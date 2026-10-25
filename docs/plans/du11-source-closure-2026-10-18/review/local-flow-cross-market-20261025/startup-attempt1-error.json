@@ -1,0 +1,8 @@
+{
+  "stage": "source-ref receipt serialization before parse",
+  "error": "SourceRef has no to_dict; corrected independent harness to dataclasses.asdict",
+  "parse_calls": 0,
+  "select_calls": 0,
+  "model_calls": 0,
+  "product_defect": false
+}

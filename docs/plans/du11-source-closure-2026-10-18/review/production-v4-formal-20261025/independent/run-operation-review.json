@@ -1,0 +1,44 @@
+{
+  "schema_version": "company-wiki-production-runner-independent-review/1",
+  "status": "NOT_READY_FOR_REAL_RUN",
+  "head": "483cb2a56299cb28ca07bbd349674860baf04430",
+  "reviewed_scope": [
+    "docs/plans/du11-source-closure-2026-10-18/review/production-v4-formal-20261025/README.md",
+    "docs/plans/du11-source-closure-2026-10-18/review/production-v4-formal-20261025/run_operation.py",
+    "tools/document_understanding_benchmark/phase_c_runner.py"
+  ],
+  "findings": [
+    {
+      "id": "R1",
+      "severity": "BLOCKER",
+      "file": "tools/document_understanding_benchmark/phase_c_runner.py",
+      "symbol": "run_pair",
+      "finding": "A throwable append_native call precedes shutil.rmtree in finally; ledger or SQLite failure can bypass owned-temp cleanup.",
+      "required_validation": "Inject append_native persistence failure; prove temp root is deleted, status is FAIL, and unknown/charge accounting is explicit."
+    }
+  ],
+  "static_checks": {
+    "provider_options_read_from_actual_config": true,
+    "single_and_mother_budget_checks_present": true,
+    "preflight_requires_zero_post_and_exact_refusal_and_full_gold": true,
+    "formal_requires_preflight_receipt": false,
+    "formal_requires_fresh_run_pair_source_gold_budget_path": true,
+    "git_head_recorded": true,
+    "product_tree_hash_recorded": true,
+    "pwf_status_fingerprint_recorded_as_observation": true,
+    "pwf_full_file_freeze_gate": false,
+    "raw_copy_requested": false,
+    "test_or_formal_script_executed_by_reviewer": false,
+    "paid_api_called_by_reviewer": false
+  },
+  "sha256": {
+    "run_operation.py": "99a78e354db38d52dedd205347db8c5ac96df20615dddb3ed540d5e994fa9f2",
+    "README.md": "0736439592fab2533bc91cb1328d2cb426b8957ac28371eaa93e7c71e3148769",
+    "phase_c_runner.py": "3c744e6265d7790819d581e8204726258bdcb1b7813da59b1f04c3d42f6f8e99"
+  },
+  "limitations": [
+    "This is a static pre-review; no runner invocation, test, model/API request, download, or raw copy was performed.",
+    "The shared phase_c_runner cleanup finding is pending the ROOT TDD repair and final SHA-bound re-review.",
+    "No user-facing approval/receipt gate is recommended between preflight and formal; formal mode must repeat its own fresh internal source/gold/config/budget checks."
+  ]
+}

@@ -1,0 +1,76 @@
+{
+  "schema_version": "ci-followup-publication/1",
+  "head": "483cb2a56299cb28ca07bbd349674860baf04430",
+  "branch": "master",
+  "pushed": true,
+  "normal_hooks": true,
+  "pre_commit": "Ruff/full-src mypy/host assumption guard PASS",
+  "pre_push": "154PASS/29.90sec",
+  "files": {
+    "src/company_wiki/automation/narrative_select.py": {
+      "sha256": "62cf8c8df200a82d34dc0a1df387a615f379050b0234b94f9099784ff9135f12",
+      "review_sha256": "62cf8c8df200a82d34dc0a1df387a615f379050b0234b94f9099784ff9135f12",
+      "review_match": true,
+      "git_lf_sha256": "26981b9863802bad8c1cf1d7c122bf67939c627712ae0e93f4b8c84645956be7",
+      "git_lf_match": true
+    },
+    "src/company_wiki/document_understanding/profiles/reading_defaults.json": {
+      "sha256": "8cf8210e3a85f7941cba21db3469461982d3f4e613237ba351055997f46592af",
+      "review_sha256": "8cf8210e3a85f7941cba21db3469461982d3f4e613237ba351055997f46592af",
+      "review_match": true,
+      "git_lf_sha256": "1369877c2fb43ebd116d55df37148ae03432bc7dbecd392eaf76f954ae15928c",
+      "git_lf_match": true
+    },
+    "tools/import_reading_policies.py": {
+      "sha256": "f25a955cd1e903cbc86573211946635f2972d13bb46f24dac7ae8ab6832b4bc6",
+      "review_sha256": "f25a955cd1e903cbc86573211946635f2972d13bb46f24dac7ae8ab6832b4bc6",
+      "review_match": true,
+      "git_lf_sha256": "8f965551083ca5cf7d3add071aa708ab581358617c744f73fc13eea5eea7cfb1",
+      "git_lf_match": true
+    },
+    "tests/unit/du11_production/test_pdf_production.py": {
+      "sha256": "3d9e454a7c26efd3b9e3e359b00d945327aebffd7db75c70a0081fc1287f27b3",
+      "review_sha256": "3d9e454a7c26efd3b9e3e359b00d945327aebffd7db75c70a0081fc1287f27b3",
+      "review_match": true,
+      "git_lf_sha256": "3d9e454a7c26efd3b9e3e359b00d945327aebffd7db75c70a0081fc1287f27b3",
+      "git_lf_match": true
+    },
+    "tests/unit/document_understanding_root/test_du2_policy_registry.py": {
+      "sha256": "31a65508e447d4d92f481dcb67d983d9bc7a928071220e20dbee7470f67deb97",
+      "review_sha256": "31a65508e447d4d92f481dcb67d983d9bc7a928071220e20dbee7470f67deb97",
+      "review_match": true,
+      "git_lf_sha256": "bdd9dad04cc10ad6b712757c2cb2d30432875d5755654d12a897b42c10cfe800",
+      "git_lf_match": true
+    },
+    "tests/unit/document_understanding_root/test_inferred_heading_data_rows.py": {
+      "sha256": "778a156318a9f8ac19dca75acea6078e5606521470161a91dd19d73d688fd453",
+      "review_sha256": "778a156318a9f8ac19dca75acea6078e5606521470161a91dd19d73d688fd453",
+      "review_match": true,
+      "git_lf_sha256": "ca696e1e4216fbc07d49c1b30af28139ba5859af5fb7b6a23c7c9b4f17d4fc8e",
+      "git_lf_match": true
+    },
+    "tests/unit/document_understanding_selection/test_reading_native_dependency_closure.py": {
+      "sha256": "41c7315f5fc8840f3d084ba2cc7d1dc233028a7fe5df216b17a99783108ae2af",
+      "review_sha256": "41c7315f5fc8840f3d084ba2cc7d1dc233028a7fe5df216b17a99783108ae2af",
+      "review_match": true,
+      "git_lf_sha256": "10b84893ce6bac98fdbcecdf8622b6a194bb43b5fede87b2f896a8f81118d378",
+      "git_lf_match": true
+    }
+  },
+  "independent_review": "independent/ci-followup-review.json",
+  "source_input_review": "../annual14-local-flow-regrade-20261025/report.json",
+  "source_grade": "12PASS2PARTIAL; source/input only",
+  "formal_summary": "NOT_REVIEWED",
+  "RF": "OPEN",
+  "ci": [
+    {
+      "id": 40191425654,
+      "head_sha": "483cb2a56299cb28ca07bbd349674860baf04430",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40191425654",
+      "created_at": "2026-10-25T12:02:59Z",
+      "updated_at": "2026-10-25T12:07:16Z"
+    }
+  ]
+}

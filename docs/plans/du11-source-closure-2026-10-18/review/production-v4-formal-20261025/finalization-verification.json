@@ -1,0 +1,17 @@
+{
+  "schema_version": "finalization-fix-verification/1",
+  "head_before_commit": "483cb2a56299cb28ca07bbd349674860baf04430",
+  "files": {
+    "tools/document_understanding_benchmark/phase_c_runner.py": "4cab71dd8691d4d15fa7a8ab1e96829eeb948126a7f44e04a5033fa6157acc66",
+    "tests/test_phase_c_finalization.py": "bca693d1b014c0aaac9d362d0290b2d7dedee1649ba95c278cb2221628dbb35d",
+    "docs/plans/du11-source-closure-2026-10-18/review/production-v4-formal-20261025/run_operation.py": "635ac8e58b77cdda76c5f7c9fb182ff410f273287c461c9c797519d1990c0b3e"
+  },
+  "source_semantic_owners_unchanged": true,
+  "paid_calls": 0,
+  "downloads": 0,
+  "tests": "4-file host final59PASS/66.50sec, before journal-binding delta; journal-binding3trueRED then current finalization12PASS/11.77sec; Ruff/diff-check PASS; owned tmp restored. Counts overlap, not added.",
+  "independent_review": "PENDING",
+  "formal_source_preflight": "OPEN_CF1_CF2_CF3_CF4",
+  "accounting_recovery": "Existing native-usage journal SHA bound in same mother-ledger fallback; restart CLI after AUTO DB removed; unknown/mutated journal keeps full hold; same-key release and idempotent replay, no model POST.",
+  "additional_tdd": "Sidecar rejection and DB-gone replay2RED; empty journal after recorded POST1RED; journal changed/lowered/empty/late-unbound3RED. All current focused tests green."
+}

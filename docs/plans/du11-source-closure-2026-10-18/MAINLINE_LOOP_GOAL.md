@@ -1,7 +1,22 @@
 # 当前主线循环目标
+
+## 2026-10-25 当前行动：跨市场来源共因修复
+
+**主线持续active，整体未完成。** 最新已发布产品483cb2a5精确CI40191425654成功；药明康德来源/实际输入14项独审12PASS/2PARTIAL是单份年报结论，不代表其他市场文种或模型质量。
+
+独立三例真实预检发现：微软严格业务关系7PASS/1PARTIAL；港股中报裸compiler联合目标1PASS/4PARTIAL/2MISSING（期间可由verified document共享头一次提供，不要求每task重复p5）；中微429页招股在同一16M账户耗尽、0span，无正式内容gold故NOT_GRADED。IPO热点实测解析仅420,052、understand_units11,473,800、candidates4,091,862；约2.6%是解析逻辑工作量，不能说PDF转文字占尽资源，也不能从逻辑计数推CPU瓶颈。[独立报告](review/local-flow-cross-market-20261025/final-report.md)和[热点](review/local-flow-cross-market-20261025/ipo-profile.md)已冻结，0模型/API/下载/原件副本，原文/config/catalog稳定。
+
+ROOT已核真实HTML：加粗业务标题、含bullet的flex list在原DOM存在，标准化后只剩dom_path与平文本，bullet owner还排在body后；这为共享结构层缺业务父级提供可复现线索，不按公司名特判。[统一实施细则CF1–CF4](review/local-flow-root-causes-20261025/implementation_plan.md)是下一轮详细步骤，选材cap/预算不提高。
+
+独审还发现运行器落账故障会漏清理/未知费用可能显示0。已TDD修在既有phase_c_runner：始终清理自有临时湖、同一账本保守hold及逐run去重/对账释放、未知delta为null；主机四文件59PASS/66.50秒；之后journal绑定3项真RED→当前finalization12PASS/11.77秒，旧母账两例1.53秒通过（计数重叠，不相加），Ruff/diff-check绿，最终独审PASS（仅清理/费用工程，见review/production-v4-formal-20261025/independent/finalization-final-review.json）。恢复CLI只读失败当时绑定SHA的用量记录，同键释放占额；记录变更或从未保存时保留unknown。没有新client/store/预算库/人工签收；[技术节点](review/production-v4-formal-20261025/README.md)。本轮未发起真实付费摘要，母账仍1,783,378 tokens/$0.724836，配置10M/$20含unknown。
+
+**下一步唯一行动：** 接收清理/费用根修最终独审并发布；随后按CF1–CF4先中性RED再共享owner实施，修来源关系、未闭句和选择效率，再新attempt三源验收。来源合格后才正式v4摘要、cache零重复费用与RF真实采用。W16/W17/W18作者工区不写，Dayu/IQS不动。
+
+---
+
 ## 2026-10-25 当前增量：来源复评与CI跟进
 
-最新独立来源/实际输入评分12PASS/2PARTIAL/0MISSING，绑定06c及attempt05，见[报告](review/annual14-local-flow-regrade-20261025/report.md)。A01/A05已补齐，A02/A13精确财务仍由完整来源/金融层及RF实际采用承担。06c精确CI40190090649六项失败已原样复现；共因修复后218项通过/16.45秒、生成链check/Ruff通过，最终独审已PASS，待正常提交推送及新精确CI，旧CI不能记绿。下一步唯一动作是完成这一发布节点，再用其他市场/文种真实样本验证及运行配置内正式摘要/cache/RF。三外包工区不写；模型响应NOT_REVIEWED、RF OPEN。
+最新独立来源/实际输入评分12PASS/2PARTIAL/0MISSING，绑定06c及attempt05，见[报告](review/annual14-local-flow-regrade-20261025/report.md)。A01/A05已补齐，A02/A13精确财务仍由完整来源/金融层及RF实际采用承担。06c精确CI40190090649六项失败已原样复现；共因修复后218项通过/16.45秒、生成链check/Ruff通过，最终独审已PASS，483cb2a5已正常提交推送，精确CI40191425654于12:07:16 UTC completed/success，旧CI不能记绿。下一步唯一动作是完成这一发布节点，再用其他市场/文种真实样本验证及运行配置内正式摘要/cache/RF。三外包工区不写；模型响应NOT_REVIEWED、RF OPEN。
 
 **执行状态：用户2026-10-23“继续”已恢复，原生目标active。以CURRENT_STATUS为唯一入口，目标正文/累计预算保留，整体未完成。**
 

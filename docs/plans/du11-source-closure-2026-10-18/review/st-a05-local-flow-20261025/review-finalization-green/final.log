@@ -1,0 +1,71 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\cwdoc-9devo_jh\\pytest", "requested_basetemp_len": 56, "cwd_len": 34, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+timeout: 180.0s
+timeout method: thread
+timeout func_only: False
+collected 51 items
+
+tests\test_phase_c_finalization.py F                                     [  1%]
+tests\test_phase_c_activation_recovery.py ....F                          [ 11%]
+tests\test_phase_c_extractive.py .............FF........                 [ 56%]
+tests\test_phase_c_readonly_source.py ....F.FF..............             [100%]
+
+================================== FAILURES ===================================
+_______ test_accounting_exception_cannot_skip_actual_owned_lake_cleanup _______
+tests\test_phase_c_finalization.py:32: in test_accounting_exception_cannot_skip_actual_owned_lake_cleanup
+    result = runner.run_pair({"sample_id": "loopback-fixture"}, provider, metadata, mode="loopback", output=output,
+tools\document_understanding_benchmark\phase_c_runner.py:1471: in run_pair
+    raise RuntimeError("unsafe phase C cleanup target")
+E   RuntimeError: unsafe phase C cleanup target
+__________ test_actual_paid_outbox_resumes_same_run_without_new_post __________
+tests\test_phase_c_activation_recovery.py:247: in test_actual_paid_outbox_resumes_same_run_without_new_post
+    result = runner.run_pair(
+tools\document_understanding_benchmark\phase_c_runner.py:1471: in run_pair
+    raise RuntimeError("unsafe phase C cleanup target")
+E   RuntimeError: unsafe phase C cleanup target
+_ test_existing_http_adapter_uses_local_v5_loopback_and_actual_core_keeps_original_cards[False] _
+tests\test_phase_c_extractive.py:220: in test_existing_http_adapter_uses_local_v5_loopback_and_actual_core_keeps_original_cards
+    response = model.generate(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_http_model.py:396: in generate
+    raise ModelResponseError("MODEL_HTTP_TRANSPORT") from None
+E   company_wiki.automation.narrative_model.ModelResponseError: MODEL_HTTP_TRANSPORT
+_ test_existing_http_adapter_uses_local_v5_loopback_and_actual_core_keeps_original_cards[True] _
+tests\test_phase_c_extractive.py:220: in test_existing_http_adapter_uses_local_v5_loopback_and_actual_core_keeps_original_cards
+    response = model.generate(request)
+               ^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\automation\narrative_http_model.py:396: in generate
+    raise ModelResponseError("MODEL_HTTP_TRANSPORT") from None
+E   company_wiki.automation.narrative_model.ModelResponseError: MODEL_HTTP_TRANSPORT
+__________ test_readonly_runner_gap_is_not_run_and_never_calls_model __________
+tests\test_phase_c_readonly_source.py:262: in test_readonly_runner_gap_is_not_run_and_never_calls_model
+    actual = runner.run_pair(
+tools\document_understanding_benchmark\phase_c_runner.py:1471: in run_pair
+    raise RuntimeError("unsafe phase C cleanup target")
+E   RuntimeError: unsafe phase C cleanup target
+______ test_single_selector_keeps_real_loopback_resume_and_cache_proofs _______
+tests\test_phase_c_readonly_source.py:334: in test_single_selector_keeps_real_loopback_resume_and_cache_proofs
+    result = runner.run_pair(
+tools\document_understanding_benchmark\phase_c_runner.py:1471: in run_pair
+    raise RuntimeError("unsafe phase C cleanup target")
+E   RuntimeError: unsafe phase C cleanup target
+_ test_registered_runner_passes_real_ref_to_valid_batch_without_starting_model _
+tests\test_phase_c_readonly_source.py:423: in test_registered_runner_passes_real_ref_to_valid_batch_without_starting_model
+    actual = runner.run_pair(
+tools\document_understanding_benchmark\phase_c_runner.py:1471: in run_pair
+    raise RuntimeError("unsafe phase C cleanup target")
+E   RuntimeError: unsafe phase C cleanup target
+=========================== short test summary info ===========================
+FAILED tests/test_phase_c_finalization.py::test_accounting_exception_cannot_skip_actual_owned_lake_cleanup
+FAILED tests/test_phase_c_activation_recovery.py::test_actual_paid_outbox_resumes_same_run_without_new_post
+FAILED tests/test_phase_c_extractive.py::test_existing_http_adapter_uses_local_v5_loopback_and_actual_core_keeps_original_cards[False]
+FAILED tests/test_phase_c_extractive.py::test_existing_http_adapter_uses_local_v5_loopback_and_actual_core_keeps_original_cards[True]
+FAILED tests/test_phase_c_readonly_source.py::test_readonly_runner_gap_is_not_run_and_never_calls_model
+FAILED tests/test_phase_c_readonly_source.py::test_single_selector_keeps_real_loopback_resume_and_cache_proofs
+FAILED tests/test_phase_c_readonly_source.py::test_registered_runner_passes_real_ref_to_valid_batch_without_starting_model
+======================== 7 failed, 44 passed in 54.04s ========================

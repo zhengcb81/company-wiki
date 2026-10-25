@@ -1,0 +1,65 @@
+{
+  "case_id": "cn-ipo",
+  "source_ref": {
+    "document_id": "urn:company-wiki:document:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+    "source_id": "urn:company-wiki:source:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+    "content_sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+    "byte_size": 11211796,
+    "mime_type": "application/pdf",
+    "schema_version": "2.0"
+  },
+  "source_sha_verified": true,
+  "title": "中微公司：首次公开发行股票并在科创板上市招股说明书",
+  "declared_kind": "prospectus",
+  "language": "zh",
+  "gold_path": null,
+  "gold_sha256": null,
+  "gold_status": "NO_FORMAL_GOLD_CONTENT_NOT_GRADED",
+  "selector": "0.9.0",
+  "requested_max_selected": 112,
+  "summary_projection": "reading-model-input/4",
+  "parse_select_share_same_WorkBudget": true,
+  "model_calls": 0,
+  "downloads": 0,
+  "raw_copies": 0,
+  "parse_entry": "parse_pdf_bytes(selector=0.9.0, same WorkBudget)",
+  "parse_work": 420052,
+  "parsed_unit_count": 14025,
+  "parsed_page_count": 429,
+  "selection": {
+    "status": "needs_review",
+    "coverage_complete": false,
+    "selection_limit": 112,
+    "candidate_count": 8361,
+    "omitted_candidate_count": 8361,
+    "dropped_financial_count": 0,
+    "diagnostics": [
+      {
+        "code": "work_budget_exhausted",
+        "count": 1,
+        "dimension": "document_work",
+        "external_model_cost": false,
+        "phase": "document",
+        "used": 15999740,
+        "requested": null,
+        "limit": 16000000,
+        "detail": "unexamined source content remains unknown; original is unchanged"
+      }
+    ],
+    "selected_count": 0,
+    "selected_chars": 0
+  },
+  "reading_route": null,
+  "reading_policy": [],
+  "selected_quotes": [],
+  "compiler_status": "NOT_COMPILED_BUDGET_EXHAUSTED_STOP",
+  "status": "WORK_EXHAUSTED_STOP",
+  "work_budget": {
+    "used": 15999740,
+    "limit": 16000000,
+    "exhausted": true
+  },
+  "elapsed_seconds": 12.397,
+  "source_stable": true,
+  "protected_unchanged": true
+}

@@ -18,3 +18,5 @@ ROOT仅修改CWP原owner及测试，不写W16/W17/W18工区。最终集中检查
 ## 为什么本地没有挡住
 
 pre-commit运行lint/type/host guard；此前宽影响push按既定快速策略跑154项契约，不承诺全单测，CI才跑完整单测。本轮大节点集中339项漏了legacy production budget、旧layout stub、策略生成工具及旧dependency消费者几套测试，是ROOT验收覆盖遗漏。后续共享阅读大节点要把这四个既有责任层消费者与新增测试一起集中跑（本轮8文件218项），不把每次commit重新变成上万项全量，也不另加人工许可或永续增长的smoke清单。
+
+发布闭合：483cb2a5已正常推送，154P/29.90s；精确CI40191425654 completed/success（12:07:16 UTC）。旧06c失败保留，正式摘要/RF仍OPEN。

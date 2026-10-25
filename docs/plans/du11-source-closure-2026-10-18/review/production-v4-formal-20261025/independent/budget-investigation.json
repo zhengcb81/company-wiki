@@ -1,0 +1,82 @@
+{
+  "schema_version": "company-wiki-budget-investigation/1",
+  "status": "READ_ONLY_FINDINGS",
+  "head": "483cb2a56299cb28ca07bbd349674860baf04430",
+  "summary": {
+    "root_cause": "The current receipts show a shared logical-work ceiling and a separate candidate-recall issue; they do not identify the present hottest function because production run receipts lack per-stage attribution.",
+    "budget_raise_recommended": false,
+    "external_calls": 0,
+    "source_downloads": 0,
+    "raw_copies": 0,
+    "product_files_modified": false
+  },
+  "samples": {
+    "amec_cn_ipo": {
+      "pages": 429,
+      "units": 14025,
+      "parse_work": 420052,
+      "work_used": 15999740,
+      "work_limit": 16000000,
+      "candidates_reported": 8361,
+      "selected_spans": 0,
+      "tasks": 0,
+      "elapsed_seconds": 12.397,
+      "finding": "Shared work exhausted after parsing; exact post-parse stage distribution is unavailable."
+    },
+    "kingsoft_hk_interim": {
+      "work_used": 3644236,
+      "work_limit": 16000000,
+      "candidates_reported": 1116,
+      "selected_spans": 112,
+      "selected_chars": 6522,
+      "tasks": 60,
+      "coverage_complete": false,
+      "finding": "Work budget was not exhausted; root-reported missing gold business facts indicate a selection/recall issue distinct from budget pressure."
+    },
+    "msft_us_10k": {
+      "work_used": 13577692,
+      "work_limit": 16000000,
+      "candidates_reported": 484,
+      "selected_spans": 112,
+      "selected_chars": 40491,
+      "tasks": 50,
+      "coverage_complete": true,
+      "finding": "Budget was not exhausted; root-reported missing Azure hierarchy gold indicates that complete processing status is not a gold-recall guarantee."
+    }
+  },
+  "existing_scopes": [
+    "src/company_wiki/document_normalization/layout_snapshots/contract.py",
+    "src/company_wiki/document_understanding/narrative_continuity.py",
+    "src/company_wiki/source_catalog/narrative_evidence.py (shared_budget.scoped(1000000))",
+    "src/company_wiki/source_catalog/narrative_pdf_intent.py"
+  ],
+  "limitations": [
+    "Work units are instrumented logical work, not LLM tokens, bytes, wall-clock seconds, or a complete CPU hard bound.",
+    "Cross-market run receipts provide combined parse/select work, not current per-stage totals.",
+    "The historical profile-real.json is bound to older source hashes and a different US 10-Q; its hotspot figures are directional only.",
+    "The two HK gold misses and MSFT Azure miss are ROOT findings; this report records the distinction but does not independently adjudicate semantic correctness."
+  ],
+  "evidence_sha256": {
+    "src/company_wiki/resource_budget.py": "8c55fc4e6a0ad7faf0fbdcef1de06d4e709cdf2935db57c24c4e100092dd76a1",
+    "src/company_wiki/document_understanding/pipeline.py": "198385623657a1704091d38435b1bc696794dd7af7b768eac493b718d705c3056",
+    "src/company_wiki/source_catalog/narrative_reading.py": "aedc19846af1fc1d8a3ff2ae849fa9ba90581ff128d49cbfc523bcc9ccf6b9f9",
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": "ee77cd8cf295a5748d762b41e1fd75819b475632d44852ea81abd4c8114d16b4",
+    "src/company_wiki/document_understanding/narrative_continuity.py": "e6dd8e4c35022392a65e5ed489320ffc41a4fb286b9b3d51c26f57f8597a29a4",
+    "src/company_wiki/document_understanding/operating_states/relations.py": "0b65b713bedca344d09bd2fe00ae52941433b91aaaf2ecdc6be137abf8c2386e",
+    "src/company_wiki/document_understanding/structure/_work.py": "6cc3b330a4fee0a06bd3e79fbce7ffd85b20cb69238482ef78ca29200edcd469",
+    "src/company_wiki/document_understanding/layout_hints/contract.py": "2aa658add3a6783a20debe338b799ae840153baab683b1279d05cfe409c1047",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "9d8da04aeffc7d5e812d8c3a97752d14acc3e61e99106b6776de6d0886e1c337",
+    "src/company_wiki/source_catalog/narrative_pdf_intent.py": "6c220b8f3bfcbde879c98ba50b300fab90c730bdb38c6df660b871eae70e1050",
+    "docs/plans/du11-source-closure-2026-10-18/review/local-flow-cross-market-20261025/run-manifest.json": "444e69ce70640a9fdacd5b883e12e011288bd285f6e708aca2b9c8664e9b14c8",
+    "docs/plans/du11-source-closure-2026-10-18/review/local-flow-cross-market-20261025/cn-ipo.json": "4e458311992098e4c189ec4a9e0f9df47a94d77a8e593d3784e29feb4ab02a0c",
+    "docs/plans/du11-source-closure-2026-10-18/review/local-flow-cross-market-20261025/us-10k.json": "0d17d3905261fa79ee0a5fcc010dc6bc136353912f526662470be1ab849b23c1",
+    "docs/plans/du11-source-closure-2026-10-18/review/local-flow-cross-market-20261025/du5-hk-kingsoft-interim.json": "2d7b64019a3437599f7e228ffea4291f1153c47fb1834591832e3f2ffbc37d2a",
+    ".planning/shared-reading-production/du6-state-design/efficiency-review/profile-real.json": "7e3d1f6290490d5a64796a969a71c8ca6f94b8cf41dbfe91be53e642598ae94a"
+  },
+  "historical_profile_source_hashes": {
+    "src/company_wiki/source_catalog/narrative_reading.py": "e65fd634b127e43f7117be5be89000c29fe2e63b00e645d2ab081a74538e7228",
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": "3ddf9a432f3869eba8178d9d5d5304bdb4aeab769d70151e2b4c409867ad81ed",
+    "src/company_wiki/document_understanding/operating_states/relations.py": "04ea303f1560d92efbd285d8039fd2cbb120bcb690c84e76d32a56f6f714c399"
+  },
+  "recommended_next_step": "Add stage-level attribution to the existing shared WorkBudget without a second budget or extra scan, then optimize only a stage shown by current-source cross-market replay to dominate. Separately correct gold recall/ranking for HK interim and US 10-K within the existing 112-span limit."
+}

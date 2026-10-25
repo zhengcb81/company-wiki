@@ -1,8 +1,22 @@
 # 当前项目状态与接手入口
 
-## 当前行动：来源输入12/2，修复精确CI六项后发布（2026-10-25）
+## 2026-10-25 当前行动：跨市场来源共因修复
 
-**整体目标未完成。** 当前主线仍是“来源处理→正式摘要→缓存恢复→RF实际采用→四路审查→新公司泛化”。已发布共享引擎v4摘要和恢复工程；真实摘要内容、当前RF消费和完整公司循环仍待验收。最新产品代码为`06c1a5839302f4e297d70a13267a8aa490eef719`，已推送master，[精确CI40190090649](https://github.com/zhengcb81/company-wiki/actions/runs/40190090649)已完成/failure：六项在本地同四文件精确复现。ROOT跟进已218项通过（16.45秒）、compiler --check与Ruff通过，独立终审已PASS，待新提交推送及精确CI；不改写06c历史CI为绿。正常pre-commit Ruff/全src mypy/host guard通过，pre-push154通过（52.28秒）；17被审源码/测试与Git的LF字节一致。见[发布收据](review/st-a05-local-flow-20261025/publication.json)。此前8a258b93分页/多层列表组件CI40185824736成功。
+**主线持续active，整体未完成。** 最新已发布产品483cb2a5精确CI40191425654成功；药明康德来源/实际输入14项独审12PASS/2PARTIAL是单份年报结论，不代表其他市场文种或模型质量。
+
+独立三例真实预检发现：微软严格业务关系7PASS/1PARTIAL；港股中报裸compiler联合目标1PASS/4PARTIAL/2MISSING（期间可由verified document共享头一次提供，不要求每task重复p5）；中微429页招股在同一16M账户耗尽、0span，无正式内容gold故NOT_GRADED。IPO热点实测解析仅420,052、understand_units11,473,800、candidates4,091,862；约2.6%是解析逻辑工作量，不能说PDF转文字占尽资源，也不能从逻辑计数推CPU瓶颈。[独立报告](review/local-flow-cross-market-20261025/final-report.md)和[热点](review/local-flow-cross-market-20261025/ipo-profile.md)已冻结，0模型/API/下载/原件副本，原文/config/catalog稳定。
+
+ROOT已核真实HTML：加粗业务标题、含bullet的flex list在原DOM存在，标准化后只剩dom_path与平文本，bullet owner还排在body后；这为共享结构层缺业务父级提供可复现线索，不按公司名特判。[统一实施细则CF1–CF4](review/local-flow-root-causes-20261025/implementation_plan.md)是下一轮详细步骤，选材cap/预算不提高。
+
+独审还发现运行器落账故障会漏清理/未知费用可能显示0。已TDD修在既有phase_c_runner：始终清理自有临时湖、同一账本保守hold及逐run去重/对账释放、未知delta为null；主机四文件59PASS/66.50秒；之后journal绑定3项真RED→当前finalization12PASS/11.77秒，旧母账两例1.53秒通过（计数重叠，不相加），Ruff/diff-check绿，最终独审PASS（仅清理/费用工程，见review/production-v4-formal-20261025/independent/finalization-final-review.json）。恢复CLI只读失败当时绑定SHA的用量记录，同键释放占额；记录变更或从未保存时保留unknown。没有新client/store/预算库/人工签收；[技术节点](review/production-v4-formal-20261025/README.md)。本轮未发起真实付费摘要，母账仍1,783,378 tokens/$0.724836，配置10M/$20含unknown。
+
+**下一步唯一行动：** 接收清理/费用根修最终独审并发布；随后按CF1–CF4先中性RED再共享owner实施，修来源关系、未闭句和选择效率，再新attempt三源验收。来源合格后才正式v4摘要、cache零重复费用与RF真实采用。W16/W17/W18作者工区不写，Dayu/IQS不动。
+
+---
+
+## 当前行动：局部流及CI已发布全绿，进入跨市场预检和v4真实摘要（2026-10-25）
+
+**整体目标未完成。** 当前主线仍是“来源处理→正式摘要→缓存恢复→RF实际采用→四路审查→新公司泛化”。已发布共享引擎v4摘要和恢复工程；真实摘要内容、当前RF消费和完整公司循环仍待验收。源侧局部流代码为`06c1a5839302f4e297d70a13267a8aa490eef719`；最新跟进产品为`483cb2a56299cb28ca07bbd349674860baf04430`，已推送master且[精确CI40191425654](https://github.com/zhengcb81/company-wiki/actions/runs/40191425654) completed/success。旧[精确CI40190090649](https://github.com/zhengcb81/company-wiki/actions/runs/40190090649)已完成/failure：六项在本地同四文件精确复现。ROOT跟进已218项通过（16.45秒）、compiler --check与Ruff通过，独立终审已PASS，已随483cb2a5正常推送并通过精确CI40191425654；不改写06c历史CI为绿。正常pre-commit Ruff/全src mypy/host guard通过，pre-push154通过（52.28秒）；17被审源码/测试与Git的LF字节一致。见[发布收据](review/st-a05-local-flow-20261025/publication.json)。此前8a258b93分页/多层列表组件CI40185824736成功。
 
 **最新独立来源/输入复核为12 PASS、2 PARTIAL、0 MISSING。** [新14项独立复评](review/annual14-local-flow-regrade-20261025/report.md)绑定06c及attempt05实际62任务输入；A01/A05跨页Chemistry父级已在各自任务补齐，旧10PASS保持。A02/A13精确持续/终止经营金额、货币单位、重述及时段/时点口径仍需完整来源/金融读取和RF实际采用；不要求全表叙述切片。189个原文member offset与32条原金标引句已逐一验真，原件SHA不变。旧10/4及8/6报告保留为历史；模型响应语义NOT_REVIEWED、当前RF OPEN。来源输入通过不代签工程CI或完整公司循环。
 
@@ -18,7 +32,7 @@
 
 **本轮局部流已通过最终独立审查并推送：** 文字/几何覆盖分维度、单栏正证、最小必需上下文及缓存闭包均已修在原owner。attempt05仍112span/9060字符/62任务，work13,450,656/16M；D&M和TIDES自己的task已含Chemistry父级与期间，旧10PASS/A13七span保持，原件/config/catalog稳定，0新费用。独审发现的预算吞异常、错位栏位、弱caption与显式context误裁剪等均先RED再修。集中339通过/6既有skip，最后导航/缓存补58通过（有重叠），Ruff/12源码mypy通过。全局partial仍在；随后独立14项重评为12/2/0，正式响应NOT_REVIEWED、当前RF OPEN。见[本轮完整证据](review/st-a05-local-flow-20261025/README.md)。
 
-**下一步唯一行动：** 完成CI跟进独立终审、正常提交推送并核对新精确HEAD CI。六项来自预算新旧契约、generated catalog维护链、缺字段伪engine及固定导航块数；没有回退止读预算或扩cap，见[CI共因与验收](review/st-a05-local-flow-20261025/ci-followup.md)。之后用其他市场/文种真实资料验证，再按配置运行新正式摘要、缓存零重复计费恢复和RF实际采用，继续W12四审/公司holdout。既有付费收据不改写，外包W16/W17/W18路径不写。
+**下一步唯一行动：** 完成独立跨市场/文种来源预检和v4运行器预审，再跑零POST生产预检与配置内新正式摘要/缓存恢复。CI跟进已正常推送483cb2a5且精确CI全绿；六项来自预算新旧契约、generated catalog维护链、缺字段伪engine及固定导航块数；没有回退止读预算或扩cap，见[CI共因与验收](review/st-a05-local-flow-20261025/ci-followup.md)。之后用其他市场/文种真实资料验证，再按配置运行新正式摘要、缓存零重复计费恢复和RF实际采用，继续W12四审/公司holdout。既有付费收据不改写，外包W16/W17/W18路径不写。
 
 累计预算仍按用户授权10M tokens/$20，母账1,783,378 tokens/$0.724836，unknown保留。本轮0新增费用。相关目录首次1606通过/11临时目录setup错误；这11项在正常主机同断言重跑全通过。最终108项定向测试、Ruff/mypy通过；不合并成“一次全绿1617项”，[独立最终复审](review/st-a13-recognition-scope-20261025/independent/final-review.md)已通过，范围仅限工程与来源输入。
 

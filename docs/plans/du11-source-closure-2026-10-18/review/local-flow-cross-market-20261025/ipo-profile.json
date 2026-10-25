@@ -1,0 +1,1707 @@
+{
+  "schema_version": "independent-single-account-ipo-work-profile/1",
+  "scope": "Diagnostic-only subclass and function boundary wrappers; no model compiler, source projection or repeated baseline replay",
+  "head": "483cb2a56299cb28ca07bbd349674860baf04430",
+  "source_ref": {
+    "document_id": "urn:company-wiki:document:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+    "source_id": "urn:company-wiki:source:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+    "content_sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+    "byte_size": 11211796,
+    "mime_type": "application/pdf",
+    "schema_version": "2.0"
+  },
+  "source_original_sha_verified": true,
+  "source_tree_sha256": "b43aed5e5da428b753495072b43b8671ca38d6c7f257fbb5d951f3618b485984",
+  "source_owner17_matches_frozen_run": true,
+  "source_stable": true,
+  "profile_code_sha256": "ddb8dd068ab0b97c7eac461528f64e7e4cc49d8498b788b1f189e12a66cbb53a",
+  "baseline_result_sha256": "4e458311992098e4c189ec4a9e0f9df47a94d77a8e593d3784e29feb4ab02a0c",
+  "protected_sha256": {
+    "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+    ".source_catalog\\catalog.sqlite3": "0e0775fc1dd29f2828f643cb1e6c45a9b77d1626089d1a16401a1a6245eeb5f5",
+    "config\\resource_budget.yaml": "148f22816bf0b8935bbb2c1618f3199d46ff52f41377e3e582c26a96ea7be3b5"
+  },
+  "protected_unchanged": true,
+  "write_store_constructed": false,
+  "outcome": {
+    "parsed_units": 14025,
+    "parsed_pages": 429,
+    "parse_work": 420052,
+    "work_used": 15999740,
+    "work_limit": 16000000,
+    "exhausted": true,
+    "status": "needs_review",
+    "candidate_count": 8361,
+    "selected_count": 0
+  },
+  "same_outcome_as_uninstrumented_run": true,
+  "comparison": {
+    "parsed_units": {
+      "profile": 14025,
+      "baseline": 14025,
+      "equal": true
+    },
+    "parsed_pages": {
+      "profile": 429,
+      "baseline": 429,
+      "equal": true
+    },
+    "parse_work": {
+      "profile": 420052,
+      "baseline": 420052,
+      "equal": true
+    },
+    "work_used": {
+      "profile": 15999740,
+      "baseline": 15999740,
+      "equal": true
+    },
+    "work_limit": {
+      "profile": 16000000,
+      "baseline": 16000000,
+      "equal": true
+    },
+    "exhausted": {
+      "profile": true,
+      "baseline": true,
+      "equal": true
+    },
+    "status": {
+      "profile": "needs_review",
+      "baseline": "needs_review",
+      "equal": true
+    },
+    "candidate_count": {
+      "profile": 8361,
+      "baseline": 8361,
+      "equal": true
+    },
+    "selected_count": {
+      "profile": 0,
+      "baseline": 0,
+      "equal": true
+    }
+  },
+  "wall_seconds_diagnostic_not_benchmark": 12.203682,
+  "budget_exception": null,
+  "accounting": {
+    "accepted_total": 15999740,
+    "root_used": 15999740,
+    "accepted_equals_root_used": true,
+    "rejected_requested_total": 276,
+    "root_only_no_double_count": true,
+    "forwarding_frames_skipped": 168136,
+    "unresolved_forwarding_calls": 0,
+    "interpretation": "Rejected requested units are tail attempts, never actual accepted work; inclusive nested stage deltas must not be summed."
+  },
+  "stage_boundaries": [
+    {
+      "stage": "pipeline.understand_units",
+      "entry_used": 434078,
+      "exit_used": 11907878,
+      "inclusive_accepted_delta": 11473800,
+      "exhausted_on_exit": false,
+      "exception": null,
+      "wall_seconds": 6.1448
+    },
+    {
+      "stage": "reading._understand",
+      "entry_used": 420053,
+      "exit_used": 11907878,
+      "inclusive_accepted_delta": 11487825,
+      "exhausted_on_exit": false,
+      "exception": null,
+      "wall_seconds": 6.16702
+    },
+    {
+      "stage": "reading._candidates",
+      "entry_used": 11907878,
+      "exit_used": 15999740,
+      "inclusive_accepted_delta": 4091862,
+      "exhausted_on_exit": true,
+      "exception": null,
+      "wall_seconds": 2.302857
+    }
+  ],
+  "caller_hotspots": [
+    {
+      "file": "src/company_wiki/document_understanding/structure/_work.py",
+      "function": "reserve",
+      "line": 17,
+      "accepted_delta": 5429520,
+      "accepted_calls": 56707,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/structure/_work.py",
+      "function": "stage",
+      "line": 33,
+      "accepted_delta": 3208304,
+      "accepted_calls": 9,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/source_catalog/narrative_reading.py",
+      "function": "statement_members",
+      "line": 445,
+      "accepted_delta": 1088288,
+      "accepted_calls": 2330,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_hints/contract.py",
+      "function": "charge",
+      "line": 185,
+      "accepted_delta": 590246,
+      "accepted_calls": 42933,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+      "function": "fact",
+      "line": 612,
+      "accepted_delta": 415020,
+      "accepted_calls": 501,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+      "function": "local_qualification_dependencies",
+      "line": 375,
+      "accepted_delta": 413816,
+      "accepted_calls": 2769,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_hints/columns.py",
+      "function": "observe_single_body_lane",
+      "line": 57,
+      "accepted_delta": 331842,
+      "accepted_calls": 13028,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+      "function": "local_qualification_dependencies",
+      "line": 370,
+      "accepted_delta": 311726,
+      "accepted_calls": 6588,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+      "function": "local_qualification_dependencies",
+      "line": 466,
+      "accepted_delta": 306015,
+      "accepted_calls": 12311,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_bridge.py",
+      "function": "_overlay_observation",
+      "line": 46,
+      "accepted_delta": 267305,
+      "accepted_calls": 14025,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+      "function": "local_operating_context_dependencies",
+      "line": 555,
+      "accepted_delta": 251634,
+      "accepted_calls": 923,
+      "rejected_requested": 276,
+      "rejected_calls": 1
+    },
+    {
+      "file": "src/company_wiki/source_catalog/narrative_pdf_candidates.py",
+      "function": "charge",
+      "line": 40,
+      "accepted_delta": 249996,
+      "accepted_calls": 41148,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_hints/neighbours.py",
+      "function": "_query",
+      "line": 55,
+      "accepted_delta": 234250,
+      "accepted_calls": 234250,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_hints/neighbours.py",
+      "function": "_assign",
+      "line": 35,
+      "accepted_delta": 228011,
+      "accepted_calls": 228011,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+      "function": "_source_material_range",
+      "line": 288,
+      "accepted_delta": 222355,
+      "accepted_calls": 9082,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/source_catalog/narrative_reading.py",
+      "function": "_prose_reading_packages",
+      "line": 287,
+      "accepted_delta": 202384,
+      "accepted_calls": 1077,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/narrative_continuity.py",
+      "function": "charge",
+      "line": 391,
+      "accepted_delta": 146831,
+      "accepted_calls": 78750,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_hints/columns.py",
+      "function": "observe_single_body_lane",
+      "line": 86,
+      "accepted_delta": 96232,
+      "accepted_calls": 280,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/operating_states/relations.py",
+      "function": "_clause_events",
+      "line": 602,
+      "accepted_delta": 78400,
+      "accepted_calls": 3008,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/strategy_binding.py",
+      "function": "visit",
+      "line": 273,
+      "accepted_delta": 75326,
+      "accepted_calls": 75326,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/source_catalog/narrative_reading.py",
+      "function": "_prose_reading_packages",
+      "line": 178,
+      "accepted_delta": 68882,
+      "accepted_calls": 6073,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/strategy_binding.py",
+      "function": "fold",
+      "line": 44,
+      "accepted_delta": 58167,
+      "accepted_calls": 58167,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/narrative_continuity.py",
+      "function": "__init__",
+      "line": 268,
+      "accepted_delta": 56101,
+      "accepted_calls": 1,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_bridge.py",
+      "function": "bind_layout_context",
+      "line": 235,
+      "accepted_delta": 54657,
+      "accepted_calls": 6073,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_hints/columns.py",
+      "function": "observe_single_body_lane",
+      "line": 66,
+      "accepted_delta": 52188,
+      "accepted_calls": 408,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/source_catalog/narrative_native_dependencies.py",
+      "function": "collect_native_dependencies",
+      "line": 50,
+      "accepted_delta": 48149,
+      "accepted_calls": 1,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/strategy_binding.py",
+      "function": "bind_reading_plan",
+      "line": 403,
+      "accepted_delta": 47810,
+      "accepted_calls": 1079,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/pipeline.py",
+      "function": "understand_units",
+      "line": 146,
+      "accepted_delta": 42076,
+      "accepted_calls": 1,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/source_catalog/narrative_reading.py",
+      "function": "_prose_reading_packages",
+      "line": 151,
+      "accepted_delta": 42076,
+      "accepted_calls": 1,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/source_catalog/narrative_reading.py",
+      "function": "_prose_reading_packages",
+      "line": 253,
+      "accepted_delta": 42032,
+      "accepted_calls": 1078,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/strategy_binding.py",
+      "function": "matches",
+      "line": 51,
+      "accepted_delta": 40931,
+      "accepted_calls": 40931,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_bridge.py",
+      "function": "add",
+      "line": 187,
+      "accepted_delta": 40824,
+      "accepted_calls": 40824,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+      "function": "_source_material_range",
+      "line": 279,
+      "accepted_delta": 36103,
+      "accepted_calls": 9082,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/operating_states/relations.py",
+      "function": "_detect_operating_relations",
+      "line": 1059,
+      "accepted_delta": 35605,
+      "accepted_calls": 229,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/source_catalog/narrative_reading.py",
+      "function": "context",
+      "line": 305,
+      "accepted_delta": 34943,
+      "accepted_calls": 5261,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/source_catalog/narrative_reading.py",
+      "function": "_prose_reading_packages",
+      "line": 359,
+      "accepted_delta": 31210,
+      "accepted_calls": 1,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/source_catalog/narrative_reading.py",
+      "function": "context",
+      "line": 296,
+      "accepted_delta": 29543,
+      "accepted_calls": 9089,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/structure/_work.py",
+      "function": "observe",
+      "line": 28,
+      "accepted_delta": 28291,
+      "accepted_calls": 14025,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/source_catalog/narrative_antecedent.py",
+      "function": "build_antecedent_windows",
+      "line": 104,
+      "accepted_delta": 28051,
+      "accepted_calls": 1,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/source_catalog/narrative_reading.py",
+      "function": "_candidates",
+      "line": 563,
+      "accepted_delta": 28051,
+      "accepted_calls": 1,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_hints/neighbours.py",
+      "function": "vertical_clearances",
+      "line": 95,
+      "accepted_delta": 28050,
+      "accepted_calls": 28050,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/operating_states/relations.py",
+      "function": "matching_text",
+      "line": 809,
+      "accepted_delta": 20858,
+      "accepted_calls": 504,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/operating_states/relations.py",
+      "function": "_detect_operating_relations",
+      "line": 1039,
+      "accepted_delta": 20680,
+      "accepted_calls": 504,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/native_table_bridge.py",
+      "function": "_each",
+      "line": 18,
+      "accepted_delta": 20098,
+      "accepted_calls": 20098,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_hints/fine_geometry.py",
+      "function": "_range",
+      "line": 89,
+      "accepted_delta": 19879,
+      "accepted_calls": 19759,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/source_catalog/narrative_evidence.py",
+      "function": "_project_native_prose",
+      "line": 1111,
+      "accepted_delta": 19779,
+      "accepted_calls": 19779,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_normalization/layout_snapshots/unit_binding.py",
+      "function": "take_one",
+      "line": 73,
+      "accepted_delta": 19759,
+      "accepted_calls": 19759,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_hints/fine_geometry.py",
+      "function": "_font_style",
+      "line": 241,
+      "accepted_delta": 19759,
+      "accepted_calls": 19759,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_hints/fine_geometry.py",
+      "function": "_take",
+      "line": 46,
+      "accepted_delta": 19759,
+      "accepted_calls": 19759,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/geometry_intent/reading.py",
+      "function": "_charge_material",
+      "line": 35,
+      "accepted_delta": 19065,
+      "accepted_calls": 19065,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_bridge.py",
+      "function": "_apply_layout",
+      "line": 145,
+      "accepted_delta": 18282,
+      "accepted_calls": 3984,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_bridge.py",
+      "function": "_bind_context",
+      "line": 270,
+      "accepted_delta": 17892,
+      "accepted_calls": 17892,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+      "function": "_source_material_range",
+      "line": 270,
+      "accepted_delta": 15024,
+      "accepted_calls": 15024,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/source_catalog/narrative_reading.py",
+      "function": "_candidates",
+      "line": 583,
+      "accepted_delta": 14466,
+      "accepted_calls": 1,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/source_catalog/narrative_evidence.py",
+      "function": "_project_native_prose",
+      "line": 1076,
+      "accepted_delta": 14454,
+      "accepted_calls": 429,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/source_catalog/narrative_reading.py",
+      "function": "native_fields",
+      "line": 309,
+      "accepted_delta": 14359,
+      "accepted_calls": 5270,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_bridge.py",
+      "function": "_bind_context",
+      "line": 285,
+      "accepted_delta": 14298,
+      "accepted_calls": 14298,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/source_catalog/narrative_evidence.py",
+      "function": "_project_native_prose",
+      "line": 1096,
+      "accepted_delta": 14287,
+      "accepted_calls": 14025,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_normalization/layout_snapshots/projection.py",
+      "function": "_process_page",
+      "line": 235,
+      "accepted_delta": 14025,
+      "accepted_calls": 14025,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_normalization/layout_snapshots/projection.py",
+      "function": "project_layout_snapshot",
+      "line": 104,
+      "accepted_delta": 14025,
+      "accepted_calls": 14025,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_bridge.py",
+      "function": "_apply_layout",
+      "line": 71,
+      "accepted_delta": 14025,
+      "accepted_calls": 14025,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_bridge.py",
+      "function": "_apply_layout",
+      "line": 151,
+      "accepted_delta": 14025,
+      "accepted_calls": 14025,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_bridge.py",
+      "function": "_overlay_observation",
+      "line": 44,
+      "accepted_delta": 14025,
+      "accepted_calls": 14025,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_hints/__init__.py",
+      "function": "_derive",
+      "line": 85,
+      "accepted_delta": 14025,
+      "accepted_calls": 14025,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_hints/__init__.py",
+      "function": "_derive",
+      "line": 420,
+      "accepted_delta": 14025,
+      "accepted_calls": 14025,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_hints/__init__.py",
+      "function": "_derive",
+      "line": 451,
+      "accepted_delta": 14025,
+      "accepted_calls": 14025,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_hints/columns.py",
+      "function": "observe_single_body_lane",
+      "line": 44,
+      "accepted_delta": 14025,
+      "accepted_calls": 14025,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_hints/geometry.py",
+      "function": "band_cells",
+      "line": 231,
+      "accepted_delta": 14025,
+      "accepted_calls": 14025,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_hints/geometry.py",
+      "function": "band_geometry_units",
+      "line": 183,
+      "accepted_delta": 14025,
+      "accepted_calls": 14025,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_hints/headings.py",
+      "function": "body_font_size",
+      "line": 58,
+      "accepted_delta": 14025,
+      "accepted_calls": 14025,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_hints/headings.py",
+      "function": "detect_repeated_furniture",
+      "line": 32,
+      "accepted_delta": 14025,
+      "accepted_calls": 14025,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_hints/neighbours.py",
+      "function": "vertical_clearances",
+      "line": 71,
+      "accepted_delta": 14025,
+      "accepted_calls": 14025,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_hints/ordering.py",
+      "function": "build_reading_order",
+      "line": 20,
+      "accepted_delta": 14025,
+      "accepted_calls": 11456,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_hints/ordering.py",
+      "function": "build_reading_order",
+      "line": 25,
+      "accepted_delta": 14025,
+      "accepted_calls": 14025,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/native_signal_bridge.py",
+      "function": "collect_native_signals",
+      "line": 15,
+      "accepted_delta": 14025,
+      "accepted_calls": 14025,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/source_signals/__init__.py",
+      "function": "_index_units",
+      "line": 141,
+      "accepted_delta": 14025,
+      "accepted_calls": 14025,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/structure/contract.py",
+      "function": "parse_observation",
+      "line": 326,
+      "accepted_delta": 14025,
+      "accepted_calls": 1,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/structure/contract.py",
+      "function": "parse_observation",
+      "line": 338,
+      "accepted_delta": 14025,
+      "accepted_calls": 14025,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/source_catalog/narrative_evidence.py",
+      "function": "_project_native_prose",
+      "line": 1082,
+      "accepted_delta": 14025,
+      "accepted_calls": 14025,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/source_catalog/narrative_evidence.py",
+      "function": "_project_native_prose",
+      "line": 1133,
+      "accepted_delta": 14025,
+      "accepted_calls": 14025,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+      "function": "local_qualification_dependencies",
+      "line": 328,
+      "accepted_delta": 14025,
+      "accepted_calls": 14025,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+      "function": "local_qualification_dependencies",
+      "line": 444,
+      "accepted_delta": 14025,
+      "accepted_calls": 1,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+      "function": "local_qualification_dependencies",
+      "line": 455,
+      "accepted_delta": 14025,
+      "accepted_calls": 1,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/source_catalog/narrative_reading.py",
+      "function": "_prose_reading_packages",
+      "line": 332,
+      "accepted_delta": 14025,
+      "accepted_calls": 1,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/source_catalog/narrative_reading.py",
+      "function": "_understand",
+      "line": 1378,
+      "accepted_delta": 14025,
+      "accepted_calls": 14025,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/structure/sections.py",
+      "function": "_native_list_scopes",
+      "line": 203,
+      "accepted_delta": 14024,
+      "accepted_calls": 14024,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/strategy_binding.py",
+      "function": "bind_reading_plan",
+      "line": 382,
+      "accepted_delta": 13388,
+      "accepted_calls": 1078,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_bridge.py",
+      "function": "_bind_context",
+      "line": 280,
+      "accepted_delta": 12180,
+      "accepted_calls": 12180,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/source_catalog/narrative_native_dependencies.py",
+      "function": "collect_native_dependencies",
+      "line": 73,
+      "accepted_delta": 12180,
+      "accepted_calls": 6073,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/geometry_intent/reading.py",
+      "function": "_charge_material",
+      "line": 37,
+      "accepted_delta": 11971,
+      "accepted_calls": 1634,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_hints/tables.py",
+      "function": "analyse_page",
+      "line": 138,
+      "accepted_delta": 11456,
+      "accepted_calls": 11456,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_hints/tables.py",
+      "function": "build_region_drafts",
+      "line": 166,
+      "accepted_delta": 11456,
+      "accepted_calls": 11456,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_hints/columns.py",
+      "function": "detect_document_lanes",
+      "line": 155,
+      "accepted_delta": 10754,
+      "accepted_calls": 429,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_hints/columns.py",
+      "function": "compute_cuts",
+      "line": 115,
+      "accepted_delta": 10325,
+      "accepted_calls": 10325,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/operating_states/relations.py",
+      "function": "_view_and_names",
+      "line": 235,
+      "accepted_delta": 9244,
+      "accepted_calls": 72,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/source_catalog/narrative_antecedent.py",
+      "function": "build_antecedent_windows",
+      "line": 117,
+      "accepted_delta": 9089,
+      "accepted_calls": 9089,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/source_catalog/narrative_reading.py",
+      "function": "native_fields",
+      "line": 316,
+      "accepted_delta": 9089,
+      "accepted_calls": 9089,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/operating_states/relations.py",
+      "function": "_unit",
+      "line": 218,
+      "accepted_delta": 8872,
+      "accepted_calls": 8872,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/strategy_binding.py",
+      "function": "_match_rule",
+      "line": 140,
+      "accepted_delta": 8624,
+      "accepted_calls": 8624,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/strategy_binding.py",
+      "function": "_copy_policy_material",
+      "line": 61,
+      "accepted_delta": 7807,
+      "accepted_calls": 7807,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/geometry_intent/reading.py",
+      "function": "_charge_material",
+      "line": 41,
+      "accepted_delta": 7014,
+      "accepted_calls": 1622,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/strategy_binding.py",
+      "function": "_copy_policy_material",
+      "line": 70,
+      "accepted_delta": 6649,
+      "accepted_calls": 6649,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/strategy_binding.py",
+      "function": "_copy_policy_material",
+      "line": 66,
+      "accepted_delta": 6599,
+      "accepted_calls": 1127,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+      "function": "local_qualification_dependencies",
+      "line": 349,
+      "accepted_delta": 6589,
+      "accepted_calls": 1,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_hints/columns.py",
+      "function": "observe_single_body_lane",
+      "line": 81,
+      "accepted_delta": 6402,
+      "accepted_calls": 6402,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_bridge.py",
+      "function": "_bind_context",
+      "line": 290,
+      "accepted_delta": 6218,
+      "accepted_calls": 6218,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_bridge.py",
+      "function": "_bind_context",
+      "line": 277,
+      "accepted_delta": 6073,
+      "accepted_calls": 6073,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_bridge.py",
+      "function": "_bind_context",
+      "line": 295,
+      "accepted_delta": 6073,
+      "accepted_calls": 1,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/pipeline.py",
+      "function": "understand_units",
+      "line": 247,
+      "accepted_delta": 6073,
+      "accepted_calls": 6073,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/source_catalog/narrative_native_dependencies.py",
+      "function": "collect_native_dependencies",
+      "line": 69,
+      "accepted_delta": 6073,
+      "accepted_calls": 6073,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/source_catalog/narrative_reading.py",
+      "function": "_prose_reading_packages",
+      "line": 183,
+      "accepted_delta": 5813,
+      "accepted_calls": 887,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_hints/headings.py",
+      "function": "body_font_size",
+      "line": 76,
+      "accepted_delta": 5630,
+      "accepted_calls": 5630,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/geometry_intent/reading.py",
+      "function": "_charge_material",
+      "line": 45,
+      "accepted_delta": 5404,
+      "accepted_calls": 3504,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_hints/tables.py",
+      "function": "build_region_drafts",
+      "line": 186,
+      "accepted_delta": 5213,
+      "accepted_calls": 5213,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/operating_states/relations.py",
+      "function": "_view_and_names",
+      "line": 233,
+      "accepted_delta": 4690,
+      "accepted_calls": 72,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/operating_states/relations.py",
+      "function": "_detect_operating_relations",
+      "line": 1054,
+      "accepted_delta": 4622,
+      "accepted_calls": 72,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_bridge.py",
+      "function": "_bind_context",
+      "line": 266,
+      "accepted_delta": 3984,
+      "accepted_calls": 3984,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_hints/__init__.py",
+      "function": "_derive",
+      "line": 610,
+      "accepted_delta": 3984,
+      "accepted_calls": 3984,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_hints/__init__.py",
+      "function": "add_group",
+      "line": 203,
+      "accepted_delta": 3984,
+      "accepted_calls": 3984,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/source_catalog/narrative_reading.py",
+      "function": "_prose_reading_packages",
+      "line": 243,
+      "accepted_delta": 3498,
+      "accepted_calls": 1078,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_hints/tables.py",
+      "function": "analyse_region",
+      "line": 320,
+      "accepted_delta": 2820,
+      "accepted_calls": 2820,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_hints/tables.py",
+      "function": "_flag_wrapped_rows",
+      "line": 365,
+      "accepted_delta": 2594,
+      "accepted_calls": 2594,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+      "function": "local_operating_context_dependencies",
+      "line": 526,
+      "accepted_delta": 2202,
+      "accepted_calls": 2202,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/source_catalog/narrative_reading.py",
+      "function": "_prose_reading_packages",
+      "line": 217,
+      "accepted_delta": 2155,
+      "accepted_calls": 1078,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/source_catalog/narrative_reading.py",
+      "function": "_prose_reading_packages",
+      "line": 274,
+      "accepted_delta": 2155,
+      "accepted_calls": 1078,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_hints/tables.py",
+      "function": "analyse_region",
+      "line": 338,
+      "accepted_delta": 2084,
+      "accepted_calls": 2084,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/source_catalog/narrative_reading.py",
+      "function": "_prose_reading_packages",
+      "line": 270,
+      "accepted_delta": 1079,
+      "accepted_calls": 1,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/source_catalog/narrative_reading.py",
+      "function": "_prose_reading_packages",
+      "line": 231,
+      "accepted_delta": 1078,
+      "accepted_calls": 1078,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/strategy_binding.py",
+      "function": "heading_text",
+      "line": 325,
+      "accepted_delta": 1077,
+      "accepted_calls": 1077,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/strategy_binding.py",
+      "function": "heading_text",
+      "line": 330,
+      "accepted_delta": 1077,
+      "accepted_calls": 1077,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/strategy_binding.py",
+      "function": "fold",
+      "line": 46,
+      "accepted_delta": 1073,
+      "accepted_calls": 1073,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/narrative_continuity.py",
+      "function": "__init__",
+      "line": 292,
+      "accepted_delta": 859,
+      "accepted_calls": 1,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_bridge.py",
+      "function": "bind_layout_context",
+      "line": 231,
+      "accepted_delta": 679,
+      "accepted_calls": 1,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/operating_states/relations.py",
+      "function": "_clause_events",
+      "line": 742,
+      "accepted_delta": 469,
+      "accepted_calls": 26,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/source_catalog/narrative_evidence.py",
+      "function": "_parse_pdf_document",
+      "line": 1660,
+      "accepted_delta": 430,
+      "accepted_calls": 1,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_hints/__init__.py",
+      "function": "_derive",
+      "line": 108,
+      "accepted_delta": 429,
+      "accepted_calls": 429,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/source_catalog/narrative_evidence.py",
+      "function": "_emit_pdf_page",
+      "line": 1544,
+      "accepted_delta": 429,
+      "accepted_calls": 429,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/source_catalog/narrative_pdf_intent.py",
+      "function": "request",
+      "line": 56,
+      "accepted_delta": 429,
+      "accepted_calls": 429,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/source_catalog/narrative_pdf_intent.py",
+      "function": "scan_planned_pages",
+      "line": 190,
+      "accepted_delta": 429,
+      "accepted_calls": 429,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/source_catalog/narrative_pdf_layout.py",
+      "function": "_take",
+      "line": 111,
+      "accepted_delta": 429,
+      "accepted_calls": 429,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/narrative_continuity.py",
+      "function": "__init__",
+      "line": 277,
+      "accepted_delta": 368,
+      "accepted_calls": 1,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/structure/contract.py",
+      "function": "parse_observation",
+      "line": 335,
+      "accepted_delta": 367,
+      "accepted_calls": 1,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_hints/__init__.py",
+      "function": "_derive",
+      "line": 387,
+      "accepted_delta": 286,
+      "accepted_calls": 286,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_hints/__init__.py",
+      "function": "_derive",
+      "line": 397,
+      "accepted_delta": 286,
+      "accepted_calls": 286,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/operating_states/relations.py",
+      "function": "_predicate_modifiers",
+      "line": 559,
+      "accepted_delta": 251,
+      "accepted_calls": 27,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/strategy_binding.py",
+      "function": "_copy_policy_material",
+      "line": 63,
+      "accepted_delta": 122,
+      "accepted_calls": 22,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_hints/__init__.py",
+      "function": "_derive",
+      "line": 493,
+      "accepted_delta": 95,
+      "accepted_calls": 95,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_hints/__init__.py",
+      "function": "_region_descriptor",
+      "line": 775,
+      "accepted_delta": 88,
+      "accepted_calls": 88,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/geometry_intent/reading.py",
+      "function": "prepare_geometry_reading",
+      "line": 267,
+      "accepted_delta": 38,
+      "accepted_calls": 38,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/operating_states/relations.py",
+      "function": "_clause_events",
+      "line": 604,
+      "accepted_delta": 28,
+      "accepted_calls": 28,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/operating_states/relations.py",
+      "function": "_clause_events",
+      "line": 609,
+      "accepted_delta": 28,
+      "accepted_calls": 28,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/operating_states/relations.py",
+      "function": "_clause_events",
+      "line": 616,
+      "accepted_delta": 28,
+      "accepted_calls": 28,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/operating_states/relations.py",
+      "function": "_detect_operating_relations",
+      "line": 1084,
+      "accepted_delta": 27,
+      "accepted_calls": 27,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_hints/tables.py",
+      "function": "_attach_context",
+      "line": 298,
+      "accepted_delta": 18,
+      "accepted_calls": 18,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/geometry_intent/planner.py",
+      "function": "plan_geometry_requests",
+      "line": 519,
+      "accepted_delta": 17,
+      "accepted_calls": 1,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_hints/tables.py",
+      "function": "_attach_context",
+      "line": 283,
+      "accepted_delta": 17,
+      "accepted_calls": 17,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/geometry_intent/reading.py",
+      "function": "_windows",
+      "line": 116,
+      "accepted_delta": 9,
+      "accepted_calls": 1,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/structure/contract.py",
+      "function": "parse_observation",
+      "line": 330,
+      "accepted_delta": 9,
+      "accepted_calls": 2,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/geometry_intent/planner.py",
+      "function": "_parse_rules",
+      "line": 135,
+      "accepted_delta": 8,
+      "accepted_calls": 8,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/operating_states/relations.py",
+      "function": "_predicate_modifiers",
+      "line": 570,
+      "accepted_delta": 2,
+      "accepted_calls": 2,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/geometry_intent/planner.py",
+      "function": "plan_geometry_requests",
+      "line": 533,
+      "accepted_delta": 1,
+      "accepted_calls": 1,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/geometry_intent/planner.py",
+      "function": "plan_geometry_requests",
+      "line": 563,
+      "accepted_delta": 1,
+      "accepted_calls": 1,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/geometry_intent/reading.py",
+      "function": "_native_rows",
+      "line": 67,
+      "accepted_delta": 1,
+      "accepted_calls": 1,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/geometry_intent/reading.py",
+      "function": "prepare_geometry_reading",
+      "line": 265,
+      "accepted_delta": 1,
+      "accepted_calls": 1,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_bridge.py",
+      "function": "_overlay_observation",
+      "line": 39,
+      "accepted_delta": 1,
+      "accepted_calls": 1,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/layout_bridge.py",
+      "function": "bind_layout_context",
+      "line": 226,
+      "accepted_delta": 1,
+      "accepted_calls": 1,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/native_table_bridge.py",
+      "function": "bind_native_tables",
+      "line": 118,
+      "accepted_delta": 1,
+      "accepted_calls": 1,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/native_table_bridge.py",
+      "function": "close_native_table_dependencies",
+      "line": 183,
+      "accepted_delta": 1,
+      "accepted_calls": 1,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/pipeline.py",
+      "function": "understand_units",
+      "line": 104,
+      "accepted_delta": 1,
+      "accepted_calls": 1,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/strategy_binding.py",
+      "function": "bind_reading_plan",
+      "line": 259,
+      "accepted_delta": 1,
+      "accepted_calls": 1,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/strategy_binding.py",
+      "function": "bind_reading_plan",
+      "line": 444,
+      "accepted_delta": 1,
+      "accepted_calls": 1,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/document_understanding/structure/__init__.py",
+      "function": "build_structure",
+      "line": 86,
+      "accepted_delta": 1,
+      "accepted_calls": 1,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/source_catalog/narrative_pdf_intent.py",
+      "function": "scan_planned_pages",
+      "line": 158,
+      "accepted_delta": 1,
+      "accepted_calls": 1,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    },
+    {
+      "file": "src/company_wiki/source_catalog/narrative_reading.py",
+      "function": "select_reading_evidence",
+      "line": 1470,
+      "accepted_delta": 1,
+      "accepted_calls": 1,
+      "rejected_requested": 0,
+      "rejected_calls": 0
+    }
+  ],
+  "hooks_restored": true,
+  "no_additional_source_or_model_work_after_exhaustion": true,
+  "calls": {
+    "model": 0,
+    "api": 0,
+    "download": 0,
+    "raw_copy": 0
+  },
+  "temporary_directories_created": 0,
+  "limits": [
+    "Constant-depth frame observation changes timing; this is diagnostic work accounting, not a timing benchmark.",
+    "If outcome differs, do not assume it represents the uninstrumented run. Frozen three-case report remains unchanged."
+  ]
+}

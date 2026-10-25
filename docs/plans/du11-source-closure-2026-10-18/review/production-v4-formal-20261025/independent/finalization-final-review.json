@@ -1,0 +1,49 @@
+{
+  "schema_version": "phase-c-finalization-independent-review/1",
+  "verdict": "PASS_SUBTASK_ONLY",
+  "scope": [
+    "phase_c_runner finalization and owned temporary-lake cleanup",
+    "unknown accounting fallback in the existing mother ledger",
+    "post-cleanup native usage journal reconciliation"
+  ],
+  "not_approved": [
+    "source preflight CF1-CF4",
+    "paid formal summary",
+    "narrative quality",
+    "complete Revenue Forecast run"
+  ],
+  "files": {
+    "tools/document_understanding_benchmark/phase_c_runner.py": "4cab71dd8691d4d15fa7a8ab1e96829eeb948126a7f44e04a5033fa6157acc66",
+    "tests/test_phase_c_finalization.py": "bca693d1b014c0aaac9d362d0290b2d7dedee1649ba95c278cb2221628dbb35d",
+    "docs/plans/du11-source-closure-2026-10-18/review/production-v4-formal-20261025/run_operation.py": "635ac8e58b77cdda76c5f7c9fb182ff410f273287c461c9c797519d1990c0b3e"
+  },
+  "verification": {
+    "finalization_tests": "12 passed in 11.77 seconds",
+    "wider_four_file_host_run": "59 passed before final journal-binding changes; not claimed as final-source run",
+    "ruff": "PASS per frozen verification receipt",
+    "diff_check": "PASS per frozen verification receipt",
+    "paid_calls": 0,
+    "downloads": 0,
+    "raw_copies": 0
+  },
+  "findings": [
+    {
+      "id": "FINALIZATION_CLEANUP_ON_ACCOUNTING_FAILURE",
+      "status": "CLOSED",
+      "evidence": "Nested finalization, explicit FAIL on accounting/observation/cleanup failures, owned-root checks without assert, and fault-injection tests."
+    },
+    {
+      "id": "UNKNOWN_CHARGE_MUST_NOT_LOOK_FREE",
+      "status": "CLOSED",
+      "evidence": "Full request-bound fallback, per-run actual-row sum versus fallback max accounting, and wrapper null delta / within-limits false on reconciliation-required result."
+    },
+    {
+      "id": "RECOVERY_AFTER_TEMP_DATABASE_REMOVAL",
+      "status": "CLOSED",
+      "evidence": "Restart CLI replays the existing native usage journal without AUTO or POST; journal SHA binding, empty-after-POST refusal, and idempotent same-key release are tested."
+    }
+  ],
+  "residual_limit": "If both the shared usage ledger and diagnostic output are unavailable, no software path can durably persist a shared hold. The operation remains FAIL/unknown and must not be treated as a zero-cost success.",
+  "source_preflight": "OPEN_CF1_CF2_CF3_CF4",
+  "product_semantic_owners_unchanged": true
+}

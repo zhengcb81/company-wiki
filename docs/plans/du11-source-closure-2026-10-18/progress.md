@@ -1128,3 +1128,23 @@ Root cause from the configured model and official MiniMax API documentation: `Mi
 ## 2026-10-25 14项来源复评及CI共因跟进
 
 新独立报告12PASS/2PARTIAL/0MISSING；189 member offsets和32原金标引句验真，62任务payload与attempt05相同。A02/A13精确金融口径不以扩大叙述切片解决，RF须实际完整来源绑定。06c远端CI失败6项已本地6FAIL122PASS复现：defaults/compiler单源遗漏、零共享预算旧免费扫描契约、layout伪engine漏groups、generic导航固定block数。新增defaults/compiler两项真RED；handler新测试初版hash夹具错误，两次217PASS1FAIL如实保留，修为原件真实SHA并撤销新catch后再次真RED，随后正确owner捕获预算原因，最终218PASS/16.45s，临时目录恢复、compiler --check/Ruff通过。budget预付不回退、runtime catalog字节未改、不增加门禁。最终独审/新推送CI待完成，0新API/下载/原件副本。
+
+2026-10-25发布闭合：483cb2a56299cb28ca07bbd349674860baf04430正常提交/推送，pre-commit Ruff/full-src mypy/host guard通过，pre-push154P/29.90s；7文件review物理SHA与Git LF字节均一致。精确CI40191425654于12:07:16 UTC completed/success，旧06c失败仍保留。当前转独立三类来源预检及明确v4 task-summary运行器预审；旧formal-v4运行实际显式v5排名，不冒充v4摘要。母账仍1,783,378 tokens/$0.724836，本节点0新费用。
+
+
+## 2026-10-25 跨市场预检与失败清理/费用根修增量
+
+**主线持续active，整体未完成。** 最新已发布产品483cb2a5精确CI40191425654成功；药明康德来源/实际输入14项独审12PASS/2PARTIAL是单份年报结论，不代表其他市场文种或模型质量。
+
+独立三例真实预检发现：微软严格业务关系7PASS/1PARTIAL；港股中报裸compiler联合目标1PASS/4PARTIAL/2MISSING（期间可由verified document共享头一次提供，不要求每task重复p5）；中微429页招股在同一16M账户耗尽、0span，无正式内容gold故NOT_GRADED。IPO热点实测解析仅420,052、understand_units11,473,800、candidates4,091,862；约2.6%是解析逻辑工作量，不能说PDF转文字占尽资源，也不能从逻辑计数推CPU瓶颈。[独立报告](review/local-flow-cross-market-20261025/final-report.md)和[热点](review/local-flow-cross-market-20261025/ipo-profile.md)已冻结，0模型/API/下载/原件副本，原文/config/catalog稳定。
+
+ROOT已核真实HTML：加粗业务标题、含bullet的flex list在原DOM存在，标准化后只剩dom_path与平文本，bullet owner还排在body后；这为共享结构层缺业务父级提供可复现线索，不按公司名特判。[统一实施细则CF1–CF4](review/local-flow-root-causes-20261025/implementation_plan.md)是下一轮详细步骤，选材cap/预算不提高。
+
+独审还发现运行器落账故障会漏清理/未知费用可能显示0。已TDD修在既有phase_c_runner：始终清理自有临时湖、同一账本保守hold及逐run去重/对账释放、未知delta为null；主机四文件59PASS/66.50秒；之后journal绑定3项真RED→当前finalization12PASS/11.77秒，旧母账两例1.53秒通过（计数重叠，不相加），Ruff/diff-check绿，最终独审PASS（仅清理/费用工程，见review/production-v4-formal-20261025/independent/finalization-final-review.json）。恢复CLI只读失败当时绑定SHA的用量记录，同键释放占额；记录变更或从未保存时保留unknown。没有新client/store/预算库/人工签收；[技术节点](review/production-v4-formal-20261025/README.md)。本轮未发起真实付费摘要，母账仍1,783,378 tokens/$0.724836，配置10M/$20含unknown。
+
+**下一步唯一行动：** 接收清理/费用根修最终独审并发布；随后按CF1–CF4先中性RED再共享owner实施，修来源关系、未闭句和选择效率，再新attempt三源验收。来源合格后才正式v4摘要、cache零重复费用与RF真实采用。W16/W17/W18作者工区不写，Dayu/IQS不动。
+
+---
+
+
+故障测试过程如实保留：首RED夹具漏sample_id，纠正后真正finally-OSError RED；首集中51例44P7F，其中2个loopback为沙箱socket、5个暴露旧安全条件错误地禁止workspace中自有tmp。新绝对parent/prefix检查只禁止删仓/祖先，允许安全自有子tmp；在正常主机同4文件54项通过。未知hold新增2真RED后修复：同账本按run取真钱合计与保守占额之较大值、同键settled0释放；已有/未有模拟POST与hold存储拒绝补6P。所有测试tmp恢复，真实母账未变。

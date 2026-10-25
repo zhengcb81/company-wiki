@@ -1,0 +1,24 @@
+{
+  "phase": "red",
+  "targets": [
+    "tests/test_phase_c_finalization.py::test_live_mother_hold_survives_diagnostic_sidecar_write_failure",
+    "tests/test_phase_c_finalization.py::test_reconcile_after_cleanup_uses_durable_native_journal_without_database"
+  ],
+  "owned_test_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\cwdoc-oljhz6qj",
+  "exit_code": 1,
+  "elapsed_seconds": 3.26,
+  "temp_decisions": [
+    {
+      "event": "decision",
+      "requested_basetemp": "C:\\Users\\郑曾波\\Projects\\company-wiki\\cwdoc-oljhz6qj\\pytest",
+      "requested_basetemp_len": 56,
+      "cwd_len": 34,
+      "threshold": 60,
+      "win32_path_limit": 210,
+      "generation_reserve": 150,
+      "relocated": false,
+      "reason": "within-budget"
+    }
+  ],
+  "owned_test_root_restored_to_absent": true
+}

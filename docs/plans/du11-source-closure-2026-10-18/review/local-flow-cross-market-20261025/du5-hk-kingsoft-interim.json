@@ -1,0 +1,4136 @@
+{
+  "case_id": "du5-hk-kingsoft-interim",
+  "source_ref": {
+    "document_id": "urn:company-wiki:document:sha256:4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+    "source_id": "urn:company-wiki:source:sha256:4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+    "content_sha256": "4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+    "byte_size": 3396644,
+    "mime_type": "application/pdf",
+    "schema_version": "2.0"
+  },
+  "source_sha_verified": true,
+  "title": "2025 中期報告",
+  "declared_kind": "semi_annual_report",
+  "language": "zh-hant",
+  "gold_path": "docs\\plans\\du11-source-closure-2026-10-18\\review\\market-family-upgrade-20261024\\m1-source-checkpoints\\gold\\du5-hk-kingsoft-interim.json",
+  "gold_sha256": "1d3e2d29436ba92758500039d75d9d24a1fdd84b9fefc9f0bb539e495a9d2604",
+  "gold_status": "FROZEN_DEVELOPMENT_GOLD",
+  "selector": "0.9.0",
+  "requested_max_selected": 112,
+  "summary_projection": "reading-model-input/4",
+  "parse_select_share_same_WorkBudget": true,
+  "model_calls": 0,
+  "downloads": 0,
+  "raw_copies": 0,
+  "parse_entry": "parse_pdf_bytes(selector=0.9.0, same WorkBudget)",
+  "parse_work": 307383,
+  "parsed_unit_count": 2330,
+  "parsed_page_count": 75,
+  "selection": {
+    "status": "partial",
+    "coverage_complete": false,
+    "selection_limit": 112,
+    "candidate_count": 1116,
+    "omitted_candidate_count": 1004,
+    "dropped_financial_count": 0,
+    "diagnostics": [
+      {
+        "code": "budget_full",
+        "count": 102,
+        "phase": "selection",
+        "external_model_cost": false,
+        "targets": [
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:f26c83f2918a37a128eae4eab259d8aa1440124545488ad28f134b74c04785e6",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:f26c83f2918a37a128eae4eab259d8aa1440124545488ad28f134b74c04785e6"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/page:10/paragraph:0",
+            "used": 112,
+            "requested": 1,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:581c83a1c987bb213816004132ccd728ea6d40b1c53abda8141336824de1915b",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:581c83a1c987bb213816004132ccd728ea6d40b1c53abda8141336824de1915b"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/page:10/paragraph:13/chars:341-370",
+            "used": 112,
+            "requested": 1,
+            "limit": 112,
+            "closure_size": 2
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:696094acd80390ac3ed01b5736f1bad465730472921b0df90f61d2fd6fee4952",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:696094acd80390ac3ed01b5736f1bad465730472921b0df90f61d2fd6fee4952"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/page:10/paragraph:15/chars:376-451",
+            "used": 112,
+            "requested": 2,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:0eca563ec790663610cc675a03d2dcfb6aea54122afdc63ebe8cdc5ddce72c57",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:0eca563ec790663610cc675a03d2dcfb6aea54122afdc63ebe8cdc5ddce72c57"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/page:10/paragraph:18/chars:451-500",
+            "used": 112,
+            "requested": 2,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:958b83183168ea0617066a509b36b874eb48940fbfcfff53025883b070bab6f0",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:958b83183168ea0617066a509b36b874eb48940fbfcfff53025883b070bab6f0"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/page:10/paragraph:20/chars:500-557",
+            "used": 112,
+            "requested": 2,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:118dcae3f02ddcbd482ce597861cfc2873d2d058a16394260a9b00f57cf3ecb9",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:118dcae3f02ddcbd482ce597861cfc2873d2d058a16394260a9b00f57cf3ecb9"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/page:10/paragraph:22/chars:557-603",
+            "used": 112,
+            "requested": 2,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:51caa6d144f799858fe4c2d743df926f99b1cedbaf3e33c53b06d9f68abf60a8",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:51caa6d144f799858fe4c2d743df926f99b1cedbaf3e33c53b06d9f68abf60a8"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/page:10/paragraph:24/chars:604-675",
+            "used": 112,
+            "requested": 2,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:3c700bca89530f3bc6cc01bd5035d544afae2d23db06365103adeacb5bd0b218",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:3c700bca89530f3bc6cc01bd5035d544afae2d23db06365103adeacb5bd0b218"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/page:11/paragraph:0",
+            "used": 112,
+            "requested": 2,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:469823f3de33badef2b105463091eddadf4c8e14eda430b1fabbd3631b81b502",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:469823f3de33badef2b105463091eddadf4c8e14eda430b1fabbd3631b81b502"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/page:11/paragraph:13/chars:237-403",
+            "used": 112,
+            "requested": 1,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:8aba10d4e6cef906310cdea234d59eaeb096022af992bca0e8755679ef392bfe",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:8aba10d4e6cef906310cdea234d59eaeb096022af992bca0e8755679ef392bfe"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/page:11/paragraph:21/chars:404-469",
+            "used": 112,
+            "requested": 1,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:2f5c2fe489f9ac1165f016c0ade20b2ff95473f8a82cfba2dc368af407372014",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:2f5c2fe489f9ac1165f016c0ade20b2ff95473f8a82cfba2dc368af407372014"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/page:11/paragraph:24/chars:475-571",
+            "used": 112,
+            "requested": 2,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:aff6b36f605a114c7d4d599f8f9ba8b2b2364e0ca63a35fc5c31c40d87e69bcd",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:aff6b36f605a114c7d4d599f8f9ba8b2b2364e0ca63a35fc5c31c40d87e69bcd"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/page:11/paragraph:3/chars:28-37",
+            "used": 112,
+            "requested": 1,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:3c79a3658ca03a5e6621d076929e7de87f2796dfbd7ac93c33b521ea496ff369",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:3c79a3658ca03a5e6621d076929e7de87f2796dfbd7ac93c33b521ea496ff369"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/page:11/paragraph:4/chars:37-182",
+            "used": 112,
+            "requested": 1,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:8e6454b59f2a3a39a42dbaebead4ce97f7bcfd13454d2f97e23ca795daf9ab19",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:8e6454b59f2a3a39a42dbaebead4ce97f7bcfd13454d2f97e23ca795daf9ab19"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/page:12/paragraph:0",
+            "used": 112,
+            "requested": 2,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:8aae567d85f02357d497d8e91c8a31816ab0f0554fbe9bd0417c313e05db9e8f",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:8aae567d85f02357d497d8e91c8a31816ab0f0554fbe9bd0417c313e05db9e8f"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/page:12/paragraph:10",
+            "used": 112,
+            "requested": 3,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:34624b4d7eaea8e94afcd309230325f5405cf47f28afd7236e13fd9fc67c3535",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:34624b4d7eaea8e94afcd309230325f5405cf47f28afd7236e13fd9fc67c3535"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/page:12/paragraph:11",
+            "used": 112,
+            "requested": 3,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:4b6422e94253df6f6520c21970cbb5457ef9cb7efee45838bb8b4bbc3ba94f3f",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:4b6422e94253df6f6520c21970cbb5457ef9cb7efee45838bb8b4bbc3ba94f3f"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/page:12/paragraph:12",
+            "used": 112,
+            "requested": 3,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:7b788d8bf8c40be291a69c84a8f8fb0621baaec4f32358998bdc8a7885b22766",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:7b788d8bf8c40be291a69c84a8f8fb0621baaec4f32358998bdc8a7885b22766"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/page:12/paragraph:18",
+            "used": 112,
+            "requested": 3,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:7ee1a8cc6e98057ad0bc0964058f46ec165173c5d1f68896a65a215023e91220",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:7ee1a8cc6e98057ad0bc0964058f46ec165173c5d1f68896a65a215023e91220"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/page:12/paragraph:27",
+            "used": 112,
+            "requested": 3,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:bff8ad8d28ca6a0c85e3f70194f9cae196f499da5b219c012402ddec699e201b",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:bff8ad8d28ca6a0c85e3f70194f9cae196f499da5b219c012402ddec699e201b"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/page:12/paragraph:28",
+            "used": 112,
+            "requested": 3,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:4d0ebaa65cadcd6fd701669b51b213f35a0c32f52b9151a0021bd806213f5a6d",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:4d0ebaa65cadcd6fd701669b51b213f35a0c32f52b9151a0021bd806213f5a6d"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/page:12/paragraph:29",
+            "used": 112,
+            "requested": 3,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:ee063318d91a0306322bfd39deab54140c347e54ceae7ad2fcf647cee1bc8beb",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:ee063318d91a0306322bfd39deab54140c347e54ceae7ad2fcf647cee1bc8beb"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/page:12/paragraph:3",
+            "used": 112,
+            "requested": 3,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:ba22236afe53a41a3dc6c58e71a634f604ee50ac8d34d30672e6b5e28c699285",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:ba22236afe53a41a3dc6c58e71a634f604ee50ac8d34d30672e6b5e28c699285"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/page:12/paragraph:4",
+            "used": 112,
+            "requested": 3,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:e396ca5576bff72c23366b948636d7d249b32673cef47025d6886a64125f9622",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:e396ca5576bff72c23366b948636d7d249b32673cef47025d6886a64125f9622"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/page:13/paragraph:0",
+            "used": 112,
+            "requested": 3,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:37f1fa863dabb08d9b89c57435a7e38d0c637188ac561930d019826073da5b5d",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:37f1fa863dabb08d9b89c57435a7e38d0c637188ac561930d019826073da5b5d"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/page:13/paragraph:10/chars:304-356",
+            "used": 112,
+            "requested": 1,
+            "limit": 112,
+            "closure_size": 2
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:0c777d9ee986444cdc450f99bd73e9912f3009f97f8ad91a01264f7964420de1",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:0c777d9ee986444cdc450f99bd73e9912f3009f97f8ad91a01264f7964420de1"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/page:13/paragraph:13",
+            "used": 112,
+            "requested": 1,
+            "limit": 112,
+            "closure_size": 2
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:60012662dbc4d5c9132221742a37391ccb3e69fe450ef14c4edd46049ac0f6c2",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:60012662dbc4d5c9132221742a37391ccb3e69fe450ef14c4edd46049ac0f6c2"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/page:13/paragraph:14/chars:387-451",
+            "used": 112,
+            "requested": 1,
+            "limit": 112,
+            "closure_size": 2
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:1a9a7c9f89e4f92d59aed140ebdac50c819c4242975d7b8391f3cc00a55da4c0",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:1a9a7c9f89e4f92d59aed140ebdac50c819c4242975d7b8391f3cc00a55da4c0"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/page:13/paragraph:21/chars:578-730",
+            "used": 112,
+            "requested": 1,
+            "limit": 112,
+            "closure_size": 2
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:3918c4ae64e3abdaa4cb038350501c4aa9c30ee22ab95f7c1b95c40ad11982db",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:3918c4ae64e3abdaa4cb038350501c4aa9c30ee22ab95f7c1b95c40ad11982db"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/page:13/paragraph:27/chars:730-794",
+            "used": 112,
+            "requested": 1,
+            "limit": 112,
+            "closure_size": 2
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:37cf7ff2cd003cd93fbfc0bae5cf6aa09d225868a584654a47d7c1bc210e4618",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:37cf7ff2cd003cd93fbfc0bae5cf6aa09d225868a584654a47d7c1bc210e4618"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/page:13/paragraph:35",
+            "used": 112,
+            "requested": 1,
+            "limit": 112,
+            "closure_size": 2
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:3f89ee0732cac2d082dbc6e32346274ddf1682a40ebf9685810d25909929b4c3",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:3f89ee0732cac2d082dbc6e32346274ddf1682a40ebf9685810d25909929b4c3"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/page:13/paragraph:36",
+            "used": 112,
+            "requested": 1,
+            "limit": 112,
+            "closure_size": 2
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:5ffb549fcfbe8dc18d4d200661311eb46148b32971aeebb6f6bd206227c19271",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:5ffb549fcfbe8dc18d4d200661311eb46148b32971aeebb6f6bd206227c19271"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/page:13/paragraph:37",
+            "used": 112,
+            "requested": 1,
+            "limit": 112,
+            "closure_size": 2
+          }
+        ],
+        "targets_limited": true,
+        "dimension": "selection_spans",
+        "used": 112,
+        "limit": 112
+      }
+    ],
+    "selected_count": 112,
+    "selected_chars": 6522
+  },
+  "reading_route": null,
+  "reading_policy": [
+    {
+      "profile_id": "hk_periodic",
+      "profile_version": "hk_periodic/v2+901fadeb175bf571",
+      "family": "interim",
+      "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 六个月累计口径的本期变化 与年报共用模板但周期不丢 期后事项（含融资、收购）单列 同店/门店等经营指标的可比口径 未审计状态对数值的限定",
+      "policy_components": [
+        {
+          "kind": "family",
+          "id": "hk_interim_report",
+          "version": "1.0.4",
+          "content_digest": "55bd782fd82bb4306c686457f641cc2c6ff2b38b4681700b19683d92fe9b1082"
+        }
+      ],
+      "reading_questions": [
+        "六个月累计口径的本期变化",
+        "与年报共用模板但周期不丢",
+        "期后事项（含融资、收购）单列",
+        "同店/门店等经营指标的可比口径",
+        "未审计状态对数值的限定",
+        "中期财务表现的经营解释"
+      ],
+      "context_requirements": [
+        {
+          "when": "always_for_assertion",
+          "slots": [
+            "subject",
+            "period"
+          ],
+          "missing_behavior": "unknown",
+          "reason": "中期数据为期末止六个月口径且未审计"
+        },
+        {
+          "when": "quantity_emitted",
+          "slots": [
+            "quantity",
+            "unit",
+            "period",
+            "denominator",
+            "geography"
+          ],
+          "missing_behavior": "partial",
+          "reason": "六个月/单季/同比基期、存量/净增、地域与模式范围分开"
+        },
+        {
+          "when": "explicit_condition_present",
+          "slots": [
+            "condition",
+            "modality",
+            "period"
+          ],
+          "missing_behavior": "deferred",
+          "reason": "期后发展与展望的时点限定必须保留"
+        },
+        {
+          "when": "project_emitted",
+          "slots": [
+            "project",
+            "stage",
+            "condition"
+          ],
+          "missing_behavior": "partial",
+          "reason": "融资、收购、新市场进入必须保留阶段与条件（如期后完成 vs 报告期内）"
+        }
+      ],
+      "family_policy": {
+        "id": "hk_interim_report",
+        "design_status": "verified",
+        "spec_status": "implemented",
+        "evidence_status": "real",
+        "integration_status": "not_integrated",
+        "gaps": [
+          "中期报告摘要/更正版本对缺失"
+        ]
+      },
+      "negative_hints": [
+        "未经审计综合财务报表与纯会计附注；例外：其中含经营解释或业务机制",
+        "企业管治等常规章节；例外：含重大经营事实"
+      ],
+      "semantic_units": [
+        "paragraph_event",
+        "project",
+        "operating_table",
+        "risk",
+        "background"
+      ],
+      "section_priorities": [
+        {
+          "section_role": "management_discussion",
+          "priority": 1
+        }
+      ]
+    },
+    {
+      "profile_id": "hk_periodic",
+      "profile_version": "hk_periodic/v2+901fadeb175bf571",
+      "family": "interim",
+      "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 六个月累计口径的本期变化 与年报共用模板但周期不丢 期后事项（含融资、收购）单列 同店/门店等经营指标的可比口径 未审计状态对数值的限定",
+      "policy_components": [
+        {
+          "kind": "family",
+          "id": "hk_interim_report",
+          "version": "1.0.4",
+          "content_digest": "55bd782fd82bb4306c686457f641cc2c6ff2b38b4681700b19683d92fe9b1082"
+        }
+      ],
+      "reading_questions": [
+        "六个月累计口径的本期变化",
+        "与年报共用模板但周期不丢",
+        "期后事项（含融资、收购）单列",
+        "同店/门店等经营指标的可比口径",
+        "未审计状态对数值的限定",
+        "本期新增的风险事实"
+      ],
+      "context_requirements": [
+        {
+          "when": "always_for_assertion",
+          "slots": [
+            "subject",
+            "period"
+          ],
+          "missing_behavior": "unknown",
+          "reason": "中期数据为期末止六个月口径且未审计"
+        },
+        {
+          "when": "quantity_emitted",
+          "slots": [
+            "quantity",
+            "unit",
+            "period",
+            "denominator",
+            "geography"
+          ],
+          "missing_behavior": "partial",
+          "reason": "六个月/单季/同比基期、存量/净增、地域与模式范围分开"
+        },
+        {
+          "when": "explicit_condition_present",
+          "slots": [
+            "condition",
+            "modality",
+            "period"
+          ],
+          "missing_behavior": "deferred",
+          "reason": "期后发展与展望的时点限定必须保留"
+        },
+        {
+          "when": "project_emitted",
+          "slots": [
+            "project",
+            "stage",
+            "condition"
+          ],
+          "missing_behavior": "partial",
+          "reason": "融资、收购、新市场进入必须保留阶段与条件（如期后完成 vs 报告期内）"
+        }
+      ],
+      "family_policy": {
+        "id": "hk_interim_report",
+        "design_status": "verified",
+        "spec_status": "implemented",
+        "evidence_status": "real",
+        "integration_status": "not_integrated",
+        "gaps": [
+          "中期报告摘要/更正版本对缺失"
+        ]
+      },
+      "negative_hints": [
+        "未经审计综合财务报表与纯会计附注；例外：其中含经营解释或业务机制",
+        "企业管治等常规章节；例外：含重大经营事实"
+      ],
+      "semantic_units": [
+        "paragraph_event",
+        "project",
+        "operating_table",
+        "risk",
+        "background"
+      ],
+      "section_priorities": [
+        {
+          "section_role": "risk",
+          "priority": 2
+        }
+      ]
+    },
+    {
+      "profile_id": "hk_periodic",
+      "profile_version": "hk_periodic/v2+901fadeb175bf571",
+      "family": "interim",
+      "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 六个月累计口径的本期变化 与年报共用模板但周期不丢 期后事项（含融资、收购）单列 同店/门店等经营指标的可比口径 未审计状态对数值的限定",
+      "policy_components": [
+        {
+          "kind": "family",
+          "id": "hk_interim_report",
+          "version": "1.0.4",
+          "content_digest": "55bd782fd82bb4306c686457f641cc2c6ff2b38b4681700b19683d92fe9b1082"
+        }
+      ],
+      "reading_questions": [
+        "六个月累计口径的本期变化",
+        "与年报共用模板但周期不丢",
+        "期后事项（含融资、收购）单列",
+        "同店/门店等经营指标的可比口径",
+        "未审计状态对数值的限定",
+        "本期（六个月）业务变化与新进展"
+      ],
+      "context_requirements": [
+        {
+          "when": "always_for_assertion",
+          "slots": [
+            "subject",
+            "period"
+          ],
+          "missing_behavior": "unknown",
+          "reason": "中期数据为期末止六个月口径且未审计"
+        },
+        {
+          "when": "quantity_emitted",
+          "slots": [
+            "quantity",
+            "unit",
+            "period",
+            "denominator",
+            "geography"
+          ],
+          "missing_behavior": "partial",
+          "reason": "六个月/单季/同比基期、存量/净增、地域与模式范围分开"
+        },
+        {
+          "when": "explicit_condition_present",
+          "slots": [
+            "condition",
+            "modality",
+            "period"
+          ],
+          "missing_behavior": "deferred",
+          "reason": "期后发展与展望的时点限定必须保留"
+        },
+        {
+          "when": "project_emitted",
+          "slots": [
+            "project",
+            "stage",
+            "condition"
+          ],
+          "missing_behavior": "partial",
+          "reason": "融资、收购、新市场进入必须保留阶段与条件（如期后完成 vs 报告期内）"
+        }
+      ],
+      "family_policy": {
+        "id": "hk_interim_report",
+        "design_status": "verified",
+        "spec_status": "implemented",
+        "evidence_status": "real",
+        "integration_status": "not_integrated",
+        "gaps": [
+          "中期报告摘要/更正版本对缺失"
+        ]
+      },
+      "negative_hints": [
+        "未经审计综合财务报表与纯会计附注；例外：其中含经营解释或业务机制",
+        "企业管治等常规章节；例外：含重大经营事实"
+      ],
+      "semantic_units": [
+        "paragraph_event",
+        "project",
+        "operating_table",
+        "risk",
+        "background"
+      ],
+      "section_priorities": [
+        {
+          "section_role": "business",
+          "priority": 1
+        }
+      ]
+    },
+    {
+      "profile_id": "hk_periodic",
+      "profile_version": "hk_periodic/v2+901fadeb175bf571",
+      "family": "interim",
+      "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 六个月累计口径的本期变化 与年报共用模板但周期不丢 期后事项（含融资、收购）单列 同店/门店等经营指标的可比口径 未审计状态对数值的限定",
+      "policy_components": [
+        {
+          "kind": "family",
+          "id": "hk_interim_report",
+          "version": "1.0.4",
+          "content_digest": "55bd782fd82bb4306c686457f641cc2c6ff2b38b4681700b19683d92fe9b1082"
+        }
+      ],
+      "reading_questions": [
+        "六个月累计口径的本期变化",
+        "与年报共用模板但周期不丢",
+        "期后事项（含融资、收购）单列",
+        "同店/门店等经营指标的可比口径",
+        "未审计状态对数值的限定"
+      ],
+      "context_requirements": [
+        {
+          "when": "always_for_assertion",
+          "slots": [
+            "subject",
+            "period"
+          ],
+          "missing_behavior": "unknown",
+          "reason": "中期数据为期末止六个月口径且未审计"
+        },
+        {
+          "when": "quantity_emitted",
+          "slots": [
+            "quantity",
+            "unit",
+            "period",
+            "denominator",
+            "geography"
+          ],
+          "missing_behavior": "partial",
+          "reason": "六个月/单季/同比基期、存量/净增、地域与模式范围分开"
+        },
+        {
+          "when": "explicit_condition_present",
+          "slots": [
+            "condition",
+            "modality",
+            "period"
+          ],
+          "missing_behavior": "deferred",
+          "reason": "期后发展与展望的时点限定必须保留"
+        },
+        {
+          "when": "project_emitted",
+          "slots": [
+            "project",
+            "stage",
+            "condition"
+          ],
+          "missing_behavior": "partial",
+          "reason": "融资、收购、新市场进入必须保留阶段与条件（如期后完成 vs 报告期内）"
+        }
+      ],
+      "family_policy": {
+        "id": "hk_interim_report",
+        "design_status": "verified",
+        "spec_status": "implemented",
+        "evidence_status": "real",
+        "integration_status": "not_integrated",
+        "gaps": [
+          "中期报告摘要/更正版本对缺失"
+        ]
+      },
+      "negative_hints": [
+        "未经审计综合财务报表与纯会计附注；例外：其中含经营解释或业务机制",
+        "企业管治等常规章节；例外：含重大经营事实"
+      ],
+      "semantic_units": [
+        "paragraph_event",
+        "project",
+        "operating_table",
+        "risk",
+        "background"
+      ],
+      "section_priorities": [
+        {
+          "section_role": "unknown",
+          "priority": 2
+        }
+      ]
+    }
+  ],
+  "selected_quotes": [
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:af7a9cd57639f913fe76c091b8a765315c11149eff9771ac988ca3c1dc68249a",
+      "locator": "loc:v1/page:5/paragraph:1",
+      "full_quote": "主要摘要",
+      "page": 5,
+      "quote_sha256": "abfe6acb80f799f4bd845a8fe5f56eda3862d394b694f9f33bfbafc3ac3d2110",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:314033e2a8c0e5654840a638831eb8cd6edc9593fa08f0386c6efc4bb95c4295",
+      "locator": "loc:v1/page:5/paragraph:11",
+      "full_quote": "非公認會計準則財務指標",
+      "page": 5,
+      "quote_sha256": "86c02e63c1b7c215ef8854354d8e35ea6a60e237a12a0d2f4b60c0b4392fd6f0",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:96143009f970eed9bfd2a8cb1e54565115aa8bae7adde6fe98072c0bd36b6859",
+      "locator": "loc:v1/page:5/paragraph:12/chars:250-446",
+      "full_quote": "未經審計中期簡明合併財務資料乃根據美國公認會計準則（「美國公認會計準則」）編製。於評估我們的業務\n時，我們考慮並使用若干非公認會計準則財務指標，包括非公認會計準則毛利、非公認會計準則毛利率、非\n公認會計準則經營虧損、非公認會計準則經營虧損率、非公認會計準則EBITDA、非公認會計準則EBITDA利\n潤率、非公認會計準則淨虧損及非公認會計準則淨虧損率，作為補充指標以審閱及評估我們的經營表現。",
+      "page": 5,
+      "quote_sha256": "51ec2b7459d6d4467aa2e45918497056c78a764d95af1670689673b46e05a344",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_state_unknown"
+      ],
+      "topics": [
+        "core_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:aad0cef6f15e0f3c12f7b72b5bfa8d321e163add144259f8cb27c8615390d686",
+      "locator": "loc:v1/page:5/paragraph:20/chars:497-551",
+      "full_quote": "我們呈列該等非公認會計準則財務指標，乃由於我們的管理層使用該等財務指標來評估我們的經營表現\n並制定業務計劃。",
+      "page": 5,
+      "quote_sha256": "1824246652c1d42d5e6a7a5149cdbc27555ff715877cef6f1076db0da64e93db",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_state_unknown"
+      ],
+      "topics": [
+        "core_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:a05928afad9a7cfb35ed0377616c0f6a36fbd74ecf5c97858c8c7235885eb4a0",
+      "locator": "loc:v1/page:5/paragraph:22/chars:551-588",
+      "full_quote": "我們亦認為，使用該等非公認會計準則財務指標有助於投資者評估我們的經營表現。",
+      "page": 5,
+      "quote_sha256": "376575959769bd36e68230ec6c13960131d8dce260ef9b0075b21016b03a7dde",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_state_unknown"
+      ],
+      "topics": [
+        "core_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:419b1d26bf31f0857242e5348dfb405ca5c7a4859197b27bcb20856dcd7b7d39",
+      "locator": "loc:v1/page:7/paragraph:1",
+      "full_quote": "主要摘要",
+      "page": 7,
+      "quote_sha256": "abfe6acb80f799f4bd845a8fe5f56eda3862d394b694f9f33bfbafc3ac3d2110",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:b8324478749dbf0775c7e2257f45f293da1c3be0dcd4f781c1b31ca8da9badd8",
+      "locator": "loc:v1/page:7/paragraph:2",
+      "full_quote": "經調整淨虧損（淨虧損率）、經調整EBITDA（EBITDA利潤率）及經調整經營虧損（經調整經營虧損\n率）\n（非公認會計準則財務指標）",
+      "page": 7,
+      "quote_sha256": "b5002da6d3f23d0be70c0e927b23d1d3079305024f6e7e6c9093edc98dadde14",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_state_unknown"
+      ],
+      "topics": [
+        "core_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:1f7bcad7124d7e7164e5e07a302bdb1dad0e3b4278fb2d318f818c388dd80212",
+      "locator": "loc:v1/page:7/paragraph:8/chars:263-342",
+      "full_quote": "我們將非公認會計準則經營虧損界定為不包\n括股權激勵費用及無形資產攤銷的經營虧損，而我們將非公認會計準則經營虧損率界定為非公認會計準則經\n營虧損佔收入的百分比。",
+      "page": 7,
+      "quote_sha256": "5d9ac8997cc941a200035faa2488ee0d20cc75a9688af92ecbd551a40f05ae51",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_current_state"
+      ],
+      "topics": [
+        "core_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:527d6e64dacfce0031f8e6c3e47c41ec5c4103b3eabd68730648a37778bd0024",
+      "locator": "loc:v1/page:7/paragraph:11/chars:342-498",
+      "full_quote": "下表將我們於截至二零二四年及二零二五年六月三十日止六個月的經調整淨虧損\n（淨虧損率）\n（非公認會計準則財務指標）、經調整EBITDA（EBITDA利潤率）\n（非公認會計準則財務指標）及經調\n整經營虧損（經調整經營虧損率）\n（非公認會計準則財務指標）與根據美國公認會計準則計算及呈列的最直接可\n比財務指標進行對賬。",
+      "page": 7,
+      "quote_sha256": "10c4a11c4846f20cfd2b21d3b94d5795738053eeffbe5969fa496c212dbc82f9",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_current_state"
+      ],
+      "topics": [
+        "core_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:411df4e791d228f07dd8f4de17d76b08feaeaacad002c4afc5ef9f562e08e1d7",
+      "locator": "loc:v1/page:8/paragraph:1",
+      "full_quote": "主要摘要",
+      "page": 8,
+      "quote_sha256": "abfe6acb80f799f4bd845a8fe5f56eda3862d394b694f9f33bfbafc3ac3d2110",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:bb7433c5aeda2b2ef1b0138aa3e554a13ee961508c4318debdc11d767dd87825",
+      "locator": "loc:v1/page:8/paragraph:5",
+      "full_quote": "經營虧損\n(551,726)\n(561,188)\n(78,338)",
+      "page": 8,
+      "quote_sha256": "7fdab9cb66c19524ea349e3f0283161ef67606a322d322d841bec134f6d45e52",
+      "quality_flags": [
+        "table_structure_ambiguous"
+      ],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_state_unknown"
+      ],
+      "topics": [
+        "core_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:e7f87ef6f78492d4e90fb52b42d0908575550cf0c62f240e4d4dc2313f7193aa",
+      "locator": "loc:v1/page:8/paragraph:9",
+      "full_quote": "經調整經營虧損（非公認會計準則財務指標）\n(315,550)\n(222,189)\n(31,016)",
+      "page": 8,
+      "quote_sha256": "81979a144a80aae6c166a493162f704288a9afd281554f1c8398b2c52eedbbca",
+      "quality_flags": [
+        "table_structure_ambiguous"
+      ],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_state_unknown"
+      ],
+      "topics": [
+        "core_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:5884efe64d81b29ab7690ec337a04e7523fc31606de343a6ec1c8dc048a69600",
+      "locator": "loc:v1/page:8/paragraph:11",
+      "full_quote": "不包括出售物業及設備的收益，正常化經調整經營虧損\n(339,371)\n(230,007)\n(32,107)",
+      "page": 8,
+      "quote_sha256": "0ea90d301fd9e0a6464b5049ef349743856a9ba4c72fe2244325cae6ed14d0ff",
+      "quality_flags": [
+        "table_structure_ambiguous"
+      ],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_state_unknown"
+      ],
+      "topics": [
+        "core_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:d0ee31caa1edc80b0cb373e182b96a0d09ad14969299caf81ebf795984fe9ce3",
+      "locator": "loc:v1/page:9/paragraph:1",
+      "full_quote": "業務回顧及展望",
+      "page": 9,
+      "quote_sha256": "e847c24a7e5c21d3253a5c74a887d08f6bc8a1c2df51100cb4196a0ce11a0137",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:5b0330dfe6e8a04bb185ff4223c60802369e21463dd3cdaead628b4dbedb5c2d",
+      "locator": "loc:v1/page:9/paragraph:2",
+      "full_quote": "報告期內業務回顧",
+      "page": 9,
+      "quote_sha256": "d3331d0b1792dca09370b83d0876e9c82694ddf4547ae83d346e68eba9bab320",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:6323bc043cc32717ba54eca3078fcdbb2ee1c4923a4633d76ead81c1f438405c",
+      "locator": "loc:v1/page:9/paragraph:3/chars:30-56",
+      "full_quote": "我們繼續堅持高質量、可持續發展的原則，「技術立業」。",
+      "page": 9,
+      "quote_sha256": "c23dd04b56c8305ef008599a7055013b7986bd583daac9a495289111c621deac",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan"
+      ],
+      "topics": [
+        "business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:4f939ffa3ddcfaec2abf28e2f3432efe3295ba06d0e40db328329075bbd5c9ff",
+      "locator": "loc:v1/page:9/paragraph:6/chars:89-287",
+      "full_quote": "於報告期內，總收入達到人民幣4,319.2百萬元（602.9百萬美元），較去年同期的人民幣3,667.5百萬元增加\n17.8%。該增加主要是由於AI相關客戶收入增長強勁及我們擴展行業雲項目，但部分被我們主動縮減提供予\n內容分發網絡(CDN)客戶的服務規模所抵銷。公有雲服務收入為人民幣2,978.8百萬元（415.8百萬美元），\n行業雲服務收入為人民幣1,340.4百萬元（187.1百萬美元）。",
+      "page": 9,
+      "quote_sha256": "006f46006ddc1c0311060a3764e952ddc623e310349ad80747c6bf49c1fa49d1",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "business_revenue_measure"
+      ],
+      "topics": [
+        "business_revenue_measure"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:3bc0f1147075ee51b16d458cfb068a4419883ec50a61e0f8cedcfcce8cd59ff8",
+      "locator": "loc:v1/page:9/paragraph:22",
+      "full_quote": "產品及行業特定解決方案",
+      "page": 9,
+      "quote_sha256": "d7ac52187603332b506950ddcdb6f937fe867a515da68f30ed31cf592cc6c376",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:efa3d9c42abcb78f38a0c7e0afb03ea8385dfbb0343e69ef35191d50095c1099",
+      "locator": "loc:v1/page:9/paragraph:24/chars:625-699",
+      "full_quote": "我們的模\n塊化雲產品，包括統一的IaaS基礎設施、PaaS層、SaaS應用軟件、AI能力及交付服務，可用於設計不同的解\n決方案，以滿足各種業務需求。",
+      "page": 9,
+      "quote_sha256": "93f9d5521bbcdc13b9304c533478d68cf5a2385ead3dbc41f1d349b51e6cfd88",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "business_structure_mechanism",
+        "operating_state_unknown"
+      ],
+      "topics": [
+        "core_business",
+        "business_structure_mechanism"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:f8e45a2dc6db89f5b816f5f916d6546a87fe95974163643f260ea46f7beeaac9",
+      "locator": "loc:v1/page:10/paragraph:1",
+      "full_quote": "業務回顧及展望",
+      "page": 10,
+      "quote_sha256": "e847c24a7e5c21d3253a5c74a887d08f6bc8a1c2df51100cb4196a0ce11a0137",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:8cd6aef675d9cc552c2f190255fc6af1eaa46f9ce5fb9535375f0dbfba135e3f",
+      "locator": "loc:v1/page:10/paragraph:2/chars:21-178",
+      "full_quote": "我們繼續秉持「技術立業」，持續快速迭代產品，打造核心產品的一流客戶體驗。報告期內，第九代雲服務器\nC9a及X9a正式發佈，搭載大幅提升性能的全新處理器，滿足客戶多樣化的計算場景需求。這包括自然語言\n處理及推薦算法等AI推理場景，以及金融交易系統及電子商務閃購的高吞吐量和高併發場景，以及高性能、\n低延遲的遊戲環境。",
+      "page": 10,
+      "quote_sha256": "f4fc31f0207cf0dc3143167893ea30a9ad4eaf41aa256f961d89b29c311c5311",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_description_unknown"
+      ],
+      "topics": [
+        "core_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:90f36e2ed245cecd63eb6c40ee04754ffd823ebfadaad17e81b54963af71bf59",
+      "locator": "loc:v1/page:10/paragraph:8/chars:178-299",
+      "full_quote": "星流訓練與推理平台亦已正式上線，為用戶提供一站式模型訓練與推理任務管理平台，\n集成了小米MIMO、Kimi、Deepseek、Qwen3等優質開源大型語言模型，進一步拓展訓練與推理平台生態系\n統，助力公共服務、金融服務、互聯網等領域AI升級。",
+      "page": 10,
+      "quote_sha256": "e7264c6c458c2d9d71b5122fa83e54b31c80f61f227c5aa91755389451f7f3ec",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_description_unknown"
+      ],
+      "topics": [
+        "core_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:78daa8042319d309e91fd8d7ad1d6b81b02ee84f70487572d90684ca1fc75b79",
+      "locator": "loc:v1/page:10/paragraph:11/chars:299-341",
+      "full_quote": "此外，我們亦推出了高性能文件存儲KPFS2.0、雲數\n據庫專用集群、瀚海大模型平台。",
+      "page": 10,
+      "quote_sha256": "fdb27f7f05d85a968e980a2de5b11298b2f931244f60117abcee94a7a32cdc9d",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_description_unknown"
+      ],
+      "topics": [
+        "core_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:05d219dde961a63e2f5bd273c0e0fbe073cc3c1d62682f0555056fbf0d83d238",
+      "locator": "loc:v1/page:11/paragraph:1",
+      "full_quote": "業務回顧及展望",
+      "page": 11,
+      "quote_sha256": "e847c24a7e5c21d3253a5c74a887d08f6bc8a1c2df51100cb4196a0ce11a0137",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:ed2057ef277b693119d87725ce4efa1e7a5162152df5b8da5806739267e95d5f",
+      "locator": "loc:v1/page:11/paragraph:2",
+      "full_quote": "研究與開發",
+      "page": 11,
+      "quote_sha256": "ccf8256e98442b22b3b69b41fca24a595b9d1dc8c20a6221f8c4d06cade84176",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:997cb651751f8d62163fd3c2a4a255b3fb117907e23fb9bc8c7ace8de641e4a8",
+      "locator": "loc:v1/page:11/paragraph:11/chars:182-236",
+      "full_quote": "我們的技術平台作為產品開發和創新的基礎，旨在不斷滿足客戶不斷變化的業務需\n求，使我們能夠不斷提高客戶參與度。",
+      "page": 11,
+      "quote_sha256": "a06bce3b25c4e30e8115e1b3cc093a43c5327c66837dc6aade407645d1996927",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_state_unknown"
+      ],
+      "topics": [
+        "core_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:2abba42d30c270cd6517cf10fdff3be0a30e2235c8fb037af6bbe937c89c2e01",
+      "locator": "loc:v1/page:13/paragraph:1",
+      "full_quote": "管理層討論與分析",
+      "page": 13,
+      "quote_sha256": "7c7c34abd427eae9b06ebb84e491df9f414a3fc3876ac7f65fbe2d685d168698",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:e09eb9348b9c5b806ccd5123fd00f79e0d1208e3716d3fc764c89fd45511bb4b",
+      "locator": "loc:v1/page:13/paragraph:2/chars:23-155",
+      "full_quote": "總收入達到人民幣4,319.2 百萬元（602.9 百萬美元），較二零二四年同期的人民幣3,667.5 百萬元增加\n17.8%。該增加主要是由於AI相關客戶的強勁收入增長、我們的行業雲項目擴張，並部分被我們主動縮減向\n內容分發網絡（「CDN」）客戶提供的服務抵銷。",
+      "page": 13,
+      "quote_sha256": "ec296777562c615e850f30a28e9b4497e90a5455a090c3ca4b5a68198b3e9b47",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_causal_driver",
+        "operating_metric_change",
+        "operating_description_unknown"
+      ],
+      "topics": [
+        "operating_causal_driver",
+        "operating_metric_change",
+        "core_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:8821797dd42c3cb12244443a2c12fa285cf2e518b783e7f3e17134b75e21b699",
+      "locator": "loc:v1/page:13/paragraph:6/chars:156-244",
+      "full_quote": "• \n來自公有雲服務的收入由二零二四年同期的人民幣2,421.9百萬元增加23.0%至人民幣2,978.8百萬元\n（415.8百萬美元）。該同比增加主要是由於AI相關服務增長。",
+      "page": 13,
+      "quote_sha256": "d59718e7e411e0c946add5148495a303e6a5c22103cfa9f43be354f98788069b",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan"
+      ],
+      "topics": [
+        "management_discussion"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:f05e62840af54f9fb9240e557b5e12d1248086180ec1a69fe40a820058df9275",
+      "locator": "loc:v1/page:13/paragraph:9",
+      "full_quote": "• \n來自行業雲服務的收入為人民幣1,340.4百萬元（187.1百萬美元），較二零二四年同期的人民幣1,245.4",
+      "page": 13,
+      "quote_sha256": "80ece2e126699ae75b984c71519effb133f56d1eb79ab7a82fc4b9ba32107b64",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "business_revenue_measure"
+      ],
+      "topics": [
+        "business_revenue_measure"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:6c3c973b80ee391c24cc9b4e5add2b12d169f9f4ac33e8db3d6dca033d95a4f9",
+      "locator": "loc:v1/page:13/paragraph:16/chars:451-578",
+      "full_quote": "我們繼續加強成本控制措施。二零二五年上半年，互聯網數據中心成本由人民幣1,496.8百萬元同比\n增加1.9%至人民幣1,525.9百萬元（213.0百萬美元）。該增加主要是由於基礎設施需求日益增加（這與我們的\nAI業務擴張相一致）及AI帶來的基本雲增長。",
+      "page": 13,
+      "quote_sha256": "6b0c3728102c0339579ed9c7cbf99c70e72c2db2292af8094e24482e9e56a4c0",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_description_unknown"
+      ],
+      "topics": [
+        "core_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:98e04598a679b1e733fbf8551d2adbc39e1ee2e8e0bc27cd50e1e8cb45cdc9e7",
+      "locator": "loc:v1/page:13/paragraph:29/chars:795-950",
+      "full_quote": "毛利為人民幣657.2百萬元（91.7百萬美元），較二零二四年同期的人民幣611.6百萬元增加7.4%。該改善主\n要是由於我們的收入規模擴張較快及收入組合優化。毛利率為15.2%，而二零二四年同期則為16.7%。該減\n少主要是由於隨著AI業務擴張，服務器成本增加，以及若干客戶的進一步營收活動所產生的前期成本。",
+      "page": 13,
+      "quote_sha256": "fd65e172efc7d2bf4e374cea9e23046cee441a141a6fd2ab4b37da33acc07e52",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_description_unknown"
+      ],
+      "topics": [
+        "core_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:3be6919b2925afe6d07fcebf1d8a860c7f58e013a3461f655e802ca82d8626cc",
+      "locator": "loc:v1/page:14/paragraph:1",
+      "full_quote": "管理層討論與分析",
+      "page": 14,
+      "quote_sha256": "7c7c34abd427eae9b06ebb84e491df9f414a3fc3876ac7f65fbe2d685d168698",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:b92125fdad0a878cc8b609a31e52e7d9ac951dc2714bd3f5b0185106cb587194",
+      "locator": "loc:v1/page:14/paragraph:11",
+      "full_quote": "經營虧損為人民幣561.2百萬元（78.3百萬美元），而二零二四年同期的經營虧損則為人民幣551.7百萬元。",
+      "page": 14,
+      "quote_sha256": "c4437f526544fd6d4aaa76b062c3a1c034af8d22a53bc1a344d60bcaa9364e97",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_state_unknown"
+      ],
+      "topics": [
+        "core_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:6892a3e2d50de190d8f02a520870badd5e3d01858ac76e6829dc6a645cac084a",
+      "locator": "loc:v1/page:14/paragraph:13",
+      "full_quote": "有關增加主要由於經營虧損增加及利息費用增加。",
+      "page": 14,
+      "quote_sha256": "cfa21a4f66dd25f6f4082b9c3934e4fdecb3f89ffa99455f44cb43f38bc3fb93",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_state_unknown"
+      ],
+      "topics": [
+        "core_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:79d1b4184ad98af106b28e3d98b9405b1840b3cb07a22d34147c04360889e3f1",
+      "locator": "loc:v1/page:15/paragraph:1",
+      "full_quote": "管理層討論與分析",
+      "page": 15,
+      "quote_sha256": "7c7c34abd427eae9b06ebb84e491df9f414a3fc3876ac7f65fbe2d685d168698",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:6b33aa11a91159426122a0ba6c08d86302bbeaf08844d4d49957ed22b9f3fd76",
+      "locator": "loc:v1/page:15/paragraph:2",
+      "full_quote": "流動資金及資本資源",
+      "page": 15,
+      "quote_sha256": "9e89e5163d1ce6f0f5baff3b09eed43059e492c42ab478ee8a95c9d3a2fee225",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:3f13bb560948877ee23f501916309cd09a03633b9a89e0902b5c53714b360363",
+      "locator": "loc:v1/page:15/paragraph:5/chars:286-370",
+      "full_quote": "截至二零二五年六月三十日，我們的絕大部分現金及現金等價物均位於中國內地及香港。就長期而言，我們\n擬以經營活動所得現金及融資活動籌集的資金撥付未來營運資金需求及資本開支。",
+      "page": 15,
+      "quote_sha256": "67b838abeddb681e14c52f5a0920a6c78dcd46573d508237150ed922d9b1f850",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_state_unknown"
+      ],
+      "topics": [
+        "core_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:6f506543067d349b8d5c6ac4d9ae70b5f8fc86642233ce2a2a0d03be60302780",
+      "locator": "loc:v1/page:15/paragraph:13",
+      "full_quote": "外匯風險",
+      "page": 15,
+      "quote_sha256": "da9e69209e135b4911063730dd534130dd8e905e4c2830476cd701dfa26055df",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:9dee4b446b6ecfb246303640ad44b13809894f5741b4a4d5a6209d239ea27113",
+      "locator": "loc:v1/page:15/paragraph:14/chars:770-890",
+      "full_quote": "我們的大部分業務以人民幣進行交易，有交易貨幣風險敞口。我們的若干銀行結餘、其他應收賬款以及應計\n費用及其他應付賬款以外幣計值，並面臨外幣風險。我們目前並無外幣對沖政策。然而，我們的管理層會監\n察外匯風險，並將於未來需要時考慮適當的對沖措施。",
+      "page": 15,
+      "quote_sha256": "96d709ce54262257755c2b1f54317fc0c50944156da22d5354b8830f4109046b",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "business_risk_or_constraint"
+      ],
+      "topics": [
+        "currency_risk"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:9b7a49ed9a3da1080f6f6b903d4285de77c1bc141fe1182ee33bee07b53a11d2",
+      "locator": "loc:v1/page:15/paragraph:20",
+      "full_quote": "重大投資",
+      "page": 15,
+      "quote_sha256": "29a9751ba64e55b1889c0bb3ea14001336dd411b10fda6c0c6b46c2c9f4e53b6",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:d3441e90a6a573de8117ecda4d1eb2804da1ee739b21e431afbe81a792ea18f4",
+      "locator": "loc:v1/page:15/paragraph:21/chars:966-1071",
+      "full_quote": "截至二零二五年六月三十日，本集團並無持有任何重大投資（包括對被投資公司的任何投資價值佔本集團截\n至二零二五年六月三十日總資產的5%或以上）。截至二零二五年六月三十日，本集團並無任何未來重大投資\n及資本資產計劃。",
+      "page": 15,
+      "quote_sha256": "f8a4a82076e09114d30958a361124fa56b2ba89223bb83fbcfd1bd6e7ccf6f0d",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "future_investment_disclosure"
+      ],
+      "topics": [
+        "future_investment_disclosure"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:572763eb89cde71f2505b503c03694537129d260573b1617ce0d40c1eac6ce41",
+      "locator": "loc:v1/page:20/paragraph:1",
+      "full_quote": "其他資料",
+      "page": 20,
+      "quote_sha256": "5fab9b033c5144c7b477f2b9e4b2667a615fc203c3969a045ce9db8f964239ba",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:10ad26804424ec1907452e721eda0246c94d64338c5f10d06b1192ef6c8b5091",
+      "locator": "loc:v1/page:20/paragraph:2",
+      "full_quote": "歸屬時間表",
+      "page": 20,
+      "quote_sha256": "096b341db65145509d00c0b7e2ab9dff26de85e0019a0de104e4999046182b63",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:c3ec8c8922ced71cbac0b7878a7069902af993575e5da274970799e86760e814",
+      "locator": "loc:v1/page:20/paragraph:3",
+      "full_quote": "董事會須於要約日期釐定購股權所涉及的股份歸屬時間表。",
+      "page": 20,
+      "quote_sha256": "739604d57a12fea3da2842eb96c77a3675cc7aa108ed9fdb24098e22e364c6c5",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_state_unknown"
+      ],
+      "topics": [
+        "core_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:9ede2e19bdcedc8275359e1b1371905b2748d7a799a10be09cc9d0167c8e881d",
+      "locator": "loc:v1/page:20/paragraph:8",
+      "full_quote": "計劃剩餘年期",
+      "page": 20,
+      "quote_sha256": "61a93f020f5e6c6aded85970167f76b0f2a6c9b6d4bf87b8db6e915dfe6b0abc",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:ac1b5cf75a8342370d083c0e726bee4597c06bdf2b9a60862831d70cef28f8cb",
+      "locator": "loc:v1/page:20/paragraph:9/chars:141-273",
+      "full_quote": "二零一三年購股權計劃自二零一三年二月二十七日起有效期為十年。截至最後實際可行日期，二零一三年購\n股權計劃的期限已屆滿，惟該計劃的條文仍具有十足效力及作用，以使在該計劃終止前授出的任何購股權\n（以尚未行使者為限）有效行使或根據該計劃的條文可能規定的其他情況有效行使。",
+      "page": 20,
+      "quote_sha256": "e518e9a0b80c04d946807d0c5d5510638c62f66d3c55c7513eb09654a3edfe46",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_plan"
+      ],
+      "topics": [
+        "core_business",
+        "new_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:acdd6379f723fff039d83ca63b38b917569534102d83934834caaaa15f22a3ed",
+      "locator": "loc:v1/page:21/paragraph:1",
+      "full_quote": "其他資料",
+      "page": 21,
+      "quote_sha256": "5fab9b033c5144c7b477f2b9e4b2667a615fc203c3969a045ce9db8f964239ba",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:f8187c87e131beb718f469565c97a11f285e01765dd49420b4db7d45104afc39",
+      "locator": "loc:v1/page:21/paragraph:10",
+      "full_quote": "合資格參與者",
+      "page": 21,
+      "quote_sha256": "2b2a4ef9a5713385590d5936e51831773184f588a41c3e7ec76bef1553121079",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:8d23dc427da51772ebb296a2de56581324dad4ddad548a2f36831be1007d4e7c",
+      "locator": "loc:v1/page:21/paragraph:11/chars:236-294",
+      "full_quote": "本公司、子公司或本公司及其子公司持有任何股權的任何實體的員工（不論全職或兼職）均合資格參與二零一\n三年股份獎勵計劃。",
+      "page": 21,
+      "quote_sha256": "5f8b055c35ab6d13ba1642ec0f37c0dc55e75870b1870e0e4cf5f7ac8d86e14d",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_state_unknown"
+      ],
+      "topics": [
+        "core_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:ba980f205deaaf39599af5138668f6d0cfbdbee0fee575214e998147f0aa07f7",
+      "locator": "loc:v1/page:21/paragraph:16",
+      "full_quote": "個別限額",
+      "page": 21,
+      "quote_sha256": "306b0568ef5a25b99e3b7a878c3ebd40e46b997470ce1062dda3f2fe184f958a",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:9aaa2a261b3be80216cd7769bb942f812f98b154b465ab5d7262ec510c0a1e39",
+      "locator": "loc:v1/page:21/paragraph:17",
+      "full_quote": "二零一三年股份獎勵計劃下每位參與者的配額並無上限。",
+      "page": 21,
+      "quote_sha256": "6adb079755dd38575cee12422bf9fd56ceed091371ab15b73a1cb3a11d3bc415",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_state_unknown"
+      ],
+      "topics": [
+        "core_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:e5d513a81ccc48c02d546623ea21f18c0cee5edef8a22d2cda274b1aac09c87f",
+      "locator": "loc:v1/page:21/paragraph:24",
+      "full_quote": "計劃剩餘年期",
+      "page": 21,
+      "quote_sha256": "61a93f020f5e6c6aded85970167f76b0f2a6c9b6d4bf87b8db6e915dfe6b0abc",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:a71932fa8d82d7bcc5b248bddb0b648b1df1d291c603c4897b565e8feb333fb2",
+      "locator": "loc:v1/page:21/paragraph:25/chars:571-702",
+      "full_quote": "二零一三年股份獎勵計劃自二零一三年二月二十二日起有效期為十年。截至最後實際可行日期，二零一三年\n股份獎勵計劃的期限已屆滿，惟該計劃的條文仍具有十足效力及作用，以使在該計劃終止前已授出但尚未歸\n屬的任何獎勵股份有效行使或根據該計劃的條文可能規定的其他情況有效行使。",
+      "page": 21,
+      "quote_sha256": "89282387eaeb865922d75fd847c6ab90a745b0bed698470ee5612c8f4d6ba81d",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_plan"
+      ],
+      "topics": [
+        "core_business",
+        "new_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:222faf7025c6e82a887e13ecd4036decaf5eaf5d6064f3a371ffc80e8121e7cc",
+      "locator": "loc:v1/page:22/paragraph:1",
+      "full_quote": "其他資料",
+      "page": 22,
+      "quote_sha256": "5fab9b033c5144c7b477f2b9e4b2667a615fc203c3969a045ce9db8f964239ba",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:79496cbdc3683755aa7e2b989864c744c3135496bd4dda25c34ab319f0c36739",
+      "locator": "loc:v1/page:22/paragraph:6",
+      "full_quote": "目的",
+      "page": 22,
+      "quote_sha256": "cfbeaa72b649203ee638be2c734fbab406e7f06b26e13ed451f99c69d3d350ef",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:fe513e318c616cb387984bd335e56450a450a15b2226fbb701b43c909ea397fb",
+      "locator": "loc:v1/page:22/paragraph:7/chars:107-297",
+      "full_quote": "二零二一年股權激勵計劃旨在通過將本集團的董事及員工以及本集團服務提供商的個人利益與股東的個人利\n益聯繫起來及通過就優異表現向有關人士提供獎勵以期為股東帶來豐厚回報促進本公司的成功及提升本公司\n的價值。二零二一年股權激勵計劃亦旨在使本公司能靈活激勵、吸引及挽留本集團的董事及員工以及本集團\n的服務提供商使之提供服務，而本公司能否成功經營業務主要取決於該等人士的判斷、利益及特別努力。",
+      "page": 22,
+      "quote_sha256": "d20e6dcd16435c55c49237e4330ba139f0db2f5b6ee58404526bf7f3e9f893d1",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_mechanism",
+        "operating_current_state"
+      ],
+      "topics": [
+        "core_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:36468e831a57047f72e2d90f4f521ab0886748772bfcb60872632d9f1b9a5262",
+      "locator": "loc:v1/page:22/paragraph:12",
+      "full_quote": "合資格參與者",
+      "page": 22,
+      "quote_sha256": "2b2a4ef9a5713385590d5936e51831773184f588a41c3e7ec76bef1553121079",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:0f93c6205270f5c9c3e6f4c95f8414d86448d92ba4a7b53a1b7240b0b635ea99",
+      "locator": "loc:v1/page:22/paragraph:21",
+      "full_quote": "參與者」）；",
+      "page": 22,
+      "quote_sha256": "c74d67e716a91d690d48694d01ca0ecee2cdb5c898808c72dc7c3d8863af5dfb",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_state_unknown"
+      ],
+      "topics": [
+        "core_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:46020b3e2966d87d1b9687ad5542d5d3aa7a98eb88328b7f325fd5fedc474c8a",
+      "locator": "loc:v1/page:22/paragraph:23",
+      "full_quote": "(d) \n為參與者的利益而根據本公司的任何僱員福利計劃（包括二零二一年股權激勵計劃）設立的信託或實體",
+      "page": 22,
+      "quote_sha256": "96ee8b65bd4c4bea403639eed4ec4fbd59314b13055aca683b65ffab8e16d95a",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_state_unknown"
+      ],
+      "topics": [
+        "core_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:db944a565d2425357e9912d8ebdf67f490bd6f296fc8a7bfb1de5ef8368768ca",
+      "locator": "loc:v1/page:22/paragraph:24",
+      "full_quote": "由董事會或其授權人士不時釐定有權參與二零二一年股權激勵計劃。",
+      "page": 22,
+      "quote_sha256": "4fe022529adb25aa9fe6ecfefb8ba22a174dc65453751ff7a893f750f7e48472",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_state_unknown"
+      ],
+      "topics": [
+        "core_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:c2d82a266ad19d6c8c0daabfcc18d30161ff2515a78d5fbabc58bd6943a3d8f2",
+      "locator": "loc:v1/page:22/paragraph:25",
+      "full_quote": "具體而言，服務商參與者包括：",
+      "page": 22,
+      "quote_sha256": "26db671525a3d4fc814a113655e72245ef498cd0cc01b8aae74d4b639bd80e0a",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_state_unknown"
+      ],
+      "topics": [
+        "core_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:72628566d8d9553e07ddfba34aef24f6fcaa76825928ac60d5aeec253fe92537",
+      "locator": "loc:v1/page:23/paragraph:1",
+      "full_quote": "其他資料",
+      "page": 23,
+      "quote_sha256": "5fab9b033c5144c7b477f2b9e4b2667a615fc203c3969a045ce9db8f964239ba",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:98fb1cf64fc4bebc7c4c5e321783c8cc637f174a0a9ab4d2d3013e405c8b2701",
+      "locator": "loc:v1/page:23/paragraph:13/chars:426-507",
+      "full_quote": "為免生疑問，就集資、合併或收購提供諮詢\n服務的配售代理或財務顧問，或提供保證或須公正及客觀地履行服務的審計師或估值師等專業服務商不得參\n與二零二一年股權激勵計劃。",
+      "page": 23,
+      "quote_sha256": "d40a51d7bd2238e60ce2959f5bf614d2780fe022968fa659c0a7e2a8afcd53a4",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_state_unknown"
+      ],
+      "topics": [
+        "core_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:28543bb9ba2067814537bdff69b2522db2f85e8ff535827d2962d0c717985ea2",
+      "locator": "loc:v1/page:23/paragraph:16/chars:508-683",
+      "full_quote": "在評估服務商參與者是否按持續及經常性基準向本集團提供服務時，董事會或薪酬委員會應考慮所提供服務\n的時間及類型以及該等服務的重複性及規律性，並將該等指標與本集團向其提供股權激勵的本集團僱員、高\n級職員及董事的表現作基準比較，同時考慮二零二一年股權激勵計劃的目的及聘用服務商參與者的目標。本\n公司亦將根據業內可得資料，考慮同類服務商的可比同行的薪酬待遇。",
+      "page": 23,
+      "quote_sha256": "a72fc818c2e372d19aaa971b0e46e3eb92e00ba6b878bc60acf29ff84863646b",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_state_unknown"
+      ],
+      "topics": [
+        "core_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:b2306ce70ff3bf0be24f0ced830679c709a2e1605c326638f157f0083c08e97b",
+      "locator": "loc:v1/page:23/paragraph:21/chars:684-818",
+      "full_quote": "董事會認為，服務商參與二零二一年股權激勵計劃的資格與二零二一年股權激勵計劃的目的一致，這使本集\n團能夠保留其現金資源並使用股權激勵以鼓勵本集團以外的人士為本集團作出貢獻及協調各方的共同利益，\n因為本公司及服務商參與者均可透過持有股權激勵，從本集團的長期增長中互惠互利。",
+      "page": 23,
+      "quote_sha256": "9d17795a1088532307b2a1a3a87ffaed8a1670ee3fc1d6c5247c9444f5fac9cd",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_mechanism",
+        "operating_state_unknown"
+      ],
+      "topics": [
+        "core_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:aca347581215c8b0954f5a13cb04cebf4f89a0c7e8f68518a0e12addb2e50bca",
+      "locator": "loc:v1/page:23/paragraph:24",
+      "full_quote": "可供發行股份數目",
+      "page": 23,
+      "quote_sha256": "a3b407a21c0b48cc9fa6b6e61a434dc59527c713b2f48c33a5de43cb47545d77",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:544160d1ad90d539ad4a42df21688a5646c4dbcd37ec32bbed70aa6ad5f4e4f4",
+      "locator": "loc:v1/page:23/paragraph:28/chars:939-1053",
+      "full_quote": "根據二零二一年股權激勵計劃及本公司任何其他股份計劃可能授予服務商參與者的所\n有購股權及獎勵獲行使後可予發行的股份總數合共為38,052,848股股份，即不超過緊隨香港上市後已發行股\n份總數的百分之一(1%)（「服務商分限額」）。",
+      "page": 23,
+      "quote_sha256": "f91dd5c6918be5c9ea71d8ee99c72179066ed9ccc924d7a8a03b1b177fb34bfc",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_state_unknown"
+      ],
+      "topics": [
+        "core_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:f1cd144e5db87b02023e0f0e1ad05fa1940e72ea716edc85c16807767cc09b14",
+      "locator": "loc:v1/page:24/paragraph:1",
+      "full_quote": "其他資料",
+      "page": 24,
+      "quote_sha256": "5fab9b033c5144c7b477f2b9e4b2667a615fc203c3969a045ce9db8f964239ba",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:d0e3e6338d95e38d4afadf0f6b4719b7867cf1d523dc94579ef86fea8381a597",
+      "locator": "loc:v1/page:24/paragraph:8",
+      "full_quote": "承授人的最高權利",
+      "page": 24,
+      "quote_sha256": "5cb6375989127434c4ed1dd0025125f9e5fef64ca86bb1e8c90c7ac6583e093c",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:f61d1e447addaf2528f23c7043bfacc7767b70f4ff0717580421a79e28515a0b",
+      "locator": "loc:v1/page:24/paragraph:9/chars:294-440",
+      "full_quote": "除非獲股東批准，否則於任何12個月期間根據二零二一年股權激勵計劃及本公司任何其他股份計劃已授出\n及將予授出的獎勵獲歸屬或行使後已發行及將予發行予各選定參與者的股份總數（包括根據本計劃所有已歸\n屬、已行使及尚未行使的獎勵，惟不包括已失效的任何獎勵）不得超過已發行股份總數的1%（「個別限額」）。",
+      "page": 24,
+      "quote_sha256": "874f5736f18b7be2397835cb40bb96c055c734e876fa503e6b9cba73fc303235",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_state_unknown"
+      ],
+      "topics": [
+        "core_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:91753bcf94a3d0566ff8107dbeca9c80f071bdd29ac8c56ec1acb0e9ef2523b1",
+      "locator": "loc:v1/page:24/paragraph:12/chars:441-581",
+      "full_quote": "倘於直至有關進一步授出日期（包括該日）的12個月期間內，進一步向選定參與者授出獎勵將導致於已授出及\n將向該選定參與者授出的所有獎勵（包括所有已歸屬、已行使及尚未行使的獎勵）獲行使後已發行及將予發行\n的股份總數超出個別限額，則須經股東的單獨批准（該選定參與者及其聯繫人須放棄投票）。",
+      "page": 24,
+      "quote_sha256": "1b4dcd18355839549c5e5d7261cc10af9f2cee785c09602c71bb498fb209fca2",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_state_unknown",
+        "operating_other_party_state"
+      ],
+      "topics": [
+        "core_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:9f9071677d2fcf0b8a66fe92fc9bda9f2c36cdd6d10aed83016522fa74234fa0",
+      "locator": "loc:v1/page:25/paragraph:1",
+      "full_quote": "其他資料",
+      "page": 25,
+      "quote_sha256": "5fab9b033c5144c7b477f2b9e4b2667a615fc203c3969a045ce9db8f964239ba",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:5ff7aeeeb14c5389cff3be27a910c2c4b96ebc3babf90484df82cd87e7101955",
+      "locator": "loc:v1/page:25/paragraph:2",
+      "full_quote": "歸屬時間表",
+      "page": 25,
+      "quote_sha256": "096b341db65145509d00c0b7e2ab9dff26de85e0019a0de104e4999046182b63",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:546dd1857bfe553a60298802c085692d459e16695dd50d5882dcd296263486aa",
+      "locator": "loc:v1/page:25/paragraph:3/chars:25-186",
+      "full_quote": "根據二零二一年股權激勵計劃將發行予任何參與者的獎勵（以獲授權授出的受限制股份單位、購股權或其他\n類型股份或其他類型獎勵或利益的形式）須受獎勵協議所訂明的歸屬時間表規限。根據二零二一年股權激勵\n計劃授出的任何獎勵的歸屬期不應少於12個月，除非董事會批准了較短歸屬期並遵守《香港上市規則》第十七\n章第17.03F條的適用規定。",
+      "page": 25,
+      "quote_sha256": "b545b52c74f8b8696bfd48cc6501b76903e81fd79d44f92072146d702f8c60d8",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_state_unknown"
+      ],
+      "topics": [
+        "core_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:ccdedf5cb4c3a420e1b434251df38e89ce3488caf1caf82639bfbf427cfca588",
+      "locator": "loc:v1/page:25/paragraph:11",
+      "full_quote": "(b) \n向因身故或殘疾或發生任何不可控事件而終止僱傭的參與者授出的獎勵，而該獎勵可能會加速歸屬；",
+      "page": 25,
+      "quote_sha256": "b37fe3040a5f4a006afb45f427d652b12e8dfa93da11e6fea3475fab48f0f066",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_state_unknown"
+      ],
+      "topics": [
+        "core_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:3d7b13a917b7b6ad643cad3948868d17aaa0f784f4209d38fcb622bbe582f213",
+      "locator": "loc:v1/page:25/paragraph:15",
+      "full_quote": "(e) \n根據本公司人力資源部或薪酬委員會指定的行政人員所評估的參與者於過往12個月內的表彰表現而授",
+      "page": 25,
+      "quote_sha256": "46a1cb50fc470f2a5b716053d8a11ea6b5b60a2ba6def67fd150e1ab2d140e3a",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_state_unknown"
+      ],
+      "topics": [
+        "core_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:c4a6e324e1d905c8aea2e8314ad152dfc01a5b7569f41eb0a3b58433101ea246",
+      "locator": "loc:v1/page:25/paragraph:16",
+      "full_quote": "予的獎勵，該獎勵有理由獲得較短歸屬期的額外獎勵，以達到留住該參與者的目的；",
+      "page": 25,
+      "quote_sha256": "6b9dadc6196f428aa0d22e953647a16120a03b2ac2481d4997998559af768599",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_state_unknown"
+      ],
+      "topics": [
+        "core_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:d1a1f54352acf28ffffb3e07216aae00d8845075f216681bd77c8e662af76f96",
+      "locator": "loc:v1/page:26/paragraph:1",
+      "full_quote": "其他資料",
+      "page": 26,
+      "quote_sha256": "5fab9b033c5144c7b477f2b9e4b2667a615fc203c3969a045ce9db8f964239ba",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:17e287fc5802bcf23341da2b6eca9e36d73357b817f40a63962ac20143c21db7",
+      "locator": "loc:v1/page:26/paragraph:18",
+      "full_quote": "計劃剩餘年期",
+      "page": 26,
+      "quote_sha256": "61a93f020f5e6c6aded85970167f76b0f2a6c9b6d4bf87b8db6e915dfe6b0abc",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:d62e09a4319be830f845c02f80cc0d1bc19b798c745f74fdf710b08c8c5957a2",
+      "locator": "loc:v1/page:26/paragraph:19/chars:456-549",
+      "full_quote": "除非董事會另行終止，否則二零二一年股權激勵計劃將在採納日期（即二零二一年十一月十五日）後的十(10)\n年內繼續有效。於最後實際可行日期，二零二一年股權激勵計劃的剩餘年期約為六年零兩個月。",
+      "page": 26,
+      "quote_sha256": "ce61bb67611733e009768eb640eea3ba1036ae299b1d7c7d7fb452558409bb31",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_restriction"
+      ],
+      "topics": [
+        "core_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:c935d83fcfca8453e4ae1b0fe627e7dbc872f98f6f5f343052dfcbc9fa9fed76",
+      "locator": "loc:v1/page:30/paragraph:1",
+      "full_quote": "其他資料",
+      "page": 30,
+      "quote_sha256": "5fab9b033c5144c7b477f2b9e4b2667a615fc203c3969a045ce9db8f964239ba",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:a7cfbb5783506c84b52c15bc44347ba49c78ce5225a11c9374a319e9202ec720",
+      "locator": "loc:v1/page:30/paragraph:7",
+      "full_quote": "(vi) \n除非根據相關計劃規則另有批准，否則上述受限制股份單位可於自歸屬後至相關承授人不再為合資格參與者後30天\n期間獲行使。",
+      "page": 30,
+      "quote_sha256": "047aeac4150da7c646b9753b591bb5ee50ed5f8c11415293b7ed36c6c90f4f0a",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_state_unknown"
+      ],
+      "topics": [
+        "core_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:96f84fc17614d17aeee56f76c973ce8187a554c0fa3341bcd3a74d2631d3db99",
+      "locator": "loc:v1/page:30/paragraph:8",
+      "full_quote": "企業管治",
+      "page": 30,
+      "quote_sha256": "2bd186f22554e2113715a6210509145bd451c360be4f4396831903f99cbd34df",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:6d478b05cc11cf00d4b5b80c8c1c0704ef99ec63b56afb8bb51acc1cb0839367",
+      "locator": "loc:v1/page:30/paragraph:22",
+      "full_quote": "重大訴訟",
+      "page": 30,
+      "quote_sha256": "7c82e90c65c3c7cbb79dca17bee5c69eb55f7980b6f2c2e1e280998f131f59bf",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:04ec2c57a801c239bd4c93a283dece497e76c4b1feac1d64dd7f1d3400c9dd55",
+      "locator": "loc:v1/page:30/paragraph:23/chars:790-869",
+      "full_quote": "於報告期內，本公司並無涉及任何可能對本集團經營造成重大不利影響的重大訴訟或仲裁。於報告期內，董\n事亦不知悉本集團有任何待決的或針對本集團提起的重大訴訟或申索。",
+      "page": 30,
+      "quote_sha256": "67f2a4cf7fb0a023b9da984b79c07d5e712b9f94cf34f1f44617975991ebf1e1",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_restriction"
+      ],
+      "topics": [
+        "core_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:7d4fa238bf792da099d830146d7d942cc1d38cc56ec94aea95514141706a0895",
+      "locator": "loc:v1/page:31/paragraph:1",
+      "full_quote": "其他資料",
+      "page": 31,
+      "quote_sha256": "5fab9b033c5144c7b477f2b9e4b2667a615fc203c3969a045ce9db8f964239ba",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:4110925722a80ddec7af9bdd2e0326b57b6f308b76a7f7b4912e25c30eb9d4f8",
+      "locator": "loc:v1/page:31/paragraph:17",
+      "full_quote": "發行美國存託股及股份",
+      "page": 31,
+      "quote_sha256": "833de86670fd75d801094d78f761096b3ae57b3055ca1b4c1a55d541e91ec7a7",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:170f010d76867b7d62d3a9f9e2865db82743d8b24802c07019a30653e0026e3a",
+      "locator": "loc:v1/page:31/paragraph:29",
+      "full_quote": "(II) 認購事項",
+      "page": 31,
+      "quote_sha256": "b18c424dc72a8409cae6fcd5da099af6dbdf3bd0e90a5b13b8d27a2fcc515b2a",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:79fc54e2ef469b6d79a5578342cd2ce48e730062217dcd9ebff297cbfba13ffb",
+      "locator": "loc:v1/page:31/paragraph:32/chars:745-784",
+      "full_quote": "金山軟件為本公司的控股股東及關連人士。認購事項已於股東週年大會上獲得股東批准。",
+      "page": 31,
+      "quote_sha256": "d5597690d30faa3f1d3ee33caedf6f2bc7eb349584340686ba0877a629653a79",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "business_ownership_scope"
+      ],
+      "topics": [
+        "business_ownership_scope"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:372514d98fa118b3a65f6daf0ea77ca6969347f00ad9dd64034b10139762124a",
+      "locator": "loc:v1/page:34/paragraph:1",
+      "full_quote": "其他資料",
+      "page": 34,
+      "quote_sha256": "5fab9b033c5144c7b477f2b9e4b2667a615fc203c3969a045ce9db8f964239ba",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:b1c4e29033c83644732f1b8e73a58f215c63b013d246917e7aa8b6f07222a7ae",
+      "locator": "loc:v1/page:34/paragraph:2/chars:19-192",
+      "full_quote": "安永會計師事務所的工作並不涉及對任何相關財務資料的獨立審核。遵照香港鑒證準則第3000號（經修訂）\n進行的工作，範圍有別於遵照香港會計師公會頒佈的香港審計準則或香港審閱委聘準則進行的審計或審閱，\n因此，安永會計師事務所並無就公認會計準則差異對賬發表審計意見或審閱結論。安永會計師事務所的工作\n僅供董事用於本中期報告的上述目的，未必適用於其他目的。",
+      "page": 34,
+      "quote_sha256": "a73c542244aa2ab34fdd36eaa9fb7b6bd8db940e188a0388f56f054e8f628c1d",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_restriction"
+      ],
+      "topics": [
+        "core_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:08af34ad55ee0b4cb5279d107a43b644d4c8ecfa01bee3101bccb8b9d9c0264a",
+      "locator": "loc:v1/page:41/paragraph:1",
+      "full_quote": "截至二零二四年及二零二五年六月三十日止六個月\n未經審計中期簡明合併現金流量表",
+      "page": 41,
+      "quote_sha256": "21483b744e6391ed9ba11e1bcf505ba30d4fa1c7f07de18e938729db3e35023c",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:433fef04403950c4ebe8b46b9c843d00147fca22acd4652f2630f8e5982cd082",
+      "locator": "loc:v1/page:41/paragraph:16",
+      "full_quote": "非現金經營租賃費用\n8,618\n19,070\n2,662",
+      "page": 41,
+      "quote_sha256": "fd2b04f12b93b1afdeba9bb3c58cd83f9fccefdf1e407fae3aef8af8e4b8573a",
+      "quality_flags": [
+        "table_structure_ambiguous"
+      ],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_state_unknown"
+      ],
+      "topics": [
+        "core_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:cfa9d20ae09945b5ddfee61170a9856244c7c478e12573dd687f77eb1ab00020",
+      "locator": "loc:v1/page:41/paragraph:28",
+      "full_quote": "經營活動（所用）所得現金淨額\n(170,167)\n1,041,744\n145,422",
+      "page": 41,
+      "quote_sha256": "638cac58522da5153b9a9d3a4bd8653e3c3304c2145f8c207e01e337531187e7",
+      "quality_flags": [
+        "table_structure_ambiguous"
+      ],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_state_unknown"
+      ],
+      "topics": [
+        "core_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:93fe8465073ffede986fba0cea25b5b6090019f4973e030a742cec5e7678efd1",
+      "locator": "loc:v1/page:42/paragraph:1",
+      "full_quote": "截至二零二四年及二零二五年六月三十日止六個月\n未經審計中期簡明合併現金流量表",
+      "page": 42,
+      "quote_sha256": "21483b744e6391ed9ba11e1bcf505ba30d4fa1c7f07de18e938729db3e35023c",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:9c4712efca01ee8ba02674a86ecc273d6ab4f6cc3eadc3aae3b7dcdc314f608b",
+      "locator": "loc:v1/page:42/paragraph:5",
+      "full_quote": "融資活動產生的現金流量\n償還短期借款\n(490,502)\n(865,034)\n(120,754)\n短期借款所得款項\n834,519\n1,495,840\n208,811\n償還長期借款\n(1,000)\n(46,600)\n(6,505)\n長期借款所得款項\n226,861\n1,105,277\n154,291\n收購非控股權益\n(30,001)\n(136,000)\n(18,985)\n償還融資租賃本金\n(24,226)\n(274,408)\n(38,306)\n業務合併產生的金融負債的結算及變更\n(22,578)\n(74,793)\n(10,440)\n償還應付關聯方貸款\n(260,193)\n(483,394)\n(67,480)\n應付關聯方貸款所得款項\n1,400,000\n350,000\n48,858\n行使購股權所得款項\n3,166\n16,517\n2,306\n後續發售所得款項，扣除發售成本\n–\n2,015,154\n281,305",
+      "page": 42,
+      "quote_sha256": "e1cb076a3795785f7879130b8014208e07c66ad42a35685738df4814cd3e3684",
+      "quality_flags": [
+        "table_structure_ambiguous"
+      ],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_description_unknown"
+      ],
+      "topics": [
+        "core_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:a3932cf6e5220fb91c5a83cfe207842479748a36ae4ba892751ed98cffa08a02",
+      "locator": "loc:v1/page:42/paragraph:9",
+      "full_quote": "現金流量資料的補充披露：\n已付所得稅\n30,359\n18,866\n2,634\n已付利息\n81,240\n234,284\n32,705\n非現金投資及融資活動：\n計入應計費用及其他負債的物業及設備購置\n525,013\n353,465\n49,342\n計入應計費用及其他負債的購買對價\n667,947\n512,987\n71,610\n非控股權益收購對價\n319,592\n119,992\n16,750\n計入應計費用及其他負債的發售成本\n–\n3,948\n551\n以經營租賃負債換取的使用權資產\n9,034\n11,877\n1,658\n以融資租賃負債換取的使用權資產\n83,510\n3,461,852\n483,256\n現金及現金等價物以及受限制現金的對賬：\n現金及現金等價物\n1,837,757\n5,464,077\n762,756\n受限制現金\n258,647\n53,051\n7,406",
+      "page": 42,
+      "quote_sha256": "4ee45d35c457e083280235fc0f41327c01d7b3aed229edab69685e8d8d1092b1",
+      "quality_flags": [
+        "table_structure_ambiguous"
+      ],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_state_unknown"
+      ],
+      "topics": [
+        "core_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:1e0b11f7f6af90a9d1894c4d6ac329f73d116650679e3acd7c93f36a3c6dd3dd",
+      "locator": "loc:v1/page:46/paragraph:1",
+      "full_quote": "未經審計中期簡明合併財務報表附註",
+      "page": 46,
+      "quote_sha256": "49ca1db299ae09146e7641f47df1b99762afdab86384f8262c252a0934c24ca1",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:afbabf12e76c7f81e28556b9398a59ce168a9a4f6d6f11aa8d671ace67d09adf",
+      "locator": "loc:v1/page:46/paragraph:3",
+      "full_quote": "2. 主要會計政策概要（續）",
+      "page": 46,
+      "quote_sha256": "880249cb86577d8636492ec8d879b322626cc372c959c173c0cad8c8f1878efd",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:6d3b4331f8704f83f6d4f71e316e628dd09b151574069a4722b0830918e9499e",
+      "locator": "loc:v1/page:46/paragraph:5",
+      "full_quote": "b) \n不易於確定公平值的股權投資",
+      "page": 46,
+      "quote_sha256": "f80c264f468bb0207fb46848916b3b0c80d22329242c3f2bd498196bb2a42bdf",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:7488fa3c1470678cdc9898ac7411924a9f453e84ac332b06ff548c973d2552ff",
+      "locator": "loc:v1/page:46/paragraph:8/chars:158-307",
+      "full_quote": "對於不易於確定公平值且不符合ASC 820公平值計量及披露（「ASC 820」）中的現有可行權宜\n方法使用投資的每股資產淨值（或其等價物）估計公平值的股權證券，本集團選擇使用替代計量方\n法，按成本減任何減值，加上或減去同一發行人的相同或類似投資（如有）的有序交易中的可觀察\n價格變動計量其所有投資。",
+      "page": 46,
+      "quote_sha256": "58dcc11f643b2970aa4efb6f1fc3271d42bce0b4e2db6ebb6e2290fdbbe413f1",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_metric_change"
+      ],
+      "topics": [
+        "operating_metric_change"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:766104c93fdf16cd0bc0cab50cf3a0c68e0ac79fa7711569d5c958407a462b5b",
+      "locator": "loc:v1/page:48/paragraph:1",
+      "full_quote": "未經審計中期簡明合併財務報表附註",
+      "page": 48,
+      "quote_sha256": "49ca1db299ae09146e7641f47df1b99762afdab86384f8262c252a0934c24ca1",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:768cb4014d61ad8842126c1c220761ba5ee9ec28fe6fbe0f4e7089bfd700a6c3",
+      "locator": "loc:v1/page:48/paragraph:3",
+      "full_quote": "2. 主要會計政策概要（續）",
+      "page": 48,
+      "quote_sha256": "880249cb86577d8636492ec8d879b322626cc372c959c173c0cad8c8f1878efd",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:9d36e3d27e21d20ecfc4fc1e3a6f6ab03eeceb16dd64f4a13bb56d997824a9b4",
+      "locator": "loc:v1/page:48/paragraph:4",
+      "full_quote": "公平值計量",
+      "page": 48,
+      "quote_sha256": "c6130ba311b4f54318bfa36c5ce78a739a9f3e3fe706ebbcdbdbf8c9a00e03e3",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:ff7d8bb2a13707eb88051bbcba3742317e92bfdc1613d910f19b75f72276c031",
+      "locator": "loc:v1/page:48/paragraph:10/chars:232-357",
+      "full_quote": "就不易於確\n定公平值的股權投資而言，本集團選擇使用替代計量法，按成本減任何減值，加上或減去同一發行人的\n相同或類似投資（如有）的有序交易中的可觀察價格變動計量該等投資。本集團在獨立第三方估值公司\n的協助下，使用替代計量方法釐定其股權投資的估計公平值。",
+      "page": 48,
+      "quote_sha256": "bb2258c0a12c454f9b0a12ed5de409eb9e66c099e9e69559f6158ccd811215a4",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_metric_change"
+      ],
+      "topics": [
+        "operating_metric_change"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:11289cb88f295e036f22e22b5bfef0bc03df23634a30368f74b997597ac1426d",
+      "locator": "loc:v1/page:48/paragraph:25/chars:608-739",
+      "full_quote": "ASC 820描述了計量資產及負債公平值的三種主要方法：(1)市場法；(2)收入法；及(3)成本法。市場法\n採用由涉及相同或可比資產或負債的市場交易產生的價格及其他相關資料。收入法使用估值技術將未來\n金額轉換為單個現值金額。該計量基於當前市場對未來金額的預期值。",
+      "page": 48,
+      "quote_sha256": "def3ab2b70ae064408cc8d2c3e968e489e74999940878b286270ca3050714b80",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_state_unknown"
+      ],
+      "topics": [
+        "core_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:32d6c5dd366cd88c75ece6c4a725092153b4244f902c4e270eb49e821dff7912",
+      "locator": "loc:v1/page:50/paragraph:1",
+      "full_quote": "未經審計中期簡明合併財務報表附註",
+      "page": 50,
+      "quote_sha256": "49ca1db299ae09146e7641f47df1b99762afdab86384f8262c252a0934c24ca1",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:2ed262dbb55719e30b3aa7f323a35c698f3de131d6d8a1371acb696604092923",
+      "locator": "loc:v1/page:50/paragraph:3",
+      "full_quote": "2. 主要會計政策概要（續）",
+      "page": 50,
+      "quote_sha256": "880249cb86577d8636492ec8d879b322626cc372c959c173c0cad8c8f1878efd",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:678d9b68130b79e61565018f2a2b80851608f39c7ea49d4ef00dad2f3e2926cc",
+      "locator": "loc:v1/page:50/paragraph:22",
+      "full_quote": "分部報告",
+      "page": 50,
+      "quote_sha256": "99545dc11161b19a7a905e5c9a03f5e92d937a54bb30c2620fae2734effa2be4",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:6b97ac2bd1d23c5d9718beb0588cfc4e5e600254004f7b4777750f4e0b544e54",
+      "locator": "loc:v1/page:50/paragraph:25/chars:693-853",
+      "full_quote": "本集團的主要經營決策者（「主要經營決策者」）已被確定為首席執行官，其在作出有關分配資源及評估\n本集團整體表現的決策時審閱合併經營業績，因此本集團僅有一個經營分部。主要經營決策者使用合併\n淨虧損評估財務表現及分配資源。主要經營決策者於評估經營業績及作出資源決策以提高盈利能力時，\n會定期考慮合併淨虧損的預算與實際比較情況。",
+      "page": 50,
+      "quote_sha256": "9dcc6e42e440b0f873ce2e3440db485ab604cf10227038d98e0a838da6f5a7f3",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "reporting_segment_scope",
+        "operating_current_state",
+        "operating_state_unknown"
+      ],
+      "topics": [
+        "reporting_segment_scope",
+        "core_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:ff2b5b9cade231e22a5998701d701f747edcd77dcb8215b6f9bec14aa2e91d3f",
+      "locator": "loc:v1/page:50/paragraph:31/chars:853-982",
+      "full_quote": "主要經營決策者亦將合併淨虧損的預算與實際金額進行\n比較，以作出符合本集團戰略舉措及資本分配優先次序的決定。主要經營決策者審閱的重大開支包括於\n未經審計中期簡明合併綜合虧損表中呈列的重大開支。分部資產的計量於未經審計中期簡明合併資產負\n債表呈報為合併資產總額。",
+      "page": 50,
+      "quote_sha256": "587f51e805bea70343b64a8b84275cdfb6359797dcc33c6d1cbad5fb292536ff",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_state_unknown"
+      ],
+      "topics": [
+        "core_business"
+      ]
+    }
+  ],
+  "actual_model_payload_sha256": "8247e17e3d527a657c359f79a5c6ab5ac4e85fd5889d6e70888a07bf2adc9ee7",
+  "actual_model_binding_sha256": "4b09dc1b32b1f6c98024d2478cde4cff829ad2ebd87e78a2ddeb29bcd37d1b44",
+  "actual_task_count": 60,
+  "tasks": [
+    {
+      "key": "t1",
+      "kind": "background",
+      "section_role": "management_discussion",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:f05e62840af54f9fb9240e557b5e12d1248086180ec1a69fe40a820058df9275"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:2abba42d30c270cd6517cf10fdff3be0a30e2235c8fb037af6bbe937c89c2e01"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:2abba42d30c270cd6517cf10fdff3be0a30e2235c8fb037af6bbe937c89c2e01",
+        "urn:company-wiki:evidence-span:sha256:f05e62840af54f9fb9240e557b5e12d1248086180ec1a69fe40a820058df9275"
+      ]
+    },
+    {
+      "key": "t2",
+      "kind": "background",
+      "section_role": "management_discussion",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:b92125fdad0a878cc8b609a31e52e7d9ac951dc2714bd3f5b0185106cb587194"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:3be6919b2925afe6d07fcebf1d8a860c7f58e013a3461f655e802ca82d8626cc"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:3be6919b2925afe6d07fcebf1d8a860c7f58e013a3461f655e802ca82d8626cc",
+        "urn:company-wiki:evidence-span:sha256:b92125fdad0a878cc8b609a31e52e7d9ac951dc2714bd3f5b0185106cb587194"
+      ]
+    },
+    {
+      "key": "t3",
+      "kind": "background",
+      "section_role": "management_discussion",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:6892a3e2d50de190d8f02a520870badd5e3d01858ac76e6829dc6a645cac084a"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:3be6919b2925afe6d07fcebf1d8a860c7f58e013a3461f655e802ca82d8626cc"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:3be6919b2925afe6d07fcebf1d8a860c7f58e013a3461f655e802ca82d8626cc",
+        "urn:company-wiki:evidence-span:sha256:6892a3e2d50de190d8f02a520870badd5e3d01858ac76e6829dc6a645cac084a"
+      ]
+    },
+    {
+      "key": "t4",
+      "kind": "paragraph_event",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:9c4712efca01ee8ba02674a86ecc273d6ab4f6cc3eadc3aae3b7dcdc314f608b"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:93fe8465073ffede986fba0cea25b5b6090019f4973e030a742cec5e7678efd1"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:93fe8465073ffede986fba0cea25b5b6090019f4973e030a742cec5e7678efd1",
+        "urn:company-wiki:evidence-span:sha256:9c4712efca01ee8ba02674a86ecc273d6ab4f6cc3eadc3aae3b7dcdc314f608b"
+      ]
+    },
+    {
+      "key": "t5",
+      "kind": "paragraph_event",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:a3932cf6e5220fb91c5a83cfe207842479748a36ae4ba892751ed98cffa08a02"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:93fe8465073ffede986fba0cea25b5b6090019f4973e030a742cec5e7678efd1"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:93fe8465073ffede986fba0cea25b5b6090019f4973e030a742cec5e7678efd1",
+        "urn:company-wiki:evidence-span:sha256:a3932cf6e5220fb91c5a83cfe207842479748a36ae4ba892751ed98cffa08a02"
+      ]
+    },
+    {
+      "key": "t6",
+      "kind": "background",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:46020b3e2966d87d1b9687ad5542d5d3aa7a98eb88328b7f325fd5fedc474c8a"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:222faf7025c6e82a887e13ecd4036decaf5eaf5d6064f3a371ffc80e8121e7cc",
+        "urn:company-wiki:evidence-span:sha256:36468e831a57047f72e2d90f4f521ab0886748772bfcb60872632d9f1b9a5262"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:222faf7025c6e82a887e13ecd4036decaf5eaf5d6064f3a371ffc80e8121e7cc",
+        "urn:company-wiki:evidence-span:sha256:36468e831a57047f72e2d90f4f521ab0886748772bfcb60872632d9f1b9a5262",
+        "urn:company-wiki:evidence-span:sha256:46020b3e2966d87d1b9687ad5542d5d3aa7a98eb88328b7f325fd5fedc474c8a"
+      ]
+    },
+    {
+      "key": "t7",
+      "kind": "background",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:3d7b13a917b7b6ad643cad3948868d17aaa0f784f4209d38fcb622bbe582f213"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:9f9071677d2fcf0b8a66fe92fc9bda9f2c36cdd6d10aed83016522fa74234fa0",
+        "urn:company-wiki:evidence-span:sha256:5ff7aeeeb14c5389cff3be27a910c2c4b96ebc3babf90484df82cd87e7101955"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:9f9071677d2fcf0b8a66fe92fc9bda9f2c36cdd6d10aed83016522fa74234fa0",
+        "urn:company-wiki:evidence-span:sha256:5ff7aeeeb14c5389cff3be27a910c2c4b96ebc3babf90484df82cd87e7101955",
+        "urn:company-wiki:evidence-span:sha256:3d7b13a917b7b6ad643cad3948868d17aaa0f784f4209d38fcb622bbe582f213"
+      ]
+    },
+    {
+      "key": "t8",
+      "kind": "background",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:c4a6e324e1d905c8aea2e8314ad152dfc01a5b7569f41eb0a3b58433101ea246"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:9f9071677d2fcf0b8a66fe92fc9bda9f2c36cdd6d10aed83016522fa74234fa0",
+        "urn:company-wiki:evidence-span:sha256:5ff7aeeeb14c5389cff3be27a910c2c4b96ebc3babf90484df82cd87e7101955"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:9f9071677d2fcf0b8a66fe92fc9bda9f2c36cdd6d10aed83016522fa74234fa0",
+        "urn:company-wiki:evidence-span:sha256:5ff7aeeeb14c5389cff3be27a910c2c4b96ebc3babf90484df82cd87e7101955",
+        "urn:company-wiki:evidence-span:sha256:c4a6e324e1d905c8aea2e8314ad152dfc01a5b7569f41eb0a3b58433101ea246"
+      ]
+    },
+    {
+      "key": "t9",
+      "kind": "background",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:b8324478749dbf0775c7e2257f45f293da1c3be0dcd4f781c1b31ca8da9badd8"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:419b1d26bf31f0857242e5348dfb405ca5c7a4859197b27bcb20856dcd7b7d39"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:419b1d26bf31f0857242e5348dfb405ca5c7a4859197b27bcb20856dcd7b7d39",
+        "urn:company-wiki:evidence-span:sha256:b8324478749dbf0775c7e2257f45f293da1c3be0dcd4f781c1b31ca8da9badd8"
+      ]
+    },
+    {
+      "key": "t10",
+      "kind": "background",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:bb7433c5aeda2b2ef1b0138aa3e554a13ee961508c4318debdc11d767dd87825"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:411df4e791d228f07dd8f4de17d76b08feaeaacad002c4afc5ef9f562e08e1d7"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:411df4e791d228f07dd8f4de17d76b08feaeaacad002c4afc5ef9f562e08e1d7",
+        "urn:company-wiki:evidence-span:sha256:bb7433c5aeda2b2ef1b0138aa3e554a13ee961508c4318debdc11d767dd87825"
+      ]
+    },
+    {
+      "key": "t11",
+      "kind": "background",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:e7f87ef6f78492d4e90fb52b42d0908575550cf0c62f240e4d4dc2313f7193aa"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:411df4e791d228f07dd8f4de17d76b08feaeaacad002c4afc5ef9f562e08e1d7"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:411df4e791d228f07dd8f4de17d76b08feaeaacad002c4afc5ef9f562e08e1d7",
+        "urn:company-wiki:evidence-span:sha256:e7f87ef6f78492d4e90fb52b42d0908575550cf0c62f240e4d4dc2313f7193aa"
+      ]
+    },
+    {
+      "key": "t12",
+      "kind": "background",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:5884efe64d81b29ab7690ec337a04e7523fc31606de343a6ec1c8dc048a69600"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:411df4e791d228f07dd8f4de17d76b08feaeaacad002c4afc5ef9f562e08e1d7"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:411df4e791d228f07dd8f4de17d76b08feaeaacad002c4afc5ef9f562e08e1d7",
+        "urn:company-wiki:evidence-span:sha256:5884efe64d81b29ab7690ec337a04e7523fc31606de343a6ec1c8dc048a69600"
+      ]
+    },
+    {
+      "key": "t13",
+      "kind": "background",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:c3ec8c8922ced71cbac0b7878a7069902af993575e5da274970799e86760e814"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:572763eb89cde71f2505b503c03694537129d260573b1617ce0d40c1eac6ce41",
+        "urn:company-wiki:evidence-span:sha256:10ad26804424ec1907452e721eda0246c94d64338c5f10d06b1192ef6c8b5091"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:572763eb89cde71f2505b503c03694537129d260573b1617ce0d40c1eac6ce41",
+        "urn:company-wiki:evidence-span:sha256:10ad26804424ec1907452e721eda0246c94d64338c5f10d06b1192ef6c8b5091",
+        "urn:company-wiki:evidence-span:sha256:c3ec8c8922ced71cbac0b7878a7069902af993575e5da274970799e86760e814"
+      ]
+    },
+    {
+      "key": "t14",
+      "kind": "background",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:9aaa2a261b3be80216cd7769bb942f812f98b154b465ab5d7262ec510c0a1e39"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:acdd6379f723fff039d83ca63b38b917569534102d83934834caaaa15f22a3ed",
+        "urn:company-wiki:evidence-span:sha256:ba980f205deaaf39599af5138668f6d0cfbdbee0fee575214e998147f0aa07f7"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:acdd6379f723fff039d83ca63b38b917569534102d83934834caaaa15f22a3ed",
+        "urn:company-wiki:evidence-span:sha256:ba980f205deaaf39599af5138668f6d0cfbdbee0fee575214e998147f0aa07f7",
+        "urn:company-wiki:evidence-span:sha256:9aaa2a261b3be80216cd7769bb942f812f98b154b465ab5d7262ec510c0a1e39"
+      ]
+    },
+    {
+      "key": "t15",
+      "kind": "background",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:0f93c6205270f5c9c3e6f4c95f8414d86448d92ba4a7b53a1b7240b0b635ea99"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:222faf7025c6e82a887e13ecd4036decaf5eaf5d6064f3a371ffc80e8121e7cc",
+        "urn:company-wiki:evidence-span:sha256:36468e831a57047f72e2d90f4f521ab0886748772bfcb60872632d9f1b9a5262"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:222faf7025c6e82a887e13ecd4036decaf5eaf5d6064f3a371ffc80e8121e7cc",
+        "urn:company-wiki:evidence-span:sha256:36468e831a57047f72e2d90f4f521ab0886748772bfcb60872632d9f1b9a5262",
+        "urn:company-wiki:evidence-span:sha256:0f93c6205270f5c9c3e6f4c95f8414d86448d92ba4a7b53a1b7240b0b635ea99"
+      ]
+    },
+    {
+      "key": "t16",
+      "kind": "background",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:db944a565d2425357e9912d8ebdf67f490bd6f296fc8a7bfb1de5ef8368768ca"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:222faf7025c6e82a887e13ecd4036decaf5eaf5d6064f3a371ffc80e8121e7cc",
+        "urn:company-wiki:evidence-span:sha256:36468e831a57047f72e2d90f4f521ab0886748772bfcb60872632d9f1b9a5262"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:222faf7025c6e82a887e13ecd4036decaf5eaf5d6064f3a371ffc80e8121e7cc",
+        "urn:company-wiki:evidence-span:sha256:36468e831a57047f72e2d90f4f521ab0886748772bfcb60872632d9f1b9a5262",
+        "urn:company-wiki:evidence-span:sha256:db944a565d2425357e9912d8ebdf67f490bd6f296fc8a7bfb1de5ef8368768ca"
+      ]
+    },
+    {
+      "key": "t17",
+      "kind": "background",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:c2d82a266ad19d6c8c0daabfcc18d30161ff2515a78d5fbabc58bd6943a3d8f2"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:222faf7025c6e82a887e13ecd4036decaf5eaf5d6064f3a371ffc80e8121e7cc",
+        "urn:company-wiki:evidence-span:sha256:36468e831a57047f72e2d90f4f521ab0886748772bfcb60872632d9f1b9a5262"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:222faf7025c6e82a887e13ecd4036decaf5eaf5d6064f3a371ffc80e8121e7cc",
+        "urn:company-wiki:evidence-span:sha256:36468e831a57047f72e2d90f4f521ab0886748772bfcb60872632d9f1b9a5262",
+        "urn:company-wiki:evidence-span:sha256:c2d82a266ad19d6c8c0daabfcc18d30161ff2515a78d5fbabc58bd6943a3d8f2"
+      ]
+    },
+    {
+      "key": "t18",
+      "kind": "background",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:ccdedf5cb4c3a420e1b434251df38e89ce3488caf1caf82639bfbf427cfca588"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:9f9071677d2fcf0b8a66fe92fc9bda9f2c36cdd6d10aed83016522fa74234fa0",
+        "urn:company-wiki:evidence-span:sha256:5ff7aeeeb14c5389cff3be27a910c2c4b96ebc3babf90484df82cd87e7101955"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:9f9071677d2fcf0b8a66fe92fc9bda9f2c36cdd6d10aed83016522fa74234fa0",
+        "urn:company-wiki:evidence-span:sha256:5ff7aeeeb14c5389cff3be27a910c2c4b96ebc3babf90484df82cd87e7101955",
+        "urn:company-wiki:evidence-span:sha256:ccdedf5cb4c3a420e1b434251df38e89ce3488caf1caf82639bfbf427cfca588"
+      ]
+    },
+    {
+      "key": "t19",
+      "kind": "background",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:a7cfbb5783506c84b52c15bc44347ba49c78ce5225a11c9374a319e9202ec720"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:c935d83fcfca8453e4ae1b0fe627e7dbc872f98f6f5f343052dfcbc9fa9fed76"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:c935d83fcfca8453e4ae1b0fe627e7dbc872f98f6f5f343052dfcbc9fa9fed76",
+        "urn:company-wiki:evidence-span:sha256:a7cfbb5783506c84b52c15bc44347ba49c78ce5225a11c9374a319e9202ec720"
+      ]
+    },
+    {
+      "key": "t20",
+      "kind": "background",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:433fef04403950c4ebe8b46b9c843d00147fca22acd4652f2630f8e5982cd082"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:08af34ad55ee0b4cb5279d107a43b644d4c8ecfa01bee3101bccb8b9d9c0264a"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:08af34ad55ee0b4cb5279d107a43b644d4c8ecfa01bee3101bccb8b9d9c0264a",
+        "urn:company-wiki:evidence-span:sha256:433fef04403950c4ebe8b46b9c843d00147fca22acd4652f2630f8e5982cd082"
+      ]
+    },
+    {
+      "key": "t21",
+      "kind": "background",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:cfa9d20ae09945b5ddfee61170a9856244c7c478e12573dd687f77eb1ab00020"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:08af34ad55ee0b4cb5279d107a43b644d4c8ecfa01bee3101bccb8b9d9c0264a"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:08af34ad55ee0b4cb5279d107a43b644d4c8ecfa01bee3101bccb8b9d9c0264a",
+        "urn:company-wiki:evidence-span:sha256:cfa9d20ae09945b5ddfee61170a9856244c7c478e12573dd687f77eb1ab00020"
+      ]
+    },
+    {
+      "key": "t22",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:96143009f970eed9bfd2a8cb1e54565115aa8bae7adde6fe98072c0bd36b6859"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:af7a9cd57639f913fe76c091b8a765315c11149eff9771ac988ca3c1dc68249a",
+        "urn:company-wiki:evidence-span:sha256:314033e2a8c0e5654840a638831eb8cd6edc9593fa08f0386c6efc4bb95c4295"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:af7a9cd57639f913fe76c091b8a765315c11149eff9771ac988ca3c1dc68249a",
+        "urn:company-wiki:evidence-span:sha256:314033e2a8c0e5654840a638831eb8cd6edc9593fa08f0386c6efc4bb95c4295",
+        "urn:company-wiki:evidence-span:sha256:96143009f970eed9bfd2a8cb1e54565115aa8bae7adde6fe98072c0bd36b6859"
+      ]
+    },
+    {
+      "key": "t23",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:aad0cef6f15e0f3c12f7b72b5bfa8d321e163add144259f8cb27c8615390d686"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:af7a9cd57639f913fe76c091b8a765315c11149eff9771ac988ca3c1dc68249a",
+        "urn:company-wiki:evidence-span:sha256:314033e2a8c0e5654840a638831eb8cd6edc9593fa08f0386c6efc4bb95c4295"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:af7a9cd57639f913fe76c091b8a765315c11149eff9771ac988ca3c1dc68249a",
+        "urn:company-wiki:evidence-span:sha256:314033e2a8c0e5654840a638831eb8cd6edc9593fa08f0386c6efc4bb95c4295",
+        "urn:company-wiki:evidence-span:sha256:aad0cef6f15e0f3c12f7b72b5bfa8d321e163add144259f8cb27c8615390d686"
+      ]
+    },
+    {
+      "key": "t24",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:a05928afad9a7cfb35ed0377616c0f6a36fbd74ecf5c97858c8c7235885eb4a0"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:af7a9cd57639f913fe76c091b8a765315c11149eff9771ac988ca3c1dc68249a",
+        "urn:company-wiki:evidence-span:sha256:314033e2a8c0e5654840a638831eb8cd6edc9593fa08f0386c6efc4bb95c4295"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:af7a9cd57639f913fe76c091b8a765315c11149eff9771ac988ca3c1dc68249a",
+        "urn:company-wiki:evidence-span:sha256:314033e2a8c0e5654840a638831eb8cd6edc9593fa08f0386c6efc4bb95c4295",
+        "urn:company-wiki:evidence-span:sha256:a05928afad9a7cfb35ed0377616c0f6a36fbd74ecf5c97858c8c7235885eb4a0"
+      ]
+    },
+    {
+      "key": "t25",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:1f7bcad7124d7e7164e5e07a302bdb1dad0e3b4278fb2d318f818c388dd80212"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:419b1d26bf31f0857242e5348dfb405ca5c7a4859197b27bcb20856dcd7b7d39"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:419b1d26bf31f0857242e5348dfb405ca5c7a4859197b27bcb20856dcd7b7d39",
+        "urn:company-wiki:evidence-span:sha256:1f7bcad7124d7e7164e5e07a302bdb1dad0e3b4278fb2d318f818c388dd80212"
+      ]
+    },
+    {
+      "key": "t26",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:527d6e64dacfce0031f8e6c3e47c41ec5c4103b3eabd68730648a37778bd0024"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:419b1d26bf31f0857242e5348dfb405ca5c7a4859197b27bcb20856dcd7b7d39"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:419b1d26bf31f0857242e5348dfb405ca5c7a4859197b27bcb20856dcd7b7d39",
+        "urn:company-wiki:evidence-span:sha256:527d6e64dacfce0031f8e6c3e47c41ec5c4103b3eabd68730648a37778bd0024"
+      ]
+    },
+    {
+      "key": "t27",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:6323bc043cc32717ba54eca3078fcdbb2ee1c4923a4633d76ead81c1f438405c"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:d0ee31caa1edc80b0cb373e182b96a0d09ad14969299caf81ebf795984fe9ce3",
+        "urn:company-wiki:evidence-span:sha256:5b0330dfe6e8a04bb185ff4223c60802369e21463dd3cdaead628b4dbedb5c2d"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:d0ee31caa1edc80b0cb373e182b96a0d09ad14969299caf81ebf795984fe9ce3",
+        "urn:company-wiki:evidence-span:sha256:5b0330dfe6e8a04bb185ff4223c60802369e21463dd3cdaead628b4dbedb5c2d",
+        "urn:company-wiki:evidence-span:sha256:6323bc043cc32717ba54eca3078fcdbb2ee1c4923a4633d76ead81c1f438405c"
+      ]
+    },
+    {
+      "key": "t28",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:4f939ffa3ddcfaec2abf28e2f3432efe3295ba06d0e40db328329075bbd5c9ff"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:d0ee31caa1edc80b0cb373e182b96a0d09ad14969299caf81ebf795984fe9ce3",
+        "urn:company-wiki:evidence-span:sha256:5b0330dfe6e8a04bb185ff4223c60802369e21463dd3cdaead628b4dbedb5c2d"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:d0ee31caa1edc80b0cb373e182b96a0d09ad14969299caf81ebf795984fe9ce3",
+        "urn:company-wiki:evidence-span:sha256:5b0330dfe6e8a04bb185ff4223c60802369e21463dd3cdaead628b4dbedb5c2d",
+        "urn:company-wiki:evidence-span:sha256:4f939ffa3ddcfaec2abf28e2f3432efe3295ba06d0e40db328329075bbd5c9ff"
+      ]
+    },
+    {
+      "key": "t29",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:efa3d9c42abcb78f38a0c7e0afb03ea8385dfbb0343e69ef35191d50095c1099"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:d0ee31caa1edc80b0cb373e182b96a0d09ad14969299caf81ebf795984fe9ce3",
+        "urn:company-wiki:evidence-span:sha256:3bc0f1147075ee51b16d458cfb068a4419883ec50a61e0f8cedcfcce8cd59ff8"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:d0ee31caa1edc80b0cb373e182b96a0d09ad14969299caf81ebf795984fe9ce3",
+        "urn:company-wiki:evidence-span:sha256:3bc0f1147075ee51b16d458cfb068a4419883ec50a61e0f8cedcfcce8cd59ff8",
+        "urn:company-wiki:evidence-span:sha256:efa3d9c42abcb78f38a0c7e0afb03ea8385dfbb0343e69ef35191d50095c1099"
+      ]
+    },
+    {
+      "key": "t30",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:8cd6aef675d9cc552c2f190255fc6af1eaa46f9ce5fb9535375f0dbfba135e3f"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:f8e45a2dc6db89f5b816f5f916d6546a87fe95974163643f260ea46f7beeaac9"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:f8e45a2dc6db89f5b816f5f916d6546a87fe95974163643f260ea46f7beeaac9",
+        "urn:company-wiki:evidence-span:sha256:8cd6aef675d9cc552c2f190255fc6af1eaa46f9ce5fb9535375f0dbfba135e3f"
+      ]
+    },
+    {
+      "key": "t31",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:90f36e2ed245cecd63eb6c40ee04754ffd823ebfadaad17e81b54963af71bf59"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:f8e45a2dc6db89f5b816f5f916d6546a87fe95974163643f260ea46f7beeaac9"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:f8e45a2dc6db89f5b816f5f916d6546a87fe95974163643f260ea46f7beeaac9",
+        "urn:company-wiki:evidence-span:sha256:90f36e2ed245cecd63eb6c40ee04754ffd823ebfadaad17e81b54963af71bf59"
+      ]
+    },
+    {
+      "key": "t32",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:78daa8042319d309e91fd8d7ad1d6b81b02ee84f70487572d90684ca1fc75b79"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:f8e45a2dc6db89f5b816f5f916d6546a87fe95974163643f260ea46f7beeaac9"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:f8e45a2dc6db89f5b816f5f916d6546a87fe95974163643f260ea46f7beeaac9",
+        "urn:company-wiki:evidence-span:sha256:78daa8042319d309e91fd8d7ad1d6b81b02ee84f70487572d90684ca1fc75b79"
+      ]
+    },
+    {
+      "key": "t33",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:997cb651751f8d62163fd3c2a4a255b3fb117907e23fb9bc8c7ace8de641e4a8"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:05d219dde961a63e2f5bd273c0e0fbe073cc3c1d62682f0555056fbf0d83d238",
+        "urn:company-wiki:evidence-span:sha256:ed2057ef277b693119d87725ce4efa1e7a5162152df5b8da5806739267e95d5f"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:05d219dde961a63e2f5bd273c0e0fbe073cc3c1d62682f0555056fbf0d83d238",
+        "urn:company-wiki:evidence-span:sha256:ed2057ef277b693119d87725ce4efa1e7a5162152df5b8da5806739267e95d5f",
+        "urn:company-wiki:evidence-span:sha256:997cb651751f8d62163fd3c2a4a255b3fb117907e23fb9bc8c7ace8de641e4a8"
+      ]
+    },
+    {
+      "key": "t34",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:e09eb9348b9c5b806ccd5123fd00f79e0d1208e3716d3fc764c89fd45511bb4b"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:2abba42d30c270cd6517cf10fdff3be0a30e2235c8fb037af6bbe937c89c2e01"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:2abba42d30c270cd6517cf10fdff3be0a30e2235c8fb037af6bbe937c89c2e01",
+        "urn:company-wiki:evidence-span:sha256:e09eb9348b9c5b806ccd5123fd00f79e0d1208e3716d3fc764c89fd45511bb4b"
+      ]
+    },
+    {
+      "key": "t35",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:8821797dd42c3cb12244443a2c12fa285cf2e518b783e7f3e17134b75e21b699"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:2abba42d30c270cd6517cf10fdff3be0a30e2235c8fb037af6bbe937c89c2e01"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:2abba42d30c270cd6517cf10fdff3be0a30e2235c8fb037af6bbe937c89c2e01",
+        "urn:company-wiki:evidence-span:sha256:8821797dd42c3cb12244443a2c12fa285cf2e518b783e7f3e17134b75e21b699"
+      ]
+    },
+    {
+      "key": "t36",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:6c3c973b80ee391c24cc9b4e5add2b12d169f9f4ac33e8db3d6dca033d95a4f9"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:2abba42d30c270cd6517cf10fdff3be0a30e2235c8fb037af6bbe937c89c2e01"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:2abba42d30c270cd6517cf10fdff3be0a30e2235c8fb037af6bbe937c89c2e01",
+        "urn:company-wiki:evidence-span:sha256:6c3c973b80ee391c24cc9b4e5add2b12d169f9f4ac33e8db3d6dca033d95a4f9"
+      ]
+    },
+    {
+      "key": "t37",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:98e04598a679b1e733fbf8551d2adbc39e1ee2e8e0bc27cd50e1e8cb45cdc9e7"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:2abba42d30c270cd6517cf10fdff3be0a30e2235c8fb037af6bbe937c89c2e01"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:2abba42d30c270cd6517cf10fdff3be0a30e2235c8fb037af6bbe937c89c2e01",
+        "urn:company-wiki:evidence-span:sha256:98e04598a679b1e733fbf8551d2adbc39e1ee2e8e0bc27cd50e1e8cb45cdc9e7"
+      ]
+    },
+    {
+      "key": "t38",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:3f13bb560948877ee23f501916309cd09a03633b9a89e0902b5c53714b360363"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:79d1b4184ad98af106b28e3d98b9405b1840b3cb07a22d34147c04360889e3f1",
+        "urn:company-wiki:evidence-span:sha256:6b33aa11a91159426122a0ba6c08d86302bbeaf08844d4d49957ed22b9f3fd76"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:79d1b4184ad98af106b28e3d98b9405b1840b3cb07a22d34147c04360889e3f1",
+        "urn:company-wiki:evidence-span:sha256:6b33aa11a91159426122a0ba6c08d86302bbeaf08844d4d49957ed22b9f3fd76",
+        "urn:company-wiki:evidence-span:sha256:3f13bb560948877ee23f501916309cd09a03633b9a89e0902b5c53714b360363"
+      ]
+    },
+    {
+      "key": "t39",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:9dee4b446b6ecfb246303640ad44b13809894f5741b4a4d5a6209d239ea27113"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:79d1b4184ad98af106b28e3d98b9405b1840b3cb07a22d34147c04360889e3f1",
+        "urn:company-wiki:evidence-span:sha256:6f506543067d349b8d5c6ac4d9ae70b5f8fc86642233ce2a2a0d03be60302780"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:79d1b4184ad98af106b28e3d98b9405b1840b3cb07a22d34147c04360889e3f1",
+        "urn:company-wiki:evidence-span:sha256:6f506543067d349b8d5c6ac4d9ae70b5f8fc86642233ce2a2a0d03be60302780",
+        "urn:company-wiki:evidence-span:sha256:9dee4b446b6ecfb246303640ad44b13809894f5741b4a4d5a6209d239ea27113"
+      ]
+    },
+    {
+      "key": "t40",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:d3441e90a6a573de8117ecda4d1eb2804da1ee739b21e431afbe81a792ea18f4"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:79d1b4184ad98af106b28e3d98b9405b1840b3cb07a22d34147c04360889e3f1",
+        "urn:company-wiki:evidence-span:sha256:9b7a49ed9a3da1080f6f6b903d4285de77c1bc141fe1182ee33bee07b53a11d2"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:79d1b4184ad98af106b28e3d98b9405b1840b3cb07a22d34147c04360889e3f1",
+        "urn:company-wiki:evidence-span:sha256:9b7a49ed9a3da1080f6f6b903d4285de77c1bc141fe1182ee33bee07b53a11d2",
+        "urn:company-wiki:evidence-span:sha256:d3441e90a6a573de8117ecda4d1eb2804da1ee739b21e431afbe81a792ea18f4"
+      ]
+    },
+    {
+      "key": "t41",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:ac1b5cf75a8342370d083c0e726bee4597c06bdf2b9a60862831d70cef28f8cb"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:572763eb89cde71f2505b503c03694537129d260573b1617ce0d40c1eac6ce41",
+        "urn:company-wiki:evidence-span:sha256:9ede2e19bdcedc8275359e1b1371905b2748d7a799a10be09cc9d0167c8e881d"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:572763eb89cde71f2505b503c03694537129d260573b1617ce0d40c1eac6ce41",
+        "urn:company-wiki:evidence-span:sha256:9ede2e19bdcedc8275359e1b1371905b2748d7a799a10be09cc9d0167c8e881d",
+        "urn:company-wiki:evidence-span:sha256:ac1b5cf75a8342370d083c0e726bee4597c06bdf2b9a60862831d70cef28f8cb"
+      ]
+    },
+    {
+      "key": "t42",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:8d23dc427da51772ebb296a2de56581324dad4ddad548a2f36831be1007d4e7c"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:acdd6379f723fff039d83ca63b38b917569534102d83934834caaaa15f22a3ed",
+        "urn:company-wiki:evidence-span:sha256:f8187c87e131beb718f469565c97a11f285e01765dd49420b4db7d45104afc39"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:acdd6379f723fff039d83ca63b38b917569534102d83934834caaaa15f22a3ed",
+        "urn:company-wiki:evidence-span:sha256:f8187c87e131beb718f469565c97a11f285e01765dd49420b4db7d45104afc39",
+        "urn:company-wiki:evidence-span:sha256:8d23dc427da51772ebb296a2de56581324dad4ddad548a2f36831be1007d4e7c"
+      ]
+    },
+    {
+      "key": "t43",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:a71932fa8d82d7bcc5b248bddb0b648b1df1d291c603c4897b565e8feb333fb2"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:acdd6379f723fff039d83ca63b38b917569534102d83934834caaaa15f22a3ed",
+        "urn:company-wiki:evidence-span:sha256:e5d513a81ccc48c02d546623ea21f18c0cee5edef8a22d2cda274b1aac09c87f"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:acdd6379f723fff039d83ca63b38b917569534102d83934834caaaa15f22a3ed",
+        "urn:company-wiki:evidence-span:sha256:e5d513a81ccc48c02d546623ea21f18c0cee5edef8a22d2cda274b1aac09c87f",
+        "urn:company-wiki:evidence-span:sha256:a71932fa8d82d7bcc5b248bddb0b648b1df1d291c603c4897b565e8feb333fb2"
+      ]
+    },
+    {
+      "key": "t44",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:fe513e318c616cb387984bd335e56450a450a15b2226fbb701b43c909ea397fb"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:222faf7025c6e82a887e13ecd4036decaf5eaf5d6064f3a371ffc80e8121e7cc",
+        "urn:company-wiki:evidence-span:sha256:79496cbdc3683755aa7e2b989864c744c3135496bd4dda25c34ab319f0c36739"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:222faf7025c6e82a887e13ecd4036decaf5eaf5d6064f3a371ffc80e8121e7cc",
+        "urn:company-wiki:evidence-span:sha256:79496cbdc3683755aa7e2b989864c744c3135496bd4dda25c34ab319f0c36739",
+        "urn:company-wiki:evidence-span:sha256:fe513e318c616cb387984bd335e56450a450a15b2226fbb701b43c909ea397fb"
+      ]
+    },
+    {
+      "key": "t45",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:98fb1cf64fc4bebc7c4c5e321783c8cc637f174a0a9ab4d2d3013e405c8b2701"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:72628566d8d9553e07ddfba34aef24f6fcaa76825928ac60d5aeec253fe92537"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:72628566d8d9553e07ddfba34aef24f6fcaa76825928ac60d5aeec253fe92537",
+        "urn:company-wiki:evidence-span:sha256:98fb1cf64fc4bebc7c4c5e321783c8cc637f174a0a9ab4d2d3013e405c8b2701"
+      ]
+    },
+    {
+      "key": "t46",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:28543bb9ba2067814537bdff69b2522db2f85e8ff535827d2962d0c717985ea2"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:72628566d8d9553e07ddfba34aef24f6fcaa76825928ac60d5aeec253fe92537"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:72628566d8d9553e07ddfba34aef24f6fcaa76825928ac60d5aeec253fe92537",
+        "urn:company-wiki:evidence-span:sha256:28543bb9ba2067814537bdff69b2522db2f85e8ff535827d2962d0c717985ea2"
+      ]
+    },
+    {
+      "key": "t47",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:b2306ce70ff3bf0be24f0ced830679c709a2e1605c326638f157f0083c08e97b"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:72628566d8d9553e07ddfba34aef24f6fcaa76825928ac60d5aeec253fe92537"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:72628566d8d9553e07ddfba34aef24f6fcaa76825928ac60d5aeec253fe92537",
+        "urn:company-wiki:evidence-span:sha256:b2306ce70ff3bf0be24f0ced830679c709a2e1605c326638f157f0083c08e97b"
+      ]
+    },
+    {
+      "key": "t48",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:544160d1ad90d539ad4a42df21688a5646c4dbcd37ec32bbed70aa6ad5f4e4f4"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:72628566d8d9553e07ddfba34aef24f6fcaa76825928ac60d5aeec253fe92537",
+        "urn:company-wiki:evidence-span:sha256:aca347581215c8b0954f5a13cb04cebf4f89a0c7e8f68518a0e12addb2e50bca"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:72628566d8d9553e07ddfba34aef24f6fcaa76825928ac60d5aeec253fe92537",
+        "urn:company-wiki:evidence-span:sha256:aca347581215c8b0954f5a13cb04cebf4f89a0c7e8f68518a0e12addb2e50bca",
+        "urn:company-wiki:evidence-span:sha256:544160d1ad90d539ad4a42df21688a5646c4dbcd37ec32bbed70aa6ad5f4e4f4"
+      ]
+    },
+    {
+      "key": "t49",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:f61d1e447addaf2528f23c7043bfacc7767b70f4ff0717580421a79e28515a0b"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:f1cd144e5db87b02023e0f0e1ad05fa1940e72ea716edc85c16807767cc09b14",
+        "urn:company-wiki:evidence-span:sha256:d0e3e6338d95e38d4afadf0f6b4719b7867cf1d523dc94579ef86fea8381a597"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:f1cd144e5db87b02023e0f0e1ad05fa1940e72ea716edc85c16807767cc09b14",
+        "urn:company-wiki:evidence-span:sha256:d0e3e6338d95e38d4afadf0f6b4719b7867cf1d523dc94579ef86fea8381a597",
+        "urn:company-wiki:evidence-span:sha256:f61d1e447addaf2528f23c7043bfacc7767b70f4ff0717580421a79e28515a0b"
+      ]
+    },
+    {
+      "key": "t50",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:91753bcf94a3d0566ff8107dbeca9c80f071bdd29ac8c56ec1acb0e9ef2523b1"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:f1cd144e5db87b02023e0f0e1ad05fa1940e72ea716edc85c16807767cc09b14",
+        "urn:company-wiki:evidence-span:sha256:d0e3e6338d95e38d4afadf0f6b4719b7867cf1d523dc94579ef86fea8381a597"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:f1cd144e5db87b02023e0f0e1ad05fa1940e72ea716edc85c16807767cc09b14",
+        "urn:company-wiki:evidence-span:sha256:d0e3e6338d95e38d4afadf0f6b4719b7867cf1d523dc94579ef86fea8381a597",
+        "urn:company-wiki:evidence-span:sha256:91753bcf94a3d0566ff8107dbeca9c80f071bdd29ac8c56ec1acb0e9ef2523b1"
+      ]
+    },
+    {
+      "key": "t51",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:546dd1857bfe553a60298802c085692d459e16695dd50d5882dcd296263486aa"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:9f9071677d2fcf0b8a66fe92fc9bda9f2c36cdd6d10aed83016522fa74234fa0",
+        "urn:company-wiki:evidence-span:sha256:5ff7aeeeb14c5389cff3be27a910c2c4b96ebc3babf90484df82cd87e7101955"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:9f9071677d2fcf0b8a66fe92fc9bda9f2c36cdd6d10aed83016522fa74234fa0",
+        "urn:company-wiki:evidence-span:sha256:5ff7aeeeb14c5389cff3be27a910c2c4b96ebc3babf90484df82cd87e7101955",
+        "urn:company-wiki:evidence-span:sha256:546dd1857bfe553a60298802c085692d459e16695dd50d5882dcd296263486aa"
+      ]
+    },
+    {
+      "key": "t52",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:d62e09a4319be830f845c02f80cc0d1bc19b798c745f74fdf710b08c8c5957a2"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:d1a1f54352acf28ffffb3e07216aae00d8845075f216681bd77c8e662af76f96",
+        "urn:company-wiki:evidence-span:sha256:17e287fc5802bcf23341da2b6eca9e36d73357b817f40a63962ac20143c21db7"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:d1a1f54352acf28ffffb3e07216aae00d8845075f216681bd77c8e662af76f96",
+        "urn:company-wiki:evidence-span:sha256:17e287fc5802bcf23341da2b6eca9e36d73357b817f40a63962ac20143c21db7",
+        "urn:company-wiki:evidence-span:sha256:d62e09a4319be830f845c02f80cc0d1bc19b798c745f74fdf710b08c8c5957a2"
+      ]
+    },
+    {
+      "key": "t53",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:04ec2c57a801c239bd4c93a283dece497e76c4b1feac1d64dd7f1d3400c9dd55"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:c935d83fcfca8453e4ae1b0fe627e7dbc872f98f6f5f343052dfcbc9fa9fed76",
+        "urn:company-wiki:evidence-span:sha256:96f84fc17614d17aeee56f76c973ce8187a554c0fa3341bcd3a74d2631d3db99",
+        "urn:company-wiki:evidence-span:sha256:6d478b05cc11cf00d4b5b80c8c1c0704ef99ec63b56afb8bb51acc1cb0839367"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:c935d83fcfca8453e4ae1b0fe627e7dbc872f98f6f5f343052dfcbc9fa9fed76",
+        "urn:company-wiki:evidence-span:sha256:96f84fc17614d17aeee56f76c973ce8187a554c0fa3341bcd3a74d2631d3db99",
+        "urn:company-wiki:evidence-span:sha256:6d478b05cc11cf00d4b5b80c8c1c0704ef99ec63b56afb8bb51acc1cb0839367",
+        "urn:company-wiki:evidence-span:sha256:04ec2c57a801c239bd4c93a283dece497e76c4b1feac1d64dd7f1d3400c9dd55"
+      ]
+    },
+    {
+      "key": "t54",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:79fc54e2ef469b6d79a5578342cd2ce48e730062217dcd9ebff297cbfba13ffb"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:7d4fa238bf792da099d830146d7d942cc1d38cc56ec94aea95514141706a0895",
+        "urn:company-wiki:evidence-span:sha256:4110925722a80ddec7af9bdd2e0326b57b6f308b76a7f7b4912e25c30eb9d4f8",
+        "urn:company-wiki:evidence-span:sha256:170f010d76867b7d62d3a9f9e2865db82743d8b24802c07019a30653e0026e3a"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:7d4fa238bf792da099d830146d7d942cc1d38cc56ec94aea95514141706a0895",
+        "urn:company-wiki:evidence-span:sha256:4110925722a80ddec7af9bdd2e0326b57b6f308b76a7f7b4912e25c30eb9d4f8",
+        "urn:company-wiki:evidence-span:sha256:170f010d76867b7d62d3a9f9e2865db82743d8b24802c07019a30653e0026e3a",
+        "urn:company-wiki:evidence-span:sha256:79fc54e2ef469b6d79a5578342cd2ce48e730062217dcd9ebff297cbfba13ffb"
+      ]
+    },
+    {
+      "key": "t55",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:b1c4e29033c83644732f1b8e73a58f215c63b013d246917e7aa8b6f07222a7ae"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:372514d98fa118b3a65f6daf0ea77ca6969347f00ad9dd64034b10139762124a"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:372514d98fa118b3a65f6daf0ea77ca6969347f00ad9dd64034b10139762124a",
+        "urn:company-wiki:evidence-span:sha256:b1c4e29033c83644732f1b8e73a58f215c63b013d246917e7aa8b6f07222a7ae"
+      ]
+    },
+    {
+      "key": "t56",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:7488fa3c1470678cdc9898ac7411924a9f453e84ac332b06ff548c973d2552ff"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:1e0b11f7f6af90a9d1894c4d6ac329f73d116650679e3acd7c93f36a3c6dd3dd",
+        "urn:company-wiki:evidence-span:sha256:afbabf12e76c7f81e28556b9398a59ce168a9a4f6d6f11aa8d671ace67d09adf",
+        "urn:company-wiki:evidence-span:sha256:6d3b4331f8704f83f6d4f71e316e628dd09b151574069a4722b0830918e9499e"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:1e0b11f7f6af90a9d1894c4d6ac329f73d116650679e3acd7c93f36a3c6dd3dd",
+        "urn:company-wiki:evidence-span:sha256:afbabf12e76c7f81e28556b9398a59ce168a9a4f6d6f11aa8d671ace67d09adf",
+        "urn:company-wiki:evidence-span:sha256:6d3b4331f8704f83f6d4f71e316e628dd09b151574069a4722b0830918e9499e",
+        "urn:company-wiki:evidence-span:sha256:7488fa3c1470678cdc9898ac7411924a9f453e84ac332b06ff548c973d2552ff"
+      ]
+    },
+    {
+      "key": "t57",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:ff7d8bb2a13707eb88051bbcba3742317e92bfdc1613d910f19b75f72276c031"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:766104c93fdf16cd0bc0cab50cf3a0c68e0ac79fa7711569d5c958407a462b5b",
+        "urn:company-wiki:evidence-span:sha256:768cb4014d61ad8842126c1c220761ba5ee9ec28fe6fbe0f4e7089bfd700a6c3",
+        "urn:company-wiki:evidence-span:sha256:9d36e3d27e21d20ecfc4fc1e3a6f6ab03eeceb16dd64f4a13bb56d997824a9b4"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:766104c93fdf16cd0bc0cab50cf3a0c68e0ac79fa7711569d5c958407a462b5b",
+        "urn:company-wiki:evidence-span:sha256:768cb4014d61ad8842126c1c220761ba5ee9ec28fe6fbe0f4e7089bfd700a6c3",
+        "urn:company-wiki:evidence-span:sha256:9d36e3d27e21d20ecfc4fc1e3a6f6ab03eeceb16dd64f4a13bb56d997824a9b4",
+        "urn:company-wiki:evidence-span:sha256:ff7d8bb2a13707eb88051bbcba3742317e92bfdc1613d910f19b75f72276c031"
+      ]
+    },
+    {
+      "key": "t58",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:11289cb88f295e036f22e22b5bfef0bc03df23634a30368f74b997597ac1426d"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:766104c93fdf16cd0bc0cab50cf3a0c68e0ac79fa7711569d5c958407a462b5b",
+        "urn:company-wiki:evidence-span:sha256:768cb4014d61ad8842126c1c220761ba5ee9ec28fe6fbe0f4e7089bfd700a6c3",
+        "urn:company-wiki:evidence-span:sha256:9d36e3d27e21d20ecfc4fc1e3a6f6ab03eeceb16dd64f4a13bb56d997824a9b4"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:766104c93fdf16cd0bc0cab50cf3a0c68e0ac79fa7711569d5c958407a462b5b",
+        "urn:company-wiki:evidence-span:sha256:768cb4014d61ad8842126c1c220761ba5ee9ec28fe6fbe0f4e7089bfd700a6c3",
+        "urn:company-wiki:evidence-span:sha256:9d36e3d27e21d20ecfc4fc1e3a6f6ab03eeceb16dd64f4a13bb56d997824a9b4",
+        "urn:company-wiki:evidence-span:sha256:11289cb88f295e036f22e22b5bfef0bc03df23634a30368f74b997597ac1426d"
+      ]
+    },
+    {
+      "key": "t59",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:6b97ac2bd1d23c5d9718beb0588cfc4e5e600254004f7b4777750f4e0b544e54"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:32d6c5dd366cd88c75ece6c4a725092153b4244f902c4e270eb49e821dff7912",
+        "urn:company-wiki:evidence-span:sha256:2ed262dbb55719e30b3aa7f323a35c698f3de131d6d8a1371acb696604092923",
+        "urn:company-wiki:evidence-span:sha256:678d9b68130b79e61565018f2a2b80851608f39c7ea49d4ef00dad2f3e2926cc"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:32d6c5dd366cd88c75ece6c4a725092153b4244f902c4e270eb49e821dff7912",
+        "urn:company-wiki:evidence-span:sha256:2ed262dbb55719e30b3aa7f323a35c698f3de131d6d8a1371acb696604092923",
+        "urn:company-wiki:evidence-span:sha256:678d9b68130b79e61565018f2a2b80851608f39c7ea49d4ef00dad2f3e2926cc",
+        "urn:company-wiki:evidence-span:sha256:6b97ac2bd1d23c5d9718beb0588cfc4e5e600254004f7b4777750f4e0b544e54"
+      ]
+    },
+    {
+      "key": "t60",
+      "kind": "native_continuity",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:ff2b5b9cade231e22a5998701d701f747edcd77dcb8215b6f9bec14aa2e91d3f"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:32d6c5dd366cd88c75ece6c4a725092153b4244f902c4e270eb49e821dff7912",
+        "urn:company-wiki:evidence-span:sha256:2ed262dbb55719e30b3aa7f323a35c698f3de131d6d8a1371acb696604092923",
+        "urn:company-wiki:evidence-span:sha256:678d9b68130b79e61565018f2a2b80851608f39c7ea49d4ef00dad2f3e2926cc"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:32d6c5dd366cd88c75ece6c4a725092153b4244f902c4e270eb49e821dff7912",
+        "urn:company-wiki:evidence-span:sha256:2ed262dbb55719e30b3aa7f323a35c698f3de131d6d8a1371acb696604092923",
+        "urn:company-wiki:evidence-span:sha256:678d9b68130b79e61565018f2a2b80851608f39c7ea49d4ef00dad2f3e2926cc",
+        "urn:company-wiki:evidence-span:sha256:ff2b5b9cade231e22a5998701d701f747edcd77dcb8215b6f9bec14aa2e91d3f"
+      ]
+    }
+  ],
+  "actual_payload_available_task_keys": [
+    "t1",
+    "t2",
+    "t3",
+    "t4",
+    "t5",
+    "t6",
+    "t7",
+    "t8",
+    "t9",
+    "t10",
+    "t11",
+    "t12",
+    "t13",
+    "t14",
+    "t15",
+    "t16",
+    "t17",
+    "t18",
+    "t19",
+    "t20",
+    "t21",
+    "t22",
+    "t23",
+    "t24",
+    "t25",
+    "t26",
+    "t27",
+    "t28",
+    "t29",
+    "t30",
+    "t31",
+    "t32",
+    "t33",
+    "t34",
+    "t35",
+    "t36",
+    "t37",
+    "t38",
+    "t39",
+    "t40",
+    "t41",
+    "t42",
+    "t43",
+    "t44",
+    "t45",
+    "t46",
+    "t47",
+    "t48",
+    "t49",
+    "t50",
+    "t51",
+    "t52",
+    "t53",
+    "t54",
+    "t55",
+    "t56",
+    "t57",
+    "t58",
+    "t59",
+    "t60"
+  ],
+  "compiler_status": "COMPILED_ACTUAL_V4_INPUT_NOT_SENT",
+  "status": "COMPLETE_BOUNDED_SOURCE_INPUT_PRECHECK",
+  "gold_source_observations": [
+    {
+      "fact_id": "total-revenue-h1-2025",
+      "target_kind": "correctness_if_emitted",
+      "any_support_sets": [
+        [
+          {
+            "atom": {
+              "exact_quote": "截至二零二五年六月三十日止六個月的財務摘要",
+              "page": 5,
+              "location_kind": "page"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": []
+          },
+          {
+            "atom": {
+              "exact_quote": "截至六月三十日止六個月\n同比變動\n二零二四年\n二零二五年\n人民幣千元\n人民幣千元\n%",
+              "page": 5,
+              "location_kind": "page"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": []
+          },
+          {
+            "atom": {
+              "exact_quote": "收入\n3,667,464\n4,319,204\n17.8%",
+              "page": 5,
+              "location_kind": "page"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": []
+          }
+        ]
+      ],
+      "semantic_status": "PENDING_INDEPENDENT_MANUAL_REVIEW"
+    },
+    {
+      "fact_id": "segment-revenue-split",
+      "target_kind": "correctness_if_emitted",
+      "any_support_sets": [
+        [
+          {
+            "atom": {
+              "exact_quote": "截至二零二五年六月三十日止六個月的財務摘要",
+              "page": 5,
+              "location_kind": "page"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": []
+          },
+          {
+            "atom": {
+              "exact_quote": "（除股數和每股數據外，所有金額以千計）\n截至六月三十日止六個月\n二零二四年\n二零二五年\n二零二五年\n人民幣\n人民幣\n美元",
+              "page": 12,
+              "location_kind": "page"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": []
+          },
+          {
+            "atom": {
+              "exact_quote": "公有雲服務\n2,421,912\n2,978,788\n415,823",
+              "page": 12,
+              "location_kind": "page"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": []
+          },
+          {
+            "atom": {
+              "exact_quote": "行業雲服務\n1,245,400\n1,340,416\n187,115",
+              "page": 12,
+              "location_kind": "page"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": []
+          }
+        ]
+      ],
+      "semantic_status": "PENDING_INDEPENDENT_MANUAL_REVIEW"
+    },
+    {
+      "fact_id": "net-loss-us-gaap-widened",
+      "target_kind": "correctness_if_emitted",
+      "any_support_sets": [
+        [
+          {
+            "atom": {
+              "exact_quote": "截至二零二五年六月三十日止六個月的財務摘要",
+              "page": 5,
+              "location_kind": "page"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": []
+          },
+          {
+            "atom": {
+              "exact_quote": "截至六月三十日止六個月\n同比變動\n二零二四年\n二零二五年\n人民幣千元\n人民幣千元\n%",
+              "page": 5,
+              "location_kind": "page"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": []
+          },
+          {
+            "atom": {
+              "exact_quote": "淨虧損\n(717,334)\n(772,973)\n7.8%",
+              "page": 5,
+              "location_kind": "page"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": []
+          },
+          {
+            "atom": {
+              "exact_quote": "未經審計中期簡明合併財務資料乃根據美國公認會計準則（「美國公認會計準則」）編製。",
+              "page": 5,
+              "location_kind": "page"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": [
+              "urn:company-wiki:evidence-span:sha256:96143009f970eed9bfd2a8cb1e54565115aa8bae7adde6fe98072c0bd36b6859"
+            ]
+          }
+        ]
+      ],
+      "semantic_status": "PENDING_INDEPENDENT_MANUAL_REVIEW"
+    },
+    {
+      "fact_id": "us-gaap-basis-not-ifrs",
+      "target_kind": "disposition_context",
+      "any_support_sets": [
+        [
+          {
+            "atom": {
+              "exact_quote": "截至二零二五年六月三十日止六個月的財務摘要",
+              "page": 5,
+              "location_kind": "page"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": []
+          },
+          {
+            "atom": {
+              "exact_quote": "未經審計中期簡明財務報表乃根據美國公認會計準則編製，在若干方面有別於《國際財務報告準則》",
+              "page": 67,
+              "location_kind": "page"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": []
+          }
+        ]
+      ],
+      "semantic_status": "PENDING_INDEPENDENT_MANUAL_REVIEW"
+    },
+    {
+      "fact_id": "unit-and-fx-convention",
+      "target_kind": "disposition_context",
+      "any_support_sets": [
+        [
+          {
+            "atom": {
+              "exact_quote": "截至二零二五年六月三十日止六個月的財務摘要",
+              "page": 5,
+              "location_kind": "page"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": []
+          },
+          {
+            "atom": {
+              "exact_quote": "（除股數和每股數據外，所有金額以千計）\n截至六月三十日止六個月\n二零二四年\n二零二五年\n二零二五年\n人民幣\n人民幣\n美元",
+              "page": 12,
+              "location_kind": "page"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": []
+          },
+          {
+            "atom": {
+              "exact_quote": "（金額以人民幣千元（「人民幣」）及千美元（「美元」）列示，股份數目及每股數據除外）",
+              "page": 45,
+              "location_kind": "page"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": []
+          },
+          {
+            "atom": {
+              "exact_quote": "美元金額乃為方便讀者而呈列，並於二零二五年六月三十日在紐約市就經紐約聯邦儲備銀行海關核證的\n人民幣電匯轉賬以人民幣7.1636元兌1.00美元的中午買入匯率換算。概不表示人民幣金額可以或可能\n按該匯率兌換為美元。",
+              "page": 45,
+              "location_kind": "page"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": []
+          }
+        ]
+      ],
+      "semantic_status": "PENDING_INDEPENDENT_MANUAL_REVIEW"
+    },
+    {
+      "fact_id": "gross-margin-decline",
+      "target_kind": "required_business",
+      "any_support_sets": [
+        [
+          {
+            "atom": {
+              "exact_quote": "截至二零二五年六月三十日止六個月的財務摘要",
+              "page": 5,
+              "location_kind": "page"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": []
+          },
+          {
+            "atom": {
+              "exact_quote": "毛利為人民幣657.2百萬元（91.7百萬美元），較二零二四年同期的人民幣611.6百萬元增加7.4%。",
+              "page": 13,
+              "location_kind": "page"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": [
+              "urn:company-wiki:evidence-span:sha256:98e04598a679b1e733fbf8551d2adbc39e1ee2e8e0bc27cd50e1e8cb45cdc9e7"
+            ]
+          },
+          {
+            "atom": {
+              "exact_quote": "毛利率為15.2%，而二零二四年同期則為16.7%。該減\n少主要是由於隨著AI業務擴張，服務器成本增加，以及若干客戶的進一步營收活動所產生的前期成本。",
+              "page": 13,
+              "location_kind": "page"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": [
+              "urn:company-wiki:evidence-span:sha256:98e04598a679b1e733fbf8551d2adbc39e1ee2e8e0bc27cd50e1e8cb45cdc9e7"
+            ]
+          }
+        ]
+      ],
+      "semantic_status": "PENDING_INDEPENDENT_MANUAL_REVIEW"
+    },
+    {
+      "fact_id": "adjusted-ebitda-nongaap",
+      "target_kind": "correctness_if_emitted",
+      "any_support_sets": [
+        [
+          {
+            "atom": {
+              "exact_quote": "截至二零二五年六月三十日止六個月的財務摘要",
+              "page": 5,
+              "location_kind": "page"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": []
+          },
+          {
+            "atom": {
+              "exact_quote": "非公認會計準則EBITDA為人民幣724.6百萬元（101.1百萬美元），較二零二四年同期的人民幣93.8百萬元增\n加672.6%。",
+              "page": 14,
+              "location_kind": "page"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": []
+          }
+        ]
+      ],
+      "semantic_status": "PENDING_INDEPENDENT_MANUAL_REVIEW"
+    },
+    {
+      "fact_id": "capex-vs-revenue",
+      "target_kind": "correctness_if_emitted",
+      "any_support_sets": [
+        [
+          {
+            "atom": {
+              "exact_quote": "截至二零二四年及二零二五年六月三十日止六個月\n未經審計中期簡明合併現金流量表\n（金額以人民幣千元（「人民幣」）及千美元（「美元」）列示，股份數目及每股數據除外）",
+              "page": 41,
+              "location_kind": "page"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": []
+          },
+          {
+            "atom": {
+              "exact_quote": "截至六月三十日止六個月\n二零二四年\n二零二五年\n二零二五年\n人民幣\n人民幣\n美元",
+              "page": 41,
+              "location_kind": "page"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": []
+          },
+          {
+            "atom": {
+              "exact_quote": "投資活動產生的現金流量\n購買物業及設備及預付款項\n(1,866,298)\n(1,483,742)\n(207,123)",
+              "page": 41,
+              "location_kind": "page"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": []
+          }
+        ]
+      ],
+      "semantic_status": "PENDING_INDEPENDENT_MANUAL_REVIEW"
+    },
+    {
+      "fact_id": "no-material-investments-or-capex-plans",
+      "target_kind": "required_business",
+      "any_support_sets": [
+        [
+          {
+            "atom": {
+              "exact_quote": "截至二零二五年六月三十日，本集團並無持有任何重大投資（包括對被投資公司的任何投資價值佔本集團截\n至二零二五年六月三十日總資產的5%或以上）。截至二零二五年六月三十日，本集團並無任何未來重大投資\n及資本資產計劃。",
+              "page": 15,
+              "location_kind": "page"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": [
+              "urn:company-wiki:evidence-span:sha256:d3441e90a6a573de8117ecda4d1eb2804da1ee739b21e431afbe81a792ea18f4"
+            ]
+          }
+        ]
+      ],
+      "semantic_status": "PENDING_INDEPENDENT_MANUAL_REVIEW"
+    },
+    {
+      "fact_id": "h2-2025-business-outlook",
+      "target_kind": "required_business",
+      "any_support_sets": [
+        [
+          {
+            "atom": {
+              "exact_quote": "截至二零二五年六月三十日止六個月的財務摘要",
+              "page": 5,
+              "location_kind": "page"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": []
+          },
+          {
+            "atom": {
+              "exact_quote": "展望下半年，我們將維持高質量發展和可持續發展戰略，不斷投資技術研發，並全面提升AI能力。同時，我\n們將積極擁抱AI時代小米和金山生態系統的雲需求。",
+              "page": 11,
+              "location_kind": "page"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": []
+          }
+        ]
+      ],
+      "semantic_status": "PENDING_INDEPENDENT_MANUAL_REVIEW"
+    },
+    {
+      "fact_id": "single-operating-segment",
+      "target_kind": "required_business",
+      "any_support_sets": [
+        [
+          {
+            "atom": {
+              "exact_quote": "本集團整體表現的決策時審閱合併經營業績，因此本集團僅有一個經營分部。",
+              "page": 50,
+              "location_kind": "page"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": [
+              "urn:company-wiki:evidence-span:sha256:6b97ac2bd1d23c5d9718beb0588cfc4e5e600254004f7b4777750f4e0b544e54"
+            ]
+          },
+          {
+            "atom": {
+              "exact_quote": "本集團的大部分收入來自中國內地，且本集團的大部分長期資產位於中國內地，因此並無呈列地區分\n部。",
+              "page": 50,
+              "location_kind": "page"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": []
+          }
+        ]
+      ],
+      "semantic_status": "PENDING_INDEPENDENT_MANUAL_REVIEW"
+    },
+    {
+      "fact_id": "related-party-revenue",
+      "target_kind": "correctness_if_emitted",
+      "any_support_sets": [
+        [
+          {
+            "atom": {
+              "exact_quote": "（金額以人民幣千元（「人民幣」）及千美元（「美元」）列示，股份數目及每股數據除外）",
+              "page": 64,
+              "location_kind": "page"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": []
+          },
+          {
+            "atom": {
+              "exact_quote": "截至六月三十日止六個月\n二零二四年\n二零二五年\n二零二五年\n人民幣\n人民幣\n美元",
+              "page": 64,
+              "location_kind": "page"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": []
+          },
+          {
+            "atom": {
+              "exact_quote": "收益：\n 向小米集團提供公有雲服務\n490,133\n772,761\n107,873\n 向金山軟件集團提供公有雲服務\n136,596\n173,094\n24,163\n 向其他關聯方提供公有雲服務\n232\n336\n47\n 向小米集團提供行業雲服務\n67,117\n171,315\n23,915\n 向金山軟件集團提供行業雲服務\n7,996\n7,855\n1,097\n 向其他關聯方提供行業雲服務\n16\n–\n–\n 向其他關聯方提供其他服務\n291\n97\n14\n702,381\n1,125,458\n157,109",
+              "page": 64,
+              "location_kind": "page"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": []
+          }
+        ]
+      ],
+      "semantic_status": "PENDING_INDEPENDENT_MANUAL_REVIEW"
+    },
+    {
+      "fact_id": "interim-period-meta",
+      "target_kind": "disposition_context",
+      "any_support_sets": [
+        [
+          {
+            "atom": {
+              "exact_quote": "截至二零二五年六月三十日止六個月的財務摘要",
+              "page": 5,
+              "location_kind": "page"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": []
+          },
+          {
+            "atom": {
+              "exact_quote": "未經審計中期簡明合併財務資料乃根據美國公認會計準則（「美國公認會計準則」）編製。",
+              "page": 5,
+              "location_kind": "page"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": [
+              "urn:company-wiki:evidence-span:sha256:96143009f970eed9bfd2a8cb1e54565115aa8bae7adde6fe98072c0bd36b6859"
+            ]
+          }
+        ]
+      ],
+      "semantic_status": "PENDING_INDEPENDENT_MANUAL_REVIEW"
+    },
+    {
+      "fact_id": "cloud-revenue-operating-drivers",
+      "target_kind": "required_business",
+      "any_support_sets": [
+        [
+          {
+            "atom": {
+              "exact_quote": "截至二零二五年六月三十日止六個月的財務摘要",
+              "page": 5,
+              "location_kind": "page"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": []
+          },
+          {
+            "atom": {
+              "exact_quote": "該增加主要是由於AI相關客戶收入增長強勁及我們擴展行業雲項目，但部分被我們主動縮減提供予\n內容分發網絡(CDN)客戶的服務規模所抵銷。",
+              "page": 9,
+              "location_kind": "page"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": [
+              "urn:company-wiki:evidence-span:sha256:4f939ffa3ddcfaec2abf28e2f3432efe3295ba06d0e40db328329075bbd5c9ff"
+            ]
+          }
+        ]
+      ],
+      "semantic_status": "PENDING_INDEPENDENT_MANUAL_REVIEW"
+    },
+    {
+      "fact_id": "cloud-service-growth-causal-split",
+      "target_kind": "required_business",
+      "any_support_sets": [
+        [
+          {
+            "atom": {
+              "exact_quote": "截至二零二五年六月三十日止六個月的財務摘要",
+              "page": 5,
+              "location_kind": "page"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": []
+          },
+          {
+            "atom": {
+              "exact_quote": "來自公有雲服務的收入由二零二四年同期的人民幣2,421.9百萬元增加23.0%至人民幣2,978.8百萬元\n（415.8百萬美元）。該同比增加主要是由於AI相關服務增長。",
+              "page": 13,
+              "location_kind": "page"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": [
+              "urn:company-wiki:evidence-span:sha256:8821797dd42c3cb12244443a2c12fa285cf2e518b783e7f3e17134b75e21b699"
+            ]
+          },
+          {
+            "atom": {
+              "exact_quote": "來自行業雲服務的收入為人民幣1,340.4百萬元（187.1百萬美元），較二零二四年同期的人民幣1,245.4\n百萬元增加7.6%。該同比增加主要是由於不斷增長的IT需求及我們向垂直行業客戶複製行業解決方案\n的能力。",
+              "page": 13,
+              "location_kind": "page"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": []
+          }
+        ]
+      ],
+      "semantic_status": "PENDING_INDEPENDENT_MANUAL_REVIEW"
+    },
+    {
+      "fact_id": "idc-purchase-commitment-stage",
+      "target_kind": "required_business",
+      "any_support_sets": [
+        [
+          {
+            "atom": {
+              "exact_quote": "（金額以人民幣千元（「人民幣」）及千美元（「美元」）列示，股份數目及每股數據除外）",
+              "page": 66,
+              "location_kind": "page"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": []
+          },
+          {
+            "atom": {
+              "exact_quote": "於二零二五年六月一日，本集團簽訂一份不可取消一年期互聯網數據中心服務協議，據此，本集團作出\n合同最低採購承諾，總金額為人民幣630,000元（87,945美元）。截至二零二五年六月三十日，剩餘採\n購承諾金額為人民幣576,101元（80,421美元）。",
+              "page": 66,
+              "location_kind": "page"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": []
+          }
+        ]
+      ],
+      "semantic_status": "PENDING_INDEPENDENT_MANUAL_REVIEW"
+    }
+  ],
+  "work_budget": {
+    "used": 3644236,
+    "limit": 16000000,
+    "exhausted": false
+  },
+  "elapsed_seconds": 5.782,
+  "source_stable": true,
+  "protected_unchanged": true
+}

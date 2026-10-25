@@ -1,0 +1,24 @@
+{
+  "phase": "final",
+  "targets": [
+    "tests/test_phase_c_extractive.py::test_mother_budget_keeps_unknown_holds_without_a_second_global_stop",
+    "tests/test_phase_c_readonly_source.py::test_mother_total_keeps_baseline_unknown_and_deduplicates_native_attempts"
+  ],
+  "owned_test_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\cwdoc-vfr90v6k",
+  "exit_code": 0,
+  "elapsed_seconds": 3.07,
+  "temp_decisions": [
+    {
+      "event": "decision",
+      "requested_basetemp": "C:\\Users\\郑曾波\\Projects\\company-wiki\\cwdoc-vfr90v6k\\pytest",
+      "requested_basetemp_len": 56,
+      "cwd_len": 34,
+      "threshold": 60,
+      "win32_path_limit": 210,
+      "generation_reserve": 150,
+      "relocated": false,
+      "reason": "within-budget"
+    }
+  ],
+  "owned_test_root_restored_to_absent": true
+}

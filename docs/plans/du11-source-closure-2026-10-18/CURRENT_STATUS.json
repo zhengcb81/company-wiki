@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-25",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "SOURCE_INPUT12_PASS2_PARTIAL; CI06c_SIX_FAILURES_REPRODUCED_FOLLOWUP218_PASS_INDEPENDENT_PASS_READY_TO_PUBLISH; FORMAL_SUMMARY_RF_OPEN",
+  "overall_status": "483cb2a5_PUBLISHED_CI_SUCCESS; SOURCE_CROSS_MARKET_CF1_CF4_OPEN; FINALIZATION_TDD54_HOST_PASS_PLUS6_STORAGE_PASS_REVIEWING; FORMAL_SUMMARY_RF_OPEN",
   "parallel_packages_20261025": {
     "status": "ALL_THREE_DISPATCHED_BY_USER",
     "entry": "harness_lanes/20261025/README.md",
@@ -26,15 +26,15 @@
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
-  "last_code_commit": "06c1a5839302f4e297d70a13267a8aa490eef719",
+  "last_code_commit": "483cb2a56299cb28ca07bbd349674860baf04430",
   "code_ci": {
-    "id": 40190090649,
-    "head_sha": "06c1a5839302f4e297d70a13267a8aa490eef719",
+    "id": 40191425654,
+    "head_sha": "483cb2a56299cb28ca07bbd349674860baf04430",
     "status": "completed",
-    "conclusion": "failure",
-    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40190090649",
-    "created_at": "2026-10-25T11:43:55Z",
-    "updated_at": "2026-10-25T11:48:21Z"
+    "conclusion": "success",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40191425654",
+    "created_at": "2026-10-25T12:02:59Z",
+    "updated_at": "2026-10-25T12:07:16Z"
   },
   "formal_v4_offline_selection_replay_20261025": {
     "status": "EXACT_REPRODUCED_NO_PAID_CALL",
@@ -306,7 +306,7 @@
     {
       "id": "R1",
       "task": "freeze independent-company holdout and run RF audit loop",
-      "status": "CURRENT_SOURCE_INPUT12_PASS2_PARTIAL; LOCAL_FLOW06c_SOURCE_PASS_CI_FAILURE_FOLLOWUP218_PASS_REVIEWING; FORMAL_RESPONSES_NOT_REVIEWED; CURRENT_RF_OPEN; W16_W17_W18_ISOLATED",
+      "status": "ANNUAL14_SOURCE12_2; CROSS_MARKET_CF1_CF4_SHARED_SOURCE_DEFECTS_OPEN; FINALIZATION_ACCOUNTING_FIX_REVIEWING; FORMAL_RESPONSES_NOT_REVIEWED; RF_OPEN; THREE_AUTHOR_WORKTREES_ISOLATED",
       "mainline": true
     },
     {
@@ -335,7 +335,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "Normal commit/push of independently passed CI followup and exactHEAD CI observation. Source/input14 regrade12PASS2PARTIAL complete; independent cross-market/document source preflight active. Then configured formal summary/cache recovery/actual RF complete-financial-source adoption. W16/W17/W18 author paths stay isolated.",
+  "next_step_now": "Receive frozen finalization/accounting fix independent review, fix any material findings, normal commit/push. Then CF1-CF4 shared source work: native HTML outline/list observations, PDF incomplete fragment/continuation and selected factual coverage, IPO structure/candidate scan reuse using measured hotspots. Keep configured16M/112 and frozen source/gold. No new paid summaries until this source node is actually adequate; no permission receipt chain. W16/W17/W18 author paths stay isolated.",
   "parallel_work_packages": [
     {
       "id": "IR-REPORT-GENERATION",
@@ -394,13 +394,13 @@
   "r1_stage_ref": "r1-holdout-20261021/stage-progress.json",
   "r1_freeze_review": "review/r1-holdout-freeze-review-20261021.json",
   "last_verified_successful_code_ci": {
-    "id": 40185824736,
-    "head_sha": "8a258b93404f351ae92cd3449198b42141ef4169",
+    "id": 40191425654,
+    "head_sha": "483cb2a56299cb28ca07bbd349674860baf04430",
     "status": "completed",
     "conclusion": "success",
-    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40185824736",
-    "created_at": "2026-10-25T10:41:44Z",
-    "updated_at": "2026-10-25T10:46:55Z"
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40191425654",
+    "created_at": "2026-10-25T12:02:59Z",
+    "updated_at": "2026-10-25T12:07:16Z"
   },
   "r5_integration_ref": "r1-holdout-20261021/r5-integration.json",
   "r1_four_review_ref": "r1-holdout-20261021/initial-audit/four-review-observation.json",
@@ -1957,7 +1957,7 @@
   },
   "last_source_product_commit": "06c1a5839302f4e297d70a13267a8aa490eef719",
   "a01_a05_local_flow_20261025": {
-    "status": "SOURCE_INPUT_INDEPENDENT_PASS12_2; EXACT06c_CI_FAILED6; ROOT_FOLLOWUP218_PASS_INDEPENDENT_PASS_READY_TO_PUBLISH",
+    "status": "SOURCE_INPUT_INDEPENDENT_PASS12_2; CI_FOLLOWUP483cb2a5_EXACT_CI_SUCCESS",
     "evidence": "review/st-a05-local-flow-20261025/README.md",
     "verification": "review/st-a05-local-flow-20261025/verification.json",
     "source_pages": 249,
@@ -1986,7 +1986,7 @@
     "publication": "review/st-a05-local-flow-20261025/publication.json"
   },
   "a01_a05_ci_followup_20261025": {
-    "status": "218_PASS_INDEPENDENT_PASS_READY_TO_PUBLISH",
+    "status": "PUBLISHED_EXACT_HEAD_CI_SUCCESS",
     "evidence": "review/st-a05-local-flow-20261025/ci-followup.md",
     "initial_reproduction": "6 failed122 passed in same4 files",
     "actual_root_red": "defaults/compiler2fail; valid-hash handler diagnostic1fail; earlier invalid-hash fixture attempts retained separately",
@@ -2002,6 +2002,38 @@
     "no_runtime_catalog_change": true,
     "new_model_calls": 0,
     "new_downloads": 0,
-    "independent_review": "review/st-a05-local-flow-20261025/independent/ci-followup-review.json"
+    "independent_review": "review/st-a05-local-flow-20261025/independent/ci-followup-review.json",
+    "commit": "483cb2a56299cb28ca07bbd349674860baf04430",
+    "publication": "review/st-a05-local-flow-20261025/ci-followup-publication.json"
+  },
+  "cross_market_local_flow_20261025": {
+    "status": "INDEPENDENT_REAL_PREFLIGHT_FOUND_SHARED_SOURCE_GAPS",
+    "head": "483cb2a56299cb28ca07bbd349674860baf04430",
+    "report": "review/local-flow-cross-market-20261025/final-report.json",
+    "US": "7PASS1PARTIAL strict subject hierarchy; broad old8quote-any not adequate",
+    "HK": "bare compiler joint targets1PASS4PARTIAL2MISSING; document period may validly be supplied once by verified shared envelope, not required to repeat page5 in everytask",
+    "IPO": "NO_FORMAL_CONTENT_GOLD; parse420052/total15999740 of16M;0spans honest stop",
+    "profile": "review/local-flow-cross-market-20261025/ipo-profile.json",
+    "understand_units_accepted_delta": 11473800,
+    "candidates_accepted_delta": 4091862,
+    "native_parse_proportion": "2.6% of logical work; not CPU time",
+    "ROOT_raw_DOM_evidence": "review/local-flow-root-causes-20261025/html-source-shape.json",
+    "implementation_plan": "review/local-flow-root-causes-20261025/implementation_plan.md",
+    "new_model_calls": 0,
+    "downloads": 0,
+    "raw_copies": 0,
+    "protected_source_config_catalog_unchanged": true
+  },
+  "formal_v4_operation_20261025": {
+    "status": "ENGINEERING_INDEPENDENT_PASS_READY_TO_PUBLISH; NOT_EXECUTED_SOURCE_GAPS_OPEN",
+    "entry": "review/production-v4-formal-20261025/README.md",
+    "verification": "review/production-v4-formal-20261025/finalization-verification.json",
+    "new_source_technical_code": "Existing phase_c_runner only; no new client/store/ledger",
+    "changes": "Nested finally removes owned lake on accounting/observation faults; unknown full request hold in existing ledger and per-run max dedup/release; unknown delta is null, not0",
+    "test_evidence": "Host4files59PASS/66.50s before journal-binding delta; binding3trueRED then finalization12PASS/11.77s; legacy mother2PASS/1.53s; overlapping not summed; Ruff/diffcheck PASS; tmp restored",
+    "api_calls": 0,
+    "manual_receipt_permission_added": false,
+    "accounting_recovery": "Same ledger fallback binds durable native-usage SHA; offline CLI after AUTO DB removed, same-key release/idempotency; absent or changed journal stays unknown, no model POST",
+    "independent_review": "review/production-v4-formal-20261025/independent/finalization-final-review.json"
   }
 }

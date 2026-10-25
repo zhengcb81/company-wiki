@@ -1,0 +1,3850 @@
+{
+  "case_id": "us-10k",
+  "source_ref": {
+    "document_id": "urn:company-wiki:document:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+    "source_id": "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+    "content_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+    "byte_size": 8158067,
+    "mime_type": "text/html",
+    "schema_version": "2.0"
+  },
+  "source_sha_verified": true,
+  "title": "Microsoft 10-K FY2025",
+  "declared_kind": "annual_report",
+  "language": "en",
+  "gold_path": "tools\\document_understanding_benchmark\\gold\\us-10k.du11-v2-20261024.json",
+  "gold_sha256": "4dd0875a81b82508cf02f874e80df6d712da2ee756a26f44feee5f5f7e28a2a8",
+  "gold_status": "FROZEN_DEVELOPMENT_GOLD",
+  "selector": "0.9.0",
+  "requested_max_selected": 112,
+  "summary_projection": "reading-model-input/4",
+  "parse_select_share_same_WorkBudget": false,
+  "model_calls": 0,
+  "downloads": 0,
+  "raw_copies": 0,
+  "parse_entry": "normalize_document(text/html), existing finite NormalizationLimits; HTML parser has no WorkBudget parameter",
+  "parse_work": 0,
+  "parsed_unit_count": 5215,
+  "parsed_page_count": 0,
+  "selection": {
+    "status": "partial",
+    "coverage_complete": true,
+    "selection_limit": 112,
+    "candidate_count": 484,
+    "omitted_candidate_count": 372,
+    "dropped_financial_count": 149,
+    "diagnostics": [
+      {
+        "code": "budget_full",
+        "count": 308,
+        "phase": "selection",
+        "external_model_cost": false,
+        "targets": [
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:0835468b2a8e504d4d273a7009f571662ba5b3e8c1ecdf7fced1ee1709b6408b",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:0835468b2a8e504d4d273a7009f571662ba5b3e8c1ecdf7fced1ee1709b6408b"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/paragraph:1058",
+            "used": 112,
+            "requested": 3,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:d6dccf536af9fac1d6c08efdf088f4b2ad450ccd31b5ec6b11c1c6eb6b795070",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:d6dccf536af9fac1d6c08efdf088f4b2ad450ccd31b5ec6b11c1c6eb6b795070"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/paragraph:1059",
+            "used": 112,
+            "requested": 3,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:996d40379d0bab8a6527de919713a6002558e48e7c5a5222469f73217ff10472",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:996d40379d0bab8a6527de919713a6002558e48e7c5a5222469f73217ff10472"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/paragraph:1060",
+            "used": 112,
+            "requested": 3,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:b51445fe9254ecd5fef519bce8d630bd53da2acce9a1797092630821d9238905",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:b51445fe9254ecd5fef519bce8d630bd53da2acce9a1797092630821d9238905"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/paragraph:1061",
+            "used": 112,
+            "requested": 3,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:fe08d9bbbef79874ef60c23eb7e8dccf93348cdcfd7e25b8a8284b65537b7578",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:fe08d9bbbef79874ef60c23eb7e8dccf93348cdcfd7e25b8a8284b65537b7578"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/paragraph:1062",
+            "used": 112,
+            "requested": 3,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:195a743c9ec9de3f9b9abe1db4789997bdb2fb58c015fbb3ed95716da1dc30d4",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:195a743c9ec9de3f9b9abe1db4789997bdb2fb58c015fbb3ed95716da1dc30d4"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/paragraph:1063",
+            "used": 112,
+            "requested": 3,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:b7eae53691d47bd80242ed97679d4164765c616acd4caad8db99c871f2f3ee71",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:b7eae53691d47bd80242ed97679d4164765c616acd4caad8db99c871f2f3ee71"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/paragraph:1064",
+            "used": 112,
+            "requested": 3,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:d8066717aebcf7ba18c5528e66f1456d7528af8c5631d3248dee6ca75e706661",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:d8066717aebcf7ba18c5528e66f1456d7528af8c5631d3248dee6ca75e706661"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/paragraph:1066",
+            "used": 112,
+            "requested": 3,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:9b08cf01b0cd975e3b86b52ec4c5479e33209f401aa35bcb5411f5524364d01b",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:9b08cf01b0cd975e3b86b52ec4c5479e33209f401aa35bcb5411f5524364d01b"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/paragraph:1067",
+            "used": 112,
+            "requested": 3,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:b67f7b3183befe0e6eece7abfd7f301c810e2c7a924a38d89265433f8457f1a1",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:b67f7b3183befe0e6eece7abfd7f301c810e2c7a924a38d89265433f8457f1a1"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/paragraph:1068",
+            "used": 112,
+            "requested": 3,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:4342d4a835e7d0480d86dee37989652783f83f2a4b108a722a9c97a92d4141bf",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:4342d4a835e7d0480d86dee37989652783f83f2a4b108a722a9c97a92d4141bf"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/paragraph:1073",
+            "used": 112,
+            "requested": 3,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:38a69261551f34509bc441c1cfc4bdbd9dd62a643f7336bf793a353792f88890",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:38a69261551f34509bc441c1cfc4bdbd9dd62a643f7336bf793a353792f88890"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/paragraph:1074",
+            "used": 112,
+            "requested": 3,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:7a82eedc14c50b2c20942063e4ad4880fd5cd1c67be4039c6b6b40d5d615d4e5",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:7a82eedc14c50b2c20942063e4ad4880fd5cd1c67be4039c6b6b40d5d615d4e5"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/paragraph:1075",
+            "used": 112,
+            "requested": 3,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:8d23e8011b03076a86ae912f56090df1df8be0c38153f6828a2eb35b25279432",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:8d23e8011b03076a86ae912f56090df1df8be0c38153f6828a2eb35b25279432"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/paragraph:1076",
+            "used": 112,
+            "requested": 3,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:60651aed128dd0bd4587069bb11735b546c294b27d8f227fd510bf048c01b3dc",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:60651aed128dd0bd4587069bb11735b546c294b27d8f227fd510bf048c01b3dc"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/paragraph:1077",
+            "used": 112,
+            "requested": 3,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:2a422660b24f835968e0a2548628cefd3f50e93ca91dda790505acf5857642f3",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:2a422660b24f835968e0a2548628cefd3f50e93ca91dda790505acf5857642f3"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/paragraph:1078",
+            "used": 112,
+            "requested": 3,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:cd5f55899262befb0dd6c97df3faecedc382dcc4e42ed3a4fbab7687fedfa579",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:cd5f55899262befb0dd6c97df3faecedc382dcc4e42ed3a4fbab7687fedfa579"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/paragraph:1079",
+            "used": 112,
+            "requested": 3,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:007a2ae7f86f66af566747012c20b88841a07ecb92609d41352b64caecc36d98",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:007a2ae7f86f66af566747012c20b88841a07ecb92609d41352b64caecc36d98"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/paragraph:1080",
+            "used": 112,
+            "requested": 3,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:4846c2d7739ccd0716cfacdf705fa43f24d737372bcdeadb8db241afa7989d32",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:4846c2d7739ccd0716cfacdf705fa43f24d737372bcdeadb8db241afa7989d32"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/paragraph:1081",
+            "used": 112,
+            "requested": 3,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:eeb707ed7a9eb6e7798e51e420c44016a7fc720bd2637f937abed677aedd26df",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:eeb707ed7a9eb6e7798e51e420c44016a7fc720bd2637f937abed677aedd26df"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/paragraph:1085",
+            "used": 112,
+            "requested": 3,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:cdfcf037a0d99721d40bd3b834a7cdb37952f5764eb2b64d5623e8c731509845",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:cdfcf037a0d99721d40bd3b834a7cdb37952f5764eb2b64d5623e8c731509845"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/paragraph:1088",
+            "used": 112,
+            "requested": 3,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:36ec0a700d5d5b541d8387d93f951ab04120a6db780094c4e68d966011865b19",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:36ec0a700d5d5b541d8387d93f951ab04120a6db780094c4e68d966011865b19"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/paragraph:1107",
+            "used": 112,
+            "requested": 3,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:d569285b63fe8da60618daf99a23fce03e153b8ff3f43de67e3121a6f653d1a4",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:d569285b63fe8da60618daf99a23fce03e153b8ff3f43de67e3121a6f653d1a4"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/paragraph:1108",
+            "used": 112,
+            "requested": 3,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:c8e38062467f7a111dc51a7e12ec2f3f4f35a67b00b0883de6bab383ddeaf9cb",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:c8e38062467f7a111dc51a7e12ec2f3f4f35a67b00b0883de6bab383ddeaf9cb"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/paragraph:1109",
+            "used": 112,
+            "requested": 3,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:18b63e2a816866740804f06b41061efaacf4711f3fb2fed015a9f3fe29397f70",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:18b63e2a816866740804f06b41061efaacf4711f3fb2fed015a9f3fe29397f70"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/paragraph:1151",
+            "used": 112,
+            "requested": 3,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:a65f795c151690021e0eb76e9181008a4aeead48218b2d2dad4a789dfc871868",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:a65f795c151690021e0eb76e9181008a4aeead48218b2d2dad4a789dfc871868"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/paragraph:1156",
+            "used": 112,
+            "requested": 3,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:5595db29707d6933e4864d6feffdaa3f8d81602eaeac19eee1dc10360f4a62b9",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:5595db29707d6933e4864d6feffdaa3f8d81602eaeac19eee1dc10360f4a62b9"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/paragraph:1157",
+            "used": 112,
+            "requested": 3,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:41aeca1d9f09d056749ae095cdcc16e982b7105f37c8f5145d12ccbbf8b01260",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:41aeca1d9f09d056749ae095cdcc16e982b7105f37c8f5145d12ccbbf8b01260"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/paragraph:1158",
+            "used": 112,
+            "requested": 3,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:a94fe6ea2f633cafea8043061584433db2f1e8e33d6686c49529fd64e40653cc",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:a94fe6ea2f633cafea8043061584433db2f1e8e33d6686c49529fd64e40653cc"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/paragraph:1160",
+            "used": 112,
+            "requested": 3,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:a03e169b5931b2854c5cc565dc21c0f070531ee3e2b5cc985aab14b857ed12ed",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:a03e169b5931b2854c5cc565dc21c0f070531ee3e2b5cc985aab14b857ed12ed"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/paragraph:1162",
+            "used": 112,
+            "requested": 3,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:91cba0cdf1761331678c00dfe4b36a75d92414ef7161dfddceef6df245f3c0a1",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:91cba0cdf1761331678c00dfe4b36a75d92414ef7161dfddceef6df245f3c0a1"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/paragraph:1163",
+            "used": 112,
+            "requested": 3,
+            "limit": 112,
+            "closure_size": 3
+          },
+          {
+            "item_id": "urn:company-wiki:narrative-unit:sha256:27c604510a70526940d673f02cc28fab639afa46e938b63d91692d906fe14fa8",
+            "item_ids": [
+              "urn:company-wiki:narrative-unit:sha256:27c604510a70526940d673f02cc28fab639afa46e938b63d91692d906fe14fa8"
+            ],
+            "item_count": 1,
+            "item_ids_limited": false,
+            "group_id": null,
+            "locator": "loc:v1/paragraph:1164",
+            "used": 112,
+            "requested": 3,
+            "limit": 112,
+            "closure_size": 3
+          }
+        ],
+        "targets_limited": true,
+        "dimension": "selection_spans",
+        "used": 112,
+        "limit": 112
+      }
+    ],
+    "selected_count": 112,
+    "selected_chars": 40491
+  },
+  "reading_route": null,
+  "reading_policy": [
+    {
+      "profile_id": "sec_10k",
+      "profile_version": "sec_10k/v2+7929e15618a836ab",
+      "family": "annual",
+      "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 业务模式、分部构成与收入确认机制 报告期经营驱动与同比口径解释 KPI/经营指标的定义、分母与期间 业务风险的更新与已发生事实 展望/指引及全局限定语（如 constant currency） 合同、履约义务、剩余履约义务等商业机制描述",
+      "policy_components": [
+        {
+          "kind": "family",
+          "id": "sec_10k",
+          "version": "1.0.2",
+          "content_digest": "879ed688455e23c53be846c229e038025ffef9adee05a0b0373e7d437ffeb17a"
+        }
+      ],
+      "reading_questions": [
+        "业务模式、分部构成与收入确认机制",
+        "报告期经营驱动与同比口径解释",
+        "KPI/经营指标的定义、分母与期间",
+        "业务风险的更新与已发生事实",
+        "展望/指引及全局限定语（如 constant currency）",
+        "合同、履约义务、剩余履约义务等商业机制描述",
+        "业务模式与收费/交付方式",
+        "分部构成与各分部经营机制"
+      ],
+      "context_requirements": [
+        {
+          "when": "always_for_assertion",
+          "slots": [
+            "subject",
+            "period",
+            "role"
+          ],
+          "missing_behavior": "unknown",
+          "reason": "10-K 数值与叙述都带报告期；MD&A 管理层陈述与附注/审计信息来源角色不同"
+        },
+        {
+          "when": "quantity_emitted",
+          "slots": [
+            "quantity",
+            "unit",
+            "period",
+            "denominator"
+          ],
+          "missing_behavior": "partial",
+          "reason": "分部收入、KPI、RPO 等数值必须保留单位、期间与分母定义，RPO/订单不等于收入"
+        },
+        {
+          "when": "explicit_condition_present",
+          "slots": [
+            "condition",
+            "modality"
+          ],
+          "missing_behavior": "deferred",
+          "reason": "forward-looking、guidance、constant currency 等限定语随局部事实保留"
+        },
+        {
+          "when": "project_emitted",
+          "slots": [
+            "project",
+            "geography",
+            "stage"
+          ],
+          "missing_behavior": "partial",
+          "reason": "数据中心、产能、产品发布等项目/进度断言需保留地域与阶段"
+        }
+      ],
+      "family_policy": {
+        "id": "sec_10k",
+        "design_status": "verified",
+        "spec_status": "implemented",
+        "evidence_status": "real",
+        "integration_status": "not_integrated",
+        "gaps": [
+          "Item 8 附注金标未建",
+          "10-K/A 修订版本对缺失"
+        ]
+      },
+      "negative_hints": [
+        "Item 8 常规三表与附注中的纯会计科目明细；例外：其中含收入确认、履约义务、分部或合同等商业机制描述",
+        "Human Capital、Properties、Controls 等常规章节；例外：其中含对经营的实际约束或重大变化事实",
+        "目录、交叉引用指引、签名页与 Exhibit 索引；例外：用于确认章节定位、版本与附件完整性"
+      ],
+      "semantic_units": [
+        "paragraph_event",
+        "operating_table",
+        "risk",
+        "background"
+      ],
+      "section_priorities": [
+        {
+          "section_role": "business",
+          "priority": 1
+        }
+      ]
+    },
+    {
+      "profile_id": "sec_10k",
+      "profile_version": "sec_10k/v2+7929e15618a836ab",
+      "family": "annual",
+      "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 业务模式、分部构成与收入确认机制 报告期经营驱动与同比口径解释 KPI/经营指标的定义、分母与期间 业务风险的更新与已发生事实 展望/指引及全局限定语（如 constant currency） 合同、履约义务、剩余履约义务等商业机制描述",
+      "policy_components": [
+        {
+          "kind": "family",
+          "id": "sec_10k",
+          "version": "1.0.2",
+          "content_digest": "879ed688455e23c53be846c229e038025ffef9adee05a0b0373e7d437ffeb17a"
+        }
+      ],
+      "reading_questions": [
+        "业务模式、分部构成与收入确认机制",
+        "报告期经营驱动与同比口径解释",
+        "KPI/经营指标的定义、分母与期间",
+        "业务风险的更新与已发生事实",
+        "展望/指引及全局限定语（如 constant currency）",
+        "合同、履约义务、剩余履约义务等商业机制描述",
+        "哪些风险是已发生事实、哪些是假设性风险",
+        "风险更新相对上年的变化"
+      ],
+      "context_requirements": [
+        {
+          "when": "always_for_assertion",
+          "slots": [
+            "subject",
+            "period",
+            "role"
+          ],
+          "missing_behavior": "unknown",
+          "reason": "10-K 数值与叙述都带报告期；MD&A 管理层陈述与附注/审计信息来源角色不同"
+        },
+        {
+          "when": "quantity_emitted",
+          "slots": [
+            "quantity",
+            "unit",
+            "period",
+            "denominator"
+          ],
+          "missing_behavior": "partial",
+          "reason": "分部收入、KPI、RPO 等数值必须保留单位、期间与分母定义，RPO/订单不等于收入"
+        },
+        {
+          "when": "explicit_condition_present",
+          "slots": [
+            "condition",
+            "modality"
+          ],
+          "missing_behavior": "deferred",
+          "reason": "forward-looking、guidance、constant currency 等限定语随局部事实保留"
+        },
+        {
+          "when": "project_emitted",
+          "slots": [
+            "project",
+            "geography",
+            "stage"
+          ],
+          "missing_behavior": "partial",
+          "reason": "数据中心、产能、产品发布等项目/进度断言需保留地域与阶段"
+        }
+      ],
+      "family_policy": {
+        "id": "sec_10k",
+        "design_status": "verified",
+        "spec_status": "implemented",
+        "evidence_status": "real",
+        "integration_status": "not_integrated",
+        "gaps": [
+          "Item 8 附注金标未建",
+          "10-K/A 修订版本对缺失"
+        ]
+      },
+      "negative_hints": [
+        "Item 8 常规三表与附注中的纯会计科目明细；例外：其中含收入确认、履约义务、分部或合同等商业机制描述",
+        "Human Capital、Properties、Controls 等常规章节；例外：其中含对经营的实际约束或重大变化事实",
+        "目录、交叉引用指引、签名页与 Exhibit 索引；例外：用于确认章节定位、版本与附件完整性"
+      ],
+      "semantic_units": [
+        "paragraph_event",
+        "operating_table",
+        "risk",
+        "background"
+      ],
+      "section_priorities": [
+        {
+          "section_role": "risk",
+          "priority": 2
+        }
+      ]
+    },
+    {
+      "profile_id": "sec_10k",
+      "profile_version": "sec_10k/v2+7929e15618a836ab",
+      "family": "annual",
+      "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 业务模式、分部构成与收入确认机制 报告期经营驱动与同比口径解释 KPI/经营指标的定义、分母与期间 业务风险的更新与已发生事实 展望/指引及全局限定语（如 constant currency） 合同、履约义务、剩余履约义务等商业机制描述",
+      "policy_components": [
+        {
+          "kind": "family",
+          "id": "sec_10k",
+          "version": "1.0.2",
+          "content_digest": "879ed688455e23c53be846c229e038025ffef9adee05a0b0373e7d437ffeb17a"
+        }
+      ],
+      "reading_questions": [
+        "业务模式、分部构成与收入确认机制",
+        "报告期经营驱动与同比口径解释",
+        "KPI/经营指标的定义、分母与期间",
+        "业务风险的更新与已发生事实",
+        "展望/指引及全局限定语（如 constant currency）",
+        "合同、履约义务、剩余履约义务等商业机制描述",
+        "经营结果背后的业务驱动与解释",
+        "同比/环比基期与口径"
+      ],
+      "context_requirements": [
+        {
+          "when": "always_for_assertion",
+          "slots": [
+            "subject",
+            "period",
+            "role"
+          ],
+          "missing_behavior": "unknown",
+          "reason": "10-K 数值与叙述都带报告期；MD&A 管理层陈述与附注/审计信息来源角色不同"
+        },
+        {
+          "when": "quantity_emitted",
+          "slots": [
+            "quantity",
+            "unit",
+            "period",
+            "denominator"
+          ],
+          "missing_behavior": "partial",
+          "reason": "分部收入、KPI、RPO 等数值必须保留单位、期间与分母定义，RPO/订单不等于收入"
+        },
+        {
+          "when": "explicit_condition_present",
+          "slots": [
+            "condition",
+            "modality"
+          ],
+          "missing_behavior": "deferred",
+          "reason": "forward-looking、guidance、constant currency 等限定语随局部事实保留"
+        },
+        {
+          "when": "project_emitted",
+          "slots": [
+            "project",
+            "geography",
+            "stage"
+          ],
+          "missing_behavior": "partial",
+          "reason": "数据中心、产能、产品发布等项目/进度断言需保留地域与阶段"
+        }
+      ],
+      "family_policy": {
+        "id": "sec_10k",
+        "design_status": "verified",
+        "spec_status": "implemented",
+        "evidence_status": "real",
+        "integration_status": "not_integrated",
+        "gaps": [
+          "Item 8 附注金标未建",
+          "10-K/A 修订版本对缺失"
+        ]
+      },
+      "negative_hints": [
+        "Item 8 常规三表与附注中的纯会计科目明细；例外：其中含收入确认、履约义务、分部或合同等商业机制描述",
+        "Human Capital、Properties、Controls 等常规章节；例外：其中含对经营的实际约束或重大变化事实",
+        "目录、交叉引用指引、签名页与 Exhibit 索引；例外：用于确认章节定位、版本与附件完整性"
+      ],
+      "semantic_units": [
+        "paragraph_event",
+        "operating_table",
+        "risk",
+        "background"
+      ],
+      "section_priorities": [
+        {
+          "section_role": "management_discussion",
+          "priority": 1
+        }
+      ]
+    },
+    {
+      "profile_id": "sec_10k",
+      "profile_version": "sec_10k/v2+7929e15618a836ab",
+      "family": "annual",
+      "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 业务模式、分部构成与收入确认机制 报告期经营驱动与同比口径解释 KPI/经营指标的定义、分母与期间 业务风险的更新与已发生事实 展望/指引及全局限定语（如 constant currency） 合同、履约义务、剩余履约义务等商业机制描述",
+      "policy_components": [
+        {
+          "kind": "family",
+          "id": "sec_10k",
+          "version": "1.0.2",
+          "content_digest": "879ed688455e23c53be846c229e038025ffef9adee05a0b0373e7d437ffeb17a"
+        }
+      ],
+      "reading_questions": [
+        "业务模式、分部构成与收入确认机制",
+        "报告期经营驱动与同比口径解释",
+        "KPI/经营指标的定义、分母与期间",
+        "业务风险的更新与已发生事实",
+        "展望/指引及全局限定语（如 constant currency）",
+        "合同、履约义务、剩余履约义务等商业机制描述"
+      ],
+      "context_requirements": [
+        {
+          "when": "always_for_assertion",
+          "slots": [
+            "subject",
+            "period",
+            "role"
+          ],
+          "missing_behavior": "unknown",
+          "reason": "10-K 数值与叙述都带报告期；MD&A 管理层陈述与附注/审计信息来源角色不同"
+        },
+        {
+          "when": "quantity_emitted",
+          "slots": [
+            "quantity",
+            "unit",
+            "period",
+            "denominator"
+          ],
+          "missing_behavior": "partial",
+          "reason": "分部收入、KPI、RPO 等数值必须保留单位、期间与分母定义，RPO/订单不等于收入"
+        },
+        {
+          "when": "explicit_condition_present",
+          "slots": [
+            "condition",
+            "modality"
+          ],
+          "missing_behavior": "deferred",
+          "reason": "forward-looking、guidance、constant currency 等限定语随局部事实保留"
+        },
+        {
+          "when": "project_emitted",
+          "slots": [
+            "project",
+            "geography",
+            "stage"
+          ],
+          "missing_behavior": "partial",
+          "reason": "数据中心、产能、产品发布等项目/进度断言需保留地域与阶段"
+        }
+      ],
+      "family_policy": {
+        "id": "sec_10k",
+        "design_status": "verified",
+        "spec_status": "implemented",
+        "evidence_status": "real",
+        "integration_status": "not_integrated",
+        "gaps": [
+          "Item 8 附注金标未建",
+          "10-K/A 修订版本对缺失"
+        ]
+      },
+      "negative_hints": [
+        "Item 8 常规三表与附注中的纯会计科目明细；例外：其中含收入确认、履约义务、分部或合同等商业机制描述",
+        "Human Capital、Properties、Controls 等常规章节；例外：其中含对经营的实际约束或重大变化事实",
+        "目录、交叉引用指引、签名页与 Exhibit 索引；例外：用于确认章节定位、版本与附件完整性"
+      ],
+      "semantic_units": [
+        "paragraph_event",
+        "operating_table",
+        "risk",
+        "background"
+      ],
+      "section_priorities": [
+        {
+          "section_role": "unknown",
+          "priority": 2
+        }
+      ]
+    }
+  ],
+  "selected_quotes": [
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:0af91717650c271c40b9bada7cec849cfdaf6802d19dc9d522ae9d90033bea5f",
+      "locator": "loc:v1/paragraph:144",
+      "full_quote": "PART I",
+      "page": null,
+      "quote_sha256": "495768bd3d6957619d4fbe2457811a0483df9e815938bdd9fb195935ece1b264",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:63eeff55462e96e9f17488f223e3b93c8e738c37bcdc5ba92fa9c6d6c02513a8",
+      "locator": "loc:v1/paragraph:145",
+      "full_quote": "ITEM 1. B USINESS",
+      "page": null,
+      "quote_sha256": "b89c5f599c7a375290bfd31af151f809e8f3b944077432649c9e2417c5067dd7",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:f1b1f2ebd8ba85e14dd69714ca65822f9d2c155d8cbc98bba9af8adc655c7feb",
+      "locator": "loc:v1/paragraph:154",
+      "full_quote": "Our products include operating systems, cross-device productivity and collaboration applications, server applications, business solution applications, desktop and server management tools, software development tools, and video games. We also design and sell devices, including PCs, tablets, gaming and entertainment consoles, other intelligent devices, and related accessories.",
+      "page": null,
+      "quote_sha256": "d43a949a12468e8502504625a93781bfe40d24186d1bdf23f04f6d9e9063fc3a",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "business_scope",
+        "operating_milestone"
+      ],
+      "topics": [
+        "business_scope",
+        "core_business",
+        "business_progress"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:616fc43055fd9cfccca0ecc1dd5c6f95fe7570663fa9fc4e745d948070d9734f",
+      "locator": "loc:v1/paragraph:157",
+      "full_quote": "PART I",
+      "page": null,
+      "quote_sha256": "495768bd3d6957619d4fbe2457811a0483df9e815938bdd9fb195935ece1b264",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:14c90f5708f83fb08012d5290a7b8f301e622c1df19fe5e4b5cd2b554819a2ea",
+      "locator": "loc:v1/paragraph:158",
+      "full_quote": "Item 1",
+      "page": null,
+      "quote_sha256": "c5ddfeffb275254140796b8c080f372d65ebb1b0590e238b191f595d5fcd32ca",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:f6bfbf97b2313672a6e2da5239b80b9b95f61bf82cf4a07c1b572290a61d2b76",
+      "locator": "loc:v1/paragraph:171",
+      "full_quote": "Transforming the workplace to deliver new, modern, modular business applications, drive deeper insights, and improve how people communicate, collaborate, learn, work, and interact with one another.",
+      "page": null,
+      "quote_sha256": "90d1c7c41fa9c77063804d9eb41762362816649f56dfe5ca50ace19e8d81cf1c",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_mechanism",
+        "operating_state_unknown"
+      ],
+      "topics": [
+        "core_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:49e5decb7d377215c6475b3126278f18d4f9cb3a92a5ffe50c643945ac75580b",
+      "locator": "loc:v1/paragraph:189",
+      "full_quote": "PART I",
+      "page": null,
+      "quote_sha256": "495768bd3d6957619d4fbe2457811a0483df9e815938bdd9fb195935ece1b264",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:edb956400e38393756bdc28be1667bee89233a8f8bc75220d727dca1f10aa1b2",
+      "locator": "loc:v1/paragraph:190",
+      "full_quote": "Item 1",
+      "page": null,
+      "quote_sha256": "c5ddfeffb275254140796b8c080f372d65ebb1b0590e238b191f595d5fcd32ca",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:1c28a702a8daf02b283bc5ffa7cc3486785c602ed5e876d9a2b5df7374261343",
+      "locator": "loc:v1/paragraph:192",
+      "full_quote": "We operate our business and report our financial performance using three segments: Productivity and Business Processes, Intelligent Cloud, and More Personal Computing. Our segments provide management with a comprehensive financial view of our key businesses. The segments enable the alignment of strategies and objectives across the development, sales, marketing, and services organizations, and they provide a framework for timely and rational allocation of resources within businesses.",
+      "page": null,
+      "quote_sha256": "935d60904eb39710e00cb0d07e9c8f15556ba7d4792be8f0e005e28fdcc9c92f",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "business_reporting_scope"
+      ],
+      "topics": [
+        "business_reporting_scope"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:efddbcd3d5f79edd043a467ba27a20b55d6f1f52b13660a65da13ec748301ba5",
+      "locator": "loc:v1/paragraph:193",
+      "full_quote": "In August 2024, we announced changes to the composition of our segments. These changes align our segments with how we currently manage our business, most notably bringing the commercial components of Microsoft 365 together in the Productivity and Business Processes segment. Beginning in fiscal year 2025, the information that our chief operating decision maker is regularly provided and reviews for purposes of allocating resources and assessing performance reflects these segment changes.",
+      "page": null,
+      "quote_sha256": "44aabdcda6f4b04c42224b6ae75148f50a2c1113a26a3b4004de54b5f65179b4",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "business_reporting_scope"
+      ],
+      "topics": [
+        "business_reporting_scope"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:445a4b457069c04e124fb9798e1e64ca09e0ebbaeeead7032d018252ecd2f592",
+      "locator": "loc:v1/paragraph:194",
+      "full_quote": "Additional information on our operating segments and geographic and product information is contained in Note 18 – Segment Information and Geographic Data of the Notes to Financial Statements (Part II, Item 8 of this Form 10-K).",
+      "page": null,
+      "quote_sha256": "8339c38282c50757ec1b7dc3bb8ae7c3b8a3fbf9c77033fb9762aa774543c23e",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "business_reporting_scope"
+      ],
+      "topics": [
+        "business_reporting_scope"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:238ca446bc568eb803b2f245727b775a0b147dff5a824c18c70d240c1738926e",
+      "locator": "loc:v1/paragraph:197",
+      "full_quote": "Our Productivity and Business Processes segment consists of products and services in our portfolio of productivity, communication, and information services, spanning a variety of devices and platforms. This segment primarily comprises:",
+      "page": null,
+      "quote_sha256": "d993f813170ccba6b56ef55f21d23a571600f3e3997733ba6230381a8cdeb7b2",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "business_structure",
+        "business_reporting_scope"
+      ],
+      "topics": [
+        "core_business",
+        "business_reporting_scope"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:3c4965cdd6faea72ec8489fd84bfcf51989ca853448d1abcdef13d7e347b0d95",
+      "locator": "loc:v1/paragraph:207",
+      "full_quote": "Microsoft 365 Commercial is an AI-powered business and productivity solutions platform that brings together Office, Windows, Microsoft 365 Copilot, and Enterprise Mobility + Security to help organizations empower their employees. Growth depends on our ability to reach new users in new markets such as frontline workers, small and medium businesses, and growth markets, as well as add AI-enabled tools, features, and agentic scenarios to our core product and service offerings across communication, collaboration, analytics, security, compliance, and other AI business productivity categories. Microsoft 365 Commercial revenue is mainly affected by a combination of continued installed base growth and average revenue per user expansion, as well as the continued shift from Office licensed on-premises to Microsoft 365.",
+      "page": null,
+      "quote_sha256": "6780329863d5a23515b01856bcfff1f74f2385faa41f706c61c225db9bb34eb0",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_mechanism",
+        "business_billing_basis",
+        "operating_metric_change",
+        "operating_description_unknown"
+      ],
+      "topics": [
+        "core_business",
+        "business_billing_basis",
+        "operating_metric_change"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:19ee74b882adce2d07704c1770911d44291027043d98d6743dd95eaff0350513",
+      "locator": "loc:v1/paragraph:211",
+      "full_quote": "PART I",
+      "page": null,
+      "quote_sha256": "495768bd3d6957619d4fbe2457811a0483df9e815938bdd9fb195935ece1b264",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:6763e228bfed6e48dbc52511c0f0b263a7900c0f2326573b281e92236dbfeb61",
+      "locator": "loc:v1/paragraph:212",
+      "full_quote": "Item 1",
+      "page": null,
+      "quote_sha256": "c5ddfeffb275254140796b8c080f372d65ebb1b0590e238b191f595d5fcd32ca",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:448609b8070080b695440c3d2d3deca99ec406c1a1c36a94eb1d0b85b67f40be",
+      "locator": "loc:v1/paragraph:216",
+      "full_quote": "Dynamics provides cloud-based and on-premises business solutions for financial management, enterprise resource planning (“ERP”), customer relationship management (“CRM”), and supply chain management, as well as agentic AI and other low code application development platforms, for small and medium businesses, large organizations, and divisions of global enterprises. Dynamics revenue is driven by the number of users licensed and applications consumed, expansion of average revenue per user, and the continued shift to Dynamics 365, a unified set of cloud-based intelligent business applications, including our low code development platforms, such as Power Apps and Power Automate.",
+      "page": null,
+      "quote_sha256": "99cc951ee9e65cd5ea620ee8e7a1b298704b2b8562ceb6b1c77bc9d34dce1785",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "business_billing_basis",
+        "operating_description_unknown"
+      ],
+      "topics": [
+        "business_billing_basis",
+        "core_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:4eefbeb57dac400a19e5cc9fd3f35791a032496f96e9214b3c9e46e88a2ad0f4",
+      "locator": "loc:v1/paragraph:224",
+      "full_quote": "Our Intelligent Cloud segment consists of our public, private, and hybrid server products and cloud services that power modern business and developers. This segment primarily comprises:",
+      "page": null,
+      "quote_sha256": "5e917062d98a0c16faaba740b5332ca48d66d29ec417085265ec93005789e273",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "business_structure",
+        "business_reporting_scope"
+      ],
+      "topics": [
+        "core_business",
+        "business_reporting_scope"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:9151b4e68c954bfb94e5030323f2ae85a5193947efa79909db426e53cdb9fa84",
+      "locator": "loc:v1/paragraph:230",
+      "full_quote": "PART I",
+      "page": null,
+      "quote_sha256": "495768bd3d6957619d4fbe2457811a0483df9e815938bdd9fb195935ece1b264",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:b62abd15346cd398f08e4543b7913fe9f48f26031e3a5e8c1776d16e87a38663",
+      "locator": "loc:v1/paragraph:231",
+      "full_quote": "Item 1",
+      "page": null,
+      "quote_sha256": "c5ddfeffb275254140796b8c080f372d65ebb1b0590e238b191f595d5fcd32ca",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:492da1a73aaae3e4a3092536653e4c3fcc97a9a88bb210ca79c882bb4906dfb2",
+      "locator": "loc:v1/paragraph:233",
+      "full_quote": "Azure is a comprehensive set of cloud services that offer developers, IT professionals, and enterprises freedom to build, deploy, and manage applications on any platform or device. Customers can use Azure through our global network of datacenters for computing, networking, storage, mobile and web application services, AI, Internet of Things, cognitive services, and machine learning. Azure enables customers to devote more resources to development and use of applications that benefit their organizations, rather than managing on-premises hardware and software. Azure revenue is mainly affected by infrastructure-as-a-service and platform-as-a-service consumption-based services.",
+      "page": null,
+      "quote_sha256": "93a9159b81c6d7c3a672279e63cea873f307a130c4ecd124e226024ab092e374",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "business_billing_basis",
+        "operating_description_unknown"
+      ],
+      "topics": [
+        "core_business",
+        "business_billing_basis"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:e5fc6655d2ecb80ed95e8f220a5bd1fe28cab239dda29dee90167fa041dce461",
+      "locator": "loc:v1/paragraph:235",
+      "full_quote": "Our server products are designed to make IT professionals, developers, and their systems more productive and efficient. Server software is integrated server infrastructure and middleware designed to support software applications built on the Windows Server operating system. This includes the server platform, database, business intelligence, storage, management and operations, virtualization, service-oriented architecture platform, security, and identity software. We also license standalone and software development lifecycle tools for software architects, developers, testers, and project managers. Server products revenue is mainly affected by purchases through volume licensing programs, licenses sold to OEMs, and retail packaged products. CALs provide access rights to certain server products, including SQL Server and Windows Server, and revenue is reported along with the associated server product.",
+      "page": null,
+      "quote_sha256": "264fa06b62f591e7ae1ae6fbc329d721f61da563df05e416ba1a13873de86d12",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_mechanism",
+        "operating_state_unknown"
+      ],
+      "topics": [
+        "core_business",
+        "products_rd"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:bc24d7ff53ab75802eda11a4d7de92b3e6be8ba3a507186d38718605b32e7f95",
+      "locator": "loc:v1/paragraph:244",
+      "full_quote": "PART I",
+      "page": null,
+      "quote_sha256": "495768bd3d6957619d4fbe2457811a0483df9e815938bdd9fb195935ece1b264",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:fda3b4c4c6571dba219f46f5c4bd2f0e44a57b43a1549dca584d07aa8cab1264",
+      "locator": "loc:v1/paragraph:245",
+      "full_quote": "Item 1",
+      "page": null,
+      "quote_sha256": "c5ddfeffb275254140796b8c080f372d65ebb1b0590e238b191f595d5fcd32ca",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:a83d1d60e778219e94183effed17a9ee94e2b3a3df1fa160019f1e3462e76b94",
+      "locator": "loc:v1/paragraph:250",
+      "full_quote": "Our More Personal Computing segment consists of products and services that put customers at the center of the experience with our technology. This segment primarily comprises:",
+      "page": null,
+      "quote_sha256": "6e0ae0c4087ac566b8e2f526bc149145e95f4512862546ec023ff089ee335a6a",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "business_structure",
+        "business_reporting_scope"
+      ],
+      "topics": [
+        "core_business",
+        "business_reporting_scope"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:dde59e01244a2cfa4a482b1d069b5d6e679ba78963ffedbd4ec5b871f123a223",
+      "locator": "loc:v1/paragraph:273",
+      "full_quote": "Constraints in the supply chain of device components.",
+      "page": null,
+      "quote_sha256": "c54d4db7fa20af8101bca5c0413e65e330175a9d0a73c53149933e9c49eda480",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "business_risk_or_constraint"
+      ],
+      "topics": [
+        "core_business",
+        "capacity_projects"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:a272abb3ef674a65e36a8f62e6fdf890efbb241ac103e9a150d373d127a2057e",
+      "locator": "loc:v1/paragraph:277",
+      "full_quote": "We design and sell devices, such as Surface (including Copilot+ PCs) and PC accessories. Our devices are designed to enable people and organizations to connect to the people and content that matter most using Windows and integrated Microsoft products and services. Surface is designed to help organizations, students, and consumers be more productive. Growth in Devices is dependent on total PC shipments, the ability to attract new customers, our product roadmap, and expanding into new categories.",
+      "page": null,
+      "quote_sha256": "f62e38354c988df9b9fe5cc6a521702436cba244e346112735ba6ba78ee5ef69",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_milestone",
+        "operating_state_unknown"
+      ],
+      "topics": [
+        "core_business",
+        "business_progress"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:cca8fa38e089bea8b2c35b8e1483d14790e51bf1bccac31fb0a3ca9425bd5117",
+      "locator": "loc:v1/paragraph:295",
+      "full_quote": "PART I",
+      "page": null,
+      "quote_sha256": "495768bd3d6957619d4fbe2457811a0483df9e815938bdd9fb195935ece1b264",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:d9c1a21f0cc37cbfa18235dcf6493ec678ed364a08d992a5812c5b8351a71fec",
+      "locator": "loc:v1/paragraph:296",
+      "full_quote": "Item 1",
+      "page": null,
+      "quote_sha256": "c5ddfeffb275254140796b8c080f372d65ebb1b0590e238b191f595d5fcd32ca",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:cfda7c2fd64d9495044b26bc099f9f78b29b4f1f9960346c905b974d4d153b90",
+      "locator": "loc:v1/paragraph:297",
+      "full_quote": "We design our programs to attract, reward, and retain top talent while fostering continuous employee development and reinforcing our organizational culture and values. Our total compensation offering is both highly differentiated and competitive within the market, and we also monitor pay equity across multiple dimensions. We have invested significantly in employee wellbeing and offer a differentiated benefits package which includes many physical, emotional, and financial wellness programs. We also provide access to continuous learning through a wide range of internal and external content, supporting professional growth across roles and disciplines. Through our employee listening systems, we gather direct feedback from our workforce, enabling us to adapt our programs and address employee needs globally with real-time insights. Additionally, our culture prioritizes the security of both our customers and Microsoft, embedding this responsibility across all teams and functions.",
+      "page": null,
+      "quote_sha256": "d4ac6cdd5226f102aaf7937c8a353c82d16c26d771cacc4960f7c26de9d96ab4",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_milestone"
+      ],
+      "topics": [
+        "core_business",
+        "business_progress"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:7174b759fb7a05bc7cf1b7217ff0757243c65a37b339280358cd404c2e6ccdb6",
+      "locator": "loc:v1/paragraph:301",
+      "full_quote": "We engage third-party manufacturers to produce our devices and have implemented measures to enhance supply chain efficiency and resilience, including the ability to relocate production geographically.",
+      "page": null,
+      "quote_sha256": "ab34c8eae99c9740f430735563fe955a4cb790c2a1419d6c5d3464e721f535f9",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_mechanism",
+        "business_risk_or_constraint",
+        "operating_other_party_state"
+      ],
+      "topics": [
+        "core_business",
+        "capacity_projects"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:e0b6020a431fd29307bcce99b7938dedb1a922429a5e41d876ca63971c99a312",
+      "locator": "loc:v1/paragraph:307",
+      "full_quote": "We plan to continue to make significant investments in a broad range of product research and development activities, and as appropriate, we will coordinate our research and development across operating segments and leverage the results across the company. This includes continuing to support fundamental research, which provides us with a unique perspective on future trends and contributes to our innovation.",
+      "page": null,
+      "quote_sha256": "e0512ec3e96ce35dee4a1add48bd6f694dd526c8404eb0cda2a2b6998a3ff4d3",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "business_reporting_scope",
+        "operating_current_state"
+      ],
+      "topics": [
+        "business_reporting_scope",
+        "core_business",
+        "capacity_projects"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:3170513f41b8acff337642a3e5ad0144cd29443fa8d813eb2e6115e30f56b72f",
+      "locator": "loc:v1/paragraph:309",
+      "full_quote": "PART I",
+      "page": null,
+      "quote_sha256": "495768bd3d6957619d4fbe2457811a0483df9e815938bdd9fb195935ece1b264",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:3517e695b03ae69f3807618c2221c127f6ab322dd39fb2c95e3840299f029cea",
+      "locator": "loc:v1/paragraph:310",
+      "full_quote": "Item 1",
+      "page": null,
+      "quote_sha256": "c5ddfeffb275254140796b8c080f372d65ebb1b0590e238b191f595d5fcd32ca",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:f3984dc157fbb3977cc0fb6fa3d40e8d9e53b97ba4edcc22f35d6d5dcfad8a7c",
+      "locator": "loc:v1/paragraph:315",
+      "full_quote": "Our customers include individual consumers, small and medium organizations, large global enterprises, public-sector institutions, service providers, application developers, and OEMs. We market and distribute our products and services through the following channels: direct, distributors and resellers, and OEMs. Our sales organization performs a variety of functions, including working directly with commercial enterprises and public-sector organizations worldwide to identify and meet their technology and digital transformation requirements; supporting system integrators, independent software vendors, and other partners who engage directly with our customers to perform sales, consulting, and fulfillment functions for our products and services; and managing OEM relationships.",
+      "page": null,
+      "quote_sha256": "d59d3e3f3b19f4f6a22fc3dd1fe2cb6fab370f598ffa843ac40843b3ee26cf0b",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "business_structure",
+        "business_structure_mechanism",
+        "operating_description_unknown"
+      ],
+      "topics": [
+        "core_business",
+        "business_structure_mechanism"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:db7583c813c1e7d655b26ede11b6347b33506ecde4e3be84368b9045f7098967",
+      "locator": "loc:v1/paragraph:317",
+      "full_quote": "Many organizations that license our products and services transact directly with us through Enterprise Agreements and Enterprise Services contracts, with sales support from system integrators, independent software vendors, web agencies, and partners that advise organizations on licensing our products and services (“Enterprise Agreement Software Advisors” or “ESA”). Microsoft offers direct sales programs targeted to reach small, medium, and corporate customers, in addition to those offered through the reseller channel. A large network of partner advisors support many of these sales.",
+      "page": null,
+      "quote_sha256": "04b18b2990b55ec3b299c3a49360af326ad26924734421f61765ce72aafca162",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "business_structure",
+        "business_structure_mechanism",
+        "operating_description_unknown"
+      ],
+      "topics": [
+        "core_business",
+        "business_structure_mechanism"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:8c564a9a838693e01fe7a731715ce65a9198c4bbb7e8423c358ad1fc0de53a05",
+      "locator": "loc:v1/paragraph:320",
+      "full_quote": "Organizations also license our products and services indirectly, primarily through licensing solution partners (“LSP”), distributors, value-added resellers (“VAR”), and retailers. Although each type of reselling partner may reach organizations of all sizes, LSPs are primarily engaged with large organizations, distributors resell primarily to VARs, and VARs typically reach small and medium organizations. ESAs are also typically authorized as LSPs and operate as resellers for our other volume licensing programs. Microsoft Cloud Solution Provider is our main partner program for reselling cloud services.",
+      "page": null,
+      "quote_sha256": "1df2833d2bfb40964612a275e7f40ff006a18bb47d0520680b2c80306bc76ad9",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "business_structure",
+        "business_structure_mechanism"
+      ],
+      "topics": [
+        "core_business",
+        "business_structure_mechanism"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:16ee103a696cbeb313aa18473fb236a695f50c810ac16e71e2daf2467a5c8991",
+      "locator": "loc:v1/paragraph:324",
+      "full_quote": "PART I",
+      "page": null,
+      "quote_sha256": "495768bd3d6957619d4fbe2457811a0483df9e815938bdd9fb195935ece1b264",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:a0187bd367450c528aa604ef267baee5dd3a0bdfe761823ddffc7c1bd88febcc",
+      "locator": "loc:v1/paragraph:325",
+      "full_quote": "Item 1",
+      "page": null,
+      "quote_sha256": "c5ddfeffb275254140796b8c080f372d65ebb1b0590e238b191f595d5fcd32ca",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:fdd7620d5abc782f22a0e06b73ebf53e1c12ca279a4b2b189845216689252fa3",
+      "locator": "loc:v1/paragraph:328",
+      "full_quote": "There are two broad categories of OEMs. The largest category of OEMs are direct OEMs as our relationship with them is managed through a direct agreement between Microsoft and the OEM. We have distribution agreements covering one or more of our products with virtually all the multinational OEMs, including Dell, Hewlett-Packard, Lenovo, and with many regional and local OEMs. The second broad category of OEMs are system builders consisting of lower-volume PC manufacturers, which source Microsoft software for pre-installation and local redistribution primarily through the Microsoft distributor channel rather than through a direct agreement or relationship with Microsoft.",
+      "page": null,
+      "quote_sha256": "031ee874e4e5b9a8965390e99e2faa2b4ebaf5d5d9e1da9cda129af4bcd11471",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_mechanism",
+        "business_structure",
+        "business_structure_mechanism",
+        "operating_state_unknown"
+      ],
+      "topics": [
+        "core_business",
+        "business_structure_mechanism"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:6fabc7cc3817364de34622f58f89cd5e51c9327b26ad893e2ce8fc526a5d08c6",
+      "locator": "loc:v1/paragraph:431",
+      "full_quote": "PART I",
+      "page": null,
+      "quote_sha256": "495768bd3d6957619d4fbe2457811a0483df9e815938bdd9fb195935ece1b264",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:4ca1bd973ae232cf6679f8ab1088d65b778919d71ccc61c13005b776c674ca2d",
+      "locator": "loc:v1/paragraph:432",
+      "full_quote": "Item 1A",
+      "page": null,
+      "quote_sha256": "08b0661198fa14e4f430feda35852355c1448813696ceea1225613c56682e0a8",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:21fb612d66f76b59ba721d34188103c05139698065e90b5b022ae132ba976292",
+      "locator": "loc:v1/paragraph:437",
+      "full_quote": "We are investing in artificial intelligence (“AI”) across the entire company and infusing generative AI capabilities into our consumer and commercial offerings. AI technology and services are a highly competitive and rapidly evolving market, and new competitors continue to enter the market. We will bear significant development and operational costs to build and support the AI models, services, platforms, and infrastructure necessary to meet the needs of our customers. To compete effectively we must also be responsive to technological change, new and potential regulatory developments, and public scrutiny.",
+      "page": null,
+      "quote_sha256": "47cbb87674a09cc977eb576782fd3a34616e0eb082e0a967e02606803f54553b",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "business_strategy",
+        "operating_description_unknown"
+      ],
+      "topics": [
+        "core_business",
+        "new_business",
+        "products_rd"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:1a1a0fe814b48c58cfc780e10365cc179f356ee7135dbdc07aefe813f051622d",
+      "locator": "loc:v1/paragraph:459",
+      "full_quote": "PART I",
+      "page": null,
+      "quote_sha256": "495768bd3d6957619d4fbe2457811a0483df9e815938bdd9fb195935ece1b264",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:269ff7cd3952b3ec74d13a28dd55a6996accf7f2f4aa35111fcde532c7e1504c",
+      "locator": "loc:v1/paragraph:460",
+      "full_quote": "Item 1A",
+      "page": null,
+      "quote_sha256": "08b0661198fa14e4f430feda35852355c1448813696ceea1225613c56682e0a8",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:79fd8228fa6bde910b8ab153a14f944af2244dbc712f37160322a374916ddeaf",
+      "locator": "loc:v1/paragraph:463",
+      "full_quote": "We make significant investments in products and services that may not achieve expected returns. We will continue to make significant investments in research, development, and marketing for existing products, services, and technologies, including AI-based products and services. We also invest in the development and acquisition of a variety of hardware for productivity, communication, and entertainment, including PCs, tablets, and gaming devices. Investments in new technology are speculative. Commercial success depends on many factors, including innovation, developer support, and effective distribution and marketing. If customers do not perceive our latest offerings as providing significant new functionality or other value, they may reduce their purchases of new software and hardware products or upgrades, unfavorably affecting revenue. We may not achieve significant revenue from new product, service, and distribution channel investments for several years, if at all. New products and services may not be profitable or may not achieve operating margins as high as we have experienced historically. We may not get engagement in certain features that drive post-sale monetization opportunities. Our data-handling practices across our products and services will continue to be under scrutiny. Perceptions of mismanagement, driven by regulatory activity or negative public reaction to our practices or product experiences, could negatively impact product and feature adoption. Developing new technologies is complex. It can require long development and testing periods. We could experience significant delays in new releases or significant problems in creating new products or services. These factors could adversely affect our business, financial condition, and results of operations.",
+      "page": null,
+      "quote_sha256": "47713c39798b074b5309eded52fa4b3eec4fdb642b390bb8377959775651bd46",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_mechanism",
+        "operating_current_state"
+      ],
+      "topics": [
+        "core_business",
+        "products_rd",
+        "capacity_projects"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:c8c2ca720cb93046fa3ffe696f763e55c678459222c844879fda3d66a32b315a",
+      "locator": "loc:v1/paragraph:464",
+      "full_quote": "Acquisitions, joint ventures, and strategic alliances could have an adverse effect on our business. We expect to continue making acquisitions and entering into joint ventures and strategic alliances as part of our long-term business strategy. For example, in October 2023 we completed our acquisition of Activision Blizzard , Inc. (“Activision Blizzard”). In January 2023 we announced the third phase of our OpenAI strategic partnership. Acquisitions and other transactions and arrangements involve significant challenges and risks, including that they do not advance our business strategy, that we get an unsatisfactory return on our investment, that they raise new compliance-related obligations and challenges, that we have difficulty integrating and retaining new employees, business systems, and technology, that they distract management from our other businesses, or that announced transactions may not be completed. If an arrangement fails to adequately anticipate changing circumstances and interests of a party, it may result in early termination or renegotiation of the arrangement. We also have limited ability to control or influence third parties with whom we have arrangements, which may impact our ability to realize the anticipated benefits. The success of these transactions and arrangements depend in part on our ability to leverage them to enhance our existing products and services or develop compelling new ones, as well as the acquired companies’ ability to meet our policies and processes in areas such as data governance, privacy, digital safety, responsible AI, and cybersecurity. It may take longer than expected to realize the full economic benefits from these transactions and arrangements, such as increased revenue or enhanced efficiencies, or the benefits may ultimately be smaller than we expected, which could cause an impairment of goodwill or intangibles. We have recorded, and may in the future be required to record, a significant charge in our consolidated financial statements during the period in which any impairment of our goodwill or amortizable intangible assets is determined, negatively affecting our results of operations. In addition, an acquisition may be subject to challenge even after it has been completed. These events could adversely affect our business, operations, financial condition, and results of operations.",
+      "page": null,
+      "quote_sha256": "ab0f867b44a6d04acd3fd49cb75aa23319b020ca1b0a890d7641dd3218156182",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_state_unknown"
+      ],
+      "topics": [
+        "core_business",
+        "capacity_projects"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:c571f0b5596d734a4d3289fc2fe70fdd34b24d5c6c5bc18286d06e7481f438b2",
+      "locator": "loc:v1/paragraph:466",
+      "full_quote": "PART I",
+      "page": null,
+      "quote_sha256": "495768bd3d6957619d4fbe2457811a0483df9e815938bdd9fb195935ece1b264",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:f1a8ed9e8dbbe3fa2e834c939bb7a972baf90e035ce80e6b82d244cc0c1976ae",
+      "locator": "loc:v1/paragraph:467",
+      "full_quote": "Item 1A",
+      "page": null,
+      "quote_sha256": "08b0661198fa14e4f430feda35852355c1448813696ceea1225613c56682e0a8",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:da4a69c672ec00fd2c9e10cbc81608712871d96ad25761a21b08a6a953c926d0",
+      "locator": "loc:v1/paragraph:473",
+      "full_quote": "Cyberthreats are constantly evolving and becoming increasingly sophisticated and complex, increasing the difficulty of detecting and successfully defending against them. Threat actors may also utilize emerging technologies, such as AI and machine learning. Our current capabilities may not detect certain vulnerabilities or new attack methods, which may allow them to persist in the environment over long periods of time. It may be difficult to determine the best way to investigate, mitigate, contain, and remediate the harm caused by a cyber incident. Such efforts may not be successful, and we may make errors or fail to take necessary actions. It is possible that threat actors may gain undetected access to other networks and systems after establishing a foothold on an internal system. Cyber incidents and attacks can have cascading impacts that unfold with increasing speed across our internal networks and systems, as well as those of our partners and customers. In addition, it may take considerable time for us to investigate and evaluate the full impact of incidents, particularly for sophisticated attacks. As a result of these and other factors, we may not be able to provide prompt, full, and reliable information about the incident to our customers, partners, regulators, and the public. Breaches of our facilities, network, or data security can disrupt the security of our systems and business applications, impair our ability to provide services to our customers and protect the privacy of their data, result in product development delays, compromise confidential or technical business information, result in theft or misuse of our intellectual property or other assets, subject us to ransomware attacks, require us to allocate more resources to improve technologies or remediate the impacts of attacks, or otherwise adversely affect our business. In addition, actions taken to remediate an incident could result in outages, data losses, and disruptions of our services.",
+      "page": null,
+      "quote_sha256": "7b30d988c648beabf84613f3089b88dd3f19e5788f2ab581af04c8511741acf6",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_mechanism",
+        "operating_plan"
+      ],
+      "topics": [
+        "core_business",
+        "products_rd",
+        "new_business",
+        "capacity_projects"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:0e0cd926ebc8726f17e6cdc75077eeeda415c4779afaaf2f6e651870510175f8",
+      "locator": "loc:v1/paragraph:475",
+      "full_quote": "PART I",
+      "page": null,
+      "quote_sha256": "495768bd3d6957619d4fbe2457811a0483df9e815938bdd9fb195935ece1b264",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:caa121f80b590ebf1fead17b68bc504ce6287996f1b9a287c5a7ed8d14effaf2",
+      "locator": "loc:v1/paragraph:476",
+      "full_quote": "Item 1A",
+      "page": null,
+      "quote_sha256": "08b0661198fa14e4f430feda35852355c1448813696ceea1225613c56682e0a8",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:92f1d7d71b3c939db2581e957eeab78fb57b6021ec595d055642378e63f1977e",
+      "locator": "loc:v1/paragraph:479",
+      "full_quote": "The security of our products and services is important in our customers’ decisions to purchase or use our products or services across cloud and on-premises environments. Security threats are a significant challenge to companies like us, whose business is providing technology products and services to others. Threats to or attacks on our own infrastructure, such as the nation-state attack described in the prior risk factor, have also affected our customers and may do so in the future. The reliability of our cloud-based services and the protection of customer data depend on the security of our infrastructure, which includes hardware and other elements provided by third parties. Adversaries tend to focus their efforts on the most popular operating systems, programs, and services, including many of ours, as well as customers with sensitive data, and we expect that to continue. In addition, adversaries can attack our customers’ on-premises or cloud environments, sometimes exploiting previously unknown (“zero-day”) vulnerabilities. Product vulnerabilities can persist even after we have issued security patches if customers have not installed the most recent updates, or if the attackers exploited the vulnerabilities before patching to install additional malware to further compromise customers’ systems. Adversaries will continue to attack customers using our cloud services as customers embrace digital transformation. Adversaries that acquire user account information can use that information to compromise our users’ accounts, including where accounts share the same attributes such as passwords. Inadequate account security practices may also result in unauthorized access, and user activity may result in ransomware or other malicious software impacting a customer’s use of our products or services. Weaknesses in our development processes can result in vulnerabilities in our products. Open source software can also contain vulnerabilities that may make our products susceptible to cyberattacks as we increasingly incorporate open source software into our products. Additionally, features that rely on generative AI can be susceptible to security threats.",
+      "page": null,
+      "quote_sha256": "edaa6a40c47fc4a418160529816e364dd1ca9a0d425c170b97a60ba44cab0f35",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_mechanism",
+        "operating_plan"
+      ],
+      "topics": [
+        "core_business",
+        "products_rd",
+        "new_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:0b5b4507493c0f9e5c19dcad8f5d8c7e2d15c3f77feb66dcd7616d0db07b7b75",
+      "locator": "loc:v1/paragraph:502",
+      "full_quote": "PART I",
+      "page": null,
+      "quote_sha256": "495768bd3d6957619d4fbe2457811a0483df9e815938bdd9fb195935ece1b264",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:1a19964445e54ac5f9b1fd4f1bd301ffa1dafc2feacd1e43b9b7f8f3589cd623",
+      "locator": "loc:v1/paragraph:503",
+      "full_quote": "Item 1A",
+      "page": null,
+      "quote_sha256": "08b0661198fa14e4f430feda35852355c1448813696ceea1225613c56682e0a8",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:b5f59da4cbd7b5f2f65387fb971841c8a51108095cf96a11fe8602b717d1022e",
+      "locator": "loc:v1/paragraph:506",
+      "full_quote": "We may have excessive outages, data losses, and disruptions of our online services if we fail to maintain an adequate operations infrastructure. Our increasing user traffic, growth in services, and the complexity of our products and services demand more computing power. We spend substantial amounts to build, purchase, or lease datacenters and equipment and to upgrade our technology and network infrastructure to handle more traffic on our websites and in our datacenters. Our datacenters depend on the availability of permitted and buildable land, predictable energy, networking supplies, and servers, including graphics processing units and other components. The cost or availability of these dependencies could be adversely affected by a variety of factors, including the transition to a clean energy economy, local and regional environmental regulations, and geopolitical disruptions. These demands continue to increase as we introduce new products and services and support the growth and the augmentation of existing services, including through the incorporation of AI features and/or functionality. We are rapidly growing our business of providing a platform and back-end hosting for services provided by third parties to their end users. Maintaining, securing, and expanding this infrastructure is expensive and complex, and requires development of principles for datacenter builds in geographies with higher safety and reliability risks. It requires that we maintain an Internet connectivity infrastructure and storage and compute capacity that is robust and reliable within competitive and regulatory constraints that continue to evolve. Inefficiencies or operational failures, including temporary or permanent loss of customer data, outages, insufficient Internet connectivity, insufficient or unavailable power or water supply, or inadequate storage and compute capacity could diminish the quality of our products, services, and user experience, resulting in contractual liability, claims by customers and other third parties, regulatory actions, damage to our reputation, and loss of current and potential users, subscribers, and advertisers, each of which could adversely affect our business, operations, financial condition, and results of operations.",
+      "page": null,
+      "quote_sha256": "606df3a398db26fe84c4ee64d0604d10542d83317f8853d40a42356c53882089",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "business_risk_or_constraint",
+        "operating_mechanism",
+        "operating_description_unknown"
+      ],
+      "topics": [
+        "core_business",
+        "capacity_projects",
+        "products_rd"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:a87c090e1743d0ba5981cb6a09cfef78f563b6c18ed2aef726eea79f1c8bfd22",
+      "locator": "loc:v1/paragraph:507",
+      "full_quote": "We may experience supply or quality problems. There are limited suppliers for certain device and datacenter components. We continue to identify and evaluate opportunities to expand our datacenter locations and increase our server capacity to meet the evolving needs of our customers, particularly given the growing demand for AI services. Capacity available to us may be affected as competitors use some of the same suppliers and materials for hardware components. If components are delayed or become unavailable, whether because of supplier capacity constraint, industry shortages, legal or regulatory changes that restrict supply sources, or other reasons, we may not obtain timely replacement supplies, resulting in reduced sales or inadequate datacenter capacity to support the delivery and continued development of our products and services. Component shortages, excess or obsolete inventory, or price reductions resulting in inventory adjustments may increase our cost of revenue. Datacenter servers, Xbox consoles, Surface devices, and other hardware are assembled in Asia and other geographies that may be subject to disruptions in the supply chain, resulting in shortages which could adversely affect our business, operations, financial condition, and results of operations.",
+      "page": null,
+      "quote_sha256": "e92713bfcc5a7bba9e25e53639fad9aba4c7ce3a3477d2b71c7df37c6f6f72b6",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "business_risk_or_constraint",
+        "operating_mechanism",
+        "operating_plan"
+      ],
+      "topics": [
+        "core_business",
+        "capacity_projects",
+        "products_rd",
+        "new_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:b26233d215218f00b7c8385a9ed8df998cd62daf6fbf9c9806b1dd65718b9816",
+      "locator": "loc:v1/paragraph:509",
+      "full_quote": "PART I",
+      "page": null,
+      "quote_sha256": "495768bd3d6957619d4fbe2457811a0483df9e815938bdd9fb195935ece1b264",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:90c780e29079d7b023aa04bb7e231f3906a840e78eead7ab99feeeda5a2327c4",
+      "locator": "loc:v1/paragraph:510",
+      "full_quote": "Item 1A",
+      "page": null,
+      "quote_sha256": "08b0661198fa14e4f430feda35852355c1448813696ceea1225613c56682e0a8",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:c276f8d58226bbd3b103ca459d7d4783ff916b5d8e8fd40d7d895b130a027932",
+      "locator": "loc:v1/paragraph:511",
+      "full_quote": "Our software products and services also have and may in the future experience quality or reliability problems. The processes we use to develop our software are imperfect. Like all software, our software contains bugs and other defects that interfere with their intended operation. Our customers increasingly rely on us for critical business functions and multiple workloads. Many of our products and services are interdependent on one another. Our products and services may be impacted by interaction with third-party products and services. Our customers may also utilize their own or third-party products and services whose reliability is dependent on interaction with our products and services. Each of these circumstances potentially magnifies the impact of quality or reliability issues. Weaknesses in our processes could result in defects we do not detect and fix in pre-release testing, which could cause reduced sales, damage to our reputation, repair or remediation costs, delays in the release of new products or versions, or legal liability, and could adversely affect our business, financial condition, and results of operations. Although our license agreements typically contain provisions that eliminate or limit our exposure to liability, there is no assurance these provisions will withstand legal challenge.",
+      "page": null,
+      "quote_sha256": "0183e630c0e9619cb3a93e8f17afb544816c6a2446355a38a4fa017092271216",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_mechanism",
+        "operating_metric_change",
+        "operating_description_unknown"
+      ],
+      "topics": [
+        "core_business",
+        "products_rd",
+        "operating_metric_change"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:5df97c5adca49a9a04493d51749be21af22025cfb5642dd83fbbad56fe947d7c",
+      "locator": "loc:v1/paragraph:512",
+      "full_quote": "Our hardware products such as Xbox consoles, Surface devices, and other devices we design and market are highly complex. Failure to prevent, detect, or address defects in design, manufacture, or associated software could result in recalls, safety alerts, or product liability claims, which could adversely affect our business and results of operations.",
+      "page": null,
+      "quote_sha256": "ca9e4152ab2a409ee01c5384445e8c96bc259794e4633629e19cdb0bef0d4520",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_milestone",
+        "operating_state_unknown"
+      ],
+      "topics": [
+        "core_business",
+        "business_progress"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:a63e149f825c9e08b465c4bbf7762694bec129437b74d085cd39a0058f72ae03",
+      "locator": "loc:v1/paragraph:523",
+      "full_quote": "PART I",
+      "page": null,
+      "quote_sha256": "495768bd3d6957619d4fbe2457811a0483df9e815938bdd9fb195935ece1b264",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:1f31a927faa188f87646f9e540e73c3827f5879dfc91387a89eb85c9c507df8e",
+      "locator": "loc:v1/paragraph:524",
+      "full_quote": "Item 1A",
+      "page": null,
+      "quote_sha256": "08b0661198fa14e4f430feda35852355c1448813696ceea1225613c56682e0a8",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:d779fbdb76a6f6098efd25936e81064158443d92f3645e6ea9d02680b223955b",
+      "locator": "loc:v1/paragraph:525",
+      "full_quote": "Trade: Increasing trade laws, policies, sanctions, and other regulatory requirements also affect our operations in and outside the U.S. relating to trade and investment. Economic sanctions in the U.S., the EU, and other countries prohibit most business with restricted entities or countries. U.S. export controls restrict Microsoft from offering many of its products and services to, or making investments in, certain entities in specified countries. U.S. import controls restrict us from integrating certain information and communication technologies into our supply chain and allow for government review of transactions involving information and communications technology from countries determined to be foreign adversaries. Supply chain regulations may impact the availability of goods or result in additional regulatory scrutiny. Restrictions on data flows and outbound investment and customer sensitivities may limit our ability to leverage parts of our global engineering footprint to provide services in certain jurisdictions. Increased geopolitical instabilities and changing U.S. Administration priorities create an unpredictable trade landscape. U.S. tariff and shifting AI export controls policies, like the AI Diffusion Rule, could increase operational costs, create uncertainty in the continuity of our products, and accelerate sovereignty initiatives among international partners and customers. The volatility of U.S. tariffs has triggered economic uncertainty and could impact cloud and devices supply chain cost competitiveness. The potential replacement of the recently rescinded AI Diffusion Rule and other potential AI-related rulemakings could adversely affect Microsoft’s business, strategy, and operations. Periods of intense diplomatic or armed conflict like the ongoing conflict in Ukraine and the Israel-Hamas conflict could result in (1) new and rapidly evolving sanctions and trade restrictions, which may impair trade with sanctioned individuals and countries, and (2) negative impacts to regional trade ecosystems among our customers, partners, and us.",
+      "page": null,
+      "quote_sha256": "8588dfa5f54cffec331c5b1620c6002ab4c330198351aff4a0471413c748c764",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "business_risk_or_constraint"
+      ],
+      "topics": [
+        "core_business",
+        "overseas",
+        "products_rd"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:b3708198a812b28309b36c4e9b1deeb90d8fa41a6bfedd70f3653997cfb9cc5f",
+      "locator": "loc:v1/paragraph:529",
+      "full_quote": "Handling of personal data: Legal requirements relating to the collection, storage, handling, and transfer of personal data globally continue to evolve. The growth of our Internet- and cloud-based services internationally relies on the movement of data across national boundaries. Data protection authorities and governments in the EU and other markets have and may again restrict and/or block the use of services that involve the transfer of data across borders. New and evolving rules and restrictions on the flow of data across borders could increase the cost and complexity of delivering our products and services. In addition, the EU General Data Protection Regulation (“GDPR”) and other similar regulations impose a range of compliance obligations regarding the handling of personal data. New requirements related to the use of data, including the Data Act, add additional rules and restrictions on the use of data in our products and services.",
+      "page": null,
+      "quote_sha256": "3289904574e449aa0bd6e109249853f2fb2d4e0f83d96dbe497b3b3215c749c8",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "business_risk_or_constraint",
+        "operating_plan"
+      ],
+      "topics": [
+        "core_business",
+        "new_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:915add030e65ca876ea1cb3e07b7cb3b4e999574368cb4545d55ead5b5057513",
+      "locator": "loc:v1/paragraph:564",
+      "full_quote": "PART I",
+      "page": null,
+      "quote_sha256": "495768bd3d6957619d4fbe2457811a0483df9e815938bdd9fb195935ece1b264",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:ca26191fff27b6a3537bc58ba8dd91ebc0c9cf47fff71942bc3053c3c81fe56b",
+      "locator": "loc:v1/paragraph:565",
+      "full_quote": "Item 1A",
+      "page": null,
+      "quote_sha256": "08b0661198fa14e4f430feda35852355c1448813696ceea1225613c56682e0a8",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:c336ddcf6640c6c2bf976dc51b93e0017499242f1bc924cfe3e409b6cedaaea5",
+      "locator": "loc:v1/paragraph:571",
+      "full_quote": "In addition, our international growth strategy includes certain markets, the developing nature of which presents several risks, including deterioration of social, political, labor, or economic conditions in a country or region, and difficulties in staffing and managing foreign operations. Emerging nationalist and protectionist trends and concerns about human rights, the environment, and political expression in specific countries may significantly alter the trade and commercial environments. Changes to trade policy or agreements as a result of populism, protectionism, or economic nationalism may result in higher tariffs, local sourcing initiatives, and non-local sourcing restrictions, export controls, investment restrictions, or other developments that make it more difficult to operate and sell our products in foreign countries. Disruptions of these kinds in developed or emerging markets could negatively impact demand for our products and services, impair our ability to operate in certain regions, or increase operating costs. Although we hedge a portion of our international currency exposure, significant fluctuations in foreign exchange rates between the U.S. dollar and foreign currencies could adversely affect our results of operations.",
+      "page": null,
+      "quote_sha256": "f6de529bdb37abf2f89cdd8bb01c771ec51017f3758cf8ee8c3081806ef5402c",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "business_risk_or_constraint"
+      ],
+      "topics": [
+        "core_business",
+        "capacity_projects",
+        "overseas",
+        "products_rd"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:3e84ae9e6c3473a732c6bb6d3e02d94a56deb0e417de67745d154595c627115b",
+      "locator": "loc:v1/paragraph:573",
+      "full_quote": "PART I",
+      "page": null,
+      "quote_sha256": "495768bd3d6957619d4fbe2457811a0483df9e815938bdd9fb195935ece1b264",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:8854c5e138d95f1d47cede1be71885a4857e37531294ad217b068c04eaf41f61",
+      "locator": "loc:v1/paragraph:574",
+      "full_quote": "Item 1A",
+      "page": null,
+      "quote_sha256": "08b0661198fa14e4f430feda35852355c1448813696ceea1225613c56682e0a8",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:5ffe65c4588f1ac29bcfaeeb9d1f59c83cd87db039dfe6f472b59e6dbd8ef3b8",
+      "locator": "loc:v1/paragraph:575",
+      "full_quote": "Our business depends on our ability to attract and retain talented employees. Our business is based on successfully attracting, training, and retaining talented employees representing diverse backgrounds, experiences, and skill sets. The market for highly skilled workers and leaders in our industry is extremely competitive. Maintaining our brand and reputation, as well as an inclusive work environment that enables all our employees to thrive, are important to our ability to recruit and retain employees. We are also limited in our ability to recruit internationally by restrictive domestic immigration laws. Restraints on the flow of technical and professional talent, including those derived from changes to U.S. immigration policies or laws, may inhibit our ability to adequately staff our research and development efforts. If we are less successful in our recruiting efforts, or if we cannot retain highly skilled workers and key leaders, our ability to develop and deliver successful products and services could be adversely affected. Effective succession planning is also important to our long-term success. Failure to ensure effective transfer of knowledge and smooth transitions involving key employees could hinder our strategic planning and execution. How employment-related laws are interpreted and applied to our workforce practices may result in increased operating costs and less flexibility in how we meet our workforce needs. Our global workforce is predominantly non-unionized, although we do have some employees in the U.S. and internationally who are represented by unions or works councils. In the U.S., there has been a general increase in workers exercising their right to form or join a union. The unionization of significant employee populations could result in higher costs and other operational changes necessary to respond to changing conditions and to establish new relationships with worker representatives.",
+      "page": null,
+      "quote_sha256": "20d63c7d6ed0697f6a57fa6b0807c4c755d7ce8857b7398fa27e152e416d4f97",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_mechanism",
+        "business_risk_or_constraint",
+        "operating_plan"
+      ],
+      "topics": [
+        "core_business",
+        "new_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:806f8b778ac719be1ce3fc6647118de5ff9090a72e2f8cd1de2f3b32b83aede4",
+      "locator": "loc:v1/paragraph:577",
+      "full_quote": "PART I",
+      "page": null,
+      "quote_sha256": "495768bd3d6957619d4fbe2457811a0483df9e815938bdd9fb195935ece1b264",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:af35a93ed121ac5978510edfa01d368517bdd9dd30f86b5bd724a1a1c723f08a",
+      "locator": "loc:v1/paragraph:581",
+      "full_quote": "ITEM 1C. CY BERSECURITY",
+      "page": null,
+      "quote_sha256": "4ad3df943aadb0b12ca4eb6fa91547b655307bdd96552e55c3139ec4026beca4",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:6345936c11ae8f1d1adeb0a48eb45f794106ea6e3ca3cd73cfba79b9c51002ab",
+      "locator": "loc:v1/paragraph:590",
+      "full_quote": "We operate a cybersecurity program and governance framework designed to protect our computing environments against cybersecurity threats, and we have controls, policies, and procedures to identify, manage, and mitigate cybersecurity threats. Annually, we assess our cybersecurity program’s alignment with the National Institute of Standards & Technology’s Cyber Security Framework (“NIST”) and other applicable industry standards. We also undertake integrated planning and preparedness activities to support business continuity and operational resiliency. We assess our program's effectiveness through various exercises, including tabletop simulations and production environment tests, penetration and vulnerability tests, red team exercises, and other related activities. We conduct mandatory cybersecurity training, provide employees with tools to report suspected incidents and assess their own security posture, and conduct real-time simulated employee education exercises, such as phishing email campaigns designed to emulate real-world attacks. We also engage in robust cybersecurity assessments and remediation efforts for acquired companies.",
+      "page": null,
+      "quote_sha256": "ebf1ee64dae7776d6305cc4a3729d60664b34ee76d62839fca4f846cf9cb601d",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_milestone",
+        "operating_state_unknown"
+      ],
+      "topics": [
+        "core_business",
+        "business_progress"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:2eb804413ec04e372e071ad72a8ae5cd7c0ab39b6f97c8ea4ff63673573133b7",
+      "locator": "loc:v1/paragraph:719",
+      "full_quote": "PART II",
+      "page": null,
+      "quote_sha256": "87b6a3b1d87b62692a8d3c58da990ad0e08cd90f00d5c5f3169ed3bb04bf166a",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:ac17b74db2a2048fb9302eba3226a7655b0610bc70daf5ae8e310ae6281473f6",
+      "locator": "loc:v1/paragraph:720",
+      "full_quote": "Item 7",
+      "page": null,
+      "quote_sha256": "6fb2db0fe4c4a42049a9f54f18891d22a2b8523542ece709ba6c8284040592e7",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:321ab17447a9c9af483a12253ea310522bfa3e4ae5233a76748081ee9942b410",
+      "locator": "loc:v1/paragraph:723",
+      "full_quote": "The investments we are making in cloud and AI infrastructure and devices will continue to increase our operating costs and may decrease our operating margins. We continue to identify and evaluate opportunities to expand our datacenter locations and increase our server capacity to meet the evolving needs of our customers, particularly given the growing demand for AI services. Our datacenters depend on the availability of permitted and buildable land, predictable energy, networking supplies, and servers, including graphics processing units (“GPUs”) and other components. Our devices are primarily manufactured by third-party contract manufacturers. For the majority of our products, we have the ability to use other manufacturers if a current vendor becomes unavailable or unable to meet our requirements. However, some of our products contain certain components for which there are very few qualified suppliers. Extended disruptions at these suppliers could impact our ability to manufacture devices on time to meet consumer demand.",
+      "page": null,
+      "quote_sha256": "9003ccb84cace0bde5f2baa68c76b0c8815e4d0e28e13f4a1262a2b475d54edd",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_mechanism",
+        "operating_current_state",
+        "operating_state_unknown",
+        "operating_other_party_state"
+      ],
+      "topics": [
+        "core_business",
+        "capacity_projects"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:b45713f2ee79ce5e0d524bdb1dc9e4ae40499bcfcc02df5d1c95948c7dfa5382",
+      "locator": "loc:v1/paragraph:731",
+      "full_quote": "We report our financial performance based on the following segments: Productivity and Business Processes, Intelligent Cloud, and More Personal Computing. The segment amounts included in MD&A are presented on a basis consistent with our internal management reporting.",
+      "page": null,
+      "quote_sha256": "51fab0a0a4734e09d8995e8717859b0078da8a92e9aebcc446aa99d9fea1fd20",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "business_reporting_scope"
+      ],
+      "topics": [
+        "business_reporting_scope"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:585b5fa3d977d1a4d3dc09ad01197a875b51b1b9f45fafffd1e00a519427ac11",
+      "locator": "loc:v1/paragraph:732",
+      "full_quote": "In August 2024, we announced changes to the composition of our segments. These changes align our segments with how we currently manage our business, most notably bringing the commercial components of Microsoft 365 together in the Productivity and Business Processes segment. Beginning in fiscal year 2025, the information that our chief operating decision maker is regularly provided and reviews for purposes of allocating resources and assessing performance reflects these segment changes. Prior period segment information has been recast to conform to the way we internally manage and monitor our business during fiscal year 2025.",
+      "page": null,
+      "quote_sha256": "65c0c62276b194dd9ba33d52767604258acf9987a58aa6a04f90f698d29bf56a",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "business_reporting_scope"
+      ],
+      "topics": [
+        "business_reporting_scope"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:445576b96b4782fa7503a9b77cd2833d2e13e7ec22608d7f75321c46dd30710a",
+      "locator": "loc:v1/paragraph:735",
+      "full_quote": "PART II",
+      "page": null,
+      "quote_sha256": "87b6a3b1d87b62692a8d3c58da990ad0e08cd90f00d5c5f3169ed3bb04bf166a",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:98dc2b88611978c4898d53dd5a11a7067b48b9a174f997494c0f1fa5fee13276",
+      "locator": "loc:v1/paragraph:736",
+      "full_quote": "Item 7",
+      "page": null,
+      "quote_sha256": "6fb2db0fe4c4a42049a9f54f18891d22a2b8523542ece709ba6c8284040592e7",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:18ef62817453389f7dffe74fe7aa6c18f88c24d025386a37640e06b466a93803",
+      "locator": "loc:v1/paragraph:738",
+      "full_quote": "We use metrics in assessing the performance of our business and to make informed decisions regarding the allocation of resources. We disclose metrics to enable investors to evaluate progress against our ambitions, provide transparency into performance trends, and reflect the continued evolution of our products and services. Our commercial and other business metrics are fundamentally connected based on how customers use our products and services. The metrics are disclosed in the MD&A or the Notes to Financial Statements (Part II, Item 8 of this Form 10-K). Financial metrics are calculated based on financial results prepared in accordance with accounting principles generally accepted in the United States of America (“GAAP”), and growth comparisons relate to the corresponding period of last fiscal year.",
+      "page": null,
+      "quote_sha256": "f3be676601a16546023d7e8ccc724ac0a15143cbb4fd4ddb89c78645c5463f26",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_current_state"
+      ],
+      "topics": [
+        "core_business",
+        "capacity_projects"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:c289f6a278daea6179261b52de7fd4776c557d4de7a690dabe7f169bda8ca74e",
+      "locator": "loc:v1/paragraph:739",
+      "full_quote": "In the first quarter of fiscal year 2025, we made updates to our metrics in connection with the segment changes described above. These changes align our metrics with how we manage and monitor certain businesses. The key change was bringing the commercial components of Microsoft 365 together and creating a new Microsoft 365 Commercial cloud revenue growth metric. Other changes include combining Windows OEM and Devices into a single revenue growth metric that brings revenue from PC market-driven businesses together, as well as elevating our cloud revenue growth metrics to align to our strategic focus on cloud growth.",
+      "page": null,
+      "quote_sha256": "4e0fcd863377309ed4f7b4454bfe036fe73812a72745e185420d50e1cc8a5b98",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "business_reporting_scope"
+      ],
+      "topics": [
+        "business_reporting_scope"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:6c920f426c72ac112b7a812e9ca24414512db698cdab58642daf1f71d67a61da",
+      "locator": "loc:v1/paragraph:741",
+      "full_quote": "Our commercial business primarily consists of Server products and cloud services, Microsoft 365 Commercial products and cloud services, the commercial portion of LinkedIn, Dynamics products and cloud services, and Enterprise and partner services. Our commercial metrics allow management and investors to assess the overall health of our commercial business and include leading indicators of future performance.",
+      "page": null,
+      "quote_sha256": "fa3896690ce45d7242601e137ba40b4238e06130915e724b452dc937b5ec709a",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "business_structure",
+        "operating_description_unknown"
+      ],
+      "topics": [
+        "core_business",
+        "products_rd"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:e01c0fce4f49d9f5dd93d20fa17f342816bb2f9bb1eba9a47faf3fe4cc99321f",
+      "locator": "loc:v1/table:10/row:1/column:0",
+      "full_quote": "Commercial remaining performance obligation",
+      "page": null,
+      "quote_sha256": "a994ca13b85c7cb0cb0927faa9d2bbfc9992671e942afeef1d82ea10c0b742ff",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:a9648f494966932634526d2096f653e8acc9f297de9218432e580bf7b3457a5a",
+      "locator": "loc:v1/table:10/row:1/column:2",
+      "full_quote": "Commercial portion of revenue allocated to remaining performance obligations, which includes unearned revenue and amounts that will be invoiced and recognized as revenue in future periods",
+      "page": null,
+      "quote_sha256": "e34c979fb3de8e066039c2c8a04bb2c9698e1664edff01cae79335d323b3eba0",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:ca3ada35b0ac064045a3220514969e5f839e401110f43705febdbb34160f2c3c",
+      "locator": "loc:v1/table:10/row:3/column:0",
+      "full_quote": "Microsoft Cloud revenue and revenue growth",
+      "page": null,
+      "quote_sha256": "2d5e5afc4253d235bfd3b4b4c3fa4b6509c491f0cf10a2dc49f5928b57adb762",
+      "quality_flags": [
+        "table_structure_ambiguous"
+      ],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:5ddd7a3e71c135dcd5df56605aaffd09c0cbe5e9ec2a85a7c33c124d0644e4f6",
+      "locator": "loc:v1/table:10/row:3/column:2",
+      "full_quote": "Revenue from Microsoft 365 Commercial cloud, Azure and other cloud services, the commercial portion of LinkedIn, and Dynamics 365",
+      "page": null,
+      "quote_sha256": "ac45d690118756a6d75911cff73fb497eabe74f12b98ef7a59c6af84698edf15",
+      "quality_flags": [
+        "table_structure_ambiguous"
+      ],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:4c258fcdcb5899b712c533b41c3cb349402726bfcd0344d2dde4264414619669",
+      "locator": "loc:v1/table:10/row:5/column:0",
+      "full_quote": "Microsoft Cloud gross margin percentage",
+      "page": null,
+      "quote_sha256": "4530788373f7dc65baa0a3254c6096318f663bf485a488d1d348a5185b83ccaa",
+      "quality_flags": [
+        "table_structure_ambiguous"
+      ],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:fb08b7fa0fc479cb9aba51f55012cbddd0052f3a1d04e0dea69186dd2256f42c",
+      "locator": "loc:v1/table:10/row:5/column:2",
+      "full_quote": "Gross margin percentage for our Microsoft Cloud business",
+      "page": null,
+      "quote_sha256": "173330016afbf7581c29cb57a7f1be819fceb8f95eced7e82858f58e12247f03",
+      "quality_flags": [
+        "table_structure_ambiguous"
+      ],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:1ce287cd584dd9cb8084997ea0b7ffc5648f459d14a18f0d52f844585cf8e835",
+      "locator": "loc:v1/table:11/row:3/column:0",
+      "full_quote": "Microsoft 365 Commercial seat growth",
+      "page": null,
+      "quote_sha256": "5c6e0fe8e1f977869f4aac72ed014cb51f2d75fb85ed9627232e8c6648a424ce",
+      "quality_flags": [
+        "table_structure_ambiguous"
+      ],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_metric_change"
+      ],
+      "topics": [
+        "operating_metric_change"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:6fcb4746851040461df503eecbe46b465acd99b2f0df40a1ca190005cf918d64",
+      "locator": "loc:v1/table:11/row:3/column:2",
+      "full_quote": "The number of Microsoft 365 Commercial seats at end of period where seats are paid users covered by a Microsoft 365 Commercial subscription",
+      "page": null,
+      "quote_sha256": "a8ce69cab3c0662a3166011c81f069207d68bcc71767c619f764eb438defa813",
+      "quality_flags": [
+        "table_structure_ambiguous"
+      ],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:d91191c96f2ec5e0cd6b82a2b1cfb43294876cf682f13c7d28b0e9574a975dc6",
+      "locator": "loc:v1/table:11/row:7/column:0",
+      "full_quote": "Microsoft 365 Consumer subscribers",
+      "page": null,
+      "quote_sha256": "734b9ab886691f0f7098cc6fc69e4b1926b56db56f5f93e6acfff4e578b936ed",
+      "quality_flags": [
+        "table_structure_ambiguous"
+      ],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:e0d7274e45cdf75fac857514d65becbc030f3296f346253a235e022bade289e4",
+      "locator": "loc:v1/table:11/row:7/column:2",
+      "full_quote": "The number of Microsoft 365 Consumer subscribers at end of period",
+      "page": null,
+      "quote_sha256": "6e5a896d0df38404b64fc7f0ccd69052dcef817dd348412a59e5b158ce426e16",
+      "quality_flags": [
+        "table_structure_ambiguous"
+      ],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:707df2667babbfd954d970766aefd18b65c7ff3d794c54fe071aa0d7ee5ca020",
+      "locator": "loc:v1/paragraph:813",
+      "full_quote": "PART II",
+      "page": null,
+      "quote_sha256": "87b6a3b1d87b62692a8d3c58da990ad0e08cd90f00d5c5f3169ed3bb04bf166a",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:11a8ec20fa3b592db27708cfaf01af84241b016fd3384d727691ec5eb255b0b5",
+      "locator": "loc:v1/paragraph:814",
+      "full_quote": "Item 7",
+      "page": null,
+      "quote_sha256": "6fb2db0fe4c4a42049a9f54f18891d22a2b8523542ece709ba6c8284040592e7",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:dc02b23f4fb0be1692f20d15bd0f6498515748add787fec297349d5a4edc04be",
+      "locator": "loc:v1/paragraph:908",
+      "full_quote": "Microsoft 365 Commercial products and cloud services revenue increased $10.8 billion or 14%. Microsoft 365 Commercial cloud revenue grew 15% with Microsoft 365 Commercial seat growth of 6% driven by small and medium businesses and frontline worker offerings, as well as growth in revenue per user. Microsoft 365 Commercial products revenue grew 7% driven by the Windows Commercial on-premises components of Microsoft 365 suite sales and an increase in Office transactional purchasing with the launch of Office 2024.",
+      "page": null,
+      "quote_sha256": "11ff0d41f950445a6f002b52f2d071c95e5b05e6c728bb06e8dba853f81627ed",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "business_billing_basis",
+        "operating_metric_change",
+        "operating_description_unknown"
+      ],
+      "topics": [
+        "business_billing_basis",
+        "operating_metric_change",
+        "capacity_projects",
+        "core_business"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:e749c64cdd89a3329a01bdf201e87dc635c245c4ec45bdb83a27c2818500ed0d",
+      "locator": "loc:v1/paragraph:910",
+      "full_quote": "Microsoft 365 Consumer products and cloud services revenue increased $756 million or 11%. Microsoft 365 Consumer cloud revenue grew 11% driven by Microsoft 365 Consumer subscriber growth of 8% to 89.0 million, as well as growth in revenue per user from the price increase announced in January 2025.",
+      "page": null,
+      "quote_sha256": "6e0d4815a43d7c03bfda536ae6a6a6bf8aa5bf2cf937f02dc555fbe65287f75d",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_causal_driver",
+        "business_billing_basis",
+        "operating_metric_change",
+        "product_operating_driver"
+      ],
+      "topics": [
+        "operating_causal_driver",
+        "business_billing_basis",
+        "operating_metric_change",
+        "product_operating_driver"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:029220fc1f6993832e8f32d3fca4f1cd169a2ebd64b9d4bb86cf7e51fe39ff48",
+      "locator": "loc:v1/paragraph:924",
+      "full_quote": "PART II",
+      "page": null,
+      "quote_sha256": "87b6a3b1d87b62692a8d3c58da990ad0e08cd90f00d5c5f3169ed3bb04bf166a",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:91d0f777db38c010f68295220ef542279ef477ab266bf1d26fa6766190b66f74",
+      "locator": "loc:v1/paragraph:925",
+      "full_quote": "Item 7",
+      "page": null,
+      "quote_sha256": "6fb2db0fe4c4a42049a9f54f18891d22a2b8523542ece709ba6c8284040592e7",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:76f0355dd29cc9af20782b8f2dfd460c0690194fa0bc989fdf0b3752612cf9d0",
+      "locator": "loc:v1/paragraph:928",
+      "full_quote": "Server products and cloud services revenue increased $18.6 billion or 23% driven by Azure and other cloud services. Azure and other cloud services revenue grew 34% driven by demand for our portfolio of services. Server products revenue decreased 3% driven by a decrease in transactional purchasing with continued customer shift to cloud offerings.",
+      "page": null,
+      "quote_sha256": "2b412f2dcf2414593e033d7da216e09c6ef3e6404c6f384e297ea2ec54798f8e",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_causal_driver",
+        "operating_metric_change",
+        "product_operating_driver",
+        "operating_description_unknown"
+      ],
+      "topics": [
+        "core_business",
+        "operating_causal_driver",
+        "operating_metric_change",
+        "product_operating_driver"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:ddb2b2c5636aab4351c8de4e0fd2670b4d0178bfb4f7001f81ed1c3c28457627",
+      "locator": "loc:v1/paragraph:1844",
+      "full_quote": "PART II",
+      "page": null,
+      "quote_sha256": "87b6a3b1d87b62692a8d3c58da990ad0e08cd90f00d5c5f3169ed3bb04bf166a",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:85ac9616fd47e651c7d6c881f0aef6e2bf943a0f30b2fd006cabe7006e6c92c4",
+      "locator": "loc:v1/paragraph:1845",
+      "full_quote": "Item 8",
+      "page": null,
+      "quote_sha256": "cfc3637bd6712da85137c80600e5290f49cd064e68ace3151e1ed788f06aa67d",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:a60ce8d282205321da3c878be63a2f984cde469a121d803aa4e18d3fab1c6292",
+      "locator": "loc:v1/paragraph:1853",
+      "full_quote": "In August 2024, we announced changes to the composition of our segments. These changes align our segments with how we currently manage our business, most notably bringing the commercial components of Microsoft 365 together in the Productivity and Business Processes segment. Beginning in fiscal year 2025, the information that our chief operating decision maker is regularly provided and reviews for purposes of allocating resources and assessing performance reflects these segment changes. Prior period segment information has been recast to conform to the way we internally manage and monitor our business during fiscal year 2025. These changes primarily impacted Note 8 – Goodwill, Note 12 – Unearned Revenue, and Note 18 – Segment Information and Geographic Data.",
+      "page": null,
+      "quote_sha256": "00ca320873c6aa6182d621143965a62b7fafee7673bd3ef6926ae2056d0aa17f",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "business_reporting_scope"
+      ],
+      "topics": [
+        "business_reporting_scope"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:9ab62cef2badd0dc7296dd7b19fb0e795664fa5bf9c9c909dc340ea1a3bcec0f",
+      "locator": "loc:v1/paragraph:1864",
+      "full_quote": "PART II",
+      "page": null,
+      "quote_sha256": "87b6a3b1d87b62692a8d3c58da990ad0e08cd90f00d5c5f3169ed3bb04bf166a",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:4df1170ec37b01c83fbb311eefe192d6715928e5c11779e253b9f337a2dbd4e0",
+      "locator": "loc:v1/paragraph:1865",
+      "full_quote": "Item 8",
+      "page": null,
+      "quote_sha256": "cfc3637bd6712da85137c80600e5290f49cd064e68ace3151e1ed788f06aa67d",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:d61b2e3c132afb9b7075b8a6886bb38795feb6588e2296f00ed673ec9c2418be",
+      "locator": "loc:v1/paragraph:1871",
+      "full_quote": "Certain volume licensing programs, including Enterprise Agreements, include on-premises licenses combined with Software Assurance (“SA”). SA conveys rights to new software and upgrades released over the contract period and provides support, tools, and training to help customers deploy and use products more efficiently. On-premises licenses are considered distinct performance obligations when sold with SA. Revenue allocated to SA is generally recognized ratably over the contract period as customers simultaneously consume and receive benefits, given that SA comprises distinct performance obligations that are satisfied over time.",
+      "page": null,
+      "quote_sha256": "e4c29111fb8ca7b41fb8509875c83a5360353bba2998f5f4ab41a805c61af358",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "operating_mechanism",
+        "business_structure",
+        "business_revenue_recognition",
+        "operating_description_unknown"
+      ],
+      "topics": [
+        "core_business",
+        "products_rd",
+        "business_revenue_recognition"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:64a14166014780fbc20afb96966485a867ce6922b20b00321ab0b48fed466955",
+      "locator": "loc:v1/paragraph:3829",
+      "full_quote": "PART II",
+      "page": null,
+      "quote_sha256": "87b6a3b1d87b62692a8d3c58da990ad0e08cd90f00d5c5f3169ed3bb04bf166a",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:7da32196b25db2ef4ee3f315ccdb4e3e7ee516532f1665725b7fb2da43193d93",
+      "locator": "loc:v1/paragraph:3830",
+      "full_quote": "Item 8",
+      "page": null,
+      "quote_sha256": "cfc3637bd6712da85137c80600e5290f49cd064e68ace3151e1ed788f06aa67d",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:bebd55194edde5635fe4e3b3932b0ee2dc5a9f580fcd30a2a39f01ca97e28574",
+      "locator": "loc:v1/paragraph:3845",
+      "full_quote": "Revenue allocated to remaining performance obligations, which includes unearned revenue and amounts that will be invoiced and recognized as revenue in future periods, was $ 375 billion as of June 30, 2025, of which $ 368 billion is related to the commercial portion of revenue. We expect to recognize approximately 40 % of our total company remaining performance obligation revenue over the next 12 months and the remainder thereafter.",
+      "page": null,
+      "quote_sha256": "71eac6842bc154db11f0b3ce3498c9836658889ac0d489a808bc42b25254463e",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "source_revenue_guidance",
+        "contract_revenue_conversion",
+        "operating_contract_stock"
+      ],
+      "topics": [
+        "source_revenue_guidance",
+        "contract_revenue_conversion",
+        "operating_metrics"
+      ]
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:a617b820e0ab1ddc1b336409252bdcdc8cef4b062a7ce896a9819ecdfc05d42c",
+      "locator": "loc:v1/paragraph:4391",
+      "full_quote": "PART II",
+      "page": null,
+      "quote_sha256": "87b6a3b1d87b62692a8d3c58da990ad0e08cd90f00d5c5f3169ed3bb04bf166a",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:2eb9526144f53aaf190992f019546821e1cb4a84ffdb7591e88de250a0a82828",
+      "locator": "loc:v1/paragraph:4392",
+      "full_quote": "Item 8",
+      "page": null,
+      "quote_sha256": "cfc3637bd6712da85137c80600e5290f49cd064e68ace3151e1ed788f06aa67d",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_context"
+      ],
+      "topics": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:b47e0d576f56828b9640d02b173b8b0a05a3da9824a104c8ba44d3ed11e4829e",
+      "locator": "loc:v1/paragraph:4416",
+      "full_quote": "In its operation of the business, management, including our chief operating decision maker (“CODM”), who is also our Chief Executive Officer , reviews certain financial information, including segmented internal profit and loss statements. The primary profitability measure used by the CODM to review segment operating results is operating income. The CODM uses operating income to allocate resources during our annual planning process and throughout the year, as well as to assess the performance of our segments, primarily by monitoring actual results compared to prior periods and expected results. During the periods presented, we reported our financial performance based on the following segments: Productivity and Business Processes, Intelligent Cloud, and More Personal Computing.",
+      "page": null,
+      "quote_sha256": "89892876b0c8003c170ad642175ef5e5e321bc93dcf5d16fd992f8a84a64b082",
+      "quality_flags": [],
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "business_reporting_scope"
+      ],
+      "topics": [
+        "business_reporting_scope"
+      ]
+    }
+  ],
+  "actual_model_payload_sha256": "fa22c2931586b51f56df0b24e43002eb82df2efcd0ee16f8e16f50a072b872f6",
+  "actual_model_binding_sha256": "5dddd28a100d6f25033de7dcd565afd476b68947d518b131875205356dacc3cb",
+  "actual_task_count": 50,
+  "tasks": [
+    {
+      "key": "t1",
+      "kind": "operating_table",
+      "section_role": "management_discussion",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:ca3ada35b0ac064045a3220514969e5f839e401110f43705febdbb34160f2c3c",
+        "urn:company-wiki:evidence-span:sha256:5ddd7a3e71c135dcd5df56605aaffd09c0cbe5e9ec2a85a7c33c124d0644e4f6",
+        "urn:company-wiki:evidence-span:sha256:4c258fcdcb5899b712c533b41c3cb349402726bfcd0344d2dde4264414619669",
+        "urn:company-wiki:evidence-span:sha256:fb08b7fa0fc479cb9aba51f55012cbddd0052f3a1d04e0dea69186dd2256f42c"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:e01c0fce4f49d9f5dd93d20fa17f342816bb2f9bb1eba9a47faf3fe4cc99321f",
+        "urn:company-wiki:evidence-span:sha256:a9648f494966932634526d2096f653e8acc9f297de9218432e580bf7b3457a5a"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:e01c0fce4f49d9f5dd93d20fa17f342816bb2f9bb1eba9a47faf3fe4cc99321f",
+        "urn:company-wiki:evidence-span:sha256:a9648f494966932634526d2096f653e8acc9f297de9218432e580bf7b3457a5a",
+        "urn:company-wiki:evidence-span:sha256:ca3ada35b0ac064045a3220514969e5f839e401110f43705febdbb34160f2c3c",
+        "urn:company-wiki:evidence-span:sha256:5ddd7a3e71c135dcd5df56605aaffd09c0cbe5e9ec2a85a7c33c124d0644e4f6",
+        "urn:company-wiki:evidence-span:sha256:4c258fcdcb5899b712c533b41c3cb349402726bfcd0344d2dde4264414619669",
+        "urn:company-wiki:evidence-span:sha256:fb08b7fa0fc479cb9aba51f55012cbddd0052f3a1d04e0dea69186dd2256f42c"
+      ]
+    },
+    {
+      "key": "t2",
+      "kind": "operating_table",
+      "section_role": "management_discussion",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:1ce287cd584dd9cb8084997ea0b7ffc5648f459d14a18f0d52f844585cf8e835",
+        "urn:company-wiki:evidence-span:sha256:6fcb4746851040461df503eecbe46b465acd99b2f0df40a1ca190005cf918d64",
+        "urn:company-wiki:evidence-span:sha256:d91191c96f2ec5e0cd6b82a2b1cfb43294876cf682f13c7d28b0e9574a975dc6",
+        "urn:company-wiki:evidence-span:sha256:e0d7274e45cdf75fac857514d65becbc030f3296f346253a235e022bade289e4"
+      ],
+      "context": [],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:1ce287cd584dd9cb8084997ea0b7ffc5648f459d14a18f0d52f844585cf8e835",
+        "urn:company-wiki:evidence-span:sha256:6fcb4746851040461df503eecbe46b465acd99b2f0df40a1ca190005cf918d64",
+        "urn:company-wiki:evidence-span:sha256:d91191c96f2ec5e0cd6b82a2b1cfb43294876cf682f13c7d28b0e9574a975dc6",
+        "urn:company-wiki:evidence-span:sha256:e0d7274e45cdf75fac857514d65becbc030f3296f346253a235e022bade289e4"
+      ]
+    },
+    {
+      "key": "t3",
+      "kind": "paragraph_event",
+      "section_role": "business",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:e5fc6655d2ecb80ed95e8f220a5bd1fe28cab239dda29dee90167fa041dce461"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:9151b4e68c954bfb94e5030323f2ae85a5193947efa79909db426e53cdb9fa84",
+        "urn:company-wiki:evidence-span:sha256:b62abd15346cd398f08e4543b7913fe9f48f26031e3a5e8c1776d16e87a38663"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:9151b4e68c954bfb94e5030323f2ae85a5193947efa79909db426e53cdb9fa84",
+        "urn:company-wiki:evidence-span:sha256:b62abd15346cd398f08e4543b7913fe9f48f26031e3a5e8c1776d16e87a38663",
+        "urn:company-wiki:evidence-span:sha256:e5fc6655d2ecb80ed95e8f220a5bd1fe28cab239dda29dee90167fa041dce461"
+      ]
+    },
+    {
+      "key": "t4",
+      "kind": "paragraph_event",
+      "section_role": "business",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:a272abb3ef674a65e36a8f62e6fdf890efbb241ac103e9a150d373d127a2057e"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:bc24d7ff53ab75802eda11a4d7de92b3e6be8ba3a507186d38718605b32e7f95",
+        "urn:company-wiki:evidence-span:sha256:fda3b4c4c6571dba219f46f5c4bd2f0e44a57b43a1549dca584d07aa8cab1264"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:bc24d7ff53ab75802eda11a4d7de92b3e6be8ba3a507186d38718605b32e7f95",
+        "urn:company-wiki:evidence-span:sha256:fda3b4c4c6571dba219f46f5c4bd2f0e44a57b43a1549dca584d07aa8cab1264",
+        "urn:company-wiki:evidence-span:sha256:a272abb3ef674a65e36a8f62e6fdf890efbb241ac103e9a150d373d127a2057e"
+      ]
+    },
+    {
+      "key": "t5",
+      "kind": "paragraph_event",
+      "section_role": "management_discussion",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:dc02b23f4fb0be1692f20d15bd0f6498515748add787fec297349d5a4edc04be"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:707df2667babbfd954d970766aefd18b65c7ff3d794c54fe071aa0d7ee5ca020",
+        "urn:company-wiki:evidence-span:sha256:11a8ec20fa3b592db27708cfaf01af84241b016fd3384d727691ec5eb255b0b5"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:707df2667babbfd954d970766aefd18b65c7ff3d794c54fe071aa0d7ee5ca020",
+        "urn:company-wiki:evidence-span:sha256:11a8ec20fa3b592db27708cfaf01af84241b016fd3384d727691ec5eb255b0b5",
+        "urn:company-wiki:evidence-span:sha256:dc02b23f4fb0be1692f20d15bd0f6498515748add787fec297349d5a4edc04be"
+      ]
+    },
+    {
+      "key": "t6",
+      "kind": "paragraph_event",
+      "section_role": "management_discussion",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:e749c64cdd89a3329a01bdf201e87dc635c245c4ec45bdb83a27c2818500ed0d"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:707df2667babbfd954d970766aefd18b65c7ff3d794c54fe071aa0d7ee5ca020",
+        "urn:company-wiki:evidence-span:sha256:11a8ec20fa3b592db27708cfaf01af84241b016fd3384d727691ec5eb255b0b5"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:707df2667babbfd954d970766aefd18b65c7ff3d794c54fe071aa0d7ee5ca020",
+        "urn:company-wiki:evidence-span:sha256:11a8ec20fa3b592db27708cfaf01af84241b016fd3384d727691ec5eb255b0b5",
+        "urn:company-wiki:evidence-span:sha256:e749c64cdd89a3329a01bdf201e87dc635c245c4ec45bdb83a27c2818500ed0d"
+      ]
+    },
+    {
+      "key": "t7",
+      "kind": "paragraph_event",
+      "section_role": "management_discussion",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:76f0355dd29cc9af20782b8f2dfd460c0690194fa0bc989fdf0b3752612cf9d0"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:029220fc1f6993832e8f32d3fca4f1cd169a2ebd64b9d4bb86cf7e51fe39ff48",
+        "urn:company-wiki:evidence-span:sha256:91d0f777db38c010f68295220ef542279ef477ab266bf1d26fa6766190b66f74"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:029220fc1f6993832e8f32d3fca4f1cd169a2ebd64b9d4bb86cf7e51fe39ff48",
+        "urn:company-wiki:evidence-span:sha256:91d0f777db38c010f68295220ef542279ef477ab266bf1d26fa6766190b66f74",
+        "urn:company-wiki:evidence-span:sha256:76f0355dd29cc9af20782b8f2dfd460c0690194fa0bc989fdf0b3752612cf9d0"
+      ]
+    },
+    {
+      "key": "t8",
+      "kind": "background",
+      "section_role": "business",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:1c28a702a8daf02b283bc5ffa7cc3486785c602ed5e876d9a2b5df7374261343"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:49e5decb7d377215c6475b3126278f18d4f9cb3a92a5ffe50c643945ac75580b",
+        "urn:company-wiki:evidence-span:sha256:edb956400e38393756bdc28be1667bee89233a8f8bc75220d727dca1f10aa1b2"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:49e5decb7d377215c6475b3126278f18d4f9cb3a92a5ffe50c643945ac75580b",
+        "urn:company-wiki:evidence-span:sha256:edb956400e38393756bdc28be1667bee89233a8f8bc75220d727dca1f10aa1b2",
+        "urn:company-wiki:evidence-span:sha256:1c28a702a8daf02b283bc5ffa7cc3486785c602ed5e876d9a2b5df7374261343"
+      ]
+    },
+    {
+      "key": "t9",
+      "kind": "background",
+      "section_role": "business",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:efddbcd3d5f79edd043a467ba27a20b55d6f1f52b13660a65da13ec748301ba5"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:49e5decb7d377215c6475b3126278f18d4f9cb3a92a5ffe50c643945ac75580b",
+        "urn:company-wiki:evidence-span:sha256:edb956400e38393756bdc28be1667bee89233a8f8bc75220d727dca1f10aa1b2"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:49e5decb7d377215c6475b3126278f18d4f9cb3a92a5ffe50c643945ac75580b",
+        "urn:company-wiki:evidence-span:sha256:edb956400e38393756bdc28be1667bee89233a8f8bc75220d727dca1f10aa1b2",
+        "urn:company-wiki:evidence-span:sha256:efddbcd3d5f79edd043a467ba27a20b55d6f1f52b13660a65da13ec748301ba5"
+      ]
+    },
+    {
+      "key": "t10",
+      "kind": "background",
+      "section_role": "business",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:e0b6020a431fd29307bcce99b7938dedb1a922429a5e41d876ca63971c99a312"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:cca8fa38e089bea8b2c35b8e1483d14790e51bf1bccac31fb0a3ca9425bd5117",
+        "urn:company-wiki:evidence-span:sha256:d9c1a21f0cc37cbfa18235dcf6493ec678ed364a08d992a5812c5b8351a71fec"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:cca8fa38e089bea8b2c35b8e1483d14790e51bf1bccac31fb0a3ca9425bd5117",
+        "urn:company-wiki:evidence-span:sha256:d9c1a21f0cc37cbfa18235dcf6493ec678ed364a08d992a5812c5b8351a71fec",
+        "urn:company-wiki:evidence-span:sha256:e0b6020a431fd29307bcce99b7938dedb1a922429a5e41d876ca63971c99a312"
+      ]
+    },
+    {
+      "key": "t11",
+      "kind": "background",
+      "section_role": "management_discussion",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:321ab17447a9c9af483a12253ea310522bfa3e4ae5233a76748081ee9942b410"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:2eb804413ec04e372e071ad72a8ae5cd7c0ab39b6f97c8ea4ff63673573133b7",
+        "urn:company-wiki:evidence-span:sha256:ac17b74db2a2048fb9302eba3226a7655b0610bc70daf5ae8e310ae6281473f6"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:2eb804413ec04e372e071ad72a8ae5cd7c0ab39b6f97c8ea4ff63673573133b7",
+        "urn:company-wiki:evidence-span:sha256:ac17b74db2a2048fb9302eba3226a7655b0610bc70daf5ae8e310ae6281473f6",
+        "urn:company-wiki:evidence-span:sha256:321ab17447a9c9af483a12253ea310522bfa3e4ae5233a76748081ee9942b410"
+      ]
+    },
+    {
+      "key": "t12",
+      "kind": "background",
+      "section_role": "management_discussion",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:585b5fa3d977d1a4d3dc09ad01197a875b51b1b9f45fafffd1e00a519427ac11"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:2eb804413ec04e372e071ad72a8ae5cd7c0ab39b6f97c8ea4ff63673573133b7",
+        "urn:company-wiki:evidence-span:sha256:ac17b74db2a2048fb9302eba3226a7655b0610bc70daf5ae8e310ae6281473f6"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:2eb804413ec04e372e071ad72a8ae5cd7c0ab39b6f97c8ea4ff63673573133b7",
+        "urn:company-wiki:evidence-span:sha256:ac17b74db2a2048fb9302eba3226a7655b0610bc70daf5ae8e310ae6281473f6",
+        "urn:company-wiki:evidence-span:sha256:585b5fa3d977d1a4d3dc09ad01197a875b51b1b9f45fafffd1e00a519427ac11"
+      ]
+    },
+    {
+      "key": "t13",
+      "kind": "background",
+      "section_role": "management_discussion",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:18ef62817453389f7dffe74fe7aa6c18f88c24d025386a37640e06b466a93803"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:445576b96b4782fa7503a9b77cd2833d2e13e7ec22608d7f75321c46dd30710a",
+        "urn:company-wiki:evidence-span:sha256:98dc2b88611978c4898d53dd5a11a7067b48b9a174f997494c0f1fa5fee13276"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:445576b96b4782fa7503a9b77cd2833d2e13e7ec22608d7f75321c46dd30710a",
+        "urn:company-wiki:evidence-span:sha256:98dc2b88611978c4898d53dd5a11a7067b48b9a174f997494c0f1fa5fee13276",
+        "urn:company-wiki:evidence-span:sha256:18ef62817453389f7dffe74fe7aa6c18f88c24d025386a37640e06b466a93803"
+      ]
+    },
+    {
+      "key": "t14",
+      "kind": "background",
+      "section_role": "business",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:f6bfbf97b2313672a6e2da5239b80b9b95f61bf82cf4a07c1b572290a61d2b76"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:616fc43055fd9cfccca0ecc1dd5c6f95fe7570663fa9fc4e745d948070d9734f",
+        "urn:company-wiki:evidence-span:sha256:14c90f5708f83fb08012d5290a7b8f301e622c1df19fe5e4b5cd2b554819a2ea"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:616fc43055fd9cfccca0ecc1dd5c6f95fe7570663fa9fc4e745d948070d9734f",
+        "urn:company-wiki:evidence-span:sha256:14c90f5708f83fb08012d5290a7b8f301e622c1df19fe5e4b5cd2b554819a2ea",
+        "urn:company-wiki:evidence-span:sha256:f6bfbf97b2313672a6e2da5239b80b9b95f61bf82cf4a07c1b572290a61d2b76"
+      ]
+    },
+    {
+      "key": "t15",
+      "kind": "background",
+      "section_role": "business",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:445a4b457069c04e124fb9798e1e64ca09e0ebbaeeead7032d018252ecd2f592"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:49e5decb7d377215c6475b3126278f18d4f9cb3a92a5ffe50c643945ac75580b",
+        "urn:company-wiki:evidence-span:sha256:edb956400e38393756bdc28be1667bee89233a8f8bc75220d727dca1f10aa1b2"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:49e5decb7d377215c6475b3126278f18d4f9cb3a92a5ffe50c643945ac75580b",
+        "urn:company-wiki:evidence-span:sha256:edb956400e38393756bdc28be1667bee89233a8f8bc75220d727dca1f10aa1b2",
+        "urn:company-wiki:evidence-span:sha256:445a4b457069c04e124fb9798e1e64ca09e0ebbaeeead7032d018252ecd2f592"
+      ]
+    },
+    {
+      "key": "t16",
+      "kind": "background",
+      "section_role": "business",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:238ca446bc568eb803b2f245727b775a0b147dff5a824c18c70d240c1738926e"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:49e5decb7d377215c6475b3126278f18d4f9cb3a92a5ffe50c643945ac75580b",
+        "urn:company-wiki:evidence-span:sha256:edb956400e38393756bdc28be1667bee89233a8f8bc75220d727dca1f10aa1b2"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:49e5decb7d377215c6475b3126278f18d4f9cb3a92a5ffe50c643945ac75580b",
+        "urn:company-wiki:evidence-span:sha256:edb956400e38393756bdc28be1667bee89233a8f8bc75220d727dca1f10aa1b2",
+        "urn:company-wiki:evidence-span:sha256:238ca446bc568eb803b2f245727b775a0b147dff5a824c18c70d240c1738926e"
+      ]
+    },
+    {
+      "key": "t17",
+      "kind": "background",
+      "section_role": "business",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:3c4965cdd6faea72ec8489fd84bfcf51989ca853448d1abcdef13d7e347b0d95"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:49e5decb7d377215c6475b3126278f18d4f9cb3a92a5ffe50c643945ac75580b",
+        "urn:company-wiki:evidence-span:sha256:edb956400e38393756bdc28be1667bee89233a8f8bc75220d727dca1f10aa1b2"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:49e5decb7d377215c6475b3126278f18d4f9cb3a92a5ffe50c643945ac75580b",
+        "urn:company-wiki:evidence-span:sha256:edb956400e38393756bdc28be1667bee89233a8f8bc75220d727dca1f10aa1b2",
+        "urn:company-wiki:evidence-span:sha256:3c4965cdd6faea72ec8489fd84bfcf51989ca853448d1abcdef13d7e347b0d95"
+      ]
+    },
+    {
+      "key": "t18",
+      "kind": "background",
+      "section_role": "business",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:448609b8070080b695440c3d2d3deca99ec406c1a1c36a94eb1d0b85b67f40be"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:19ee74b882adce2d07704c1770911d44291027043d98d6743dd95eaff0350513",
+        "urn:company-wiki:evidence-span:sha256:6763e228bfed6e48dbc52511c0f0b263a7900c0f2326573b281e92236dbfeb61"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:19ee74b882adce2d07704c1770911d44291027043d98d6743dd95eaff0350513",
+        "urn:company-wiki:evidence-span:sha256:6763e228bfed6e48dbc52511c0f0b263a7900c0f2326573b281e92236dbfeb61",
+        "urn:company-wiki:evidence-span:sha256:448609b8070080b695440c3d2d3deca99ec406c1a1c36a94eb1d0b85b67f40be"
+      ]
+    },
+    {
+      "key": "t19",
+      "kind": "background",
+      "section_role": "business",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:4eefbeb57dac400a19e5cc9fd3f35791a032496f96e9214b3c9e46e88a2ad0f4"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:19ee74b882adce2d07704c1770911d44291027043d98d6743dd95eaff0350513",
+        "urn:company-wiki:evidence-span:sha256:6763e228bfed6e48dbc52511c0f0b263a7900c0f2326573b281e92236dbfeb61"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:19ee74b882adce2d07704c1770911d44291027043d98d6743dd95eaff0350513",
+        "urn:company-wiki:evidence-span:sha256:6763e228bfed6e48dbc52511c0f0b263a7900c0f2326573b281e92236dbfeb61",
+        "urn:company-wiki:evidence-span:sha256:4eefbeb57dac400a19e5cc9fd3f35791a032496f96e9214b3c9e46e88a2ad0f4"
+      ]
+    },
+    {
+      "key": "t20",
+      "kind": "background",
+      "section_role": "business",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:492da1a73aaae3e4a3092536653e4c3fcc97a9a88bb210ca79c882bb4906dfb2"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:9151b4e68c954bfb94e5030323f2ae85a5193947efa79909db426e53cdb9fa84",
+        "urn:company-wiki:evidence-span:sha256:b62abd15346cd398f08e4543b7913fe9f48f26031e3a5e8c1776d16e87a38663"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:9151b4e68c954bfb94e5030323f2ae85a5193947efa79909db426e53cdb9fa84",
+        "urn:company-wiki:evidence-span:sha256:b62abd15346cd398f08e4543b7913fe9f48f26031e3a5e8c1776d16e87a38663",
+        "urn:company-wiki:evidence-span:sha256:492da1a73aaae3e4a3092536653e4c3fcc97a9a88bb210ca79c882bb4906dfb2"
+      ]
+    },
+    {
+      "key": "t21",
+      "kind": "background",
+      "section_role": "business",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:a83d1d60e778219e94183effed17a9ee94e2b3a3df1fa160019f1e3462e76b94"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:bc24d7ff53ab75802eda11a4d7de92b3e6be8ba3a507186d38718605b32e7f95",
+        "urn:company-wiki:evidence-span:sha256:fda3b4c4c6571dba219f46f5c4bd2f0e44a57b43a1549dca584d07aa8cab1264"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:bc24d7ff53ab75802eda11a4d7de92b3e6be8ba3a507186d38718605b32e7f95",
+        "urn:company-wiki:evidence-span:sha256:fda3b4c4c6571dba219f46f5c4bd2f0e44a57b43a1549dca584d07aa8cab1264",
+        "urn:company-wiki:evidence-span:sha256:a83d1d60e778219e94183effed17a9ee94e2b3a3df1fa160019f1e3462e76b94"
+      ]
+    },
+    {
+      "key": "t22",
+      "kind": "background",
+      "section_role": "business",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:dde59e01244a2cfa4a482b1d069b5d6e679ba78963ffedbd4ec5b871f123a223"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:bc24d7ff53ab75802eda11a4d7de92b3e6be8ba3a507186d38718605b32e7f95",
+        "urn:company-wiki:evidence-span:sha256:fda3b4c4c6571dba219f46f5c4bd2f0e44a57b43a1549dca584d07aa8cab1264"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:bc24d7ff53ab75802eda11a4d7de92b3e6be8ba3a507186d38718605b32e7f95",
+        "urn:company-wiki:evidence-span:sha256:fda3b4c4c6571dba219f46f5c4bd2f0e44a57b43a1549dca584d07aa8cab1264",
+        "urn:company-wiki:evidence-span:sha256:dde59e01244a2cfa4a482b1d069b5d6e679ba78963ffedbd4ec5b871f123a223"
+      ]
+    },
+    {
+      "key": "t23",
+      "kind": "background",
+      "section_role": "business",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:cfda7c2fd64d9495044b26bc099f9f78b29b4f1f9960346c905b974d4d153b90"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:cca8fa38e089bea8b2c35b8e1483d14790e51bf1bccac31fb0a3ca9425bd5117",
+        "urn:company-wiki:evidence-span:sha256:d9c1a21f0cc37cbfa18235dcf6493ec678ed364a08d992a5812c5b8351a71fec"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:cca8fa38e089bea8b2c35b8e1483d14790e51bf1bccac31fb0a3ca9425bd5117",
+        "urn:company-wiki:evidence-span:sha256:d9c1a21f0cc37cbfa18235dcf6493ec678ed364a08d992a5812c5b8351a71fec",
+        "urn:company-wiki:evidence-span:sha256:cfda7c2fd64d9495044b26bc099f9f78b29b4f1f9960346c905b974d4d153b90"
+      ]
+    },
+    {
+      "key": "t24",
+      "kind": "background",
+      "section_role": "business",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:7174b759fb7a05bc7cf1b7217ff0757243c65a37b339280358cd404c2e6ccdb6"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:cca8fa38e089bea8b2c35b8e1483d14790e51bf1bccac31fb0a3ca9425bd5117",
+        "urn:company-wiki:evidence-span:sha256:d9c1a21f0cc37cbfa18235dcf6493ec678ed364a08d992a5812c5b8351a71fec"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:cca8fa38e089bea8b2c35b8e1483d14790e51bf1bccac31fb0a3ca9425bd5117",
+        "urn:company-wiki:evidence-span:sha256:d9c1a21f0cc37cbfa18235dcf6493ec678ed364a08d992a5812c5b8351a71fec",
+        "urn:company-wiki:evidence-span:sha256:7174b759fb7a05bc7cf1b7217ff0757243c65a37b339280358cd404c2e6ccdb6"
+      ]
+    },
+    {
+      "key": "t25",
+      "kind": "background",
+      "section_role": "business",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:f3984dc157fbb3977cc0fb6fa3d40e8d9e53b97ba4edcc22f35d6d5dcfad8a7c"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:3170513f41b8acff337642a3e5ad0144cd29443fa8d813eb2e6115e30f56b72f",
+        "urn:company-wiki:evidence-span:sha256:3517e695b03ae69f3807618c2221c127f6ab322dd39fb2c95e3840299f029cea"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:3170513f41b8acff337642a3e5ad0144cd29443fa8d813eb2e6115e30f56b72f",
+        "urn:company-wiki:evidence-span:sha256:3517e695b03ae69f3807618c2221c127f6ab322dd39fb2c95e3840299f029cea",
+        "urn:company-wiki:evidence-span:sha256:f3984dc157fbb3977cc0fb6fa3d40e8d9e53b97ba4edcc22f35d6d5dcfad8a7c"
+      ]
+    },
+    {
+      "key": "t26",
+      "kind": "background",
+      "section_role": "business",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:db7583c813c1e7d655b26ede11b6347b33506ecde4e3be84368b9045f7098967"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:3170513f41b8acff337642a3e5ad0144cd29443fa8d813eb2e6115e30f56b72f",
+        "urn:company-wiki:evidence-span:sha256:3517e695b03ae69f3807618c2221c127f6ab322dd39fb2c95e3840299f029cea"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:3170513f41b8acff337642a3e5ad0144cd29443fa8d813eb2e6115e30f56b72f",
+        "urn:company-wiki:evidence-span:sha256:3517e695b03ae69f3807618c2221c127f6ab322dd39fb2c95e3840299f029cea",
+        "urn:company-wiki:evidence-span:sha256:db7583c813c1e7d655b26ede11b6347b33506ecde4e3be84368b9045f7098967"
+      ]
+    },
+    {
+      "key": "t27",
+      "kind": "background",
+      "section_role": "business",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:8c564a9a838693e01fe7a731715ce65a9198c4bbb7e8423c358ad1fc0de53a05"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:3170513f41b8acff337642a3e5ad0144cd29443fa8d813eb2e6115e30f56b72f",
+        "urn:company-wiki:evidence-span:sha256:3517e695b03ae69f3807618c2221c127f6ab322dd39fb2c95e3840299f029cea"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:3170513f41b8acff337642a3e5ad0144cd29443fa8d813eb2e6115e30f56b72f",
+        "urn:company-wiki:evidence-span:sha256:3517e695b03ae69f3807618c2221c127f6ab322dd39fb2c95e3840299f029cea",
+        "urn:company-wiki:evidence-span:sha256:8c564a9a838693e01fe7a731715ce65a9198c4bbb7e8423c358ad1fc0de53a05"
+      ]
+    },
+    {
+      "key": "t28",
+      "kind": "background",
+      "section_role": "business",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:fdd7620d5abc782f22a0e06b73ebf53e1c12ca279a4b2b189845216689252fa3"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:16ee103a696cbeb313aa18473fb236a695f50c810ac16e71e2daf2467a5c8991",
+        "urn:company-wiki:evidence-span:sha256:a0187bd367450c528aa604ef267baee5dd3a0bdfe761823ddffc7c1bd88febcc"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:16ee103a696cbeb313aa18473fb236a695f50c810ac16e71e2daf2467a5c8991",
+        "urn:company-wiki:evidence-span:sha256:a0187bd367450c528aa604ef267baee5dd3a0bdfe761823ddffc7c1bd88febcc",
+        "urn:company-wiki:evidence-span:sha256:fdd7620d5abc782f22a0e06b73ebf53e1c12ca279a4b2b189845216689252fa3"
+      ]
+    },
+    {
+      "key": "t29",
+      "kind": "background",
+      "section_role": "management_discussion",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:b45713f2ee79ce5e0d524bdb1dc9e4ae40499bcfcc02df5d1c95948c7dfa5382"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:2eb804413ec04e372e071ad72a8ae5cd7c0ab39b6f97c8ea4ff63673573133b7",
+        "urn:company-wiki:evidence-span:sha256:ac17b74db2a2048fb9302eba3226a7655b0610bc70daf5ae8e310ae6281473f6"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:2eb804413ec04e372e071ad72a8ae5cd7c0ab39b6f97c8ea4ff63673573133b7",
+        "urn:company-wiki:evidence-span:sha256:ac17b74db2a2048fb9302eba3226a7655b0610bc70daf5ae8e310ae6281473f6",
+        "urn:company-wiki:evidence-span:sha256:b45713f2ee79ce5e0d524bdb1dc9e4ae40499bcfcc02df5d1c95948c7dfa5382"
+      ]
+    },
+    {
+      "key": "t30",
+      "kind": "background",
+      "section_role": "management_discussion",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:c289f6a278daea6179261b52de7fd4776c557d4de7a690dabe7f169bda8ca74e"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:445576b96b4782fa7503a9b77cd2833d2e13e7ec22608d7f75321c46dd30710a",
+        "urn:company-wiki:evidence-span:sha256:98dc2b88611978c4898d53dd5a11a7067b48b9a174f997494c0f1fa5fee13276"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:445576b96b4782fa7503a9b77cd2833d2e13e7ec22608d7f75321c46dd30710a",
+        "urn:company-wiki:evidence-span:sha256:98dc2b88611978c4898d53dd5a11a7067b48b9a174f997494c0f1fa5fee13276",
+        "urn:company-wiki:evidence-span:sha256:c289f6a278daea6179261b52de7fd4776c557d4de7a690dabe7f169bda8ca74e"
+      ]
+    },
+    {
+      "key": "t31",
+      "kind": "background",
+      "section_role": "management_discussion",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:6c920f426c72ac112b7a812e9ca24414512db698cdab58642daf1f71d67a61da"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:445576b96b4782fa7503a9b77cd2833d2e13e7ec22608d7f75321c46dd30710a",
+        "urn:company-wiki:evidence-span:sha256:98dc2b88611978c4898d53dd5a11a7067b48b9a174f997494c0f1fa5fee13276"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:445576b96b4782fa7503a9b77cd2833d2e13e7ec22608d7f75321c46dd30710a",
+        "urn:company-wiki:evidence-span:sha256:98dc2b88611978c4898d53dd5a11a7067b48b9a174f997494c0f1fa5fee13276",
+        "urn:company-wiki:evidence-span:sha256:6c920f426c72ac112b7a812e9ca24414512db698cdab58642daf1f71d67a61da"
+      ]
+    },
+    {
+      "key": "t32",
+      "kind": "risk",
+      "section_role": "risk",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:c8c2ca720cb93046fa3ffe696f763e55c678459222c844879fda3d66a32b315a"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:1a1a0fe814b48c58cfc780e10365cc179f356ee7135dbdc07aefe813f051622d",
+        "urn:company-wiki:evidence-span:sha256:269ff7cd3952b3ec74d13a28dd55a6996accf7f2f4aa35111fcde532c7e1504c"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:1a1a0fe814b48c58cfc780e10365cc179f356ee7135dbdc07aefe813f051622d",
+        "urn:company-wiki:evidence-span:sha256:269ff7cd3952b3ec74d13a28dd55a6996accf7f2f4aa35111fcde532c7e1504c",
+        "urn:company-wiki:evidence-span:sha256:c8c2ca720cb93046fa3ffe696f763e55c678459222c844879fda3d66a32b315a"
+      ]
+    },
+    {
+      "key": "t33",
+      "kind": "risk",
+      "section_role": "risk",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:92f1d7d71b3c939db2581e957eeab78fb57b6021ec595d055642378e63f1977e"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:0e0cd926ebc8726f17e6cdc75077eeeda415c4779afaaf2f6e651870510175f8",
+        "urn:company-wiki:evidence-span:sha256:caa121f80b590ebf1fead17b68bc504ce6287996f1b9a287c5a7ed8d14effaf2"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:0e0cd926ebc8726f17e6cdc75077eeeda415c4779afaaf2f6e651870510175f8",
+        "urn:company-wiki:evidence-span:sha256:caa121f80b590ebf1fead17b68bc504ce6287996f1b9a287c5a7ed8d14effaf2",
+        "urn:company-wiki:evidence-span:sha256:92f1d7d71b3c939db2581e957eeab78fb57b6021ec595d055642378e63f1977e"
+      ]
+    },
+    {
+      "key": "t34",
+      "kind": "risk",
+      "section_role": "risk",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:b5f59da4cbd7b5f2f65387fb971841c8a51108095cf96a11fe8602b717d1022e"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:0b5b4507493c0f9e5c19dcad8f5d8c7e2d15c3f77feb66dcd7616d0db07b7b75",
+        "urn:company-wiki:evidence-span:sha256:1a19964445e54ac5f9b1fd4f1bd301ffa1dafc2feacd1e43b9b7f8f3589cd623"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:0b5b4507493c0f9e5c19dcad8f5d8c7e2d15c3f77feb66dcd7616d0db07b7b75",
+        "urn:company-wiki:evidence-span:sha256:1a19964445e54ac5f9b1fd4f1bd301ffa1dafc2feacd1e43b9b7f8f3589cd623",
+        "urn:company-wiki:evidence-span:sha256:b5f59da4cbd7b5f2f65387fb971841c8a51108095cf96a11fe8602b717d1022e"
+      ]
+    },
+    {
+      "key": "t35",
+      "kind": "risk",
+      "section_role": "risk",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:d779fbdb76a6f6098efd25936e81064158443d92f3645e6ea9d02680b223955b"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:a63e149f825c9e08b465c4bbf7762694bec129437b74d085cd39a0058f72ae03",
+        "urn:company-wiki:evidence-span:sha256:1f31a927faa188f87646f9e540e73c3827f5879dfc91387a89eb85c9c507df8e"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:a63e149f825c9e08b465c4bbf7762694bec129437b74d085cd39a0058f72ae03",
+        "urn:company-wiki:evidence-span:sha256:1f31a927faa188f87646f9e540e73c3827f5879dfc91387a89eb85c9c507df8e",
+        "urn:company-wiki:evidence-span:sha256:d779fbdb76a6f6098efd25936e81064158443d92f3645e6ea9d02680b223955b"
+      ]
+    },
+    {
+      "key": "t36",
+      "kind": "risk",
+      "section_role": "risk",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:c336ddcf6640c6c2bf976dc51b93e0017499242f1bc924cfe3e409b6cedaaea5"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:915add030e65ca876ea1cb3e07b7cb3b4e999574368cb4545d55ead5b5057513",
+        "urn:company-wiki:evidence-span:sha256:ca26191fff27b6a3537bc58ba8dd91ebc0c9cf47fff71942bc3053c3c81fe56b"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:915add030e65ca876ea1cb3e07b7cb3b4e999574368cb4545d55ead5b5057513",
+        "urn:company-wiki:evidence-span:sha256:ca26191fff27b6a3537bc58ba8dd91ebc0c9cf47fff71942bc3053c3c81fe56b",
+        "urn:company-wiki:evidence-span:sha256:c336ddcf6640c6c2bf976dc51b93e0017499242f1bc924cfe3e409b6cedaaea5"
+      ]
+    },
+    {
+      "key": "t37",
+      "kind": "paragraph_event",
+      "section_role": "risk",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:5ffe65c4588f1ac29bcfaeeb9d1f59c83cd87db039dfe6f472b59e6dbd8ef3b8"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:3e84ae9e6c3473a732c6bb6d3e02d94a56deb0e417de67745d154595c627115b",
+        "urn:company-wiki:evidence-span:sha256:8854c5e138d95f1d47cede1be71885a4857e37531294ad217b068c04eaf41f61"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:3e84ae9e6c3473a732c6bb6d3e02d94a56deb0e417de67745d154595c627115b",
+        "urn:company-wiki:evidence-span:sha256:8854c5e138d95f1d47cede1be71885a4857e37531294ad217b068c04eaf41f61",
+        "urn:company-wiki:evidence-span:sha256:5ffe65c4588f1ac29bcfaeeb9d1f59c83cd87db039dfe6f472b59e6dbd8ef3b8"
+      ]
+    },
+    {
+      "key": "t38",
+      "kind": "paragraph_event",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:6345936c11ae8f1d1adeb0a48eb45f794106ea6e3ca3cd73cfba79b9c51002ab"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:806f8b778ac719be1ce3fc6647118de5ff9090a72e2f8cd1de2f3b32b83aede4",
+        "urn:company-wiki:evidence-span:sha256:af35a93ed121ac5978510edfa01d368517bdd9dd30f86b5bd724a1a1c723f08a"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:806f8b778ac719be1ce3fc6647118de5ff9090a72e2f8cd1de2f3b32b83aede4",
+        "urn:company-wiki:evidence-span:sha256:af35a93ed121ac5978510edfa01d368517bdd9dd30f86b5bd724a1a1c723f08a",
+        "urn:company-wiki:evidence-span:sha256:6345936c11ae8f1d1adeb0a48eb45f794106ea6e3ca3cd73cfba79b9c51002ab"
+      ]
+    },
+    {
+      "key": "t39",
+      "kind": "paragraph_event",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:b47e0d576f56828b9640d02b173b8b0a05a3da9824a104c8ba44d3ed11e4829e"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:a617b820e0ab1ddc1b336409252bdcdc8cef4b062a7ce896a9819ecdfc05d42c",
+        "urn:company-wiki:evidence-span:sha256:2eb9526144f53aaf190992f019546821e1cb4a84ffdb7591e88de250a0a82828"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:a617b820e0ab1ddc1b336409252bdcdc8cef4b062a7ce896a9819ecdfc05d42c",
+        "urn:company-wiki:evidence-span:sha256:2eb9526144f53aaf190992f019546821e1cb4a84ffdb7591e88de250a0a82828",
+        "urn:company-wiki:evidence-span:sha256:b47e0d576f56828b9640d02b173b8b0a05a3da9824a104c8ba44d3ed11e4829e"
+      ]
+    },
+    {
+      "key": "t40",
+      "kind": "background",
+      "section_role": "risk",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:21fb612d66f76b59ba721d34188103c05139698065e90b5b022ae132ba976292"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:6fabc7cc3817364de34622f58f89cd5e51c9327b26ad893e2ce8fc526a5d08c6",
+        "urn:company-wiki:evidence-span:sha256:4ca1bd973ae232cf6679f8ab1088d65b778919d71ccc61c13005b776c674ca2d"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:6fabc7cc3817364de34622f58f89cd5e51c9327b26ad893e2ce8fc526a5d08c6",
+        "urn:company-wiki:evidence-span:sha256:4ca1bd973ae232cf6679f8ab1088d65b778919d71ccc61c13005b776c674ca2d",
+        "urn:company-wiki:evidence-span:sha256:21fb612d66f76b59ba721d34188103c05139698065e90b5b022ae132ba976292"
+      ]
+    },
+    {
+      "key": "t41",
+      "kind": "background",
+      "section_role": "risk",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:79fd8228fa6bde910b8ab153a14f944af2244dbc712f37160322a374916ddeaf"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:1a1a0fe814b48c58cfc780e10365cc179f356ee7135dbdc07aefe813f051622d",
+        "urn:company-wiki:evidence-span:sha256:269ff7cd3952b3ec74d13a28dd55a6996accf7f2f4aa35111fcde532c7e1504c"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:1a1a0fe814b48c58cfc780e10365cc179f356ee7135dbdc07aefe813f051622d",
+        "urn:company-wiki:evidence-span:sha256:269ff7cd3952b3ec74d13a28dd55a6996accf7f2f4aa35111fcde532c7e1504c",
+        "urn:company-wiki:evidence-span:sha256:79fd8228fa6bde910b8ab153a14f944af2244dbc712f37160322a374916ddeaf"
+      ]
+    },
+    {
+      "key": "t42",
+      "kind": "background",
+      "section_role": "risk",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:da4a69c672ec00fd2c9e10cbc81608712871d96ad25761a21b08a6a953c926d0"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:c571f0b5596d734a4d3289fc2fe70fdd34b24d5c6c5bc18286d06e7481f438b2",
+        "urn:company-wiki:evidence-span:sha256:f1a8ed9e8dbbe3fa2e834c939bb7a972baf90e035ce80e6b82d244cc0c1976ae"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:c571f0b5596d734a4d3289fc2fe70fdd34b24d5c6c5bc18286d06e7481f438b2",
+        "urn:company-wiki:evidence-span:sha256:f1a8ed9e8dbbe3fa2e834c939bb7a972baf90e035ce80e6b82d244cc0c1976ae",
+        "urn:company-wiki:evidence-span:sha256:da4a69c672ec00fd2c9e10cbc81608712871d96ad25761a21b08a6a953c926d0"
+      ]
+    },
+    {
+      "key": "t43",
+      "kind": "background",
+      "section_role": "risk",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:a87c090e1743d0ba5981cb6a09cfef78f563b6c18ed2aef726eea79f1c8bfd22"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:0b5b4507493c0f9e5c19dcad8f5d8c7e2d15c3f77feb66dcd7616d0db07b7b75",
+        "urn:company-wiki:evidence-span:sha256:1a19964445e54ac5f9b1fd4f1bd301ffa1dafc2feacd1e43b9b7f8f3589cd623"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:0b5b4507493c0f9e5c19dcad8f5d8c7e2d15c3f77feb66dcd7616d0db07b7b75",
+        "urn:company-wiki:evidence-span:sha256:1a19964445e54ac5f9b1fd4f1bd301ffa1dafc2feacd1e43b9b7f8f3589cd623",
+        "urn:company-wiki:evidence-span:sha256:a87c090e1743d0ba5981cb6a09cfef78f563b6c18ed2aef726eea79f1c8bfd22"
+      ]
+    },
+    {
+      "key": "t44",
+      "kind": "background",
+      "section_role": "risk",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:c276f8d58226bbd3b103ca459d7d4783ff916b5d8e8fd40d7d895b130a027932"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:b26233d215218f00b7c8385a9ed8df998cd62daf6fbf9c9806b1dd65718b9816",
+        "urn:company-wiki:evidence-span:sha256:90c780e29079d7b023aa04bb7e231f3906a840e78eead7ab99feeeda5a2327c4"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:b26233d215218f00b7c8385a9ed8df998cd62daf6fbf9c9806b1dd65718b9816",
+        "urn:company-wiki:evidence-span:sha256:90c780e29079d7b023aa04bb7e231f3906a840e78eead7ab99feeeda5a2327c4",
+        "urn:company-wiki:evidence-span:sha256:c276f8d58226bbd3b103ca459d7d4783ff916b5d8e8fd40d7d895b130a027932"
+      ]
+    },
+    {
+      "key": "t45",
+      "kind": "background",
+      "section_role": "risk",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:5df97c5adca49a9a04493d51749be21af22025cfb5642dd83fbbad56fe947d7c"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:b26233d215218f00b7c8385a9ed8df998cd62daf6fbf9c9806b1dd65718b9816",
+        "urn:company-wiki:evidence-span:sha256:90c780e29079d7b023aa04bb7e231f3906a840e78eead7ab99feeeda5a2327c4"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:b26233d215218f00b7c8385a9ed8df998cd62daf6fbf9c9806b1dd65718b9816",
+        "urn:company-wiki:evidence-span:sha256:90c780e29079d7b023aa04bb7e231f3906a840e78eead7ab99feeeda5a2327c4",
+        "urn:company-wiki:evidence-span:sha256:5df97c5adca49a9a04493d51749be21af22025cfb5642dd83fbbad56fe947d7c"
+      ]
+    },
+    {
+      "key": "t46",
+      "kind": "background",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:a60ce8d282205321da3c878be63a2f984cde469a121d803aa4e18d3fab1c6292"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:ddb2b2c5636aab4351c8de4e0fd2670b4d0178bfb4f7001f81ed1c3c28457627",
+        "urn:company-wiki:evidence-span:sha256:85ac9616fd47e651c7d6c881f0aef6e2bf943a0f30b2fd006cabe7006e6c92c4"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:ddb2b2c5636aab4351c8de4e0fd2670b4d0178bfb4f7001f81ed1c3c28457627",
+        "urn:company-wiki:evidence-span:sha256:85ac9616fd47e651c7d6c881f0aef6e2bf943a0f30b2fd006cabe7006e6c92c4",
+        "urn:company-wiki:evidence-span:sha256:a60ce8d282205321da3c878be63a2f984cde469a121d803aa4e18d3fab1c6292"
+      ]
+    },
+    {
+      "key": "t47",
+      "kind": "background",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:f1b1f2ebd8ba85e14dd69714ca65822f9d2c155d8cbc98bba9af8adc655c7feb"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:0af91717650c271c40b9bada7cec849cfdaf6802d19dc9d522ae9d90033bea5f",
+        "urn:company-wiki:evidence-span:sha256:63eeff55462e96e9f17488f223e3b93c8e738c37bcdc5ba92fa9c6d6c02513a8"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:0af91717650c271c40b9bada7cec849cfdaf6802d19dc9d522ae9d90033bea5f",
+        "urn:company-wiki:evidence-span:sha256:63eeff55462e96e9f17488f223e3b93c8e738c37bcdc5ba92fa9c6d6c02513a8",
+        "urn:company-wiki:evidence-span:sha256:f1b1f2ebd8ba85e14dd69714ca65822f9d2c155d8cbc98bba9af8adc655c7feb"
+      ]
+    },
+    {
+      "key": "t48",
+      "kind": "background",
+      "section_role": "risk",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:b3708198a812b28309b36c4e9b1deeb90d8fa41a6bfedd70f3653997cfb9cc5f"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:a63e149f825c9e08b465c4bbf7762694bec129437b74d085cd39a0058f72ae03",
+        "urn:company-wiki:evidence-span:sha256:1f31a927faa188f87646f9e540e73c3827f5879dfc91387a89eb85c9c507df8e"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:a63e149f825c9e08b465c4bbf7762694bec129437b74d085cd39a0058f72ae03",
+        "urn:company-wiki:evidence-span:sha256:1f31a927faa188f87646f9e540e73c3827f5879dfc91387a89eb85c9c507df8e",
+        "urn:company-wiki:evidence-span:sha256:b3708198a812b28309b36c4e9b1deeb90d8fa41a6bfedd70f3653997cfb9cc5f"
+      ]
+    },
+    {
+      "key": "t49",
+      "kind": "background",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:d61b2e3c132afb9b7075b8a6886bb38795feb6588e2296f00ed673ec9c2418be"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:9ab62cef2badd0dc7296dd7b19fb0e795664fa5bf9c9c909dc340ea1a3bcec0f",
+        "urn:company-wiki:evidence-span:sha256:4df1170ec37b01c83fbb311eefe192d6715928e5c11779e253b9f337a2dbd4e0"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:9ab62cef2badd0dc7296dd7b19fb0e795664fa5bf9c9c909dc340ea1a3bcec0f",
+        "urn:company-wiki:evidence-span:sha256:4df1170ec37b01c83fbb311eefe192d6715928e5c11779e253b9f337a2dbd4e0",
+        "urn:company-wiki:evidence-span:sha256:d61b2e3c132afb9b7075b8a6886bb38795feb6588e2296f00ed673ec9c2418be"
+      ]
+    },
+    {
+      "key": "t50",
+      "kind": "background",
+      "section_role": "unknown",
+      "support": [
+        "urn:company-wiki:evidence-span:sha256:bebd55194edde5635fe4e3b3932b0ee2dc5a9f580fcd30a2a39f01ca97e28574"
+      ],
+      "context": [
+        "urn:company-wiki:evidence-span:sha256:64a14166014780fbc20afb96966485a867ce6922b20b00321ab0b48fed466955",
+        "urn:company-wiki:evidence-span:sha256:7da32196b25db2ef4ee3f315ccdb4e3e7ee516532f1665725b7fb2da43193d93"
+      ],
+      "members": [
+        "urn:company-wiki:evidence-span:sha256:64a14166014780fbc20afb96966485a867ce6922b20b00321ab0b48fed466955",
+        "urn:company-wiki:evidence-span:sha256:7da32196b25db2ef4ee3f315ccdb4e3e7ee516532f1665725b7fb2da43193d93",
+        "urn:company-wiki:evidence-span:sha256:bebd55194edde5635fe4e3b3932b0ee2dc5a9f580fcd30a2a39f01ca97e28574"
+      ]
+    }
+  ],
+  "actual_payload_available_task_keys": [
+    "t1",
+    "t2",
+    "t3",
+    "t4",
+    "t5",
+    "t6",
+    "t7",
+    "t8",
+    "t9",
+    "t10",
+    "t11",
+    "t12",
+    "t13",
+    "t14",
+    "t15",
+    "t16",
+    "t17",
+    "t18",
+    "t19",
+    "t20",
+    "t21",
+    "t22",
+    "t23",
+    "t24",
+    "t25",
+    "t26",
+    "t27",
+    "t28",
+    "t29",
+    "t30",
+    "t31",
+    "t32",
+    "t33",
+    "t34",
+    "t35",
+    "t36",
+    "t37",
+    "t38",
+    "t39",
+    "t40",
+    "t41",
+    "t42",
+    "t43",
+    "t44",
+    "t45",
+    "t46",
+    "t47",
+    "t48",
+    "t49",
+    "t50"
+  ],
+  "compiler_status": "COMPILED_ACTUAL_V4_INPUT_NOT_SENT",
+  "status": "COMPLETE_BOUNDED_SOURCE_INPUT_PRECHECK",
+  "gold_source_observations": [
+    {
+      "fact_id": "f-azure-is-consumption-based",
+      "target_kind": "required_business",
+      "any_support_sets": [
+        [
+          {
+            "atom": {
+              "page": 1,
+              "exact_quote": "Azure revenue is mainly affected by infrastructure-as-a-service and platform-as-a-service consumption-based services.",
+              "location_kind": "document"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": [
+              "urn:company-wiki:evidence-span:sha256:492da1a73aaae3e4a3092536653e4c3fcc97a9a88bb210ca79c882bb4906dfb2"
+            ]
+          }
+        ]
+      ],
+      "semantic_status": "PENDING_INDEPENDENT_MANUAL_REVIEW"
+    },
+    {
+      "fact_id": "f-azure-inside-intelligent-cloud",
+      "target_kind": "required_business",
+      "any_support_sets": [
+        [
+          {
+            "atom": {
+              "page": 1,
+              "exact_quote": "Server products and cloud services, including Azure and other cloud services, comprising cloud and AI consumption-based services",
+              "location_kind": "document"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": []
+          }
+        ],
+        [
+          {
+            "atom": {
+              "page": 1,
+              "exact_quote": "Our Intelligent Cloud segment consists of our public, private, and hybrid server products and cloud services that power modern business and developers.",
+              "location_kind": "document"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": [
+              "urn:company-wiki:evidence-span:sha256:4eefbeb57dac400a19e5cc9fd3f35791a032496f96e9214b3c9e46e88a2ad0f4"
+            ]
+          }
+        ]
+      ],
+      "semantic_status": "PENDING_INDEPENDENT_MANUAL_REVIEW"
+    },
+    {
+      "fact_id": "f-three-segments",
+      "target_kind": "required_business",
+      "any_support_sets": [
+        [
+          {
+            "atom": {
+              "page": 1,
+              "exact_quote": "We operate our business and report our financial performance using three segments: Productivity and Business Processes, Intelligent Cloud, and More Personal Computing.",
+              "location_kind": "document"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": [
+              "urn:company-wiki:evidence-span:sha256:1c28a702a8daf02b283bc5ffa7cc3486785c602ed5e876d9a2b5df7374261343"
+            ]
+          }
+        ]
+      ],
+      "semantic_status": "PENDING_INDEPENDENT_MANUAL_REVIEW"
+    },
+    {
+      "fact_id": "f-segment-change-in-august-2024",
+      "target_kind": "required_business",
+      "any_support_sets": [
+        [
+          {
+            "atom": {
+              "page": 1,
+              "exact_quote": "In August 2024, we announced changes to the composition of our segments.",
+              "location_kind": "document"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": [
+              "urn:company-wiki:evidence-span:sha256:efddbcd3d5f79edd043a467ba27a20b55d6f1f52b13660a65da13ec748301ba5",
+              "urn:company-wiki:evidence-span:sha256:585b5fa3d977d1a4d3dc09ad01197a875b51b1b9f45fafffd1e00a519427ac11",
+              "urn:company-wiki:evidence-span:sha256:a60ce8d282205321da3c878be63a2f984cde469a121d803aa4e18d3fab1c6292"
+            ]
+          }
+        ],
+        [
+          {
+            "atom": {
+              "page": 1,
+              "exact_quote": "most notably bringing the commercial components of Microsoft 365 together in the Productivity and Business Processes segment",
+              "location_kind": "document"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": [
+              "urn:company-wiki:evidence-span:sha256:efddbcd3d5f79edd043a467ba27a20b55d6f1f52b13660a65da13ec748301ba5",
+              "urn:company-wiki:evidence-span:sha256:585b5fa3d977d1a4d3dc09ad01197a875b51b1b9f45fafffd1e00a519427ac11",
+              "urn:company-wiki:evidence-span:sha256:a60ce8d282205321da3c878be63a2f984cde469a121d803aa4e18d3fab1c6292"
+            ]
+          }
+        ]
+      ],
+      "semantic_status": "PENDING_INDEPENDENT_MANUAL_REVIEW"
+    },
+    {
+      "fact_id": "f-m365-consumer-vs-commercial-metric",
+      "target_kind": "required_business",
+      "any_support_sets": [
+        [
+          {
+            "atom": {
+              "page": 1,
+              "exact_quote": "Microsoft 365 Consumer products and cloud services revenue increased 11% driven by Microsoft 365 Consumer cloud revenue growth of 11%.",
+              "location_kind": "document"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": []
+          }
+        ],
+        [
+          {
+            "atom": {
+              "page": 1,
+              "exact_quote": "Microsoft 365 Commercial products and cloud services revenue increased 14% driven by Microsoft 365 Commercial cloud revenue growth of 15%.",
+              "location_kind": "document"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": []
+          }
+        ],
+        [
+          {
+            "atom": {
+              "page": 1,
+              "exact_quote": "Microsoft 365 Consumer products and cloud services revenue increased $756 million or 11%. Microsoft 365 Consumer cloud revenue grew 11% driven by Microsoft 365 Consumer subscriber growth of 8% to 89.0 million, as well as growth in revenue per user from the price increase announced in January 2025.",
+              "location_kind": "document"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": [
+              "urn:company-wiki:evidence-span:sha256:e749c64cdd89a3329a01bdf201e87dc635c245c4ec45bdb83a27c2818500ed0d"
+            ]
+          }
+        ],
+        [
+          {
+            "atom": {
+              "page": 1,
+              "exact_quote": "Microsoft 365 Commercial products and cloud services revenue increased $10.8 billion or 14%. Microsoft 365 Commercial cloud revenue grew 15% with Microsoft 365 Commercial seat growth of 6% driven by small and medium businesses and frontline worker offerings, as well as growth in revenue per user. Microsoft 365 Commercial products revenue grew 7% driven by the Windows Commercial on-premises components of Microsoft 365 suite sales and an increase in Office transactional purchasing with the launch of Office 2024.",
+              "location_kind": "document"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": [
+              "urn:company-wiki:evidence-span:sha256:dc02b23f4fb0be1692f20d15bd0f6498515748add787fec297349d5a4edc04be"
+            ]
+          }
+        ]
+      ],
+      "semantic_status": "PENDING_INDEPENDENT_MANUAL_REVIEW"
+    },
+    {
+      "fact_id": "f-azure-growth-inside-combined-line",
+      "target_kind": "required_business",
+      "any_support_sets": [
+        [
+          {
+            "atom": {
+              "page": 1,
+              "exact_quote": "Server products and cloud services revenue increased 23% driven by Azure and other cloud services revenue growth of 34%.",
+              "location_kind": "document"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": []
+          }
+        ],
+        [
+          {
+            "atom": {
+              "page": 1,
+              "exact_quote": "Server products and cloud services revenue increased $18.6 billion or 23% driven by Azure and other cloud services. Azure and other cloud services revenue grew 34% driven by demand for our portfolio of services. Server products revenue decreased 3% driven by a decrease in transactional purchasing with continued customer shift to cloud offerings.",
+              "location_kind": "document"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": [
+              "urn:company-wiki:evidence-span:sha256:76f0355dd29cc9af20782b8f2dfd460c0690194fa0bc989fdf0b3752612cf9d0"
+            ]
+          }
+        ]
+      ],
+      "semantic_status": "PENDING_INDEPENDENT_MANUAL_REVIEW"
+    },
+    {
+      "fact_id": "f-rpo-scope-and-amount",
+      "target_kind": "required_business",
+      "any_support_sets": [
+        [
+          {
+            "atom": {
+              "page": 1,
+              "exact_quote": "was $ 375 billion as of June 30, 2025, of which $ 368 billion is related to the commercial portion of revenue",
+              "location_kind": "document"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": [
+              "urn:company-wiki:evidence-span:sha256:bebd55194edde5635fe4e3b3932b0ee2dc5a9f580fcd30a2a39f01ca97e28574"
+            ]
+          }
+        ]
+      ],
+      "semantic_status": "PENDING_INDEPENDENT_MANUAL_REVIEW"
+    },
+    {
+      "fact_id": "f-rpo-recognition-is-forward",
+      "target_kind": "required_business",
+      "any_support_sets": [
+        [
+          {
+            "atom": {
+              "page": 1,
+              "exact_quote": "We expect to recognize approximately 40 % of our total company remaining performance obligation revenue over the next 12 months",
+              "location_kind": "document"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": [
+              "urn:company-wiki:evidence-span:sha256:bebd55194edde5635fe4e3b3932b0ee2dc5a9f580fcd30a2a39f01ca97e28574"
+            ]
+          }
+        ]
+      ],
+      "semantic_status": "PENDING_INDEPENDENT_MANUAL_REVIEW"
+    },
+    {
+      "fact_id": "f-total-revenue-consolidated",
+      "target_kind": "correctness_if_emitted",
+      "any_support_sets": [
+        [
+          {
+            "atom": {
+              "page": 1,
+              "exact_quote": "Microsoft Cloud revenue increased 23% to $168.9 billion.",
+              "location_kind": "document"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": []
+          }
+        ]
+      ],
+      "semantic_status": "PENDING_INDEPENDENT_MANUAL_REVIEW"
+    },
+    {
+      "fact_id": "f-fiscal-year-not-calendar",
+      "target_kind": "disposition_context",
+      "any_support_sets": [
+        [
+          {
+            "atom": {
+              "page": 1,
+              "exact_quote": "was $ 375 billion as of June 30, 2025",
+              "location_kind": "document"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": [
+              "urn:company-wiki:evidence-span:sha256:bebd55194edde5635fe4e3b3932b0ee2dc5a9f580fcd30a2a39f01ca97e28574"
+            ]
+          }
+        ]
+      ],
+      "semantic_status": "PENDING_INDEPENDENT_MANUAL_REVIEW"
+    },
+    {
+      "fact_id": "f-uneared-revenue-rollforward",
+      "target_kind": "correctness_if_emitted",
+      "any_support_sets": [
+        [
+          {
+            "atom": {
+              "page": 1,
+              "exact_quote": "Balance, end of period $ 67,265",
+              "location_kind": "document"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": []
+          }
+        ]
+      ],
+      "semantic_status": "PENDING_INDEPENDENT_MANUAL_REVIEW"
+    },
+    {
+      "fact_id": "f-html-tag-boundary-corruption",
+      "target_kind": "disposition_context",
+      "any_support_sets": [
+        [
+          {
+            "atom": {
+              "page": 1,
+              "exact_quote": "Item 1 OPERATING SEGMENTS",
+              "location_kind": "document"
+            },
+            "in_parsed_source": true,
+            "exact_selected_candidate_span_ids": []
+          }
+        ]
+      ],
+      "semantic_status": "PENDING_INDEPENDENT_MANUAL_REVIEW"
+    }
+  ],
+  "work_budget": {
+    "used": 13577692,
+    "limit": 16000000,
+    "exhausted": false
+  },
+  "elapsed_seconds": 17.234,
+  "source_stable": true,
+  "protected_unchanged": true
+}

@@ -1,0 +1,173 @@
+{
+  "source_ref": {
+    "document_id": "urn:company-wiki:document:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+    "source_id": "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+    "content_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+    "byte_size": 8158067,
+    "mime_type": "text/html",
+    "schema_version": "2.0"
+  },
+  "raw_sha_verified": true,
+  "scope": "Original DOM shape only; no selection/model replay",
+  "units": [
+    {
+      "index": 220,
+      "kind": "html_paragraph",
+      "text": "Our Enterprise Mobility + Security offerings compete with products from a range of competitors including identity vendors, security solution vendors, and numerous other security point solution vendors.",
+      "metadata": {
+        "dom_path": "0.1.22.7",
+        "source_locator": "cwp-html-dom/1|n=0.1.22.7"
+      }
+    },
+    {
+      "index": 221,
+      "kind": "html_paragraph",
+      "text": "LinkedIn faces competition from online professional networks; recruiting, talent management, and human resource services companies; job boards; companies that provide learning and development products and services; online and offline outlets that generate revenue from advertisers and marketers; and online and offline outlets for companies with lead generation and customer intelligence and insights.",
+      "metadata": {
+        "dom_path": "0.1.22.8",
+        "source_locator": "cwp-html-dom/1|n=0.1.22.8"
+      }
+    },
+    {
+      "index": 222,
+      "kind": "html_paragraph",
+      "text": "Dynamics competes with cloud-based and on-premises business solution providers.",
+      "metadata": {
+        "dom_path": "0.1.22.9",
+        "source_locator": "cwp-html-dom/1|n=0.1.22.9"
+      }
+    },
+    {
+      "index": 223,
+      "kind": "html_paragraph",
+      "text": "Intelligent Cloud",
+      "metadata": {
+        "dom_path": "0.1.22.10",
+        "source_locator": "cwp-html-dom/1|n=0.1.22.10"
+      }
+    },
+    {
+      "index": 224,
+      "kind": "html_paragraph",
+      "text": "Our Intelligent Cloud segment consists of our public, private, and hybrid server products and cloud services that power modern business and developers. This segment primarily comprises:",
+      "metadata": {
+        "dom_path": "0.1.22.11",
+        "source_locator": "cwp-html-dom/1|n=0.1.22.11"
+      }
+    },
+    {
+      "index": 225,
+      "kind": "html_paragraph",
+      "text": "Server products and cloud services, including Azure and other cloud services, comprising cloud and AI consumption-based services, GitHub cloud services, Nuance Healthcare cloud services, virtual desktop offerings, and other cloud services; and Server products, comprising SQL Server, Windows Server, Visual Studio, System Center, related Client Access Licenses (“CALs”), and other on-premises offerings.",
+      "metadata": {
+        "dom_path": "0.1.22.12.1",
+        "source_locator": "cwp-html-dom/1|n=0.1.22.12.1"
+      }
+    },
+    {
+      "index": 226,
+      "kind": "html_paragraph",
+      "text": "•",
+      "metadata": {
+        "dom_path": "0.1.22.12",
+        "source_locator": "cwp-html-dom/1|n=0.1.22.12"
+      }
+    },
+    {
+      "index": 227,
+      "kind": "html_paragraph",
+      "text": "Enterprise and partner services, including Enterprise Support Services, Industry Solutions, Nuance professional services, Microsoft Partner Network, and Learning Experience.",
+      "metadata": {
+        "dom_path": "0.1.22.13.1",
+        "source_locator": "cwp-html-dom/1|n=0.1.22.13.1"
+      }
+    },
+    {
+      "index": 228,
+      "kind": "html_paragraph",
+      "text": "•",
+      "metadata": {
+        "dom_path": "0.1.22.13",
+        "source_locator": "cwp-html-dom/1|n=0.1.22.13"
+      }
+    },
+    {
+      "index": 229,
+      "kind": "html_paragraph",
+      "text": "6",
+      "metadata": {
+        "dom_path": "0.1.23.0",
+        "source_locator": "cwp-html-dom/1|n=0.1.23.0"
+      }
+    },
+    {
+      "index": 230,
+      "kind": "html_paragraph",
+      "text": "PART I",
+      "metadata": {
+        "dom_path": "0.1.25.0",
+        "source_locator": "cwp-html-dom/1|n=0.1.25.0"
+      }
+    },
+    {
+      "index": 231,
+      "kind": "html_paragraph",
+      "text": "Item 1",
+      "metadata": {
+        "dom_path": "0.1.25.1",
+        "source_locator": "cwp-html-dom/1|n=0.1.25.1"
+      }
+    },
+    {
+      "index": 232,
+      "kind": "html_paragraph",
+      "text": "Server Products and Cloud Services",
+      "metadata": {
+        "dom_path": "0.1.26.0",
+        "source_locator": "cwp-html-dom/1|n=0.1.26.0"
+      }
+    },
+    {
+      "index": 233,
+      "kind": "html_paragraph",
+      "text": "Azure is a comprehensive set of cloud services that offer developers, IT professionals, and enterprises freedom to build, deploy, and manage applications on any platform or device. Customers can use Azure through our global network of datacenters for computing, networking, storage, mobile and web application services, AI, Internet of Things, cognitive services, and machine learning. Azure enables customers to devote more resources to development and use of applications that benefit their organizations, rather than managing on-premises hardware and software. Azure revenue is mainly affected by infrastructure-as-a-service and platform-as-a-service consumption-based services.",
+      "metadata": {
+        "dom_path": "0.1.26.1",
+        "source_locator": "cwp-html-dom/1|n=0.1.26.1"
+      }
+    },
+    {
+      "index": 234,
+      "kind": "html_paragraph",
+      "text": "Azure AI offerings provide a competitive advantage as companies seek ways to optimize and scale their business with AI. We offer supercomputing power for AI at scale to run large workloads, complemented by our rapidly expanding portfolio of AI cloud services (including the latest models) and hardware, which includes custom-built silicon and strong partnerships with chip manufacturers. Azure AI Foundry is a unified platform for developers to design, customize, and manage AI applications and agents.",
+      "metadata": {
+        "dom_path": "0.1.26.2",
+        "source_locator": "cwp-html-dom/1|n=0.1.26.2"
+      }
+    },
+    {
+      "index": 235,
+      "kind": "html_paragraph",
+      "text": "Our server products are designed to make IT professionals, developers, and their systems more productive and efficient. Server software is integrated server infrastructure and middleware designed to support software applications built on the Windows Server operating system. This includes the server platform, database, business intelligence, storage, management and operations, virtualization, service-oriented architecture platform, security, and identity software. We also license standalone and software development lifecycle tools for software architects, developers, testers, and project managers. Server products revenue is mainly affected by purchases through volume licensing programs, licenses sold to OEMs, and retail packaged products. CALs provide access rights to certain server products, including SQL Server and Windows Server, and revenue is reported along with the associated server product.",
+      "metadata": {
+        "dom_path": "0.1.26.3",
+        "source_locator": "cwp-html-dom/1|n=0.1.26.3"
+      }
+    },
+    {
+      "index": 236,
+      "kind": "html_paragraph",
+      "text": "GitHub and Nuance Healthcare include both cloud and on-premises offerings. GitHub provides a collaboration platform for developers to manage code and incorporate AI and agent-based tools across the software development lifecycle. Nuance Healthcare provides AI solutions to the healthcare industry.",
+      "metadata": {
+        "dom_path": "0.1.26.4",
+        "source_locator": "cwp-html-dom/1|n=0.1.26.4"
+      }
+    }
+  ],
+  "raw_native_html_excerpt": "p style=\"font-size:10pt;margin-top:13.5pt;font-family:Times New Roman;margin-bottom:0;text-align:left;\"><span style=\"color:#000000;white-space:pre-wrap;font-weight:bold;font-size:10pt;font-family:Arial;font-kerning:none;min-width:fit-content;\">Intelligent Cloud</span></p><p style=\"font-size:10pt;margin-top:9pt;font-family:Times New Roman;margin-bottom:0;text-align:justify;\"><span style=\"color:#000000;white-space:pre-wrap;font-size:10pt;font-family:Arial;font-kerning:none;min-width:fit-content;\">Our Intelligent Cloud segment consists of our public, private, and hybrid server products and cloud services that power modern business and developers. This segment primarily comprises:</span></p><div class=\"item-list-element-wrapper\" style=\"margin-left:5.731%;display:flex;margin-top:4.5pt;justify-content:flex-start;align-items:baseline;margin-bottom:0;min-width:3.333%;text-align:justify;\"><span style=\"color:#000000;white-space:pre-wrap;font-size:10pt;font-family:Times New Roman;font-kerning:none;min-width:3.5356267702001714%;word-break:keep-all;display:inline-flex;justify-content:flex-start;\">&#8226;</span><div style=\"display:inline;\"><span style=\"color:#000000;white-space:pre-wrap;font-size:10pt;font-family:Arial;font-kerning:none;min-width:fit-content;\">Server products and cloud services, including Azure and other cloud services, comprising cloud and AI consumption-based services, GitHub cloud services, Nuance Healthcare cloud services, virtual desktop offerings, and other cloud services; and Server products, comprising SQL Server, Windows Server, Visual Studio, System Center, related Client Access Licenses (&#8220;CALs&#8221;), and other on-premises offerings.</span></div></div><div class=\"item-list-element-wrapper\" style=\"margin-left:5.731%;display:flex;margin-top:4.5pt;justify-content:flex-start;align-items:baseline;margin-bottom:0;min-width:3.333%;text-align:justify;\"><span style=\"color:#000000;white-space:pre-wrap;font-size:10pt;font-family:Times New Roman;font-kerning:none;min-width:3.5356267702001714%;word-break:keep-all;display:inline-flex;justify-content:flex-start;\">&#8226;</span><div style=\"display:inline;\"><span style=\"color:#000000;white-space:pre-wrap;font-size:10pt;font-family:Arial;font-kerning:none;min-width:fit-content;\">Enterprise and partner services, including Enterprise Support Services, Industry Solutions, Nuance professional services, Microsoft Partner Network, and Learning Experience.</span></div></div></div>\n  <div style=\"z-index:2;flex-direction:column;display:flex;padding-bottom:0.4in;min-height:0.6in;justify-content:flex-end;position:relative;box-sizing:border-box;\"><p style=\"font-size:10pt;margin-top:12pt;font-family:Times New Roman;margin-bottom:0;text-align:center;margin-left:0;margin-right:0;\"><span style=\"color:#000000;white-space:pre-wrap;font-size:8pt;font-family:Arial;font-kerning:none;min-width:fit-content;\">6</span></p></div>\n  <hr style=\"margin-inline-start:auto;margin-inline-end:auto;page-break-after:always;\"/>\n  <div style=\"padding-top:0.5in;z-index:2;min-height:0.6in;position:relative;box-sizing:border-box;\"><p style=\"font-size:10pt;margin-top:0;font-family:Times New Roman;margin-bottom:0;text-align:center;margin-left:0;margin-right:0;\"><span style=\"color:#000000;white-space:pre-wrap;text-decoration:underline solid;font-size:7.5pt;font-family:Arial;font-kerning:none;min-width:fit-content;\">PART I</span></p><p style=\"font-size:10pt;margin-top:0;font-family:Times New Roman;margin-bottom:0;text-align:center;margin-left:0;margin-right:0;\"><span style=\"color:#000000;white-space:pre-wrap;font-size:7.5pt;font-family:Arial;font-kerning:none;min-width:fit-content;\">Item 1</span></p><p style=\"font-size:10pt;margin-top:0;font-family:Times New Roman;margin-bottom:0;text-align:center;margin-left:0;margin-right:0;\"><span style=\"white-space:pre-wrap;font-size:9pt;font-family:Arial;font-kerning:none;min-width:fit-content;\">&#160;</span></p></div>\n  <div class=\"main-content-container\" style=\"z-index:5;position:relative;\"><p style=\"font-size:10pt;margin-top:13.5pt;font-family:Times New Roman;margin-bottom:0;text-align:left;\"><span style=\"color:#000000;white-space:pre-wrap;font-weight:bold;font-size:10pt;font-family:Arial;font-style:italic;font-kerning:none;min-width:fit-content;\">Server Products and Cloud Services</span></p><p style=\"font-size:10pt;margin-top:9pt;font-family:Times New Roman;margin-bottom:0;text-align:justify;\"><span style=\"color:#000000;white-space:pre-wrap;font-size:10pt;font-family:Arial;font-kerning:none;min-width:fit-content;\">Azure is a comprehensive set of cloud services that offer developers, IT professionals, and enterprises freedom to build, deploy, and manage applicati",
+  "write_store_constructed": false,
+  "protected_unchanged": true,
+  "model_calls": 0,
+  "downloads": 0,
+  "raw_copies": 0
+}

@@ -1,0 +1,1084 @@
+{
+  "schema_version": "independent-local-flow-cross-market-run/1",
+  "created_at": "2026-10-25T12:07:28.514757+00:00",
+  "head_before": "483cb2a56299cb28ca07bbd349674860baf04430",
+  "head_after": "483cb2a56299cb28ca07bbd349674860baf04430",
+  "source_stable": true,
+  "source_tree_sha256": "b43aed5e5da428b753495072b43b8671ca38d6c7f257fbb5d951f3618b485984",
+  "source_owner17_unchanged": true,
+  "protected_unchanged": true,
+  "write_store_constructed": false,
+  "case_summaries": [
+    {
+      "case_id": "us-10k",
+      "status": "COMPLETE_BOUNDED_SOURCE_INPUT_PRECHECK",
+      "selection": {
+        "status": "partial",
+        "coverage_complete": true,
+        "selection_limit": 112,
+        "candidate_count": 484,
+        "omitted_candidate_count": 372,
+        "dropped_financial_count": 149,
+        "diagnostics": [
+          {
+            "code": "budget_full",
+            "count": 308,
+            "phase": "selection",
+            "external_model_cost": false,
+            "targets": [
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:0835468b2a8e504d4d273a7009f571662ba5b3e8c1ecdf7fced1ee1709b6408b",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:0835468b2a8e504d4d273a7009f571662ba5b3e8c1ecdf7fced1ee1709b6408b"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/paragraph:1058",
+                "used": 112,
+                "requested": 3,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:d6dccf536af9fac1d6c08efdf088f4b2ad450ccd31b5ec6b11c1c6eb6b795070",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:d6dccf536af9fac1d6c08efdf088f4b2ad450ccd31b5ec6b11c1c6eb6b795070"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/paragraph:1059",
+                "used": 112,
+                "requested": 3,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:996d40379d0bab8a6527de919713a6002558e48e7c5a5222469f73217ff10472",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:996d40379d0bab8a6527de919713a6002558e48e7c5a5222469f73217ff10472"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/paragraph:1060",
+                "used": 112,
+                "requested": 3,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:b51445fe9254ecd5fef519bce8d630bd53da2acce9a1797092630821d9238905",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:b51445fe9254ecd5fef519bce8d630bd53da2acce9a1797092630821d9238905"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/paragraph:1061",
+                "used": 112,
+                "requested": 3,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:fe08d9bbbef79874ef60c23eb7e8dccf93348cdcfd7e25b8a8284b65537b7578",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:fe08d9bbbef79874ef60c23eb7e8dccf93348cdcfd7e25b8a8284b65537b7578"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/paragraph:1062",
+                "used": 112,
+                "requested": 3,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:195a743c9ec9de3f9b9abe1db4789997bdb2fb58c015fbb3ed95716da1dc30d4",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:195a743c9ec9de3f9b9abe1db4789997bdb2fb58c015fbb3ed95716da1dc30d4"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/paragraph:1063",
+                "used": 112,
+                "requested": 3,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:b7eae53691d47bd80242ed97679d4164765c616acd4caad8db99c871f2f3ee71",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:b7eae53691d47bd80242ed97679d4164765c616acd4caad8db99c871f2f3ee71"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/paragraph:1064",
+                "used": 112,
+                "requested": 3,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:d8066717aebcf7ba18c5528e66f1456d7528af8c5631d3248dee6ca75e706661",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:d8066717aebcf7ba18c5528e66f1456d7528af8c5631d3248dee6ca75e706661"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/paragraph:1066",
+                "used": 112,
+                "requested": 3,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:9b08cf01b0cd975e3b86b52ec4c5479e33209f401aa35bcb5411f5524364d01b",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:9b08cf01b0cd975e3b86b52ec4c5479e33209f401aa35bcb5411f5524364d01b"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/paragraph:1067",
+                "used": 112,
+                "requested": 3,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:b67f7b3183befe0e6eece7abfd7f301c810e2c7a924a38d89265433f8457f1a1",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:b67f7b3183befe0e6eece7abfd7f301c810e2c7a924a38d89265433f8457f1a1"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/paragraph:1068",
+                "used": 112,
+                "requested": 3,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:4342d4a835e7d0480d86dee37989652783f83f2a4b108a722a9c97a92d4141bf",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:4342d4a835e7d0480d86dee37989652783f83f2a4b108a722a9c97a92d4141bf"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/paragraph:1073",
+                "used": 112,
+                "requested": 3,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:38a69261551f34509bc441c1cfc4bdbd9dd62a643f7336bf793a353792f88890",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:38a69261551f34509bc441c1cfc4bdbd9dd62a643f7336bf793a353792f88890"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/paragraph:1074",
+                "used": 112,
+                "requested": 3,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:7a82eedc14c50b2c20942063e4ad4880fd5cd1c67be4039c6b6b40d5d615d4e5",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:7a82eedc14c50b2c20942063e4ad4880fd5cd1c67be4039c6b6b40d5d615d4e5"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/paragraph:1075",
+                "used": 112,
+                "requested": 3,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:8d23e8011b03076a86ae912f56090df1df8be0c38153f6828a2eb35b25279432",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:8d23e8011b03076a86ae912f56090df1df8be0c38153f6828a2eb35b25279432"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/paragraph:1076",
+                "used": 112,
+                "requested": 3,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:60651aed128dd0bd4587069bb11735b546c294b27d8f227fd510bf048c01b3dc",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:60651aed128dd0bd4587069bb11735b546c294b27d8f227fd510bf048c01b3dc"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/paragraph:1077",
+                "used": 112,
+                "requested": 3,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:2a422660b24f835968e0a2548628cefd3f50e93ca91dda790505acf5857642f3",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:2a422660b24f835968e0a2548628cefd3f50e93ca91dda790505acf5857642f3"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/paragraph:1078",
+                "used": 112,
+                "requested": 3,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:cd5f55899262befb0dd6c97df3faecedc382dcc4e42ed3a4fbab7687fedfa579",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:cd5f55899262befb0dd6c97df3faecedc382dcc4e42ed3a4fbab7687fedfa579"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/paragraph:1079",
+                "used": 112,
+                "requested": 3,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:007a2ae7f86f66af566747012c20b88841a07ecb92609d41352b64caecc36d98",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:007a2ae7f86f66af566747012c20b88841a07ecb92609d41352b64caecc36d98"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/paragraph:1080",
+                "used": 112,
+                "requested": 3,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:4846c2d7739ccd0716cfacdf705fa43f24d737372bcdeadb8db241afa7989d32",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:4846c2d7739ccd0716cfacdf705fa43f24d737372bcdeadb8db241afa7989d32"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/paragraph:1081",
+                "used": 112,
+                "requested": 3,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:eeb707ed7a9eb6e7798e51e420c44016a7fc720bd2637f937abed677aedd26df",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:eeb707ed7a9eb6e7798e51e420c44016a7fc720bd2637f937abed677aedd26df"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/paragraph:1085",
+                "used": 112,
+                "requested": 3,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:cdfcf037a0d99721d40bd3b834a7cdb37952f5764eb2b64d5623e8c731509845",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:cdfcf037a0d99721d40bd3b834a7cdb37952f5764eb2b64d5623e8c731509845"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/paragraph:1088",
+                "used": 112,
+                "requested": 3,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:36ec0a700d5d5b541d8387d93f951ab04120a6db780094c4e68d966011865b19",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:36ec0a700d5d5b541d8387d93f951ab04120a6db780094c4e68d966011865b19"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/paragraph:1107",
+                "used": 112,
+                "requested": 3,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:d569285b63fe8da60618daf99a23fce03e153b8ff3f43de67e3121a6f653d1a4",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:d569285b63fe8da60618daf99a23fce03e153b8ff3f43de67e3121a6f653d1a4"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/paragraph:1108",
+                "used": 112,
+                "requested": 3,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:c8e38062467f7a111dc51a7e12ec2f3f4f35a67b00b0883de6bab383ddeaf9cb",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:c8e38062467f7a111dc51a7e12ec2f3f4f35a67b00b0883de6bab383ddeaf9cb"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/paragraph:1109",
+                "used": 112,
+                "requested": 3,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:18b63e2a816866740804f06b41061efaacf4711f3fb2fed015a9f3fe29397f70",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:18b63e2a816866740804f06b41061efaacf4711f3fb2fed015a9f3fe29397f70"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/paragraph:1151",
+                "used": 112,
+                "requested": 3,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:a65f795c151690021e0eb76e9181008a4aeead48218b2d2dad4a789dfc871868",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:a65f795c151690021e0eb76e9181008a4aeead48218b2d2dad4a789dfc871868"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/paragraph:1156",
+                "used": 112,
+                "requested": 3,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:5595db29707d6933e4864d6feffdaa3f8d81602eaeac19eee1dc10360f4a62b9",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:5595db29707d6933e4864d6feffdaa3f8d81602eaeac19eee1dc10360f4a62b9"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/paragraph:1157",
+                "used": 112,
+                "requested": 3,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:41aeca1d9f09d056749ae095cdcc16e982b7105f37c8f5145d12ccbbf8b01260",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:41aeca1d9f09d056749ae095cdcc16e982b7105f37c8f5145d12ccbbf8b01260"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/paragraph:1158",
+                "used": 112,
+                "requested": 3,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:a94fe6ea2f633cafea8043061584433db2f1e8e33d6686c49529fd64e40653cc",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:a94fe6ea2f633cafea8043061584433db2f1e8e33d6686c49529fd64e40653cc"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/paragraph:1160",
+                "used": 112,
+                "requested": 3,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:a03e169b5931b2854c5cc565dc21c0f070531ee3e2b5cc985aab14b857ed12ed",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:a03e169b5931b2854c5cc565dc21c0f070531ee3e2b5cc985aab14b857ed12ed"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/paragraph:1162",
+                "used": 112,
+                "requested": 3,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:91cba0cdf1761331678c00dfe4b36a75d92414ef7161dfddceef6df245f3c0a1",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:91cba0cdf1761331678c00dfe4b36a75d92414ef7161dfddceef6df245f3c0a1"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/paragraph:1163",
+                "used": 112,
+                "requested": 3,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:27c604510a70526940d673f02cc28fab639afa46e938b63d91692d906fe14fa8",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:27c604510a70526940d673f02cc28fab639afa46e938b63d91692d906fe14fa8"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/paragraph:1164",
+                "used": 112,
+                "requested": 3,
+                "limit": 112,
+                "closure_size": 3
+              }
+            ],
+            "targets_limited": true,
+            "dimension": "selection_spans",
+            "used": 112,
+            "limit": 112
+          }
+        ],
+        "selected_count": 112,
+        "selected_chars": 40491
+      },
+      "actual_task_count": 50,
+      "compiler_status": "COMPILED_ACTUAL_V4_INPUT_NOT_SENT",
+      "work_budget": {
+        "used": 13577692,
+        "limit": 16000000,
+        "exhausted": false
+      },
+      "elapsed_seconds": 17.234
+    },
+    {
+      "case_id": "du5-hk-kingsoft-interim",
+      "status": "COMPLETE_BOUNDED_SOURCE_INPUT_PRECHECK",
+      "selection": {
+        "status": "partial",
+        "coverage_complete": false,
+        "selection_limit": 112,
+        "candidate_count": 1116,
+        "omitted_candidate_count": 1004,
+        "dropped_financial_count": 0,
+        "diagnostics": [
+          {
+            "code": "budget_full",
+            "count": 102,
+            "phase": "selection",
+            "external_model_cost": false,
+            "targets": [
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:f26c83f2918a37a128eae4eab259d8aa1440124545488ad28f134b74c04785e6",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:f26c83f2918a37a128eae4eab259d8aa1440124545488ad28f134b74c04785e6"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/page:10/paragraph:0",
+                "used": 112,
+                "requested": 1,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:581c83a1c987bb213816004132ccd728ea6d40b1c53abda8141336824de1915b",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:581c83a1c987bb213816004132ccd728ea6d40b1c53abda8141336824de1915b"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/page:10/paragraph:13/chars:341-370",
+                "used": 112,
+                "requested": 1,
+                "limit": 112,
+                "closure_size": 2
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:696094acd80390ac3ed01b5736f1bad465730472921b0df90f61d2fd6fee4952",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:696094acd80390ac3ed01b5736f1bad465730472921b0df90f61d2fd6fee4952"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/page:10/paragraph:15/chars:376-451",
+                "used": 112,
+                "requested": 2,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:0eca563ec790663610cc675a03d2dcfb6aea54122afdc63ebe8cdc5ddce72c57",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:0eca563ec790663610cc675a03d2dcfb6aea54122afdc63ebe8cdc5ddce72c57"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/page:10/paragraph:18/chars:451-500",
+                "used": 112,
+                "requested": 2,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:958b83183168ea0617066a509b36b874eb48940fbfcfff53025883b070bab6f0",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:958b83183168ea0617066a509b36b874eb48940fbfcfff53025883b070bab6f0"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/page:10/paragraph:20/chars:500-557",
+                "used": 112,
+                "requested": 2,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:118dcae3f02ddcbd482ce597861cfc2873d2d058a16394260a9b00f57cf3ecb9",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:118dcae3f02ddcbd482ce597861cfc2873d2d058a16394260a9b00f57cf3ecb9"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/page:10/paragraph:22/chars:557-603",
+                "used": 112,
+                "requested": 2,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:51caa6d144f799858fe4c2d743df926f99b1cedbaf3e33c53b06d9f68abf60a8",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:51caa6d144f799858fe4c2d743df926f99b1cedbaf3e33c53b06d9f68abf60a8"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/page:10/paragraph:24/chars:604-675",
+                "used": 112,
+                "requested": 2,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:3c700bca89530f3bc6cc01bd5035d544afae2d23db06365103adeacb5bd0b218",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:3c700bca89530f3bc6cc01bd5035d544afae2d23db06365103adeacb5bd0b218"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/page:11/paragraph:0",
+                "used": 112,
+                "requested": 2,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:469823f3de33badef2b105463091eddadf4c8e14eda430b1fabbd3631b81b502",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:469823f3de33badef2b105463091eddadf4c8e14eda430b1fabbd3631b81b502"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/page:11/paragraph:13/chars:237-403",
+                "used": 112,
+                "requested": 1,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:8aba10d4e6cef906310cdea234d59eaeb096022af992bca0e8755679ef392bfe",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:8aba10d4e6cef906310cdea234d59eaeb096022af992bca0e8755679ef392bfe"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/page:11/paragraph:21/chars:404-469",
+                "used": 112,
+                "requested": 1,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:2f5c2fe489f9ac1165f016c0ade20b2ff95473f8a82cfba2dc368af407372014",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:2f5c2fe489f9ac1165f016c0ade20b2ff95473f8a82cfba2dc368af407372014"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/page:11/paragraph:24/chars:475-571",
+                "used": 112,
+                "requested": 2,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:aff6b36f605a114c7d4d599f8f9ba8b2b2364e0ca63a35fc5c31c40d87e69bcd",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:aff6b36f605a114c7d4d599f8f9ba8b2b2364e0ca63a35fc5c31c40d87e69bcd"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/page:11/paragraph:3/chars:28-37",
+                "used": 112,
+                "requested": 1,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:3c79a3658ca03a5e6621d076929e7de87f2796dfbd7ac93c33b521ea496ff369",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:3c79a3658ca03a5e6621d076929e7de87f2796dfbd7ac93c33b521ea496ff369"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/page:11/paragraph:4/chars:37-182",
+                "used": 112,
+                "requested": 1,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:8e6454b59f2a3a39a42dbaebead4ce97f7bcfd13454d2f97e23ca795daf9ab19",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:8e6454b59f2a3a39a42dbaebead4ce97f7bcfd13454d2f97e23ca795daf9ab19"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/page:12/paragraph:0",
+                "used": 112,
+                "requested": 2,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:8aae567d85f02357d497d8e91c8a31816ab0f0554fbe9bd0417c313e05db9e8f",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:8aae567d85f02357d497d8e91c8a31816ab0f0554fbe9bd0417c313e05db9e8f"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/page:12/paragraph:10",
+                "used": 112,
+                "requested": 3,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:34624b4d7eaea8e94afcd309230325f5405cf47f28afd7236e13fd9fc67c3535",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:34624b4d7eaea8e94afcd309230325f5405cf47f28afd7236e13fd9fc67c3535"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/page:12/paragraph:11",
+                "used": 112,
+                "requested": 3,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:4b6422e94253df6f6520c21970cbb5457ef9cb7efee45838bb8b4bbc3ba94f3f",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:4b6422e94253df6f6520c21970cbb5457ef9cb7efee45838bb8b4bbc3ba94f3f"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/page:12/paragraph:12",
+                "used": 112,
+                "requested": 3,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:7b788d8bf8c40be291a69c84a8f8fb0621baaec4f32358998bdc8a7885b22766",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:7b788d8bf8c40be291a69c84a8f8fb0621baaec4f32358998bdc8a7885b22766"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/page:12/paragraph:18",
+                "used": 112,
+                "requested": 3,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:7ee1a8cc6e98057ad0bc0964058f46ec165173c5d1f68896a65a215023e91220",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:7ee1a8cc6e98057ad0bc0964058f46ec165173c5d1f68896a65a215023e91220"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/page:12/paragraph:27",
+                "used": 112,
+                "requested": 3,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:bff8ad8d28ca6a0c85e3f70194f9cae196f499da5b219c012402ddec699e201b",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:bff8ad8d28ca6a0c85e3f70194f9cae196f499da5b219c012402ddec699e201b"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/page:12/paragraph:28",
+                "used": 112,
+                "requested": 3,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:4d0ebaa65cadcd6fd701669b51b213f35a0c32f52b9151a0021bd806213f5a6d",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:4d0ebaa65cadcd6fd701669b51b213f35a0c32f52b9151a0021bd806213f5a6d"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/page:12/paragraph:29",
+                "used": 112,
+                "requested": 3,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:ee063318d91a0306322bfd39deab54140c347e54ceae7ad2fcf647cee1bc8beb",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:ee063318d91a0306322bfd39deab54140c347e54ceae7ad2fcf647cee1bc8beb"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/page:12/paragraph:3",
+                "used": 112,
+                "requested": 3,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:ba22236afe53a41a3dc6c58e71a634f604ee50ac8d34d30672e6b5e28c699285",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:ba22236afe53a41a3dc6c58e71a634f604ee50ac8d34d30672e6b5e28c699285"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/page:12/paragraph:4",
+                "used": 112,
+                "requested": 3,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:e396ca5576bff72c23366b948636d7d249b32673cef47025d6886a64125f9622",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:e396ca5576bff72c23366b948636d7d249b32673cef47025d6886a64125f9622"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/page:13/paragraph:0",
+                "used": 112,
+                "requested": 3,
+                "limit": 112,
+                "closure_size": 3
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:37f1fa863dabb08d9b89c57435a7e38d0c637188ac561930d019826073da5b5d",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:37f1fa863dabb08d9b89c57435a7e38d0c637188ac561930d019826073da5b5d"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/page:13/paragraph:10/chars:304-356",
+                "used": 112,
+                "requested": 1,
+                "limit": 112,
+                "closure_size": 2
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:0c777d9ee986444cdc450f99bd73e9912f3009f97f8ad91a01264f7964420de1",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:0c777d9ee986444cdc450f99bd73e9912f3009f97f8ad91a01264f7964420de1"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/page:13/paragraph:13",
+                "used": 112,
+                "requested": 1,
+                "limit": 112,
+                "closure_size": 2
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:60012662dbc4d5c9132221742a37391ccb3e69fe450ef14c4edd46049ac0f6c2",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:60012662dbc4d5c9132221742a37391ccb3e69fe450ef14c4edd46049ac0f6c2"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/page:13/paragraph:14/chars:387-451",
+                "used": 112,
+                "requested": 1,
+                "limit": 112,
+                "closure_size": 2
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:1a9a7c9f89e4f92d59aed140ebdac50c819c4242975d7b8391f3cc00a55da4c0",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:1a9a7c9f89e4f92d59aed140ebdac50c819c4242975d7b8391f3cc00a55da4c0"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/page:13/paragraph:21/chars:578-730",
+                "used": 112,
+                "requested": 1,
+                "limit": 112,
+                "closure_size": 2
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:3918c4ae64e3abdaa4cb038350501c4aa9c30ee22ab95f7c1b95c40ad11982db",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:3918c4ae64e3abdaa4cb038350501c4aa9c30ee22ab95f7c1b95c40ad11982db"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/page:13/paragraph:27/chars:730-794",
+                "used": 112,
+                "requested": 1,
+                "limit": 112,
+                "closure_size": 2
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:37cf7ff2cd003cd93fbfc0bae5cf6aa09d225868a584654a47d7c1bc210e4618",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:37cf7ff2cd003cd93fbfc0bae5cf6aa09d225868a584654a47d7c1bc210e4618"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/page:13/paragraph:35",
+                "used": 112,
+                "requested": 1,
+                "limit": 112,
+                "closure_size": 2
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:3f89ee0732cac2d082dbc6e32346274ddf1682a40ebf9685810d25909929b4c3",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:3f89ee0732cac2d082dbc6e32346274ddf1682a40ebf9685810d25909929b4c3"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/page:13/paragraph:36",
+                "used": 112,
+                "requested": 1,
+                "limit": 112,
+                "closure_size": 2
+              },
+              {
+                "item_id": "urn:company-wiki:narrative-unit:sha256:5ffb549fcfbe8dc18d4d200661311eb46148b32971aeebb6f6bd206227c19271",
+                "item_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:5ffb549fcfbe8dc18d4d200661311eb46148b32971aeebb6f6bd206227c19271"
+                ],
+                "item_count": 1,
+                "item_ids_limited": false,
+                "group_id": null,
+                "locator": "loc:v1/page:13/paragraph:37",
+                "used": 112,
+                "requested": 1,
+                "limit": 112,
+                "closure_size": 2
+              }
+            ],
+            "targets_limited": true,
+            "dimension": "selection_spans",
+            "used": 112,
+            "limit": 112
+          }
+        ],
+        "selected_count": 112,
+        "selected_chars": 6522
+      },
+      "actual_task_count": 60,
+      "compiler_status": "COMPILED_ACTUAL_V4_INPUT_NOT_SENT",
+      "work_budget": {
+        "used": 3644236,
+        "limit": 16000000,
+        "exhausted": false
+      },
+      "elapsed_seconds": 5.782
+    },
+    {
+      "case_id": "cn-ipo",
+      "status": "WORK_EXHAUSTED_STOP",
+      "selection": {
+        "status": "needs_review",
+        "coverage_complete": false,
+        "selection_limit": 112,
+        "candidate_count": 8361,
+        "omitted_candidate_count": 8361,
+        "dropped_financial_count": 0,
+        "diagnostics": [
+          {
+            "code": "work_budget_exhausted",
+            "count": 1,
+            "dimension": "document_work",
+            "external_model_cost": false,
+            "phase": "document",
+            "used": 15999740,
+            "requested": null,
+            "limit": 16000000,
+            "detail": "unexamined source content remains unknown; original is unchanged"
+          }
+        ],
+        "selected_count": 0,
+        "selected_chars": 0
+      },
+      "actual_task_count": null,
+      "compiler_status": "NOT_COMPILED_BUDGET_EXHAUSTED_STOP",
+      "work_budget": {
+        "used": 15999740,
+        "limit": 16000000,
+        "exhausted": true
+      },
+      "elapsed_seconds": 12.397
+    }
+  ],
+  "neutral_controls": [
+    {
+      "text": "The auditor tested revenue: includes manual inspection of contract samples.",
+      "eligible": false,
+      "reasons": [],
+      "purpose": "unknown",
+      "financial_only": true,
+      "expected_eligible": false,
+      "expected_actual_growth": false,
+      "passed": true
+    },
+    {
+      "text": "Training for revenue: includes instructions for reviewing deferred revenue.",
+      "eligible": false,
+      "reasons": [],
+      "purpose": "unknown",
+      "financial_only": true,
+      "expected_eligible": false,
+      "expected_actual_growth": false,
+      "passed": true
+    },
+    {
+      "text": "Our service revenue: includes cloud subscriptions and support services.",
+      "eligible": true,
+      "reasons": [
+        "reporting_metric_definition"
+      ],
+      "purpose": "operating_metric_basis",
+      "financial_only": false,
+      "expected_eligible": true,
+      "expected_actual_growth": false,
+      "passed": true
+    },
+    {
+      "text": "Paid seats: number of licensed users and our paid seats increased 20% to 240 in 2026.",
+      "eligible": true,
+      "reasons": [
+        "reporting_metric_definition",
+        "operating_metric_change"
+      ],
+      "purpose": "operating_metric_basis",
+      "financial_only": false,
+      "expected_eligible": true,
+      "expected_actual_growth": true,
+      "passed": true
+    },
+    {
+      "text": "Paid seats: number of licensed users at the end of the period.",
+      "eligible": true,
+      "reasons": [
+        "reporting_metric_definition"
+      ],
+      "purpose": "operating_metric_basis",
+      "financial_only": false,
+      "expected_eligible": true,
+      "expected_actual_growth": false,
+      "passed": true
+    }
+  ],
+  "calls": {
+    "model": 0,
+    "api": 0,
+    "download": 0,
+    "raw_copy": 0
+  },
+  "temporary_directories_created": 0,
+  "model_response_semantics": "NOT_REVIEWED",
+  "current_rf_consumption": "OPEN"
+}

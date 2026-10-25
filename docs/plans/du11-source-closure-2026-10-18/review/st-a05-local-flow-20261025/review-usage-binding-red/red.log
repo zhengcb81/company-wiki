@@ -1,0 +1,35 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\cwdoc-biv9tqxw\\pytest", "requested_basetemp_len": 56, "cwd_len": 34, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+timeout: 180.0s
+timeout method: thread
+timeout func_only: False
+collected 3 items
+
+tests\test_phase_c_finalization.py FFF                                   [100%]
+
+================================== FAILURES ===================================
+_ test_replay_rejects_changed_or_unbound_usage_and_keeps_full_hold[lower_values] _
+tests\test_phase_c_finalization.py:208: in test_replay_rejects_changed_or_unbound_usage_and_keeps_full_hold
+    with pytest.raises(ValueError, match='native usage journal (changed|has no bound)'):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError
+___ test_replay_rejects_changed_or_unbound_usage_and_keeps_full_hold[empty] ___
+tests\test_phase_c_finalization.py:208: in test_replay_rejects_changed_or_unbound_usage_and_keeps_full_hold
+    with pytest.raises(ValueError, match='native usage journal (changed|has no bound)'):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError
+_ test_replay_rejects_changed_or_unbound_usage_and_keeps_full_hold[late_unbound] _
+tests\test_phase_c_finalization.py:208: in test_replay_rejects_changed_or_unbound_usage_and_keeps_full_hold
+    with pytest.raises(ValueError, match='native usage journal (changed|has no bound)'):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ValueError
+=========================== short test summary info ===========================
+FAILED tests/test_phase_c_finalization.py::test_replay_rejects_changed_or_unbound_usage_and_keeps_full_hold[lower_values]
+FAILED tests/test_phase_c_finalization.py::test_replay_rejects_changed_or_unbound_usage_and_keeps_full_hold[empty]
+FAILED tests/test_phase_c_finalization.py::test_replay_rejects_changed_or_unbound_usage_and_keeps_full_hold[late_unbound]
+============================== 3 failed in 0.54s ==============================

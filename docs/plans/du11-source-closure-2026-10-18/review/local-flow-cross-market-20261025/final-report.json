@@ -1,0 +1,2274 @@
+{
+  "schema_version": "independent-local-flow-cross-market-final/1",
+  "created_at": "2026-10-25T12:15:18.040990+00:00",
+  "verdict": "SOURCE_INPUT_GAPS_FOUND; IPO_WORK_EXHAUSTED_STOP; MODEL_NOT_REVIEWED; RF_OPEN",
+  "binding": {
+    "head_before": "483cb2a56299cb28ca07bbd349674860baf04430",
+    "head_after": "483cb2a56299cb28ca07bbd349674860baf04430",
+    "tracked_WIP_at_run": " M .githooks/pre-push\n",
+    "source_tree_sha256": "b43aed5e5da428b753495072b43b8671ca38d6c7f257fbb5d951f3618b485984",
+    "source_file_count": 376,
+    "source_owner17": {
+      "src/company_wiki/document_understanding/decision_inventory.py": {
+        "frozen_sha256": "e2c568258d6857f6e0702a8ba725bd7cf635bbb85cdd944ae8961dcfb2fdbeef",
+        "actual_sha256": "e2c568258d6857f6e0702a8ba725bd7cf635bbb85cdd944ae8961dcfb2fdbeef"
+      },
+      "src/company_wiki/document_understanding/layout_bridge.py": {
+        "frozen_sha256": "ea6eb10c2ed687319f01f918b96b14bf4ff87dcee85cca5352e3251f413f38a5",
+        "actual_sha256": "ea6eb10c2ed687319f01f918b96b14bf4ff87dcee85cca5352e3251f413f38a5"
+      },
+      "src/company_wiki/document_understanding/layout_hints/__init__.py": {
+        "frozen_sha256": "997b295d388604f23503958c1e4e9de2fb69a3a1be1910086a4da8fd9ed0ec9d",
+        "actual_sha256": "997b295d388604f23503958c1e4e9de2fb69a3a1be1910086a4da8fd9ed0ec9d"
+      },
+      "src/company_wiki/document_understanding/layout_hints/columns.py": {
+        "frozen_sha256": "e19dfedb9e86a4edbb189558a3cf75074571f6e378c1ec44cf77c091e1665a5c",
+        "actual_sha256": "e19dfedb9e86a4edbb189558a3cf75074571f6e378c1ec44cf77c091e1665a5c"
+      },
+      "src/company_wiki/document_understanding/narrative_continuity.py": {
+        "frozen_sha256": "e6dd8e4c35022392a65e5ed489320ffc41a4fb286b9b3d51c26f57f8597a29a4",
+        "actual_sha256": "e6dd8e4c35022392a65e5ed489320ffc41a4fb286b9b3d51c26f57f8597a29a4"
+      },
+      "src/company_wiki/document_understanding/observation_adapter.py": {
+        "frozen_sha256": "aaf39f3e4a6413014e2f56a07f99bbf76cec591133bbdfab28acabe445843e1d",
+        "actual_sha256": "aaf39f3e4a6413014e2f56a07f99bbf76cec591133bbdfab28acabe445843e1d"
+      },
+      "src/company_wiki/document_understanding/pipeline.py": {
+        "frozen_sha256": "198385623657a1704091d38435b1bc696794dd7afb768eac493b718d705c3056",
+        "actual_sha256": "198385623657a1704091d38435b1bc696794dd7afb768eac493b718d705c3056"
+      },
+      "src/company_wiki/document_understanding/profiles/reading_catalog.json": {
+        "frozen_sha256": "6da5b087eaae8126e75e0075af5e248309c747abc99457c5c6292e48f3f7d909",
+        "actual_sha256": "6da5b087eaae8126e75e0075af5e248309c747abc99457c5c6292e48f3f7d909"
+      },
+      "src/company_wiki/document_understanding/profiles/registry.py": {
+        "frozen_sha256": "1b0649063b880d5fc84506c31d973c9c2b5c58def99010370798b47875683b4b",
+        "actual_sha256": "1b0649063b880d5fc84506c31d973c9c2b5c58def99010370798b47875683b4b"
+      },
+      "src/company_wiki/source_catalog/narrative_document.py": {
+        "frozen_sha256": "889df37ad7325325a05d79e5a15cf45a5b395d5a273f856c0a2ee2662527d7c9",
+        "actual_sha256": "889df37ad7325325a05d79e5a15cf45a5b395d5a273f856c0a2ee2662527d7c9"
+      },
+      "src/company_wiki/source_catalog/narrative_evidence.py": {
+        "frozen_sha256": "9d8da04aeffc7d5e812d8c3a97752d14acc3e61e99106b6776de6d0886e1c337",
+        "actual_sha256": "9d8da04aeffc7d5e812d8c3a97752d14acc3e61e99106b6776de6d0886e1c337"
+      },
+      "src/company_wiki/source_catalog/narrative_pdf_intent.py": {
+        "frozen_sha256": "6c220b8f3bfcbde879c98ba50b300fab90c730bdb38c6df660b871eae70e1050",
+        "actual_sha256": "6c220b8f3bfcbde879c98ba50b300fab90c730bdb38c6df660b871eae70e1050"
+      },
+      "src/company_wiki/source_catalog/narrative_reading.py": {
+        "frozen_sha256": "aedc19846af1fc1d8a3ff2ae849fa9ba90581ff128d49cbfc523bcc9ccf6b9f9",
+        "actual_sha256": "aedc19846af1fc1d8a3ff2ae849fa9ba90581ff128d49cbfc523bcc9ccf6b9f9"
+      },
+      "tests/unit/document_understanding_selection/test_reading_decision_inventory.py": {
+        "frozen_sha256": "8bcb61367e11d30647cb86b697cb3eb3a2cefea0437194c6ef30a459243ded7a",
+        "actual_sha256": "8bcb61367e11d30647cb86b697cb3eb3a2cefea0437194c6ef30a459243ded7a"
+      },
+      "tests/unit/document_understanding_selection/test_native_text_page_coverage.py": {
+        "frozen_sha256": "93654e6bc32f31a0bef33a45c0f4ba0ed8afb6831f2b73e3935c97b07bbf2b78",
+        "actual_sha256": "93654e6bc32f31a0bef33a45c0f4ba0ed8afb6831f2b73e3935c97b07bbf2b78"
+      },
+      "tests/unit/document_understanding_selection/test_reading_navigation_context.py": {
+        "frozen_sha256": "e870b9e24fe43b2dfc26fa8a672b81c8145101e9870ea6f8d6eea0f63c05d8ce",
+        "actual_sha256": "e870b9e24fe43b2dfc26fa8a672b81c8145101e9870ea6f8d6eea0f63c05d8ce"
+      },
+      "tests/unit/document_understanding_layout_hints/test_single_body_lane.py": {
+        "frozen_sha256": "500fbc8563efdbb8efe9e89bd61f459aa4ff493037d4213d4da9eaef40392105",
+        "actual_sha256": "500fbc8563efdbb8efe9e89bd61f459aa4ff493037d4213d4da9eaef40392105"
+      }
+    },
+    "protected_config_DB_budget_sha256": {
+      "config\\source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+      ".source_catalog\\catalog.sqlite3": "0e0775fc1dd29f2828f643cb1e6c45a9b77d1626089d1a16401a1a6245eeb5f5",
+      "config\\resource_budget.yaml": "148f22816bf0b8935bbb2c1618f3199d46ff52f41377e3e582c26a96ea7be3b5"
+    },
+    "frozen_gold_sha256": {
+      "tools\\document_understanding_benchmark\\gold\\us-10k.du11-v2-20261024.json": "4dd0875a81b82508cf02f874e80df6d712da2ee756a26f44feee5f5f7e28a2a8",
+      "docs\\plans\\du11-source-closure-2026-10-18\\review\\market-family-upgrade-20261024\\m1-source-checkpoints\\gold\\du5-hk-kingsoft-interim.json": "1d3e2d29436ba92758500039d75d9d24a1fdd84b9fefc9f0bb539e495a9d2604"
+    },
+    "evidence_sha256": {
+      "docs\\plans\\du11-source-closure-2026-10-18\\review\\local-flow-cross-market-20261025\\run_precheck.py": "18aa3b03309983444ea1bfc3974342c2fd63a52dbf85301dbea9737b903da643",
+      "docs\\plans\\du11-source-closure-2026-10-18\\review\\local-flow-cross-market-20261025\\start-bindings.json": "09fe6f2651e50d59d826dc3cea1f410b38bf3b5ff85708fbcefd15d3fc7af715",
+      "docs\\plans\\du11-source-closure-2026-10-18\\review\\local-flow-cross-market-20261025\\run-manifest.json": "444e69ce70640a9fdacd5b883e12e011288bd285f6e708aca2b9c8664e9b14c8",
+      "docs\\plans\\du11-source-closure-2026-10-18\\review\\local-flow-cross-market-20261025\\us-10k.json": "0d17d3905261fa79ee0a5fcc010dc6bc136353912f526662470be1ab849b23c1",
+      "docs\\plans\\du11-source-closure-2026-10-18\\review\\local-flow-cross-market-20261025\\du5-hk-kingsoft-interim.json": "2d7b64019a3437599f7e228ffea4291f1153c47fb1834591832e3f2ffbc37d2a",
+      "docs\\plans\\du11-source-closure-2026-10-18\\review\\local-flow-cross-market-20261025\\cn-ipo.json": "4e458311992098e4c189ec4a9e0f9df47a94d77a8e593d3784e29feb4ab02a0c",
+      "docs\\plans\\du11-source-closure-2026-10-18\\review\\local-flow-cross-market-20261025\\startup-attempt1-bindings.json": "572a0f69499bb702a77f3fa3c401847353d815bd85b2d1a38297b98d3a36c606",
+      "docs\\plans\\du11-source-closure-2026-10-18\\review\\local-flow-cross-market-20261025\\startup-attempt1-error.json": "934c708de7296140dc485dc75a17500595f7143a0b9e0b15fec1f92d4aa425fd",
+      "docs\\plans\\du11-source-closure-2026-10-18\\review\\market-family-upgrade-20261024\\m1-source-checkpoints\\source-bindings.json": "afb250b2aacb9648375d33c6e20526159bd21394c5daf5fc61c12878f0b69cbd",
+      "docs\\plans\\du11-source-closure-2026-10-18\\review\\market-family-upgrade-20261024\\m3-implementation-20261024\\m3-independent-final\\checks.json": "9500e09dd419fb2a593f70681c34f0082adad4e859ff55d6d2a8e0f170d345be",
+      "docs\\plans\\du11-source-closure-2026-10-18\\review\\market-family-upgrade-20261024\\m3-implementation-20261024\\m3-independent-final\\r5\\report.md": "438feb1048b000a6df5d88140394fd9092ad6ef303507a8dce95adef78e64f21"
+    }
+  },
+  "run_controls": {
+    "source_stable": true,
+    "source_owner17_unchanged": true,
+    "protected_unchanged": true,
+    "write_store_constructed": false,
+    "calls": {
+      "model": 0,
+      "api": 0,
+      "download": 0,
+      "raw_copy": 0
+    },
+    "temporary_directories_created": 0
+  },
+  "summary": [
+    {
+      "case_id": "us-10k",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+        "source_id": "urn:company-wiki:source:sha256:99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+        "content_sha256": "99d693f6c1544144ebeee92954f151a85bc62111837530a42855953bc01d0bbe",
+        "byte_size": 8158067,
+        "mime_type": "text/html",
+        "schema_version": "2.0"
+      },
+      "status": "COMPLETE_BOUNDED_SOURCE_INPUT_PRECHECK",
+      "selection": {
+        "status": "partial",
+        "coverage_complete": true,
+        "selection_limit": 112,
+        "candidate_count": 484,
+        "omitted_candidate_count": 372,
+        "dropped_financial_count": 149,
+        "diagnostics": [
+          {
+            "code": "budget_full",
+            "count": 308,
+            "phase": "selection",
+            "external_model_cost": false,
+            "targets_limited": true,
+            "dimension": "selection_spans",
+            "used": 112,
+            "limit": 112
+          }
+        ],
+        "selected_count": 112,
+        "selected_chars": 40491
+      },
+      "parse_work": 0,
+      "work_budget": {
+        "used": 13577692,
+        "limit": 16000000,
+        "exhausted": false
+      },
+      "parse_entry": "normalize_document(text/html), existing finite NormalizationLimits; HTML parser has no WorkBudget parameter",
+      "PDF_shared_account": false,
+      "compiler_status": "COMPILED_ACTUAL_V4_INPUT_NOT_SENT",
+      "actual_task_count": 50,
+      "actual_model_payload_sha256": "fa22c2931586b51f56df0b24e43002eb82df2efcd0ee16f8e16f50a072b872f6",
+      "actual_model_binding_sha256": "5dddd28a100d6f25033de7dcd565afd476b68947d518b131875205356dacc3cb",
+      "policy_families": [
+        "annual"
+      ],
+      "route_note": "The harness queried a non-existent reading_context.route key; null is telemetry not captured, not proof of missing product routing. Policy family is directly observed; declared_kind is explicit input metadata.",
+      "elapsed_seconds": 17.234,
+      "content_status": "GRADED_REQUIRED_SOURCE_INPUT_ONLY"
+    },
+    {
+      "case_id": "du5-hk-kingsoft-interim",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+        "source_id": "urn:company-wiki:source:sha256:4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+        "content_sha256": "4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+        "byte_size": 3396644,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      },
+      "status": "COMPLETE_BOUNDED_SOURCE_INPUT_PRECHECK",
+      "selection": {
+        "status": "partial",
+        "coverage_complete": false,
+        "selection_limit": 112,
+        "candidate_count": 1116,
+        "omitted_candidate_count": 1004,
+        "dropped_financial_count": 0,
+        "diagnostics": [
+          {
+            "code": "budget_full",
+            "count": 102,
+            "phase": "selection",
+            "external_model_cost": false,
+            "targets_limited": true,
+            "dimension": "selection_spans",
+            "used": 112,
+            "limit": 112
+          }
+        ],
+        "selected_count": 112,
+        "selected_chars": 6522
+      },
+      "parse_work": 307383,
+      "work_budget": {
+        "used": 3644236,
+        "limit": 16000000,
+        "exhausted": false
+      },
+      "parse_entry": "parse_pdf_bytes(selector=0.9.0, same WorkBudget)",
+      "PDF_shared_account": true,
+      "compiler_status": "COMPILED_ACTUAL_V4_INPUT_NOT_SENT",
+      "actual_task_count": 60,
+      "actual_model_payload_sha256": "8247e17e3d527a657c359f79a5c6ab5ac4e85fd5889d6e70888a07bf2adc9ee7",
+      "actual_model_binding_sha256": "4b09dc1b32b1f6c98024d2478cde4cff829ad2ebd87e78a2ddeb29bcd37d1b44",
+      "policy_families": [
+        "interim"
+      ],
+      "route_note": "The harness queried a non-existent reading_context.route key; null is telemetry not captured, not proof of missing product routing. Policy family is directly observed; declared_kind is explicit input metadata.",
+      "elapsed_seconds": 5.782,
+      "content_status": "GRADED_REQUIRED_SOURCE_INPUT_ONLY"
+    },
+    {
+      "case_id": "cn-ipo",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+        "source_id": "urn:company-wiki:source:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+        "content_sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+        "byte_size": 11211796,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      },
+      "status": "WORK_EXHAUSTED_STOP",
+      "selection": {
+        "status": "needs_review",
+        "coverage_complete": false,
+        "selection_limit": 112,
+        "candidate_count": 8361,
+        "omitted_candidate_count": 8361,
+        "dropped_financial_count": 0,
+        "diagnostics": [
+          {
+            "code": "work_budget_exhausted",
+            "count": 1,
+            "dimension": "document_work",
+            "external_model_cost": false,
+            "phase": "document",
+            "used": 15999740,
+            "requested": null,
+            "limit": 16000000,
+            "detail": "unexamined source content remains unknown; original is unchanged"
+          }
+        ],
+        "selected_count": 0,
+        "selected_chars": 0
+      },
+      "parse_work": 420052,
+      "work_budget": {
+        "used": 15999740,
+        "limit": 16000000,
+        "exhausted": true
+      },
+      "parse_entry": "parse_pdf_bytes(selector=0.9.0, same WorkBudget)",
+      "PDF_shared_account": true,
+      "compiler_status": "NOT_COMPILED_BUDGET_EXHAUSTED_STOP",
+      "actual_task_count": null,
+      "actual_model_payload_sha256": null,
+      "actual_model_binding_sha256": null,
+      "policy_families": [],
+      "route_note": "The harness queried a non-existent reading_context.route key; null is telemetry not captured, not proof of missing product routing. Policy family is directly observed; declared_kind is explicit input metadata.",
+      "elapsed_seconds": 12.397,
+      "content_status": "NOT_GRADED_NO_FORMAL_GOLD_BUDGET_STOP"
+    }
+  ],
+  "required_source_input_counts": {
+    "us-10k": {
+      "PASS": 7,
+      "PARTIAL": 1
+    },
+    "du5-hk-kingsoft-interim": {
+      "PARTIAL": 4,
+      "PASS": 1,
+      "MISSING": 2
+    },
+    "cn-ipo": "NOT_GRADED; no formal source gold, no actual model input after budget exhaustion"
+  },
+  "HK_body_only_counts_not_complete_gold_acceptance": {
+    "PASS": 3,
+    "MISSING": 2,
+    "PARTIAL": 2
+  },
+  "required_targets": {
+    "us-10k": [
+      {
+        "fact_id": "f-azure-is-consumption-based",
+        "frozen_gold": {
+          "id": "f-azure-is-consumption-based",
+          "importance": "critical",
+          "modality": "actual",
+          "role": "company_filing",
+          "any_support_sets": [
+            [
+              {
+                "page": 1,
+                "exact_quote": "Azure revenue is mainly affected by infrastructure-as-a-service and platform-as-a-service consumption-based services.",
+                "location_kind": "document"
+              }
+            ]
+          ],
+          "must_preserve": [
+            "consumption-based services",
+            "infrastructure-as-a-service"
+          ],
+          "must_not_assert": [
+            "Azure 收入主要按每用户或每席位计费",
+            "Azure 与 Microsoft 365 Commercial 采用同一计费机制"
+          ],
+          "reason": "Azure 的官方收入机制表述是「mainly affected by infrastructure-as-a-service and platform-as-a-service **consumption-based** services」——**消费制**（按用量）。与之相对，每用户/席位口径属于 **Microsoft 365 Commercial**（「average revenue per user expansion」）。把 Azure 说成席位制、或把两者的计费机制混为一谈，是本样本最核心的口径错。",
+          "fact_scope": "narrative",
+          "target_kind": "required_business",
+          "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+        },
+        "source_input_status": "PASS",
+        "operating_core_body_status": "PASS",
+        "reason": "Azure/IaaS/PaaS consumption-based mechanism is in one complete support paragraph; no seat-based mechanism is substituted.",
+        "actual_task_keys": [
+          "t20"
+        ],
+        "evidence": [
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:9151b4e68c954bfb94e5030323f2ae85a5193947efa79909db426e53cdb9fa84",
+            "locator": "loc:v1/paragraph:230",
+            "full_quote": "PART I",
+            "page": null,
+            "quote_sha256": "495768bd3d6957619d4fbe2457811a0483df9e815938bdd9fb195935ece1b264",
+            "quality_flags": [],
+            "source_role": "company_filing",
+            "selection_reasons": [
+              "reading_context"
+            ],
+            "topics": [],
+            "actual_roles": [
+              {
+                "task": "t20",
+                "role": "context"
+              }
+            ]
+          },
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:b62abd15346cd398f08e4543b7913fe9f48f26031e3a5e8c1776d16e87a38663",
+            "locator": "loc:v1/paragraph:231",
+            "full_quote": "Item 1",
+            "page": null,
+            "quote_sha256": "c5ddfeffb275254140796b8c080f372d65ebb1b0590e238b191f595d5fcd32ca",
+            "quality_flags": [],
+            "source_role": "company_filing",
+            "selection_reasons": [
+              "reading_context"
+            ],
+            "topics": [],
+            "actual_roles": [
+              {
+                "task": "t20",
+                "role": "context"
+              }
+            ]
+          },
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:492da1a73aaae3e4a3092536653e4c3fcc97a9a88bb210ca79c882bb4906dfb2",
+            "locator": "loc:v1/paragraph:233",
+            "full_quote": "Azure is a comprehensive set of cloud services that offer developers, IT professionals, and enterprises freedom to build, deploy, and manage applications on any platform or device. Customers can use Azure through our global network of datacenters for computing, networking, storage, mobile and web application services, AI, Internet of Things, cognitive services, and machine learning. Azure enables customers to devote more resources to development and use of applications that benefit their organizations, rather than managing on-premises hardware and software. Azure revenue is mainly affected by infrastructure-as-a-service and platform-as-a-service consumption-based services.",
+            "page": null,
+            "quote_sha256": "93a9159b81c6d7c3a672279e63cea873f307a130c4ecd124e226024ab092e374",
+            "quality_flags": [],
+            "source_role": "company_filing",
+            "selection_reasons": [
+              "reading_plan",
+              "business_billing_basis",
+              "operating_description_unknown"
+            ],
+            "topics": [
+              "core_business",
+              "business_billing_basis"
+            ],
+            "actual_roles": [
+              {
+                "task": "t20",
+                "role": "support"
+              }
+            ]
+          }
+        ],
+        "all_required_source_atoms_found_in_parsed_original": true,
+        "legacy_exact_quote_OR_selected": true,
+        "model_response_semantics": "NOT_REVIEWED",
+        "RF_consumption": "OPEN"
+      },
+      {
+        "fact_id": "f-azure-inside-intelligent-cloud",
+        "frozen_gold": {
+          "id": "f-azure-inside-intelligent-cloud",
+          "importance": "critical",
+          "modality": "actual",
+          "role": "company_filing",
+          "any_support_sets": [
+            [
+              {
+                "page": 1,
+                "exact_quote": "Server products and cloud services, including Azure and other cloud services, comprising cloud and AI consumption-based services",
+                "location_kind": "document"
+              }
+            ],
+            [
+              {
+                "page": 1,
+                "exact_quote": "Our Intelligent Cloud segment consists of our public, private, and hybrid server products and cloud services that power modern business and developers.",
+                "location_kind": "document"
+              }
+            ]
+          ],
+          "must_preserve": [
+            "Azure and other cloud services",
+            "Server products and cloud services",
+            "Intelligent Cloud"
+          ],
+          "must_not_assert": [
+            "Azure 是独立报告分部",
+            "Azure 收入等于 Intelligent Cloud 分部收入"
+          ],
+          "reason": "Azure **不是独立报告行**：它是「Azure and other cloud services」的组成部分，后者又属于「Server products and cloud services」，再属于 **Intelligent Cloud** 分部 —— 三层嵌套。所以「Azure 分部收入」这一说法双重错误；把 Azure 等同于 Intelligent Cloud 会把合并口径当单一产品口径。",
+          "fact_scope": "narrative",
+          "target_kind": "required_business",
+          "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+        },
+        "source_input_status": "PARTIAL",
+        "operating_core_body_status": "PARTIAL",
+        "reason": "The old OR accepts the Intelligent Cloud introduction alone. Actual t19 ends 'This segment primarily comprises:' without the list child; t20's Azure mechanism and t7's Server/Azure growth have no Intelligent Cloud owner in their own task context. The full nested scope is not one closed local source basis.",
+        "actual_task_keys": [
+          "t19",
+          "t20",
+          "t7"
+        ],
+        "evidence": [
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:19ee74b882adce2d07704c1770911d44291027043d98d6743dd95eaff0350513",
+            "locator": "loc:v1/paragraph:211",
+            "full_quote": "PART I",
+            "page": null,
+            "quote_sha256": "495768bd3d6957619d4fbe2457811a0483df9e815938bdd9fb195935ece1b264",
+            "quality_flags": [],
+            "source_role": "company_filing",
+            "selection_reasons": [
+              "reading_context"
+            ],
+            "topics": [],
+            "actual_roles": [
+              {
+                "task": "t19",
+                "role": "context"
+              }
+            ]
+          },
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:6763e228bfed6e48dbc52511c0f0b263a7900c0f2326573b281e92236dbfeb61",
+            "locator": "loc:v1/paragraph:212",
+            "full_quote": "Item 1",
+            "page": null,
+            "quote_sha256": "c5ddfeffb275254140796b8c080f372d65ebb1b0590e238b191f595d5fcd32ca",
+            "quality_flags": [],
+            "source_role": "company_filing",
+            "selection_reasons": [
+              "reading_context"
+            ],
+            "topics": [],
+            "actual_roles": [
+              {
+                "task": "t19",
+                "role": "context"
+              }
+            ]
+          },
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:4eefbeb57dac400a19e5cc9fd3f35791a032496f96e9214b3c9e46e88a2ad0f4",
+            "locator": "loc:v1/paragraph:224",
+            "full_quote": "Our Intelligent Cloud segment consists of our public, private, and hybrid server products and cloud services that power modern business and developers. This segment primarily comprises:",
+            "page": null,
+            "quote_sha256": "5e917062d98a0c16faaba740b5332ca48d66d29ec417085265ec93005789e273",
+            "quality_flags": [],
+            "source_role": "company_filing",
+            "selection_reasons": [
+              "reading_plan",
+              "business_structure",
+              "business_reporting_scope"
+            ],
+            "topics": [
+              "core_business",
+              "business_reporting_scope"
+            ],
+            "actual_roles": [
+              {
+                "task": "t19",
+                "role": "support"
+              }
+            ]
+          },
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:9151b4e68c954bfb94e5030323f2ae85a5193947efa79909db426e53cdb9fa84",
+            "locator": "loc:v1/paragraph:230",
+            "full_quote": "PART I",
+            "page": null,
+            "quote_sha256": "495768bd3d6957619d4fbe2457811a0483df9e815938bdd9fb195935ece1b264",
+            "quality_flags": [],
+            "source_role": "company_filing",
+            "selection_reasons": [
+              "reading_context"
+            ],
+            "topics": [],
+            "actual_roles": [
+              {
+                "task": "t20",
+                "role": "context"
+              }
+            ]
+          },
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:b62abd15346cd398f08e4543b7913fe9f48f26031e3a5e8c1776d16e87a38663",
+            "locator": "loc:v1/paragraph:231",
+            "full_quote": "Item 1",
+            "page": null,
+            "quote_sha256": "c5ddfeffb275254140796b8c080f372d65ebb1b0590e238b191f595d5fcd32ca",
+            "quality_flags": [],
+            "source_role": "company_filing",
+            "selection_reasons": [
+              "reading_context"
+            ],
+            "topics": [],
+            "actual_roles": [
+              {
+                "task": "t20",
+                "role": "context"
+              }
+            ]
+          },
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:492da1a73aaae3e4a3092536653e4c3fcc97a9a88bb210ca79c882bb4906dfb2",
+            "locator": "loc:v1/paragraph:233",
+            "full_quote": "Azure is a comprehensive set of cloud services that offer developers, IT professionals, and enterprises freedom to build, deploy, and manage applications on any platform or device. Customers can use Azure through our global network of datacenters for computing, networking, storage, mobile and web application services, AI, Internet of Things, cognitive services, and machine learning. Azure enables customers to devote more resources to development and use of applications that benefit their organizations, rather than managing on-premises hardware and software. Azure revenue is mainly affected by infrastructure-as-a-service and platform-as-a-service consumption-based services.",
+            "page": null,
+            "quote_sha256": "93a9159b81c6d7c3a672279e63cea873f307a130c4ecd124e226024ab092e374",
+            "quality_flags": [],
+            "source_role": "company_filing",
+            "selection_reasons": [
+              "reading_plan",
+              "business_billing_basis",
+              "operating_description_unknown"
+            ],
+            "topics": [
+              "core_business",
+              "business_billing_basis"
+            ],
+            "actual_roles": [
+              {
+                "task": "t20",
+                "role": "support"
+              }
+            ]
+          },
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:029220fc1f6993832e8f32d3fca4f1cd169a2ebd64b9d4bb86cf7e51fe39ff48",
+            "locator": "loc:v1/paragraph:924",
+            "full_quote": "PART II",
+            "page": null,
+            "quote_sha256": "87b6a3b1d87b62692a8d3c58da990ad0e08cd90f00d5c5f3169ed3bb04bf166a",
+            "quality_flags": [],
+            "source_role": "company_filing",
+            "selection_reasons": [
+              "reading_context"
+            ],
+            "topics": [],
+            "actual_roles": [
+              {
+                "task": "t7",
+                "role": "context"
+              }
+            ]
+          },
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:91d0f777db38c010f68295220ef542279ef477ab266bf1d26fa6766190b66f74",
+            "locator": "loc:v1/paragraph:925",
+            "full_quote": "Item 7",
+            "page": null,
+            "quote_sha256": "6fb2db0fe4c4a42049a9f54f18891d22a2b8523542ece709ba6c8284040592e7",
+            "quality_flags": [],
+            "source_role": "company_filing",
+            "selection_reasons": [
+              "reading_context"
+            ],
+            "topics": [],
+            "actual_roles": [
+              {
+                "task": "t7",
+                "role": "context"
+              }
+            ]
+          },
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:76f0355dd29cc9af20782b8f2dfd460c0690194fa0bc989fdf0b3752612cf9d0",
+            "locator": "loc:v1/paragraph:928",
+            "full_quote": "Server products and cloud services revenue increased $18.6 billion or 23% driven by Azure and other cloud services. Azure and other cloud services revenue grew 34% driven by demand for our portfolio of services. Server products revenue decreased 3% driven by a decrease in transactional purchasing with continued customer shift to cloud offerings.",
+            "page": null,
+            "quote_sha256": "2b412f2dcf2414593e033d7da216e09c6ef3e6404c6f384e297ea2ec54798f8e",
+            "quality_flags": [],
+            "source_role": "company_filing",
+            "selection_reasons": [
+              "reading_plan",
+              "operating_causal_driver",
+              "operating_metric_change",
+              "product_operating_driver",
+              "operating_description_unknown"
+            ],
+            "topics": [
+              "core_business",
+              "operating_causal_driver",
+              "operating_metric_change",
+              "product_operating_driver"
+            ],
+            "actual_roles": [
+              {
+                "task": "t7",
+                "role": "support"
+              }
+            ]
+          }
+        ],
+        "all_required_source_atoms_found_in_parsed_original": true,
+        "legacy_exact_quote_OR_selected": true,
+        "model_response_semantics": "NOT_REVIEWED",
+        "RF_consumption": "OPEN"
+      },
+      {
+        "fact_id": "f-three-segments",
+        "frozen_gold": {
+          "id": "f-three-segments",
+          "importance": "critical",
+          "quantity_basis": "count",
+          "modality": "actual",
+          "role": "company_filing",
+          "any_support_sets": [
+            [
+              {
+                "page": 1,
+                "exact_quote": "We operate our business and report our financial performance using three segments: Productivity and Business Processes, Intelligent Cloud, and More Personal Computing.",
+                "location_kind": "document"
+              }
+            ]
+          ],
+          "must_preserve": [
+            "three segments",
+            "Productivity and Business Processes",
+            "More Personal Computing"
+          ],
+          "must_not_assert": [
+            "公司按四个分部报告",
+            "公司只有一个报告分部"
+          ],
+          "reason": "**三个**报告分部：Productivity and Business Processes、Intelligent Cloud、More Personal Computing。同文件还有「Microsoft Cloud」这一跨分部非分部 KPI，不能把它当第四个分部。",
+          "fact_scope": "narrative",
+          "target_kind": "required_business",
+          "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+        },
+        "source_input_status": "PASS",
+        "operating_core_body_status": "PASS",
+        "reason": "Three named reporting segments and count appear together; Microsoft Cloud is not introduced as a fourth segment.",
+        "actual_task_keys": [
+          "t8"
+        ],
+        "evidence": [
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:49e5decb7d377215c6475b3126278f18d4f9cb3a92a5ffe50c643945ac75580b",
+            "locator": "loc:v1/paragraph:189",
+            "full_quote": "PART I",
+            "page": null,
+            "quote_sha256": "495768bd3d6957619d4fbe2457811a0483df9e815938bdd9fb195935ece1b264",
+            "quality_flags": [],
+            "source_role": "company_filing",
+            "selection_reasons": [
+              "reading_context"
+            ],
+            "topics": [],
+            "actual_roles": [
+              {
+                "task": "t8",
+                "role": "context"
+              }
+            ]
+          },
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:edb956400e38393756bdc28be1667bee89233a8f8bc75220d727dca1f10aa1b2",
+            "locator": "loc:v1/paragraph:190",
+            "full_quote": "Item 1",
+            "page": null,
+            "quote_sha256": "c5ddfeffb275254140796b8c080f372d65ebb1b0590e238b191f595d5fcd32ca",
+            "quality_flags": [],
+            "source_role": "company_filing",
+            "selection_reasons": [
+              "reading_context"
+            ],
+            "topics": [],
+            "actual_roles": [
+              {
+                "task": "t8",
+                "role": "context"
+              }
+            ]
+          },
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:1c28a702a8daf02b283bc5ffa7cc3486785c602ed5e876d9a2b5df7374261343",
+            "locator": "loc:v1/paragraph:192",
+            "full_quote": "We operate our business and report our financial performance using three segments: Productivity and Business Processes, Intelligent Cloud, and More Personal Computing. Our segments provide management with a comprehensive financial view of our key businesses. The segments enable the alignment of strategies and objectives across the development, sales, marketing, and services organizations, and they provide a framework for timely and rational allocation of resources within businesses.",
+            "page": null,
+            "quote_sha256": "935d60904eb39710e00cb0d07e9c8f15556ba7d4792be8f0e005e28fdcc9c92f",
+            "quality_flags": [],
+            "source_role": "company_filing",
+            "selection_reasons": [
+              "reading_plan",
+              "business_reporting_scope"
+            ],
+            "topics": [
+              "business_reporting_scope"
+            ],
+            "actual_roles": [
+              {
+                "task": "t8",
+                "role": "support"
+              }
+            ]
+          }
+        ],
+        "all_required_source_atoms_found_in_parsed_original": true,
+        "legacy_exact_quote_OR_selected": true,
+        "model_response_semantics": "NOT_REVIEWED",
+        "RF_consumption": "OPEN"
+      },
+      {
+        "fact_id": "f-segment-change-in-august-2024",
+        "frozen_gold": {
+          "id": "f-segment-change-in-august-2024",
+          "importance": "critical",
+          "modality": "actual",
+          "role": "company_filing",
+          "any_support_sets": [
+            [
+              {
+                "page": 1,
+                "exact_quote": "In August 2024, we announced changes to the composition of our segments.",
+                "location_kind": "document"
+              }
+            ],
+            [
+              {
+                "page": 1,
+                "exact_quote": "most notably bringing the commercial components of Microsoft 365 together in the Productivity and Business Processes segment",
+                "location_kind": "document"
+              }
+            ]
+          ],
+          "must_preserve": [
+            "In August 2024",
+            "changes to the composition of our segments"
+          ],
+          "must_not_assert": [
+            "分部口径自2024年8月起未变，跨期可直接比较"
+          ],
+          "reason": "2024 年 8 月**已宣布调整分部构成**（把 M365 商用组件并入 Productivity and Business Processes），且自 FY2025 起按新口径报告。因此跨 FY2024/FY2025 的分部对比含口径变更，直接比较会读出虚假的增减。",
+          "fact_scope": "narrative",
+          "target_kind": "required_business",
+          "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+        },
+        "source_input_status": "PASS",
+        "operating_core_body_status": "PASS",
+        "reason": "August 2024 composition change, Microsoft365 Commercial movement, FY2025 basis and prior-period recast are directly visible.",
+        "actual_task_keys": [
+          "t9",
+          "t12",
+          "t46"
+        ],
+        "evidence": [
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:49e5decb7d377215c6475b3126278f18d4f9cb3a92a5ffe50c643945ac75580b",
+            "locator": "loc:v1/paragraph:189",
+            "full_quote": "PART I",
+            "page": null,
+            "quote_sha256": "495768bd3d6957619d4fbe2457811a0483df9e815938bdd9fb195935ece1b264",
+            "quality_flags": [],
+            "source_role": "company_filing",
+            "selection_reasons": [
+              "reading_context"
+            ],
+            "topics": [],
+            "actual_roles": [
+              {
+                "task": "t9",
+                "role": "context"
+              }
+            ]
+          },
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:edb956400e38393756bdc28be1667bee89233a8f8bc75220d727dca1f10aa1b2",
+            "locator": "loc:v1/paragraph:190",
+            "full_quote": "Item 1",
+            "page": null,
+            "quote_sha256": "c5ddfeffb275254140796b8c080f372d65ebb1b0590e238b191f595d5fcd32ca",
+            "quality_flags": [],
+            "source_role": "company_filing",
+            "selection_reasons": [
+              "reading_context"
+            ],
+            "topics": [],
+            "actual_roles": [
+              {
+                "task": "t9",
+                "role": "context"
+              }
+            ]
+          },
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:efddbcd3d5f79edd043a467ba27a20b55d6f1f52b13660a65da13ec748301ba5",
+            "locator": "loc:v1/paragraph:193",
+            "full_quote": "In August 2024, we announced changes to the composition of our segments. These changes align our segments with how we currently manage our business, most notably bringing the commercial components of Microsoft 365 together in the Productivity and Business Processes segment. Beginning in fiscal year 2025, the information that our chief operating decision maker is regularly provided and reviews for purposes of allocating resources and assessing performance reflects these segment changes.",
+            "page": null,
+            "quote_sha256": "44aabdcda6f4b04c42224b6ae75148f50a2c1113a26a3b4004de54b5f65179b4",
+            "quality_flags": [],
+            "source_role": "company_filing",
+            "selection_reasons": [
+              "reading_plan",
+              "business_reporting_scope"
+            ],
+            "topics": [
+              "business_reporting_scope"
+            ],
+            "actual_roles": [
+              {
+                "task": "t9",
+                "role": "support"
+              }
+            ]
+          },
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:2eb804413ec04e372e071ad72a8ae5cd7c0ab39b6f97c8ea4ff63673573133b7",
+            "locator": "loc:v1/paragraph:719",
+            "full_quote": "PART II",
+            "page": null,
+            "quote_sha256": "87b6a3b1d87b62692a8d3c58da990ad0e08cd90f00d5c5f3169ed3bb04bf166a",
+            "quality_flags": [],
+            "source_role": "company_filing",
+            "selection_reasons": [
+              "reading_context"
+            ],
+            "topics": [],
+            "actual_roles": [
+              {
+                "task": "t12",
+                "role": "context"
+              }
+            ]
+          },
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:ac17b74db2a2048fb9302eba3226a7655b0610bc70daf5ae8e310ae6281473f6",
+            "locator": "loc:v1/paragraph:720",
+            "full_quote": "Item 7",
+            "page": null,
+            "quote_sha256": "6fb2db0fe4c4a42049a9f54f18891d22a2b8523542ece709ba6c8284040592e7",
+            "quality_flags": [],
+            "source_role": "company_filing",
+            "selection_reasons": [
+              "reading_context"
+            ],
+            "topics": [],
+            "actual_roles": [
+              {
+                "task": "t12",
+                "role": "context"
+              }
+            ]
+          },
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:585b5fa3d977d1a4d3dc09ad01197a875b51b1b9f45fafffd1e00a519427ac11",
+            "locator": "loc:v1/paragraph:732",
+            "full_quote": "In August 2024, we announced changes to the composition of our segments. These changes align our segments with how we currently manage our business, most notably bringing the commercial components of Microsoft 365 together in the Productivity and Business Processes segment. Beginning in fiscal year 2025, the information that our chief operating decision maker is regularly provided and reviews for purposes of allocating resources and assessing performance reflects these segment changes. Prior period segment information has been recast to conform to the way we internally manage and monitor our business during fiscal year 2025.",
+            "page": null,
+            "quote_sha256": "65c0c62276b194dd9ba33d52767604258acf9987a58aa6a04f90f698d29bf56a",
+            "quality_flags": [],
+            "source_role": "company_filing",
+            "selection_reasons": [
+              "reading_plan",
+              "business_reporting_scope"
+            ],
+            "topics": [
+              "business_reporting_scope"
+            ],
+            "actual_roles": [
+              {
+                "task": "t12",
+                "role": "support"
+              }
+            ]
+          },
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:ddb2b2c5636aab4351c8de4e0fd2670b4d0178bfb4f7001f81ed1c3c28457627",
+            "locator": "loc:v1/paragraph:1844",
+            "full_quote": "PART II",
+            "page": null,
+            "quote_sha256": "87b6a3b1d87b62692a8d3c58da990ad0e08cd90f00d5c5f3169ed3bb04bf166a",
+            "quality_flags": [],
+            "source_role": "company_filing",
+            "selection_reasons": [
+              "reading_context"
+            ],
+            "topics": [],
+            "actual_roles": [
+              {
+                "task": "t46",
+                "role": "context"
+              }
+            ]
+          },
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:85ac9616fd47e651c7d6c881f0aef6e2bf943a0f30b2fd006cabe7006e6c92c4",
+            "locator": "loc:v1/paragraph:1845",
+            "full_quote": "Item 8",
+            "page": null,
+            "quote_sha256": "cfc3637bd6712da85137c80600e5290f49cd064e68ace3151e1ed788f06aa67d",
+            "quality_flags": [],
+            "source_role": "company_filing",
+            "selection_reasons": [
+              "reading_context"
+            ],
+            "topics": [],
+            "actual_roles": [
+              {
+                "task": "t46",
+                "role": "context"
+              }
+            ]
+          },
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:a60ce8d282205321da3c878be63a2f984cde469a121d803aa4e18d3fab1c6292",
+            "locator": "loc:v1/paragraph:1853",
+            "full_quote": "In August 2024, we announced changes to the composition of our segments. These changes align our segments with how we currently manage our business, most notably bringing the commercial components of Microsoft 365 together in the Productivity and Business Processes segment. Beginning in fiscal year 2025, the information that our chief operating decision maker is regularly provided and reviews for purposes of allocating resources and assessing performance reflects these segment changes. Prior period segment information has been recast to conform to the way we internally manage and monitor our business during fiscal year 2025. These changes primarily impacted Note 8 – Goodwill, Note 12 – Unearned Revenue, and Note 18 – Segment Information and Geographic Data.",
+            "page": null,
+            "quote_sha256": "00ca320873c6aa6182d621143965a62b7fafee7673bd3ef6926ae2056d0aa17f",
+            "quality_flags": [],
+            "source_role": "company_filing",
+            "selection_reasons": [
+              "reading_plan",
+              "business_reporting_scope"
+            ],
+            "topics": [
+              "business_reporting_scope"
+            ],
+            "actual_roles": [
+              {
+                "task": "t46",
+                "role": "support"
+              }
+            ]
+          }
+        ],
+        "all_required_source_atoms_found_in_parsed_original": true,
+        "legacy_exact_quote_OR_selected": true,
+        "model_response_semantics": "NOT_REVIEWED",
+        "RF_consumption": "OPEN"
+      },
+      {
+        "fact_id": "f-m365-consumer-vs-commercial-metric",
+        "frozen_gold": {
+          "id": "f-m365-consumer-vs-commercial-metric",
+          "importance": "critical",
+          "modality": "actual",
+          "role": "company_filing",
+          "any_support_sets": [
+            [
+              {
+                "page": 1,
+                "exact_quote": "Microsoft 365 Consumer products and cloud services revenue increased 11% driven by Microsoft 365 Consumer cloud revenue growth of 11%.",
+                "location_kind": "document"
+              }
+            ],
+            [
+              {
+                "page": 1,
+                "exact_quote": "Microsoft 365 Commercial products and cloud services revenue increased 14% driven by Microsoft 365 Commercial cloud revenue growth of 15%.",
+                "location_kind": "document"
+              }
+            ],
+            [
+              {
+                "page": 1,
+                "exact_quote": "Microsoft 365 Consumer products and cloud services revenue increased $756 million or 11%. Microsoft 365 Consumer cloud revenue grew 11% driven by Microsoft 365 Consumer subscriber growth of 8% to 89.0 million, as well as growth in revenue per user from the price increase announced in January 2025.",
+                "location_kind": "document"
+              }
+            ],
+            [
+              {
+                "page": 1,
+                "exact_quote": "Microsoft 365 Commercial products and cloud services revenue increased $10.8 billion or 14%. Microsoft 365 Commercial cloud revenue grew 15% with Microsoft 365 Commercial seat growth of 6% driven by small and medium businesses and frontline worker offerings, as well as growth in revenue per user. Microsoft 365 Commercial products revenue grew 7% driven by the Windows Commercial on-premises components of Microsoft 365 suite sales and an increase in Office transactional purchasing with the launch of Office 2024.",
+                "location_kind": "document"
+              }
+            ]
+          ],
+          "must_preserve": [
+            "Microsoft 365 Consumer",
+            "11%",
+            "Microsoft 365 Commercial",
+            "14%"
+          ],
+          "must_not_assert": [
+            "Microsoft 365 Consumer 与 Commercial 使用同一度量指标",
+            "Microsoft 365 商用云收入增长14%"
+          ],
+          "reason": "Consumer 与 Commercial 是**两个产品族**且度量不同：Consumer 以订阅者数计、Commercial 以**席位**计。增速也不同（Consumer products and cloud services +11%；Commercial products and cloud services +14%，其中 Commercial cloud +15%）。把 14% 与 15% 混用、或把两者当成同一指标，是嵌套口径错。",
+          "fact_scope": "narrative",
+          "target_kind": "required_business",
+          "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+        },
+        "source_input_status": "PASS",
+        "operating_core_body_status": "PASS",
+        "reason": "Each complete business paragraph names its own product family: Commercial products14%, cloud15%, seats6%; Consumer products/cloud11%, subscribers8% to89.0million. Separate subjects and metrics preserved.",
+        "actual_task_keys": [
+          "t5",
+          "t6"
+        ],
+        "evidence": [
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:707df2667babbfd954d970766aefd18b65c7ff3d794c54fe071aa0d7ee5ca020",
+            "locator": "loc:v1/paragraph:813",
+            "full_quote": "PART II",
+            "page": null,
+            "quote_sha256": "87b6a3b1d87b62692a8d3c58da990ad0e08cd90f00d5c5f3169ed3bb04bf166a",
+            "quality_flags": [],
+            "source_role": "company_filing",
+            "selection_reasons": [
+              "reading_context"
+            ],
+            "topics": [],
+            "actual_roles": [
+              {
+                "task": "t5",
+                "role": "context"
+              },
+              {
+                "task": "t6",
+                "role": "context"
+              }
+            ]
+          },
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:11a8ec20fa3b592db27708cfaf01af84241b016fd3384d727691ec5eb255b0b5",
+            "locator": "loc:v1/paragraph:814",
+            "full_quote": "Item 7",
+            "page": null,
+            "quote_sha256": "6fb2db0fe4c4a42049a9f54f18891d22a2b8523542ece709ba6c8284040592e7",
+            "quality_flags": [],
+            "source_role": "company_filing",
+            "selection_reasons": [
+              "reading_context"
+            ],
+            "topics": [],
+            "actual_roles": [
+              {
+                "task": "t5",
+                "role": "context"
+              },
+              {
+                "task": "t6",
+                "role": "context"
+              }
+            ]
+          },
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:dc02b23f4fb0be1692f20d15bd0f6498515748add787fec297349d5a4edc04be",
+            "locator": "loc:v1/paragraph:908",
+            "full_quote": "Microsoft 365 Commercial products and cloud services revenue increased $10.8 billion or 14%. Microsoft 365 Commercial cloud revenue grew 15% with Microsoft 365 Commercial seat growth of 6% driven by small and medium businesses and frontline worker offerings, as well as growth in revenue per user. Microsoft 365 Commercial products revenue grew 7% driven by the Windows Commercial on-premises components of Microsoft 365 suite sales and an increase in Office transactional purchasing with the launch of Office 2024.",
+            "page": null,
+            "quote_sha256": "11ff0d41f950445a6f002b52f2d071c95e5b05e6c728bb06e8dba853f81627ed",
+            "quality_flags": [],
+            "source_role": "company_filing",
+            "selection_reasons": [
+              "reading_plan",
+              "business_billing_basis",
+              "operating_metric_change",
+              "operating_description_unknown"
+            ],
+            "topics": [
+              "business_billing_basis",
+              "operating_metric_change",
+              "capacity_projects",
+              "core_business"
+            ],
+            "actual_roles": [
+              {
+                "task": "t5",
+                "role": "support"
+              }
+            ]
+          },
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:e749c64cdd89a3329a01bdf201e87dc635c245c4ec45bdb83a27c2818500ed0d",
+            "locator": "loc:v1/paragraph:910",
+            "full_quote": "Microsoft 365 Consumer products and cloud services revenue increased $756 million or 11%. Microsoft 365 Consumer cloud revenue grew 11% driven by Microsoft 365 Consumer subscriber growth of 8% to 89.0 million, as well as growth in revenue per user from the price increase announced in January 2025.",
+            "page": null,
+            "quote_sha256": "6e0d4815a43d7c03bfda536ae6a6a6bf8aa5bf2cf937f02dc555fbe65287f75d",
+            "quality_flags": [],
+            "source_role": "company_filing",
+            "selection_reasons": [
+              "reading_plan",
+              "operating_causal_driver",
+              "business_billing_basis",
+              "operating_metric_change",
+              "product_operating_driver"
+            ],
+            "topics": [
+              "operating_causal_driver",
+              "business_billing_basis",
+              "operating_metric_change",
+              "product_operating_driver"
+            ],
+            "actual_roles": [
+              {
+                "task": "t6",
+                "role": "support"
+              }
+            ]
+          }
+        ],
+        "all_required_source_atoms_found_in_parsed_original": true,
+        "legacy_exact_quote_OR_selected": true,
+        "model_response_semantics": "NOT_REVIEWED",
+        "RF_consumption": "OPEN"
+      },
+      {
+        "fact_id": "f-azure-growth-inside-combined-line",
+        "frozen_gold": {
+          "id": "f-azure-growth-inside-combined-line",
+          "importance": "critical",
+          "quantity_basis": "period_flow",
+          "modality": "actual",
+          "role": "company_filing",
+          "any_support_sets": [
+            [
+              {
+                "page": 1,
+                "exact_quote": "Server products and cloud services revenue increased 23% driven by Azure and other cloud services revenue growth of 34%.",
+                "location_kind": "document"
+              }
+            ],
+            [
+              {
+                "page": 1,
+                "exact_quote": "Server products and cloud services revenue increased $18.6 billion or 23% driven by Azure and other cloud services. Azure and other cloud services revenue grew 34% driven by demand for our portfolio of services. Server products revenue decreased 3% driven by a decrease in transactional purchasing with continued customer shift to cloud offerings.",
+                "location_kind": "document"
+              }
+            ]
+          ],
+          "must_preserve": [
+            "Azure and other cloud services revenue growth of 34%",
+            "23%"
+          ],
+          "must_not_assert": [
+            "Azure 单独收入增长23%",
+            "Azure and other cloud services 增长23%"
+          ],
+          "reason": "34% 挂在「**Azure and other cloud services**」这条合并行上，23% 是上一层「Server products and cloud services」。本 10-K **不披露 Azure 单独的美元收入、也不披露 Azure 单独的增速**；任何 Azure-only 金额都是编造。",
+          "fact_scope": "narrative",
+          "target_kind": "required_business",
+          "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+        },
+        "source_input_status": "PASS",
+        "operating_core_body_status": "PASS",
+        "reason": "Same support binds Server products/services +23% to the upper line and Azure and other services +34% to the combined child line, not standalone Azure.",
+        "actual_task_keys": [
+          "t7"
+        ],
+        "evidence": [
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:029220fc1f6993832e8f32d3fca4f1cd169a2ebd64b9d4bb86cf7e51fe39ff48",
+            "locator": "loc:v1/paragraph:924",
+            "full_quote": "PART II",
+            "page": null,
+            "quote_sha256": "87b6a3b1d87b62692a8d3c58da990ad0e08cd90f00d5c5f3169ed3bb04bf166a",
+            "quality_flags": [],
+            "source_role": "company_filing",
+            "selection_reasons": [
+              "reading_context"
+            ],
+            "topics": [],
+            "actual_roles": [
+              {
+                "task": "t7",
+                "role": "context"
+              }
+            ]
+          },
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:91d0f777db38c010f68295220ef542279ef477ab266bf1d26fa6766190b66f74",
+            "locator": "loc:v1/paragraph:925",
+            "full_quote": "Item 7",
+            "page": null,
+            "quote_sha256": "6fb2db0fe4c4a42049a9f54f18891d22a2b8523542ece709ba6c8284040592e7",
+            "quality_flags": [],
+            "source_role": "company_filing",
+            "selection_reasons": [
+              "reading_context"
+            ],
+            "topics": [],
+            "actual_roles": [
+              {
+                "task": "t7",
+                "role": "context"
+              }
+            ]
+          },
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:76f0355dd29cc9af20782b8f2dfd460c0690194fa0bc989fdf0b3752612cf9d0",
+            "locator": "loc:v1/paragraph:928",
+            "full_quote": "Server products and cloud services revenue increased $18.6 billion or 23% driven by Azure and other cloud services. Azure and other cloud services revenue grew 34% driven by demand for our portfolio of services. Server products revenue decreased 3% driven by a decrease in transactional purchasing with continued customer shift to cloud offerings.",
+            "page": null,
+            "quote_sha256": "2b412f2dcf2414593e033d7da216e09c6ef3e6404c6f384e297ea2ec54798f8e",
+            "quality_flags": [],
+            "source_role": "company_filing",
+            "selection_reasons": [
+              "reading_plan",
+              "operating_causal_driver",
+              "operating_metric_change",
+              "product_operating_driver",
+              "operating_description_unknown"
+            ],
+            "topics": [
+              "core_business",
+              "operating_causal_driver",
+              "operating_metric_change",
+              "product_operating_driver"
+            ],
+            "actual_roles": [
+              {
+                "task": "t7",
+                "role": "support"
+              }
+            ]
+          }
+        ],
+        "all_required_source_atoms_found_in_parsed_original": true,
+        "legacy_exact_quote_OR_selected": true,
+        "model_response_semantics": "NOT_REVIEWED",
+        "RF_consumption": "OPEN"
+      },
+      {
+        "fact_id": "f-rpo-scope-and-amount",
+        "frozen_gold": {
+          "id": "f-rpo-scope-and-amount",
+          "importance": "critical",
+          "quantity_basis": "total",
+          "modality": "actual",
+          "role": "company_filing",
+          "any_support_sets": [
+            [
+              {
+                "page": 1,
+                "exact_quote": "was $ 375 billion as of June 30, 2025, of which $ 368 billion is related to the commercial portion of revenue",
+                "location_kind": "document"
+              }
+            ]
+          ],
+          "must_preserve": [
+            "375 billion",
+            "368 billion",
+            "June 30, 2025"
+          ],
+          "must_not_assert": [
+            "剩余履约义务为3,750亿美元且全部为商用部分",
+            "剩余履约义务金额为7,265百万美元"
+          ],
+          "reason": "剩余履约义务（RPO）**375 十亿美元**（截至 2025-06-30），其中商用部分 **368 十亿美元**。7,265 百万美元是**未实现收入的期末余额**，与 RPO 不是同一指标（RPO 还含「will be invoiced」部分）。把两者混用或丢掉「of which」的限定，都会读错。",
+          "fact_scope": "narrative",
+          "target_kind": "required_business",
+          "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+        },
+        "source_input_status": "PASS",
+        "operating_core_body_status": "PASS",
+        "reason": "One complete support includes RPO definition, total375billion, commercial368billion, June30 2025 and forward invoicing; not unearned revenue.",
+        "actual_task_keys": [
+          "t50"
+        ],
+        "evidence": [
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:64a14166014780fbc20afb96966485a867ce6922b20b00321ab0b48fed466955",
+            "locator": "loc:v1/paragraph:3829",
+            "full_quote": "PART II",
+            "page": null,
+            "quote_sha256": "87b6a3b1d87b62692a8d3c58da990ad0e08cd90f00d5c5f3169ed3bb04bf166a",
+            "quality_flags": [],
+            "source_role": "company_filing",
+            "selection_reasons": [
+              "reading_context"
+            ],
+            "topics": [],
+            "actual_roles": [
+              {
+                "task": "t50",
+                "role": "context"
+              }
+            ]
+          },
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:7da32196b25db2ef4ee3f315ccdb4e3e7ee516532f1665725b7fb2da43193d93",
+            "locator": "loc:v1/paragraph:3830",
+            "full_quote": "Item 8",
+            "page": null,
+            "quote_sha256": "cfc3637bd6712da85137c80600e5290f49cd064e68ace3151e1ed788f06aa67d",
+            "quality_flags": [],
+            "source_role": "company_filing",
+            "selection_reasons": [
+              "reading_context"
+            ],
+            "topics": [],
+            "actual_roles": [
+              {
+                "task": "t50",
+                "role": "context"
+              }
+            ]
+          },
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:bebd55194edde5635fe4e3b3932b0ee2dc5a9f580fcd30a2a39f01ca97e28574",
+            "locator": "loc:v1/paragraph:3845",
+            "full_quote": "Revenue allocated to remaining performance obligations, which includes unearned revenue and amounts that will be invoiced and recognized as revenue in future periods, was $ 375 billion as of June 30, 2025, of which $ 368 billion is related to the commercial portion of revenue. We expect to recognize approximately 40 % of our total company remaining performance obligation revenue over the next 12 months and the remainder thereafter.",
+            "page": null,
+            "quote_sha256": "71eac6842bc154db11f0b3ce3498c9836658889ac0d489a808bc42b25254463e",
+            "quality_flags": [],
+            "source_role": "company_filing",
+            "selection_reasons": [
+              "reading_plan",
+              "source_revenue_guidance",
+              "contract_revenue_conversion",
+              "operating_contract_stock"
+            ],
+            "topics": [
+              "source_revenue_guidance",
+              "contract_revenue_conversion",
+              "operating_metrics"
+            ],
+            "actual_roles": [
+              {
+                "task": "t50",
+                "role": "support"
+              }
+            ]
+          }
+        ],
+        "all_required_source_atoms_found_in_parsed_original": true,
+        "legacy_exact_quote_OR_selected": true,
+        "model_response_semantics": "NOT_REVIEWED",
+        "RF_consumption": "OPEN"
+      },
+      {
+        "fact_id": "f-rpo-recognition-is-forward",
+        "frozen_gold": {
+          "id": "f-rpo-recognition-is-forward",
+          "importance": "critical",
+          "quantity_basis": "ratio",
+          "modality": "plan",
+          "role": "company_filing",
+          "any_support_sets": [
+            [
+              {
+                "page": 1,
+                "exact_quote": "We expect to recognize approximately 40 % of our total company remaining performance obligation revenue over the next 12 months",
+                "location_kind": "document"
+              }
+            ]
+          ],
+          "must_preserve": [
+            "approximately 40 %",
+            "over the next 12 months"
+          ],
+          "must_not_assert": [
+            "公司已在报告期内确认40%的剩余履约义务"
+          ],
+          "reason": "约 40% 是**预计未来 12 个月将确认**的比例（前瞻语态「We expect to recognize ... over the next 12 months」），不是已确认。与 375 十亿美元同句相邻，时态写错即错。",
+          "fact_scope": "narrative",
+          "target_kind": "required_business",
+          "classification_reason": "具体经营模式、业务阶段、客户/项目/订单或业务解释是用户所需描述性证据；保持原重要性与支持原文。"
+        },
+        "source_input_status": "PASS",
+        "operating_core_body_status": "PASS",
+        "reason": "Same RPO support explicitly expects approximately40% over next12months; not current-period realized revenue.",
+        "actual_task_keys": [
+          "t50"
+        ],
+        "evidence": [
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:64a14166014780fbc20afb96966485a867ce6922b20b00321ab0b48fed466955",
+            "locator": "loc:v1/paragraph:3829",
+            "full_quote": "PART II",
+            "page": null,
+            "quote_sha256": "87b6a3b1d87b62692a8d3c58da990ad0e08cd90f00d5c5f3169ed3bb04bf166a",
+            "quality_flags": [],
+            "source_role": "company_filing",
+            "selection_reasons": [
+              "reading_context"
+            ],
+            "topics": [],
+            "actual_roles": [
+              {
+                "task": "t50",
+                "role": "context"
+              }
+            ]
+          },
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:7da32196b25db2ef4ee3f315ccdb4e3e7ee516532f1665725b7fb2da43193d93",
+            "locator": "loc:v1/paragraph:3830",
+            "full_quote": "Item 8",
+            "page": null,
+            "quote_sha256": "cfc3637bd6712da85137c80600e5290f49cd064e68ace3151e1ed788f06aa67d",
+            "quality_flags": [],
+            "source_role": "company_filing",
+            "selection_reasons": [
+              "reading_context"
+            ],
+            "topics": [],
+            "actual_roles": [
+              {
+                "task": "t50",
+                "role": "context"
+              }
+            ]
+          },
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:bebd55194edde5635fe4e3b3932b0ee2dc5a9f580fcd30a2a39f01ca97e28574",
+            "locator": "loc:v1/paragraph:3845",
+            "full_quote": "Revenue allocated to remaining performance obligations, which includes unearned revenue and amounts that will be invoiced and recognized as revenue in future periods, was $ 375 billion as of June 30, 2025, of which $ 368 billion is related to the commercial portion of revenue. We expect to recognize approximately 40 % of our total company remaining performance obligation revenue over the next 12 months and the remainder thereafter.",
+            "page": null,
+            "quote_sha256": "71eac6842bc154db11f0b3ce3498c9836658889ac0d489a808bc42b25254463e",
+            "quality_flags": [],
+            "source_role": "company_filing",
+            "selection_reasons": [
+              "reading_plan",
+              "source_revenue_guidance",
+              "contract_revenue_conversion",
+              "operating_contract_stock"
+            ],
+            "topics": [
+              "source_revenue_guidance",
+              "contract_revenue_conversion",
+              "operating_metrics"
+            ],
+            "actual_roles": [
+              {
+                "task": "t50",
+                "role": "support"
+              }
+            ]
+          }
+        ],
+        "all_required_source_atoms_found_in_parsed_original": true,
+        "legacy_exact_quote_OR_selected": true,
+        "model_response_semantics": "NOT_REVIEWED",
+        "RF_consumption": "OPEN"
+      }
+    ],
+    "du5-hk-kingsoft-interim": [
+      {
+        "fact_id": "gross-margin-decline",
+        "frozen_gold": {
+          "id": "gross-margin-decline",
+          "importance": "normal",
+          "target_kind": "required_business",
+          "quantity_basis": "ratio",
+          "modality": "actual",
+          "role": "company_filing",
+          "fact_scope": "narrative",
+          "any_support_sets": [
+            [
+              {
+                "exact_quote": "截至二零二五年六月三十日止六個月的財務摘要",
+                "page": 5,
+                "location_kind": "page"
+              },
+              {
+                "exact_quote": "毛利為人民幣657.2百萬元（91.7百萬美元），較二零二四年同期的人民幣611.6百萬元增加7.4%。",
+                "page": 13,
+                "location_kind": "page"
+              },
+              {
+                "exact_quote": "毛利率為15.2%，而二零二四年同期則為16.7%。該減\n少主要是由於隨著AI業務擴張，服務器成本增加，以及若干客戶的進一步營收活動所產生的前期成本。",
+                "page": 13,
+                "location_kind": "page"
+              }
+            ]
+          ],
+          "must_preserve": [
+            "毛利",
+            "15.2%",
+            "16.7%",
+            "服務器成本增加",
+            "前期成本"
+          ],
+          "must_not_assert": [
+            "毛利率由15.2%提升至16.7%",
+            "毛利下降7.4%",
+            "毛利率提高因AI業務擴張"
+          ],
+          "reason": "保留required_business：毛利额改善而利润率下降及AI服务器/客户前期成本经营解释；完整方向与原因联合，利润率与纯金额不互为OR。精确千元额另属财务责任。"
+        },
+        "source_input_status": "PARTIAL",
+        "operating_core_body_status": "PASS",
+        "reason": "Gross profit +7.4%, margin15.2% vs16.7%, AI server costs and client upfront costs are complete in one support. This bare compiler material has no verified shared document-period field or applicable period context. A source-owner-verified shared period in a full request would suffice once; repeating p5 per task is not required. An unrelated cash-flow header is not a document-level qualifier.",
+        "actual_task_keys": [
+          "t37"
+        ],
+        "evidence": [
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:2abba42d30c270cd6517cf10fdff3be0a30e2235c8fb037af6bbe937c89c2e01",
+            "locator": "loc:v1/page:13/paragraph:1",
+            "full_quote": "管理層討論與分析",
+            "page": 13,
+            "quote_sha256": "7c7c34abd427eae9b06ebb84e491df9f414a3fc3876ac7f65fbe2d685d168698",
+            "quality_flags": [],
+            "source_role": "company_filing",
+            "selection_reasons": [
+              "reading_context"
+            ],
+            "topics": [],
+            "actual_roles": [
+              {
+                "task": "t37",
+                "role": "context"
+              }
+            ]
+          },
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:98e04598a679b1e733fbf8551d2adbc39e1ee2e8e0bc27cd50e1e8cb45cdc9e7",
+            "locator": "loc:v1/page:13/paragraph:29/chars:795-950",
+            "full_quote": "毛利為人民幣657.2百萬元（91.7百萬美元），較二零二四年同期的人民幣611.6百萬元增加7.4%。該改善主\n要是由於我們的收入規模擴張較快及收入組合優化。毛利率為15.2%，而二零二四年同期則為16.7%。該減\n少主要是由於隨著AI業務擴張，服務器成本增加，以及若干客戶的進一步營收活動所產生的前期成本。",
+            "page": 13,
+            "quote_sha256": "fd65e172efc7d2bf4e374cea9e23046cee441a141a6fd2ab4b37da33acc07e52",
+            "quality_flags": [],
+            "source_role": "company_filing",
+            "selection_reasons": [
+              "reading_plan",
+              "operating_description_unknown"
+            ],
+            "topics": [
+              "core_business"
+            ],
+            "actual_roles": [
+              {
+                "task": "t37",
+                "role": "support"
+              }
+            ]
+          }
+        ],
+        "all_required_source_atoms_found_in_parsed_original": true,
+        "legacy_exact_quote_OR_selected": false,
+        "model_response_semantics": "NOT_REVIEWED",
+        "RF_consumption": "OPEN"
+      },
+      {
+        "fact_id": "no-material-investments-or-capex-plans",
+        "frozen_gold": {
+          "id": "no-material-investments-or-capex-plans",
+          "importance": "normal",
+          "target_kind": "required_business",
+          "quantity_basis": "investment",
+          "modality": "negation",
+          "role": "company_filing",
+          "fact_scope": "narrative",
+          "any_support_sets": [
+            [
+              {
+                "exact_quote": "截至二零二五年六月三十日，本集團並無持有任何重大投資（包括對被投資公司的任何投資價值佔本集團截\n至二零二五年六月三十日總資產的5%或以上）。截至二零二五年六月三十日，本集團並無任何未來重大投資\n及資本資產計劃。",
+                "page": 15,
+                "location_kind": "page"
+              }
+            ]
+          ],
+          "must_preserve": [
+            "並無",
+            "重大投資",
+            "5%",
+            "資本資產計劃"
+          ],
+          "must_not_assert": [
+            "本集團持有佔總資產5%以上的重大投資",
+            "本集團計劃未來進行重大資本開支",
+            "本集團有重大收購計劃"
+          ],
+          "reason": "现有重大投资阈值与未来重大计划两否定须同包，不以不完整前半句替代；不将普通AI购置活动与公告重大投资计划混同。"
+        },
+        "source_input_status": "PASS",
+        "operating_core_body_status": "PASS",
+        "reason": "As-of June30 2025, >=5% material investment definition and both no-current-investment/no-future-material-capital-plan negations are in one support.",
+        "actual_task_keys": [
+          "t40"
+        ],
+        "evidence": [
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:79d1b4184ad98af106b28e3d98b9405b1840b3cb07a22d34147c04360889e3f1",
+            "locator": "loc:v1/page:15/paragraph:1",
+            "full_quote": "管理層討論與分析",
+            "page": 15,
+            "quote_sha256": "7c7c34abd427eae9b06ebb84e491df9f414a3fc3876ac7f65fbe2d685d168698",
+            "quality_flags": [],
+            "source_role": "company_filing",
+            "selection_reasons": [
+              "reading_context"
+            ],
+            "topics": [],
+            "actual_roles": [
+              {
+                "task": "t40",
+                "role": "context"
+              }
+            ]
+          },
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:9b7a49ed9a3da1080f6f6b903d4285de77c1bc141fe1182ee33bee07b53a11d2",
+            "locator": "loc:v1/page:15/paragraph:20",
+            "full_quote": "重大投資",
+            "page": 15,
+            "quote_sha256": "29a9751ba64e55b1889c0bb3ea14001336dd411b10fda6c0c6b46c2c9f4e53b6",
+            "quality_flags": [],
+            "source_role": "company_filing",
+            "selection_reasons": [
+              "reading_context"
+            ],
+            "topics": [],
+            "actual_roles": [
+              {
+                "task": "t40",
+                "role": "context"
+              }
+            ]
+          },
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:d3441e90a6a573de8117ecda4d1eb2804da1ee739b21e431afbe81a792ea18f4",
+            "locator": "loc:v1/page:15/paragraph:21/chars:966-1071",
+            "full_quote": "截至二零二五年六月三十日，本集團並無持有任何重大投資（包括對被投資公司的任何投資價值佔本集團截\n至二零二五年六月三十日總資產的5%或以上）。截至二零二五年六月三十日，本集團並無任何未來重大投資\n及資本資產計劃。",
+            "page": 15,
+            "quote_sha256": "f8a4a82076e09114d30958a361124fa56b2ba89223bb83fbcfd1bd6e7ccf6f0d",
+            "quality_flags": [],
+            "source_role": "company_filing",
+            "selection_reasons": [
+              "reading_plan",
+              "future_investment_disclosure"
+            ],
+            "topics": [
+              "future_investment_disclosure"
+            ],
+            "actual_roles": [
+              {
+                "task": "t40",
+                "role": "support"
+              }
+            ]
+          }
+        ],
+        "all_required_source_atoms_found_in_parsed_original": true,
+        "legacy_exact_quote_OR_selected": true,
+        "model_response_semantics": "NOT_REVIEWED",
+        "RF_consumption": "OPEN"
+      },
+      {
+        "fact_id": "h2-2025-business-outlook",
+        "frozen_gold": {
+          "id": "h2-2025-business-outlook",
+          "importance": "normal",
+          "target_kind": "required_business",
+          "quantity_basis": "unknown",
+          "modality": "plan",
+          "role": "management_prepared",
+          "fact_scope": "narrative",
+          "any_support_sets": [
+            [
+              {
+                "exact_quote": "截至二零二五年六月三十日止六個月的財務摘要",
+                "page": 5,
+                "location_kind": "page"
+              },
+              {
+                "exact_quote": "展望下半年，我們將維持高質量發展和可持續發展戰略，不斷投資技術研發，並全面提升AI能力。同時，我\n們將積極擁抱AI時代小米和金山生態系統的雲需求。",
+                "page": 11,
+                "location_kind": "page"
+              }
+            ]
+          ],
+          "must_preserve": [
+            "展望下半年",
+            "將",
+            "戰略",
+            "AI"
+          ],
+          "must_not_assert": [
+            "公司已完成全面AI能力提升",
+            "公司在上半年實現高質量盈利",
+            "公司將退出研發投入"
+          ],
+          "reason": "下半年AI/小米金山生态需求方向是业务计划，不是元数据，改required_business且normal不变；不能当已实现业绩。"
+        },
+        "source_input_status": "MISSING",
+        "operating_core_body_status": "MISSING",
+        "reason": "Source has the exact H2 AI and Xiaomi/Kingsoft ecosystem plan, but no selected support contains the plan. Selected p11 R&D platform description does not substitute a H2 plan.",
+        "actual_task_keys": [],
+        "evidence": [],
+        "all_required_source_atoms_found_in_parsed_original": true,
+        "legacy_exact_quote_OR_selected": false,
+        "model_response_semantics": "NOT_REVIEWED",
+        "RF_consumption": "OPEN"
+      },
+      {
+        "fact_id": "single-operating-segment",
+        "frozen_gold": {
+          "id": "single-operating-segment",
+          "importance": "normal",
+          "target_kind": "required_business",
+          "quantity_basis": "unknown",
+          "modality": "actual",
+          "role": "company_filing",
+          "fact_scope": "narrative",
+          "any_support_sets": [
+            [
+              {
+                "exact_quote": "本集團整體表現的決策時審閱合併經營業績，因此本集團僅有一個經營分部。",
+                "page": 50,
+                "location_kind": "page"
+              },
+              {
+                "exact_quote": "本集團的大部分收入來自中國內地，且本集團的大部分長期資產位於中國內地，因此並無呈列地區分\n部。",
+                "page": 50,
+                "location_kind": "page"
+              }
+            ]
+          ],
+          "must_preserve": [
+            "一個經營分部",
+            "並無呈列地區分"
+          ],
+          "must_not_assert": [
+            "公司披露公有雲與行業雲兩個報告分部",
+            "公司按地區披露海外分部收入",
+            "主要經營決策者按分部評估業績"
+          ],
+          "reason": "一经营分部与不列地区分部是互补结构定义，联合支持；不能把公有云/行业云收入分类误当可报告分部。保留旧重要性。"
+        },
+        "source_input_status": "PARTIAL",
+        "operating_core_body_status": "PARTIAL",
+        "reason": "Single operating segment and CODM basis are present. The complementary mainland revenue/assets and no geographic segment statement is absent; public/industry service categories must not become reportable segments.",
+        "actual_task_keys": [
+          "t59"
+        ],
+        "evidence": [
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:32d6c5dd366cd88c75ece6c4a725092153b4244f902c4e270eb49e821dff7912",
+            "locator": "loc:v1/page:50/paragraph:1",
+            "full_quote": "未經審計中期簡明合併財務報表附註",
+            "page": 50,
+            "quote_sha256": "49ca1db299ae09146e7641f47df1b99762afdab86384f8262c252a0934c24ca1",
+            "quality_flags": [],
+            "source_role": "company_filing",
+            "selection_reasons": [
+              "reading_context"
+            ],
+            "topics": [],
+            "actual_roles": [
+              {
+                "task": "t59",
+                "role": "context"
+              }
+            ]
+          },
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:2ed262dbb55719e30b3aa7f323a35c698f3de131d6d8a1371acb696604092923",
+            "locator": "loc:v1/page:50/paragraph:3",
+            "full_quote": "2. 主要會計政策概要（續）",
+            "page": 50,
+            "quote_sha256": "880249cb86577d8636492ec8d879b322626cc372c959c173c0cad8c8f1878efd",
+            "quality_flags": [],
+            "source_role": "company_filing",
+            "selection_reasons": [
+              "reading_context"
+            ],
+            "topics": [],
+            "actual_roles": [
+              {
+                "task": "t59",
+                "role": "context"
+              }
+            ]
+          },
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:678d9b68130b79e61565018f2a2b80851608f39c7ea49d4ef00dad2f3e2926cc",
+            "locator": "loc:v1/page:50/paragraph:22",
+            "full_quote": "分部報告",
+            "page": 50,
+            "quote_sha256": "99545dc11161b19a7a905e5c9a03f5e92d937a54bb30c2620fae2734effa2be4",
+            "quality_flags": [],
+            "source_role": "company_filing",
+            "selection_reasons": [
+              "reading_context"
+            ],
+            "topics": [],
+            "actual_roles": [
+              {
+                "task": "t59",
+                "role": "context"
+              }
+            ]
+          },
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:6b97ac2bd1d23c5d9718beb0588cfc4e5e600254004f7b4777750f4e0b544e54",
+            "locator": "loc:v1/page:50/paragraph:25/chars:693-853",
+            "full_quote": "本集團的主要經營決策者（「主要經營決策者」）已被確定為首席執行官，其在作出有關分配資源及評估\n本集團整體表現的決策時審閱合併經營業績，因此本集團僅有一個經營分部。主要經營決策者使用合併\n淨虧損評估財務表現及分配資源。主要經營決策者於評估經營業績及作出資源決策以提高盈利能力時，\n會定期考慮合併淨虧損的預算與實際比較情況。",
+            "page": 50,
+            "quote_sha256": "9dcc6e42e440b0f873ce2e3440db485ab604cf10227038d98e0a838da6f5a7f3",
+            "quality_flags": [],
+            "source_role": "company_filing",
+            "selection_reasons": [
+              "reading_plan",
+              "reporting_segment_scope",
+              "operating_current_state",
+              "operating_state_unknown"
+            ],
+            "topics": [
+              "reporting_segment_scope",
+              "core_business"
+            ],
+            "actual_roles": [
+              {
+                "task": "t59",
+                "role": "support"
+              }
+            ]
+          }
+        ],
+        "all_required_source_atoms_found_in_parsed_original": true,
+        "legacy_exact_quote_OR_selected": false,
+        "model_response_semantics": "NOT_REVIEWED",
+        "RF_consumption": "OPEN"
+      },
+      {
+        "fact_id": "cloud-revenue-operating-drivers",
+        "frozen_gold": {
+          "id": "cloud-revenue-operating-drivers",
+          "importance": "critical",
+          "target_kind": "required_business",
+          "quantity_basis": "unknown",
+          "modality": "actual",
+          "role": "company_filing",
+          "fact_scope": "narrative",
+          "any_support_sets": [
+            [
+              {
+                "exact_quote": "截至二零二五年六月三十日止六個月的財務摘要",
+                "page": 5,
+                "location_kind": "page"
+              },
+              {
+                "exact_quote": "該增加主要是由於AI相關客戶收入增長強勁及我們擴展行業雲項目，但部分被我們主動縮減提供予\n內容分發網絡(CDN)客戶的服務規模所抵銷。",
+                "page": 9,
+                "location_kind": "page"
+              }
+            ]
+          ],
+          "must_preserve": [
+            "AI",
+            "行業雲項目",
+            "主動縮減",
+            "CDN",
+            "抵銷"
+          ],
+          "must_not_assert": [
+            "金山雲所有業務增長均來自AI且沒有抵銷因素",
+            "CDN服務擴張是收入增長的主要原因"
+          ],
+          "reason": "源侧新增关键经营因果：AI客户与行业云扩张、主动缩减CDN的抵销必须同时保留；补正金融数责任拆分，不以降分母取绿。"
+        },
+        "source_input_status": "PARTIAL",
+        "operating_core_body_status": "PASS",
+        "reason": "AI customer/industry-project expansion and deliberate CDN contraction offset are complete in support. This bare compiler material supplies no verified shared H1 period nor applicable local period. A verified document-level period in the full request may supply it once; full request was not built in this run, so no blanket production failure is claimed.",
+        "actual_task_keys": [
+          "t28"
+        ],
+        "evidence": [
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:d0ee31caa1edc80b0cb373e182b96a0d09ad14969299caf81ebf795984fe9ce3",
+            "locator": "loc:v1/page:9/paragraph:1",
+            "full_quote": "業務回顧及展望",
+            "page": 9,
+            "quote_sha256": "e847c24a7e5c21d3253a5c74a887d08f6bc8a1c2df51100cb4196a0ce11a0137",
+            "quality_flags": [],
+            "source_role": "company_filing",
+            "selection_reasons": [
+              "reading_context"
+            ],
+            "topics": [],
+            "actual_roles": [
+              {
+                "task": "t28",
+                "role": "context"
+              }
+            ]
+          },
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:5b0330dfe6e8a04bb185ff4223c60802369e21463dd3cdaead628b4dbedb5c2d",
+            "locator": "loc:v1/page:9/paragraph:2",
+            "full_quote": "報告期內業務回顧",
+            "page": 9,
+            "quote_sha256": "d3331d0b1792dca09370b83d0876e9c82694ddf4547ae83d346e68eba9bab320",
+            "quality_flags": [],
+            "source_role": "company_filing",
+            "selection_reasons": [
+              "reading_context"
+            ],
+            "topics": [],
+            "actual_roles": [
+              {
+                "task": "t28",
+                "role": "context"
+              }
+            ]
+          },
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:4f939ffa3ddcfaec2abf28e2f3432efe3295ba06d0e40db328329075bbd5c9ff",
+            "locator": "loc:v1/page:9/paragraph:6/chars:89-287",
+            "full_quote": "於報告期內，總收入達到人民幣4,319.2百萬元（602.9百萬美元），較去年同期的人民幣3,667.5百萬元增加\n17.8%。該增加主要是由於AI相關客戶收入增長強勁及我們擴展行業雲項目，但部分被我們主動縮減提供予\n內容分發網絡(CDN)客戶的服務規模所抵銷。公有雲服務收入為人民幣2,978.8百萬元（415.8百萬美元），\n行業雲服務收入為人民幣1,340.4百萬元（187.1百萬美元）。",
+            "page": 9,
+            "quote_sha256": "006f46006ddc1c0311060a3764e952ddc623e310349ad80747c6bf49c1fa49d1",
+            "quality_flags": [],
+            "source_role": "company_filing",
+            "selection_reasons": [
+              "reading_plan",
+              "business_revenue_measure"
+            ],
+            "topics": [
+              "business_revenue_measure"
+            ],
+            "actual_roles": [
+              {
+                "task": "t28",
+                "role": "support"
+              }
+            ]
+          }
+        ],
+        "all_required_source_atoms_found_in_parsed_original": true,
+        "legacy_exact_quote_OR_selected": false,
+        "model_response_semantics": "NOT_REVIEWED",
+        "RF_consumption": "OPEN"
+      },
+      {
+        "fact_id": "cloud-service-growth-causal-split",
+        "frozen_gold": {
+          "id": "cloud-service-growth-causal-split",
+          "importance": "critical",
+          "target_kind": "required_business",
+          "quantity_basis": "unknown",
+          "modality": "actual",
+          "role": "company_filing",
+          "fact_scope": "narrative",
+          "any_support_sets": [
+            [
+              {
+                "exact_quote": "截至二零二五年六月三十日止六個月的財務摘要",
+                "page": 5,
+                "location_kind": "page"
+              },
+              {
+                "exact_quote": "來自公有雲服務的收入由二零二四年同期的人民幣2,421.9百萬元增加23.0%至人民幣2,978.8百萬元\n（415.8百萬美元）。該同比增加主要是由於AI相關服務增長。",
+                "page": 13,
+                "location_kind": "page"
+              },
+              {
+                "exact_quote": "來自行業雲服務的收入為人民幣1,340.4百萬元（187.1百萬美元），較二零二四年同期的人民幣1,245.4\n百萬元增加7.6%。該同比增加主要是由於不斷增長的IT需求及我們向垂直行業客戶複製行業解決方案\n的能力。",
+                "page": 13,
+                "location_kind": "page"
+              }
+            ]
+          ],
+          "must_preserve": [
+            "公有雲服務",
+            "AI相關服務增長",
+            "行業雲服務",
+            "IT需求",
+            "垂直行業客戶"
+          ],
+          "must_not_assert": [
+            "行業雲收入增長23.0%",
+            "公有雲增長全部因垂直行業方案複製且與AI無關"
+          ],
+          "reason": "按真实业务主体分开增长驱动，避免兄弟业务归因串线；数字在源包中保留但不要求把全表精度塞进叙述。"
+        },
+        "source_input_status": "PARTIAL",
+        "operating_core_body_status": "PARTIAL",
+        "reason": "Public cloud +23% and AI cause are complete. Industry-cloud support p13/9 stops after prior-period1,245.4, lacking its unit/7.6%/IT-demand and vertical-solution continuation. Its quality_flags are empty; both frozen causal branches are not locally available.",
+        "actual_task_keys": [
+          "t1",
+          "t35"
+        ],
+        "evidence": [
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:2abba42d30c270cd6517cf10fdff3be0a30e2235c8fb037af6bbe937c89c2e01",
+            "locator": "loc:v1/page:13/paragraph:1",
+            "full_quote": "管理層討論與分析",
+            "page": 13,
+            "quote_sha256": "7c7c34abd427eae9b06ebb84e491df9f414a3fc3876ac7f65fbe2d685d168698",
+            "quality_flags": [],
+            "source_role": "company_filing",
+            "selection_reasons": [
+              "reading_context"
+            ],
+            "topics": [],
+            "actual_roles": [
+              {
+                "task": "t1",
+                "role": "context"
+              },
+              {
+                "task": "t35",
+                "role": "context"
+              }
+            ]
+          },
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:f05e62840af54f9fb9240e557b5e12d1248086180ec1a69fe40a820058df9275",
+            "locator": "loc:v1/page:13/paragraph:9",
+            "full_quote": "• \n來自行業雲服務的收入為人民幣1,340.4百萬元（187.1百萬美元），較二零二四年同期的人民幣1,245.4",
+            "page": 13,
+            "quote_sha256": "80ece2e126699ae75b984c71519effb133f56d1eb79ab7a82fc4b9ba32107b64",
+            "quality_flags": [],
+            "source_role": "company_filing",
+            "selection_reasons": [
+              "reading_plan",
+              "business_revenue_measure"
+            ],
+            "topics": [
+              "business_revenue_measure"
+            ],
+            "actual_roles": [
+              {
+                "task": "t1",
+                "role": "support"
+              }
+            ]
+          },
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:8821797dd42c3cb12244443a2c12fa285cf2e518b783e7f3e17134b75e21b699",
+            "locator": "loc:v1/page:13/paragraph:6/chars:156-244",
+            "full_quote": "• \n來自公有雲服務的收入由二零二四年同期的人民幣2,421.9百萬元增加23.0%至人民幣2,978.8百萬元\n（415.8百萬美元）。該同比增加主要是由於AI相關服務增長。",
+            "page": 13,
+            "quote_sha256": "d59718e7e411e0c946add5148495a303e6a5c22103cfa9f43be354f98788069b",
+            "quality_flags": [],
+            "source_role": "company_filing",
+            "selection_reasons": [
+              "reading_plan"
+            ],
+            "topics": [
+              "management_discussion"
+            ],
+            "actual_roles": [
+              {
+                "task": "t35",
+                "role": "support"
+              }
+            ]
+          }
+        ],
+        "all_required_source_atoms_found_in_parsed_original": true,
+        "legacy_exact_quote_OR_selected": false,
+        "model_response_semantics": "NOT_REVIEWED",
+        "RF_consumption": "OPEN"
+      },
+      {
+        "fact_id": "idc-purchase-commitment-stage",
+        "frozen_gold": {
+          "id": "idc-purchase-commitment-stage",
+          "importance": "normal",
+          "target_kind": "required_business",
+          "quantity_basis": "unknown",
+          "modality": "actual",
+          "role": "company_filing",
+          "fact_scope": "narrative",
+          "any_support_sets": [
+            [
+              {
+                "exact_quote": "（金額以人民幣千元（「人民幣」）及千美元（「美元」）列示，股份數目及每股數據除外）",
+                "page": 66,
+                "location_kind": "page"
+              },
+              {
+                "exact_quote": "於二零二五年六月一日，本集團簽訂一份不可取消一年期互聯網數據中心服務協議，據此，本集團作出\n合同最低採購承諾，總金額為人民幣630,000元（87,945美元）。截至二零二五年六月三十日，剩餘採\n購承諾金額為人民幣576,101元（80,421美元）。",
+                "page": 66,
+                "location_kind": "page"
+              }
+            ]
+          ],
+          "must_preserve": [
+            "二零二五年六月一日",
+            "不可取消一年期",
+            "服務協議",
+            "630,000",
+            "576,101",
+            "人民幣千元"
+          ],
+          "must_not_assert": [
+            "一年期IDC採購承諾已成為公司收入",
+            "金山雲已完成全部IDC服務採購履約",
+            "採購承諾金額為人民幣630,000元整（非千元列示基準）"
+          ],
+          "reason": "保留原period-meta错误OR曾引用的采购责任为独立业务合同阶段，完整金额原话与全节千元说明联合，迁移原错误单位反例；不凭正文元字抹去全节单位，也不自造已履约/收入。"
+        },
+        "source_input_status": "MISSING",
+        "operating_core_body_status": "MISSING",
+        "reason": "Neither the June1 noncancellable1year IDC agreement, 630000 minimum nor576101 remaining commitment/unit context is selected. No source-input basis for this business contract stage exists.",
+        "actual_task_keys": [],
+        "evidence": [],
+        "all_required_source_atoms_found_in_parsed_original": true,
+        "legacy_exact_quote_OR_selected": false,
+        "model_response_semantics": "NOT_REVIEWED",
+        "RF_consumption": "OPEN"
+      }
+    ]
+  },
+  "nonrequired_financial_meta_targets": {
+    "status": "SOURCE_ATOMS_OBSERVED_BUT_NOT_REQUIRED_NARRATIVE_RECALL_OR_MODEL_CORRECTNESS_SIGNOFF",
+    "must_not_assert_checks": "Preserved in original gold; no model output exists here to test semantic violations."
+  },
+  "findings": [
+    {
+      "id": "CM-01",
+      "severity": "P2",
+      "owner": "CWP source hierarchy/context closure and actual scoped task admission",
+      "case": "us-10k",
+      "fact": "f-azure-inside-intelligent-cloud",
+      "actual_tasks": [
+        "t19",
+        "t20",
+        "t7"
+      ],
+      "reproduction": "t19 ends primarily comprises: without the child list; Azure and Server facts have no IC owner in their own context. Old gold OR permits weak IC introduction alone.",
+      "action": "Trace DOM list/heading relation and retain required scope in child tasks; regression must use neutral parent/child and sibling negatives, not Azure name rules. Do not alter gold to make current selection pass."
+    },
+    {
+      "id": "CM-02",
+      "severity": "P2",
+      "owner": "CWP native PDF sentence continuation/qualification closure and support admission",
+      "case": "du5-hk-kingsoft-interim",
+      "reproduction": "Actual t1 support p13/9 ends at prior-year1,245.4, lacks the next line/unit/growth/causal branch, quality_flags=[]; t59 lacks complementary geographic non-segmentation clause.",
+      "action": "Follow original unit continuation dependencies and reject/defer incomplete factual support or retain the full qualified sentence. Preserve business sibling scope and table units; use neutral PDF line-split tests."
+    },
+    {
+      "id": "CM-03",
+      "severity": "P2",
+      "owner": "CWP document period qualification and strategy/selection allocation",
+      "case": "du5-hk-kingsoft-interim",
+      "reproduction": "Business t37/t28/t35 lack the frozen six-month anchor; H2 AI/eco-system plan and IDC purchase-stage fact absent although source atoms exist and work budget is not exhausted.",
+      "action": "Supply one source-owner-verified shared document period or applicable local context; do not duplicate p5 into every task. Inspect the actual full request before concluding production period is missing. Investigate outlook/contract-stage allocation without issuer-specific rules or cap increase."
+    },
+    {
+      "id": "CM-04",
+      "severity": "OPEN_EFFICIENCY_CAPACITY",
+      "owner": "Shared work planner/inventory processing; exact exhausted phase not localized by this precheck",
+      "case": "cn-ipo",
+      "reproduction": "429pages/14025 parsed units, parse420052 then composed work15,999,740/16M; candidate_count8361,0 selected, honest needs_review. Old m3 separate parse/select account and160-span replay is not comparable.",
+      "action": "Retain hard ceiling and stop; investigate bounded/resumable candidate planning and unnecessary repeated work in a separate owner node. No budget increase, retry, content grade or model compiler after exhaustion in this run."
+    }
+  ],
+  "neutral_controls": [
+    {
+      "text": "The auditor tested revenue: includes manual inspection of contract samples.",
+      "eligible": false,
+      "reasons": [],
+      "purpose": "unknown",
+      "financial_only": true,
+      "expected_eligible": false,
+      "expected_actual_growth": false,
+      "passed": true
+    },
+    {
+      "text": "Training for revenue: includes instructions for reviewing deferred revenue.",
+      "eligible": false,
+      "reasons": [],
+      "purpose": "unknown",
+      "financial_only": true,
+      "expected_eligible": false,
+      "expected_actual_growth": false,
+      "passed": true
+    },
+    {
+      "text": "Our service revenue: includes cloud subscriptions and support services.",
+      "eligible": true,
+      "reasons": [
+        "reporting_metric_definition"
+      ],
+      "purpose": "operating_metric_basis",
+      "financial_only": false,
+      "expected_eligible": true,
+      "expected_actual_growth": false,
+      "passed": true
+    },
+    {
+      "text": "Paid seats: number of licensed users and our paid seats increased 20% to 240 in 2026.",
+      "eligible": true,
+      "reasons": [
+        "reporting_metric_definition",
+        "operating_metric_change"
+      ],
+      "purpose": "operating_metric_basis",
+      "financial_only": false,
+      "expected_eligible": true,
+      "expected_actual_growth": true,
+      "passed": true
+    },
+    {
+      "text": "Paid seats: number of licensed users at the end of the period.",
+      "eligible": true,
+      "reasons": [
+        "reporting_metric_definition"
+      ],
+      "purpose": "operating_metric_basis",
+      "financial_only": false,
+      "expected_eligible": true,
+      "expected_actual_growth": false,
+      "passed": true
+    }
+  ],
+  "source_gold_observations": [
+    "Original required gold source quotes are found in the SHA-verified original's parser units; this is recorded separately from actual selected task coverage.",
+    "US hierarchy OR supports are weaker than its full reason/proposition. Both the literal result and stricter source-input semantic judgement are retained, with no gold rewrite.",
+    "US HTML legacy page1 is virtual document location, never a physical PDF page.",
+    "US RPO gold reason mentions7,265 million as an unearned-revenue distractor, while its separate correct balance target says67,265 million; preserve this stale explanation inconsistency, do not repair the original gold here or invent a model error.",
+    "HK IDC source body uses yuan while section header is thousand-yuan presentation; full unit qualification remains necessary, and the current fact is not selected.",
+    "cn-ipo is AMEC, not SMIC or the scanned Dinglong administrative confirmation. It has no formal content gold; existing M3 checks are historical source/binding checks only."
+  ],
+  "limits": [
+    "Single actual production attempt per source after a harness-only pre-parse serialization startup error. That startup error performed no parse/select and is preserved separately.",
+    "PDF parse and select charge the same configured16M account; max_selected112. No old helper with separate phase accounts was executed.",
+    "HTML uses existing finite NormalizationLimits but its frontend has no WorkBudget argument; parse_work0 does not mean zero parsing effort. Its observed work total covers the shared selector account, not an invented HTML parse charge.",
+    "Actual v4 model inputs were compiled once for US/HK and hashed. Model responses, formal summary recovery and RF adoption are not reviewed.",
+    "Gold source quote observations use the parser units from verified bytes; this is not visual layout inspection or exhaustive independent re-rendering of every selected span.",
+    "No product, old gold, PWF, production configuration, database, original document or external author-worktree writes. No temp directories were created.",
+    "Findings require owner root-cause investigation; this independent precheck did not modify code or create source-specific passing exceptions."
+  ],
+  "model_response_semantics": "NOT_REVIEWED",
+  "current_RF_consumption": "OPEN",
+  "document_period_boundary": {
+    "reviewed_surface": "Bare compile_scoped_model_view.to_model_dict material",
+    "shared_head_fields": [
+      "schema_version",
+      "scope",
+      "max_claims",
+      "available_task_count",
+      "fragment_defaults",
+      "task_defaults",
+      "shared_fragments",
+      "tasks"
+    ],
+    "verified_shared_document_period_observed": false,
+    "formal_full_NarrativeModelRequest": "NOT_BUILT_IN_THIS_RUN",
+    "static_full_request_observation": "build_scoped_request adds source.language/title/document_kind and reading_strategy. A verified title or another verified shared field may supply a period; this run cannot exclude such full-request context.",
+    "acceptance_rule": "A source-owner-verified document-level period can qualify applicable tasks once; do not duplicate p5. Another task cash-flow header is not shared document metadata.",
+    "HK_count_boundary": "1PASS/4PARTIAL/2MISSING is bare-material coverage, not a claim that every production full request lacks period metadata."
+  }
+}

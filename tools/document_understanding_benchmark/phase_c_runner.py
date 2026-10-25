@@ -6,6 +6,7 @@ import argparse
 from contextlib import closing
 from dataclasses import asdict
 from datetime import UTC, datetime
+from decimal import Decimal
 import gzip
 import hashlib
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
@@ -208,12 +209,25 @@ def mother_totals(metadata_path: str | Path, usage_path: str | Path, *,
         if row["kind"] != "native_model_charge" or row["mode"] != "live":
             continue
         latest[(row["database"], row["attempt_id"])] = row
+    native = [row for row in latest.values() if not row.get("accounting_hold_for_run")]
+    holds = [row for row in latest.values() if row.get("accounting_hold_for_run")]
+    # A run-level fallback covers its already-persisted native attempts. Charge
+    # the larger amount per dimension while accounting is unknown, not both.
+    observed: dict[tuple[str, str], list[int]] = {}
+    for row in native:
+        amounts = observed.setdefault((row["database"], row.get("run_id", "")), [0, 0])
+        amounts[0] += row["charged_tokens"]
+        amounts[1] += row["charged_micro_usd"]
+    extra_tokens = sum(max(0, row["charged_tokens"] - observed.get(
+        (row["database"], row["accounting_hold_for_run"]), [0, 0])[0]) for row in holds)
+    extra_usd = sum(max(0, row["charged_micro_usd"] - observed.get(
+        (row["database"], row["accounting_hold_for_run"]), [0, 0])[1]) for row in holds)
     return {
         "charged_tokens": baseline["prior_charged_tokens"]
-        + sum(row["charged_tokens"] for row in latest.values()),
+        + sum(row["charged_tokens"] for row in native) + extra_tokens,
         "charged_micro_usd": baseline["prior_charged_micro_usd"]
         + baseline["retained_fx_hold_micro_usd"]
-        + sum(row["charged_micro_usd"] for row in latest.values()),
+        + sum(row["charged_micro_usd"] for row in native) + extra_usd,
         "new_unknown_count": sum(
             row["usage_status"] != "known" for row in latest.values()
         ),
@@ -382,20 +396,8 @@ def append_native(database: Path, run_id: str, output: Path, mode: str) -> list[
         )]
     write_json(output / (run_id + ".native-failures.json"), failures)
     if mode == "live":
-        if USAGE is None:
-            raise ValueError("live native usage needs the explicit existing mother ledger")
-        existing = {
-            json.dumps(row, sort_keys=True, ensure_ascii=False)
-            for row in read_rows(USAGE)
-        }
-        with USAGE.open("a", encoding="utf8") as stream:
-            for row in records:
-                encoded = json.dumps(row, sort_keys=True, ensure_ascii=False)
-                if encoded not in existing:
-                    stream.write(encoded + "\n")
-                    existing.add(encoded)
-            stream.flush()
-            os.fsync(stream.fileno())
+        _append_native_rows(database, run_id, records,
+                            journal_sha256=fingerprint(output / (run_id + ".native-usage.json"))["sha256"])
     if failures:
         # A test-review snapshot must never prevent native charge persistence
         # or the owner's finally cleanup. Its failure remains explicit.
@@ -410,6 +412,123 @@ def append_native(database: Path, run_id: str, output: Path, mode: str) -> list[
         if review is not None:
             write_json(output / (run_id + ".failure-review-index.json"), review)
     return records
+
+
+def _accounting_hold(database, run_id, mode, *, tokens, micro_usd, reconciled=False):
+    return {"kind": "native_model_charge", "mode": mode, "database": str(database),
+            "attempt_id": run_id + ":accounting-unknown", "run_id": run_id,
+            "accounting_hold_for_run": run_id,
+            "usage_status": "known" if reconciled else "unknown",
+            "charged_tokens": tokens, "charged_micro_usd": micro_usd,
+            "cost_kind": "accounting_fallback_hold_not_provider_invoice"}
+
+
+def _append_native_rows(database, run_id, records, *, journal_sha256=None):
+    if USAGE is None:
+        raise ValueError("live native usage needs the explicit existing mother ledger")
+    previous = read_rows(USAGE)
+    existing = {json.dumps(row, sort_keys=True, ensure_ascii=False) for row in previous}
+    to_append = list(records)
+    held = next((row for row in reversed(previous)
+                 if row.get("accounting_hold_for_run") == run_id
+                 and row.get("database") == str(database)), None)
+    if held is not None:
+        release = _accounting_hold(database, run_id, "live", tokens=0, micro_usd=0,
+                                   reconciled=True)
+        binding = journal_sha256 or held.get("native_usage_journal_sha256")
+        if binding:
+            release["native_usage_journal_sha256"] = binding
+        to_append.append(release)
+    with USAGE.open("a", encoding="utf-8") as stream:
+        for row in to_append:
+            encoded = json.dumps(row, sort_keys=True, ensure_ascii=False)
+            if encoded not in existing:
+                stream.write(encoded + "\n")
+                existing.add(encoded)
+        stream.flush()
+        os.fsync(stream.fileno())
+
+
+def _preserve_accounting_hold(database, run_id, output, mode, limits):
+    row = _accounting_hold(database, run_id, mode, tokens=limits["max_tokens"],
+        micro_usd=int(Decimal(str(limits["max_cost_usd"])) * 1_000_000))
+    journal = output / (run_id + ".native-usage.json")
+    try:
+        row["native_usage_journal_sha256"] = fingerprint(journal)["sha256"]
+    except OSError:
+        # Keep the full hold when native usage never became durable. A later
+        # file cannot retroactively establish what the failed run recorded.
+        pass
+    saved = {"ledger_saved": False, "sidecar_saved": False}
+    ledger_error = None
+    if mode == "live":
+        try:
+            if USAGE is None:
+                raise ValueError("accounting fallback requires the existing mother ledger")
+            with USAGE.open("a", encoding="utf-8") as stream:
+                stream.write(json.dumps(row, sort_keys=True, ensure_ascii=False) + "\n")
+                stream.flush()
+                os.fsync(stream.fileno())
+            saved["ledger_saved"] = True
+        except Exception as exc:
+            ledger_error = exc
+    try:
+        write_json(output / (run_id + ".accounting-hold.json"), row)
+        saved["sidecar_saved"] = True
+    except Exception:
+        if not saved["ledger_saved"]:
+            raise
+    if ledger_error is not None:
+        raise ledger_error
+    return saved
+
+
+def reconcile_native_usage(output: Path, run_id: str) -> dict:
+    """Replay exact durable usage after the owned AUTO DB was removed; no POST."""
+    if USAGE is None:
+        raise ValueError("native reconciliation requires the existing mother ledger")
+    if not run_id or Path(run_id).name != run_id or run_id in {".", ".."}:
+        raise ValueError("run ID must be a single filename component")
+    journal = output / (run_id + ".native-usage.json")
+    journal_bytes = journal.read_bytes()
+    journal_sha256 = hashlib.sha256(journal_bytes).hexdigest()
+    holds = {row["database"]: row for row in read_rows(USAGE)
+             if row.get("accounting_hold_for_run") == run_id}
+    fallback = output / (run_id + ".accounting-hold.json")
+    if not holds and fallback.exists():
+        held = json.loads(fallback.read_text(encoding="utf-8"))
+        if held.get("accounting_hold_for_run") == run_id:
+            holds[held["database"]] = held
+    if not holds or any(not held.get("native_usage_journal_sha256") for held in holds.values()):
+        raise ValueError("native usage journal has no bound accounting snapshot; retain unknown hold")
+    if any(held["native_usage_journal_sha256"] != journal_sha256 for held in holds.values()):
+        raise ValueError("native usage journal changed; retain unknown hold")
+    rows = json.loads(journal_bytes)
+    if not isinstance(rows, list):
+        raise ValueError("native usage journal must contain reservation rows")
+    for row in rows:
+        if (not isinstance(row, dict) or row.get("kind") != "native_model_charge"
+                or row.get("mode") != "live" or row.get("run_id") != run_id
+                or not isinstance(row.get("database"), str) or not row["database"]
+                or not isinstance(row.get("usage_status"), str) or not row["usage_status"]
+                or any(type(row.get(k)) is not int or row[k] < 0
+                       for k in ("charged_tokens", "charged_micro_usd"))
+                or not isinstance(row.get("attempt_id"), str) or not row["attempt_id"]):
+            raise ValueError("native usage journal is not this run's accounting")
+    databases = {row["database"] for row in rows}
+    if not rows:
+        if any(row.get("event") == "http_post_attempt" and row.get("run_id") == run_id
+               for row in read_rows(output / "events.jsonl")):
+            raise ValueError("empty native usage after recorded POST; retain unknown hold")
+        databases = set(holds)
+    if len(databases) != 1 or databases != set(holds):
+        raise ValueError("native usage journal has ambiguous database ownership")
+    _append_native_rows(databases.pop(), run_id, rows, journal_sha256=journal_sha256)
+    result = {"status": "RECONCILED", "run_id": run_id, "native_rows": len(rows),
+              "journal_sha256": journal_sha256, "model_post_attempts": 0,
+              "AUTO_database_opened": False}
+    write_json(output / (run_id + ".accounting-reconciled.json"), result)
+    return result
 
 
 def source_descriptor(sample: dict) -> dict:
@@ -1443,34 +1562,52 @@ def run_pair(
             error_line=trace.tb_lineno if trace else None,
         )
     finally:
-        if current_run is not None and database.exists():
-            append_native(database, current_run, output, mode)
-        outcome["model_post_attempts"] = sum(
-            row["event"] == "http_post_attempt" for row in read_rows(events)
-        )
-        outcome["protected_unchanged"] = all(
-            fingerprint(Path(path)) == before for path, before in protected.items()
-        )
-        outcome["sentinel_unchanged"] = fingerprint(sentinel) == sentinel_before
-        assert (
-            root.parent == temp_parent
-            and root.name.startswith("cwplC-")
-            and ROOT not in root.parents
-        )
         try:
-            shutil.rmtree(root)
-        except OSError as exc:
-            outcome["cleanup_error"] = type(exc).__name__
-            outcome["remaining_owned_temp"] = str(root)
-            outcome["status"] = "FAIL"
-        outcome["temporary_lake_removed"] = not root.exists()
-        if (
-            not outcome["protected_unchanged"]
-            or not outcome["sentinel_unchanged"]
-            or not outcome["temporary_lake_removed"]
-        ):
-            outcome["status"] = "FAIL"
-        write_json(output / "receipt.json", outcome)
+            try:
+                if current_run is not None and database.exists():
+                    append_native(database, current_run, output, mode)
+            except Exception as exc:
+                # The native usage journal is written before the mother ledger.
+                # An accounting failure is never success or zero-cost evidence;
+                # retain the failed run identity for reconciliation, but do not
+                # strand an entire test lake merely because persistence failed.
+                outcome.update(status="FAIL", finalization_error=type(exc).__name__,
+                               native_usage_reconciliation_required=True,
+                               native_usage_run_id=current_run)
+                try:
+                    saved = _preserve_accounting_hold(database, current_run, output, mode,
+                                                     metadata["candidate_per_paid_request_limits"])
+                    outcome["native_usage_hold_saved"] = saved["ledger_saved" if mode == "live" else "sidecar_saved"]
+                    outcome["native_usage_hold_sidecar_saved"] = saved["sidecar_saved"]
+                except Exception as hold_error:
+                    outcome.update(native_usage_hold_saved=False,
+                                   accounting_hold_error=type(hold_error).__name__)
+            outcome["model_post_attempts"] = sum(
+                row["event"] == "http_post_attempt" for row in read_rows(events)
+            )
+            outcome["protected_unchanged"] = all(
+                fingerprint(Path(path)) == before for path, before in protected.items()
+            )
+            outcome["sentinel_unchanged"] = fingerprint(sentinel) == sentinel_before
+        except Exception as exc:
+            outcome.update(status="FAIL", finalization_observation_error=type(exc).__name__)
+        finally:
+            # This absolute owned-root check must also work under python -O.
+            if (root.parent != temp_parent or not root.name.startswith("cwplC-")
+                    or root == ROOT or root in ROOT.parents):
+                raise RuntimeError("unsafe phase C cleanup target")
+            try:
+                shutil.rmtree(root)
+            except OSError as exc:
+                outcome["cleanup_error"] = type(exc).__name__
+                outcome["remaining_owned_temp"] = str(root)
+                outcome["status"] = "FAIL"
+            outcome["temporary_lake_removed"] = not root.exists()
+            if (outcome.get("protected_unchanged") is not True
+                    or outcome.get("sentinel_unchanged") is not True
+                    or not outcome["temporary_lake_removed"]):
+                outcome["status"] = "FAIL"
+            write_json(output / "receipt.json", outcome)
     return outcome
 
 
@@ -1615,12 +1752,20 @@ def argument_parser() -> argparse.ArgumentParser:
                         help="Omission retains the historical pair; 0.9.0 is single-selector acceptance.")
     parser.add_argument("--activation-recovery", action="store_true",
                         help="Test paid outbox activation_pending then resume the same run with zero new POST.")
+    parser.add_argument("--reconcile-run-id", help="Replay an existing native usage journal into --usage-ledger; no model or AUTO DB.")
     return parser
 
 
 def main() -> int:
     parser = argument_parser()
     args = parser.parse_args()
+    global USAGE
+    if args.reconcile_run_id is not None:
+        if args.usage_ledger is None or args.mode != "live":
+            parser.error("native reconciliation requires live mode and the existing usage ledger")
+        USAGE = args.usage_ledger.resolve()
+        print(json.dumps(reconcile_native_usage(args.output.resolve(strict=True), args.reconcile_run_id)))
+        return 0
     if args.source_mode == "registered_readonly" and args.source_catalog_config is None:
         parser.error("registered_readonly requires --source-catalog-config")
     if args.source_mode == "registered_readonly" and args.mode != "live":
@@ -1631,7 +1776,6 @@ def main() -> int:
     metadata = (json.loads(preparation_path.read_text(encoding="utf8"))
                 if preparation_path is not None else loopback_preparation())
     preparation = verify_preparation(metadata, mode=args.mode)
-    global USAGE
     destination = args.output.resolve()
     destination.mkdir(parents=True, exist_ok=False)
     USAGE = (args.usage_ledger.resolve() if args.usage_ledger is not None
