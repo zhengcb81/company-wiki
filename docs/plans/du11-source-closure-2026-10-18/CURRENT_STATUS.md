@@ -6,7 +6,7 @@
 
 最终独立复审PASS，绑定源码/测试SHA：`narrative_operating_relations.py`=`ee77cd8c…14d16b4`，`narrative_reading.py`=`65ef7a2b…3953ce`，回归测试=`06823e76…12641c`。初始定向测试67项通过（4.04秒）；发布前对同三测试文件复测94项通过（3.60秒）。Ruff、mypy和diff-check通过。药明康德真实原件SHA=`7f1431d6…2d6a2`的零费用离线回放选中112片段/8,915字符，工作量10,565,038/16,000,000，未耗尽；日期与容量各自作为对方的context，但没有并入对方support。0模型调用、0下载、0原文复制，原件稳定。回放边界仍是`coverage_complete=false`、`whole_content_pass=false`、`content_quality=not_regraded`；内容评分继续为8通过/6部分/0缺失，不能把来源闭包修复视为内容验收。
 
-代码与证据现已满足本节点本地发布条件，下一步只提交本节点源码、测试、回放/独审证据和PWF，推送后核对精确HEAD CI，再继续其余partial根因。QA-RAG-SAFE-REBUILD、IR-REPORT-GENERATION、MC-OUTPUT-INTEGRITY仍是已ROOT接收、作者仓独立保留的外包交付，不代替主线内容验收。
+本节点已提交并推送：`861b7b3360753baf845f186a2cb7043b4de14690`；精确HEAD GitHub CI `40168702115`成功（Fast checks 3分09秒）。本地pre-push的154项契约smoke、发布前94项相关单测、Ruff、mypy和独审均通过。下一步继续追踪annual14其余partial根因；QA-RAG-SAFE-REBUILD、IR-REPORT-GENERATION、MC-OUTPUT-INTEGRITY仍是已ROOT接收、作者仓独立保留的外包交付，不代替主线内容验收。
 
 ## 上一已发布节点：annual14 bullet-parent 来源闭合（2026-10-25）
 

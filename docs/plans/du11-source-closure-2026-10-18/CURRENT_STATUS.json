@@ -2,22 +2,27 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-25",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "V4_AND_ST_A03_PUBLISHED; ANNUAL14_ST_A09_CONTEXT_ROOTFIX_REVIEWED_PENDING_PUBLICATION; CONTENT_AND_RF_ACCEPTANCE_OPEN",
+  "overall_status": "V4_AND_ST_A03_PUBLISHED; ANNUAL14_ST_A09_CONTEXT_ROOTFIX_PUBLISHED_EXACT_CI_PASS; CONTENT_AND_RF_ACCEPTANCE_OPEN",
   "current_authorized_scope": "User resumed current mainline with continue on2026-10-23. Prior pause superseded; native goal active verified.",
   "parent_plan_id": "document-understanding-2026-10-13",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
-  "last_code_commit": "64570b9a66738410a5299ec5d98438e5160a04ee",
+  "last_code_commit": "861b7b3360753baf845f186a2cb7043b4de14690",
   "code_ci": {
-    "id": 40166148355,
-    "head_sha": "64570b9a66738410a5299ec5d98438e5160a04ee",
+    "id": 40168702115,
+    "job_id": 121094966664,
+    "head_sha": "861b7b3360753baf845f186a2cb7043b4de14690",
     "status": "completed",
     "conclusion": "success",
-    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40166148355",
-    "observed_at": "2026-10-25T05:06:25Z",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40168702115",
+    "observed_at": "2026-10-25T06:23:36Z",
     "run_scope": "Fast checks job including full tests/unit suite",
-    "duration": "4m29s"
+    "duration": "3m09s",
+    "annotations": [
+      "Node.js 20 deprecation warning for actions/checkout@v4 and actions/setup-python@v5; GitHub forces Node.js 24.",
+      "ubuntu-latest migration notice to Ubuntu 26 beginning 2026-10-19."
+    ]
   },
   "formal_v4_offline_selection_replay_20261025": {
     "status": "EXACT_REPRODUCED_NO_PAID_CALL",
@@ -318,7 +323,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "ST-A09 source-context root fix is implemented locally and independently reviewed. It filters complete generic phase phrases before bigrams, keeps project context one-hop outside transitive qualification closure, and charges six text-length passes. Related 67 tests, Ruff, mypy, diff-check, and a zero-cost real annual14 replay pass; the 112-span coverage remains incomplete and content is not regraded. Publish only this node and verify exact-head CI, then continue the other annual14 partial root causes.",
+  "next_step_now": "ST-A09 source-context root fix is committed and pushed at 861b7b3360753baf845f186a2cb7043b4de14690; exact-head GitHub CI 40168702115 succeeded in 3m09s. It filters complete generic phase phrases before bigrams, keeps project context one-hop outside transitive qualification closure, and charges six text-length passes. Final publication rerun: 94 tests across the same three related files, Ruff, mypy, diff-check, local 154 contract smoke, and zero-cost real annual14 replay pass. The 112-span coverage remains incomplete and content is not regraded. Continue the other annual14 partial root causes.",
   "parallel_work_packages": [
     {
       "id": "IR-REPORT-GENERATION",
@@ -377,14 +382,14 @@
   "r1_stage_ref": "r1-holdout-20261021/stage-progress.json",
   "r1_freeze_review": "review/r1-holdout-freeze-review-20261021.json",
   "last_verified_successful_code_ci": {
-    "id": 40166148355,
-    "head_sha": "64570b9a66738410a5299ec5d98438e5160a04ee",
+    "id": 40168702115,
+    "head_sha": "861b7b3360753baf845f186a2cb7043b4de14690",
     "status": "completed",
     "conclusion": "success",
-    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40166148355",
-    "observed_at": "2026-10-25T05:06:25Z",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40168702115",
+    "observed_at": "2026-10-25T06:23:36Z",
     "run_scope": "Fast checks job including full tests/unit suite",
-    "duration": "4m29s"
+    "duration": "3m09s"
   },
   "r5_integration_ref": "r1-holdout-20261021/r5-integration.json",
   "r1_four_review_ref": "r1-holdout-20261021/initial-audit/four-review-observation.json",
@@ -832,7 +837,7 @@
     "At a major gate, independently review exact source/test/evidence SHAs, then replay the unchanged real-source gold across affected markets and document types. Keep old paid receipts immutable and preserve all review/partial states.",
     "Only after the offline coverage and quality gate passes, make a newly configured bounded summary attempt; verify summary quality, cache recovery, and actual RF use. Continue W12 four-review and the company holdout loop afterward."
   ],
-  "last_updated_utc": "2026-10-25T06:14:20Z",
+  "last_updated_utc": "2026-10-25T06:23:36Z",
   "latest_publish_validation": {
     "source_commit": "1e5e6c1aff3680a46ca9dbab14b322b0f7f9374c",
     "verified_push_head": "f73afb89be1f4caf610432211281e07a14e58c77",
@@ -1684,7 +1689,7 @@
     "independent_review_json": "review/r1-w08-material-value-20261024/bullet-parent-fix-20261025/independent-review.json"
   },
   "annual14_st_a09_context_closure_20261025": {
-    "status": "LOCAL_IMPLEMENTATION_INDEPENDENT_REVIEW_PASS_PENDING_PUBLICATION_CONTENT_NOT_REGRADED",
+    "status": "PUBLISHED_EXACT_HEAD_CI_PASS_CONTENT_NOT_REGRADED",
     "source_sha256": "7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
     "page_count": 249,
     "selected_count": 112,
@@ -1717,6 +1722,8 @@
     "replay_receipt_sha256": "20c4d26e7a8f9ba050eea9e6ccb6eee0aa3c3c29785b524cb6115e58a80b304f",
     "independent_review": "review/r1-w08-material-value-20261024/bullet-parent-fix-20261025/context-replay-rootfix-20261025/independent-review.md",
     "independent_review_sha256": "384aa9bae72d4de3ebc331ca93d8491ebe39b107931e347c1c81a9ee3ccefd2d",
-    "next_action": "Commit/push only this rootfix, tests, replay evidence, and PWF; verify exact new-head CI; then continue remaining annual14 partial root-cause work without changing content grades."
+    "published_commit": "861b7b3360753baf845f186a2cb7043b4de14690",
+    "exact_head_ci": "https://github.com/zhengcb81/company-wiki/actions/runs/40168702115",
+    "next_action": "Continue remaining annual14 partial root-cause work without changing content grades."
   }
 }

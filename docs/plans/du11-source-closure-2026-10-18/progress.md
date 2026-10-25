@@ -1045,4 +1045,5 @@ Root cause from the configured model and official MiniMax API documentation: `Mi
 - **大节点测试：** 新增阶段前缀异对象/经营数量负例、generic phrase词项负例、A-B/B-C桥接限制，以及同项目里程碑/容量正例和support/context隔离。初始三个测试文件67/67通过（4.04秒）；发布前同三文件最终复测94/94通过（3.60秒），Ruff、两个源文件mypy、diff-check通过。最终独立复审PASS，报告绑定源码SHA `ee77cd8c…14d16b4`、`65ef7a2b…3953ce`和测试SHA `06823e76…12641c`。
 - **真实资料验收：** 重放本地药明康德FY2025原件，SHA `7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2`；249页、112片段/8,915字符、工作量10,565,038/16,000,000，未耗尽。第12页paragraph 29扩产日期与paragraph 30容量在各自span中互相成为context，但support集合保持分离；0模型调用/下载/原文复制，原件和374个生产Python文件稳定。`coverage_complete=false`、`whole_content_pass=false`、`content_quality=not_regraded`，年度14评分仍8 pass/6 partial/0 missing。
 - **收据：** [独立复审](review/r1-w08-material-value-20261024/bullet-parent-fix-20261025/context-replay-rootfix-20261025/independent-review.md)、[回放收据](review/r1-w08-material-value-20261024/bullet-parent-fix-20261025/context-replay-rootfix-20261025/replay-receipt.json)、selection及trace在同目录。QA-RAG-SAFE-REBUILD仍按既有ROOT验收记录标记外部卡已接收，未跨仓合并。
-- **下一步：** 定点暂存本次两份源码、测试、上述证据和PWF，提交/推送并核精确HEAD CI；随后查annual14其他partial的真实共同根因，不重复全量长测。
+- **发布完成：** 提交`861b7b3360753baf845f186a2cb7043b4de14690`推送至`master`；本地pre-push 154项契约smoke通过，GitHub精确HEAD CI `40168702115`成功（3分09秒）。
+- **下一步：** 继续查annual14其他partial的真实共同根因，不重跑无关的长时全量检查；在内容重评之前维持8通过/6部分/0缺失。
