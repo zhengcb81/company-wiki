@@ -577,5 +577,6 @@ RF最终pin9669c4d7精确CI已success；本次PWF汇总正常提交/推送后，
 
 1. **分类器根因修复并通过最终独审。** 首轮独立复核发现地区快捷路径绕过成本科目排除，可把 `Cost of revenue from customers in US markets` 误判为收入地域。新增两条中性负例后先复现RED，再把共用的 `_ENGLISH_REVENUE_SUBJECT` 规则接入普通与快捷分类路径；完整分类模块39/39通过，Ruff/diff-check通过。最终独立复核确认首轮P2已修复，无新P0–P2；SHA与边界见[独审收据](review/r1-w08-material-value-20261024/geography-source-grammar-independent-review-20261025.json)。
 2. **真实来源验证完成，内容质量仍待复核。** 冻结Wuxi annual14零费用回放证明ST-A03第16页注释现在准入且入选；38条共同准入记录只有这一条变化。最终修改后的离线回放仍观察到14个gold标签、72个目标单元，选材112/112，1,440候选，工作量9,867,763/16,000,000；原文hash验证且代码树稳定，0模型调用/下载/原文复制。完整输入/输出SHA、证据定位和scratch清理记录见[来源回放收据](review/r1-w08-material-value-20261024/geography-source-grammar-replay-20261025.json)。仍保持既有来源内容审查8通过/6部分/0缺失；来源准入通过不自动提升内容分数。
-3. **下一步顺序：** 仅提交本节点所属源码、测试和PWF，正常推送并核对精确HEAD CI。然后沿同一source-owner思路处理其余五个partial目标（ST-A01/A02/A05/A09/A13），每项先定位原文/投影/依赖/消费层根因，再写中性RED；不增加公司特例、预算或批次。
+3. **发布完成。** 源码、回归测试和PWF已提交`81c9d97c8b551de285a385050caa600eea9106ca`并推送`master`；精确CI `40163967926`通过（Fast checks/完整`tests/unit`，4分29秒）。Pre-push选择29个受影响目标，另有154项contract smoke通过24.49秒；343个宽范围目标仍交由CI。
+4. **下一步：** 沿同一source-owner思路处理其余五个partial目标（ST-A01/A02/A05/A09/A13），每项先定位原文/投影/依赖/消费层根因，再写中性RED；不增加公司特例、预算或批次。
 4. **大节点验收：** 五项真实来源问题形成一组后做一次独立复核和多文种/市场回放；之后才做bounded content regrade、正式摘要、缓存恢复和RF实际消费。除非冻结必需事实确需新增跨度，否则不扩大批次；不重放旧付费formal-v4收据。

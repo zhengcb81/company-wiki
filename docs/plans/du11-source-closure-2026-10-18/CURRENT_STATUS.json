@@ -2,36 +2,36 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-25",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "V4_DEFAULT_AND_RECOVERY_PUSHED_EXACT_CI_GREEN_CONTENT_COVERAGE_AND_RF_ACCEPTANCE_OPEN",
+  "overall_status": "V4_AND_ST_A03_SOURCE_FIX_PUSHED_EXACT_CI_GREEN_CONTENT_COVERAGE_AND_RF_ACCEPTANCE_OPEN",
   "current_authorized_scope": "User resumed current mainline with continue on2026-10-23. Prior pause superseded; native goal active verified.",
   "parent_plan_id": "document-understanding-2026-10-13",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
-  "last_code_commit": "fc7cfa6d0d8f7b633a216798d168d75a791f57e8",
+  "last_code_commit": "81c9d97c8b551de285a385050caa600eea9106ca",
   "code_ci": {
-    "id": 40162702684,
-    "job_id": 121077406567,
+    "id": 40163967926,
+    "job_id": 121081108478,
     "check_id": null,
-    "head_sha": "fc7cfa6d0d8f7b633a216798d168d75a791f57e8",
+    "head_sha": "81c9d97c8b551de285a385050caa600eea9106ca",
     "status": "completed",
     "conclusion": "success",
-    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40162702684",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40163967926",
     "failed_test_count": 0,
     "junit_report": null,
     "failure_summary": null,
-    "observed_at": "2026-10-25T04:59:07Z",
+    "observed_at": "2026-10-25T05:06:25Z",
     "annotations": [
       "Node.js 20 deprecation warning for actions/checkout@v4 and actions/setup-python@v5; GitHub forces Node.js 24.",
       "ubuntu-latest migration notice to Ubuntu 26 beginning 2026-10-19."
     ],
     "run_scope": "Fast checks job including full tests/unit suite",
-    "duration": "4m31s",
+    "duration": "4m29s",
     "previous_successful_ci": {
-      "id": 40148571611,
-      "head_sha": "3dc04a8e3e78726ed155bf9da65a4e65c7cf4f81",
+      "id": 40162702684,
+      "head_sha": "fc7cfa6d0d8f7b633a216798d168d75a791f57e8",
       "conclusion": "success",
-      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40148571611"
+      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40162702684"
     },
     "previous_failed_ci": {
       "id": 40143579006,
@@ -346,7 +346,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "Selector 0.9 task-scoped v4 summary and paid-response recovery are published; exact CI 40148571611 is green. QA-RAG-SAFE-REBUILD, IR-REPORT-GENERATION, and MC-OUTPUT-INTEGRITY are accepted deliveries on independent repositories. For Wuxi annual14 ST-A03, the first independent review found a P2 shortcut bypass in the cost-label exclusion; two regression negatives reproduced it and the shared revenue-subject rule now protects both classifier paths. The complete classifier module is 39/39 green and the post-fix zero-cost real-source replay is stable; final independent review is pending before publication. The 14-target source output is not regraded: prior 8 pass/6 partial/0 missing remains the last reviewed content result. No wire schema changed; do not replay the old paid formal-v4 receipt.",
+  "next_step_now": "Selector 0.9 task-scoped v4 summary and paid-response recovery are published; exact CI 40148571611 is green. QA-RAG-SAFE-REBUILD, IR-REPORT-GENERATION, and MC-OUTPUT-INTEGRITY are accepted deliveries on independent repositories. ST-A03's shared revenue/cost geography classifier repair passed final independent review, was pushed in 81c9d97c, and exact CI 40163967926 is green. The classifier module is 39/39; the zero-cost annual14 source replay is stable. This is source admission evidence only: content remains 8 pass/6 partial/0 missing and no content regrade was performed. Next trace the five other partial targets. No wire schema changed; do not replay the old paid formal-v4 receipt.",
   "parallel_work_packages": [
     {
       "id": "IR-REPORT-GENERATION",
@@ -1586,7 +1586,7 @@
     "budget_authority": "The later 2026-10-23 user authorization and config/resource_budget.yaml set 10,000,000 tokens and USD 20; prior 2,000,000 goal wording is stale. Current mother usage 1,783,378 tokens / USD 0.724836, retained unknown holds included."
   },
   "source_geography_classifier_root_cause_20261025": {
-    "status": "ROOT_FIX_REPLAY_AND_INDEPENDENT_REVIEW_PASS_UNPUBLISHED",
+    "status": "PUSHED_EXACT_CI_SUCCESS",
     "evidence": "review/r1-w08-material-value-20261024/geography-source-grammar-replay-20261025.json",
     "sample": "Wuxi AppTec FY2025 annual report, annual14 target ST-A03",
     "before": "eligible=false; topics=[]; admitted=false",
@@ -1646,9 +1646,12 @@
     "paid_calls": 0,
     "downloads": 0,
     "raw_copies": 0,
-    "evidence_sha256": "a867183e8293f5254bb2f0e50fcd5ff20250ac200190cb500d6c4bc4fe4c335a",
+    "evidence_sha256": "176e5fffc440f6cddc866f533744525390f30861d0563b30961c098beeeccf67",
     "independent_review_evidence_sha256": "803c330536ce9075c67d012b0e9149a388b80b887c141dfa00b2226cb3ac03ea",
     "scratch_cleanup": "PASS; isolated replay directory removed after capture",
+    "published_commit": "81c9d97c8b551de285a385050caa600eea9106ca",
+    "remote_ci_run_id": 40163967926,
+    "remote_ci_conclusion": "success",
     "initial_independent_review": {
       "result": "FAIL_P2",
       "finding": "The _REGION_CUSTOMER_REVENUE shortcut bypassed the shared cost-of exclusion and misclassified cost-of-revenue/costs-of-sales customer-region phrases.",

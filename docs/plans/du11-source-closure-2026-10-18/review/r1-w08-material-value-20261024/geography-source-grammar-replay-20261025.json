@@ -1,6 +1,6 @@
 {
   "schema_version": "wuxi-annual14-source-geography-replay/1",
-  "status": "ROOT_FIX_REPLAY_AND_INDEPENDENT_REVIEW_PASS_UNPUBLISHED",
+  "status": "ROOT_FIX_REPLAY_INDEPENDENT_REVIEW_AND_EXACT_CI_PASS_PUSHED",
   "sample": "Wuxi AppTec FY2025 annual report; annual14 source checklist",
   "input_source_sha256": "7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
   "input_source_byte_size": 1608226,
@@ -141,5 +141,19 @@
     "downloads": 0,
     "raw_copies": 0,
     "scratch_cleanup": "PASS; isolated replay directory removed after receipt capture"
+  },
+  "publication": {
+    "commit": "81c9d97c8b551de285a385050caa600eea9106ca",
+    "branch": "master",
+    "pushed": true,
+    "remote_ci_run_id": 40163967926,
+    "remote_ci_job_id": 121081108478,
+    "remote_ci_head_sha": "81c9d97c8b551de285a385050caa600eea9106ca",
+    "remote_ci_status": "completed",
+    "remote_ci_conclusion": "success",
+    "remote_ci_duration": "4m29s",
+    "remote_ci_scope": "Fast checks including full tests/unit",
+    "observed_at": "2026-10-25T05:06:25Z",
+    "local_pre_push": "PASS; 29 affected targets selected and CI contract smoke 154 passed in 24.49s; broad affected set 343 deferred to CI"
   }
 }
