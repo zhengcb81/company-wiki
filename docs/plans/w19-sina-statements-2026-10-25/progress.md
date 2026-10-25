@@ -52,3 +52,10 @@ B节点按唯一owner实施：contracts/normalize→sina_provider→schema/store
 
 ### 期间真实响应总字节（wire）
 lrb 705,179B + fzb 1,104,886B + llb 647,868B + 美的397,408B + 招行(~2页) + BJ no_data 44B + 早期BJ探针88B + 官方PDF 9,168,457B（另一工具另一预算）≈ 12MB+9MB < 20MB上限。
+
+## 2026-10-25 独立审查轮次记录
+
+- **首轮**（agent_2d649eaf，对 CWP e583904d/FF a211d3a）：PASS_WITH_FIXES，9 findings（R1 范围放宽谎报 complete、R5 未提交改动为 blocking）→ 全部根修于 CWP ae317ca9 / FF 7d9bb85。
+- **第二轮**（同审查者，对 ae317ca9/7d9bb85）：PASS_WITH_FIXES，新增 R10（T2b/T2c 无 from/all_history 仍谎报、T3b 供应方新增更近期不重抓）与 R11（replay 跨实体污染）blocking，R12 continuation 三缺陷，R13/R14 low；同时确认 R1-R9 修复与 R9 字节账精确相等 → 根修于 CWP 71e98ed0 / FF d396fe7（coverage 表 fetched_from/fetched_to 抓取包络 + 方向化 _needs_fetch；_source_owner_security 归属闸门 fail-closed；token 按表作用域；replay 分支前置 + 完整信封）。
+- **第三轮补审**（对 71e98ed0/d396fe7）：进行中；结论将回填 delivery/w19/review.md 并随 handoff 提交。
+- 每轮审查报告原样保留在 delivery/w19/review.md|json，未用作者转述替代。
