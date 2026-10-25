@@ -347,9 +347,9 @@
     "R/R MCL与R/R CLL/SLL获FDA快速通道资格"
    ],
    "must_not_assert": [
-    "三期试验已入组（预计2024Q4或2025Q1首例）"
+    "BGB-16673三期临床试验已开始入组"
    ],
-   "reason": "扩展队列入组中vs三期预计首例：进度层次。"
+   "reason": "扩展队列入组中vs三期预计首例：进度层次（三期预计2024Q4或2025Q1入组首例受试者，与同文件h1-sonrotoclax-plan锚句互证）。"
   },
   {
    "id": "h1-frost-sullivan-currency",

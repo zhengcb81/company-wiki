@@ -26,6 +26,18 @@ def sha256_file(path: Path) -> str:
     return hashlib.sha256(Path(path).read_bytes()).hexdigest()
 
 
+def sha256_committed_bytes(path: Path) -> str:
+    """SHA-256 over the file's committed (LF) bytes.
+
+    JSON payloads are committed with LF endings; a CRLF checkout must not
+    change what a pinned sha means, so manifest/gold bindings hash the
+    line-ending-normalized bytes. The original's own sha256 is never computed
+    this way - only in-repo JSON receipts.
+    """
+    data = Path(path).read_bytes().replace(bytes([13, 10]), bytes([10]))
+    return hashlib.sha256(data).hexdigest()
+
+
 def load_manifest(path: Path) -> dict[str, Any]:
     record = json.loads(Path(path).read_text(encoding="utf-8"))
     if record.get("schema_version") != MANIFEST_SCHEMA:
@@ -44,21 +56,21 @@ def load_manifest(path: Path) -> dict[str, Any]:
         if sample["sample_id"] in seen:
             raise ManifestError(f"duplicate sample_id {sample['sample_id']!r}")
         seen.add(sample["sample_id"])
-        sha = sample["source_ref"]["content_sha256"]
+        ref = sample["source_ref"]
+        if not isinstance(ref, Mapping) or not set(_REQUIRED_SOURCE_REF_FIELDS) <= ref.keys():
+            raise ManifestError(f"{where}.source_ref is missing required fields")
+        sha = ref["content_sha256"]
+        if not isinstance(sha, str) or len(sha) != 64 or sha != sha.lower():
+            raise ManifestError(f"{where}.source_ref.content_sha256 must be a lowercase sha256")
+        for key in ("document_id", "source_id"):
+            if not ref[key].endswith(sha):
+                raise ManifestError(f"{where}.source_ref.{key} does not bind the content sha")
         if sha in seen_shas:
             raise ManifestError(
                 f"two samples bind the same original content sha {sha[:12]} "
                 "(one material cannot impersonate two independent originals)"
             )
         seen_shas.add(sha)
-        ref = sample["source_ref"]
-        if not isinstance(ref, Mapping) or not set(_REQUIRED_SOURCE_REF_FIELDS) <= ref.keys():
-            raise ManifestError(f"{where}.source_ref is missing required fields")
-        if not isinstance(sha, str) or len(sha) != 64 or sha != sha.lower():
-            raise ManifestError(f"{where}.source_ref.content_sha256 must be a lowercase sha256")
-        for key in ("document_id", "source_id"):
-            if not ref[key].endswith(sha):
-                raise ManifestError(f"{where}.source_ref.{key} does not bind the content sha")
         prior = sample["prior_use"]
         if not isinstance(prior, Mapping) or prior.get("status") not in {"fresh", "local-unseen", "development"}:
             raise ManifestError(f"{where}.prior_use.status must be fresh/local-unseen/development")
@@ -78,7 +90,7 @@ def verify_manifest_gold(manifest: Mapping[str, Any], manifest_path: Path) -> li
         gold_file = gold_path_for(Path(manifest_path), sample)
         if not gold_file.exists():
             raise ManifestError(f"gold file missing for {sample['sample_id']}: {gold_file}")
-        actual = sha256_file(gold_file)
+        actual = sha256_committed_bytes(gold_file)
         if actual != sample["gold_sha256"]:
             raise ManifestError(
                 f"gold sha mismatch for {sample['sample_id']}: manifest "

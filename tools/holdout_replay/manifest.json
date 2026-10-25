@@ -32,7 +32,7 @@
   {
    "sample_id": "w18-cn-zijin-fy2025",
    "gold_file": "gold/w18-cn-zijin-fy2025.json",
-   "gold_sha256": "6a2cdb2c7379f5c4982feffc88b5a87dbe50aeebbf99d38c0c7bfacccf812713",
+   "gold_sha256": "be6f5fbea15204afdcc8e8e94ad7d761498d834b9487670037a5ff6b825743ca",
    "document_kind": "annual_report",
    "market": "CN",
    "language": "zh",
@@ -69,7 +69,7 @@
   {
    "sample_id": "w18-cn-beigene-h1-2024",
    "gold_file": "gold/w18-cn-beigene-h1-2024.json",
-   "gold_sha256": "20a0f79c59337803b0a7526e326579e498dfb5bb7c1f4f1ce2461065dff40b2c",
+   "gold_sha256": "e8271afbeffe759a4811bca37f03aed2e846c5fdb9ed58881a7629dc7a9346d9",
    "document_kind": "semi_annual_report",
    "market": "CN",
    "language": "zh",
@@ -102,7 +102,7 @@
   {
    "sample_id": "w18-cn-beigene-ir-202206",
    "gold_file": "gold/w18-cn-beigene-ir-202206.json",
-   "gold_sha256": "b18ee5c723edbf4c3a6e1fcfdb21365b240827429af9d2993eddecd407fdbda6",
+   "gold_sha256": "40c78a5474a62ea8a857ffa5607de2efbe835b4740e840ede36a041d96a4989b",
    "document_kind": "investor_relations",
    "market": "CN",
    "language": "zh",
@@ -135,7 +135,7 @@
   {
    "sample_id": "w18-cn-beigene-ipo",
    "gold_file": "gold/w18-cn-beigene-ipo.json",
-   "gold_sha256": "542082387361571d625ad9326b882687f4e3e8c404a12cbed4c14d2bd64184ce",
+   "gold_sha256": "81f16d69faa7d18b1ffaf3ccb41e0eed9a80a86b85449deb556a5c9e6c7c2cdd",
    "document_kind": "prospectus",
    "market": "CN",
    "language": "zh",
@@ -168,7 +168,7 @@
   {
    "sample_id": "w18-hk-beigene-fy2022",
    "gold_file": "gold/w18-hk-beigene-fy2022.json",
-   "gold_sha256": "d7bbaab1cd12d1c59d9e189af13684e3820caf858ee1d42a7d957f0236d07647",
+   "gold_sha256": "cc978beb0fb739ddd2d17e6548cf775c010b25b5375ef6a53954aba9083fdb50",
    "document_kind": "annual_report",
    "market": "HK",
    "language": "zh-Hant",
@@ -201,7 +201,7 @@
   {
    "sample_id": "w18-us-alphabet-fy2025",
    "gold_file": "gold/w18-us-alphabet-fy2025.json",
-   "gold_sha256": "8b678e5829f6d5d4df07b41089c1a9ae3775fef5e5b1f1ed0338cb75d58b9591",
+   "gold_sha256": "6e404729350a3487e3337ffef2170285fef397d4889587c89348604bc234f235",
    "document_kind": "annual_report",
    "market": "US",
    "language": "en",
@@ -238,7 +238,7 @@
   {
    "sample_id": "w18-cn-hikvision-call-2024h1",
    "gold_file": "gold/w18-cn-hikvision-call-2024h1.json",
-   "gold_sha256": "2ba0985cd571116cb5c145853b409bec835da92b387c89c3a01b23303e476dc6",
+   "gold_sha256": "12acfb4089a00af4b5f721b31bf8b4b1683cf5ccf8d66b57ff33f0f43e1f0a6f",
    "document_kind": "investor_call_transcript",
    "market": "CN",
    "language": "zh",
@@ -271,7 +271,7 @@
   {
    "sample_id": "w18-cn-sugondata-charter",
    "gold_file": "gold/w18-cn-sugondata-charter.json",
-   "gold_sha256": "90ff0e3ff2a6357f6d49c4e7efee007219d65e1bbd4da1d4532d1e51429523d5",
+   "gold_sha256": "3a6c71db44c910b25a851d94f830e656b3d502b52acef2123cb3f949f10e676a",
    "document_kind": "ir_policy",
    "market": "CN",
    "language": "zh",

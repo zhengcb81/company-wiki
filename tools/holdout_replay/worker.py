@@ -152,17 +152,18 @@ def _compile_model_view(spec: dict[str, Any], sample: dict[str, Any],
     return configured_preview(spec, raw_request)
 
 
-def _selector_versions() -> dict[str, Any]:
+def _selector_versions(compile_selector_version: str) -> dict[str, Any]:
     """Record which selector generation each replay path actually uses.
 
     The direct observation path follows the production default; the compile
-    path pins the selector required by the v4 scoped projection. Both are
-    stamped per artifact so the two visibility layers are never conflated.
+    path pins the selector passed for this job (the v4 scoped projection
+    requires 0.9.0). Both are stamped per artifact so the two visibility
+    layers are never conflated.
     """
     from company_wiki.source_catalog import narrative_evidence
     return {
         "observe_path_default": getattr(narrative_evidence, "NARRATIVE_SELECTOR_VERSION", None),
-        "compile_path_pinned": "0.9.0",
+        "compile_path_pinned": compile_selector_version,
     }
 
 
@@ -184,7 +185,8 @@ def run_job(job: dict[str, Any]) -> dict[str, Any]:
     }
     observed = _native_observation(path, sample)
     result["native_observed"] = observed
-    result["selector_versions"] = _selector_versions()
+    result["selector_versions"] = _selector_versions(
+        job.get("compile_selector_version", "0.9.0"))
 
     compile_spec = job.get("compile_spec")
     tasks: dict[str, str] | None = None

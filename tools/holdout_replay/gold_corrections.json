@@ -111,8 +111,15 @@
    "severity": "P3（复审N2：F6同型残留清理）",
    "field": "must_not_assert",
    "old": "5处禁令串仍含真值对照括注（如'（关键性超40项）''（自研仅3款）'等）",
-   "new": "禁令仅保留假命题本体；真值对照移至reason",
+   "new": "禁令仅保留假命题本体；真值对照移至reason（执行记录：4/5首轮清理+1处同型顺手清理；h1-bgb16673-300残留括注在终审后补清，见下一条）",
    "source_side_reason": "与F6同法：防止朴素子串/数字匹配把候选摘要中的正确对照陈述误判为违规。"
+  },
+  {
+   "sample": "w18-cn-beigene-h1-2024", "fact": "h1-bgb16673-300", "severity": "P3（终审残留补清）",
+   "field": "must_not_assert",
+   "old": "三期已入组（预计2024Q4或2025Q1首例）",
+   "new": "BGB-16673三期临床试验已开始入组",
+   "source_side_reason": "终审确认的最后一处真值括注；对照真值（预计2024Q4或2025Q1首例）移至reason，与同文件h1-sonrotoclax-plan锚句可互证。锚点未变。"
   }
  ],
  "manifest_changes": [
