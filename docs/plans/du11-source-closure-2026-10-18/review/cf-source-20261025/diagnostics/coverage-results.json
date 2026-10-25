@@ -1,0 +1,10 @@
+{
+  "baseline_head": "c3ad2ece1827cc7558e3c86a9f5b327c644d9595",
+  "source_sha256": "5b86913bf420c13af3e62fa4eceb310c51e24599c6cd58a810ce2fbeedc2c412",
+  "diagnostic_differential_cases": 500,
+  "zero_budget_no_iteration": "PASS",
+  "full_structure_differential_cases": 24,
+  "duplicate_output_lists_independent": "PASS",
+  "downloads": 0,
+  "paid_calls": 0
+}

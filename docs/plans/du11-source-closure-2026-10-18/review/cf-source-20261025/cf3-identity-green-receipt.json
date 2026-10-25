@@ -1,0 +1,25 @@
+{
+  "command": [
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/unit/test_cf3_algorithm_identity.py",
+    "tests/unit/test_cf3_relation_work.py",
+    "tests/unit/document_understanding_structure",
+    "tests/unit/document_understanding_root/test_structure_shared_work_budget.py",
+    "tests/unit/document_understanding_layout_hints/test_b_tables_and_relations.py",
+    "tests/unit/document_understanding_selection/test_reading_decision_inventory.py",
+    "tests/unit/du11_source_closure/test_source_dependency_scope.py",
+    "tests/unit/du11_tail_integration/test_tail_source_wiring.py"
+  ],
+  "exit_code": 1,
+  "seconds": 36.494,
+  "temporary_root_restored_absent": true,
+  "paid_calls": 0,
+  "downloads": 0
+}

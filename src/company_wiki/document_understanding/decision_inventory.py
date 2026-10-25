@@ -29,6 +29,24 @@ _NARRATIVE_MATERIAL_MATCHER = "company_wiki.source_catalog.narrative_replay"
 _MATERIAL_MATCHERS = frozenset({_NORMALIZED_MATERIAL_MATCHER, _NARRATIVE_MATERIAL_MATCHER})
 
 
+def _structure_algorithm_hashes(root: Path | None = None) -> dict[str, str]:
+    """Bind the owned structure package, including future child algorithms.
+
+    Module names and normalized bytes are portable between installations. The
+    package boundary excludes tests, configuration and incidental local files.
+    Reading source files does not import children or create another registry.
+    """
+    package_root = root if root is not None else Path(__file__).parent / "structure"
+    hashes = {}
+    for path in sorted(package_root.rglob("*.py")):
+        parts = path.relative_to(package_root).with_suffix("").parts
+        if parts[-1] == "__init__":
+            parts = parts[:-1]
+        name = ".".join(("company_wiki.document_understanding.structure", *parts))
+        hashes[name] = sha256(path.read_bytes().replace(b"\r\n", b"\n")).hexdigest()
+    return hashes
+
+
 def _source_usability_version(mime_type: str | None, material_matcher: str | None = None) -> str:
     """Bind source-owner code actually used by this carrier, independent of host."""
     from company_wiki.automation.narrative_formats import NORMALIZED_MIME_TYPES
@@ -87,10 +105,6 @@ def _versions(*, pdf_frontend: bool = False, mime_type: str | None = None,
         # Early composition transfers native proof into each target dependency.
         # Actual byte changes in either owner invalidate complete cached reads.
         "company_wiki.document_understanding.pipeline",
-        "company_wiki.document_understanding.structure",
-        "company_wiki.document_understanding.structure.sections",
-        "company_wiki.document_understanding.structure.layout",
-        "company_wiki.document_understanding.structure.contract",
         "company_wiki.document_understanding.layout_bridge",
         "company_wiki.document_understanding.observation_adapter",
         "company_wiki.document_understanding.layout_hints.headings",
@@ -112,16 +126,19 @@ def _versions(*, pdf_frontend: bool = False, mime_type: str | None = None,
             raise RuntimeError(f"module {name} has no file")
         return Path(path)
 
-    versions = {"inventory": "1.10.0",
+    business_hashes = {name: sha256(
+        _module_path(name).read_bytes().replace(b"\r\n", b"\n")).hexdigest()
+        for name in business_modules}
+    business_hashes.update(_structure_algorithm_hashes())
+
+    versions = {"inventory": "1.11.0",
             "context_policy": _digest(registry._CATALOG.get("context_policy", {})), "selector": "0.9.0", "budget": READING_BUDGET_POLICY,
             "document_work_limit": str(load_budget_policy().document_work_limit),
             "native_table_bridge": NATIVE_TABLE_BRIDGE_VERSION,
             "source_usability": _source_usability_version(
                 mime_type or ("application/pdf" if pdf_frontend else None), material_matcher),
             "business_policy": READING_BUSINESS_POLICY_VERSION,
-            "business_algorithms": _digest({name: sha256(
-                _module_path(name).read_bytes().replace(b"\r\n", b"\n")).hexdigest()
-                for name in business_modules}),
+            "business_algorithms": _digest(business_hashes),
             "strategy_binding": STRATEGY_BINDING_VERSION,
             "observation_adapter": OBSERVATION_ADAPTER_VERSION,
             "continuity": NARRATIVE_CONTINUITY_FEATURE_VERSION,

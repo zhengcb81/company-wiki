@@ -1,0 +1,55 @@
+{
+  "purpose": "Immutable diagnostics/receipts, not another production reader. Reproduce old script locations by copying frozen bytes to original task-owned paths; each real replay refuses to overwrite existing result. New source validation needs a new attempt, never edits old receipt.",
+  "files": [
+    {
+      "original": ".planning/cf-source-20261025/replay_ipo.py",
+      "frozen_copy": "diagnostics/replay_ipo.py",
+      "sha256": "bf9d0e8aaf7005ece74a36571e5d9c5a8cba4947b79c973b753474ef5c395af9"
+    },
+    {
+      "original": ".planning/cf-source-20261025/replay_ipo_indexed.py",
+      "frozen_copy": "diagnostics/replay_ipo_indexed.py",
+      "sha256": "04c7dc75b197730746b305cb4f9a4a7274fb1b1cbc1c41e2e27b6b8ff5952a29"
+    },
+    {
+      "original": ".planning/cf-source-20261025/inspect_dom.py",
+      "frozen_copy": "diagnostics/inspect_dom.py",
+      "sha256": "3fa4ba9d54dd6b0eaf21e3ed54c94df88aca75a2f5f1e344a0e28fd1104317ed"
+    },
+    {
+      "original": ".planning/cf-source-20261025/run_tests.py",
+      "frozen_copy": "diagnostics/run_tests.py",
+      "sha256": "12ff550ae6796fa12e405394eda6574346586d53d732c02dab94017325ea9ee5"
+    },
+    {
+      "original": ".planning/cf-source-20261025/cf3-relations-red.log",
+      "frozen_copy": "diagnostics/cf3-relations-red.log",
+      "sha256": "c72dab36898e30762ec8c22483fb0ccbb4a33334b6310561b8fb5006474e4346"
+    },
+    {
+      "original": ".planning/cf-source-20261025/cf3-geometry-red.log",
+      "frozen_copy": "diagnostics/cf3-geometry-red.log",
+      "sha256": "f75ba8336a689c3e245bc28eec6c56b80b0138aa30350a089405417d75a8d82e"
+    },
+    {
+      "original": ".planning/cf-source-20261025/reviewer/probe.py",
+      "frozen_copy": "diagnostics/probe.py",
+      "sha256": "11169d1cb3bce21f6c5e97cd4d4f5c987d17b0dfdc7a8d12cab1709bdc1a9f97"
+    },
+    {
+      "original": ".planning/cf-source-20261025/reviewer/probe-results.json",
+      "frozen_copy": "diagnostics/probe-results.json",
+      "sha256": "caeacf98e4ff63e1a916566ceb43d66fbcd4b86f5e568c45c91c1e021ca6a2b7"
+    },
+    {
+      "original": ".planning/cf-source-20261025/reviewer/coverage-results.json",
+      "frozen_copy": "diagnostics/coverage-results.json",
+      "sha256": "58620195a7a4fa20423d14ae55a1da151904005c4f83cef75c03425fb41a8865"
+    },
+    {
+      "original": ".planning/cf-source-20261025/reviewer/coverage_probe.py",
+      "frozen_copy": "diagnostics/coverage_probe.py",
+      "sha256": "50968ded1af90bb8e8164e0a6628706cb4fd56a484eaceefc5258797245f819b"
+    }
+  ]
+}

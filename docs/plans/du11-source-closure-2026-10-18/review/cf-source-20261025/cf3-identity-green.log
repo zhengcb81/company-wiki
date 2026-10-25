@@ -1,0 +1,54 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 197 items
+
+tests\unit\test_cf3_algorithm_identity.py ..                             [  1%]
+tests\unit\test_cf3_relation_work.py ..........                          [  6%]
+tests\unit\document_understanding_structure\test_page_counter_furniture.py . [  6%]
+.........................                                                [ 19%]
+tests\unit\document_understanding_structure\test_structure_contracts.py . [ 19%]
+........................                                                 [ 31%]
+tests\unit\document_understanding_structure\test_structure_red.py ...... [ 35%]
+................                                                         [ 43%]
+tests\unit\document_understanding_root\test_structure_shared_work_budget.py . [ 43%]
+..................                                                       [ 52%]
+tests\unit\document_understanding_layout_hints\test_b_tables_and_relations.py . [ 53%]
+...........                                                              [ 58%]
+tests\unit\document_understanding_selection\test_reading_decision_inventory.py . [ 59%]
+................................FFF...                                   [ 78%]
+tests\unit\du11_source_closure\test_source_dependency_scope.py ........  [ 82%]
+tests\unit\du11_tail_integration\test_tail_source_wiring.py ............ [ 88%]
+......................                                                   [100%]
+
+================================== FAILURES ===================================
+_ test_w08_changed_source_implementation_invalidates_the_real_complete_decision[company_wiki.document_understanding.structure] _
+tests\unit\document_understanding_selection\test_reading_decision_inventory.py:378: in test_w08_changed_source_implementation_invalidates_the_real_complete_decision
+    assert compare_decision_dependencies(frozen, inventory.current_decision_trace(frozen))["status"] == "changed"
+E   AssertionError: assert 'same' == 'changed'
+E     
+E     - changed
+E     + same
+_ test_w08_changed_source_implementation_invalidates_the_real_complete_decision[company_wiki.document_understanding.structure.layout] _
+tests\unit\document_understanding_selection\test_reading_decision_inventory.py:378: in test_w08_changed_source_implementation_invalidates_the_real_complete_decision
+    assert compare_decision_dependencies(frozen, inventory.current_decision_trace(frozen))["status"] == "changed"
+E   AssertionError: assert 'same' == 'changed'
+E     
+E     - changed
+E     + same
+_ test_w08_changed_source_implementation_invalidates_the_real_complete_decision[company_wiki.document_understanding.structure.sections] _
+tests\unit\document_understanding_selection\test_reading_decision_inventory.py:378: in test_w08_changed_source_implementation_invalidates_the_real_complete_decision
+    assert compare_decision_dependencies(frozen, inventory.current_decision_trace(frozen))["status"] == "changed"
+E   AssertionError: assert 'same' == 'changed'
+E     
+E     - changed
+E     + same
+=========================== short test summary info ===========================
+FAILED tests/unit/document_understanding_selection/test_reading_decision_inventory.py::test_w08_changed_source_implementation_invalidates_the_real_complete_decision[company_wiki.document_understanding.structure]
+FAILED tests/unit/document_understanding_selection/test_reading_decision_inventory.py::test_w08_changed_source_implementation_invalidates_the_real_complete_decision[company_wiki.document_understanding.structure.layout]
+FAILED tests/unit/document_understanding_selection/test_reading_decision_inventory.py::test_w08_changed_source_implementation_invalidates_the_real_complete_decision[company_wiki.document_understanding.structure.sections]
+======================= 3 failed, 194 passed in 30.54s ========================

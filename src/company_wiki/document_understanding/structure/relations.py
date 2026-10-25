@@ -300,38 +300,43 @@ def language_lane_relations(
     signal.  Either way the relation only *links* the two units -- neither is
     translated, dropped, or rewritten.
     """
-    by_page_lane: dict[tuple[int | None, int], list[ObservationUnit]] = {}
+    # Index source/page once. Looking through every page/lane for each page
+    # was quadratic even when no page contained a possible pair.
+    reserve(builder._budget, len(ordering.ordered))
+    by_page: dict[tuple[str | None, int | None], dict[int, list[ObservationUnit]]] = {}
     for unit in ordering.ordered:
         if unit.column is None:
             continue
         if unit.kind in {"header", "footer"}:
             continue
-        by_page_lane.setdefault((unit.page, unit.column), []).append(unit)
+        page_lanes = by_page.setdefault((unit.source_id, unit.page), {})
+        page_lanes.setdefault(unit.column, []).append(unit)
 
-    pages = {page for page, _ in by_page_lane}
-    for page in sorted(pages, key=lambda value: (value is None, value or 0)):
-        reserve(builder._budget, len(by_page_lane))
-        lanes = sorted(
-            lane for candidate_page, lane in by_page_lane if candidate_page == page
-        )
+    reserve(builder._budget, len(by_page) * (1 + len(by_page).bit_length()))
+    for scope in sorted(by_page, key=lambda value: (value[1] is None, value[1] or 0, value[0] or "")):
+        lane_units = by_page[scope]
+        reserve(builder._budget, len(lane_units) * (1 + len(lane_units).bit_length()))
+        lanes = sorted(lane_units)
         for left_index, left_lane in enumerate(lanes):
             for right_index in range(left_index + 1, len(lanes)):
                 reserve(builder._budget)
                 right_lane = lanes[right_index]
-                left_units = by_page_lane[(page, left_lane)]
-                right_units = by_page_lane[(page, right_lane)]
+                left_units = lane_units[left_lane]
+                right_units = lane_units[right_lane]
                 _pair_lanes(
                     builder, left_units, right_units, work_budget=builder._budget
                 )
 
-    by_dom_parent: dict[str, list[ObservationUnit]] = {}
+    by_dom_parent: dict[tuple[str | None, str], list[ObservationUnit]] = {}
+    reserve(builder._budget, len(ordering.ordered))
     for unit in ordering.ordered:
         if unit.column is not None or not unit.dom_path:
             continue
         parent = unit.dom_path.rsplit(".", 1)[0]
-        by_dom_parent.setdefault(parent, []).append(unit)
-    for parent in sorted(by_dom_parent):
-        group = by_dom_parent[parent]
+        by_dom_parent.setdefault((unit.source_id, parent), []).append(unit)
+    reserve(builder._budget, len(by_dom_parent) * (1 + len(by_dom_parent).bit_length()))
+    for dom_scope in sorted(by_dom_parent, key=lambda value: (value[0] or "", value[1])):
+        group = by_dom_parent[dom_scope]
         if len(group) < 2:
             continue
         _pair_lanes(builder, group, group, allow_self=True, work_budget=builder._budget)
@@ -347,7 +352,10 @@ def _geometric_lane_pairs(
     Units are bucketed by page first, so this stays linear in the unit count
     instead of comparing the whole document pairwise.
     """
-    by_page: dict[int, list[ObservationUnit]] = {}
+    by_page: dict[tuple[str | None, int], list[ObservationUnit]] = {}
+    reserve(builder._budget, len(ordering.ordered))
+    scripts: dict[str, str] = {}
+    page_scripts: dict[tuple[str | None, int], set[str]] = {}
     for unit in ordering.ordered:
         if unit.page is None or unit.bbox is None or unit.column is not None:
             continue
@@ -359,26 +367,31 @@ def _geometric_lane_pairs(
             "table_caption",
         }:
             continue
+        reserve(builder._budget, (len(unit.text) + 63) // 64)
         script = layout_mod.script_of(unit.text)
         if script is None:
             continue
-        by_page.setdefault(unit.page, []).append(unit)
+        scope = (unit.source_id, unit.page)
+        by_page.setdefault(scope, []).append(unit)
+        scripts[unit.unit_id] = script
+        page_scripts.setdefault(scope, set()).add(script)
 
-    for page in sorted(by_page):
+    for page in sorted(by_page, key=lambda value: (value[1], value[0] or "")):
+        if len(page_scripts[page]) < 2:
+            continue
         reserve(builder._budget, len(by_page[page]) * len(by_page[page]).bit_length())
         bucket = sorted(by_page[page], key=lambda unit: (unit.y0, unit.x0))
         for index, left in enumerate(bucket):
-            left_script = layout_mod.script_of(left.text)
-            if left_script is None:
-                continue
+            left_script = scripts[left.unit_id]
             for right_index in range(index + 1, len(bucket)):
                 reserve(builder._budget)
                 right = bucket[right_index]
                 right_y, left_y = right.y0, left.y0
                 if right_y is None or left_y is None or right_y - left_y > 24:
                     break
-                reserve(builder._budget, (len(right.text) + 63) // 64)
-                if layout_mod.script_of(right.text) == left_script:
+                if scripts[right.unit_id] == left_script:
+                    continue
+                if left.kind != right.kind:
                     continue
                 if not layout_mod.vertically_aligned(left, right):
                     continue
@@ -403,6 +416,8 @@ def _pair_lanes(
     """Pair units positionally, refusing pairs without a language difference."""
     candidates: Iterable[tuple[ObservationUnit, ObservationUnit]]
     if allow_self:
+        if not _possible_language_pair(left_units, left_units, work_budget=work_budget):
+            return
         # Reserve the exact possible pairs before expansion; keep them lazy.
         reserve(work_budget, len(left_units) * (len(left_units) - 1) // 2)
         candidates = (
@@ -438,6 +453,8 @@ def _pair_by_nearest(
     work_budget: WorkBudget | None = None,
 ) -> None:
     """Unequal lane lengths: pair by vertical position, never by count order."""
+    if not _possible_language_pair(left_units, right_units, work_budget=work_budget):
+        return
     reserve(work_budget, len(left_units) * len(right_units))
     for left in left_units:
         left_y = left.y0
@@ -464,7 +481,41 @@ def _pair_by_nearest(
         )
 
 
+def _possible_language_pair(
+    left_units: Sequence[ObservationUnit],
+    right_units: Sequence[ObservationUnit],
+    *,
+    work_budget: WorkBudget | None,
+) -> bool:
+    """Reject impossible expansions with a paid linear eligibility pass.
+
+    This does not pick counterparts. Eligible inputs still follow the old
+    positional/nearest/DOM pairing and tie order. Missing language stays
+    unknown, and original attribution is a grouping boundary, not a new
+    identity verification or cache.
+    """
+    same = left_units is right_units
+    reserve(work_budget, len(left_units) + (0 if same else len(right_units)))
+
+    def families(units: Sequence[ObservationUnit]) -> dict[tuple[str | None, str], set[str]]:
+        groups: dict[tuple[str | None, str], set[str]] = {}
+        for unit in units:
+            if unit.language:
+                family = unit.language.split("-")[0].casefold()
+                if family:
+                    groups.setdefault((unit.source_id, unit.kind), set()).add(family)
+        return groups
+
+    left = families(left_units)
+    right = left if same else families(right_units)
+    reserve(work_budget, len(left))
+    return any(right.get(key) and (len(values) > 1 or values != right[key])
+               for key, values in left.items())
+
+
 def _different_language(left: ObservationUnit, right: ObservationUnit) -> bool:
+    if left.source_id != right.source_id:
+        return False
     if not left.language or not right.language:
         return False
     left_family = left.language.split("-")[0].casefold()

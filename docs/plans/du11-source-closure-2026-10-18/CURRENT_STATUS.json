@@ -2,9 +2,9 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-25",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "483cb2a5_PUBLISHED_CI_SUCCESS; SOURCE_CROSS_MARKET_CF1_CF4_OPEN; FINALIZATION_TDD54_HOST_PASS_PLUS6_STORAGE_PASS_REVIEWING; FORMAL_SUMMARY_RF_OPEN",
+  "overall_status": "CF3_STAGE1_INDEPENDENT_PASS_LOCAL_PUBLICATION_PENDING; IPO_PARTIAL112_WITHIN_UNCHANGED16M; CF1_CF2_CF3_TAIL_CF4_FORMAL_SUMMARY_RF_OPEN",
   "parallel_packages_20261025": {
-    "status": "ALL_THREE_DISPATCHED_BY_USER",
+    "status": "W16_W17_ROOT_ACCEPTED_MERGED_INSTALLED_W18_AWAITING_AUTHOR_HANDOFF",
     "entry": "harness_lanes/20261025/README.md",
     "dispatch": "harness_lanes/20261025/dispatch.json",
     "package_ids": [
@@ -13,7 +13,7 @@
       "W18-CWP-HOLDOUT"
     ],
     "separate_worktrees_and_local_pwf_seeds": true,
-    "product_implementation_started": "not_observed_by_ROOT",
+    "product_implementation_started": "W16/W17 complete; W18 separate author ownership unchanged",
     "independent_packet_review": "PASS",
     "review": "harness_lanes/20261025/packet-review.md",
     "root_scope": "CWP production source path and final real summary/cache/RF content acceptance; do not write delegated RF/Audit paths or W18 new replay/test paths during author work",
@@ -21,7 +21,7 @@
     "new_downloads": 0,
     "annual14_grade_unchanged": "Historical8/6/0 and10/4/0 reports preserved; latest source/input12/2/0; response semantics NOT_REVIEWED and RF OPEN"
   },
-  "current_authorized_scope": "User resumed current mainline with continue on2026-10-23. Prior pause superseded; native goal active verified.",
+  "current_authorized_scope": "Human continue authorizes mainline implementation. Native goal tool observed blocked on2026-10-25; no tool-supported resume and no claim of automatic resumption. Resource authority is current configured10M tokens/USD20, not stale2M goal text.",
   "parent_plan_id": "document-understanding-2026-10-13",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
@@ -2050,5 +2050,41 @@
       "filing-fetch": "c8b0e40f6772d1cad91f0bc0a127cc807c340810"
     },
     "independent_review": "harness_lanes/20261025/W19-packet-review.json"
+  },
+  "cf_source_20261025": {
+    "status": "ENGINEERING_STAGE1_INDEPENDENT_PASS_PUBLICATION_PENDING",
+    "entry": "review/cf-source-20261025/README.md",
+    "independent_review": "review/cf-source-20261025/cf3-independent-review.json",
+    "true_red": [
+      "same-language quadratic expansion",
+      "structure child source changes missed by algorithm identity",
+      "per-gap repeated complete unit iteration"
+    ],
+    "tests": "198 related PASS before coverage;147 PASS with coverage; groups overlap; independent74 PASS; mypy src375 and Ruff PASS",
+    "real_ipo": {
+      "receipt": "review/cf-source-20261025/cf3-ipo-indexed-replay.json",
+      "pages": 429,
+      "units": 14025,
+      "parse_work": 420052,
+      "understand_work_before": 11473800,
+      "understand_work_after": 6334220,
+      "selected_count_before": 0,
+      "selected_count_after": 112,
+      "work_used": 15998158,
+      "work_limit": 16000000,
+      "exhausted": true,
+      "status": "partial",
+      "content_grade": "NOT_GRADED_NO_FORMAL_IPO_GOLD"
+    },
+    "new_paid_calls": 0,
+    "new_downloads": 0,
+    "new_raw_copies": 0,
+    "remaining": [
+      "CF1 actual DOM heading/list dependencies",
+      "CF2 complete source clause/unit/modality boundaries",
+      "CF3 existing fact/candidate owner efficiency; do not add second cache",
+      "CF4 stricter independent source context gold",
+      "Formal v4 summary/cache no duplicate cost/RF adoption and company loop"
+    ]
   }
 }

@@ -1,0 +1,348 @@
+{
+  "schema_version": "cf3-independent-owner-exploration/1",
+  "plan_id": "du11-source-closure-2026-10-18",
+  "status": "INVESTIGATION_COMPLETE_NOT_PRODUCT_ACCEPTANCE",
+  "head": "c3ad2ece1827cc7558e3c86a9f5b327c644d9595",
+  "source_hashes_at_report": {
+    "src/company_wiki/document_understanding/pipeline.py": "198385623657a1704091d38435b1bc696794dd7afb768eac493b718d705c3056",
+    "src/company_wiki/document_understanding/structure/__init__.py": "db3b2cc328a8253de22cea4902a97da1ba9352b1042e11be1fcfff2d080a29bc",
+    "src/company_wiki/document_understanding/structure/_work.py": "6cc3b330a4fee0a06bd3e79fbce7ffd85b20cb69238482ef78ca29200edcd469",
+    "src/company_wiki/document_understanding/structure/relations.py": "6ce396b2535449ae47fc7b04308c789a1362db187d5df8d7ae7637f6988832e6",
+    "src/company_wiki/document_understanding/operating_states/relations.py": "0b65b713bedca344d09bd2fe00ae52941433b91aaaf2ecdc6be137abf8c2386e",
+    "src/company_wiki/source_catalog/narrative_reading.py": "aedc19846af1fc1d8a3ff2ae849fa9ba90581ff128d49cbfc523bcc9ccf6b9f9",
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": "ee77cd8cf295a5748d762b41e1fd75819b475632d44852ea81abd4c8114d16b4",
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "72f3cad8cf9e1bfa13b3aa8d442f8c69d1d92b18c1685728cdd2ebe9668d5aed"
+  },
+  "frozen_real_profile": {
+    "path": "docs/plans/du11-source-closure-2026-10-18/review/local-flow-cross-market-20261025/ipo-profile.json",
+    "sha256": "fdc0f39bc5175d9759cf9802e3f15d6af19f78422f0373d7298b4ed7787cdc44",
+    "outcome": {
+      "parsed_units": 14025,
+      "parsed_pages": 429,
+      "parse_work": 420052,
+      "work_used": 15999740,
+      "work_limit": 16000000,
+      "exhausted": true,
+      "status": "needs_review",
+      "candidate_count": 8361,
+      "selected_count": 0
+    },
+    "understand_units_accepted_work": 11473800,
+    "candidates_accepted_work": 4091862,
+    "reserve_accepted_work": 5429520,
+    "reserve_secondary_caller": "NOT_RECORDED_NOT_RECOVERABLE_FROM_SAVED_PROFILE",
+    "stage_accounting": {
+      "passes": 44,
+      "sorts": 10,
+      "units": 14025,
+      "text_blocks_64char": 14266,
+      "sort_work": 1963500,
+      "reconstructed_work": 3208304
+    },
+    "not_cpu_proportions": true
+  },
+  "neutral_negative_scaling": [
+    {
+      "family": "one_lane_each_page",
+      "n": [
+        64,
+        128,
+        256,
+        512
+      ],
+      "accepted_work": [
+        4096,
+        16384,
+        65536,
+        262144
+      ],
+      "relations": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "family": "same_dom_parent",
+      "n": [
+        64,
+        128,
+        256,
+        512
+      ],
+      "accepted_work": [
+        2016,
+        8128,
+        32640,
+        130816
+      ],
+      "relations": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "family": "unequal_lanes_same_language",
+      "n": [
+        64,
+        128,
+        256,
+        512
+      ],
+      "accepted_work": [
+        4163,
+        16515,
+        65795,
+        262659
+      ],
+      "relations": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "neutral_full_pdf": [
+    {
+      "family": "neutral_pdf_full",
+      "n": 64,
+      "pipeline_used": 23083,
+      "pipeline_status": "complete",
+      "structure_count": 2,
+      "selection_used": 355546,
+      "selection_exhausted": false,
+      "status": "needs_review",
+      "spans": 0
+    },
+    {
+      "family": "neutral_pdf_full",
+      "n": 128,
+      "pipeline_used": 47108,
+      "pipeline_status": "complete",
+      "structure_count": 4,
+      "selection_used": 712065,
+      "selection_exhausted": false,
+      "status": "needs_review",
+      "spans": 0
+    },
+    {
+      "family": "neutral_pdf_full",
+      "n": 256,
+      "pipeline_used": 96440,
+      "pipeline_status": "complete",
+      "structure_count": 8,
+      "selection_used": 1426381,
+      "selection_exhausted": false,
+      "status": "needs_review",
+      "spans": 0
+    },
+    {
+      "family": "neutral_pdf_full",
+      "n": 512,
+      "pipeline_used": 197672,
+      "pipeline_status": "complete",
+      "structure_count": 16,
+      "selection_used": 2857581,
+      "selection_exhausted": false,
+      "status": "needs_review",
+      "spans": 0
+    }
+  ],
+  "existing_session_cache": {
+    "schema_version": "cf3-existing-session-cache-probe/1",
+    "fact": {
+      "first_used": 6299,
+      "repeat_used_delta": 0,
+      "financial_projection_delta": 0,
+      "same_fact_object": true
+    },
+    "reference_rows": [
+      {
+        "target": "1",
+        "status": "ambiguous",
+        "used_delta": 98,
+        "cached_original_work": 98
+      },
+      {
+        "target": "1",
+        "status": "ambiguous",
+        "used_delta": 0,
+        "cached_original_work": 98
+      },
+      {
+        "target": "2",
+        "status": "ambiguous",
+        "used_delta": 98,
+        "cached_original_work": 98
+      },
+      {
+        "target": "2",
+        "status": "ambiguous",
+        "used_delta": 0,
+        "cached_original_work": 98
+      }
+    ],
+    "conclusion": "Existing same-owner facts, finance and identical reference keys are cached. Different targets with shared predecessors still rescan declarations; context-specific correctness must be retained.",
+    "calls": {
+      "network": 0,
+      "paid": 0,
+      "raw": 0
+    },
+    "temporary_dirs_created": 0
+  },
+  "partial_retention": [
+    {
+      "limit": 16000000,
+      "used": 66121,
+      "exhausted": false,
+      "status": "selected",
+      "spans": 2
+    },
+    {
+      "limit": 100000,
+      "used": 66121,
+      "exhausted": false,
+      "status": "selected",
+      "spans": 2
+    },
+    {
+      "limit": 50000,
+      "used": 49958,
+      "exhausted": true,
+      "status": "partial",
+      "spans": 2
+    },
+    {
+      "limit": 30000,
+      "used": 29133,
+      "exhausted": true,
+      "status": "partial",
+      "spans": 2
+    },
+    {
+      "limit": 20000,
+      "used": 18725,
+      "exhausted": true,
+      "status": "partial",
+      "spans": 2
+    },
+    {
+      "limit": 10000,
+      "used": 9813,
+      "exhausted": true,
+      "status": "needs_review",
+      "spans": 0
+    }
+  ],
+  "findings": [
+    {
+      "id": "CF3-S1",
+      "owner": "structure/relations.py::language_lane_relations",
+      "state": "PROVEN",
+      "root_cause": "Per-page comprehension scans document-wide page/lane keys; P pages with one lane incur P squared work and zero relations.",
+      "fix": "Build page-to-lanes index once, charge actual index creation and actual local visits."
+    },
+    {
+      "id": "CF3-S2",
+      "owner": "structure/relations.py::_pair_lanes",
+      "state": "PROVEN",
+      "root_cause": "All same-parent DOM pairs reserved and inspected before necessary language difference check; all same-family units still n(n-1)/2.",
+      "fix": "Reuse observed language families before enumeration; preserve original structural alignment, pair ordering and exact relation output."
+    },
+    {
+      "id": "CF3-S3",
+      "owner": "structure/relations.py::_pair_by_nearest",
+      "state": "PROVEN",
+      "root_cause": "Reserve full left*right cardinality even if all observed language families make pairs impossible.",
+      "fix": "Exclude provably impossible family buckets before nearest matching; retain mixed/missing language conservative behavior, original tie ordering and geometry semantics."
+    },
+    {
+      "id": "CF3-S4",
+      "owner": "operating_states/relations.py::_clause_events + SourceOperatingSession.fact",
+      "state": "EXPENSIVE_FIXED_PASSES_NOT_MISSING_OWNER_CACHE",
+      "root_cause": "32 full grammar scans per gated clause, then20 business recognizer logical passes per new source owner. Same owner fact and financial projection are already cached.",
+      "fix": "If further optimization is needed, derive conservative event-family dispatch from existing grammar and reuse immutable normalized lexical observations; unsupported pattern must fallback to full grammar, never false absence."
+    },
+    {
+      "id": "CF3-S5",
+      "owner": "OperatingRelationSession._reference_closure",
+      "state": "BOUNDED_REPEAT_OBSERVED",
+      "root_cause": "Same target/predecessor key cached; different targets sharing predecessor rescan immutable declaration observations.",
+      "fix": "Optional session-local declaration observation cache by original source unit ID; retain target-specific compatibility, window completeness, nearest family, competing-family ambiguity and original offsets."
+    },
+    {
+      "id": "CF3-S6",
+      "owner": "narrative_reading._candidates",
+      "state": "GLOBAL_PREFLIGHT_BARRIER_OBSERVED_LATE_RETENTION_ALREADY_WORKS",
+      "root_cause": "Reference, qualifications and local-context passes precede source-priority candidate loop. IPO exhausts in preflight before first final candidate.",
+      "fix": "First remove proven unnecessary work. If still needed, process source-proven closed dependency scopes incrementally; never publish a fact before its qualifier/reference envelope is closed."
+    }
+  ],
+  "recommended_reds": [
+    "Doubling one-lane page count must remain near linear with zero spurious relations.",
+    "Same-language DOM siblings and unequal lane populations must not pay pairwise work; preserve mixed-language exact original relations and ordering.",
+    "Two legitimate mixed-language counterpart pairs on multiple sources/pages must remain separated and preserve confidence and refs.",
+    "Cached repeated fact, finance and identical reference calls pay zero additional semantic work. Shared predecessor observations may be reused but target-specific ambiguity/negative restriction stays unchanged.",
+    "Known complete independent business package survives later tail exhaustion as partial; unknown qualification tail in same dependency scope may never yield naked plan or completion.",
+    "After a meaningful source-owner change only, replay frozen IPO with the same parse+select16M ledger and112 cap; no gold means NOT_GRADED, not semantic PASS."
+  ],
+  "evidence": [
+    {
+      "path": ".planning/cf-source-20261025/cf3-explore/probe.py",
+      "sha256": "b1849afaa8182d410d10efa2a1b257e9cee653db8a18132eb9dfc4585a8f359d",
+      "bytes": 5673
+    },
+    {
+      "path": ".planning/cf-source-20261025/cf3-explore/synthetic-measurements.json",
+      "sha256": "cc9d9889c46315d5218b72a982dc31f628b3a01508e6da23ac3e8ee807700449",
+      "bytes": 54059
+    },
+    {
+      "path": ".planning/cf-source-20261025/cf3-explore/partial_probe.py",
+      "sha256": "21f429228de8751f9eb16fbc21108d9a08b1652e28d9bb196374fd96ee96bb19",
+      "bytes": 2060
+    },
+    {
+      "path": ".planning/cf-source-20261025/cf3-explore/partial-retention.json",
+      "sha256": "94dccfd763af5c347d96e5157bc9d01f17df7cedcb90a2c474ad09f14d4e7730",
+      "bytes": 14880
+    },
+    {
+      "path": ".planning/cf-source-20261025/cf3-explore/cache_probe.py",
+      "sha256": "4cbb193d01ddbe291f913952b5af5c32f5e808e781fca5db2453121681d4f64e",
+      "bytes": 2073
+    },
+    {
+      "path": ".planning/cf-source-20261025/cf3-explore/session-cache.json",
+      "sha256": "7fb28a48a8e4c13a2a09dea0016bd0f1ed23fa2c2a240fb28359e3e612988f2d",
+      "bytes": 1047
+    }
+  ],
+  "boundaries": {
+    "paid_api_calls": 0,
+    "network_calls": 0,
+    "downloads": 0,
+    "real_original_reads_or_copies": 0,
+    "production_catalog_opened": false,
+    "product_source_or_tests_or_config_writes": false,
+    "author_or_cross_repo_writes": false,
+    "temporary_directories_created": 0,
+    "temporary_directory_restore": "No temporary directories created; only assigned diagnostic/report files written."
+  },
+  "errors_and_corrections": [
+    "Initial neutral parser_version was cf3-1, invalid for emitted EvidenceSpan. Preserved invalid-fixture diagnostics; corrected to1.0.0. Corrected full measurements are identical in all logical work/outcome fields.",
+    "One literal rg path wildcard was invalid on Windows; switched to concrete file paths.",
+    "Broad historical JSON literal search yielded oversized single lines; switched to filename-only Python search and bounded reads. No source copies or mutations."
+  ],
+  "limitations": [
+    "Do not assign synthetic work proportions to the real IPO.",
+    "Frozen profile records direct charge sites only; it does not identify reserve secondary callers. No real14k unchanged replay was performed.",
+    "Logical work accounting is not instruction count, timing or API cost.",
+    "Neutral PDF0 spans is not a recall claim; the suite is a complexity probe without semantic gold.",
+    "Existing late completed-candidate preservation is a positive control, not a newly discovered defect."
+  ]
+}

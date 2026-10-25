@@ -341,12 +341,6 @@ def _build_structure(observation, *, limits=None, work_budget=None, state=None, 
         state["completed_stage"] = "relations"
     if work is not None:
         work.stage(passes=4, sorts=3)  # coverage, diagnostics and output ordering
-        pages = envelope["coverage"]
-        reserve(
-            work_budget,
-            (len(pages.get("opaque_pages", [])) + len(pages.get("deferred_pages", [])))
-            * (1 + len(units)),
-        )
 
     coverage = _coverage(
         envelope, units, ordering, semantic_units, over_budget, resolved
@@ -360,7 +354,8 @@ def _build_structure(observation, *, limits=None, work_budget=None, state=None, 
         )
     )
 
-    diagnostics.extend(_coverage_diagnostics(envelope, coverage, units))
+    diagnostics.extend(_coverage_diagnostics(envelope, coverage, units,
+                                             work_budget=work_budget))
 
     for semantic in semantic_units:
         members = semantic.get("member_unit_ids", ())
@@ -530,22 +525,40 @@ def _coverage(
 
 
 def _coverage_diagnostics(
-    envelope: Mapping[str, Any], coverage: Mapping[str, Any], units
+    envelope: Mapping[str, Any], coverage: Mapping[str, Any], units,
+    *, work_budget: WorkBudget | None = None,
 ) -> list[dict]:
+    # Gap pages need their own original unit references, not another complete
+    # source scan per page. Pay for the single index and every emitted member;
+    # repeated gap entries retain their original order and independent lists.
+    opaque_pages = coverage["opaque_pages"]
+    deferred_pages = coverage.get("deferred_pages", [])
+    page_count = len(opaque_pages) + len(deferred_pages)
+    by_page: dict[int | None, list[str]] = {}
+    reserve(work_budget, page_count + (len(units) if page_count else 0))
+    if page_count:
+        for unit in units:
+            by_page.setdefault(unit.page, []).append(unit.unit_id)
+
+    def page_members(page):
+        members = by_page.get(page, ())
+        reserve(work_budget, len(members))
+        return list(members)
+
     diagnostics: list[dict] = []
-    for page in coverage["opaque_pages"]:
+    for page in opaque_pages:
         diagnostics.append(
             {
                 "code": "OPAQUE_PAGE",
-                "unit_ids": [unit.unit_id for unit in units if unit.page == page],
+                "unit_ids": page_members(page),
                 "detail": f"page {page} produced no native text and is not covered",
             }
         )
-    for page in coverage.get("deferred_pages", []):
+    for page in deferred_pages:
         diagnostics.append(
             {
                 "code": "DEFERRED_PAGE",
-                "unit_ids": [unit.unit_id for unit in units if unit.page == page],
+                "unit_ids": page_members(page),
                 "detail": f"page {page} is deferred by the caller's read budget",
             }
         )

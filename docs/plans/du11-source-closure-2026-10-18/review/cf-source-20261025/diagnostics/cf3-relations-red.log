@@ -1,0 +1,60 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 7 items
+
+tests\unit\test_cf3_relation_work.py FFFF...                             [100%]
+
+================================== FAILURES ===================================
+___________ test_one_lane_per_page_does_not_rescan_all_other_pages ____________
+tests\unit\test_cf3_relation_work.py:38: in test_one_lane_per_page_does_not_rescan_all_other_pages
+    assert large_work < 3 * small_work
+E   assert 16384 < (3 * 4096)
+____ test_same_language_dom_siblings_do_not_reserve_a_cartesian_expansion _____
+tests\unit\test_cf3_relation_work.py:42: in test_same_language_dom_siblings_do_not_reserve_a_cartesian_expansion
+    relations, work = observe([unit(i, page=None, lane=None, dom=f"0.1.{i}")
+tests\unit\test_cf3_relation_work.py:30: in observe
+    language_lane_relations(builder, units, ordering)
+src\company_wiki\document_understanding\structure\relations.py:337: in language_lane_relations
+    _pair_lanes(builder, group, group, allow_self=True, work_budget=builder._budget)
+src\company_wiki\document_understanding\structure\relations.py:407: in _pair_lanes
+    reserve(work_budget, len(left_units) * (len(left_units) - 1) // 2)
+src\company_wiki\document_understanding\structure\_work.py:17: in reserve
+    budget.charge(count)
+src\company_wiki\resource_budget.py:113: in charge
+    raise WorkBudgetExceeded(
+E   company_wiki.resource_budget.WorkBudgetExceeded: document_work limit reached: phase=document, used=0, requested=79800, limit=5000
+______ test_same_language_unequal_lanes_do_not_reserve_impossible_pairs _______
+tests\unit\test_cf3_relation_work.py:51: in test_same_language_unequal_lanes_do_not_reserve_impossible_pairs
+    relations, work = observe(units, cap=4_000)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_cf3_relation_work.py:30: in observe
+    language_lane_relations(builder, units, ordering)
+src\company_wiki\document_understanding\structure\relations.py:323: in language_lane_relations
+    _pair_lanes(
+src\company_wiki\document_understanding\structure\relations.py:415: in _pair_lanes
+    _pair_by_nearest(builder, left_units, right_units, work_budget=work_budget)
+src\company_wiki\document_understanding\structure\relations.py:441: in _pair_by_nearest
+    reserve(work_budget, len(left_units) * len(right_units))
+src\company_wiki\document_understanding\structure\_work.py:17: in reserve
+    budget.charge(count)
+src\company_wiki\resource_budget.py:113: in charge
+    raise WorkBudgetExceeded(
+E   company_wiki.resource_budget.WorkBudgetExceeded: document_work limit reached: phase=document, used=3, requested=6480, limit=4000
+______ test_foreign_originals_are_not_counterparts_even_on_the_same_page ______
+tests\unit\test_cf3_relation_work.py:59: in test_foreign_originals_are_not_counterparts_even_on_the_same_page
+    assert relations == ()
+E   AssertionError: assert ({'from_unit_...': 'medium'},) == ()
+E     
+E     Left contains one more item: {'from_unit_ids': ['u0'], 'to_unit_ids': ['u1'], 'kind': 'language_parallel', 'confidence': 'medium'}
+E     Use -v to get more diff
+=========================== short test summary info ===========================
+FAILED tests/unit/test_cf3_relation_work.py::test_one_lane_per_page_does_not_rescan_all_other_pages
+FAILED tests/unit/test_cf3_relation_work.py::test_same_language_dom_siblings_do_not_reserve_a_cartesian_expansion
+FAILED tests/unit/test_cf3_relation_work.py::test_same_language_unequal_lanes_do_not_reserve_impossible_pairs
+FAILED tests/unit/test_cf3_relation_work.py::test_foreign_originals_are_not_counterparts_even_on_the_same_page
+========================= 4 failed, 3 passed in 1.62s =========================

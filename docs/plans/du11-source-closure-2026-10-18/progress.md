@@ -1172,3 +1172,17 @@ W16最终独审0 OPEN，18次实际CLI/快照/回测10断言、60独立测试通
 两技能安装运行闭包均与主线全匹配；RF九项定点同步后发现另两项旧Git版本残留，经溯源及85项阅读接口测试补齐；四次安装版RF CLI通过。Audit venv同步两次errno13，改用本机默认Conda同一原同步器后正常完成，未改ACL/许可；旧blocked收据保留为历史，最终installation-final.json覆盖当前判决。提交初次MSYS命名对象失败，随后venv缺pre_commit，使用既有Conda完整原钩子通过，不改钩子或降测试。UTF-8结构校验两技能valid。
 
 本节点只关闭两包工程/部署，不关闭来源语义、annual14精确金融、正式摘要/cache、真实RF与公司循环。下一步按CF1–CF4中性RED→共享owner修复→三市场真实样本，再正式摘要/零重复费用缓存/RF采用。W18仍待交付，W19 READY；各自作者工区不写。0新付费/下载/原件副本。详见[接收总记录](review/package-reception-w16-w17-20261025/README.md)。
+
+
+## 2026-10-25 CF1–CF4恢复实施
+
+已重读唯一计划/真实跨市场报告并确认两卡发布完成。开始实际DOM父级证据调查和CF3独立只读效率探索；目前未改生产源码、未调模型，旧限额/原件/金标保持。节点见review/cf-source-20261025/README.md；不把当前源码结构线索当根修验收。
+
+
+## 2026-10-25 CF3共享效率第一节点
+
+CF3第一效率节点独审PASS：共享关系负例剪枝、结构算法cache闭包和缺页诊断单次索引。真实中微429页/14025units，同16M/112上限从0span变112span，understand工作11473800→6334220；仍exhausted/partial、无IPO gold NOT_GRADED。0新付费/下载。CF1/CF2及CF3候选优化、正式摘要/cache/RF循环仍OPEN。
+
+先冻结中性RED，再修共享责任层。真实reserve caller发现5.15M来自缺页诊断反复全源扫描，单次页索引保留诊断原值；关系剪枝及跨source/kind边界一并修复，owned结构包版本自动失效旧cache。最终独审74 tests、750关系差分/250跨source、500诊断/24完整结构对照通过。147相关PASS、之前198PASS有重叠，mypy src375和Ruff绿。旧12参数缓存测试只换真实字节注入点，same/changed断言未改。
+
+首次venv/PyMuPDF1.28.2得14006units，保留为非同backend诊断；随后Conda1.26.7恰与冻结parse counts一致得14025units，仍partial，不宣称CPU性能比例或IPO内容通过。独审核真实收据SHA/计量/原文config/catalog均稳定。下一步正常发布，再CF1/CF2与候选热点。

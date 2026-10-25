@@ -1,0 +1,30 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 10 items
+
+tests\unit\test_cf3_relation_work.py .......F..                          [100%]
+
+================================== FAILURES ===================================
+__ test_monoscript_geometric_rows_do_not_expand_a_same_height_cartesian_set ___
+tests\unit\test_cf3_relation_work.py:88: in test_monoscript_geometric_rows_do_not_expand_a_same_height_cartesian_set
+    relations, work = observe(units, cap=5_000)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_cf3_relation_work.py:30: in observe
+    language_lane_relations(builder, units, ordering)
+src\company_wiki\document_understanding\structure\relations.py:344: in language_lane_relations
+    _geometric_lane_pairs(builder, ordering)
+src\company_wiki\document_understanding\structure\relations.py:381: in _geometric_lane_pairs
+    reserve(builder._budget)
+src\company_wiki\document_understanding\structure\_work.py:17: in reserve
+    budget.charge(count)
+src\company_wiki\resource_budget.py:113: in charge
+    raise WorkBudgetExceeded(
+E   company_wiki.resource_budget.WorkBudgetExceeded: document_work limit reached: phase=document, used=5000, requested=1, limit=5000
+=========================== short test summary info ===========================
+FAILED tests/unit/test_cf3_relation_work.py::test_monoscript_geometric_rows_do_not_expand_a_same_height_cartesian_set
+========================= 1 failed, 9 passed in 2.15s =========================

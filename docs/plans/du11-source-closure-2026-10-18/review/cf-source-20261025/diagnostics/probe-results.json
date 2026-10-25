@@ -1,0 +1,28 @@
+{
+  "binding": {
+    "src/company_wiki/document_understanding/structure/relations.py": "df8334faeb9ae648f329db67ee06c53dcb2f779b01a9017a23a296f88ad7fcef",
+    "src/company_wiki/document_understanding/decision_inventory.py": "0064578ac7b2dce0df3f82996c0b619937ef8fd602e9a30f615bf185c30dfeb7",
+    "tests/unit/test_cf3_relation_work.py": "d9ba8774843ce0e731b4b18769b54b8dcf5bbe1cf1933595db2d101d28f2640c",
+    "tests/unit/test_cf3_algorithm_identity.py": "684bae82e9c544ea01ed739f55339456b21ff4e566530f22ed55a0ed4898969a"
+  },
+  "baseline": "c3ad2ece1827cc7558e3c86a9f5b327c644d9595",
+  "single_source_differential_cases": 750,
+  "positive_differential_cases": 285,
+  "expected_kind_fix_cases": 127,
+  "cross_source_cases": 250,
+  "portable_lf_crlf_nested_and_deletion_closure": "PASS",
+  "temporary_root_restored_absent": true,
+  "cross_kind_geometry_current": [],
+  "cross_kind_geometry_baseline": [
+    {
+      "from_unit_ids": [
+        "u0"
+      ],
+      "to_unit_ids": [
+        "u1"
+      ],
+      "kind": "language_parallel",
+      "confidence": "medium"
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 2 items
+
+tests\unit\test_cf3_algorithm_identity.py FF                             [100%]
+
+================================== FAILURES ===================================
+______ test_relation_owner_change_invalidates_current_decision_identity _______
+tests\unit\test_cf3_algorithm_identity.py:19: in test_relation_owner_change_invalidates_current_decision_identity
+    assert decision_inventory._versions()["business_algorithms"] != before
+E   AssertionError: assert '37dc28eee00e56d0ae1210398783d7d15eb08db71b17591a73f59e348665e829' != '37dc28eee00e56d0ae1210398783d7d15eb08db71b17591a73f59e348665e829'
+__ test_structure_owner_closure_tracks_new_modules_and_ignores_host_location __
+tests\unit\test_cf3_algorithm_identity.py:30: in test_structure_owner_closure_tracks_new_modules_and_ignores_host_location
+    initial = decision_inventory._structure_algorithm_hashes(first)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.document_understanding.decision_inventory' has no attribute '_structure_algorithm_hashes'
+=========================== short test summary info ===========================
+FAILED tests/unit/test_cf3_algorithm_identity.py::test_relation_owner_change_invalidates_current_decision_identity
+FAILED tests/unit/test_cf3_algorithm_identity.py::test_structure_owner_closure_tracks_new_modules_and_ignores_host_location
+============================= 2 failed in 14.25s ==============================

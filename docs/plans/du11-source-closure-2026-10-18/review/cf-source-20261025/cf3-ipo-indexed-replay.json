@@ -1,0 +1,4103 @@
+{
+  "schema_version": "cf3-source-replay/1",
+  "source_ref": {
+    "document_id": "urn:company-wiki:document:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+    "source_id": "urn:company-wiki:source:sha256:19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+    "content_sha256": "19cdb41e03b2d86ac15007753784f5859e1450a2bf79b514a7c0d4bd6830be67",
+    "byte_size": 11211796,
+    "mime_type": "application/pdf",
+    "schema_version": "2.0"
+  },
+  "runtime": {
+    "python": "3.13.9 | packaged by Anaconda, Inc. | (main, Oct 21 2025, 19:09:58) [MSC v.1929 64 bit (AMD64)]",
+    "executable": "C:\\Miniconda\\python.exe",
+    "packages": {
+      "pymupdf": "1.26.7",
+      "beautifulsoup4": "4.14.3"
+    }
+  },
+  "head": "c3ad2ece1827cc7558e3c86a9f5b327c644d9595",
+  "source_sha256": {
+    "src/company_wiki/__init__.py": "39921253e7b65e89c49eca2f8904b24c39b2425af79fb8f1ab8edc61e4c69ad2",
+    "src/company_wiki/_atomic_file.py": "0fdba54d92df8a07c14bbd268b972610b3f685fc38ac41e860142624337e83fc",
+    "src/company_wiki/_bounded_process.py": "4bdc93b67362ce86ee22ab135211c15e788a58def4e11bf9eb18a9bd47f4c5ad",
+    "src/company_wiki/_file_mutex.py": "ab98d37fd0c8214e4a6f1605eda64364280bd326076ca48d3a28096f80bfcbf5",
+    "src/company_wiki/_id_scope.py": "1b70f9cd678cb2d2ee01dc430dc6b140ec5ae6bfe6041f898a906a2559baabe5",
+    "src/company_wiki/_process_tree.py": "d883732a4dab3f2a62ef272d5931228ee64d47ba63ffb1fea502cc1b5d8db144",
+    "src/company_wiki/automation/__init__.py": "d3aa609e3668e3334cb18a86a5b7564fe2ac8c39ea645a335b73bcb106394199",
+    "src/company_wiki/automation/_clock.py": "2a256f7f82eb13d4e569b6033a320b27bc2a9d45b0f7f2a4cf6685d0764ecb71",
+    "src/company_wiki/automation/cli.py": "bc8fba688f81d32745664860dd8ea6e7f72a45b56fdce8451a47e63f2a63ca91",
+    "src/company_wiki/automation/controller.py": "a97684678d48df90c82602a8c1f90f9f5a12839910c8162cfee3ebdacd4a574f",
+    "src/company_wiki/automation/dag_persistence.py": "3979087e1c0581b5325d425c1a5323239e102320b5e30725ca2c4ffc61de1d9b",
+    "src/company_wiki/automation/event_sources.py": "ec5d9464a355eb94ea894d1fce046ce3f6f3ce78c8f0660a7b429a7156b09617",
+    "src/company_wiki/automation/execution_context.py": "fd28cb1070d7c734544723f35eb954222f3eda7142b7efc890f7085002b5fc63",
+    "src/company_wiki/automation/execution_snapshot.py": "1c2fb91e6959afefa8f9709acceaadbe37b537f865f7e7169972eb5c1fafaeac",
+    "src/company_wiki/automation/handlers/__init__.py": "c3b278499f6ea2a7cc46b154eeebcf166ccdaa8c0dff1f89dbb838d45538761d",
+    "src/company_wiki/automation/heartbeat.py": "3f9232d90cff1a66cd718ccdb20de935742dfb3ac18dfcda5db9d98c1d2d9fca",
+    "src/company_wiki/automation/migrations.py": "5f6c74024a9dd836e3c01b608468fb54e673afd1567641af9d16bc392fb34bb9",
+    "src/company_wiki/automation/models.py": "1b572cecca521c02ff39c896ba879a4445a961220263523b2cafd07bcbf42588",
+    "src/company_wiki/automation/narrative_batch.py": "e30c382487139681dfeb8250067f94f03919891332cbee39013580df6fc63ac6",
+    "src/company_wiki/automation/narrative_batch_cli.py": "268c047d8c5d6b72716ecf6e77a74165c38afc268cd72b8b94590b3ea85b3d0d",
+    "src/company_wiki/automation/narrative_batch_request.py": "1d6ddeb3e112bc49f8b4bf63e7d727e9b1b666461398e54f7f0ff84ae9e804ee",
+    "src/company_wiki/automation/narrative_contracts.py": "918d9fe2b92c24c00d8e532889c6107c69200cf4cbe22a3ba073449bd437b497",
+    "src/company_wiki/automation/narrative_evidence_view.py": "840c6e22fc75297b0c28a8b82301add67d1796c0402d3511e45ee5f08162153d",
+    "src/company_wiki/automation/narrative_failed_final.py": "d8075d58fa7268090fa7df02e2d1d04ba670670f2492bac73be9bcd843bbff62",
+    "src/company_wiki/automation/narrative_formats.py": "58dc81ae9ebdda162c44675bdf613741d4d7e7593533edc0b1f7f4ee69ff8dd6",
+    "src/company_wiki/automation/narrative_generation.py": "e4d581eb7a96a40b47049f6a73d458e55f79742dc214ed57fe3880f0faa9cba8",
+    "src/company_wiki/automation/narrative_http_model.py": "4087f9345ccf84a0c660c0c5143f5c3e6d7ee03a0ea83e9a8e93366c406c9ed0",
+    "src/company_wiki/automation/narrative_model.py": "971df3140d77774cb64d735bc4579e72404f1dc6f0c25c49bd3001fc311fb374",
+    "src/company_wiki/automation/narrative_model_caller.py": "4eacaee1476a073eba2f948b461278ff3c473ca6572418e488344d310b165b4f",
+    "src/company_wiki/automation/narrative_model_citations.py": "f6bdb80c4e789504311f044ccc69a6c3266d508b31d17b1c88ce23eb93d69d7e",
+    "src/company_wiki/automation/narrative_model_extractive.py": "f93b4925b72162d352d5a17d62782207b8409c2683372a319a0dea31be270af3",
+    "src/company_wiki/automation/narrative_model_runtime.py": "ef92950ab398408b7bcbc4381a5c9249a6d858b8a9422e099a34457f60bd1a7b",
+    "src/company_wiki/automation/narrative_model_scoped.py": "d6da97b56c3772c8ad19c08c212ffe1d8e7b61f2d95943dcc1098bd7956cce26",
+    "src/company_wiki/automation/narrative_official_json.py": "7ada26406ad53a7c11699c4d0f57edb8f083d27b247ff855321fd1ba267bc826",
+    "src/company_wiki/automation/narrative_output_language.py": "91cc43343b2c191048136875973d0ad44e3b5b17c854991e237bab9489b671e4",
+    "src/company_wiki/automation/narrative_paid_response.py": "8fc0bf0fe6885d04a40013738ddefbab267f4608476ebfa76db75c7d7d85205b",
+    "src/company_wiki/automation/narrative_projection.py": "0164080a2e6db980f3e5eccaebde3b380d94ea488d152fb65d479ba0b6bbfc45",
+    "src/company_wiki/automation/narrative_replay.py": "efb30e4790618b754f2d4ef3db2f68437d5abd7372f1ce2326452983d9db679a",
+    "src/company_wiki/automation/narrative_run_store.py": "88e5452057d043d9b31594cd1cc6d2b243e704ae58160ef09b8b9b1fb993b75a",
+    "src/company_wiki/automation/narrative_runtime.py": "56a59d334c6dcbcf017d0dbdbe926bbb97da1f47f7a8e98d443c8054a65ba5f3",
+    "src/company_wiki/automation/narrative_select.py": "62cf8c8df200a82d34dc0a1df387a615f379050b0234b94f9099784ff9135f12",
+    "src/company_wiki/automation/narrative_selection_generation.py": "5b67dc9d9b0a44de020e2a4e79c97dd21315a97854610b4f9df2b9286c46466e",
+    "src/company_wiki/automation/narrative_selector_binding.py": "b32834cec079a873e0c6f7cfd0562a15bccc2a1d02a6df892ffdea283cf0411c",
+    "src/company_wiki/automation/narrative_source_guard.py": "4d199c3732231c229694ab6801a9c109514efe7f8811d04bc386e407abc4c256",
+    "src/company_wiki/automation/narrative_summarize.py": "7507ff0107291eddff0bf1b387ccc3e71307a9c7e5af41192d0e59133109f6b5",
+    "src/company_wiki/automation/narrative_summary_execution.py": "7b4ab588b7fbaa14168bc6465b05ef369afdcfcfb14fc6eab751f4072c82002e",
+    "src/company_wiki/automation/narrative_transport.py": "140398db6e010c511322c49056aa408f2649c0d374cf5ef847e4a10397d582da",
+    "src/company_wiki/automation/narrative_transport_contracts.py": "6fca7f092e3f4441e9a92b2f6ddcefbb08fc0553fd70bf36409ea1b51ae456b5",
+    "src/company_wiki/automation/narrative_verify.py": "da491f44da72a74434aece9e0649627e4b53045a5b5c70d222a5c855c187e92c",
+    "src/company_wiki/automation/narrative_worker_factory.py": "1acc2e35ef093227f5a5c8037c0c4e89660a67c03fc8da008befdfcf6a291d01",
+    "src/company_wiki/automation/outbox.py": "f8ec1dce9f4ef6c4485b478c79aaefe5835e9bd52fd751f4f7f3251cf1e704b1",
+    "src/company_wiki/automation/planner.py": "dbbaefe6e4f09972abdc8126cf8f6c143a99ad7fe70d53642e120530f6757104",
+    "src/company_wiki/automation/policy.py": "67584de1bf2eee8f21c565c4422df634f2414c5fb3f2e251e989a89bd69df41c",
+    "src/company_wiki/automation/registry.py": "b744c250a5be5e272bad43ac8c627ea84f7fd9bf02668841de1626af1eaf6286",
+    "src/company_wiki/automation/retry.py": "6a09f8d037f368533672bb00e41844fa35c309077d163edde18bbfc29b223a63",
+    "src/company_wiki/automation/runtime_control.py": "978ce7e43252ef9d5650c72e157709a090e58c604f126ea54529ba70662e2cd0",
+    "src/company_wiki/automation/scheduler.py": "9b7f77a6599222d5803cd829f5b9fb79cbbdcf696508287363926b8a082a026d",
+    "src/company_wiki/automation/store.py": "fdc4a8f713116e5cfa2c63f0afdb530a364945b0e4927efd6d63e0b99e93b624",
+    "src/company_wiki/automation/supervisor.py": "a856d31b20db03a576fb7dd664eae48cdf6c5e22d6d773fe78a28c9c111c3aa8",
+    "src/company_wiki/automation/terminal_receipt_contracts.py": "4113dda30f530f6fdf217c0280a1cddc5efdd8f1507964359e5b1154b85671df",
+    "src/company_wiki/automation/terminal_receipts.py": "8b03189848d6618a617c48f1f1b1a65b57280642a7311c05b0db516dc5e3080e",
+    "src/company_wiki/automation/worker.py": "02d995f259b7c35b353317f3dd450b1627c04c367350877aee0bd4b754b33b02",
+    "src/company_wiki/automation/worker_process.py": "e01239498fb02ef86be517a85f57993f3aeed1e5abdf6944ac2c6958052afdf9",
+    "src/company_wiki/canonical_ingest.py": "e2fa4ec013e26e8e6a68663107e2f090acd68bf897b17c4d1b1b1fc7aa7cab52",
+    "src/company_wiki/config.py": "655d67bfe1512dbc0003077f2d4d44d5ca767193d64de4c3b0bbb77aecceef49",
+    "src/company_wiki/deployment.py": "fe20585e798188bab9df7b6ffd6c613f84dc978a8cfcc52bfcdb711e01d7ec56",
+    "src/company_wiki/document_normalization/__init__.py": "4b4d2112e01a3779d2eaa1e7df9ffa077e05c49b451efb95c92a1c807b80bb06",
+    "src/company_wiki/document_normalization/assets.py": "5014efbe1786d8faf3ea9a2efa400008031ecade5c0dad4e3e2e52c49a83705a",
+    "src/company_wiki/document_normalization/document.py": "e53a49dc941ef0cca17cdde1a249abbb91390bf9cef9380c28433c651d459b15",
+    "src/company_wiki/document_normalization/docx_parser.py": "5eaf43d938334ab106db66aef5a0cc4ef7acd7e57c6d96f61b77d09179ff303d",
+    "src/company_wiki/document_normalization/errors.py": "f379eb226a7b84a1e3f2223ee497216372f9759355aa483654fedbae5ad91d37",
+    "src/company_wiki/document_normalization/form_fields.py": "f2765734ccd6ebfbc596583598c457b5a7343f2617c69e968eb6162fb9d49144",
+    "src/company_wiki/document_normalization/html_parser.py": "e0dce2f1b8b933ecdf14de3983a2a505ae47ef6c5ea827e40f247c91257350d8",
+    "src/company_wiki/document_normalization/isolated_ocr.py": "dab20aea4e97ea955cfe931b77905f7d3035bdba86be2765621b635ff8bdf6e2",
+    "src/company_wiki/document_normalization/layout_snapshots/__init__.py": "11a6e988ad8f3cf1b188034f99739215dbfce7780794a01a527878431d649ff1",
+    "src/company_wiki/document_normalization/layout_snapshots/contract.py": "360e19c8518861abff3d8ef2504a49e7dc008c3cf5d400baa0868ab9ec0ecd17",
+    "src/company_wiki/document_normalization/layout_snapshots/identity.py": "2b0fa1f61176e9a69da9dd6b33a9295ed4f3b8e8e8b47204538a9363ac7a32da",
+    "src/company_wiki/document_normalization/layout_snapshots/projection.py": "998fb43282470beff27a8b96d64700018937f221c05db4a01efd15808fb001d2",
+    "src/company_wiki/document_normalization/layout_snapshots/unit_binding.py": "443baf7cd68621071437f4d0763d4ced37f79567e1de52f4fc2cd44bdf8eb21e",
+    "src/company_wiki/document_normalization/limits.py": "f9c16b1e9dabdf7d7626fc95e54ab6d56aae7e06ef1bdb4f48a4f0951df70241",
+    "src/company_wiki/document_normalization/local_ocr.py": "2f66b6fa486f6af41f529c69786ed9381455ed755c54c48383d3025f5bb0d561",
+    "src/company_wiki/document_normalization/ocr_composition.py": "9a4d517114d6bcd4b692eee4520c9fc2d16f6caa84854f348d1c655d668bd9fe",
+    "src/company_wiki/document_normalization/ocr_page_text.py": "29d0690a9459b5165534519343c95d45fe4f1e2ce724f6dfa6960128c85ab389",
+    "src/company_wiki/document_normalization/ocr_region_recovery.py": "45d2305c035cd8fce8d37aa7b9170b240cf96241b1fcb1bd6ef23edf6a7774dc",
+    "src/company_wiki/document_normalization/office_table_structure.py": "f5fe14a4563462df803dc5474ba38adacd905af15091d47190ee943600136c94",
+    "src/company_wiki/document_normalization/pdf_table_observations/__init__.py": "4945546c639e9ee5a7e048c98d10b00d05adb1091883d8366d091bc373eef439",
+    "src/company_wiki/document_normalization/pdf_table_observations/adapter.py": "7d87851bcccbdcc264485997da75bcc105957b8cb25f8e0b2cd1f518acfb52ed",
+    "src/company_wiki/document_normalization/pptx_parser.py": "45af59e6f0e92fc2ef76d6a554445f296b085b980c4fdca2912a4395882ee8ec",
+    "src/company_wiki/document_normalization/replay.py": "7bf63177865218ba34d414cffdb4d66572e310e0cf3d682c86ae5bf32fc8cad4",
+    "src/company_wiki/document_normalization/table_shapes.py": "de7730c837273a19254a7e1ba5eafd72fd9c9655ecc2eab2c169858566a58e08",
+    "src/company_wiki/document_normalization/text.py": "f145c9148cef1868161a474463b62f6a7532d3db6c171baa112e5847baba3158",
+    "src/company_wiki/document_normalization/text_matching.py": "a7bdc28965536167a4c55b6132f9b7a2ae004edb4c56211f513482de59225352",
+    "src/company_wiki/document_normalization/units.py": "a65813c07427c50c4a8d618e58bbf16d400519e7f8c4d190946815f94b9162c5",
+    "src/company_wiki/document_understanding/__init__.py": "68e79aab7d1e1749d5d5d912a8c7262d2fbe8e7cc8dd5a300098368ea72eb22f",
+    "src/company_wiki/document_understanding/decision_dependencies/__init__.py": "07a08aa1c034356f4ff42f76d2a66d2f1feba605a404371a713ecf8e3b6df72a",
+    "src/company_wiki/document_understanding/decision_dependencies/compare.py": "e36ff94655ded12180775080e2dc6116643bd99d22b9f4ca2828a2dac46bbe5e",
+    "src/company_wiki/document_understanding/decision_dependencies/contract.py": "4f51076fa7666f008aec2580e7815bfb113de1bae755399dc836c934bafd0475",
+    "src/company_wiki/document_understanding/decision_dependencies/freeze.py": "57ab1d200a297ded4f862479731e25d308e8fa48c060fa64c7774406db097bf4",
+    "src/company_wiki/document_understanding/decision_dependencies/trace.py": "1629c4d0a45e471ec2aa50174541014dcfa64d032c05e7802f1ab812e207163b",
+    "src/company_wiki/document_understanding/decision_inventory.py": "0064578ac7b2dce0df3f82996c0b619937ef8fd602e9a30f615bf185c30dfeb7",
+    "src/company_wiki/document_understanding/geometry_intent/__init__.py": "a2f0304fa36e3bec687206859a0a14be682a9a6492c63f0ed7930f5a1b274ce6",
+    "src/company_wiki/document_understanding/geometry_intent/contracts.py": "dbc88ad3a075ddf2ea4a875a29564bf4be9ec450ac1cbb21aabb18d8a7c01ea2",
+    "src/company_wiki/document_understanding/geometry_intent/planner.py": "be0e6762b5a13df40285bed03a88cb6b65be8f823fa09f5df14ef99826299aa4",
+    "src/company_wiki/document_understanding/geometry_intent/reading.py": "6669f465d23f8f1d84a156bbc5d9f3cd4d33e8671af526d386df9c4707c8716a",
+    "src/company_wiki/document_understanding/indented_tail_geometry.py": "dc970d64b228be3d18d25f8c64238b86a27d10ae7f35efc4546416f6bb27ecfd",
+    "src/company_wiki/document_understanding/layout_bridge.py": "ea6eb10c2ed687319f01f918b96b14bf4ff87dcee85cca5352e3251f413f38a5",
+    "src/company_wiki/document_understanding/layout_hints/__init__.py": "997b295d388604f23503958c1e4e9de2fb69a3a1be1910086a4da8fd9ed0ec9d",
+    "src/company_wiki/document_understanding/layout_hints/columns.py": "e19dfedb9e86a4edbb189558a3cf75074571f6e378c1ec44cf77c091e1665a5c",
+    "src/company_wiki/document_understanding/layout_hints/contract.py": "2aa658add3a6783a20debea338b799ae840153baab683b1279d05cfe409c1047",
+    "src/company_wiki/document_understanding/layout_hints/fine_geometry.py": "5fe649d430a518e8d407976d40a3a7bb5656c734ccd7c95badca5e2d6297f784",
+    "src/company_wiki/document_understanding/layout_hints/geometry.py": "fa41da1cd15ea12e94a7077583978e2f8f34fa9510ea83f02a982ff35f38bcfc",
+    "src/company_wiki/document_understanding/layout_hints/headings.py": "6c31a1ee2128db8ac9b8c87ac69829dba29bdd68c2406bc0a09f02d6ab5f904f",
+    "src/company_wiki/document_understanding/layout_hints/neighbours.py": "610632d5e238deefb7b398965c0794cef038a3a5a8bc8aa05c448e1bd91a7d98",
+    "src/company_wiki/document_understanding/layout_hints/ordering.py": "6d8eda6b3d5504e56d3242a027968aab57d3a72ef53c9fd59569c63afd5e9ec4",
+    "src/company_wiki/document_understanding/layout_hints/relations.py": "744881cb8ab3ac8b7bac5e8d4733a27178bc918e7bab3639aed65ecd4fb43fd4",
+    "src/company_wiki/document_understanding/layout_hints/tables.py": "5b70a25c7a0e3abf0e62045795330a94faed5c796f6fc95df58b1bddd97beb31",
+    "src/company_wiki/document_understanding/layout_hints/text_evidence.py": "710aa35e4bc1c39ee08a3f227062e429225b32e7d41e573dc5ba94aabbccdbcb",
+    "src/company_wiki/document_understanding/narrative_continuity.py": "e6dd8e4c35022392a65e5ed489320ffc41a4fb286b9b3d51c26f57f8597a29a4",
+    "src/company_wiki/document_understanding/native_signal_bridge.py": "4a9cebce8aed14129dee1e70a50c98b2e5dac01285c1a42386a920d69d0ba2c2",
+    "src/company_wiki/document_understanding/native_table_bridge.py": "898e7fd5751c583d5c296de6396c605d563107cd64898fbedf2d1835af4f6fe1",
+    "src/company_wiki/document_understanding/observation_adapter.py": "aaf39f3e4a6413014e2f56a07f99bbf76cec591133bbdfab28acabe445843e1d",
+    "src/company_wiki/document_understanding/operating_states/__init__.py": "4e79edc05e6b67db3448a4c0a6f356a7f24eef1a800295f30ab7c28dc9c71c65",
+    "src/company_wiki/document_understanding/operating_states/patterns.py": "28a5f7f20f9c2cde99564eeb288605b694979080c9df69419c8375ffca35a380",
+    "src/company_wiki/document_understanding/operating_states/product_reference.py": "65132e690d3ab88ecb919428567ddcaea41e2da6e104ce42f828eeb98f6d9f19",
+    "src/company_wiki/document_understanding/operating_states/relations.py": "0b65b713bedca344d09bd2fe00ae52941433b91aaaf2ecdc6be137abf8c2386e",
+    "src/company_wiki/document_understanding/operating_states/text_view.py": "240ca4e89b78c4dfa96618c850d4448db12cd50d198e3f85d775c5ac86621914",
+    "src/company_wiki/document_understanding/orchestration.py": "64a929fa743a23078f621fe1f706bc036c414597e601def1368f3454b5165987",
+    "src/company_wiki/document_understanding/pipeline.py": "198385623657a1704091d38435b1bc696794dd7afb768eac493b718d705c3056",
+    "src/company_wiki/document_understanding/profiles/__init__.py": "8b7706444f4b9222576b86bf5c098f0619cd925747152a9de3d80676f3791c23",
+    "src/company_wiki/document_understanding/profiles/child_ranges.py": "53a7c391cba4546193bf322dcf9410fc37be07b4f871cf3caf30832774f14a5c",
+    "src/company_wiki/document_understanding/profiles/decision.py": "e1da5af230dff4b98ba269253113b4b1d8266ffb4e29c598c0faf4297362bfbd",
+    "src/company_wiki/document_understanding/profiles/geometry_policy.py": "2fbee9a58aad6f48d79c49f56d5caf5fe155024de501e8c8826018a6cad7a344",
+    "src/company_wiki/document_understanding/profiles/lifecycle.py": "5a43b850eab54b11d44642f447cb2d146afb60db3813cdef9fdb244cdc8aabfa",
+    "src/company_wiki/document_understanding/profiles/model.py": "022191ab135b0c0844d7698cddc679eaa7103bc3c8153b39c600bc37ffeae2ce",
+    "src/company_wiki/document_understanding/profiles/observation.py": "5d5f7aa0b99ffbce7085be6b6d522f70afae1b469f4e31b0a679cc6a2b0642ea",
+    "src/company_wiki/document_understanding/profiles/registry.py": "1b0649063b880d5fc84506c31d973c9c2b5c58def99010370798b47875683b4b",
+    "src/company_wiki/document_understanding/profiles/signals.py": "e55a6bd92ef0bd5a42f248668e3a01a71ff8478a55f945bfbd6cea2ad5a178b0",
+    "src/company_wiki/document_understanding/profiles/vocabulary.py": "e24f0d4536199d26f64742b40708d16428e3585ddff5e40d6d712da7ba543340",
+    "src/company_wiki/document_understanding/selection_bridge.py": "0da2f2b1f43bd27d11df4a48bf5574816918fe2724593716e39fe93745a243c8",
+    "src/company_wiki/document_understanding/source_cards.py": "17a831002d74e69b906dea029b5f19f51ffd9d61cea98a63a8c8cc6ee5725eb5",
+    "src/company_wiki/document_understanding/source_signals/__init__.py": "8e8aef3c031bcf14366d2bbf3c7758a6ea5424584c2282c8297c6f2f2913d4c7",
+    "src/company_wiki/document_understanding/source_signals/contract.py": "d84d93b798e1e06cf58b551a71195e98f0726eaa501c4b70eab036e356052f39",
+    "src/company_wiki/document_understanding/strategy_binding.py": "63678a70251781e530875e670b80d1bed3055dc31fc7a6e11faff39917ea92b2",
+    "src/company_wiki/document_understanding/structure/__init__.py": "5b86913bf420c13af3e62fa4eceb310c51e24599c6cd58a810ce2fbeedc2c412",
+    "src/company_wiki/document_understanding/structure/_work.py": "6cc3b330a4fee0a06bd3e79fbce7ffd85b20cb69238482ef78ca29200edcd469",
+    "src/company_wiki/document_understanding/structure/contract.py": "399e8c80362477ebb02ab3aad9b14cf00ada880c6709e3ad88bf9bd26c847cb8",
+    "src/company_wiki/document_understanding/structure/layout.py": "b365e55b6f0ad4b2a84f3fa3f7195c628b4fe401633bb487208b3edd77fa9072",
+    "src/company_wiki/document_understanding/structure/paragraphs.py": "93af3606fae496ea548f69d6c5ae9930d5f4489abad2cc273777b396ea0ccfa5",
+    "src/company_wiki/document_understanding/structure/projects.py": "2d7f1994b130c8a1948491b506f5af6ce59c5ed598a40fbfb215f4274984902e",
+    "src/company_wiki/document_understanding/structure/qa.py": "c024685d21b71b91cd61e4c549af11489a1462b8e7410af4b3eb52549b8b4434",
+    "src/company_wiki/document_understanding/structure/relations.py": "df8334faeb9ae648f329db67ee06c53dcb2f779b01a9017a23a296f88ad7fcef",
+    "src/company_wiki/document_understanding/structure/sections.py": "8ff70fc94b5af97d856a651235577d85087fbdd2c0b42863f6701b3517dc6b4d",
+    "src/company_wiki/document_understanding/structure/table_purpose.py": "5178ddcaf84c4a190562432850ef7ebb8de575272b3d2e9b3bd7402b92867d73",
+    "src/company_wiki/document_understanding/structure/tables.py": "74507c46c2cf4e0eed59f8f0fe32beec62193ae1112ff0102367cf8f18f09854",
+    "src/company_wiki/document_understanding/summary_input.py": "6570fd29be6467500d20e387a3d15b8b77b3044242c3fc31b7fcd9002f35a56a",
+    "src/company_wiki/document_understanding/summary_tasks.py": "2163f1a683114548a123ccad595c03f0e93520aa3f7d8eb42ebfd509ef942bb2",
+    "src/company_wiki/document_understanding/table_measurements/__init__.py": "0e70cabe032244817ae363f6938fa6156fe6efaa4d17a981308db457b78cce21",
+    "src/company_wiki/document_understanding/table_measurements/_labels.py": "229687a5b73f0ae088f4d21755a161b5e21df62da3d23e7cce30ae44fc10ee78",
+    "src/company_wiki/document_understanding/table_measurements/_periods.py": "12a63d328cce74b4e7f532bfedf83d81e88fd8d238aef8b64dcd8dffd1b387c9",
+    "src/company_wiki/document_understanding/table_measurements/bindings.py": "01a88a0b1ec14d70b95df584a9b8b62b8842c7d9c87e738803a754e7c2295925",
+    "src/company_wiki/domain.py": "001549c830705e76dc42bf4641ec205115bb0800b89c195112c11d1b46f236c3",
+    "src/company_wiki/graph_adapter.py": "3d6d281923725c02ccb79aa97d09d5004bb9410d62b92f3f7c9bc163da35b3dd",
+    "src/company_wiki/ingest.py": "7e08f7f205a39ba522f717d9518c1eb7e43ad3d10dd749aa299f36b71c8462a0",
+    "src/company_wiki/legacy_research_ingest.py": "e979c4e100189d9e50c0b169143124735b72c4fac7576e29d3b2369421dbfdbe",
+    "src/company_wiki/migration.py": "05d14b5955ed0e709787b01545d1be454eb213dd2df1c3f38e1d6f82d49263ba",
+    "src/company_wiki/model_config.py": "848c93379da45097c2636195cc0030b662485dde67541dcd0b3b8d23b1f671f9",
+    "src/company_wiki/narrative_subject.py": "d87194b4f7a0b4d9eaccca7135133308fbd051dc7ef8c1a98d63d3b5473f60c0",
+    "src/company_wiki/parser_adapters/__init__.py": "62d4cce47810674a49014b6fcf14c8a0756dea0896a454c0c2700f7ea0d3cf8e",
+    "src/company_wiki/parser_adapters/pdf_extract_v3.py": "31f2a8614fbcb7e8b2412f377fba7a11b1f138d5bbac26f9acd86eb16c335495",
+    "src/company_wiki/parser_adapters/pdf_ocr_page_adapter.py": "02712372c3da28450d12c11bb4e351fcca5ed29630ad98f9266a1c900f5bedab",
+    "src/company_wiki/parser_adapters/pdf_page_aware.py": "d4391ab5f236aee4b7080be924313e0d78e8ee9a3879b09e2e6319801dcd3089",
+    "src/company_wiki/proposal.py": "f24bed92e250d6738f2fdbd14d997d4906ebf0d8709f27973b3f8b86f4fe0a82",
+    "src/company_wiki/quality.py": "0979ce6eb275eaee503d7121d5fcd276e6cc7a4375dae3545b8545efcfad9e48",
+    "src/company_wiki/question_model.py": "04a9a81731082dac61c645eff5e5adb51e8e44409920a5856c488d712c02c573",
+    "src/company_wiki/question_registry.py": "85dcce2813ff79ae2c7ab7dc81d01e0aef3df9e514c3c7dd9ce841f7e5d4e499",
+    "src/company_wiki/resource_budget.py": "8c55fc4e6a0ad7faf0fbdcef1de06d4e709cdf2935db57c24c4e100092dd76a1",
+    "src/company_wiki/routing.py": "171fbc90b4ba1b23df2c5502e7ce841a71e137917d26d32a211f56912dead5f9",
+    "src/company_wiki/run_store.py": "55db6db0b88edb2655fe041f326cca9dc60a15dbbf6dad9242fc75297c4a68fd",
+    "src/company_wiki/scheduler.py": "8b190ae1c6e4a2be6400844e3509e2c6e7ed05db931a93bef303d3a9f7469ec7",
+    "src/company_wiki/source_catalog/__init__.py": "4c3328c0f9bef8af1000e284a92592a7045734fc82bda3dd02a048e18c6b2af0",
+    "src/company_wiki/source_catalog/acquisition.py": "d4ff52aec2d007610936a5bdb10a545e3d55c8c5fba216d946acab9aeef6192b",
+    "src/company_wiki/source_catalog/acquisition_config.py": "39ff26a07f12d439808ebb0c5036c59afe338c35196b2b2774f3c1f8b1e0e4f3",
+    "src/company_wiki/source_catalog/acquisition_failure.py": "b509eeb73464b13d1771e50888d2ff4e2e90dab4ca126c7483f25f64f1ae49fe",
+    "src/company_wiki/source_catalog/acquisition_journal.py": "1f575ed12917dd868c1a7d7a4a5cef9090bf83b54a8a6e1e0b404a38635b4d55",
+    "src/company_wiki/source_catalog/acquisition_observation.py": "3076bf0586a2004b5d46ff31200781d79729ef840852b616f0cc5c120a2020b1",
+    "src/company_wiki/source_catalog/acquisition_service.py": "4fcf81804b80d379391d34024714a1684565b7caca582d77b0c36c600372d3b3",
+    "src/company_wiki/source_catalog/acquisition_validation.py": "9cb48d4b36aab91277328d868e21b0c26e4082a2eb0febafd38f0c7e8767b00c",
+    "src/company_wiki/source_catalog/activation.py": "3a4c8f8318ff7eab2a0e9ed697e0a54074b91bbeb892e61bf8a0bc0bed897ec7",
+    "src/company_wiki/source_catalog/adapter_dispatch.py": "ab1d8a90d16f69dd16d6766af34c14ae9c8d32831594f769ee66115ffaa57d71",
+    "src/company_wiki/source_catalog/adapter_process.py": "1fef76f7e2c44257481c0cd222c15e2b34e156343aef231597a94ed19ce9ed44",
+    "src/company_wiki/source_catalog/adapters/common.py": "d2f62b08ddd1c33b56e28c94291b54f4731cfa8eaac10f937cbc3b051e165ac5",
+    "src/company_wiki/source_catalog/adapters/company_raw.py": "d1b6011cb56e95dc9c49de44897d4e5a1006bf65fe811df6bb93a574adf3d9ed",
+    "src/company_wiki/source_catalog/adapters/conformance.py": "d99bdf79be4a055500b25a5846bc59c85e88c45c005ac8ee70e4438b31ecfd99",
+    "src/company_wiki/source_catalog/adapters/dayu.py": "cc65a7d12ad7d692a488d5f866719da55689225a896adb55c8ccdb988884b72a",
+    "src/company_wiki/source_catalog/adapters/interface.py": "6c92dc1eca85d14f3ee927f6cf0cdd4e194f629324e817ed64f139c8a764a436",
+    "src/company_wiki/source_catalog/adapters/parity.py": "367fdb27602c13f911d872901216358dc8871a48ca8734d1ab64453b82f24af5",
+    "src/company_wiki/source_catalog/adapters/registry.py": "33524affc460a65af9d7d500d8e90f58b0b9d6f54c0686ba7a4d1e7dc6d07a79",
+    "src/company_wiki/source_catalog/adapters/sidecar.py": "a99ab8043ae08cd60dd70371911b38b5ee50f72923f038bc98e89b4f39346c91",
+    "src/company_wiki/source_catalog/admission.py": "d177821c1216d92d9f4a9a277b5ed682e7b05c7f38a863e4d3631b2f8e74f22c",
+    "src/company_wiki/source_catalog/architecture_gate.py": "7fe30a9f611851d19d8942e8f431fac426220d553dd6b7af4f160c096fe63818",
+    "src/company_wiki/source_catalog/archive_retired_evidence.py": "52e8488dd7597232adc4b1c7a685749d2a5b54e26c178463aa0942e2b4b600e0",
+    "src/company_wiki/source_catalog/artifact_backfill.py": "6766b1f4d0a42f700193cbc0706f8289e6f444a912ae2fbce7805062b2cd6947",
+    "src/company_wiki/source_catalog/artifact_dag.py": "0c8b1d6d1a28c94f27ea8ffe52a98d67b84f0a49653931b9c9317e27da6c20d1",
+    "src/company_wiki/source_catalog/artifact_handle.py": "3cc8fbf4f65380d17e2f0140390ef346f7cc17504854ff04b3ddf46498317b99",
+    "src/company_wiki/source_catalog/artifact_read_model.py": "ee2792312947bc694084b059384d7a30376a29293a57e3f69534a4d37bc55711",
+    "src/company_wiki/source_catalog/assertion_service.py": "bcf06fdd8d95e5dd69291623ea3711a16e3ca89be4661882830d0f39d4ee4313",
+    "src/company_wiki/source_catalog/attribution.py": "1925b3ef1595640a9459e66dff638c24ad2fdb9c33c2afd6ae7c57ef2fe9d12c",
+    "src/company_wiki/source_catalog/authorization.py": "73e76c35edec6313374f9352fc517719407b7865ce28671f34381aa38ace9c98",
+    "src/company_wiki/source_catalog/backfill_v2.py": "edfad4e79d7b4044066ba589ccc9ad2fcf837eb4030d3c3c8d07066fcb939f62",
+    "src/company_wiki/source_catalog/bounded_content_encoding.py": "1b093ca0dabcc3ee628f30f506cd337107eff31f657aa8998dfef8733072ebc4",
+    "src/company_wiki/source_catalog/bounded_http.py": "a63b63faffbd11ae669c31bd3772130af36258f66151a004c6b73526259597d5",
+    "src/company_wiki/source_catalog/canary_registry.py": "5e7ea3f4ae667bde349bb48f27574dc7a8b2f68ffd47d4f355ebc938dcacd9f9",
+    "src/company_wiki/source_catalog/canonical_scope.py": "7421ea436ab2f915dbfc73dc1e5443e0710c5e2294320304393a0382d5dc9c50",
+    "src/company_wiki/source_catalog/canonical_writer.py": "cee23be7c5e549e2d55cc47fc2157466544ba041c66ed3c2b19effdb6bc528fc",
+    "src/company_wiki/source_catalog/catalog_size_report.py": "07b3fd04021d147301f67311ebd4d0c85848550189bd62c4b6b7c3f906a9a4c4",
+    "src/company_wiki/source_catalog/cli.py": "1eeec29a081121bb496d93b24c028d0f524dc8d372ad409732768dbb53c25ef6",
+    "src/company_wiki/source_catalog/close_gap.py": "66aa14a11d9c4bc371995032972459be728aedc9c830a80df4395c32bc004d6b",
+    "src/company_wiki/source_catalog/code_identity.py": "322f6ac4ef1e82554e405d4d66609920770e992a56c596e119e1622c32d6bbfd",
+    "src/company_wiki/source_catalog/config.py": "47a029ded115f6fc7364a98db2f83a772e7f6f293ca53dd4030f456d6c470d04",
+    "src/company_wiki/source_catalog/control.py": "4d71129d779dec639e423ba8518f0288871bf3adbfb961b629557e26b6aa770d",
+    "src/company_wiki/source_catalog/dayu_cli_adapter.py": "496d12ccbc55662c1e23e878ec5e14df0281aeff83ad29163f6da8c3e753b807",
+    "src/company_wiki/source_catalog/dayu_fiscal_metadata.py": "04249d337bbf506fae6ee89df57158f8d27ab46a73906ab4b9d6fadfb43ba27e",
+    "src/company_wiki/source_catalog/dayu_sdk_bridge.py": "429e26d8e2e9a8fa3e8dc57b9d97a4fd213976f4d497ebfa3d1ed91c0371ff70",
+    "src/company_wiki/source_catalog/dayu_sdk_cli.py": "abd44602a0e40bd9384da6db01dc6e828f28cecd73a78b1971def1b776049ad6",
+    "src/company_wiki/source_catalog/document_kinds.py": "699c09ab3846eb30905c1b7f3933271e8499d660274fef002eecc67c13764cdd",
+    "src/company_wiki/source_catalog/download_budget.py": "7b82ee5a365f0a50045489be3835472166413b9b47572c19be1f5a55062b91aa",
+    "src/company_wiki/source_catalog/dropbox_governance.py": "4d601c1705557d7dcf3978baf2f3a51d4a27ea6313a8c703fd0c3e5e57180c04",
+    "src/company_wiki/source_catalog/duplicate_cleanup.py": "9a942b23b3c78c41deaf13c159ecb1448e3f50d5447ea6000e7cea9126c0e7ef",
+    "src/company_wiki/source_catalog/entity_detection.py": "a65ce1423d7b8f373545ca4d42a66a467cf218b158d1ee0156eddde5e440465e",
+    "src/company_wiki/source_catalog/error_taxonomy.py": "5e0635455e70dfd5bd72938b31f7b26d37bba8b7d0877880c6f7ee51ad543f4d",
+    "src/company_wiki/source_catalog/evidence_query.py": "99450d60b93cd3e6824b39d93cc3c78425aa51e716cf4d254eeb574528f9fe5a",
+    "src/company_wiki/source_catalog/extraction_quality.py": "e8bb592d732a26db02a738f04257d3a355d5608474b77fc696e29daf6f4fee68",
+    "src/company_wiki/source_catalog/flags.py": "78abc6b5dfd8f86566e1903612bc99ab02661108287e3e5e8beca983fc37b06a",
+    "src/company_wiki/source_catalog/focus_cleanup.py": "9b1453452bbc31e5a0b714bfb068bd2e83b84808cf965913ea34bf0628f14504",
+    "src/company_wiki/source_catalog/gap_plan.py": "9d6ad1db49850fef94bce79a108608d29a238a7357c07e213c4e600c3346a6d8",
+    "src/company_wiki/source_catalog/homepage_identity.py": "685cef38772c69c71226eb5cc40f168826d3486d23cd4a7e21b5990896426739",
+    "src/company_wiki/source_catalog/html_capture.py": "0a3455bbf497824b388e986e1e0a2e48426cf48eee58b1d04803cd26646d688c",
+    "src/company_wiki/source_catalog/identity_cli.py": "989cf4181f7c8b2084663058fcd84a526c5d03a577cc668983a49dd87d1572a2",
+    "src/company_wiki/source_catalog/legacy_close_gate.py": "6b8668ae417fc1e2bf4f80bf575ccb37166173c63263161c20c9b075a69ec0aa",
+    "src/company_wiki/source_catalog/llm_failure_policy.py": "6b71af022d871c96b8c40e2c1960a993ad820165c50d8ecc632c1960798441e9",
+    "src/company_wiki/source_catalog/local_inventory.py": "59c8a70d2acc46cdbe77d1dd87e0fca30f9ce9108c683bbc2b6a7b0901d6276b",
+    "src/company_wiki/source_catalog/local_prepare_cli.py": "2a65e18133c2f3c57dd0129dbdf648f9ae9f1576e74d9a82b81a4feecc4665cc",
+    "src/company_wiki/source_catalog/local_reconcile.py": "2c0cecfb23e2a61645576ed89ce9309d61e90f643b432810e8720019e64e0963",
+    "src/company_wiki/source_catalog/lock.py": "5f0d33d657949a2ba53affbe41a2c873e1ccb2008de3d72507e062c7c1f354f6",
+    "src/company_wiki/source_catalog/maintenance_retirement.py": "a4119734be4c51dff0a208b6d86b2374b81e6c3a25225b900e3ddcb08b16a60b",
+    "src/company_wiki/source_catalog/metadata_observation.py": "371d357533e975084e8c468762a3b6d76de6b6d0284483122c292fbbbbc8cac3",
+    "src/company_wiki/source_catalog/migration.py": "fcff4fc82fb13e301beaac4f4f497220c79c4713df59d48bf935cd23ef0f6298",
+    "src/company_wiki/source_catalog/migration_ledger.py": "e33fb416a4d2076fa17f17d3d57317004e33c7a14825720c6530c9010889d883",
+    "src/company_wiki/source_catalog/models.py": "67dd90d355f3e9b75c6df95e375c932a38171076a46a6a9b382507677906766e",
+    "src/company_wiki/source_catalog/n6_budget_dedup.py": "992ea8dfce2808aac33827e921bfb4997e3605052eee18822c23e5b5ebda85a7",
+    "src/company_wiki/source_catalog/n6_candidate_completion.py": "6e42c29ae05a8bd904598aba9d5944ec2f90ea01585ede8b21839081cf19ee40",
+    "src/company_wiki/source_catalog/n6_candidate_operating_facts.py": "206752f12bfaa463384e308383bcbf49f846b34969aa911d4a39214a8b7d5832",
+    "src/company_wiki/source_catalog/n6_scope_changes.py": "818e711a1931c09cca106b6dd84079db4c1df8feb3c5e117211e98d5352fa396",
+    "src/company_wiki/source_catalog/narrative_antecedent.py": "41d42ef7d43822715a5b35f59246f41e3a8fb4a61ef84969819d23bc5b371237",
+    "src/company_wiki/source_catalog/narrative_artifact_store.py": "0ef88398dc53877bde1ce251324232c890514a7e15d9e46d159a4ed64298c7cb",
+    "src/company_wiki/source_catalog/narrative_budget.py": "508688f14b98c862926adb8a6b22435f6f1bb087925b04f81f41892266987586",
+    "src/company_wiki/source_catalog/narrative_business_disclosures.py": "6a40e4771e7622c688a8361274b2edadd328b645db2520c41db6d0d397a31eb7",
+    "src/company_wiki/source_catalog/narrative_business_groups.py": "93d2f5f9f16804bd6dc7059bb28f5e1032fdf8999976ae529232290ff1b0125d",
+    "src/company_wiki/source_catalog/narrative_business_meaning.py": "e56f7e605e23b5bf835e66f170ab8e0515c35386a0c05981d41c57dc7f9f2d28",
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "72f3cad8cf9e1bfa13b3aa8d442f8c69d1d92b18c1685728cdd2ebe9668d5aed",
+    "src/company_wiki/source_catalog/narrative_candidates.py": "65d3fe798b9d8ae86805472d475ce4f0d189af9f2c2d38a06f31da66e05a4904",
+    "src/company_wiki/source_catalog/narrative_context.py": "4f4749cd3df6c6a16d31e9ea5327beb5cee9d0895c6e25ef2df19404fde69e4e",
+    "src/company_wiki/source_catalog/narrative_document.py": "889df37ad7325325a05d79e5a15cf45a5b395d5a273f856c0a2ee2662527d7c9",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "9d8da04aeffc7d5e812d8c3a97752d14acc3e61e99106b6776de6d0886e1c337",
+    "src/company_wiki/source_catalog/narrative_finalize.py": "b7190eda70265140b3195ddb7a2b068273065303d3de76dc70e158a862c3ac33",
+    "src/company_wiki/source_catalog/narrative_group_candidates.py": "2939de5e85af77c4fe387c1ebcc97328283ff134311aac4d0a47b64dc5488617",
+    "src/company_wiki/source_catalog/narrative_language.py": "e649b2ae01ebf966438d3db91abb7588032ef5ad2ca8af06b8a0d9b6ef66d85f",
+    "src/company_wiki/source_catalog/narrative_matching.py": "1ce34bb2de6a68bbe590b9f571ad0289d9dbbe95654e50f0f96c7a8f70495454",
+    "src/company_wiki/source_catalog/narrative_native_dependencies.py": "e0ee41a8a732a9fa8df358ec4fb9ace436d3ac24b63f352caa5778f75c3e8117",
+    "src/company_wiki/source_catalog/narrative_native_ranges.py": "b42aeb4b09896de059b0130957040e16baaf04415aa0d3e98093fb0662343dda",
+    "src/company_wiki/source_catalog/narrative_neighbors.py": "44fca7fd68a1c1365dbbc6c9700883a979f85bbfe4789236f19048fffcd6d09c",
+    "src/company_wiki/source_catalog/narrative_normalization.py": "97eca82a8472c167b7b1cd065eae154dca2e7019b77649ccc748e8fadfbb627a",
+    "src/company_wiki/source_catalog/narrative_ocr_groups.py": "705dd4a67c020efffaaea74d0076b981ec8ae9fe8a297ff15f3e1f1e0f08ae57",
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": "ee77cd8cf295a5748d762b41e1fd75819b475632d44852ea81abd4c8114d16b4",
+    "src/company_wiki/source_catalog/narrative_parent_composition.py": "35333e8af811736424f13a9d00337fa3f54093c80bc33a9906f29746d59f04e2",
+    "src/company_wiki/source_catalog/narrative_pdf_candidates.py": "3d999423bf61ca6e77ddb83c27c5083b74723deaea9ecc902fd5cf7819d65044",
+    "src/company_wiki/source_catalog/narrative_pdf_groups.py": "f67b9409cd1158219caa23120e04cd6aa1e7bb7cd8e27b2dcecd8f2f42333ff3",
+    "src/company_wiki/source_catalog/narrative_pdf_intent.py": "6c220b8f3bfcbde879c98ba50b300fab90c730bdb38c6df660b871eae70e1050",
+    "src/company_wiki/source_catalog/narrative_pdf_layout.py": "8e366ef82bbed4ca8fbd3c45564f2b9f4031355a029800eb4ab1b2804473e12e",
+    "src/company_wiki/source_catalog/narrative_pdf_qa.py": "f06ff742370f8d68b18f283869b31a223dffced7d1472bf489baad153312a5b1",
+    "src/company_wiki/source_catalog/narrative_predicate_state.py": "0f002d36ab8d4d32af1c2d62af54a4f02b7b986fd08216a5e41125f75d75d27b",
+    "src/company_wiki/source_catalog/narrative_project_context.py": "918bc36a7a5de03c9163855eff2a216cb15099a9896d78d60f5af22a5422f65e",
+    "src/company_wiki/source_catalog/narrative_reading.py": "aedc19846af1fc1d8a3ff2ae849fa9ba90581ff128d49cbfc523bcc9ccf6b9f9",
+    "src/company_wiki/source_catalog/narrative_recognition_scope.py": "f6efa0788fe698c9dccc7aa555916ea326f82736ef49813dac9db7f4e52243c9",
+    "src/company_wiki/source_catalog/narrative_replay.py": "bd28988c1be17f2d545e61b6efefbdc06c63036491a5d008386dab0c9518f644",
+    "src/company_wiki/source_catalog/narrative_reporting_rules.py": "2830f09deb00ad8e98fee636454b523b471898b7d9045cd24433459c1e77e3e1",
+    "src/company_wiki/source_catalog/narrative_retrieval.py": "5318557aff5b973e92071b845910b0d3d4d0912c08f90a6c2d10cac714c04f93",
+    "src/company_wiki/source_catalog/narrative_revenue_guidance.py": "f895322ef6b6b5f189b35fdb4bd4b8b4f2482cc78564b141ea6c743826cb7e44",
+    "src/company_wiki/source_catalog/narrative_routing.py": "b61c3d4c4650a66c53fa072207fa98773821b3cad5ded571b36c2a334ce0257f",
+    "src/company_wiki/source_catalog/narrative_semantic_coverage.py": "fd2866db2c8c831c9b74e874f7e40c021e08d44cb3a45684cb3c7d31180a72ca",
+    "src/company_wiki/source_catalog/narrative_source_purpose.py": "f31122bf5452b42864edbde61490e4408f41b5fb7a6f990fa431cbdf7dc1771d",
+    "src/company_wiki/source_catalog/narrative_stage_assertions.py": "fbb75ccd07016bcc70993f24bb38a1e2919c4398ba9ec79656f54013c8c3ec24",
+    "src/company_wiki/source_catalog/narrative_transport_cli.py": "8a2cbc088581496a8b48094cb53767f12b7a58448831f715c9cfb6397d41138e",
+    "src/company_wiki/source_catalog/narrative_visual_units.py": "25c16a3cb89348d4cd472dccc84fee0c943444ef3867ad37bf665a57c86fbc7e",
+    "src/company_wiki/source_catalog/normalized_meta.py": "1bf09a97a53a459fdb223ebaeace20824bd462c9bc847b076792ad4f472576b2",
+    "src/company_wiki/source_catalog/normalizer.py": "08b7fa4eafc37e119ccb59f94a969244e82a854694beab4d5b11bb306f40b40e",
+    "src/company_wiki/source_catalog/observability.py": "6e87b02c932810a32688dad58d488f1d4453d7de94650a40a25262ee93ad8ca8",
+    "src/company_wiki/source_catalog/official_discovery.py": "6869349b5d6f4861e9c78cdc8748aaa7f547d2866cf278fc5f721418a137b123",
+    "src/company_wiki/source_catalog/official_json_import.py": "4c0e9fe062b49ad88044abf5431070885cdc8c1ae497b271cc585e2549b2f22b",
+    "src/company_wiki/source_catalog/official_json_layout.py": "d18850b6724a35348c6e0edbd9154c3774e486cac90c46e55f2a891ebd474f59",
+    "src/company_wiki/source_catalog/official_json_projection.py": "6f6e462b039a54387768293510af121759f1584ae9237b82dd0b929da7915892",
+    "src/company_wiki/source_catalog/official_json_structure.py": "cd44f56e0baa05e60866f7a70d5d0eb58a15582fcffd17e7348d3b2fc1717a68",
+    "src/company_wiki/source_catalog/official_json_subject.py": "287c5d25687c9f420c80de7bea9193566479d66f81b95767e822424a390655ae",
+    "src/company_wiki/source_catalog/official_source_cli.py": "bdd06d5728dc25ef9a7433e5d7c1c89534f3fa52b9dd6e15ce7867e40d9c6162",
+    "src/company_wiki/source_catalog/official_source_flow.py": "3c4640201f9a1f70b4ce41a51d752f3f8fb5d048eb28f1296658298d2cf714c9",
+    "src/company_wiki/source_catalog/operation_actor.py": "036c692fd806a76b2155e597cd611794f340677a6d1acc91496a1cc5f042da96",
+    "src/company_wiki/source_catalog/operation_contract.py": "4b5f0ca35073d1eb51dc59e808641679c30c372cede736833a85803364928398",
+    "src/company_wiki/source_catalog/operation_projection.py": "f046ae241db4f3b0680f055ea0c3f783d431bd8c40918dcab1f9aef7bf8911a0",
+    "src/company_wiki/source_catalog/policy.py": "78320c429e4b7bc92e257c87bbee3dd97b1a384111cb1bd059828713b54763df",
+    "src/company_wiki/source_catalog/policy_2x.py": "50795556585892adef734e50a00c82f72168ee445f444599cb30a07039f424c3",
+    "src/company_wiki/source_catalog/policy_3x.py": "3e3023506e08121aa0a1cec728b9de760e05756f09fb34cc02fdb36f798b06d8",
+    "src/company_wiki/source_catalog/portfolio_promoter.py": "9b7c0ef82826da674f36a1609b8eafef4384fd1978fa75a560ce7f7be40e85d1",
+    "src/company_wiki/source_catalog/processing_demand.py": "90f232edb7804f78a16c6b4e865255cd607a1d0dc30384fc1cd6faa1833ac88b",
+    "src/company_wiki/source_catalog/producer_events.py": "8e0f18fbd17c1a2bb0e50947831889fdaef2f7ae318ad3c93a5333cfe6aac874",
+    "src/company_wiki/source_catalog/producer_journal.py": "d32767d9b44cbff26054b606c1ae13c0d65510ba18ae4505df295c8b2965202e",
+    "src/company_wiki/source_catalog/prompt_injection.py": "2ba4ca6398c5e7400535d2385c4ad55ef04ee8001d1995bcc8c430cbdda14bdc",
+    "src/company_wiki/source_catalog/prompt_injection_guard.py": "9790a0c28122b0f8e71514fb3b1aaa6ee231eca6cf98e12101c22beda7ad67b5",
+    "src/company_wiki/source_catalog/prune_retired_evidence.py": "54e92897a1952b9bda2af39eaaa7df744c950fe9d7b8921489617560b5a47f61",
+    "src/company_wiki/source_catalog/qualification.py": "130811c14921cd71d298149d830610432fb9431e232afe1ba018096dcf2a1184",
+    "src/company_wiki/source_catalog/read_chain.py": "ed4d53c6bedf2c28cdfeb08fdc0d8bd2cd442dfca1e4618c1b59e6bffc5df3c2",
+    "src/company_wiki/source_catalog/reader.py": "10995cbaa2854844a359a12f4b6544186bfec49647923566ebfc057bb9a1b8d6",
+    "src/company_wiki/source_catalog/reconcile_retire_state.py": "26a5c1aa9b6388d896a0671e48a223a666465c166ad33f066e54e9215c215789",
+    "src/company_wiki/source_catalog/reconciliation.py": "1de2764d6f1397b315dfa85b005805513c3b9377bca6249ef05fe29ea02a4795",
+    "src/company_wiki/source_catalog/registration_scope.py": "85f6c0b324c13181e7bfa8d1e9f0efa406b6149817d35e0a6cbc79c20f81146f",
+    "src/company_wiki/source_catalog/remediation.py": "fe5d334726e61e87be64bb777fee1624bc8449655384e2c61ad952ecbb6fce09",
+    "src/company_wiki/source_catalog/resolver.py": "8e6196c3b7c87794666f9edd798422c12463190538a463c296d04fb2a76b92a3",
+    "src/company_wiki/source_catalog/restore.py": "1c1bbbc35f810bd83c58fbf484602d0d94697d15cc21294013bfb1f550ea37df",
+    "src/company_wiki/source_catalog/runtime_policy.py": "71971edfe180469ae431f129afec3789cd481404c5624a6f72b23da1d49ab7b7",
+    "src/company_wiki/source_catalog/scanner.py": "897f641afd5ada10d570310fb72debf0fe5df05d7b0781297e2f5d30ebf65601",
+    "src/company_wiki/source_catalog/scheduler.py": "a4bf0fa032d6011c8fdf47cc51df2e851e1bb8db5f91d0f549b63eed3c8183e3",
+    "src/company_wiki/source_catalog/section_chunk_fact.py": "1103398600952c099aa29ad8ae4cc06d0e881da5051e8943625094c50b1b8ded",
+    "src/company_wiki/source_catalog/section_query.py": "a40d54a36fe14fd0e76b322477885777ad2b3fa8b5263a2d8e726a2c63214f49",
+    "src/company_wiki/source_catalog/security_code.py": "e723575171bd364521dae2ebbd97b8d1acb807d667c7b8448ee96edafad12195",
+    "src/company_wiki/source_catalog/security_identity.py": "79a5cdb123ca2cbabe83b091aff9bb48503a55e6f6ba882b5310a8645996d052",
+    "src/company_wiki/source_catalog/service.py": "3d88bd7d7b81d55b1ae566d860adb0b5527cb47842bcd3c9a3c48fcc47b26fb6",
+    "src/company_wiki/source_catalog/shadow_parity.py": "dd175bf1634334787d0330de55751a791dc7e1168a10bf2d896b227b13f8b892",
+    "src/company_wiki/source_catalog/source_availability.py": "275e66bf745b21cd331ab2102f5309bea2b9d5b5e512be0adcba524c09ab82de",
+    "src/company_wiki/source_catalog/source_bundle.py": "fe64912172d3004b137ebf415a01b8b3e75eb41ea785edf254644258f0c2261c",
+    "src/company_wiki/source_catalog/source_export_v2_cli.py": "b9ff7cf3c8521e6e63c46f47bd7b708ec11ffb650e53c060861f69db0164e17e",
+    "src/company_wiki/source_catalog/source_group_scope.py": "167e068ca0ebcbf677d4f64e4eed5e0134ff73f08055f7ab54f2a5e862f9a27a",
+    "src/company_wiki/source_catalog/source_location.py": "1b521cd1f6133335e4e934adb3e8e8220ce27409612a195cd62ece0f9c3c3676",
+    "src/company_wiki/source_catalog/source_operation.py": "ffcdbd035547a9cbc42c65efe04a0731d8ad55eef60d8b925eeb303bd722d5b3",
+    "src/company_wiki/source_catalog/source_query_cli.py": "fca1d028725e3f22f569875a2774562bc57cef4fa3511bcf50ea4dfa101949df",
+    "src/company_wiki/source_catalog/source_read_policy.py": "7313355fa9cd36e19d1b984dbbc5a63d1ebf99c5395843c6722e47b9868758ff",
+    "src/company_wiki/source_catalog/source_reader.py": "ff66ee735fb3d7ca7ffae9c82615240468807c894e1a9e883e09075b12a44e39",
+    "src/company_wiki/source_catalog/source_reader_cli.py": "f6ff7dcc14ebd6ffeba99dc597b150d4f2d5bc9f42d1a6850bf1d439e5b5c715",
+    "src/company_wiki/source_catalog/startup.py": "b6dabe59543f6a1c5c4af7982f97aa2167f7ac264f17eca53166c4b9e320ed8b",
+    "src/company_wiki/source_catalog/store.py": "ccae2c324b2efbac3824cef4e3fa3cfa273583efb6aeac11334c70625e5fd99e",
+    "src/company_wiki/source_catalog/trace_parity.py": "d40ef902dca7d81d3d44be49b0a40ac8757ebcbff9189d93f3701142a5833298",
+    "src/company_wiki/source_catalog/transcript_fmp_contract.py": "bf8d6d82c239741c66b9cfb63641276b6e29532fcd5ceb13e5479b087b8dd2d3",
+    "src/company_wiki/source_catalog/transcript_import.py": "a954fc19037f35814950faf21624a4634745cf75675fee519937025a3b384b98",
+    "src/company_wiki/source_catalog/transcript_import_cli.py": "f0ecee57e98508fc31b2fdb90a3a6251c71f5147de34e6f58bb859fed939cbc0",
+    "src/company_wiki/source_catalog/transcript_json_extract.py": "85433d1745929cb16851461a42c55f0e70905740831d384893f1aef7b24e918e",
+    "src/company_wiki/source_catalog/transcript_layout.py": "b3e0eb04d68f0195d7726f03a0ab1daba04ec10a90874f4b2201f56382b9f34c",
+    "src/company_wiki/source_catalog/transcript_lineage.py": "e7e3856f71d7a9df90a3f427fcedbe7cc4220dc728c89e68ba2f661a0c0d2482",
+    "src/company_wiki/source_catalog/transcript_material.py": "aeb815ec218f8adc254d69884b44f9e671e3cb07742ab6e8ac126a36061de69c",
+    "src/company_wiki/source_catalog/transcript_text_extract.py": "c9c64a6260706ddce4b0a2c7fa387bf4c3e2f0e033ae647692fb97d0577dd2bf",
+    "src/company_wiki/source_catalog/transcript_tool_contract.py": "cfc6d17ad4789e1f39587053d593ab9787e4b176fbf86e81149e9d08aa97dffe",
+    "src/company_wiki/source_catalog/transcript_tool_errors.py": "cf0bfa2d7eb1a346bf1999e3d96cd28224c17ec306cdfff065b5b5224f798c64",
+    "src/company_wiki/source_catalog/transcript_versions.py": "868e931fc2d077cb4dab2707f4533a202ab0289b6f4b422c4b8eaf9784da45cd",
+    "src/company_wiki/source_catalog/url_binding.py": "d8468aeabdf0adda063c755cf603feae78eea75aa7f3189c7f0cc5146f9f49e7",
+    "src/company_wiki/source_catalog/visibility_bridge.py": "3fb393f9540f5f4c791aef3f29467d41bae6d6ece03c1fb1ed5e96e336bf6815",
+    "src/company_wiki/source_contract/__init__.py": "bc0b9fd3a5de53a36c9dcf399590bb90a0fc41a02b89654090f0b35062eb0414",
+    "src/company_wiki/source_contract/announcement_cli.py": "b96b41e99c7ada43dfc380c559e9c9670c065a378f1e8d5fe1d201d964973b88",
+    "src/company_wiki/source_contract/announcement_collector.py": "65b4a7673e3dd04a662d6a04e57bb36d9f50c69e5f599244ae360f82854b0ff6",
+    "src/company_wiki/source_contract/cli.py": "ad808941b993a3811c37ddb789fddb95d8b7b5039fe32cbac1950a98c1d4348d",
+    "src/company_wiki/source_contract/compatibility.py": "c39a8148d64346c030102d023bc17b0431846789e78682b89d3fe58f95f4d415",
+    "src/company_wiki/source_contract/evidence_span.py": "8ee05d0aa195f1365d035d38e8b3f7dd4406d7578c402062de4ebf5332565239",
+    "src/company_wiki/source_contract/schema.py": "4ed344929a93544b19c17be5c26679567b95c07489d48fa03dde718401903526",
+    "src/company_wiki/source_contract/schemas/__init__.py": "f1bd84dd9c013fd8ada353164b0b0a0d44e34033e1ab971d2d935a555ce1a532",
+    "src/company_wiki/source_contract/source_export.py": "a9812b56a4c66c2c16f02c946d2c3165cff94e0ed1f96b48b677b2fd92afbe63",
+    "src/company_wiki/source_contract/source_export_v2.py": "9cd518d87381941025721336a74975b3770bdae5bb36344780eaf715dac8becc",
+    "src/company_wiki/source_contract/source_manifest.py": "46efb68e48035cf638b067cbe007f4a336920a847522303d03de386ba4066f62",
+    "src/company_wiki/source_registry.py": "92e06fa9cbc56c827f80e34654dbb356980b446f378db2abdbcb703ccb70c32f",
+    "src/company_wiki/wiki_repository.py": "9c1e0478b44c4c89da46bbecb064c0e02e47b50b1f27ddc15a130e5da58c585d",
+    "src/company_wiki/document_understanding/profiles/reading_catalog.json": "6da5b087eaae8126e75e0075af5e248309c747abc99457c5c6292e48f3f7d909"
+  },
+  "runner_sha256": "04c7dc75b197730746b305cb4f9a4a7274fb1b1cbc1c41e2e27b6b8ff5952a29",
+  "baseline_sha256": "4e458311992098e4c189ec4a9e0f9df47a94d77a8e593d3784e29feb4ab02a0c",
+  "parsed_units": 14025,
+  "parsed_pages": 429,
+  "parse_work": 420052,
+  "work_used": 15998158,
+  "work_limit": 16000000,
+  "exhausted": true,
+  "status": "partial",
+  "candidate_count": 7491,
+  "selected_count": 112,
+  "budget_exception": null,
+  "stages_inclusive_do_not_sum": [
+    {
+      "stage": "pipeline.understand_units",
+      "inclusive_work": 6334220,
+      "wall_seconds_diagnostic": 9.9776
+    },
+    {
+      "stage": "reading._understand",
+      "inclusive_work": 6348245,
+      "wall_seconds_diagnostic": 10.0061
+    },
+    {
+      "stage": "reading._candidates",
+      "inclusive_work": 9229860,
+      "wall_seconds_diagnostic": 8.0534
+    }
+  ],
+  "caller_hotspots": [
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_operating_relations.py",
+        "fact",
+        612
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_operating_relations.py",
+        "fact",
+        612
+      ],
+      "accepted_work": 3262920,
+      "rejected_requested": 2120
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/structure/_work.py",
+        "stage",
+        33
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/structure/_work.py",
+        "stage",
+        33
+      ],
+      "accepted_work": 3208304,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "statement_members",
+        445
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "statement_members",
+        445
+      ],
+      "accepted_work": 1088288,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_operating_relations.py",
+        "local_operating_context_dependencies",
+        555
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_operating_relations.py",
+        "local_operating_context_dependencies",
+        555
+      ],
+      "accepted_work": 840618,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/operating_states/relations.py",
+        "_clause_events",
+        602
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/operating_states/relations.py",
+        "_clause_events",
+        602
+      ],
+      "accepted_work": 594944,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_hints/contract.py",
+        "charge",
+        185
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_hints/contract.py",
+        "charge",
+        185
+      ],
+      "accepted_work": 590246,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "_candidates",
+        985
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "_candidates",
+        985
+      ],
+      "accepted_work": 449520,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_operating_relations.py",
+        "local_qualification_dependencies",
+        375
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_operating_relations.py",
+        "local_qualification_dependencies",
+        375
+      ],
+      "accepted_work": 413816,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_hints/columns.py",
+        "observe_single_body_lane",
+        57
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_hints/columns.py",
+        "observe_single_body_lane",
+        57
+      ],
+      "accepted_work": 331842,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_operating_relations.py",
+        "local_qualification_dependencies",
+        370
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_operating_relations.py",
+        "local_qualification_dependencies",
+        370
+      ],
+      "accepted_work": 311726,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_operating_relations.py",
+        "local_qualification_dependencies",
+        466
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_operating_relations.py",
+        "local_qualification_dependencies",
+        466
+      ],
+      "accepted_work": 306015,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/operating_states/relations.py",
+        "_detect_operating_relations",
+        1059
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/operating_states/relations.py",
+        "_detect_operating_relations",
+        1059
+      ],
+      "accepted_work": 295431,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_bridge.py",
+        "_overlay_observation",
+        46
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_bridge.py",
+        "_overlay_observation",
+        46
+      ],
+      "accepted_work": 267305,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_pdf_candidates.py",
+        "charge",
+        40
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_pdf_candidates.py",
+        "charge",
+        40
+      ],
+      "accepted_work": 249996,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_operating_relations.py",
+        "_source_material_range",
+        288
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_operating_relations.py",
+        "_source_material_range",
+        288
+      ],
+      "accepted_work": 236387,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_hints/neighbours.py",
+        "_query",
+        55
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_hints/neighbours.py",
+        "_query",
+        55
+      ],
+      "accepted_work": 234250,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_hints/neighbours.py",
+        "_assign",
+        35
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_hints/neighbours.py",
+        "_assign",
+        35
+      ],
+      "accepted_work": 228011,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "_prose_reading_packages",
+        287
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "_prose_reading_packages",
+        287
+      ],
+      "accepted_work": 202384,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/operating_states/relations.py",
+        "matching_text",
+        809
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/operating_states/relations.py",
+        "matching_text",
+        809
+      ],
+      "accepted_work": 165838,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/operating_states/relations.py",
+        "_detect_operating_relations",
+        1039
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/operating_states/relations.py",
+        "_detect_operating_relations",
+        1039
+      ],
+      "accepted_work": 159683,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/narrative_continuity.py",
+        "charge",
+        391
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/narrative_continuity.py",
+        "charge",
+        391
+      ],
+      "accepted_work": 146831,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/structure/_work.py",
+        "reserve",
+        17
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/structure/__init__.py",
+        "commit_semantics",
+        227
+      ],
+      "accepted_work": 127142,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_hints/columns.py",
+        "observe_single_body_lane",
+        86
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_hints/columns.py",
+        "observe_single_body_lane",
+        86
+      ],
+      "accepted_work": 96232,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/operating_states/relations.py",
+        "_view_and_names",
+        235
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/operating_states/relations.py",
+        "_view_and_names",
+        235
+      ],
+      "accepted_work": 82420,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/strategy_binding.py",
+        "visit",
+        273
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/strategy_binding.py",
+        "visit",
+        273
+      ],
+      "accepted_work": 75326,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "_prose_reading_packages",
+        178
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "_prose_reading_packages",
+        178
+      ],
+      "accepted_work": 68882,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/strategy_binding.py",
+        "fold",
+        44
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/strategy_binding.py",
+        "fold",
+        44
+      ],
+      "accepted_work": 58167,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/narrative_continuity.py",
+        "__init__",
+        268
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/narrative_continuity.py",
+        "__init__",
+        268
+      ],
+      "accepted_work": 56101,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_bridge.py",
+        "bind_layout_context",
+        235
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_bridge.py",
+        "bind_layout_context",
+        235
+      ],
+      "accepted_work": 54657,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_hints/columns.py",
+        "observe_single_body_lane",
+        66
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_hints/columns.py",
+        "observe_single_body_lane",
+        66
+      ],
+      "accepted_work": 52188,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_native_dependencies.py",
+        "collect_native_dependencies",
+        50
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_native_dependencies.py",
+        "collect_native_dependencies",
+        50
+      ],
+      "accepted_work": 48149,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/strategy_binding.py",
+        "bind_reading_plan",
+        403
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/strategy_binding.py",
+        "bind_reading_plan",
+        403
+      ],
+      "accepted_work": 47810,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/pipeline.py",
+        "understand_units",
+        146
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/pipeline.py",
+        "understand_units",
+        146
+      ],
+      "accepted_work": 42076,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "_prose_reading_packages",
+        151
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "_prose_reading_packages",
+        151
+      ],
+      "accepted_work": 42076,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "_prose_reading_packages",
+        253
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "_prose_reading_packages",
+        253
+      ],
+      "accepted_work": 42032,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/operating_states/relations.py",
+        "_view_and_names",
+        233
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/operating_states/relations.py",
+        "_view_and_names",
+        233
+      ],
+      "accepted_work": 41990,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/strategy_binding.py",
+        "matches",
+        51
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/strategy_binding.py",
+        "matches",
+        51
+      ],
+      "accepted_work": 40931,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_bridge.py",
+        "add",
+        187
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_bridge.py",
+        "add",
+        187
+      ],
+      "accepted_work": 40824,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/operating_states/relations.py",
+        "_detect_operating_relations",
+        1054
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/operating_states/relations.py",
+        "_detect_operating_relations",
+        1054
+      ],
+      "accepted_work": 38472,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_operating_relations.py",
+        "_source_material_range",
+        279
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_operating_relations.py",
+        "_source_material_range",
+        279
+      ],
+      "accepted_work": 38412,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "context",
+        305
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "context",
+        305
+      ],
+      "accepted_work": 34943,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "_prose_reading_packages",
+        359
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "_prose_reading_packages",
+        359
+      ],
+      "accepted_work": 31210,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "context",
+        296
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "context",
+        296
+      ],
+      "accepted_work": 29543,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/structure/_work.py",
+        "observe",
+        28
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/structure/_work.py",
+        "observe",
+        28
+      ],
+      "accepted_work": 28291,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_antecedent.py",
+        "build_antecedent_windows",
+        104
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_antecedent.py",
+        "build_antecedent_windows",
+        104
+      ],
+      "accepted_work": 28051,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "_candidates",
+        563
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "_candidates",
+        563
+      ],
+      "accepted_work": 28051,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_hints/neighbours.py",
+        "vertical_clearances",
+        95
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_hints/neighbours.py",
+        "vertical_clearances",
+        95
+      ],
+      "accepted_work": 28050,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/structure/_work.py",
+        "reserve",
+        17
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/structure/relations.py",
+        "_geometric_lane_pairs",
+        382
+      ],
+      "accepted_work": 22991,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/native_table_bridge.py",
+        "_each",
+        18
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/native_table_bridge.py",
+        "_each",
+        18
+      ],
+      "accepted_work": 20098,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_hints/fine_geometry.py",
+        "_range",
+        89
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_hints/fine_geometry.py",
+        "_range",
+        89
+      ],
+      "accepted_work": 19879,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_evidence.py",
+        "_project_native_prose",
+        1111
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_evidence.py",
+        "_project_native_prose",
+        1111
+      ],
+      "accepted_work": 19779,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_normalization/layout_snapshots/unit_binding.py",
+        "take_one",
+        73
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_normalization/layout_snapshots/unit_binding.py",
+        "take_one",
+        73
+      ],
+      "accepted_work": 19759,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_hints/fine_geometry.py",
+        "_font_style",
+        241
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_hints/fine_geometry.py",
+        "_font_style",
+        241
+      ],
+      "accepted_work": 19759,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_hints/fine_geometry.py",
+        "_take",
+        46
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_hints/fine_geometry.py",
+        "_take",
+        46
+      ],
+      "accepted_work": 19759,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/geometry_intent/reading.py",
+        "_charge_material",
+        35
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/geometry_intent/reading.py",
+        "_charge_material",
+        35
+      ],
+      "accepted_work": 19065,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_operating_relations.py",
+        "_source_material_range",
+        270
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_operating_relations.py",
+        "_source_material_range",
+        270
+      ],
+      "accepted_work": 18714,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_bridge.py",
+        "_apply_layout",
+        145
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_bridge.py",
+        "_apply_layout",
+        145
+      ],
+      "accepted_work": 18282,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/structure/_work.py",
+        "reserve",
+        17
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/structure/__init__.py",
+        "_build_structure",
+        362
+      ],
+      "accepted_work": 18253,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_bridge.py",
+        "_bind_context",
+        270
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_bridge.py",
+        "_bind_context",
+        270
+      ],
+      "accepted_work": 17892,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "_candidates",
+        583
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "_candidates",
+        583
+      ],
+      "accepted_work": 14466,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_evidence.py",
+        "_project_native_prose",
+        1076
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_evidence.py",
+        "_project_native_prose",
+        1076
+      ],
+      "accepted_work": 14454,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/structure/_work.py",
+        "reserve",
+        17
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/structure/__init__.py",
+        "_coverage_diagnostics",
+        538
+      ],
+      "accepted_work": 14392,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "native_fields",
+        309
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "native_fields",
+        309
+      ],
+      "accepted_work": 14359,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_bridge.py",
+        "_bind_context",
+        285
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_bridge.py",
+        "_bind_context",
+        285
+      ],
+      "accepted_work": 14298,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_evidence.py",
+        "_project_native_prose",
+        1096
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_evidence.py",
+        "_project_native_prose",
+        1096
+      ],
+      "accepted_work": 14287,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/structure/_work.py",
+        "reserve",
+        17
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/structure/relations.py",
+        "_geometric_lane_pairs",
+        370
+      ],
+      "accepted_work": 14121,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_normalization/layout_snapshots/projection.py",
+        "_process_page",
+        235
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_normalization/layout_snapshots/projection.py",
+        "_process_page",
+        235
+      ],
+      "accepted_work": 14025,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_normalization/layout_snapshots/projection.py",
+        "project_layout_snapshot",
+        104
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_normalization/layout_snapshots/projection.py",
+        "project_layout_snapshot",
+        104
+      ],
+      "accepted_work": 14025,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_bridge.py",
+        "_apply_layout",
+        71
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_bridge.py",
+        "_apply_layout",
+        71
+      ],
+      "accepted_work": 14025,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_bridge.py",
+        "_apply_layout",
+        151
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_bridge.py",
+        "_apply_layout",
+        151
+      ],
+      "accepted_work": 14025,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_bridge.py",
+        "_overlay_observation",
+        44
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_bridge.py",
+        "_overlay_observation",
+        44
+      ],
+      "accepted_work": 14025,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_hints/__init__.py",
+        "_derive",
+        85
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_hints/__init__.py",
+        "_derive",
+        85
+      ],
+      "accepted_work": 14025,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_hints/__init__.py",
+        "_derive",
+        420
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_hints/__init__.py",
+        "_derive",
+        420
+      ],
+      "accepted_work": 14025,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_hints/__init__.py",
+        "_derive",
+        451
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_hints/__init__.py",
+        "_derive",
+        451
+      ],
+      "accepted_work": 14025,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_hints/columns.py",
+        "observe_single_body_lane",
+        44
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_hints/columns.py",
+        "observe_single_body_lane",
+        44
+      ],
+      "accepted_work": 14025,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_hints/geometry.py",
+        "band_cells",
+        231
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_hints/geometry.py",
+        "band_cells",
+        231
+      ],
+      "accepted_work": 14025,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_hints/geometry.py",
+        "band_geometry_units",
+        183
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_hints/geometry.py",
+        "band_geometry_units",
+        183
+      ],
+      "accepted_work": 14025,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_hints/headings.py",
+        "body_font_size",
+        58
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_hints/headings.py",
+        "body_font_size",
+        58
+      ],
+      "accepted_work": 14025,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_hints/headings.py",
+        "detect_repeated_furniture",
+        32
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_hints/headings.py",
+        "detect_repeated_furniture",
+        32
+      ],
+      "accepted_work": 14025,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_hints/neighbours.py",
+        "vertical_clearances",
+        71
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_hints/neighbours.py",
+        "vertical_clearances",
+        71
+      ],
+      "accepted_work": 14025,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_hints/ordering.py",
+        "build_reading_order",
+        20
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_hints/ordering.py",
+        "build_reading_order",
+        20
+      ],
+      "accepted_work": 14025,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_hints/ordering.py",
+        "build_reading_order",
+        25
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_hints/ordering.py",
+        "build_reading_order",
+        25
+      ],
+      "accepted_work": 14025,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/native_signal_bridge.py",
+        "collect_native_signals",
+        15
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/native_signal_bridge.py",
+        "collect_native_signals",
+        15
+      ],
+      "accepted_work": 14025,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/source_signals/__init__.py",
+        "_index_units",
+        141
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/source_signals/__init__.py",
+        "_index_units",
+        141
+      ],
+      "accepted_work": 14025,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/structure/_work.py",
+        "reserve",
+        17
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/structure/relations.py",
+        "_geometric_lane_pairs",
+        356
+      ],
+      "accepted_work": 14025,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/structure/_work.py",
+        "reserve",
+        17
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/structure/relations.py",
+        "language_lane_relations",
+        305
+      ],
+      "accepted_work": 14025,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/structure/_work.py",
+        "reserve",
+        17
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/structure/relations.py",
+        "language_lane_relations",
+        331
+      ],
+      "accepted_work": 14025,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/structure/contract.py",
+        "parse_observation",
+        326
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/structure/contract.py",
+        "parse_observation",
+        326
+      ],
+      "accepted_work": 14025,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/structure/contract.py",
+        "parse_observation",
+        338
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/structure/contract.py",
+        "parse_observation",
+        338
+      ],
+      "accepted_work": 14025,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_evidence.py",
+        "_project_native_prose",
+        1082
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_evidence.py",
+        "_project_native_prose",
+        1082
+      ],
+      "accepted_work": 14025,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_evidence.py",
+        "_project_native_prose",
+        1133
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_evidence.py",
+        "_project_native_prose",
+        1133
+      ],
+      "accepted_work": 14025,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_operating_relations.py",
+        "local_qualification_dependencies",
+        328
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_operating_relations.py",
+        "local_qualification_dependencies",
+        328
+      ],
+      "accepted_work": 14025,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_operating_relations.py",
+        "local_qualification_dependencies",
+        444
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_operating_relations.py",
+        "local_qualification_dependencies",
+        444
+      ],
+      "accepted_work": 14025,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_operating_relations.py",
+        "local_qualification_dependencies",
+        455
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_operating_relations.py",
+        "local_qualification_dependencies",
+        455
+      ],
+      "accepted_work": 14025,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "_prose_reading_packages",
+        332
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "_prose_reading_packages",
+        332
+      ],
+      "accepted_work": 14025,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "_understand",
+        1378
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "_understand",
+        1378
+      ],
+      "accepted_work": 14025,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/structure/sections.py",
+        "_native_list_scopes",
+        203
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/structure/sections.py",
+        "_native_list_scopes",
+        203
+      ],
+      "accepted_work": 14024,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/strategy_binding.py",
+        "bind_reading_plan",
+        382
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/strategy_binding.py",
+        "bind_reading_plan",
+        382
+      ],
+      "accepted_work": 13388,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/structure/_work.py",
+        "reserve",
+        17
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/structure/relations.py",
+        "add",
+        57
+      ],
+      "accepted_work": 12494,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/structure/_work.py",
+        "reserve",
+        17
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/structure/relations.py",
+        "check_acyclic",
+        105
+      ],
+      "accepted_work": 12494,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_bridge.py",
+        "_bind_context",
+        280
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_bridge.py",
+        "_bind_context",
+        280
+      ],
+      "accepted_work": 12180,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_native_dependencies.py",
+        "collect_native_dependencies",
+        73
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_native_dependencies.py",
+        "collect_native_dependencies",
+        73
+      ],
+      "accepted_work": 12180,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/structure/_work.py",
+        "reserve",
+        17
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/structure/__init__.py",
+        "page_members",
+        545
+      ],
+      "accepted_work": 12063,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/geometry_intent/reading.py",
+        "_charge_material",
+        37
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/geometry_intent/reading.py",
+        "_charge_material",
+        37
+      ],
+      "accepted_work": 11971,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_hints/tables.py",
+        "analyse_page",
+        138
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_hints/tables.py",
+        "analyse_page",
+        138
+      ],
+      "accepted_work": 11456,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_hints/tables.py",
+        "build_region_drafts",
+        166
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_hints/tables.py",
+        "build_region_drafts",
+        166
+      ],
+      "accepted_work": 11456,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_hints/columns.py",
+        "detect_document_lanes",
+        155
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_hints/columns.py",
+        "detect_document_lanes",
+        155
+      ],
+      "accepted_work": 10754,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_hints/columns.py",
+        "compute_cuts",
+        115
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_hints/columns.py",
+        "compute_cuts",
+        115
+      ],
+      "accepted_work": 10325,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/operating_states/relations.py",
+        "_unit",
+        218
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/operating_states/relations.py",
+        "_unit",
+        218
+      ],
+      "accepted_work": 10267,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_antecedent.py",
+        "build_antecedent_windows",
+        117
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_antecedent.py",
+        "build_antecedent_windows",
+        117
+      ],
+      "accepted_work": 9089,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "native_fields",
+        316
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "native_fields",
+        316
+      ],
+      "accepted_work": 9089,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/strategy_binding.py",
+        "_match_rule",
+        140
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/strategy_binding.py",
+        "_match_rule",
+        140
+      ],
+      "accepted_work": 8624,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/structure/_work.py",
+        "reserve",
+        17
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/structure/relations.py",
+        "_geometric_lane_pairs",
+        387
+      ],
+      "accepted_work": 7862,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/strategy_binding.py",
+        "_copy_policy_material",
+        61
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/strategy_binding.py",
+        "_copy_policy_material",
+        61
+      ],
+      "accepted_work": 7807,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/geometry_intent/reading.py",
+        "_charge_material",
+        41
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/geometry_intent/reading.py",
+        "_charge_material",
+        41
+      ],
+      "accepted_work": 7014,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/operating_states/relations.py",
+        "_detect_operating_relations",
+        1012
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/operating_states/relations.py",
+        "_detect_operating_relations",
+        1012
+      ],
+      "accepted_work": 7014,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/strategy_binding.py",
+        "_copy_policy_material",
+        70
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/strategy_binding.py",
+        "_copy_policy_material",
+        70
+      ],
+      "accepted_work": 6649,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/strategy_binding.py",
+        "_copy_policy_material",
+        66
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/strategy_binding.py",
+        "_copy_policy_material",
+        66
+      ],
+      "accepted_work": 6599,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_operating_relations.py",
+        "local_qualification_dependencies",
+        349
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_operating_relations.py",
+        "local_qualification_dependencies",
+        349
+      ],
+      "accepted_work": 6589,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_operating_relations.py",
+        "local_operating_context_dependencies",
+        526
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_operating_relations.py",
+        "local_operating_context_dependencies",
+        526
+      ],
+      "accepted_work": 6588,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_hints/columns.py",
+        "observe_single_body_lane",
+        81
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_hints/columns.py",
+        "observe_single_body_lane",
+        81
+      ],
+      "accepted_work": 6402,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_bridge.py",
+        "_bind_context",
+        290
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_bridge.py",
+        "_bind_context",
+        290
+      ],
+      "accepted_work": 6218,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_bridge.py",
+        "_bind_context",
+        277
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_bridge.py",
+        "_bind_context",
+        277
+      ],
+      "accepted_work": 6073,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_bridge.py",
+        "_bind_context",
+        295
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_bridge.py",
+        "_bind_context",
+        295
+      ],
+      "accepted_work": 6073,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/pipeline.py",
+        "understand_units",
+        247
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/pipeline.py",
+        "understand_units",
+        247
+      ],
+      "accepted_work": 6073,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_native_dependencies.py",
+        "collect_native_dependencies",
+        69
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_native_dependencies.py",
+        "collect_native_dependencies",
+        69
+      ],
+      "accepted_work": 6073,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/structure/_work.py",
+        "reserve",
+        17
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/structure/relations.py",
+        "_reachable",
+        143
+      ],
+      "accepted_work": 6053,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "_prose_reading_packages",
+        183
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "_prose_reading_packages",
+        183
+      ],
+      "accepted_work": 5813,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_hints/headings.py",
+        "body_font_size",
+        76
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_hints/headings.py",
+        "body_font_size",
+        76
+      ],
+      "accepted_work": 5630,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/geometry_intent/reading.py",
+        "_charge_material",
+        45
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/geometry_intent/reading.py",
+        "_charge_material",
+        45
+      ],
+      "accepted_work": 5404,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "_candidates",
+        848
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "_candidates",
+        848
+      ],
+      "accepted_work": 5268,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_hints/tables.py",
+        "build_region_drafts",
+        186
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_hints/tables.py",
+        "build_region_drafts",
+        186
+      ],
+      "accepted_work": 5213,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_bridge.py",
+        "_bind_context",
+        266
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_bridge.py",
+        "_bind_context",
+        266
+      ],
+      "accepted_work": 3984,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_hints/__init__.py",
+        "_derive",
+        610
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_hints/__init__.py",
+        "_derive",
+        610
+      ],
+      "accepted_work": 3984,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_hints/__init__.py",
+        "add_group",
+        203
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_hints/__init__.py",
+        "add_group",
+        203
+      ],
+      "accepted_work": 3984,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "_candidates",
+        984
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "_candidates",
+        984
+      ],
+      "accepted_work": 3736,
+      "rejected_requested": 4922
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "_prose_reading_packages",
+        243
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "_prose_reading_packages",
+        243
+      ],
+      "accepted_work": 3498,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_hints/tables.py",
+        "analyse_region",
+        320
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_hints/tables.py",
+        "analyse_region",
+        320
+      ],
+      "accepted_work": 2820,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/operating_states/relations.py",
+        "_clause_events",
+        742
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/operating_states/relations.py",
+        "_clause_events",
+        742
+      ],
+      "accepted_work": 2692,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_hints/tables.py",
+        "_flag_wrapped_rows",
+        365
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_hints/tables.py",
+        "_flag_wrapped_rows",
+        365
+      ],
+      "accepted_work": 2594,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/operating_states/relations.py",
+        "_predicate_modifiers",
+        559
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/operating_states/relations.py",
+        "_predicate_modifiers",
+        559
+      ],
+      "accepted_work": 2185,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "_prose_reading_packages",
+        217
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "_prose_reading_packages",
+        217
+      ],
+      "accepted_work": 2155,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "_prose_reading_packages",
+        274
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "_prose_reading_packages",
+        274
+      ],
+      "accepted_work": 2155,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_hints/tables.py",
+        "analyse_region",
+        338
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_hints/tables.py",
+        "analyse_region",
+        338
+      ],
+      "accepted_work": 2084,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "_prose_reading_packages",
+        270
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "_prose_reading_packages",
+        270
+      ],
+      "accepted_work": 1079,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "_prose_reading_packages",
+        231
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "_prose_reading_packages",
+        231
+      ],
+      "accepted_work": 1078,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/strategy_binding.py",
+        "heading_text",
+        325
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/strategy_binding.py",
+        "heading_text",
+        325
+      ],
+      "accepted_work": 1077,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/strategy_binding.py",
+        "heading_text",
+        330
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/strategy_binding.py",
+        "heading_text",
+        330
+      ],
+      "accepted_work": 1077,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/strategy_binding.py",
+        "fold",
+        46
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/strategy_binding.py",
+        "fold",
+        46
+      ],
+      "accepted_work": 1073,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/narrative_continuity.py",
+        "__init__",
+        292
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/narrative_continuity.py",
+        "__init__",
+        292
+      ],
+      "accepted_work": 859,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_bridge.py",
+        "bind_layout_context",
+        231
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_bridge.py",
+        "bind_layout_context",
+        231
+      ],
+      "accepted_work": 679,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_evidence.py",
+        "_parse_pdf_document",
+        1660
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_evidence.py",
+        "_parse_pdf_document",
+        1660
+      ],
+      "accepted_work": 430,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_hints/__init__.py",
+        "_derive",
+        108
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_hints/__init__.py",
+        "_derive",
+        108
+      ],
+      "accepted_work": 429,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_evidence.py",
+        "_emit_pdf_page",
+        1544
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_evidence.py",
+        "_emit_pdf_page",
+        1544
+      ],
+      "accepted_work": 429,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_pdf_intent.py",
+        "request",
+        56
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_pdf_intent.py",
+        "request",
+        56
+      ],
+      "accepted_work": 429,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_pdf_intent.py",
+        "scan_planned_pages",
+        190
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_pdf_intent.py",
+        "scan_planned_pages",
+        190
+      ],
+      "accepted_work": 429,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_pdf_layout.py",
+        "_take",
+        111
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_pdf_layout.py",
+        "_take",
+        111
+      ],
+      "accepted_work": 429,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/narrative_continuity.py",
+        "__init__",
+        277
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/narrative_continuity.py",
+        "__init__",
+        277
+      ],
+      "accepted_work": 368,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/structure/contract.py",
+        "parse_observation",
+        335
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/structure/contract.py",
+        "parse_observation",
+        335
+      ],
+      "accepted_work": 367,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_hints/__init__.py",
+        "_derive",
+        387
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_hints/__init__.py",
+        "_derive",
+        387
+      ],
+      "accepted_work": 286,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_hints/__init__.py",
+        "_derive",
+        397
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_hints/__init__.py",
+        "_derive",
+        397
+      ],
+      "accepted_work": 286,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/operating_states/relations.py",
+        "_clause_events",
+        609
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/operating_states/relations.py",
+        "_clause_events",
+        609
+      ],
+      "accepted_work": 274,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/operating_states/relations.py",
+        "_clause_events",
+        604
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/operating_states/relations.py",
+        "_clause_events",
+        604
+      ],
+      "accepted_work": 256,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/operating_states/relations.py",
+        "_clause_events",
+        616
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/operating_states/relations.py",
+        "_clause_events",
+        616
+      ],
+      "accepted_work": 256,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/operating_states/relations.py",
+        "_detect_operating_relations",
+        1084
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/operating_states/relations.py",
+        "_detect_operating_relations",
+        1084
+      ],
+      "accepted_work": 215,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/strategy_binding.py",
+        "_copy_policy_material",
+        63
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/strategy_binding.py",
+        "_copy_policy_material",
+        63
+      ],
+      "accepted_work": 122,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_hints/__init__.py",
+        "_derive",
+        493
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_hints/__init__.py",
+        "_derive",
+        493
+      ],
+      "accepted_work": 95,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_hints/__init__.py",
+        "_region_descriptor",
+        775
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_hints/__init__.py",
+        "_region_descriptor",
+        775
+      ],
+      "accepted_work": 88,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/operating_states/relations.py",
+        "_predicate_modifiers",
+        570
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/operating_states/relations.py",
+        "_predicate_modifiers",
+        570
+      ],
+      "accepted_work": 40,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/geometry_intent/reading.py",
+        "prepare_geometry_reading",
+        267
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/geometry_intent/reading.py",
+        "prepare_geometry_reading",
+        267
+      ],
+      "accepted_work": 38,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_hints/tables.py",
+        "_attach_context",
+        298
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_hints/tables.py",
+        "_attach_context",
+        298
+      ],
+      "accepted_work": 18,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/geometry_intent/planner.py",
+        "plan_geometry_requests",
+        519
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/geometry_intent/planner.py",
+        "plan_geometry_requests",
+        519
+      ],
+      "accepted_work": 17,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_hints/tables.py",
+        "_attach_context",
+        283
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_hints/tables.py",
+        "_attach_context",
+        283
+      ],
+      "accepted_work": 17,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/geometry_intent/reading.py",
+        "_windows",
+        116
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/geometry_intent/reading.py",
+        "_windows",
+        116
+      ],
+      "accepted_work": 9,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/structure/contract.py",
+        "parse_observation",
+        330
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/structure/contract.py",
+        "parse_observation",
+        330
+      ],
+      "accepted_work": 9,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/geometry_intent/planner.py",
+        "_parse_rules",
+        135
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/geometry_intent/planner.py",
+        "_parse_rules",
+        135
+      ],
+      "accepted_work": 8,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/geometry_intent/planner.py",
+        "plan_geometry_requests",
+        533
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/geometry_intent/planner.py",
+        "plan_geometry_requests",
+        533
+      ],
+      "accepted_work": 1,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/geometry_intent/planner.py",
+        "plan_geometry_requests",
+        563
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/geometry_intent/planner.py",
+        "plan_geometry_requests",
+        563
+      ],
+      "accepted_work": 1,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/geometry_intent/reading.py",
+        "_native_rows",
+        67
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/geometry_intent/reading.py",
+        "_native_rows",
+        67
+      ],
+      "accepted_work": 1,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/geometry_intent/reading.py",
+        "prepare_geometry_reading",
+        265
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/geometry_intent/reading.py",
+        "prepare_geometry_reading",
+        265
+      ],
+      "accepted_work": 1,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_bridge.py",
+        "_overlay_observation",
+        39
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_bridge.py",
+        "_overlay_observation",
+        39
+      ],
+      "accepted_work": 1,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/layout_bridge.py",
+        "bind_layout_context",
+        226
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/layout_bridge.py",
+        "bind_layout_context",
+        226
+      ],
+      "accepted_work": 1,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/native_table_bridge.py",
+        "bind_native_tables",
+        118
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/native_table_bridge.py",
+        "bind_native_tables",
+        118
+      ],
+      "accepted_work": 1,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/native_table_bridge.py",
+        "close_native_table_dependencies",
+        183
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/native_table_bridge.py",
+        "close_native_table_dependencies",
+        183
+      ],
+      "accepted_work": 1,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/pipeline.py",
+        "understand_units",
+        104
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/pipeline.py",
+        "understand_units",
+        104
+      ],
+      "accepted_work": 1,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/strategy_binding.py",
+        "bind_reading_plan",
+        259
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/strategy_binding.py",
+        "bind_reading_plan",
+        259
+      ],
+      "accepted_work": 1,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/strategy_binding.py",
+        "bind_reading_plan",
+        444
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/strategy_binding.py",
+        "bind_reading_plan",
+        444
+      ],
+      "accepted_work": 1,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/structure/__init__.py",
+        "build_structure",
+        86
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/structure/__init__.py",
+        "build_structure",
+        86
+      ],
+      "accepted_work": 1,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_pdf_intent.py",
+        "scan_planned_pages",
+        158
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_pdf_intent.py",
+        "scan_planned_pages",
+        158
+      ],
+      "accepted_work": 1,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "select_reading_evidence",
+        1470
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "select_reading_evidence",
+        1470
+      ],
+      "accepted_work": 1,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/structure/_work.py",
+        "reserve",
+        17
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/structure/__init__.py",
+        "_build_structure",
+        370
+      ],
+      "accepted_work": 0,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/structure/_work.py",
+        "reserve",
+        17
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/structure/relations.py",
+        "_reachable",
+        149
+      ],
+      "accepted_work": 0,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/structure/_work.py",
+        "reserve",
+        17
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/structure/relations.py",
+        "header_and_footnote_relations",
+        245
+      ],
+      "accepted_work": 0,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/structure/_work.py",
+        "reserve",
+        17
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/structure/relations.py",
+        "language_lane_relations",
+        315
+      ],
+      "accepted_work": 0,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/document_understanding/structure/_work.py",
+        "reserve",
+        17
+      ],
+      "reserve_caller": [
+        "src/company_wiki/document_understanding/structure/relations.py",
+        "language_lane_relations",
+        337
+      ],
+      "accepted_work": 0,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_native_dependencies.py",
+        "collect_native_dependencies",
+        107
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_native_dependencies.py",
+        "collect_native_dependencies",
+        107
+      ],
+      "accepted_work": 0,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_native_dependencies.py",
+        "collect_native_dependencies",
+        159
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_native_dependencies.py",
+        "collect_native_dependencies",
+        159
+      ],
+      "accepted_work": 0,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_native_dependencies.py",
+        "collect_native_dependencies",
+        173
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_native_dependencies.py",
+        "collect_native_dependencies",
+        173
+      ],
+      "accepted_work": 0,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_native_dependencies.py",
+        "collect_native_dependencies",
+        228
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_native_dependencies.py",
+        "collect_native_dependencies",
+        228
+      ],
+      "accepted_work": 0,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_pdf_intent.py",
+        "request",
+        57
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_pdf_intent.py",
+        "request",
+        57
+      ],
+      "accepted_work": 0,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_pdf_intent.py",
+        "request",
+        67
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_pdf_intent.py",
+        "request",
+        67
+      ],
+      "accepted_work": 0,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_pdf_intent.py",
+        "request",
+        71
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_pdf_intent.py",
+        "request",
+        71
+      ],
+      "accepted_work": 0,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "_prose_reading_packages",
+        189
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "_prose_reading_packages",
+        189
+      ],
+      "accepted_work": 0,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "native_fields",
+        319
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "native_fields",
+        319
+      ],
+      "accepted_work": 0,
+      "rejected_requested": 0
+    },
+    {
+      "direct": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "native_fields",
+        322
+      ],
+      "reserve_caller": [
+        "src/company_wiki/source_catalog/narrative_reading.py",
+        "native_fields",
+        322
+      ],
+      "accepted_work": 0,
+      "rejected_requested": 0
+    }
+  ],
+  "selected_quotes": [
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:dc2f06c0f0c21c0b64ab1764237816f80887dc25235345c41d446675431f21bc",
+      "locator": "loc:v1/page:2/paragraph:2",
+      "page": 2,
+      "quote": "声明及承诺",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:97fe8a4c5fe4605220c1cdf5c2dff23da31679759a07fccc04d9a64e0c11d977",
+      "locator": "loc:v1/page:2/paragraph:8/chars:179-284",
+      "page": 2,
+      "quote": "根据《证券法》的规定，股票依法发行后，发行人经营与收益的变化，由发\n行人自行负责；投资者自主判断发行人的投资价值，自主作出投资决策，自行承\n担股票依法发行后因发行人经营与收益变化或者股票价格变动引致的投资风险。",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:d0e92b8e74ed08fe318e4ec4126b7b4d9493ccb2d400dbbb9f2841e554b98b0d",
+      "locator": "loc:v1/page:4/paragraph:2",
+      "page": 4,
+      "quote": "重大事项提示",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:a4761ec74e9c4bf01efafa53aaadf7ac07e75411c2b9e7ead61ecda410c08ea5",
+      "locator": "loc:v1/page:6/paragraph:18",
+      "page": 6,
+      "quote": "1、毛利率水平波动甚至下降的风险",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:2e264351dd3f68eb9de07c1885a80f322cddd0c8ebd98e00bfdbcaeeeb85fb80",
+      "locator": "loc:v1/page:7/paragraph:7/chars:197-266",
+      "page": 7,
+      "quote": "公司产品毛利率对售价、产品结构、低毛利率产品的收入占比等因素变化较\n为敏感，如果未来下游客户需求下降、行业竞争加剧等可能导致产品价格下降；",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:c20ffd1d19f5a69b84b8923b973f9fa3ac02d446319e56ba57bf69575a04f97b",
+      "locator": "loc:v1/page:7/paragraph:18",
+      "page": 7,
+      "quote": "3、政府补助与税收优惠政策变动的风险",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:0baaf3e82a03e3b0ab25ccd16e40c1607cfefb15ed3ed95982947adf19b38498",
+      "locator": "loc:v1/page:7/paragraph:19/chars:499-629",
+      "page": 7,
+      "quote": "公司自成立以来先后承担了多项国家重大科研项目，报告期内，公司计入当\n期损益的政府补助金额分别为11,589.26 万元、11,687.56 万元、16,982.95 万元，\n如果公司未来不能持续获得政府补助或政府补助显著降低，将会对公司经营业绩\n产生不利影响。",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:a0b42d6f1a1dd5fe1e6345e112a0bcc53c56ba0bdf02c68a31451515eb425213",
+      "locator": "loc:v1/page:7/paragraph:26",
+      "page": 7,
+      "quote": "（七）知识产权争议风险",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:5db6c0090338b1774b9114b76347007b141da02502aadbb0ba7a1ef5191f4aab",
+      "locator": "loc:v1/page:8/paragraph:7/chars:164-257",
+      "page": 8,
+      "quote": "公司在全球范围内销售产品，在多个国家或地区注册知识产权，但不同国别、\n不同的法律体系对知识产权的权利范围的解释和认定存在差异，若未能深刻理解\n往往会引发争议甚至诉讼，并随之影响业务经营。",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:6fe76b516f029fd7cf399d8b065fbf62d1ac486aed17b854138393ca0fd84246",
+      "locator": "loc:v1/page:8/paragraph:18",
+      "page": 8,
+      "quote": "（九）市场竞争风险",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:54c704dcf182601ef8f1efc6111f52168c57f97047c05aab52435cba9b8281d6",
+      "locator": "loc:v1/page:8/paragraph:24/chars:604-696",
+      "page": 8,
+      "quote": "我国半导体设备厂商的逐步崛起，可能引起竞争对手\n的重视，使得竞争加剧。半导体设备市场的快速增长以及我国市场的进口替代预\n期，还将吸引更多的潜在进入者。因此，公司面临市场竞争加剧的风险。",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:52b8a3a3f017b613cf9ff8717e34b86fd6f138e17be5a1903db5f43b5aa05ced",
+      "locator": "loc:v1/page:9/paragraph:8/chars:221-341",
+      "page": 9,
+      "quote": "一方面，中微公司刻蚀设备市场占有率虽还有待提高，但该业务已逐步发展\n并占有一席之地，同时公司MOCVD 设备市场占有率已获得较大提高，这可能\n会引起前述国际竞争对手的特别重视，如果他们采取各种竞争措施并加剧市场竞\n争，将给公司带来经营风险。",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:5154002169e2386ea2d8158c2f9049292a097b581de1865267edd1d168e010db",
+      "locator": "loc:v1/page:9/paragraph:12/chars:341-407",
+      "page": 9,
+      "quote": "另一方面，随着半导体设备市场的快速增长以及我\n国市场的进口替代预期，将吸引更多的潜在进入者，也会加剧市场竞争并给公司\n带来经营风险。",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:80294b9144fe259727fdd7e46490f8af2afd21708e265283e25ffe066608115a",
+      "locator": "loc:v1/page:25/paragraph:2",
+      "page": 25,
+      "quote": "第二节  概 览",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:fb2844f3a29c1db091a9bf6727cffe96801759932ae903e3dcdc4418c1c5a8e3",
+      "locator": "loc:v1/page:27/paragraph:35",
+      "page": 27,
+      "quote": "四、发行人主营业务经营情况",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:035e225537e4f577df0c32e89c470054dd4d0ab7df04f511fe132d652427f953",
+      "locator": "loc:v1/page:28/paragraph:10",
+      "page": 28,
+      "quote": "（一）主要业务、产品及主要经营模式",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:4f964015e393046a5b1064f2d233148b69b57cff035ac972f5f3bae0e179a52a",
+      "locator": "loc:v1/page:29/paragraph:2/chars:53-132",
+      "page": 29,
+      "quote": "通过向全球领先的集成电路和LED 芯片制造商提供极具竞争力的高端设备、\n工艺技术解决方案和高质量服务，公司助力客户提升技术水平、提高生产效率、\n降低生产成本。",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:04865347a9ec38c73af5b43462a7f44631a259a78a58a6545e48a9c515350e5d",
+      "locator": "loc:v1/page:29/paragraph:11",
+      "page": 29,
+      "quote": "（5）充分发挥员",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:d017f0f9027e208c84c98127c77a12d07813b2419e94e1b7bd7e6aadc5e2e929",
+      "locator": "loc:v1/page:33/paragraph:15",
+      "page": 33,
+      "quote": "（七）财务数据概述",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:12aec08d6b29ad58c0453f27d84ee92c578f987116f021ec8e9aaddc45c107de",
+      "locator": "loc:v1/page:33/paragraph:25/chars:631-687",
+      "page": 33,
+      "quote": "公司产品具有\n高附加值，人均销售额快速提升，从2016 年的约120 万元增长至2018 年的约\n250 万元。",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:40476e9514b360874ce3512ac1b79ca0f84ae8810ee791d7c5a7bfb223678f18",
+      "locator": "loc:v1/page:33/paragraph:28",
+      "page": 33,
+      "quote": "（八）未来发展战略",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:8b758c8bbc1edb431ff34c11e165a3a4bf4f5cd300bb9f50d1d64afeefb2699a",
+      "locator": "loc:v1/page:33/paragraph:30/chars:723-821",
+      "page": 33,
+      "quote": "公司目前开发的产\n品以集成电路前道生产的等离子体刻蚀设备、薄膜沉积设备等关键设备为主，并\n已逐步开发应用于后道先进封装、MEMS、Mini LED、Micro LED 等领域的泛半\n导体设备产品。",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:55b1b71cfebb9907bad76c887526e91b2e9427ab4fb3d12c10bc8765ef8bf7da",
+      "locator": "loc:v1/page:35/paragraph:2",
+      "page": 35,
+      "quote": "第三节  本次发行概况",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:fbf9a7a256441c3e3d418a64dabdf930548d56ba0cd980f77af366e86fa9edaa",
+      "locator": "loc:v1/page:35/paragraph:3",
+      "page": 35,
+      "quote": "一、本次发行的基本情况",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:2e97b58fbb088ae32e6a3f62882f3b55b5ea339aed976b803c3cae4a8b2a8700",
+      "locator": "loc:v1/page:35/paragraph:9",
+      "page": 35,
+      "quote": "发行人高管、员工拟参与战略",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:62efd337e861c7b2619d60a7eea5d879015610f615c8eb00549f7a194e6885a4",
+      "locator": "loc:v1/page:39/paragraph:2",
+      "page": 39,
+      "quote": "第四节  风险因素",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:f0ebf4ff0344fddf834b51229fe6d65210951c77c0da0e5203045f139c3daeae",
+      "locator": "loc:v1/page:39/paragraph:10",
+      "page": 39,
+      "quote": "一、技术风险",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:4b5fcc98ca3be92210657274d4b1abbfad1bfd8d5ee02cef083a1a46c839f7fa",
+      "locator": "loc:v1/page:39/paragraph:11",
+      "page": 39,
+      "quote": "（一）研发投入不足导致技术被赶超或替代的风险",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:688a80ed3039f3a8c66c1f77da4264da1c5ca22b90b947534af19d9d98c44c93",
+      "locator": "loc:v1/page:39/paragraph:16/chars:386-449",
+      "page": 39,
+      "quote": "如果公司未来研发资金投入不足，不能满足技术升级需要，可能导致公司技\n术被赶超或替代的风险，对当期及未来的经营业绩产生不利影响。",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:6ae6bc32070419cd233c0f6a8d61daed99c4332cf02254d0e0acdadcb001a7d9",
+      "locator": "loc:v1/page:39/paragraph:18",
+      "page": 39,
+      "quote": "（二）研发方向存在偏差的风险",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:665ddda382f3e2992867295fc2d424dcff065df6c4c116aeeddd5462676ca54a",
+      "locator": "loc:v1/page:39/paragraph:19/chars:465-595",
+      "page": 39,
+      "quote": "公司所处的半导体设备行业属于半导体产业链的上游核心环节之一，半导体\n设备需要超前研发设计，研发方向能否符合未来市场需求和发展趋势尤为重要，\n如果公司未来不能紧跟行业前沿需求，正确把握研发方向，将有可能使公司技术\n落后于竞争对手，导致客户订单减少，市场份额下降。",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:dcd821134f719ac9ba68edf8f9671ab0ea39071919529f0130c937d2c74d47c4",
+      "locator": "loc:v1/page:40/paragraph:17",
+      "page": 40,
+      "quote": "（四）核心技术泄密风险",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:ceaa994093edd362360d7783b14d8618884f6cccf0a1434019b341409fd91d1b",
+      "locator": "loc:v1/page:40/paragraph:26/chars:671-768",
+      "page": 40,
+      "quote": "如果未来关键技术人员流失或在生产经营过程中相关技术、数据、图纸、保\n密信息泄露进而导致核心技术泄露，将会在一定程度上影响公司的技术研发创新\n能力和市场竞争力，对公司的生产经营和发展产生不利影响。",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:4f7111b6598665a53b590bc06989bbbed8b6952a647a49957554ee91433dcf59",
+      "locator": "loc:v1/page:42/paragraph:24",
+      "page": 42,
+      "quote": "四、财务风险",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:e7b1d2cd83af19c0230bfa2680990f6ce21d752cb8e95af6f3f42856b2981067",
+      "locator": "loc:v1/page:42/paragraph:25",
+      "page": 42,
+      "quote": "（一）毛利率水平波动甚至下降的风险",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:616d6877fbea3494adbc82bf9d81334ebb3a76f93a1d374dfe55a3e2e5a00d7f",
+      "locator": "loc:v1/page:43/paragraph:16/chars:444-513",
+      "page": 43,
+      "quote": "公司产品毛利率对售价、产品结构、低毛利率产品的收入占比等因素变化较\n为敏感，如果未来下游客户需求下降、行业竞争加剧等可能导致产品价格下降；",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:bc76db5ebcb909f44585565037140b60a0883cb5cdc63ec0133c535c62d7a9ca",
+      "locator": "loc:v1/page:43/paragraph:22",
+      "page": 43,
+      "quote": "（二）公司业绩波动的风险",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:357a25de0d478c4d5d8886ecfcff12c017993f183eef50024d9435444a87bb93",
+      "locator": "loc:v1/page:43/paragraph:28/chars:781-859",
+      "page": 43,
+      "quote": "如果未来发生市场竞争加剧、宏观经济景气度下行、国家产业政策变化或公司不\n能有效拓展国内外新客户等情形，将使公司面临一定的经营压力，公司存在业绩\n波动的风险。",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:22bd4b20a044dee649399bd705cc9d95aaba91df27170615d5177c4ab5645fda",
+      "locator": "loc:v1/page:45/paragraph:25",
+      "page": 45,
+      "quote": "（七）汇兑损失风险",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:b663c2bb046742184e884ce432d49639ee6afd920fda36d00925d297428b2356",
+      "locator": "loc:v1/page:45/paragraph:26/chars:727-784",
+      "page": 45,
+      "quote": "公司存在境外销售和采购情形，外币结算币种主要为美元。在人民币对外币\n汇率浮动的背景下，公司面临一定的汇兑损失风险。",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:bb92af7310b0061827af49606eb579d764d50dfd3402b74f0fcb47b232bd19f7",
+      "locator": "loc:v1/page:46/paragraph:22",
+      "page": 46,
+      "quote": "（十一）未来并购的风险",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:267b31f4bbad8b73f790a4069d914570a7d01530d9705e7b3a3e159630ee55ce",
+      "locator": "loc:v1/page:46/paragraph:24/chars:622-716",
+      "page": 46,
+      "quote": "虽然公司未来并购时将继续秉承审慎原则，相应制定整合计划，防范并购风险，\n但若出现宏观经济波动、市场竞争加剧、被并购公司业绩低于预期或协同效应未\n显现等情形，将对公司的经营业绩产生不利影响。",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:a59e0749efd56670737dbd13ed3ddcd8e515a3f6c4bf5e008ee845671bfd0be5",
+      "locator": "loc:v1/page:47/paragraph:2",
+      "page": 47,
+      "quote": "五、法律风险",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:2c4801aaecb570361678b342285381e83a258f4330c1c427a26375710ee6e6e9",
+      "locator": "loc:v1/page:47/paragraph:3",
+      "page": 47,
+      "quote": "（一）知识产权争议风险",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:5644be6e833382d5a5da35d07d0a20fff872ff2159733b666467b870e3057f8a",
+      "locator": "loc:v1/page:47/paragraph:4/chars:72-152",
+      "page": 47,
+      "quote": "半导体设备行业是典型的技术密集型行业，为了保持技术优势和竞争力，防\n止技术外泄风险，已掌握先进技术的半导体设备企业通常会通过申请专利等方式\n设置较高的进入壁垒。",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:bd0650f3daef81060f4a8cb55cdea4897241b0e9624b1ef487d6847d739b0c46",
+      "locator": "loc:v1/page:47/paragraph:11/chars:254-347",
+      "page": 47,
+      "quote": "公司在全球范围内销售产品，在多个国家或地区注册知识产权，但不同国别、\n不同的法律体系对知识产权的权利范围的解释和认定存在差异，若未能深刻理解\n往往会引发争议甚至诉讼，并随之影响业务经营。",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:884b61e1868cb5ae6a49fd74cb735fd19a93715589b7a3e868e513f298824c46",
+      "locator": "loc:v1/page:48/paragraph:2",
+      "page": 48,
+      "quote": "七、市场风险",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:80a5c8e45ff71941b94490c6de94172d9dce6842038b19cda8b15219208db06a",
+      "locator": "loc:v1/page:48/paragraph:3",
+      "page": 48,
+      "quote": "（一）市场竞争风险",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:218172af5086668119e8428e87977773939fbd504cdadd985b97da15a50c495a",
+      "locator": "loc:v1/page:48/paragraph:9/chars:185-277",
+      "page": 48,
+      "quote": "我国半导体设备厂商的逐步崛起，可能引起竞争对手的重视，\n使得竞争加剧。半导体设备市场的快速增长以及我国市场的进口替代预期，还将\n吸引更多的潜在进入者。因此，公司面临市场竞争加剧的风险。",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:eaca98a271a73ec7c568a6f780f66ffedc99ed1993afc2d491993228aaba7f6c",
+      "locator": "loc:v1/page:48/paragraph:25/chars:553-673",
+      "page": 48,
+      "quote": "一方面，中微公司刻蚀设备市场占有率虽还有待提高，但该业务已逐步发展\n并占有一席之地，同时公司MOCVD 设备市场占有率已获得较大提高，这可能\n会引起前述国际竞争对手的特别重视，如果他们采取各种竞争措施并加剧市场竞\n争，将给公司带来经营风险。",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:707c2d81b89f870456e0f84db04aa421cf17c0dc839e899fd4778b497bb85e0d",
+      "locator": "loc:v1/page:48/paragraph:29/chars:673-739",
+      "page": 48,
+      "quote": "另一方面，随着半导体设备市场的快速增长以及我\n国市场的进口替代预期，将吸引更多的潜在进入者，也会加剧市场竞争并给公司\n带来经营风险。",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:e08dece8bc600baa4e5a4b31ea437c3e78a9f23bd105a90661969516c0d54ebd",
+      "locator": "loc:v1/page:49/paragraph:2",
+      "page": 49,
+      "quote": "（二）客户集中度较高的风险",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:84cfd45649224eb8d44491165b3f110017b1ddca33c53f2ffa65b94cdad63609",
+      "locator": "loc:v1/page:49/paragraph:3/chars:67-172",
+      "page": 49,
+      "quote": "经过多年的努力，公司产品已经成功进入了海内外知名芯片制造企业的供应\n链体系。报告期内，前五名客户收入占当期营业收入总额的比重分别为85.74%、\n74.52%和60.55%，占比逐年降低，但客户集中度仍然较高。",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:63275ec4ce970caeaa3657af2be629964b1ba1e52eb8a923abe45b03da8103ad",
+      "locator": "loc:v1/page:49/paragraph:13",
+      "page": 49,
+      "quote": "八、募集资金投资项目风险",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:0262a16a5ce3a4ccf4e286d5d095e62927e2c2288d416cc921ddf83d2d511f14",
+      "locator": "loc:v1/page:49/paragraph:21",
+      "page": 49,
+      "quote": "（二）募投项目的实施风险",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:d909fc8666642d3556fe315c0d615e42d7c74bc55fe6dd98996e8d8e7eea0dfc",
+      "locator": "loc:v1/page:49/paragraph:22/chars:494-548",
+      "page": 49,
+      "quote": "本次募集资金在扣除发行相关费用后拟用于高端半导体设备扩产升级项目、\n技术研发中心建设升级项目和补充流动资金。",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:9340f4f026811ac4879e7ca76b929ab74193470dbd5948a18a290ec8910786b9",
+      "locator": "loc:v1/page:114/paragraph:2",
+      "page": 114,
+      "quote": "第六节  业务与技术",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:f5c9be4780ed4be03d95de15853abf5848d7b79be18fdbd564939bf806acf38b",
+      "locator": "loc:v1/page:119/paragraph:2",
+      "page": 119,
+      "quote": "4、生产模式",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:d9939a5a4a7e0afea326aae709ac99e5fd05f65cf5f5a55f650d423d89959700",
+      "locator": "loc:v1/page:119/paragraph:3/chars:58-153",
+      "page": 119,
+      "quote": "公司主要采用以销定产的生产模式，实行订单式生产为主，结合少量库存式\n生产为辅的生产方式。订单式生产是指公司在与客户签订订单后，根据订单情况\n进行定制化设计及生产制造，以应对客户的差异化需求。",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:fe808a9027ec7f28185c7f802f3a9055b66287c632df3d615e4154bc6c44beec",
+      "locator": "loc:v1/page:128/paragraph:6",
+      "page": 128,
+      "quote": "2、MOCVD 设备的生产工艺流程",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:57d25f005a1a6258d8193205e4278691d18de30caef4c9055ddebdec8fe721a3",
+      "locator": "loc:v1/page:128/paragraph:7/chars:120-219",
+      "page": 128,
+      "quote": "公司MOCVD 设备的生产采用模块化生产模式。与刻蚀设备的生产相比，\n模块化生产模式将系统集成、终测及工艺调试移植到客户端进行，增加了独立的\n反应腔体测试和传送模组测试，从而大大缩短了产品组装周期。",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:8ca360e5bf01b5d0b9c7ac27fbbd1583cfaf0318d6676abd5c3896440c284a28",
+      "locator": "loc:v1/page:135/paragraph:6",
+      "page": 135,
+      "quote": "（1）半导体行业概述",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:ee5564439f30a5b0bc271cd8333449aecfd45933df619b4b5610240161e36cef",
+      "locator": "loc:v1/page:135/paragraph:8/chars:150-242",
+      "page": 135,
+      "quote": "半导体行业是现代经济社会发展的战略性、基础性和先导性产业，是电子信\n息产业的基础支撑，其产品被广泛地应用于电子通信、计算机、网络技术、物联\n网等产业，是绝大多数电子设备的核心组成部分。",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:94d4e0feee738ea7edcd8a834bf506baf9d6e6e58b34723b3e2d2773f35926fc",
+      "locator": "loc:v1/page:135/paragraph:19/chars:443-549",
+      "page": 135,
+      "quote": "半导体核心元器件晶体管自诞生以来，带动了全球半导体产业20 世纪50 年代至\n90 年代的迅猛增长。进入21 世纪以后市场日趋成熟，随着PC、手机、液晶电\n视等消费类电子产品市场渗透率不断提高，行业增速逐步放缓。",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:6fa92f76c0e7fae9e6d014b3c8ad9c86e8fbb67aa25b4c5dbbd5bed1fed38e54",
+      "locator": "loc:v1/page:136/paragraph:10/chars:228-368",
+      "page": 136,
+      "quote": "从需求端分析，随着经济的不断发展，中国已成为了全球最大的电子产品生\n产及消费市场，衍生出了巨大的半导体器件需求。根据IC Insights 统计，从2013\n年到2018 年仅中国半导体集成电路市场规模就从820 亿美元扩大至1,550 亿美\n元，年均复合增长率约为13.58%。",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:8475e0de9890db6ddb635de35ae536a0aa1c006ca363785e8721dec9ee9ca1c0",
+      "locator": "loc:v1/page:145/paragraph:10",
+      "page": 145,
+      "quote": "（4）公司所处的细分行业概述",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:c17bf6d9eec3ea77307ae0c811659e7c71e2113f529c1eda83823a91778b5efe",
+      "locator": "loc:v1/page:145/paragraph:18/chars:388-447",
+      "page": 145,
+      "quote": "集成电路设备包括晶圆制造设备、封装设备和测试设备等，晶圆制造设备的\n市场规模占比超过集成电路设备整体市场规模的80%。",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:0baacc3732f70f3b85878cba80df80e5ac8c729a7e4bb0e846ab9a3c7501571d",
+      "locator": "loc:v1/page:147/paragraph:4/chars:84-128",
+      "page": 147,
+      "quote": "在需求增长较快的刻蚀设备领域，行业集中度较高，泛林半导体占据刻蚀设\n备市场份额半壁江山。",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:236fd9e636d321f6e768ebaaddf71324d5284f8331650d22845d984d8a24b812",
+      "locator": "loc:v1/page:148/paragraph:23/chars:509-556",
+      "page": 148,
+      "quote": "近年来，中国LED芯片产业的快速发展带动了作为产业核心设备的MOCVD\n设备需求量的快速增长。",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:9318ba14344780ff257d25602c288b5f04340c3317a843fad3af247c3ab8ca91",
+      "locator": "loc:v1/page:157/paragraph:3",
+      "page": 157,
+      "quote": "1、刻蚀设备行业",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:8741b9df9918b339ef1ff7619eb878c621bce29e8af0494987674c6d0884ee92",
+      "locator": "loc:v1/page:157/paragraph:16/chars:367-453",
+      "page": 157,
+      "quote": "中微公司的刻蚀设备虽然在销售规模上离全球半导体设备巨头尚有一定差距，\n但其部分技术水平和应用领域已达到国际同类产品的标准，并已应用于全球最先\n进的7 纳米和5 纳米生产线。",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:fe12d7e51053b043b35391b50c288a15946125da0fb31340b5cd6cc5138ce2f4",
+      "locator": "loc:v1/page:164/paragraph:12",
+      "page": 164,
+      "quote": "（7）公司运营成本优势",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:93d93fccc57c205e34964fee28556324d0eca181ca988f495085bc99038a8e5b",
+      "locator": "loc:v1/page:164/paragraph:15/chars:361-436",
+      "page": 164,
+      "quote": "公司建立了全球化的采购体系，与供应商密切\n合作，能制造出模块化、易维护、具有成本竞争优势的产品；通过科学的方法管\n理库存，有效地降低了公司的运营成本。",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:e3da6e86b17c31174c7165d0d386b785eb4e82e52d5fbad1fe5756e4a00a4824",
+      "locator": "loc:v1/page:165/paragraph:8",
+      "page": 165,
+      "quote": "（1）新应用推动市场需求持续旺盛",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:c955bf23bc6b006518d972d296c49ecbb9d5a32c5e61de84e84d954ed2d60f2d",
+      "locator": "loc:v1/page:165/paragraph:19/chars:460-566",
+      "page": 165,
+      "quote": "从长远来看，伴随新应用推动市场需求的持续旺盛，半导体行业的景气度有\n望保持螺旋式上升。在如此的大浪潮下，全球的半导体巨头如三星、英特尔、海\n力士等纷纷在近期提出加大资本性支出的计划，或开启新一轮的半导体投资周期。",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:061742d0eb91d7191e9e93354d963d5eb4444e629cba7aad693a52d2c223acf5",
+      "locator": "loc:v1/page:167/paragraph:12",
+      "page": 167,
+      "quote": "（4）全球半导体产能向中国大陆转移，推动国内设备行业大力发展",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:e2c844b45596872c973f983c7ce621192d414871f9867fd2c8a6fddcc1a19d57",
+      "locator": "loc:v1/page:167/paragraph:13/chars:422-547",
+      "page": 167,
+      "quote": "作为全球最大的半导体消费市场，我国对半导体器件产品的需求持续旺盛，\n中国半导体市场规模2013 年至2018 年年均复合增长率为14.34%。市场需求带\n动全球产能中心逐步向中国大陆转移，持续的产能转移带动了大陆半导体整体产\n业规模和技术水平的提高。",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:78f91e37af4c1ddd624f1e4d941538a2639b28b18e20d533fd9567e6ba733456",
+      "locator": "loc:v1/page:168/paragraph:3/chars:81-156",
+      "page": 168,
+      "quote": "同时，中国大陆\n需求和投资的旺盛也促进了我国半导体产业专业人才的培养及配套行业的发展，\n半导体产业环境的良性发展为我国设备产业的扩张和升级提供了机遇。",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:7589e4785eb71e0639060d9ef9ad7a858336deb9b2c5a8249a7d8a2bfbe26f23",
+      "locator": "loc:v1/page:170/paragraph:14",
+      "page": 170,
+      "quote": "（1）刻蚀设备",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:5b7e0262f118693a3a1d3a4f5974148e84e5d6d07111c6f67808e77ab9bf9d6d",
+      "locator": "loc:v1/page:172/paragraph:13/chars:263-305",
+      "page": 172,
+      "quote": "报告期内，公司的深硅刻蚀设备的累计产量和销量分别为14 腔、10 腔，已\n实现量产。",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:385a2f753f554f3ade1f55089bbb9982ffc7eeb50d0c143ae9e83f9b8085780c",
+      "locator": "loc:v1/page:173/paragraph:20",
+      "page": 173,
+      "quote": "1、主要产品规模",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:22cd87c86a3cea6a4f992dbffc15d3552e60d904c21f92ef8fa7218d56d79b31",
+      "locator": "loc:v1/page:173/paragraph:21/chars:469-485",
+      "page": 173,
+      "quote": "公司主要采用以销定产的生产模式。",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:b19790ebc3b5889603883b22c4a37324bbb25235e0dc950c6cc97e2ea8087de6",
+      "locator": "loc:v1/page:173/paragraph:22/chars:485-586",
+      "page": 173,
+      "quote": "本公司的主要生产资料是原材料、人工\n及检测组装设备。原材料方面，公司的原材料供应渠道较多，公司与合格原材料\n供应商建立了稳定的合作关系，能够保证原材料的供应和质量的稳定，原材料不\n会成为公司的产能瓶颈。",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:289a176c813eb9999ad80e0d838e681c8a70d2e579dbead3b522511d971aa63d",
+      "locator": "loc:v1/page:173/paragraph:27/chars:586-700",
+      "page": 173,
+      "quote": "人工方面，由于公司将生产流程按照模块化设计，在生\n产过程中先组装模块再组装整机，生产过程较为简单，培训上岗较快，再加上外\n部劳动力市场供应充足，公司也可根据实际订单灵活调整工人的数量，人工亦不\n会成为限制公司生产能力的主要因素。",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:7fa78d3efedf233284411da5905888e501975cf2d173ce57eda0d5a049c3bc3a",
+      "locator": "loc:v1/page:173/paragraph:31/chars:700-782",
+      "page": 173,
+      "quote": "检测组装设备方面，绝大多数零部件主要\n通过外购实现，在工厂内装配、检测的周期较短，生产过程对固定资产的占用较\n少，检测和组装设备不会成为限制公司生产能力的主要因素。",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:9953e9b72288b27b938e32aa86ef1f20c1eb29128f30049080de1d894630ed3f",
+      "locator": "loc:v1/page:175/paragraph:15",
+      "page": 175,
+      "quote": "6、公司在美国的销售收入情况",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:d795e1463f805a6e148b5937ea94e1a7b3610c84590127df1adab67045a5bae5",
+      "locator": "loc:v1/page:175/paragraph:24",
+      "page": 175,
+      "quote": "（二）主要客户情况",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:6b1c98e9a017aa19088c8a12a16e07f78fc609aa4f43fa260bd6773b4d6a54ef",
+      "locator": "loc:v1/page:176/paragraph:21/chars:550-652",
+      "page": 176,
+      "quote": "2016 年、2017 年和2018 年，公司向前五名客户合计销售额占当期销售总额\n的比例分别为85.74%、74.52%和60.55%，占比逐年降低，主要系公司收入规模\n增大，主要客户的集中度逐年降低。",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:f0745ae02ee4159d81ec76e5ab46c63d9da6c17646e2ac9187b46525e8142d0a",
+      "locator": "loc:v1/page:176/paragraph:29/chars:775-898",
+      "page": 176,
+      "quote": "报告期各期，公司前五大客户的新增、新减情况如下：2017 年新增客户为\n华灿光电、璨扬光电、三安光电，新减客户为海外客户2、海外客户3、海外客\n户4；2018 年新增客户为乾照光电、长江存储、华力微电子，新减客户为华灿光\n电、璨扬光电、中芯国际。",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:bf0dabe22e4c496af00709060dcc6efb1b84c5b1660c319bdcb98c2af3977273",
+      "locator": "loc:v1/page:178/paragraph:5",
+      "page": 178,
+      "quote": "2、主要原材料的价格变动趋势",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:64f36768601ac50719778d0d0c5df027368becd0acabd0eca2b1642046044cdf",
+      "locator": "loc:v1/page:178/paragraph:6",
+      "page": 178,
+      "quote": "报告期内，公司主要原材料的采购价格变动情况如下：",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:91354e0b5245da4cead6b2a491e0447d73a6dcb0dbdcc3a8843afc5318ebd1d7",
+      "locator": "loc:v1/page:262/paragraph:8",
+      "page": 262,
+      "quote": "2、基本每股收益：",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:0a428fc43bcd0bb31d57bfa2a07d83f5cb08f72b631f61a11cfffec32874bab1",
+      "locator": "loc:v1/page:316/paragraph:7",
+      "page": 316,
+      "quote": "（5）存货",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:217bae6b0ada899253c9d800c948325641bbb225b19692045c0c4bba004b4c66",
+      "locator": "loc:v1/page:318/paragraph:4",
+      "page": 318,
+      "quote": "需求旺盛，公司订单数量逐年增加，发出商品相应增加所致。",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:5ce1b5b8461b26b85bf73feb0af538baf8b9ba8e8511cc39a4ab659e9d5d5db0",
+      "locator": "loc:v1/page:342/paragraph:10",
+      "page": 342,
+      "quote": "1、经营活动产生的现金流量中各个细分项目的构成、变动及原因",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:9f5ee2d7da2f633dc5461730151eb5e0abf24a6f49f8d488699a2a76f6d65399",
+      "locator": "loc:v1/page:342/paragraph:11",
+      "page": 342,
+      "quote": "报告期内，经营活动现金流入项目变动及主要原因如下：",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:cc8c81fe8d84e56cdb6fab72606755b3dc74e1e20e1a49b378b4baf5f6c1dbb7",
+      "locator": "loc:v1/page:342/paragraph:18",
+      "page": 342,
+      "quote": "（2）收到其他与经营活动有关的现金",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:8e9974ac1e63cfd21eb97c8ec2eac7c5aee471940e7fee40ec4967f0f5204981",
+      "locator": "loc:v1/page:342/paragraph:29",
+      "page": 342,
+      "quote": "报告期内，经营活动现金流出项目变动及主要原因如下：",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:ad7ecd5db08b17e8203c12b9b466f2f18868e60c795b1288d4ff9f62909d423d",
+      "locator": "loc:v1/page:353/paragraph:2",
+      "page": 353,
+      "quote": "第九节  募集资金运用与未来发展规划",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:61b4fc6c08d3791bf91edfb708aab995d1e739e7e235a2ddedf54445d7e8337e",
+      "locator": "loc:v1/page:353/paragraph:3",
+      "page": 353,
+      "quote": "一、募集资金运用概况",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:a15c1d3b9c47c0e3405f591ff5eae5e27e158c9603b743d08bc03602e71b92eb",
+      "locator": "loc:v1/page:353/paragraph:8",
+      "page": 353,
+      "quote": "（二）实际募集资金量与投资项目需求出现差异时的安排",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:73c1bb71496ffb2c4ef97e5e5e3a081e044cc5f9d678d71bd03b2c19f1dd5469",
+      "locator": "loc:v1/page:353/paragraph:9/chars:173-297",
+      "page": 353,
+      "quote": "若本次股票发行后，实际募集资金数额（扣除发行费用后）大于上述投资项\n目的资金需求，超过部分将根据中国证监会及上海证券交易所的有关规定用于公\n司主营业务的发展。若本次股票发行后，实际募集资金小于上述投资项目的资金\n需求，不足部分公司将用自筹资金补足。",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:ae62c977cb37cce7d241006ce7058b316027f82fab4d03d7bd2c54c9b13de479",
+      "locator": "loc:v1/page:354/paragraph:8",
+      "page": 354,
+      "quote": "（1）高端半导体设备扩产升级项目",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:36fcecfb30984c13f791b24cec4c329943790bbe5c00bb31598c3e81b3e95591",
+      "locator": "loc:v1/page:354/paragraph:16",
+      "page": 354,
+      "quote": "公司拟使用本次发行的部分募集资金用于以下项目：",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:a73821ab8ba4a33b2bf8b0875de033af4871842b7915c997a3d6b0d9f2a7a5fc",
+      "locator": "loc:v1/page:354/paragraph:24",
+      "page": 354,
+      "quote": "（2）技术研发中心建设升级项目",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:9bcbf93fc8902f4b58df501980cad427a32b86e8f2ab637b6fef7f4a47892bf9",
+      "locator": "loc:v1/page:355/paragraph:4",
+      "page": 355,
+      "quote": "公司拟使用本次发行的部分募集资金用于以下项目：",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:86debf37d272dcc0c14938a4ea81f7ee7fbe4e07f855cfe70219ad11e7d4a244",
+      "locator": "loc:v1/page:369/paragraph:2",
+      "page": 369,
+      "quote": "第十节  投资者保护",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:436cd4e1943fe08d32dbaf396d79f1c82e9ee58ec6cf9b0c578253c11704336e",
+      "locator": "loc:v1/page:383/paragraph:29",
+      "page": 383,
+      "quote": "10、本次发行前全体股东承诺",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:51e183a4616b78e58cc77a835665e58d5df56b1ed477dc0979ad0845afe9cec7",
+      "locator": "loc:v1/page:383/paragraph:30",
+      "page": 383,
+      "quote": "如果相关监管规则不再对某项承诺的内容予以要求时，相应部分自行终止。",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:1f0b0336b11f74d3e5c49591478204c045f6da80ec2ebad87421a6d12ba20969",
+      "locator": "loc:v1/page:415/paragraph:1",
+      "page": 415,
+      "quote": "附表一：发行人及子公司的重要专利",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:63c3be259bc68b34ec7d3aca119dd591ee84dfca039cd56aecdffccab9103709",
+      "locator": "loc:v1/page:419/paragraph:1",
+      "page": 419,
+      "quote": "2、发行人及子公司在境外取得的重要专利权",
+      "quality_flags": []
+    },
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:bdea76ac1d4bb5ecdcfa2173f2549827d373df275534c7fc7dd66ec96aea1934",
+      "locator": "loc:v1/page:420/paragraph:14",
+      "page": 420,
+      "quote": "27 \n中微公司 \nICP Source Design for Plasma Uniformity and Efficiency",
+      "quality_flags": []
+    }
+  ],
+  "content_grade": "NOT_GRADED_NO_FORMAL_IPO_GOLD",
+  "wall_seconds_diagnostic_not_benchmark": 23.5855,
+  "protected_sha256": {
+    "config/source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+    ".source_catalog/catalog.sqlite3": "0e0775fc1dd29f2828f643cb1e6c45a9b77d1626089d1a16401a1a6245eeb5f5",
+    "config/resource_budget.yaml": "148f22816bf0b8935bbb2c1618f3199d46ff52f41377e3e582c26a96ea7be3b5"
+  },
+  "protected_unchanged": true,
+  "write_store_constructed": false,
+  "source_code_stable": true,
+  "hooks_restored": true,
+  "accepted_work_equals_account": true,
+  "calls": {
+    "model": 0,
+    "api": 0,
+    "download": 0,
+    "raw_copy": 0
+  }
+}

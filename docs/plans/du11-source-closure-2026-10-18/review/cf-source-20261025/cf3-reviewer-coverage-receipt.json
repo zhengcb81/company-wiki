@@ -1,0 +1,19 @@
+{
+  "command": [
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/unit/test_cf3_coverage_work.py",
+    "tests/unit/document_understanding_root/test_structure_shared_work_budget.py"
+  ],
+  "exit_code": 0,
+  "seconds": 3.771,
+  "temporary_root_restored_absent": true,
+  "paid_calls": 0,
+  "downloads": 0
+}

@@ -970,3 +970,10 @@ W16最终独审0 OPEN，18次实际CLI/快照/回测10断言、60独立测试通
 两技能安装运行闭包均与主线全匹配；RF九项定点同步后发现另两项旧Git版本残留，经溯源及85项阅读接口测试补齐；四次安装版RF CLI通过。Audit venv同步两次errno13，改用本机默认Conda同一原同步器后正常完成，未改ACL/许可；旧blocked收据保留为历史，最终installation-final.json覆盖当前判决。提交初次MSYS命名对象失败，随后venv缺pre_commit，使用既有Conda完整原钩子通过，不改钩子或降测试。UTF-8结构校验两技能valid。
 
 本节点只关闭两包工程/部署，不关闭来源语义、annual14精确金融、正式摘要/cache、真实RF与公司循环。下一步按CF1–CF4中性RED→共享owner修复→三市场真实样本，再正式摘要/零重复费用缓存/RF采用。W18仍待交付，W19 READY；各自作者工区不写。0新付费/下载/原件副本。详见[接收总记录](review/package-reception-w16-w17-20261025/README.md)。
+
+
+## CF3真实热点与修复（2026-10-25）
+
+CF3第一效率节点独审PASS：共享关系负例剪枝、结构算法cache闭包和缺页诊断单次索引。真实中微429页/14025units，同16M/112上限从0span变112span，understand工作11473800→6334220；仍exhausted/partial、无IPO gold NOT_GRADED。0新付费/下载。CF1/CF2及CF3候选优化、正式摘要/cache/RF循环仍OPEN。
+
+原5.43M reserve不能靠旧直接扣账frame逆推关系循环，本轮固定深度调用者诊断实际证明结构coverage diagnostic全页×全unit占约5.15M。索引消除真实扫描后才降低对应计费。WorkPlan.stage保留3208304，未假删阶段收费。既有partial保全有效：释放前置开销后从0变112；仍耗尽说明候选/事实后缀工作仍待改进。

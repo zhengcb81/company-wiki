@@ -1,0 +1,24 @@
+{
+  "schema_version": "root-independent-review/1",
+  "node": "CF3-structure-relations-coverage-and-cache-identity",
+  "date": "2026-10-25",
+  "reviewer": "cf3_root_quality_review",
+  "status": "PASS",
+  "open_findings": 0,
+  "baseline_head": "c3ad2ece1827cc7558e3c86a9f5b327c644d9595",
+  "sha256": {
+    "src/company_wiki/document_understanding/structure/relations.py": "df8334faeb9ae648f329db67ee06c53dcb2f779b01a9017a23a296f88ad7fcef",
+    "src/company_wiki/document_understanding/structure/__init__.py": "5b86913bf420c13af3e62fa4eceb310c51e24599c6cd58a810ce2fbeedc2c412",
+    "tests/unit/test_cf3_coverage_work.py": "fcdfffa12cdf217b68045b98d07d7029926137712a101ceec445e922262ec1bf",
+    "src/company_wiki/document_understanding/decision_inventory.py": "0064578ac7b2dce0df3f82996c0b619937ef8fd602e9a30f615bf185c30dfeb7",
+    "tests/unit/test_cf3_relation_work.py": "d9ba8774843ce0e731b4b18769b54b8dcf5bbe1cf1933595db2d101d28f2640c",
+    "tests/unit/test_cf3_algorithm_identity.py": "684bae82e9c544ea01ed739f55339456b21ff4e566530f22ed55a0ed4898969a",
+    "tests/unit/document_understanding_selection/test_reading_decision_inventory.py": "2c548e2214b3357492cdb888ccd11978aabddffeb909dbd1ca3872fd2964c09b"
+  },
+  "findings": [{"id": "R1", "priority": "P2", "status": "CLOSED", "title": "Geometry counterpart matching lacked kind boundary", "introduced_by_current_diff": false, "reproducer": "Same source/page/y; side-by-side English heading and Chinese paragraph, column=None; baseline emits language_parallel", "fix": "ROOT added shared kind exclusion plus negative test; independent positive/differential verification passed"}],
+  "verification": {"pytest_passed": 74, "pytest_groups": [{"passed": 52, "pytest_seconds": 9.07, "command_seconds": 12.517}, {"passed": 22, "pytest_seconds": 2.17, "command_seconds": 3.771}], "fixed_seed": 20261025, "single_source_differential_cases": 750, "positive_cases": 285, "expected_kind_fix_cases": 127, "cross_source_random_cases": 250, "portable_crlf_lf_nested_add_delete": "PASS", "diagnostics_differential_cases": 500, "full_structure_differential_cases": 24, "zero_budget_no_source_iteration": "PASS", "duplicate_page_lists_independent": "PASS", "existing_cache_test_adjustment": "Accepted: actual source-byte injection preserves complete/same/changed assertions"},
+  "evidence": ["cf3-reviewer-focused.log", "cf3-reviewer-focused-receipt.json", "cf3-reviewer-coverage.log", "cf3-reviewer-coverage-receipt.json", ".planning/cf-source-20261025/reviewer/probe-results.json", ".planning/cf-source-20261025/reviewer/coverage-results.json"],
+  "hygiene": {"product_modified_by_reviewer": false, "download_calls": 0, "paid_calls": 0, "keys_read": false, "production_config_changed": false, "temporary_roots_restored_absent": true},
+  "root_real_replay_receipt_review": {"report": "cf3-ipo-indexed-replay.json", "report_sha256": "21cfbb96fcf57745c0bae16e49254389fdff8403f69f9307d629d7c3daf1dda5", "runtime": "Conda/PyMuPDF 1.26.7", "parsed_units": 14025, "parsed_pages": 429, "parse_work": 420052, "understand_work": 6334220, "selected_count": 112, "work_used": 15998158, "work_limit": 16000000, "exhausted": true, "status": "partial", "source_binding_mismatches": [], "caller_accepted_sum_equals_account": true, "content_grade": "NOT_GRADED_NO_FORMAL_IPO_GOLD", "rerun_by_reviewer": false},
+  "not_claimed": ["Entire CF3 complete", "Real IPO fits 16M", "Real IPO semantic content gold passed", "Formal summary/cache recovery complete"]
+}

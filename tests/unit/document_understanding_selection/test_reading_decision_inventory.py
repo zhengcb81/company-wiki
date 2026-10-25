@@ -358,23 +358,30 @@ def test_real_multi_parent_reading_bridge_namespaces_actual_profiles_for_complet
     "company_wiki.document_understanding.structure.layout",
     "company_wiki.document_understanding.structure.sections",
 ])
-def test_w08_changed_source_implementation_invalidates_the_real_complete_decision(tmp_path, monkeypatch, module_name):
-    from types import SimpleNamespace
+def test_w08_changed_source_implementation_invalidates_the_real_complete_decision(monkeypatch, module_name):
     from company_wiki.document_understanding import decision_inventory as inventory
     from company_wiki.document_understanding.decision_dependencies import (
         compare_decision_dependencies, freeze_decision_dependencies,
     )
     observed = _real_interim_pipeline()
     observed["observation"]["metadata"]["mime_type"] = "text/html"
-    source_file = tmp_path / "owned-source.py"
-    source_file.write_bytes(b"def source_rule():\\n    return True\\n")
-    actual_import = inventory.import_module
-    monkeypatch.setattr(inventory, "import_module",
-        lambda name: SimpleNamespace(__file__=str(source_file)) if name == module_name else actual_import(name))
+    source_file = Path(importlib.import_module(module_name).__file__).resolve()
+    read_bytes = Path.read_bytes
+    changed = False
+
+    def source_bytes(path):
+        raw = read_bytes(path)
+        if changed and path.resolve() == source_file:
+            return raw + b"\n# changed owned source algorithm\n"
+        return raw
+
+    # Exercise source bytes, independent of whether an owner is discovered
+    # through its package or an explicit module import. No source is written.
+    monkeypatch.setattr(Path, "read_bytes", source_bytes)
     frozen = freeze_decision_dependencies(inventory.build_decision_trace(observed))
     assert frozen["status"] == "complete"
     assert compare_decision_dependencies(frozen, inventory.current_decision_trace(frozen))["status"] == "same"
-    source_file.write_bytes(b"def source_rule():\\n    return False\\n")
+    changed = True
     assert compare_decision_dependencies(frozen, inventory.current_decision_trace(frozen))["status"] == "changed"
 
 
