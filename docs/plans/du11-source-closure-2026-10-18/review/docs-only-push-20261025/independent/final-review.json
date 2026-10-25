@@ -1,0 +1,165 @@
+{
+  "schema_version": "docs-only-push-independent-final-review/1",
+  "reviewer": "annual14_current_source_review (independent of implementation)",
+  "verdict": "PASS",
+  "scope": "Current docs-only pre-push fast path, changed-file classification, and corresponding tests only",
+  "unresolved_product_findings": [],
+  "source_sha256": {
+    "tools/pre_push_gate.py": "af059a018aaa17025461ca724b7de4e9b6ad88bc25041da77b9a1254e8414d0b",
+    "tools/changed_unit_tests.py": "17ebda2877525410b4bce8b9b36b6278e1c294964d59b905cdc3495310bcbf3e",
+    "tests/unit/test_daily_push_policy.py": "56b9d83cf315cb0b290ab7496d4060ca10b6e49f28b7d4b6ba811cc2a73dd999",
+    "tests/unit/test_ci_push_selection.py": "3f4a0fc238a9b5ddae671b9e25d9ffa132434e7f2c15f4f33aa9a1cebb1ef9c8"
+  },
+  "unchanged_context_sha256": {
+    ".github/workflows/ci.yml": "f2fec1e5e2815f649812e57302a027e690afe36c8c181a7f031cba9245ac3f80",
+    ".githooks/pre-push": "ce4822bb5a082f9d940a0181498215ffb5584f49aee351a38a5651885b03687d"
+  },
+  "evidence_sha256": {
+    "README.md": "cd26c9bc53f1bdcb486c684ab59485e38c0a6b287fb304a1efad4ae963c03ae8",
+    "red.log": "c69d8515b1d11cab364f0ec7e6329c812f94b57ae93c9c999d6bfece3b20d225",
+    "red-receipt.json": "f5b0e0e30a20e9849b0afdb2afaabac1b5991020686ae9481c2e9d2dd2e97a92",
+    "green.log": "38c59e084b3e1004061af218598095155c7497278fb09e6ca1563fbea5aee7c8",
+    "green-receipt.json": "c40877ef1552dc0806c2722e3590d5b87e28ae29b1d122d791887522c0e77436",
+    "scope-red.log": "fb9b93a0953dc86144a06476add4b6caba5dcfeefec86c160b823f507943602a",
+    "scope-red-receipt.json": "088f6e974b7a86fed3926f989c0cc5953258a06587f5a805e17df043770700f0",
+    "final.log": "17466201748786811c9fe2223c59dd9dbcdbaef7c00324274d3abd977b438421",
+    "final-receipt.json": "db59bc913ae873ad329fe8b781ff3ef0c69bf7ae4ed2721cebb770b5f7547b66",
+    "environment-rerun.log": "560a2a25d6dd16f03e87890d9495d6edc751387b7f71cc3aaa80e181dce0a558",
+    "environment-rerun-receipt.json": "e61fc4e7c2f96b721e6b54b30a35614d78bd8103e07b6d8570a2dc5bddfcc20c",
+    "run_checks.py": "fc94772c52617fb2c18876aefd569cc89a934f61fa4950de63a276f97309962c",
+    "independent/initial-findings.json": "0156907f5a172b8e6ea7fe7a89a123beca7adcbbd9ddb27667300bf5bbc9a5b9",
+    "independent/review-notes.md": "c94244b4572e25fa5dfa5767bfd0ae5b9e3758e08a69944b372bbb70cdecbbe4",
+    "independent/independent_probe.py": "7a3eed73e3e121bd22c01e996d959ebc69c6c327e1fb8d29f64e2033f058d5ab",
+    "independent/final-probe01.json": "afe1718b148308444f1692ab051b0bfe51f00381cb5310e2af7654ece40a6f78",
+    "independent/final-review.md": "4a885adc185f051c7b0ae7f364c726a0ffe7ec3337caadb9fbeebec28d04bf5a"
+  },
+  "initial_findings": [
+    {
+      "id": "TRUSTED_EMPTY_SCOPE",
+      "severity": "P2",
+      "initial_status": "CHANGES_REQUESTED",
+      "final_status": "CLOSED",
+      "owner": "tools/changed_unit_tests.py::select_unit_tests",
+      "root_cause": "Unknown non-Python resources outside the old known runtime roots were classified as no behavior changes. A newly trusted empty list amplified this omission into a test-free push.",
+      "fix": "Explicit non-runtime documentation whitelist after existing archive/global checks; unknown resources conservatively retain runtime fallback. No reason-string or single-path gate special case.",
+      "true_red": "scope-red.log: 14 failed, 11 passed",
+      "independent_regression": "Eight current classification boundaries and whole-range/dispatch probes PASS."
+    }
+  ],
+  "checks": [
+    {
+      "id": "empty_scope",
+      "status": "PASS",
+      "evidence": "Empty trusted targets return before test runner; tests_not_run only; no empty-argv pytest."
+    },
+    {
+      "id": "runtime_unknown",
+      "status": "PASS",
+      "evidence": "Root config, docs plus config, unknown command/resource, provider config, runtime Markdown and unknown range retain checks."
+    },
+    {
+      "id": "full_push_range",
+      "status": "PASS",
+      "evidence": "changed_paths unchanged; real local Git earlier-code plus last-doc range includes code and dispatches test; failure exit 7 propagated."
+    },
+    {
+      "id": "real_hook_e2e",
+      "status": "PASS",
+      "evidence": "ROOT test_real_docs_push_runs_no_tests_but_does_not_hide_earlier_code passed in final.log; includes remote-ref no-advance on earlier failing code."
+    },
+    {
+      "id": "ci_full_unchanged",
+      "status": "PASS",
+      "evidence": "Independent actual gate dispatch preserves CI one smoke and full six stages; workflow/hook unchanged."
+    },
+    {
+      "id": "failure_startup",
+      "status": "PASS",
+      "evidence": "Existing launch/error/failure assertions retained; original missing-runner assertion passes targeted environment rerun."
+    },
+    {
+      "id": "tests_not_weakened",
+      "status": "PASS",
+      "evidence": "Outdated docs-implies-smoke inputs moved to runtime/unknown inputs; original runtime contract assertions retained; nonarchival JSON no longer treated as inert."
+    },
+    {
+      "id": "docs_cleanup",
+      "status": "PASS",
+      "evidence": "README corrected; final root/rerun and independent owned temporary roots confirmed absent."
+    }
+  ],
+  "root_test_runs": [
+    {
+      "phase": "red",
+      "pytest_failed": 3,
+      "pytest_passed": 0,
+      "claim": "True RED for fast path; retained."
+    },
+    {
+      "phase": "initial_green",
+      "pytest_passed": 105,
+      "claim": "Before classifier fix; not acceptance of final classifier."
+    },
+    {
+      "phase": "scope_red",
+      "pytest_failed": 14,
+      "pytest_passed": 11,
+      "pytest_seconds": 4.7,
+      "wrapper_seconds": 11.23,
+      "claim": "True RED for independent classification counterexamples."
+    },
+    {
+      "phase": "final",
+      "pytest_passed": 129,
+      "pytest_failed": 1,
+      "pytest_seconds": 160.84,
+      "wrapper_seconds": 167.48,
+      "failure": "test_real_push_with_missing_gate_runner_is_blocked",
+      "failure_boundary": "Git sh NtCreateDirectoryObject environment failure before hook execution; missing-runner assertion not reached.",
+      "cleanup_confirmed_absent": true
+    },
+    {
+      "phase": "environment_rerun",
+      "pytest_passed": 1,
+      "pytest_failed": 0,
+      "pytest_seconds": 3.36,
+      "wrapper_seconds": 7.29,
+      "original_assertion_unchanged": true,
+      "product_test_sha_unchanged": true,
+      "cleanup_confirmed_absent": true
+    }
+  ],
+  "acceptance_run_boundary": "129 final-run passes plus 1 original-assertion targeted host rerun pass; NOT a single all-green 130-test run.",
+  "independent_probe": {
+    "checks": {
+      "docs_real_git_paths": true,
+      "docs_no_dispatch_and_honest": true,
+      "entire_range_includes_earlier_code": true,
+      "mixed_dispatch_failure_not_skipped": true,
+      "unknown_dispatches_existing_smoke": true,
+      "ci_still_dispatches_smoke": true,
+      "full_mode_still_all_six_stages": true,
+      "all_classifier_boundaries": true
+    },
+    "source_stable": true,
+    "actual_git_commit_ranges": true,
+    "actual_classifier_and_gate_entry": true,
+    "test_dispatch_intercepted": true,
+    "simulated_failure_exit": 7,
+    "pytest_children": 0,
+    "external_calls": 0,
+    "owned_git_root_restored_absent": true,
+    "limits": "This probe is not the ROOT-owned real hook/pytest push E2E."
+  },
+  "publication_boundary": {
+    "ready_for_root_commit_push": true,
+    "not_acceptance_of": [
+      "other concurrent A05 changes",
+      "all project/CI suites",
+      "company content or official summary",
+      "current RF adoption/results"
+    ],
+    "performance_claim": "Verified no smoke dispatch for trusted docs-only range; actual end-to-end network push latency not measured."
+  },
+  "product_or_author_files_written_by_reviewer": false
+}

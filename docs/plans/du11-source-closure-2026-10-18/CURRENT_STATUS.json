@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-25",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ST_A13_PUBLISHED_EXACT_CI_SUCCESS; A01_A05_NATIVE_OUTLINE_TDD_NEXT; REAL_SUMMARY_RF_OPEN",
+  "overall_status": "A01_A05_NATIVE_OUTLINE_IMPLEMENTING; DOCS_ONLY_PUSH_INDEPENDENT_PASS_PUBLISH_NEXT; REAL_SUMMARY_RF_OPEN",
   "parallel_packages_20261025": {
     "status": "ALL_THREE_DISPATCHED_BY_USER",
     "entry": "harness_lanes/20261025/README.md",
@@ -1909,5 +1909,23 @@
     "code_commit": "26e981e1f75d8e67274679749f6ef213d7490012",
     "publication": "review/st-a13-recognition-scope-20261025/publication.json"
   },
-  "a01_a05_investigation": "review/st-a05-parent-investigation-20261025/README.md"
+  "a01_a05_investigation": "review/st-a05-parent-investigation-20261025/README.md",
+  "docs_only_push_20261025": {
+    "status": "INDEPENDENT_PASS_READY_TO_PUBLISH",
+    "evidence": "review/docs-only-push-20261025/README.md",
+    "independent_review": "review/docs-only-push-20261025/independent/final-review.json",
+    "root_tests": "129 main PASS +1 same-assertion environment rerun PASS; not one130-green run",
+    "unknown_config_still_checked": true,
+    "ci_full_unchanged": true,
+    "api_calls": 0
+  },
+  "a01_a05_20261025": {
+    "status": "TDD_IMPLEMENTATION_NOT_YET_ACCEPTED",
+    "evidence": "review/st-a05-parent-investigation-20261025/README.md",
+    "initial_red": "13 FAIL/13 PASS",
+    "initial_green": "98 PASS",
+    "same_physical_edge_red": "1 FAIL; repaired; final checks pending",
+    "formal_summary": "NOT_REVIEWED",
+    "new_api_calls": 0
+  }
 }

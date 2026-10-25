@@ -43,6 +43,18 @@ def _targets(command):
     return command[command.index("--timeout=180") + 1:]
 
 
+@pytest.mark.parametrize("reason", ["no behavior changes", "fixture reason"])
+def test_non_runtime_push_never_dispatches_a_test_runner(monkeypatch, capsys, reason):
+    _push_gate(monkeypatch, [], reason)
+    observed = _capture_gates(monkeypatch)
+    assert gate.main(["--push-checks"]) == 0
+    assert observed == []
+    output = capsys.readouterr().out
+    assert "tests_not_run" in output
+    assert "local_fast_pass" not in output
+    assert "GREEN" not in output
+
+
 @pytest.mark.parametrize("selected,reason", [
     (["tests/unit"], "unknown push range"),
     (["tests/unit"], "configuration or test entrypoint changed"),
@@ -78,7 +90,6 @@ def test_empty_stdin_is_an_unknown_range_that_defers(monkeypatch, capsys):
 
 
 @pytest.mark.parametrize("selected,reason", [
-    ([], "no behavior changes"),
     (["tests/unit/test_reader.py"], "affected unit tests"),
     (["tests/unit/test_a.py", "tests/contract/test_shared.py"],
      "affected test modules"),
@@ -103,7 +114,7 @@ def test_a_small_explainable_set_runs_those_files_and_reports_the_ran_scope(
 
 def test_push_targets_never_expand_to_the_whole_unit_directory(monkeypatch):
     for selected in (["tests/unit"], ["tests/unit/test_a.py", "tests/unit"],
-                     [], ["tests/unit/du/test_x.py"]):
+                     ["tests/unit/du/test_x.py"]):
         _push_gate(monkeypatch, selected, "fixture reason")
         observed = _capture_gates(monkeypatch)
         assert gate.main(["--push-checks"]) == 0
@@ -157,7 +168,7 @@ def test_node_id_selection_deduplicates_exact_smoke_member_and_keeps_siblings():
 
 
 def test_smoke_only_push_label_does_not_claim_affected_tests_ran(monkeypatch, capsys):
-    _push_gate(monkeypatch, [], "no behavior changes")
+    _push_gate(monkeypatch, ["tests/unit"], "unknown push range")
     observed = _capture_gates(monkeypatch)
 
     assert gate.main(["--push-checks"]) == 0
@@ -198,7 +209,7 @@ def test_green_full_local_mode_keeps_its_own_wording(monkeypatch, capsys):
 
 
 def test_green_push_mode_never_claims_full_or_safe(monkeypatch, capsys):
-    _push_gate(monkeypatch, [], "no behavior changes")
+    _push_gate(monkeypatch, ["tests/unit/test_reader.py"], "affected unit tests")
     _capture_gates(monkeypatch)
     assert gate.main(["--push-checks"]) == 0
     output = capsys.readouterr().out
@@ -214,7 +225,7 @@ def test_green_push_mode_never_claims_full_or_safe(monkeypatch, capsys):
 ])
 def test_remote_and_full_mode_sets_are_unchanged_by_the_push_policy(
         monkeypatch, entrypoint, extra):
-    _push_gate(monkeypatch, [], "no behavior changes")
+    _push_gate(monkeypatch, ["tests/unit"], "unknown push range")
     observed = _capture_gates(monkeypatch)
     assert gate.main([entrypoint, *extra]) == 0
     assert len(observed) == 1
@@ -350,6 +361,38 @@ def test_real_push_green_fast_pass_then_blocked_by_a_ran_failure(tmp_path):
     assert "PUSH CHECKS RED" in combined
     assert "test_gate_probe" in combined
     assert _remote_head(work) != local_head
+
+
+def test_real_docs_push_runs_no_tests_but_does_not_hide_earlier_code(tmp_path):
+    work, _remote, probe = _fixture_repository(tmp_path)
+    initial = _push(work)
+    assert initial.returncode == 0, initial.stdout + initial.stderr
+    evidence = work / "docs/plans/fixture/probe.py"
+    evidence.parent.mkdir(parents=True)
+    evidence.write_text("raise RuntimeError('archived only')\n", encoding="utf-8")
+    _git(work, "add", "docs/plans/fixture/probe.py")
+    _git(work, "commit", "-qm", "plan evidence only")
+    docs = _push(work)
+    output = docs.stdout + docs.stderr
+    assert docs.returncode == 0, output
+    assert "tests_not_run" in output
+    assert "local_fast_pass" not in output
+    assert "passed" not in output
+    assert _remote_head(work) == _git(work, "rev-parse", "HEAD").stdout.strip()
+
+    probe.write_text("def test_probe(): assert False, 'earlier code failure'\n",
+                     encoding="utf-8", newline="\n")
+    _git(work, "add", "tests/unit/test_gate_probe.py")
+    _git(work, "commit", "-qm", "unpublished failing code")
+    evidence.write_text("# latest commit is still only evidence\n", encoding="utf-8")
+    _git(work, "add", "docs/plans/fixture/probe.py")
+    _git(work, "commit", "-qm", "docs after code")
+    blocked = _push(work)
+    combined = blocked.stdout + blocked.stderr
+    assert blocked.returncode != 0, combined
+    assert "PUSH CHECKS RED" in combined
+    assert "earlier code failure" in combined
+    assert _remote_head(work) != _git(work, "rev-parse", "HEAD").stdout.strip()
 
 
 def test_real_push_with_missing_gate_runner_is_blocked(tmp_path):

@@ -895,3 +895,7 @@ Verification after fixes: latest rerun passed 46 protocol/Phase C tests in 139.7
 - 真原件有p13编号Chemistry父级、p14缩进D&M/TIDES及其Roman子项；同级Testing重回原缩进。`probe_real_structure.py`直接观察未修改的生产outline/physical输出：Chemistry scope只到p13 R段末，下一单元是`13 / 249`，再是p14重复标题与D&M；跨页物理调用计数为0。
 - 源码layout._running_furniture按精确同文字分组；_PAGE_NUMBER只认裸数字，因此变化n/total页码没有正证成为furniture，outline先停止，尚未请求邻页proof。下一步应在物理/版面owner证明“与物理页一致的跨页计数模板+页边位置”，保留分母、坐标、原ID；不能把任意数字或body比率都当页脚。
 - 中性三层的root父项尚在，但破折号中间业务不在citation/model；真实例相反本地破折号在、root父级缺。单层scope扫描跳过已消费成员、单active native scope是共同表示缺口线索；仍需typed多层栈的正反TDD及真实物理证明。不要直接index+1补丁导致重复扫描，也不能放宽邻页、lane、材料预算约束。
+# 2026-10-25 ROOT效率与来源层级新增发现
+
+- 09a758c8纯PWF已由classifier判无行为，却仍固定154项smoke、160.83秒。首修gate后独审定位更深共因：旧classifier将任何不以.py结尾且不在代码目录的文件当文档，包括根config.yaml/未知shell/JSON。现唯一classifier明确文档/归档，未知资源仍检查；不是按reason跳过或补单个config例外。最终独审PASS，129主跑+1原断言MSYS环境复跑通过；初版105绿不代签最终版本。
+- A01/A05真实变化分页计数未识别、三层native scope跳过内层opener是两个触发；新TDD13FAIL/13PASS后共享structure修复98PASS。新1例又证明内外层会对同物理边重复发现，先RED后在同调用内共用正/负proof；集中预算/cache/结构验收进行中。真实SourceRef回放与独审尚待，不能宣称来源内容验收。

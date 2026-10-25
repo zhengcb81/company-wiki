@@ -1,0 +1,28 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\cwdoc-8i_zqsq0\\pytest", "requested_basetemp_len": 56, "cwd_len": 34, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+timeout: 180.0s
+timeout method: thread
+timeout func_only: False
+collected 130 items
+
+tests\unit\test_daily_push_policy.py ............................F.      [ 23%]
+tests\unit\test_ci_push_selection.py ................................... [ 50%]
+......................................................                   [ 91%]
+tests\unit\test_pre_push_parallel_phases.py ....                         [ 94%]
+tests\unit\test_pre_push_temp_scope.py .......                           [100%]
+
+================================== FAILURES ===================================
+_____________ test_real_push_with_missing_gate_runner_is_blocked ______________
+tests\unit\test_daily_push_policy.py:406: in test_real_push_with_missing_gate_runner_is_blocked
+    assert "missing" in combined.lower()
+E   AssertionError: assert 'missing' in '      0 [main] sh (26192) c:\\program files\\git\\usr\\bin\\sh.exe: *** fatal error - ntcreatedirectoryobject(\\basen... not read from remote repository.\n\nplease make sure you have the correct access rights\nand the repository exists.\n'
+E    +  where '      0 [main] sh (26192) c:\\program files\\git\\usr\\bin\\sh.exe: *** fatal error - ntcreatedirectoryobject(\\basen... not read from remote repository.\n\nplease make sure you have the correct access rights\nand the repository exists.\n' = <built-in method lower of str object at 0x0000016DFFBD9D10>()
+E    +    where <built-in method lower of str object at 0x0000016DFFBD9D10> = '      0 [main] sh (26192) C:\\Program Files\\Git\\usr\\bin\\sh.exe: *** fatal error - NtCreateDirectoryObject(\\BaseN... not read from remote repository.\n\nPlease make sure you have the correct access rights\nand the repository exists.\n'.lower
+=========================== short test summary info ===========================
+FAILED tests/unit/test_daily_push_policy.py::test_real_push_with_missing_gate_runner_is_blocked
+================== 1 failed, 129 passed in 160.84s (0:02:40) ==================

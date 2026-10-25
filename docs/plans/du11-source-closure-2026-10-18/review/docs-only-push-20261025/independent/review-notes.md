@@ -1,0 +1,7 @@
+# 纯PWF推送快路径独立审查
+
+已读完整产品diff、pre_push_gate、新旧daily_push_policy/ci_push_selection测试。生产仅新增可信empty目标的提前退出，输出tests_not_run；分类器、CI/full未改。正在核分类器边界、真实Git全range测试和无空pytest调用保证；不重复ROOT四文件E2E。只写本独审目录，自有临时库结束恢复不存在。
+
+独立探针首次启动因脚本目录不在repo root导致tools导入失败；未创建tmp。已在自有探针显式解析pyproject根并加入sys.path后重跑，非产品故障。初审P2已在classifier责任层修复，当前继续完整range/dispatch实核。
+
+小Git探针计算已执行，但Windows Git对象文件为只读，首轮shutil.rmtree清理在finally报WinError5，未发布成功收据。仅对已创建且路径精确验证的owned-git-xr18p477清理，按标准onexc去只读后恢复不存在；探针同步使用该清理方式再跑，不涉及生产.git。

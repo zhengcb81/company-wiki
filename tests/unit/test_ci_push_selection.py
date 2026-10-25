@@ -112,7 +112,33 @@ def test_unknown_source_dependency_falls_back_instead_of_silent_skip(project):
 
 
 def test_document_only_push_does_not_run_full_units(project):
-    assert select_unit_tests(project, {"docs/report.md", "docs/receipt.json"})[0] == []
+    # A JSON receipt is non-runtime only inside the owned plan archive.
+    assert select_unit_tests(project, {"docs/report.md", "docs/plans/run/receipt.json"})[0] == []
+
+
+@pytest.mark.parametrize("name", ["config.yaml", "startup.ps1", "misc/runtime.json",
+    "docs/receipt.json", "runtime.toml", "prompts/default.txt", "README.js",
+    "src/pkg/prompt.md", "tests/fixture.md"])
+@pytest.mark.parametrize("mixed_docs", [False, True])
+def test_unknown_or_runtime_nonpython_paths_cannot_become_a_test_free_push(
+        project, monkeypatch, name, mixed_docs):
+    paths = {name} | ({"docs/plans/run/receipt.json"} if mixed_docs else set())
+    selected, _reason = select_unit_tests(project, paths)
+    assert selected == ["tests/unit"]
+    seen = []
+    monkeypatch.setattr(gate, "PROJECT_ROOT", project)
+    monkeypatch.setattr(sys, "stdin", type("Input", (), {"read": lambda self: "refs"})())
+    monkeypatch.setattr(gate, "changed_paths", lambda root, data: paths)
+    monkeypatch.setattr(gate, "_run_pytest_gate", lambda cmd, label: seen.append(cmd) or 0)
+    assert gate.main(["--push-checks"]) == 0
+    assert len(seen) == 1
+    assert seen[0][seen[0].index("--timeout=180") + 1:] == list(gate.FAST_CONTRACT_CASES)
+
+
+@pytest.mark.parametrize("name", ["README.md", "CONTRIBUTING.md", "CHANGELOG.md",
+    "AGENTS.md", "docs/usage.md", "docs/design.rst", "docs/usage.adoc"])
+def test_explicit_documentation_has_no_runtime_targets(project, name):
+    assert select_unit_tests(project, {name}) == ([], "no behavior changes")
 
 
 def test_git_range_covers_earlier_code_and_final_document_commit(project, monkeypatch):
@@ -173,8 +199,8 @@ def test_push_failure_is_propagated_and_suites_are_not_duplicated(monkeypatch):
 def test_published_summary_contracts_run_in_both_ci_and_push(entrypoint, monkeypatch):
     seen = []
     monkeypatch.setattr(sys, "stdin", type("Input", (), {"read": lambda self: "refs"})())
-    monkeypatch.setattr(gate, "changed_paths", lambda root, data: {"docs/report.md"})
-    monkeypatch.setattr(gate, "select_unit_tests", lambda root, files: ([], "documents only"))
+    monkeypatch.setattr(gate, "changed_paths", lambda root, data: {"config/fixture.yaml"})
+    monkeypatch.setattr(gate, "select_unit_tests", lambda root, files: (["tests/unit"], "configuration changed"))
     monkeypatch.setattr(gate, "_run_pytest_gate", lambda cmd, label: seen.append(cmd) or 0)
 
     assert gate.main([entrypoint]) == 0
@@ -188,8 +214,8 @@ def test_published_summary_contracts_run_in_both_ci_and_push(entrypoint, monkeyp
 def test_source_scope_guard_is_shared_but_full_cache_matrix_is_major_node_only(entrypoint, monkeypatch):
     seen = []
     monkeypatch.setattr(sys, "stdin", type("Input", (), {"read": lambda self: "refs"})())
-    monkeypatch.setattr(gate, "changed_paths", lambda root, data: {"docs/report.md"})
-    monkeypatch.setattr(gate, "select_unit_tests", lambda root, files: ([], "documents only"))
+    monkeypatch.setattr(gate, "changed_paths", lambda root, data: {"config/fixture.yaml"})
+    monkeypatch.setattr(gate, "select_unit_tests", lambda root, files: (["tests/unit"], "configuration changed"))
     monkeypatch.setattr(gate, "_run_pytest_gate", lambda cmd, label: seen.append(cmd) or 0)
 
     assert gate.main([entrypoint]) == 0

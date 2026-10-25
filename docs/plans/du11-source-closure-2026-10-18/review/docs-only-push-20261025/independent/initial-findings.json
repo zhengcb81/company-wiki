@@ -1,0 +1,43 @@
+{
+  "schema_version": "docs-only-push-independent-initial-finding/1",
+  "status": "CHANGES_REQUESTED_AT_FIRST_REVIEW",
+  "severity": "P2",
+  "id": "TRUSTED_EMPTY_SCOPE",
+  "old_classifier_git_blob_sha256": "6774558e8fdc3f757581a4d25d5f44f7c4490cf3902965756419052eaa461155",
+  "finding": "Classifier treated non-Python paths outside known runtime directories as no behavior changes, so new early-return skipped actual root config.yaml and unknown startup.ps1/misc/runtime.json.",
+  "reproductions": [
+    {
+      "changes": [
+        "config.yaml"
+      ],
+      "selected": [],
+      "reason": "no behavior changes",
+      "planned_targets": 0,
+      "actual_root_config_exists": true
+    },
+    {
+      "changes": [
+        "README.md",
+        "config.yaml"
+      ],
+      "selected": [],
+      "planned_targets": 0
+    },
+    {
+      "changes": [
+        "startup.ps1"
+      ],
+      "selected": [],
+      "planned_targets": 0
+    },
+    {
+      "changes": [
+        "misc/runtime.json"
+      ],
+      "selected": [],
+      "planned_targets": 0
+    }
+  ],
+  "recommended_owner": "changed_unit_tests.select_unit_tests: explicit non-runtime documents; unknown paths conservatively retain existing smoke recommendation",
+  "limits": "No product writes, model/network calls or real pytest child. ROOT was told immediately and fixed classifier owner."
+}

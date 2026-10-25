@@ -251,7 +251,13 @@ def select_unit_tests(root: Path, changes: set[str] | None) -> tuple[list[str], 
         return full, "configuration or test entrypoint changed"
     if any(name.startswith("tools/") and not _benchmark(name) for name in changes):
         return full, "shared or unknown tooling changed"
-    relevant = {name for name in changes if name.endswith(".py") or name.startswith(("src/", "scripts/", "tools/", "tests/"))}
+    # Empty is now a test-free push, so it needs positive documentation scope.
+    # Unknown suffixes/locations can be runtime config, prompts or shell entrypoints;
+    # absence from the Python import graph does not prove that they are documents.
+    root_documents = {"README.md", "CONTRIBUTING.md", "CHANGELOG.md", "AGENTS.md"}
+    documents = {name for name in changes if name in root_documents or
+                 name.startswith("docs/") and Path(name).suffix in {".md", ".rst", ".adoc"}}
+    relevant = changes - documents
     if not relevant:
         return [], "no behavior changes"
     resources = {name for name in relevant if not name.endswith(".py")}

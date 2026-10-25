@@ -1,0 +1,23 @@
+{
+  "phase": "environment-rerun",
+  "targets": [
+    "tests/unit/test_daily_push_policy.py::test_real_push_with_missing_gate_runner_is_blocked"
+  ],
+  "owned_test_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\cwdoc-ozgiqe9e",
+  "exit_code": 0,
+  "elapsed_seconds": 7.29,
+  "temp_decisions": [
+    {
+      "event": "decision",
+      "requested_basetemp": "C:\\Users\\郑曾波\\Projects\\company-wiki\\cwdoc-ozgiqe9e\\pytest",
+      "requested_basetemp_len": 56,
+      "cwd_len": 34,
+      "threshold": 60,
+      "win32_path_limit": 210,
+      "generation_reserve": 150,
+      "relocated": false,
+      "reason": "within-budget"
+    }
+  ],
+  "owned_test_root_restored_to_absent": true
+}

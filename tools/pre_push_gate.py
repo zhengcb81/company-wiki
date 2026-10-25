@@ -3,7 +3,8 @@
 Three bounded layers share one script. Commits keep static checks (pre-commit).
 Daily pushes run the affected unit files plus the shared fast contract set
 once, and defer everything else to CI; a wide, dynamic or unknown scope runs
-the fast contract set alone and says so. The full local suite below stays an
+the fast contract set alone and says so. A proven non-runtime range starts no
+test process and reports tests_not_run. The full local suite below stays an
 explicit decision and is never started implicitly by a push. A green fast pass
 only proves the scope that actually ran (`local_fast_pass`), never the whole
 project (`full_validation_pending` covers the rest).
@@ -196,11 +197,13 @@ def _push_targets(selected: list[str]) -> tuple[list[str], str]:
     The selection layer may still recommend the whole unit suite for wide,
     dynamic, configuration or unknown scopes. That recommendation stays with
     CI: silently starting all unit tests on every push is the regression this
-    policy exists to prevent. The push itself always runs the shared fast
-    contract set once, deduplicated against whole-file selections, and a small
-    explainable affected set keeps running its complete files.
+    policy exists to prevent. A trusted empty selection has no runtime targets;
+    other pushes run the shared fast contract set once, deduplicated against
+    whole-file selections. A small explainable affected set keeps its full files.
     """
     selected = list(dict.fromkeys(selected))
+    if not selected:
+        return [], "no runtime test targets in the classified push range"
     if "tests/unit" in selected:
         return list(FAST_CONTRACT_CASES), "full unit suite recommendation deferred to CI"
     if any(not target.split("::", 1)[0].endswith(".py") for target in selected):
@@ -284,6 +287,13 @@ def main(argv: list[str] | None = None) -> int:
         selected, reason = select_unit_tests(
             PROJECT_ROOT, changed_paths(PROJECT_ROOT, sys.stdin.read()))
         targets, deferred = _push_targets(selected)
+        if not targets:
+            # pytest with an empty target list would collect the entire project.
+            # Only the existing range classifier can produce this empty scope;
+            # unknown/configuration ranges still select the contract smoke set.
+            print(f"Push scope: {reason}; planned 0 runtime targets. "
+                  f"tests_not_run: {deferred}; CI policy unchanged.")
+            return 0
         print(f"Push scope: {reason}; planned {len(targets)} target(s); "
               f"full_validation_pending: {deferred}.")
         print("Planned test targets:", *targets, sep="\n  ")

@@ -1,0 +1,106 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\cwdoc-ydt3n8sf\\pytest", "requested_basetemp_len": 56, "cwd_len": 34, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+timeout: 180.0s
+timeout method: thread
+timeout func_only: False
+collected 3 items
+
+tests\unit\test_daily_push_policy.py FFF                                 [100%]
+
+================================== FAILURES ===================================
+__ test_non_runtime_push_never_dispatches_a_test_runner[no behavior changes] __
+tests\unit\test_daily_push_policy.py:51: in test_non_runtime_push_never_dispatches_a_test_runner
+    assert observed == []
+E   AssertionError: assert [(['C:\\Users...unit files)')] == []
+E     
+E     Left contains one more item: (['C:\\Users\\郑曾波\\Projects\\company-wiki\\.venv\\Scripts\\python.exe', '-m', 'pytest', '-q', '--tb=short', '--timeout=180', ...], 'daily push fast feedback: CI contract smoke (no affected unit files)')
+E     Use -v to get more diff
+---------------------------- Captured stdout call -----------------------------
+Push scope: no behavior changes; planned 29 target(s); full_validation_pending: tests/unit outside the 29 ran targets deferred to CI.
+Planned test targets:
+  tests/unit/test_local_budget_observation.py::test_read_charge_reports_a_rejected_tail_separately_from_accepted_bytes
+  tests/contract/test_local_prepare_failure_boundaries.py::test_real_discovery_completed_write_survives_later_unknown_failure
+  tests/document_normalization/test_ocr_region_recovery.py::test_roi_budget_preflight_never_calls_rejected_renderer
+  tests/document_normalization/test_ocr_region_recovery.py::test_rejected_render_attempt_keeps_reserved_budget
+  tests/document_normalization/test_ocr_region_recovery.py::test_upscale_preflight_accounts_for_64m_canvas_without_allocating_it
+  tests/document_normalization/test_isolated_ocr.py::test_noncooperative_native_stops_at_product_deadline[gil-block-inference-infer]
+  tests/document_normalization/test_isolated_ocr.py::test_native_stdin_probe_does_not_deadlock_liveness_monitor[preflight]
+  tests/document_normalization/test_isolated_ocr.py::test_narrative_default_proxy_carries_deadline_without_starting_native
+  tests/integration/test_m3_official_json_acceptance.py
+  tests/unit/test_runtime_dependencies.py::test_ci_requirements_include_declared_runtime_dependencies
+  tests/unit/test_automation_migrations.py::test_m14_classification_uses_one_snapshot_during_concurrent_init
+  tests/contract/test_zr203_reader_rewire.py::test_read_entrypoints_never_construct_catalog_store
+  tests/contract/test_zr1003_shadow_assertions.py::test_c2_recorded_review_is_diagnostic_metadata
+  tests/contract/test_zr1006_broker_cohort.py::test_c2_ramp_1_to_3_to_7
+  tests/contract/test_source_catalog_temp_worker_governance.py::test_owned_temp_worker_helper_detects_test_pid
+  tests/contract/test_source_catalog_temp_worker_governance.py::test_stop_does_not_touch_unowned_live_workers_or_temporary_files
+  tests/contract/test_narrative_output_plan.py
+  tests/contract/test_summary_group_coverage.py
+  tests/contract/test_official_transcript_layouts.py
+  tests/contract/test_transcript_speaker_affiliation.py
+  tests/contract/test_source_scope_qualification.py
+  tests/contract/test_narrative_availability.py::test_one_verified_original_buffer_one_owner_lookup_no_new_fact_writer
+  tests/contract/test_narrative_availability.py::test_projected_two_parents_cannot_borrow_one_raw_proof
+  tests/unit/test_narrative_evidence.py::test_financial_table_rows_are_dropped_but_business_rows_are_selected
+  tests/unit/test_narrative_evidence.py::test_numbered_project_rationale_heading_survives_a_tight_budget
+  tests/unit/test_narrative_transport_contracts.py::test_frozen_producer_golden_contract_and_hash_bindings
+  tests/contract/test_fc905_receipt_envelope.py::test_pi03_no_review_is_explicit_not_reviewed
+  tests/unit/test_narrative_retrieval.py::test_resolver_fails_closed_when_raw_source_hash_changes
+  tests/contract/test_b10_read_chain.py::test_b10_scan_is_not_vacuous
+
+Push fast gate GREEN (local_fast_pass for the ran scope only); full_validation_pending — CI still runs the full suites.
+____ test_non_runtime_push_never_dispatches_a_test_runner[fixture reason] _____
+tests\unit\test_daily_push_policy.py:51: in test_non_runtime_push_never_dispatches_a_test_runner
+    assert observed == []
+E   AssertionError: assert [(['C:\\Users...unit files)')] == []
+E     
+E     Left contains one more item: (['C:\\Users\\郑曾波\\Projects\\company-wiki\\.venv\\Scripts\\python.exe', '-m', 'pytest', '-q', '--tb=short', '--timeout=180', ...], 'daily push fast feedback: CI contract smoke (no affected unit files)')
+E     Use -v to get more diff
+---------------------------- Captured stdout call -----------------------------
+Push scope: fixture reason; planned 29 target(s); full_validation_pending: tests/unit outside the 29 ran targets deferred to CI.
+Planned test targets:
+  tests/unit/test_local_budget_observation.py::test_read_charge_reports_a_rejected_tail_separately_from_accepted_bytes
+  tests/contract/test_local_prepare_failure_boundaries.py::test_real_discovery_completed_write_survives_later_unknown_failure
+  tests/document_normalization/test_ocr_region_recovery.py::test_roi_budget_preflight_never_calls_rejected_renderer
+  tests/document_normalization/test_ocr_region_recovery.py::test_rejected_render_attempt_keeps_reserved_budget
+  tests/document_normalization/test_ocr_region_recovery.py::test_upscale_preflight_accounts_for_64m_canvas_without_allocating_it
+  tests/document_normalization/test_isolated_ocr.py::test_noncooperative_native_stops_at_product_deadline[gil-block-inference-infer]
+  tests/document_normalization/test_isolated_ocr.py::test_native_stdin_probe_does_not_deadlock_liveness_monitor[preflight]
+  tests/document_normalization/test_isolated_ocr.py::test_narrative_default_proxy_carries_deadline_without_starting_native
+  tests/integration/test_m3_official_json_acceptance.py
+  tests/unit/test_runtime_dependencies.py::test_ci_requirements_include_declared_runtime_dependencies
+  tests/unit/test_automation_migrations.py::test_m14_classification_uses_one_snapshot_during_concurrent_init
+  tests/contract/test_zr203_reader_rewire.py::test_read_entrypoints_never_construct_catalog_store
+  tests/contract/test_zr1003_shadow_assertions.py::test_c2_recorded_review_is_diagnostic_metadata
+  tests/contract/test_zr1006_broker_cohort.py::test_c2_ramp_1_to_3_to_7
+  tests/contract/test_source_catalog_temp_worker_governance.py::test_owned_temp_worker_helper_detects_test_pid
+  tests/contract/test_source_catalog_temp_worker_governance.py::test_stop_does_not_touch_unowned_live_workers_or_temporary_files
+  tests/contract/test_narrative_output_plan.py
+  tests/contract/test_summary_group_coverage.py
+  tests/contract/test_official_transcript_layouts.py
+  tests/contract/test_transcript_speaker_affiliation.py
+  tests/contract/test_source_scope_qualification.py
+  tests/contract/test_narrative_availability.py::test_one_verified_original_buffer_one_owner_lookup_no_new_fact_writer
+  tests/contract/test_narrative_availability.py::test_projected_two_parents_cannot_borrow_one_raw_proof
+  tests/unit/test_narrative_evidence.py::test_financial_table_rows_are_dropped_but_business_rows_are_selected
+  tests/unit/test_narrative_evidence.py::test_numbered_project_rationale_heading_survives_a_tight_budget
+  tests/unit/test_narrative_transport_contracts.py::test_frozen_producer_golden_contract_and_hash_bindings
+  tests/contract/test_fc905_receipt_envelope.py::test_pi03_no_review_is_explicit_not_reviewed
+  tests/unit/test_narrative_retrieval.py::test_resolver_fails_closed_when_raw_source_hash_changes
+  tests/contract/test_b10_read_chain.py::test_b10_scan_is_not_vacuous
+
+Push fast gate GREEN (local_fast_pass for the ran scope only); full_validation_pending — CI still runs the full suites.
+______ test_real_docs_push_runs_no_tests_but_does_not_hide_earlier_code _______
+tests\unit\test_daily_push_policy.py:379: in test_real_docs_push_runs_no_tests_but_does_not_hide_earlier_code
+    assert "tests_not_run" in output
+E   AssertionError: assert 'tests_not_run' in 'Push scope: no behavior changes; planned 29 target(s); full_validation_pending: tests/unit outside the 29 ran targets...any-wiki\\cwdoc-ydt3n8sf\\pytest\\test_real_docs_push_runs_no_te0\\remote.git\n   65bd80c..466f857  master -> master\n'
+=========================== short test summary info ===========================
+FAILED tests/unit/test_daily_push_policy.py::test_non_runtime_push_never_dispatches_a_test_runner[no behavior changes]
+FAILED tests/unit/test_daily_push_policy.py::test_non_runtime_push_never_dispatches_a_test_runner[fixture reason]
+FAILED tests/unit/test_daily_push_policy.py::test_real_docs_push_runs_no_tests_but_does_not_hide_earlier_code
+============================= 3 failed in 45.84s ==============================

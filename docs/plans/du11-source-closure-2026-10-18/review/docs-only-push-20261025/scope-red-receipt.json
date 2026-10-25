@@ -1,0 +1,24 @@
+{
+  "phase": "scope-red",
+  "targets": [
+    "tests/unit/test_ci_push_selection.py::test_unknown_or_runtime_nonpython_paths_cannot_become_a_test_free_push",
+    "tests/unit/test_ci_push_selection.py::test_explicit_documentation_has_no_runtime_targets"
+  ],
+  "owned_test_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\cwdoc-_uyu3hl4",
+  "exit_code": 1,
+  "elapsed_seconds": 11.23,
+  "temp_decisions": [
+    {
+      "event": "decision",
+      "requested_basetemp": "C:\\Users\\郑曾波\\Projects\\company-wiki\\cwdoc-_uyu3hl4\\pytest",
+      "requested_basetemp_len": 56,
+      "cwd_len": 34,
+      "threshold": 60,
+      "win32_path_limit": 210,
+      "generation_reserve": 150,
+      "relocated": false,
+      "reason": "within-budget"
+    }
+  ],
+  "owned_test_root_restored_to_absent": true
+}

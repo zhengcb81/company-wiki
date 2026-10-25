@@ -1095,3 +1095,8 @@ Root cause from the configured model and official MiniMax API documentation: `Mi
 
 - **ST-A13发布完成：** 26e981e1正常提交推送master；pre-commit各项通过、pre-push154契约31.74秒通过。GitHub精确HEAD CI40180784583 completed/success（09:28:29–09:33:26 UTC），产品/测试物理SHA仍与独审相同；publication.json另记录Git blob/LF等价，未改旧收据。
 - **A01/A05真实结构调查：** 同一SourceRef只读parse/understand观察证明Chemistry scope只到p13，随后`13 / 249`分页计数未被家具识别；跨13→14物理校验调用为0，不能归咎物理校验拒绝。当前layout只按相同文字跨页重复、裸数字page pattern识别，变化n/total缺通用正证；中性三层例另证明平面scope漏中层。保留实际116935字节收据，0模型/下载/原件副本、配置/目录库未改。初版调查脚本误用oracle.kind导致一次KeyError，核对现有runner后改为document_kind；是调查脚本键名错误，不是产品失败。
+# 2026-10-25 三卡发出后继续ROOT主线
+
+- W16/W17/W18用户已发出，ROOT未写三个作者工区/独占目录。
+- 纯计划推送冗余先TDD3FAIL；初版105PASS，独审发现TRUSTED_EMPTY_SCOPE，新增25例14FAIL/11PASS后修classifier。最终四文件129PASS/1个Git sh NtCreateDirectoryObject环境失败（160.84s）；同源码原断言只复跑该例1PASS3.36s。Ruff/diff-check通过。独立真实Git范围/分发8控制PASS、报告绑定最终四文件，范围内零未解；所有独占测试目录恢复不存在。准备正常提交推送，不改hook mode。
+- A01/A05新增页码及三层祖先26项，13FAIL/13PASS，原13个负例保持正确；初修和旧native/物理模块98PASS5.42s。同物理边重复发现另1真RED，现已由同调用proof缓存修复，集中结构/预算/cache测试和真实原文回放待验收。未新增模型/下载/原文副本，母账与10/4/0来源评分不变。

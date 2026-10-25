@@ -1,0 +1,662 @@
+{
+  "schema_version": "docs-only-push-independent-probes/1",
+  "checks": {
+    "docs_real_git_paths": true,
+    "docs_no_dispatch_and_honest": true,
+    "entire_range_includes_earlier_code": true,
+    "mixed_dispatch_failure_not_skipped": true,
+    "unknown_dispatches_existing_smoke": true,
+    "ci_still_dispatches_smoke": true,
+    "full_mode_still_all_six_stages": true,
+    "all_classifier_boundaries": true
+  },
+  "classifier": [
+    {
+      "name": "archive-py",
+      "changes": [
+        "docs/plans/fixture/probe.py"
+      ],
+      "selected": [],
+      "reason": "no behavior changes",
+      "targets": [],
+      "expected_skip": true,
+      "pass": true
+    },
+    {
+      "name": "root-doc",
+      "changes": [
+        "README.md"
+      ],
+      "selected": [],
+      "reason": "no behavior changes",
+      "targets": [],
+      "expected_skip": true,
+      "pass": true
+    },
+    {
+      "name": "root-runtime-config",
+      "changes": [
+        "config.yaml"
+      ],
+      "selected": [
+        "tests/unit"
+      ],
+      "reason": "resource dependency scope unknown",
+      "targets": [
+        "tests/unit/test_local_budget_observation.py::test_read_charge_reports_a_rejected_tail_separately_from_accepted_bytes",
+        "tests/contract/test_local_prepare_failure_boundaries.py::test_real_discovery_completed_write_survives_later_unknown_failure",
+        "tests/document_normalization/test_ocr_region_recovery.py::test_roi_budget_preflight_never_calls_rejected_renderer",
+        "tests/document_normalization/test_ocr_region_recovery.py::test_rejected_render_attempt_keeps_reserved_budget",
+        "tests/document_normalization/test_ocr_region_recovery.py::test_upscale_preflight_accounts_for_64m_canvas_without_allocating_it",
+        "tests/document_normalization/test_isolated_ocr.py::test_noncooperative_native_stops_at_product_deadline[gil-block-inference-infer]",
+        "tests/document_normalization/test_isolated_ocr.py::test_native_stdin_probe_does_not_deadlock_liveness_monitor[preflight]",
+        "tests/document_normalization/test_isolated_ocr.py::test_narrative_default_proxy_carries_deadline_without_starting_native",
+        "tests/integration/test_m3_official_json_acceptance.py",
+        "tests/unit/test_runtime_dependencies.py::test_ci_requirements_include_declared_runtime_dependencies",
+        "tests/unit/test_automation_migrations.py::test_m14_classification_uses_one_snapshot_during_concurrent_init",
+        "tests/contract/test_zr203_reader_rewire.py::test_read_entrypoints_never_construct_catalog_store",
+        "tests/contract/test_zr1003_shadow_assertions.py::test_c2_recorded_review_is_diagnostic_metadata",
+        "tests/contract/test_zr1006_broker_cohort.py::test_c2_ramp_1_to_3_to_7",
+        "tests/contract/test_source_catalog_temp_worker_governance.py::test_owned_temp_worker_helper_detects_test_pid",
+        "tests/contract/test_source_catalog_temp_worker_governance.py::test_stop_does_not_touch_unowned_live_workers_or_temporary_files",
+        "tests/contract/test_narrative_output_plan.py",
+        "tests/contract/test_summary_group_coverage.py",
+        "tests/contract/test_official_transcript_layouts.py",
+        "tests/contract/test_transcript_speaker_affiliation.py",
+        "tests/contract/test_source_scope_qualification.py",
+        "tests/contract/test_narrative_availability.py::test_one_verified_original_buffer_one_owner_lookup_no_new_fact_writer",
+        "tests/contract/test_narrative_availability.py::test_projected_two_parents_cannot_borrow_one_raw_proof",
+        "tests/unit/test_narrative_evidence.py::test_financial_table_rows_are_dropped_but_business_rows_are_selected",
+        "tests/unit/test_narrative_evidence.py::test_numbered_project_rationale_heading_survives_a_tight_budget",
+        "tests/unit/test_narrative_transport_contracts.py::test_frozen_producer_golden_contract_and_hash_bindings",
+        "tests/contract/test_fc905_receipt_envelope.py::test_pi03_no_review_is_explicit_not_reviewed",
+        "tests/unit/test_narrative_retrieval.py::test_resolver_fails_closed_when_raw_source_hash_changes",
+        "tests/contract/test_b10_read_chain.py::test_b10_scan_is_not_vacuous"
+      ],
+      "expected_skip": false,
+      "pass": true
+    },
+    {
+      "name": "docs-plus-runtime-config",
+      "changes": [
+        "README.md",
+        "config.yaml"
+      ],
+      "selected": [
+        "tests/unit"
+      ],
+      "reason": "resource dependency scope unknown",
+      "targets": [
+        "tests/unit/test_local_budget_observation.py::test_read_charge_reports_a_rejected_tail_separately_from_accepted_bytes",
+        "tests/contract/test_local_prepare_failure_boundaries.py::test_real_discovery_completed_write_survives_later_unknown_failure",
+        "tests/document_normalization/test_ocr_region_recovery.py::test_roi_budget_preflight_never_calls_rejected_renderer",
+        "tests/document_normalization/test_ocr_region_recovery.py::test_rejected_render_attempt_keeps_reserved_budget",
+        "tests/document_normalization/test_ocr_region_recovery.py::test_upscale_preflight_accounts_for_64m_canvas_without_allocating_it",
+        "tests/document_normalization/test_isolated_ocr.py::test_noncooperative_native_stops_at_product_deadline[gil-block-inference-infer]",
+        "tests/document_normalization/test_isolated_ocr.py::test_native_stdin_probe_does_not_deadlock_liveness_monitor[preflight]",
+        "tests/document_normalization/test_isolated_ocr.py::test_narrative_default_proxy_carries_deadline_without_starting_native",
+        "tests/integration/test_m3_official_json_acceptance.py",
+        "tests/unit/test_runtime_dependencies.py::test_ci_requirements_include_declared_runtime_dependencies",
+        "tests/unit/test_automation_migrations.py::test_m14_classification_uses_one_snapshot_during_concurrent_init",
+        "tests/contract/test_zr203_reader_rewire.py::test_read_entrypoints_never_construct_catalog_store",
+        "tests/contract/test_zr1003_shadow_assertions.py::test_c2_recorded_review_is_diagnostic_metadata",
+        "tests/contract/test_zr1006_broker_cohort.py::test_c2_ramp_1_to_3_to_7",
+        "tests/contract/test_source_catalog_temp_worker_governance.py::test_owned_temp_worker_helper_detects_test_pid",
+        "tests/contract/test_source_catalog_temp_worker_governance.py::test_stop_does_not_touch_unowned_live_workers_or_temporary_files",
+        "tests/contract/test_narrative_output_plan.py",
+        "tests/contract/test_summary_group_coverage.py",
+        "tests/contract/test_official_transcript_layouts.py",
+        "tests/contract/test_transcript_speaker_affiliation.py",
+        "tests/contract/test_source_scope_qualification.py",
+        "tests/contract/test_narrative_availability.py::test_one_verified_original_buffer_one_owner_lookup_no_new_fact_writer",
+        "tests/contract/test_narrative_availability.py::test_projected_two_parents_cannot_borrow_one_raw_proof",
+        "tests/unit/test_narrative_evidence.py::test_financial_table_rows_are_dropped_but_business_rows_are_selected",
+        "tests/unit/test_narrative_evidence.py::test_numbered_project_rationale_heading_survives_a_tight_budget",
+        "tests/unit/test_narrative_transport_contracts.py::test_frozen_producer_golden_contract_and_hash_bindings",
+        "tests/contract/test_fc905_receipt_envelope.py::test_pi03_no_review_is_explicit_not_reviewed",
+        "tests/unit/test_narrative_retrieval.py::test_resolver_fails_closed_when_raw_source_hash_changes",
+        "tests/contract/test_b10_read_chain.py::test_b10_scan_is_not_vacuous"
+      ],
+      "expected_skip": false,
+      "pass": true
+    },
+    {
+      "name": "unknown-root-command",
+      "changes": [
+        "startup.ps1"
+      ],
+      "selected": [
+        "tests/unit"
+      ],
+      "reason": "resource dependency scope unknown",
+      "targets": [
+        "tests/unit/test_local_budget_observation.py::test_read_charge_reports_a_rejected_tail_separately_from_accepted_bytes",
+        "tests/contract/test_local_prepare_failure_boundaries.py::test_real_discovery_completed_write_survives_later_unknown_failure",
+        "tests/document_normalization/test_ocr_region_recovery.py::test_roi_budget_preflight_never_calls_rejected_renderer",
+        "tests/document_normalization/test_ocr_region_recovery.py::test_rejected_render_attempt_keeps_reserved_budget",
+        "tests/document_normalization/test_ocr_region_recovery.py::test_upscale_preflight_accounts_for_64m_canvas_without_allocating_it",
+        "tests/document_normalization/test_isolated_ocr.py::test_noncooperative_native_stops_at_product_deadline[gil-block-inference-infer]",
+        "tests/document_normalization/test_isolated_ocr.py::test_native_stdin_probe_does_not_deadlock_liveness_monitor[preflight]",
+        "tests/document_normalization/test_isolated_ocr.py::test_narrative_default_proxy_carries_deadline_without_starting_native",
+        "tests/integration/test_m3_official_json_acceptance.py",
+        "tests/unit/test_runtime_dependencies.py::test_ci_requirements_include_declared_runtime_dependencies",
+        "tests/unit/test_automation_migrations.py::test_m14_classification_uses_one_snapshot_during_concurrent_init",
+        "tests/contract/test_zr203_reader_rewire.py::test_read_entrypoints_never_construct_catalog_store",
+        "tests/contract/test_zr1003_shadow_assertions.py::test_c2_recorded_review_is_diagnostic_metadata",
+        "tests/contract/test_zr1006_broker_cohort.py::test_c2_ramp_1_to_3_to_7",
+        "tests/contract/test_source_catalog_temp_worker_governance.py::test_owned_temp_worker_helper_detects_test_pid",
+        "tests/contract/test_source_catalog_temp_worker_governance.py::test_stop_does_not_touch_unowned_live_workers_or_temporary_files",
+        "tests/contract/test_narrative_output_plan.py",
+        "tests/contract/test_summary_group_coverage.py",
+        "tests/contract/test_official_transcript_layouts.py",
+        "tests/contract/test_transcript_speaker_affiliation.py",
+        "tests/contract/test_source_scope_qualification.py",
+        "tests/contract/test_narrative_availability.py::test_one_verified_original_buffer_one_owner_lookup_no_new_fact_writer",
+        "tests/contract/test_narrative_availability.py::test_projected_two_parents_cannot_borrow_one_raw_proof",
+        "tests/unit/test_narrative_evidence.py::test_financial_table_rows_are_dropped_but_business_rows_are_selected",
+        "tests/unit/test_narrative_evidence.py::test_numbered_project_rationale_heading_survives_a_tight_budget",
+        "tests/unit/test_narrative_transport_contracts.py::test_frozen_producer_golden_contract_and_hash_bindings",
+        "tests/contract/test_fc905_receipt_envelope.py::test_pi03_no_review_is_explicit_not_reviewed",
+        "tests/unit/test_narrative_retrieval.py::test_resolver_fails_closed_when_raw_source_hash_changes",
+        "tests/contract/test_b10_read_chain.py::test_b10_scan_is_not_vacuous"
+      ],
+      "expected_skip": false,
+      "pass": true
+    },
+    {
+      "name": "unknown-resource",
+      "changes": [
+        "misc/runtime.json"
+      ],
+      "selected": [
+        "tests/unit"
+      ],
+      "reason": "resource dependency scope unknown",
+      "targets": [
+        "tests/unit/test_local_budget_observation.py::test_read_charge_reports_a_rejected_tail_separately_from_accepted_bytes",
+        "tests/contract/test_local_prepare_failure_boundaries.py::test_real_discovery_completed_write_survives_later_unknown_failure",
+        "tests/document_normalization/test_ocr_region_recovery.py::test_roi_budget_preflight_never_calls_rejected_renderer",
+        "tests/document_normalization/test_ocr_region_recovery.py::test_rejected_render_attempt_keeps_reserved_budget",
+        "tests/document_normalization/test_ocr_region_recovery.py::test_upscale_preflight_accounts_for_64m_canvas_without_allocating_it",
+        "tests/document_normalization/test_isolated_ocr.py::test_noncooperative_native_stops_at_product_deadline[gil-block-inference-infer]",
+        "tests/document_normalization/test_isolated_ocr.py::test_native_stdin_probe_does_not_deadlock_liveness_monitor[preflight]",
+        "tests/document_normalization/test_isolated_ocr.py::test_narrative_default_proxy_carries_deadline_without_starting_native",
+        "tests/integration/test_m3_official_json_acceptance.py",
+        "tests/unit/test_runtime_dependencies.py::test_ci_requirements_include_declared_runtime_dependencies",
+        "tests/unit/test_automation_migrations.py::test_m14_classification_uses_one_snapshot_during_concurrent_init",
+        "tests/contract/test_zr203_reader_rewire.py::test_read_entrypoints_never_construct_catalog_store",
+        "tests/contract/test_zr1003_shadow_assertions.py::test_c2_recorded_review_is_diagnostic_metadata",
+        "tests/contract/test_zr1006_broker_cohort.py::test_c2_ramp_1_to_3_to_7",
+        "tests/contract/test_source_catalog_temp_worker_governance.py::test_owned_temp_worker_helper_detects_test_pid",
+        "tests/contract/test_source_catalog_temp_worker_governance.py::test_stop_does_not_touch_unowned_live_workers_or_temporary_files",
+        "tests/contract/test_narrative_output_plan.py",
+        "tests/contract/test_summary_group_coverage.py",
+        "tests/contract/test_official_transcript_layouts.py",
+        "tests/contract/test_transcript_speaker_affiliation.py",
+        "tests/contract/test_source_scope_qualification.py",
+        "tests/contract/test_narrative_availability.py::test_one_verified_original_buffer_one_owner_lookup_no_new_fact_writer",
+        "tests/contract/test_narrative_availability.py::test_projected_two_parents_cannot_borrow_one_raw_proof",
+        "tests/unit/test_narrative_evidence.py::test_financial_table_rows_are_dropped_but_business_rows_are_selected",
+        "tests/unit/test_narrative_evidence.py::test_numbered_project_rationale_heading_survives_a_tight_budget",
+        "tests/unit/test_narrative_transport_contracts.py::test_frozen_producer_golden_contract_and_hash_bindings",
+        "tests/contract/test_fc905_receipt_envelope.py::test_pi03_no_review_is_explicit_not_reviewed",
+        "tests/unit/test_narrative_retrieval.py::test_resolver_fails_closed_when_raw_source_hash_changes",
+        "tests/contract/test_b10_read_chain.py::test_b10_scan_is_not_vacuous"
+      ],
+      "expected_skip": false,
+      "pass": true
+    },
+    {
+      "name": "configured-provider",
+      "changes": [
+        "config/models.yaml"
+      ],
+      "selected": [
+        "tests/unit"
+      ],
+      "reason": "configuration or test entrypoint changed",
+      "targets": [
+        "tests/unit/test_local_budget_observation.py::test_read_charge_reports_a_rejected_tail_separately_from_accepted_bytes",
+        "tests/contract/test_local_prepare_failure_boundaries.py::test_real_discovery_completed_write_survives_later_unknown_failure",
+        "tests/document_normalization/test_ocr_region_recovery.py::test_roi_budget_preflight_never_calls_rejected_renderer",
+        "tests/document_normalization/test_ocr_region_recovery.py::test_rejected_render_attempt_keeps_reserved_budget",
+        "tests/document_normalization/test_ocr_region_recovery.py::test_upscale_preflight_accounts_for_64m_canvas_without_allocating_it",
+        "tests/document_normalization/test_isolated_ocr.py::test_noncooperative_native_stops_at_product_deadline[gil-block-inference-infer]",
+        "tests/document_normalization/test_isolated_ocr.py::test_native_stdin_probe_does_not_deadlock_liveness_monitor[preflight]",
+        "tests/document_normalization/test_isolated_ocr.py::test_narrative_default_proxy_carries_deadline_without_starting_native",
+        "tests/integration/test_m3_official_json_acceptance.py",
+        "tests/unit/test_runtime_dependencies.py::test_ci_requirements_include_declared_runtime_dependencies",
+        "tests/unit/test_automation_migrations.py::test_m14_classification_uses_one_snapshot_during_concurrent_init",
+        "tests/contract/test_zr203_reader_rewire.py::test_read_entrypoints_never_construct_catalog_store",
+        "tests/contract/test_zr1003_shadow_assertions.py::test_c2_recorded_review_is_diagnostic_metadata",
+        "tests/contract/test_zr1006_broker_cohort.py::test_c2_ramp_1_to_3_to_7",
+        "tests/contract/test_source_catalog_temp_worker_governance.py::test_owned_temp_worker_helper_detects_test_pid",
+        "tests/contract/test_source_catalog_temp_worker_governance.py::test_stop_does_not_touch_unowned_live_workers_or_temporary_files",
+        "tests/contract/test_narrative_output_plan.py",
+        "tests/contract/test_summary_group_coverage.py",
+        "tests/contract/test_official_transcript_layouts.py",
+        "tests/contract/test_transcript_speaker_affiliation.py",
+        "tests/contract/test_source_scope_qualification.py",
+        "tests/contract/test_narrative_availability.py::test_one_verified_original_buffer_one_owner_lookup_no_new_fact_writer",
+        "tests/contract/test_narrative_availability.py::test_projected_two_parents_cannot_borrow_one_raw_proof",
+        "tests/unit/test_narrative_evidence.py::test_financial_table_rows_are_dropped_but_business_rows_are_selected",
+        "tests/unit/test_narrative_evidence.py::test_numbered_project_rationale_heading_survives_a_tight_budget",
+        "tests/unit/test_narrative_transport_contracts.py::test_frozen_producer_golden_contract_and_hash_bindings",
+        "tests/contract/test_fc905_receipt_envelope.py::test_pi03_no_review_is_explicit_not_reviewed",
+        "tests/unit/test_narrative_retrieval.py::test_resolver_fails_closed_when_raw_source_hash_changes",
+        "tests/contract/test_b10_read_chain.py::test_b10_scan_is_not_vacuous"
+      ],
+      "expected_skip": false,
+      "pass": true
+    },
+    {
+      "name": "unknown-range",
+      "changes": null,
+      "selected": [
+        "tests/unit"
+      ],
+      "reason": "unknown push range",
+      "targets": [
+        "tests/unit/test_local_budget_observation.py::test_read_charge_reports_a_rejected_tail_separately_from_accepted_bytes",
+        "tests/contract/test_local_prepare_failure_boundaries.py::test_real_discovery_completed_write_survives_later_unknown_failure",
+        "tests/document_normalization/test_ocr_region_recovery.py::test_roi_budget_preflight_never_calls_rejected_renderer",
+        "tests/document_normalization/test_ocr_region_recovery.py::test_rejected_render_attempt_keeps_reserved_budget",
+        "tests/document_normalization/test_ocr_region_recovery.py::test_upscale_preflight_accounts_for_64m_canvas_without_allocating_it",
+        "tests/document_normalization/test_isolated_ocr.py::test_noncooperative_native_stops_at_product_deadline[gil-block-inference-infer]",
+        "tests/document_normalization/test_isolated_ocr.py::test_native_stdin_probe_does_not_deadlock_liveness_monitor[preflight]",
+        "tests/document_normalization/test_isolated_ocr.py::test_narrative_default_proxy_carries_deadline_without_starting_native",
+        "tests/integration/test_m3_official_json_acceptance.py",
+        "tests/unit/test_runtime_dependencies.py::test_ci_requirements_include_declared_runtime_dependencies",
+        "tests/unit/test_automation_migrations.py::test_m14_classification_uses_one_snapshot_during_concurrent_init",
+        "tests/contract/test_zr203_reader_rewire.py::test_read_entrypoints_never_construct_catalog_store",
+        "tests/contract/test_zr1003_shadow_assertions.py::test_c2_recorded_review_is_diagnostic_metadata",
+        "tests/contract/test_zr1006_broker_cohort.py::test_c2_ramp_1_to_3_to_7",
+        "tests/contract/test_source_catalog_temp_worker_governance.py::test_owned_temp_worker_helper_detects_test_pid",
+        "tests/contract/test_source_catalog_temp_worker_governance.py::test_stop_does_not_touch_unowned_live_workers_or_temporary_files",
+        "tests/contract/test_narrative_output_plan.py",
+        "tests/contract/test_summary_group_coverage.py",
+        "tests/contract/test_official_transcript_layouts.py",
+        "tests/contract/test_transcript_speaker_affiliation.py",
+        "tests/contract/test_source_scope_qualification.py",
+        "tests/contract/test_narrative_availability.py::test_one_verified_original_buffer_one_owner_lookup_no_new_fact_writer",
+        "tests/contract/test_narrative_availability.py::test_projected_two_parents_cannot_borrow_one_raw_proof",
+        "tests/unit/test_narrative_evidence.py::test_financial_table_rows_are_dropped_but_business_rows_are_selected",
+        "tests/unit/test_narrative_evidence.py::test_numbered_project_rationale_heading_survives_a_tight_budget",
+        "tests/unit/test_narrative_transport_contracts.py::test_frozen_producer_golden_contract_and_hash_bindings",
+        "tests/contract/test_fc905_receipt_envelope.py::test_pi03_no_review_is_explicit_not_reviewed",
+        "tests/unit/test_narrative_retrieval.py::test_resolver_fails_closed_when_raw_source_hash_changes",
+        "tests/contract/test_b10_read_chain.py::test_b10_scan_is_not_vacuous"
+      ],
+      "expected_skip": false,
+      "pass": true
+    }
+  ],
+  "docs_real_range": {
+    "paths": [
+      "docs/plans/fixture/probe.py"
+    ],
+    "exit_code": 0,
+    "dispatches": [],
+    "stdout": "Push scope: no behavior changes; planned 0 runtime targets. tests_not_run: no runtime test targets in the classified push range; CI policy unchanged.\n"
+  },
+  "mixed_real_range": {
+    "paths": [
+      "docs/plans/fixture/probe.py",
+      "src/pkg/core.py"
+    ],
+    "exit_code": 7,
+    "dispatches": [
+      {
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "-m",
+          "pytest",
+          "-q",
+          "--tb=short",
+          "--timeout=180",
+          "tests/unit/test_core.py",
+          "tests/unit/test_local_budget_observation.py::test_read_charge_reports_a_rejected_tail_separately_from_accepted_bytes",
+          "tests/contract/test_local_prepare_failure_boundaries.py::test_real_discovery_completed_write_survives_later_unknown_failure",
+          "tests/document_normalization/test_ocr_region_recovery.py::test_roi_budget_preflight_never_calls_rejected_renderer",
+          "tests/document_normalization/test_ocr_region_recovery.py::test_rejected_render_attempt_keeps_reserved_budget",
+          "tests/document_normalization/test_ocr_region_recovery.py::test_upscale_preflight_accounts_for_64m_canvas_without_allocating_it",
+          "tests/document_normalization/test_isolated_ocr.py::test_noncooperative_native_stops_at_product_deadline[gil-block-inference-infer]",
+          "tests/document_normalization/test_isolated_ocr.py::test_native_stdin_probe_does_not_deadlock_liveness_monitor[preflight]",
+          "tests/document_normalization/test_isolated_ocr.py::test_narrative_default_proxy_carries_deadline_without_starting_native",
+          "tests/integration/test_m3_official_json_acceptance.py",
+          "tests/unit/test_runtime_dependencies.py::test_ci_requirements_include_declared_runtime_dependencies",
+          "tests/unit/test_automation_migrations.py::test_m14_classification_uses_one_snapshot_during_concurrent_init",
+          "tests/contract/test_zr203_reader_rewire.py::test_read_entrypoints_never_construct_catalog_store",
+          "tests/contract/test_zr1003_shadow_assertions.py::test_c2_recorded_review_is_diagnostic_metadata",
+          "tests/contract/test_zr1006_broker_cohort.py::test_c2_ramp_1_to_3_to_7",
+          "tests/contract/test_source_catalog_temp_worker_governance.py::test_owned_temp_worker_helper_detects_test_pid",
+          "tests/contract/test_source_catalog_temp_worker_governance.py::test_stop_does_not_touch_unowned_live_workers_or_temporary_files",
+          "tests/contract/test_narrative_output_plan.py",
+          "tests/contract/test_summary_group_coverage.py",
+          "tests/contract/test_official_transcript_layouts.py",
+          "tests/contract/test_transcript_speaker_affiliation.py",
+          "tests/contract/test_source_scope_qualification.py",
+          "tests/contract/test_narrative_availability.py::test_one_verified_original_buffer_one_owner_lookup_no_new_fact_writer",
+          "tests/contract/test_narrative_availability.py::test_projected_two_parents_cannot_borrow_one_raw_proof",
+          "tests/unit/test_narrative_evidence.py::test_financial_table_rows_are_dropped_but_business_rows_are_selected",
+          "tests/unit/test_narrative_evidence.py::test_numbered_project_rationale_heading_survives_a_tight_budget",
+          "tests/unit/test_narrative_transport_contracts.py::test_frozen_producer_golden_contract_and_hash_bindings",
+          "tests/contract/test_fc905_receipt_envelope.py::test_pi03_no_review_is_explicit_not_reviewed",
+          "tests/unit/test_narrative_retrieval.py::test_resolver_fails_closed_when_raw_source_hash_changes",
+          "tests/contract/test_b10_read_chain.py::test_b10_scan_is_not_vacuous"
+        ],
+        "label": "daily push fast feedback: affected unit tests and CI contract smoke"
+      }
+    ],
+    "stdout": "Push scope: affected unit tests; planned 30 target(s); full_validation_pending: tests/unit outside the 30 ran targets deferred to CI.\nPlanned test targets:\n  tests/unit/test_core.py\n  tests/unit/test_local_budget_observation.py::test_read_charge_reports_a_rejected_tail_separately_from_accepted_bytes\n  tests/contract/test_local_prepare_failure_boundaries.py::test_real_discovery_completed_write_survives_later_unknown_failure\n  tests/document_normalization/test_ocr_region_recovery.py::test_roi_budget_preflight_never_calls_rejected_renderer\n  tests/document_normalization/test_ocr_region_recovery.py::test_rejected_render_attempt_keeps_reserved_budget\n  tests/document_normalization/test_ocr_region_recovery.py::test_upscale_preflight_accounts_for_64m_canvas_without_allocating_it\n  tests/document_normalization/test_isolated_ocr.py::test_noncooperative_native_stops_at_product_deadline[gil-block-inference-infer]\n  tests/document_normalization/test_isolated_ocr.py::test_native_stdin_probe_does_not_deadlock_liveness_monitor[preflight]\n  tests/document_normalization/test_isolated_ocr.py::test_narrative_default_proxy_carries_deadline_without_starting_native\n  tests/integration/test_m3_official_json_acceptance.py\n  tests/unit/test_runtime_dependencies.py::test_ci_requirements_include_declared_runtime_dependencies\n  tests/unit/test_automation_migrations.py::test_m14_classification_uses_one_snapshot_during_concurrent_init\n  tests/contract/test_zr203_reader_rewire.py::test_read_entrypoints_never_construct_catalog_store\n  tests/contract/test_zr1003_shadow_assertions.py::test_c2_recorded_review_is_diagnostic_metadata\n  tests/contract/test_zr1006_broker_cohort.py::test_c2_ramp_1_to_3_to_7\n  tests/contract/test_source_catalog_temp_worker_governance.py::test_owned_temp_worker_helper_detects_test_pid\n  tests/contract/test_source_catalog_temp_worker_governance.py::test_stop_does_not_touch_unowned_live_workers_or_temporary_files\n  tests/contract/test_narrative_output_plan.py\n  tests/contract/test_summary_group_coverage.py\n  tests/contract/test_official_transcript_layouts.py\n  tests/contract/test_transcript_speaker_affiliation.py\n  tests/contract/test_source_scope_qualification.py\n  tests/contract/test_narrative_availability.py::test_one_verified_original_buffer_one_owner_lookup_no_new_fact_writer\n  tests/contract/test_narrative_availability.py::test_projected_two_parents_cannot_borrow_one_raw_proof\n  tests/unit/test_narrative_evidence.py::test_financial_table_rows_are_dropped_but_business_rows_are_selected\n  tests/unit/test_narrative_evidence.py::test_numbered_project_rationale_heading_survives_a_tight_budget\n  tests/unit/test_narrative_transport_contracts.py::test_frozen_producer_golden_contract_and_hash_bindings\n  tests/contract/test_fc905_receipt_envelope.py::test_pi03_no_review_is_explicit_not_reviewed\n  tests/unit/test_narrative_retrieval.py::test_resolver_fails_closed_when_raw_source_hash_changes\n  tests/contract/test_b10_read_chain.py::test_b10_scan_is_not_vacuous\n\nPUSH CHECKS RED — fix the failing phase; do not bypass.\n"
+  },
+  "unknown": {
+    "exit_code": 7,
+    "dispatches": [
+      {
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "-m",
+          "pytest",
+          "-q",
+          "--tb=short",
+          "--timeout=180",
+          "tests/unit/test_local_budget_observation.py::test_read_charge_reports_a_rejected_tail_separately_from_accepted_bytes",
+          "tests/contract/test_local_prepare_failure_boundaries.py::test_real_discovery_completed_write_survives_later_unknown_failure",
+          "tests/document_normalization/test_ocr_region_recovery.py::test_roi_budget_preflight_never_calls_rejected_renderer",
+          "tests/document_normalization/test_ocr_region_recovery.py::test_rejected_render_attempt_keeps_reserved_budget",
+          "tests/document_normalization/test_ocr_region_recovery.py::test_upscale_preflight_accounts_for_64m_canvas_without_allocating_it",
+          "tests/document_normalization/test_isolated_ocr.py::test_noncooperative_native_stops_at_product_deadline[gil-block-inference-infer]",
+          "tests/document_normalization/test_isolated_ocr.py::test_native_stdin_probe_does_not_deadlock_liveness_monitor[preflight]",
+          "tests/document_normalization/test_isolated_ocr.py::test_narrative_default_proxy_carries_deadline_without_starting_native",
+          "tests/integration/test_m3_official_json_acceptance.py",
+          "tests/unit/test_runtime_dependencies.py::test_ci_requirements_include_declared_runtime_dependencies",
+          "tests/unit/test_automation_migrations.py::test_m14_classification_uses_one_snapshot_during_concurrent_init",
+          "tests/contract/test_zr203_reader_rewire.py::test_read_entrypoints_never_construct_catalog_store",
+          "tests/contract/test_zr1003_shadow_assertions.py::test_c2_recorded_review_is_diagnostic_metadata",
+          "tests/contract/test_zr1006_broker_cohort.py::test_c2_ramp_1_to_3_to_7",
+          "tests/contract/test_source_catalog_temp_worker_governance.py::test_owned_temp_worker_helper_detects_test_pid",
+          "tests/contract/test_source_catalog_temp_worker_governance.py::test_stop_does_not_touch_unowned_live_workers_or_temporary_files",
+          "tests/contract/test_narrative_output_plan.py",
+          "tests/contract/test_summary_group_coverage.py",
+          "tests/contract/test_official_transcript_layouts.py",
+          "tests/contract/test_transcript_speaker_affiliation.py",
+          "tests/contract/test_source_scope_qualification.py",
+          "tests/contract/test_narrative_availability.py::test_one_verified_original_buffer_one_owner_lookup_no_new_fact_writer",
+          "tests/contract/test_narrative_availability.py::test_projected_two_parents_cannot_borrow_one_raw_proof",
+          "tests/unit/test_narrative_evidence.py::test_financial_table_rows_are_dropped_but_business_rows_are_selected",
+          "tests/unit/test_narrative_evidence.py::test_numbered_project_rationale_heading_survives_a_tight_budget",
+          "tests/unit/test_narrative_transport_contracts.py::test_frozen_producer_golden_contract_and_hash_bindings",
+          "tests/contract/test_fc905_receipt_envelope.py::test_pi03_no_review_is_explicit_not_reviewed",
+          "tests/unit/test_narrative_retrieval.py::test_resolver_fails_closed_when_raw_source_hash_changes",
+          "tests/contract/test_b10_read_chain.py::test_b10_scan_is_not_vacuous"
+        ],
+        "label": "daily push fast feedback: CI contract smoke (no affected unit files)"
+      }
+    ],
+    "stdout": "Push scope: unknown push range; planned 29 target(s); full_validation_pending: full unit suite recommendation deferred to CI.\nPlanned test targets:\n  tests/unit/test_local_budget_observation.py::test_read_charge_reports_a_rejected_tail_separately_from_accepted_bytes\n  tests/contract/test_local_prepare_failure_boundaries.py::test_real_discovery_completed_write_survives_later_unknown_failure\n  tests/document_normalization/test_ocr_region_recovery.py::test_roi_budget_preflight_never_calls_rejected_renderer\n  tests/document_normalization/test_ocr_region_recovery.py::test_rejected_render_attempt_keeps_reserved_budget\n  tests/document_normalization/test_ocr_region_recovery.py::test_upscale_preflight_accounts_for_64m_canvas_without_allocating_it\n  tests/document_normalization/test_isolated_ocr.py::test_noncooperative_native_stops_at_product_deadline[gil-block-inference-infer]\n  tests/document_normalization/test_isolated_ocr.py::test_native_stdin_probe_does_not_deadlock_liveness_monitor[preflight]\n  tests/document_normalization/test_isolated_ocr.py::test_narrative_default_proxy_carries_deadline_without_starting_native\n  tests/integration/test_m3_official_json_acceptance.py\n  tests/unit/test_runtime_dependencies.py::test_ci_requirements_include_declared_runtime_dependencies\n  tests/unit/test_automation_migrations.py::test_m14_classification_uses_one_snapshot_during_concurrent_init\n  tests/contract/test_zr203_reader_rewire.py::test_read_entrypoints_never_construct_catalog_store\n  tests/contract/test_zr1003_shadow_assertions.py::test_c2_recorded_review_is_diagnostic_metadata\n  tests/contract/test_zr1006_broker_cohort.py::test_c2_ramp_1_to_3_to_7\n  tests/contract/test_source_catalog_temp_worker_governance.py::test_owned_temp_worker_helper_detects_test_pid\n  tests/contract/test_source_catalog_temp_worker_governance.py::test_stop_does_not_touch_unowned_live_workers_or_temporary_files\n  tests/contract/test_narrative_output_plan.py\n  tests/contract/test_summary_group_coverage.py\n  tests/contract/test_official_transcript_layouts.py\n  tests/contract/test_transcript_speaker_affiliation.py\n  tests/contract/test_source_scope_qualification.py\n  tests/contract/test_narrative_availability.py::test_one_verified_original_buffer_one_owner_lookup_no_new_fact_writer\n  tests/contract/test_narrative_availability.py::test_projected_two_parents_cannot_borrow_one_raw_proof\n  tests/unit/test_narrative_evidence.py::test_financial_table_rows_are_dropped_but_business_rows_are_selected\n  tests/unit/test_narrative_evidence.py::test_numbered_project_rationale_heading_survives_a_tight_budget\n  tests/unit/test_narrative_transport_contracts.py::test_frozen_producer_golden_contract_and_hash_bindings\n  tests/contract/test_fc905_receipt_envelope.py::test_pi03_no_review_is_explicit_not_reviewed\n  tests/unit/test_narrative_retrieval.py::test_resolver_fails_closed_when_raw_source_hash_changes\n  tests/contract/test_b10_read_chain.py::test_b10_scan_is_not_vacuous\n\nPUSH CHECKS RED — fix the failing phase; do not bypass.\n"
+  },
+  "ci": {
+    "exit_code": 0,
+    "dispatches": [
+      {
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "-m",
+          "pytest",
+          "-q",
+          "--tb=short",
+          "--timeout=180",
+          "tests/unit/test_local_budget_observation.py::test_read_charge_reports_a_rejected_tail_separately_from_accepted_bytes",
+          "tests/contract/test_local_prepare_failure_boundaries.py::test_real_discovery_completed_write_survives_later_unknown_failure",
+          "tests/document_normalization/test_ocr_region_recovery.py::test_roi_budget_preflight_never_calls_rejected_renderer",
+          "tests/document_normalization/test_ocr_region_recovery.py::test_rejected_render_attempt_keeps_reserved_budget",
+          "tests/document_normalization/test_ocr_region_recovery.py::test_upscale_preflight_accounts_for_64m_canvas_without_allocating_it",
+          "tests/document_normalization/test_isolated_ocr.py::test_noncooperative_native_stops_at_product_deadline[gil-block-inference-infer]",
+          "tests/document_normalization/test_isolated_ocr.py::test_native_stdin_probe_does_not_deadlock_liveness_monitor[preflight]",
+          "tests/document_normalization/test_isolated_ocr.py::test_narrative_default_proxy_carries_deadline_without_starting_native",
+          "tests/integration/test_m3_official_json_acceptance.py",
+          "tests/unit/test_runtime_dependencies.py::test_ci_requirements_include_declared_runtime_dependencies",
+          "tests/unit/test_automation_migrations.py::test_m14_classification_uses_one_snapshot_during_concurrent_init",
+          "tests/contract/test_zr203_reader_rewire.py::test_read_entrypoints_never_construct_catalog_store",
+          "tests/contract/test_zr1003_shadow_assertions.py::test_c2_recorded_review_is_diagnostic_metadata",
+          "tests/contract/test_zr1006_broker_cohort.py::test_c2_ramp_1_to_3_to_7",
+          "tests/contract/test_source_catalog_temp_worker_governance.py::test_owned_temp_worker_helper_detects_test_pid",
+          "tests/contract/test_source_catalog_temp_worker_governance.py::test_stop_does_not_touch_unowned_live_workers_or_temporary_files",
+          "tests/contract/test_narrative_output_plan.py",
+          "tests/contract/test_summary_group_coverage.py",
+          "tests/contract/test_official_transcript_layouts.py",
+          "tests/contract/test_transcript_speaker_affiliation.py",
+          "tests/contract/test_source_scope_qualification.py",
+          "tests/contract/test_narrative_availability.py::test_one_verified_original_buffer_one_owner_lookup_no_new_fact_writer",
+          "tests/contract/test_narrative_availability.py::test_projected_two_parents_cannot_borrow_one_raw_proof",
+          "tests/unit/test_narrative_evidence.py::test_financial_table_rows_are_dropped_but_business_rows_are_selected",
+          "tests/unit/test_narrative_evidence.py::test_numbered_project_rationale_heading_survives_a_tight_budget",
+          "tests/unit/test_narrative_transport_contracts.py::test_frozen_producer_golden_contract_and_hash_bindings",
+          "tests/contract/test_fc905_receipt_envelope.py::test_pi03_no_review_is_explicit_not_reviewed",
+          "tests/unit/test_narrative_retrieval.py::test_resolver_fails_closed_when_raw_source_hash_changes",
+          "tests/contract/test_b10_read_chain.py::test_b10_scan_is_not_vacuous"
+        ],
+        "label": "CI fast contract smoke set"
+      }
+    ],
+    "stdout": "\nfast contract gate GREEN (local_fast_pass for the curated set); full_validation_pending — full suites stay with CI and the explicit full local mode.\n"
+  },
+  "full": {
+    "exit_code": 0,
+    "dispatches": [
+      {
+        "command": [
+          "ruff",
+          "check",
+          "src",
+          "tests/unit",
+          "tests/contract",
+          "scripts"
+        ],
+        "label": "ruff (CI WU-1.2 full scope)"
+      },
+      {
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "-m",
+          "compileall",
+          "-q",
+          "src",
+          "scripts",
+          "tests"
+        ],
+        "label": "compileall"
+      },
+      {
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "scripts/config_doctor.py"
+        ],
+        "label": "config_doctor (CI WU-7.1)"
+      },
+      {
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "scripts/host_assumption_guard.py"
+        ],
+        "label": "host assumption guard (FC-1307-a; the class that broke CI in F-B01-9)"
+      },
+      {
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "-m",
+          "pytest",
+          "tests/unit",
+          "-q",
+          "--tb=short"
+        ],
+        "label": "unit tests (CI Unit tests)"
+      },
+      {
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "-m",
+          "pytest",
+          "-q",
+          "--tb=short",
+          "--timeout=180",
+          "tests/unit/test_narrative_evidence.py",
+          "tests/unit/test_narrative_transport_contracts.py",
+          "tests/contract/test_legacy_observation.py",
+          "tests/contract/test_zr506_section_chunk_fact.py",
+          "tests/unit/test_narrative_retrieval.py",
+          "tests/contract/test_fc905_receipt_envelope.py",
+          "tests/contract/test_b10_read_chain.py",
+          "tests/unit/test_writer_freeze.py",
+          "tests/contract/test_fc1307_host_assumption_gate.py",
+          "tests/unit/test_automation_migrations.py::test_m14_classification_uses_one_snapshot_during_concurrent_init",
+          "tests/contract/test_zr203_reader_rewire.py::test_read_entrypoints_never_construct_catalog_store",
+          "tests/contract/test_zr1003_shadow_assertions.py::test_c2_recorded_review_is_diagnostic_metadata",
+          "tests/contract/test_zr1006_broker_cohort.py::test_c2_ramp_1_to_3_to_7",
+          "tests/contract/test_source_catalog_temp_worker_governance.py::test_owned_temp_worker_helper_detects_test_pid",
+          "tests/contract/test_source_catalog_temp_worker_governance.py::test_stop_does_not_touch_unowned_live_workers_or_temporary_files"
+        ],
+        "label": "focused contracts, recent CI regressions, and gate regression tests"
+      }
+    ],
+    "stdout": "\nfull local gate GREEN — full validation ran locally; self-monitor CI.\n"
+  },
+  "git_commands": [
+    {
+      "args": [
+        "init",
+        "-q",
+        "-b",
+        "master"
+      ],
+      "exit_code": 0
+    },
+    {
+      "args": [
+        "config",
+        "user.name",
+        "Independent Review Fixture"
+      ],
+      "exit_code": 0
+    },
+    {
+      "args": [
+        "config",
+        "user.email",
+        "independent@example.invalid"
+      ],
+      "exit_code": 0
+    },
+    {
+      "args": [
+        "config",
+        "commit.gpgsign",
+        "false"
+      ],
+      "exit_code": 0
+    },
+    {
+      "args": [
+        "config",
+        "core.hooksPath",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\docs-only-push-20261025\\independent\\owned-git-wfu8kr0c\\empty-hooks"
+      ],
+      "exit_code": 0
+    },
+    {
+      "args": [
+        "add",
+        "src",
+        "tests",
+        "config.yaml"
+      ],
+      "exit_code": 0
+    },
+    {
+      "args": [
+        "commit",
+        "-qm",
+        "neutral baseline"
+      ],
+      "exit_code": 0
+    },
+    {
+      "args": [
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    },
+    {
+      "args": [
+        "add",
+        "docs"
+      ],
+      "exit_code": 0
+    },
+    {
+      "args": [
+        "commit",
+        "-qm",
+        "archive only"
+      ],
+      "exit_code": 0
+    },
+    {
+      "args": [
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    },
+    {
+      "args": [
+        "add",
+        "src/pkg/core.py"
+      ],
+      "exit_code": 0
+    },
+    {
+      "args": [
+        "commit",
+        "-qm",
+        "earlier code"
+      ],
+      "exit_code": 0
+    },
+    {
+      "args": [
+        "add",
+        "docs"
+      ],
+      "exit_code": 0
+    },
+    {
+      "args": [
+        "commit",
+        "-qm",
+        "last docs"
+      ],
+      "exit_code": 0
+    },
+    {
+      "args": [
+        "rev-parse",
+        "HEAD"
+      ],
+      "exit_code": 0
+    }
+  ],
+  "scope": "Real local Git commit ranges and actual classifier/gate dispatch; runner intentionally intercepted. ROOT owns real hook/pytest push E2E.",
+  "external_calls": 0,
+  "pytest_children": 0,
+  "source_sha256": {
+    "tools/pre_push_gate.py": "af059a018aaa17025461ca724b7de4e9b6ad88bc25041da77b9a1254e8414d0b",
+    "tools/changed_unit_tests.py": "17ebda2877525410b4bce8b9b36b6278e1c294964d59b905cdc3495310bcbf3e",
+    "tests/unit/test_daily_push_policy.py": "56b9d83cf315cb0b290ab7496d4060ca10b6e49f28b7d4b6ba811cc2a73dd999",
+    "tests/unit/test_ci_push_selection.py": "3f4a0fc238a9b5ddae671b9e25d9ffa132434e7f2c15f4f33aa9a1cebb1ef9c8"
+  },
+  "source_stable": true,
+  "owned_git_root_restored_absent": true
+}

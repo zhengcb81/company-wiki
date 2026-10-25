@@ -1,0 +1,62 @@
+{
+  "phase": "red",
+  "targets": [
+    "tests/unit/test_daily_push_policy.py::test_non_runtime_push_never_dispatches_a_test_runner",
+    "tests/unit/test_daily_push_policy.py::test_real_docs_push_runs_no_tests_but_does_not_hide_earlier_code"
+  ],
+  "owned_test_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\cwdoc-ydt3n8sf",
+  "exit_code": 1,
+  "elapsed_seconds": 53.9,
+  "temp_decisions": [
+    {
+      "event": "decision",
+      "requested_basetemp": "C:\\Users\\郑曾波\\Projects\\company-wiki\\cwdoc-ydt3n8sf\\pytest",
+      "requested_basetemp_len": 56,
+      "cwd_len": 34,
+      "threshold": 60,
+      "win32_path_limit": 210,
+      "generation_reserve": 150,
+      "relocated": false,
+      "reason": "within-budget"
+    },
+    {
+      "event": "decision",
+      "requested_basetemp": "C:\\Users\\郑曾波\\Projects\\company-wiki\\cwdoc-ydt3n8sf\\pytest\\test_real_docs_push_runs_no_te0\\work\\cwpp-rwnauz40",
+      "requested_basetemp_len": 107,
+      "cwd_len": 93,
+      "threshold": 60,
+      "win32_path_limit": 210,
+      "generation_reserve": 150,
+      "relocated": true,
+      "reason": "resolved-basetemp-exceeds-budget",
+      "effective_basetemp": "C:\\Users\\郑曾波\\Projects\\company-wiki\\cwdoc-ydt3n8sf\\short\\20261025-094924-bb82d613",
+      "effective_basetemp_len": 80
+    },
+    {
+      "event": "cleanup",
+      "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki\\cwdoc-ydt3n8sf\\short\\20261025-094924-bb82d613",
+      "existed": true,
+      "removed": true
+    },
+    {
+      "event": "decision",
+      "requested_basetemp": "C:\\Users\\郑曾波\\Projects\\company-wiki\\cwdoc-ydt3n8sf\\pytest\\test_real_docs_push_runs_no_te0\\work\\cwpp-c6_54hr1",
+      "requested_basetemp_len": 107,
+      "cwd_len": 93,
+      "threshold": 60,
+      "win32_path_limit": 210,
+      "generation_reserve": 150,
+      "relocated": true,
+      "reason": "resolved-basetemp-exceeds-budget",
+      "effective_basetemp": "C:\\Users\\郑曾波\\Projects\\company-wiki\\cwdoc-ydt3n8sf\\short\\20261025-094949-90d3bd32",
+      "effective_basetemp_len": 80
+    },
+    {
+      "event": "cleanup",
+      "dir": "C:\\Users\\郑曾波\\Projects\\company-wiki\\cwdoc-ydt3n8sf\\short\\20261025-094949-90d3bd32",
+      "existed": true,
+      "removed": true
+    }
+  ],
+  "owned_test_root_restored_to_absent": true
+}
