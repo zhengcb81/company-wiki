@@ -1,0 +1,33 @@
+{
+  "schema_version": "wuxi-annual14-parent-context-check/3",
+  "replay_receipt_sha256": "c7ae82677bf908389127c7bbc5e1eafca5aeaf8a3ba5e075d5ec9191cf1c074c",
+  "verifier_sha256": "df1d5eda8b05f6b50b9378d3d65b92f0a399be67cd751d52caf5aa853412ed49",
+  "wrapper_sha256": "42d2f1f034ad56fbec1ad33b9661421bc800866bc6b5d4b20a5fdf8dbd50db38",
+  "observer_sha256": "8e6f20be5d47df4fff36e41d69729cae05957e25173fb880e4ee8b46ab37d4ba",
+  "checklist_sha256": "92aafc341326845cac2aada578b67d6211f99244163f90345269686fedf0b258",
+  "selection_sha256": "0469b0d72bdd2f7b5f288eb24b5ed56bee032e7493524fb5caf2c6cb3c708074",
+  "trace_sha256": "2a9cb9b516f0f98dda95572d7192e83026da814752e436c1ba493dc349d62159",
+  "source_count": 374,
+  "source_tree_sha256": "25c95484069552fda3f1f4015b2d04732469d007e07c89774f4e71b61a1ee5e2",
+  "code_sha256": "61e018c4c9877826a21c69dfad241c53a35c5a6177f696951903f53745c0cbfb",
+  "test_sha256": "03aea19fe3f2ca702694027bdec8d3d6a9a2de0f7b183ea9c28518e2a0bc8910",
+  "original_sha256": "7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+  "original_bytes": 1608226,
+  "production_selection_limit": 112,
+  "selected_count": 112,
+  "selected_chars": 8915,
+  "work_used": 9864579,
+  "parent_unit_id": "urn:company-wiki:narrative-unit:sha256:3611369166708c2e846b6839d17908a778ba5424f28540e0b194752adf557f79",
+  "parent_context_in_child_packages": {
+    "ST-A08": true,
+    "ST-A09": true
+  },
+  "parent_selected_as_context_only": true,
+  "separate_date_span_count": 2,
+  "separate_capacity_span_count": 2,
+  "date_capacity_dependency_added": false,
+  "content_quality_regraded": false,
+  "external_model_calls": 0,
+  "downloads": 0,
+  "raw_copies": 0
+}

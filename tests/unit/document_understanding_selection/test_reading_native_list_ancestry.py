@@ -138,6 +138,34 @@ def _factual_list_source(mode):
                     "sibling": at(sibling)}
 
 
+def _bulleted_parent_source(mode="same_page"):
+    """A descriptive bullet may own indented roman-numbered children."""
+    parent = "- Division Alpha service results are as follows:"
+    first = "i. Service revenue reached RMB 120 million, up 18%."
+    second = "ii. Customer count increased 12%."
+    sibling = "(2) Division Beta revenue reached RMB 90 million."
+    if mode == "cross_page":
+        rows = [(1, "一、经营情况", 0, (90, 100, 550, 112)),
+                (1, parent, 1, (90, 640, 550, 652)),
+                (1, first, 2, (110, 720, 550, 732)),
+                (2, second, 0, (110, 70, 550, 82)),
+                (2, sibling, 1, (90, 130, 550, 142))]
+    else:
+        first_left = 90 if mode == "same_level" else 110
+        rows = [(1, "一、经营情况", 0, (90, 100, 550, 112)),
+                (1, parent, 1, (90, 200, 550, 212)),
+                (1, first, 2, (first_left, 230, 550, 242)),
+                (1, second, 3, (110, 260, 550, 272)),
+                (1, sibling, 4, (90, 340, 550, 352))]
+    parsed = _source(rows)
+
+    def at(text):
+        return next(unit for unit in parsed.units if unit.raw_text == text)
+
+    return parsed, {"parent": at(parent), "first": at(first),
+                    "second": at(second), "sibling": at(sibling)}
+
+
 def _run_public(parsed):
     original = [(u.unit_id, u.source_id, u.raw_text, u.coordinates, repr(u.metadata), u.quality_flags)
                 for u in parsed.units]
@@ -275,6 +303,28 @@ def test_factual_numbered_item_does_not_capture_a_same_level_bullet():
     assert not parent_spans.intersection(
         span_id for citation in citations for span_id in citation["context_evidence_ids"]
     )
+
+
+@pytest.mark.parametrize("mode", ("same_page", "cross_page"))
+def test_descriptive_bullet_parent_is_kept_with_its_indented_roman_children(mode):
+    parsed, units = _bulleted_parent_source(mode)
+    pipeline, selected, _used = _run_public(parsed)
+    children = [
+        _own_context(parsed, pipeline, selected, units[name], (units["parent"],),
+                     units["sibling"])
+        for name in ("first", "second")
+    ]
+    observation = {"children": children, "sections": pipeline["structure"]["sections"]}
+    _OBSERVATIONS.append(observation)
+    assert not any(child["failures"] for child in children), observation
+
+
+def test_descriptive_bullet_does_not_capture_a_same_level_roman_item():
+    parsed, units = _bulleted_parent_source("same_level")
+    pipeline, _selected, _used = _run_public(parsed)
+    section = next(section for section in pipeline["structure"]["sections"]
+                   if units["first"].unit_id in section.get("body_unit_ids", ()))
+    assert units["parent"].unit_id not in section["heading_unit_ids"]
 
 
 def _flow_source(mode):

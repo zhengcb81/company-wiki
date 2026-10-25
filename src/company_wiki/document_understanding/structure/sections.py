@@ -175,25 +175,26 @@ class _NativeListScope:
 _LIST_CHILD = re.compile(
     r"^\s*(?:[-•●▪]|(?=[ivxlcdm]+[.)])m{0,3}(?:cm|cd|d?c{0,3})"
     r"(?:xc|xl|l?x{0,3})(?:ix|iv|v?i{0,3})[.)])\s+\S", re.IGNORECASE)
+_LIST_PARENT = re.compile(
+    r"^\s*(?:(?:\(\d{1,2}\)|（\d{1,2}）)|[-–—•●▪])\s+\S")
 _INTERNAL_SENTENCE_BOUNDARY = re.compile(r"[。！？;；!?]\s*\S|(?<![\dA-Z])\.\s+\S")
 
 
-def _native_numbered_list_scopes(ordering: layout_mod.Ordering,
-                                 native_context: NativeSourceContext | None = None):
-    """Discover one existing native list, with an independent physical page proof.
+def _native_list_scopes(ordering: layout_mod.Ordering,
+                        native_context: NativeSourceContext | None = None):
+    """Discover a source-marked parent and its nested list with physical proof.
 
-    The numbered introduction supplies syntax, structure owns its parent ID,
-    and the shared physical observer supplies only original boundary witnesses.
-    Missing context retains the former same-page capability.
+    Numbered and bulleted introductions supply syntax, structure owns the
+    parent ID, and the shared physical observer supplies original page-boundary
+    witnesses. A nested child must remain indented within the same source lane.
     """
     scopes = {}
     ordered = ordering.ordered
-    marker = re.compile(r"^(?:\(\d{1,2}\)|（\d{1,2}）)\s+\S")
     excluded = ordering.toc_ids | ordering.running_header_ids
     index = 0
     while index + 1 < len(ordered):
         opener = ordered[index]
-        if (opener.unit_id in excluded or not marker.match(opener.text)
+        if (opener.unit_id in excluded or not _LIST_PARENT.match(opener.text)
                 or opener.source_id is None or opener.page is None or opener.bbox is None
                 or opener.dom_path is not None or opener.table_id
                 or opener.is_table_furniture or opener.is_footnote):
@@ -354,7 +355,7 @@ def build_sections(
     active_item = None
     previous_source: str | None = None
     source_seen = False
-    numbered_scopes = _native_numbered_list_scopes(ordering, native_context)
+    native_list_scopes = _native_list_scopes(ordering, native_context)
     required_context_by_unit: dict[str, tuple[str, ...]] = {}
     required_source_by_unit: dict[str, tuple[str, ...]] = {}
     source_proofs_by_unit: dict[str, tuple[dict[str, Any], ...]] = {}
@@ -435,7 +436,7 @@ def build_sections(
         if native_scope_members and unit.unit_id not in native_scope_members:
             stack[:] = native_parent_stack
             native_scope_members = set()
-        native_scope = numbered_scopes.get(unit.unit_id)
+        native_scope = native_list_scopes.get(unit.unit_id)
         if native_scope is not None:
             native_parent_stack = list(stack)
             parent_depth = stack[-1].depth if stack else 0

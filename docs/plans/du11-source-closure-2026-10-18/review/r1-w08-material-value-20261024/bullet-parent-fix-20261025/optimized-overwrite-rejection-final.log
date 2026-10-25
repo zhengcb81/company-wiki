@@ -1,0 +1,22 @@
+python -O: exit=1; expected refusal=true; result SHA before=a3559e5121e90efaebf8cfd29ba4078cdcbdc16ef9da92c133e7c7f8dd6e1614; after=a3559e5121e90efaebf8cfd29ba4078cdcbdc16ef9da92c133e7c7f8dd6e1614; unchanged=True
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\company-wiki\docs\plans\du11-source-closure-2026-10-18\review\r1-w08-material-value-20261024\bullet-parent-fix-20261025\verify_parent_context.py", line 192, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\郑曾波\Projects\company-wiki\docs\plans\du11-source-closure-2026-10-18\review\r1-w08-material-value-20261024\bullet-parent-fix-20261025\verify_parent_context.py", line 41, in main
+    require(not OUTPUT.exists(), f"Refusing to overwrite {OUTPUT.name}")
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\郑曾波\Projects\company-wiki\docs\plans\du11-source-closure-2026-10-18\review\r1-w08-material-value-20261024\bullet-parent-fix-20261025\verify_parent_context.py", line 33, in require
+    raise RuntimeError(message)
+RuntimeError: Refusing to overwrite parent-context-check-v3.json
+PYTHONOPTIMIZE=1: exit=1; expected refusal=true; result SHA before=a3559e5121e90efaebf8cfd29ba4078cdcbdc16ef9da92c133e7c7f8dd6e1614; after=a3559e5121e90efaebf8cfd29ba4078cdcbdc16ef9da92c133e7c7f8dd6e1614; unchanged=True
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\company-wiki\docs\plans\du11-source-closure-2026-10-18\review\r1-w08-material-value-20261024\bullet-parent-fix-20261025\verify_parent_context.py", line 192, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\郑曾波\Projects\company-wiki\docs\plans\du11-source-closure-2026-10-18\review\r1-w08-material-value-20261024\bullet-parent-fix-20261025\verify_parent_context.py", line 41, in main
+    require(not OUTPUT.exists(), f"Refusing to overwrite {OUTPUT.name}")
+    ~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\郑曾波\Projects\company-wiki\docs\plans\du11-source-closure-2026-10-18\review\r1-w08-material-value-20261024\bullet-parent-fix-20261025\verify_parent_context.py", line 33, in require
+    raise RuntimeError(message)
+RuntimeError: Refusing to overwrite parent-context-check-v3.json

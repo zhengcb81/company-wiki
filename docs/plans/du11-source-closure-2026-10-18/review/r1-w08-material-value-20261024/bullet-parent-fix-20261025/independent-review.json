@@ -1,0 +1,36 @@
+{
+  "schema_version": "wuxi-annual14-bullet-parent-independent-review/1",
+  "reviewer": "native_bullet_parent_review",
+  "review_mode": "read_only_independent",
+  "verdict": "PASS_NO_BLOCKER",
+  "scope": "source structure, focused regression, real-source replay, hash-bound verifier, and overwrite refusal evidence",
+  "tests": "155 passed; Ruff PASS; git diff --check PASS",
+  "optimized_no_overwrite": {
+    "python_-O": "PASS",
+    "PYTHONOPTIMIZE_1": "PASS",
+    "result_sha_before_after_equal": true,
+    "log": "optimized-overwrite-rejection-final.log"
+  },
+  "source_sha256": "7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+  "source_tree_files": 374,
+  "source_tree_sha256": "25c95484069552fda3f1f4015b2d04732469d007e07c89774f4e71b61a1ee5e2",
+  "selected_count": 112,
+  "selected_chars": 8915,
+  "work_used": 9864579,
+  "work_limit": 16000000,
+  "parent_context_targets": {
+    "ST-A08": true,
+    "ST-A09": true
+  },
+  "date_capacity_dependency_added": false,
+  "content_quality_regraded": false,
+  "content_status": "8 pass / 6 partial / 0 missing",
+  "reviewed_sha256": {
+    "sections.py": "61e018c4c9877826a21c69dfad241c53a35c5a6177f696951903f53745c0cbfb",
+    "test_reading_native_list_ancestry.py": "03aea19fe3f2ca702694027bdec8d3d6a9a2de0f7b183ea9c28518e2a0bc8910",
+    "verify_parent_context.py": "df1d5eda8b05f6b50b9378d3d65b92f0a399be67cd751d52caf5aa853412ed49",
+    "parent-context-check-v3.json": "a3559e5121e90efaebf8cfd29ba4078cdcbdc16ef9da92c133e7c7f8dd6e1614",
+    "optimized-overwrite-rejection-final.log": "fbc2f613bbfc761cb5116aee86f3268de8204a564cf62b51030fc7549a08467f"
+  },
+  "remaining_issues": []
+}

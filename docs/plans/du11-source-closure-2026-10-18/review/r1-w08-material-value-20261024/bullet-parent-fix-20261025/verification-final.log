@@ -1,0 +1,25 @@
+$ ruff
+exit=0
+All checks passed!
+
+
+$ git-diff-check
+exit=0
+
+
+v3 receipt sha256=a3559e5121e90efaebf8cfd29ba4078cdcbdc16ef9da92c133e7c7f8dd6e1614
+python -O and PYTHONOPTIMIZE=1 no-overwrite checks: PASS (see verifier-safety-check.log)
+
+Final rerun after PWF/README updates:
+$ ruff
+exit=0
+All checks passed!
+
+
+$ git diff --check
+exit=0
+
+
+
+Final PWF and independent-review link diff check:
+exit=0

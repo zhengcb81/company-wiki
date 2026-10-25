@@ -1,0 +1,2 @@
+$ C:\Miniconda\python.exe -m ruff check src/company_wiki/document_understanding/structure/sections.py tests/unit/document_understanding_selection/test_reading_native_list_ancestry.py
+All checks passed!

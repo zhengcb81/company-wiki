@@ -580,3 +580,10 @@ RF最终pin9669c4d7精确CI已success；本次PWF汇总正常提交/推送后，
 3. **发布完成。** 源码、回归测试和PWF已提交`81c9d97c8b551de285a385050caa600eea9106ca`并推送`master`；精确CI `40163967926`通过（Fast checks/完整`tests/unit`，4分29秒）。Pre-push选择29个受影响目标，另有154项contract smoke通过24.49秒；343个宽范围目标仍交由CI。
 4. **下一步：** 沿同一source-owner思路处理其余五个partial目标（ST-A01/A02/A05/A09/A13），每项先定位原文/投影/依赖/消费层根因，再写中性RED；不增加公司特例、预算或批次。
 4. **大节点验收：** 五项真实来源问题形成一组后做一次独立复核和多文种/市场回放；之后才做bounded content regrade、正式摘要、缓存恢复和RF实际消费。除非冻结必需事实确需新增跨度，否则不扩大批次；不重放旧付费formal-v4收据。
+
+## 2026-10-25 根节点：annual14 bullet-parent 结构修复
+
+- 状态：实现、155项相关回归、Ruff、diff-check、零费用真实年报selector回放及首轮独立复核均完成；来源父项上下文已证实，内容评分仍保持8 pass/6 partial/0 missing。
+- 收据：`review/r1-w08-material-value-20261024/bullet-parent-fix-20261025/README.md`。当前生产选择器报告112片段上限；未手动覆盖。
+- 当前发布状态：源码、测试和证据尚未提交；精确CI仍只对应已发布HEAD `81c9d97c8b551de285a385050caa600eea9106ca`。更新后的只读验证器独立窄复核已通过且无阻断（`review/r1-w08-material-value-20261024/bullet-parent-fix-20261025/independent-review.md`）；ROOT接下来限定暂存本节点文件、提交并检查该提交的精确CI。
+- 接续顺序：发布并验证后，继续逐项追查其余annual14 partial的原文、来源准入、任务上下文及RF消费；在内容大节点复审前不改评分。

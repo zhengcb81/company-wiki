@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-25",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "V4_AND_ST_A03_SOURCE_FIX_PUSHED_EXACT_CI_GREEN_CONTENT_COVERAGE_AND_RF_ACCEPTANCE_OPEN",
+  "overall_status": "V4_AND_ST_A03_PUBLISHED; ANNUAL14_BULLET_PARENT_SOURCE_FIX_INDEPENDENTLY_REVIEWED_READY_TO_PUBLISH; CONTENT_AND_RF_ACCEPTANCE_OPEN",
   "current_authorized_scope": "User resumed current mainline with continue on2026-10-23. Prior pause superseded; native goal active verified.",
   "parent_plan_id": "document-understanding-2026-10-13",
   "plan_id": "du11-source-closure-2026-10-18",
@@ -346,7 +346,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "Selector 0.9 task-scoped v4 summary and paid-response recovery are published; exact CI 40148571611 is green. QA-RAG-SAFE-REBUILD, IR-REPORT-GENERATION, and MC-OUTPUT-INTEGRITY are accepted deliveries on independent repositories. ST-A03's shared revenue/cost geography classifier repair passed final independent review, was pushed in 81c9d97c, and exact CI 40163967926 is green. The classifier module is 39/39; the zero-cost annual14 source replay is stable. This is source admission evidence only: content remains 8 pass/6 partial/0 missing and no content regrade was performed. Next trace the five other partial targets. No wire schema changed; do not replay the old paid formal-v4 receipt.",
+  "next_step_now": "Independent review of the optimization-safe verifier and the final overwrite-rejection SHA log is PASS with no blockers. Next, commit and push only the bullet-parent source/test/evidence and PWF files, verify CI for the exact new HEAD, and continue the remaining annual14 partial-target root-cause work. This is source-context evidence only; content remains 8 pass / 6 partial / 0 missing.",
   "parallel_work_packages": [
     {
       "id": "IR-REPORT-GENERATION",
@@ -1662,5 +1662,40 @@
       "final_independent_review": "PASS_NO_P0_P2",
       "review_receipt": "review/r1-w08-material-value-20261024/geography-source-grammar-independent-review-20261025.json"
     }
+  },
+  "annual14_bullet_parent_fix_20261025": {
+    "status": "LOCAL_SOURCE_FIX_AND_REAL_REPLAY_PASS_CONTENT_NOT_REGRADED",
+    "source": "companies/药明康德/raw/financial_reports/药明康德：2025年年度报告.pdf",
+    "source_sha256": "7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+    "selected": 112,
+    "production_selection_limit": 112,
+    "selected_chars": 8915,
+    "work_used": 9864579,
+    "work_limit": 16000000,
+    "parent_context_targets": {
+      "ST-A08": true,
+      "ST-A09": true
+    },
+    "date_and_capacity_separate": true,
+    "inferred_dependency_added": false,
+    "downloads": 0,
+    "raw_copies": 0,
+    "external_model_calls": 0,
+    "related_tests": "155 passed in 5.14s",
+    "ruff": "PASS",
+    "diff_check": "PASS",
+    "initial_independent_review": "PASS_NO_BLOCKER_SOURCE_CONTEXT_ONLY",
+    "updated_verifier_review": "PASS_NO_BLOCKER",
+    "evidence": "review/r1-w08-material-value-20261024/bullet-parent-fix-20261025/README.md",
+    "content_review": "NOT_REGRADED; retain 8 pass / 6 partial / 0 missing",
+    "publication": "READY_FOR_COMMIT_PUSH",
+    "verifier_version": "3; explicit checks and exclusive output creation",
+    "optimized_mode_no_overwrite": "PASS for python -O and PYTHONOPTIMIZE=1; receipt SHA unchanged",
+    "verification_log": "review/r1-w08-material-value-20261024/bullet-parent-fix-20261025/verification-final.log",
+    "no_overwrite_log": "review/r1-w08-material-value-20261024/bullet-parent-fix-20261025/optimized-overwrite-rejection-final.log",
+    "optimized_mode_result_sha_unchanged": true,
+    "no_overwrite_review": "PASS; before/after result SHA recorded and independently confirmed",
+    "independent_review": "review/r1-w08-material-value-20261024/bullet-parent-fix-20261025/independent-review.md",
+    "independent_review_json": "review/r1-w08-material-value-20261024/bullet-parent-fix-20261025/independent-review.json"
   }
 }
