@@ -1,0 +1,145 @@
+{
+  "schema_version": "wuxi-annual14-source-geography-replay/1",
+  "status": "ROOT_FIX_REPLAY_AND_INDEPENDENT_REVIEW_PASS_UNPUBLISHED",
+  "sample": "Wuxi AppTec FY2025 annual report; annual14 source checklist",
+  "input_source_sha256": "7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2",
+  "input_source_byte_size": 1608226,
+  "input_original_sha_verified": true,
+  "root_fix_source": "src/company_wiki/source_catalog/narrative_business_disclosures.py",
+  "root_fix_source_sha256": "8a7200d4cb9bdfcd174b0fb00633c98a76d1d411517f14fb525551d237bb1bb1",
+  "regression_test": "tests/unit/document_understanding_selection/test_reading_material_value.py",
+  "regression_test_sha256": "98edf71b9478da3e8c253898c403d70fe8fb2b9d8d60070077e4280e1128f1f2",
+  "target_unit_id": "urn:company-wiki:narrative-unit:sha256:bfa1e6af26b2ab45472c6ac96c4f9b6e9951a5d2d662e28c4fb827506db86747",
+  "target": "ST-A03 customer revenue geography definition",
+  "target_location": {
+    "page": 16,
+    "paragraph": 19,
+    "char_start": 533,
+    "char_end": 641,
+    "locator": "loc:v1/page:16/paragraph:19/chars:533-641",
+    "evidence_span_id": "urn:company-wiki:evidence-span:sha256:1005a061093c0e0c122eeef980f71f09239fe7c24104a7f453f80fc04601516b"
+  },
+  "before": {
+    "eligible": false,
+    "topics": [],
+    "admitted": false
+  },
+  "after": {
+    "eligible": true,
+    "topics": [
+      "customer_revenue_geography"
+    ],
+    "admitted": true,
+    "selected": true
+  },
+  "shared_admission_units_compared": 38,
+  "admission_deltas": [
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:bfa1e6af26b2ab45472c6ac96c4f9b6e9951a5d2d662e28c4fb827506db86747",
+      "target_ids": [
+        "ST-A03"
+      ],
+      "page": 16,
+      "before": [
+        false,
+        [],
+        false
+      ],
+      "after": [
+        true,
+        [
+          "customer_revenue_geography"
+        ],
+        true
+      ]
+    }
+  ],
+  "selection": {
+    "physical_pages": 249,
+    "candidate_count": 1440,
+    "selected_count": 112,
+    "selection_limit": 112,
+    "selected_chars": 9014,
+    "coverage_complete": false,
+    "checkpoint_pass": true,
+    "work_used": 9867763,
+    "work_limit": 16000000,
+    "observed_target_labels": [
+      "ST-A01",
+      "ST-A02",
+      "ST-A03",
+      "ST-A04",
+      "ST-A05",
+      "ST-A06",
+      "ST-A07",
+      "ST-A08",
+      "ST-A09",
+      "ST-A10",
+      "ST-A11",
+      "ST-A12",
+      "ST-A13",
+      "ST-A14"
+    ],
+    "observed_target_units": 72
+  },
+  "selection_sha256": "f3775f8ddb1a9e85dadd603c5091552cbb7d98f527a677a15c5082fbd03bda7d",
+  "trace_sha256": "153b478fcd78fbfb96ff90470e636eb2b3ae405c3da6d210acad31b368475e63",
+  "wrapper_sha256": "dd49fa3f1fcc0b02951da6f52444871ec2e400fc1ecaa7c99342b6a6419e8963",
+  "source_tree_stable": true,
+  "protected_originals_unchanged": true,
+  "external_model_calls": 0,
+  "downloads": 0,
+  "raw_copies": 0,
+  "content_regrade": "NOT_PERFORMED; prior source review remains 8 pass / 6 partial / 0 missing until independently regraded",
+  "regression_tests": "39 passed in 1.76s after final reviewer finding; Ruff PASS; git diff --check PASS",
+  "paid_calls": 0,
+  "scratch_directory": "docs/plans/du11-source-closure-2026-10-18/review/r1-w08-material-value-20261024/publication/final-source-replay-20261025",
+  "scratch_cleanup": "removed; exact isolated replay directory restored to absent state after receipt capture",
+  "runner": "docs/plans/du11-source-closure-2026-10-18/review/r1-w08-material-value-20261024/publication/final-source/replay_all_targets.py",
+  "runner_sha256": "dd49fa3f1fcc0b02951da6f52444871ec2e400fc1ecaa7c99342b6a6419e8963",
+  "scope_input_sha256": "77c6af8cccfbd7feb3cbc1291d8434444530ba4f5772548947b39a7fa4915233",
+  "source_index_sha256": "e8fdf01712dd3a5f774305cdca13bbf3cdc73bbc722dbbbaa9ce1d5b404c5111",
+  "oracle_input_sha256": "ea6e95a091364d364808fa022ca5e85b7495eceb5cb25f0e326523525b400b05",
+  "independent_review_followup": {
+    "initial_result": "FAIL_P2",
+    "finding": "_REGION_CUSTOMER_REVENUE shortcut independently matched cost-of-revenue and costs-of-sales phrases as customer revenue geography, bypassing the exclusion used by the ordinary revenue path.",
+    "repair": "Extracted the bounded English revenue-subject pattern, including cost-of exclusions, into _ENGLISH_REVENUE_SUBJECT and reused it in both ordinary and geographic shortcut classifiers.",
+    "new_negative_cases": [
+      "Cost of revenue from customers in US markets.",
+      "The costs of sales from customers in US markets."
+    ],
+    "red": "Both new cases failed before the shared-pattern repair by being tagged customer_revenue_geography.",
+    "green": "39/39 targeted classifier tests passed after repair.",
+    "final_independent_review": "PASS_NO_P0_P2",
+    "review_receipt": "geography-source-grammar-independent-review-20261025.json",
+    "reviewed_source_sha256": "8a7200d4cb9bdfcd174b0fb00633c98a76d1d411517f14fb525551d237bb1bb1",
+    "reviewed_test_sha256": "98edf71b9478da3e8c253898c403d70fe8fb2b9d8d60070077e4280e1128f1f2"
+  },
+  "final_zero_cost_source_replay": {
+    "head_before_publication": "fc7cfa6d0d8f7b633a216798d168d75a791f57e8",
+    "wrapper_sha256": "dd49fa3f1fcc0b02951da6f52444871ec2e400fc1ecaa7c99342b6a6419e8963",
+    "observer_sha256": "8e6f20be5d47df4fff36e41d69729cae05957e25173fb880e4ee8b46ab37d4ba",
+    "checklist_sha256": "92aafc341326845cac2aada578b67d6211f99244163f90345269686fedf0b258",
+    "selection_sha256": "10deb332118a833cf658262c2461a72385104fc244b3fae131fa49e1d728a523",
+    "trace_sha256": "1d84a1dd0f7cf21eed973e4ba77724a1ad15b2a1c13de584cbc39568929405a2",
+    "source_tree_file_count": 374,
+    "source_tree_stable": true,
+    "observed_target_units": 72,
+    "observed_target_labels": [
+      "ST-A01", "ST-A02", "ST-A03", "ST-A04", "ST-A05", "ST-A06", "ST-A07",
+      "ST-A08", "ST-A09", "ST-A10", "ST-A11", "ST-A12", "ST-A13", "ST-A14"
+    ],
+    "physical_pages": 249,
+    "candidate_count": 1440,
+    "selected_count": 112,
+    "selection_limit": 112,
+    "selected_chars": 9014,
+    "work_used": 9867763,
+    "work_limit": 16000000,
+    "protected_original_unchanged": true,
+    "external_model_calls": 0,
+    "downloads": 0,
+    "raw_copies": 0,
+    "scratch_cleanup": "PASS; isolated replay directory removed after receipt capture"
+  }
+}

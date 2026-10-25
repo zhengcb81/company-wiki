@@ -8,24 +8,30 @@
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
-  "last_code_commit": "3dc04a8e3e78726ed155bf9da65a4e65c7cf4f81",
+  "last_code_commit": "fc7cfa6d0d8f7b633a216798d168d75a791f57e8",
   "code_ci": {
-    "id": 40148571611,
-    "check_id": 121035094340,
-    "head_sha": "3dc04a8e3e78726ed155bf9da65a4e65c7cf4f81",
+    "id": 40162702684,
+    "job_id": 121077406567,
+    "check_id": null,
+    "head_sha": "fc7cfa6d0d8f7b633a216798d168d75a791f57e8",
     "status": "completed",
     "conclusion": "success",
-    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40148571611",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40162702684",
     "failed_test_count": 0,
     "junit_report": null,
     "failure_summary": null,
-    "updated_at": "2026-10-25T01:04:41Z",
+    "observed_at": "2026-10-25T04:59:07Z",
+    "annotations": [
+      "Node.js 20 deprecation warning for actions/checkout@v4 and actions/setup-python@v5; GitHub forces Node.js 24.",
+      "ubuntu-latest migration notice to Ubuntu 26 beginning 2026-10-19."
+    ],
+    "run_scope": "Fast checks job including full tests/unit suite",
+    "duration": "4m31s",
     "previous_successful_ci": {
-      "id": 40131924884,
-      "head_sha": "808623377905520ec0c28c7330fe14243e4c6c04",
+      "id": 40148571611,
+      "head_sha": "3dc04a8e3e78726ed155bf9da65a4e65c7cf4f81",
       "conclusion": "success",
-      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40131924884",
-      "updated_at": "2026-10-24T20:55:13Z"
+      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40148571611"
     },
     "previous_failed_ci": {
       "id": 40143579006,
@@ -38,8 +44,8 @@
       "repair_commit": "275c8295f2924939695fdbfd2d19a6cc603f1111",
       "repair_validation": "64 focused tests passed; Ruff passed; diff-check passed"
     },
-    "run_scope": "Fast checks job including full tests/unit suite",
-    "duration": "4m21s"
+    "prior_ci_run_scope": "Fast checks job including full tests/unit suite",
+    "prior_ci_duration": "4m21s"
   },
   "formal_v4_offline_selection_replay_20261025": {
     "status": "EXACT_REPRODUCED_NO_PAID_CALL",
@@ -340,7 +346,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "The selector 0.9 v4 summary default and paid-response recovery are published; exact CI 40148571611 is green. QA-RAG-SAFE-REBUILD, IR-REPORT-GENERATION, and MC-OUTPUT-INTEGRITY are accepted deliveries on independent repositories. Offline evidence: Microsoft FY2025 10-K v4 preflight supports 8/8 frozen required business facts from 112 selected candidates; Wuxi annual14 source review is 8 pass, 6 partial, 0 missing. Continue tracing concrete source, table, parent-scope, geography, date/volume, and amount gaps. Add no source batches unless evidence shows they recover required facts. The in-memory coverage aliases and four-combination unit test are local only; wire schema unchanged. Do not replay the old paid formal-v4 receipt.",
+  "next_step_now": "Selector 0.9 task-scoped v4 summary and paid-response recovery are published; exact CI 40148571611 is green. QA-RAG-SAFE-REBUILD, IR-REPORT-GENERATION, and MC-OUTPUT-INTEGRITY are accepted deliveries on independent repositories. For Wuxi annual14 ST-A03, the first independent review found a P2 shortcut bypass in the cost-label exclusion; two regression negatives reproduced it and the shared revenue-subject rule now protects both classifier paths. The complete classifier module is 39/39 green and the post-fix zero-cost real-source replay is stable; final independent review is pending before publication. The 14-target source output is not regraded: prior 8 pass/6 partial/0 missing remains the last reviewed content result. No wire schema changed; do not replay the old paid formal-v4 receipt.",
   "parallel_work_packages": [
     {
       "id": "IR-REPORT-GENERATION",
@@ -813,7 +819,7 @@
     },
     "publication_docs_commit": "fa667547"
   },
-  "next_step_after_publication": "Continue offline diagnosis of the six concrete annual14 partial targets and Microsoft 10-K source/candidate/layout dimensions. Implement new batches only when a frozen required-fact gap proves they add value; then run one major independent review before any new paid summary.",
+  "next_step_after_publication": "Continue offline diagnosis of the other five annual14 partial targets and Microsoft 10-K source/candidate/layout dimensions. At the next major source-content gate, independently review exact source, test and replay receipt SHAs, then regrade the unchanged real-source gold. Add source batches only if a frozen required-fact gap proves they add value; any new paid summary remains after that review.",
   "w08_current_review": {
     "selection_path": "review/r1-w08-material-value-20261024/publication/final-source/selection.json",
     "selection_sha256": "44a9ac20e9b83f67bf99976820cf88b7de592b74b0104fca09abc434c0287904",
@@ -848,13 +854,13 @@
     "a02_prior_growth_subfact_restored": true
   },
   "next_steps": [
-    "Run offline source-level attribution for the six Wuxi annual14 partial targets, distinguishing missing source text, source projection, local context/dependency, and downstream summary/RF use.",
+    "Continue source-level diagnosis of the five remaining annual14 partial targets; keep ST-A03 content status unchanged until the source replay receives a bounded independent content regrade.",
     "Keep Microsoft source scan, candidate omission, layout geometry, and required-fact recall as separate dimensions; its v4 preflight supports all 8 required business facts. Do not equate 4,087 unassigned units or deferred candidates with unread mandatory facts.",
     "Write neutral failing tests for any proven shared root cause; use existing source owners and local dependency contracts. Implement resumable bounded batches only if a frozen gold gap is shown to be recoverable by additional candidates, with source identity, closure, aggregate coverage, cache identity, crash resume, and no duplicate spend tested.",
     "At a major gate, independently review exact source/test/evidence SHAs, then replay the unchanged real-source gold across affected markets and document types. Keep old paid receipts immutable and preserve all review/partial states.",
     "Only after the offline coverage and quality gate passes, make a newly configured bounded summary attempt; verify summary quality, cache recovery, and actual RF use. Continue W12 four-review and the company holdout loop afterward."
   ],
-  "last_updated_utc": "2026-10-25T00:27:46Z",
+  "last_updated_utc": "2026-10-25T04:49:00Z",
   "latest_publish_validation": {
     "source_commit": "1e5e6c1aff3680a46ca9dbab14b322b0f7f9374c",
     "verified_push_head": "f73afb89be1f4caf610432211281e07a14e58c77",
@@ -1578,5 +1584,80 @@
       "dependency_plan": "review/r1-w08-material-value-20261024/next-dependency-plan.md"
     },
     "budget_authority": "The later 2026-10-23 user authorization and config/resource_budget.yaml set 10,000,000 tokens and USD 20; prior 2,000,000 goal wording is stale. Current mother usage 1,783,378 tokens / USD 0.724836, retained unknown holds included."
+  },
+  "source_geography_classifier_root_cause_20261025": {
+    "status": "ROOT_FIX_REPLAY_AND_INDEPENDENT_REVIEW_PASS_UNPUBLISHED",
+    "evidence": "review/r1-w08-material-value-20261024/geography-source-grammar-replay-20261025.json",
+    "sample": "Wuxi AppTec FY2025 annual report, annual14 target ST-A03",
+    "before": "eligible=false; topics=[]; admitted=false",
+    "after": "eligible=true; topic=customer_revenue_geography; admitted=true; candidate selected at page 16 paragraph 19",
+    "shared_admission_units_compared": 38,
+    "admission_deltas": [
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:bfa1e6af26b2ab45472c6ac96c4f9b6e9951a5d2d662e28c4fb827506db86747",
+        "target_ids": [
+          "ST-A03"
+        ],
+        "page": 16,
+        "before": [
+          false,
+          [],
+          false
+        ],
+        "after": [
+          true,
+          [
+            "customer_revenue_geography"
+          ],
+          true
+        ]
+      }
+    ],
+    "selection_metrics": {
+      "physical_pages": 249,
+      "candidate_count": 1440,
+      "selected_count": 112,
+      "selection_limit": 112,
+      "selected_chars": 9014,
+      "coverage_complete": false,
+      "checkpoint_pass": true,
+      "work_used": 9867763,
+      "work_limit": 16000000,
+      "observed_target_labels": [
+        "ST-A01",
+        "ST-A02",
+        "ST-A03",
+        "ST-A04",
+        "ST-A05",
+        "ST-A06",
+        "ST-A07",
+        "ST-A08",
+        "ST-A09",
+        "ST-A10",
+        "ST-A11",
+        "ST-A12",
+        "ST-A13",
+        "ST-A14"
+      ],
+      "observed_target_units": 72
+    },
+    "content_regrade": "NOT_PERFORMED; 8 pass / 6 partial remains prior reviewed result",
+    "wire_schema_changed": false,
+    "paid_calls": 0,
+    "downloads": 0,
+    "raw_copies": 0,
+    "evidence_sha256": "a867183e8293f5254bb2f0e50fcd5ff20250ac200190cb500d6c4bc4fe4c335a",
+    "independent_review_evidence_sha256": "803c330536ce9075c67d012b0e9149a388b80b887c141dfa00b2226cb3ac03ea",
+    "scratch_cleanup": "PASS; isolated replay directory removed after capture",
+    "initial_independent_review": {
+      "result": "FAIL_P2",
+      "finding": "The _REGION_CUSTOMER_REVENUE shortcut bypassed the shared cost-of exclusion and misclassified cost-of-revenue/costs-of-sales customer-region phrases.",
+      "new_regression_cases": 2,
+      "red_reproduced": true,
+      "repair": "Reuse _ENGLISH_REVENUE_SUBJECT in both ordinary and shortcut paths.",
+      "retest": "39/39 targeted tests passed; Ruff and diff-check passed.",
+      "final_independent_review": "PASS_NO_P0_P2",
+      "review_receipt": "review/r1-w08-material-value-20261024/geography-source-grammar-independent-review-20261025.json"
+    }
   }
 }

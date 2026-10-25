@@ -1,0 +1,44 @@
+{
+  "schema_version": "independent-source-grammar-review/1",
+  "reviewer": "independent agent geography_source_review",
+  "review_mode": "read-only review of exact current worktree; no files changed by reviewer",
+  "result": "PASS_NO_P0_P2",
+  "initial_finding": {
+    "severity": "P2",
+    "root_cause": "The _REGION_CUSTOMER_REVENUE shortcut bypassed the cost-of exclusion and could classify costs of sales/revenue as customer revenue geography.",
+    "repair_verified": "_ENGLISH_REVENUE_SUBJECT is shared by _REVENUE and _REGION_CUSTOMER_REVENUE; both new negative cases return false."
+  },
+  "positive_controls": [
+    "Chinese coordinated revenue-plus-cost geographic allocation returns true.",
+    "English coordinated revenue-plus-cost geographic allocation returns true.",
+    "Ordinary customer-revenue geography returns true."
+  ],
+  "test_result": "39 passed in 1.73s in independent rerun; primary run was 39 passed in 1.76s",
+  "reviewed_sha256": {
+    "source": "8a7200d4cb9bdfcd174b0fb00633c98a76d1d411517f14fb525551d237bb1bb1",
+    "test": "98edf71b9478da3e8c253898c403d70fe8fb2b9d8d60070077e4280e1128f1f2",
+    "source_replay_receipt_before_review_update": "c25db9a815a094f7264609781c4de1e314cc78702fd73ed63a59cb0a556528fc",
+    "wrapper": "dd49fa3f1fcc0b02951da6f52444871ec2e400fc1ecaa7c99342b6a6419e8963",
+    "observer": "8e6f20be5d47df4fff36e41d69729cae05957e25173fb880e4ee8b46ab37d4ba",
+    "annual14_checklist": "92aafc341326845cac2aada578b67d6211f99244163f90345269686fedf0b258"
+  },
+  "reviewed_pwf_sha256_before_recording_final_result": {
+    "task_plan.md": "49ec517a113ab1ab48f772aa1cf6be6844c52050f142fd15600a5d05fb06d6d7",
+    "findings.md": "8682d18e5b6230e0c398547c79f9437102982a94570112de0a4a8a0a680c2cb6",
+    "progress.md": "187275490b7e6132740e6157b94e7646d0a0b79eb7d9e9da4c042fdd53ad5896",
+    "CURRENT_STATUS.md": "bf4a133ae42e7c95152fc55010fc29d5d0519321f663cf124eda736231c6ab1a",
+    "CURRENT_STATUS.json": "35bea34538d7313ccf08aa5444f6b80a39f10a6d2aa192709c6faea1de044be2"
+  },
+  "source_sample_limit": "The annual report PDF was not present in this worktree. Reviewer checked the recorded original SHA 7f1431d66eae399d4b35639bb650e23287c7f52dacbb47b4b4a197fb5026d6a2 and byte-size receipt, but did not recompute the PDF hash from original bytes.",
+  "acceptance_limits": [
+    "The replay selected 112 of 112 allowed candidates and reports coverage_complete=false.",
+    "Annual14 content review was not rerun; last reviewed result remains 8 pass / 6 partial / 0 missing.",
+    "The replay output directory was removed after evidence capture; selection/trace files are retained by hash in the main receipt."
+  ],
+  "no_external_effects": {
+    "model_calls": 0,
+    "downloads": 0,
+    "raw_copies": 0,
+    "schema_or_budget_changes": 0
+  }
+}

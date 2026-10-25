@@ -23,6 +23,8 @@ GEOGRAPHIES = (
     "本公司营业收入按客户母公司所在地的国家或地区统计，对比期间数据已相应调整。",
     "收入按客戶母公司所在地分區。",
     "Revenue is attributed to geographic markets based on the country of each customer's headquarters.",
+    "本公司营业收入及营业成本按客户母公司所在地分地区统计。",
+    "Revenue and cost of sales are allocated based on the location of each customer's headquarters.",
 )
 CONTRACTS = (
     "本公司期末未交付订单余额为人民币80亿元，其中25亿元将在2028会计年度确认收入。",
@@ -70,6 +72,11 @@ def test_contract_balance_and_absolute_fiscal_year_conversion_have_distinct_uses
     "We strive to serve our customers with better products and services.",
     "Our factories are located in three geographic markets.",
     "Our cash balances are attributed to the countries of the group's banks.",
+    "Cost of revenue is allocated based on each customer's headquarters.",
+    "The costs of sales are allocated based on the location of each customer's headquarters.",
+    "Cost of revenue from customers in US markets.",
+    "The costs of sales from customers in US markets.",
+    "营业收入和净利润根据客户母公司所在地统计。",
     "公司计划明年争取人民币80亿元新增订单。",
     "The auditors assessed the remaining performance obligations and tested management estimates.",
 ))

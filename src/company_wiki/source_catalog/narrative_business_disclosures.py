@@ -30,7 +30,8 @@ _EN_MEMBERS = re.compile(r",|\band\b|\bor\b", re.I)
 _GENERIC_MEMBER = re.compile(
     r"(?:the\s+)?(?:products?|services?|solutions?|research|development|manufacturing|"
     r"production|sales|operations?|business(?:es)?)", re.I)
-_REVENUE = re.compile(r"收入|营业额|\b(?:revenues?|sales)\b", re.I)
+_ENGLISH_REVENUE_SUBJECT = r"(?<!cost of )(?<!costs of )\b(?:revenues?|sales)\b"
+_REVENUE = re.compile(rf"收入|营业额|{_ENGLISH_REVENUE_SUBJECT}", re.I)
 _CUSTOMER_LOCATION = re.compile(
     r"客户(?:的)?(?:母公司|总部)?所在地|客户(?:的)?(?:母公司)?总部|"
     r"\bcustomers?['’]s?\s+(?:headquarters|location|domicile)|"
@@ -38,10 +39,16 @@ _CUSTOMER_LOCATION = re.compile(
 _REVENUE_ALLOCATION = re.compile(
     r"^\s*(?:主要)?(?:按|根据|依据|基于)|"
     r"^\s*(?:(?:is|are|was|were)\s+)?(?:attribut\w*|allocat\w*|based on)\b", re.I)
+_COORDINATED_REVENUE_COST = re.compile(
+    r"^\s*(?:和|及|与|以及|、|and\s+)"
+    r"(?:(?:主营业务|营业|销售|服务)?成本(?=(?:分别|主要)?(?:按|根据|依据|基于|$|[\s,，]))|"
+    r"(?:cost\s+of\s+(?:sales|revenue|services?)|(?:operating\s+)?costs?)\b)",
+    re.I,
+)
 _REGION_CUSTOMER_REVENUE = re.compile(
     r"(?:来自|源自|来源于)[^，。；;!?]{0,30}(?:国|洲|地区|国家|省|市|区域|市场|境内|境外|海外|国内)"
     r"客户(?:的)?收入|"
-    r"\b(?:revenues?|sales)\s+from\s+customers?\s+in\s+[^,，。;!?]{1,60}"
+    rf"{_ENGLISH_REVENUE_SUBJECT}\s+from\s+customers?\s+in\s+[^,，。;!?]{{1,60}}"
     r"\b(?:markets?|regions?|countries)\b|"
     r"\bcustomer\s+revenues?\s+by\s+geographic(?:al)?\s+(?:location|region|market)\b", re.I)
 _STOCK = re.compile(
@@ -326,6 +333,9 @@ def _customer_geography(clause: str) -> bool:
     for revenue in _REVENUE.finditer(clause):
         _left, right = predicate_scope(clause, revenue.start(), revenue.end())
         tail = clause[revenue.end():right]
+        coordinated_cost = _COORDINATED_REVENUE_COST.match(tail)
+        if coordinated_cost is not None:
+            tail = tail[coordinated_cost.end():]
         if _REVENUE_ALLOCATION.match(tail) and _CUSTOMER_LOCATION.search(tail):
             return True
     return False

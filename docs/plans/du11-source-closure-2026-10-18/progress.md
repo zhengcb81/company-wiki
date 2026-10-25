@@ -1016,3 +1016,10 @@ Root cause from the configured model and official MiniMax API documentation: `Mi
 - 冻结Microsoft FY2025 10-K的v4预检112个入选span支持8/8必需业务事实，说明314项deferred不是必须全部发送模型的证据。药明康德年度14项最新来源复核为8 pass/6 partial/0 missing；下一个根因点是具体父级/表头/地域定义/日期依赖与时段金额，不先扩大批次或上限。
 - 独立预算授权以用户2026-10-23后续明确升级到累计10M tokens/$20为准，覆盖较早目标文本里的2M；生产配置与预算PWF一致。当前母账1,783,378 tokens/$0.724836，剩余8,216,622 tokens/$19.275164，unknown保留；本次无真实模型/供应商调用。
 - 下一步先完成离线证据归因与中性RED；仅在真实目标证明额外批次能补必需事实时实现可恢复续批。不要重放旧formal-v4，不降低gold断言，不把几何缺失等同未扫描。
+
+## 2026-10-25 ST-A03 source grammar TDD and real-source replay
+
+- Traced the frozen Wuxi annual14 page-16 geography note to the source classifier: coordinated revenue-plus-cost wording was rejected, while cost-only English geography could be misclassified as revenue.
+- First independent review found the `_REGION_CUSTOMER_REVENUE` shortcut bypassed the ordinary cost exclusion. Two new negative fixtures reproduced that P2; a shared `_ENGLISH_REVENUE_SUBJECT` pattern now protects both paths. `test_reading_material_value.py` passed 39/39 (1.76s), Ruff and diff-check passed. Final independent review passed with no P0–P2; exact reviewed source/test/replay/PWF SHA and coverage limits are recorded in [the independent review receipt](review/r1-w08-material-value-20261024/geography-source-grammar-independent-review-20261025.json).
+- The post-fix zero-cost/zero-download annual14 replay remained stable: 112 selected candidates, all 14 gold labels and 72 target units observed, 9,867,763/16,000,000 work used, original SHA verified and source tree unchanged. The earlier focused admission comparison still shows ST-A03 changed from ineligible/unadmitted to admitted/selected as the only delta among 38 common records. Full hashes: [receipt](review/r1-w08-material-value-20261024/geography-source-grammar-replay-20261025.json).
+- No content regrade: keep the prior review 8 pass/6 partial/0 missing until the next bounded independent content review. Test scratch output was removed; `.tmp-r4` and `.tmp-r5` do not remain. Code and PWF are independently reviewed and ready for scoped publication; exact HEAD CI must pass before tracing the other five partial targets.
