@@ -1,0 +1,425 @@
+{
+ "sample_id": "w18-cn-beigene-h1-2024",
+ "market": "CN",
+ "company": "百济神州",
+ "language": "zh",
+ "source_sha256": "5ffb8c9225efa6e84c7c901c7a2eb6b1c80c5aedc893c53428def3abba587ac3",
+ "expected_route_families": [
+  "interim",
+  "cn_interim_report"
+ ],
+ "facts": [
+  {
+   "id": "h1-revenue-65pct",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "period_flow",
+   "modality": "actual",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 9,
+      "location_kind": "page",
+      "exact_quote": "营业收入 \n11,996,406 \n7,251,228 \n65.44"
+     },
+     {
+      "page": 9,
+      "location_kind": "page",
+      "exact_quote": "主要系公司自研产品百悦泽®和百泽安®以及安进授权产品的\n销售增长"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "2024H1营业收入人民币11,996,406千元、同比+65.44%",
+    "单位为千元人民币",
+    "增长主因：百悦泽/百泽安及安进授权产品"
+   ],
+   "must_not_assert": [
+    "增长65.44%全部来自自研产品（含安进授权）",
+    "收入为美元口径"
+   ],
+   "reason": "A股半年报口径（人民币千元）与港股年报（千美元）体系不同；增长归因含授权产品。"
+  },
+  {
+   "id": "h1-loss-narrowed",
+   "importance": "critical",
+   "target_kind": "correctness_if_emitted",
+   "quantity_basis": "period_flow",
+   "modality": "actual",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 9,
+      "location_kind": "page",
+      "exact_quote": "归属于上市公司股东的净利润 \n-2,877,389 \n-5,218,922"
+     },
+     {
+      "page": 9,
+      "location_kind": "page",
+      "exact_quote": "经营活动产生的现金流量净额 \n-3,102,466"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "2024H1归母净利润-2,877,389千元（上年同期-5,218,922千元）",
+    "亏损收窄但仍为亏损",
+    "经营现金流-3,102,466千元（仍为净流出）"
+   ],
+   "must_not_assert": [
+    "公司实现盈利",
+    "亏损扩大"
+   ],
+   "reason": "方向+符号：收窄的亏损，'不适用'增幅列不得写成增长百分比。"
+  },
+  {
+   "id": "h1-rd-ratio-drop",
+   "importance": "normal",
+   "target_kind": "correctness_if_emitted",
+   "quantity_basis": "ratio",
+   "modality": "actual",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 9,
+      "location_kind": "page",
+      "exact_quote": "研发投入占营业收入的比例（%） \n55.25 \n81.12 \n减少25.87个百分点"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "研发投入占营业收入55.25%（上年同期81.12%）",
+    "下降25.87个百分点"
+   ],
+   "must_not_assert": [
+    "研发投入金额下降"
+   ],
+   "reason": "比例下降不能推出绝对研发投入或研发项目减少；锚点同时覆盖本期/上期比例及百分点变化，不在禁止陈述中混入未经证明的因果。"
+  },
+  {
+   "id": "h1-zanubrutinib-70-markets",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "count",
+   "modality": "actual",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 12,
+      "location_kind": "page",
+      "exact_quote": "百悦泽®已在美国、中国、欧盟、英国、加拿大、澳大利亚等超过70\n个国家和地区获批上市"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "截至2024H1百悦泽获批超70个国家和地区（2022年报口径超65个）"
+   ],
+   "must_not_assert": [
+    "70个市场均为自研申报获批（另有经销商申报）"
+   ],
+   "reason": "获批市场数期间递进（65→70+）。"
+  },
+  {
+   "id": "h1-tislei-13-indications",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "count",
+   "modality": "actual",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 16,
+      "location_kind": "page",
+      "exact_quote": "百泽安®已在中国获批用于13 项适应症"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "截至2024H1百泽安中国获批13项适应症（2022年报十项、2022年6月IR 9项）"
+   ],
+   "must_not_assert": [
+    "13项为全球获批数",
+    "欧洲获批13项"
+   ],
+   "reason": "适应症数期间序列第三节点，且限定中国。"
+  },
+  {
+   "id": "h1-nrdl-5of6",
+   "importance": "normal",
+   "target_kind": "required_business",
+   "quantity_basis": "count",
+   "modality": "actual",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 16,
+      "location_kind": "page",
+      "exact_quote": "百悦泽®获批的六项适应症中符合纳入条件的五\n项适应症已纳入国家医疗保障局发布的新版国家基本医疗保险、工伤保险和生育保险药品目录（国\n家医保目录或NRDL"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "百悦泽获批的六项适应症中符合纳入条件的五项已纳入医保目录",
+    "一项未纳入"
+   ],
+   "must_not_assert": [
+    "六项全部纳入医保",
+    "百泽安适应症全部纳入"
+   ],
+   "reason": "5/6的部分纳入：分母分子都要对。"
+  },
+  {
+   "id": "h1-suzhou-capacity",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "capacity_new",
+   "modality": "actual",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 12,
+      "location_kind": "page",
+      "exact_quote": "位于中国苏州的新建小分子创新药物产业化基地已完工启用，第一阶段的建\n设新增超过5.2 万平方米，固体制剂产能扩大至每年10 亿片（粒）剂次"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "苏州基地第一阶段已完工启用",
+    "新增超5.2万平方米",
+    "固体制剂产能扩大至每年10亿片（粒）剂次"
+   ],
+   "must_not_assert": [
+    "苏州基地全部规划产能已建成",
+    "10亿片为当期实际产量（产能≠产量）"
+   ],
+   "reason": "完工事件+产能口径：产能是能力上限，不是当期产量。"
+  },
+  {
+   "id": "h1-hopewell-july-2024",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "total",
+   "modality": "actual",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 12,
+      "location_kind": "page",
+      "exact_quote": "我们位于美国新泽西州霍普韦尔西普林斯顿创新园区的旗舰级生物药生产基地和临床研发中心已\n于2024 年7 月启用"
+     },
+     {
+      "page": 12,
+      "location_kind": "page",
+      "exact_quote": "2024 年7 月23 日，我们宣布在美国新泽西州霍普韦尔的西普林斯顿创新园区旗舰基地正式\n启用"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "霍普韦尔旗舰基地2024年7月启用",
+    "官宣日期2024-07-23"
+   ],
+   "must_not_assert": [
+    "基地2024年下半年才动工",
+    "启用时间与官宣日期混写"
+   ],
+   "reason": "日期事实：启用月份与官宣日期两处一致相互印证。"
+  },
+  {
+   "id": "h1-guangzhou-65000l",
+   "importance": "normal",
+   "target_kind": "required_business",
+   "quantity_basis": "capacity_total",
+   "modality": "actual",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 12,
+      "location_kind": "page",
+      "exact_quote": "位于中国广州的世界一\n流生物药生产基地总产能已达6.5 万升，抗体偶联药物（ADC）生产设施和全新生物药临床生产\n大楼均已竣工"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "广州基地总产能已达6.5万升",
+    "ADC设施与临床生产大楼竣工"
+   ],
+   "must_not_assert": [
+    "6.5万升全部已获批用于商业化生产"
+   ],
+   "reason": "产能总数vs获批产能（招股书口径一期8,000升获批）的区别。"
+  },
+  {
+   "id": "h1-clinical-decro",
+   "importance": "normal",
+   "target_kind": "required_business",
+   "quantity_basis": "count",
+   "modality": "actual",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 12,
+      "location_kind": "page",
+      "exact_quote": "已建立起一支3,000 多\n人的全球临床团队，基本实现去CRO 化。我们已自主开展超过140 项临床试验，并在超过45 个\n国家和地区入组了24,000 多名受试者"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "全球临床团队3,000多人、基本实现去CRO化",
+    "超140项临床试验/45国家地区/24,000多名受试者"
+   ],
+   "must_not_assert": [
+    "完全无CRO外包",
+    "自主开展的140项临床试验全部为关键性试验"
+   ],
+   "reason": "'基本'去CRO化的限定词与试验类型构成（关键性或潜在注册可用超40项，其余为非关键性试验）。"
+  },
+  {
+   "id": "h1-sonrotoclax-plan",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "projected_output",
+   "modality": "plan",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 25,
+      "location_kind": "page",
+      "exact_quote": "Sonrotoclax 用于\n治疗R/R CLL 和R/R MCL 的三期临床试验预计将于2024 年第四季度或2025 年第一季度入组首\n例受试者"
+     },
+     {
+      "page": 25,
+      "location_kind": "page",
+      "exact_quote": "针对R/R MCL 的全球临床试验已完成入组"
+     },
+     {
+      "page": 25,
+      "location_kind": "page",
+      "exact_quote": "R/R WM 和R/R MCL 适\n应症已获得美国FDA 快速通道资格认定"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "sonrotoclax R/R CLL与R/R MCL三期预计2024Q4或2025Q1首例入组（计划）",
+    "其中R/R MCL全球试验已完成入组（已发生）",
+    "R/R WM与R/R MCL获FDA快速通道资格"
+   ],
+   "must_not_assert": [
+    "三期试验已开始入组",
+    "全部四项注册试验已完成入组"
+   ],
+   "reason": "同一药物内计划与已发生的分离：完成的是二期队列（R/R MCL全球试验已完成入组），三期是预计（2024Q4或2025Q1首例）。"
+  },
+  {
+   "id": "h1-bgb16673-300",
+   "importance": "normal",
+   "target_kind": "required_business",
+   "quantity_basis": "count",
+   "modality": "actual",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 26,
+      "location_kind": "page",
+      "exact_quote": "BGB-16673 用于治疗R/R MCL 和R/R CLL 的两项潜在注册可用扩展队列继续入组患者，目\n前已入组受试者超过300 人"
+     },
+     {
+      "page": 26,
+      "location_kind": "page",
+      "exact_quote": "其中，R/R MCL 以及R/R CLL/SLL 适应症已获得美国FDA 快速通\n道资格认定。公司预计BGB-16673 用于治疗R/R CLL/SLL 的三期临床试验将于2024 年第四季度\n或2025 年第一季度入组首例受试者"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "BGB-16673两项扩展队列已入组超300人（进行中）",
+    "R/R MCL与R/R CLL/SLL获FDA快速通道资格"
+   ],
+   "must_not_assert": [
+    "BGB-16673三期临床试验已开始入组"
+   ],
+   "reason": "BGB-16673自身第26页段落区分扩展队列已入组、FDA资格与CLL/SLL三期预计2024Q4或2025Q1首例；不同药物的相似日期不能互证。"
+  },
+  {
+   "id": "h1-frost-sullivan-currency",
+   "importance": "normal",
+   "target_kind": "disposition_context",
+   "quantity_basis": "projected_output",
+   "modality": "third_party",
+   "role": "third_party",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 26,
+      "location_kind": "page",
+      "exact_quote": "全球BTK 抑制剂耐药后市场规模在2026 年将达到23.2 亿美\n元，至2030 年将增长至32.0 亿美元；中国BTK 抑制剂耐药后市场规模在2026 年将达到3.2 亿\n元"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "弗若斯特沙利文（第三方）预测",
+    "全球市场2026年23.2亿/2030年32.0亿美元",
+    "中国市场2026年3.2亿元人民币（币种不同）"
+   ],
+   "must_not_assert": [
+    "中国市场3.2亿美元（实为人民币）",
+    "公司自身预测"
+   ],
+   "reason": "第三方预测+全球（美元）与中国（人民币）双币种，币种错配即错。"
+  },
+  {
+   "id": "h1-alpine-hr",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "ratio",
+   "modality": "actual",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 23,
+      "location_kind": "page",
+      "exact_quote": "纳入百悦泽®治疗R/R CLL 的PFS 优效性结果（HR 0.65，\np=0.0024）"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "2023年12月美国说明书更新纳入ALPINE PFS优效结果",
+    "HR 0.65、p=0.0024",
+    "人群R/R CLL"
+   ],
+   "must_not_assert": [
+    "HR 0.65为中国说明书数据",
+    "PFS优效=总生存期优效"
+   ],
+   "reason": "精确数值+终点限定（PFS非OS）+监管动作（说明书更新）。"
+  }
+ ],
+ "schema_version": "du-gold/1",
+ "scope": "holdout",
+ "support_set_frozen_before_output": true,
+ "notes": "W18-CWP-HOLDOUT（冻结于2026-10-25）。百济神州2024年半年度报告（A股科创板，人民币千元）。有界阅读：完整阅读第9页（主要会计数据）、12-17页（业务概览与产品）、22-26页（管线与市场机会）后冻结support set，未查看任何候选输出。prior_use=fresh。指定陷阱：亏损收窄仍亏损、研发占比下降≠研发减少、产能vs产量、计划（三期预计入组）vs已发生（二期完成入组）、第三方预测币种错配（美元vs人民币）、HR精确数值归属美国说明书更新。"
+}

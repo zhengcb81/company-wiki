@@ -1,0 +1,75 @@
+{
+  "schema_version": "root-independent-review/1",
+  "package": "W18-CWP-HOLDOUT",
+  "reviewer": "ROOT independent intake/review agent (not implementation author)",
+  "verdict": "PASS_ENGINEERING_AND_ORACLE_SCOPE",
+  "reviewed_root_head_before_merge": "b57a716c18c209144744d86fafc35eae87e1546f",
+  "reviewed_author_head": "b697bcf9b84de52b9d47c811554043e10ef2b551",
+  "reviewed_code_commit": null,
+  "commit_note": "Reviewed pending ROOT merge/source corrections. Exact LF-normalized file SHA bindings below; publishing merge commit must retain these bytes. No pending implementation change is signed in advance.",
+  "reviewed_file_sha256_lf": {
+    "tests/holdout/w18/test_manifest_freeze.py": "2148000226345c9014af348dd130be4f2d68b29d289f7d6e44f1cd2f95cd22de",
+    "tests/holdout/w18/test_runner_boundaries.py": "7b0b52413b5586b0218ce1caa5617e8782df0c2c2dd2146e4c320fc273a25f2b",
+    "tools/holdout_replay/__init__.py": "5be7caff749b01dffff1f623ce48dfeb86f7f49cf8de05e5525bb499149a2269",
+    "tools/holdout_replay/__main__.py": "faba0ad01faea5c93145f9d2941740f683d3005635e12aab9a61538249a14bfe",
+    "tools/holdout_replay/gold/w18-cn-beigene-h1-2024.json": "f692b0b3386b6e941e56b0ed448b5db2f2560278ef885da6fbd3c7bc838c0536",
+    "tools/holdout_replay/gold/w18-cn-beigene-ipo.json": "81f16d69faa7d18b1ffaf3ccb41e0eed9a80a86b85449deb556a5c9e6c7c2cdd",
+    "tools/holdout_replay/gold/w18-cn-beigene-ir-202206.json": "40c78a5474a62ea8a857ffa5607de2efbe835b4740e840ede36a041d96a4989b",
+    "tools/holdout_replay/gold/w18-cn-hikvision-call-2024h1.json": "12acfb4089a00af4b5f721b31bf8b4b1683cf5ccf8d66b57ff33f0f43e1f0a6f",
+    "tools/holdout_replay/gold/w18-cn-sugondata-charter.json": "3a6c71db44c910b25a851d94f830e656b3d502b52acef2123cb3f949f10e676a",
+    "tools/holdout_replay/gold/w18-cn-zijin-fy2025.json": "be6f5fbea15204afdcc8e8e94ad7d761498d834b9487670037a5ff6b825743ca",
+    "tools/holdout_replay/gold/w18-hk-beigene-fy2022.json": "cebddab245e35c6d406fbb42aeecf2d9e4141c081bb02d636373a39fc0ac21f9",
+    "tools/holdout_replay/gold/w18-us-alphabet-fy2025.json": "b10fd807147b1f1b0fe57be537e4a645a4c13ccefb15770ed8e020b3cf47b92b",
+    "tools/holdout_replay/gold_corrections.json": "bd9c1bc4680d5ca75718ce8b7a682b8f2db1d04df4655699e93ea73758eca3cd",
+    "tools/holdout_replay/manifest.json": "857fa81d8fb21f8d06831f547ea0b1d839a532a7eb260fafa591abf2022577e8",
+    "tools/holdout_replay/manifest.py": "efa0e2af0080908d401a19bb9fd015b1708c849fa142611d5f9e8f9e139cc060",
+    "tools/holdout_replay/producer.py": "957caf64d7ac0104674fcbe12d796fdaaccbd09bee791afef79a7b726bd0a8d3",
+    "tools/holdout_replay/resolve.py": "469b84ff0b3b46b666616ff285b7effeadccaf67a6c874cf6a5b2b5381727681",
+    "tools/holdout_replay/runner.py": "baa01f1751cdb139c7db1a88ccdfc09d35f2c4b6032a00b2e5f47051c8a3bee2",
+    "tools/holdout_replay/worker.py": "fb5b69db5826760954d5b83f4d8df5254ba7e6e7255ecbff4d2003c63830fd95"
+  },
+  "open_in_scope_findings": [],
+  "resolved_findings": [
+    "R1 new lake allocation before any write, validation before allocation, exclusive config/receipt files",
+    "R2 atomic exclusive attempt claim; reuse refuses without modifying existing evidence",
+    "R3 strict schema/sample/commit/before-after SHA/boolean binding; invalid result retained and not ok",
+    "R4 seven financial-table-only targets reclassified optional correctness; facts and previous baselines retained",
+    "R5 neutral PDF now in manifest and actual three-carrier subprocess chain",
+    "R6 H1 physical pages 9/25/26 source-bound support and same-drug conditions; no cross-drug corroboration"
+  ],
+  "independently_run": [
+    {
+      "command": "python -B -X utf8 .planning/w18-root-acceptance-20261025/run_tests.py independent-green tests/holdout/w18",
+      "passed": 28,
+      "failed": 0,
+      "pytest_seconds": 49.53,
+      "total_seconds": 70.77,
+      "receipt": "independent-green-receipt.json",
+      "temporary_root_restored_absent": true
+    },
+    {
+      "method": "Independent direct boundary mutations, separate from implementation tests",
+      "mutations": [
+        "original_unchanged integer 1 rejected (strict boolean)",
+        "original_before_sha mismatch rejected",
+        "request_sent true rejected"
+      ],
+      "valid_control_accepted": true,
+      "receipt": "independent-counterexamples.json"
+    }
+  ],
+  "gold": {
+    "version": 4,
+    "targets": 96,
+    "previous_oracle_and_baseline_preserved": true,
+    "meaning": "Exposed regression oracle, not newly blind holdout. Oracle changes are not implementation recall gains."
+  },
+  "limits": [
+    "No paid model/LLM/download/network calls, no author source/worktree changes.",
+    "No new true-summary/cache/RF semantic acceptance is claimed.",
+    "ROOT still owns frozen-v4/candidate publication and representative real source replay; raw product findings remain OPEN.",
+    "Observe default-selector and 0.9 compiled-model-input observations remain different generations and must not be conflated."
+  ],
+  "paid_calls": 0,
+  "downloads": 0
+}

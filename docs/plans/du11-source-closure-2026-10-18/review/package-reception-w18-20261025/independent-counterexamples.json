@@ -1,0 +1,20 @@
+{
+  "new_independent_mutations": {
+    "original_unchanged": {
+      "rejected": true,
+      "reason": "original changed"
+    },
+    "original_before_sha256": {
+      "rejected": true,
+      "reason": "original_before_sha256 mismatch"
+    },
+    "model_view": {
+      "rejected": true,
+      "reason": "worker reports request sent"
+    }
+  },
+  "valid_control_accepted": true,
+  "paid_calls": 0,
+  "downloads": 0,
+  "source_writes": 0
+}

@@ -1,0 +1,306 @@
+{
+ "schema_version": "w18-holdout-manifest/1",
+ "card": "W18-CWP-HOLDOUT",
+ "plan_id": "w18-cwp-holdout-2026-10-25",
+ "created": "2026-10-25",
+ "base_code_commit": "ba8f8543c0351f6857e1ce24e943ad9da1b664ef",
+ "frozen_before_candidate_output": true,
+ "gold_version": 4,
+ "gold_v1_freeze_commit": "5e4488bb",
+ "gold_v1_archive": "gold/archive-v1/",
+ "corrections_file": "gold_corrections.json",
+ "freeze_note": "Manifest and source-side gold were frozen and committed before any candidate selection, layout or model-view output was produced for these samples. Physical original locations are machine-local bindings (never committed); identity comes from provider receipts or scan sidecars plus document-internal identity pages, never from directory names.",
+ "prior_use_exclusion_check": {
+  "excluded_companies": [
+   "药明康德",
+   "中微公司",
+   "万润股份",
+   "吉比特",
+   "珀莱雅",
+   "金山云",
+   "微软"
+  ],
+  "excluded_sha_sources": [
+   "tools/document_understanding_benchmark/gold/*.json (28 samples)",
+   "du5_manifest.json",
+   "docs/plans/du11-source-closure-2026-10-18/review/market-family-upgrade-20261024/{inventory,du5-inventory,extra-inventory,m1-*}.json (25-sample round + m1 development gold)"
+  ],
+  "result": "no candidate SHA collides with any excluded SHA; no candidate company is in the excluded company list"
+ },
+ "sample_count": 8,
+ "samples": [
+  {
+   "sample_id": "w18-cn-zijin-fy2025",
+   "gold_file": "gold/w18-cn-zijin-fy2025.json",
+   "gold_sha256": "be6f5fbea15204afdcc8e8e94ad7d761498d834b9487670037a5ff6b825743ca",
+   "document_kind": "annual_report",
+   "market": "CN",
+   "language": "zh",
+   "carrier": ".pdf",
+   "source_ref": {
+    "document_id": "urn:company-wiki:document:sha256:01819e1c7daad939d1779a8aa729f50f02151192e609cb28c2c405634a8f343d",
+    "source_id": "urn:company-wiki:source:sha256:01819e1c7daad939d1779a8aa729f50f02151192e609cb28c2c405634a8f343d",
+    "content_sha256": "01819e1c7daad939d1779a8aa729f50f02151192e609cb28c2c405634a8f343d",
+    "byte_size": 79925886,
+    "mime_type": "application/pdf",
+    "schema_version": "2.0"
+   },
+   "identity_evidence": {
+    "method": "provider receipt",
+    "provider": "cninfo",
+    "provider_document_id": "1225023658",
+    "security_id": "601899",
+    "entity": "紫金矿业",
+    "filing_date": "2026-03-20",
+    "fiscal_year": 2025,
+    "evidence": "acquisition sidecar receipt (stockinfo-cninfo adapter) + cover page 601899.S listing"
+   },
+   "prior_use": {
+    "status": "local-unseen",
+    "known_prior_sightings": "SHA appears (metadata only - no content read, no gold, no tuning) in: g2_steady_production_migration_2026-10-07.json retained_sources, r2_canary_retirement_preflight_2026-10-07.json, assurance/fc/FC-504/canary_registry_2026-08-10.json, and the ephemeral n5-raw-duplicate-audit dedup verification outputs (written to exclusive temp files, not verifiable in-repo)"
+   },
+   "reading_scope": {
+    "fully_read_pages": "10, 11, 34, 37 (physical)",
+    "skimmed_pages": "1, 2-9 headers, 27-28 keyword hits",
+    "unread_pages": "all others of 352"
+   },
+   "designated_trap": "产量计划为指导性免责、巨龙二期已建vs三期条件式、马诺诺日期计划vs水电站完成、港元/美元币种、第三方归属（LBMA/ICSG/福布斯）、三项利润指标增幅各不相同"
+  },
+  {
+   "sample_id": "w18-cn-beigene-h1-2024",
+   "gold_file": "gold/w18-cn-beigene-h1-2024.json",
+   "gold_sha256": "f692b0b3386b6e941e56b0ed448b5db2f2560278ef885da6fbd3c7bc838c0536",
+   "document_kind": "semi_annual_report",
+   "market": "CN",
+   "language": "zh",
+   "carrier": ".pdf",
+   "source_ref": {
+    "document_id": "urn:company-wiki:document:sha256:5ffb8c9225efa6e84c7c901c7a2eb6b1c80c5aedc893c53428def3abba587ac3",
+    "source_id": "urn:company-wiki:source:sha256:5ffb8c9225efa6e84c7c901c7a2eb6b1c80c5aedc893c53428def3abba587ac3",
+    "content_sha256": "5ffb8c9225efa6e84c7c901c7a2eb6b1c80c5aedc893c53428def3abba587ac3",
+    "byte_size": 4681559,
+    "mime_type": "application/pdf",
+    "schema_version": "2.0"
+   },
+   "identity_evidence": {
+    "method": "document-internal identity + scan sidecar",
+    "security_id": "688235",
+    "entity": "百济神州",
+    "evidence": "page 9 stock table (SSE STAR 688235 / HKEX 06160 / NASDAQ BGNE) + scan sidecar security_id"
+   },
+   "prior_use": {
+    "status": "fresh",
+    "known_prior_sightings": "company name appears only in shared-reading security_master identity list; this original's SHA has no prior sighting"
+   },
+   "reading_scope": {
+    "fully_read_pages": "9, 12, 15, 16, 17, 22, 23, 25, 26 (physical)",
+    "skimmed_pages": "13-14 (product table intro)",
+    "unread_pages": "all others of 232"
+   },
+   "designated_trap": "亏损收窄仍亏损、研发占比下降≠研发减少、产能vs产量、三期计划入组vs二期已完成、第三方预测币种错配、HR数值归属美国说明书更新、人民币千元口径"
+  },
+  {
+   "sample_id": "w18-cn-beigene-ir-202206",
+   "gold_file": "gold/w18-cn-beigene-ir-202206.json",
+   "gold_sha256": "40c78a5474a62ea8a857ffa5607de2efbe835b4740e840ede36a041d96a4989b",
+   "document_kind": "investor_relations",
+   "market": "CN",
+   "language": "zh",
+   "carrier": ".pdf",
+   "source_ref": {
+    "document_id": "urn:company-wiki:document:sha256:737f92af61c7f52075384e7a0f93cb7b9fd25ab777e24ba1a6cb57b4559454bb",
+    "source_id": "urn:company-wiki:source:sha256:737f92af61c7f52075384e7a0f93cb7b9fd25ab777e24ba1a6cb57b4559454bb",
+    "content_sha256": "737f92af61c7f52075384e7a0f93cb7b9fd25ab777e24ba1a6cb57b4559454bb",
+    "byte_size": 308659,
+    "mime_type": "application/pdf",
+    "schema_version": "2.0"
+   },
+   "identity_evidence": {
+    "method": "document-internal identity + scan sidecar",
+    "security_id": "688235",
+    "entity": "百济神州",
+    "evidence": "page 1 header (A股688235/港股06160/美股BGNE 三地代码) + scan sidecar security_id; activity date 2022-06-14"
+   },
+   "prior_use": {
+    "status": "fresh",
+    "known_prior_sightings": "company name appears only in security_master identity list; no SHA sighting"
+   },
+   "reading_scope": {
+    "fully_read_pages": "1, 2, 3, 4 (all)",
+    "skimmed_pages": "",
+    "unread_pages": ""
+   },
+   "designated_trap": "第三方归属（摩根士丹利/罗氏）、选择权vs已行使、计划vs已发生、PDUFA目标日期≠批准、预期遵守≠已证明、百泽安适应症9项@2022-06期间口径"
+  },
+  {
+   "sample_id": "w18-cn-beigene-ipo",
+   "gold_file": "gold/w18-cn-beigene-ipo.json",
+   "gold_sha256": "81f16d69faa7d18b1ffaf3ccb41e0eed9a80a86b85449deb556a5c9e6c7c2cdd",
+   "document_kind": "prospectus",
+   "market": "CN",
+   "language": "zh",
+   "carrier": ".pdf",
+   "source_ref": {
+    "document_id": "urn:company-wiki:document:sha256:dc6a8f8131b052745865d633e760e81dc7536eb64f359b279bf02de3a208f664",
+    "source_id": "urn:company-wiki:source:sha256:dc6a8f8131b052745865d633e760e81dc7536eb64f359b279bf02de3a208f664",
+    "content_sha256": "dc6a8f8131b052745865d633e760e81dc7536eb64f359b279bf02de3a208f664",
+    "byte_size": 13310685,
+    "mime_type": "application/pdf",
+    "schema_version": "2.0"
+   },
+   "identity_evidence": {
+    "method": "document-internal identity + scan sidecar",
+    "security_id": "688235",
+    "entity": "百济神州",
+    "evidence": "cover page (科创板上市招股说明书, Cayman registered issuer) + scan sidecar security_id"
+   },
+   "prior_use": {
+    "status": "fresh",
+    "known_prior_sightings": "company name appears only in security_master identity list; no SHA sighting"
+   },
+   "reading_scope": {
+    "fully_read_pages": "4, 25, 31, 51, 158, 459 (physical)",
+    "skimmed_pages": "1-3 (cover/TOC)",
+    "unread_pages": "all others of 675"
+   },
+   "designated_trap": "加速/附条件批准路径、募资总额绿鞋条件性、广州产能已完成/计划/远期三层、获批8,000升vs建成24,000升、面值0.0001美元+人民币交易、无控股股东否定、风险提示≠已发生"
+  },
+  {
+   "sample_id": "w18-hk-beigene-fy2022",
+   "gold_file": "gold/w18-hk-beigene-fy2022.json",
+   "gold_sha256": "cebddab245e35c6d406fbb42aeecf2d9e4141c081bb02d636373a39fc0ac21f9",
+   "document_kind": "annual_report",
+   "market": "HK",
+   "language": "zh-Hant",
+   "carrier": ".pdf",
+   "source_ref": {
+    "document_id": "urn:company-wiki:document:sha256:fd5fc4a89f14702218b7a26999e69491e9a97c21189e31e9ff4dca59bc674ec7",
+    "source_id": "urn:company-wiki:source:sha256:fd5fc4a89f14702218b7a26999e69491e9a97c21189e31e9ff4dca59bc674ec7",
+    "content_sha256": "fd5fc4a89f14702218b7a26999e69491e9a97c21189e31e9ff4dca59bc674ec7",
+    "byte_size": 5036564,
+    "mime_type": "application/pdf",
+    "schema_version": "2.0"
+   },
+   "identity_evidence": {
+    "method": "document-internal identity + scan sidecar",
+    "security_id": "06160",
+    "entity": "百济神州",
+    "evidence": "公司資料 page (股份代號06160, NASDAQ BGNE, Cayman registered) + scan sidecar security_id"
+   },
+   "prior_use": {
+    "status": "fresh",
+    "known_prior_sightings": "no SHA sighting; company name only in security_master"
+   },
+   "reading_scope": {
+    "fully_read_pages": "10, 11, 12, 152, 156, 157, 158 (physical)",
+    "skimmed_pages": "2-5, 82",
+    "unread_pages": "all others of 405"
+   },
+   "designated_trap": "产品收入vs合作收入方向相反、亏损扩大、现金存量下降、US GAAP口径（非HKFRS）、无VIE否定、选择权费用收入确认受限、65市场/十项适应症@2022年报期间口径"
+  },
+  {
+   "sample_id": "w18-us-alphabet-fy2025",
+   "gold_file": "gold/w18-us-alphabet-fy2025.json",
+   "gold_sha256": "b10fd807147b1f1b0fe57be537e4a645a4c13ccefb15770ed8e020b3cf47b92b",
+   "document_kind": "annual_report",
+   "market": "US",
+   "language": "en",
+   "carrier": ".html",
+   "source_ref": {
+    "document_id": "urn:company-wiki:document:sha256:c2f6301004f35411a20611c14ff01d80a85c0bcbab6053c80d8cc7f6fc747161",
+    "source_id": "urn:company-wiki:source:sha256:c2f6301004f35411a20611c14ff01d80a85c0bcbab6053c80d8cc7f6fc747161",
+    "content_sha256": "c2f6301004f35411a20611c14ff01d80a85c0bcbab6053c80d8cc7f6fc747161",
+    "byte_size": 2616499,
+    "mime_type": "text/html",
+    "schema_version": "2.0"
+   },
+   "identity_evidence": {
+    "method": "provider receipt",
+    "provider": "sec",
+    "provider_document_id": "0001652044-26-000018",
+    "security_id": "GOOGL",
+    "entity": "Alphabet Inc.",
+    "filing_date": "2026-02-05",
+    "fiscal_year": 2025,
+    "evidence": "SEC accession receipt + CIK 1652044 archives URL in sidecar"
+   },
+   "prior_use": {
+    "status": "fresh",
+    "known_prior_sightings": "Alphabet name appears in cross-market-rf-e2e review command stdout (company lists), fresh-source-facts company binding handoff and n6 footprint scan (metadata); this 10-K SHA has no prior sighting; prior fresh-us-apple-10k sample is Apple (different company)"
+   },
+   "reading_scope": {
+    "fully_read_lines": "Item 1 body (143-238), Trends/Monetization (517-620), Executive Overview (617-647) of 2679 extracted lines",
+    "skimmed_lines": "TOC and part headers",
+    "unread_lines": "remainder (risk factors, financial statements, notes)"
+   },
+   "designated_trap": "Wiz签署协议vs交割、OI&E投资收益vs经营利润、Other Bets亏损一次性成分、A/C类回购拆分、capex vs费用、财年=日历年"
+  },
+  {
+   "sample_id": "w18-cn-hikvision-call-2024h1",
+   "gold_file": "gold/w18-cn-hikvision-call-2024h1.json",
+   "gold_sha256": "12acfb4089a00af4b5f721b31bf8b4b1683cf5ccf8d66b57ff33f0f43e1f0a6f",
+   "document_kind": "investor_call_transcript",
+   "market": "CN",
+   "language": "zh",
+   "carrier": ".docx",
+   "source_ref": {
+    "document_id": "urn:company-wiki:document:sha256:65305c5c67625f2d19020d59e748b45a4503ee179088b0113580bfbe23fdfcbc",
+    "source_id": "urn:company-wiki:source:sha256:65305c5c67625f2d19020d59e748b45a4503ee179088b0113580bfbe23fdfcbc",
+    "content_sha256": "65305c5c67625f2d19020d59e748b45a4503ee179088b0113580bfbe23fdfcbc",
+    "byte_size": 47403,
+    "mime_type": "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+    "schema_version": "2.0"
+   },
+   "identity_evidence": {
+    "method": "document-internal identity + scan sidecar",
+    "security_id": "002415",
+    "entity": "海康威视",
+    "evidence": "title/first paragraph 海康威视（002415）2024年半年度业绩说明电话会议 + scan sidecar security_id; date 2024-08-17"
+   },
+   "prior_use": {
+    "status": "fresh",
+    "known_prior_sightings": "company name appears in n5 raw-duplicate-audit (a different PDF's path/hash metadata), security_master and n6 footprint scan; this transcript SHA has no prior sighting"
+   },
+   "reading_scope": {
+    "fully_read_paragraphs": "0-249 (all 250)",
+    "skimmed_paragraphs": "",
+    "unread_paragraphs": ""
+   },
+   "designated_trap": "口径分离（归母vs扣非、可比口径毛算）、并表vs内生（森斯泰克/ASR'笔录'疑词保留）、指引条件性（宽泛140vs确认正增长）、美国营收定性下行无数字"
+  },
+  {
+   "sample_id": "w18-cn-sugondata-charter",
+   "gold_file": "gold/w18-cn-sugondata-charter.json",
+   "gold_sha256": "3a6c71db44c910b25a851d94f830e656b3d502b52acef2123cb3f949f10e676a",
+   "document_kind": "ir_policy",
+   "market": "CN",
+   "language": "zh",
+   "carrier": ".pdf",
+   "source_ref": {
+    "document_id": "urn:company-wiki:document:sha256:7241428edfe28965a031237890618b628644236cad6aff112a272250ceebf8bc",
+    "source_id": "urn:company-wiki:source:sha256:7241428edfe28965a031237890618b628644236cad6aff112a272250ceebf8bc",
+    "content_sha256": "7241428edfe28965a031237890618b628644236cad6aff112a272250ceebf8bc",
+    "byte_size": 647277,
+    "mime_type": "application/pdf",
+    "schema_version": "2.0"
+   },
+   "identity_evidence": {
+    "method": "document-internal identity + scan sidecar",
+    "security_id": "920808",
+    "entity": "曙光数创",
+    "evidence": "cover page 证券代码920808/公告编号2026-040 + scan sidecar security_id (北交所)"
+   },
+   "prior_use": {
+    "status": "fresh",
+    "known_prior_sightings": "'曙光数创' appears inside the DU10 中科曙光 (different company, different SHA) goldset case only as a subsidiary name in summary text; this charter SHA has no prior sighting"
+   },
+   "reading_scope": {
+    "fully_read_pages": "1, 6, 33 (physical)",
+    "skimmed_pages": "2 (TOC)",
+    "unread_pages": "all others of 68"
+   },
+   "designated_trap": "治理负例：经营范围登记目录≠当期业务构成；表决/程序条款≠经营事实；身份字段（920808北交所/公告编号2026-040/2026年4月版）若被摘要必须正确"
+  }
+ ],
+ "gold_v4_note": "ROOT source-side scope/support corrections after author intake, before ROOT candidate. Prior v3.1 preserved at b697bcf9b84de52b9d47c811554043e10ef2b551; old baselines unchanged. Exposed regression set, not new blind holdout. Oracle changes are not code gains."
+}

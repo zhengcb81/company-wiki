@@ -1,0 +1,128 @@
+{
+ "sample_id": "w18-cn-sugondata-charter",
+ "market": "CN",
+ "company": "曙光数创",
+ "language": "zh",
+ "source_sha256": "7241428edfe28965a031237890618b628644236cad6aff112a272250ceebf8bc",
+ "expected_route_families": [
+  "administrative"
+ ],
+ "facts": [
+  {
+   "id": "charter-registered-scope",
+   "importance": "normal",
+   "target_kind": "disposition_context",
+   "quantity_basis": "unknown",
+   "modality": "actual",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 6,
+      "location_kind": "page",
+      "exact_quote": "第十四条  经依法登记，公司的经营范围：技术服务、技术开发、技术咨询、\n技术交流、技术转让、技术推广；信息咨询服务（不含许可类信息咨询服务）；\n计算机软硬件及辅助设备批发；计算机软硬件及辅助设备零售；电子产品销售；\n机械设备销售；化工产品销售（不含许可类化工产品）；电子、机械设备维护（不\n含特种设备）；专用设备制造（不含许可类专业设备制造）；计算机软硬件及外\n围设备制造；制冷、空调设备制造；制冷、空调设备销售；信息系统集成服务；\n智能仪器仪表制造；智能输配电及控制设备销售；电力设施器材销售；电线、电\n缆经营；配电开关控制设备制造；配电开关控制设备销售；配电开关控制设备研\n发；数字视频监控系统销售；智能基础制造装备制造；人工智能硬件销售；工业\n控制计算机及系统销售；货物进出口、技术进出口；建设工程施工、建筑劳务分\n包、对外承包工程"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "经营范围为依法登记的许可目录（第十四条）",
+    "目录列举本身不构成当期业务构成"
+   ],
+   "must_not_assert": [
+    "经营范围目录等于当期实际业务或收入结构",
+    "公司披露各业务线收入",
+    "该文件披露期间经营业绩"
+   ],
+   "reason": "治理负例核心：章程经营范围是法定登记目录，不是经营事实；把它当业务摘要来源即分类错误。"
+  },
+  {
+   "id": "charter-voting-procedure",
+   "importance": "normal",
+   "target_kind": "disposition_context",
+   "quantity_basis": "unknown",
+   "modality": "actual",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 33,
+      "location_kind": "page",
+      "exact_quote": "第九十二条  股东会审议下列影响中小股东利益的重大事项时，对中小股东\n的表决情况应当单独计票并披露"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "中小股东单独计票为股东会程序规则（第九十二条）",
+    "属于治理程序而非业务进展"
+   ],
+   "must_not_assert": [
+    "公司已发生该清单所列重大事项",
+    "程序规则是当期经营信息"
+   ],
+   "reason": "程序条款不能被当作经营事件；清单列举≠已发生。"
+  },
+  {
+   "id": "charter-share-issuance-principles",
+   "importance": "normal",
+   "target_kind": "disposition_context",
+   "quantity_basis": "unknown",
+   "modality": "actual",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 6,
+      "location_kind": "page",
+      "exact_quote": "第十六条  公司股份的发行，实行公开、公平、公正的原则，同类别的每一\n股份具有同等权利"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "同股同权原则（第十六条）"
+   ],
+   "must_not_assert": [
+    "公司披露股份结构变动或发行计划"
+   ],
+   "reason": "治理原则条款；负例样本的第三类程序套话。"
+  },
+  {
+   "id": "charter-document-identity",
+   "importance": "normal",
+   "target_kind": "correctness_if_emitted",
+   "quantity_basis": "count",
+   "modality": "actual",
+   "role": "company_filing",
+   "fact_scope": "document_meta",
+   "any_support_sets": [
+    [
+     {
+      "page": 1,
+      "location_kind": "page",
+      "exact_quote": "证券代码：920808        证券简称：曙光数创        公告编号：2026-040"
+     },
+     {
+      "page": 1,
+      "location_kind": "page",
+      "exact_quote": "曙光数据基础设施创新技术（北京） \n股份有限公司 \n章程"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "证券代码920808/证券简称曙光数创/公告编号2026-040",
+    "章程版本2026年4月"
+   ],
+   "must_not_assert": [
+    "公司为沪深交易所上市公司",
+    "公告编号2026-040为年度报告编号"
+   ],
+   "reason": "文件身份若被摘要提及必须正确：证券代码920808属北交所（非沪深）、公告2026-040、2026年4月版章程。"
+  }
+ ],
+ "schema_version": "du-gold/1",
+ "scope": "holdout",
+ "support_set_frozen_before_output": true,
+ "notes": "W18-CWP-HOLDOUT（冻结于2026-10-25）。曙光数创公司章程（2026年4月，公告2026-040）作为治理/程序套话负例：68页中完整阅读第1、6、33页并扫读目录，负例目标数可少于业务样本。prior_use=fresh：'曙光数创'名称曾作为中科曙光（不同公司、不同原件SHA）DU10案例内容中的子公司名出现；本公司及本章程SHA未进入任何既有gold。指定陷阱：经营范围登记目录≠当期业务构成；程序/表决条款≠经营事实；身份字段（920808北交所/公告编号）若被摘要必须正确。"
+}

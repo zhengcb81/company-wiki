@@ -1,0 +1,96 @@
+{
+  "reviewer": "independent agent 3 (replay verification; not involved in implementation)",
+  "reviewed_code_commit": "6a3f14c4",
+  "verdict": "PASS",
+  "replay": {
+    "sample": "w18-cn-beigene-ir-202206",
+    "status": "ok",
+    "sha_verified": true,
+    "import_under_producer": true,
+    "metrics_match_baseline": true,
+    "details": {
+      "original_before_sha256": "737f92af61c7f52075384e7a0f93cb7b9fd25ab777e24ba1a6cb57b4559454bb",
+      "original_after_sha256": "737f92af61c7f52075384e7a0f93cb7b9fd25ab777e24ba1a6cb57b4559454bb",
+      "original_unchanged": true,
+      "import_roots": {
+        "company_wiki": "C:/Users/郑曾波/Projects/w18-producer-ba8f8543/src/company_wiki/__init__.py",
+        "company_wiki.source_catalog": "C:/Users/郑曾波/Projects/w18-producer-ba8f8543/src/company_wiki/source_catalog/__init__.py"
+      },
+      "model_view": {"status": "not_attempted", "request_sent_absent": true},
+      "metrics_vs_baseline": {
+        "selected_spans": "2 == 2",
+        "candidate_count": "2 == 2",
+        "source_units": "102 == 102",
+        "page_count": "4 == 4"
+      },
+      "deep_compare": "native_observed 与基线逐字节一致（仅排除 parse_seconds/select_seconds/elapsed_seconds 计时字段）；targets 完全一致；evaluation 41 项 checks 中仅 resource.elapsed 的 observed 秒数不同（计时字段，均为 PASS）",
+      "network_calls": 0,
+      "model_posts": 0
+    }
+  },
+  "failure_chain": {
+    "timeout_ok": true,
+    "no_result_file": true,
+    "no_overwrite_ok": true,
+    "cleanup_ok": true,
+    "foreign_dir_untouched": true,
+    "details": {
+      "timeout_run": {
+        "sample_status": "timeout",
+        "reason": "WORKER_TIMEOUT_AFTER_0.2s",
+        "attempt_dir_files": [".du-bench-owned", ".du-bench-sentinel.json", "attempt.json", "w18-cn-beigene-ir-202206.job.json"],
+        "result_json_absent": true
+      },
+      "cleanup_owned_test": {
+        "foreign_cleanup_result": {"removed": false, "reason": "container is not marked owned; refusing to delete"},
+        "foreign_dir_intact": true,
+        "owned_cleanup_result": {"removed": true, "children_removed": [".du-bench-owned", "attempt.json", "sample.result.json"]}
+      },
+      "no_overwrite_test": {
+        "attempt_dirs": ["20261025T160609Z-1", "20261025T161235Z-1"],
+        "new_attempt_created": true,
+        "old_attempt_byte_identical": "全部 5 文件（sentinel、attempt.json、job.json、result.json、owned 标记）逐字节不变",
+        "run2_metrics_reproduce": "selected_spans=2, candidate_count=2, source_units=102, page_count=4"
+      }
+    }
+  },
+  "counterexample": {
+    "setup": {
+      "scratch_pkg": "C:/Users/郑曾波/Projects/w18-review-scratch-replay/counter/{manifest.json, gold/ce-beigene-ir-202206.json, bindings.json}",
+      "original": "C:/Users/郑曾波/Projects/company-wiki/companies/百济神州/raw/research/百济神州：投资者关系活动记录表（2022年6月）.pdf（只读复用，SHA 737f92af…）",
+      "frozen_gold_touched": false,
+      "run_exit_code": 0,
+      "sample_status": "ok"
+    },
+    "negation_conditional": {
+      "fact_desc": "ce-fda-approval-negation-mismatch（critical/required_business）：must_not_assert=[\"FDA已批准该sNDA\"]，锚点引句=原文『目标审评日期延长三个月至2023 年1 月20 日』(page 1)",
+      "observed_status": {
+        "anchor_visibility": {"on_read_page": true, "page_opaque": false, "selected_locators": [], "model_input_task_keys": []},
+        "summary_status": "not_reviewed",
+        "recall_check": {"check_id": "recall.ce-fda-approval-negation-mismatch", "status": "FAIL", "observed": "absent or unread"}
+      },
+      "word_match_not_business_pass": true
+    },
+    "period_unit_mismatch": {
+      "fact_desc": "ce-tislei-9-ind-period-mismatch（normal/required_business，quantity_basis=count）：锚点引句=『百泽安®目前在国内取得9 项获批适应症』(page 3)，must_preserve=[\"百泽安国内获批适应症 9项@2022-06 期间口径\"], must_not_assert=[\"公司截至2024年仍为9项\"]",
+      "observed_status": {
+        "anchor_visibility": {"on_read_page": true, "page_opaque": false, "selected_locators": [], "model_input_task_keys": []},
+        "summary_status": "not_reviewed",
+        "recall_check": {"check_id": "recall.ce-tislei-9-ind-period-mismatch", "status": "PARTIAL", "observed": "absent or unread"}
+      }
+    },
+    "conclusion": "两对抗 fact 均只产生机械可见性记录 + summary_status=not_reviewed；锚点词面在已读页出现但未进入 selected_evidence 时，recall 判 FAIL/PARTIAL，绝不因词匹配代签业务通过；must_not_assert（已批准/2024年外推）从未被当作可满足或已满足的业务断言。"
+  },
+  "findings": [
+    {"id": "F1-enum-guard-positive", "severity": "info", "evidence": "构造反例 gold 首版 quantity_basis='stock_flow' 被 producer 端 BenchmarkSchemaError 拒绝（允许值 capacity_new/capacity_total/count/incremental/investment/period_flow/projected_output/ratio/total/unknown），evaluation.status=failed 并给出精确错误位置；改为 count 后通过。枚举校验在评估入口即生效，属正向防御。"},
+    {"id": "F2-elapsed-nondeterminism-expected", "severity": "info", "evidence": "两次成功 run 的 evaluation.checks 中 resource.elapsed.observed 为唯一差异，均 PASS；native_observed 排除计时字段后与基线逐字节一致，重放确定性成立。"},
+    {"id": "F3-attempt-numbering-scheme", "severity": "info", "evidence": "_next_attempt_dir 采用 {UTC时间戳}-{N} 命名；跨秒重跑生成新时间戳目录，旧 attempt 全部文件逐字节不变，满足不覆盖要求。"}
+  ],
+  "constraints_check": {
+    "zero_model_calls": true,
+    "zero_network": true,
+    "workspace_git_clean_after": true,
+    "producer_head": "ba8f8543c0351f6857e1ce24e943ad9da1b664ef (clean)",
+    "outputs_confined_to": "C:/Users/郑曾波/Projects/w18-review-scratch-replay/"
+  }
+}

@@ -1040,3 +1040,8 @@ PDF-C1已正常提交推送87d39bbc；pre-commit真实捕获固定Windows测试�
 
 
 PDF-C1发布节点关闭：87d39bbc产品和6d7eb858测试观察器根修均正常推送，新精确CI40230230567对6d7eb858 completed/success，旧40229110372失败不改写。产品source SHA与独审/三源59回放绑定一致；164P、主机集成2P、独立15及历史7、CI跟进独立2P等计数有重叠。正常pre-commit全过，pre-push前后154P/61.23秒、156P/72.73秒，无绕hook。唯一状态和Next Step进入C2中性RED/真实接缝，C3正式摘要/cache/RF/新公司仍OPEN。0费用/下载/原件副本，原hook模式和历史未跟踪文件不动。
+
+
+## W18 ROOT接收（2026-10-25）
+
+W18初审不能直接签收：原子目录分配与整个attempt不可变是同一所有权边界；worker退出0不代表源绑定正确；配置校验应在任何写入之前。七个纯表目标改为correctness_if_emitted并保留数值陷阱；临床/FDA锚点必须属于同药物。机械可见性和旧默认selector不是生产摘要质量；产品解析/路由/覆盖发现继续OPEN。详见review/package-reception-w18-20261025/README.md。

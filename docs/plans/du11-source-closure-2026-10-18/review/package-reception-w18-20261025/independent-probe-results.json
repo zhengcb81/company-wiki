@@ -1,0 +1,15 @@
+{
+  "bootstrap_invalid_binding": {
+    "exit_code": 2,
+    "old_config_preserved": false
+  },
+  "changed_original_result": {
+    "sample_status": "ok",
+    "overall": "ok"
+  },
+  "forced_existing_attempt": {
+    "sample_status": "refused",
+    "old_receipt_preserved": false
+  },
+  "owned_temp_restored_absent": true
+}

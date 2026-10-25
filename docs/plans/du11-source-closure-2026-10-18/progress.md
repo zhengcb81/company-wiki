@@ -1254,3 +1254,10 @@ PDF-C1已正常提交推送87d39bbc；pre-commit真实捕获固定Windows测试�
 
 
 PDF-C1发布节点关闭：87d39bbc产品和6d7eb858测试观察器根修均正常推送，新精确CI40230230567对6d7eb858 completed/success，旧40229110372失败不改写。产品source SHA与独审/三源59回放绑定一致；164P、主机集成2P、独立15及历史7、CI跟进独立2P等计数有重叠。正常pre-commit全过，pre-push前后154P/61.23秒、156P/72.73秒，无绕hook。唯一状态和Next Step进入C2中性RED/真实接缝，C3正式摘要/cache/RF/新公司仍OPEN。0费用/下载/原件副本，原hook模式和历史未跟踪文件不动。
+
+
+## W18 ROOT接收（2026-10-25）
+
+W18接收：作者45新增路径已无冲突进入merge索引；ROOT独立中性probe确认6项工具/金标问题。新增9项RED全部失败（26.78秒，临时根已恢复），已在原薄工具修复原子目录、既有湖不写穿和结果绑定，PDF夹具进入实际链，完整W18正在跑。gold v4在ROOT候选前源侧修订；先一次UTF-8输出失败无原件写入，改-X utf8实读9/25/26页成功。旧baseline/作者工区/WIP保留。
+
+W18 ROOT集中终审通过：独立完整28P/49.53秒，额外before SHA/unchanged非bool/request_sent三突变拒绝，正例通过，19文件最终LF绑定，0 OPEN工具/oracle范围。下一步正常merge commit冻结v4后，新独占候选工区实际回放；未代签产品缺口。

@@ -1,0 +1,426 @@
+{
+ "sample_id": "w18-cn-beigene-ir-202206",
+ "market": "CN",
+ "company": "百济神州",
+ "language": "zh",
+ "source_sha256": "737f92af61c7f52075384e7a0f93cb7b9fd25ab777e24ba1a6cb57b4559454bb",
+ "expected_route_families": [
+  "investor_qa",
+  "results_release"
+ ],
+ "facts": [
+  {
+   "id": "ir-pdufa-extension",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "total",
+   "modality": "actual",
+   "role": "company_statement",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 1,
+      "location_kind": "page",
+      "exact_quote": "美国食品药品监督管理局\n（FDA）将其《处方药申报者付费法案》（PDUFA）目标审评日期延长\n三个月至2023 年1 月20 日"
+     },
+     {
+      "page": 2,
+      "location_kind": "page",
+      "exact_quote": "FDA 此举旨在就公司递交的额外临床数据进行充分的审评"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "PDUFA目标审评日期延长三个月至2023-01-20",
+    "延期原因为审评额外临床数据"
+   ],
+   "must_not_assert": [
+    "FDA已拒绝该sNDA",
+    "FDA已批准该适应症",
+    "延期意味着安全性问题"
+   ],
+   "reason": "监管时间线事实：延期≠拒绝≠批准，三条均不得混淆。"
+  },
+  {
+   "id": "ir-alpine-orr-superiority",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "unknown",
+   "modality": "actual",
+   "role": "company_statement",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 2,
+      "location_kind": "page",
+      "exact_quote": "经独立审查\n委员会（IRC）评估，在复发或难治性（R/R）CLL 或SLL 成人患者中，百\n悦泽®展示了优于伊布替尼的总缓解率（ORR）"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "IRC评估",
+    "R/R CLL/SLL成人患者人群",
+    "总缓解率ORR（非PFS/OS）",
+    "优于伊布替尼"
+   ],
+   "must_not_assert": [
+    "PFS优于伊布替尼（本次申报口径为ORR）",
+    "初治患者人群结果"
+   ],
+   "reason": "终点与人群双重限定：该句只支持ORR优效于R/R人群。"
+  },
+  {
+   "id": "ir-snda-evidence-basis",
+   "importance": "normal",
+   "target_kind": "disposition_context",
+   "quantity_basis": "count",
+   "modality": "actual",
+   "role": "company_statement",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 2,
+      "location_kind": "page",
+      "exact_quote": "百悦泽®用于治疗CLL/SLL的2 项全球3 期试验分别为：\n（1）SEQUOIA \n临床试验（NCT03336333），对百悦泽®与苯达莫司汀联合利妥昔单抗进行\n对比，用于治疗初治（TN）患者；及（2）ALPINE 临床试验（NCT03734016），\n对百悦泽®与伊布替尼进行对比，用于治疗复发/难治性（R/R）患者"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "2项全球3期试验（SEQUOIA=TN人群/联合苯达莫司汀+利妥昔单抗对照；ALPINE=R/R人群/伊布替尼对照）",
+    "另含8项支持性试验"
+   ],
+   "must_not_assert": [
+    "两项试验均为头对头伊布替尼对照",
+    "SEQUOIA入组R/R患者"
+   ],
+   "reason": "证据基础的试验分工：两项3期的对照与人群不同，互换即错。"
+  },
+  {
+   "id": "ir-roche-tigit-third-party",
+   "importance": "critical",
+   "target_kind": "disposition_context",
+   "quantity_basis": "unknown",
+   "modality": "third_party",
+   "role": "third_party",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 2,
+      "location_kind": "page",
+      "exact_quote": "近期罗氏\n宣布其TIGIT 抑制剂tiragolumab 针对非小细胞肺癌（NSCLC）患者\n的III 期SKYSCRAPER-01 中期试验结果未达到无进展生存期（PFS）\n这一联合主要临床终点"
+     },
+     {
+      "page": 2,
+      "location_kind": "page",
+      "exact_quote": "罗氏TIGIT\n在SCLC 的结果无法外推至其他适应症"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "SKYSCRAPER-01未达PFS终点属罗氏（第三方）结果",
+    "公司结论：SCLC结果无法外推"
+   ],
+   "must_not_assert": [
+    "公司TIGIT三期失败",
+    "罗氏结果直接适用于公司欧司珀利单抗",
+    "公司TIGIT重点在SCLC"
+   ],
+   "reason": "第三方结果归属+不可外推：罗氏失败不能转写为公司管线失败；公司重点在NSCLC。"
+  },
+  {
+   "id": "ir-novartis-option-not-exercised",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "total",
+   "modality": "conditional",
+   "role": "company_statement",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 2,
+      "location_kind": "page",
+      "exact_quote": "授予诺华在指定国家共同开发欧司珀利单抗的独家的、基于时间的选\n择权，诺华可在2023 年年底之前行使该权利"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "独家的、基于时间的选择权",
+    "诺华可在2023年底前行使（权利，未行使）",
+    "共同取得收益、承担风险"
+   ],
+   "must_not_assert": [
+    "诺华已行使选择权",
+    "诺华已获得欧司珀利单抗权益",
+    "合作已完全落地"
+   ],
+   "reason": "选择权≠已行使；时间窗口是条件的一部分。"
+  },
+  {
+   "id": "ir-phase3-cost-share",
+   "importance": "normal",
+   "target_kind": "disposition_context",
+   "quantity_basis": "ratio",
+   "modality": "actual",
+   "role": "company_statement",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 3,
+      "location_kind": "page",
+      "exact_quote": "新药\n研发中III 期试验的成本占比最高（约60%~70%）"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "III期试验成本占新药研发总成本约60%-70%"
+   ],
+   "must_not_assert": [
+    "III期成本占比60%~70%为审计数字",
+    "公司III期支出占其研发费用60%~70%"
+   ],
+   "reason": "行业比例约数，非公司报表口径。"
+  },
+  {
+   "id": "ir-global-trials-footprint",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "count",
+   "modality": "actual",
+   "role": "company_statement",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 3,
+      "location_kind": "page",
+      "exact_quote": "在全球45 个国家/地区启动的超过100 项临\n床试验，有半数以上均为全球临床试验"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "45个国家/地区",
+    "超100项临床试验",
+    "半数以上为全球性试验"
+   ],
+   "must_not_assert": [
+    "100项全部为全球性试验",
+    "公司披露45国均已有获批药物"
+   ],
+   "reason": "全球临床覆盖广度，半数以上≠全部。"
+  },
+  {
+   "id": "ir-tislei-9-indications",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "count",
+   "modality": "actual",
+   "role": "company_statement",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 3,
+      "location_kind": "page",
+      "exact_quote": "百泽安®目前在国内取得9 项获批适应症，是目\n前在国内获批适应症最多的PD-1/PD-L1"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "9项获批适应症（截至2022年6月口径）",
+    "国内获批适应症最多的PD-1/PD-L1"
+   ],
+   "must_not_assert": [
+    "此后仍为9项（期间口径会增长）",
+    "全球获批9项"
+   ],
+   "reason": "期间口径陷阱：2022-06为9项，与2022年报十项、2024H1十三项形成期间序列。"
+  },
+  {
+   "id": "ir-upfront-payment-attribution",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "total",
+   "modality": "actual",
+   "role": "company_statement",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 3,
+      "location_kind": "page",
+      "exact_quote": "百泽安\n®与欧司珀利单抗的合作分别为公司取得6.5 亿美元以及3 亿美元合作预付\n款"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "百泽安合作预付款6.5亿美元",
+    "欧司珀利单抗合作预付款3亿美元",
+    "两笔归属分开"
+   ],
+   "must_not_assert": [
+    "欧司珀利单抗预付款6.5亿美元",
+    "两笔合作均来自诺华同一协议"
+   ],
+   "reason": "金额归属必须逐药对应；两笔预付款分属不同合作安排。"
+  },
+  {
+   "id": "ir-bgb11417-plan-vs-hope",
+   "importance": "normal",
+   "target_kind": "required_business",
+   "quantity_basis": "unknown",
+   "modality": "plan",
+   "role": "company_statement",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 2,
+      "location_kind": "page",
+      "exact_quote": "计划在今年年底的美国血液学协会年\n会（ASH）大会上进行进一步的数据汇报"
+     },
+     {
+      "page": 3,
+      "location_kind": "page",
+      "exact_quote": "将启动对BGB-11417 的关键性临床试验"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "年底ASH数据汇报为计划",
+    "关键性临床试验将启动（计划）",
+    "公司'希望'其成为另一款基石产品"
+   ],
+   "must_not_assert": [
+    "ASH数据已公布",
+    "关键性试验已启动/入组",
+    "BGB-11417已成为基石产品"
+   ],
+   "reason": "计划/希望vs已发生的分离；'希望成为基石'是愿景非事实。"
+  },
+  {
+   "id": "ir-ms-btk-forecast",
+   "importance": "normal",
+   "target_kind": "disposition_context",
+   "quantity_basis": "projected_output",
+   "modality": "third_party",
+   "role": "third_party",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 3,
+      "location_kind": "page",
+      "exact_quote": "根据摩根士\n丹利的数据，2026 年全球BTK 抑制剂类药物市场规模有望达150 亿美元"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "摩根士丹利（第三方）预测",
+    "2026年全球BTK市场有望达150亿美元",
+    "有望=预测非事实"
+   ],
+   "must_not_assert": [
+    "公司预测市场规模150亿美元",
+    "2026年市场规模确定为150亿美元"
+   ],
+   "reason": "第三方预测归属+'有望'虚拟语气。"
+  },
+  {
+   "id": "ir-fda-deadline-covid-conditional",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "total",
+   "modality": "conditional",
+   "role": "company_statement",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 4,
+      "location_kind": "page",
+      "exact_quote": "FDA 做出决议的目标日期为2022 年7 月12 日，但如\n之前公司公布，监管审查完成的时间可能会因新冠肺炎疫情的限制而有所延\n迟"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "PDUFA目标日期2022-07-12",
+    "疫情限制可能导致延迟（条件性）"
+   ],
+   "must_not_assert": [
+    "FDA已于2022-07-12批准",
+    "延迟已实际发生"
+   ],
+   "reason": "目标日期与条件性延迟可能，不得写成结果。"
+  },
+  {
+   "id": "ir-covid-revenue-impact",
+   "importance": "normal",
+   "target_kind": "disposition_context",
+   "quantity_basis": "unknown",
+   "modality": "negation",
+   "role": "company_statement",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 4,
+      "location_kind": "page",
+      "exact_quote": "整体而言，疫情未对公司的收入产生较大负面影响"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "疫情未对收入产生较大负面影响",
+    "较大（限定词）"
+   ],
+   "must_not_assert": [
+    "疫情对收入无任何影响",
+    "疫情推动收入增长"
+   ],
+   "reason": "否定+限定：'未产生较大负面影响'不等于零影响。"
+  },
+  {
+   "id": "ir-hfcaa-expectation",
+   "importance": "normal",
+   "target_kind": "disposition_context",
+   "quantity_basis": "unknown",
+   "modality": "plan",
+   "role": "company_statement",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 4,
+      "location_kind": "page",
+      "exact_quote": "我们预期将能够遵守 《加速外国公司问责法\n案》和美国竞争法案，并在提交 2022 年 10-K 表格后证明我们已聘请美国\n上市公司会计监管委员会认定能够检查或调查的注册公共会计师事务所"
+     },
+     {
+      "page": 4,
+      "location_kind": "page",
+      "exact_quote": "公司自2022 年3 月23 日起聘任Ernst & Young LLP 为公司美股财务报\n表的审计机构"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "预期将能够遵守（期望非既成）",
+    "以提交2022年10-K后证明为条件",
+    "Ernst & Young LLP为美股2022年报审计机构"
+   ],
+   "must_not_assert": [
+    "公司已证明HFCAA合规",
+    "退市风险已消除（当时）"
+   ],
+   "reason": "期望+条件时点：预期遵守≠已证明合规。"
+  }
+ ],
+ "schema_version": "du-gold/1",
+ "scope": "holdout",
+ "support_set_frozen_before_output": true,
+ "notes": "W18-CWP-HOLDOUT（冻结于2026-10-25）。百济神州投资者关系活动记录表（2022年6月，2022-06-14电话会议），4页全文阅读后冻结support set，未查看任何候选输出。身份证据：正文首页A股688235/港股06160/美股BGNE三地代码+scan边车security_id。prior_use=fresh：公司名仅见于security_master身份清单；本原件SHA未出现在任何既有gold/清单。指定陷阱：第三方归属（摩根士丹利/罗氏）、选择权vs已行使、计划vs已发生、PDUFA目标日期≠批准、预期遵守≠已证明、百泽安适应症数的期间口径（9项@2022-06）。"
+}

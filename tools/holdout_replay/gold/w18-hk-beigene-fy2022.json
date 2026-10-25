@@ -1,0 +1,376 @@
+{
+ "sample_id": "w18-hk-beigene-fy2022",
+ "market": "HK",
+ "company": "百济神州",
+ "language": "zh-Hant",
+ "source_sha256": "fd5fc4a89f14702218b7a26999e69491e9a97c21189e31e9ff4dca59bc674ec7",
+ "expected_route_families": [
+  "annual",
+  "hk_annual_report"
+ ],
+ "facts": [
+  {
+   "id": "hk-product-vs-collab-revenue",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "period_flow",
+   "modality": "actual",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 152,
+      "location_kind": "page",
+      "exact_quote": "產品收入，淨額\n130,885\n222,596\n308,874\n633,987\n1,254,612"
+     },
+     {
+      "page": 152,
+      "location_kind": "page",
+      "exact_quote": "合作收入\n67,335\n205,616\n–\n542,296\n161,309"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "2022年產品收入淨額$1,254,612千",
+    "2022年合作收入$161,309千",
+    "收入合計$1,415,921千",
+    "两类收入分开列报"
+   ],
+   "must_not_assert": [
+    "2022年合作收入同比增长",
+    "收入合计全部为产品销售"
+   ],
+   "reason": "收入结构分离：产品收入高增而合作收入大降（2021年$542,296千→2022年$161,309千），合并叙述会掩盖结构。"
+  },
+  {
+   "id": "hk-net-loss-widened",
+   "importance": "critical",
+   "target_kind": "correctness_if_emitted",
+   "quantity_basis": "period_flow",
+   "modality": "actual",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 152,
+      "location_kind": "page",
+      "exact_quote": "虧損淨額\n674,033\n950,578\n1,628,591\n1,457,816\n2,003,815"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "2022年虧損淨額$2,003,815千（2021年$1,457,816千）",
+    "亏损同比扩大"
+   ],
+   "must_not_assert": [
+    "亏损收窄",
+    "公司2022年实现盈利"
+   ],
+   "reason": "方向陷阱：收入增长37%背景下的亏损扩大（港元/美元口径为千美元）。"
+  },
+  {
+   "id": "hk-gross-margin-decline",
+   "importance": "normal",
+   "target_kind": "correctness_if_emitted",
+   "quantity_basis": "ratio",
+   "modality": "actual",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 152,
+      "location_kind": "page",
+      "exact_quote": "毛利率(%)\n86%\n83%\n77%\n86%\n80%"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "2022年毛利率80%（2021年86%）",
+    "毛利率同比下降6个百分点"
+   ],
+   "must_not_assert": [
+    "毛利率同比上升或持平"
+   ],
+   "reason": "利润率方向与收入增长背离。"
+  },
+  {
+   "id": "hk-cash-position-decline",
+   "importance": "normal",
+   "target_kind": "correctness_if_emitted",
+   "quantity_basis": "total",
+   "modality": "actual",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 152,
+      "location_kind": "page",
+      "exact_quote": "現金、現金等價物及受限制現金\n740,713\n620,775\n1,390,005\n4,382,887\n3,875,037"
+     },
+     {
+      "page": 152,
+      "location_kind": "page",
+      "exact_quote": "短期投資\n1,068,509\n364,728\n3,268,725\n2,241,962\n665,251"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "2022年末現金及受限制現金$3,875,037千（2021年末$4,382,887千）",
+    "短期投資$665,251千（2021年末$2,241,962千）"
+   ],
+   "must_not_assert": [
+    "现金及短期投资合计同比增长",
+    "营运资金增加"
+   ],
+   "reason": "时点存量对比：两项均下降，与'雄厚财务实力'叙述并存。"
+  },
+  {
+   "id": "hk-us-gaap-basis",
+   "importance": "normal",
+   "target_kind": "disposition_context",
+   "quantity_basis": "unknown",
+   "modality": "actual",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 152,
+      "location_kind": "page",
+      "exact_quote": "相關期間的財務業績及財務狀況乃根據向證券交易委員會提交的10-K表格中年度報告編製"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "港股年报财务摘要按美国10-K（US GAAP）编制",
+    "千美元单位"
+   ],
+   "must_not_assert": [
+    "该摘要按香港财务报告准则（HKFRS）编制",
+    "金额为人民币"
+   ],
+   "reason": "跨境双重报告口径：港股公告内的摘要沿用US GAAP，与A股半年报（人民币千元）不同体系。"
+  },
+  {
+   "id": "hk-cayman-no-vie",
+   "importance": "critical",
+   "target_kind": "disposition_context",
+   "quantity_basis": "unknown",
+   "modality": "negation",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 10,
+      "location_kind": "page",
+      "exact_quote": "我們是一家在開曼群島註冊的控股公司，主要通過我們在美國、中國、英國、瑞士和澳大利亞的子公司開展\n業務。下圖概述了我們的公司架構。目前，我們的公司架構中不包含可變利益實體"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "开曼控股架构+五国子公司经营",
+    "不含VIE（可变利益实体）"
+   ],
+   "must_not_assert": [
+    "公司通过VIE架构控制中国经营实体"
+   ],
+   "reason": "架构否定事实：不含VIE是明确否定，不得臆造VIE结构。"
+  },
+  {
+   "id": "hk-research-team-and-payments",
+   "importance": "normal",
+   "target_kind": "required_business",
+   "quantity_basis": "total",
+   "modality": "actual",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 11,
+      "location_kind": "page",
+      "exact_quote": "擁有超過950名科研人員。公司\n取得的商業化上市批准、臨床數據及合作項目均證明瞭他們的實力，其中合作項目為公司帶來了14億美\n元的合作付款"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "肿瘤研究团队超950名科研人员",
+    "合作项目累计带来14亿美元合作付款（累计口径）"
+   ],
+   "must_not_assert": [
+    "14亿美元为2022年单年合作收入"
+   ],
+   "reason": "累计合作付款与当期合作收入的口径差异（2022年合作收入仅$161,309千）。"
+  },
+  {
+   "id": "hk-alpine-first-in-class",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "unknown",
+   "modality": "actual",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 12,
+      "location_kind": "page",
+      "exact_quote": "ALPINE頭對頭試驗的數據顯示，百悅澤®是首個且唯\n一一個有效性優於伊布替尼的BTK抑制劑，該試驗數據也入選了2022年末美國血液學會(ASH)年會中久\n負盛名的最新突破板塊進行展示，同時獲《新英格蘭醫學雜誌》刊發"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "ALPINE头对头试验",
+    "首个且唯一有效性优于伊布替尼的BTK抑制剂",
+    "ASH最新突破板块+NEJM发表"
+   ],
+   "must_not_assert": [
+    "所有终点均优于（该句为有效性/缓解口径）",
+    "百泽安也优于伊布替尼"
+   ],
+   "reason": "同管线头对头证据强度与范围限定。"
+  },
+  {
+   "id": "hk-tislei-10-indications",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "count",
+   "modality": "actual",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 12,
+      "location_kind": "page",
+      "exact_quote": "其目前已經在中國獲批用於十項適應症"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "截至2022年报百泽安中国获批十项适应症（2022年6月IR口径为9项）"
+   ],
+   "must_not_assert": [
+    "2022年6月时已获批十项（期间口径）",
+    "十项为全球获批数"
+   ],
+   "reason": "期间口径序列（9→10→13）中2022年报节点：十项。"
+  },
+  {
+   "id": "hk-zanubrutinib-65-markets",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "count",
+   "modality": "actual",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 12,
+      "location_kind": "page",
+      "exact_quote": "百悅澤®目前已在共計超過65個市場獲批，並有其他正在審評中或計劃遞交的上市\n申請"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "截至2022年报百悦泽获批市场超65个（2024H1口径为超70个）"
+   ],
+   "must_not_assert": [
+    "2022年已获批70个市场",
+    "65个市场均为自研商业化（含经销商市场）"
+   ],
+   "reason": "获批市场数的期间口径与来源（自主+经销商申报）。"
+  },
+  {
+   "id": "hk-commercial-footprint",
+   "importance": "normal",
+   "target_kind": "required_business",
+   "quantity_basis": "count",
+   "modality": "actual",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 12,
+      "location_kind": "page",
+      "exact_quote": "規模超過3,500人，以將藥品帶給全球患者。中國的商業化\n團隊正在積極推動我們的自主研發及合作藥物在實體瘤和血液學領域的應用。百悅澤®和百澤安®已經分\n別在中國BTK抑制劑及PD-1/PDL-1類別藥物市場取得了領先地位，我們也上市並銷售來自於我們全球\n商業合作夥伴的超過13款產品"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "国际化商业化团队超3,500人",
+    "上市销售合作产品超13款（2024H1口径14款）"
+   ],
+   "must_not_assert": [
+    "13款产品均为自研",
+    "商业化团队3,500人覆盖美国市场销售主体为经销商"
+   ],
+   "reason": "商业化规模口径：自研3款+合作13款必须分开。"
+  },
+  {
+   "id": "hk-2023-expectation",
+   "importance": "normal",
+   "target_kind": "required_business",
+   "quantity_basis": "projected_output",
+   "modality": "plan",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 12,
+      "location_kind": "page",
+      "exact_quote": "並預期在2023年及以後，收入會繼續大幅增長。我們預計短期內產品收入增\n長能夠超過經營費用增長"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "预期2023年及以后收入大幅增长（预期）",
+    "预计短期内产品收入增速超过经营费用增速"
+   ],
+   "must_not_assert": [
+    "预期已实现",
+    "公司承诺收入增长"
+   ],
+   "reason": "前瞻预期：亏损背景下的增长预期与费用纪律预期。"
+  },
+  {
+   "id": "hk-option-fee-constrained",
+   "importance": "critical",
+   "target_kind": "disposition_context",
+   "quantity_basis": "total",
+   "modality": "conditional",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 158,
+      "location_kind": "page",
+      "exact_quote": "歐司珀利單抗協議下的選擇權行使費取決於諾華公司是否行使其權利，並且在選擇權被行使之前被視為完全\n受限"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "欧司珀利单抗选择权行使费在行使前完全受限（收入确认约束）",
+    "里程碑付款因不确定性初始排除"
+   ],
+   "must_not_assert": [
+    "选择权费用已确认为2022年收入",
+    "里程碑付款已在签约时确认"
+   ],
+   "reason": "收入确认条件：受限/递延规则决定合作收入口径，是理解合作收入下降的钥匙。"
+  }
+ ],
+ "schema_version": "du-gold/1",
+ "scope": "holdout",
+ "support_set_frozen_before_output": true,
+ "notes": "W18-CWP-HOLDOUT（冻结于2026-10-25）。百济神州港股2022年度报告（繁体中文，US GAAP千美元）。有界阅读：完整阅读PDF第10-12页（业务与战略）、152页（财务概要）、156-158页（MD&A收入确认），扫读目录/公司资料/前瞻陈述/风险页后冻结support set，未查看任何候选输出。prior_use=fresh。指定陷阱：产品收入vs合作收入方向相反、亏损扩大（非收窄）、现金存量下降、US GAAP口径（非HKFRS）、无VIE否定、选择权费用收入确认受限、获批市场/适应症数的期间口径（65/十项@2022年报）。"
+}

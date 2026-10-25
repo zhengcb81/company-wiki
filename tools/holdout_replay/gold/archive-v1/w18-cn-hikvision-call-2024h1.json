@@ -1,0 +1,407 @@
+{
+ "sample_id": "w18-cn-hikvision-call-2024h1",
+ "market": "CN",
+ "company": "海康威视",
+ "language": "zh",
+ "source_sha256": "65305c5c67625f2d19020d59e748b45a4503ee179088b0113580bfbe23fdfcbc",
+ "expected_route_families": [
+  "earnings_call",
+  "investor_call_transcript"
+ ],
+ "facts": [
+  {
+   "id": "hik-rev-up-profit-down",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "period_flow",
+   "modality": "actual",
+   "role": "management_prepared",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "location_kind": "document",
+      "exact_quote": "实现营业总收入412.09亿元，比上年同期增长9.68%，实现归属上市公司股东的净利润50.64亿元，比上年同期下降5.13%"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "营业总收入412.09亿元、同比+9.68%",
+    "归母净利润50.64亿元、同比-5.13%",
+    "收入与利润方向背离（激励注销费用与汇兑影响）"
+   ],
+   "must_not_assert": [
+    "净利润随营业收入增长",
+    "利润下降5.13%系收入下滑所致"
+   ],
+   "reason": "方向背离是本样本核心口径事实：收入增长而归母净利润下降，下降主因见一次性费用与汇兑两项目标。"
+  },
+  {
+   "id": "hik-deducted-np-up",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "period_flow",
+   "modality": "actual",
+   "role": "management_prepared",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "location_kind": "document",
+      "exact_quote": "实现归属上市公司股东的扣除非经常性损益的净利润52.43亿元，比上年同期增长4.11%"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "扣非归母净利润52.43亿元、同比+4.11%",
+    "与归母净利润口径不同（扣非为增长）"
+   ],
+   "must_not_assert": [
+    "公司扣非净利润下降",
+    "扣非与归母净利润同向变动"
+   ],
+   "reason": "扣非口径同比增长而归母口径下降，两口径必须分开；混淆即错。"
+  },
+  {
+   "id": "hik-three-bg-decline",
+   "importance": "normal",
+   "target_kind": "required_business",
+   "quantity_basis": "period_flow",
+   "modality": "actual",
+   "role": "management_prepared",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "location_kind": "document",
+      "exact_quote": "三个BG营收总和189.71亿元，比上年同期下降0.26%，占公司营收46%"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "三BG合计189.71亿元、同比-0.26%",
+    "占营收46%"
+   ],
+   "must_not_assert": [
+    "三个BG均增长",
+    "国内主业增长"
+   ],
+   "reason": "国内三BG合计微降，与公司整体营收增长背离（海外/创新业务拉动）。"
+  },
+  {
+   "id": "hik-funding-differentiation",
+   "importance": "normal",
+   "target_kind": "disposition_context",
+   "quantity_basis": "unknown",
+   "modality": "actual",
+   "role": "management_prepared",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "location_kind": "document",
+      "exact_quote": "依赖地方财政资金投入的行业普遍比较困难，依靠自身资金为主发展的行业保持一定的投资，得到国债支持的领域则相对活跃"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "地方财政资金行业困难/自筹资金行业保持投资/国债支持领域活跃的三分归因"
+   ],
+   "must_not_assert": [
+    "行业困难与资金来源无关",
+    "全部行业需求下滑"
+   ],
+   "reason": "管理层对需求分化的资金面归因，是后续BG/行业判断的前提语境。"
+  },
+  {
+   "id": "hik-overseas-28pct-sanction",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "period_flow",
+   "modality": "actual",
+   "role": "management_prepared",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "location_kind": "document",
+      "exact_quote": "另外主业方面，上半年实现营收114.41亿元，同比增长15.46%。海外主业收入占公司业务比重约28%"
+     },
+     {
+      "location_kind": "document",
+      "exact_quote": "受美国制裁影响，美国的营收持续下行，收入占比持续降低，剔除美国市场的影响，美洲、泛欧、泛亚太、中、东非4个大区均实现增长"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "海外主业114.41亿元、同比+15.46%",
+    "海外占约28%为不含创新业务的主业口径",
+    "含创新业务口径为34.41%",
+    "美国营收持续下行、占比持续降低（仅定性，无数字）",
+    "剔除美国后四大区均增长"
+   ],
+   "must_not_assert": [
+    "美国营收具体金额或占比数字",
+    "公司披露美国市场收入同比变化"
+   ],
+   "reason": "海外口径有28%/34.41%两层；美国制裁影响为定性表述（持续下行/占比降低），原文未给任何美国数字，编造数字即错。"
+  },
+  {
+   "id": "hik-dev-vs-developed-73",
+   "importance": "normal",
+   "target_kind": "required_business",
+   "quantity_basis": "ratio",
+   "modality": "actual",
+   "role": "management_prepared",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "location_kind": "document",
+      "exact_quote": "目前海外发展中国家与发达国家的营收贡献比例约为7:3"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "发展中:发达国家营收贡献约7:3",
+    "约"
+   ],
+   "must_not_assert": [
+    "发展中国家与发达国家7:3为精确披露",
+    "发达国家贡献约7成"
+   ],
+   "reason": "海外结构比例，方向性约数。"
+  },
+  {
+   "id": "hik-equity-incentive-oneoff",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "total",
+   "modality": "actual",
+   "role": "management_prepared",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "location_kind": "document",
+      "exact_quote": "这笔费用金额是4.71亿元，按照被激励员工的归属，记录了二季度的销售管理和研发费用中，并标记为非经常损益"
+     },
+     {
+      "location_kind": "document",
+      "exact_quote": "注销的股份数是9740多万股，占比占总股本的比例是1.0439%"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "注销2021年股权激励产生一次性费用4.71亿元",
+    "全部计入二季度费用并标记为非经常损益",
+    "注销股份9740多万股、占总股本1.0439%"
+   ],
+   "must_not_assert": [
+    "经营性费用率大幅上升",
+    "该4.71亿元为经常性费用"
+   ],
+   "reason": "一次性、非经常标记与股份数是三件必须同时成立的事实；去掉非经常标记即口径错误。"
+  },
+  {
+   "id": "hik-fx-direction",
+   "importance": "normal",
+   "target_kind": "required_business",
+   "quantity_basis": "period_flow",
+   "modality": "actual",
+   "role": "management_prepared",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "location_kind": "document",
+      "exact_quote": "本期的汇兑损失约为8,100万元，去年同期产生的汇兑损益约为2.85亿元"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "本期汇兑损失约8,100万元",
+    "去年同期为汇兑收益约2.85亿元",
+    "两期方向相反"
+   ],
+   "must_not_assert": [
+    "两期均为汇兑损失",
+    "本期汇兑损失2.85亿元"
+   ],
+   "reason": "期间与方向双重分离：本期损失vs上年收益。"
+  },
+  {
+   "id": "hik-guidance-wide-140",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "projected_output",
+   "modality": "plan",
+   "role": "management_prepared",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "location_kind": "document",
+      "exact_quote": "也有很多的投资人就是来询问是不是公司要下调预期，现在看确实我们也要调整预期，至于现在给到多少预期，我感觉挺难的"
+     },
+     {
+      "location_kind": "document",
+      "exact_quote": "初步还是给一个宽泛的目标，还是比较2023年就还是140往上去看，但具体能看到多少，现在我也说不好"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "口头承认需调整预期",
+    "初步/宽泛的目标、较2023年140往上看",
+    "具体数字现在说不好"
+   ],
+   "must_not_assert": [
+    "公司正式发布全年140亿（元）业绩指引",
+    "公司确认140为净利润目标口径",
+    "公司给出确定数字"
+   ],
+   "reason": "条件性口头指引：仅宽泛上行参照且未说明口径，不得固化为正式指引数字。"
+  },
+  {
+   "id": "hik-positive-growth-confirm",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "projected_output",
+   "modality": "plan",
+   "role": "management_answer",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "location_kind": "document",
+      "exact_quote": "今年的话咱们现在还是维持一个正增长的业绩预期。这个是可以确认这一点是吗？"
+     },
+     {
+      "location_kind": "document",
+      "exact_quote": "对，从公司的角度，我们还是对市场还是抱乐观的看法"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "公司确认维持全年正增长的业绩预期",
+    "问答归属：提问+管理层肯定回答"
+   ],
+   "must_not_assert": [
+    "公司确认140亿净利润目标",
+    "公司给出正增长的幅度"
+   ],
+   "reason": "与本样本另一目标（宽泛140）构成计划vs确认对比：正增长被明确确认，幅度未确认。"
+  },
+  {
+   "id": "hik-auto-electronics-merger",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "period_flow",
+   "modality": "actual",
+   "role": "management_answer",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "location_kind": "document",
+      "exact_quote": "汽车电子大家就是看到数据的话同比增长超过了60，那么其中有一块是因为汽车电子去年完成了跟我们的雷达的一个子公司的重组合并，那么叫森斯泰克，所以合并之后有一块收入的提升是森斯泰克的业务笔录带来的影响"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "汽车电子同比增长超60%",
+    "其中一块来自森斯泰克重组合并（并表）",
+    "ASR转写'业务笔录'保留疑词原样"
+   ],
+   "must_not_assert": [
+    "内生增速超60%",
+    "森斯泰克并表前汽车电子也增长超60%"
+   ],
+   "reason": "并表vs内生必须分离；'笔录'为'并表'ASR疑词，按原文保留不得静默改写。"
+  },
+  {
+   "id": "hik-headcount-plan-vs-actual",
+   "importance": "normal",
+   "target_kind": "required_business",
+   "quantity_basis": "count",
+   "modality": "plan",
+   "role": "management_answer",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "location_kind": "document",
+      "exact_quote": "今年的全年的人员编制大概控制在5%以内，到目前为止应该是大我印象里可能在2%左右的增长"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "全年编制计划控制在5%以内（4月口径）",
+    "目前约2%增长且为'印象里'记忆口径"
+   ],
+   "must_not_assert": [
+    "公司披露精确在册人数",
+    "已超5%编制增长"
+   ],
+   "reason": "计划上限与当前约数的双重口径，且当前值为口头记忆约数。"
+  },
+  {
+   "id": "hik-comparable-profit-estimate",
+   "importance": "normal",
+   "target_kind": "disposition_context",
+   "quantity_basis": "period_flow",
+   "modality": "actual",
+   "role": "management_answer",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "location_kind": "document",
+      "exact_quote": "去掉股权激励费用和包括汇兑损益的两个两个影响，就是按照可比口径的话，利润同比可能在9% 10%左右，我毛算算大概是这样子"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "剔除股权激励费用与汇兑损益的可比口径",
+    "约9%-10%",
+    "我毛算算（粗略估计）"
+   ],
+   "must_not_assert": [
+    "公司正式披露可比口径利润增速9%-10%",
+    "该口径为审计/定期报告数字"
+   ],
+   "reason": "口头粗算的非正式口径，估计性质必须保留。"
+  },
+  {
+   "id": "hik-fiber-model-error-drop",
+   "importance": "normal",
+   "target_kind": "required_business",
+   "quantity_basis": "ratio",
+   "modality": "actual",
+   "role": "management_answer",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "location_kind": "document",
+      "exact_quote": "光纤大模型大概现在积累了3.5万小时的这样的一个数据，那么也在钢铁、煤炭、电力的行业，像这种皮带这种故障检测的产品当中做了应用，相比于传统的这种模型，故障诊断的错误率大概下降了有超过70%"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "光纤大模型3.5万小时数据",
+    "对比基准为传统模型",
+    "故障诊断错误率下降超70%"
+   ],
+   "must_not_assert": [
+    "错误率下降至70%以下绝对值",
+    "相对人工作业下降70%"
+   ],
+   "reason": "比较基准是'传统模型'；基数与比较对象不能替换。"
+  }
+ ],
+ "schema_version": "du-gold/1",
+ "scope": "holdout",
+ "support_set_frozen_before_output": true,
+ "notes": "W18-CWP-HOLDOUT（冻结于2026-10-25）。海康威视2024年半年度业绩说明电话会议原语言DOCX转写（2024-08-17），全文250段全部阅读后再冻结support set，未查看任何候选选择输出。prior_use=fresh：公司名仅见于n5 raw-duplicate-audit（另一份PDF的路径/哈希元数据）、security_master身份清单与n6 footprint扫描；本转写原件与内容此前未被读取、未进入任何benchmark gold或调参记录。指定陷阱：口径分离（归母vs扣非、可比口径毛算）、并表vs内生（森斯泰克/ASR'笔录'疑词）、指引条件性（宽泛140vs确认正增长）、美国营收截断不得编数。"
+}

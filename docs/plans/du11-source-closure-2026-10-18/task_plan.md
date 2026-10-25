@@ -1,5 +1,9 @@
 # 当前行动计划（2026-10-25更新）
 
+## 最新插入节点：W18 ROOT接收
+
+作者已交付；当前唯一动作是完成[W18集中接收](review/package-reception-w18-20261025/README.md)的根修终审、正常并线发布及冻结候选真实回放。9项中性RED、完整28P、v4 gold10P已留证；等待ROOT最终独审和真实兼容回放。完成后回到下方PDF-C2/C3，不重做C1。W19、作者工区和既有WIP不动。
+
 ## 2026-10-25 当前行动：PDF-C1发布验收完成，进入PDF-C2
 
 **研究比较与单层阅读边界已完成；整个PDF升级和公司循环尚未完成。** 选定原生canonical文字/locator＋按需Docling段落结构方向。统一`PdfReading`已在生产路径收拢read/select、内部重读兼容、配方/producer、material验证和replay；AUTO只传逻辑任务、统一账户/deadline，select/verify同一owner，不挑SDK/options，摘要继续共享阅读协议。

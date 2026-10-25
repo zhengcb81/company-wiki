@@ -1,0 +1,386 @@
+{
+ "sample_id": "w18-cn-zijin-fy2025",
+ "market": "CN",
+ "company": "紫金矿业",
+ "language": "zh",
+ "source_sha256": "01819e1c7daad939d1779a8aa729f50f02151192e609cb28c2c405634a8f343d",
+ "expected_route_families": [
+  "annual",
+  "cn_annual_report"
+ ],
+ "facts": [
+  {
+   "id": "zj-2025-production",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "period_flow",
+   "modality": "actual",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 34,
+      "location_kind": "page",
+      "exact_quote": "实现矿产金90 吨、矿产铜109 万吨、当量碳酸锂2.55 万吨、矿产锌（铅）40 万吨、\n矿产银439 吨"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "2025年矿产金90吨/矿产铜109万吨/当量碳酸锂2.55万吨/矿产锌铅40万吨/矿产银439吨"
+   ],
+   "must_not_assert": [
+    "矿产铜109万吨为2026年计划产量",
+    "当量碳酸锂2.55万吨为2028年规划产能"
+   ],
+   "reason": "全年产量五品种基数；与2026-2028计划严格分开（计划口径见zj-plan-disclaimer：2026E铜120万吨、2028E 150-160万吨）。"
+  },
+  {
+   "id": "zj-profit-triple-growth",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "period_flow",
+   "modality": "actual",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 34,
+      "location_kind": "page",
+      "exact_quote": "实现息税折旧摊销前利润1,014 亿元、利润总额808 亿元、归母净利润518 亿元，分\n别同比大幅增长60%、68%、62%"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "EBITDA 1,014亿元(+60%)/利润总额808亿元(+68%)/归母净利润518亿元(+62%)",
+    "三个指标的增幅各不相同"
+   ],
+   "must_not_assert": [
+    "三项指标均增长62%",
+    "518亿元为利润总额（归母净利润口径）"
+   ],
+   "reason": "三项利润指标与各自增幅一一对应，不可串位。"
+  },
+  {
+   "id": "zj-balance-ratio-down",
+   "importance": "normal",
+   "target_kind": "required_business",
+   "quantity_basis": "ratio",
+   "modality": "actual",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 34,
+      "location_kind": "page",
+      "exact_quote": "资产总额5,120 亿元、归母净资产1,855 亿元，分别较期初增长29% 和33%；资产负债率下降至51.56%"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "期末资产负债率降至51.56%",
+    "期末资产总额5,120亿元(+29%)、归母净资产1,855亿元(+33%)"
+   ],
+   "must_not_assert": [
+    "负债率上升",
+    "51.56%为年末 target 上限"
+   ],
+   "reason": "杠杆方向：下降+精确值。"
+  },
+  {
+   "id": "zj-plan-disclaimer",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "projected_output",
+   "modality": "plan",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 10,
+      "location_kind": "page",
+      "exact_quote": "鉴于市场环境复杂多变，本计划为指导性指标，存在不确定性，不构成对产量实现的承诺，公司有权根据情况变化，对本计划作出相应调整"
+     },
+     {
+      "page": 10,
+      "location_kind": "page",
+      "exact_quote": "矿产铜/ 万吨\n107\n109\n120\n150-160"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "2026-2028产量计划为指导性指标、不构成承诺",
+    "矿产铜2025实际109/2026E 120/2028E 150-160万吨",
+    "矿产金90/105/130-140吨",
+    "锂LCE 2.55/12/27-32万吨"
+   ],
+   "must_not_assert": [
+    "150-160万吨为公司承诺产量",
+    "2026E数字为已实现产量"
+   ],
+   "reason": "计划vs实际的显式免责：指导性指标+区间+不构成承诺三要素。"
+  },
+  {
+   "id": "zj-lithium-2028-plan",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "projected_output",
+   "modality": "plan",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 11,
+      "location_kind": "page",
+      "exact_quote": "公司规划至2028 年形成27-32 万吨当量碳\n酸锂产能，成为全球最重要锂生产商之一"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "2028年形成27-32万吨当量碳酸锂产能（规划）",
+    "'成为全球最重要锂生产商之一'的愿景表述"
+   ],
+   "must_not_assert": [
+    "已成为全球最重要锂生产商（规划愿景）",
+    "27-32万吨为2025年已达产能"
+   ],
+   "reason": "锂板块规划目标与愿景的虚拟性质。"
+  },
+  {
+   "id": "zj-manono-date-plan",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "capacity_new",
+   "modality": "plan",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 11,
+      "location_kind": "page",
+      "exact_quote": "马诺诺锂矿东北部项目计划2026 年6 月\n底投产，项目毗邻的Mpiana-Mwanga 水\n电站一阶段修复工程已完成，实现装机容量约\n37.5MW"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "马诺诺东北部项目计划2026年6月底投产（计划）",
+    "配套水电站一阶段修复已完成、装机约37.5MW（已发生）"
+   ],
+   "must_not_assert": [
+    "马诺诺项目已投产",
+    "水电站全部完工"
+   ],
+   "reason": "同一项目内计划（投产日期）与已完成（水电站一阶段）分离，日期不得提前。"
+  },
+  {
+   "id": "zj-julong-phase-conditional",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "capacity_total",
+   "modality": "conditional",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 11,
+      "location_kind": "page",
+      "exact_quote": "巨龙铜矿二期改扩建工程建成投产，年产铜\n将达30-35 万吨，成为中国最大的铜矿山；\n若巨龙铜矿三期工程获得批准，达产后年产铜\n约60 万吨"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "二期已建成投产、年产铜将达30-35万吨",
+    "三期若获批准、达产后约60万吨（条件式）"
+   ],
+   "must_not_assert": [
+    "三期已获批或已投产",
+    "60万吨为现有产能",
+    "巨龙当前年产量已达30-35万吨（达产后将达）"
+   ],
+   "reason": "二期已建/三期条件式的三重分离：建成≠达产，达产≠获批三期。"
+  },
+  {
+   "id": "zj-kamoa-recovery",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "capacity_total",
+   "modality": "actual",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 11,
+      "location_kind": "page",
+      "exact_quote": "卡莫阿铜矿卡库拉矿段东区的排水及复产工\n作有序推进，产能正在逐步恢复；配套的50 万\n吨/ 年铜冶炼厂建成并形成新的增长点"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "卡库拉东区排水及复产有序推进、产能逐步恢复（进行中）",
+    "配套50万吨/年铜冶炼厂建成"
+   ],
+   "must_not_assert": [
+    "卡莫阿已完全复产",
+    "冶炼厂产能属卡莫阿以外的公司全资资产（为配套项目）"
+   ],
+   "reason": "恢复进行时与配套冶炼厂建成事件的分离。"
+  },
+  {
+   "id": "zj-serbia-europe-second",
+   "importance": "normal",
+   "target_kind": "required_business",
+   "quantity_basis": "capacity_total",
+   "modality": "conditional",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 11,
+      "location_kind": "page",
+      "exact_quote": "丘卡卢- 佩吉铜金矿、博尔铜矿联合成为欧\n洲第二大矿产铜企业，正在加快推进年总产铜\n45 万吨改扩建工程，有望联合晋升为欧洲第一\n大矿产铜企业"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "塞尔维亚两矿联合已成为欧洲第二大矿产铜企业",
+    "45万吨改扩建推进中",
+    "'有望'晋升欧洲第一（可能性）"
+   ],
+   "must_not_assert": [
+    "已成为欧洲第一大矿产铜企业",
+    "年总产铜45万吨改扩建工程已建成"
+   ],
+   "reason": "已实现（第二）vs进行中（改扩建）vs可能（第一）的时态分层。"
+  },
+  {
+   "id": "zj-zijin-gold-ipo",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "total",
+   "modality": "actual",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 34,
+      "location_kind": "page",
+      "exact_quote": "顺利完成紫金黄金国际分\n拆上市，募集资金287 亿港元，是迄今为止全球黄金开采行业规模最大IPO、中国矿业企业规模最大境外IPO"
+     },
+     {
+      "page": 34,
+      "location_kind": "page",
+      "exact_quote": "公司于\n2026 年1 月以负收益率形式，成功发行15 亿美元零息H 股可转债，40% 的最终转股溢价率是亚太地区有史以来矿业类\n可转债最高转股溢价率"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "紫金黄金国际分拆上市募资287亿港元（港元）",
+    "全球黄金开采行业规模最大IPO",
+    "2026年1月发行15亿美元零息H股可转债（美元）",
+    "40%最终转股溢价率",
+    "负收益率形式"
+   ],
+   "must_not_assert": [
+    "紫金黄金国际IPO募资287亿美元",
+    "15亿美元可转债发行于2025年报告期内",
+    "可转债为增发股票"
+   ],
+   "reason": "币种（港元/美元）+时点（报告期后2026-01事件在年报披露）+工具（可转债）三重口径。"
+  },
+  {
+   "id": "zj-gold-price-context",
+   "importance": "normal",
+   "target_kind": "disposition_context",
+   "quantity_basis": "period_flow",
+   "modality": "third_party",
+   "role": "third_party",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 37,
+      "location_kind": "page",
+      "exact_quote": "LBMA 现货黄金收\n于4,308 美元/ 盎司，较年初大幅上涨约63%，年内累计\n创53 次历史收盘新高；全年均价达3,439 美元/ 盎司"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "LBMA现货金年末收4,308美元/盎司、较年初约+63%",
+    "年内53次收盘新高、全年均价3,439美元/盎司",
+    "数据归属LBMA（第三方市场数据）"
+   ],
+   "must_not_assert": [
+    "金价为公司经营数据",
+    "4,308美元/盎司为全年均价"
+   ],
+   "reason": "市场背景数据：收盘价与均价两个数、第三方归属（全年均价3,439美元/盎司）。"
+  },
+  {
+   "id": "zj-icsg-copper-supply",
+   "importance": "normal",
+   "target_kind": "disposition_context",
+   "quantity_basis": "projected_output",
+   "modality": "third_party",
+   "role": "third_party",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 37,
+      "location_kind": "page",
+      "exact_quote": "国际铜研究小组\n（ICSG）统计显示，受事故及品位下降影响，2025 年全球矿产铜产量增速约为1%"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "ICSG统计2025年全球矿产铜产量增速约1%",
+    "受事故及品位下降影响"
+   ],
+   "must_not_assert": [
+    "紫金自身矿产铜产量增速约为1%"
+   ],
+   "reason": "第三方全球数据与公司自身产量严格分开（公司2025年109万吨/2024年107万吨，自身增速约1.9%，与全球约1%不同）。"
+  },
+  {
+   "id": "zj-forbes-ranking",
+   "importance": "normal",
+   "target_kind": "disposition_context",
+   "quantity_basis": "count",
+   "modality": "third_party",
+   "role": "third_party",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 34,
+      "location_kind": "page",
+      "exact_quote": "位列《福布斯》全球上市公司2000 强第251 位，居其中上榜的全球金属矿业公司第4 位、全球\n黄金公司第1 位"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "福布斯全球2000强第251位",
+    "其中全球金属矿业第4位、全球黄金公司第1位",
+    "排名归属福布斯（第三方）"
+   ],
+   "must_not_assert": [
+    "公司为全球第一大金属矿业公司",
+    "《财富》世界500强排名第251位"
+   ],
+   "reason": "两个榜单（福布斯/财富）名次不同且均为第三方；《财富》世界500强排名为第365位（对照事实，非禁令）。"
+  }
+ ],
+ "schema_version": "du-gold/1",
+ "scope": "holdout",
+ "support_set_frozen_before_output": true,
+ "notes": "W18-CWP-HOLDOUT（冻结于2026-10-25）。紫金矿业2025年年度报告（A+H，601899.SH/2899.HK，中英双语版）。有界阅读：完整阅读第10-11页（产量与重要增量项目）、34页（MD&A概要）、37页（金属价格市场环境）后冻结support set，未查看任何候选输出。prior_use=local-unseen：该年报SHA曾出现在g2_steady_production_migration与r2_canary_retirement_preflight的目录迁移保留清单及n5 raw-duplicate-audit的路径/哈希核验（均为元数据操作，未读取内容、未进入任何gold或调参记录）。指定陷阱：产量计划指导性免责、巨龙二期已建vs三期条件式、马诺诺投产日期计划vs水电站已完成、港股IPO港元/可转债美元币种、LBMA/ICSG/福布斯第三方归属、三项利润指标增幅各不相同。"
+}

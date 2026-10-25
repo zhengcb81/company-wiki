@@ -1,0 +1,22 @@
+{
+  "command": [
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/holdout/w18/test_runner_boundaries.py",
+    "-k",
+    "worker_result_must_match_job or bootstrap_never_changes_existing_lake or existing_result",
+    "--basetemp",
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\cw-y_wksu99\\p"
+  ],
+  "exit_code": 1,
+  "seconds": 33.618,
+  "temporary_root_restored_absent": true,
+  "paid_calls": 0,
+  "downloads": 0
+}

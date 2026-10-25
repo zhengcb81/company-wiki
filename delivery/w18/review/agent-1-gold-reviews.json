@@ -1,0 +1,48 @@
+{
+  "reviewer": "independent agent 1 (source-side gold; not involved in implementation)",
+  "rounds": [
+    {
+      "round": "initial review",
+      "reviewed_code_commit": "6a3f14c4",
+      "verdict": "PASS_WITH_FINDINGS",
+      "document_integrity": "8/8 original SHA-256 and byte_size match manifest; 8/8 gold file SHA-256 match manifest",
+      "anchors_checked_total": {"facts": 96, "anchors": 113, "verified": 113, "failures": 0},
+      "semantic_checks": "36 spot checks across all 8 samples; cross-sample period chains (百泽安 9项@2022-06 -> 十项@2022年报 -> 13项@2024H1; 百悦泽 65->70 markets; Alphabet fiscal=calendar year) all verified against originals",
+      "prior_use_findings": "zijin local-unseen verified (metadata-only sightings); 曙光数创 vs 中科曙光 confirmed different company/SHA; all 7 fresh samples' SHAs have zero prior sightings; exclusion lists have no collision",
+      "freeze_order_findings": "freeze commit 5e4488bb (10:21:12Z) precedes first replay attempt (11:37Z) by 76 minutes; gold/manifest unchanged after freeze; producer deploy verified at ba8f8543",
+      "findings": [
+        {"id": "F1", "severity": "P2", "title": "ipo-approval-pathway-dates must_not_assert forbade a true proposition (百泽安 did start China sales before 百悦泽)", "disposition": "fixed in v2 (351ba6ae): prohibition reversed to the false proposition; no approval-order prohibition added (anchor carries no approval dates)"},
+        {"id": "F2", "severity": "P3", "title": "goog-tax-law-driver quote truncated mid-word", "disposition": "fixed in v2: quote completed to full clause"},
+        {"id": "F3", "severity": "P3", "title": "numeric must_preserve items without anchor coverage (6 sites)", "disposition": "fixed in v2: spans extended / companion anchors added (anchors 113->116)"},
+        {"id": "F4", "severity": "P3", "title": "zijin prior_use sighting enumeration incomplete (FC-504 canary_registry) and one unverifiable item", "disposition": "fixed in v2: FC-504 added; n5 item re-phrased as ephemeral/unverifiable-in-repo"},
+        {"id": "F5", "severity": "P3", "title": "interpretive additions beyond original wording (hik-fx 汇兑收益, goog-other-bets '一次性', h1-nrdl classification)", "disposition": "fixed in v2: original wording restored"},
+        {"id": "F6", "severity": "P3", "title": "true-value contrast parentheticals inside must_not_assert could trip naive matchers", "disposition": "fixed in v2/v3: contrasts moved to reason"}
+      ]
+    },
+    {
+      "round": "re-review of v2",
+      "reviewed_code_commit": "351ba6ae",
+      "verdict": "PASS",
+      "itemized_recheck": {
+        "diff_scope": "18 facts modified across 7 gold files; no fact added/removed; anchors 113->116; manifest v2 fields consistent",
+        "anchor_reverification": {"facts": 96, "anchors": 116, "verified": 116, "failures": 0},
+        "F1_truth_fix": "all modified must_not_assert now false propositions",
+        "archive_v1": "8/8 git blob hashes equal frozen commit 5e4488bb (CRLF checkout noted, pins self-consistent)",
+        "receipt_consistency": "baseline-summary v2 manifest sha matches; attempts preserved"
+      },
+      "new_findings": [
+        {"id": "N1", "severity": "P3", "title": "one fact change (zj-serbia) not logged in corrections; h1-nrdl preserve[0] wording unlogged", "disposition": "fixed in v3 (349a5548): both logged"},
+        {"id": "N2", "severity": "P3", "title": "5 remaining parenthetical true-value contrasts in must_not_assert", "disposition": "fixed in v3 + v3.1 (faa488a7): 4 cleaned in v3, residual h1-bgb16673-300 cleaned in v3.1"},
+        {"id": "N3", "severity": "P3", "title": "corrections manifest_changes over-claimed 'all 8 gold_sha256 updated' (7 updated, sugondata unchanged at v2)", "disposition": "fixed in v3: wording corrected"}
+      ]
+    },
+    {
+      "round": "final focus confirmation of v3",
+      "reviewed_code_commit": "349a5548",
+      "final_verdict": "PASS",
+      "verdict_note": "N1/N3 fully fixed; N2 executed 4/5 + 1 bonus; single residual P3 (h1-bgb16673-300) with no semantic/anchor/test impact",
+      "open_items": ["P3 residual h1-bgb16673-300 parenthetical + ledger over-claim"],
+      "disposition": "fixed in v3.1 (faa488a7): parenthetical removed (true value moved to reason with cross-reference), ledger entry appended and N2 wording corrected; anchors 116 unchanged, tests 20/20"
+    }
+  ]
+}

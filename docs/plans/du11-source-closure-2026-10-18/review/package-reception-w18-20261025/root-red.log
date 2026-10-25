@@ -1,0 +1,90 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\cw-y_wksu99\\p", "requested_basetemp_len": 48, "cwd_len": 34, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 18 items / 9 deselected / 9 selected
+
+tests\holdout\w18\test_runner_boundaries.py FFFFFFFFF                    [100%]
+
+================================== FAILURES ===================================
+______________ test_existing_result_refuses_and_preserves_bytes _______________
+tests\holdout\w18\test_runner_boundaries.py:334: in test_existing_result_refuses_and_preserves_bytes
+    with pytest.raises(ReplayError, match="ATTEMPT_EXISTS_NOT_OVERWRITING"):
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   Failed: DID NOT RAISE ReplayError
+---------------------------- Captured stdout setup ----------------------------
+warning: The `fitz` API is deprecated and will be removed in future. Use `import pymupdf` instead.
+_____________ test_worker_result_must_match_job[changed_original] _____________
+tests\holdout\w18\test_runner_boundaries.py:408: in test_worker_result_must_match_job
+    assert receipt["overall"] == "has_failures"
+E   AssertionError: assert 'ok' == 'has_failures'
+E     
+E     - has_failures
+E     + ok
+_______________ test_worker_result_must_match_job[wrong_sample] _______________
+tests\holdout\w18\test_runner_boundaries.py:408: in test_worker_result_must_match_job
+    assert receipt["overall"] == "has_failures"
+E   AssertionError: assert 'ok' == 'has_failures'
+E     
+E     - has_failures
+E     + ok
+______________ test_worker_result_must_match_job[wrong_producer] ______________
+tests\holdout\w18\test_runner_boundaries.py:408: in test_worker_result_must_match_job
+    assert receipt["overall"] == "has_failures"
+E   AssertionError: assert 'ok' == 'has_failures'
+E     
+E     - has_failures
+E     + ok
+_______________ test_worker_result_must_match_job[wrong_schema] _______________
+tests\holdout\w18\test_runner_boundaries.py:408: in test_worker_result_must_match_job
+    assert receipt["overall"] == "has_failures"
+E   AssertionError: assert 'ok' == 'has_failures'
+E     
+E     - has_failures
+E     + ok
+__________________ test_worker_result_must_match_job[array] ___________________
+tests\holdout\w18\test_runner_boundaries.py:406: in test_worker_result_must_match_job
+    receipt = run_replay(producer_root=repo, producer_commit=commit, manifest_path=manifest,
+tools\holdout_replay\runner.py:210: in run_replay
+    if payload.get("model_view", {}).get("request_sent"):
+       ^^^^^^^^^^^
+E   AttributeError: 'list' object has no attribute 'get'
+______________ test_worker_result_must_match_job[bad_model_view] ______________
+tests\holdout\w18\test_runner_boundaries.py:406: in test_worker_result_must_match_job
+    receipt = run_replay(producer_root=repo, producer_commit=commit, manifest_path=manifest,
+tools\holdout_replay\runner.py:210: in run_replay
+    if payload.get("model_view", {}).get("request_sent"):
+       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'list' object has no attribute 'get'
+______________ test_bootstrap_never_changes_existing_lake[False] ______________
+tests\holdout\w18\test_runner_boundaries.py:436: in test_bootstrap_never_changes_existing_lake
+    assert cli.cmd_bootstrap_lake(args) == 2
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tools\holdout_replay\__main__.py:109: in cmd_bootstrap_lake
+    completed = subprocess.run(command, env=env, capture_output=True, text=True,
+tests\holdout\w18\test_runner_boundaries.py:434: in unexpected
+    pytest.fail("registration reached before safe lake claim")
+E   Failed: registration reached before safe lake claim
+______________ test_bootstrap_never_changes_existing_lake[True] _______________
+tests\holdout\w18\test_runner_boundaries.py:437: in test_bootstrap_never_changes_existing_lake
+    assert (config.read_bytes(), config.stat().st_mtime_ns) == before
+E   assert (b'schema_ver...0611441007600) == (b'existing p...0610232258600)
+E     
+E     At index 0 diff: b'schema_version: "1.0"\r\ncatalog_dir: "C:/Users/\xe9\x83\x91\xe6\x9b\xbe\xe6\xb3\xa2/Projects/company-wiki/cw-y_wksu99/p/test_bootstrap_never_changes_e1/existing-lake/.source_catalog"\r\nroots:\r\n  - root_id: w18_lake\r\n    kind: company_raw\r\n    path: "C:/Users/\xe9\x83\x91\xe6\x9b\xbe\xe6\xb3\xa2/Projects/company-wiki/cw-y_wksu99/p/test_bootstrap_never_changes_e1/elsewhere"\r\n    priority: 10\r\n' != b'existing production configuration'
+E     Use -v to get more diff
+---------------------------- Captured stdout call -----------------------------
+{"status": "refused", "reason": "binding outside --source-root: 'C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\cw-y_wksu99\\\\p\\\\test_bootstrap_never_changes_e1\\\\call.txt' is not in the subpath of 'C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\cw-y_wksu99\\\\p\\\\test_bootstrap_never_changes_e1\\\\elsewhere'"}
+=========================== short test summary info ===========================
+FAILED tests/holdout/w18/test_runner_boundaries.py::test_existing_result_refuses_and_preserves_bytes
+FAILED tests/holdout/w18/test_runner_boundaries.py::test_worker_result_must_match_job[changed_original]
+FAILED tests/holdout/w18/test_runner_boundaries.py::test_worker_result_must_match_job[wrong_sample]
+FAILED tests/holdout/w18/test_runner_boundaries.py::test_worker_result_must_match_job[wrong_producer]
+FAILED tests/holdout/w18/test_runner_boundaries.py::test_worker_result_must_match_job[wrong_schema]
+FAILED tests/holdout/w18/test_runner_boundaries.py::test_worker_result_must_match_job[array]
+FAILED tests/holdout/w18/test_runner_boundaries.py::test_worker_result_must_match_job[bad_model_view]
+FAILED tests/holdout/w18/test_runner_boundaries.py::test_bootstrap_never_changes_existing_lake[False]
+FAILED tests/holdout/w18/test_runner_boundaries.py::test_bootstrap_never_changes_existing_lake[True]
+====================== 9 failed, 9 deselected in 26.78s =======================

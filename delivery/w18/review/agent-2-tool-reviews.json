@@ -1,0 +1,42 @@
+{
+  "reviewer": "independent agent 2 (engineering diff + H-items; not involved in implementation)",
+  "rounds": [
+    {
+      "round": "initial review",
+      "reviewed_code_commit": "6a3f14c4",
+      "verdict": "PASS_WITH_FINDINGS",
+      "h_items": {"H01": "PASS", "H02": "PASS", "H03": "PASS", "H04": "PASS", "H05": "PASS",
+                  "H06": "NOT_APPLICABLE", "H07": "PASS", "H08": "PASS", "H09": "PASS",
+                  "H10": "PASS", "H11": "PASS"},
+      "test_run": {"command": "python -X utf8 -m pytest -q tests/holdout/w18", "exit_code": 0, "passed": 19},
+      "independent_rechecks": "H02 exclusion SHA pool re-derived from DU gold x28 + du5_manifest + m1/inventory JSONs and raw-grepped against the 8 candidate SHAs: zero collision; summary numbers (96/10/16/73/0, DUB 8/41/22/25) independently recomputed from attempt records with 0 mismatch; all receipt SHAs hash-verified",
+      "findings": [
+        {"id": "D1", "severity": "P3", "title": "selector version skew between observe path (production default) and compile path (hardcoded 0.9.0) not disclosed", "disposition": "fixed: _selector_versions stamps both per artifact; compile_selector_version CLI/job plumbing; findings.md disclosure"},
+        {"id": "D2", "severity": "P3", "title": "network_calls/model_posts constants could read as measurements", "disposition": "fixed: zero_network_by_construction note field"},
+        {"id": "D3", "severity": "P3", "title": "load_manifest did not reject duplicate content_sha256 across samples", "disposition": "fixed + new test"},
+        {"id": "D4", "severity": "P3", "title": "bootstrap-lake binding outside source-root raised raw traceback", "disposition": "fixed: JSON refused exit 2"},
+        {"id": "D5", "severity": "P3", "title": "corrupt worker result crashed run_replay before attempt.json written", "disposition": "fixed: WORKER_RESULT_UNREADABLE row, receipt still written, corrupt evidence preserved"},
+        {"id": "D6", "severity": "P3", "title": "DU-BENCH module import root not recorded", "disposition": "fixed: recorded and asserted under producer root"}
+      ]
+    },
+    {
+      "round": "re-review of D1-D6 + gold v2/v3",
+      "reviewed_code_commit": "349a5548",
+      "verdict": "PASS",
+      "independent_rechecks": "D3 (twin-sample manifest -> ManifestError), D4 (CLI-triggered out-of-root binding -> JSON refused), D5 (truncated worker JSON -> failed row + receipt written + corrupt file byte-preserved) all exercised with self-built neutral scenarios, not just code reading; gold v1 archive content-compared to frozen commit; attempt-3 'identical outcomes' independently recomputed (0 fact-level diff vs v1 attempt)",
+      "new_findings": [
+        {"id": "N1", "severity": "P3", "title": "SHA pins bound to CRLF working-tree bytes; LF checkout would fail-closed", "disposition": "fixed: sha256_committed_bytes LF-normalized pins, verified 8/8 == HEAD blob sha == normalized worktree sha"},
+        {"id": "N2", "severity": "P3", "title": "'byte-identical archive' wording vs CRLF working-tree copies", "disposition": "fixed: wording corrected in findings.md and corrections policy (28f06a9a)"},
+        {"id": "N3", "severity": "P3", "title": "_selector_versions hardcoded pinned value instead of job value", "disposition": "fixed: stamps actual compile_selector_version"},
+        {"id": "N4", "severity": "P3", "title": "duplicate-sha check ran before source_ref structure validation (KeyError instead of ManifestError)", "disposition": "fixed: check moved after validation"}
+      ]
+    },
+    {
+      "round": "final diff confirmation",
+      "reviewed_code_commit": "faa488a7",
+      "final_verdict": "PASS",
+      "evidence": "diff 349a5548..faa488a7 confined to stated fixes; ruff=0, pytest 20/20 (41.1s) independently rerun; N1 verified 8/8 (gold pin == HEAD blob sha == normalized worktree sha; manifest consistent); N4 verified with malformed source_ref mutations (list/missing-key -> ManifestError only); N3 stamps job value; gold v3.1 anchors untouched",
+      "residual_note": "one P3 wording item (archive wording) specified by reviewer and applied verbatim in docs-only commit 28f06a9a after this round"
+    }
+  ]
+}

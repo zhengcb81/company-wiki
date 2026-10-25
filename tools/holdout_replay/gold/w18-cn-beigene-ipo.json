@@ -1,0 +1,313 @@
+{
+ "sample_id": "w18-cn-beigene-ipo",
+ "market": "CN",
+ "company": "百济神州",
+ "language": "zh",
+ "source_sha256": "dc6a8f8131b052745865d633e760e81dc7536eb64f359b279bf02de3a208f664",
+ "expected_route_families": [
+  "prospectus",
+  "prospectus_cn"
+ ],
+ "facts": [
+  {
+   "id": "ipo-unprofitable-identity",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "unknown",
+   "modality": "negation",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 4,
+      "location_kind": "page",
+      "exact_quote": "发行人是一家尚未盈利的生物科技公司"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "发行人自我定位为尚未盈利的生物科技公司（招股书签署时点）"
+   ],
+   "must_not_assert": [
+    "发行时公司已盈利",
+    "尚未盈利为审计意见"
+   ],
+   "reason": "发行人身份的否定性事实，是招股书风险披露的锚点。"
+  },
+  {
+   "id": "ipo-three-commercial-drugs",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "count",
+   "modality": "actual",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 4,
+      "location_kind": "page",
+      "exact_quote": "公司共有3 款自主研发药物\n处于商业化阶段：分别为BTK 小分子抑制剂百悦泽®（BRUKINSA®，泽布替尼\n胶囊，zanubrutinib），抗PD-1 单抗百泽安®（替雷利珠单抗注射液，tislelizumab）\n和PARP 抑制剂百汇泽®（帕米帕利胶囊，pamiparib"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "3款自研商业化药物：百悦泽（BTK）/百泽安（PD-1）/百汇泽（PARP）"
+   ],
+   "must_not_assert": [
+    "48款商业化及临床阶段产品全部为自主研发"
+   ],
+   "reason": "自研3款与合作产品的构成区分（另有37款合作产品处于临床或商业化阶段）。"
+  },
+  {
+   "id": "ipo-approval-pathway-dates",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "total",
+   "modality": "actual",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 4,
+      "location_kind": "page",
+      "exact_quote": "BRUKINSA®（百悦泽®）\n获得美国食品药品管理局（FDA）加速批准3上市，于2019 年11 月在美国开始\n商业化销售。百悦泽®（BRUKINSA®）和百泽安®获得中国国家药监局附条件批\n准4并分别于2020 年6 月和2020 年3 月在中国开始商业化销售。百汇泽®于2021\n年5 月获得中国国家药监局附条件批准"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "百悦泽FDA加速批准、2019年11月美国开始销售",
+    "百悦泽与百泽安中国附条件批准、分别2020年6月/2020年3月开始销售",
+    "百汇泽2021年5月中国附条件批准"
+   ],
+   "must_not_assert": [
+    "加速批准=完全批准",
+    "附条件批准=完全批准",
+    "百悦泽先于百泽安在中国开始商业化销售"
+   ],
+   "reason": "批准路径（加速/附条件）与商业化时点双事实；路径类型不可互改。销售时序：原文'分别于2020年6月和2020年3月'映射百悦泽=6月、百泽安=3月，即百泽安先开始在华销售；锚句不含获批日期，任何获批时序表述都缺乏本锚句支持。"
+  },
+  {
+   "id": "ipo-48-pipeline-count",
+   "importance": "normal",
+   "target_kind": "required_business",
+   "quantity_basis": "count",
+   "modality": "actual",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 4,
+      "location_kind": "page",
+      "exact_quote": "截至2021 年11 月4 日，公司的商业\n化产品及临床阶段候选药物共有48 款，包括10 款商业化阶段药物6、2 款已申报\n候选药物和36 款7临床阶段候选药物"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "截至2021-11-04共48款（10商业化+2已申报+36临床）",
+    "其中3款自研上市、8款自研临床在研、37款合作产品"
+   ],
+   "must_not_assert": [
+    "48款全部为自研",
+    "10款商业化阶段药物全部为自研"
+   ],
+   "reason": "时点+构成的双重口径：截至日与自研/合作拆分（10款商业化中自研仅3款，其余为合作产品）。"
+  },
+  {
+   "id": "ipo-no-controlling-shareholder",
+   "importance": "critical",
+   "target_kind": "disposition_context",
+   "quantity_basis": "unknown",
+   "modality": "negation",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 459,
+      "location_kind": "page",
+      "exact_quote": "报告期内，公司无控股股东和实际控制人，公司不存在资金被第一大股东占\n用的情形，也不存在为第一大股东进行违规担保的情形"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "报告期内无控股股东和实际控制人",
+    "不存在资金被第一大股东占用",
+    "不存在为第一大股东违规担保"
+   ],
+   "must_not_assert": [
+    "安进为控股股东",
+    "公司存在VIE架构"
+   ],
+   "reason": "治理结构否定事实三连（无控制人/无占用/无违规担保）。"
+  },
+  {
+   "id": "ipo-share-par-value",
+   "importance": "normal",
+   "target_kind": "correctness_if_emitted",
+   "quantity_basis": "total",
+   "modality": "actual",
+   "role": "company_filing",
+   "fact_scope": "document_meta",
+   "any_support_sets": [
+    [
+     {
+      "page": 25,
+      "location_kind": "page",
+      "exact_quote": "公司股票面值为0.0001 美元并以人民币为股票交易币种在上交\n所科创板进行交易"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "股票面值0.0001美元",
+    "以人民币为交易币种在上交所科创板交易",
+    "红筹（开曼）结构"
+   ],
+   "must_not_assert": [
+    "股票面值以人民币标定",
+    "面值0.0001元人民币"
+   ],
+   "reason": "红筹双重货币安排：面值美元、交易人民币，错配即错。"
+  },
+  {
+   "id": "ipo-proceeds-greenshoe",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "total",
+   "modality": "conditional",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 51,
+      "location_kind": "page",
+      "exact_quote": "募集资金总额2,215,964.31 万元（行使超额配售选择权之前）；\n2,548,353.39 万元（全额行使超额配售选择权之后）"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "募集资金总额2,215,964.31万元（绿鞋行使前）",
+    "全额行使后2,548,353.39万元",
+    "万元人民币单位"
+   ],
+   "must_not_assert": [
+    "募资总额为单一确定数（依赖绿鞋行使状态）",
+    "以美元计价"
+   ],
+   "reason": "金额的条件性：两个数对应绿鞋前/后两种状态。"
+  },
+  {
+   "id": "ipo-use-of-proceeds",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "investment",
+   "modality": "plan",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 158,
+      "location_kind": "page",
+      "exact_quote": "本次募集资金将投入以下项目：药物临床试验研发项目、研发中心建设项目、\n生产基地研发和产业化项目、营销网络建设项目及补充流动资金"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "募投五类用途：临床研发/研发中心/生产基地/营销网络/补充流动资金"
+   ],
+   "must_not_assert": [
+    "募资用于偿还债务或分红"
+   ],
+   "reason": "用途清单事实（招股书口径）。"
+  },
+  {
+   "id": "ipo-guangzhou-capacity-ladder",
+   "importance": "critical",
+   "target_kind": "required_business",
+   "quantity_basis": "capacity_total",
+   "modality": "plan",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 158,
+      "location_kind": "page",
+      "exact_quote": "广州生产基地一期和二期\n工厂已分别于2019 年9 月和2020 年12 月落成，目前建成产能达24,000 升的生\n物制剂生产设施，三期工厂计划产能为40,000 升，预计2022 年底前建设完成，\n落成后总产能可达64,000 升。未来，广州生产基地产能预计将超过120,000 升，\n最高可达到200,000 升"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "一期2019-09/二期2020-12已落成、建成产能24,000升（已发生）",
+    "三期计划40,000升、预计2022年底建成、届时总64,000升（计划）",
+    "未来超120,000升、最高200,000升（远期预计）"
+   ],
+   "must_not_assert": [
+    "招股书时点已建成64,000升",
+    "200,000升为已获批产能"
+   ],
+   "reason": "产能阶梯的已完成/计划/远期三层分离，是本样本核心结构。"
+  },
+  {
+   "id": "ipo-guangzhou-nmpa-8000l",
+   "importance": "normal",
+   "target_kind": "required_business",
+   "quantity_basis": "capacity_total",
+   "modality": "actual",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 158,
+      "location_kind": "page",
+      "exact_quote": "2021 年4 月，中国国家药监局批准广州生产基地一期工\n厂8,000 升产能用于为中国市场生产和供应百泽安®"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "2021年4月NMPA批准一期8,000升用于百泽安中国供应"
+   ],
+   "must_not_assert": [
+    "24,000升全部获批商业化",
+    "批准时间为2022年"
+   ],
+   "reason": "获批产能（8,000升）与建成产能（24,000升）的差值口径。"
+  },
+  {
+   "id": "ipo-depreciation-risk",
+   "importance": "normal",
+   "target_kind": "disposition_context",
+   "quantity_basis": "unknown",
+   "modality": "plan",
+   "role": "company_filing",
+   "fact_scope": "narrative",
+   "any_support_sets": [
+    [
+     {
+      "page": 158,
+      "location_kind": "page",
+      "exact_quote": "募集资金投资项目\n实施完毕后，公司的固定资产规模将有较大幅度的增长，固定资产年折旧费用也\n将有较大幅度的增加。本次募集资金投资项目新增的折旧和研发费用将进一步影\n响公司的净利润和净资产收益率，对公司整体的盈利能力产生一定的不利影响"
+     }
+    ]
+   ],
+   "must_preserve": [
+    "募投完成后折旧与研发费用增加的影响为风险提示（前瞻性）"
+   ],
+   "must_not_assert": [
+    "折旧费用已大幅增加（招股书时点）",
+    "风险提示=已发生事实"
+   ],
+   "reason": "风险因素的前瞻性质：不得把风险写成当期结果。"
+  }
+ ],
+ "schema_version": "du-gold/1",
+ "scope": "holdout",
+ "support_set_frozen_before_output": true,
+ "notes": "W18-CWP-HOLDOUT（冻结于2026-10-25）。百济神州科创板IPO招股说明书（675页）。有界阅读：完整阅读第4页（重大事项提示-未盈利身份与产品线）、24页（红筹结构）、31页（目录）、51页（发行概况-募集资金）、158页（募投风险与广州产能）、459页（无控股股东）后冻结support set，未查看任何候选输出。prior_use=fresh。指定陷阱：加速/附条件批准路径、募资总额的绿鞋条件性、广州产能已完成/计划/远期三层、获批8,000升vs建成24,000升、面值0.0001美元+人民币交易、无控股股东否定、风险提示≠已发生。"
+}
