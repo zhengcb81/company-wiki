@@ -20,7 +20,7 @@ from company_wiki.resource_budget import WorkBudget, WorkBudgetExceeded
 
 from .indented_tail_geometry import indented_terminal_tail_proof
 
-NARRATIVE_CONTINUITY_FEATURE_VERSION = "native-narrative-continuity/8"
+NARRATIVE_CONTINUITY_FEATURE_VERSION = "native-narrative-continuity/9"
 _LIMITS = {
     "max_units": 50_000,
     "max_window_units": 8,
@@ -525,6 +525,20 @@ class _Analysis:
             return None
         if left.column != right.column:
             return None
+        a_hint = left.unit.get("hints", {}).get("paragraph_membership", {})
+        b_hint = right.unit.get("hints", {}).get("paragraph_membership", {})
+        if (isinstance(a_hint, Mapping) and isinstance(b_hint, Mapping)
+                and a_hint.get("version") == b_hint.get("version") == "pdf-paragraph-membership/1"
+                and isinstance(a_hint.get("group"), str) and len(a_hint["group"]) == 64
+                and a_hint.get("group") == b_hint.get("group")
+                and type(a_hint.get("position")) is int and type(b_hint.get("position")) is int
+                and b_hint["position"] == a_hint["position"] + 1
+                and type(a_hint.get("count")) is int and a_hint.get("count") == b_hint.get("count")
+                and 0 <= a_hint["position"] < b_hint["position"] < a_hint["count"] <= 64
+                and a_hint.get("next") == right.unit["unit_id"]
+                and b_hint.get("previous") == left.unit["unit_id"]):
+            return {"left": left.unit["unit_id"], "right": right.unit["unit_id"],
+                    "basis": "source_exact_paragraph_membership", "group": a_hint["group"]}
         if left.block == right.block:
             left_meta, right_meta = left.provenance, right.provenance
             end, start = (

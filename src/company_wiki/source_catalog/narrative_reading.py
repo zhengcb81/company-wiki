@@ -498,6 +498,8 @@ def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, An
                 pid += ":statement:" + sha256("\0".join(piece).encode()).hexdigest()
             generated.append({"package_id": pid, "kind": "native_continuity",
                 "member_unit_ids": piece, "anchor_unit_ids": list(piece),
+                "_paragraph_membership_only": any(edge.get("basis") == "source_exact_paragraph_membership"
+                    for edge in window.get("proof", ())),
                 "required_context_unit_ids": context(piece), **native_fields(piece)})
             grouped.update(piece)
     expanded = []
@@ -633,7 +635,7 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
             for uid in dict.fromkeys(package["member_unit_ids"]):
                 ownership[uid] = ownership.get(uid, 0) + 1
     for package in packages:
-        if package["kind"] != "native_continuity":
+        if package["kind"] != "native_continuity" or package.get("_paragraph_membership_only"):
             continue
         members = list(dict.fromkeys(package["member_unit_ids"]))
         required = set(members) | set(package.get("required_context_unit_ids", ()))
@@ -1087,6 +1089,11 @@ def _native_layout_summary(parsed: DocumentStructure) -> dict[str, Any] | None:
     result = {key: coverage[key] for key in (
         "feature_version", "complete", "processed_unit_count", "processed_page_count",
         "deferred_unit_count", "fine_element_count", "work_units") if key in coverage}
+    execution = coverage.get("reading_execution")
+    if isinstance(execution, Mapping):
+        # Opaque logical execution observation, already bounded by its source
+        # reading owner; this layer neither selects nor configures a backend.
+        result["reading_execution"] = dict(execution)
     native_ranges = coverage.get("native_ranges")
     if isinstance(native_ranges, Mapping):
         result["native_ranges"] = {key: native_ranges[key] for key in (

@@ -66,16 +66,18 @@ class NativePdfBackend:
     producer must implement the complete backend, not masquerade as this one.
     """
     def __init__(self, *, parser: PdfBytesParser | None = None,
-                 replayer: Callable[..., Any] | None = None) -> None:
+                 replayer: Callable[..., Any] | None = None,
+                 paragraph_enhancement: Any | None = None) -> None:
         self._parser = parser
         self._replayer = replayer
+        self._paragraph_enhancement = paragraph_enhancement
 
     def describe_recipe(self) -> Mapping[str, Any]:
         try:
             runtime_version = version("pymupdf")
         except PackageNotFoundError as exc:
             raise PdfReadingError("PDF_DEPENDENCY_UNAVAILABLE: pymupdf") from exc
-        return {
+        recipe = {
             "format": "pdf",
             "parser_name": native.NARRATIVE_PARSER_NAME,
             "parser_version": native.NARRATIVE_PARSER_VERSION,
@@ -85,6 +87,9 @@ class NativePdfBackend:
                 Path(__file__).read_bytes().replace(b"\r\n", b"\n")
             ).hexdigest(),
         }
+        if self._paragraph_enhancement is not None:
+            recipe["paragraph_enhancement"] = dict(self._paragraph_enhancement.describe_recipe())
+        return recipe
 
     def read(self, data: bytes, request: PdfReadingRequest, *, selector_version: str,
              work_budget: WorkBudget | None, full_table_scan: bool = False,
@@ -106,7 +111,13 @@ class NativePdfBackend:
             )
         # No callable-identity branch or TypeError retry: every implementation
         # of the current contract receives the same resource/context inputs.
-        return parser(data, **arguments)
+        parsed = parser(data, **arguments)
+        if selector_version == "0.9.0" and self._paragraph_enhancement is not None:
+            if work_budget is None:
+                raise ValueError("paragraph enhancement requires the shared document work budget")
+            parsed = self._paragraph_enhancement.enhance(data, parsed,
+                work_budget=work_budget, deadline=deadline)
+        return parsed
 
     def verify_material(self, parsed: NarrativeParseResult,
                         evidence_spans: Sequence[EvidenceSpan]) -> None:
@@ -131,7 +142,11 @@ class PdfReading:
                  deadline: float | None = None) -> None:
         if backend is not None and (parser is not None or replayer is not None):
             raise ValueError("provide a complete backend or native-compatible callbacks")
-        self._backend = backend or NativePdfBackend(parser=parser, replayer=replayer)
+        if backend is None:
+            from .narrative_pdf_enhancement import configured_paragraph_runtime
+            backend = NativePdfBackend(parser=parser, replayer=replayer,
+                paragraph_enhancement=configured_paragraph_runtime())
+        self._backend = backend
         self._deadline = _valid_deadline(deadline)
         self._recipe: dict[str, Any] | None = None
 

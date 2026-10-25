@@ -60,6 +60,8 @@ def _kernel():
             wintypes.BOOL,
         ),
         "AssignProcessToJobObject": ([wintypes.HANDLE, wintypes.HANDLE], wintypes.BOOL),
+        "QueryInformationJobObject": ([wintypes.HANDLE, ctypes.c_int, ctypes.c_void_p,
+                                       wintypes.DWORD, ctypes.c_void_p], wintypes.BOOL),
         "TerminateJobObject": ([wintypes.HANDLE, wintypes.UINT], wintypes.BOOL),
         "CloseHandle": ([wintypes.HANDLE], wintypes.BOOL),
         "OpenProcess": ([wintypes.DWORD, wintypes.BOOL, wintypes.DWORD], wintypes.HANDLE),
@@ -81,7 +83,9 @@ def _win_error() -> OSError:
 class WindowsJob:
     """The waiting bootstrap is assigned before it can launch the user's command."""
 
-    def __init__(self, process_handle: int) -> None:
+    def __init__(self, process_handle: int, *, memory_limit_bytes: int | None = None) -> None:
+        if memory_limit_bytes is not None and (type(memory_limit_bytes) is not int or memory_limit_bytes <= 0):
+            raise ValueError("job memory limit must be a positive byte count")
         self.kernel = _kernel()
         self.handle = self.kernel.CreateJobObjectW(None, None)
         if not self.handle:
@@ -89,6 +93,9 @@ class WindowsJob:
         try:
             info = _ExtendedLimits()
             info.basic.flags = 0x2000  # JOB_OBJECT_LIMIT_KILL_ON_JOB_CLOSE
+            if memory_limit_bytes is not None:
+                info.basic.flags |= 0x200  # JOB_OBJECT_LIMIT_JOB_MEMORY
+                info.job_memory = memory_limit_bytes
             if not self.kernel.SetInformationJobObject(
                 self.handle, 9, ctypes.byref(info), ctypes.sizeof(info)
             ):
@@ -102,6 +109,12 @@ class WindowsJob:
     def terminate(self) -> None:
         if self.handle and not self.kernel.TerminateJobObject(self.handle, 1):
             raise _win_error()
+
+    def peak_commit_bytes(self) -> int:
+        info = _ExtendedLimits()
+        if not self.kernel.QueryInformationJobObject(self.handle, 9, ctypes.byref(info), ctypes.sizeof(info), None):
+            raise _win_error()
+        return int(info.peak_job_memory)
 
     def close(self) -> None:
         handle, self.handle = self.handle, None

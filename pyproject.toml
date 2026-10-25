@@ -28,6 +28,9 @@ company-wiki-narrative-batch = "company_wiki.automation.narrative_batch_cli:main
 
 [project.optional-dependencies]
 pdf = ["PyMuPDF>=1.23.0,<2.0"]
+# Deliberately optional: native reading and ordinary CI never install/load ML.
+# Actual deployed dependencies and existing model bytes are pinned in its recipe.
+pdf-layout = ["docling==2.96.0"]
 download = ["playwright>=1.40.0"]
 catalog = [
     "PyMuPDF>=1.23.0,<2.0",

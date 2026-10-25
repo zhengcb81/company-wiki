@@ -27,7 +27,7 @@ from company_wiki.document_normalization.table_shapes import has_tabular_value_t
 
 INPUT_SCHEMA_VERSION = "du-input/1"
 
-OBSERVATION_ADAPTER_VERSION = "du-observation-adapter/7"
+OBSERVATION_ADAPTER_VERSION = "du-observation-adapter/8"
 
 _READING_LAYOUT_FIELDS = frozenset({"bbox", "page", "column", "page_width", "page_height", "coordinate_frame", "rotation",
                                   "granularity", "font_size", "font_weight", "frame_converted", "cropbox", "cropbox_position"})
@@ -60,6 +60,10 @@ def _reading_layout_fields(metadata: Mapping[str, Any]) -> tuple[dict[str, Any],
     layout = {key: deepcopy(value) for key, value in supplied.items() if key in _READING_LAYOUT_FIELDS} if isinstance(supplied, Mapping) else {}
     upstream = reading.get("upstream_hints")
     hints: dict[str, Any] = {}
+    membership = reading.get("paragraph_membership")
+    if isinstance(membership, Mapping):
+        hints["paragraph_membership"] = {key: deepcopy(membership[key]) for key in
+            ("version", "group", "position", "count", "previous", "next") if key in membership}
     if isinstance(upstream, Mapping):
         for name in ("words", "cells", "font_runs", "spans"):
             entries = upstream.get(name)
