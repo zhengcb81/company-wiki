@@ -1,0 +1,18 @@
+{
+  "schema_version": "pdf-c1-public-ci-observation/1",
+  "head_sha": "87d39bbc5b3bacf59dfc6c3ead11665b7007e83e",
+  "observed_at": "2026-10-25T20:10:14.980185+00:00",
+  "runs": [
+    {
+      "id": 40229110372,
+      "head_sha": "87d39bbc5b3bacf59dfc6c3ead11665b7007e83e",
+      "name": "CI",
+      "status": "completed",
+      "conclusion": "failure",
+      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40229110372",
+      "created_at": "2026-10-25T20:05:23Z",
+      "updated_at": "2026-10-25T20:08:47Z"
+    }
+  ],
+  "authentication": "none;public API only"
+}

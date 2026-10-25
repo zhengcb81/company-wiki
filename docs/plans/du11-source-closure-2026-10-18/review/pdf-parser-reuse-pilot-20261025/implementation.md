@@ -24,7 +24,7 @@
 4. generation/cache接受owner给出的不透明recipe fingerprint；修PDF忽略parser_components的实际路径，同一运行composition向select/verify/freeze提供同一owner。缓存层只规范化/hash/storage，不再枚举PDF工具。改变显式启用配方里的模型/第三方版本/options必须失效；仅移动宿主/模型目录不失效。完全禁用Docling的纯native配方不引用其已安装版本；启用按需分支时可保守绑定可能用到的依赖，即使该文档最终没用也允许额外cache miss，不能漏失效。实际参与列表只在select后的现有依赖/收据记录。
 5. 摘要模块在同一逻辑阅读职责内复用当前代码；transport/费用执行仍是通用基础设施。先保留阶段边界，不顺便搬整个仓目录或改wire契约。
 
-PDF-C1集中验收：上述RED转绿＋既有PDF选择/格式/verify/generation/cache的定向回归＋独立架构审查。不是每个文件人工签收。保留旧replay兼容；不重放旧付费请求。
+PDF-C1集中验收：上述RED转绿＋完整`tests/unit/du11_production`包（包括work-policy/cache，不只挑PDF同名文件）＋既有格式/verify/generation/cache的定向回归＋独立架构审查。职责迁移用CodeGraph调用者/覆写者及测试源码核全部旧接缝；本轮CI两项旧观察钩子遗漏见[c1-ci-followup](c1-ci-followup.md)。不是每个文件人工签收，不给每次commit加全量。保留旧replay兼容；不重放旧付费请求。
 
 ## 三、PDF-C2：实现按需Docling结构增强
 
@@ -56,3 +56,40 @@ PDF-C1集中验收：上述RED转绿＋既有PDF选择/格式/verify/generation/
 
 
 冻结不变量：actual使用的backend/model/options必须属于冻结recipe允许的配置与指纹；版本漂移或临时替换不能当普通fallback。重放按actual的文本/坐标契约派发并核recipe一致；验证canonical原文成员不等于重新推理布局模型，不能为缓存恢复增加不必要的模型调用。无法按原契约重放则如实报告，不冒充新版本可验旧证据。
+
+## C2接线前的源码调查补充（基线87d39bbc；尚未实施）
+
+以下将下一节点约束落到真实调用链，不增加审批或第二计划。调查只读、未运行重模型或产品测试，不能当C2通过。
+
+### 1. 真正到达摘要的最小链路
+
+`PdfReading内部增强器严格对齐 → observation_adapter.build_observation显式generic hint → narrative_continuity._Analysis.edge既有物理边owner → finish / narrative_reading._prose_reading_packages → _candidates / _context → summary_tasks.build_summary_task_plan`。
+
+- 当前`ObservationUnit`没有通用paragraph membership槽，`reading_layout.upstream_hints`也只透传words/cells/font_runs/spans，塞任意metadata不会自动生效。continuity已直接读原始du-input hints，因此本节点不必扩大所有结构类型。
+- **只修改structure/paragraphs.py不够。** `_prose_reading_packages`不信任普通容器的atomic性，会再按native continuity拆解；必须在实际模型任务中验证完整成员，而不是只看结构分组数量。
+- 摘要继续复用现有citation_views与summary_tasks；不另写Docling summary/prompt/合并器。AUTO、存储、FF、RF不解释新hint或SDK配置。
+
+### 2. 成员提示与原文身份
+
+- 源owner完成同source/SHA/page/frame/连续原序/唯一覆盖/严格字符等价认证后，才发紧凑generic paragraph proof。可用每unit O(1)的group、position/count、prev/next原unit引用及proof digest，或每组一次有界成员表；不得给每unit复制整段全文/全成员列表造成O(N²)。对外不叫Docling专属业务类型。
+- hint是transient，在`NarrativeUnit.to_evidence_span`的既有过滤点剔除，不改原raw_text/unit_id/coordinates/parser，也不随每span持久化大结构。
+- `_Analysis.edge`只增加一种物理正证；仍保留source/page/role/原序/章节/profile/project/表格/标题/已知异列等反证。不伪造native字体或font coverage；缺字体而当前observer拒绝时如实not_applied，不假填regular。跨页沿现有原生证明，本节点不凭同paragraph_ref跳页。
+- `finish/statement_members`继续把独立完整事实分开，保留条件/否定/计划限定；同段不等于同一事实/因果。当前8unit/4block/2048字符上限不为试点金标提高。原型含10/15成员长段，不能一律强塞完整窗口；须按真实完整句边界保留闭合前缀、延期未闭尾部。
+- **采用明确兼容决策：** external-membership-only窗口负责原成员成组，不触发`_candidates`现有`native_range_unit`折叠。这样最终span仍保留原native成员/locator，避免只保留`_carrier_origins`却宣称所有最终ID不变。已有纯native range路径不改，也不生成外部改写文本carrier。
+
+### 3. 分诊与有限运行时
+
+- 在native已经读取页面的snapshot/emit流程记录小型结构缺口需求，后端读完后只处理dedup的受界页，全源DU只跑一次。现有geometry planner以table/QA为主，`tabular_evidence`不能冒充叙述缺口；需要共用时在唯一owner明确扩purpose，不另造planner/store。
+- 早期分诊只描述相邻原块的未闭句、金额/单位分裂、悬挂bullet等物理观察，结合已有reading intent，不再写第二套业务词法。仅“无句号”不够，不能触发所有标题/标签。
+- 后验`CONTINUITY_OPEN_START/END`等用于核验/下次有理由的回放，不免费启动全源selector→Docling→全源selector。`NEEDS_UPSTREAM_GRANULARITY`当前是表格问题，不能泛化成任意段落问题。
+- 如果早期分诊尚无可靠实现，可先用明确受界页请求验功能；这仍是工程试点，不宣传成通用分诊已完成。不得将p13/p114或gold字符串编码成生产规则。
+- 重模型解释器/依赖/模型与线程配置只由阅读runtime解释；基于既有有限worker生命周期复用热实例，必须接关闭/异常/父worker终止清理。先核现有受界隔离执行器的资源与子进程清理能力，不先新造常驻服务。冷启、推理、RSS和剩余deadline真实计量，原生15秒fine-capture不是Docling启动额度。
+
+### 4. 本节点集中测试清单
+
+1. 中英文数字→单位/增幅→原因、悬挂列表正例；检查最终summary_task实际成员与原句，而非仅DTO数量。
+2. 异源/页/角色、兄弟业务/项目、表格/标题、异列、跳漏/逆序/重复文字、错误frame/字符差异全部拒绝提示；原生材料仍保留。
+3. 同段独立事实仍拆分；条件/否定/计划不丢；没有hint时输出逐字段等价，原text/ID/locator及持久span不被提示污染。
+4. native读取一次、DU一次、同页需求去重、0需求0重模型调用；低预算/超时保持闭合前缀及真实partial，不新开账户。模型丢失/截断/超大响应/worker退出均有清理收据。
+5. recipe绑定显式启用增强器/模型/选项/对齐代码指纹，actual只记真实调用；修改算法使cache正确失效，移动宿主不失效；原spanreplay不重新推理布局。
+6. 五页开发金标保留原六组、补两缺组，经营表typed-row状态如实；之后独立新公司/US PDF与真实扫描/复杂页holdout，再正式摘要/缓存/RF。不能用开发五页代签泛化。

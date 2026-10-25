@@ -1,0 +1,27 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 164 items
+
+tests\unit\du11_production\test_business_coverage_relations.py ......... [  5%]
+...................................                                      [ 26%]
+tests\unit\du11_production\test_cache_identity.py ...                    [ 28%]
+tests\unit\du11_production\test_convertible_policy_scope.py .            [ 29%]
+tests\unit\du11_production\test_document_work_policy.py ..               [ 30%]
+tests\unit\du11_production\test_exploration_fairness.py ..               [ 31%]
+tests\unit\du11_production\test_native_prose_continuity.py ..........    [ 37%]
+tests\unit\du11_production\test_native_table_projection.py ...           [ 39%]
+tests\unit\du11_production\test_pdf_candidates.py ...................... [ 53%]
+........                                                                 [ 57%]
+tests\unit\du11_production\test_pdf_production.py ............           [ 65%]
+tests\unit\du11_production\test_project_table_scope.py ..                [ 66%]
+tests\unit\du11_production\test_shared_work_budget.py ..                 [ 67%]
+tests\unit\test_pdf_reading_boundary.py ...............                  [ 76%]
+tests\unit\test_narrative_source_usability_dependencies.py ............. [ 84%]
+.........................                                                [100%]
+
+============================ 164 passed in 18.15s =============================

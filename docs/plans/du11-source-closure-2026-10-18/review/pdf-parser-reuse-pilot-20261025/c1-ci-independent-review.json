@@ -1,0 +1,60 @@
+{
+  "schema_version": "pdf-c1-ci-followup-independent-review/1",
+  "date": "2026-10-25",
+  "status": "PASS_0_OPEN_FIXTURE_MIGRATION_ONLY",
+  "failed_commit": "87d39bbc5b3bacf59dfc6c3ead11665b7007e83e",
+  "failed_ci_run": 40229110372,
+  "test_binding": {
+    "path": "tests/unit/du11_production/test_document_work_policy.py",
+    "bytes": 6102,
+    "sha256": "930d46e53f0dd0bc355395f5d8e454b09b156f14b64bf49cf06fe9c35afb1f94",
+    "lf_sha256": "930d46e53f0dd0bc355395f5d8e454b09b156f14b64bf49cf06fe9c35afb1f94"
+  },
+  "all_previously_reviewed_product_source_lf_hashes_unchanged": true,
+  "assertion_preservation": {
+    "method": "AST comparison against HEAD",
+    "unchanged_functions": [
+      "test_partial_work_retains_diagnostics_and_is_not_a_complete_cache",
+      "test_only_work_configuration_changes_source_cache_identity",
+      "manifest"
+    ],
+    "weakened_assertions": false
+  },
+  "execution_semantics": [
+    "ObservedReading.read calls super().read with original bytes and same WorkBudget",
+    "ObservedSelector delegates bound builtin0.9 selector without replacing outputs",
+    "after_parse includes entire current reader-boundary accounting",
+    "selector entry observes same budget object and unchanged post-read used count",
+    "partial diagnostic/cache rejection/external money independence/source SHA assertions unchanged",
+    "fixture blocks socket connections and uses own temporary budget config"
+  ],
+  "independent_runs": [
+    {
+      "scope": "initial default temp strategy",
+      "exit_code": 1,
+      "result": "2_SETUP_ERRORS_NOT_TEST_EXECUTION",
+      "reason": "sandbox relocated-temp numbered-directory setup OSError",
+      "outer_seconds": 17.445,
+      "owned_parent_removed": true,
+      "pytest_cleanup_reported_removed": false,
+      "exact_relocated_path_checked_absent_in_followup": true
+    },
+    {
+      "scope": "same2tests repo-owned48char basetemp;actual changed path constraint",
+      "receipt": "c1-ci-independent-boundary-receipt.json",
+      "log": "c1-ci-independent-boundary.log",
+      "exit_code": 0,
+      "passed": 2,
+      "pytest_seconds": 6.65,
+      "outer_seconds": 11.098,
+      "temporary_root_restored_absent": true,
+      "basetemp_relocated": false
+    }
+  ],
+  "network_paid_heavy_model_calls": 0,
+  "production_changes": false,
+  "not_claimed": [
+    "Remote replacement CI already green",
+    "Full project or new C2 acceptance"
+  ]
+}

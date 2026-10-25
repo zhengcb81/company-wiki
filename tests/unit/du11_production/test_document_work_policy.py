@@ -9,6 +9,7 @@ import yaml
 
 from company_wiki.automation.narrative_generation import current_reading_decision_matches
 from company_wiki.automation.narrative_select import NarrativeSelectHandler, _SelectFailure
+from company_wiki.source_catalog.narrative_pdf_reading import PdfReading
 
 
 @pytest.fixture
@@ -46,21 +47,28 @@ def run_pdf(tmp_path, monkeypatch):
             "document_processing": {"max_work_units": work}}), encoding="utf-8")
         observed = {}
 
-        class ObservedHandler(NarrativeSelectHandler):
-            def _parse_pdf(self, *args, **kwargs):
+        class ObservedReading(PdfReading):
+            # Observe the current responsibility boundary, rather than private
+            # handler hooks that no longer execute PDF reading or selection.
+            def read(self, *args, **kwargs):
                 observed["budget"] = kwargs["work_budget"]
-                parsed = super()._parse_pdf(*args, **kwargs)
+                parsed = super().read(*args, **kwargs)
                 observed["after_parse"] = kwargs["work_budget"].used
                 return parsed
 
-            def _run_selector(self, *args, **kwargs):
-                assert kwargs["work_budget"] is observed["budget"]
-                assert kwargs["work_budget"].used == observed["after_parse"]
-                selected = super()._run_selector(*args, **kwargs)
-                observed["selection"] = selected
-                return selected
+            def select(self, *args, selector, **kwargs):
+                class ObservedSelector:
+                    selector_version = selector.selector_version
+                    def __call__(self, parsed, **options):
+                        assert options["work_budget"] is observed["budget"]
+                        assert options["work_budget"].used == observed["after_parse"]
+                        selected = selector(parsed, **options)
+                        observed["selection"] = selected
+                        return selected
+                return super().select(*args, selector=ObservedSelector(), **kwargs)
 
-        handler = ObservedHandler(reader=object(), selector_version="0.9.0")
+        handler = NarrativeSelectHandler(reader=object(), pdf_reading=ObservedReading(),
+                                        selector_version="0.9.0")
         try:
             handler._select_pdf(payload, original, SimpleNamespace(checkpoint=lambda: None))
         except _SelectFailure:

@@ -1,6 +1,8 @@
 # 当前行动计划（2026-10-25更新）
 
-## 2026-10-25 当前行动：PDF-C1单层阅读边界已独审，收尾发布中
+## 2026-10-25 当前行动：PDF-C1已推送，完整CI两项测试迁移修复中
+
+87d39bbc已正常推送；精确CI40229110372两项旧测试钩子KeyError，本地原样复现后仅迁移观察器，完整生产包及边界164P。产品源码不变，修复独审/正常发布/新精确CI收尾中；不将旧CI记绿。[根因与方法补全](review/pdf-parser-reuse-pilot-20261025/c1-ci-followup.md)。
 
 真实比较已选定“原生canonical文字/locator＋按需Docling结构提示”。PDF-C1产品代码已实施：统一`PdfReading`负责read/select、后端身份/配方、材料核对和replay；AUTO只传逻辑任务、统一账户/deadline，select与verify使用同一实例。换兼容实现不再因函数identity丢预算/context，PDF配方和PyMuPDF实际版本进入generation。非PDF不加载可选PDF运行时，旧已完成PDF历史不补签当前配方。[本节点](review/pdf-parser-reuse-pilot-20261025/c1-acceptance.md)。
 

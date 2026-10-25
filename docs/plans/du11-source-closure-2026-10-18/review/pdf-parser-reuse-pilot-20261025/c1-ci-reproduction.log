@@ -1,0 +1,32 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 2 items
+
+tests\unit\du11_production\test_document_work_policy.py FF               [100%]
+
+================================== FAILURES ===================================
+______ test_partial_work_retains_diagnostics_and_is_not_a_complete_cache ______
+tests\unit\du11_production\test_document_work_policy.py:81: in test_partial_work_retains_diagnostics_and_is_not_a_complete_cache
+    complete = run_pdf(16_000_000)
+               ^^^^^^^^^^^^^^^^^^^
+tests\unit\du11_production\test_document_work_policy.py:69: in run
+    assert observed["budget"].max_work_units == work
+           ^^^^^^^^^^^^^^^^^^
+E   KeyError: 'budget'
+_________ test_only_work_configuration_changes_source_cache_identity __________
+tests\unit\du11_production\test_document_work_policy.py:104: in test_only_work_configuration_changes_source_cache_identity
+    original = run_pdf(16_000_000)["selection"]
+               ^^^^^^^^^^^^^^^^^^^
+tests\unit\du11_production\test_document_work_policy.py:69: in run
+    assert observed["budget"].max_work_units == work
+           ^^^^^^^^^^^^^^^^^^
+E   KeyError: 'budget'
+=========================== short test summary info ===========================
+FAILED tests/unit/du11_production/test_document_work_policy.py::test_partial_work_retains_diagnostics_and_is_not_a_complete_cache
+FAILED tests/unit/du11_production/test_document_work_policy.py::test_only_work_configuration_changes_source_cache_identity
+============================== 2 failed in 4.04s ==============================
