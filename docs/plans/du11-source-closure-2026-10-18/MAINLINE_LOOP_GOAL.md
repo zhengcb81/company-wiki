@@ -2,7 +2,7 @@
 
 ## 2026-10-25 当前行动：跨市场来源共因修复
 
-**主线持续active，整体未完成。** 最新已发布产品483cb2a5精确CI40191425654成功；药明康德来源/实际输入14项独审12PASS/2PARTIAL是单份年报结论，不代表其他市场文种或模型质量。
+**主线持续active，整体未完成。** 最新工具工程243993d2已正常提交推送、精确CI40195639414成功；当前来源生产版本仍483cb2a5（CI40191425654成功）；药明康德来源/实际输入14项独审12PASS/2PARTIAL是单份年报结论，不代表其他市场文种或模型质量。
 
 独立三例真实预检发现：微软严格业务关系7PASS/1PARTIAL；港股中报裸compiler联合目标1PASS/4PARTIAL/2MISSING（期间可由verified document共享头一次提供，不要求每task重复p5）；中微429页招股在同一16M账户耗尽、0span，无正式内容gold故NOT_GRADED。IPO热点实测解析仅420,052、understand_units11,473,800、candidates4,091,862；约2.6%是解析逻辑工作量，不能说PDF转文字占尽资源，也不能从逻辑计数推CPU瓶颈。[独立报告](review/local-flow-cross-market-20261025/final-report.md)和[热点](review/local-flow-cross-market-20261025/ipo-profile.md)已冻结，0模型/API/下载/原件副本，原文/config/catalog稳定。
 
@@ -10,7 +10,9 @@ ROOT已核真实HTML：加粗业务标题、含bullet的flex list在原DOM存在
 
 独审还发现运行器落账故障会漏清理/未知费用可能显示0。已TDD修在既有phase_c_runner：始终清理自有临时湖、同一账本保守hold及逐run去重/对账释放、未知delta为null；主机四文件59PASS/66.50秒；之后journal绑定3项真RED→当前finalization12PASS/11.77秒，旧母账两例1.53秒通过（计数重叠，不相加），Ruff/diff-check绿，最终独审PASS（仅清理/费用工程，见review/production-v4-formal-20261025/independent/finalization-final-review.json）。恢复CLI只读失败当时绑定SHA的用量记录，同键释放占额；记录变更或从未保存时保留unknown。没有新client/store/预算库/人工签收；[技术节点](review/production-v4-formal-20261025/README.md)。本轮未发起真实付费摘要，母账仍1,783,378 tokens/$0.724836，配置10M/$20含unknown。
 
-**下一步唯一行动：** 接收清理/费用根修最终独审并发布；随后按CF1–CF4先中性RED再共享owner实施，修来源关系、未闭句和选择效率，再新attempt三源验收。来源合格后才正式v4摘要、cache零重复费用与RF真实采用。W16/W17/W18作者工区不写，Dayu/IQS不动。
+**下一步唯一行动：** 清理/费用根修已发布并精确CI全绿；按CF1–CF4先中性RED再共享owner实施，修来源关系、未闭句和选择效率，再新attempt三源验收。来源合格后才正式v4摘要、cache零重复费用与RF真实采用。W16/W17/W18作者工区不写，Dayu/IQS不动。
+
+**用户新增独立线W19（READY，可立即派发）：** [新浪三表API/CWP专门存储/FF调用施工卡](harness_lanes/20261025/W19-SINA-STATEMENTS.md)。真实接口及完整分页已调查，18份离线响应175785B；此卡用两个新工区，只改新增financial_statements及必要storage接缝，不改ROOT叙述/结构路径，与W16/W17/W18独立。独立施工设计审查PASS，两个工区seed已提交、tracked clean、实际源码就绪；状态见W19-setup.json；不把任务卡或网络形状调查当实现通过。
 
 ---
 

@@ -26,15 +26,13 @@
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
-  "last_code_commit": "483cb2a56299cb28ca07bbd349674860baf04430",
+  "last_code_commit": "243993d2c9e12c2a9cb6e2b728e547928607abff",
   "code_ci": {
-    "id": 40191425654,
-    "head_sha": "483cb2a56299cb28ca07bbd349674860baf04430",
+    "id": 40195639414,
+    "head_sha": "243993d2c9e12c2a9cb6e2b728e547928607abff",
     "status": "completed",
     "conclusion": "success",
-    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40191425654",
-    "created_at": "2026-10-25T12:02:59Z",
-    "updated_at": "2026-10-25T12:07:16Z"
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40195639414"
   },
   "formal_v4_offline_selection_replay_20261025": {
     "status": "EXACT_REPRODUCED_NO_PAID_CALL",
@@ -335,7 +333,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "Receive frozen finalization/accounting fix independent review, fix any material findings, normal commit/push. Then CF1-CF4 shared source work: native HTML outline/list observations, PDF incomplete fragment/continuation and selected factual coverage, IPO structure/candidate scan reuse using measured hotspots. Keep configured16M/112 and frozen source/gold. No new paid summaries until this source node is actually adequate; no permission receipt chain. W16/W17/W18 author paths stay isolated.",
+  "next_step_now": "Finalization engineering243993d2 published and exact CI40195639414 success. Proceed CF1-CF4 TDD/shared source owner fixes without changing configured16M/112. W19 Sina financial statement source/API/storage/FF package prepared separately; no author implementation started, no shared narrative paths.",
   "parallel_work_packages": [
     {
       "id": "IR-REPORT-GENERATION",
@@ -2025,7 +2023,7 @@
     "protected_source_config_catalog_unchanged": true
   },
   "formal_v4_operation_20261025": {
-    "status": "ENGINEERING_INDEPENDENT_PASS_READY_TO_PUBLISH; NOT_EXECUTED_SOURCE_GAPS_OPEN",
+    "status": "ENGINEERING_PUBLISHED_EXACT_CI_SUCCESS; NOT_EXECUTED_SOURCE_GAPS_OPEN",
     "entry": "review/production-v4-formal-20261025/README.md",
     "verification": "review/production-v4-formal-20261025/finalization-verification.json",
     "new_source_technical_code": "Existing phase_c_runner only; no new client/store/ledger",
@@ -2034,6 +2032,23 @@
     "api_calls": 0,
     "manual_receipt_permission_added": false,
     "accounting_recovery": "Same ledger fallback binds durable native-usage SHA; offline CLI after AUTO DB removed, same-key release/idempotency; absent or changed journal stays unknown, no model POST",
-    "independent_review": "review/production-v4-formal-20261025/independent/finalization-final-review.json"
+    "independent_review": "review/production-v4-formal-20261025/independent/finalization-final-review.json",
+    "publication": "review/production-v4-formal-20261025/publication.json"
+  },
+  "w19_sina_statements_20261025": {
+    "status": "READY_NOT_DISPATCHED_PACKET_INDEPENDENT_PASS",
+    "card": "harness_lanes/20261025/W19-SINA-STATEMENTS.md",
+    "setup": "harness_lanes/20261025/W19-setup.json",
+    "research": "review/sina-statements-research-20261025/README.md",
+    "research_public_http_requests": 20,
+    "research_public_response_bytes": 2634389,
+    "fixture_gzip_bytes": 175785,
+    "production_database_opened": false,
+    "paid_calls": 0,
+    "seed_commits": {
+      "company-wiki": "a308350279623577f75863f86605aa803e8c565a",
+      "filing-fetch": "c8b0e40f6772d1cad91f0bc0a127cc807c340810"
+    },
+    "independent_review": "harness_lanes/20261025/W19-packet-review.json"
   }
 }

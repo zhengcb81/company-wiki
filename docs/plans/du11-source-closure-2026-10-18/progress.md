@@ -1148,3 +1148,11 @@ ROOT已核真实HTML：加粗业务标题、含bullet的flex list在原DOM存在
 
 
 故障测试过程如实保留：首RED夹具漏sample_id，纠正后真正finally-OSError RED；首集中51例44P7F，其中2个loopback为沙箱socket、5个暴露旧安全条件错误地禁止workspace中自有tmp。新绝对parent/prefix检查只禁止删仓/祖先，允许安全自有子tmp；在正常主机同4文件54项通过。未知hold新增2真RED后修复：同账本按run取真钱合计与保守占额之较大值、同键settled0释放；已有/未有模拟POST与hold存储拒绝补6P。所有测试tmp恢复，真实母账未变。
+
+## 2026-10-25 清理/费用发布与新浪三表新独立卡
+
+清理/费用根修独审PASS，243993d2正常提交推送，pre-push154P/29.25秒，精确CI40195639414 success；三被审文件与Git LF字节相同，publication.json留证。来源CF1–CF4/正式摘要/RF未签收。
+
+用户提出新浪A股三表；已核官方页面实际JS数据入口，冻结18份API原始响应175785B，20次研究请求2634389B，三表分别36/33/36期、9729源行。publish_date存在后期修订/口径风险，当前快照不冒充过去PIT；未作官方逐值正确性验收、未写生产库、0付费。完整调查和W19独立卡分别在review/sina-statements-research-20261025与harness_lanes/20261025；CWP/FF两个独立工区已创建并准备文档seed，最终独审进行中，未启动产品实现。原三卡不受影响，ROOT继续文档阅读/摘要owner。
+
+W19交接就绪：施工设计独审PASS，18份API夹具逐份SHA/长度核对一致；CWP seed a3083502、FF seed c8b0e40已正常commit，两个工区tracked clean、源码实际存在且只新增本卡PWF。状态READY_NOT_DISPATCHED，尚无产品实现。初始化空index/只读全局hook cache失败已解决，详情W19-setup.json及各工区progress；hooks未绕过。

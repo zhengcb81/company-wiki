@@ -1,0 +1,5846 @@
+[
+  {
+    "url": "https://quotes.sina.cn/cn/api/openapi.php/CompanyFinanceService.getFinanceReport2022?paperCode=sh688012&source=lrb&type=0&page=1&num=10",
+    "http_status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "server_date": "Sun, 25 Oct 2026 13:04:06 GMT",
+    "bytes": 196351,
+    "sha256": "2aa0b2ba42c1b449b5f8ec8868855e4f2ae707213a1e770262e9349ad92f3b20",
+    "retrieved_at": "2026-10-25T13:04:06.465392+00:00",
+    "parameters": {
+      "paperCode": "sh688012",
+      "source": "lrb",
+      "type": 0,
+      "page": 1,
+      "num": 10
+    },
+    "fixture": "sh688012-lrb-type0-page1-num10.json.gz",
+    "result_status": {
+      "code": 0
+    },
+    "data_type": "dict",
+    "report_count": "36",
+    "report_dates": [
+      {
+        "date_value": "20260630",
+        "date_description": "2026半年报",
+        "date_type": 2
+      },
+      {
+        "date_value": "20260331",
+        "date_description": "2026一季报",
+        "date_type": 1
+      },
+      {
+        "date_value": "20251231",
+        "date_description": "2025年报",
+        "date_type": 4
+      },
+      {
+        "date_value": "20250930",
+        "date_description": "2025三季报",
+        "date_type": 3
+      },
+      {
+        "date_value": "20250630",
+        "date_description": "2025半年报",
+        "date_type": 2
+      },
+      {
+        "date_value": "20250331",
+        "date_description": "2025一季报",
+        "date_type": 1
+      },
+      {
+        "date_value": "20241231",
+        "date_description": "2024年报",
+        "date_type": 4
+      },
+      {
+        "date_value": "20240930",
+        "date_description": "2024三季报",
+        "date_type": 3
+      },
+      {
+        "date_value": "20240630",
+        "date_description": "2024半年报",
+        "date_type": 2
+      },
+      {
+        "date_value": "20240331",
+        "date_description": "2024一季报",
+        "date_type": 1
+      }
+    ],
+    "reports": [
+      {
+        "period_end_raw": "20260630",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20260820",
+        "update_time": 1787134205,
+        "items": 77,
+        "sample_items": [
+          {
+            "item_field": "BIZTOTINCO",
+            "item_title": "营业总收入",
+            "item_value": "6691287327.670000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.34889
+          },
+          {
+            "item_field": "BIZINCO",
+            "item_title": "营业收入",
+            "item_value": "6691287327.670000",
+            "item_display_type": 2,
+            "item_display": "小类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.34889
+          },
+          {
+            "item_field": "BASICEPS",
+            "item_title": "基本每股收益",
+            "item_value": "4.330000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "ps4",
+            "item_group_no": 8,
+            "item_source": "lrb",
+            "item_tongbi": 2.83186
+          }
+        ],
+        "precision_types": [
+          "f2",
+          "ps4"
+        ],
+        "blank_field_rows": 0,
+        "null_values": 41
+      },
+      {
+        "period_end_raw": "20260331",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20260428",
+        "update_time": 1777292045,
+        "items": 77,
+        "sample_items": [
+          {
+            "item_field": "BIZTOTINCO",
+            "item_title": "营业总收入",
+            "item_value": "2914986518.730000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.34129
+          },
+          {
+            "item_field": "BIZINCO",
+            "item_title": "营业收入",
+            "item_value": "2914986518.730000",
+            "item_display_type": 2,
+            "item_display": "小类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.34129
+          },
+          {
+            "item_field": "BASICEPS",
+            "item_title": "基本每股收益",
+            "item_value": "1.480000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "ps4",
+            "item_group_no": 8,
+            "item_source": "lrb",
+            "item_tongbi": 1.96
+          }
+        ],
+        "precision_types": [
+          "f2",
+          "ps4"
+        ],
+        "blank_field_rows": 0,
+        "null_values": 41
+      },
+      {
+        "period_end_raw": "20251231",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "是",
+        "audit_opinion": "标准无保留审计意见",
+        "publish_date": "20260331",
+        "update_time": 1774875725,
+        "items": 77,
+        "sample_items": [
+          {
+            "item_field": "BIZTOTINCO",
+            "item_title": "营业总收入",
+            "item_value": "12384638268.110000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.36618
+          },
+          {
+            "item_field": "BIZINCO",
+            "item_title": "营业收入",
+            "item_value": "12384638268.110000",
+            "item_display_type": 2,
+            "item_display": "小类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.36618
+          },
+          {
+            "item_field": "BASICEPS",
+            "item_title": "基本每股收益",
+            "item_value": "3.400000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "ps4",
+            "item_group_no": 8,
+            "item_source": "lrb",
+            "item_tongbi": 0.30268
+          }
+        ],
+        "precision_types": [
+          "f2",
+          "ps4"
+        ],
+        "blank_field_rows": 0,
+        "null_values": 40
+      },
+      {
+        "period_end_raw": "20250930",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20251030",
+        "update_time": 1761731288,
+        "items": 77,
+        "sample_items": [
+          {
+            "item_field": "BIZTOTINCO",
+            "item_title": "营业总收入",
+            "item_value": "8062565115.420000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.46401
+          },
+          {
+            "item_field": "BIZINCO",
+            "item_title": "营业收入",
+            "item_value": "8062565115.420000",
+            "item_display_type": 2,
+            "item_display": "小类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.46401
+          },
+          {
+            "item_field": "BASICEPS",
+            "item_title": "基本每股收益",
+            "item_value": "1.940000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "ps4",
+            "item_group_no": 8,
+            "item_source": "lrb",
+            "item_tongbi": 0.31081
+          }
+        ],
+        "precision_types": [
+          "f2",
+          "ps4"
+        ],
+        "blank_field_rows": 0,
+        "null_values": 40
+      },
+      {
+        "period_end_raw": "20250630",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20260820",
+        "update_time": 1756373045,
+        "items": 77,
+        "sample_items": [
+          {
+            "item_field": "BIZTOTINCO",
+            "item_title": "营业总收入",
+            "item_value": "4960601270.040000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.43881
+          },
+          {
+            "item_field": "BIZINCO",
+            "item_title": "营业收入",
+            "item_value": "4960601270.040000",
+            "item_display_type": 2,
+            "item_display": "小类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.43881
+          },
+          {
+            "item_field": "BASICEPS",
+            "item_title": "基本每股收益",
+            "item_value": "1.130000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "ps4",
+            "item_group_no": 8,
+            "item_source": "lrb",
+            "item_tongbi": 0.34524
+          }
+        ],
+        "precision_types": [
+          "f2",
+          "ps4"
+        ],
+        "blank_field_rows": 0,
+        "null_values": 40
+      },
+      {
+        "period_end_raw": "20250331",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20260428",
+        "update_time": 1745497806,
+        "items": 77,
+        "sample_items": [
+          {
+            "item_field": "BIZTOTINCO",
+            "item_title": "营业总收入",
+            "item_value": "2173278385.620000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.35405
+          },
+          {
+            "item_field": "BIZINCO",
+            "item_title": "营业收入",
+            "item_value": "2173278385.620000",
+            "item_display_type": 2,
+            "item_display": "小类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.35405
+          },
+          {
+            "item_field": "BASICEPS",
+            "item_title": "基本每股收益",
+            "item_value": "0.500000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "ps4",
+            "item_group_no": 8,
+            "item_source": "lrb",
+            "item_tongbi": 0.25
+          }
+        ],
+        "precision_types": [
+          "f2",
+          "ps4"
+        ],
+        "blank_field_rows": 0,
+        "null_values": 41
+      },
+      {
+        "period_end_raw": "20241231",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "是",
+        "audit_opinion": "标准无保留审计意见",
+        "publish_date": "20260331",
+        "update_time": 1744889522,
+        "items": 77,
+        "sample_items": [
+          {
+            "item_field": "BIZTOTINCO",
+            "item_title": "营业总收入",
+            "item_value": "9065165097.690000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.4473
+          },
+          {
+            "item_field": "BIZINCO",
+            "item_title": "营业收入",
+            "item_value": "9065165097.690000",
+            "item_display_type": 2,
+            "item_display": "小类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.4473
+          },
+          {
+            "item_field": "BASICEPS",
+            "item_title": "基本每股收益",
+            "item_value": "2.610000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "ps4",
+            "item_group_no": 8,
+            "item_source": "lrb",
+            "item_tongbi": -0.09689
+          }
+        ],
+        "precision_types": [
+          "f2",
+          "ps4"
+        ],
+        "blank_field_rows": 0,
+        "null_values": 40
+      },
+      {
+        "period_end_raw": "20240930",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20251030",
+        "update_time": 1730205428,
+        "items": 77,
+        "sample_items": [
+          {
+            "item_field": "BIZTOTINCO",
+            "item_title": "营业总收入",
+            "item_value": "5507194599.460000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.36274
+          },
+          {
+            "item_field": "BIZINCO",
+            "item_title": "营业收入",
+            "item_value": "5507194599.460000",
+            "item_display_type": 2,
+            "item_display": "小类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.36274
+          },
+          {
+            "item_field": "BASICEPS",
+            "item_title": "基本每股收益",
+            "item_value": "1.480000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "ps4",
+            "item_group_no": 8,
+            "item_source": "lrb",
+            "item_tongbi": -0.21277
+          }
+        ],
+        "precision_types": [
+          "f2",
+          "ps4"
+        ],
+        "blank_field_rows": 0,
+        "null_values": 40
+      },
+      {
+        "period_end_raw": "20240630",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20250829",
+        "update_time": 1724331123,
+        "items": 77,
+        "sample_items": [
+          {
+            "item_field": "BIZTOTINCO",
+            "item_title": "营业总收入",
+            "item_value": "3447712750.840000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.36462
+          },
+          {
+            "item_field": "BIZINCO",
+            "item_title": "营业收入",
+            "item_value": "3447712750.840000",
+            "item_display_type": 2,
+            "item_display": "小类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.36462
+          },
+          {
+            "item_field": "BASICEPS",
+            "item_title": "基本每股收益",
+            "item_value": "0.840000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "ps4",
+            "item_group_no": 8,
+            "item_source": "lrb",
+            "item_tongbi": -0.48466
+          }
+        ],
+        "precision_types": [
+          "f2",
+          "ps4"
+        ],
+        "blank_field_rows": 0,
+        "null_values": 40
+      },
+      {
+        "period_end_raw": "20240331",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20250425",
+        "update_time": 1714068426,
+        "items": 77,
+        "sample_items": [
+          {
+            "item_field": "BIZTOTINCO",
+            "item_title": "营业总收入",
+            "item_value": "1605024097.680000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.31229
+          },
+          {
+            "item_field": "BIZINCO",
+            "item_title": "营业收入",
+            "item_value": "1605024097.680000",
+            "item_display_type": 2,
+            "item_display": "小类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.31229
+          },
+          {
+            "item_field": "BASICEPS",
+            "item_title": "基本每股收益",
+            "item_value": "0.400000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "ps4",
+            "item_group_no": 8,
+            "item_source": "lrb",
+            "item_tongbi": -0.11111
+          }
+        ],
+        "precision_types": [
+          "f2",
+          "ps4"
+        ],
+        "blank_field_rows": 0,
+        "null_values": 42
+      }
+    ]
+  },
+  {
+    "url": "https://quotes.sina.cn/cn/api/openapi.php/CompanyFinanceService.getFinanceReport2022?paperCode=sh688012&source=lrb&type=0&page=2&num=10",
+    "http_status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "server_date": "Sun, 25 Oct 2026 13:04:08 GMT",
+    "bytes": 196381,
+    "sha256": "1a705900667d517f0a92358f561d1c971e862746336c6eb4cd4859afe480e3ff",
+    "retrieved_at": "2026-10-25T13:04:08.527384+00:00",
+    "parameters": {
+      "paperCode": "sh688012",
+      "source": "lrb",
+      "type": 0,
+      "page": 2,
+      "num": 10
+    },
+    "fixture": "sh688012-lrb-type0-page2-num10.json.gz",
+    "result_status": {
+      "code": 0
+    },
+    "data_type": "dict",
+    "report_count": "36",
+    "report_dates": [
+      {
+        "date_value": "20231231",
+        "date_description": "2023年报",
+        "date_type": 4
+      },
+      {
+        "date_value": "20230930",
+        "date_description": "2023三季报",
+        "date_type": 3
+      },
+      {
+        "date_value": "20230630",
+        "date_description": "2023半年报",
+        "date_type": 2
+      },
+      {
+        "date_value": "20230331",
+        "date_description": "2023一季报",
+        "date_type": 1
+      },
+      {
+        "date_value": "20221231",
+        "date_description": "2022年报",
+        "date_type": 4
+      },
+      {
+        "date_value": "20220930",
+        "date_description": "2022三季报",
+        "date_type": 3
+      },
+      {
+        "date_value": "20220630",
+        "date_description": "2022半年报",
+        "date_type": 2
+      },
+      {
+        "date_value": "20220331",
+        "date_description": "2022一季报",
+        "date_type": 1
+      },
+      {
+        "date_value": "20211231",
+        "date_description": "2021年报",
+        "date_type": 4
+      },
+      {
+        "date_value": "20210930",
+        "date_description": "2021三季报",
+        "date_type": 3
+      }
+    ],
+    "reports": [
+      {
+        "period_end_raw": "20231231",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "是",
+        "audit_opinion": "标准无保留审计意见",
+        "publish_date": "20250418",
+        "update_time": 1710759722,
+        "items": 77,
+        "sample_items": [
+          {
+            "item_field": "BIZTOTINCO",
+            "item_title": "营业总收入",
+            "item_value": "6263513581.370000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.32146
+          },
+          {
+            "item_field": "BIZINCO",
+            "item_title": "营业收入",
+            "item_value": "6263513581.370000",
+            "item_display_type": 2,
+            "item_display": "小类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.32146
+          },
+          {
+            "item_field": "BASICEPS",
+            "item_title": "基本每股收益",
+            "item_value": "2.890000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "ps4",
+            "item_group_no": 8,
+            "item_source": "lrb",
+            "item_tongbi": 0.52105
+          }
+        ],
+        "precision_types": [
+          "f2",
+          "ps4"
+        ],
+        "blank_field_rows": 0,
+        "null_values": 40
+      },
+      {
+        "period_end_raw": "20230930",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20241030",
+        "update_time": 1698322623,
+        "items": 77,
+        "sample_items": [
+          {
+            "item_field": "BIZTOTINCO",
+            "item_title": "营业总收入",
+            "item_value": "4041266479.180000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.32803
+          },
+          {
+            "item_field": "BIZINCO",
+            "item_title": "营业收入",
+            "item_value": "4041266479.180000",
+            "item_display_type": 2,
+            "item_display": "小类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.32803
+          },
+          {
+            "item_field": "BASICEPS",
+            "item_title": "基本每股收益",
+            "item_value": "1.880000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "ps4",
+            "item_group_no": 8,
+            "item_source": "lrb",
+            "item_tongbi": 0.45736
+          }
+        ],
+        "precision_types": [
+          "f2",
+          "ps4"
+        ],
+        "blank_field_rows": 0,
+        "null_values": 40
+      },
+      {
+        "period_end_raw": "20230630",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20240823",
+        "update_time": 1724331123,
+        "items": 77,
+        "sample_items": [
+          {
+            "item_field": "BIZTOTINCO",
+            "item_title": "营业总收入",
+            "item_value": "2526501011.910000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.28132
+          },
+          {
+            "item_field": "BIZINCO",
+            "item_title": "营业收入",
+            "item_value": "2526501011.910000",
+            "item_display_type": 2,
+            "item_display": "小类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.28132
+          },
+          {
+            "item_field": "BASICEPS",
+            "item_title": "基本每股收益",
+            "item_value": "1.630000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "ps4",
+            "item_group_no": 8,
+            "item_source": "lrb",
+            "item_tongbi": 1.14474
+          }
+        ],
+        "precision_types": [
+          "f2",
+          "ps4"
+        ],
+        "blank_field_rows": 0,
+        "null_values": 40
+      },
+      {
+        "period_end_raw": "20230331",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20240426",
+        "update_time": 1682692324,
+        "items": 77,
+        "sample_items": [
+          {
+            "item_field": "BIZTOTINCO",
+            "item_title": "营业总收入",
+            "item_value": "1223068402.750000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.2886
+          },
+          {
+            "item_field": "BIZINCO",
+            "item_title": "营业收入",
+            "item_value": "1223068402.750000",
+            "item_display_type": 2,
+            "item_display": "小类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.2886
+          },
+          {
+            "item_field": "BASICEPS",
+            "item_title": "基本每股收益",
+            "item_value": "0.450000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "ps4",
+            "item_group_no": 8,
+            "item_source": "lrb",
+            "item_tongbi": 1.36842
+          }
+        ],
+        "precision_types": [
+          "f2",
+          "ps4"
+        ],
+        "blank_field_rows": 0,
+        "null_values": 41
+      },
+      {
+        "period_end_raw": "20221231",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "是",
+        "audit_opinion": "标准无保留审计意见",
+        "publish_date": "20240319",
+        "update_time": 1680201425,
+        "items": 77,
+        "sample_items": [
+          {
+            "item_field": "BIZTOTINCO",
+            "item_title": "营业总收入",
+            "item_value": "4739830997.550000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.52498
+          },
+          {
+            "item_field": "BIZINCO",
+            "item_title": "营业收入",
+            "item_value": "4739830997.550000",
+            "item_display_type": 2,
+            "item_display": "小类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.52498
+          },
+          {
+            "item_field": "BASICEPS",
+            "item_title": "基本每股收益",
+            "item_value": "1.900000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "ps4",
+            "item_group_no": 8,
+            "item_source": "lrb",
+            "item_tongbi": 0.07955
+          }
+        ],
+        "precision_types": [
+          "f2",
+          "ps4"
+        ],
+        "blank_field_rows": 0,
+        "null_values": 40
+      },
+      {
+        "period_end_raw": "20220930",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20231027",
+        "update_time": 1666879324,
+        "items": 77,
+        "sample_items": [
+          {
+            "item_field": "BIZTOTINCO",
+            "item_title": "营业总收入",
+            "item_value": "3043057722.110000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.46811
+          },
+          {
+            "item_field": "BIZINCO",
+            "item_title": "营业收入",
+            "item_value": "3043057722.110000",
+            "item_display_type": 2,
+            "item_display": "小类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.46811
+          },
+          {
+            "item_field": "BASICEPS",
+            "item_title": "基本每股收益",
+            "item_value": "1.290000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "ps4",
+            "item_group_no": 8,
+            "item_source": "lrb",
+            "item_tongbi": 0.34375
+          }
+        ],
+        "precision_types": [
+          "f2",
+          "ps4"
+        ],
+        "blank_field_rows": 0,
+        "null_values": 40
+      },
+      {
+        "period_end_raw": "20220630",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20230825",
+        "update_time": 1660132322,
+        "items": 77,
+        "sample_items": [
+          {
+            "item_field": "BIZTOTINCO",
+            "item_title": "营业总收入",
+            "item_value": "1971794762.860000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.473
+          },
+          {
+            "item_field": "BIZINCO",
+            "item_title": "营业收入",
+            "item_value": "1971794762.860000",
+            "item_display_type": 2,
+            "item_display": "小类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.473
+          },
+          {
+            "item_field": "BASICEPS",
+            "item_title": "基本每股收益",
+            "item_value": "0.760000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "ps4",
+            "item_group_no": 8,
+            "item_source": "lrb",
+            "item_tongbi": 0.02703
+          }
+        ],
+        "precision_types": [
+          "f2",
+          "ps4"
+        ],
+        "blank_field_rows": 0,
+        "null_values": 40
+      },
+      {
+        "period_end_raw": "20220331",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20230429",
+        "update_time": 1651049526,
+        "items": 77,
+        "sample_items": [
+          {
+            "item_field": "BIZTOTINCO",
+            "item_title": "营业总收入",
+            "item_value": "949143575.280000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.57313
+          },
+          {
+            "item_field": "BIZINCO",
+            "item_title": "营业收入",
+            "item_value": "949143575.280000",
+            "item_display_type": 2,
+            "item_display": "小类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.57313
+          },
+          {
+            "item_field": "BASICEPS",
+            "item_title": "基本每股收益",
+            "item_value": "0.190000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "ps4",
+            "item_group_no": 8,
+            "item_source": "lrb",
+            "item_tongbi": -0.26923
+          }
+        ],
+        "precision_types": [
+          "f2",
+          "ps4"
+        ],
+        "blank_field_rows": 0,
+        "null_values": 40
+      },
+      {
+        "period_end_raw": "20211231",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "是",
+        "audit_opinion": "标准无保留审计意见",
+        "publish_date": "20230331",
+        "update_time": 1648650724,
+        "items": 77,
+        "sample_items": [
+          {
+            "item_field": "BIZTOTINCO",
+            "item_title": "营业总收入",
+            "item_value": "3108134730.670000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.36724
+          },
+          {
+            "item_field": "BIZINCO",
+            "item_title": "营业收入",
+            "item_value": "3108134730.670000",
+            "item_display_type": 2,
+            "item_display": "小类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.36724
+          },
+          {
+            "item_field": "BASICEPS",
+            "item_title": "基本每股收益",
+            "item_value": "1.760000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "ps4",
+            "item_group_no": 8,
+            "item_source": "lrb",
+            "item_tongbi": 0.91304
+          }
+        ],
+        "precision_types": [
+          "f2",
+          "ps4"
+        ],
+        "blank_field_rows": 0,
+        "null_values": 40
+      },
+      {
+        "period_end_raw": "20210930",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20221028",
+        "update_time": 1635338824,
+        "items": 77,
+        "sample_items": [
+          {
+            "item_field": "BIZTOTINCO",
+            "item_title": "营业总收入",
+            "item_value": "2072777066.620000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.40403
+          },
+          {
+            "item_field": "BIZINCO",
+            "item_title": "营业收入",
+            "item_value": "2072777066.620000",
+            "item_display_type": 2,
+            "item_display": "小类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.40403
+          },
+          {
+            "item_field": "BASICEPS",
+            "item_title": "基本每股收益",
+            "item_value": "0.960000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "ps4",
+            "item_group_no": 8,
+            "item_source": "lrb",
+            "item_tongbi": 0.84615
+          }
+        ],
+        "precision_types": [
+          "f2",
+          "ps4"
+        ],
+        "blank_field_rows": 0,
+        "null_values": 40
+      }
+    ]
+  },
+  {
+    "url": "https://quotes.sina.cn/cn/api/openapi.php/CompanyFinanceService.getFinanceReport2022?paperCode=sh688012&source=lrb&type=0&page=3&num=10",
+    "http_status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "server_date": "Sun, 25 Oct 2026 13:04:12 GMT",
+    "bytes": 195795,
+    "sha256": "d823e8c2cc6fa0a2def3cf841f6ec6e34f3ff305a347bea3a6fb4e263dd441c0",
+    "retrieved_at": "2026-10-25T13:04:12.291671+00:00",
+    "parameters": {
+      "paperCode": "sh688012",
+      "source": "lrb",
+      "type": 0,
+      "page": 3,
+      "num": 10
+    },
+    "fixture": "sh688012-lrb-type0-page3-num10.json.gz",
+    "result_status": {
+      "code": 0
+    },
+    "data_type": "dict",
+    "report_count": "36",
+    "report_dates": [
+      {
+        "date_value": "20210630",
+        "date_description": "2021半年报",
+        "date_type": 2
+      },
+      {
+        "date_value": "20210331",
+        "date_description": "2021一季报",
+        "date_type": 1
+      },
+      {
+        "date_value": "20201231",
+        "date_description": "2020年报",
+        "date_type": 4
+      },
+      {
+        "date_value": "20200930",
+        "date_description": "2020三季报",
+        "date_type": 3
+      },
+      {
+        "date_value": "20200630",
+        "date_description": "2020半年报",
+        "date_type": 2
+      },
+      {
+        "date_value": "20200331",
+        "date_description": "2020一季报",
+        "date_type": 1
+      },
+      {
+        "date_value": "20191231",
+        "date_description": "2019年报",
+        "date_type": 4
+      },
+      {
+        "date_value": "20190930",
+        "date_description": "2019三季报",
+        "date_type": 3
+      },
+      {
+        "date_value": "20190630",
+        "date_description": "2019半年报",
+        "date_type": 2
+      },
+      {
+        "date_value": "20190331",
+        "date_description": "2019一季报",
+        "date_type": 1
+      }
+    ],
+    "reports": [
+      {
+        "period_end_raw": "20210630",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20220811",
+        "update_time": 1629802023,
+        "items": 77,
+        "sample_items": [
+          {
+            "item_field": "BIZTOTINCO",
+            "item_title": "营业总收入",
+            "item_value": "1338627684.430000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.36817
+          },
+          {
+            "item_field": "BIZINCO",
+            "item_title": "营业收入",
+            "item_value": "1338627684.430000",
+            "item_display_type": 2,
+            "item_display": "小类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.36817
+          },
+          {
+            "item_field": "BASICEPS",
+            "item_title": "基本每股收益",
+            "item_value": "0.740000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "ps4",
+            "item_group_no": 8,
+            "item_source": "lrb",
+            "item_tongbi": 2.36364
+          }
+        ],
+        "precision_types": [
+          "f2",
+          "ps4"
+        ],
+        "blank_field_rows": 0,
+        "null_values": 40
+      },
+      {
+        "period_end_raw": "20210331",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20220428",
+        "update_time": 1619537823,
+        "items": 77,
+        "sample_items": [
+          {
+            "item_field": "BIZTOTINCO",
+            "item_title": "营业总收入",
+            "item_value": "603346870.600000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.46235
+          },
+          {
+            "item_field": "BIZINCO",
+            "item_title": "营业收入",
+            "item_value": "603346870.600000",
+            "item_display_type": 2,
+            "item_display": "小类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.46235
+          },
+          {
+            "item_field": "BASICEPS",
+            "item_title": "基本每股收益",
+            "item_value": "0.260000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "ps4",
+            "item_group_no": 8,
+            "item_source": "lrb",
+            "item_tongbi": 4.2
+          }
+        ],
+        "precision_types": [
+          "f2",
+          "ps4"
+        ],
+        "blank_field_rows": 0,
+        "null_values": 41
+      },
+      {
+        "period_end_raw": "20201231",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "是",
+        "audit_opinion": "标准无保留审计意见",
+        "publish_date": "20220331",
+        "update_time": 1617103323,
+        "items": 77,
+        "sample_items": [
+          {
+            "item_field": "BIZTOTINCO",
+            "item_title": "营业总收入",
+            "item_value": "2273291898.060000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.16762
+          },
+          {
+            "item_field": "BIZINCO",
+            "item_title": "营业收入",
+            "item_value": "2273291898.060000",
+            "item_display_type": 2,
+            "item_display": "小类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.16762
+          },
+          {
+            "item_field": "BASICEPS",
+            "item_title": "基本每股收益",
+            "item_value": "0.920000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "ps4",
+            "item_group_no": 8,
+            "item_source": "lrb",
+            "item_tongbi": 1.48649
+          }
+        ],
+        "precision_types": [
+          "f2",
+          "ps4"
+        ],
+        "blank_field_rows": 0,
+        "null_values": 40
+      },
+      {
+        "period_end_raw": "20200930",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20211028",
+        "update_time": 1603885923,
+        "items": 77,
+        "sample_items": [
+          {
+            "item_field": "BIZTOTINCO",
+            "item_title": "营业总收入",
+            "item_value": "1476308787.770000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.21255
+          },
+          {
+            "item_field": "BIZINCO",
+            "item_title": "营业收入",
+            "item_value": "1476308787.770000",
+            "item_display_type": 2,
+            "item_display": "小类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.21255
+          },
+          {
+            "item_field": "BASICEPS",
+            "item_title": "基本每股收益",
+            "item_value": "0.520000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "ps4",
+            "item_group_no": 8,
+            "item_source": "lrb",
+            "item_tongbi": 0.92593
+          }
+        ],
+        "precision_types": [
+          "f2",
+          "ps4"
+        ],
+        "blank_field_rows": 0,
+        "null_values": 41
+      },
+      {
+        "period_end_raw": "20200630",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20210825",
+        "update_time": 1598638324,
+        "items": 77,
+        "sample_items": [
+          {
+            "item_field": "BIZTOTINCO",
+            "item_title": "营业总收入",
+            "item_value": "978404284.640000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.22138
+          },
+          {
+            "item_field": "BIZINCO",
+            "item_title": "营业收入",
+            "item_value": "978404284.640000",
+            "item_display_type": 2,
+            "item_display": "小类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.22138
+          },
+          {
+            "item_field": "BASICEPS",
+            "item_title": "基本每股收益",
+            "item_value": "0.220000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "ps4",
+            "item_group_no": 8,
+            "item_source": "lrb",
+            "item_tongbi": 2.66667
+          }
+        ],
+        "precision_types": [
+          "f2",
+          "ps4"
+        ],
+        "blank_field_rows": 0,
+        "null_values": 41
+      },
+      {
+        "period_end_raw": "20200331",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20210428",
+        "update_time": 1588117923,
+        "items": 77,
+        "sample_items": [
+          {
+            "item_field": "BIZTOTINCO",
+            "item_title": "营业总收入",
+            "item_value": "412585985.950000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.09646
+          },
+          {
+            "item_field": "BIZINCO",
+            "item_title": "营业收入",
+            "item_value": "412585985.950000",
+            "item_display_type": 2,
+            "item_display": "小类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.09646
+          },
+          {
+            "item_field": "BASICEPS",
+            "item_title": "基本每股收益",
+            "item_value": "0.050000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "ps4",
+            "item_group_no": 8,
+            "item_source": "lrb",
+            "item_tongbi": 0.66667
+          }
+        ],
+        "precision_types": [
+          "f2",
+          "ps4"
+        ],
+        "blank_field_rows": 0,
+        "null_values": 43
+      },
+      {
+        "period_end_raw": "20191231",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "是",
+        "audit_opinion": "标准无保留审计意见",
+        "publish_date": "20210331",
+        "update_time": 1587041823,
+        "items": 77,
+        "sample_items": [
+          {
+            "item_field": "BIZTOTINCO",
+            "item_title": "营业总收入",
+            "item_value": "1946949250.750000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.18768
+          },
+          {
+            "item_field": "BIZINCO",
+            "item_title": "营业收入",
+            "item_value": "1946949250.750000",
+            "item_display_type": 2,
+            "item_display": "小类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.18768
+          },
+          {
+            "item_field": "BASICEPS",
+            "item_title": "基本每股收益",
+            "item_value": "0.370000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "ps4",
+            "item_group_no": 8,
+            "item_source": "lrb",
+            "item_tongbi": 0.85
+          }
+        ],
+        "precision_types": [
+          "f2",
+          "ps4"
+        ],
+        "blank_field_rows": 0,
+        "null_values": 41
+      },
+      {
+        "period_end_raw": "20190930",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20201029",
+        "update_time": 1584086440,
+        "items": 77,
+        "sample_items": [
+          {
+            "item_field": "BIZTOTINCO",
+            "item_title": "营业总收入",
+            "item_value": "1217521611.840000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.24745
+          },
+          {
+            "item_field": "BIZINCO",
+            "item_title": "营业收入",
+            "item_value": "1217521611.840000",
+            "item_display_type": 2,
+            "item_display": "小类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.24745
+          },
+          {
+            "item_field": "BASICEPS",
+            "item_title": "基本每股收益",
+            "item_value": "0.270000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "ps4",
+            "item_group_no": 8,
+            "item_source": "lrb",
+            "item_tongbi": ""
+          }
+        ],
+        "precision_types": [
+          "f2",
+          "ps4"
+        ],
+        "blank_field_rows": 0,
+        "null_values": 41
+      },
+      {
+        "period_end_raw": "20190630",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20200829",
+        "update_time": 1584086440,
+        "items": 77,
+        "sample_items": [
+          {
+            "item_field": "BIZTOTINCO",
+            "item_title": "营业总收入",
+            "item_value": "801062332.680000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.72034
+          },
+          {
+            "item_field": "BIZINCO",
+            "item_title": "营业收入",
+            "item_value": "801062332.680000",
+            "item_display_type": 2,
+            "item_display": "小类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.72034
+          },
+          {
+            "item_field": "BASICEPS",
+            "item_title": "基本每股收益",
+            "item_value": "0.060000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "ps4",
+            "item_group_no": 8,
+            "item_source": "lrb",
+            "item_tongbi": ""
+          }
+        ],
+        "precision_types": [
+          "f2",
+          "ps4"
+        ],
+        "blank_field_rows": 0,
+        "null_values": 41
+      },
+      {
+        "period_end_raw": "20190331",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20200429",
+        "update_time": 1584086440,
+        "items": 77,
+        "sample_items": [
+          {
+            "item_field": "BIZTOTINCO",
+            "item_title": "营业总收入",
+            "item_value": "376288946.910000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 5.24134
+          },
+          {
+            "item_field": "BIZINCO",
+            "item_title": "营业收入",
+            "item_value": "376288946.910000",
+            "item_display_type": 2,
+            "item_display": "小类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 5.24134
+          },
+          {
+            "item_field": "BASICEPS",
+            "item_title": "基本每股收益",
+            "item_value": "0.030000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "ps4",
+            "item_group_no": 8,
+            "item_source": "lrb",
+            "item_tongbi": ""
+          }
+        ],
+        "precision_types": [
+          "f2",
+          "ps4"
+        ],
+        "blank_field_rows": 0,
+        "null_values": 42
+      }
+    ]
+  },
+  {
+    "url": "https://quotes.sina.cn/cn/api/openapi.php/CompanyFinanceService.getFinanceReport2022?paperCode=sh688012&source=lrb&type=0&page=4&num=10",
+    "http_status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "server_date": "Sun, 25 Oct 2026 13:04:16 GMT",
+    "bytes": 116608,
+    "sha256": "1fe421c2cb11260c4251d7621a6e249809056257e21bb3620fe10ed60001149a",
+    "retrieved_at": "2026-10-25T13:04:15.853005+00:00",
+    "parameters": {
+      "paperCode": "sh688012",
+      "source": "lrb",
+      "type": 0,
+      "page": 4,
+      "num": 10
+    },
+    "fixture": "sh688012-lrb-type0-page4-num10.json.gz",
+    "result_status": {
+      "code": 0
+    },
+    "data_type": "dict",
+    "report_count": "36",
+    "report_dates": [
+      {
+        "date_value": "20181231",
+        "date_description": "2018年报",
+        "date_type": 4
+      },
+      {
+        "date_value": "20180930",
+        "date_description": "2018三季报",
+        "date_type": 3
+      },
+      {
+        "date_value": "20180630",
+        "date_description": "2018半年报",
+        "date_type": 2
+      },
+      {
+        "date_value": "20180331",
+        "date_description": "2018一季报",
+        "date_type": 1
+      },
+      {
+        "date_value": "20171231",
+        "date_description": "2017年报",
+        "date_type": 4
+      },
+      {
+        "date_value": "20161231",
+        "date_description": "2016年报",
+        "date_type": 4
+      }
+    ],
+    "reports": [
+      {
+        "period_end_raw": "20181231",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "是",
+        "audit_opinion": "标准无保留审计意见",
+        "publish_date": "20200417",
+        "update_time": 1584086440,
+        "items": 77,
+        "sample_items": [
+          {
+            "item_field": "BIZTOTINCO",
+            "item_title": "营业总收入",
+            "item_value": "1639288330.400000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.68665
+          },
+          {
+            "item_field": "BIZINCO",
+            "item_title": "营业收入",
+            "item_value": "1639288330.400000",
+            "item_display_type": 2,
+            "item_display": "小类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.68665
+          },
+          {
+            "item_field": "BASICEPS",
+            "item_title": "基本每股收益",
+            "item_value": "0.200000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "ps4",
+            "item_group_no": 8,
+            "item_source": "lrb",
+            "item_tongbi": ""
+          }
+        ],
+        "precision_types": [
+          "f2",
+          "ps4"
+        ],
+        "blank_field_rows": 0,
+        "null_values": 42
+      },
+      {
+        "period_end_raw": "20180930",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20191029",
+        "update_time": 1584086440,
+        "items": 77,
+        "sample_items": [
+          {
+            "item_field": "BIZTOTINCO",
+            "item_title": "营业总收入",
+            "item_value": "976008219.360000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": ""
+          },
+          {
+            "item_field": "BIZINCO",
+            "item_title": "营业收入",
+            "item_value": "976008219.360000",
+            "item_display_type": 2,
+            "item_display": "小类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": ""
+          },
+          {
+            "item_field": "BASICEPS",
+            "item_title": "基本每股收益",
+            "item_value": null,
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "ps4",
+            "item_group_no": 8,
+            "item_source": "lrb",
+            "item_tongbi": ""
+          }
+        ],
+        "precision_types": [
+          "f2",
+          "ps4"
+        ],
+        "blank_field_rows": 0,
+        "null_values": 44
+      },
+      {
+        "period_end_raw": "20180630",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20190822",
+        "update_time": 1584086440,
+        "items": 77,
+        "sample_items": [
+          {
+            "item_field": "BIZTOTINCO",
+            "item_title": "营业总收入",
+            "item_value": "465640538.440000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": ""
+          },
+          {
+            "item_field": "BIZINCO",
+            "item_title": "营业收入",
+            "item_value": "465640538.440000",
+            "item_display_type": 2,
+            "item_display": "小类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": ""
+          },
+          {
+            "item_field": "BASICEPS",
+            "item_title": "基本每股收益",
+            "item_value": null,
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "ps4",
+            "item_group_no": 8,
+            "item_source": "lrb",
+            "item_tongbi": ""
+          }
+        ],
+        "precision_types": [
+          "f2",
+          "ps4"
+        ],
+        "blank_field_rows": 0,
+        "null_values": 47
+      },
+      {
+        "period_end_raw": "20180331",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "招股说明书/意向书",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20190703",
+        "update_time": 1584086440,
+        "items": 77,
+        "sample_items": [
+          {
+            "item_field": "BIZTOTINCO",
+            "item_title": "营业总收入",
+            "item_value": "60289803.630000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": ""
+          },
+          {
+            "item_field": "BIZINCO",
+            "item_title": "营业收入",
+            "item_value": "60289803.630000",
+            "item_display_type": 2,
+            "item_display": "小类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": ""
+          },
+          {
+            "item_field": "BASICEPS",
+            "item_title": "基本每股收益",
+            "item_value": null,
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "ps4",
+            "item_group_no": 8,
+            "item_source": "lrb",
+            "item_tongbi": ""
+          }
+        ],
+        "precision_types": [
+          "f2",
+          "ps4"
+        ],
+        "blank_field_rows": 0,
+        "null_values": 50
+      },
+      {
+        "period_end_raw": "20171231",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "招股说明书/意向书",
+        "is_audit": "是",
+        "audit_opinion": "标准无保留审计意见",
+        "publish_date": "20190703",
+        "update_time": 1584086440,
+        "items": 77,
+        "sample_items": [
+          {
+            "item_field": "BIZTOTINCO",
+            "item_title": "营业总收入",
+            "item_value": "971920551.650000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.59455
+          },
+          {
+            "item_field": "BIZINCO",
+            "item_title": "营业收入",
+            "item_value": "971920551.650000",
+            "item_display_type": 2,
+            "item_display": "小类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.59455
+          },
+          {
+            "item_field": "BASICEPS",
+            "item_title": "基本每股收益",
+            "item_value": null,
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "ps4",
+            "item_group_no": 8,
+            "item_source": "lrb",
+            "item_tongbi": ""
+          }
+        ],
+        "precision_types": [
+          "f2",
+          "ps4"
+        ],
+        "blank_field_rows": 0,
+        "null_values": 48
+      },
+      {
+        "period_end_raw": "20161231",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "招股说明书/意向书",
+        "is_audit": "是",
+        "audit_opinion": "标准无保留审计意见",
+        "publish_date": "20190703",
+        "update_time": 1584086440,
+        "items": 77,
+        "sample_items": [
+          {
+            "item_field": "BIZTOTINCO",
+            "item_title": "营业总收入",
+            "item_value": "609528437.830000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": ""
+          },
+          {
+            "item_field": "BIZINCO",
+            "item_title": "营业收入",
+            "item_value": "609528437.830000",
+            "item_display_type": 2,
+            "item_display": "小类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": ""
+          },
+          {
+            "item_field": "BASICEPS",
+            "item_title": "基本每股收益",
+            "item_value": null,
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "ps4",
+            "item_group_no": 8,
+            "item_source": "lrb",
+            "item_tongbi": ""
+          }
+        ],
+        "precision_types": [
+          "f2",
+          "ps4"
+        ],
+        "blank_field_rows": 0,
+        "null_values": 47
+      }
+    ]
+  },
+  {
+    "url": "https://quotes.sina.cn/cn/api/openapi.php/CompanyFinanceService.getFinanceReport2022?paperCode=sh688012&source=fzb&type=0&page=1&num=10",
+    "http_status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "server_date": "Sun, 25 Oct 2026 13:04:18 GMT",
+    "bytes": 335794,
+    "sha256": "534dd4e09d7f682782048776b4514ae66d41b5522c8b13725c0a74bc49e5d7e2",
+    "retrieved_at": "2026-10-25T13:04:18.521075+00:00",
+    "parameters": {
+      "paperCode": "sh688012",
+      "source": "fzb",
+      "type": 0,
+      "page": 1,
+      "num": 10
+    },
+    "fixture": "sh688012-fzb-type0-page1-num10.json.gz",
+    "result_status": {
+      "code": 0
+    },
+    "data_type": "dict",
+    "report_count": "33",
+    "report_dates": [
+      {
+        "date_value": "20260630",
+        "date_description": "2026半年报",
+        "date_type": 2
+      },
+      {
+        "date_value": "20260331",
+        "date_description": "2026一季报",
+        "date_type": 1
+      },
+      {
+        "date_value": "20251231",
+        "date_description": "2025年报",
+        "date_type": 4
+      },
+      {
+        "date_value": "20250930",
+        "date_description": "2025三季报",
+        "date_type": 3
+      },
+      {
+        "date_value": "20250630",
+        "date_description": "2025半年报",
+        "date_type": 2
+      },
+      {
+        "date_value": "20250331",
+        "date_description": "2025一季报",
+        "date_type": 1
+      },
+      {
+        "date_value": "20241231",
+        "date_description": "2024年报",
+        "date_type": 4
+      },
+      {
+        "date_value": "20240930",
+        "date_description": "2024三季报",
+        "date_type": 3
+      },
+      {
+        "date_value": "20240630",
+        "date_description": "2024半年报",
+        "date_type": 2
+      },
+      {
+        "date_value": "20240331",
+        "date_description": "2024一季报",
+        "date_type": 1
+      }
+    ],
+    "reports": [
+      {
+        "period_end_raw": "20260630",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20260820",
+        "update_time": 1787134207,
+        "items": 141,
+        "sample_items": [
+          {
+            "item_field": "TOTASSET",
+            "item_title": "资产总计",
+            "item_value": "37736913182.750000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 2,
+            "item_source": "fzb",
+            "item_tongbi": 0.3278
+          },
+          {
+            "item_field": "TOTLIAB",
+            "item_title": "负债合计",
+            "item_value": "7446753872.340000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 4,
+            "item_source": "fzb",
+            "item_tongbi": -0.01653
+          },
+          {
+            "item_field": "TOTLIABSHAREQUI",
+            "item_title": "负债和所有者权益(或股东权益)总计",
+            "item_value": "37736913182.750000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 5,
+            "item_source": "fzb",
+            "item_tongbi": 0.3278
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 5,
+        "null_values": 75
+      },
+      {
+        "period_end_raw": "20260331",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20260428",
+        "update_time": 1777292045,
+        "items": 141,
+        "sample_items": [
+          {
+            "item_field": "TOTASSET",
+            "item_title": "资产总计",
+            "item_value": "31270377655.770000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 2,
+            "item_source": "fzb",
+            "item_tongbi": 0.1531
+          },
+          {
+            "item_field": "TOTLIAB",
+            "item_title": "负债合计",
+            "item_value": "6934399075.530000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 4,
+            "item_source": "fzb",
+            "item_tongbi": -0.00662
+          },
+          {
+            "item_field": "TOTLIABSHAREQUI",
+            "item_title": "负债和所有者权益(或股东权益)总计",
+            "item_value": "31270377655.770000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 5,
+            "item_source": "fzb",
+            "item_tongbi": 0.1531
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 5,
+        "null_values": 85
+      },
+      {
+        "period_end_raw": "20251231",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "是",
+        "audit_opinion": "标准无保留审计意见",
+        "publish_date": "20260820",
+        "update_time": 1774875724,
+        "items": 141,
+        "sample_items": [
+          {
+            "item_field": "TOTASSET",
+            "item_title": "资产总计",
+            "item_value": "29846018981.430000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 2,
+            "item_source": "fzb",
+            "item_tongbi": 0.1384
+          },
+          {
+            "item_field": "TOTLIAB",
+            "item_title": "负债合计",
+            "item_value": "7117178471.340000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 4,
+            "item_source": "fzb",
+            "item_tongbi": 0.09799
+          },
+          {
+            "item_field": "TOTLIABSHAREQUI",
+            "item_title": "负债和所有者权益(或股东权益)总计",
+            "item_value": "29846018981.430000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 5,
+            "item_source": "fzb",
+            "item_tongbi": 0.1384
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 5,
+        "null_values": 76
+      },
+      {
+        "period_end_raw": "20250930",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20251030",
+        "update_time": 1761731289,
+        "items": 141,
+        "sample_items": [
+          {
+            "item_field": "TOTASSET",
+            "item_title": "资产总计",
+            "item_value": "29786854954.280000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 2,
+            "item_source": "fzb",
+            "item_tongbi": 0.17868
+          },
+          {
+            "item_field": "TOTLIAB",
+            "item_title": "负债合计",
+            "item_value": "8346143175.730000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 4,
+            "item_source": "fzb",
+            "item_tongbi": 0.27764
+          },
+          {
+            "item_field": "TOTLIABSHAREQUI",
+            "item_title": "负债和所有者权益(或股东权益)总计",
+            "item_value": "29786854954.280000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 5,
+            "item_source": "fzb",
+            "item_tongbi": 0.17868
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 5,
+        "null_values": 83
+      },
+      {
+        "period_end_raw": "20250630",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20250829",
+        "update_time": 1756373045,
+        "items": 141,
+        "sample_items": [
+          {
+            "item_field": "TOTASSET",
+            "item_title": "资产总计",
+            "item_value": "28420694710.140000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 2,
+            "item_source": "fzb",
+            "item_tongbi": 0.17239
+          },
+          {
+            "item_field": "TOTLIAB",
+            "item_title": "负债合计",
+            "item_value": "7571943226.060000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 4,
+            "item_source": "fzb",
+            "item_tongbi": 0.24725
+          },
+          {
+            "item_field": "TOTLIABSHAREQUI",
+            "item_title": "负债和所有者权益(或股东权益)总计",
+            "item_value": "28420694710.140000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 5,
+            "item_source": "fzb",
+            "item_tongbi": 0.17239
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 5,
+        "null_values": 75
+      },
+      {
+        "period_end_raw": "20250331",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20250425",
+        "update_time": 1745497806,
+        "items": 141,
+        "sample_items": [
+          {
+            "item_field": "TOTASSET",
+            "item_title": "资产总计",
+            "item_value": "27118584850.110000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 2,
+            "item_source": "fzb",
+            "item_tongbi": 0.21214
+          },
+          {
+            "item_field": "TOTLIAB",
+            "item_title": "负债合计",
+            "item_value": "6980583129.650000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 4,
+            "item_source": "fzb",
+            "item_tongbi": 0.56959
+          },
+          {
+            "item_field": "TOTLIABSHAREQUI",
+            "item_title": "负债和所有者权益(或股东权益)总计",
+            "item_value": "27118584850.110000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 5,
+            "item_source": "fzb",
+            "item_tongbi": 0.21214
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 5,
+        "null_values": 83
+      },
+      {
+        "period_end_raw": "20241231",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "是",
+        "audit_opinion": "标准无保留审计意见",
+        "publish_date": "20260331",
+        "update_time": 1744889527,
+        "items": 141,
+        "sample_items": [
+          {
+            "item_field": "TOTASSET",
+            "item_title": "资产总计",
+            "item_value": "26217544719.070000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 2,
+            "item_source": "fzb",
+            "item_tongbi": 0.21797
+          },
+          {
+            "item_field": "TOTLIAB",
+            "item_title": "负债合计",
+            "item_value": "6482002827.110000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 4,
+            "item_source": "fzb",
+            "item_tongbi": 0.75074
+          },
+          {
+            "item_field": "TOTLIABSHAREQUI",
+            "item_title": "负债和所有者权益(或股东权益)总计",
+            "item_value": "26217544719.070000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 5,
+            "item_source": "fzb",
+            "item_tongbi": 0.21797
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 5,
+        "null_values": 75
+      },
+      {
+        "period_end_raw": "20240930",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20241030",
+        "update_time": 1730205311,
+        "items": 141,
+        "sample_items": [
+          {
+            "item_field": "TOTASSET",
+            "item_title": "资产总计",
+            "item_value": "25271340608.370000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 2,
+            "item_source": "fzb",
+            "item_tongbi": 0.23185
+          },
+          {
+            "item_field": "TOTLIAB",
+            "item_title": "负债合计",
+            "item_value": "6532452489.500000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 4,
+            "item_source": "fzb",
+            "item_tongbi": 0.82133
+          },
+          {
+            "item_field": "TOTLIABSHAREQUI",
+            "item_title": "负债和所有者权益(或股东权益)总计",
+            "item_value": "25271340608.370000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 5,
+            "item_source": "fzb",
+            "item_tongbi": 0.23185
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 5,
+        "null_values": 84
+      },
+      {
+        "period_end_raw": "20240630",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20240823",
+        "update_time": 1724331013,
+        "items": 141,
+        "sample_items": [
+          {
+            "item_field": "TOTASSET",
+            "item_title": "资产总计",
+            "item_value": "24241626255.770000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 2,
+            "item_source": "fzb",
+            "item_tongbi": 0.17298
+          },
+          {
+            "item_field": "TOTLIAB",
+            "item_title": "负债合计",
+            "item_value": "6070931541.880000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 4,
+            "item_source": "fzb",
+            "item_tongbi": 0.56311
+          },
+          {
+            "item_field": "TOTLIABSHAREQUI",
+            "item_title": "负债和所有者权益(或股东权益)总计",
+            "item_value": "24241626255.770000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 5,
+            "item_source": "fzb",
+            "item_tongbi": 0.17298
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 5,
+        "null_values": 76
+      },
+      {
+        "period_end_raw": "20240331",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20240426",
+        "update_time": 1714068605,
+        "items": 141,
+        "sample_items": [
+          {
+            "item_field": "TOTASSET",
+            "item_title": "资产总计",
+            "item_value": "22372509254.070000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 2,
+            "item_source": "fzb",
+            "item_tongbi": 0.10384
+          },
+          {
+            "item_field": "TOTLIAB",
+            "item_title": "负债合计",
+            "item_value": "4447385355.910000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 4,
+            "item_source": "fzb",
+            "item_tongbi": -0.00174
+          },
+          {
+            "item_field": "TOTLIABSHAREQUI",
+            "item_title": "负债和所有者权益(或股东权益)总计",
+            "item_value": "22372509254.070000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 5,
+            "item_source": "fzb",
+            "item_tongbi": 0.10384
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 5,
+        "null_values": 85
+      }
+    ]
+  },
+  {
+    "url": "https://quotes.sina.cn/cn/api/openapi.php/CompanyFinanceService.getFinanceReport2022?paperCode=sh688012&source=fzb&type=0&page=2&num=10",
+    "http_status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "server_date": "Sun, 25 Oct 2026 13:04:21 GMT",
+    "bytes": 335497,
+    "sha256": "78c0862f2e867d07769f56bf300b28bc7d7296de2afd867b264b37a8ca8e2713",
+    "retrieved_at": "2026-10-25T13:04:20.891030+00:00",
+    "parameters": {
+      "paperCode": "sh688012",
+      "source": "fzb",
+      "type": 0,
+      "page": 2,
+      "num": 10
+    },
+    "fixture": "sh688012-fzb-type0-page2-num10.json.gz",
+    "result_status": {
+      "code": 0
+    },
+    "data_type": "dict",
+    "report_count": "33",
+    "report_dates": [
+      {
+        "date_value": "20231231",
+        "date_description": "2023年报",
+        "date_type": 4
+      },
+      {
+        "date_value": "20230930",
+        "date_description": "2023三季报",
+        "date_type": 3
+      },
+      {
+        "date_value": "20230630",
+        "date_description": "2023半年报",
+        "date_type": 2
+      },
+      {
+        "date_value": "20230331",
+        "date_description": "2023一季报",
+        "date_type": 1
+      },
+      {
+        "date_value": "20221231",
+        "date_description": "2022年报",
+        "date_type": 4
+      },
+      {
+        "date_value": "20220930",
+        "date_description": "2022三季报",
+        "date_type": 3
+      },
+      {
+        "date_value": "20220630",
+        "date_description": "2022半年报",
+        "date_type": 2
+      },
+      {
+        "date_value": "20220331",
+        "date_description": "2022一季报",
+        "date_type": 1
+      },
+      {
+        "date_value": "20211231",
+        "date_description": "2021年报",
+        "date_type": 4
+      },
+      {
+        "date_value": "20210930",
+        "date_description": "2021三季报",
+        "date_type": 3
+      }
+    ],
+    "reports": [
+      {
+        "period_end_raw": "20231231",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "是",
+        "audit_opinion": "标准无保留审计意见",
+        "publish_date": "20250418",
+        "update_time": 1710759906,
+        "items": 141,
+        "sample_items": [
+          {
+            "item_field": "TOTASSET",
+            "item_title": "资产总计",
+            "item_value": "21525546561.690000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 2,
+            "item_source": "fzb",
+            "item_tongbi": 0.07441
+          },
+          {
+            "item_field": "TOTLIAB",
+            "item_title": "负债合计",
+            "item_value": "3702441375.240000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 4,
+            "item_source": "fzb",
+            "item_tongbi": -0.18668
+          },
+          {
+            "item_field": "TOTLIABSHAREQUI",
+            "item_title": "负债和所有者权益(或股东权益)总计",
+            "item_value": "21525546561.690000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 5,
+            "item_source": "fzb",
+            "item_tongbi": 0.07441
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 5,
+        "null_values": 78
+      },
+      {
+        "period_end_raw": "20230930",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20231027",
+        "update_time": 1698322503,
+        "items": 141,
+        "sample_items": [
+          {
+            "item_field": "TOTASSET",
+            "item_title": "资产总计",
+            "item_value": "20515011656.680000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 2,
+            "item_source": "fzb",
+            "item_tongbi": 0.07017
+          },
+          {
+            "item_field": "TOTLIAB",
+            "item_title": "负债合计",
+            "item_value": "3586638259.140000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 4,
+            "item_source": "fzb",
+            "item_tongbi": -0.12559
+          },
+          {
+            "item_field": "TOTLIABSHAREQUI",
+            "item_title": "负债和所有者权益(或股东权益)总计",
+            "item_value": "20515011656.680000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 5,
+            "item_source": "fzb",
+            "item_tongbi": 0.07017
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 5,
+        "null_values": 85
+      },
+      {
+        "period_end_raw": "20230630",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20230825",
+        "update_time": 1692887602,
+        "items": 141,
+        "sample_items": [
+          {
+            "item_field": "TOTASSET",
+            "item_title": "资产总计",
+            "item_value": "20666726394.180000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 2,
+            "item_source": "fzb",
+            "item_tongbi": 0.13395
+          },
+          {
+            "item_field": "TOTLIAB",
+            "item_title": "负债合计",
+            "item_value": "3883874227.550000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 4,
+            "item_source": "fzb",
+            "item_tongbi": 0.09693
+          },
+          {
+            "item_field": "TOTLIABSHAREQUI",
+            "item_title": "负债和所有者权益(或股东权益)总计",
+            "item_value": "20666726394.180000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 5,
+            "item_source": "fzb",
+            "item_tongbi": 0.13395
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 5,
+        "null_values": 76
+      },
+      {
+        "period_end_raw": "20230331",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20230429",
+        "update_time": 1682692517,
+        "items": 141,
+        "sample_items": [
+          {
+            "item_field": "TOTASSET",
+            "item_title": "资产总计",
+            "item_value": "20267982609.730000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 2,
+            "item_source": "fzb",
+            "item_tongbi": 0.19523
+          },
+          {
+            "item_field": "TOTLIAB",
+            "item_title": "负债合计",
+            "item_value": "4455157322.630000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 4,
+            "item_source": "fzb",
+            "item_tongbi": 0.55535
+          },
+          {
+            "item_field": "TOTLIABSHAREQUI",
+            "item_title": "负债和所有者权益(或股东权益)总计",
+            "item_value": "20267982609.730000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 5,
+            "item_source": "fzb",
+            "item_tongbi": 0.19523
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 5,
+        "null_values": 84
+      },
+      {
+        "period_end_raw": "20221231",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "是",
+        "audit_opinion": "标准无保留审计意见",
+        "publish_date": "20240319",
+        "update_time": 1680201304,
+        "items": 141,
+        "sample_items": [
+          {
+            "item_field": "TOTASSET",
+            "item_title": "资产总计",
+            "item_value": "20034781468.880000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 2,
+            "item_source": "fzb",
+            "item_tongbi": 0.19732
+          },
+          {
+            "item_field": "TOTLIAB",
+            "item_title": "负债合计",
+            "item_value": "4552280216.800000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 4,
+            "item_source": "fzb",
+            "item_tongbi": 0.63001
+          },
+          {
+            "item_field": "TOTLIABSHAREQUI",
+            "item_title": "负债和所有者权益(或股东权益)总计",
+            "item_value": "20034781468.880000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 5,
+            "item_source": "fzb",
+            "item_tongbi": 0.19732
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 5,
+        "null_values": 76
+      },
+      {
+        "period_end_raw": "20220930",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20221028",
+        "update_time": 1666879204,
+        "items": 141,
+        "sample_items": [
+          {
+            "item_field": "TOTASSET",
+            "item_title": "资产总计",
+            "item_value": "19169940287.560000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 2,
+            "item_source": "fzb",
+            "item_tongbi": 0.24814
+          },
+          {
+            "item_field": "TOTLIAB",
+            "item_title": "负债合计",
+            "item_value": "4101801936.960000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 4,
+            "item_source": "fzb",
+            "item_tongbi": 1.07268
+          },
+          {
+            "item_field": "TOTLIABSHAREQUI",
+            "item_title": "负债和所有者权益(或股东权益)总计",
+            "item_value": "19169940287.560000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 5,
+            "item_source": "fzb",
+            "item_tongbi": 0.24814
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 5,
+        "null_values": 83
+      },
+      {
+        "period_end_raw": "20220630",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20220811",
+        "update_time": 1660132209,
+        "items": 141,
+        "sample_items": [
+          {
+            "item_field": "TOTASSET",
+            "item_title": "资产总计",
+            "item_value": "18225471539.360000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 2,
+            "item_source": "fzb",
+            "item_tongbi": 0.26131
+          },
+          {
+            "item_field": "TOTLIAB",
+            "item_title": "负债合计",
+            "item_value": "3540675345.370000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 4,
+            "item_source": "fzb",
+            "item_tongbi": 1.47798
+          },
+          {
+            "item_field": "TOTLIABSHAREQUI",
+            "item_title": "负债和所有者权益(或股东权益)总计",
+            "item_value": "18225471539.360000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 5,
+            "item_source": "fzb",
+            "item_tongbi": 0.26131
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 5,
+        "null_values": 76
+      },
+      {
+        "period_end_raw": "20220331",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20220428",
+        "update_time": 1651049406,
+        "items": 141,
+        "sample_items": [
+          {
+            "item_field": "TOTASSET",
+            "item_title": "资产总计",
+            "item_value": "16957460264.090000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 2,
+            "item_source": "fzb",
+            "item_tongbi": 1.87231
+          },
+          {
+            "item_field": "TOTLIAB",
+            "item_title": "负债合计",
+            "item_value": "2864411629.900000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 4,
+            "item_source": "fzb",
+            "item_tongbi": 1.13263
+          },
+          {
+            "item_field": "TOTLIABSHAREQUI",
+            "item_title": "负债和所有者权益(或股东权益)总计",
+            "item_value": "16957460264.090000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 5,
+            "item_source": "fzb",
+            "item_tongbi": 1.87231
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 5,
+        "null_values": 84
+      },
+      {
+        "period_end_raw": "20211231",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "是",
+        "audit_opinion": "标准无保留审计意见",
+        "publish_date": "20230331",
+        "update_time": 1648650604,
+        "items": 141,
+        "sample_items": [
+          {
+            "item_field": "TOTASSET",
+            "item_title": "资产总计",
+            "item_value": "16732989003.950000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 2,
+            "item_source": "fzb",
+            "item_tongbi": 1.88456
+          },
+          {
+            "item_field": "TOTLIAB",
+            "item_title": "负债合计",
+            "item_value": "2792788758.180000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 4,
+            "item_source": "fzb",
+            "item_tongbi": 0.95086
+          },
+          {
+            "item_field": "TOTLIABSHAREQUI",
+            "item_title": "负债和所有者权益(或股东权益)总计",
+            "item_value": "16732989003.950000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 5,
+            "item_source": "fzb",
+            "item_tongbi": 1.88456
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 5,
+        "null_values": 76
+      },
+      {
+        "period_end_raw": "20210930",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20211028",
+        "update_time": 1635338704,
+        "items": 141,
+        "sample_items": [
+          {
+            "item_field": "TOTASSET",
+            "item_title": "资产总计",
+            "item_value": "15358817749.030000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 2,
+            "item_source": "fzb",
+            "item_tongbi": 1.86141
+          },
+          {
+            "item_field": "TOTLIAB",
+            "item_title": "负债合计",
+            "item_value": "1978986316.150000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 4,
+            "item_source": "fzb",
+            "item_tongbi": 0.56216
+          },
+          {
+            "item_field": "TOTLIABSHAREQUI",
+            "item_title": "负债和所有者权益(或股东权益)总计",
+            "item_value": "15358817749.030000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 5,
+            "item_source": "fzb",
+            "item_tongbi": 1.86141
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 5,
+        "null_values": 88
+      }
+    ]
+  },
+  {
+    "url": "https://quotes.sina.cn/cn/api/openapi.php/CompanyFinanceService.getFinanceReport2022?paperCode=sh688012&source=fzb&type=0&page=3&num=10",
+    "http_status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "server_date": "Sun, 25 Oct 2026 13:04:23 GMT",
+    "bytes": 333446,
+    "sha256": "f082e1ebcf93b427e9d0c9bb0e5dbcad1c25979c7cde97a189012ee4661f015e",
+    "retrieved_at": "2026-10-25T13:04:23.794292+00:00",
+    "parameters": {
+      "paperCode": "sh688012",
+      "source": "fzb",
+      "type": 0,
+      "page": 3,
+      "num": 10
+    },
+    "fixture": "sh688012-fzb-type0-page3-num10.json.gz",
+    "result_status": {
+      "code": 0
+    },
+    "data_type": "dict",
+    "report_count": "33",
+    "report_dates": [
+      {
+        "date_value": "20210630",
+        "date_description": "2021半年报",
+        "date_type": 2
+      },
+      {
+        "date_value": "20210331",
+        "date_description": "2021一季报",
+        "date_type": 1
+      },
+      {
+        "date_value": "20201231",
+        "date_description": "2020年报",
+        "date_type": 4
+      },
+      {
+        "date_value": "20200930",
+        "date_description": "2020三季报",
+        "date_type": 3
+      },
+      {
+        "date_value": "20200630",
+        "date_description": "2020半年报",
+        "date_type": 2
+      },
+      {
+        "date_value": "20200331",
+        "date_description": "2020一季报",
+        "date_type": 1
+      },
+      {
+        "date_value": "20191231",
+        "date_description": "2019年报",
+        "date_type": 4
+      },
+      {
+        "date_value": "20190930",
+        "date_description": "2019三季报",
+        "date_type": 3
+      },
+      {
+        "date_value": "20190630",
+        "date_description": "2019半年报",
+        "date_type": 2
+      },
+      {
+        "date_value": "20190331",
+        "date_description": "2019一季报",
+        "date_type": 1
+      }
+    ],
+    "reports": [
+      {
+        "period_end_raw": "20210630",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20210825",
+        "update_time": 1629801903,
+        "items": 141,
+        "sample_items": [
+          {
+            "item_field": "TOTASSET",
+            "item_title": "资产总计",
+            "item_value": "14449604643.040000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 2,
+            "item_source": "fzb",
+            "item_tongbi": 1.82831
+          },
+          {
+            "item_field": "TOTLIAB",
+            "item_title": "负债合计",
+            "item_value": "1428857185.000000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 4,
+            "item_source": "fzb",
+            "item_tongbi": 0.16437
+          },
+          {
+            "item_field": "TOTLIABSHAREQUI",
+            "item_title": "负债和所有者权益(或股东权益)总计",
+            "item_value": "14449604643.040000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 5,
+            "item_source": "fzb",
+            "item_tongbi": 1.82831
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 5,
+        "null_values": 79
+      },
+      {
+        "period_end_raw": "20210331",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20210428",
+        "update_time": 1619538003,
+        "items": 141,
+        "sample_items": [
+          {
+            "item_field": "TOTASSET",
+            "item_title": "资产总计",
+            "item_value": "5903769115.420000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 2,
+            "item_source": "fzb",
+            "item_tongbi": 0.13092
+          },
+          {
+            "item_field": "TOTLIAB",
+            "item_title": "负债合计",
+            "item_value": "1343138009.340000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 4,
+            "item_source": "fzb",
+            "item_tongbi": -0.06908
+          },
+          {
+            "item_field": "TOTLIABSHAREQUI",
+            "item_title": "负债和所有者权益(或股东权益)总计",
+            "item_value": "5903769115.420000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 5,
+            "item_source": "fzb",
+            "item_tongbi": 0.13092
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 5,
+        "null_values": 88
+      },
+      {
+        "period_end_raw": "20201231",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "是",
+        "audit_opinion": "标准无保留审计意见",
+        "publish_date": "20220331",
+        "update_time": 1617103503,
+        "items": 141,
+        "sample_items": [
+          {
+            "item_field": "TOTASSET",
+            "item_title": "资产总计",
+            "item_value": "5800876895.940000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 2,
+            "item_source": "fzb",
+            "item_tongbi": 0.21508
+          },
+          {
+            "item_field": "TOTLIAB",
+            "item_title": "负债合计",
+            "item_value": "1431569911.520000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 4,
+            "item_source": "fzb",
+            "item_tongbi": 0.3996
+          },
+          {
+            "item_field": "TOTLIABSHAREQUI",
+            "item_title": "负债和所有者权益(或股东权益)总计",
+            "item_value": "5800876895.940000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 5,
+            "item_source": "fzb",
+            "item_tongbi": 0.21508
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 5,
+        "null_values": 82
+      },
+      {
+        "period_end_raw": "20200930",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20201029",
+        "update_time": 1603885803,
+        "items": 141,
+        "sample_items": [
+          {
+            "item_field": "TOTASSET",
+            "item_title": "资产总计",
+            "item_value": "5367560969.600000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 2,
+            "item_source": "fzb",
+            "item_tongbi": 0.10612
+          },
+          {
+            "item_field": "TOTLIAB",
+            "item_title": "负债合计",
+            "item_value": "1266830210.740000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 4,
+            "item_source": "fzb",
+            "item_tongbi": 0.09121
+          },
+          {
+            "item_field": "TOTLIABSHAREQUI",
+            "item_title": "负债和所有者权益(或股东权益)总计",
+            "item_value": "5367560969.600000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 5,
+            "item_source": "fzb",
+            "item_tongbi": 0.10612
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 5,
+        "null_values": 91
+      },
+      {
+        "period_end_raw": "20200630",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20200829",
+        "update_time": 1598638203,
+        "items": 141,
+        "sample_items": [
+          {
+            "item_field": "TOTASSET",
+            "item_title": "资产总计",
+            "item_value": "5108915771.090000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 2,
+            "item_source": "fzb",
+            "item_tongbi": 0.5291
+          },
+          {
+            "item_field": "TOTLIAB",
+            "item_title": "负债合计",
+            "item_value": "1227148118.830000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 4,
+            "item_source": "fzb",
+            "item_tongbi": 0.0284
+          },
+          {
+            "item_field": "TOTLIABSHAREQUI",
+            "item_title": "负债和所有者权益(或股东权益)总计",
+            "item_value": "5108915771.090000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 5,
+            "item_source": "fzb",
+            "item_tongbi": 0.5291
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 5,
+        "null_values": 82
+      },
+      {
+        "period_end_raw": "20200331",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20200429",
+        "update_time": 1588116303,
+        "items": 141,
+        "sample_items": [
+          {
+            "item_field": "TOTASSET",
+            "item_title": "资产总计",
+            "item_value": "5220302537.200000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 2,
+            "item_source": "fzb",
+            "item_tongbi": 0.51616
+          },
+          {
+            "item_field": "TOTLIAB",
+            "item_title": "负债合计",
+            "item_value": "1442809679.140000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 4,
+            "item_source": "fzb",
+            "item_tongbi": 0.09967
+          },
+          {
+            "item_field": "TOTLIABSHAREQUI",
+            "item_title": "负债和所有者权益(或股东权益)总计",
+            "item_value": "5220302537.200000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 5,
+            "item_source": "fzb",
+            "item_tongbi": 0.51616
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 5,
+        "null_values": 93
+      },
+      {
+        "period_end_raw": "20191231",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "是",
+        "audit_opinion": "标准无保留审计意见",
+        "publish_date": "20210331",
+        "update_time": 1587041703,
+        "items": 141,
+        "sample_items": [
+          {
+            "item_field": "TOTASSET",
+            "item_title": "资产总计",
+            "item_value": "4774054304.040000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 2,
+            "item_source": "fzb",
+            "item_tongbi": 0.3514
+          },
+          {
+            "item_field": "TOTLIAB",
+            "item_title": "负债合计",
+            "item_value": "1022841198.510000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 4,
+            "item_source": "fzb",
+            "item_tongbi": -0.27781
+          },
+          {
+            "item_field": "TOTLIABSHAREQUI",
+            "item_title": "负债和所有者权益(或股东权益)总计",
+            "item_value": "4774054304.040000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 5,
+            "item_source": "fzb",
+            "item_tongbi": 0.3514
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 5,
+        "null_values": 85
+      },
+      {
+        "period_end_raw": "20190930",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20191029",
+        "update_time": 1584084588,
+        "items": 141,
+        "sample_items": [
+          {
+            "item_field": "TOTASSET",
+            "item_title": "资产总计",
+            "item_value": "4852624472.060000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 2,
+            "item_source": "fzb",
+            "item_tongbi": ""
+          },
+          {
+            "item_field": "TOTLIAB",
+            "item_title": "负债合计",
+            "item_value": "1160942112.880000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 4,
+            "item_source": "fzb",
+            "item_tongbi": ""
+          },
+          {
+            "item_field": "TOTLIABSHAREQUI",
+            "item_title": "负债和所有者权益(或股东权益)总计",
+            "item_value": "4852624472.060000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 5,
+            "item_source": "fzb",
+            "item_tongbi": ""
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 5,
+        "null_values": 93
+      },
+      {
+        "period_end_raw": "20190630",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20190822",
+        "update_time": 1584084588,
+        "items": 141,
+        "sample_items": [
+          {
+            "item_field": "TOTASSET",
+            "item_title": "资产总计",
+            "item_value": "3341133557.750000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 2,
+            "item_source": "fzb",
+            "item_tongbi": ""
+          },
+          {
+            "item_field": "TOTLIAB",
+            "item_title": "负债合计",
+            "item_value": "1193259033.330000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 4,
+            "item_source": "fzb",
+            "item_tongbi": ""
+          },
+          {
+            "item_field": "TOTLIABSHAREQUI",
+            "item_title": "负债和所有者权益(或股东权益)总计",
+            "item_value": "3341133557.750000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 5,
+            "item_source": "fzb",
+            "item_tongbi": ""
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 5,
+        "null_values": 86
+      },
+      {
+        "period_end_raw": "20190331",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "招股说明书/意向书",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20190703",
+        "update_time": 1584084588,
+        "items": 141,
+        "sample_items": [
+          {
+            "item_field": "TOTASSET",
+            "item_title": "资产总计",
+            "item_value": "3443113321.070000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 2,
+            "item_source": "fzb",
+            "item_tongbi": ""
+          },
+          {
+            "item_field": "TOTLIAB",
+            "item_title": "负债合计",
+            "item_value": "1312034640.350000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 4,
+            "item_source": "fzb",
+            "item_tongbi": ""
+          },
+          {
+            "item_field": "TOTLIABSHAREQUI",
+            "item_title": "负债和所有者权益(或股东权益)总计",
+            "item_value": "3443113321.070000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 5,
+            "item_source": "fzb",
+            "item_tongbi": ""
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 5,
+        "null_values": 88
+      }
+    ]
+  },
+  {
+    "url": "https://quotes.sina.cn/cn/api/openapi.php/CompanyFinanceService.getFinanceReport2022?paperCode=sh688012&source=fzb&type=0&page=4&num=10",
+    "http_status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "server_date": "Sun, 25 Oct 2026 13:04:26 GMT",
+    "bytes": 100105,
+    "sha256": "e4f190a1133790da2f043048d7b0850b1a2b05b5060373fbb108a54f9eb7b5ef",
+    "retrieved_at": "2026-10-25T13:04:25.640266+00:00",
+    "parameters": {
+      "paperCode": "sh688012",
+      "source": "fzb",
+      "type": 0,
+      "page": 4,
+      "num": 10
+    },
+    "fixture": "sh688012-fzb-type0-page4-num10.json.gz",
+    "result_status": {
+      "code": 0
+    },
+    "data_type": "dict",
+    "report_count": "33",
+    "report_dates": [
+      {
+        "date_value": "20181231",
+        "date_description": "2018年报",
+        "date_type": 4
+      },
+      {
+        "date_value": "20171231",
+        "date_description": "2017年报",
+        "date_type": 4
+      },
+      {
+        "date_value": "20161231",
+        "date_description": "2016年报",
+        "date_type": 4
+      }
+    ],
+    "reports": [
+      {
+        "period_end_raw": "20181231",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "是",
+        "audit_opinion": "标准无保留审计意见",
+        "publish_date": "20200417",
+        "update_time": 1584084588,
+        "items": 141,
+        "sample_items": [
+          {
+            "item_field": "TOTASSET",
+            "item_title": "资产总计",
+            "item_value": "3532678998.550000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 2,
+            "item_source": "fzb",
+            "item_tongbi": 0.55213
+          },
+          {
+            "item_field": "TOTLIAB",
+            "item_title": "负债合计",
+            "item_value": "1416305626.150000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 4,
+            "item_source": "fzb",
+            "item_tongbi": -0.2953
+          },
+          {
+            "item_field": "TOTLIABSHAREQUI",
+            "item_title": "负债和所有者权益(或股东权益)总计",
+            "item_value": "3532678998.550000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 5,
+            "item_source": "fzb",
+            "item_tongbi": 0.55213
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 5,
+        "null_values": 85
+      },
+      {
+        "period_end_raw": "20171231",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "招股说明书/意向书",
+        "is_audit": "是",
+        "audit_opinion": "标准无保留审计意见",
+        "publish_date": "20190703",
+        "update_time": 1584084588,
+        "items": 141,
+        "sample_items": [
+          {
+            "item_field": "TOTASSET",
+            "item_title": "资产总计",
+            "item_value": "2276021401.760000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 2,
+            "item_source": "fzb",
+            "item_tongbi": 1.1103
+          },
+          {
+            "item_field": "TOTLIAB",
+            "item_title": "负债合计",
+            "item_value": "2009809861.200000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 4,
+            "item_source": "fzb",
+            "item_tongbi": 0.031
+          },
+          {
+            "item_field": "TOTLIABSHAREQUI",
+            "item_title": "负债和所有者权益(或股东权益)总计",
+            "item_value": "2276021401.760000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 5,
+            "item_source": "fzb",
+            "item_tongbi": 1.1103
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 5,
+        "null_values": 90
+      },
+      {
+        "period_end_raw": "20161231",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "招股说明书/意向书",
+        "is_audit": "是",
+        "audit_opinion": "标准无保留审计意见",
+        "publish_date": "20190703",
+        "update_time": 1584084588,
+        "items": 141,
+        "sample_items": [
+          {
+            "item_field": "TOTASSET",
+            "item_title": "资产总计",
+            "item_value": "1078528417.560000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 2,
+            "item_source": "fzb",
+            "item_tongbi": ""
+          },
+          {
+            "item_field": "TOTLIAB",
+            "item_title": "负债合计",
+            "item_value": "1949371002.790000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 4,
+            "item_source": "fzb",
+            "item_tongbi": ""
+          },
+          {
+            "item_field": "TOTLIABSHAREQUI",
+            "item_title": "负债和所有者权益(或股东权益)总计",
+            "item_value": "1078528417.560000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 5,
+            "item_source": "fzb",
+            "item_tongbi": ""
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 5,
+        "null_values": 91
+      }
+    ]
+  },
+  {
+    "url": "https://quotes.sina.cn/cn/api/openapi.php/CompanyFinanceService.getFinanceReport2022?paperCode=sh688012&source=llb&type=0&page=1&num=10",
+    "http_status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "server_date": "Sun, 25 Oct 2026 13:04:28 GMT",
+    "bytes": 180281,
+    "sha256": "74abee7afdb45b44584858afa200458dae083d6a3df7b1c16f6d093b5df44a40",
+    "retrieved_at": "2026-10-25T13:04:27.765763+00:00",
+    "parameters": {
+      "paperCode": "sh688012",
+      "source": "llb",
+      "type": 0,
+      "page": 1,
+      "num": 10
+    },
+    "fixture": "sh688012-llb-type0-page1-num10.json.gz",
+    "result_status": {
+      "code": 0
+    },
+    "data_type": "dict",
+    "report_count": "36",
+    "report_dates": [
+      {
+        "date_value": "20260630",
+        "date_description": "2026半年报",
+        "date_type": 2
+      },
+      {
+        "date_value": "20260331",
+        "date_description": "2026一季报",
+        "date_type": 1
+      },
+      {
+        "date_value": "20251231",
+        "date_description": "2025年报",
+        "date_type": 4
+      },
+      {
+        "date_value": "20250930",
+        "date_description": "2025三季报",
+        "date_type": 3
+      },
+      {
+        "date_value": "20250630",
+        "date_description": "2025半年报",
+        "date_type": 2
+      },
+      {
+        "date_value": "20250331",
+        "date_description": "2025一季报",
+        "date_type": 1
+      },
+      {
+        "date_value": "20241231",
+        "date_description": "2024年报",
+        "date_type": 4
+      },
+      {
+        "date_value": "20240930",
+        "date_description": "2024三季报",
+        "date_type": 3
+      },
+      {
+        "date_value": "20240630",
+        "date_description": "2024半年报",
+        "date_type": 2
+      },
+      {
+        "date_value": "20240331",
+        "date_description": "2024一季报",
+        "date_type": 1
+      }
+    ],
+    "reports": [
+      {
+        "period_end_raw": "20260630",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20260820",
+        "update_time": 1787134208,
+        "items": 64,
+        "sample_items": [
+          {
+            "item_field": "MANANETR",
+            "item_title": "经营活动产生的现金流量净额",
+            "item_value": "684553490.600000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "llb",
+            "item_tongbi": 2.3739
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 3,
+        "null_values": 28
+      },
+      {
+        "period_end_raw": "20260331",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20260428",
+        "update_time": 1777292045,
+        "items": 64,
+        "sample_items": [
+          {
+            "item_field": "MANANETR",
+            "item_title": "经营活动产生的现金流量净额",
+            "item_value": "-158726143.080000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "llb",
+            "item_tongbi": -1.42124
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 3,
+        "null_values": 33
+      },
+      {
+        "period_end_raw": "20251231",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "是",
+        "audit_opinion": "标准无保留审计意见",
+        "publish_date": "20260331",
+        "update_time": 1774875726,
+        "items": 64,
+        "sample_items": [
+          {
+            "item_field": "MANANETR",
+            "item_title": "经营活动产生的现金流量净额",
+            "item_value": "2295352919.080000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "llb",
+            "item_tongbi": 0.57388
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 3,
+        "null_values": 29
+      },
+      {
+        "period_end_raw": "20250930",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20251030",
+        "update_time": 1761731896,
+        "items": 64,
+        "sample_items": [
+          {
+            "item_field": "MANANETR",
+            "item_title": "经营活动产生的现金流量净额",
+            "item_value": "1298309239.310000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "llb",
+            "item_tongbi": 3.85227
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 3,
+        "null_values": 34
+      },
+      {
+        "period_end_raw": "20250630",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20260820",
+        "update_time": 1756373046,
+        "items": 64,
+        "sample_items": [
+          {
+            "item_field": "MANANETR",
+            "item_title": "经营活动产生的现金流量净额",
+            "item_value": "202896547.300000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "llb",
+            "item_tongbi": -0.46875
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 3,
+        "null_values": 32
+      },
+      {
+        "period_end_raw": "20250331",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20260428",
+        "update_time": 1745497807,
+        "items": 64,
+        "sample_items": [
+          {
+            "item_field": "MANANETR",
+            "item_title": "经营活动产生的现金流量净额",
+            "item_value": "376808177.470000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "llb",
+            "item_tongbi": 1.64253
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 3,
+        "null_values": 37
+      },
+      {
+        "period_end_raw": "20241231",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "是",
+        "audit_opinion": "标准无保留审计意见",
+        "publish_date": "20260331",
+        "update_time": 1744889526,
+        "items": 64,
+        "sample_items": [
+          {
+            "item_field": "MANANETR",
+            "item_title": "经营活动产生的现金流量净额",
+            "item_value": "1458401788.710000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "llb",
+            "item_tongbi": 2.49285
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 3,
+        "null_values": 28
+      },
+      {
+        "period_end_raw": "20240930",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20251030",
+        "update_time": 1730220904,
+        "items": 64,
+        "sample_items": [
+          {
+            "item_field": "MANANETR",
+            "item_title": "经营活动产生的现金流量净额",
+            "item_value": "267567582.390000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "llb",
+            "item_tongbi": 1.20961
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 3,
+        "null_values": 33
+      },
+      {
+        "period_end_raw": "20240630",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20250829",
+        "update_time": 1724331010,
+        "items": 64,
+        "sample_items": [
+          {
+            "item_field": "MANANETR",
+            "item_title": "经营活动产生的现金流量净额",
+            "item_value": "381921900.150000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "llb",
+            "item_tongbi": 1.55753
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 3,
+        "null_values": 31
+      },
+      {
+        "period_end_raw": "20240331",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20250425",
+        "update_time": 1714068604,
+        "items": 64,
+        "sample_items": [
+          {
+            "item_field": "MANANETR",
+            "item_title": "经营活动产生的现金流量净额",
+            "item_value": "-586440411.600000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "llb",
+            "item_tongbi": -0.6869
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 3,
+        "null_values": 35
+      }
+    ]
+  },
+  {
+    "url": "https://quotes.sina.cn/cn/api/openapi.php/CompanyFinanceService.getFinanceReport2022?paperCode=sh688012&source=llb&type=0&page=2&num=10",
+    "http_status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "server_date": "Sun, 25 Oct 2026 13:04:31 GMT",
+    "bytes": 180082,
+    "sha256": "acc3baab9f16ab7861ae5ef0fa6b72a1a94705187dbc8b85e9db02474078c704",
+    "retrieved_at": "2026-10-25T13:04:30.866210+00:00",
+    "parameters": {
+      "paperCode": "sh688012",
+      "source": "llb",
+      "type": 0,
+      "page": 2,
+      "num": 10
+    },
+    "fixture": "sh688012-llb-type0-page2-num10.json.gz",
+    "result_status": {
+      "code": 0
+    },
+    "data_type": "dict",
+    "report_count": "36",
+    "report_dates": [
+      {
+        "date_value": "20231231",
+        "date_description": "2023年报",
+        "date_type": 4
+      },
+      {
+        "date_value": "20230930",
+        "date_description": "2023三季报",
+        "date_type": 3
+      },
+      {
+        "date_value": "20230630",
+        "date_description": "2023半年报",
+        "date_type": 2
+      },
+      {
+        "date_value": "20230331",
+        "date_description": "2023一季报",
+        "date_type": 1
+      },
+      {
+        "date_value": "20221231",
+        "date_description": "2022年报",
+        "date_type": 4
+      },
+      {
+        "date_value": "20220930",
+        "date_description": "2022三季报",
+        "date_type": 3
+      },
+      {
+        "date_value": "20220630",
+        "date_description": "2022半年报",
+        "date_type": 2
+      },
+      {
+        "date_value": "20220331",
+        "date_description": "2022一季报",
+        "date_type": 1
+      },
+      {
+        "date_value": "20211231",
+        "date_description": "2021年报",
+        "date_type": 4
+      },
+      {
+        "date_value": "20210930",
+        "date_description": "2021三季报",
+        "date_type": 3
+      }
+    ],
+    "reports": [
+      {
+        "period_end_raw": "20231231",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "是",
+        "audit_opinion": "标准无保留审计意见",
+        "publish_date": "20250418",
+        "update_time": 1710759910,
+        "items": 64,
+        "sample_items": [
+          {
+            "item_field": "MANANETR",
+            "item_title": "经营活动产生的现金流量净额",
+            "item_value": "-976926439.660000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "llb",
+            "item_tongbi": -2.58201
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 3,
+        "null_values": 31
+      },
+      {
+        "period_end_raw": "20230930",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20241030",
+        "update_time": 1698332102,
+        "items": 64,
+        "sample_items": [
+          {
+            "item_field": "MANANETR",
+            "item_title": "经营活动产生的现金流量净额",
+            "item_value": "-1276491922.810000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "llb",
+            "item_tongbi": -18.40584
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 3,
+        "null_values": 34
+      },
+      {
+        "period_end_raw": "20230630",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20240823",
+        "update_time": 1692887407,
+        "items": 64,
+        "sample_items": [
+          {
+            "item_field": "MANANETR",
+            "item_title": "经营活动产生的现金流量净额",
+            "item_value": "-685020477.310000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "llb",
+            "item_tongbi": -11.99388
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 3,
+        "null_values": 32
+      },
+      {
+        "period_end_raw": "20230331",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20240426",
+        "update_time": 1682692506,
+        "items": 64,
+        "sample_items": [
+          {
+            "item_field": "MANANETR",
+            "item_title": "经营活动产生的现金流量净额",
+            "item_value": "-347642998.500000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "llb",
+            "item_tongbi": -0.26908
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 3,
+        "null_values": 35
+      },
+      {
+        "period_end_raw": "20221231",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "是",
+        "audit_opinion": "标准无保留审计意见",
+        "publish_date": "20240319",
+        "update_time": 1680201303,
+        "items": 64,
+        "sample_items": [
+          {
+            "item_field": "MANANETR",
+            "item_title": "经营活动产生的现金流量净额",
+            "item_value": "617523432.120000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "llb",
+            "item_tongbi": -0.39235
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 3,
+        "null_values": 31
+      },
+      {
+        "period_end_raw": "20220930",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20231027",
+        "update_time": 1666881305,
+        "items": 64,
+        "sample_items": [
+          {
+            "item_field": "MANANETR",
+            "item_title": "经营活动产生的现金流量净额",
+            "item_value": "73336987.340000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "llb",
+            "item_tongbi": -0.81859
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 3,
+        "null_values": 34
+      },
+      {
+        "period_end_raw": "20220630",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20230825",
+        "update_time": 1660132204,
+        "items": 64,
+        "sample_items": [
+          {
+            "item_field": "MANANETR",
+            "item_title": "经营活动产生的现金流量净额",
+            "item_value": "62309235.840000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "llb",
+            "item_tongbi": 2.76902
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 3,
+        "null_values": 33
+      },
+      {
+        "period_end_raw": "20220331",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20230429",
+        "update_time": 1651049406,
+        "items": 64,
+        "sample_items": [
+          {
+            "item_field": "MANANETR",
+            "item_title": "经营活动产生的现金流量净额",
+            "item_value": "-273934106.920000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "llb",
+            "item_tongbi": -2.53947
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 3,
+        "null_values": 36
+      },
+      {
+        "period_end_raw": "20211231",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "是",
+        "audit_opinion": "标准无保留审计意见",
+        "publish_date": "20230331",
+        "update_time": 1648650603,
+        "items": 64,
+        "sample_items": [
+          {
+            "item_field": "MANANETR",
+            "item_title": "经营活动产生的现金流量净额",
+            "item_value": "1016256088.400000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "llb",
+            "item_tongbi": 0.20083
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 3,
+        "null_values": 30
+      },
+      {
+        "period_end_raw": "20210930",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20221028",
+        "update_time": 1635339303,
+        "items": 64,
+        "sample_items": [
+          {
+            "item_field": "MANANETR",
+            "item_title": "经营活动产生的现金流量净额",
+            "item_value": "404267359.690000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "llb",
+            "item_tongbi": 0.05714
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 3,
+        "null_values": 34
+      }
+    ]
+  },
+  {
+    "url": "https://quotes.sina.cn/cn/api/openapi.php/CompanyFinanceService.getFinanceReport2022?paperCode=sh688012&source=llb&type=0&page=3&num=10",
+    "http_status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "server_date": "Sun, 25 Oct 2026 13:04:33 GMT",
+    "bytes": 179837,
+    "sha256": "e9d7d4f6d65cc298d0200be25ff6d806397db54e1a62dd08b4b1da47a016a03b",
+    "retrieved_at": "2026-10-25T13:04:32.999884+00:00",
+    "parameters": {
+      "paperCode": "sh688012",
+      "source": "llb",
+      "type": 0,
+      "page": 3,
+      "num": 10
+    },
+    "fixture": "sh688012-llb-type0-page3-num10.json.gz",
+    "result_status": {
+      "code": 0
+    },
+    "data_type": "dict",
+    "report_count": "36",
+    "report_dates": [
+      {
+        "date_value": "20210630",
+        "date_description": "2021半年报",
+        "date_type": 2
+      },
+      {
+        "date_value": "20210331",
+        "date_description": "2021一季报",
+        "date_type": 1
+      },
+      {
+        "date_value": "20201231",
+        "date_description": "2020年报",
+        "date_type": 4
+      },
+      {
+        "date_value": "20200930",
+        "date_description": "2020三季报",
+        "date_type": 3
+      },
+      {
+        "date_value": "20200630",
+        "date_description": "2020半年报",
+        "date_type": 2
+      },
+      {
+        "date_value": "20200331",
+        "date_description": "2020一季报",
+        "date_type": 1
+      },
+      {
+        "date_value": "20191231",
+        "date_description": "2019年报",
+        "date_type": 4
+      },
+      {
+        "date_value": "20190930",
+        "date_description": "2019三季报",
+        "date_type": 3
+      },
+      {
+        "date_value": "20190630",
+        "date_description": "2019半年报",
+        "date_type": 2
+      },
+      {
+        "date_value": "20190331",
+        "date_description": "2019一季报",
+        "date_type": 1
+      }
+    ],
+    "reports": [
+      {
+        "period_end_raw": "20210630",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20220811",
+        "update_time": 1629801903,
+        "items": 64,
+        "sample_items": [
+          {
+            "item_field": "MANANETR",
+            "item_title": "经营活动产生的现金流量净额",
+            "item_value": "-35222450.570000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "llb",
+            "item_tongbi": -1.12268
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 3,
+        "null_values": 32
+      },
+      {
+        "period_end_raw": "20210331",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20220428",
+        "update_time": 1619538003,
+        "items": 64,
+        "sample_items": [
+          {
+            "item_field": "MANANETR",
+            "item_title": "经营活动产生的现金流量净额",
+            "item_value": "-77394097.180000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "llb",
+            "item_tongbi": -1.31125
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 3,
+        "null_values": 36
+      },
+      {
+        "period_end_raw": "20201231",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "是",
+        "audit_opinion": "标准无保留审计意见",
+        "publish_date": "20220331",
+        "update_time": 1617103502,
+        "items": 64,
+        "sample_items": [
+          {
+            "item_field": "MANANETR",
+            "item_title": "经营活动产生的现金流量净额",
+            "item_value": "846292855.040000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "llb",
+            "item_tongbi": 5.35017
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 3,
+        "null_values": 29
+      },
+      {
+        "period_end_raw": "20200930",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20211028",
+        "update_time": 1603887003,
+        "items": 64,
+        "sample_items": [
+          {
+            "item_field": "MANANETR",
+            "item_title": "经营活动产生的现金流量净额",
+            "item_value": "382414777.930000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "llb",
+            "item_tongbi": 3.47879
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 3,
+        "null_values": 35
+      },
+      {
+        "period_end_raw": "20200630",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20210825",
+        "update_time": 1598638203,
+        "items": 64,
+        "sample_items": [
+          {
+            "item_field": "MANANETR",
+            "item_title": "经营活动产生的现金流量净额",
+            "item_value": "287103894.490000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "llb",
+            "item_tongbi": 1.76657
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 3,
+        "null_values": 33
+      },
+      {
+        "period_end_raw": "20200331",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20210428",
+        "update_time": 1588117503,
+        "items": 64,
+        "sample_items": [
+          {
+            "item_field": "MANANETR",
+            "item_title": "经营活动产生的现金流量净额",
+            "item_value": "248652463.030000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "llb",
+            "item_tongbi": 2.08683
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 3,
+        "null_values": 38
+      },
+      {
+        "period_end_raw": "20191231",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "是",
+        "audit_opinion": "标准无保留审计意见",
+        "publish_date": "20210331",
+        "update_time": 1587044104,
+        "items": 64,
+        "sample_items": [
+          {
+            "item_field": "MANANETR",
+            "item_title": "经营活动产生的现金流量净额",
+            "item_value": "133270991.540000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "llb",
+            "item_tongbi": -0.48959
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 3,
+        "null_values": 28
+      },
+      {
+        "period_end_raw": "20190930",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20201029",
+        "update_time": 1584082728,
+        "items": 64,
+        "sample_items": [
+          {
+            "item_field": "MANANETR",
+            "item_title": "经营活动产生的现金流量净额",
+            "item_value": "-154274785.580000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "llb",
+            "item_tongbi": 0.53679
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 3,
+        "null_values": 33
+      },
+      {
+        "period_end_raw": "20190630",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20200829",
+        "update_time": 1584082728,
+        "items": 64,
+        "sample_items": [
+          {
+            "item_field": "MANANETR",
+            "item_title": "经营活动产生的现金流量净额",
+            "item_value": "-374530659.900000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "llb",
+            "item_tongbi": -1.98266
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 3,
+        "null_values": 32
+      },
+      {
+        "period_end_raw": "20190331",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20200429",
+        "update_time": 1584082728,
+        "items": 64,
+        "sample_items": [
+          {
+            "item_field": "MANANETR",
+            "item_title": "经营活动产生的现金流量净额",
+            "item_value": "-228786493.430000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "llb",
+            "item_tongbi": -12.63376
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 3,
+        "null_values": 35
+      }
+    ]
+  },
+  {
+    "url": "https://quotes.sina.cn/cn/api/openapi.php/CompanyFinanceService.getFinanceReport2022?paperCode=sh688012&source=llb&type=0&page=4&num=10",
+    "http_status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "server_date": "Sun, 25 Oct 2026 13:04:36 GMT",
+    "bytes": 107624,
+    "sha256": "c58ba26de93cb71849c7f1d1f67690e16c7a231508a78e8ec97385305414abc6",
+    "retrieved_at": "2026-10-25T13:04:35.788587+00:00",
+    "parameters": {
+      "paperCode": "sh688012",
+      "source": "llb",
+      "type": 0,
+      "page": 4,
+      "num": 10
+    },
+    "fixture": "sh688012-llb-type0-page4-num10.json.gz",
+    "result_status": {
+      "code": 0
+    },
+    "data_type": "dict",
+    "report_count": "36",
+    "report_dates": [
+      {
+        "date_value": "20181231",
+        "date_description": "2018年报",
+        "date_type": 4
+      },
+      {
+        "date_value": "20180930",
+        "date_description": "2018三季报",
+        "date_type": 3
+      },
+      {
+        "date_value": "20180630",
+        "date_description": "2018半年报",
+        "date_type": 2
+      },
+      {
+        "date_value": "20180331",
+        "date_description": "2018一季报",
+        "date_type": 1
+      },
+      {
+        "date_value": "20171231",
+        "date_description": "2017年报",
+        "date_type": 4
+      },
+      {
+        "date_value": "20161231",
+        "date_description": "2016年报",
+        "date_type": 4
+      }
+    ],
+    "reports": [
+      {
+        "period_end_raw": "20181231",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "是",
+        "audit_opinion": "标准无保留审计意见",
+        "publish_date": "20200417",
+        "update_time": 1584082728,
+        "items": 64,
+        "sample_items": [
+          {
+            "item_field": "MANANETR",
+            "item_title": "经营活动产生的现金流量净额",
+            "item_value": "261107142.050000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "llb",
+            "item_tongbi": 2.73971
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 3,
+        "null_values": 31
+      },
+      {
+        "period_end_raw": "20180930",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20191029",
+        "update_time": 1584082728,
+        "items": 64,
+        "sample_items": [
+          {
+            "item_field": "MANANETR",
+            "item_title": "经营活动产生的现金流量净额",
+            "item_value": "-333053711.620000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "llb",
+            "item_tongbi": ""
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 3,
+        "null_values": 33
+      },
+      {
+        "period_end_raw": "20180630",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20190822",
+        "update_time": 1584082728,
+        "items": 64,
+        "sample_items": [
+          {
+            "item_field": "MANANETR",
+            "item_title": "经营活动产生的现金流量净额",
+            "item_value": "-125569230.970000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "llb",
+            "item_tongbi": ""
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 3,
+        "null_values": 32
+      },
+      {
+        "period_end_raw": "20180331",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "招股说明书/意向书",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20190703",
+        "update_time": 1584082728,
+        "items": 64,
+        "sample_items": [
+          {
+            "item_field": "MANANETR",
+            "item_title": "经营活动产生的现金流量净额",
+            "item_value": "19665734.480000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "llb",
+            "item_tongbi": ""
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 3,
+        "null_values": 35
+      },
+      {
+        "period_end_raw": "20171231",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "招股说明书/意向书",
+        "is_audit": "是",
+        "audit_opinion": "标准无保留审计意见",
+        "publish_date": "20190703",
+        "update_time": 1584082728,
+        "items": 64,
+        "sample_items": [
+          {
+            "item_field": "MANANETR",
+            "item_title": "经营活动产生的现金流量净额",
+            "item_value": "-150087012.820000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "llb",
+            "item_tongbi": -0.47721
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 3,
+        "null_values": 32
+      },
+      {
+        "period_end_raw": "20161231",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "招股说明书/意向书",
+        "is_audit": "是",
+        "audit_opinion": "标准无保留审计意见",
+        "publish_date": "20190703",
+        "update_time": 1584082728,
+        "items": 64,
+        "sample_items": [
+          {
+            "item_field": "MANANETR",
+            "item_title": "经营活动产生的现金流量净额",
+            "item_value": "-101601436.370000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "llb",
+            "item_tongbi": ""
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 3,
+        "null_values": 32
+      }
+    ]
+  },
+  {
+    "url": "https://quotes.sina.cn/cn/api/openapi.php/CompanyFinanceService.getFinanceReport2022?paperCode=sh688012&source=lrb&type=0&page=5&num=10",
+    "http_status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "server_date": "Sun, 25 Oct 2026 13:04:39 GMT",
+    "bytes": 44,
+    "sha256": "2e2fd57f2bcd27801c7bef62922376a712f41ccedcadd5eac6b9b2e134301254",
+    "retrieved_at": "2026-10-25T13:04:37.979931+00:00",
+    "parameters": {
+      "paperCode": "sh688012",
+      "source": "lrb",
+      "type": 0,
+      "page": 5,
+      "num": 10
+    },
+    "fixture": "sh688012-lrb-type0-page5-num10.json.gz",
+    "result_status": {
+      "code": 0
+    },
+    "data_type": "NoneType"
+  },
+  {
+    "url": "https://quotes.sina.cn/cn/api/openapi.php/CompanyFinanceService.getFinanceReport2022?paperCode=sh688012&source=lrb&type=4&page=1&num=2",
+    "http_status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "server_date": "Sun, 25 Oct 2026 13:04:40 GMT",
+    "bytes": 39444,
+    "sha256": "597506c4a5a9093286e4dc26961933d8118dae6e1a7ed464c24c1e4322cbbd34",
+    "retrieved_at": "2026-10-25T13:04:39.837009+00:00",
+    "parameters": {
+      "paperCode": "sh688012",
+      "source": "lrb",
+      "type": 4,
+      "page": 1,
+      "num": 2
+    },
+    "fixture": "sh688012-lrb-type4-page1-num2.json.gz",
+    "result_status": {
+      "code": 0
+    },
+    "data_type": "dict",
+    "report_count": "10",
+    "report_dates": [
+      {
+        "date_value": "20251231",
+        "date_description": "2025年报",
+        "date_type": 4
+      },
+      {
+        "date_value": "20241231",
+        "date_description": "2024年报",
+        "date_type": 4
+      }
+    ],
+    "reports": [
+      {
+        "period_end_raw": "20251231",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "是",
+        "audit_opinion": "标准无保留审计意见",
+        "publish_date": "20260331",
+        "update_time": 1774875725,
+        "items": 77,
+        "sample_items": [
+          {
+            "item_field": "BIZTOTINCO",
+            "item_title": "营业总收入",
+            "item_value": "12384638268.110000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.36618
+          },
+          {
+            "item_field": "BIZINCO",
+            "item_title": "营业收入",
+            "item_value": "12384638268.110000",
+            "item_display_type": 2,
+            "item_display": "小类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.36618
+          },
+          {
+            "item_field": "BASICEPS",
+            "item_title": "基本每股收益",
+            "item_value": "3.400000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "ps4",
+            "item_group_no": 8,
+            "item_source": "lrb",
+            "item_tongbi": 0.30268
+          }
+        ],
+        "precision_types": [
+          "f2",
+          "ps4"
+        ],
+        "blank_field_rows": 0,
+        "null_values": 40
+      },
+      {
+        "period_end_raw": "20241231",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "是",
+        "audit_opinion": "标准无保留审计意见",
+        "publish_date": "20260331",
+        "update_time": 1744889522,
+        "items": 77,
+        "sample_items": [
+          {
+            "item_field": "BIZTOTINCO",
+            "item_title": "营业总收入",
+            "item_value": "9065165097.690000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.4473
+          },
+          {
+            "item_field": "BIZINCO",
+            "item_title": "营业收入",
+            "item_value": "9065165097.690000",
+            "item_display_type": 2,
+            "item_display": "小类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.4473
+          },
+          {
+            "item_field": "BASICEPS",
+            "item_title": "基本每股收益",
+            "item_value": "2.610000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "ps4",
+            "item_group_no": 8,
+            "item_source": "lrb",
+            "item_tongbi": -0.09689
+          }
+        ],
+        "precision_types": [
+          "f2",
+          "ps4"
+        ],
+        "blank_field_rows": 0,
+        "null_values": 40
+      }
+    ]
+  },
+  {
+    "url": "https://quotes.sina.cn/cn/api/openapi.php/CompanyFinanceService.getFinanceReport2022?paperCode=sz000333&source=lrb&type=0&page=1&num=1",
+    "http_status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "server_date": "Sun, 25 Oct 2026 13:04:43 GMT",
+    "bytes": 19936,
+    "sha256": "97ab0cbcf1cd83e0effc4274f1a4f6d336685bc3c1731110fbb0205582a99ebc",
+    "retrieved_at": "2026-10-25T13:04:42.354475+00:00",
+    "parameters": {
+      "paperCode": "sz000333",
+      "source": "lrb",
+      "type": 0,
+      "page": 1,
+      "num": 1
+    },
+    "fixture": "sz000333-lrb-type0-page1-num1.json.gz",
+    "result_status": {
+      "code": 0
+    },
+    "data_type": "dict",
+    "report_count": "79",
+    "report_dates": [
+      {
+        "date_value": "20260630",
+        "date_description": "2026半年报",
+        "date_type": 2
+      }
+    ],
+    "reports": [
+      {
+        "period_end_raw": "20260630",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20260829",
+        "update_time": 1787917442,
+        "items": 77,
+        "sample_items": [
+          {
+            "item_field": "BIZTOTINCO",
+            "item_title": "营业总收入",
+            "item_value": "261052379000.000000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.03456
+          },
+          {
+            "item_field": "BIZINCO",
+            "item_title": "营业收入",
+            "item_value": "260042490000.000000",
+            "item_display_type": 2,
+            "item_display": "小类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.03552
+          },
+          {
+            "item_field": "BASICEPS",
+            "item_title": "基本每股收益",
+            "item_value": "3.520000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "ps4",
+            "item_group_no": 8,
+            "item_source": "lrb",
+            "item_tongbi": 0.03226
+          }
+        ],
+        "precision_types": [
+          "f2",
+          "ps4"
+        ],
+        "blank_field_rows": 0,
+        "null_values": 32
+      }
+    ]
+  },
+  {
+    "url": "https://quotes.sina.cn/cn/api/openapi.php/CompanyFinanceService.getFinanceReport2022?paperCode=sh600036&source=fzb&type=0&page=1&num=1",
+    "http_status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "server_date": "Sun, 25 Oct 2026 13:04:45 GMT",
+    "bytes": 34504,
+    "sha256": "b5570d509b8db186edd0182a0afd2ead1a26d1ae7b1287fde22de5f0af876353",
+    "retrieved_at": "2026-10-25T13:04:44.970914+00:00",
+    "parameters": {
+      "paperCode": "sh600036",
+      "source": "fzb",
+      "type": 0,
+      "page": 1,
+      "num": 1
+    },
+    "fixture": "sh600036-fzb-type0-page1-num1.json.gz",
+    "result_status": {
+      "code": 0
+    },
+    "data_type": "dict",
+    "report_count": "102",
+    "report_dates": [
+      {
+        "date_value": "20260630",
+        "date_description": "2026半年报",
+        "date_type": 2
+      }
+    ],
+    "reports": [
+      {
+        "period_end_raw": "20260630",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20260829",
+        "update_time": 1787914923,
+        "items": 144,
+        "sample_items": [
+          {
+            "item_field": "TOTASSET",
+            "item_title": "资产总计",
+            "item_value": "13785280000000.000000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "fzb",
+            "item_tongbi": 0.08913
+          },
+          {
+            "item_field": "TOTLIAB",
+            "item_title": "负债合计",
+            "item_value": "12431979000000.000000",
+            "item_display_type": 6,
+            "item_display": "中类",
+            "item_precision": "f2",
+            "item_group_no": 2,
+            "item_source": "fzb",
+            "item_tongbi": 0.09434
+          }
+        ],
+        "precision_types": [
+          "f2"
+        ],
+        "blank_field_rows": 3,
+        "null_values": 82
+      }
+    ]
+  },
+  {
+    "url": "https://quotes.sina.cn/cn/api/openapi.php/CompanyFinanceService.getFinanceReport2022?paperCode=sh601318&source=lrb&type=0&page=1&num=1",
+    "http_status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "server_date": "Sun, 25 Oct 2026 13:04:48 GMT",
+    "bytes": 20233,
+    "sha256": "013f00e3de303b94a58e64bfc507031a09ad02b63abc2b9e8a30c3db6a30719c",
+    "retrieved_at": "2026-10-25T13:04:47.367902+00:00",
+    "parameters": {
+      "paperCode": "sh601318",
+      "source": "lrb",
+      "type": 0,
+      "page": 1,
+      "num": 1
+    },
+    "fixture": "sh601318-lrb-type0-page1-num1.json.gz",
+    "result_status": {
+      "code": 0
+    },
+    "data_type": "dict",
+    "report_count": "90",
+    "report_dates": [
+      {
+        "date_value": "20260630",
+        "date_description": "2026半年报",
+        "date_type": 2
+      }
+    ],
+    "reports": [
+      {
+        "period_end_raw": "20260630",
+        "rType": "合并期末",
+        "rCurrency": "CNY",
+        "data_source": "定期报告",
+        "is_audit": "未审计",
+        "audit_opinion": "",
+        "publish_date": "20260821",
+        "update_time": 1787227922,
+        "items": 76,
+        "sample_items": [
+          {
+            "item_field": "BIZINCO",
+            "item_title": "营业收入",
+            "item_value": "575138000000.000000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "f2",
+            "item_group_no": 1,
+            "item_source": "lrb",
+            "item_tongbi": 0.1501
+          },
+          {
+            "item_field": "BASICEPS",
+            "item_title": "基本每股收益",
+            "item_value": "5.300000",
+            "item_display_type": 1,
+            "item_display": "大类",
+            "item_precision": "ps4",
+            "item_group_no": 8,
+            "item_source": "lrb",
+            "item_tongbi": 0.36951
+          }
+        ],
+        "precision_types": [
+          "f2",
+          "ps4"
+        ],
+        "blank_field_rows": 0,
+        "null_values": 28
+      }
+    ]
+  },
+  {
+    "url": "https://quotes.sina.cn/cn/api/openapi.php/CompanyFinanceService.getFinanceReport2022?paperCode=sh999999&source=lrb&type=0&page=1&num=1",
+    "http_status": 200,
+    "content_type": "application/json; charset=utf-8",
+    "server_date": "Sun, 25 Oct 2026 13:04:49 GMT",
+    "bytes": 44,
+    "sha256": "2e2fd57f2bcd27801c7bef62922376a712f41ccedcadd5eac6b9b2e134301254",
+    "retrieved_at": "2026-10-25T13:04:48.631715+00:00",
+    "parameters": {
+      "paperCode": "sh999999",
+      "source": "lrb",
+      "type": 0,
+      "page": 1,
+      "num": 1
+    },
+    "fixture": "sh999999-lrb-type0-page1-num1.json.gz",
+    "result_status": {
+      "code": 0
+    },
+    "data_type": "NoneType"
+  }
+]

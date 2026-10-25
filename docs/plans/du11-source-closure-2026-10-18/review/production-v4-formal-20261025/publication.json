@@ -1,0 +1,37 @@
+{
+  "schema_version": "phase-c-finalization-publication/1",
+  "commit": "243993d2c9e12c2a9cb6e2b728e547928607abff",
+  "pushed": "origin/master",
+  "normal_precommit": "PASS host assumption guard; source-only Ruff/mypy skipped by normal path selection because src unchanged",
+  "normal_prepush": "154PASS/29.25sec; no hook bypass",
+  "ci": {
+    "id": 40195639414,
+    "head_sha": "243993d2c9e12c2a9cb6e2b728e547928607abff",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40195639414"
+  },
+  "files": {
+    "tools/document_understanding_benchmark/phase_c_runner.py": {
+      "reviewed_physical_sha256": "4cab71dd8691d4d15fa7a8ab1e96829eeb948126a7f44e04a5033fa6157acc66",
+      "current_physical_sha256": "4cab71dd8691d4d15fa7a8ab1e96829eeb948126a7f44e04a5033fa6157acc66",
+      "git_blob_sha256": "dfdfcee660a56f37788cadfb7fea7b28c330b4b62f2599b71d1d56e842f375fe",
+      "git_lf_equal": true
+    },
+    "tests/test_phase_c_finalization.py": {
+      "reviewed_physical_sha256": "bca693d1b014c0aaac9d362d0290b2d7dedee1649ba95c278cb2221628dbb35d",
+      "current_physical_sha256": "bca693d1b014c0aaac9d362d0290b2d7dedee1649ba95c278cb2221628dbb35d",
+      "git_blob_sha256": "bca693d1b014c0aaac9d362d0290b2d7dedee1649ba95c278cb2221628dbb35d",
+      "git_lf_equal": true
+    },
+    "docs/plans/du11-source-closure-2026-10-18/review/production-v4-formal-20261025/run_operation.py": {
+      "reviewed_physical_sha256": "635ac8e58b77cdda76c5f7c9fb182ff410f273287c461c9c797519d1990c0b3e",
+      "current_physical_sha256": "635ac8e58b77cdda76c5f7c9fb182ff410f273287c461c9c797519d1990c0b3e",
+      "git_blob_sha256": "635ac8e58b77cdda76c5f7c9fb182ff410f273287c461c9c797519d1990c0b3e",
+      "git_lf_equal": true
+    }
+  },
+  "paid_calls": 0,
+  "downloads": 0,
+  "source_semantic_scope": "CF1-CF4_OPEN_NOT_SIGNED_BY_THIS_ENGINEERING_RELEASE"
+}

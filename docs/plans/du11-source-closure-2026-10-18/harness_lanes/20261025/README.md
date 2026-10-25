@@ -27,3 +27,7 @@
 最终接口固定为各自`delivery/w16|w17|w18/handoff.md/json`，使用[handoff.template.json](handoff.template.json)。ROOT统一接收、并线和安装；作者只推自己的codex支线。没有remote如实报告，不能因此虚构CI或把本地结果说成远端通过。
 
 空间约束：不复制原始资料库，不提交API响应全集或完整PDF/MD；新持久交付证据默认每卡不超过10MiB、测试fixture不超过2MiB。超出时先压缩重复日志、仅留必要失败/最终证据，仍需超出则说明精确字节和不可替代理由，交由ROOT集成时处理，不能偷偷新增大目录。测试临时数据与最终证据分开，临时目录前后恢复。
+
+## 用户新增独立卡 W19（2026-10-25）
+
+[W19-SINA-STATEMENTS](W19-SINA-STATEMENTS.md)是另一张完整卡，负责新浪历史三表数据API、CWP专门数表、FF调用及技能路由，使用CWP和FF两个新隔离工区。已派发三卡的dispatch/count/status不变；W19有单独[setup](W19-setup.json)、研究和交接模板。其真实有界公开采集已由用户明确要求，适用本卡自己的边界，不套用前三卡COMMON的零下载限制。ROOT将CWP storage窄接缝让给W19，自己继续不重叠的结构/叙述owner。当前READY可立即派发，两个seed已提交且tracked clean；本卡实施尚未开始，不把文档seed当实现。
