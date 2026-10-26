@@ -1,0 +1,43 @@
+{
+  "schema_version": "sina-statements-research/1",
+  "page": {
+    "url": "https://vip.stock.finance.sina.com.cn/corp/go.php/vFD_FinanceSummary/stockid/688012/displaytype/4.phtml",
+    "http_status": 200,
+    "content_type": "text/html; charset=gbk",
+    "server_date": "Sun, 25 Oct 2026 13:04:03 GMT",
+    "bytes": 47010,
+    "sha256": "a9d6899de5438e31bdb6b915c66671944a20e422136f1f8becaaa117c0831ad7",
+    "retrieved_at": "2026-10-25T13:04:02.464773+00:00",
+    "actual_strict_encoding": "gb18030",
+    "report_type_buttons": [
+      "<span class=\"-bg-active\" data-value=\"0\">全部",
+      "<span data-value=\"4\">年报",
+      "<span data-value=\"3\">三季报",
+      "<span data-value=\"2\">中报",
+      "<span data-value=\"1\">一季报"
+    ],
+    "cncw_script_urls": [
+      "//n.sinaimg.cn/finance/2022/pc/cncw2022.js?ts=1792933443"
+    ]
+  },
+  "javascript": {
+    "url": "https://n.sinaimg.cn/finance/2022/pc/cncw2022.js",
+    "http_status": 200,
+    "content_type": "application/x-javascript",
+    "server_date": "Sun, 25 Oct 2026 13:04:04 GMT",
+    "bytes": 15373,
+    "sha256": "5a79412a56ba365e41fc8a5efa1d4bfc9ead2aae86491f8fad382a52096eb339",
+    "retrieved_at": "2026-10-25T13:04:03.088872+00:00",
+    "endpoint_observed": true,
+    "frontend_page_size": 10,
+    "frontend_formats_numbers": true,
+    "frontend_may_hide_zero_by_truthiness": true
+  },
+  "http_requests": 20,
+  "response_bytes": 2634389,
+  "observations": "observations.json",
+  "production_catalog_opened": false,
+  "paid_calls": 0,
+  "credentials_read": false,
+  "fixture_bytes": 175785
+}

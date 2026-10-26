@@ -1,0 +1,18 @@
+{
+ "deleted": [
+  {
+   "root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w19-real-e2e-20261025",
+   "files": 52,
+   "bytes": 19428346,
+   "exists_after": false
+  },
+  {
+   "root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w19-official-e2e-20261025",
+   "files": 14,
+   "bytes": 11935910,
+   "exists_after": false
+  }
+ ],
+ "kept": [],
+ "timestamp": "2026-10-25T23:22:10Z"
+}

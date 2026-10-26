@@ -107,6 +107,18 @@ def _utc_now() -> str:
 
 
 class SourceCatalog:
+    def identify_company(self, query: str, *, market: str):
+        from .security_identity import (SecurityMasterStore, SecurityIdentityResolver,
+            SecurityMasterUnavailableError, IdentityResult, IdentityStatus, load_identity_master)
+        store = SecurityMasterStore(self.config.catalog_dir / "security_master")
+        try:
+            master = load_identity_master(store, market=market)
+        except SecurityMasterUnavailableError:
+            return IdentityResult(query=query, normalized_query=query, market_hint=market,
+                exchange_hint=None, status=IdentityStatus.MISSING,
+                reason="company_identity_snapshot_unavailable", resolved=None, candidates=())
+        return SecurityIdentityResolver(master).identify(query, market=market)
+
     def __init__(self, config: CatalogConfig):
         if not isinstance(config, CatalogConfig):
             raise TypeError("config must be CatalogConfig")

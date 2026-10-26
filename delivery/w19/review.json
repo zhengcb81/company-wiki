@@ -1,0 +1,217 @@
+{
+  "schema_version": "w19-independent-review/1",
+  "review_round": 4,
+  "reviewer": "zcode-independent-final-reviewer:mimo-v2.6-flash (W19-SINA-STATEMENTS, not an implementer)",
+  "review_date": "2026-10-25",
+  "reviewed_code_commits": {
+    "company-wiki": "43995453",
+    "filing-fetch": "d396fe7"
+  },
+  "previous_reviewed_code_commits": {
+    "round_1": {
+      "company-wiki": "e583904d",
+      "filing-fetch": "a211d3a"
+    },
+    "round_2": {
+      "company-wiki": "ae317ca9",
+      "filing-fetch": "7d9bb85"
+    },
+    "round_3": {
+      "company-wiki": "71e98ed0",
+      "filing-fetch": "d396fe7"
+    }
+  },
+  "baselines": {
+    "company-wiki": "243993d2",
+    "filing-fetch": "e0d9642"
+  },
+  "note_on_commits": "author quoted FF hash 6a2db27 which does not exist; bound to git log HEAD d396fe7 (only scripts/ff_financial_statements.py +4 lines over 7d9bb85)",
+  "verdict": "PASS",
+  "recheck": {
+    "round": 4,
+    "scope": "git diff 71e98ed0..43995453 (service.py _needs_fetch unbounded-to rules + 1 regression); FF unchanged at d396fe7",
+    "result": "PASS",
+    "residual_non_blocking": [],
+    "blocking_findings": []
+  },
+  "findings": [
+    {
+      "id": "W19-R15",
+      "severity": "medium",
+      "blocking": false,
+      "status": "fixed_verified_round4",
+      "title": "Omitting period_end_to still skips the newer-direction refetch",
+      "evidence": "service.py _needs_fetch: want_to None under end_of_data reuses only when fetched_to IS NULL (return fetched_to is not None) and always refetches under period_boundary. Reviewer CLI runs: bounded full fetch (to=2026-06-30, fetched_to=2026-06-30) then identical bounded request -> 0 HTTP (bounded reuse unaffected); request without period_end_to under the mutated provider-newer fixture (consistent report_count 37) -> refetch 5 HTTP -> 37 periods, last=2026-09-30, envelope becomes fetched_to=NULL; repeat of the same no-to request -> 0 HTTP, 37 periods. from=2025 + no-to -> refetch every time (period_boundary branch), honest complete, bytes dedup.",
+      "recommendation": "None (fixed as suggested)."
+    },
+    {
+      "id": "W19-R10",
+      "severity": "major",
+      "blocking": true,
+      "status": "fixed_verified_round3",
+      "title": "Round 2: range-widening variants reported complete over uncovered ranges",
+      "evidence": "Re-verified by the round-2 methods on 71e98ed0: T2b (narrow fetch then request without period_end_from) -> refetch 5 HTTP -> 36 periods complete, repeat 0 HTTP; T2c (all_history=true) -> refetch 5 HTTP -> 36; T3b (mutated provider-newer fixture, report_count bumped consistently on every lrb page) with to=2026-12-31 -> refetch 5 HTTP -> 37 periods, last=2026-09-30, repeat 0 HTTP. Coverage rows now persist fetched_from=NULL (older exhausted) / fetched_to (answered upper bound). Residual no-to edge filed as W19-R15.",
+      "recommendation": "See W19-R15."
+    },
+    {
+      "id": "W19-R11",
+      "severity": "major",
+      "blocking": true,
+      "status": "fixed_verified_round3",
+      "title": "Round 2: replay_source cross-entity contamination",
+      "evidence": "Re-verified on a two-security root (688012 + 000333): replay of a versions-backed source with the wrong company -> exit 2 request_error, 000333 version count stays 0; reviewer-constructed committed page with ZERO version rows (sidecar top-level security_id=688012): wrong company -> exit 2 (sidecar owner), tampered sidecar without security_id -> exit 2 'cannot verify source ownership; refusing replay' (fail-closed), restored sidecar + correct company -> exit 0 publishing idempotently (reused=2), post-publish cross-entity -> exit 2 again.",
+      "recommendation": "None."
+    },
+    {
+      "id": "W19-R12",
+      "severity": "medium",
+      "blocking": false,
+      "status": "fixed_verified_round3",
+      "title": "Round 2: continuation contract inconsistency",
+      "evidence": "Crafted token fsv-...:5 on a three-statement request: income resumes correctly (first report 72 rows, min ordinal 6) while balance_sheet returns its full 33 periods and cash_flow its full 36 (was complete/0-reports). reuse_only+continuation now rejected: CWP CLI exit 2 request_error (contracts.py:205-207) and FF exit 2 request_error (ff_financial_statements.py:78-81).",
+      "recommendation": "If paging is ever activated, bind the token to security_id as well (cross-company tokens can still blank a same-typed statement); tokens remain unissuable in practice (20000-row bound unreachable for CN data)."
+    },
+    {
+      "id": "W19-R13",
+      "severity": "low",
+      "blocking": false,
+      "status": "fixed_verified_round3",
+      "title": "Round 2: --replay-source silently ignored under reuse_only",
+      "evidence": "Replay branch moved before the reuse_only early-return; reviewer run with intent=reuse_only + --replay-source -> exit 0, replay actually executed (no silent ignore).",
+      "recommendation": "None."
+    },
+    {
+      "id": "W19-R14",
+      "severity": "low",
+      "blocking": false,
+      "status": "fixed_verified_round3",
+      "title": "Round 2: replay envelope lacked response/1 payload",
+      "evidence": "Replay output now carries status/company_identity/statements[]/usage/retrieved_at; statement entries include replayed_source_id/new_version_ids/reused_version_ids (coverage/knowledge_mode still absent - acceptable for a replay receipt).",
+      "recommendation": "None."
+    },
+    {
+      "id": "W19-R1",
+      "severity": "major",
+      "blocking": true,
+      "status": "fixed_verified_round2",
+      "title": "Round 1: fetch_if_missing complete over wider range (from-widening)",
+      "evidence": "Round-2 verification: from-widening refetches (5 HTTP -> 36), incomplete terminals (count_changed/budget_stopped/max_pages/duplicate_page/no_progress) all refetch, end_of_data control 0 HTTP.",
+      "recommendation": "None."
+    },
+    {
+      "id": "W19-R2",
+      "severity": "medium",
+      "blocking": false,
+      "status": "fixed_verified_round2",
+      "title": "Round 1: silent truncation / fields not exposed",
+      "evidence": "fields honored identically on fetch and reuse_only paths; continuation/truncated surfaced (see W19-R12 for the continuation part).",
+      "recommendation": "None."
+    },
+    {
+      "id": "W19-R3",
+      "severity": "minor",
+      "blocking": false,
+      "status": "fixed_verified_round2",
+      "title": "Round 1: FF relabeled CWP request_error as upstream_error",
+      "evidence": "FF badrange -> exit 2 status=request_error, no retryable mislabel.",
+      "recommendation": "None."
+    },
+    {
+      "id": "W19-R4",
+      "severity": "minor",
+      "blocking": false,
+      "status": "fixed_verified_round2",
+      "title": "Round 1: top-level unavailable unreachable",
+      "evidence": "All-statements-unavailable -> top-level unavailable.",
+      "recommendation": "None."
+    },
+    {
+      "id": "W19-R5",
+      "severity": "medium",
+      "blocking": true,
+      "status": "fixed_verified_round2",
+      "title": "Round 1: uncommitted code above the reviewed commit",
+      "evidence": "All changes committed in ae317ca9/7d9bb85 (and now 71e98ed0/d396fe7); worktrees clean apart from review/handoff documents.",
+      "recommendation": "Only documentation commits may move HEAD from here."
+    },
+    {
+      "id": "W19-R6",
+      "severity": "low",
+      "blocking": false,
+      "status": "fixed_verified_round2",
+      "title": "Round 1: per-report captured_at vs retrieved_at",
+      "evidence": "Reports expose retrieved_at.",
+      "recommendation": "None."
+    },
+    {
+      "id": "W19-R7",
+      "severity": "low",
+      "blocking": false,
+      "status": "fixed_verified_round2",
+      "title": "Round 1: instant semantics not machine-readable",
+      "evidence": "Reports expose period_semantics (balance_sheet=instant).",
+      "recommendation": "None."
+    },
+    {
+      "id": "W19-R8",
+      "severity": "low",
+      "blocking": false,
+      "status": "fixed_verified_round2_then_hardened_round3",
+      "title": "Round 1: no replay-from-SourceRef entry",
+      "evidence": "Replay entry works for all three statements (item_source detection), 0 HTTP, byte-level dedup, idempotent; round 3 adds the ownership gate (W19-R11) and CLI placement/shape fixes (W19-R13/R14).",
+      "recommendation": "None."
+    },
+    {
+      "id": "W19-R9",
+      "severity": "low",
+      "blocking": false,
+      "status": "fixed_verified_round2",
+      "title": "Round 1: fixture replay reported response_bytes=0",
+      "evidence": "Offline receipts equal decompressed fixture bytes exactly (income 705179 / balance 1104886 / cash 647868; round-3 coverage row also records last_response_bytes=705179).",
+      "recommendation": "None."
+    }
+  ],
+  "observations": [
+    "Unbounded-envelope trust posture: a no-to request reuses 0 HTTP on an exhausted unbounded envelope (fetched_to NULL); provider periods published after that capture require refresh or a range change to re-verify. Inherent to offline reuse, coverage exposes last_period_end - accepted.",
+    "from-bounded + to-unbounded requests structurally never reach 0-HTTP reuse (envelope always period_boundary); honest status, bytes dedup, efficiency-only edge.",
+    "FF full-suite fc803 failures (lt01/02/05/07/09) predate W19 (identical at baseline e0d9642 and 7d9bb85; they drive fetch_filing against the ambient editable production company_wiki, unrelated to the W19 diff).",
+    "fetched_from/fetched_to are CREATE-TABLE-only; ae317ca9-shaped 1.3.0 DBs fail closed at open (schema structure drift). 1.3.0 unreleased - acceptable; branch-internal old experiment DBs must be rebuilt.",
+    "Service-side continuation tokens remain unissuable in practice; bind tokens to security_id if paging is ever activated."
+  ],
+  "independent_behaviors": [
+    "Exported 43995453 via git archive and rebuilt fixture roots (19/19 SHAs vs observations.json + byte-exact terminators + consistent newer-history variant) and two fresh wiki roots",
+    "Reviewed the 12-line _needs_fetch delta and the new TestR15UnboundedToDirection regression",
+    "R15 e2e matrix on the real CLI: bounded fetch -> bounded repeat 0 HTTP (reuse unaffected); no-to request under newer provider refetches 5 HTTP to 37 periods with envelope fetched_to=NULL; same no-to repeat 0 HTTP; from=2025 + no-to refetches (period_boundary branch, always)",
+    "Reran CWP tests/financial_statements/ at 43995453: 107 passed",
+    "No network, no production writes, no commits, no source edits; temp root deleted after the report was written"
+  ],
+  "commands_run": [
+    {
+      "command": "git -C company-wiki-w19-sina-statements diff 71e98ed0..43995453 -- src/ tests/",
+      "result": "service.py _needs_fetch unbounded-to rules (+12/-6) and TestR15UnboundedToDirection regression (+54); no other code"
+    },
+    {
+      "command": "git archive 43995453 ... | tar -x -C %TEMP%/w19-r15-recheck/cwp",
+      "result": "read-only export"
+    },
+    {
+      "command": "python setup_roots.py (reviewer-authored)",
+      "result": "21-entry fixture root (19 SHA-verified), consistent fixtures_newer (report_count 37 + 2026-09-30), wiki + wikiR2 roots"
+    },
+    {
+      "command": "python r15_driver.py (reviewer-authored)",
+      "result": "all assertions passed: A1 bounded fetch 36p/5HTTP; A2 bounded repeat 0 HTTP; A3 no-to + newer provider refetch 5 HTTP -> 37p/last=2026-09-30/fetched_to=NULL; A4 no-to repeat 0 HTTP/37p; B1 narrow 6p/1HTTP period_boundary; B2 from=2025+no-to refetch; B3 repeat refetches (honest, efficiency edge)"
+    },
+    {
+      "command": "python -m pytest tests/financial_statements/ -q (CWP @ 43995453)",
+      "result": "107 passed in 64.87s, exit 0"
+    }
+  ],
+  "artifacts": {
+    "report_md": "delivery/w19/review.md (round-4 final, updated in place; rounds 1-3 preserved in git history)",
+    "temp_workspace": "%TEMP%/w19-r15-recheck (deleted after report write)",
+    "network_calls": 0,
+    "commits_created": 0,
+    "production_dir_writes": 0
+  }
+}
