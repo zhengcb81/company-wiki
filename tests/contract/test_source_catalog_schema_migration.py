@@ -33,18 +33,16 @@ def _schema_version(db_path: Path) -> str:
 
 
 def test_fresh_database_has_text_fingerprint_column(tmp_path):
-    module = _catalog_module()
     db_path = tmp_path / "catalog.sqlite3"
 
     _catalog_store_cls()(db_path)
 
     assert "text_fingerprint" in _documents_columns(db_path)
-    assert _schema_version(db_path) == module.CATALOG_SCHEMA_VERSION
+    assert _schema_version(db_path) == _catalog_module().CATALOG_SCHEMA_VERSION
 
 
 def test_migrate_legacy_database_adds_text_fingerprint(tmp_path):
     """A 1.0.0 DB (full schema, no text_fingerprint) migrates on open, idempotently."""
-    module = _catalog_module()
     db_path = tmp_path / "catalog.sqlite3"
 
     # Build a current-schema DB, then regress it to the legacy 1.0.0 shape:
@@ -67,7 +65,7 @@ def test_migrate_legacy_database_adds_text_fingerprint(tmp_path):
 
     store = _catalog_store_cls()(db_path)
     assert "text_fingerprint" in _documents_columns(db_path)
-    assert _schema_version(db_path) == module.CATALOG_SCHEMA_VERSION
+    assert _schema_version(db_path) == _catalog_module().CATALOG_SCHEMA_VERSION
     # Existing rows survive the migration; fingerprint stays null until computed.
     with sqlite3.connect(db_path) as conn:
         row = conn.execute(
@@ -78,7 +76,7 @@ def test_migrate_legacy_database_adds_text_fingerprint(tmp_path):
     # Idempotent: re-opening must not error and must keep the column/version.
     _catalog_store_cls()(db_path)
     assert "text_fingerprint" in _documents_columns(db_path)
-    assert _schema_version(db_path) == module.CATALOG_SCHEMA_VERSION
+    assert _schema_version(db_path) == _catalog_module().CATALOG_SCHEMA_VERSION
     assert store is not None
 
 
@@ -144,12 +142,11 @@ def _insert_document(
 
 
 def test_t2_01_fresh_database_has_fingerprint_state_and_dispatch_index(tmp_path):
-    module = _catalog_module()
     db_path = tmp_path / "catalog.sqlite3"
     _catalog_store_cls()(db_path)
 
     assert "document_fingerprint_state" in _tables(db_path)
-    assert _schema_version(db_path) == "1.2.0"
+    assert _schema_version(db_path) == _catalog_module().CATALOG_SCHEMA_VERSION
     with sqlite3.connect(db_path) as conn:
         indexes = {
             row[0]
@@ -158,7 +155,7 @@ def test_t2_01_fresh_database_has_fingerprint_state_and_dispatch_index(tmp_path)
             )
         }
     assert "idx_fingerprint_state_dispatch" in indexes
-    assert module.CATALOG_SCHEMA_VERSION == "1.2.0"
+    assert _catalog_module().CATALOG_SCHEMA_VERSION == "1.4.0"
 
 
 def test_t2_01_migrate_legacy_1_0_creates_state_table_and_seeds(tmp_path):
@@ -185,7 +182,7 @@ def test_t2_01_migrate_legacy_1_0_creates_state_table_and_seeds(tmp_path):
 
     assert "document_fingerprint_state" in _tables(db_path)
     assert "text_fingerprint" in _documents_columns(db_path)
-    assert _schema_version(db_path) == "1.2.0"
+    assert _schema_version(db_path) == _catalog_module().CATALOG_SCHEMA_VERSION
     counts = _fingerprint_state_counts(db_path)
     assert counts.get("pending", 0) == 1, counts
     assert counts.get("completed", 0) == 0, counts
@@ -207,7 +204,7 @@ def test_t2_01_migrate_legacy_1_1_seeds_completed_and_pending(tmp_path):
 
     _catalog_store_cls()(db_path)  # reopen → migrates 1.1.0 -> 1.2.0
 
-    assert _schema_version(db_path) == "1.2.0"
+    assert _schema_version(db_path) == _catalog_module().CATALOG_SCHEMA_VERSION
     counts = _fingerprint_state_counts(db_path)
     assert counts.get("completed", 0) == 1, counts
     assert counts.get("pending", 0) == 1, counts
@@ -234,7 +231,7 @@ def test_t2_02_migration_is_idempotent(tmp_path):
     _catalog_store_cls()(db_path)  # reopen again — must be a no-op on state
     _catalog_store_cls()(db_path)
 
-    assert _schema_version(db_path) == "1.2.0"
+    assert _schema_version(db_path) == _catalog_module().CATALOG_SCHEMA_VERSION
     assert _fingerprint_state_counts(db_path) == counts_before, "state counts drifted"
     with sqlite3.connect(db_path) as conn:
         row_after = conn.execute(

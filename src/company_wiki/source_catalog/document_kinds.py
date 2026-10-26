@@ -13,6 +13,9 @@ SIDECAR_KIND_MAP = {
     "equity_offering_prospectus": (SourceType.PROSPECTUS, "equity_offering_prospectus"),
     "convertible_bond_prospectus": (SourceType.PROSPECTUS, "convertible_bond_prospectus"),
     "news": (SourceType.ORIGINAL_NEWS, "news"),
+    # W19: third-party multi-period statement datasets (sina_finance). A
+    # dataset is source material, not a periodic filing: no fictitious FY.
+    "financial_statement_dataset": (SourceType.OTHER, "financial_statement_dataset"),
 }
 SOURCE_FACT_KINDS = {kind: source_type.value for kind, (source_type, _) in SIDECAR_KIND_MAP.items()}
 SOURCE_FACT_KINDS["other"] = SourceType.OTHER.value
