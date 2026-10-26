@@ -1,8 +1,8 @@
 {
   "schema_version": "company-wiki-current-plan-status/1",
-  "as_of_date": "2026-10-25",
+  "as_of_date": "2026-10-26",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "PAUSED_BY_USER_PDF_C2_IMPLEMENTED_LINUX_TYPING_PUBLICATION_FIX_OPEN",
+  "overall_status": "ACTIVE_W19_ROOT_LAYER_AND_DATA_QUALITY_ACCEPTANCE_IN_PROGRESS",
   "parallel_packages_20261025": {
     "status": "W16_W17_W18_ROOT_COMPONENT_ACCEPTED_MERGED",
     "entry": "harness_lanes/20261025/README.md",
@@ -21,17 +21,18 @@
     "new_downloads": 0,
     "annual14_grade_unchanged": "Historical8/6/0 and10/4/0 reports preserved; latest source/input12/2/0; response semantics NOT_REVIEWED and RF OPEN"
   },
-  "current_authorized_scope": "Human continue authorizes mainline implementation. Native goal tool observed blocked on2026-10-25; no tool-supported resume and no claim of automatic resumption. Resource authority is current configured10M tokens/USD20, not stale2M goal text.",
+  "current_authorized_scope": "User resumed implementation; Sina and PDF stay within corresponding abstract owners; no new per-material approval. Configured cumulative 10M tokens/USD20 including unknown holds. Native goal active observed this session.",
   "parent_plan_id": "document-understanding-2026-10-13",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
-  "last_code_commit": "f13de801cd3a276f3906bfe9c9b66905ce182599",
+  "last_code_commit": "4c8b4642a12016c1a587c5f1fe47ef9635221815",
   "code_ci": {
-    "head_sha": "f13de801cd3a276f3906bfe9c9b66905ce182599",
-    "status": "not_observed_after_push",
-    "conclusion": null,
-    "known_local_linux_mypy_failure": "_paragraph_worker.py:51 ctypes.WinDLL attr-defined"
+    "head_sha": "4c8b4642a12016c1a587c5f1fe47ef9635221815",
+    "status": "completed",
+    "conclusion": "success",
+    "run_id": 40291031425,
+    "receipt": "review/pdf-c2-publication-20261026/publication-ci.json"
   },
   "formal_v4_offline_selection_replay_20261025": {
     "status": "EXACT_REPRODUCED_NO_PAID_CALL",
@@ -2238,5 +2239,16 @@
     "content_recall_old_groups": "6/8 -> 7/8",
     "per_fact_v2": "8/9 -> 9/9",
     "formal_summary_cache_rf": "OPEN"
+  },
+  "w19_root_reception_20261026": {
+    "status": "IN_PROGRESS_NOT_ACCEPTED_NOT_PUBLISHED",
+    "entry": "review/w19-reception-20261026/README.md",
+    "worktree": "cw-w19",
+    "author_cwp_head": "22ab7a4196619047b3a18746a9ad95aa3c03a888",
+    "author_ff_head": "d396fe73df27768468d6ea84835562820b4ae952",
+    "root_regressions": "8 red then 8 green; layer tests in progress",
+    "linux_mypy": "388 source files PASS",
+    "new_paid_calls": 0,
+    "next": "Finish layer tests and independent review, then official six-value and FF/CWP reuse E2E; merge only afterward."
   }
 }

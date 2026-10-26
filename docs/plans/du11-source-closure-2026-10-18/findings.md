@@ -1,5 +1,19 @@
 ## 2026-10-24 Microsoft 10-K RPO 真实选材根修
 
+## 2026-10-26 当前：已恢复实施，W19接收与抽象层质量根修
+
+用户已恢复实施，并要求新浪API/PDF技能严格封装在各自责任层、增加对应测试。PDF-C2 Linux类型窄修已由`4c8b4642`正常提交推送；Linux完整379源码mypy、正常pre-commit、pre-push154项与补充独审通过，精确[CI40291031425](https://github.com/zhengcb81/company-wiki/actions/runs/40291031425) completed/success。旧暂停与Linux问题已结束，不再是下一步。
+
+**唯一下一步：** 在ROOT自有`cw-w19`集成工区完成W19质量/分层回归与独立复审，再做FF薄调用、官方三表每表2项对照和跨仓复用大节点，最后保留作者提交祖先并入主线。当前W19尚未验收/发布；作者工区只读。详见[W19接收细则](review/w19-reception-20261026/README.md)。
+
+已发现并TDD修复的共因：手拼不可直接打开的SourceRef、只读/下载查询覆盖及版本语义分化、timestamp-only刷新重复写原件并重绑历史来源、无上界同请求重复抓取。原8项回归真实RED后转绿；当前集成完整Linux388源码mypy已通过。新增分层测试正在验证，不用局部绿代签全部交付。
+
+分层原则：FF只调CWP公共财务数据入口；新浪provider负责HTTP，纯normalizer负责数值/期间解释，repository负责专门数表，canonical writer/reader负责原件路径/暂存/SourceRef。PDF SDK/模型配置/增强进程只在PdfReading实现内，上层只传逻辑任务与统一预算；不把新浪三表送回PDF/叙述切片链。零新增模型调用；原件、生产配置/数据库、Dayu/IQS/RF WIP保持。
+
+C3正式摘要语义、缓存重启零重复费用、RF实际采用和新holdout/公司循环仍OPEN；完成W19大节点后继续，不重跑已关闭PDF比较/冷启整批。有效资源仍配置10M tokens/$20（含旧unknown）。
+
+以下为历史快照，历史段中的“当前/下一步/唯一”不覆盖本段及CURRENT_STATUS.json。
+
 初次对 Microsoft FY2025 10-K 做零POST检查时，金标准 8 项只支持 4 项；复核后其中3项是原金标准锚句没有匹配已选中的同口径详细MD&A事实，另1项是真实漏选的RPO未来确认节奏。原文明确披露RPO总额3750亿美元、商业部分3680亿美元，并预期约40%在未来12个月确认。根因不是selector限额：现有 `_STOCK_CONVERSION_PREFIX` 只允许 `of the`，未覆盖真实自然语序 `of our total company ...`。
 
 宽泛的source-purpose金额规则试验已经完整撤回。保留的窄修仅在转换动词/比例、`of` 后最多四个固定限定词、紧接RPO存量词，并且既有同一谓词范围含未来/期间信号时建立 `contract_revenue_conversion`。source purpose仍是 `accounting_policy`；单句的有界经营关系才允许作为 `operating_contract_stock` 阅读。纯定义、审计描述、无转换节奏余额和“RPO附近出现日期”均不应升级成经营事实。

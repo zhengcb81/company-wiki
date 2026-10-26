@@ -1,5 +1,19 @@
 # 当前行动计划（2026-10-25更新）
 
+## 2026-10-26 当前：已恢复实施，W19接收与抽象层质量根修
+
+用户已恢复实施，并要求新浪API/PDF技能严格封装在各自责任层、增加对应测试。PDF-C2 Linux类型窄修已由`4c8b4642`正常提交推送；Linux完整379源码mypy、正常pre-commit、pre-push154项与补充独审通过，精确[CI40291031425](https://github.com/zhengcb81/company-wiki/actions/runs/40291031425) completed/success。旧暂停与Linux问题已结束，不再是下一步。
+
+**唯一下一步：** 在ROOT自有`cw-w19`集成工区完成W19质量/分层回归与独立复审，再做FF薄调用、官方三表每表2项对照和跨仓复用大节点，最后保留作者提交祖先并入主线。当前W19尚未验收/发布；作者工区只读。详见[W19接收细则](review/w19-reception-20261026/README.md)。
+
+已发现并TDD修复的共因：手拼不可直接打开的SourceRef、只读/下载查询覆盖及版本语义分化、timestamp-only刷新重复写原件并重绑历史来源、无上界同请求重复抓取。原8项回归真实RED后转绿；当前集成完整Linux388源码mypy已通过。新增分层测试正在验证，不用局部绿代签全部交付。
+
+分层原则：FF只调CWP公共财务数据入口；新浪provider负责HTTP，纯normalizer负责数值/期间解释，repository负责专门数表，canonical writer/reader负责原件路径/暂存/SourceRef。PDF SDK/模型配置/增强进程只在PdfReading实现内，上层只传逻辑任务与统一预算；不把新浪三表送回PDF/叙述切片链。零新增模型调用；原件、生产配置/数据库、Dayu/IQS/RF WIP保持。
+
+C3正式摘要语义、缓存重启零重复费用、RF实际采用和新holdout/公司循环仍OPEN；完成W19大节点后继续，不重跑已关闭PDF比较/冷启整批。有效资源仍配置10M tokens/$20（含旧unknown）。
+
+以下为历史快照，历史段中的“当前/下一步/唯一”不覆盖本段及CURRENT_STATUS.json。
+
 ## 2026-10-25 用户明确暂停（本段为唯一当前状态）
 
 已停止代码实施。PDF-C2主体代码`f13de801`已正常提交并推送master；正常pre-commit及pre-push154项通过。段落分诊、严格成员对齐、按需增强及actual观察持久化已实现，真实HK缺口已改善。最终源码/测试独审F1–F5 PASS/0 OPEN；**随后ROOT补查发现新的Linux类型检查问题尚未修复，发布不能记完成或CI全绿。**
@@ -51,32 +65,7 @@ W18/W19作者工区、RF运行WIP、Dayu/IQS未写。以下旧“当前/下一�
 
 ## Next Step
 
-PDF-C1已正常发布且精确CI成功，进入PDF-C2：通用缺口/严格native段落成员对齐中性RED→既有continuity及实际summary任务→受界懒加载热运行时。C3正式摘要/cache/RF及新样本验证仍OPEN，不重跑已关闭C1。
-
-### 本批并行安排（2026-10-25，用户已发出三卡）
-
-三张新卡与各自开工目录见[harness_lanes/20261025/README.md](harness_lanes/20261025/README.md)，机器清单见同目录dispatch.json；与已关闭W13/W14/W15及IR/QA/MC三卡不同。W16独占RF收入口径责任层，W17独占Audit覆盖观察责任层，W18独占CWP新holdout工具/测试/PWF且禁止改生产源码。三工区PWF seed已分别提交、tracked clean，ROOT未启动产品实施。独立agent对卡片、基线、24份seed与接口审查PASS；三卡均要求作者在完成前独立agent全面审查、全部修复并复审后才交接。
-
-ROOT继续下方ST-A02的CWP来源/真实数据调查与其余partial，不并发改W16/W17的产品路径或W18新增目录；对既有冻结RF的只读验证可继续。W16不替ROOT拿真实金融数据，W17不代签语义质量，W18不跑付费摘要或真实RF。收包后ROOT统一集成，不用分包工程绿关闭内容或公司循环。
-
-### 当前下一步（TDD顺序）
-
-0. **已发布关闭：纯PWF推送快路径。** 1171aa6f正常提交推送，pre-push154项48.16秒通过、精确CI40184030458成功。3项首轮RED、分类器14项RED；独审定位并修旧漏分类，129主跑+1环境复跑，独立PASS。明确文档/归档不启动pytest，unknown/config/mixed及CI/full保持检查。见[发布收据](review/docs-only-push-20261025/publication.json)。
-1. **当前活动项：清理/会计失败路径独审与CF1–CF4来源根修。** 483cb2a5已推送且CI全绿；跨市场预检不合格，细则见独立报告和root-cause plan。清理/费用修改主机59P，新增journal变更3RED后当前finalization12P及旧母账2P（重叠不相加），最终独审已PASS，已发布243993d2并精确CI全绿。然后按真实DOM/未闭句/测量热点写中性RED，在共享owner修，不增cap或另开账户。
-2. **来源与金融责任分开闭环：** 冻结14项输入重评已完成，A01/A03/A05/A09等12项PASS；A02/A13精确金融口径仍PARTIAL，须由现有完整来源读取/结构化金融数据和RF实际参数采用验收，不通过扩大叙述cap强塞全文表格。跨市场/文种真实样本通过后，再新运行正式摘要、语义复核与缓存恢复，旧付费响应不重放。
-3. **按已证实根因TDD修复：** 为跨文种的真实结构/语义规则写中性RED，再改共享责任层；保留既有通过项、来源身份、预算与wire schema，不引入发行人特例或无证因果边。只有真实金标证明新增批次能补回必需事实，才设计稳定有界continuation，并覆盖源/任务身份、上下文闭包、汇总覆盖、缓存恢复和不重复计费。
-4. **大节点集中验收：** 同一冻结样本回放并复核原14项断言，再用未参与修复的其他市场/文种样本做泛化；独立复核绑定最终代码和证据SHA。验收前不调用新付费摘要。离线证据通过后，才用配置内有界请求验证正式摘要、缓存恢复和RF实际消费，之后继续W12四审及公司holdout循环。
-
-已验证：非loopback的85项针对性测试通过；两项worker测试在受限沙箱报`MODEL_HTTP_TRANSPORT`。同一production文件在可用loopback的本机环境7/7通过，证实该两项是沙箱socket限制；远端精确CI整体success。不得把沙箱失败记成代码缺陷或删除这些测试。
-2026-10-24执行补记：M1源侧development gold和M2源码独审均完成；M2完整DOCX历史/当前cache生命周期已有定向端到端验收。W13根修、W14离线链和W15可移位回放现已ROOT接收；W13精确CI 40120507146 completed/success，W14主线离线gate 595通过，W15无remote。三卡不代表正式摘要/cache/真实公司预测验收。M3/M4/M5及CN H1摘要/RF接口已完成；内容质量、下一个US样本、W12四审与公司循环仍OPEN，保持共享引擎/单family registry，不另造市场专用全文处理器。新主线明确按有界定向测试、真实样本集中验收推进，日常push不再隐式跑全量。
-
-五family阅读策略组件已TDD与独立61P验收，75相关P，正常推送c990e389已完成（8216P/24既有skip，另146契约P）；原source/request根修已发布3b4110a3且精确CI40087657562成功。25原件调查/4真实选材与26critical独审后，按[跨市场后续共因](review/market-family-upgrade-20261024/remaining_root_causes.md)冻结语义正确的源侧金标，修匿名DOCX电话会、指标定义/历史指引、局部上下文与稀疏降噪，合并原annual14六partial责任；不得为旧金标错项或财务全表扩大切片。formal-v4 证明运行链可走通，但暴露下游不消费的当前根因链：选择上限和未分配结构使选材/布局不完整，产出全部待审claim，RF因质量状态不消费。先修该共因并做离线大节点验收，再规划新正式摘要、cache复用、真实采用矩阵与W12四审、新公司循环。USIPO补样本地计量错误先精确诊断，不重试同失败/加审批。详细[实施细则](review/market-family-upgrade-20261024/strategy_upgrade_design.md)；唯一状态CURRENT_STATUS。
-
-**W11状态：** W11-CWP-SOURCES A/B/C全流程已由用户确认完成并推送，卡片关闭；ROOT的真实IR原件与内容覆盖验收仍按单独业务证据处理，不重开作者施工卡。
-
-**独立分包（已关闭）：** [20261024三卡总入口](harness_lanes/20261024/README.md)：W13-CWP-GATES以ROOT有界适配接收，W14-RF-CLEAN-CHAIN并入并推送RF主线，W15-AUDIT-PORTABLE并入Audit本地主线并由ROOT修复字节可移植性。ROOT现继续正式摘要/cache恢复、RF实际读取、真实样本覆盖与W12；三卡工程验收不代签这些内容验收。详见[三卡ROOT接收总记录](review/package-reception-w13-w15-20261024/README.md)。
-
-源码`f2b8f2bf`已正常推送，真实合线`e09e44e1`保留`ef49ae3e`作者祖先；完整单测8056P/24既有skip/221.02s，契约smoke146P/30.52s。精确[CI40050949303](https://github.com/zhengcb81/company-wiki/actions/runs/40050949303) completed/success。原4失败、同13+原4独审17P及两处共因修复收据均保留，未改旧断言/绕hook。
+完成W19 ROOT抽象层/数据语义回归与独审→FF/官方每表2项/跨仓复用大节点→并线推送；之后继续C3正式摘要/cache/RF及新样本。详见CURRENT_STATUS与W19接收细则。
 
 ## 历史记录（保留原过程，不作为当前待办）
 

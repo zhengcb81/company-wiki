@@ -1,0 +1,152 @@
+{
+  "schema_version": "pdf-c2-independent-portability-review/1",
+  "reviewer": "independent sub-agent /root/pdf_c2_portability_review",
+  "reviewed_at_utc": "2026-10-26T07:57:24.917464+00:00",
+  "status": "PASS",
+  "open_count": 0,
+  "findings": [],
+  "scope": "Only _paragraph_worker.py:51 Windows API typing portability delta; no release/CI/C3/model/source-replay certification.",
+  "head_commit_at_review": "f1b9935bd82d19de5da76331028c87419fa12337",
+  "old_snapshot": {
+    "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c2-enhancement-20261025/independent/final-review.json",
+    "byte_sha256": "ef9dbc14ea77f788e6ca3c284f0abe54e4ec735a6cf52515f4629c63edf4c7e5",
+    "status": "PASS",
+    "open_count": 0,
+    "base_commit": "8669e0cd",
+    "preserved_unchanged": true
+  },
+  "worker_delta": {
+    "path": "src/company_wiki/source_catalog/_paragraph_worker.py",
+    "line": 51,
+    "old": "kernel = ctypes.WinDLL(\"kernel32\", use_last_error=True)",
+    "new": "kernel = cast(Any, ctypes).WinDLL(\"kernel32\", use_last_error=True)",
+    "old_lf_sha256": "570d658be0b3cf6b948b972d668851ae2542964854b49f85ab8a0e86c2bda97c",
+    "new_lf_sha256": "5bbc41a5468bce9448c5f1b6a12c115a5bbbf307a9cc54fb59dc0eddde3c35ca",
+    "reverse_patch_reconstructs_old_lf_sha256": true,
+    "reverse_patch_equals_HEAD_LF": true,
+    "single_line_only": true
+  },
+  "bound_files": [
+    {
+      "path": "pyproject.toml",
+      "previous_lf_sha256": "37fec49124a9b3663e68c9ea91548e4d047eb2f9a3a913f6743911f8d0f01aad",
+      "current_lf_sha256": "37fec49124a9b3663e68c9ea91548e4d047eb2f9a3a913f6743911f8d0f01aad",
+      "unchanged": true
+    },
+    {
+      "path": "src/company_wiki/_process_tree.py",
+      "previous_lf_sha256": "d6c31e77dfa827b9068b5742f3456546976abe347341a60a7b9accb259c65145",
+      "current_lf_sha256": "d6c31e77dfa827b9068b5742f3456546976abe347341a60a7b9accb259c65145",
+      "unchanged": true
+    },
+    {
+      "path": "src/company_wiki/document_understanding/narrative_continuity.py",
+      "previous_lf_sha256": "f70ea4e157a7423f31caebbc8794fa0a21aa8762b890e1fb379cd7de358c17e3",
+      "current_lf_sha256": "f70ea4e157a7423f31caebbc8794fa0a21aa8762b890e1fb379cd7de358c17e3",
+      "unchanged": true
+    },
+    {
+      "path": "src/company_wiki/document_understanding/observation_adapter.py",
+      "previous_lf_sha256": "bcd4ebad0a7f6ce38c942099cafb9cb96b5ff444a475295540f6a77d3f2e7dd1",
+      "current_lf_sha256": "bcd4ebad0a7f6ce38c942099cafb9cb96b5ff444a475295540f6a77d3f2e7dd1",
+      "unchanged": true
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_pdf_reading.py",
+      "previous_lf_sha256": "c7c000d7da38361a83fc45a4ce526543e93113bdafb8fb4a132cd1bb1cc94c2e",
+      "current_lf_sha256": "c7c000d7da38361a83fc45a4ce526543e93113bdafb8fb4a132cd1bb1cc94c2e",
+      "unchanged": true
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_reading.py",
+      "previous_lf_sha256": "833b7e04366cd9ae8398232370302a2e6f7f9ff2a4a6021e8b3333fc8e145a2f",
+      "current_lf_sha256": "833b7e04366cd9ae8398232370302a2e6f7f9ff2a4a6021e8b3333fc8e145a2f",
+      "unchanged": true
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_pdf_paragraphs.py",
+      "previous_lf_sha256": "46d3cfeac4dbfb43d8857340488e3935fa5b63a026ece4d333a22c08375de083",
+      "current_lf_sha256": "46d3cfeac4dbfb43d8857340488e3935fa5b63a026ece4d333a22c08375de083",
+      "unchanged": true
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_pdf_enhancement.py",
+      "previous_lf_sha256": "07ed552b29588add5647bdd7a13ac431f8499bad0129a46f82f347764f01f9f4",
+      "current_lf_sha256": "07ed552b29588add5647bdd7a13ac431f8499bad0129a46f82f347764f01f9f4",
+      "unchanged": true
+    },
+    {
+      "path": "src/company_wiki/source_catalog/_paragraph_worker.py",
+      "previous_lf_sha256": "570d658be0b3cf6b948b972d668851ae2542964854b49f85ab8a0e86c2bda97c",
+      "current_lf_sha256": "5bbc41a5468bce9448c5f1b6a12c115a5bbbf307a9cc54fb59dc0eddde3c35ca",
+      "unchanged": false
+    },
+    {
+      "path": "tests/unit/test_pdf_paragraph_alignment.py",
+      "previous_lf_sha256": "8ecd0a4fa4017ca4df77bc8a1232d71a187c83bc67b7ec46e81b0842a01cc5a5",
+      "current_lf_sha256": "8ecd0a4fa4017ca4df77bc8a1232d71a187c83bc67b7ec46e81b0842a01cc5a5",
+      "unchanged": true
+    },
+    {
+      "path": "tests/unit/test_pdf_paragraph_runtime.py",
+      "previous_lf_sha256": "eadefc9b584871bc4fdfb182c899570bca82d9f4cae2e754803da19406a64beb",
+      "current_lf_sha256": "eadefc9b584871bc4fdfb182c899570bca82d9f4cae2e754803da19406a64beb",
+      "unchanged": true
+    },
+    {
+      "path": "tests/unit/test_pdf_paragraph_reading_integration.py",
+      "previous_lf_sha256": "82831f54be24a9306a16d4d036e87e4d34401c5d084636c41e8162781b7dd46c",
+      "current_lf_sha256": "82831f54be24a9306a16d4d036e87e4d34401c5d084636c41e8162781b7dd46c",
+      "unchanged": true
+    }
+  ],
+  "unchanged_other_bound_file_count": 11,
+  "review_checks": {
+    "cast_and_Any_already_imported_at_line": 14,
+    "Windows_API_remains_in_os_name_nt_branch": true,
+    "existing_convention": "src/company_wiki/_process_tree.py:55",
+    "existing_convention_lf_sha256": "d6c31e77dfa827b9068b5742f3456546976abe347341a60a7b9accb259c65145",
+    "AST_equal_after_erasing_only_ctypes_cast": true,
+    "runtime_cast_retains_ctypes_identity": true,
+    "runtime_cast_retains_WinDLL_callable_identity": true,
+    "old_new_mock_calls_equal": true,
+    "mock_call_args": [
+      "kernel32"
+    ],
+    "mock_call_kwargs": {
+      "use_last_error": true
+    }
+  },
+  "reasoning": "os.name branch guarding is unchanged. typing.cast returns the same object at runtime, so Windows library loading and arguments are unchanged. The Any view allows Linux typeshed checking of a Windows-only dynamic API, matching the existing process-tree implementation.",
+  "verification_provenance": {
+    "independent": "LF hashes, git one-line diff, exact reverse patch to HEAD, normalized AST comparison, cast/callable identity and isolated expression mock probe on local Python 3.13.9 Windows",
+    "ROOT_linux_mypy": "ROOT is separately running the full 379-file Linux-platform check; no receipt consumed and no result claimed by this review."
+  },
+  "excluded_actions": {
+    "Docling_imports": 0,
+    "model_calls": 0,
+    "downloads": 0,
+    "raw_copies": 0,
+    "old_34_tests_rerun": false,
+    "old_source_replay_rerun": false,
+    "source_edits": 0,
+    "production_config_edits": 0,
+    "git_index_edits": 0,
+    "hooks_run": false,
+    "CI_signed": false,
+    "C3_signed": false
+  },
+  "preservation": {
+    "unrelated_hook_mode_WIP": "observed .githooks/pre-push tracked modification; untouched",
+    "W19_author_workspaces_RF_Dayu_IQS": "untouched",
+    "only_written_files": [
+      ".planning/pdf-c2-publication-20261026/independent/portability-review.md",
+      ".planning/pdf-c2-publication-20261026/independent/portability-review.json"
+    ]
+  },
+  "scope_limits": [
+    "Historical F1-F5 PASS/0 OPEN and three-source replay are inherited only through the old snapshot; not rerun or recertified.",
+    "No claim of a fresh final-SHA model run. Worker source identity changes and existing identity binding may legitimately invalidate earlier enhancement caches.",
+    "ROOT must independently close full Linux mypy, normal hooks, publication exact CI and all later C3 work."
+  ]
+}

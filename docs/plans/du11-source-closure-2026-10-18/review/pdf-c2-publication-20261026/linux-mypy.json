@@ -1,0 +1,12 @@
+{
+  "worker_lf_sha256": "5bbc41a5468bce9448c5f1b6a12c115a5bbbf307a9cc54fb59dc0eddde3c35ca",
+  "schema_version": "pdf-c2-linux-typing-check/1",
+  "scope": "Complete source, not skipped-import subset",
+  "command": ".venv/Scripts/python.exe -m mypy --platform linux src",
+  "new_model_calls": 0,
+  "date": "2026-10-26",
+  "stdout": "Success: no issues found in 379 source files",
+  "exit_code": 0,
+  "new_downloads": 0,
+  "source_before_commit": "f1b9935b"
+}

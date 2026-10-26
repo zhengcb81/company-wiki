@@ -1,5 +1,19 @@
 ## 2026-10-24 W08 annual14 V2 选材复核与相关测试包恢复
 
+## 2026-10-26 当前：已恢复实施，W19接收与抽象层质量根修
+
+用户已恢复实施，并要求新浪API/PDF技能严格封装在各自责任层、增加对应测试。PDF-C2 Linux类型窄修已由`4c8b4642`正常提交推送；Linux完整379源码mypy、正常pre-commit、pre-push154项与补充独审通过，精确[CI40291031425](https://github.com/zhengcb81/company-wiki/actions/runs/40291031425) completed/success。旧暂停与Linux问题已结束，不再是下一步。
+
+**唯一下一步：** 在ROOT自有`cw-w19`集成工区完成W19质量/分层回归与独立复审，再做FF薄调用、官方三表每表2项对照和跨仓复用大节点，最后保留作者提交祖先并入主线。当前W19尚未验收/发布；作者工区只读。详见[W19接收细则](review/w19-reception-20261026/README.md)。
+
+已发现并TDD修复的共因：手拼不可直接打开的SourceRef、只读/下载查询覆盖及版本语义分化、timestamp-only刷新重复写原件并重绑历史来源、无上界同请求重复抓取。原8项回归真实RED后转绿；当前集成完整Linux388源码mypy已通过。新增分层测试正在验证，不用局部绿代签全部交付。
+
+分层原则：FF只调CWP公共财务数据入口；新浪provider负责HTTP，纯normalizer负责数值/期间解释，repository负责专门数表，canonical writer/reader负责原件路径/暂存/SourceRef。PDF SDK/模型配置/增强进程只在PdfReading实现内，上层只传逻辑任务与统一预算；不把新浪三表送回PDF/叙述切片链。零新增模型调用；原件、生产配置/数据库、Dayu/IQS/RF WIP保持。
+
+C3正式摘要语义、缓存重启零重复费用、RF实际采用和新holdout/公司循环仍OPEN；完成W19大节点后继续，不重跑已关闭PDF比较/冷启整批。有效资源仍配置10M tokens/$20（含旧unknown）。
+
+以下为历史快照，历史段中的“当前/下一步/唯一”不覆盖本段及CURRENT_STATUS.json。
+
 在不修改冻结的首轮annual14 review/gold前提下，使用新目录`review/r1-w08-crosspage-20261024/annual14-v2/`保存第二轮实际选择和复核。SourceRef原始字节SHA复验一致；一次249页回放，5,660 units/1,532 candidates，保留96 spans/7,171字符，工作8,613,643/16M且未耗尽；编译52个scoped task view，0 provider调用、0下载、0 raw副本。14项ROOT链路复核为6 pass/7 partial/1 missing，首轮3/9/2提升；A07的42万新化合物与310个R→D转换已在`t23`，A11新客和新分子收入占比分别在`t29`/`t15`且对象清楚，A14集中度、需求、监管、竞争、项目延误及汇率风险均有局部可读任务。A01/A02/A03/A04/A05/A09/A12仍partial，A13仍missing；不将fallback原文算selected或将aggregate `budget_full`猜成目标原因。
 
 验证：相关自然包1,546 passed/34.48s；Ruff变更文件全绿；三个源码文件mypy 0错误。整包先在83%卡于既有`test_real_official_export_adapter_keeps_two_actual_parents_and_native_fields`：它使用系统默认`TemporaryDirectory`，fixture再于其内创建嵌套临时目录，本机受限Windows临时区的`mkdir`挂起。测试改用pytest `tmp_path`隔离后，单测2.35s通过，整包完整34.48s通过；生产代码和fixture事实断言未改。回执明确标明ROOT复核、不是独立签收、没有真实模型响应或摘要验收。W11-CWP-SOURCES按用户确认已A/B/C完成并推送，作为完成项不重开。
