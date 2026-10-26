@@ -9,7 +9,7 @@
    "branch": "codex/w19-sina-statements-20261025",
    "base_commit": "243993d2c9e12c2a9cb6e2b728e547928607abff",
    "code_commit": "43995453",
-   "handoff_commit": null,
+   "handoff_commit": "c5f77b28",
    "changed_paths": [
     "src/company_wiki/source_catalog/financial_statements/**",
     "tests/financial_statements/**",
@@ -27,8 +27,8 @@
     "canonical_writer.py: ThirdPartyDatasetOriginal + import_third_party_dataset_staged + financial_statements destination + provenance block",
     "document_kinds.py: SIDECAR_KIND_MAP += financial_statement_dataset -> SourceType.OTHER"
    ],
-   "remote": null,
-   "pushed": false
+   "remote": "https://github.com/zhengcb81/company-wiki.git",
+   "pushed": true
   },
   {
    "name": "filing-fetch",
@@ -45,8 +45,8 @@
     "docs/plans/w19-sina-statements-2026-10-25/**"
    ],
    "shared_seams": [],
-   "remote": null,
-   "pushed": false
+   "remote": "https://github.com/zhengcb81/filing-fetch.git",
+   "pushed": true
   }
  ],
  "requirements": [
@@ -324,5 +324,6 @@
   "5 fc803 e2e failures in the FULL FF suite pre-exist W19 (verified identical at base e0d9642); author ran the selected focused suites",
   "fetched_from/fetched_to columns only exist in CREATE TABLE: 1.3.0 was never published, but old trial DBs from mid-branch commits fail closed (structure drift) and must be rebuilt",
   "continuation tokens are version-scoped per statement; if multi-statement paging is enabled later, bind the token to security_id as well"
- ]
+ ],
+ "push_note": "Both author branches pushed. FF pushed directly. CWP push from the long-named worktree (company-wiki-w19-sina-statements, +20 chars vs production root) was blocked by the pre-push CI smoke via canonical_root_path_limit; proven environmental (same smoke passes at base 243993d2 in a short-path worktree and in the production root; the failing shared-original path is untouched by this diff). Pushed instead from a short-path detached worktree at c5f77b28 where the gate passes. Not a bypass: the gate ran and passed on the same commit."
 }

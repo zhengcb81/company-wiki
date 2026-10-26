@@ -65,3 +65,9 @@ lrb 705,179B + fzb 1,104,886B + llb 647,868B + 美的397,408B + 招行(~2页) + 
 - 第四轮差异补审（71e98ed0..43995453，R15 一行修复+回归）：**PASS**，R1–R15 全部关闭，无未决 finding；review.md/json 已更新为最终版（verdict PASS，round 4，绑定 CWP 43995453 / FF d396fe7）。
 - 真实测试根清理收据 delivery/w19/cleanup_receipt.json（66 文件 31,364,256B，根已不存在；生产配置 sha 3d159a4e 未动）。
 - handoff.md/json 终稿（status COMPLETE、四轮轮次、R10-R15 处置表、审查者5条观察、清理收据）。STOP 等 ROOT。
+
+## 2026-10-26 推送与收尾
+
+- FF 分支已直推 origin（d396fe7）。CWP 从长名工区推送被 pre-push CI 冒烟以 canonical_root_path_limit 拦截：证据表明纯环境原因（工区名比生产根长 20 字符；同冒烟在 base 243993d2 的短路径 worktree 与生产根均通过，失败路径 import_shared_original_staged 与本卡 diff 无关）。未绕过门禁：在同 commit c5f77b28 的短路径 detached worktree 里门禁通过后推送成功。episode 已记入 handoff.json push_note。
+- 两分支均已推送：CWP `codex/w19-sina-statements-20261025`@c5f77b28、FF 同名@d396fe7；未 merge 主线。
+- 终态：A/B/C 完成，四轮独立审查 PASS（R1–R15 全关闭），handoff/review/cleanup 交付齐备。STOP 等 ROOT。
