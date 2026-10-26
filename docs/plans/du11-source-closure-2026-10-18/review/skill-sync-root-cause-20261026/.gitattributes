@@ -1,0 +1,5 @@
+# Receipts and independent review cite exact native bytes across hosts.
+.gitattributes text eol=lf
+*.py text eol=lf
+*.json -text -eol whitespace=cr-at-eol
+independent/** -text -eol whitespace=cr-at-eol

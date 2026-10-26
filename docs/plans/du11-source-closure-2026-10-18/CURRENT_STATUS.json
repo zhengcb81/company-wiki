@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-26",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "W19_PUBLISHED_CI_GREEN_C3_NEXT_GLOBAL_INSTALL_OS_GAP",
+  "overall_status": "ACTIVE_C3_READY_GLOBAL_SKILLS_SYNCHRONIZED",
   "parallel_packages_20261025": {
     "status": "W16_W17_W18_ROOT_COMPONENT_ACCEPTED_MERGED",
     "entry": "harness_lanes/20261025/README.md",
@@ -21,7 +21,7 @@
     "new_downloads": 0,
     "annual14_grade_unchanged": "Historical8/6/0 and10/4/0 reports preserved; latest source/input12/2/0; response semantics NOT_REVIEWED and RF OPEN"
   },
-  "current_authorized_scope": "User continue authorizes implementation; no per-material/manual canary approvals. Current configured resource authority10M tokens/USD20 including unknown. Native goal controller last read blocked; no tool-supported resume claimed.",
+  "current_authorized_scope": "User continue and explicit skill-sync root repair authorized; no new manual gates. Configured authority10M tokens/USD20 including unknown supersedes old native-objective2M text; native goal observed active on2026-10-26.",
   "parent_plan_id": "document-understanding-2026-10-13",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
@@ -333,7 +333,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "After human resume: fix only _paragraph_worker.py ctypes.WinDLL access using the existing cross-platform typed-cast convention, run mypy --platform linux src plus normal pre-commit, bind the narrow portability delta to independent review, commit/push and observe exact CI. Do not repeat Docling cold runs or declare C2 publication/C3 summary/cache/RF complete.",
+  "next_step_now": "Execute existing PDF-C3: configured real summary semantics, cross-process cache/no duplicate spend recovery, actual RF adoption, held-out companies and eight-step audit loop. W19, Linux portability and global skill sync are complete/published or accepted; do not repeat them or wait for human resume.",
   "parallel_work_packages": [
     {
       "id": "IR-REPORT-GENERATION",
@@ -354,7 +354,7 @@
       "review_before_handoff": true
     }
   ],
-  "next_step_after_user_resumes": "After human resume: fix only _paragraph_worker.py ctypes.WinDLL access using the existing cross-platform typed-cast convention, run mypy --platform linux src plus normal pre-commit, bind the narrow portability delta to independent review, commit/push and observe exact CI. Do not repeat Docling cold runs or declare C2 publication/C3 summary/cache/RF complete.",
+  "next_step_after_user_resumes": "Execute existing PDF-C3: configured real summary semantics, cross-process cache/no duplicate spend recovery, actual RF adoption, held-out companies and eight-step audit loop. W19, Linux portability and global skill sync are complete/published or accepted; do not repeat them or wait for human resume.",
   "budget_snapshot": {
     "observed_on": "2026-10-25",
     "observation_ref": "review/market-family-upgrade-20261024/formal-v4-and-cards-root-acceptance-20261025.md",
@@ -805,7 +805,7 @@
     },
     "publication_docs_commit": "fa667547"
   },
-  "next_step_after_publication": "After human resume: fix only _paragraph_worker.py ctypes.WinDLL access using the existing cross-platform typed-cast convention, run mypy --platform linux src plus normal pre-commit, bind the narrow portability delta to independent review, commit/push and observe exact CI. Do not repeat Docling cold runs or declare C2 publication/C3 summary/cache/RF complete.",
+  "next_step_after_publication": "Execute existing PDF-C3: configured real summary semantics, cross-process cache/no duplicate spend recovery, actual RF adoption, held-out companies and eight-step audit loop. W19, Linux portability and global skill sync are complete/published or accepted; do not repeat them or wait for human resume.",
   "w08_current_review": {
     "selection_path": "review/r1-w08-material-value-20261024/publication/final-source/selection.json",
     "selection_sha256": "44a9ac20e9b83f67bf99976820cf88b7de592b74b0104fca09abc434c0287904",
@@ -840,8 +840,8 @@
     "a02_prior_growth_subfact_restored": true
   },
   "next_steps": [
-    "After human resume: fix only _paragraph_worker.py ctypes.WinDLL access using the existing cross-platform typed-cast convention, run mypy --platform linux src plus normal pre-commit, bind the narrow portability delta to independent review, commit/push and observe exact CI. Do not repeat Docling cold runs or declare C2 publication/C3 summary/cache/RF complete.",
-    "Then continue configured real summaries, semantic review, formal cache restart and RF adoption."
+    "Execute existing PDF-C3: configured real summary semantics, cross-process cache/no duplicate spend recovery, actual RF adoption, held-out companies and eight-step audit loop. W19, Linux portability and global skill sync are complete/published or accepted; do not repeat them or wait for human resume.",
+    "Keep C3 semantic/LLM/cache/RF acceptance distinct from installed-byte and isolated FF reuse acceptance; preserve source originals, configured budgets and other-owner WIP."
   ],
   "last_updated_utc": "2026-10-25T10:46:55Z",
   "latest_publish_validation": {
@@ -2034,7 +2034,7 @@
     "publication": "review/production-v4-formal-20261025/publication.json"
   },
   "w19_sina_statements_20261025": {
-    "status": "READY_NOT_DISPATCHED_PACKET_INDEPENDENT_PASS",
+    "status": "COMPONENT_ACCEPTED_MERGED_PUBLISHED",
     "card": "harness_lanes/20261025/W19-SINA-STATEMENTS.md",
     "setup": "harness_lanes/20261025/W19-setup.json",
     "research": "review/sina-statements-research-20261025/README.md",
@@ -2047,7 +2047,9 @@
       "company-wiki": "a308350279623577f75863f86605aa803e8c565a",
       "filing-fetch": "c8b0e40f6772d1cad91f0bc0a127cc807c340810"
     },
-    "independent_review": "harness_lanes/20261025/W19-packet-review.json"
+    "independent_review": "harness_lanes/20261025/W19-packet-review.json",
+    "status_at_packet_creation": "READY_NOT_DISPATCHED_PACKET_INDEPENDENT_PASS",
+    "current_reception": "review/w19-reception-20261026/README.md"
   },
   "cf_source_20261025": {
     "status": "ENGINEERING_STAGE1_PUBLISHED_CI_SUCCESS",
@@ -2241,7 +2243,7 @@
     "formal_summary_cache_rf": "OPEN"
   },
   "w19_root_reception_20261026": {
-    "status": "COMPONENT_ACCEPTED_PUBLISHED_CI_GREEN_GLOBAL_INSTALL_OS_GAP",
+    "status": "COMPONENT_ACCEPTED_PUBLISHED_CI_GREEN_GLOBAL_SYNC_REPAIRED",
     "entry": "review/w19-reception-20261026/README.md",
     "cwp_main_head": "10def09e8fd1967e0b87434ae211d1fbaafbb090",
     "ff_main_head": "5396bd688e5b775e746fe3290852f0532d4548f8",
@@ -2265,22 +2267,51 @@
     },
     "new_model_calls": 0,
     "per_row_unit_scale": "Unproven units remain None; six official nominal-yuan checks do not upgrade all provider rows.",
-    "next": "C3 from canonical project entrypoints: formal summary semantics, zero-repeat-cost restart/cache, actual RF adoption and held-out companies. Do not block on global-skill OS write access.",
+    "next": "Execute existing PDF-C3: configured real summary semantics, cross-process cache/no duplicate spend recovery, actual RF adoption, held-out companies and eight-step audit loop. W19, Linux portability and global skill sync are complete/published or accepted; do not repeat them or wait for human resume.",
     "ff_api_release_head": "72024a8597e27607badbbfdd06c39446269d7010",
     "ff_installer_ci": 40304350720,
     "root_worktrees_removed": true,
     "installation": {
-      "status": "FAILED_OS_PERMISSION_NO_WRITES",
-      "seconds": 0.38098319998243824,
-      "target_bytes_unchanged": true,
-      "project_manual_gate": false,
+      "status": "SYNCHRONIZED_AND_ISOLATED_ENTRYPOINTS_VERIFIED",
+      "historical_first_attempt": {
+        "status": "FAILED_OS_PERMISSION_NO_WRITES",
+        "seconds": 0.38098319998243824,
+        "target_bytes_unchanged": true,
+        "project_manual_gate": false,
+        "ACL_changes": 0,
+        "receipt": "review/w19-reception-20261026/install-actual-receipt.json"
+      },
+      "current_receipt": "review/skill-sync-root-cause-20261026/final-verification.json",
+      "runtime_matches_per_physical_target": 22,
+      "updated_files": 8,
+      "repeat_written": 0,
       "ACL_changes": 0,
-      "receipt": "review/w19-reception-20261026/install-actual-receipt.json"
+      "label_changes": 0,
+      "independent_review": "PASS_ZERO_OPEN"
     }
   },
   "native_goal_controller_observation": {
-    "status": "blocked",
+    "status": "active",
     "implementation_authorized_by_user": true,
-    "resume_tool_available": false
+    "observed_date": "2026-10-26"
+  },
+  "current_task_override": "Human-prioritized global skill runtime repair complete and independently accepted; publish records, then return to existing C3.",
+  "skill_sync_root_cause_20261026": {
+    "status": "COMPLETE_INDEPENDENT_PASS_ZERO_OPEN",
+    "entry": "review/skill-sync-root-cause-20261026/README.md",
+    "root_cause": "Low mandatory integrity label inherited by workspace venv executable downgrades actual Python even when approved parent shell is Medium; Low cannot write implicit-Medium global skills under Windows MIC.",
+    "repair": "Existing normal host Python under the supported approved shell runs the identical canonical scoped installer; no global ACL/label/config changes.",
+    "physical_targets": 2,
+    "logical_entrypoints": 3,
+    "updated_files": 8,
+    "runtime_files_matched_per_target": 22,
+    "repeat_written": 0,
+    "installed_cli_reuse": "PASS3_ENTRIES_36_33_36_PERIODS_9729_ROWS_12_DIRECT_REFS_0_HTTP",
+    "global_acl_changes": 0,
+    "global_label_changes": 0,
+    "new_paid_calls": 0,
+    "test_root_restored_absent": true,
+    "production_default_configuration_functionality": "NOT_TESTED; installed CLI acceptance uses explicit isolated config",
+    "independent_review": "review/skill-sync-root-cause-20261026/independent/review.json"
   }
 }

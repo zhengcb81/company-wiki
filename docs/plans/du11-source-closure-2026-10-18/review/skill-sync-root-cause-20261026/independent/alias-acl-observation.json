@@ -1,0 +1,115 @@
+{
+  "aliases": [
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills",
+      "link_type": null,
+      "target": [
+        null
+      ],
+      "attributes": "Directory"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.claude\\skills",
+      "link_type": null,
+      "target": [
+        null
+      ],
+      "attributes": "Directory"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\skills",
+      "link_type": null,
+      "target": [
+        null
+      ],
+      "attributes": "Directory"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch",
+      "link_type": null,
+      "target": [
+        null
+      ],
+      "attributes": "Directory"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.claude\\skills\\filing-fetch",
+      "link_type": "Junction",
+      "target": [
+        "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch"
+      ],
+      "attributes": "Directory, ReparsePoint"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch",
+      "link_type": null,
+      "target": [
+        null
+      ],
+      "attributes": "Directory"
+    }
+  ],
+  "target_dacl": [
+    {
+      "path": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch",
+      "owner": "DESKTOP-156V213\\郑曾波",
+      "access": [
+        {
+          "identity": "DESKTOP-156V213\\CodexSandboxUsers",
+          "rights": "ReadAndExecute, Synchronize",
+          "type": "Allow",
+          "inherited": true
+        },
+        {
+          "identity": "NT AUTHORITY\\SYSTEM",
+          "rights": "FullControl",
+          "type": "Allow",
+          "inherited": true
+        },
+        {
+          "identity": "BUILTIN\\Administrators",
+          "rights": "FullControl",
+          "type": "Allow",
+          "inherited": true
+        },
+        {
+          "identity": "DESKTOP-156V213\\郑曾波",
+          "rights": "FullControl",
+          "type": "Allow",
+          "inherited": true
+        }
+      ]
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch",
+      "owner": "DESKTOP-156V213\\郑曾波",
+      "access": [
+        {
+          "identity": "DESKTOP-156V213\\CodexSandboxUsers",
+          "rights": "ReadAndExecute, Synchronize",
+          "type": "Allow",
+          "inherited": true
+        },
+        {
+          "identity": "NT AUTHORITY\\SYSTEM",
+          "rights": "FullControl",
+          "type": "Allow",
+          "inherited": true
+        },
+        {
+          "identity": "BUILTIN\\Administrators",
+          "rights": "FullControl",
+          "type": "Allow",
+          "inherited": true
+        },
+        {
+          "identity": "DESKTOP-156V213\\郑曾波",
+          "rights": "FullControl",
+          "type": "Allow",
+          "inherited": true
+        }
+      ]
+    }
+  ],
+  "read_only": true
+}

@@ -1,6 +1,6 @@
 # 当前行动计划（2026-10-25更新）
 
-## 2026-10-26 当前：W19分层根修已并线，回到C3
+## 2026-10-26 当前：W19已发布，技能同步根因已修复，回到C3
 
 **CWP `10def09e` / FF `72024a8` 已并入主线并推送，精确CI均成功。** 作者提交祖先完整保留；36份独审源码/测试与已发布文件逐SHA一致。新浪经FF公共入口→CWP财务服务→HTTP provider/纯normalizer→专门数表repository；原件暂存/根定位/SourceRef仍由writer/reader负责。PDF消费者只用PdfReading，SDK、模型配置和增强进程封装在阅读实现层，两条链不互相绕过。
 
@@ -8,11 +8,11 @@ ROOT修复了来源引用、范围覆盖、版本选择与不可变来源、重�
 
 真实API只用4请求/942,986B/23.68秒/$0，中微三表和招商银行利润表及两公司二次0HTTP通过；离线真实子进程链36/33/36期、9729行、4049数值locator逐值、12个返回SourceRef直接打开均通过。约11MB测试湖，无原件重复增长，临时根恢复不存在。官方年报原件只读复用，三表各2项由独立reader/PdfReading、6页目视、JSONPointer及Decimal和三条公式核验通过。新浪行unit/scale仍None，不从f2或六样本推广全局单位。
 
-全局技能安装未完成：当前执行环境对`.agents`/`.codex`目标返回真实EACCES，所选6文件零写入/字节未变。Windows暂存重试空转共因已TDD/独审修复并发布FF `5396bd6`，精确CI40304350720成功；现在0.38秒明确失败，不再长期重试。ROOT未改ACL或换写入通道。继续主线时直接使用canonical FF仓库入口；安装是环境收尾项，不把它变成C3人审门。见[安装状态与命令](review/w19-reception-20261026/INSTALLATION.md)。
+全局技能同步根因已修复并实际完成：获批shell为Medium，但工作区venv可执行文件带Low标签，启动的Python仍为Low，受到Windows MIC no-write-up拒写；并非缺少授权或目录FullControl。改用同一获批shell中的现有宿主Python执行同一canonical定点安装器，四路径×两物理目标共8文件更新，.claude junction去重。两物理目标各22份公开runtime SHA全部一致，最终重复0写、配置和未选文件保留，无全局ACL/标签修改。三个安装CLI新进程→隔离CWP→三表复用均通过，0HTTP/付费、测试根恢复；本节点独立复核PASS / 0 OPEN。见[根因、收据及以后运行方式](review/skill-sync-root-cause-20261026/README.md)。
 
 **唯一下一步：** 本轮ROOT临时工区已清理；按已冻结PDF-C3细则进入配置内正式摘要语义→缓存跨进程零重复费用恢复→RF实际采用→新公司/跨市场文种holdout和八步公司审查循环。不重开已完成PDF比较/冷启批次，不把工程绿或金融六样本扩大成内容质量全通过。详见[本轮验收与后续](review/w19-reception-20261026/README.md)。
 
-用户继续授权有效；原生goal控制器本次回读仍显示blocked，工具不提供resume，不声称已自动重启；这不是本轮实现的权限等待。配置资源继续10M tokens/$20含旧unknown，本轮无新增模型费用。生产原件/配置/目录库、Dayu/IQS/RF他人WIP不写。
+用户继续授权有效；原生goal控制器本轮实际回读active。其旧objective文本的2M额度已由当前配置10M tokens/$20（含旧unknown）取代，不改配置、不另造许可。本轮无新增模型费用；生产原件/配置/目录库、Dayu/IQS/RF他人WIP不写。
 
 以下为历史快照，其中“当前/下一步/唯一”不覆盖本段及CURRENT_STATUS.json。
 

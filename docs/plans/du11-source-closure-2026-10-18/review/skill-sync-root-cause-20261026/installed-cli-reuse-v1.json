@@ -1,0 +1,59 @@
+{
+  "schema_version": "installed-ff-cli-reuse/1",
+  "passed": true,
+  "network_requests": 0,
+  "paid_calls": 0,
+  "runs": [
+    {
+      "alias": ".agents",
+      "actual_script": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\fetch_statements.py",
+      "physical_script": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\fetch_statements.py",
+      "returncode": 0,
+      "status": "complete",
+      "http_requests": 0,
+      "periods": {
+        "income_statement": 36,
+        "balance_sheet": 33,
+        "cash_flow": 36
+      },
+      "rows": 9729,
+      "direct_sources_opened": 12
+    },
+    {
+      "alias": ".claude",
+      "actual_script": "C:\\Users\\郑曾波\\.claude\\skills\\filing-fetch\\scripts\\fetch_statements.py",
+      "physical_script": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\fetch_statements.py",
+      "returncode": 0,
+      "status": "complete",
+      "http_requests": 0,
+      "periods": {
+        "income_statement": 36,
+        "balance_sheet": 33,
+        "cash_flow": 36
+      },
+      "rows": 9729,
+      "direct_sources_opened": 12
+    },
+    {
+      "alias": ".codex",
+      "actual_script": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch\\scripts\\fetch_statements.py",
+      "physical_script": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch\\scripts\\fetch_statements.py",
+      "returncode": 0,
+      "status": "complete",
+      "http_requests": 0,
+      "periods": {
+        "income_statement": 36,
+        "balance_sheet": 33,
+        "cash_flow": 36
+      },
+      "rows": 9729,
+      "direct_sources_opened": 12
+    }
+  ],
+  "seed_provider": "frozen Sina bytes via existing fixture port; not live HTTP",
+  "seed_fixture_exchanges": 15,
+  "immutable_originals_unchanged": true,
+  "temporary_bytes": 11709113,
+  "temporary_root_restored_absent": true,
+  "elapsed_seconds": 13.447
+}

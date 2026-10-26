@@ -42,6 +42,12 @@ StockWiki 独占投资研究语义和下游状态。company-wiki 不得生成或
 - 怀疑配置损坏时先跑 `python scripts/config_doctor.py`（exit≠0 即有问题）；
   控制面板菜单 7 也提供该体检。
 
+## Windows 全局技能部署运行时（2026-10-26）
+
+全局技能同步是部署任务，沿用既有授权和平台支持的提权执行，不新增项目许可。工作区的 `.venv/Scripts/python.exe` 可能继承 Low 完整性标签；即使父 shell 已获准正常执行，该可执行文件仍会使 Python 降为 Low，无法写入默认 Medium 的全局技能目录。用户 FullControl 和 `os.access(W_OK)` 不能证明这种进程可写。
+
+遇到此类拒写，先只读核对实际 Python 令牌与文件标签；在获准的宿主 shell 中，使用已安装且标签正常的宿主 Python 执行同一 canonical 定点安装器。不能仅换 shell 后继续调用 Low 的 venv，也不能改全局 ACL/完整性标签或绕过平台拒绝。安装后核对包 SHA、配置保留、重复零写和独立新进程入口；具体复现与修复见 `docs/plans/du11-source-closure-2026-10-18/review/skill-sync-root-cause-20261026/README.md`。
+
 ## 目录规范
 
 - `companies/{公司名}/` — 公司所有原始文档（新闻 .md、财报/研报 .pdf 直接存放）

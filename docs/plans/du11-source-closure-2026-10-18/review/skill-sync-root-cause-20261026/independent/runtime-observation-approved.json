@@ -1,0 +1,67 @@
+{
+  "shell_integrity_group": "\"Mandatory Label\\Medium Mandatory Level\",\"Label\",\"S-1-16-8192\",\"\"",
+  "venv": {
+    "schema_version": "skill-sync-mic-observation/1",
+    "executable": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+    "base_executable": "C:\\Users\\郑曾波\\AppData\\Roaming\\uv\\python\\cpython-3.14-windows-x86_64-none\\python.exe",
+    "process_integrity_sid": "S-1-16-4096",
+    "labels": {
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\.venv\\Scripts\\python.exe": "S:AI(ML;ID;NW;;;LW)",
+      "C:\\Users\\郑曾波\\AppData\\Roaming\\uv\\python\\cpython-3.14-windows-x86_64-none\\python.exe": "implicit_medium",
+      "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch": "implicit_medium",
+      "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch": "implicit_medium"
+    },
+    "read_only": true,
+    "independent_token_details": {
+      "self": {
+        "pid": 27360,
+        "image": "C:\\Users\\郑曾波\\AppData\\Roaming\\uv\\python\\cpython-3.14.2-windows-x86_64-none\\python.exe",
+        "integrity_sid": "S-1-16-4096",
+        "is_token_restricted": false,
+        "is_appcontainer": false,
+        "has_restrictions": true
+      },
+      "parent": {
+        "pid": 25232,
+        "image": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+        "integrity_sid": "S-1-16-4096",
+        "is_token_restricted": false,
+        "is_appcontainer": false,
+        "has_restrictions": true
+      }
+    },
+    "no_writer_invoked": true
+  },
+  "base": {
+    "schema_version": "skill-sync-mic-observation/1",
+    "executable": "C:\\Users\\郑曾波\\AppData\\Roaming\\uv\\python\\cpython-3.14-windows-x86_64-none\\python.exe",
+    "base_executable": "C:\\Users\\郑曾波\\AppData\\Roaming\\uv\\python\\cpython-3.14-windows-x86_64-none\\python.exe",
+    "process_integrity_sid": "S-1-16-8192",
+    "labels": {
+      "C:\\Users\\郑曾波\\AppData\\Roaming\\uv\\python\\cpython-3.14-windows-x86_64-none\\python.exe": "implicit_medium",
+      "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch": "implicit_medium",
+      "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch": "implicit_medium"
+    },
+    "read_only": true,
+    "independent_token_details": {
+      "self": {
+        "pid": 1844,
+        "image": "C:\\Users\\郑曾波\\AppData\\Roaming\\uv\\python\\cpython-3.14.2-windows-x86_64-none\\python.exe",
+        "integrity_sid": "S-1-16-8192",
+        "is_token_restricted": false,
+        "is_appcontainer": false,
+        "has_restrictions": true
+      },
+      "parent": {
+        "pid": 30776,
+        "image": "C:\\Users\\郑曾波\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell\\pwsh.exe",
+        "integrity_sid": "S-1-16-8192",
+        "is_token_restricted": false,
+        "is_appcontainer": false,
+        "has_restrictions": true
+      }
+    },
+    "no_writer_invoked": true
+  },
+  "mode": "approved-tool-shell; both children read-only; no global writes or permission changes"
+}

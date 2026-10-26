@@ -1,3 +1,11 @@
+# 全局技能同步已修复（2026-10-26最新）
+
+同一获批shell下工作区venv因可执行文件Low标签仍降权；使用现有宿主Python后同一canonical安装器已实际成功。四文件×两物理根共8项更新，.claude junction不重复；各22份公开runtime SHA一致，重复0写。三逻辑安装入口新进程→隔离CWP三表reuse-only均通过，0HTTP/付费，测试根恢复。用户配置保留；其生产默认配置功能并未由隔离测试代签。未改全局ACL/标签或沙箱设置，不需要再授权。
+
+唯一当前细节与命令见[根因及修复](../skill-sync-root-cause-20261026/README.md)。以下旧EACCES/六文件零写是当时真实快照，install-actual-receipt.json不改写；它不再表示当前未同步。
+
+---
+
 # 全局技能副本：实际OS拒写，不是项目许可
 
 仓库主线代码已可用且两仓精确CI成功。三个选择路径是`SKILL.md`、`scripts/fetch_statements.py`、`scripts/ff_financial_statements.py`；`.claude`指向`.agents`同一物理目标，另一个物理目标为`.codex`。六个实际文件均未写入，前后SHA不变；配置、输出和未选文件不变。安装程序还诊断了原有`fetch_filing.py`安装漂移，本轮未扩大写范围。

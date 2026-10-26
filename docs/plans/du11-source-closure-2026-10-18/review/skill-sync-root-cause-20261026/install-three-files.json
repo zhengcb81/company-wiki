@@ -1,0 +1,60 @@
+{
+  "schema_version": "ff-install-result/1",
+  "status": "completed",
+  "scope": [
+    "SKILL.md",
+    "scripts/fetch_statements.py",
+    "scripts/ff_financial_statements.py"
+  ],
+  "targets": [
+    {
+      "physical_target": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch",
+      "destinations": [
+        "C:\\Users\\郑曾波\\.agents\\skills",
+        "C:\\Users\\郑曾波\\.claude\\skills"
+      ],
+      "written": [
+        "SKILL.md",
+        "scripts/fetch_statements.py",
+        "scripts/ff_financial_statements.py"
+      ],
+      "not_written": [],
+      "conflicts": [],
+      "preserved_config": [],
+      "errors": [],
+      "full_runtime_drift": [
+        "scripts/fetch_filing.py"
+      ],
+      "outside_scope_runtime_drift": [
+        "scripts/fetch_filing.py"
+      ],
+      "runtime_diagnostic_errors": [],
+      "runtime_byte_complete": false,
+      "runtime_execution_validation": "NOT_EVALUATED"
+    },
+    {
+      "physical_target": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch",
+      "destinations": [
+        "C:\\Users\\郑曾波\\.codex\\skills"
+      ],
+      "written": [
+        "SKILL.md",
+        "scripts/fetch_statements.py",
+        "scripts/ff_financial_statements.py"
+      ],
+      "not_written": [],
+      "conflicts": [],
+      "preserved_config": [],
+      "errors": [],
+      "full_runtime_drift": [
+        "scripts/fetch_filing.py"
+      ],
+      "outside_scope_runtime_drift": [
+        "scripts/fetch_filing.py"
+      ],
+      "runtime_diagnostic_errors": [],
+      "runtime_byte_complete": false,
+      "runtime_execution_validation": "NOT_EVALUATED"
+    }
+  ]
+}

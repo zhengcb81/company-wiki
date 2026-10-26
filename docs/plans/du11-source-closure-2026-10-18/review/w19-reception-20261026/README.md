@@ -14,7 +14,7 @@ ROOT8个原反例、后续3个版本/覆盖反例、replay伪新观察、缺快�
 
 旧1.2/1.3删掉财务表的反证测试仍能直接读取同一原件、DB SHA不变；财务reuse给named gap且不迁移。因此ROOT最初“版本号升级会阻断所有原件阅读”的假设未成立，没有据此改reader.py或扩权限。正常写入时唯一CatalogStore DDL链负责1.4迁移；此轮不为验收迁移生产库。
 
-ROOT两个干净、已全并线工区已正常移除，不用force；初次删除只因Windows执行位差异拒绝，命令级core.filemode=false后正常删除，主目录模式WIP保持。全局安装因实际OS EACCES未完成且6文件未变；安装器空转已TDD/独审修复并发布FF5396bd6/CI40304350720成功，见[安装状态](INSTALLATION.md)。其余作者工区、配置、原件、无关hook模式WIP和Dayu/IQS/RF均保持。C3摘要语义/cache/RF/new holdout未签收，本节点完成后回到C3，不重跑C1/C2比较。
+ROOT两个干净、已全并线工区已正常移除，不用force；初次删除只因Windows执行位差异拒绝，命令级core.filemode=false后正常删除，主目录模式WIP保持。初次全局安装EACCES/六文件零写已保留历史收据；本轮已定位venv可执行文件Low标签并以获批宿主Python完成8文件同步、各22 runtime SHA和三CLI隔离复用/最终0写验证，未改全局ACL/标签。安装器空转先前已TDD/独审修复并发布FF5396bd6/CI40304350720成功，见[当前安装状态](INSTALLATION.md)。其余作者工区、配置、原件、无关hook模式WIP和Dayu/IQS/RF均保持。C3摘要语义/cache/RF/new holdout未签收，本节点完成后回到C3，不重跑C1/C2比较。
 
 以下为接收/实施历史，旧IN_PROGRESS由上方当前结果统领。
 

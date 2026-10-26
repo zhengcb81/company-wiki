@@ -1,0 +1,469 @@
+{
+  "canonical": "C:\\Users\\郑曾波\\Projects\\filing-fetch",
+  "canonical_installer_sha256": "6eccbb375b25badc16684d0c79547b36c2e9ee0a68ea445b4430cf3d38ee39de",
+  "agents_claude_same_directory": true,
+  "agents_codex_same_directory": false,
+  "rows": [
+    {
+      "surface": ".agents",
+      "physical_target": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch",
+      "package_public_count": 22,
+      "package_comparisons": [
+        {
+          "file": "CHANGELOG.md",
+          "source_sha256": "abc739adbfc402c53df056a87a105520f30dea3d9adb10cbe425b7380ec53825",
+          "installed_sha256": "abc739adbfc402c53df056a87a105520f30dea3d9adb10cbe425b7380ec53825",
+          "equal": true
+        },
+        {
+          "file": "references/contract-ownership.md",
+          "source_sha256": "ca731d27679d728df86598ff3eb7eb836556f945da0a673c4fcccdf899ab80c7",
+          "installed_sha256": "ca731d27679d728df86598ff3eb7eb836556f945da0a673c4fcccdf899ab80c7",
+          "equal": true
+        },
+        {
+          "file": "references/identity.md",
+          "source_sha256": "ae83b6215c8c1cd0d60fac31f7c69446a2c57d9e945a6f58a709640e51aedd64",
+          "installed_sha256": "ae83b6215c8c1cd0d60fac31f7c69446a2c57d9e945a6f58a709640e51aedd64",
+          "equal": true
+        },
+        {
+          "file": "scripts/et_v2_contract.py",
+          "source_sha256": "50bc9db60ac0ab16dcc0cb63f67f557857bf04c47dc19c5777e22028eb4f1d00",
+          "installed_sha256": "50bc9db60ac0ab16dcc0cb63f67f557857bf04c47dc19c5777e22028eb4f1d00",
+          "equal": true
+        },
+        {
+          "file": "scripts/fetch_filing.py",
+          "source_sha256": "3cba8cf0bdb9e9a3859895a2ee86b0ab60e819e8a3c381d75c1a00bb31ebe71b",
+          "installed_sha256": "3cba8cf0bdb9e9a3859895a2ee86b0ab60e819e8a3c381d75c1a00bb31ebe71b",
+          "equal": true
+        },
+        {
+          "file": "scripts/fetch_statements.py",
+          "source_sha256": "4cd7a2409959a762588de262a9979a6c8c2a64db45ff128468f778f6fa947128",
+          "installed_sha256": "4cd7a2409959a762588de262a9979a6c8c2a64db45ff128468f778f6fa947128",
+          "equal": true
+        },
+        {
+          "file": "scripts/ff_configuration.py",
+          "source_sha256": "c73b71c4ac18b6d59da2f4e8b7aff599442e9d15f37cd80338b74f485127fe81",
+          "installed_sha256": "c73b71c4ac18b6d59da2f4e8b7aff599442e9d15f37cd80338b74f485127fe81",
+          "equal": true
+        },
+        {
+          "file": "scripts/ff_financial_statements.py",
+          "source_sha256": "3334cac4b6bf3f49d3979f5e1834d8c4ff35f522938dd0f91ef13c1c6508fed4",
+          "installed_sha256": "3334cac4b6bf3f49d3979f5e1834d8c4ff35f522938dd0f91ef13c1c6508fed4",
+          "equal": true
+        },
+        {
+          "file": "scripts/ff_local_preparation_observation.py",
+          "source_sha256": "f9194e4fd8eb311930e2e5151c57f0ccc57dbd0e8690df8ce32341a8fd32b26f",
+          "installed_sha256": "f9194e4fd8eb311930e2e5151c57f0ccc57dbd0e8690df8ce32341a8fd32b26f",
+          "equal": true
+        },
+        {
+          "file": "scripts/ff_local_source_prepare.py",
+          "source_sha256": "34193905be4503303a636e2c025075da8b4a29cb8cffcb759aaec5c87163daee",
+          "installed_sha256": "34193905be4503303a636e2c025075da8b4a29cb8cffcb759aaec5c87163daee",
+          "equal": true
+        },
+        {
+          "file": "scripts/ff_process_transport.py",
+          "source_sha256": "a95321ded274556981dc18f494513e344cd3679d7ae75e9bb5eab754c440c43a",
+          "installed_sha256": "a95321ded274556981dc18f494513e344cd3679d7ae75e9bb5eab754c440c43a",
+          "equal": true
+        },
+        {
+          "file": "scripts/ff_process_tree.py",
+          "source_sha256": "4ff6acbb5d838e593e90d62c1d35d7c9ecdae35b3916d1d041bd7ed077bc504f",
+          "installed_sha256": "4ff6acbb5d838e593e90d62c1d35d7c9ecdae35b3916d1d041bd7ed077bc504f",
+          "equal": true
+        },
+        {
+          "file": "scripts/ff_provider_cause.py",
+          "source_sha256": "84e2de504b1c2c03774beb3cc4e548d4b8a26b8532a6464dd38f50f3569fbeeb",
+          "installed_sha256": "84e2de504b1c2c03774beb3cc4e548d4b8a26b8532a6464dd38f50f3569fbeeb",
+          "equal": true
+        },
+        {
+          "file": "scripts/ff_source_candidate.py",
+          "source_sha256": "2f9293f1243ecc55bd88ec18a3c6499a58913041444f6ca3d256980d847a93b0",
+          "installed_sha256": "2f9293f1243ecc55bd88ec18a3c6499a58913041444f6ca3d256980d847a93b0",
+          "equal": true
+        },
+        {
+          "file": "scripts/ff_source_failure.py",
+          "source_sha256": "25b2efa46932ba887aa0ebbfd6e5b994bb3307a90962888343473c16996e4de5",
+          "installed_sha256": "25b2efa46932ba887aa0ebbfd6e5b994bb3307a90962888343473c16996e4de5",
+          "equal": true
+        },
+        {
+          "file": "scripts/ff_source_ref.py",
+          "source_sha256": "d82e2bd49b022ac5ac7acf16604470ad7fede82b58937e7c621dc630380cf3ea",
+          "installed_sha256": "d82e2bd49b022ac5ac7acf16604470ad7fede82b58937e7c621dc630380cf3ea",
+          "equal": true
+        },
+        {
+          "file": "scripts/ff_v2_envelope.py",
+          "source_sha256": "a4a5e3e5946d23e7c0fa3e22158d29a9b0b5ae41d539cf60ba06ff393469e67f",
+          "installed_sha256": "a4a5e3e5946d23e7c0fa3e22158d29a9b0b5ae41d539cf60ba06ff393469e67f",
+          "equal": true
+        },
+        {
+          "file": "scripts/filing_contracts.py",
+          "source_sha256": "033248d7f6bb72801428fc886aa5a32b2357de88e1179c892b237ac2eee65659",
+          "installed_sha256": "033248d7f6bb72801428fc886aa5a32b2357de88e1179c892b237ac2eee65659",
+          "equal": true
+        },
+        {
+          "file": "scripts/transcript_companion.py",
+          "source_sha256": "7e3f28a5928270850af308b9d20f4187cbaa985f1e0a5b4dffb83c3a1c0084be",
+          "installed_sha256": "7e3f28a5928270850af308b9d20f4187cbaa985f1e0a5b4dffb83c3a1c0084be",
+          "equal": true
+        },
+        {
+          "file": "scripts/transcript_reuse_selection.py",
+          "source_sha256": "66600ac99f48f43fc4ca332a71edd5ce6a2671173f4a4da97f99f3f724b41269",
+          "installed_sha256": "66600ac99f48f43fc4ca332a71edd5ce6a2671173f4a4da97f99f3f724b41269",
+          "equal": true
+        },
+        {
+          "file": "scripts/transcript_tool_transport.py",
+          "source_sha256": "4bb18006bb608c3dc706a6ca3f70e77fe03513798ff815b464aad208a8f33026",
+          "installed_sha256": "4bb18006bb608c3dc706a6ca3f70e77fe03513798ff815b464aad208a8f33026",
+          "equal": true
+        },
+        {
+          "file": "SKILL.md",
+          "source_sha256": "590d27e461e5852c8513f016a1ab8c8ca10d561b20c3ff93976f31c17ef851e4",
+          "installed_sha256": "590d27e461e5852c8513f016a1ab8c8ca10d561b20c3ff93976f31c17ef851e4",
+          "equal": true
+        }
+      ],
+      "metadata_changes_since_before_final_drift": [
+        {
+          "file": "scripts/fetch_filing.py",
+          "old": [
+            70127,
+            1792701428847258900
+          ],
+          "current": [
+            71585,
+            1792860635811733000
+          ]
+        }
+      ],
+      "config_metadata_only": true
+    },
+    {
+      "surface": ".claude",
+      "physical_target": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch",
+      "package_public_count": 22,
+      "package_comparisons": [
+        {
+          "file": "CHANGELOG.md",
+          "source_sha256": "abc739adbfc402c53df056a87a105520f30dea3d9adb10cbe425b7380ec53825",
+          "installed_sha256": "abc739adbfc402c53df056a87a105520f30dea3d9adb10cbe425b7380ec53825",
+          "equal": true
+        },
+        {
+          "file": "references/contract-ownership.md",
+          "source_sha256": "ca731d27679d728df86598ff3eb7eb836556f945da0a673c4fcccdf899ab80c7",
+          "installed_sha256": "ca731d27679d728df86598ff3eb7eb836556f945da0a673c4fcccdf899ab80c7",
+          "equal": true
+        },
+        {
+          "file": "references/identity.md",
+          "source_sha256": "ae83b6215c8c1cd0d60fac31f7c69446a2c57d9e945a6f58a709640e51aedd64",
+          "installed_sha256": "ae83b6215c8c1cd0d60fac31f7c69446a2c57d9e945a6f58a709640e51aedd64",
+          "equal": true
+        },
+        {
+          "file": "scripts/et_v2_contract.py",
+          "source_sha256": "50bc9db60ac0ab16dcc0cb63f67f557857bf04c47dc19c5777e22028eb4f1d00",
+          "installed_sha256": "50bc9db60ac0ab16dcc0cb63f67f557857bf04c47dc19c5777e22028eb4f1d00",
+          "equal": true
+        },
+        {
+          "file": "scripts/fetch_filing.py",
+          "source_sha256": "3cba8cf0bdb9e9a3859895a2ee86b0ab60e819e8a3c381d75c1a00bb31ebe71b",
+          "installed_sha256": "3cba8cf0bdb9e9a3859895a2ee86b0ab60e819e8a3c381d75c1a00bb31ebe71b",
+          "equal": true
+        },
+        {
+          "file": "scripts/fetch_statements.py",
+          "source_sha256": "4cd7a2409959a762588de262a9979a6c8c2a64db45ff128468f778f6fa947128",
+          "installed_sha256": "4cd7a2409959a762588de262a9979a6c8c2a64db45ff128468f778f6fa947128",
+          "equal": true
+        },
+        {
+          "file": "scripts/ff_configuration.py",
+          "source_sha256": "c73b71c4ac18b6d59da2f4e8b7aff599442e9d15f37cd80338b74f485127fe81",
+          "installed_sha256": "c73b71c4ac18b6d59da2f4e8b7aff599442e9d15f37cd80338b74f485127fe81",
+          "equal": true
+        },
+        {
+          "file": "scripts/ff_financial_statements.py",
+          "source_sha256": "3334cac4b6bf3f49d3979f5e1834d8c4ff35f522938dd0f91ef13c1c6508fed4",
+          "installed_sha256": "3334cac4b6bf3f49d3979f5e1834d8c4ff35f522938dd0f91ef13c1c6508fed4",
+          "equal": true
+        },
+        {
+          "file": "scripts/ff_local_preparation_observation.py",
+          "source_sha256": "f9194e4fd8eb311930e2e5151c57f0ccc57dbd0e8690df8ce32341a8fd32b26f",
+          "installed_sha256": "f9194e4fd8eb311930e2e5151c57f0ccc57dbd0e8690df8ce32341a8fd32b26f",
+          "equal": true
+        },
+        {
+          "file": "scripts/ff_local_source_prepare.py",
+          "source_sha256": "34193905be4503303a636e2c025075da8b4a29cb8cffcb759aaec5c87163daee",
+          "installed_sha256": "34193905be4503303a636e2c025075da8b4a29cb8cffcb759aaec5c87163daee",
+          "equal": true
+        },
+        {
+          "file": "scripts/ff_process_transport.py",
+          "source_sha256": "a95321ded274556981dc18f494513e344cd3679d7ae75e9bb5eab754c440c43a",
+          "installed_sha256": "a95321ded274556981dc18f494513e344cd3679d7ae75e9bb5eab754c440c43a",
+          "equal": true
+        },
+        {
+          "file": "scripts/ff_process_tree.py",
+          "source_sha256": "4ff6acbb5d838e593e90d62c1d35d7c9ecdae35b3916d1d041bd7ed077bc504f",
+          "installed_sha256": "4ff6acbb5d838e593e90d62c1d35d7c9ecdae35b3916d1d041bd7ed077bc504f",
+          "equal": true
+        },
+        {
+          "file": "scripts/ff_provider_cause.py",
+          "source_sha256": "84e2de504b1c2c03774beb3cc4e548d4b8a26b8532a6464dd38f50f3569fbeeb",
+          "installed_sha256": "84e2de504b1c2c03774beb3cc4e548d4b8a26b8532a6464dd38f50f3569fbeeb",
+          "equal": true
+        },
+        {
+          "file": "scripts/ff_source_candidate.py",
+          "source_sha256": "2f9293f1243ecc55bd88ec18a3c6499a58913041444f6ca3d256980d847a93b0",
+          "installed_sha256": "2f9293f1243ecc55bd88ec18a3c6499a58913041444f6ca3d256980d847a93b0",
+          "equal": true
+        },
+        {
+          "file": "scripts/ff_source_failure.py",
+          "source_sha256": "25b2efa46932ba887aa0ebbfd6e5b994bb3307a90962888343473c16996e4de5",
+          "installed_sha256": "25b2efa46932ba887aa0ebbfd6e5b994bb3307a90962888343473c16996e4de5",
+          "equal": true
+        },
+        {
+          "file": "scripts/ff_source_ref.py",
+          "source_sha256": "d82e2bd49b022ac5ac7acf16604470ad7fede82b58937e7c621dc630380cf3ea",
+          "installed_sha256": "d82e2bd49b022ac5ac7acf16604470ad7fede82b58937e7c621dc630380cf3ea",
+          "equal": true
+        },
+        {
+          "file": "scripts/ff_v2_envelope.py",
+          "source_sha256": "a4a5e3e5946d23e7c0fa3e22158d29a9b0b5ae41d539cf60ba06ff393469e67f",
+          "installed_sha256": "a4a5e3e5946d23e7c0fa3e22158d29a9b0b5ae41d539cf60ba06ff393469e67f",
+          "equal": true
+        },
+        {
+          "file": "scripts/filing_contracts.py",
+          "source_sha256": "033248d7f6bb72801428fc886aa5a32b2357de88e1179c892b237ac2eee65659",
+          "installed_sha256": "033248d7f6bb72801428fc886aa5a32b2357de88e1179c892b237ac2eee65659",
+          "equal": true
+        },
+        {
+          "file": "scripts/transcript_companion.py",
+          "source_sha256": "7e3f28a5928270850af308b9d20f4187cbaa985f1e0a5b4dffb83c3a1c0084be",
+          "installed_sha256": "7e3f28a5928270850af308b9d20f4187cbaa985f1e0a5b4dffb83c3a1c0084be",
+          "equal": true
+        },
+        {
+          "file": "scripts/transcript_reuse_selection.py",
+          "source_sha256": "66600ac99f48f43fc4ca332a71edd5ce6a2671173f4a4da97f99f3f724b41269",
+          "installed_sha256": "66600ac99f48f43fc4ca332a71edd5ce6a2671173f4a4da97f99f3f724b41269",
+          "equal": true
+        },
+        {
+          "file": "scripts/transcript_tool_transport.py",
+          "source_sha256": "4bb18006bb608c3dc706a6ca3f70e77fe03513798ff815b464aad208a8f33026",
+          "installed_sha256": "4bb18006bb608c3dc706a6ca3f70e77fe03513798ff815b464aad208a8f33026",
+          "equal": true
+        },
+        {
+          "file": "SKILL.md",
+          "source_sha256": "590d27e461e5852c8513f016a1ab8c8ca10d561b20c3ff93976f31c17ef851e4",
+          "installed_sha256": "590d27e461e5852c8513f016a1ab8c8ca10d561b20c3ff93976f31c17ef851e4",
+          "equal": true
+        }
+      ],
+      "metadata_changes_since_before_final_drift": [
+        {
+          "file": "scripts/fetch_filing.py",
+          "old": [
+            70127,
+            1792701428847258900
+          ],
+          "current": [
+            71585,
+            1792860635811733000
+          ]
+        }
+      ],
+      "config_metadata_only": true
+    },
+    {
+      "surface": ".codex",
+      "physical_target": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch",
+      "package_public_count": 22,
+      "package_comparisons": [
+        {
+          "file": "CHANGELOG.md",
+          "source_sha256": "abc739adbfc402c53df056a87a105520f30dea3d9adb10cbe425b7380ec53825",
+          "installed_sha256": "abc739adbfc402c53df056a87a105520f30dea3d9adb10cbe425b7380ec53825",
+          "equal": true
+        },
+        {
+          "file": "references/contract-ownership.md",
+          "source_sha256": "ca731d27679d728df86598ff3eb7eb836556f945da0a673c4fcccdf899ab80c7",
+          "installed_sha256": "ca731d27679d728df86598ff3eb7eb836556f945da0a673c4fcccdf899ab80c7",
+          "equal": true
+        },
+        {
+          "file": "references/identity.md",
+          "source_sha256": "ae83b6215c8c1cd0d60fac31f7c69446a2c57d9e945a6f58a709640e51aedd64",
+          "installed_sha256": "ae83b6215c8c1cd0d60fac31f7c69446a2c57d9e945a6f58a709640e51aedd64",
+          "equal": true
+        },
+        {
+          "file": "scripts/et_v2_contract.py",
+          "source_sha256": "50bc9db60ac0ab16dcc0cb63f67f557857bf04c47dc19c5777e22028eb4f1d00",
+          "installed_sha256": "50bc9db60ac0ab16dcc0cb63f67f557857bf04c47dc19c5777e22028eb4f1d00",
+          "equal": true
+        },
+        {
+          "file": "scripts/fetch_filing.py",
+          "source_sha256": "3cba8cf0bdb9e9a3859895a2ee86b0ab60e819e8a3c381d75c1a00bb31ebe71b",
+          "installed_sha256": "3cba8cf0bdb9e9a3859895a2ee86b0ab60e819e8a3c381d75c1a00bb31ebe71b",
+          "equal": true
+        },
+        {
+          "file": "scripts/fetch_statements.py",
+          "source_sha256": "4cd7a2409959a762588de262a9979a6c8c2a64db45ff128468f778f6fa947128",
+          "installed_sha256": "4cd7a2409959a762588de262a9979a6c8c2a64db45ff128468f778f6fa947128",
+          "equal": true
+        },
+        {
+          "file": "scripts/ff_configuration.py",
+          "source_sha256": "c73b71c4ac18b6d59da2f4e8b7aff599442e9d15f37cd80338b74f485127fe81",
+          "installed_sha256": "c73b71c4ac18b6d59da2f4e8b7aff599442e9d15f37cd80338b74f485127fe81",
+          "equal": true
+        },
+        {
+          "file": "scripts/ff_financial_statements.py",
+          "source_sha256": "3334cac4b6bf3f49d3979f5e1834d8c4ff35f522938dd0f91ef13c1c6508fed4",
+          "installed_sha256": "3334cac4b6bf3f49d3979f5e1834d8c4ff35f522938dd0f91ef13c1c6508fed4",
+          "equal": true
+        },
+        {
+          "file": "scripts/ff_local_preparation_observation.py",
+          "source_sha256": "f9194e4fd8eb311930e2e5151c57f0ccc57dbd0e8690df8ce32341a8fd32b26f",
+          "installed_sha256": "f9194e4fd8eb311930e2e5151c57f0ccc57dbd0e8690df8ce32341a8fd32b26f",
+          "equal": true
+        },
+        {
+          "file": "scripts/ff_local_source_prepare.py",
+          "source_sha256": "34193905be4503303a636e2c025075da8b4a29cb8cffcb759aaec5c87163daee",
+          "installed_sha256": "34193905be4503303a636e2c025075da8b4a29cb8cffcb759aaec5c87163daee",
+          "equal": true
+        },
+        {
+          "file": "scripts/ff_process_transport.py",
+          "source_sha256": "a95321ded274556981dc18f494513e344cd3679d7ae75e9bb5eab754c440c43a",
+          "installed_sha256": "a95321ded274556981dc18f494513e344cd3679d7ae75e9bb5eab754c440c43a",
+          "equal": true
+        },
+        {
+          "file": "scripts/ff_process_tree.py",
+          "source_sha256": "4ff6acbb5d838e593e90d62c1d35d7c9ecdae35b3916d1d041bd7ed077bc504f",
+          "installed_sha256": "4ff6acbb5d838e593e90d62c1d35d7c9ecdae35b3916d1d041bd7ed077bc504f",
+          "equal": true
+        },
+        {
+          "file": "scripts/ff_provider_cause.py",
+          "source_sha256": "84e2de504b1c2c03774beb3cc4e548d4b8a26b8532a6464dd38f50f3569fbeeb",
+          "installed_sha256": "84e2de504b1c2c03774beb3cc4e548d4b8a26b8532a6464dd38f50f3569fbeeb",
+          "equal": true
+        },
+        {
+          "file": "scripts/ff_source_candidate.py",
+          "source_sha256": "2f9293f1243ecc55bd88ec18a3c6499a58913041444f6ca3d256980d847a93b0",
+          "installed_sha256": "2f9293f1243ecc55bd88ec18a3c6499a58913041444f6ca3d256980d847a93b0",
+          "equal": true
+        },
+        {
+          "file": "scripts/ff_source_failure.py",
+          "source_sha256": "25b2efa46932ba887aa0ebbfd6e5b994bb3307a90962888343473c16996e4de5",
+          "installed_sha256": "25b2efa46932ba887aa0ebbfd6e5b994bb3307a90962888343473c16996e4de5",
+          "equal": true
+        },
+        {
+          "file": "scripts/ff_source_ref.py",
+          "source_sha256": "d82e2bd49b022ac5ac7acf16604470ad7fede82b58937e7c621dc630380cf3ea",
+          "installed_sha256": "d82e2bd49b022ac5ac7acf16604470ad7fede82b58937e7c621dc630380cf3ea",
+          "equal": true
+        },
+        {
+          "file": "scripts/ff_v2_envelope.py",
+          "source_sha256": "a4a5e3e5946d23e7c0fa3e22158d29a9b0b5ae41d539cf60ba06ff393469e67f",
+          "installed_sha256": "a4a5e3e5946d23e7c0fa3e22158d29a9b0b5ae41d539cf60ba06ff393469e67f",
+          "equal": true
+        },
+        {
+          "file": "scripts/filing_contracts.py",
+          "source_sha256": "033248d7f6bb72801428fc886aa5a32b2357de88e1179c892b237ac2eee65659",
+          "installed_sha256": "033248d7f6bb72801428fc886aa5a32b2357de88e1179c892b237ac2eee65659",
+          "equal": true
+        },
+        {
+          "file": "scripts/transcript_companion.py",
+          "source_sha256": "7e3f28a5928270850af308b9d20f4187cbaa985f1e0a5b4dffb83c3a1c0084be",
+          "installed_sha256": "7e3f28a5928270850af308b9d20f4187cbaa985f1e0a5b4dffb83c3a1c0084be",
+          "equal": true
+        },
+        {
+          "file": "scripts/transcript_reuse_selection.py",
+          "source_sha256": "66600ac99f48f43fc4ca332a71edd5ce6a2671173f4a4da97f99f3f724b41269",
+          "installed_sha256": "66600ac99f48f43fc4ca332a71edd5ce6a2671173f4a4da97f99f3f724b41269",
+          "equal": true
+        },
+        {
+          "file": "scripts/transcript_tool_transport.py",
+          "source_sha256": "4bb18006bb608c3dc706a6ca3f70e77fe03513798ff815b464aad208a8f33026",
+          "installed_sha256": "4bb18006bb608c3dc706a6ca3f70e77fe03513798ff815b464aad208a8f33026",
+          "equal": true
+        },
+        {
+          "file": "SKILL.md",
+          "source_sha256": "590d27e461e5852c8513f016a1ab8c8ca10d561b20c3ff93976f31c17ef851e4",
+          "installed_sha256": "590d27e461e5852c8513f016a1ab8c8ca10d561b20c3ff93976f31c17ef851e4",
+          "equal": true
+        }
+      ],
+      "metadata_changes_since_before_final_drift": [
+        {
+          "file": "scripts/fetch_filing.py",
+          "old": [
+            70127,
+            1792701428880039000
+          ],
+          "current": [
+            71585,
+            1792860635811733000
+          ]
+        }
+      ],
+      "config_metadata_only": true
+    }
+  ],
+  "credential_or_unknown_bodies_read": false,
+  "writes_to_global_targets": 0
+}

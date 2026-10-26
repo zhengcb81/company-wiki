@@ -1,0 +1,192 @@
+{
+  "schema_version": "skill-sync-independent-review/1",
+  "status": "PASS",
+  "open_count": 0,
+  "reviewed_at_utc": "2026-10-26T18:57:49.029419+00:00",
+  "scope": "Read-only independent Windows runtime/MIC, package-byte/alias/history verification plus source/receipt review of ROOT approved scoped install and isolated installed-entry smoke. Reviewer performs no global write.",
+  "root_cause": {
+    "status": "INDEPENDENTLY_REPRODUCED",
+    "approved_context": "One approved tool pwsh isMedium8192. Low-labelled venv launcher and actual Python child areLow4096; direct pre-existing base executable remainsMedium8192. Both approved-context paths report TokenIsAppContainer=false.",
+    "default_context": "Default restricted tool pwsh isLow4096/AppContainer; both venv and direct-base children remainLow/AppContainer. Using base Python does not elevate a low parent.",
+    "file_labels": "venv file S:AI(ML;ID;NW;;;LW); base interpreter and target skill directories have no explicit label and therefore implicitMedium.",
+    "DACL": "Independently read ownerFullControl and CodexSandboxUsers ReadAndExecute entries. IsTokenRestricted=false is not evidence ofMedium or absence ofMIC/AppContainer; TokenHasRestrictions remains recordedtrue.",
+    "causal_assessment": "MIC no-write-up is a sufficient and reproducible explanation for approved-shell venv EACCES despite owner write permissions. The approved base runtime removes unintended integrity reduction while preserving the original supported approval context, canonical installer and narrow paths. No directory/file relabel, ACL rewrite, admin elevation or sandbox bypass is required or performed by reviewer.",
+    "sources": [
+      {
+        "title": "Microsoft Mandatory Integrity Control",
+        "url": "https://learn.microsoft.com/en-us/windows/win32/secauthz/mandatory-integrity-control",
+        "claims": "Low cannot writeMedium even with DACL allow; childIL is minimum of caller/executable; missing object label defaultsMedium."
+      }
+    ],
+    "diagnostic_script_review": "diagnose_runtime.py uses TOKEN_QUERY, GetTokenInformation and LABEL_SECURITY_INFORMATION reads, freeing owned handles/buffers. No setters/writer/process launch. Independent wrapper adds self/parent and TokenIsAppContainer detail."
+  },
+  "runtime_evidence": {
+    "approved": "runtime-observation-approved.json",
+    "default": "runtime-observation-default.json",
+    "ACL_alias": "alias-acl-observation.json"
+  },
+  "installation_scope": {
+    "canonical_root": "C:\\Users\\郑曾波\\Projects\\filing-fetch",
+    "canonical_head_observed": "5396bd688e5b775e746fe3290852f0532d4548f8",
+    "canonical_head_ROOT_receipt": "5396bd688e5b775e746fe3290852f0532d4548f8",
+    "installer_sha256": "6eccbb375b25badc16684d0c79547b36c2e9ee0a68ea445b4430cf3d38ee39de",
+    "original_three_scope": [
+      "SKILL.md",
+      "scripts/fetch_statements.py",
+      "scripts/ff_financial_statements.py"
+    ],
+    "original_three_physical_writes": 6,
+    "original_three_repeat_writes": 0,
+    "original_three_full_runtime_complete": false,
+    "old_fetch_filing": {
+      "blob": "a1ff25acf5bc5b76c8bdd5fe744cc09dcede88d6",
+      "sha256": "a004bee1db025dafbcffd55bc73dea3a9064f122f3e5296e88173052ce7665c4",
+      "reachable_object_entries": [
+        "a1ff25acf5bc5b76c8bdd5fe744cc09dcede88d6 scripts/fetch_filing.py"
+      ],
+      "diff_to_current_HEAD": "diff --git a/a1ff25acf5bc5b76c8bdd5fe744cc09dcede88d6 b/scripts/fetch_filing.py\nindex a1ff25a..42482d7 100644\n--- a/a1ff25acf5bc5b76c8bdd5fe744cc09dcede88d6\n+++ b/scripts/fetch_filing.py\n@@ -67,6 +67,9 @@ from ff_source_candidate import (\n     contains_physical_field as _contains_physical_field,\n     validate_source_candidate,\n )\n+from ff_local_preparation_observation import (\n+    local_preparation_observation as _local_preparation_observation,\n+)\n \n SKILL_ROOT = Path(__file__).resolve().parents[1]\n DEFAULT_COMPANY_WIKI_CONFIG = SKILL_ROOT / \"config\" / \"company_wiki.json\"\n@@ -765,8 +768,10 @@ def _validated_operation(payload: dict[str, Any], operation: str) -> dict[str, A\n             acquisition_observation=observation,\n         )\n     local = payload.get(\"local_preparation\")\n+    local_fields = {\"status\", \"reason\", \"blocks_download\", \"causes\"}\n     if local is not None and (\n-        not isinstance(local, dict) or set(local) != {\"status\", \"reason\", \"blocks_download\", \"causes\"}\n+        not isinstance(local, dict)\n+        or set(local) not in (local_fields, local_fields | {\"local_read_budget\"})\n         or not isinstance(local.get(\"status\"), str)\n         or local[\"status\"] not in {\"blocked\", \"unavailable\", \"ambiguous\"}\n         or local.get(\"status\") != payload.get(\"status\") or local.get(\"blocks_download\") is not True\n@@ -775,6 +780,9 @@ def _validated_operation(payload: dict[str, Any], operation: str) -> dict[str, A\n                    for x in [local.get(\"reason\"), *local.get(\"causes\", [])])\n     ):\n         raise invalid_result(operation)\n+    if isinstance(local, dict) and \"local_read_budget\" in local:\n+        if _local_preparation_observation_from_operation(local) is None:\n+            raise invalid_result(operation)\n     if _contains_physical_field({\n         key: value for key, value in payload.items() if key != \"acquisition_failure\"\n     }):\n@@ -809,6 +817,30 @@ def _validated_operation(payload: dict[str, Any], operation: str) -> dict[str, A\n     return payload\n \n \n+def _local_preparation_observation_from_operation(\n+    local: dict[str, Any],\n+) -> dict[str, Any] | None:\n+    \"\"\"Adapt CWP's validated owner counters to FF's existing local-IO envelope.\"\"\"\n+    budget = local.get(\"local_read_budget\")\n+    if not isinstance(budget, dict):\n+        return None\n+    limits = budget.get(\"limits\")\n+    if not isinstance(limits, dict):\n+        return None\n+    local_limits = {\n+        key: limits.get(key)\n+        for key in (\"max_candidates\", \"max_bytes\", \"timeout_seconds\")\n+    }\n+    payload = {\n+        \"status\": local.get(\"status\"),\n+        \"reason\": local.get(\"reason\"),\n+        \"blocks_download\": local.get(\"blocks_download\"),\n+        \"operations\": [budget],\n+        \"diagnostics\": [{\"reason\": reason} for reason in local.get(\"causes\", [])],\n+    }\n+    return _local_preparation_observation(payload, local_limits)\n+\n+\n def _raise_operation_business_failure(\n     stdout: bytes, *, action: str, returncode: int, source_request: dict[str, Any],\n ) -> None:\n@@ -894,9 +926,12 @@ def _pathless_operation_handle(\n         code, stage = errors.get(result[\"status\"], (\"upstream_error\", \"source_operation\"))\n         local = result.get(\"local_preparation\")\n         local_cause = None\n+        local_observation = None\n         if isinstance(local, dict):\n             local_cause = ff_provider_cause.source_condition(operation, local[\"reason\"])\n             local_cause.update(provider_started=False, usage_complete=True)\n+            if \"local_read_budget\" in local:\n+                local_observation = _local_preparation_observation_from_operation(local)\n         raise FilingFetchError(\n             f\"company-wiki {operation} {result['status']}\",\n             code=code,\n@@ -907,6 +942,7 @@ def _pathless_operation_handle(\n             acquisition_failure=ff_provider_cause.validated_acquisition_failure(result.get(\"acquisition_failure\")),\n             acquisition_observation=ff_provider_cause.validated_acquisition_observation(\n                 result.get(\"acquisition_observation\")),\n+            local_preparation_observation=local_observation,\n         )\n     outcome = result.get(\"outcome\")\n     events = result.get(\"download_events\")\n"
+    },
+    "additional_fetch_filing_physical_writes": 2,
+    "final_four_scope": [
+      "SKILL.md",
+      "scripts/fetch_filing.py",
+      "scripts/fetch_statements.py",
+      "scripts/ff_financial_statements.py"
+    ],
+    "final_repeat_writes": 0,
+    "physical_targets": 2,
+    "logical_entrypoints": 3,
+    "claude_alias": "Only .claude/skills/filing-fetch is junction to .agents/skills/filing-fetch; .claude/skills itself is a normal directory. Independent samefile and Get-Item agree.",
+    "public_owned_files_per_physical_target": 22,
+    "independent_public_runtime_byte_complete": true,
+    "full_public_manifest": {
+      "CHANGELOG.md": "abc739adbfc402c53df056a87a105520f30dea3d9adb10cbe425b7380ec53825",
+      "references/contract-ownership.md": "ca731d27679d728df86598ff3eb7eb836556f945da0a673c4fcccdf899ab80c7",
+      "references/identity.md": "ae83b6215c8c1cd0d60fac31f7c69446a2c57d9e945a6f58a709640e51aedd64",
+      "scripts/et_v2_contract.py": "50bc9db60ac0ab16dcc0cb63f67f557857bf04c47dc19c5777e22028eb4f1d00",
+      "scripts/fetch_filing.py": "3cba8cf0bdb9e9a3859895a2ee86b0ab60e819e8a3c381d75c1a00bb31ebe71b",
+      "scripts/fetch_statements.py": "4cd7a2409959a762588de262a9979a6c8c2a64db45ff128468f778f6fa947128",
+      "scripts/ff_configuration.py": "c73b71c4ac18b6d59da2f4e8b7aff599442e9d15f37cd80338b74f485127fe81",
+      "scripts/ff_financial_statements.py": "3334cac4b6bf3f49d3979f5e1834d8c4ff35f522938dd0f91ef13c1c6508fed4",
+      "scripts/ff_local_preparation_observation.py": "f9194e4fd8eb311930e2e5151c57f0ccc57dbd0e8690df8ce32341a8fd32b26f",
+      "scripts/ff_local_source_prepare.py": "34193905be4503303a636e2c025075da8b4a29cb8cffcb759aaec5c87163daee",
+      "scripts/ff_process_transport.py": "a95321ded274556981dc18f494513e344cd3679d7ae75e9bb5eab754c440c43a",
+      "scripts/ff_process_tree.py": "4ff6acbb5d838e593e90d62c1d35d7c9ecdae35b3916d1d041bd7ed077bc504f",
+      "scripts/ff_provider_cause.py": "84e2de504b1c2c03774beb3cc4e548d4b8a26b8532a6464dd38f50f3569fbeeb",
+      "scripts/ff_source_candidate.py": "2f9293f1243ecc55bd88ec18a3c6499a58913041444f6ca3d256980d847a93b0",
+      "scripts/ff_source_failure.py": "25b2efa46932ba887aa0ebbfd6e5b994bb3307a90962888343473c16996e4de5",
+      "scripts/ff_source_ref.py": "d82e2bd49b022ac5ac7acf16604470ad7fede82b58937e7c621dc630380cf3ea",
+      "scripts/ff_v2_envelope.py": "a4a5e3e5946d23e7c0fa3e22158d29a9b0b5ae41d539cf60ba06ff393469e67f",
+      "scripts/filing_contracts.py": "033248d7f6bb72801428fc886aa5a32b2357de88e1179c892b237ac2eee65659",
+      "scripts/transcript_companion.py": "7e3f28a5928270850af308b9d20f4187cbaa985f1e0a5b4dffb83c3a1c0084be",
+      "scripts/transcript_reuse_selection.py": "66600ac99f48f43fc4ca332a71edd5ce6a2671173f4a4da97f99f3f724b41269",
+      "scripts/transcript_tool_transport.py": "4bb18006bb608c3dc706a6ca3f70e77fe03513798ff815b464aad208a8f33026",
+      "SKILL.md": "590d27e461e5852c8513f016a1ab8c8ca10d561b20c3ff93976f31c17ef851e4"
+    },
+    "preserved_config": "User config is excluded from canonical-template synchronization; reviewer stat-only checks preserve size/mtime. ROOT verification reports original config hash preservation; reviewer does not read credential/config bodies.",
+    "unknown_files": "Metadata-only enumeration shows no additions/removals and no modifications other than permitted fetch_filing since before-final-drift. No unknown/credential body read."
+  },
+  "smoke_review": {
+    "status": "PASS_FOR_RECORDED_ISOLATED_SCOPE",
+    "independent_mode": "Audited script/receipt against current installed public SHAs; did not rerun global writer or seed another fixture catalog.",
+    "script": "verify_installed_cli.py",
+    "receipt": "installed-cli-reuse-v1.json",
+    "runs": [
+      {
+        "alias": ".agents",
+        "actual_script": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\fetch_statements.py",
+        "physical_script": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\fetch_statements.py",
+        "returncode": 0,
+        "status": "complete",
+        "http_requests": 0,
+        "periods": {
+          "income_statement": 36,
+          "balance_sheet": 33,
+          "cash_flow": 36
+        },
+        "rows": 9729,
+        "direct_sources_opened": 12
+      },
+      {
+        "alias": ".claude",
+        "actual_script": "C:\\Users\\郑曾波\\.claude\\skills\\filing-fetch\\scripts\\fetch_statements.py",
+        "physical_script": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\fetch_statements.py",
+        "returncode": 0,
+        "status": "complete",
+        "http_requests": 0,
+        "periods": {
+          "income_statement": 36,
+          "balance_sheet": 33,
+          "cash_flow": 36
+        },
+        "rows": 9729,
+        "direct_sources_opened": 12
+      },
+      {
+        "alias": ".codex",
+        "actual_script": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch\\scripts\\fetch_statements.py",
+        "physical_script": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch\\scripts\\fetch_statements.py",
+        "returncode": 0,
+        "status": "complete",
+        "http_requests": 0,
+        "periods": {
+          "income_statement": 36,
+          "balance_sheet": 33,
+          "cash_flow": 36
+        },
+        "rows": 9729,
+        "direct_sources_opened": 12
+      }
+    ],
+    "seed": "Existing fixture provider yields15 fixture exchanges, not liveHTTP. Fresh subprocesses execute actual installed scripts through .agents/.claude/.codex and real bounded CWP child, with explicit isolated --config/PYTHONPATH and reuse_only. No FF response mock.",
+    "immutable_originals_unchanged": true,
+    "temporary_root_restored_absent": true,
+    "temporary_bytes": 11709113,
+    "elapsed_seconds": 13.447,
+    "default_production_configuration": "NOT_CERTIFIED; preserved user default config/CWP deployment not covered by isolated smoke.",
+    "full_runtime_execution": "Only the tested fetch_statements reuse flow is exercised, not every optional adapter or provider.",
+    "temporary_bytes_semantics": "Directory size immediately before cleanup, not observed process/disk peak."
+  },
+  "durable_byte_sha256": {
+    "docs\\plans\\du11-source-closure-2026-10-18\\review\\skill-sync-root-cause-20261026\\README.md": "91dc252ddc37e34b2b00842c02fb24cef48f3f63f974e1fe455612b98a7b9dfa",
+    "docs\\plans\\du11-source-closure-2026-10-18\\review\\skill-sync-root-cause-20261026\\diagnose_runtime.py": "72e664de4aeb159bf666462848dd5ef66dd0b3bfea8383c2f79f0dc13fb10afc",
+    "docs\\plans\\du11-source-closure-2026-10-18\\review\\skill-sync-root-cause-20261026\\venv-runtime.json": "787121110da5d556a787b8c24586e5874fdfb89c5eab1c7b191056b107caa244",
+    "docs\\plans\\du11-source-closure-2026-10-18\\review\\skill-sync-root-cause-20261026\\host-runtime.json": "6dffd5e6833c3298bad678ea83dc8bf6b79999f7bd0f12254bd068dcb1cc3101",
+    "docs\\plans\\du11-source-closure-2026-10-18\\review\\skill-sync-root-cause-20261026\\install-three-files.json": "43fab748f442c8b06e0c6aa531afeac6ba34b5bcf2ca65a3cc237f582e5393d4",
+    "docs\\plans\\du11-source-closure-2026-10-18\\review\\skill-sync-root-cause-20261026\\install-three-files-repeat.json": "19c5392fb58aafa385f8e9634e861215acf492c55fe9fc7f36e1bff0b142042c",
+    "docs\\plans\\du11-source-closure-2026-10-18\\review\\skill-sync-root-cause-20261026\\install-legacy-drift.json": "0c7e40787e66885191ae6525825b7326ea60c0707c0453693bb722f0dda9246a",
+    "docs\\plans\\du11-source-closure-2026-10-18\\review\\skill-sync-root-cause-20261026\\install-final-repeat.json": "8bfb7b8e03da03fba72b85d9abd0bd11c477ca4cc234a358007a948f927365c4",
+    "docs\\plans\\du11-source-closure-2026-10-18\\review\\skill-sync-root-cause-20261026\\final-verification.json": "f06ec5f858924e2e44475d31cddc3b294bf15ae421b60b4a9f7cb0ccd7180184",
+    "docs\\plans\\du11-source-closure-2026-10-18\\review\\skill-sync-root-cause-20261026\\verify_installed_cli.py": "b7ee0e9e9ac28475198df3bd7863e16f395be816267179c682bc8ba7bd568a97",
+    "docs\\plans\\du11-source-closure-2026-10-18\\review\\skill-sync-root-cause-20261026\\installed-cli-reuse-v1.json": "405607fee4f9cca9a2aee040895cfa9083d66082a3ecc7442f381db6857e3a26"
+  },
+  "independent_byte_sha256": {
+    "read_runtime.py": "09a8a8a14935d4931192d3c1c7245e81a90dd7709368ba3a2153ec3aa489ccf5",
+    "runtime-observation-default.json": "244668490f5da92294dce41730d16330e742fedf5463d4c6e1507e710bf22203",
+    "runtime-observation-approved.json": "ae0ecceed52160f9ef0075e31b4771a2e697c4daa57fb3123edec59583c5992b",
+    "alias-acl-observation.json": "63324caac29f689fe6db9c003681ceb66b83b4c47c71fbc613a5562ace81b3cd",
+    "installed-bytes-observation.json": "98431a2782dcc8768933d92e9f4170cd45eeede76138632a77a32d6b9ca8a2ea",
+    "manifest-history-observation.json": "903c24a5d65d23413f58f55e4fe616d8ed146de9c817f0ea3c36e9d0825a6112"
+  },
+  "program_lf_sha256": {
+    "docs\\plans\\du11-source-closure-2026-10-18\\review\\skill-sync-root-cause-20261026\\diagnose_runtime.py": "72e664de4aeb159bf666462848dd5ef66dd0b3bfea8383c2f79f0dc13fb10afc",
+    "docs\\plans\\du11-source-closure-2026-10-18\\review\\skill-sync-root-cause-20261026\\verify_installed_cli.py": "b7ee0e9e9ac28475198df3bd7863e16f395be816267179c682bc8ba7bd568a97"
+  },
+  "preservation": {
+    "reviewer_global_file_writes": 0,
+    "reviewer_global_ACL_writes": 0,
+    "reviewer_integrity_label_changes": 0,
+    "reviewer_writer_invocations": 0,
+    "reviewer_production_data_or_credential_reads": 0,
+    "reviewer_git_mutations": 0,
+    "read_only_approved_tool_call": "Used solely to inspect identical current child-runtime tokens, with no install/global write; default-context comparison separately recorded.",
+    "output_directory": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w19-root-reception-20261026\\independent\\skill-sync-20261026"
+  },
+  "limits": [
+    "Three-file sync alone was not full runtime; final conclusion depends on explicitly selected historical fetch_filing repair and independent22-file match.",
+    "Configured user state is preserved and excluded from runtime-byte-completeness definition.",
+    "Default sandbox remains restricted; base runtime is not an auto-elevation mechanism.",
+    "No C3 formal summary/cache/RF/company-research-loop, exactCI or default-production-config completion claim."
+  ],
+  "root_cause_node": "docs/plans/du11-source-closure-2026-10-18/review/skill-sync-root-cause-20261026"
+}

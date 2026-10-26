@@ -1,0 +1,277 @@
+{
+  "schema_version": "skill-sync-final-verification/1",
+  "status": "PASS",
+  "installer_sha256": "6eccbb375b25badc16684d0c79547b36c2e9ee0a68ea445b4430cf3d38ee39de",
+  "canonical_ff_head": "5396bd688e5b775e746fe3290852f0532d4548f8",
+  "public_runtime_files": 22,
+  "targets": [
+    {
+      "alias": ".agents",
+      "physical_target": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch",
+      "checks": [
+        {
+          "path": "CHANGELOG.md",
+          "source_sha256": "abc739adbfc402c53df056a87a105520f30dea3d9adb10cbe425b7380ec53825",
+          "target_sha256": "abc739adbfc402c53df056a87a105520f30dea3d9adb10cbe425b7380ec53825"
+        },
+        {
+          "path": "references/contract-ownership.md",
+          "source_sha256": "ca731d27679d728df86598ff3eb7eb836556f945da0a673c4fcccdf899ab80c7",
+          "target_sha256": "ca731d27679d728df86598ff3eb7eb836556f945da0a673c4fcccdf899ab80c7"
+        },
+        {
+          "path": "references/identity.md",
+          "source_sha256": "ae83b6215c8c1cd0d60fac31f7c69446a2c57d9e945a6f58a709640e51aedd64",
+          "target_sha256": "ae83b6215c8c1cd0d60fac31f7c69446a2c57d9e945a6f58a709640e51aedd64"
+        },
+        {
+          "path": "scripts/et_v2_contract.py",
+          "source_sha256": "50bc9db60ac0ab16dcc0cb63f67f557857bf04c47dc19c5777e22028eb4f1d00",
+          "target_sha256": "50bc9db60ac0ab16dcc0cb63f67f557857bf04c47dc19c5777e22028eb4f1d00"
+        },
+        {
+          "path": "scripts/fetch_filing.py",
+          "source_sha256": "3cba8cf0bdb9e9a3859895a2ee86b0ab60e819e8a3c381d75c1a00bb31ebe71b",
+          "target_sha256": "3cba8cf0bdb9e9a3859895a2ee86b0ab60e819e8a3c381d75c1a00bb31ebe71b"
+        },
+        {
+          "path": "scripts/fetch_statements.py",
+          "source_sha256": "4cd7a2409959a762588de262a9979a6c8c2a64db45ff128468f778f6fa947128",
+          "target_sha256": "4cd7a2409959a762588de262a9979a6c8c2a64db45ff128468f778f6fa947128"
+        },
+        {
+          "path": "scripts/ff_configuration.py",
+          "source_sha256": "c73b71c4ac18b6d59da2f4e8b7aff599442e9d15f37cd80338b74f485127fe81",
+          "target_sha256": "c73b71c4ac18b6d59da2f4e8b7aff599442e9d15f37cd80338b74f485127fe81"
+        },
+        {
+          "path": "scripts/ff_financial_statements.py",
+          "source_sha256": "3334cac4b6bf3f49d3979f5e1834d8c4ff35f522938dd0f91ef13c1c6508fed4",
+          "target_sha256": "3334cac4b6bf3f49d3979f5e1834d8c4ff35f522938dd0f91ef13c1c6508fed4"
+        },
+        {
+          "path": "scripts/ff_local_preparation_observation.py",
+          "source_sha256": "f9194e4fd8eb311930e2e5151c57f0ccc57dbd0e8690df8ce32341a8fd32b26f",
+          "target_sha256": "f9194e4fd8eb311930e2e5151c57f0ccc57dbd0e8690df8ce32341a8fd32b26f"
+        },
+        {
+          "path": "scripts/ff_local_source_prepare.py",
+          "source_sha256": "34193905be4503303a636e2c025075da8b4a29cb8cffcb759aaec5c87163daee",
+          "target_sha256": "34193905be4503303a636e2c025075da8b4a29cb8cffcb759aaec5c87163daee"
+        },
+        {
+          "path": "scripts/ff_process_transport.py",
+          "source_sha256": "a95321ded274556981dc18f494513e344cd3679d7ae75e9bb5eab754c440c43a",
+          "target_sha256": "a95321ded274556981dc18f494513e344cd3679d7ae75e9bb5eab754c440c43a"
+        },
+        {
+          "path": "scripts/ff_process_tree.py",
+          "source_sha256": "4ff6acbb5d838e593e90d62c1d35d7c9ecdae35b3916d1d041bd7ed077bc504f",
+          "target_sha256": "4ff6acbb5d838e593e90d62c1d35d7c9ecdae35b3916d1d041bd7ed077bc504f"
+        },
+        {
+          "path": "scripts/ff_provider_cause.py",
+          "source_sha256": "84e2de504b1c2c03774beb3cc4e548d4b8a26b8532a6464dd38f50f3569fbeeb",
+          "target_sha256": "84e2de504b1c2c03774beb3cc4e548d4b8a26b8532a6464dd38f50f3569fbeeb"
+        },
+        {
+          "path": "scripts/ff_source_candidate.py",
+          "source_sha256": "2f9293f1243ecc55bd88ec18a3c6499a58913041444f6ca3d256980d847a93b0",
+          "target_sha256": "2f9293f1243ecc55bd88ec18a3c6499a58913041444f6ca3d256980d847a93b0"
+        },
+        {
+          "path": "scripts/ff_source_failure.py",
+          "source_sha256": "25b2efa46932ba887aa0ebbfd6e5b994bb3307a90962888343473c16996e4de5",
+          "target_sha256": "25b2efa46932ba887aa0ebbfd6e5b994bb3307a90962888343473c16996e4de5"
+        },
+        {
+          "path": "scripts/ff_source_ref.py",
+          "source_sha256": "d82e2bd49b022ac5ac7acf16604470ad7fede82b58937e7c621dc630380cf3ea",
+          "target_sha256": "d82e2bd49b022ac5ac7acf16604470ad7fede82b58937e7c621dc630380cf3ea"
+        },
+        {
+          "path": "scripts/ff_v2_envelope.py",
+          "source_sha256": "a4a5e3e5946d23e7c0fa3e22158d29a9b0b5ae41d539cf60ba06ff393469e67f",
+          "target_sha256": "a4a5e3e5946d23e7c0fa3e22158d29a9b0b5ae41d539cf60ba06ff393469e67f"
+        },
+        {
+          "path": "scripts/filing_contracts.py",
+          "source_sha256": "033248d7f6bb72801428fc886aa5a32b2357de88e1179c892b237ac2eee65659",
+          "target_sha256": "033248d7f6bb72801428fc886aa5a32b2357de88e1179c892b237ac2eee65659"
+        },
+        {
+          "path": "scripts/transcript_companion.py",
+          "source_sha256": "7e3f28a5928270850af308b9d20f4187cbaa985f1e0a5b4dffb83c3a1c0084be",
+          "target_sha256": "7e3f28a5928270850af308b9d20f4187cbaa985f1e0a5b4dffb83c3a1c0084be"
+        },
+        {
+          "path": "scripts/transcript_reuse_selection.py",
+          "source_sha256": "66600ac99f48f43fc4ca332a71edd5ce6a2671173f4a4da97f99f3f724b41269",
+          "target_sha256": "66600ac99f48f43fc4ca332a71edd5ce6a2671173f4a4da97f99f3f724b41269"
+        },
+        {
+          "path": "scripts/transcript_tool_transport.py",
+          "source_sha256": "4bb18006bb608c3dc706a6ca3f70e77fe03513798ff815b464aad208a8f33026",
+          "target_sha256": "4bb18006bb608c3dc706a6ca3f70e77fe03513798ff815b464aad208a8f33026"
+        },
+        {
+          "path": "SKILL.md",
+          "source_sha256": "590d27e461e5852c8513f016a1ab8c8ca10d561b20c3ff93976f31c17ef851e4",
+          "target_sha256": "590d27e461e5852c8513f016a1ab8c8ca10d561b20c3ff93976f31c17ef851e4"
+        }
+      ],
+      "preserved_config": [
+        {
+          "path": "config/company_wiki.json",
+          "unchanged": true,
+          "absent": false
+        }
+      ],
+      "metadata_delta_since_before_final_drift": [
+        "scripts/fetch_filing.py"
+      ],
+      "unselected_metadata_unchanged": true,
+      "staging_residue_count": 0
+    },
+    {
+      "alias": ".codex",
+      "physical_target": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch",
+      "checks": [
+        {
+          "path": "CHANGELOG.md",
+          "source_sha256": "abc739adbfc402c53df056a87a105520f30dea3d9adb10cbe425b7380ec53825",
+          "target_sha256": "abc739adbfc402c53df056a87a105520f30dea3d9adb10cbe425b7380ec53825"
+        },
+        {
+          "path": "references/contract-ownership.md",
+          "source_sha256": "ca731d27679d728df86598ff3eb7eb836556f945da0a673c4fcccdf899ab80c7",
+          "target_sha256": "ca731d27679d728df86598ff3eb7eb836556f945da0a673c4fcccdf899ab80c7"
+        },
+        {
+          "path": "references/identity.md",
+          "source_sha256": "ae83b6215c8c1cd0d60fac31f7c69446a2c57d9e945a6f58a709640e51aedd64",
+          "target_sha256": "ae83b6215c8c1cd0d60fac31f7c69446a2c57d9e945a6f58a709640e51aedd64"
+        },
+        {
+          "path": "scripts/et_v2_contract.py",
+          "source_sha256": "50bc9db60ac0ab16dcc0cb63f67f557857bf04c47dc19c5777e22028eb4f1d00",
+          "target_sha256": "50bc9db60ac0ab16dcc0cb63f67f557857bf04c47dc19c5777e22028eb4f1d00"
+        },
+        {
+          "path": "scripts/fetch_filing.py",
+          "source_sha256": "3cba8cf0bdb9e9a3859895a2ee86b0ab60e819e8a3c381d75c1a00bb31ebe71b",
+          "target_sha256": "3cba8cf0bdb9e9a3859895a2ee86b0ab60e819e8a3c381d75c1a00bb31ebe71b"
+        },
+        {
+          "path": "scripts/fetch_statements.py",
+          "source_sha256": "4cd7a2409959a762588de262a9979a6c8c2a64db45ff128468f778f6fa947128",
+          "target_sha256": "4cd7a2409959a762588de262a9979a6c8c2a64db45ff128468f778f6fa947128"
+        },
+        {
+          "path": "scripts/ff_configuration.py",
+          "source_sha256": "c73b71c4ac18b6d59da2f4e8b7aff599442e9d15f37cd80338b74f485127fe81",
+          "target_sha256": "c73b71c4ac18b6d59da2f4e8b7aff599442e9d15f37cd80338b74f485127fe81"
+        },
+        {
+          "path": "scripts/ff_financial_statements.py",
+          "source_sha256": "3334cac4b6bf3f49d3979f5e1834d8c4ff35f522938dd0f91ef13c1c6508fed4",
+          "target_sha256": "3334cac4b6bf3f49d3979f5e1834d8c4ff35f522938dd0f91ef13c1c6508fed4"
+        },
+        {
+          "path": "scripts/ff_local_preparation_observation.py",
+          "source_sha256": "f9194e4fd8eb311930e2e5151c57f0ccc57dbd0e8690df8ce32341a8fd32b26f",
+          "target_sha256": "f9194e4fd8eb311930e2e5151c57f0ccc57dbd0e8690df8ce32341a8fd32b26f"
+        },
+        {
+          "path": "scripts/ff_local_source_prepare.py",
+          "source_sha256": "34193905be4503303a636e2c025075da8b4a29cb8cffcb759aaec5c87163daee",
+          "target_sha256": "34193905be4503303a636e2c025075da8b4a29cb8cffcb759aaec5c87163daee"
+        },
+        {
+          "path": "scripts/ff_process_transport.py",
+          "source_sha256": "a95321ded274556981dc18f494513e344cd3679d7ae75e9bb5eab754c440c43a",
+          "target_sha256": "a95321ded274556981dc18f494513e344cd3679d7ae75e9bb5eab754c440c43a"
+        },
+        {
+          "path": "scripts/ff_process_tree.py",
+          "source_sha256": "4ff6acbb5d838e593e90d62c1d35d7c9ecdae35b3916d1d041bd7ed077bc504f",
+          "target_sha256": "4ff6acbb5d838e593e90d62c1d35d7c9ecdae35b3916d1d041bd7ed077bc504f"
+        },
+        {
+          "path": "scripts/ff_provider_cause.py",
+          "source_sha256": "84e2de504b1c2c03774beb3cc4e548d4b8a26b8532a6464dd38f50f3569fbeeb",
+          "target_sha256": "84e2de504b1c2c03774beb3cc4e548d4b8a26b8532a6464dd38f50f3569fbeeb"
+        },
+        {
+          "path": "scripts/ff_source_candidate.py",
+          "source_sha256": "2f9293f1243ecc55bd88ec18a3c6499a58913041444f6ca3d256980d847a93b0",
+          "target_sha256": "2f9293f1243ecc55bd88ec18a3c6499a58913041444f6ca3d256980d847a93b0"
+        },
+        {
+          "path": "scripts/ff_source_failure.py",
+          "source_sha256": "25b2efa46932ba887aa0ebbfd6e5b994bb3307a90962888343473c16996e4de5",
+          "target_sha256": "25b2efa46932ba887aa0ebbfd6e5b994bb3307a90962888343473c16996e4de5"
+        },
+        {
+          "path": "scripts/ff_source_ref.py",
+          "source_sha256": "d82e2bd49b022ac5ac7acf16604470ad7fede82b58937e7c621dc630380cf3ea",
+          "target_sha256": "d82e2bd49b022ac5ac7acf16604470ad7fede82b58937e7c621dc630380cf3ea"
+        },
+        {
+          "path": "scripts/ff_v2_envelope.py",
+          "source_sha256": "a4a5e3e5946d23e7c0fa3e22158d29a9b0b5ae41d539cf60ba06ff393469e67f",
+          "target_sha256": "a4a5e3e5946d23e7c0fa3e22158d29a9b0b5ae41d539cf60ba06ff393469e67f"
+        },
+        {
+          "path": "scripts/filing_contracts.py",
+          "source_sha256": "033248d7f6bb72801428fc886aa5a32b2357de88e1179c892b237ac2eee65659",
+          "target_sha256": "033248d7f6bb72801428fc886aa5a32b2357de88e1179c892b237ac2eee65659"
+        },
+        {
+          "path": "scripts/transcript_companion.py",
+          "source_sha256": "7e3f28a5928270850af308b9d20f4187cbaa985f1e0a5b4dffb83c3a1c0084be",
+          "target_sha256": "7e3f28a5928270850af308b9d20f4187cbaa985f1e0a5b4dffb83c3a1c0084be"
+        },
+        {
+          "path": "scripts/transcript_reuse_selection.py",
+          "source_sha256": "66600ac99f48f43fc4ca332a71edd5ce6a2671173f4a4da97f99f3f724b41269",
+          "target_sha256": "66600ac99f48f43fc4ca332a71edd5ce6a2671173f4a4da97f99f3f724b41269"
+        },
+        {
+          "path": "scripts/transcript_tool_transport.py",
+          "source_sha256": "4bb18006bb608c3dc706a6ca3f70e77fe03513798ff815b464aad208a8f33026",
+          "target_sha256": "4bb18006bb608c3dc706a6ca3f70e77fe03513798ff815b464aad208a8f33026"
+        },
+        {
+          "path": "SKILL.md",
+          "source_sha256": "590d27e461e5852c8513f016a1ab8c8ca10d561b20c3ff93976f31c17ef851e4",
+          "target_sha256": "590d27e461e5852c8513f016a1ab8c8ca10d561b20c3ff93976f31c17ef851e4"
+        }
+      ],
+      "preserved_config": [
+        {
+          "path": "config/company_wiki.json",
+          "unchanged": true,
+          "absent": false
+        }
+      ],
+      "metadata_delta_since_before_final_drift": [
+        "scripts/fetch_filing.py"
+      ],
+      "unselected_metadata_unchanged": true,
+      "staging_residue_count": 0
+    }
+  ],
+  "global_acl_changes": 0,
+  "global_label_changes": 0,
+  "credentials_read": false,
+  "scope": [
+    "SKILL.md",
+    "scripts/fetch_statements.py",
+    "scripts/ff_financial_statements.py",
+    "scripts/fetch_filing.py"
+  ],
+  "claude_same_physical_target_as_agents": true,
+  "full_runtime_byte_complete": true,
+  "final_repeat_written_count": 0
+}

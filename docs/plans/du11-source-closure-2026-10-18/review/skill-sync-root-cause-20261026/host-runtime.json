@@ -1,0 +1,12 @@
+{
+  "schema_version": "skill-sync-mic-observation/1",
+  "executable": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Roaming\\uv\\python\\cpython-3.14-windows-x86_64-none\\python.exe",
+  "base_executable": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Roaming\\uv\\python\\cpython-3.14-windows-x86_64-none\\python.exe",
+  "process_integrity_sid": "S-1-16-8192",
+  "labels": {
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Roaming\\uv\\python\\cpython-3.14-windows-x86_64-none\\python.exe": "implicit_medium",
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\.agents\\skills\\filing-fetch": "implicit_medium",
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\skills\\filing-fetch": "implicit_medium"
+  },
+  "read_only": true
+}
