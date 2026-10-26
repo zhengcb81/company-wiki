@@ -36,6 +36,46 @@ def _fixture_source(catalog, imported):
     return original, descriptor
 
 
+def test_exact_source_content_read_is_separate_from_historical_filing_qualification(tmp_path):
+    from company_wiki.source_catalog.source_reader import SourceRef
+    from tools.document_understanding_benchmark.phase_c_readonly_source import prepare_registered_source, ReadonlySourceGap
+
+    with reuse.setup_source("http://127.0.0.1:1/chat/completions") as (root, catalog, config, _, imported, _kind):
+        original, descriptor = _fixture_source(catalog, imported)
+        protected = {p: _fingerprint(p) for p in [original, config, catalog.config.database_path]}
+        descriptor["published_date"] = None
+        facts = {"content_sha256": imported["source_ref"]["content_sha256"],
+                 "facts": {"published_date": None},
+                 "evidence": {"published_date": {"value": None, "locator": "fixture/source-date-unproved"}}}
+        common = dict(source_config=config, original=original,
+                      expected_sha256=imported["source_ref"]["content_sha256"],
+                      descriptor=descriptor, as_of_date="2026-10-17", source_facts=facts)
+        content = tmp_path / "content"
+        result = prepare_registered_source(owned_root=content, expected_ref=SourceRef(**imported["source_ref"]), **common)
+        assert result["source_ref"] == imported["source_ref"]
+        assert result["manifest"]["published_date"] is None
+        assert result["selection"] == {"mode": "exact_source_version", "filing_identity_period_asof_qualification": "NOT_EVALUATED"}
+        assert result["raw_copies"] == 0
+        # Same bytes/date cannot silently qualify for an historical filing query.
+        with pytest.raises(ReadonlySourceGap, match="registered_source_not_found"):
+            prepare_registered_source(owned_root=tmp_path / "filing", **common)
+        assert all(_fingerprint(p) == fp for p, fp in protected.items())
+
+
+def test_explicit_version_read_cannot_substitute_another_document(tmp_path):
+    from dataclasses import replace
+    from company_wiki.source_catalog.source_reader import SourceRef
+    from tools.document_understanding_benchmark.phase_c_readonly_source import prepare_registered_source, ReadonlySourceGap
+
+    with reuse.setup_source("http://127.0.0.1:1/chat/completions") as (_root, catalog, config, _, imported, _kind):
+        original, descriptor = _fixture_source(catalog, imported)
+        wrong = replace(SourceRef(**imported["source_ref"]), document_id="urn:company-wiki:document:sha256:" + "b" * 64)
+        with pytest.raises(ReadonlySourceGap):
+            prepare_registered_source(source_config=config, owned_root=tmp_path / "owned",
+                                      original=original, expected_sha256=imported["source_ref"]["content_sha256"],
+                                      descriptor=descriptor, as_of_date="2026-10-17", expected_ref=wrong)
+
+
 def test_registered_source_mounts_same_bytes_and_only_explicit_group(
     tmp_path, monkeypatch
 ):
@@ -388,7 +428,6 @@ def test_registered_runner_passes_real_ref_to_valid_batch_without_starting_model
         provider["options"]["endpoint"] = (
             "https://model.fixture.invalid/chat/completions"
         )
-        monkeypatch.setattr(runner, "source_descriptor", lambda _sample: descriptor)
         calls = []
 
         def stop_before_model(owned, output, label, command, env, *args, **kwargs):

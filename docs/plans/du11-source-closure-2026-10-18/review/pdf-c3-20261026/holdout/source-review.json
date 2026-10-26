@@ -1,0 +1,125 @@
+{
+  "schema_version": "pdf-c3-source-review/1",
+  "reviewer": "/root/c3_holdout_source_freeze",
+  "review_type": "source_author_review",
+  "reviewed_at": "2026-10-26T19:14:54.811132+00:00",
+  "status": "SOURCE_GOLD_FROZEN_WITH_METADATA_GAPS",
+  "scope": "Source content checkpoints only; no end-to-end summary, selector or FF/RF acceptance claim.",
+  "binding": {
+    "manifest.json": "e8f794fb4b62ac776ace25de6dccfba42c2a1ea2fd0d4d217f005db96189528a",
+    "c3-cn-huali-ir-202305.gold.json": "f00f127585d4015fbb8592a8254327f205386877cbc03481b39eeb294932f6f9",
+    "c3-us-berkshire-letter-2008.gold.json": "a5db9f9f7eeb536c3cbab367aa7b172a8f39268bdbca6f9c0b0bdf7e55a2ee22"
+  },
+  "samples": [
+    {
+      "sample_id": "c3-us-berkshire-letter-2008",
+      "source_sha256": "46920242cbb861fd844453d5e20edd8b0ecea977d85111cf2a7cfb249913c6cf",
+      "checkpoints": 10,
+      "source_content_sufficient": true,
+      "public_US_filing_qualification_sufficient": false,
+      "freshness": "fresh_source_content_before_C3_producer; bounded search cannot prove all historical agent exposure",
+      "exposed_regression_after_first_candidate": true
+    },
+    {
+      "sample_id": "c3-cn-huali-ir-202305",
+      "source_sha256": "d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "checkpoints": 10,
+      "source_content_sufficient": true,
+      "public_US_filing_qualification_sufficient": "not_applicable",
+      "freshness": "fresh_source_content_before_C3_producer; bounded search cannot prove all historical agent exposure",
+      "exposed_regression_after_first_candidate": true
+    }
+  ],
+  "checks": {
+    "gold_before_candidate": true,
+    "reader_path": "SourceCatalog.reader(query_only) -> SourceVersionReader.query_ref/open_version(preview) -> PdfReading.read(selector_version=0.8.0); no select() or model path invoked",
+    "native_support_quotes": "Captured from canonical in-memory units with original SourceRef/SHA, physical page and paragraph locators, parser version and text SHA; no full PDF/MD copies.",
+    "visual_checks": {
+      "berkshire": [
+        2,
+        6,
+        7,
+        22
+      ],
+      "huali": [
+        1,
+        2,
+        3
+      ]
+    },
+    "source_read_scope": "Per-gold reading_scope explicitly lists fully read, skimmed and unread pages; full native parse is not a claim of full human reading.",
+    "unseen_check": "Literal company/hash filenames searched under tools/document_understanding_benchmark, tools/holdout_replay and DU11 review JSON/Markdown excluding candidate/summary filename globs; no hits before new gold. No candidate content inspected.",
+    "role_modality": "Every checkpoint includes required support set and forbidden attribution/period/negation/forecast counterexamples."
+  },
+  "carrier_evidence": {
+    "berkshire": {
+      "pages": 22,
+      "pdf_version": "1.6",
+      "producer": "Acrobat Distiller 7.0.5 (Windows)",
+      "creation_date_metadata": "2009-02-28",
+      "modified_date_metadata": "2009-03-02"
+    },
+    "huali": {
+      "pages": 5,
+      "pdf_version": "1.5",
+      "producer": "Microsoft Word 2016",
+      "creator": "Microsoft Word 2016",
+      "creation_date_metadata": "2023-05-19"
+    },
+    "interpretation": "Existing native print/office PDFs with native text and document page layout; no HTML conversion performed. Producer metadata is supporting carrier evidence, not authentication of official origin.",
+    "diagnostic_caveat": "Poppler pdfinfo reports File size: 0 bytes on these Unicode paths although SourceVersionReader verified actual nonzero size and SHA; do not use the pdfinfo size as source identity."
+  },
+  "gaps": [
+    {
+      "id": "US-QUALIFICATION",
+      "severity": "open",
+      "detail": "No application/pdf among seven correctly US-tagged registered originals. Berkshire is a true US issuer letter in an incorrectly tagged active original; public source-facts qualification still needs isolated owner correction."
+    },
+    {
+      "id": "US-FILING-CARRIER",
+      "severity": "open",
+      "detail": "The selected letter is not SEC10-K/10Q/20F/8K. Coverage of a fresh correctly qualified true SEC filing PDF is still unavailable. Minimal future acquisition: one official issuer-hosted native report/filing PDF for a fresh US issuer, via existing configured acquisition owner, with source URL/period/kind/identity receipt; no download was attempted here."
+    },
+    {
+      "id": "OFFICIAL-BYTE-PROVENANCE",
+      "severity": "open",
+      "detail": "Existing source_url/official download receipts absent for both chosen PDFs. SEC/Nasdaq snapshot proves Berkshire issuer market/CIK, not these bytes. Do not invent source URL."
+    },
+    {
+      "id": "DATE-CLASSIFICATION",
+      "severity": "corrected_before_candidate",
+      "detail": "Independent reviewer caught proposed signature date being placed in published_date; manifest now uses null and separate letter_signed_date. Huali event dates are not publication date."
+    },
+    {
+      "id": "NEW-BUSINESS-DENOMINATOR",
+      "severity": "not_applicable",
+      "detail": "Huali does not disclose a separate new business segment or its revenue; checks use disclosed new-customer/factory onboarding and Indonesia capacity instead of inventing a new segment."
+    },
+    {
+      "id": "SOURCE-REVIEW-CORRECTIONS",
+      "severity": "corrected_before_candidate",
+      "detail": "Independent review preserved future modality of HUALI-03 and added explicit GEICO context to BRK-09; golden files now v2. Initial/final hashes and reason recorded in gold-corrections.json."
+    }
+  ],
+  "independent_review": {
+    "status": "PASS_WITH_GAPS",
+    "agent": "/root/c3_holdout_source_freeze/source_gold_independent_review",
+    "report_json": "independent-source-review.json",
+    "report_json_sha256": "3b7c47bf77906bcfb6e011cf49382326cae3eabc984bdfe4e67fb90518ff285f",
+    "report_markdown": "independent-source-review.md",
+    "report_markdown_sha256": "e8d94c93878ac73a4f5fe7c40e7a3490c75e1be9b78c80136a445336c12b4ceb",
+    "final_support_units_verified": 101,
+    "open_gold_defects": 0,
+    "scope": "Source gold only; does not sign candidate, summary, FF/RF or official acquisition qualification."
+  },
+  "actions": {
+    "paid_calls": 0,
+    "downloads": 0,
+    "producer_invocations": 0,
+    "producer_output_reads": 0,
+    "production_writes": 0,
+    "raw_copies": 0,
+    "commits": 0
+  },
+  "temporary_page_images": "Removed after independent visual review; no PDF copies retained."
+}

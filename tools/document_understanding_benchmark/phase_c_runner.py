@@ -532,40 +532,45 @@ def reconcile_native_usage(output: Path, run_id: str) -> dict:
 
 
 def source_descriptor(sample: dict) -> dict:
-    labels = {"cn-h1": "中微公司", "hk-annual": "名创优品", "us-10k": "微软"}
     observation = sample["source_metadata_observation"]
     primary = sample.get("verified_official_descriptor") or {}
-    # Labels are the explicit companies in prep.md, not filename inference.
+    # Identity/language are prepared source facts, never sample-ID semantics.
+    # Legacy preparations lack display names: their explicit security ID is
+    # still a valid resolver query; do not invent a company or a language.
     descriptor = {
-        "entity": labels[sample["sample_id"]],
-        "publisher": primary.get("publisher") or labels[sample["sample_id"]],
-        **{
-            key: primary.get(key, observation.get(key))
-            for key in (
-                "market",
-                "security_id",
-                "fiscal_year",
-                "fiscal_period",
-                "period_end",
-                "published_date",
-                "filing_date",
-                "source_url",
-                "form_type",
-            )
-        },
-        "title": observation["title"],
-        "document_kind": observation["document_kind"],
-        "language": "en"
-        if sample["sample_id"] == "us-10k"
-        else "zh"
-        if sample["sample_id"] == "cn-h1"
-        else "mixed",
+        key: primary.get(key, observation.get(key))
+        for key in (
+            "entity", "publisher", "market", "security_id", "fiscal_year",
+            "fiscal_period", "period_end", "published_date", "filing_date",
+            "source_url", "form_type", "title", "document_kind", "language",
+        )
     }
+    entity = descriptor["entity"] or descriptor["security_id"]
+    if not isinstance(entity, str) or not entity.strip():
+        raise ValueError("prepared source identity requires entity or security_id")
+    descriptor["entity"] = entity
+    descriptor["publisher"] = descriptor["publisher"] or entity
     if descriptor["published_date"] is None and descriptor["filing_date"] is not None:
         # The observed filing date is the public availability date. File mtime
         # and the local capture time cannot establish historic availability.
         descriptor["published_date"] = descriptor["filing_date"]
     return descriptor
+
+
+def prepared_live_input(metadata: dict, sample_id: str) -> tuple[dict, dict]:
+    """Select one explicit source/provider pair before creating any run IO."""
+    samples = [row for row in metadata.get("samples", ())
+               if isinstance(row, dict) and row.get("sample_id") == sample_id]
+    if len(samples) != 1:
+        raise ValueError("expected unique prepared sample: " + str(sample_id))
+    sample = samples[0]
+    provider_name = sample.get("provider")
+    providers = [row for row in metadata.get("providers", ())
+                 if isinstance(row, dict) and row.get("provider") == provider_name]
+    if not isinstance(provider_name, str) or not provider_name or len(providers) != 1:
+        raise ValueError("expected unique prepared provider: " + str(provider_name))
+    source_descriptor(sample)
+    return sample, providers[0]
 
 
 def seed_identity(root: Path, mode: str, descriptor: dict, *, source_catalog_config: Path | None = None) -> dict:
@@ -927,6 +932,71 @@ def run_pair(
     selected_versions=None,
     activation_recovery=False,
 ):
+    """Own the whole temporary-lake lifetime, including preparation failures."""
+    versions = selector_versions(selected_versions)
+    projections = {version: reading_projection_for(version, reading_model_projection) for version in versions}
+    if source_mode not in {"isolated-copy", "registered_readonly"}:
+        raise ValueError("unsupported phase C source mode")
+    if source_mode == "registered_readonly":
+        if source_catalog_config is None:
+            raise ValueError("registered_readonly requires explicit source_catalog_config")
+        if mode != "live":
+            raise ValueError("registered_readonly requires explicitly prepared source metadata")
+        source_catalog_config = Path(source_catalog_config).resolve(strict=True)
+        if not source_catalog_config.is_file():
+            raise ValueError("source_catalog_config must be a file")
+    descriptor = source_descriptor(sample) if mode == "live" else None
+    temp_parent = Path(tempfile.gettempdir()).resolve()
+    outcome = None
+    root = None
+    try:
+        with tempfile.TemporaryDirectory(prefix="cwplC-", dir=temp_parent) as directory:
+            root = Path(directory).resolve()
+            if (root.parent != temp_parent or not root.name.startswith("cwplC-")
+                    or root == ROOT or root in ROOT.parents):
+                raise RuntimeError("unsafe phase C temporary root")
+            outcome = _run_pair_in_owned_root(
+                sample, provider, metadata, root=root, mode=mode, output=output,
+                descriptor=descriptor, versions=versions, projections=projections,
+                preparation_path=preparation_path, fixture_endpoint=fixture_endpoint,
+                missing_gold=missing_gold, split_groups=split_groups,
+                consumer_projects=consumer_projects, source_mode=source_mode,
+                source_catalog_config=source_catalog_config, activation_recovery=activation_recovery,
+            )
+    except OSError as exc:
+        if outcome is None:
+            raise
+        outcome.update(status="FAIL", cleanup_error=type(exc).__name__, remaining_owned_temp=str(root))
+    assert root is not None and outcome is not None
+    outcome["temporary_lake_removed"] = not root.exists()
+    if (outcome.get("protected_unchanged") is not True
+            or outcome.get("sentinel_unchanged") is not True
+            or not outcome["temporary_lake_removed"]):
+        outcome["status"] = "FAIL"
+    write_json(output / "receipt.json", outcome)
+    return outcome
+
+
+def _run_pair_in_owned_root(
+    sample,
+    provider,
+    metadata,
+    *,
+    root,
+    mode,
+    output,
+    descriptor,
+    versions,
+    projections,
+    preparation_path=None,
+    fixture_endpoint=None,
+    missing_gold=False,
+    split_groups=False,
+    consumer_projects=None,
+    source_mode="isolated-copy",
+    source_catalog_config=None,
+    activation_recovery=False,
+):
     from company_wiki.source_catalog.official_source_flow import (
         prepare_official_narrative_request,
     )
@@ -937,21 +1007,6 @@ def run_pair(
     )
     from company_wiki.automation.narrative_contracts import NarrativeBundle
 
-    versions = selector_versions(selected_versions)
-    projections = {version: reading_projection_for(version, reading_model_projection) for version in versions}
-    if source_mode not in {"isolated-copy", "registered_readonly"}:
-        raise ValueError("unsupported phase C source mode")
-    if source_mode == "registered_readonly":
-        if source_catalog_config is None:
-            raise ValueError("registered_readonly requires explicit source_catalog_config")
-        if mode != "live":
-            raise ValueError("registered_readonly requires explicitly prepared source metadata")
-        # Invalid inputs fail before creating owned test IO.
-        source_catalog_config = Path(source_catalog_config).resolve(strict=True)
-        if not source_catalog_config.is_file():
-            raise ValueError("source_catalog_config must be a file")
-    temp_parent = Path(tempfile.gettempdir()).resolve()
-    root = Path(tempfile.mkdtemp(prefix="cwplC-", dir=temp_parent)).resolve()
     (root / "config").mkdir()
     sentinel = root / "SENTINEL"
     sentinel.write_bytes(b"own-isolated-phase-C-lake\n")
@@ -1064,7 +1119,6 @@ def run_pair(
         original = Path(sample["original"])
         sha = sample["fingerprint"]["sha256"]
         gold = Path(sample["gold"])
-        descriptor = source_descriptor(sample)
         mime = sample["mime_type"]
         llm = None
     protected = {
@@ -1116,15 +1170,20 @@ def run_pair(
     }
     if mode == "live":
         observation = sample["source_metadata_observation"]
+        primary = sample.get("verified_official_descriptor") or {}
+        date_field = (
+            "published_date"
+            if primary.get("published_date", observation.get("published_date")) is not None
+            else "filing_date"
+        )
+        date_owner = "verified_official_descriptor" if date_field in primary else "source_metadata_observation"
         outcome["availability_date_provenance"] = {
             "observed_published_date": observation.get("published_date"),
             "observed_filing_date": observation.get("filing_date"),
             "registered_published_date": descriptor["published_date"],
-            "method": "verified_official_descriptor"
-            if sample.get("verified_official_descriptor")
-            else "observed_published_date"
-            if observation.get("published_date")
-            else "observed_filing_date_as_public_availability",
+            "method": date_owner + "." + date_field
+            if descriptor["published_date"] is not None
+            else "unknown_public_availability",
             "mtime_used": False,
         }
         outcome["language_provenance"] = {
@@ -1132,9 +1191,9 @@ def run_pair(
             "gold_language_label": json.loads(gold.read_text(encoding="utf8")).get(
                 "language"
             ),
-            "basis": "ROOT actual English/Traditional-Chinese bilingual original"
-            if sample["sample_id"] == "hk-annual"
-            else "actual original language",
+            "basis": "prepared_source_descriptor"
+            if descriptor["language"] is not None
+            else "unspecified_source_language_normalization_owner_decides",
             "translation": False,
         }
     try:
@@ -1146,11 +1205,13 @@ def run_pair(
             protected[identity_proof["original"]] = identity_proof["fingerprint"]
         if source_mode == "registered_readonly":
             from tools.document_understanding_benchmark.phase_c_readonly_source import prepare_registered_source
+            from company_wiki.source_catalog.source_reader import SourceRef
 
             mounted = prepare_registered_source(source_config=Path(source_catalog_config),
                 owned_root=root, original=original, expected_sha256=sha,
                 descriptor=descriptor, as_of_date=datetime.now(UTC).date().isoformat(),
-                source_facts=sample.get("registered_source_facts"))
+                source_facts=sample.get("registered_source_facts"),
+                expected_ref=SourceRef(**sample["source_ref"]) if sample.get("source_ref") is not None else None)
             config = Path(mounted["catalog_config"])
             # This is an existing registered SourceRef, not an HTTP/import receipt.
             imported = {"source_ref": mounted["source_ref"]}
@@ -1591,23 +1652,6 @@ def run_pair(
             outcome["sentinel_unchanged"] = fingerprint(sentinel) == sentinel_before
         except Exception as exc:
             outcome.update(status="FAIL", finalization_observation_error=type(exc).__name__)
-        finally:
-            # This absolute owned-root check must also work under python -O.
-            if (root.parent != temp_parent or not root.name.startswith("cwplC-")
-                    or root == ROOT or root in ROOT.parents):
-                raise RuntimeError("unsafe phase C cleanup target")
-            try:
-                shutil.rmtree(root)
-            except OSError as exc:
-                outcome["cleanup_error"] = type(exc).__name__
-                outcome["remaining_owned_temp"] = str(root)
-                outcome["status"] = "FAIL"
-            outcome["temporary_lake_removed"] = not root.exists()
-            if (outcome.get("protected_unchanged") is not True
-                    or outcome.get("sentinel_unchanged") is not True
-                    or not outcome["temporary_lake_removed"]):
-                outcome["status"] = "FAIL"
-            write_json(output / "receipt.json", outcome)
     return outcome
 
 
@@ -1732,7 +1776,7 @@ def loopback_preparation():
 def argument_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--mode", choices=("loopback", "live"), default="loopback")
-    parser.add_argument("--sample", choices=("cn-h1", "hk-annual", "us-10k"))
+    parser.add_argument("--sample", help="exact sample_id from the explicit preparation metadata")
     parser.add_argument("--metadata", type=Path,
                         help="Explicit live preparation revision; loopback does not need paid history.")
     parser.add_argument("--usage-ledger", type=Path,
@@ -1772,9 +1816,12 @@ def main() -> int:
         parser.error("registered_readonly uses explicit prepared originals; loopback retains its own synthetic source")
     if args.mode == "live" and (args.metadata is None or args.usage_ledger is None):
         parser.error("live mode requires explicit --metadata and --usage-ledger")
+    if args.mode == "live" and args.sample is None:
+        parser.error("choose one explicit prepared sample for each live operation")
     preparation_path = args.metadata.resolve() if args.metadata is not None else None
     metadata = (json.loads(preparation_path.read_text(encoding="utf8"))
                 if preparation_path is not None else loopback_preparation())
+    live_input = prepared_live_input(metadata, args.sample) if args.mode == "live" else None
     preparation = verify_preparation(metadata, mode=args.mode)
     destination = args.output.resolve()
     destination.mkdir(parents=True, exist_ok=False)
@@ -1795,16 +1842,8 @@ def main() -> int:
         "purpose": "reproducibility observation only; not permission or source acceptance",
     })
     if args.mode == "live":
-        if args.sample is None:
-            raise ValueError("choose one explicit sample for each live operation")
-        sample = next(
-            row for row in metadata["samples"] if row["sample_id"] == args.sample
-        )
-        provider = next(
-            row
-            for row in metadata["providers"]
-            if row["provider"] == sample["provider"]
-        )
+        assert live_input is not None
+        sample, provider = live_input
         from config import Config
         from company_wiki.automation.narrative_http_model import (
             model_options_from_config,

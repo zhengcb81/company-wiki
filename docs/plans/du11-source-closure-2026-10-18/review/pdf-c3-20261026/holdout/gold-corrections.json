@@ -1,0 +1,21 @@
+{
+  "schema_version": "pdf-c3-source-gold-corrections/1",
+  "corrected_at": "2026-10-26T19:15:18.073179+00:00",
+  "before_any_candidate_output": true,
+  "candidate_outputs_read": false,
+  "changes": [
+    {
+      "sample_id": "c3-us-berkshire-letter-2008",
+      "before_sha256": "df40b2380c41febc035e393143586c88a2187808d4940ae958e22224dd8ffe34",
+      "after_sha256": "a5db9f9f7eeb536c3cbab367aa7b172a8f39268bdbca6f9c0b0bdf7e55a2ee22",
+      "reason": "Independent source review: retained Most quantifier in BRK-02; expanded BRK-09 GEICO support context across p7 paragraphs5-9."
+    },
+    {
+      "sample_id": "c3-cn-huali-ir-202305",
+      "before_sha256": "3b9a0411ecb2fc61d28a5bfea92436bcbbb2cd28c59a9da240dbef86d4187501",
+      "after_sha256": "f00f127585d4015fbb8592a8254327f205386877cbc03481b39eeb294932f6f9",
+      "reason": "Independent source review: HUALI-03 preserves 会 future/expectation modality rather than completed order offset."
+    }
+  ],
+  "manifest_date_correction": "published_date null; signature date separate"
+}

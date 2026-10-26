@@ -1,0 +1,22 @@
+{
+  "command": [
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-o",
+    "addopts=",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c3irfix\\p",
+    "tests/test_phase_c_readonly_source.py::test_registered_runner_passes_real_ref_to_valid_batch_without_starting_model"
+  ],
+  "exit_code": 0,
+  "stdout": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\.c3irfix\\\\p\", \"requested_basetemp_len\": 45, \"cwd_len\": 34, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\n.                                                                        [100%]\n1 passed in 8.25s\n",
+  "stderr": "",
+  "owned_TEMP_TMP": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c3irfix"
+}

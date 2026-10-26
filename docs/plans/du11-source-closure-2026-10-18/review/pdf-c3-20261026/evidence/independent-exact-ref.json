@@ -1,0 +1,37 @@
+[
+  {
+    "mutation": "document_id",
+    "rejected_reason": "registered_source_document_not_indexed"
+  },
+  {
+    "mutation": "source_id",
+    "rejected_reason": "registered_source_document_source_mismatch"
+  },
+  {
+    "mutation": "content_sha256",
+    "rejected_reason": "registered_source_ref_pin_mismatch"
+  },
+  {
+    "mutation": "byte_size",
+    "rejected_reason": "registered_source_ref_pin_mismatch"
+  },
+  {
+    "mutation": "mime_type",
+    "rejected_reason": "registered_source_ref_pin_mismatch"
+  },
+  {
+    "mutation": "schema_version",
+    "rejected_reason": "registered_source_ref_pin_mismatch"
+  },
+  {
+    "actual_runner_expected_ref_wiring": "PASS",
+    "held_cli_calls": 1,
+    "model_posts": 0,
+    "selection": {
+      "mode": "exact_source_version",
+      "filing_identity_period_asof_qualification": "NOT_EVALUATED"
+    },
+    "temporary_lake_removed": true,
+    "protected_unchanged": true
+  }
+]

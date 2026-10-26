@@ -1,0 +1,113 @@
+{
+  "schema_version": "pdf-c3-independent-source-review/1",
+  "reviewer_agent": "/root/c3_holdout_source_freeze/source_gold_independent_review",
+  "reviewed_at": "2026-10-26T19:16:56.080526+00:00",
+  "verdict": "PASS_WITH_GAPS",
+  "scope": "Source-side gold only; no candidate/summary/producer evaluation.",
+  "manifest_sha256": "e8f794fb4b62ac776ace25de6dccfba42c2a1ea2fd0d4d217f005db96189528a",
+  "samples": [
+    {
+      "sample_id": "c3-us-berkshire-letter-2008",
+      "gold_sha256": "a5db9f9f7eeb536c3cbab367aa7b172a8f39268bdbca6f9c0b0bdf7e55a2ee22",
+      "gold_version": 2,
+      "source_sha256": "46920242cbb861fd844453d5e20edd8b0ecea977d85111cf2a7cfb249913c6cf",
+      "source_bytes": 132043,
+      "page_count": 22,
+      "exact_quote_hash_locator_unit_id_checks": 19,
+      "checkpoints_semantically_reviewed": 10,
+      "quote_mismatches": 0,
+      "dangling_support_ids": 0,
+      "recipe_matches": true
+    },
+    {
+      "sample_id": "c3-cn-huali-ir-202305",
+      "gold_sha256": "f00f127585d4015fbb8592a8254327f205386877cbc03481b39eeb294932f6f9",
+      "gold_version": 2,
+      "source_sha256": "d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "source_bytes": 238982,
+      "page_count": 5,
+      "exact_quote_hash_locator_unit_id_checks": 82,
+      "checkpoints_semantically_reviewed": 10,
+      "quote_mismatches": 0,
+      "dangling_support_ids": 0,
+      "recipe_matches": true
+    }
+  ],
+  "findings_resolved": [
+    {
+      "id": "SRC-01",
+      "severity": "P2",
+      "finding": "Signature date proposed as source published_date.",
+      "resolution": "published_date=null; letter_signed_date separate."
+    },
+    {
+      "id": "SRC-02",
+      "severity": "P2",
+      "finding": "HUALI-03 prospective new-customer offset became completed.",
+      "resolution": "v2 expected/partial offset retained; realized/full offset forbidden."
+    },
+    {
+      "id": "SRC-03",
+      "severity": "P2",
+      "finding": "BRK-09 support lacked explicit GEICO owner.",
+      "resolution": "v2 requires physical p7 paragraphs5-9 with explicit owner context."
+    },
+    {
+      "id": "SRC-04",
+      "severity": "P3",
+      "finding": "BRK-02 target omitted Most qualifier.",
+      "resolution": "v2 preserves most."
+    }
+  ],
+  "open_gold_defects": 0,
+  "qualification_gaps": [
+    "Berkshire metadata currently HK/Unresolved/broker_research, not qualified US/IR metadata.",
+    "No official acquisition/source_url receipt binds either exact PDF byte stream.",
+    "Shareholder letter is not complete SEC 10-K; true SEC filing PDF coverage remains open.",
+    "Huali meeting dates are not source-proven publication date or fiscal period.",
+    "Prior-use assessment cannot prove every historical reader/session never saw these companies."
+  ],
+  "independent_method": {
+    "source_bytes_opened_via": "SourceVersionReader.open_version(preview)",
+    "source_text_read_via": "PdfReading.read(selector_version=0.8.0); no select call",
+    "catalog_reader_query_only": true,
+    "visual_pages": {
+      "Berkshire": [
+        2,
+        7,
+        22
+      ],
+      "Huali": [
+        1,
+        2,
+        3
+      ]
+    },
+    "exclusion_manifests_rechecked": [
+      "tools/holdout_replay/manifest.json",
+      "tools/document_understanding_benchmark/holdout.json",
+      "tools/document_understanding_benchmark/du5_manifest.json"
+    ],
+    "exclusion_hash_or_company_hits": 0,
+    "model_calls": 0,
+    "downloads": 0,
+    "production_writes": 0,
+    "producer_calls": 0,
+    "producer_outputs_read": 0
+  },
+  "anti_leakage_assessment": "No producer call/output read in this reviewer execution or supplied source-author task history. Visible source-driven v1/v2 freezes precede candidate use. Not a global forensic proof over other agents or historical sessions.",
+  "not_evaluated": [
+    "Candidate semantic recall/omissions",
+    "Formal original-language summary quality",
+    "FF/RF qualification/consumption",
+    "US complete SEC PDF provenance/behavior"
+  ],
+  "binding_followup": {
+    "reviewed_at": "2026-10-26T19:18:01.838300+00:00",
+    "old_manifest_sha256": "cce5850d8ba08dc0cf61438a6a7824be1cdb1b95590074fe104fd4ca7660ef4f",
+    "new_manifest_sha256": "e8f794fb4b62ac776ace25de6dccfba42c2a1ea2fd0d4d217f005db96189528a",
+    "only_difference": "manifest.independent_review.verdict_location report_json.status -> report_json.verdict",
+    "verification": "Reverse substitution reproduces exact prior reviewed manifest SHA-256. Both gold hashes unchanged.",
+    "verdict": "PASS_WITH_GAPS unchanged"
+  }
+}

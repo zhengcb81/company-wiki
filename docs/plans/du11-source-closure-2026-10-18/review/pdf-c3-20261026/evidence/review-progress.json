@@ -1,0 +1,22 @@
+{
+  "status": "PENDING_INTEGRATION_INCREMENT",
+  "completed_runner_review": "PASS / 0 OPEN on LF ab1ddce7e962934de75c41386da14c8cd334034b09047303a76f368f9787a607",
+  "targeted_receipt": "final-targeted.json",
+  "targeted_passed": 15,
+  "closed_independent_findings": [
+    "date provenance unrelated primary fields",
+    "temporary root leakage before execution try"
+  ],
+  "red_receipt": "independent-before-fix-probe-v2.json",
+  "green_receipt": "independent-after-fix-probe-v2.json",
+  "not_final_binding": true,
+  "pending": "Parent requested content-read composition via complete expected SourceRef separate from strict filing qualification. No final pass claimed for this unreviewed increment.",
+  "owned_temp_roots_cleaned": [
+    ".c3irfinal",
+    ".c3irfix",
+    ".c3irt"
+  ],
+  "boundary_advice": "Preserve normal query default and historical eligibility. Explicit full-Ref read verifies all Ref fields and bytes with the public reader; records filing identity/period/asof NOT_EVALUATED and never fabricates date.",
+  "superseded_by": "review.json",
+  "current_result": "PASS / 0 OPEN final frozen engineering candidate"
+}

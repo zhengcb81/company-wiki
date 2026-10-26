@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-26",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_C3_READY_GLOBAL_SKILLS_SYNCHRONIZED",
+  "overall_status": "ACTIVE_PDF_C3_ENGINEERING_ACCEPTED_FORMAL_SUMMARY_NEXT",
   "parallel_packages_20261025": {
     "status": "W16_W17_W18_ROOT_COMPONENT_ACCEPTED_MERGED",
     "entry": "harness_lanes/20261025/README.md",
@@ -333,7 +333,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "Execute existing PDF-C3: configured real summary semantics, cross-process cache/no duplicate spend recovery, actual RF adoption, held-out companies and eight-step audit loop. W19, Linux portability and global skill sync are complete/published or accepted; do not repeat them or wait for human resume.",
+  "next_step_now": "PDF-C3: publish accepted metadata/lifecycle/exact-ref engineering delta, then one configured HK real summary + activation/restart/cross-run cache + FF/RF public consumers. Source semantic review and fresh-holdout candidate/summary still OPEN. Continue eight-step company loop; do not repeat W19/skill-sync/C1-C2 comparisons.",
   "parallel_work_packages": [
     {
       "id": "IR-REPORT-GENERATION",
@@ -354,7 +354,7 @@
       "review_before_handoff": true
     }
   ],
-  "next_step_after_user_resumes": "Execute existing PDF-C3: configured real summary semantics, cross-process cache/no duplicate spend recovery, actual RF adoption, held-out companies and eight-step audit loop. W19, Linux portability and global skill sync are complete/published or accepted; do not repeat them or wait for human resume.",
+  "next_step_after_user_resumes": "PDF-C3: publish accepted metadata/lifecycle/exact-ref engineering delta, then one configured HK real summary + activation/restart/cross-run cache + FF/RF public consumers. Source semantic review and fresh-holdout candidate/summary still OPEN. Continue eight-step company loop; do not repeat W19/skill-sync/C1-C2 comparisons.",
   "budget_snapshot": {
     "observed_on": "2026-10-25",
     "observation_ref": "review/market-family-upgrade-20261024/formal-v4-and-cards-root-acceptance-20261025.md",
@@ -805,7 +805,7 @@
     },
     "publication_docs_commit": "fa667547"
   },
-  "next_step_after_publication": "Execute existing PDF-C3: configured real summary semantics, cross-process cache/no duplicate spend recovery, actual RF adoption, held-out companies and eight-step audit loop. W19, Linux portability and global skill sync are complete/published or accepted; do not repeat them or wait for human resume.",
+  "next_step_after_publication": "PDF-C3: publish accepted metadata/lifecycle/exact-ref engineering delta, then one configured HK real summary + activation/restart/cross-run cache + FF/RF public consumers. Source semantic review and fresh-holdout candidate/summary still OPEN. Continue eight-step company loop; do not repeat W19/skill-sync/C1-C2 comparisons.",
   "w08_current_review": {
     "selection_path": "review/r1-w08-material-value-20261024/publication/final-source/selection.json",
     "selection_sha256": "44a9ac20e9b83f67bf99976820cf88b7de592b74b0104fca09abc434c0287904",
@@ -840,7 +840,7 @@
     "a02_prior_growth_subfact_restored": true
   },
   "next_steps": [
-    "Execute existing PDF-C3: configured real summary semantics, cross-process cache/no duplicate spend recovery, actual RF adoption, held-out companies and eight-step audit loop. W19, Linux portability and global skill sync are complete/published or accepted; do not repeat them or wait for human resume.",
+    "PDF-C3: publish accepted metadata/lifecycle/exact-ref engineering delta, then one configured HK real summary + activation/restart/cross-run cache + FF/RF public consumers. Source semantic review and fresh-holdout candidate/summary still OPEN. Continue eight-step company loop; do not repeat W19/skill-sync/C1-C2 comparisons.",
     "Keep C3 semantic/LLM/cache/RF acceptance distinct from installed-byte and isolated FF reuse acceptance; preserve source originals, configured budgets and other-owner WIP."
   ],
   "last_updated_utc": "2026-10-25T10:46:55Z",
@@ -2295,7 +2295,7 @@
     "implementation_authorized_by_user": true,
     "observed_date": "2026-10-26"
   },
-  "current_task_override": "Human-prioritized global skill runtime repair complete and independently accepted; publish records, then return to existing C3.",
+  "current_task_override": "Global skill sync repaired and pushed a5a35798; resumed C3 engineering/source freeze, real summaries next.",
   "skill_sync_root_cause_20261026": {
     "status": "COMPLETE_INDEPENDENT_PASS_ZERO_OPEN",
     "entry": "review/skill-sync-root-cause-20261026/README.md",
@@ -2313,5 +2313,20 @@
     "test_root_restored_absent": true,
     "production_default_configuration_functionality": "NOT_TESTED; installed CLI acceptance uses explicit isolated config",
     "independent_review": "review/skill-sync-root-cause-20261026/independent/review.json"
+  },
+  "pdf_c3_20261026": {
+    "status": "ENGINEERING_ACCEPTED_PUBLISHING_REAL_SUMMARY_OPEN",
+    "entry": "review/pdf-c3-20261026/README.md",
+    "independent_engineering": "PASS_ZERO_OPEN",
+    "focused_tests": 50,
+    "independent_tests": 18,
+    "test_counts_overlap": true,
+    "frozen_holdout": "review/pdf-c3-20261026/holdout/manifest.json",
+    "holdout_source_grade": "PASS_WITH_GAPS_20_CHECKPOINTS_101_SUPPORT_UNITS",
+    "holdout_candidate_output_produced": false,
+    "new_model_calls": 0,
+    "next_formal_sample": "c3-hk-kingsoft-h1-2025",
+    "next_model": "configured mimo-v2.6-flash",
+    "native_goal_status": "active"
   }
 }

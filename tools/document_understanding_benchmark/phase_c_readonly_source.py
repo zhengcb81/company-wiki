@@ -32,6 +32,7 @@ def prepare_registered_source(
     descriptor: dict,
     as_of_date: str,
     source_facts: dict | None = None,
+    expected_ref=None,
 ) -> dict:
     from company_wiki.source_catalog.config import load_catalog_config
     from company_wiki.source_catalog.resolver import SourceRequest
@@ -42,9 +43,16 @@ def prepare_registered_source(
         SourceLocationError,
     )
     from company_wiki.source_catalog.source_reader import (
+        SourceRef,
         SourceVersionReader,
         SourceReadError,
     )
+
+    if expected_ref is not None and (
+        not isinstance(expected_ref, SourceRef)
+        or expected_ref.content_sha256 != expected_sha256
+    ):
+        raise ReadonlySourceGap("registered_source_ref_pin_mismatch")
 
     source_config, owned_root = (
         Path(source_config).resolve(),
@@ -99,6 +107,13 @@ def prepare_registered_source(
                 detail={"errors": registration.errors},
             )
         reader = SourceVersionReader(catalog)
+        pinned_ref = None
+        if expected_ref is not None:
+            pinned_ref = reader.query_ref(
+                expected_ref.document_id, expected_ref.source_id, expected_ref.content_sha256
+            )
+            if pinned_ref != expected_ref:
+                raise ReadonlySourceGap("registered_source_ref_pin_mismatch")
         fact_registration = None
         if source_facts is not None:
             if source_facts.get("content_sha256") != expected_sha256:
@@ -106,36 +121,41 @@ def prepare_registered_source(
             # Only the explicitly registered original is in this owned catalog.
             # Resolve its actual registered identifiers; never manufacture a Ref
             # or an HTTP capture from the prepared official descriptor.
-            versions = [row for row in catalog.query(text=expected_sha256, limit=2)
-                        if row.get("content_sha256") == expected_sha256]
-            if len(versions) != 1:
-                raise ReadonlySourceGap("registered_source_fact_version_ambiguous")
-            version = versions[0]
-            fact_ref = reader.query_ref(version["document_id"], version["source_id"], expected_sha256)
+            fact_ref = pinned_ref
+            if fact_ref is None:
+                versions = [row for row in catalog.query(text=expected_sha256, limit=2)
+                            if row.get("content_sha256") == expected_sha256]
+                if len(versions) != 1:
+                    raise ReadonlySourceGap("registered_source_fact_version_ambiguous")
+                version = versions[0]
+                fact_ref = reader.query_ref(version["document_id"], version["source_id"], expected_sha256)
             fact_registration = catalog.record_source_facts(
                 ref=fact_ref, facts=source_facts["facts"], evidence=source_facts["evidence"])
-        request = SourceRequest(
-            entity=descriptor["entity"],
-            document_kind=descriptor["document_kind"],
-            as_of_date=as_of_date,
-            market=descriptor.get("market"),
-            security_id=descriptor.get("security_id"),
-            fiscal_year=descriptor.get("fiscal_year"),
-            fiscal_period=descriptor.get("fiscal_period"),
-            form_type=descriptor.get("form_type"),
-            mode="exact",
-            allow_download=False,
-        )
-        query = reader.query_local(request)
-        if query.status != "found" or len(query.matches) != 1:
-            raise ReadonlySourceGap(
-                "registered_source_" + query.status,
-                detail={
-                    "reason": query.reason,
-                    "excluded_candidates": list(query.excluded_candidates),
-                },
+        if pinned_ref is None:
+            request = SourceRequest(
+                entity=descriptor["entity"],
+                document_kind=descriptor["document_kind"],
+                as_of_date=as_of_date,
+                market=descriptor.get("market"),
+                security_id=descriptor.get("security_id"),
+                fiscal_year=descriptor.get("fiscal_year"),
+                fiscal_period=descriptor.get("fiscal_period"),
+                form_type=descriptor.get("form_type"),
+                mode="exact",
+                allow_download=False,
             )
-        ref = query.matches[0]
+            query = reader.query_local(request)
+            if query.status != "found" or len(query.matches) != 1:
+                raise ReadonlySourceGap(
+                    "registered_source_" + query.status,
+                    detail={"reason": query.reason, "excluded_candidates": list(query.excluded_candidates)},
+                )
+            ref = query.matches[0]
+        else:
+            # Processing an explicit source version makes no historical filing
+            # eligibility claim. The public owner still verifies all Ref fields,
+            # current roots and bytes with its normal read path.
+            ref = pinned_ref
         if ref.content_sha256 != expected_sha256:
             raise ReadonlySourceGap("registered_source_sha_mismatch")
         opened = reader.open_version(ref, purpose="narrative_derivation")
@@ -169,6 +189,10 @@ def prepare_registered_source(
             "source_ref": asdict(ref),
             "manifest": manifest,
             "descriptor_diagnostics": descriptor_diagnostics,
+            "selection": {
+                "mode": "exact_source_version" if pinned_ref is not None else "qualified_source_request",
+                "filing_identity_period_asof_qualification": "NOT_EVALUATED" if pinned_ref is not None else "REQUEST_APPLIED",
+            },
             "source_fact_registration": fact_registration,
             "catalog_config": str(target),
             "raw_copies": 0,

@@ -1,0 +1,142 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.c3irt", "requested_basetemp_len": 41, "cwd_len": 34, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+..........F                                                              [100%]
+================================== FAILURES ===================================
+_ test_registered_runner_passes_real_ref_to_valid_batch_without_starting_model _
+
+    @contextmanager
+    def owned_lake():
+        with tempfile.TemporaryDirectory(prefix="cwpaW03-") as folder:
+            root = Path(folder)
+>           (root / "companies").mkdir()
+
+tests\integration\test_official_source_flow.py:26: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = WindowsPath('C:/Users/郑曾波/AppData/Local/Packages/sandbox.{da6bacf8-79d1-40c8-bb68-71be1abbf4d0}/AC/Temp/cwpaW03-4szcdaur/companies')
+mode = 511, parents = False, exist_ok = False
+
+    def mkdir(self, mode=0o777, parents=False, exist_ok=False):
+        """
+        Create a new directory at this given path.
+        """
+        try:
+>           os.mkdir(self, mode)
+E           PermissionError: [WinError 5] 拒绝访问。: 'C:\\Users\\郑曾波\\AppData\\Local\\Packages\\sandbox.{da6bacf8-79d1-40c8-bb68-71be1abbf4d0}\\AC\\Temp\\cwpaW03-4szcdaur\\companies'
+
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\pathlib\__init__.py:1011: PermissionError
+
+During handling of the above exception, another exception occurred:
+
+path = 'C:\\Users\\郑曾波\\AppData\\Local\\Packages\\sandbox.{da6bacf8-79d1-40c8-bb68-71be1abbf4d0}\\AC\\Temp\\cwpaW03-4szcdaur'
+dir_fd = None
+onexc = <function TemporaryDirectory._rmtree.<locals>.onexc at 0x00000184451ABED0>
+
+    def _rmtree_unsafe(path, dir_fd, onexc):
+        if dir_fd is not None:
+            raise NotImplementedError("dir_fd unavailable on this platform")
+        try:
+            st = os.lstat(path)
+        except OSError as err:
+            onexc(os.lstat, path, err)
+            return
+        try:
+            if _rmtree_islink(st):
+                # symlinks to directories are forbidden, see bug #1669
+                raise OSError("Cannot call rmtree on a symbolic link")
+        except OSError as err:
+            onexc(os.path.islink, path, err)
+            # can't continue even if onexc hook returns
+            return
+        def onerror(err):
+            if not isinstance(err, FileNotFoundError):
+                onexc(os.scandir, err.filename, err)
+        results = os.walk(path, topdown=False, onerror=onerror, followlinks=os._walk_symlinks_as_files)
+        for dirpath, dirnames, filenames in results:
+            for name in dirnames:
+                fullname = os.path.join(dirpath, name)
+                try:
+                    os.rmdir(fullname)
+                except FileNotFoundError:
+                    continue
+                except OSError as err:
+                    onexc(os.rmdir, fullname, err)
+            for name in filenames:
+                fullname = os.path.join(dirpath, name)
+                try:
+                    os.unlink(fullname)
+                except FileNotFoundError:
+                    continue
+                except OSError as err:
+                    onexc(os.unlink, fullname, err)
+        try:
+>           os.rmdir(path)
+E           PermissionError: [WinError 5] 拒绝访问。: 'C:\\Users\\郑曾波\\AppData\\Local\\Packages\\sandbox.{da6bacf8-79d1-40c8-bb68-71be1abbf4d0}\\AC\\Temp\\cwpaW03-4szcdaur'
+
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\shutil.py:707: PermissionError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/.c3irt/test_registered_runner_passes_0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000018445271A90>
+
+    def test_registered_runner_passes_real_ref_to_valid_batch_without_starting_model(
+        tmp_path, monkeypatch
+    ):
+        from tools.document_understanding_benchmark import phase_c_runner as runner
+    
+>       with reuse.setup_source("http://127.0.0.1:1/chat/completions") as (
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            root,
+            catalog,
+            config,
+            _,
+            imported,
+            _,
+        ):
+
+tests\test_phase_c_readonly_source.py:365: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\contextlib.py:141: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+tests\integration\test_narrative_generation_reuse.py:34: in setup_source
+    with official.owned_lake() as (root, catalog):
+         ^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\contextlib.py:141: in __enter__
+    return next(self.gen)
+           ^^^^^^^^^^^^^^
+tests\integration\test_official_source_flow.py:24: in owned_lake
+    with tempfile.TemporaryDirectory(prefix="cwpaW03-") as folder:
+         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\tempfile.py:971: in __exit__
+    self.cleanup()
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\tempfile.py:975: in cleanup
+    self._rmtree(self.name, ignore_errors=self._ignore_cleanup_errors)
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\tempfile.py:955: in _rmtree
+    _shutil.rmtree(name, onexc=onexc)
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\shutil.py:852: in rmtree
+    _rmtree_impl(path, dir_fd, onexc)
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\shutil.py:711: in _rmtree_unsafe
+    onexc(os.rmdir, path, err)
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\tempfile.py:927: in onexc
+    _resetperms(path)
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\tempfile.py:287: in _resetperms
+    _dont_follow_symlinks(_os.chmod, path, 0o700)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+func = <built-in function chmod>
+path = 'C:\\Users\\郑曾波\\AppData\\Local\\Packages\\sandbox.{da6bacf8-79d1-40c8-bb68-71be1abbf4d0}\\AC\\Temp\\cwpaW03-4szcdaur'
+args = (448,)
+
+    def _dont_follow_symlinks(func, path, *args):
+        # Pass follow_symlinks=False, unless not supported on this platform.
+        if func in _os.supports_follow_symlinks:
+>           func(path, *args, follow_symlinks=False)
+E           PermissionError: [WinError 5] 拒绝访问。: 'C:\\Users\\郑曾波\\AppData\\Local\\Packages\\sandbox.{da6bacf8-79d1-40c8-bb68-71be1abbf4d0}\\AC\\Temp\\cwpaW03-4szcdaur'
+
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\tempfile.py:276: PermissionError
+=========================== short test summary info ===========================
+FAILED tests/test_phase_c_readonly_source.py::test_registered_runner_passes_real_ref_to_valid_batch_without_starting_model
+1 failed, 10 passed in 2.86s
+
+STDERR

@@ -1,0 +1,124 @@
+{
+  "schema_version": "du-gold/1",
+  "sample_id": "c3-hk-kingsoft-h1-2025",
+  "source_sha256": "4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+  "scope": "development",
+  "language": "zh",
+  "facts": [
+    {
+      "id": "hk-industry-cloud-closure",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "any_support_sets": [
+        [
+          {
+            "page": 13,
+            "exact_quote": "來自行業雲服務的收入為人民幣1,340.4百萬元",
+            "locator": "loc:v1/page:13/source-checkpoint:hk-industry-cloud-closure"
+          },
+          {
+            "page": 13,
+            "exact_quote": "較二零二四年同期的人民幣1,245.4百萬元增加7.6%",
+            "locator": "loc:v1/page:13/source-checkpoint:hk-industry-cloud-closure"
+          },
+          {
+            "page": 13,
+            "exact_quote": "主要是由於不斷增長的IT需求",
+            "locator": "loc:v1/page:13/source-checkpoint:hk-industry-cloud-closure"
+          },
+          {
+            "page": 13,
+            "exact_quote": "向垂直行業客戶複製行業解決方案的能力",
+            "locator": "loc:v1/page:13/source-checkpoint:hk-industry-cloud-closure"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "來自行業雲服務的收入為人民幣1,340.4百萬元",
+        "較二零二四年同期的人民幣1,245.4百萬元增加7.6%",
+        "主要是由於不斷增長的IT需求",
+        "向垂直行業客戶複製行業解決方案的能力"
+      ],
+      "counterexample_observations": [
+        "增加23.0%"
+      ]
+    },
+    {
+      "id": "hk-rd-period-scope",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "any_support_sets": [
+        [
+          {
+            "page": 11,
+            "exact_quote": "報告期內",
+            "locator": "loc:v1/page:11/source-checkpoint:hk-rd-period-scope"
+          },
+          {
+            "page": 11,
+            "exact_quote": "研發費用為人民幣420.5百萬元",
+            "locator": "loc:v1/page:11/source-checkpoint:hk-rd-period-scope"
+          },
+          {
+            "page": 11,
+            "exact_quote": "截至二零二五年六月三十日",
+            "locator": "loc:v1/page:11/source-checkpoint:hk-rd-period-scope"
+          },
+          {
+            "page": 11,
+            "exact_quote": "研發人員達1,094人",
+            "locator": "loc:v1/page:11/source-checkpoint:hk-rd-period-scope"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "報告期內",
+        "研發費用為人民幣420.5百萬元",
+        "截至二零二五年六月三十日",
+        "研發人員達1,094人"
+      ],
+      "counterexample_observations": [
+        "620人"
+      ]
+    },
+    {
+      "id": "hk-outlook-not-actual",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "any_support_sets": [
+        [
+          {
+            "page": 11,
+            "exact_quote": "展望下半年",
+            "locator": "loc:v1/page:11/source-checkpoint:hk-outlook-not-actual"
+          },
+          {
+            "page": 11,
+            "exact_quote": "將維持高質量發展和可持續發展戰略",
+            "locator": "loc:v1/page:11/source-checkpoint:hk-outlook-not-actual"
+          },
+          {
+            "page": 11,
+            "exact_quote": "全面提升AI能力",
+            "locator": "loc:v1/page:11/source-checkpoint:hk-outlook-not-actual"
+          },
+          {
+            "page": 11,
+            "exact_quote": "我們旨在持續",
+            "locator": "loc:v1/page:11/source-checkpoint:hk-outlook-not-actual"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "展望下半年",
+        "將維持高質量發展和可持續發展戰略",
+        "全面提升AI能力",
+        "我們旨在持續"
+      ],
+      "counterexample_observations": [
+        "研發人員達"
+      ]
+    }
+  ],
+  "source_checkpoint_derivation": "Immutable C2 business-checkpoints; no candidate/summary output consulted for this projection."
+}

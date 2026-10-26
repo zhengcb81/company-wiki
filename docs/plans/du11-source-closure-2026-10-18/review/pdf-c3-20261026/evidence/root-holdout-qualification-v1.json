@@ -1,0 +1,66 @@
+[
+  {
+    "sample_id": "c3-cn-huali-ir-202305",
+    "source_sha256": "d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+    "model_calls": 0,
+    "raw_copies": 0,
+    "status": "SOURCE_GAP",
+    "reason": "registered_source_not_found",
+    "detail": {
+      "reason": "no_local_match",
+      "excluded_candidates": [
+        {
+          "source_ref": {
+            "document_id": "urn:company-wiki:document:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+            "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+            "content_sha256": "d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+            "byte_size": 238982,
+            "mime_type": "application/pdf",
+            "schema_version": "2.0"
+          },
+          "qualification": {
+            "publication_status": "unknown",
+            "as_of_date": "2026-10-26",
+            "local_bytes_status": "not_checked",
+            "historical_date_eligible": false,
+            "historical_reuse_eligible": false,
+            "schema_version": "source-qualification/1"
+          }
+        }
+      ]
+    },
+    "test_root_restored_absent": true
+  },
+  {
+    "sample_id": "c3-us-berkshire-letter-2008",
+    "source_sha256": "46920242cbb861fd844453d5e20edd8b0ecea977d85111cf2a7cfb249913c6cf",
+    "model_calls": 0,
+    "raw_copies": 0,
+    "status": "SOURCE_GAP",
+    "reason": "registered_source_not_found",
+    "detail": {
+      "reason": "no_local_match",
+      "excluded_candidates": [
+        {
+          "source_ref": {
+            "document_id": "urn:company-wiki:document:sha256:46920242cbb861fd844453d5e20edd8b0ecea977d85111cf2a7cfb249913c6cf",
+            "source_id": "urn:company-wiki:source:sha256:46920242cbb861fd844453d5e20edd8b0ecea977d85111cf2a7cfb249913c6cf",
+            "content_sha256": "46920242cbb861fd844453d5e20edd8b0ecea977d85111cf2a7cfb249913c6cf",
+            "byte_size": 132043,
+            "mime_type": "application/pdf",
+            "schema_version": "2.0"
+          },
+          "qualification": {
+            "publication_status": "unknown",
+            "as_of_date": "2026-10-26",
+            "local_bytes_status": "not_checked",
+            "historical_date_eligible": false,
+            "historical_reuse_eligible": false,
+            "schema_version": "source-qualification/1"
+          }
+        }
+      ]
+    },
+    "test_root_restored_absent": true
+  }
+]

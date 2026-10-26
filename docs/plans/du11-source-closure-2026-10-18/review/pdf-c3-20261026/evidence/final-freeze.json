@@ -1,0 +1,38 @@
+{
+  "argv": [
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-m",
+    "pytest",
+    "-q",
+    "tests/test_phase_c_sample_metadata.py",
+    "tests/test_phase_c_readonly_source.py::test_exact_source_content_read_is_separate_from_historical_filing_qualification",
+    "tests/test_phase_c_readonly_source.py::test_explicit_version_read_cannot_substitute_another_document",
+    "tests/test_phase_c_readonly_source.py::test_registered_runner_passes_real_ref_to_valid_batch_without_starting_model",
+    ".planning/c3-20261026/independent-runner/test_independent_exact_ref.py",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c3irfreeze\\p",
+    "--junitxml",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\c3-20261026\\independent-runner\\final-freeze.xml"
+  ],
+  "exit_code": 0,
+  "elapsed_seconds": 13.872,
+  "source_lf_sha256_before": {
+    "tools/document_understanding_benchmark/phase_c_runner.py": "352e00f7c46266facef8f504ce831266138df464604b106f2e17d723c837cc7f",
+    "tools/document_understanding_benchmark/phase_c_readonly_source.py": "534cef13a299b506573fdaa54141793e9731c2ca6d6253869b8e85c77b63db34",
+    "tests/test_phase_c_sample_metadata.py": "285e2dc384337239025117fa8925ef3e6f104eb1f9c3958e80e04c1bfbed050e",
+    "tests/test_phase_c_readonly_source.py": "fc0bfc8b7b344347ad2be95f7340cd9c14068eb5826f9a46dccac31812391f16"
+  },
+  "source_lf_sha256_after": {
+    "tools/document_understanding_benchmark/phase_c_runner.py": "352e00f7c46266facef8f504ce831266138df464604b106f2e17d723c837cc7f",
+    "tools/document_understanding_benchmark/phase_c_readonly_source.py": "534cef13a299b506573fdaa54141793e9731c2ca6d6253869b8e85c77b63db34",
+    "tests/test_phase_c_sample_metadata.py": "285e2dc384337239025117fa8925ef3e6f104eb1f9c3958e80e04c1bfbed050e",
+    "tests/test_phase_c_readonly_source.py": "fc0bfc8b7b344347ad2be95f7340cd9c14068eb5826f9a46dccac31812391f16"
+  },
+  "stable_bindings": true,
+  "fixture_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c3irfreeze",
+  "scope": "14 metadata + 2 exact-ref +1 default held +1 independent six-field and actual exact-ref held composition",
+  "external_network_calls": 0,
+  "model_calls": 0
+}

@@ -1,0 +1,66 @@
+{
+  "snapshot": "git HEAD before C3 uncommitted edits; not claimed as400727 exact replay",
+  "source_lf_sha256": "dfdfcee660a56f37788cadfb7fea7b28c330b4b62f2599b71d1d56e842f375fe",
+  "results": [
+    {
+      "case": "primary_title_only_no_date",
+      "provenance": null,
+      "status": null,
+      "error": {
+        "type": "RuntimeError",
+        "message": "unsafe phase C cleanup target"
+      },
+      "allocated_roots": 1,
+      "leaked_before_independent_cleanup": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\c3ir-zc8u5usl\\cwplC-cfo04fei"
+      ],
+      "model_post_attempts": 0
+    },
+    {
+      "case": "primary_title_only_observed_date",
+      "provenance": null,
+      "status": null,
+      "error": {
+        "type": "RuntimeError",
+        "message": "unsafe phase C cleanup target"
+      },
+      "allocated_roots": 1,
+      "leaked_before_independent_cleanup": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\c3ir-zc8u5usl\\cwplC-z2e6372t"
+      ],
+      "model_post_attempts": 0
+    },
+    {
+      "case": "missing_original",
+      "provenance": null,
+      "status": null,
+      "error": {
+        "type": "FileNotFoundError",
+        "message": "[WinError 2] 系统找不到指定的文件。: 'C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\c3ir-zc8u5usl\\\\not-present.txt'"
+      },
+      "allocated_roots": 1,
+      "leaked_before_independent_cleanup": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\c3ir-zc8u5usl\\cwplC-jksotlto"
+      ],
+      "model_post_attempts": 0
+    },
+    {
+      "case": "invalid_gold_json",
+      "provenance": null,
+      "status": null,
+      "error": {
+        "type": "JSONDecodeError",
+        "message": "Expecting property name enclosed in double quotes: line 1 column 2 (char 1)"
+      },
+      "allocated_roots": 1,
+      "leaked_before_independent_cleanup": [
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\c3ir-zc8u5usl\\cwplC-h7mgbox3"
+      ],
+      "model_post_attempts": 0
+    }
+  ],
+  "holdout_read": false,
+  "network_calls": 0,
+  "model_calls": 0,
+  "manual_owned_cleanup_done": true
+}

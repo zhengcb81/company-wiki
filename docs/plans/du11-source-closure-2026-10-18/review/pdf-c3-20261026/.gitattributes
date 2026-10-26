@@ -1,0 +1,5 @@
+.gitattributes text eol=lf
+*.py text eol=lf
+*.json -text -eol whitespace=cr-at-eol
+evidence/** -text -eol whitespace=cr-at-eol
+holdout/** -text -eol whitespace=cr-at-eol

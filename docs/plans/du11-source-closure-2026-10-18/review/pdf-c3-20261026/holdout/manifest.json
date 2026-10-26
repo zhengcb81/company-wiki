@@ -1,0 +1,196 @@
+{
+  "schema_version": "pdf-c3-holdout-manifest/1",
+  "frozen_at": "2026-10-26T19:12:50.407666+00:00",
+  "frozen_before_candidate_output": true,
+  "source_author_agent": "/root/c3_holdout_source_freeze",
+  "base_code_commit": "a5a357981490bde65cb5dca3a9ba75f1d2841662",
+  "samples": [
+    {
+      "sample_id": "c3-us-berkshire-letter-2008",
+      "gold_file": "c3-us-berkshire-letter-2008.gold.json",
+      "gold_sha256": "a5db9f9f7eeb536c3cbab367aa7b172a8f39268bdbca6f9c0b0bdf7e55a2ee22",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:46920242cbb861fd844453d5e20edd8b0ecea977d85111cf2a7cfb249913c6cf",
+        "source_id": "urn:company-wiki:source:sha256:46920242cbb861fd844453d5e20edd8b0ecea977d85111cf2a7cfb249913c6cf",
+        "content_sha256": "46920242cbb861fd844453d5e20edd8b0ecea977d85111cf2a7cfb249913c6cf",
+        "byte_size": 132043,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      },
+      "market": "US",
+      "language": "en",
+      "document_kind": "investor_relations",
+      "company": "Berkshire Hathaway Inc.",
+      "freshness": "fresh_before_c3_candidate",
+      "checkpoints": 10,
+      "qualification_status": "SOURCE_CONTENT_FROZEN_METADATA_GAP",
+      "source_gap": [
+        "Current manifest says HK / Unresolved and broker_research; this is a source-metadata gap, not permission to guess US in FF/RF.",
+        "No official acquisition/source_url receipt binds these exact bytes; document typography and content plus existing SEC/Nasdaq identity snapshot support content identity only.",
+        "True US SEC filing PDF coverage remains unfilled by this standalone shareholder letter."
+      ],
+      "gold_version": 2
+    },
+    {
+      "sample_id": "c3-cn-huali-ir-202305",
+      "gold_file": "c3-cn-huali-ir-202305.gold.json",
+      "gold_sha256": "f00f127585d4015fbb8592a8254327f205386877cbc03481b39eeb294932f6f9",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+        "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+        "content_sha256": "d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+        "byte_size": 238982,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      },
+      "market": "CN",
+      "language": "zh",
+      "document_kind": "investor_relations",
+      "company": "中山华利实业集团股份有限公司",
+      "freshness": "fresh_before_c3_candidate",
+      "checkpoints": 10,
+      "qualification_status": "SOURCE_CONTENT_FROZEN_METADATA_GAP",
+      "source_gap": [
+        "Source manifest published_date/source_url/language are absent; meeting dates and identity are document-internal evidence, not an invented official download receipt.",
+        "No separate new-business segment or quantified new-client revenue is disclosed in the reviewed content; new-customer onboarding/capacity expansion are the applicable categories."
+      ],
+      "gold_version": 2
+    }
+  ],
+  "inventory_observation": {
+    "read_only_catalog": true,
+    "registered_US_market_items": {
+      "text/html": 6,
+      "text/plain": 1,
+      "application/pdf": 0
+    },
+    "native_pdf_found_outside_correct_US_metadata": true,
+    "US_SEC_filing_PDF_gap_remains": true
+  },
+  "official_identity_snapshot": {
+    "schema_version": "1.0",
+    "retrieved_at": "2026-07-19T08:04:38Z",
+    "sha256": "8f946cab293f66f0b80bec8660ec3fda5e7189d15ddf18b14d33e8bff59d916b",
+    "matching_records": [
+      {
+        "active": true,
+        "aliases": [
+          "BERKSHIRE HATHAWAY",
+          "Berkshire Hathaway Inc Common Stock",
+          "Berkshire Hathaway Inc. Common Stock"
+        ],
+        "canonical_name": "BERKSHIRE HATHAWAY INC",
+        "exchange": "NYSE",
+        "identifiers": {
+          "cik": "0001067983"
+        },
+        "market": "US",
+        "schema_version": "1.0",
+        "security_id": "BRK-A",
+        "source_name": "sec_nasdaq",
+        "source_record_id": "0001067983",
+        "source_url": "https://www.sec.gov/files/company_tickers.json",
+        "ticker": "BRK-A"
+      },
+      {
+        "active": true,
+        "aliases": [
+          "BERKSHIRE HATHAWAY",
+          "Berkshire Hathaway Inc New Common Stock",
+          "Berkshire Hathaway Inc. New Common Stock"
+        ],
+        "canonical_name": "BERKSHIRE HATHAWAY INC",
+        "exchange": "NYSE",
+        "identifiers": {
+          "cik": "0001067983"
+        },
+        "market": "US",
+        "schema_version": "1.0",
+        "security_id": "BRK-B",
+        "source_name": "sec_nasdaq",
+        "source_record_id": "0001067983",
+        "source_url": "https://www.sec.gov/files/company_tickers.json",
+        "ticker": "BRK-B"
+      }
+    ],
+    "scope_limit": "Issuer/exchange/CIK only; does not authenticate this shareholder-letter byte stream or prove its source_url."
+  },
+  "forbidden_actions_observed": {
+    "paid_calls": 0,
+    "downloads": 0,
+    "producer_calls": 0,
+    "producer_output_reads": 0,
+    "production_writes": 0,
+    "raw_copies": 0
+  },
+  "exclusion_inputs": [
+    "tools/holdout_replay/manifest.json",
+    "tools/document_understanding_benchmark/holdout.json",
+    "tools/document_understanding_benchmark/*manifest*.json",
+    "docs/plans/du11-source-closure-2026-10-18/review existing JSON/Markdown literal company/hash search"
+  ],
+  "excluded_company_examples": [
+    "中微公司",
+    "药明康德",
+    "金山云",
+    "微软",
+    "紫金矿业",
+    "百济神州",
+    "海康威视",
+    "曙光数创",
+    "Alphabet",
+    "广联达",
+    "雅克科技",
+    "阿里巴巴",
+    "壁仞科技",
+    "MongoDB",
+    "NVIDIA",
+    "名创优品",
+    "万润股份",
+    "鼎龙股份",
+    "珀莱雅",
+    "吉比特",
+    "科大讯飞"
+  ],
+  "owner_correction_recommendation": {
+    "berkshire": {
+      "market": "US",
+      "security_id": "BRK-A",
+      "identifiers": {
+        "cik": "0001067983"
+      },
+      "entity": "BERKSHIRE HATHAWAY INC",
+      "document_kind": "investor_relations",
+      "fiscal_year": 2008,
+      "language": "en",
+      "published_date": null,
+      "published_date_basis": "Unknown; printed signature date is separately recorded and cannot establish official publication date.",
+      "source_url": null,
+      "form_type": null,
+      "constraint": "Do not mark as SEC 10-K; preserve original manifest and classify letter. Any assertion must pass existing source-facts owner in isolated test catalog.",
+      "letter_signed_date": "2009-02-27"
+    },
+    "huali": {
+      "market": "CN",
+      "security_id": "300979",
+      "entity": "中山华利实业集团股份有限公司",
+      "document_kind": "investor_relations",
+      "language": "zh",
+      "published_date": null,
+      "event_dates": [
+        "2023-05-11",
+        "2023-05-12",
+        "2023-05-17",
+        "2023-05-18"
+      ],
+      "constraint": "Filename date is not source-proven publication date; no fiscal quarter qualification from event dates."
+    }
+  },
+  "independent_review": {
+    "report_json": "independent-source-review.json",
+    "report_markdown": "independent-source-review.md",
+    "verdict_location": "report_json.verdict",
+    "state_at_source_freeze": "Final source-review receipt is stored separately; manifest is immutable before final review binding."
+  },
+  "source_review_revision_at": "2026-10-26T19:15:18.073179+00:00"
+}

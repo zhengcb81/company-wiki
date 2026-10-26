@@ -1,0 +1,1835 @@
+{
+  "schema_version": "pdf-c3-source-gold/1",
+  "sample_id": "c3-cn-huali-ir-202305",
+  "gold_version": 2,
+  "frozen_at": "2026-10-26T19:12:50.407666+00:00",
+  "frozen_before_candidate_output": true,
+  "source_ref": {
+    "document_id": "urn:company-wiki:document:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+    "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+    "content_sha256": "d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+    "byte_size": 238982,
+    "mime_type": "application/pdf",
+    "schema_version": "2.0"
+  },
+  "source_manifest_observed": {
+    "document_id": "urn:company-wiki:document:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+    "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+    "content_sha256": "d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+    "byte_size": 238982,
+    "mime_type": "application/pdf",
+    "title": "华利集团：300979华利集团调研活动信息20230519",
+    "document_kind": "investor_relations",
+    "published_date": null,
+    "source_url": null,
+    "retrieved_at": null,
+    "collector_name": null,
+    "collector_version": null,
+    "canonical_entity_id": null,
+    "display_name": null,
+    "market": "CN",
+    "security_id": "华利集团",
+    "fiscal_year": null,
+    "fiscal_period": null,
+    "period_end": null,
+    "form_type": null,
+    "provider": null,
+    "provider_document_id": null,
+    "language": null
+  },
+  "source_identity": {
+    "entity": "中山华利实业集团股份有限公司",
+    "market_content_classification": "CN",
+    "document_kind_content_classification": "investor_relations",
+    "fiscal_year": null,
+    "language": "zh",
+    "classification_basis": "document-internal text + visual page check; market for Berkshire also matches existing official security-master snapshot"
+  },
+  "reading_recipe": {
+    "format": "pdf",
+    "parser_name": "selective_narrative_parser",
+    "parser_version": "0.1.1",
+    "reader_recipe": "native-pdf/1",
+    "runtime": {
+      "pymupdf": "1.28.2"
+    },
+    "reader_implementation_sha256": "c7c000d7da38361a83fc45a4ce526543e93113bdafb8fb4a132cd1bb1cc94c2e"
+  },
+  "gold_locator_reader_version": "0.8.0 native read, no selector invoked",
+  "physical_page_count": 5,
+  "reading_scope": {
+    "fully_read_physical_pages": [
+      1,
+      2,
+      3
+    ],
+    "visual_checked_physical_pages": [
+      1,
+      2,
+      3
+    ],
+    "skimmed_physical_pages": [
+      4,
+      5
+    ],
+    "unread_physical_pages": [],
+    "page_number_note": "One-based physical PDF page numbers; appendix participant names on pages 4-5 are not operating evidence."
+  },
+  "checkpoints": [
+    {
+      "checkpoint_id": "HUALI-01",
+      "categories": [
+        "identity",
+        "period",
+        "document_kind"
+      ],
+      "expected_source_meaning": "Issuer is 中山华利实业集团股份有限公司, security 300979; IR record 2023-010 covers meetings on May 11, 12, 17 and 18, 2023. This is not a quarterly financial report.",
+      "critical": true,
+      "required_support_sets": [
+        [
+          "p1-paragraph0",
+          "p1-paragraph1",
+          "p1-paragraph2",
+          "p1-paragraph8"
+        ]
+      ],
+      "support_semantics": "All members of at least one set are required; equivalent replayable source spans may replace paragraph segmentation without dropping semantic context.",
+      "forbidden_misattributions": [
+        "Do not use filename date May 19 as the meeting date.",
+        "Do not equate event dates with a fiscal reporting period."
+      ]
+    },
+    {
+      "checkpoint_id": "HUALI-02",
+      "categories": [
+        "industry",
+        "forward_looking"
+      ],
+      "expected_source_meaning": "Brand destocking started affecting manufacturers in H2 2022, especially Q4, and significantly affected Q1 2023 shipments; destocking timing differs by brand and only some brands expected Q2 shipments to improve.",
+      "critical": true,
+      "required_support_sets": [
+        [
+          "p1-paragraph14",
+          "p1-paragraph15",
+          "p1-paragraph16",
+          "p1-paragraph17",
+          "p1-paragraph18",
+          "p1-paragraph19",
+          "p1-paragraph20",
+          "p1-paragraph21",
+          "p1-paragraph22",
+          "p1-paragraph23",
+          "p1-paragraph24",
+          "p1-paragraph25",
+          "p1-paragraph26"
+        ]
+      ],
+      "support_semantics": "All members of at least one set are required; equivalent replayable source spans may replace paragraph segmentation without dropping semantic context.",
+      "forbidden_misattributions": [
+        "Do not claim industry destocking had ended or all brands improved in Q2."
+      ]
+    },
+    {
+      "checkpoint_id": "HUALI-03",
+      "categories": [
+        "business_progress",
+        "new_customer"
+      ],
+      "expected_source_meaning": "Some brand orders were down year on year and others grew; new-customer orders were expected to partly fill declining customers’ order gaps.",
+      "critical": true,
+      "required_support_sets": [
+        [
+          "p1-paragraph27",
+          "p1-paragraph28",
+          "p1-paragraph29",
+          "p1-paragraph30",
+          "p1-paragraph31",
+          "p1-paragraph32"
+        ]
+      ],
+      "support_semantics": "All members of at least one set are required; equivalent replayable source spans may replace paragraph segmentation without dropping semantic context.",
+      "forbidden_misattributions": [
+        "Do not infer every customer declined or new orders fully offset the decline.",
+        "Do not convert the expected new-customer offset into a completed offset already realized."
+      ]
+    },
+    {
+      "checkpoint_id": "HUALI-04",
+      "categories": [
+        "operating_number",
+        "negation"
+      ],
+      "expected_source_meaning": "For urgent additional orders, some deliveries can be made in 2-3 weeks; the company does not raise prices for urgent orders, which increase revenue scale and can benefit scale efficiency.",
+      "critical": true,
+      "required_support_sets": [
+        [
+          "p1-paragraph33",
+          "p1-paragraph34",
+          "p1-paragraph35",
+          "p1-paragraph36",
+          "p1-paragraph37",
+          "p1-paragraph38",
+          "p2-paragraph0",
+          "p2-paragraph1",
+          "p2-paragraph2"
+        ]
+      ],
+      "support_semantics": "All members of at least one set are required; equivalent replayable source spans may replace paragraph segmentation without dropping semantic context.",
+      "forbidden_misattributions": [
+        "Do not claim an urgent-order price premium or that all orders are delivered in 2-3 weeks."
+      ]
+    },
+    {
+      "checkpoint_id": "HUALI-05",
+      "categories": [
+        "business_progress",
+        "attribution"
+      ],
+      "expected_source_meaning": "Gross-margin performance is attributed to customer/product mix adjustment, lean manufacturing and factory operating efficiency; materials, labor, utilization and employee skill also affect it.",
+      "critical": true,
+      "required_support_sets": [
+        [
+          "p2-paragraph3",
+          "p2-paragraph4",
+          "p2-paragraph5",
+          "p2-paragraph6",
+          "p2-paragraph7",
+          "p2-paragraph8"
+        ]
+      ],
+      "support_semantics": "All members of at least one set are required; equivalent replayable source spans may replace paragraph segmentation without dropping semantic context.",
+      "forbidden_misattributions": [
+        "Do not reduce the explanation to raw-material price declines or quote an undisclosed gross-margin rate."
+      ]
+    },
+    {
+      "checkpoint_id": "HUALI-06",
+      "categories": [
+        "capacity",
+        "forward_looking"
+      ],
+      "expected_source_meaning": "Capacity planning follows new/existing customer orders with flexibility; company planned active expansion and estimated 1-2 years from construction to acceptance after land formalities were completed.",
+      "critical": true,
+      "required_support_sets": [
+        [
+          "p2-paragraph9",
+          "p2-paragraph10",
+          "p2-paragraph11",
+          "p2-paragraph12",
+          "p2-paragraph13",
+          "p2-paragraph14",
+          "p2-paragraph15",
+          "p2-paragraph16",
+          "p2-paragraph17"
+        ]
+      ],
+      "support_semantics": "All members of at least one set are required; equivalent replayable source spans may replace paragraph segmentation without dropping semantic context.",
+      "forbidden_misattributions": [
+        "Do not report 1-2 years as order lead time or as elapsed time for a completed plant."
+      ]
+    },
+    {
+      "checkpoint_id": "HUALI-07",
+      "categories": [
+        "new_capacity",
+        "operating_number",
+        "forward_looking"
+      ],
+      "expected_source_meaning": "Indonesia phase I and II total expected capacity is 50-60 million pairs per year, with phase I expected to begin production in 2023; both are phased, and timing depends on orders, construction and local approval.",
+      "critical": true,
+      "required_support_sets": [
+        [
+          "p2-paragraph18",
+          "p2-paragraph19",
+          "p2-paragraph20",
+          "p2-paragraph21",
+          "p2-paragraph22",
+          "p2-paragraph23",
+          "p2-paragraph24",
+          "p2-paragraph25",
+          "p2-paragraph26",
+          "p2-paragraph27"
+        ]
+      ],
+      "support_semantics": "All members of at least one set are required; equivalent replayable source spans may replace paragraph segmentation without dropping semantic context.",
+      "forbidden_misattributions": [
+        "Do not state 50-60 million pairs already produced or assign all capacity to phase I.",
+        "Do not omit conditions or convert expected production into completed production."
+      ]
+    },
+    {
+      "checkpoint_id": "HUALI-08",
+      "categories": [
+        "operating_number",
+        "negation",
+        "currency"
+      ],
+      "expected_source_meaning": "FX result was a gain of RMB82 million in 2022 and approximately a loss of RMB35 million in Q1 2023; Hong Kong trade subsidiaries use USD statements, mainland entities RMB and overseas subsidiaries local currencies.",
+      "critical": true,
+      "required_support_sets": [
+        [
+          "p2-paragraph28",
+          "p2-paragraph29",
+          "p2-paragraph30",
+          "p2-paragraph31",
+          "p2-paragraph32",
+          "p2-paragraph33",
+          "p2-paragraph34",
+          "p2-paragraph35",
+          "p2-paragraph36",
+          "p2-paragraph37",
+          "p2-paragraph38",
+          "p2-paragraph39",
+          "p2-paragraph40",
+          "p2-paragraph41"
+        ]
+      ],
+      "support_semantics": "All members of at least one set are required; equivalent replayable source spans may replace paragraph segmentation without dropping semantic context.",
+      "forbidden_misattributions": [
+        "Do not reverse gain/loss, use USD for the disclosed FX results, or mix annual 2022 and Q1 2023."
+      ]
+    },
+    {
+      "checkpoint_id": "HUALI-09",
+      "categories": [
+        "attribution",
+        "negative_control"
+      ],
+      "expected_source_meaning": "Converse and Vans each represented less than 20% of the company’s 2022 revenue; although they have high vulcanized-shoe exposure they also have some cold-cemented shoes.",
+      "critical": true,
+      "required_support_sets": [
+        [
+          "p3-paragraph0",
+          "p3-paragraph1",
+          "p3-paragraph2",
+          "p3-paragraph3"
+        ]
+      ],
+      "support_semantics": "All members of at least one set are required; equivalent replayable source spans may replace paragraph segmentation without dropping semantic context.",
+      "forbidden_misattributions": [
+        "Do not say vulcanized shoes account for less than 20% of total company revenue.",
+        "Do not combine the two brand shares into an asserted less-than-20% total."
+      ]
+    },
+    {
+      "checkpoint_id": "HUALI-10",
+      "categories": [
+        "new_customer",
+        "business_process"
+      ],
+      "expected_source_meaning": "Most factories serve one brand with independent development/production teams; new brands may initially use separate premises/lines inside another brand factory and get a dedicated new factory once volume reaches sufficient scale.",
+      "critical": true,
+      "required_support_sets": [
+        [
+          "p3-paragraph4",
+          "p3-paragraph5",
+          "p3-paragraph6",
+          "p3-paragraph7",
+          "p3-paragraph8",
+          "p3-paragraph9",
+          "p3-paragraph10"
+        ]
+      ],
+      "support_semantics": "All members of at least one set are required; equivalent replayable source spans may replace paragraph segmentation without dropping semantic context.",
+      "forbidden_misattributions": [
+        "Do not describe new-brand dedicated factories as already completed or treat client brands as company-owned brands."
+      ]
+    }
+  ],
+  "support_units": [
+    {
+      "support_id": "p1-paragraph0",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 1,
+        "paragraph_index": 0,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "证券代码：300979                                    证券简称：华利集团",
+      "quote_sha256": "8a6ddb5ea06888e5e082c2d7e9b46165fb8d916091c0f3b466231e472757b309",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:67ae521235b0f98c8a2e0207e0f4777f69a8b40c092dc210528240e6508a700a",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p1-paragraph1",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 1,
+        "paragraph_index": 1,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "中山华利实业集团股份有限公司投资者关系活动记录表",
+      "quote_sha256": "60a78086659ec4edb259b1b434c1edf9c74c8ee2b1c766a812ad8005f3c94cc8",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:135046f69993607293301dca6737d5bdc7d41522fe3a644bcff7ada4016ab2ac",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p1-paragraph2",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 1,
+        "paragraph_index": 2,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "编号：2023-010",
+      "quote_sha256": "d4e717618b3ffa8ee4ed6bb8fda59ae5166e23baf9563ca265553802eb5dd1bc",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:eb26bf47633e0a788fb1c3a92693eaa5182ad42a774c200a18e404bce46e57cc",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p1-paragraph8",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 1,
+        "paragraph_index": 8,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "时间 \n2023年5月11日、2023年5月12日、2023年5月17日、2023年5月18日",
+      "quote_sha256": "c177beda473d3b7ca8e0cf3cd1bdf3e493693f3dc6bde5a9a124ae431717a10e",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:a9527ab2efafdda603f1a6a9c596b4ea4f39ee4df835f0f8f6ebd8b6ce2dd145",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p1-paragraph14",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 1,
+        "paragraph_index": 14,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "Q：预计品牌去库存什么时候可以结束？",
+      "quote_sha256": "0d2802b67d706cdb7f1638c7413774a468c25c50d5f1e5ee2efbde4d5e89abf8",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:21ac53a1c0cf9f0f76047be1473d79d6d8eef51e6283085addfef37e7793083a",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p1-paragraph15",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 1,
+        "paragraph_index": 15,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "A：从2022 年中很多品牌出现高库存问题，不同品牌去库存的节奏、进度有差异，从去",
+      "quote_sha256": "0b341306572e59517da0872d32cebdce8f4e0a77c9b28392b7020604ec5a5399",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:938c1f63b39076c703dea993a48ee7b0c20b8e982341b9d9cb9eba38bf54349d",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p1-paragraph16",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 1,
+        "paragraph_index": 16,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "年下半年特别是四季度开始，去库存对制造商的订单开始产生影响，在今年一季度对订",
+      "quote_sha256": "d5e5fd3526292f475821060b8c0962e0788ab463d7b77b436bae8744457d319c",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:e1cfd6f60fe4f67c0eafbbe1bc4cb61aa3bf2c42ea6a29ac788e693fb078c5f8",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p1-paragraph17",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 1,
+        "paragraph_index": 17,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "单的出货影响比较大。",
+      "quote_sha256": "ae9bc5e0dfc32f865b9deabbe4cf213fbd52293ac16932c52f06542a3eefea66",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:0ab69d73c118c370154a303a60c5d5fea40778e666fb026f726124e9dac5dd46",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p1-paragraph18",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 1,
+        "paragraph_index": 18,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "同时由于国际政治、经济形势复杂，很多品牌基于对未来经济形",
+      "quote_sha256": "05c606b16fe5eaf72bdc625a5801cf3cd174858fc9e4a457962584de6b417371",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:be737a02423061cb86ce342fe5c4cbd367d93c26d87c4da2bb54bc91905daace",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p1-paragraph19",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 1,
+        "paragraph_index": 19,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "势的不确定性，订单预测相对保守。",
+      "quote_sha256": "49ee3258ae533de31fdbee57cd1170677b1a6e4a72e9388dc74ce487c268750f",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:6c30b72df471f2ad67b1c4df746cb6826e434cd61444f25dd6327d36c0b69158",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p1-paragraph20",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 1,
+        "paragraph_index": 20,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "从今年一季度的营业收入看，部分品牌订单调整幅",
+      "quote_sha256": "44be45f0fa455869f6f0cb75174c29a28b07edc8084eac46756a1f074e57233d",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:109d5cbafd337fb05f925634cfa6be0798e5227de1497d018368dd0c39a98416",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p1-paragraph21",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 1,
+        "paragraph_index": 21,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "度较大，部分品牌订单有增长。",
+      "quote_sha256": "0ac4a2096ba8a00c3bf724a6017502d0bd6638ca60d9b0d7e073597a829e1e14",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:e7c03fac64182fef790042a670088f0486d99899e0c8e64bb4b7009302393156",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p1-paragraph22",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 1,
+        "paragraph_index": 22,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "品牌去库存的时间周期，可能不同的品牌有差异。",
+      "quote_sha256": "3f9b88885e8cd712ff124b02d1a1f26fdf4c10be446676c12c7a712707fe0513",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:05e0d9863cf69b71462585091afa2c2609e2b1654e40d433595f983d111541b8",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p1-paragraph23",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 1,
+        "paragraph_index": 23,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "从品",
+      "quote_sha256": "81a3b062cf204d3da5cb47cde8e1c243c327bf5e4c270ad30486a91881eabb50",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:6c6bde7c7afdc0ddc895f5439d1de4997661bf98721de7f9a3a433d5dd275e5e",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p1-paragraph24",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 1,
+        "paragraph_index": 24,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "牌客户预告订单看，部分品牌二季度出货预计有好转。",
+      "quote_sha256": "9805b96e274814ef310c64d770c945c7d9093b92dc276673abcab8967f5fd061",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:8f79b550ddf311c020706b6b61fa004f28a0100214c3e781cbee7329bede03be",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p1-paragraph25",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 1,
+        "paragraph_index": 25,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "公司服务的品牌大多数都是上市",
+      "quote_sha256": "03a299564e676941fd58e61049c5e53098c3dd535d4aaa8d153dab889c1441ee",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:a3f2fca4830c54be137e4359ed1ce1c9c00d8e1d9c8981676e1c91e828b29fd2",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p1-paragraph26",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 1,
+        "paragraph_index": 26,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "公司，通常每3 个月会披露财报，可以查阅品牌的财报关注库存的调整情况。",
+      "quote_sha256": "8cbd94ad713554a2390b259158ebf716c0ab6d037263f967545cc98d7daf93dc",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:64ae357c3b97418f5466cfdb4b0e822572c1b69636bdc893bc154604d0d199b7",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p1-paragraph27",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 1,
+        "paragraph_index": 27,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "Q：目前公司订单情况如何？",
+      "quote_sha256": "a85eea00949a7c999a89c40302ba86a71f3ab125fc7338046571f3a94b205fcb",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:80aadf0464f2b350776faabe750186876677458af69e4ac24e6f350207db7a68",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p1-paragraph28",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 1,
+        "paragraph_index": 28,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "A：目前部分运动品牌的库存比较高，同时由于国际政治、经济形势复杂，很多品牌基",
+      "quote_sha256": "cc446b0102d8f9e08e655ca10041553ff29fa531a4de0aad71c077d0736df88f",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:4d3edf51e8bcfadbe70c417f595f1f112fd1fa81804d253e3ffb28c17d6754d7",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p1-paragraph29",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 1,
+        "paragraph_index": 29,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "于对未来经济形势的不确定性，订单预测相对保守。",
+      "quote_sha256": "d5e311aa39255c7fdcb022130eda35e2a5f293c155f539a29d7974dfcd1c181d",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:73450eac5789c57a1fbb464cdcc93c50f77a888d355102414a8c260a082a7367",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p1-paragraph30",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 1,
+        "paragraph_index": 30,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "从目前的已经下达的订单及预告订",
+      "quote_sha256": "aed7308134f4f77ede23a717ce579aee3efc8eab131950eb022f65a9e10bdcc0",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:0349863aed8beae66b06e5b45011c443fe013513d2fda5f87de1611d8ef5df09",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p1-paragraph31",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 1,
+        "paragraph_index": 31,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "单情况看，部分品牌订单同比去年有下滑，部分品牌订单有增长，同时新客户的订单也",
+      "quote_sha256": "d411fa6209e675ab09bc3832ba1ae1060585e38b5fe78ee3a4890046c004ce30",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:45646f31419313a0867b434cf87477e4515a7dcf1ac7b174041d8e740b84b5eb",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p1-paragraph32",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 1,
+        "paragraph_index": 32,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "会弥补一些下滑客户的订单缺口。",
+      "quote_sha256": "0914378b1c020b8d3cad14d3005bf62b6243f816801624a6d2905d525e652238",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:db3727bebab326ae54635de9e29de4bbba6e65d1f2d4b31a8ade10a5386f94aa",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p1-paragraph33",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 1,
+        "paragraph_index": 33,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "Q：追加订单对公司毛利率的影响如何？",
+      "quote_sha256": "d927785d9abd221a3567e806f14bbfaaae003aa5dcac0c8815c2e3fb23927284",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:52ac0ea0484ad74a3df53606279fa2a5774937b88a4b68bdde71550dd6ae5d16",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p1-paragraph34",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 1,
+        "paragraph_index": 34,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "A：客户在下达每个月的例行订单之后，也会根据销售情况、库存情况以及其他工厂的",
+      "quote_sha256": "bfdeca5e8c33c3bd6b14305103f37311e920a76244782f0aad61cef9444210e6",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:42d2a2447c7a68a0533c534d2fde41d90278a08bef75ffe4b5fd3a4b44494b04",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p1-paragraph35",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 1,
+        "paragraph_index": 35,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "出货情况等因素，追加紧急订单。",
+      "quote_sha256": "aa84e7110098e43d64951c8577961aea643fea51ebe50d4b302eb8b92d78bd00",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:45094897a96d6fff350462e517bfcfb1eedef15ff95598285f4be1f815713d02",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p1-paragraph36",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 1,
+        "paragraph_index": 36,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "紧急订单通常要求的交货时间比较短，对制造商的产",
+      "quote_sha256": "cdb89bc37761ecae407e686a4e8e71256d493b3c898cee998846ff73651ac3e4",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:7602b917b4584bfb01c26b4531e3a4a61a12bb69d43accafbcab96e15367b8cd",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p1-paragraph37",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 1,
+        "paragraph_index": 37,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "能弹性和运营效率要求比较高。",
+      "quote_sha256": "075d16baeb749dad2b1917d9ae7b1c4bb1aea889f652dbf6fcbf79929d3922fd",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:c0855696b1d31efdbbc4dc6d19b514425ff2bfbf59f84803dcfe9d74015ed7e9",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p1-paragraph38",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 1,
+        "paragraph_index": 38,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "对于客户的紧急补货订单，公司会用最快的速度响应客",
+      "quote_sha256": "74113e9a03314a18351e6e95bd9b1576a5be7897b0592b0472e8e0dd837a1bcd",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:da9948016191837b4870b355f8950252aefa6480feeded98a8af52f5dce2b2fd",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p2-paragraph0",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 2,
+        "paragraph_index": 0,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "户的需求，部分订单可以做到 2-3 周的时间交货。",
+      "quote_sha256": "479f18c32e0921d06c49acb3c6b49d7f7e870a0c9c3a21cd9fb7e74d75574875",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:0d58581150b277a5495ec5824cea751adc0d41aa1c7c8f8c60c7e1bff1127afa",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p2-paragraph1",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 2,
+        "paragraph_index": 1,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "公司不会对客户的紧急追加订单提",
+      "quote_sha256": "159fd6ebcdf16eacc77667d135f4a3518740b559418ce4ea0e6dab76e79f3d4c",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:6a8a86913ef65129f40d0b544a7c7c5165c82b448314c324e4564dd4183fd36b",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p2-paragraph2",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 2,
+        "paragraph_index": 2,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "价，但是紧急订单会增加公司的营收规模，有利于提升规模效益。",
+      "quote_sha256": "30cf6f45ec630f4d2fac0001f0669cfd1805df31f2752726f44559fc93104090",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:a85cf7a6fa5aeb6e8365e69df32ae66846b822069f439656b40c8f5b9b72f7bc",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p2-paragraph3",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 2,
+        "paragraph_index": 3,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "Q：在同行中公司毛利率表现较好的原因？",
+      "quote_sha256": "589e01c322aa8f6ae16d411daee7cc5f1a43de90878ff914609f78c0d117137b",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:a8ec6e801873a4aff4703e59bef9dcabca8e75f7a282774dad5efe47cbdcd25f",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p2-paragraph4",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 2,
+        "paragraph_index": 4,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "A：公司毛利率表现主要得益于公司客户结构和产品结构的调整以及精益生产等措施的",
+      "quote_sha256": "b0b846ec2526ceba61c996783660aa86f428c817aa1aa5776070197ca6559af0",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:f2d28aa0dde2f48d63bdb9c5487f585c4167fd3e452df329300cf50e49ad07b3",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p2-paragraph5",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 2,
+        "paragraph_index": 5,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "推进、工厂运营效率的提高。",
+      "quote_sha256": "58dae4a4b874b023a27aacbd0ed314392ae16f8a6542d7d6f196853d29b1500b",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:14cdd229ce84dba933b3664b878e788eed2dc153976f5b17bc5704fe01e24552",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p2-paragraph6",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 2,
+        "paragraph_index": 6,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "原材料价格的波动、人工成本的上涨、产能利用情况、员",
+      "quote_sha256": "6c4391c695405ea9dd72e2e215fdb393348caab9db3439b6971bff7e423f589b",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:fd91e3ec3568a1a6196dea4ec975c5d7c56c273e6c92a02abb9a649dcbdd031b",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p2-paragraph7",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 2,
+        "paragraph_index": 7,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "工的熟练度等因素都会影响毛利率，公司未来将持续推进客户结构的优化和运营效率的",
+      "quote_sha256": "74a96e2c48de7abe9f7cfb68b12b2261b7802cd71a65cf00e3931af04f51fff3",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:e73e657479defd380933fcb72d8a894a08a3badd38453b7e82c416bca6601be4",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p2-paragraph8",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 2,
+        "paragraph_index": 8,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "提高。",
+      "quote_sha256": "ae880dc14a77d00c3d45d243d50ac5d3cb47a36fd2254fac0b3eb384684f2acf",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:469f7c41727d41754a6ba6d9a4928f5526ada3e9cd5806385265a180dbfcbf13",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p2-paragraph9",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 2,
+        "paragraph_index": 9,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "Q：公司扩产的提前量情况如何？",
+      "quote_sha256": "7fc3e7656e6b5bfb5be2dfb372aa7fb91943c1f37d7ad06657406b68e6e3aee0",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:2e256181aa101a6d8f5ff3c18a1837b7d749618f1deeb7a2db6946ed20f4ea8a",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p2-paragraph10",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 2,
+        "paragraph_index": 10,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "A：公司的产能规划主要根据新老客户的订单沟通情况进行安排，同时也会保持一定灵",
+      "quote_sha256": "d6a67496a74d52b0e15e5a13c74a1443fa655ebe6969e00253977efd2ac55125",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:e9595c9e7a9348eece72a96f86f767b7980fee4ae099fe24e97fddc25aa25324",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p2-paragraph11",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 2,
+        "paragraph_index": 11,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "活性。",
+      "quote_sha256": "eb0bba510624ec4e341b62716c9eb38f4e27e94788b6b0c38e27bde1c23c2539",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:9e23e0a384e6cd961fe42f9da00b6a20b2ddf83b9b6c7f1b752e060739c7ac10",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p2-paragraph12",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 2,
+        "paragraph_index": 12,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "考虑到客户订单的需求，未来几年公司仍会保持积极的产能扩张。",
+      "quote_sha256": "bd743e89d56cf03cb97625b1583ba9512594b12bed0facef8a3dd38ae0af7a81",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:5097ed53045802afbbb3654a89f1a332e7f5c7c746f69a4c1864665809447cc3",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p2-paragraph13",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 2,
+        "paragraph_index": 13,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "公司会通过购",
+      "quote_sha256": "8bdd132a8c7d0fa86271d2656b5bd900fe080b99e09b933224b40bf88c45d2f6",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:1e68bcf6261a8e4686ec49c4185a441c65d37da21cf7acafa15179c10f04034d",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p2-paragraph14",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 2,
+        "paragraph_index": 14,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "买土地新建厂房、租赁厂房、在原有厂房增加生产线、购买厂房等方式来提升产能。",
+      "quote_sha256": "600162b3722ac194903966f1bc7d63843552faa40271d7c0367456676bc88518",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:8284c8ca9f34a849e18a70de9fac17fe69f573ce1a4c494ace03c17929b5da23",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p2-paragraph15",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 2,
+        "paragraph_index": 15,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "购",
+      "quote_sha256": "299c1aec8a577888a925d5bdb4008e8bc78539f93d846e6465c45e30c50544c1",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:d04efd3640fa9c23137529d2b88b96eb99be12d64a68f5dfb24632a5fbc8ed07",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p2-paragraph16",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 2,
+        "paragraph_index": 16,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "买土地新建厂房的周期比较久，土地手续办妥后，工程施工到验收周期需要1-2 年时",
+      "quote_sha256": "df6e62f4265432f881a7a94decd4aa6785e36347afae9af868b8391b68142941",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:5dc0d44e3445db71724ee1e1bae65e23810d300504dd956a44db795df4cb41aa",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p2-paragraph17",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 2,
+        "paragraph_index": 17,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "间。",
+      "quote_sha256": "e29e4c027d6cf09e911737b72c2eff417b3e9669035096313758bd2367394391",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:fb9bc234ad5499a82c56e2c09267fab2dc385570f1fef306104cdb40ecd393e8",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p2-paragraph18",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 2,
+        "paragraph_index": 18,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "Q：印尼工厂的情况如何？",
+      "quote_sha256": "5dba3456e1eb12e3ad17053db53f7c26fb0f7fe39014629b765e4efe22d85be9",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:cfaa5714e6bb98fd2d6684619d066f7aba66f4875934f977612d29126a5a588a",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p2-paragraph19",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 2,
+        "paragraph_index": 19,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "A：印尼是制鞋业大国，很多运动鞋制造商在印尼开设了工厂。",
+      "quote_sha256": "46e10b44a1368a562773f9e5faba87d21e6bb2dc58ba5407da871dc6d2af80db",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:584ff9a821a292efd42a5fb6dacb8ace12217f2a1d43303c0a0b74ed4b4d0b02",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p2-paragraph20",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 2,
+        "paragraph_index": 20,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "公司实控人之前在印尼",
+      "quote_sha256": "b8e5ddbf7954ad8034ee5c4a467a25ad00f6000930151d011f3531df278e5cf3",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:6e2708ee2d8ad7e91fa7ae2a460d91e9e2660e6c85028c98693ad8b2e6b5561c",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p2-paragraph21",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 2,
+        "paragraph_index": 21,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "也开过制鞋工厂，公司也有在印尼工作过的工厂管理人员，所以印尼对公司不是陌生的",
+      "quote_sha256": "d0519739802ffa2cc5f32a46264cebba9cea61e6473e191ea42f7df23e312a92",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:d6c094067ca86fb1f089744a00d48b3607aa497da0bd0446cccaf655f29753f2",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p2-paragraph22",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 2,
+        "paragraph_index": 22,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "环境。",
+      "quote_sha256": "99fbda5c0734161c961283803666270abf3eb1d44b2bc25f547b4fcbdd2cecc4",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:b963873797aff5bdb7e2d30d840d333013f28990561f42793d8e4ead26e2052b",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p2-paragraph23",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 2,
+        "paragraph_index": 23,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "印尼两期工厂预计产能合计5000-6000 万双/年，印尼一期工厂今年将会开始投",
+      "quote_sha256": "37b4ca827b6e944e4ea235668de511b2857f40c093e287131991683048a051a4",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:89b325c219dea1561bd247456faa460a529b949bfada0a7b5efcb6080b05436a",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p2-paragraph24",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 2,
+        "paragraph_index": 24,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "产。",
+      "quote_sha256": "c6f44b6dec3881427b942e07c9750002a1b651279fb116f91bd1eb1f2a595630",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:e2dbd8e002dca4d03ec169ea5e93665c6672c6ce86616f2e2d77195cc3da71c9",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p2-paragraph25",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 2,
+        "paragraph_index": 25,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "两期工厂的规模比较大，都会分期建设，逐步投产。",
+      "quote_sha256": "0015df32aa1d6be536f5b0a8f3d6d7c59f280833434e18e7c777d8da392ff526",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:3b147452b5a18e605b33e7887a31c88ab469a78ea134641510986edfbb73e1bd",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p2-paragraph26",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 2,
+        "paragraph_index": 26,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "具体的投产安排，跟订单情",
+      "quote_sha256": "292f021c1ce65c38f984105d7ab07eedcf9dd056a65509ae6655cd786f10db4e",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:621980d9d27f7ae863b721b0e50b3d09567838ca259fec8703a9103cb143bd66",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p2-paragraph27",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 2,
+        "paragraph_index": 27,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "况、建设进度以及当地政府部门的审批进度有关。",
+      "quote_sha256": "931d0ac8ac803f571cf91d095a73b9fc2cf3fbe5ab087086ea46156adaec29ef",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:4d0fd0a54d010ca46e3a64b2e0448dc1ebafbfc3df80f383c59a0f0e0bbfed45",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p2-paragraph28",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 2,
+        "paragraph_index": 28,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "Q：汇兑损益对净利润的影响如何？",
+      "quote_sha256": "183c4af78946666a864bbd5cb87abfc65a1f669c07662b009659299c24da1f33",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:6f9216d59fdbed3cec17ade9351458e953a76343982d7e8512f06fec35a114c7",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p2-paragraph29",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 2,
+        "paragraph_index": 29,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "A：公司主要的贸易子公司在香港，销售收款和采购付款主要发生在香港贸易子公司，",
+      "quote_sha256": "2dfbaec0c261b17e09b5bc313cb06733a7dc668bb823636dfbe15e51ba532b4c",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:e3dfbb427b2d3b0feb48dcc300e4aa4f7881f38f06654a2d2bced2f36d21e858",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p2-paragraph30",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 2,
+        "paragraph_index": 30,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "销售收款是用美元结算，主要原材料采购、机器设备采购等是用美元结算，香港贸易子",
+      "quote_sha256": "0771f5b286abe60ce32463ce5db0c1077c37b61cd81725667e70d7602a87f6d7",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:302eaeab87c10faf5d17f8d63f6536ebfd6675927c3db93bc73ce1728bf9fc69",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p2-paragraph31",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 2,
+        "paragraph_index": 31,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "公司的报表是美元报表；",
+      "quote_sha256": "973ea19586a15c8efabc4cbf3be0adbb47c1679d2ef923bf6818097d74333916",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:8cbad565906d03d0840344a622adc2d4fbd89697b0a26517b97fd326c0624e77",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p2-paragraph32",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 2,
+        "paragraph_index": 32,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "中山华利和中山的贸易公司以及中山其他子公司的报表是人民",
+      "quote_sha256": "b82f36e46df7c756afacdd8b21e279228ad92e977eed5af7ac538162c823db03",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:a435742a4dc76d035c15bf1540157a5d07efdaa54cc306685cb80f57bdd7594b",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p2-paragraph33",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 2,
+        "paragraph_index": 33,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "币报表，境内管理总部和开发中心的运营开支部分用人民币支付，会有外币资产和负",
+      "quote_sha256": "f009c892faa1b44a170a5ffd643624dc6ca9474397b083e28a9e6d73fb0da9c5",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:921026497f78f1610d0e6d7d0ecc9d2d2b59dfbb53ad28c1077171311781f203",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p2-paragraph34",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 2,
+        "paragraph_index": 34,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "债，比如美元的应收款项和应付款项。",
+      "quote_sha256": "16171069c80de6a6e6137e107aa88665a00eb5d982140d53ada786f7e60bcca3",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:2b9bbde2d9404c8bd4317d80235f76be6becae13486d36453c76f6a9d2e1c9b6",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p2-paragraph35",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 2,
+        "paragraph_index": 35,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "同时公司在越南、印尼、缅甸、多米尼加等地的",
+      "quote_sha256": "c2481142812d30f9f0e3621ade48b8830217496b7628cc56c2ecc279b6c88671",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:6d9ba2b1005b7e9c05d3e93edfa8ab802494570059279a7d280d6da40250a1f9",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p2-paragraph36",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 2,
+        "paragraph_index": 36,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "子公司，报表本位币是当地货币，这些子公司会有外币资产和负债。",
+      "quote_sha256": "2bd7213301e92ce8071b6fc47a9cbd07457da9da74489f4f84332d72d6590ec8",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:bf407ebd36ec134873eaf61029d9c5c94c860bcda587e36177239e7452671a00",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p2-paragraph37",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 2,
+        "paragraph_index": 37,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "人民币兑美元的汇",
+      "quote_sha256": "381f5c39c7f94a05495c5bf83356d3522aec82d262a8ffb6b20fed47b56b7b5f",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:035e6fcdfd630c4fb1764f1c6ffecbdfb482cfce1b7dd561b16ae655478c652a",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p2-paragraph38",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 2,
+        "paragraph_index": 38,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "率波动以及子公司所在地当地币种兑美元的汇率变动，外币资产和外币负债在报表列报",
+      "quote_sha256": "7998adf718c47e526904e5c6503eb365566fe0cb4a88d827706946590e967da4",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:ef32d600ecda0278a92aeafa447d3b35e325b631bc3b18145f02e95884950a07",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p2-paragraph39",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 2,
+        "paragraph_index": 39,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "时会形成汇兑损益，计入财务费用。",
+      "quote_sha256": "01fd8709bd25fb7dba40b934f682879a57e26b208e7f28393ba3f89ae1152dd4",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:623a1f7d8271d429e58ceda3cc76175e20c7f5b3846953d3a74021f40f50e108",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p2-paragraph40",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 2,
+        "paragraph_index": 40,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "2022 年度汇兑损益是收益8,200 万元，2023 年一季",
+      "quote_sha256": "76b897f6e2fbb54a0bcac40b31c62d75d6a522723be91611021f38749557211e",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:390e1bf447d8abf119d24db1f4f8c20ff014260bc64569a200df9c76d9076d05",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p2-paragraph41",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 2,
+        "paragraph_index": 41,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "度汇兑损益约损失3,500 万元，占当期净利润的比重较小。",
+      "quote_sha256": "43f7bab7a19a0f11d2f5f8f86fab3a31f49fddb0c4a2530f7a1c2c30dc829668",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:68bed5c0b5b40acdd5102adf9088ddc218cecec9e2ef7f70e0a3b8607d43ea01",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p3-paragraph0",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 3,
+        "paragraph_index": 0,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "Q：公司硫化鞋的占比？",
+      "quote_sha256": "e50ee49fef09c9f2b0ad87f3a7a947e5d472125587e330137bb5c2f271e5b681",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:4ccc0fbb802372a65a9780a28cf96be0792824e58e45fb3d450acd1802b51145",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p3-paragraph1",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 3,
+        "paragraph_index": 1,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "A：各运动品牌中硫化鞋占比比较高的品牌主要是Converse 和Vans，这两个品牌也有一",
+      "quote_sha256": "abd966da339ad828bb8ad0b9766e6d32aa312616f0e2e4aab85b43d5695c2186",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:03d5b8bf46b210a286bd04fddad11443dd6b6fbd1d6b5b5f575c0954b2903b42",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p3-paragraph2",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 3,
+        "paragraph_index": 2,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "部分冷粘鞋。",
+      "quote_sha256": "3ac195ba657de5b4fd1c46d7840c484abbad60d447217645c052799c3478a7e4",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:c5882165916139086319009db1ebbce03351fedd3424da5c207242a624a24c12",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p3-paragraph3",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 3,
+        "paragraph_index": 3,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "这两个品牌在2022 年的营收中占比都不到20%。",
+      "quote_sha256": "c760ce4d171c55c515e475a56fdb60ee62f7dfb892c1bb31d04f43f118c969a4",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:6eb9fd1b4a59910609c965b7cd0926badec52778ef7e5889d77f212a9297be47",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p3-paragraph4",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 3,
+        "paragraph_index": 4,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "Q：制造工厂主要是拼厂还是包厂？",
+      "quote_sha256": "b456936f4e9526222fee8c66af86475e10ac73b0a3b9a6ab3a031f2c333d18d7",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:1b82776b3eb22fbd3a5a0ad7cac58ef45b666b71261f9207fb0270def698f6ad",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p3-paragraph5",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 3,
+        "paragraph_index": 5,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "A：公司的主要品牌都会有专属的工厂，公司大多数工厂只为一个品牌服务。",
+      "quote_sha256": "2616bfbfb36bdd4e9e889ffb9578779f19b966ae7adc410a60a232b3e81b8d87",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:7d1ef7c625173e9cf7424ed2556272979250b56e774b6e7a78885e2f0bd30cc8",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p3-paragraph6",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 3,
+        "paragraph_index": 6,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "各个客户",
+      "quote_sha256": "50f6d3c6e4c3a8009c90e3e1eb81d338dcc3c2bba88e0326d31f56107caaaf59",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:75858a6e759e715b915fd4ea7c2980b89ee1b601d73be4070ebe06fd58b9df0a",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p3-paragraph7",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 3,
+        "paragraph_index": 7,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "的服务团队要保持独立，包括开发团队、量产产线等。",
+      "quote_sha256": "6f196f33404b41a80df6057e62981d6dd1d153d1d3c687bececf19f536439f53",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:20eac9a5c0a4bf4ee8690a3aa0f4a57384049f685c488124b3c93fe6e5d0f0a0",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p3-paragraph8",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 3,
+        "paragraph_index": 8,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "但是接到新品牌的时候，新品牌",
+      "quote_sha256": "21d996f5a1455d80955e5daf8351d56f004d0075b116237394fbaf7b5bffa822",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:93a1aa4238b6bbe2dc2465426ecb0c9bccf4b28c14877f43774962493813e8d1",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p3-paragraph9",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 3,
+        "paragraph_index": 9,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "初期订单规模不能满足一个工厂的产能，会先暂时在其他品牌工厂设立独立的厂房和产",
+      "quote_sha256": "6481cd66ef58ede01cbffe1d1acb3739dbf30e0e5658966a8c4a16da8c43639b",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:d99f8bccc85f949c827beefde1aa2d8c1a30e8267b040e6a2d8033f7a357fb66",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p3-paragraph10",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "locator": {
+        "page_number": 3,
+        "paragraph_index": 10,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "线，当新品牌达到一定量级后，也会有一个专属的新工厂。",
+      "quote_sha256": "0beda7e50539cc49eecaa4d4e625ae0e219e36b400cc319345b3c71e6a2108b5",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:d2840b178f83c304847f2d4e5616ecdb637a69fb4760f174e1f04a16c3b0d465",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    }
+  ],
+  "gaps": [
+    "Source manifest published_date/source_url/language are absent; meeting dates and identity are document-internal evidence, not an invented official download receipt.",
+    "No separate new-business segment or quantified new-client revenue is disclosed in the reviewed content; new-customer onboarding/capacity expansion are the applicable categories."
+  ],
+  "anti_leakage": {
+    "producer_selection_invoked": false,
+    "producer_outputs_read": false,
+    "model_calls": 0,
+    "downloads": 0,
+    "source_only_reader": true
+  },
+  "freshness": {
+    "status": "fresh_source_content_before_c3_candidate",
+    "basis": "No company/hash hit in tools/document_understanding_benchmark, tools/holdout_replay or existing DU11 review JSON/Markdown literal inventory; metadata existence and filesystem scans are not unseen-by-all-history proof.",
+    "limitation": "A later candidate or rule-tuning run makes this sample exposed/regression for subsequent rounds."
+  },
+  "source_review_revision_at": "2026-10-26T19:15:18.073179+00:00",
+  "revision_reason": "Independent source review: HUALI-03 preserves 会 future/expectation modality rather than completed order offset."
+}

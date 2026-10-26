@@ -1,0 +1,64 @@
+{
+  "snapshot": "current C3 lifecycle/provenance fix",
+  "source_lf_sha256": "352e00f7c46266facef8f504ce831266138df464604b106f2e17d723c837cc7f",
+  "results": [
+    {
+      "case": "primary_title_only_no_date",
+      "provenance": {
+        "observed_published_date": null,
+        "observed_filing_date": null,
+        "registered_published_date": null,
+        "method": "unknown_public_availability",
+        "mtime_used": false
+      },
+      "status": "FAIL",
+      "error": null,
+      "allocated_roots": 1,
+      "leaked_before_independent_cleanup": [],
+      "model_post_attempts": 0
+    },
+    {
+      "case": "primary_title_only_observed_date",
+      "provenance": {
+        "observed_published_date": "2020-01-02",
+        "observed_filing_date": null,
+        "registered_published_date": "2020-01-02",
+        "method": "source_metadata_observation.published_date",
+        "mtime_used": false
+      },
+      "status": "FAIL",
+      "error": null,
+      "allocated_roots": 1,
+      "leaked_before_independent_cleanup": [],
+      "model_post_attempts": 0
+    },
+    {
+      "case": "missing_original",
+      "provenance": null,
+      "status": null,
+      "error": {
+        "type": "FileNotFoundError",
+        "message": "[WinError 2] 系统找不到指定的文件。: 'C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\c3ir-yszq1p25\\\\not-present.txt'"
+      },
+      "allocated_roots": 1,
+      "leaked_before_independent_cleanup": [],
+      "model_post_attempts": 0
+    },
+    {
+      "case": "invalid_gold_json",
+      "provenance": null,
+      "status": null,
+      "error": {
+        "type": "JSONDecodeError",
+        "message": "Expecting property name enclosed in double quotes: line 1 column 2 (char 1)"
+      },
+      "allocated_roots": 1,
+      "leaked_before_independent_cleanup": [],
+      "model_post_attempts": 0
+    }
+  ],
+  "holdout_read": false,
+  "network_calls": 0,
+  "model_calls": 0,
+  "manual_owned_cleanup_done": true
+}

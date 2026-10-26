@@ -1,0 +1,132 @@
+{
+  "review_node": "pdf-c3-20261026 engineering runner generalization / exact reference composition",
+  "reviewer": "independent /root/pdf_c2_portability_review",
+  "result": "PASS",
+  "open_findings": 0,
+  "closed_findings": [
+    {
+      "id": "C3-ENG-01",
+      "priority": "P2",
+      "problem": "Nonempty verified descriptor falsely certified dates it did not contribute, including unknown dates.",
+      "resolution": "Date provenance follows actual published_date/filing_date field contributor; missing date remains unknown_public_availability.",
+      "verified": "two independent current synthetic probes plus in-tree regression cases"
+    },
+    {
+      "id": "C3-ENG-02",
+      "priority": "P2",
+      "problem": "Missing original / malformed gold failed before former try/finally and leaked an allocated temporary lake.",
+      "resolution": "Public run_pair owns TemporaryDirectory across setup and execution; private body retains accounting/protected-input observation; removal observed only after context exit.",
+      "verified": "two independent current synthetic probes retain original errors and no leaked roots plus in-tree regressions"
+    }
+  ],
+  "bindings": {
+    "tools/document_understanding_benchmark/phase_c_runner.py": {
+      "sha256": "6ec1da67eb22eeca4cfbb4cbb763fc0badfc7393daaa030e769469968404b033",
+      "lf_sha256": "352e00f7c46266facef8f504ce831266138df464604b106f2e17d723c837cc7f"
+    },
+    "tools/document_understanding_benchmark/phase_c_readonly_source.py": {
+      "sha256": "de1f1d3670cbf3442a42f72a4c869267024362ae799ed967753f4930349337ed",
+      "lf_sha256": "534cef13a299b506573fdaa54141793e9731c2ca6d6253869b8e85c77b63db34"
+    },
+    "tests/test_phase_c_sample_metadata.py": {
+      "sha256": "285e2dc384337239025117fa8925ef3e6f104eb1f9c3958e80e04c1bfbed050e",
+      "lf_sha256": "285e2dc384337239025117fa8925ef3e6f104eb1f9c3958e80e04c1bfbed050e"
+    },
+    "tests/test_phase_c_readonly_source.py": {
+      "sha256": "dbd94818c08769c525a3c502b704acaf8862d6ce5311b7edd3ac6e0858dcdd80",
+      "lf_sha256": "fc0bfc8b7b344347ad2be95f7340cd9c14068eb5826f9a46dccac31812391f16"
+    }
+  },
+  "initial_reviewed_lf_sha256": "40072701e4f21ecfeb87798a579f1b2f2462be02bf31e400407344a8ec6948c2",
+  "red_evidence": {
+    "receipt": "independent-before-fix-probe-v2.json",
+    "snapshot": "baseline-runner-snapshot.py",
+    "snapshot_lf_sha256": "dfdfcee660a56f37788cadfb7fea7b28c330b4b62f2599b71d1d56e842f375fe",
+    "lineage": "Actual synthetic RED used historical committed HEAD. Identical defective paths were statically present in initial400727; exact400727 bytes were not saved before concurrent edits, so no exact400 replay claimed."
+  },
+  "green_evidence": [
+    "independent-after-fix-probe-v2.json",
+    "final-freeze.json",
+    "final-freeze.xml",
+    "final-freeze.log",
+    "independent-exact-ref.json"
+  ],
+  "targeted_tests": {
+    "passed": 18,
+    "failed": 0,
+    "elapsed_pytest_seconds": 12.52,
+    "composition": "14 metadata + 2 exact-ref + 1 default registered held CLI + 1 independent six-field rejection / actual exact-ref held CLI",
+    "stable_source_bindings": true
+  },
+  "static_review": [
+    "No live sample-ID company/language switch; uniform primary descriptor field precedence and explicit security_id fallback through existing resolver.",
+    "Missing identity and duplicate/missing sample/provider have named errors before allocation/preflight/output creation.",
+    "Unknown language/date remain unknown; date provenance never certifies unrelated primary fields.",
+    "Public run_pair is sole lifecycle owner; original accounting/finalization remains; setup errors are not model usage unknown.",
+    "Default registered-source path preserves strict SourceRequest query including historical publication eligibility.",
+    "Explicit expected_ref path uses complete SourceRef equality after actual owner registration/query_ref, then public open_version; source-facts uses that same pinned reference.",
+    "Exact-ref content processing records filing identity/period/asof qualification NOT_EVALUATED; production SourceReader and filing-fetch selection were not changed.",
+    "Runner forwards sample.source_ref only when explicitly prepared; direct real-synthetic held probe confirms complete Ref reaches public batch CLI and unknown date remains null."
+  ],
+  "independent_ref_mutations": [
+    "document_id",
+    "source_id",
+    "content_sha256",
+    "byte_size",
+    "mime_type",
+    "schema_version"
+  ],
+  "external_receipts_reviewed": {
+    "holdout-qualification-v1.json": {
+      "sha256": "477b09c6ce6015762a3787034232b86bf24cab3562c3e09348a095b413226368",
+      "rows": 2,
+      "statuses": [
+        "SOURCE_GAP",
+        "SOURCE_GAP"
+      ],
+      "model_calls": [
+        0,
+        0
+      ],
+      "temp_restored": [
+        true,
+        true
+      ],
+      "review": "receipt only, no holdout/gold content read or independent actual-original rerun"
+    },
+    "holdout-exact-registration-v2.json": {
+      "sha256": "ed4dca5ecb1d5d3eb7fb0c893d73183a6ad7fb80cfbde9a2978306acf647415f",
+      "rows": 2,
+      "statuses": [
+        "EXACT_CONTENT_REFERENCE_READABLE",
+        "EXACT_CONTENT_REFERENCE_READABLE"
+      ],
+      "model_calls": [
+        0,
+        0
+      ],
+      "temp_restored": [
+        true,
+        true
+      ],
+      "review": "receipt only, no holdout/gold content read or independent actual-original rerun"
+    }
+  },
+  "limitations": [
+    "Engineering entry point only; no holdout/gold content read, except self-created synthetic gold. Actual-source receipts reviewed only as boundary evidence.",
+    "No external HTTP, paid/model calls, production source/config writes, full localhost rerun, or C3 reading quality/cache/RF acceptance certified.",
+    "Initial default AppContainer TEMP setup failed before runner; owned short workspace TEMP rerun passed. Exact empty default TEMP remnant and all owned fixtures cleaned.",
+    "Intermediate probe v1 files contain harness mistakes and are superseded by v2; do not cite v1 as product failure/validation.",
+    "Formal source acceptance and unknown historical filing qualification are not implied by exact content readability."
+  ],
+  "cleanup": {
+    "owned_fixture_roots_absent": [
+      ".c3irfinal",
+      ".c3irfix",
+      ".c3irt",
+      ".c3irfreeze"
+    ],
+    "independent_red_leaked_roots_cleaned": true
+  },
+  "production_changes_by_reviewer": false
+}

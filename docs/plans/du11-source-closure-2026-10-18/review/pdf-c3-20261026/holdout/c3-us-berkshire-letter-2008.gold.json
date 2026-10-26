@@ -1,0 +1,659 @@
+{
+  "schema_version": "pdf-c3-source-gold/1",
+  "sample_id": "c3-us-berkshire-letter-2008",
+  "gold_version": 2,
+  "frozen_at": "2026-10-26T19:12:50.407666+00:00",
+  "frozen_before_candidate_output": true,
+  "source_ref": {
+    "document_id": "urn:company-wiki:document:sha256:46920242cbb861fd844453d5e20edd8b0ecea977d85111cf2a7cfb249913c6cf",
+    "source_id": "urn:company-wiki:source:sha256:46920242cbb861fd844453d5e20edd8b0ecea977d85111cf2a7cfb249913c6cf",
+    "content_sha256": "46920242cbb861fd844453d5e20edd8b0ecea977d85111cf2a7cfb249913c6cf",
+    "byte_size": 132043,
+    "mime_type": "application/pdf",
+    "schema_version": "2.0"
+  },
+  "source_manifest_observed": {
+    "document_id": "urn:company-wiki:document:sha256:46920242cbb861fd844453d5e20edd8b0ecea977d85111cf2a7cfb249913c6cf",
+    "source_id": "urn:company-wiki:source:sha256:46920242cbb861fd844453d5e20edd8b0ecea977d85111cf2a7cfb249913c6cf",
+    "content_sha256": "46920242cbb861fd844453d5e20edd8b0ecea977d85111cf2a7cfb249913c6cf",
+    "byte_size": 132043,
+    "mime_type": "application/pdf",
+    "title": "berkshire2008",
+    "document_kind": "broker_research",
+    "published_date": null,
+    "source_url": null,
+    "retrieved_at": null,
+    "collector_name": null,
+    "collector_version": null,
+    "canonical_entity_id": null,
+    "display_name": null,
+    "market": "HK",
+    "security_id": "Unresolved (dropbox_stock)",
+    "fiscal_year": null,
+    "fiscal_period": null,
+    "period_end": null,
+    "form_type": null,
+    "provider": null,
+    "provider_document_id": null,
+    "language": null
+  },
+  "source_identity": {
+    "entity": "Berkshire Hathaway Inc.",
+    "market_content_classification": "US",
+    "document_kind_content_classification": "investor_relations",
+    "fiscal_year": 2008,
+    "language": "en",
+    "classification_basis": "document-internal text + visual page check; market for Berkshire also matches existing official security-master snapshot"
+  },
+  "reading_recipe": {
+    "format": "pdf",
+    "parser_name": "selective_narrative_parser",
+    "parser_version": "0.1.1",
+    "reader_recipe": "native-pdf/1",
+    "runtime": {
+      "pymupdf": "1.28.2"
+    },
+    "reader_implementation_sha256": "c7c000d7da38361a83fc45a4ce526543e93113bdafb8fb4a132cd1bb1cc94c2e"
+  },
+  "gold_locator_reader_version": "0.8.0 native read, no selector invoked",
+  "physical_page_count": 22,
+  "reading_scope": {
+    "fully_read_physical_pages": [
+      2,
+      3,
+      5,
+      6,
+      7,
+      8,
+      22
+    ],
+    "visual_checked_physical_pages": [
+      2,
+      6,
+      7,
+      22
+    ],
+    "skimmed_physical_pages": [
+      1
+    ],
+    "unread_physical_pages": [
+      4,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21
+    ],
+    "page_number_note": "PDF physical page = printed page minus one, e.g. physical 2 is printed 3. Gold locators use one-based physical pages."
+  },
+  "checkpoints": [
+    {
+      "checkpoint_id": "BRK-01",
+      "categories": [
+        "identity",
+        "period",
+        "document_kind"
+      ],
+      "expected_source_meaning": "Berkshire Hathaway Inc. shareholder letter about 2008, signed by Warren E. Buffett on February 27, 2009; standalone letter excerpt, not a complete SEC 10-K.",
+      "critical": true,
+      "required_support_sets": [
+        [
+          "p2-paragraph0",
+          "p2-paragraph1",
+          "p2-paragraph2",
+          "p22-paragraph7"
+        ]
+      ],
+      "support_semantics": "All members of at least one set are required; equivalent replayable source spans may replace paragraph segmentation without dropping semantic context.",
+      "forbidden_misattributions": [
+        "Do not label the business year 2009 because that is the signature year.",
+        "Do not promote the catalog broker_research/HK labels as document truth."
+      ]
+    },
+    {
+      "checkpoint_id": "BRK-02",
+      "categories": [
+        "business_progress",
+        "attribution"
+      ],
+      "expected_source_meaning": "In 2008, most economically sensitive businesses earned below potential; retailers and residential-construction operations were particularly hurt, while insurance and utilities delivered outstanding results.",
+      "critical": true,
+      "required_support_sets": [
+        [
+          "p3-paragraph7"
+        ]
+      ],
+      "support_semantics": "All members of at least one set are required; equivalent replayable source spans may replace paragraph segmentation without dropping semantic context.",
+      "forbidden_misattributions": [
+        "Do not claim every Berkshire business contracted or that insurance/utilities had weak 2008 results."
+      ]
+    },
+    {
+      "checkpoint_id": "BRK-03",
+      "categories": [
+        "operating_number",
+        "negation"
+      ],
+      "expected_source_meaning": "Insurance did not repeat exceptional 2007 underwriting profits, but had its sixth consecutive underwriting gain in 2008; $58.5 billion float cost less than zero and Berkshire was paid $2.8 billion to hold it.",
+      "critical": true,
+      "required_support_sets": [
+        [
+          "p3-paragraph8"
+        ]
+      ],
+      "support_semantics": "All members of at least one set are required; equivalent replayable source spans may replace paragraph segmentation without dropping semantic context.",
+      "forbidden_misattributions": [
+        "Do not turn lower underwriting profit into an underwriting loss.",
+        "Float is not Berkshire revenue or owned capital."
+      ]
+    },
+    {
+      "checkpoint_id": "BRK-04",
+      "categories": [
+        "ownership",
+        "business_scope"
+      ],
+      "expected_source_meaning": "Berkshire owned an 87.4% diluted interest in MidAmerican; its listed utility operations include UK electricity distribution, Iowa and western US electric operations, and Kern River/Northern Natural pipelines.",
+      "critical": true,
+      "required_support_sets": [
+        [
+          "p5-paragraph1",
+          "p5-paragraph2",
+          "p5-paragraph3",
+          "p5-paragraph4"
+        ]
+      ],
+      "support_semantics": "All members of at least one set are required; equivalent replayable source spans may replace paragraph segmentation without dropping semantic context.",
+      "forbidden_misattributions": [
+        "Do not say 100% ownership or assign UK end users to Iowa."
+      ]
+    },
+    {
+      "checkpoint_id": "BRK-05",
+      "categories": [
+        "business_progress",
+        "operating_number"
+      ],
+      "expected_source_meaning": "PacifiCorp wind capacity was 33 MW when purchased in 2006 and is now 794 MW; MidAmerican spent $1.8 billion on wind generation at its two operations in 2008.",
+      "critical": true,
+      "required_support_sets": [
+        [
+          "p6-paragraph1",
+          "p6-paragraph2"
+        ]
+      ],
+      "support_semantics": "All members of at least one set are required; equivalent replayable source spans may replace paragraph segmentation without dropping semantic context.",
+      "forbidden_misattributions": [
+        "Do not call 794 an employee count or 2008 incremental MW.",
+        "Do not assign all MidAmerican wind expenditure solely to PacifiCorp."
+      ]
+    },
+    {
+      "checkpoint_id": "BRK-06",
+      "categories": [
+        "negation",
+        "reinvestment"
+      ],
+      "expected_source_meaning": "MidAmerican had not paid a dividend since Berkshire invested in early 2000; earnings were reinvested to develop utility systems.",
+      "critical": true,
+      "required_support_sets": [
+        [
+          "p6-paragraph2"
+        ]
+      ],
+      "support_semantics": "All members of at least one set are required; equivalent replayable source spans may replace paragraph segmentation without dropping semantic context.",
+      "forbidden_misattributions": [
+        "Do not describe this statement as Berkshire parent dividend history or as a future perpetual prohibition."
+      ]
+    },
+    {
+      "checkpoint_id": "BRK-07",
+      "categories": [
+        "industry",
+        "third_party_attribution"
+      ],
+      "expected_source_meaning": "For the 25 years ending 2007, insurers averaged 8.5% return on net worth versus 14.0% for the Fortune 500; these are industry comparisons, not Berkshire/GEICO returns.",
+      "critical": true,
+      "required_support_sets": [
+        [
+          "p7-paragraph3"
+        ]
+      ],
+      "support_semantics": "All members of at least one set are required; equivalent replayable source spans may replace paragraph segmentation without dropping semantic context.",
+      "forbidden_misattributions": [
+        "Do not attach either industry average to Berkshire actual 2008 ROE."
+      ]
+    },
+    {
+      "checkpoint_id": "BRK-08",
+      "categories": [
+        "operating_number",
+        "business_progress"
+      ],
+      "expected_source_meaning": "GEICO auto-insurance market share was 7.7%, up from 7.2% in 2007; new business gains and improved renewals moved it to number three among auto insurers.",
+      "critical": true,
+      "required_support_sets": [
+        [
+          "p7-paragraph5",
+          "p7-paragraph6"
+        ]
+      ],
+      "support_semantics": "All members of at least one set are required; equivalent replayable source spans may replace paragraph segmentation without dropping semantic context.",
+      "forbidden_misattributions": [
+        "Do not assign 7.7% to all Berkshire insurance or confuse it with premium growth."
+      ]
+    },
+    {
+      "checkpoint_id": "BRK-09",
+      "categories": [
+        "new_business",
+        "operating_number"
+      ],
+      "expected_source_meaning": "GEICO motorcycle policies increased 23.4% last year, raising share from about 6% to more than 7%; RV and ATV grew from a small base and GEICO recently began insuring commercial autos.",
+      "critical": true,
+      "required_support_sets": [
+        [
+          "p7-paragraph5",
+          "p7-paragraph6",
+          "p7-paragraph7",
+          "p7-paragraph8",
+          "p7-paragraph9"
+        ]
+      ],
+      "support_semantics": "All members of at least one set are required; equivalent replayable source spans may replace paragraph segmentation without dropping semantic context.",
+      "forbidden_misattributions": [
+        "Do not report 23.4% as consolidated revenue growth.",
+        "Commercial-auto entry is GEICO activity, not a new Berkshire standalone reportable segment."
+      ]
+    },
+    {
+      "checkpoint_id": "BRK-10",
+      "categories": [
+        "forward_looking",
+        "negation"
+      ],
+      "expected_source_meaning": "Management expected the economy to remain in shambles in 2009, probably beyond, but explicitly said this did not predict whether the stock market would rise or fall.",
+      "critical": true,
+      "required_support_sets": [
+        [
+          "p3-paragraph0"
+        ]
+      ],
+      "support_semantics": "All members of at least one set are required; equivalent replayable source spans may replace paragraph segmentation without dropping semantic context.",
+      "forbidden_misattributions": [
+        "Do not convert the economic outlook into a guaranteed stock-market decline or a current 2026 forecast."
+      ]
+    }
+  ],
+  "support_units": [
+    {
+      "support_id": "p2-paragraph0",
+      "source_id": "urn:company-wiki:source:sha256:46920242cbb861fd844453d5e20edd8b0ecea977d85111cf2a7cfb249913c6cf",
+      "locator": {
+        "page_number": 2,
+        "paragraph_index": 0,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "BERKSHIRE HATHAWAY INC.",
+      "quote_sha256": "5c25af01a0b1c3b4f263266bd0eeca2fdb0db80456c1b93f7baa0ed5bd32b0b3",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:0b31577df2795bbf274cfa3f1732535f746675fdb465add89645457e7201f3e7",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p2-paragraph1",
+      "source_id": "urn:company-wiki:source:sha256:46920242cbb861fd844453d5e20edd8b0ecea977d85111cf2a7cfb249913c6cf",
+      "locator": {
+        "page_number": 2,
+        "paragraph_index": 1,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "To the Shareholders of Berkshire Hathaway Inc.:",
+      "quote_sha256": "fa7ed05fde63bcc3fe85ffa4318bd9b611e2173205ec1dca08f93be8e054b29e",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:da2f7e65d78d487771f3769a158eede7f67830f0cae00f6e71b8e6e886907f6e",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p2-paragraph2",
+      "source_id": "urn:company-wiki:source:sha256:46920242cbb861fd844453d5e20edd8b0ecea977d85111cf2a7cfb249913c6cf",
+      "locator": {
+        "page_number": 2,
+        "paragraph_index": 2,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "Our decrease in net worth during 2008 was $11.5 billion, which reduced the per-share book value of\nboth our Class A and Class B stock by 9.6%. Over the last 44 years (that is, since present management took over)\nbook value has grown from $19 to $70,530, a rate of 20.3% compounded annually.*",
+      "quote_sha256": "9adb3e6acfb56b364ece1b04d843358f09491318780343df66f6c66a37e14880",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:4e736961322cf338e4ca5d8f893237b4e66f0dc77835be97831c26d39fb0647d",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p22-paragraph7",
+      "source_id": "urn:company-wiki:source:sha256:46920242cbb861fd844453d5e20edd8b0ecea977d85111cf2a7cfb249913c6cf",
+      "locator": {
+        "page_number": 22,
+        "paragraph_index": 7,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "February 27, 2009\nWarren E. Buffett\nChairman of the Board",
+      "quote_sha256": "1dadcb55a4aad14f6f765bfc21bcec57202f3651dc99e50c41f723060ba8b9c8",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:ede7429e055be652faeac38b72c544f61828e9e1bca4d3b5f47ca5fab354f05e",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p3-paragraph7",
+      "source_id": "urn:company-wiki:source:sha256:46920242cbb861fd844453d5e20edd8b0ecea977d85111cf2a7cfb249913c6cf",
+      "locator": {
+        "page_number": 3,
+        "paragraph_index": 7,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "Most of the Berkshire businesses whose results are significantly affected by the economy earned below\ntheir potential last year, and that will be true in 2009 as well. Our retailers were hit particularly hard, as were our\noperations tied to residential construction. In aggregate, however, our manufacturing, service and retail\nbusinesses earned substantial sums and most of them – particularly the larger ones – continue to strengthen their\ncompetitive positions. Moreover, we are fortunate that Berkshire’s two most important businesses – our\ninsurance and utility groups – produce earnings that are not correlated to those of the general economy. Both\nbusinesses delivered outstanding results in 2008 and have excellent prospects.",
+      "quote_sha256": "31640d7369ee93a43f84f5a87e3a2d920d6e4a526eca1eadb39a557483d3f722",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:f5cd0986fa6910b363bd81a47a49c4455db21b0e5d4d20c202ccc2e63053ce74",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p3-paragraph8",
+      "source_id": "urn:company-wiki:source:sha256:46920242cbb861fd844453d5e20edd8b0ecea977d85111cf2a7cfb249913c6cf",
+      "locator": {
+        "page_number": 3,
+        "paragraph_index": 8,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "As predicted in last year’s report, the exceptional underwriting profits that our insurance businesses\nrealized in 2007 were not repeated in 2008. Nevertheless, the insurance group delivered an underwriting gain for\nthe sixth consecutive year. This means that our $58.5 billion of insurance “float” – money that doesn’t belong to\nus but that we hold and invest for our own benefit – cost us less than zero. In fact, we were paid $2.8 billion to\nhold our float during 2008. Charlie and I find this enjoyable.",
+      "quote_sha256": "7054fb455320120504c291a19543b3edc6d805f2b2746e09dbe02aa1cc2cc976",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:fb9b71403a158edf77dfa4182810f3ef82f887ec5af2d602a66168a4100a4f11",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p5-paragraph1",
+      "source_id": "urn:company-wiki:source:sha256:46920242cbb861fd844453d5e20edd8b0ecea977d85111cf2a7cfb249913c6cf",
+      "locator": {
+        "page_number": 5,
+        "paragraph_index": 1,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "Berkshire has an 87.4% (diluted) interest in MidAmerican Energy Holdings, which owns a wide\nvariety of utility operations. The largest of these are (1) Yorkshire Electricity and Northern Electric, whose\n3.8 million end users make it the U.K.’s third largest distributor of electricity;",
+      "quote_sha256": "68e3c4671409d7fbcfed42f7f85134de094d9f684456793ff1bd3ad2ab5e7b41",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:1194d1c8266a05742d6ecb25768579877a7eb5d39871c30f0c48291ebe87f820",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p5-paragraph2",
+      "source_id": "urn:company-wiki:source:sha256:46920242cbb861fd844453d5e20edd8b0ecea977d85111cf2a7cfb249913c6cf",
+      "locator": {
+        "page_number": 5,
+        "paragraph_index": 2,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "(2) MidAmerican Energy, which\nserves 723,000 electric customers, primarily in Iowa;",
+      "quote_sha256": "c843715c006b96f90fe6b17428a35a9e2a2fc5f989fda66219ec238238bf1798",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:b1cac9d6e35fbae5a5aabf9a4c0554110779ce92df16fa10c9d3a78751b6548a",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p5-paragraph3",
+      "source_id": "urn:company-wiki:source:sha256:46920242cbb861fd844453d5e20edd8b0ecea977d85111cf2a7cfb249913c6cf",
+      "locator": {
+        "page_number": 5,
+        "paragraph_index": 3,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "(3) Pacific Power and Rocky Mountain Power, serving\nabout 1.7 million electric customers in six western states;",
+      "quote_sha256": "ac6b7e7f86b1c0f0b61d445edefa925831c6a72e92f730bfe293feb179c83069",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:5a0bafa4cd827850b349d2dbb7e5d5b3576395f5eb0780c455cf8540207d5b8c",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p5-paragraph4",
+      "source_id": "urn:company-wiki:source:sha256:46920242cbb861fd844453d5e20edd8b0ecea977d85111cf2a7cfb249913c6cf",
+      "locator": {
+        "page_number": 5,
+        "paragraph_index": 4,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "and (4) Kern River and Northern Natural pipelines,\nwhich carry about 9% of the natural gas consumed in the U.S.",
+      "quote_sha256": "e9219a15ac9b48b091a1e1f6e8fe7e2e3382f1288bb91d535bc5f284fc497757",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:2bd286c026eebac7d24b0772ac0037571427468c300fc4df97fea075271e19e6",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p6-paragraph1",
+      "source_id": "urn:company-wiki:source:sha256:46920242cbb861fd844453d5e20edd8b0ecea977d85111cf2a7cfb249913c6cf",
+      "locator": {
+        "page_number": 6,
+        "paragraph_index": 1,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "Similarly, when we purchased PacifiCorp in 2006, we moved aggressively to expand wind generation.\nWind capacity was then 33 megawatts. It’s now 794, with more coming. (Arriving at PacifiCorp, we found\n“wind” of a different sort: The company had 98 committees that met frequently. Now there are 28. Meanwhile,\nwe generate and deliver considerably more electricity, doing so with 2% fewer employees.)",
+      "quote_sha256": "8218a4054f685adfd369e480dddb4f59dcee76eb75aa8e4e0f5dc5b39cedbd63",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:4efb79ba59aab65f01f90b5b1f523febea1cfc9b797a231479b73fa81811e4b5",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p6-paragraph2",
+      "source_id": "urn:company-wiki:source:sha256:46920242cbb861fd844453d5e20edd8b0ecea977d85111cf2a7cfb249913c6cf",
+      "locator": {
+        "page_number": 6,
+        "paragraph_index": 2,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "In 2008 alone, MidAmerican spent $1.8 billion on wind generation at our two operations, and today the\ncompany is number one in the nation among regulated utilities in ownership of wind capacity. By the way,\ncompare that $1.8 billion to the $1.1 billion of pre-tax earnings of PacifiCorp (shown in the table as “Western”)\nand Iowa. In our utility business, we spend all we earn, and then some, in order to fulfill the needs of our service\nareas. Indeed, MidAmerican has not paid a dividend since Berkshire bought into the company in early 2000. Its\nearnings have instead been reinvested to develop the utility systems our customers require and deserve. In\nexchange, we have been allowed to earn a fair return on the huge sums we have invested. It’s a great partnership\nfor all concerned.",
+      "quote_sha256": "b757699de20243ba67b59009dd4a7b84e216840657196fd23aff35947fb448cf",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:19a553ad18f36f0b8800cee9c9bfa1ed380d30554ff7d38ce967190296f107b2",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p7-paragraph3",
+      "source_id": "urn:company-wiki:source:sha256:46920242cbb861fd844453d5e20edd8b0ecea977d85111cf2a7cfb249913c6cf",
+      "locator": {
+        "page_number": 7,
+        "paragraph_index": 3,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "Our insurance group has propelled Berkshire’s growth since we first entered the business in 1967. This\nhappy result has not been due to general prosperity in the industry. During the 25 years ending in 2007, return on\nnet worth for insurers averaged 8.5% versus 14.0% for the Fortune 500. Clearly our insurance CEOs have not\nhad the wind at their back. Yet these managers have excelled to a degree Charlie and I never dreamed possible in\nthe early days. Why do I love them?",
+      "quote_sha256": "99776c4ffa7594d57f2ae9689671ba22ff945a457dfc67182e86bd2992964164",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:dc994261f37bc16c18e96e75f0718257f3f81819a7675e0ae24bc65030faa27c",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p7-paragraph5",
+      "source_id": "urn:company-wiki:source:sha256:46920242cbb861fd844453d5e20edd8b0ecea977d85111cf2a7cfb249913c6cf",
+      "locator": {
+        "page_number": 7,
+        "paragraph_index": 5,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "At GEICO, Tony Nicely – now in his 48th year at the company after joining it when he was 18 –\ncontinues to gobble up market share while maintaining disciplined underwriting. When Tony became CEO in\n1993, GEICO had 2.0% of the auto insurance market, a level at which the company had long been stuck. Now we\nhave a 7.7% share, up from 7.2% in 2007.",
+      "quote_sha256": "598dc5629a3782b964fa1b4516328fe0dcf0a0f16f88058414f38de17aa9d931",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:933d32a65e6612c470ddf855a4112baf63e436512b303a4f9e8855db2b566b38",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p7-paragraph6",
+      "source_id": "urn:company-wiki:source:sha256:46920242cbb861fd844453d5e20edd8b0ecea977d85111cf2a7cfb249913c6cf",
+      "locator": {
+        "page_number": 7,
+        "paragraph_index": 6,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "The combination of new business gains and an improvement in the renewal rate on existing business\nhas moved GEICO into the number three position among auto insurers. In 1995, when Berkshire purchased\ncontrol, GEICO was number seven. Now we trail only State Farm and Allstate.",
+      "quote_sha256": "74055861852a6db4899ac2480b67d008bfb26acd1e4327a487e8245c5f160073",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:cd18d49caa9c87eea03bdd94af6ce14b20cd675aa900e182ef3bd18a7f85ae6e",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p7-paragraph9",
+      "source_id": "urn:company-wiki:source:sha256:46920242cbb861fd844453d5e20edd8b0ecea977d85111cf2a7cfb249913c6cf",
+      "locator": {
+        "page_number": 7,
+        "paragraph_index": 9,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "Beyond this, we are gaining ground in allied lines. Last year, our motorcycle policies increased by\n23.4%, which raised our market share from about 6% to more than 7%. Our RV and ATV businesses are also\ngrowing rapidly, albeit from a small base. And, finally, we recently began insuring commercial autos, a big\nmarket that offers real promise.",
+      "quote_sha256": "2f7611ae36986adc7243d4d6eaa4f898681d4678878afb962160f07d44644185",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:c0059401222cfbbc4206576b967bee989863b8f6e2ff4e40a49b1c6b37f6111e",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p3-paragraph0",
+      "source_id": "urn:company-wiki:source:sha256:46920242cbb861fd844453d5e20edd8b0ecea977d85111cf2a7cfb249913c6cf",
+      "locator": {
+        "page_number": 3,
+        "paragraph_index": 0,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "Take a look again at the 44-year table on page 2. In 75% of those years, the S&P stocks recorded a\ngain. I would guess that a roughly similar percentage of years will be positive in the next 44. But neither Charlie\nMunger, my partner in running Berkshire, nor I can predict the winning and losing years in advance. (In our\nusual opinionated view, we don’t think anyone else can either.) We’re certain, for example, that the economy will\nbe in shambles throughout 2009 – and, for that matter, probably well beyond – but that conclusion does not tell\nus whether the stock market will rise or fall.",
+      "quote_sha256": "4a1c9e87cdc7bd7ce702f00c90f8c0a206aed02ddb6700cf16605264b7dc1a49",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:075df0473837ce23cb9d64c5e198d4102fa42fff8a36118bb80c0d03fdf0a1da",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p7-paragraph7",
+      "source_id": "urn:company-wiki:source:sha256:46920242cbb861fd844453d5e20edd8b0ecea977d85111cf2a7cfb249913c6cf",
+      "locator": {
+        "page_number": 7,
+        "paragraph_index": 7,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "GEICO grows because it saves money for motorists. No one likes to buy auto insurance. But virtually\neveryone likes to drive. So, sensibly, drivers look for the lowest-cost insurance consistent with first-class service.\nEfficiency is the key to low cost, and efficiency is Tony’s specialty. Five years ago the number of policies per\nemployee was 299. In 2008, the number was 439, a huge increase in productivity.",
+      "quote_sha256": "298b981e53b9734808f725c3802647d4769efe757d667f78b62c8d52bfbea946",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:fa62c925d702b91b450d4a66a939e45b881033c070a37319984dc7caefa8e259",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    },
+    {
+      "support_id": "p7-paragraph8",
+      "source_id": "urn:company-wiki:source:sha256:46920242cbb861fd844453d5e20edd8b0ecea977d85111cf2a7cfb249913c6cf",
+      "locator": {
+        "page_number": 7,
+        "paragraph_index": 8,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "quote": "As we view GEICO’s current opportunities, Tony and I feel like two hungry mosquitoes in a nudist\ncamp. Juicy targets are everywhere. First, and most important, our new business in auto insurance is now\nexploding. Americans are focused on saving money as never before, and they are flocking to GEICO. In January\n2009, we set a monthly record – by a wide margin – for growth in policyholders. That record will last exactly 28\ndays: As we go to press, it’s clear February’s gain will be even better.",
+      "quote_sha256": "251400ccc32f746828d72c2f571a4df617361e34fbd97c3a650548d947105125",
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:9189514a8ba87b6728bd79e1d5ec2642725bf7b8b9f5ac05457002ad54d48bd8",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1"
+    }
+  ],
+  "gaps": [
+    "Current manifest says HK / Unresolved and broker_research; this is a source-metadata gap, not permission to guess US in FF/RF.",
+    "No official acquisition/source_url receipt binds these exact bytes; document typography and content plus existing SEC/Nasdaq identity snapshot support content identity only.",
+    "True US SEC filing PDF coverage remains unfilled by this standalone shareholder letter."
+  ],
+  "anti_leakage": {
+    "producer_selection_invoked": false,
+    "producer_outputs_read": false,
+    "model_calls": 0,
+    "downloads": 0,
+    "source_only_reader": true
+  },
+  "freshness": {
+    "status": "fresh_source_content_before_c3_candidate",
+    "basis": "No company/hash hit in tools/document_understanding_benchmark, tools/holdout_replay or existing DU11 review JSON/Markdown literal inventory; metadata existence and filesystem scans are not unseen-by-all-history proof.",
+    "limitation": "A later candidate or rule-tuning run makes this sample exposed/regression for subsequent rounds."
+  },
+  "source_review_revision_at": "2026-10-26T19:15:18.073179+00:00",
+  "revision_reason": "Independent source review: retained Most quantifier in BRK-02; expanded BRK-09 GEICO support context across p7 paragraphs5-9."
+}

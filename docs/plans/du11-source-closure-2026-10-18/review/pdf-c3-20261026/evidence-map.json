@@ -1,0 +1,170 @@
+{
+  ".planning\\c3-20261026\\independent-runner\\after-fix-probe-v2.py": {
+    "archive": "docs\\plans\\du11-source-closure-2026-10-18\\review\\pdf-c3-20261026\\evidence\\after-fix-probe-v2.py",
+    "original_sha256": "2d7b47172fd4ab0b7d8db5cb0a3066b6f43fb780654c7f6879028705b54c4ae7",
+    "archive_sha256": "2d7b47172fd4ab0b7d8db5cb0a3066b6f43fb780654c7f6879028705b54c4ae7"
+  },
+  ".planning\\c3-20261026\\independent-runner\\after-fix-probe.py": {
+    "archive": "docs\\plans\\du11-source-closure-2026-10-18\\review\\pdf-c3-20261026\\evidence\\after-fix-probe.py",
+    "original_sha256": "006e0deeae39d4968811910a6ecc01b876fe1f31a7aa8c06c29bce7296b2ec13",
+    "archive_sha256": "006e0deeae39d4968811910a6ecc01b876fe1f31a7aa8c06c29bce7296b2ec13"
+  },
+  ".planning\\c3-20261026\\independent-runner\\baseline-runner-snapshot.py": {
+    "archive": "docs\\plans\\du11-source-closure-2026-10-18\\review\\pdf-c3-20261026\\evidence\\baseline-runner-snapshot.py.gz",
+    "original_sha256": "dfdfcee660a56f37788cadfb7fea7b28c330b4b62f2599b71d1d56e842f375fe",
+    "archive_sha256": "a3ba68b7cf3e74f8011e08d1cd948f55365c7c1a0f9fe3aa76d46a8ae8ac458a"
+  },
+  ".planning\\c3-20261026\\independent-runner\\before-fix-probe-v2.py": {
+    "archive": "docs\\plans\\du11-source-closure-2026-10-18\\review\\pdf-c3-20261026\\evidence\\before-fix-probe-v2.py",
+    "original_sha256": "5d884f55a7cfc8c20ba3d5d8291ae52d4d588cd2900aab1d656f822e92d5a3ac",
+    "archive_sha256": "5d884f55a7cfc8c20ba3d5d8291ae52d4d588cd2900aab1d656f822e92d5a3ac"
+  },
+  ".planning\\c3-20261026\\independent-runner\\before-fix-probe.py": {
+    "archive": "docs\\plans\\du11-source-closure-2026-10-18\\review\\pdf-c3-20261026\\evidence\\before-fix-probe.py",
+    "original_sha256": "ae6fcd1a19aa4515dbbd867434e8e3b5ba5bb2e9ca22c057de9530866c95e878",
+    "archive_sha256": "ae6fcd1a19aa4515dbbd867434e8e3b5ba5bb2e9ca22c057de9530866c95e878"
+  },
+  ".planning\\c3-20261026\\independent-runner\\final-freeze.json": {
+    "archive": "docs\\plans\\du11-source-closure-2026-10-18\\review\\pdf-c3-20261026\\evidence\\final-freeze.json",
+    "original_sha256": "b409989d9af32010a1c33a29bff356af03d21688bf19ac457278b778676aaea3",
+    "archive_sha256": "b409989d9af32010a1c33a29bff356af03d21688bf19ac457278b778676aaea3"
+  },
+  ".planning\\c3-20261026\\independent-runner\\final-freeze.log": {
+    "archive": "docs\\plans\\du11-source-closure-2026-10-18\\review\\pdf-c3-20261026\\evidence\\final-freeze.log",
+    "original_sha256": "f0dfcb6c1dd712dd15693db66b36a0b72cac7b236a28dddfd76d1d4fe9551763",
+    "archive_sha256": "f0dfcb6c1dd712dd15693db66b36a0b72cac7b236a28dddfd76d1d4fe9551763"
+  },
+  ".planning\\c3-20261026\\independent-runner\\final-freeze.xml": {
+    "archive": "docs\\plans\\du11-source-closure-2026-10-18\\review\\pdf-c3-20261026\\evidence\\final-freeze.xml",
+    "original_sha256": "32d51d7fe2e7b43e9ffc88b9436d06eaeaa987388583a168605993d67ab5bba2",
+    "archive_sha256": "32d51d7fe2e7b43e9ffc88b9436d06eaeaa987388583a168605993d67ab5bba2"
+  },
+  ".planning\\c3-20261026\\independent-runner\\final-targeted.json": {
+    "archive": "docs\\plans\\du11-source-closure-2026-10-18\\review\\pdf-c3-20261026\\evidence\\final-targeted.json",
+    "original_sha256": "61b8d1a2f3493185af01d87cda4840321408293d825c67ed8038de7fbb8c9be9",
+    "archive_sha256": "61b8d1a2f3493185af01d87cda4840321408293d825c67ed8038de7fbb8c9be9"
+  },
+  ".planning\\c3-20261026\\independent-runner\\final-targeted.log": {
+    "archive": "docs\\plans\\du11-source-closure-2026-10-18\\review\\pdf-c3-20261026\\evidence\\final-targeted.log",
+    "original_sha256": "42bf2f7c5bb7d416899c348c637895614e73ad540324686ce573bccba492e19b",
+    "archive_sha256": "42bf2f7c5bb7d416899c348c637895614e73ad540324686ce573bccba492e19b"
+  },
+  ".planning\\c3-20261026\\independent-runner\\final-targeted.xml": {
+    "archive": "docs\\plans\\du11-source-closure-2026-10-18\\review\\pdf-c3-20261026\\evidence\\final-targeted.xml",
+    "original_sha256": "ead388266439b4952e40796d249f85987f14dc45094e574b29a0a1bd9e4dddbe",
+    "archive_sha256": "ead388266439b4952e40796d249f85987f14dc45094e574b29a0a1bd9e4dddbe"
+  },
+  ".planning\\c3-20261026\\independent-runner\\held-cli-owned-temp.json": {
+    "archive": "docs\\plans\\du11-source-closure-2026-10-18\\review\\pdf-c3-20261026\\evidence\\held-cli-owned-temp.json",
+    "original_sha256": "90775d3e3a508b0ca33f5772f54496171beb909df1e42fb9faa3e42cc1bef8e0",
+    "archive_sha256": "90775d3e3a508b0ca33f5772f54496171beb909df1e42fb9faa3e42cc1bef8e0"
+  },
+  ".planning\\c3-20261026\\independent-runner\\independent-after-fix-probe-v2.json": {
+    "archive": "docs\\plans\\du11-source-closure-2026-10-18\\review\\pdf-c3-20261026\\evidence\\independent-after-fix-probe-v2.json",
+    "original_sha256": "f6e675e18e89f72f7f2df384c073a22065bce5b303ed0581eb3bf2be287390ad",
+    "archive_sha256": "f6e675e18e89f72f7f2df384c073a22065bce5b303ed0581eb3bf2be287390ad"
+  },
+  ".planning\\c3-20261026\\independent-runner\\independent-after-fix-probe.json": {
+    "archive": "docs\\plans\\du11-source-closure-2026-10-18\\review\\pdf-c3-20261026\\evidence\\independent-after-fix-probe.json",
+    "original_sha256": "1934a7fe716c8ba843de2c8ec46ac2153f8d0a070b86b44b76b1c7e97d76068d",
+    "archive_sha256": "1934a7fe716c8ba843de2c8ec46ac2153f8d0a070b86b44b76b1c7e97d76068d"
+  },
+  ".planning\\c3-20261026\\independent-runner\\independent-before-fix-probe-v2.json": {
+    "archive": "docs\\plans\\du11-source-closure-2026-10-18\\review\\pdf-c3-20261026\\evidence\\independent-before-fix-probe-v2.json",
+    "original_sha256": "06b04f9977330ab7439cd8c2a612d4a82a4c15aab72f1f4033bf90abc1a4c4d0",
+    "archive_sha256": "06b04f9977330ab7439cd8c2a612d4a82a4c15aab72f1f4033bf90abc1a4c4d0"
+  },
+  ".planning\\c3-20261026\\independent-runner\\independent-before-fix-probe.json": {
+    "archive": "docs\\plans\\du11-source-closure-2026-10-18\\review\\pdf-c3-20261026\\evidence\\independent-before-fix-probe.json",
+    "original_sha256": "b3c4d246f84746e423da81301d62cbd11438df0095dad40f364b79a6727b8da7",
+    "archive_sha256": "b3c4d246f84746e423da81301d62cbd11438df0095dad40f364b79a6727b8da7"
+  },
+  ".planning\\c3-20261026\\independent-runner\\independent-exact-ref.json": {
+    "archive": "docs\\plans\\du11-source-closure-2026-10-18\\review\\pdf-c3-20261026\\evidence\\independent-exact-ref.json",
+    "original_sha256": "c8d3306a69826c9026aa0e7e8d6d230c0a40089d06cf914d0c34e15f437c2007",
+    "archive_sha256": "c8d3306a69826c9026aa0e7e8d6d230c0a40089d06cf914d0c34e15f437c2007"
+  },
+  ".planning\\c3-20261026\\independent-runner\\review-progress.json": {
+    "archive": "docs\\plans\\du11-source-closure-2026-10-18\\review\\pdf-c3-20261026\\evidence\\review-progress.json",
+    "original_sha256": "feec58f87e1864a85f3a2669c08e645545a64ff93ffa5b90cf57aefdb7cf53b3",
+    "archive_sha256": "feec58f87e1864a85f3a2669c08e645545a64ff93ffa5b90cf57aefdb7cf53b3"
+  },
+  ".planning\\c3-20261026\\independent-runner\\review-progress.md": {
+    "archive": "docs\\plans\\du11-source-closure-2026-10-18\\review\\pdf-c3-20261026\\evidence\\review-progress.md",
+    "original_sha256": "53acd4a9c954d8dc98b96a955d842a647ec469ce4df1500851fed0248c246770",
+    "archive_sha256": "53acd4a9c954d8dc98b96a955d842a647ec469ce4df1500851fed0248c246770"
+  },
+  ".planning\\c3-20261026\\independent-runner\\review.json": {
+    "archive": "docs\\plans\\du11-source-closure-2026-10-18\\review\\pdf-c3-20261026\\evidence\\review.json",
+    "original_sha256": "c765be485c186d46221687f0768ddce5ff7df59be0ace9622b9cff3b8b9c5ac4",
+    "archive_sha256": "c765be485c186d46221687f0768ddce5ff7df59be0ace9622b9cff3b8b9c5ac4"
+  },
+  ".planning\\c3-20261026\\independent-runner\\review.md": {
+    "archive": "docs\\plans\\du11-source-closure-2026-10-18\\review\\pdf-c3-20261026\\evidence\\review.md",
+    "original_sha256": "6c5644bfee651d2345cb35a786f1874cbaf3bbdafa6b34cf0587f5391a8a0ed4",
+    "archive_sha256": "6c5644bfee651d2345cb35a786f1874cbaf3bbdafa6b34cf0587f5391a8a0ed4"
+  },
+  ".planning\\c3-20261026\\independent-runner\\targeted-initial.json": {
+    "archive": "docs\\plans\\du11-source-closure-2026-10-18\\review\\pdf-c3-20261026\\evidence\\targeted-initial.json",
+    "original_sha256": "d0b6c34d788d2abc1c4a6be5d43472112b10a0bfedc5d17dd30fac11038e7151",
+    "archive_sha256": "d0b6c34d788d2abc1c4a6be5d43472112b10a0bfedc5d17dd30fac11038e7151"
+  },
+  ".planning\\c3-20261026\\independent-runner\\targeted-initial.log": {
+    "archive": "docs\\plans\\du11-source-closure-2026-10-18\\review\\pdf-c3-20261026\\evidence\\targeted-initial.log",
+    "original_sha256": "ce8ce7bb2762c8fb77ece184a63845bd0db76820b3b756bdc4b481a8ffd1b3e4",
+    "archive_sha256": "ce8ce7bb2762c8fb77ece184a63845bd0db76820b3b756bdc4b481a8ffd1b3e4"
+  },
+  ".planning\\c3-20261026\\independent-runner\\test_independent_exact_ref.py": {
+    "archive": "docs\\plans\\du11-source-closure-2026-10-18\\review\\pdf-c3-20261026\\evidence\\test_independent_exact_ref.py",
+    "original_sha256": "792aac3eca3935408d0af82314defb8f2877d6b2596ecf95bf7b70c9cc93a31f",
+    "archive_sha256": "792aac3eca3935408d0af82314defb8f2877d6b2596ecf95bf7b70c9cc93a31f"
+  },
+  ".planning\\c3-20261026\\metadata-red-owned.xml": {
+    "archive": "docs\\plans\\du11-source-closure-2026-10-18\\review\\pdf-c3-20261026\\evidence\\root-metadata-red-owned.xml",
+    "sha256": "6afe088b375e832d5f0f08485c89270a13bdd9c4351b98145cbe769d098ed7a5"
+  },
+  ".planning\\c3-20261026\\metadata-red-owned.log": {
+    "archive": "docs\\plans\\du11-source-closure-2026-10-18\\review\\pdf-c3-20261026\\evidence\\root-metadata-red-owned.log",
+    "sha256": "ac9f213146b19700128a09385ee7fae3a31b4bada0001f4a0e6d10d893aa5090"
+  },
+  ".planning\\c3-20261026\\metadata-resource-final-v2.xml": {
+    "archive": "docs\\plans\\du11-source-closure-2026-10-18\\review\\pdf-c3-20261026\\evidence\\root-metadata-resource-final-v2.xml",
+    "sha256": "848f243856eed1e73744ff5f9e716ff720cd320b6559cf8c81558bf975e9a62c"
+  },
+  ".planning\\c3-20261026\\metadata-resource-final-v2.log": {
+    "archive": "docs\\plans\\du11-source-closure-2026-10-18\\review\\pdf-c3-20261026\\evidence\\root-metadata-resource-final-v2.log",
+    "sha256": "4a96a13599487293198050f13f74cc978e7b3e77490dc098facd566a8687e150"
+  },
+  ".planning\\c3-20261026\\exact-ref-red.xml": {
+    "archive": "docs\\plans\\du11-source-closure-2026-10-18\\review\\pdf-c3-20261026\\evidence\\root-exact-ref-red.xml",
+    "sha256": "c925f92c983cb473bf4da5bb4950db684a190f204c56cdeded52a6932784f5a7"
+  },
+  ".planning\\c3-20261026\\exact-ref-red.log": {
+    "archive": "docs\\plans\\du11-source-closure-2026-10-18\\review\\pdf-c3-20261026\\evidence\\root-exact-ref-red.log",
+    "sha256": "cfcac18f90918515228bff2f043805cb498af8a709ddd31e6ef4e5e9539a6df6"
+  },
+  ".planning\\c3-20261026\\exact-ref-and-lifecycle-green.xml": {
+    "archive": "docs\\plans\\du11-source-closure-2026-10-18\\review\\pdf-c3-20261026\\evidence\\root-exact-ref-and-lifecycle-green.xml",
+    "sha256": "dfce1610db5322940581a008ee595f2dc912e8da0fd4d29e8284598b49f1d445"
+  },
+  ".planning\\c3-20261026\\exact-ref-and-lifecycle-green.log": {
+    "archive": "docs\\plans\\du11-source-closure-2026-10-18\\review\\pdf-c3-20261026\\evidence\\root-exact-ref-and-lifecycle-green.log",
+    "sha256": "87930fe82b3a493e29446bcb4c7e0efc1eccaafee1c419510896e967484e0f9c"
+  },
+  ".planning\\c3-20261026\\lifecycle-loopback-final.xml": {
+    "archive": "docs\\plans\\du11-source-closure-2026-10-18\\review\\pdf-c3-20261026\\evidence\\root-lifecycle-loopback-final.xml",
+    "sha256": "015d73e3c2881ae8c4e58fb12723efe927479b53c90209b372d5ca5fcbc23814"
+  },
+  ".planning\\c3-20261026\\lifecycle-loopback-final.log": {
+    "archive": "docs\\plans\\du11-source-closure-2026-10-18\\review\\pdf-c3-20261026\\evidence\\root-lifecycle-loopback-final.log",
+    "sha256": "22f919a34ba3e34680d9af483e1cbd7ebe9a2b01150ce8fba83819cb00cebcf8"
+  },
+  ".planning\\c3-20261026\\holdout-qualification-v1.json": {
+    "archive": "docs\\plans\\du11-source-closure-2026-10-18\\review\\pdf-c3-20261026\\evidence\\root-holdout-qualification-v1.json",
+    "sha256": "477b09c6ce6015762a3787034232b86bf24cab3562c3e09348a095b413226368"
+  },
+  ".planning\\c3-20261026\\holdout-exact-registration-v2.json": {
+    "archive": "docs\\plans\\du11-source-closure-2026-10-18\\review\\pdf-c3-20261026\\evidence\\root-holdout-exact-registration-v2.json",
+    "sha256": "ed4dca5ecb1d5d3eb7fb0c893d73183a6ad7fb80cfbde9a2978306acf647415f"
+  }
+}

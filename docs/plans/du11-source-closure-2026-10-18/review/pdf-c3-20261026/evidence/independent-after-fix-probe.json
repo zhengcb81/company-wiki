@@ -1,0 +1,58 @@
+{
+  "snapshot": "current C3 lifecycle/provenance fix",
+  "source_lf_sha256": "ab1ddce7e962934de75c41386da14c8cd334034b09047303a76f368f9787a607",
+  "results": [
+    {
+      "case": "primary_title_only_no_date",
+      "provenance": null,
+      "status": null,
+      "error": {
+        "type": "TypeError",
+        "message": "mkdtemp() got multiple values for argument 'dir'"
+      },
+      "allocated_roots": 0,
+      "leaked_before_independent_cleanup": [],
+      "model_post_attempts": 0
+    },
+    {
+      "case": "primary_title_only_observed_date",
+      "provenance": null,
+      "status": null,
+      "error": {
+        "type": "TypeError",
+        "message": "mkdtemp() got multiple values for argument 'dir'"
+      },
+      "allocated_roots": 0,
+      "leaked_before_independent_cleanup": [],
+      "model_post_attempts": 0
+    },
+    {
+      "case": "missing_original",
+      "provenance": null,
+      "status": null,
+      "error": {
+        "type": "TypeError",
+        "message": "mkdtemp() got multiple values for argument 'dir'"
+      },
+      "allocated_roots": 0,
+      "leaked_before_independent_cleanup": [],
+      "model_post_attempts": 0
+    },
+    {
+      "case": "invalid_gold_json",
+      "provenance": null,
+      "status": null,
+      "error": {
+        "type": "TypeError",
+        "message": "mkdtemp() got multiple values for argument 'dir'"
+      },
+      "allocated_roots": 0,
+      "leaked_before_independent_cleanup": [],
+      "model_post_attempts": 0
+    }
+  ],
+  "holdout_read": false,
+  "network_calls": 0,
+  "model_calls": 0,
+  "manual_owned_cleanup_done": true
+}

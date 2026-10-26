@@ -1,0 +1,50 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+FF                                                                       [100%]
+================================== FAILURES ===================================
+_ test_exact_source_content_read_is_separate_from_historical_filing_qualification _
+
+tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/.planning/c3-20261026/tmp/pytest-of-郑曾波/pytest-7/test_exact_source_content_read0')
+
+    def test_exact_source_content_read_is_separate_from_historical_filing_qualification(tmp_path):
+        from company_wiki.source_catalog.source_reader import SourceRef
+        from tools.document_understanding_benchmark.phase_c_readonly_source import prepare_registered_source, ReadonlySourceGap
+    
+        with reuse.setup_source("http://127.0.0.1:1/chat/completions") as (root, catalog, config, _, imported, _kind):
+            original, descriptor = _fixture_source(catalog, imported)
+            protected = {p: _fingerprint(p) for p in [original, config, catalog.config.database_path]}
+            descriptor["published_date"] = None
+            facts = {"content_sha256": imported["source_ref"]["content_sha256"],
+                     "facts": {"published_date": None},
+                     "evidence": {"published_date": {"value": None, "locator": "fixture/source-date-unproved"}}}
+            common = dict(source_config=config, original=original,
+                          expected_sha256=imported["source_ref"]["content_sha256"],
+                          descriptor=descriptor, as_of_date="2026-10-17", source_facts=facts)
+            content = tmp_path / "content"
+>           result = prepare_registered_source(owned_root=content, expected_ref=SourceRef(**imported["source_ref"]), **common)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           TypeError: prepare_registered_source() got an unexpected keyword argument 'expected_ref'
+
+tests\test_phase_c_readonly_source.py:54: TypeError
+________ test_explicit_version_read_cannot_substitute_another_document ________
+
+tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/.planning/c3-20261026/tmp/pytest-of-郑曾波/pytest-7/test_explicit_version_read_can0')
+
+    def test_explicit_version_read_cannot_substitute_another_document(tmp_path):
+        from dataclasses import replace
+        from company_wiki.source_catalog.source_reader import SourceRef
+        from tools.document_understanding_benchmark.phase_c_readonly_source import prepare_registered_source, ReadonlySourceGap
+    
+        with reuse.setup_source("http://127.0.0.1:1/chat/completions") as (_root, catalog, config, _, imported, _kind):
+            original, descriptor = _fixture_source(catalog, imported)
+            wrong = replace(SourceRef(**imported["source_ref"]), document_id="urn:company-wiki:document:sha256:" + "b" * 64)
+            with pytest.raises(ReadonlySourceGap):
+>               prepare_registered_source(source_config=config, owned_root=tmp_path / "owned",
+                                          original=original, expected_sha256=imported["source_ref"]["content_sha256"],
+                                          descriptor=descriptor, as_of_date="2026-10-17", expected_ref=wrong)
+E               TypeError: prepare_registered_source() got an unexpected keyword argument 'expected_ref'
+
+tests\test_phase_c_readonly_source.py:74: TypeError
+=========================== short test summary info ===========================
+FAILED tests/test_phase_c_readonly_source.py::test_exact_source_content_read_is_separate_from_historical_filing_qualification
+FAILED tests/test_phase_c_readonly_source.py::test_explicit_version_read_cannot_substitute_another_document
+2 failed in 6.77s

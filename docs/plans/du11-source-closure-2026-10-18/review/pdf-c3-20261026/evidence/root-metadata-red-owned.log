@@ -1,0 +1,357 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+FFFFFFFFF                                                                [100%]
+================================== FAILURES ===================================
+__ test_unseen_sample_uses_explicit_company_and_language_without_id_mapping ___
+
+    def test_unseen_sample_uses_explicit_company_and_language_without_id_mapping():
+        sample = prepared_sample()
+        before = deepcopy(sample)
+>       descriptor = runner.source_descriptor(sample)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_phase_c_sample_metadata.py:30: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+sample = {'sample_id': 'unseen-letter-17', 'provider': 'configured-provider', 'source_metadata_observation': {'entity': 'Example Issuer', 'publisher': 'Example Holdings', 'market': 'US', 'security_id': 'EXMP', ...}}
+
+    def source_descriptor(sample: dict) -> dict:
+        labels = {"cn-h1": "中微公司", "hk-annual": "名创优品", "us-10k": "微软"}
+        observation = sample["source_metadata_observation"]
+        primary = sample.get("verified_official_descriptor") or {}
+        # Labels are the explicit companies in prep.md, not filename inference.
+        descriptor = {
+>           "entity": labels[sample["sample_id"]],
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            "publisher": primary.get("publisher") or labels[sample["sample_id"]],
+            **{
+                key: primary.get(key, observation.get(key))
+                for key in (
+                    "market",
+                    "security_id",
+                    "fiscal_year",
+                    "fiscal_period",
+                    "period_end",
+                    "published_date",
+                    "filing_date",
+                    "source_url",
+                    "form_type",
+                )
+            },
+            "title": observation["title"],
+            "document_kind": observation["document_kind"],
+            "language": "en"
+            if sample["sample_id"] == "us-10k"
+            else "zh"
+            if sample["sample_id"] == "cn-h1"
+            else "mixed",
+        }
+E       KeyError: 'unseen-letter-17'
+
+tools\document_understanding_benchmark\phase_c_runner.py:540: KeyError
+_ test_source_owned_correction_supersedes_unreliable_observation_for_every_field _
+
+    def test_source_owned_correction_supersedes_unreliable_observation_for_every_field():
+        sample = prepared_sample()
+        sample["verified_official_descriptor"] = {
+            "entity": "Verified Issuer", "publisher": "Verified Holdings",
+            "market": "HK", "security_id": "00123", "language": "en",
+            "title": "Interim announcement", "document_kind": "semi_annual_report",
+            "published_date": "2020-08-03", "fiscal_year": 2020,
+        }
+>       descriptor = runner.source_descriptor(sample)
+                     ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\test_phase_c_sample_metadata.py:47: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+sample = {'sample_id': 'unseen-letter-17', 'provider': 'configured-provider', 'source_metadata_observation': {'entity': 'Exampl...criptor': {'entity': 'Verified Issuer', 'publisher': 'Verified Holdings', 'market': 'HK', 'security_id': '00123', ...}}
+
+    def source_descriptor(sample: dict) -> dict:
+        labels = {"cn-h1": "中微公司", "hk-annual": "名创优品", "us-10k": "微软"}
+        observation = sample["source_metadata_observation"]
+        primary = sample.get("verified_official_descriptor") or {}
+        # Labels are the explicit companies in prep.md, not filename inference.
+        descriptor = {
+>           "entity": labels[sample["sample_id"]],
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            "publisher": primary.get("publisher") or labels[sample["sample_id"]],
+            **{
+                key: primary.get(key, observation.get(key))
+                for key in (
+                    "market",
+                    "security_id",
+                    "fiscal_year",
+                    "fiscal_period",
+                    "period_end",
+                    "published_date",
+                    "filing_date",
+                    "source_url",
+                    "form_type",
+                )
+            },
+            "title": observation["title"],
+            "document_kind": observation["document_kind"],
+            "language": "en"
+            if sample["sample_id"] == "us-10k"
+            else "zh"
+            if sample["sample_id"] == "cn-h1"
+            else "mixed",
+        }
+E       KeyError: 'unseen-letter-17'
+
+tools\document_understanding_benchmark\phase_c_runner.py:540: KeyError
+_ test_legacy_source_identifier_is_usable_without_inventing_company_or_language _
+
+    def test_legacy_source_identifier_is_usable_without_inventing_company_or_language():
+        sample = prepared_sample()
+        observation = sample["source_metadata_observation"]
+        for key in ("entity", "publisher", "language"):
+            del observation[key]
+        # A familiar historical ID must not secretly restore a fixed company name.
+        sample["sample_id"] = "cn-h1"
+        descriptor = runner.source_descriptor(sample)
+>       assert descriptor["entity"] == "EXMP"
+E       AssertionError: assert '中微公司' == 'EXMP'
+E         
+E         - EXMP
+E         + 中微公司
+
+tests\test_phase_c_sample_metadata.py:60: AssertionError
+__ test_missing_source_identity_is_explained_without_guessing_from_sample_id __
+
+    def test_missing_source_identity_is_explained_without_guessing_from_sample_id():
+        sample = prepared_sample()
+        for key in ("entity", "security_id"):
+            del sample["source_metadata_observation"][key]
+        with pytest.raises(ValueError, match="source identity"):
+>           runner.source_descriptor(sample)
+
+tests\test_phase_c_sample_metadata.py:69: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+sample = {'sample_id': 'unseen-letter-17', 'provider': 'configured-provider', 'source_metadata_observation': {'publisher': 'Example Holdings', 'market': 'US', 'language': 'zh-hant', 'title': 'Shareholder letter', ...}}
+
+    def source_descriptor(sample: dict) -> dict:
+        labels = {"cn-h1": "中微公司", "hk-annual": "名创优品", "us-10k": "微软"}
+        observation = sample["source_metadata_observation"]
+        primary = sample.get("verified_official_descriptor") or {}
+        # Labels are the explicit companies in prep.md, not filename inference.
+        descriptor = {
+>           "entity": labels[sample["sample_id"]],
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+            "publisher": primary.get("publisher") or labels[sample["sample_id"]],
+            **{
+                key: primary.get(key, observation.get(key))
+                for key in (
+                    "market",
+                    "security_id",
+                    "fiscal_year",
+                    "fiscal_period",
+                    "period_end",
+                    "published_date",
+                    "filing_date",
+                    "source_url",
+                    "form_type",
+                )
+            },
+            "title": observation["title"],
+            "document_kind": observation["document_kind"],
+            "language": "en"
+            if sample["sample_id"] == "us-10k"
+            else "zh"
+            if sample["sample_id"] == "cn-h1"
+            else "mixed",
+        }
+E       KeyError: 'unseen-letter-17'
+
+tools\document_understanding_benchmark\phase_c_runner.py:540: KeyError
+________ test_cli_accepts_prepared_sample_ids_without_creating_any_io _________
+
+self = ArgumentParser(prog='python.exe -m pytest', usage=None, description='Explicit isolated Phase C runner. Default is loopback, never live POST.', formatter_class=<class 'argparse.HelpFormatter'>, conflict_handler='error', add_help=True)
+args = ['--mode', 'live', '--sample', 'unseen-letter-17', '--output', 'C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\c3-20261026\\tmp\\pytest-of-郑曾波\\pytest-0\\test_cli_accepts_prepared_samp0\\not-created']
+namespace = Namespace(mode='live', sample=None, metadata=None, usage_ledger=None, output=None, consumer_projects=None, reading_mod...='isolated-copy', source_catalog_config=None, selector_versions=None, activation_recovery=False, reconcile_run_id=None)
+intermixed = False
+
+    def _parse_known_args2(self, args, namespace, intermixed):
+        if args is None:
+            # args default to the system args
+            args = _sys.argv[1:]
+        else:
+            # make sure that args are mutable
+            args = list(args)
+    
+        # default Namespace built from parser defaults
+        if namespace is None:
+            namespace = Namespace()
+    
+        # add any action defaults that aren't present
+        for action in self._actions:
+            if action.dest is not SUPPRESS:
+                if not hasattr(namespace, action.dest):
+                    if action.default is not SUPPRESS:
+                        setattr(namespace, action.dest, action.default)
+    
+        # add any parser defaults that aren't present
+        for dest in self._defaults:
+            if not hasattr(namespace, dest):
+                setattr(namespace, dest, self._defaults[dest])
+    
+        # parse the arguments and exit if there are any errors
+        if self.exit_on_error:
+            try:
+>               namespace, args = self._parse_known_args(args, namespace, intermixed)
+                                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\argparse.py:2042: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\argparse.py:2293: in _parse_known_args
+    start_index = consume_optional(start_index)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\argparse.py:2217: in consume_optional
+    take_action(action, args, option_string)
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\argparse.py:2103: in take_action
+    argument_values = self._get_values(action, argument_strings)
+                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\argparse.py:2620: in _get_values
+    self._check_value(action, value)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = ArgumentParser(prog='python.exe -m pytest', usage=None, description='Explicit isolated Phase C runner. Default is loopback, never live POST.', formatter_class=<class 'argparse.HelpFormatter'>, conflict_handler='error', add_help=True)
+action = _StoreAction(option_strings=['--sample'], dest='sample', nargs=None, const=None, default=None, type=None, choices=('cn-h1', 'hk-annual', 'us-10k'), required=False, help=None, metavar=None, deprecated=False)
+value = 'unseen-letter-17'
+
+    def _check_value(self, action, value):
+        # converted value must be one of the choices (if specified)
+        choices = action.choices
+        if choices is None:
+            return
+    
+        if isinstance(choices, str):
+            choices = iter(choices)
+    
+        if value not in choices:
+            args = {'value': str(value),
+                    'choices': ', '.join(map(str, action.choices))}
+            msg = _('invalid choice: %(value)r (choose from %(choices)s)')
+    
+            if self.suggest_on_error and isinstance(value, str):
+                if all(isinstance(choice, str) for choice in action.choices):
+                    import difflib
+                    suggestions = difflib.get_close_matches(value, action.choices, 1)
+                    if suggestions:
+                        args['closest'] = suggestions[0]
+                        msg = _('invalid choice: %(value)r, maybe you meant %(closest)r? '
+                                '(choose from %(choices)s)')
+    
+>           raise ArgumentError(action, msg % args)
+E           argparse.ArgumentError: argument --sample: invalid choice: 'unseen-letter-17' (choose from cn-h1, hk-annual, us-10k)
+
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\argparse.py:2691: ArgumentError
+
+During handling of the above exception, another exception occurred:
+
+tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/.planning/c3-20261026/tmp/pytest-of-郑曾波/pytest-0/test_cli_accepts_prepared_samp0')
+
+    def test_cli_accepts_prepared_sample_ids_without_creating_any_io(tmp_path):
+        destination = tmp_path / "not-created"
+>       args = runner.argument_parser().parse_args([
+            "--mode", "live", "--sample", "unseen-letter-17", "--output", str(destination)
+        ])
+
+tests\test_phase_c_sample_metadata.py:74: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\argparse.py:2003: in parse_args
+    args, argv = self.parse_known_args(args, namespace)
+                 ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\argparse.py:2013: in parse_known_args
+    return self._parse_known_args2(args, namespace, intermixed=False)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\argparse.py:2044: in _parse_known_args2
+    self.error(str(err))
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\argparse.py:2773: in error
+    self.exit(2, _('%(prog)s: error: %(message)s\n') % args)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+self = ArgumentParser(prog='python.exe -m pytest', usage=None, description='Explicit isolated Phase C runner. Default is loopback, never live POST.', formatter_class=<class 'argparse.HelpFormatter'>, conflict_handler='error', add_help=True)
+status = 2
+message = "python.exe -m pytest: error: argument --sample: invalid choice: 'unseen-letter-17' (choose from cn-h1, hk-annual, us-10k)\n"
+
+    def exit(self, status=0, message=None):
+        if message:
+            self._print_message(message, _sys.stderr)
+>       _sys.exit(status)
+E       SystemExit: 2
+
+..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\argparse.py:2760: SystemExit
+---------------------------- Captured stderr call -----------------------------
+usage: python.exe -m pytest [-h] [--mode {loopback,live}]
+                            [--sample {cn-h1,hk-annual,us-10k}]
+                            [--metadata METADATA]
+                            [--usage-ledger USAGE_LEDGER] --output OUTPUT
+                            [--consumer-projects CONSUMER_PROJECTS]
+                            [--reading-model-projection {reading-model-input/4,reading-model-input/5}]
+                            [--source-mode {isolated-copy,registered_readonly}]
+                            [--source-catalog-config SOURCE_CATALOG_CONFIG]
+                            [--selector-versions {0.9.0,0.9.0,0.8.0}]
+                            [--activation-recovery]
+                            [--reconcile-run-id RECONCILE_RUN_ID]
+python.exe -m pytest: error: argument --sample: invalid choice: 'unseen-letter-17' (choose from cn-h1, hk-annual, us-10k)
+_____ test_live_input_selection_is_exact_and_reuses_the_prepared_provider _____
+
+    def test_live_input_selection_is_exact_and_reuses_the_prepared_provider():
+        sample = prepared_sample()
+        provider = {"provider": "configured-provider", "options": {"model_id": "existing-model"}}
+        metadata = {"samples": [sample], "providers": [provider]}
+>       selected, configured = runner.prepared_live_input(metadata, "unseen-letter-17")
+                               ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'tools.document_understanding_benchmark.phase_c_runner' has no attribute 'prepared_live_input'
+
+tests\test_phase_c_sample_metadata.py:85: AttributeError
+____ test_ambiguous_preparation_cannot_silently_select_first_row[samples] _____
+
+part = 'samples'
+
+    @pytest.mark.parametrize("part", ["samples", "providers"])
+    def test_ambiguous_preparation_cannot_silently_select_first_row(part):
+        metadata = {"samples": [prepared_sample()], "providers": [{"provider": "configured-provider"}]}
+        metadata[part].append(deepcopy(metadata[part][0]))
+        with pytest.raises(ValueError, match="unique prepared"):
+>           runner.prepared_live_input(metadata, "unseen-letter-17")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'tools.document_understanding_benchmark.phase_c_runner' has no attribute 'prepared_live_input'
+
+tests\test_phase_c_sample_metadata.py:94: AttributeError
+___ test_ambiguous_preparation_cannot_silently_select_first_row[providers] ____
+
+part = 'providers'
+
+    @pytest.mark.parametrize("part", ["samples", "providers"])
+    def test_ambiguous_preparation_cannot_silently_select_first_row(part):
+        metadata = {"samples": [prepared_sample()], "providers": [{"provider": "configured-provider"}]}
+        metadata[part].append(deepcopy(metadata[part][0]))
+        with pytest.raises(ValueError, match="unique prepared"):
+>           runner.prepared_live_input(metadata, "unseen-letter-17")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'tools.document_understanding_benchmark.phase_c_runner' has no attribute 'prepared_live_input'
+
+tests\test_phase_c_sample_metadata.py:94: AttributeError
+_______________ test_unknown_sample_is_explicit_metadata_error ________________
+
+    def test_unknown_sample_is_explicit_metadata_error():
+        with pytest.raises(ValueError, match="unique prepared sample"):
+>           runner.prepared_live_input({"samples": [], "providers": []}, "missing")
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E           AttributeError: module 'tools.document_understanding_benchmark.phase_c_runner' has no attribute 'prepared_live_input'
+
+tests\test_phase_c_sample_metadata.py:99: AttributeError
+=========================== short test summary info ===========================
+FAILED tests/test_phase_c_sample_metadata.py::test_unseen_sample_uses_explicit_company_and_language_without_id_mapping
+FAILED tests/test_phase_c_sample_metadata.py::test_source_owned_correction_supersedes_unreliable_observation_for_every_field
+FAILED tests/test_phase_c_sample_metadata.py::test_legacy_source_identifier_is_usable_without_inventing_company_or_language
+FAILED tests/test_phase_c_sample_metadata.py::test_missing_source_identity_is_explained_without_guessing_from_sample_id
+FAILED tests/test_phase_c_sample_metadata.py::test_cli_accepts_prepared_sample_ids_without_creating_any_io
+FAILED tests/test_phase_c_sample_metadata.py::test_live_input_selection_is_exact_and_reuses_the_prepared_provider
+FAILED tests/test_phase_c_sample_metadata.py::test_ambiguous_preparation_cannot_silently_select_first_row[samples]
+FAILED tests/test_phase_c_sample_metadata.py::test_ambiguous_preparation_cannot_silently_select_first_row[providers]
+FAILED tests/test_phase_c_sample_metadata.py::test_unknown_sample_is_explicit_metadata_error
+9 failed in 0.90s
