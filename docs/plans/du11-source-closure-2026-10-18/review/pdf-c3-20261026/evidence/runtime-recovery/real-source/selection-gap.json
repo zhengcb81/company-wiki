@@ -1,0 +1,54 @@
+{
+  "schema_version": "c3-source-selection-gap/1",
+  "source_sha256": "4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+  "model_calls": 0,
+  "native_seconds": 4.308357899950352,
+  "work_used": 3636909,
+  "work_limit": 16000000,
+  "source_unchanged": true,
+  "observed_admission": [
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:8aba10d4e6cef906310cdea234d59eaeb096022af992bca0e8755679ef392bfe",
+      "text": "報告期內，我們的研發費用為人民幣420.5百萬元（58.7百萬美元），而截至二零二五年六月三十日，我們的\n研發人員達1,094人。",
+      "kind": "native_continuity",
+      "admitted": true,
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "required": [
+        "urn:company-wiki:narrative-unit:sha256:640af7ff9289f5a59305d83ea1d1dbbf96f0fd98dcd5836accb39e4be8df8b63",
+        "urn:company-wiki:narrative-unit:sha256:b986244a2bd853360b4637efc0a7b5cfd3eadb839397b29e63da536b0ec10b39"
+      ],
+      "reading_role": "business",
+      "reading_priority": 1
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:2f5c2fe489f9ac1165f016c0ade20b2ff95473f8a82cfba2dc368af407372014",
+      "text": "展望下半年，我們將維持高質量發展和可持續發展戰略，不斷投資技術研發，並全面提升AI能力。同時，我\n們將積極擁抱AI時代小米和金山生態系統的雲需求。我們旨在持續為客戶、股東、員工和社會創造價值。",
+      "kind": "native_continuity",
+      "admitted": true,
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "required": [
+        "urn:company-wiki:narrative-unit:sha256:57dde3b7ab70803d2781d5c795f7c0dd9e8df54eef4a675b6c5718d541d1eecb",
+        "urn:company-wiki:narrative-unit:sha256:b986244a2bd853360b4637efc0a7b5cfd3eadb839397b29e63da536b0ec10b39"
+      ],
+      "reading_role": "outlook",
+      "reading_priority": 1
+    }
+  ],
+  "conclusion": "Complete native continuity admits both statements, but fact detector returns no eligible relation. Both receive description value; meaningful facts consume the bounded 112-span budget first. This is source selection quality, not LLM output, SDK failure or work-budget exhaustion.",
+  "next": "Generic operating-resource and reading-intent coverage TDD; keep frozen source/gold, financial boundaries and caps. No company/page special case.",
+  "limits": "Development sample; new holdout remains untouched; source-only observation is not formal model or RF acceptance."
+}

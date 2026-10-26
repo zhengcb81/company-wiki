@@ -1,0 +1,153 @@
+{
+  "runs": [
+    {
+      "run": "old-a",
+      "status": "completed",
+      "posts": 1,
+      "documents": [
+        {
+          "artifact_ref": {
+            "artifact_version_id": "narrative-ddc7325ecad3426e9377496bf7ef9774",
+            "byte_size": 27348,
+            "content_sha256": "e855b668e38c6641c04fd1a01a067c3be829b0bb82b4016385509c2a56aa50e7",
+            "document_id": "urn:company-wiki:document:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed",
+            "source_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed",
+            "source_sha256": "cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed"
+          },
+          "document_id": "urn:company-wiki:document:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed",
+          "errors": [],
+          "status": "completed"
+        }
+      ],
+      "budget": {
+        "estimated_micro_usd": 111,
+        "tokens": 92,
+        "unknown_reservations": 0,
+        "unsettled_reservations": 0
+      },
+      "reused_pins": {},
+      "manifest_summaries": [
+        {
+          "source": "urn:company-wiki:document:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed",
+          "business_algorithms": null,
+          "dependency_decision_digest": null,
+          "selection": null,
+          "manifest_sha256": "899884fbdd371df530ca32e94cecf71062bc12dd3dba8e21b05ada727bad2d01"
+        }
+      ],
+      "structure_observation_count": 1
+    },
+    {
+      "run": "old-b",
+      "status": "completed",
+      "posts": 1,
+      "documents": [
+        {
+          "artifact_ref": {
+            "artifact_version_id": "narrative-ddc7325ecad3426e9377496bf7ef9774",
+            "byte_size": 27348,
+            "content_sha256": "e855b668e38c6641c04fd1a01a067c3be829b0bb82b4016385509c2a56aa50e7",
+            "document_id": "urn:company-wiki:document:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed",
+            "source_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed",
+            "source_sha256": "cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed"
+          },
+          "document_id": "urn:company-wiki:document:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed",
+          "errors": [],
+          "generation_status": "reused",
+          "status": "completed"
+        }
+      ],
+      "budget": {
+        "estimated_micro_usd": 0,
+        "tokens": 0,
+        "unknown_reservations": 0,
+        "unsettled_reservations": 0
+      },
+      "reused_pins": {
+        "urn:company-wiki:document:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed": {
+          "artifact_version_id": "narrative-ddc7325ecad3426e9377496bf7ef9774",
+          "byte_size": 27348,
+          "content_sha256": "e855b668e38c6641c04fd1a01a067c3be829b0bb82b4016385509c2a56aa50e7",
+          "document_id": "urn:company-wiki:document:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed",
+          "source_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed",
+          "source_sha256": "cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed"
+        }
+      },
+      "manifest_summaries": [
+        {
+          "source": "urn:company-wiki:document:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed",
+          "business_algorithms": null,
+          "dependency_decision_digest": null,
+          "selection": null,
+          "manifest_sha256": "899884fbdd371df530ca32e94cecf71062bc12dd3dba8e21b05ada727bad2d01"
+        }
+      ],
+      "structure_observation_count": 1
+    },
+    {
+      "run": "new-c",
+      "status": "completed",
+      "posts": 1,
+      "documents": [
+        {
+          "artifact_ref": {
+            "artifact_version_id": "narrative-ddc7325ecad3426e9377496bf7ef9774",
+            "byte_size": 27348,
+            "content_sha256": "e855b668e38c6641c04fd1a01a067c3be829b0bb82b4016385509c2a56aa50e7",
+            "document_id": "urn:company-wiki:document:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed",
+            "source_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed",
+            "source_sha256": "cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed"
+          },
+          "document_id": "urn:company-wiki:document:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed",
+          "errors": [],
+          "generation_status": "reused",
+          "status": "completed"
+        }
+      ],
+      "budget": {
+        "estimated_micro_usd": 0,
+        "tokens": 0,
+        "unknown_reservations": 0,
+        "unsettled_reservations": 0
+      },
+      "reused_pins": {
+        "urn:company-wiki:document:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed": {
+          "artifact_version_id": "narrative-ddc7325ecad3426e9377496bf7ef9774",
+          "byte_size": 27348,
+          "content_sha256": "e855b668e38c6641c04fd1a01a067c3be829b0bb82b4016385509c2a56aa50e7",
+          "document_id": "urn:company-wiki:document:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed",
+          "source_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed",
+          "source_sha256": "cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed"
+        }
+      },
+      "manifest_summaries": [
+        {
+          "source": "urn:company-wiki:document:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed",
+          "business_algorithms": null,
+          "dependency_decision_digest": null,
+          "selection": null,
+          "manifest_sha256": "899884fbdd371df530ca32e94cecf71062bc12dd3dba8e21b05ada727bad2d01"
+        }
+      ],
+      "structure_observation_count": 1
+    }
+  ],
+  "actual_hash_observers": {
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\r1-final3-source-semantics-20261022\\review\\legacy-sections-908ec2c4.py.txt": {
+      "count": 3,
+      "executed": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\r1-final3-source-semantics-20261022\\review\\legacy-sections-908ec2c4.py.txt",
+      "section_identity_sha": "abddf859e804e65765c34bc336ed7a8eb91de0d3894f761c63eafd8b77e94287",
+      "all_hashes_sha": "e8325e30674801f3c71cd7443f6b1b2e189d7ddfdf69649922e3b39fcc348812"
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\document_understanding\\structure\\sections.py": {
+      "count": 1,
+      "executed": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\document_understanding\\structure\\sections.py",
+      "section_identity_sha": "abddf859e804e65765c34bc336ed7a8eb91de0d3894f761c63eafd8b77e94287",
+      "all_hashes_sha": "e8325e30674801f3c71cd7443f6b1b2e189d7ddfdf69649922e3b39fcc348812"
+    }
+  },
+  "old_new_public_ref_identical": true,
+  "old_new_public_bundle_identical": true,
+  "source_section_lf_sha256": "abddf859e804e65765c34bc336ed7a8eb91de0d3894f761c63eafd8b77e94287",
+  "legacy_lf_sha256": "7f010ccbe6815f5b842f2d90b99d751fd95478cea750c907292c3aaff39080d0"
+}

@@ -22,6 +22,7 @@ from typing import Any
 from company_wiki._bounded_process import run_bounded, TransportError
 from company_wiki.resource_budget import WorkBudget
 from .narrative_document import DocumentStructure
+from .narrative_pdf_environment import ENVIRONMENT_ALGORITHM, LEGACY_ENVIRONMENT_ALGORITHM
 from .narrative_pdf_paragraphs import (
     PARAGRAPH_ALIGNMENT_VERSION, ParagraphProposal, align_paragraphs, triage_paragraph_gaps,
 )
@@ -44,8 +45,11 @@ class ParagraphRuntimeConfig:
     # peak is ~3.10GiB even though its earlier sampled RSS was only ~1.06GB.
     max_memory_bytes: int = 4 * 1024 * 1024 * 1024
     cpu_threads: int = 4
+    environment_algorithm: str = LEGACY_ENVIRONMENT_ALGORITHM
 
     def __post_init__(self) -> None:
+        if self.environment_algorithm not in {LEGACY_ENVIRONMENT_ALGORITHM, ENVIRONMENT_ALGORITHM}:
+            raise ValueError("unsupported PDF runtime environment algorithm")
         if (type(self.max_seconds) not in (int, float) or not 1 <= self.max_seconds <= 300
                 or type(self.max_pages) is not int or not 1 <= self.max_pages <= 16):
             raise ValueError("invalid paragraph runtime time/page bound")
@@ -68,7 +72,10 @@ class ParagraphRuntimeConfig:
         object.__setattr__(self, "runtime_versions", MappingProxyType(dict(self.runtime_versions)))
 
     def recipe(self) -> dict[str, Any]:
-        return {"engine": "docling", "engine_version": self.docling_version,
+        binding = ({} if self.environment_algorithm == LEGACY_ENVIRONMENT_ALGORITHM else {
+            "environment_algorithm": self.environment_algorithm,
+            "environment_implementation_sha256": sha256(Path(__file__).with_name("narrative_pdf_environment.py").read_bytes().replace(b"\r\n", b"\n")).hexdigest()})
+        return {**binding, "engine": "docling", "engine_version": self.docling_version,
                 "model_sha256": self.model_sha256, "model_config_sha256": self.model_config_sha256,
                 "runtime_versions": dict(self.runtime_versions),
                 "environment_sha256": self.environment_sha256,
@@ -88,8 +95,13 @@ def configured_paragraph_runtime() -> ParagraphEnhancement | None:
     if selected is None:
         return None
     raw = json.loads(Path(selected).read_text(encoding="utf-8"))
-    if not isinstance(raw, dict) or raw.pop("schema_version", None) != "pdf-paragraph-runtime/1":
+    if not isinstance(raw, dict):
         raise ValueError("invalid PDF paragraph runtime configuration")
+    schema = raw.pop("schema_version", None)
+    if (schema not in {"pdf-paragraph-runtime/1", "pdf-paragraph-runtime/2"}
+            or (schema.endswith("/1") and "environment_algorithm" in raw)
+            or (schema.endswith("/2") and raw.get("environment_algorithm") != ENVIRONMENT_ALGORITHM)):
+        raise ValueError("invalid PDF paragraph runtime environment algorithm binding")
     return ParagraphEnhancement(ParagraphRuntimeConfig(**raw))
 
 
@@ -156,7 +168,11 @@ class ParagraphEnhancement:
                 diagnostic["status"] = "native_fallback"
                 tick = time.monotonic()
                 try:
-                    request = {"schema_version": "pdf-paragraph-request/1", "source_sha256": parsed.source_sha256,
+                    v2 = self.config.environment_algorithm == ENVIRONMENT_ALGORITHM
+                    version = "2" if v2 else "1"
+                    algorithm_binding = {"environment_algorithm": self.config.environment_algorithm} if v2 else {}
+                    request = {"schema_version": "pdf-paragraph-request/" + version, **algorithm_binding,
+                        "source_sha256": parsed.source_sha256,
                         "pdf_base64": base64.b64encode(data).decode("ascii"), "pages": list(triage.pages),
                         "artifacts": self.config.artifacts, "model_sha256": self.config.model_sha256,
                         "model_config_sha256": self.config.model_config_sha256,
@@ -179,7 +195,8 @@ class ParagraphEnhancement:
                             stdout_cap_bytes=self.config.max_output_bytes, stderr_cap_bytes=65536)
                     diagnostic["temporary_root_restored_absent"] = not Path(folder).exists()
                     response = json.loads(raw["stdout"])
-                    if (not isinstance(response, Mapping) or response.get("schema_version") != "pdf-paragraph-response/1"
+                    if (not isinstance(response, Mapping) or response.get("schema_version") != "pdf-paragraph-response/" + version
+                            or (v2 and response.get("environment_algorithm") != self.config.environment_algorithm)
                             or response.get("source_sha256") != parsed.source_sha256
                             or response.get("pages") != list(triage.pages)
                             or response.get("docling_version") != self.config.docling_version

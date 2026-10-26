@@ -1,0 +1,9 @@
+{
+  "node": "tests/integration/test_n6_batch_upgrade_identity.py::test_real_batches_keep_old_generation_and_create_separate_upgraded_jobs[parser]",
+  "exit_code": 1,
+  "duration_seconds": 19.693,
+  "pid": 22768,
+  "alive_after": false,
+  "python": "C:\\Miniconda\\python.exe",
+  "temp_restored_absent": true
+}

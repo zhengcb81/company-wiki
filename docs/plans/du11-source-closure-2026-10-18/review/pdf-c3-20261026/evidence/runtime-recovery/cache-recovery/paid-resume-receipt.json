@@ -1,0 +1,15 @@
+{
+  "nodes": [
+    {
+      "node": "tests/integration/test_reading_default_resume.py::test_paid_outbox_resumes_frozen_selector_across_default_upgrade_without_new_post[narrative-batch-request/2]",
+      "exit_code": 0,
+      "timeout": false,
+      "duration_seconds": 34.77,
+      "pid": 2240,
+      "alive_after": false,
+      "python": "C:\\Miniconda\\python.exe"
+    }
+  ],
+  "temp_restored_absent": true,
+  "plugin_autoload": false
+}

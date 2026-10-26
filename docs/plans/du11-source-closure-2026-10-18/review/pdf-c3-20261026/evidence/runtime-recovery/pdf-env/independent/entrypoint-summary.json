@@ -1,0 +1,22 @@
+{
+  "schema_version": "independent-pdf-env-probe/1",
+  "status": "PASS",
+  "worker_entrypoint_equal": true,
+  "python": "C:\\Miniconda\\python.exe",
+  "python_version": "3.13.9",
+  "closure_count": 104,
+  "environment_sha256": "c84a984ccb3a56dffbfd0d4538f14ce4a27de44dec4981527a2b0c4a545cdf44",
+  "legacy": {
+    "v1_algorithm_equal": true,
+    "optional_imports": []
+  },
+  "changed_config_fields": [
+    "environment_algorithm",
+    "environment_sha256",
+    "schema_version"
+  ],
+  "frozen_v1_config_sha256": "d84387132edda4dab3cc43d62a7cd9a93634914977b8da89b42ddb90f3c27a1a",
+  "v2_config_sha256": "077654bd7eeb016d57667ec3560e602f4de480a74c2cbb236fc1100dda942fd6",
+  "heavy_sdk_imports": false,
+  "pdf_conversion": false
+}

@@ -1,0 +1,24 @@
+{
+  "nodes": [
+    {
+      "node": "tests/unit/test_narrative_batch_recovery.py",
+      "exit_code": 0,
+      "timeout": false,
+      "duration_seconds": 2.232,
+      "pid": 22464,
+      "alive_after": false,
+      "python": "C:\\Miniconda\\python.exe"
+    },
+    {
+      "node": "tests/integration/test_narrative_generation_reuse.py::test_different_configured_runs_default_to_one_generation_post_and_public_pin[application/pdf]",
+      "exit_code": 0,
+      "timeout": false,
+      "duration_seconds": 36.887,
+      "pid": 30264,
+      "alive_after": false,
+      "python": "C:\\Miniconda\\python.exe"
+    }
+  ],
+  "temp_restored_absent": true,
+  "plugin_autoload": false
+}

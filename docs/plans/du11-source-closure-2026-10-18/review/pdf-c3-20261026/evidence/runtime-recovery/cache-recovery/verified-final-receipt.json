@@ -1,0 +1,24 @@
+{
+  "nodes": [
+    {
+      "node": "tests/unit/test_narrative_batch_recovery.py",
+      "exit_code": 0,
+      "timeout": false,
+      "duration_seconds": 6.057,
+      "pid": 11376,
+      "alive_after": false,
+      "python": "C:\\Miniconda\\python.exe"
+    },
+    {
+      "node": "tests/integration/test_n6_batch_upgrade_identity.py::test_real_batches_keep_old_generation_and_create_separate_upgraded_jobs[parser]",
+      "exit_code": 0,
+      "timeout": false,
+      "duration_seconds": 26.442,
+      "pid": 24420,
+      "alive_after": false,
+      "python": "C:\\Miniconda\\python.exe"
+    }
+  ],
+  "temp_restored_absent": true,
+  "plugin_autoload": false
+}

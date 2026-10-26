@@ -1,0 +1,1607 @@
+{
+  "baseline_component": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\r1-final3-source-semantics-20261022\\review\\legacy-sections-908ec2c4.py.txt",
+  "baseline_sections_sha256": "7f010ccbe6815f5b842f2d90b99d751fd95478cea750c907292c3aaff39080d0",
+  "scope": "one actual historical sections component; current remaining code; synthetic generated PDF",
+  "external_provider_calls": 0,
+  "old_result": {
+    "budget": {
+      "estimated_micro_usd": 111,
+      "tokens": 92,
+      "unknown_reservations": 0,
+      "unsettled_reservations": 0
+    },
+    "documents": [
+      {
+        "artifact_ref": {
+          "artifact_version_id": "narrative-2ccaa653feef4551b211c080ee22517d",
+          "byte_size": 27348,
+          "content_sha256": "e855b668e38c6641c04fd1a01a067c3be829b0bb82b4016385509c2a56aa50e7",
+          "document_id": "urn:company-wiki:document:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed",
+          "source_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed",
+          "source_sha256": "cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed"
+        },
+        "document_id": "urn:company-wiki:document:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed",
+        "errors": [],
+        "status": "completed"
+      }
+    ],
+    "run_id": "old-a",
+    "schema_version": "narrative-batch-result/1",
+    "status": "completed",
+    "storage": {
+      "persistent_added_bytes": 425636,
+      "scratch_peak_bytes": 27348,
+      "scratch_peak_observation": "committed_writer_lower_bound"
+    }
+  },
+  "old_cache": {
+    "budget": {
+      "estimated_micro_usd": 0,
+      "tokens": 0,
+      "unknown_reservations": 0,
+      "unsettled_reservations": 0
+    },
+    "documents": [
+      {
+        "artifact_ref": {
+          "artifact_version_id": "narrative-2ccaa653feef4551b211c080ee22517d",
+          "byte_size": 27348,
+          "content_sha256": "e855b668e38c6641c04fd1a01a067c3be829b0bb82b4016385509c2a56aa50e7",
+          "document_id": "urn:company-wiki:document:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed",
+          "source_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed",
+          "source_sha256": "cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed"
+        },
+        "document_id": "urn:company-wiki:document:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed",
+        "errors": [],
+        "generation_status": "reused",
+        "status": "completed"
+      }
+    ],
+    "run_id": "old-b",
+    "schema_version": "narrative-batch-result/1",
+    "status": "completed",
+    "storage": {
+      "persistent_added_bytes": 136,
+      "scratch_peak_bytes": 0
+    }
+  },
+  "new_result": {
+    "budget": {
+      "estimated_micro_usd": 111,
+      "tokens": 92,
+      "unknown_reservations": 0,
+      "unsettled_reservations": 0
+    },
+    "documents": [
+      {
+        "artifact_ref": {
+          "artifact_version_id": "narrative-8ac7879c3c9e4d9fbdf343498ff230d3",
+          "byte_size": 26113,
+          "content_sha256": "46c992e4abe3729d0b053278e46b58924a2ae733d1a633e082581136e7cdf3ad",
+          "document_id": "urn:company-wiki:document:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed",
+          "source_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed",
+          "source_sha256": "cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed"
+        },
+        "document_id": "urn:company-wiki:document:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed",
+        "errors": [],
+        "status": "completed"
+      }
+    ],
+    "run_id": "new-c",
+    "schema_version": "narrative-batch-result/1",
+    "status": "completed",
+    "storage": {
+      "persistent_added_bytes": 178692,
+      "scratch_peak_bytes": 26113,
+      "scratch_peak_observation": "committed_writer_lower_bound"
+    }
+  },
+  "new_cache": {
+    "budget": {
+      "estimated_micro_usd": 0,
+      "tokens": 0,
+      "unknown_reservations": 0,
+      "unsettled_reservations": 0
+    },
+    "documents": [
+      {
+        "artifact_ref": {
+          "artifact_version_id": "narrative-8ac7879c3c9e4d9fbdf343498ff230d3",
+          "byte_size": 26113,
+          "content_sha256": "46c992e4abe3729d0b053278e46b58924a2ae733d1a633e082581136e7cdf3ad",
+          "document_id": "urn:company-wiki:document:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed",
+          "source_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed",
+          "source_sha256": "cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed"
+        },
+        "document_id": "urn:company-wiki:document:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed",
+        "errors": [],
+        "generation_status": "reused",
+        "status": "completed"
+      }
+    ],
+    "run_id": "new-d",
+    "schema_version": "narrative-batch-result/1",
+    "status": "completed",
+    "storage": {
+      "persistent_added_bytes": 136,
+      "scratch_peak_bytes": 0
+    }
+  },
+  "old_context": [
+    {
+      "locator": "loc:v1/page:1/paragraph:2",
+      "context": [
+        "I. Management discussion"
+      ]
+    },
+    {
+      "locator": "loc:v1/page:1/paragraph:4",
+      "context": [
+        "I. Management discussion"
+      ]
+    }
+  ],
+  "new_context": [
+    {
+      "locator": "loc:v1/page:1/paragraph:2",
+      "context": [
+        "I. Management discussion",
+        "(1) Diagnostics services generated USD 12 million.\nDuring the period:"
+      ]
+    },
+    {
+      "locator": "loc:v1/page:1/paragraph:4",
+      "context": [
+        "I. Management discussion",
+        "(2) Technical services generated USD 9 million.\nDuring the period:"
+      ]
+    }
+  ],
+  "old_ref": {
+    "artifact_sha256": "e855b668e38c6641c04fd1a01a067c3be829b0bb82b4016385509c2a56aa50e7",
+    "artifact_version_id": "narrative-2ccaa653feef4551b211c080ee22517d",
+    "byte_size": 27348,
+    "schema_version": "narrative-ref/1",
+    "source_ref": {
+      "byte_size": 1964,
+      "content_sha256": "cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed",
+      "document_id": "urn:company-wiki:document:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed",
+      "mime_type": "application/pdf",
+      "schema_version": "2.0",
+      "source_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed"
+    }
+  },
+  "new_ref": {
+    "artifact_sha256": "46c992e4abe3729d0b053278e46b58924a2ae733d1a633e082581136e7cdf3ad",
+    "artifact_version_id": "narrative-8ac7879c3c9e4d9fbdf343498ff230d3",
+    "byte_size": 26113,
+    "schema_version": "narrative-ref/1",
+    "source_ref": {
+      "byte_size": 1964,
+      "content_sha256": "cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed",
+      "document_id": "urn:company-wiki:document:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed",
+      "mime_type": "application/pdf",
+      "schema_version": "2.0",
+      "source_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed"
+    }
+  },
+  "old_structures": [
+    {
+      "producer": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c3leggreen\\cwpaW03-e9w_u6bk\\legacy-deployment\\document_understanding\\structure\\sections.py",
+      "sections": [
+        {
+          "headings": [
+            "I. Management discussion"
+          ],
+          "body": [
+            "(1) Diagnostics services generated USD 12 million.\nDuring the period:",
+            "- New product revenue exceeds 30%.",
+            "(2) Technical services generated USD 9 million.\nDuring the period:",
+            "- New product revenue exceeds 30%.",
+            "The company plans remain subject to market conditions."
+          ],
+          "basis": [
+            "reading_order",
+            "heading_level"
+          ]
+        }
+      ]
+    },
+    {
+      "producer": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c3leggreen\\cwpaW03-e9w_u6bk\\legacy-deployment\\document_understanding\\structure\\sections.py",
+      "sections": [
+        {
+          "headings": [
+            "I. Management discussion"
+          ],
+          "body": [
+            "(1) Diagnostics services generated USD 12 million.\nDuring the period:",
+            "- New product revenue exceeds 30%.",
+            "(2) Technical services generated USD 9 million.\nDuring the period:",
+            "- New product revenue exceeds 30%.",
+            "The company plans remain subject to market conditions."
+          ],
+          "basis": [
+            "reading_order",
+            "heading_level"
+          ]
+        }
+      ]
+    }
+  ],
+  "new_structures": [
+    {
+      "producer": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c3leggreen\\cwpaW03-e9w_u6bk\\legacy-deployment\\document_understanding\\structure\\sections.py",
+      "sections": [
+        {
+          "headings": [
+            "I. Management discussion"
+          ],
+          "body": [
+            "(1) Diagnostics services generated USD 12 million.\nDuring the period:",
+            "- New product revenue exceeds 30%.",
+            "(2) Technical services generated USD 9 million.\nDuring the period:",
+            "- New product revenue exceeds 30%.",
+            "The company plans remain subject to market conditions."
+          ],
+          "basis": [
+            "reading_order",
+            "heading_level"
+          ]
+        }
+      ]
+    },
+    {
+      "producer": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c3leggreen\\cwpaW03-e9w_u6bk\\legacy-deployment\\document_understanding\\structure\\sections.py",
+      "sections": [
+        {
+          "headings": [
+            "I. Management discussion"
+          ],
+          "body": [
+            "(1) Diagnostics services generated USD 12 million.\nDuring the period:",
+            "- New product revenue exceeds 30%.",
+            "(2) Technical services generated USD 9 million.\nDuring the period:",
+            "- New product revenue exceeds 30%.",
+            "The company plans remain subject to market conditions."
+          ],
+          "basis": [
+            "reading_order",
+            "heading_level"
+          ]
+        }
+      ]
+    },
+    {
+      "producer": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\document_understanding\\structure\\sections.py",
+      "sections": [
+        {
+          "headings": [
+            "I. Management discussion"
+          ],
+          "body": [
+            "The company plans remain subject to market conditions."
+          ],
+          "basis": [
+            "reading_order",
+            "heading_level"
+          ]
+        },
+        {
+          "headings": [
+            "(1) Diagnostics services generated USD 12 million.\nDuring the period:"
+          ],
+          "body": [
+            "- New product revenue exceeds 30%."
+          ],
+          "basis": [
+            "reading_order",
+            "heading_numbering",
+            "native_numbered_list",
+            "role_inherited"
+          ]
+        },
+        {
+          "headings": [
+            "(2) Technical services generated USD 9 million.\nDuring the period:"
+          ],
+          "body": [
+            "- New product revenue exceeds 30%."
+          ],
+          "basis": [
+            "reading_order",
+            "heading_numbering",
+            "native_numbered_list",
+            "role_inherited"
+          ]
+        }
+      ]
+    },
+    {
+      "producer": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\document_understanding\\structure\\sections.py",
+      "sections": [
+        {
+          "headings": [
+            "I. Management discussion"
+          ],
+          "body": [
+            "The company plans remain subject to market conditions."
+          ],
+          "basis": [
+            "reading_order",
+            "heading_level"
+          ]
+        },
+        {
+          "headings": [
+            "(1) Diagnostics services generated USD 12 million.\nDuring the period:"
+          ],
+          "body": [
+            "- New product revenue exceeds 30%."
+          ],
+          "basis": [
+            "reading_order",
+            "heading_numbering",
+            "native_numbered_list",
+            "role_inherited"
+          ]
+        },
+        {
+          "headings": [
+            "(2) Technical services generated USD 9 million.\nDuring the period:"
+          ],
+          "body": [
+            "- New product revenue exceeds 30%."
+          ],
+          "basis": [
+            "reading_order",
+            "heading_numbering",
+            "native_numbered_list",
+            "role_inherited"
+          ]
+        }
+      ]
+    }
+  ],
+  "old_final": {
+    "bundle_producer": "1.0.0",
+    "bundle_schema": "narrative-bundle/2.0",
+    "execution_versions": {
+      "adapter": "openai-compatible-http/1",
+      "handlers": {
+        "source.narrative_select": "1.1.0",
+        "source.narrative_summarize": "1.1.0",
+        "source.narrative_verify": "1.1.0"
+      },
+      "model_request_schema": "narrative-model-request/5",
+      "parser": "0.1.1",
+      "prompt": "reading-source-scoped/4.0.6",
+      "selector": "0.9.0"
+    },
+    "model": {
+      "endpoint": "http://127.0.0.1:54710/v1/chat/completions",
+      "max_output_tokens": 8192,
+      "model_id": "stub-model",
+      "output_token_field": "max_tokens",
+      "temperature": 0.7
+    },
+    "parser_component": {
+      "name": "selective_narrative_parser",
+      "version": "0.1.1"
+    },
+    "parser_components": {
+      "format": "pdf",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1",
+      "reader_implementation_sha256": "c7c000d7da38361a83fc45a4ce526543e93113bdafb8fb4a132cd1bb1cc94c2e",
+      "reader_recipe": "native-pdf/1",
+      "runtime": {
+        "pymupdf": "1.28.2"
+      }
+    },
+    "profile": "P2",
+    "reading_context_projection_version": "reading-context-projection/1",
+    "reading_dependencies": {
+      "candidates": [
+        {
+          "candidate_id": "facet|facet_capacity_projects",
+          "component_ids": [
+            "facet|facet_capacity_projects"
+          ],
+          "eligible": false,
+          "scope_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+        },
+        {
+          "candidate_id": "facet|facet_core_business",
+          "component_ids": [
+            "facet|facet_core_business"
+          ],
+          "eligible": false,
+          "scope_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+        },
+        {
+          "candidate_id": "facet|facet_customer_orders",
+          "component_ids": [
+            "facet|facet_customer_orders"
+          ],
+          "eligible": false,
+          "scope_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+        },
+        {
+          "candidate_id": "facet|facet_industry_competition",
+          "component_ids": [
+            "facet|facet_industry_competition"
+          ],
+          "eligible": false,
+          "scope_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+        },
+        {
+          "candidate_id": "facet|facet_new_business",
+          "component_ids": [
+            "facet|facet_new_business"
+          ],
+          "eligible": false,
+          "scope_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+        },
+        {
+          "candidate_id": "facet|facet_operating_metrics",
+          "component_ids": [
+            "facet|facet_operating_metrics"
+          ],
+          "eligible": false,
+          "scope_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+        },
+        {
+          "candidate_id": "facet|facet_overseas",
+          "component_ids": [
+            "facet|facet_overseas"
+          ],
+          "eligible": false,
+          "scope_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+        },
+        {
+          "candidate_id": "facet|facet_risk_denial",
+          "component_ids": [
+            "facet|facet_risk_denial"
+          ],
+          "eligible": false,
+          "scope_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+        },
+        {
+          "candidate_id": "facet|mechanism_biopharma_cdmo",
+          "component_ids": [
+            "facet|mechanism_biopharma_cdmo"
+          ],
+          "eligible": false,
+          "scope_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+        },
+        {
+          "candidate_id": "facet|mechanism_manufacturing",
+          "component_ids": [
+            "facet|mechanism_manufacturing"
+          ],
+          "eligible": false,
+          "scope_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+        },
+        {
+          "candidate_id": "facet|mechanism_store_network",
+          "component_ids": [
+            "facet|mechanism_store_network"
+          ],
+          "eligible": false,
+          "scope_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+        },
+        {
+          "candidate_id": "facet|mechanism_subscription_consumption",
+          "component_ids": [
+            "facet|mechanism_subscription_consumption"
+          ],
+          "eligible": false,
+          "scope_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+        },
+        {
+          "candidate_id": "facet|semantic_capacity_project",
+          "component_ids": [
+            "facet|semantic_capacity_project"
+          ],
+          "eligible": false,
+          "scope_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+        },
+        {
+          "candidate_id": "facet|semantic_stage_progression",
+          "component_ids": [
+            "facet|semantic_stage_progression"
+          ],
+          "eligible": false,
+          "scope_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+        },
+        {
+          "candidate_id": "family|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent|container_attachment",
+          "component_ids": [
+            "family|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent|container_attachment"
+          ],
+          "eligible": true,
+          "scope_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+        },
+        {
+          "candidate_id": "family|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent|event_response",
+          "component_ids": [
+            "family|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent|event_response"
+          ],
+          "eligible": true,
+          "scope_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+        },
+        {
+          "candidate_id": "family|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent|lifecycle_revision_overlay",
+          "component_ids": [
+            "family|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent|lifecycle_revision_overlay"
+          ],
+          "eligible": true,
+          "scope_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+        },
+        {
+          "candidate_id": "family|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent|secondary_research",
+          "component_ids": [
+            "family|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent|secondary_research"
+          ],
+          "eligible": true,
+          "scope_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+        },
+        {
+          "candidate_id": "family|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root|container_attachment",
+          "component_ids": [
+            "family|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root|container_attachment"
+          ],
+          "eligible": true,
+          "scope_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root"
+        },
+        {
+          "candidate_id": "family|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root|event_response",
+          "component_ids": [
+            "family|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root|event_response"
+          ],
+          "eligible": true,
+          "scope_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root"
+        },
+        {
+          "candidate_id": "family|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root|lifecycle_revision_overlay",
+          "component_ids": [
+            "family|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root|lifecycle_revision_overlay"
+          ],
+          "eligible": true,
+          "scope_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root"
+        },
+        {
+          "candidate_id": "family|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root|secondary_research",
+          "component_ids": [
+            "family|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root|secondary_research"
+          ],
+          "eligible": true,
+          "scope_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root"
+        }
+      ],
+      "components": [
+        {
+          "component_id": "binding|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent|generic",
+          "content_digest": "97d13169eff5d417ac9633156a9f39fe784eda981d34f1b0cd8bb9f22d9231fa",
+          "matcher_digest": "97d13169eff5d417ac9633156a9f39fe784eda981d34f1b0cd8bb9f22d9231fa",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+          ],
+          "version": "catalog-binding/1"
+        },
+        {
+          "component_id": "binding|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root|generic",
+          "content_digest": "97d13169eff5d417ac9633156a9f39fe784eda981d34f1b0cd8bb9f22d9231fa",
+          "matcher_digest": "97d13169eff5d417ac9633156a9f39fe784eda981d34f1b0cd8bb9f22d9231fa",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root"
+          ],
+          "version": "catalog-binding/1"
+        },
+        {
+          "component_id": "carrier|application/pdf",
+          "content_digest": "72685f995a69c4e940f539fb0c057258de22fa5bef111f81f7c51f5e1cda64ee",
+          "matcher_digest": "72685f995a69c4e940f539fb0c057258de22fa5bef111f81f7c51f5e1cda64ee",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent",
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root"
+          ],
+          "version": "source-carrier/1"
+        },
+        {
+          "component_id": "facet|facet_capacity_projects",
+          "content_digest": "daa039b9fa9203341010226c286e9f1689c09f004a87e913f0f5384df54e4216",
+          "matcher_digest": "27eedb0cf174c44c3eabac6087ceb795a6f9e43c6900c422d4d9029f601e568a",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+          ],
+          "version": "facet-decision/1"
+        },
+        {
+          "component_id": "facet|facet_core_business",
+          "content_digest": "94c6bc31a043c0bc883c0a0bbe570adc1c50ce5158f8f2f4581c8e4f0b61171c",
+          "matcher_digest": "4c646fc499e77e6db962b3e539d8c2dd6e0385f7a8a6b547849455cb2821d37b",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+          ],
+          "version": "facet-decision/1"
+        },
+        {
+          "component_id": "facet|facet_customer_orders",
+          "content_digest": "9bb10d12aeab54732dce7472692ce646328c05069e604c197b772c0bd0c41879",
+          "matcher_digest": "622da5a82dbf1cc29d3b92587f067ed94e09b5cfaff42b2498e70339925eb240",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+          ],
+          "version": "facet-decision/1"
+        },
+        {
+          "component_id": "facet|facet_industry_competition",
+          "content_digest": "5c3cb9cdd0a6649221e7d27117bd2c3a49362e68debb319f113bb8ac4fc5209a",
+          "matcher_digest": "d13b7c5f7a19358d3f0b1d64c01450199d9dcf6d30d18733e04befc3b9c416af",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+          ],
+          "version": "facet-decision/1"
+        },
+        {
+          "component_id": "facet|facet_new_business",
+          "content_digest": "aea6170bd370f7b8baedcae971134c453a1ef9899ebd35b53d921aef5848c23a",
+          "matcher_digest": "076612a10ad359df9a76978463584a10ff84a0b061fd1331998e45d2e4d3992c",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+          ],
+          "version": "facet-decision/1"
+        },
+        {
+          "component_id": "facet|facet_operating_metrics",
+          "content_digest": "0c5f635f15c47d8aa94d8df8358ca1b40be1d685db9cfd37d25f236071e094a9",
+          "matcher_digest": "12516ad9d586eef912442a7c15b1a53d767889732a4b363ef0afcf602802aef9",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+          ],
+          "version": "facet-decision/1"
+        },
+        {
+          "component_id": "facet|facet_overseas",
+          "content_digest": "ecae563611546f54092d8db1bcf6570508aa963c9b8190f55e9cfa075fe3b07e",
+          "matcher_digest": "e7aa46e0677563334e1c11d23d4487116432b5831e945be28f0504a4e7ffe391",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+          ],
+          "version": "facet-decision/1"
+        },
+        {
+          "component_id": "facet|facet_risk_denial",
+          "content_digest": "0e54c3a014380955a878f4a9cc04975986536a1e1d2b3b58a4de157009832006",
+          "matcher_digest": "f42efde28d658b7462420ab51eaf4858766953da230d4349b352adf6dfd6c6ab",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+          ],
+          "version": "facet-decision/1"
+        },
+        {
+          "component_id": "facet|mechanism_biopharma_cdmo",
+          "content_digest": "43a0b31780da302f3358c988f5afd11c505cf2ba2fc38bddc13310063fb65661",
+          "matcher_digest": "339c1a9ccf07455a20807c4445796f6fc5d8e6a1741799f19e07629d962fda92",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+          ],
+          "version": "facet-decision/1"
+        },
+        {
+          "component_id": "facet|mechanism_manufacturing",
+          "content_digest": "834cd3589be895b270740514f24abf3b14dd66850aca4a06d557072725fa5348",
+          "matcher_digest": "ae4a2ff576f04b1e6372b48ea64b265947a553d571967c3f609d24424f3380b5",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+          ],
+          "version": "facet-decision/1"
+        },
+        {
+          "component_id": "facet|mechanism_store_network",
+          "content_digest": "4f853cdaa0f507c5847296026e615a512fcddf7a24f08dd9eb2cddc33cffd8d0",
+          "matcher_digest": "b5f05fdc2210bbd629cadcad7869b1b88032f41623db2432d6a68c564db1dfd9",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+          ],
+          "version": "facet-decision/1"
+        },
+        {
+          "component_id": "facet|mechanism_subscription_consumption",
+          "content_digest": "dbee663c61a2117745cc389ba729d81bc5d8a4ecf315c2faff218f8fef40e35b",
+          "matcher_digest": "5209f05801495e04123f72045e4d8269b3fca4201073a25dfdf09f4290cec02d",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+          ],
+          "version": "facet-decision/1"
+        },
+        {
+          "component_id": "facet|semantic_capacity_project",
+          "content_digest": "2a35749f9dead1ebc90b9f3efb7be946393d22e870bdf31db74b23846262a44c",
+          "matcher_digest": "94910de41eff8344affd83eabe4d73dea718c1abc3d21cea50df4dc9d5c220e3",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+          ],
+          "version": "facet-decision/1"
+        },
+        {
+          "component_id": "facet|semantic_stage_progression",
+          "content_digest": "b5ddd73791d181ee892ab9d367c253a0668a3630623e7395953f54adefecedf9",
+          "matcher_digest": "090df710a280fa34d851f6727918259c88e7e57f02bae13b82310b3bb8dc1181",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+          ],
+          "version": "facet-decision/1"
+        },
+        {
+          "component_id": "fallback|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent",
+          "content_digest": "2fbaf1381351b0e1515d6ee5a7811d53e67780898dda450b968280dcbfc5179d",
+          "matcher_digest": "2fbaf1381351b0e1515d6ee5a7811d53e67780898dda450b968280dcbfc5179d",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+          ],
+          "version": "1.0.1"
+        },
+        {
+          "component_id": "fallback|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root",
+          "content_digest": "2fbaf1381351b0e1515d6ee5a7811d53e67780898dda450b968280dcbfc5179d",
+          "matcher_digest": "2fbaf1381351b0e1515d6ee5a7811d53e67780898dda450b968280dcbfc5179d",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root"
+          ],
+          "version": "1.0.1"
+        },
+        {
+          "component_id": "family|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent|container_attachment",
+          "content_digest": "1f7dd5901de3b49c5a64138e78dc3e5d08f9e6e00af4a8606a55770b5dbb24db",
+          "matcher_digest": "d44096922dfb139243c3311984234deae413c111052388fc817625c17cc213c8",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+          ],
+          "version": "family-decision/1"
+        },
+        {
+          "component_id": "family|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent|event_response",
+          "content_digest": "7519ace99f4cd89593ac86fa6861f1ab0b36d4e3ec94c40eb4cc64981d53b908",
+          "matcher_digest": "9f06c8c7574b77305da7f7cc4bafa22107184d824fe906241f4f882c6811b863",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+          ],
+          "version": "family-decision/1"
+        },
+        {
+          "component_id": "family|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent|lifecycle_revision_overlay",
+          "content_digest": "64bb0ee34046b9123c61b558fc6e3ceeb3751f8b8d35d3e806dd0c9be2913e9c",
+          "matcher_digest": "b604e271817be993464d962171eb5233a307ed0909ab7a252219373b556b5071",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+          ],
+          "version": "family-decision/1"
+        },
+        {
+          "component_id": "family|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent|secondary_research",
+          "content_digest": "b1033a527edabdc929514b119fc8fef0a98ae5dc02e617e055a06a1482f59226",
+          "matcher_digest": "3a7a112994b0e8aa702bf1f601237d842ee204a086ad9a9998b98e9ca5019dc0",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+          ],
+          "version": "family-decision/1"
+        },
+        {
+          "component_id": "family|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root|container_attachment",
+          "content_digest": "1f7dd5901de3b49c5a64138e78dc3e5d08f9e6e00af4a8606a55770b5dbb24db",
+          "matcher_digest": "d44096922dfb139243c3311984234deae413c111052388fc817625c17cc213c8",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root"
+          ],
+          "version": "family-decision/1"
+        },
+        {
+          "component_id": "family|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root|event_response",
+          "content_digest": "7519ace99f4cd89593ac86fa6861f1ab0b36d4e3ec94c40eb4cc64981d53b908",
+          "matcher_digest": "9f06c8c7574b77305da7f7cc4bafa22107184d824fe906241f4f882c6811b863",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root"
+          ],
+          "version": "family-decision/1"
+        },
+        {
+          "component_id": "family|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root|lifecycle_revision_overlay",
+          "content_digest": "64bb0ee34046b9123c61b558fc6e3ceeb3751f8b8d35d3e806dd0c9be2913e9c",
+          "matcher_digest": "b604e271817be993464d962171eb5233a307ed0909ab7a252219373b556b5071",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root"
+          ],
+          "version": "family-decision/1"
+        },
+        {
+          "component_id": "family|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root|secondary_research",
+          "content_digest": "b1033a527edabdc929514b119fc8fef0a98ae5dc02e617e055a06a1482f59226",
+          "matcher_digest": "3a7a112994b0e8aa702bf1f601237d842ee204a086ad9a9998b98e9ca5019dc0",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root"
+          ],
+          "version": "family-decision/1"
+        },
+        {
+          "component_id": "pdf-capture-used|426e7bae0098a6ac2e7cb4ff3bba8d7eb4e5a70825cd91645437170b8d9ff489",
+          "content_digest": "426e7bae0098a6ac2e7cb4ff3bba8d7eb4e5a70825cd91645437170b8d9ff489",
+          "matcher_digest": "426e7bae0098a6ac2e7cb4ff3bba8d7eb4e5a70825cd91645437170b8d9ff489",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent",
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root"
+          ],
+          "version": "source-capture-use/1"
+        },
+        {
+          "component_id": "pdf-frontend-used|pdf-reading-layout/2",
+          "content_digest": "c1edea5f393bd8ac0769cca940b0ea41bd9c8231808fa2b7dd3f317d0e6ca3bc",
+          "matcher_digest": "c1edea5f393bd8ac0769cca940b0ea41bd9c8231808fa2b7dd3f317d0e6ca3bc",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent",
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root"
+          ],
+          "version": "native-frontend-use/1"
+        },
+        {
+          "component_id": "source-matcher-used|company_wiki.source_catalog.narrative_replay",
+          "content_digest": "007502c26e359f33fc9bcce399520363a290db696027583482f515fd583cb0ff",
+          "matcher_digest": "007502c26e359f33fc9bcce399520363a290db696027583482f515fd583cb0ff",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent",
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root"
+          ],
+          "version": "parsed-material-matcher/1"
+        }
+      ],
+      "decision_digest": "4f28cecc8eb43f56bf5617d8c5ebfd8d4c11ca7b87379182360b03792d2b2f78",
+      "diagnostics": [],
+      "schema_version": "du-decision-dependencies/1",
+      "scopes": [
+        {
+          "family": "unknown",
+          "form_type": "unknown",
+          "purpose": "unknown",
+          "regime": "unknown",
+          "scope_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+        },
+        {
+          "family": "unknown",
+          "form_type": "unknown",
+          "purpose": "unknown",
+          "regime": "unknown",
+          "scope_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root"
+        }
+      ],
+      "status": "complete",
+      "versions": {
+        "budget": "reading_plan/3",
+        "business_algorithms": "7f85b2bc3975827987131b051cd1e1af7f15ffbacf2f01b333ba6169a24f7ac8",
+        "business_policy": "reading-business-policy/19",
+        "context_policy": "a57a8dd2da347e8dfd04ff7683e0401450cf20ba35e5b039fb48b1649547858e",
+        "continuity": "native-narrative-continuity/9",
+        "continuity_algorithms": "0b7ad5fec291b9be30d650603d8e467ccaa6ab66de9d391af2b1199e7cf3fcb3",
+        "document_work_limit": "16000000",
+        "inventory": "1.11.0",
+        "layout": "1.3.0",
+        "native_table_bridge": "2.1.1",
+        "observation_adapter": "du-observation-adapter/8",
+        "pdf_capture": "requested-pages/1",
+        "pdf_frontend": "pdf-reading-layout/2",
+        "pdf_native_prose": "pdf-native-prose-layout/1",
+        "pdf_native_range": "native-pdf-page-view/1",
+        "pdf_native_range_parser": "0.1.0",
+        "pdf_page_intent": "pdf-reading-execution/1",
+        "pdf_projection": "du3-geometry/1",
+        "pdf_reading_algorithms": "17c2321ec7e508341da27c7ad5bc5d5eed5c038f76e215032c7856bd0a124f00",
+        "pdf_reading_bridge": "pdf-geometry-reading/1",
+        "pipeline": "1.15.0",
+        "script_matching": "source-script-match/1",
+        "selector": "0.9.0",
+        "source_usability": "source-usability/3+e7ead97c28bdc7164634109f0e3b6063ce827dee21399a4793ecd32bbbf8d17c",
+        "strategy_binding": "reading-strategy-binding/3",
+        "summary": "1.1.0",
+        "table_purpose": "operating-table-purpose/5"
+      }
+    },
+    "reading_model_boundary": {
+      "decoder_sha256": "e845da66199597ffe9f296c6828de4f0c98012ee8e599cb617b9683f01ff4f16",
+      "decoder_version": "reading-scoped-task-decoder/4",
+      "implementation_dependencies": {
+        "canonical_contracts": "824e448a8ccdd7573b8adc3afaf55558ca6dd6c211b155a1411d6165413f5a1a",
+        "canonical_encoding": "2746b0195891b35b9e7acb98cf184973c4e5da65823d142d653fcb40c40f1899",
+        "legacy_utilities": "0b0b66330375ceedd56a60417f168d63c9c2d2e94f9b360af1f7fcad95774a26",
+        "role_quality_owner": "b39a92f3d8561b495cfdd2ee9f07f6017de9aedd45516aa3924b3283047f4012",
+        "runtime": "71addc45a6282bc787f932ab927efcd582279348d94eb45251f9ed89153f8cbb",
+        "scoped_protocol": "4446c386a4fe17999e40cdb3550c1aee237f9c626de439e1aa084344c2a6e2d9",
+        "source_task_plan": "2163f1a683114548a123ccad595c03f0e93520aa3f7d8eb42ebfd509ef942bb2",
+        "subject_contracts": "bd00a6e2dca1bb541954c3348e76e126bed1296f72266fd56cd19c3d3699a769"
+      },
+      "instruction_sha256": "650f47f6005c519482cb8d0ee457f90cf1a858d868b1fe90fc90bae8406108b7",
+      "prompt_version": "reading-source-scoped/4.0.6",
+      "reading_projection_version": "reading-model-input/4",
+      "request_schema": "narrative-model-request/5",
+      "response_schema_sha256": "6777d5c2bb9a81c44bd25342419b6e19e23324c1cef2c1e1a02f2405476bb5fa",
+      "schema_version": "reading-model-boundary/1"
+    },
+    "reading_model_projection": "reading-model-input/4",
+    "schema_version": "narrative-generation/1",
+    "select_schema": "narrative-select-result/2.1",
+    "selection_generation": {
+      "decision_digest": "4f28cecc8eb43f56bf5617d8c5ebfd8d4c11ca7b87379182360b03792d2b2f78",
+      "evidence_sha256": "a42d78df26f05784b312e03ec3fa813221c80e89b7be94a14deb8282813232ed",
+      "material_sha256": "7c156572b141fa1127cb429537d17f0bb78fc037497812ffac6a76e8b5d3e35b",
+      "reading_policy_version": "du-sent-policy/1+ef9ada908ad5c86e006772791140ec3b12ecac71490312ddd9c74e4a0fbff31d",
+      "schema_version": "narrative-selection-generation/1",
+      "select_result_sha256": "c61c07cb0a2172653c3a5741f39ab289623c589207d68d7e76430417b10fd578"
+    },
+    "source_metadata": {
+      "document_kind": "annual_report",
+      "language": "en",
+      "source_class": "filing",
+      "title": "Acme business update"
+    },
+    "source_ref": {
+      "byte_size": 1964,
+      "content_sha256": "cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed",
+      "document_id": "urn:company-wiki:document:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed",
+      "mime_type": "application/pdf",
+      "schema_version": "2.0",
+      "source_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed"
+    },
+    "summary_schema": "narrative-summary-result/2.0",
+    "summary_validation": {
+      "detector_distribution": "py3langid/0.4.0",
+      "language_observer": {
+        "numpy": {
+          "distribution": "numpy",
+          "status": "available",
+          "version": "2.5.4"
+        },
+        "py3langid": {
+          "distribution": "py3langid",
+          "model": {
+            "bytes": 4586720,
+            "sha256": "f4f4a2c3465ca1f081541037f9cac23021d68151c2f709c55ae5eedfca522963",
+            "status": "available"
+          },
+          "module": {
+            "bytes": 12687,
+            "sha256": "87dd47f1253b2adc6f82ed96f53e385a80bbde4f3627741cc516e7d0dd4a55d5",
+            "status": "available"
+          },
+          "status": "available",
+          "version": "0.4.0"
+        },
+        "schema_version": "narrative-language-observer/1"
+      },
+      "observer_sha256": "b13bdc90f730026d0a83173730451f2ee8e2472270767a7c793c19f781fbc186",
+      "schema_version": "narrative-summary-validation/2",
+      "summary_handler_sha256": "45eab7da5de3ab9e59e1635e6ce5b7b06073fb89b1e385353e24528c0c62ba19"
+    }
+  },
+  "new_final": {
+    "bundle_producer": "1.0.0",
+    "bundle_schema": "narrative-bundle/2.0",
+    "execution_versions": {
+      "adapter": "openai-compatible-http/1",
+      "handlers": {
+        "source.narrative_select": "1.1.0",
+        "source.narrative_summarize": "1.1.0",
+        "source.narrative_verify": "1.1.0"
+      },
+      "model_request_schema": "narrative-model-request/5",
+      "parser": "0.1.1",
+      "prompt": "reading-source-scoped/4.0.6",
+      "selector": "0.9.0"
+    },
+    "model": {
+      "endpoint": "http://127.0.0.1:54710/v1/chat/completions",
+      "max_output_tokens": 8192,
+      "model_id": "stub-model",
+      "output_token_field": "max_tokens",
+      "temperature": 0.7
+    },
+    "parser_component": {
+      "name": "selective_narrative_parser",
+      "version": "0.1.1"
+    },
+    "parser_components": {
+      "format": "pdf",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1",
+      "reader_implementation_sha256": "c7c000d7da38361a83fc45a4ce526543e93113bdafb8fb4a132cd1bb1cc94c2e",
+      "reader_recipe": "native-pdf/1",
+      "runtime": {
+        "pymupdf": "1.28.2"
+      }
+    },
+    "profile": "P2",
+    "reading_context_projection_version": "reading-context-projection/1",
+    "reading_dependencies": {
+      "candidates": [
+        {
+          "candidate_id": "facet|facet_capacity_projects",
+          "component_ids": [
+            "facet|facet_capacity_projects"
+          ],
+          "eligible": false,
+          "scope_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+        },
+        {
+          "candidate_id": "facet|facet_core_business",
+          "component_ids": [
+            "facet|facet_core_business"
+          ],
+          "eligible": false,
+          "scope_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+        },
+        {
+          "candidate_id": "facet|facet_customer_orders",
+          "component_ids": [
+            "facet|facet_customer_orders"
+          ],
+          "eligible": false,
+          "scope_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+        },
+        {
+          "candidate_id": "facet|facet_industry_competition",
+          "component_ids": [
+            "facet|facet_industry_competition"
+          ],
+          "eligible": false,
+          "scope_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+        },
+        {
+          "candidate_id": "facet|facet_new_business",
+          "component_ids": [
+            "facet|facet_new_business"
+          ],
+          "eligible": false,
+          "scope_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+        },
+        {
+          "candidate_id": "facet|facet_operating_metrics",
+          "component_ids": [
+            "facet|facet_operating_metrics"
+          ],
+          "eligible": false,
+          "scope_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+        },
+        {
+          "candidate_id": "facet|facet_overseas",
+          "component_ids": [
+            "facet|facet_overseas"
+          ],
+          "eligible": false,
+          "scope_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+        },
+        {
+          "candidate_id": "facet|facet_risk_denial",
+          "component_ids": [
+            "facet|facet_risk_denial"
+          ],
+          "eligible": false,
+          "scope_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+        },
+        {
+          "candidate_id": "facet|mechanism_biopharma_cdmo",
+          "component_ids": [
+            "facet|mechanism_biopharma_cdmo"
+          ],
+          "eligible": false,
+          "scope_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+        },
+        {
+          "candidate_id": "facet|mechanism_manufacturing",
+          "component_ids": [
+            "facet|mechanism_manufacturing"
+          ],
+          "eligible": false,
+          "scope_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+        },
+        {
+          "candidate_id": "facet|mechanism_store_network",
+          "component_ids": [
+            "facet|mechanism_store_network"
+          ],
+          "eligible": false,
+          "scope_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+        },
+        {
+          "candidate_id": "facet|mechanism_subscription_consumption",
+          "component_ids": [
+            "facet|mechanism_subscription_consumption"
+          ],
+          "eligible": false,
+          "scope_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+        },
+        {
+          "candidate_id": "facet|semantic_capacity_project",
+          "component_ids": [
+            "facet|semantic_capacity_project"
+          ],
+          "eligible": false,
+          "scope_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+        },
+        {
+          "candidate_id": "facet|semantic_stage_progression",
+          "component_ids": [
+            "facet|semantic_stage_progression"
+          ],
+          "eligible": false,
+          "scope_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+        },
+        {
+          "candidate_id": "family|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent|container_attachment",
+          "component_ids": [
+            "family|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent|container_attachment"
+          ],
+          "eligible": true,
+          "scope_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+        },
+        {
+          "candidate_id": "family|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent|event_response",
+          "component_ids": [
+            "family|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent|event_response"
+          ],
+          "eligible": true,
+          "scope_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+        },
+        {
+          "candidate_id": "family|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent|lifecycle_revision_overlay",
+          "component_ids": [
+            "family|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent|lifecycle_revision_overlay"
+          ],
+          "eligible": true,
+          "scope_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+        },
+        {
+          "candidate_id": "family|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent|secondary_research",
+          "component_ids": [
+            "family|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent|secondary_research"
+          ],
+          "eligible": true,
+          "scope_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+        },
+        {
+          "candidate_id": "family|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root|container_attachment",
+          "component_ids": [
+            "family|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root|container_attachment"
+          ],
+          "eligible": true,
+          "scope_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root"
+        },
+        {
+          "candidate_id": "family|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root|event_response",
+          "component_ids": [
+            "family|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root|event_response"
+          ],
+          "eligible": true,
+          "scope_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root"
+        },
+        {
+          "candidate_id": "family|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root|lifecycle_revision_overlay",
+          "component_ids": [
+            "family|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root|lifecycle_revision_overlay"
+          ],
+          "eligible": true,
+          "scope_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root"
+        },
+        {
+          "candidate_id": "family|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root|secondary_research",
+          "component_ids": [
+            "family|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root|secondary_research"
+          ],
+          "eligible": true,
+          "scope_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root"
+        }
+      ],
+      "components": [
+        {
+          "component_id": "binding|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent|generic",
+          "content_digest": "97d13169eff5d417ac9633156a9f39fe784eda981d34f1b0cd8bb9f22d9231fa",
+          "matcher_digest": "97d13169eff5d417ac9633156a9f39fe784eda981d34f1b0cd8bb9f22d9231fa",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+          ],
+          "version": "catalog-binding/1"
+        },
+        {
+          "component_id": "binding|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root|generic",
+          "content_digest": "97d13169eff5d417ac9633156a9f39fe784eda981d34f1b0cd8bb9f22d9231fa",
+          "matcher_digest": "97d13169eff5d417ac9633156a9f39fe784eda981d34f1b0cd8bb9f22d9231fa",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root"
+          ],
+          "version": "catalog-binding/1"
+        },
+        {
+          "component_id": "carrier|application/pdf",
+          "content_digest": "72685f995a69c4e940f539fb0c057258de22fa5bef111f81f7c51f5e1cda64ee",
+          "matcher_digest": "72685f995a69c4e940f539fb0c057258de22fa5bef111f81f7c51f5e1cda64ee",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent",
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root"
+          ],
+          "version": "source-carrier/1"
+        },
+        {
+          "component_id": "facet|facet_capacity_projects",
+          "content_digest": "daa039b9fa9203341010226c286e9f1689c09f004a87e913f0f5384df54e4216",
+          "matcher_digest": "27eedb0cf174c44c3eabac6087ceb795a6f9e43c6900c422d4d9029f601e568a",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+          ],
+          "version": "facet-decision/1"
+        },
+        {
+          "component_id": "facet|facet_core_business",
+          "content_digest": "94c6bc31a043c0bc883c0a0bbe570adc1c50ce5158f8f2f4581c8e4f0b61171c",
+          "matcher_digest": "4c646fc499e77e6db962b3e539d8c2dd6e0385f7a8a6b547849455cb2821d37b",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+          ],
+          "version": "facet-decision/1"
+        },
+        {
+          "component_id": "facet|facet_customer_orders",
+          "content_digest": "9bb10d12aeab54732dce7472692ce646328c05069e604c197b772c0bd0c41879",
+          "matcher_digest": "622da5a82dbf1cc29d3b92587f067ed94e09b5cfaff42b2498e70339925eb240",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+          ],
+          "version": "facet-decision/1"
+        },
+        {
+          "component_id": "facet|facet_industry_competition",
+          "content_digest": "5c3cb9cdd0a6649221e7d27117bd2c3a49362e68debb319f113bb8ac4fc5209a",
+          "matcher_digest": "d13b7c5f7a19358d3f0b1d64c01450199d9dcf6d30d18733e04befc3b9c416af",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+          ],
+          "version": "facet-decision/1"
+        },
+        {
+          "component_id": "facet|facet_new_business",
+          "content_digest": "aea6170bd370f7b8baedcae971134c453a1ef9899ebd35b53d921aef5848c23a",
+          "matcher_digest": "076612a10ad359df9a76978463584a10ff84a0b061fd1331998e45d2e4d3992c",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+          ],
+          "version": "facet-decision/1"
+        },
+        {
+          "component_id": "facet|facet_operating_metrics",
+          "content_digest": "0c5f635f15c47d8aa94d8df8358ca1b40be1d685db9cfd37d25f236071e094a9",
+          "matcher_digest": "12516ad9d586eef912442a7c15b1a53d767889732a4b363ef0afcf602802aef9",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+          ],
+          "version": "facet-decision/1"
+        },
+        {
+          "component_id": "facet|facet_overseas",
+          "content_digest": "ecae563611546f54092d8db1bcf6570508aa963c9b8190f55e9cfa075fe3b07e",
+          "matcher_digest": "e7aa46e0677563334e1c11d23d4487116432b5831e945be28f0504a4e7ffe391",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+          ],
+          "version": "facet-decision/1"
+        },
+        {
+          "component_id": "facet|facet_risk_denial",
+          "content_digest": "0e54c3a014380955a878f4a9cc04975986536a1e1d2b3b58a4de157009832006",
+          "matcher_digest": "f42efde28d658b7462420ab51eaf4858766953da230d4349b352adf6dfd6c6ab",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+          ],
+          "version": "facet-decision/1"
+        },
+        {
+          "component_id": "facet|mechanism_biopharma_cdmo",
+          "content_digest": "43a0b31780da302f3358c988f5afd11c505cf2ba2fc38bddc13310063fb65661",
+          "matcher_digest": "339c1a9ccf07455a20807c4445796f6fc5d8e6a1741799f19e07629d962fda92",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+          ],
+          "version": "facet-decision/1"
+        },
+        {
+          "component_id": "facet|mechanism_manufacturing",
+          "content_digest": "834cd3589be895b270740514f24abf3b14dd66850aca4a06d557072725fa5348",
+          "matcher_digest": "ae4a2ff576f04b1e6372b48ea64b265947a553d571967c3f609d24424f3380b5",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+          ],
+          "version": "facet-decision/1"
+        },
+        {
+          "component_id": "facet|mechanism_store_network",
+          "content_digest": "4f853cdaa0f507c5847296026e615a512fcddf7a24f08dd9eb2cddc33cffd8d0",
+          "matcher_digest": "b5f05fdc2210bbd629cadcad7869b1b88032f41623db2432d6a68c564db1dfd9",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+          ],
+          "version": "facet-decision/1"
+        },
+        {
+          "component_id": "facet|mechanism_subscription_consumption",
+          "content_digest": "dbee663c61a2117745cc389ba729d81bc5d8a4ecf315c2faff218f8fef40e35b",
+          "matcher_digest": "5209f05801495e04123f72045e4d8269b3fca4201073a25dfdf09f4290cec02d",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+          ],
+          "version": "facet-decision/1"
+        },
+        {
+          "component_id": "facet|semantic_capacity_project",
+          "content_digest": "2a35749f9dead1ebc90b9f3efb7be946393d22e870bdf31db74b23846262a44c",
+          "matcher_digest": "94910de41eff8344affd83eabe4d73dea718c1abc3d21cea50df4dc9d5c220e3",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+          ],
+          "version": "facet-decision/1"
+        },
+        {
+          "component_id": "facet|semantic_stage_progression",
+          "content_digest": "b5ddd73791d181ee892ab9d367c253a0668a3630623e7395953f54adefecedf9",
+          "matcher_digest": "090df710a280fa34d851f6727918259c88e7e57f02bae13b82310b3bb8dc1181",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+          ],
+          "version": "facet-decision/1"
+        },
+        {
+          "component_id": "fallback|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent",
+          "content_digest": "2fbaf1381351b0e1515d6ee5a7811d53e67780898dda450b968280dcbfc5179d",
+          "matcher_digest": "2fbaf1381351b0e1515d6ee5a7811d53e67780898dda450b968280dcbfc5179d",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+          ],
+          "version": "1.0.1"
+        },
+        {
+          "component_id": "fallback|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root",
+          "content_digest": "2fbaf1381351b0e1515d6ee5a7811d53e67780898dda450b968280dcbfc5179d",
+          "matcher_digest": "2fbaf1381351b0e1515d6ee5a7811d53e67780898dda450b968280dcbfc5179d",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root"
+          ],
+          "version": "1.0.1"
+        },
+        {
+          "component_id": "family|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent|container_attachment",
+          "content_digest": "1f7dd5901de3b49c5a64138e78dc3e5d08f9e6e00af4a8606a55770b5dbb24db",
+          "matcher_digest": "d44096922dfb139243c3311984234deae413c111052388fc817625c17cc213c8",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+          ],
+          "version": "family-decision/1"
+        },
+        {
+          "component_id": "family|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent|event_response",
+          "content_digest": "7519ace99f4cd89593ac86fa6861f1ab0b36d4e3ec94c40eb4cc64981d53b908",
+          "matcher_digest": "9f06c8c7574b77305da7f7cc4bafa22107184d824fe906241f4f882c6811b863",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+          ],
+          "version": "family-decision/1"
+        },
+        {
+          "component_id": "family|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent|lifecycle_revision_overlay",
+          "content_digest": "64bb0ee34046b9123c61b558fc6e3ceeb3751f8b8d35d3e806dd0c9be2913e9c",
+          "matcher_digest": "b604e271817be993464d962171eb5233a307ed0909ab7a252219373b556b5071",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+          ],
+          "version": "family-decision/1"
+        },
+        {
+          "component_id": "family|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent|secondary_research",
+          "content_digest": "b1033a527edabdc929514b119fc8fef0a98ae5dc02e617e055a06a1482f59226",
+          "matcher_digest": "3a7a112994b0e8aa702bf1f601237d842ee204a086ad9a9998b98e9ca5019dc0",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+          ],
+          "version": "family-decision/1"
+        },
+        {
+          "component_id": "family|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root|container_attachment",
+          "content_digest": "1f7dd5901de3b49c5a64138e78dc3e5d08f9e6e00af4a8606a55770b5dbb24db",
+          "matcher_digest": "d44096922dfb139243c3311984234deae413c111052388fc817625c17cc213c8",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root"
+          ],
+          "version": "family-decision/1"
+        },
+        {
+          "component_id": "family|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root|event_response",
+          "content_digest": "7519ace99f4cd89593ac86fa6861f1ab0b36d4e3ec94c40eb4cc64981d53b908",
+          "matcher_digest": "9f06c8c7574b77305da7f7cc4bafa22107184d824fe906241f4f882c6811b863",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root"
+          ],
+          "version": "family-decision/1"
+        },
+        {
+          "component_id": "family|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root|lifecycle_revision_overlay",
+          "content_digest": "64bb0ee34046b9123c61b558fc6e3ceeb3751f8b8d35d3e806dd0c9be2913e9c",
+          "matcher_digest": "b604e271817be993464d962171eb5233a307ed0909ab7a252219373b556b5071",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root"
+          ],
+          "version": "family-decision/1"
+        },
+        {
+          "component_id": "family|urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root|secondary_research",
+          "content_digest": "b1033a527edabdc929514b119fc8fef0a98ae5dc02e617e055a06a1482f59226",
+          "matcher_digest": "3a7a112994b0e8aa702bf1f601237d842ee204a086ad9a9998b98e9ca5019dc0",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root"
+          ],
+          "version": "family-decision/1"
+        },
+        {
+          "component_id": "pdf-capture-used|426e7bae0098a6ac2e7cb4ff3bba8d7eb4e5a70825cd91645437170b8d9ff489",
+          "content_digest": "426e7bae0098a6ac2e7cb4ff3bba8d7eb4e5a70825cd91645437170b8d9ff489",
+          "matcher_digest": "426e7bae0098a6ac2e7cb4ff3bba8d7eb4e5a70825cd91645437170b8d9ff489",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent",
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root"
+          ],
+          "version": "source-capture-use/1"
+        },
+        {
+          "component_id": "pdf-frontend-used|pdf-reading-layout/2",
+          "content_digest": "c1edea5f393bd8ac0769cca940b0ea41bd9c8231808fa2b7dd3f317d0e6ca3bc",
+          "matcher_digest": "c1edea5f393bd8ac0769cca940b0ea41bd9c8231808fa2b7dd3f317d0e6ca3bc",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent",
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root"
+          ],
+          "version": "native-frontend-use/1"
+        },
+        {
+          "component_id": "source-matcher-used|company_wiki.source_catalog.narrative_replay",
+          "content_digest": "007502c26e359f33fc9bcce399520363a290db696027583482f515fd583cb0ff",
+          "matcher_digest": "007502c26e359f33fc9bcce399520363a290db696027583482f515fd583cb0ff",
+          "scope_ids": [
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent",
+            "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root"
+          ],
+          "version": "parsed-material-matcher/1"
+        }
+      ],
+      "decision_digest": "c1eeab9ff123ad16a3d1b0c78ef18858d19530d4d961c08dd58a517534e8e150",
+      "diagnostics": [],
+      "schema_version": "du-decision-dependencies/1",
+      "scopes": [
+        {
+          "family": "unknown",
+          "form_type": "unknown",
+          "purpose": "unknown",
+          "regime": "unknown",
+          "scope_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|pdf-native-intent"
+        },
+        {
+          "family": "unknown",
+          "form_type": "unknown",
+          "purpose": "unknown",
+          "regime": "unknown",
+          "scope_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed|root"
+        }
+      ],
+      "status": "complete",
+      "versions": {
+        "budget": "reading_plan/3",
+        "business_algorithms": "d35e6ae0ef3b3dff3b25c7670c8807102e2410ff4f5f54c5605696bcc109cd3e",
+        "business_policy": "reading-business-policy/19",
+        "context_policy": "a57a8dd2da347e8dfd04ff7683e0401450cf20ba35e5b039fb48b1649547858e",
+        "continuity": "native-narrative-continuity/9",
+        "continuity_algorithms": "0b7ad5fec291b9be30d650603d8e467ccaa6ab66de9d391af2b1199e7cf3fcb3",
+        "document_work_limit": "16000000",
+        "inventory": "1.11.0",
+        "layout": "1.3.0",
+        "native_table_bridge": "2.1.1",
+        "observation_adapter": "du-observation-adapter/8",
+        "pdf_capture": "requested-pages/1",
+        "pdf_frontend": "pdf-reading-layout/2",
+        "pdf_native_prose": "pdf-native-prose-layout/1",
+        "pdf_native_range": "native-pdf-page-view/1",
+        "pdf_native_range_parser": "0.1.0",
+        "pdf_page_intent": "pdf-reading-execution/1",
+        "pdf_projection": "du3-geometry/1",
+        "pdf_reading_algorithms": "17c2321ec7e508341da27c7ad5bc5d5eed5c038f76e215032c7856bd0a124f00",
+        "pdf_reading_bridge": "pdf-geometry-reading/1",
+        "pipeline": "1.15.0",
+        "script_matching": "source-script-match/1",
+        "selector": "0.9.0",
+        "source_usability": "source-usability/3+e7ead97c28bdc7164634109f0e3b6063ce827dee21399a4793ecd32bbbf8d17c",
+        "strategy_binding": "reading-strategy-binding/3",
+        "summary": "1.1.0",
+        "table_purpose": "operating-table-purpose/5"
+      }
+    },
+    "reading_model_boundary": {
+      "decoder_sha256": "e845da66199597ffe9f296c6828de4f0c98012ee8e599cb617b9683f01ff4f16",
+      "decoder_version": "reading-scoped-task-decoder/4",
+      "implementation_dependencies": {
+        "canonical_contracts": "824e448a8ccdd7573b8adc3afaf55558ca6dd6c211b155a1411d6165413f5a1a",
+        "canonical_encoding": "2746b0195891b35b9e7acb98cf184973c4e5da65823d142d653fcb40c40f1899",
+        "legacy_utilities": "0b0b66330375ceedd56a60417f168d63c9c2d2e94f9b360af1f7fcad95774a26",
+        "role_quality_owner": "b39a92f3d8561b495cfdd2ee9f07f6017de9aedd45516aa3924b3283047f4012",
+        "runtime": "71addc45a6282bc787f932ab927efcd582279348d94eb45251f9ed89153f8cbb",
+        "scoped_protocol": "4446c386a4fe17999e40cdb3550c1aee237f9c626de439e1aa084344c2a6e2d9",
+        "source_task_plan": "2163f1a683114548a123ccad595c03f0e93520aa3f7d8eb42ebfd509ef942bb2",
+        "subject_contracts": "bd00a6e2dca1bb541954c3348e76e126bed1296f72266fd56cd19c3d3699a769"
+      },
+      "instruction_sha256": "650f47f6005c519482cb8d0ee457f90cf1a858d868b1fe90fc90bae8406108b7",
+      "prompt_version": "reading-source-scoped/4.0.6",
+      "reading_projection_version": "reading-model-input/4",
+      "request_schema": "narrative-model-request/5",
+      "response_schema_sha256": "6777d5c2bb9a81c44bd25342419b6e19e23324c1cef2c1e1a02f2405476bb5fa",
+      "schema_version": "reading-model-boundary/1"
+    },
+    "reading_model_projection": "reading-model-input/4",
+    "schema_version": "narrative-generation/1",
+    "select_schema": "narrative-select-result/2.1",
+    "selection_generation": {
+      "decision_digest": "c1eeab9ff123ad16a3d1b0c78ef18858d19530d4d961c08dd58a517534e8e150",
+      "evidence_sha256": "2acbba8a06ba4044778080f9f71debd2d97e7b31d0ad437512d40a316b186dce",
+      "material_sha256": "34741b8f4dc708471c5bc7eb241fcc2b366920a30ec336e559973795356d589a",
+      "reading_policy_version": "du-sent-policy/1+ef9ada908ad5c86e006772791140ec3b12ecac71490312ddd9c74e4a0fbff31d",
+      "schema_version": "narrative-selection-generation/1",
+      "select_result_sha256": "dd51a1b40e255c4858eec9fa16d9e1c8e93659a8512c99b4342c0e60d0413435"
+    },
+    "source_metadata": {
+      "document_kind": "annual_report",
+      "language": "en",
+      "source_class": "filing",
+      "title": "Acme business update"
+    },
+    "source_ref": {
+      "byte_size": 1964,
+      "content_sha256": "cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed",
+      "document_id": "urn:company-wiki:document:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed",
+      "mime_type": "application/pdf",
+      "schema_version": "2.0",
+      "source_id": "urn:company-wiki:source:sha256:cfb184372da332954db17784866ca37c2ccad1af81d910c0067da6d87b0740ed"
+    },
+    "summary_schema": "narrative-summary-result/2.0",
+    "summary_validation": {
+      "detector_distribution": "py3langid/0.4.0",
+      "language_observer": {
+        "numpy": {
+          "distribution": "numpy",
+          "status": "available",
+          "version": "2.5.4"
+        },
+        "py3langid": {
+          "distribution": "py3langid",
+          "model": {
+            "bytes": 4586720,
+            "sha256": "f4f4a2c3465ca1f081541037f9cac23021d68151c2f709c55ae5eedfca522963",
+            "status": "available"
+          },
+          "module": {
+            "bytes": 12687,
+            "sha256": "87dd47f1253b2adc6f82ed96f53e385a80bbde4f3627741cc516e7d0dd4a55d5",
+            "status": "available"
+          },
+          "status": "available",
+          "version": "0.4.0"
+        },
+        "schema_version": "narrative-language-observer/1"
+      },
+      "observer_sha256": "b13bdc90f730026d0a83173730451f2ee8e2472270767a7c793c19f781fbc186",
+      "schema_version": "narrative-summary-validation/2",
+      "summary_handler_sha256": "45eab7da5de3ab9e59e1635e6ce5b7b06073fb89b1e385353e24528c0c62ba19"
+    }
+  },
+  "loopback_fixture_posts": 2,
+  "old_bundle_unchanged": true,
+  "owned_lake_removed": true
+}

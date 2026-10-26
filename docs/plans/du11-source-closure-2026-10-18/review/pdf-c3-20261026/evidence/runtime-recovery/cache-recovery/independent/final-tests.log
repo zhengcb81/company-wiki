@@ -1,0 +1,49 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Temp\\c3recheck-20261026\\pytest", "requested_basetemp_len": 33, "cwd_len": 34, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0 -- C:\Miniconda\python.exe
+rootdir: C:\Users\郑曾波\Projects\company-wiki
+configfile: pytest.ini
+collecting ... collected 32 items
+
+tests/unit/test_narrative_batch_recovery.py::test_completed_generation_matches_whole_published_recipe_without_current_sdk[parser_version] PASSED [  3%]
+tests/unit/test_narrative_batch_recovery.py::test_completed_generation_matches_whole_published_recipe_without_current_sdk[reader_recipe] PASSED [  6%]
+tests/unit/test_narrative_batch_recovery.py::test_completed_generation_matches_whole_published_recipe_without_current_sdk[runtime] PASSED [  9%]
+tests/unit/test_narrative_batch_recovery.py::test_completed_generation_matches_whole_published_recipe_without_current_sdk[reader_implementation_sha256] PASSED [ 12%]
+tests/unit/test_narrative_batch_recovery.py::test_completed_generation_matches_whole_published_recipe_without_current_sdk[paragraph_enhancement] PASSED [ 15%]
+tests/unit/test_narrative_batch_recovery.py::test_completed_generation_rejects_invalid_publication_digest PASSED [ 18%]
+tests/unit/test_narrative_batch_recovery.py::test_completed_generation_requires_publication_proof_for_recipe PASSED [ 21%]
+tests/unit/test_narrative_batch_recovery.py::test_completed_generation_cannot_remove_recipe_and_resign_as_legacy PASSED [ 25%]
+tests/unit/test_narrative_batch_recovery.py::test_genuine_pre_generation_history_keeps_legacy_read_contract PASSED [ 28%]
+tests/unit/test_narrative_batch_recovery.py::test_pinned_base_generation_resolves_final_selection_and_keeps_exact_recipe PASSED [ 31%]
+tests/unit/test_narrative_batch_recovery.py::test_completed_generation_rejects_malformed_publication_metadata[[]] PASSED [ 34%]
+tests/unit/test_narrative_batch_recovery.py::test_completed_generation_rejects_malformed_publication_metadata[null] PASSED [ 37%]
+tests/unit/test_narrative_batch_recovery.py::test_completed_generation_rejects_malformed_publication_metadata[invalid json] PASSED [ 40%]
+tests/unit/test_narrative_batch_recovery.py::test_base_selection_rejects_non_object_metadata_through_owner_and_batch[[]] PASSED [ 43%]
+tests/unit/test_narrative_batch_recovery.py::test_base_selection_rejects_non_object_metadata_through_owner_and_batch[null] PASSED [ 46%]
+tests/unit/test_narrative_batch_recovery.py::test_base_selection_rejects_non_object_metadata_through_owner_and_batch[true] PASSED [ 50%]
+tests/unit/test_narrative_batch_recovery.py::test_base_selection_rejects_non_object_metadata_through_owner_and_batch[0] PASSED [ 53%]
+tests/unit/test_narrative_batch_recovery.py::test_base_selection_rejects_non_object_metadata_through_owner_and_batch["text"] PASSED [ 56%]
+tests/unit/test_narrative_batch_recovery.py::test_same_run_changed_request_is_refused_before_recipe_or_job_access[source] PASSED [ 59%]
+tests/unit/test_narrative_batch_recovery.py::test_same_run_changed_request_is_refused_before_recipe_or_job_access[model] PASSED [ 62%]
+tests/unit/test_narrative_batch_recovery.py::test_same_run_changed_request_is_refused_before_recipe_or_job_access[profile] PASSED [ 65%]
+tests/unit/test_narrative_batch_recovery.py::test_same_run_changed_request_is_refused_before_recipe_or_job_access[limit] PASSED [ 68%]
+tests/unit/test_narrative_batch_recovery.py::test_binding_decoder_retains_published_recipe_without_instantiating_current_reader[narrative-batch-request/1] PASSED [ 71%]
+tests/unit/test_narrative_batch_recovery.py::test_binding_decoder_retains_published_recipe_without_instantiating_current_reader[narrative-batch-request/2] PASSED [ 75%]
+tests/unit/test_narrative_batch_recovery.py::test_completed_restore_does_not_require_current_recipe PASSED [ 78%]
+tests/unit/test_narrative_batch_recovery.py::test_unfinished_or_unactivated_restore_rejects_recipe_drift_before_execution[ready-False] PASSED [ 81%]
+tests/unit/test_narrative_batch_recovery.py::test_unfinished_or_unactivated_restore_rejects_recipe_drift_before_execution[succeeded-False] PASSED [ 84%]
+tests/unit/test_narrative_batch_recovery.py::test_new_generation_keeps_strict_recipe_contract[parser_version-99.0.0] PASSED [ 87%]
+tests/unit/test_narrative_batch_recovery.py::test_new_generation_keeps_strict_recipe_contract[runtime-value1] PASSED [ 90%]
+tests/unit/test_narrative_batch_recovery.py::test_new_generation_keeps_strict_recipe_contract[reader_recipe-unknown/9] PASSED [ 93%]
+.planning/c3-20261026/cache-recovery/independent/test_review_counterexamples.py::test_base_selection_corrupt_metadata_is_controlled_rejection[[]] PASSED [ 96%]
+.planning/c3-20261026/cache-recovery/independent/test_review_counterexamples.py::test_base_selection_corrupt_metadata_is_controlled_rejection[null] PASSED [100%]
+
+============================== warnings summary ===============================
+..\..\..\..\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464
+  C:\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: C:\Users\郑曾波\Projects\company-wiki\.planning\c3-20261026\cache-recovery\independent\final-tests.xml -
+======================== 32 passed, 1 warning in 2.30s ========================

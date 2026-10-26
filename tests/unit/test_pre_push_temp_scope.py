@@ -5,7 +5,8 @@ import importlib.util
 import io
 from pathlib import Path
 import sys
-import subprocess
+
+from company_wiki._bounded_process import ChildTimeout
 
 import pytest
 
@@ -83,11 +84,12 @@ def test_timed_out_check_preserves_progress_and_returns_red(monkeypatch, capsys,
     progress = "tests/unit/test_reader.py::test_source 原文 PASSED\n"
     error = "last child diagnostic\n"
     def expired(*args, **kwargs):
-        assert kwargs["timeout"] == 600
-        raise subprocess.TimeoutExpired(args[0], 600,
-            output=progress.encode("utf-8") if as_bytes else progress,
-            stderr=error.encode("utf-8") if as_bytes else error)
-    monkeypatch.setattr(gate.subprocess, "run", expired)
+        assert kwargs["timeout_seconds"] == 600
+        exc = ChildTimeout("fixture timeout")
+        exc.stdout = progress.encode("utf-8") if as_bytes else progress
+        exc.stderr = error.encode("utf-8") if as_bytes else error
+        raise exc
+    monkeypatch.setattr(gate, "run_bounded", expired)
     assert gate._run([sys.executable, "-m", "pytest"], "full bootstrap") == 124
     output = capsys.readouterr().out
     assert progress.strip() in output
@@ -97,10 +99,11 @@ def test_timed_out_check_preserves_progress_and_returns_red(monkeypatch, capsys,
 
 def test_timeout_diagnostic_survives_a_legacy_console_encoding(monkeypatch):
     def expired(*args, **kwargs):
-        raise subprocess.TimeoutExpired(args[0], 600,
-            output="last test: snowman ☃ 原文\n".encode("utf-8"),
-            stderr=b"child stderr\n")
-    monkeypatch.setattr(gate.subprocess, "run", expired)
+        exc = ChildTimeout("fixture timeout")
+        exc.stdout = "last test: snowman ☃ 原文\n".encode("utf-8")
+        exc.stderr = b"child stderr\n"
+        raise exc
+    monkeypatch.setattr(gate, "run_bounded", expired)
     buffer = io.BytesIO()
     console = io.TextIOWrapper(buffer, encoding="gbk", errors="strict")
     with monkeypatch.context() as context:

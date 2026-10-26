@@ -1,0 +1,178 @@
+{
+  "status": "IMPLEMENTED_AWAITING_ROOT_INDEPENDENT_REVIEW",
+  "scope": [
+    "src/company_wiki/automation/narrative_batch.py",
+    "src/company_wiki/automation/narrative_generation.py",
+    "tests/unit/test_narrative_batch_recovery.py"
+  ],
+  "untouched_original_integration": "tests/integration/test_n6_batch_upgrade_identity.py",
+  "files": {
+    "src/company_wiki/automation/narrative_batch.py": {
+      "bytes": 107106,
+      "sha256": "6f6db0abaeebb7d38c7f77402cd6943ec1beedfd290631ded29c492d446b9d9c",
+      "lf_sha256": "770d482454bce479c1b737272e5d115b0608f2d5b43de5b8acd654c87f2c1a39"
+    },
+    "src/company_wiki/automation/narrative_generation.py": {
+      "bytes": 26791,
+      "sha256": "fb6a3c9c51f05f266fe123527b7685350705abdd6287b2bda627ae1be9011518",
+      "lf_sha256": "caf25bdd7d8903c975341feb07a07452768e7896f30a9a95ba0bd81a200fd2e4"
+    },
+    "tests/unit/test_narrative_batch_recovery.py": {
+      "bytes": 11740,
+      "sha256": "b6ef493e83429622e560dd47b46b4a5d8d435f42b415fdd7ad8f0c6b4be482d4",
+      "lf_sha256": "76aa67b4bf64f9d3504f2541b32be99493986e4e1f67eb95c564c692e22d5f34"
+    },
+    "tests/integration/test_n6_batch_upgrade_identity.py": {
+      "bytes": 9997,
+      "sha256": "b8ddb010e8943767a35f798e2be37eada23abd50235f49eda946c5e31908035a",
+      "lf_sha256": "b8ddb010e8943767a35f798e2be37eada23abd50235f49eda946c5e31908035a"
+    }
+  },
+  "actual_red": {
+    "original_parser": {
+      "node": "tests/integration/test_n6_batch_upgrade_identity.py::test_real_batches_keep_old_generation_and_create_separate_upgraded_jobs[parser]",
+      "exit_code": 1,
+      "duration_seconds": 19.693,
+      "pid": 22768,
+      "alive_after": false,
+      "python": "C:\\Miniconda\\python.exe",
+      "temp_restored_absent": true
+    },
+    "owner_decoder": "units-final-0.log (both schemas forbidden current reader via parser_component)",
+    "base_final": "final-selection-red-0.log"
+  },
+  "tests": {
+    "verified-final": {
+      "nodes": [
+        {
+          "node": "tests/unit/test_narrative_batch_recovery.py",
+          "exit_code": 0,
+          "timeout": false,
+          "duration_seconds": 6.057,
+          "pid": 11376,
+          "alive_after": false,
+          "python": "C:\\Miniconda\\python.exe"
+        },
+        {
+          "node": "tests/integration/test_n6_batch_upgrade_identity.py::test_real_batches_keep_old_generation_and_create_separate_upgraded_jobs[parser]",
+          "exit_code": 0,
+          "timeout": false,
+          "duration_seconds": 26.442,
+          "pid": 24420,
+          "alive_after": false,
+          "python": "C:\\Miniconda\\python.exe"
+        }
+      ],
+      "temp_restored_absent": true,
+      "plugin_autoload": false
+    },
+    "cross-run-final": {
+      "nodes": [
+        {
+          "node": "tests/unit/test_narrative_batch_recovery.py",
+          "exit_code": 0,
+          "timeout": false,
+          "duration_seconds": 2.232,
+          "pid": 22464,
+          "alive_after": false,
+          "python": "C:\\Miniconda\\python.exe"
+        },
+        {
+          "node": "tests/integration/test_narrative_generation_reuse.py::test_different_configured_runs_default_to_one_generation_post_and_public_pin[application/pdf]",
+          "exit_code": 0,
+          "timeout": false,
+          "duration_seconds": 36.887,
+          "pid": 30264,
+          "alive_after": false,
+          "python": "C:\\Miniconda\\python.exe"
+        }
+      ],
+      "temp_restored_absent": true,
+      "plugin_autoload": false
+    },
+    "owner-final": {
+      "nodes": [
+        {
+          "node": "tests/unit/test_narrative_batch_recovery.py",
+          "exit_code": 0,
+          "timeout": false,
+          "duration_seconds": 5.941,
+          "pid": 22148,
+          "alive_after": false,
+          "python": "C:\\Miniconda\\python.exe"
+        },
+        {
+          "node": "tests/unit/test_narrative_generation.py",
+          "exit_code": 0,
+          "timeout": false,
+          "duration_seconds": 5.86,
+          "pid": 13664,
+          "alive_after": false,
+          "python": "C:\\Miniconda\\python.exe"
+        }
+      ],
+      "temp_restored_absent": true,
+      "plugin_autoload": false
+    },
+    "final-unit": {
+      "nodes": [
+        {
+          "node": "tests/unit/test_narrative_batch_recovery.py",
+          "exit_code": 2,
+          "timeout": false,
+          "duration_seconds": 5.643,
+          "pid": 26576,
+          "alive_after": false,
+          "python": "C:\\Miniconda\\python.exe"
+        },
+        {
+          "node": "tests/unit/test_narrative_batch.py",
+          "exit_code": 0,
+          "timeout": false,
+          "duration_seconds": 8.672,
+          "pid": 5072,
+          "alive_after": false,
+          "python": "C:\\Miniconda\\python.exe"
+        },
+        {
+          "node": "tests/unit/test_narrative_generation.py",
+          "exit_code": 0,
+          "timeout": false,
+          "duration_seconds": 7.883,
+          "pid": 5664,
+          "alive_after": false,
+          "python": "C:\\Miniconda\\python.exe"
+        }
+      ],
+      "temp_restored_absent": true,
+      "plugin_autoload": false
+    },
+    "paid-resume": {
+      "nodes": [
+        {
+          "node": "tests/integration/test_reading_default_resume.py::test_paid_outbox_resumes_frozen_selector_across_default_upgrade_without_new_post[narrative-batch-request/2]",
+          "exit_code": 0,
+          "timeout": false,
+          "duration_seconds": 34.77,
+          "pid": 2240,
+          "alive_after": false,
+          "python": "C:\\Miniconda\\python.exe"
+        }
+      ],
+      "temp_restored_absent": true,
+      "plugin_autoload": false
+    }
+  },
+  "limitations": [
+    "Original policy PDF parser upgrade fixture has no summary POST; paid recovery is separately covered by schema2 outbox fixture and PDF cross-run fixture.",
+    "No real supplier requests, downloads, actual document content acceptance, global deployment, commit or push.",
+    "Initial complete original-node assertions passed but plugin process exit exceeded 55s: green.log/xml retained and not counted as successful process. Subsequent exact runs exited 0."
+  ],
+  "responsibility": {
+    "batch": "Decode immutable request/membership; completed output validates published generation and delegates public read; recipe availability checked only before actual execution.",
+    "generation": "Explicit supplied recipe owns identity without loading current parser; absent recipe still resolves actual current PdfReading.",
+    "public_reader": "Current SourceRef/root bytes and evidence locator replay unchanged."
+  },
+  "cleanup_remaining_dirs": [],
+  "production_config_diff": []
+}

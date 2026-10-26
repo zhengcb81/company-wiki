@@ -1,0 +1,468 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\c3-20261026\\pdf-env\\pytest-temp", "requested_basetemp_len": 76, "cwd_len": 34, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Packages\\sandbox.{aee8e5b6-bb6d-495f-8b08-a7c66a906edf}\\AC\\Temp\\cw-pytest-basetemp\\20261026-201856-0d88db19", "effective_basetemp_len": 134}
+FFFFFFFFFFFE.                                                            [100%]
+=================================== ERRORS ====================================
+_ ERROR at setup of test_v2_config_explicit_algorithm_and_recipe_source_binding _
+
+fixturedef = <FixtureDef argname='tmp_path' scope='function' baseid=''>
+request = <SubRequest 'tmp_path' for <Function test_v2_config_explicit_algorithm_and_recipe_source_binding>>
+
+    @pytest.hookimpl(wrapper=True)
+    def pytest_fixture_setup(fixturedef: FixtureDef, request) -> object | None:
+        if (
+            fixturedef.argname == "event_loop_policy"
+            and fixturedef.func.__module__ != __name__
+        ):
+            warnings.warn(
+                PytestDeprecationWarning(_EVENT_LOOP_POLICY_FIXTURE_DEPRECATION_WARNING),
+            )
+        asyncio_mode = _get_asyncio_mode(request.config)
+        if not _is_asyncio_fixture_function(fixturedef.func):
+            if asyncio_mode == Mode.STRICT:
+                # Ignore async fixtures without explicit asyncio mark in strict mode
+                # This applies to pytest_trio fixtures, for example
+                return (yield)
+            if not _is_coroutine_or_asyncgen(fixturedef.func):
+>               return (yield)
+                        ^^^^^
+E               OSError: could not create numbered dir with prefix test_v2_config_explicit_algori in C:\Users\֣����\AppData\Local\Packages\sandbox.{aee8e5b6-bb6d-495f-8b08-a7c66a906edf}\AC\Temp\cw-pytest-basetemp\20261026-201856-0d88db19 after 10 tries
+
+.venv\Lib\site-packages\pytest_asyncio\plugin.py:926: OSError
+================================== FAILURES ===================================
+_ test_duplicate_search_path_discovery_and_unrelated_distribution_do_not_change_identity _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F278EC9810>
+
+    def test_duplicate_search_path_discovery_and_unrelated_distribution_do_not_change_identity(monkeypatch):
+        root, dep = package("docling", requires=("backend",)), package("backend")
+>       expected = fingerprint(monkeypatch, [root, dep])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\unit\test_pdf_runtime_environment.py:33: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F278EC9810>
+packages = [namespace(metadata={'Name': 'docling', 'Version': '1'}, version='1', requires=['backend']), namespace(metadata={'Name': 'backend', 'Version': '1'}, version='1', requires=[])]
+roots = ('docling',), marker_environment = None
+
+    def fingerprint(monkeypatch, packages, roots=("docling",), marker_environment=None):
+        by_name = {p.metadata["Name"].lower().replace("_", "-"): p for p in packages}
+        def lookup(name):
+            from importlib.metadata import PackageNotFoundError
+            if name not in by_name:
+                raise PackageNotFoundError(name)
+            return by_name[name]
+        monkeypatch.setattr(worker, "distributions", lambda: packages)
+        monkeypatch.setattr(worker, "distribution", lookup, raising=False)
+>       return worker.environment_sha256(roots=roots, marker_environment=marker_environment)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: environment_sha256() got an unexpected keyword argument 'roots'
+
+tests\unit\test_pdf_runtime_environment.py:28: TypeError
+_ test_transitive_selected_version_and_metadata_dependency_changes_change_identity _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F278EC8C30>
+
+    def test_transitive_selected_version_and_metadata_dependency_changes_change_identity(monkeypatch):
+        root, dep = package("docling", requires=("backend",)), package("backend", requires=("leaf",))
+        leaf = package("leaf")
+>       expected = fingerprint(monkeypatch, [root, dep, leaf])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\unit\test_pdf_runtime_environment.py:40: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F278EC8C30>
+packages = [namespace(metadata={'Name': 'docling', 'Version': '1'}, version='1', requires=['backend']), namespace(metadata={'Name... '1'}, version='1', requires=['leaf']), namespace(metadata={'Name': 'leaf', 'Version': '1'}, version='1', requires=[])]
+roots = ('docling',), marker_environment = None
+
+    def fingerprint(monkeypatch, packages, roots=("docling",), marker_environment=None):
+        by_name = {p.metadata["Name"].lower().replace("_", "-"): p for p in packages}
+        def lookup(name):
+            from importlib.metadata import PackageNotFoundError
+            if name not in by_name:
+                raise PackageNotFoundError(name)
+            return by_name[name]
+        monkeypatch.setattr(worker, "distributions", lambda: packages)
+        monkeypatch.setattr(worker, "distribution", lookup, raising=False)
+>       return worker.environment_sha256(roots=roots, marker_environment=marker_environment)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: environment_sha256() got an unexpected keyword argument 'roots'
+
+tests\unit\test_pdf_runtime_environment.py:28: TypeError
+___ test_inactive_markers_and_unused_extras_do_not_require_or_bind_packages ___
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F278F49FD0>
+
+    def test_inactive_markers_and_unused_extras_do_not_require_or_bind_packages(monkeypatch):
+        root = package("docling", requires=('missing; python_version < "2"', 'ocr; extra == "ocr"'), extras=("ocr",))
+>       expected = fingerprint(monkeypatch, [root])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\unit\test_pdf_runtime_environment.py:47: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F278F49FD0>
+packages = [namespace(metadata={'Name': 'docling', 'Version': '1'}, version='1', requires=['missing; python_version < "2"', 'ocr; extra == "ocr"'])]
+roots = ('docling',), marker_environment = None
+
+    def fingerprint(monkeypatch, packages, roots=("docling",), marker_environment=None):
+        by_name = {p.metadata["Name"].lower().replace("_", "-"): p for p in packages}
+        def lookup(name):
+            from importlib.metadata import PackageNotFoundError
+            if name not in by_name:
+                raise PackageNotFoundError(name)
+            return by_name[name]
+        monkeypatch.setattr(worker, "distributions", lambda: packages)
+        monkeypatch.setattr(worker, "distribution", lookup, raising=False)
+>       return worker.environment_sha256(roots=roots, marker_environment=marker_environment)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: environment_sha256() got an unexpected keyword argument 'roots'
+
+tests\unit\test_pdf_runtime_environment.py:28: TypeError
+_______ test_marker_platform_activation_is_evaluated_and_fingerprinted ________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F278F63240>
+
+    def test_marker_platform_activation_is_evaluated_and_fingerprinted(monkeypatch):
+        root = package("docling", requires=('backend; sys_platform == "win32"',))
+>       win = fingerprint(monkeypatch, [root, package("backend")], marker_environment={"sys_platform": "win32"})
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\unit\test_pdf_runtime_environment.py:53: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F278F63240>
+packages = [namespace(metadata={'Name': 'docling', 'Version': '1'}, version='1', requires=['backend; sys_platform == "win32"']), namespace(metadata={'Name': 'backend', 'Version': '1'}, version='1', requires=[])]
+roots = ('docling',), marker_environment = {'sys_platform': 'win32'}
+
+    def fingerprint(monkeypatch, packages, roots=("docling",), marker_environment=None):
+        by_name = {p.metadata["Name"].lower().replace("_", "-"): p for p in packages}
+        def lookup(name):
+            from importlib.metadata import PackageNotFoundError
+            if name not in by_name:
+                raise PackageNotFoundError(name)
+            return by_name[name]
+        monkeypatch.setattr(worker, "distributions", lambda: packages)
+        monkeypatch.setattr(worker, "distribution", lookup, raising=False)
+>       return worker.environment_sha256(roots=roots, marker_environment=marker_environment)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: environment_sha256() got an unexpected keyword argument 'roots'
+
+tests\unit\test_pdf_runtime_environment.py:28: TypeError
+___________ test_transitive_extras_revisit_earlier_nodes_and_cycles ___________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F278F639B0>
+
+    def test_transitive_extras_revisit_earlier_nodes_and_cycles(monkeypatch):
+        root = package("docling", requires=("backend", "later"))
+        dep = package("backend", requires=('leaf; extra == "feature"', "docling"), extras=("feature",))
+        later = package("later", requires=("backend[feature]",))
+>       expected = fingerprint(monkeypatch, [root, dep, later, package("leaf")])
+                   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests\unit\test_pdf_runtime_environment.py:63: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F278F639B0>
+packages = [namespace(metadata={'Name': 'docling', 'Version': '1'}, version='1', requires=['backend', 'later']), namespace(metada...on='1', requires=['backend[feature]']), namespace(metadata={'Name': 'leaf', 'Version': '1'}, version='1', requires=[])]
+roots = ('docling',), marker_environment = None
+
+    def fingerprint(monkeypatch, packages, roots=("docling",), marker_environment=None):
+        by_name = {p.metadata["Name"].lower().replace("_", "-"): p for p in packages}
+        def lookup(name):
+            from importlib.metadata import PackageNotFoundError
+            if name not in by_name:
+                raise PackageNotFoundError(name)
+            return by_name[name]
+        monkeypatch.setattr(worker, "distributions", lambda: packages)
+        monkeypatch.setattr(worker, "distribution", lookup, raising=False)
+>       return worker.environment_sha256(roots=roots, marker_environment=marker_environment)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: environment_sha256() got an unexpected keyword argument 'roots'
+
+tests\unit\test_pdf_runtime_environment.py:28: TypeError
+___ test_missing_or_invalid_active_metadata_is_an_explicit_failure[missing] ___
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F278F73A50>
+broken = 'missing'
+
+    @pytest.mark.parametrize("broken", ["missing", "name", "version", "requirement", "specifier", "extra"])
+    def test_missing_or_invalid_active_metadata_is_an_explicit_failure(monkeypatch, broken):
+        root, dep = package("docling", requires=("backend>=2",)), package("backend", "2")
+        packages = [root, dep]
+        if broken == "missing":
+            packages = [root]
+        elif broken == "name":
+            dep.metadata["Name"] = ""
+        elif broken == "version":
+            dep.version = ""
+        elif broken == "requirement":
+            root.requires = ["???"]
+        elif broken == "specifier":
+            dep.version = "1"
+        elif broken == "extra":
+            root.requires = ["backend[not-declared]"]
+        with pytest.raises((ValueError, LookupError)):
+>           fingerprint(monkeypatch, packages)
+
+tests\unit\test_pdf_runtime_environment.py:85: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F278F73A50>
+packages = [namespace(metadata={'Name': 'docling', 'Version': '1'}, version='1', requires=['backend>=2'])]
+roots = ('docling',), marker_environment = None
+
+    def fingerprint(monkeypatch, packages, roots=("docling",), marker_environment=None):
+        by_name = {p.metadata["Name"].lower().replace("_", "-"): p for p in packages}
+        def lookup(name):
+            from importlib.metadata import PackageNotFoundError
+            if name not in by_name:
+                raise PackageNotFoundError(name)
+            return by_name[name]
+        monkeypatch.setattr(worker, "distributions", lambda: packages)
+        monkeypatch.setattr(worker, "distribution", lookup, raising=False)
+>       return worker.environment_sha256(roots=roots, marker_environment=marker_environment)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: environment_sha256() got an unexpected keyword argument 'roots'
+
+tests\unit\test_pdf_runtime_environment.py:28: TypeError
+____ test_missing_or_invalid_active_metadata_is_an_explicit_failure[name] _____
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F278FC4250>
+broken = 'name'
+
+    @pytest.mark.parametrize("broken", ["missing", "name", "version", "requirement", "specifier", "extra"])
+    def test_missing_or_invalid_active_metadata_is_an_explicit_failure(monkeypatch, broken):
+        root, dep = package("docling", requires=("backend>=2",)), package("backend", "2")
+        packages = [root, dep]
+        if broken == "missing":
+            packages = [root]
+        elif broken == "name":
+            dep.metadata["Name"] = ""
+        elif broken == "version":
+            dep.version = ""
+        elif broken == "requirement":
+            root.requires = ["???"]
+        elif broken == "specifier":
+            dep.version = "1"
+        elif broken == "extra":
+            root.requires = ["backend[not-declared]"]
+        with pytest.raises((ValueError, LookupError)):
+>           fingerprint(monkeypatch, packages)
+
+tests\unit\test_pdf_runtime_environment.py:85: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F278FC4250>
+packages = [namespace(metadata={'Name': 'docling', 'Version': '1'}, version='1', requires=['backend>=2']), namespace(metadata={'Name': '', 'Version': '2'}, version='2', requires=[])]
+roots = ('docling',), marker_environment = None
+
+    def fingerprint(monkeypatch, packages, roots=("docling",), marker_environment=None):
+        by_name = {p.metadata["Name"].lower().replace("_", "-"): p for p in packages}
+        def lookup(name):
+            from importlib.metadata import PackageNotFoundError
+            if name not in by_name:
+                raise PackageNotFoundError(name)
+            return by_name[name]
+        monkeypatch.setattr(worker, "distributions", lambda: packages)
+        monkeypatch.setattr(worker, "distribution", lookup, raising=False)
+>       return worker.environment_sha256(roots=roots, marker_environment=marker_environment)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: environment_sha256() got an unexpected keyword argument 'roots'
+
+tests\unit\test_pdf_runtime_environment.py:28: TypeError
+___ test_missing_or_invalid_active_metadata_is_an_explicit_failure[version] ___
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F278FBA120>
+broken = 'version'
+
+    @pytest.mark.parametrize("broken", ["missing", "name", "version", "requirement", "specifier", "extra"])
+    def test_missing_or_invalid_active_metadata_is_an_explicit_failure(monkeypatch, broken):
+        root, dep = package("docling", requires=("backend>=2",)), package("backend", "2")
+        packages = [root, dep]
+        if broken == "missing":
+            packages = [root]
+        elif broken == "name":
+            dep.metadata["Name"] = ""
+        elif broken == "version":
+            dep.version = ""
+        elif broken == "requirement":
+            root.requires = ["???"]
+        elif broken == "specifier":
+            dep.version = "1"
+        elif broken == "extra":
+            root.requires = ["backend[not-declared]"]
+        with pytest.raises((ValueError, LookupError)):
+>           fingerprint(monkeypatch, packages)
+
+tests\unit\test_pdf_runtime_environment.py:85: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F278FBA120>
+packages = [namespace(metadata={'Name': 'docling', 'Version': '1'}, version='1', requires=['backend>=2']), namespace(metadata={'Name': 'backend', 'Version': '2'}, version='', requires=[])]
+roots = ('docling',), marker_environment = None
+
+    def fingerprint(monkeypatch, packages, roots=("docling",), marker_environment=None):
+        by_name = {p.metadata["Name"].lower().replace("_", "-"): p for p in packages}
+        def lookup(name):
+            from importlib.metadata import PackageNotFoundError
+            if name not in by_name:
+                raise PackageNotFoundError(name)
+            return by_name[name]
+        monkeypatch.setattr(worker, "distributions", lambda: packages)
+        monkeypatch.setattr(worker, "distribution", lookup, raising=False)
+>       return worker.environment_sha256(roots=roots, marker_environment=marker_environment)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: environment_sha256() got an unexpected keyword argument 'roots'
+
+tests\unit\test_pdf_runtime_environment.py:28: TypeError
+_ test_missing_or_invalid_active_metadata_is_an_explicit_failure[requirement] _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F278FBB110>
+broken = 'requirement'
+
+    @pytest.mark.parametrize("broken", ["missing", "name", "version", "requirement", "specifier", "extra"])
+    def test_missing_or_invalid_active_metadata_is_an_explicit_failure(monkeypatch, broken):
+        root, dep = package("docling", requires=("backend>=2",)), package("backend", "2")
+        packages = [root, dep]
+        if broken == "missing":
+            packages = [root]
+        elif broken == "name":
+            dep.metadata["Name"] = ""
+        elif broken == "version":
+            dep.version = ""
+        elif broken == "requirement":
+            root.requires = ["???"]
+        elif broken == "specifier":
+            dep.version = "1"
+        elif broken == "extra":
+            root.requires = ["backend[not-declared]"]
+        with pytest.raises((ValueError, LookupError)):
+>           fingerprint(monkeypatch, packages)
+
+tests\unit\test_pdf_runtime_environment.py:85: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F278FBB110>
+packages = [namespace(metadata={'Name': 'docling', 'Version': '1'}, version='1', requires=['???']), namespace(metadata={'Name': 'backend', 'Version': '2'}, version='2', requires=[])]
+roots = ('docling',), marker_environment = None
+
+    def fingerprint(monkeypatch, packages, roots=("docling",), marker_environment=None):
+        by_name = {p.metadata["Name"].lower().replace("_", "-"): p for p in packages}
+        def lookup(name):
+            from importlib.metadata import PackageNotFoundError
+            if name not in by_name:
+                raise PackageNotFoundError(name)
+            return by_name[name]
+        monkeypatch.setattr(worker, "distributions", lambda: packages)
+        monkeypatch.setattr(worker, "distribution", lookup, raising=False)
+>       return worker.environment_sha256(roots=roots, marker_environment=marker_environment)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: environment_sha256() got an unexpected keyword argument 'roots'
+
+tests\unit\test_pdf_runtime_environment.py:28: TypeError
+__ test_missing_or_invalid_active_metadata_is_an_explicit_failure[specifier] __
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F278F819B0>
+broken = 'specifier'
+
+    @pytest.mark.parametrize("broken", ["missing", "name", "version", "requirement", "specifier", "extra"])
+    def test_missing_or_invalid_active_metadata_is_an_explicit_failure(monkeypatch, broken):
+        root, dep = package("docling", requires=("backend>=2",)), package("backend", "2")
+        packages = [root, dep]
+        if broken == "missing":
+            packages = [root]
+        elif broken == "name":
+            dep.metadata["Name"] = ""
+        elif broken == "version":
+            dep.version = ""
+        elif broken == "requirement":
+            root.requires = ["???"]
+        elif broken == "specifier":
+            dep.version = "1"
+        elif broken == "extra":
+            root.requires = ["backend[not-declared]"]
+        with pytest.raises((ValueError, LookupError)):
+>           fingerprint(monkeypatch, packages)
+
+tests\unit\test_pdf_runtime_environment.py:85: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F278F819B0>
+packages = [namespace(metadata={'Name': 'docling', 'Version': '1'}, version='1', requires=['backend>=2']), namespace(metadata={'Name': 'backend', 'Version': '2'}, version='1', requires=[])]
+roots = ('docling',), marker_environment = None
+
+    def fingerprint(monkeypatch, packages, roots=("docling",), marker_environment=None):
+        by_name = {p.metadata["Name"].lower().replace("_", "-"): p for p in packages}
+        def lookup(name):
+            from importlib.metadata import PackageNotFoundError
+            if name not in by_name:
+                raise PackageNotFoundError(name)
+            return by_name[name]
+        monkeypatch.setattr(worker, "distributions", lambda: packages)
+        monkeypatch.setattr(worker, "distribution", lookup, raising=False)
+>       return worker.environment_sha256(roots=roots, marker_environment=marker_environment)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: environment_sha256() got an unexpected keyword argument 'roots'
+
+tests\unit\test_pdf_runtime_environment.py:28: TypeError
+____ test_missing_or_invalid_active_metadata_is_an_explicit_failure[extra] ____
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F278F81550>
+broken = 'extra'
+
+    @pytest.mark.parametrize("broken", ["missing", "name", "version", "requirement", "specifier", "extra"])
+    def test_missing_or_invalid_active_metadata_is_an_explicit_failure(monkeypatch, broken):
+        root, dep = package("docling", requires=("backend>=2",)), package("backend", "2")
+        packages = [root, dep]
+        if broken == "missing":
+            packages = [root]
+        elif broken == "name":
+            dep.metadata["Name"] = ""
+        elif broken == "version":
+            dep.version = ""
+        elif broken == "requirement":
+            root.requires = ["???"]
+        elif broken == "specifier":
+            dep.version = "1"
+        elif broken == "extra":
+            root.requires = ["backend[not-declared]"]
+        with pytest.raises((ValueError, LookupError)):
+>           fingerprint(monkeypatch, packages)
+
+tests\unit\test_pdf_runtime_environment.py:85: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001F278F81550>
+packages = [namespace(metadata={'Name': 'docling', 'Version': '1'}, version='1', requires=['backend[not-declared]']), namespace(metadata={'Name': 'backend', 'Version': '2'}, version='2', requires=[])]
+roots = ('docling',), marker_environment = None
+
+    def fingerprint(monkeypatch, packages, roots=("docling",), marker_environment=None):
+        by_name = {p.metadata["Name"].lower().replace("_", "-"): p for p in packages}
+        def lookup(name):
+            from importlib.metadata import PackageNotFoundError
+            if name not in by_name:
+                raise PackageNotFoundError(name)
+            return by_name[name]
+        monkeypatch.setattr(worker, "distributions", lambda: packages)
+        monkeypatch.setattr(worker, "distribution", lookup, raising=False)
+>       return worker.environment_sha256(roots=roots, marker_environment=marker_environment)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       TypeError: environment_sha256() got an unexpected keyword argument 'roots'
+
+tests\unit\test_pdf_runtime_environment.py:28: TypeError
+=========================== short test summary info ===========================
+FAILED tests/unit/test_pdf_runtime_environment.py::test_duplicate_search_path_discovery_and_unrelated_distribution_do_not_change_identity
+FAILED tests/unit/test_pdf_runtime_environment.py::test_transitive_selected_version_and_metadata_dependency_changes_change_identity
+FAILED tests/unit/test_pdf_runtime_environment.py::test_inactive_markers_and_unused_extras_do_not_require_or_bind_packages
+FAILED tests/unit/test_pdf_runtime_environment.py::test_marker_platform_activation_is_evaluated_and_fingerprinted
+FAILED tests/unit/test_pdf_runtime_environment.py::test_transitive_extras_revisit_earlier_nodes_and_cycles
+FAILED tests/unit/test_pdf_runtime_environment.py::test_missing_or_invalid_active_metadata_is_an_explicit_failure[missing]
+FAILED tests/unit/test_pdf_runtime_environment.py::test_missing_or_invalid_active_metadata_is_an_explicit_failure[name]
+FAILED tests/unit/test_pdf_runtime_environment.py::test_missing_or_invalid_active_metadata_is_an_explicit_failure[version]
+FAILED tests/unit/test_pdf_runtime_environment.py::test_missing_or_invalid_active_metadata_is_an_explicit_failure[requirement]
+FAILED tests/unit/test_pdf_runtime_environment.py::test_missing_or_invalid_active_metadata_is_an_explicit_failure[specifier]
+FAILED tests/unit/test_pdf_runtime_environment.py::test_missing_or_invalid_active_metadata_is_an_explicit_failure[extra]
+ERROR tests/unit/test_pdf_runtime_environment.py::test_v2_config_explicit_algorithm_and_recipe_source_binding
+11 failed, 1 passed, 1 error in 7.29s
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\AppData\\Local\\Packages\\sandbox.{aee8e5b6-bb6d-495f-8b08-a7c66a906edf}\\AC\\Temp\\cw-pytest-basetemp\\20261026-201856-0d88db19", "existed": true, "removed": false}

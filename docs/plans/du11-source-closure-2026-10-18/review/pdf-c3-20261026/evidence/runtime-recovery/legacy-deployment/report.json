@@ -1,0 +1,75 @@
+{
+  "result": "ROOT_CAUSE_IDENTIFIED / HISTORICAL_FIXTURE_DEPLOYMENT_MISMATCH",
+  "product_cache_identity_defect_demonstrated": false,
+  "test_fixture_issue": "exec(legacy sections) plus reassigned module.__file__ no longer changes physically scanned structure package identity",
+  "triggering_commit": "1cddb0bd3e8e929a5e5fa9059ac7d06d0ef931f1",
+  "causal_chain": [
+    "1cddb0bd changed structure hashing from enumerated loaded module.__file__ to all physical structure/*.py next to the actual decision_inventory module.",
+    "Historical fixture executes legacy.txt in current module namespace; code co_filename is old but physical current package remains installed.",
+    "Old bundle falsely carries CURRENT structure hash abddf8… despite executing old7f010c…; current_trace sees same package closure and accepts it.",
+    "old-b and new-c both reuse identical artifact with zero further fixture POST. Current structure never executes; old/new public bundle and Ref are equal."
+  ],
+  "red_evidence": {
+    "exit_code": 1,
+    "timeout": false,
+    "seconds": 26.77,
+    "before_lf_sha256": {
+      "tests/integration/test_reading_parent_cache_migration.py": "8b4f55f260179649919c4e087195a13f73bd5782182b8572c2080b901dfa37d9",
+      "src/company_wiki/document_understanding/decision_inventory.py": "b26676abcd35b013a753ae276140d4b9e58aa47eefb0c2dfb6cb684d906b5b67",
+      "src/company_wiki/automation/narrative_generation.py": "caf25bdd7d8903c975341feb07a07452768e7896f30a9a95ba0bd81a200fd2e4",
+      "src/company_wiki/automation/narrative_batch.py": "770d482454bce479c1b737272e5d115b0608f2d5b43de5b8acd654c87f2c1a39",
+      "src/company_wiki/document_understanding/structure/sections.py": "abddf859e804e65765c34bc336ed7a8eb91de0d3894f761c63eafd8b77e94287",
+      "docs/plans/r1-final3-source-semantics-20261022/review/legacy-sections-908ec2c4.py.txt": "7f010ccbe6815f5b842f2d90b99d751fd95478cea750c907292c3aaff39080d0"
+    },
+    "after_lf_sha256": {
+      "tests/integration/test_reading_parent_cache_migration.py": "8b4f55f260179649919c4e087195a13f73bd5782182b8572c2080b901dfa37d9",
+      "src/company_wiki/document_understanding/decision_inventory.py": "b26676abcd35b013a753ae276140d4b9e58aa47eefb0c2dfb6cb684d906b5b67",
+      "src/company_wiki/automation/narrative_generation.py": "caf25bdd7d8903c975341feb07a07452768e7896f30a9a95ba0bd81a200fd2e4",
+      "src/company_wiki/automation/narrative_batch.py": "770d482454bce479c1b737272e5d115b0608f2d5b43de5b8acd654c87f2c1a39",
+      "src/company_wiki/document_understanding/structure/sections.py": "abddf859e804e65765c34bc336ed7a8eb91de0d3894f761c63eafd8b77e94287",
+      "docs/plans/r1-final3-source-semantics-20261022/review/legacy-sections-908ec2c4.py.txt": "7f010ccbe6815f5b842f2d90b99d751fd95478cea750c907292c3aaff39080d0"
+    },
+    "stable": true,
+    "owned_pid": 15556,
+    "owned_pid_alive_after": false,
+    "fixture_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c3legir",
+    "observation_only": true
+  },
+  "comparison_evidence": "material-identity-comparison.json",
+  "physical_deployment_negative_control": {
+    "only_changed_structure_file": "sections.py",
+    "hashes_differ": {
+      "company_wiki.document_understanding.structure.sections": {
+        "current": "abddf859e804e65765c34bc336ed7a8eb91de0d3894f761c63eafd8b77e94287",
+        "actual_old_deployment": "7f010ccbe6815f5b842f2d90b99d751fd95478cea750c907292c3aaff39080d0"
+      }
+    },
+    "current_cache_owner_considers_injected_old_final_current": true,
+    "old_final_business_algorithms": "d35e6ae0ef3b3dff3b25c7670c8807102e2410ff4f5f54c5605696bcc109cd3e",
+    "old_final_decision_digest": "c1eeab9ff123ad16a3d1b0c78ef18858d19530d4d961c08dd58a517534e8e150",
+    "old_final_material_sha256": "7c156572b141fa1127cb429537d17f0bb78fc037497812ffac6a76e8b5d3e35b",
+    "no_algorithm_execution_in_overlay": true,
+    "own_overlay": "C:\\Users\\郑曾波\\Projects\\company-wiki\\c3ls-cvfc9mbp",
+    "own_overlay_restored_absent": true
+  },
+  "recommended_repair": "In test-owned directory deploy real current decision_inventory + real current structure package with only sections.py replaced by historical bytes; load that actual composite package from physical paths while other source owners stay current. Modern stage returns actual canonical package. Keep all existing POST/material/context/cache/old exact reference assertions; do not alter production hash or synthesize identity markers.",
+  "evidence_files": [
+    "actual-identity-hashes.jsonl",
+    "old-a-snapshot.json",
+    "old-b-snapshot.json",
+    "new-c-snapshot.json",
+    "old-a-public-bundle.json",
+    "new-c-current-public-bundle.json",
+    "old-a-model-material.json",
+    "observed.log",
+    "observed.xml",
+    "observed-run.json",
+    "physical-deployment-negative-control.json"
+  ],
+  "scope": "one actual original synthetic node with observer-only bootstrap,0 external/paid calls; one no-parser physical file-hash negative control; no source change during diagnosis",
+  "cleanup": {
+    "owned_observer_root_removed": true,
+    "physical_hash_overlay_removed": true,
+    "owned_process_alive": false
+  }
+}

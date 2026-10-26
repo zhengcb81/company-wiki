@@ -1,0 +1,107 @@
+{
+  "result": "PRODUCT_REVIEW_PASS / ONE_TEST_QUALITY_FINDING_PENDING",
+  "open_findings": 1,
+  "findings": [
+    {
+      "id": "GATE-IR-01",
+      "priority": "P2",
+      "status": "ROOT_ACCEPTED_PENDING_FIX",
+      "file": "tests/unit/test_pre_push_process_cleanup.py",
+      "line": 35,
+      "problem": "Fixed2s deadline expired before cold-started descendant published PID. Initial actual run failed record.exists; identical isolated rerun passed. Therefore this new regression can fail based on startup load without assessing owned-tree cleanup.",
+      "request": "Keep real descendant/dead-PID/bounded-return assertions; atomically publish complete PID and allow sufficient bounded cold-start headroom (ROOT proposes8s versus descendant self-stop12s). Do not count retry green as repair.",
+      "evidence": [
+        "targeted.log",
+        "targeted.xml",
+        "rerun.log",
+        "rerun.xml"
+      ]
+    }
+  ],
+  "product_assessment": [
+    "All29 original FAST targets and CURRENT_CI inventory AST unchanged against HEAD; whole-file unit selections cover matching FAST members and preserve siblings otherwise.",
+    "Only small affected tests/unit expands daily; nonunit and unknown/wide recommendations explicitly defer, while original FAST remains. Empty runtime selection does not accidentally collect full suite.",
+    "No CI workflow, selector, bounded_process, or process_tree modification in gate owner diff. Existing CI unit and FAST entrypoints preserved; this does not certify deferred nonunit suites ran.",
+    "Daily one total180s deadline; manual full/explicit FAST600s. Per-pipe caps bound capture, overflows125/timeout124/actual nonzero code retained.",
+    "Same _bounded_process lifecycle owns barrier/job/group, both pipes, termination and2.5s cleanup grace. Launch/transport/cleanup errors remain nonzero through _dispatch_gate.",
+    "Inherited checkout-specific Git context stripped only in copied child env, user Git settings retained, and all four TEMP/TMP/TMPDIR/SQLITE_TMPDIR root at owned scratch.",
+    "Actual venv-launcher held-file descendant releases before TemporaryDirectory cleanup, real exit7 remains7, stdout/stderr overflow remain red with retained progress.",
+    "Independent added cap/orphan probe establishes a grandchild with DEVNULL outputs and confirms overflow125 kills it before return. Independent cleanup TransportError probe confirms diagnostics and nonzero1, no green."
+  ],
+  "independent_runs": {
+    "initial": {
+      "cases": 12,
+      "passed": 10,
+      "failed": 2,
+      "process_seconds": 27.131,
+      "file": "targeted.json",
+      "failure_classification": [
+        "GATE-IR-01 cold-start fixture flake",
+        "Independent probe marker existed before PID write completed; fixed harness to atomic marker, not product defect"
+      ]
+    },
+    "minimal_rerun": {
+      "cases": 2,
+      "passed": 2,
+      "failed": 0,
+      "process_seconds": 7.323,
+      "file": "rerun.json",
+      "interpretation": "Original fixed2s test passing retry establishes variability only; no repair closure. Atomic own cap/orphan probe is valid PASS."
+    }
+  },
+  "owner_receipts_reviewed": {
+    "venv-final-green.txt": {
+      "sha256": "6496770cea3e8ced8082c75c322c97358ccdd696e4417f71c8e51d4414635824",
+      "summary": [
+        "============================= 40 passed in 22.55s ============================="
+      ],
+      "independently_rerun": false
+    },
+    "host-git-normal.txt": {
+      "sha256": "a50bec00d85e51e3f811223f5b7f6584c1401af096065a41bd48d19f7577d886",
+      "summary": [
+        "============================= 30 passed in 37.73s ============================="
+      ],
+      "independently_rerun": false
+    }
+  },
+  "bindings": {
+    "tools/pre_push_gate.py": {
+      "initial_raw_sha256": "4175973f5bfd2f727fdff54567f9f4361d5834bfe7c47bcbdc735e64148fc538",
+      "current_raw_sha256": "4175973f5bfd2f727fdff54567f9f4361d5834bfe7c47bcbdc735e64148fc538",
+      "current_lf_sha256": "7a74ecbf1051f6a888d232c20aa1a2ea643793d86d66618162c2f35524b4c172"
+    },
+    "tests/unit/test_pre_push_gate.py": {
+      "initial_raw_sha256": "624d413e16236550188731feb4b6cb8b2673dbb578d9b2f3d67959490d065d96",
+      "current_raw_sha256": "624d413e16236550188731feb4b6cb8b2673dbb578d9b2f3d67959490d065d96",
+      "current_lf_sha256": "624d413e16236550188731feb4b6cb8b2673dbb578d9b2f3d67959490d065d96"
+    },
+    "tests/unit/test_pre_push_process_cleanup.py": {
+      "initial_raw_sha256": "d7a2d0bd5d18514280d48abf5a1100f95c1c9b81e9738deeb0b5bb5584000896",
+      "current_raw_sha256": "d7a2d0bd5d18514280d48abf5a1100f95c1c9b81e9738deeb0b5bb5584000896",
+      "current_lf_sha256": "d7a2d0bd5d18514280d48abf5a1100f95c1c9b81e9738deeb0b5bb5584000896"
+    },
+    "tests/unit/test_pre_push_temp_scope.py": {
+      "initial_raw_sha256": "ccf736630701507b431ba9e933f2189e3133c23977301d1adf926e0b1e88b7d3",
+      "current_raw_sha256": "ccf736630701507b431ba9e933f2189e3133c23977301d1adf926e0b1e88b7d3",
+      "current_lf_sha256": "3152ea12af026882576988a54a3602adc3c21f01edd6b673d115a2b0d789d86f"
+    },
+    "tests/unit/test_daily_push_policy.py": {
+      "initial_raw_sha256": "931871fea16df19129d972f5a87b09df92b95bf111f04201ce18a71163642efc",
+      "current_raw_sha256": "931871fea16df19129d972f5a87b09df92b95bf111f04201ce18a71163642efc",
+      "current_lf_sha256": "c2bd150dd428151fa33ace818a729cfe7c27094073cfdad33bf0ad6909446f0b"
+    }
+  },
+  "fast_ast_unchanged": true,
+  "ci_owner_unchanged": [],
+  "cleanup": {
+    "initial_pid_alive_after": false,
+    "rerun_pid_alive_after": false,
+    "owned_tmp_roots_absent": true
+  },
+  "scope_limits": [
+    "No full FAST/CI/daily product gate run and no project push by reviewer. Parent/owner actual local Git30P receipt reviewed only.",
+    "No external HTTP, paid/model calls, ACL/label/config change, source edit, commit, or other WIP edit by reviewer.",
+    "Previously reproduced P1 frozen-recipe history and P2 legacy-section adapter remain separately owned; nonunit policy deferral is not their resolution."
+  ]
+}

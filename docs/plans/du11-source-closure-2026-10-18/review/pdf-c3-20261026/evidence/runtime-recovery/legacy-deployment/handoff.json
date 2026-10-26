@@ -1,0 +1,67 @@
+{
+  "status": "IMPLEMENTED_GREEN / INDEPENDENT_REVIEW_SEPARATE",
+  "authorized_write_scope": [
+    "tests/integration/test_reading_parent_cache_migration.py",
+    "own scratch/reports only"
+  ],
+  "source_raw_sha256": "ca8159ae4f35496db9e89842a4fac19f648dcb1ed46a3ce9d117cd6384d80035",
+  "source_lf_sha256": "ab9444118640140443a0e92d2825f135e3239a9d55e1c19b26b10f3b57ba840f",
+  "red": {
+    "receipt": "observed-run.json",
+    "pytest_seconds": 25.17,
+    "failure": "original line125 fixture posts1 instead of2",
+    "source_lf_sha256": "8b4f55f260179649919c4e087195a13f73bd5782182b8572c2080b901dfa37d9"
+  },
+  "green": {
+    "receipt": "green-run.json",
+    "pytest_seconds": 31.69,
+    "outer_process_seconds": 33.153,
+    "test_log": "green.log",
+    "test_xml": "green.xml",
+    "case_count": 1,
+    "exit_code": 0,
+    "source_bindings_stable": true,
+    "actual_public_receipt": "green-public-cache-result-0.json"
+  },
+  "implementation": "Deploy actual current __init__.py and decision_inventory.py with actual structure package under test-owned legacy-deployment; replace only deployed sections.py with historical bytes; use ordinary importlib package spec with explicit deployed/current submodule search paths. Guard loading before any current package. Modern stage uses original canonical launcher. No production hash or manufactured version.",
+  "copied_files": 13,
+  "current_file_bytes_upper_bound": 198430,
+  "original_assertions_ast_unchanged": true,
+  "original_assertion_count": 25,
+  "ruff": "PASS",
+  "actual_acceptance": {
+    "fixture_posts": 2,
+    "old_business_algorithms": "7f85b2bc3975827987131b051cd1e1af7f15ffbacf2f01b333ba6169a24f7ac8",
+    "new_business_algorithms": "d35e6ae0ef3b3dff3b25c7670c8807102e2410ff4f5f54c5605696bcc109cd3e",
+    "old_material_sha256": "7c156572b141fa1127cb429537d17f0bb78fc037497812ffac6a76e8b5d3e35b",
+    "new_material_sha256": "34741b8f4dc708471c5bc7eb241fcc2b366920a30ec336e559973795356d589a",
+    "new_cached_tokens": 0,
+    "old_cached_tokens": 0,
+    "old_bundle_unchanged": true,
+    "owned_lake_removed": true,
+    "old_actual_producer": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c3leggreen\\cwpaW03-e9w_u6bk\\legacy-deployment\\document_understanding\\structure\\sections.py",
+    "current_actual_producer": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\document_understanding\\structure\\sections.py"
+  },
+  "cleanup": {
+    "red_owned_pid": 15556,
+    "red_pid_alive": false,
+    "green_owned_pid": 16340,
+    "green_pid_alive": false,
+    "roots_absent": [
+      ".c3legir",
+      ".c3leggreen"
+    ],
+    "readonly_hash_control_overlay_removed": true
+  },
+  "concurrent_owner_boundary": {
+    "narrative_generation_lf_sha256_at_red": "caf25bdd7d8903c975341feb07a07452768e7896f30a9a95ba0bd81a200fd2e4",
+    "narrative_generation_lf_sha256_at_green": "64e9ddd7c63f5fa6b92abd3f15d8e2a8d430880fbdb70481604d763586edf1ff",
+    "note": "Another owner changed generation code between diagnosis and repair validation; each run is internally SHA stable. This author did not change that product owner and does not independently sign it."
+  },
+  "independent_review_handoff": "/root/c3_cache_independent_review; separate report and actual independent identity-only process proof; author GREEN is not self-independent acceptance",
+  "not_done": [
+    "No production source/hash/selection assertion change",
+    "No full integration/FAST/paid/provider rerun",
+    "No commit/push/hook/mode/config/ACL change"
+  ]
+}

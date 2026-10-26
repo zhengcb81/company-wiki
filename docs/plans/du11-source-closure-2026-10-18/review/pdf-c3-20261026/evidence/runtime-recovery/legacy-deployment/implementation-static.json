@@ -1,0 +1,23 @@
+{
+  "all_original_assertions_ast_unchanged": true,
+  "original_assertion_count": 25,
+  "physical_deployment_source_files": 13,
+  "physical_deployment_byte_size_upper_bound": 198430,
+  "source_files": [
+    "__init__.py",
+    "decision_inventory.py",
+    "structure/__init__.py",
+    "structure/_work.py",
+    "structure/contract.py",
+    "structure/layout.py",
+    "structure/paragraphs.py",
+    "structure/projects.py",
+    "structure/qa.py",
+    "structure/relations.py",
+    "structure/sections.py",
+    "structure/table_purpose.py",
+    "structure/tables.py"
+  ],
+  "scope": "real module source deployment; no production fingerprint override or manufactured cache version",
+  "test_lf_sha256": "ab9444118640140443a0e92d2825f135e3239a9d55e1c19b26b10f3b57ba840f"
+}

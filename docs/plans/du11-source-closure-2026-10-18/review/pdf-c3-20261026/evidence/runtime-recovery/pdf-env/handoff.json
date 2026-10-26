@@ -1,0 +1,83 @@
+{
+  "schema_version": "pdf-runtime-environment-handoff/1",
+  "status": "IMPLEMENTED_LIGHTWEIGHT_VERIFIED_CONTENT_NOT_RUN",
+  "algorithm": "pdf-runtime-closure/2",
+  "environment_sha256": "c84a984ccb3a56dffbfd0d4538f14ce4a27de44dec4981527a2b0c4a545cdf44",
+  "closure_count": 104,
+  "roots": [
+    "docling",
+    "docling-core",
+    "docling-ibm-models",
+    "pymupdf",
+    "pypdfium2",
+    "torch"
+  ],
+  "python_version": "3.13.9",
+  "runtime_versions": {
+    "docling-core": "2.78.0",
+    "docling-ibm-models": "3.13.2",
+    "torch": "2.12.0",
+    "pymupdf": "1.26.7",
+    "pypdfium2": "4.30.0",
+    "python": "3.13.9"
+  },
+  "docling_version": "2.96.0",
+  "packaging": "25.0",
+  "v2_config": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\c3-20261026\\pdf-env\\runtime-4g-v2.json",
+  "v2_config_sha256": "077654bd7eeb016d57667ec3560e602f4de480a74c2cbb236fc1100dda942fd6",
+  "frozen_v1_config_sha256": "d84387132edda4dab3cc43d62a7cd9a93634914977b8da89b42ddb90f3c27a1a",
+  "changed_config_fields": [
+    "schema_version",
+    "environment_algorithm",
+    "environment_sha256"
+  ],
+  "real_entrypoint_comparison": {
+    "same": true,
+    "first": "ROOT/src",
+    "second": "ROOT/src;ROOT/src",
+    "artifacts": [
+      "environment-entry-src.json",
+      "environment-entry-duplicate-src.json"
+    ]
+  },
+  "red": {
+    "initial": "11 failed, 1 passed, 1 temp-fixture error",
+    "api_failures": "v2 API absent in old implementation; no assertion removed",
+    "config_isolated": "1 failed, 12 deselected: old schema rejects v2",
+    "receipts": [
+      "red.txt",
+      "red-config.txt"
+    ]
+  },
+  "green": {
+    "pytest": "37 passed in 3.79s",
+    "ruff": "All checks passed",
+    "mypy": "Success: no issues found in 3 source files"
+  },
+  "source_files": {
+    "src/company_wiki/source_catalog/narrative_pdf_enhancement.py": {
+      "bytes_sha256": "a54918b3a974d1460f3283a73cc87acdc3892765eee79ce7c5ebf4ee00931b60",
+      "normalized_sha256": "a54918b3a974d1460f3283a73cc87acdc3892765eee79ce7c5ebf4ee00931b60"
+    },
+    "src/company_wiki/source_catalog/_paragraph_worker.py": {
+      "bytes_sha256": "a41a1b36b45c71433e0ab8a87b62f56a8af0fd247c32ad5815484f7ec223bc65",
+      "normalized_sha256": "a41a1b36b45c71433e0ab8a87b62f56a8af0fd247c32ad5815484f7ec223bc65"
+    },
+    "src/company_wiki/source_catalog/narrative_pdf_environment.py": {
+      "bytes_sha256": "ead95695a148f2871d46036de9cde7a2f731719515afc590ae99a31d946c5f05",
+      "normalized_sha256": "435fdfb646e01c18905b76548fdd2a1d2fa8b2c7a7adcd3ff91a548afd962b65"
+    },
+    "tests/unit/test_pdf_runtime_environment.py": {
+      "bytes_sha256": "921a589b07523c42395abfb81317dd109f9bbdda4084e1d93e4663a73881b01b",
+      "normalized_sha256": "22054c16bec00a7a93e0b733b28e13a2b527f3271b3cd05d9809e6660a35e73a"
+    }
+  },
+  "limitations": [
+    "No PDF content conversion or LLM calls were run by this subtask.",
+    "Installed selected metadata/version identity, not a wheel byte integrity attestation.",
+    "Active direct-URL requirements fail explicitly because metadata cannot prove URL bytes.",
+    "Historical v1 inventory algorithm intentionally retains its old behavior.",
+    "No pyproject change: packaging 25.0 belongs to the active declared Docling closure.",
+    "Initial default sandbox TEMP was unwritable; final tests used the task-owned TEMP."
+  ]
+}

@@ -21,7 +21,9 @@ from tools import pre_push_gate as gate  # noqa: E402
 
 REPOSITORY_ROOT = Path(__file__).resolve().parents[2]
 HOOK_AND_GATE_FILES = (".githooks/pre-push", "tools/pre_push_gate.py",
-                       "tools/changed_unit_tests.py")
+                       "tools/changed_unit_tests.py",
+                       "src/company_wiki/_bounded_process.py",
+                       "src/company_wiki/_process_tree.py")
 
 
 def _push_gate(monkeypatch, selected, reason, push_input="fixture push range"):
@@ -101,12 +103,16 @@ def test_a_small_explainable_set_runs_those_files_and_reports_the_ran_scope(
     assert gate.main(["--push-checks"]) == 0
     assert len(observed) == 1
     targets = _targets(observed[0][0])
-    assert targets[:len(selected)] == selected
+    units = [path for path in selected if path.startswith("tests/unit/")]
+    assert targets[:len(units)] == units
     smoke = [case for case in gate.FAST_CONTRACT_CASES
-             if not any(case.split("::")[0] == path for path in selected)]
-    assert targets[len(selected):] == smoke
+             if not any(case.split("::")[0] == path for path in units)]
+    assert targets[len(units):] == smoke
     assert len(targets) == len(set(targets))
     output = capsys.readouterr().out
+    if len(units) != len(selected):
+        assert "non-unit" in output and "deferred" in output
+        assert all(path not in targets for path in selected if path not in units)
     assert "ran" in output and str(len(targets)) in output
     assert "full_validation_pending" in output
     assert "local_fast_pass" in output

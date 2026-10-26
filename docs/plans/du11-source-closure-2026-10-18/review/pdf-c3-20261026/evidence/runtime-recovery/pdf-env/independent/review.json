@@ -1,0 +1,99 @@
+{
+  "schema_version": "independent-review/1",
+  "reviewer": "/root/c3_pdf_env_independent_review",
+  "reviewed_at_utc": "2026-10-26T20:55:06.002041+00:00",
+  "verdict": "PASS",
+  "open_count": 0,
+  "findings": [],
+  "scope": [
+    "src/company_wiki/source_catalog/narrative_pdf_enhancement.py",
+    "src/company_wiki/source_catalog/_paragraph_worker.py",
+    "src/company_wiki/source_catalog/narrative_pdf_environment.py",
+    "tests/unit/test_pdf_runtime_environment.py"
+  ],
+  "source_files": {
+    "src/company_wiki/source_catalog/narrative_pdf_enhancement.py": {
+      "bytes_sha256": "a54918b3a974d1460f3283a73cc87acdc3892765eee79ce7c5ebf4ee00931b60",
+      "normalized_sha256": "a54918b3a974d1460f3283a73cc87acdc3892765eee79ce7c5ebf4ee00931b60"
+    },
+    "src/company_wiki/source_catalog/_paragraph_worker.py": {
+      "bytes_sha256": "a41a1b36b45c71433e0ab8a87b62f56a8af0fd247c32ad5815484f7ec223bc65",
+      "normalized_sha256": "a41a1b36b45c71433e0ab8a87b62f56a8af0fd247c32ad5815484f7ec223bc65"
+    },
+    "src/company_wiki/source_catalog/narrative_pdf_environment.py": {
+      "bytes_sha256": "ead95695a148f2871d46036de9cde7a2f731719515afc590ae99a31d946c5f05",
+      "normalized_sha256": "435fdfb646e01c18905b76548fdd2a1d2fa8b2c7a7adcd3ff91a548afd962b65"
+    },
+    "tests/unit/test_pdf_runtime_environment.py": {
+      "bytes_sha256": "921a589b07523c42395abfb81317dd109f9bbdda4084e1d93e4663a73881b01b",
+      "normalized_sha256": "22054c16bec00a7a93e0b733b28e13a2b527f3271b3cd05d9809e6660a35e73a"
+    }
+  },
+  "tests": {
+    "command": "C:/Miniconda/python.exe -B -m pytest -q -o addopts= --confcutdir OWN_REVIEW tests/unit/test_pdf_runtime_environment.py OWN_REVIEW/test_independent_environment.py --junitxml OWN_REVIEW/focused.xml",
+    "passed": 25,
+    "failed": 0,
+    "errors": 0,
+    "author_tests": 18,
+    "independent_counterexamples": 7,
+    "elapsed_seconds": 2.11,
+    "warning": "asyncio_mode unknown because optional pytest plugin auto-load deliberately disabled; no async tests in this focused scope"
+  },
+  "review_dimensions": [
+    "Root set derives from configured runtimes plus Docling; selected distribution lookup follows metadata precedence; no full-environment enumeration in v2.",
+    "PEP508 markers, declared extras and late-extra dependency cycles reach a fixed point; conflicting later constraints are checked after a node was already selected.",
+    "Selected active transitive version/declaration changes affect identity; inactive optional and unrelated packages do not.",
+    "Direct URLs are rejected only when activated; malformed or missing active metadata fails explicitly.",
+    "V1 inventory remains byte-for-byte algorithm compatible; v1 recipe does not claim v2; explicit schema/algorithm selection remains separate.",
+    "V2 recipe binds environment implementation, worker/orchestration/alignment, configuration, runtime versions, model artifacts and bounds. Worker request and response both bind schema/algorithm/hash.",
+    "Native/base and v1 import paths do not import packaging, Docling or Torch; tested with an import blocker in a fresh process.",
+    "Actual metadata worker CLI with duplicate PYTHONPATH returns exactly the same 104-node closure and fingerprint."
+  ],
+  "real_entrypoint_probe": {
+    "schema_version": "independent-pdf-env-probe/1",
+    "status": "PASS",
+    "worker_entrypoint_equal": true,
+    "python": "C:\\Miniconda\\python.exe",
+    "python_version": "3.13.9",
+    "closure_count": 104,
+    "environment_sha256": "c84a984ccb3a56dffbfd0d4538f14ce4a27de44dec4981527a2b0c4a545cdf44",
+    "legacy": {
+      "v1_algorithm_equal": true,
+      "optional_imports": []
+    },
+    "changed_config_fields": [
+      "environment_algorithm",
+      "environment_sha256",
+      "schema_version"
+    ],
+    "frozen_v1_config_sha256": "d84387132edda4dab3cc43d62a7cd9a93634914977b8da89b42ddb90f3c27a1a",
+    "v2_config_sha256": "077654bd7eeb016d57667ec3560e602f4de480a74c2cbb236fc1100dda942fd6",
+    "heavy_sdk_imports": false,
+    "pdf_conversion": false
+  },
+  "cleanup": {
+    "own_temp_removed": true,
+    "own_temp_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\c3-20261026\\pdf-env\\independent\\tmp",
+    "production_files_written": false,
+    "downloads": 0,
+    "llm_calls": 0,
+    "heavy_conversions": 0,
+    "child_processes": "All spawned child subprocesses completed before bounded subprocess.run returned; tests emitted terminal JUnit. Windows CIM process inventory was unavailable to this sandbox and was not used as evidence."
+  },
+  "limits": [
+    "This review checks metadata/environment engineering only, not actual PDF content recall or summary quality. ROOT owns the real conversion/content acceptance.",
+    "The digest binds selected distribution metadata and versions, not arbitrary wheel contents/native libraries or all import shadowing.",
+    "This is not a general full-repository review; only the four stated source/test files and lightweight independent probes were reviewed."
+  ],
+  "evidence_sha256": {
+    "entry-duplicate_src_and_root.json": "2602798232f61bce9c1e6e025cd7b42975f8093a5eaff296fd4d594ac928d391",
+    "entry-duplicate_src_and_root.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "entry-single_src.json": "2602798232f61bce9c1e6e025cd7b42975f8093a5eaff296fd4d594ac928d391",
+    "entry-single_src.stderr.txt": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "entrypoint-summary.json": "557942b6b2682eecd7165bd421ead779a181555bbbbac2b66c3cee4ed6342417",
+    "focused.log": "ddb1a4985fc70fa15ed78ac1417c3f33089b4cc1ce36637650b367e885a3377e",
+    "focused.xml": "73b5d3bbe0f862f5612b7b51030b89a9a24e31c6654e1a1f91e665df72523933",
+    "probe_actual_entrypoints.py": "f15ee3d3aab71aae9835ba081f1e91b1551afce63fe0858dc9a52457d3eb0f83",
+    "test_independent_environment.py": "b41794c032aaf3bd08ef00b8c56a51feceef3a523f9b62a50c23463cbd45988c"
+  }
+}

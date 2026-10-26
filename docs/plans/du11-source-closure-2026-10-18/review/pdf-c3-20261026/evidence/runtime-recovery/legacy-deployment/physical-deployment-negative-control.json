@@ -1,0 +1,16 @@
+{
+  "only_changed_structure_file": "sections.py",
+  "hashes_differ": {
+    "company_wiki.document_understanding.structure.sections": {
+      "current": "abddf859e804e65765c34bc336ed7a8eb91de0d3894f761c63eafd8b77e94287",
+      "actual_old_deployment": "7f010ccbe6815f5b842f2d90b99d751fd95478cea750c907292c3aaff39080d0"
+    }
+  },
+  "current_cache_owner_considers_injected_old_final_current": true,
+  "old_final_business_algorithms": "d35e6ae0ef3b3dff3b25c7670c8807102e2410ff4f5f54c5605696bcc109cd3e",
+  "old_final_decision_digest": "c1eeab9ff123ad16a3d1b0c78ef18858d19530d4d961c08dd58a517534e8e150",
+  "old_final_material_sha256": "7c156572b141fa1127cb429537d17f0bb78fc037497812ffac6a76e8b5d3e35b",
+  "no_algorithm_execution_in_overlay": true,
+  "own_overlay": "C:\\Users\\郑曾波\\Projects\\company-wiki\\c3ls-cvfc9mbp",
+  "own_overlay_restored_absent": true
+}

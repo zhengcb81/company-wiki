@@ -39,18 +39,27 @@ from __future__ import annotations
 
 import argparse
 import os
-import subprocess
 import sys
 import tempfile
 from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
+from company_wiki._bounded_process import (  # noqa: E402
+    ChildFailed, ChildTimeout, OutputLimitExceeded, TransportError, run_bounded,
+)
 from tools.changed_unit_tests import changed_paths, select_unit_tests  # noqa: E402
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 # Count a closed list as well as the literal full-suite recommendation. A
 # hundreds-file list is still a broad validation run, not daily feedback.
 DAILY_PUSH_MAX_AFFECTED_TARGETS = 32
+# The normal curated smoke took ~52s for 154 cases. Three minutes allows
+# affected unit work while keeping daily feedback bounded; full mode keeps 600s.
+DAILY_PUSH_TIMEOUT_SECONDS = 180
+DAILY_PUSH_LABEL_PREFIX = "daily push fast feedback:"
+STDOUT_CAP_BYTES = 4 * 1024 * 1024
+STDERR_CAP_BYTES = 512 * 1024
 GIT_REPOSITORY_CONTEXT = (
     "GIT_DIR", "GIT_WORK_TREE", "GIT_COMMON_DIR", "GIT_INDEX_FILE",
     "GIT_OBJECT_DIRECTORY", "GIT_ALTERNATE_OBJECT_DIRECTORIES", "GIT_PREFIX",
@@ -108,7 +117,7 @@ def _print_output(value: str) -> None:
 def _run(
     cmd: list[str],
     label: str,
-    timeout: int = 600,
+    timeout: float = 600,
     env_extra: dict | None = None,
 ) -> int:
     env = dict(os.environ)
@@ -121,21 +130,34 @@ def _run(
         env.update(env_extra)
     _print_output(f"\n=== {label} ===")
     try:
-        proc = subprocess.run(
-            cmd, cwd=str(PROJECT_ROOT), capture_output=True, text=True,
-            encoding="utf-8", errors="replace", timeout=timeout, env=env,
+        result = run_bounded(
+            cmd, cwd=str(PROJECT_ROOT), timeout_seconds=timeout, env=env,
+            stdout_cap_bytes=STDOUT_CAP_BYTES, stderr_cap_bytes=STDERR_CAP_BYTES,
         )
-    except subprocess.TimeoutExpired as exc:
-        # TimeoutExpired can carry bytes even with text=True. Keep the child's
-        # last progress rather than replacing the evidence with a traceback.
-        for stream in (exc.stdout, exc.stderr):
+        stdout, stderr, returncode = result["stdout"], result["stderr"], 0
+    except ChildFailed as exc:
+        stdout, stderr, returncode = exc.stdout, exc.stderr, exc.returncode
+    except TransportError as exc:
+        # The owner kills and reaps its entire tree before returning. Preserve
+        # progress and cleanup diagnostics without making a transport red green.
+        for stream in (getattr(exc, "stdout", b""), getattr(exc, "stderr", b"")):
             if stream:
                 _print_output(stream.decode("utf-8", errors="replace")
                               if isinstance(stream, bytes) else stream)
-        _print_output(f"FAILED: {label} (timeout after {timeout}s)")
-        return 124
-    output = (proc.stdout or "") + "\n" + (proc.stderr or "")
-    returncode = proc.returncode
+        for note in getattr(exc, "__notes__", ()):
+            _print_output(note)
+        if isinstance(exc, ChildTimeout):
+            _print_output(f"FAILED: {label} (timeout after {timeout}s)")
+            return 124
+        if isinstance(exc, OutputLimitExceeded):
+            _print_output(f"FAILED: {label} (output truncated: {exc}; "
+                          f"stdout cap={STDOUT_CAP_BYTES}, stderr cap={STDERR_CAP_BYTES} bytes)")
+            return 125
+        _print_output(f"FAILED: {label} ({type(exc).__name__}: {exc})")
+        return 1
+    output = "\n".join(stream.decode("utf-8", errors="replace")
+                       if isinstance(stream, bytes) else str(stream or "")
+                       for stream in (stdout, stderr))
     if returncode != 0:
         _print_output(output)  # Keep the first failing node, not just the tail.
         _print_output(f"FAILED: {label}")
@@ -161,13 +183,16 @@ def _run_pytest_gate(cmd: list[str], label: str) -> int:
     # TemporaryDirectory restores this owned root on success, failure or timeout.
     # Full bootstrap progress is captured (not streamed on successful pushes).
     # On timeout it identifies the last test; successful output lists slow cases.
+    daily = label.startswith(DAILY_PUSH_LABEL_PREFIX)
+    if daily:
+        # Capture the last running node on timeout and slow successful cases.
+        cmd = [*cmd, "-vv", "--durations=15"]
     if "tests/unit" in cmd or _explicit_test_paths(cmd) > 200:
         # xdist is already a declared test dependency. Each worker has its own
         # interpreter and pytest temp tree; file scheduling keeps module-level
         # fixtures together. Retain the full collection and the same timeout.
-        # A wide affected set (push hook with many changed shared modules) is
-        # the same allowance as the full unit suite, so it gets the same two
-        # workers instead of one serial process under the identical deadline.
+        # An explicitly requested wide file set gets the same two workers as
+        # the full unit suite. Daily policy defers wide recommendations to CI.
         # Narrow changed-file and contract gates avoid this startup overhead.
         cmd = [*cmd, "-n", "2", "--dist=loadfile", "-vv", "--durations=15"]
     # Windows SQLite and tempfile consult TEMP/TMP independently of pytest's
@@ -179,6 +204,7 @@ def _run_pytest_gate(cmd: list[str], label: str) -> int:
         return _run(
             [*cmd, "--basetemp", basetemp, "-p", "no:cacheprovider"],
             label,
+            timeout=DAILY_PUSH_TIMEOUT_SECONDS if daily else 600,
             env_extra={
                 "PYTHONIOENCODING": "utf-8",
                 "PYTHONUTF8": "1",
@@ -208,6 +234,15 @@ def _push_targets(selected: list[str]) -> tuple[list[str], str]:
         return list(FAST_CONTRACT_CASES), "full unit suite recommendation deferred to CI"
     if any(not target.split("::", 1)[0].endswith(".py") for target in selected):
         return list(FAST_CONTRACT_CASES), "unbounded test directory recommendation deferred to CI"
+    # The selector also describes changed integration/root test modules. Those
+    # recommendations belong to CI or a separate major-node integration run;
+    # only affected units may expand the fixed daily contract inventory.
+    units = [target for target in selected
+             if target.startswith("tests/unit/")
+             and ".." not in target.split("::", 1)[0].split("/")
+             and "\\" not in target.split("::", 1)[0]]
+    nonunit_count = len(selected) - len(units)
+    selected = units
     if len(selected) > DAILY_PUSH_MAX_AFFECTED_TARGETS:
         return list(FAST_CONTRACT_CASES), f"wide affected set ({len(selected)} targets) deferred to CI"
     whole_files = {path for path in selected if "::" not in path}
@@ -217,7 +252,11 @@ def _push_targets(selected: list[str]) -> tuple[list[str], str]:
     # exact duplicate node IDs.
     targets.extend(case for case in FAST_CONTRACT_CASES
                    if case.split("::")[0] not in whole_files and case not in targets)
-    return targets, f"tests/unit outside the {len(targets)} ran targets deferred to CI"
+    deferred = f"tests/unit outside the {len(targets)} ran targets deferred to CI"
+    if nonunit_count:
+        deferred += (f"; {nonunit_count} non-unit recommendation(s) deferred to CI "
+                     "or separate major-node integration acceptance")
+    return targets, deferred
 
 
 def _dispatch_gate(cmd: list[str], label: str, env_extra: dict | None = None) -> int:
@@ -298,9 +337,9 @@ def main(argv: list[str] | None = None) -> int:
               f"full_validation_pending: {deferred}.")
         print("Planned test targets:", *targets, sep="\n  ")
         label = (
-            "daily push fast feedback: affected unit tests and CI contract smoke"
+            f"{DAILY_PUSH_LABEL_PREFIX} affected unit tests and CI contract smoke"
             if any(target not in FAST_CONTRACT_CASES for target in targets)
-            else "daily push fast feedback: CI contract smoke (no affected unit files)"
+            else f"{DAILY_PUSH_LABEL_PREFIX} CI contract smoke (no affected unit files)"
         )
         code = _dispatch_gate(
             [sys.executable, "-m", "pytest", "-q", "--tb=short", "--timeout=180", *targets],

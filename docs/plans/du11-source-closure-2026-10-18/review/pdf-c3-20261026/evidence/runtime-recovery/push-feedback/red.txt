@@ -1,0 +1,56 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\c3-20261026\\push-feedback\\red-tmp", "requested_basetemp_len": 78, "cwd_len": 34, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\c3-20261026\\push-feedback\\temp\\cw-pytest-basetemp\\20261026-200551-5e294827", "effective_basetemp_len": 119}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\֣����\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 5 items
+
+tests\unit\test_pre_push_gate.py FFF                                     [ 60%]
+tests\unit\test_pre_push_process_cleanup.py F.                           [100%]
+
+================================== FAILURES ===================================
+_____ test_mixed_selection_defers_nonunit_files_but_keeps_affected_units ______
+tests\unit\test_pre_push_gate.py:9: in test_mixed_selection_defers_nonunit_files_but_keeps_affected_units
+    assert targets == [selected[0], *gate.FAST_CONTRACT_CASES]
+E   AssertionError: assert ['tests/unit/...enderer', ...] == ['tests/unit/...ting_it', ...]
+E     
+E     At index 1 diff: 'tests/integration/test_slow.py' != 'tests/unit/test_local_budget_observation.py::test_read_charge_reports_a_rejected_tail_separately_from_accepted_bytes'
+E     Left contains 2 more items, first extra item: 'tests/unit/test_narrative_retrieval.py::test_resolver_fails_closed_when_raw_source_hash_changes'
+E     Use -v to get more diff
+__________ test_nonunit_selection_cannot_expand_curated_whole_files ___________
+tests\unit\test_pre_push_gate.py:17: in test_nonunit_selection_cannot_expand_curated_whole_files
+    assert targets == list(gate.FAST_CONTRACT_CASES)
+E   AssertionError: assert ['tests/contr..._budget', ...] == ['tests/unit/...-infer]', ...]
+E     
+E     At index 0 diff: 'tests/contract/test_source_catalog_temp_worker_governance.py' != 'tests/unit/test_local_budget_observation.py::test_read_charge_reports_a_rejected_tail_separately_from_accepted_bytes'
+E     Right contains 3 more items, first extra item: 'tests/contract/test_fc905_receipt_envelope.py::test_pi03_no_review_is_explicit_not_reviewed'
+E     Use -v to get more diff
+_______ test_parent_traversal_is_an_unknown_scope_not_an_affected_unit ________
+tests\unit\test_pre_push_gate.py:23: in test_parent_traversal_is_an_unknown_scope_not_an_affected_unit
+    assert targets == list(gate.FAST_CONTRACT_CASES)
+E   AssertionError: assert ['tests/unit/...ting_it', ...] == ['tests/unit/...-infer]', ...]
+E     
+E     At index 0 diff: 'tests/unit/../integration/test_slow.py' != 'tests/unit/test_local_budget_observation.py::test_read_charge_reports_a_rejected_tail_separately_from_accepted_bytes'
+E     Left contains one more item: 'tests/contract/test_b10_read_chain.py::test_b10_scan_is_not_vacuous'
+E     Use -v to get more diff
+____________ test_timeout_stops_the_owned_grandchild_before_return ____________
+tests\unit\test_pre_push_process_cleanup.py:35: in test_timeout_stops_the_owned_grandchild_before_return
+    assert not pid_is_alive(pid), "gate returned while its owned descendant was alive"
+E   AssertionError: gate returned while its owned descendant was alive
+E   assert not True
+E    +  where True = pid_is_alive(12320)
+---------------------------- Captured stdout call -----------------------------
+
+=== owned timeout ===
+owned grandchild ready
+
+FAILED: owned timeout (timeout after 2s)
+=========================== short test summary info ===========================
+FAILED tests/unit/test_pre_push_gate.py::test_mixed_selection_defers_nonunit_files_but_keeps_affected_units
+FAILED tests/unit/test_pre_push_gate.py::test_nonunit_selection_cannot_expand_curated_whole_files
+FAILED tests/unit/test_pre_push_gate.py::test_parent_traversal_is_an_unknown_scope_not_an_affected_unit
+FAILED tests/unit/test_pre_push_process_cleanup.py::test_timeout_stops_the_owned_grandchild_before_return
+========================= 4 failed, 1 passed in 3.48s =========================
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\c3-20261026\\push-feedback\\temp\\cw-pytest-basetemp\\20261026-200551-5e294827", "existed": true, "removed": true}

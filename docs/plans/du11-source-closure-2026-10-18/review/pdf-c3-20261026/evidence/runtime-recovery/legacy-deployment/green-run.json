@@ -1,0 +1,27 @@
+{
+  "exit_code": 0,
+  "timeout": false,
+  "seconds": 33.153,
+  "before_lf_sha256": {
+    "tests/integration/test_reading_parent_cache_migration.py": "ab9444118640140443a0e92d2825f135e3239a9d55e1c19b26b10f3b57ba840f",
+    "src/company_wiki/document_understanding/decision_inventory.py": "b26676abcd35b013a753ae276140d4b9e58aa47eefb0c2dfb6cb684d906b5b67",
+    "src/company_wiki/automation/narrative_generation.py": "64e9ddd7c63f5fa6b92abd3f15d8e2a8d430880fbdb70481604d763586edf1ff",
+    "src/company_wiki/automation/narrative_batch.py": "770d482454bce479c1b737272e5d115b0608f2d5b43de5b8acd654c87f2c1a39",
+    "src/company_wiki/document_understanding/structure/sections.py": "abddf859e804e65765c34bc336ed7a8eb91de0d3894f761c63eafd8b77e94287",
+    "docs/plans/r1-final3-source-semantics-20261022/review/legacy-sections-908ec2c4.py.txt": "7f010ccbe6815f5b842f2d90b99d751fd95478cea750c907292c3aaff39080d0"
+  },
+  "after_lf_sha256": {
+    "tests/integration/test_reading_parent_cache_migration.py": "ab9444118640140443a0e92d2825f135e3239a9d55e1c19b26b10f3b57ba840f",
+    "src/company_wiki/document_understanding/decision_inventory.py": "b26676abcd35b013a753ae276140d4b9e58aa47eefb0c2dfb6cb684d906b5b67",
+    "src/company_wiki/automation/narrative_generation.py": "64e9ddd7c63f5fa6b92abd3f15d8e2a8d430880fbdb70481604d763586edf1ff",
+    "src/company_wiki/automation/narrative_batch.py": "770d482454bce479c1b737272e5d115b0608f2d5b43de5b8acd654c87f2c1a39",
+    "src/company_wiki/document_understanding/structure/sections.py": "abddf859e804e65765c34bc336ed7a8eb91de0d3894f761c63eafd8b77e94287",
+    "docs/plans/r1-final3-source-semantics-20261022/review/legacy-sections-908ec2c4.py.txt": "7f010ccbe6815f5b842f2d90b99d751fd95478cea750c907292c3aaff39080d0"
+  },
+  "stable": true,
+  "owned_pid": 16340,
+  "owned_pid_alive_after": false,
+  "fixture_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c3leggreen",
+  "observation_only": false,
+  "scope": "original unmodified assertions with real physical legacy fixture deployment"
+}

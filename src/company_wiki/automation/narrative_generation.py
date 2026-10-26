@@ -124,12 +124,16 @@ def generation_manifest(
     versions.pop("document_normalization", None)
     if normalized:
         versions.pop("parser", None)
-    parser_name, parser_version = parser_component(
-        payload.source_ref.mime_type, payload.source_metadata.source_class
-    )
     if (normalized or pdf) and parser_components is not None:
+        # A supplied recipe is already the causal producer identity. Looking
+        # up today's reader first would make decoding immutable history depend
+        # on the current SDK even though that value is immediately discarded.
         parser_name = parser_components["parser_name"]
         parser_version = parser_components["parser_version"]
+    else:
+        parser_name, parser_version = parser_component(
+            payload.source_ref.mime_type, payload.source_metadata.source_class
+        )
     model = request.model_options
     generation_fields = ("model_id", "endpoint", "max_output_tokens")
     effective_model = {key: model[key] for key in generation_fields if key in model}
@@ -527,6 +531,8 @@ def find_reuse_pin(artifacts, reader, payload, manifest, facts, *, normalization
 
 def reading_candidate_manifest(version, base: Mapping[str, Any]) -> dict[str, Any]:
     metadata = json.loads(version.metadata_json)
+    if not isinstance(metadata, dict):
+        raise ValueError("BATCH_REUSE_MANIFEST_INVALID")
     manifest = metadata.get("generation_manifest")
     if (not isinstance(manifest, dict) or "selection_generation" not in manifest
             or {key: value for key, value in manifest.items()

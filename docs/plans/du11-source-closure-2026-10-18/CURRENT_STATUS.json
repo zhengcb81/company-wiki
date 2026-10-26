@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-26",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_PDF_C3_ENGINEERING_ACCEPTED_FORMAL_SUMMARY_NEXT",
+  "overall_status": "ACTIVE_PDF_C3_ENGINEERING_ACCEPTED_SOURCE_SELECTION_ROOT_FIX_PENDING",
   "parallel_packages_20261025": {
     "status": "W16_W17_W18_ROOT_COMPONENT_ACCEPTED_MERGED",
     "entry": "harness_lanes/20261025/README.md",
@@ -2295,7 +2295,7 @@
     "implementation_authorized_by_user": true,
     "observed_date": "2026-10-26"
   },
-  "current_task_override": "Global skill sync repaired and pushed a5a35798; resumed C3 engineering/source freeze, real summaries next.",
+  "current_task_override": "Dashboard independently handed off; C3 runtime/cache/push and real legacy deployment all accepted. Normal publish, then generic source semantic selection TDD before paid summary.",
   "skill_sync_root_cause_20261026": {
     "status": "COMPLETE_INDEPENDENT_PASS_ZERO_OPEN",
     "entry": "review/skill-sync-root-cause-20261026/README.md",
@@ -2315,7 +2315,7 @@
     "independent_review": "review/skill-sync-root-cause-20261026/independent/review.json"
   },
   "pdf_c3_20261026": {
-    "status": "ENGINEERING_ACCEPTED_PUBLISHING_REAL_SUMMARY_OPEN",
+    "status": "RUNTIME_CACHE_PUSH_ACCEPTED_PUBLISH_PENDING_CONTENT_OPEN",
     "entry": "review/pdf-c3-20261026/README.md",
     "independent_engineering": "PASS_ZERO_OPEN",
     "focused_tests": 50,
@@ -2328,5 +2328,48 @@
     "next_formal_sample": "c3-hk-kingsoft-h1-2025",
     "next_model": "configured mimo-v2.6-flash",
     "native_goal_status": "active"
+  },
+  "c3_actual_attempt_20261026": {
+    "run_id": "phaseC-090-777179bc3756",
+    "status": "PRE_RESERVATION_BLOCKED",
+    "reason": "PHASE_C_GOLD_SUPPORT_MISSING",
+    "model_POSTs": 0,
+    "new_charge": 0,
+    "new_unknown": 0,
+    "owned_lake_removed": true,
+    "receipt": ".planning/c3-20261026/hk-formal-v1/overall.json",
+    "source_diagnosis": ".planning/c3-20261026/hk-material-diagnosis-v1.json.gz",
+    "root_cause": "Worker IDENTITY: duplicate whole-environment distribution inventory. Declared PDF dependency closure v2 independently accepted and real conversion succeeds; frozen content still missing due to separate source-semantic selection issue.",
+    "local_commit": "65f42d418b1328784aecc1a3460aea535eedb3a8",
+    "published": false,
+    "push_failure": "47 targets /392 collected /600s; two regressions being root-fixed, not waived by narrower daily gate"
+  },
+  "next_action": "Normal publish accepted engineering; implement generic operating-resource and plan semantic owner per SELECTION_ROOT_DESIGN, retain planner/caps/gold, source coverage then real summary/cache/FF-RF.",
+  "c3_runtime_recovery_20261026": {
+    "entry": "review/pdf-c3-20261026/RUNTIME_RECOVERY.md",
+    "environment_independent": "PASS_ZERO_OPEN_25_TESTS_AND_REAL_WORKER_ENTRYPOINTS",
+    "cache_independent": "PASS_ZERO_OPEN_32_TESTS",
+    "push_independent": "PASS_ZERO_OPEN_FINAL_LAUNCHER_LIFECYCLE_TESTS",
+    "linux_mypy": "PASS_389_SOURCE_FILES",
+    "real_pdf_enhancement": {
+      "pages": [
+        12,
+        13,
+        17
+      ],
+      "seconds": 117.4022,
+      "peak_job_commit_bytes": 3363454976,
+      "limit_seconds": 120,
+      "limit_bytes": 4294967296,
+      "accepted_groups": 3,
+      "rejected_groups": 128
+    },
+    "remaining_content_gap": "Actual reading admits R&D resource quantities and outlook plan, but shared semantic policy classifies them as description; bounded material cap prioritizes meaningful facts.",
+    "legacy_fixture": "PASS_1_NODE_31_69_SECONDS_ALL_25_ASSERTIONS_UNCHANGED_INDEPENDENT_PASS_ZERO_OPEN",
+    "new_model_calls": 0,
+    "new_downloads": 0,
+    "production_unchanged": true,
+    "published": false,
+    "selection_design": "review/pdf-c3-20261026/SELECTION_ROOT_DESIGN.md"
   }
 }

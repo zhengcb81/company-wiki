@@ -1,0 +1,58 @@
+{
+  "schema_version": "independent-review/1",
+  "reviewer": "/root/c3_cache_independent_review",
+  "author": false,
+  "status": "PASS",
+  "open": [],
+  "scope": "tests/integration/test_reading_parent_cache_migration.py",
+  "byte_sha256": "ca8159ae4f35496db9e89842a4fac19f648dcb1ed46a3ce9d117cd6384d80035",
+  "lf_sha256": "ab9444118640140443a0e92d2825f135e3239a9d55e1c19b26b10f3b57ba840f",
+  "independent_checks": {
+    "existing_assertions_unchanged": true,
+    "assertion_count": 25,
+    "physical_code_inventory_match": "PASS",
+    "changed_structure_keys": [
+      "company_wiki.document_understanding.structure.sections"
+    ],
+    "proof": "independent-identity-probe.json"
+  },
+  "author_full_node": {
+    "passed": 1,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "exit_code": 0,
+    "timeout": false,
+    "seconds": 33.153,
+    "source_hashes_stable": true,
+    "log": "green.log",
+    "junit": "green.xml",
+    "receipt": "green-run.json",
+    "material_receipt": "green-public-cache-result-0.json"
+  },
+  "behaviors": {
+    "loopback_posts": 2,
+    "external_provider_calls": 0,
+    "old_cache_tokens": 0,
+    "new_cache_tokens": 0,
+    "old_material_sha256": "7c156572b141fa1127cb429537d17f0bb78fc037497812ffac6a76e8b5d3e35b",
+    "new_material_sha256": "34741b8f4dc708471c5bc7eb241fcc2b366920a30ec336e559973795356d589a",
+    "old_bundle_unchanged": true,
+    "different_ancestry_verified": true
+  },
+  "cleanup": {
+    "author_lake_removed": true,
+    "author_base_absent": true,
+    "author_pid_dead_per_receipt": true,
+    "reviewer_temp_absent": true
+  },
+  "reviewer_product_writes": 0,
+  "paid_calls": 0,
+  "downloads": 0,
+  "heavy_node_rerun_by_reviewer": false,
+  "limitations": [
+    "Historical sections component with current remainder, not a full old release",
+    "Synthetic PDF and loopback engineering acceptance, not real-company content acceptance",
+    "Independent physical hash probe is separate from author green runtime trace"
+  ]
+}

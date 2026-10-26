@@ -1,0 +1,18 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki
+configfile: pytest.ini
+collected 1 item
+
+tests\integration\test_reading_default_resume.py .                       [100%]
+
+============================== warnings summary ===============================
+..\..\..\..\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464
+  C:\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: C:\Users\郑曾波\Projects\company-wiki\.planning\c3-20261026\cache-recovery\paid-resume-0.xml -
+======================== 1 passed, 1 warning in 34.07s ========================

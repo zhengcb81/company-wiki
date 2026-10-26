@@ -1,0 +1,70 @@
+{
+  "result": "PASS",
+  "open_findings": 0,
+  "supersedes": "review.json / review.md (historical initial P2 evidence retained unchanged)",
+  "closed_findings": [
+    {
+      "id": "GATE-IR-01",
+      "priority": "P2",
+      "resolution": "Both PID fixtures publish complete PID using pending file plus atomic os.replace. First cold-start timeout2s->8s and venv-held-file timeout4s->8s, while descendant self-stop12s and death/file deletion/first elapsed<13s assertions remain.",
+      "why_meaningful": "Death is checked immediately after bounded8s return, before descendant12s self-expiry; successful return cannot substitute waiting for natural exit. Atomic marker prevents exists-before-write-completion races.",
+      "actual_verification": "Two modified original nodes passed independently in16.78s under approved normal shell, actual workspace venv launcher; bounded outer job kept and reaped.",
+      "old_source_raw_sha256": "d7a2d0bd5d18514280d48abf5a1100f95c1c9b81e9738deeb0b5bb5584000896",
+      "new_source_raw_sha256": "eff8f62cda0e8b587bb2f9527fc298e47300a194117a102d21f1cfa2f3665e24"
+    }
+  ],
+  "bindings": {
+    "tools/pre_push_gate.py": {
+      "raw_sha256": "4175973f5bfd2f727fdff54567f9f4361d5834bfe7c47bcbdc735e64148fc538",
+      "lf_sha256": "7a74ecbf1051f6a888d232c20aa1a2ea643793d86d66618162c2f35524b4c172"
+    },
+    "tests/unit/test_pre_push_gate.py": {
+      "raw_sha256": "624d413e16236550188731feb4b6cb8b2673dbb578d9b2f3d67959490d065d96",
+      "lf_sha256": "624d413e16236550188731feb4b6cb8b2673dbb578d9b2f3d67959490d065d96"
+    },
+    "tests/unit/test_pre_push_process_cleanup.py": {
+      "raw_sha256": "eff8f62cda0e8b587bb2f9527fc298e47300a194117a102d21f1cfa2f3665e24",
+      "lf_sha256": "eff8f62cda0e8b587bb2f9527fc298e47300a194117a102d21f1cfa2f3665e24"
+    },
+    "tests/unit/test_pre_push_temp_scope.py": {
+      "raw_sha256": "ccf736630701507b431ba9e933f2189e3133c23977301d1adf926e0b1e88b7d3",
+      "lf_sha256": "3152ea12af026882576988a54a3602adc3c21f01edd6b673d115a2b0d789d86f"
+    },
+    "tests/unit/test_daily_push_policy.py": {
+      "raw_sha256": "931871fea16df19129d972f5a87b09df92b95bf111f04201ce18a71163642efc",
+      "lf_sha256": "c2bd150dd428151fa33ace818a729cfe7c27094073cfdad33bf0ad6909446f0b"
+    }
+  },
+  "four_other_files_identical_to_prior_handoff": true,
+  "fast_inventory_29_and_current_ci_ast_unchanged": true,
+  "verification": {
+    "independent_passed": 2,
+    "failed": 0,
+    "pytest_seconds": 16.78,
+    "outer_process_seconds": 18.85,
+    "test_receipt": "final-startup.json",
+    "test_log": "final-startup.log",
+    "test_xml": "final-startup.xml",
+    "all_five_source_bindings_stable_before_after": true,
+    "owner_root_receipt": "../root-startup-fix.log/xml (2P16.64s, reviewed only)"
+  },
+  "retained_prior_assessment": "All prior product assessment stands: daily unit-only expansion preserves29FAST/CI;180s daily/600s explicit full, bounded output,124/125/true failure codes, fail-closed launch/transport/cleanup, copied Git context isolation, exclusive TEMP/TMP/TMPDIR/SQLITE_TMPDIR, real descendant cleanup.",
+  "prior_evidence_preserved": [
+    "targeted.json/log/xml initial actual flaky RED",
+    "rerun.json/log/xml original retry only, not counted as repair",
+    "review.json/md prior P2 pending",
+    "test_review_probes.py independent cleanup-error nonzero and atomic cap/grandchild proof"
+  ],
+  "cleanup": {
+    "owned_outer_pid": 14576,
+    "owned_outer_pid_alive": false,
+    "owned_tmp_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c3pgir3",
+    "owned_tmp_root_absent": true
+  },
+  "scope_limits": [
+    "Only push-feedback owner reviewed; no full FAST/CI rerun, no project commit/push, no hook bypass.",
+    "No production/config/ACL/labels/author WIP changes; existing hook mode WIP left untouched.",
+    "Previously diagnosed parser-history product failure and legacy-sections adapter remain separate owner tracks; nonunit deferral does not solve them.",
+    "No external HTTP, download, paid/model calls."
+  ]
+}

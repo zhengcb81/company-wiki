@@ -410,7 +410,12 @@ def _thaw_generations(frozen):
 
 
 def _validate_normalization_binding(manifests, snapshot):
-    """Check frozen causal identity without deployment reads or adapter inference."""
+    """Require the recorded recipe before executing work with current software.
+
+    This is an execution admission check, not a historical identity decoder.
+    Completed reads prove the recorded generation against its publication and
+    let the public reading owner verify current source bytes and locators.
+    """
     from .narrative_formats import NORMALIZED_MIME_TYPES
 
     try:
@@ -443,6 +448,33 @@ def _validate_normalization_binding(manifests, snapshot):
             }:
                 raise BatchResumeError("BATCH_FROZEN_BINDING_INVALID")
     except (KeyError, TypeError, ValueError) as exc:
+        raise BatchResumeError("BATCH_FROZEN_BINDING_INVALID") from exc
+
+
+def _validate_published_generation(manifest, version):
+    """Bind a recipe-bearing history to the exact recorded publication.
+
+    Neither today's SDK nor a self-consistent rehash of a changed run binding
+    proves what produced an old artifact. Its existing publication carries the
+    complete immutable generation, including every recipe field. Pre-recipe
+    legacy publications retain their existing public-reader checks.
+    """
+    if manifest is None:
+        return
+    try:
+        if (manifest.get("execution_versions", {}).get("selector") == "0.9.0"
+                and "selection_generation" not in manifest):
+            from .narrative_generation import reading_candidate_manifest
+            manifest = reading_candidate_manifest(version, manifest)
+        metadata = json.loads(version.metadata_json)
+        if (isinstance(metadata, dict) and "generation_manifest" not in metadata
+                and "parser_components" not in manifest):
+            return  # A genuinely pre-generation legacy publication.
+        if (not isinstance(metadata, dict)
+                or metadata.get("generation_manifest") != manifest
+                or metadata.get("generation_sha256") != generation_sha256(manifest)):
+            raise BatchResumeError("BATCH_FROZEN_BINDING_INVALID")
+    except (TypeError, ValueError) as exc:
         raise BatchResumeError("BATCH_FROZEN_BINDING_INVALID") from exc
 
 
@@ -634,10 +666,6 @@ def _resume_binding(
             }
         pins = frozen["reused_artifact_pins"] if reusable else {}
         manifests = _thaw_generations(frozen) if reusable else {}
-        if reusable:
-            _validate_normalization_binding(
-                manifests, frozen.get("normalization_config")
-            )
         payload_wires = {
             document: {
                 "schema_version": "source-revision-event/2.0",
@@ -807,6 +835,7 @@ def _projection_loader(catalog):
 
 
 def _item_generation(request, payload, *, normalization=None, versions=None,
+                     parser_components=None,
                      reading_model_projection=READING_PROJECTION_UNSET):
     if (reading_model_projection is READING_PROJECTION_UNSET
             and request.reading_model_projection is not None):
@@ -823,15 +852,15 @@ def _item_generation(request, payload, *, normalization=None, versions=None,
                 "official_json_adapter",
             }
         }
+        if (parser_components is None and normalization is not None
+                and payload.source_ref.mime_type == PPTX_MIME
+                and payload.source_metadata.source_class == "filing"):
+            parser_components = normalization.identity(payload.source_ref.mime_type)
         return generation_manifest(
             request,
             payload,
             execution_versions=raw_versions,
-            parser_components=normalization.identity(payload.source_ref.mime_type)
-            if normalization is not None
-            and payload.source_ref.mime_type == PPTX_MIME
-            and payload.source_metadata.source_class == "filing"
-            else None,
+            parser_components=parser_components,
             reading_model_projection=reading_model_projection,
         )
     projected_versions = {k: versions[k] for k in ("adapter", "selector", "handlers")}
@@ -945,7 +974,6 @@ def _resume_item_binding(
             or not set(pins) <= keys
         ):
             raise BatchResumeError("BATCH_FROZEN_BINDING_INVALID")
-        _validate_normalization_binding(manifests, frozen.get("normalization_config"))
         current_payloads, facts = prepared_sources
         current = {payload.item_key: payload for payload in current_payloads}
         if set(current) != keys:
@@ -975,6 +1003,7 @@ def _resume_item_binding(
                     frozen.get("normalization_config"), deadline=deadline
                 ),
                 versions=versions,
+                parser_components=manifest.get("parser_components"),
                 reading_model_projection=manifest.get("reading_model_projection"),
             )
             for field in ("parser_component", "bundle_producer", "material_extractor"):
@@ -1624,6 +1653,12 @@ def _run_prepared(
                 status = _blocked_status(previous)
             return _receipt(previous.run_id, status, documents, runs, guard)
     if previous is not None:
+        # Only a fully returned public read can avoid execution admission.
+        # Pending work, paid-response recovery and activation recovery still
+        # require the exact deployed recipe before any workers/gate writes.
+        _validate_normalization_binding(
+            binding.generation_manifests, binding.normalization_config
+        )
         _effective_execution_versions(request, versions, require_available=True)
     if previous is not None and store.has_running_jobs_outside_scope(previous.job_ids):
         raise ValueError("AUTOMATION_FOREIGN_WORKER_ACTIVE")
@@ -2183,6 +2218,16 @@ def _final_documents(
             manifest = runs.final_generations(request.run_id).get(key, manifest)
         pin = binding.reused_artifact_pins.get(key)
         if pin is not None:
+            if payload.subject.kind == "raw" and manifest is not None:
+                version, _ = artifacts.read_exact(
+                    artifact_version_id=pin["artifact_version_id"],
+                    document_id=ref.document_id,
+                    source_id=ref.source_id,
+                    source_sha256=ref.content_sha256,
+                    expected_sha256=pin["content_sha256"],
+                    expected_size=pin["byte_size"],
+                )
+                _validate_published_generation(manifest, version)
             already_verified = (
                 manifest is not None
                 and manifest.get("execution_versions", {}).get("selector") == "0.9.0"
@@ -2239,6 +2284,7 @@ def _final_documents(
         if verify.status is JobStatus.SUCCEEDED and effect_ids:
             try:
                 version = artifacts.visible_version_for_effect(effect_ids[0])
+                _validate_published_generation(manifest, version)
                 if projected:
                     if manifest is None:
                         raise BatchResumeError("BATCH_FROZEN_BINDING_INVALID")

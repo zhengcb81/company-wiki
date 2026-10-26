@@ -1,0 +1,64 @@
+{
+  "schema_version": "independent-review/1",
+  "reviewer": "/root/c3_cache_independent_review",
+  "author": null,
+  "status": "PASS",
+  "supersedes": "review.json disposition only; original evidence retained",
+  "closed": [
+    {
+      "id": "C3-IR-01",
+      "priority": "P2",
+      "resolution": "Shared reading_candidate_manifest rejects all non-object JSON with its existing ValueError contract; batch consistently normalizes it",
+      "verified_permanent_cases": 5,
+      "original_independent_counterexamples_passed": 2
+    }
+  ],
+  "open": [],
+  "files": {
+    "src/company_wiki/automation/narrative_batch.py": {
+      "bytes": 107106,
+      "sha256": "6f6db0abaeebb7d38c7f77402cd6943ec1beedfd290631ded29c492d446b9d9c",
+      "lf_sha256": "770d482454bce479c1b737272e5d115b0608f2d5b43de5b8acd654c87f2c1a39"
+    },
+    "src/company_wiki/automation/narrative_generation.py": {
+      "bytes": 26889,
+      "sha256": "720924613789251e0cc6433ba961fc710342969ebcbc276ea641f0a98edbea0c",
+      "lf_sha256": "64e9ddd7c63f5fa6b92abd3f15d8e2a8d430880fbdb70481604d763586edf1ff"
+    },
+    "tests/unit/test_narrative_batch_recovery.py": {
+      "bytes": 12397,
+      "sha256": "db8228d73d61b9d1bda5d77a5bb123724a8cb7e9db569d3e6f6d5b908ad77ced",
+      "lf_sha256": "97afb46df5004f5c401031477c10baab0328e54589db58237b8007c6aee97034"
+    },
+    "tests/integration/test_n6_batch_upgrade_identity.py": {
+      "bytes": 9997,
+      "sha256": "b8ddb010e8943767a35f798e2be37eada23abd50235f49eda946c5e31908035a",
+      "lf_sha256": "b8ddb010e8943767a35f798e2be37eada23abd50235f49eda946c5e31908035a"
+    }
+  },
+  "tests": {
+    "passed": 32,
+    "failed": 0,
+    "errors": 0,
+    "pytest_seconds": 2.3,
+    "process_seconds": 3.4218543,
+    "exit_code": 0,
+    "log": "final-tests.log",
+    "junit": "final-tests.xml",
+    "heavy_integration_rerun": null
+  },
+  "cleanup": {
+    "path": "C:\\Temp\\c3recheck-20261026",
+    "absent_after": true,
+    "owned_python_pids": []
+  },
+  "product_edits_by_reviewer": 0,
+  "real_provider_calls": 0,
+  "downloads": 0,
+  "production_writes": 0,
+  "limitations": [
+    "Acceptance covers the three-file cache recovery engineering scope only",
+    "No new live-provider or content-quality acceptance",
+    "Prior independent CLI source corruption evidence and author original integration evidence retained separately"
+  ]
+}

@@ -1,0 +1,11 @@
+{
+  "red_owned_pid": 15556,
+  "red_pid_alive": false,
+  "green_owned_pid": 16340,
+  "green_pid_alive": false,
+  "roots_absent": [
+    ".c3legir",
+    ".c3leggreen"
+  ],
+  "readonly_hash_control_overlay_removed": true
+}

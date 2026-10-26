@@ -1,0 +1,210 @@
+{
+  "schema_version": "selection-root-design/1",
+  "author": "/root/c3_pdf_env_independent_review",
+  "created_at_utc": "2026-10-26T21:09:00.274735+00:00",
+  "status": "READ_ONLY_DESIGN_READY",
+  "implementation_started": false,
+  "prerequisite": "ROOT first commits/pushes accepted runtime/cache/gate node. No concurrent product edits before that publication.",
+  "decision": "Keep reading_plan/3 and existing caps; fix shared source semantic owner and source-proven topic projection. No heading/company/page/market exceptions; do not rerun Docling for already complete native text.",
+  "evidence": {
+    "native_seconds": 4.308357899950352,
+    "source_unit_count": 2330,
+    "saved_native_units": 67,
+    "native_work_used": 3636909,
+    "work_limit": 16000000,
+    "native_selected_spans": 112,
+    "v2_total_seconds": 125.181,
+    "v2_work_used": 3778313,
+    "v2_work_exhausted": false,
+    "v2_selected_spans": 112,
+    "affected_observations": [
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:469823f3de33badef2b105463091eddadf4c8e14eda430b1fabbd3631b81b502",
+        "raw_text": "我們持續推進北京－武漢雙研究中心戰略。戰略性地理分佈將有助於我們在人才引進和保留方面取得進一步\n的成功。透過校園招募、社會招募及星雲訓練營項目，我們正快速壯大人才隊伍。截至2024年底，金山雲武\n漢研發中心員工總數（包括實習生和外包員工）已超過620人。展望未來，武漢研究中心對我們培育更壯大的\n人才隊伍、提升技術創新能力至關重要。",
+        "admitted": true,
+        "fact": {
+          "eligible": false,
+          "topics": [],
+          "reasons": [],
+          "score": 0,
+          "financial_exempt": false,
+          "purpose": "unknown"
+        },
+        "role": "business",
+        "priority": 1,
+        "required_count": 2
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:8aba10d4e6cef906310cdea234d59eaeb096022af992bca0e8755679ef392bfe",
+        "raw_text": "報告期內，我們的研發費用為人民幣420.5百萬元（58.7百萬美元），而截至二零二五年六月三十日，我們的\n研發人員達1,094人。",
+        "admitted": true,
+        "fact": {
+          "eligible": false,
+          "topics": [],
+          "reasons": [],
+          "score": 0,
+          "financial_exempt": false,
+          "purpose": "unknown"
+        },
+        "role": "business",
+        "priority": 1,
+        "required_count": 2
+      },
+      {
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:2f5c2fe489f9ac1165f016c0ade20b2ff95473f8a82cfba2dc368af407372014",
+        "raw_text": "展望下半年，我們將維持高質量發展和可持續發展戰略，不斷投資技術研發，並全面提升AI能力。同時，我\n們將積極擁抱AI時代小米和金山生態系統的雲需求。我們旨在持續為客戶、股東、員工和社會創造價值。",
+        "admitted": true,
+        "fact": {
+          "eligible": false,
+          "topics": [],
+          "reasons": [],
+          "score": 0,
+          "financial_exempt": false,
+          "purpose": "unknown"
+        },
+        "role": "outlook",
+        "priority": 1,
+        "required_count": 2
+      }
+    ]
+  },
+  "root_causes": [
+    {
+      "id": "SEL-RESOURCE",
+      "cause": "Operating metric subject vocabulary has no R&D/workforce/resource allocation relation; known quantity/person units never receive a valid subject.",
+      "owner": "source semantic resource observer + production 0.9 projection"
+    },
+    {
+      "id": "SEL-PLAN",
+      "cause": "Plan action/object grammar excludes research allocation and specific technology capability actions; punctuation splitting loses bounded shared actor/modality across coordinated predicates.",
+      "owner": "source disclosure/state owner, using existing predicate_scope/observe_metric_predicate"
+    },
+    {
+      "id": "SEL-COVERAGE",
+      "cause": "Value precedes coverage by intentional anti-boilerplate invariant; description titles cannot win. Mapping all new information to one generic quantity topic still allows starvation.",
+      "owner": "source-proven, bounded reading_topics projection; existing planner unchanged"
+    }
+  ],
+  "probe_counts": {
+    "pure_semantic_cases": 25,
+    "production_owner_fixtures": 5,
+    "rank_cases": 4
+  },
+  "rank_evidence": [
+    {
+      "case": "description",
+      "selected": [
+        "repeat-0",
+        "repeat-1",
+        "repeat-2"
+      ],
+      "rare_diagnostic": [
+        "budget_full"
+      ]
+    },
+    {
+      "case": "same_generic_topic",
+      "selected": [
+        "repeat-0",
+        "repeat-1",
+        "repeat-2"
+      ],
+      "rare_diagnostic": [
+        "budget_full"
+      ]
+    },
+    {
+      "case": "distinct_resource_topic",
+      "selected": [
+        "repeat-0",
+        "repeat-1",
+        "rare"
+      ],
+      "rare_diagnostic": []
+    },
+    {
+      "case": "distinct_plan_topic",
+      "selected": [
+        "repeat-0",
+        "repeat-1",
+        "rare"
+      ],
+      "rare_diagnostic": []
+    }
+  ],
+  "boundaries": {
+    "actual_resource": "Explicit measured workforce/resource relation; original amount/unit/date/actor/denominator preserved; no inferred productivity or revenue.",
+    "actual_allocation": "Explicit resource action/use plus money relation. Pure R&D expense accounting row does not gain priority; mixed original personnel paragraph may retain expense text without a separate financial extractor.",
+    "planned_resource": "Source actor + bounded future/plan state + concrete resource action/object; operating_plan only, not actual stock or achieved capability.",
+    "conditional_negative": "Retain existing modality/condition/qualification; never label hypothetical/question/negated quantity as actual.",
+    "boilerplate": "Heading, AI keyword, stakeholder value and generic efficiency language alone remain description.",
+    "legacy": "New semantic use attaches to production 0.9 owner. Freeze legacy detector/replay; do not silently change 0.8 by expanding shared text fallback."
+  },
+  "tdd_phases": [
+    {
+      "phase": "RED",
+      "work": "Neutral CN/HK/US zh-Hans/zh-Hant/en resource stock, allocation, plan, counterexamples; production SourceOperatingSession/_candidates and original refs; crowded cap fixture."
+    },
+    {
+      "phase": "GREEN",
+      "work": "Implement bounded shared observer + value/topic projection + work charging + dependency fingerprint/version. Keep all existing value/rank/predicate/closure assertions. One independent engineering review."
+    },
+    {
+      "phase": "REAL_KNOWN_SOURCE",
+      "work": "One native-only selection check on existing HK original/frozen oracle, same112/48000/work caps, resource and H2-plan content reaches summary input with all qualifiers. No new holdout/Docling/LLM in this diagnostic node."
+    },
+    {
+      "phase": "ROOT_CONTINUE",
+      "work": "After accepted source-selection node, ROOT runs formal summary/cache recovery under main PWF. No small-node human signoffs."
+    }
+  ],
+  "suggested_new_owner": "src/company_wiki/source_catalog/narrative_operating_resources.py",
+  "suggested_test": "tests/unit/document_understanding_selection/test_reading_operating_resources.py",
+  "preserved_rank_invariants": [
+    "meaningful fact before novel high-priority description",
+    "fair topical visits only from actual source labels",
+    "complete context closure",
+    "unique original IDs and character accounting",
+    "missing context and work stop visible",
+    "legacy policy replay stable",
+    "no raw-text classification inside planner"
+  ],
+  "source_baseline_sha256": {
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "2ef38c8330f912b16ada948bcdca812f001277d78d05abdda8aa7afd51d456e7",
+    "src/company_wiki/source_catalog/narrative_business_disclosures.py": "50a47298627bc00d66af2e8e60ce86cdeb0fc5b8b5293efe2ea8d22081b5fbe4",
+    "src/company_wiki/source_catalog/narrative_predicate_state.py": "0f002d36ab8d4d32af1c2d62af54a4f02b7b986fd08216a5e41125f75d75d27b",
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": "aea4208f9922527b44a55efa89f3d8b6008ea381445342e83213521638b24fea",
+    "src/company_wiki/source_catalog/narrative_reading.py": "833b7e04366cd9ae8398232370302a2e6f7f9ff2a4a6021e8b3333fc8e145a2f",
+    "src/company_wiki/source_catalog/narrative_budget.py": "286506ff9116c5222a3c157806402c0bbd5f65beb1c8345aaa440133f50d0142",
+    "src/company_wiki/document_understanding/decision_inventory.py": "b26676abcd35b013a753ae276140d4b9e58aa47eefb0c2dfb6cb684d906b5b67"
+  },
+  "artifacts": {
+    "native-selection-observation.json.gz": {
+      "sha256": "b13d370cdb37cc00018646d6fb518da695288df7812c09ef9c4c43fcbf006cf4",
+      "bytes": 112490
+    },
+    "hk-v2-source-check/diagnosis.json.gz": {
+      "sha256": "2670e6fa24291059ccccbf1b98ce109c2f4135c070bdba0d13edc7a45e93e351",
+      "bytes": 90367
+    },
+    "selection-design-probes.json": {
+      "sha256": "b5775047ff460c82eb923dab1fdb5d9fb4c80d148743774d8b68e5d645ffdba6",
+      "bytes": 11283
+    },
+    "selection-root-design.md": {
+      "sha256": "05fa77a32c1fa1cdbf4cb1cae21fa0d923ff14b4de6222a0c5cd92b6d046d58a",
+      "bytes": 17007
+    }
+  },
+  "side_effects": {
+    "product_edits": 0,
+    "test_edits": 0,
+    "parser_calls": 0,
+    "docling_calls": 0,
+    "llm_calls": 0,
+    "downloads": 0,
+    "raw_copies": 0,
+    "new_holdout_touched": false
+  },
+  "next_action": "ROOT publish accepted base node; then implement this TDD node serially and re-review at the two major milestones."
+}

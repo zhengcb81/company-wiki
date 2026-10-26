@@ -1,0 +1,90 @@
+{
+  "schema_version": "independent-review/1",
+  "reviewer": "/root/c3_cache_independent_review",
+  "author": null,
+  "status": "CHANGES_REQUESTED",
+  "head": "65f42d418b1328784aecc1a3460aea535eedb3a8",
+  "files": {
+    "src/company_wiki/automation/narrative_batch.py": {
+      "bytes": 107106,
+      "sha256": "6f6db0abaeebb7d38c7f77402cd6943ec1beedfd290631ded29c492d446b9d9c",
+      "lf_sha256": "770d482454bce479c1b737272e5d115b0608f2d5b43de5b8acd654c87f2c1a39"
+    },
+    "src/company_wiki/automation/narrative_generation.py": {
+      "bytes": 26791,
+      "sha256": "fb6a3c9c51f05f266fe123527b7685350705abdd6287b2bda627ae1be9011518",
+      "lf_sha256": "caf25bdd7d8903c975341feb07a07452768e7896f30a9a95ba0bd81a200fd2e4"
+    },
+    "tests/unit/test_narrative_batch_recovery.py": {
+      "bytes": 11740,
+      "sha256": "b6ef493e83429622e560dd47b46b4a5d8d435f42b415fdd7ad8f0c6b4be482d4",
+      "lf_sha256": "76aa67b4bf64f9d3504f2541b32be99493986e4e1f67eb95c564c692e22d5f34"
+    },
+    "tests/integration/test_n6_batch_upgrade_identity.py": {
+      "bytes": 9997,
+      "sha256": "b8ddb010e8943767a35f798e2be37eada23abd50235f49eda946c5e31908035a",
+      "lf_sha256": "b8ddb010e8943767a35f798e2be37eada23abd50235f49eda946c5e31908035a"
+    }
+  },
+  "open": [
+    {
+      "id": "C3-IR-01",
+      "priority": "P2",
+      "file": "src/company_wiki/automation/narrative_generation.py",
+      "line": 534,
+      "title": "Selector-0.9 base publication metadata shape leaks AttributeError",
+      "reproduction": "test_review_counterexamples.py::test_base_selection_corrupt_metadata_is_controlled_rejection",
+      "expected": "BatchResumeError BATCH_FROZEN_BINDING_INVALID",
+      "actual": "AttributeError for [] or null",
+      "fix": "Guard decoded metadata dictionary shape in reading_candidate_manifest; retain ValueError owner contract",
+      "evidence": "counterexamples.log"
+    }
+  ],
+  "tests": [
+    {
+      "suite": "tests/unit/test_narrative_batch_recovery.py",
+      "passed": 25,
+      "failed": 0,
+      "evidence": "review-tests.log"
+    },
+    {
+      "suite": "independent selector-0.9 malformed metadata",
+      "passed": 0,
+      "failed": 2,
+      "evidence": "counterexamples.log"
+    },
+    {
+      "suite": "real isolated selector-0.8 raw mutation",
+      "passed": 1,
+      "failed": 0,
+      "duration_seconds": 9.53,
+      "error": "no_verified_location",
+      "exit_code": 2,
+      "llm_requests": 0,
+      "evidence": "raw-reason.log"
+    }
+  ],
+  "cleanup": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\c3-20261026\\cache-recovery\\independent\\owned-test-temp",
+      "existed": true,
+      "absent_after": true
+    },
+    {
+      "path": "C:\\Temp\\c3review-20261026",
+      "existed": true,
+      "absent_after": true
+    }
+  ],
+  "owned_python_pids": [],
+  "limitations": [
+    "No live supplier/content quality acceptance",
+    "Existing author integration receipts inspected rather than all rerun",
+    "Reviewer probe setup/count errors retained transparently and not treated as product failures"
+  ],
+  "product_edits": 0,
+  "real_provider_calls": 0,
+  "downloads": 0,
+  "production_writes": 0,
+  "followup": "Owner shape guard plus 2 counterexamples and 25 recovery tests; rebind source SHA"
+}

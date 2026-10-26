@@ -1,0 +1,66 @@
+{
+  "status": "ready_for_independent_review",
+  "files": {
+    "tools/pre_push_gate.py": "4175973f5bfd2f727fdff54567f9f4361d5834bfe7c47bcbdc735e64148fc538",
+    "tests/unit/test_pre_push_gate.py": "624d413e16236550188731feb4b6cb8b2673dbb578d9b2f3d67959490d065d96",
+    "tests/unit/test_pre_push_process_cleanup.py": "d7a2d0bd5d18514280d48abf5a1100f95c1c9b81e9738deeb0b5bb5584000896",
+    "tests/unit/test_pre_push_temp_scope.py": "ccf736630701507b431ba9e933f2189e3133c23977301d1adf926e0b1e88b7d3",
+    "tests/unit/test_daily_push_policy.py": "931871fea16df19129d972f5a87b09df92b95bf111f04201ce18a71163642efc"
+  },
+  "red": {
+    "log": "red.txt",
+    "failed": 4,
+    "passed": 1,
+    "regressions": [
+      "nonunit expansion in daily selection",
+      "curated nonunit whole-file expansion",
+      "parent traversal selection",
+      "live owned grandchild after timeout"
+    ]
+  },
+  "green": [
+    {
+      "log": "venv-final-green.txt",
+      "passed": 40,
+      "seconds": 22.55,
+      "runtime": "workspace venv Python 3.14.2; real Windows process tree, file lock, stdout/stderr caps"
+    },
+    {
+      "log": "host-git-normal.txt",
+      "passed": 30,
+      "seconds": 37.73,
+      "runtime": "C:/Miniconda/python.exe 3.13.9 in approved normal-integrity shell; local Git fixture remotes only"
+    }
+  ],
+  "additional_evidence": {
+    "log": "host-green.txt",
+    "passed": 153,
+    "failed": 5,
+    "failure_reason": "all five MSYS tests failed under restricted inherited Low token; same five included in later 30/30 normal-integrity run",
+    "selector_tests_passed": 89
+  },
+  "policy": {
+    "affected_unit_target_limit": 32,
+    "fast_contracts_unchanged": true,
+    "fast_contract_target_count": 29,
+    "daily_deadline_seconds": 180,
+    "manual_full_deadline_seconds": 600,
+    "stdout_cap_bytes": 4194304,
+    "stderr_cap_bytes": 524288,
+    "timeout_exit_code": 124,
+    "output_cap_exit_code": 125,
+    "nonzero_child_exit": "preserved"
+  },
+  "static_checks": "ruff passed; git diff --check passed",
+  "temp_cleanup": "push-feedback/temp removed after all test processes ended using verified absolute native PowerShell removal",
+  "changes_not_made": [
+    "no hook edit",
+    "no workflow edit",
+    "no selector edit",
+    "no bounded_process or process_tree edit",
+    "no config edit",
+    "no project commit or remote push",
+    "no paid or network test"
+  ],
+  "test_adjustments": "Existing timeout mocks now target run_bounded while preserving original progress/encoding/TEMP/Git context/cleanup assertions. Policy mixed-selection expectation now asserts unit-only expansion plus every FAST member; real Git fixture includes the two actual owner modules. Windows Job/venv file lock regressions are Windows-specific; portable bounded output/exit tests still run on all platforms."
+}

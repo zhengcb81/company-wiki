@@ -1,0 +1,421 @@
+{
+  "schema_version": "selection-root-design-probes/1",
+  "cases": [
+    {
+      "case": "cn_resource",
+      "text": "截至报告期末，研发人员达1,094人，其中博士145人。",
+      "eligible": false,
+      "topics": [],
+      "reasons": [],
+      "score": 0,
+      "financial_exempt": false,
+      "purpose": "unknown",
+      "value": "description"
+    },
+    {
+      "case": "hk_resource",
+      "text": "截至報告期末，研發人員達1,094人，其中博士145人。",
+      "eligible": false,
+      "topics": [],
+      "reasons": [],
+      "score": 0,
+      "financial_exempt": false,
+      "purpose": "unknown",
+      "value": "description"
+    },
+    {
+      "case": "en_resource",
+      "text": "At period end, our R&D team numbered 1,094 employees.",
+      "eligible": false,
+      "topics": [],
+      "reasons": [],
+      "score": 0,
+      "financial_exempt": false,
+      "purpose": "unknown",
+      "value": "description"
+    },
+    {
+      "case": "en_research",
+      "text": "Our research and development staff totaled 1,094 people at June 30.",
+      "eligible": false,
+      "topics": [],
+      "reasons": [],
+      "score": 0,
+      "financial_exempt": false,
+      "purpose": "unknown",
+      "value": "description"
+    },
+    {
+      "case": "en_engineer",
+      "text": "We employed 1,094 software engineers at June 30.",
+      "eligible": false,
+      "topics": [],
+      "reasons": [],
+      "score": 0,
+      "financial_exempt": false,
+      "purpose": "unknown",
+      "value": "description"
+    },
+    {
+      "case": "cn_spend",
+      "text": "本期研发投入为人民币420.5百万元，主要用于人工智能研发平台建设。",
+      "eligible": false,
+      "topics": [],
+      "reasons": [],
+      "score": 0,
+      "financial_exempt": false,
+      "purpose": "unknown",
+      "value": "description"
+    },
+    {
+      "case": "en_spend",
+      "text": "We invested RMB 420.5 million in research and development this period.",
+      "eligible": false,
+      "topics": [],
+      "reasons": [],
+      "score": 0,
+      "financial_exempt": false,
+      "purpose": "unknown",
+      "value": "description"
+    },
+    {
+      "case": "hk_plan",
+      "text": "展望下半年，我們將維持高質量發展和可持續發展戰略，不斷投資技術研發，並全面提升AI能力。",
+      "eligible": false,
+      "topics": [],
+      "reasons": [],
+      "score": 0,
+      "financial_exempt": false,
+      "purpose": "unknown",
+      "value": "description"
+    },
+    {
+      "case": "cn_plan",
+      "text": "展望下半年，我们将继续投入技术研发，提升人工智能能力，并拓展企业云服务。",
+      "eligible": true,
+      "topics": [
+        "core_business",
+        "new_business",
+        "capacity_projects",
+        "business_progress"
+      ],
+      "reasons": [
+        "business_strategy",
+        "operating_activity"
+      ],
+      "score": 3,
+      "financial_exempt": false,
+      "purpose": "operating",
+      "value": "meaningful_fact"
+    },
+    {
+      "case": "en_plan",
+      "text": "In the second half we will continue investing in research and development and enhance our AI capabilities.",
+      "eligible": false,
+      "topics": [],
+      "reasons": [],
+      "score": 0,
+      "financial_exempt": false,
+      "purpose": "unknown",
+      "value": "description"
+    },
+    {
+      "case": "known_plan",
+      "text": "We plan to expand our service platform next year.",
+      "eligible": true,
+      "topics": [
+        "core_business",
+        "new_business",
+        "business_progress"
+      ],
+      "reasons": [
+        "business_strategy",
+        "operating_activity"
+      ],
+      "score": 3,
+      "financial_exempt": false,
+      "purpose": "operating",
+      "value": "meaningful_fact"
+    },
+    {
+      "case": "cn_boilerplate",
+      "text": "我们坚持高质量发展，为客户、股东、员工和社会创造价值。",
+      "eligible": false,
+      "topics": [],
+      "reasons": [],
+      "score": 0,
+      "financial_exempt": false,
+      "purpose": "unknown",
+      "value": "description"
+    },
+    {
+      "case": "en_boilerplate",
+      "text": "We are committed to sustainable development and creating value for all stakeholders.",
+      "eligible": false,
+      "topics": [],
+      "reasons": [],
+      "score": 0,
+      "financial_exempt": false,
+      "purpose": "unknown",
+      "value": "description"
+    },
+    {
+      "case": "cn_glossary",
+      "text": "研发人员是指参与研发活动的人；例如一家公司有1,094人。",
+      "eligible": false,
+      "topics": [],
+      "reasons": [],
+      "score": 0,
+      "financial_exempt": false,
+      "purpose": "unknown",
+      "value": "description"
+    },
+    {
+      "case": "cn_conditional",
+      "text": "如果研发人员达到1,094人，我们将考虑扩建实验室。",
+      "eligible": true,
+      "topics": [
+        "business_progress"
+      ],
+      "reasons": [
+        "operating_activity"
+      ],
+      "score": 3,
+      "financial_exempt": false,
+      "purpose": "unknown",
+      "value": "meaningful_fact"
+    },
+    {
+      "case": "en_conditional",
+      "text": "If our R&D staff reaches 1,094 people, we may expand the laboratory.",
+      "eligible": false,
+      "topics": [],
+      "reasons": [],
+      "score": 0,
+      "financial_exempt": false,
+      "purpose": "unknown",
+      "value": "description"
+    },
+    {
+      "case": "cn_question",
+      "text": "请问公司下半年是否计划增加研发人员至1,094人？",
+      "eligible": false,
+      "topics": [],
+      "reasons": [],
+      "score": 0,
+      "financial_exempt": false,
+      "purpose": "unknown",
+      "value": "description"
+    },
+    {
+      "case": "en_question",
+      "text": "Will you increase R&D staff to 1,094 people next year?",
+      "eligible": false,
+      "topics": [],
+      "reasons": [],
+      "score": 0,
+      "financial_exempt": false,
+      "purpose": "unknown",
+      "value": "description"
+    },
+    {
+      "case": "cn_accounting",
+      "text": "研发费用按照会计政策计入损益，金额为人民币420.5百万元。",
+      "eligible": false,
+      "topics": [],
+      "reasons": [],
+      "score": 0,
+      "financial_exempt": false,
+      "purpose": "accounting_policy",
+      "value": "description"
+    },
+    {
+      "case": "en_accounting",
+      "text": "Research and development expenses of RMB 420.5 million were recognized in profit or loss under the accounting policy.",
+      "eligible": false,
+      "topics": [],
+      "reasons": [],
+      "score": 0,
+      "financial_exempt": false,
+      "purpose": "accounting_policy",
+      "value": "description"
+    },
+    {
+      "case": "en_pension",
+      "text": "Employee benefit liabilities were RMB 420.5 million at June 30.",
+      "eligible": false,
+      "topics": [],
+      "reasons": [],
+      "score": 0,
+      "financial_exempt": false,
+      "purpose": "unknown",
+      "value": "description"
+    },
+    {
+      "case": "cn_counterfeit",
+      "text": "研发人员培训手册第1094条介绍人工智能业务。",
+      "eligible": false,
+      "topics": [],
+      "reasons": [],
+      "score": 0,
+      "financial_exempt": false,
+      "purpose": "unknown",
+      "value": "description"
+    },
+    {
+      "case": "en_counterfeit",
+      "text": "Research staff training manual 1094 describes artificial intelligence services.",
+      "eligible": false,
+      "topics": [],
+      "reasons": [],
+      "score": 0,
+      "financial_exempt": false,
+      "purpose": "unknown",
+      "value": "description"
+    },
+    {
+      "case": "cn_other_actor",
+      "text": "合作伙伴研发人员达1,094人，公司员工数量未披露。",
+      "eligible": false,
+      "topics": [],
+      "reasons": [],
+      "score": 0,
+      "financial_exempt": false,
+      "purpose": "unknown",
+      "value": "description"
+    },
+    {
+      "case": "cn_negative",
+      "text": "公司尚未将研发人员增加至1,094人。",
+      "eligible": false,
+      "topics": [],
+      "reasons": [],
+      "score": 0,
+      "financial_exempt": false,
+      "purpose": "unknown",
+      "value": "description"
+    }
+  ],
+  "rank": [
+    {
+      "case": "description",
+      "selected": [
+        "repeat-0",
+        "repeat-1",
+        "repeat-2"
+      ],
+      "rare_diagnostic": [
+        "budget_full"
+      ]
+    },
+    {
+      "case": "same_generic_topic",
+      "selected": [
+        "repeat-0",
+        "repeat-1",
+        "repeat-2"
+      ],
+      "rare_diagnostic": [
+        "budget_full"
+      ]
+    },
+    {
+      "case": "distinct_resource_topic",
+      "selected": [
+        "repeat-0",
+        "repeat-1",
+        "rare"
+      ],
+      "rare_diagnostic": []
+    },
+    {
+      "case": "distinct_plan_topic",
+      "selected": [
+        "repeat-0",
+        "repeat-1",
+        "rare"
+      ],
+      "rare_diagnostic": []
+    }
+  ],
+  "model_calls": 0,
+  "downloads": 0,
+  "parser_calls": 0,
+  "production_owner_fixture": [
+    {
+      "case": "cn_resource",
+      "complete": true,
+      "withheld": 0,
+      "candidates": [
+        {
+          "text": "截至报告期末，研发人员达1,094人，其中博士145人。",
+          "value": "description",
+          "topics": [
+            "business"
+          ],
+          "fact_reasons": []
+        }
+      ]
+    },
+    {
+      "case": "hk_resource",
+      "complete": true,
+      "withheld": 0,
+      "candidates": [
+        {
+          "text": "截至報告期末，研發人員達1,094人，其中博士145人。",
+          "value": "description",
+          "topics": [
+            "business"
+          ],
+          "fact_reasons": []
+        }
+      ]
+    },
+    {
+      "case": "en_resource",
+      "complete": true,
+      "withheld": 0,
+      "candidates": [
+        {
+          "text": "At period end, our R&D team numbered 1,094 employees.",
+          "value": "description",
+          "topics": [
+            "business"
+          ],
+          "fact_reasons": []
+        }
+      ]
+    },
+    {
+      "case": "hk_plan",
+      "complete": true,
+      "withheld": 0,
+      "candidates": [
+        {
+          "text": "展望下半年，我們將維持高質量發展和可持續發展戰略，不斷投資技術研發，並全面提升AI能力。",
+          "value": "description",
+          "topics": [
+            "outlook"
+          ],
+          "fact_reasons": []
+        }
+      ]
+    },
+    {
+      "case": "en_plan",
+      "complete": true,
+      "withheld": 0,
+      "candidates": [
+        {
+          "text": "In the second half we will continue investing in research and development and enhance our AI capabilities.",
+          "value": "description",
+          "topics": [
+            "outlook"
+          ],
+          "fact_reasons": []
+        }
+      ]
+    }
+  ]
+}

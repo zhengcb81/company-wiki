@@ -1,0 +1,8 @@
+{
+  "path": "tests/unit/test_narrative_batch_recovery.py",
+  "change": "Remove extra blank line at EOF only; git diff --check caught it before commit",
+  "ast_equal": true,
+  "old_lf_sha256": "97afb46df5004f5c401031477c10baab0328e54589db58237b8007c6aee97034",
+  "new_lf_sha256": "aad1763805996663b080314b98990bf930961a64d5516fc0ee28dca828263f30",
+  "new_raw_sha256": "a2d2e5e997b8a17f7a4877f50438b11f657740ede729d92deea9546ab6b07a77"
+}

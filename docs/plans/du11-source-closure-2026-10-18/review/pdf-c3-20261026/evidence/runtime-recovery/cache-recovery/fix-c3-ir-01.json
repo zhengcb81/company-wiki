@@ -1,0 +1,58 @@
+{
+  "schema_version": "narrow-fix-handoff/1",
+  "finding_id": "C3-IR-01",
+  "author": "/root/c3_pdf_env_independent_review",
+  "created_at_utc": "2026-10-26T20:58:49.974843+00:00",
+  "status": "FIXED_PENDING_INDEPENDENT_RECHECK",
+  "root_cause": "reading_candidate_manifest treated any JSON-decoded value as a dict; selector 0.9 resolves metadata here before the batch owner performs its own shape validation.",
+  "fix": "After json.loads, reject non-dict values with existing ValueError(BATCH_REUSE_MANIFEST_INVALID). Existing batch normalization converts this into BATCH_FROZEN_BINDING_INVALID.",
+  "production_change_lines": 2,
+  "permanent_tests": "test_base_selection_rejects_non_object_metadata_through_owner_and_batch: []/null/true/0/string; each asserts owner ValueError and batch BatchResumeError.",
+  "test_results": {
+    "red": {
+      "failed": 5,
+      "passed": 0,
+      "deselected": 25,
+      "seconds": 2.32,
+      "cause": "AttributeError before change"
+    },
+    "green": {
+      "passed": 30,
+      "failed": 0,
+      "errors": 0,
+      "seconds": 1.72
+    },
+    "warning": "asyncio_mode unknown because plugin autoload intentionally disabled; no async tests in scope"
+  },
+  "source_files": {
+    "src/company_wiki/automation/narrative_generation.py": {
+      "bytes_sha256": "720924613789251e0cc6433ba961fc710342969ebcbc276ea641f0a98edbea0c",
+      "lf_sha256": "64e9ddd7c63f5fa6b92abd3f15d8e2a8d430880fbdb70481604d763586edf1ff",
+      "bytes": 26889
+    },
+    "tests/unit/test_narrative_batch_recovery.py": {
+      "bytes_sha256": "db8228d73d61b9d1bda5d77a5bb123724a8cb7e9db569d3e6f6d5b908ad77ced",
+      "lf_sha256": "97afb46df5004f5c401031477c10baab0328e54589db58237b8007c6aee97034",
+      "bytes": 12397
+    }
+  },
+  "receipts": {
+    "green.log": "2e326efe0e234bdbb39ced423bc8e2ff0ae532d5b55a2b303f5af792b1dface2",
+    "green.xml": "22cf0e98c6186479842ff7bf829476784d0dabbc20a3668f678c124fae1e89d7",
+    "red.log": "3938a93d94d6efc582cd1472de5e1057571957b3a8a1c86cb47dfe26cd964cc7",
+    "red.xml": "7d32dfd04f0dcfd7e5fd20706011c9279e11ad68c39c485ed3f97e51a88425b7"
+  },
+  "cleanup": {
+    "own_temp_removed": true,
+    "own_temp_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\c3-20261026\\cache-recovery\\fix-c3-ir-01\\tmp",
+    "test_processes_completed": true,
+    "production_data_writes": 0,
+    "downloads": 0,
+    "llm_calls": 0
+  },
+  "scope_notes": [
+    "Only owner module and its recovery test were edited; existing assertions retained.",
+    "No changes to narrative_batch.py, PWF, production configuration, or other fixes.",
+    "The original independent reviewer must rebind final reviewed source SHA before closing C3-IR-01."
+  ]
+}

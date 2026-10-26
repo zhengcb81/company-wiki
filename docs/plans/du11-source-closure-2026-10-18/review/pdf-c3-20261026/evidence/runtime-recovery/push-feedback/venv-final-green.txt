@@ -1,0 +1,19 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\c3-20261026\\push-feedback\\venv-final2-tmp", "requested_basetemp_len": 86, "cwd_len": 34, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": true, "reason": "resolved-basetemp-exceeds-budget", "effective_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\c3-20261026\\push-feedback\\temp\\cw-pytest-basetemp\\20261026-201205-48013a03", "effective_basetemp_len": 119}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\֣����\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 40 items
+
+tests\unit\test_pre_push_gate.py .....                                   [ 12%]
+tests\unit\test_pre_push_process_cleanup.py .....                        [ 25%]
+tests\unit\test_pre_push_temp_scope.py .......                           [ 42%]
+tests\unit\test_pre_push_parallel_phases.py ....                         [ 52%]
+tests\unit\test_pre_push_full_unit_workers.py ......                     [ 67%]
+tests\unit\test_daily_push_bounds.py .........                           [ 90%]
+tests\unit\test_bounded_process.py ....                                  [100%]
+
+============================= 40 passed in 22.55s =============================
+CW-BASETEMP-CLEANUP {"event": "cleanup", "dir": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\c3-20261026\\push-feedback\\temp\\cw-pytest-basetemp\\20261026-201205-48013a03", "existed": true, "removed": true}

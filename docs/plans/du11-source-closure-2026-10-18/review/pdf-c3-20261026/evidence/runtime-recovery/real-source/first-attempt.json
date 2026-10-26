@@ -1,0 +1,163 @@
+{
+  "mode": "live",
+  "sample": "c3-hk-kingsoft-h1-2025",
+  "source_mode": "registered_readonly",
+  "selector_versions": [
+    "0.9.0"
+  ],
+  "reading_model_projections": {
+    "0.9.0": "reading-model-input/4"
+  },
+  "comparison_scope": "single_selector_no_paired_improvement_claim",
+  "scope": "development regression, not holdout",
+  "states": [
+    {
+      "version": "0.9.0",
+      "run_id": "phaseC-090-777179bc3756",
+      "exit": 2,
+      "receipt": {
+        "budget": {
+          "estimated_micro_usd": 0,
+          "tokens": 0,
+          "unknown_reservations": 0,
+          "unsettled_reservations": 0
+        },
+        "documents": [
+          {
+            "artifact_ref": null,
+            "document_id": "urn:company-wiki:document:sha256:4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+            "errors": [
+              "DEPENDENCY_TERMINAL",
+              "PHASE_C_GOLD_SUPPORT_MISSING"
+            ],
+            "status": "dead_letter"
+          }
+        ],
+        "run_id": "phaseC-090-777179bc3756",
+        "schema_version": "narrative-batch-result/1",
+        "status": "failed",
+        "storage": {
+          "persistent_added_bytes": 643277,
+          "scratch_peak_bytes": 0
+        }
+      },
+      "native_usage": [],
+      "activation_recovery": {
+        "status": "PRE_RESERVATION_BLOCKED",
+        "code": "PHASE_C_GOLD_SUPPORT_MISSING",
+        "reserved": false,
+        "post_attempts": 0,
+        "native_usage_rows": 0
+      },
+      "expected_refusal_zero_reservation_zero_POST": true
+    }
+  ],
+  "internal_algorithm_caps": {
+    "0.8.0": "No internal 48000-char cap",
+    "0.9.0": 48000
+  },
+  "public_span_limits": {
+    "default": 96,
+    "financial_reports": 112,
+    "prospectus": 160
+  },
+  "activation_recovery_requested": true,
+  "model_settings": {
+    "model_id": "mimo-v2.6-flash",
+    "endpoint": "https://token-plan-cn.xiaomimimo.com/v1/chat/completions",
+    "api_key_env": "MIMO_API_KEY",
+    "max_output_tokens": 8192,
+    "temperature": 1.0,
+    "output_token_field": "max_completion_tokens",
+    "thinking": "disabled"
+  },
+  "capture_origin": "existing local bytes; descriptor URL does not prove remote or historical download SHA",
+  "availability_date_provenance": {
+    "observed_published_date": "2025-09-26",
+    "observed_filing_date": null,
+    "registered_published_date": "2025-09-26",
+    "method": "source_metadata_observation.published_date",
+    "mtime_used": false
+  },
+  "language_provenance": {
+    "registered_language": "zh",
+    "gold_language_label": "zh",
+    "basis": "prepared_source_descriptor",
+    "translation": false
+  },
+  "identity_snapshot": {
+    "kind": "byte_exact_existing_official_security_snapshot_no_refresh",
+    "original": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\security_master\\hk.json",
+    "fingerprint": {
+      "sha256": "8b15eec8a2047b414c99e817fb61cfbfcecf54e3aff8570cb02e12f8ccc98d5a",
+      "bytes": 1062358,
+      "mtime_ns": 1784448774167246800
+    }
+  },
+  "source_registration": {
+    "source_ref": {
+      "document_id": "urn:company-wiki:document:sha256:4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+      "source_id": "urn:company-wiki:source:sha256:4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+      "content_sha256": "4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+      "byte_size": 3396644,
+      "mime_type": "application/pdf",
+      "schema_version": "2.0"
+    },
+    "manifest": {
+      "document_id": "urn:company-wiki:document:sha256:4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+      "source_id": "urn:company-wiki:source:sha256:4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+      "content_sha256": "4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+      "byte_size": 3396644,
+      "mime_type": "application/pdf",
+      "title": "2025 中期報告",
+      "document_kind": "semi_annual_report",
+      "published_date": "2025-09-26",
+      "source_url": "https://www1.hkexnews.hk/listedco/listconews/sehk/2025/0926/2025092601733_c.pdf",
+      "retrieved_at": "2026-06-04T21:01:53Z",
+      "collector_name": null,
+      "collector_version": null,
+      "canonical_entity_id": null,
+      "display_name": null,
+      "market": "HK",
+      "security_id": "03896",
+      "fiscal_year": 2025,
+      "fiscal_period": "H1",
+      "period_end": null,
+      "form_type": "H1",
+      "provider": "hkexnews",
+      "provider_document_id": "11857348",
+      "language": "zh"
+    },
+    "descriptor_diagnostics": {},
+    "selection": {
+      "mode": "qualified_source_request",
+      "filing_identity_period_asof_qualification": "REQUEST_APPLIED"
+    },
+    "source_fact_registration": null,
+    "catalog_config": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\c3-20261026\\tmp\\cwplC-y08ctfoz\\config\\source_catalog.yaml",
+    "raw_copies": 0,
+    "verified_sha256": "4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+    "registration": {
+      "root_id": "company_raw",
+      "relative_paths": [
+        "金山雲/raw/financial_reports/semi_annual/2025-09-26_hkexnews_11857348_2025 中期報告.pdf"
+      ],
+      "files_seen": 2
+    },
+    "download_events": 0
+  },
+  "source_ref": {
+    "document_id": "urn:company-wiki:document:sha256:4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+    "source_id": "urn:company-wiki:source:sha256:4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+    "content_sha256": "4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+    "byte_size": 3396644,
+    "mime_type": "application/pdf",
+    "schema_version": "2.0"
+  },
+  "status": "PRE_RESERVATION_BLOCKED",
+  "model_post_attempts": 0,
+  "protected_unchanged": true,
+  "sentinel_unchanged": true,
+  "temporary_lake_removed": true,
+  "all_prepared_protected_unchanged": true
+}

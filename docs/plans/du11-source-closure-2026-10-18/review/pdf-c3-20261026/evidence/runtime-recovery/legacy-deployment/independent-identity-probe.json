@@ -1,0 +1,45 @@
+{
+  "old": {
+    "source": "C:\\Temp\\c3-legacy-independent-20261026\\legacy-deployment\\document_understanding\\structure\\sections.py",
+    "code": "C:\\Temp\\c3-legacy-independent-20261026\\legacy-deployment\\document_understanding\\structure\\sections.py",
+    "inventory_source": "C:\\Temp\\c3-legacy-independent-20261026\\legacy-deployment\\document_understanding\\decision_inventory.py",
+    "lf_sha256": "7f010ccbe6815f5b842f2d90b99d751fd95478cea750c907292c3aaff39080d0",
+    "hashes": {
+      "company_wiki.document_understanding.structure": "fdff0121fa71bcc639e2fdb98d8171d0a0e148e3483585dd40095d0dde7ccd01",
+      "company_wiki.document_understanding.structure._work": "2ffaa2ae049bf59f1706f099ffe40f13e57cf8a42d309a899fccf342a657ccab",
+      "company_wiki.document_understanding.structure.contract": "e653137a48f287928fc9e8784dd00a562194c8abda57ab27af192f19b6cd1b5a",
+      "company_wiki.document_understanding.structure.layout": "59d6600669321705a8b72b2996a285e36ebed3d2bd745d17848b233c66b93220",
+      "company_wiki.document_understanding.structure.paragraphs": "f5b99d696f608ac3ef252f1342b52652482235e99262a46074982b078c6e96a6",
+      "company_wiki.document_understanding.structure.projects": "e474cf949554adc317dfb11a87748dd5b07b1f51fd4c6c8a7ab5b2ca76458a00",
+      "company_wiki.document_understanding.structure.qa": "283d04e50f898a4b9001075144eb7043b75589d7f5fce4d6555c96a82d6dcf8f",
+      "company_wiki.document_understanding.structure.relations": "d986cacdf165966496077c69981c4b19aed1c694b4ff42defd7af3465684b350",
+      "company_wiki.document_understanding.structure.sections": "7f010ccbe6815f5b842f2d90b99d751fd95478cea750c907292c3aaff39080d0",
+      "company_wiki.document_understanding.structure.table_purpose": "11efe75840f86c23921cd4da1e4edadc1a088098c5174015be186874edeb3b72",
+      "company_wiki.document_understanding.structure.tables": "106e49fb5329aeb992619fca08db4256a1fb87b51107dc8a1457527cd1e77e9d"
+    }
+  },
+  "current": {
+    "source": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\document_understanding\\structure\\sections.py",
+    "code": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\document_understanding\\structure\\sections.py",
+    "inventory_source": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\document_understanding\\decision_inventory.py",
+    "lf_sha256": "abddf859e804e65765c34bc336ed7a8eb91de0d3894f761c63eafd8b77e94287",
+    "hashes": {
+      "company_wiki.document_understanding.structure": "fdff0121fa71bcc639e2fdb98d8171d0a0e148e3483585dd40095d0dde7ccd01",
+      "company_wiki.document_understanding.structure._work": "2ffaa2ae049bf59f1706f099ffe40f13e57cf8a42d309a899fccf342a657ccab",
+      "company_wiki.document_understanding.structure.contract": "e653137a48f287928fc9e8784dd00a562194c8abda57ab27af192f19b6cd1b5a",
+      "company_wiki.document_understanding.structure.layout": "59d6600669321705a8b72b2996a285e36ebed3d2bd745d17848b233c66b93220",
+      "company_wiki.document_understanding.structure.paragraphs": "f5b99d696f608ac3ef252f1342b52652482235e99262a46074982b078c6e96a6",
+      "company_wiki.document_understanding.structure.projects": "e474cf949554adc317dfb11a87748dd5b07b1f51fd4c6c8a7ab5b2ca76458a00",
+      "company_wiki.document_understanding.structure.qa": "283d04e50f898a4b9001075144eb7043b75589d7f5fce4d6555c96a82d6dcf8f",
+      "company_wiki.document_understanding.structure.relations": "d986cacdf165966496077c69981c4b19aed1c694b4ff42defd7af3465684b350",
+      "company_wiki.document_understanding.structure.sections": "abddf859e804e65765c34bc336ed7a8eb91de0d3894f761c63eafd8b77e94287",
+      "company_wiki.document_understanding.structure.table_purpose": "11efe75840f86c23921cd4da1e4edadc1a088098c5174015be186874edeb3b72",
+      "company_wiki.document_understanding.structure.tables": "106e49fb5329aeb992619fca08db4256a1fb87b51107dc8a1457527cd1e77e9d"
+    }
+  },
+  "changed_keys": [
+    "company_wiki.document_understanding.structure.sections"
+  ],
+  "status": "PASS",
+  "owned_temp_removed": true
+}

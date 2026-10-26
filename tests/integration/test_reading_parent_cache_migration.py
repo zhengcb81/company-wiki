@@ -15,6 +15,26 @@ loopback_model_server = reuse.loopback_model_server
 LEGACY = Path(__file__).resolve().parents[2] / "docs/plans/r1-final3-source-semantics-20261022/review/legacy-sections-908ec2c4.py.txt"
 
 
+def deploy_legacy_reading_sources(root):
+    """Deploy the actual old component beside its physical identity owner.
+
+    Other reading modules fall through to their unchanged current sources. The
+    structure inventory hashes its own sibling package, so an in-memory exec
+    or a changed module label cannot represent an old installed deployment.
+    """
+    current = Path(__file__).resolve().parents[2] / "src/company_wiki/document_understanding"
+    deployed = root / "legacy-deployment/document_understanding"
+    deployed.mkdir(parents=True)
+    for name in ("__init__.py", "decision_inventory.py"):
+        (deployed / name).write_bytes((current / name).read_bytes())
+    for source in sorted((current / "structure").rglob("*.py")):
+        target = deployed / source.relative_to(current)
+        target.parent.mkdir(parents=True, exist_ok=True)
+        target.write_bytes(source.read_bytes())
+    (deployed / "structure/sections.py").write_bytes(LEGACY.read_bytes())
+    return current, deployed
+
+
 def observe_structure(root):
     """Observe the actual producer; never replace its output or cache decision."""
     bootstrap = root / "reading-bootstrap/sitecustomize.py"
@@ -27,10 +47,11 @@ def observe_structure(root):
             "_observed_build_accepts_kwargs = any(p.kind is inspect.Parameter.VAR_KEYWORD "
             "for p in _observed_build_parameters.values())\n"
             "def _observe_sections(*args, **kwargs):\n"
-            "    if ('native_context' in kwargs and 'native_context' not in _observed_build_parameters "
+            "    for optional in ('native_context', 'work_budget'):\n"
+            "        if (optional in kwargs and optional not in _observed_build_parameters "
             "and not _observed_build_accepts_kwargs):\n"
-            "        kwargs = dict(kwargs)\n"
-            "        kwargs.pop('native_context')\n"
+            "            kwargs = dict(kwargs)\n"
+            "            kwargs.pop(optional)\n"
             "    result = _observed_build_sections(*args, **kwargs)\n"
             "    if not hasattr(result, 'required_context_by_unit_id'):\n"
             "        result = SimpleNamespace(sections=result.sections, diagnostics=result.diagnostics, "
@@ -88,16 +109,27 @@ def test_old_sections_cache_misses_then_new_public_parent_and_cache_restore(loop
         kind = "annual_report"
         protected = shared._protected(root, config, llm)
         try:
+            current_sources, legacy_sources = deploy_legacy_reading_sources(root)
             launcher = shared._launcher(root)
             bootstrap = root / "reading-bootstrap/sitecustomize.py"
             with bootstrap.open("a", encoding="utf-8") as stream:
                 stream.write("\nfrom pathlib import Path\n"
-                    "from company_wiki.document_understanding import structure\n"
-                    "from company_wiki.document_understanding.structure import sections\n"
-                    "legacy_path = Path(" + ascii(str(LEGACY)) + ")\n"
-                    "exec(compile(legacy_path.read_bytes(), str(legacy_path), 'exec'), sections.__dict__)\n"
-                    "sections.__file__ = str(legacy_path)\n"
-                    "structure.build_sections = sections.build_sections\n")
+                    "import importlib.util\nimport sys\nimport company_wiki\n"
+                    "deployed = Path(" + ascii(str(legacy_sources)) + ")\n"
+                    "current = Path(" + ascii(str(current_sources)) + ")\n"
+                    "name = 'company_wiki.document_understanding'\n"
+                    "loaded = sys.modules.get(name)\n"
+                    "if loaded is not None and Path(loaded.__file__).resolve() != (deployed / '__init__.py').resolve():\n"
+                    "    raise RuntimeError('legacy fixture must load before the current reading package')\n"
+                    "if loaded is None:\n"
+                    "    spec = importlib.util.spec_from_file_location(name, deployed / '__init__.py',\n"
+                    "        submodule_search_locations=[str(deployed), str(current)])\n"
+                    "    if spec is None or spec.loader is None:\n"
+                    "        raise RuntimeError('legacy fixture package deployment unavailable')\n"
+                    "    package = importlib.util.module_from_spec(spec)\n"
+                    "    sys.modules[name] = package\n"
+                    "    company_wiki.document_understanding = package\n"
+                    "    spec.loader.exec_module(package)\n")
             observe_structure(root)
             old_request = reuse.request_path(root, imported, loopback_model_server.endpoint, "old-a", selector_version="0.9.0")
             process, old_result = reuse.invoke(root, config, old_request, llm, "old-a", launcher=launcher)
