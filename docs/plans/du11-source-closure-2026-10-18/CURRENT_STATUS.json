@@ -2295,7 +2295,7 @@
     "implementation_authorized_by_user": true,
     "observed_date": "2026-10-26"
   },
-  "current_task_override": "Dashboard independently handed off; C3 runtime/cache/push and real legacy deployment all accepted. Normal publish, then generic source semantic selection TDD before paid summary.",
+  "current_task_override": "Dashboard independently handed off. C3 engineering accepted and pushed ad9a9a96, exact CI running; source semantic selection TDD next, no new paid call.",
   "skill_sync_root_cause_20261026": {
     "status": "COMPLETE_INDEPENDENT_PASS_ZERO_OPEN",
     "entry": "review/skill-sync-root-cause-20261026/README.md",
@@ -2315,7 +2315,7 @@
     "independent_review": "review/skill-sync-root-cause-20261026/independent/review.json"
   },
   "pdf_c3_20261026": {
-    "status": "RUNTIME_CACHE_PUSH_ACCEPTED_PUBLISH_PENDING_CONTENT_OPEN",
+    "status": "ENGINEERING_ACCEPTED_PUBLISHED_SOURCE_SEMANTIC_TDD_ACTIVE_CONTENT_OPEN",
     "entry": "review/pdf-c3-20261026/README.md",
     "independent_engineering": "PASS_ZERO_OPEN",
     "focused_tests": 50,
@@ -2341,10 +2341,10 @@
     "source_diagnosis": ".planning/c3-20261026/hk-material-diagnosis-v1.json.gz",
     "root_cause": "Worker IDENTITY: duplicate whole-environment distribution inventory. Declared PDF dependency closure v2 independently accepted and real conversion succeeds; frozen content still missing due to separate source-semantic selection issue.",
     "local_commit": "65f42d418b1328784aecc1a3460aea535eedb3a8",
-    "published": false,
+    "published": true,
     "push_failure": "47 targets /392 collected /600s; two regressions being root-fixed, not waived by narrower daily gate"
   },
-  "next_action": "Normal publish accepted engineering; implement generic operating-resource and plan semantic owner per SELECTION_ROOT_DESIGN, retain planner/caps/gold, source coverage then real summary/cache/FF-RF.",
+  "next_action": "Generic source semantic owner TDD per SELECTION_ROOT_DESIGN; exact CI observation; original gold/caps unchanged. Source coverage before real summary/cache/FF-RF and holdout.",
   "c3_runtime_recovery_20261026": {
     "entry": "review/pdf-c3-20261026/RUNTIME_RECOVERY.md",
     "environment_independent": "PASS_ZERO_OPEN_25_TESTS_AND_REAL_WORKER_ENTRYPOINTS",
@@ -2369,7 +2369,21 @@
     "new_model_calls": 0,
     "new_downloads": 0,
     "production_unchanged": true,
-    "published": false,
-    "selection_design": "review/pdf-c3-20261026/SELECTION_ROOT_DESIGN.md"
+    "published": true,
+    "selection_design": "review/pdf-c3-20261026/SELECTION_ROOT_DESIGN.md",
+    "code_commit": "ad9a9a9664b99e56b03e06f9c2c912df2dc886e9",
+    "exact_ci": [
+      {
+        "id": 40402565591,
+        "name": "CI",
+        "head_sha": "ad9a9a9664b99e56b03e06f9c2c912df2dc886e9",
+        "status": "in_progress",
+        "conclusion": null,
+        "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40402565591",
+        "created_at": "2026-10-26T21:13:46Z",
+        "updated_at": "2026-10-26T21:13:51Z"
+      }
+    ],
+    "publication": "review/pdf-c3-20261026/runtime-publication.json"
   }
 }

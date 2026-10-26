@@ -1,0 +1,35 @@
+{
+  "schema_version": "c3-runtime-publication/1",
+  "code_commit": "ad9a9a9664b99e56b03e06f9c2c912df2dc886e9",
+  "branch": "master",
+  "remote": "origin/master",
+  "pushed": true,
+  "previous_local_commit_now_published": "65f42d418b1328784aecc1a3460aea535eedb3a8",
+  "normal_precommit": "PASS_RUFF_MYPY_HOST_GUARD_NO_BYPASS",
+  "normal_prepush": {
+    "passed": 154,
+    "seconds": 30.11,
+    "scope": "unchanged FAST smoke; wide affected scope explicitly deferred"
+  },
+  "exact_code_ci": [
+    {
+      "id": 40402565591,
+      "name": "CI",
+      "head_sha": "ad9a9a9664b99e56b03e06f9c2c912df2dc886e9",
+      "status": "in_progress",
+      "conclusion": null,
+      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40402565591",
+      "created_at": "2026-10-26T21:13:46Z",
+      "updated_at": "2026-10-26T21:13:51Z"
+    }
+  ],
+  "semantic_summary_acceptance": "OPEN",
+  "mother_tokens": 1783378,
+  "mother_micro_usd": 724836,
+  "new_model_calls": 0,
+  "new_downloads": 0,
+  "preserved_wip": [
+    ".githooks/pre-push mode-only"
+  ],
+  "next": "Generic source semantic owner TDD per SELECTION_ROOT_DESIGN; source-only coverage before real summary/cache/FF-RF"
+}

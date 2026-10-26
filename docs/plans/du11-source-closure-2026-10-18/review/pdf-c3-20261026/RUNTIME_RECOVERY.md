@@ -1,6 +1,6 @@
 # PDF-C3 运行环境、历史恢复与推送反馈根修
 
-状态：三项工程独审 PASS/0 OPEN；历史物理部署测试亦独审通过。正式摘要、RF采用与holdout内容仍 OPEN。
+状态：工程与历史物理部署测试独审 PASS/0 OPEN，已正常推送 master `ad9a9a96`；pre-push154P/30.11秒，精确CI运行中。[发布收据](runtime-publication.json)。正式摘要、RF采用与holdout内容仍 OPEN。
 
 ## 已完成的共因修复
 
