@@ -300,12 +300,46 @@ def test_legitimate_partial_dependencies_do_not_block_final_summary_generation(t
     assert generation.current_reading_decision_matches(final) is False
 
 
-@pytest.mark.parametrize("already_verified,read_only,expected_reads", [(True, False, 0), (False, False, 1), (False, True, 1)])
-def test_reuse_final_receipt_has_one_owner_read_per_operation(monkeypatch, already_verified, read_only, expected_reads):
+@pytest.fixture
+def published_reuse(tmp_path):
+    """Real publication owner; only the original-source read is stubbed below."""
     from company_wiki.automation import narrative_batch as batch
     from company_wiki.automation.narrative_contracts import SourceRevisionEventPayload
+    from company_wiki.source_catalog.narrative_artifact_store import (
+        LocalNarrativeObjectStore, NarrativeArtifactDraft, NarrativeArtifactStore,
+    )
+    from company_wiki.source_catalog.store import CatalogStore
     from unit.test_narrative_batch import _request
+
     selected = _selected().to_dict()["result"]
+    ref = selected["source_ref"]
+    now = "2026-10-14T00:00:00Z"
+    catalog = CatalogStore(tmp_path / "catalog.sqlite3")
+    with catalog.transaction() as connection:
+        connection.execute(
+            "INSERT INTO sources (source_id, content_sha256, byte_size, mime_type, first_seen_at) VALUES (?,?,?,?,?)",
+            (ref["source_id"], ref["content_sha256"], ref["byte_size"], ref["mime_type"], now),
+        )
+        connection.execute(
+            "INSERT INTO documents (document_id, primary_source_id, title, source_type, document_kind, "
+            "source_status, metadata_priority, metadata_json, first_seen_at, last_seen_at) "
+            "VALUES (?,?,?,?,?,?,?,?,?,?)",
+            (ref["document_id"], ref["source_id"], selected["source_metadata"]["title"], "file",
+             selected["source_metadata"]["document_kind"], "active", 10, "{}", now, now),
+        )
+    objects = LocalNarrativeObjectStore(tmp_path / "objects")
+    writer = NarrativeArtifactStore(catalog, objects)
+    bundle = _bundle()
+    draft = NarrativeArtifactDraft(
+        effect_id="fixture-effect", work_key=canonical_json_hash(_base()),
+        document_id=ref["document_id"], source_id=ref["source_id"], source_sha256=ref["content_sha256"],
+        producer_name="company_wiki.narrative_bundle", producer_version=bundle.versions.bundle_producer,
+        policy_sha256=selected["expected_read_policy_sha256"], selection_status=bundle.selection.status,
+        quality_status="verified", metadata_json=_version(_final()).metadata_json, created_at=now,
+    )
+    prepared = writer.prepare(draft, canonical_json(bundle.to_dict()).encode("utf-8"))
+    visible = writer.activate(prepared.effect_id, verified_after_hash=prepared.content_sha256, activated_at=now)
+    artifacts = writer.for_reading(catalog.database_path, objects)
     payload = SourceRevisionEventPayload.from_dict({
         "schema_version": "source-revision-event/2.0", "source_ref": selected["source_ref"],
         "source_metadata": selected["source_metadata"],
@@ -315,16 +349,27 @@ def test_reuse_final_receipt_has_one_owner_read_per_operation(monkeypatch, alrea
     request = _request()
     binding = batch._events_from_sources(request, [payload], ({"document_id": key, "document_kind": "prospectus"},),
                                          now="2026-10-14T00:00:00Z")
-    pin = {"artifact_version_id": "narrative-fixture", "content_sha256": "f" * 64,
-           "byte_size": 1200, "document_id": key, "source_id": payload.source_ref.source_id,
-           "source_sha256": payload.source_ref.content_sha256}
+    pin = generation.artifact_pin(visible)
     binding = replace(binding, generation_manifests={key: _base()}, reused_artifact_pins={key: pin},
-                      verified_reuse_keys=frozenset({key}) if already_verified else frozenset())
+                      verified_reuse_keys=frozenset())
+    try:
+        yield SimpleNamespace(artifacts=artifacts, catalog=catalog, visible=visible, pin=pin,
+                              payload=payload, request=request, binding=binding, key=key)
+    finally:
+        artifacts.close()
+
+
+@pytest.mark.parametrize("already_verified,read_only,expected_reads", [(True, False, 0), (False, False, 1), (False, True, 1)])
+def test_reuse_final_receipt_has_one_owner_read_per_operation(monkeypatch, published_reuse, already_verified, read_only, expected_reads):
+    from company_wiki.automation import narrative_batch as batch
+    request, payload, pin = published_reuse.request, published_reuse.payload, published_reuse.pin
+    binding = replace(published_reuse.binding,
+                      verified_reuse_keys=frozenset({payload.item_key}) if already_verified else frozenset())
     calls = []
     monkeypatch.setattr(batch, "read_reuse_pin", lambda *args, **kwargs: calls.append(args) or True)
     ledger = SimpleNamespace(reservations_for_run=lambda run_id: (), final_generations=lambda run_id: {})
     store = SimpleNamespace(list_jobs=lambda **kwargs: ())
-    output = batch._final_documents(request, binding, store, ledger, object(), read_only=read_only,
+    output = batch._final_documents(request, binding, store, ledger, published_reuse.artifacts, read_only=read_only,
                                     reader=object())
     assert len(calls) == expected_reads
     assert output[0]["status"] == "completed" and output[0]["generation_status"] == "reused"
@@ -334,25 +379,31 @@ def test_reuse_final_receipt_has_one_owner_read_per_operation(monkeypatch, alrea
     assert "verified_reuse_keys" not in durable
 
 
-def test_new_operation_rejects_changed_reused_original_before_new_fee(monkeypatch):
+def test_new_operation_rejects_changed_reused_original_before_new_fee(monkeypatch, published_reuse):
     from company_wiki.automation import narrative_batch as batch
-    from company_wiki.automation.narrative_contracts import SourceRevisionEventPayload
-    from unit.test_narrative_batch import _request
-    selected = _selected().to_dict()["result"]
-    payload = SourceRevisionEventPayload.from_dict({
-        "schema_version": "source-revision-event/2.0", "source_ref": selected["source_ref"],
-        "source_metadata": selected["source_metadata"],
-        "expected_read_policy_sha256": selected["expected_read_policy_sha256"],
-    })
-    request = _request()
-    key = payload.item_key
-    binding = batch._events_from_sources(request, [payload], ({"document_id": key},), now="2026-10-14T00:00:00Z")
-    binding = replace(binding, generation_manifests={key: _base()}, reused_artifact_pins={key: {
-        "artifact_version_id": "pinned", "byte_size": 1200}}, verified_reuse_keys=frozenset())
+    request, binding = published_reuse.request, published_reuse.binding
     calls = []
     monkeypatch.setattr(batch, "read_reuse_pin", lambda *args, **kwargs: calls.append(args) or False)
     ledger = SimpleNamespace(reservations_for_run=lambda run_id: (), final_generations=lambda run_id: {})
     store = SimpleNamespace(list_jobs=lambda **kwargs: ())
     with pytest.raises(batch.BatchResumeError, match="BATCH_REUSE_ARTIFACT_INVALID"):
-        batch._final_documents(request, binding, store, ledger, object(), read_only=True, reader=object())
+        batch._final_documents(request, binding, store, ledger, published_reuse.artifacts, read_only=True, reader=object())
     assert len(calls) == 1
+
+
+def test_same_operation_verified_source_cannot_bypass_publication_proof(monkeypatch, published_reuse):
+    from company_wiki.automation import narrative_batch as batch
+    metadata = json.loads(published_reuse.visible.metadata_json)
+    metadata["generation_sha256"] = "0" * 64
+    with published_reuse.catalog.transaction() as connection:
+        connection.execute("UPDATE narrative_artifact_versions SET metadata_json=? WHERE artifact_version_id=?",
+                           (canonical_json(metadata), published_reuse.pin["artifact_version_id"]))
+    binding = replace(published_reuse.binding, verified_reuse_keys=frozenset({published_reuse.key}))
+    def forbidden(*args, **kwargs):
+        pytest.fail("publication proof must reject corruption before another original-source read")
+    monkeypatch.setattr(batch, "read_reuse_pin", forbidden)
+    ledger = SimpleNamespace(reservations_for_run=lambda run_id: (), final_generations=lambda run_id: {})
+    store = SimpleNamespace(list_jobs=lambda **kwargs: ())
+    with pytest.raises(batch.BatchResumeError, match="BATCH_FROZEN_BINDING_INVALID"):
+        batch._final_documents(published_reuse.request, binding, store, ledger,
+                               published_reuse.artifacts, read_only=True, reader=object())

@@ -2295,7 +2295,7 @@
     "implementation_authorized_by_user": true,
     "observed_date": "2026-10-26"
   },
-  "current_task_override": "Dashboard independently handed off. C3 engineering accepted and pushed ad9a9a96, exact CI running; source semantic selection TDD next, no new paid call.",
+  "current_task_override": "C3 CI fixture repair ROOT48 passed pending publication; semantic candidate independent review requests3 root fixes; no paid calls. Dashboard separate.",
   "skill_sync_root_cause_20261026": {
     "status": "COMPLETE_INDEPENDENT_PASS_ZERO_OPEN",
     "entry": "review/skill-sync-root-cause-20261026/README.md",
@@ -2315,7 +2315,7 @@
     "independent_review": "review/skill-sync-root-cause-20261026/independent/review.json"
   },
   "pdf_c3_20261026": {
-    "status": "ENGINEERING_ACCEPTED_PUBLISHED_SOURCE_SEMANTIC_TDD_ACTIVE_CONTENT_OPEN",
+    "status": "CI_FOLLOWUP_READY_SEMANTIC_REVIEW_CHANGES_REQUESTED_CONTENT_OPEN",
     "entry": "review/pdf-c3-20261026/README.md",
     "independent_engineering": "PASS_ZERO_OPEN",
     "focused_tests": 50,
@@ -2327,7 +2327,7 @@
     "new_model_calls": 0,
     "next_formal_sample": "c3-hk-kingsoft-h1-2025",
     "next_model": "configured mimo-v2.6-flash",
-    "native_goal_status": "active"
+    "native_goal_status": "paused_observed_user_continuation_authorized"
   },
   "c3_actual_attempt_20261026": {
     "run_id": "phaseC-090-777179bc3756",
@@ -2344,7 +2344,7 @@
     "published": true,
     "push_failure": "47 targets /392 collected /600s; two regressions being root-fixed, not waived by narrower daily gate"
   },
-  "next_action": "Generic source semantic owner TDD per SELECTION_ROOT_DESIGN; exact CI observation; original gold/caps unchanged. Source coverage before real summary/cache/FF-RF and holdout.",
+  "next_action": "Publish accepted CI repair, then shared predicate/resource root fixes and independent review, then source gold before formal summary/cache/FF-RF/holdouts.",
   "c3_runtime_recovery_20261026": {
     "entry": "review/pdf-c3-20261026/RUNTIME_RECOVERY.md",
     "environment_independent": "PASS_ZERO_OPEN_25_TESTS_AND_REAL_WORKER_ENTRYPOINTS",
@@ -2375,15 +2375,23 @@
     "exact_ci": [
       {
         "id": 40402565591,
-        "name": "CI",
         "head_sha": "ad9a9a9664b99e56b03e06f9c2c912df2dc886e9",
-        "status": "in_progress",
-        "conclusion": null,
+        "status": "completed",
+        "conclusion": "failure",
         "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40402565591",
-        "created_at": "2026-10-26T21:13:46Z",
-        "updated_at": "2026-10-26T21:13:51Z"
+        "updated_at": "2026-10-26T21:18:54Z"
       }
     ],
     "publication": "review/pdf-c3-20261026/runtime-publication.json"
+  },
+  "c3_ci_followup_20261026": {
+    "entry": "review/pdf-c3-20261026/ci-followup.json",
+    "root_tests": 48,
+    "status": "READY_TO_PUBLISH",
+    "semantic_open": [
+      "SEM-IR-01",
+      "SEM-IR-02",
+      "SEM-IR-03"
+    ]
   }
 }

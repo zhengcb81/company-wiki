@@ -105,6 +105,9 @@ FAST_CONTRACT_CASES = (
     "tests/contract/test_fc905_receipt_envelope.py::test_pi03_no_review_is_explicit_not_reviewed",
     "tests/unit/test_narrative_retrieval.py::test_resolver_fails_closed_when_raw_source_hash_changes",
     "tests/contract/test_b10_read_chain.py::test_b10_scan_is_not_vacuous",
+    # Reused receipts retain one source-owner read for each operation.
+    "tests/unit/test_shared_reading_cache_precheck.py::test_reuse_final_receipt_has_one_owner_read_per_operation",
+    "tests/unit/test_shared_reading_cache_precheck.py::test_new_operation_rejects_changed_reused_original_before_new_fee",
 )
 
 

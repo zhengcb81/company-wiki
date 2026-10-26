@@ -1,0 +1,99 @@
+{
+  "schema_version": "c3-ci-followup/1",
+  "failed_ci": {
+    "id": 40402565591,
+    "head_sha": "ad9a9a9664b99e56b03e06f9c2c912df2dc886e9",
+    "status": "completed",
+    "conclusion": "failure",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40402565591",
+    "updated_at": "2026-10-26T21:18:54Z"
+  },
+  "root_cause": "Old cache tests passed object() and incomplete pins, incompatible with real publication proof. Product verification retained.",
+  "fix": "Isolated real CatalogStore/ArtifactStore publication fixture; original26 assertions unchanged; new corrupt-publication negative.",
+  "feedback": "FAST original29 unchanged plus2 exact nodes/4 cases; daily180 seconds unchanged. skipped JUnit never parsed; real failures still annotated.",
+  "root_validation": {
+    "passed": 48,
+    "seconds": 7.13,
+    "test_files": 3,
+    "tmp_restored": true
+  },
+  "semantic_status": "CHANGES_REQUESTED_3_FINDINGS_10_RED_3_CONTROLS_PASS",
+  "real_native_source": {
+    "seconds": 11.263,
+    "selected_spans": 112,
+    "work": 4649337,
+    "work_limit": 16000000,
+    "resource_gold": "supported",
+    "outlook_gold": "supported",
+    "industry_cloud_gold": "not_supported_native_only",
+    "scope": "source_selection_not_summary"
+  },
+  "code_publication": "PENDING_NORMAL_HOOKS",
+  "exact_new_ci": "NOT_STARTED",
+  "new_model_calls": 0,
+  "downloads": 0,
+  "mother_tokens": 1783378,
+  "mother_micro_usd": 724836,
+  "evidence": [
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/ci-followup/failed-code-ci.json",
+      "bytes": 266,
+      "sha256": "6d45d07907c091c12ee38a4194f47dadc00f564fa0576de063f13741f39d8838"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/ci-followup/annotations.json",
+      "bytes": 3834,
+      "sha256": "c0c222ca38afd120d31c1e2dfa4d5ba8ebe7b493c6c3c3a21d973e395d2c599e"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/ci-followup/cache-fixture-handoff.json",
+      "bytes": 2295,
+      "sha256": "8d67fb71d81cce8261552cc688e906f5097ae494ac297c6179ff3af3ea5de8b3"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/ci-followup/cache-fixture-handoff.md",
+      "bytes": 4637,
+      "sha256": "f0f3849d686a3cae94ba42b43862ebf82aff8e418481ef27b0bbbd8f556f4c62"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/ci-followup/feedback-handoff.json",
+      "bytes": 3836,
+      "sha256": "f7f31dd28ec3278da1400101054e1a9ad90711c3dec664edf5dcb27a4e646138"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/ci-followup/feedback-handoff.md",
+      "bytes": 2146,
+      "sha256": "6bd5a4d511039eb9511659792bebdd7f2577e7f0e268a2bada1511aecbf7b578"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/ci-followup/root-48-tests.log",
+      "bytes": 832,
+      "sha256": "063ae66dd8f8420829e7a5bd48993477a0ed47941ad662c29af586da7f993814"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/ci-followup/root-48-tests.xml",
+      "bytes": 8063,
+      "sha256": "7c40f54c7b30e08f52552ecc46cc6c8b957ae8966f3ba32700d6550f9b2e934e"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/ci-followup/semantic-initial-review.json",
+      "bytes": 3961,
+      "sha256": "aba8b62db2357523717263574c53c1f1a1e0f692ff6a6c092d6ba84fccaa7d5d"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/ci-followup/semantic-initial-review.md",
+      "bytes": 8617,
+      "sha256": "e73aa6d34f0825b636e4c2ad7553db469df9a1a5ac08922f5100538944a72b8d"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/ci-followup/semantic-scan-counts.json",
+      "bytes": 624,
+      "sha256": "e87ee214c503f26c1dddc9851554dc29fa92feea886c10f9417ba851780215d5"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/ci-followup/semantic-review-probes.py",
+      "bytes": 2687,
+      "sha256": "9aa017aa37388689994e787e5f9e24fb7ca9f36bef70d511a5d61fdbaba714b9"
+    }
+  ]
+}

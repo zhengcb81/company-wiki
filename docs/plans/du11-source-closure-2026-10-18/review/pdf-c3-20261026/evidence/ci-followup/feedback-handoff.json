@@ -1,0 +1,93 @@
+{
+  "status": "READY_FOR_ROOT_CACHE_FOUR_CASE_VALIDATION",
+  "implemented": [
+    "Append only two exact cache reuse nodes to FAST: three parametrized cases plus one changed-original rejection case. Original29 targets and CURRENT_CI inventory AST retained, daily180s unchanged; no full-file expansion.",
+    "Skip JUnit parsing entirely for explicit TEST_SUITE_OUTCOME=skipped; ordinary not-run/skipped diagnostic plus step summary, no error annotation and no stale report access.",
+    "Real failure missing JUnit or no failure detail continues emitting ::error; existing privacy/annotation caps preserved."
+  ],
+  "authorized_files": [
+    "tools/pre_push_gate.py",
+    "tools/summarize_junit_failures.py",
+    "tests/unit/test_pre_push_gate.py",
+    "tests/unit/test_summarize_junit_failures.py"
+  ],
+  "bindings": {
+    "tools/pre_push_gate.py": {
+      "raw_sha256": "6a08edcb27127c81b4e10bddc570ef702e9cf244a0a045e4b5bcc6f7aa4754d2",
+      "lf_sha256": "d3966f0a9df14de80715acbbc13a9e7e98dbea74c08f10c649ca357a74635041"
+    },
+    "tools/summarize_junit_failures.py": {
+      "raw_sha256": "e5a54a007ebfa6fb055ee2b2f86edab43736f6be50a40014a02b37df4ae80c22",
+      "lf_sha256": "e5a54a007ebfa6fb055ee2b2f86edab43736f6be50a40014a02b37df4ae80c22"
+    },
+    "tests/unit/test_pre_push_gate.py": {
+      "raw_sha256": "2fab9e9eed568952463718541ca2ab0eeeb6536d0a24bf940be67a8bc05e72fd",
+      "lf_sha256": "2fab9e9eed568952463718541ca2ab0eeeb6536d0a24bf940be67a8bc05e72fd"
+    },
+    "tests/unit/test_summarize_junit_failures.py": {
+      "raw_sha256": "5dfc3a3f685d8438765f988a4edeeb0ebf60b3e2cc967fa5b71190d05afda224",
+      "lf_sha256": "5dfc3a3f685d8438765f988a4edeeb0ebf60b3e2cc967fa5b71190d05afda224"
+    }
+  },
+  "tdd": {
+    "red": {
+      "tests": 5,
+      "failed": 3,
+      "passed": 2,
+      "pytest_seconds": 2.21,
+      "outer_seconds": 7.105,
+      "receipt": "red.json/log/xml",
+      "failures": "two skipped parse guards plus missing FAST node inventory"
+    },
+    "green": {
+      "tests": 19,
+      "failed": 0,
+      "passed": 19,
+      "pytest_seconds": 2.19,
+      "outer_seconds": 8.662,
+      "receipt": "green.json/log/xml",
+      "runtime": "C:\\Miniconda\\python.exe"
+    },
+    "stable_source_bindings_per_run": true
+  },
+  "static": {
+    "original29fast_prefix_ast_unchanged": true,
+    "current_ci_inventory_ast_unchanged": true,
+    "daily_deadline_ast_unchanged": true,
+    "added_node_literals": [
+      "tests/unit/test_shared_reading_cache_precheck.py::test_reuse_final_receipt_has_one_owner_read_per_operation",
+      "tests/unit/test_shared_reading_cache_precheck.py::test_new_operation_rejects_changed_reused_original_before_new_fee"
+    ],
+    "no_whole_file_expansion": true
+  },
+  "checks": [
+    "Ruff all4 PASS",
+    "git diff --check all4 PASS (CRLF normalization warnings only)"
+  ],
+  "pending_owner_validation": "ROOT/cache owner will run actual two added cache node IDs after fixing their4 AttributeErrors. This author ran only summarizer and gate-policy units; no claim actual cache4 or fullFAST/CI passed.",
+  "cleanup": {
+    "red_pid": 10920,
+    "red_pid_alive_after": false,
+    "green_pid": 20940,
+    "green_pid_alive_after": false,
+    "owned_roots_absent": [
+      ".c3cif-red",
+      ".c3cif-green"
+    ],
+    "native_powershell_verified_absolute_cleanup": true
+  },
+  "unchanged_scope": [
+    "CIworkflow",
+    "production source and budgets",
+    "hook/mode WIP",
+    "original29 FAST targets",
+    "process tree owner and tests",
+    "original cache test assertions"
+  ],
+  "not_done": [
+    "no project commit/push",
+    "no external HTTP/download/paid/model call",
+    "no full pytest/FAST/16second process-tree proof rerun",
+    "no source_catalog configuration write"
+  ]
+}

@@ -1,0 +1,58 @@
+{
+  "schema_version": "scoped-test-fix-handoff/1",
+  "author": "/root/c3_cache_independent_review",
+  "independently_reviewed": false,
+  "status": "IMPLEMENTED_LOCAL_GREEN_AWAITING_ROOT_REVIEW",
+  "ci_run": "40402565591",
+  "scope": [
+    "tests/unit/test_shared_reading_cache_precheck.py"
+  ],
+  "source_raw_sha256": "0517a05bf03935e520cef380b4e81c94b883654915d9ec86b9497e2ce570802d",
+  "source_lf_sha256": "0517a05bf03935e520cef380b4e81c94b883654915d9ec86b9497e2ce570802d",
+  "root_cause": "Old tests passed object() instead of publication reader and one incomplete pin; newly exercised real owner contract read_exact was absent. Product verification is correct.",
+  "fix": "Real CatalogStore + prepare/activate publication + read-only NarrativeArtifactReader fixture shared by affected tests. Full pin and real publication bytes/metadata. No stub of publication proof.",
+  "red": {
+    "passed": 24,
+    "failed": 4,
+    "seconds": 10.57,
+    "log": "red.log",
+    "junit": "red.xml"
+  },
+  "green": {
+    "passed": 59,
+    "failed": 0,
+    "seconds": 7.71,
+    "exit_code": 0,
+    "scope_counts": {
+      "cache_precheck": 29,
+      "batch_recovery": 30
+    },
+    "log": "green.log",
+    "junit": "green.xml"
+  },
+  "existing_assertions": {
+    "functions": 15,
+    "assertions": 26,
+    "unchanged": true
+  },
+  "new_regression": "Same-operation verified source cannot bypass corrupt persisted publication generation hash",
+  "ruff": "PASS",
+  "cleanup": {
+    "path": "C:\\Temp\\c3precheck-20261026",
+    "absolute_boundary_verified": true,
+    "absent_after": true,
+    "owned_python_pids": [],
+    "real_model_calls": 0,
+    "downloads": 0,
+    "production_writes": 0,
+    "code_write_scope": [
+      "tests/unit/test_shared_reading_cache_precheck.py"
+    ]
+  },
+  "unchanged_product_lf_sha256": {
+    "src/company_wiki/automation/narrative_batch.py": "770d482454bce479c1b737272e5d115b0608f2d5b43de5b8acd654c87f2c1a39",
+    "src/company_wiki/automation/narrative_generation.py": "64e9ddd7c63f5fa6b92abd3f15d8e2a8d430880fbdb70481604d763586edf1ff"
+  },
+  "commit_push_performed": false,
+  "next": "ROOT review, commit/push, inspect exact resulting remote CI; include this existing consumer file in focused cache-change checks."
+}

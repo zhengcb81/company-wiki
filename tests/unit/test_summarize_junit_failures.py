@@ -5,6 +5,8 @@ from __future__ import annotations
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
+import pytest
+
 from tools.summarize_junit_failures import main
 
 
@@ -144,3 +146,41 @@ def test_collection_traceback_exposes_exception_class_without_private_body(tmp_p
     output = capsys.readouterr().out
     assert "[ModuleNotFoundError]" in output
     assert "private" not in output and "No module named" not in output
+
+
+@pytest.mark.parametrize("stale_report", [False, True], ids=["missing-report", "stale-failure"])
+def test_skipped_suite_does_not_read_a_report_or_emit_failure_annotations(
+    tmp_path, capsys, monkeypatch, stale_report
+):
+    report = tmp_path / "previous-or-missing.xml"
+    if stale_report:
+        _write_report(report)
+    summary = tmp_path / "step-summary.md"
+    monkeypatch.setenv("TEST_SUITE_OUTCOME", "skipped")
+    monkeypatch.setenv("TEST_SUITE_NAME", "contract tests")
+    monkeypatch.setenv("GITHUB_STEP_SUMMARY", str(summary))
+
+    def report_read_forbidden(*_args, **_kwargs):
+        raise AssertionError("a skipped suite must not read current or stale JUnit")
+
+    monkeypatch.setattr(ET, "parse", report_read_forbidden)
+    assert main(str(report)) == 0
+    output = capsys.readouterr().out
+    assert "contract tests" in output and "not run" in output and "skipped" in output
+    assert "::error" not in output
+    content = summary.read_text(encoding="utf-8")
+    assert "not run" in content and "skipped" in content
+    assert "test_case_0" not in content and "Failed" not in content
+
+
+@pytest.mark.parametrize("missing_report", [False, True], ids=["no-failure-detail", "no-report"])
+def test_actual_failure_without_junit_detail_still_emits_error(
+    tmp_path, capsys, monkeypatch, missing_report
+):
+    report = tmp_path / "failed.xml"
+    if not missing_report:
+        report.write_text('<testsuite tests="0" failures="0" errors="0"/>', encoding="utf-8")
+    monkeypatch.setenv("TEST_SUITE_OUTCOME", "failure")
+    assert main(str(report)) == 0
+    output = capsys.readouterr().out
+    assert "::error::" in output and "not run" not in output

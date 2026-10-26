@@ -81,6 +81,11 @@ def _append_step_summary(lines: list[str]) -> None:
 
 def main(report_path: str) -> int:
     suite_name = os.environ.get("TEST_SUITE_NAME", "tests")
+    if os.environ.get("TEST_SUITE_OUTCOME") == "skipped":
+        message = f"Tests not run (skipped): {suite_name}; JUnit report not inspected"
+        print(_escape_command_data(message))
+        _append_step_summary([f"## {suite_name} not run", "", message])
+        return 0
     failures = _failed_cases(Path(report_path))
     if failures is None:
         message = "JUnit report unavailable or invalid; inspect the authenticated job log"

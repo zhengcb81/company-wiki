@@ -1,5 +1,7 @@
 # PDF-C3 运行环境、历史恢复与推送反馈根修
 
+最新：旧精确CI40402565591失败4项旧cache夹具，修复ROOT48P；语义候选独审3项OPEN。见[CI与语义当前收据](ci-followup.json)。以下原运行中状态为发布当时快照；不代签新CI或内容。
+
 状态：工程与历史物理部署测试独审 PASS/0 OPEN，已正常推送 master `ad9a9a96`；pre-push154P/30.11秒，精确CI运行中。[发布收据](runtime-publication.json)。正式摘要、RF采用与holdout内容仍 OPEN。
 
 ## 已完成的共因修复

@@ -30,10 +30,15 @@ def main():
     parser.add_argument("--metadata", type=Path, required=True)
     parser.add_argument("--sample", required=True)
     parser.add_argument("--output", type=Path, required=True)
+    parser.add_argument("--gold", type=Path,
+        help="Optional frozen source checkpoints; scores source selection, not model output")
     args = parser.parse_args()
     if args.output.exists():
         raise FileExistsError(args.output)
     ref = SourceRef(**json.loads(args.source_ref.read_text(encoding="utf-8")))
+    gold = None if args.gold is None else json.loads(args.gold.read_text(encoding="utf-8"))
+    if gold is not None and gold.get("source_sha256") != ref.content_sha256:
+        raise ValueError("gold source differs from the requested immutable source")
     metadata = json.loads(args.metadata.read_text(encoding="utf-8"))
     sample = next(s for s in metadata["samples"] if s["sample_id"] == args.sample)
     descriptor = sample["source_metadata_observation"]
@@ -66,10 +71,33 @@ def main():
             "elapsed_seconds": round(time.monotonic() - started, 3)}
         assert all(hashlib.sha256(p.read_bytes()).hexdigest() == fingerprints[str(p)] for p in protected)
         result["production_config_catalog_unchanged"] = True
+        if gold is not None:
+            from tools.document_understanding_benchmark.closed_group_support import score_facts
+            from tools.document_understanding_benchmark.phase_c_observer import _oracle_reading_context
+
+            # Caller is the actual typed selector plus the source-owned replay
+            # above. Never score unvalidated third-party group declarations.
+            required = [fact for fact in gold["facts"]
+                        if fact.get("target_kind") == "required_business"]
+            facts = score_facts(required, evidence_spans=selected.evidence_spans,
+                reading_context=_oracle_reading_context(selected.reading_context),
+                source_id=ref.source_id)
+            result["gold_observation"] = {
+                "gold_sha256": hashlib.sha256(args.gold.read_bytes()).hexdigest(),
+                "facts": facts, "required_count": len(facts),
+                "supported_count": sum(fact["supported"] for fact in facts),
+                "missing_ids": [fact["id"] for fact in facts if not fact["supported"]],
+                "scope": "source_selection_only_not_model_request_or_summary_acceptance",
+            }
         args.output.parent.mkdir(parents=True, exist_ok=True)
         with args.output.open("xb") as stream:
             stream.write(gzip.compress(json.dumps(result, ensure_ascii=False).encode("utf-8"), mtime=0))
-        print(json.dumps({k: v for k, v in result.items() if k not in {"selected_spans", "reading_context", "reader_recipe"}}, ensure_ascii=True))
+        print(json.dumps({"output": str(args.output), "sample": args.sample,
+            "parsed_units": len(parsed.units), "selected_spans": len(selected.evidence_spans),
+            "work_used": budget.used, "work_limit": budget.max_work_units,
+            "elapsed_seconds": result["elapsed_seconds"], "model_calls": 0,
+            "production_config_catalog_unchanged": True,
+            "gold_observation": result.get("gold_observation")}, ensure_ascii=True))
     finally:
         catalog.close()
 

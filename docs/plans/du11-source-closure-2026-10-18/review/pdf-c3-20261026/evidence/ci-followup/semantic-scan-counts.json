@@ -1,0 +1,32 @@
+[
+  {
+    "assertions": 16,
+    "chars": 638,
+    "calls": 32,
+    "predicate_input_chars": 20416,
+    "declared_resource_work": 11484,
+    "reasons": [
+      "operating_resource_stock"
+    ]
+  },
+  {
+    "assertions": 32,
+    "chars": 1278,
+    "calls": 64,
+    "predicate_input_chars": 81792,
+    "declared_resource_work": 23004,
+    "reasons": [
+      "operating_resource_stock"
+    ]
+  },
+  {
+    "assertions": 64,
+    "chars": 2558,
+    "calls": 128,
+    "predicate_input_chars": 327424,
+    "declared_resource_work": 46044,
+    "reasons": [
+      "operating_resource_stock"
+    ]
+  }
+]

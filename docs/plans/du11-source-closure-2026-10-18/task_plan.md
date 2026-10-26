@@ -1,5 +1,16 @@
 # 当前行动计划（2026-10-25更新）
 
+## 2026-10-26 C3最新：CI测试夹具已修，语义独审三项待闭合
+
+`ad9a9a96` 的精确 CI40402565591 已失败，不能继续标运行中或全绿。四个失败都来自旧cache测试使用 `object()`/残缺pin，缺少新owner真实publication读取接口；已用隔离CatalogStore→ArtifactStore→只读Reader建立真实夹具，原26条assert保留，增加损坏publication反例。ROOT独立定向48P/7.13秒，测试目录恢复；没有放松产品校验。推送FAST仅补两个节点共四例，原29目标及180秒上限不变；skipped步骤不再解析旧/缺JUnit伪报错，真实failure继续报告。发布收据见[CI根修](review/pdf-c3-20261026/ci-followup.json)，新精确CI尚待正常发布后观察，旧失败不改绿。
+
+语义候选真实HK native-only读取11.263秒/112切片/4,649,337 work，同16M额度下研发与展望gold已支持；行业云同组证据仍需C2增强，未声称3/3或正式摘要通过。独审发现三项P2：否定计划被当肯定计划、will/将人数目标漏识别、每个分句反复扫描全句导致平方增长；中性10RED/3控制通过。共同谓词owner和资源关系需要根修，候选不并线、不跑新付费摘要。[独审](review/pdf-c3-20261026/evidence/ci-followup/semantic-initial-review.md)。
+
+**唯一下一步：** 正常发布CI修复→共享谓词上下文与资源语义TDD根修/独审→冻结gold同限额真实增强→配置内正式摘要/恢复/FF-RF→新holdout及八步公司循环。Dashboard由独立harness负责。累计仍1,783,378 tokens/$0.724836，配置10M/$20含unknown，0新模型/下载/原件副本。
+
+原生控制器本轮回读为paused；用户“继续之前工作”已明确恢复本轮实施。工具不提供resume操作，不将历史文档active冒充当前控制器状态；不新建重复目标。下方历史状态由本段与CURRENT_STATUS.json取代。
+
+
 ## 2026-10-26 C3实测更新：基础根修已验收，业务选材共因待修
 
 HK正式attempt `phaseC-090-777179bc3756` 已终止：`PHASE_C_GOLD_SUPPORT_MISSING`，0 POST、0新费用/unknown，临时湖已清理。环境v2根修已独审PASS：按实际PDF依赖闭包绑定104项，不再把重复PYTHONPATH发行元数据计成环境变化，旧v1配置和算法可重放。一次真实整份HK读取已成功增强12/13/17页，117.40秒/3页/单converter，内存峰值约3.13GiB，未提高120秒/4GiB上限；这是引擎执行通过，不代表摘要内容通过。
@@ -90,7 +101,7 @@ W18/W19作者工区、RF运行WIP、Dayu/IQS未写。以下旧“当前/下一�
 
 ## Next Step
 
-下一步从canonical仓库入口做PDF-C3正式摘要语义→cache跨进程恢复→RF实际采用→新holdout/公司循环。ROOT工区已清理；已发布W19/PDF-C2不重跑。全局技能目录EACCES单列环境收尾，不新增授权门。
+正常发布CI夹具/反馈修复，随后修复共享谓词三项独审问题并复核；通过后按原gold/额度做一次真实增强，再正式摘要/cache/RF。唯一入口CURRENT_STATUS.md/json。
 
 ## 历史记录（保留原过程，不作为当前待办）
 

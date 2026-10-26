@@ -4,6 +4,18 @@ import sys
 from tools import pre_push_gate as gate
 
 
+def test_fast_inventory_keeps_the_four_reuse_receipt_regressions_without_a_whole_file():
+    path = "tests/unit/test_shared_reading_cache_precheck.py"
+    required = (
+        path + "::test_reuse_final_receipt_has_one_owner_read_per_operation",
+        path + "::test_new_operation_rejects_changed_reused_original_before_new_fee",
+    )
+    assert len(gate.FAST_CONTRACT_CASES) == 31  # original 29 targets plus two nodes / four cases
+    assert path not in gate.FAST_CONTRACT_CASES
+    assert all(gate.FAST_CONTRACT_CASES.count(node) == 1 for node in required)
+    assert gate.DAILY_PUSH_TIMEOUT_SECONDS == 180
+
+
 def test_mixed_selection_defers_nonunit_files_but_keeps_affected_units():
     selected = ["tests/unit/test_reader.py", "tests/integration/test_slow.py",
                 "tests/test_phase_c_sample_metadata.py"]

@@ -1,0 +1,114 @@
+{
+  "schema_version": "independent-review/1",
+  "reviewer": "/root/c3_cache_independent_review",
+  "author": false,
+  "status": "CHANGES_REQUESTED",
+  "reviewed_files": {
+    "src/company_wiki/source_catalog/narrative_operating_resources.py": {
+      "bytes": 7898,
+      "sha256": "33794202dff05867e2a81cbd97f2011061e6977a521bf9f235846c51d51cd6e9",
+      "lf_sha256": "33794202dff05867e2a81cbd97f2011061e6977a521bf9f235846c51d51cd6e9"
+    },
+    "src/company_wiki/source_catalog/narrative_business_policy.py": {
+      "bytes": 51204,
+      "sha256": "1e73e3ba4b2193e4a0d6ca0bfc18b253bea5a471233f9940f69a363a71a2d0f4",
+      "lf_sha256": "6b77dc6193e2084674d6bda44599729bb48c5cbc446e8b54f03bfd1a967e122a"
+    },
+    "src/company_wiki/document_understanding/decision_inventory.py": {
+      "bytes": 28180,
+      "sha256": "842a7d0cd022e0025da94a18d3d646667286bde2843ca5e116a94ff74332d9f3",
+      "lf_sha256": "1dead1dc88e686156289739264ae66e3ef72e66004b871985c9579e489c9c849"
+    },
+    "tests/unit/document_understanding_selection/test_reading_operating_resources.py": {
+      "bytes": 10905,
+      "sha256": "41cfa30ad1439f45eee20149fc5a0da2db0df703db0093c2e48e3635a4470c98",
+      "lf_sha256": "41cfa30ad1439f45eee20149fc5a0da2db0df703db0093c2e48e3635a4470c98"
+    }
+  },
+  "matches_author_handoff": true,
+  "open": [
+    {
+      "id": "SEM-IR-01",
+      "priority": "P2",
+      "title": "Negated resource plans become positive operating plans",
+      "location": "narrative_operating_resources.py:131 / shared predicate _MODAL",
+      "reproduced_cases": 5,
+      "owner_fix": "Shared predicate governing-negation grammar; no resource-local duplicate blacklist"
+    },
+    {
+      "id": "SEM-IR-02",
+      "priority": "P2",
+      "title": "Explicit will/将 workforce targets fail resource binding",
+      "location": "narrative_operating_resources.py:33",
+      "reproduced_cases": 4,
+      "owner_fix": "Bounded resource metric/predicate/quantity relation; shared predicate owner decides future/actual/negative state"
+    },
+    {
+      "id": "SEM-IR-03",
+      "priority": "P2",
+      "title": "Per-assertion full-sentence predicate scans are quadratic under fixed work charge",
+      "location": "narrative_operating_resources.py:111,126,131",
+      "reproduced_cases": 1,
+      "owner_fix": "One prepared predicate context with reusable assertion spans; preserve condition/actor scope, do not increase magic scan constant"
+    }
+  ],
+  "independent_tests": {
+    "failed": 10,
+    "passed": 3,
+    "seconds": 1.54,
+    "exit_code": 1,
+    "log": "review-red.log",
+    "junit": "review-red.xml",
+    "tests": "test_review_probes.py",
+    "repair_implemented": false
+  },
+  "scan_counts": [
+    {
+      "assertions": 16,
+      "chars": 638,
+      "calls": 32,
+      "predicate_input_chars": 20416,
+      "declared_resource_work": 11484,
+      "reasons": [
+        "operating_resource_stock"
+      ]
+    },
+    {
+      "assertions": 32,
+      "chars": 1278,
+      "calls": 64,
+      "predicate_input_chars": 81792,
+      "declared_resource_work": 23004,
+      "reasons": [
+        "operating_resource_stock"
+      ]
+    },
+    {
+      "assertions": 64,
+      "chars": 2558,
+      "calls": 128,
+      "predicate_input_chars": 327424,
+      "declared_resource_work": 46044,
+      "reasons": [
+        "operating_resource_stock"
+      ]
+    }
+  ],
+  "author_green_evidence_inspected": {
+    "focused_passed": 498,
+    "final_new_cases": 58,
+    "rerun_by_reviewer": false
+  },
+  "cleanup": {
+    "path": "C:/Temp/c3semantic-review-20261026",
+    "absent_after": true,
+    "owned_python_pids": []
+  },
+  "product_edits": 0,
+  "existing_test_edits": 0,
+  "models": 0,
+  "downloads": 0,
+  "docling": 0,
+  "holdout_touched": false,
+  "next": "Original author shared predicate/resource root fix, focused tests, then independent SHA-bound recheck."
+}
