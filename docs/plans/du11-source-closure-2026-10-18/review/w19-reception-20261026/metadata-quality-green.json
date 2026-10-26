@@ -1,0 +1,24 @@
+{
+  "command": [
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/financial_statements/test_layer_ports.py",
+    "-k",
+    "legacy_capture or missing_identity",
+    "--no-cov",
+    "--basetemp",
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\cw-x9ymxmdw\\p"
+  ],
+  "cwd": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\cw-w19",
+  "exit_code": 0,
+  "seconds": 6.789,
+  "temporary_root_restored_absent": true,
+  "new_paid_calls": 0,
+  "new_downloads": 0
+}

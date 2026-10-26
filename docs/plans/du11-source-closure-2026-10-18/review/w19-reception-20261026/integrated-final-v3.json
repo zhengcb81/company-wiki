@@ -1,0 +1,26 @@
+{
+  "command": [
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/financial_statements",
+    "tests/contract/test_source_catalog_canonical_writer.py",
+    "tests/unit/test_source_reading_layers.py",
+    "tests/unit/test_pdf_reading_boundary.py",
+    "tests/unit/test_pdf_paragraph_reading_integration.py",
+    "--no-cov",
+    "--basetemp",
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\cw-k68i9nyl\\p"
+  ],
+  "cwd": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\cw-w19",
+  "exit_code": 0,
+  "seconds": 118.828,
+  "temporary_root_restored_absent": true,
+  "new_paid_calls": 0,
+  "new_downloads": 0
+}

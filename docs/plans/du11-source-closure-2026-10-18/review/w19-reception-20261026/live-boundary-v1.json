@@ -1,0 +1,108 @@
+{
+  "schema_version": "w19-live-ff-cwp-sina/1",
+  "passed": true,
+  "companies": [
+    {
+      "code": "688012",
+      "status": "complete",
+      "usage": {
+        "http_requests": 3,
+        "response_bytes": 712325,
+        "cost_usd": "0.00"
+      },
+      "statements": [
+        {
+          "statement_type": "income_statement",
+          "source_ref": {
+            "document_id": "urn:company-wiki:document:sha256:000d501797020b108093139968ebfdb347bce874faf0bf5472880040b3ff3bc5",
+            "source_id": "urn:company-wiki:source:sha256:000d501797020b108093139968ebfdb347bce874faf0bf5472880040b3ff3bc5",
+            "content_sha256": "000d501797020b108093139968ebfdb347bce874faf0bf5472880040b3ff3bc5",
+            "byte_size": 196200,
+            "mime_type": "application/json",
+            "schema_version": "2.0"
+          },
+          "rows": 77,
+          "currency": "CNY",
+          "consolidation": "consolidated"
+        },
+        {
+          "statement_type": "balance_sheet",
+          "source_ref": {
+            "document_id": "urn:company-wiki:document:sha256:52f1ce9ca19579972ca192b479d617ca4b1b52eeef962b1561f595345d53b602",
+            "source_id": "urn:company-wiki:source:sha256:52f1ce9ca19579972ca192b479d617ca4b1b52eeef962b1561f595345d53b602",
+            "content_sha256": "52f1ce9ca19579972ca192b479d617ca4b1b52eeef962b1561f595345d53b602",
+            "byte_size": 335331,
+            "mime_type": "application/json",
+            "schema_version": "2.0"
+          },
+          "rows": 141,
+          "currency": "CNY",
+          "consolidation": "consolidated"
+        },
+        {
+          "statement_type": "cash_flow",
+          "source_ref": {
+            "document_id": "urn:company-wiki:document:sha256:8a1b8a74545acbbbe527b6cddfba981ad1d47a3d311a993843c4e47c8020340e",
+            "source_id": "urn:company-wiki:source:sha256:8a1b8a74545acbbbe527b6cddfba981ad1d47a3d311a993843c4e47c8020340e",
+            "content_sha256": "8a1b8a74545acbbbe527b6cddfba981ad1d47a3d311a993843c4e47c8020340e",
+            "byte_size": 180794,
+            "mime_type": "application/json",
+            "schema_version": "2.0"
+          },
+          "rows": 64,
+          "currency": "CNY",
+          "consolidation": "consolidated"
+        }
+      ],
+      "repeat_http": 0
+    },
+    {
+      "code": "600036",
+      "status": "complete",
+      "usage": {
+        "http_requests": 1,
+        "response_bytes": 230661,
+        "cost_usd": "0.00"
+      },
+      "statements": [
+        {
+          "statement_type": "income_statement",
+          "source_ref": {
+            "document_id": "urn:company-wiki:document:sha256:262b5cf36a5d009c22591d67afc3d95350d4ea0585982d2de0fce8dae3eb62d9",
+            "source_id": "urn:company-wiki:source:sha256:262b5cf36a5d009c22591d67afc3d95350d4ea0585982d2de0fce8dae3eb62d9",
+            "content_sha256": "262b5cf36a5d009c22591d67afc3d95350d4ea0585982d2de0fce8dae3eb62d9",
+            "byte_size": 230661,
+            "mime_type": "application/json",
+            "schema_version": "2.0"
+          },
+          "rows": 89,
+          "currency": "CNY",
+          "consolidation": "consolidated"
+        }
+      ],
+      "repeat_http": 0
+    }
+  ],
+  "source_binding": {
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\cw-w19\\src\\company_wiki\\source_catalog\\financial_statements\\__init__.py": "0174bcd43e6bf1aa766ac01652cb326dd425cc0e2cea4bbe91e811dc6698b841",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\cw-w19\\src\\company_wiki\\source_catalog\\financial_statements\\cli.py": "431294e62a0dda25bd912a582a3770a90f5ed2bb1bbb3989330ab17664aa895c",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\cw-w19\\src\\company_wiki\\source_catalog\\financial_statements\\contracts.py": "6400139fb2f65601afc08d06987fa42ac9cb20e95b2802a3dc16d54ddb3f0b05",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\cw-w19\\src\\company_wiki\\source_catalog\\financial_statements\\normalize.py": "63bd8e32dfbb518ce8fbc7872a199114d76bdb6695255db46ac4a0f3611543c0",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\cw-w19\\src\\company_wiki\\source_catalog\\financial_statements\\provider_contracts.py": "9dfc365a9f20cfc3da772d251efc706ea053d33a7a6bb96b26d035409d0657c3",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\cw-w19\\src\\company_wiki\\source_catalog\\financial_statements\\repository.py": "a7ce23e86b3839d44b7ffc24a2799a056dff9255d3a73a2a17c22e52edfd6fe3",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\cw-w19\\src\\company_wiki\\source_catalog\\financial_statements\\schema.py": "f34b849d945beed96855d27d8059de1cbd19e89e3b14016a754dbfeca0d71a29",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\cw-w19\\src\\company_wiki\\source_catalog\\financial_statements\\service.py": "2a109f33d531e9f3a4534296f11c9ef5324fa0174f66543b78fac4809af58114",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\cw-w19\\src\\company_wiki\\source_catalog\\financial_statements\\sina_provider.py": "2ef766f7729908b1714ba02848b89d84977977ec9c2767e5f8a484a3d514ec1a",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\cw-ff19\\scripts\\ff_financial_statements.py": "3334cac4b6bf3f49d3979f5e1834d8c4ff35f522938dd0f91ef13c1c6508fed4"
+  },
+  "new_paid_calls": 0,
+  "cost_usd": "0.00",
+  "http_requests": 4,
+  "response_bytes": 942986,
+  "max_acquisition_reservations_bytes": 8388608,
+  "max_acquisition_seconds": 90,
+  "temporary_root_restored_absent": true,
+  "elapsed_seconds": 23.682963800034486,
+  "production_config_catalog_unchanged": true,
+  "source_binding_unchanged": true
+}

@@ -1,0 +1,26 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\cw-9n7lfggu\\p", "requested_basetemp_len": 48, "cwd_len": 41, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki\cw-w19
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 158 items
+
+tests\financial_statements\test_canonical_writer_third_party.py ....     [  2%]
+tests\financial_statements\test_cli_subprocess.py ....                   [  5%]
+tests\financial_statements\test_layer_ports.py ....                      [  7%]
+tests\financial_statements\test_normalize.py .......................     [ 22%]
+tests\financial_statements\test_offline_e2e_full.py ..                   [ 23%]
+tests\financial_statements\test_repository_migration.py ...............  [ 32%]
+tests\financial_statements\test_root_acceptance_regressions.py ........  [ 37%]
+tests\financial_statements\test_root_reuse.py .                          [ 38%]
+tests\financial_statements\test_second_recheck_regressions.py .......... [ 44%]
+                                                                         [ 44%]
+tests\financial_statements\test_service_contracts.py ................... [ 56%]
+............                                                             [ 64%]
+tests\financial_statements\test_sina_provider.py .................       [ 75%]
+tests\contract\test_source_catalog_canonical_writer.py .............     [ 83%]
+tests\unit\test_source_reading_layers.py ..........................      [100%]
+
+======================= 158 passed in 90.70s (0:01:30) ========================

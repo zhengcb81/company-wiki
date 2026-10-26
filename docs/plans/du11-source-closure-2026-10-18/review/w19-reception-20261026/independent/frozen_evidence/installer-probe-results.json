@@ -1,0 +1,58 @@
+{
+  "schema_version": "w19-installer-independent-probe/1",
+  "status": "PASS",
+  "runtime": "3.14.2 (main, Dec  9 2025, 19:03:14) [MSC v.1944 64 bit (AMD64)]",
+  "source_lf_sha256": "6eccbb375b25badc16684d0c79547b36c2e9ee0a68ea445b4430cf3d38ee39de",
+  "results": [
+    {
+      "case": "PermissionError exact object and one attempt",
+      "attempts": 1,
+      "errno": 13,
+      "same_exception_object": true,
+      "target_snapshot_unchanged": true,
+      "selected_batch_stops": true,
+      "pass": true
+    },
+    {
+      "case": "eight real O_EXCL collisions exhaust finitely",
+      "attempts": 8,
+      "preexisting_collision_bytes_mtime_preserved": true,
+      "target_snapshot_unchanged": true,
+      "pass": true
+    },
+    {
+      "case": "two actual collisions then successful exclusive creation",
+      "attempts": 3,
+      "fsync_calls": 1,
+      "only_selected_file_changed": true,
+      "collision_file_untouched": true,
+      "no_new_staging_residue": true,
+      "pass": true
+    },
+    {
+      "case": "failed promotion keeps owner bytes, pending files and removes staging",
+      "status": "partial",
+      "written": [
+        "SKILL.md"
+      ],
+      "not_written": [
+        "scripts/fetch.py"
+      ],
+      "unselected_files_and_config_unchanged": true,
+      "no_staging_residue": true,
+      "pass": true
+    },
+    {
+      "case": "CAS still detects owner edit at new staging seam",
+      "conflict": true,
+      "owner_edit_preserved": true,
+      "no_staging_residue": true,
+      "pass": true
+    }
+  ],
+  "temporary_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\r19i-d_saiiqp",
+  "temporary_root_absent": true,
+  "real_installation_targets_touched": false,
+  "ACL_changes": 0,
+  "network_calls": 0
+}

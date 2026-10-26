@@ -1,0 +1,80 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\cw-v37a_yno\\p", "requested_basetemp_len": 48, "cwd_len": 41, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki\cw-w19
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 8 items
+
+tests\financial_statements\test_root_acceptance_regressions.py FFFFFFFF  [100%]
+
+================================== FAILURES ===================================
+_______________ test_returned_source_ref_can_be_opened_directly _______________
+tests\financial_statements\test_root_acceptance_regressions.py:40: in test_returned_source_ref_can_be_opened_directly
+    opened = SourceVersionReader(catalog).open_version(ref, purpose="preview")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\source_reader.py:636: in open_version
+    result = self._verified_version(
+src\company_wiki\source_catalog\source_reader.py:677: in _verified_version
+    raise SourceReadError("unavailable", "source_ref_changed")
+E   company_wiki.source_catalog.source_reader.SourceReadError: unavailable: source_ref_changed
+________ test_narrow_capture_does_not_make_wide_reuse_complete[False] _________
+tests\financial_statements\test_root_acceptance_regressions.py:52: in test_narrow_capture_does_not_make_wide_reuse_complete
+    assert response["status"] == "partial"
+E   AssertionError: assert 'complete' == 'partial'
+E     
+E     - partial
+E     + complete
+_________ test_narrow_capture_does_not_make_wide_reuse_complete[True] _________
+tests\financial_statements\test_root_acceptance_regressions.py:52: in test_narrow_capture_does_not_make_wide_reuse_complete
+    assert response["status"] == "partial"
+E   AssertionError: assert 'complete' == 'partial'
+E     
+E     - partial
+E     + complete
+_________ test_partial_acquisition_is_still_partial_on_readonly_reuse _________
+tests\financial_statements\test_root_acceptance_regressions.py:63: in test_partial_acquisition_is_still_partial_on_readonly_reuse
+    assert response["status"] == "partial"
+E   AssertionError: assert 'complete' == 'partial'
+E     
+E     - partial
+E     + complete
+_____ test_timestamp_only_refresh_does_not_grow_raw_or_rebind_old_version _____
+tests\financial_statements\test_root_acceptance_regressions.py:77: in test_timestamp_only_refresh_does_not_grow_raw_or_rebind_old_version
+    assert now["source_ref"] == original["source_ref"]
+E   AssertionError: assert {'document_id...e': None, ...} == {'document_id...e': None, ...}
+E     
+E     Omitting 3 identical items, use -vv to show
+E     Differing items:
+E     {'document_id': 'urn:company-wiki:document:sha256:278a5930c828fd4c52605b8ff99c8d429c6c09c9e64c25ed916602df75f18d29'} != {'document_id': 'urn:company-wiki:document:sha256:2aa0b2ba42c1b449b5f8ec8868855e4f2ae707213a1e770262e9349ad92f3b20'}
+E     {'content_sha256': '278a5930c828fd4c52605b8ff99c8d429c6c09c9e64c25ed916602df75f18d29'} != {'content_sha256': '2aa0b2ba42c1b449b5f8ec8868855e4f2ae707213a1e770262e9349ad92f3b20'}
+E     {'source_id': 'urn:company-wiki:source:sha256:278a5930c828fd4c52605b8ff99c8d429c6c09c9e64c25ed916602df75f...
+E     
+E     ...Full output truncated (2 lines hidden), use '-vv' to show
+_ test_current_and_historical_revision_are_selected_before_pagination[False] __
+tests\financial_statements\test_root_acceptance_regressions.py:96: in test_current_and_historical_revision_are_selected_before_pagination
+    assert len(selected) == 1
+E   AssertionError: assert 2 == 1
+E    +  where 2 = len([{'statement_version_id': 'fsv-e63301e36bb4f724405459a072fa7ad191aff5b2a008b2c2123408657d98e074', 'statement_type': 'i...f1781b071370af9', 'statement_type': 'income_statement', 'period_end': '2026-06-30', 'period_kind': 'semi_annual', ...}])
+__ test_current_and_historical_revision_are_selected_before_pagination[True] __
+tests\financial_statements\test_root_acceptance_regressions.py:96: in test_current_and_historical_revision_are_selected_before_pagination
+    assert len(selected) == 1
+E   AssertionError: assert 2 == 1
+E    +  where 2 = len([{'statement_version_id': 'fsv-e63301e36bb4f724405459a072fa7ad191aff5b2a008b2c2123408657d98e074', 'statement_type': 'i...f1781b071370af9', 'statement_type': 'income_statement', 'period_end': '2026-06-30', 'period_kind': 'semi_annual', ...}])
+______ test_same_lower_bound_unbounded_upper_request_reuses_without_http ______
+tests\financial_statements\test_root_acceptance_regressions.py:118: in test_same_lower_bound_unbounded_upper_request_reuses_without_http
+    assert len(handler.requests) == before and second["usage"]["http_requests"] == 0
+E   AssertionError: assert (4 == 2)
+E    +  where 4 = len(['https://quotes.sina.cn/cn/api/openapi.php/CompanyFinanceService.getFinanceReport2022?paperCode=sh688012&source=lrb&t...a.cn/cn/api/openapi.php/CompanyFinanceService.getFinanceReport2022?paperCode=sh688012&source=lrb&type=0&page=2&num=10'])
+E    +    where ['https://quotes.sina.cn/cn/api/openapi.php/CompanyFinanceService.getFinanceReport2022?paperCode=sh688012&source=lrb&t...a.cn/cn/api/openapi.php/CompanyFinanceService.getFinanceReport2022?paperCode=sh688012&source=lrb&type=0&page=2&num=10'] = <function _recorder.<locals>.handler at 0x00000191BD2E2560>.requests
+=========================== short test summary info ===========================
+FAILED tests/financial_statements/test_root_acceptance_regressions.py::test_returned_source_ref_can_be_opened_directly
+FAILED tests/financial_statements/test_root_acceptance_regressions.py::test_narrow_capture_does_not_make_wide_reuse_complete[False]
+FAILED tests/financial_statements/test_root_acceptance_regressions.py::test_narrow_capture_does_not_make_wide_reuse_complete[True]
+FAILED tests/financial_statements/test_root_acceptance_regressions.py::test_partial_acquisition_is_still_partial_on_readonly_reuse
+FAILED tests/financial_statements/test_root_acceptance_regressions.py::test_timestamp_only_refresh_does_not_grow_raw_or_rebind_old_version
+FAILED tests/financial_statements/test_root_acceptance_regressions.py::test_current_and_historical_revision_are_selected_before_pagination[False]
+FAILED tests/financial_statements/test_root_acceptance_regressions.py::test_current_and_historical_revision_are_selected_before_pagination[True]
+FAILED tests/financial_statements/test_root_acceptance_regressions.py::test_same_lower_bound_unbounded_upper_request_reuses_without_http
+============================= 8 failed in 19.49s ==============================

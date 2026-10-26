@@ -1,0 +1,191 @@
+{
+  "schema_version": "w19-independent-final-layer-review/2",
+  "reviewer": "independent sub-agent /root/pdf_c2_portability_review",
+  "reviewed_at_utc": "2026-10-26T09:24:19.584086+00:00",
+  "status": "PASS",
+  "open_count": 0,
+  "scope": "ROOT-owned cw-w19 Sina/PDF layers, selected cw-ff19 thin client, and independently executed FF bounded process→CWP CLI→frozen fixture provider. No official-value/release/CI/C3 certification.",
+  "findings": [
+    {
+      "id": "W19-R2-F1",
+      "priority": "P1",
+      "status": "CLOSED",
+      "root_cause": "Offline derivation shared the live provider-observation path, falsely treating old-source replay as a new provider capture.",
+      "red": "review2-probe-results.json",
+      "green": "review2-final-core-probe-results.json",
+      "resolution": "provider_observed=False skips existing-version last_checked/transition updates. Newly restored versions bind reader original capture time and unknown order; selection uses observed_at then sequence.",
+      "verified": "A100→B200→offline replay A keeps current/PIT B200; observations2→2, no provider call during replay."
+    },
+    {
+      "id": "W19-R2-F2",
+      "priority": "P2",
+      "status": "CLOSED",
+      "root_cause": "Eager writable repository before identity plus missing-snapshot exception escaping public boundary.",
+      "red": "review2-additional-probe-clean-results.json",
+      "green": "review2-final-additional-probe-results.json",
+      "resolution": "Lazy repository after identity; existing SourceCatalog facade returns named IdentityResult missing-snapshot gap.",
+      "verified": "company_identity_snapshot_unavailable; zero provider calls; absent DB remains absent. Final pytest covers reuse_only/fetch_if_missing; independent probe additionally covers refresh."
+    },
+    {
+      "id": "W19-R2-F3",
+      "priority": "P2",
+      "status": "CLOSED",
+      "root_cause": "Migration recorded unknown order but current response hid uncertainty, promoting hash tie-breaking to complete current state.",
+      "red": "review2-additional-probe-clean-results.json",
+      "green": "review2-final-additional-probe-results.json",
+      "resolution": "Public observation_order_verified, named version_selection_quality and partial unknown results. Live confirmation adds one verified observation while retaining historical unknown rows.",
+      "verified": "Same-second migration partial/legacy_observation_order_unverified; real confirmation2→3 and repeat stays3; historical PIT remains unknown/partial."
+    },
+    {
+      "id": "W19-R2-F4",
+      "priority": "P2",
+      "status": "CLOSED",
+      "root_cause": "Duplicated FF validation used tuple defaults then required lists, disagreeing with CWP optional-field defaults.",
+      "red": "review2-ff-defaults-probe.json",
+      "green": "review2-final-ff-defaults-probe.json and independent-offline-boundary-v1.json",
+      "resolution": "List defaults for validation; original request forwarded unchanged.",
+      "verified": "Three omission variants accepted unchanged; eight explicit invalid None/string/tuple/empty-list variants refused. Actual bounded child chain accepts both omitted lists."
+    }
+  ],
+  "prior_three_probes": "ABA, same-second revisions and future PIT coverage borrowing independently closed.",
+  "source_lf_sha256": {
+    "cw-w19/src/company_wiki/source_catalog/financial_statements/__init__.py": "0174bcd43e6bf1aa766ac01652cb326dd425cc0e2cea4bbe91e811dc6698b841",
+    "cw-w19/src/company_wiki/source_catalog/financial_statements/cli.py": "431294e62a0dda25bd912a582a3770a90f5ed2bb1bbb3989330ab17664aa895c",
+    "cw-w19/src/company_wiki/source_catalog/financial_statements/contracts.py": "6400139fb2f65601afc08d06987fa42ac9cb20e95b2802a3dc16d54ddb3f0b05",
+    "cw-w19/src/company_wiki/source_catalog/financial_statements/normalize.py": "63bd8e32dfbb518ce8fbc7872a199114d76bdb6695255db46ac4a0f3611543c0",
+    "cw-w19/src/company_wiki/source_catalog/financial_statements/provider_contracts.py": "9dfc365a9f20cfc3da772d251efc706ea053d33a7a6bb96b26d035409d0657c3",
+    "cw-w19/src/company_wiki/source_catalog/financial_statements/repository.py": "a7ce23e86b3839d44b7ffc24a2799a056dff9255d3a73a2a17c22e52edfd6fe3",
+    "cw-w19/src/company_wiki/source_catalog/financial_statements/schema.py": "f34b849d945beed96855d27d8059de1cbd19e89e3b14016a754dbfeca0d71a29",
+    "cw-w19/src/company_wiki/source_catalog/financial_statements/service.py": "2a109f33d531e9f3a4534296f11c9ef5324fa0174f66543b78fac4809af58114",
+    "cw-w19/src/company_wiki/source_catalog/financial_statements/sina_provider.py": "2ef766f7729908b1714ba02848b89d84977977ec9c2767e5f8a484a3d514ec1a",
+    "cw-w19/src/company_wiki/source_catalog/canonical_writer.py": "f46d3253be6396024e539105ff673dd3b0027cef87466e44ea46907f32a29c44",
+    "cw-w19/src/company_wiki/source_catalog/service.py": "c3f4c43dad6f9743d0d6dda9183017ecd17752fb1202fbc71f017a0c2f68a67f",
+    "cw-w19/src/company_wiki/source_catalog/source_reader.py": "ff66ee735fb3d7ca7ffae9c82615240468807c894e1a9e883e09075b12a44e39",
+    "cw-w19/src/company_wiki/source_catalog/reader.py": "63588ad032a7c794c445b5afd58cfc3a28c43cf2a6ee66f4fce2cdb1fff77119",
+    "cw-w19/src/company_wiki/source_catalog/models.py": "9d053bd98a4c2853365a14c0bc2c612e781f264c4c5a72180c1be2ef4020c28e",
+    "cw-w19/src/company_wiki/source_catalog/store.py": "dc998762a80d315d0b05b451e4b58909d33899cc057f179bb1b37b0941ef9616",
+    "cw-w19/src/company_wiki/source_catalog/narrative_pdf_reading.py": "c7c000d7da38361a83fc45a4ce526543e93113bdafb8fb4a132cd1bb1cc94c2e",
+    "cw-w19/src/company_wiki/source_catalog/narrative_pdf_enhancement.py": "07ed552b29588add5647bdd7a13ac431f8499bad0129a46f82f347764f01f9f4",
+    "cw-w19/src/company_wiki/source_catalog/narrative_pdf_paragraphs.py": "46d3cfeac4dbfb43d8857340488e3935fa5b63a026ece4d333a22c08375de083",
+    "cw-w19/src/company_wiki/source_catalog/_paragraph_worker.py": "5bbc41a5468bce9448c5f1b6a12c115a5bbbf307a9cc54fb59dc0eddde3c35ca",
+    "cw-w19/src/company_wiki/automation/narrative_select.py": "d061f3da73b86fff38718021d6be7578b27eb0eb0de1376fbd96117fcb7b8bd3",
+    "cw-w19/src/company_wiki/automation/narrative_verify.py": "8261e6612cb2f09c0d3897dbb23b1f7e4cc47716ab786760eeb36b18ff50a282",
+    "cw-w19/src/company_wiki/automation/narrative_runtime.py": "10a83e5c1abadd4f99548a037222e2df097e080bb027e4a6217e70109bc514a1",
+    "cw-w19/src/company_wiki/automation/narrative_batch.py": "47e074cf8d203c81e3aa06a643fdad90cf63b51e85a82126231aef4081be00cf",
+    "cw-w19/src/company_wiki/automation/narrative_generation.py": "7f094cd1603b7f71032d54c08f97cd3e40d329bf0cdd1530a1f175c16f2133a1",
+    "cw-w19/src/company_wiki/automation/narrative_replay.py": "860a20a2b972493c382e99634734fc5ec5229100bdc316034566e9bdabc2fcd5",
+    "cw-w19/tests/unit/test_source_reading_layers.py": "4480bed1882204d8ea9c695f145361bb9f54069019437b496de12898260fe337",
+    "cw-w19/tests/unit/test_financial_statement_public_regressions.py": "3164c326eb9f32c1e95927e61b895c9dec4e802442d64f59f27d48cb4a368840",
+    "cw-w19/tests/unit/test_pdf_reading_boundary.py": "8c619e9ba6fcd634a53742cd4db8f2311272f2a212967c1abee8c52a28605d26",
+    "cw-w19/tests/financial_statements/test_root_acceptance_regressions.py": "f96e8b5da0af3f0ade38b0afbad18d5a3bc8006d9cfff0aa43ce45584f12a5fa",
+    "cw-w19/tests/financial_statements/test_layer_ports.py": "43e25fa3c546221b1aee5770b8d444ca39ccf59c2a8887c3eda5780b12ea7a67",
+    "cw-w19/tests/financial_statements/test_repository_migration.py": "ccc90d36788a056f6e2eab3922c2a855c4da932f2a0bf0ff1cdee16989ca5d8d",
+    "cw-w19/tests/financial_statements/test_service_contracts.py": "1eacdead871e21841757af96da3096cdb0e93288a7246956fcdcc85ec9272981",
+    "cw-w19/tests/financial_statements/test_offline_e2e_full.py": "297196f600712231533650b1e502a7eecef8a1a593da8520ba4053e12ea37d5e",
+    "cw-ff19/scripts/fetch_statements.py": "4cd7a2409959a762588de262a9979a6c8c2a64db45ff128468f778f6fa947128",
+    "cw-ff19/scripts/ff_financial_statements.py": "3334cac4b6bf3f49d3979f5e1834d8c4ff35f522938dd0f91ef13c1c6508fed4",
+    "cw-ff19/tests/financial_statements/test_layer_boundary.py": "fd538a589700a0f4c202c65270d97ed094e3e5e3fb1ad5f264aa64237c5bfaea"
+  },
+  "evidence_byte_sha256": {
+    "review2-probe-results.json": "c040ccadb36b38e87da33e5aa3cee583bd9407439db8e2ef6a3bfd2fcc32b66a",
+    "review2-probe-after-root-results.json": "5a6e099680bae12776c32e5d86110dcd5b1d777bfb991339c0d8b3a1e7961606",
+    "review2-additional-probe-clean-results.json": "9ced58a14fbb700f33d3e0d6f72e3b180d43a904773c41d3901ca930c106df9a",
+    "review2-ff-defaults-probe.json": "ea99a537f0f6f96b6b07e7d0c99c6433cbfa60d9696db02ffdd5995722dfb002",
+    "review2-final-core-probe-results.json": "e67152a581337f75a581696720338bcc2637469ca29b09964d553631c1271777",
+    "review2-final-additional-probe-results.json": "430b93f263ccd6a98a76ce3721a6a815adb3b55ace97bf4443d024e5272a7627",
+    "review2-final-ff-defaults-probe.json": "aed45bf8941bcf1cfbaa2853f701e0e584c2ade400db1d8d99afbe5883d9a530",
+    "review2-focused-tests.json": "a932ae67e1778f5d025d914960607b214ad6ab0f68f3464f0c05829272ad2266",
+    "review2-focused-tests.log": "580fc30b8ae142a16a4dffe17dacec13bbc6110ec3580ed83b7bcce2f2a2efed",
+    "review2-final-targeted-tests.json": "00f016def7f95f45b2dfc59e8b3c466e23cbc0379d689fc608a5f72d40e8a727",
+    "review2-final-plus-compatibility-tests.json": "6442881d324a0bcee53eefe35f5d37ed399739bd8197615300d5dd5ae646006d",
+    "review2-final-plus-compatibility-tests.log": "587b42b3e50bef1dbc40d36ca175b3d029f71cceab6cd0f1d6dfc2155adc50ab",
+    "review2-pdf-tests.json": "c4bf024eb486e8bb1147dfde07279b77284be32138937d3a98f53ec7691aac50",
+    "review2-pdf-tests.log": "5b53d200fd0b4ad871bd84c0ab0bb35da1b19791452256d40f7ca9c18fa41480",
+    "review2-pdf-port-probe.json": "eef8ab4b8a3b893bedf7dd446792599c81ba9f1b8158e222ddbe1c916eae2908",
+    "review2-pure-import-probe.json": "3fb8a24ed2799953e8a63b4416e231a9b1706e370a7c4f1b97b8d91476085ed7",
+    "independent-offline-boundary-v1.json": "9c7dd238e09cdc401a72f758bd4628554c587396ddb1ed71206b3f450f020d4c",
+    "review2-final-cleanup.json": "62e7880361ad890697367b13253f87076e5d67968d16f95bd955f8332ac8fcd4"
+  },
+  "acceptance_script": {
+    "path": "docs\\plans\\du11-source-closure-2026-10-18\\review\\w19-reception-20261026\\verify_offline_boundary.py",
+    "byte_sha256": "a4f8ed9b9a11aa4cd7dd0ab85cd8ecffb9fe46f7704493dd98ddb06dc9430d15",
+    "lf_sha256": "a4f8ed9b9a11aa4cd7dd0ab85cd8ecffb9fe46f7704493dd98ddb06dc9430d15",
+    "design_status": "PASS",
+    "design": "Exclude only exact catalog.sqlite3/-wal/-shm physical files from immutable-file comparison. Every other wiki file remains byte-exact; mode=ro/query_only iterdump checks logical catalog. Actual net growth<=0 permits WAL reclamation. Owned exclusive scratch is bounded and cleaned. No physical SQLite byte-immutability claim.",
+    "independently_executed": true,
+    "command": ".venv/Scripts/python.exe -X utf8 -B docs\\plans\\du11-source-closure-2026-10-18\\review\\w19-reception-20261026\\verify_offline_boundary.py --cwp-root cw-w19 --ff-root cw-ff19 --output .planning/w19-root-reception-20261026/independent/independent-offline-boundary-v1.json",
+    "receipt": "independent-offline-boundary-v1.json",
+    "result": {
+      "schema_version": "w19-ff-cwp-offline-acceptance/1",
+      "passed": true,
+      "test_provider": "frozen real Sina bytes via CWP fixture port",
+      "real_network_requests": 0,
+      "new_paid_calls": 0,
+      "periods": {
+        "income_statement": 36,
+        "balance_sheet": 33,
+        "cash_flow": 36
+      },
+      "rows": 9729,
+      "numeric_pointer_checks": 4049,
+      "unique_public_sources": 12,
+      "initial_stored_bytes": 11541954,
+      "repeat_growth_bytes": -4264232,
+      "immutable_original_growth_bytes": 0,
+      "catalog_logical_content_unchanged": true,
+      "fetch_if_missing_repeat_http": 0,
+      "readonly_repeat_http": 0,
+      "temporary_root_restored_absent": true,
+      "elapsed_seconds": 11.857,
+      "source_binding_unchanged": true
+    }
+  },
+  "verification": {
+    "final_related_pytest": {
+      "passed": 21,
+      "receipt": "review2-final-plus-compatibility-tests.json",
+      "source_stable": true
+    },
+    "earlier19": "Superseded by final21 after two additive old-schema cases and closing fixture edits; do not sum.",
+    "initial_selected_pytest": {
+      "passed": 73,
+      "receipt": "review2-focused-tests.json",
+      "note": "Pre-final repairs; unit aliases overlap direct tests. Do not add counts or claim73 independent scenarios."
+    },
+    "PDF_behavior_pytest": {
+      "passed": 15,
+      "receipt": "review2-pdf-tests.json",
+      "scope": "Synthetic native/replacement backend, enhancement config unset, no Docling/model."
+    },
+    "FF_initial_AST_pytest": {
+      "passed": 8,
+      "command": "python -X utf8 -B -m pytest -q -o addopts= -p no:cacheprovider tests/financial_statements/test_layer_boundary.py",
+      "note": "Direct tool receipt only; static boundary checks do not prove request semantics."
+    },
+    "PDF_independent_backend": "review2-pdf-port-probe.json: budget/deadline identity, select/verify/replay same backend, wrong-source and recipe drift refusals. No Docling import.",
+    "pure_import_isolation": "review2-pure-import-probe.json: pure/storage modules import with httpx/Sina refused. Broader requests refusal hit existing parent source_catalog/security_identity dependency; no broader independence claim."
+  },
+  "additive_schema_compatibility": {
+    "status": "PASS",
+    "production_change": false,
+    "evidence": "Final two parametrized tests remove all financial tables and label catalog1.2/1.3. Existing SourceRef opens same raw bytes; DB bytes unchanged during read. Financial reuse returns financial_statements_unavailable without migration.",
+    "conclusion": "Proposed global version-gating risk did not reproduce; reader.py left unchanged instead of widening declarations without evidence."
+  },
+  "test_quality": "Explicit AST paths and alias/relative/constant-dynamic import positive/negative self-tests complement behavioral substitution, exact public SourceRef, interleaved staging cleanup, readonly store refusal, actual bounded child and independent mutation probes. Unit aliases retain normal CI discovery but overlap focused direct tests.",
+  "preservation": {
+    "production_source_edits_by_reviewer": 0,
+    "production_config_edits_by_reviewer": 0,
+    "real_network_requests": 0,
+    "model_calls": 0,
+    "downloads": 0,
+    "owned_test_roots_restored_absent": true,
+    "protected_author_workspaces_originals_config_database_other_WIP": "No writes; all fixture/catalog writes restricted to reviewer/acceptance-owned temporary roots.",
+    "historical_harness_errors": "Read-helper missing-config assumption corrected; broad requests import sentinel scoped to instructed seam; one pre-test import collided with ROOT edit; one reviewer sqlite fixture cleanup handle fixed and temp removed. Final report write guard detected changed test SHA and final21 rerun replaced earlier19. All final probes clean.",
+    "production_raw_original_copies": 0
+  },
+  "remaining_outside_scope": [
+    "Six official financial values versus official originals remain OPEN. Sina-internal pointer consistency cannot close them.",
+    "No live API, paid/model execution, release/exact CI/C3/cache/RF blanket completion.",
+    "ROOT broader196 tests and Linux/Windows mypy are separately owned and not independently re-signed here."
+  ]
+}

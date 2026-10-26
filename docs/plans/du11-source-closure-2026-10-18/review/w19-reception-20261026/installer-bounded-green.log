@@ -1,0 +1,52 @@
+.................FssF....................................                [100%]
+================================== FAILURES ===================================
+________ test_concurrent_target_edit_survives_with_conflict_diagnostic ________
+
+canonical = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/cw-fgboh1xh/p/test_concurrent_target_edit_su0/canonical')
+tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/cw-fgboh1xh/p/test_concurrent_target_edit_su0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001E807E64730>
+
+    def test_concurrent_target_edit_survives_with_conflict_diagnostic(
+        canonical: Path,
+        tmp_path: Path,
+        monkeypatch: pytest.MonkeyPatch,
+    ) -> None:
+        parent = tmp_path / "skills"
+        target = parent / installer.SKILL / SELECTED[1]
+        target.parent.mkdir(parents=True)
+        target.write_bytes(b"old bytes")
+>       mkstemp = installer.tempfile.mkstemp
+                  ^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'sync_installs_b3' has no attribute 'tempfile'
+
+tests\test_selective_installation.py:283: AttributeError
+__ test_physical_root_retargeted_during_staging_is_not_used_for_final_write ___
+
+canonical = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/cw-fgboh1xh/p/test_physical_root_retargeted_0/canonical')
+tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/cw-fgboh1xh/p/test_physical_root_retargeted_0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001E807CA50D0>
+
+    def test_physical_root_retargeted_during_staging_is_not_used_for_final_write(
+        canonical: Path,
+        tmp_path: Path,
+        monkeypatch: pytest.MonkeyPatch,
+    ) -> None:
+        parent = tmp_path / "skills"
+        root = parent / installer.SKILL
+        path = root / SELECTED[1]
+        path.parent.mkdir(parents=True)
+        path.write_bytes(b"old bytes")
+        outside = tmp_path / "other-owner"
+        marker = outside / SELECTED[1]
+        marker.parent.mkdir(parents=True)
+        marker.write_bytes(b"old bytes")  # Equal bytes alone must not prove path ownership.
+        moved = tmp_path / "original-root"
+>       mkstemp = installer.tempfile.mkstemp
+                  ^^^^^^^^^^^^^^^^^^
+E       AttributeError: module 'sync_installs_b3' has no attribute 'tempfile'
+
+tests\test_selective_installation.py:368: AttributeError
+=========================== short test summary info ===========================
+FAILED tests/test_selective_installation.py::test_concurrent_target_edit_survives_with_conflict_diagnostic
+FAILED tests/test_selective_installation.py::test_physical_root_retargeted_during_staging_is_not_used_for_final_write
+2 failed, 53 passed, 2 skipped in 18.10s

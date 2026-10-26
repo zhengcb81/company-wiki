@@ -1,0 +1,28 @@
+{
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-o",
+    "addopts=",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.r19r2t",
+    "tests/unit/test_source_reading_layers.py",
+    "tests/unit/test_financial_statement_public_regressions.py",
+    "tests/financial_statements/test_root_acceptance_regressions.py",
+    "tests/financial_statements/test_layer_ports.py",
+    "tests/financial_statements/test_repository_migration.py"
+  ],
+  "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki\\cw-w19",
+  "exit_code": 0,
+  "stdout_tail": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\.r19r2t\", \"requested_basetemp_len\": 42, \"cwd_len\": 41, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\n........................................................................ [ 98%]\n.                                                                        [100%]\n73 passed in 69.71s (0:01:09)\n",
+  "stderr_tail": "",
+  "temporary_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.r19r2t",
+  "no_http": "ordinary conftest blocks sockets; selected tests use finite fixtures"
+}

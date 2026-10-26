@@ -1,0 +1,48 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\cw-wcga8gy1\\p", "requested_basetemp_len": 48, "cwd_len": 41, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki\cw-w19
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 7 items / 4 deselected / 3 selected
+
+tests\financial_statements\test_layer_ports.py FFF                       [100%]
+
+================================== FAILURES ===================================
+___ test_legacy_capture_migration_preserves_sources_without_inventing_order ___
+tests\financial_statements\test_layer_ports.py:102: in test_legacy_capture_migration_preserves_sources_without_inventing_order
+    assert current["observation_order_verified"] is False
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   KeyError: 'observation_order_verified'
+_ test_missing_identity_snapshot_is_named_and_does_not_create_catalog[reuse_only] _
+tests\financial_statements\test_layer_ports.py:118: in test_missing_identity_snapshot_is_named_and_does_not_create_catalog
+    assert response["reason"] == "company_identity_snapshot_unavailable"
+E   AssertionError: assert 'financial_st...s_unavailable' == 'company_iden...t_unavailable'
+E     
+E     - company_identity_snapshot_unavailable
+E     + financial_statements_unavailable
+_ test_missing_identity_snapshot_is_named_and_does_not_create_catalog[fetch_if_missing] _
+tests\financial_statements\test_layer_ports.py:117: in test_missing_identity_snapshot_is_named_and_does_not_create_catalog
+    response = _service(SourceCatalog(config), _recorder(_zhongwei_lrb())).handle_request(request())
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\financial_statements\service.py:140: in handle_request
+    identity, identity_result = self._identify(request)
+                                ^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\financial_statements\service.py:114: in _identify
+    result = self.catalog.identify_company(request.company_query, market="CN")
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\service.py:113: in identify_company
+    return SecurityIdentityResolver(load_identity_master(store, market=market)).identify(query, market=market)
+                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\security_identity.py:428: in load_identity_master
+    master = store.load()
+             ^^^^^^^^^^^^
+src\company_wiki\source_catalog\security_identity.py:408: in load
+    raise SecurityMasterUnavailableError(
+E   company_wiki.source_catalog.security_identity.SecurityMasterUnavailableError: no security-master snapshots found in C:\Users\郑曾波\Projects\company-wiki\cw-wcga8gy1\p\test_missing_identity_snapshot1\db\security_master
+=========================== short test summary info ===========================
+FAILED tests/financial_statements/test_layer_ports.py::test_legacy_capture_migration_preserves_sources_without_inventing_order
+FAILED tests/financial_statements/test_layer_ports.py::test_missing_identity_snapshot_is_named_and_does_not_create_catalog[reuse_only]
+FAILED tests/financial_statements/test_layer_ports.py::test_missing_identity_snapshot_is_named_and_does_not_create_catalog[fetch_if_missing]
+======================= 3 failed, 4 deselected in 5.66s =======================

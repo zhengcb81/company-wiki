@@ -1,0 +1,127 @@
+{
+  "status": "PASS",
+  "official_source_ref": {
+    "document_id": "urn:company-wiki:document:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+    "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+    "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+    "byte_size": 9165875,
+    "mime_type": "application/pdf",
+    "schema_version": "2.0"
+  },
+  "page_count": 259,
+  "unit_count": 6489,
+  "native_seconds": 5.575903500022832,
+  "frozen_native_pages_exact": 15,
+  "frozen_native_units_exact": 314,
+  "reading_recipe": {
+    "format": "pdf",
+    "parser_name": "selective_narrative_parser",
+    "parser_version": "0.1.1",
+    "reader_recipe": "native-pdf/1",
+    "runtime": {
+      "pymupdf": "1.28.2"
+    },
+    "reader_implementation_sha256": "c7c000d7da38361a83fc45a4ce526543e93113bdafb8fb4a132cd1bb1cc94c2e"
+  },
+  "header_checks": [
+    {
+      "page": 138,
+      "heading": "合并资产负债表",
+      "consolidated": true,
+      "currency": "CNY",
+      "scale": 1,
+      "first_numeric_column_year": 2025
+    },
+    {
+      "page": 142,
+      "heading": "合并利润表",
+      "consolidated": true,
+      "currency": "CNY",
+      "scale": 1,
+      "first_numeric_column_year": 2025
+    },
+    {
+      "page": 146,
+      "heading": "合并现金流量表",
+      "consolidated": true,
+      "currency": "CNY",
+      "scale": 1,
+      "first_numeric_column_year": 2025
+    }
+  ],
+  "checks": [
+    {
+      "field": "BIZTOTINCO",
+      "page": 142,
+      "paragraph": 12,
+      "native_unit_exact": true,
+      "first_2025_amount": "12384638268.11",
+      "sina_original_value": "12384638268.110000",
+      "Decimal_equal": true,
+      "api_unit": null,
+      "api_scale": null
+    },
+    {
+      "field": "BIZTOTCOST",
+      "page": 143,
+      "paragraph": 2,
+      "native_unit_exact": true,
+      "first_2025_amount": "11006675861.27",
+      "sina_original_value": "11006675861.270000",
+      "Decimal_equal": true,
+      "api_unit": null,
+      "api_scale": null
+    },
+    {
+      "field": "CURFDS",
+      "page": 138,
+      "paragraph": 19,
+      "native_unit_exact": true,
+      "first_2025_amount": "7951400258.31",
+      "sina_original_value": "7951400258.310000",
+      "Decimal_equal": true,
+      "api_unit": null,
+      "api_scale": null
+    },
+    {
+      "field": "TOTASSET",
+      "page": 139,
+      "paragraph": 3,
+      "native_unit_exact": true,
+      "first_2025_amount": "29846018981.43",
+      "sina_original_value": "29846018981.430000",
+      "Decimal_equal": true,
+      "api_unit": null,
+      "api_scale": null
+    },
+    {
+      "field": "LABORGETCASH",
+      "page": 146,
+      "paragraph": 8,
+      "native_unit_exact": true,
+      "first_2025_amount": "14122161977.48",
+      "sina_original_value": "14122161977.480000",
+      "Decimal_equal": true,
+      "api_unit": null,
+      "api_scale": null
+    },
+    {
+      "field": "MANANETR",
+      "page": 147,
+      "paragraph": 5,
+      "native_unit_exact": true,
+      "first_2025_amount": "2295352919.08",
+      "sina_original_value": "2295352919.080000",
+      "Decimal_equal": true,
+      "api_unit": null,
+      "api_scale": null
+    }
+  ],
+  "render_dir": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.r19off",
+  "config_unchanged": true,
+  "writable_store_denied": true,
+  "network_calls": 0,
+  "model_calls": 0,
+  "downloads": 0,
+  "Docling_imported": false
+}

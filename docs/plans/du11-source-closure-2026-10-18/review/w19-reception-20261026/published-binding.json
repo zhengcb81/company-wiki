@@ -1,0 +1,225 @@
+{
+  "schema_version": "w19-reviewed-mainline-binding/1",
+  "passed": true,
+  "files": [
+    {
+      "reviewed": "cw-w19/src/company_wiki/source_catalog/financial_statements/__init__.py",
+      "published": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\financial_statements\\__init__.py",
+      "lf_sha256": "0174bcd43e6bf1aa766ac01652cb326dd425cc0e2cea4bbe91e811dc6698b841",
+      "matches_review": true
+    },
+    {
+      "reviewed": "cw-w19/src/company_wiki/source_catalog/financial_statements/cli.py",
+      "published": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\financial_statements\\cli.py",
+      "lf_sha256": "431294e62a0dda25bd912a582a3770a90f5ed2bb1bbb3989330ab17664aa895c",
+      "matches_review": true
+    },
+    {
+      "reviewed": "cw-w19/src/company_wiki/source_catalog/financial_statements/contracts.py",
+      "published": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\financial_statements\\contracts.py",
+      "lf_sha256": "6400139fb2f65601afc08d06987fa42ac9cb20e95b2802a3dc16d54ddb3f0b05",
+      "matches_review": true
+    },
+    {
+      "reviewed": "cw-w19/src/company_wiki/source_catalog/financial_statements/normalize.py",
+      "published": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\financial_statements\\normalize.py",
+      "lf_sha256": "63bd8e32dfbb518ce8fbc7872a199114d76bdb6695255db46ac4a0f3611543c0",
+      "matches_review": true
+    },
+    {
+      "reviewed": "cw-w19/src/company_wiki/source_catalog/financial_statements/provider_contracts.py",
+      "published": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\financial_statements\\provider_contracts.py",
+      "lf_sha256": "9dfc365a9f20cfc3da772d251efc706ea053d33a7a6bb96b26d035409d0657c3",
+      "matches_review": true
+    },
+    {
+      "reviewed": "cw-w19/src/company_wiki/source_catalog/financial_statements/repository.py",
+      "published": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\financial_statements\\repository.py",
+      "lf_sha256": "a7ce23e86b3839d44b7ffc24a2799a056dff9255d3a73a2a17c22e52edfd6fe3",
+      "matches_review": true
+    },
+    {
+      "reviewed": "cw-w19/src/company_wiki/source_catalog/financial_statements/schema.py",
+      "published": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\financial_statements\\schema.py",
+      "lf_sha256": "f34b849d945beed96855d27d8059de1cbd19e89e3b14016a754dbfeca0d71a29",
+      "matches_review": true
+    },
+    {
+      "reviewed": "cw-w19/src/company_wiki/source_catalog/financial_statements/service.py",
+      "published": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\financial_statements\\service.py",
+      "lf_sha256": "2a109f33d531e9f3a4534296f11c9ef5324fa0174f66543b78fac4809af58114",
+      "matches_review": true
+    },
+    {
+      "reviewed": "cw-w19/src/company_wiki/source_catalog/financial_statements/sina_provider.py",
+      "published": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\financial_statements\\sina_provider.py",
+      "lf_sha256": "2ef766f7729908b1714ba02848b89d84977977ec9c2767e5f8a484a3d514ec1a",
+      "matches_review": true
+    },
+    {
+      "reviewed": "cw-w19/src/company_wiki/source_catalog/canonical_writer.py",
+      "published": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\canonical_writer.py",
+      "lf_sha256": "f46d3253be6396024e539105ff673dd3b0027cef87466e44ea46907f32a29c44",
+      "matches_review": true
+    },
+    {
+      "reviewed": "cw-w19/src/company_wiki/source_catalog/service.py",
+      "published": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\service.py",
+      "lf_sha256": "c3f4c43dad6f9743d0d6dda9183017ecd17752fb1202fbc71f017a0c2f68a67f",
+      "matches_review": true
+    },
+    {
+      "reviewed": "cw-w19/src/company_wiki/source_catalog/source_reader.py",
+      "published": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\source_reader.py",
+      "lf_sha256": "ff66ee735fb3d7ca7ffae9c82615240468807c894e1a9e883e09075b12a44e39",
+      "matches_review": true
+    },
+    {
+      "reviewed": "cw-w19/src/company_wiki/source_catalog/reader.py",
+      "published": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\reader.py",
+      "lf_sha256": "63588ad032a7c794c445b5afd58cfc3a28c43cf2a6ee66f4fce2cdb1fff77119",
+      "matches_review": true
+    },
+    {
+      "reviewed": "cw-w19/src/company_wiki/source_catalog/models.py",
+      "published": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\models.py",
+      "lf_sha256": "9d053bd98a4c2853365a14c0bc2c612e781f264c4c5a72180c1be2ef4020c28e",
+      "matches_review": true
+    },
+    {
+      "reviewed": "cw-w19/src/company_wiki/source_catalog/store.py",
+      "published": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\store.py",
+      "lf_sha256": "dc998762a80d315d0b05b451e4b58909d33899cc057f179bb1b37b0941ef9616",
+      "matches_review": true
+    },
+    {
+      "reviewed": "cw-w19/src/company_wiki/source_catalog/narrative_pdf_reading.py",
+      "published": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_pdf_reading.py",
+      "lf_sha256": "c7c000d7da38361a83fc45a4ce526543e93113bdafb8fb4a132cd1bb1cc94c2e",
+      "matches_review": true
+    },
+    {
+      "reviewed": "cw-w19/src/company_wiki/source_catalog/narrative_pdf_enhancement.py",
+      "published": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_pdf_enhancement.py",
+      "lf_sha256": "07ed552b29588add5647bdd7a13ac431f8499bad0129a46f82f347764f01f9f4",
+      "matches_review": true
+    },
+    {
+      "reviewed": "cw-w19/src/company_wiki/source_catalog/narrative_pdf_paragraphs.py",
+      "published": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_pdf_paragraphs.py",
+      "lf_sha256": "46d3cfeac4dbfb43d8857340488e3935fa5b63a026ece4d333a22c08375de083",
+      "matches_review": true
+    },
+    {
+      "reviewed": "cw-w19/src/company_wiki/source_catalog/_paragraph_worker.py",
+      "published": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\_paragraph_worker.py",
+      "lf_sha256": "5bbc41a5468bce9448c5f1b6a12c115a5bbbf307a9cc54fb59dc0eddde3c35ca",
+      "matches_review": true
+    },
+    {
+      "reviewed": "cw-w19/src/company_wiki/automation/narrative_select.py",
+      "published": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\automation\\narrative_select.py",
+      "lf_sha256": "d061f3da73b86fff38718021d6be7578b27eb0eb0de1376fbd96117fcb7b8bd3",
+      "matches_review": true
+    },
+    {
+      "reviewed": "cw-w19/src/company_wiki/automation/narrative_verify.py",
+      "published": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\automation\\narrative_verify.py",
+      "lf_sha256": "8261e6612cb2f09c0d3897dbb23b1f7e4cc47716ab786760eeb36b18ff50a282",
+      "matches_review": true
+    },
+    {
+      "reviewed": "cw-w19/src/company_wiki/automation/narrative_runtime.py",
+      "published": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\automation\\narrative_runtime.py",
+      "lf_sha256": "10a83e5c1abadd4f99548a037222e2df097e080bb027e4a6217e70109bc514a1",
+      "matches_review": true
+    },
+    {
+      "reviewed": "cw-w19/src/company_wiki/automation/narrative_batch.py",
+      "published": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\automation\\narrative_batch.py",
+      "lf_sha256": "47e074cf8d203c81e3aa06a643fdad90cf63b51e85a82126231aef4081be00cf",
+      "matches_review": true
+    },
+    {
+      "reviewed": "cw-w19/src/company_wiki/automation/narrative_generation.py",
+      "published": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\automation\\narrative_generation.py",
+      "lf_sha256": "7f094cd1603b7f71032d54c08f97cd3e40d329bf0cdd1530a1f175c16f2133a1",
+      "matches_review": true
+    },
+    {
+      "reviewed": "cw-w19/src/company_wiki/automation/narrative_replay.py",
+      "published": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\automation\\narrative_replay.py",
+      "lf_sha256": "860a20a2b972493c382e99634734fc5ec5229100bdc316034566e9bdabc2fcd5",
+      "matches_review": true
+    },
+    {
+      "reviewed": "cw-w19/tests/unit/test_source_reading_layers.py",
+      "published": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\test_source_reading_layers.py",
+      "lf_sha256": "4480bed1882204d8ea9c695f145361bb9f54069019437b496de12898260fe337",
+      "matches_review": true
+    },
+    {
+      "reviewed": "cw-w19/tests/unit/test_financial_statement_public_regressions.py",
+      "published": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\test_financial_statement_public_regressions.py",
+      "lf_sha256": "3164c326eb9f32c1e95927e61b895c9dec4e802442d64f59f27d48cb4a368840",
+      "matches_review": true
+    },
+    {
+      "reviewed": "cw-w19/tests/unit/test_pdf_reading_boundary.py",
+      "published": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\test_pdf_reading_boundary.py",
+      "lf_sha256": "8c619e9ba6fcd634a53742cd4db8f2311272f2a212967c1abee8c52a28605d26",
+      "matches_review": true
+    },
+    {
+      "reviewed": "cw-w19/tests/financial_statements/test_root_acceptance_regressions.py",
+      "published": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\financial_statements\\test_root_acceptance_regressions.py",
+      "lf_sha256": "f96e8b5da0af3f0ade38b0afbad18d5a3bc8006d9cfff0aa43ce45584f12a5fa",
+      "matches_review": true
+    },
+    {
+      "reviewed": "cw-w19/tests/financial_statements/test_layer_ports.py",
+      "published": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\financial_statements\\test_layer_ports.py",
+      "lf_sha256": "43e25fa3c546221b1aee5770b8d444ca39ccf59c2a8887c3eda5780b12ea7a67",
+      "matches_review": true
+    },
+    {
+      "reviewed": "cw-w19/tests/financial_statements/test_repository_migration.py",
+      "published": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\financial_statements\\test_repository_migration.py",
+      "lf_sha256": "ccc90d36788a056f6e2eab3922c2a855c4da932f2a0bf0ff1cdee16989ca5d8d",
+      "matches_review": true
+    },
+    {
+      "reviewed": "cw-w19/tests/financial_statements/test_service_contracts.py",
+      "published": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\financial_statements\\test_service_contracts.py",
+      "lf_sha256": "1eacdead871e21841757af96da3096cdb0e93288a7246956fcdcc85ec9272981",
+      "matches_review": true
+    },
+    {
+      "reviewed": "cw-w19/tests/financial_statements/test_offline_e2e_full.py",
+      "published": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\financial_statements\\test_offline_e2e_full.py",
+      "lf_sha256": "297196f600712231533650b1e502a7eecef8a1a593da8520ba4053e12ea37d5e",
+      "matches_review": true
+    },
+    {
+      "reviewed": "cw-ff19/scripts/fetch_statements.py",
+      "published": "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\fetch_statements.py",
+      "lf_sha256": "4cd7a2409959a762588de262a9979a6c8c2a64db45ff128468f778f6fa947128",
+      "matches_review": true
+    },
+    {
+      "reviewed": "cw-ff19/scripts/ff_financial_statements.py",
+      "published": "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_financial_statements.py",
+      "lf_sha256": "3334cac4b6bf3f49d3979f5e1834d8c4ff35f522938dd0f91ef13c1c6508fed4",
+      "matches_review": true
+    },
+    {
+      "reviewed": "cw-ff19/tests/financial_statements/test_layer_boundary.py",
+      "published": "C:\\Users\\郑曾波\\Projects\\filing-fetch\\tests\\financial_statements\\test_layer_boundary.py",
+      "lf_sha256": "fd538a589700a0f4c202c65270d97ed094e3e5e3fb1ad5f264aa64237c5bfaea",
+      "matches_review": true
+    }
+  ],
+  "cwp_code_head": "10def09e8fd1967e0b87434ae211d1fbaafbb090",
+  "ff_code_head": "72024a8597e27607badbbfdd06c39446269d7010",
+  "author_ancestors_preserved": true
+}

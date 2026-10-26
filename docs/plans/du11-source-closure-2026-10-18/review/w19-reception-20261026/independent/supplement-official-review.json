@@ -1,0 +1,454 @@
+{
+  "schema_version": "w19-independent-official-six-supplement/1",
+  "status": "PASS",
+  "open_count": 0,
+  "reviewed_at_utc": "2026-10-26T09:39:42.057622+00:00",
+  "scope": "Only six consolidated2025 statement samples, their raw/native/source bindings, precision, units and source-table arithmetic; plus static review of ROOT current live compact receipt.",
+  "official_source_ref": {
+    "document_id": "urn:company-wiki:document:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+    "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+    "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+    "byte_size": 9165875,
+    "mime_type": "application/pdf",
+    "schema_version": "2.0"
+  },
+  "official_metadata": {
+    "document_id": "urn:company-wiki:document:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+    "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+    "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+    "byte_size": 9165875,
+    "mime_type": "application/pdf",
+    "title": "中微公司：2025年年度报告",
+    "document_kind": "annual_report",
+    "published_date": "2026-03-31",
+    "source_url": "https://static.cninfo.com.cn/finalpage/2026-03-31/1225062431.PDF",
+    "retrieved_at": null,
+    "collector_name": null,
+    "collector_version": null,
+    "canonical_entity_id": null,
+    "display_name": "中微公司",
+    "market": "CN",
+    "security_id": "688012",
+    "fiscal_year": 2025,
+    "fiscal_period": "FY",
+    "period_end": "2025-12-31",
+    "form_type": null,
+    "provider": null,
+    "provider_document_id": null,
+    "language": "zh"
+  },
+  "reading_recipe": {
+    "format": "pdf",
+    "parser_name": "selective_narrative_parser",
+    "parser_version": "0.1.1",
+    "reader_recipe": "native-pdf/1",
+    "runtime": {
+      "pymupdf": "1.28.2"
+    },
+    "reader_implementation_sha256": "c7c000d7da38361a83fc45a4ce526543e93113bdafb8fb4a132cd1bb1cc94c2e"
+  },
+  "independent_source_verification": {
+    "status": "PASS",
+    "page_count": 259,
+    "unit_count": 6489,
+    "native_seconds": 5.575903500022832,
+    "frozen_native_pages_exact": 15,
+    "frozen_native_units_exact": 314,
+    "header_checks": [
+      {
+        "page": 138,
+        "heading": "合并资产负债表",
+        "consolidated": true,
+        "currency": "CNY",
+        "scale": 1,
+        "first_numeric_column_year": 2025
+      },
+      {
+        "page": 142,
+        "heading": "合并利润表",
+        "consolidated": true,
+        "currency": "CNY",
+        "scale": 1,
+        "first_numeric_column_year": 2025
+      },
+      {
+        "page": 146,
+        "heading": "合并现金流量表",
+        "consolidated": true,
+        "currency": "CNY",
+        "scale": 1,
+        "first_numeric_column_year": 2025
+      }
+    ],
+    "config_unchanged": true,
+    "writable_store_denied": true,
+    "network_calls": 0,
+    "model_calls": 0,
+    "downloads": 0,
+    "Docling_imported": false
+  },
+  "native_timing_note": "probe native_seconds includes rendering six pages; not compared with ROOT parse-only2.46s as equivalent benchmarks.",
+  "checks": [
+    {
+      "statement_type": "income_statement",
+      "provider_field": "BIZTOTINCO",
+      "label": "营业总收入",
+      "expected_official": "12384638268.11",
+      "actual_sina": "12384638268.110000",
+      "currency": "CNY",
+      "api_unit": null,
+      "api_scale": null,
+      "official_unit": "CNY",
+      "official_scale": 1,
+      "unit_validation": "exact numeric magnitude equals official yuan amounts in these six samples; provider per-row unit remains unspecified",
+      "period_end": "2025-12-31",
+      "consolidation": "consolidated",
+      "period_semantics": "annual_duration",
+      "official_locator": {
+        "page_number": 142,
+        "paragraph_index": 12,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "official_unit_id": "urn:company-wiki:narrative-unit:sha256:56501f56e9e7d718a38b3f9cba408a9d6e7c218d4c9f381e4b05e9e98a65c384",
+      "official_excerpt": "营业总收入七(61)12,384,638,268.119,065,165,097.69其中：营业收入12,384,638,268.119,0",
+      "sina_page_sha256": "2aa0b2ba42c1b449b5f8ec8868855e4f2ae707213a1e770262e9349ad92f3b20",
+      "sina_json_pointer": "/result/data/report_list/20251231/data/0/item_value",
+      "pass": true,
+      "independent_first_2025_value": "12384638268.11",
+      "independent_direct_json_pointer_value": "12384638268.110000",
+      "exact_decimal_difference": "0.000000",
+      "render_visually_verified": true,
+      "exact_native_unit_locator_text_replayed": true
+    },
+    {
+      "statement_type": "income_statement",
+      "provider_field": "BIZTOTCOST",
+      "label": "营业总成本",
+      "expected_official": "11006675861.27",
+      "actual_sina": "11006675861.270000",
+      "currency": "CNY",
+      "api_unit": null,
+      "api_scale": null,
+      "official_unit": "CNY",
+      "official_scale": 1,
+      "unit_validation": "exact numeric magnitude equals official yuan amounts in these six samples; provider per-row unit remains unspecified",
+      "period_end": "2025-12-31",
+      "consolidation": "consolidated",
+      "period_semantics": "annual_duration",
+      "official_locator": {
+        "page_number": 143,
+        "paragraph_index": 2,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "official_unit_id": "urn:company-wiki:narrative-unit:sha256:9b6fddc9c81d81cf0e18079c5ac5d3e4ca1aa78a552d6b1f4c75b18c24ab3f09",
+      "official_excerpt": "营业总成本11,006,675,861.277,665,508,922.25其中：营业成本七(61)7,534,139,015.565,34",
+      "sina_page_sha256": "2aa0b2ba42c1b449b5f8ec8868855e4f2ae707213a1e770262e9349ad92f3b20",
+      "sina_json_pointer": "/result/data/report_list/20251231/data/7/item_value",
+      "pass": true,
+      "independent_first_2025_value": "11006675861.27",
+      "independent_direct_json_pointer_value": "11006675861.270000",
+      "exact_decimal_difference": "0.000000",
+      "render_visually_verified": true,
+      "exact_native_unit_locator_text_replayed": true
+    },
+    {
+      "statement_type": "balance_sheet",
+      "provider_field": "CURFDS",
+      "label": "货币资金",
+      "expected_official": "7951400258.31",
+      "actual_sina": "7951400258.310000",
+      "currency": "CNY",
+      "api_unit": null,
+      "api_scale": null,
+      "official_unit": "CNY",
+      "official_scale": 1,
+      "unit_validation": "exact numeric magnitude equals official yuan amounts in these six samples; provider per-row unit remains unspecified",
+      "period_end": "2025-12-31",
+      "consolidation": "consolidated",
+      "period_semantics": "instant",
+      "official_locator": {
+        "page_number": 138,
+        "paragraph_index": 19,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "official_unit_id": "urn:company-wiki:narrative-unit:sha256:9a61a4ccf16479c592531cb17cbadec37e25bfc30a1b07387e6313cf002afe83",
+      "official_excerpt": "货币资金七(1)7,951,400,258.317,761,617,180.32结算备付金拆出资金交易性金融资产七(2)791,755,1",
+      "sina_page_sha256": "534dd4e09d7f682782048776b4514ae66d41b5522c8b13725c0a74bc49e5d7e2",
+      "sina_json_pointer": "/result/data/report_list/20251231/data/1/item_value",
+      "pass": true,
+      "independent_first_2025_value": "7951400258.31",
+      "independent_direct_json_pointer_value": "7951400258.310000",
+      "exact_decimal_difference": "0.000000",
+      "render_visually_verified": true,
+      "exact_native_unit_locator_text_replayed": true
+    },
+    {
+      "statement_type": "balance_sheet",
+      "provider_field": "TOTASSET",
+      "label": "资产总计",
+      "expected_official": "29846018981.43",
+      "actual_sina": "29846018981.430000",
+      "currency": "CNY",
+      "api_unit": null,
+      "api_scale": null,
+      "official_unit": "CNY",
+      "official_scale": 1,
+      "unit_validation": "exact numeric magnitude equals official yuan amounts in these six samples; provider per-row unit remains unspecified",
+      "period_end": "2025-12-31",
+      "consolidation": "consolidated",
+      "period_semantics": "instant",
+      "official_locator": {
+        "page_number": 139,
+        "paragraph_index": 3,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "official_unit_id": "urn:company-wiki:narrative-unit:sha256:a5dc77bfd6842fbb52acebd699b59af5229a939ee678b88f9848778d2213e63a",
+      "official_excerpt": "资产总计29,846,018,981.4326,217,544,719.07流动负债：",
+      "sina_page_sha256": "534dd4e09d7f682782048776b4514ae66d41b5522c8b13725c0a74bc49e5d7e2",
+      "sina_json_pointer": "/result/data/report_list/20251231/data/66/item_value",
+      "pass": true,
+      "independent_first_2025_value": "29846018981.43",
+      "independent_direct_json_pointer_value": "29846018981.430000",
+      "exact_decimal_difference": "0.000000",
+      "render_visually_verified": true,
+      "exact_native_unit_locator_text_replayed": true
+    },
+    {
+      "statement_type": "cash_flow",
+      "provider_field": "LABORGETCASH",
+      "label": "销售商品、提供劳务收到的现金",
+      "expected_official": "14122161977.48",
+      "actual_sina": "14122161977.480000",
+      "currency": "CNY",
+      "api_unit": null,
+      "api_scale": null,
+      "official_unit": "CNY",
+      "official_scale": 1,
+      "unit_validation": "exact numeric magnitude equals official yuan amounts in these six samples; provider per-row unit remains unspecified",
+      "period_end": "2025-12-31",
+      "consolidation": "consolidated",
+      "period_semantics": "annual_duration",
+      "official_locator": {
+        "page_number": 146,
+        "paragraph_index": 8,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "official_unit_id": "urn:company-wiki:narrative-unit:sha256:91edbbb54c137f3005593c275625831283930d6e2a188c4fc4d7cea14fe1aaf0",
+      "official_excerpt": "销售商品、提供劳务收到的现金14,122,161,977.4811,697,193,960.13",
+      "sina_page_sha256": "74abee7afdb45b44584858afa200458dae083d6a3df7b1c16f6d093b5df44a40",
+      "sina_json_pointer": "/result/data/report_list/20251231/data/1/item_value",
+      "pass": true,
+      "independent_first_2025_value": "14122161977.48",
+      "independent_direct_json_pointer_value": "14122161977.480000",
+      "exact_decimal_difference": "0.000000",
+      "render_visually_verified": true,
+      "exact_native_unit_locator_text_replayed": true
+    },
+    {
+      "statement_type": "cash_flow",
+      "provider_field": "MANANETR",
+      "label": "经营活动产生的现金流量净额",
+      "expected_official": "2295352919.08",
+      "actual_sina": "2295352919.080000",
+      "currency": "CNY",
+      "api_unit": null,
+      "api_scale": null,
+      "official_unit": "CNY",
+      "official_scale": 1,
+      "unit_validation": "exact numeric magnitude equals official yuan amounts in these six samples; provider per-row unit remains unspecified",
+      "period_end": "2025-12-31",
+      "consolidation": "consolidated",
+      "period_semantics": "annual_duration",
+      "official_locator": {
+        "page_number": 147,
+        "paragraph_index": 5,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "official_unit_id": "urn:company-wiki:narrative-unit:sha256:b3f36d445d0a54177d806c95e634689f720735e846402d23b0972d0fa539198b",
+      "official_excerpt": "经营活动产生的现金流量净额七(79)(1)2,295,352,919.081,458,401,788.71",
+      "sina_page_sha256": "74abee7afdb45b44584858afa200458dae083d6a3df7b1c16f6d093b5df44a40",
+      "sina_json_pointer": "/result/data/report_list/20251231/data/25/item_value",
+      "pass": true,
+      "independent_first_2025_value": "2295352919.08",
+      "independent_direct_json_pointer_value": "2295352919.080000",
+      "exact_decimal_difference": "0.000000",
+      "render_visually_verified": true,
+      "exact_native_unit_locator_text_replayed": true
+    }
+  ],
+  "formula_checks": [
+    {
+      "name": "营业总成本组成",
+      "parts": {
+        "其中：营业成本": "7534139015.56",
+        "税金及附加": "68310115.40",
+        "销售费用": "498511080.73",
+        "管理费用": "477875366.88",
+        "研发费用": "2475424032.16",
+        "财务费用": "-47583749.46"
+      },
+      "computed": "11006675861.27",
+      "reported": "11006675861.27",
+      "equal": true
+    },
+    {
+      "name": "资产总计=流动资产合计+非流动资产合计",
+      "computed": "29846018981.43",
+      "reported": "29846018981.43",
+      "equal": true
+    },
+    {
+      "name": "经营现金净额=经营现金流入小计-流出小计",
+      "computed": "2295352919.08",
+      "reported": "2295352919.08",
+      "equal": true
+    }
+  ],
+  "precision_and_scope": {
+    "official_scale": 1,
+    "official_currency": "CNY",
+    "official_display_precision": "two decimals",
+    "Sina_raw_precision": "six decimals with trailing zeros for these six values",
+    "comparison": "Decimal exact equality, no float, rounding, currency conversion or scaling",
+    "production_api_unit_scale_preserved_none": true,
+    "no_f2_inference": true,
+    "no_global_unknown_unit_backfill": true,
+    "income_cost_semantics": "BIZTOTCOST is total operating costs including expense components, not only营业成本/COGS; revenue and gross customer receipts are distinct facts.",
+    "BS_semantics": "2025-12-31 consolidated instant; annual current column precedes2024 comparative.",
+    "income_CF_semantics": "2025 annual duration per official2025年1—12月 header; no production period_start fabrication.",
+    "oracle_limit": "verify_official_six is a frozen six-sample source-validation tool, not a financial PDF extractor. Independent visual first-column/first-post-label and exact314-unit replay close material anchoring for this audit."
+  },
+  "visual_review": {
+    "pages": [
+      138,
+      139,
+      142,
+      143,
+      146,
+      147
+    ],
+    "render_tool": "PyMuPDF1.28.2, matrix1.6, original SourceVersionReader bytes in memory; no PDF file copy",
+    "full_relevant_pages_inspected": true,
+    "render_sha256": {
+      "page-138.png": "c025e931b99a4432efe60a605d5ea3462171a7a117e741482322034395a0a30b",
+      "page-139.png": "ab3817403e00786c15c235eef3218a724f99a82aab979852b7c3b3de084b40c0",
+      "page-142.png": "21faf51968db07edba0f1c3baf8d210ab8cfa90fc58d3f6ddcf5f2d4a15ef5ee",
+      "page-143.png": "a86df90bebaaf928bd589d6ea6be6ad84700d078d94e881b98747a15be09ac81",
+      "page-146.png": "a57f557719488a15f5bc3198265172736093ae9119d71768ef577ab05c5bf083",
+      "page-147.png": "2be99462ee541cccd62c6d262a9d2f49cc01a940baa23ed7f4052b52e84f9c03"
+    },
+    "temporary_render_root_restored_absent": true
+  },
+  "material_byte_sha256": {
+    "docs\\plans\\du11-source-closure-2026-10-18\\review\\w19-reception-20261026\\official-native-observation.json.gz": "8b110335ec3cac19e798d2bfe7bd0998d44103dd5dbfff18c62b7cadbf3f3b91",
+    "docs\\plans\\du11-source-closure-2026-10-18\\review\\w19-reception-20261026\\official-six-values-v1.json": "ca057f7aa76a5aefeac3872c8965cfe9443a13efa51eb568de4a907a70e4b6d2",
+    "docs\\plans\\du11-source-closure-2026-10-18\\review\\w19-reception-20261026\\verify_official_six.py": "b8580f0b5f112aa560c9430df6a84787883c82a53e1aec767733946f9c0338a5",
+    "docs\\plans\\du11-source-closure-2026-10-18\\review\\w19-reception-20261026\\live-boundary-v1.json": "5a27b2f34fd2b58358d7aee2cd58a9bca57c2e88fa65909d53a1c0192f87534a",
+    "docs\\plans\\du11-source-closure-2026-10-18\\review\\w19-reception-20261026\\verify_live_boundary.py": "c1e1a625fd9c116cd68ef0e9b59d1219a3ebde89ddfb52f90cca3cef0f41078f",
+    ".planning\\w19-root-reception-20261026\\independent\\supplement-official-probe.py": "849cc5860dcbfb3afb9f53f102e5142255f09c976f671ec0cbb535ad31f50be7",
+    ".planning\\w19-root-reception-20261026\\independent\\supplement-official-probe-results.json": "9dc987555d77cba2e7f9ed65b6bc63bc54bcfa05cffbadc914c15db254680e87",
+    ".planning\\w19-root-reception-20261026\\independent\\supplement-official-formula-results.json": "a407285ceb4cab666b37c15f6dd4881b5115353b56e4e83a1e21e5baee38bcd4",
+    ".planning\\w19-root-reception-20261026\\independent\\independent-official-six-values-v1.json": "ca057f7aa76a5aefeac3872c8965cfe9443a13efa51eb568de4a907a70e4b6d2"
+  },
+  "raw_sina_bindings": [
+    {
+      "path": "cw-w19\\docs\\plans\\w19-sina-statements-2026-10-25\\inputs\\research\\capture\\sh688012-lrb-type0-page1-num10.json.gz",
+      "gzip_byte_sha256": "913848afd310a907c28175685285f3bd5a16b00c8db5dfe17ea7adb22aedf01a",
+      "decompressed_sha256": "2aa0b2ba42c1b449b5f8ec8868855e4f2ae707213a1e770262e9349ad92f3b20",
+      "source_id": "urn:company-wiki:source:sha256:2aa0b2ba42c1b449b5f8ec8868855e4f2ae707213a1e770262e9349ad92f3b20"
+    },
+    {
+      "path": "cw-w19\\docs\\plans\\w19-sina-statements-2026-10-25\\inputs\\research\\capture\\sh688012-fzb-type0-page1-num10.json.gz",
+      "gzip_byte_sha256": "2aea9538d08578484d5bbb81291c054e85aa526ed2729b6e25586bba943a1a74",
+      "decompressed_sha256": "534dd4e09d7f682782048776b4514ae66d41b5522c8b13725c0a74bc49e5d7e2",
+      "source_id": "urn:company-wiki:source:sha256:534dd4e09d7f682782048776b4514ae66d41b5522c8b13725c0a74bc49e5d7e2"
+    },
+    {
+      "path": "cw-w19\\docs\\plans\\w19-sina-statements-2026-10-25\\inputs\\research\\capture\\sh688012-llb-type0-page1-num10.json.gz",
+      "gzip_byte_sha256": "bb5747c753b98452720048ba54c3b0e4ce47859aa57320054a9d045852bce6cb",
+      "decompressed_sha256": "74abee7afdb45b44584858afa200458dae083d6a3df7b1c16f6d093b5df44a40",
+      "source_id": "urn:company-wiki:source:sha256:74abee7afdb45b44584858afa200458dae083d6a3df7b1c16f6d093b5df44a40"
+    }
+  ],
+  "source_lf_sha256": {
+    "src/company_wiki/source_catalog/source_reader.py": "ff66ee735fb3d7ca7ffae9c82615240468807c894e1a9e883e09075b12a44e39",
+    "src/company_wiki/source_catalog/narrative_pdf_reading.py": "c7c000d7da38361a83fc45a4ce526543e93113bdafb8fb4a132cd1bb1cc94c2e",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "b39a92f3d8561b495cfdd2ee9f07f6017de9aedd45516aa3924b3283047f4012",
+    "src/company_wiki/source_catalog/narrative_document.py": "d02b1895ac2fe2af8b526a965a9996650cf4dd2714dc801f23caaf0edcbd0efb",
+    "cw-w19/src/company_wiki/source_catalog/financial_statements/normalize.py": "63bd8e32dfbb518ce8fbc7872a199114d76bdb6695255db46ac4a0f3611543c0",
+    "cw-w19/tests/contract/test_source_catalog_schema_migration.py": "ce41f0765181b35eb44491d1cc30c5751549c6539d1b54735b98730a6014891c"
+  },
+  "previous_final_review": {
+    "path": ".planning\\w19-root-reception-20261026\\independent\\final-review2.json",
+    "byte_sha256": "57a57d0ac3e3d0664ddfeb065c073a5925229e3722ec1d7f6ff105d20d169994",
+    "all_previous36_bindings_unchanged": true,
+    "drift": [],
+    "official_six_scope_update": "The previous report correctly left official six values outside scope OPEN at that time. This supplement independently closes that specific six-sample gate; previous report bytes remain unchanged."
+  },
+  "commit_test_delta": {
+    "CWP_commit": "63a26230111548abb452f79a9a2dff9bee66dd9f",
+    "FF_commit": "9758ee32687cda85fc17bbbfd520e2bd76ce2413",
+    "reviewed_path": "cw-w19/tests/contract/test_source_catalog_schema_migration.py",
+    "finding": "Commit first-parent diff inlines3 _catalog_module() locals at assertions and aligns expected current schema with1.4.0 while retaining fingerprint/data-preservation/idempotency assertions. This path is outside prior36 bindings; no observed previous-binding drift or production API delta.",
+    "root_reported_51_checks": "Not independently rerun by this supplement; no broad repeat required for test-local cleanup."
+  },
+  "ROOT_live_receipt_review": {
+    "status": "PASS_FOR_RECORDED_SCOPE",
+    "mode": "Read script+compact receipt and verified current10 source hashes and arithmetic; no additional external request by reviewer.",
+    "receipt": "live-boundary-v1.json",
+    "script": "verify_live_boundary.py",
+    "observed_companies": [
+      "688012 three statements",
+      "600036 income_statement"
+    ],
+    "recorded_http_requests": 4,
+    "recorded_response_bytes": 942986,
+    "recorded_elapsed_seconds": 23.682963800034486,
+    "recorded_paid_cost_usd": "0.00",
+    "recorded_repeat_http": [
+      0,
+      0
+    ],
+    "recorded_temp_cleanup": true,
+    "recorded_production_config_catalog_unchanged": true,
+    "script_boundary": "Uses FF real unpatched build command/CWP CLI/provider; only environment is patched. Existing configured identities are selected and written only to isolated test root. Direct SourceRef open and six official-value assertions execute during acquisition. No claim of a second independent external run."
+  },
+  "preservation": {
+    "reviewer_real_network_requests": 0,
+    "reviewer_downloads": 0,
+    "reviewer_model_calls": 0,
+    "reviewer_production_source_edits": 0,
+    "reviewer_production_config_edits": 0,
+    "reviewer_production_raw_copies": 0,
+    "temporary_images_removed": true,
+    "failed_command_note": "Initial verifier --cwp-root . selected baseline root without financial_statements; no output written. Corrected to assigned cw-w19 and passed; actual original reading intentionally used mainline read-only SourceVersionReader."
+  },
+  "limits": [
+    "Six explicit source samples, not all fields/companies/years or per-row unit certification.",
+    "No arbitrary historical PIT, RF adoption, valuation/research conclusion, release/exact CI or universal API-availability certification."
+  ]
+}

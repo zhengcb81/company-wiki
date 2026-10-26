@@ -1,18 +1,20 @@
 # 当前行动计划（2026-10-25更新）
 
-## 2026-10-26 当前：已恢复实施，W19接收与抽象层质量根修
+## 2026-10-26 当前：W19分层根修已并线，回到C3
 
-用户已恢复实施，并要求新浪API/PDF技能严格封装在各自责任层、增加对应测试。PDF-C2 Linux类型窄修已由`4c8b4642`正常提交推送；Linux完整379源码mypy、正常pre-commit、pre-push154项与补充独审通过，精确[CI40291031425](https://github.com/zhengcb81/company-wiki/actions/runs/40291031425) completed/success。旧暂停与Linux问题已结束，不再是下一步。
+**CWP `10def09e` / FF `72024a8` 已并入主线并推送，精确CI均成功。** 作者提交祖先完整保留；36份独审源码/测试与已发布文件逐SHA一致。新浪经FF公共入口→CWP财务服务→HTTP provider/纯normalizer→专门数表repository；原件暂存/根定位/SourceRef仍由writer/reader负责。PDF消费者只用PdfReading，SDK、模型配置和增强进程封装在阅读实现层，两条链不互相绕过。
 
-**唯一下一步：** 在ROOT自有`cw-w19`集成工区完成W19质量/分层回归与独立复审，再做FF薄调用、官方三表每表2项对照和跨仓复用大节点，最后保留作者提交祖先并入主线。当前W19尚未验收/发布；作者工区只读。详见[W19接收细则](review/w19-reception-20261026/README.md)。
+ROOT修复了来源引用、范围覆盖、版本选择与不可变来源、重复抓取/写原件，以及独审新增的A→B→A、同秒排序、离线重放伪观察、缺快照提前建库、旧排序未知高报成功及FF缺省合同漂移。对应真实RED保留；集中196通过、51发布接缝通过、FF35通过、独立21通过（计数有重叠，不相加）。正常pre-push CWP154通过/52.43秒；FF933通过/7skip/+78subtests/110.87秒；没有改门禁阈值或删除事实断言。
 
-已发现并TDD修复的共因：手拼不可直接打开的SourceRef、只读/下载查询覆盖及版本语义分化、timestamp-only刷新重复写原件并重绑历史来源、无上界同请求重复抓取。原8项回归真实RED后转绿；当前集成完整Linux388源码mypy已通过。新增分层测试正在验证，不用局部绿代签全部交付。
+真实API只用4请求/942,986B/23.68秒/$0，中微三表和招商银行利润表及两公司二次0HTTP通过；离线真实子进程链36/33/36期、9729行、4049数值locator逐值、12个返回SourceRef直接打开均通过。约11MB测试湖，无原件重复增长，临时根恢复不存在。官方年报原件只读复用，三表各2项由独立reader/PdfReading、6页目视、JSONPointer及Decimal和三条公式核验通过。新浪行unit/scale仍None，不从f2或六样本推广全局单位。
 
-分层原则：FF只调CWP公共财务数据入口；新浪provider负责HTTP，纯normalizer负责数值/期间解释，repository负责专门数表，canonical writer/reader负责原件路径/暂存/SourceRef。PDF SDK/模型配置/增强进程只在PdfReading实现内，上层只传逻辑任务与统一预算；不把新浪三表送回PDF/叙述切片链。零新增模型调用；原件、生产配置/数据库、Dayu/IQS/RF WIP保持。
+全局技能安装未完成：当前执行环境对`.agents`/`.codex`目标返回真实EACCES，所选6文件零写入/字节未变。Windows暂存重试空转共因已TDD/独审修复并发布FF `5396bd6`，精确CI40304350720成功；现在0.38秒明确失败，不再长期重试。ROOT未改ACL或换写入通道。继续主线时直接使用canonical FF仓库入口；安装是环境收尾项，不把它变成C3人审门。见[安装状态与命令](review/w19-reception-20261026/INSTALLATION.md)。
 
-C3正式摘要语义、缓存重启零重复费用、RF实际采用和新holdout/公司循环仍OPEN；完成W19大节点后继续，不重跑已关闭PDF比较/冷启整批。有效资源仍配置10M tokens/$20（含旧unknown）。
+**唯一下一步：** 本轮ROOT临时工区已清理；按已冻结PDF-C3细则进入配置内正式摘要语义→缓存跨进程零重复费用恢复→RF实际采用→新公司/跨市场文种holdout和八步公司审查循环。不重开已完成PDF比较/冷启批次，不把工程绿或金融六样本扩大成内容质量全通过。详见[本轮验收与后续](review/w19-reception-20261026/README.md)。
 
-以下为历史快照，历史段中的“当前/下一步/唯一”不覆盖本段及CURRENT_STATUS.json。
+用户继续授权有效；原生goal控制器本次回读仍显示blocked，工具不提供resume，不声称已自动重启；这不是本轮实现的权限等待。配置资源继续10M tokens/$20含旧unknown，本轮无新增模型费用。生产原件/配置/目录库、Dayu/IQS/RF他人WIP不写。
+
+以下为历史快照，其中“当前/下一步/唯一”不覆盖本段及CURRENT_STATUS.json。
 
 ## 2026-10-25 用户明确暂停（本段为唯一当前状态）
 
@@ -65,7 +67,7 @@ W18/W19作者工区、RF运行WIP、Dayu/IQS未写。以下旧“当前/下一�
 
 ## Next Step
 
-完成W19 ROOT抽象层/数据语义回归与独审→FF/官方每表2项/跨仓复用大节点→并线推送；之后继续C3正式摘要/cache/RF及新样本。详见CURRENT_STATUS与W19接收细则。
+下一步从canonical仓库入口做PDF-C3正式摘要语义→cache跨进程恢复→RF实际采用→新holdout/公司循环。ROOT工区已清理；已发布W19/PDF-C2不重跑。全局技能目录EACCES单列环境收尾，不新增授权门。
 
 ## 历史记录（保留原过程，不作为当前待办）
 

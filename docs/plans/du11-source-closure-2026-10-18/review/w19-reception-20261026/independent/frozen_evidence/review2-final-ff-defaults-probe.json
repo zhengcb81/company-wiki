@@ -1,0 +1,76 @@
+{
+  "results": [
+    {
+      "case": "omitted_both",
+      "CWP_accepts": true,
+      "FF_accepts": true,
+      "request_unchanged": true,
+      "failed": false
+    },
+    {
+      "case": "omitted_statements",
+      "CWP_accepts": true,
+      "FF_accepts": true,
+      "request_unchanged": true,
+      "failed": false
+    },
+    {
+      "case": "omitted_report_types",
+      "CWP_accepts": true,
+      "FF_accepts": true,
+      "request_unchanged": true,
+      "failed": false
+    },
+    {
+      "case": "invalid_explicit_statements",
+      "value": "None",
+      "rejected_with_request_error": true,
+      "failed": false
+    },
+    {
+      "case": "invalid_explicit_statements",
+      "value": "'annual'",
+      "rejected_with_request_error": true,
+      "failed": false
+    },
+    {
+      "case": "invalid_explicit_statements",
+      "value": "()",
+      "rejected_with_request_error": true,
+      "failed": false
+    },
+    {
+      "case": "invalid_explicit_statements",
+      "value": "[]",
+      "rejected_with_request_error": true,
+      "failed": false
+    },
+    {
+      "case": "invalid_explicit_report_types",
+      "value": "None",
+      "rejected_with_request_error": true,
+      "failed": false
+    },
+    {
+      "case": "invalid_explicit_report_types",
+      "value": "'annual'",
+      "rejected_with_request_error": true,
+      "failed": false
+    },
+    {
+      "case": "invalid_explicit_report_types",
+      "value": "()",
+      "rejected_with_request_error": true,
+      "failed": false
+    },
+    {
+      "case": "invalid_explicit_report_types",
+      "value": "[]",
+      "rejected_with_request_error": true,
+      "failed": false
+    }
+  ],
+  "network_requests": 0,
+  "model_calls": 0,
+  "pure_validation_only": true
+}

@@ -1,0 +1,40 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\cw-n4oegnsm\\p", "requested_basetemp_len": 48, "cwd_len": 41, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki\cw-w19
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 0 items / 1 error
+
+=================================== ERRORS ====================================
+____ ERROR collecting tests/financial_statements/test_service_contracts.py ____
+..\.venv\Lib\site-packages\_pytest\python.py:508: in importtestmodule
+    mod = import_path(
+..\.venv\Lib\site-packages\_pytest\pathlib.py:596: in import_path
+    importlib.import_module(module_name)
+..\..\..\AppData\Roaming\uv\python\cpython-3.14-windows-x86_64-none\Lib\importlib\__init__.py:88: in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+<frozen importlib._bootstrap>:1398: in _gcd_import
+    ???
+<frozen importlib._bootstrap>:1371: in _find_and_load
+    ???
+<frozen importlib._bootstrap>:1342: in _find_and_load_unlocked
+    ???
+<frozen importlib._bootstrap>:938: in _load_unlocked
+    ???
+..\.venv\Lib\site-packages\_pytest\assertion\rewrite.py:188: in exec_module
+    exec(co, module.__dict__)
+tests\financial_statements\test_service_contracts.py:11: in <module>
+    from company_wiki.source_catalog.financial_statements.service import (
+src\company_wiki\source_catalog\financial_statements\service.py:32: in <module>
+    from .repository import (
+E     File "C:\Users\郑曾波\Projects\company-wiki\cw-w19\src\company_wiki\source_catalog\financial_statements\repository.py", line 209
+E       self._observe_transition(connection, existing["statement_version_id"], retrieved_at)
+E   IndentationError: unexpected indent
+=========================== short test summary info ===========================
+ERROR tests/financial_statements/test_service_contracts.py
+============================== 1 error in 4.14s ===============================
+ERROR: found no collectors for C:\Users\郑曾波\Projects\company-wiki\cw-w19\tests\financial_statements\test_service_contracts.py::TestReviewFixRegressions
+

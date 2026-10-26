@@ -1,0 +1,7 @@
+{
+  "pure_storage_imports_under_HTTP_provider_refusal": "PASS",
+  "attempted_forbidden_imports": [],
+  "scope": "httpx/Sina import refusal per previous targeted review; base source_catalog package already imports requests through security_identity",
+  "model_calls": 0,
+  "network_requests": 0
+}

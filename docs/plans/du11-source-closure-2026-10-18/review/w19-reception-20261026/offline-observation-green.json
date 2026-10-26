@@ -1,0 +1,24 @@
+{
+  "command": [
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/financial_statements/test_root_acceptance_regressions.py",
+    "-k",
+    "offline_replay or content_transitions",
+    "--no-cov",
+    "--basetemp",
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\cw-ub0xz2_w\\p"
+  ],
+  "cwd": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\cw-w19",
+  "exit_code": 0,
+  "seconds": 12.727,
+  "temporary_root_restored_absent": true,
+  "new_paid_calls": 0,
+  "new_downloads": 0
+}

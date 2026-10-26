@@ -1,0 +1,122 @@
+{
+  "schema_version": "w19-independent-installer-review/1",
+  "status": "PASS",
+  "open_count": 0,
+  "reviewed_at_utc": "2026-10-26T10:05:01.315197+00:00",
+  "scope": "Only installer-owned staging seam and selected installation boundaries. This is not real-target installation completion or permission approval.",
+  "commit": "f7aa0bab5fd110397ce31bfc7c7c069013cfa51d",
+  "source_lf_sha256": {
+    "cw-ff19/tools/sync_installs_b3.py": "6eccbb375b25badc16684d0c79547b36c2e9ee0a68ea445b4430cf3d38ee39de",
+    "cw-ff19/tests/test_selective_installation.py": "da06a88297651a96355d0a2a70d76fa6964833f1c03804e29eb84ac100055307"
+  },
+  "evidence_byte_sha256": {
+    ".planning\\w19-root-reception-20261026\\independent\\installer-probe.py": "912ddacf0934da605813925339f3752ee3ea0d17968dc1f9a6fa05b040e9fb6f",
+    ".planning\\w19-root-reception-20261026\\independent\\installer-probe-results.json": "1c8426ba786d59867b618ac855f030d70fc64ffd3f50fca9cce23730c5eeb4de",
+    ".planning\\w19-root-reception-20261026\\independent\\installer-tests.json": "68ec89c6f52868a987d5ac28b517fbe416bc92a82ab19fb5f40aca316274c67a",
+    ".planning\\w19-root-reception-20261026\\independent\\installer-tests.log": "e2695291c775c9ce524036337127c14b96f2eff688b55a69be693245ec781bf8",
+    ".planning\\w19-root-reception-20261026\\independent\\installer-link-skips.json": "63fa3034960688c958088a95569466b936d632f30ef88118e53ac07959444181",
+    ".planning\\w19-root-reception-20261026\\independent\\installer-cleanup.json": "a6aed2f8fd9df3cd3f09ee1050290fcf9784ca2c871f63527687d09842975784",
+    ".planning\\w19-root-reception-20261026\\install-diagnostic.json": "6afdf805c4889edbebe2f886fb7ba638f66332a53ba83de30e10b07a8e623c27"
+  },
+  "root_cause_review": {
+    "diagnostic": "Owned20s diagnostic stops in Python3.14 tempfile._mkstemp_inner via old installer mkstemp call.",
+    "independent_stdlib_source_check": "Read actual Python3.14.2 _mkstemp_inner: PermissionError under Windows+isdir+os.access(W_OK) continues TMP_MAX loop, same as FileExistsError; os.access can disagree with restricted-token creation rights.",
+    "corrected_behavior": "_stage_file retains same directory, O_WRONLY|O_CREAT|O_EXCL|O_BINARY and0o600; only FileExistsError retries, total8 attempts. PermissionError is not caught/reclassified and propagates unchanged. No access guessing, ACL edit, alternate writer or directory fallback.",
+    "unchanged_downstream": "Commit diff retains fdopen/flush/fsync/copystat/SHA/source recheck/CAS/os.replace/finally cleanup. Only import, local helper and staging call site change."
+  },
+  "independent_probe": {
+    "schema_version": "w19-installer-independent-probe/1",
+    "status": "PASS",
+    "runtime": "3.14.2 (main, Dec  9 2025, 19:03:14) [MSC v.1944 64 bit (AMD64)]",
+    "source_lf_sha256": "6eccbb375b25badc16684d0c79547b36c2e9ee0a68ea445b4430cf3d38ee39de",
+    "results": [
+      {
+        "case": "PermissionError exact object and one attempt",
+        "attempts": 1,
+        "errno": 13,
+        "same_exception_object": true,
+        "target_snapshot_unchanged": true,
+        "selected_batch_stops": true,
+        "pass": true
+      },
+      {
+        "case": "eight real O_EXCL collisions exhaust finitely",
+        "attempts": 8,
+        "preexisting_collision_bytes_mtime_preserved": true,
+        "target_snapshot_unchanged": true,
+        "pass": true
+      },
+      {
+        "case": "two actual collisions then successful exclusive creation",
+        "attempts": 3,
+        "fsync_calls": 1,
+        "only_selected_file_changed": true,
+        "collision_file_untouched": true,
+        "no_new_staging_residue": true,
+        "pass": true
+      },
+      {
+        "case": "failed promotion keeps owner bytes, pending files and removes staging",
+        "status": "partial",
+        "written": [
+          "SKILL.md"
+        ],
+        "not_written": [
+          "scripts/fetch.py"
+        ],
+        "unselected_files_and_config_unchanged": true,
+        "no_staging_residue": true,
+        "pass": true
+      },
+      {
+        "case": "CAS still detects owner edit at new staging seam",
+        "conflict": true,
+        "owner_edit_preserved": true,
+        "no_staging_residue": true,
+        "pass": true
+      }
+    ],
+    "temporary_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\r19i-d_saiiqp",
+    "temporary_root_absent": true,
+    "real_installation_targets_touched": false,
+    "ACL_changes": 0,
+    "network_calls": 0
+  },
+  "focused_tests": {
+    "runtime": "Python3.14.2",
+    "passed": 19,
+    "skipped": 3,
+    "elapsed_seconds": 12.14,
+    "receipt": "installer-tests.json",
+    "source_binding_unchanged": true,
+    "selected_scope": "All destinations are owned pytest tmp; literal CLI case also runs installed --help in temporary roots.",
+    "skip_reason": "directory links unavailable on this filesystem: Access is denied.",
+    "skipped_tests": [
+      "test_destination_aliases_are_one_physical_target",
+      "test_selected_child_symlink_does_not_write_outside_target",
+      "test_physical_root_retargeted_during_staging_is_not_used_for_final_write"
+    ],
+    "skip_limit": "Not counted as PASS; no ACL/privilege adjustment or link-creation workaround attempted."
+  },
+  "test_seam_review": {
+    "finding": "Initial static read found2 cases still observing installer.tempfile.mkstemp after implementation moved to_stage_file. ROOT notified; fixed before independent full test run.",
+    "resolution": "Concurrent target-edit and physical-root-retarget cases now wrap installer._stage_file. Existing CAS, ownership and cleanup assertions are preserved in commit diff.",
+    "status": "CLOSED",
+    "test_quality": "New negative cases bound stdlib TMP_MAX to32 for historical RED safety. Independent probes additionally use real pre-existing collision files and real O_EXCL failures, prove recovery after2 collisions and exact8 exhaustion; they do not mock FileExistsError success behavior."
+  },
+  "preservation": {
+    "production_implementation_edits_by_reviewer": 0,
+    "real_installation_target_writes": 0,
+    "ACL_edits": 0,
+    "network_calls": 0,
+    "model_calls": 0,
+    "owned_test_roots_cleaned": true,
+    "unselected_files_and_user_config_preserved": "Independent byte+mtime snapshots unchanged except explicitly successful selected SKILL.md; collision file also preserved. Failed staging/promotion leaves no new temp residue and pending selected files remain untouched."
+  },
+  "scope_limits": [
+    "Real .agents/.claude/.codex installation directories were never used by reviewer.",
+    "Restricted-token EACCES may still stop real installation despite correct owner ACL; truthful OS failure is expected and is not a new human-approval gate.",
+    "Installer code-quality PASS does not certify successful installation, full runtime execution or the3 skipped directory-link cases.",
+    "No ACL changes, alternate write path or scope expansion is proposed."
+  ]
+}

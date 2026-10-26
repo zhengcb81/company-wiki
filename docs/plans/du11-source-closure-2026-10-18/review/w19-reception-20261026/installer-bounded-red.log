@@ -1,0 +1,53 @@
+FF                                                                       [100%]
+================================== FAILURES ===================================
+____ test_staging_permission_error_is_reported_once_without_collision_spin ____
+
+canonical = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/cw-9iauz_ox/p/test_staging_permission_error_0/canonical')
+tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/cw-9iauz_ox/p/test_staging_permission_error_0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000255C3880C30>
+
+    def test_staging_permission_error_is_reported_once_without_collision_spin(canonical, tmp_path, monkeypatch):
+        attempts = []
+        original_open = os.open
+        def denied(path, flags, *args, **kwargs):
+            if Path(path).name.startswith(".ff-install-"):
+                attempts.append(path)
+                raise PermissionError(13, "controlled permission denial", str(path))
+            return original_open(path, flags, *args, **kwargs)
+        # Bound the old stdlib Windows loop so the RED itself cannot hang.
+        monkeypatch.setattr(tempfile, "TMP_MAX", 32)
+        monkeypatch.setattr(os, "open", denied)
+        result = installer.sync(tmp_path / "skills", files=["SKILL.md"])
+        assert result["status"] == "failed"
+>       assert len(attempts) == 1
+E       AssertionError: assert 32 == 1
+E        +  where 32 = len(['C:\\Users\\郑曾波\\Projects\\company-wiki\\cw-9iauz_ox\\p\\test_staging_permission_error_0\\skills\\filing-fetch\\.ff-i...jects\\company-wiki\\cw-9iauz_ox\\p\\test_staging_permission_error_0\\skills\\filing-fetch\\.ff-install-daoc0zrl', ...])
+
+tests\test_selective_installation.py:32: AssertionError
+___________________ test_staging_collision_retry_is_finite ____________________
+
+canonical = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/cw-9iauz_ox/p/test_staging_collision_retry_i0/canonical')
+tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/cw-9iauz_ox/p/test_staging_collision_retry_i0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x00000255C3880E90>
+
+    def test_staging_collision_retry_is_finite(canonical, tmp_path, monkeypatch):
+        attempts = []
+        original_open = os.open
+        def collisions(path, flags, *args, **kwargs):
+            if Path(path).name.startswith(".ff-install-"):
+                attempts.append(path)
+                raise FileExistsError(17, "controlled collision", str(path))
+            return original_open(path, flags, *args, **kwargs)
+        monkeypatch.setattr(tempfile, "TMP_MAX", 32)
+        monkeypatch.setattr(os, "open", collisions)
+        result = installer.sync(tmp_path / "skills", files=["SKILL.md"])
+        assert result["status"] == "failed"
+>       assert 1 < len(attempts) <= 8
+E       AssertionError: assert 32 <= 8
+E        +  where 32 = len(['C:\\Users\\郑曾波\\Projects\\company-wiki\\cw-9iauz_ox\\p\\test_staging_collision_retry_i0\\skills\\filing-fetch\\.ff-i...jects\\company-wiki\\cw-9iauz_ox\\p\\test_staging_collision_retry_i0\\skills\\filing-fetch\\.ff-install-pf5vqw9v', ...])
+
+tests\test_selective_installation.py:50: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_selective_installation.py::test_staging_permission_error_is_reported_once_without_collision_spin
+FAILED tests/test_selective_installation.py::test_staging_collision_retry_is_finite
+2 failed, 20 deselected in 0.92s

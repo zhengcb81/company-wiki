@@ -1,0 +1,29 @@
+{
+  "command": [
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-o",
+    "addopts=",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.r19inst",
+    "tests/test_selective_installation.py"
+  ],
+  "cwd": "C:\\Users\\郑曾波\\Projects\\company-wiki\\cw-ff19",
+  "exit_code": 0,
+  "stdout_tail": "..................sss.                                                   [100%]\n19 passed, 3 skipped in 12.14s\n",
+  "stderr_tail": "",
+  "temporary_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.r19inst",
+  "source_lf_sha256": {
+    "tools/sync_installs_b3.py": "6eccbb375b25badc16684d0c79547b36c2e9ee0a68ea445b4430cf3d38ee39de",
+    "tests/test_selective_installation.py": "da06a88297651a96355d0a2a70d76fa6964833f1c03804e29eb84ac100055307"
+  },
+  "source_binding_unchanged": true,
+  "scope": "exact selected installer test file; all destinations are test tmp roots"
+}

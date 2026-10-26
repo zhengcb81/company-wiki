@@ -1,0 +1,22 @@
+{
+  "command": [
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/financial_statements",
+    "--no-cov",
+    "--basetemp",
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\cw-qyrcg6_f\\p"
+  ],
+  "cwd": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\cw-ff19",
+  "exit_code": 0,
+  "seconds": 11.226,
+  "temporary_root_restored_absent": true,
+  "new_paid_calls": 0,
+  "new_downloads": 0
+}

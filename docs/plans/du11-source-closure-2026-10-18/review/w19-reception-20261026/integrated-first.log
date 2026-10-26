@@ -1,0 +1,35 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\cw-5t9d3bae\\p", "requested_basetemp_len": 48, "cwd_len": 41, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki\cw-w19
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 135 items
+
+tests\financial_statements\test_canonical_writer_third_party.py ....     [  2%]
+tests\financial_statements\test_cli_subprocess.py ....                   [  5%]
+tests\financial_statements\test_normalize.py .......................     [ 22%]
+tests\financial_statements\test_offline_e2e_full.py ..                   [ 24%]
+tests\financial_statements\test_repository_migration.py ...............  [ 35%]
+tests\financial_statements\test_root_acceptance_regressions.py ........  [ 41%]
+tests\financial_statements\test_root_reuse.py .                          [ 42%]
+tests\financial_statements\test_second_recheck_regressions.py .......... [ 49%]
+                                                                         [ 49%]
+tests\financial_statements\test_service_contracts.py ................... [ 63%]
+...........F                                                             [ 72%]
+tests\financial_statements\test_sina_provider.py .................       [ 85%]
+tests\contract\test_source_catalog_schema_migration.py .......           [ 90%]
+tests\contract\test_source_catalog_canonical_writer.py .............     [100%]
+
+================================== FAILURES ===================================
+____ TestReviewFixRegressions.test_point_in_time_same_day_capture_is_valid ____
+tests\financial_statements\test_service_contracts.py:547: in test_point_in_time_same_day_capture_is_valid
+    assert statement["point_in_time_quality"] == "pit_verified"
+E   AssertionError: assert 'historical_asof_unverifiable' == 'pit_verified'
+E     
+E     - pit_verified
+E     + historical_asof_unverifiable
+=========================== short test summary info ===========================
+FAILED tests/financial_statements/test_service_contracts.py::TestReviewFixRegressions::test_point_in_time_same_day_capture_is_valid
+================== 1 failed, 134 passed in 99.58s (0:01:39) ===================

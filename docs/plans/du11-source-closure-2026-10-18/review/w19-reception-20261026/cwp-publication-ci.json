@@ -1,0 +1,19 @@
+{
+  "schema_version": "w19-exact-public-ci/1",
+  "repo": "company-wiki",
+  "head_sha": "10def09e8fd1967e0b87434ae211d1fbaafbb090",
+  "observed_at": "2026-10-26T09:45:43.602416+00:00",
+  "authentication": "none",
+  "runs": [
+    {
+      "id": 40300969747,
+      "head_sha": "10def09e8fd1967e0b87434ae211d1fbaafbb090",
+      "name": "CI",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40300969747",
+      "created_at": "2026-10-26T09:37:20Z",
+      "updated_at": "2026-10-26T09:42:23Z"
+    }
+  ]
+}

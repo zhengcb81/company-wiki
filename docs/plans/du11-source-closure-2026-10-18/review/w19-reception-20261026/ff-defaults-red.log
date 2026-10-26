@@ -1,0 +1,232 @@
+FFF........                                                              [100%]
+================================== FAILURES ===================================
+_ TestThinClientContract.test_omitted_optional_lists_are_forwarded_without_inventing_defaults[omitted0] _
+
+self = <test_fetch_statements.TestThinClientContract object at 0x000001C80F201450>
+tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/cw-sfbfx2ta/p/test_omitted_optional_lists_ar0')
+omitted = ('statements',)
+
+    @pytest.mark.parametrize("omitted", [("statements",), ("report_types",), ("statements", "report_types")])
+    def test_omitted_optional_lists_are_forwarded_without_inventing_defaults(self, tmp_path, omitted):
+        config = _wiki_root(tmp_path)
+        request = {key: value for key, value in REQUEST.items() if key not in omitted}
+        with patch.object(ff_financial_statements, "_run_bounded_json",
+            return_value=(json.dumps(ENVELOPE).encode(), b"", 0)) as transport:
+>           ff_financial_statements.fetch_statements(config_path=config, request=request)
+
+tests\financial_statements\test_fetch_statements.py:99: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\ff_financial_statements.py:160: in fetch_statements
+    validate_request(request)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+payload = {'schema_version': 'financial-statements-request/1', 'company_query': '中微公司', 'market': 'CN', 'report_types': ['annual', 'semi_annual', 'q1', 'q3'], ...}
+
+    def validate_request(payload: Any) -> dict[str, Any]:
+        """One validation owner on the FF side (CWP validates again server-side)."""
+        if not isinstance(payload, dict):
+            raise FilingFetchError("request must be a JSON object", code="request_error")
+        if payload.get("schema_version") != STATEMENTS_REQUEST_SCHEMA_VERSION:
+            raise FilingFetchError(
+                f"schema_version must be {STATEMENTS_REQUEST_SCHEMA_VERSION}",
+                code="request_error",
+            )
+        allowed_fields = {
+            "schema_version", "company_query", "market", "statements", "report_types",
+            "period_end_from", "period_end_to", "all_history", "knowledge_mode",
+            "as_of_date", "intent", "acquisition_limits", "fields", "continuation",
+        }
+        unknown = set(payload) - allowed_fields
+        if unknown:
+            raise FilingFetchError(
+                f"unknown request fields: {sorted(unknown)}", code="request_error"
+            )
+        fields = payload.get("fields")
+        if fields is not None:
+            if not isinstance(fields, list) or not fields:
+                raise FilingFetchError("fields must be a non-empty list", code="request_error")
+            if not all(isinstance(item, str) and item.strip() for item in fields):
+                raise FilingFetchError(
+                    "fields items must be non-empty text", code="request_error"
+                )
+        continuation = payload.get("continuation")
+        if continuation is not None and (
+            not isinstance(continuation, str) or not continuation.strip()
+        ):
+            raise FilingFetchError(
+                "continuation must be non-empty text", code="request_error"
+            )
+        if continuation is not None and payload.get("intent", "fetch_if_missing") == "reuse_only":
+            raise FilingFetchError(
+                "continuation is not supported with reuse_only", code="request_error"
+            )
+        query = payload.get("company_query")
+        if not isinstance(query, str) or not query.strip() or query != query.strip():
+            raise FilingFetchError(
+                "company_query must be trimmed non-empty text", code="request_error"
+            )
+        market = payload.get("market", "CN")
+        if market != "CN":
+            raise FilingFetchError("only market=CN is supported", code="request_error")
+        for name, known in (("statements", STATEMENT_TYPES), ("report_types", REPORT_TYPES)):
+            values = payload.get(name, tuple(known))
+            if not isinstance(values, list) or not values:
+>               raise FilingFetchError(f"{name} must be a non-empty list", code="request_error")
+E               filing_contracts.FilingFetchError: statements must be a non-empty list
+
+scripts\ff_financial_statements.py:92: FilingFetchError
+_ TestThinClientContract.test_omitted_optional_lists_are_forwarded_without_inventing_defaults[omitted1] _
+
+self = <test_fetch_statements.TestThinClientContract object at 0x000001C80F201950>
+tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/cw-sfbfx2ta/p/test_omitted_optional_lists_ar1')
+omitted = ('report_types',)
+
+    @pytest.mark.parametrize("omitted", [("statements",), ("report_types",), ("statements", "report_types")])
+    def test_omitted_optional_lists_are_forwarded_without_inventing_defaults(self, tmp_path, omitted):
+        config = _wiki_root(tmp_path)
+        request = {key: value for key, value in REQUEST.items() if key not in omitted}
+        with patch.object(ff_financial_statements, "_run_bounded_json",
+            return_value=(json.dumps(ENVELOPE).encode(), b"", 0)) as transport:
+>           ff_financial_statements.fetch_statements(config_path=config, request=request)
+
+tests\financial_statements\test_fetch_statements.py:99: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\ff_financial_statements.py:160: in fetch_statements
+    validate_request(request)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+payload = {'schema_version': 'financial-statements-request/1', 'company_query': '中微公司', 'market': 'CN', 'statements': ['income_statement'], ...}
+
+    def validate_request(payload: Any) -> dict[str, Any]:
+        """One validation owner on the FF side (CWP validates again server-side)."""
+        if not isinstance(payload, dict):
+            raise FilingFetchError("request must be a JSON object", code="request_error")
+        if payload.get("schema_version") != STATEMENTS_REQUEST_SCHEMA_VERSION:
+            raise FilingFetchError(
+                f"schema_version must be {STATEMENTS_REQUEST_SCHEMA_VERSION}",
+                code="request_error",
+            )
+        allowed_fields = {
+            "schema_version", "company_query", "market", "statements", "report_types",
+            "period_end_from", "period_end_to", "all_history", "knowledge_mode",
+            "as_of_date", "intent", "acquisition_limits", "fields", "continuation",
+        }
+        unknown = set(payload) - allowed_fields
+        if unknown:
+            raise FilingFetchError(
+                f"unknown request fields: {sorted(unknown)}", code="request_error"
+            )
+        fields = payload.get("fields")
+        if fields is not None:
+            if not isinstance(fields, list) or not fields:
+                raise FilingFetchError("fields must be a non-empty list", code="request_error")
+            if not all(isinstance(item, str) and item.strip() for item in fields):
+                raise FilingFetchError(
+                    "fields items must be non-empty text", code="request_error"
+                )
+        continuation = payload.get("continuation")
+        if continuation is not None and (
+            not isinstance(continuation, str) or not continuation.strip()
+        ):
+            raise FilingFetchError(
+                "continuation must be non-empty text", code="request_error"
+            )
+        if continuation is not None and payload.get("intent", "fetch_if_missing") == "reuse_only":
+            raise FilingFetchError(
+                "continuation is not supported with reuse_only", code="request_error"
+            )
+        query = payload.get("company_query")
+        if not isinstance(query, str) or not query.strip() or query != query.strip():
+            raise FilingFetchError(
+                "company_query must be trimmed non-empty text", code="request_error"
+            )
+        market = payload.get("market", "CN")
+        if market != "CN":
+            raise FilingFetchError("only market=CN is supported", code="request_error")
+        for name, known in (("statements", STATEMENT_TYPES), ("report_types", REPORT_TYPES)):
+            values = payload.get(name, tuple(known))
+            if not isinstance(values, list) or not values:
+>               raise FilingFetchError(f"{name} must be a non-empty list", code="request_error")
+E               filing_contracts.FilingFetchError: report_types must be a non-empty list
+
+scripts\ff_financial_statements.py:92: FilingFetchError
+_ TestThinClientContract.test_omitted_optional_lists_are_forwarded_without_inventing_defaults[omitted2] _
+
+self = <test_fetch_statements.TestThinClientContract object at 0x000001C80F3B0FC0>
+tmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/cw-sfbfx2ta/p/test_omitted_optional_lists_ar2')
+omitted = ('statements', 'report_types')
+
+    @pytest.mark.parametrize("omitted", [("statements",), ("report_types",), ("statements", "report_types")])
+    def test_omitted_optional_lists_are_forwarded_without_inventing_defaults(self, tmp_path, omitted):
+        config = _wiki_root(tmp_path)
+        request = {key: value for key, value in REQUEST.items() if key not in omitted}
+        with patch.object(ff_financial_statements, "_run_bounded_json",
+            return_value=(json.dumps(ENVELOPE).encode(), b"", 0)) as transport:
+>           ff_financial_statements.fetch_statements(config_path=config, request=request)
+
+tests\financial_statements\test_fetch_statements.py:99: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+scripts\ff_financial_statements.py:160: in fetch_statements
+    validate_request(request)
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+payload = {'schema_version': 'financial-statements-request/1', 'company_query': '中微公司', 'market': 'CN', 'period_end_from': '2016-01-01', ...}
+
+    def validate_request(payload: Any) -> dict[str, Any]:
+        """One validation owner on the FF side (CWP validates again server-side)."""
+        if not isinstance(payload, dict):
+            raise FilingFetchError("request must be a JSON object", code="request_error")
+        if payload.get("schema_version") != STATEMENTS_REQUEST_SCHEMA_VERSION:
+            raise FilingFetchError(
+                f"schema_version must be {STATEMENTS_REQUEST_SCHEMA_VERSION}",
+                code="request_error",
+            )
+        allowed_fields = {
+            "schema_version", "company_query", "market", "statements", "report_types",
+            "period_end_from", "period_end_to", "all_history", "knowledge_mode",
+            "as_of_date", "intent", "acquisition_limits", "fields", "continuation",
+        }
+        unknown = set(payload) - allowed_fields
+        if unknown:
+            raise FilingFetchError(
+                f"unknown request fields: {sorted(unknown)}", code="request_error"
+            )
+        fields = payload.get("fields")
+        if fields is not None:
+            if not isinstance(fields, list) or not fields:
+                raise FilingFetchError("fields must be a non-empty list", code="request_error")
+            if not all(isinstance(item, str) and item.strip() for item in fields):
+                raise FilingFetchError(
+                    "fields items must be non-empty text", code="request_error"
+                )
+        continuation = payload.get("continuation")
+        if continuation is not None and (
+            not isinstance(continuation, str) or not continuation.strip()
+        ):
+            raise FilingFetchError(
+                "continuation must be non-empty text", code="request_error"
+            )
+        if continuation is not None and payload.get("intent", "fetch_if_missing") == "reuse_only":
+            raise FilingFetchError(
+                "continuation is not supported with reuse_only", code="request_error"
+            )
+        query = payload.get("company_query")
+        if not isinstance(query, str) or not query.strip() or query != query.strip():
+            raise FilingFetchError(
+                "company_query must be trimmed non-empty text", code="request_error"
+            )
+        market = payload.get("market", "CN")
+        if market != "CN":
+            raise FilingFetchError("only market=CN is supported", code="request_error")
+        for name, known in (("statements", STATEMENT_TYPES), ("report_types", REPORT_TYPES)):
+            values = payload.get(name, tuple(known))
+            if not isinstance(values, list) or not values:
+>               raise FilingFetchError(f"{name} must be a non-empty list", code="request_error")
+E               filing_contracts.FilingFetchError: statements must be a non-empty list
+
+scripts\ff_financial_statements.py:92: FilingFetchError
+=========================== short test summary info ===========================
+FAILED tests/financial_statements/test_fetch_statements.py::TestThinClientContract::test_omitted_optional_lists_are_forwarded_without_inventing_defaults[omitted0]
+FAILED tests/financial_statements/test_fetch_statements.py::TestThinClientContract::test_omitted_optional_lists_are_forwarded_without_inventing_defaults[omitted1]
+FAILED tests/financial_statements/test_fetch_statements.py::TestThinClientContract::test_omitted_optional_lists_are_forwarded_without_inventing_defaults[omitted2]
+3 failed, 8 passed, 12 deselected in 1.05s

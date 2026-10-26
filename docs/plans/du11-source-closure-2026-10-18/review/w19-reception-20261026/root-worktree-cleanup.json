@@ -1,0 +1,13 @@
+{
+  "schema_version": "w19-root-owned-cleanup/1",
+  "cwp_worktree": "cw-w19",
+  "ff_worktree": "cw-ff19",
+  "both_absent": true,
+  "clean_content_checked_before_remove": true,
+  "fully_merged_ancestry_checked_before_remove": true,
+  "windows_filemode_comparison_ignored_per_command_only": true,
+  "force_used": false,
+  "author_worktrees_untouched": true,
+  "production_originals_config_catalog_untouched": true,
+  "unrelated_primary_hook_mode_wip_preserved": true
+}

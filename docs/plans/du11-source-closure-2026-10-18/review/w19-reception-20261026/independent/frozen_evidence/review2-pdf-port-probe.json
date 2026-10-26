@@ -1,0 +1,11 @@
+{
+  "scope": "PdfReading owner with complete neutral backend; no SDK/real PDF/consumer handler E2E",
+  "select_verify_replay_same_backend": true,
+  "shared_budget_identity": true,
+  "deadline_forwarded": true,
+  "wrong_source_rejected": true,
+  "recipe_drift_rejected": true,
+  "Docling_imported": false,
+  "model_calls": 0,
+  "downloads": 0
+}

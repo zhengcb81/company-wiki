@@ -1,0 +1,39 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\cw-nrvrgf74\\p", "requested_basetemp_len": 48, "cwd_len": 41, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.14.2, pytest-9.1.1, pluggy-1.6.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki\cw-w19
+configfile: pytest.ini
+plugins: anyio-4.14.2, asyncio-1.4.0, cov-7.1.0, mock-3.15.1, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 11 items / 8 deselected / 3 selected
+
+tests\financial_statements\test_root_acceptance_regressions.py FFF       [100%]
+
+================================== FAILURES ===================================
+_ test_content_transitions_follow_observation_order_even_when_old_content_returns[False] _
+tests\financial_statements\test_root_acceptance_regressions.py:136: in test_content_transitions_follow_observation_order_even_when_old_content_returns
+    assert value(returned) == value(original)
+E   AssertionError: assert '6691287328.670000' == '6691287327.670000'
+E     
+E     - 6691287327.670000
+E     ?          ^
+E     + 6691287328.670000
+E     ?          ^
+_ test_content_transitions_follow_observation_order_even_when_old_content_returns[True] _
+tests\financial_statements\test_root_acceptance_regressions.py:134: in test_content_transitions_follow_observation_order_even_when_old_content_returns
+    assert Decimal(value(revised)) == Decimal(value(original)) + 1
+E   AssertionError: assert Decimal('6691287327.670000') == (Decimal('6691287327.670000') + 1)
+E    +  where Decimal('6691287327.670000') = Decimal('6691287327.670000')
+E    +    where '6691287327.670000' = value({'statement_version_id': 'fsv-e63301e36bb4f724405459a072fa7ad191aff5b2a008b2c2123408657d98e074', 'statement_type': 'income_statement', 'period_end': '2026-06-30', 'period_kind': 'semi_annual', ...})
+E    +  and   Decimal('6691287327.670000') = Decimal('6691287327.670000')
+E    +    where '6691287327.670000' = value({'statement_version_id': 'fsv-e63301e36bb4f724405459a072fa7ad191aff5b2a008b2c2123408657d98e074', 'statement_type': 'income_statement', 'period_end': '2026-06-30', 'period_kind': 'semi_annual', ...})
+_____ test_pit_coverage_does_not_borrow_future_periods_or_fetch_envelope ______
+tests\financial_statements\test_root_acceptance_regressions.py:160: in test_pit_coverage_does_not_borrow_future_periods_or_fetch_envelope
+    assert statement["coverage"]["observed_periods"] == len(old_periods)
+E   AssertionError: assert 36 == 10
+E    +  where 10 = len({'2024-03-31', '2024-06-30', '2024-09-30', '2024-12-31', '2025-03-31', '2025-06-30', ...})
+=========================== short test summary info ===========================
+FAILED tests/financial_statements/test_root_acceptance_regressions.py::test_content_transitions_follow_observation_order_even_when_old_content_returns[False]
+FAILED tests/financial_statements/test_root_acceptance_regressions.py::test_content_transitions_follow_observation_order_even_when_old_content_returns[True]
+FAILED tests/financial_statements/test_root_acceptance_regressions.py::test_pit_coverage_does_not_borrow_future_periods_or_fetch_envelope
+====================== 3 failed, 8 deselected in 11.89s =======================

@@ -1,0 +1,25 @@
+{
+  "command": [
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.venv\\Scripts\\python.exe",
+    "-X",
+    "utf8",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-rs",
+    "-o",
+    "addopts=",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.r19link",
+    "tests/test_selective_installation.py::test_destination_aliases_are_one_physical_target",
+    "tests/test_selective_installation.py::test_selected_child_symlink_does_not_write_outside_target",
+    "tests/test_selective_installation.py::test_physical_root_retargeted_during_staging_is_not_used_for_final_write"
+  ],
+  "exit_code": 0,
+  "stdout": "sss                                                                      [100%]\n=========================== short test summary info ===========================\nSKIPPED [3] tests\\test_selective_installation.py:99: directory links unavailable on this filesystem: b'Access is denied.\\r\\n'\n3 skipped in 0.34s\n",
+  "stderr": "",
+  "temporary_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.r19link"
+}

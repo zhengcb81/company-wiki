@@ -1,0 +1,122 @@
+{
+  "schema_version": "w19-global-installation-attempt/1",
+  "status": "FAILED_OS_PERMISSION_NO_WRITES",
+  "seconds": 0.38098319998243824,
+  "result": {
+    "schema_version": "ff-install-result/1",
+    "status": "failed",
+    "scope": [
+      "SKILL.md",
+      "scripts/fetch_statements.py",
+      "scripts/ff_financial_statements.py"
+    ],
+    "targets": [
+      {
+        "physical_target": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch",
+        "destinations": [
+          "C:\\Users\\郑曾波\\.agents\\skills",
+          "C:\\Users\\郑曾波\\.claude\\skills"
+        ],
+        "written": [],
+        "not_written": [
+          "SKILL.md",
+          "scripts/fetch_statements.py",
+          "scripts/ff_financial_statements.py"
+        ],
+        "conflicts": [],
+        "preserved_config": [],
+        "errors": [
+          {
+            "path": "SKILL.md",
+            "reason": "[Errno 13] Permission denied: 'C:\\\\Users\\\\郑曾波\\\\.agents\\\\skills\\\\filing-fetch\\\\.ff-install-62d4473a461e'"
+          }
+        ],
+        "full_runtime_drift": [
+          "SKILL.md",
+          "scripts/fetch_filing.py",
+          "scripts/fetch_statements.py",
+          "scripts/ff_financial_statements.py"
+        ],
+        "outside_scope_runtime_drift": [
+          "scripts/fetch_filing.py"
+        ],
+        "runtime_diagnostic_errors": [],
+        "runtime_byte_complete": false,
+        "runtime_execution_validation": "NOT_EVALUATED"
+      },
+      {
+        "physical_target": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch",
+        "destinations": [
+          "C:\\Users\\郑曾波\\.codex\\skills"
+        ],
+        "written": [],
+        "not_written": [
+          "SKILL.md",
+          "scripts/fetch_statements.py",
+          "scripts/ff_financial_statements.py"
+        ],
+        "conflicts": [],
+        "preserved_config": [],
+        "errors": [
+          {
+            "path": "SKILL.md",
+            "reason": "[Errno 13] Permission denied: 'C:\\\\Users\\\\郑曾波\\\\.codex\\\\skills\\\\filing-fetch\\\\.ff-install-d634e968ebbe'"
+          }
+        ],
+        "full_runtime_drift": [
+          "SKILL.md",
+          "scripts/fetch_filing.py",
+          "scripts/fetch_statements.py",
+          "scripts/ff_financial_statements.py"
+        ],
+        "outside_scope_runtime_drift": [
+          "scripts/fetch_filing.py"
+        ],
+        "runtime_diagnostic_errors": [],
+        "runtime_byte_complete": false,
+        "runtime_execution_validation": "NOT_EVALUATED"
+      }
+    ]
+  },
+  "target_bytes_unchanged": true,
+  "checks": [
+    {
+      "target": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\SKILL.md",
+      "before_sha256": "f6c022719f4f2b900f753a7fd984156a67e7aeadfbb5e1f89ec31b3bd493c022",
+      "after_sha256": "f6c022719f4f2b900f753a7fd984156a67e7aeadfbb5e1f89ec31b3bd493c022",
+      "unchanged": true
+    },
+    {
+      "target": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\fetch_statements.py",
+      "before_sha256": null,
+      "after_sha256": null,
+      "unchanged": true
+    },
+    {
+      "target": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\ff_financial_statements.py",
+      "before_sha256": null,
+      "after_sha256": null,
+      "unchanged": true
+    },
+    {
+      "target": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch\\SKILL.md",
+      "before_sha256": "f6c022719f4f2b900f753a7fd984156a67e7aeadfbb5e1f89ec31b3bd493c022",
+      "after_sha256": "f6c022719f4f2b900f753a7fd984156a67e7aeadfbb5e1f89ec31b3bd493c022",
+      "unchanged": true
+    },
+    {
+      "target": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch\\scripts\\fetch_statements.py",
+      "before_sha256": null,
+      "after_sha256": null,
+      "unchanged": true
+    },
+    {
+      "target": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch\\scripts\\ff_financial_statements.py",
+      "before_sha256": null,
+      "after_sha256": null,
+      "unchanged": true
+    }
+  ],
+  "ACL_changes": 0,
+  "followup": "Run the same bounded three-file command from a user context that already has write access; do not change ACL or bypass the restricted context."
+}

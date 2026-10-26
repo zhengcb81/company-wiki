@@ -1,0 +1,5 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.r19r2p", "requested_basetemp_len": 42, "cwd_len": 41, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+...............                                                          [100%]
+15 passed in 6.77s
+
+STDERR

@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-26",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_W19_ROOT_LAYER_AND_DATA_QUALITY_ACCEPTANCE_IN_PROGRESS",
+  "overall_status": "W19_PUBLISHED_CI_GREEN_C3_NEXT_GLOBAL_INSTALL_OS_GAP",
   "parallel_packages_20261025": {
     "status": "W16_W17_W18_ROOT_COMPONENT_ACCEPTED_MERGED",
     "entry": "harness_lanes/20261025/README.md",
@@ -21,18 +21,18 @@
     "new_downloads": 0,
     "annual14_grade_unchanged": "Historical8/6/0 and10/4/0 reports preserved; latest source/input12/2/0; response semantics NOT_REVIEWED and RF OPEN"
   },
-  "current_authorized_scope": "User resumed implementation; Sina and PDF stay within corresponding abstract owners; no new per-material approval. Configured cumulative 10M tokens/USD20 including unknown holds. Native goal active observed this session.",
+  "current_authorized_scope": "User continue authorizes implementation; no per-material/manual canary approvals. Current configured resource authority10M tokens/USD20 including unknown. Native goal controller last read blocked; no tool-supported resume claimed.",
   "parent_plan_id": "document-understanding-2026-10-13",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
-  "last_code_commit": "4c8b4642a12016c1a587c5f1fe47ef9635221815",
+  "last_code_commit": "10def09e8fd1967e0b87434ae211d1fbaafbb090",
   "code_ci": {
-    "head_sha": "4c8b4642a12016c1a587c5f1fe47ef9635221815",
+    "head_sha": "10def09e8fd1967e0b87434ae211d1fbaafbb090",
     "status": "completed",
     "conclusion": "success",
-    "run_id": 40291031425,
-    "receipt": "review/pdf-c2-publication-20261026/publication-ci.json"
+    "run_id": 40300969747,
+    "receipt": "review/w19-reception-20261026/cwp-publication-ci.json"
   },
   "formal_v4_offline_selection_replay_20261025": {
     "status": "EXACT_REPRODUCED_NO_PAID_CALL",
@@ -2241,14 +2241,46 @@
     "formal_summary_cache_rf": "OPEN"
   },
   "w19_root_reception_20261026": {
-    "status": "IN_PROGRESS_NOT_ACCEPTED_NOT_PUBLISHED",
+    "status": "COMPONENT_ACCEPTED_PUBLISHED_CI_GREEN_GLOBAL_INSTALL_OS_GAP",
     "entry": "review/w19-reception-20261026/README.md",
-    "worktree": "cw-w19",
-    "author_cwp_head": "22ab7a4196619047b3a18746a9ad95aa3c03a888",
-    "author_ff_head": "d396fe73df27768468d6ea84835562820b4ae952",
-    "root_regressions": "8 red then 8 green; layer tests in progress",
-    "linux_mypy": "388 source files PASS",
-    "new_paid_calls": 0,
-    "next": "Finish layer tests and independent review, then official six-value and FF/CWP reuse E2E; merge only afterward."
+    "cwp_main_head": "10def09e8fd1967e0b87434ae211d1fbaafbb090",
+    "ff_main_head": "5396bd688e5b775e746fe3290852f0532d4548f8",
+    "author_ancestors_preserved": true,
+    "reviewed_published_files_sha_matches": 36,
+    "independent_implementation_review": "PASS_ZERO_OPEN",
+    "independent_official_six_values": "PASS_ZERO_OPEN_SAMPLE_SCOPE",
+    "cwp_ci": 40300969747,
+    "ff_ci": 40301405046,
+    "focused_tests": 196,
+    "release_seam_tests": 51,
+    "ff_statement_tests": 35,
+    "test_counts_overlap": true,
+    "live_api": {
+      "requests": 4,
+      "response_bytes": 942986,
+      "cost_usd": "0.00",
+      "seconds": 23.682963800034486,
+      "temporary_root_restored_absent": true,
+      "production_config_catalog_unchanged": true
+    },
+    "new_model_calls": 0,
+    "per_row_unit_scale": "Unproven units remain None; six official nominal-yuan checks do not upgrade all provider rows.",
+    "next": "C3 from canonical project entrypoints: formal summary semantics, zero-repeat-cost restart/cache, actual RF adoption and held-out companies. Do not block on global-skill OS write access.",
+    "ff_api_release_head": "72024a8597e27607badbbfdd06c39446269d7010",
+    "ff_installer_ci": 40304350720,
+    "root_worktrees_removed": true,
+    "installation": {
+      "status": "FAILED_OS_PERMISSION_NO_WRITES",
+      "seconds": 0.38098319998243824,
+      "target_bytes_unchanged": true,
+      "project_manual_gate": false,
+      "ACL_changes": 0,
+      "receipt": "review/w19-reception-20261026/install-actual-receipt.json"
+    }
+  },
+  "native_goal_controller_observation": {
+    "status": "blocked",
+    "implementation_authorized_by_user": true,
+    "resume_tool_available": false
   }
 }

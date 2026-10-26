@@ -1,0 +1,152 @@
+[
+  {
+    "original": "review2-probe-results.json",
+    "archived": "independent/frozen_evidence/review2-probe-results.json",
+    "byte_sha256": "c040ccadb36b38e87da33e5aa3cee583bd9407439db8e2ef6a3bfd2fcc32b66a",
+    "status": "exact"
+  },
+  {
+    "original": "review2-probe-after-root-results.json",
+    "archived": "independent/frozen_evidence/review2-probe-after-root-results.json",
+    "byte_sha256": "5a6e099680bae12776c32e5d86110dcd5b1d777bfb991339c0d8b3a1e7961606",
+    "status": "exact"
+  },
+  {
+    "original": "review2-additional-probe-clean-results.json",
+    "archived": "independent/frozen_evidence/review2-additional-probe-clean-results.json",
+    "byte_sha256": "9ced58a14fbb700f33d3e0d6f72e3b180d43a904773c41d3901ca930c106df9a",
+    "status": "exact"
+  },
+  {
+    "original": "review2-ff-defaults-probe.json",
+    "archived": "independent/frozen_evidence/review2-ff-defaults-probe.json",
+    "byte_sha256": "ea99a537f0f6f96b6b07e7d0c99c6433cbfa60d9696db02ffdd5995722dfb002",
+    "status": "exact"
+  },
+  {
+    "original": "review2-final-core-probe-results.json",
+    "archived": "independent/frozen_evidence/review2-final-core-probe-results.json",
+    "byte_sha256": "e67152a581337f75a581696720338bcc2637469ca29b09964d553631c1271777",
+    "status": "exact"
+  },
+  {
+    "original": "review2-final-additional-probe-results.json",
+    "archived": "independent/frozen_evidence/review2-final-additional-probe-results.json",
+    "byte_sha256": "430b93f263ccd6a98a76ce3721a6a815adb3b55ace97bf4443d024e5272a7627",
+    "status": "exact"
+  },
+  {
+    "original": "review2-final-ff-defaults-probe.json",
+    "archived": "independent/frozen_evidence/review2-final-ff-defaults-probe.json",
+    "byte_sha256": "aed45bf8941bcf1cfbaa2853f701e0e584c2ade400db1d8d99afbe5883d9a530",
+    "status": "exact"
+  },
+  {
+    "original": "review2-focused-tests.json",
+    "archived": "independent/frozen_evidence/review2-focused-tests.json",
+    "byte_sha256": "a932ae67e1778f5d025d914960607b214ad6ab0f68f3464f0c05829272ad2266",
+    "status": "exact"
+  },
+  {
+    "original": "review2-focused-tests.log",
+    "archived": "independent/frozen_evidence/review2-focused-tests.log",
+    "byte_sha256": "580fc30b8ae142a16a4dffe17dacec13bbc6110ec3580ed83b7bcce2f2a2efed",
+    "status": "exact"
+  },
+  {
+    "original": "review2-final-targeted-tests.json",
+    "archived": "independent/frozen_evidence/review2-final-targeted-tests.json",
+    "byte_sha256": "00f016def7f95f45b2dfc59e8b3c466e23cbc0379d689fc608a5f72d40e8a727",
+    "status": "exact"
+  },
+  {
+    "original": "review2-final-plus-compatibility-tests.json",
+    "archived": "independent/frozen_evidence/review2-final-plus-compatibility-tests.json",
+    "byte_sha256": "6442881d324a0bcee53eefe35f5d37ed399739bd8197615300d5dd5ae646006d",
+    "status": "exact"
+  },
+  {
+    "original": "review2-final-plus-compatibility-tests.log",
+    "archived": "independent/frozen_evidence/review2-final-plus-compatibility-tests.log",
+    "byte_sha256": "587b42b3e50bef1dbc40d36ca175b3d029f71cceab6cd0f1d6dfc2155adc50ab",
+    "status": "exact"
+  },
+  {
+    "original": "review2-pdf-tests.json",
+    "archived": "independent/frozen_evidence/review2-pdf-tests.json",
+    "byte_sha256": "c4bf024eb486e8bb1147dfde07279b77284be32138937d3a98f53ec7691aac50",
+    "status": "exact"
+  },
+  {
+    "original": "review2-pdf-tests.log",
+    "archived": "independent/frozen_evidence/review2-pdf-tests.log",
+    "byte_sha256": "5b53d200fd0b4ad871bd84c0ab0bb35da1b19791452256d40f7ca9c18fa41480",
+    "status": "exact"
+  },
+  {
+    "original": "review2-pdf-port-probe.json",
+    "archived": "independent/frozen_evidence/review2-pdf-port-probe.json",
+    "byte_sha256": "eef8ab4b8a3b893bedf7dd446792599c81ba9f1b8158e222ddbe1c916eae2908",
+    "status": "exact"
+  },
+  {
+    "original": "review2-pure-import-probe.json",
+    "archived": "independent/frozen_evidence/review2-pure-import-probe.json",
+    "byte_sha256": "3fb8a24ed2799953e8a63b4416e231a9b1706e370a7c4f1b97b8d91476085ed7",
+    "status": "exact"
+  },
+  {
+    "original": "independent-offline-boundary-v1.json",
+    "archived": "independent/frozen_evidence/independent-offline-boundary-v1.json",
+    "byte_sha256": "9c7dd238e09cdc401a72f758bd4628554c587396ddb1ed71206b3f450f020d4c",
+    "status": "exact"
+  },
+  {
+    "original": "review2-final-cleanup.json",
+    "archived": "independent/frozen_evidence/review2-final-cleanup.json",
+    "byte_sha256": "62e7880361ad890697367b13253f87076e5d67968d16f95bd955f8332ac8fcd4",
+    "status": "exact"
+  },
+  {
+    "original": ".planning\\w19-root-reception-20261026\\independent\\installer-probe.py",
+    "archived": "independent/frozen_evidence/installer-probe.py",
+    "byte_sha256": "912ddacf0934da605813925339f3752ee3ea0d17968dc1f9a6fa05b040e9fb6f",
+    "status": "exact"
+  },
+  {
+    "original": ".planning\\w19-root-reception-20261026\\independent\\installer-probe-results.json",
+    "archived": "independent/frozen_evidence/installer-probe-results.json",
+    "byte_sha256": "1c8426ba786d59867b618ac855f030d70fc64ffd3f50fca9cce23730c5eeb4de",
+    "status": "exact"
+  },
+  {
+    "original": ".planning\\w19-root-reception-20261026\\independent\\installer-tests.json",
+    "archived": "independent/frozen_evidence/installer-tests.json",
+    "byte_sha256": "68ec89c6f52868a987d5ac28b517fbe416bc92a82ab19fb5f40aca316274c67a",
+    "status": "exact"
+  },
+  {
+    "original": ".planning\\w19-root-reception-20261026\\independent\\installer-tests.log",
+    "archived": "independent/frozen_evidence/installer-tests.log",
+    "byte_sha256": "e2695291c775c9ce524036337127c14b96f2eff688b55a69be693245ec781bf8",
+    "status": "exact"
+  },
+  {
+    "original": ".planning\\w19-root-reception-20261026\\independent\\installer-link-skips.json",
+    "archived": "independent/frozen_evidence/installer-link-skips.json",
+    "byte_sha256": "63fa3034960688c958088a95569466b936d632f30ef88118e53ac07959444181",
+    "status": "exact"
+  },
+  {
+    "original": ".planning\\w19-root-reception-20261026\\independent\\installer-cleanup.json",
+    "archived": "independent/frozen_evidence/installer-cleanup.json",
+    "byte_sha256": "a6aed2f8fd9df3cd3f09ee1050290fcf9784ca2c871f63527687d09842975784",
+    "status": "exact"
+  },
+  {
+    "original": ".planning\\w19-root-reception-20261026\\install-diagnostic.json",
+    "archived": "independent/frozen_evidence/install-diagnostic.json",
+    "byte_sha256": "6afdf805c4889edbebe2f886fb7ba638f66332a53ba83de30e10b07a8e623c27",
+    "status": "exact"
+  }
+]

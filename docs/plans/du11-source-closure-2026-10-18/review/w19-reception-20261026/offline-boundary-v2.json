@@ -1,0 +1,60 @@
+{
+  "schema_version": "w19-ff-cwp-offline-acceptance/1",
+  "passed": false,
+  "test_provider": "frozen real Sina bytes via CWP fixture port",
+  "real_network_requests": 0,
+  "new_paid_calls": 0,
+  "source_binding": {
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\cw-w19\\src\\company_wiki\\source_catalog\\financial_statements\\__init__.py": "0174bcd43e6bf1aa766ac01652cb326dd425cc0e2cea4bbe91e811dc6698b841",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\cw-w19\\src\\company_wiki\\source_catalog\\financial_statements\\cli.py": "431294e62a0dda25bd912a582a3770a90f5ed2bb1bbb3989330ab17664aa895c",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\cw-w19\\src\\company_wiki\\source_catalog\\financial_statements\\contracts.py": "6400139fb2f65601afc08d06987fa42ac9cb20e95b2802a3dc16d54ddb3f0b05",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\cw-w19\\src\\company_wiki\\source_catalog\\financial_statements\\normalize.py": "63bd8e32dfbb518ce8fbc7872a199114d76bdb6695255db46ac4a0f3611543c0",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\cw-w19\\src\\company_wiki\\source_catalog\\financial_statements\\provider_contracts.py": "9dfc365a9f20cfc3da772d251efc706ea053d33a7a6bb96b26d035409d0657c3",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\cw-w19\\src\\company_wiki\\source_catalog\\financial_statements\\repository.py": "a7ce23e86b3839d44b7ffc24a2799a056dff9255d3a73a2a17c22e52edfd6fe3",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\cw-w19\\src\\company_wiki\\source_catalog\\financial_statements\\schema.py": "f34b849d945beed96855d27d8059de1cbd19e89e3b14016a754dbfeca0d71a29",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\cw-w19\\src\\company_wiki\\source_catalog\\financial_statements\\service.py": "2a109f33d531e9f3a4534296f11c9ef5324fa0174f66543b78fac4809af58114",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\cw-w19\\src\\company_wiki\\source_catalog\\financial_statements\\sina_provider.py": "2ef766f7729908b1714ba02848b89d84977977ec9c2767e5f8a484a3d514ec1a",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\cw-w19\\src\\company_wiki\\source_catalog\\canonical_writer.py": "f46d3253be6396024e539105ff673dd3b0027cef87466e44ea46907f32a29c44",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\cw-w19\\src\\company_wiki\\source_catalog\\service.py": "c3f4c43dad6f9743d0d6dda9183017ecd17752fb1202fbc71f017a0c2f68a67f",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\cw-ff19\\scripts\\ff_financial_statements.py": "3334cac4b6bf3f49d3979f5e1834d8c4ff35f522938dd0f91ef13c1c6508fed4",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\cw-ff19\\scripts\\fetch_statements.py": "4cd7a2409959a762588de262a9979a6c8c2a64db45ff128468f778f6fa947128"
+  },
+  "repeat_changed_files": [
+    {
+      "path": ".source_catalog\\catalog.sqlite3",
+      "before": [
+        4759552,
+        "7cb4f94ecd8d9d5c88331ffa2a8debd00159b94ab3e6fb6bb9502a7adebcb54c"
+      ],
+      "after": [
+        4759552,
+        "2b2fb30f2ae1251813b56cfdc3bb7d85bfdd79189f2f3b52f406ac02b9d20cb1"
+      ]
+    },
+    {
+      "path": ".source_catalog\\catalog.sqlite3-shm",
+      "before": [
+        32768,
+        "2c947c4f0e7811cd5f267adad3763634788a728a8ef23d08b1857a935427fb28"
+      ],
+      "after": [
+        32768,
+        "fd4c9fda9cd3f9ae7c962b0ddf37232294d55580e1aa165aa06129b8549389eb"
+      ]
+    },
+    {
+      "path": ".source_catalog\\catalog.sqlite3-wal",
+      "before": [
+        4264232,
+        "7658e618d70b9db2eb41915e96db0ac88ba2322a87914810a2a44f75469dab9d"
+      ],
+      "after": [
+        0,
+        "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      ]
+    }
+  ],
+  "temporary_root_restored_absent": true,
+  "elapsed_seconds": 8.144,
+  "source_binding_unchanged": true
+}
