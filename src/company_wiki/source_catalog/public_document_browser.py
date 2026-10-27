@@ -172,6 +172,13 @@ def document_version_id(document_id: str, source_id: str,
         digest).decode("ascii").rstrip("=")
 
 
+def _required_text(value: Any, field: str, *, max_length: int = 300) -> str:
+    if not isinstance(value, str) or not value.strip() \
+            or len(value) > max_length:
+        raise PublicBrowseError(f"invalid_{field}")
+    return value.strip()
+
+
 def _optional_text(value: Any, field: str, *, max_length: int = 200) -> str | None:
     if value is None:
         return None
@@ -182,25 +189,28 @@ def _optional_text(value: Any, field: str, *, max_length: int = 200) -> str | No
 
 
 def _optional_text_list(value: Any, field: str) -> tuple[str, ...] | None:
-    if value is None:
+    if value is None or value == []:
+        # An explicitly empty list means "no filter", like an absent field.
         return None
     if not isinstance(value, list) or not value \
             or len(value) > 32 \
             or any(not isinstance(item, str) or not _TOKEN_RE.fullmatch(item)
                    for item in value):
         raise PublicBrowseError(f"invalid_{field}")
-    return tuple(dict.fromkeys(value))
+    # Sorted at the seam: filter identity is a set, so a replayed page may
+    # re-send the same values in any order.
+    return tuple(sorted(dict.fromkeys(value)))
 
 
 def _optional_int_list(value: Any, field: str) -> tuple[int, ...] | None:
-    if value is None:
+    if value is None or value == []:
         return None
     if not isinstance(value, list) or not value \
             or len(value) > 200 \
             or any(isinstance(item, bool) or not isinstance(item, int)
                    or not 1900 <= item <= 2200 for item in value):
         raise PublicBrowseError(f"invalid_{field}")
-    return tuple(dict.fromkeys(value))
+    return tuple(sorted(dict.fromkeys(value)))
 
 
 def _normalize_filters(market: str | None,
@@ -354,9 +364,8 @@ class PublicDocumentBrowser:
             raise PublicBrowseError("request_fields_not_exact")
         if request["schema_version"] != BROWSE_REQUEST_SCHEMA:
             raise PublicBrowseError("unsupported_request_version")
-        entity = _optional_text(request["canonical_entity_id"],
-                                "canonical_entity_id", max_length=300)
-        assert entity is not None
+        entity = _required_text(request["canonical_entity_id"],
+                                "canonical_entity_id")
         limit = request["limit"]
         if limit is None:
             limit = _DEFAULT_LIMIT
@@ -683,6 +692,13 @@ class PublicDocumentBrowser:
             reason_codes.append("entity_not_indexed")
         elif not total:
             reason_codes.append("no_documents_match_filters")
+        elif offset >= total:
+            # A cursor past the end of the pinned snapshot (e.g. forged or
+            # replayed after the snapshot shrank behind a stale check) is
+            # reported honestly as an empty page, never as zero available
+            # items.
+            state = "empty"
+            reason_codes.append("page_offset_beyond_total")
         if any(not version.resolvable for version in page_items):
             state = "partial"
             reason_codes.append("some_versions_not_resolvable")

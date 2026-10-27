@@ -426,6 +426,49 @@ def test_filter_conflicts_and_bad_tokens_are_rejected(tmp_path):
         _browse(browser, market="x" * 500)
     with pytest.raises(PublicBrowseError):
         browser.browse({"schema_version": BROWSE_REQUEST_SCHEMA})
+    # F-01 (review): a null canonical entity is a blocked request, never an
+    # internal crash (CLI must emit the blocked envelope with exit 2).
+    with pytest.raises(PublicBrowseError):
+        _browse(browser, canonical_entity_id=None)
+    catalog.close()
+
+
+def test_snapshot_filter_replay_is_order_insensitive_and_empty_list_is_unset(tmp_path):
+    catalog = _build(tmp_path)
+    browser = PublicDocumentBrowser(catalog)
+    first = _browse(browser, document_kinds=["annual_report", "news"], limit=3)
+    assert first["state"] == "available"
+    # F-02 (review): re-sending the same filter SET in a different order is
+    # a replay, not a conflict.
+    replay = _browse(browser, limit=3,
+                     document_kinds=["news", "annual_report"],
+                     snapshot_id=first["page"]["snapshot_id"])
+    assert [i["document_version_id"] for i in replay["items"]] == \
+        [i["document_version_id"] for i in first["items"]]
+    # F-04 (review): an empty filter list means "no filter" — same cabinet as
+    # an absent filter, on fresh and replayed pages alike.
+    unfiltered = _browse(browser, document_kinds=[], limit=3)
+    assert unfiltered["page"]["total"] == _browse(browser, limit=3)["page"]["total"]
+    catalog.close()
+
+
+def test_forged_cursor_offset_beyond_total_reports_empty(tmp_path):
+    catalog = _build(tmp_path)
+    browser = PublicDocumentBrowser(catalog)
+    first = _browse(browser, document_kinds=["news"], limit=3)
+    assert first["page"]["total"] == 1
+    import base64
+    import json as _json
+    forged = base64.urlsafe_b64encode(_json.dumps({
+        "v": 1, "snapshot": first["page"]["snapshot_id"], "offset": 999999,
+    }).encode("utf-8")).decode("ascii").rstrip("=")
+    # F-03 (review): a past-the-end offset is reported honestly as an empty
+    # page, not as a silently "available" zero-item slice.
+    page = _browse(browser, cursor=forged)
+    assert page["items"] == []
+    assert page["state"] == "empty"
+    assert "page_offset_beyond_total" in page["reason_codes"]
+    assert page["page"]["next_cursor"] is None
     catalog.close()
 
 
@@ -612,6 +655,16 @@ def test_cli_browse_and_reopen_roundtrip(tmp_path):
     assert proc.returncode == 2
     assert json.loads(proc.stderr.decode("utf-8").splitlines()[-1])["state"] \
         == "blocked"
+
+    # F-01 (review RED): a null canonical entity is a blocked request with
+    # the error envelope — never an internal traceback with exit 1.
+    proc = run(dict(browse_request, canonical_entity_id=None))
+    assert proc.returncode == 2, proc.stderr
+    assert json.loads(proc.stderr.decode("utf-8").splitlines()[-1]) == {
+        "schema_version": "company-wiki-public-document-browse/1",
+        "state": "blocked",
+        "reason": "invalid_canonical_entity_id",
+    }
 
     # duplicate JSON keys are rejected
     proc = _run_cli(
