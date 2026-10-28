@@ -1196,3 +1196,50 @@ CI0c988e8d/40406128851已于2026-10-26T21:44:13Z completed/success，正常hooks
 **唯一下一步：** 共同oracle按真实单行换行、数字/CJK边界做中性TDD与独审；用已保存typedselection+实际HTTP输入离线重新验完整来源/实际sent tasks，禁止再为检查器重跑未改变的SDK批次。并优先修来源能力→摘要任务准入的共用缝隙：实际55任务仍含12个低值unknown/description任务（页脚、单位/期间、非公认拆片和纯财务数值等）；先辨识已有源owner为何只降级却仍可生成，保留有效业务描述/Q&A/风险，不简单排除所有unknown。SDK独立104依赖运行时的零大文件复制方案已设计、未部署，启动超时仍OPEN。通过后新正式摘要→激活/缓存→FF/RF实际采用→fresh holdout和完整公司循环。
 
 母账仍1800368tokens/$0.727945，6新unknown及旧7hold保留，10M/$20配置不变。本轮临时湖及外层根均恢复不存在；原件/生产配置/其他owner不变。当前用户授权继续，原生goal仍不能由工具resume，不冒称控制器active。下方为历史，不覆盖本段和CURRENT_STATUS.json。
+
+
+## 2026-10-28 当前：来源支持能力与跨仓消费接线施工中
+
+已发布原生段落/oracle根修`5002e8c3`及交接`96a49238`，精确代码CI40681137297 completed/success。来源/已准备发送任务离线3/3；本轮无新真实模型POST或费用，没有新最终摘要签收。
+
+正在按[ADMISSION_ROOT_PLAN](review/pdf-c3-20261026/ADMISSION_ROOT_PLAN.md)及[冻结接口](review/pdf-c3-20261026/SOURCE_SUPPORT_INTERFACE.md)实施下一阶段，**新wire /4尚未发布**。消费者半边十文件独审PASS/59项，闭合旧codec与extractive草稿忽略用途的两个绕过；历史/1–3绑定及读取保留。来源半边中性、保存真实112证据/55scope重放已初步通过，随后影响域识别出真实过严/混合段落回归及80项固定旧schema的测试假设，正按根因修复，不重复未改变全量。完整定性业务及source-object关系不能因未知阶段而丢失；单纯产品label则保资料/context，不成为独立事实。
+
+RF/StockWiki兼容在ROOT自有detached worktree完成：RF作者161P、StockWiki100P，跨仓独审71P（计数重叠）。PRIMARY源码/他人assurance/output/runs未改，尚未合并/推送/部署。FF不消费该来源语义schema，不加正文分类。跨仓代码测试不代签当前CWP产物联合端到端。当前source_use按完整view判定，不能逐span投票或借context捐能力；原文可读性与可生成事实明确分离。
+
+**唯一下一步：** SOURCE冻结并加入新helper字节指纹→保留业务断言的旧测试/协议接缝迁移与一次针对性整合→当前CWP真实处理、公共CLI原始字节/收据联调到RF和StockWiki（本地loopback，不是供应商摘要）→SOURCE及联合大节点独审→兼容仓/本仓按序发布同步。之后完成按配置真实原语言摘要、缓存/恢复、FF/RF实际采用、新holdout和公司循环。/4发布不能先于兼容验收。
+
+效率还须治理阅读层的增强需求：当前physical triage会在业务筛选前为财务尾段触发昂贵SDK。先验证按既有阅读策略排除已确认非业务缺口、保未知/真正业务缺口的按需请求，再决定104依赖隔离运行时；不直接关闭配置、不抬额度、不再为oracle重跑同一120秒批次。原件、生产配置、Dayu/IQS/其他owner保持；10M/$20、母账1800368tokens/$0.727945及unknown hold不变。原生goal新回读active。本段与CURRENT_STATUS.json为当前，其余历史状态不覆盖。
+
+
+## 2026-10-28 当前：用途共因修复、真实选材与公共联调
+
+当前目标ACTIVE。原生段落/oracle发布`5002e8c3`及文档`96a49238`，精确代码CI40681137297成功。新`du-production-reading/4`尚未发布：来源负责完整scope的摘要用途，消费者只消费用途、不重判正文；原件/检索可读性保留。接口为[来源用途接线](review/pdf-c3-20261026/SOURCE_SUPPORT_INTERFACE.md)。
+
+来源首轮独审4RED（完整用途/功能/服务覆盖被误排除；词汇表名词借另一句量产）已从同子句对象/动作绑定修复。v2定向315P和最后131P均为作者证据，计数重叠；独审v2另得129P/2F，暴露英中“向银行提供期权定价软件”被会计关键词误判，正在修条款用途与真实业务产品的共同边界，不加公司/词语白名单。原失败与交接保留，未提前签收。
+
+真实整份原件native诊断：2330单元、101切片、47 support/4 unresolved任务，6.182秒、6,177,988 work（16M内）；行业云完整增长/原因、研发资源、未来计划三gold均在可生成任务内。最后诊断脚本序列化误用asdict(mappingproxy)报错，result已保存、完整selection压缩件未写；已改用canonical to_dict，待最终源码再复验，不能将这次整probe记PASS。没有SDK/供应商请求或额度提升。
+
+当前CWP worker→本地loopback一次HTTP→同run重跑零额外HTTP/费用→公共CLI bytes/receipt→RF validator+StockWiki公共transport已1P/21.80秒，独立测试湖已删除。前两次新测试夹具失败（config相对根、误写公共类名）均修正并保留回执，没有改产品迁就夹具。此检查只证明/4公共兼容和本地恢复，不代表正式供应商摘要、context用途真实RF采用或预测模型通过。后两者仍OPEN。
+
+RF161P/StockWiki100P、跨仓独审71P，兼容代码仍在ROOT自有detached工区，未提交/合并/部署；他人assurance/output/runs保留。FF不消费该来源语义，不加正文分类。StockWiki现无origin，不能声称已推送。ROOT消费旧59项独审及后续2个小delta已查，scoped decoder保留整个support view，无新增人工门。
+
+**唯一下一步：** 来源v3冻结→独审S3反例及保留控制→一次针对性影响域/全src类型检查＋最终真实native/公共联调→兼容仓先提交并线部署→CWP /4提交推送。随后完成按需PDF增强、配置内真实摘要/缓存恢复/FF-RF实际采用、新holdout及八步公司循环。当前API母账1,800,368 tokens/$0.727945（unknown保留），配置10M/$20不变；原件、生产配置、Dayu/IQS/Dashboard其他owner不写。不重复未改变的120秒SDK或超时全量。
+
+
+
+## 2026-10-28 兼容仓已并线、部署及RF远端绿
+
+RF兼容已提交并入main并推送`0991e25d`，正常pre-push595P/48.32秒，精确远端CI40697596115 completed/success。StockWiki已提交并入本地master `33534818`，没有配置remote，不宣称远端发布。五文件独审71P与当前CWP公共联调1P通过；RF两源码定点同步到3逻辑入口/2物理副本，共4写，重复同步0写，配置/output保留，最终公共回执的新进程部署验证待做。他人assurance/output/runs及tracked WIP hash不变。FF不消费该来源语义，不加正文分类。ROOT消费旧59项独审及后续2个小delta已查，scoped decoder保留整个support view，无新增人工门。
+
+
+## 2026-10-28 当前：跨仓已并线，SOURCE v4先修完整断言与用途共因
+
+目标ACTIVE，CWP已发布代码仍`5002e8c3`（精确CI40681137297成功）；`du-production-reading/4`源码未提交/发布，不能记整体验收绿。唯一实施入口为[ADMISSION_ROOT_PLAN末尾v4细则](review/pdf-c3-20261026/ADMISSION_ROOT_PLAN.md)及[冻结wire接口](review/pdf-c3-20261026/SOURCE_SUPPORT_INTERFACE.md)。不新增人工许可、不增加额度。
+
+**已完成：** RF兼容`0991e25d`已main/推送，正常pre-push595P/48.32秒，远端CI40697596115成功；StockWiki兼容`33534818`已本地master，无remote所以未推送。五文件独审71P，当前CWP实际worker/一次loopback/同run零额外HTTP/公共CLI到RF和StockWiki已通过（最终v4测试1P/23.21秒）。RF两源码定点部署4物理文件，重复零写；三RF入口及StockWiki主线四个独立新进程使用实际公共字节/收据回读均通过，0 worker重跑/0HTTP，配置/output及他人WIP保持。这里测试的是公共兼容，不是供应商摘要或RF预测采用。
+
+**真实选材与未解缺陷：** v3整份原件native读取2330units/101span，47 support/4 unresolved view，6,177,988work/16M；行业云增长与原因、研发资源、H2计划三gold均在admitted任务内，原件不变、0SDK/0POST。但独审完整阅读这批views仍发现激励/租赁残句、授奖/审计/前瞻定义/业绩免责声明/会计编制及对账等被错误准入；产品码发布和平台上线又被数字二次判断误排。因此三gold不能代替材质验收。真实服务交付/履约/计费财注为保留正例。
+
+单次来源组合域2534P/11F/11skip、77.04秒；395文件mypy通过。11失败含工厂/制造基地/产能/客户复购等真实召回缺口：direct fact与Session投影不一致，未知阶段被当作不可支持。nested仅14,688work、单次物理观察，不能用加额度或新cache遮掩。源码保持冻结，独审补齐词内动词、残句、产品修饰语和产品码中性反例后，统一修共享assessment；不逐公司加分支。production测试湖已移出pytest发现树，避免并发collection遇创建/删除竞态；原collection错误及有效RED均保留。
+
+**唯一下一步：** 冻结完整共因反例→SOURCE v4共同assessment/typed对象与动作/条款用途根修→只复验新增反例、11失败节点与必要影响包→整原件全部support view/3gold复验与独审→CWP /4提交推送。之后完成按需PDF增强、配置内正式摘要/缓存恢复/FF-RF实际采用、新holdout及八步公司循环。预算仍10M/$20，母账1,800,368 tokens/$0.727945及unknown保留；原件/生产配置/Dayu/IQS/Dashboard他人施工保持。不重复未改变的77秒域、120秒SDK或绿的部署小节点。

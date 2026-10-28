@@ -1,0 +1,109 @@
+{
+  "status": "CHANGES_REQUIRED_SOURCE_V4_ROOT_REPAIR_PLANNED",
+  "files": [
+    {
+      "input": "source-use-final-v3.log",
+      "file": "v3__source-use-final-v3.log.gz",
+      "input_sha256": "26d8fa8faac747b892694f89b71118190ec135e97abef29c709e8cd04e23069a",
+      "input_bytes": 25098
+    },
+    {
+      "input": "source-use-final-v3.xml",
+      "file": "v3__source-use-final-v3.xml.gz",
+      "input_sha256": "1016fd8104aafda07f33ad9a164d48f5849ce9f92c6d49839b6be72cd6de62c4",
+      "input_bytes": 613451
+    },
+    {
+      "input": "source-use-final-v3.json",
+      "file": "v3__source-use-final-v3.json.gz",
+      "input_sha256": "289b8512ecde0319304e01199aca902c9605feced9fd2f05c77c99c6e1b43928",
+      "input_bytes": 381
+    },
+    {
+      "input": "source-use-final-v3-cleanup.json",
+      "file": "v3__source-use-final-v3-cleanup.json.gz",
+      "input_sha256": "243ef0ec59fe5db1a70144ee9987d6c9e33247e184e7147f3937aa1840f699c4",
+      "input_bytes": 139
+    },
+    {
+      "input": "support-final-v3-mypy.log",
+      "file": "v3__support-final-v3-mypy.log.gz",
+      "input_sha256": "7c6cc22f1bfbfc563995b6b511094c49ef4cbb345c662ab05c805428492391ff",
+      "input_bytes": 46
+    },
+    {
+      "input": "native-support-v3/result.json",
+      "file": "v3__native-support-v3__result.json.gz",
+      "input_sha256": "cda51534acd957ac8403aa72f01c14ffb93abc7fcc2fe3bdc7edd51836d5a146",
+      "input_bytes": 22925
+    },
+    {
+      "input": "native-support-v3/selection.json.gz",
+      "file": "v3__native-support-v3__selection.json.gz",
+      "input_sha256": "e22a10df47b0890a2b62794f7134fc5670e00ceeff9707e3c4b9f9a51a9079f6",
+      "input_bytes": 81992
+    },
+    {
+      "input": "support-public-v4.xml",
+      "file": "v3__support-public-v4.xml.gz",
+      "input_sha256": "da62b97bcc55013adf1f001a2b2d865c2cec945456a330a1ea669cce364c8735",
+      "input_bytes": 21783
+    },
+    {
+      "input": "support-public-v4.log",
+      "file": "v3__support-public-v4.log.gz",
+      "input_sha256": "4bcf12dc0b87552272a737a20512ac6195985eb31cb221621f8877f3b4fef8b0",
+      "input_bytes": 1683
+    },
+    {
+      "input": "support-public-v4-cleanup.json",
+      "file": "v3__support-public-v4-cleanup.json.gz",
+      "input_sha256": "4be991a9e27092673ac690355cd7fecc465ade2a29b2161f658d90cbf20da1b3",
+      "input_bytes": 160
+    },
+    {
+      "input": "compat-installed-readers.json",
+      "file": "v3__compat-installed-readers.json.gz",
+      "input_sha256": "6772765eb4070317aea18d6b89687fc0fd1b0ad6f3e9a46455a6d5d03a13cc06",
+      "input_bytes": 1225
+    },
+    {
+      "input": "source-support-use/handoff-v3.md",
+      "file": "v3__source-support-use__handoff-v3.md.gz",
+      "input_sha256": "7edca5caf9c60b4bb5ff95b489010660180ed334a5fbfaad71e5019b74cf806d",
+      "input_bytes": 3406
+    },
+    {
+      "input": "source-support-use/handoff-v3.json",
+      "file": "v3__source-support-use__handoff-v3.json.gz",
+      "input_sha256": "33fbe3324dbc77436d6e69180600759774798dd0a4fbe6fe66e51a5998de3066",
+      "input_bytes": 7613
+    },
+    {
+      "input": "source-support-use/source-review-v3/native-triage.json",
+      "file": "v3__source-support-use__source-review-v3__native-triage.json.gz",
+      "input_sha256": "a2d9ce3e0cbcb16e8f36f4970701f49021aca0c4f50490985d7f2c9274c63905",
+      "input_bytes": 17088
+    },
+    {
+      "input": "source-support-use/source-review-v3/test_native_common_roots.py",
+      "file": "v3__source-support-use__source-review-v3__test_native_common_roots.py.gz",
+      "input_sha256": "70767f12a1d729a70fa3d37f8caa6f0a1bdc91ad9b424c70ef4be71751ff1fa2",
+      "input_bytes": 877
+    },
+    {
+      "input": "source-support-use/source-review-v3/test_rule_roles.py",
+      "file": "v3__source-support-use__source-review-v3__test_rule_roles.py.gz",
+      "input_sha256": "243a6814357e25fd80a920adb2086077adb57cc8a7ca53cc527a9ee7bb506a38",
+      "input_bytes": 935
+    }
+  ],
+  "domain": {
+    "passed": 2534,
+    "failed": 11,
+    "skipped": 11
+  },
+  "public_compatibility_and_installed_readers": "PASS",
+  "real_source_content": "CHANGES_REQUIRED",
+  "supplier_model_calls": 0
+}

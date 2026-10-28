@@ -1,0 +1,105 @@
+{
+  "scope": "compatible_consumers_published_source_v3_still_in_progress",
+  "rf_commit": "0991e25d5dca667a3fdafb7bc5ebf0e546a2272b",
+  "stockwiki_local_commit": "33534818e4a8c76f3c0ab5ebe5b41af009d292c1",
+  "source_wire_4_published": false,
+  "new_supplier_calls": 0,
+  "files": [
+    {
+      "input": "compat-publication-rf.json",
+      "file": "compat-publication-rf.json.gz",
+      "bytes": 3723,
+      "sha256": "b810f0e1096119298109f4c7dc25a4392ad819d8440b1d593cb2dc552003f46f"
+    },
+    {
+      "input": "compat-publication-stockwiki.json",
+      "file": "compat-publication-stockwiki.json.gz",
+      "bytes": 3112,
+      "sha256": "d87677e8819c681f8323d959662a44c081db87464e9c40ed76dcea35afac3c05"
+    },
+    {
+      "input": "compat-rf-ci.json",
+      "file": "compat-rf-ci.json.gz",
+      "bytes": 229,
+      "sha256": "36024e9a13c4d070fbd0f21e3891a6e287da9f78dec9bfaefe5948ceaf1aedcc"
+    },
+    {
+      "input": "compat-install-plan.json",
+      "file": "compat-install-plan.json.gz",
+      "bytes": 2171,
+      "sha256": "263009f30d697665d7130d09c72d408009425ac006c5263b424bbfaf32b1e095"
+    },
+    {
+      "input": "compat-install-apply.json",
+      "file": "compat-install-apply.json.gz",
+      "bytes": 1508,
+      "sha256": "7f1075dd1ff84508aeb68e99cc40dc2afa8f163f68c81b1f7231286d86e7a275"
+    },
+    {
+      "input": "compat-install-repeat.json",
+      "file": "compat-install-repeat.json.gz",
+      "bytes": 1508,
+      "sha256": "fb6c64228b2f1788c6bfa8955c61a1a3c699eb8407cd3bed38c3c366012dca12"
+    },
+    {
+      "input": "compat-rf-9.log",
+      "file": "compat-rf-9.log.gz",
+      "bytes": 787,
+      "sha256": "bf098f107fdf8aeb9f6aec20d76a04d9a0f238bab22fa28f649f6da067c57118"
+    },
+    {
+      "input": "support-public-v3.log",
+      "file": "support-public-v3.log.gz",
+      "bytes": 1297,
+      "sha256": "3307053e0cb6942d85bb3ff9c7165637fe322d28a34b783a16a310d3368a8566"
+    },
+    {
+      "input": "support-public-v3.xml",
+      "file": "support-public-v3.xml.gz",
+      "bytes": 426,
+      "sha256": "4569580cfff81160532faa71c0ec2616a357dae0495df9cb4353951928a2db04"
+    },
+    {
+      "input": "support-public-v3-cleanup.json",
+      "file": "support-public-v3-cleanup.json.gz",
+      "bytes": 160,
+      "sha256": "4be991a9e27092673ac690355cd7fecc465ade2a29b2161f658d90cbf20da1b3"
+    },
+    {
+      "input": "source-support-use/compat-review/independent.md",
+      "file": "source-support-use__compat-review__independent.md.gz",
+      "bytes": 2656,
+      "sha256": "3db1c4d486b8966633ea72bd0b90e24e6b4575dbfb292515cd4302f497e5cec9"
+    },
+    {
+      "input": "source-support-use/compat-review/independent.json",
+      "file": "source-support-use__compat-review__independent.json.gz",
+      "bytes": 9667,
+      "sha256": "b8c9670d5610a4205b2cd84e73db4f878708806453e7b8765974ae5ea104f770"
+    },
+    {
+      "input": "source-support-use/compat-implementation/handoff.json",
+      "file": "source-support-use__compat-implementation__handoff.json.gz",
+      "bytes": 6910,
+      "sha256": "d11927bee9714a3d2d0aa76f1e7416b20aa1466692022f7b7832b177f58bc9e9"
+    },
+    {
+      "input": "source-support-use/source-review-v2/independent.md",
+      "file": "source-support-use__source-review-v2__independent.md.gz",
+      "bytes": 2447,
+      "sha256": "ee128969b22776b62199d06aa18e47ca94c4f47a8c858cda5f234544e5a09356"
+    },
+    {
+      "input": "source-support-use/source-review-v2/independent.json",
+      "file": "source-support-use__source-review-v2__independent.json.gz",
+      "bytes": 7786,
+      "sha256": "5bc0504a60069c912a855c356ddd24b4bc2de37ccf3f9b1a8af9bfc9fb07a743"
+    },
+    {
+      "input": "native-support-v2/result.json",
+      "file": "native-support-v2__result.json.gz",
+      "bytes": 22924,
+      "sha256": "cacac31e1b97b5aedbdf972510a8951975bbbd1c99dcf71b2e0bf7da80ef7e96"
+    }
+  ]
+}

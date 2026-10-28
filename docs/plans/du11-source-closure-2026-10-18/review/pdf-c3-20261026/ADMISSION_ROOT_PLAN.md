@@ -1,5 +1,7 @@
 # 可读来源与摘要支持的准入缺口：只读根因设计
 
+> 2026-10-28 实施修订：下文最初只读设计已实施到未发布的SOURCE v3。跨仓兼容已独审、公共联调、并线/部署；CWP生产源码仍不能发布。最新真实整源审查证实不能仅靠refs合法、reason字符串或三个gold就签收。当前优先执行本文末尾“SOURCE v4共同根因收敛”，其状态高于下文最初拟议步骤；不新增人工许可。
+
 结论：低价值分类已经产生，但没有形成“该闭合来源scope能否独立支持本次业务摘要”的契约。来源阅读层为召回而允许业务章节中的描述材料；任务层把所有来源view变成task；source-card把parsed/nonempty视为可用，仅阻断已知数表歧义。因此footer、单位/期间caption、断词和孤立财务数都能获得合法task与basis。软target已不强迫填满，但无法撤销这些错误支持能力。
 
 还存在第二类来源语义问题：若会计规则、股权计划目的等已被误标meaningful或operating_metric，仅加value_band过滤仍会漏。推荐先建立可读性/完整支持能力/此次用途的分离，再在已有purpose/relationship owner根修这类误判。不能在摘要compiler再造财务词表、指代解析或业务rank。
@@ -67,3 +69,28 @@ Q&A不得因为question不能作公司声明而丢整个回答；来源view继�
 先扩现有 `tests/unit/document_understanding_selection/test_summary_source_admission.py`、`test_reading_material_value.py` 和 `tests/unit/test_source_summary_tasks.py`。若无现有合适的scoped admission测试owner，拟新增一个 `tests/unit/test_scoped_source_capability.py`，覆盖实际packet/basis、旧bundle和新身份接缝。所有测试这里只列设计，未创建或执行。不能把此次native8/工具独审的PASS迁移为本设计已经实施。
 
 本轮只冻结此设计与同名json，不改产品、测试、配置、PWF或原件，不运行任何复验。ROOT可据此固定下一节点PWF；不继续扩大只读调查。
+
+## SOURCE v4共同根因收敛（2026-10-28，优先实施）
+
+### 已有反证，不能绕过
+
+- 单次组合影响域2534P/11F/11skip，77.04秒。没有超时，不再重复整域。工厂收购、制造基地投产、产能、客户复购等失败不是额度不足；nested例实际work仅14,688/16M且每物理edge只观察一次。
+- 完整工厂业务句direct fact为eligible/operating，但SourceOperatingSession投影移除operating_activity后丢掉可支持性；“未知阶段不能假造进度”和“完整实际业务不能摘要”被混淆。
+- 真实整份native /4仍有规则、套话与碎片漏网。unknown relation中“参与者”被切成“参与/者”，“经营租赁”被切成“经营/租赁”；出处refs落在assertion内不等于完整业务语义。激励限额、审计范围、前瞻性定义、业绩免责声明、编制假设及会计对账也不能因此变成独立业务事实。
+- 相反，带字母数字产品码、代际序号的完整产品发布/平台上线被换行+任意isdigit二次推断为数列；同一SourceOperatingSession已给has_unbound_numeric_cells=false。必须消除相互矛盾的第二套判断。
+- 会计/估值关键词作为“实际向客户提供的软件产品”的修饰语仍有误排。应按同子句actor、业务对象、动作、规则对象的角色辨义，不能添加软件产品名或“公允价值/期权定价”白名单。
+- 原三项gold在实际新选材均保留（101span/2330units，6.178Mwork）；这只证明三组完整依据可用，不代表47个support view全部有用或模型摘要通过。真实服务交付、履约与计费财注仍须保留，不能整章排除。
+
+### 责任与实施顺序
+
+1. 先冻结独审中性反例、11原失败节点及实际新view的正负支持scope。保持原件SHA/原三gold/全部资源上限，测试可记录公司样本locator，生产不得按公司、页号、task号分支。
+2. 来源层共享assessment统一“原文定位、完整断言、经营用途、阶段/模态、数列质量”五件事；出处证明不是业务事实证明，未知阶段不是碎片通行证。优先复用/修复现有SourceOperatingSession、business policy/purpose及typed relationship owner，不在摘要compiler或消费者再解析正文。必要时可重构现有共享owner，不因旧五文件边界强行叠helper。
+3. early candidate和完整support view消费同一assessment及现有受界session。去除reason字符串回退放行、任意isdigit二次数列推断；完整的通用经营事件、资源变化、功能/用途/服务关系无需猜标准阶段才保留。真实规则/模板按其条款对象与用途识别，不能由另句业务词反向洗白。
+4. 先跑新增中性RED和原11失败节点；只有确认过期的year label/topic精确元组夹具才由ROOT迁移，保留原业务、原文、边界、归属断言。真实业务漏召不能靠改断言解决。已将production测试湖移出pytest发现树，解决并发创建/删除目录干扰collection的基础原因。
+5. 定向影响包通过后，整原件native读一次，检查原三gold及所有完整support view的财务碎片/规则/模板占位和新品/平台/产能等召回。关键节点独审检查相同源码，按实际完整范围签收；不靠三个gold替代全材质审查。
+6. RF兼容`0991e25d`已main/远端CI成功，StockWiki`33534818`本地master（无remote）；安装四新进程公开字节复验通过。保持/4 wire不变时不为纯SOURCE语义改动重跑部署或模型。最终source域修复通过、全src类型检查与关键独审后再提交/推送CWP producer，更新本计划与收据。
+7. 然后回到既定按需增强与配置内真实摘要、缓存恢复、FF/RF实际采用、新holdout及公司循环。PDF SDK启动慢保持单独根因诊断，不为本轮oracle重复120秒批次、不提高费用/token/切片额度。
+
+### 实施验收口径
+
+完整statement和实际业务召回必须正例绿；词内动词、残句、规则/套话不能独立支持摘要。原文/上下文仍可读，可用性不等于摘要用途。每轮只跑变化对应反例和必要影响包，未改变的绿项不重跑；一次全域已留证，不能隐去11失败、独审红或把接口绿当业务质量绿。
