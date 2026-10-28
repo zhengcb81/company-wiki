@@ -3,12 +3,14 @@
 from __future__ import annotations
 
 import os
+from collections import Counter
 import re
 import sys
 import xml.etree.ElementTree as ET
 from pathlib import Path
 
 MAX_ANNOTATIONS = 25
+MAX_GROUP_SUMMARY_CHARS = 12000
 
 
 def _escape_command_data(value: str) -> str:
@@ -79,6 +81,25 @@ def _append_step_summary(lines: list[str]) -> None:
         print("::warning title=Unit test diagnostics::Could not write GITHUB_STEP_SUMMARY")
 
 
+def _failure_groups(failures: list[tuple[str, str, str, str]]) -> str:
+    """Keep the complete bounded function inventory in the first annotation.
+
+    Actions may expose only ten individual annotations. Parameter payloads
+    are unnecessary here: group by function and exception, with case counts.
+    """
+    groups = Counter((node.split("[", 1)[0], kind) for _, _, node, kind in failures)
+    lines = [f"Failure groups ({len(failures)} failed cases):"]
+    size = len(lines[0])
+    for index, ((node, kind), count) in enumerate(groups.items()):
+        line = f"{node} [{kind}] x{count}"
+        if size + len(line) + 1 > MAX_GROUP_SUMMARY_CHARS - 100:
+            lines.append(f"Group inventory truncated: {len(groups) - index} groups not shown.")
+            break
+        lines.append(line)
+        size += len(line) + 1
+    return "\n".join(lines)
+
+
 def main(report_path: str) -> int:
     suite_name = os.environ.get("TEST_SUITE_NAME", "tests")
     if os.environ.get("TEST_SUITE_OUTCOME") == "skipped":
@@ -103,11 +124,13 @@ def main(report_path: str) -> int:
         return 0
 
     summary_lines = [f"## Failed {suite_name}", ""]
-    for file_name, line, node_id, error_type in failures[:MAX_ANNOTATIONS]:
+    for index, (file_name, line, node_id, error_type) in enumerate(failures[:MAX_ANNOTATIONS]):
         properties = f" file={_escape_command_data(file_name)}" if file_name else ""
         if line.isdigit():
             properties += f",line={line}"
         diagnostic = f"{node_id} [{error_type}]"
+        if index == 0:
+            diagnostic += "\n" + _failure_groups(failures)
         print(
             f"::error{properties}::"
             f"{_escape_command_data(diagnostic)}"

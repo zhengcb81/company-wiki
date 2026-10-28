@@ -1,0 +1,20 @@
+{
+  "exit": 0,
+  "seconds": 23.91,
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "-m",
+    "pytest",
+    "-q",
+    "-o",
+    "addopts=",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp=C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.c3lv3\\pytest",
+    "--junitxml=C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\c3-20261028\\legacy-v3-fixture\\frozen.xml",
+    "tests/unit/test_narrative_scoped_runtime_recovery.py::test_real_paid_v3_typed_stage_recovers_with_zero_new_posts_after_validator_upgrade",
+    "tests/support/test_legacy_reading_producer.py"
+  ],
+  "scratch_restored_absent": true
+}

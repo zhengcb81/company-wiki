@@ -10,6 +10,7 @@ import pytest
 from company_wiki.automation.models import HandlerOutcome, canonical_json, make_job_key
 from company_wiki.automation.narrative_contracts import NarrativeBundle, NarrativeSelectResult
 from company_wiki.automation.narrative_model import NarrativeModelResponse
+from company_wiki.automation.narrative_model_scoped import SCOPED_MODEL_PROJECTION_VERSION
 from company_wiki.automation.narrative_runtime import NarrativeRuntimeDependencies, register_narrative_handlers
 from company_wiki.automation.narrative_select import NarrativeSelectHandler
 from company_wiki.automation.worker import HandlerExecutor
@@ -17,6 +18,7 @@ from company_wiki.source_catalog import narrative_evidence as evidence
 from company_wiki.source_catalog.narrative_document import NarrativeEvidencePackage
 from company_wiki.source_contract import EvidenceCoordinates, EvidenceSpan
 from unit.test_narrative_select_handler import FakeReader, _context, _payload
+from support.scoped_model_response import source_grounded_scoped_reply
 
 
 BUSINESS = "Company launched a new device and received repeat orders from overseas customers."
@@ -46,12 +48,9 @@ class CountingModel:
     def generate(self, request):
         self.calls.append(request)
         data = json.loads(request.data_json)
-        source = data["source"]
-        row = next(row for row in data["evidence"] if BUSINESS in row[1])
-        body = {"draft": {"source_id": source["source_id"], "source_sha256": source["source_sha256"],
-                          "language": source["language"], "claims": [
-                              {"claim_id": "c1", "text": BUSINESS, "evidence_ids": [row[0]],
-                               "evidence_group_ids": [], "claim_type": "company_statement", "modality": "actual"}]}}
+        # Current sources use the task-scoped model contract. The shared
+        # fixture copies actual task-local support without claiming a review.
+        body = source_grounded_scoped_reply(data)
         return NarrativeModelResponse("offline-fixture", "offline-fixture", request.prompt_version,
                                       canonical_json(body).encode(), input_tokens=10, output_tokens=10)
 
@@ -62,7 +61,8 @@ def _registered_dag(payload, data, *, reader=None, normalization=None):
     executor = HandlerExecutor()
     register_narrative_handlers(executor, NarrativeRuntimeDependencies(
         reader=reader or FakeReader(payload, data), model=model, normalization=normalization,
-        selector_version="0.9.0", reading_model_projection=lambda _subject: None))
+        selector_version="0.9.0",
+        reading_model_projection=lambda _subject: SCOPED_MODEL_PROJECTION_VERSION))
     base = _context(payload, lambda: None)
     results = {}
     for job_type in ("source.narrative_select", "source.narrative_summarize", "source.narrative_verify"):

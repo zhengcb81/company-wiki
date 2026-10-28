@@ -1,0 +1,502 @@
+{
+  "schema_version": "remaining-independent-review/1",
+  "status": "PASS",
+  "review_state": "FINAL",
+  "reviewer": "/root/c3_semantic_final_20261028",
+  "scope": "EXACT_24_REMAINING_SOURCE_FIXTURE_REPORTER_COMPONENTS",
+  "baseline": "908ef3cb5010e1b656a5cd179de36a098748babf; CI40729898744 failure retained",
+  "files": [
+    {
+      "path": "src/company_wiki/document_normalization/table_shapes.py",
+      "bytes": 3551,
+      "sha256": "585f24ce6ac16de2ad8b73c72daab7cca8e906eed60d8f365fc74bd46c490a2d",
+      "lf_sha256": "13893250c0e51cdd4bdeb8737c3ef950a20859916243fdfaa4caae2a74e81c99"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/assertion_roles.py",
+      "bytes": 15468,
+      "sha256": "acc9837923173443d563696f17f28a6a0544233d1e5ebe96422e342d91ef5dca",
+      "lf_sha256": "62c43e69b4eef47768344d6997858cb853bc35a4dee3245955ff8f57bbe8d6c6"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/patterns.py",
+      "bytes": 25014,
+      "sha256": "46d2a264fdfdb56677a32d1bb48019c111bd58b8086cc1f6b65bbdda33cef4ed",
+      "lf_sha256": "49bb93ff207c329c9ed87c3b978c359b1ab3eaa98078978c83cbe78ab062b39c"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/relations.py",
+      "bytes": 57099,
+      "sha256": "5ea73a73c2e956f15f70d518cbee352d19d3b19d88f579015cbccc56054f261a",
+      "lf_sha256": "d440c148dc0634ab72c00f4a6464c926741ce1e8c5c2e8551457953d2559c524"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/structure/table_purpose.py",
+      "bytes": 19830,
+      "sha256": "2d87eec638175b4b1e1cce6f16fa9cf3c4809211194f48cfd9b53165d9113c46",
+      "lf_sha256": "0d92f12205582fbf04db5d282193fcd00aee18e207e92f549142f9a71bc5297b"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_budget.py",
+      "bytes": 49784,
+      "sha256": "b805b334233d2214d004774bbef8add00d99881346c5f48b4781a4f36c810be3",
+      "lf_sha256": "113645934c00dd82491413b5f4165a4e632e0a4f959b18dc4d71c88fa6e14a66"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_policy.py",
+      "bytes": 60737,
+      "sha256": "74e8a02585d293d1eb6944ef1822df89316918268b8e958b6d8ebd503ce2752c",
+      "lf_sha256": "513c4df83baca59e80152121e6ded752b880391f8f715df61ec2c2718f973739"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_finalize.py",
+      "bytes": 12331,
+      "sha256": "feb6feb3fce94f003ed832ae147151adf64f50af7ed762ce005a6e5fdbc13e04",
+      "lf_sha256": "1dfb75374e9e45c255045d2e677883985a9af50790d6184300a92e0d284fb37e"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+      "bytes": 41687,
+      "sha256": "af91e2f24a4ddf773402a43e1bf4884c7ff019795e13ffb9b48e7dbe8072830b",
+      "lf_sha256": "ac82f984e77a46c46a5c596b2000d9658dbf86a79004f946b08c1d92922a8e65"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_reading.py",
+      "bytes": 101365,
+      "sha256": "ba55b183886528e3be16c125f8674de5227a95ed12afc058ca3840f5599d6614",
+      "lf_sha256": "c996bdc7c9a03f57d8ada08ada59399073cac590b8de579514ea69889de73c87"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_source_purpose.py",
+      "bytes": 14877,
+      "sha256": "9533140c4797f4ad56344ef2257a90d4cfee889be95cb896b7477dbe973ea7f1",
+      "lf_sha256": "e9b84f5dd70cdbeb353bc85c1fece91082afd4c268f675a4fd772a126d71b706"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_support_use.py",
+      "bytes": 3896,
+      "sha256": "10b6bd5e0fa7a8895ba94a9e84c474cb3e0dea2043921898c143093bdb9696c4",
+      "lf_sha256": "10b6bd5e0fa7a8895ba94a9e84c474cb3e0dea2043921898c143093bdb9696c4"
+    },
+    {
+      "path": "tests/support/historical_reading_v3/README.md",
+      "bytes": 833,
+      "sha256": "24fd61223d1d745eb521c1a14dc79c18788790aa7025a8b9f1c6a64e02b2ccac",
+      "lf_sha256": "69fd50a6c7ee89a72501bdc7234973ceef1d58ce9c74d75c34cb06e95c1a4490"
+    },
+    {
+      "path": "tests/support/historical_reading_v3/manifest.json",
+      "bytes": 752,
+      "sha256": "19c5bd1f55ee94d778c16607f3cdf19e8dcd851f5e4df2d604397a1db0ad8b72",
+      "lf_sha256": "d0dfeab47667f31e1fa1936069b86cd013111e860acdc071fe9e2a464a803360"
+    },
+    {
+      "path": "tests/support/historical_reading_v3/narrative_reading.py.gz",
+      "bytes": 22804,
+      "sha256": "1d3a1e0c48eee694a5ade8871fbde0c66f87ece1cddebe3b96e85e35b4e78b4a"
+    },
+    {
+      "path": "tests/support/legacy_reading_producer.py",
+      "bytes": 3599,
+      "sha256": "7ac07199cb354c83257a08c524b8f009092de2dba837e522d797ad8e862df1ac",
+      "lf_sha256": "7ac07199cb354c83257a08c524b8f009092de2dba837e522d797ad8e862df1ac"
+    },
+    {
+      "path": "tests/support/test_legacy_reading_producer.py",
+      "bytes": 1961,
+      "sha256": "e04faa23f1a6f420df512e9396759f55e55e6d1c42b74b810155aef570ed3f50",
+      "lf_sha256": "e04faa23f1a6f420df512e9396759f55e55e6d1c42b74b810155aef570ed3f50"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_value_coverage.py",
+      "bytes": 20085,
+      "sha256": "96949e2454105213ee0ec8bfad1ebd432cccf7ed2141a71d443d59753e2b5162",
+      "lf_sha256": "cdfbaf795d5f663a9a8cb88ae2dffd9cff2413ec5f7375313111e5e770f5bd98"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_source_support_use.py",
+      "bytes": 54628,
+      "sha256": "9eeb1e778ad2b0cd8b55c0ddeffa7f8dc27d55233cad3ec5d2d1aa0cf556f6ca",
+      "lf_sha256": "382e839e32d8bd4a2a3e686474122f43844578d43921a55703b8cdd80b000e75"
+    },
+    {
+      "path": "tests/unit/test_narrative_language.py",
+      "bytes": 4744,
+      "sha256": "4969b423778a1fb6bfa964d89d17c31165d3f431b75f61f71ad3706b31320cdc",
+      "lf_sha256": "4969b423778a1fb6bfa964d89d17c31165d3f431b75f61f71ad3706b31320cdc"
+    },
+    {
+      "path": "tests/unit/test_narrative_partial_source_admission.py",
+      "bytes": 15868,
+      "sha256": "feac5491678112f2adc40033ee21098d557ef00be6c3add4f010c42aaec41ac8",
+      "lf_sha256": "feac5491678112f2adc40033ee21098d557ef00be6c3add4f010c42aaec41ac8"
+    },
+    {
+      "path": "tests/unit/test_narrative_scoped_runtime_recovery.py",
+      "bytes": 12123,
+      "sha256": "4bbcd43a75fababd3e2e163d773da024d1f90f75a2b9d5f33b5fae67ded7dd98",
+      "lf_sha256": "ed7a483cdc6888bc787ea7ea5692e29e55b3bf1c841b1500c76ad0576ea17f3f"
+    },
+    {
+      "path": "tests/unit/test_summarize_junit_failures.py",
+      "bytes": 8164,
+      "sha256": "f2e77e4a033c39e565f9c1257d55b091060dcc8188bbbe02c9021964a606b683",
+      "lf_sha256": "f2e77e4a033c39e565f9c1257d55b091060dcc8188bbbe02c9021964a606b683"
+    },
+    {
+      "path": "tools/summarize_junit_failures.py",
+      "bytes": 6496,
+      "sha256": "5a1f7d7b50b7c3426a6a915e083a7f7db7845760247dbed2ce49c3739318b2f6",
+      "lf_sha256": "5a1f7d7b50b7c3426a6a915e083a7f7db7845760247dbed2ce49c3739318b2f6"
+    }
+  ],
+  "excluded_WIP": [
+    "src/company_wiki/source_catalog/narrative_pdf_paragraphs.py",
+    "src/company_wiki/source_catalog/narrative_pdf_enhancement.py",
+    "tests/unit/test_pdf_paragraph_demand.py"
+  ],
+  "binding": "All24 exact paths/bytes/raw SHA and text LF SHA match freeze, before/after short tests and at final signing. Binary gzip raw hash only. No PDF3 WIP included.",
+  "open_findings": [],
+  "conclusions": {
+    "shared_head": "One clause-local sorted index combines canonical product heads with existing description/state/resource observations. Subject descriptions and same-clause action objects use that index. Resource heads stay object-only; bisect preserves original100-char target bound. Original Company launched a new device quote is restored unchanged without issuer/stage invention or an added product list.",
+    "test_intent": "Marker retains IV and gains a complete copular predicate. DOCX language edits only import namespace. Partial keeps original BUSINESS, source replay/unread/forgery/zero-model assertions; helper uses actual scoped task support and explicit current projection, not a legacy-codec exemption.",
+    "historical_truth": "Physical old Git component naturally produces /3 without rewriting result tags/IDs/hashes. Saved actual request is schema4/projection3; today src-only fresh CLI recovers with model constructors forbidden and no new POST, unchanged DB/run/budget/raw. Scope explicitly is a single component, not old full release. Current /4 legacy rejection controls pass.",
+    "reporter": "First annotation adds parameter-free function/exception/count inventory with12000-char bound and explicit remainder; original25 individual annotations, privacy/skip behavior, exit semantics and CI scope/timeouts remain unchanged.350-case neutral control verifies truncation and original25+remainder shape.",
+    "content": "All38 actual support raw-text/source-ID/locator triples exactly equal previously fully reviewed set; source5 anchors and admitted tasks verified. No new formal supplier summary is implied."
+  },
+  "root_assertions_audit": [
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_value_coverage.py",
+      "original_assertions_AST_identical": true,
+      "assertion_count": 64
+    },
+    {
+      "path": "tests/unit/test_narrative_language.py",
+      "original_assertions_AST_identical": true,
+      "assertion_count": 8
+    },
+    {
+      "path": "tests/unit/test_narrative_partial_source_admission.py",
+      "original_assertions_AST_identical": true,
+      "assertion_count": 46
+    }
+  ],
+  "independent_tests": {
+    "total_unique_final": 30,
+    "passed": 30,
+    "failed": 0,
+    "pytest_seconds": 7.28,
+    "runner_seconds": 9.607,
+    "neutral_owned_controls": 9,
+    "log": "recheck.log",
+    "junit": "recheck.xml",
+    "receipt": "recheck.json",
+    "initial_review_fixture_corrections": "Initial30 gave28P2F in reviewer assertions only: membranes is not an already canonical head; audit-purpose rejection must be asserted at final SourceSession/use rather than raw descriptive roles. Full output retained as initial-review-fixtures.*; no product or author-test change. Corrected30 all pass; overlapping runs not summed.",
+    "not_repeated": "No457/9476/full-domain, no author actual loopback8, no PDF WIP tests/original processing.",
+    "warning": "Unrelated asyncio_mode warning with autoload disabled; timeout plugin explicitly loaded."
+  },
+  "receipts_only_not_added_to_own_test_count": {
+    "inventory_completion": {
+      "unit-counterproof-tail": {
+        "receipt": {
+          "path": ".planning/c3-20261028/unit-counterproof-tail/receipt.json",
+          "sha256": "dcc0bf25adf5f92df02411e8c9f54c631e02e4165f3188e6325c0a3de5be13cb",
+          "bytes": 2815
+        },
+        "tests": {
+          "artifact": {
+            "path": ".planning/c3-20261028/unit-counterproof-tail/results.xml",
+            "sha256": "a8ffcb830b73ceec87377d0cba0c93ac7fa08c5c8a2cc649c47a8dabc462c6fb",
+            "bytes": 179780
+          },
+          "tests": 1021,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0,
+          "suite_seconds": [
+            "128.980"
+          ]
+        }
+      },
+      "unit-counterproof-retained": {
+        "receipt": {
+          "path": ".planning/c3-20261028/unit-counterproof-retained/receipt.json",
+          "sha256": "54da1f3c3f276dc29087068abc112ebf484aaed3147d0167184293f7d059ff57",
+          "bytes": 389
+        },
+        "tests": {
+          "artifact": {
+            "path": ".planning/c3-20261028/unit-counterproof-retained/results.xml",
+            "sha256": "ab3ae91f6a9f94a5560e50d5bd06bfdceca969be71fb70f47483d007f888e35e",
+            "bytes": 2361
+          },
+          "tests": 12,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0,
+          "suite_seconds": [
+            "15.371"
+          ]
+        }
+      },
+      "unit-counterproof-harness": {
+        "receipt": {
+          "path": ".planning/c3-20261028/unit-counterproof-harness/receipt.json",
+          "sha256": "f2bf393627b4cd7a83ef5f4393d902cf02d1221c8d254fcde09bcb12b5ee7e6c",
+          "bytes": 668
+        },
+        "tests": {
+          "artifact": {
+            "path": ".planning/c3-20261028/unit-counterproof-harness/results.xml",
+            "sha256": "8bc1405fcd52f3efe77f51c980652e7fd64b691e3a92b7fedc3a6eaf5eb58565",
+            "bytes": 685
+          },
+          "tests": 3,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0,
+          "suite_seconds": [
+            "55.632"
+          ]
+        }
+      },
+      "initial_inventory": {
+        "receipt": {
+          "path": ".planning/c3-20261028/all-unit-counterproof/receipt.json",
+          "sha256": "5cddcd560699e20cd21e95b1762d3f9cd967d597706b87e869ee7a84321acdcf",
+          "bytes": 1041
+        },
+        "complete": false,
+        "collected": 9476,
+        "time_limit_seconds": 600,
+        "progress_percent": 89,
+        "not_a_whole_suite_PASS": true
+      }
+    },
+    "source": "457 unique before nonsemantic local typing rename; exact14 head/linear subset afterward, reviewed as source author receipts.",
+    "root_fixture_initial": {
+      "artifact": {
+        "path": ".planning/c3-20261028/root-fixtures-green.xml",
+        "sha256": "f0853c028bbd51aea9a7da670579d5722141a68c97c70dd530ce400eaf1d3cec",
+        "bytes": 19871
+      },
+      "tests": 86,
+      "failed": 2,
+      "errors": 0,
+      "skipped": 0,
+      "suite_seconds": [
+        "5.754"
+      ]
+    },
+    "root_two_model_port_recheck": {
+      "artifact": {
+        "path": ".planning/c3-20261028/root-fixtures-model-port.xml",
+        "sha256": "ea153058e68ea0c72a960118d1442ecba67544473e2bb3e5d4f47bdb778524d9",
+        "bytes": 592
+      },
+      "tests": 2,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "suite_seconds": [
+        "5.273"
+      ]
+    },
+    "historical": {
+      "scope": "One exact historical producer component plus typed-v3 codec; all remaining runtime current, not a complete old release",
+      "final_receipt": {
+        "artifact": {
+          "path": ".planning/c3-20261028/legacy-v3-fixture/frozen.xml",
+          "sha256": "2b0c65b899773a0424e7ed1e235c8788b28f6a65b9b868a08d42a90f6f099761",
+          "bytes": 2968
+        },
+        "tests": 3,
+        "failed": 0,
+        "errors": 0,
+        "skipped": 0,
+        "suite_seconds": [
+          "17.618"
+        ]
+      },
+      "provenance": {
+        "schema_version": "historical-source-producer-fixture/1",
+        "commit": "5002e8c3c40ca14a29f3ed8a08f6fcab2ec14b9c",
+        "git_path": "src/company_wiki/source_catalog/narrative_reading.py",
+        "git_blob_sha1": "8a06bfa7b92808db448fa8dee1eb2ba016cfc140",
+        "source_sha256": "51ecc1ca4ba55f170786af2d7aea28ee5dfe05cf9f0d2711d8f617ef16cd74b9",
+        "source_bytes": 92082,
+        "gzip_sha256": "1d3a1e0c48eee694a5ade8871fbde0c66f87ece1cddebe3b96e85e35b4e78b4a",
+        "gzip_bytes": 22804,
+        "artifact": "narrative_reading.py.gz",
+        "scope": "One exact pre-support-use source producer component plus typed-v3 model protocol; remaining runtime is current. Not an entire historical release.",
+        "contains_original_documents": false,
+        "contains_sdk": false
+      },
+      "actual_suite_property": {
+        "automation_catalog_run_budget_originals_unchanged": true,
+        "historical_model_request_schema": "narrative-model-request/4",
+        "historical_projection": "reading-model-input/3",
+        "producer_observations": [
+          {
+            "phase": "loaded",
+            "pid": 23392,
+            "producer": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c3lv3\\pytest\\nb0\\run\\historical-v3-source\\source_catalog\\narrative_reading.py",
+            "source_sha256": "51ecc1ca4ba55f170786af2d7aea28ee5dfe05cf9f0d2711d8f617ef16cd74b9"
+          },
+          {
+            "phase": "loaded",
+            "pid": 20920,
+            "producer": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c3lv3\\pytest\\nb0\\run\\historical-v3-source\\source_catalog\\narrative_reading.py",
+            "source_sha256": "51ecc1ca4ba55f170786af2d7aea28ee5dfe05cf9f0d2711d8f617ef16cd74b9"
+          },
+          {
+            "has_support_use": false,
+            "phase": "selected",
+            "pid": 20920,
+            "producer": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c3lv3\\pytest\\nb0\\run\\historical-v3-source\\source_catalog\\narrative_reading.py",
+            "reading_schema": "du-production-reading/3",
+            "source_sha256": "51ecc1ca4ba55f170786af2d7aea28ee5dfe05cf9f0d2711d8f617ef16cd74b9",
+            "views": 1
+          },
+          {
+            "phase": "loaded",
+            "pid": 10920,
+            "producer": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c3lv3\\pytest\\nb0\\run\\historical-v3-source\\source_catalog\\narrative_reading.py",
+            "source_sha256": "51ecc1ca4ba55f170786af2d7aea28ee5dfe05cf9f0d2711d8f617ef16cd74b9"
+          }
+        ],
+        "scope": "one actual pre-use source component plus typed-v3 protocol; other runtime current",
+        "total_loopback_posts": 1,
+        "upgraded_runtime": {
+          "legacy_bootstrap_loaded": false,
+          "producer": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_reading.py"
+        }
+      },
+      "independently_verified": "Compressed/source hash and Git blob/commit byte equality; deployment and re-signed tamper controls passed without executing old code or HTTP in this independent run",
+      "review_not_repeated": "Author real loopback8 and final historical3 not repeated; actual frozen XML/provenance/code audited",
+      "cleanup": {
+        "author_temp_absent": true
+      }
+    },
+    "reporter": "ROOT15P receipt in frozen manifest; independent relevant6 plus neutral350-case control passed.",
+    "mypy": {
+      "result": "396src PASS; receipt includes current tree, excluded PDF WIP is not signed here",
+      "artifact": {
+        "path": ".planning/c3-20261028/remaining-final-mypy.log",
+        "sha256": "60bced76ab56e76b083157a70181a8162a3589e108419b3cad74bfd1a4f88c64",
+        "bytes": 46
+      }
+    }
+  },
+  "actual_native": {
+    "artifacts": [
+      {
+        "path": ".planning/c3-20261028/native-support-remaining-final/result.json",
+        "sha256": "177e542cfee3710a3a853cb3fff1ded32d666237bb16dc9a329bd1fe1d353472",
+        "bytes": 18496
+      },
+      {
+        "path": ".planning/c3-20261028/native-support-remaining-final/selection.json.gz",
+        "sha256": "321a00f1dcd21fc6c9f629d6b8ea58e5664674fa7a6ce3ffb6432e4b5d56f8bf",
+        "bytes": 72074
+      },
+      {
+        "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/business-recovery-checkpoints/hk-development-business5-gold.json",
+        "sha256": "9feb80977944efb79c0d94b0975e6c464a2b95b0879e815559e70f2c541485a5",
+        "bytes": 6716
+      }
+    ],
+    "selection_uncompressed_sha256": "1fac11708ae79a78bc6c57e731ef29a21f820f22dc3a602d4f6a1b4ac26a6757",
+    "source_sha256": "4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+    "original_unchanged": true,
+    "parsed_units": 2330,
+    "selected_spans": 81,
+    "support_admitted_tasks": 38,
+    "all_support_texts_source_IDs_and_locators_equal_reviewed_CI_final": true,
+    "score_scope": "Independent single-span anchor score; current /4 group context not downgraded to legacy oracle context",
+    "source_facts": [
+      {
+        "id": "hk-industry-cloud-closure",
+        "supported": true,
+        "all_anchors_individually_present": true
+      },
+      {
+        "id": "hk-rd-period-scope",
+        "supported": true,
+        "all_anchors_individually_present": true
+      },
+      {
+        "id": "hk-outlook-not-actual",
+        "supported": true,
+        "all_anchors_individually_present": true
+      },
+      {
+        "id": "hk-cloud-server-c9a-x9a-release",
+        "supported": true,
+        "all_anchors_individually_present": true
+      },
+      {
+        "id": "hk-training-inference-platform-launch",
+        "supported": true,
+        "all_anchors_individually_present": true
+      }
+    ],
+    "admitted_facts": [
+      {
+        "id": "hk-industry-cloud-closure",
+        "supported": true,
+        "supported_task_keys": [
+          "t19"
+        ]
+      },
+      {
+        "id": "hk-rd-period-scope",
+        "supported": true,
+        "supported_task_keys": [
+          "t16"
+        ]
+      },
+      {
+        "id": "hk-outlook-not-actual",
+        "supported": true,
+        "supported_task_keys": [
+          "t17"
+        ]
+      },
+      {
+        "id": "hk-cloud-server-c9a-x9a-release",
+        "supported": true,
+        "supported_task_keys": [
+          "t9"
+        ]
+      },
+      {
+        "id": "hk-training-inference-platform-launch",
+        "supported": true,
+        "supported_task_keys": [
+          "t10"
+        ]
+      }
+    ],
+    "seconds": 5.385,
+    "work_used": 6175509,
+    "SDK_calls": 0,
+    "model_POST": 0
+  },
+  "next_nodes_open": [
+    "Formal configured supplier summary and claim/citation review",
+    "Current preparation revision actual restart/cross-run cache and fee/POST reuse",
+    "RF actual factual or forecast-model adoption",
+    "Excluded PDF3 WIP separate independent acceptance",
+    "New published exact remote CI outcome; this review does not claim9476 one-shot full PASS"
+  ],
+  "cleanup": {
+    "own_temp": ".c3rmi",
+    "absent": true,
+    "TEMP_TMP": "child env only; parent unchanged",
+    "author_temp_absent": true,
+    "independent_PDF_SDK_supplier_HTTP_download": 0,
+    "local_model_fixture": "one in-process deterministic HTML scoped reply; no model client/HTTP",
+    "review_writes": "Own remaining-independent evidence only; no product/author tests/PWF/Git/config/original writes"
+  }
+}

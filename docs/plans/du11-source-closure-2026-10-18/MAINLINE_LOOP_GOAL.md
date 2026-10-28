@@ -1,18 +1,18 @@
 # 当前主线循环目标
 
-## 2026-10-28 当前：来源组件已发布，CI兼容共因已修，待发布与新精确CI
+## 2026-10-28 当前：剩余共因已集中验收，正常发布后核新精确CI
 
-目标ACTIVE。唯一入口为本段及CURRENT_STATUS.json；下方旧状态是历史。源码ec7c8d84与PWF e5bee2f7均已推送。来源组件25文件独审PASS、真实81span/38support/5gold和396文件mypy均保持历史事实，但精确CI40725371023已completed/failure，不能记发布整体验收绿。
+目标ACTIVE。最后已发布源码908ef3cb的CI40729898744失败保留。此后剩余缺陷已统一处理并通过最终24文件独审，不将旧CI改绿。当前唯一入口是本段/CURRENT_STATUS.json及[本轮结案](review/pdf-c3-20261026/REMAINING_UNIT_REPAIR.md)。
 
-ROOT只复现失败所在4组：26例中13F/13P、4.10秒，原断言未改、临时.c3cif已清、0SDK/模型/下载。10项同族OCR负例中identity/linkable/组隔离断言已通过，独立名词片段却仍入库；另3项是预测前提被漏选、1实数＋缺失标记的经营量行被漏选、会计句混合真实并购业务被漏选。公开注解只展示其中10项，不能将截断注解当全部失败数量。不是Linux类型检查失败或配额不足。
+**已完成：** SOURCE以一个prepared typed-head位置索引同时判主语描述和动作后的局部宾语，恢复原Company/device句和六已有产品族，不加词表副本、issuer/stage或公司条件。ROOT只按原意迁移IV marker完整谓语、DOCX测试导入和当前scoped模型端口，原业务句/partial/forged/零模型/原文与replay断言全部保留。历史v3以真正5002旧producer一组件物理部署自然产/3、一次loopback，然后今天无bootstrap新CLI/validator升级恢复0POST，原DB/run/budget/raw不变；仅22.8KB代码fixture，不复制原件或SDK。
 
-**本轮关闭：** 四类共享proof根因已修；原四测试文件/断言未改，18中性先12F6P，最终必要416P/13.29秒（含定向44）、独审通过；真实2330units/81spans/38support/5gold、7.479秒、6,175,509work与全src396mypy通过。见[修复与收据](review/pdf-c3-20261026/SOURCE_USE_CI_REPAIR.md)。
+**盘点与验收：** 单次9476盘点到89%/600秒后停止，27报告，未重跑全域；只补未执行1021P、retained12P和正常插件3P。三个工程假反证已关闭，余24源/夹具案例已归因并修复。SOURCE先457unique，最后类型变量名整理后14定点；ROOT三文件84P2F后仅两端口节点2P；历史关联8P/最后3P；最终独审30unique/7.28秒。这些范围有重叠，不相加、不声称9476在当前新字节全绿。真实81span/38support及五金标完整、5.385秒/6,175,509work，396mypy通过。没有提高额度。
 
-**唯一下一步：** 正常提交/推送此CI根修并观察新精确CI。PDF增强需求根修细则已准备但顺延，不与此修复混写。然后真实配置摘要/cache/FF-RF、新holdout及八步公司循环仍OPEN；不提高额度或写公司条件。
+**效率根修：** CI首条失败注解现在同时列出无参数的有界全部function组和case数，不再被平台前十条注解遮住后续类别；原25逐项封顶、traceback隐私、skip判断不变。新2RED→原13＋新2共15P，没有增加CI任务、范围、超时或小节点门禁。
 
-静态pre-commit负责Ruff/mypy/宿主假设，不执行语义测试。pre-push按既有约定宽范围只跑158项smoke（35.43秒）；因此不能把本地fast PASS误称所有来源语义或跨旧版本边界通过。后续在本次大节点补当前与旧0.8/OCR真实接口的正反例覆盖，不扩成每小步全量门禁。
+**唯一下一步：** 正常提交/推送上述源码和测试，核新精确CI→修PDF独审PD1再验收其独立组件→真实配置摘要/响应独审/恢复缓存/FF-RF实际采用→新holdout和八步循环。PDF3WIP不混入本次签收/提交：49作者控制通过，但独审44中42P2F，双row形状排除会吞真实amount/dependent，必须先修；不能靠页数下降或0SDK代签。
 
-配置10M/$20、母账1,800,368tokens/$0.727945与unknown不变；原件/生产配置/其他owner WIP保持。证据见[CI反证](review/pdf-c3-20261026/evidence/source-use-ci-20261028/)。
+正式供应商摘要、当前revision缓存恢复和RF模型采用仍OPEN。配置10M/$20、母账1,800,368tokens/$0.727945及unknown不变，0新供应商/SDK/下载；原件/生产配置/其他owner不写。所有本轮隔离测试根已恢复不存在；只留紧凑代码fixture和压缩证据。
 
 ## 2026-10-28 当前：C3共因工程已发布，真实摘要进行中
 

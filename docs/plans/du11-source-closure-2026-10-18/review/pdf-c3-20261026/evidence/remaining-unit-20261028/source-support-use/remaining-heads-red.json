@@ -1,0 +1,11 @@
+{
+  "exit_code": 1,
+  "seconds": 9.314,
+  "targets": [
+    "tests/unit/document_understanding_selection/test_source_support_use.py::test_provision_objects_use_the_same_canonical_heads_as_subject_descriptions",
+    "tests/unit/document_understanding_selection/test_source_support_use.py::test_complete_partial_source_business_fixture_is_supported_without_changing_its_text",
+    "tests/unit/document_understanding_selection/test_source_support_use.py::test_shared_target_heads_cannot_donate_across_clauses_or_turn_financial_audit_objects_into_support"
+  ],
+  "owned_temp": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c3su",
+  "owned_temp_absent": true
+}

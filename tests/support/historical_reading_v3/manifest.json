@@ -1,0 +1,14 @@
+{
+  "schema_version": "historical-source-producer-fixture/1",
+  "commit": "5002e8c3c40ca14a29f3ed8a08f6fcab2ec14b9c",
+  "git_path": "src/company_wiki/source_catalog/narrative_reading.py",
+  "git_blob_sha1": "8a06bfa7b92808db448fa8dee1eb2ba016cfc140",
+  "source_sha256": "51ecc1ca4ba55f170786af2d7aea28ee5dfe05cf9f0d2711d8f617ef16cd74b9",
+  "source_bytes": 92082,
+  "gzip_sha256": "1d3a1e0c48eee694a5ade8871fbde0c66f87ece1cddebe3b96e85e35b4e78b4a",
+  "gzip_bytes": 22804,
+  "artifact": "narrative_reading.py.gz",
+  "scope": "One exact pre-support-use source producer component plus typed-v3 model protocol; remaining runtime is current. Not an entire historical release.",
+  "contains_original_documents": false,
+  "contains_sdk": false
+}

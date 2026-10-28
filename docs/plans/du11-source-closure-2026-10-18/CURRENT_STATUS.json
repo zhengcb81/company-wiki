@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-28",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_SOURCE_CI_REPAIR_INDEPENDENT_PASS_PUBLICATION_PENDING",
+  "overall_status": "ACTIVE_REMAINING_ROOT_REPAIR_INDEPENDENT_PASS_PUBLICATION_PENDING",
   "parallel_packages_20261025": {
     "status": "W16_W17_W18_ROOT_COMPONENT_ACCEPTED_MERGED",
     "entry": "harness_lanes/20261025/README.md",
@@ -26,14 +26,14 @@
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
-  "last_code_commit": "ec7c8d846a12f3f6f5f8c27a94063733e17187c7",
+  "last_code_commit": "908ef3cb5010e1b656a5cd179de36a098748babf",
   "code_ci": {
-    "id": 40725371023,
-    "head_sha": "ec7c8d846a12f3f6f5f8c27a94063733e17187c7",
+    "id": 40729898744,
+    "head_sha": "908ef3cb5010e1b656a5cd179de36a098748babf",
     "status": "completed",
     "conclusion": "failure",
-    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40725371023",
-    "updated_at": "2026-10-28T16:26:42Z"
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40729898744",
+    "updated_at": "2026-10-28T16:55:03Z"
   },
   "formal_v4_offline_selection_replay_20261025": {
     "status": "EXACT_REPRODUCED_NO_PAID_CALL",
@@ -2345,7 +2345,7 @@
     "published": true,
     "push_failure": "47 targets /392 collected /600s; two regressions being root-fixed, not waived by narrower daily gate"
   },
-  "next_action": "Publish independently accepted source CI root fix and observe new exactCI; then paragraph-demand root repair, configured actual summary/cache/FF-RF, new holdouts and audit loop.",
+  "next_action": "Publish24-file accepted remaining-source/current-history fixtures/CI visibility; exactCI, then PDF PD1 root repair and component acceptance, actual configured summary/cache/FF-RF and holdouts. No whole-suite repeat or permission ask.",
   "c3_runtime_recovery_20261026": {
     "entry": "review/pdf-c3-20261026/RUNTIME_RECOVERY.md",
     "environment_independent": "PASS_ZERO_OPEN_25_TESTS_AND_REAL_WORKER_ENTRYPOINTS",
@@ -2769,6 +2769,28 @@
       "real_native_business_gold": "5/5",
       "summary_quality": "OPEN",
       "entry": "review/pdf-c3-20261026/SOURCE_USE_CI_REPAIR.md"
+    }
+  },
+  "remaining_unit_counterproof": {
+    "status": "COMPOSITE_INVENTORY_AND_ROOT_REPAIR_ACCEPTED",
+    "collected": 9476,
+    "observed_failures": 27,
+    "whole_repeat_forbidden": true,
+    "unexecuted_tail": 1021,
+    "roots": "shared typed object heads; historical/current model fixture protocols; marker fixture; local harness/imports",
+    "paragraph_WIP": "49P; separate2source+1test; not released",
+    "final_review": {
+      "status": "PASS",
+      "unique_tests": 30,
+      "seconds": 7.28,
+      "bound_files": 24
+    },
+    "whole_suite_current_bytes": "NOT_CLAIMED; bounded composite inventory and affected-node validation",
+    "independent_pdf": {
+      "status": "CHANGES_REQUESTED",
+      "passed": 42,
+      "failed": 2,
+      "finding": "PD1: shape veto precedes positive amount/dependency evidence"
     }
   }
 }

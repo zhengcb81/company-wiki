@@ -1,0 +1,371 @@
+{
+  "schema_version": "source-support-use-handoff/remaining",
+  "date": "2026-10-28",
+  "status": "FROZEN_READY_FOR_INDEPENDENT_RECHECK",
+  "baseline": "Published908ef3cb / CI40729898744",
+  "files": [
+    {
+      "path": "src/company_wiki/source_catalog/narrative_reading.py",
+      "bytes": 101365,
+      "sha256": "ba55b183886528e3be16c125f8674de5227a95ed12afc058ca3840f5599d6614",
+      "lf_sha256": "c996bdc7c9a03f57d8ada08ada59399073cac590b8de579514ea69889de73c87",
+      "changed_since_ci": false
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_policy.py",
+      "bytes": 60737,
+      "sha256": "74e8a02585d293d1eb6944ef1822df89316918268b8e958b6d8ebd503ce2752c",
+      "lf_sha256": "513c4df83baca59e80152121e6ded752b880391f8f715df61ec2c2718f973739",
+      "changed_since_ci": false
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_source_purpose.py",
+      "bytes": 14877,
+      "sha256": "9533140c4797f4ad56344ef2257a90d4cfee889be95cb896b7477dbe973ea7f1",
+      "lf_sha256": "e9b84f5dd70cdbeb353bc85c1fece91082afd4c268f675a4fd772a126d71b706",
+      "changed_since_ci": false
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_support_use.py",
+      "bytes": 3896,
+      "sha256": "10b6bd5e0fa7a8895ba94a9e84c474cb3e0dea2043921898c143093bdb9696c4",
+      "lf_sha256": "10b6bd5e0fa7a8895ba94a9e84c474cb3e0dea2043921898c143093bdb9696c4",
+      "changed_since_ci": false
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+      "bytes": 41687,
+      "sha256": "af91e2f24a4ddf773402a43e1bf4884c7ff019795e13ffb9b48e7dbe8072830b",
+      "lf_sha256": "ac82f984e77a46c46a5c596b2000d9658dbf86a79004f946b08c1d92922a8e65",
+      "changed_since_ci": false
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/relations.py",
+      "bytes": 57099,
+      "sha256": "5ea73a73c2e956f15f70d518cbee352d19d3b19d88f579015cbccc56054f261a",
+      "lf_sha256": "d440c148dc0634ab72c00f4a6464c926741ce1e8c5c2e8551457953d2559c524",
+      "changed_since_ci": false
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/patterns.py",
+      "bytes": 25014,
+      "sha256": "46d2a264fdfdb56677a32d1bb48019c111bd58b8086cc1f6b65bbdda33cef4ed",
+      "lf_sha256": "49bb93ff207c329c9ed87c3b978c359b1ab3eaa98078978c83cbe78ab062b39c",
+      "changed_since_ci": false
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/assertion_roles.py",
+      "bytes": 15468,
+      "sha256": "acc9837923173443d563696f17f28a6a0544233d1e5ebe96422e342d91ef5dca",
+      "lf_sha256": "62c43e69b4eef47768344d6997858cb853bc35a4dee3245955ff8f57bbe8d6c6",
+      "changed_since_ci": true
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_source_support_use.py",
+      "bytes": 54628,
+      "sha256": "9eeb1e778ad2b0cd8b55c0ddeffa7f8dc27d55233cad3ec5d2d1aa0cf556f6ca",
+      "lf_sha256": "382e839e32d8bd4a2a3e686474122f43844578d43921a55703b8cdd80b000e75",
+      "changed_since_ci": true
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_budget.py",
+      "bytes": 49784,
+      "sha256": "b805b334233d2214d004774bbef8add00d99881346c5f48b4781a4f36c810be3",
+      "lf_sha256": "113645934c00dd82491413b5f4165a4e632e0a4f959b18dc4d71c88fa6e14a66",
+      "changed_since_ci": false
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_finalize.py",
+      "bytes": 12331,
+      "sha256": "feb6feb3fce94f003ed832ae147151adf64f50af7ed762ce005a6e5fdbc13e04",
+      "lf_sha256": "1dfb75374e9e45c255045d2e677883985a9af50790d6184300a92e0d284fb37e",
+      "changed_since_ci": false
+    },
+    {
+      "path": "src/company_wiki/document_understanding/structure/table_purpose.py",
+      "bytes": 19830,
+      "sha256": "2d87eec638175b4b1e1cce6f16fa9cf3c4809211194f48cfd9b53165d9113c46",
+      "lf_sha256": "0d92f12205582fbf04db5d282193fcd00aee18e207e92f549142f9a71bc5297b",
+      "changed_since_ci": false
+    },
+    {
+      "path": "src/company_wiki/document_normalization/table_shapes.py",
+      "bytes": 3551,
+      "sha256": "585f24ce6ac16de2ad8b73c72daab7cca8e906eed60d8f365fc74bd46c490a2d",
+      "lf_sha256": "13893250c0e51cdd4bdeb8737c3ef950a20859916243fdfaa4caae2a74e81c99",
+      "changed_since_ci": false
+    }
+  ],
+  "changes_since_ci": [
+    "src/company_wiki/document_understanding/operating_states/assertion_roles.py",
+    "tests/unit/document_understanding_selection/test_source_support_use.py"
+  ],
+  "unchanged_manifest_files": 11,
+  "plan": "../remaining-unit-root-plan.md",
+  "inventory": {
+    "first": "../all-unit-counterproof/receipt.json: INCOMPLETE600s/89%,9476collected,27failure reports",
+    "tail": "../unit-counterproof-tail/receipt.json: complete1021P/129.18s,50files",
+    "retained": "../unit-counterproof-retained/receipt.json: complete12P/15.53s",
+    "harness": "../unit-counterproof-harness/receipt.json: complete3P/55.85s,normal child plugins",
+    "classification": "3harness false counterproofs closed;24 remaining reports=marker1+test-import5+partial17+historical-v3-codec1. Root test/fixture migrations are separate, not signed by this source handoff."
+  },
+  "root_cause": "The head-first descriptor consumed canonical product_head_spans but actor/action-first object proof used only a separate small local object dictionary, losing complete device/sensor/etc assertions.",
+  "fix": "One clause-local sorted head-position index combines existing canonical product heads and existing description/state/resource observations. Head-first descriptions and predicate-local bounded target lookup reuse it; resources remain object-only. No new family terms, global cache, NLP classifier or stage.",
+  "local_scope": "Actual predicate end to min(clause end,predicate end+100), queried with bisect; source clauses/subject grammar/financial payload and purpose constraints unchanged.",
+  "red": {
+    "counts": {
+      "total": 13,
+      "failed": 7,
+      "errors": 0,
+      "skipped": 0
+    },
+    "receipt": {
+      "exit_code": 1,
+      "seconds": 9.314,
+      "targets": [
+        "tests/unit/document_understanding_selection/test_source_support_use.py::test_provision_objects_use_the_same_canonical_heads_as_subject_descriptions",
+        "tests/unit/document_understanding_selection/test_source_support_use.py::test_complete_partial_source_business_fixture_is_supported_without_changing_its_text",
+        "tests/unit/document_understanding_selection/test_source_support_use.py::test_shared_target_heads_cannot_donate_across_clauses_or_turn_financial_audit_objects_into_support"
+      ],
+      "owned_temp": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c3su",
+      "owned_temp_absent": true
+    }
+  },
+  "green": {
+    "counts": {
+      "total": 14,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "receipt": {
+      "exit_code": 0,
+      "seconds": 6.979,
+      "targets": [
+        "tests/unit/document_understanding_selection/test_source_support_use.py::test_provision_objects_use_the_same_canonical_heads_as_subject_descriptions",
+        "tests/unit/document_understanding_selection/test_source_support_use.py::test_complete_partial_source_business_fixture_is_supported_without_changing_its_text",
+        "tests/unit/document_understanding_selection/test_source_support_use.py::test_shared_target_heads_cannot_donate_across_clauses_or_turn_financial_audit_objects_into_support",
+        "tests/unit/document_understanding_selection/test_source_support_use.py::test_clause_description_work_is_linear_in_repeated_unbound_heads"
+      ],
+      "owned_temp": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c3su",
+      "owned_temp_absent": true
+    }
+  },
+  "source": {
+    "counts": {
+      "total": 412,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "receipt": {
+      "exit_code": 0,
+      "seconds": 8.791,
+      "targets": [
+        "tests/unit/document_understanding_selection/test_source_support_use.py",
+        "tests/unit/du11_source_quality/test_business_admission.py",
+        "tests/unit/document_understanding_selection/test_summary_source_admission.py",
+        "tests/unit/test_main_ocr_selection.py"
+      ],
+      "owned_temp": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c3su",
+      "owned_temp_absent": true
+    }
+  },
+  "actions": {
+    "counts": {
+      "total": 45,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "receipt": {
+      "exit_code": 0,
+      "seconds": 7.053,
+      "targets": [
+        "tests/unit/document_understanding_selection/test_source_operating_actions.py"
+      ],
+      "owned_temp": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c3su",
+      "owned_temp_absent": true
+    }
+  },
+  "final": {
+    "counts": {
+      "total": 14,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "receipt": {
+      "exit_code": 0,
+      "seconds": 5.179,
+      "targets": [
+        "tests/unit/document_understanding_selection/test_source_support_use.py::test_provision_objects_use_the_same_canonical_heads_as_subject_descriptions",
+        "tests/unit/document_understanding_selection/test_source_support_use.py::test_complete_partial_source_business_fixture_is_supported_without_changing_its_text",
+        "tests/unit/document_understanding_selection/test_source_support_use.py::test_shared_target_heads_cannot_donate_across_clauses_or_turn_financial_audit_objects_into_support",
+        "tests/unit/document_understanding_selection/test_source_support_use.py::test_clause_description_work_is_linear_in_repeated_unbound_heads"
+      ],
+      "owned_temp": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c3su",
+      "owned_temp_absent": true
+    }
+  },
+  "unique_tests": {
+    "source": 412,
+    "actions": 45,
+    "overlap": 0,
+    "total_unique": 457,
+    "final_subset": 14
+  },
+  "counts_by_module": {
+    "tests.unit.document_understanding_selection.test_source_support_use": 274,
+    "tests.unit.test_main_ocr_selection": 43,
+    "tests.unit.du11_source_quality.test_business_admission": 33,
+    "tests.unit.document_understanding_selection.test_summary_source_admission": 62,
+    "tests.unit.document_understanding_selection.test_source_operating_actions": 45
+  },
+  "original_business": "Company launched a new device and received repeat orders from overseas customers.",
+  "preserved": [
+    "Original BUSINESS bytes supported without changing the fixture sentence.",
+    "Six existing canonical object families:device/sensor/membrane/filter/prototype/module; no copy into another vocabulary.",
+    "Unknown issuer/stage not promoted to milestone/current state merely for read eligibility.",
+    "Bare product NP, cross-clause head donation, financial assets/accounting systems and audit-rule negatives remain rejected.",
+    "Original source actor/negation/future/research-vs-product-launch contracts retain their existing shared binder semantics.",
+    "Linear regex work1.15 threshold unchanged; no extra per-predicate product-head scan or quota increase.",
+    "No source wire/projection, financial/numeric admission, support-first heap, physical/PDF/paragraph or consumer changes."
+  ],
+  "static": {
+    "initial": [
+      {
+        "status": "fulfilled",
+        "value": {
+          "chunk_id": "f61d80",
+          "wall_time_seconds": 10.015908,
+          "session_id": 94791,
+          "original_token_count": 0,
+          "output": ""
+        }
+      },
+      {
+        "status": "fulfilled",
+        "value": {
+          "chunk_id": "f6bf48",
+          "wall_time_seconds": 5.5949514,
+          "exit_code": 0,
+          "original_token_count": 5,
+          "output": "All checks passed!\n"
+        }
+      },
+      {
+        "status": "fulfilled",
+        "value": {
+          "chunk_id": "346143",
+          "wall_time_seconds": 10.010805,
+          "session_id": 80679,
+          "original_token_count": 0,
+          "output": ""
+        }
+      },
+      {
+        "status": "fulfilled",
+        "value": {
+          "chunk_id": "1b1efb",
+          "wall_time_seconds": 5.2150587999999996,
+          "exit_code": 0,
+          "original_token_count": 41,
+          "output": "warning: in the working copy of 'tests/unit/document_understanding_selection/test_source_support_use.py', LF will be replaced by CRLF the next time Git touches it\n"
+        }
+      },
+      {
+        "status": "fulfilled",
+        "value": {
+          "chunk_id": "074592",
+          "wall_time_seconds": 5.2860777,
+          "exit_code": 0,
+          "original_token_count": 0,
+          "output": ""
+        }
+      }
+    ],
+    "initial_completion": [
+      {
+        "status": "fulfilled",
+        "value": {
+          "chunk_id": "352bf8",
+          "wall_time_seconds": 8.6e-06,
+          "exit_code": 0,
+          "original_token_count": 394,
+          "output": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\.c3su\\\\p\", \"requested_basetemp_len\": 42, \"cwd_len\": 34, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\r\n============================= test session starts =============================\r\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\r\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\r\nconfigfile: pytest.ini\r\ncollected 45 items\r\n\r\ntests\\unit\\document_understanding_selection\\test_source_operating_actions.py . [  2%]\r\n............................................                             [100%]\r\n\r\n============================== warnings summary ===============================\r\n..\\..\\..\\..\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464\r\n  C:\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode\r\n  \r\n    self._warn_or_fail_if_strict(f\"Unknown config option: {key}\\n\")\r\n\r\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\r\n- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\c3-20261028\\source-support-use\\remaining-actions-checks.xml -\r\n======================== 45 passed, 1 warning in 5.76s ========================\r\n\r\n{\"exit_code\": 0, \"seconds\": 7.053, \"targets\": [\"tests/unit/document_understanding_selection/test_source_operating_actions.py\"], \"owned_temp\": \"C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\.c3su\", \"owned_temp_absent\": true}\r\n"
+        }
+      },
+      {
+        "status": "fulfilled",
+        "value": {
+          "chunk_id": "7af68b",
+          "wall_time_seconds": 8.1e-06,
+          "exit_code": 1,
+          "original_token_count": 170,
+          "output": "src\\company_wiki\\document_understanding\\operating_states\\assertion_roles.py:125: error: Incompatible types in assignment (expression has type \"Match[str] | None\", variable has type \"Match[str]\")  [assignment]\r\nsrc\\company_wiki\\document_understanding\\operating_states\\assertion_roles.py:137: error: Incompatible types in assignment (expression has type \"Match[str] | None\", variable has type \"Match[str]\")  [assignment]\r\nsrc\\company_wiki\\document_understanding\\operating_states\\assertion_roles.py:141: error: Incompatible types in assignment (expression has type \"Match[str] | None\", variable has type \"Match[str]\")  [assignment]\r\nFound 3 errors in 1 file (checked 1 source file)\r\n"
+        }
+      }
+    ],
+    "final": [
+      {
+        "status": "fulfilled",
+        "value": {
+          "chunk_id": "76ac58",
+          "wall_time_seconds": 1.0313185,
+          "exit_code": 0,
+          "original_token_count": 5,
+          "output": "All checks passed!\n"
+        }
+      },
+      {
+        "status": "fulfilled",
+        "value": {
+          "chunk_id": "ed4a3b",
+          "wall_time_seconds": 2.257972,
+          "exit_code": 0,
+          "original_token_count": 11,
+          "output": "Success: no issues found in 1 source file\r\n"
+        }
+      },
+      {
+        "status": "fulfilled",
+        "value": {
+          "chunk_id": "6c7e6a",
+          "wall_time_seconds": 0.9349909,
+          "exit_code": 0,
+          "original_token_count": 41,
+          "output": "warning: in the working copy of 'tests/unit/document_understanding_selection/test_source_support_use.py', LF will be replaced by CRLF the next time Git touches it\n"
+        }
+      }
+    ],
+    "repair": "Renamed the resource-head iterator variable to avoid leaking non-optional Match inference into existing optional grammar match locals; no semantic change after tests."
+  },
+  "test_boundary": "412+45 ran before only a nonsemantic resource iterator variable rename to repair mypy inference. Final14 exact head/linear controls ran afterward and pass; do not count them as extra unique tests.",
+  "ROOT_scope_not_written": [
+    "test_reading_value_coverage.py",
+    "test_narrative_language.py",
+    "test_narrative_partial_source_admission.py",
+    "test_narrative_scoped_runtime_recovery.py",
+    "paragraph3WIP",
+    "PWF/Git/consumer/tools/config"
+  ],
+  "cleanup": {
+    "owned_temp": ".c3su",
+    "absent": true,
+    "production_config_changes": false,
+    "committed": false
+  },
+  "external_work": {
+    "original_PDF_reads": 0,
+    "SDK_runs": 0,
+    "paid_model_calls": 0,
+    "downloads": 0,
+    "fresh_holdout_access": 0
+  },
+  "pending": [
+    "ROOT unified fixture/source recheck without weakening current4-to-legacy rejection",
+    "Independent component review and one actual native five-gold/full-view regression",
+    "Normal publication/fullsrc/CI; no new configured summary is certified"
+  ]
+}

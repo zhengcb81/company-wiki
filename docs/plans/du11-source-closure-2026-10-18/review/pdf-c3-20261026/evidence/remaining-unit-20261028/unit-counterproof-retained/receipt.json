@@ -1,0 +1,15 @@
+{
+  "mode": "retained",
+  "complete": true,
+  "returncode": 0,
+  "timeout": false,
+  "time_limit_seconds": 45,
+  "seconds": 18.127,
+  "targets": [
+    "tests/unit/test_retained_plan_fixture_bytes.py"
+  ],
+  "scratch_absent": true,
+  "cleanup_error": null,
+  "plugins_inherited_by_nested_pytest": "pytest_timeout,pytest_mock,pytest_asyncio.plugin",
+  "originals_copied": 0
+}

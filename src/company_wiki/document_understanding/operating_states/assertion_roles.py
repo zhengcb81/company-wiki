@@ -7,6 +7,7 @@ recognized stage alone never manufacture an assertion.
 from __future__ import annotations
 
 from dataclasses import dataclass
+from bisect import bisect_left
 import re
 
 from company_wiki.document_normalization.text_matching import matching_reading_text
@@ -96,10 +97,17 @@ def _description_payload(value: str) -> bool:
 
 
 def _clause_description(value: str) -> bool:
-    heads = {(match.start(), match.end()) for match in _DESCRIPTION_OBJECT.finditer(value)}
-    heads.update((start, end) for start, end, _ in product_head_spans(value))
-    heads.update((match.start(), match.end()) for match in _STATE_HEAD.finditer(value))
-    for start, end in sorted(heads):
+    # One clause-local index supplies both head-first descriptions and
+    # actor/action-first objects. Resource heads remain object-only here.
+    heads = {(match.start(), match.end()): True for match in _DESCRIPTION_OBJECT.finditer(value)}
+    heads.update({(start, end): True for start, end, _ in product_head_spans(value)})
+    heads.update({(match.start(), match.end()): True for match in _STATE_HEAD.finditer(value)})
+    for resource_head in _RESOURCE_OBJECT.finditer(value):
+        heads.setdefault((resource_head.start(),resource_head.end()),False)
+    ordered_heads=sorted(heads)
+    for start, end in ordered_heads:
+        if not heads[start,end]:
+            continue
         # Only a bounded tail attached to this head is inspected. An earlier
         # noun cannot donate itself to a later clause's stage or predicate.
         tail = value[end:end + 160]
@@ -144,10 +152,12 @@ def _clause_description(value: str) -> bool:
         if predicate.start() > 100:
             continue
         subject = value[:predicate.start()]
-        target = value[predicate.end():predicate.end() + 100]
+        target_end=min(len(value),predicate.end()+100)
+        target = value[predicate.end():target_end]
+        index=bisect_left(ordered_heads,(predicate.end(),-1))
         if ((_PROVISION_ACTOR_EN.fullmatch(subject) or _PROVISION_ACTOR_CN.fullmatch(subject))
                 and _description_payload(target)
-                and (_DESCRIPTION_OBJECT.search(target) or _RESOURCE_OBJECT.search(target) or _STATE_HEAD.search(target))):
+                and index<len(ordered_heads) and ordered_heads[index][1]<=target_end):
             return True
     return False
 

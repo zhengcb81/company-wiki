@@ -1,7 +1,8 @@
 """Real v3 completion and CLI recovery across a simulated validator upgrade.
 
-Loopback is an actual HTTP transport, never a supplier. Historical artifacts
-are produced by the original v3 runtime, not hand-written or relabelled v4.
+Loopback is an actual HTTP transport, never a supplier. The historical case
+deploys one exact pre-use source producer plus typed-v3 model protocol; other
+modules are current. It is not an entire old release or relabelled v4 output.
 """
 from dataclasses import replace
 import json
@@ -14,6 +15,7 @@ from company_wiki.automation import narrative_batch as batch
 from company_wiki.automation.narrative_run_store import NarrativeRunStore
 from company_wiki.automation.store import AutomationStore
 from support import narrative_batch_fixtures as batch_fixtures
+from support.legacy_reading_producer import deploy_historical_reading_producer
 from support.narrative_batch_fixtures import (
     isolated_batch_directory, prepare_source_catalog,
     loopback_model_server as _loopback_model_server,
@@ -83,8 +85,9 @@ def test_explicit_v4_manifest_drives_actual_worker_http_verify_and_completed_rec
 
 
 def test_real_paid_v3_typed_stage_recovers_with_zero_new_posts_after_validator_upgrade(
-    tmp_path_factory, loopback_model_server, monkeypatch,
+    tmp_path_factory, loopback_model_server, record_testsuite_property,
 ):
+    """Real old producer component + v3 codec, then current-only CLI recovery."""
     with isolated_batch_directory(tmp_path_factory) as root:
         state = prepare_source_catalog(root, one_source=True, include_policy=False)
         try:
@@ -93,15 +96,41 @@ def test_real_paid_v3_typed_stage_recovers_with_zero_new_posts_after_validator_u
             # verifies historical recovery, not a production throughput deadline.
             request = replace(request, selector_version='0.9.0', max_seconds=90)
             wire = request.to_dict()
-            original = batch.generation_manifest
-            def explicit_v3(*args, **kwargs):
-                return original(*args, **{**kwargs, 'reading_model_projection': 'reading-model-input/3'})
-            with monkeypatch.context() as patch:
-                patch.setattr(batch, 'generation_manifest', explicit_v3)
-                first = batch.run_batch(request, project_root=root,
-                    catalog_config_path=state.config_path, db_path=root/'automation.db',
-                    work_dir=root/'work')
-            assert first['status']=='completed', first
+            prepared_originals={p:p.read_bytes() for p in state.raw_paths.values()}
+            bootstrap, observations, producer = deploy_historical_reading_producer(root)
+            request_path=root/'request.json'
+            request_path.write_text(json.dumps(wire),encoding='utf-8')
+            historical_launcher=root/'historical_v3_runtime.py'
+            historical_launcher.write_text('''from company_wiki.automation import narrative_batch as batch
+from company_wiki.automation.narrative_batch_cli import main
+original = batch.generation_manifest
+def explicit_v3(*args, **kwargs):
+    return original(*args, **{**kwargs, 'reading_model_projection': 'reading-model-input/3'})
+batch.generation_manifest = explicit_v3
+if __name__ == '__main__':
+    raise SystemExit(main())
+''',encoding='utf-8')
+            current_sources=Path(__file__).resolve().parents[2]/'src'
+            historical_process=subprocess.run([sys.executable,'-B','-X','utf8',str(historical_launcher),
+                '--project-root',str(root),'--catalog-config',str(state.config_path),
+                '--automation-db',str(root/'automation.db'),'--work-dir',str(root/'work'),
+                '--request',str(request_path)],cwd=root,
+                env=dict(os.environ,PYTHONPATH=os.pathsep.join((str(bootstrap),str(current_sources))),
+                         PYTHONDONTWRITEBYTECODE='1',PYTHON_DOTENV_DISABLED='1'),
+                capture_output=True,text=True,encoding='utf-8',timeout=120)
+            first=json.loads(historical_process.stdout)
+            observed_store=AutomationStore(root/'automation.db')
+            diagnostics=[(job.job_type,attempt.error_code,attempt.error_detail)
+                         for job in observed_store.list_jobs()
+                         for attempt in observed_store.list_attempts(job.job_id)]
+            assert historical_process.returncode==0 and first['status']=='completed', (first,historical_process.stderr,diagnostics)
+            observed=[json.loads(line) for line in observations.read_text(encoding='utf-8').splitlines()]
+            selected=[row for row in observed if row['phase']=='selected']
+            assert selected and all(row['reading_schema']=='du-production-reading/3'
+                                    and not row['has_support_use'] for row in selected)
+            assert all(Path(row['producer']).resolve()==producer.resolve() for row in observed)
+            frozen_observations=observations.read_bytes()
+            assert {p:p.read_bytes() for p in prepared_originals}==prepared_originals
             assert len(loopback_model_server.requests)==1
             assert loopback_model_server.requests[0][0]['schema_version']=='narrative-model-request/4'
             runs=NarrativeRunStore(root/'automation.db')
@@ -111,10 +140,15 @@ def test_real_paid_v3_typed_stage_recovers_with_zero_new_posts_after_validator_u
             before_auto=_database_dump(root/'automation.db')
             before_catalog=_database_dump(state.catalog.config.database_path)
             originals={p:p.read_bytes() for p in state.raw_paths.values()}
-            request_path=root/'request.json'
-            request_path.write_text(json.dumps(wire),encoding='utf-8')
             launcher=root/'upgraded_runtime.py'
-            launcher.write_text('''import company_wiki.automation.narrative_summarize as summary
+            launcher.write_text('''import json
+from pathlib import Path
+import company_wiki.source_catalog.narrative_reading as source_producer
+Path(__file__).with_name('upgraded-source.json').write_text(json.dumps({
+    'producer': source_producer.__file__,
+    'legacy_bootstrap_loaded': 'historical-v3-bootstrap' in str(__import__('sys').path),
+}), encoding='utf-8')
+import company_wiki.automation.narrative_summarize as summary
 import company_wiki.automation.narrative_worker_factory as factory
 from company_wiki.automation.narrative_batch_cli import main
 original = summary.reading_summary_validation_identity
@@ -143,5 +177,18 @@ raise SystemExit(main())
             assert _database_dump(state.catalog.config.database_path)==before_catalog
             assert runs.get_run(request.run_id)==original_run
             assert {p:p.read_bytes() for p in originals}==originals
+            upgraded=json.loads((root/'upgraded-source.json').read_text(encoding='utf-8'))
+            assert Path(upgraded['producer']).resolve()==current_sources/'company_wiki/source_catalog/narrative_reading.py'
+            assert upgraded['legacy_bootstrap_loaded'] is False
+            assert observations.read_bytes()==frozen_observations
+            record_testsuite_property('legacy_producer_recovery',json.dumps({
+                'scope':'one actual pre-use source component plus typed-v3 protocol; other runtime current',
+                'producer_observations':observed,
+                'historical_model_request_schema':loopback_model_server.requests[0][0]['schema_version'],
+                'historical_projection':'reading-model-input/3',
+                'total_loopback_posts':len(loopback_model_server.requests),
+                'upgraded_runtime':upgraded,
+                'automation_catalog_run_budget_originals_unchanged':True,
+            },sort_keys=True))
         finally:
             state.catalog.close()

@@ -1,0 +1,21 @@
+{
+  "scope": "single complete inventory attempt, STOPPED_AT_BOUND; not full validation",
+  "collected": 9476,
+  "progress_percent": 89,
+  "complete": false,
+  "time_limit_seconds": 600,
+  "timeout": true,
+  "failure_reports_observed": 27,
+  "partially_executed_file": "tests/unit/test_retained_plan_fixture_bytes.py",
+  "completed_cases_in_partial_file": 4,
+  "unexecuted_tail_nodeids": 1021,
+  "next": "Only unexecuted-nodeids plus separately bounded retained fixture and harness-influenced nodes; never repeat whole unchanged suite",
+  "cleanup_error": "Python rmtree rejected read-only fake Git object; owned root then verified and deleted using normal PowerShell Force",
+  "scratch_absent": true,
+  "originals_copied": 0,
+  "harness_findings": [
+    "Nested pytest does not inherit explicit -p while autoload is disabled",
+    "Host installed tests package shadows tests.document_normalization imports"
+  ],
+  "source_scope": "Published908ef3cb plus separate paragraph3-file WIP; no source edits during execution"
+}

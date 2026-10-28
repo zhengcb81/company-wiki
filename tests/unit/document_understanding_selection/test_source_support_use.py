@@ -855,3 +855,33 @@ def test_single_operating_value_cells_keep_role_and_readable_offer_without_multi
     assert roles.numeric_role=='operating'
     assert use==('unresolved','source_numeric_scope_unresolved')
     assert packages and selected.evidence_spans
+
+
+@pytest.mark.parametrize('object_name',('device','sensor','membrane','filter','prototype','module'))
+def test_provision_objects_use_the_same_canonical_heads_as_subject_descriptions(object_name):
+    from company_wiki.document_understanding.operating_states.product_reference import product_head_spans
+    text=f'Company launched a new {object_name} for overseas customers.'
+    assert product_head_spans(text)
+    fact,roles,use=_ci_source_assessment(text)
+    assert roles.operating and fact.eligible and use[0]=='support'
+    assert not {'operating_milestone','operating_current_state'}.intersection(fact.reasons)
+
+
+def test_complete_partial_source_business_fixture_is_supported_without_changing_its_text():
+    text='Company launched a new device and received repeat orders from overseas customers.'
+    selected,packages,parsed=_select_support_case([text],4)
+    assert packages and [span.raw_text for span in selected.evidence_spans]==[text]
+    assert parsed.units[0].raw_text==text
+
+
+@pytest.mark.parametrize('text',(
+    'Company launched. A new device for overseas customers.',
+    'Company launched cash investments. A sensor for customers.',
+    'Company launched cash investments.',
+    'A device for overseas customers.',
+    'Audit procedures included inspecting the sensor delivered to customers.',
+    'The Company designs and maintains accounting and internal control systems to provide reasonable assurance that assets are safeguarded and financial records are reliable for preparing consolidated financial statements.',
+))
+def test_shared_target_heads_cannot_donate_across_clauses_or_turn_financial_audit_objects_into_support(text):
+    fact,_roles,use=_ci_source_assessment(text)
+    assert not fact.eligible and use[0]!='support'

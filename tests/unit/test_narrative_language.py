@@ -69,7 +69,7 @@ def test_rejects_unsupported_mime_and_non_utf8_text() -> None:
     ("zh", "公司海外新业务完成认证并开始批量交付，新增客户订单持续增长。" * 3),
 ])
 def test_partial_docx_body_language_matches_composed_normalization(language, text):
-    from tests.document_normalization.test_docx import package, para, norm, MIME
+    from document_normalization.test_docx import package, para, norm, MIME
     from company_wiki.source_catalog.narrative_normalization import NarrativeNormalization
 
     data = package(para(text), {"word/header1.xml": "<header/>"})
@@ -82,7 +82,7 @@ def test_partial_docx_body_language_matches_composed_normalization(language, tex
 
 @pytest.mark.parametrize("data", [b"invalid zip", b"PK\x03\x04truncated"])
 def test_invalid_docx_still_has_named_extraction_failure(data):
-    from tests.document_normalization.test_docx import MIME
+    from document_normalization.test_docx import MIME
 
     with pytest.raises(NarrativeLanguageError, match="SOURCE_LANGUAGE_TEXT_EXTRACTION_FAILED"):
         detect_narrative_language(data, MIME)
@@ -92,7 +92,7 @@ def test_batch_preparation_retains_configured_normalization_owner():
     import hashlib
     import json
     from unit.test_narrative_batch import _request, _module, SparseMetadataReader
-    from tests.document_normalization.test_docx import MIME, package, para
+    from document_normalization.test_docx import MIME, package, para
     from company_wiki.automation.narrative_batch_request import NarrativeBatchRequest
     from company_wiki.source_catalog.narrative_normalization import NarrativeNormalization
 

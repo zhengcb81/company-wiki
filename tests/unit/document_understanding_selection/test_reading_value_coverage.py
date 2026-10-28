@@ -344,7 +344,7 @@ def test_missing_pure_projection_component_cannot_claim_complete_pdf(monkeypatch
 
 
 def test_marker_filter_does_not_remove_words_with_digits_or_roman_prefixes():
-    for text in ("IV therapy services for hospitals", "Our 2026 product portfolio includes recycling systems.",
+    for text in ("IV therapy services are provided to hospitals.", "Our 2026 product portfolio includes recycling systems.",
                  "一体化生产服务覆盖多个下游客户工序。"):
         unit = SimpleNamespace(raw_text=text, source_role="company_filing", unit_kind="html_paragraph")
         assert reading._admitted(unit, {"section_role": "business"}, "narrative")[0]

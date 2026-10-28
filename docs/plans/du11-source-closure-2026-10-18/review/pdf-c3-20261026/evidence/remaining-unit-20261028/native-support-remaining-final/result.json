@@ -1,0 +1,642 @@
+{
+  "scope": "fresh_whole_original_native_selection_and_source_task_admission_only",
+  "source_sha256": "4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+  "schema": "du-production-reading/4",
+  "gold_path": "docs\\plans\\du11-source-closure-2026-10-18\\review\\pdf-c3-20261026\\business-recovery-checkpoints\\hk-development-business5-gold.json",
+  "gold_sha256": "9feb80977944efb79c0d94b0975e6c464a2b95b0879e815559e70f2c541485a5",
+  "seconds": 5.385,
+  "parsed_units": 2330,
+  "selected_spans": 81,
+  "work_used": 6175509,
+  "task_uses": {
+    "support": 38
+  },
+  "full_selection_gold": [
+    {
+      "id": "hk-industry-cloud-closure",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "hk-rd-period-scope",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "hk-outlook-not-actual",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "hk-cloud-server-c9a-x9a-release",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "hk-training-inference-platform-launch",
+      "supported": true,
+      "all_anchors_individually_present": true
+    }
+  ],
+  "admitted_task_gold": {
+    "scope": "source_support_in_current_request_tasks",
+    "request_scope": "full_request",
+    "sent_task_keys": [
+      "t1",
+      "t2",
+      "t3",
+      "t4",
+      "t5",
+      "t6",
+      "t7",
+      "t8",
+      "t9",
+      "t10",
+      "t11",
+      "t12",
+      "t13",
+      "t14",
+      "t15",
+      "t16",
+      "t17",
+      "t18",
+      "t19",
+      "t20",
+      "t21",
+      "t22",
+      "t23",
+      "t24",
+      "t25",
+      "t26",
+      "t27",
+      "t28",
+      "t29",
+      "t30",
+      "t31",
+      "t32",
+      "t33",
+      "t34",
+      "t35",
+      "t36",
+      "t37",
+      "t38"
+    ],
+    "facts": [
+      {
+        "id": "hk-industry-cloud-closure",
+        "supported": true,
+        "supported_task_keys": [
+          "t19"
+        ]
+      },
+      {
+        "id": "hk-rd-period-scope",
+        "supported": true,
+        "supported_task_keys": [
+          "t16"
+        ]
+      },
+      {
+        "id": "hk-outlook-not-actual",
+        "supported": true,
+        "supported_task_keys": [
+          "t17"
+        ]
+      },
+      {
+        "id": "hk-cloud-server-c9a-x9a-release",
+        "supported": true,
+        "supported_task_keys": [
+          "t9"
+        ]
+      },
+      {
+        "id": "hk-training-inference-platform-launch",
+        "supported": true,
+        "supported_task_keys": [
+          "t10"
+        ]
+      }
+    ],
+    "required_count": 5,
+    "supported_count": 5,
+    "missing_ids": [],
+    "not_sent_ids": [],
+    "summary_claim_coverage": "not_evaluated"
+  },
+  "tasks": [
+    {
+      "key": "t1",
+      "support_use": "support",
+      "support_reason": "source_business_relation",
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "support_ids": [
+        "urn:company-wiki:evidence-span:sha256:a726230ce22d73e29e85d56b0c9e007d42f850066471cd7389639051f4502ff7"
+      ],
+      "gold_supported": []
+    },
+    {
+      "key": "t2",
+      "support_use": "support",
+      "support_reason": "source_business_relation",
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "support_ids": [
+        "urn:company-wiki:evidence-span:sha256:18b082e5dafeea15da624de42a54425e193ac1189ae90c7be539785e143c1878"
+      ],
+      "gold_supported": []
+    },
+    {
+      "key": "t3",
+      "support_use": "support",
+      "support_reason": "source_business_relation",
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "support_ids": [
+        "urn:company-wiki:evidence-span:sha256:4f4dc87550ede6b49625242286cc6e217104167a4cf5162d98cd15fdd1ebefef"
+      ],
+      "gold_supported": []
+    },
+    {
+      "key": "t4",
+      "support_use": "support",
+      "support_reason": "source_business_relation",
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "support_ids": [
+        "urn:company-wiki:evidence-span:sha256:b2bf738c04f0d3ac657b433f08a86862175de58bfde28936b72ca32b5eb8860b"
+      ],
+      "gold_supported": []
+    },
+    {
+      "key": "t5",
+      "support_use": "support",
+      "support_reason": "source_business_relation",
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "support_ids": [
+        "urn:company-wiki:evidence-span:sha256:210efbadac7b8c85edf037095059fdc8f0cc88a38e64224757ade2278eff7026"
+      ],
+      "gold_supported": []
+    },
+    {
+      "key": "t6",
+      "support_use": "support",
+      "support_reason": "source_business_relation",
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "support_ids": [
+        "urn:company-wiki:evidence-span:sha256:936316afeb330e7e435731b866dfffd576596eba6186a0cdb2a0f9a491889ee2"
+      ],
+      "gold_supported": []
+    },
+    {
+      "key": "t7",
+      "support_use": "support",
+      "support_reason": "source_business_relation",
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "support_ids": [
+        "urn:company-wiki:evidence-span:sha256:4be85a5a2ad4b0a8e79a4d340a7c50a3675aa07b651401ae003d1e14e040dead"
+      ],
+      "gold_supported": []
+    },
+    {
+      "key": "t8",
+      "support_use": "support",
+      "support_reason": "source_business_relation",
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "support_ids": [
+        "urn:company-wiki:evidence-span:sha256:8818fc521557cd67fae4600425f2ee7100234303cd6172b22b37c636a9fa7316"
+      ],
+      "gold_supported": []
+    },
+    {
+      "key": "t9",
+      "support_use": "support",
+      "support_reason": "source_business_relation",
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "support_ids": [
+        "urn:company-wiki:evidence-span:sha256:1f7ecf4ec68b26351c21146cc74ec823968ed6019559489aafdaf001e7b63e7f"
+      ],
+      "gold_supported": [
+        "hk-cloud-server-c9a-x9a-release"
+      ]
+    },
+    {
+      "key": "t10",
+      "support_use": "support",
+      "support_reason": "source_business_relation",
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "support_ids": [
+        "urn:company-wiki:evidence-span:sha256:39fa9abb35f7b6d484020457bf06034352188edd63872ebcd775865f6b64dceb"
+      ],
+      "gold_supported": [
+        "hk-training-inference-platform-launch"
+      ]
+    },
+    {
+      "key": "t11",
+      "support_use": "support",
+      "support_reason": "source_business_relation",
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "support_ids": [
+        "urn:company-wiki:evidence-span:sha256:8facfc0d576e1a57a19bc09a369461f97dd092759766cd021359a17adedfbddc"
+      ],
+      "gold_supported": []
+    },
+    {
+      "key": "t12",
+      "support_use": "support",
+      "support_reason": "source_business_relation",
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "support_ids": [
+        "urn:company-wiki:evidence-span:sha256:1de7e93f7bb352987434d1213901eae8f134591cb410248cda4b345e0bf67f36"
+      ],
+      "gold_supported": []
+    },
+    {
+      "key": "t13",
+      "support_use": "support",
+      "support_reason": "source_business_relation",
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "support_ids": [
+        "urn:company-wiki:evidence-span:sha256:525a35d6fe0dc8a88e169207582796b04116d50afb7af3962819cc81e1d13b03"
+      ],
+      "gold_supported": []
+    },
+    {
+      "key": "t14",
+      "support_use": "support",
+      "support_reason": "source_business_relation",
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "support_ids": [
+        "urn:company-wiki:evidence-span:sha256:e7f50c2c92b0239ffc85cf16fdbaca4101461bfd4589735ec2bb5b4d8397a58b"
+      ],
+      "gold_supported": []
+    },
+    {
+      "key": "t15",
+      "support_use": "support",
+      "support_reason": "source_business_relation",
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "support_ids": [
+        "urn:company-wiki:evidence-span:sha256:4b0dcf1d2805672cfb61e7b85361f4e9c59eba7e0b3cb48600cce507332c9e77"
+      ],
+      "gold_supported": []
+    },
+    {
+      "key": "t16",
+      "support_use": "support",
+      "support_reason": "source_business_relation",
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "support_ids": [
+        "urn:company-wiki:evidence-span:sha256:ae5f4d14634776a788377b2a94cd69fc31a3cf0713f348ecfebfc2052412bf1f"
+      ],
+      "gold_supported": [
+        "hk-rd-period-scope"
+      ]
+    },
+    {
+      "key": "t17",
+      "support_use": "support",
+      "support_reason": "source_business_relation",
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "support_ids": [
+        "urn:company-wiki:evidence-span:sha256:e395049c60cd340ca2d8e90ef42468163895fbd38a73219c4a529f0ffbdd993d"
+      ],
+      "gold_supported": [
+        "hk-outlook-not-actual"
+      ]
+    },
+    {
+      "key": "t18",
+      "support_use": "support",
+      "support_reason": "source_business_relation",
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "support_ids": [
+        "urn:company-wiki:evidence-span:sha256:a26ef156c5f0fb478d924f579b5dcff216786caba4f5ed126c68755b22913dd8"
+      ],
+      "gold_supported": []
+    },
+    {
+      "key": "t19",
+      "support_use": "support",
+      "support_reason": "source_business_relation",
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "support_ids": [
+        "urn:company-wiki:evidence-span:sha256:0f887d75ce8ca0b8f1286183e21da451e63f4e297e4efd79664d9414c7a26430"
+      ],
+      "gold_supported": [
+        "hk-industry-cloud-closure"
+      ]
+    },
+    {
+      "key": "t20",
+      "support_use": "support",
+      "support_reason": "source_business_relation",
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "support_ids": [
+        "urn:company-wiki:evidence-span:sha256:7b93bd1a2359ad75a22d86fc05f1d0499187f0a436a9eb346fc74a2181479183"
+      ],
+      "gold_supported": []
+    },
+    {
+      "key": "t21",
+      "support_use": "support",
+      "support_reason": "source_business_relation",
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "support_ids": [
+        "urn:company-wiki:evidence-span:sha256:69ff7031971451decb1ea8bf50d13652db9f467b14c74b011cd9c1d64dd2ea0e"
+      ],
+      "gold_supported": []
+    },
+    {
+      "key": "t22",
+      "support_use": "support",
+      "support_reason": "source_business_relation",
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "support_ids": [
+        "urn:company-wiki:evidence-span:sha256:46871741dd03ce6c6d8005c1d9104bbfd9cc64cbc01895e108b12d2023138253"
+      ],
+      "gold_supported": []
+    },
+    {
+      "key": "t23",
+      "support_use": "support",
+      "support_reason": "source_business_relation",
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "support_ids": [
+        "urn:company-wiki:evidence-span:sha256:5b61e1e80cdc9a1e4bf7fa418ca8a0ab6b41ffc92b4d12dd9d4c446cc50fb894"
+      ],
+      "gold_supported": []
+    },
+    {
+      "key": "t24",
+      "support_use": "support",
+      "support_reason": "source_business_relation",
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "support_ids": [
+        "urn:company-wiki:evidence-span:sha256:758fbd733944789866a438cab93fed0faece590487f4796fb19f5fd5106e6f4a"
+      ],
+      "gold_supported": []
+    },
+    {
+      "key": "t25",
+      "support_use": "support",
+      "support_reason": "source_business_relation",
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "support_ids": [
+        "urn:company-wiki:evidence-span:sha256:fbcc7fe501d4582332c63866c574c7150f7f38d840b50c1441e46f5ad2e6c847"
+      ],
+      "gold_supported": []
+    },
+    {
+      "key": "t26",
+      "support_use": "support",
+      "support_reason": "source_business_relation",
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "support_ids": [
+        "urn:company-wiki:evidence-span:sha256:cbd98718fcaac669d6da0e7306544063dc66ddc9dfa45af23adb9cd085c0ce5a"
+      ],
+      "gold_supported": []
+    },
+    {
+      "key": "t27",
+      "support_use": "support",
+      "support_reason": "source_business_relation",
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "support_ids": [
+        "urn:company-wiki:evidence-span:sha256:0d37f44cedadb1ed894dd513356666eb2f10a4dd1252490d39b2ad38b19d982e"
+      ],
+      "gold_supported": []
+    },
+    {
+      "key": "t28",
+      "support_use": "support",
+      "support_reason": "source_business_relation",
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "support_ids": [
+        "urn:company-wiki:evidence-span:sha256:82b027b386d8f4eeba248557943b4fca6bcd36d49330efeadb801a5110372077"
+      ],
+      "gold_supported": []
+    },
+    {
+      "key": "t29",
+      "support_use": "support",
+      "support_reason": "source_business_relation",
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "support_ids": [
+        "urn:company-wiki:evidence-span:sha256:fd3bbf438dff21595e48fc4599558af7d5d00416ed1ca794b281428cd1b0bd11"
+      ],
+      "gold_supported": []
+    },
+    {
+      "key": "t30",
+      "support_use": "support",
+      "support_reason": "source_business_relation",
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "support_ids": [
+        "urn:company-wiki:evidence-span:sha256:78fcb1f62afdbc8d331925ea874e7357653a1c4ef11b163d093d0b1772eb3bab"
+      ],
+      "gold_supported": []
+    },
+    {
+      "key": "t31",
+      "support_use": "support",
+      "support_reason": "source_business_relation",
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "support_ids": [
+        "urn:company-wiki:evidence-span:sha256:30988efa414e481761680d6c9b9b23b063166475d4fc4b66a9eb1cab5f0217bc"
+      ],
+      "gold_supported": []
+    },
+    {
+      "key": "t32",
+      "support_use": "support",
+      "support_reason": "source_business_relation",
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "support_ids": [
+        "urn:company-wiki:evidence-span:sha256:2599b7c50356c1325e77d15a9bca58af805dd089dcfd2ee8763db140f98bc80d"
+      ],
+      "gold_supported": []
+    },
+    {
+      "key": "t33",
+      "support_use": "support",
+      "support_reason": "source_business_relation",
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "support_ids": [
+        "urn:company-wiki:evidence-span:sha256:7d38f0f8a080a66f4bed83b4716c4c25caca6146f0386547e0e74eee0c33261f"
+      ],
+      "gold_supported": []
+    },
+    {
+      "key": "t34",
+      "support_use": "support",
+      "support_reason": "source_business_relation",
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "support_ids": [
+        "urn:company-wiki:evidence-span:sha256:5015d7057fcf95162916fc28736c4880ffee309b97ab29ccd761a19de0c3f27f"
+      ],
+      "gold_supported": []
+    },
+    {
+      "key": "t35",
+      "support_use": "support",
+      "support_reason": "source_business_relation",
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "support_ids": [
+        "urn:company-wiki:evidence-span:sha256:6c5b44fc8574de03949f029f89cec40c89facb281909f954e57d36fcb00a933e"
+      ],
+      "gold_supported": []
+    },
+    {
+      "key": "t36",
+      "support_use": "support",
+      "support_reason": "source_business_relation",
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "support_ids": [
+        "urn:company-wiki:evidence-span:sha256:c52ff00d650c41765d408edfe0131dfd8fb52e4437d26dd27e9b9a500297482c"
+      ],
+      "gold_supported": []
+    },
+    {
+      "key": "t37",
+      "support_use": "support",
+      "support_reason": "source_business_relation",
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "support_ids": [
+        "urn:company-wiki:evidence-span:sha256:dddd0d65fc9702548d62db123ca7b814d3d636f2debd1761ca6c0dd4337028e1"
+      ],
+      "gold_supported": []
+    },
+    {
+      "key": "t38",
+      "support_use": "support",
+      "support_reason": "source_business_relation",
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "support_ids": [
+        "urn:company-wiki:evidence-span:sha256:3ba0b02f3f982b6e3e06fe47e74efac345952a0961629eac4d09766976295215"
+      ],
+      "gold_supported": []
+    }
+  ],
+  "all_gold_in_admitted_tasks": true,
+  "original_unchanged": true,
+  "SDK_calls": 0,
+  "model_POST": 0,
+  "limits_raised": false,
+  "limitations": [
+    "Native-only reading is an isolated source-layer diagnostic, not the configured SDK recipe or a new summary.",
+    "Task gold verifies complete support availability, not rewritten summary quality."
+  ]
+}

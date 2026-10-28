@@ -1531,3 +1531,31 @@ ROOT只复现失败所在4组：26例中13F/13P、4.10秒，原断言未改、�
 配置10M/$20、母账1,800,368tokens/$0.727945与unknown不变；原件/生产配置/其他owner WIP保持。证据见[CI反证](review/pdf-c3-20261026/evidence/source-use-ci-20261028/)。
 
 2026-10-28：来源兼容CI四共因关闭，原四测试无diff，必要416unique通过，集中独审通过；真实5gold及396mypy通过，正常发布/新精确CI待完成。见SOURCE_USE_CI_REPAIR。未加额度、公司特判或小节点门禁。
+
+## 2026-10-28 当前：剩余失败统一盘点，原件与源码冻结后集中修复
+
+目标ACTIVE。源码已推送908ef3cb；原13项CI反证通过共享proof根修关闭，必要416P、独审63P、真实81span/38support/五业务金标及396mypy均留证。但新精确CI40729898744仍FAIL；不得记全部发布完成。公开注解受前十条限制，完整日志API403、IAB未登录；没有提取凭证，也不要求用户处理。
+
+为避免按前十条盲修，ROOT做了**一次**隔离单元盘点：收集9476例（含单独PDF需求15例WIP），600秒达到界限，进度89%，27个失败报告；明确INCOMPLETE，不冒称全域完成。旧已运行范围不重跑。只补未执行尾部1021例、单独12项Git字节夹具，以及受诊断插件继承影响的3项工程用例。测试根.c3all已核归属并清理，Git只读临时对象不修改全局ACL。
+
+当前分组：marker正例1是旧裸NP夹具，按原意补有限谓语、保IV前缀；partial-source17含共享产品头在主语/宾语位置不一致的真召回，以及当前/4却使用旧model codec的夹具；paid-v3恢复1也待核历史producer协议。另daily_push3是本次harness未把插件传给子pytest，language5是在本机tests包命名空间导入前失败，不能当作来源/语言产品缺陷。必须待尾部结果归齐再确认全部分类，不能直接删测试或放宽/4使用旧codec。
+
+**唯一下一步：** 读三个补齐范围最终收据→按只读remaining-unit-root-plan统一冻结共因与分工→SOURCE复用一次prepared typed-head索引、ROOT保持原意迁移旧协议/marker/import夹具→只跑原失败和必要影响包→独立大节点审查、真实五金标→正常发布/精确CI。源码在本次盘点与尾部运行期间保持冻结。
+
+PDF需求已另行TDD：7RED/8控制→相关49P、396mypy；只改PDF阅读层2源文件和独立测试，尚未验收/发布。一次真实需求观察从12/17/19改为28/3/4、366340work；旧两端完整数字行/其他词内误判已移除，但新浮现姓名/地址/复杂表内断句仍须审，不能宣称零SDK。此WIP不混入SOURCE manifest，等待本批统一缺陷闭合后继续。
+
+正式供应商摘要、当前revision恢复/缓存、RF实际采用、新holdout及八步循环仍OPEN。配置/母账/unknown不变，0新模型/SDK/下载，原件/生产配置/其他owner不写。诊断见.planning/c3-20261028/all-unit-counterproof/receipt.json；完成后把紧凑最终证据归档PWF，不提交完整临时环境。
+
+## 2026-10-28 当前：剩余共因已集中验收，正常发布后核新精确CI
+
+目标ACTIVE。最后已发布源码908ef3cb的CI40729898744失败保留。此后剩余缺陷已统一处理并通过最终24文件独审，不将旧CI改绿。当前唯一入口是本段/CURRENT_STATUS.json及[本轮结案](review/pdf-c3-20261026/REMAINING_UNIT_REPAIR.md)。
+
+**已完成：** SOURCE以一个prepared typed-head位置索引同时判主语描述和动作后的局部宾语，恢复原Company/device句和六已有产品族，不加词表副本、issuer/stage或公司条件。ROOT只按原意迁移IV marker完整谓语、DOCX测试导入和当前scoped模型端口，原业务句/partial/forged/零模型/原文与replay断言全部保留。历史v3以真正5002旧producer一组件物理部署自然产/3、一次loopback，然后今天无bootstrap新CLI/validator升级恢复0POST，原DB/run/budget/raw不变；仅22.8KB代码fixture，不复制原件或SDK。
+
+**盘点与验收：** 单次9476盘点到89%/600秒后停止，27报告，未重跑全域；只补未执行1021P、retained12P和正常插件3P。三个工程假反证已关闭，余24源/夹具案例已归因并修复。SOURCE先457unique，最后类型变量名整理后14定点；ROOT三文件84P2F后仅两端口节点2P；历史关联8P/最后3P；最终独审30unique/7.28秒。这些范围有重叠，不相加、不声称9476在当前新字节全绿。真实81span/38support及五金标完整、5.385秒/6,175,509work，396mypy通过。没有提高额度。
+
+**效率根修：** CI首条失败注解现在同时列出无参数的有界全部function组和case数，不再被平台前十条注解遮住后续类别；原25逐项封顶、traceback隐私、skip判断不变。新2RED→原13＋新2共15P，没有增加CI任务、范围、超时或小节点门禁。
+
+**唯一下一步：** 正常提交/推送上述源码和测试，核新精确CI→修PDF独审PD1再验收其独立组件→真实配置摘要/响应独审/恢复缓存/FF-RF实际采用→新holdout和八步循环。PDF3WIP不混入本次签收/提交：49作者控制通过，但独审44中42P2F，双row形状排除会吞真实amount/dependent，必须先修；不能靠页数下降或0SDK代签。
+
+正式供应商摘要、当前revision缓存恢复和RF模型采用仍OPEN。配置10M/$20、母账1,800,368tokens/$0.727945及unknown不变，0新供应商/SDK/下载；原件/生产配置/其他owner不写。所有本轮隔离测试根已恢复不存在；只留紧凑代码fixture和压缩证据。

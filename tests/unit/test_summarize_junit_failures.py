@@ -78,6 +78,33 @@ def test_caps_annotations_and_reports_remaining_failure_count(
     assert output[-1] == "::error::and 5 more failing tests"
 
 
+def test_first_annotation_contains_groups_beyond_platform_annotation_limit(tmp_path, capsys):
+    report = tmp_path / "all-failures.xml"
+    _write_report(report, case_count=30)
+    assert main(str(report)) == 0
+    first = capsys.readouterr().out.splitlines()[0]
+    assert "Failure groups (30 failed cases)" in first
+    assert "test_case_29" in first
+    assert "private traceback omitted" not in first
+
+
+def test_group_inventory_collapses_parameters_without_revealing_their_values(tmp_path, capsys):
+    report = tmp_path / "parameterized.xml"
+    suite = ET.Element("testsuite")
+    for index in range(30):
+        case = ET.SubElement(suite, "testcase", {
+            "file": "tests/unit/test_example.py",
+            "name": f"test_group[private_parameter_{index}]",
+        })
+        ET.SubElement(case, "failure", {"type": "AssertionError"})
+    ET.ElementTree(suite).write(report, encoding="utf-8")
+    assert main(str(report)) == 0
+    first = capsys.readouterr().out.splitlines()[0]
+    groups = first.split("Failure groups", 1)[1]
+    assert "test_group [AssertionError] x30" in groups
+    assert "private_parameter" not in groups
+
+
 def test_missing_junit_file_keeps_original_pytest_failure_actionable(
     tmp_path: Path, capsys
 ) -> None:

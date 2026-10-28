@@ -1,0 +1,17 @@
+{
+  "mode": "harness",
+  "complete": true,
+  "returncode": 0,
+  "timeout": false,
+  "time_limit_seconds": 120,
+  "seconds": 59.389,
+  "targets": [
+    "tests/unit/test_daily_push_policy.py::test_real_push_green_fast_pass_then_blocked_by_a_ran_failure",
+    "tests/unit/test_daily_push_policy.py::test_real_docs_push_runs_no_tests_but_does_not_hide_earlier_code",
+    "tests/unit/test_daily_push_policy.py::test_real_push_defers_wide_scope_and_full_run_still_finds_the_failure"
+  ],
+  "scratch_absent": true,
+  "cleanup_error": null,
+  "plugins_inherited_by_nested_pytest": "pytest_timeout,pytest_mock,pytest_asyncio.plugin",
+  "originals_copied": 0
+}

@@ -1,0 +1,158 @@
+{
+  "schema_version": "historical-v3-component-fixture-handoff/3",
+  "status": "FROZEN_READY_FOR_ROOT_REVIEW",
+  "author": "/root/ci_source_controls_review",
+  "files": [
+    {
+      "path": "tests/unit/test_narrative_scoped_runtime_recovery.py",
+      "sha256": "4bbcd43a75fababd3e2e163d773da024d1f90f75a2b9d5f33b5fae67ded7dd98",
+      "lf_sha256": "ed7a483cdc6888bc787ea7ea5692e29e55b3bf1c841b1500c76ad0576ea17f3f",
+      "bytes": 12123
+    },
+    {
+      "path": "tests/support/legacy_reading_producer.py",
+      "sha256": "7ac07199cb354c83257a08c524b8f009092de2dba837e522d797ad8e862df1ac",
+      "lf_sha256": "7ac07199cb354c83257a08c524b8f009092de2dba837e522d797ad8e862df1ac",
+      "bytes": 3599
+    },
+    {
+      "path": "tests/support/test_legacy_reading_producer.py",
+      "sha256": "e04faa23f1a6f420df512e9396759f55e55e6d1c42b74b810155aef570ed3f50",
+      "lf_sha256": "e04faa23f1a6f420df512e9396759f55e55e6d1c42b74b810155aef570ed3f50",
+      "bytes": 1961
+    },
+    {
+      "path": "tests/support/historical_reading_v3/manifest.json",
+      "sha256": "19c5bd1f55ee94d778c16607f3cdf19e8dcd851f5e4df2d604397a1db0ad8b72",
+      "lf_sha256": "d0dfeab47667f31e1fa1936069b86cd013111e860acdc071fe9e2a464a803360",
+      "bytes": 752
+    },
+    {
+      "path": "tests/support/historical_reading_v3/narrative_reading.py.gz",
+      "sha256": "1d3a1e0c48eee694a5ade8871fbde0c66f87ece1cddebe3b96e85e35b4e78b4a",
+      "lf_sha256": "e8f05e5cb0eee8f878afe2c837feaa4d8ca0476790d8ad85468f25138abd3141",
+      "bytes": 22804
+    },
+    {
+      "path": "tests/support/historical_reading_v3/README.md",
+      "sha256": "24fd61223d1d745eb521c1a14dc79c18788790aa7025a8b9f1c6a64e02b2ccac",
+      "lf_sha256": "69fd50a6c7ee89a72501bdc7234973ceef1d58ce9c74d75c34cb06e95c1a4490",
+      "bytes": 833
+    }
+  ],
+  "root_cause": "Old recovery test configured the typed-v3 codec but used today's source producer, which publishes mandatory /4 support-use fields. The current legacy-codec refusal was correct; the historical fixture had never truly represented its claimed producer.",
+  "historical_component": {
+    "schema_version": "historical-source-producer-fixture/1",
+    "commit": "5002e8c3c40ca14a29f3ed8a08f6fcab2ec14b9c",
+    "git_path": "src/company_wiki/source_catalog/narrative_reading.py",
+    "git_blob_sha1": "8a06bfa7b92808db448fa8dee1eb2ba016cfc140",
+    "source_sha256": "51ecc1ca4ba55f170786af2d7aea28ee5dfe05cf9f0d2711d8f617ef16cd74b9",
+    "source_bytes": 92082,
+    "gzip_sha256": "1d3a1e0c48eee694a5ade8871fbde0c66f87ece1cddebe3b96e85e35b4e78b4a",
+    "gzip_bytes": 22804,
+    "artifact": "narrative_reading.py.gz",
+    "scope": "One exact pre-support-use source producer component plus typed-v3 model protocol; remaining runtime is current. Not an entire historical release.",
+    "contains_original_documents": false,
+    "contains_sdk": false
+  },
+  "physical_deployment": "One unmodified Git-blob source producer file in an isolated source_catalog.__path__ overlay. Other source/runtime dependencies are current. A return observer records natural schema and hash without modifying results.",
+  "protocol_selection": "Same original generation_manifest API explicitly selects reading-model-input/3 in first launcher; no result/tag/group/hash rewriting. The normal CLI request and worker/store/verify/publish paths execute.",
+  "current_recovery": "Fresh CLI process has current src-only PYTHONPATH, imports today's producer, upgrades validator identity and forbids both model constructors; legacy bootstrap is absent.",
+  "preserved_original_assertions": [
+    "completed first stage",
+    "one real loopback HTTP POST",
+    "model request schema4",
+    "all frozen manifests reading-model-input/3",
+    "validator upgrade in new process",
+    "zero new model construction/POST on recovery",
+    "identical documents and budget",
+    "automation/catalog database dumps unchanged",
+    "run binding unchanged",
+    "raw original bytes unchanged"
+  ],
+  "additional_controls": [
+    "exact original Git blob provenance even if edited fixture hashes are re-signed",
+    "normal CI deployment requires no Git objects or subprocess",
+    "physical old module origin observed",
+    "natural old context /3 with no /4 support-use fields observed",
+    "new CLI current producer origin and no old bootstrap",
+    "actual first-stage TXT original preservation",
+    "current /4 still refuses None and codecs1/2/3"
+  ],
+  "tests": {
+    "related_matrix": {
+      "tests": 8,
+      "failures": 0,
+      "seconds": 23.5,
+      "receipt": "final.xml",
+      "warning": "Old record_property produced xunit2 warning; migrated to compatible suite property, no behaviour/contract change."
+    },
+    "final_exact_target_and_provenance": {
+      "tests": 3,
+      "failures": 0,
+      "seconds": 17.62,
+      "warnings": 0,
+      "receipt": "frozen.xml",
+      "commands_cleanup": "frozen.json"
+    },
+    "ruff": "3 edited Python files PASS"
+  },
+  "actual_provenance": {
+    "automation_catalog_run_budget_originals_unchanged": true,
+    "historical_model_request_schema": "narrative-model-request/4",
+    "historical_projection": "reading-model-input/3",
+    "producer_observations": [
+      {
+        "phase": "loaded",
+        "pid": 23392,
+        "producer": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c3lv3\\pytest\\nb0\\run\\historical-v3-source\\source_catalog\\narrative_reading.py",
+        "source_sha256": "51ecc1ca4ba55f170786af2d7aea28ee5dfe05cf9f0d2711d8f617ef16cd74b9"
+      },
+      {
+        "phase": "loaded",
+        "pid": 20920,
+        "producer": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c3lv3\\pytest\\nb0\\run\\historical-v3-source\\source_catalog\\narrative_reading.py",
+        "source_sha256": "51ecc1ca4ba55f170786af2d7aea28ee5dfe05cf9f0d2711d8f617ef16cd74b9"
+      },
+      {
+        "has_support_use": false,
+        "phase": "selected",
+        "pid": 20920,
+        "producer": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c3lv3\\pytest\\nb0\\run\\historical-v3-source\\source_catalog\\narrative_reading.py",
+        "reading_schema": "du-production-reading/3",
+        "source_sha256": "51ecc1ca4ba55f170786af2d7aea28ee5dfe05cf9f0d2711d8f617ef16cd74b9",
+        "views": 1
+      },
+      {
+        "phase": "loaded",
+        "pid": 10920,
+        "producer": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c3lv3\\pytest\\nb0\\run\\historical-v3-source\\source_catalog\\narrative_reading.py",
+        "source_sha256": "51ecc1ca4ba55f170786af2d7aea28ee5dfe05cf9f0d2711d8f617ef16cd74b9"
+      }
+    ],
+    "scope": "one actual pre-use source component plus typed-v3 protocol; other runtime current",
+    "total_loopback_posts": 1,
+    "upgraded_runtime": {
+      "legacy_bootstrap_loaded": false,
+      "producer": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\narrative_reading.py"
+    }
+  },
+  "environment_observation": {
+    "restricted_shell": "first/diagnosed ended MODEL_HTTP_TRANSPORT before loopback received a request; source-contract error was already gone.",
+    "normal_host_same_source": "host.xml1P16.77s then final matrices passed; no ACL, firewall, production network or permission controls changed."
+  },
+  "cleanup": {
+    "scratch": ".c3lv3",
+    "restored_absent": true,
+    "owned_lakes": "existing isolated_batch_directory restores sentinel and removes its entire own run, including overlay/bootstrap/SQLite/objects",
+    "readonly_handling": "normal writable attribute only for own verified scratch if needed; no ACL changes"
+  },
+  "new_external_http": 0,
+  "new_vendor_calls": 0,
+  "new_original_downloads": 0,
+  "pdf_sdk_copy_or_execution": 0,
+  "production_files_changed": 0,
+  "other_root_or_source_test_files_changed": 0,
+  "scope_limit": "Not a full old release, not a historic real-company analysis, not arbitrary historical model recovery. It is the specifically stated physical pre-use component + actual typed-v3 lifecycle followed by current-only completed recovery.",
+  "next": "ROOT independent scope/provenance review and integration; do not loosen production /4 legacy-codec refusal or repeat full unit suite for this isolated node."
+}
