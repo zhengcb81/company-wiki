@@ -1,0 +1,33 @@
+{
+  "schema_version": "independent-eof-rebinding/1",
+  "status": "PASS",
+  "path": "src/company_wiki/document_understanding/operating_states/assertion_roles.py",
+  "before_sha256": "cf9bf579a26ba662b45e92ebf093c185d56a37da8d458122e1f396aa99b91726",
+  "after_sha256": "dcdac6cc8642d7ca277e2aa908ec24d2bcd1e01dd7a63420c213441f24f4338e",
+  "before_lf_sha256": "d6f7293db07c195818c058eb889113f0b63ca4bab11ed84a91383f3fb3f07914",
+  "after_lf_sha256": "1edd406c0ad615e13f05552b26052fde6a357b42681712ac7a08b949258d64d1",
+  "before_EOF_bytes": [
+    13,
+    10,
+    13,
+    10,
+    13,
+    10
+  ],
+  "after_EOF_bytes": [
+    10
+  ],
+  "exact_before_hash_reconstructed_by_only_EOF_terminator_change": true,
+  "independent_AST_identical": true,
+  "AST_dump_sha256": "0732acb164988a3b13f1ab0d5a6a236774dacb90e6d2fce5b35d020ab20e0617",
+  "other24_raw_and_LF_unchanged": true,
+  "root_receipt": {
+    "path": ".planning/c3-20261028/support-eof-only.json",
+    "sha256": "8be8da22f3b1f54e4f0ec6bf9e0478364ddddbbfafaf8d3092d3c9710b601f89"
+  },
+  "diff": "eof-only.diff",
+  "tests_rerun": 0,
+  "PDF_SDK_model_originals_rerun": 0,
+  "product_source_writes": 0,
+  "execution_identity": "32 independent tests and publication native ran on the pre-EOF source. Final single-file binding is bridged only by exact EOF diff and independent AST equality; no execution on new bytes is claimed."
+}

@@ -1,0 +1,10 @@
+--- src/company_wiki/document_understanding/operating_states/assertion_roles.py (tested)
++++ src/company_wiki/document_understanding/operating_states/assertion_roles.py (EOF-only)
+@@ -214,6 +214,4 @@
+     numeric=shape.unbound_numeric_cells
+     return SourceAssertionRoles(tuple(clauses),numeric,
+         unbound_numeric_row_role(text) if numeric else "unknown",
+-        raw_structure_complete=shape.complete_value_row)
+-
+-
++        raw_structure_complete=shape.complete_value_row)

@@ -1515,3 +1515,5 @@ ROOT补查协议/缓存相关九文件306P/7F：四个旧schema/codec/空请求�
 **跨仓：** RF兼容0991e25d已远端main且精确CI成功；StockWiki33534818已本地master、无remote。CWP实际worker→一次loopback→同run零新增请求→公共CLI→两消费者通过；RF四物理文件定点部署、重复零写，三RF入口＋SW四新进程回读通过。不是正式供应商摘要或RF预测采用验收，wire未变不重复部署。
 
 **唯一下一步：** 正常提交/推送本组件并观察精确CI→按需PDF增强准备（只修共同owner，不重复未变的120秒冷启）→新五项金标的新metadata revision配置内真实摘要→实际响应语义独审与activation/重启/跨run零重复费用→FF/RF实际采用→未曝光holdout及八步公司循环。正式摘要质量、缓存完整验收及RF模型采用仍OPEN。配置10M/$20不变，母账1,800,368tokens/$0.727945和unknown保留；原件/生产配置/Dayu/IQS/Dashboard/其他owner WIP不写。
+
+2026-10-28：来源用途共因组件已正常发布ec7c8d84，precommit PASS/prepush158P35.43s，精确CI40725371023 in_progress/None。PDF首次直接需求观察识别完整表行、页脚/标题误判，1.182s/440310work/0SDK/0POST；下一步PARAGRAPH_DEMAND_ROOT_PLAN，保持原件/limits及供应商摘要、缓存、RF采用OPEN。

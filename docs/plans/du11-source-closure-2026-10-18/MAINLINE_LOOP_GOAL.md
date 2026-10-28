@@ -1,8 +1,8 @@
 # 当前主线循环目标
 
-## 2026-10-28 当前：来源选材与摘要用途根修已验收，待正常发布
+## 2026-10-28 当前：来源选材根修已发布，推进PDF增强需求根修
 
-目标ACTIVE。唯一入口为本段及CURRENT_STATUS.json；本段取代下方旧“当前/下一步”。本次SOURCE v6c与ROOT消费组件已独审PASS，源码尚待本节点正常提交/推送与精确CI，不能把旧CI代签。详见[组件验收与真实收据](review/pdf-c3-20261026/SOURCE_USE_ACCEPTANCE.md)。
+目标ACTIVE。唯一入口为本段及CURRENT_STATUS.json；本段取代下方旧“当前/下一步”。本次SOURCE v6c与ROOT消费组件已独审PASS，源码已正常提交/推送`ec7c8d84`，pre-commit通过、pre-push158P/35.43秒；精确CI40725371023为in_progress/None，不借旧CI代签。详见[组件验收与真实收据](review/pdf-c3-20261026/SOURCE_USE_ACCEPTANCE.md)。
 
 **本轮完成：** 共用typed断言/对象动作及用途证明；可读原文、独立业务候选、可生成支持三轴分开。财表行、残句、页脚和规则套话保持原文可检索，不再靠章节位置取得独立摘要位；实际业务因果、服务交付/计费、资源、未来及否定保留。未知叙述和未读/超限不能被当作“无内容”跳过。当前reading_plan/3只接受来源完整处置证明，旧1/2重放计数兼容保留。已有同一预算heap按完整support优先，无公司/页码/产品码特判、无新许可、无提高额度。
 
@@ -10,7 +10,7 @@
 
 **跨仓：** RF兼容0991e25d已远端main且精确CI成功；StockWiki33534818已本地master、无remote。CWP实际worker→一次loopback→同run零新增请求→公共CLI→两消费者通过；RF四物理文件定点部署、重复零写，三RF入口＋SW四新进程回读通过。不是正式供应商摘要或RF预测采用验收，wire未变不重复部署。
 
-**唯一下一步：** 正常提交/推送本组件并观察精确CI→按需PDF增强准备（只修共同owner，不重复未变的120秒冷启）→新五项金标的新metadata revision配置内真实摘要→实际响应语义独审与activation/重启/跨run零重复费用→FF/RF实际采用→未曝光holdout及八步公司循环。正式摘要质量、缓存完整验收及RF模型采用仍OPEN。配置10M/$20不变，母账1,800,368tokens/$0.727945和unknown保留；原件/生产配置/Dayu/IQS/Dashboard/其他owner WIP不写。
+**唯一下一步：** 按[PDF增强需求根修细则](review/pdf-c3-20261026/PARAGRAPH_DEMAND_ROOT_PLAN.md)先TDD后实现；现有triage把完整数值表行、页脚/标题当断句，首次只读观察1.182秒已留证，不重跑120秒SDK；只在PDF阅读层复用已有结构/布局owner修复，保留真业务断裂→新五项金标的新metadata revision配置内真实摘要→实际响应语义独审与activation/重启/跨run零重复费用→FF/RF实际采用→未曝光holdout及八步公司循环。正式摘要质量、缓存完整验收及RF模型采用仍OPEN。配置10M/$20不变，母账1,800,368tokens/$0.727945和unknown保留；原件/生产配置/Dayu/IQS/Dashboard/其他owner WIP不写。
 
 ## 2026-10-28 当前：C3共因工程已发布，真实摘要进行中
 

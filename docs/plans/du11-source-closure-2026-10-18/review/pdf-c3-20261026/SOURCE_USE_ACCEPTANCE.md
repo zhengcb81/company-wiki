@@ -1,6 +1,6 @@
 # 来源用途与选材共因：组件验收
 
-状态：SOURCE v6c＋ROOT consumer独立审查PASS；正常发布待完成。整体PWF继续ACTIVE，正式供应商摘要、恢复及RF预测采用不由本节点代签。
+状态：SOURCE v6c＋ROOT consumer独立审查PASS；已正常提交推送ec7c8d84；precommit PASS，prepush158P/35.43秒，精确CI40725371023 in_progress/None。整体PWF继续ACTIVE，正式供应商摘要、恢复及RF预测采用不由本节点代签。
 
 ## 修复了什么
 
@@ -51,3 +51,5 @@
 最后CI同源宿主检查发现负例的硬编码盘符，已改用tmp_path.anchor保持绝对路径反例和原拒绝断言；单节点1P/3.23s，独审追加新SHA，生产代码未变。
 
 正常暂存检查另发现新文件EOF空行，已仅去除尾部空行，AST逐树相同；独审重绑定最终SHA，未重跑已绿行为包。
+
+发布收据见[SOURCE_USE_PUBLICATION](SOURCE_USE_PUBLICATION.json)；下一实施入口为[PARAGRAPH_DEMAND_ROOT_PLAN](PARAGRAPH_DEMAND_ROOT_PLAN.md)。

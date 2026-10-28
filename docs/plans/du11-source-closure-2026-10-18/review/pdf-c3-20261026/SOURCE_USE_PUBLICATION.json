@@ -1,0 +1,28 @@
+{
+  "schema_version": "source-use-publication/1",
+  "head_sha": "ec7c8d846a12f3f6f5f8c27a94063733e17187c7",
+  "branch": "master",
+  "pushed": true,
+  "pre_commit": "PASS",
+  "pre_push": {
+    "passed": 158,
+    "seconds": 35.43
+  },
+  "exact_ci": {
+    "id": 40725371023,
+    "head_sha": "ec7c8d846a12f3f6f5f8c27a94063733e17187c7",
+    "status": "in_progress",
+    "conclusion": null,
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40725371023",
+    "updated_at": "2026-10-28T16:22:51Z"
+  },
+  "source_use_component": "INDEPENDENT_PASS",
+  "native_business_gold": "5/5_SOURCE_AND_ADMITTED_TASK_ONLY",
+  "actual_supplier_summary": "OPEN",
+  "current_revision_cache_recovery": "OPEN",
+  "RF_forecast_adoption": "OPEN",
+  "limits_raised": false,
+  "new_supplier_POST": 0,
+  "originals_unchanged": true,
+  "next": "PARAGRAPH_DEMAND_ROOT_PLAN.md; then new5-gold configured formal summary/recovery/FF-RF and holdouts"
+}
