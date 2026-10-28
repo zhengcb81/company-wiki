@@ -1,0 +1,73 @@
+{
+  "schema_version": "paragraph-demand-independent/2",
+  "status": "PASS",
+  "review_state": "FINAL",
+  "reviewer": "/root/c3_summary_root_design",
+  "files": [
+    {
+      "path": "src/company_wiki/source_catalog/narrative_pdf_paragraphs.py",
+      "sha256": "4f09319d0bac10222d5395b00525ed10a294476fca67daade7a7b24b5095fe48",
+      "lf_sha256": "ccb14886c4178d025f850a23b26352a3f8b0e4d2b41edaf29cdf32eab316e833"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_pdf_enhancement.py",
+      "sha256": "0fe3a244db1fc934ed4c849b31f63994d3ea94b343885fe571745bbfd8456c42",
+      "lf_sha256": "9e8c735be8b38823e2ec92a1ae3413ef18764ddb79e9bfbfd9eb79ce33c9cf48"
+    },
+    {
+      "path": "tests/unit/test_pdf_paragraph_demand.py",
+      "sha256": "eddd75847e8ab48b583fb9e32b1482effd103b4302c1c80b542781d34a9fb93a",
+      "lf_sha256": "eddd75847e8ab48b583fb9e32b1482effd103b4302c1c80b542781d34a9fb93a"
+    }
+  ],
+  "binding": "Exact ROOT paragraph-pd1-handoff.json3raw/LF SHA verified before/after23 tests and again at signing",
+  "previous": "independent.md/json and independent-run.json/log/xml preserve original44unique42P2F; not overwritten",
+  "closed": [
+    {
+      "id": "PD1-row-shape-is-not-complete-prose-disposition",
+      "resolution": "Observed positive amount/dependent tail is checked before the weaker paired complete-row shape; both frozen independent REDs now demand page1.",
+      "barriers": "Native proven closure, physical page/role/frame/rotation/column/overlap/missing geometry and terminal left continue to win before positive-tail handling."
+    }
+  ],
+  "tests": {
+    "counts": {
+      "total": 23,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "passed": 23,
+    "pytest_seconds": 6.14,
+    "runner_seconds": 7.917,
+    "independent": 15,
+    "author_controls": 8,
+    "log": "recheck-v2.log",
+    "junit": "recheck-v2.xml",
+    "receipt": "recheck-v2.json",
+    "scope": "Only own frozen2PD1 counterexamples+necessary physical/native/precharge/once/recipe/payload controls, one new terminal precedence control and author complete-row/mixed/compound-prefix controls. No44/49/full-domain repetition."
+  },
+  "guarantees": [
+    "Two wrapped-prose numeric shapes cannot veto their actual amount/dependent evidence.",
+    "Complete nominal row pairs retain no-demand/no-runner behavior; mixed/one-sided rows preserve unknown prose.",
+    "其/其他/其它 distinction and explicit其中 behavior remain in the existing author/current implementation; no new dictionary or financial/page/company exclusion was added.",
+    "Index-local prepared observation, failed shared charge before scanning and exact helper LF recipe binding retain prior passing controls.",
+    "No-demand UnreadPayload remains uninspected and runner-free; source text/IDs/coordinates/metadata unchanged."
+  ],
+  "OPEN": [],
+  "outside_scope_open": [
+    "Configured SDK isolation/deployment/startup validation",
+    "Formal provider summary and fees/restoration acceptance",
+    "Actual cache reuse and RF adoption",
+    "SOURCE final24 independent acceptance is owned separately"
+  ],
+  "actual_evidence": "ROOT supplied paragraph-demand-v3.json: pages28/3/4,10reasons,366340work,0.910s,original unchanged,0SDK/POST; not rerun or independently promoted to configured SDK/summary acceptance",
+  "static": "ROOT supplied final396-source mypy after only reason:str|None local annotation; this reviewer inspected final bytes and ran targeted tests, not fullsrc again",
+  "cleanup": {
+    "temp": ".c3pdi",
+    "absent": true,
+    "TEMP_TMP_child_only": true,
+    "product_author_tests_config_PWF_Git_written": false,
+    "PDF_SDK_model_supplier_download_runs": 0
+  },
+  "acceptance_scope": "Physical paragraph-demand PD1 component only; no formal SDK/summary/cache/RF signoff"
+}

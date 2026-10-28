@@ -1,0 +1,29 @@
+{
+  "status": "FROZEN_FOR_PD1_RECHECK",
+  "files": [
+    {
+      "path": "src/company_wiki/source_catalog/narrative_pdf_paragraphs.py",
+      "sha256": "4f09319d0bac10222d5395b00525ed10a294476fca67daade7a7b24b5095fe48",
+      "lf_sha256": "ccb14886c4178d025f850a23b26352a3f8b0e4d2b41edaf29cdf32eab316e833"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_pdf_enhancement.py",
+      "sha256": "0fe3a244db1fc934ed4c849b31f63994d3ea94b343885fe571745bbfd8456c42",
+      "lf_sha256": "9e8c735be8b38823e2ec92a1ae3413ef18764ddb79e9bfbfd9eb79ce33c9cf48"
+    },
+    {
+      "path": "tests/unit/test_pdf_paragraph_demand.py",
+      "sha256": "eddd75847e8ab48b583fb9e32b1482effd103b4302c1c80b542781d34a9fb93a",
+      "lf_sha256": "eddd75847e8ab48b583fb9e32b1482effd103b4302c1c80b542781d34a9fb93a"
+    }
+  ],
+  "fix": "A true amount/dependent tail precedes the weaker complete-row text shape; physical barriers, native-proven closure and terminal left still win. No new account/page/company conditions.",
+  "old_red": "paragraph-demand-independent:44unique42P2F, preserved",
+  "new_regression": "Two independent cases copied into owned tests; amount/dependent shape collision now preserved",
+  "tests": "31P1.28s; includes owned17 and independent14; source unrelated to SOURCE final24",
+  "typing": "First2-source mypy caught reason inferred str vs optional; explicit local str|None then all396src PASS; no behavior change",
+  "real_native": "paragraph-demand-v3.json: pages28/3/4,10reasons,366340work,0.910s; original unchanged,0SDK/POST",
+  "known_remaining": "Complex mixed tables, names/address or other uncertain physical gaps remain conservative; no claim of0SDK, SDK startup, configured summary, cache or RF acceptance",
+  "limits": "unchanged120s/3pages/4GiB/2MiB; sharedWorkBudget and canonical raw/IDs intact",
+  "scratch_absent": true
+}

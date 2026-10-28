@@ -26,6 +26,7 @@ from .narrative_pdf_environment import ENVIRONMENT_ALGORITHM, LEGACY_ENVIRONMENT
 from . import narrative_pdf_page_checkpoints as page_checkpoints
 from .narrative_pdf_paragraphs import (
     PARAGRAPH_ALIGNMENT_VERSION, ParagraphProposal, align_paragraphs, triage_paragraph_gaps,
+    paragraph_triage_dependencies,
 )
 
 
@@ -83,6 +84,7 @@ class ParagraphRuntimeConfig:
                 "runtime_versions": dict(self.runtime_versions),
                 "environment_sha256": self.environment_sha256,
                 "alignment": PARAGRAPH_ALIGNMENT_VERSION,
+                "triage_dependencies": paragraph_triage_dependencies(),
                 "offline": True, "ocr": False, "table_structure": False,
                 "cpu_threads": self.cpu_threads, "max_seconds": self.max_seconds,
                 "max_pages": self.max_pages, "max_input_bytes": self.max_input_bytes,

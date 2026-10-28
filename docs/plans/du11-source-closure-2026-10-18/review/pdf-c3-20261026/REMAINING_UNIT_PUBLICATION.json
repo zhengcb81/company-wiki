@@ -1,0 +1,22 @@
+{
+  "code_commit": "011e376d58a321fab63ee14955b41a8600e27cdf",
+  "branch": "master",
+  "pushed": true,
+  "normal_pre_commit": "PASS",
+  "normal_pre_push": {
+    "passed": 158,
+    "seconds": 31.7
+  },
+  "exact_ci": {
+    "id": 40741228182,
+    "head_sha": "011e376d58a321fab63ee14955b41a8600e27cdf",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40741228182",
+    "updated_at": "2026-10-28T18:07:05Z"
+  },
+  "acceptance_scope": "source/4 remaining24 plus original failed fixtures and CI visibility; PDF3 separate",
+  "no_new_supplier_calls": true,
+  "no_new_downloads": true,
+  "full_unit_current_bytes": "Remote ordinary CI success; no claim that local incomplete9476 diagnostic was complete"
+}

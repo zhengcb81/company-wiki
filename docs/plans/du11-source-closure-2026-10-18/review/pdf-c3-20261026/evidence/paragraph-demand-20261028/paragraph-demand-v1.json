@@ -1,0 +1,124 @@
+{
+  "scope": "native read plus first direct existing paragraph gap demand observation; not configured SDK or summary",
+  "pages": [
+    12,
+    17,
+    19
+  ],
+  "reasons": [
+    {
+      "page": 12,
+      "reason": "amount_or_dependent_tail",
+      "priority": 3,
+      "left": "urn:company-wiki:narrative-unit:sha256:02e3369ceba18bd822dc8a27a31e19976160d8c3088274f9b1d51d1b8b477cc0",
+      "right": "urn:company-wiki:narrative-unit:sha256:8aae567d85f02357d497d8e91c8a31816ab0f0554fbe9bd0417c313e05db9e8f",
+      "left_text": "行業雲服務\n1,245,400\n1,340,416\n187,115",
+      "right_text": "其他\n152\n–\n–"
+    },
+    {
+      "page": 12,
+      "reason": "unproven_wrapped_prose",
+      "priority": 1,
+      "left": "urn:company-wiki:narrative-unit:sha256:4b6422e94253df6f6520c21970cbb5457ef9cb7efee45838bb8b4bbc3ba94f3f",
+      "right": "urn:company-wiki:narrative-unit:sha256:57a098c4a5c5fd54ce1d94e850c50490a73f29305d7e97213580dfc77e111bcb",
+      "left_text": "營業成本\n(3,055,864)\n(3,662,041)\n(511,201)",
+      "right_text": "毛利\n611,600\n657,163\n91,737"
+    },
+    {
+      "page": 12,
+      "reason": "unproven_wrapped_prose",
+      "priority": 1,
+      "left": "urn:company-wiki:narrative-unit:sha256:3fdc3bdae475618cf16f42a6ba4baffd92a8426044cbfb83439a15a00ef73e15",
+      "right": "urn:company-wiki:narrative-unit:sha256:7b788d8bf8c40be291a69c84a8f8fb0621baaec4f32358998bdc8a7885b22766",
+      "left_text": "研發費用\n(435,922)\n(420,455)\n(58,693)",
+      "right_text": "經營費用總額\n(1,163,326)\n(1,218,351)\n(170,075)"
+    },
+    {
+      "page": 12,
+      "reason": "unproven_wrapped_prose",
+      "priority": 1,
+      "left": "urn:company-wiki:narrative-unit:sha256:7b788d8bf8c40be291a69c84a8f8fb0621baaec4f32358998bdc8a7885b22766",
+      "right": "urn:company-wiki:narrative-unit:sha256:7a370c5945e188607402c17599d31346d135fb23d384cba2bc54a05027b2de72",
+      "left_text": "經營費用總額\n(1,163,326)\n(1,218,351)\n(170,075)",
+      "right_text": "經營虧損\n(551,726)\n(561,188)\n(78,338)"
+    },
+    {
+      "page": 12,
+      "reason": "amount_or_dependent_tail",
+      "priority": 2,
+      "left": "urn:company-wiki:narrative-unit:sha256:8f6225d5aef311c4720768eaa169116cb633ce15cf5fc9d2f26b30136dba613b",
+      "right": "urn:company-wiki:narrative-unit:sha256:89a269c6dfcfccf399c93239ccd47fbcf7da225ee3b3ec51f9e98b6ffd4a0349",
+      "left_text": "匯兌虧損\n(49,736)\n(30,475)\n(4,254)",
+      "right_text": "其他（虧損）收益淨額\n(16,036)\n4,864\n679"
+    },
+    {
+      "page": 12,
+      "reason": "unproven_wrapped_prose",
+      "priority": 1,
+      "left": "urn:company-wiki:narrative-unit:sha256:82ab8120c4f6f42253cdd783d7153dfd444f5fb7f220351ce320c0e161ff8c3e",
+      "right": "urn:company-wiki:narrative-unit:sha256:e59692c3b86dfc2106ad26564a9563a8f3a65eb0291a88b4165f5aee5331a249",
+      "left_text": "其他（開支）收入淨額\n(16,151)\n16,510\n2,305",
+      "right_text": "除所得稅前虧損\n(725,814)\n(761,389)\n(106,284)"
+    },
+    {
+      "page": 12,
+      "reason": "unproven_wrapped_prose",
+      "priority": 1,
+      "left": "urn:company-wiki:narrative-unit:sha256:8aa3318e8d1743ba18faf8de9a27fddad2d7ae60023669a7e4c3c9a7ef9be9a6",
+      "right": "urn:company-wiki:narrative-unit:sha256:7ee1a8cc6e98057ad0bc0964058f46ec165173c5d1f68896a65a215023e91220",
+      "left_text": "所得稅利益（開支）\n8,480\n(11,584)\n(1,617)",
+      "right_text": "淨虧損\n(717,334)\n(772,973)\n(107,901)"
+    },
+    {
+      "page": 12,
+      "reason": "unproven_wrapped_prose",
+      "priority": 1,
+      "left": "urn:company-wiki:narrative-unit:sha256:7ee1a8cc6e98057ad0bc0964058f46ec165173c5d1f68896a65a215023e91220",
+      "right": "urn:company-wiki:narrative-unit:sha256:bff8ad8d28ca6a0c85e3f70194f9cae196f499da5b219c012402ddec699e201b",
+      "left_text": "淨虧損\n(717,334)\n(772,973)\n(107,901)",
+      "right_text": "減：非控股權益應佔淨虧損\n(4,748)\n(1,582)\n(221)"
+    },
+    {
+      "page": 12,
+      "reason": "unproven_wrapped_prose",
+      "priority": 1,
+      "left": "urn:company-wiki:narrative-unit:sha256:bff8ad8d28ca6a0c85e3f70194f9cae196f499da5b219c012402ddec699e201b",
+      "right": "urn:company-wiki:narrative-unit:sha256:4d0ebaa65cadcd6fd701669b51b213f35a0c32f52b9151a0021bd806213f5a6d",
+      "left_text": "減：非控股權益應佔淨虧損\n(4,748)\n(1,582)\n(221)",
+      "right_text": "金山云控股有限公司應佔淨虧損\n(712,586)\n(771,391)\n(107,680)"
+    },
+    {
+      "page": 17,
+      "reason": "amount_or_dependent_tail",
+      "priority": 3,
+      "left": "urn:company-wiki:narrative-unit:sha256:f91d0eb0d1219b0fb357a2fe39c633a06038c4c9360aa305895ad5960305a53e",
+      "right": "urn:company-wiki:narrative-unit:sha256:f81d1630ca52bb842e5f942fed71b692e530dfed391da45a953187bbaf9c53c8",
+      "left_text": "二零二五 中期報告  16",
+      "right_text": "其他資料"
+    },
+    {
+      "page": 17,
+      "reason": "unproven_wrapped_prose",
+      "priority": 1,
+      "left": "urn:company-wiki:narrative-unit:sha256:2b25a016295feed2dbe06924856fe2b84515b4056e0808f96572aca6eff7c534",
+      "right": "urn:company-wiki:narrative-unit:sha256:45ae2f4c923fe3a917f6fe7e2a7a9f57ca8dfc6c8fb415dc86082ebc096d28af",
+      "left_text": "董事及最高行政人員於本公司或其任何相聯法團之股份、相關股份及債權證中之\n權益及淡倉",
+      "right_text": "截至二零二五年六月三十日，本公司董事及最高行政人員於本公司或其相聯法團（定義見證券及期貨條例第"
+    },
+    {
+      "page": 19,
+      "reason": "amount_or_dependent_tail",
+      "priority": 3,
+      "left": "urn:company-wiki:narrative-unit:sha256:968f4103c84c0ad85a248f6ceee5ae968d984a1c13baaf23020241187920ccc2",
+      "right": "urn:company-wiki:narrative-unit:sha256:856606da76e6a1bb61188eaae782d83570a467a330385c0d5c61aae6603867c5",
+      "left_text": "二零二五 中期報告  18",
+      "right_text": "其他資料"
+    }
+  ],
+  "units": 2330,
+  "work_used": 440310,
+  "seconds": 1.182,
+  "source_sha256": "4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+  "original_unchanged": true,
+  "SDK_model_download": 0
+}

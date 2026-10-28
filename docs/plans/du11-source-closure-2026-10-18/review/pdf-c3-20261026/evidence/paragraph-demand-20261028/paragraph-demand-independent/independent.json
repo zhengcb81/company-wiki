@@ -1,0 +1,116 @@
+{
+  "schema_version": "paragraph-demand-independent/1",
+  "status": "CHANGES_REQUESTED",
+  "review_state": "FINAL",
+  "reviewer": "/root/c3_summary_root_design",
+  "files": [
+    {
+      "path": "src/company_wiki/source_catalog/narrative_pdf_paragraphs.py",
+      "sha256": "a1a15885d8ea7a51f5b1b2663a8d2958c36575054067e1046b087354278df869",
+      "lf_sha256": "a1a15885d8ea7a51f5b1b2663a8d2958c36575054067e1046b087354278df869"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_pdf_enhancement.py",
+      "sha256": "0fe3a244db1fc934ed4c849b31f63994d3ea94b343885fe571745bbfd8456c42",
+      "lf_sha256": "9e8c735be8b38823e2ec92a1ae3413ef18764ddb79e9bfbfd9eb79ce33c9cf48"
+    },
+    {
+      "path": "tests/unit/test_pdf_paragraph_demand.py",
+      "sha256": "b9c0858032340137898c92302d595cdd4438836c33fb012e49f78456ff6dceac",
+      "lf_sha256": "b9c0858032340137898c92302d595cdd4438836c33fb012e49f78456ff6dceac"
+    }
+  ],
+  "after": [
+    {
+      "path": "src/company_wiki/source_catalog/narrative_pdf_paragraphs.py",
+      "sha256": "a1a15885d8ea7a51f5b1b2663a8d2958c36575054067e1046b087354278df869",
+      "lf_sha256": "a1a15885d8ea7a51f5b1b2663a8d2958c36575054067e1046b087354278df869"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_pdf_enhancement.py",
+      "sha256": "0fe3a244db1fc934ed4c849b31f63994d3ea94b343885fe571745bbfd8456c42",
+      "lf_sha256": "9e8c735be8b38823e2ec92a1ae3413ef18764ddb79e9bfbfd9eb79ce33c9cf48"
+    },
+    {
+      "path": "tests/unit/test_pdf_paragraph_demand.py",
+      "sha256": "b9c0858032340137898c92302d595cdd4438836c33fb012e49f78456ff6dceac",
+      "lf_sha256": "b9c0858032340137898c92302d595cdd4438836c33fb012e49f78456ff6dceac"
+    }
+  ],
+  "scope": "Physical paragraph-demand component only; not SOURCE final24 or configured SDK/summary/cache/RF acceptance",
+  "tests": {
+    "counts": {
+      "total": 44,
+      "failed": 2,
+      "errors": 0,
+      "skipped": 0
+    },
+    "passed": 42,
+    "pytest_seconds": 6.02,
+    "runner_seconds": 7.139,
+    "author_demand": 15,
+    "existing_alignment": 15,
+    "independent": 14,
+    "log": "independent.log",
+    "junit": "independent.xml",
+    "receipt": "independent-run.json"
+  },
+  "findings": [
+    {
+      "id": "PD1-row-shape-is-not-complete-prose-disposition",
+      "priority": "P2",
+      "file": "src/company_wiki/source_catalog/narrative_pdf_paragraphs.py",
+      "line": 133,
+      "title": "Literal row-shaped wrapping suppresses genuine amount/dependent tails",
+      "root": "complete_value_row accepts one text cell without sentence-terminal punctuation followed by literal scalars. That text cell can itself be a real wrapped clause. Triage vetoes a pair before honoring its observed dependent/amount tail.",
+      "examples": [
+        [
+          "The installed production equipment generated revenue of\n12.4",
+          "million dollars and remains subject to customer acceptance\n125\n160"
+        ],
+        [
+          "The other matters are still being examined\n125\n160",
+          "which are subject to customer acceptance\n175\n200"
+        ]
+      ],
+      "actual": "Both pairs have complete_value_row=True on each side, but triage returns pages=(), reasons=() while the source amount/dependency remains explicit.",
+      "expected": "Preserve a conservative gap for real amount/dependent prose. Literal value-cell presence plus one arbitrary text cell cannot prove that prose is a nominal row label.",
+      "bounded_repair": "At the physical-demand owner, do not allow the literal row-pair veto to erase actual dependent/amount evidence without stronger positive structural disposition; retain complete nominal-row negatives and mixed/one-sided-row positives. Reuse existing evidence, not new company/finance words or a second business classifier.",
+      "tests": "test_independent.py::test_true_dependent_or_amount_tail_cannot_be_disposed_by_row_shaped_wrapping (2params)"
+    }
+  ],
+  "passed_controls": [
+    "All15 author demand tests and all15 existing pure alignment controls pass.",
+    "Actual shared helper LF bytes exactly equal recipe.triage_dependencies and actual default120s/3pages/4GiB/2MiB are unchanged.",
+    "Source page/role/frame/rotation/column/overlap/missing-box physical barriers retain prior behavior; already-closed native edges are not reoffered.",
+    "A refused shared charge prevents shape scanning; repeated identical text at distinct positions is prepared once per original index.",
+    "No-demand enhancement does not inspect, hash or parse an UnreadPayload object and never invokes its runner.",
+    "Original raw IDs, source IDs, text, coordinates and metadata remain unchanged in the real failing demand probes."
+  ],
+  "limitations": [
+    "Source identity guards/foreign-unit transport were statically inspected, not newly expanded; no separate mixed-source contract change is requested here.",
+    "The provided actual v2 triage12-to10 reason shift is diagnostic evidence only. Remaining names/addresses/date/vesting mixed tables do not prove irrelevant or no-SDK status.",
+    "Native v2 pages28/3/4 may expose capped-priority candidates; no source/original or SDK was rerun in this review.",
+    "No new SOURCE business-admission or formal summary/RF conclusion is signed."
+  ],
+  "evidence": {
+    "v1": "../paragraph-demand-v1.json",
+    "v2": "../paragraph-demand-v2.json",
+    "v2_pages": [
+      28,
+      3,
+      4
+    ],
+    "v2_reasons": 10,
+    "v2_work": 366340,
+    "v2_seconds": 2.111
+  },
+  "cleanup": {
+    "temp": ".c3pdi",
+    "absent": true,
+    "TEMP_TMP_child_only": true,
+    "product_or_author_tests_written": false,
+    "original_PDF_SDK_model_supplier_download_runs": 0
+  },
+  "next": "ROOT bounded repair and explicit recheck of this same common root; reviewer source/test modifications are confined to this independent directory"
+}

@@ -1,18 +1,14 @@
 # 当前项目状态与接手入口
 
-## 2026-10-28 当前：剩余共因已集中验收，正常发布后核新精确CI
+## 2026-10-28 当前：来源共因已发布且远端CI成功，继续PDF需求与正式摘要
 
-目标ACTIVE。最后已发布源码908ef3cb的CI40729898744失败保留。此后剩余缺陷已统一处理并通过最终24文件独审，不将旧CI改绿。当前唯一入口是本段/CURRENT_STATUS.json及[本轮结案](review/pdf-c3-20261026/REMAINING_UNIT_REPAIR.md)。
+目标ACTIVE。来源用途/4、共用对象证明、原意保留的测试协议及有界CI失败分组已正常提交推送master `011e376d`；pre-commit通过，pre-push158P/31.70秒，精确CI40741228182 **completed/success**。旧两次失败保留，不改写历史。见[发布收据](review/pdf-c3-20261026/REMAINING_UNIT_PUBLICATION.json)和[组件验收](review/pdf-c3-20261026/REMAINING_UNIT_REPAIR.md)。原件/生产配置/其他owner WIP未改。
 
-**已完成：** SOURCE以一个prepared typed-head位置索引同时判主语描述和动作后的局部宾语，恢复原Company/device句和六已有产品族，不加词表副本、issuer/stage或公司条件。ROOT只按原意迁移IV marker完整谓语、DOCX测试导入和当前scoped模型端口，原业务句/partial/forged/零模型/原文与replay断言全部保留。历史v3以真正5002旧producer一组件物理部署自然产/3、一次loopback，然后今天无bootstrap新CLI/validator升级恢复0POST，原DB/run/budget/raw不变；仅22.8KB代码fixture，不复制原件或SDK。
+**已验证的内容范围：** 实际HK半年报完整原生读取2330units→81spans/38support任务，五项冻结业务检查点均在实际可发送任务内，5.385秒、6,175,509/16M work。不是正式摘要成绩。纯财务与未知表行不冒充已解释业务，原文仍可检索；没有增加额度或公司条件。
 
-**盘点与验收：** 单次9476盘点到89%/600秒后停止，27报告，未重跑全域；只补未执行1021P、retained12P和正常插件3P。三个工程假反证已关闭，余24源/夹具案例已归因并修复。SOURCE先457unique，最后类型变量名整理后14定点；ROOT三文件84P2F后仅两端口节点2P；历史关联8P/最后3P；最终独审30unique/7.28秒。这些范围有重叠，不相加、不声称9476在当前新字节全绿。真实81span/38support及五金标完整、5.385秒/6,175,509work，396mypy通过。没有提高额度。
+**当前唯一下一步：** 将已通过PD1最终独审的PDF需求组件单独发布；在PDF阅读层内修复已实测的SDK部署元数据扫描瓶颈，先轻量部署证明和一次有界cold探针，不重复旧120秒超时。随后新五金标metadata revision按真实配置运行原语言摘要→独立内容审查→激活/重启/跨run零重复费用→FF/RF真实消费与预测模型采用→新holdout及八步公司循环。工程/输入通过不代签正式输出、缓存或预测。
 
-**效率根修：** CI首条失败注解现在同时列出无参数的有界全部function组和case数，不再被平台前十条注解遮住后续类别；原25逐项封顶、traceback隐私、skip判断不变。新2RED→原13＋新2共15P，没有增加CI任务、范围、超时或小节点门禁。
-
-**唯一下一步：** 正常提交/推送上述源码和测试，核新精确CI→修PDF独审PD1再验收其独立组件→真实配置摘要/响应独审/恢复缓存/FF-RF实际采用→新holdout和八步循环。PDF3WIP不混入本次签收/提交：49作者控制通过，但独审44中42P2F，双row形状排除会吞真实amount/dependent，必须先修；不能靠页数下降或0SDK代签。
-
-正式供应商摘要、当前revision缓存恢复和RF模型采用仍OPEN。配置10M/$20、母账1,800,368tokens/$0.727945及unknown不变，0新供应商/SDK/下载；原件/生产配置/其他owner不写。所有本轮隔离测试根已恢复不存在；只留紧凑代码fixture和压缩证据。
+PDF三文件已通过最终独审23P/0OPEN，等待本次独立发布：旧独审42P2F的反例保留；正向尾句证据现在先于弱表形状，ROOT31P及396文件mypy通过。见[验收](review/pdf-c3-20261026/PARAGRAPH_DEMAND_ACCEPTANCE.md)。真实需求仍为28/3/4页、10原因，未宣称零SDK。复杂表/姓名/地址的剩余不确定性如实保留。配置10M tokens/$20、母账1,800,368tokens/$0.727945和unknown不变；本节点0供应商/SDK/下载。下方旧“当前/下一步”仅为历史，不覆盖本段或CURRENT_STATUS.json。
 
 ## 2026-10-28 当前：C3共因工程已发布，真实摘要进行中
 

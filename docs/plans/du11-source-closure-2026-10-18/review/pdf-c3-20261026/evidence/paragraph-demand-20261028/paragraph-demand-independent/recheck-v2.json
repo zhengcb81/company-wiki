@@ -1,0 +1,46 @@
+{
+  "exit_code": 0,
+  "seconds": 7.917,
+  "targets": [
+    ".planning/c3-20261028/paragraph-demand-independent/test_independent.py",
+    "tests/unit/test_pdf_paragraph_demand.py::test_two_complete_rows_are_not_a_prose_fracture_or_sdk_demand",
+    "tests/unit/test_pdf_paragraph_demand.py::test_mixed_material_or_one_row_cannot_dispose_of_unexplained_prose",
+    "tests/unit/test_pdf_paragraph_demand.py::test_pronoun_prefix_inside_an_independent_word_is_not_a_dependent_tail"
+  ],
+  "before": [
+    {
+      "path": "src/company_wiki/source_catalog/narrative_pdf_paragraphs.py",
+      "sha256": "4f09319d0bac10222d5395b00525ed10a294476fca67daade7a7b24b5095fe48",
+      "lf_sha256": "ccb14886c4178d025f850a23b26352a3f8b0e4d2b41edaf29cdf32eab316e833"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_pdf_enhancement.py",
+      "sha256": "0fe3a244db1fc934ed4c849b31f63994d3ea94b343885fe571745bbfd8456c42",
+      "lf_sha256": "9e8c735be8b38823e2ec92a1ae3413ef18764ddb79e9bfbfd9eb79ce33c9cf48"
+    },
+    {
+      "path": "tests/unit/test_pdf_paragraph_demand.py",
+      "sha256": "eddd75847e8ab48b583fb9e32b1482effd103b4302c1c80b542781d34a9fb93a",
+      "lf_sha256": "eddd75847e8ab48b583fb9e32b1482effd103b4302c1c80b542781d34a9fb93a"
+    }
+  ],
+  "after": [
+    {
+      "path": "src/company_wiki/source_catalog/narrative_pdf_paragraphs.py",
+      "sha256": "4f09319d0bac10222d5395b00525ed10a294476fca67daade7a7b24b5095fe48",
+      "lf_sha256": "ccb14886c4178d025f850a23b26352a3f8b0e4d2b41edaf29cdf32eab316e833"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_pdf_enhancement.py",
+      "sha256": "0fe3a244db1fc934ed4c849b31f63994d3ea94b343885fe571745bbfd8456c42",
+      "lf_sha256": "9e8c735be8b38823e2ec92a1ae3413ef18764ddb79e9bfbfd9eb79ce33c9cf48"
+    },
+    {
+      "path": "tests/unit/test_pdf_paragraph_demand.py",
+      "sha256": "eddd75847e8ab48b583fb9e32b1482effd103b4302c1c80b542781d34a9fb93a",
+      "lf_sha256": "eddd75847e8ab48b583fb9e32b1482effd103b4302c1c80b542781d34a9fb93a"
+    }
+  ],
+  "source_unchanged": true,
+  "temp_absent": true
+}

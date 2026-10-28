@@ -1,0 +1,106 @@
+{
+  "scope": "native read plus first direct existing paragraph gap demand observation; not configured SDK or summary",
+  "pages": [
+    28,
+    3,
+    4
+  ],
+  "reasons": [
+    {
+      "page": 3,
+      "reason": "unproven_wrapped_prose",
+      "priority": 1,
+      "left": "urn:company-wiki:narrative-unit:sha256:de5bbc3070304078117c3a70357f64362196da24e9cbcb59f3f0a379b6b55d19",
+      "right": "urn:company-wiki:narrative-unit:sha256:4155be2d8976dc879b554d2c60da185d22f3bb2e15c34c3e37800a26db928d07",
+      "left_text": "張鐸先生（於二零二五年六月九日獲委任）\n馮宏華先生（於二零二五年六月九日辭任）",
+      "right_text": "獨立非執行董事"
+    },
+    {
+      "page": 4,
+      "reason": "unproven_wrapped_prose",
+      "priority": 1,
+      "left": "urn:company-wiki:narrative-unit:sha256:a38bb2cbf82206ec16aab327c45fda4a5cf2c930e542f3ebedb0d4b6f3ba1f42",
+      "right": "urn:company-wiki:narrative-unit:sha256:175bf75c2b08f2d21a60916aed957d98d1c5dc94e053df1657e558e52a1aeece",
+      "left_text": "Maples and Calder (Hong Kong) LLP",
+      "right_text": "香港"
+    },
+    {
+      "page": 28,
+      "reason": "unproven_wrapped_prose",
+      "priority": 1,
+      "left": "urn:company-wiki:narrative-unit:sha256:5806cadc995e0e42af3e23b40563b5d7d08637dd9769e8c6e7d7f28ea001366b",
+      "right": "urn:company-wiki:narrative-unit:sha256:166faf6207eb871b84ab30b210e07225f1633f58927d07b6ac95ebccaadbe294",
+      "left_text": "1,600,000\n0\n0\n0\n0\n1,600,000\n5年\n0-0.86978\n0",
+      "right_text": "二零二五年三月二十日\n0\n512,233\n0\n0\n0\n512,233\n於授出時歸屬\n0.01\n0"
+    },
+    {
+      "page": 28,
+      "reason": "unproven_wrapped_prose",
+      "priority": 1,
+      "left": "urn:company-wiki:narrative-unit:sha256:166faf6207eb871b84ab30b210e07225f1633f58927d07b6ac95ebccaadbe294",
+      "right": "urn:company-wiki:narrative-unit:sha256:a293d966e3c27d5c8597159302373c729190e7b6fba5c658281cac7ac3e371a7",
+      "left_text": "二零二五年三月二十日\n0\n512,233\n0\n0\n0\n512,233\n於授出時歸屬\n0.01\n0",
+      "right_text": "田開顏\n二零一九年十二月五日\n320,000\n0\n0\n0\n0\n320,000\n5年\n0-0.86978\n0"
+    },
+    {
+      "page": 28,
+      "reason": "unproven_wrapped_prose",
+      "priority": 1,
+      "left": "urn:company-wiki:narrative-unit:sha256:a293d966e3c27d5c8597159302373c729190e7b6fba5c658281cac7ac3e371a7",
+      "right": "urn:company-wiki:narrative-unit:sha256:586c9413daf159799fd43a6d4ee3d81f18bea56531ce9dacb9948d7c39b62bd1",
+      "left_text": "田開顏\n二零一九年十二月五日\n320,000\n0\n0\n0\n0\n320,000\n5年\n0-0.86978\n0",
+      "right_text": "二零二四年三月二十二日\n107,893\n0\n0\n0\n0\n107,893\n於授出時歸屬\n0.01\n0"
+    },
+    {
+      "page": 28,
+      "reason": "unproven_wrapped_prose",
+      "priority": 1,
+      "left": "urn:company-wiki:narrative-unit:sha256:56f85900e5e643fc2d65c8ec8ce9d571c8fc6bbc905214997b9daee593d72286",
+      "right": "urn:company-wiki:narrative-unit:sha256:6aef430052edc77f8c22fed3d7c8918b8e55e09153eaa96dd7fe56715ddeb8e0",
+      "left_text": "3,380,005\n0\n0\n0\n1,965,540\n1,414,465\n2-5年\n0-0.86978\n0.99",
+      "right_text": "二零二四年三月二十二日\n251,613\n0\n0\n0\n251,613\n0\n於授出時歸屬\n0.01\n0.81"
+    },
+    {
+      "page": 28,
+      "reason": "amount_or_dependent_tail",
+      "priority": 2,
+      "left": "urn:company-wiki:narrative-unit:sha256:3997c6cdcb18e91ac9e5ad3765103155cacdefa6b77ee2536648c342747d4221",
+      "right": "urn:company-wiki:narrative-unit:sha256:559326d0edcce3f1ab772312c57c32531820cb9fbc93b35a3db6b694043b3c0b",
+      "left_text": "二零二三年四月二十一日\n1,487,809\n0\n0\n0\n102,552\n1,385,257\n於授出日期至",
+      "right_text": "其後5年期間"
+    },
+    {
+      "page": 28,
+      "reason": "amount_or_dependent_tail",
+      "priority": 2,
+      "left": "urn:company-wiki:narrative-unit:sha256:78978c833038fa0e6dcbc99eb0116caddcba1b8abfec17c6c9582fcda4c9b0cb",
+      "right": "urn:company-wiki:narrative-unit:sha256:528669f23c959fbf08c780bd603592ae0f27a784450a2cf2398230997536934c",
+      "left_text": "二零二三年十二月十三日\n69,020,567\n0\n0\n0\n4,095,715\n64,924,852\n於授出日期至",
+      "right_text": "其後5年期間"
+    },
+    {
+      "page": 28,
+      "reason": "unproven_wrapped_prose",
+      "priority": 1,
+      "left": "urn:company-wiki:narrative-unit:sha256:1c9a33286510b475b066fce3b2d93b2e960a80eda717544d4fd2b5745808e7fa",
+      "right": "urn:company-wiki:narrative-unit:sha256:935141c2086d1fb6840ab2fbbaf4fc9fe5e9cb7b529ef4726a732960545016ee",
+      "left_text": "二零二四年一月十九日\n2,474,375\n0\n109,408\n0\n108,665\n2,256,302\n於相應歸屬",
+      "right_text": "開始日期的"
+    },
+    {
+      "page": 28,
+      "reason": "amount_or_dependent_tail",
+      "priority": 2,
+      "left": "urn:company-wiki:narrative-unit:sha256:7d63e97be8f7fd0d60ba6c11171e0de2f830482d36d4a41248141db58bdaf9ec",
+      "right": "urn:company-wiki:narrative-unit:sha256:037e9c6d92c3d63f4de574c029972aaeb5fc0afb39ab091346fd2029f40bac14",
+      "left_text": "二零二四年三月二十二日\n5,360,464\n0\n0\n0\n871,036\n4,489,428\n於授出日期至",
+      "right_text": "其後5年期"
+    }
+  ],
+  "units": 2330,
+  "work_used": 366340,
+  "seconds": 0.91,
+  "source_sha256": "4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+  "original_unchanged": true,
+  "SDK_model_download": 0
+}

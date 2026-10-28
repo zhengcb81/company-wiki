@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-28",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_REMAINING_ROOT_REPAIR_INDEPENDENT_PASS_PUBLICATION_PENDING",
+  "overall_status": "ACTIVE_SOURCE_PUBLISHED_CI_SUCCESS_PDF_DEMAND_INDEPENDENT_PASS_PUBLICATION_PENDING",
   "parallel_packages_20261025": {
     "status": "W16_W17_W18_ROOT_COMPONENT_ACCEPTED_MERGED",
     "entry": "harness_lanes/20261025/README.md",
@@ -26,7 +26,7 @@
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
-  "last_code_commit": "908ef3cb5010e1b656a5cd179de36a098748babf",
+  "last_code_commit": "011e376d58a321fab63ee14955b41a8600e27cdf",
   "code_ci": {
     "id": 40729898744,
     "head_sha": "908ef3cb5010e1b656a5cd179de36a098748babf",
@@ -334,7 +334,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "PDF-C3: publish accepted metadata/lifecycle/exact-ref engineering delta, then one configured HK real summary + activation/restart/cross-run cache + FF/RF public consumers. Source semantic review and fresh-holdout candidate/summary still OPEN. Continue eight-step company loop; do not repeat W19/skill-sync/C1-C2 comparisons.",
+  "next_step_now": "Publish independently accepted PDF3 physical-demand component; isolated declared SDK deployment and one cold probe; formal business5 summary/content/cache/FF-RF; holdouts and full company loop.",
   "parallel_work_packages": [
     {
       "id": "IR-REPORT-GENERATION",
@@ -355,7 +355,7 @@
       "review_before_handoff": true
     }
   ],
-  "next_step_after_user_resumes": "PDF-C3: publish accepted metadata/lifecycle/exact-ref engineering delta, then one configured HK real summary + activation/restart/cross-run cache + FF/RF public consumers. Source semantic review and fresh-holdout candidate/summary still OPEN. Continue eight-step company loop; do not repeat W19/skill-sync/C1-C2 comparisons.",
+  "next_step_after_user_resumes": "Publish independently accepted PDF3 physical-demand component; isolated declared SDK deployment and one cold probe; formal business5 summary/content/cache/FF-RF; holdouts and full company loop.",
   "budget_snapshot": {
     "observed_on": "2026-10-25",
     "observation_ref": "review/market-family-upgrade-20261024/formal-v4-and-cards-root-acceptance-20261025.md",
@@ -389,7 +389,7 @@
     "minimax": "MiniMax-M3.1-Flash"
   },
   "historical_us_c_model": "MiniMax-M3",
-  "new_paid_calls_in_this_update": 1,
+  "new_paid_calls_in_this_update": 0,
   "r1_stage_ref": "r1-holdout-20261021/stage-progress.json",
   "r1_freeze_review": "review/r1-holdout-freeze-review-20261021.json",
   "last_verified_successful_code_ci": {
@@ -406,11 +406,11 @@
   "r2_triage_ref": "review/r1-r2-recovery-triage-20261021.json",
   "initial_execution_paid_calls_preserved": 2,
   "r1_engineering_closeout_ref": "r1-holdout-20261021/engineering-closeout-20261022.json",
-  "publication_status_owner": "r1-holdout-20261021/engineering-closeout-20261022.json",
-  "resume_handoff": "HANDOFF-2026-10-22.md",
+  "publication_status_owner": "review/pdf-c3-20261026/REMAINING_UNIT_PUBLICATION.json",
+  "resume_handoff": "CURRENT_STATUS.md",
   "resumed_at": "2026-10-23T18:41:33.912794+00:00",
   "previous_pause_request": "Superseded by user continue2026-10-23",
-  "last_updated_at": "2026-10-25",
+  "last_updated_at": "2026-10-28",
   "r1_w03_integration_ref": "review/r1-w03-integration-20261022.json",
   "r1_w07_live_ref": "review/r1-w07-live-20261022.json",
   "local_observation_followup": {
@@ -806,7 +806,7 @@
     },
     "publication_docs_commit": "fa667547"
   },
-  "next_step_after_publication": "PDF-C3: publish accepted metadata/lifecycle/exact-ref engineering delta, then one configured HK real summary + activation/restart/cross-run cache + FF/RF public consumers. Source semantic review and fresh-holdout candidate/summary still OPEN. Continue eight-step company loop; do not repeat W19/skill-sync/C1-C2 comparisons.",
+  "next_step_after_publication": "Publish independently accepted PDF3 physical-demand component; isolated declared SDK deployment and one cold probe; formal business5 summary/content/cache/FF-RF; holdouts and full company loop.",
   "w08_current_review": {
     "selection_path": "review/r1-w08-material-value-20261024/publication/final-source/selection.json",
     "selection_sha256": "44a9ac20e9b83f67bf99976820cf88b7de592b74b0104fca09abc434c0287904",
@@ -844,7 +844,7 @@
     "PDF-C3: publish accepted metadata/lifecycle/exact-ref engineering delta, then one configured HK real summary + activation/restart/cross-run cache + FF/RF public consumers. Source semantic review and fresh-holdout candidate/summary still OPEN. Continue eight-step company loop; do not repeat W19/skill-sync/C1-C2 comparisons.",
     "Keep C3 semantic/LLM/cache/RF acceptance distinct from installed-byte and isolated FF reuse acceptance; preserve source originals, configured budgets and other-owner WIP."
   ],
-  "last_updated_utc": "2026-10-25T10:46:55Z",
+  "last_updated_utc": "2026-10-28T18:15:54.723663+00:00",
   "latest_publish_validation": {
     "source_commit": "1e5e6c1aff3680a46ca9dbab14b322b0f7f9374c",
     "verified_push_head": "f73afb89be1f4caf610432211281e07a14e58c77",
@@ -1952,7 +1952,7 @@
     "engineering_commit": "8a258b93404f351ae92cd3449198b42141ef4169",
     "publication": "review/st-a05-parent-investigation-20261025/publication.json"
   },
-  "last_source_product_commit": "06c1a5839302f4e297d70a13267a8aa490eef719",
+  "last_source_product_commit": "011e376d58a321fab63ee14955b41a8600e27cdf",
   "a01_a05_local_flow_20261025": {
     "status": "SOURCE_INPUT_INDEPENDENT_PASS12_2; CI_FOLLOWUP483cb2a5_EXACT_CI_SUCCESS",
     "evidence": "review/st-a05-local-flow-20261025/README.md",
@@ -2296,7 +2296,7 @@
     "implementation_authorized_by_user": true,
     "observed_date": "2026-10-26"
   },
-  "current_task_override": "A v3+B v2 engineering19files independent PASS/51, author308 and src391 mypy pass. One real revalidation146.072sec stopped before reservation with0POST/0charge: industry cloud head/tail split into2 source tasks, original words retained but single-fact closure missing; actual sentgold2/3. No new final content can be signed.",
+  "current_task_override": "Source common roots accepted/published/exactCI success; PDF PD1 recheck and isolated SDK deployment in progress. No formal current-summary/cache/RF acceptance yet.",
   "skill_sync_root_cause_20261026": {
     "status": "COMPLETE_INDEPENDENT_PASS_ZERO_OPEN",
     "entry": "review/skill-sync-root-cause-20261026/README.md",
@@ -2345,7 +2345,7 @@
     "published": true,
     "push_failure": "47 targets /392 collected /600s; two regressions being root-fixed, not waived by narrower daily gate"
   },
-  "next_action": "Publish24-file accepted remaining-source/current-history fixtures/CI visibility; exactCI, then PDF PD1 root repair and component acceptance, actual configured summary/cache/FF-RF and holdouts. No whole-suite repeat or permission ask.",
+  "next_action": "Publish independently accepted PDF3 physical-demand component; isolated declared SDK deployment and one cold probe; formal business5 summary/content/cache/FF-RF; holdouts and full company loop.",
   "c3_runtime_recovery_20261026": {
     "entry": "review/pdf-c3-20261026/RUNTIME_RECOVERY.md",
     "environment_independent": "PASS_ZERO_OPEN_25_TESTS_AND_REAL_WORKER_ENTRYPOINTS",
@@ -2707,9 +2707,9 @@
   },
   "source_support_use": {
     "wire": "du-production-reading/4",
-    "status": "UNPUBLISHED_IMPLEMENTATION",
+    "status": "PUBLISHED_CI_SUCCESS",
     "consumer": "FINAL_INDEPENDENT_PASS_59",
-    "source": "V6C_AND_ROOT_CONSUMER_PUBLISHED_INDEPENDENT_PASS",
+    "source": "FINAL24_INDEPENDENT_PASS_AND_PUBLISHED",
     "cross_repository": {
       "rf_commit": "0991e25d5dca667a3fdafb7bc5ebf0e546a2272b",
       "rf_main_pushed": true,
@@ -2729,7 +2729,7 @@
       "unrelated_primary_wip_unchanged": true
     },
     "public_current_producer_gate": "V3_PUBLIC_WORKER_CLI_RF_STOCKWIKI_1P_23_21S",
-    "real_supplier_summary": "NOT_RUN",
+    "real_supplier_summary": "NOT_RUN_FOR_CURRENT_SOURCE",
     "interface": "review/pdf-c3-20261026/SOURCE_SUPPORT_INTERFACE.md",
     "real_native_source": {
       "selected_spans": 81,
@@ -2760,15 +2760,23 @@
     "formal_business_gold": "review/pdf-c3-20261026/business-recovery-checkpoints/hk-development-business5-gold.json",
     "final_summary": "OPEN_NOT_EXECUTED_FOR_CURRENT_SOURCE",
     "acceptance": "review/pdf-c3-20261026/SOURCE_USE_ACCEPTANCE.md",
-    "publication": "review/pdf-c3-20261026/SOURCE_USE_PUBLICATION.json",
-    "full_CI": "FAILURE; ROOT isolated26 cases13F13P; source component review remains scoped, overall publication not green",
+    "publication": "review/pdf-c3-20261026/REMAINING_UNIT_PUBLICATION.json",
+    "full_CI": {
+      "id": 40741228182,
+      "head_sha": "011e376d58a321fab63ee14955b41a8600e27cdf",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40741228182",
+      "updated_at": "2026-10-28T18:07:05Z"
+    },
     "CI_repair": {
-      "status": "INDEPENDENT_PASS_PUBLICATION_PENDING",
+      "status": "PUBLISHED_EXACT_CI_SUCCESS",
       "necessary_unique": 416,
       "original_four_tests_changed": false,
       "real_native_business_gold": "5/5",
       "summary_quality": "OPEN",
-      "entry": "review/pdf-c3-20261026/SOURCE_USE_CI_REPAIR.md"
+      "entry": "review/pdf-c3-20261026/SOURCE_USE_CI_REPAIR.md",
+      "publication_commit": "011e376d58a321fab63ee14955b41a8600e27cdf"
     }
   },
   "remaining_unit_counterproof": {
@@ -2778,7 +2786,7 @@
     "whole_repeat_forbidden": true,
     "unexecuted_tail": 1021,
     "roots": "shared typed object heads; historical/current model fixture protocols; marker fixture; local harness/imports",
-    "paragraph_WIP": "49P; separate2source+1test; not released",
+    "paragraph_WIP": "THREE_FILES_INDEPENDENT_FINAL_PASS_PUBLICATION_PENDING",
     "final_review": {
       "status": "PASS",
       "unique_tests": 30,
@@ -2787,10 +2795,107 @@
     },
     "whole_suite_current_bytes": "NOT_CLAIMED; bounded composite inventory and affected-node validation",
     "independent_pdf": {
-      "status": "CHANGES_REQUESTED",
-      "passed": 42,
-      "failed": 2,
-      "finding": "PD1: shape veto precedes positive amount/dependency evidence"
+      "schema_version": "paragraph-demand-independent/2",
+      "status": "PASS",
+      "review_state": "FINAL",
+      "reviewer": "/root/c3_summary_root_design",
+      "files": [
+        {
+          "path": "src/company_wiki/source_catalog/narrative_pdf_paragraphs.py",
+          "sha256": "4f09319d0bac10222d5395b00525ed10a294476fca67daade7a7b24b5095fe48",
+          "lf_sha256": "ccb14886c4178d025f850a23b26352a3f8b0e4d2b41edaf29cdf32eab316e833"
+        },
+        {
+          "path": "src/company_wiki/source_catalog/narrative_pdf_enhancement.py",
+          "sha256": "0fe3a244db1fc934ed4c849b31f63994d3ea94b343885fe571745bbfd8456c42",
+          "lf_sha256": "9e8c735be8b38823e2ec92a1ae3413ef18764ddb79e9bfbfd9eb79ce33c9cf48"
+        },
+        {
+          "path": "tests/unit/test_pdf_paragraph_demand.py",
+          "sha256": "eddd75847e8ab48b583fb9e32b1482effd103b4302c1c80b542781d34a9fb93a",
+          "lf_sha256": "eddd75847e8ab48b583fb9e32b1482effd103b4302c1c80b542781d34a9fb93a"
+        }
+      ],
+      "binding": "Exact ROOT paragraph-pd1-handoff.json3raw/LF SHA verified before/after23 tests and again at signing",
+      "previous": "independent.md/json and independent-run.json/log/xml preserve original44unique42P2F; not overwritten",
+      "closed": [
+        {
+          "id": "PD1-row-shape-is-not-complete-prose-disposition",
+          "resolution": "Observed positive amount/dependent tail is checked before the weaker paired complete-row shape; both frozen independent REDs now demand page1.",
+          "barriers": "Native proven closure, physical page/role/frame/rotation/column/overlap/missing geometry and terminal left continue to win before positive-tail handling."
+        }
+      ],
+      "tests": {
+        "counts": {
+          "total": 23,
+          "failed": 0,
+          "errors": 0,
+          "skipped": 0
+        },
+        "passed": 23,
+        "pytest_seconds": 6.14,
+        "runner_seconds": 7.917,
+        "independent": 15,
+        "author_controls": 8,
+        "log": "recheck-v2.log",
+        "junit": "recheck-v2.xml",
+        "receipt": "recheck-v2.json",
+        "scope": "Only own frozen2PD1 counterexamples+necessary physical/native/precharge/once/recipe/payload controls, one new terminal precedence control and author complete-row/mixed/compound-prefix controls. No44/49/full-domain repetition."
+      },
+      "guarantees": [
+        "Two wrapped-prose numeric shapes cannot veto their actual amount/dependent evidence.",
+        "Complete nominal row pairs retain no-demand/no-runner behavior; mixed/one-sided rows preserve unknown prose.",
+        "其/其他/其它 distinction and explicit其中 behavior remain in the existing author/current implementation; no new dictionary or financial/page/company exclusion was added.",
+        "Index-local prepared observation, failed shared charge before scanning and exact helper LF recipe binding retain prior passing controls.",
+        "No-demand UnreadPayload remains uninspected and runner-free; source text/IDs/coordinates/metadata unchanged."
+      ],
+      "OPEN": [],
+      "outside_scope_open": [
+        "Configured SDK isolation/deployment/startup validation",
+        "Formal provider summary and fees/restoration acceptance",
+        "Actual cache reuse and RF adoption",
+        "SOURCE final24 independent acceptance is owned separately"
+      ],
+      "actual_evidence": "ROOT supplied paragraph-demand-v3.json: pages28/3/4,10reasons,366340work,0.910s,original unchanged,0SDK/POST; not rerun or independently promoted to configured SDK/summary acceptance",
+      "static": "ROOT supplied final396-source mypy after only reason:str|None local annotation; this reviewer inspected final bytes and ran targeted tests, not fullsrc again",
+      "cleanup": {
+        "temp": ".c3pdi",
+        "absent": true,
+        "TEMP_TMP_child_only": true,
+        "product_author_tests_config_PWF_Git_written": false,
+        "PDF_SDK_model_supplier_download_runs": 0
+      },
+      "acceptance_scope": "Physical paragraph-demand PD1 component only; no formal SDK/summary/cache/RF signoff"
+    },
+    "publication": {
+      "code_commit": "011e376d58a321fab63ee14955b41a8600e27cdf",
+      "branch": "master",
+      "pushed": true,
+      "normal_pre_commit": "PASS",
+      "normal_pre_push": {
+        "passed": 158,
+        "seconds": 31.7
+      },
+      "exact_ci": {
+        "id": 40741228182,
+        "head_sha": "011e376d58a321fab63ee14955b41a8600e27cdf",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40741228182",
+        "updated_at": "2026-10-28T18:07:05Z"
+      },
+      "acceptance_scope": "source/4 remaining24 plus original failed fixtures and CI visibility; PDF3 separate",
+      "no_new_supplier_calls": true,
+      "no_new_downloads": true,
+      "full_unit_current_bytes": "Remote ordinary CI success; no claim that local incomplete9476 diagnostic was complete"
+    }
+  },
+  "historical_status_snapshots": {
+    "before_remaining_ci_success_20261028": {
+      "current_task_override": "A v3+B v2 engineering19files independent PASS/51, author308 and src391 mypy pass. One real revalidation146.072sec stopped before reservation with0POST/0charge: industry cloud head/tail split into2 source tasks, original words retained but single-fact closure missing; actual sentgold2/3. No new final content can be signed.",
+      "last_source_product_commit": "06c1a5839302f4e297d70a13267a8aa490eef719",
+      "publication_status_owner": "r1-holdout-20261021/engineering-closeout-20261022.json",
+      "resume_handoff": "HANDOFF-2026-10-22.md"
     }
   }
 }

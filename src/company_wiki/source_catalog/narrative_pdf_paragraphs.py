@@ -9,17 +9,19 @@ from collections.abc import Sequence
 from dataclasses import dataclass, replace
 from hashlib import sha256
 import math
+from pathlib import Path
 import re
 import unicodedata
 from typing import Any
 
 from company_wiki.resource_budget import WorkBudget
+from company_wiki.document_normalization import table_shapes
 from .narrative_document import DocumentStructure, NarrativeUnit
 
 PARAGRAPH_ALIGNMENT_VERSION = "pdf-paragraph-membership/1"
 _FRAMES = {"dict", "rawdict", "text", "words", "span"}
 _END = re.compile(r"[。！？.!?;；][\"'”’）)\]》]*$")
-_DEPENDENT = re.compile(r"^(?:該|该|上述|其|由於|由于|因此|百萬|百万|億元|亿元|萬元|万元|"
+_DEPENDENT = re.compile(r"^(?:該|该|上述|其(?![他它])|由於|由于|因此|百萬|百万|億元|亿元|萬元|万元|"
                         r"million\b|billion\b|and\b|but\b|which\b|because\b|this\b)", re.I)
 
 
@@ -47,6 +49,20 @@ class ParagraphAlignment:
     parsed: DocumentStructure
     accepted_groups: int
     rejected_groups: int
+
+
+def paragraph_triage_dependencies() -> dict[str, str]:
+    """Bind the shared shape implementation actually consumed by this owner."""
+    return {"company_wiki.document_normalization.table_shapes": sha256(
+        Path(table_shapes.__file__).read_bytes().replace(b"\r\n", b"\n")
+    ).hexdigest()}
+
+
+@dataclass(frozen=True)
+class _GapObservation:
+    complete_value_row: bool
+    dependent_tail: bool
+    terminal: bool
 
 
 def _comparison(text: str) -> str:
@@ -84,12 +100,24 @@ def triage_paragraph_gaps(parsed: DocumentStructure, *, work_budget: WorkBudget,
     boundary = physical["unexamined_from_index"]
     reasons: list[dict[str, Any]] = []
     page_scores: dict[int, int] = {}
+    prepared: dict[int, _GapObservation] = {}
+
+    def observe(index: int) -> _GapObservation:
+        if index not in prepared:
+            text = parsed.units[index].raw_text
+            work_budget.charge(1 + len(text))
+            prepared[index] = _GapObservation(
+                table_shapes.observe_value_cells(text).complete_value_row,
+                bool(_DEPENDENT.search(text)), bool(_END.search(text)),
+            )
+        return prepared[index]
+
     for index, (left, right) in enumerate(zip(parsed.units, parsed.units[1:])):
-        work_budget.charge(1 + len(left.raw_text) + len(right.raw_text))
+        work_budget.charge()
         page = left.coordinates.page_number
         if (page is None or page != right.coordinates.page_number
                 or left.unit_kind != "pdf_text_block" or right.unit_kind != "pdf_text_block"
-                or left.source_role != right.source_role or _END.search(left.raw_text)
+                or left.source_role != right.source_role
                 or (left.unit_id, right.unit_id) in proven or boundary is not None and index + 1 >= boundary):
             continue
         a, b = _layout(left), _layout(right)
@@ -98,11 +126,22 @@ def triage_paragraph_gaps(parsed: DocumentStructure, *, work_budget: WorkBudget,
                 or a.get("rotation") != b.get("rotation") or a.get("column") != b.get("column")
                 or min(box_a[2], box_b[2]) <= max(box_a[0], box_b[0])):
             continue
-        reason = ("amount_or_dependent_tail" if _DEPENDENT.search(right.raw_text) else
-                  "unproven_wrapped_prose" if len(left.raw_text) >= 32
-                  and re.match(r"[a-z\u3400-\u9fff]", right.raw_text) else None)
+        left_observation, right_observation = observe(index), observe(index + 1)
+        if left_observation.terminal:
+            continue
+        # A literal label/value shape also fits native-wrapped prose. Positive
+        # amount/dependency evidence must survive that weaker observation.
+        reason: str | None
+        if right_observation.dependent_tail:
+            reason = "amount_or_dependent_tail"
+        elif left_observation.complete_value_row and right_observation.complete_value_row:
+            continue
+        else:
+            reason = ("unproven_wrapped_prose" if len(left.raw_text) >= 32
+                      and re.match(r"[a-z\u3400-\u9fff]", right.raw_text) else None)
         if reason is not None:
-            score = 3 if re.search(r"\d$", left.raw_text) and _DEPENDENT.search(right.raw_text) else 2 if _DEPENDENT.search(right.raw_text) else 1
+            score = (3 if re.search(r"\d$", left.raw_text) and right_observation.dependent_tail
+                     else 2 if right_observation.dependent_tail else 1)
             page_scores[page] = max(score, page_scores.get(page, 0))
             reasons.append({"page": page, "reason": reason, "priority": score,
                             "left": left.unit_id, "right": right.unit_id})
