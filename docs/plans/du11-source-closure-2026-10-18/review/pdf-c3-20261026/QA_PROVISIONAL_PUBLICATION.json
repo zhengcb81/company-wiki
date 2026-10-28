@@ -1,0 +1,21 @@
+{
+  "code_commit": "c6c446d0eebc8f6e6f6903bd677c04eebaf65077",
+  "branch": "master",
+  "pushed": true,
+  "normal_pre_commit": "PASS",
+  "normal_pre_push": {
+    "passed": 158,
+    "seconds": 44.98
+  },
+  "exact_ci": {
+    "id": 40750555849,
+    "head_sha": "c6c446d0eebc8f6e6f6903bd677c04eebaf65077",
+    "status": "in_progress",
+    "conclusion": null,
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40750555849",
+    "updated_at": "2026-10-28T19:01:50Z"
+  },
+  "full_CI_status": "PENDING_NOT_SIGNED",
+  "independent_review": "evidence/qa-provisional-20261028/qa-single-independent/independent-v3.json",
+  "scope": "Single-column provisional Q/A discovery and prior-date compatibility only; real whole IR remains OPEN"
+}

@@ -1325,3 +1325,41 @@ PDF需求已另行TDD：7RED/8控制→相关49P、396mypy；只改PDF阅读层2
 PDF三文件尚为独立WIP：旧独审42P2F指出双表行形状会吞真实金额/从属尾句；ROOT让正向尾句证据先于弱表形状，31P及396文件mypy通过，最终独审正在复核。真实需求仍为28/3/4页、10原因，未宣称零SDK。复杂表/姓名/地址的剩余不确定性如实保留。配置10M tokens/$20、母账1,800,368tokens/$0.727945和unknown不变；本节点0供应商/SDK/下载。下方旧“当前/下一步”仅为历史，不覆盖本段或CURRENT_STATUS.json。
 
 2026-10-28：PDF需求PD1最终23项独审PASS/0OPEN，旧42P2F保留；三文件与冻结raw/LF一致，原件需求366340work/0.910秒，仍有复杂表等未知，不签正式摘要。见review/pdf-c3-20261026/PARAGRAPH_DEMAND_ACCEPTANCE.md。正常独立发布后继续SDK部署与正式验证；不提高额度。
+
+## 2026-10-28 当前：两项工程已发布且CI成功，优先修内容信息量与真实召回
+
+目标ACTIVE。来源共因`011e376d`/CI40741228182与PDF物理需求`618df929`/CI40743943928均已正常提交推送master，精确CI **success**；两次正常pre-push各158P/31.70秒和32.03秒。旧失败和独审RED保留。PDF PD1最终独审23P/0OPEN，source最终24文件独审通过。工程通过不代签内容质量。
+
+**当前主问题：** 全38任务独立内容预审确认HK关键五业务事实输入充分，同时发现泛宣传句/目的模板、持续经营现金与现有授信背景及重复内容仍可能独占summary任务。完整语法/recall理由不等于具体业务信息。新真实开发复验还发现CN IR219units但0spans、六业务检查点未命中；US10-K HTML5215units/112spans、15,983,870work、八检查点4/8，需要分别核生产接线/路由/筛选和未读范围，不增加额度或公司补丁。诊断harness自身两处序列化错误与产品结果分开保留。
+
+**唯一下一步：** 按[来源信息量根修细则](review/pdf-c3-20261026/SOURCE_INFORMATION_ROOT_PLAN.md)冻结共用owner的中性TDD和实现设计，修具体性/经营对象类型与IR真实零选材根因，再集中独审和跨市场原件复验。SDK依赖部署隔离只在阅读实现层并行进行，不修改原包/模型/全局环境、不重复旧120秒超时。修好输入后用实际配置和新五金标metadata revision完成正式摘要→独立claim语义/数字审查→激活/重启/跨run零重复费用→FF/RF真实消费及模型采用→新holdout和八步公司循环。
+
+已发布PDF分诊仍保留复杂表等不确定需求（28/3/4页10原因、366340work/0.910秒），不宣称零SDK或正式摘要通过。现配置10M tokens/$20、母账1,800,368tokens/$0.727945及unknown保留；本节点0新供应商/SDK/下载。原件/生产配置/其他owner WIP不改。紧凑独立预审和真实基线见review/pdf-c3-20261026/evidence/information-preaudit-20261028；下方旧“当前/下一步”仅为历史。
+
+## 2026-10-28 当前：来源信息量根修继续；两条优先外包、一条可选后续
+
+目标ACTIVE，用户没有再次暂停。已发布来源根修011e376d及PDF物理需求618df929，精确CI40741228182/40743943928均success；不是正式摘要或RF循环通过。原始文档、生产配置及其他owner WIP保留。
+
+**主线下一步：** 按[来源信息量根修](review/pdf-c3-20261026/SOURCE_INFORMATION_ROOT_PLAN.md)实施A：用既有局部typed经营对象证据关闭current-state→财务豁免旁路，再实施B：具体功能/业务payload与泛目标区分，不按公司、数字或description整类排除。中英设计26期望+3真实文本诊断已冻结，尚未冒称pytest通过。HK五关键输入充分但t11/14套话和t29财务背景仍OPEN；未发新模型请求。
+
+**IR与验证现状：** 一次独立诊断确认万润IR六页原文全读、全部金标词已在shadow，零选材源于单列QA未物化，不是预算或参数。ROOT单列provisional discovery新5RED→相关39P，独审补的类型泄漏1RED已修、定向3P；最终两文件独审23P/0OPEN。真实再次复验252units/2spans/707865work/1.869秒，仅恢复部分结构，未解决整份QA/role问题，仍0/6旧机械分；该两文件WIP未发布，不能签IR完成。US原4/8中两项已有等义完整段，语义至少6/8；RPO两项未见可用任务，原因未证，不改gold凑分。
+
+**SDK部署：** 104依赖已在独立标准venv用硬链接隔离，1.233GB是共享逻辑字节，SDK/模型复制0、新scaffold约0.52MB。唯一30秒无文档探针18.81秒被探针自身误拦Windows NUL设备而退出；部署元数据验证通过，SDK启动仍未签收。旧失败/marker保留，不重复原命令。下一次先修并测试仅标准devnull的guard误报，再决定必要的有界新探针，不改原包/全局ACL或生产额度。
+
+**外包不再凑固定三包：** [W20入口](harness_lanes/20261028/README.md)建议先启动AUDIT-CHECKPOINTS、RF-ADOPTION；FF-REPLAY为可选后续，非当前阻塞。各自不同仓/独立工区/分支及完整PWF已建，原主目录不改。三卡独立审查通过并关闭两项FF合同歧义，要求作者交接前真实独立agent审查、全部修复和最终复审。当前只是READY，不把用户尚未分发写成RUNNING。
+
+配置10M tokens/$20，母账1,800,368tokens/$0.727945及unknown不变；没有新供应商POST/下载。正式摘要→独立内容审查→激活/重启/跨run缓存零重复费→FF/RF真实消费/模型采用→新holdout及八步公司循环仍OPEN。ROOT保留源码实作与最终整合。下方旧“当前/下一步”均为历史。
+
+## 2026-10-28 收尾完成后暂停（唯一当前状态）
+
+用户明确要求“发完包后收尾，然后暂停”。本次仅发布已在施工且通过独审的Q/A provisional组件`c6c446d0`，完成卡片/证据/交接；不继续source信息量A/B、新SDK探针、正式摘要/付费/下载或公司循环。**总目标未完成，不能记complete。** 详细唯一恢复入口：[暂停交接](review/pdf-c3-20261026/PAUSE_HANDOFF_20261028.md)。
+
+已发布source011e376d与PDF物理需求618df929精确CI成功；最后Q/A两文件v3独审PASS/0OPEN、pre-commit通过、pre-push158P/44.98秒、已推master。最新精确CI见[发布收据](review/pdf-c3-20261026/QA_PROVISIONAL_PUBLICATION.json)，pending不代签。最终兼容性短测与旧RED保存，不重跑全域。产品源码无未提交改动，原hook mode/RF他人WIP保留。
+
+**未解决：** HK套话/泛目标与财务存量背景仍占summary任务，A/B共享owner设计已冻结但尚未实施；真实IR只部分恢复（日期整理前v2 252units/2spans），原0/6及role/context oracle问题保留；US两项exact假阴性已找到等义段，RPO两项仍待归因。SDK104依赖隔离部署通过，但唯一cold被探针自身NUL误拦，不能签SDK启动。正式摘要、缓存恢复、FF/RF真实采用、新holdout/八步循环都OPEN。
+
+[W20两条优先线与一张可选后续卡](harness_lanes/20261028/README.md)已在独立工区准备完整计划并独立审查通过：AUDIT-CHECKPOINTS/RF-ADOPTION优先，FF-REPLAY可后置。作者必须独审、修复、复审后交接；当前READY，不假称用户已发出或作者已运行。不同repo/不同工区，不和ROOT阅读实现冲突；不再预设每轮三包。
+
+配置10M tokens/$20，母账1,800,368tokens/$0.727945及unknown不变，本节点0新供应商POST/下载。所有短测TEMP已恢复；只存紧凑证据，未提交SDK/env/原件大副本。下一步先等待用户明确恢复，再按暂停交接A→B/真实IR/SDK与正式摘要顺序继续。下方旧“当前/下一步/恢复运行”均为历史。
+
+2026-10-28：收尾文档首次diff --check发现findings/progress末尾多余空行，已仅整理EOF；不涉及产品、测试断言或额度变更。

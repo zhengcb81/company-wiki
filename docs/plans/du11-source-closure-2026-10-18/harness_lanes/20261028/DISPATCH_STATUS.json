@@ -1,0 +1,17 @@
+{
+  "status": "READY_NOT_DISPATCHED",
+  "independent_card_review": "APPROVE_OPEN0",
+  "priorities": {
+    "W20-AUDIT-CHECKPOINTS": "PRIORITY_READY",
+    "W20-RF-ADOPTION": "PRIORITY_READY",
+    "W20-FF-REPLAY": "OPTIONAL_LATER"
+  },
+  "card_sha256": {
+    "W20-AUDIT-CHECKPOINTS": "1b5897fa7839cb9280b13c6dd45b50c9e4c3bdb7a7db299560d3a82dbc5dc4a9",
+    "W20-RF-ADOPTION": "135ef4a401440cbc722be8449c618c7656070ef980775ce16cf0e9e1c66214c5",
+    "W20-FF-REPLAY": "1be244ad4d7afb319fd9c7f5db0148fe3422813ae80bb2c72d23cd6dde603b5e"
+  },
+  "root_priority_adjustment": "After independent card review, ROOT changed only overview scheduling: two directly support current acceptance; FF is optional. No technical card or reviewed interfaces changed.",
+  "count_policy": "derive task count from remaining work, dependency and receiving cost; never fixed3",
+  "no_author_implementation_started_by_root": true
+}

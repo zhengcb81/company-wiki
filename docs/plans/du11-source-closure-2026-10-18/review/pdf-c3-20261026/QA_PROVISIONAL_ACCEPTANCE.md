@@ -1,6 +1,6 @@
 # 单列Q/A原生发现：有限组件收尾
 
-状态：最终两文件独立复审PASS；正常发布待完成。本节点只修PDF阅读实现的provisional discovery，**不签整份IR资料已恢复、角色oracle、正式摘要/缓存或RF**。
+状态：最终两文件独立复审PASS；已正常提交推送master c6c446d0，pre-commit及pre-push通过。精确CI状态见QA_PROVISIONAL_PUBLICATION.json，pending不代签。本节点只修PDF阅读实现的provisional discovery，**不签整份IR资料已恢复、角色oracle、正式摘要/缓存或RF**。
 
 真实IR六页原文已经读取，但宽单元格按一列排版，原candidate在Q/A语法判定之前要求至少两列，未物化管理层/提问结构而全部shadow不可选。修复复用原measured rows及Q/A source grammar；仅已观察Q/A类型可单列，以左边距而非全宽框重叠确认同列，普通经营数表仍至少两对齐列。沿既有资源限额、页底/次页顶部continuation及后续原生表格/角色验证；不把shadow直接改成管理层。
 

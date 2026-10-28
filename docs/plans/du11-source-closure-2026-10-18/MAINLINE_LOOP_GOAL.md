@@ -1,14 +1,16 @@
 # 当前主线循环目标
 
-## 2026-10-28 当前：来源共因已发布且远端CI成功，继续PDF需求与正式摘要
+## 2026-10-28 收尾完成后暂停（唯一当前状态）
 
-目标ACTIVE。来源用途/4、共用对象证明、原意保留的测试协议及有界CI失败分组已正常提交推送master `011e376d`；pre-commit通过，pre-push158P/31.70秒，精确CI40741228182 **completed/success**。旧两次失败保留，不改写历史。见[发布收据](review/pdf-c3-20261026/REMAINING_UNIT_PUBLICATION.json)和[组件验收](review/pdf-c3-20261026/REMAINING_UNIT_REPAIR.md)。原件/生产配置/其他owner WIP未改。
+用户明确要求“发完包后收尾，然后暂停”。本次仅发布已在施工且通过独审的Q/A provisional组件`c6c446d0`，完成卡片/证据/交接；不继续source信息量A/B、新SDK探针、正式摘要/付费/下载或公司循环。**总目标未完成，不能记complete。** 详细唯一恢复入口：[暂停交接](review/pdf-c3-20261026/PAUSE_HANDOFF_20261028.md)。
 
-**已验证的内容范围：** 实际HK半年报完整原生读取2330units→81spans/38support任务，五项冻结业务检查点均在实际可发送任务内，5.385秒、6,175,509/16M work。不是正式摘要成绩。纯财务与未知表行不冒充已解释业务，原文仍可检索；没有增加额度或公司条件。
+已发布source011e376d与PDF物理需求618df929精确CI成功；最后Q/A两文件v3独审PASS/0OPEN、pre-commit通过、pre-push158P/44.98秒、已推master。最新精确CI见[发布收据](review/pdf-c3-20261026/QA_PROVISIONAL_PUBLICATION.json)，pending不代签。最终兼容性短测与旧RED保存，不重跑全域。产品源码无未提交改动，原hook mode/RF他人WIP保留。
 
-**当前唯一下一步：** 将已通过PD1最终独审的PDF需求组件单独发布；在PDF阅读层内修复已实测的SDK部署元数据扫描瓶颈，先轻量部署证明和一次有界cold探针，不重复旧120秒超时。随后新五金标metadata revision按真实配置运行原语言摘要→独立内容审查→激活/重启/跨run零重复费用→FF/RF真实消费与预测模型采用→新holdout及八步公司循环。工程/输入通过不代签正式输出、缓存或预测。
+**未解决：** HK套话/泛目标与财务存量背景仍占summary任务，A/B共享owner设计已冻结但尚未实施；真实IR只部分恢复（日期整理前v2 252units/2spans），原0/6及role/context oracle问题保留；US两项exact假阴性已找到等义段，RPO两项仍待归因。SDK104依赖隔离部署通过，但唯一cold被探针自身NUL误拦，不能签SDK启动。正式摘要、缓存恢复、FF/RF真实采用、新holdout/八步循环都OPEN。
 
-PDF三文件已通过最终独审23P/0OPEN，等待本次独立发布：旧独审42P2F的反例保留；正向尾句证据现在先于弱表形状，ROOT31P及396文件mypy通过。见[验收](review/pdf-c3-20261026/PARAGRAPH_DEMAND_ACCEPTANCE.md)。真实需求仍为28/3/4页、10原因，未宣称零SDK。复杂表/姓名/地址的剩余不确定性如实保留。配置10M tokens/$20、母账1,800,368tokens/$0.727945和unknown不变；本节点0供应商/SDK/下载。下方旧“当前/下一步”仅为历史，不覆盖本段或CURRENT_STATUS.json。
+[W20两条优先线与一张可选后续卡](harness_lanes/20261028/README.md)已在独立工区准备完整计划并独立审查通过：AUDIT-CHECKPOINTS/RF-ADOPTION优先，FF-REPLAY可后置。作者必须独审、修复、复审后交接；当前READY，不假称用户已发出或作者已运行。不同repo/不同工区，不和ROOT阅读实现冲突；不再预设每轮三包。
+
+配置10M tokens/$20，母账1,800,368tokens/$0.727945及unknown不变，本节点0新供应商POST/下载。所有短测TEMP已恢复；只存紧凑证据，未提交SDK/env/原件大副本。下一步先等待用户明确恢复，再按暂停交接A→B/真实IR/SDK与正式摘要顺序继续。下方旧“当前/下一步/恢复运行”均为历史。
 
 ## 2026-10-28 当前：C3共因工程已发布，真实摘要进行中
 

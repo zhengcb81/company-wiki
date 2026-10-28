@@ -1,0 +1,44 @@
+[
+  {
+    "card": "W20-AUDIT-CHECKPOINTS",
+    "workdir": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit-w20-checkpoints",
+    "plan": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit-w20-checkpoints\\docs\\plans\\w20-audit-checkpoints-2026-10-28",
+    "card_sha256": "1b5897fa7839cb9280b13c6dd45b50c9e4c3bdb7a7db299560d3a82dbc5dc4a9",
+    "seeded_files": [
+      "construction_card.md",
+      "findings.md",
+      "progress.md",
+      "task_plan.md"
+    ],
+    "primary_code_writes": 0,
+    "product_code_writes": 0
+  },
+  {
+    "card": "W20-RF-ADOPTION",
+    "workdir": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-w20-adoption",
+    "plan": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-w20-adoption\\docs\\plans\\w20-rf-adoption-2026-10-28",
+    "card_sha256": "135ef4a401440cbc722be8449c618c7656070ef980775ce16cf0e9e1c66214c5",
+    "seeded_files": [
+      "construction_card.md",
+      "findings.md",
+      "progress.md",
+      "task_plan.md"
+    ],
+    "primary_code_writes": 0,
+    "product_code_writes": 0
+  },
+  {
+    "card": "W20-FF-REPLAY",
+    "workdir": "C:\\Users\\郑曾波\\Projects\\filing-fetch-w20-replay",
+    "plan": "C:\\Users\\郑曾波\\Projects\\filing-fetch-w20-replay\\docs\\plans\\w20-ff-replay-2026-10-28",
+    "card_sha256": "1be244ad4d7afb319fd9c7f5db0148fe3422813ae80bb2c72d23cd6dde603b5e",
+    "seeded_files": [
+      "construction_card.md",
+      "findings.md",
+      "progress.md",
+      "task_plan.md"
+    ],
+    "primary_code_writes": 0,
+    "product_code_writes": 0
+  }
+]

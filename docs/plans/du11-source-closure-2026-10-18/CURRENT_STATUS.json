@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-28",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_SOURCE_PUBLISHED_CI_SUCCESS_PDF_DEMAND_INDEPENDENT_PASS_PUBLICATION_PENDING",
+  "overall_status": "PAUSED_AFTER_REQUESTED_CLOSEOUT_GOAL_INCOMPLETE",
   "parallel_packages_20261025": {
     "status": "W16_W17_W18_ROOT_COMPONENT_ACCEPTED_MERGED",
     "entry": "harness_lanes/20261025/README.md",
@@ -21,12 +21,12 @@
     "new_downloads": 0,
     "annual14_grade_unchanged": "Historical8/6/0 and10/4/0 reports preserved; latest source/input12/2/0; response semantics NOT_REVIEWED and RF OPEN"
   },
-  "current_authorized_scope": "User continues implementation; native goal freshly observed active; actual configured cumulative10M tokens/USD20 including unknown; objective old2M text is historical. No per-material approval.",
+  "current_authorized_scope": "Explicit user pause after completed closeout; do not start new implementation/model/download/loop until resume; existing material authorization persists.",
   "parent_plan_id": "document-understanding-2026-10-13",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
-  "last_code_commit": "011e376d58a321fab63ee14955b41a8600e27cdf",
+  "last_code_commit": "c6c446d0eebc8f6e6f6903bd677c04eebaf65077",
   "code_ci": {
     "id": 40729898744,
     "head_sha": "908ef3cb5010e1b656a5cd179de36a098748babf",
@@ -334,7 +334,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "Publish independently accepted PDF3 physical-demand component; isolated declared SDK deployment and one cold probe; formal business5 summary/content/cache/FF-RF; holdouts and full company loop.",
+  "next_step_now": "WAIT_FOR_USER_RESUME",
   "parallel_work_packages": [
     {
       "id": "IR-REPORT-GENERATION",
@@ -355,7 +355,7 @@
       "review_before_handoff": true
     }
   ],
-  "next_step_after_user_resumes": "Publish independently accepted PDF3 physical-demand component; isolated declared SDK deployment and one cold probe; formal business5 summary/content/cache/FF-RF; holdouts and full company loop.",
+  "next_step_after_user_resumes": "After explicit resume: shared typed-object/financial exemption A then payload B TDD; remaining actual IR QA and role/context oracle; corrected standard-devnull probe and child environment isolation within reading owner; configured business5 summary/content/cache/FF-RF actual adoption; holdouts/full loop.",
   "budget_snapshot": {
     "observed_on": "2026-10-25",
     "observation_ref": "review/market-family-upgrade-20261024/formal-v4-and-cards-root-acceptance-20261025.md",
@@ -406,8 +406,8 @@
   "r2_triage_ref": "review/r1-r2-recovery-triage-20261021.json",
   "initial_execution_paid_calls_preserved": 2,
   "r1_engineering_closeout_ref": "r1-holdout-20261021/engineering-closeout-20261022.json",
-  "publication_status_owner": "review/pdf-c3-20261026/REMAINING_UNIT_PUBLICATION.json",
-  "resume_handoff": "CURRENT_STATUS.md",
+  "publication_status_owner": "review/pdf-c3-20261026/QA_PROVISIONAL_PUBLICATION.json",
+  "resume_handoff": "review/pdf-c3-20261026/PAUSE_HANDOFF_20261028.md",
   "resumed_at": "2026-10-23T18:41:33.912794+00:00",
   "previous_pause_request": "Superseded by user continue2026-10-23",
   "last_updated_at": "2026-10-28",
@@ -806,7 +806,7 @@
     },
     "publication_docs_commit": "fa667547"
   },
-  "next_step_after_publication": "Publish independently accepted PDF3 physical-demand component; isolated declared SDK deployment and one cold probe; formal business5 summary/content/cache/FF-RF; holdouts and full company loop.",
+  "next_step_after_publication": "PAUSE; do not start new work",
   "w08_current_review": {
     "selection_path": "review/r1-w08-material-value-20261024/publication/final-source/selection.json",
     "selection_sha256": "44a9ac20e9b83f67bf99976820cf88b7de592b74b0104fca09abc434c0287904",
@@ -844,7 +844,7 @@
     "PDF-C3: publish accepted metadata/lifecycle/exact-ref engineering delta, then one configured HK real summary + activation/restart/cross-run cache + FF/RF public consumers. Source semantic review and fresh-holdout candidate/summary still OPEN. Continue eight-step company loop; do not repeat W19/skill-sync/C1-C2 comparisons.",
     "Keep C3 semantic/LLM/cache/RF acceptance distinct from installed-byte and isolated FF reuse acceptance; preserve source originals, configured budgets and other-owner WIP."
   ],
-  "last_updated_utc": "2026-10-28T18:15:54.723663+00:00",
+  "last_updated_utc": "2026-10-28T19:02:25.220588+00:00",
   "latest_publish_validation": {
     "source_commit": "1e5e6c1aff3680a46ca9dbab14b322b0f7f9374c",
     "verified_push_head": "f73afb89be1f4caf610432211281e07a14e58c77",
@@ -1952,7 +1952,7 @@
     "engineering_commit": "8a258b93404f351ae92cd3449198b42141ef4169",
     "publication": "review/st-a05-parent-investigation-20261025/publication.json"
   },
-  "last_source_product_commit": "011e376d58a321fab63ee14955b41a8600e27cdf",
+  "last_source_product_commit": "c6c446d0eebc8f6e6f6903bd677c04eebaf65077",
   "a01_a05_local_flow_20261025": {
     "status": "SOURCE_INPUT_INDEPENDENT_PASS12_2; CI_FOLLOWUP483cb2a5_EXACT_CI_SUCCESS",
     "evidence": "review/st-a05-local-flow-20261025/README.md",
@@ -2296,7 +2296,7 @@
     "implementation_authorized_by_user": true,
     "observed_date": "2026-10-26"
   },
-  "current_task_override": "Source common roots accepted/published/exactCI success; PDF PD1 recheck and isolated SDK deployment in progress. No formal current-summary/cache/RF acceptance yet.",
+  "current_task_override": "User requested wrap then pause; only QA provisional completed/published. Source information A/B, actual whole IR, SDK startup, summaries/cache/RF and goal remain incomplete.",
   "skill_sync_root_cause_20261026": {
     "status": "COMPLETE_INDEPENDENT_PASS_ZERO_OPEN",
     "entry": "review/skill-sync-root-cause-20261026/README.md",
@@ -2345,7 +2345,7 @@
     "published": true,
     "push_failure": "47 targets /392 collected /600s; two regressions being root-fixed, not waived by narrower daily gate"
   },
-  "next_action": "Publish independently accepted PDF3 physical-demand component; isolated declared SDK deployment and one cold probe; formal business5 summary/content/cache/FF-RF; holdouts and full company loop.",
+  "next_action": "WAIT_FOR_USER_RESUME",
   "c3_runtime_recovery_20261026": {
     "entry": "review/pdf-c3-20261026/RUNTIME_RECOVERY.md",
     "environment_independent": "PASS_ZERO_OPEN_25_TESTS_AND_REAL_WORKER_ENTRYPOINTS",
@@ -2786,7 +2786,7 @@
     "whole_repeat_forbidden": true,
     "unexecuted_tail": 1021,
     "roots": "shared typed object heads; historical/current model fixture protocols; marker fixture; local harness/imports",
-    "paragraph_WIP": "THREE_FILES_INDEPENDENT_FINAL_PASS_PUBLICATION_PENDING",
+    "paragraph_WIP": "PUBLISHED_CI_SUCCESS",
     "final_review": {
       "status": "PASS",
       "unique_tests": 30,
@@ -2897,5 +2897,89 @@
       "publication_status_owner": "r1-holdout-20261021/engineering-closeout-20261022.json",
       "resume_handoff": "HANDOFF-2026-10-22.md"
     }
+  },
+  "paragraph_demand_publication": {
+    "code_commit": "618df929ffa889424b3346d5299d67b9b1c72709",
+    "branch": "master",
+    "pushed": true,
+    "normal_pre_commit": "PASS",
+    "normal_pre_push": {
+      "passed": 158,
+      "seconds": 32.03
+    },
+    "exact_ci": {
+      "id": 40743943928,
+      "head_sha": "618df929ffa889424b3346d5299d67b9b1c72709",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40743943928",
+      "updated_at": "2026-10-28T18:24:24Z"
+    },
+    "acceptance_scope": "Only PDF physical-demand three reviewed files; formal summary/cache/RF remain OPEN",
+    "independent_review": "evidence/paragraph-demand-20261028/paragraph-demand-independent/independent-v2.json"
+  },
+  "information_content_repair": {
+    "status": "DESIGN_TDD_AND_DIAGNOSIS_IN_PROGRESS",
+    "entry": "review/pdf-c3-20261026/SOURCE_INFORMATION_ROOT_PLAN.md",
+    "independent_preaudit": "38_TASKS_ALL_READ_BUSINESS5_INPUT_SUFFICIENT_PRECISION_ISSUES_OPEN",
+    "real_development_baseline": {
+      "cn_ir": "219units0spans6business_missing",
+      "us_10k": "5215units112spans50of52admitted4of8business"
+    },
+    "no_new_paid_calls": true,
+    "formal_summary": "NOT_EXECUTED_FOR_CURRENT_SOURCE",
+    "specificity_design": "FROZEN_26_BILINGUAL_PLUS3_SAVED_TEXT_OBSERVATIONS_NOT_TEST_RESULTS",
+    "ir_discovery": "UNPUBLISHED_TWOFILE_INDEPENDENT23PASS_ACTUAL_PARTIAL2SPANS_OLD_GOLD0OF6_NOT_COMPLETE",
+    "sdk_runtime": "DEPLOYMENT_PASS_COLD_PROBE_INCONCLUSIVE_DEVICE_GUARD_FALSE_POSITIVE"
+  },
+  "parallel_harness_dispatch": {
+    "entry": "harness_lanes/20261028/README.md",
+    "status": "READY_NOT_DISPATCHED",
+    "independent_card_review": "APPROVE_OPEN0",
+    "priorities": {
+      "W20-AUDIT-CHECKPOINTS": "PRIORITY_READY",
+      "W20-RF-ADOPTION": "PRIORITY_READY",
+      "W20-FF-REPLAY": "OPTIONAL_LATER"
+    },
+    "card_sha256": {
+      "W20-AUDIT-CHECKPOINTS": "1b5897fa7839cb9280b13c6dd45b50c9e4c3bdb7a7db299560d3a82dbc5dc4a9",
+      "W20-RF-ADOPTION": "135ef4a401440cbc722be8449c618c7656070ef980775ce16cf0e9e1c66214c5",
+      "W20-FF-REPLAY": "1be244ad4d7afb319fd9c7f5db0148fe3422813ae80bb2c72d23cd6dde603b5e"
+    },
+    "root_priority_adjustment": "After independent card review, ROOT changed only overview scheduling: two directly support current acceptance; FF is optional. No technical card or reviewed interfaces changed.",
+    "count_policy": "derive task count from remaining work, dependency and receiving cost; never fixed3",
+    "no_author_implementation_started_by_root": true
+  },
+  "owned_uncommitted_runtime": [
+    "src/company_wiki/source_catalog/narrative_pdf_candidates.py",
+    "tests/unit/du11_production/test_pdf_single_column_qa.py"
+  ],
+  "foreign_wip_preserved": [
+    ".githooks/pre-push mode-only",
+    "RF primary assurance/runs daily_alert/weekly_alert/weekly_manifest"
+  ],
+  "pause_requested_by_user": true,
+  "paused_scope": "ROOT mainline only; external lanes remain independent READY",
+  "own_uncommitted_runtime": [],
+  "qa_provisional_publication": {
+    "code_commit": "c6c446d0eebc8f6e6f6903bd677c04eebaf65077",
+    "branch": "master",
+    "pushed": true,
+    "normal_pre_commit": "PASS",
+    "normal_pre_push": {
+      "passed": 158,
+      "seconds": 44.98
+    },
+    "exact_ci": {
+      "id": 40750555849,
+      "head_sha": "c6c446d0eebc8f6e6f6903bd677c04eebaf65077",
+      "status": "in_progress",
+      "conclusion": null,
+      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40750555849",
+      "updated_at": "2026-10-28T19:01:50Z"
+    },
+    "full_CI_status": "PENDING_NOT_SIGNED",
+    "independent_review": "evidence/qa-provisional-20261028/qa-single-independent/independent-v3.json",
+    "scope": "Single-column provisional Q/A discovery and prior-date compatibility only; real whole IR remains OPEN"
   }
 }

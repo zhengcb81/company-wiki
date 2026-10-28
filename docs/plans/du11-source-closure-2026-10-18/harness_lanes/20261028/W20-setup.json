@@ -1,0 +1,61 @@
+{
+  "schema_version": "w20-parallel-setup/1",
+  "lanes": [
+    {
+      "card": "W20-AUDIT-CHECKPOINTS",
+      "source_root": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit",
+      "workdir": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit-w20-checkpoints",
+      "branch": "codex/w20-audit-checkpoints-20261028",
+      "base_commit": "33200f8c947f35be75a77de38040982724e033a7",
+      "primary_tracked_status_before": "",
+      "primary_tracked_status_unchanged": true,
+      "worktree_clean": true,
+      "raw_docs_copied": 0,
+      "model_calls": 0,
+      "provider_calls": 0
+    },
+    {
+      "card": "W20-RF-ADOPTION",
+      "source_root": "C:\\Users\\郑曾波\\Projects\\revenue-forecast",
+      "workdir": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-w20-adoption",
+      "branch": "codex/w20-rf-adoption-20261028",
+      "base_commit": "0991e25d5dca667a3fdafb7bc5ebf0e546a2272b",
+      "primary_tracked_status_before": "M assurance/runs/daily_alert.jsonl\n M assurance/runs/weekly_alert.jsonl\n M assurance/runs/weekly_manifest.json",
+      "primary_tracked_status_unchanged": true,
+      "worktree_clean": true,
+      "raw_docs_copied": 0,
+      "model_calls": 0,
+      "provider_calls": 0,
+      "sparse_checkout": true,
+      "sparse_directories": [
+        "scripts",
+        "tests",
+        "tools",
+        "config",
+        "references",
+        "agents",
+        "assurance",
+        "docs",
+        ".github",
+        ".githooks",
+        "e2e",
+        "compatibility"
+      ],
+      "excluded_tracked_history_bytes": 845794900,
+      "reason": "Avoid checkout of tracked historical .planning/source copies and delivery archives; available read-only through Git"
+    },
+    {
+      "card": "W20-FF-REPLAY",
+      "source_root": "C:\\Users\\郑曾波\\Projects\\filing-fetch",
+      "workdir": "C:\\Users\\郑曾波\\Projects\\filing-fetch-w20-replay",
+      "branch": "codex/w20-ff-replay-20261028",
+      "base_commit": "5396bd688e5b775e746fe3290852f0532d4548f8",
+      "primary_tracked_status_before": "",
+      "primary_tracked_status_unchanged": true,
+      "worktree_clean": true,
+      "raw_docs_copied": 0,
+      "model_calls": 0,
+      "provider_calls": 0
+    }
+  ]
+}

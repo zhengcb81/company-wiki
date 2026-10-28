@@ -1,0 +1,20 @@
+{
+  "code_commit": "618df929ffa889424b3346d5299d67b9b1c72709",
+  "branch": "master",
+  "pushed": true,
+  "normal_pre_commit": "PASS",
+  "normal_pre_push": {
+    "passed": 158,
+    "seconds": 32.03
+  },
+  "exact_ci": {
+    "id": 40743943928,
+    "head_sha": "618df929ffa889424b3346d5299d67b9b1c72709",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40743943928",
+    "updated_at": "2026-10-28T18:24:24Z"
+  },
+  "acceptance_scope": "Only PDF physical-demand three reviewed files; formal summary/cache/RF remain OPEN",
+  "independent_review": "evidence/paragraph-demand-20261028/paragraph-demand-independent/independent-v2.json"
+}

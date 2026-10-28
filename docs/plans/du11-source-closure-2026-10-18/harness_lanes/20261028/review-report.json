@@ -1,0 +1,90 @@
+{
+  "schema_version": "w20-packet-review/1",
+  "reviewer": "/root/ci_source_controls_review",
+  "status": "APPROVE_WITH_TWO_FF_CONTRACT_CLARIFICATIONS",
+  "scope": "Read-only construction-card design review, not implementation or production acceptance",
+  "card_sha256": {
+    "README.md": "07dafed8ebf01eae3c85c6e1dfe93b33d5aa6b6da004e853828a5d792cbe5426",
+    "W20-AUDIT-CHECKPOINTS.md": "1b5897fa7839cb9280b13c6dd45b50c9e4c3bdb7a7db299560d3a82dbc5dc4a9",
+    "W20-RF-ADOPTION.md": "135ef4a401440cbc722be8449c618c7656070ef980775ce16cf0e9e1c66214c5",
+    "W20-FF-REPLAY.md": "74bfa4010aa4bc427bb17b86a2cd80695f39f3aa53e51562d23de0532a734b40",
+    "W20-setup.json": "54a3ee5161fe3489df862d9cff75aae69b62aa65a5044c783afdfd302cc60fb8"
+  },
+  "report_md_sha256": "90e791bbac5d42bf296448236cc73c292377f8106414a3a485b72d69b396aa73",
+  "findings": [
+    {
+      "id": "F1",
+      "priority": "P2",
+      "card": "W20-FF-REPLAY",
+      "status": "OPEN_FOR_ROOT_CARD_CLARIFICATION",
+      "summary": "Pin committed CWP and ET dependency inputs to stable read-only code roots; avoid binding active ROOT WIP primary",
+      "fix": "Freeze commit/public contract in A and prove relevant modules unchanged through the bounded run; preserve counterexample instead of adopting WIP"
+    },
+    {
+      "id": "F2",
+      "priority": "P2",
+      "card": "W20-FF-REPLAY",
+      "status": "OPEN_FOR_ROOT_CARD_CLARIFICATION",
+      "summary": "Distinguish selected/fault-case scope PASS from original mandatory 41-case full coverage",
+      "fix": "Preserve authoritative registry, explicit selected/expected/missing scope and non-upgrade control; no required_cases denominator reduction"
+    }
+  ],
+  "passes": [
+    "disjoint repositories and worktrees",
+    "no inter-card runtime dependency",
+    "four audit roles and expert preserved",
+    "question premise stays context",
+    "RF explicit binding not adoption inference",
+    "durable retry reuse without exactly-once promise",
+    "no duplicate W17 coverage counter/W19 financial provider",
+    "A/B independent continuation; C independent agent review and fixes",
+    "versioned SHA-bound implementation/test/review handoff",
+    "original docs and owner WIP untouched"
+  ],
+  "worktree_observation": [
+    {
+      "card": "W20-AUDIT-CHECKPOINTS",
+      "head": "33200f8c947f35be75a77de38040982724e033a7",
+      "branch": "codex/w20-audit-checkpoints-20261028",
+      "tracked_clean": true,
+      "sparse": false
+    },
+    {
+      "card": "W20-RF-ADOPTION",
+      "head": "0991e25d5dca667a3fdafb7bc5ebf0e546a2272b",
+      "branch": "codex/w20-rf-adoption-20261028",
+      "tracked_clean": true,
+      "sparse": true
+    },
+    {
+      "card": "W20-FF-REPLAY",
+      "head": "5396bd688e5b775e746fe3290852f0532d4548f8",
+      "branch": "codex/w20-ff-replay-20261028",
+      "tracked_clean": true,
+      "sparse": false
+    }
+  ],
+  "primary_observation": {
+    "revenue-forecast": [
+      "M assurance/runs/daily_alert.jsonl",
+      "M assurance/runs/weekly_alert.jsonl",
+      "M assurance/runs/weekly_manifest.json"
+    ],
+    "filing-fetch": [],
+    "revenue-forecast-audit": []
+  },
+  "execution": {
+    "product_changes": 0,
+    "git_mutations": 0,
+    "test_runs": 0,
+    "sdk_model_matrix_runs": 0,
+    "network_download_paid_calls": 0,
+    "secret_reads": 0
+  },
+  "limitations": [
+    "Static review only, no execution proof",
+    "Final card SHA is ROOT responsibility after edits",
+    "Existing FF historical README statuses differ from later DU10 pinned-run evidence and must retain version scope",
+    "AUDIT CodeGraph not initialized; no index creation in this read-only scope"
+  ]
+}
