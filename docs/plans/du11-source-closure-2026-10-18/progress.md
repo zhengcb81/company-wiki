@@ -1440,3 +1440,5 @@ CI0c988e8d/40406128851已于2026-10-26T21:44:13Z completed/success，正常hooks
 母账仍1800368tokens/$0.727945，6新unknown及旧7hold保留，10M/$20配置不变。本轮临时湖及外层根均恢复不存在；原件/生产配置/其他owner不变。当前用户授权继续，原生goal仍不能由工具resume，不冒称控制器active。下方为历史，不覆盖本段和CURRENT_STATUS.json。
 
 2026-10-28：共同oracle已独审通过；原保存输入离线完整来源/实际发送均3/3，未改金标、未重解析PDF或调用模型。原生8+oracle2按最终SHA合并正常发布；下一步来源能力与摘要任务准入，真实新摘要仍未验收。
+
+2026-10-28：5002e8c3已正常推送，precommit PASS/prepush158P37.61秒；精确CI40681137297当前in_progress/None。原生goal新回读active，旧paused观察不覆盖本次。下一步ADMISSION_ROOT_PLAN已纳入唯一PWF入口，先source能力正反例，后共享准入；本次无新模型POST。

@@ -2,15 +2,15 @@
 
 ## 2026-10-28 当前：原生来源闭合根修已独审，真实阻断定位为检查器假阴性
 
-上一批e3411d2e已提交推送，精确CI40677247749 completed/success，precommit通过、prepush158P/33.28秒。当前新增八文件原生悬挂缩进候选已独审PASS/71项，114相关测试通过，全src393文件mypy通过。完整来源读取领域2459P/1新增夹具失败/11skip；失败只因新夹具换文字未同步字体字符范围，已修夹具并定点通过，产品runtime没有因此改动，未重复全量。
+上一批e3411d2e已提交推送，精确CI40677247749 completed/success，precommit通过、prepush158P/33.28秒。新增八文件原生悬挂缩进修复及两文件oracle已正常提交推送`5002e8c3`；precommit通过，prepush158P/37.61秒，精确CI40681137297当前in_progress/None，不借旧CI代签。原生独审PASS/71项，114相关测试通过，全src393文件mypy通过。完整来源读取领域2459P/1新增夹具失败/11skip；失败只因新夹具换文字未同步字体字符范围，已修夹具并定点通过，产品runtime没有因此改动，未重复全量。
 
 原生层保留同一TextPage的真实span origin/direction/bbox/字符对齐，纯几何owner证明marker与正文同baseline，continuity消费正文锚点，原bbox/ID/locator不改。跨源/页/栏/作用域/句尾及新条目边界保留，helper进入已有缓存指纹。实际生产选材8.888秒/5174255 work/112证据，行业云收入本期值/基数/7.6%/两原因进入同一support。没有抬额度或公司特例。
 
 新真实v5 `phaseC-090-64100fdc01a5` 144.15秒在预留前停止，0POST/新增费用。独审确认实际t33支持全文、group和selection_trace与原生复验一致；阻断是旧oracle把同一native range中的1245.4\n百萬元折为带空格，与金标误判不等，不是再次丢失原文。三项关键内容人工检查均在，但检查器修复/实际摘要/恢复/FF-RF尚不能代签。旧付费摘要遗漏2/3结果保留。见[本节点来源/真实证据](review/pdf-c3-20261026/NATIVE_CONTINUITY_RESULT.json)。
 
-**唯一下一步：** 共同oracle已通过中性TDD和独审，旧RED13F/32P、新45P、相关156P，原typedselection+实际HTTP输入离线full_source与sent_tasks均3/3，gold/input未改、0SDK/POST；正常发布本节点后，禁止再为检查器重跑未改变的SDK批次。并优先修来源能力→摘要任务准入的共用缝隙：实际55任务仍含12个低值unknown/description任务（页脚、单位/期间、非公认拆片和纯财务数值等）；先辨识已有源owner为何只降级却仍可生成，保留有效业务描述/Q&A/风险，不简单排除所有unknown。SDK独立104依赖运行时的零大文件复制方案已设计、未部署，启动超时仍OPEN。通过后新正式摘要→激活/缓存→FF/RF实际采用→fresh holdout和完整公司循环。
+**唯一下一步：** 共同oracle已通过中性TDD和独审，旧RED13F/32P、新45P、相关156P，原typedselection+实际HTTP输入离线full_source与已准备请求的sent_tasks均3/3（未POST），gold/input未改、0SDK/POST；本节点已发布，禁止再为检查器重跑未改变的SDK批次。按[摘要准入根修细则](review/pdf-c3-20261026/ADMISSION_ROOT_PLAN.md)先写来源能力正反例，再实施source owner→task admission，compiler只消费判定。并优先修来源能力→摘要任务准入的共用缝隙：实际55任务仍含12个低值unknown/description任务（页脚、单位/期间、非公认拆片和纯财务数值等）；先辨识已有源owner为何只降级却仍可生成，保留有效业务描述/Q&A/风险，不简单排除所有unknown。SDK独立104依赖运行时的零大文件复制方案已设计、未部署，启动超时仍OPEN。通过后新正式摘要→激活/缓存→FF/RF实际采用→fresh holdout和完整公司循环。
 
-母账仍1800368tokens/$0.727945，6新unknown及旧7hold保留，10M/$20配置不变。本轮临时湖及外层根均恢复不存在；原件/生产配置/其他owner不变。当前用户授权继续，原生goal仍不能由工具resume，不冒称控制器active。下方为历史，不覆盖本段和CURRENT_STATUS.json。
+母账仍1800368tokens/$0.727945，6新unknown及旧7hold保留，10M/$20配置不变。本轮临时湖及外层根均恢复不存在；原件/生产配置/其他owner不变。当前用户授权继续，本轮重新读取原生goal实际为active；旧objective2M文字由现配置10M/$20取代，未重复新建目标。下方为历史，不覆盖本段和CURRENT_STATUS.json。
 
 ## 2026-10-28 当前：C3共因工程已发布，真实摘要进行中
 

@@ -1,0 +1,817 @@
+{
+  "schema_version": "c3-source-summary-admission-design/1",
+  "date": "2026-10-28",
+  "status": "READ_ONLY_DESIGN_FROZEN",
+  "actual_evidence": {
+    "files": {
+      ".planning\\c3-20261028\\hk-native-v5\\materials\\phaseC-090-64100fdc01a5.selection.json.gz": {
+        "sha256": "497d9d140461f459c775d189bbc80d88a3ad847dfd226fecd88698b03f97ff21",
+        "bytes": 87334
+      },
+      ".planning\\c3-20261028\\hk-native-v5\\materials\\phaseC-090-64100fdc01a5.input.json.gz": {
+        "sha256": "767d2c3a0e47336d5553b8e23a001d56737f742b8753ce3f26fcb1b571d23adb",
+        "bytes": 15823
+      }
+    },
+    "span_count": 112,
+    "available_tasks": 55,
+    "task_reading_counts": {
+      "(1, 'description', 0)": 23,
+      "(2, 'meaningful_fact', 3)": 22,
+      "(1, 'meaningful_fact', 3)": 10
+    },
+    "first12": [
+      {
+        "key": "t1",
+        "reading": {
+          "priority": 1,
+          "purposes": [
+            "unknown"
+          ],
+          "score": 0,
+          "value_band": "description"
+        },
+        "text": "截至六月三十日止六個月",
+        "source_ids": [
+          "s32"
+        ]
+      },
+      {
+        "key": "t2",
+        "reading": {
+          "priority": 1,
+          "purposes": [
+            "unknown"
+          ],
+          "score": 0,
+          "value_band": "description"
+        },
+        "text": "截至二零二五年六月三十日，我們的現金及現金等價物為人民幣5,464.1百萬元（762.8百萬美元），較截至二\n零二四年十二月三十一日的人民幣2,648.8百萬元增加106.3%。",
+        "source_ids": [
+          "s48"
+        ]
+      },
+      {
+        "key": "t3",
+        "reading": {
+          "priority": 1,
+          "purposes": [
+            "unknown"
+          ],
+          "score": 0,
+          "value_band": "description"
+        },
+        "text": "9  金山云控股有限公司",
+        "source_ids": [
+          "s16"
+        ]
+      },
+      {
+        "key": "t4",
+        "reading": {
+          "priority": 1,
+          "purposes": [
+            "unknown"
+          ],
+          "score": 0,
+          "value_band": "description"
+        },
+        "text": "11  金山云控股有限公司",
+        "source_ids": [
+          "s28"
+        ]
+      },
+      {
+        "key": "t5",
+        "reading": {
+          "priority": 1,
+          "purposes": [
+            "unknown"
+          ],
+          "score": 0,
+          "value_band": "description"
+        },
+        "text": "（除股數和每股數據外，所有金額以千計）",
+        "source_ids": [
+          "s31"
+        ]
+      },
+      {
+        "key": "t6",
+        "reading": {
+          "priority": 1,
+          "purposes": [
+            "unknown"
+          ],
+          "score": 0,
+          "value_band": "description"
+        },
+        "text": "非公",
+        "source_ids": [
+          "s38"
+        ]
+      },
+      {
+        "key": "t7",
+        "reading": {
+          "priority": 1,
+          "purposes": [
+            "unknown"
+          ],
+          "score": 0,
+          "value_band": "description"
+        },
+        "text": "認會計準則毛利為人民幣678.2百萬元（94.7百萬美元），而二零二四年同期則為人民幣622.5百萬元。",
+        "source_ids": [
+          "s39"
+        ]
+      },
+      {
+        "key": "t8",
+        "reading": {
+          "priority": 1,
+          "purposes": [
+            "unknown"
+          ],
+          "score": 0,
+          "value_band": "description"
+        },
+        "text": "非公認",
+        "source_ids": [
+          "s40"
+        ]
+      },
+      {
+        "key": "t9",
+        "reading": {
+          "priority": 1,
+          "purposes": [
+            "unknown"
+          ],
+          "score": 0,
+          "value_band": "description"
+        },
+        "text": "會計準則毛利率為15.7%，而二零二四年同期則為17.0%。",
+        "source_ids": [
+          "s41"
+        ]
+      },
+      {
+        "key": "t10",
+        "reading": {
+          "priority": 1,
+          "purposes": [
+            "unknown"
+          ],
+          "score": 0,
+          "value_band": "description"
+        },
+        "text": "13  金山云控股有限公司",
+        "source_ids": [
+          "s42"
+        ]
+      },
+      {
+        "key": "t11",
+        "reading": {
+          "priority": 1,
+          "purposes": [
+            "unknown"
+          ],
+          "score": 0,
+          "value_band": "description"
+        },
+        "text": "二零二五 中期報告  14",
+        "source_ids": [
+          "s44"
+        ]
+      },
+      {
+        "key": "t12",
+        "reading": {
+          "priority": 1,
+          "purposes": [
+            "unknown"
+          ],
+          "score": 0,
+          "value_band": "description"
+        },
+        "text": "15  金山云控股有限公司",
+        "source_ids": [
+          "s53"
+        ]
+      }
+    ],
+    "selected_controls": [
+      {
+        "key": "t29",
+        "reading": {
+          "priority": 1,
+          "purposes": [
+            "operating"
+          ],
+          "score": 3,
+          "value_band": "meaningful_fact"
+        },
+        "text": "我們持續推進北京－武漢雙研究中心戰略。戰略性地理分佈將有助於我們在人才引進和保留方面取得進一步\n的成功。透過校園招募、社會招募及星雲訓練營項目，我們正快速壯大人才隊伍。截至2024年底，金山雲武\n漢研發中心員工總數（包括實習生和外包員工）已超過620人。展望未來，武漢研究中心對我們培育更壯大的\n人才隊伍、提升技術創新能力至關重要。",
+        "source_ids": [
+          "s24"
+        ]
+      },
+      {
+        "key": "t30",
+        "reading": {
+          "priority": 1,
+          "purposes": [
+            "operating"
+          ],
+          "score": 3,
+          "value_band": "meaningful_fact"
+        },
+        "text": "報告期內，我們的研發費用為人民幣420.5百萬元（58.7百萬美元），而截至二零二五年六月三十日，我們的\n研發人員達1,094人。",
+        "source_ids": [
+          "s25"
+        ]
+      },
+      {
+        "key": "t31",
+        "reading": {
+          "priority": 1,
+          "purposes": [
+            "operating"
+          ],
+          "score": 3,
+          "value_band": "meaningful_fact"
+        },
+        "text": "展望下半年，我們將維持高質量發展和可持續發展戰略，不斷投資技術研發，並全面提升AI能力。同時，我\n們將積極擁抱AI時代小米和金山生態系統的雲需求。我們旨在持續為客戶、股東、員工和社會創造價值。",
+        "source_ids": [
+          "s27"
+        ]
+      },
+      {
+        "key": "t33",
+        "reading": {
+          "priority": 1,
+          "purposes": [
+            "operating_metric"
+          ],
+          "score": 3,
+          "value_band": "meaningful_fact"
+        },
+        "text": "• \n來自行業雲服務的收入為人民幣1,340.4百萬元（187.1百萬美元），較二零二四年同期的人民幣1,245.4\n百萬元增加7.6%。該同比增加主要是由於不斷增長的IT需求及我們向垂直行業客戶複製行業解決方案\n的能力。",
+        "source_ids": [
+          "s35"
+        ]
+      },
+      {
+        "key": "t34",
+        "reading": {
+          "priority": 1,
+          "purposes": [
+            "unknown"
+          ],
+          "score": 3,
+          "value_band": "meaningful_fact"
+        },
+        "text": "我們繼續加強成本控制措施。二零二五年上半年，互聯網數據中心成本由人民幣1,496.8百萬元同比\n增加1.9%至人民幣1,525.9百萬元（213.0百萬美元）。該增加主要是由於基礎設施需求日益增加（這與我們的\nAI業務擴張相一致）及AI帶來的基本雲增長。",
+        "source_ids": [
+          "s36"
+        ]
+      },
+      {
+        "key": "t35",
+        "reading": {
+          "priority": 1,
+          "purposes": [
+            "unknown"
+          ],
+          "score": 3,
+          "value_band": "meaningful_fact"
+        },
+        "text": "毛利為人民幣657.2百萬元（91.7百萬美元），較二零二四年同期的人民幣611.6百萬元增加7.4%。該改善主\n要是由於我們的收入規模擴張較快及收入組合優化。毛利率為15.2%，而二零二四年同期則為16.7%。該減\n少主要是由於隨著AI業務擴張，服務器成本增加，以及若干客戶的進一步營收活動所產生的前期成本。",
+        "source_ids": [
+          "s37"
+        ]
+      },
+      {
+        "key": "t37",
+        "reading": {
+          "priority": 2,
+          "purposes": [
+            "unknown"
+          ],
+          "score": 3,
+          "value_band": "meaningful_fact"
+        },
+        "text": "我們的大部分業務以人民幣進行交易，有交易貨幣風險敞口。我們的若干銀行結餘、其他應收賬款以及應計\n費用及其他應付賬款以外幣計值，並面臨外幣風險。我們目前並無外幣對沖政策。然而，我們的管理層會監\n察外匯風險，並將於未來需要時考慮適當的對沖措施。",
+        "source_ids": [
+          "s50"
+        ]
+      },
+      {
+        "key": "t38",
+        "reading": {
+          "priority": 1,
+          "purposes": [
+            "operating_investment_disclosure"
+          ],
+          "score": 3,
+          "value_band": "meaningful_fact"
+        },
+        "text": "截至二零二五年六月三十日，本集團並無持有任何重大投資（包括對被投資公司的任何投資價值佔本集團截\n至二零二五年六月三十日總資產的5%或以上）。截至二零二五年六月三十日，本集團並無任何未來重大投資\n及資本資產計劃。",
+        "source_ids": [
+          "s52"
+        ]
+      },
+      {
+        "key": "t39",
+        "reading": {
+          "priority": 2,
+          "purposes": [
+            "unknown"
+          ],
+          "score": 3,
+          "value_band": "meaningful_fact"
+        },
+        "text": "二零一三年購股權計劃自二零一三年二月二十七日起有效期為十年。截至最後實際可行日期，二零一三年購\n股權計劃的期限已屆滿，惟該計劃的條文仍具有十足效力及作用，以使在該計劃終止前授出的任何購股權\n（以尚未行使者為限）有效行使或根據該計劃的條文可能規定的其他情況有效行使。",
+        "source_ids": [
+          "s56"
+        ]
+      },
+      {
+        "key": "t41",
+        "reading": {
+          "priority": 2,
+          "purposes": [
+            "operating"
+          ],
+          "score": 3,
+          "value_band": "meaningful_fact"
+        },
+        "text": "二零二一年股權激勵計劃旨在通過將本集團的董事及員工以及本集團服務提供商的個人利益與股東的個人利\n益聯繫起來及通過就優異表現向有關人士提供獎勵以期為股東帶來豐厚回報促進本公司的成功及提升本公司\n的價值。二零二一年股權激勵計劃亦旨在使本公司能靈活激勵、吸引及挽留本集團的董事及員工以及本集團\n的服務提供商使之提供服務，而本公司能否成功經營業務主要取決於該等人士的判斷、利益及特別努力。",
+        "source_ids": [
+          "s62"
+        ]
+      },
+      {
+        "key": "t44",
+        "reading": {
+          "priority": 2,
+          "purposes": [
+            "unknown"
+          ],
+          "score": 3,
+          "value_band": "meaningful_fact"
+        },
+        "text": "於報告期內，本公司並無涉及任何可能對本集團經營造成重大不利影響的重大訴訟或仲裁。於報告期內，董\n事亦不知悉本集團有任何待決的或針對本集團提起的重大訴訟或申索。",
+        "source_ids": [
+          "s72"
+        ]
+      },
+      {
+        "key": "t50",
+        "reading": {
+          "priority": 2,
+          "purposes": [
+            "unknown"
+          ],
+          "score": 3,
+          "value_band": "meaningful_fact"
+        },
+        "text": "有鑒於此，管理層在評估本集團是否有足夠的財務資源持續經營時，已審慎考慮本集團的未來流動資金\n及表現以及其可用融資來源。截至二零二五年六月三十日，本集團擁有現金、現金等價物以及受限制現\n金人民幣5,517,128元（770,162美元）。此外，本集團擁有銀行及其他金融機構的現有信貸融資，為本\n集團日後的營運及資本開支提供資金。",
+        "source_ids": [
+          "s87"
+        ]
+      },
+      {
+        "key": "t51",
+        "reading": {
+          "priority": 2,
+          "purposes": [
+            "operating_metric"
+          ],
+          "score": 3,
+          "value_band": "meaningful_fact"
+        },
+        "text": "對於不易於確定公平值且不符合ASC 820公平值計量及披露（「ASC 820」）中的現有可行權宜\n方法使用投資的每股資產淨值（或其等價物）估計公平值的股權證券，本集團選擇使用替代計量方\n法，按成本減任何減值，加上或減去同一發行人的相同或類似投資（如有）的有序交易中的可觀察\n價格變動計量其所有投資。",
+        "source_ids": [
+          "s91"
+        ]
+      },
+      {
+        "key": "t55",
+        "reading": {
+          "priority": 2,
+          "purposes": [
+            "operating"
+          ],
+          "score": 3,
+          "value_band": "meaningful_fact"
+        },
+        "text": "本集團採用月度使用記錄（一種產出計量）來確認一段時間內的收\n入，因為此種計量方法最真實地描述了服務的同時消費和交付。",
+        "source_ids": [
+          "s105"
+        ]
+      }
+    ],
+    "output_plan": {
+      "configured_output_tokens": 8192,
+      "coverage": "selected_source_tasks_only",
+      "max_claims": 40,
+      "max_claims_per_task": 2,
+      "planning": "soft_target_within_existing_caps",
+      "target_claim_count": 24,
+      "target_text_chars": 240
+    },
+    "selection": {
+      "candidate_count": 1042,
+      "coverage_complete": false,
+      "dropped_financial_count": 616,
+      "lines_total": 0,
+      "omitted_candidate_count": 930,
+      "pages_read": 75,
+      "pages_total": 75,
+      "selected_count": 112,
+      "source_units": 1794,
+      "status": "partial",
+      "tables_scanned": 1,
+      "tables_total": 2
+    },
+    "trace_counts": {
+      "admitted_count": 104,
+      "count": 799,
+      "limited": true,
+      "rejected_count": 695,
+      "rejection_counts": {
+        "financial_only": 188,
+        "no_supported_business_signal": 481,
+        "non_narrative_unit": 15,
+        "non_operating_purpose": 11
+      }
+    },
+    "tasks13_23": [
+      {
+        "key": "t13",
+        "reading": {
+          "priority": 2,
+          "purposes": [
+            "unknown"
+          ],
+          "score": 3,
+          "value_band": "meaningful_fact"
+        },
+        "text": "本集團目前並無涉及可能對本集團的業務、財務狀況或經營業績造成重大不利影響的法律或行政訴訟。",
+        "source_ids": [
+          "s109"
+        ]
+      },
+      {
+        "key": "t14",
+        "reading": {
+          "priority": 2,
+          "purposes": [
+            "operating"
+          ],
+          "score": 3,
+          "value_band": "meaningful_fact"
+        },
+        "text": "根據《國際財務報告準則》，對已滿足服務條件的購股權及受限制股份單位的股權激勵費用，按滿足條件之可\n能性入賬並作為本集團對最終將予歸屬的權益工具數量的最佳估計的一部分進行評估。",
+        "source_ids": [
+          "s112"
+        ]
+      },
+      {
+        "key": "t15",
+        "reading": {
+          "priority": 2,
+          "purposes": [
+            "unknown"
+          ],
+          "score": 3,
+          "value_band": "meaningful_fact"
+        },
+        "text": "我們將非公認會計準則經營虧損界定為不包\n括股權激勵費用及無形資產攤銷的經營虧損，而我們將非公認會計準則經營虧損率界定為非公認會計準則經\n營虧損佔收入的百分比。",
+        "source_ids": [
+          "s2"
+        ]
+      },
+      {
+        "key": "t16",
+        "reading": {
+          "priority": 2,
+          "purposes": [
+            "unknown"
+          ],
+          "score": 3,
+          "value_band": "meaningful_fact"
+        },
+        "text": "下表將我們於截至二零二四年及二零二五年六月三十日止六個月的經調整淨虧損\n（淨虧損率）\n（非公認會計準則財務指標）、經調整EBITDA（EBITDA利潤率）\n（非公認會計準則財務指標）及經調\n整經營虧損（經調整經營虧損率）\n（非公認會計準則財務指標）與根據美國公認會計準則計算及呈列的最直接可\n比財務指標進行對賬。",
+        "source_ids": [
+          "s3"
+        ]
+      },
+      {
+        "key": "t17",
+        "reading": {
+          "priority": 1,
+          "purposes": [
+            "unknown"
+          ],
+          "score": 0,
+          "value_band": "description"
+        },
+        "text": "我們繼續堅持高質量、可持續發展的原則，「技術立業」。",
+        "source_ids": [
+          "s6"
+        ]
+      },
+      {
+        "key": "t18",
+        "reading": {
+          "priority": 1,
+          "purposes": [
+            "unknown"
+          ],
+          "score": 0,
+          "value_band": "description"
+        },
+        "text": "我們以客戶為中心，在業務全過程中鑄就聲譽，加\n強業務和運營管理。",
+        "source_ids": [
+          "s7"
+        ]
+      },
+      {
+        "key": "t19",
+        "reading": {
+          "priority": 1,
+          "purposes": [
+            "operating_metric"
+          ],
+          "score": 3,
+          "value_band": "meaningful_fact"
+        },
+        "text": "於報告期內，總收入達到人民幣4,319.2百萬元（602.9百萬美元），較去年同期的人民幣3,667.5百萬元增加\n17.8%。該增加主要是由於AI相關客戶收入增長強勁及我們擴展行業雲項目，但部分被我們主動縮減提供予\n內容分發網絡(CDN)客戶的服務規模所抵銷。公有雲服務收入為人民幣2,978.8百萬元（415.8百萬美元），\n行業雲服務收入為人民幣1,340.4百萬元（187.1百萬美元）。",
+        "source_ids": [
+          "s8"
+        ]
+      },
+      {
+        "key": "t20",
+        "reading": {
+          "priority": 1,
+          "purposes": [
+            "unknown"
+          ],
+          "score": 0,
+          "value_band": "description"
+        },
+        "text": "毛利為人民幣657.2百萬元（91.7百萬美元），\n較二零二四年上半年的人民幣611.6百萬元增長7.4%。毛利率為15.2%，而二零二四年同期則為16.7%。",
+        "source_ids": [
+          "s9"
+        ]
+      },
+      {
+        "key": "t21",
+        "reading": {
+          "priority": 1,
+          "purposes": [
+            "unknown"
+          ],
+          "score": 0,
+          "value_band": "description"
+        },
+        "text": "我們憑藉廣泛的基礎設施提供全套雲產品，並基於相同的基礎技術能力打造我們的行業解決方案。",
+        "source_ids": [
+          "s11"
+        ]
+      },
+      {
+        "key": "t22",
+        "reading": {
+          "priority": 1,
+          "purposes": [
+            "operating"
+          ],
+          "score": 3,
+          "value_band": "meaningful_fact"
+        },
+        "text": "我們的模\n塊化雲產品，包括統一的IaaS基礎設施、PaaS層、SaaS應用軟件、AI能力及交付服務，可用於設計不同的解\n決方案，以滿足各種業務需求。",
+        "source_ids": [
+          "s12"
+        ]
+      },
+      {
+        "key": "t23",
+        "reading": {
+          "priority": 1,
+          "purposes": [
+            "unknown"
+          ],
+          "score": 0,
+          "value_band": "description"
+        },
+        "text": "我們設計了各種行業特定解決方案，可以釋放我們基礎設施資源的全部潛力並為我們的客戶創造價值。作為\n行業先行者，憑藉我們深厚的行業洞察力，我們已戰略性地將業務範圍擴展至選定的垂直行業，並通過不懈\n的執行力建立了領先的市場地位。隨著我們持續為垂直行業的領先客戶提供服務，我們的產品和解決方案將\n不斷根據客戶的反饋進行迭代和調整。",
+        "source_ids": [
+          "s13"
+        ]
+      }
+    ]
+  },
+  "code_evidence": [
+    {
+      "path": "src/company_wiki/source_catalog/narrative_reading.py",
+      "lf_sha256": "51ecc1ca4ba55f170786af2d7aea28ee5dfe05cf9f0d2711d8f617ef16cd74b9",
+      "symbols": {
+        "_admitted": 58,
+        "_candidates": 548
+      }
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_policy.py",
+      "lf_sha256": "57a2a8a74be95833613a78524109e6c82b3cd75649c769c384b17efeac81b235",
+      "symbols": {
+        "_purpose_fact": 848,
+        "reading_financial_only": 884
+      }
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_disclosures.py",
+      "lf_sha256": "3818577d5249f2d517ae26eb5c2877cf1bf375858ed19559ebfd43f091360351",
+      "symbols": {
+        "reading_material_value": 514
+      }
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_source_purpose.py",
+      "lf_sha256": "46863005b09a3eefb8c0befb83f4a3c1078b33f38661d032df9c1256f3b65156",
+      "symbols": {
+        "_clause_purpose": 138
+      }
+    },
+    {
+      "path": "src/company_wiki/document_understanding/summary_tasks.py",
+      "lf_sha256": "2163f1a683114548a123ccad595c03f0e93520aa3f7d8eb42ebfd509ef942bb2",
+      "symbols": {
+        "build_summary_task_plan": 76
+      }
+    },
+    {
+      "path": "src/company_wiki/document_understanding/source_cards.py",
+      "lf_sha256": "e769d288d6fc20735319db027fe21a03e6b121a6144bcded9c22bab324d1ba29",
+      "symbols": {
+        "source_task_admission": 62,
+        "source_cards": 81,
+        "reading_hint": 31
+      }
+    },
+    {
+      "path": "src/company_wiki/automation/narrative_model_scoped.py",
+      "lf_sha256": "873a5ae5c027cd38c9068c9180b837e0b4950d2b2b62276ad732c98ea7b54685",
+      "symbols": {
+        "scoped_boundary_identity": 85,
+        "compile_scoped_model_view": 413,
+        "resolve_basis": 393
+      }
+    },
+    {
+      "path": "src/company_wiki/automation/narrative_summary_execution.py",
+      "lf_sha256": "0c6dd028c36bac773535090025be1a3f92b2d4eb12f8c9275c9338d3db94985d",
+      "symbols": {}
+    }
+  ],
+  "root_findings": [
+    {
+      "owner": "narrative_reading._admitted",
+      "gap": "section_role in BUSINESS_ROLES admits retrieval descriptions even when no eligible fact exists"
+    },
+    {
+      "owner": "reading_material_value + _candidates",
+      "gap": "description downgrades do not remove support status; section reading priority and role topics remain"
+    },
+    {
+      "owner": "summary_tasks.build_summary_task_plan",
+      "gap": "every native citation view/ungrouped selected span becomes a task without a statement-support capability"
+    },
+    {
+      "owner": "source_cards + source_task_admission",
+      "gap": "parsed/nonempty/no known ambiguous table implies admitted after exact scope dedup; reading hints are not generation suitability"
+    },
+    {
+      "owner": "existing source purpose/relationships",
+      "gap": "Some actual accounting/definition/incentive material is already meaningful or operating_metric; a downstream band/score threshold cannot fix this false-positive class"
+    }
+  ],
+  "proposed_contract": {
+    "separate": [
+      "raw readable and traceable availability",
+      "closed source-owned factual support scope",
+      "suitability for current business summary intent"
+    ],
+    "minimal_source_projection": {
+      "proposed_field": "reading_support_use",
+      "values": [
+        "support",
+        "context_only",
+        "unresolved"
+      ],
+      "additional": "one bounded source-owned reason; bind to exact support/context citation view, not isolated span votes",
+      "not": "permission, authorization or a second workflow"
+    },
+    "preserve_existing": [
+      "raw/source IDs/locator/member order",
+      "Q&A roles and support/context partition",
+      "purpose/priority/value/score from sole source owner",
+      "shared WorkBudget and actual configured limits"
+    ],
+    "readable_availability": "SourceCard.available remains physical reference availability; do not relabel readable context as unparsed",
+    "generation_admission": "One existing source_task_admission consumes source use and source purpose for the current intent; never parse text again in compiler",
+    "unknown_policy": "Unknown/description/score0 alone never deny. Complete qualitative business mechanisms, risks, resources, future and actual operating causes remain eligible under source evidence; unassessed semantics stay retrievable and explicitly deferred",
+    "source_policy_correction": "Rule-vs-event, accounting metric-vs-operating object, incentive scheme-vs-resource, auditor-vs-issuer are distinguished in existing source owners"
+  },
+  "next_files": [
+    {
+      "path": "src/company_wiki/source_catalog/narrative_reading.py",
+      "change": "Split broad retrieval admission from source support use; project exact group/view use after closure and before budgeted selection. Detached context cannot be an independent summary anchor."
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_policy.py",
+      "change": "Reuse source-bound objects/relations and existing purpose; ensure quantity/activity of a financial rule is not an operating exemption. Preserve qualitative unknown positives."
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_source_purpose.py",
+      "change": "Target actual shared rule/event/definition false positives with neutral multilingual contrasts; no company/page/task or accounting-chapter blacklist."
+    },
+    {
+      "path": "src/company_wiki/document_understanding/summary_tasks.py",
+      "change": "Carry source use by reference in native task binding if needed; keep canonical full plan, native order and support/context; no rank or prose parsing."
+    },
+    {
+      "path": "src/company_wiki/document_understanding/source_cards.py",
+      "change": "Keep read availability separate; source_task_admission maps source use into executable/context/unresolved and exact-scope duplicate dispositions."
+    },
+    {
+      "path": "src/company_wiki/automation/narrative_summary_execution.py",
+      "change": "Only if required: extend existing bounded reason/disposition contract to reflect context/unresolved accurately; retain old receipts by old identity."
+    },
+    {
+      "path": "src/company_wiki/automation/narrative_model_scoped.py",
+      "change": "Expected consumer only: existing admitted filtering/resolve_basis/source-card SHA identity should suffice. No financial/reference text classifier or new rank."
+    }
+  ],
+  "test_plan_not_executed": [
+    {
+      "path": "tests/unit/document_understanding_selection/test_summary_source_admission.py",
+      "cases": "Existing A owner: unknown/description complete qualitative business vs section-only footer/caption/date/fragment; preserved finance-with-operating-causes/resource/future/risk negatives."
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_material_value.py",
+      "cases": "Value remains independent of support capability: score0 description need not disappear and meaningful false policy cases cannot bypass source use."
+    },
+    {
+      "path": "tests/unit/test_source_summary_tasks.py",
+      "cases": "Full canonical task plan retained; source-owned use round-trip by exact citation view; operating-table and Q&A support/context closure remains."
+    },
+    {
+      "path": "tests/unit/test_scoped_source_capability.py",
+      "proposed_new_if_no_existing_owner_test": true,
+      "cases": "Same source admission reaches actual material and resolve_basis; context/unresolved not executable; legacy reading remains valid; new generation pin changes; no padding/rank or widened caps."
+    }
+  ],
+  "tdd_invariants": [
+    "Readable original bytes are retained; context-only is not bad parsing or discarded from source retrieval.",
+    "Unknown purpose/description/score0 are not global deny rules; actual t21 qualitative mechanism and t34/t35 unknown operating causes are positive controls.",
+    "Resource stock and future action, risk constraints/negation, no future material investment, and service billing/delivery notes keep native roles/modality/period.",
+    "Date/unit/header/footer cannot autonomously support a business claim; split qualifiers need source-proved closure or unresolved.",
+    "Financial snapshot can be complete source information while unsuitable as standalone business update; financial drivers remain useful.",
+    "A meaningful/operating_metric tag is insufficient when source object is an accounting rule or incentive mechanism.",
+    "No cross-task borrowing, source text joining, company/page/task checks, token increase, fixed description quota or second paid ranking.",
+    "No context donation of priority or capability; identical text does not merge distinct stage/period/role views.",
+    "Shared selection budget remains bounded; downstream packet filtering alone does not prove recovery of omitted candidates.",
+    "Actual source/sent gold remains unchanged; smaller or empty material never constitutes a content pass."
+  ],
+  "rollout": [
+    "Freeze neutral RED around the existing source admission owner and actual first12/positive selected controls without hardcoding their addresses.",
+    "Implement source support projection and policy object corrections, then one shared card admission consumer and bounded diagnostic integration.",
+    "Run targeted source/task/scoped/legacy controls and independent major-node review; no repeated heavy PDF/model batches.",
+    "Replay only saved112-span projection offline with0POST; cannot claim full1042-candidate selection or recovered capacity from this snapshot.",
+    "After root source fix changes identity, one original-budget source+actual-sent validation then scheduled actual final summary review; retain failed artifacts and all costs."
+  ],
+  "risks": [
+    "The full source candidate prose/relationships are not all present in selected snapshot; cannot fully replay new selection.",
+    "Existing source eligible/purpose labels have residual false positives; annotating capability with the same uncorrected labels will not close the gap.",
+    "Annotation must be support-scope owned so incomplete individual table cells and complete qualified table groups are not conflated.",
+    "Legacy selection without source-use metadata is unassessed, not automatically proven; do not reinterpret historical completed results.",
+    "Existing extractive /5 compatibility and execution receipt enums consume SourceCard.available separately; avoid silent behavior conflation.",
+    "Actual final model behavior has not been tested by this design."
+  ],
+  "performed": {
+    "gz_and_source_reads": true,
+    "source_helper_replay": false,
+    "tests": 0,
+    "PDF_reads": 0,
+    "SDK_runs": 0,
+    "LLM_calls": 0,
+    "product_edits": 0,
+    "shared_PWF_edits": 0
+  }
+}

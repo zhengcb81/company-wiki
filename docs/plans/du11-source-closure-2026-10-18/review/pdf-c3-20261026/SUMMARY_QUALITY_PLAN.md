@@ -97,3 +97,5 @@ A v3+B v2共19文件工程独审PASS/51项，全src391 mypy PASS，308项指标�
 优先B：来源能力与摘要任务准入共因。v5前12个任务仍为unknown/description/priority1/score0，其中页脚、单位/期间、非GAAP碎片和纯财务数值能够占用生成槽。先检查现有source purpose/value/furniture/financial判定与compiler准入衔接，定义资料可见但不可单独形成业务摘要的类型；保留有价值的未知业务描述、风险、Q&A、经营资源及计划。中性正反例和实际保存材料复验，不用公司/页脚字面名单，不按全部unknown一刀切，不靠prompt软目标解决source能力缺口。
 
 后续SDK隔离按现有environment闭包owner/专用venv/RECORD硬链接设计另行实施；不复制GB权重/SDK、不改全局包、不抬120秒/4GiB。只有recipe或执行方案实质改变才再次端到端。来源、真实摘要、缓存、FF/RF实际采用、新holdout和公司循环分别留证，不能因本源节点通过宣布全部项目完成。
+
+具体下一阶段已冻结为[ADMISSION_ROOT_PLAN](ADMISSION_ROOT_PLAN.md)及同名JSON，包含已保存55任务、具体owner、正反例与层间接线。原生+oracle已发布5002e8c3，三关键来源/准备请求离线3/3；无新摘要通过。原生goal本轮新回读active。

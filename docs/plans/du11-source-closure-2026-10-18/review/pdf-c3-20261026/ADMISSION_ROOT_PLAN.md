@@ -1,0 +1,69 @@
+# 可读来源与摘要支持的准入缺口：只读根因设计
+
+结论：低价值分类已经产生，但没有形成“该闭合来源scope能否独立支持本次业务摘要”的契约。来源阅读层为召回而允许业务章节中的描述材料；任务层把所有来源view变成task；source-card把parsed/nonempty视为可用，仅阻断已知数表歧义。因此footer、单位/期间caption、断词和孤立财务数都能获得合法task与basis。软target已不强迫填满，但无法撤销这些错误支持能力。
+
+还存在第二类来源语义问题：若会计规则、股权计划目的等已被误标meaningful或operating_metric，仅加value_band过滤仍会漏。推荐先建立可读性/完整支持能力/此次用途的分离，再在已有purpose/relationship owner根修这类误判。不能在摘要compiler再造财务词表、指代解析或业务rank。
+
+## 实际证据与边界
+
+只读资料：hk-native-v5 `phaseC-090-64100fdc01a5.selection.json.gz` 与 `.input.json.gz`，压缩字节SHA与8个代码owner的LF SHA见同名json。未跑helper、测试、PDF、SDK或LLM，只解析已有gzip/JSON和源码AST。
+
+- selection共112 spans，coverage_complete=false；source阅读1042候选/选择112。admission trace记录799次、104 admitted/695 rejected，抽样limited=true，不能把该104当实际task数或全量candidate证明。
+- 实际请求55任务：23个priority=1/description/score=0；10个priority=1/meaningful_fact/score=3；22个priority=2/meaningful_fact/score=3。**首12个均为description，但不是前23个都为description。** source优先级数字来自来源意图，不是已证明价值。
+- t1仅期间，t5仅单位说明；t3/4/10/11/12是footer；t6、t8是“非公”“非公認”，t7/9各为缺失完整GAAP限定的尾段；t2完整现金快照仍是本次经营摘要的低价值独立财务总额。这里分为“支持不完整”和“支持完整但用途不适合”，不能混成同一种坏解析。
+- t21也是unknown/description/score0，却包含基础设施→产品→行业解决方案的完整定性关系；不能将unknown或description一刀切。t34/35为unknown但有实际成本/毛利原因，t37为风险敞口与无对冲政策，t30研发资源、t31未来计划、t38明确无未来重大投资均须保留相应用途和模态。
+- t14会计股权激励规则、t15非GAAP定义、t16对账说明、t39股权计划年期、t41激励计划目的、t51公平值计量政策已获得meaningful，部分purpose甚至为operating/operating_metric。因此“score>0才发”“只发meaningful”“purpose非unknown才发”都不是共享根修。具体哪个谓词导致每个误判本轮没有执行重放，不冒称已经逐项定位。
+- t55的服务月度使用记录/交付对应收入确认是有业务机制的财注正例；t50有持续经营评估和融资可用性上下文。不能通过删除整章财注、所有现金/收入/成本词来过滤。
+
+## 代码链证据
+
+1. `source_catalog/narrative_reading.py::_admitted:58`：既有非经营purpose、financial_only、非叙述marker及heading检查后，`scoped = section_role in _BUSINESS_ROLES`即可admit；并未要求fact.eligible。Chinese字词footer/单位caption含isalpha字符，不能靠既有纯数字/outline过滤覆盖。
+2. `_candidates:548`在该结果后才解释meaningful，弱描述仍继承章节priority；description还获得章节scope_topics。`narrative_business_disclosures.py::reading_material_value:514`明确只解释价值、不改变准入。因此降为description本来就不等于不能被下游引用。
+3. `narrative_business_policy.py::reading_financial_only:884`是既有金融谓词与source-purpose投影的责任层；SOURCE_ACCOUNTING并不覆盖所有现金/毛利表达，完整non-GAAP词组又可能被原生断开。实际metadata证明这些片段未被阻断，但没有必要在compiler复制一份更长的词表。
+4. `document_understanding/summary_tasks.py::build_summary_task_plan:76`保留每个来源citation view，并把未分组span注册成standalone task。它只验证来源/成员/顺序/分区，不判断独立陈述能力，符合引用视图职责。
+5. `source_cards.py::source_cards:81`只检查成员parsed/nonempty及table_structure_ambiguous；`source_task_admission:62`只依据available和精确scope去重给admitted。`reading_hint:31`将priority/value/score/purpose投影为提示，未参与可执行性。
+6. `automation/narrative_model_scoped.py::compile_scoped_model_view:413`消费上述admission；model_tasks仅筛status=admitted。resolve_basis验证的是本地support ID，不验证语义/限定完整性，所以当前footer也能成为结构合法basis。instruction虽已禁止padding和无主体原因，不能代替来源能力判断。
+
+## 建议契约：三件事分开
+
+| 层面 | 含义 | 本次片段例子 | 责任 |
+|---|---|---|---|
+| 可读/可追溯 | 原文存在、parsed、source/locator可回放 | footer、单位caption也满足 | 现有source/SourceCard.available；不改成“坏来源” |
+| 完整支持能力 | 闭合scope是否独立支持带主体/限定的陈述，或仅为另一事实的上下文 | 日期/单位是context；缺GAAP前缀是unresolved；完整定性机制可support | 来源原生group/reference/purpose/operating owner |
+| 此次摘要适用性 | 已完整内容是否适合当前source-oriented业务摘要 | 独立现金总额通常只作资料；经营原因、风险边界、资源和计划可用 | 来源已判用途＋共享source_task_admission消费，不重解析正文 |
+
+最小投影建议（名称供实施owner统一，不是新许可协议）：在现有reading structured_value/来源citation view上携带 `reading_support_use = support | context_only | unresolved` 及一个有界reason。判断按**source-owned support scope**，不是逐字符或每span单独投票；表格需要完整headers/period/unit，Q&A需要完整attribution/问答依赖。同一caption可作为别的合格scope的context，却不能单独变fact。实际可用字段先复用已有结构、reference状态、purpose与关系证据，不增加第二份plan/rank。
+
+`SourceCard.available`继续表示引用可物化；摘要admission另消费来源use和当前用途，保留完整canonical source plan及对未执行scope的原因。不要把context_only伪标source_not_parsed，也不要通过needs_review/uncertain把不闭合支持重新放行。raw原文、ID、locator、support/context分区和完整成员不变；缺前缀只由原生闭合owner在有证明时恢复，compiler不得拼t6+t7或借邻task补限定。
+
+来源判断不能直接写成“fact.eligible/meaningful为真才support”。description的具体经营机制、未知状态但有完整产品/客户/流程关系的定性事实仍可support；没有数字不扣能力。若现有识别尚无法判断，应明确unassessed/unresolved并保留资料召回与诊断，不能冒充财务坏行或从检索中删除。明确未知状态本身不变成商业进展或financial_exempt。
+
+对于意义已误判的会计/计划规则，使用现有source_purpose与源绑定关系：区分规则条件与实际事件、会计计量对象与业务指标、激励计划与经营资源、审计行为与公司行为；用相同动词/数字但不同对象和语用的中性正反例固定，而不是新增公司/词句黑名单。完整风险限制、明确否定、未来投资披露、服务计费/交付机制不能因财经章节被排除。
+
+## 责任边界、资源与兼容
+
+来源层先做scope闭合，再给support use，最后按既有预算选完整包。只靠summary边界过滤虽能净化模型packet，**不会追回已经被caption/footer占用的112 selection预算**；本次reading diagnostics已有selection_spans budget_full观察。完整claimable anchor及其必需context应在同一既有账户被选择，孤立context不应因章节priority1成为另一anchor。不新增“只许N个描述”的quota，也不在B重排所有source任务。
+
+建议实施顺序：A复用 `_admitted/_candidates` 与已有source-purpose/continuity关系owner生产有界use；B在既有source_task_admission统一映射，并由task投影携带来源判定；C仅按需要更新现有execution reason枚举和observer，不能保留“admitted表示可读”而继续让caller误用。旧/5显式兼容的原文卡不充当正式摘要；不要为清理packet把所有SourceCard.available改False，破坏资料使用与旧读取。
+
+旧selection缺use需标legacy/unassessed；新付费生成应消费当前来源投影，不能缺字段默认声明闭合，也不在模型边界临时解析旧文本。历史已完成产物按原版本只读，不重新贴新能力标签。既有reading policy/producer/implementation hash、selection bundle和scoped boundary（已含source_card owner SHA）负责新语义身份，不另建授权、门禁、任务库或缓存。
+
+Q&A不得因为question不能作公司声明而丢整个回答；来源view继续区分question、answer、operator/context及unclear attribution。风险的否定/条件、资源存量的期间与人头口径、未来模态、无未来投资、财注经营原因均作为正例完整贯通，context不能向support捐优先级或关系。
+
+## 先TDD的可执行验证设计（本轮未执行）
+
+1. 来源中性RED：业务章节中footer/单位/日期/断半财务限定均可读但不得独立support；完整经营说明即使purpose未知、score0/description、无数字仍可support。无章节证明的碎片不得借section title成事实。
+2. 用同一语义作简/繁/英和原生断行变体：完整non-GAAP定义/财务快照与有经营原因的财务段区分；prefix丢失为unresolved；原生证明闭合后保完整限定，不能跨task拼。
+3. 规则/事件反控：股权激励年期/目的与实际研发资源；公平值计量“减值/变动”与客户使用量实际变化；审计测试与业务交付/计费机制。不靠动词或“计划”一个词决定。
+4. 保留Q&A完整回答/问题身份，风险敞口及无对冲政策，资源人头口径与将来招聘/投资，无未来重大投资，unknown完整经营原因，经营表格与不完整财表。比较/主体/币种/单位/期间原约束保持。
+5. 协议RED：source use逐scope到scoped packet和resolve_basis；context-only/unresolved不执行，完整source plan/理由保留；同源多view不可按文本误去重，context不能捐能力，旧bundle读取保持而新生成身份更新。
+6. 先用本次typed selection做0POST离线重放：首12不成为独立摘要任务，t21/30/31/33/34/35/37/38等正例不丢；t14等误判需source-owner真实输出判定，不凭手填expected metadata冒充修好。这里只能证明已选112 spans的投影，新全文候选/资源收益不能用该snapshot假称已验。
+7. 大节点独审后，按原预算一次真实来源与actual sent检查，再做已计划的正式摘要。3gold不改、不豁免，空packet/少packet不是内容PASS；真实final仍需完整独审，不能把“没送垃圾”当“关键信息必然输出”。
+
+## 下一节点具体文件与测试
+
+最小产品owner按前述链依次为 `source_catalog/narrative_reading.py`、`narrative_business_policy.py`、`narrative_source_purpose.py`，以及 `document_understanding/source_cards.py`；若来源view判定需进入task binding，再小改既有 `summary_tasks.py` 携带，不新造plan。`automation/narrative_summary_execution.py`仅在新增准确reason/disposition需兼容时更新；scoped compiler原则上只复用现有admitted筛选、resolve_basis与source-card实施SHA，不增加正文分类。具体清单及每件职责见json。
+
+先扩现有 `tests/unit/document_understanding_selection/test_summary_source_admission.py`、`test_reading_material_value.py` 和 `tests/unit/test_source_summary_tasks.py`。若无现有合适的scoped admission测试owner，拟新增一个 `tests/unit/test_scoped_source_capability.py`，覆盖实际packet/basis、旧bundle和新身份接缝。所有测试这里只列设计，未创建或执行。不能把此次native8/工具独审的PASS迁移为本设计已经实施。
+
+本轮只冻结此设计与同名json，不改产品、测试、配置、PWF或原件，不运行任何复验。ROOT可据此固定下一节点PWF；不继续扩大只读调查。
