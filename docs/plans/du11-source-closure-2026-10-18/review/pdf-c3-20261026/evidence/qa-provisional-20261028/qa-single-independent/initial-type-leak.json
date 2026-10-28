@@ -1,0 +1,69 @@
+{
+  "initial_normalized_git_blob_sha1": "26239b152e352d6e1f4b6886e1241ceef2fac12b",
+  "initial_lf_sha256": "d0dc8157ab5f2c8434f8ab8ad6ad5b88e8e4a5c7e811cf85f8873c1898c040ad",
+  "identity_method": "Exact removal of only v2 guard/comment delta matches initial git-diff postimage26239b15; original raw newline hash was not independently pinned before ROOT fixed it, so none is claimed.",
+  "direct_independent_observation": {
+    "snapshot_rows": [
+      [
+        100,
+        [
+          [
+            50,
+            150,
+            "产能"
+          ]
+        ]
+      ],
+      [
+        120,
+        [
+          [
+            50,
+            150,
+            "100台/年"
+          ]
+        ]
+      ]
+    ],
+    "qa_true": {
+      "candidate": true,
+      "reason": "aligned_operating_fields_and_rows",
+      "partial": false
+    },
+    "qa_false": {
+      "candidate": false,
+      "reason": "no_measured_operating_grid",
+      "partial": false
+    }
+  },
+  "root_red": {
+    "artifact": {
+      "path": ".planning/c3-20261028/qa-type-leak-red.xml",
+      "bytes": 827,
+      "sha256": "0b500e1d56087656f7c9e9e2178c44bd81684d5ae5d998677c1822f409c82403"
+    },
+    "tests": 1,
+    "failed": 1,
+    "errors": 0,
+    "skipped": 0,
+    "suite_seconds": [
+      "1.806"
+    ]
+  },
+  "root_green_subset": {
+    "artifact": {
+      "path": ".planning/c3-20261028/qa-type-leak-green.xml",
+      "bytes": 762,
+      "sha256": "013c6955a872f7b1caa4481a7b1b12723e32af11e3ab4377a038d61e9700c7c7"
+    },
+    "tests": 3,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "suite_seconds": [
+      "1.488"
+    ]
+  },
+  "root_cause": "One-column alignment was enabled by QA intent, then fell through into ordinary operating field qualification without an observed QA marker.",
+  "final_closure": "Observed QA marker returns qa first. All remaining pairs<2 returnNone before field eligibility; ordinary operating minimum remains2 even inside IR intent."
+}

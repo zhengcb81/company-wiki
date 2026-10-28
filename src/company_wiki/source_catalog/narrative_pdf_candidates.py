@@ -163,8 +163,14 @@ def _measure_rows(snapshot, budget, width, height):
     return rows, malformed
 
 
-def _aligned(first, second, budget, *, exact=False):
+def _aligned(first, second, budget, *, exact=False, qa=False):
     budget.charge(1 + len(first) * len(second))
+    # A question and its answer often occupy a single wide table cell.  This
+    # only requests discovery: native extraction still owns cells and speakers.
+    # A wide prose box overlaps almost any other box, so one-column continuity
+    # needs the measured text margin rather than the multi-column overlap rule.
+    if qa and len(first) == len(second) == 1:
+        return [(0, 0)] if abs(first[0]['x0'] - second[0]['x0']) <= 8 else []
     if not 2 <= len(first) <= MAX_COLUMNS or not 2 <= len(second) <= MAX_COLUMNS:
         return []
     if exact and len(first) != len(second):
@@ -233,7 +239,7 @@ def _qa_marker(text, parser_version):
 
 
 def _pair_candidate(first, second, budget, qa, parser_version):
-    pairs = _aligned(first['cells'], second['cells'], budget)
+    pairs = _aligned(first['cells'], second['cells'], budget, qa=qa)
     if not pairs:
         return None
     if qa:
@@ -241,6 +247,11 @@ def _pair_candidate(first, second, budget, qa, parser_version):
         budget.charge(1 + len(first_text) + len(second_text))
         if _qa_marker(first_text, parser_version) or _qa_marker(second_text, parser_version):
             return {'kind': 'qa', 'fields': [], 'reason': 'aligned_source_qa_grid'}
+    # The one-column exception belongs to an observed Q/A marker, not merely
+    # the document's reading intent. Ordinary field/value tables still need
+    # the original two-column structural observation.
+    if len(pairs) < 2:
+        return None
     fields = _field_eligibility(first['cells'], second['cells'], pairs, budget)
     if not fields:
         fields = _field_eligibility(second['cells'], first['cells'], [(j, i) for i, j in pairs], budget)
@@ -260,7 +271,8 @@ def _continuation(previous, width, height, budget, qa):
             or abs(old_width - width) > width * .01 or abs(old_height - height) > height * .01):
         return None
     columns, fields = previous.get('columns'), previous.get('fields')
-    if not _sequence(columns) or not 2 <= len(columns) <= MAX_COLUMNS:
+    minimum = 1 if previous['kind'] == 'qa' else 2
+    if not _sequence(columns) or not minimum <= len(columns) <= MAX_COLUMNS:
         return None
     if not _sequence(fields) or len(fields) > MAX_COLUMNS:
         return None
@@ -325,21 +337,23 @@ def observe_pdf_candidate(snapshot, *, work_budget: WorkBudget, qa: bool = False
         for index, row in enumerate(body):
             budget.charge()
             cells = row['cells']
-            if not 2 <= len(cells) <= MAX_COLUMNS:
-                # Measured centered date labels inside a grid are not prose.
-                if last is not None and len(cells) == 1:
-                    text = _text(cells, budget)
-                    budget.charge(1 + len(text))
-                    if (len(text) <= 32 and any(c.isdigit() for c in text)
-                            and all(c.isdigit() or c in ' \t-–—/年月日季度半至止' for c in text)
-                            and not budget.operating(text)
-                            and cells[0]['x1'] - cells[0]['x0'] < width * .4):
-                        continue
+            # Keep the existing multi-column date interstitial before the
+            # Q/A-specific minimum; accepting one-column Q/A must not turn a
+            # previously skipped date into a break in a two-column grid.
+            if last is not None and len(last['cells']) >= 2 and len(cells) == 1:
+                text = _text(cells, budget)
+                budget.charge(1 + len(text))
+                if (len(text) <= 32 and any(c.isdigit() for c in text)
+                        and all(c.isdigit() or c in ' \t-–—/年月日季度半至止' for c in text)
+                        and not budget.operating(text)
+                        and cells[0]['x1'] - cells[0]['x0'] < width * .4):
+                    continue
+            if not (1 if qa else 2) <= len(cells) <= MAX_COLUMNS:
                 active, last = None, None
                 continue
             close = last is not None and row['y0'] - last['y1'] <= max(24, 3 * typical)
             if (active and last is not None and close
-                    and _aligned(last['cells'], cells, budget, exact=True)
+                    and _aligned(last['cells'], cells, budget, exact=True, qa=active['kind'] == 'qa')
                     and _eligible_continuation(active, row, budget)):
                 active['rows'] += 1
                 if active['rows'] >= 2:
@@ -350,7 +364,7 @@ def observe_pdf_candidate(snapshot, *, work_budget: WorkBudget, qa: bool = False
                     active = dict(candidate, rows=2)
                     result.update(candidate=True, reason=candidate['reason'])
                 elif (index == 0 and prior and row['y0'] <= height * .2
-                      and _aligned(prior['columns'], cells, budget, exact=True)
+                      and _aligned(prior['columns'], cells, budget, exact=True, qa=prior['kind'] == 'qa')
                       and _eligible_continuation(prior, row, budget)):
                     active = dict(prior, rows=1)
                 else:

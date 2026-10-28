@@ -1,0 +1,185 @@
+{
+  "schema_version": "independent-qa-single-discovery-review/v2",
+  "status": "PASS",
+  "review_state": "FINAL",
+  "scope": "Exactly2files; provisional native Q/A discovery/continuation, not source specificity or final QA acceptance",
+  "reviewer": "/root/c3_semantic_final_20261028",
+  "files": [
+    {
+      "path": "src/company_wiki/source_catalog/narrative_pdf_candidates.py",
+      "sha256": "eb7e4d14c43431ba59fc21c9e0c25056f5616d3528ff612f1f827e911c3452d2",
+      "lf_sha256": "776257ffa86cb524a82f8ba384246fb4a145581c6f98e77c3b025a3af3a12fee",
+      "bytes": 17195
+    },
+    {
+      "path": "tests/unit/du11_production/test_pdf_single_column_qa.py",
+      "sha256": "40d96e364a1da185a04452fe9805c3e1e631ae924f828e0171e3c708a5f40d3c",
+      "lf_sha256": "40d96e364a1da185a04452fe9805c3e1e631ae924f828e0171e3c708a5f40d3c",
+      "bytes": 3339
+    }
+  ],
+  "binding": "Final2file raw/LF SHA verified before/after23tests and at signing. Initial counterexample/normalized v1 identity and ROOT RED are preserved separately.",
+  "open_findings": [],
+  "closed_finding": {
+    "initial_normalized_git_blob_sha1": "26239b152e352d6e1f4b6886e1241ceef2fac12b",
+    "initial_lf_sha256": "d0dc8157ab5f2c8434f8ab8ad6ad5b88e8e4a5c7e811cf85f8873c1898c040ad",
+    "identity_method": "Exact removal of only v2 guard/comment delta matches initial git-diff postimage26239b15; original raw newline hash was not independently pinned before ROOT fixed it, so none is claimed.",
+    "direct_independent_observation": {
+      "snapshot_rows": [
+        [
+          100,
+          [
+            [
+              50,
+              150,
+              "产能"
+            ]
+          ]
+        ],
+        [
+          120,
+          [
+            [
+              50,
+              150,
+              "100台/年"
+            ]
+          ]
+        ]
+      ],
+      "qa_true": {
+        "candidate": true,
+        "reason": "aligned_operating_fields_and_rows",
+        "partial": false
+      },
+      "qa_false": {
+        "candidate": false,
+        "reason": "no_measured_operating_grid",
+        "partial": false
+      }
+    },
+    "root_red": {
+      "artifact": {
+        "path": ".planning/c3-20261028/qa-type-leak-red.xml",
+        "bytes": 827,
+        "sha256": "0b500e1d56087656f7c9e9e2178c44bd81684d5ae5d998677c1822f409c82403"
+      },
+      "tests": 1,
+      "failed": 1,
+      "errors": 0,
+      "skipped": 0,
+      "suite_seconds": [
+        "1.806"
+      ]
+    },
+    "root_green_subset": {
+      "artifact": {
+        "path": ".planning/c3-20261028/qa-type-leak-green.xml",
+        "bytes": 762,
+        "sha256": "013c6955a872f7b1caa4481a7b1b12723e32af11e3ab4377a038d61e9700c7c7"
+      },
+      "tests": 3,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "suite_seconds": [
+        "1.488"
+      ]
+    },
+    "root_cause": "One-column alignment was enabled by QA intent, then fell through into ordinary operating field qualification without an observed QA marker.",
+    "final_closure": "Observed QA marker returns qa first. All remaining pairs<2 returnNone before field eligibility; ordinary operating minimum remains2 even inside IR intent."
+  },
+  "review": {
+    "root_cause": "Single measured QA column may provisionally request discovery; existing source QA grammar is required on a new pair. Copied document intent alone confers no one-column operating qualification.",
+    "geometry": "Actual finite bbox validation remains mandatory. SingleQA alignment uses the existing8px text-margin criterion; wide-box overlap cannot borrow another text column. Original gap, top/bottom and page-dimension checks stay in place.",
+    "continuation": "Only prior kindqa can have1column and requires current qa intent. Operating/unknown kinds cannot borrow the relaxed minimum; actual current margin/shape and ordered first-body check still apply. QA continuation does not invent speaker or factual status.",
+    "budget_and_work": "Existing shared WorkBudget charges before snapshot access and pair comparison; zero-work unread sentinel passes. No quota/time/memory increase, new IO or whole-page text scan. Row text remains per-call cached and neighbor-local; maxspans/columns and sorting charge unchanged.",
+    "identity_and_scope": "Snapshots remain byte/value-equivalent in deepcopy controls. Function emits only provisional candidate/reason/compactcontinuation, not source_role, business_eligible, EvidenceSpan, repaired text, company rule or model output. qa_text_shadow exclusion and speaker/QA extraction owners are untouched.",
+    "code_quality": "Small typed-shape exception in existing alignment and continuation owners; v2 explicit minimum closes type leakage at the common fallback. No extra QA dictionary, filename/page condition or source-specific policy."
+  },
+  "independent_tests": {
+    "unique": 23,
+    "passed": 23,
+    "failed": 0,
+    "pytest_seconds": 2.39,
+    "runner_seconds": 3.126,
+    "own_neutral": 6,
+    "author_new_suite": 10,
+    "necessary_original_controls": 7,
+    "log": "recheck.log",
+    "junit": "recheck.xml",
+    "receipt": "recheck.json",
+    "not_summed": "Author initial39 and later3 overlap with independent controls, so are receipt evidence only; no full-domain/39rerun.",
+    "warning": "Unrelated asyncio_mode option warning under disabled autoload; pytest_timeout explicitly loaded."
+  },
+  "author_receipts": {
+    "original_tdd": {
+      "artifact": {
+        "path": ".planning/c3-20261028/qa-single-red.xml",
+        "bytes": 3994,
+        "sha256": "e154d6c2e73df38f7fb668740e1a671b0d38caaf5eccc64563c06ed5d3188e61"
+      },
+      "tests": 9,
+      "failed": 5,
+      "errors": 0,
+      "skipped": 0,
+      "suite_seconds": [
+        "1.613"
+      ]
+    },
+    "initial39green": {
+      "artifact": {
+        "path": ".planning/c3-20261028/qa-single-green.xml",
+        "bytes": 6369,
+        "sha256": "9df56cb30ca3ce0cc064318646ff1009883bfb4d35e3d8e7c7cc2a6a12ef92f9"
+      },
+      "tests": 39,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "suite_seconds": [
+        "2.579"
+      ]
+    },
+    "type_boundary_red": {
+      "artifact": {
+        "path": ".planning/c3-20261028/qa-type-leak-red.xml",
+        "bytes": 827,
+        "sha256": "0b500e1d56087656f7c9e9e2178c44bd81684d5ae5d998677c1822f409c82403"
+      },
+      "tests": 1,
+      "failed": 1,
+      "errors": 0,
+      "skipped": 0,
+      "suite_seconds": [
+        "1.806"
+      ]
+    },
+    "type_boundary_green_subset": {
+      "artifact": {
+        "path": ".planning/c3-20261028/qa-type-leak-green.xml",
+        "bytes": 762,
+        "sha256": "013c6955a872f7b1caa4481a7b1b12723e32af11e3ab4377a038d61e9700c7c7"
+      },
+      "tests": 3,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0,
+      "suite_seconds": [
+        "1.488"
+      ]
+    }
+  },
+  "unexecuted_next_scope": [
+    "Fresh actual CNIR native replay and attributed QA materialization/locator review",
+    "QA oracle role/context observation repair; keep historical0/6 and do not turn question premises into facts",
+    "Source specificity owner, configured SDK, formal supplier summary/cache/RF adoption"
+  ],
+  "cleanup": {
+    "owned_temp": ".c3qai",
+    "absent": true,
+    "TEMP_TMP": "child-only environment; parent unchanged",
+    "PDF_SDK_model_HTTP_download": 0,
+    "writes": "Only own qa-single-independent evidence; no product/author-test/PWF/original edits"
+  }
+}

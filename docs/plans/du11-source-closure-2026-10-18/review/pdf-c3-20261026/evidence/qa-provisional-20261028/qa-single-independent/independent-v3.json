@@ -1,0 +1,100 @@
+{
+  "schema_version": "independent-qa-single-discovery-review/v3",
+  "status": "PASS",
+  "review_state": "FINAL",
+  "scope": "Only final centered-date branch movement plus one author test; exactly2files. Provisional discovery only.",
+  "reviewer": "/root/c3_semantic_final_20261028",
+  "files": [
+    {
+      "path": "src/company_wiki/source_catalog/narrative_pdf_candidates.py",
+      "bytes": 17340,
+      "sha256": "f3ae3b80c48fb99f9d58a87a51d3bb06cc70ba85108586f43cc6feb3be519671",
+      "lf_sha256": "455953ed3eb9e8b1647cca3006d1c03dd94fd06f879688fcbeba848b1b7c8a11"
+    },
+    {
+      "path": "tests/unit/du11_production/test_pdf_single_column_qa.py",
+      "bytes": 3985,
+      "sha256": "d042c586c087c53e7b5ab67211416bd9efd3d63ae48a11f8bd608d15ab22ecbb",
+      "lf_sha256": "d042c586c087c53e7b5ab67211416bd9efd3d63ae48a11f8bd608d15ab22ecbb"
+    }
+  ],
+  "previous_immutable_report": "independent.md/json (v2); historical initial type-leak and23P preserved unchanged",
+  "exact_delta": {
+    "source": "Existing date-interstitial recognition moved before QA minimum check, restricted to preceding>=2cells; no date vocabulary/threshold or quota change.",
+    "proof": "Reverse only this block movement/last>=2 condition and remove only newtest; reconstructed LF hashes equal both immutable v2files.",
+    "patch": {
+      "path": ".planning/c3-20261028/qa-single-independent/delta-v2-v3.diff",
+      "sha256": "154bf9aea3d33ba34eba7ce55ecd4d713dbcba163621f9acf6868f6aba8a986b",
+      "bytes": 2676
+    }
+  },
+  "open_findings": [],
+  "review": {
+    "root_cause": "qa=True admits1cell, making the old len<2 branch unable to visit date skip for a two-columnQA grid. Moving the same observation earlier restores existing behavior.",
+    "negative_boundary": "Skip requires preceding measured multi-column row. The two single-columnQA rows remain a candidate but cannot skip a centered date to carry continuation into an unrelated following row.",
+    "preserved": "Ordinary operating3column date skip and existing cross-page continuation pass. Marker-gated QA-only1column/type-leak guard retained. Geometry, shared precharge, source input identity, source speaker/shadow ownership and all caps unchanged.",
+    "performance": "Same bounded short-date predicate and row-local cached text; no new full-page scan, dictionary or IO."
+  },
+  "independent_tests": {
+    "unique_current": 5,
+    "passed": 5,
+    "failed": 0,
+    "junit": {
+      "artifact": {
+        "path": ".planning/c3-20261028/qa-single-independent/recheck-v3.xml",
+        "sha256": "2bbcaca76384f0d645b0424fb191875368c30bc17254a7624656f13af3030fe3",
+        "bytes": 1096
+      },
+      "tests": 5,
+      "failed": 0,
+      "errors": 0,
+      "suite_seconds": [
+        "9.290"
+      ]
+    },
+    "runner_seconds": 18.695,
+    "scope": "2own date-boundary controls + author date1 + original ordinarycontinuation1 + prior type-leak1",
+    "not_repeated": "No23/39/full-domain/PDF/SDK/model rerun; old test counts not rebound as though run on newSHA."
+  },
+  "root_receipts_only": {
+    "date_red": {
+      "artifact": {
+        "path": ".planning/c3-20261028/qa-date-red.xml",
+        "sha256": "02d2cd2d0e48738fe9efd8dbdd0dabaa7ea855049a6024b315a036c9a3e0456d",
+        "bytes": 1177
+      },
+      "tests": 1,
+      "failed": 1,
+      "errors": 0,
+      "suite_seconds": [
+        "3.419"
+      ]
+    },
+    "date_green4": {
+      "artifact": {
+        "path": ".planning/c3-20261028/qa-date-green.xml",
+        "sha256": "ea1bb5302ff11212f27d4a30b9bc815905d086cd7a5ae0ece95868a9db6fc70c",
+        "bytes": 919
+      },
+      "tests": 4,
+      "failed": 0,
+      "errors": 0,
+      "suite_seconds": [
+        "4.696"
+      ]
+    }
+  },
+  "real_CN_scope": "ROOT reports252units/2spans/707865work/1.869s remainspartial, old exact0/6 and role-oracle gap unresolved. Not independently replayed here and not full-QA acceptance.",
+  "remaining_unexecuted_scope": [
+    "Complete real sourceQA attribution/closure and oracle role/context diagnosis",
+    "Source specificity A/B, configured SDK, formal supplier summary, cache/recovery and RF adoption"
+  ],
+  "cleanup": {
+    "own_temp": ".c3qav",
+    "absent": true,
+    "TEMP_TMP": "child env only; parent unchanged",
+    "PDF_SDK_model_HTTP_download": 0,
+    "writes": "Own evidence only; no product/author-test/PWF/original edits"
+  },
+  "pause": "Final review complete; STOP. User requested pause after this closeout; no new implementation/testing/source processing authorized by this report."
+}

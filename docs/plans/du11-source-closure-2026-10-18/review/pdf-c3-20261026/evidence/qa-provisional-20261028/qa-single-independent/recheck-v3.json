@@ -1,0 +1,28 @@
+{
+  "exit_code": 0,
+  "seconds": 18.695,
+  "files": [
+    {
+      "path": "src/company_wiki/source_catalog/narrative_pdf_candidates.py",
+      "bytes": 17340,
+      "sha256": "f3ae3b80c48fb99f9d58a87a51d3bb06cc70ba85108586f43cc6feb3be519671",
+      "lf_sha256": "455953ed3eb9e8b1647cca3006d1c03dd94fd06f879688fcbeba848b1b7c8a11"
+    },
+    {
+      "path": "tests/unit/du11_production/test_pdf_single_column_qa.py",
+      "bytes": 3985,
+      "sha256": "d042c586c087c53e7b5ab67211416bd9efd3d63ae48a11f8bd608d15ab22ecbb",
+      "lf_sha256": "d042c586c087c53e7b5ab67211416bd9efd3d63ae48a11f8bd608d15ab22ecbb"
+    }
+  ],
+  "before_after_unchanged": true,
+  "targets": [
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\c3-20261028\\qa-single-independent\\test_date_boundary.py",
+    "tests/unit/du11_production/test_pdf_single_column_qa.py::test_existing_centered_date_does_not_break_two_column_qa_continuation",
+    "tests/unit/du11_production/test_pdf_single_column_qa.py::test_qa_intent_does_not_relax_single_column_operating_table_discovery",
+    "tests/unit/du11_production/test_pdf_candidates.py::test_bottom_table_signature_recovers_unlabeled_next_page_aligned_rows"
+  ],
+  "temporary_absent": true,
+  "TEMP_TMP": "child-only environment; parent unchanged",
+  "PDF_SDK_model_HTTP_download": 0
+}
