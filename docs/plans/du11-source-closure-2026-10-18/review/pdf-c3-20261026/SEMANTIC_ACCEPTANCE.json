@@ -1,0 +1,209 @@
+{
+  "schema_version": "c3-content-engineering-acceptance/1",
+  "date": "2026-10-28",
+  "status": "ENGINEERING_ACCEPTED_PUBLICATION_PENDING_REAL_CONTENT_OPEN",
+  "source_lf_sha256": {
+    "src/company_wiki/source_catalog/narrative_operating_resources.py": "f2ebc6236524f8a6df0b7a0049c14555af71474d4a29bbc88e5641519641ae44",
+    "src/company_wiki/source_catalog/narrative_predicate_state.py": "38f8c3440f45e526fc493586112d4f8b11dbd99e8d7d0835f45e42b1e6d8c43d",
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "6b77dc6193e2084674d6bda44599729bb48c5cbc446e8b54f03bfd1a967e122a",
+    "src/company_wiki/document_understanding/decision_inventory.py": "1dead1dc88e686156289739264ae66e3ef72e66004b871985c9579e489c9c849",
+    "tests/unit/document_understanding_selection/test_reading_operating_resources.py": "f3be33da958ec3494ac2b8232f61f53ab89d9ed0d62bfe3c3f1b2afa50dbbd08",
+    "tests/unit/document_understanding_selection/test_prepared_predicate_context.py": "2fd27260553791f7e8816f437ae6cd5762da51ea5f0a2e7804613dc7f9e91a22",
+    "tools/document_understanding_benchmark/closed_group_support.py": "06698b1eacf9c384581f0f960e31d754d7701333b9a24c8fc9c848a41c206403",
+    "tests/unit/test_closed_group_numeric_boundary.py": "179cf4a9efa7d84272aa5e00b3fbad301afcee6e2a3248bfcebe5e722583dc30",
+    "tools/document_understanding_benchmark/phase_c_observer.py": "8f2c44ef2b63b5a434c3789111388edb8a3e3f3065a5b3ce17fbe7243ca46930",
+    "tests/unit/test_phase_c_observer.py": "18a5cfc93d3e43990babed08144fe4ba38a617d960ba1d3faf9d9d06c7e72a4b"
+  },
+  "semantic_independent": "PASS_0_OPEN",
+  "closed": [
+    "SEM-IR-01",
+    "SEM-IR-02",
+    "SEM-IR-03",
+    "OBS-NUMERIC-CJK-BOUNDARY",
+    "OBS-SENT-TASK-COVERAGE"
+  ],
+  "current_source_tests": {
+    "root_existing_files": 440,
+    "independent_existing_files": 99,
+    "same_original_scope_total": 539,
+    "independent_additional_cases": 27,
+    "tool_independent_cases": 37,
+    "counts_overlap_elsewhere": true
+  },
+  "mypy": "390 source files PASS",
+  "scan_total_many_assertions": [
+    11289,
+    22601,
+    45225
+  ],
+  "scan_total_single_assertion": [
+    6670,
+    13390,
+    26830
+  ],
+  "single_assertion_query_regex_input": 0,
+  "actual_current_enhanced_source_or_summary": "NOT_RUN",
+  "gold_unchanged": true,
+  "new_model_calls": 0,
+  "downloads": 0,
+  "mother_tokens": 1783378,
+  "mother_micro_usd": 724836,
+  "evidence": [
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/content-readiness/semantic-author/handoff-v2.md",
+      "bytes": 4677,
+      "sha256": "456aae964f526b0d20e44a344b4555025917f73a659b844bd487013460f7cf85"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/content-readiness/semantic-author/handoff-v2.json",
+      "bytes": 5447,
+      "sha256": "0dcdf01da5428bae000153ad2b98e9de1e10a20b9432d442f8e2d9ba54770791"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/content-readiness/semantic-author/red-v2.log",
+      "bytes": 24090,
+      "sha256": "24ba241d8d8d489bafe6ec4dd42fea5948f1a3c3df1f289c3bb18b20564bd1be"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/content-readiness/semantic-author/final-v2.log",
+      "bytes": 1720,
+      "sha256": "d74ce29dafbd24b936fccc6fa3b675ea3d508cbd969af44e1f17df28d6c50715"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/content-readiness/semantic-author/scan-counts-v2.json",
+      "bytes": 8597,
+      "sha256": "801db589502d79fe2f38a034ae5db958ab4498603a912c5f096789bc23aa3b26"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/content-readiness/semantic-author/cleanup-v2.json",
+      "bytes": 265,
+      "sha256": "d24ef0b8251fccb1943a1b063063082ce7992b5a991e23f38992e9a229645e31"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/content-readiness/semantic-review/final-semantic.md",
+      "bytes": 4210,
+      "sha256": "7aa0c4acf5d79bbafaa7fa7995132b28f3b3623240820441b913d619b95fd833"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/content-readiness/semantic-review/final-semantic.json",
+      "bytes": 15037,
+      "sha256": "ebd9e1163abc6fb141a722d37fcd5a04502b7cb06f1347eccd37d493d3b418f6"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/content-readiness/numeric-oracle/handoff.md",
+      "bytes": 4737,
+      "sha256": "74b624238a869af8b4f2f9a3330e0033442c2598d8c3ae66664b1ae933c00ec0"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/content-readiness/numeric-oracle/handoff.json",
+      "bytes": 2097,
+      "sha256": "bfc3fb009281367d1dbd2ecad542875a58635500abb918c02c34420e7610e6ee"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/content-readiness/numeric-oracle/red-v2.xml",
+      "bytes": 25961,
+      "sha256": "05e2cbc4828e8d9f34bef2400d85b17ef6197a27f829bfedcbda26fb7d9ad740"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/content-readiness/numeric-oracle/green.log",
+      "bytes": 2064,
+      "sha256": "04ab9f7d0c58e3ed2e9144cd0dc95c8c985b0a1328bb29af35b0201c137e7aba"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/content-readiness/numeric-oracle/cached-gold-rescore.json",
+      "bytes": 2973,
+      "sha256": "72c5582f8106774d4c12cf344edd2d364f145c5df53e6085091e9a93c4587671"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/content-readiness/numeric-oracle/combined-observer-rescore.json",
+      "bytes": 4258,
+      "sha256": "3997084d8d03fee19148274a6ccae03b99432bc9e4b98a4ef16375e2e2a645dd"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/content-readiness/numeric-oracle/final-scope.json",
+      "bytes": 650,
+      "sha256": "88ba7cff18eeb3bdd8f2d5545c6cb2f16b1caf8fefec0e3c7e12311a1849a30c"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/content-readiness/sent-tasks/handoff.md",
+      "bytes": 1895,
+      "sha256": "ef7f3eaf093890b4c24a50059f57912658ae5a1009159eed4078ece98fee47dc"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/content-readiness/sent-tasks/handoff.json",
+      "bytes": 2942,
+      "sha256": "8d6bad7cfc381b74580a8d62d71df32162481900736062a1ec5ebfe656d8baba"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/content-readiness/sent-tasks/red.json",
+      "bytes": 888,
+      "sha256": "3f1f1fa101ba2edb141bec94d68071575d2fabf40dbd144eea651506dbe6be53"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/content-readiness/sent-tasks/green.json",
+      "bytes": 1274,
+      "sha256": "62e5c867e84c32d95ea0d729770c2368cb6b5c2cd8f1492143cd948a997ce870"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/content-readiness/sent-tasks/green.log",
+      "bytes": 1484,
+      "sha256": "83f85aeef7bde9bb9c22f2701a8d4ae95889c158f394c224f40861a1223de447"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/content-readiness/sent-tasks/cached-counterexample.json",
+      "bytes": 931,
+      "sha256": "a3a90b9f4cdd24cfe2d4860a6e6698b0c0621fbcb3de04d4528aff290e6a5eb8"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/content-readiness/root/root-tools-independent-review.md",
+      "bytes": 1369,
+      "sha256": "5af41ffe2f27d618a195bc974067b92dba5a2601d7d0017c1c4900d650ca641a"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/content-readiness/root/root-tools-independent-review.json",
+      "bytes": 2655,
+      "sha256": "ed8e83ee5872b7281d0be8da3e47b9d1ab48cc30f4d0f632336a70d32c53ebf0"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/content-readiness/root/root-tools-independent.log",
+      "bytes": 1562,
+      "sha256": "9b6187fbaf54b974c5eeb50f06bff955e53960790d871b325851bf3987a81f81"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/content-readiness/root/formal-next-readiness.md",
+      "bytes": 6852,
+      "sha256": "8d9bfab53fb77c7811b552a85e4405b4d82533dc1bbc2b727a6fb359e25e3e0f"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/content-readiness/root/industry-cloud-source-readiness.md",
+      "bytes": 5439,
+      "sha256": "0cb1485c936c6e9f0ed29b3f2ec6ec8eba73142606127df0c74a751c88acab73"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/content-readiness/root/resume.json",
+      "bytes": 1253,
+      "sha256": "3d8e2194618a927999584fa5a80f34d4de9aaad83c5420bdb03448ea6a7f0ea4"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/content-readiness/root/regression-v2.json",
+      "bytes": 1903,
+      "sha256": "a13d457e96819dec3ff4d95d9426bee5efa1b89edbd4925eb8e372ffc7e004b7"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/content-readiness/root/regression-v2.log",
+      "bytes": 2845,
+      "sha256": "25d84860b69707d143c30400e304e9f82b6aabf46c0ca34a6fda36093b03398c"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/content-readiness/root/regression.log",
+      "bytes": 1634,
+      "sha256": "bc496c999ec49d54bc7d42049fa6d1c77e774a94dddae19e16237de8fde14f92"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/content-readiness/root/mypy-final.log",
+      "bytes": 46,
+      "sha256": "bdd0b877935b2038718b82fb729d815304b9d902a46e61b4bac78931c3fb23d1"
+    }
+  ],
+  "next": "Normal commit/push and exact CI; then one configured formal HK attempt per FORMAL_NEXT.md; real summary/cache/FF-RF and fresh holdouts remain OPEN."
+}

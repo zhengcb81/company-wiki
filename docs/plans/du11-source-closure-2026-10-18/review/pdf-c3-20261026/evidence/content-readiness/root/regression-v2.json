@@ -1,0 +1,27 @@
+{
+  "exit_code": 0,
+  "seconds": 22.251,
+  "targets": [
+    "tests/unit/document_understanding_selection/test_reading_balanced_coverage.py",
+    "tests/unit/document_understanding_selection/test_reading_decision_inventory.py",
+    "tests/unit/document_understanding_selection/test_reading_material_value.py",
+    "tests/unit/document_understanding_selection/test_reading_measure_scope.py",
+    "tests/unit/document_understanding_selection/test_reading_order_metric_language_parity.py",
+    "tests/unit/document_understanding_selection/test_reading_predicate_generalization.py",
+    "tests/unit/document_understanding_selection/test_reading_predicate_state_owner.py",
+    "tests/unit/document_understanding_selection/test_reading_semantic_value.py",
+    "tests/unit/document_understanding_selection/test_reading_value_coverage.py"
+  ],
+  "source_lf_sha256": {
+    "src/company_wiki/source_catalog/narrative_operating_resources.py": "f2ebc6236524f8a6df0b7a0049c14555af71474d4a29bbc88e5641519641ae44",
+    "src/company_wiki/source_catalog/narrative_predicate_state.py": "38f8c3440f45e526fc493586112d4f8b11dbd99e8d7d0835f45e42b1e6d8c43d",
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "6b77dc6193e2084674d6bda44599729bb48c5cbc446e8b54f03bfd1a967e122a",
+    "src/company_wiki/document_understanding/decision_inventory.py": "1dead1dc88e686156289739264ae66e3ef72e66004b871985c9579e489c9c849",
+    "tests/unit/document_understanding_selection/test_reading_operating_resources.py": "f3be33da958ec3494ac2b8232f61f53ab89d9ed0d62bfe3c3f1b2afa50dbbd08",
+    "tests/unit/document_understanding_selection/test_prepared_predicate_context.py": "2fd27260553791f7e8816f437ae6cd5762da51ea5f0a2e7804613dc7f9e91a22"
+  },
+  "source_stable": true,
+  "owned_tmp": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c328reg",
+  "cleanup_pending": false,
+  "owned_tmp_absent": true
+}

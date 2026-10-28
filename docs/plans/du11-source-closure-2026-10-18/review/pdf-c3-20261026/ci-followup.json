@@ -28,8 +28,15 @@
     "industry_cloud_gold": "not_supported_native_only",
     "scope": "source_selection_not_summary"
   },
-  "code_publication": "PENDING_NORMAL_HOOKS",
-  "exact_new_ci": "NOT_STARTED",
+  "code_publication": "PUBLISHED_EXACT_CI_SUCCESS",
+  "exact_new_ci": {
+    "id": 40406128851,
+    "head_sha": "0c988e8d70e22a436126e6ae31ad4fa8172a4222",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40406128851",
+    "updated_at": "2026-10-26T21:44:13Z"
+  },
   "new_model_calls": 0,
   "downloads": 0,
   "mother_tokens": 1783378,
@@ -95,5 +102,11 @@
       "bytes": 2687,
       "sha256": "9aa017aa37388689994e787e5f9e24fb7ca9f36bef70d511a5d61fdbaba714b9"
     }
-  ]
+  ],
+  "normal_precommit": "PASS",
+  "normal_prepush": {
+    "passed": 158,
+    "seconds": 55.73,
+    "targets": 31
+  }
 }

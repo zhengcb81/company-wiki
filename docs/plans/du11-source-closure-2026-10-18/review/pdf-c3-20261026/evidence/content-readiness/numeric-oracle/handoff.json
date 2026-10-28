@@ -1,0 +1,64 @@
+{
+  "status": "IMPLEMENTED_FOCUSED_GREEN_PENDING_ROOT_REVIEW",
+  "author": "/root/c3_cache_independent_review",
+  "independent_reviewer": "ROOT pending",
+  "files": {
+    "tools/document_understanding_benchmark/closed_group_support.py": {
+      "sha256": "c6b3197218424fc64be20ade7cef6576cfdad7eef0e8be89388abde1e0e16940",
+      "lf_sha256": "06698b1eacf9c384581f0f960e31d754d7701333b9a24c8fc9c848a41c206403",
+      "bytes": 17907
+    },
+    "tests/unit/test_closed_group_numeric_boundary.py": {
+      "sha256": "179cf4a9efa7d84272aa5e00b3fbad301afcee6e2a3248bfcebe5e722583dc30",
+      "lf_sha256": "179cf4a9efa7d84272aa5e00b3fbad301afcee6e2a3248bfcebe5e722583dc30",
+      "bytes": 5669
+    }
+  },
+  "scope_assertion": "Only _join AST changes in existing tool; all other existing AST unchanged",
+  "red": {
+    "failed": 8,
+    "passed": 19,
+    "seconds": 1.31,
+    "junit": "red-v2.xml"
+  },
+  "green": {
+    "passed": 132,
+    "seconds": 7.37,
+    "junit": "green.xml"
+  },
+  "ruff": "PASS",
+  "cached_rescore": "cached-gold-rescore.json",
+  "target_before": false,
+  "target_after": true,
+  "other_two_gold_remain_false": true,
+  "actual_summary_performed": false,
+  "original_manual_report_is_physical_closure_only": true,
+  "post_test_change": "Two explanatory comment lines only",
+  "removing_comments_reproduces_executed_oracle_sha": true,
+  "executed_oracle_sha": "ff9e2d01b527ebc5119a094741414ab008ec58f92223ad08da8febae0d8a7b50",
+  "cleanup": {
+    "path": "C:\\Temp\\c3numeric-boundary-20261027",
+    "absent_after": true,
+    "owned_python_pids": [],
+    "models": 0,
+    "downloads": 0,
+    "pdf_parses": 0
+  },
+  "product_edits": 0,
+  "gold_edits": 0,
+  "models": 0,
+  "downloads": 0,
+  "pdf_parses": 0,
+  "commit": false,
+  "push": false,
+  "open": [
+    "ROOT independent review"
+  ],
+  "combined_current_observer": {
+    "receipt": "combined-observer-rescore.json",
+    "industry_full_selection": true,
+    "industry_scoped_task": "t35",
+    "summary_claim_coverage": "not_evaluated",
+    "model_call": false
+  }
+}

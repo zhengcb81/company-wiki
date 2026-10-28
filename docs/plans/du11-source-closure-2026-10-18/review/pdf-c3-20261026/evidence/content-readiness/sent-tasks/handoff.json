@@ -1,0 +1,56 @@
+{
+  "status": "FROZEN_FOR_ROOT_INDEPENDENT_REVIEW / STOP_AFTER_CURRENT_WORK",
+  "authorized_files": [
+    "tools/document_understanding_benchmark/phase_c_observer.py",
+    "tests/unit/test_phase_c_observer.py"
+  ],
+  "bindings": {
+    "tools/document_understanding_benchmark/phase_c_observer.py": {
+      "raw_sha256": "f4457f7a0a3aa58e60840c6090b77a1ae2036348a6b55068b539305ee298ca8c",
+      "lf_sha256": "8f2c44ef2b63b5a434c3789111388edb8a3e3f3065a5b3ce17fbe7243ca46930"
+    },
+    "tests/unit/test_phase_c_observer.py": {
+      "raw_sha256": "18a5cfc93d3e43990babed08144fe4ba38a617d960ba1d3faf9d9d06c7e72a4b",
+      "lf_sha256": "18a5cfc93d3e43990babed08144fe4ba38a617d960ba1d3faf9d9d06c7e72a4b"
+    }
+  },
+  "root_cause": "Legacy gold_observation verifies sent material equals the compiler full/subset view but scores required facts against all selected spans/groups. Thus subset gold can borrow an unsent task and falsely appear sent.",
+  "actual_cached_control": "cached-counterexample.json",
+  "implementation": [
+    "Preserve legacy top-level source-availability fields with explicit scope and full_selection alias.",
+    "Observe witnesses in each actual compiler task using original group closure/support+context and existing score_facts; sent key filtering yields supported_task_keys/not_sent_ids.",
+    "Initial full-request source-task gaps are checked by gold_admission_missing before original paid caller/reservation. Initial subset is invalid; repair subset does not re-require previously completed tasks.",
+    "No observation is called emitted summary coverage; summary_claim_coverage=not_evaluated."
+  ],
+  "tdd": {
+    "red": "6 failed /3.39s",
+    "green": "10 passed /3.74s",
+    "green_composition": "6 new neutral cases plus4 existing pure observer/compiler compatibility cases",
+    "normal_runtime": "C:\\Miniconda\\python.exe",
+    "red_receipt": "red.json/log/xml",
+    "green_receipt": "green.json/log/xml",
+    "source_stable_each_run": true
+  },
+  "static_checks": [
+    "Ruff both PASS",
+    "git diff --check both PASS"
+  ],
+  "other_owner_boundary": "closed_group_support numeric/CJK join fix is another author, not modified here; original frozen gold and production runtime unchanged",
+  "readiness": "../formal-next-readiness.md",
+  "cleanup": {
+    "owned_red_pid": 11856,
+    "owned_red_pid_alive": false,
+    "owned_green_pid": 12080,
+    "owned_green_pid_alive": false,
+    "owned_roots_absent": [
+      ".c3obs-red",
+      ".c3obs-green"
+    ]
+  },
+  "scope_limits": [
+    "No PDF/Docling/model/download/production test or real formal attempt.",
+    "No change to prior CI4 files, other author sources, original gold/protected metadata, production budget, PWF or hook/mode.",
+    "No independent self-sign; ROOT reviews frozen implementation.",
+    "User pause: finish current authorized handoff then stop; no new tasks or real attempt."
+  ]
+}

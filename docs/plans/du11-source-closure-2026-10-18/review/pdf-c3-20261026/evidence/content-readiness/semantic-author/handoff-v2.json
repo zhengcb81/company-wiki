@@ -1,0 +1,135 @@
+{
+  "schema": "cwp-semantic-selection-handoff/2",
+  "status": "FROZEN_FOR_INDEPENDENT_REVIEW",
+  "author": "/root/c3_pdf_env_independent_review",
+  "time_utc": "2026-10-26T21:59:54.326852+00:00",
+  "files": [
+    {
+      "path": "src/company_wiki/source_catalog/narrative_operating_resources.py",
+      "bytes": 8029,
+      "sha256": "0b3d45add7f61ceb19ed0cbbf8a59a22b9f3dd4587da821b96c8678cfbea4c19",
+      "lf_sha256": "f2ebc6236524f8a6df0b7a0049c14555af71474d4a29bbc88e5641519641ae44"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_predicate_state.py",
+      "bytes": 18426,
+      "sha256": "780b5792a5fdeb45a4f0c3679837edb805eec504a7914dd641eb02b35fa47979",
+      "lf_sha256": "780b5792a5fdeb45a4f0c3679837edb805eec504a7914dd641eb02b35fa47979"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_policy.py",
+      "bytes": 51204,
+      "sha256": "1e73e3ba4b2193e4a0d6ca0bfc18b253bea5a471233f9940f69a363a71a2d0f4",
+      "lf_sha256": "6b77dc6193e2084674d6bda44599729bb48c5cbc446e8b54f03bfd1a967e122a"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/decision_inventory.py",
+      "bytes": 28180,
+      "sha256": "842a7d0cd022e0025da94a18d3d646667286bde2843ca5e116a94ff74332d9f3",
+      "lf_sha256": "1dead1dc88e686156289739264ae66e3ef72e66004b871985c9579e489c9c849"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_operating_resources.py",
+      "bytes": 12570,
+      "sha256": "dadf68fe5e41c42bbddcefe8c8bc0ddf15748ac07af0f799b8c4db0aa7fe321d",
+      "lf_sha256": "f3be33da958ec3494ac2b8232f61f53ab89d9ed0d62bfe3c3f1b2afa50dbbd08"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_prepared_predicate_context.py",
+      "bytes": 7294,
+      "sha256": "2fd27260553791f7e8816f437ae6cd5762da51ea5f0a2e7804613dc7f9e91a22",
+      "lf_sha256": "2fd27260553791f7e8816f437ae6cd5762da51ea5f0a2e7804613dc7f9e91a22"
+    }
+  ],
+  "evidence": {
+    "red-v2.log": {
+      "sha256": "24ba241d8d8d489bafe6ec4dd42fea5948f1a3c3df1f289c3bb18b20564bd1be",
+      "bytes": 24090
+    },
+    "red-v2.xml": {
+      "sha256": "967e9c3d7abfc36b49497d42096e5945a98a791459e3fecebcfd4b5f0ed58174",
+      "bytes": 28963
+    },
+    "first-v2.log": {
+      "sha256": "55ef88d0bd40a012456985267c10415b33e7dc59cd18c31172244086c94fb73f",
+      "bytes": 802
+    },
+    "focused-v2.log": {
+      "sha256": "743130a76b1713f4c9032be627191fd9e782993a10b6db724643946a034aeff9",
+      "bytes": 1720
+    },
+    "final-v2.log": {
+      "sha256": "d74ce29dafbd24b936fccc6fa3b675ea3d508cbd969af44e1f17df28d6c50715",
+      "bytes": 1720
+    },
+    "final-v2.xml": {
+      "sha256": "fdc4efc01f4519500edf3b12e5fc26f7e7d74d7e655e29f696ada5d96a982449",
+      "bytes": 136301
+    },
+    "scan-counts-v2.json": {
+      "sha256": "801db589502d79fe2f38a034ae5db958ab4498603a912c5f096789bc23aa3b26",
+      "bytes": 8597
+    },
+    "ruff-v2.log": {
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+      "bytes": 20
+    },
+    "cleanup-v2.json": {
+      "sha256": "d24ef0b8251fccb1943a1b063063082ce7992b5a991e23f38992e9a229645e31",
+      "bytes": 265
+    }
+  },
+  "findings": {
+    "SEM-IR-01": "shared plan negation vocabulary; no resource blacklist",
+    "SEM-IR-02": "same-length shared modal view binds future headcount; original predicate remains plan-only",
+    "SEM-IR-03": "prepared assertion/modal/period indexes; binary indexed bounded queries; no repeated regex scans per hit"
+  },
+  "validation": {
+    "red": {
+      "failed": 16,
+      "passed": 3,
+      "deselected": 59,
+      "seconds": 2.85
+    },
+    "initial_green": {
+      "passed": 129,
+      "seconds": 4.39
+    },
+    "final_green": {
+      "passed": 539,
+      "seconds": 17.16,
+      "warnings": 2
+    },
+    "ruff": "PASS",
+    "git_diff_check": "PASS"
+  },
+  "invariants": {
+    "legacy_0_8": "existing tests preserved",
+    "reading_plan": "reading_plan/3 unchanged",
+    "max_spans": 112,
+    "max_reading_chars": 48000,
+    "resource_scan_passes": 18,
+    "hash_inventory": "both resource and shared predicate module byte hashes included",
+    "new_dependency_packages": []
+  },
+  "limitations": [
+    "No model, Docling, original document or new holdout was used; ROOT owns real source-to-summary acceptance.",
+    "Preparation/query performance contract is for bounded assertion_spans. Public compatibility accepts cross-delimiter metric targets through a cached fallback; overlapping unbounded compound targets are not the resource consumer API.",
+    "Single-target public observe_metric_predicate keeps its existing per-call boundary scan. This change does not migrate unrelated metric consumers to the prepared API.",
+    "Regex-input counts are deterministic work evidence, not wall-clock guarantees or a universal NLP guarantee.",
+    "Plugin auto-loading disabled; warnings only asyncio_mode/timeout registration, not test failures."
+  ],
+  "cleanup": {
+    "task_temp": "C:\\Temp\\c3sem-v2",
+    "removed": true,
+    "model_calls": 0,
+    "downloads": 0,
+    "test_sessions_completed": true,
+    "time_utc": "2026-10-26T21:59:52.7269142Z",
+    "original_documents_changed": false,
+    "production_config_changed": false
+  },
+  "committed": false,
+  "pushed": false,
+  "independent_review": "PENDING_ROOT"
+}

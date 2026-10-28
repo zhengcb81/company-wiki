@@ -1,0 +1,45 @@
+{
+  "schema_version": "independent-review/1",
+  "reviewer": "ROOT",
+  "authors": [
+    "c3_cache_independent_review",
+    "pdf_c2_portability_review"
+  ],
+  "status": "PASS_ZERO_OPEN_TOOL_SCOPE_ONLY",
+  "files_lf_sha256": {
+    "tools/document_understanding_benchmark/closed_group_support.py": "06698b1eacf9c384581f0f960e31d754d7701333b9a24c8fc9c848a41c206403",
+    "tests/unit/test_closed_group_numeric_boundary.py": "179cf4a9efa7d84272aa5e00b3fbad301afcee6e2a3248bfcebe5e722583dc30",
+    "tools/document_understanding_benchmark/phase_c_observer.py": "8f2c44ef2b63b5a434c3789111388edb8a3e3f3065a5b3ce17fbe7243ca46930",
+    "tests/unit/test_phase_c_observer.py": "18a5cfc93d3e43990babed08144fe4ba38a617d960ba1d3faf9d9d06c7e72a4b"
+  },
+  "review": [
+    "Numeric/CJK separator change only within source-owner-proven continuity; no intra-span rewrite or digit/digit/decimal/Latin merging.",
+    "Scoped request bytes remain equal to actual compiler view/subset, including shared fragments. Per-task score uses unchanged oracle and exact task members, not unrelated selected spans.",
+    "First request requires all frozen gold in sent tasks before original budgeted generate; initial subset rejected; valid later subset records not_sent without demanding completed tasks again.",
+    "Production scoped request builders reject missing reading_context before this observer; no newly reachable None subscript failure.",
+    "No summary claim validity or real POST is inferred from source/task availability. Old gold bytes and source preservation rules unchanged."
+  ],
+  "independent_validation": {
+    "passed": 37,
+    "seconds": 4.88,
+    "scope": "two new unit suites plus4 existing observer consumer checks",
+    "log": "root-tools-independent.log",
+    "junit": "root-tools-independent.xml"
+  },
+  "author_validation_inspected": {
+    "oracle": 132,
+    "observer": 10,
+    "counts_overlap": true
+  },
+  "real_cached_combination": "numeric-boundary-oracle/combined-observer-rescore.json; industry cloud supported by actual compiled t35; R&D/outlook still absent from OLD cached selection.",
+  "cleanup": {
+    "owned_root": ".c3ir",
+    "absent_after": true,
+    "absolute_target_checked": true,
+    "note": "Optional reparse-point filter used invalid PowerShell shorthand after tests; emitted a nonterminating diagnostic. Native removal was bounded to the resolved owned root and actual absence independently checked. Do not claim that optional filter passed."
+  },
+  "new_model_calls": 0,
+  "pdf_parses": 0,
+  "downloads": 0,
+  "formal_summary_acceptance": "OPEN_USER_REQUESTED_PAUSE_AFTER_CURRENT_NODE"
+}

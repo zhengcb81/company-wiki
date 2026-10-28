@@ -1,0 +1,37 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.c328reg\\p", "requested_basetemp_len": 45, "cwd_len": 34, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki
+configfile: pytest.ini
+collected 440 items
+
+tests\unit\document_understanding_selection\test_reading_balanced_coverage.py . [  0%]
+..............                                                           [  3%]
+tests\unit\document_understanding_selection\test_reading_decision_inventory.py . [  3%]
+......................................                                   [ 12%]
+tests\unit\document_understanding_selection\test_reading_material_value.py . [ 12%]
+..........................................                               [ 22%]
+tests\unit\document_understanding_selection\test_reading_measure_scope.py . [ 22%]
+.........................                                                [ 27%]
+tests\unit\document_understanding_selection\test_reading_order_metric_language_parity.py . [ 28%]
+................................................                         [ 39%]
+tests\unit\document_understanding_selection\test_reading_predicate_generalization.py . [ 39%]
+.................................                                        [ 46%]
+tests\unit\document_understanding_selection\test_reading_predicate_state_owner.py . [ 47%]
+................                                                         [ 50%]
+tests\unit\document_understanding_selection\test_reading_semantic_value.py . [ 50%]
+........................................................................ [ 67%]
+........................................................................ [ 83%]
+.......................                                                  [ 88%]
+tests\unit\document_understanding_selection\test_reading_value_coverage.py . [ 89%]
+................................................                         [100%]
+
+============================== warnings summary ===============================
+..\..\..\..\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464
+  C:\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: C:\Users\郑曾波\Projects\company-wiki\.planning\c3-20261028\regression-v2.xml -
+======================= 440 passed, 1 warning in 18.91s =======================

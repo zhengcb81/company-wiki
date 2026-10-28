@@ -23,6 +23,7 @@ from .narrative_recognition_scope import (
     named_recognition_scope,
 )
 from .narrative_predicate_state import observe_metric_predicate, predicate_scope
+from .narrative_operating_resources import RESOURCE_READING_SCAN_PASSES
 from .narrative_business_disclosures import (
     READING_DISCLOSURE_SCAN_PASSES,
     disclosure_relations,
@@ -52,9 +53,10 @@ _ACTIVITY = re.compile(
 
 # Only the opt-in ReadingPlan detector consumes these relations. Explicit
 # legacy selectors keep detect_business_fact and its historical predicates.
-READING_BUSINESS_POLICY_VERSION = "reading-business-policy/19"
+READING_BUSINESS_POLICY_VERSION = "reading-business-policy/20"
 READING_BUSINESS_SCAN_PASSES = (
     6 + READING_DISCLOSURE_SCAN_PASSES + READING_RECOGNITION_SCOPE_SCAN_PASSES
+    + RESOURCE_READING_SCAN_PASSES
 )
 _FINANCIAL_BUSINESS_RELATIONS = frozenset({
     "business_billing_basis", "business_reporting_scope",
@@ -801,6 +803,17 @@ def project_reading_business_fact(text: str, source_relations: dict, *,
     Legacy 0.8 recognition remains unchanged.
     """
     fact = (description if description is not None else detect_reading_business_fact(text)) if include_description else OperatingFact()
+    if include_description:
+        from .narrative_operating_resources import operating_resource_relations
+        resource_reasons = operating_resource_relations(_reading_text(text))
+        if resource_reasons:
+            topic_for = {"operating_resource_stock": "operating_resources",
+                         "operating_resource_allocation": "research_investment",
+                         "operating_plan": "operating_plan"}
+            fact = replace(fact, eligible=True,
+                topics=tuple(dict.fromkeys((*fact.topics, *(topic_for[reason] for reason in resource_reasons)))),
+                reasons=tuple(dict.fromkeys((*fact.reasons, *resource_reasons))),
+                purpose="operating" if fact.purpose in NON_OPERATING_PURPOSES or fact.purpose == "unknown" else fact.purpose)
     if fact.purpose in NON_OPERATING_PURPOSES:
         return fact
     # Only the source-owned 0.9 projection consumes the new reading use. The

@@ -56,6 +56,57 @@ def _append(path: str, value: dict) -> None:
         os.fsync(stream.fileno())
 
 
+def _sent_task_gold(required, selected, view, sent_keys):
+    """Observe existing compiler closures; never infer new source groups."""
+    from tools.document_understanding_benchmark.closed_group_support import score_facts
+
+    spans = {span.span_id: span for span in selected.evidence_spans}
+    groups = {group["group_id"]: group for group in selected.reading_context["groups"]}
+    witnesses = {fact["id"]: [] for fact in required}
+    for task in view.plan.tasks:
+        context = None
+        if task.origin_group_id is not None:
+            group = groups[task.origin_group_id]
+            assert tuple(group["evidence_ids"]) == task.member_ids
+            context = _oracle_reading_context({
+                "schema_version": selected.reading_context["schema_version"],
+                "groups": [group],
+            })
+        scores = score_facts(required,
+            evidence_spans=tuple(spans[sid] for sid in task.member_ids),
+            reading_context=context, source_id=selected.source_ref.source_id)
+        for fact in scores:
+            if fact["supported"]:
+                witnesses[fact["id"]].append(task.key)
+    facts = [{"id": fact["id"],
+              "supported": bool(keys := [key for key in witnesses[fact["id"]] if key in sent_keys]),
+              "supported_task_keys": keys}
+             for fact in required]
+    return {
+        "scope": "source_support_in_current_request_tasks",
+        "request_scope": "full_request" if len(sent_keys) == len(view.plan.tasks) else "repair_subset",
+        "sent_task_keys": [task.key for task in view.plan.tasks if task.key in sent_keys],
+        "facts": facts, "required_count": len(facts),
+        "supported_count": sum(fact["supported"] for fact in facts),
+        "missing_ids": [fact["id"] for fact in facts if not fact["supported"]],
+        "not_sent_ids": [fact["id"] for fact in facts
+                         if not fact["supported"] and witnesses[fact["id"]]],
+        "summary_claim_coverage": "not_evaluated",
+    }
+
+
+def gold_admission_missing(observation, *, attempt_no):
+    """Require full source-task gold on the first request, observe repair subsets."""
+    sent = observation.get("sent_tasks")
+    if sent is None:
+        return observation["missing_ids"]
+    if sent["request_scope"] == "repair_subset":
+        if attempt_no <= 1:
+            raise ValueError("repair subset cannot be an initial request")
+        return []  # Unsent completed tasks need not be sent again for a repair.
+    return sent["missing_ids"]
+
+
 def gold_observation(gold: dict, selected, envelope: dict) -> dict:
     from company_wiki.automation.narrative_model import _group_mapping
 
@@ -67,6 +118,8 @@ def gold_observation(gold: dict, selected, envelope: dict) -> dict:
         sys.path.insert(0, project)
     from tools.document_understanding_benchmark.closed_group_support import score_facts
 
+    view = None
+    sent_keys = frozenset()
     if envelope["schema_version"] in {"narrative-model-request/5", "narrative-model-request/6"}:
         from company_wiki.automation.narrative_model_scoped import compile_scoped_model_view
 
@@ -76,12 +129,12 @@ def gold_observation(gold: dict, selected, envelope: dict) -> dict:
         max_claims = max(1, len(selected.evidence_spans) * 2) if envelope["schema_version"] == "narrative-model-request/6" else 20
         view = compile_scoped_model_view(selected, max_claims=max_claims)
         full_material = view.to_model_dict()
+        sent_keys = frozenset(row["key"] for row in envelope["material"]["tasks"])
         if envelope["material"] != full_material:
             # A coverage-repair retry sends only the still-uncovered tasks; its
             # material must equal the same compiler restricted to those keys.
             from dataclasses import replace
 
-            sent_keys = frozenset(row["key"] for row in envelope["material"]["tasks"])
             full_keys = {row["key"] for row in full_material["tasks"]}
             assert sent_keys and sent_keys < full_keys
             assert envelope["material"] == replace(
@@ -149,7 +202,8 @@ def gold_observation(gold: dict, selected, envelope: dict) -> dict:
                 for base, group in zip(scored, observed, strict=True)]
     facts = [{**result, "importance": original.get("importance")}
         for original, result in zip(required, scored, strict=True)]
-    return {
+    observation = {
+        "scope": "full_selected_source_availability",
         "facts": facts,
         "required_count": len(facts),
         "supported_count": sum(fact["supported"] for fact in facts),
@@ -161,6 +215,11 @@ def gold_observation(gold: dict, selected, envelope: dict) -> dict:
         "unique_aliases": True,
         "quality_oracle": "tools.document_understanding_benchmark.closed_group_support.score_facts",
     }
+    observation["full_selection"] = {key: observation[key] for key in (
+        "scope", "facts", "required_count", "supported_count", "missing_ids")}
+    if view is not None:
+        observation["sent_tasks"] = _sent_task_gold(required, selected, view, sent_keys)
+    return observation
 
 
 def install() -> None:
@@ -315,7 +374,9 @@ def install() -> None:
         if not material_file.exists():
             with gzip.open(material_file, "wb") as stream:
                 stream.write(body)
-        if version == "0.9.0" and observation["missing_ids"]:
+        if version == "0.9.0" and gold_admission_missing(
+            observation, attempt_no=context.attempt.attempt_no
+        ):
             refuse("PHASE_C_GOLD_SUPPORT_MISSING")
         if config.get("forbid_post"):
             refuse("PHASE_C_CACHE_WOULD_GENERATE")

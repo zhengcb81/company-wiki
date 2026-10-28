@@ -1,0 +1,28 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Temp\\c3numeric-boundary-20261027\\pytest-green", "requested_basetemp_len": 48, "cwd_len": 34, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki
+configfile: pytest.ini
+collected 132 items
+
+tests\unit\test_closed_group_numeric_boundary.py ....................... [ 17%]
+....                                                                     [ 20%]
+tests\unit\document_understanding_selection\test_closed_group_support.py . [ 21%]
+.........                                                                [ 28%]
+tests\unit\document_understanding_selection\test_attributed_context_quote_oracle.py . [ 28%]
+..                                                                       [ 30%]
+tests\unit\document_understanding_selection\test_reading_display_adapter.py . [ 31%]
+....................................                                     [ 58%]
+tests\unit\test_narrative_claim_grounding.py ................            [ 70%]
+tests\unit\test_source_summary_tasks.py ................                 [ 82%]
+tests\test_phase_c_extractive.py .......................                 [100%]
+
+============================== warnings summary ===============================
+..\..\..\..\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464
+  C:\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: C:\Users\郑曾波\Projects\company-wiki\.planning\c3-20261026\numeric-boundary-oracle\green.xml -
+======================= 132 passed, 1 warning in 7.37s ========================

@@ -1,0 +1,85 @@
+{
+  "schema_version": "closed-group-numeric-rescore/1",
+  "baseline_revision": "0c988e8d70e22a436126e6ae31ad4fa8172a4222",
+  "baseline_oracle_sha256": "23dd1b294be6a2d776eee00e60df24121cdf9e9d252f082fd3693cf5ca65cb34",
+  "baseline_observer_sha256": "575a78408ea6a1dbded75a770ebc765c73bc091b36d9daadd5d8b15aeea7baf6",
+  "current_oracle_sha256": "ff9e2d01b527ebc5119a094741414ab008ec58f92223ad08da8febae0d8a7b50",
+  "diagnosis_sha256": "2670e6fa24291059ccccbf1b98ce109c2f4135c070bdba0d13edc7a45e93e351",
+  "gold_sha256": "2d6391a1f3f6d0c6e9bc7629e327f54c5bb4d2c651b202d38dd4f4364dbba568",
+  "method": "Same frozen typed spans, original context, scoped compiler max_claims=20 and committed gold_observation; only _join changes between observations.",
+  "before": {
+    "facts": [
+      {
+        "id": "hk-industry-cloud-closure",
+        "supported": false,
+        "all_anchors_individually_present": false,
+        "importance": "critical"
+      },
+      {
+        "id": "hk-rd-period-scope",
+        "supported": false,
+        "all_anchors_individually_present": false,
+        "importance": "critical"
+      },
+      {
+        "id": "hk-outlook-not-actual",
+        "supported": false,
+        "all_anchors_individually_present": false,
+        "importance": "critical"
+      }
+    ],
+    "required_count": 3,
+    "supported_count": 0,
+    "missing_ids": [
+      "hk-industry-cloud-closure",
+      "hk-rd-period-scope",
+      "hk-outlook-not-actual"
+    ],
+    "evidence_count": 112,
+    "groups": 59,
+    "citation_units": 0,
+    "evidence_characters": 6427,
+    "unique_aliases": true,
+    "quality_oracle": "tools.document_understanding_benchmark.closed_group_support.score_facts"
+  },
+  "after": {
+    "facts": [
+      {
+        "id": "hk-industry-cloud-closure",
+        "supported": true,
+        "all_anchors_individually_present": false,
+        "importance": "critical"
+      },
+      {
+        "id": "hk-rd-period-scope",
+        "supported": false,
+        "all_anchors_individually_present": false,
+        "importance": "critical"
+      },
+      {
+        "id": "hk-outlook-not-actual",
+        "supported": false,
+        "all_anchors_individually_present": false,
+        "importance": "critical"
+      }
+    ],
+    "required_count": 3,
+    "supported_count": 1,
+    "missing_ids": [
+      "hk-rd-period-scope",
+      "hk-outlook-not-actual"
+    ],
+    "evidence_count": 112,
+    "groups": 59,
+    "citation_units": 0,
+    "evidence_characters": 6427,
+    "unique_aliases": true,
+    "quality_oracle": "tools.document_understanding_benchmark.closed_group_support.score_facts"
+  },
+  "input_unchanged": true,
+  "models": 0,
+  "downloads": 0,
+  "pdf_parses": 0,
+  "actual_summary_performed": false,
+  "limitation": "Compiler/oracle cache observation only; original manual 4/4 report proved physical source closure, not the previously failing oracle nor a real summary."
+}

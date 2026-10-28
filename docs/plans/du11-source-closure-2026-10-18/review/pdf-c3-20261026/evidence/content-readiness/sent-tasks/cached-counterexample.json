@@ -1,0 +1,17 @@
+{
+  "scope": "old observer actual cached input / in-memory control only; no gold file change",
+  "cache_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\c3-20261026\\hk-v2-source-check\\diagnosis.json.gz",
+  "cache_sha256": "2670e6fa24291059ccccbf1b98ce109c2f4135c070bdba0d13edc7a45e93e351",
+  "gold_sha256": "2d6391a1f3f6d0c6e9bc7629e327f54c5bb4d2c651b202d38dd4f4364dbba568",
+  "control_anchor_json_path": "facts[0].any_support_sets[0][0] only; NOT claimed as the complete frozen4-anchor fact",
+  "full_compiled_request_old_observer_supported": true,
+  "repair_subset_task_keys": [
+    "t1"
+  ],
+  "subset_contains_control_anchor": false,
+  "subset_old_observer_supported": true,
+  "actual_industry_closed_task": "t35 with4 support p13:9-12 and1context p13:1",
+  "model_calls": 0,
+  "pdf_parses": 0,
+  "old_observer_lf_sha256": "575a78408ea6a1dbded75a770ebc765c73bc091b36d9daadd5d8b15aeea7baf6"
+}

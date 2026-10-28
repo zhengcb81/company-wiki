@@ -1,0 +1,25 @@
+{
+  "phase": "green",
+  "exit_code": 0,
+  "timeout": false,
+  "seconds": 11.423,
+  "runtime": "C:\\Miniconda\\python.exe",
+  "before_lf_sha256": {
+    "tools/document_understanding_benchmark/phase_c_observer.py": "8f2c44ef2b63b5a434c3789111388edb8a3e3f3065a5b3ce17fbe7243ca46930",
+    "tests/unit/test_phase_c_observer.py": "18a5cfc93d3e43990babed08144fe4ba38a617d960ba1d3faf9d9d06c7e72a4b"
+  },
+  "after_lf_sha256": {
+    "tools/document_understanding_benchmark/phase_c_observer.py": "8f2c44ef2b63b5a434c3789111388edb8a3e3f3065a5b3ce17fbe7243ca46930",
+    "tests/unit/test_phase_c_observer.py": "18a5cfc93d3e43990babed08144fe4ba38a617d960ba1d3faf9d9d06c7e72a4b"
+  },
+  "stable": true,
+  "pid": 12080,
+  "pid_alive_after": false,
+  "fixture_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c3obs-green",
+  "targets": [
+    "tests/unit/test_phase_c_observer.py",
+    "tests/test_phase_c_extractive.py::test_gold_observer_validates_the_actual_scoped_request_and_rejects_changed_material",
+    "tests/test_phase_c_extractive.py::test_observer_adapts_v3_context_membership_for_the_independent_oracle",
+    "tests/integration/test_shared_scoped_public_request.py::test_existing_phase_c_observer_binds_actual_v4_material_without_another_oracle"
+  ]
+}

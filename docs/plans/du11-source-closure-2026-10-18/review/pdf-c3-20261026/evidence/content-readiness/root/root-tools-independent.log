@@ -1,0 +1,22 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.c3ir\\p", "requested_basetemp_len": 42, "cwd_len": 34, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+rootdir: C:\Users\郑曾波\Projects\company-wiki
+configfile: pytest.ini
+collected 37 items
+
+tests\unit\test_closed_group_numeric_boundary.py ....................... [ 62%]
+....                                                                     [ 72%]
+tests\unit\test_phase_c_observer.py ......                               [ 89%]
+tests\test_phase_c_extractive.py ...                                     [ 97%]
+tests\integration\test_shared_scoped_public_request.py .                 [100%]
+
+============================== warnings summary ===============================
+..\..\..\..\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464
+  C:\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+- generated xml file: C:\Users\郑曾波\Projects\company-wiki\.planning\c3-20261026\root-tools-independent.xml -
+======================== 37 passed, 1 warning in 4.88s ========================

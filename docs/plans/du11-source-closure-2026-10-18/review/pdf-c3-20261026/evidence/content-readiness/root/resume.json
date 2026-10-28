@@ -1,0 +1,26 @@
+{
+  "date": "2026-10-28",
+  "user": "继续",
+  "previous_pause_revoked": true,
+  "native_controller_observation": "paused; API has no resume method, user continuation authorizes execution",
+  "prior_commit": "0c988e8d70e22a436126e6ae31ad4fa8172a4222",
+  "type_amendment": {
+    "file": "src/company_wiki/source_catalog/narrative_predicate_state.py",
+    "frozen_v2_lf_sha256": "780b5792a5fdeb45a4f0c3679837edb805eec504a7914dd641eb02b35fa47979",
+    "current_lf_sha256": "38f8c3440f45e526fc493586112d4f8b11dbd99e8d7d0835f45e42b1e6d8c43d",
+    "changes": [
+      "groups collection annotation",
+      "references collection annotation",
+      "period: Period annotation",
+      "lastgroup cast and explanatory comment/import"
+    ],
+    "frozen_source_bytes_reconstructed": false,
+    "reconstruction_ast_equal": true,
+    "limitation": "Frozen-v2 bytes are unavailable; two exact-reconstruction attempts did not match its SHA. Do not claim byte/AST equivalence to that version. Final tests/review bind actual current source.",
+    "mypy": "390 source files PASS",
+    "log": ".planning/c3-20261026/content-mypy-final.log"
+  },
+  "new_model_calls": 0,
+  "new_downloads": 0,
+  "observed_at": "2026-10-28T06:54:36.854610+00:00"
+}

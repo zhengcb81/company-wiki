@@ -1,0 +1,22 @@
+{
+  "phase": "red",
+  "exit_code": 1,
+  "timeout": false,
+  "seconds": 12.43,
+  "runtime": "C:\\Miniconda\\python.exe",
+  "before_lf_sha256": {
+    "tools/document_understanding_benchmark/phase_c_observer.py": "575a78408ea6a1dbded75a770ebc765c73bc091b36d9daadd5d8b15aeea7baf6",
+    "tests/unit/test_phase_c_observer.py": "18a5cfc93d3e43990babed08144fe4ba38a617d960ba1d3faf9d9d06c7e72a4b"
+  },
+  "after_lf_sha256": {
+    "tools/document_understanding_benchmark/phase_c_observer.py": "575a78408ea6a1dbded75a770ebc765c73bc091b36d9daadd5d8b15aeea7baf6",
+    "tests/unit/test_phase_c_observer.py": "18a5cfc93d3e43990babed08144fe4ba38a617d960ba1d3faf9d9d06c7e72a4b"
+  },
+  "stable": true,
+  "pid": 11856,
+  "pid_alive_after": false,
+  "fixture_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c3obs-red",
+  "targets": [
+    "tests/unit/test_phase_c_observer.py"
+  ]
+}

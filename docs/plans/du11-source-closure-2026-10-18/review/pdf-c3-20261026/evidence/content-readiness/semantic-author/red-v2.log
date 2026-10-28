@@ -1,0 +1,345 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+FFFFF..FFFF.FFFFFFF                                                      [100%]
+================================== FAILURES ===================================
+_ test_negated_plan_never_asserts_positive_resource_or_plan[We have no plans to invest in research and development.] _
+
+text = 'We have no plans to invest in research and development.'
+
+    @pytest.mark.parametrize("text", (
+        "We have no plans to invest in research and development.",
+        "We have no current plans to invest in research and development.",
+        "公司暂无计划投入技术研发。",
+        "公司不计划投资技术研发。",
+        "本集團暫無計劃投資技術研發。",
+        "We will not invest USD 4 million in research and development.",
+        "公司尚未确定计划投入技术研发。",
+    ))
+    def test_negated_plan_never_asserts_positive_resource_or_plan(text):
+>       assert not (ACTUAL | {"operating_plan"}).intersection(project(text).reasons)
+E       AssertionError: assert not {'operating_plan'}
+E        +  where {'operating_plan'} = <built-in method intersection of set object at 0x000001832FF957E0>(('operating_plan',))
+E        +    where <built-in method intersection of set object at 0x000001832FF957E0> = ({'operating_resource_allocation', 'operating_resource_stock'} | {'operating_plan'}).intersection
+E        +    and   ('operating_plan',) = OperatingFact(eligible=True, topics=('operating_plan',), reasons=('operating_plan',), score=3, financial_exempt=True, purpose='operating').reasons
+E        +      where OperatingFact(eligible=True, topics=('operating_plan',), reasons=('operating_plan',), score=3, financial_exempt=True, purpose='operating') = project('We have no plans to invest in research and development.')
+
+tests\unit\document_understanding_selection\test_reading_operating_resources.py:224: AssertionError
+_ test_negated_plan_never_asserts_positive_resource_or_plan[We have no current plans to invest in research and development.] _
+
+text = 'We have no current plans to invest in research and development.'
+
+    @pytest.mark.parametrize("text", (
+        "We have no plans to invest in research and development.",
+        "We have no current plans to invest in research and development.",
+        "公司暂无计划投入技术研发。",
+        "公司不计划投资技术研发。",
+        "本集團暫無計劃投資技術研發。",
+        "We will not invest USD 4 million in research and development.",
+        "公司尚未确定计划投入技术研发。",
+    ))
+    def test_negated_plan_never_asserts_positive_resource_or_plan(text):
+>       assert not (ACTUAL | {"operating_plan"}).intersection(project(text).reasons)
+E       AssertionError: assert not {'operating_plan'}
+E        +  where {'operating_plan'} = <built-in method intersection of set object at 0x000001832FF949E0>(('operating_plan',))
+E        +    where <built-in method intersection of set object at 0x000001832FF949E0> = ({'operating_resource_allocation', 'operating_resource_stock'} | {'operating_plan'}).intersection
+E        +    and   ('operating_plan',) = OperatingFact(eligible=True, topics=('operating_plan',), reasons=('operating_plan',), score=3, financial_exempt=True, purpose='operating').reasons
+E        +      where OperatingFact(eligible=True, topics=('operating_plan',), reasons=('operating_plan',), score=3, financial_exempt=True, purpose='operating') = project('We have no current plans to invest in research and development.')
+
+tests\unit\document_understanding_selection\test_reading_operating_resources.py:224: AssertionError
+_ test_negated_plan_never_asserts_positive_resource_or_plan[\u516c\u53f8\u6682\u65e0\u8ba1\u5212\u6295\u5165\u6280\u672f\u7814\u53d1\u3002] _
+
+text = '公司暂无计划投入技术研发。'
+
+    @pytest.mark.parametrize("text", (
+        "We have no plans to invest in research and development.",
+        "We have no current plans to invest in research and development.",
+        "公司暂无计划投入技术研发。",
+        "公司不计划投资技术研发。",
+        "本集團暫無計劃投資技術研發。",
+        "We will not invest USD 4 million in research and development.",
+        "公司尚未确定计划投入技术研发。",
+    ))
+    def test_negated_plan_never_asserts_positive_resource_or_plan(text):
+>       assert not (ACTUAL | {"operating_plan"}).intersection(project(text).reasons)
+E       AssertionError: assert not {'operating_plan'}
+E        +  where {'operating_plan'} = <built-in method intersection of set object at 0x000001832FFC5620>(('operating_plan',))
+E        +    where <built-in method intersection of set object at 0x000001832FFC5620> = ({'operating_resource_allocation', 'operating_resource_stock'} | {'operating_plan'}).intersection
+E        +    and   ('operating_plan',) = OperatingFact(eligible=True, topics=('operating_plan',), reasons=('operating_plan',), score=3, financial_exempt=True, purpose='operating').reasons
+E        +      where OperatingFact(eligible=True, topics=('operating_plan',), reasons=('operating_plan',), score=3, financial_exempt=True, purpose='operating') = project('公司暂无计划投入技术研发。')
+
+tests\unit\document_understanding_selection\test_reading_operating_resources.py:224: AssertionError
+_ test_negated_plan_never_asserts_positive_resource_or_plan[\u516c\u53f8\u4e0d\u8ba1\u5212\u6295\u8d44\u6280\u672f\u7814\u53d1\u3002] _
+
+text = '公司不计划投资技术研发。'
+
+    @pytest.mark.parametrize("text", (
+        "We have no plans to invest in research and development.",
+        "We have no current plans to invest in research and development.",
+        "公司暂无计划投入技术研发。",
+        "公司不计划投资技术研发。",
+        "本集團暫無計劃投資技術研發。",
+        "We will not invest USD 4 million in research and development.",
+        "公司尚未确定计划投入技术研发。",
+    ))
+    def test_negated_plan_never_asserts_positive_resource_or_plan(text):
+>       assert not (ACTUAL | {"operating_plan"}).intersection(project(text).reasons)
+E       AssertionError: assert not {'operating_plan'}
+E        +  where {'operating_plan'} = <built-in method intersection of set object at 0x000001832FFC66C0>(('operating_plan',))
+E        +    where <built-in method intersection of set object at 0x000001832FFC66C0> = ({'operating_resource_allocation', 'operating_resource_stock'} | {'operating_plan'}).intersection
+E        +    and   ('operating_plan',) = OperatingFact(eligible=True, topics=('operating_plan',), reasons=('operating_plan',), score=3, financial_exempt=True, purpose='operating').reasons
+E        +      where OperatingFact(eligible=True, topics=('operating_plan',), reasons=('operating_plan',), score=3, financial_exempt=True, purpose='operating') = project('公司不计划投资技术研发。')
+
+tests\unit\document_understanding_selection\test_reading_operating_resources.py:224: AssertionError
+_ test_negated_plan_never_asserts_positive_resource_or_plan[\u672c\u96c6\u5718\u66ab\u7121\u8a08\u5283\u6295\u8cc7\u6280\u8853\u7814\u767c\u3002] _
+
+text = '本集團暫無計劃投資技術研發。'
+
+    @pytest.mark.parametrize("text", (
+        "We have no plans to invest in research and development.",
+        "We have no current plans to invest in research and development.",
+        "公司暂无计划投入技术研发。",
+        "公司不计划投资技术研发。",
+        "本集團暫無計劃投資技術研發。",
+        "We will not invest USD 4 million in research and development.",
+        "公司尚未确定计划投入技术研发。",
+    ))
+    def test_negated_plan_never_asserts_positive_resource_or_plan(text):
+>       assert not (ACTUAL | {"operating_plan"}).intersection(project(text).reasons)
+E       AssertionError: assert not {'operating_plan'}
+E        +  where {'operating_plan'} = <built-in method intersection of set object at 0x000001832FFC73E0>(('operating_plan',))
+E        +    where <built-in method intersection of set object at 0x000001832FFC73E0> = ({'operating_resource_allocation', 'operating_resource_stock'} | {'operating_plan'}).intersection
+E        +    and   ('operating_plan',) = OperatingFact(eligible=True, topics=('operating_plan',), reasons=('operating_plan',), score=3, financial_exempt=True, purpose='operating').reasons
+E        +      where OperatingFact(eligible=True, topics=('operating_plan',), reasons=('operating_plan',), score=3, financial_exempt=True, purpose='operating') = project('本集團暫無計劃投資技術研發。')
+
+tests\unit\document_understanding_selection\test_reading_operating_resources.py:224: AssertionError
+_ test_explicit_future_headcount_is_plan_only[Our research staff will number 2,400 people next year.] _
+
+text = 'Our research staff will number 2,400 people next year.'
+
+    @pytest.mark.parametrize("text", (
+        "Our research staff will number 2,400 people next year.",
+        "Our R&D staff will reach 2,400 employees next year.",
+        "公司研发人员将达到2,400人。",
+        "本集團研發人員將達到2,400人。",
+        "We expect our research staff to reach 2,400 people next year.",
+    ))
+    def test_explicit_future_headcount_is_plan_only(text):
+        fact = project(text)
+>       assert "operating_plan" in fact.reasons
+E       AssertionError: assert 'operating_plan' in ()
+E        +  where () = OperatingFact(eligible=False, topics=(), reasons=(), score=0, financial_exempt=False, purpose='unknown').reasons
+
+tests\unit\document_understanding_selection\test_reading_operating_resources.py:236: AssertionError
+_ test_explicit_future_headcount_is_plan_only[Our R&D staff will reach 2,400 employees next year.] _
+
+text = 'Our R&D staff will reach 2,400 employees next year.'
+
+    @pytest.mark.parametrize("text", (
+        "Our research staff will number 2,400 people next year.",
+        "Our R&D staff will reach 2,400 employees next year.",
+        "公司研发人员将达到2,400人。",
+        "本集團研發人員將達到2,400人。",
+        "We expect our research staff to reach 2,400 people next year.",
+    ))
+    def test_explicit_future_headcount_is_plan_only(text):
+        fact = project(text)
+>       assert "operating_plan" in fact.reasons
+E       AssertionError: assert 'operating_plan' in ()
+E        +  where () = OperatingFact(eligible=False, topics=(), reasons=(), score=0, financial_exempt=False, purpose='unknown').reasons
+
+tests\unit\document_understanding_selection\test_reading_operating_resources.py:236: AssertionError
+_ test_explicit_future_headcount_is_plan_only[\u516c\u53f8\u7814\u53d1\u4eba\u5458\u5c06\u8fbe\u52302,400\u4eba\u3002] _
+
+text = '公司研发人员将达到2,400人。'
+
+    @pytest.mark.parametrize("text", (
+        "Our research staff will number 2,400 people next year.",
+        "Our R&D staff will reach 2,400 employees next year.",
+        "公司研发人员将达到2,400人。",
+        "本集團研發人員將達到2,400人。",
+        "We expect our research staff to reach 2,400 people next year.",
+    ))
+    def test_explicit_future_headcount_is_plan_only(text):
+        fact = project(text)
+>       assert "operating_plan" in fact.reasons
+E       AssertionError: assert 'operating_plan' in ()
+E        +  where () = OperatingFact(eligible=False, topics=(), reasons=(), score=0, financial_exempt=False, purpose='unknown').reasons
+
+tests\unit\document_understanding_selection\test_reading_operating_resources.py:236: AssertionError
+_ test_explicit_future_headcount_is_plan_only[\u672c\u96c6\u5718\u7814\u767c\u4eba\u54e1\u5c07\u9054\u52302,400\u4eba\u3002] _
+
+text = '本集團研發人員將達到2,400人。'
+
+    @pytest.mark.parametrize("text", (
+        "Our research staff will number 2,400 people next year.",
+        "Our R&D staff will reach 2,400 employees next year.",
+        "公司研发人员将达到2,400人。",
+        "本集團研發人員將達到2,400人。",
+        "We expect our research staff to reach 2,400 people next year.",
+    ))
+    def test_explicit_future_headcount_is_plan_only(text):
+        fact = project(text)
+>       assert "operating_plan" in fact.reasons
+E       AssertionError: assert 'operating_plan' in ()
+E        +  where () = OperatingFact(eligible=False, topics=(), reasons=(), score=0, financial_exempt=False, purpose='unknown').reasons
+
+tests\unit\document_understanding_selection\test_reading_operating_resources.py:236: AssertionError
+________ test_negative_actor_does_not_poison_separate_actual_resource _________
+
+    def test_negative_actor_does_not_poison_separate_actual_resource():
+        text = ("We have no plans to invest in research and development, "
+                "but our supplier employed 2,400 research engineers.")
+        fact = project(text)
+        assert "operating_resource_stock" in fact.reasons
+>       assert "operating_plan" not in fact.reasons
+E       AssertionError: assert 'operating_plan' not in ('operating_plan', 'operating_resource_stock')
+E        +  where ('operating_plan', 'operating_resource_stock') = OperatingFact(eligible=True, topics=('operating_plan', 'operating_resources'), reasons=('operating_plan', 'operating_resource_stock'), score=3, financial_exempt=True, purpose='operating').reasons
+
+tests\unit\document_understanding_selection\test_reading_operating_resources.py:245: AssertionError
+______________ test_real_boundary_and_modal_scans_grow_linearly _______________
+
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x000001832FF7B1D0>
+
+    def test_real_boundary_and_modal_scans_grow_linearly(monkeypatch):
+        observations = []
+        for size in (16, 32, 64):
+            text = ", ".join(["our R&D staff numbered 2,400 employees"] * size)
+            totals = {}
+            with monkeypatch.context() as patch:
+                meter(patch, totals)
+                assert resources.operating_resource_relations(text) == ("operating_resource_stock",)
+            observations.append((len(text), sum(totals.values())))
+            # No fake probe replaces recognition. Both real boundary and modal
+            # owners must have scanned, including preparation and all queries.
+            assert totals[predicates.__name__ + "_BOUNDARY"] >= len(text)
+            assert totals[predicates.__name__ + "_MODAL"] > 0
+        for (old_len, old_work), (new_len, new_work) in zip(observations, observations[1:]):
+>           assert new_work / old_work <= (new_len / old_len) * 1.15, observations
+E           AssertionError: [(638, 80865), (1278, 305105), (2558, 1183665)]
+E           assert (305105 / 80865) <= ((1278 / 638) * 1.15)
+
+tests\unit\document_understanding_selection\test_prepared_predicate_context.py:50: AssertionError
+_ test_shared_owner_negates_plan_governor[We have no plans to invest in research and development.] _
+
+text = 'We have no plans to invest in research and development.'
+
+    @pytest.mark.parametrize("text", (
+        "We have no plans to invest in research and development.",
+        "We have no current plans to invest in research and development.",
+        "公司暂无计划投入技术研发。", "公司不计划投资技术研发。",
+        "本集團暫無計劃投資技術研發。",
+    ))
+    def test_shared_owner_negates_plan_governor(text):
+        start = text.index("invest") if "invest" in text else text.index("投")
+        state = predicates.observe_metric_predicate(text, start, start + 2)
+>       assert state.modality == "negative" and not state.forward_outlook and not state.observed
+E       AssertionError: assert ('planned' == 'negative'
+E         
+E         - negative
+E         + planned)
+
+tests\unit\document_understanding_selection\test_prepared_predicate_context.py:62: AssertionError
+_ test_shared_owner_negates_plan_governor[We have no current plans to invest in research and development.] _
+
+text = 'We have no current plans to invest in research and development.'
+
+    @pytest.mark.parametrize("text", (
+        "We have no plans to invest in research and development.",
+        "We have no current plans to invest in research and development.",
+        "公司暂无计划投入技术研发。", "公司不计划投资技术研发。",
+        "本集團暫無計劃投資技術研發。",
+    ))
+    def test_shared_owner_negates_plan_governor(text):
+        start = text.index("invest") if "invest" in text else text.index("投")
+        state = predicates.observe_metric_predicate(text, start, start + 2)
+>       assert state.modality == "negative" and not state.forward_outlook and not state.observed
+E       AssertionError: assert ('planned' == 'negative'
+E         
+E         - negative
+E         + planned)
+
+tests\unit\document_understanding_selection\test_prepared_predicate_context.py:62: AssertionError
+_ test_shared_owner_negates_plan_governor[\u516c\u53f8\u6682\u65e0\u8ba1\u5212\u6295\u5165\u6280\u672f\u7814\u53d1\u3002] _
+
+text = '公司暂无计划投入技术研发。'
+
+    @pytest.mark.parametrize("text", (
+        "We have no plans to invest in research and development.",
+        "We have no current plans to invest in research and development.",
+        "公司暂无计划投入技术研发。", "公司不计划投资技术研发。",
+        "本集團暫無計劃投資技術研發。",
+    ))
+    def test_shared_owner_negates_plan_governor(text):
+        start = text.index("invest") if "invest" in text else text.index("投")
+        state = predicates.observe_metric_predicate(text, start, start + 2)
+>       assert state.modality == "negative" and not state.forward_outlook and not state.observed
+E       AssertionError: assert ('planned' == 'negative'
+E         
+E         - negative
+E         + planned)
+
+tests\unit\document_understanding_selection\test_prepared_predicate_context.py:62: AssertionError
+_ test_shared_owner_negates_plan_governor[\u516c\u53f8\u4e0d\u8ba1\u5212\u6295\u8d44\u6280\u672f\u7814\u53d1\u3002] _
+
+text = '公司不计划投资技术研发。'
+
+    @pytest.mark.parametrize("text", (
+        "We have no plans to invest in research and development.",
+        "We have no current plans to invest in research and development.",
+        "公司暂无计划投入技术研发。", "公司不计划投资技术研发。",
+        "本集團暫無計劃投資技術研發。",
+    ))
+    def test_shared_owner_negates_plan_governor(text):
+        start = text.index("invest") if "invest" in text else text.index("投")
+        state = predicates.observe_metric_predicate(text, start, start + 2)
+>       assert state.modality == "negative" and not state.forward_outlook and not state.observed
+E       AssertionError: assert ('planned' == 'negative'
+E         
+E         - negative
+E         + planned)
+
+tests\unit\document_understanding_selection\test_prepared_predicate_context.py:62: AssertionError
+_ test_shared_owner_negates_plan_governor[\u672c\u96c6\u5718\u66ab\u7121\u8a08\u5283\u6295\u8cc7\u6280\u8853\u7814\u767c\u3002] _
+
+text = '本集團暫無計劃投資技術研發。'
+
+    @pytest.mark.parametrize("text", (
+        "We have no plans to invest in research and development.",
+        "We have no current plans to invest in research and development.",
+        "公司暂无计划投入技术研发。", "公司不计划投资技术研发。",
+        "本集團暫無計劃投資技術研發。",
+    ))
+    def test_shared_owner_negates_plan_governor(text):
+        start = text.index("invest") if "invest" in text else text.index("投")
+        state = predicates.observe_metric_predicate(text, start, start + 2)
+>       assert state.modality == "negative" and not state.forward_outlook and not state.observed
+E       AssertionError: assert ('actual' == 'negative'
+E         
+E         - negative
+E         + actual)
+
+tests\unit\document_understanding_selection\test_prepared_predicate_context.py:62: AssertionError
+============================== warnings summary ===============================
+..\..\..\..\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464
+  C:\Miniconda\Lib\site-packages\_pytest\config\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode
+  
+    self._warn_or_fail_if_strict(f"Unknown config option: {key}\n")
+
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+=========================== short test summary info ===========================
+FAILED tests/unit/document_understanding_selection/test_reading_operating_resources.py::test_negated_plan_never_asserts_positive_resource_or_plan[We have no plans to invest in research and development.]
+FAILED tests/unit/document_understanding_selection/test_reading_operating_resources.py::test_negated_plan_never_asserts_positive_resource_or_plan[We have no current plans to invest in research and development.]
+FAILED tests/unit/document_understanding_selection/test_reading_operating_resources.py::test_negated_plan_never_asserts_positive_resource_or_plan[\u516c\u53f8\u6682\u65e0\u8ba1\u5212\u6295\u5165\u6280\u672f\u7814\u53d1\u3002]
+FAILED tests/unit/document_understanding_selection/test_reading_operating_resources.py::test_negated_plan_never_asserts_positive_resource_or_plan[\u516c\u53f8\u4e0d\u8ba1\u5212\u6295\u8d44\u6280\u672f\u7814\u53d1\u3002]
+FAILED tests/unit/document_understanding_selection/test_reading_operating_resources.py::test_negated_plan_never_asserts_positive_resource_or_plan[\u672c\u96c6\u5718\u66ab\u7121\u8a08\u5283\u6295\u8cc7\u6280\u8853\u7814\u767c\u3002]
+FAILED tests/unit/document_understanding_selection/test_reading_operating_resources.py::test_explicit_future_headcount_is_plan_only[Our research staff will number 2,400 people next year.]
+FAILED tests/unit/document_understanding_selection/test_reading_operating_resources.py::test_explicit_future_headcount_is_plan_only[Our R&D staff will reach 2,400 employees next year.]
+FAILED tests/unit/document_understanding_selection/test_reading_operating_resources.py::test_explicit_future_headcount_is_plan_only[\u516c\u53f8\u7814\u53d1\u4eba\u5458\u5c06\u8fbe\u52302,400\u4eba\u3002]
+FAILED tests/unit/document_understanding_selection/test_reading_operating_resources.py::test_explicit_future_headcount_is_plan_only[\u672c\u96c6\u5718\u7814\u767c\u4eba\u54e1\u5c07\u9054\u52302,400\u4eba\u3002]
+FAILED tests/unit/document_understanding_selection/test_reading_operating_resources.py::test_negative_actor_does_not_poison_separate_actual_resource
+FAILED tests/unit/document_understanding_selection/test_prepared_predicate_context.py::test_real_boundary_and_modal_scans_grow_linearly
+FAILED tests/unit/document_understanding_selection/test_prepared_predicate_context.py::test_shared_owner_negates_plan_governor[We have no plans to invest in research and development.]
+FAILED tests/unit/document_understanding_selection/test_prepared_predicate_context.py::test_shared_owner_negates_plan_governor[We have no current plans to invest in research and development.]
+FAILED tests/unit/document_understanding_selection/test_prepared_predicate_context.py::test_shared_owner_negates_plan_governor[\u516c\u53f8\u6682\u65e0\u8ba1\u5212\u6295\u5165\u6280\u672f\u7814\u53d1\u3002]
+FAILED tests/unit/document_understanding_selection/test_prepared_predicate_context.py::test_shared_owner_negates_plan_governor[\u516c\u53f8\u4e0d\u8ba1\u5212\u6295\u8d44\u6280\u672f\u7814\u53d1\u3002]
+FAILED tests/unit/document_understanding_selection/test_prepared_predicate_context.py::test_shared_owner_negates_plan_governor[\u672c\u96c6\u5718\u66ab\u7121\u8a08\u5283\u6295\u8cc7\u6280\u8853\u7814\u767c\u3002]
+16 failed, 3 passed, 59 deselected, 1 warning in 2.85s

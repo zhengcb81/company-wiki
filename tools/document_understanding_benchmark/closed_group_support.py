@@ -84,13 +84,20 @@ def _join(chain: Sequence[EvidenceSpan]) -> str:
         right = span.raw_text or ""
         left_char = result.rstrip()[-1:]
         right_char = right.lstrip()[:1]
+        # Chinese quantity/unit boundaries, like 12.3|万元 or 人数为|500,
+        # need no synthetic space. Digit/digit and decimal-token edges do.
         # Closing/opening CJK punctuation also borders native Chinese text.
         # This only chooses a boundary between proven original fragments; it
         # does not delete whitespace inside either original span or join two
         # separated Latin tokens into an invented English word.
         cjk_boundary = bool(
-            _CJK.fullmatch(left_char) and (_CJK.fullmatch(right_char) or right_char in _CJK_PUNCTUATION)
-            or _CJK.fullmatch(right_char) and left_char in _CJK_PUNCTUATION
+            _CJK.fullmatch(left_char) and (
+                _CJK.fullmatch(right_char) or right_char in _CJK_PUNCTUATION
+                or right_char in "0123456789"
+            )
+            or _CJK.fullmatch(right_char) and (
+                left_char in _CJK_PUNCTUATION or left_char in "0123456789"
+            )
         )
         separator = "" if cjk_boundary else " "
         result = result.rstrip() + separator + right.lstrip()
