@@ -1,0 +1,108 @@
+"""Read saved material only; replay one already-proven source group, no PDF IO."""
+from pathlib import Path
+from dataclasses import fields
+import gzip
+import hashlib
+import json
+
+from company_wiki.document_understanding.observation_adapter import build_observation
+from company_wiki.source_catalog.narrative_business_policy import assess_reading_business_fact, reading_material_value
+from company_wiki.source_catalog.narrative_document import DocumentStructure
+from company_wiki.source_catalog.narrative_evidence import _make_unit
+from company_wiki.source_catalog.narrative_reading import _candidates
+from company_wiki.source_contract import EvidenceCoordinates
+
+ROOT = Path(__file__).resolve().parents[3]
+HERE = Path(__file__).resolve().parent
+old_dir = ROOT / ".planning/c3-20261028/hk-formal-v2"
+new_dir = ROOT / ".planning/c3-20261028/hk-quality-v3"
+old_path = next(old_dir.glob("*.bundle.json.gz"))
+bundle = json.load(gzip.open(old_path, "rt", encoding="utf-8"))
+supports = [bundle["evidence_spans"][i - 1] for i in (33, 34, 35, 36)]
+header = bundle["evidence_spans"][30]
+old_group = next(g for g in bundle["reading_context"]["groups"]
+                 if set(g["citation_views"][0]["support_evidence_ids"]) == {s["span_id"] for s in supports})
+units, typed = [], []
+for span in [header, *supports]:
+    unit = _make_unit(source_id=span["source_id"], parser_version=span["parser_version"],
+        coordinates=EvidenceCoordinates.from_dict(span["coordinates"]), raw_text=span["raw_text"],
+        unit_kind=span["structured_value"]["unit_kind"], source_role=span["structured_value"]["source_role"],
+        language=span["structured_value"]["language"], metadata=span["structured_value"],
+        quality_flags=span["quality_flags"])
+    projected = unit.to_evidence_span(topics=span["structured_value"]["topics"],
+                                    selection_reasons=span["structured_value"]["selection_reasons"])
+    assert projected.span_id == span["span_id"]
+    assert unit.raw_text == span["raw_text"] and unit.coordinates.to_dict() == span["coordinates"]
+    units.append(unit)
+    row = {f.name: getattr(unit, f.name) for f in fields(unit)}
+    row.update(coordinates=unit.coordinates.to_dict(), metadata=dict(unit.metadata),
+               quality_flags=list(unit.quality_flags), original_evidence_span_id=span["span_id"])
+    typed.append(row)
+ids = [unit.unit_id for unit in units]
+parsed = DocumentStructure(bundle["source_ref"]["source_id"], bundle["source_ref"]["content_sha256"],
+    "zh", tuple(units), page_count=75, pages_read=0, errors=("SELECTED_FRAGMENT_ONLY",),
+    mime_type="application/pdf")
+pipeline = {"observation": build_observation(units, source_id=parsed.source_id,
+    source_sha256=parsed.source_sha256), "reading_plan": {"unit_profiles": {
+        unit.unit_id: {"section_role": old_group["section_role"], "priority":
+            unit.metadata["reading_priority"], "family": "interim"} for unit in units}},
+    "structure": {"sections": [{"section_id": "frozen-selected-scope",
+        "heading_unit_ids": ids[:1], "body_unit_ids": ids[1:]}]},
+    "packages": {"packages": [{"package_id": old_group["group_id"], "kind": old_group["kind"],
+        "member_unit_ids": ids[1:], "anchor_unit_ids": ids[1:], "required_context_unit_ids": ids[:1]}]}}
+_, metadata, groups, local_complete, withheld = _candidates(parsed, pipeline)
+assert len(groups) == 1 and groups[0]["member_unit_ids"] == ids[1:] and not withheld
+values = [{"value_band": row["value_band"], "fact_purpose": row.get("fact_purpose"),
+           "fact_reasons": list(row.get("fact_reasons", ()))}
+          for row in metadata.values() if not row.get("context_only")]
+assert len(values) == 4 and all(row["value_band"] == "meaningful_fact" for row in values)
+
+fixture = {"schema_version": "selected-source-closed-group-fixture/1",
+    "scope": "five selected units only; missing transient reading_layout/native_source_view not invented",
+    "source_ref": bundle["source_ref"], "units": typed,
+    "frozen_source_group": old_group, "pipeline": pipeline,
+    "document_coverage_complete": parsed.coverage_complete}
+(HERE / "closure-5unit-fixture.json").write_text(json.dumps(fixture, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+
+request_path = next((new_dir / "materials").glob("*.input.json.gz"))
+request = json.load(gzip.open(request_path, "rt", encoding="utf-8"))
+material = json.loads(request["messages"][1]["content"])["material"]
+shared = {row["source_key"]: row for row in material["shared_fragments"]}
+new_tasks = []
+for task in material["tasks"]:
+    texts = [(shared[p["shared_ref"]] if "shared_ref" in p else p)["text"] for p in task["parts"]]
+    if any(text == supports[0]["raw_text"] or "百萬元增加7.6%。" in text for text in texts):
+        new_tasks.append({"key": task["key"], "kind": task.get("kind", material["task_defaults"]["kind"]),
+            "reading": task.get("reading"), "support_parts": task.get("support_parts"),
+            "part_source_keys": [p.get("shared_ref", p.get("source_key")) for p in task["parts"]]})
+checks = []
+for name, text in [("whole_support", "\n".join(s["raw_text"] for s in supports)),
+                   ("first_fragment", supports[0]["raw_text"]),
+                   ("tail_three_fragments", "\n".join(s["raw_text"] for s in supports[1:]))]:
+    fact, financial = assess_reading_business_fact(text, {"relations": []})
+    checks.append({"scope": name, "eligible": fact.eligible, "purpose": fact.purpose,
+        "reasons": list(fact.reasons), "financial_only": financial,
+        "value_band": reading_material_value(fact)})
+old_execution = bundle["reading_context"]["layout_coverage"]["native_frontend"]["reading_execution"]
+report = {"schema_version": "c3-selected-group-closure-diagnosis/1", "status": "READ_ONLY_DIAGNOSIS",
+    "source_sha256": parsed.source_sha256,
+    "old_bundle_uncompressed_sha256": hashlib.sha256(gzip.open(old_path, "rb").read()).hexdigest(),
+    "new_input_uncompressed_sha256": hashlib.sha256(gzip.open(request_path, "rb").read()).hexdigest(),
+    "old_group_id": old_group["group_id"], "old_group_kind": old_group["kind"],
+    "old_support_span_ids": [s["span_id"] for s in supports],
+    "old_support_locators": [s["locator"] for s in supports], "new_split_tasks": new_tasks,
+    "helper_controls": checks, "pure_local_selector": {"supplied_closed_support_count": 4,
+        "retained_closed_support_count": 4, "withheld_count": len(withheld),
+        "local_group_complete": local_complete, "values": values,
+        "full_document_coverage_complete": parsed.coverage_complete,
+        "scope": "existing closed group supplied; no native geometry/enhancement re-execution"},
+    "old_actual_reading_execution": old_execution,
+    "native_first_to_second_x0_delta": supports[1]["structured_value"]["bbox"][0] - supports[0]["structured_value"]["bbox"][0],
+    "native_wrapped_line_x0_guard": 2.1 * supports[0]["structured_value"]["font_size"],
+    "conclusion": "Current purpose/admission/reference retains the supplied four-part closed group. New actual request instead already has first fragment and tail carrier split into different source tasks. Diagnose pre-group native/paragraph enhancement observation and fallback; do not restore unknown financial exemptions or join tasks in summary compiler.",
+    "unproven": ["new actual paragraph enhancement execution/fallback without retained selected.reading_context",
+                 "new full-document selector behavior", "all original native membership/font inputs"],
+    "product_files_changed": False, "new_model_calls": 0, "pdf_replays": 0, "downloads": 0}
+(HERE / "closure-diagnosis.json").write_text(json.dumps(report, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+print(json.dumps({"status": report["status"], "new_tasks": new_tasks,
+                  "local_selector": report["pure_local_selector"]}, ensure_ascii=False))

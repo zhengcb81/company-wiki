@@ -1,0 +1,134 @@
+{
+  "schema": "cwp-independent-quality-content-review/1",
+  "status": "PARTIAL",
+  "date_utc": "2026-10-28T08:45:29Z",
+  "reviewer": "/root/c3_semantic_final_20261028",
+  "summary_author": false,
+  "run_id": "phaseC-090-d7c91950f2dc",
+  "producer_overall_status": "PRE_RESERVATION_BLOCKED",
+  "content_acceptance": "NOT_PASSED_NO_FINAL_AVAILABLE",
+  "source_admission": "FAIL",
+  "identity": {
+    "source_sha256": "4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+    "artifact_sha256": null,
+    "final_response_sha256": null,
+    "captured_prepared_http_body_sha256": "1bd23886b5e395ca39de93d8c9ea270ca6f7ea5dec6dba6fb4d6ff73fa18d108",
+    "captured_prepared_http_body_bytes": 67716,
+    "model_selected_input_sha256": "eea2d381981baa554129d54e7ef48dd28740057a744fbda3e3c276b1d0367bc2",
+    "material_sha256": "a1085a864ce6d5c72b77e58a8f60c2921844ea855f0dcb826a59979fa5156cef",
+    "final_generation_sha256": "f59ff18da80910a6ad4d41dab48d371e1093f31afb8711fa0fa10ae30015ed4a",
+    "engineering_review_json_sha256": "31f455dd5aaa277d0e1832c2cd6427b4eb2a5161836138a458fa388988558c83",
+    "launch_json_sha256": "b4ff82754f630e3a73713b7d3020b17f52d7095d35d641a0cbbf63f115237655"
+  },
+  "input_scope": {
+    "prepared_tasks": 57,
+    "transmitted_http_tasks": 0,
+    "pre_reservation_event_gold_label": "sent_tasks is the observer's compiled-request scope label; no actual HTTP transmission occurred in this run",
+    "output_plan": {
+      "configured_output_tokens": 8192,
+      "max_claims": 40,
+      "max_claims_per_task": 2,
+      "target_claim_count": 24,
+      "planning": "soft_target_within_existing_caps"
+    }
+  },
+  "gold_results": [
+    {
+      "id": "hk-industry-cloud-closure",
+      "summary_status": "NOT_EVALUATED_NO_RESPONSE",
+      "prepared_source_support_status": "FAIL",
+      "expected_source_page": 13,
+      "actual_tasks": [
+        {
+          "task": "t4",
+          "kind": "background",
+          "section_role": "management_discussion",
+          "support": "p2=s33",
+          "context": "p1=s31, 管理層討論與分析",
+          "text": "• \n來自行業雲服務的收入為人民幣1,340.4百萬元（187.1百萬美元），較二零二四年同期的人民幣1,245.4",
+          "reading": {"priority": 1, "value_band": "meaningful_fact", "score": 3, "purposes": ["operating_metric"]}
+        },
+        {
+          "task": "t35",
+          "kind": "native_continuity",
+          "section_role": "unknown (task default)",
+          "support": "p2=s34",
+          "context": "p1=s31, 管理層討論與分析",
+          "text": "百萬元增加7.6%。該同比增加主要是由於不斷增長的IT需求及我們向垂直行業客戶複製行業解決方案\n的能力。",
+          "reading": {"priority": 1, "value_band": "description", "score": 0, "purposes": ["unknown"]}
+        }
+      ],
+      "finding": "The words remain in the prepared request but are split into two independent factual-support scopes. t4 ends before the prior-period value's unit and the growth rate; t35 begins with that orphan unit and contains the increase/cause without its industry-cloud subject. Neither task has the other as factual support. Context is only a section title. Task-local citation rules cannot legally borrow another task to manufacture complete support.",
+      "additional_current_value": "t19 contains 1,340.4百萬元 in the total-revenue paragraph, but not industry-cloud 1,245.4/+7.6%/IT demand/replicated industry solution causal closure.",
+      "oracle": "Both full_selection and prepared-request task support are false for this target. This is a source grouping/support-closure failure before model invocation, not another model omission. Exact lower code branch is not proven by the retained request alone."
+    },
+    {
+      "id": "hk-rd-period-scope",
+      "summary_status": "NOT_EVALUATED_NO_RESPONSE",
+      "prepared_source_support_status": "PASS",
+      "task": "t32",
+      "support": "p3=s27",
+      "text": "報告期內，我們的研發費用為人民幣420.5百萬元（58.7百萬美元），而截至二零二五年六月三十日，我們的\n研發人員達1,094人。",
+      "note": "Prepared source keeps the expense reporting period, RMB/USD units and 2025-06-30 headcount. Separate t31 says Wuhan centre >620 including interns/outsourcing at end-2024; no new final exists to test whether the model preserves or confuses these scopes."
+    },
+    {
+      "id": "hk-outlook-not-actual",
+      "summary_status": "NOT_EVALUATED_NO_RESPONSE",
+      "prepared_source_support_status": "PASS",
+      "task": "t33",
+      "support": "p3=s29",
+      "text": "展望下半年，我們將維持高質量發展和可持續發展戰略，不斷投資技術研發，並全面提升AI能力。同時，我\n們將積極擁抱AI時代小米和金山生態系統的雲需求。我們旨在持續為客戶、股東、員工和社會創造價值。",
+      "note": "Prepared source retains H2/將/旨在 future modality. No new final exists to assess rewritten modality."
+    }
+  ],
+  "confirmed_source_finding": {
+    "id": "QC-IR-01",
+    "priority": "P2",
+    "title": "Industry-cloud head and comparison/cause tail lack a shared factual support scope",
+    "root_owner": "Source grouping / native continuity / citation-support closure before summary compilation",
+    "evidence": ["actual prepared t4/p2=s33", "actual prepared t35/p2=s34", "pre_reservation_material gold required 3 supported 2", "pre_reservation_refused PHASE_C_GOLD_SUPPORT_MISSING"],
+    "safe_outcome": "The pre-reservation guard correctly refused; no paid retry or source/prompt/gold modification was initiated by reviewer."
+  },
+  "prepared_input_observations_not_final_output_findings": [
+    {"tasks": ["t2", "t3", "t9", "t11", "t12"], "observation": "Page/footer strings remain factual task support with description hints, e.g. 9 金山云控股有限公司 and 二零二五 中期報告 14."},
+    {"tasks": ["t5", "t6", "t7", "t8"], "observation": "Non-GAAP text is split: t5='非公', t6 begins 認會計準則毛利..., t7='非公認', t8 begins 會計準則毛利率.... Each is separate factual support, not a completed original statement."},
+    {"tasks": ["t10"], "observation": "主要由於戰略結構調整導致研發人員減少以及研發團隊從北京戰略搬遷到武漢。 is prepared as standalone support without naming which result it explains."},
+    {"tasks": ["t15", "t16", "t17", "t29", "t41", "t42", "t43", "t53", "t54"], "observation": "Prepared tasks still include non-GAAP definitions, generic principles, equity-plan/accounting rules. Some carry meaningful_fact metadata. The new soft-target instruction may omit them, but no final exists to verify that behavior."}
+  ],
+  "lifecycle_this_run_only": {
+    "error": "PHASE_C_GOLD_SUPPORT_MISSING",
+    "batch_status": "failed",
+    "document_status": "dead_letter",
+    "POST_attempts": 0,
+    "reserved": false,
+    "native_usage_rows": 0,
+    "charged_tokens": 0,
+    "charged_micro_usd": 0,
+    "mother_before_equals_after": true,
+    "mother_tokens": 1800368,
+    "mother_micro_usd": 727945,
+    "activation_recovery": "NOT_RUN_PRE_RESERVATION_BLOCKED",
+    "same_run_restart": "NOT_RUN",
+    "cross_run_cache": "NOT_RUN",
+    "public_FF_RF_consumers": "NOT_RUN_NO_NEW_ARTIFACT",
+    "producer_cleanup_receipt": {"protected_unchanged": true, "sentinel_unchanged": true, "temporary_lake_removed": true, "all_prepared_protected_unchanged": true}
+  },
+  "evidence": [
+    {"path": ".planning/c3-20261028/hk-quality-v3/overall.json", "sha256": "a021268175a6e50c1c5053b09a5201fd492bc1a145cd00b4703364882b8f9122"},
+    {"path": ".planning/c3-20261028/hk-quality-v3/events.jsonl", "sha256": "fcbca17e17a6c6cf68610b6af0f2bf3ff9661dc7e084b0d522a5c050ebfcfbe0"},
+    {"path": ".planning/c3-20261028/hk-quality-v3/receipt.json", "sha256": "6dd5a1366833b7b98ad7ad6065a8deb5c15f849a14092d0b17a79f8214030e91"},
+    {"path": ".planning/c3-20261028/hk-quality-v3/materials/phaseC-090-d7c91950f2dc.input.json.gz", "sha256": "2568533c02259bc5ab5cbccb51ea215a1c59a4aa7f66a2de084d1c3f2a2c9963"},
+    {"path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/hk-development-gold.json", "sha256": "2d6391a1f3f6d0c6e9bc7629e327f54c5bb4d2c651b202d38dd4f4364dbba568"}
+  ],
+  "review_cleanup": {
+    "model_calls": 0,
+    "PDF_Docling": 0,
+    "downloads_network": 0,
+    "additional_producer_runs": 0,
+    "background_processes": 0,
+    "new_temp_lake": false,
+    "source_code_PWF_original_config_changes": 0,
+    "engineering_review_modified": false,
+    "retained": "Only this independent report.md/json; no full bundle or request duplication."
+  }
+}

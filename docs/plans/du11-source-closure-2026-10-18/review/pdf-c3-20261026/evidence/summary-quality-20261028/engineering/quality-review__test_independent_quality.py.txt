@@ -1,0 +1,138 @@
+"""Neutral independent scope/identity/source completeness probes; no IO providers."""
+from dataclasses import replace
+import hashlib
+import json
+from pathlib import Path
+import re
+
+import pytest
+
+from company_wiki.document_understanding.source_cards import source_cards, source_task_admission
+from company_wiki.automation import narrative_model_scoped as scoped
+from company_wiki.automation.narrative_contracts import NarrativeContractError
+from company_wiki.automation.narrative_replay import _projection_span_identity
+from company_wiki.source_catalog import narrative_business_policy as policy
+from company_wiki.source_catalog import narrative_predicate_state as predicates
+from unit.document_understanding_selection.test_summary_source_admission import reference_case
+from unit.document_understanding_selection.test_reading_native_carriers import source_fixture
+from unit.test_narrative_extractive_runtime import selected
+from unit.test_scoped_source_admission import decode, clause
+from unit.document_understanding_selection.test_prepared_predicate_context import RegexMeter
+
+
+@pytest.mark.parametrize("previous", (
+    "There was an increase of 12%.",
+    "An increase of 12% was reported.",
+    "It increased by 12%.",
+    "本期同比增加12%。",
+))
+def test_result_without_a_named_subject_is_not_certified_unique(previous):
+    session, ids = reference_case([previous, "This increase was due to expanding our cloud services."])
+    observed = session.reference(ids[-1])
+    assert observed["status"] in {"missing", "partial", "ambiguous"}, observed
+    assert not observed["support_original_unit_ids"]
+
+
+def test_production_result_without_named_subject_must_defer():
+    parsed, pipeline = source_fixture([("There was an increase of 12%.",),
+                                      ("This increase was due to expanding our cloud services.",)])
+    _, _, packages, _, withheld = __import__(
+        "company_wiki.source_catalog.narrative_reading", fromlist=["_candidates"])._candidates(parsed, pipeline)
+    uid = parsed.units[-1].unit_id
+    assert not [p for p in packages if uid in p.get("anchor_unit_ids", ())], packages
+    assert any(row["reason"] == "REFERENCE_UNRESOLVED" for row in withheld)
+
+
+def test_source_hints_never_restart_business_classification(monkeypatch):
+    def forbidden(*args, **kwargs):
+        raise AssertionError("summary must not reclassify source wording")
+    monkeypatch.setattr(policy, "detect_reading_business_fact", forbidden)
+    monkeypatch.setattr(policy, "detect_business_fact", forbidden)
+    source = selected(1)
+    base = source.evidence_spans[0]
+    span = type(base).create(source_id=base.source_id, coordinates=base.coordinates,
+        raw_text="Our subscription revenue increased by 9%.",
+        structured_value={**base.structured_value, "reading_priority": 3,
+            "reading_value_band": "description", "reading_score": 4,
+            "reading_fact_purpose": "unknown", "text_sha256": hashlib.sha256(
+                b"Our subscription revenue increased by 9%.").hexdigest()},
+        parser_name=base.parser_name, parser_version=base.parser_version,
+        parse_status=base.parse_status, quality_flags=base.quality_flags)
+    source = replace(source, evidence_spans=(span,))
+    wire = scoped.compile_scoped_model_view(source, max_claims=20).to_model_dict()
+    assert wire["tasks"][0]["reading"] == {"priority": 3, "value_band": "description",
+                                           "score": 4, "purposes": ["unknown"]}
+
+
+@pytest.mark.parametrize("field", ("kind", "section_role", "support_roles", "context_ids"))
+def test_same_support_different_role_or_scope_does_not_deduplicate(field):
+    source = selected(2)
+    view = scoped.compile_scoped_model_view(source, max_claims=20)
+    card = next(source_cards(view.plan, {s.span_id: s for s in source.evidence_spans}))
+    replacement = {"kind": "qa_exchange", "section_role": "question",
+                   "support_roles": ("analyst",), "context_ids": (source.evidence_spans[1].span_id,)}[field]
+    second = replace(card, task=replace(card.task, key="other", **{field: replacement}))
+    admission = source_task_admission((card, second))
+    assert admission["other"]["status"] == "admitted"
+
+
+@pytest.mark.parametrize("field", ("reading_revenue", "reading_period", "reading_original_amount"))
+def test_arbitrary_original_reading_field_remains_identity(field):
+    base = selected(1).evidence_spans[0]
+    def create(metadata):
+        return type(base).create(source_id=base.source_id, coordinates=base.coordinates,
+            raw_text=base.raw_text, structured_value={**base.structured_value,
+                "unit_kind": "official_json_field", "text_sha256": hashlib.sha256(
+                    base.raw_text.encode()).hexdigest(), **metadata},
+            parser_name=base.parser_name, parser_version=base.parser_version,
+            parse_status=base.parse_status, quality_flags=base.quality_flags)
+    assert _projection_span_identity(create({field: 47})) != _projection_span_identity(create({field: 48}))
+
+
+def test_causal_actions_use_linear_actual_regex_windows(monkeypatch):
+    rows = []
+    for count in (16, 32, 64):
+        text = "Costs changed due to " + " and ".join(["may expand our cloud services"] * count)
+        totals = {}
+        with monkeypatch.context() as patch:
+            for module in (policy, predicates):
+                for name, value in vars(module).items():
+                    if isinstance(value, re.Pattern):
+                        patch.setattr(module, name, RegexMeter(value, totals, module.__name__ + name))
+            assert not policy._operating_causal_relation(text)
+        rows.append({"actions": count, "chars": len(text), "regex_input_chars": sum(totals.values()),
+                     "by_regex": totals})
+    Path(__file__).with_name("scan.json").write_text(json.dumps(rows, indent=2) + "\n")
+    for old, new in zip(rows, rows[1:]):
+        assert new["regex_input_chars"] / old["regex_input_chars"] <= 1.15 * new["chars"] / old["chars"]
+
+
+def test_per_task_hard_cap_is_enforced_below_global_cap():
+    source = selected(1)
+    with pytest.raises(NarrativeContractError):
+        decode(source, {"t1": [clause(source, 0)] * 3})
+
+
+@pytest.mark.parametrize("scenario,repeated,tail", (
+    ("many_assertions", "our paid subscribers totaled 2,370", " and our customers increased by 12%."),
+    ("one_assertion", "paid subscribers totaled 2,370", " and customers increased by 12%."),
+))
+def test_result_subject_metric_work_is_linear(monkeypatch, scenario, repeated, tail):
+    rows = []
+    for count in (16, 32, 64):
+        text = " and ".join([repeated] * count) + tail
+        if scenario == "one_assertion":
+            assert len(predicates.prepare_predicate_context(text).assertion_spans) == 1
+        totals = {}
+        with monkeypatch.context() as patch:
+            for module in (policy, predicates):
+                for name, value in vars(module).items():
+                    if isinstance(value, re.Pattern):
+                        patch.setattr(module, name, RegexMeter(value, totals, module.__name__ + name))
+            start = text.index("increased")
+            assert policy.source_result_subject(text, start, start + len("increased"))
+        rows.append({"scenario": scenario, "metrics": count, "chars": len(text), "regex_input_chars": sum(totals.values()),
+                     "by_regex": totals})
+    Path(__file__).with_name("subject-scan-" + scenario + ".json").write_text(json.dumps(rows, indent=2) + "\n")
+    for old, new in zip(rows, rows[1:]):
+        assert new["regex_input_chars"] / old["regex_input_chars"] <= 1.15 * new["chars"] / old["chars"]

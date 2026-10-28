@@ -1,0 +1,1214 @@
+{
+  "schema": "cwp-independent-content-review/1",
+  "status": "FAIL",
+  "time_utc": "2026-10-28T07:12:13.523776+00:00",
+  "reviewer": "/root/c3_semantic_final_20261028",
+  "summary_author": false,
+  "run_id": "phaseC-090-cc347948ae96",
+  "source_sha256": "4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+  "artifact_sha256": "ba856a0881d078ae55dee65b6583f19f8a45c7abe4da6c6d626b840effe9a0ae",
+  "final_response_sha256": "2bbbaf0ce5e1dbac4714a10d8ca0466ac37827c4928814902f49dad94133d074",
+  "critical_passed": 2,
+  "critical_required": 3,
+  "gold_results": [
+    {
+      "id": "hk-industry-cloud-closure",
+      "status": "FAIL",
+      "sent": true,
+      "task": "t37",
+      "support": [
+        {
+          "part": "p2",
+          "source_key": "s33",
+          "span_id": "urn:company-wiki:evidence-span:sha256:b95de2d665a45dddfe5171e61e11456330439a916576851380ce537db50848ce",
+          "locator": "loc:v1/page:13/paragraph:9"
+        },
+        {
+          "part": "p3",
+          "source_key": "s34",
+          "span_id": "urn:company-wiki:evidence-span:sha256:05cba3725cb76decbb79e8d497779fce7670c854584d89c78ed41b003b4714cb",
+          "locator": "loc:v1/page:13/paragraph:10"
+        },
+        {
+          "part": "p4",
+          "source_key": "s35",
+          "span_id": "urn:company-wiki:evidence-span:sha256:c600d04527e36d93c8581ba689bd398f375279f70c68b324baec8dc44dbb3000",
+          "locator": "loc:v1/page:13/paragraph:11"
+        },
+        {
+          "part": "p5",
+          "source_key": "s36",
+          "span_id": "urn:company-wiki:evidence-span:sha256:656fb5bb6387c1fc5d458544f9611700a4d4a8c856ee1a01258bf0992f57bb57",
+          "locator": "loc:v1/page:13/paragraph:12"
+        }
+      ],
+      "actual_claims": [
+        {
+          "claim_id": "t27-1",
+          "claim_type": "company_statement",
+          "context_evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:2f84f446d6c15f6ec026c3ed8b37c4d01d5eb206aed71c2dd3029869e3759f82",
+            "urn:company-wiki:evidence-span:sha256:83b71f04996fd76934c16ce5de240df5ba5799f8fced0d8de0055efebb5ce620"
+          ],
+          "evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:92c9f7bfda779c4c020bd2bf3eceaac272676b763e23fbf2a1e8803ac2d63bcf"
+          ],
+          "modality": "actual",
+          "needs_review": true,
+          "text": "報告期內總收入達人民幣4,319.2百萬元（602.9百萬美元），較去年同期人民幣3,667.5百萬元增加17.8%，主要由於AI相關客戶收入增長強勁及行業雲項目擴展，但部分被主動縮減向內容分發網絡(CDN)客戶提供的服務規模所抵銷；公有雲服務收入人民幣2,978.8百萬元（415.8百萬美元），行業雲服務收入人民幣1,340.4百萬元（187.1百萬美元）。",
+          "locators": [
+            "loc:v1/page:9/paragraph:6/chars:89-287"
+          ]
+        }
+      ],
+      "preserved": [
+        "行業雲服務收入人民幣1,340.4百萬元（187.1百萬美元）"
+      ],
+      "omitted": [
+        "二零二四年同期人民幣1,245.4百萬元",
+        "同比增加7.6%",
+        "增長的IT需求",
+        "向垂直行業客戶複製行業解決方案的能力"
+      ],
+      "wrong_23_percent_emitted": false,
+      "root_cause": "All four source fragments were present in actual sent t37, but sparse final output contains no t37 claim and no citation to its support. t27 covers current segment revenue only, together with whole-company 17.8% growth/causes. Fixed target 24 from 60 tasks does not enforce required-business coverage; 24 outputs end at t35. This is output omission after successful source selection/dispatch, not the repaired source grammar or closed-group join."
+    },
+    {
+      "id": "hk-rd-period-scope",
+      "status": "PASS",
+      "sent": true,
+      "task": "t34",
+      "support": [
+        {
+          "part": "p3",
+          "source_key": "s28",
+          "span_id": "urn:company-wiki:evidence-span:sha256:46171d403d6f1512afc387cd40aeec0f313a9d0f09e709914a9340b8d5416d96",
+          "locator": "loc:v1/page:11/paragraph:21/chars:404-469"
+        }
+      ],
+      "actual_claims": [
+        {
+          "claim_id": "t34-1",
+          "claim_type": "company_statement",
+          "context_evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:00f47cfe5085af96f3f47760b3e428dd9800e9d6fccfd91607ba230e315a269a",
+            "urn:company-wiki:evidence-span:sha256:5be288ad34d4106f0d47607cb50cc8cbbc5c414168cfb0693b5d268f0218a3c1"
+          ],
+          "evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:46171d403d6f1512afc387cd40aeec0f313a9d0f09e709914a9340b8d5416d96"
+          ],
+          "modality": "actual",
+          "needs_review": true,
+          "text": "報告期內研發費用為人民幣420.5百萬元（58.7百萬美元）；截至二零二五年六月三十日，研發人員達1,094人。",
+          "locators": [
+            "loc:v1/page:11/paragraph:21/chars:404-469"
+          ]
+        }
+      ],
+      "omitted": [],
+      "note": "報告期內 binds 420.5百萬元（58.7百萬美元）; 2025-06-30 binds 1,094人. Separate t33 correctly retains Wuhan-centre >620 people at end-2024 including interns/outsourcing; it does not replace the 1,094 scope."
+    },
+    {
+      "id": "hk-outlook-not-actual",
+      "status": "PASS",
+      "sent": true,
+      "task": "t35",
+      "support": [
+        {
+          "part": "p3",
+          "source_key": "s30",
+          "span_id": "urn:company-wiki:evidence-span:sha256:85318717f0f56616aaf10c338175db14ec6de099929ff9340258988e9da14a48",
+          "locator": "loc:v1/page:11/paragraph:24/chars:475-571"
+        }
+      ],
+      "actual_claims": [
+        {
+          "claim_id": "t35-1",
+          "claim_type": "company_statement",
+          "context_evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:00f47cfe5085af96f3f47760b3e428dd9800e9d6fccfd91607ba230e315a269a",
+            "urn:company-wiki:evidence-span:sha256:7b7f18615c427f7f82ea8ed2822ef2129a3ac95ab666877dc5dca19801439383"
+          ],
+          "evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:85318717f0f56616aaf10c338175db14ec6de099929ff9340258988e9da14a48"
+          ],
+          "modality": "planned",
+          "needs_review": true,
+          "text": "展望下半年，公司將維持高質量發展和可持續發展戰略，不斷投資技術研發並全面提升AI能力，積極擁抱AI時代小米和金山生態系統的雲需求，旨在持續為客戶、股東、員工和社會創造價值。",
+          "locators": [
+            "loc:v1/page:11/paragraph:24/chars:475-571"
+          ]
+        }
+      ],
+      "omitted": [],
+      "note": "展望下半年/將/旨在 and modality planned are retained; AI improvement is not asserted as achieved."
+    }
+  ],
+  "full_output": {
+    "claims": 24,
+    "actual_tasks": 60,
+    "output_plan": {
+      "configured_output_tokens": 8192,
+      "coverage": "selected_source_tasks_only",
+      "max_claims": 40,
+      "max_claims_per_task": 2,
+      "planning": "compact_target_not_token_estimate",
+      "target_claim_count": 24,
+      "target_text_chars": 240
+    },
+    "citation_binding_status": "PASS_ALL_24",
+    "claim_audit": [
+      {
+        "claim_id": "t1-1",
+        "task": "t1",
+        "modality": "actual",
+        "basis_parts": [
+          "p2"
+        ],
+        "locators": [
+          "loc:v1/page:14/paragraph:11"
+        ],
+        "citation_binding": "PASS"
+      },
+      {
+        "claim_id": "t2-1",
+        "task": "t2",
+        "modality": "actual",
+        "basis_parts": [
+          "p2"
+        ],
+        "locators": [
+          "loc:v1/page:14/paragraph:13"
+        ],
+        "citation_binding": "PASS"
+      },
+      {
+        "claim_id": "t3-1",
+        "task": "t3",
+        "modality": "uncertain",
+        "basis_parts": [
+          "p2"
+        ],
+        "locators": [
+          "loc:v1/page:42/paragraph:5"
+        ],
+        "citation_binding": "PASS"
+      },
+      {
+        "claim_id": "t4-1",
+        "task": "t4",
+        "modality": "uncertain",
+        "basis_parts": [
+          "p2"
+        ],
+        "locators": [
+          "loc:v1/page:42/paragraph:9"
+        ],
+        "citation_binding": "PASS"
+      },
+      {
+        "claim_id": "t5-1",
+        "task": "t5",
+        "modality": "actual",
+        "basis_parts": [
+          "p3"
+        ],
+        "locators": [
+          "loc:v1/page:22/paragraph:23"
+        ],
+        "citation_binding": "PASS"
+      },
+      {
+        "claim_id": "t6-1",
+        "task": "t6",
+        "modality": "uncertain",
+        "basis_parts": [
+          "p3"
+        ],
+        "locators": [
+          "loc:v1/page:25/paragraph:15"
+        ],
+        "citation_binding": "PASS"
+      },
+      {
+        "claim_id": "t8-1",
+        "task": "t8",
+        "modality": "actual",
+        "basis_parts": [
+          "p2"
+        ],
+        "locators": [
+          "loc:v1/page:7/paragraph:2"
+        ],
+        "citation_binding": "PASS"
+      },
+      {
+        "claim_id": "t9-1",
+        "task": "t9",
+        "modality": "uncertain",
+        "basis_parts": [
+          "p2"
+        ],
+        "locators": [
+          "loc:v1/page:8/paragraph:5"
+        ],
+        "citation_binding": "PASS"
+      },
+      {
+        "claim_id": "t10-1",
+        "task": "t10",
+        "modality": "uncertain",
+        "basis_parts": [
+          "p2"
+        ],
+        "locators": [
+          "loc:v1/page:8/paragraph:9"
+        ],
+        "citation_binding": "PASS"
+      },
+      {
+        "claim_id": "t12-1",
+        "task": "t12",
+        "modality": "actual",
+        "basis_parts": [
+          "p3"
+        ],
+        "locators": [
+          "loc:v1/page:20/paragraph:3"
+        ],
+        "citation_binding": "PASS"
+      },
+      {
+        "claim_id": "t13-1",
+        "task": "t13",
+        "modality": "actual",
+        "basis_parts": [
+          "p3"
+        ],
+        "locators": [
+          "loc:v1/page:21/paragraph:17"
+        ],
+        "citation_binding": "PASS"
+      },
+      {
+        "claim_id": "t17-1",
+        "task": "t17",
+        "modality": "actual",
+        "basis_parts": [
+          "p3"
+        ],
+        "locators": [
+          "loc:v1/page:25/paragraph:11"
+        ],
+        "citation_binding": "PASS"
+      },
+      {
+        "claim_id": "t18-1",
+        "task": "t18",
+        "modality": "actual",
+        "basis_parts": [
+          "p2"
+        ],
+        "locators": [
+          "loc:v1/page:30/paragraph:7"
+        ],
+        "citation_binding": "PASS"
+      },
+      {
+        "claim_id": "t20-1",
+        "task": "t20",
+        "modality": "uncertain",
+        "basis_parts": [
+          "p2"
+        ],
+        "locators": [
+          "loc:v1/page:41/paragraph:28"
+        ],
+        "citation_binding": "PASS"
+      },
+      {
+        "claim_id": "t21-1",
+        "task": "t21",
+        "modality": "actual",
+        "basis_parts": [
+          "p3"
+        ],
+        "locators": [
+          "loc:v1/page:5/paragraph:12/chars:250-446"
+        ],
+        "citation_binding": "PASS"
+      },
+      {
+        "claim_id": "t22-1",
+        "task": "t22",
+        "modality": "actual",
+        "basis_parts": [
+          "p3"
+        ],
+        "locators": [
+          "loc:v1/page:5/paragraph:20/chars:497-551"
+        ],
+        "citation_binding": "PASS"
+      },
+      {
+        "claim_id": "t24-1",
+        "task": "t24",
+        "modality": "actual",
+        "basis_parts": [
+          "p2"
+        ],
+        "locators": [
+          "loc:v1/page:7/paragraph:8/chars:263-342"
+        ],
+        "citation_binding": "PASS"
+      },
+      {
+        "claim_id": "t26-1",
+        "task": "t26",
+        "modality": "planned",
+        "basis_parts": [
+          "p3"
+        ],
+        "locators": [
+          "loc:v1/page:9/paragraph:3/chars:30-56"
+        ],
+        "citation_binding": "PASS"
+      },
+      {
+        "claim_id": "t27-1",
+        "task": "t27",
+        "modality": "actual",
+        "basis_parts": [
+          "p3"
+        ],
+        "locators": [
+          "loc:v1/page:9/paragraph:6/chars:89-287"
+        ],
+        "citation_binding": "PASS"
+      },
+      {
+        "claim_id": "t29-1",
+        "task": "t29",
+        "modality": "actual",
+        "basis_parts": [
+          "p2"
+        ],
+        "locators": [
+          "loc:v1/page:10/paragraph:2/chars:21-178"
+        ],
+        "citation_binding": "PASS"
+      },
+      {
+        "claim_id": "t30-1",
+        "task": "t30",
+        "modality": "actual",
+        "basis_parts": [
+          "p2"
+        ],
+        "locators": [
+          "loc:v1/page:10/paragraph:8/chars:178-299"
+        ],
+        "citation_binding": "PASS"
+      },
+      {
+        "claim_id": "t33-1",
+        "task": "t33",
+        "modality": "actual",
+        "basis_parts": [
+          "p3"
+        ],
+        "locators": [
+          "loc:v1/page:11/paragraph:13/chars:237-403"
+        ],
+        "citation_binding": "PASS"
+      },
+      {
+        "claim_id": "t34-1",
+        "task": "t34",
+        "modality": "actual",
+        "basis_parts": [
+          "p3"
+        ],
+        "locators": [
+          "loc:v1/page:11/paragraph:21/chars:404-469"
+        ],
+        "citation_binding": "PASS"
+      },
+      {
+        "claim_id": "t35-1",
+        "task": "t35",
+        "modality": "planned",
+        "basis_parts": [
+          "p3"
+        ],
+        "locators": [
+          "loc:v1/page:11/paragraph:24/chars:475-571"
+        ],
+        "citation_binding": "PASS"
+      }
+    ],
+    "open_issues": [
+      {
+        "id": "CONTENT-01",
+        "priority": "P2",
+        "title": "Critical industry-cloud growth and causal update omitted after being sent",
+        "claims": [
+          "t27-1"
+        ],
+        "missing_task": "t37",
+        "detail": "All four source fragments were present in actual sent t37, but sparse final output contains no t37 claim and no citation to its support. t27 covers current segment revenue only, together with whole-company 17.8% growth/causes. Fixed target 24 from 60 tasks does not enforce required-business coverage; 24 outputs end at t35. This is output omission after successful source selection/dispatch, not the repaired source grammar or closed-group join."
+      },
+      {
+        "id": "CONTENT-02",
+        "priority": "P2",
+        "title": "Emitted financial-table numbers have no assigned period/currency/unit",
+        "claims": [
+          "t3-1",
+          "t4-1",
+          "t9-1",
+          "t10-1",
+          "t20-1"
+        ],
+        "detail": "t3/t4 choose the first numbers from three-column ambiguous source rows without naming the selected column. t9/t10/t20 list three numbers without mapping columns to periods/currencies/units. The source context titles mention two six-month periods but do not map each numeric column, and the summary adds no mapping. uncertain and needs_review honestly retain uncertainty but do not make these financial assertions independently interpretable. No claim of a particular wrong conversion/year is made without the missing headers."
+      },
+      {
+        "id": "CONTENT-03",
+        "priority": "P2",
+        "title": "Causal claim keeps an unresolved increase referent",
+        "claims": [
+          "t2-1"
+        ],
+        "detail": "有關增加主要由於經營虧損增加及利息費用增加 preserves the sentence's literal wording but neither its cited factual span nor its sole context 管理層討論與分析 names what increased. Its preceding output t1 describes operating loss, creating an ambiguous association. The frozen task already lacks the antecedent, so this is source-task context closure plus unresolved output, not fabricated source bytes."
+      }
+    ],
+    "observations": [
+      {
+        "claims": [
+          "t8-1"
+        ],
+        "kind": "low_information_title",
+        "detail": "A section title naming adjusted metrics becomes a definitional claim; supported, but no business update."
+      },
+      {
+        "claims": [
+          "t26-1"
+        ],
+        "kind": "generic_principle",
+        "detail": "High-quality/sustainable-development 技術立業 principle consumes a target slot; text describes continuing a principle while model modality is planned. No concrete business achievement is supplied."
+      },
+      {
+        "claims": [
+          "t5-1",
+          "t6-1",
+          "t12-1",
+          "t13-1",
+          "t17-1",
+          "t18-1",
+          "t21-1",
+          "t22-1",
+          "t24-1"
+        ],
+        "kind": "background_weight",
+        "detail": "Many selected claims concern equity-plan rules or non-GAAP definitions while the sent critical industry-cloud causal update is omitted. These claims are supported; observation concerns information allocation, not intrinsic falsehood."
+      }
+    ],
+    "requested_task_metadata": [
+      {
+        "task": "t2",
+        "kind": "background",
+        "section_role": "management_discussion",
+        "section_role_origin": "explicit",
+        "topics": [
+          "core_business"
+        ],
+        "topics_origin": "task_default",
+        "members": [
+          {
+            "part": "p1",
+            "factual_support": false,
+            "source_key": "s39",
+            "locator": "loc:v1/page:14/paragraph:1",
+            "page": 14,
+            "unit_kind": "pdf_text_block",
+            "table_index": null,
+            "row_index": null,
+            "quality_flags": [],
+            "selection_reasons": [
+              "reading_context"
+            ],
+            "topics": [],
+            "reading_value_band": "description"
+          },
+          {
+            "part": "p2",
+            "factual_support": true,
+            "source_key": "s41",
+            "locator": "loc:v1/page:14/paragraph:13",
+            "page": 14,
+            "unit_kind": "pdf_text_block",
+            "table_index": null,
+            "row_index": null,
+            "quality_flags": [],
+            "selection_reasons": [
+              "reading_plan",
+              "operating_state_unknown"
+            ],
+            "topics": [
+              "core_business"
+            ],
+            "reading_value_band": "meaningful_fact"
+          }
+        ]
+      },
+      {
+        "task": "t3",
+        "kind": "paragraph_event",
+        "section_role": "unknown",
+        "section_role_origin": "task_default",
+        "topics": [
+          "core_business"
+        ],
+        "topics_origin": "task_default",
+        "members": [
+          {
+            "part": "p1",
+            "factual_support": false,
+            "source_key": "s96",
+            "locator": "loc:v1/page:42/paragraph:1",
+            "page": 42,
+            "unit_kind": "pdf_text_block",
+            "table_index": null,
+            "row_index": null,
+            "quality_flags": [],
+            "selection_reasons": [
+              "reading_context"
+            ],
+            "topics": [],
+            "reading_value_band": "description"
+          },
+          {
+            "part": "p2",
+            "factual_support": true,
+            "source_key": "s97",
+            "locator": "loc:v1/page:42/paragraph:5",
+            "page": 42,
+            "unit_kind": "pdf_text_block",
+            "table_index": null,
+            "row_index": null,
+            "quality_flags": [
+              "table_structure_ambiguous"
+            ],
+            "selection_reasons": [
+              "reading_plan",
+              "operating_description_unknown"
+            ],
+            "topics": [
+              "core_business"
+            ],
+            "reading_value_band": "meaningful_fact"
+          }
+        ]
+      },
+      {
+        "task": "t4",
+        "kind": "paragraph_event",
+        "section_role": "unknown",
+        "section_role_origin": "task_default",
+        "topics": [
+          "core_business"
+        ],
+        "topics_origin": "task_default",
+        "members": [
+          {
+            "part": "p1",
+            "factual_support": false,
+            "source_key": "s96",
+            "locator": "loc:v1/page:42/paragraph:1",
+            "page": 42,
+            "unit_kind": "pdf_text_block",
+            "table_index": null,
+            "row_index": null,
+            "quality_flags": [],
+            "selection_reasons": [
+              "reading_context"
+            ],
+            "topics": [],
+            "reading_value_band": "description"
+          },
+          {
+            "part": "p2",
+            "factual_support": true,
+            "source_key": "s98",
+            "locator": "loc:v1/page:42/paragraph:9",
+            "page": 42,
+            "unit_kind": "pdf_text_block",
+            "table_index": null,
+            "row_index": null,
+            "quality_flags": [
+              "table_structure_ambiguous"
+            ],
+            "selection_reasons": [
+              "reading_plan",
+              "operating_state_unknown"
+            ],
+            "topics": [
+              "core_business"
+            ],
+            "reading_value_band": "meaningful_fact"
+          }
+        ]
+      },
+      {
+        "task": "t8",
+        "kind": "background",
+        "section_role": "unknown",
+        "section_role_origin": "task_default",
+        "topics": [
+          "core_business"
+        ],
+        "topics_origin": "task_default",
+        "members": [
+          {
+            "part": "p1",
+            "factual_support": false,
+            "source_key": "s6",
+            "locator": "loc:v1/page:7/paragraph:1",
+            "page": 7,
+            "unit_kind": "pdf_text_block",
+            "table_index": null,
+            "row_index": null,
+            "quality_flags": [],
+            "selection_reasons": [
+              "reading_context"
+            ],
+            "topics": [],
+            "reading_value_band": "description"
+          },
+          {
+            "part": "p2",
+            "factual_support": true,
+            "source_key": "s7",
+            "locator": "loc:v1/page:7/paragraph:2",
+            "page": 7,
+            "unit_kind": "pdf_text_block",
+            "table_index": null,
+            "row_index": null,
+            "quality_flags": [],
+            "selection_reasons": [
+              "reading_plan",
+              "operating_state_unknown"
+            ],
+            "topics": [
+              "core_business"
+            ],
+            "reading_value_band": "meaningful_fact"
+          }
+        ]
+      },
+      {
+        "task": "t9",
+        "kind": "background",
+        "section_role": "unknown",
+        "section_role_origin": "task_default",
+        "topics": [
+          "core_business"
+        ],
+        "topics_origin": "task_default",
+        "members": [
+          {
+            "part": "p1",
+            "factual_support": false,
+            "source_key": "s10",
+            "locator": "loc:v1/page:8/paragraph:1",
+            "page": 8,
+            "unit_kind": "pdf_text_block",
+            "table_index": null,
+            "row_index": null,
+            "quality_flags": [],
+            "selection_reasons": [
+              "reading_context"
+            ],
+            "topics": [],
+            "reading_value_band": "description"
+          },
+          {
+            "part": "p2",
+            "factual_support": true,
+            "source_key": "s11",
+            "locator": "loc:v1/page:8/paragraph:5",
+            "page": 8,
+            "unit_kind": "pdf_text_block",
+            "table_index": null,
+            "row_index": null,
+            "quality_flags": [
+              "table_structure_ambiguous"
+            ],
+            "selection_reasons": [
+              "reading_plan",
+              "operating_state_unknown"
+            ],
+            "topics": [
+              "core_business"
+            ],
+            "reading_value_band": "meaningful_fact"
+          }
+        ]
+      },
+      {
+        "task": "t10",
+        "kind": "background",
+        "section_role": "unknown",
+        "section_role_origin": "task_default",
+        "topics": [
+          "core_business"
+        ],
+        "topics_origin": "task_default",
+        "members": [
+          {
+            "part": "p1",
+            "factual_support": false,
+            "source_key": "s10",
+            "locator": "loc:v1/page:8/paragraph:1",
+            "page": 8,
+            "unit_kind": "pdf_text_block",
+            "table_index": null,
+            "row_index": null,
+            "quality_flags": [],
+            "selection_reasons": [
+              "reading_context"
+            ],
+            "topics": [],
+            "reading_value_band": "description"
+          },
+          {
+            "part": "p2",
+            "factual_support": true,
+            "source_key": "s12",
+            "locator": "loc:v1/page:8/paragraph:9",
+            "page": 8,
+            "unit_kind": "pdf_text_block",
+            "table_index": null,
+            "row_index": null,
+            "quality_flags": [
+              "table_structure_ambiguous"
+            ],
+            "selection_reasons": [
+              "reading_plan",
+              "operating_state_unknown"
+            ],
+            "topics": [
+              "core_business"
+            ],
+            "reading_value_band": "meaningful_fact"
+          }
+        ]
+      },
+      {
+        "task": "t20",
+        "kind": "background",
+        "section_role": "unknown",
+        "section_role_origin": "task_default",
+        "topics": [
+          "core_business"
+        ],
+        "topics_origin": "task_default",
+        "members": [
+          {
+            "part": "p1",
+            "factual_support": false,
+            "source_key": "s93",
+            "locator": "loc:v1/page:41/paragraph:1",
+            "page": 41,
+            "unit_kind": "pdf_text_block",
+            "table_index": null,
+            "row_index": null,
+            "quality_flags": [],
+            "selection_reasons": [
+              "reading_context"
+            ],
+            "topics": [],
+            "reading_value_band": "description"
+          },
+          {
+            "part": "p2",
+            "factual_support": true,
+            "source_key": "s95",
+            "locator": "loc:v1/page:41/paragraph:28",
+            "page": 41,
+            "unit_kind": "pdf_text_block",
+            "table_index": null,
+            "row_index": null,
+            "quality_flags": [
+              "table_structure_ambiguous"
+            ],
+            "selection_reasons": [
+              "reading_plan",
+              "operating_state_unknown"
+            ],
+            "topics": [
+              "core_business"
+            ],
+            "reading_value_band": "meaningful_fact"
+          }
+        ]
+      },
+      {
+        "task": "t26",
+        "kind": "native_continuity",
+        "section_role": "unknown",
+        "section_role_origin": "task_default",
+        "topics": [
+          "business"
+        ],
+        "topics_origin": "explicit",
+        "members": [
+          {
+            "part": "p1",
+            "factual_support": false,
+            "source_key": "s14",
+            "locator": "loc:v1/page:9/paragraph:1",
+            "page": 9,
+            "unit_kind": "pdf_text_block",
+            "table_index": null,
+            "row_index": null,
+            "quality_flags": [],
+            "selection_reasons": [
+              "reading_context"
+            ],
+            "topics": [],
+            "reading_value_band": "description"
+          },
+          {
+            "part": "p2",
+            "factual_support": false,
+            "source_key": "s15",
+            "locator": "loc:v1/page:9/paragraph:2",
+            "page": 9,
+            "unit_kind": "pdf_text_block",
+            "table_index": null,
+            "row_index": null,
+            "quality_flags": [],
+            "selection_reasons": [
+              "reading_context"
+            ],
+            "topics": [],
+            "reading_value_band": "description"
+          },
+          {
+            "part": "p3",
+            "factual_support": true,
+            "source_key": "s16",
+            "locator": "loc:v1/page:9/paragraph:3/chars:30-56",
+            "page": 9,
+            "unit_kind": "pdf_native_range",
+            "table_index": null,
+            "row_index": null,
+            "quality_flags": [],
+            "selection_reasons": [
+              "reading_plan"
+            ],
+            "topics": [
+              "business"
+            ],
+            "reading_value_band": "description"
+          }
+        ]
+      },
+      {
+        "task": "t37",
+        "kind": "native_continuity",
+        "section_role": "unknown",
+        "section_role_origin": "task_default",
+        "topics": [
+          "business_revenue_measure"
+        ],
+        "topics_origin": "explicit",
+        "members": [
+          {
+            "part": "p1",
+            "factual_support": false,
+            "source_key": "s31",
+            "locator": "loc:v1/page:13/paragraph:1",
+            "page": 13,
+            "unit_kind": "pdf_text_block",
+            "table_index": null,
+            "row_index": null,
+            "quality_flags": [],
+            "selection_reasons": [
+              "reading_context"
+            ],
+            "topics": [],
+            "reading_value_band": "description"
+          },
+          {
+            "part": "p2",
+            "factual_support": true,
+            "source_key": "s33",
+            "locator": "loc:v1/page:13/paragraph:9",
+            "page": 13,
+            "unit_kind": "pdf_text_block",
+            "table_index": null,
+            "row_index": null,
+            "quality_flags": [],
+            "selection_reasons": [
+              "reading_plan",
+              "business_revenue_measure"
+            ],
+            "topics": [
+              "business_revenue_measure"
+            ],
+            "reading_value_band": "meaningful_fact"
+          },
+          {
+            "part": "p3",
+            "factual_support": true,
+            "source_key": "s34",
+            "locator": "loc:v1/page:13/paragraph:10",
+            "page": 13,
+            "unit_kind": "pdf_text_block",
+            "table_index": null,
+            "row_index": null,
+            "quality_flags": [],
+            "selection_reasons": [
+              "reading_plan",
+              "business_revenue_measure"
+            ],
+            "topics": [
+              "business_revenue_measure"
+            ],
+            "reading_value_band": "meaningful_fact"
+          },
+          {
+            "part": "p4",
+            "factual_support": true,
+            "source_key": "s35",
+            "locator": "loc:v1/page:13/paragraph:11",
+            "page": 13,
+            "unit_kind": "pdf_text_block",
+            "table_index": null,
+            "row_index": null,
+            "quality_flags": [],
+            "selection_reasons": [
+              "reading_plan",
+              "business_revenue_measure"
+            ],
+            "topics": [
+              "business_revenue_measure"
+            ],
+            "reading_value_band": "meaningful_fact"
+          },
+          {
+            "part": "p5",
+            "factual_support": true,
+            "source_key": "s36",
+            "locator": "loc:v1/page:13/paragraph:12",
+            "page": 13,
+            "unit_kind": "pdf_text_block",
+            "table_index": null,
+            "row_index": null,
+            "quality_flags": [],
+            "selection_reasons": [
+              "reading_plan",
+              "business_revenue_measure"
+            ],
+            "topics": [
+              "business_revenue_measure"
+            ],
+            "reading_value_band": "meaningful_fact"
+          }
+        ]
+      }
+    ]
+  },
+  "lifecycle": {
+    "status": "PASS_WITH_SCOPE_LIMITS",
+    "model": "mimo-v2.6-flash",
+    "model_post_attempts": 1,
+    "known_usage": {
+      "usage_status": "known",
+      "input_tokens": 15327,
+      "output_tokens": 1663,
+      "charged_tokens": 16990,
+      "charged_micro_usd": 3109,
+      "cost_kind": "budget_proxy_or_unknown_hold_not_invoice"
+    },
+    "activation_recovery": {
+      "status": "PASS",
+      "held_status": "activation_pending",
+      "same_run_id": "phaseC-090-cc347948ae96",
+      "native_attempts_before": 1,
+      "native_attempts_after": 1,
+      "charged_tokens_before": 16990,
+      "charged_tokens_after": 16990,
+      "charged_micro_usd_before": 3109,
+      "charged_micro_usd_after": 3109,
+      "POSTs_before": 1,
+      "POSTs_after": 1,
+      "paid_generation_unchanged": true,
+      "response_identity_unchanged": true
+    },
+    "same_run_zero_POST": true,
+    "cross_run_zero_POST": true,
+    "cross_run_native_attempts": 0,
+    "public_replay_status": "verified",
+    "filing_fetch": {
+      "status": "source_candidate",
+      "outcome": "reused_existing",
+      "byte_verification": "pending_verified_open",
+      "calls": 2,
+      "downloads": 0
+    },
+    "RF_source": {
+      "read_status": "ok",
+      "capture_action": "verified_read",
+      "narrative_consumption": "not_consumed",
+      "dependency_count": 0
+    },
+    "RF_public_narrative": {
+      "read_status": "ok",
+      "same_summary": true,
+      "artifact_ref": {
+        "artifact_sha256": "ba856a0881d078ae55dee65b6583f19f8a45c7abe4da6c6d626b840effe9a0ae",
+        "artifact_version_id": "narrative-6976c5dd9bc744e3b940e6316de20694",
+        "byte_size": 419186,
+        "schema_version": "narrative-ref/1",
+        "source_ref": {
+          "byte_size": 3396644,
+          "content_sha256": "4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+          "document_id": "urn:company-wiki:document:sha256:4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+          "mime_type": "application/pdf",
+          "schema_version": "2.0",
+          "source_id": "urn:company-wiki:source:sha256:4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36"
+        }
+      },
+      "claims": 24,
+      "quality_status": "needs_review"
+    },
+    "producer_cleanup_receipt": {
+      "protected_unchanged": true,
+      "sentinel_unchanged": true,
+      "temporary_lake_removed": true,
+      "all_prepared_protected_unchanged": true
+    },
+    "RF_not_consumed_interpretation": {
+      "status": "EXPECTED_READ_ONLY_RECEIPT_NOT_A_PRODUCT_FINDING",
+      "reason_field_in_receipt": null,
+      "implementation_reason": "RF source_preparation calls read_narrative_context then narrative_read_receipt(context); the receipt initializer explicitly sets status not_consumed and dependencies []. No forecast/claim/parameter binding is requested by this CLI stage.",
+      "source_location": "C:/Users/郑曾波/Projects/revenue-forecast/scripts/source_narrative_context.py:34",
+      "required_flag_in_retained_narrative_read_request": "absent",
+      "request_scope": "narrative-read-request/1 with narrative_ref/as_of_date/expected_source; no forecast input or binding list",
+      "original_consumer_request": "Temporary consumer-narrative-request.json was removed with producer lake; retained read-request and canonical consumers() writer establish read scope, not a forecast run."
+    },
+    "not_proven": [
+      "FF receipt alone does not verify bytes: pending_verified_open is explicit.",
+      "RF public artifact reading is proven; RF research/forecast consumption is not_consumed with zero dependencies, so no forecast/model adoption is claimed.",
+      "Source-support 3/3, batch completed and overall PASS are lifecycle/source gates, not summary-content 3/3.",
+      "Selection remains partial (112/1120 candidates); this review does not claim whole-report completeness or holdout generalization."
+    ]
+  },
+  "evidence": [
+    {
+      "path": ".planning\\c3-20261028\\hk-formal-v2\\phaseC-090-cc347948ae96.bundle.json.gz",
+      "bytes": 90298,
+      "sha256": "c68d05c77de29e2a3b780a13a2fb4f0dbe7b68ae208a0870b22eb1b1b0d1e115"
+    },
+    {
+      "path": ".planning\\c3-20261028\\hk-formal-v2\\materials\\phaseC-090-cc347948ae96.input.json.gz",
+      "bytes": 16514,
+      "sha256": "5f2e20cffc4aa6969d20ac3dd3e5f6420dc9cbc0d0073c1524b79c467320115c"
+    },
+    {
+      "path": ".planning\\c3-20261028\\hk-formal-v2\\materials\\phaseC-090-cc347948ae96.db75761e8a3f4945a0e83aaf01b48b34.response.json.gz",
+      "bytes": 2479,
+      "sha256": "dd3a73fda050b776bda94fce37c134f3c4c46d2861cf82b8453773da7df19c74"
+    },
+    {
+      "path": ".planning\\c3-20261028\\hk-formal-v2\\events.jsonl",
+      "bytes": 4527,
+      "sha256": "b0ae2c76183e8368b691a19f925b8871ce43255f18ceee65be8ee416a8b33213"
+    },
+    {
+      "path": ".planning\\c3-20261028\\hk-formal-v2\\overall.json",
+      "bytes": 750506,
+      "sha256": "094e48df083791d31bc8cab2b9eb9281d68170f29dba825c8453b4baf898eb24"
+    },
+    {
+      "path": ".planning\\c3-20261028\\hk-formal-v2\\receipt.json",
+      "bytes": 750461,
+      "sha256": "3e5bfe011360373598610169da27e285c381474c1ab6b1c8eafedcb4da5de166"
+    },
+    {
+      "path": "docs\\plans\\du11-source-closure-2026-10-18\\review\\pdf-c3-20261026\\hk-development-gold.json",
+      "bytes": 4238,
+      "sha256": "2d6391a1f3f6d0c6e9bc7629e327f54c5bb4d2c651b202d38dd4f4364dbba568"
+    },
+    {
+      "path": ".planning\\c3-20261028\\hk-formal-v2\\phaseC-090-cc347948ae96.native-usage.json",
+      "bytes": 1709,
+      "sha256": "e45a7c04d43babdb83c408083e7473a5ff980a336d78ec0189b37c59360907a9"
+    },
+    {
+      "path": ".planning\\c3-20261028\\hk-formal-v2\\phaseC-090-cc347948ae96-cache.native-usage.json",
+      "bytes": 4,
+      "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f"
+    },
+    {
+      "path": ".planning\\c3-20261028\\hk-formal-v2\\phaseC-090-cc347948ae96-activation-resume.stdout.json",
+      "bytes": 1176,
+      "sha256": "8c1c5a6e3752497704c662bae2de887b551246191b65a097096cde1ad5d2809f"
+    },
+    {
+      "path": ".planning\\c3-20261028\\hk-formal-v2\\phaseC-090-cc347948ae96-restart.stdout.json",
+      "bytes": 1176,
+      "sha256": "8c1c5a6e3752497704c662bae2de887b551246191b65a097096cde1ad5d2809f"
+    },
+    {
+      "path": ".planning\\c3-20261028\\hk-formal-v2\\phaseC-090-cc347948ae96-cross-run.stdout.json",
+      "bytes": 957,
+      "sha256": "979114392d72a6ac0d6cbcacfc10f2df9e3bb2d21f55b28510350317f237c6c7"
+    },
+    {
+      "path": ".planning\\c3-20261028\\hk-formal-v2\\ff-reuse.stdout.json",
+      "bytes": 1058,
+      "sha256": "27affca076658a375d532da6b7bec87f92ef9274f659988be6b94156bec327a0"
+    },
+    {
+      "path": ".planning\\c3-20261028\\hk-formal-v2\\rf-source.stdout.json",
+      "bytes": 8813,
+      "sha256": "95c88aaa0082f9e0d9a6ef1ad013c037039ebf9280f6aae3cbcc14f7e927f039"
+    },
+    {
+      "path": ".planning\\c3-20261028\\hk-formal-v2\\rf-narrative.stdout.json",
+      "bytes": 422582,
+      "sha256": "599e2bdea4029716548ac885e8c9460884dadebd2f4cb2186ea8b1244eb17609"
+    },
+    {
+      "path": ".planning\\c3-20261028\\hk-formal-v2\\phaseC-090-cc347948ae96.read-request.json",
+      "bytes": 1020,
+      "sha256": "eb49d1ea77959574640002eca96564bd39c39d0f6854e4d6312745e6f9883254"
+    },
+    {
+      "path": ".planning\\c3-20261028\\hk-formal-v2\\rf-source.command.json",
+      "bytes": 1042,
+      "sha256": "f06b053ffb6852ccb9a21156c9e9b107c35af11c7907cc1dce8b9b3f345e6a4c"
+    },
+    {
+      "path": ".planning\\c3-20261028\\hk-formal-v2\\rf-narrative.command.json",
+      "bytes": 561,
+      "sha256": "11cf7e51251b4ec7cd4afe787a97d5da0c0b4f28ba08fa8c1aa42e2cd777b8b3"
+    }
+  ],
+  "review_cleanup": {
+    "models": 0,
+    "network": 0,
+    "PDF_reads": 0,
+    "Docling": 0,
+    "downloads": 0,
+    "product_changes": 0,
+    "production_config_changes": 0,
+    "original_changes": 0,
+    "temporary_lake_created": false,
+    "background_processes": 0,
+    "retained": "Only reviewer script and report.md/json; no full bundle duplication."
+  }
+}

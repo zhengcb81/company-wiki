@@ -1,0 +1,30 @@
+[
+  {
+    "kind": "native_model_charge",
+    "mode": "live",
+    "database": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c328live\\cwplC-ibxo339p\\AUTO.sqlite",
+    "attempt_id": "db75761e8a3f4945a0e83aaf01b48b34",
+    "run_id": "phaseC-090-cc347948ae96",
+    "job_id": "0348236058941361",
+    "request_sha256": "e5f93081a56b6e7112b038fc465976b6dd82a666459276ff546f1ef8b006188a",
+    "input_tokens_bound": 62301,
+    "max_output_tokens": 8192,
+    "output_bytes_bound": 2097152,
+    "reserved_micro_usd": 13115,
+    "usage_status": "known",
+    "input_tokens": 15327,
+    "output_tokens": 1663,
+    "estimated_micro_usd": 3109,
+    "response_sha256": "2bbbaf0ce5e1dbac4714a10d8ca0466ac37827c4928814902f49dad94133d074",
+    "error_code": null,
+    "output_bytes": 419186,
+    "output_sha256": "ba856a0881d078ae55dee65b6583f19f8a45c7abe4da6c6d626b840effe9a0ae",
+    "reserved_at": "2026-10-28T07:03:11Z",
+    "usage_settled_at": "2026-10-28T07:03:50Z",
+    "output_settled_at": "2026-10-28T07:03:57Z",
+    "paid_response_json": "{\"adapter_id\":\"openai-compatible-http/1\",\"body_sha256\":\"a9831bc0aa6177a847869aada2092edd73fd470bdcf44f19cdd097c17c674077\",\"byte_size\":6224,\"duration_ms\":38611,\"http_status\":200,\"model_id\":\"mimo-v2.6-flash\",\"object_key\":\"objects/sha256/a9/a9831bc0aa6177a847869aada2092edd73fd470bdcf44f19cdd097c17c674077.json\",\"prompt_version\":\"reading-source-scoped/4.0.6\",\"request_sha256\":\"e5f93081a56b6e7112b038fc465976b6dd82a666459276ff546f1ef8b006188a\",\"schema_version\":\"narrative-paid-response/1\"}",
+    "charged_tokens": 16990,
+    "charged_micro_usd": 3109,
+    "cost_kind": "budget_proxy_or_unknown_hold_not_invoice"
+  }
+]

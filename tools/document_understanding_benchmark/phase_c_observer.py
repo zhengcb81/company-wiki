@@ -16,6 +16,26 @@ INSTALLED = False
 _pending: dict | None = None
 
 
+def capture_selection_checkpoint(selected, directory: Path, run_id: str) -> dict:
+    """Retain source decisions on refusal without rerunning PDF extraction.
+
+    The model view intentionally excludes diagnostic execution metadata. Save
+    the typed selection before its temporary lake is cleaned, never credentials,
+    provider reasoning, or a second original PDF.
+    """
+    path = directory / (run_id + '.selection.json.gz')
+    if path.parent.resolve() != directory.resolve():
+        raise ValueError('OBSERVED_SELECTION_PATH_INVALID')
+    body = json.dumps(selected.to_dict(), ensure_ascii=False, sort_keys=True,
+                      separators=(',', ':')).encode()
+    if path.exists():
+        if gzip.decompress(path.read_bytes()) != body:
+            raise ValueError('OBSERVED_SELECTION_CHANGED')
+    else:
+        path.write_bytes(gzip.compress(body, mtime=0))
+    return {'file': path.name, 'sha256': hashlib.sha256(body).hexdigest(), 'bytes': len(body)}
+
+
 def _oracle_reading_context(context):
     """Project typed production context to the oracle's membership-only schema.
 
@@ -84,7 +104,7 @@ def _sent_task_gold(required, selected, view, sent_keys):
              for fact in required]
     return {
         "scope": "source_support_in_current_request_tasks",
-        "request_scope": "full_request" if len(sent_keys) == len(view.plan.tasks) else "repair_subset",
+        "request_scope": "full_request" if sent_keys == view.admitted_task_keys else "repair_subset",
         "sent_task_keys": [task.key for task in view.plan.tasks if task.key in sent_keys],
         "facts": facts, "required_count": len(facts),
         "supported_count": sum(fact["supported"] for fact in facts),
@@ -352,6 +372,8 @@ def install() -> None:
         gold = json.loads(gold_bytes)
         assert gold["source_sha256"] == selected.source_ref.content_sha256
         observation = gold_observation(gold, selected, envelope)
+        selection_checkpoint = capture_selection_checkpoint(
+            selected, Path(config['materials']), caller._run_id)
         event = {
             "event": "pre_reservation_material",
             "run_id": caller._run_id,
@@ -367,6 +389,7 @@ def install() -> None:
             if final is not None
             else None,
             "gold": observation,
+            "selection_checkpoint": selection_checkpoint,
             "mode": config["mode"],
         }
         _append(config["events"], event)

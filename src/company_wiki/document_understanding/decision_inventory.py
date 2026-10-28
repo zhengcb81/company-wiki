@@ -102,6 +102,7 @@ def _versions(*, pdf_frontend: bool = False, mime_type: str | None = None,
         "company_wiki.document_understanding.layout_hints.columns",
         "company_wiki.source_catalog.narrative_native_dependencies",
         "company_wiki.source_catalog.narrative_finalize",
+        "company_wiki.source_contract.selection_annotations",
         # Native outline declarations change each statement's own source scope.
         # Early composition transfers native proof into each target dependency.
         # Actual byte changes in either owner invalidate complete cached reads.

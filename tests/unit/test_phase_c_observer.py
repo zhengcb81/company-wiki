@@ -12,6 +12,21 @@ from tools.document_understanding_benchmark import phase_c_observer as observer
 from unit.test_narrative_extractive_runtime import selected
 
 
+def test_pre_reservation_selection_checkpoint_retains_diagnostics_and_is_immutable(tmp_path):
+    import gzip
+
+    source = selected(2)
+    before = source.to_dict()
+    snapshot = observer.capture_selection_checkpoint(source, tmp_path, 'bounded-run')
+    assert json.loads(gzip.decompress((tmp_path / snapshot['file']).read_bytes())) == before
+    assert snapshot['sha256'] == hashlib.sha256(json.dumps(before, ensure_ascii=False,
+        sort_keys=True, separators=(',', ':')).encode()).hexdigest()
+    assert observer.capture_selection_checkpoint(source, tmp_path, 'bounded-run') == snapshot
+    with pytest.raises(ValueError, match='SELECTION_CHANGED'):
+        observer.capture_selection_checkpoint(selected(3), tmp_path, 'bounded-run')
+    assert json.loads(gzip.decompress((tmp_path / snapshot['file']).read_bytes())) == before
+
+
 def _gold(source):
     return {"facts": [{"id": "fact-" + str(index), "target_kind": "required_business",
         "importance": "critical", "any_support_sets": [[{

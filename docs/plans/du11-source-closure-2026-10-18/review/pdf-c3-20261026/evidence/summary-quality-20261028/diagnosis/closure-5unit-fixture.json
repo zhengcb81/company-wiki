@@ -1,0 +1,532 @@
+{
+  "schema_version": "selected-source-closed-group-fixture/1",
+  "scope": "five selected units only; missing transient reading_layout/native_source_view not invented",
+  "source_ref": {
+    "byte_size": 3396644,
+    "content_sha256": "4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+    "document_id": "urn:company-wiki:document:sha256:4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+    "mime_type": "application/pdf",
+    "schema_version": "2.0",
+    "source_id": "urn:company-wiki:source:sha256:4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36"
+  },
+  "units": [
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:daa09653fc915ab60b7997c49e41559a50ee1e4b9ada4a2ab95a95b39af277d7",
+      "source_id": "urn:company-wiki:source:sha256:4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1",
+      "coordinates": {
+        "page_number": 13,
+        "paragraph_index": 1,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "raw_text": "管理層討論與分析",
+      "unit_kind": "pdf_text_block",
+      "source_role": "company_filing",
+      "language": "zh",
+      "quality_flags": [],
+      "metadata": {
+        "bbox": [
+          416.6535949707031,
+          92.1467056274414,
+          538.6011962890625,
+          110.08070373535156
+        ],
+        "block_char_end": 8,
+        "block_char_start": 0,
+        "block_sha256": "7c7c34abd427eae9b06ebb84e491df9f414a3fc3876ac7f65fbe2d685d168698",
+        "font_size": 13.645511627197266,
+        "font_weight": "bold",
+        "geometry_feature_version": "pdf-geometry/1",
+        "geometry_granularity": "block",
+        "language": "zh",
+        "page_height": 807.8740234375,
+        "page_width": 595.2760009765625,
+        "pdf_block": 1,
+        "reading_priority": 2,
+        "reading_score": 0,
+        "reading_value_band": "description",
+        "selection_reasons": [
+          "reading_context"
+        ],
+        "source_role": "company_filing",
+        "text_sha256": "7c7c34abd427eae9b06ebb84e491df9f414a3fc3876ac7f65fbe2d685d168698",
+        "topics": [],
+        "unit_kind": "pdf_text_block"
+      },
+      "original_evidence_span_id": "urn:company-wiki:evidence-span:sha256:212bfc05d06d00fedec5ecd891c401015f88ca5e27fab80bd1d163d06736cca7"
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:b11bcdfc7a70119162ae056aec1e118ae129a179db4dc76676c8211997fefd01",
+      "source_id": "urn:company-wiki:source:sha256:4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1",
+      "coordinates": {
+        "page_number": 13,
+        "paragraph_index": 9,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "raw_text": "• \n來自行業雲服務的收入為人民幣1,340.4百萬元（187.1百萬美元），較二零二四年同期的人民幣1,245.4",
+      "unit_kind": "pdf_text_block",
+      "source_role": "company_filing",
+      "language": "zh",
+      "quality_flags": [],
+      "metadata": {
+        "bbox": [
+          99.19459533691406,
+          267.5849609375,
+          538.5655517578125,
+          278.0339660644531
+        ],
+        "block_char_end": 58,
+        "block_char_start": 0,
+        "block_sha256": "80ece2e126699ae75b984c71519effb133f56d1eb79ab7a82fc4b9ba32107b64",
+        "font_size": 9.0,
+        "font_weight": "regular",
+        "geometry_feature_version": "pdf-geometry/1",
+        "geometry_granularity": "block",
+        "language": "zh",
+        "page_height": 807.8740234375,
+        "page_width": 595.2760009765625,
+        "pdf_block": 7,
+        "reading_priority": 1,
+        "reading_score": 3,
+        "reading_value_band": "meaningful_fact",
+        "selection_reasons": [
+          "reading_plan",
+          "business_revenue_measure"
+        ],
+        "source_role": "company_filing",
+        "text_sha256": "80ece2e126699ae75b984c71519effb133f56d1eb79ab7a82fc4b9ba32107b64",
+        "topics": [
+          "business_revenue_measure"
+        ],
+        "unit_kind": "pdf_text_block"
+      },
+      "original_evidence_span_id": "urn:company-wiki:evidence-span:sha256:b95de2d665a45dddfe5171e61e11456330439a916576851380ce537db50848ce"
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:20f67260806fa261db163e8d55c01cb65518607208afbd8f0bee51dca311b4ed",
+      "source_id": "urn:company-wiki:source:sha256:4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1",
+      "coordinates": {
+        "page_number": 13,
+        "paragraph_index": 10,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "raw_text": "百萬元增加7.6%。",
+      "unit_kind": "pdf_text_block",
+      "source_role": "company_filing",
+      "language": "zh",
+      "quality_flags": [],
+      "metadata": {
+        "bbox": [
+          121.87457275390625,
+          281.5889892578125,
+          538.5115966796875,
+          292.0379943847656
+        ],
+        "block_char_end": 10,
+        "block_char_start": 0,
+        "block_sha256": "206ec68ac1851e27a7d79d304270f394021860cc699cccc3d0ccc59294c5b168",
+        "font_size": 9.0,
+        "font_weight": "regular",
+        "geometry_feature_version": "pdf-geometry/1",
+        "geometry_granularity": "block",
+        "language": "zh",
+        "page_height": 807.8740234375,
+        "page_width": 595.2760009765625,
+        "pdf_block": 8,
+        "reading_priority": 1,
+        "reading_score": 3,
+        "reading_value_band": "meaningful_fact",
+        "selection_reasons": [
+          "reading_plan",
+          "business_revenue_measure"
+        ],
+        "source_role": "company_filing",
+        "text_sha256": "4daad2c0120da0265c84426e53263a91f26acb779d77607eecb7591ecc848bc7",
+        "topics": [
+          "business_revenue_measure"
+        ],
+        "unit_kind": "pdf_text_block"
+      },
+      "original_evidence_span_id": "urn:company-wiki:evidence-span:sha256:05cba3725cb76decbb79e8d497779fce7670c854584d89c78ed41b003b4714cb"
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:618c9e9444f23fd84af4e6cb9cae7ea3adb8232ad8e1d5553994a63b569b024a",
+      "source_id": "urn:company-wiki:source:sha256:4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1",
+      "coordinates": {
+        "page_number": 13,
+        "paragraph_index": 11,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "raw_text": "該同比增加主要是由於不斷增長的IT需求及我們向垂直行業客戶複製行業解決方案",
+      "unit_kind": "pdf_text_block",
+      "source_role": "company_filing",
+      "language": "zh",
+      "quality_flags": [],
+      "metadata": {
+        "bbox": [
+          121.87457275390625,
+          281.5889892578125,
+          538.5115966796875,
+          292.0379943847656
+        ],
+        "block_char_end": 47,
+        "block_char_start": 10,
+        "block_sha256": "206ec68ac1851e27a7d79d304270f394021860cc699cccc3d0ccc59294c5b168",
+        "font_size": 9.0,
+        "font_weight": "regular",
+        "geometry_feature_version": "pdf-geometry/1",
+        "geometry_granularity": "block",
+        "language": "zh",
+        "page_height": 807.8740234375,
+        "page_width": 595.2760009765625,
+        "pdf_block": 8,
+        "reading_priority": 1,
+        "reading_score": 3,
+        "reading_value_band": "meaningful_fact",
+        "selection_reasons": [
+          "reading_plan",
+          "business_revenue_measure"
+        ],
+        "source_role": "company_filing",
+        "text_sha256": "decfc72afcd38da28760320e4578acf9524771edaa90a4bcc338f2426f326cc3",
+        "topics": [
+          "business_revenue_measure"
+        ],
+        "unit_kind": "pdf_text_block"
+      },
+      "original_evidence_span_id": "urn:company-wiki:evidence-span:sha256:c600d04527e36d93c8581ba689bd398f375279f70c68b324baec8dc44dbb3000"
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:df657668dbf678513d1ab685b068334d701e7cd9f366da7e3b4ea749445c1ba6",
+      "source_id": "urn:company-wiki:source:sha256:4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+      "parser_name": "selective_narrative_parser",
+      "parser_version": "0.1.1",
+      "coordinates": {
+        "page_number": 13,
+        "paragraph_index": 12,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": null,
+        "char_end": null
+      },
+      "raw_text": "的能力。",
+      "unit_kind": "pdf_text_block",
+      "source_role": "company_filing",
+      "language": "zh",
+      "quality_flags": [],
+      "metadata": {
+        "bbox": [
+          121.8656005859375,
+          296.1763000488281,
+          158.62159729003906,
+          305.1763000488281
+        ],
+        "block_char_end": 4,
+        "block_char_start": 0,
+        "block_sha256": "f989af4a6e7123b1d3959acc684bed335655e71ce53d95846ef4af8747227be5",
+        "font_size": 9.0,
+        "font_weight": "regular",
+        "geometry_feature_version": "pdf-geometry/1",
+        "geometry_granularity": "block",
+        "language": "zh",
+        "page_height": 807.8740234375,
+        "page_width": 595.2760009765625,
+        "pdf_block": 9,
+        "reading_priority": 1,
+        "reading_score": 3,
+        "reading_value_band": "meaningful_fact",
+        "selection_reasons": [
+          "reading_plan",
+          "business_revenue_measure"
+        ],
+        "source_role": "company_filing",
+        "text_sha256": "f989af4a6e7123b1d3959acc684bed335655e71ce53d95846ef4af8747227be5",
+        "topics": [
+          "business_revenue_measure"
+        ],
+        "unit_kind": "pdf_text_block"
+      },
+      "original_evidence_span_id": "urn:company-wiki:evidence-span:sha256:656fb5bb6387c1fc5d458544f9611700a4d4a8c856ee1a01258bf0992f57bb57"
+    }
+  ],
+  "frozen_source_group": {
+    "citation_views": [
+      {
+        "context_evidence_ids": [
+          "urn:company-wiki:evidence-span:sha256:212bfc05d06d00fedec5ecd891c401015f88ca5e27fab80bd1d163d06736cca7"
+        ],
+        "support_evidence_ids": [
+          "urn:company-wiki:evidence-span:sha256:b95de2d665a45dddfe5171e61e11456330439a916576851380ce537db50848ce",
+          "urn:company-wiki:evidence-span:sha256:05cba3725cb76decbb79e8d497779fce7670c854584d89c78ed41b003b4714cb",
+          "urn:company-wiki:evidence-span:sha256:c600d04527e36d93c8581ba689bd398f375279f70c68b324baec8dc44dbb3000",
+          "urn:company-wiki:evidence-span:sha256:656fb5bb6387c1fc5d458544f9611700a4d4a8c856ee1a01258bf0992f57bb57"
+        ]
+      }
+    ],
+    "evidence_ids": [
+      "urn:company-wiki:evidence-span:sha256:212bfc05d06d00fedec5ecd891c401015f88ca5e27fab80bd1d163d06736cca7",
+      "urn:company-wiki:evidence-span:sha256:b95de2d665a45dddfe5171e61e11456330439a916576851380ce537db50848ce",
+      "urn:company-wiki:evidence-span:sha256:05cba3725cb76decbb79e8d497779fce7670c854584d89c78ed41b003b4714cb",
+      "urn:company-wiki:evidence-span:sha256:c600d04527e36d93c8581ba689bd398f375279f70c68b324baec8dc44dbb3000",
+      "urn:company-wiki:evidence-span:sha256:656fb5bb6387c1fc5d458544f9611700a4d4a8c856ee1a01258bf0992f57bb57"
+    ],
+    "group_id": "urn:company-wiki:reading-group:sha256:56e2b1d7dcdbb049a90f341fa6dbcb96212bf7550e5162767acf6c4f799c6180",
+    "kind": "native_continuity",
+    "section_role": "unknown"
+  },
+  "pipeline": {
+    "observation": {
+      "schema_version": "du-input/1",
+      "source_ref": {
+        "source_id": "urn:company-wiki:source:sha256:4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+        "source_sha256": "4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36"
+      },
+      "metadata": {
+        "title": "",
+        "declared_kind": "unknown",
+        "mime_type": "application/pdf",
+        "language": "zh"
+      },
+      "coverage": {
+        "native_scan": "complete",
+        "opaque_pages": [],
+        "deferred_pages": []
+      },
+      "units": [
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:daa09653fc915ab60b7997c49e41559a50ee1e4b9ada4a2ab95a95b39af277d7",
+          "ordinal": 0,
+          "locator": "loc:v1/page:13/paragraph:1",
+          "page": 13,
+          "text": "管理層討論與分析",
+          "kind": "paragraph",
+          "language": "zh",
+          "role": "company_filing",
+          "layout": {
+            "bbox": [
+              416.6535949707031,
+              92.1467056274414,
+              538.6011962890625,
+              110.08070373535156
+            ],
+            "page_width": 595.2760009765625,
+            "page_height": 807.8740234375,
+            "font_size": 13.645511627197266,
+            "font_weight": "bold",
+            "geometry_feature_version": "pdf-geometry/1",
+            "geometry_granularity": "block"
+          },
+          "hints": {
+            "source_id": "urn:company-wiki:source:sha256:4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+            "geometry_granularity": "block"
+          }
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:b11bcdfc7a70119162ae056aec1e118ae129a179db4dc76676c8211997fefd01",
+          "ordinal": 1,
+          "locator": "loc:v1/page:13/paragraph:9",
+          "page": 13,
+          "text": "• \n來自行業雲服務的收入為人民幣1,340.4百萬元（187.1百萬美元），較二零二四年同期的人民幣1,245.4",
+          "kind": "paragraph",
+          "language": "zh",
+          "role": "company_filing",
+          "layout": {
+            "bbox": [
+              99.19459533691406,
+              267.5849609375,
+              538.5655517578125,
+              278.0339660644531
+            ],
+            "page_width": 595.2760009765625,
+            "page_height": 807.8740234375,
+            "font_size": 9.0,
+            "font_weight": "regular",
+            "geometry_feature_version": "pdf-geometry/1",
+            "geometry_granularity": "block"
+          },
+          "hints": {
+            "source_id": "urn:company-wiki:source:sha256:4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+            "geometry_granularity": "block"
+          }
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:20f67260806fa261db163e8d55c01cb65518607208afbd8f0bee51dca311b4ed",
+          "ordinal": 2,
+          "locator": "loc:v1/page:13/paragraph:10",
+          "page": 13,
+          "text": "百萬元增加7.6%。",
+          "kind": "paragraph",
+          "language": "zh",
+          "role": "company_filing",
+          "layout": {
+            "bbox": [
+              121.87457275390625,
+              281.5889892578125,
+              538.5115966796875,
+              292.0379943847656
+            ],
+            "page_width": 595.2760009765625,
+            "page_height": 807.8740234375,
+            "font_size": 9.0,
+            "font_weight": "regular",
+            "geometry_feature_version": "pdf-geometry/1",
+            "geometry_granularity": "block"
+          },
+          "hints": {
+            "source_id": "urn:company-wiki:source:sha256:4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+            "geometry_granularity": "block"
+          }
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:618c9e9444f23fd84af4e6cb9cae7ea3adb8232ad8e1d5553994a63b569b024a",
+          "ordinal": 3,
+          "locator": "loc:v1/page:13/paragraph:11",
+          "page": 13,
+          "text": "該同比增加主要是由於不斷增長的IT需求及我們向垂直行業客戶複製行業解決方案",
+          "kind": "paragraph",
+          "language": "zh",
+          "role": "company_filing",
+          "layout": {
+            "bbox": [
+              121.87457275390625,
+              281.5889892578125,
+              538.5115966796875,
+              292.0379943847656
+            ],
+            "page_width": 595.2760009765625,
+            "page_height": 807.8740234375,
+            "font_size": 9.0,
+            "font_weight": "regular",
+            "geometry_feature_version": "pdf-geometry/1",
+            "geometry_granularity": "block"
+          },
+          "hints": {
+            "source_id": "urn:company-wiki:source:sha256:4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+            "geometry_granularity": "block"
+          }
+        },
+        {
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:df657668dbf678513d1ab685b068334d701e7cd9f366da7e3b4ea749445c1ba6",
+          "ordinal": 4,
+          "locator": "loc:v1/page:13/paragraph:12",
+          "page": 13,
+          "text": "的能力。",
+          "kind": "paragraph",
+          "language": "zh",
+          "role": "company_filing",
+          "layout": {
+            "bbox": [
+              121.8656005859375,
+              296.1763000488281,
+              158.62159729003906,
+              305.1763000488281
+            ],
+            "page_width": 595.2760009765625,
+            "page_height": 807.8740234375,
+            "font_size": 9.0,
+            "font_weight": "regular",
+            "geometry_feature_version": "pdf-geometry/1",
+            "geometry_granularity": "block"
+          },
+          "hints": {
+            "source_id": "urn:company-wiki:source:sha256:4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+            "geometry_granularity": "block"
+          }
+        }
+      ]
+    },
+    "reading_plan": {
+      "unit_profiles": {
+        "urn:company-wiki:narrative-unit:sha256:daa09653fc915ab60b7997c49e41559a50ee1e4b9ada4a2ab95a95b39af277d7": {
+          "section_role": "unknown",
+          "priority": 2,
+          "family": "interim"
+        },
+        "urn:company-wiki:narrative-unit:sha256:b11bcdfc7a70119162ae056aec1e118ae129a179db4dc76676c8211997fefd01": {
+          "section_role": "unknown",
+          "priority": 1,
+          "family": "interim"
+        },
+        "urn:company-wiki:narrative-unit:sha256:20f67260806fa261db163e8d55c01cb65518607208afbd8f0bee51dca311b4ed": {
+          "section_role": "unknown",
+          "priority": 1,
+          "family": "interim"
+        },
+        "urn:company-wiki:narrative-unit:sha256:618c9e9444f23fd84af4e6cb9cae7ea3adb8232ad8e1d5553994a63b569b024a": {
+          "section_role": "unknown",
+          "priority": 1,
+          "family": "interim"
+        },
+        "urn:company-wiki:narrative-unit:sha256:df657668dbf678513d1ab685b068334d701e7cd9f366da7e3b4ea749445c1ba6": {
+          "section_role": "unknown",
+          "priority": 1,
+          "family": "interim"
+        }
+      }
+    },
+    "structure": {
+      "sections": [
+        {
+          "section_id": "frozen-selected-scope",
+          "heading_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:daa09653fc915ab60b7997c49e41559a50ee1e4b9ada4a2ab95a95b39af277d7"
+          ],
+          "body_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:b11bcdfc7a70119162ae056aec1e118ae129a179db4dc76676c8211997fefd01",
+            "urn:company-wiki:narrative-unit:sha256:20f67260806fa261db163e8d55c01cb65518607208afbd8f0bee51dca311b4ed",
+            "urn:company-wiki:narrative-unit:sha256:618c9e9444f23fd84af4e6cb9cae7ea3adb8232ad8e1d5553994a63b569b024a",
+            "urn:company-wiki:narrative-unit:sha256:df657668dbf678513d1ab685b068334d701e7cd9f366da7e3b4ea749445c1ba6"
+          ]
+        }
+      ]
+    },
+    "packages": {
+      "packages": [
+        {
+          "package_id": "urn:company-wiki:reading-group:sha256:56e2b1d7dcdbb049a90f341fa6dbcb96212bf7550e5162767acf6c4f799c6180",
+          "kind": "native_continuity",
+          "member_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:b11bcdfc7a70119162ae056aec1e118ae129a179db4dc76676c8211997fefd01",
+            "urn:company-wiki:narrative-unit:sha256:20f67260806fa261db163e8d55c01cb65518607208afbd8f0bee51dca311b4ed",
+            "urn:company-wiki:narrative-unit:sha256:618c9e9444f23fd84af4e6cb9cae7ea3adb8232ad8e1d5553994a63b569b024a",
+            "urn:company-wiki:narrative-unit:sha256:df657668dbf678513d1ab685b068334d701e7cd9f366da7e3b4ea749445c1ba6"
+          ],
+          "anchor_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:b11bcdfc7a70119162ae056aec1e118ae129a179db4dc76676c8211997fefd01",
+            "urn:company-wiki:narrative-unit:sha256:20f67260806fa261db163e8d55c01cb65518607208afbd8f0bee51dca311b4ed",
+            "urn:company-wiki:narrative-unit:sha256:618c9e9444f23fd84af4e6cb9cae7ea3adb8232ad8e1d5553994a63b569b024a",
+            "urn:company-wiki:narrative-unit:sha256:df657668dbf678513d1ab685b068334d701e7cd9f366da7e3b4ea749445c1ba6"
+          ],
+          "required_context_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:daa09653fc915ab60b7997c49e41559a50ee1e4b9ada4a2ab95a95b39af277d7"
+          ]
+        }
+      ]
+    }
+  },
+  "document_coverage_complete": false
+}

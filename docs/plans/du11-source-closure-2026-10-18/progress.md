@@ -1376,3 +1376,26 @@ CI0c988e8d/40406128851已于2026-10-26T21:44:13Z completed/success，正常hooks
 共享谓词/资源三项及验收工具两项均已关闭，最终源码独审PASS/0 OPEN；原539项范围已在实际新SHA复验（ROOT440＋独审99），另27独立反例、工具独审37项通过，mypy390文件通过。长句重复查询0额外regex扫描，原选材/预算上限保留。详见[最终工程验收](review/pdf-c3-20261026/SEMANTIC_ACCEPTANCE.md)。源码尚待本次正常提交推送及精确CI，不能借旧0c988e8d成功代签。
 
 **唯一下一步：** 正常提交推送→一次配置内真实HK摘要，实际sent task gold在预留费用前检查→激活/重启/跨run0重复费用→FF/RF公共消费与独立内容审查。准确参数/恢复边界见[FORMAL_NEXT](review/pdf-c3-20261026/FORMAL_NEXT.md)。未曝光holdout、实际RF预测模型采用与八步公司循环仍OPEN。用户已于10月28日恢复实施，下方暂停为历史。当前0新模型/下载，母账1,783,378 tokens/$0.724836，配置10M/$20含unknown；Dashboard独立，外部owner WIP不写。
+
+
+2026-10-28：已正常推送0da0ca6c；pre-commit通过，pre-push158P/33.56秒。发布10份Git LF SHA与独审绑定全一致，远端无他人新提交。精确CI40647344290运行中。正式HK单次attempt已启动，采用新runtime-v2 metadata和已配置MiMo，累计母账预检1,783,378tokens/724,836microUSD，保留6新unknown和旧7hold；原件复用、无新下载。不得将尚在运行当内容通过。
+
+
+## 2026-10-28 当前：真实链路通过，摘要内容2/3，推进质量共因修复
+
+0da0ca6c已发布，精确CI40647344290成功；真实HK唯一POST运行202.18秒完成，发送材料3/3完整，但独审摘要仅2/3：行业云专属同比/基数/原因遗漏，财务碎片/标题套话占位，另有无前指的原因句。研发及未来计划正确。激活恢复、同run重启/跨run缓存0新增POST/费用，FF复用和RF公共读取通过；RF not_consumed是只读准备阶段预期，不冒称预测采用。[真实结果与费用](review/pdf-c3-20261026/FORMAL_HK_RESULT.json)。
+
+**唯一下一步：** 按[SUMMARY_QUALITY_PLAN](review/pdf-c3-20261026/SUMMARY_QUALITY_PLAN.md)修两层共同owner：来源用途/完整性/价值、摘要消费已有priority/支持能力与软目标。先中性TDD与0POST真实响应回放，集中独审后一次同配置真实复验；不增加额度、不按公司/页码/task打补丁、不切回历史/5原卡冒充摘要。源层初步实现、摘要边界兼容测试正在收尾，尚未独审或发布。
+
+新增16990tokens/3109microUSD为已知预算代理费用，累计1,800,368tokens/$0.727945，6笔新unknown及旧7hold原样保留；10M/$20上限未升。原件、配置、测试湖不变/恢复，0下载。新holdout、实际RF预测与完整公司循环仍OPEN；Dashboard独立。下方“进行中/暂停”等均为历史，不覆盖本段及CURRENT_STATUS.json。
+
+
+## 2026-10-28 当前：摘要共因工程通过，真实来源闭合仍待修复
+
+已完成来源用途/金融豁免、支持能力、priority/purpose投影、精确scope去重、软目标与输出cap共因修复。独审三项追加问题（无主体增长误闭合、逐task2未执行、metric平方扫描）均闭合，19文件工程独审PASS/51项，指标相关308项与全src391文件mypy通过，计数重叠不相加。[工程收据](review/pdf-c3-20261026/QUALITY_ENGINEERING.md)。
+
+一次同配置真实复验146.072秒在费用预留前正确拒绝：行业云收入头与同比/原因尾分属两个task，prepared gold2/3；原文未全丢，但单组事实支持不完整。当前用途逻辑能保留旧已闭合4段组，尚不能证明新Docling具体为何未闭合。0POST、0预留、0新增费用/unknown；本run没有新final，也没有执行恢复/缓存/FF/RF，不能代签内容通过。[真实阻断](review/pdf-c3-20261026/QUALITY_REAL_RESULT.json)。旧唯一付费摘要2/3失败保持。
+
+**唯一下一步：** 修PDF阅读层的全或无页结果可靠性缺口：保持单converter、120秒/4GiB/3pages/2MiB与全部SHA/环境绑定，逐完成页原子检查点，未完成页留partial缺口；纯wire/短子进程TDD→独立大节点审查→改变recipe后一次真实复验。测试观察同时保留typed selection及reading_execution，避免临时湖清理后丢诊断。不抬额度、不调公司/字体/页号特例、不恢复unknown业务豁免、不在摘要compiler跨task拼证。完整细则见[SUMMARY_QUALITY_PLAN](review/pdf-c3-20261026/SUMMARY_QUALITY_PLAN.md)。
+
+母账仍1,800,368tokens/$0.727945（6笔新unknown及旧7hold保留），配置10M/$20未升。原件/生产配置与其他owner WIP不变；测试湖、外层临时根均恢复。新holdout、实际RF预测及公司循环仍OPEN，Dashboard独立。下方均为历史，不覆盖本段及CURRENT_STATUS.json。

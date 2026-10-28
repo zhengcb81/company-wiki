@@ -1,0 +1,18 @@
+{
+  "exit_code": 0,
+  "seconds": 14.694,
+  "targets": [
+    "tests/unit/test_scoped_source_admission.py",
+    "tests/unit/test_narrative_scoped_model_view.py",
+    "tests/unit/test_narrative_scoped_presentation_metadata.py",
+    "tests/unit/test_narrative_scoped_runtime_binding.py",
+    "tests/unit/test_narrative_scoped_runtime_legacy.py",
+    "tests/unit/test_narrative_scoped_runtime.py",
+    "tests/unit/test_narrative_extractive_runtime.py",
+    "tests/unit/test_phase_c_observer.py",
+    "tests/unit/document_understanding_selection/test_reading_untyped_numeric_quality.py",
+    "tests/unit/document_understanding_selection/test_reading_untyped_numeric_prose_controls.py"
+  ],
+  "owned_tmp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.sqt28focus1",
+  "cleanup_pending": true
+}

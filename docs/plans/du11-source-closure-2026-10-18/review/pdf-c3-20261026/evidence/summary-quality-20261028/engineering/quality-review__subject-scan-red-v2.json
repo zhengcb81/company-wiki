@@ -1,0 +1,83 @@
+[
+  {
+    "metrics": 16,
+    "chars": 655,
+    "regex_input_chars": 97159,
+    "by_regex": {
+      "company_wiki.source_catalog.narrative_predicate_state_SENTENCE": 28229,
+      "company_wiki.source_catalog.narrative_predicate_state_BOUNDARY": 22925,
+      "company_wiki.source_catalog.narrative_business_policy_GENERIC_DEFINITION": 1310,
+      "company_wiki.source_catalog.narrative_business_policy_PORTFOLIO_DEFINITION_CONTEXT": 1310,
+      "company_wiki.source_catalog.narrative_business_policy_OPERATING_MEASURE": 655,
+      "company_wiki.source_catalog.narrative_predicate_state_MODAL": 5895,
+      "company_wiki.source_catalog.narrative_predicate_state_FUTURE_FRAME": 5304,
+      "company_wiki.source_catalog.narrative_predicate_state_FUTURE_PERIOD": 591,
+      "company_wiki.source_catalog.narrative_predicate_state_PAST_PERIOD": 591,
+      "company_wiki.source_catalog.narrative_predicate_state_CURRENT_PERIOD": 591,
+      "company_wiki.source_catalog.narrative_predicate_state_REFERENCE_PHRASE": 591,
+      "company_wiki.source_catalog.narrative_business_policy_MEASURE_FINANCIAL_SUBJECT": 5498,
+      "company_wiki.source_catalog.narrative_business_policy_SOURCE_QUANTITY": 5498,
+      "company_wiki.source_catalog.narrative_business_policy_SOURCE_NON_QUANTITY": 5256,
+      "company_wiki.source_catalog.narrative_business_policy_MEASURE_DIRECTION_AFTER": 5498,
+      "company_wiki.source_catalog.narrative_business_policy_MEASURE_DIRECTION_BEFORE": 4824,
+      "company_wiki.source_catalog.narrative_business_policy_SOURCE_PRE_QUANTITY": 628,
+      "company_wiki.source_catalog.narrative_business_policy_SALES_COMPONENT_CHANGE": 655,
+      "company_wiki.source_catalog.narrative_business_policy_REVENUE_VALUE": 655,
+      "company_wiki.source_catalog.narrative_business_policy_REVENUE_RATE_CHANGE": 655
+    }
+  },
+  {
+    "metrics": 32,
+    "chars": 1279,
+    "regex_input_chars": 353415,
+    "by_regex": {
+      "company_wiki.source_catalog.narrative_predicate_state_SENTENCE": 106285,
+      "company_wiki.source_catalog.narrative_predicate_state_BOUNDARY": 85693,
+      "company_wiki.source_catalog.narrative_business_policy_GENERIC_DEFINITION": 2558,
+      "company_wiki.source_catalog.narrative_business_policy_PORTFOLIO_DEFINITION_CONTEXT": 2558,
+      "company_wiki.source_catalog.narrative_business_policy_OPERATING_MEASURE": 1279,
+      "company_wiki.source_catalog.narrative_predicate_state_MODAL": 21743,
+      "company_wiki.source_catalog.narrative_predicate_state_FUTURE_FRAME": 20592,
+      "company_wiki.source_catalog.narrative_predicate_state_FUTURE_PERIOD": 1151,
+      "company_wiki.source_catalog.narrative_predicate_state_PAST_PERIOD": 1151,
+      "company_wiki.source_catalog.narrative_predicate_state_CURRENT_PERIOD": 1151,
+      "company_wiki.source_catalog.narrative_predicate_state_REFERENCE_PHRASE": 1151,
+      "company_wiki.source_catalog.narrative_business_policy_MEASURE_FINANCIAL_SUBJECT": 20962,
+      "company_wiki.source_catalog.narrative_business_policy_SOURCE_QUANTITY": 20962,
+      "company_wiki.source_catalog.narrative_business_policy_SOURCE_NON_QUANTITY": 20496,
+      "company_wiki.source_catalog.narrative_business_policy_MEASURE_DIRECTION_AFTER": 20962,
+      "company_wiki.source_catalog.narrative_business_policy_MEASURE_DIRECTION_BEFORE": 19632,
+      "company_wiki.source_catalog.narrative_business_policy_SOURCE_PRE_QUANTITY": 1252,
+      "company_wiki.source_catalog.narrative_business_policy_SALES_COMPONENT_CHANGE": 1279,
+      "company_wiki.source_catalog.narrative_business_policy_REVENUE_VALUE": 1279,
+      "company_wiki.source_catalog.narrative_business_policy_REVENUE_RATE_CHANGE": 1279
+    }
+  },
+  {
+    "metrics": 64,
+    "chars": 2527,
+    "regex_input_chars": 1345159,
+    "by_regex": {
+      "company_wiki.source_catalog.narrative_predicate_state_SENTENCE": 412157,
+      "company_wiki.source_catalog.narrative_predicate_state_BOUNDARY": 331037,
+      "company_wiki.source_catalog.narrative_business_policy_GENERIC_DEFINITION": 5054,
+      "company_wiki.source_catalog.narrative_business_policy_PORTFOLIO_DEFINITION_CONTEXT": 5054,
+      "company_wiki.source_catalog.narrative_business_policy_OPERATING_MEASURE": 2527,
+      "company_wiki.source_catalog.narrative_predicate_state_MODAL": 83391,
+      "company_wiki.source_catalog.narrative_predicate_state_FUTURE_FRAME": 81120,
+      "company_wiki.source_catalog.narrative_predicate_state_FUTURE_PERIOD": 2271,
+      "company_wiki.source_catalog.narrative_predicate_state_PAST_PERIOD": 2271,
+      "company_wiki.source_catalog.narrative_predicate_state_CURRENT_PERIOD": 2271,
+      "company_wiki.source_catalog.narrative_predicate_state_REFERENCE_PHRASE": 2271,
+      "company_wiki.source_catalog.narrative_business_policy_MEASURE_FINANCIAL_SUBJECT": 81842,
+      "company_wiki.source_catalog.narrative_business_policy_SOURCE_QUANTITY": 81842,
+      "company_wiki.source_catalog.narrative_business_policy_SOURCE_NON_QUANTITY": 80928,
+      "company_wiki.source_catalog.narrative_business_policy_MEASURE_DIRECTION_AFTER": 81842,
+      "company_wiki.source_catalog.narrative_business_policy_MEASURE_DIRECTION_BEFORE": 79200,
+      "company_wiki.source_catalog.narrative_business_policy_SOURCE_PRE_QUANTITY": 2500,
+      "company_wiki.source_catalog.narrative_business_policy_SALES_COMPONENT_CHANGE": 2527,
+      "company_wiki.source_catalog.narrative_business_policy_REVENUE_VALUE": 2527,
+      "company_wiki.source_catalog.narrative_business_policy_REVENUE_RATE_CHANGE": 2527
+    }
+  }
+]

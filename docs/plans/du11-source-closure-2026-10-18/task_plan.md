@@ -1,10 +1,20 @@
 # 当前行动计划（2026-10-25更新）
 
-## 2026-10-28 当前：C3共因工程已验收，正在正常发布
+## 2026-10-28 当前：摘要共因工程通过，真实来源闭合仍待修复
 
-共享谓词/资源三项及验收工具两项均已关闭，最终源码独审PASS/0 OPEN；原539项范围已在实际新SHA复验（ROOT440＋独审99），另27独立反例、工具独审37项通过，mypy390文件通过。长句重复查询0额外regex扫描，原选材/预算上限保留。详见[最终工程验收](review/pdf-c3-20261026/SEMANTIC_ACCEPTANCE.md)。源码尚待本次正常提交推送及精确CI，不能借旧0c988e8d成功代签。
+已完成来源用途/金融豁免、支持能力、priority/purpose投影、精确scope去重、软目标与输出cap共因修复。独审三项追加问题（无主体增长误闭合、逐task2未执行、metric平方扫描）均闭合，19文件工程独审PASS/51项，指标相关308项与全src391文件mypy通过，计数重叠不相加。[工程收据](review/pdf-c3-20261026/QUALITY_ENGINEERING.md)。
 
-**唯一下一步：** 正常提交推送→一次配置内真实HK摘要，实际sent task gold在预留费用前检查→激活/重启/跨run0重复费用→FF/RF公共消费与独立内容审查。准确参数/恢复边界见[FORMAL_NEXT](review/pdf-c3-20261026/FORMAL_NEXT.md)。未曝光holdout、实际RF预测模型采用与八步公司循环仍OPEN。用户已于10月28日恢复实施，下方暂停为历史。当前0新模型/下载，母账1,783,378 tokens/$0.724836，配置10M/$20含unknown；Dashboard独立，外部owner WIP不写。
+一次同配置真实复验146.072秒在费用预留前正确拒绝：行业云收入头与同比/原因尾分属两个task，prepared gold2/3；原文未全丢，但单组事实支持不完整。当前用途逻辑能保留旧已闭合4段组，尚不能证明新Docling具体为何未闭合。0POST、0预留、0新增费用/unknown；本run没有新final，也没有执行恢复/缓存/FF/RF，不能代签内容通过。[真实阻断](review/pdf-c3-20261026/QUALITY_REAL_RESULT.json)。旧唯一付费摘要2/3失败保持。
+
+**唯一下一步：** 修PDF阅读层的全或无页结果可靠性缺口：保持单converter、120秒/4GiB/3pages/2MiB与全部SHA/环境绑定，逐完成页原子检查点，未完成页留partial缺口；纯wire/短子进程TDD→独立大节点审查→改变recipe后一次真实复验。测试观察同时保留typed selection及reading_execution，避免临时湖清理后丢诊断。不抬额度、不调公司/字体/页号特例、不恢复unknown业务豁免、不在摘要compiler跨task拼证。完整细则见[SUMMARY_QUALITY_PLAN](review/pdf-c3-20261026/SUMMARY_QUALITY_PLAN.md)。
+
+母账仍1,800,368tokens/$0.727945（6笔新unknown及旧7hold保留），配置10M/$20未升。原件/生产配置与其他owner WIP不变；测试湖、外层临时根均恢复。新holdout、实际RF预测及公司循环仍OPEN，Dashboard独立。下方均为历史，不覆盖本段及CURRENT_STATUS.json。
+
+## 2026-10-28 当前：C3共因工程已发布，真实摘要进行中
+
+共享谓词/资源三项及验收工具两项均已关闭，最终源码独审PASS/0 OPEN；原539项范围已在实际新SHA复验（ROOT440＋独审99），另27独立反例、工具独审37项通过，mypy390文件通过。长句重复查询0额外regex扫描，原选材/预算上限保留。详见[最终工程验收](review/pdf-c3-20261026/SEMANTIC_ACCEPTANCE.md)。已正常提交推送master `0da0ca6c`，pre-commit通过、pre-push158P/33.56秒；精确CI40647344290运行中，尚不代签远端成功。
+
+**唯一下一步：** 完成正在执行的一次配置内真实HK摘要，实际sent task gold在预留费用前检查→激活/重启/跨run0重复费用→FF/RF公共消费与独立内容审查。准确参数/恢复边界见[FORMAL_NEXT](review/pdf-c3-20261026/FORMAL_NEXT.md)。未曝光holdout、实际RF预测模型采用与八步公司循环仍OPEN。用户已于10月28日恢复实施，下方暂停为历史。当前0新模型/下载，母账1,783,378 tokens/$0.724836，配置10M/$20含unknown；Dashboard独立，外部owner WIP不写。
 
 
 ## 2026-10-28 恢复实施（唯一当前状态）
@@ -124,7 +134,7 @@ W18/W19作者工区、RF运行WIP、Dayu/IQS未写。以下旧“当前/下一�
 
 ## Next Step
 
-正常发布已独审的C3语义/检查器根修，再按FORMAL_NEXT做一次配置内真实摘要/恢复/FF-RF。实际sent task gold须先于费用预留；新holdout及完整公司循环仍OPEN。
+PDF owner逐完成页检查点与typed-selection观察：短TDD及大节点独审后，一次改变recipe的真实来源/摘要/恢复验收；原金标、预算与失败记录保持，之后继续holdout/RF循环。
 
 ## 历史记录（保留原过程，不作为当前待办）
 

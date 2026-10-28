@@ -1,0 +1,10 @@
+{
+  "exit_code": 0,
+  "seconds": 2.35,
+  "targets": [
+    "tests/unit/test_scoped_source_admission.py",
+    "tests/unit/test_phase_c_observer.py"
+  ],
+  "owned_tmp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.sqt28capture-green",
+  "cleanup_pending": true
+}

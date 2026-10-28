@@ -14,7 +14,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-from company_wiki.document_understanding.source_cards import source_cards
+from company_wiki.document_understanding.source_cards import source_cards, source_card_scope
 from company_wiki.document_understanding.summary_tasks import build_summary_task_plan
 from company_wiki.source_catalog.narrative_evidence import (
     summary_claim_type_for_roles, validate_summary_claim,
@@ -88,18 +88,9 @@ def _source_allocation_order(cards):
     """
     ranked = []
     for index, card in enumerate(cards):
-        best = None
-        for span in card.support:
-            value = span.structured_value
-            priority = value.get('reading_priority')
-            band = value.get('reading_value_band')
-            score = value.get('reading_score')
-            if (type(priority) is not int or band not in ('meaningful_fact', 'description')
-                    or type(score) is not int or score < 0):
-                continue
-            key = (priority, 0 if band == 'meaningful_fact' else 1, -score)
-            if best is None or key < best:
-                best = key
+        hint = card.reading_hint()
+        best = ((hint['priority'], 0 if hint['value_band'] == 'meaningful_fact' else 1,
+                 -hint['score']) if 'priority' in hint else None)
         if best is not None:
             ranked.append((index, best, card))
     result = list(cards)
@@ -142,7 +133,7 @@ def compile_extractive_plan(
         row = {'task': task.key, 'task_binding_sha256': canonical_json_hash(task.to_binding()),
                'source_disposition': 'unsupported', 'reason': card.reason, 'claim_id': None,
                'model_disposition': 'unprocessed', 'priority': None}
-        scope = (task.source_id, task.support_ids, task.context_ids)
+        scope = source_card_scope(task)
         if card.available:
             if scope in seen:
                 row.update(source_disposition='duplicate', reason='duplicate_scope', claim_id=seen[scope])

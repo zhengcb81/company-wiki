@@ -1,8 +1,8 @@
 {
   "schema_version": "company-wiki-current-plan-status/1",
-  "as_of_date": "2026-10-26",
+  "as_of_date": "2026-10-28",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_PDF_C3_ENGINEERING_ACCEPTED_SOURCE_SELECTION_ROOT_FIX_PENDING",
+  "overall_status": "ACTIVE_C3_SOURCE_CLOSURE_REGRESSION_DIAGNOSIS",
   "parallel_packages_20261025": {
     "status": "W16_W17_W18_ROOT_COMPONENT_ACCEPTED_MERGED",
     "entry": "harness_lanes/20261025/README.md",
@@ -21,18 +21,19 @@
     "new_downloads": 0,
     "annual14_grade_unchanged": "Historical8/6/0 and10/4/0 reports preserved; latest source/input12/2/0; response semantics NOT_REVIEWED and RF OPEN"
   },
-  "current_authorized_scope": "User continue and explicit skill-sync root repair authorized; no new manual gates. Configured authority10M tokens/USD20 including unknown supersedes old native-objective2M text; native goal observed active on2026-10-26.",
+  "current_authorized_scope": "User explicitly continues implementation, existing configured10M token/USD20 including unknown and source/model authorization apply; no per-material permission. Native goal last observed paused and API cannot resume; do not claim active controller.",
   "parent_plan_id": "document-understanding-2026-10-13",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
-  "last_code_commit": "10def09e8fd1967e0b87434ae211d1fbaafbb090",
+  "last_code_commit": "0da0ca6c1894f4a73f8f86ca75e33baed288de92",
   "code_ci": {
-    "head_sha": "10def09e8fd1967e0b87434ae211d1fbaafbb090",
+    "id": 40647344290,
+    "head_sha": "0da0ca6c1894f4a73f8f86ca75e33baed288de92",
     "status": "completed",
     "conclusion": "success",
-    "run_id": 40300969747,
-    "receipt": "review/w19-reception-20261026/cwp-publication-ci.json"
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40647344290",
+    "updated_at": "2026-10-28T07:06:13Z"
   },
   "formal_v4_offline_selection_replay_20261025": {
     "status": "EXACT_REPRODUCED_NO_PAID_CALL",
@@ -2295,7 +2296,7 @@
     "implementation_authorized_by_user": true,
     "observed_date": "2026-10-26"
   },
-  "current_task_override": "C3 shared semantic and observation fixes independently accepted on current source,539+27 relevant cases and37 tool cases; normal publication pending, then one real configured attempt.",
+  "current_task_override": "A v3+B v2 engineering19files independent PASS/51, author308 and src391 mypy pass. One real revalidation146.072sec stopped before reservation with0POST/0charge: industry cloud head/tail split into2 source tasks, original words retained but single-fact closure missing; actual sentgold2/3. No new final content can be signed.",
   "skill_sync_root_cause_20261026": {
     "status": "COMPLETE_INDEPENDENT_PASS_ZERO_OPEN",
     "entry": "review/skill-sync-root-cause-20261026/README.md",
@@ -2344,7 +2345,7 @@
     "published": true,
     "push_failure": "47 targets /392 collected /600s; two regressions being root-fixed, not waived by narrower daily gate"
   },
-  "next_action": "Normal commit/push accepted10 files and PWF, exact CI; one formal HK attempt per FORMAL_NEXT, then real summary/recovery/FF-RF and holdouts/company loop.",
+  "next_action": "Diagnose source native-continuity/carrier→closed group regression using saved fragments and neutral source fixtures, fix common owner without unknown-business exemption or compiler cross-task stitching, independent targeted review then one changed-recipe real revalidation. Preserve failed0POST and previous paid2/3.",
   "c3_runtime_recovery_20261026": {
     "entry": "review/pdf-c3-20261026/RUNTIME_RECOVERY.md",
     "environment_independent": "PASS_ZERO_OPEN_25_TESTS_AND_REAL_WORKER_ENTRYPOINTS",
@@ -2404,7 +2405,7 @@
     }
   },
   "c3_content_readiness_20261026": {
-    "status": "ENGINEERING_ACCEPTED_PUBLICATION_PENDING_REAL_CONTENT_OPEN",
+    "status": "ENGINEERING_PUBLISHED_REAL_LIFECYCLE_PASS_CONTENT_FAIL",
     "entry": "review/pdf-c3-20261026/CONTENT_READINESS.md",
     "gold_unchanged": true,
     "paid_calls": 0,
@@ -2415,7 +2416,17 @@
     ],
     "observation_open": [],
     "semantic_open": [],
-    "acceptance": "review/pdf-c3-20261026/SEMANTIC_ACCEPTANCE.json"
+    "acceptance": "review/pdf-c3-20261026/SEMANTIC_ACCEPTANCE.json",
+    "code_commit": "0da0ca6c1894f4a73f8f86ca75e33baed288de92",
+    "exact_ci": {
+      "id": 40647344290,
+      "head_sha": "0da0ca6c1894f4a73f8f86ca75e33baed288de92",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40647344290",
+      "updated_at": "2026-10-28T07:06:13Z"
+    },
+    "formal_attempt": ".planning/c3-20261028/hk-formal-v2"
   },
   "user_pause_request_20261026": {
     "status": "REVOKED_BY_USER_CONTINUE_20261028",
@@ -2429,5 +2440,60 @@
     "new_model_calls": 0,
     "new_downloads": 0,
     "native_goal_status": "paused_observed_no_resume_tool"
+  },
+  "formal_hk_20261028": {
+    "schema_version": "c3-formal-hk-result/1",
+    "code_commit": "0da0ca6c1894f4a73f8f86ca75e33baed288de92",
+    "exact_ci": {
+      "id": 40647344290,
+      "head_sha": "0da0ca6c1894f4a73f8f86ca75e33baed288de92",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40647344290",
+      "updated_at": "2026-10-28T07:06:13Z"
+    },
+    "lifecycle_status": "PASS",
+    "content_status": "FAIL_2_OF_3_CRITICAL",
+    "source_and_actual_sent_gold": "3_OF_3",
+    "run_id": "phaseC-090-cc347948ae96",
+    "model_posts": 1,
+    "new_tokens": 16990,
+    "new_micro_usd": 3109,
+    "usage": "known",
+    "same_run_activation_restart_and_cross_run_additional_posts": 0,
+    "consumer_scope": "FF reuse and RF public source/narrative reading, not actual forecast consumption",
+    "mother": {
+      "charged_tokens": 1800368,
+      "charged_micro_usd": 727945,
+      "new_unknown_count": 6,
+      "token_limit": 10000000,
+      "micro_usd_limit": 20000000,
+      "prior_unknown7_retained": 7
+    },
+    "originals_config_protected": true,
+    "test_lake_removed": true,
+    "outer_temp_restored_absent": true,
+    "findings": [
+      "CONTENT-01 key business task omitted",
+      "CONTENT-02 unresolved financial columns emitted",
+      "CONTENT-03 causal subject unresolved"
+    ],
+    "next_plan": "SUMMARY_QUALITY_PLAN.md"
+  },
+  "summary_quality_20261028": {
+    "engineering": "review/pdf-c3-20261026/QUALITY_ENGINEERING.json",
+    "independent_engineering": "PASS_19_FILES_51_TESTS",
+    "real_attempt": "phaseC-090-d7c91950f2dc",
+    "real_status": "PRE_RESERVATION_BLOCKED",
+    "source_and_sent_gold": "2_OF_3",
+    "new_POST": 0,
+    "new_tokens": 0,
+    "new_micro_usd": 0,
+    "root": "Source head/tail continuity closed support split, not new model omission",
+    "mother_tokens": 1800368,
+    "mother_micro_usd": 727945,
+    "publication_review": "review/pdf-c3-20261026/evidence/summary-quality-20261028/observer/observer-checkpoint-review.json",
+    "observer_delta": "PASS_20_FINAL_FILES_13_INDEPENDENT_TESTS",
+    "page_checkpoint_plan": "review/pdf-c3-20261026/PDF_PAGE_CHECKPOINT_PLAN.md"
   }
 }

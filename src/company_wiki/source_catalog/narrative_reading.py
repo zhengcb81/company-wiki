@@ -756,6 +756,7 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
     deferred_packages: set[int] = set()
     extra_context: dict[int, set[str]] = {}
     original_extra: dict[int, set[str]] = {}
+    reference_support: dict[int, set[str]] = {}
     for index, package in enumerate(budget_packages):
         if package["kind"] not in _REFERENCE_KINDS:
             continue
@@ -775,6 +776,8 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
                 break
             if status in {"unique", "collective"}:
                 needed_originals.update(closure["required_original_unit_ids"])
+                if closure.get("reference_kind") == "causal_result":
+                    reference_support.setdefault(index, set()).update(closure["support_original_unit_ids"])
         if failure is not None:
             deferred_packages.add(index)
             withheld.append({"package_id": str(package["package_id"]),
@@ -810,7 +813,7 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
     # only and must not spread to an unrelated third fact.
     local_components: dict[str, set[str]] = {}
     support_components: dict[str, set[str]] = {}
-    intrinsic_support: dict[int, set[str]] = {}
+    intrinsic_support: dict[int, set[str]] = reference_support
     local_unexamined: set[str] = set()
     try:
         def collect_components(adjacency, target):
@@ -877,7 +880,7 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
                             for uid in support_components.get(member, ()) if uid != member}
         support_originals = {member for uid in support_material for member in original_members(uid)}
         if support_originals:
-            intrinsic_support[index] = support_originals
+            intrinsic_support.setdefault(index, set()).update(support_originals)
         needed_originals.update(original_extra.get(index, ()))
         extra_context.setdefault(index, set()).update(needed_material)
         original_extra.setdefault(index, set()).update(needed_originals)

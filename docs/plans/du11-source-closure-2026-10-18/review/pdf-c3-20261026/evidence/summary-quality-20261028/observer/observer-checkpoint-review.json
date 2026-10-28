@@ -1,0 +1,141 @@
+{
+  "schema": "cwp-observer-checkpoint-independent/1",
+  "status": "PASS",
+  "open": [],
+  "reviewer": "/root/c3_semantic_final_20261028",
+  "scope": "Immutable old engineering19 acceptance plus only test-harness observer checkpoint delta and its test; current union20",
+  "files": [
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_policy.py",
+      "lf_sha256": "d24a613cea555ee2faa1f995b552632d343c320b8654a592fdd18aca73724757"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_disclosures.py",
+      "lf_sha256": "3818577d5249f2d517ae26eb5c2877cf1bf375858ed19559ebfd43f091360351"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+      "lf_sha256": "977b0fc2d9c47143f20c70d0899f85167b06eec5b10ea237af2dfca192435b8e"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_reading.py",
+      "lf_sha256": "51ecc1ca4ba55f170786af2d7aea28ee5dfe05cf9f0d2711d8f617ef16cd74b9"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_summary_source_admission.py",
+      "lf_sha256": "fac00ed764f9deaab88c4550476cf8ff20915a2e4e85124c858ce082ac603f6a"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_summary_source_metric_work.py",
+      "lf_sha256": "94024a8394d00bc921bed13780ffedc1805a53122930f7ec0127ab1147faec33"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/source_cards.py",
+      "lf_sha256": "e769d288d6fc20735319db027fe21a03e6b121a6144bcded9c22bab324d1ba29"
+    },
+    {
+      "path": "src/company_wiki/automation/narrative_model_scoped.py",
+      "lf_sha256": "01f17b424ed4230aacca5f61a2cfc5c05dd542307f9c89ba96ee0e91a7fc09b9"
+    },
+    {
+      "path": "src/company_wiki/automation/narrative_model_extractive.py",
+      "lf_sha256": "de68b05034bf9517bfafcfb7b2ee680db6cf92f97aa585e45e11dc38380bf177"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_finalize.py",
+      "lf_sha256": "00f9b88d6661b5a164ef0f434f454d2270f2b84dafa01419acf04d9a1ef4c07f"
+    },
+    {
+      "path": "src/company_wiki/automation/narrative_replay.py",
+      "lf_sha256": "7d0f8f6de962713d955a8afdbc8be1b9990a1e443aa5b06be1aa7449bbc0f222"
+    },
+    {
+      "path": "src/company_wiki/source_contract/selection_annotations.py",
+      "lf_sha256": "bb242e46cf636fa91b1e6448614d98a788523f88ed9a85cbb7021bf54dd8a444"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/decision_inventory.py",
+      "lf_sha256": "d3562d70470e6cd50f1e638e63e817199e3acedd67cbed3f59a34137ea8344ff"
+    },
+    {
+      "path": "tools/document_understanding_benchmark/phase_c_observer.py",
+      "lf_sha256": "06d29f8ccd9bb46f249598d9af301296ea9180891df02cc6af8229e8bec4610c"
+    },
+    {
+      "path": "tests/unit/test_scoped_source_admission.py",
+      "lf_sha256": "93735de0411c7c554063ed165ea0ef6508c0793dd12a5cdd523a9fe3cc9d2080"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_untyped_numeric_quality.py",
+      "lf_sha256": "11f0b5d768bcfebf690a8bafaebc640511e42545ae945cedaabb4683dd79fba5"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_untyped_numeric_prose_controls.py",
+      "lf_sha256": "40f99cadadde7ebac7e5868e8c51e5120502fa0100049c49563a1d98f3816a84"
+    },
+    {
+      "path": "tests/unit/test_narrative_scoped_runtime_recovery.py",
+      "lf_sha256": "9413ef69e40e8330a47be70d80b69244d4113f6aa27ab358eeee9997c1f68971"
+    },
+    {
+      "path": "tests/integration/test_shared_scoped_public_request.py",
+      "lf_sha256": "b56c880f6037dd113e4b2f5852a3c76a82c2b434f1f08a2c7b07301ce0d0ed8a"
+    },
+    {
+      "path": "tests/unit/test_phase_c_observer.py",
+      "lf_sha256": "024e5124ed6b7b691b3f5c9d1eaf85d6950ca96bf00c7cc916644691ce073b2c"
+    }
+  ],
+  "old_engineering19_report_sha256": "31f455dd5aaa277d0e1832c2cd6427b4eb2a5161836138a458fa388988558c83",
+  "old_engineering19_report_modified": false,
+  "only_changed_old_file": "tools/document_understanding_benchmark/phase_c_observer.py",
+  "delta_reverse_exact_old_lf_sha256": "4d7da3911ae502944c273f3f3e7b8c62f5675aa9d92a9730ed3efeb9c7a4e525",
+  "checks": [
+    "Typed selected.to_dict complete canonical JSON, including actual reading_execution diagnostic metadata, before gold refusal",
+    "Event binds uncompressed canonical SHA and bytes; deterministic gzip mtime=0",
+    "Repeated identical selection zero rewrite; changed content or diagnostics rejected with original file intact",
+    "Parent/nested/absolute run path escapes rejected; corrupt existing gzip not overwritten",
+    "No original PDF/provider configuration/credential/model response access introduced; no source admission or spending changes"
+  ],
+  "tests": {
+    "passed": 13,
+    "failed": 0,
+    "seconds": 5.2,
+    "original_current_observer": 7,
+    "independent": 6,
+    "log": "observer-tests.log",
+    "junit": "observer-tests.xml",
+    "plugin": "pytest_timeout explicitly enabled; autoload disabled",
+    "warnings": "one known asyncio_mode unknown config option"
+  },
+  "evidence": {
+    "observer-tests.log": {
+      "bytes": 1431,
+      "sha256": "ffb869b3da7048ab8c6edb135a59a61f9c735a4a11788acd3ad807d5d7efd510"
+    },
+    "observer-tests.xml": {
+      "bytes": 2447,
+      "sha256": "40bf07b53361bc96b1c03126264fd434abc15279c88682a6ba7d0733a60d5c72"
+    },
+    "test_observer_checkpoint_independent.py": {
+      "bytes": 2974,
+      "sha256": "0c91e7b757726a93dcefb7e3ac319daf86e0704c2767125aabf1b9fe4acc355c"
+    },
+    "observer-final20-scope.json": {
+      "bytes": 3457,
+      "sha256": "bda0ab38ee1d2eb2e7dba84fd9b4bb5ac5472ea3ccfdb3604873c866b23fc714"
+    }
+  },
+  "limitations": [
+    "No new real PDF/model/API execution performed; actual next-run diagnostic checkpoint seam remains to be observed",
+    "Prior hk-quality-v3 source admission refusal remains 0POST and content review remains PARTIAL; not changed to summary PASS"
+  ],
+  "cleanup": {
+    "temp_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.oqir28",
+    "absent": true,
+    "absolute_boundary_checked": true,
+    "background_processes": 0,
+    "model_HTTP_PDF_network_calls": 0,
+    "product_existing_test_PWF_original_config_edits": 0
+  }
+}

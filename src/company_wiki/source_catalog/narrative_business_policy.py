@@ -22,10 +22,13 @@ from .narrative_recognition_scope import (
     READING_RECOGNITION_SCOPE_SCAN_PASSES,
     named_recognition_scope,
 )
-from .narrative_predicate_state import observe_metric_predicate, predicate_scope
+from .narrative_predicate_state import (
+    PreparedPredicateContext, observe_metric_predicate, predicate_scope, prepare_predicate_context,
+)
 from .narrative_operating_resources import RESOURCE_READING_SCAN_PASSES
 from .narrative_business_disclosures import (
     READING_DISCLOSURE_SCAN_PASSES,
+    UNRESOLVED_READING_REASONS,
     disclosure_relations,
     reporting_metric_definition_spans,
     reading_material_value as reading_material_value,
@@ -53,9 +56,9 @@ _ACTIVITY = re.compile(
 
 # Only the opt-in ReadingPlan detector consumes these relations. Explicit
 # legacy selectors keep detect_business_fact and its historical predicates.
-READING_BUSINESS_POLICY_VERSION = "reading-business-policy/20"
+READING_BUSINESS_POLICY_VERSION = "reading-business-policy/21"
 READING_BUSINESS_SCAN_PASSES = (
-    6 + READING_DISCLOSURE_SCAN_PASSES + READING_RECOGNITION_SCOPE_SCAN_PASSES
+    14 + READING_DISCLOSURE_SCAN_PASSES + READING_RECOGNITION_SCOPE_SCAN_PASSES
     + RESOURCE_READING_SCAN_PASSES
 )
 _FINANCIAL_BUSINESS_RELATIONS = frozenset({
@@ -260,9 +263,29 @@ def _ownership_scope(clause: str) -> bool:
 
 
 def _operating_causal_relation(clause: str) -> bool:
-    for link in _DRIVER_LINK.finditer(clause):
-        if _measured_driver(clause, after=link.end()):
-            return True
+    link = _DRIVER_LINK.search(clause)
+    if link is None:
+        return False
+    # The earliest link suffices for the existing "any relation after a link"
+    # contract; repeated links must not rescan all metric relations.
+    if _measured_driver(clause, after=link.end()):
+        return True
+    # A source may explain a cost/result with a concrete operating action
+    # rather than a quantity (e.g. infrastructure for business expansion).
+    # Reuse the activity/object and predicate owners, within that action's
+    # assertion; an unrelated financial noun or future intention is not a
+    # measured or observed operating cause. Prepare shared modality once.
+    actions = tuple(_ACTIVITY.finditer(clause, link.end()))
+    if actions:
+        prepared = prepare_predicate_context(clause)
+        objects = {}
+        for action in actions:
+            scope = prepared.scope(action.start(), action.end())
+            if scope not in objects:
+                left, right = scope
+                objects[scope] = bool(_OBJECT.search(clause[max(left, link.end()):right]))
+            if objects[scope] and prepared.observe(action.start(), action.end()).observed:
+                return True
     return False
 
 
@@ -331,7 +354,9 @@ _MEASURE_NOMINAL_END = re.compile(
     r"(?=$|[,，:]|\b(?:during|at|in|from|for|on|across|within|throughout)\b|带动|帶動)", re.I)
 
 
-def _source_metric_relations(clause: str) -> tuple[tuple[str, int, int], ...]:
+def _source_metric_relations(
+    clause: str, *, prepared: PreparedPredicateContext | None = None,
+) -> tuple[tuple[str, int, int], ...]:
     """Observe metric spans with a bound quantity or change predicate.
 
     Both count and causal consumers use these exact relations. A rejected
@@ -340,14 +365,26 @@ def _source_metric_relations(clause: str) -> tuple[tuple[str, int, int], ...]:
     """
     if _GENERIC_DEFINITION.search(clause) or _PORTFOLIO_DEFINITION_CONTEXT.search(clause):
         return ()
+    prepared = prepared if prepared is not None else prepare_predicate_context(clause)
     relations: list[tuple[str, int, int]] = []
     definition_spans = reporting_metric_definition_spans(clause)
-    for metric in _OPERATING_MEASURE.finditer(clause):
+    metrics = tuple(_OPERATING_MEASURE.finditer(clause))
+    for index, metric in enumerate(metrics):
         if any(start <= metric.start() and metric.end() <= end
                for start, end in definition_spans):
             continue
-        before, after = clause[:metric.start()], clause[metric.end():]
-        state = observe_metric_predicate(clause, metric.start(), metric.end())
+        left, right = prepared.scope(metric.start(), metric.end())
+        # Other metric heads bound the local quantity/direction grammar, while
+        # modality retains the complete prepared assertion. Include the next
+        # head itself: it may be this quantity's explicit unit ("5 million
+        # users"). Each source gap is visited a bounded number of times even
+        # when many metrics share one long assertion without actor boundaries.
+        if index:
+            left = max(left, metrics[index - 1].start())
+        if index + 1 < len(metrics):
+            right = min(right, metrics[index + 1].end())
+        before, after = clause[left:metric.start()], clause[metric.end():right]
+        state = prepared.observe(metric.start(), metric.end())
         if not state.observed and not state.forward_outlook:
             continue
         # The same source-bound quantity relation can be an actual observation
@@ -385,11 +422,11 @@ def _source_metric_relations(clause: str) -> tuple[tuple[str, int, int], ...]:
     for change in _SALES_COMPONENT_CHANGE.finditer(clause):
         component = re.sub(r"^(?:(?:the|our|their|its|a|an)\s+)+", "",
                            change.group("component").strip(), flags=re.I)
-        if (_observed_measure_scope(clause, change.start(), change.end())
+        if (prepared.observe(change.start(), change.end()).observed
                 and not _FINANCIAL_COMPONENT.search(component)
                 and any(character.isalpha() for character in component)):
             relations.append(("direction", change.start(), change.end()))
-    relations.extend(_revenue_measure_relations(clause))
+    relations.extend(_revenue_measure_relations(clause, prepared=prepared))
     return tuple(relations)
 
 
@@ -468,20 +505,38 @@ def _owned_revenue_subject(clause: str, start: int) -> bool:
     return False
 
 
-def _revenue_change_has_comparison(clause: str, change: re.Match[str]) -> bool:
+def _comparison_frame_end(clause: str) -> int:
+    """Prepare the one bare comparison prefix, without rescanning per metric."""
+    match = _REVENUE_COMPARISON.match(clause)
+    if match is None:
+        return 0
+    end = match.end()
+    while end < len(clause) and clause[end] in ",， ":
+        end += 1
+    return end
+
+
+def _revenue_change_has_comparison(
+    clause: str, change: re.Match[str], *, prepared: PreparedPredicateContext | None = None,
+    following_end: int | None = None, comparison_frame_end: int | None = None,
+) -> bool:
     """Bind comparison to this change, not another metric in the same clause."""
     if _REVENUE_COMPARISON.search(change.group()):
         return True
-    following = clause[change.end():]
+    following = clause[change.end():following_end]
     if _REVENUE_COMPARISON_SUFFIX.match(following):
         return True
-    left, _right = _source_measure_scope(clause, change.start(), change.end())
+    prepared = prepared if prepared is not None else prepare_predicate_context(clause)
+    left, _right = prepared.scope(change.start(), change.end())
     # A bare source-authored frame may precede the issuer statement. A complete
     # other predicate cannot donate its comparison basis across the comma.
-    return bool(left and _REVENUE_COMPARISON.fullmatch(clause[:left].rstrip(",， ")))
+    frame_end = (_comparison_frame_end(clause) if comparison_frame_end is None else comparison_frame_end)
+    return bool(left and left <= frame_end)
 
 
-def _revenue_measure_relations(clause: str) -> tuple[tuple[str, int, int], ...]:
+def _revenue_measure_relations(
+    clause: str, *, prepared: PreparedPredicateContext | None = None,
+) -> tuple[tuple[str, int, int], ...]:
     """Bind observed revenue levels/shares or rate changes to a local business.
 
     The same source-state gate and owner proof govern every projection. A
@@ -490,20 +545,27 @@ def _revenue_measure_relations(clause: str) -> tuple[tuple[str, int, int], ...]:
     """
     if _GENERIC_DEFINITION.search(clause) or _PORTFOLIO_DEFINITION_CONTEXT.search(clause):
         return ()
+    prepared = prepared if prepared is not None else prepare_predicate_context(clause)
     relations = []
-    for value in _REVENUE_VALUE.finditer(clause):
-        if not _observed_measure_scope(clause, value.start(), value.end()):
+    values = tuple(_REVENUE_VALUE.finditer(clause))
+    for index, value in enumerate(values):
+        if not prepared.observe(value.start(), value.end()).observed:
             continue
+        following_end = values[index + 1].start() if index + 1 < len(values) else len(clause)
         # Bare years, numbered fields and unidentified values are not amounts.
-        if not (_REVENUE_MEASURE_UNIT.match(clause[value.end():])
+        if not (_REVENUE_MEASURE_UNIT.match(clause[value.end():following_end])
                 or _REVENUE_CURRENCY.search(value.group())):
             continue
         if _owned_revenue_subject(clause, value.start()):
             relations.append(("revenue", value.start(), value.end()))
-    for change in _REVENUE_RATE_CHANGE.finditer(clause):
-        if not _observed_measure_scope(clause, change.start(), change.end()):
+    changes = tuple(_REVENUE_RATE_CHANGE.finditer(clause))
+    comparison_frame_end = _comparison_frame_end(clause) if changes else 0
+    for index, change in enumerate(changes):
+        if not prepared.observe(change.start(), change.end()).observed:
             continue
-        if not _revenue_change_has_comparison(clause, change):
+        following_end = changes[index + 1].start() if index + 1 < len(changes) else len(clause)
+        if not _revenue_change_has_comparison(clause, change, prepared=prepared,
+                following_end=following_end, comparison_frame_end=comparison_frame_end):
             # A percentage without its disclosed comparison basis is not a
             # source-complete growth observation; never infer a prior period.
             continue
@@ -523,6 +585,29 @@ def _revenue_measure_relations(clause: str) -> tuple[tuple[str, int, int], ...]:
 def _business_revenue_measure(clause: str) -> bool:
     """Revenue projection of the shared source-owned measurement relation."""
     return any(kind == "revenue" for kind, _start, _end in _source_measure_relations(clause))
+
+
+def source_result_subject(text: str, start: int, end: int) -> bool:
+    """A result's subject must have an existing source-owned metric binding.
+
+    A nonempty prefix can be a time frame, existential construction or pronoun.
+    Reuse actual metric relations within this assertion, rather than treating
+    those words as a subject or borrowing a metric from a neighboring sentence.
+    This observes subject identity only; it does not supply a missing growth
+    comparison basis, period, value, or completed operating state.
+    """
+    prepared = prepare_predicate_context(text)
+    scope = prepared.scope(start, end)
+    for kind, left, right in _source_metric_relations(text, prepared=prepared):
+        if (kind in {"quantity", "direction", "revenue"} and left <= start
+                and prepared.scope(left, right) == scope):
+            return True
+    # A named business revenue subject is still explicit when its percentage
+    # lacks a comparison basis. Reuse the very same business-to-revenue owner
+    # proof; do not promote it to the complete growth relation above.
+    return any(change.start() <= start < end <= change.end()
+               and _owned_revenue_subject(text, change.start())
+               for change in _REVENUE_RATE_CHANGE.finditer(text))
 
 
 def _segment_reporting_relation(clause: str) -> bool:
@@ -765,6 +850,16 @@ def _purpose_fact(fact: OperatingFact, purpose: str) -> OperatingFact:
 
 _READING_ACCOUNTING = re.compile(r"营业收入|营业成本|净利润|资产负债|每股收益|现金流量|货币资金|应收账款|"
     r"\b(?:revenue|net income|earnings per share|cash flow|balance sheet)\b", re.IGNORECASE)
+# The source-owned assessment receives the same normalized reading view as its
+# business predicates. Routine statement labels/results are not operating facts
+# merely because a broad grammatical relation was observed. Explicit legacy
+# text-only selectors keep _READING_ACCOUNTING and their historical behavior.
+_SOURCE_ACCOUNTING = re.compile(_SEGMENT_FINANCIAL_WORD.pattern +
+    r"|亏损|费用|成本|净损失|每股收益|现金流量|货币资金|应收账款|"
+    r"(?:经营|投资|筹资|融资)活动.{0,18}(?:现金|净额)|"
+    r"非公认会计准则|借款|偿还贷款|购股权|股权激励计划|"
+    r"\b(?:(?:net|operating|comprehensive|adjusted) loss(?:es)?|EBITDA|non[- ]GAAP|"
+    r"borrowings?|repayment of loans?|share incentive schemes?)\b", re.IGNORECASE)
 
 
 def reading_financial_only(text: str, fact: OperatingFact, *, recognize=None) -> bool:
@@ -775,6 +870,8 @@ def reading_financial_only(text: str, fact: OperatingFact, *, recognize=None) ->
     """
     if fact.financial_exempt:
         return False
+    if recognize is not None and _SOURCE_ACCOUNTING.search(_reading_text(text)):
+        return True
     rejected = (reject_finance_only_text(text) if recognize is None else
                 bool(_FINANCE.search(text) and not recognize(text).eligible))
     return rejected or bool(_READING_ACCOUNTING.search(text) and not fact.eligible)
@@ -860,11 +957,14 @@ def project_reading_business_fact(text: str, source_relations: dict, *,
             reasons.append("operating_state_unknown")
         if relation["activity"] == "production" and attribution == "issuer":
             topics.append("capacity_projects")
+    substantive = set(reasons) - UNRESOLVED_READING_REASONS
     return OperatingFact(bool(reasons), tuple(dict.fromkeys(topics)), tuple(dict.fromkeys(reasons)),
                          max(fact.score if independent else 0, 3 if reasons else 0),
-                         fact.financial_exempt or (include_description and bool(reasons)), fact.purpose)
+                         (fact.financial_exempt and bool(set(independent) - UNRESOLVED_READING_REASONS))
+                         or (include_description and (bool(substantive) or fact.purpose == "operating")),
+                         fact.purpose)
 
 
 __all__ = ["business_objects", "business_qualification", "detect_business_fact",
            "detect_reading_business_fact", "project_reading_business_fact",
-           "reject_finance_only_text", "READING_BUSINESS_POLICY_VERSION"]
+           "reject_finance_only_text", "source_result_subject", "READING_BUSINESS_POLICY_VERSION"]

@@ -474,8 +474,9 @@ def reporting_basis_relations(clause: str) -> tuple[str, ...]:
 # Readability is intentionally broader than scarce summary material. Unknown
 # state and generic benefit/vision remain retrievable descriptions. Independently
 # observed quantities, scope, mechanisms, plans or constraints retain their value.
+UNRESOLVED_READING_REASONS = frozenset({"operating_state_unknown", "operating_description_unknown"})
 _DESCRIPTION_REASONS = frozenset({"operating_mechanism", "business_strategy",
-                                "business_structure"})
+                                "business_structure"}) | UNRESOLVED_READING_REASONS
 
 
 def disclosure_relations(clause: str) -> tuple[str, ...]:

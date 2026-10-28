@@ -1,0 +1,107 @@
+{
+  "schema_version": "c3-formal-hk-result/1",
+  "code_commit": "0da0ca6c1894f4a73f8f86ca75e33baed288de92",
+  "exact_ci": {
+    "id": 40647344290,
+    "head_sha": "0da0ca6c1894f4a73f8f86ca75e33baed288de92",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40647344290",
+    "updated_at": "2026-10-28T07:06:13Z"
+  },
+  "lifecycle_status": "PASS",
+  "content_status": "FAIL_2_OF_3_CRITICAL",
+  "source_and_actual_sent_gold": "3_OF_3",
+  "run_id": "phaseC-090-cc347948ae96",
+  "model_posts": 1,
+  "new_tokens": 16990,
+  "new_micro_usd": 3109,
+  "usage": "known",
+  "same_run_activation_restart_and_cross_run_additional_posts": 0,
+  "consumer_scope": "FF reuse and RF public source/narrative reading, not actual forecast consumption",
+  "mother": {
+    "charged_tokens": 1800368,
+    "charged_micro_usd": 727945,
+    "new_unknown_count": 6,
+    "token_limit": 10000000,
+    "micro_usd_limit": 20000000,
+    "prior_unknown7_retained": 7
+  },
+  "originals_config_protected": true,
+  "test_lake_removed": true,
+  "outer_temp_restored_absent": true,
+  "findings": [
+    "CONTENT-01 key business task omitted",
+    "CONTENT-02 unresolved financial columns emitted",
+    "CONTENT-03 causal subject unresolved"
+  ],
+  "next_plan": "SUMMARY_QUALITY_PLAN.md",
+  "evidence": [
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/formal-hk-20261028/overall.json.gz",
+      "bytes": 107540,
+      "sha256": "ce7bae8e1db30ffeaba57f17130db6b23eec90996384983e64f231cc9943d2bb",
+      "original_sha256": "094e48df083791d31bc8cab2b9eb9281d68170f29dba825c8453b4baf898eb24"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/formal-hk-20261028/events.jsonl",
+      "bytes": 4527,
+      "sha256": "b0ae2c76183e8368b691a19f925b8871ce43255f18ceee65be8ee416a8b33213",
+      "original_sha256": "b0ae2c76183e8368b691a19f925b8871ce43255f18ceee65be8ee416a8b33213"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/formal-hk-20261028/harness-fingerprint.json",
+      "bytes": 1159,
+      "sha256": "de864babcf86fd40de2f2188de02c19dfab69cdc8e55be4ed528993835d609a6",
+      "original_sha256": "de864babcf86fd40de2f2188de02c19dfab69cdc8e55be4ed528993835d609a6"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/formal-hk-20261028/bundle.json.gz",
+      "bytes": 90298,
+      "sha256": "c68d05c77de29e2a3b780a13a2fb4f0dbe7b68ae208a0870b22eb1b1b0d1e115",
+      "original_sha256": "c68d05c77de29e2a3b780a13a2fb4f0dbe7b68ae208a0870b22eb1b1b0d1e115"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/formal-hk-20261028/native-usage.json",
+      "bytes": 1709,
+      "sha256": "e45a7c04d43babdb83c408083e7473a5ff980a336d78ec0189b37c59360907a9",
+      "original_sha256": "e45a7c04d43babdb83c408083e7473a5ff980a336d78ec0189b37c59360907a9"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/formal-hk-20261028/phaseC-090-cc347948ae96.db75761e8a3f4945a0e83aaf01b48b34.response.json.gz",
+      "bytes": 2479,
+      "sha256": "dd3a73fda050b776bda94fce37c134f3c4c46d2861cf82b8453773da7df19c74",
+      "original_sha256": "dd3a73fda050b776bda94fce37c134f3c4c46d2861cf82b8453773da7df19c74"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/formal-hk-20261028/phaseC-090-cc347948ae96.input.json.gz",
+      "bytes": 16514,
+      "sha256": "5f2e20cffc4aa6969d20ac3dd3e5f6420dc9cbc0d0073c1524b79c467320115c",
+      "original_sha256": "5f2e20cffc4aa6969d20ac3dd3e5f6420dc9cbc0d0073c1524b79c467320115c"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/formal-hk-20261028/content-report.md",
+      "bytes": 8660,
+      "sha256": "2800739fbdd126cb6de3715b5d13e60185174e9af2d72bc06ab9b14baafdd9e0",
+      "original_sha256": "2800739fbdd126cb6de3715b5d13e60185174e9af2d72bc06ab9b14baafdd9e0"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/formal-hk-20261028/content-report.json",
+      "bytes": 40974,
+      "sha256": "8a958c8f04aadc815a255b1e46bd40d5d6fb74a4ac65930017f3d42c1c809cdb",
+      "original_sha256": "8a958c8f04aadc815a255b1e46bd40d5d6fb74a4ac65930017f3d42c1c809cdb"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/formal-hk-20261028/preflight.json",
+      "bytes": 1125,
+      "sha256": "ccfdc41baf0389268fae7989ee5ad2b41c88d9911cea3c4f3ba8fe8fa9809b16",
+      "original_sha256": "ccfdc41baf0389268fae7989ee5ad2b41c88d9911cea3c4f3ba8fe8fa9809b16"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/formal-hk-20261028/execution.json",
+      "bytes": 320,
+      "sha256": "5d81696113a583441b32b99663a3afed1fc584324e7ea8df57eb2c58d45b3118",
+      "original_sha256": "5d81696113a583441b32b99663a3afed1fc584324e7ea8df57eb2c58d45b3118"
+    }
+  ]
+}

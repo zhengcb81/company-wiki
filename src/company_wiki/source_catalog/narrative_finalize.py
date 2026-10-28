@@ -9,6 +9,7 @@ import re
 from typing import Any, Literal
 
 from company_wiki.source_contract import EvidenceSpan
+from company_wiki.source_contract.selection_annotations import reading_annotations
 
 from .n6_budget_dedup import deduplicate_candidates
 from .narrative_budget import (BudgetItem, LEGACY_BUDGET_POLICY, READING_BUDGET_POLICY,
@@ -111,9 +112,7 @@ def _evidence_spans(
         reading = (reading_metadata or {}).get(unit.unit_id)
         if reading is not None:
             unit = replace(unit, metadata={**unit.metadata,
-                "reading_priority": reading["priority"],
-                "reading_value_band": reading.get("value_band", "description"),
-                "reading_score": candidate.score})
+                **reading_annotations(reading, candidate.score)})
         spans.append(unit.to_evidence_span(
             topics=candidate.topics,
             selection_reasons=candidate.reasons,

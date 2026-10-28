@@ -1,0 +1,145 @@
+{
+  "schema_version": "c3-source-summary-admission-handoff/3",
+  "date": "2026-10-28",
+  "status": "FROZEN_READY_FOR_EFFICIENCY_RECHECK",
+  "author": "/root/c3_summary_root_design",
+  "supersedes": "handoff-v2.json for current source hash and validation scope; old receipts preserved",
+  "files": [
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_policy.py",
+      "sha256": "612910da5f86ebc314488d56c1c6ffa01aadea16f93a1eabd6ac5b1e557574ff",
+      "lf_sha256": "d24a613cea555ee2faa1f995b552632d343c320b8654a592fdd18aca73724757",
+      "bytes": 56917,
+      "v2_lf_sha256": "d813a6ec983c11a3df7076831e06675027548a19b6fe94b0e9a20fcf70a28550",
+      "changed_from_v2": true
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_disclosures.py",
+      "sha256": "1cc37cf73c2a3bf84d9cc352cfe7a18a5bc27c68dd6c3206bac254b6b5bc01fc",
+      "lf_sha256": "3818577d5249f2d517ae26eb5c2877cf1bf375858ed19559ebfd43f091360351",
+      "bytes": 29077,
+      "v2_lf_sha256": "3818577d5249f2d517ae26eb5c2877cf1bf375858ed19559ebfd43f091360351",
+      "changed_from_v2": false
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+      "sha256": "a38b66d8bbc97c7d1cd1c1b07cad7de4aa84271e23b1362c403622a68c96a745",
+      "lf_sha256": "977b0fc2d9c47143f20c70d0899f85167b06eec5b10ea237af2dfca192435b8e",
+      "bytes": 40411,
+      "v2_lf_sha256": "977b0fc2d9c47143f20c70d0899f85167b06eec5b10ea237af2dfca192435b8e",
+      "changed_from_v2": false
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_reading.py",
+      "sha256": "81e0efdf0c36569de06d2f716d2f9a2417e3cc747025de6c71a2584a29a12baf",
+      "lf_sha256": "51ecc1ca4ba55f170786af2d7aea28ee5dfe05cf9f0d2711d8f617ef16cd74b9",
+      "bytes": 93694,
+      "v2_lf_sha256": "51ecc1ca4ba55f170786af2d7aea28ee5dfe05cf9f0d2711d8f617ef16cd74b9",
+      "changed_from_v2": false
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_summary_source_admission.py",
+      "sha256": "fac00ed764f9deaab88c4550476cf8ff20915a2e4e85124c858ce082ac603f6a",
+      "lf_sha256": "fac00ed764f9deaab88c4550476cf8ff20915a2e4e85124c858ce082ac603f6a",
+      "bytes": 10515,
+      "v2_lf_sha256": "fac00ed764f9deaab88c4550476cf8ff20915a2e4e85124c858ce082ac603f6a",
+      "changed_from_v2": false
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_summary_source_metric_work.py",
+      "sha256": "94024a8394d00bc921bed13780ffedc1805a53122930f7ec0127ab1147faec33",
+      "lf_sha256": "94024a8394d00bc921bed13780ffedc1805a53122930f7ec0127ab1147faec33",
+      "bytes": 1917,
+      "v2_lf_sha256": null,
+      "changed_from_v2": true
+    }
+  ],
+  "new_test_file": "tests/unit/document_understanding_selection/test_summary_source_metric_work.py",
+  "root_cause": "Per metric compatibility predicate observation and full-prefix/full-tail regex windows repeated full source scans",
+  "fix": [
+    "One existing PreparedPredicateContext per source metric input shared through revenue sub-owner and result-subject queries",
+    "Metric-neighbor local grammar windows retain adjacent metric heads as possible quantity units; source offsets and full assertion modality stay unchanged",
+    "Revenue value/change windows bounded by neighboring native matches; comparison prefix prepared once instead of per-change full-prefix matching",
+    "All N quantity relations and the unique final direction still emitted, no shortcut/counter substitution"
+  ],
+  "frozen_independent_red": {
+    "total": 1,
+    "failed": 1,
+    "errors": 0,
+    "skipped": 0
+  },
+  "final": {
+    "total": 308,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "final_receipt": {
+    "exit_code": 0,
+    "seconds": 11.758,
+    "targets": [
+      ".planning/c3-20261028/quality-review/test_independent_quality.py::test_result_subject_metric_work_is_linear",
+      "tests/unit/document_understanding_selection/test_summary_source_metric_work.py",
+      "tests/unit/document_understanding_selection/test_summary_source_admission.py",
+      "tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py",
+      "tests/unit/document_understanding_selection/test_reading_measure_scope.py",
+      "tests/unit/document_understanding_selection/test_reading_order_metric_language_parity.py",
+      "tests/unit/document_understanding_selection/test_reading_named_segment_scope.py",
+      "tests/unit/document_understanding_selection/test_reading_portfolio_disclosure.py",
+      "tests/unit/document_understanding_selection/test_prepared_predicate_context.py"
+    ],
+    "owned_temp_absent": true
+  },
+  "workload_counts": {
+    "many_assertions": [
+      {
+        "metrics": 16,
+        "chars": 655,
+        "regex_input_chars": 11753
+      },
+      {
+        "metrics": 32,
+        "chars": 1279,
+        "regex_input_chars": 22921
+      },
+      {
+        "metrics": 64,
+        "chars": 2527,
+        "regex_input_chars": 45257
+      }
+    ],
+    "one_assertion": [
+      {
+        "metrics": 16,
+        "chars": 587,
+        "regex_input_chars": 12581
+      },
+      {
+        "metrics": 32,
+        "chars": 1147,
+        "regex_input_chars": 24677
+      },
+      {
+        "metrics": 64,
+        "chars": 2267,
+        "regex_input_chars": 48869
+      }
+    ]
+  },
+  "growth_threshold_unchanged": 1.15,
+  "independent_test_path": ".planning/c3-20261028/quality-review/test_independent_quality.py::test_result_subject_metric_work_is_linear",
+  "independent_test_lf_sha256": "09d2d55393cf27de79ecb135f922f5be120b58eeed0efd5ea9b2734fcfe82664",
+  "static": {
+    "ruff": "All checks passed!",
+    "mypy": "Success: no issues found in 1 source file"
+  },
+  "caps_and_scan_reservation_changed": false,
+  "other_A5_and_B_frozen": true,
+  "new_model_calls": 0,
+  "pdf_replays": 0,
+  "downloads": 0,
+  "fresh_holdout_accessed": false,
+  "owned_temp_absent": true,
+  "committed": false,
+  "independent_review": "pending directed efficiency recheck; author execution is not independent acceptance"
+}

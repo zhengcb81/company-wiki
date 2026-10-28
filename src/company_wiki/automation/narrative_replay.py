@@ -14,6 +14,7 @@ from company_wiki.source_catalog.transcript_text_extract import (
     extract_transcript_material,
 )
 from company_wiki.source_contract import EvidenceSpan
+from company_wiki.source_contract.selection_annotations import READING_ANNOTATION_FIELDS
 from company_wiki.source_catalog.narrative_normalization import NarrativeNormalization
 from company_wiki.source_catalog.narrative_pdf_reading import PdfReading
 
@@ -184,9 +185,7 @@ _SELECTION_ANNOTATIONS = frozenset(
         "topics",
         "selection_reasons",
         "selection_group_id",
-        "reading_priority",
-        "reading_score",
-        "reading_value_band",
+        *READING_ANNOTATION_FIELDS,
         "unit_kind",
         "text_sha256",
     }

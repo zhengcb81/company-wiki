@@ -16,7 +16,8 @@ from pathlib import Path
 from types import MappingProxyType
 from typing import Any
 
-from company_wiki.document_understanding.summary_tasks import SummaryTaskPlan, build_summary_task_plan
+from company_wiki.document_understanding.summary_tasks import SourceSummaryTask, SummaryTaskPlan, build_summary_task_plan
+from company_wiki.document_understanding.source_cards import SourceCard, source_cards, source_task_admission
 from company_wiki.source_contract import EvidenceSpan
 
 from .models import canonical_json, canonical_json_hash
@@ -30,7 +31,7 @@ SCOPED_MODEL_PROJECTION_VERSION = 'reading-model-input/4'
 # and the 22-clause draft that covered them was rejected). Forty keeps the
 # summary bounded while leaving room for every selected business update.
 MAX_SUMMARY_CLAIMS = 40
-SCOPED_PROMPT_VERSION = 'reading-source-scoped/4.0.6'
+SCOPED_PROMPT_VERSION = 'reading-source-scoped/4.1.0'
 SCOPED_REQUEST_SCHEMA = 'narrative-model-request/5'
 _LOG = logging.getLogger(__name__)
 SCOPED_INSTRUCTION = (
@@ -46,11 +47,17 @@ SCOPED_INSTRUCTION = (
     'do not output them. Respect output_plan.max_claims_per_task per task and '
     'output_plan.max_claims in total; the response schema arrays are bounded but the '
     'program enforces the smaller per-task cap, so exceeding it rejects the whole response. '
-    'Each clause is at most 280 characters. Emit exactly output_plan.target_claim_count '
+    'Each clause is at most 280 characters. Emit up to output_plan.target_claim_count '
     'clauses (never more than output_plan.max_claims in total), at most '
-    'output_plan.max_claims_per_task per task; stop once the target is reached. Cover the '
-    'most important distinct business updates and plans across the supplied tasks; omit a '
-    'task with no direct support rather than invent support. Do not output reasoning, '
+    'output_plan.max_claims_per_task per task. Review all supplied tasks before selecting '
+    'the most important distinct business updates, their causes and next actions. Reading '
+    'hints are program-owned source priorities and value, not business facts; lower priority '
+    'numbers take precedence and meaningful facts precede descriptions. Never pad with '
+    'headings, metric definitions, generic principles or table numbers whose column, '
+    'period, currency or unit is unresolved. A cause with an unresolved subject is not '
+    'a standalone fact. Merge repetition only when subject, product, stage, period and '
+    'meaning agree; an identical current value does not replace its comparison or causes. '
+    'Omit a task with no direct complete support rather than invent support. Do not output reasoning, '
     'Markdown, research conclusions, valuation, ratings or paths. Valid local citations do '
     'not prove that rewritten prose is true.'
 )
@@ -76,7 +83,7 @@ def scoped_response_schema(per_task_cap: int = 20) -> dict[str, Any]:
 
 
 def scoped_boundary_identity(boundary) -> dict[str, Any]:
-    from company_wiki.document_understanding import summary_tasks
+    from company_wiki.document_understanding import summary_tasks, source_cards as source_card_module
     from company_wiki.source_catalog import narrative_evidence
     from company_wiki import narrative_subject
     from . import models, narrative_contracts, narrative_model, narrative_model_runtime
@@ -85,6 +92,7 @@ def scoped_boundary_identity(boundary) -> dict[str, Any]:
     for name, module in {
             'runtime': narrative_model_runtime, 'scoped_protocol': __import__(__name__, fromlist=['']),
             'source_task_plan': summary_tasks, 'role_quality_owner': narrative_evidence,
+            'source_task_availability': source_card_module,
             'legacy_utilities': narrative_model, 'canonical_contracts': narrative_contracts,
             'canonical_encoding': models, 'subject_contracts': narrative_subject,
         }.items():
@@ -119,7 +127,7 @@ def _scoped_output_plan(task_count: int, max_output_tokens: int | None = None,
         # per-task share of the global cap the decoder actually enforces.
         'max_claims_per_task': 2,
         'configured_output_tokens': max_output_tokens, 'coverage': 'selected_source_tasks_only',
-        'planning': 'compact_target_not_token_estimate'}
+        'planning': 'soft_target_within_existing_caps'}
 
 
 from .narrative_model import NarrativeModelRequest as _LegacyModelRequest  # noqa: E402
@@ -154,11 +162,11 @@ def build_scoped_request(selected: NarrativeSelectResult, *, only_tasks=None,
     # (MAX_SUMMARY_CLAIMS) and the decoder enforces the same number.
     view = compile_scoped_model_view(selected, max_claims=20)
     if only_tasks is not None:
-        visible = [task for task in view.plan.tasks if task.key in only_tasks]
+        visible = [task for task in view.model_tasks if task.key in only_tasks]
         if not visible:
             raise legacy.ModelResponseError('SUMMARY_INPUT_UNAVAILABLE')
         view = replace(view, visible_keys=frozenset(task.key for task in visible))
-    if not view.plan.tasks or selected.source_metadata.language not in {'zh', 'en', 'mixed'}:
+    if not view.model_tasks or selected.source_metadata.language not in {'zh', 'en', 'mixed'}:
         raise legacy.ModelResponseError('SUMMARY_INPUT_UNAVAILABLE')
     aliases = ['r' + str(i) for i in range(1, len(selected.reading_context['groups']) + 1)]
     strategy = legacy._reading_model_context(selected.reading_context, aliases,
@@ -170,7 +178,7 @@ def build_scoped_request(selected: NarrativeSelectResult, *, only_tasks=None,
             'document_kind': selected.source_metadata.document_kind},
         'material': view.to_model_dict(), 'reading_strategy': strategy,
         'output_plan': (plan := _scoped_output_plan(
-            len(view.visible_keys) if view.visible_keys is not None else len(view.plan.tasks),
+            len(view.model_tasks),
             target_override=target_claims)),
         'response_schema': scoped_response_schema(plan['max_claims_per_task'])}
     data_json = canonical_json(envelope)
@@ -228,6 +236,9 @@ def decode_scoped_draft(response, *, selected: NarrativeSelectResult) -> dict[st
     tasks = payload['drafts_by_task']
     if any(not isinstance(rows, list) for rows in tasks.values()):
         raise NarrativeContractError('scoped task clauses must be arrays')
+    per_task_cap = _scoped_output_plan(len(tasks))['max_claims_per_task']
+    if any(len(rows) > per_task_cap for rows in tasks.values()):
+        raise NarrativeContractError('scoped task clauses exceed per-task cap')
     count = sum(len(rows) for rows in tasks.values())
     if count > MAX_SUMMARY_CLAIMS:
         raise NarrativeContractError('summary claims exceed forty')
@@ -297,23 +308,36 @@ class ScopedModelView:
     _spans: Mapping[str, EvidenceSpan]
     _source_keys: Mapping[str, str]
     _parts: Mapping[str, Mapping[str, str]]
-    # None means every plan task is visible (small selections); a frozenset
-    # bounds the model payload to the claim budget without shrinking the plan.
+    # A repair may display only a subset of source-admitted tasks. The complete
+    # source plan remains available, including unsupported and duplicate scopes.
     visible_keys: frozenset[str] | None = None
+    _admission: Mapping[str, Mapping[str, str]] | None = None
+    _cards: Mapping[str, SourceCard] | None = None
+
+    @property
+    def admitted_task_keys(self) -> frozenset[str]:
+        return frozenset(task.key for task in self.plan.tasks if self._admission is None
+                         or self._admission[task.key]['status'] == 'admitted')
+
+    @property
+    def model_tasks(self) -> tuple[SourceSummaryTask, ...]:
+        allowed = self.admitted_task_keys
+        return tuple(task for task in self.plan.tasks if task.key in allowed
+                     and (self.visible_keys is None or task.key in self.visible_keys))
 
     def to_binding(self) -> dict[str, Any]:
         """Program-owned exact identity; local keys never replace source IDs."""
         return {"schema_version": SCOPED_VIEW_SCHEMA, "source_plan": self.plan.to_binding(),
                 "source_keys": dict(self._source_keys),
-                "task_parts": {key: dict(parts) for key, parts in self._parts.items()}}
+                "task_parts": {key: dict(parts) for key, parts in self._parts.items()},
+                "source_admission": {key: dict(value) for key, value in (self._admission or {}).items()}}
 
     @property
     def binding_sha256(self) -> str:
         return canonical_json_hash(self.to_binding())
 
     def to_model_dict(self) -> dict[str, Any]:
-        visible = [task for task in self.plan.tasks
-                   if self.visible_keys is None or task.key in self.visible_keys]
+        visible = self.model_tasks
         counts = Counter(sid for task in visible for sid in task.member_ids)
 
         def source_role(span):
@@ -358,6 +382,9 @@ class ScopedModelView:
                 "parts": [{"key": key, **({"shared_ref": self._source_keys[sid]}
                             if counts[sid] > 1 else body(sid))} for key, sid in parts.items()],
             }, task_defaults))
+            hint = self._cards[task.key].reading_hint() if self._cards is not None else {}
+            if hint:
+                tasks[-1]['reading'] = hint
         return {"schema_version": SCOPED_VIEW_SCHEMA, "scope": "selected_source_tasks_only",
                 "max_claims": self.plan.max_claims, "available_task_count": len(tasks),
                 "fragment_defaults": fragment_defaults, "task_defaults": task_defaults,
@@ -366,6 +393,8 @@ class ScopedModelView:
     def resolve_basis(self, task_key: object, part_keys: object) -> ScopedClaimBinding:
         if not isinstance(task_key, str) or task_key not in self._parts:
             raise ValueError("scoped draft references an unknown source task")
+        if task_key not in self.admitted_task_keys:
+            raise ValueError("scoped draft references unavailable or duplicate source support")
         if (not isinstance(part_keys, list) or not part_keys
                 or any(not isinstance(key, str) for key in part_keys)
                 or len(part_keys) != len(set(part_keys))):
@@ -385,8 +414,13 @@ def compile_scoped_model_view(selected: NarrativeSelectResult, *, max_claims: in
     """Compile a transient view of this pinned selection, with no extra IO."""
     plan = build_summary_task_plan(selected.evidence_spans,
                                    reading_context=selected.reading_context, max_claims=max_claims)
+    known = {span.span_id: span for span in selected.evidence_spans}
+    cards = tuple(source_cards(plan, known))
+    admission = source_task_admission(cards)
     return ScopedModelView(plan,
-        MappingProxyType({span.span_id: span for span in selected.evidence_spans}),
+        MappingProxyType(known),
         MappingProxyType({sid: "s" + str(i) for i, sid in enumerate(plan.evidence_order, 1)}),
         MappingProxyType({task.key: MappingProxyType({"p" + str(i): sid
-            for i, sid in enumerate(task.member_ids, 1)}) for task in plan.tasks}))
+            for i, sid in enumerate(task.member_ids, 1)}) for task in plan.tasks}),
+        _admission=MappingProxyType({key: MappingProxyType(value) for key, value in admission.items()}),
+        _cards=MappingProxyType({card.task.key: card for card in cards}))

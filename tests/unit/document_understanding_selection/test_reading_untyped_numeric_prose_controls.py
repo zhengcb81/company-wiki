@@ -8,7 +8,7 @@ from company_wiki.resource_budget import WorkBudget
 from company_wiki.source_catalog import narrative_reading as reading
 from company_wiki.source_catalog.narrative_routing import FINANCIAL_REPORT_SELECTION_LIMIT
 from unit.document_understanding_selection.test_reading_untyped_numeric_quality import (
-    FLAG, _assert_quality_reaches_citation_and_model, _document,
+    FLAG, _assert_quality_retained_and_generation_deferred, _document,
     _native_carrier_document, _snapshot,
 )
 
@@ -59,7 +59,7 @@ def test_genuine_consecutive_value_cells_keep_unknown_even_with_missing_cell_and
     parsed = _document(["Business review", row])
     result = select(parsed)
     spans = [span for span in result.evidence_spans if span.raw_text == row]
-    _assert_quality_reaches_citation_and_model(result, spans)
+    _assert_quality_retained_and_generation_deferred(result, spans)
     assert spans[0].coordinates == parsed.units[-1].coordinates
     assert not {"unit", "currency", "period"}.intersection(spans[0].structured_value)
 

@@ -1,0 +1,486 @@
+{
+  "schema": "cwp-quality-independent-final/1",
+  "status": "PASS",
+  "open": [],
+  "time_utc": "2026-10-28T08:37:58.718556+00:00",
+  "reviewer": "/root/c3_semantic_final_20261028",
+  "author_of_A_or_B": false,
+  "scope": "A handoff-v3 (6 files) plus B handoff-v2 (13 files)",
+  "files": [
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_policy.py",
+      "lf_sha256": "d24a613cea555ee2faa1f995b552632d343c320b8654a592fdd18aca73724757",
+      "sha256": "612910da5f86ebc314488d56c1c6ffa01aadea16f93a1eabd6ac5b1e557574ff",
+      "bytes": 56917,
+      "handoff": "source-quality/handoff-v3.json"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_disclosures.py",
+      "lf_sha256": "3818577d5249f2d517ae26eb5c2877cf1bf375858ed19559ebfd43f091360351",
+      "sha256": "1cc37cf73c2a3bf84d9cc352cfe7a18a5bc27c68dd6c3206bac254b6b5bc01fc",
+      "bytes": 29077,
+      "handoff": "source-quality/handoff-v3.json"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+      "lf_sha256": "977b0fc2d9c47143f20c70d0899f85167b06eec5b10ea237af2dfca192435b8e",
+      "sha256": "a38b66d8bbc97c7d1cd1c1b07cad7de4aa84271e23b1362c403622a68c96a745",
+      "bytes": 40411,
+      "handoff": "source-quality/handoff-v3.json"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_reading.py",
+      "lf_sha256": "51ecc1ca4ba55f170786af2d7aea28ee5dfe05cf9f0d2711d8f617ef16cd74b9",
+      "sha256": "81e0efdf0c36569de06d2f716d2f9a2417e3cc747025de6c71a2584a29a12baf",
+      "bytes": 93694,
+      "handoff": "source-quality/handoff-v3.json"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_summary_source_admission.py",
+      "lf_sha256": "fac00ed764f9deaab88c4550476cf8ff20915a2e4e85124c858ce082ac603f6a",
+      "sha256": "fac00ed764f9deaab88c4550476cf8ff20915a2e4e85124c858ce082ac603f6a",
+      "bytes": 10515,
+      "handoff": "source-quality/handoff-v3.json"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_summary_source_metric_work.py",
+      "lf_sha256": "94024a8394d00bc921bed13780ffedc1805a53122930f7ec0127ab1147faec33",
+      "sha256": "94024a8394d00bc921bed13780ffedc1805a53122930f7ec0127ab1147faec33",
+      "bytes": 1917,
+      "handoff": "source-quality/handoff-v3.json"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/source_cards.py",
+      "lf_sha256": "e769d288d6fc20735319db027fe21a03e6b121a6144bcded9c22bab324d1ba29",
+      "sha256": "6caf06f2585323f412c035605a4d31fe4a7a5753b76c7420b473ae3dc7f67a75",
+      "bytes": 4237,
+      "handoff": "scoped-quality/handoff-v2.json"
+    },
+    {
+      "path": "src/company_wiki/automation/narrative_model_scoped.py",
+      "lf_sha256": "01f17b424ed4230aacca5f61a2cfc5c05dd542307f9c89ba96ee0e91a7fc09b9",
+      "sha256": "f4c9deddd92b35a01fe077125f657e887b23913e043e732112529ee5da7e7644",
+      "bytes": 25067,
+      "handoff": "scoped-quality/handoff-v2.json"
+    },
+    {
+      "path": "src/company_wiki/automation/narrative_model_extractive.py",
+      "lf_sha256": "de68b05034bf9517bfafcfb7b2ee680db6cf92f97aa585e45e11dc38380bf177",
+      "sha256": "23467992117fa8b44e1689ab212c7288ea1d1c214a242055ac71a769dc7f66ed",
+      "bytes": 18060,
+      "handoff": "scoped-quality/handoff-v2.json"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_finalize.py",
+      "lf_sha256": "00f9b88d6661b5a164ef0f434f454d2270f2b84dafa01419acf04d9a1ef4c07f",
+      "sha256": "e424ee11f7228e65e8f3171817e722f79a3cc23bdf18df082af8d218ed1bcb24",
+      "bytes": 12006,
+      "handoff": "scoped-quality/handoff-v2.json"
+    },
+    {
+      "path": "src/company_wiki/automation/narrative_replay.py",
+      "lf_sha256": "7d0f8f6de962713d955a8afdbc8be1b9990a1e443aa5b06be1aa7449bbc0f222",
+      "sha256": "7cb00b409d6be38af3fee051e1d5d86f43e4f1289e5b99528e8cafc4fca8246e",
+      "bytes": 10154,
+      "handoff": "scoped-quality/handoff-v2.json"
+    },
+    {
+      "path": "src/company_wiki/source_contract/selection_annotations.py",
+      "lf_sha256": "bb242e46cf636fa91b1e6448614d98a788523f88ed9a85cbb7021bf54dd8a444",
+      "sha256": "bb242e46cf636fa91b1e6448614d98a788523f88ed9a85cbb7021bf54dd8a444",
+      "bytes": 706,
+      "handoff": "scoped-quality/handoff-v2.json"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/decision_inventory.py",
+      "lf_sha256": "d3562d70470e6cd50f1e638e63e817199e3acedd67cbed3f59a34137ea8344ff",
+      "sha256": "cf87f9171e4ba764a2e54894d2785780905eb75a953c3289f36eb4eaacc7a7cb",
+      "bytes": 28243,
+      "handoff": "scoped-quality/handoff-v2.json"
+    },
+    {
+      "path": "tools/document_understanding_benchmark/phase_c_observer.py",
+      "lf_sha256": "4d7da3911ae502944c273f3f3e7b8c62f5675aa9d92a9730ed3efeb9c7a4e525",
+      "sha256": "98ed49ee50a27a97271a0bd096d82d3d4cf836944f3faf4b51663c75a5dd5515",
+      "bytes": 23906,
+      "handoff": "scoped-quality/handoff-v2.json"
+    },
+    {
+      "path": "tests/unit/test_scoped_source_admission.py",
+      "lf_sha256": "93735de0411c7c554063ed165ea0ef6508c0793dd12a5cdd523a9fe3cc9d2080",
+      "sha256": "93735de0411c7c554063ed165ea0ef6508c0793dd12a5cdd523a9fe3cc9d2080",
+      "bytes": 9355,
+      "handoff": "scoped-quality/handoff-v2.json"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_untyped_numeric_quality.py",
+      "lf_sha256": "11f0b5d768bcfebf690a8bafaebc640511e42545ae945cedaabb4683dd79fba5",
+      "sha256": "5eda9da97e9e48d2bc331c39f8901c0434e15425d901a6e17ef5a96c209bf0f9",
+      "bytes": 13063,
+      "handoff": "scoped-quality/handoff-v2.json"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_untyped_numeric_prose_controls.py",
+      "lf_sha256": "40f99cadadde7ebac7e5868e8c51e5120502fa0100049c49563a1d98f3816a84",
+      "sha256": "c547c37ffd8b4984d0337e2c71e35c4e480c82cef054edb0b3a5e2e672891f92",
+      "bytes": 5352,
+      "handoff": "scoped-quality/handoff-v2.json"
+    },
+    {
+      "path": "tests/unit/test_narrative_scoped_runtime_recovery.py",
+      "lf_sha256": "9413ef69e40e8330a47be70d80b69244d4113f6aa27ab358eeee9997c1f68971",
+      "sha256": "2121ef2a112a84e09bd7d5b4ca5b589886ded9c149ebcbaffee0c41345bde133",
+      "bytes": 8655,
+      "handoff": "scoped-quality/handoff-v2.json"
+    },
+    {
+      "path": "tests/integration/test_shared_scoped_public_request.py",
+      "lf_sha256": "b56c880f6037dd113e4b2f5852a3c76a82c2b434f1f08a2c7b07301ce0d0ed8a",
+      "sha256": "76988b19ae23e698f0320c7f138edcc444463989741518ffcd30f29a5b9cc0d9",
+      "bytes": 16720,
+      "handoff": "scoped-quality/handoff-v2.json"
+    }
+  ],
+  "all_19_match_handoffs": true,
+  "source_unchanged_during_final_recheck": true,
+  "closed_findings": [
+    {
+      "id": "SQ-IR-01",
+      "status": "CLOSED",
+      "problem": "Unidentified preceding change was falsely certified as a unique result subject.",
+      "root_fix": "Reference owner consumes source_result_subject, which reuses existing source-owned metric/revenue subject bindings in the same prepared assertion. No sentence blacklist and no subject donation from another assertion.",
+      "verification": "Four frozen missing-subject counterexamples plus actual production defer now pass; adjacent explicit revenue/subscriber/customer subjects, modal/direction and source/section/order controls plus original support IDs all pass."
+    },
+    {
+      "id": "SQ-IR-02",
+      "status": "CLOSED",
+      "problem": "Decoder did not enforce the declared per-task hard cap 2.",
+      "root_fix": "Decoder reads the same output-plan owner's per-task cap and rejects the entire over-cap response before clause salvage with NarrativeContractError.",
+      "verification": "Independent 3-clause counterexample now raises; author current cap contract accepts exactly 2 and rejects 3 even alongside another valid task. Global 40 and configured 8192 are unchanged."
+    },
+    {
+      "id": "SQ-IR-03",
+      "status": "CLOSED",
+      "problem": "New subject-binding use of a shared metric helper exposed repeated full-text predicate/prefix/tail scans.",
+      "root_fix": "One PreparedPredicateContext is reused by metric/revenue/result-subject owners; quantity/direction windows end at assertion/neighboring metric bounds and comparison frame is prepared once. Full assertion modality and original offsets remain intact.",
+      "verification": "Both multi-assertion and true single-assertion many-metric workloads are near-linear under real delegated regex operations; permanent tests also preserve N quantity relations plus one direction with original spans. No work constant/cap/threshold increase."
+    }
+  ],
+  "tests": {
+    "final": {
+      "passed": 51,
+      "failed": 0,
+      "errors": 0,
+      "seconds": 4.95,
+      "by_class": {
+        "tests.unit.document_understanding_selection.test_summary_source_admission": 31,
+        "tests.unit.document_understanding_selection.test_summary_source_metric_work": 2,
+        "tests.unit.test_scoped_source_admission": 1,
+        ".planning.c3-20261028.quality-review.test_independent_quality": 17
+      },
+      "log": "recheck-v3.log",
+      "junit": "recheck-v3.xml"
+    },
+    "history_not_added_to_final": [
+      "Initial 71: 62 pass/9 fail, 4.89s; includes original A43+B10 green and four concurrent author-added subject regressions duplicating four independent failures, plus independent production path failure.",
+      "Separate initial per-task cap: 1 fail, 3.04s. Missing guard existed in old HEAD and was not misattributed as introduced by B.",
+      "A v2+B v2 recheck: 38 pass/1 fail of 39, 3.96s; first two semantic/cap findings closed, actual metric scan still quadratic.",
+      "Author 661/180/308 and B125/12/13 receipts were inspected as their own scopes; they are not independently rerun totals and are not summed."
+    ],
+    "interpreter": "C:/Miniconda/python.exe -B -X utf8",
+    "plugins": "autoload disabled; pytest_timeout explicitly loaded",
+    "warning": "One known unknown asyncio_mode config option in final invocation; no timeout marker disabled."
+  },
+  "scan_counts": {
+    "many_assertions": [
+      {
+        "scenario": "many_assertions",
+        "metrics": 16,
+        "chars": 655,
+        "regex_input_chars": 11753,
+        "by_regex": {
+          "company_wiki.source_catalog.narrative_predicate_state_SENTENCE": 655,
+          "company_wiki.source_catalog.narrative_predicate_state_BOUNDARY": 655,
+          "company_wiki.source_catalog.narrative_predicate_state_FUTURE_FRAME": 655,
+          "company_wiki.source_catalog.narrative_predicate_state_LEADING_HYPOTHESIS": 655,
+          "company_wiki.source_catalog.narrative_predicate_state_MODAL": 591,
+          "company_wiki.source_catalog.narrative_predicate_state_FUTURE_PERIOD": 591,
+          "company_wiki.source_catalog.narrative_predicate_state_PAST_PERIOD": 591,
+          "company_wiki.source_catalog.narrative_predicate_state_CURRENT_PERIOD": 591,
+          "company_wiki.source_catalog.narrative_predicate_state_REFERENCE_PHRASE": 591,
+          "company_wiki.source_catalog.narrative_business_policy_GENERIC_DEFINITION": 1310,
+          "company_wiki.source_catalog.narrative_business_policy_PORTFOLIO_DEFINITION_CONTEXT": 1310,
+          "company_wiki.source_catalog.narrative_business_policy_OPERATING_MEASURE": 655,
+          "company_wiki.source_catalog.narrative_business_policy_MEASURE_FINANCIAL_SUBJECT": 258,
+          "company_wiki.source_catalog.narrative_business_policy_SOURCE_QUANTITY": 258,
+          "company_wiki.source_catalog.narrative_business_policy_SOURCE_NON_QUANTITY": 16,
+          "company_wiki.source_catalog.narrative_business_policy_MEASURE_DIRECTION_AFTER": 258,
+          "company_wiki.source_catalog.narrative_business_policy_MEASURE_DIRECTION_BEFORE": 144,
+          "company_wiki.source_catalog.narrative_business_policy_SOURCE_PRE_QUANTITY": 4,
+          "company_wiki.source_catalog.narrative_business_policy_SALES_COMPONENT_CHANGE": 655,
+          "company_wiki.source_catalog.narrative_business_policy_REVENUE_VALUE": 655,
+          "company_wiki.source_catalog.narrative_business_policy_REVENUE_RATE_CHANGE": 655
+        }
+      },
+      {
+        "scenario": "many_assertions",
+        "metrics": 32,
+        "chars": 1279,
+        "regex_input_chars": 22921,
+        "by_regex": {
+          "company_wiki.source_catalog.narrative_predicate_state_SENTENCE": 1279,
+          "company_wiki.source_catalog.narrative_predicate_state_BOUNDARY": 1279,
+          "company_wiki.source_catalog.narrative_predicate_state_FUTURE_FRAME": 1279,
+          "company_wiki.source_catalog.narrative_predicate_state_LEADING_HYPOTHESIS": 1279,
+          "company_wiki.source_catalog.narrative_predicate_state_MODAL": 1151,
+          "company_wiki.source_catalog.narrative_predicate_state_FUTURE_PERIOD": 1151,
+          "company_wiki.source_catalog.narrative_predicate_state_PAST_PERIOD": 1151,
+          "company_wiki.source_catalog.narrative_predicate_state_CURRENT_PERIOD": 1151,
+          "company_wiki.source_catalog.narrative_predicate_state_REFERENCE_PHRASE": 1151,
+          "company_wiki.source_catalog.narrative_business_policy_GENERIC_DEFINITION": 2558,
+          "company_wiki.source_catalog.narrative_business_policy_PORTFOLIO_DEFINITION_CONTEXT": 2558,
+          "company_wiki.source_catalog.narrative_business_policy_OPERATING_MEASURE": 1279,
+          "company_wiki.source_catalog.narrative_business_policy_MEASURE_FINANCIAL_SUBJECT": 498,
+          "company_wiki.source_catalog.narrative_business_policy_SOURCE_QUANTITY": 498,
+          "company_wiki.source_catalog.narrative_business_policy_SOURCE_NON_QUANTITY": 32,
+          "company_wiki.source_catalog.narrative_business_policy_MEASURE_DIRECTION_AFTER": 498,
+          "company_wiki.source_catalog.narrative_business_policy_MEASURE_DIRECTION_BEFORE": 288,
+          "company_wiki.source_catalog.narrative_business_policy_SOURCE_PRE_QUANTITY": 4,
+          "company_wiki.source_catalog.narrative_business_policy_SALES_COMPONENT_CHANGE": 1279,
+          "company_wiki.source_catalog.narrative_business_policy_REVENUE_VALUE": 1279,
+          "company_wiki.source_catalog.narrative_business_policy_REVENUE_RATE_CHANGE": 1279
+        }
+      },
+      {
+        "scenario": "many_assertions",
+        "metrics": 64,
+        "chars": 2527,
+        "regex_input_chars": 45257,
+        "by_regex": {
+          "company_wiki.source_catalog.narrative_predicate_state_SENTENCE": 2527,
+          "company_wiki.source_catalog.narrative_predicate_state_BOUNDARY": 2527,
+          "company_wiki.source_catalog.narrative_predicate_state_FUTURE_FRAME": 2527,
+          "company_wiki.source_catalog.narrative_predicate_state_LEADING_HYPOTHESIS": 2527,
+          "company_wiki.source_catalog.narrative_predicate_state_MODAL": 2271,
+          "company_wiki.source_catalog.narrative_predicate_state_FUTURE_PERIOD": 2271,
+          "company_wiki.source_catalog.narrative_predicate_state_PAST_PERIOD": 2271,
+          "company_wiki.source_catalog.narrative_predicate_state_CURRENT_PERIOD": 2271,
+          "company_wiki.source_catalog.narrative_predicate_state_REFERENCE_PHRASE": 2271,
+          "company_wiki.source_catalog.narrative_business_policy_GENERIC_DEFINITION": 5054,
+          "company_wiki.source_catalog.narrative_business_policy_PORTFOLIO_DEFINITION_CONTEXT": 5054,
+          "company_wiki.source_catalog.narrative_business_policy_OPERATING_MEASURE": 2527,
+          "company_wiki.source_catalog.narrative_business_policy_MEASURE_FINANCIAL_SUBJECT": 978,
+          "company_wiki.source_catalog.narrative_business_policy_SOURCE_QUANTITY": 978,
+          "company_wiki.source_catalog.narrative_business_policy_SOURCE_NON_QUANTITY": 64,
+          "company_wiki.source_catalog.narrative_business_policy_MEASURE_DIRECTION_AFTER": 978,
+          "company_wiki.source_catalog.narrative_business_policy_MEASURE_DIRECTION_BEFORE": 576,
+          "company_wiki.source_catalog.narrative_business_policy_SOURCE_PRE_QUANTITY": 4,
+          "company_wiki.source_catalog.narrative_business_policy_SALES_COMPONENT_CHANGE": 2527,
+          "company_wiki.source_catalog.narrative_business_policy_REVENUE_VALUE": 2527,
+          "company_wiki.source_catalog.narrative_business_policy_REVENUE_RATE_CHANGE": 2527
+        }
+      }
+    ],
+    "one_assertion": [
+      {
+        "scenario": "one_assertion",
+        "metrics": 16,
+        "chars": 587,
+        "regex_input_chars": 12581,
+        "by_regex": {
+          "company_wiki.source_catalog.narrative_predicate_state_SENTENCE": 587,
+          "company_wiki.source_catalog.narrative_predicate_state_BOUNDARY": 587,
+          "company_wiki.source_catalog.narrative_predicate_state_FUTURE_FRAME": 587,
+          "company_wiki.source_catalog.narrative_predicate_state_LEADING_HYPOTHESIS": 587,
+          "company_wiki.source_catalog.narrative_predicate_state_MODAL": 587,
+          "company_wiki.source_catalog.narrative_predicate_state_FUTURE_PERIOD": 587,
+          "company_wiki.source_catalog.narrative_predicate_state_PAST_PERIOD": 587,
+          "company_wiki.source_catalog.narrative_predicate_state_CURRENT_PERIOD": 587,
+          "company_wiki.source_catalog.narrative_predicate_state_REFERENCE_PHRASE": 587,
+          "company_wiki.source_catalog.narrative_business_policy_GENERIC_DEFINITION": 1174,
+          "company_wiki.source_catalog.narrative_business_policy_PORTFOLIO_DEFINITION_CONTEXT": 1174,
+          "company_wiki.source_catalog.narrative_business_policy_OPERATING_MEASURE": 587,
+          "company_wiki.source_catalog.narrative_business_policy_MEASURE_FINANCIAL_SUBJECT": 571,
+          "company_wiki.source_catalog.narrative_business_policy_SOURCE_QUANTITY": 571,
+          "company_wiki.source_catalog.narrative_business_policy_SOURCE_NON_QUANTITY": 329,
+          "company_wiki.source_catalog.narrative_business_policy_MEASURE_DIRECTION_AFTER": 571,
+          "company_wiki.source_catalog.narrative_business_policy_MEASURE_DIRECTION_BEFORE": 530,
+          "company_wiki.source_catalog.narrative_business_policy_SOURCE_PRE_QUANTITY": 30,
+          "company_wiki.source_catalog.narrative_business_policy_SALES_COMPONENT_CHANGE": 587,
+          "company_wiki.source_catalog.narrative_business_policy_REVENUE_VALUE": 587,
+          "company_wiki.source_catalog.narrative_business_policy_REVENUE_RATE_CHANGE": 587
+        }
+      },
+      {
+        "scenario": "one_assertion",
+        "metrics": 32,
+        "chars": 1147,
+        "regex_input_chars": 24677,
+        "by_regex": {
+          "company_wiki.source_catalog.narrative_predicate_state_SENTENCE": 1147,
+          "company_wiki.source_catalog.narrative_predicate_state_BOUNDARY": 1147,
+          "company_wiki.source_catalog.narrative_predicate_state_FUTURE_FRAME": 1147,
+          "company_wiki.source_catalog.narrative_predicate_state_LEADING_HYPOTHESIS": 1147,
+          "company_wiki.source_catalog.narrative_predicate_state_MODAL": 1147,
+          "company_wiki.source_catalog.narrative_predicate_state_FUTURE_PERIOD": 1147,
+          "company_wiki.source_catalog.narrative_predicate_state_PAST_PERIOD": 1147,
+          "company_wiki.source_catalog.narrative_predicate_state_CURRENT_PERIOD": 1147,
+          "company_wiki.source_catalog.narrative_predicate_state_REFERENCE_PHRASE": 1147,
+          "company_wiki.source_catalog.narrative_business_policy_GENERIC_DEFINITION": 2294,
+          "company_wiki.source_catalog.narrative_business_policy_PORTFOLIO_DEFINITION_CONTEXT": 2294,
+          "company_wiki.source_catalog.narrative_business_policy_OPERATING_MEASURE": 1147,
+          "company_wiki.source_catalog.narrative_business_policy_MEASURE_FINANCIAL_SUBJECT": 1131,
+          "company_wiki.source_catalog.narrative_business_policy_SOURCE_QUANTITY": 1131,
+          "company_wiki.source_catalog.narrative_business_policy_SOURCE_NON_QUANTITY": 665,
+          "company_wiki.source_catalog.narrative_business_policy_MEASURE_DIRECTION_AFTER": 1131,
+          "company_wiki.source_catalog.narrative_business_policy_MEASURE_DIRECTION_BEFORE": 1090,
+          "company_wiki.source_catalog.narrative_business_policy_SOURCE_PRE_QUANTITY": 30,
+          "company_wiki.source_catalog.narrative_business_policy_SALES_COMPONENT_CHANGE": 1147,
+          "company_wiki.source_catalog.narrative_business_policy_REVENUE_VALUE": 1147,
+          "company_wiki.source_catalog.narrative_business_policy_REVENUE_RATE_CHANGE": 1147
+        }
+      },
+      {
+        "scenario": "one_assertion",
+        "metrics": 64,
+        "chars": 2267,
+        "regex_input_chars": 48869,
+        "by_regex": {
+          "company_wiki.source_catalog.narrative_predicate_state_SENTENCE": 2267,
+          "company_wiki.source_catalog.narrative_predicate_state_BOUNDARY": 2267,
+          "company_wiki.source_catalog.narrative_predicate_state_FUTURE_FRAME": 2267,
+          "company_wiki.source_catalog.narrative_predicate_state_LEADING_HYPOTHESIS": 2267,
+          "company_wiki.source_catalog.narrative_predicate_state_MODAL": 2267,
+          "company_wiki.source_catalog.narrative_predicate_state_FUTURE_PERIOD": 2267,
+          "company_wiki.source_catalog.narrative_predicate_state_PAST_PERIOD": 2267,
+          "company_wiki.source_catalog.narrative_predicate_state_CURRENT_PERIOD": 2267,
+          "company_wiki.source_catalog.narrative_predicate_state_REFERENCE_PHRASE": 2267,
+          "company_wiki.source_catalog.narrative_business_policy_GENERIC_DEFINITION": 4534,
+          "company_wiki.source_catalog.narrative_business_policy_PORTFOLIO_DEFINITION_CONTEXT": 4534,
+          "company_wiki.source_catalog.narrative_business_policy_OPERATING_MEASURE": 2267,
+          "company_wiki.source_catalog.narrative_business_policy_MEASURE_FINANCIAL_SUBJECT": 2251,
+          "company_wiki.source_catalog.narrative_business_policy_SOURCE_QUANTITY": 2251,
+          "company_wiki.source_catalog.narrative_business_policy_SOURCE_NON_QUANTITY": 1337,
+          "company_wiki.source_catalog.narrative_business_policy_MEASURE_DIRECTION_AFTER": 2251,
+          "company_wiki.source_catalog.narrative_business_policy_MEASURE_DIRECTION_BEFORE": 2210,
+          "company_wiki.source_catalog.narrative_business_policy_SOURCE_PRE_QUANTITY": 30,
+          "company_wiki.source_catalog.narrative_business_policy_SALES_COMPONENT_CHANGE": 2267,
+          "company_wiki.source_catalog.narrative_business_policy_REVENUE_VALUE": 2267,
+          "company_wiki.source_catalog.narrative_business_policy_REVENUE_RATE_CHANGE": 2267
+        }
+      }
+    ]
+  },
+  "other_contracts_reviewed": {
+    "unknown": "Unknown-only relations retain retrievable description without independently giving financial exemption/meaningful value; source business/resource/plan/cause positives retained.",
+    "support_and_hint": "Existing source_cards capability excludes table_structure_ambiguous factual support even under uncertain output; full plan/diagnostic preserved. Reading hints project only support-owned values and do not reclassify prose. Context does not donate priority.",
+    "dedup": "Exact source/support/context/support-role/kind/section scope only; differing source evidence IDs, reasons/period members, Q&A roles or context scopes remain distinct. Representative mapping retained.",
+    "annotations": "Explicit registry of reading_priority/value_band/fact_purpose/score is shared by finalize/replay and included in reading fingerprint; arbitrary reading_revenue/reading_period/reading_original_amount still change original identity.",
+    "soft_target": "Target remains a soft up-to goal, no heading/number/principle padding requirement; max8192/40/per-task2 not raised.",
+    "old_numeric_tests": "Original unbound numeric text, flags and citation support remain inspectable; rewritten factual generation now defers. Original retrieval/lineage assertions retained.",
+    "restart_test": "Actual narrative_batch._receipt merges max(guard.peak,pin.byte_size) and marks committed_writer_lower_bound. Test's pin-derived restart assertion is valid, retains zero extra POST/fee and complete reservation equality; no assertion of a zero restart scratch or exact first-run transient peak."
+  },
+  "offline_real_replay": {
+    "evidence": ".planning/c3-20261028/scoped-quality/offline-real-replay.json",
+    "scope": "Only old spans/views and immutable old response under new compiler/validation.",
+    "old_tasks": 60,
+    "admitted_tasks": 53,
+    "old_claims": 24,
+    "retained_claims": 19,
+    "known_financial_claims_rejected": 5,
+    "source_gold": "3/3",
+    "old_t37_omission": "still missing",
+    "new_full_selection_or_summary_proven": false,
+    "new_POST": 0
+  },
+  "limitations": [
+    "Engineering quality review PASS is not real-summary content 3/3 acceptance; ROOT's one bounded formal attempt remains required.",
+    "No new PDF/Docling/model/download/API run or new whole-source selection by reviewer.",
+    "Full clean-deploy integration remains the preserved historical outer-timeout failure, not signed green here.",
+    "Actual raw/official worker seams and type/Ruff receipts are author evidence inspected; final independent recheck is the 51 tests above."
+  ],
+  "cleanup": {
+    "temp_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.qir28",
+    "absent": true,
+    "absolute_boundary_checked_before_delete": true,
+    "test_processes_completed": true,
+    "background_processes_launched": 0,
+    "environment": "All overrides were confined to completed child PowerShell processes.",
+    "product_edits": 0,
+    "existing_test_edits": 0,
+    "PWF_edits": 0,
+    "models": 0,
+    "network": 0,
+    "PDF": 0,
+    "downloads": 0,
+    "original_or_production_config_writes": 0,
+    "other_repository_writes": 0,
+    "commits": 0
+  },
+  "evidence": {
+    "tests.log": {
+      "bytes": 8168,
+      "sha256": "d71ae8b04b72489b34d93aa0b477cd53fce861a8e31334a785f5189cff702aee"
+    },
+    "tests.xml": {
+      "bytes": 23197,
+      "sha256": "6bdefcd71917232447bfcc004f4fd5972a774bf85d695cf70bf31c25c38b63a1"
+    },
+    "cap.log": {
+      "bytes": 1838,
+      "sha256": "5294004e2773f1c97e2162828243b84997630c3c11a5911f24927d2ba657428d"
+    },
+    "cap.xml": {
+      "bytes": 711,
+      "sha256": "66b7f43445a137ebd1833f59929eeaba6f011a4b13841b714c08676909fdb918"
+    },
+    "recheck-v2.log": {
+      "bytes": 2204,
+      "sha256": "0a5ee9e5b83424661233afc33c3625f432aae945a361ef35b6cf34daac74e538"
+    },
+    "recheck-v2.xml": {
+      "bytes": 9089,
+      "sha256": "b7d45c51282780bb5321994a473106ebc3fdcec470da84e4b23679778dabe124"
+    },
+    "recheck-v3.log": {
+      "bytes": 1743,
+      "sha256": "3d0a649e9e2662a2b8142e0f2b2e508fed0c02bccf395a81166bf4e305dd1a7a"
+    },
+    "recheck-v3.xml": {
+      "bytes": 12691,
+      "sha256": "0c19ccb2e806845711ad7b8f43982486739d6e68542a21354d5ad57704e86e6f"
+    },
+    "subject-scan-red-v2.json": {
+      "bytes": 5595,
+      "sha256": "63b3f4e4983632da9b06ccd36af03c8760c2abf1db2c9c8a03fbcf2091e3d518"
+    },
+    "subject-scan-many_assertions.json": {
+      "bytes": 5913,
+      "sha256": "db246e0fba4f2fb0b19f08a881f44900f40f043f6bb9eeed9a14c09eca995bb2"
+    },
+    "subject-scan-one_assertion.json": {
+      "bytes": 5922,
+      "sha256": "e9c33a868fd5a657d1461db938961e05e312411b54db781fbcb9a67d6ae3d101"
+    },
+    "scan.json": {
+      "bytes": 4899,
+      "sha256": "af720256db45b5b6c6b4f9a56d8182134f51185fee50a497d4322d9b8bec0105"
+    },
+    "test_independent_quality.py": {
+      "bytes": 7663,
+      "sha256": "09d2d55393cf27de79ecb135f922f5be120b58eeed0efd5ea9b2734fcfe82664"
+    },
+    "final-scope-v3-before.json": {
+      "bytes": 7995,
+      "sha256": "e9c7112f11062c4cdc500fdc4baab161f50713ceda38d3c9f1b7311eaa31048f"
+    },
+    "intermediate.json": {
+      "bytes": 17389,
+      "sha256": "f157215ddae2a511c34636fbd97c4d3f9a8cd3c74b8748a4e3bc277fb4aeca98"
+    },
+    "recheck-v2-status.json": {
+      "bytes": 1377,
+      "sha256": "7895b0856bf19e6105c30efbfe42677710b23df477bf8bd96d53f111b95445f5"
+    }
+  }
+}

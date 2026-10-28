@@ -1,0 +1,16 @@
+{
+  "exit_code": 0,
+  "seconds": 11.758,
+  "targets": [
+    ".planning/c3-20261028/quality-review/test_independent_quality.py::test_result_subject_metric_work_is_linear",
+    "tests/unit/document_understanding_selection/test_summary_source_metric_work.py",
+    "tests/unit/document_understanding_selection/test_summary_source_admission.py",
+    "tests/unit/document_understanding_selection/test_reading_operating_measure_variants.py",
+    "tests/unit/document_understanding_selection/test_reading_measure_scope.py",
+    "tests/unit/document_understanding_selection/test_reading_order_metric_language_parity.py",
+    "tests/unit/document_understanding_selection/test_reading_named_segment_scope.py",
+    "tests/unit/document_understanding_selection/test_reading_portfolio_disclosure.py",
+    "tests/unit/document_understanding_selection/test_prepared_predicate_context.py"
+  ],
+  "owned_temp_absent": true
+}

@@ -1,0 +1,160 @@
+{
+  "schema_version": "c3-selected-group-closure-diagnosis/1",
+  "status": "READ_ONLY_DIAGNOSIS",
+  "source_sha256": "4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+  "old_bundle_uncompressed_sha256": "ba856a0881d078ae55dee65b6583f19f8a45c7abe4da6c6d626b840effe9a0ae",
+  "new_input_uncompressed_sha256": "1bd23886b5e395ca39de93d8c9ea270ca6f7ea5dec6dba6fb4d6ff73fa18d108",
+  "old_group_id": "urn:company-wiki:reading-group:sha256:56e2b1d7dcdbb049a90f341fa6dbcb96212bf7550e5162767acf6c4f799c6180",
+  "old_group_kind": "native_continuity",
+  "old_support_span_ids": [
+    "urn:company-wiki:evidence-span:sha256:b95de2d665a45dddfe5171e61e11456330439a916576851380ce537db50848ce",
+    "urn:company-wiki:evidence-span:sha256:05cba3725cb76decbb79e8d497779fce7670c854584d89c78ed41b003b4714cb",
+    "urn:company-wiki:evidence-span:sha256:c600d04527e36d93c8581ba689bd398f375279f70c68b324baec8dc44dbb3000",
+    "urn:company-wiki:evidence-span:sha256:656fb5bb6387c1fc5d458544f9611700a4d4a8c856ee1a01258bf0992f57bb57"
+  ],
+  "old_support_locators": [
+    "loc:v1/page:13/paragraph:9",
+    "loc:v1/page:13/paragraph:10",
+    "loc:v1/page:13/paragraph:11",
+    "loc:v1/page:13/paragraph:12"
+  ],
+  "new_split_tasks": [
+    {
+      "key": "t4",
+      "kind": "background",
+      "reading": {
+        "priority": 1,
+        "purposes": [
+          "operating_metric"
+        ],
+        "score": 3,
+        "value_band": "meaningful_fact"
+      },
+      "support_parts": [
+        "p2"
+      ],
+      "part_source_keys": [
+        "s31",
+        "s33"
+      ]
+    },
+    {
+      "key": "t35",
+      "kind": "native_continuity",
+      "reading": {
+        "priority": 1,
+        "purposes": [
+          "unknown"
+        ],
+        "score": 0,
+        "value_band": "description"
+      },
+      "support_parts": [
+        "p2"
+      ],
+      "part_source_keys": [
+        "s31",
+        "s34"
+      ]
+    }
+  ],
+  "helper_controls": [
+    {
+      "scope": "whole_support",
+      "eligible": true,
+      "purpose": "operating_metric",
+      "reasons": [
+        "business_revenue_measure"
+      ],
+      "financial_only": false,
+      "value_band": "meaningful_fact"
+    },
+    {
+      "scope": "first_fragment",
+      "eligible": true,
+      "purpose": "operating_metric",
+      "reasons": [
+        "business_revenue_measure"
+      ],
+      "financial_only": false,
+      "value_band": "meaningful_fact"
+    },
+    {
+      "scope": "tail_three_fragments",
+      "eligible": false,
+      "purpose": "unknown",
+      "reasons": [],
+      "financial_only": false,
+      "value_band": "description"
+    }
+  ],
+  "pure_local_selector": {
+    "supplied_closed_support_count": 4,
+    "retained_closed_support_count": 4,
+    "withheld_count": 0,
+    "local_group_complete": true,
+    "values": [
+      {
+        "value_band": "meaningful_fact",
+        "fact_purpose": "operating_metric",
+        "fact_reasons": [
+          "business_revenue_measure"
+        ]
+      },
+      {
+        "value_band": "meaningful_fact",
+        "fact_purpose": "operating_metric",
+        "fact_reasons": [
+          "business_revenue_measure"
+        ]
+      },
+      {
+        "value_band": "meaningful_fact",
+        "fact_purpose": "operating_metric",
+        "fact_reasons": [
+          "business_revenue_measure"
+        ]
+      },
+      {
+        "value_band": "meaningful_fact",
+        "fact_purpose": "operating_metric",
+        "fact_reasons": [
+          "business_revenue_measure"
+        ]
+      }
+    ],
+    "full_document_coverage_complete": false,
+    "scope": "existing closed group supplied; no native geometry/enhancement re-execution"
+  },
+  "old_actual_reading_execution": {
+    "accepted_groups": 3,
+    "actual_engine": "docling",
+    "converter_instances": 1,
+    "engine_version": "2.96.0",
+    "model_sha256": "00333a43451945aaf89db8ca9c0a17e75d1537c17db60fdb91aa95f4c7929e0c",
+    "pages": [
+      12,
+      13,
+      17
+    ],
+    "peak_job_commit_bytes": 3346083840,
+    "rejected_groups": 128,
+    "schema_version": "pdf-reading-execution/1",
+    "scope": "paragraph_boundary_proposals",
+    "seconds": 103.7925,
+    "status": "enhanced",
+    "temporary_root_restored_absent": true
+  },
+  "native_first_to_second_x0_delta": 22.679977416992188,
+  "native_wrapped_line_x0_guard": 18.900000000000002,
+  "conclusion": "Current purpose/admission/reference retains the supplied four-part closed group. New actual request instead already has first fragment and tail carrier split into different source tasks. Diagnose pre-group native/paragraph enhancement observation and fallback; do not restore unknown financial exemptions or join tasks in summary compiler.",
+  "unproven": [
+    "new actual paragraph enhancement execution/fallback without retained selected.reading_context",
+    "new full-document selector behavior",
+    "all original native membership/font inputs"
+  ],
+  "product_files_changed": false,
+  "new_model_calls": 0,
+  "pdf_replays": 0,
+  "downloads": 0
+}

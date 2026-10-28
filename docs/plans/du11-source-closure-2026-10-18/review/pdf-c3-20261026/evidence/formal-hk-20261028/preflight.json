@@ -1,0 +1,33 @@
+{
+  "metadata": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\c3-20261028\\prepared-hk-development-runtime-v2.json",
+  "runtime_sha256": "077654bd7eeb016d57667ec3560e602f4de480a74c2cbb236fc1100dda942fd6",
+  "protected_count": 7,
+  "historical_native_observations": [
+    {
+      "database": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mW03-ahg078jp\\CN-688012\\auto\\narrative.sqlite3",
+      "attempts": 4,
+      "unchanged": true
+    },
+    {
+      "database": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mW03-ahg078jp\\HK-00700\\auto\\narrative.sqlite3",
+      "attempts": 2,
+      "unchanged": true
+    },
+    {
+      "database": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mW03-ahg078jp\\US-MSFT\\auto\\narrative.sqlite3",
+      "attempts": 3,
+      "unchanged": true
+    }
+  ],
+  "mother": {
+    "charged_tokens": 1783378,
+    "charged_micro_usd": 724836,
+    "new_unknown_count": 6,
+    "token_limit": 10000000,
+    "micro_usd_limit": 20000000,
+    "prior_unknown7_retained": 7
+  },
+  "provider": "configured mimo-v2.6-flash",
+  "new_model_calls": 0,
+  "downloads": 0
+}

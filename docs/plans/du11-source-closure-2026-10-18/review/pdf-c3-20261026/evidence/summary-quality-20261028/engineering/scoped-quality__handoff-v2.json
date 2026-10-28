@@ -1,0 +1,99 @@
+{
+  "status": "FROZEN_FOR_INDEPENDENT_REVIEW",
+  "author": "ROOT",
+  "files": [
+    {
+      "path": "src/company_wiki/document_understanding/source_cards.py",
+      "lf_sha256": "e769d288d6fc20735319db027fe21a03e6b121a6144bcded9c22bab324d1ba29"
+    },
+    {
+      "path": "src/company_wiki/automation/narrative_model_scoped.py",
+      "lf_sha256": "01f17b424ed4230aacca5f61a2cfc5c05dd542307f9c89ba96ee0e91a7fc09b9"
+    },
+    {
+      "path": "src/company_wiki/automation/narrative_model_extractive.py",
+      "lf_sha256": "de68b05034bf9517bfafcfb7b2ee680db6cf92f97aa585e45e11dc38380bf177"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_finalize.py",
+      "lf_sha256": "00f9b88d6661b5a164ef0f434f454d2270f2b84dafa01419acf04d9a1ef4c07f"
+    },
+    {
+      "path": "src/company_wiki/automation/narrative_replay.py",
+      "lf_sha256": "7d0f8f6de962713d955a8afdbc8be1b9990a1e443aa5b06be1aa7449bbc0f222"
+    },
+    {
+      "path": "src/company_wiki/source_contract/selection_annotations.py",
+      "lf_sha256": "bb242e46cf636fa91b1e6448614d98a788523f88ed9a85cbb7021bf54dd8a444"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/decision_inventory.py",
+      "lf_sha256": "d3562d70470e6cd50f1e638e63e817199e3acedd67cbed3f59a34137ea8344ff"
+    },
+    {
+      "path": "tools/document_understanding_benchmark/phase_c_observer.py",
+      "lf_sha256": "4d7da3911ae502944c273f3f3e7b8c62f5675aa9d92a9730ed3efeb9c7a4e525"
+    },
+    {
+      "path": "tests/unit/test_scoped_source_admission.py",
+      "lf_sha256": "93735de0411c7c554063ed165ea0ef6508c0793dd12a5cdd523a9fe3cc9d2080"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_untyped_numeric_quality.py",
+      "lf_sha256": "11f0b5d768bcfebf690a8bafaebc640511e42545ae945cedaabb4683dd79fba5"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_untyped_numeric_prose_controls.py",
+      "lf_sha256": "40f99cadadde7ebac7e5868e8c51e5120502fa0100049c49563a1d98f3816a84"
+    },
+    {
+      "path": "tests/unit/test_narrative_scoped_runtime_recovery.py",
+      "lf_sha256": "9413ef69e40e8330a47be70d80b69244d4113f6aa27ab358eeee9997c1f68971"
+    },
+    {
+      "path": "tests/integration/test_shared_scoped_public_request.py",
+      "lf_sha256": "b56c880f6037dd113e4b2f5852a3c76a82c2b434f1f08a2c7b07301ce0d0ed8a"
+    }
+  ],
+  "changes": [
+    "Reuse source_cards support capability in v4; preserve full plan and exact duplicate mapping.",
+    "Pass support-owned reading priority/value/score/purpose; source context cannot donate rank or invalidity.",
+    "Soft target without padding, same8192/40/per_task2; source-scoped prompt4.1.0.",
+    "Shared explicit reading annotation registry for producer and official JSON replay; unknown original fields remain strict and registry enters reading algorithm fingerprint.",
+    "Actual sent-task oracle recognizes source-admitted full request and still distinguishes repair subsets.",
+    "Independent review exposed missing decoder per-task cap. Decoder now consumes the same output-plan owner and rejects the entire over-cap response before clause salvage; no budget increase."
+  ],
+  "tdd": {
+    "first_red": "8fail/1pass with3 invalid immutable-span fixture cases; not all product RED",
+    "valid_red": "8fail/1pass after canonical create() fixture repair, product not yet changed",
+    "first_green": 9,
+    "focused_current_protocol": 125,
+    "final_targeted_worker_and_unit": 12,
+    "counts_overlap": true,
+    "mypy": "391 source files PASS",
+    "ruff": "PASS",
+    "cap_red": "1 fail/10 pass, DID NOT RAISE",
+    "cap_green": "13 pass: 11 source admission plus2 runtime recovery;24.96sec"
+  },
+  "offline_real_replay": "offline-real-replay.json; old60 tasks→53available, known5financial fragment claims removed24→19; original missing industry task still missing in old reply; inputgold3/3 remains.",
+  "test_contract_updates": [
+    "Unresolved numeric spans/quality/citation remain readable; factual generation support must defer. Old retrieval assertions preserved.",
+    "Current explicit v4 prompt frozen as4.1.0; historic v3 recovery test unchanged.",
+    "Restart scratch metric is committed paid-writer lower bound, derived from durable pins; first invocation may observe a larger transient peak. Zero POST/fee/pin equality assertions retained and lower-bound marker asserted."
+  ],
+  "failures_not_hidden": [
+    "One120s combined test runner included known~95s full clean-deploy loopback; it was not rerun. Only direct3 worker/recovery seams were selected afterwards.",
+    "Official JSON LOCATOR_REPLAY_FAILED exposed missing derived annotation registry; production fixed with shared schema, not fact-identity bypass.",
+    "Old scratch=0, then incorrect same-first-peak expectation, were corrected after reading actual storage owner. Source registry fixture initially inherited wrong text_sha256; corrected to real raw text hash."
+  ],
+  "not_done": [
+    "No new live model/PDF/full-source re-selection or fresh holdout.",
+    "Full clean-deploy integration was interrupted by outer batch bound; not claimed green or necessary to repeat now."
+  ],
+  "budget_caps_unchanged": true,
+  "configured_provider_unchanged": true,
+  "new_paid_calls_in_this_fix": 0,
+  "new_downloads": 0,
+  "cleanup": "cleanup.json covers10finished earlier roots; seams-proof restored; owned tests only, no raw production originals.",
+  "review_revision": "v2 after independent cap RED"
+}

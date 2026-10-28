@@ -1,0 +1,105 @@
+{
+  "schema_version": "c3-summary-quality-real/1",
+  "lifecycle_status": "PRE_RESERVATION_BLOCKED",
+  "content_status": "PARTIAL",
+  "scope": "same-source development regression; not fresh holdout or actual RF prediction adoption",
+  "sample": "c3-hk-kingsoft-h1-2025",
+  "model_post_attempts": 0,
+  "states": [
+    {
+      "run_id": "phaseC-090-d7c91950f2dc",
+      "exit": 2,
+      "artifact_ref": null,
+      "same_run_zero_POST": null,
+      "cross_run_zero_POST": null
+    }
+  ],
+  "seconds": 146.072,
+  "content_review": "evidence/summary-quality-20261028/real/content-report.json",
+  "mother_before": {
+    "charged_tokens": 1800368,
+    "charged_micro_usd": 727945,
+    "new_unknown_count": 6,
+    "token_limit": 10000000,
+    "micro_usd_limit": 20000000,
+    "prior_unknown7_retained": 7
+  },
+  "mother_after": {
+    "charged_tokens": 1800368,
+    "charged_micro_usd": 727945,
+    "new_unknown_count": 6,
+    "token_limit": 10000000,
+    "micro_usd_limit": 20000000,
+    "prior_unknown7_retained": 7
+  },
+  "new_charged_tokens": 0,
+  "new_charged_micro_usd": 0,
+  "protection": {
+    "protected_unchanged": true,
+    "sentinel_unchanged": true,
+    "temporary_lake_removed": true,
+    "all_prepared_protected_unchanged": true
+  },
+  "outer_temp_restored_absent": true,
+  "frozen_code_unchanged": true,
+  "model_settings": {
+    "model_id": "mimo-v2.6-flash",
+    "endpoint": "https://token-plan-cn.xiaomimimo.com/v1/chat/completions",
+    "api_key_env": "MIMO_API_KEY",
+    "max_output_tokens": 8192,
+    "temperature": 1.0,
+    "output_token_field": "max_completion_tokens",
+    "thinking": "disabled"
+  },
+  "evidence": [
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/summary-quality-20261028/real/overall.json.gz",
+      "bytes": 2092,
+      "sha256": "65e12816f7caa30be69d5e63ae10414fe92b24ce4d2acd84e751761dd5d993cf",
+      "original_sha256": "a021268175a6e50c1c5053b09a5201fd492bc1a145cd00b4703364882b8f9122"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/summary-quality-20261028/real/events.jsonl",
+      "bytes": 3163,
+      "sha256": "fcbca17e17a6c6cf68610b6af0f2bf3ff9661dc7e084b0d522a5c050ebfcfbe0",
+      "original_sha256": "fcbca17e17a6c6cf68610b6af0f2bf3ff9661dc7e084b0d522a5c050ebfcfbe0"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/summary-quality-20261028/real/harness-fingerprint.json",
+      "bytes": 1158,
+      "sha256": "25332db9d4e3042989e7c7ec16091e073272fdeacaf595e749ab7bed2ed31e8a",
+      "original_sha256": "25332db9d4e3042989e7c7ec16091e073272fdeacaf595e749ab7bed2ed31e8a"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/summary-quality-20261028/real/execution.json",
+      "bytes": 7608,
+      "sha256": "4825b2ac7ccd878b4bf9978ef7acc137145f86ad6602fc68021bee8b22c73e0b",
+      "original_sha256": "4825b2ac7ccd878b4bf9978ef7acc137145f86ad6602fc68021bee8b22c73e0b"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/summary-quality-20261028/real/content-report.md",
+      "bytes": 3689,
+      "sha256": "91613fcfec1a115960e1e024c78ea1eaf63ee82dc930aadd7ca4c0ea5fa96c59",
+      "original_sha256": "91613fcfec1a115960e1e024c78ea1eaf63ee82dc930aadd7ca4c0ea5fa96c59"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/summary-quality-20261028/real/content-report.json",
+      "bytes": 8686,
+      "sha256": "52d1be2c7b39cde07ca52b1027ed1cd143c9a2b516770e14bbb6a12f3e69e0a0",
+      "original_sha256": "52d1be2c7b39cde07ca52b1027ed1cd143c9a2b516770e14bbb6a12f3e69e0a0"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/summary-quality-20261028/real/phaseC-090-d7c91950f2dc.native-usage.json",
+      "bytes": 4,
+      "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f",
+      "original_sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/summary-quality-20261028/real/phaseC-090-d7c91950f2dc.input.json.gz",
+      "bytes": 16115,
+      "sha256": "2568533c02259bc5ab5cbccb51ea215a1c59a4aa7f66a2de084d1c3f2a2c9963",
+      "original_sha256": "2568533c02259bc5ab5cbccb51ea215a1c59a4aa7f66a2de084d1c3f2a2c9963"
+    }
+  ],
+  "evidence_bytes": 42515
+}

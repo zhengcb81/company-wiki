@@ -1,0 +1,17 @@
+{
+  "status": "CHANGES_REQUESTED",
+  "source_binding": "final-scope-before.json: all 18 files matched A/B handoff-v2 immediately before this recheck",
+  "tests": {"total": 39, "passed": 38, "failed": 1, "seconds": 3.96},
+  "closed_semantically": ["SQ-IR-01 explicit source subject", "SQ-IR-02 decoder per-task hard cap"],
+  "open": [{
+    "id": "SQ-IR-03",
+    "priority": "P2",
+    "owner": "narrative_business_policy._source_metric_relations, newly used by source_result_subject",
+    "root_cause": "Every metric calls observe_metric_predicate on the whole long assertion; new subject-binding call inherits quadratic regex work under a linear per-character reservation.",
+    "test": "test_independent_quality.py::test_result_subject_metric_work_is_linear",
+    "counts": [{"metrics":16,"chars":655,"regex_input_chars":97159},{"metrics":32,"chars":1279,"regex_input_chars":353415},{"metrics":64,"chars":2527,"regex_input_chars":1345159}],
+    "evidence": ["recheck-v2.log", "recheck-v2.xml", "subject-scan-red-v2.json"],
+    "expected": "Use one shared PreparedPredicateContext in the shared metric owner and reuse bounded observations; preserve True result and real source binding. Do not raise the work constant/cap or truncate input."
+  }],
+  "cleanup": {"review_temp": ".qir28", "absent": true, "product_edits": 0, "existing_test_edits": 0, "model_calls": 0, "pdf": 0}
+}

@@ -1,0 +1,118 @@
+{
+  "schema_version": "c3-source-summary-admission-handoff/1",
+  "date": "2026-10-28",
+  "status": "READY_FOR_ROOT_INTEGRATION_AND_INDEPENDENT_REVIEW",
+  "author": "/root/c3_summary_root_design",
+  "files": [
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_policy.py",
+      "sha256": "3dad5aa1e01d2c8d7391c2044e08d56e8b57ad2b898bcbe8015c40f7f1b0c3d5",
+      "lf_sha256": "c17edae9fd28f863093ff1055ff74ef2e3cb59ea3e33d915138b1a55c9e22929",
+      "bytes": 53468,
+      "head_lf_sha256": "6b77dc6193e2084674d6bda44599729bb48c5cbc446e8b54f03bfd1a967e122a"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_disclosures.py",
+      "sha256": "1cc37cf73c2a3bf84d9cc352cfe7a18a5bc27c68dd6c3206bac254b6b5bc01fc",
+      "lf_sha256": "3818577d5249f2d517ae26eb5c2877cf1bf375858ed19559ebfd43f091360351",
+      "bytes": 29077,
+      "head_lf_sha256": "50a47298627bc00d66af2e8e60ce86cdeb0fc5b8b5293efe2ea8d22081b5fbe4"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+      "sha256": "29b8ab1837413f4147b472d882b556a1f2b2c91bb342d49a9d9511f521cd7d94",
+      "lf_sha256": "8eb2d6bfa6754d4cf161bba8198dccd7f0f002b9b4e2017f00fc9a6d1633e81f",
+      "bytes": 40460,
+      "head_lf_sha256": "aea4208f9922527b44a55efa89f3d8b6008ea381445342e83213521638b24fea"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_reading.py",
+      "sha256": "81e0efdf0c36569de06d2f716d2f9a2417e3cc747025de6c71a2584a29a12baf",
+      "lf_sha256": "51ecc1ca4ba55f170786af2d7aea28ee5dfe05cf9f0d2711d8f617ef16cd74b9",
+      "bytes": 93694,
+      "head_lf_sha256": "833b7e04366cd9ae8398232370302a2e6f7f9ff2a4a6021e8b3333fc8e145a2f"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_summary_source_admission.py",
+      "sha256": "f8d3e429b24a99b072d482bafdb29732f59b08c1e542f0ee354f2a35cfcd8905",
+      "lf_sha256": "f8d3e429b24a99b072d482bafdb29732f59b08c1e542f0ee354f2a35cfcd8905",
+      "bytes": 9611,
+      "head_lf_sha256": null
+    }
+  ],
+  "initial_red": {
+    "total": 34,
+    "failed": 26,
+    "errors": 0,
+    "skipped": 0
+  },
+  "final": {
+    "total": 661,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "new_cases_final": 43,
+  "final_receipt": {
+    "exit_code": 0,
+    "seconds": 19.008,
+    "targets": [
+      "tests/unit/document_understanding_selection/test_summary_source_admission.py",
+      "tests/unit/document_understanding_selection/test_reading_material_value.py",
+      "tests/unit/document_understanding_selection/test_reading_operating_resources.py",
+      "tests/unit/document_understanding_selection/test_reading_predicate_state_owner.py",
+      "tests/unit/document_understanding_selection/test_reading_source_purpose_boundaries.py",
+      "tests/unit/document_understanding_selection/test_reading_table_admission.py",
+      "tests/unit/document_understanding_selection/test_reading_native_dependency_closure.py",
+      "tests/unit/document_understanding_selection/test_reading_local_qualification.py",
+      "tests/unit/document_understanding_selection/test_reading_named_portfolio_drivers.py",
+      "tests/unit/document_understanding_selection/test_reading_predicate_generalization.py",
+      "tests/unit/document_understanding_selection/test_reading_source_boundaries.py",
+      "tests/unit/document_understanding_selection/test_reading_semantic_value.py",
+      "tests/unit/document_understanding_selection/test_prepared_predicate_context.py"
+    ],
+    "owned_temp_absent": true
+  },
+  "static": {
+    "ruff": "All checks passed!",
+    "mypy": "Success: no issues found in 4 source files",
+    "diff_check": "PASS"
+  },
+  "version_change": {
+    "reading_business_policy": "20 -> 21",
+    "fixed_scan_reservation_per_character": "base 6 -> 14; existing shared scan allowances unchanged",
+    "work_budget_cap_changed": false
+  },
+  "interfaces": {
+    "new_quality_flags": [],
+    "existing_table_quality_flag": "table_structure_ambiguous",
+    "causal_reference_optional_fields": [
+      "reference_kind=causal_result",
+      "support_original_unit_ids"
+    ],
+    "unresolved": "existing REFERENCE_UNRESOLVED deferred receipt",
+    "source_purpose_export": "ROOT requested to project existing reading metadata fact_purpose through narrative_finalize; no A edit"
+  },
+  "compatibility": {
+    "explicit_legacy_06_07": "unchanged",
+    "reading_08_shared_text_detector": "qualitative bound operating actions may now supply operating_causal_driver; version21 changed deliberately",
+    "production_09": "unknown-only retains description without financial exemption; source-normalized routine-financial filter; result-reference support/defer"
+  },
+  "intermediate_results": {
+    "first_green": "33 passed / 1 genuine AI business-cause value failure, fixed with shared bounded cause/action recognition",
+    "related": "359 passed / 1 independent factory-event finance false exclusion, fixed preserving source purpose operating",
+    "package_green": "36 passed / 2 control enum assertions used not_required instead of existing not_applicable; corrected test enum",
+    "expanded_cross_owner": "632 passed / 4 model-presentation old expectations failed after concurrent B ambiguity filtering; source span/citation assertions passed, ROOT informed"
+  },
+  "limitations": [
+    "No paid model/PDF/source replay or holdout performed",
+    "Real request/final/bundle source disposition and formal summary still require ROOT replay",
+    "Complex result anaphora defer conservatively; unique closure only one observed directional predicate in the proven adjacent predecessor",
+    "Independent review not performed by author"
+  ],
+  "new_model_calls": 0,
+  "downloads": 0,
+  "production_config_or_original_writes": false,
+  "owned_temp_absent": true,
+  "committed": false
+}

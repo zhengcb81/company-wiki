@@ -1,4 +1,4 @@
-"""Untyped source value cells keep honest numeric quality through public views.
+"""Untyped values stay retrievable, while unresolved rows defer prose generation.
 
 All sources are synthetic in-memory observations. No parser, original file,
 network, provider, model, production configuration or catalog is used.
@@ -99,7 +99,7 @@ def _select(parsed):
     return selected
 
 
-def _assert_quality_reaches_citation_and_model(selected, spans):
+def _assert_quality_retained_and_generation_deferred(selected, spans):
     assert spans, "Business text remains readable; its unbound numbers stay unknown."
     assert all(FLAG in span.quality_flags for span in spans)
     assert any(FLAG in text for text in selected.reading_context["constraints"])
@@ -107,17 +107,24 @@ def _assert_quality_reaches_citation_and_model(selected, spans):
     assert any(ids.intersection(view["support_evidence_ids"])
                for group in selected.reading_context["groups"]
                for view in group["citation_views"])
-    model = narrative_model_scoped.compile_scoped_model_view(
+    view = narrative_model_scoped.compile_scoped_model_view(
         SimpleNamespace(evidence_spans=selected.evidence_spans,
                         reading_context=selected.reading_context), max_claims=20,
-    ).to_model_dict()
+    )
+    model = view.to_model_dict()
     assert model["schema_version"] == "source-scoped-model-view/1"
+    assert not any(ids.intersection(task.support_ids) for task in view.model_tasks)
+    admission = view.to_binding()["source_admission"]
+    assert all(admission[task.key]["reason"] == "source_table_unresolved"
+               for task in view.plan.tasks if ids.intersection(task.support_ids))
     parts = model["shared_fragments"] + [part for task in model["tasks"]
                                           for part in task["parts"] if "text" in part]
     texts = {span.raw_text for span in spans}
     actual = [part for part in parts if part["text"] in texts]
-    assert actual and all(FLAG in part.get("quality_flags", model["fragment_defaults"]["quality_flags"])
-                          for part in actual)
+    # A retained context-only fragment still carries its uncertainty. It cannot
+    # become factual support merely because another task can reference it.
+    assert all(FLAG in part.get("quality_flags", model["fragment_defaults"]["quality_flags"])
+               for part in actual)
 
 
 def _native_bound_document():
@@ -185,7 +192,7 @@ def test_public_untyped_numeric_row_keeps_unknown_attribution_in_all_views(label
     assert _snapshot(parsed) == before
     assert all(span.source_id == parsed.source_id and span.coordinates == parsed.units[-1].coordinates
                for span in spans)
-    _assert_quality_reaches_citation_and_model(selected, spans)
+    _assert_quality_retained_and_generation_deferred(selected, spans)
 
 
 @pytest.mark.parametrize("label,text,heading", PROSE_CONTROLS, ids=[case[0] for case in PROSE_CONTROLS])
@@ -223,7 +230,7 @@ def test_exact_native_carrier_does_not_erase_ambiguous_original_numeric_cells():
         unit.unit_id for unit in parsed.units
     }
     assert _snapshot(parsed) == before
-    _assert_quality_reaches_citation_and_model(selected, carriers)
+    _assert_quality_retained_and_generation_deferred(selected, carriers)
 
 
 def test_one_parent_unknown_quality_cannot_contaminate_another_parent_prose():
@@ -245,4 +252,4 @@ def test_one_parent_unknown_quality_cannot_contaminate_another_parent_prose():
     by_id = {span.span_id: span for span in selected.evidence_spans}
     for group in selected.reading_context["groups"]:
         assert len({by_id[sid].source_id for sid in group["evidence_ids"]}) == 1
-    _assert_quality_reaches_citation_and_model(selected, first_spans)
+    _assert_quality_retained_and_generation_deferred(selected, first_spans)

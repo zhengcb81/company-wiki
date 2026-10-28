@@ -1,7 +1,7 @@
 {
   "schema_version": "c3-content-engineering-acceptance/1",
   "date": "2026-10-28",
-  "status": "ENGINEERING_ACCEPTED_PUBLICATION_PENDING_REAL_CONTENT_OPEN",
+  "status": "ENGINEERING_PUBLISHED_EXACT_CI_SUCCESS_REAL_LIFECYCLE_PASS_CONTENT_FAIL",
   "source_lf_sha256": {
     "src/company_wiki/source_catalog/narrative_operating_resources.py": "f2ebc6236524f8a6df0b7a0049c14555af71474d4a29bbc88e5641519641ae44",
     "src/company_wiki/source_catalog/narrative_predicate_state.py": "38f8c3440f45e526fc493586112d4f8b11dbd99e8d7d0835f45e42b1e6d8c43d",
@@ -205,5 +205,23 @@
       "sha256": "bdd0b877935b2038718b82fb729d815304b9d902a46e61b4bac78931c3fb23d1"
     }
   ],
-  "next": "Normal commit/push and exact CI; then one configured formal HK attempt per FORMAL_NEXT.md; real summary/cache/FF-RF and fresh holdouts remain OPEN."
+  "next": "Normal commit/push and exact CI; then one configured formal HK attempt per FORMAL_NEXT.md; real summary/cache/FF-RF and fresh holdouts remain OPEN.",
+  "code_commit": "0da0ca6c1894f4a73f8f86ca75e33baed288de92",
+  "pushed": true,
+  "normal_precommit": "PASS",
+  "normal_prepush": {
+    "passed": 158,
+    "seconds": 33.56
+  },
+  "exact_ci": {
+    "id": 40647344290,
+    "head_sha": "0da0ca6c1894f4a73f8f86ca75e33baed288de92",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40647344290",
+    "updated_at": "2026-10-28T07:06:13Z"
+  },
+  "formal_attempt": ".planning/c3-20261028/hk-formal-v2",
+  "formal_status": "FINISHED_LIFECYCLE_PASS_CONTENT_FAIL_2_OF_3",
+  "formal_result": "FORMAL_HK_RESULT.json"
 }

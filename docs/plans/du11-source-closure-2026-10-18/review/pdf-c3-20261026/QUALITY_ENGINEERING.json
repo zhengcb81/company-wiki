@@ -1,0 +1,362 @@
+{
+  "schema_version": "c3-summary-quality-engineering/1",
+  "status": "INDEPENDENT_PASS_REAL_REVALIDATION_PENDING",
+  "base_commit": "0da0ca6c1894f4a73f8f86ca75e33baed288de92",
+  "source_files": [
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_policy.py",
+      "lf_sha256": "d24a613cea555ee2faa1f995b552632d343c320b8654a592fdd18aca73724757",
+      "sha256": "612910da5f86ebc314488d56c1c6ffa01aadea16f93a1eabd6ac5b1e557574ff",
+      "bytes": 56917,
+      "handoff": "source-quality/handoff-v3.json"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_disclosures.py",
+      "lf_sha256": "3818577d5249f2d517ae26eb5c2877cf1bf375858ed19559ebfd43f091360351",
+      "sha256": "1cc37cf73c2a3bf84d9cc352cfe7a18a5bc27c68dd6c3206bac254b6b5bc01fc",
+      "bytes": 29077,
+      "handoff": "source-quality/handoff-v3.json"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+      "lf_sha256": "977b0fc2d9c47143f20c70d0899f85167b06eec5b10ea237af2dfca192435b8e",
+      "sha256": "a38b66d8bbc97c7d1cd1c1b07cad7de4aa84271e23b1362c403622a68c96a745",
+      "bytes": 40411,
+      "handoff": "source-quality/handoff-v3.json"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_reading.py",
+      "lf_sha256": "51ecc1ca4ba55f170786af2d7aea28ee5dfe05cf9f0d2711d8f617ef16cd74b9",
+      "sha256": "81e0efdf0c36569de06d2f716d2f9a2417e3cc747025de6c71a2584a29a12baf",
+      "bytes": 93694,
+      "handoff": "source-quality/handoff-v3.json"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_summary_source_admission.py",
+      "lf_sha256": "fac00ed764f9deaab88c4550476cf8ff20915a2e4e85124c858ce082ac603f6a",
+      "sha256": "fac00ed764f9deaab88c4550476cf8ff20915a2e4e85124c858ce082ac603f6a",
+      "bytes": 10515,
+      "handoff": "source-quality/handoff-v3.json"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_summary_source_metric_work.py",
+      "lf_sha256": "94024a8394d00bc921bed13780ffedc1805a53122930f7ec0127ab1147faec33",
+      "sha256": "94024a8394d00bc921bed13780ffedc1805a53122930f7ec0127ab1147faec33",
+      "bytes": 1917,
+      "handoff": "source-quality/handoff-v3.json"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/source_cards.py",
+      "lf_sha256": "e769d288d6fc20735319db027fe21a03e6b121a6144bcded9c22bab324d1ba29",
+      "sha256": "6caf06f2585323f412c035605a4d31fe4a7a5753b76c7420b473ae3dc7f67a75",
+      "bytes": 4237,
+      "handoff": "scoped-quality/handoff-v2.json"
+    },
+    {
+      "path": "src/company_wiki/automation/narrative_model_scoped.py",
+      "lf_sha256": "01f17b424ed4230aacca5f61a2cfc5c05dd542307f9c89ba96ee0e91a7fc09b9",
+      "sha256": "f4c9deddd92b35a01fe077125f657e887b23913e043e732112529ee5da7e7644",
+      "bytes": 25067,
+      "handoff": "scoped-quality/handoff-v2.json"
+    },
+    {
+      "path": "src/company_wiki/automation/narrative_model_extractive.py",
+      "lf_sha256": "de68b05034bf9517bfafcfb7b2ee680db6cf92f97aa585e45e11dc38380bf177",
+      "sha256": "23467992117fa8b44e1689ab212c7288ea1d1c214a242055ac71a769dc7f66ed",
+      "bytes": 18060,
+      "handoff": "scoped-quality/handoff-v2.json"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_finalize.py",
+      "lf_sha256": "00f9b88d6661b5a164ef0f434f454d2270f2b84dafa01419acf04d9a1ef4c07f",
+      "sha256": "e424ee11f7228e65e8f3171817e722f79a3cc23bdf18df082af8d218ed1bcb24",
+      "bytes": 12006,
+      "handoff": "scoped-quality/handoff-v2.json"
+    },
+    {
+      "path": "src/company_wiki/automation/narrative_replay.py",
+      "lf_sha256": "7d0f8f6de962713d955a8afdbc8be1b9990a1e443aa5b06be1aa7449bbc0f222",
+      "sha256": "7cb00b409d6be38af3fee051e1d5d86f43e4f1289e5b99528e8cafc4fca8246e",
+      "bytes": 10154,
+      "handoff": "scoped-quality/handoff-v2.json"
+    },
+    {
+      "path": "src/company_wiki/source_contract/selection_annotations.py",
+      "lf_sha256": "bb242e46cf636fa91b1e6448614d98a788523f88ed9a85cbb7021bf54dd8a444",
+      "sha256": "bb242e46cf636fa91b1e6448614d98a788523f88ed9a85cbb7021bf54dd8a444",
+      "bytes": 706,
+      "handoff": "scoped-quality/handoff-v2.json"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/decision_inventory.py",
+      "lf_sha256": "d3562d70470e6cd50f1e638e63e817199e3acedd67cbed3f59a34137ea8344ff",
+      "sha256": "cf87f9171e4ba764a2e54894d2785780905eb75a953c3289f36eb4eaacc7a7cb",
+      "bytes": 28243,
+      "handoff": "scoped-quality/handoff-v2.json"
+    },
+    {
+      "path": "tools/document_understanding_benchmark/phase_c_observer.py",
+      "lf_sha256": "4d7da3911ae502944c273f3f3e7b8c62f5675aa9d92a9730ed3efeb9c7a4e525",
+      "sha256": "98ed49ee50a27a97271a0bd096d82d3d4cf836944f3faf4b51663c75a5dd5515",
+      "bytes": 23906,
+      "handoff": "scoped-quality/handoff-v2.json"
+    },
+    {
+      "path": "tests/unit/test_scoped_source_admission.py",
+      "lf_sha256": "93735de0411c7c554063ed165ea0ef6508c0793dd12a5cdd523a9fe3cc9d2080",
+      "sha256": "93735de0411c7c554063ed165ea0ef6508c0793dd12a5cdd523a9fe3cc9d2080",
+      "bytes": 9355,
+      "handoff": "scoped-quality/handoff-v2.json"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_untyped_numeric_quality.py",
+      "lf_sha256": "11f0b5d768bcfebf690a8bafaebc640511e42545ae945cedaabb4683dd79fba5",
+      "sha256": "5eda9da97e9e48d2bc331c39f8901c0434e15425d901a6e17ef5a96c209bf0f9",
+      "bytes": 13063,
+      "handoff": "scoped-quality/handoff-v2.json"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_untyped_numeric_prose_controls.py",
+      "lf_sha256": "40f99cadadde7ebac7e5868e8c51e5120502fa0100049c49563a1d98f3816a84",
+      "sha256": "c547c37ffd8b4984d0337e2c71e35c4e480c82cef054edb0b3a5e2e672891f92",
+      "bytes": 5352,
+      "handoff": "scoped-quality/handoff-v2.json"
+    },
+    {
+      "path": "tests/unit/test_narrative_scoped_runtime_recovery.py",
+      "lf_sha256": "9413ef69e40e8330a47be70d80b69244d4113f6aa27ab358eeee9997c1f68971",
+      "sha256": "2121ef2a112a84e09bd7d5b4ca5b589886ded9c149ebcbaffee0c41345bde133",
+      "bytes": 8655,
+      "handoff": "scoped-quality/handoff-v2.json"
+    },
+    {
+      "path": "tests/integration/test_shared_scoped_public_request.py",
+      "lf_sha256": "b56c880f6037dd113e4b2f5852a3c76a82c2b434f1f08a2c7b07301ce0d0ed8a",
+      "sha256": "76988b19ae23e698f0320c7f138edcc444463989741518ffcd30f29a5b9cc0d9",
+      "bytes": 16720,
+      "handoff": "scoped-quality/handoff-v2.json"
+    }
+  ],
+  "independent_review": "evidence/summary-quality-20261028/engineering/quality-review__final.json",
+  "root_causes_closed": [
+    "unresolved relations promoted to meaningful business facts",
+    "known ambiguous financial tables admitted to factual generation",
+    "source-owned reading priority/purpose hidden from model; exact-target padding",
+    "unbound causal subject certified by nonempty prefix",
+    "per-task2 cap not enforced by decoder",
+    "shared metric full-text predicate scanning repeated per metric",
+    "new source-derived annotation absent from original identity replay registry"
+  ],
+  "tests": {
+    "source_final": "308 passed, includes neutral quantity/direction and5 existing metric compatibility files",
+    "independent_final": "51 passed/4.95sec; final source hashes stable",
+    "scoped_cap_and_actual_runtime_recovery": "13 passed/24.96sec",
+    "actual_raw_and_official_json_public_worker_seams": "12 passed/42.47sec before cap3line addition; retained as prior seam evidence",
+    "mypy": "391 source files PASS",
+    "counts_overlap_not_sum": true
+  },
+  "offline_negative_control": "old60 tasks→53 available, old24 claims→19;5 unbound financial fragments removed; old critical omission still FAIL",
+  "limits_unchanged": {
+    "work": 16000000,
+    "input_chars": 48000,
+    "model_output_tokens": 8192,
+    "claims": 40,
+    "per_task": 2
+  },
+  "real_content_status": "NOT_REVALIDATED_YET; old2/3 FAIL retained",
+  "new_paid_calls_in_engineering": 0,
+  "not_completed": [
+    "new real content/recovery acceptance",
+    "fresh holdouts",
+    "actual RF prediction consumption and company loop"
+  ],
+  "evidence": [
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/summary-quality-20261028/engineering/source-quality__handoff-v3.md",
+      "bytes": 2525,
+      "sha256": "a0bb10a95595678c91fdaaec7d2cad9fcc0948f7710c784f57f2e61b96f5e591",
+      "original_sha256": "a0bb10a95595678c91fdaaec7d2cad9fcc0948f7710c784f57f2e61b96f5e591"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/summary-quality-20261028/engineering/source-quality__handoff-v3.json",
+      "bytes": 6190,
+      "sha256": "a90a513348805c6eeb67aeb1449dbc9de0ee47078a5a438536ff5b94bbd55478",
+      "original_sha256": "a90a513348805c6eeb67aeb1449dbc9de0ee47078a5a438536ff5b94bbd55478"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/summary-quality-20261028/engineering/source-quality__handoff-v2.json",
+      "bytes": 4822,
+      "sha256": "1406def060d34d69869b597f4e83886edd5cd6dd3d0745fadbdfdc0b31eddd68",
+      "original_sha256": "1406def060d34d69869b597f4e83886edd5cd6dd3d0745fadbdfdc0b31eddd68"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/summary-quality-20261028/engineering/source-quality__handoff.json",
+      "bytes": 5930,
+      "sha256": "818c77bed63529b2520d4c3f1f8ef7d510ec9120342c60aa48958f793a2f08a8",
+      "original_sha256": "818c77bed63529b2520d4c3f1f8ef7d510ec9120342c60aa48958f793a2f08a8"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/summary-quality-20261028/engineering/source-quality__red.log.gz",
+      "bytes": 2789,
+      "sha256": "8ede9aa367bed4305bf795c5750e42f59c0aafa59e5116586434442037a8a301",
+      "original_sha256": "fc169705608502fe5e2d69d7eaa37c8232c5223bd8407c5b0f570d800e3d3dfa"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/summary-quality-20261028/engineering/source-quality__review-red.log.gz",
+      "bytes": 1011,
+      "sha256": "7840f518bb5f0531f598e5552648a3cb65bdb9a195f3db9bebd127d9a074cacd",
+      "original_sha256": "ee757c15b130663dd7bc0ab245c8e93cbc609742826cf57b5f1ff7342aba4207"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/summary-quality-20261028/engineering/source-quality__metric-review-red.log.gz",
+      "bytes": 847,
+      "sha256": "3f86bccf2b405c95e914580ed7b7dd304709067ed4f6b74b77f3f5f80b56435d",
+      "original_sha256": "1bcb74e134edead0937c2a389b5e6ac6f86676ff325e404f23ff777fc1ffa76c"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/summary-quality-20261028/engineering/source-quality__metric-green.log.gz",
+      "bytes": 919,
+      "sha256": "e4bb44fc6e8cf00784397480e89bbdda0acbb9ce3de8e02d28562bfb344a4d37",
+      "original_sha256": "685195f5e91babf2730e157b60b9e48c6365b4c9eef7ebbe0e3a7c015cc54e43"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/summary-quality-20261028/engineering/source-quality__metric-green.json",
+      "bytes": 923,
+      "sha256": "25ab1b73456f9e6db5b559290aea2fcd915057628a1fff5f5e0fd8932d03b6c8",
+      "original_sha256": "25ab1b73456f9e6db5b559290aea2fcd915057628a1fff5f5e0fd8932d03b6c8"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/summary-quality-20261028/engineering/scoped-quality__handoff-v2.md",
+      "bytes": 2229,
+      "sha256": "c6c6fe92ab564f64e7b00940a678708efdc21a0848ddb46154f483273af96d97",
+      "original_sha256": "c6c6fe92ab564f64e7b00940a678708efdc21a0848ddb46154f483273af96d97"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/summary-quality-20261028/engineering/scoped-quality__handoff-v2.json",
+      "bytes": 5578,
+      "sha256": "4552d72657ec6222b04a3fd3cbe17fb1518548b0d95ae4e270436f32e20ddc42",
+      "original_sha256": "4552d72657ec6222b04a3fd3cbe17fb1518548b0d95ae4e270436f32e20ddc42"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/summary-quality-20261028/engineering/scoped-quality__red2.log.gz",
+      "bytes": 2038,
+      "sha256": "4b410ea5e0ccf38d7298c6c66dcfdb1b6a0d48e5b520c6f5306a3fffea4b3b6b",
+      "original_sha256": "fa73dab72b474d21ab3612b9f9cb09192443a0c3f9dcc1221f28a8a2eeecf2c2"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/summary-quality-20261028/engineering/scoped-quality__focus1.json",
+      "bytes": 816,
+      "sha256": "02f28316503237e71502a5541ef9fa420ab63087a779056c335e38ad685e2385",
+      "original_sha256": "02f28316503237e71502a5541ef9fa420ab63087a779056c335e38ad685e2385"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/summary-quality-20261028/engineering/scoped-quality__seams-proof.json",
+      "bytes": 555,
+      "sha256": "451d18fd622a9f3826b6839776c002082d1e51d9838cec4362d67d046345437f",
+      "original_sha256": "451d18fd622a9f3826b6839776c002082d1e51d9838cec4362d67d046345437f"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/summary-quality-20261028/engineering/scoped-quality__seams-proof.log.gz",
+      "bytes": 708,
+      "sha256": "04516019db089a0d2df363ae0a26c72efc666fa1bd2fc8b15a4bc821cbb8109b",
+      "original_sha256": "6310d5e84fb4d0bfbc7338dfa7839c641677e3906e74de86da8d3988c0087de3"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/summary-quality-20261028/engineering/scoped-quality__cap-red.log.gz",
+      "bytes": 862,
+      "sha256": "fcdbdcce37d57e85587d5c1340266911fd7ed52b138da54bbf1b7d4ff932e59c",
+      "original_sha256": "c7a53074980645d94967843bcacc72e6fbb66d59f81e504898e3818abe72d395"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/summary-quality-20261028/engineering/scoped-quality__cap-green.json",
+      "bytes": 296,
+      "sha256": "33a4f24eff1fdfe318a3cb8b0b651084329b4adaa98f16139893b8a0e165ef92",
+      "original_sha256": "33a4f24eff1fdfe318a3cb8b0b651084329b4adaa98f16139893b8a0e165ef92"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/summary-quality-20261028/engineering/scoped-quality__cap-green.log.gz",
+      "bytes": 705,
+      "sha256": "353941672da4f4001086baf52c5e0a999c465a8ca15e049e1d9841ae5087f02b",
+      "original_sha256": "35dff04e976efd6e072554ddd5b4c1e2bc855ed21e8e2b9792332ab7f0bdb948"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/summary-quality-20261028/engineering/scoped-quality__cleanup.json",
+      "bytes": 1349,
+      "sha256": "13a52d0122f8f17e6d1342c70f038056aa0e273ba59030f7150a11ce80aacfc7",
+      "original_sha256": "13a52d0122f8f17e6d1342c70f038056aa0e273ba59030f7150a11ce80aacfc7"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/summary-quality-20261028/engineering/scoped-quality__cap-cleanup.json",
+      "bytes": 279,
+      "sha256": "272b6beebd5687cd2938110442d4935f0188b4f6e5b101bf3d9ad511afa627f2",
+      "original_sha256": "272b6beebd5687cd2938110442d4935f0188b4f6e5b101bf3d9ad511afa627f2"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/summary-quality-20261028/engineering/scoped-quality__offline-real-replay.json",
+      "bytes": 3543,
+      "sha256": "c396abfe537198b4248459e07ec594e9bfdc305e1ec51cd412237bae2dd7718f",
+      "original_sha256": "c396abfe537198b4248459e07ec594e9bfdc305e1ec51cd412237bae2dd7718f"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/summary-quality-20261028/engineering/quality-review__intermediate.md",
+      "bytes": 5726,
+      "sha256": "971a576f4339e2e2922258372746bccc104a8c1a64f874c41d04444e9166b535",
+      "original_sha256": "971a576f4339e2e2922258372746bccc104a8c1a64f874c41d04444e9166b535"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/summary-quality-20261028/engineering/quality-review__intermediate.json",
+      "bytes": 17389,
+      "sha256": "f157215ddae2a511c34636fbd97c4d3f9a8cd3c74b8748a4e3bc277fb4aeca98",
+      "original_sha256": "f157215ddae2a511c34636fbd97c4d3f9a8cd3c74b8748a4e3bc277fb4aeca98"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/summary-quality-20261028/engineering/quality-review__recheck-v2-status.json",
+      "bytes": 1377,
+      "sha256": "7895b0856bf19e6105c30efbfe42677710b23df477bf8bd96d53f111b95445f5",
+      "original_sha256": "7895b0856bf19e6105c30efbfe42677710b23df477bf8bd96d53f111b95445f5"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/summary-quality-20261028/engineering/quality-review__subject-scan-red-v2.json",
+      "bytes": 5595,
+      "sha256": "63b3f4e4983632da9b06ccd36af03c8760c2abf1db2c9c8a03fbcf2091e3d518",
+      "original_sha256": "63b3f4e4983632da9b06ccd36af03c8760c2abf1db2c9c8a03fbcf2091e3d518"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/summary-quality-20261028/engineering/quality-review__final.md",
+      "bytes": 6977,
+      "sha256": "06d3fc38b3c87c020980a9a1defbd539ccfa470b02ea7ebc08a4c43a3dfa8c22",
+      "original_sha256": "06d3fc38b3c87c020980a9a1defbd539ccfa470b02ea7ebc08a4c43a3dfa8c22"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/summary-quality-20261028/engineering/quality-review__final.json",
+      "bytes": 28450,
+      "sha256": "31f455dd5aaa277d0e1832c2cd6427b4eb2a5161836138a458fa388988558c83",
+      "original_sha256": "31f455dd5aaa277d0e1832c2cd6427b4eb2a5161836138a458fa388988558c83"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/summary-quality-20261028/engineering/quality-review__recheck-v3.log.gz",
+      "bytes": 775,
+      "sha256": "88f0717f0feaf43ceeaed74543c9ae7544f953d0f19bd9d0a0ade62dd8cef918",
+      "original_sha256": "3d0a649e9e2662a2b8142e0f2b2e508fed0c02bccf395a81166bf4e305dd1a7a"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/summary-quality-20261028/engineering/quality-review__recheck-v3.xml.gz",
+      "bytes": 2099,
+      "sha256": "ba23e847aaa1ae1d38235f96f3674e7bac455edc423594a8a668bb08257da4af",
+      "original_sha256": "0c19ccb2e806845711ad7b8f43982486739d6e68542a21354d5ad57704e86e6f"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/summary-quality-20261028/engineering/quality-review__test_independent_quality.py.txt",
+      "bytes": 7663,
+      "sha256": "09d2d55393cf27de79ecb135f922f5be120b58eeed0efd5ea9b2734fcfe82664",
+      "original_sha256": "09d2d55393cf27de79ecb135f922f5be120b58eeed0efd5ea9b2734fcfe82664"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/summary-quality-20261028/engineering/quality-mypy-accepted-source.log.gz",
+      "bytes": 66,
+      "sha256": "619ed2ab6ff1d6b6176ceaf93077e71ab7e2f0ade3bf41f9098a371073028644",
+      "original_sha256": "3d652330ecef81fb7e5d967011e8eec8873f9e87d3849589af2d6259cfd2c6ee"
+    }
+  ],
+  "evidence_bytes": 121031
+}

@@ -1,0 +1,165 @@
+{
+  "base_head": "0da0ca6c1894f4a73f8f86ca75e33baed288de92",
+  "frozen_files": [
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_policy.py",
+      "lf_sha256": "d24a613cea555ee2faa1f995b552632d343c320b8654a592fdd18aca73724757",
+      "sha256": "612910da5f86ebc314488d56c1c6ffa01aadea16f93a1eabd6ac5b1e557574ff",
+      "bytes": 56917,
+      "handoff": "source-quality/handoff-v3.json"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_disclosures.py",
+      "lf_sha256": "3818577d5249f2d517ae26eb5c2877cf1bf375858ed19559ebfd43f091360351",
+      "sha256": "1cc37cf73c2a3bf84d9cc352cfe7a18a5bc27c68dd6c3206bac254b6b5bc01fc",
+      "bytes": 29077,
+      "handoff": "source-quality/handoff-v3.json"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+      "lf_sha256": "977b0fc2d9c47143f20c70d0899f85167b06eec5b10ea237af2dfca192435b8e",
+      "sha256": "a38b66d8bbc97c7d1cd1c1b07cad7de4aa84271e23b1362c403622a68c96a745",
+      "bytes": 40411,
+      "handoff": "source-quality/handoff-v3.json"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_reading.py",
+      "lf_sha256": "51ecc1ca4ba55f170786af2d7aea28ee5dfe05cf9f0d2711d8f617ef16cd74b9",
+      "sha256": "81e0efdf0c36569de06d2f716d2f9a2417e3cc747025de6c71a2584a29a12baf",
+      "bytes": 93694,
+      "handoff": "source-quality/handoff-v3.json"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_summary_source_admission.py",
+      "lf_sha256": "fac00ed764f9deaab88c4550476cf8ff20915a2e4e85124c858ce082ac603f6a",
+      "sha256": "fac00ed764f9deaab88c4550476cf8ff20915a2e4e85124c858ce082ac603f6a",
+      "bytes": 10515,
+      "handoff": "source-quality/handoff-v3.json"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_summary_source_metric_work.py",
+      "lf_sha256": "94024a8394d00bc921bed13780ffedc1805a53122930f7ec0127ab1147faec33",
+      "sha256": "94024a8394d00bc921bed13780ffedc1805a53122930f7ec0127ab1147faec33",
+      "bytes": 1917,
+      "handoff": "source-quality/handoff-v3.json"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/source_cards.py",
+      "lf_sha256": "e769d288d6fc20735319db027fe21a03e6b121a6144bcded9c22bab324d1ba29",
+      "sha256": "6caf06f2585323f412c035605a4d31fe4a7a5753b76c7420b473ae3dc7f67a75",
+      "bytes": 4237,
+      "handoff": "scoped-quality/handoff-v2.json"
+    },
+    {
+      "path": "src/company_wiki/automation/narrative_model_scoped.py",
+      "lf_sha256": "01f17b424ed4230aacca5f61a2cfc5c05dd542307f9c89ba96ee0e91a7fc09b9",
+      "sha256": "f4c9deddd92b35a01fe077125f657e887b23913e043e732112529ee5da7e7644",
+      "bytes": 25067,
+      "handoff": "scoped-quality/handoff-v2.json"
+    },
+    {
+      "path": "src/company_wiki/automation/narrative_model_extractive.py",
+      "lf_sha256": "de68b05034bf9517bfafcfb7b2ee680db6cf92f97aa585e45e11dc38380bf177",
+      "sha256": "23467992117fa8b44e1689ab212c7288ea1d1c214a242055ac71a769dc7f66ed",
+      "bytes": 18060,
+      "handoff": "scoped-quality/handoff-v2.json"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_finalize.py",
+      "lf_sha256": "00f9b88d6661b5a164ef0f434f454d2270f2b84dafa01419acf04d9a1ef4c07f",
+      "sha256": "e424ee11f7228e65e8f3171817e722f79a3cc23bdf18df082af8d218ed1bcb24",
+      "bytes": 12006,
+      "handoff": "scoped-quality/handoff-v2.json"
+    },
+    {
+      "path": "src/company_wiki/automation/narrative_replay.py",
+      "lf_sha256": "7d0f8f6de962713d955a8afdbc8be1b9990a1e443aa5b06be1aa7449bbc0f222",
+      "sha256": "7cb00b409d6be38af3fee051e1d5d86f43e4f1289e5b99528e8cafc4fca8246e",
+      "bytes": 10154,
+      "handoff": "scoped-quality/handoff-v2.json"
+    },
+    {
+      "path": "src/company_wiki/source_contract/selection_annotations.py",
+      "lf_sha256": "bb242e46cf636fa91b1e6448614d98a788523f88ed9a85cbb7021bf54dd8a444",
+      "sha256": "bb242e46cf636fa91b1e6448614d98a788523f88ed9a85cbb7021bf54dd8a444",
+      "bytes": 706,
+      "handoff": "scoped-quality/handoff-v2.json"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/decision_inventory.py",
+      "lf_sha256": "d3562d70470e6cd50f1e638e63e817199e3acedd67cbed3f59a34137ea8344ff",
+      "sha256": "cf87f9171e4ba764a2e54894d2785780905eb75a953c3289f36eb4eaacc7a7cb",
+      "bytes": 28243,
+      "handoff": "scoped-quality/handoff-v2.json"
+    },
+    {
+      "path": "tools/document_understanding_benchmark/phase_c_observer.py",
+      "lf_sha256": "4d7da3911ae502944c273f3f3e7b8c62f5675aa9d92a9730ed3efeb9c7a4e525",
+      "sha256": "98ed49ee50a27a97271a0bd096d82d3d4cf836944f3faf4b51663c75a5dd5515",
+      "bytes": 23906,
+      "handoff": "scoped-quality/handoff-v2.json"
+    },
+    {
+      "path": "tests/unit/test_scoped_source_admission.py",
+      "lf_sha256": "93735de0411c7c554063ed165ea0ef6508c0793dd12a5cdd523a9fe3cc9d2080",
+      "sha256": "93735de0411c7c554063ed165ea0ef6508c0793dd12a5cdd523a9fe3cc9d2080",
+      "bytes": 9355,
+      "handoff": "scoped-quality/handoff-v2.json"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_untyped_numeric_quality.py",
+      "lf_sha256": "11f0b5d768bcfebf690a8bafaebc640511e42545ae945cedaabb4683dd79fba5",
+      "sha256": "5eda9da97e9e48d2bc331c39f8901c0434e15425d901a6e17ef5a96c209bf0f9",
+      "bytes": 13063,
+      "handoff": "scoped-quality/handoff-v2.json"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_untyped_numeric_prose_controls.py",
+      "lf_sha256": "40f99cadadde7ebac7e5868e8c51e5120502fa0100049c49563a1d98f3816a84",
+      "sha256": "c547c37ffd8b4984d0337e2c71e35c4e480c82cef054edb0b3a5e2e672891f92",
+      "bytes": 5352,
+      "handoff": "scoped-quality/handoff-v2.json"
+    },
+    {
+      "path": "tests/unit/test_narrative_scoped_runtime_recovery.py",
+      "lf_sha256": "9413ef69e40e8330a47be70d80b69244d4113f6aa27ab358eeee9997c1f68971",
+      "sha256": "2121ef2a112a84e09bd7d5b4ca5b589886ded9c149ebcbaffee0c41345bde133",
+      "bytes": 8655,
+      "handoff": "scoped-quality/handoff-v2.json"
+    },
+    {
+      "path": "tests/integration/test_shared_scoped_public_request.py",
+      "lf_sha256": "b56c880f6037dd113e4b2f5852a3c76a82c2b434f1f08a2c7b07301ce0d0ed8a",
+      "sha256": "76988b19ae23e698f0320c7f138edcc444463989741518ffcd30f29a5b9cc0d9",
+      "bytes": 16720,
+      "handoff": "scoped-quality/handoff-v2.json"
+    }
+  ],
+  "pid": 10608,
+  "output": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\c3-20261028\\hk-quality-v3",
+  "owned_tmp": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c328v3",
+  "protected_count": 7,
+  "mother_before": {
+    "charged_tokens": 1800368,
+    "charged_micro_usd": 727945,
+    "new_unknown_count": 6,
+    "token_limit": 10000000,
+    "micro_usd_limit": 20000000,
+    "prior_unknown7_retained": 7
+  },
+  "started_at": "2026-10-28T08:38:36.610635+00:00",
+  "runtime_config": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\c3-20261026\\pdf-env\\runtime-4g-v2.json",
+  "scope": "one canonical live attempt; no outer premature kill after possible paid POST",
+  "exit_code": 1,
+  "seconds": 146.072,
+  "mother_after": {
+    "charged_tokens": 1800368,
+    "charged_micro_usd": 727945,
+    "new_unknown_count": 6,
+    "token_limit": 10000000,
+    "micro_usd_limit": 20000000,
+    "prior_unknown7_retained": 7
+  },
+  "frozen_files_unchanged": true,
+  "cleanup_pending": true
+}

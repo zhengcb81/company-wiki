@@ -25,7 +25,9 @@ from .narrative_revenue_guidance import (
 )
 from .narrative_business_policy import (
     READING_BUSINESS_SCAN_PASSES, assess_reading_business_fact, project_reading_business_fact,
+    source_result_subject,
 )
+from .narrative_predicate_state import observe_metric_predicate
 
 _MAX_EXPLICIT_GUIDANCE_SKIP_PARAGRAPHS = 1
 _CJK_CONTEXT_RUN = re.compile(r"[\u3400-\u9fff]{2,}")
@@ -57,6 +59,21 @@ _CJK_GENERIC_CONTEXT_PATTERN = re.compile(
 _IGNORED_CONTEXT_PATTERN = re.compile(
     f"(?:{_GENERIC_PHASE_CONTEXT_TERM.pattern})|(?:{_CJK_GENERIC_CONTEXT_PATTERN.pattern})"
 )
+# Result anaphora are source references, not independent metric assertions.
+# A named result ("the increase in service revenue") is self-contained and
+# does not match this deliberately narrow bare-result grammar.
+_RESULT_REFERENCE = re.compile(
+    r"^\s*(?P<marker>(?:(?:有[关關]|上述|[该該此])\s*)"
+    r"(?P<cn>增加|增[长長]|上升|下降|減少|减少)|"
+    r"(?:this|that|the|such)\s+(?P<en>increase|growth|rise|decrease|decline|reduction))"
+    r"(?=\s*(?:主要|[是为為由]|was\b|is\b|arose\b|resulted\b|due\b))", re.I)
+_RESULT_CHANGE = re.compile(
+    r"(?P<up>增加|增[长長]|上升|\b(?:increased?|increases|grew|rose)\b)|"
+    r"(?P<down>下降|[减減]少|\b(?:decreased?|decreases|declined?|declines|fell)\b)", re.I)
+
+
+def _result_direction(value: str) -> str:
+    return "down" if value.casefold() in {"decrease", "decline", "reduction", "下降", "减少", "減少"} else "up"
 
 
 def _specific_context_terms(text: str) -> frozenset[str]:
@@ -233,6 +250,10 @@ class SourceOperatingSession:
                 return result
         # An absent window is unknown scope, never a proven absence.
         predecessors, complete = self.antecedents.get(uid, ((), False))
+        result = self._result_reference(key, tuple(predecessors), complete)
+        if result is not None:
+            self.references[uid] = result
+            return result
         try:
             result = self.engine.reference_closure(key, tuple(predecessors),
                                                    window_complete=complete)
@@ -256,6 +277,56 @@ class SourceOperatingSession:
             else:
                 result = {**result, "declaration_refs": declarations, "member_refs": members}
         self.references[uid] = result
+        return result
+
+    def _result_reference(self, owner: str, predecessors: tuple[str, ...], complete: bool):
+        """Close one bare result over its proven adjacent source statement.
+
+        The existing antecedent window owns source/section/order boundaries.
+        Multiple changes, an unobserved predicate or an incomplete window stay
+        unresolved; the model cannot obtain a subject from another output.
+        """
+        used_before = self.work_budget.used
+        text = self.source_text(owner)
+        self.work_budget.charge(len(text) + 1)
+        marker = _RESULT_REFERENCE.match(text)
+        if marker is None:
+            return None
+        reference = {"unit_id": owner, "char_start": marker.start("marker"),
+                     "char_end": marker.end("marker")}
+        result: dict[str, Any] = {"schema_version": "du11-reference-closure/1", "unit_id": owner,
+            "status": "missing" if complete else "partial", "reference_refs": [reference],
+            "declaration_refs": [], "member_refs": [], "required_original_unit_ids": (),
+            "support_original_unit_ids": (), "reference_kind": "causal_result",
+            "attribution": "unknown", "diagnostics": [], "work_used": 0}
+        if owner in self.maps:
+            result["reference_refs"] = self._original_refs(owner, [reference])
+        if complete and predecessors:
+            previous_id = predecessors[-1]
+            previous = self.units.get(previous_id) or self.originals.get(previous_id)
+            target_id = self.groups.get(owner, (owner,))[0]
+            target = self.units[target_id]
+            if (previous is not None and previous.source_id == target.source_id
+                    and previous.source_role == target.source_role):
+                self.work_budget.charge((3 + READING_BUSINESS_SCAN_PASSES) * len(previous.raw_text) + 1)
+                changes = tuple(_RESULT_CHANGE.finditer(previous.raw_text))
+                if len(changes) > 1:
+                    result["status"] = "ambiguous"
+                elif len(changes) == 1:
+                    change = changes[0]
+                    observation = observe_metric_predicate(previous.raw_text, change.start(), change.end())
+                    if (source_result_subject(previous.raw_text, change.start(), change.end())
+                            and _RESULT_REFERENCE.match(previous.raw_text) is None
+                            and change.lastgroup == _result_direction(marker.group("cn") or marker.group("en"))
+                            and observation.observed):
+                        declaration = {"unit_id": previous_id, "char_start": 0,
+                                       "char_end": len(previous.raw_text)}
+                        result.update(status="unique", declaration_refs=[declaration],
+                            member_refs=[declaration], required_original_unit_ids=(previous_id,),
+                            support_original_unit_ids=(previous_id,), attribution="unknown")
+        if result["status"] != "unique":
+            result["diagnostics"] = [{"code": "result_antecedent_unresolved", "unit_id": owner}]
+        result["work_used"] = self.work_budget.used - used_before
         return result
 
     def _source_material_range(self, original_id: str, material_id: str):

@@ -1,0 +1,11 @@
+{
+  "exit_code": 0,
+  "seconds": 43.426,
+  "targets": [
+    "tests/unit/test_scoped_source_admission.py",
+    "tests/integration/test_shared_scoped_public_request.py::test_configured_public_v4_worker_recovery_reuse_protocol_separation_and_exact_read[raw-v2]",
+    "tests/integration/test_shared_scoped_public_request.py::test_configured_public_v4_worker_recovery_reuse_protocol_separation_and_exact_read[official_json]"
+  ],
+  "owned_tmp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.sqt28seams-proof",
+  "cleanup_pending": true
+}

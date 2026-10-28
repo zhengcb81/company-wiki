@@ -244,6 +244,8 @@ def test_configured_public_v4_worker_recovery_reuse_protocol_separation_and_exac
                           database=state.automation_db)
 
         process, first = run("public-v4")
+        if process.returncode != 0 or first["status"] != "completed":
+            print("worker_receipt=" + json.dumps(first, ensure_ascii=False))
         assert process.returncode == 0 and first["status"] == "completed", (first, process.stderr)
         assert len(server.requests) == 1 and server.errors == []
         assert server.requests[0]["schema_version"] == "narrative-model-request/5"
@@ -251,7 +253,7 @@ def test_configured_public_v4_worker_recovery_reuse_protocol_separation_and_exac
         store = NarrativeRunStore(state.automation_db)
         manifest = next(iter(store.final_generations("public-v4").values()))
         assert manifest["reading_model_projection"] == V4
-        assert manifest["execution_versions"]["prompt"] == "reading-source-scoped/4.0.6"
+        assert manifest["execution_versions"]["prompt"] == "reading-source-scoped/4.1.0"
         assert manifest["reading_model_boundary"]["request_schema"] == "narrative-model-request/5"
         reservations = tuple(asdict(row) for row in store.reservations_for_run("public-v4"))
         reference = first["items"][0]["artifact_ref"] if kind != "raw-v1" else first["documents"][0]["artifact_ref"]
@@ -265,7 +267,14 @@ def test_configured_public_v4_worker_recovery_reuse_protocol_separation_and_exac
         result_key = "documents" if kind == "raw-v1" else "items"
         assert resumed[result_key] == first[result_key] and resumed["budget"] == first["budget"]
         assert resumed["storage"]["persistent_added_bytes"] == first["storage"]["persistent_added_bytes"]
-        assert resumed["storage"]["scratch_peak_bytes"] == 0
+        # Restart can reconstruct the durable paid-writer lower bound, not
+        # every transient sample observed by the first invocation. Neither
+        # zero nor equality with that process's peak describes this receipt.
+        paid_peak = max(json.loads(row['paid_response_json'])['byte_size']
+                        for row in reservations if row['paid_response_json'] is not None)
+        assert resumed["storage"]["scratch_peak_bytes"] == paid_peak
+        assert first["storage"]["scratch_peak_bytes"] >= paid_peak
+        assert resumed["storage"]["scratch_peak_observation"] == "committed_writer_lower_bound"
         assert tuple(asdict(row) for row in store.reservations_for_run("public-v4")) == reservations
         assert len(server.requests) == 1
         wire["run_id"] = "public-v4-cache"
