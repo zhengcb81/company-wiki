@@ -1,0 +1,34 @@
+{
+  "checks": [
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "d9d126",
+        "wall_time_seconds": 0.9493093,
+        "exit_code": 0,
+        "original_token_count": 5,
+        "output": "All checks passed!\n"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "f3d4ad",
+        "wall_time_seconds": 2.3393522,
+        "exit_code": 0,
+        "original_token_count": 11,
+        "output": "Success: no issues found in 2 source files\r\n"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "8d2156",
+        "wall_time_seconds": 1.1391387,
+        "exit_code": 0,
+        "original_token_count": 2,
+        "output": "False\r\n"
+      }
+    }
+  ]
+}

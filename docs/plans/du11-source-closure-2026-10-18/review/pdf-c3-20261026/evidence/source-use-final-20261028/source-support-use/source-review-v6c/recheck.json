@@ -1,0 +1,145 @@
+{
+  "exit_code": 0,
+  "seconds": 7.729,
+  "files": [
+    {
+      "path": "src/company_wiki/source_catalog/narrative_reading.py",
+      "sha256": "ba55b183886528e3be16c125f8674de5227a95ed12afc058ca3840f5599d6614",
+      "lf_sha256": "c996bdc7c9a03f57d8ada08ada59399073cac590b8de579514ea69889de73c87"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_policy.py",
+      "sha256": "74e8a02585d293d1eb6944ef1822df89316918268b8e958b6d8ebd503ce2752c",
+      "lf_sha256": "513c4df83baca59e80152121e6ded752b880391f8f715df61ec2c2718f973739"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_source_purpose.py",
+      "sha256": "068314ff65c190d9635ebedfc723731e9253000ae076db1e83466c8ad7e8e12c",
+      "lf_sha256": "b838489bab1d2be4a87a1156e50173f2fc413caf4e94cb879f0d762b357ddfd8"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_support_use.py",
+      "sha256": "c1487ab3a8b10efba9a4311508d69664f3de38c0894914f47cb00a5daf05edbc",
+      "lf_sha256": "c1487ab3a8b10efba9a4311508d69664f3de38c0894914f47cb00a5daf05edbc"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+      "sha256": "af91e2f24a4ddf773402a43e1bf4884c7ff019795e13ffb9b48e7dbe8072830b",
+      "lf_sha256": "ac82f984e77a46c46a5c596b2000d9658dbf86a79004f946b08c1d92922a8e65"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/relations.py",
+      "sha256": "5ea73a73c2e956f15f70d518cbee352d19d3b19d88f579015cbccc56054f261a",
+      "lf_sha256": "d440c148dc0634ab72c00f4a6464c926741ce1e8c5c2e8551457953d2559c524"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/patterns.py",
+      "sha256": "46d2a264fdfdb56677a32d1bb48019c111bd58b8086cc1f6b65bbdda33cef4ed",
+      "lf_sha256": "49bb93ff207c329c9ed87c3b978c359b1ab3eaa98078978c83cbe78ab062b39c"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/assertion_roles.py",
+      "sha256": "cf9bf579a26ba662b45e92ebf093c185d56a37da8d458122e1f396aa99b91726",
+      "lf_sha256": "d6f7293db07c195818c058eb889113f0b63ca4bab11ed84a91383f3fb3f07914"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_source_support_use.py",
+      "sha256": "a64ca3a37bd294d9f553665f1fd419e19da1050c6489e3d5c36c5b45a227626d",
+      "lf_sha256": "6c6ed3ac05d772a2d78e557e5163a14c534669fb99bc1004459518a87f03b456"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_budget.py",
+      "sha256": "b805b334233d2214d004774bbef8add00d99881346c5f48b4781a4f36c810be3",
+      "lf_sha256": "113645934c00dd82491413b5f4165a4e632e0a4f959b18dc4d71c88fa6e14a66"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_finalize.py",
+      "sha256": "feb6feb3fce94f003ed832ae147151adf64f50af7ed762ce005a6e5fdbc13e04",
+      "lf_sha256": "1dfb75374e9e45c255045d2e677883985a9af50790d6184300a92e0d284fb37e"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/structure/table_purpose.py",
+      "sha256": "2d87eec638175b4b1e1cce6f16fa9cf3c4809211194f48cfd9b53165d9113c46",
+      "lf_sha256": "0d92f12205582fbf04db5d282193fcd00aee18e207e92f549142f9a71bc5297b"
+    },
+    {
+      "path": "src/company_wiki/document_normalization/table_shapes.py",
+      "sha256": "5254f922332c5defebf083734622b1db511ab4e439ad382e5e62919b2af52484",
+      "lf_sha256": "321405419b5abc10b52e2f347a703017a68e4dde21ff2f8e33c8a53e14118dc3"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/decision_inventory.py",
+      "sha256": "9e8df7a11d3e21eaa51a82422e471047980ee16bb52c93fde9ac270e9473112e",
+      "lf_sha256": "2ffdae1dfee7d9200a57f01c538b3b57eef5100d5ca9ca43339d5055a5068e95"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_decision_inventory.py",
+      "sha256": "9e686dc091312e32d03e0775c34fbed74bf57044017f38c48a303712949790e1",
+      "lf_sha256": "63eb77c909cc5b7f354b4ef8b5cac364ecda83ad758c14bc14152b1e7a81294a"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py",
+      "sha256": "c51208649403682d6f5b6aa7e34f9a6ce6c44b4f6ef61dca094ee269a2895142",
+      "lf_sha256": "8d00f1f899b3ee6ff94b5f6a8b8a7e88a35574815e4e27a225bce2fade024560"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_multilevel_native_ancestry.py",
+      "sha256": "7c82d9b3f8837059738bb60f92a99d79eb85ac3fcf088e31d6938c178290893b",
+      "lf_sha256": "7c82d9b3f8837059738bb60f92a99d79eb85ac3fcf088e31d6938c178290893b"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_native_continuity.py",
+      "sha256": "cfab6382e91222aa7d028ee59d74d0f76ce5031c34f4d7701a7fd3367e2c1cb2",
+      "lf_sha256": "08d2ef04ad5dd3c5352b608880d5926ce411c3a92721f08d7bc8a93f19e7bb5e"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_native_dependency_closure.py",
+      "sha256": "aa1454780fc52a5017760218b64e08d1553c3440b9364c23a3a7346899b229cc",
+      "lf_sha256": "26ab4550dbe9f042be0713805e11c5fd025f9760ccfd7d79bb063254c6ad8561"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_production_selection.py",
+      "sha256": "3ea2648234bc2770307eaa425b31366bc655e0860c42ee197a831f3d14f7a5f8",
+      "lf_sha256": "1be6a28f9cf025346ee2980d047ba4e4280a7d65ab53c7d6fcf3e8b9bb426970"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_untyped_numeric_quality.py",
+      "sha256": "241b984f9f9230a7133e94d3faf26e10f2ebe52c3521de25ea1a8fc9994f5cf9",
+      "lf_sha256": "5febddfa0a8a879bbaaaa2ab02003593759384e100fbb0ddcf8043de063dc4fd"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_value_coverage.py",
+      "sha256": "6526e457a9b499e1c280782d773e6f81f7f6e2e972dd40a74e380a96e0835cc7",
+      "lf_sha256": "b63b7aff8c85c147df936973df5000232edbaca4d00a1a8c9d61a8404233c329"
+    },
+    {
+      "path": "tests/unit/document_understanding_root/test_operating_relation_production.py",
+      "sha256": "ed468c39c298fcda941d6636cb0726e69789f727dd094f127d1ee5277aa86acd",
+      "lf_sha256": "a516e01850f5fc49ae3521e92e7431b1f33c4f877256c787921b4dd9d6ceedf8"
+    },
+    {
+      "path": "tests/unit/test_narrative_reading_transport.py",
+      "sha256": "b02db7e9d6cbf9c6083248d612ce8077659a66da1a57e61d57a2966854ded4bf",
+      "lf_sha256": "1d65eafb44921be57edb308773a1245de039fab0930de0e2f84f56c263e3a7e2"
+    }
+  ],
+  "frozen_files_verified": true,
+  "unchanged": true,
+  "targets": [
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\c3-20261028\\source-support-use\\source-review-v6b\\test_financial_skip_composition.py",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\c3-20261028\\source-support-use\\source-review-v6\\test_skip_composition.py",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\c3-20261028\\source-support-use\\source-review-v5\\test_offer_axes.py",
+    "tests/unit/document_understanding_selection/test_source_support_use.py::test_complete_single_row_or_scalar_material_can_use_raw_only_skip",
+    "tests/unit/document_understanding_selection/test_source_support_use.py::test_unproved_prose_or_incomplete_source_cannot_use_raw_only_skip",
+    "tests/unit/document_understanding_selection/test_source_support_use.py::test_financial_drop_count_does_not_certify_unexplained_numeric_material",
+    "tests/unit/document_understanding_selection/test_source_support_use.py::test_administrative_route_cannot_certify_mixed_numeric_material",
+    "tests/unit/document_understanding_selection/test_source_support_use.py::test_current_finalizer_requires_source_disposition_proof_and_retains_legacy_counter_replay",
+    "tests/unit/document_understanding_selection/test_source_support_use.py::test_positive_offer_keeps_raw_unknown_required_context_and_its_full_cost",
+    "tests/unit/document_understanding_selection/test_source_support_use.py::test_direct_admission_projects_use_and_relevance_from_one_preparation",
+    "tests/unit/test_narrative_summarize_handler.py::test_summarize_handler_skip_uses_no_model_policy_or_review_lookup",
+    "tests/unit/test_narrative_summarize_handler.py::test_skipped_document_never_reserves_or_calls_paid_model"
+  ],
+  "temporary_absent": true,
+  "TEMP_TMP": "child-only environment; parent unchanged",
+  "PDF_SDK_model_HTTP_download": 0
+}

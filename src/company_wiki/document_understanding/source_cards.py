@@ -59,14 +59,25 @@ def source_card_scope(task: SourceSummaryTask) -> SourceCardScope:
             task.kind, task.section_role)
 
 
+def source_card_generation_reason(card: SourceCard) -> str | None:
+    """Consume the source's scope use; do not mistake readable text for support."""
+    if not card.available:
+        return card.reason
+    use = card.task.support_use
+    if use is not None and use != 'support':
+        return 'source_' + use
+    return None
+
+
 def source_task_admission(cards: tuple[SourceCard, ...]) -> dict[str, dict[str, str]]:
     """Record source availability without shrinking the canonical source plan."""
     seen: dict[SourceCardScope, str] = {}
     result: dict[str, dict[str, str]] = {}
     for card in cards:
         key = card.task.key
-        if not card.available:
-            result[key] = {'status': 'unavailable', 'reason': card.reason}
+        reason = source_card_generation_reason(card)
+        if reason is not None:
+            result[key] = {'status': 'unavailable', 'reason': reason}
             continue
         scope = source_card_scope(card.task)
         if scope in seen:

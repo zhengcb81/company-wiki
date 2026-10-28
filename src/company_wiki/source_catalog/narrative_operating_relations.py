@@ -143,6 +143,7 @@ class SourceOperatingSession:
         self.results: dict[str, dict[str, Any]] = {}
         self.facts: dict[str, OperatingFact] = {}
         self.financial: dict[str, bool | None] = {}
+        self.assertions: dict[str, Any] = {}
         self.references: dict[str, dict[str, Any]] = {}
         self.complete = True
         self.qualifications: dict[tuple[int, int, int], tuple[Any, Any, dict[str, tuple[str, ...]]]] = {}
@@ -689,7 +690,11 @@ class SourceOperatingSession:
             if result["status"] == "partial" and self.work_budget.exhausted:
                 raise WorkBudgetExceeded("operating relation work exhausted")
             self.work_budget.charge(READING_BUSINESS_SCAN_PASSES * len(text))
-            fact, financial = assess_reading_business_fact(text, result, ref_text=ref_text)
+            from company_wiki.document_understanding.operating_states.assertion_roles import prepare_source_assertions
+            self.assertions[owner] = replace(prepare_source_assertions(text),
+                bound_operating=self.engine.complete_assertion(owner,self.contexts.get(owner,())))
+            fact, financial = assess_reading_business_fact(text, result, ref_text=ref_text,
+                                                           source_roles=self.assertions[owner])
         except WorkBudgetExceeded:
             self.complete = False
             # Closed relations retain their exact qualifiers and states without
@@ -705,3 +710,8 @@ class SourceOperatingSession:
     def financial_only(self, uid: str) -> bool | None:
         self.fact(uid)
         return self.financial[self.owner_for(uid)]
+
+    def source_assertions(self, uid: str):
+        """The exact owner's already charged role proof, never a second scan."""
+        self.fact(uid)
+        return self.assertions.get(self.owner_for(uid))

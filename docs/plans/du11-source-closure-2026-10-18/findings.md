@@ -1243,3 +1243,29 @@ RF兼容已提交并入main并推送`0991e25d`，正常pre-push595P/48.32秒，�
 单次来源组合域2534P/11F/11skip、77.04秒；395文件mypy通过。11失败含工厂/制造基地/产能/客户复购等真实召回缺口：direct fact与Session投影不一致，未知阶段被当作不可支持。nested仅14,688work、单次物理观察，不能用加额度或新cache遮掩。源码保持冻结，独审补齐词内动词、残句、产品修饰语和产品码中性反例后，统一修共享assessment；不逐公司加分支。production测试湖已移出pytest发现树，避免并发collection遇创建/删除竞态；原collection错误及有效RED均保留。
 
 **唯一下一步：** 冻结完整共因反例→SOURCE v4共同assessment/typed对象与动作/条款用途根修→只复验新增反例、11失败节点与必要影响包→整原件全部support view/3gold复验与独审→CWP /4提交推送。之后完成按需PDF增强、配置内正式摘要/缓存恢复/FF-RF实际采用、新holdout及八步公司循环。预算仍10M/$20，母账1,800,368 tokens/$0.727945及unknown保留；原件/生产配置/Dayu/IQS/Dashboard他人施工保持。不重复未改变的77秒域、120秒SDK或绿的部署小节点。
+
+## 2026-10-28 当前：v4业务支持已恢复，v5修选材预算与剩余召回
+
+目标ACTIVE。CWP last code仍`5002e8c3`（精确CI40681137297成功），最新文档/证据`f8812e44`已推送；/4 producer源码尚未提交/发布，正式供应商摘要/缓存/RF采用仍OPEN。唯一实施入口为[ADMISSION_ROOT_PLAN末尾v5节点](review/pdf-c3-20261026/ADMISSION_ROOT_PLAN.md)及[已接受的v5细则](review/pdf-c3-20261026/SOURCE_V5_SELECTION_DESIGN.md)。
+
+**已完成：** RF兼容`0991e25d`已main/远端CI40697596115成功；StockWiki`33534818`已本地master，无remote不宣称推送。五文件独审71项及当前CWP实际worker/一次loopback/同run零额外请求/公共CLI到两消费者通过。RF定点4文件同步、重复零写，三RF入口及StockWiki主线四个新进程用实际公开字节/收据回读通过。配置/output/他人WIP保持；wire未改不重复部署。
+
+v4来源共享角色/完整断言修复已冻结，最后266项通过，ROOT全src396文件mypy通过。一次真实整原件native读取2330units/112span，6,177,029work/16M、6.307秒；旧3＋新2业务检查点5/5均在可生成任务内。独审112项110P/2F，全文读取38个support确认旧13碎片/规则不再漏网，新品/平台、行业云、研发、H2计划及真实履约/计费财注保留。原三gold文件/对象不改，新的[五项检查点](review/pdf-c3-20261026/business-recovery-checkpoints/README.md)只用于下一新准备revision，不反写历史通过。
+
+**剩余共因：** 21个不可生成的numeric-unresolved任务仍占独立选材位（support21span，含context共31成员）。同源raw可读性被当作独立叙述候选，原预算排序又不区分完整support与unknown。中性小槽位3F/1P及独审折旧/汇兑2RED已冻结；未声称有某个新增真实事实已被挤掉。v5按shared table_purpose分型已知财表行、保未知经营量可读，并把既有use传入同一预算heap令完整support优先，保原闭合成本/主题公平/数量上限。具体融资约束与服务财注不整章ban。
+
+ROOT补查协议/缓存相关九文件306P/7F：四个旧schema/codec/空请求夹具已迁移且保原意，三项海外渠道/交付地域及客户生产验证窗口真召回交同一共享proof修复，原断言不改。旧2534P/11F/11skip全域是v3历史反证；不重跑77秒域或313项包。两旧spy改在真实owner/生命周期观察缓存，保持每parent一次/重复零work与每edge一次，未改生产cache或额度。
+
+**唯一下一步：** v5统一来源分型/预算排序＋3真召回修复→仅新RED、7原失败与必要影响包→一次5gold/全views原件复验及独审→CWP /4正常提交推送/精确CI。之后按既定顺序完成按需PDF增强、配置内正式摘要/缓存恢复/FF-RF实际采用、新holdout及八步循环。全部额度不变：10M/$20，母账1,800,368tokens/$0.727945和unknown保留；本轮仍0SDK/0新供应商POST/0下载。原件/生产配置/Dayu/IQS/Dashboard其他owner保持。
+
+## 2026-10-28 当前：来源选材与摘要用途根修已验收，待正常发布
+
+目标ACTIVE。唯一入口为本段及CURRENT_STATUS.json；本段取代下方旧“当前/下一步”。本次SOURCE v6c与ROOT消费组件已独审PASS，源码尚待本节点正常提交/推送与精确CI，不能把旧CI代签。详见[组件验收与真实收据](review/pdf-c3-20261026/SOURCE_USE_ACCEPTANCE.md)。
+
+**本轮完成：** 共用typed断言/对象动作及用途证明；可读原文、独立业务候选、可生成支持三轴分开。财表行、残句、页脚和规则套话保持原文可检索，不再靠章节位置取得独立摘要位；实际业务因果、服务交付/计费、资源、未来及否定保留。未知叙述和未读/超限不能被当作“无内容”跳过。当前reading_plan/3只接受来源完整处置证明，旧1/2重放计数兼容保留。已有同一预算heap按完整support优先，无公司/页码/产品码特判、无新许可、无提高额度。
+
+**真实复验：** 同一金山云2025半年报2330units，112→81个完整来源片段、38个support任务全部保留，5/5业务检查点均在准入任务内；4.139秒、6,175,509/16M work、原件SHA不变、0SDK/0供应商POST。原三gold与旧失败记录未改；新五项金标是新revision用，不能反写旧摘要通过。最后作者53P/6.16秒，独审32P/6.96秒、25文件冻结一致，全src396文件mypy通过。原失败节点已按原意修复；计数有重叠不相加。
+
+**跨仓：** RF兼容0991e25d已远端main且精确CI成功；StockWiki33534818已本地master、无remote。CWP实际worker→一次loopback→同run零新增请求→公共CLI→两消费者通过；RF四物理文件定点部署、重复零写，三RF入口＋SW四新进程回读通过。不是正式供应商摘要或RF预测采用验收，wire未变不重复部署。
+
+**唯一下一步：** 正常提交/推送本组件并观察精确CI→按需PDF增强准备（只修共同owner，不重复未变的120秒冷启）→新五项金标的新metadata revision配置内真实摘要→实际响应语义独审与activation/重启/跨run零重复费用→FF/RF实际采用→未曝光holdout及八步公司循环。正式摘要质量、缓存完整验收及RF模型采用仍OPEN。配置10M/$20不变，母账1,800,368tokens/$0.727945和unknown保留；原件/生产配置/Dayu/IQS/Dashboard/其他owner WIP不写。

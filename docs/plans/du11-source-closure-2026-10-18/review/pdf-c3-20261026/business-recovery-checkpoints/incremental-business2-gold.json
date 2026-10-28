@@ -1,0 +1,78 @@
+{
+  "schema_version": "du-gold/1",
+  "sample_id": "c3-hk-kingsoft-h1-2025",
+  "source_sha256": "4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+  "scope": "development",
+  "language": "zh",
+  "facts": [
+    {
+      "id": "hk-cloud-server-c9a-x9a-release",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "any_support_sets": [
+        [
+          {
+            "page": 10,
+            "exact_quote": "報告期內，第九代雲服務器\nC9a及X9a正式發佈",
+            "locator": "loc:v1/page:10/paragraph:2/chars:21-178"
+          },
+          {
+            "page": 10,
+            "exact_quote": "搭載大幅提升性能的全新處理器",
+            "locator": "loc:v1/page:10/paragraph:2/chars:21-178"
+          },
+          {
+            "page": 10,
+            "exact_quote": "自然語言\n處理及推薦算法等AI推理場景",
+            "locator": "loc:v1/page:10/paragraph:2/chars:21-178"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "報告期內，第九代雲服務器\nC9a及X9a正式發佈",
+        "搭載大幅提升性能的全新處理器",
+        "自然語言\n處理及推薦算法等AI推理場景"
+      ],
+      "counterexample_observations": [
+        "C9a及X9a將於下半年發佈",
+        "售出9台雲服務器",
+        "C9a及X9a已帶來新增收入"
+      ]
+    },
+    {
+      "id": "hk-training-inference-platform-launch",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "any_support_sets": [
+        [
+          {
+            "page": 10,
+            "exact_quote": "星流訓練與推理平台亦已正式上線",
+            "locator": "loc:v1/page:10/paragraph:8/chars:178-299"
+          },
+          {
+            "page": 10,
+            "exact_quote": "為用戶提供一站式模型訓練與推理任務管理平台",
+            "locator": "loc:v1/page:10/paragraph:8/chars:178-299"
+          },
+          {
+            "page": 10,
+            "exact_quote": "集成了小米MIMO、Kimi、Deepseek、Qwen3等優質開源大型語言模型",
+            "locator": "loc:v1/page:10/paragraph:8/chars:178-299"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "星流訓練與推理平台亦已正式上線",
+        "為用戶提供一站式模型訓練與推理任務管理平台",
+        "集成了小米MIMO、Kimi、Deepseek、Qwen3等優質開源大型語言模型"
+      ],
+      "counterexample_observations": [
+        "星流平台將於下半年上線",
+        "上述開源模型均由金山雲自主研發",
+        "星流平台已實現盈利"
+      ]
+    }
+  ],
+  "source_checkpoint_derivation": "Incremental two development facts only; evaluate separately from the unchanged parent three. Exact p10 source-span byte bindings are in handoff.json."
+}

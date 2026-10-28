@@ -1,0 +1,192 @@
+{
+  "schema_version": "du-gold/1",
+  "sample_id": "c3-hk-kingsoft-h1-2025",
+  "source_sha256": "4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+  "scope": "development",
+  "language": "zh",
+  "facts": [
+    {
+      "id": "hk-industry-cloud-closure",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "any_support_sets": [
+        [
+          {
+            "page": 13,
+            "exact_quote": "來自行業雲服務的收入為人民幣1,340.4百萬元",
+            "locator": "loc:v1/page:13/source-checkpoint:hk-industry-cloud-closure"
+          },
+          {
+            "page": 13,
+            "exact_quote": "較二零二四年同期的人民幣1,245.4百萬元增加7.6%",
+            "locator": "loc:v1/page:13/source-checkpoint:hk-industry-cloud-closure"
+          },
+          {
+            "page": 13,
+            "exact_quote": "主要是由於不斷增長的IT需求",
+            "locator": "loc:v1/page:13/source-checkpoint:hk-industry-cloud-closure"
+          },
+          {
+            "page": 13,
+            "exact_quote": "向垂直行業客戶複製行業解決方案的能力",
+            "locator": "loc:v1/page:13/source-checkpoint:hk-industry-cloud-closure"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "來自行業雲服務的收入為人民幣1,340.4百萬元",
+        "較二零二四年同期的人民幣1,245.4百萬元增加7.6%",
+        "主要是由於不斷增長的IT需求",
+        "向垂直行業客戶複製行業解決方案的能力"
+      ],
+      "counterexample_observations": [
+        "增加23.0%"
+      ]
+    },
+    {
+      "id": "hk-rd-period-scope",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "any_support_sets": [
+        [
+          {
+            "page": 11,
+            "exact_quote": "報告期內",
+            "locator": "loc:v1/page:11/source-checkpoint:hk-rd-period-scope"
+          },
+          {
+            "page": 11,
+            "exact_quote": "研發費用為人民幣420.5百萬元",
+            "locator": "loc:v1/page:11/source-checkpoint:hk-rd-period-scope"
+          },
+          {
+            "page": 11,
+            "exact_quote": "截至二零二五年六月三十日",
+            "locator": "loc:v1/page:11/source-checkpoint:hk-rd-period-scope"
+          },
+          {
+            "page": 11,
+            "exact_quote": "研發人員達1,094人",
+            "locator": "loc:v1/page:11/source-checkpoint:hk-rd-period-scope"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "報告期內",
+        "研發費用為人民幣420.5百萬元",
+        "截至二零二五年六月三十日",
+        "研發人員達1,094人"
+      ],
+      "counterexample_observations": [
+        "620人"
+      ]
+    },
+    {
+      "id": "hk-outlook-not-actual",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "any_support_sets": [
+        [
+          {
+            "page": 11,
+            "exact_quote": "展望下半年",
+            "locator": "loc:v1/page:11/source-checkpoint:hk-outlook-not-actual"
+          },
+          {
+            "page": 11,
+            "exact_quote": "將維持高質量發展和可持續發展戰略",
+            "locator": "loc:v1/page:11/source-checkpoint:hk-outlook-not-actual"
+          },
+          {
+            "page": 11,
+            "exact_quote": "全面提升AI能力",
+            "locator": "loc:v1/page:11/source-checkpoint:hk-outlook-not-actual"
+          },
+          {
+            "page": 11,
+            "exact_quote": "我們旨在持續",
+            "locator": "loc:v1/page:11/source-checkpoint:hk-outlook-not-actual"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "展望下半年",
+        "將維持高質量發展和可持續發展戰略",
+        "全面提升AI能力",
+        "我們旨在持續"
+      ],
+      "counterexample_observations": [
+        "研發人員達"
+      ]
+    },
+    {
+      "id": "hk-cloud-server-c9a-x9a-release",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "any_support_sets": [
+        [
+          {
+            "page": 10,
+            "exact_quote": "報告期內，第九代雲服務器\nC9a及X9a正式發佈",
+            "locator": "loc:v1/page:10/paragraph:2/chars:21-178"
+          },
+          {
+            "page": 10,
+            "exact_quote": "搭載大幅提升性能的全新處理器",
+            "locator": "loc:v1/page:10/paragraph:2/chars:21-178"
+          },
+          {
+            "page": 10,
+            "exact_quote": "自然語言\n處理及推薦算法等AI推理場景",
+            "locator": "loc:v1/page:10/paragraph:2/chars:21-178"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "報告期內，第九代雲服務器\nC9a及X9a正式發佈",
+        "搭載大幅提升性能的全新處理器",
+        "自然語言\n處理及推薦算法等AI推理場景"
+      ],
+      "counterexample_observations": [
+        "C9a及X9a將於下半年發佈",
+        "售出9台雲服務器",
+        "C9a及X9a已帶來新增收入"
+      ]
+    },
+    {
+      "id": "hk-training-inference-platform-launch",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "any_support_sets": [
+        [
+          {
+            "page": 10,
+            "exact_quote": "星流訓練與推理平台亦已正式上線",
+            "locator": "loc:v1/page:10/paragraph:8/chars:178-299"
+          },
+          {
+            "page": 10,
+            "exact_quote": "為用戶提供一站式模型訓練與推理任務管理平台",
+            "locator": "loc:v1/page:10/paragraph:8/chars:178-299"
+          },
+          {
+            "page": 10,
+            "exact_quote": "集成了小米MIMO、Kimi、Deepseek、Qwen3等優質開源大型語言模型",
+            "locator": "loc:v1/page:10/paragraph:8/chars:178-299"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "星流訓練與推理平台亦已正式上線",
+        "為用戶提供一站式模型訓練與推理任務管理平台",
+        "集成了小米MIMO、Kimi、Deepseek、Qwen3等優質開源大型語言模型"
+      ],
+      "counterexample_observations": [
+        "星流平台將於下半年上線",
+        "上述開源模型均由金山雲自主研發",
+        "星流平台已實現盈利"
+      ]
+    }
+  ],
+  "source_checkpoint_derivation": "Original three parent fact objects are unchanged. Two additional development business checkpoints derive only from the frozen canonical native-v3 p10 source spans, not a model summary. Source/parent/selection hashes and exact byte anchors are in the adjacent handoff."
+}

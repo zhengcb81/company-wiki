@@ -43,6 +43,18 @@ _CITATION_UNIT_REQUEST_SCHEMA = "narrative-model-request/4"
 MODEL_RESPONSE_MAX_BYTES = 128 * 1024
 _GROUP_DECLARATION_ABSENT = object()
 
+
+def _require_legacy_support_contract(selected: NarrativeSelectResult) -> None:
+    """Old renderers cannot express a scope's support/context-only capability.
+
+    Keep historical source contracts reproducible; current /4 and /5 dispatch
+    to the scoped/source-card implementations which consume the new contract.
+    """
+    from company_wiki.document_understanding.reading_context_contract import SUMMARY_USE_CONTEXT_SCHEMAS
+
+    if selected.reading_context is not None and selected.reading_context['schema_version'] in SUMMARY_USE_CONTEXT_SCHEMAS:
+        raise ModelResponseError('READING_MODEL_SUPPORT_USE_UNSUPPORTED')
+
 FAILED_FINAL_ATTEMPT_MAX_BYTES = 16 * 1024
 FAILED_FINAL_SCHEMA = "narrative-failed-final/1"
 
@@ -480,12 +492,11 @@ def _compile_citation_units(
     selected: NarrativeSelectResult, groups: dict[str, tuple[str, tuple[str, ...]]],
 ) -> CitationUnits:
     try:
+        from company_wiki.document_understanding.reading_context_contract import ATTRIBUTED_READING_CONTEXT_SCHEMAS
         context = selected.reading_context
         views = (tuple(tuple(tuple(view["support_evidence_ids"]) for view in group["citation_views"])
                        for group in context["groups"])
-                 if context is not None and context["schema_version"] in {
-                     "du-production-reading/2", "du-production-reading/3",
-                 } else None)
+                 if context is not None and context["schema_version"] in ATTRIBUTED_READING_CONTEXT_SCHEMAS else None)
         return compile_citation_units(selected.evidence_spans, tuple(members for _, members in groups.values()),
                                       support_views=views)
     except CitationUnitError as exc:
@@ -541,6 +552,7 @@ class NarrativeModelRequest:
 
     @classmethod
     def from_selection(cls, selected: NarrativeSelectResult, *, reading_projection_version: str | None = None) -> "NarrativeModelRequest":
+        _require_legacy_support_contract(selected)
         projected = selected.subject.kind == "official_json"
         boundary = resolve_model_boundary(reading_projection_version, projected=projected)
         reading_projection = reading_projection_version is not None
@@ -756,6 +768,7 @@ def decode_model_draft(
     evidence and claim uncertainty. Legacy model labels are optional and never
     act as permission; the canonical public wire shape remains unchanged.
     """
+    _require_legacy_support_contract(selected)
     projected_subject = selected.subject.kind == "official_json"
     boundary = resolve_model_boundary(reading_projection_version, projected=projected_subject)
     if boundary.source_owned and selected.reading_context is None:

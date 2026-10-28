@@ -83,7 +83,9 @@ def scoped_response_schema(per_task_cap: int = 20) -> dict[str, Any]:
 
 
 def scoped_boundary_identity(boundary) -> dict[str, Any]:
-    from company_wiki.document_understanding import summary_tasks, source_cards as source_card_module
+    from company_wiki.document_understanding import (
+        summary_tasks, source_cards as source_card_module, reading_context_contract,
+    )
     from company_wiki.source_catalog import narrative_evidence
     from company_wiki import narrative_subject
     from . import models, narrative_contracts, narrative_model, narrative_model_runtime
@@ -93,6 +95,7 @@ def scoped_boundary_identity(boundary) -> dict[str, Any]:
             'runtime': narrative_model_runtime, 'scoped_protocol': __import__(__name__, fromlist=['']),
             'source_task_plan': summary_tasks, 'role_quality_owner': narrative_evidence,
             'source_task_availability': source_card_module,
+            'source_use_contract': reading_context_contract,
             'legacy_utilities': narrative_model, 'canonical_contracts': narrative_contracts,
             'canonical_encoding': models, 'subject_contracts': narrative_subject,
         }.items():

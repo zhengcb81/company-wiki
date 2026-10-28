@@ -1,0 +1,9 @@
+{
+  "path": "src\\company_wiki\\document_understanding\\operating_states\\assertion_roles.py",
+  "before_sha256": "cf9bf579a26ba662b45e92ebf093c185d56a37da8d458122e1f396aa99b91726",
+  "after_sha256": "dcdac6cc8642d7ca277e2aa908ec24d2bcd1e01dd7a63420c213441f24f4338e",
+  "before_lf_sha256": "d6f7293db07c195818c058eb889113f0b63ca4bab11ed84a91383f3fb3f07914",
+  "after_lf_sha256": "1edd406c0ad615e13f05552b26052fde6a357b42681712ac7a08b949258d64d1",
+  "AST_identical": true,
+  "change": "Remove extra EOF blank line identified by staged whitespace check"
+}

@@ -1,0 +1,38 @@
+{
+  "scope": "actual_source_v3_public_wire_in_fresh_compatible_reader_processes",
+  "results": [
+    {
+      "kind": "rf",
+      "target": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+      "exit_code": 0,
+      "log": "compat-installed-reader-0.log"
+    },
+    {
+      "kind": "rf",
+      "target": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast",
+      "exit_code": 0,
+      "log": "compat-installed-reader-1.log"
+    },
+    {
+      "kind": "rf",
+      "target": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast",
+      "exit_code": 0,
+      "log": "compat-installed-reader-2.log"
+    },
+    {
+      "kind": "stockwiki",
+      "target": "C:\\Users\\郑曾波\\Projects\\StockWiki",
+      "exit_code": 0,
+      "log": "compat-installed-reader-3.log"
+    }
+  ],
+  "fixture_sha256": {
+    "bundle.json": "8311c7fab67e9fb0800ca4ce33804bb08ef1fcb89f2710a0a7f3be734bb5453e",
+    "receipt.json": "137ff9e0033c14228687b1c5b13f7d1cc0e7ef5b5fac18b66641c7bee0518218",
+    "request.json": "005ecfcc7a610ab068b249d8b5db662df01a69d33be41c92b66c79ccc5fcc68a"
+  },
+  "all_pass": true,
+  "worker_reruns": 0,
+  "HTTP_calls": 0,
+  "source_summary_quality": "NOT_EVALUATED"
+}

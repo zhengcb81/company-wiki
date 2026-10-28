@@ -14,9 +14,11 @@ from company_wiki.automation.narrative_contracts import (
 from company_wiki.automation.narrative_model import (
     NarrativeModelRequest, NarrativeModelResponse, decode_model_draft,
 )
+from company_wiki.automation.narrative_model_runtime import build_model_request
 from company_wiki.automation.narrative_select import NarrativeSelectHandler
 from company_wiki.automation.narrative_verify import NarrativeVerifyHandler
 from company_wiki.automation.models import canonical_json
+from company_wiki.document_understanding.reading_context_contract import CURRENT_READING_CONTEXT_SCHEMA
 from support.narrative_model_request_fixture import selection
 from unit.test_official_json_model_subject import selection as official_selection
 
@@ -203,7 +205,14 @@ def test_reading_context_group_identity_preserves_semantics_and_deduplicates_exa
     wire = base.to_dict()
     full_context = reading_context(base)
     full_context["schema_version"] = "du-production-reading/2"
-    full_context["groups"] = groups
+    legacy_groups = deepcopy(groups)
+    for group in legacy_groups:
+        for view in group["citation_views"]:
+            view.pop("reading_support_use")
+            view.pop("reading_support_reason")
+        group.pop("group_id")
+        group["group_id"] = narrative_reading._reading_group_id(group)
+    full_context["groups"] = legacy_groups
     wire["reading_context"] = full_context
     selected = NarrativeSelectResult.from_dict(wire)
     request = NarrativeModelRequest.from_selection(selected)
@@ -500,13 +509,28 @@ def test_actual_shared_engine_context_passes_formal_transport_at_48k_shared_budg
                            parser_identity=("narrative-parser", "0.1.0"))
     wire = NarrativeSelectHandler._result_dict(event, base.prompt_review, work, selector_version="0.9.0")
     selected = NarrativeSelectResult.from_dict(wire)
-    data = json.loads(NarrativeModelRequest.from_selection(selected).data_json)
-    assert len(data["evidence"]) == 4 and len(data["evidence_groups"]) == 2
-    assert [row[1] for row in data["evidence"]] == [unit.raw_text for unit in document.units]
-    assert sum(len(row[1]) for row in data["evidence"]) < 48000
-    assert data["reading_strategy"]["reading_policy_version"].startswith("du-sent-policy/1+")
-    assert len(data["reading_strategy"]["reading_policy_version"].split("+")[1]) == 64
-    assert data["reading_strategy"]["reading_policies"] == package.reading_context["reading_policies"]
+    data = json.loads(build_model_request(selected,
+        reading_projection_version="reading-model-input/4").data_json)
+    material = data["material"]
+    rows = material["shared_fragments"] + [part for task in material["tasks"]
+                                          for part in task["parts"] if "text" in part]
+    by_source = {row["source_key"]: row["text"] for row in rows}
+    assert len(rows) == len(by_source) == 4 and len(material["tasks"]) == 2
+    assert [by_source[f"s{i}"] for i in range(1, 5)] == [unit.raw_text for unit in document.units]
+    assert sum(map(len, by_source.values())) < 48000
+    public_context = selected.to_dict()["reading_context"]
+    assert public_context["reading_policy_version"].startswith("du-sent-policy/1+")
+    assert len(public_context["reading_policy_version"].split("+")[1]) == 64
+    assert public_context["reading_policies"] == package.reading_context["reading_policies"]
+    # The current model projection carries semantic reading instructions;
+    # version/installation identity remains in the public source context.
+    strategy = data["reading_strategy"]
+    assert "reading_policy_version" not in strategy
+    assert len(strategy["reading_policies"]) == len(public_context["reading_policies"])
+    for sent, original in zip(strategy["reading_policies"], public_context["reading_policies"], strict=True):
+        for field in ("family", "summary_focus", "reading_questions", "context_requirements", "negative_hints"):
+            assert sent[field] == original[field]
+        assert "profile_id" not in sent and "profile_version" not in sent
     assert "wrong_assertion" not in canonical_json(data)
 
 
@@ -557,8 +581,8 @@ def test_actual_shared_engine_budget_diagnostics_survive_public_result_roundtrip
         selected_trace["limited"] = invalid_count > len(selected_trace["samples"])
         with pytest.raises(NarrativeContractError, match="selected count"):
             NarrativeSelectResult.from_dict(malformed_trace)
-    model_strategy = json.loads(NarrativeModelRequest.from_selection(
-        restored, reading_projection_version="reading-model-input/1").data_json)["reading_strategy"]
+    model_strategy = json.loads(build_model_request(restored,
+        reading_projection_version="reading-model-input/4").data_json)["reading_strategy"]
     assert "selection_diagnostics" not in model_strategy
     assert "selection_trace" not in model_strategy
 
@@ -682,7 +706,7 @@ def test_group_closure_limit_has_correct_dimension_through_public_result(monkeyp
     public = result.to_dict()
     assert public["reading_context"]["selection_diagnostics"] == rows
     context = public["reading_context"]
-    assert context["schema_version"] == "du-production-reading/3"
+    assert context["schema_version"] == CURRENT_READING_CONTEXT_SCHEMA
     trace = context["selection_trace"]
     assert trace["schema_version"] == "selection-trace/1"
     assert trace["selected"]["count"] == len(package.evidence_spans)
@@ -699,9 +723,11 @@ def test_group_closure_limit_has_correct_dimension_through_public_result(monkeyp
     forged_trace.update(count=1, limited=True)
     with pytest.raises(NarrativeContractError, match="selected count"):
         NarrativeSelectResult.from_dict(forged_selected)
-    legacy_strategy = json.loads(NarrativeModelRequest.from_selection(result).data_json)["reading_strategy"]
-    assert "selection_trace" not in legacy_strategy
-    assert "selection_diagnostics" not in legacy_strategy
+    from company_wiki.automation.narrative_model_scoped import compile_scoped_model_view
+    model_material = compile_scoped_model_view(result, max_claims=20).to_model_dict()
+    assert model_material["available_task_count"] == 0 and model_material["tasks"] == []
+    assert "selection_trace" not in model_material
+    assert "selection_diagnostics" not in model_material
 
 
 def test_trace_separates_semantic_reject_defer_and_budget_omission(monkeypatch):
@@ -737,10 +763,14 @@ def test_trace_separates_semantic_reject_defer_and_budget_omission(monkeypatch):
     assert omitted_ids - selected_ids
 
     restored = NarrativeSelectResult.from_dict(public_select_wire(package, document))
-    model = json.loads(NarrativeModelRequest.from_selection(restored).data_json)
-    sent_text = {row[1] for row in model["evidence"]}
+    from company_wiki.automation.narrative_model_runtime import build_model_request
+    model = json.loads(build_model_request(restored, reading_projection_version='reading-model-input/4').data_json)
+    material = model['material']
+    fragments = {row['source_key']: row for row in material['shared_fragments']}
+    sent_text = {(fragments[part['shared_ref']] if 'shared_ref' in part else part)['text']
+                 for task in material['tasks'] for part in task['parts']}
     assert sent_text == {span.raw_text for span in package.evidence_spans}
-    assert "selection_trace" not in model["reading_strategy"]
+    assert "selection_trace" not in material
 
     inconsistent_admission = public_select_wire(package, document)
     admission = inconsistent_admission["reading_context"]["selection_trace"]["admission"]

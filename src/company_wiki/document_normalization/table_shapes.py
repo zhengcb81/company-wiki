@@ -3,6 +3,7 @@ from __future__ import annotations
 
 import re
 import unicodedata
+from dataclasses import dataclass
 
 _NUMBER_CELL = re.compile(r"[+−-]?\d(?:[\d., \u00a0\u202f]*\d)?[%％]?")
 _FOOTNOTE_MARKERS = "*†‡¹²³⁴⁵⁶⁷⁸⁹⁰"
@@ -33,6 +34,40 @@ def has_tabular_value_tail(text: str) -> bool:
             and all(_is_value_cell(cell) for cell in cells[1:]))
 
 
+@dataclass(frozen=True)
+class ValueCellObservation:
+    unbound_numeric_cells: bool
+    complete_value_row: bool
+
+
+def observe_value_cells(text: str) -> ValueCellObservation:
+    """Observe run presence and whole material coverage in one bounded pass.
+
+    Whole coverage requires only visible scalars, optionally preceded by one
+    nominal framing cell. Another text cell or sentence boundary leaves
+    material unexplained. This proves neither business meaning nor columns.
+    """
+    cells = [cell.strip() for cell in re.split(r"[\r\n\t|]+", text) if cell.strip()]
+    has_label = False
+    numeric_run = 0
+    has_values = False
+    has_scalar = False
+    complete = bool(cells)
+    for index, cell in enumerate(cells):
+        if _is_value_cell(cell):
+            numeric = any(char.isdigit() for char in cell)
+            has_scalar = has_scalar or numeric
+            numeric_run += numeric
+            has_values = has_values or numeric_run >= 2
+        else:
+            nominal = any(char.isalpha() for char in cell)
+            has_label = has_label or nominal
+            numeric_run = 0
+            complete = complete and index == 0 and nominal and not any(
+                char in ".!?。！？;；" for char in cell)
+    return ValueCellObservation(has_label and has_values, complete and has_scalar)
+
+
 def has_unbound_numeric_cells(text: str) -> bool:
     """Observe several separate values; prove no column, unit or period.
 
@@ -42,15 +77,4 @@ def has_unbound_numeric_cells(text: str) -> bool:
     Require a consecutive value run: a number wrapped between ordinary prose
     fragments does not become a cell merely because another number follows.
     """
-    cells = [cell.strip() for cell in re.split(r"[\r\n\t|]+", text) if cell.strip()]
-    has_label = False
-    numeric_run = 0
-    has_values = False
-    for cell in cells:
-        if _is_value_cell(cell):
-            numeric_run += any(char.isdigit() for char in cell)
-            has_values = has_values or numeric_run >= 2
-        else:
-            has_label = has_label or any(char.isalpha() for char in cell)
-            numeric_run = 0
-    return has_label and has_values
+    return observe_value_cells(text).unbound_numeric_cells

@@ -509,7 +509,7 @@ def test_joint_fact_requires_all_original_fragments_but_no_unrelated_background_
             "未来四年，公司将通",
             "过扩产与客户认证覆盖55%的设备市",
             "场。",
-            "另一个普通产品的说明。",
+            "另一种产品由区域渠道向客户提供维护服务。",
         ],
         heading=True,
     )
@@ -761,8 +761,11 @@ def test_real_shared_context_groups_keep_original_span_ids_and_native_order():
     assert all(set(group) == {
         "group_id", "kind", "section_role", "evidence_ids", "citation_views",
     } for group in context["groups"])
-    assert all(set(view) == {"support_evidence_ids", "context_evidence_ids"}
+    assert all(set(view) == {"support_evidence_ids", "context_evidence_ids",
+                             "reading_support_use", "reading_support_reason"}
                for group in context["groups"] for view in group["citation_views"])
+    assert all(view['reading_support_use'] == 'support'
+               for group in context['groups'] for view in group['citation_views'])
     assert not any(span.raw_text in str(context["groups"])
                    for span in selected.evidence_spans)
 

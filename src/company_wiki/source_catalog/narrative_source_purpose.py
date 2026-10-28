@@ -10,6 +10,10 @@ from __future__ import annotations
 import re
 
 from company_wiki.document_normalization.text_matching import matching_reading_text
+from company_wiki.document_understanding.operating_states.assertion_roles import (
+    SourceAssertionRoles, prepare_source_assertions,
+    descriptive_operating_relation as descriptive_operating_relation,
+)
 
 from .narrative_business_disclosures import reporting_basis_relations
 from .narrative_business_meaning import concrete_operating_event, describes_business
@@ -18,8 +22,10 @@ from .narrative_reporting_rules import reporting_rule_without_operating_event
 
 NON_OPERATING_PURPOSES = frozenset({
     "accounting_policy", "audit_procedure", "treasury_policy", "template_no_event", "navigation",
-    "governance_training",
+    "governance_training", "reporting_definition",
 })
+# Extra bounded full-clause scans for rule objects and concrete descriptions.
+SOURCE_PURPOSE_EXTENSION_SCAN_PASSES = 12
 
 _ACCOUNTING = re.compile(
     r"期权定价|股份支付|股票期权|使用权资产|租赁负债|账面价值|计入损益|"
@@ -76,12 +82,6 @@ _TEMPLATE = re.compile(r"^[\s□☑☐√✓✔×✗适用不\.、/():：（）\
 _LABELLED_NO_EVENT = re.compile(
     r"^(?:(?:[A-Za-z0-9]{1,8}|[(（][A-Za-z0-9一二三四五六七八九十]{1,8}[)）])\s*[.、)]?\s*)?"
     r"(?:[^。！？；;.!?]|(?<=\d)\.(?=\d))*?[□☐]\s*适用\s*[√✓✔☑]\s*不适用\s*$")
-# A new explicit actor starts an independent assertion even after a comma.
-# Subordinate audit test descriptions do not manufacture a company event.
-_ASSERTION_ACTOR = re.compile(
-    r"[,，]\s*(?:(?:and|but)\s+)?(?=(?:公司|本公司|集团|本集团|我们|"
-    r"the company\b|the group\b|our company\b|we\b))", re.I)
-
 # This stock is an operating contract measure, not a financial total inferred
 # from an arbitrary currency amount. Period/conversion interpretation stays in
 # the original source; this classifier never computes a dated metric.
@@ -134,8 +134,21 @@ _AUDIT_OWNER = re.compile(
     r"\b.{0,45}\b(?:test\w*|evaluat\w*|check\w*|examin\w*|includ\w*|involv\w*|performed|conducted)\b|"
     r"^\s*(?:本次|我们的|我們的)?审计(?:程序|测试|证据).{0,20}(?:包括|检查|涉及|涵盖|实施)", re.I)
 
-
-def _clause_purpose(value: str) -> str:
+# Rules use accounting/incentive objects even when they contain change, service,
+# staff or plan verbs. They are not observed customer/product operations.
+_VALUATION_OBJECT = re.compile(r"股权投资|权益投资|股权证券|公平值|公允价值|"
+    r"\b(?:equity investments?|equity securities|fair value)\b", re.I)
+_VALUATION_RULE = re.compile(r"计量|替代计量|减值|可观察价格|"
+    r"\b(?:measur\w*|impairment|observable price|carrying value)\b", re.I)
+_INCENTIVE_OBJECT = re.compile(r"购股权|股份奖励|股权激励|股份支付|"
+    r"\b(?:share[ -]based compensation|employee share options?|share incentive|equity incentive)\b", re.I)
+_INCENTIVE_RULE = re.compile(r"计划|费用|授出|归属|条件|年期|有效期|旨在|"
+    r"\b(?:schemes?|plans?|expense|grant\w*|vest\w*|conditions?|valid|aims?)\b", re.I)
+_RESULT_DEFINITION_OBJECT = re.compile(r"非公认会计准则|经调整.{0,12}(?:亏损|利润)|"
+    r"\b(?:non[- ]GAAP|adjusted (?:operating )?(?:loss|profit|EBITDA))\b", re.I)
+_RESULT_DEFINITION_RULE = re.compile(r"界定|定义|对账|调节|"
+    r"\b(?:defin\w*|reconcil\w*)\b", re.I)
+def _clause_purpose(value: str, *, operating_proof: bool = False) -> str:
     # The form's question/label may contain product or future-plan words.
     # Its explicit negative response is still not an observed business event.
     # Source clauses separated by real terminators are assessed independently.
@@ -145,6 +158,10 @@ def _clause_purpose(value: str) -> str:
         return "navigation"
     if _GOVERNANCE_TRAINING.search(value):
         return "governance_training"
+    if not operating_proof and ((_VALUATION_OBJECT.search(value) and _VALUATION_RULE.search(value))
+            or (_INCENTIVE_OBJECT.search(value) and _INCENTIVE_RULE.search(value))
+            or (_RESULT_DEFINITION_OBJECT.search(value) and _RESULT_DEFINITION_RULE.search(value))):
+        return "accounting_policy"
     basis = reporting_basis_relations(value)
     if "reporting_outlook_recast" in basis:
         return "operating_guidance"
@@ -169,10 +186,15 @@ def _clause_purpose(value: str) -> str:
     stock = _CONTRACT_STOCK.search(value)
     if stock and _STOCK_VALUE.search(value[stock.end():]):
         return "operating_contract_stock"
-    if _ACCOUNTING.search(value):
-        return "accounting_policy"
     if _TREASURY.search(value):
         return "treasury_policy"
+    # A typed operating relation binds the actual product and its supplied
+    # use/function. Financial words within that product's name are weaker
+    # evidence than this relation; actual accounting rules were checked above.
+    if operating_proof:
+        return "operating"
+    if _ACCOUNTING.search(value):
+        return "accounting_policy"
     if _TEMPLATE.fullmatch(value) and any(character in value for character in "□☑☐√✓适用"):
         return "template_no_event"
     if describes_business(value):
@@ -196,7 +218,7 @@ def revenue_recognition_mechanism(text: str) -> bool:
                 and _CUSTOMER_CONTROL_TRANSFER.search(value))
 
 
-def source_purpose(text: str) -> str:
+def source_purpose(text: str, *, prepared: SourceAssertionRoles | None = None) -> str:
     """Describe the purpose of bounded material; no whole-chapter blacklist.
 
     A separate complete operating clause keeps mixed acquisition/factory notes
@@ -209,9 +231,9 @@ def source_purpose(text: str) -> str:
     # No noun in another sentence may lend an operating object to a policy
     # verb. Conversely a genuine independent business sentence is retained
     # inside an acquisition/lease note rather than blacklisting that chapter.
-    sentences = re.split(r"[。！？；;]|(?<=[.!?])\s+", value)
-    clauses = (part for sentence in sentences for part in _ASSERTION_ACTOR.split(sentence))
-    purposes = tuple(_clause_purpose(clause.strip()) for clause in clauses if clause.strip())
+    prepared = prepared if prepared is not None else prepare_source_assertions(value)
+    purposes = tuple(clause.rule_purpose or _clause_purpose(clause.text,
+        operating_proof=clause.operating) for clause in prepared.clauses)
     for purpose in ("operating_contract_stock", "operating", "operating_metric_basis",
                     "operating_guidance", "operating_structure_basis",
                     "operating_investment_disclosure"):

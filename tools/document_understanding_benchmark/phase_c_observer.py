@@ -50,7 +50,8 @@ def _oracle_reading_context(context):
     schema = context.get("schema_version")
     if schema in {"du-production-reading/1", "du-production-reading/2"}:
         return context
-    if schema != "du-production-reading/3":
+    from company_wiki.document_understanding.reading_context_contract import TRACED_READING_CONTEXT_SCHEMAS
+    if schema not in TRACED_READING_CONTEXT_SCHEMAS:
         raise ValueError("observer requires a validated production reading context")
     groups = []
     for row in context.get("groups", ()):

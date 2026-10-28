@@ -76,6 +76,7 @@ def _budget_item(
         required_item_ids=tuple((reading or {}).get("required", ())),
         is_context_only=(reading or {}).get("context_only", False),
         value_band=(reading or {}).get("value_band", "description"),
+        reading_support_use=(reading or {}).get("support_use"),
     )
 
 
@@ -123,10 +124,9 @@ def _evidence_spans(
 
 def _status(
     structure: DocumentStructure,
-    route: DocumentRoute,
     spans: tuple[EvidenceSpan, ...],
     omitted: int,
-    dropped_financial_count: int,
+    empty_result_proven: bool,
 ) -> SelectionStatus:
     if spans and any("locator_unstable" in span.quality_flags for span in spans):
         return "needs_review"
@@ -140,9 +140,7 @@ def _status(
         return "partial"
     if not structure.coverage_complete:
         return "needs_review"
-    if structure.units and dropped_financial_count == len(structure.units):
-        return "skipped_no_narrative"
-    return "skipped_no_narrative" if route.empty_result_may_skip else "needs_review"
+    return "skipped_no_narrative" if empty_result_proven else "needs_review"
 
 
 def finalize_selection(
@@ -237,11 +235,17 @@ def finalize_selection(
         else:
             row["dimension"] = "selection_work" if reason == "work_budget_exhausted" else "selection_policy"
         diagnostic_rows.append(row)
+    # Current reading certifies whole-scope disposition in its source owner.
+    # Financial counts are diagnostics, not an independent terminal proof.
+    # Historical callers retain their former counter-based replay behavior.
+    empty_result_proven = route.empty_result_may_skip or bool(
+        budget_policy != READING_BUDGET_POLICY and structure.units
+        and dropped_financial_count == len(structure.units))
     return NarrativeEvidencePackage(
         source_id=structure.source_id,
         source_sha256=structure.source_sha256,
         document_kind=route.document_kind,
-        status=_status(structure, route, spans, omitted, dropped_financial_count),
+        status=_status(structure, spans, omitted, empty_result_proven),
         evidence_spans=spans,
         selection_limit=route.selection_limit,
         candidate_count=len(candidates),

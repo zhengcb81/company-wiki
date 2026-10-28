@@ -1,0 +1,159 @@
+{
+  "schema_version": "source-assessment-root-design/4",
+  "status": "ROOT_ACCEPTED_IMPLEMENTATION_IN_PROGRESS",
+  "existing_failed_nodes": [
+    {
+      "node": "tests.unit.document_understanding_selection.test_reading_multilevel_native_ancestry::test_nested_lists_share_one_physical_observation_for_the_same_page_edge",
+      "classification": "true_source_recall_regression",
+      "keep_assertions": true,
+      "failure": "tests\\unit\\document_understanding_selection\\test_reading_multilevel_native_ancestry.py:125: in test_nested_lists_share_one_physical_observation_for_the_same_page_edge\n    assert support and any(support.intersection(t.support_ids) for t in view.plan.tasks)\nE   assert (set())"
+    },
+    {
+      "node": "tests.unit.document_understanding_selection.test_reading_native_continuity::test_joint_fact_requires_all_original_fragments_but_no_unrelated_background_members",
+      "classification": "true_source_recall_regression",
+      "keep_assertions": true,
+      "failure": "tests\\unit\\document_understanding_selection\\test_reading_native_continuity.py:529: in test_joint_fact_requires_all_original_fragments_but_no_unrelated_background_members\n    assert metadata[parsed.units[-1].unit_id][\"required\"] == (head,)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   KeyError: 'urn:company-wiki:narrative-unit:sha256:711a3625145d5f3c754e7ed243faa23ff33df593e3044e0e12c039b6c57467ec'"
+    },
+    {
+      "node": "tests.unit.document_understanding_selection.test_reading_native_dependency_closure::test_adjacent_project_facts_for_different_objects_stay_separate",
+      "classification": "true_source_recall_regression",
+      "keep_assertions": true,
+      "failure": "tests\\unit\\document_understanding_selection\\test_reading_native_dependency_closure.py:173: in test_adjacent_project_facts_for_different_objects_stay_separate\n    assert milestone_ids and capacity_ids\nE   AssertionError: assert ({'urn:company-wiki:evidence-span:sha256:f4f8b590738481f54a7e36be565bd38aa2fa97f26e4b211e751a420f5ae688b0'} and set())"
+    },
+    {
+      "node": "tests.unit.document_understanding_selection.test_reading_native_dependency_closure::test_adjacent_project_facts_do_not_match_only_on_generic_phase_number",
+      "classification": "true_source_recall_regression",
+      "keep_assertions": true,
+      "failure": "tests\\unit\\document_understanding_selection\\test_reading_native_dependency_closure.py:201: in test_adjacent_project_facts_do_not_match_only_on_generic_phase_number\n    assert milestone_ids and capacity_ids and milestone_views and capacity_views\nE   AssertionError: assert ({'urn:company-wiki:evidence-span:sha256:79958ac19f4b375e358c55521b603de33aba280d217f9ae8bec51701fece9a49'} and set())"
+    },
+    {
+      "node": "tests.unit.document_understanding_selection.test_reading_semantic_value::test_independent_complete_statements_are_not_one_atomic_business_claim[zh-texts0]",
+      "classification": "true_source_recall_regression",
+      "keep_assertions": true,
+      "failure": "tests\\unit\\document_understanding_selection\\test_reading_semantic_value.py:77: in test_independent_complete_statements_are_not_one_atomic_business_claim\n    assert [package[\"member_unit_ids\"] for package in packages] == [[uid] for uid in ids]\nE   AssertionError: assert [['urn:compan...64c28f21c0e']] == [['urn:compan...a7282565a49']]\nE     \nE     Right contains one more item: ['urn:company-wiki:narrative-unit:sha256:a3cad085f0b8aa08feabedb344b9cf657c0b0cde9c96ed2e179d5a7282565a49']\nE     Use -v to get more diff"
+    },
+    {
+      "node": "tests.unit.document_understanding_selection.test_reading_semantic_value::test_independent_complete_statements_are_not_one_atomic_business_claim[en-texts1]",
+      "classification": "true_source_recall_regression",
+      "keep_assertions": true,
+      "failure": "tests\\unit\\document_understanding_selection\\test_reading_semantic_value.py:77: in test_independent_complete_statements_are_not_one_atomic_business_claim\n    assert [package[\"member_unit_ids\"] for package in packages] == [[uid] for uid in ids]\nE   AssertionError: assert [['urn:compan...027f64113b5']] == [['urn:compan...11871b38bc8']]\nE     \nE     Right contains one more item: ['urn:company-wiki:narrative-unit:sha256:7dfa5841665ad79fcd796a3ede7ce037337dd67eb1b5bcde789f311871b38bc8']\nE     Use -v to get more diff"
+    },
+    {
+      "node": "tests.unit.document_understanding_selection.test_reading_semantic_value::test_statement_split_and_window_fact_share_the_same_cjk_boundary_rule",
+      "classification": "true_source_recall_regression",
+      "keep_assertions": true,
+      "failure": "tests\\unit\\document_understanding_selection\\test_reading_semantic_value.py:196: in test_statement_split_and_window_fact_share_the_same_cjk_boundary_rule\n    assert [package[\"member_unit_ids\"] for package in packages] == [\nE   AssertionError: assert [['urn:compan...c63a35f9cb7']] == [['urn:compan...fe03cdf0a2f']]\nE     \nE     At index 0 diff: ['urn:company-wiki:narrative-unit:sha256:f04295bbcfc585972d043e39d3129234fb687edcca59caa4094f0dc32ba8bbca'] != ['urn:company-wiki:narrative-unit:sha256:0704fafe9cfbaecbd872eaa5f88cf57b4013181d184ce6b83e6ada97d41cb908', 'urn:company-wiki:narrative-unit:sha256:188f32b0fc1ebe398bd937351a18e64def754ca1462a7f0a6ee34c63a35f9cb7']\nE     Left contains one more item: ['urn:company-wiki:narrative-unit:sha256:0704fafe9cfbaecbd872eaa5f88cf57b4013181d184ce6b83e6ada97d41cb908', 'urn:company-wiki:narrative-unit:sha256:188f32b0fc1ebe398bd937351a18e64def754ca1462a7f0a6ee34c63a35f9cb7']\nE     Use -v to get more diff"
+    },
+    {
+      "node": "tests.unit.document_understanding_selection.test_reading_source_purpose_boundaries::test_public_selector_retains_factory_event_inside_accounting_note",
+      "classification": "true_source_recall_regression",
+      "keep_assertions": true,
+      "failure": "tests\\unit\\document_understanding_selection\\test_reading_source_purpose_boundaries.py:171: in test_public_selector_retains_factory_event_inside_accounting_note\n    assert text in [span.raw_text for span in result.evidence_spans]\nE   AssertionError: assert 'The company acquired a factory. Right-of-use assets were recognized at carrying value.' in []"
+    },
+    {
+      "node": "tests.unit.document_understanding_selection.test_reading_untyped_numeric_quality::test_single_value_and_complete_prose_are_not_labelled_as_unbound_tables[single-year-heading]",
+      "classification": "superseded_exact_expectation",
+      "keep_assertions": false,
+      "failure": "tests\\unit\\document_understanding_selection\\test_reading_untyped_numeric_quality.py:205: in test_single_value_and_complete_prose_are_not_labelled_as_unbound_tables\n    assert spans and all(FLAG not in span.quality_flags for span in spans)\nE   assert ([])"
+    },
+    {
+      "node": "tests.unit.document_understanding_selection.test_reading_untyped_numeric_quality::test_one_parent_unknown_quality_cannot_contaminate_another_parent_prose",
+      "classification": "true_source_recall_regression",
+      "keep_assertions": true,
+      "failure": "tests\\unit\\document_understanding_selection\\test_reading_untyped_numeric_quality.py:251: in test_one_parent_unknown_quality_cannot_contaminate_another_parent_prose\n    assert second_spans and all(FLAG not in span.quality_flags for span in second_spans)\nE   assert ([])"
+    },
+    {
+      "node": "tests.unit.document_understanding_selection.test_reading_value_coverage::test_actual_operating_fact_and_scope_only_description_receive_different_bands",
+      "classification": "superseded_exact_expectation",
+      "keep_assertions": false,
+      "failure": "tests\\unit\\document_understanding_selection\\test_reading_value_coverage.py:219: in test_actual_operating_fact_and_scope_only_description_receive_different_bands\n    assert metadata[units[1].unit_id][\"topics\"] == (\"business\",)\nE   AssertionError: assert ('operating_m...', 'business') == ('business',)\nE     \nE     At index 0 diff: 'operating_mechanism' != 'business'\nE     Left contains one more item: 'business'\nE     Use -v to get more diff"
+    }
+  ],
+  "classification": {
+    "true_regressions": 9,
+    "superseded_exact_expectations": 2
+  },
+  "proposed_shared_owner_expansion": [
+    "src/company_wiki/document_understanding/operating_states/relations.py",
+    "src/company_wiki/document_understanding/operating_states/patterns.py",
+    "src/company_wiki/source_catalog/narrative_operating_relations.py"
+  ],
+  "root": [
+    "Reference containment proves location, not complete or operating assertion",
+    "Production fact projection discards complete events while source use lets unknown refs bypass that loss",
+    "Financial keyword-pair purpose lacks governed object/role scope",
+    "Newline plus any digit is a second numeric attribution rule"
+  ],
+  "contract": [
+    "Private shared prepared typed assertion proof, with stage separate from completeness and business purpose",
+    "SourceOperatingSession caches one assessment per exact source/support owner",
+    "fact/financial/source support project the same assessment; support helper consumes proof, not independent text classification",
+    "Purpose resolves governing predicate and actual argument head; no whole-financial-note exclusion",
+    "Reuse original numeric/table-shape authority and remove any-digit layout heuristic",
+    "External reading-context /4 and stage wire unchanged; no caps raised"
+  ],
+  "nested_observation": {
+    "complete": true,
+    "work": 14688,
+    "limit": 16000000,
+    "withheld": [],
+    "physical_observations_per_context_edge": 1,
+    "root": "No metric proof for customer repeat-purchase ratio; not a budget/cache failure"
+  },
+  "source_evidence": [
+    "source-use-final-v3.xml/log",
+    "source-review-v3/native-triage.json",
+    "source-review-v3/test_rule_roles.py",
+    "source-review-v3/test_native_common_roots.py",
+    "regression-design-probe.json",
+    "probe_regression_design.py"
+  ],
+  "validation": [
+    "11 original failed nodes first, preserving nine real business/closure assertions",
+    "Independent sibling helper target and rule/native common-root controls",
+    "Neutral role/nominalization/unknown stage/purpose/number controls",
+    "Saved actual native scope oracle, original 3 gold unchanged, genuine financial-note billing/delivery kept",
+    "Necessary shared source/relation/metric influence packages and regex linear-work controls only",
+    "Changed-file static; ROOT owns one subsequent combined/public/native replay"
+  ],
+  "production_writes": 0,
+  "original_PDF_reads": 0,
+  "SDK_runs": 0,
+  "model_calls": 0,
+  "network_calls": 0,
+  "design_snapshot_sha256": "11fe89d5f73e988f3e661a1490413f7a30888b29d3ffd4ff38f285e6cd02c5ee",
+  "design_baseline_files": [
+    {
+      "path": "src/company_wiki/source_catalog/narrative_reading.py",
+      "sha256": "3d17456c9877148f616bed1e8d76286d683ccc1b6d4bf55965bdb127c6ce7212",
+      "lf_sha256": "148bc4beeffd2f1dab5dd6506c23ccb23160f48b5e79e148f1e416ea33e59549",
+      "unchanged_since_v3": true
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_policy.py",
+      "sha256": "d66648586eb2779232e0f6e655b6645c1e9c23d6fd9796ac68d1bb398bbb698a",
+      "lf_sha256": "67b672ee3c4912d08a1aa7d6dff9d06f48fe12f1db6cd09ccac16ff0e4a199ef",
+      "unchanged_since_v3": true
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_source_purpose.py",
+      "sha256": "82051820b80a630123cae39a334237a08619cd06ee1728b29a418bbfbbf68e1a",
+      "lf_sha256": "eef28a73c6e4cbee98811010845b0541bf11b06209dbdaab9b3008424389e5e8",
+      "unchanged_since_v3": true
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_support_use.py",
+      "sha256": "c98244f4602d68535d5056df6f9d894d61ea87870be8903cce5df5769dedf18d",
+      "lf_sha256": "c98244f4602d68535d5056df6f9d894d61ea87870be8903cce5df5769dedf18d",
+      "unchanged_since_v3": true
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_source_support_use.py",
+      "sha256": "47e42e559f28e6fc904c92203e36e09623a179a63e53b0f430f82c33d9930867",
+      "lf_sha256": "47e42e559f28e6fc904c92203e36e09623a179a63e53b0f430f82c33d9930867",
+      "unchanged_since_v3": true
+    }
+  ],
+  "baseline_notice": "These hashes describe the pre-implementation v3 design baseline, not current v4 source acceptance.",
+  "implementation_owner_note": "SOURCE owns shared assertion_roles, existing relationship/pattern/session and purpose/policy/support implementation; ROOT owns inventory, fixture migrations, public integration and release."
+}

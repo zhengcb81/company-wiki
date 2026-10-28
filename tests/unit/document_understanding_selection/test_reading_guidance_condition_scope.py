@@ -15,6 +15,7 @@ from types import SimpleNamespace
 import pytest
 
 from company_wiki.automation.narrative_model_scoped import compile_scoped_model_view
+from company_wiki.document_understanding.reading_context_contract import CURRENT_READING_CONTEXT_SCHEMA
 from company_wiki.resource_budget import DEFAULT_DOCUMENT_WORK_LIMIT, WorkBudget
 from company_wiki.source_catalog import narrative_reading as reading
 from unit.document_understanding_selection.test_reading_native_carriers import source_fixture
@@ -60,7 +61,7 @@ def _select(parsed, *, max_selected=96, max_chars=48000):
     assert DEFAULT_DOCUMENT_WORK_LIMIT == 16_000_000 and reading.MAX_READING_CHARS == 48000
     assert result.selection_limit == max_selected and len(result.evidence_spans) <= max_selected
     assert sum(len(s.raw_text or "") for s in result.evidence_spans) <= max_chars
-    assert result.reading_context["schema_version"] == "du-production-reading/3"
+    assert result.reading_context["schema_version"] == CURRENT_READING_CONTEXT_SCHEMA
     return result
 
 

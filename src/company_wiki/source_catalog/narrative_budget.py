@@ -148,6 +148,7 @@ class BudgetItem(Generic[PayloadT]):
     required_item_ids: tuple[str, ...] = ()
     is_context_only: bool = False
     value_band: Literal["meaningful_fact", "description"] = "description"
+    reading_support_use: Literal["support", "unresolved", "context_only"] | None = None
 
 
 @dataclass(frozen=True)
@@ -603,6 +604,9 @@ def _reading_plan(
             raise ValueError("evidence_chars must be a nonnegative integer")
         if type(item.is_context_only) is not bool:
             raise ValueError("is_context_only must be a boolean")
+        if item.reading_support_use is not None and (not isinstance(item.reading_support_use,str)
+                or item.reading_support_use not in {"support", "unresolved", "context_only"}):
+            raise ValueError("reading_support_use must be support, unresolved, context_only or None")
         if value_coverage and (not isinstance(item.value_band, str)
                               or item.value_band not in {"meaningful_fact", "description"}):
             raise ValueError("value_band must be meaningful_fact or description")
@@ -656,8 +660,11 @@ def _reading_plan(
     for group_members in grouped.values():
         group_members.sort(key=lambda item: (item.order_key, item.item_id))
 
+    def value_anchor(item):
+        return not item.is_context_only and (not balanced_coverage or item.reading_support_use != "context_only")
+
     anchors = {key: tuple(sorted(members, key=lambda item: (item.order_key, item.item_id)))
-               for key, members in grouped.items() if any(not item.is_context_only for item in members)}
+               for key, members in grouped.items() if any(value_anchor(item) for item in members)}
     closures: dict[str, frozenset[str]] = {}
     dropped: list[BudgetDiagnostic] = []
     stopped = False
@@ -714,7 +721,7 @@ def _reading_plan(
     guards: dict[tuple[Any, ...], set[int]] = {}
     for uid, item in by_id.items():
         signature = item.coverage_signature
-        if item.is_context_only or signature is None:
+        if not value_anchor(item) or signature is None:
             continue
         reference = id(signature)
         if value_coverage and reference in interned_objects:
@@ -752,11 +759,12 @@ def _reading_plan(
     class_repeated: dict[int, bool] = {}
     class_versions: dict[int, int] = {}
     signature_classes: dict[int, set[int]] = {}
-    bucket_ids: dict[tuple[int, int, tuple[str, ...]], int] = {}
+    bucket_ids: dict[tuple[int, int, int, tuple[str, ...]], int] = {}
     bucket_heaps: dict[int, list[tuple[Any, ...]]] = {}
     bucket_topics: dict[int, tuple[str, ...]] = {}
     bucket_priorities: dict[int, int] = {}
     bucket_values: dict[int, int] = {}
+    bucket_support_tiers: dict[int, int] = {}
     bucket_versions: dict[int, int] = {}
     topic_buckets: dict[str, set[int]] = {}
     unlabelled_buckets: set[int] = set()
@@ -764,7 +772,7 @@ def _reading_plan(
 
     for key, ids in closures.items():
         members = anchors[key]
-        value_items = tuple(item for item in members if not item.is_context_only)
+        value_items = tuple(item for item in members if value_anchor(item))
         if not charge(1 + 2 * len(ids) + len(members) + sum(len(item.reading_topics) for item in value_items)):
             return (), tuple((*dropped, work_stop()))
         chars[key] = sum(by_id[uid].evidence_chars for uid in ids)
@@ -776,7 +784,12 @@ def _reading_plan(
         # headings, a topic name or a high numeric score by the budget planner.
         value = (min(0 if item.value_band == "meaningful_fact" else 1 for item in value_items)
                  if value_coverage else 0)
-        bucket_key = (value, priority, topics)
+        # Complete source support precedes unresolved readability globally.
+        # None preserves legacy callers; older replay policies ignore this
+        # additive metadata. Payload text and scope labels cannot create it.
+        support_tier = (int(all(item.reading_support_use == "unresolved" for item in value_items))
+                        if balanced_coverage else 0)
+        bucket_key = (support_tier, value, priority, topics)
         if bucket_key not in bucket_ids:
             bid = len(bucket_ids)
             bucket_ids[bucket_key] = bid
@@ -784,6 +797,7 @@ def _reading_plan(
             bucket_topics[bid] = topics
             bucket_priorities[bid] = priority
             bucket_values[bid] = value
+            bucket_support_tiers[bid] = support_tier
             bucket_versions[bid] = 0
             for topic in topics:
                 topic_buckets.setdefault(topic, set()).add(bid)
@@ -863,7 +877,7 @@ def _reading_plan(
                     # high-priority details cannot permanently starve a less
                     # visited theme. Real scope priority still decides equal
                     # visitation; cost, signature work and closure are shared.
-                    rank = (bucket_values[bid], novelty, mean_visits,
+                    rank = (bucket_support_tiers[bid], bucket_values[bid], novelty, mean_visits,
                             bucket_priorities[bid], best[0], *best[1:6])
                 else:
                     rank = (bucket_values[bid], novelty, bucket_priorities[bid],
@@ -930,7 +944,7 @@ def _reading_plan(
             new_signatures: set[int] = set()
             for uid in sorted(added):
                 item = by_id[uid]
-                if not item.is_context_only:
+                if value_anchor(item):
                     for topic in set(item.reading_topics):
                         topic_visits[topic] = topic_visits.get(topic, 0) + 1
                         changed_topics.add(topic)
@@ -951,7 +965,7 @@ def _reading_plan(
                     else:
                         revisions[other_key] += 1
                         first = anchors[other_key][0]
-                        value_items = tuple(row for row in anchors[other_key] if not row.is_context_only)
+                        value_items = tuple(row for row in anchors[other_key] if value_anchor(row))
                         if not charge(len(value_items)) or not heap_work(len(class_heaps[other_cid]) + 1):
                             stopped = True
                             break

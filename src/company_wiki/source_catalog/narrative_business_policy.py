@@ -9,13 +9,15 @@ from __future__ import annotations
 from dataclasses import replace
 import re
 
-from company_wiki.document_normalization.text_matching import matching_reading_text, matching_script_text
+from company_wiki.document_normalization.text_matching import matching_reading_text
 
 from .n6_candidate_operating_facts import OperatingFact
 from .narrative_source_purpose import (
     NON_OPERATING_PURPOSES,
     revenue_recognition_mechanism,
+    descriptive_operating_relation,
     source_purpose,
+    SOURCE_PURPOSE_EXTENSION_SCAN_PASSES,
 )
 from .narrative_revenue_guidance import revenue_guidance
 from .narrative_recognition_scope import (
@@ -58,9 +60,11 @@ _ACTIVITY = re.compile(
 # legacy selectors keep detect_business_fact and its historical predicates.
 READING_BUSINESS_POLICY_VERSION = "reading-business-policy/22"
 READING_BUSINESS_SCAN_PASSES = (
-    14 + READING_DISCLOSURE_SCAN_PASSES + READING_RECOGNITION_SCOPE_SCAN_PASSES
+    14 + SOURCE_PURPOSE_EXTENSION_SCAN_PASSES + READING_DISCLOSURE_SCAN_PASSES + READING_RECOGNITION_SCOPE_SCAN_PASSES
     + RESOURCE_READING_SCAN_PASSES
 )
+_SOURCE_DYNAMIC_REASONS = frozenset({"operating_activity", "specific_business_event",
+    "applied_operating_milestone", "customer_adoption_milestone"})
 _FINANCIAL_BUSINESS_RELATIONS = frozenset({
     "business_billing_basis", "business_reporting_scope",
     "business_coverage_relation", "business_revenue_recognition", "source_revenue_guidance",
@@ -134,6 +138,7 @@ _REVENUE_GROWTH = re.compile(
     r"(?:收入|销售|銷售).{0,20}(?:增长|增長|下降|减少|減少)", re.I)
 _DRIVER_LINK = re.compile(r"\b(?:driven by|due to|reflecting)\b|主要由|由于|因为|受.{0,12}带动|得益于", re.I)
 _OPERATING_MEASURE = re.compile(
+    r"客户复购率|客戶復購率|\b(?:customer )?repeat.purchase rate\b|"
     r"\b(?:consumption|usage|subscribers?|seats?|customers?|users?|units?|volumes?|pricing)\b|"
     r"capacity utilization|product mix|\b(?:projects?|orders?|capacity|output|total volume)\b|"
     r"使用量|用量|订阅|訂閱|席位|用户|用戶|客户|客戶|销量|銷量|价格|價格|"
@@ -317,7 +322,7 @@ _SOURCE_QUANTITY = re.compile(
 _QUANTITY_SCALE = r"(?:(?:万|萬|亿|億|thousand|million|billion)\s*)?"
 _SOURCE_QUANTITY_UNIT = re.compile(
     r"^\s*" + _QUANTITY_SCALE +
-    r"(?:个|個|家|项|項|名|人|台|套|件|条|條|吨|噸|立方米|立方公尺|公升|升|米|"
+    r"(?:个|個|家|项|項|名|人|台|套|件|批|条|條|吨|噸|立方米|立方公尺|公升|升|米|"
     r"m[³3](?=$|[\s,，。.;；])|cubic\s+met(?:er|re)s?\b|kL\b|mL\b|L\b|"
     r"units?\b|customers?\b|projects?\b|subscribers?\b|lit(?:er|re)s?\b|tonnes?\b)", re.I)
 _SOURCE_NON_QUANTITY = re.compile(
@@ -796,26 +801,43 @@ def _reading_relations(clauses: tuple[str, ...]) -> tuple[str, ...]:
     return tuple(dict.fromkeys(reasons))
 
 
-def _detect_reading_business_fact(text: str, recognize) -> OperatingFact:
+def _detect_reading_business_fact(text: str, recognize, *, source_roles=None) -> OperatingFact:
     """Operating activity and bounded business relationships, independent of issuer.
 
     Legacy replay keeps its historical recognizer. The reading policy admits
     general operating activity in the same bounded clause; a noun or a financial
     growth sentence alone is insufficient. Numeric amounts are never required.
     """
+    if source_roles is None:
+        from company_wiki.document_understanding.operating_states.assertion_roles import prepare_source_assertions
+        source_roles = prepare_source_assertions(text)
     interpreted = _reading_text(text)
     clauses = _reading_clauses(interpreted)
     # A generic brand list must not borrow the legacy broad "comprises products"
     # mechanism. Only the opt-in reader filters that clause; legacy stays exact.
     source_clauses = tuple(clause for clause in clauses
         if not (_brand_portfolio(clause)[0] and not _brand_portfolio(clause)[1]))
-    # Preserve the old bounded per-native-line recognizer for all unfiltered
-    # material. A long wrapped tail must not erase an already observed fact.
-    fact = recognize('. '.join(source_clauses) if len(source_clauses) != len(clauses)
-                     else matching_script_text(text))
+    # Compatibility recognition is local to the same prepared source clauses.
+    # A noun in another sentence cannot donate itself to a word-only stage.
+    # Source-state projection below still owns all actual stage assertions.
+    observed = [recognize(clause) for clause in source_clauses]
+    fact = OperatingFact(any(item.eligible for item in observed),
+        tuple(dict.fromkeys(topic for item in observed for topic in item.topics)),
+        tuple(dict.fromkeys(reason for item in observed for reason in item.reasons)),
+        max((item.score for item in observed), default=0), any(item.financial_exempt for item in observed))
     activity = any(concrete_operating_event(clause) or
                    (_OBJECT.search(clause) and _ACTIVITY.search(clause)) for clause in clauses)
     relations = _reading_relations(clauses)
+    if descriptive_operating_relation(text, prepared=source_roles):
+        relations = tuple(dict.fromkeys((*relations, "operating_mechanism")))
+    elif source_roles.numeric_ambiguous:
+        # Flattening unidentified cells cannot manufacture a risk/event or a
+        # metric relation from labels in different rows. The original shape
+        # remains readable as unresolved; a complete independent prose clause
+        # above can still establish its own business meaning.
+        fact = OperatingFact()
+        activity = False
+        relations = ()
     if not relations and not activity and not _business_fact(interpreted).eligible:
         # The historical English event recognizer can treat a product-labelled
         # financial growth clause as an event. Preserve legacy replay, but the
@@ -842,7 +864,10 @@ def _detect_reading_business_fact(text: str, recognize) -> OperatingFact:
 
 def detect_reading_business_fact(text: str) -> OperatingFact:
     """Compatibility text recognizer; production supplies source relationships."""
-    return _purpose_fact(_detect_reading_business_fact(text, detect_business_fact), source_purpose(text))
+    from company_wiki.document_understanding.operating_states.assertion_roles import prepare_source_assertions
+    roles = prepare_source_assertions(text)
+    return _purpose_fact(_detect_reading_business_fact(text, detect_business_fact, source_roles=roles),
+                         source_purpose(text, prepared=roles))
 
 
 def _purpose_fact(fact: OperatingFact, purpose: str) -> OperatingFact:
@@ -874,11 +899,11 @@ _READING_ACCOUNTING = re.compile(r"营业收入|营业成本|净利润|资产负
 # merely because a broad grammatical relation was observed. Explicit legacy
 # text-only selectors keep _READING_ACCOUNTING and their historical behavior.
 _SOURCE_ACCOUNTING = re.compile(_SEGMENT_FINANCIAL_WORD.pattern +
-    r"|亏损|费用|成本|净损失|每股收益|现金流量|货币资金|应收账款|"
+    r"|毛利|现金(?:及现金)?等价物|现金流量|亏损|费用|成本|净损失|每股收益|货币资金|应收账款|"
     r"(?:经营|投资|筹资|融资)活动.{0,18}(?:现金|净额)|"
     r"非公认会计准则|借款|偿还贷款|购股权|股权激励计划|"
     r"\b(?:(?:net|operating|comprehensive|adjusted) loss(?:es)?|EBITDA|non[- ]GAAP|"
-    r"borrowings?|repayment of loans?|share incentive schemes?)\b", re.IGNORECASE)
+    r"borrowings?|repayment of loans?|share incentive schemes?|cash (?:and cash )?equivalents?|gross (?:profit|margin))\b", re.IGNORECASE)
 
 
 def reading_financial_only(text: str, fact: OperatingFact, *, recognize=None) -> bool:
@@ -896,21 +921,35 @@ def reading_financial_only(text: str, fact: OperatingFact, *, recognize=None) ->
     return rejected or bool(_READING_ACCOUNTING.search(text) and not fact.eligible)
 
 
-def assess_reading_business_fact(text: str, source_relations: dict, *, ref_text=None):
+def source_has_operating_measure(text: str) -> bool:
+    """Reuse the source metric-object vocabulary, without interpreting values."""
+    return bool(_OPERATING_MEASURE.search(_reading_text(text)))
+
+
+def source_has_operating_object(text: str) -> bool:
+    """Reuse the shared object observer for an unknown but bound predicate."""
+    return bool(_OBJECT.search(_reading_text(text)))
+
+
+def assess_reading_business_fact(text: str, source_relations: dict, *, ref_text=None, source_roles=None):
     """One call-local description/finance assessment for one source owner."""
     legacy_facts: dict[str, OperatingFact] = {}
     def recognize(value):
         if value not in legacy_facts:
             legacy_facts[value] = detect_business_fact(value)
         return legacy_facts[value]
-    description = _purpose_fact(_detect_reading_business_fact(text, recognize), source_purpose(text))
-    fact = project_reading_business_fact(text, source_relations, description=description, ref_text=ref_text)
+    from company_wiki.document_understanding.operating_states.assertion_roles import prepare_source_assertions
+    source_roles = source_roles if source_roles is not None else prepare_source_assertions(text)
+    description = _purpose_fact(_detect_reading_business_fact(text, recognize, source_roles=source_roles),
+                                source_purpose(text, prepared=source_roles))
+    fact = project_reading_business_fact(text, source_relations, description=description, ref_text=ref_text,
+                                       source_roles=source_roles)
     return fact, reading_financial_only(text, fact, recognize=recognize)
 
 
 def project_reading_business_fact(text: str, source_relations: dict, *,
                                   include_description: bool = True, ref_text=None,
-                                  description: OperatingFact | None = None) -> OperatingFact:
+                                  description: OperatingFact | None = None, source_roles=None) -> OperatingFact:
     """Combine independent descriptions with source-owned operating states.
 
     The text-only compatibility recognizer cannot assert progress in production.
@@ -938,12 +977,12 @@ def project_reading_business_fact(text: str, source_relations: dict, *,
         fact = replace(fact,
             topics=tuple(dict.fromkeys((*fact.topics, "business_recognition_scope"))),
             reasons=tuple(dict.fromkeys((*fact.reasons, "business_recognition_scope"))))
-    dynamic_reasons = {"operating_activity", "specific_business_event",
-                       "applied_operating_milestone", "customer_adoption_milestone"}
+    dynamic_reasons = _SOURCE_DYNAMIC_REASONS
     independent = tuple(reason for reason in fact.reasons if reason not in dynamic_reasons)
     topics = [topic for topic in fact.topics if topic != "business_progress"] if independent else []
     reasons = list(independent)
-    if not source_relations.get("relations") and set(fact.reasons) & dynamic_reasons:
+    if (not source_relations.get("relations") and set(fact.reasons) & dynamic_reasons
+            and descriptive_operating_relation(text, prepared=source_roles)):
         # Uncovered event grammar is useful source description, not proof of a
         # milestone. Preserve recall without a text-only completed-state label.
         reasons.append("operating_description_unknown")
@@ -980,7 +1019,7 @@ def project_reading_business_fact(text: str, source_relations: dict, *,
     return OperatingFact(bool(reasons), tuple(dict.fromkeys(topics)), tuple(dict.fromkeys(reasons)),
                          max(fact.score if independent else 0, 3 if reasons else 0),
                          (fact.financial_exempt and bool(set(independent) - UNRESOLVED_READING_REASONS))
-                         or (include_description and (bool(substantive) or fact.purpose == "operating")),
+                         or (include_description and bool(substantive)),
                          fact.purpose)
 
 

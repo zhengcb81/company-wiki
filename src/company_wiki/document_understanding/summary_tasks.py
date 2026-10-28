@@ -14,6 +14,10 @@ import json
 from typing import Any
 
 from company_wiki.source_contract import EvidenceSpan
+from .reading_context_contract import (
+    ATTRIBUTED_READING_CONTEXT_SCHEMAS, READING_CONTEXT_SCHEMAS,
+    SUMMARY_USE_CONTEXT_SCHEMAS, validate_summary_support_use,
+)
 
 
 SUMMARY_TASK_PLAN_SCHEMA = "source-summary-task-plan/1"
@@ -32,10 +36,13 @@ class SourceSummaryTask:
     topics: tuple[str, ...]
     selection_reasons: tuple[str, ...]
     support_roles: tuple[str, ...]
+    support_use: str | None = None
+    support_reason: str | None = None
 
     def to_binding(self) -> dict[str, Any]:
         return {name: list(value) if isinstance(value, tuple) else value
                 for name in self.__dataclass_fields__
+                if name not in {'support_use', 'support_reason'} or self.support_use is not None
                 for value in (getattr(self, name),)}
 
 
@@ -47,7 +54,9 @@ class SummaryTaskPlan:
 
     def to_binding(self) -> dict[str, Any]:
         """Finite causal mapping, without a second copy of original prose."""
-        return {"schema_version": SUMMARY_TASK_PLAN_SCHEMA,
+        schema = ('source-summary-task-plan/2' if any(task.support_use is not None for task in self.tasks)
+                  else SUMMARY_TASK_PLAN_SCHEMA)
+        return {"schema_version": schema,
                 "evidence_order": list(self.evidence_order), "max_claims": self.max_claims,
                 "tasks": [task.to_binding() for task in self.tasks]}
 
@@ -112,7 +121,7 @@ def build_summary_task_plan(
                 result.extend(item for item in value if isinstance(item, str))
         return tuple(dict.fromkeys(result))
 
-    def register(members, support, context, origin, kind, role):
+    def register(members, support, context, origin, kind, role, use=None, reason=None):
         if not isinstance(kind, str) or not isinstance(role, str):
             raise ValueError("source task labels must be immutable native strings")
         parents = {known[sid].source_id for sid in members}
@@ -128,30 +137,32 @@ def build_summary_task_plan(
             kind, role, observed_values(support, "topics"),
             observed_values(support, "selection_reasons"),
             support_roles,
+            use, reason,
         ))
 
     if reading_context is not None:
-        if reading_context.get("schema_version") not in {
-            "du-production-reading/1", "du-production-reading/2", "du-production-reading/3",
-        }:
+        if reading_context.get("schema_version") not in READING_CONTEXT_SCHEMAS:
             raise ValueError("source summary requires a known native reading context")
         for group in reading_context.get("groups", ()):
             members = ids(group["evidence_ids"])
             origin = group["group_id"]
             if not isinstance(origin, str) or not origin:
                 raise ValueError("source summary task requires its actual origin group")
-            views = (group["citation_views"] if reading_context["schema_version"] in {
-                "du-production-reading/2", "du-production-reading/3",
-            }
+            views = (group["citation_views"] if reading_context["schema_version"] in ATTRIBUTED_READING_CONTEXT_SCHEMAS
                      else ({"support_evidence_ids": members, "context_evidence_ids": ()},))
             if not isinstance(views, (tuple, list)) or not 1 <= len(views) <= 2:
                 raise ValueError("source summary requires the existing finite citation views")
             for view in views:
                 support = ids(view["support_evidence_ids"])
                 context = ids(view["context_evidence_ids"], allow_empty=True)
-                register(members, support, context, origin, group["kind"], group["section_role"])
+                use, reason = (validate_summary_support_use(view.get('reading_support_use'),
+                    view.get('reading_support_reason')) if reading_context['schema_version'] in SUMMARY_USE_CONTEXT_SCHEMAS
+                    else (None, None))
+                register(members, support, context, origin, group["kind"], group["section_role"], use, reason)
             grouped.update(members)
     for sid in order:
         if sid not in grouped:
-            register((sid,), (sid,), (), None, "standalone", "unknown")
+            current = reading_context is not None and reading_context['schema_version'] in SUMMARY_USE_CONTEXT_SCHEMAS
+            register((sid,), (sid,), (), None, "standalone", "unknown",
+                     'unresolved' if current else None, 'source_use_unassessed' if current else None)
     return SummaryTaskPlan(tuple(tasks), order, max_claims)

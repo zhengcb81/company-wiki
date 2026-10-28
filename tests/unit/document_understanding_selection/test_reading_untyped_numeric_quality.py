@@ -15,6 +15,7 @@ from types import SimpleNamespace
 import pytest
 
 from company_wiki.automation import narrative_model_scoped
+from company_wiki.document_understanding.reading_context_contract import CURRENT_READING_CONTEXT_SCHEMA
 from company_wiki.document_normalization import table_shapes
 from company_wiki.resource_budget import DEFAULT_DOCUMENT_WORK_LIMIT, new_document_work_budget
 from company_wiki.source_catalog import narrative_reading as reading
@@ -38,7 +39,7 @@ UNBOUND_ROWS = (
 )
 PROSE_CONTROLS = (
     ("label-one-value", "客户数量\n273", "经营情况"),
-    ("single-year-heading", "International business development\n2024", "Business review"),
+    ("single-year-in-prose", "The company served 735 customers in\n2024.", "Business review"),
     ("prose-quantities", "公司客户达到273家，新增客户75家，均已完成验证。", "经营情况"),
     ("wrapped-prose", "公司客户达到273家，\n新增客户75家，均已完成验证。", "经营情况"),
     ("english-prose", "The company served 735 customers, including 109 new customers.", "Business review"),
@@ -94,7 +95,7 @@ def _select(parsed):
     assert reading.MAX_READING_CHARS == 48_000
     assert budget.max_work_units == DEFAULT_DOCUMENT_WORK_LIMIT == 16_000_000
     assert not budget.exhausted
-    assert selected.reading_context["schema_version"] == "du-production-reading/3"
+    assert selected.reading_context["schema_version"] == CURRENT_READING_CONTEXT_SCHEMA
     assert selected.summary_input()["schema_version"] == "narrative-summary-input/0.2.0"
     return selected
 
@@ -203,6 +204,23 @@ def test_single_value_and_complete_prose_are_not_labelled_as_unbound_tables(labe
     spans = [span for span in selected.evidence_spans if span.raw_text == text]
     assert spans and all(FLAG not in span.quality_flags for span in spans)
     assert _snapshot(parsed) == before
+
+
+def test_year_label_is_neither_a_numeric_table_nor_independent_business_support():
+    text = "International business development\n2024"
+    parsed = _document(["Business review", text])
+    before = _snapshot(parsed)
+    assert not table_shapes.has_unbound_numeric_cells(text)
+    selected = _select(parsed)
+    assert _snapshot(parsed) == before
+    assert parsed.units[-1].raw_text == text
+    view = narrative_model_scoped.compile_scoped_model_view(
+        SimpleNamespace(evidence_spans=selected.evidence_spans,
+                        reading_context=selected.reading_context), max_claims=20,
+    )
+    spans = {span.span_id: span for span in selected.evidence_spans}
+    assert not any(spans[sid].raw_text == text
+                   for task in view.model_tasks for sid in task.support_ids)
 
 
 def test_complete_native_table_keeps_exact_numeric_identity_without_ambiguity():

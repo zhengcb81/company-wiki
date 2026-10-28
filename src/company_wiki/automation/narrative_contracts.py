@@ -1120,19 +1120,25 @@ def _reading_context(
 ) -> Mapping[str, Any] | None:
     if value is None:
         return None
+    from company_wiki.document_understanding.reading_context_contract import (
+        ATTRIBUTED_READING_CONTEXT_SCHEMAS, READING_CONTEXT_SCHEMAS,
+        TRACED_READING_CONTEXT_SCHEMAS, SUMMARY_USE_CONTEXT_SCHEMAS,
+        validate_summary_support_use,
+    )
     plain = _bounded_reading_json(value)
     extra: set[str] = set()
     if isinstance(plain, Mapping) and "deferred_count" in plain:
         extra |= {"deferred_count", "deferred_limited", "selection_diagnostics"}
-    if isinstance(plain, Mapping) and plain.get("schema_version") == "du-production-reading/3":
+    if isinstance(plain, Mapping) and plain.get("schema_version") in TRACED_READING_CONTEXT_SCHEMAS:
         extra |= {"deferred_count", "deferred_limited", "selection_diagnostics", "selection_trace"}
     item = _exact(plain, {
         "schema_version", "reading_policy_version", "reading_policies", "business_facets",
         "constraints", "groups", "unread", "deferred", "layout_coverage",
     } | extra, "reading_context")
-    if item["schema_version"] not in {"du-production-reading/1", "du-production-reading/2", "du-production-reading/3"}:
+    if item["schema_version"] not in READING_CONTEXT_SCHEMAS:
         raise NarrativeContractError("unsupported reading_context schema")
-    attributed = item["schema_version"] in {"du-production-reading/2", "du-production-reading/3"}
+    attributed = item["schema_version"] in ATTRIBUTED_READING_CONTEXT_SCHEMAS
+    assessed = item['schema_version'] in SUMMARY_USE_CONTEXT_SCHEMAS
     version = _text(item["reading_policy_version"], "reading_policy_version")
     prefix = "du-sent-policy/1+"
     if not version.startswith(prefix):
@@ -1185,7 +1191,13 @@ def _reading_context(
                 raise NarrativeContractError("reading_group requires one or two citation views")
             seen_support: set[frozenset[str]] = set()
             for value in views:
-                view = _exact(value, {"support_evidence_ids", "context_evidence_ids"}, "citation_view")
+                view = _exact(value, {"support_evidence_ids", "context_evidence_ids"}
+                    | ({'reading_support_use', 'reading_support_reason'} if assessed else set()), "citation_view")
+                if assessed:
+                    try:
+                        validate_summary_support_use(view['reading_support_use'], view['reading_support_reason'])
+                    except ValueError as exc:
+                        raise NarrativeContractError(str(exc)) from exc
                 support = _reading_texts(view["support_evidence_ids"], "citation_view.support_evidence_ids")
                 context = _reading_texts(view["context_evidence_ids"], "citation_view.context_evidence_ids")
                 if (not support or len(support) != len(set(support)) or len(context) != len(set(context))

@@ -1,5 +1,7 @@
 # 来源支持能力接线（2026-10-28 实施中）
 
+> 2026-10-28结案：此文为实施设计/过程记录；最终组件已按v6c独审PASS，见[SOURCE_USE_ACCEPTANCE](SOURCE_USE_ACCEPTANCE.md)。正式摘要/cache/RF采用仍OPEN。下方“未完成”仅描述当时状态。
+
 本细则承接 ADMISSION_ROOT_PLAN，不是新审批或许可。源码尚在施工，未签收或发布。
 
 - 唯一源 wire：`du-production-reading/4`；每个 `citation_views[]` 保留原 support/context 完整分区，新增必需字段 `reading_support_use`（support/context_only/unresolved）和 `reading_support_reason`（小写下划线诊断码，最长80字符）。判定属于此完整 support view，不能借 context 或按 span 多数投票。

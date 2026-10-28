@@ -179,6 +179,7 @@ class _Event:
     stage: str = "unknown"
     modality: str = "actual"
     embedded_actor: tuple[int, int] | None = None
+    bound_operating_object: bool = False
 
 
 @dataclass
@@ -432,8 +433,8 @@ def _classify_np(view: MatchingView, span: tuple[int, int],
     if not text:
         return "none", "unknown"
     product = product_head_suffix(text)
-    if product:
-        prefix = text[:product[0]]
+    if product or p.OPERATING_THEME_HEAD.search(text):
+        prefix = text[:product[0]] if product else text
         for marker, attribution in ((p.THIRD_PARTY, "other"), (p.RELATED_PARTY, "quoted_related_party")):
             party = marker.search(prefix)
             if party and p.POSSESSIVE_LINK.match(prefix[party.end():]):
@@ -455,6 +456,11 @@ def _classify_np(view: MatchingView, span: tuple[int, int],
 
 def _bind_event(view: MatchingView, scan: _UnitScan, clause: tuple[int, int],
                 event: _Event, previous_end: int | None) -> None:
+    # Explicit object slots and inherited subject NPs use the identical role
+    # owner. A typed object bound by the predicate is complete source evidence
+    # even when its state/modifier remains unknown.
+    event.bound_operating_object = any(_classify_np(view, span, scan.name_classes)[0] == "object"
+                                       for span in event.obj_spans)
     lower = clause[0] if previous_end is None else max(clause[0], previous_end)
     region = view.text[lower:event.start]
     leading = len(region) - len(region.lstrip())
@@ -482,6 +488,7 @@ def _bind_event(view: MatchingView, scan: _UnitScan, clause: tuple[int, int],
         role, actor_class = _classify_np(view, span, scan.name_classes)
         if role == "object":
             obj_spans.append(span)
+            event.bound_operating_object = True
             if attribution == "unknown" and actor_class != "unknown":
                 attribution = actor_class
         elif role == "actor":
@@ -500,12 +507,14 @@ def _bind_event(view: MatchingView, scan: _UnitScan, clause: tuple[int, int],
                     attribution = actor_class
             elif role == "object" and not obj_spans and not event.obj_spans:
                 obj_spans.append(span)
+                event.bound_operating_object = True
     # An elided continuation may inherit the already bound object, separately
     # from its issuer actor. A new explicit subject blocks that inheritance.
     if not spans and not obj_spans and not event.obj_spans and scan.last_topic is not None:
         role, _actor = _classify_np(view, scan.last_topic, scan.name_classes)
         if role == "object":
             obj_spans.append(scan.last_topic)
+            event.bound_operating_object = True
     event.actor_spans = actor_spans
     event.obj_spans = list(dict.fromkeys([*obj_spans, *event.obj_spans]))
     event.attribution = attribution
@@ -851,6 +860,7 @@ class OperatingRelationSession:
         self._views: dict[str, tuple[MatchingView, dict[str, str]]] = {}
         self._results: dict[tuple[str, tuple[str, ...]], dict[str, Any]] = {}
         self._references: dict[tuple[str, tuple[str, ...], bool], dict[str, Any]] = {}
+        self._complete_assertions: set[tuple[str, tuple[str, ...]]] = set()
 
     def unit(self, uid: str):
         if uid not in self._units:
@@ -878,6 +888,18 @@ class OperatingRelationSession:
                 "units": self.units, "context_unit_ids": context_unit_ids,
             }, work_budget=self.work_budget, prepared=self)
         return self._results[key]
+
+    def complete_assertion(self, unit_id: str, context_unit_ids: tuple[str, ...] = ()) -> bool:
+        """Cached typed source binding, independent of recognized stage.
+
+        Arbitrary serialized refs cannot supply this proof. It is committed
+        only by the actual predicate/NP binder for this exact source scope.
+        """
+        key=(unit_id,context_unit_ids)
+        result=self._results.get(key)
+        if result is None:
+            result=self.detect(unit_id,context_unit_ids)
+        return result['status']=='complete' and key in self._complete_assertions
 
     def reference_closure(self, unit_id: str, predecessor_unit_ids: tuple[str, ...] = (), *,
                           window_complete: bool = True) -> dict[str, Any]:
@@ -1035,6 +1057,13 @@ def _nominal_scope_event(clause_text: str, match: re.Match[str]) -> bool:
     headings. These forms describe a scope or request information instead of
     asserting that the named actor performs the activity.
     """
+    if p.SCOPE_NOMINAL_SUFFIX.match(clause_text, match.end('pred')):
+        return True
+    prefix=p.OUTLINE_PREFIX.sub('',clause_text[:match.start('pred')]).strip()
+    if not prefix and not match.groupdict().get('qual'):
+        # No source subject/aspect in a bare scope heading. A prior bound
+        # topic is handled by other explicit continuation constructions.
+        return True
     exclusion = _SCOPE_EXCLUSION.match(clause_text)
     if exclusion is not None:
         body_start, body_end = exclusion.span("body")
@@ -1150,6 +1179,8 @@ def _detect_operating_relations(
                     if condition_scope != clause:
                         extra_quals.append(condition_scope)
                 relations.append(_relation_dict(target, target_view, clause, event, extra_quals))
+                if event.bound_operating_object:
+                    prepared._complete_assertions.add((target,tuple(context_ids)))
     except WorkBudgetExceeded:
         exhausted = True
 

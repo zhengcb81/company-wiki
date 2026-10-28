@@ -20,18 +20,22 @@ from company_wiki.document_understanding.narrative_continuity import (
     NativeSourceContext, SourcePageFlow, build_native_continuity, native_section_key,
 )
 from company_wiki.document_understanding.operating_states.relations import independent_statement_start
+from company_wiki.document_understanding.reading_context_contract import CURRENT_READING_CONTEXT_SCHEMA
 from company_wiki.document_understanding.selection_bridge import build_context_graph
 from company_wiki.document_understanding.summary_input import _sent_policies, _unread, _SHARED_CONSTRAINTS
 from company_wiki.document_understanding.layout_hints.contract import WorkBudget, WorkBudgetExceeded, DEFAULT_LIMITS
 
 from .narrative_antecedent import build_antecedent_windows, within_reference_envelope
 from .narrative_budget import READING_BUDGET_POLICY
-from .narrative_business_policy import detect_reading_business_fact, reading_financial_only, reading_material_value
+from .narrative_business_policy import (
+    detect_reading_business_fact, reading_financial_only, reading_material_value,
+)
 from .narrative_source_purpose import NON_OPERATING_PURPOSES
 from .narrative_candidates import EvidenceCandidate
 from .narrative_document import DocumentStructure, NarrativeEvidencePackage
 from .narrative_finalize import finalize_selection
 from .narrative_routing import DocumentRoute, route_document
+from .narrative_support_use import SUPPORT_USE_SCAN_PASSES, source_support_use, source_narrative_relevance
 
 READING_SELECTOR_VERSION = "0.9.0"
 MAX_READING_CHARS = 48000
@@ -59,7 +63,9 @@ def _admitted(unit: Any, reading: Mapping[str, Any], kind: str, *, fact: Any = N
               is_heading: bool = False, table_qualified: bool = False,
               financial_only: bool | None = None,
               trace: dict[str, Any] | None = None, package_id: str | None = None,
-              required_unit_ids: Sequence[str] = ()) -> tuple[bool, Any]:
+              required_unit_ids: Sequence[str] = (),
+              support_use: tuple[str, str] | None = None,
+              offer_relevant: bool | None = None) -> tuple[bool, Any]:
     fact = fact or detect_reading_business_fact(unit.raw_text)
 
     def decision(admitted: bool, reason: str | None = None) -> tuple[bool, Any]:
@@ -94,7 +100,7 @@ def _admitted(unit: Any, reading: Mapping[str, Any], kind: str, *, fact: Any = N
         return decision(False, "table_not_qualified")
     if unit.source_role in _CONTEXT_ROLES:
         return decision(False, "source_context_role")
-    if kind != "operating_table" and (
+    if not table_qualified and (
         financial_only if financial_only is not None else _financial_only(unit.raw_text, fact)
     ):
         return decision(False, "financial_only")
@@ -107,21 +113,51 @@ def _admitted(unit: Any, reading: Mapping[str, Any], kind: str, *, fact: Any = N
         roman_marker = bool(re.fullmatch(r"[IVXLCDM]+", alphanumeric, re.IGNORECASE))
         letter_marker = bool(re.fullmatch(r"\s*[(\[（【]\s*[A-Za-z]\s*[)\]）】]\s*[.、:]?\s*", unit.raw_text))
         if not any(character.isalpha() for character in unit.raw_text) or numeric_marker:
-            if kind != "operating_table" or not any(character.isdigit() for character in unit.raw_text):
+            if not table_qualified or not any(character.isdigit() for character in unit.raw_text):
                 return decision(False, "non_narrative_unit" if not any(character.isalpha() for character in unit.raw_text)
                                 else "bare_numeric_marker")
         if roman_marker or letter_marker:
             return decision(False, "outline_marker")
     if (is_heading or unit.unit_kind.endswith("_heading")) and not fact.eligible:
         return decision(False, "heading_without_business_fact")
-    # Family/role are observed reading intent, not proof of any specific fact.
-    # They permit descriptive business material without requiring a number or a
-    # particular project duration. Unknown prose still needs an operating signal.
-    scoped = reading.get("section_role") in _BUSINESS_ROLES
-    descriptive = reading.get("family") in {"prospectus", "offering"}
-    admitted = bool(fact.eligible or scoped or kind == "operating_table" or
-                    (descriptive and kind in {"project", "operating_table"}))
-    return decision(admitted, None if admitted else "no_supported_business_signal")
+    # Reading intent is not proof of independent support. Descriptive business
+    # material can still qualify without a known stage, number or duration.
+    prepared_roles=None
+    if support_use is None or offer_relevant is None:
+        # Compatibility callers also prepare once for both independent axes.
+        # Production supplies the cached exact-view use and relevance directly.
+        from company_wiki.document_understanding.operating_states.assertion_roles import prepare_source_assertions
+        prepared_roles=prepare_source_assertions(unit.raw_text)
+    use, reason = support_use or source_support_use(unit.raw_text, fact=fact,
+        financial_only=financial_only if financial_only is not None else _financial_only(unit.raw_text, fact),
+        table_qualified=table_qualified,source_roles=prepared_roles)
+    if offer_relevant is None:
+        offer_relevant=source_narrative_relevance(fact=fact,table_qualified=table_qualified,
+            source_roles=prepared_roles)
+    readable_business = offer_relevant and (use == "support" or (
+        use == "unresolved" and reason == "source_numeric_scope_unresolved"))
+    if not offer_relevant and use == 'unresolved':
+        return decision(False,'unresolved_without_business_relevance')
+    return decision(readable_business, None if readable_business else reason)
+
+
+def _citation_support_views(entry, originals):
+    """The same exact native support scopes at admission and projection."""
+    views = entry.get("citation_support_views")
+    if entry["kind"] == "qa_exchange":
+        def role(uid):
+            unit = originals[uid]
+            return unit.get("role") if isinstance(unit, Mapping) else unit.source_role
+        declared = entry.get("anchor_unit_ids")
+        answers = {uid for uid in (declared if declared is not None else entry["member_unit_ids"])
+                   if uid in originals and role(uid) not in _CONTEXT_ROLES
+                   and (declared is not None or role(uid) == "management")}
+        views = [list(dict.fromkeys(uid for uid in view if uid in answers))
+                 for view in views or [list(answers)]]
+        views = [view for view in views if view]
+        if not views and answers:
+            views = [[uid for uid in entry["member_unit_ids"] if uid in answers]]
+    return views if views is not None else [list(entry.get("anchor_unit_ids", entry["member_unit_ids"]))]
 
 
 def _qualified_table(package: Mapping[str, Any], units: Mapping[str, Any]):
@@ -599,7 +635,18 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
     # closure. Rejected account rows are neither facts nor borrowed context.
     scoped_packages = []
     for package in packages:
-        if package["kind"] != "operating_table":
+        try:
+            work_budget.charge(1 + len(package.get("member_unit_ids", ())))
+        except WorkBudgetExceeded:
+            withheld.append({"package_id": str(package["package_id"]),
+                             "reason": "OPERATING_WORK_BUDGET", "known_unit_ids": []})
+            break
+        table_members = [units[uid] for uid in package.get("member_unit_ids", ()) if uid in units]
+        native_tables = {(unit.source_id, unit.coordinates.page_number, unit.coordinates.table_index)
+                         for unit in table_members if unit.coordinates.table_index is not None}
+        native_table = (len(native_tables) == 1 and bool(table_members)
+                        and all(unit.coordinates.table_index is not None for unit in table_members))
+        if package["kind"] != "operating_table" and not native_table:
             scoped_packages.append(package)
             continue
         members = list(dict.fromkeys(package.get("member_unit_ids", ())))
@@ -610,7 +657,14 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
                              "reason": "INCOMPLETE_OR_NONSELECTABLE_CONTEXT",
                              "known_unit_ids": sorted(all_ids & units.keys())})
             continue
-        purpose = _qualified_table(package, units)
+        try:
+            if package.get("table_purpose") is None:
+                work_budget.charge(12 * sum(len(units[uid].raw_text) for uid in all_ids))
+            purpose = _qualified_table(package, units)
+        except WorkBudgetExceeded:
+            withheld.append({"package_id": str(package["package_id"]),
+                             "reason": "OPERATING_WORK_BUDGET", "known_unit_ids": sorted(all_ids)})
+            continue
         if not purpose.eligible:
             if purpose.status == "incomplete":
                 withheld.append({"package_id": str(package["package_id"]),
@@ -619,6 +673,7 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
         body = [uid for uid in members if uid not in required]
         admitted_rows = {body[index] for index in purpose.eligible_row_indices}
         scoped_packages.append({**package,
+            "_qualified_operating_table": True,
             "member_unit_ids": [uid for uid in members if uid in required or uid in admitted_rows],
             "anchor_unit_ids": [uid for uid in body if uid in admitted_rows]})
     packages = scoped_packages
@@ -966,6 +1021,60 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
         anchors = package.get("anchor_unit_ids", ()) or package.get("member_unit_ids", ())[:1]
         return (min((int(reading.get(uid, {}).get("priority", 2)) for uid in anchors), default=2), index)
 
+    try:
+        work_budget.charge(2 * len(session.groups) + 1)
+    except WorkBudgetExceeded:
+        scope_ready = False
+        session.complete = False
+        support_groups = {}
+    else:
+        scope_ready = True
+        support_groups = dict(session.groups)
+        session.groups = support_groups
+    scope_owners = {tuple(members): owner for owner, members in support_groups.items()}
+    scope_uses: dict[tuple[Any, ...], tuple[str, str, bool]] = {}
+
+    def scope_use(native_support, *, table_qualified=False):
+        # A carrier stands for all original characters in its native range.
+        # This key is exactly the scope later projected to canonical spans.
+        if not scope_ready:
+            return "unresolved", "source_assessment_incomplete", False
+        members = tuple(dict.fromkeys(origins.get(uid, uid) for uid in native_support))
+        key = (members, table_qualified)
+        if key in scope_uses:
+            return scope_uses[key]
+        try:
+            work_budget.charge(len(members) + 1)
+            owner = scope_owners.get(members)
+            if owner is None:
+                if len(members) == 1 and session.owner_for(members[0]) == members[0]:
+                    owner = members[0]
+                else:
+                    # Add an analysis owner, never override any unit's owner.
+                    # Its contexts are empty: context cannot donate a predicate.
+                    owner = "source-support:" + str(len(scope_owners))
+                    support_groups[owner] = members
+                scope_owners[members] = owner
+            fact = session.fact(owner)
+            text = session.source_text(owner)
+            work_budget.charge(SUPPORT_USE_SCAN_PASSES * len(text))
+            source_roles=session.source_assertions(owner)
+            use = source_support_use(text, fact=fact, financial_only=session.financial_only(owner),
+                table_qualified=table_qualified,
+                context_role=all(units[uid].source_role in _CONTEXT_ROLES for uid in members),
+                source_relations=session.relations(owner), support_unit_ids=members,
+                source_roles=source_roles,
+                numeric_ambiguous=any(uid in numeric_shape_uncertain for uid in members)
+                    or bool(source_roles and source_roles.numeric_ambiguous))
+            relevance=source_narrative_relevance(fact=fact,source_roles=source_roles,
+                                                 table_qualified=table_qualified)
+            assessed=(*use,relevance)
+        except (WorkBudgetExceeded, ValueError):
+            session.complete = False
+            assessed = ("unresolved", "source_assessment_incomplete", False)
+        scope_uses[key] = assessed
+        return assessed
+
     # Spend scarce source-state work on known reading priorities first. This
     # changes analysis order, not material order, ownership or selected costs.
     for index, package in sorted(enumerate(budget_packages), key=package_priority):
@@ -996,7 +1105,26 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
             numeric_shape_uncertain.update(uid for uid in unexamined_quality
                                            if has_unbound_numeric_cells(units[uid].raw_text))
             quality_checked.update(unexamined_quality)
-        table_qualified = package["kind"] == "operating_table"
+        table_qualified = package["kind"] == "operating_table" or package.get("_qualified_operating_table", False)
+        original_package = packages[index]
+        use_views = []
+        anchor_uses: dict[str, tuple[str, str]] = {}
+        anchor_relevance: dict[str, bool] = {}
+        for native_support in _citation_support_views(original_package, original_units):
+            if not native_support:
+                continue
+            use, reason, relevant = scope_use(native_support, table_qualified=table_qualified)
+            use_views.append({"support_unit_ids": list(native_support),
+                              "reading_support_use": use, "reading_support_reason": reason})
+            for uid in native_support:
+                material_uid = origins.get(uid, uid)
+                # The offer follows one proved view and its closed costs. It
+                # never changes another view's generation-use annotation.
+                if (material_uid not in anchor_uses or use == "support"
+                        or relevant and not anchor_relevance.get(material_uid,False)):
+                    anchor_uses[material_uid] = (use, reason)
+                    anchor_relevance[material_uid] = relevant
+        packages[index] = {**original_package, "_reading_support_use_views": use_views}
         declared_anchors = list(package.get("anchor_unit_ids", ()))
         if package["kind"] == "qa_exchange":
             # The shared structure owner identifies actual answers even when a
@@ -1008,7 +1136,7 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
                 withheld.append({"package_id": str(package["package_id"]),
                                  "reason": "ANSWER_MISSING", "known_unit_ids": members})
                 continue
-        elif package["kind"] == "operating_table":
+        elif table_qualified:
             declared_anchors = [uid for uid in members
                                 if uid not in set(package.get("required_context_unit_ids", ()))
                                 and units[uid].unit_kind not in {"footnote", "table_caption", "table_header"}]
@@ -1033,7 +1161,9 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
                                        financial_only=session.financial_only(uid),
                                        is_heading=uid in headings, table_qualified=table_qualified,
                                        trace=admission_trace, package_id=str(package["package_id"]),
-                                       required_unit_ids=tuple(sorted(required - {uid})))
+                                       required_unit_ids=tuple(sorted(required - {uid})),
+                                       support_use=anchor_uses.get(uid, ("unresolved", "source_use_unassessed")),
+                                       offer_relevant=anchor_relevance.get(uid,False))
             if not admitted:
                 continue
             anchors.append(uid)
@@ -1063,6 +1193,8 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
                              "required": tuple(sorted(set(previous.get("required", ())) | (required - {uid}))),
                              "fact_purpose": fact.purpose,
                              "fact_reasons": tuple(fact.reasons[:4]),
+                             "support_use": "support" if previous.get("support_use") == "support"
+                                 else anchor_uses.get(uid, ("unresolved", "source_use_unassessed"))[0],
                              "package_ids": tuple(dict.fromkeys((*previous.get("package_ids", ()),
                                                                   str(package["package_id"]))))}
         if not anchors:
@@ -1167,23 +1299,8 @@ def _context(pipeline: Mapping[str, Any], package: NarrativeEvidencePackage,
                                  for uid in original if uid in required))
         citation_views = []
         seen_support = set()
-        native_views = entry.get("citation_support_views")
-        if entry["kind"] == "qa_exchange":
-            declared = entry.get("anchor_unit_ids")
-            answer_ids = {uid for uid in (declared if declared is not None else entry["member_unit_ids"])
-                          if uid in original and original[uid].get("role") not in _CONTEXT_ROLES
-                          and (declared is not None or original[uid].get("role") == "management")}
-            # A question can establish attribution/context, never an answer's
-            # factual support. Generic per-member native views may include Q;
-            # narrow them to actual source-owned answer anchors, keeping the
-            # complete question and all remaining members as dependencies.
-            native_views = [list(dict.fromkeys(uid for uid in view if uid in answer_ids))
-                            for view in native_views or [list(answer_ids)]]
-            native_views = [view for view in native_views if view]
-            if not native_views and answer_ids:
-                native_views = [[uid for uid in entry["member_unit_ids"] if uid in answer_ids]]
-        for native_support in native_views if native_views is not None else [
-                list(entry.get("anchor_unit_ids", entry["member_unit_ids"]))]:
+        support_uses = {tuple(row["support_unit_ids"]): row for row in entry.get("_reading_support_use_views", ())}
+        for native_support in _citation_support_views(entry, original):
             if not native_support or not set(native_support) <= required:
                 raise ValueError("native citation support must belong to its complete source package")
             support_set = {pipeline["selected_span_ids"][uid] for uid in native_support}
@@ -1192,8 +1309,11 @@ def _context(pipeline: Mapping[str, Any], package: NarrativeEvidencePackage,
             if support_key in seen_support:
                 continue
             seen_support.add(support_key)
+            use = support_uses.get(tuple(native_support), {})
             citation_views.append({"support_evidence_ids": support,
-                "context_evidence_ids": [sid for sid in ids if sid not in support_set]})
+                "context_evidence_ids": [sid for sid in ids if sid not in support_set],
+                "reading_support_use": use.get("reading_support_use", "unresolved"),
+                "reading_support_reason": use.get("reading_support_reason", "source_use_unassessed")})
         proof_rows = tuple(entry.get("_native_source_proofs", ()))
         physical_proof_ids = set(entry.get("_native_source_original_ids", ()))
         proof_endpoints = {str(uid) for proof in proof_rows for uid in (proof["left"], proof["right"])}
@@ -1229,7 +1349,7 @@ def _context(pipeline: Mapping[str, Any], package: NarrativeEvidencePackage,
         constraints.append("Fragments flagged table_structure_ambiguous do not prove column, period, "
                            "row-label or unit attribution. Use independently supported business prose; "
                            "leave unproven numeric interpretations unknown.")
-    return {"schema_version": "du-production-reading/3", "reading_policy_version": version,
+    return {"schema_version": CURRENT_READING_CONTEXT_SCHEMA, "reading_policy_version": version,
             "reading_policies": policies, "business_facets": facets,
             "constraints": constraints,
             "groups": groups, "unread": unread,
@@ -1491,6 +1611,8 @@ def select_reading_evidence(parsed: DocumentStructure, *, title: str,
     session = session_state["session"]
     origins = pipeline.get("_carrier_origins", {})
     dropped = 0
+    proved_without_offer = 0
+    unexplained_numeric = False
     for unit in parsed.units:
         uid = session.owner_for(origins.get(unit.unit_id, unit.unit_id))
         if budget.exhausted and uid not in session.facts:
@@ -1501,6 +1623,13 @@ def select_reading_evidence(parsed: DocumentStructure, *, title: str,
             session.complete = False
             break
         dropped += financial
+        source_roles=session.source_assertions(uid)
+        mixed_numeric=bool(source_roles and source_roles.numeric_ambiguous
+            and not source_roles.raw_structure_complete)
+        unexplained_numeric = unexplained_numeric or mixed_numeric
+        raw_only=bool(source_roles and source_roles.raw_structure_complete
+            and not source_narrative_relevance(fact=session.fact(uid),source_roles=source_roles))
+        proved_without_offer += bool(not mixed_numeric and (financial or raw_only))
     # Semantic 'unassigned' is not an unread page. It must not defeat a fully
     # read and positively classified finance-only document's zero-model result.
     # A bounded reference deferral removes one card, not the rest of the
@@ -1511,9 +1640,12 @@ def select_reading_evidence(parsed: DocumentStructure, *, title: str,
         "BUDGET" in str(entry.get("code", "")) or "LIMIT_REACHED" in str(entry.get("code", ""))
         for entry in pipeline.get("diagnostics", ()))
     empty_may_skip = (not candidates and parsed.coverage_complete and processing_complete
-                      and (dropped == len(parsed.units) or pipeline["route"].get("family") == "administrative"))
+                      and not unexplained_numeric
+                      and (proved_without_offer == len(parsed.units)
+                           or pipeline["route"].get("family") == "administrative"
+                           or route.empty_result_may_skip))
     effective_route = DocumentRoute(route.document_kind, route.selection_limit,
-                                    route.empty_result_may_skip or empty_may_skip)
+                                    empty_may_skip)
     material_parsed = replace(parsed, units=tuple(pipeline.get("_material_units", parsed.units)))
     result = finalize_selection(material_parsed, effective_route, candidates, group_ids={},
         heading_pattern=_NEVER_HEADING, dropped_financial_count=dropped,

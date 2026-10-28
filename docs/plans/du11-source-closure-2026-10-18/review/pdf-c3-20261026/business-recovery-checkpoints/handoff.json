@@ -1,0 +1,230 @@
+{
+  "schema_version": "independent-business-checkpoints-handoff/1",
+  "status": "FINAL_READY_FOR_NEXT_PREPARATION_REVISION",
+  "author": "independent reviewer /root/c3_semantic_final_20261028",
+  "scope": "development checkpoint extension only; not production rules or fresh holdout",
+  "source_sha256": "4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+  "parent_gold": {
+    "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/hk-development-gold.json",
+    "sha256": "2d6391a1f3f6d0c6e9bc7629e327f54c5bb4d2c651b202d38dd4f4364dbba568",
+    "bytes": 4238
+  },
+  "canonical_selection": {
+    "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/source-use-20261028/v3__native-support-v3__selection.json.gz",
+    "sha256": "e22a10df47b0890a2b62794f7134fc5670e00ceeff9707e3c4b9f9a51a9079f6",
+    "bytes": 81992,
+    "uncompressed_sha256": "ed161cfda717fa3fed074a990759542268c867f99c4ef5ba9743f5351dc4920a"
+  },
+  "canonical_native_result": {
+    "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/source-use-20261028/v3__native-support-v3__result.json.gz",
+    "sha256": "f888773c12d33eb89ce66e514bd948d24e7666f417bc7177139c2d018f4c0c73",
+    "bytes": 3460
+  },
+  "derived_outputs": [
+    {
+      "path": ".planning/c3-20261028/source-support-use/business-checkpoints/hk-development-business5-gold.json",
+      "sha256": "9feb80977944efb79c0d94b0975e6c464a2b95b0879e815559e70f2c541485a5",
+      "bytes": 6716
+    },
+    {
+      "path": ".planning/c3-20261028/source-support-use/business-checkpoints/incremental-business2-gold.json",
+      "sha256": "0d44512e11c9d779f73f17aada7cf3c3e2358717b0052f92985eee28032c529d",
+      "bytes": 2840
+    }
+  ],
+  "parent_fact_objects_unchanged": true,
+  "parent_fact_canonical_hashes": [
+    {
+      "id": "hk-industry-cloud-closure",
+      "canonical_object_sha256": "ba51ddd3427821b29315e9990429660228162797d5503adb4db1a7e0444a271e"
+    },
+    {
+      "id": "hk-rd-period-scope",
+      "canonical_object_sha256": "cc7e8ea30fd8d482bd5d5906d8149be79a5bc7b5b98208737697cbc657dbd822"
+    },
+    {
+      "id": "hk-outlook-not-actual",
+      "canonical_object_sha256": "193c6e298a977043a9ea49b310074378e1e62735ba079ceac5c49e31b6930c59"
+    }
+  ],
+  "new_fact_ids": [
+    "hk-cloud-server-c9a-x9a-release",
+    "hk-training-inference-platform-launch"
+  ],
+  "new_fact_source_bindings": [
+    {
+      "id": "hk-cloud-server-c9a-x9a-release",
+      "task": "t17",
+      "span_id": "urn:company-wiki:evidence-span:sha256:fd73ab37bcdc495e201285ff99002bf617f41a94b9ee6ce873dc9f7ed5edc2c8",
+      "required_summary_semantics": [
+        "报告期内第九代云服务器C9a及X9a正式发布；两个产品码及第九代不能转成销量、台数、增速或金额。",
+        "产品采用提升性能的新处理器，支持包含AI推理在内的多样计算需求；不要求逐个复述全部应用场景。"
+      ],
+      "modality": "actual_release; 正式发布已发生，不能降格为将来计划，也不推成客户验证、批量出货、收入或盈利。",
+      "period": "2025年上半年报告期；原句明确“報告期內”，未给具体发布日期，不补某月某日。",
+      "ownership": "发行人业务回顾所述云服务器产品；处理器品牌、架构、供应商与自研归属均未在该句披露。",
+      "forbidden_inferences": [
+        "把C9a/X9a或第九代解释为数字经营指标或售出数量。",
+        "捏造处理器型号/供应商/自研归属、性能百分比、算力、售价、订单、出货量、收入或利润。",
+        "把报告期内正式发布写成H2计划；或把发布直接写成已商业盈利。"
+      ],
+      "illustrative_semantic_reference": "報告期內，第九代雲服務器C9a及X9a正式發佈，採用提升性能的新處理器，面向包括AI推理在內的多樣化計算需求。",
+      "source_id": "urn:company-wiki:source:sha256:4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+      "page": 10,
+      "locator": "loc:v1/page:10/paragraph:2/chars:21-178",
+      "coordinates": {
+        "page_number": 10,
+        "paragraph_index": 2,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": 21,
+        "char_end": 178
+      },
+      "source_span_text_sha256": "f4fc31f0207cf0dc3143167893ea30a9ad4eaf41aa256f961d89b29c311c5311",
+      "anchors": [
+        {
+          "exact_quote": "報告期內，第九代雲服務器\nC9a及X9a正式發佈",
+          "quote_sha256": "e337a9535ae27d4d4b3babd57daeb4004c2b2ef2a71594eb9913f3f662e64779",
+          "char_start_in_span": 36,
+          "char_end_in_span": 60,
+          "utf8_byte_start_in_span": 108,
+          "utf8_byte_end_in_span": 166
+        },
+        {
+          "exact_quote": "搭載大幅提升性能的全新處理器",
+          "quote_sha256": "c76826014fb6638e945d3807204e947a5c63035fbab37c98e06050d66e587068",
+          "char_start_in_span": 61,
+          "char_end_in_span": 75,
+          "utf8_byte_start_in_span": 169,
+          "utf8_byte_end_in_span": 211
+        },
+        {
+          "exact_quote": "自然語言\n處理及推薦算法等AI推理場景",
+          "quote_sha256": "38fe89344b06908acfba812e46206d6371408c8bd9fb81e7fca8bad343ba2bf2",
+          "char_start_in_span": 94,
+          "char_end_in_span": 113,
+          "utf8_byte_start_in_span": 268,
+          "utf8_byte_end_in_span": 319
+        }
+      ],
+      "v3_observation": {
+        "use": "unresolved",
+        "reason": "source_numeric_scope_unresolved",
+        "admission": {
+          "status": "unavailable",
+          "reason": "source_unresolved"
+        }
+      }
+    },
+    {
+      "id": "hk-training-inference-platform-launch",
+      "task": "t18",
+      "span_id": "urn:company-wiki:evidence-span:sha256:dec60b36d15cda0943d3cea97d3987ec96d1f6592b4b789bb21172e95e5491d4",
+      "required_summary_semantics": [
+        "星流训练与推理平台已正式上线，提供一站式模型训练及推理任务管理。",
+        "平台集成多款开源大语言模型；可精炼概括，不强制逐个复述全部模型名。若列举，名称与归属须与来源一致。"
+      ],
+      "modality": "actual_launch_and_integration; “亦已正式上線”“集成了”是已发生，不得写成H2拟上线或计划集成。",
+      "period": "2025年上半年报告的业务回顾中已上线状态；本段未给具体上线日期，不能补日期或声称H2首次上线。",
+      "ownership": "发行人业务回顾中的星流平台集成开源模型。来源仅将MIMO明确写作“小米MIMO”；Kimi/Deepseek/Qwen3未在该段给出厂商。平台集成不转移开源模型开发或产权归属。",
+      "forbidden_inferences": [
+        "将小米MIMO、Kimi、Deepseek、Qwen3全部归为发行人自研或全部归为小米/金山所有。",
+        "把集成开源模型写成新发布或自行训练了这些基础模型。",
+        "把Qwen3的3当模型数量、用户数、代际增长指标；补模型版本、客户、付费采用率、收入或盈利。",
+        "把已正式上线写成未来计划，或把上线/集成升级为已经商业盈利。"
+      ],
+      "illustrative_semantic_reference": "星流訓練與推理平台已正式上線，提供一站式訓練及推理任務管理，並集成小米MIMO、Kimi、Deepseek、Qwen3等開源大模型。",
+      "source_id": "urn:company-wiki:source:sha256:4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+      "page": 10,
+      "locator": "loc:v1/page:10/paragraph:8/chars:178-299",
+      "coordinates": {
+        "page_number": 10,
+        "paragraph_index": 8,
+        "table_index": null,
+        "row_index": null,
+        "column_index": null,
+        "char_start": 178,
+        "char_end": 299
+      },
+      "source_span_text_sha256": "e7264c6c458c2d9d71b5122fa83e54b31c80f61f227c5aa91755389451f7f3ec",
+      "anchors": [
+        {
+          "exact_quote": "星流訓練與推理平台亦已正式上線",
+          "quote_sha256": "9e3e77760ca8f3f24528a306b55fdd17e591b7dfdac053a67e7ff3a68e837372",
+          "char_start_in_span": 0,
+          "char_end_in_span": 15,
+          "utf8_byte_start_in_span": 0,
+          "utf8_byte_end_in_span": 45
+        },
+        {
+          "exact_quote": "為用戶提供一站式模型訓練與推理任務管理平台",
+          "quote_sha256": "e30670b6ebe980629e0d27ec732a0361d58bb2a582142204d8b15063c60a08f0",
+          "char_start_in_span": 16,
+          "char_end_in_span": 37,
+          "utf8_byte_start_in_span": 48,
+          "utf8_byte_end_in_span": 111
+        },
+        {
+          "exact_quote": "集成了小米MIMO、Kimi、Deepseek、Qwen3等優質開源大型語言模型",
+          "quote_sha256": "d2e19de723685dc53091ef3c9d053c94a752f096307698b8db949371f8fd16b4",
+          "char_start_in_span": 39,
+          "char_end_in_span": 79,
+          "utf8_byte_start_in_span": 115,
+          "utf8_byte_end_in_span": 193
+        }
+      ],
+      "v3_observation": {
+        "use": "unresolved",
+        "reason": "source_numeric_scope_unresolved",
+        "admission": {
+          "status": "unavailable",
+          "reason": "source_unresolved"
+        }
+      }
+    }
+  ],
+  "counting_contract": {
+    "parent_required_business": 3,
+    "incremental_required_business": 2,
+    "combined_required_business": 5,
+    "reporting": "Always report old3 and new2 separately, then combined5. Do not silently relabel old3/3 as5/5.",
+    "v3_baseline": "Existing native-v3 result shows old3/3 in admitted tasks; t17/t18 are selected but unresolved/unavailable. New2/2 literal anchors exist in their own source spans, but new0/2 are admitted. No summary claims exist in this native diagnostic.",
+    "v3_counts": {
+      "old_admitted": 3,
+      "old_required": 3,
+      "new_literal_source_anchor_sets": 2,
+      "new_admitted": 0,
+      "new_required": 2
+    },
+    "not_demanded": [
+      "Every selected view must be summarized",
+      "Verbatim reproduction of every source anchor",
+      "All use-case/model examples must be listed",
+      "Any increase to work/PDF/model/selection/claim budgets"
+    ]
+  },
+  "next_revision_checks": [
+    "Use a new preparation revision pinned to this derived gold SHA; preserve old gold files/receipts and all three original fact objects.",
+    "Before model reservation/transmission, verify source-bound full support in the actually admitted and compiled request tasks for old3 and new2 separately. Merely present selected spans or an observer field named sent does not prove HTTP transmission.",
+    "After formal summary completion, independently inspect claim text, original-language modality/period/ownership, factual citations and separate context. Verify old3/new2 coverage separately; selected-source support is not summary coverage.",
+    "score_facts uses these OR-of-AND exact source anchors for source availability; it does not establish semantic entailment of rewritten summary claims. A claim-support observation and semantic review are both needed.",
+    "Keep the existing caps/soft targets. These are five material business checkpoints, not a mandate to summarize every view or pad to a count."
+  ],
+  "creation_verification": {
+    "all_six_new_quotes_are_exact_unique_source_substrings": true,
+    "UTF8_byte_ranges_round_trip": true,
+    "original_three_fact_objects_equal": true,
+    "all_three_inputs_byte_unchanged": true,
+    "pytest_runs": 0,
+    "score_facts_executions": 0,
+    "PDF_SDK_model_network_download_runs": 0,
+    "production_PWF_Git_writes": 0
+  },
+  "limitations": [
+    "Source p10 anchors came from the already reviewed canonical native-v3 selection; original PDF was not reopened.",
+    "This package does not certify current full-source admission or an actual final supplier summary.",
+    "Illustrative semantic references are reviewer guidance, not generated model output or an authoritative summary."
+  ],
+  "instruction": "FINAL handoff; STOP until explicitly resumed."
+}

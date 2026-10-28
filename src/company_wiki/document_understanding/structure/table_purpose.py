@@ -24,6 +24,13 @@ MAX_PURPOSE_CHARS = 2_000_000
 # tables within financial notes remain eligible; a bare retention signal does
 # not turn retained earnings or OCI into a customer-retention measure.
 _ACCOUNT_PURPOSE = re.compile(
+    r"(?:gains?|losses?) on (?:sale|disposal) of (?:property|equipment|fixed assets)|"
+    r"(?:出售|处置|處置)(?:物业及设备|物業及設備|固定资产|固定資產|设备|設備)(?:的)?(?:收益|损失|損失)|"
+    r"customer (?:advances?|deposits?|prepayments?)|客户(?:预收款|存款|预付款)|客戶(?:預收款|存款|預付款)|"
+    r"depreciation|amorti[sz]ation|income taxes?|tax (?:expenses?|benefits?|payables?)|"
+    r"foreign (?:currency )?exchange (?:gains?|losses?)|(?:currency )?translation adjustments?|"
+    r"折旧|折舊|摊销|攤銷|所得税|所得稅|汇兑(?:收益|损失|損失)|匯兌(?:收益|損失)|"
+    r"外币换算调整|外幣換算調整|"
     r"cash and cash equivalents|accounts? (?:receivable|payable)|total assets|total liabilities|"
     r"lease liabilities|right[ -]of[ -]use assets|retained earnings|comprehensive income|"
     r"(?:shareholders?|stockholders?|owners?)['’]?\s+equity|capital surplus|paid[- ]in capital|"
@@ -59,10 +66,11 @@ _PROJECT_BUSINESS_FIELD = re.compile(
     re.IGNORECASE,
 )
 _OPERATING_MEASURE_FIELD = re.compile(
+    r"外币(?:风险)?敞口|外幣(?:風險)?敞口|foreign currency (?:risk )?exposure|"
     r"产能|產能|产量|產量|销量|銷量|利用率|门店(?:数量|数目|网络)|門店(?:數量|數目|網絡)|"
     r"用户(?:数量|数目)|用戶(?:數量|數目)|订单(?:数量|数目)|訂單(?:數量|數目)|"
-    r"capacity|utilization|shipments|actual output|(?:number|count) of (?:stores|users|orders)|"
-    r"(?:store|user|order) counts?|store network|order backlog|在手订单|在手訂單|"
+    r"capacity|utilization|shipments|actual output|(?:number|count) of (?:stores|users|orders|customers|accounts)|"
+    r"(?:store|user|order|customer|account) counts?|store network|order backlog|在手订单|在手訂單|"
     r"remaining (?:performance )?obligations?|剩余履约义务|剩餘履約義務|"
     r"客户集中度|客戶集中度|customer concentration|average revenue per|留存率|留存比例|"
     r"(?:customer|user|revenue) retention(?: rate)?|"
@@ -198,6 +206,21 @@ def qualify_table(
             "not_business", "PROJECT_AMOUNTS_WITHOUT_OPERATING_RELATION"
         )
     return TablePurpose("not_business", "NO_OPERATING_TABLE_PURPOSE")
+
+
+def unbound_numeric_row_role(text: str) -> Literal["operating", "account", "unknown"]:
+    """Reuse the row-purpose service without certifying columns or values.
+
+    The caller has already observed an unbound numeric shape. Actual operating
+    measures can coexist with account modifiers; a financial chapter cannot
+    confer this role, and unidentified rows remain honestly unknown.
+    """
+    purpose=qualify_table((),(text,))
+    if purpose.eligible:
+        return "operating"
+    if purpose.reason in {"ACCOUNTING_TABLE_PURPOSE", "PROJECT_AMOUNTS_WITHOUT_OPERATING_RELATION"}:
+        return "account"
+    return "unknown"
 
 
 def _native_row_scope(unit: Any) -> tuple[Any, ...] | None:

@@ -31,7 +31,7 @@ NEW_VERSION = "0.9.0"
 
 
 @pytest.fixture(scope="module", autouse=True)
-def isolated_originals_and_config_guard():
+def isolated_originals_and_config_guard(tmp_path_factory):
     """Restore owned temporary material even when a RED assertion fails."""
     config = Path(__file__).resolve().parents[3] / "config" / "source_catalog.yaml"
 
@@ -39,7 +39,9 @@ def isolated_originals_and_config_guard():
         return hashlib.sha256(path.read_bytes()).hexdigest(), path.stat().st_mtime_ns, path.stat().st_size
 
     config_before = snapshot(config) if config.is_file() else None
-    with TemporaryDirectory(prefix="cw-reading-production-", dir=Path(__file__).parent) as directory:
+    # Live fixture directories must not appear under pytest's discovery tree:
+    # another independent test process may be traversing it during cleanup.
+    with TemporaryDirectory(prefix="cw-reading-production-", dir=tmp_path_factory.getbasetemp()) as directory:
         root = Path(directory)
         original = root / "original.txt"
         sentinel = root / "preexisting-sentinel.bin"

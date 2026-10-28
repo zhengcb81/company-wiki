@@ -1,0 +1,393 @@
+{
+  "schema_version": "independent-source-support-review/final-v6c",
+  "status": "PASS",
+  "review_state": "FINAL",
+  "reviewer": "/root/c3_semantic_final_20261028",
+  "scope": "SOURCE_SUPPORT_USE_COMPONENT_AND_STABLE_ROOT_WIRING",
+  "files": [
+    {
+      "path": "src/company_wiki/source_catalog/narrative_reading.py",
+      "sha256": "ba55b183886528e3be16c125f8674de5227a95ed12afc058ca3840f5599d6614",
+      "lf_sha256": "c996bdc7c9a03f57d8ada08ada59399073cac590b8de579514ea69889de73c87"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_policy.py",
+      "sha256": "74e8a02585d293d1eb6944ef1822df89316918268b8e958b6d8ebd503ce2752c",
+      "lf_sha256": "513c4df83baca59e80152121e6ded752b880391f8f715df61ec2c2718f973739"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_source_purpose.py",
+      "sha256": "068314ff65c190d9635ebedfc723731e9253000ae076db1e83466c8ad7e8e12c",
+      "lf_sha256": "b838489bab1d2be4a87a1156e50173f2fc413caf4e94cb879f0d762b357ddfd8"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_support_use.py",
+      "sha256": "c1487ab3a8b10efba9a4311508d69664f3de38c0894914f47cb00a5daf05edbc",
+      "lf_sha256": "c1487ab3a8b10efba9a4311508d69664f3de38c0894914f47cb00a5daf05edbc"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+      "sha256": "af91e2f24a4ddf773402a43e1bf4884c7ff019795e13ffb9b48e7dbe8072830b",
+      "lf_sha256": "ac82f984e77a46c46a5c596b2000d9658dbf86a79004f946b08c1d92922a8e65"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/relations.py",
+      "sha256": "5ea73a73c2e956f15f70d518cbee352d19d3b19d88f579015cbccc56054f261a",
+      "lf_sha256": "d440c148dc0634ab72c00f4a6464c926741ce1e8c5c2e8551457953d2559c524"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/patterns.py",
+      "sha256": "46d2a264fdfdb56677a32d1bb48019c111bd58b8086cc1f6b65bbdda33cef4ed",
+      "lf_sha256": "49bb93ff207c329c9ed87c3b978c359b1ab3eaa98078978c83cbe78ab062b39c"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/assertion_roles.py",
+      "sha256": "dcdac6cc8642d7ca277e2aa908ec24d2bcd1e01dd7a63420c213441f24f4338e",
+      "lf_sha256": "1edd406c0ad615e13f05552b26052fde6a357b42681712ac7a08b949258d64d1"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_source_support_use.py",
+      "sha256": "a64ca3a37bd294d9f553665f1fd419e19da1050c6489e3d5c36c5b45a227626d",
+      "lf_sha256": "6c6ed3ac05d772a2d78e557e5163a14c534669fb99bc1004459518a87f03b456"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_budget.py",
+      "sha256": "b805b334233d2214d004774bbef8add00d99881346c5f48b4781a4f36c810be3",
+      "lf_sha256": "113645934c00dd82491413b5f4165a4e632e0a4f959b18dc4d71c88fa6e14a66"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_finalize.py",
+      "sha256": "feb6feb3fce94f003ed832ae147151adf64f50af7ed762ce005a6e5fdbc13e04",
+      "lf_sha256": "1dfb75374e9e45c255045d2e677883985a9af50790d6184300a92e0d284fb37e"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/structure/table_purpose.py",
+      "sha256": "2d87eec638175b4b1e1cce6f16fa9cf3c4809211194f48cfd9b53165d9113c46",
+      "lf_sha256": "0d92f12205582fbf04db5d282193fcd00aee18e207e92f549142f9a71bc5297b"
+    },
+    {
+      "path": "src/company_wiki/document_normalization/table_shapes.py",
+      "sha256": "5254f922332c5defebf083734622b1db511ab4e439ad382e5e62919b2af52484",
+      "lf_sha256": "321405419b5abc10b52e2f347a703017a68e4dde21ff2f8e33c8a53e14118dc3"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/decision_inventory.py",
+      "sha256": "9e8df7a11d3e21eaa51a82422e471047980ee16bb52c93fde9ac270e9473112e",
+      "lf_sha256": "2ffdae1dfee7d9200a57f01c538b3b57eef5100d5ca9ca43339d5055a5068e95"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_decision_inventory.py",
+      "sha256": "9e686dc091312e32d03e0775c34fbed74bf57044017f38c48a303712949790e1",
+      "lf_sha256": "63eb77c909cc5b7f354b4ef8b5cac364ecda83ad758c14bc14152b1e7a81294a"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py",
+      "sha256": "c51208649403682d6f5b6aa7e34f9a6ce6c44b4f6ef61dca094ee269a2895142",
+      "lf_sha256": "8d00f1f899b3ee6ff94b5f6a8b8a7e88a35574815e4e27a225bce2fade024560"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_multilevel_native_ancestry.py",
+      "sha256": "7c82d9b3f8837059738bb60f92a99d79eb85ac3fcf088e31d6938c178290893b",
+      "lf_sha256": "7c82d9b3f8837059738bb60f92a99d79eb85ac3fcf088e31d6938c178290893b"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_native_continuity.py",
+      "sha256": "cfab6382e91222aa7d028ee59d74d0f76ce5031c34f4d7701a7fd3367e2c1cb2",
+      "lf_sha256": "08d2ef04ad5dd3c5352b608880d5926ce411c3a92721f08d7bc8a93f19e7bb5e"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_native_dependency_closure.py",
+      "sha256": "aa1454780fc52a5017760218b64e08d1553c3440b9364c23a3a7346899b229cc",
+      "lf_sha256": "26ab4550dbe9f042be0713805e11c5fd025f9760ccfd7d79bb063254c6ad8561"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_production_selection.py",
+      "sha256": "3ea2648234bc2770307eaa425b31366bc655e0860c42ee197a831f3d14f7a5f8",
+      "lf_sha256": "1be6a28f9cf025346ee2980d047ba4e4280a7d65ab53c7d6fcf3e8b9bb426970"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_untyped_numeric_quality.py",
+      "sha256": "241b984f9f9230a7133e94d3faf26e10f2ebe52c3521de25ea1a8fc9994f5cf9",
+      "lf_sha256": "5febddfa0a8a879bbaaaa2ab02003593759384e100fbb0ddcf8043de063dc4fd"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_value_coverage.py",
+      "sha256": "6526e457a9b499e1c280782d773e6f81f7f6e2e972dd40a74e380a96e0835cc7",
+      "lf_sha256": "b63b7aff8c85c147df936973df5000232edbaca4d00a1a8c9d61a8404233c329"
+    },
+    {
+      "path": "tests/unit/document_understanding_root/test_operating_relation_production.py",
+      "sha256": "ed468c39c298fcda941d6636cb0726e69789f727dd094f127d1ee5277aa86acd",
+      "lf_sha256": "a516e01850f5fc49ae3521e92e7431b1f33c4f877256c787921b4dd9d6ceedf8"
+    },
+    {
+      "path": "tests/unit/test_narrative_reading_transport.py",
+      "sha256": "b02db7e9d6cbf9c6083248d612ce8077659a66da1a57e61d57a2966854ded4bf",
+      "lf_sha256": "1d65eafb44921be57edb308773a1245de039fab0930de0e2f84f56c263e3a7e2"
+    },
+    {
+      "path": "tests/unit/test_source_summary_capability.py",
+      "sha256": "d7f0900198dfb3779c5a29830f6881baf2ebc24fe4be6862af2d141afcc36d86",
+      "lf_sha256": "d7f0900198dfb3779c5a29830f6881baf2ebc24fe4be6862af2d141afcc36d86"
+    }
+  ],
+  "author_handoff": "../handoff-v6c.json",
+  "binding": "Pre-EOF13author files matched the immutable handoff-v6c; original24 were stable before/after32 tests. Final25 now rebind only assertion_roles.py after EOF-only cleanup, independently reconstructed against its old hash and AST-identical. Other24 unchanged, including the separately reviewed portable-path fixture. No original handoff or historical RED edited.",
+  "open_findings": [],
+  "closure": {
+    "S7_known_account_and_support_order": "Known account rows no longer independently offer narrative; business-uncertain quantities remain readable/unresolved. Complete support ranks first in the same bounded heap without payload access, new quotas or lost context costs.",
+    "S8_three_axes": "Raw/source readability, positive independent narrative relevance and generation completeness are distinct. Other/其他 bare rows remain honestly unresolved but do not independently offer; customers/capacity/risk measures and complete unknown-stage business prose are preserved.",
+    "S9_whole_scope_terminal": "Numeric presence no longer certifies entire material raw-only. Unknown prose with Other/Depreciation/tax numeric rows before/after stays needs_review; dropped financial count remains diagnostic and cannot bypass whole coverage, administrative or route guards.",
+    "current_vs_legacy": "Current reading_plan/3 finalizer consumes only producer proved-empty disposition. Legacy/1-2 counter adaptation stays at the compatibility entrance; old counter no longer reinterprets current source truth.",
+    "zero_model_terminal": "Complete structured/financial rows and scalars can still skip. Unknown prose/unread/budget failures do not fake no-narrative. Existing skip handler controls retain zero model/reservation/policy/review lookup.",
+    "source_roles_and_context": "Cached same-scope typed assertion proof preserves source stage/modality/qualifiers without arbitrary ref bypass; required original context IDs and atomic span/char cost stay intact."
+  },
+  "independent_final_tests": {
+    "total": 32,
+    "passed": 32,
+    "failed": 0,
+    "pytest_seconds": 6.96,
+    "runner_seconds": 7.729,
+    "junit": "recheck.xml",
+    "log": "recheck.log",
+    "receipt": "recheck.json",
+    "not_aggregated": "Prior rounds and overlapping author packages are not added to this final test count.",
+    "scope": "Only original tax/Other composition RED, necessary pure-structure/unknown/unread/budget/legacy/context/zero-model controls; no domain or full green package repeated."
+  },
+  "code_review": {
+    "verdict": "PASS",
+    "bounded_structure": "One existing bounded cell sweep distinguishes run presence from whole nominal/scalar coverage; cached private observation is not serialized.",
+    "single_terminal_authority": "Current producer applies numeric-mixed veto before financial/raw-only/admin/route alternatives; finalizer no longer adds a second current-policy counter proof.",
+    "versioning": "Changed reading/finalizer/table-shape/shared source modules are already in existing business-algorithm byte closure. ROOT inventory/consumer/fixture files match prior reviewed final versions.",
+    "constraints": "No company/page/task production conditions, new classifier in model/compiler, stage/public /4 schema change, resource increase, process-global text cache or production config mutation found."
+  },
+  "root_validation": {
+    "mypy": {
+      "result": "PASS396src",
+      "artifact": {
+        "path": ".planning/c3-20261028/support-final-v6c-mypy.log",
+        "sha256": "60bced76ab56e76b083157a70181a8162a3589e108419b3cad74bfd1a4f88c64",
+        "bytes": 46
+      }
+    },
+    "author_final": "53P6.16s as author receipt, not independently repeated whole package.",
+    "prior_root_protocol_and_cache": "Previously reviewed stable ROOT7failure/4mutation/cache controls; latest protocol test kept public version/hash assertions and all5 semantic model-policy fields. No new product change or repeated HTTP/deployment in this final stage."
+  },
+  "actual_native": {
+    "artifacts": [
+      {
+        "path": ".planning/c3-20261028/native-support-v6c/result.json",
+        "sha256": "e491bba6c7a966c99dc8fb353be8965b744df1004b7a85edf0816d3e6635495a",
+        "bytes": 18496
+      },
+      {
+        "path": ".planning/c3-20261028/native-support-v6c/selection.json.gz",
+        "sha256": "321a00f1dcd21fc6c9f629d6b8ea58e5664674fa7a6ce3ffb6432e4b5d56f8bf",
+        "bytes": 72074
+      }
+    ],
+    "uncompressed_selection_sha256": "1fac11708ae79a78bc6c57e731ef29a21f820f22dc3a602d4f6a1b4ac26a6757",
+    "source_sha256": "4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+    "gold_sha256": "9feb80977944efb79c0d94b0975e6c464a2b95b0879e815559e70f2c541485a5",
+    "parsed_units": 2330,
+    "selected_spans": 81,
+    "support_tasks": 38,
+    "unresolved_independent_tasks": 0,
+    "admitted_tasks": 38,
+    "source_identity_task_membership": "PASS",
+    "support_text_set_exactly_equal_reviewed_v6": true,
+    "source_gold": [
+      {
+        "id": "hk-industry-cloud-closure",
+        "supported": true,
+        "all_anchors_individually_present": true
+      },
+      {
+        "id": "hk-rd-period-scope",
+        "supported": true,
+        "all_anchors_individually_present": true
+      },
+      {
+        "id": "hk-outlook-not-actual",
+        "supported": true,
+        "all_anchors_individually_present": true
+      },
+      {
+        "id": "hk-cloud-server-c9a-x9a-release",
+        "supported": true,
+        "all_anchors_individually_present": true
+      },
+      {
+        "id": "hk-training-inference-platform-launch",
+        "supported": true,
+        "all_anchors_individually_present": true
+      }
+    ],
+    "admitted_gold": [
+      {
+        "id": "hk-industry-cloud-closure",
+        "tasks": [
+          "t19"
+        ],
+        "support": [
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:0f887d75ce8ca0b8f1286183e21da451e63f4e297e4efd79664d9414c7a26430",
+            "source_id": "urn:company-wiki:source:sha256:4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+            "locator": "loc:v1/page:13/paragraph:9/chars:245-356",
+            "page": 13,
+            "text_sha256": "6a6152d09a439460a702e4ab391707fbb34317157cf5ab3026db38a1162f44a1"
+          }
+        ]
+      },
+      {
+        "id": "hk-rd-period-scope",
+        "tasks": [
+          "t16"
+        ],
+        "support": [
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:ae5f4d14634776a788377b2a94cd69fc31a3cf0713f348ecfebfc2052412bf1f",
+            "source_id": "urn:company-wiki:source:sha256:4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+            "locator": "loc:v1/page:11/paragraph:21/chars:404-469",
+            "page": 11,
+            "text_sha256": "9303b865e4979fd3ef25c43997aa6ed8b0d857fa67949e50ef47b8a6402eb37e"
+          }
+        ]
+      },
+      {
+        "id": "hk-outlook-not-actual",
+        "tasks": [
+          "t17"
+        ],
+        "support": [
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:e395049c60cd340ca2d8e90ef42468163895fbd38a73219c4a529f0ffbdd993d",
+            "source_id": "urn:company-wiki:source:sha256:4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+            "locator": "loc:v1/page:11/paragraph:24/chars:475-571",
+            "page": 11,
+            "text_sha256": "c9f9da0379c0fd23c230ea81b9c6058727b25f9b4f277d433ad4c6669cbaf82d"
+          }
+        ]
+      },
+      {
+        "id": "hk-cloud-server-c9a-x9a-release",
+        "tasks": [
+          "t9"
+        ],
+        "support": [
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:1f7ecf4ec68b26351c21146cc74ec823968ed6019559489aafdaf001e7b63e7f",
+            "source_id": "urn:company-wiki:source:sha256:4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+            "locator": "loc:v1/page:10/paragraph:2/chars:21-178",
+            "page": 10,
+            "text_sha256": "f4fc31f0207cf0dc3143167893ea30a9ad4eaf41aa256f961d89b29c311c5311"
+          }
+        ]
+      },
+      {
+        "id": "hk-training-inference-platform-launch",
+        "tasks": [
+          "t10"
+        ],
+        "support": [
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:39fa9abb35f7b6d484020457bf06034352188edd63872ebcd775865f6b64dceb",
+            "source_id": "urn:company-wiki:source:sha256:4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+            "locator": "loc:v1/page:10/paragraph:8/chars:178-299",
+            "page": 10,
+            "text_sha256": "e7264c6c458c2d9d71b5122fa83e54b31c80f61f227c5aa91755389451f7f3ec"
+          }
+        ]
+      }
+    ],
+    "old_gold_count": 3,
+    "new_gold_count": 2,
+    "combined_gold_count": 5,
+    "work_used": 6175509,
+    "max_work_units": 16000000,
+    "seconds": 4.139,
+    "SDK_calls": 0,
+    "model_POST": 0,
+    "original_unchanged": true,
+    "final_supplier_summary_exists": false
+  },
+  "content_component_verdict": {
+    "status": "PASS_FOR_SOURCE_SELECTION_AND_ADMITTED_SUPPORT",
+    "reviewed_support": "Same38 original-language support texts as the full earlier view review, verified exact text-set equality. No restored old rule/fragment contamination or unknown independent numeric tasks.",
+    "old3": "Industry cloud1340.4/1245.4million,+7.6% and IT-demand/solution-replication causes; report-period R&D420.5million/USD58.7million vs1094staff asof2025-06-30; H2 future modality retained.",
+    "new2": "Report-period ninth-generation C9a/X9a actual release and already-launched 星流 training/inference management with integrated open-source LLMs remain fully cited in admitted tasks; product codes/ownership/profit are not inferred.",
+    "valid_notes": "Concrete6.70% financing/equipment-collateral constraint, risk/resources, service delivery/maintenance/billing provisions retained."
+  },
+  "subsequent_nodes": [
+    {
+      "node": "Configured actual supplier summary and independent claim-content review",
+      "status": "OPEN_NOT_THIS_COMPONENT_GATE"
+    },
+    {
+      "node": "Current preparation revision real restart/cross-run cache and fee/POST reuse acceptance",
+      "status": "OPEN_NOT_THIS_COMPONENT_GATE"
+    },
+    {
+      "node": "RF actual fact/forecast/model adoption rather than public read compatibility",
+      "status": "OPEN_NOT_THIS_COMPONENT_GATE"
+    }
+  ],
+  "cleanup": {
+    "temporary": ".c3srv6c",
+    "absent": true,
+    "TEMP_TMP_restored": true,
+    "product_author_tests_PWF_Git_compat_primary_original_config_written": false,
+    "reviewer_PDF_SDK_supplier_model_HTTP_download": 0,
+    "pre_eof_tested24_raw_LF_SHA_stable": true,
+    "final25_verified_with_EOF_only_rebinding": true
+  },
+  "handoff": "FINAL PASS for the stated source component and stable ROOT wiring. ROOT may publish that component and advance to the separately OPEN actual summary/cache/RF nodes. Stop until explicit followup.",
+  "late_test_fixture_delta": {
+    "path": "tests/unit/test_source_summary_capability.py",
+    "change": "Only the invalid absolute-path reason fixture changes from a hardcoded Windows drive to str(tmp_path.anchor)+secret/location; same raises assertion and actual absolute-path negative retained.",
+    "executor": "ROOT",
+    "passed": 1,
+    "pytest_seconds": 3.23,
+    "artifact": {
+      "path": ".planning/c3-20261028/support-portable-path.log",
+      "sha256": "0274635f037de8ee3f960672e7328e84f57a0df94b590dadc478d2a1fb4b0783",
+      "bytes": 1009
+    },
+    "reviewer_repeated_test": false,
+    "runtime_changed": false,
+    "file_count": "Original24 did not include this earlier consumer test, so final manifest accurately has25 entries; no original entry removed."
+  },
+  "eof_only_rebinding": {
+    "schema_version": "independent-eof-rebinding/1",
+    "status": "PASS",
+    "path": "src/company_wiki/document_understanding/operating_states/assertion_roles.py",
+    "before_sha256": "cf9bf579a26ba662b45e92ebf093c185d56a37da8d458122e1f396aa99b91726",
+    "after_sha256": "dcdac6cc8642d7ca277e2aa908ec24d2bcd1e01dd7a63420c213441f24f4338e",
+    "before_lf_sha256": "d6f7293db07c195818c058eb889113f0b63ca4bab11ed84a91383f3fb3f07914",
+    "after_lf_sha256": "1edd406c0ad615e13f05552b26052fde6a357b42681712ac7a08b949258d64d1",
+    "before_EOF_bytes": [
+      13,
+      10,
+      13,
+      10,
+      13,
+      10
+    ],
+    "after_EOF_bytes": [
+      10
+    ],
+    "exact_before_hash_reconstructed_by_only_EOF_terminator_change": true,
+    "independent_AST_identical": true,
+    "AST_dump_sha256": "0732acb164988a3b13f1ab0d5a6a236774dacb90e6d2fce5b35d020ab20e0617",
+    "other24_raw_and_LF_unchanged": true,
+    "root_receipt": {
+      "path": ".planning/c3-20261028/support-eof-only.json",
+      "sha256": "8be8da22f3b1f54e4f0ec6bf9e0478364ddddbbfafaf8d3092d3c9710b601f89"
+    },
+    "diff": "eof-only.diff",
+    "tests_rerun": 0,
+    "PDF_SDK_model_originals_rerun": 0,
+    "product_source_writes": 0,
+    "execution_identity": "32 independent tests and publication native ran on the pre-EOF source. Final single-file binding is bridged only by exact EOF diff and independent AST equality; no execution on new bytes is claimed."
+  }
+}

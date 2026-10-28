@@ -1,0 +1,11 @@
+{
+  "exit_code": 1,
+  "seconds": 8.445,
+  "targets": [
+    "tests/unit/document_understanding_selection/test_source_support_use.py::test_raw_only_skip_requires_whole_unit_coverage_not_numeric_run_presence",
+    "tests/unit/document_understanding_selection/test_source_support_use.py::test_complete_single_row_or_scalar_material_can_use_raw_only_skip",
+    ".planning/c3-20261028/source-support-use/source-review-v6b/test_financial_skip_composition.py"
+  ],
+  "owned_temp": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c3su",
+  "owned_temp_absent": true
+}

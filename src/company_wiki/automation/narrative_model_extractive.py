@@ -14,7 +14,7 @@ import json
 from pathlib import Path
 from typing import Any
 
-from company_wiki.document_understanding.source_cards import source_cards, source_card_scope
+from company_wiki.document_understanding.source_cards import source_cards, source_card_scope, source_card_generation_reason
 from company_wiki.document_understanding.summary_tasks import build_summary_task_plan
 from company_wiki.source_catalog.narrative_evidence import (
     summary_claim_type_for_roles, validate_summary_claim,
@@ -130,11 +130,12 @@ def compile_extractive_plan(
     # for sorting, and the original native scope remains the dedup identity.
     for card in _source_allocation_order(list(source_cards(plan, known))):
         task = card.task
+        generation_reason = source_card_generation_reason(card)
         row = {'task': task.key, 'task_binding_sha256': canonical_json_hash(task.to_binding()),
-               'source_disposition': 'unsupported', 'reason': card.reason, 'claim_id': None,
+               'source_disposition': 'unsupported', 'reason': generation_reason or card.reason, 'claim_id': None,
                'model_disposition': 'unprocessed', 'priority': None}
         scope = source_card_scope(task)
-        if card.available:
+        if generation_reason is None:
             if scope in seen:
                 row.update(source_disposition='duplicate', reason='duplicate_scope', claim_id=seen[scope])
             else:
@@ -275,12 +276,13 @@ def decode_extractive_result(response, *, selected: NarrativeSelectResult) -> Ex
 
 def extractive_boundary_identity(boundary) -> dict[str, Any]:
     from company_wiki import narrative_subject
-    from company_wiki.document_understanding import source_cards as cards, summary_tasks
+    from company_wiki.document_understanding import source_cards as cards, summary_tasks, reading_context_contract
     from company_wiki.source_catalog import narrative_evidence
     from . import narrative_contracts, narrative_model_runtime, narrative_model_scoped, models
     from . import narrative_summary_execution
     modules = {'protocol': __import__(__name__, fromlist=['']), 'source_cards': cards,
                'source_task_plan': summary_tasks, 'role_quality_owner': narrative_evidence,
+               'source_use_contract': reading_context_contract,
                'canonical_contracts': narrative_contracts, 'canonical_encoding': models,
                'runtime': narrative_model_runtime, 'source_view': narrative_model_scoped,
                'legacy_utilities': legacy, 'subject_contracts': narrative_subject,

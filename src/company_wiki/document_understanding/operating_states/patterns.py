@@ -15,10 +15,14 @@ import re
 # modifier ("不是生产瓶颈"), never an operating predicate.
 COMPOUND_HEAD = (
     r"瓶颈|问题|难题|线|车间|基地|模式|工艺|流程|成本|效率|设备|能力|规模|"
-    r"厂商|企业|环节|要素|大国|强国|机构|体系|标准|费用|周期|进度|"
+    r"厂商|企业|环节|要素|大国|强国|机构|体系|标准|费用|周期|进度|地区|地域|"
     r"mechanism|bottleneck|issue|problem|line|site|facility|process|cost|"
     r"efficiency|capability|scale|plant|sector|industry|body|scheme"
 )
+# Non-product operating themes use the same subject/object binder, without
+# pretending that a channel or distribution network is a product declaration.
+OPERATING_THEME_HEAD = re.compile(r"(?:渠道|通路|经销网络|销售网络|交付地区|交付地域|"
+    r"(?:distribution|sales|delivery)\s+(?:channels?|networks?|regions?))\s*$",re.I)
 _NOT_COMPOUND = rf"(?!\s*(?:{COMPOUND_HEAD}))"
 
 _CJK_OBJ = r"[\w㐀-鿿（）()\- ]{1,24}"
@@ -179,6 +183,10 @@ SCOPE_CN = re.compile(
     rf"(?P<pred>涉及|參與|参与|涉足|从事|從事|經營|经营|开展业务)"
     rf"{_NOT_COMPOUND}(?P<obj>{_CJK_OBJ})?"
 )
+# A predicate-shaped stem inside a derived person/attribute noun is not a
+# finite scope predicate. Outline markers likewise cannot act as its subject.
+SCOPE_NOMINAL_SUFFIX = re.compile(r"者|人员|人員|机构|機構|性|性的")
+OUTLINE_PREFIX = re.compile(r"^\s*(?:[(（]\s*(?:[ivxlcdmIVXLCDM]+|\d+|[一二三四五六七八九十]+)\s*[)）]|[ivxlcdmIVXLCDM]+[.、])\s*")
 SCOPE_EN = re.compile(
     r"(?P<qual>is\s+not|are\s+not|not|no\s+longer|never)?\s*"
     r"(?P<pred>involved\s+in|engaged\s+in|participating\s+in|active\s+in|"

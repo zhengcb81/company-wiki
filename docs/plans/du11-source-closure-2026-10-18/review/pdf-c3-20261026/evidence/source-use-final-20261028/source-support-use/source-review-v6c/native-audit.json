@@ -1,0 +1,138 @@
+{
+  "artifacts": [
+    {
+      "path": ".planning/c3-20261028/native-support-v6c/result.json",
+      "sha256": "e491bba6c7a966c99dc8fb353be8965b744df1004b7a85edf0816d3e6635495a",
+      "bytes": 18496
+    },
+    {
+      "path": ".planning/c3-20261028/native-support-v6c/selection.json.gz",
+      "sha256": "321a00f1dcd21fc6c9f629d6b8ea58e5664674fa7a6ce3ffb6432e4b5d56f8bf",
+      "bytes": 72074
+    }
+  ],
+  "uncompressed_selection_sha256": "1fac11708ae79a78bc6c57e731ef29a21f820f22dc3a602d4f6a1b4ac26a6757",
+  "source_sha256": "4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+  "gold_sha256": "9feb80977944efb79c0d94b0975e6c464a2b95b0879e815559e70f2c541485a5",
+  "parsed_units": 2330,
+  "selected_spans": 81,
+  "support_tasks": 38,
+  "unresolved_independent_tasks": 0,
+  "admitted_tasks": 38,
+  "source_identity_task_membership": "PASS",
+  "support_text_set_exactly_equal_reviewed_v6": true,
+  "source_gold": [
+    {
+      "id": "hk-industry-cloud-closure",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "hk-rd-period-scope",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "hk-outlook-not-actual",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "hk-cloud-server-c9a-x9a-release",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "hk-training-inference-platform-launch",
+      "supported": true,
+      "all_anchors_individually_present": true
+    }
+  ],
+  "admitted_gold": [
+    {
+      "id": "hk-industry-cloud-closure",
+      "tasks": [
+        "t19"
+      ],
+      "support": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:0f887d75ce8ca0b8f1286183e21da451e63f4e297e4efd79664d9414c7a26430",
+          "source_id": "urn:company-wiki:source:sha256:4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+          "locator": "loc:v1/page:13/paragraph:9/chars:245-356",
+          "page": 13,
+          "text_sha256": "6a6152d09a439460a702e4ab391707fbb34317157cf5ab3026db38a1162f44a1"
+        }
+      ]
+    },
+    {
+      "id": "hk-rd-period-scope",
+      "tasks": [
+        "t16"
+      ],
+      "support": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:ae5f4d14634776a788377b2a94cd69fc31a3cf0713f348ecfebfc2052412bf1f",
+          "source_id": "urn:company-wiki:source:sha256:4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+          "locator": "loc:v1/page:11/paragraph:21/chars:404-469",
+          "page": 11,
+          "text_sha256": "9303b865e4979fd3ef25c43997aa6ed8b0d857fa67949e50ef47b8a6402eb37e"
+        }
+      ]
+    },
+    {
+      "id": "hk-outlook-not-actual",
+      "tasks": [
+        "t17"
+      ],
+      "support": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:e395049c60cd340ca2d8e90ef42468163895fbd38a73219c4a529f0ffbdd993d",
+          "source_id": "urn:company-wiki:source:sha256:4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+          "locator": "loc:v1/page:11/paragraph:24/chars:475-571",
+          "page": 11,
+          "text_sha256": "c9f9da0379c0fd23c230ea81b9c6058727b25f9b4f277d433ad4c6669cbaf82d"
+        }
+      ]
+    },
+    {
+      "id": "hk-cloud-server-c9a-x9a-release",
+      "tasks": [
+        "t9"
+      ],
+      "support": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:1f7ecf4ec68b26351c21146cc74ec823968ed6019559489aafdaf001e7b63e7f",
+          "source_id": "urn:company-wiki:source:sha256:4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+          "locator": "loc:v1/page:10/paragraph:2/chars:21-178",
+          "page": 10,
+          "text_sha256": "f4fc31f0207cf0dc3143167893ea30a9ad4eaf41aa256f961d89b29c311c5311"
+        }
+      ]
+    },
+    {
+      "id": "hk-training-inference-platform-launch",
+      "tasks": [
+        "t10"
+      ],
+      "support": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:39fa9abb35f7b6d484020457bf06034352188edd63872ebcd775865f6b64dceb",
+          "source_id": "urn:company-wiki:source:sha256:4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+          "locator": "loc:v1/page:10/paragraph:8/chars:178-299",
+          "page": 10,
+          "text_sha256": "e7264c6c458c2d9d71b5122fa83e54b31c80f61f227c5aa91755389451f7f3ec"
+        }
+      ]
+    }
+  ],
+  "old_gold_count": 3,
+  "new_gold_count": 2,
+  "combined_gold_count": 5,
+  "work_used": 6175509,
+  "max_work_units": 16000000,
+  "seconds": 4.139,
+  "SDK_calls": 0,
+  "model_POST": 0,
+  "original_unchanged": true,
+  "final_supplier_summary_exists": false
+}

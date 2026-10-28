@@ -1,0 +1,25 @@
+{
+  "exit_code": 0,
+  "seconds": 6.907,
+  "targets": [
+    "tests/unit/document_understanding_selection/test_source_support_use.py::test_raw_only_skip_requires_whole_unit_coverage_not_numeric_run_presence",
+    "tests/unit/document_understanding_selection/test_source_support_use.py::test_complete_single_row_or_scalar_material_can_use_raw_only_skip",
+    "tests/unit/document_understanding_selection/test_source_support_use.py::test_financial_drop_count_does_not_certify_unexplained_numeric_material",
+    "tests/unit/document_understanding_selection/test_source_support_use.py::test_administrative_route_cannot_certify_mixed_numeric_material",
+    "tests/unit/document_understanding_selection/test_source_support_use.py::test_current_finalizer_requires_source_disposition_proof_and_retains_legacy_counter_replay",
+    "tests/unit/document_understanding_selection/test_source_support_use.py::test_value_cell_presence_and_full_coverage_are_distinct_cached_structural_facts",
+    "tests/unit/document_understanding_selection/test_source_support_use.py::test_positive_offer_keeps_raw_unknown_required_context_and_its_full_cost",
+    "tests/unit/document_understanding_selection/test_source_support_use.py::test_unproved_prose_or_incomplete_source_cannot_use_raw_only_skip",
+    "tests/unit/document_understanding_selection/test_source_support_use.py::test_direct_admission_projects_use_and_relevance_from_one_preparation",
+    ".planning/c3-20261028/source-support-use/source-review-v6b/test_financial_skip_composition.py",
+    "tests/unit/document_understanding_selection/test_reading_production_selection.py::test_readable_financial_only_quarter_allows_zero_derived_material",
+    "tests/unit/document_understanding_selection/test_reading_production_selection.py::test_unread_page_cannot_be_reported_as_financial_only_skip",
+    "tests/unit/document_understanding_selection/test_reading_production_selection.py::test_real_structure_work_budget_stop_cannot_certify_financial_only_skip",
+    "tests/unit/test_narrative_selection_architecture.py::test_empty_results_skip_only_for_administrative_ir_documents",
+    "tests/unit/test_narrative_selection_architecture.py::test_unknown_document_route_cannot_auto_skip_an_empty_result",
+    "tests/unit/test_narrative_summarize_handler.py::test_summarize_handler_skip_uses_no_model_policy_or_review_lookup",
+    "tests/unit/test_narrative_summarize_handler.py::test_skipped_document_never_reserves_or_calls_paid_model"
+  ],
+  "owned_temp": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c3su",
+  "owned_temp_absent": true
+}

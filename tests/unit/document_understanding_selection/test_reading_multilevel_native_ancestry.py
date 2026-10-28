@@ -109,9 +109,13 @@ def test_nested_lists_share_one_physical_observation_for_the_same_page_edge(monk
             (2, "(2) 消费业务实现收入9亿元。", 1, (90, 130, 550, 162))]
     parsed = _source(rows)
     observations = {}
+    observed_contexts = {}
     actual = NativeSourceContext.page_neighbour
 
     def observe(self, left, right, **kwargs):
+        # Public understand/select have separate context lifetimes. Keep the
+        # observed objects alive so recycled integer IDs cannot merge them.
+        observed_contexts.setdefault(id(self), self)
         key = (id(self), left, right)
         observations[key] = observations.get(key, 0) + 1
         return actual(self, left, right, **kwargs)

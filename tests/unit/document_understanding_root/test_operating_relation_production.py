@@ -320,23 +320,27 @@ def test_trigger_preserves_all_old_relations_on_retained_specifications(monkeypa
 
 def test_source_fact_and_financial_status_share_one_owner_assessment(monkeypatch):
     from company_wiki.source_catalog.narrative_operating_relations import SourceOperatingSession
-    from company_wiki.source_catalog import narrative_business_policy as policy
+    from company_wiki.source_catalog import narrative_operating_relations as source_owner
     text = "Total revenue increased 10%."
     first, _ = native([(text,)])
     second, _ = native([(text,)], source_sha="d" * 64)
+    budget = WorkBudget(100000)
     session = SourceOperatingSession({u.unit_id:u for u in (*first.units, *second.units)},
-                                    work_budget=WorkBudget(100000))
+                                    work_budget=budget)
     calls = []
-    original = policy.detect_business_fact
-    def traced(value):
+    original = source_owner.assess_reading_business_fact
+    def traced(value, *args, **kwargs):
         calls.append(value)
-        return original(value)
-    monkeypatch.setattr(policy, "detect_business_fact", traced)
+        return original(value, *args, **kwargs)
+    monkeypatch.setattr(source_owner, "assess_reading_business_fact", traced)
     for unit in (*first.units, *second.units):
-        session.fact(unit.unit_id)
+        first_fact = session.fact(unit.unit_id)
+        used = budget.used
+        assert session.fact(unit.unit_id) == first_fact
         assert session.financial_only(unit.unit_id) is True
         assert session.financial_only(unit.unit_id) is True
-    assert calls.count(text) == 2  # one per actual parent, no text identity cache
+        assert budget.used == used
+    assert calls == [text, text]  # one complete assessment per actual parent
 
 
 def test_production_admission_and_dropped_do_not_restart_financial_detector(monkeypatch):

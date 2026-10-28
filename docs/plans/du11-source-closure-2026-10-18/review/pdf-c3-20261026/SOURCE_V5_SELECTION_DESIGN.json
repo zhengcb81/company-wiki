@@ -1,0 +1,84 @@
+{
+  "status": "ROOT_ACCEPTED_IMPLEMENTATION_IN_PROGRESS",
+  "frozen_v4_files": [
+    {
+      "path": "src/company_wiki/source_catalog/narrative_reading.py",
+      "sha256": "9e1d56a455ed2f88456610307e14cb362e90f948bd0e5eb75a82f37236605e61",
+      "unchanged": true
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_policy.py",
+      "sha256": "74e8a02585d293d1eb6944ef1822df89316918268b8e958b6d8ebd503ce2752c",
+      "unchanged": true
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_source_purpose.py",
+      "sha256": "068314ff65c190d9635ebedfc723731e9253000ae076db1e83466c8ad7e8e12c",
+      "unchanged": true
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_support_use.py",
+      "sha256": "d3a5fab4e0ffee18d91f86e76a5475ceafa64b632ec5ef9937f909605ecfc593",
+      "unchanged": true
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+      "sha256": "f19cef6d3ec77d3ad71f6c988239b0963a44c45a812ea5be3c2933a9d69d60f8",
+      "unchanged": true
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/relations.py",
+      "sha256": "3527fc7d7978ab9f47df0c5d61e32f3cf5c4fdc5158c1542e41e6d70a11f59bf",
+      "unchanged": true
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/patterns.py",
+      "sha256": "9c24486249f6f01de02987b9f8acb11a6b236b98bbce235d8bb64108656da411",
+      "unchanged": true
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/assertion_roles.py",
+      "sha256": "7583e8bd99c274cbbdb8dd2f5f30c125ecb2849d0d35c216013add74dfdc646a",
+      "unchanged": true
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_source_support_use.py",
+      "sha256": "40cd90332aaf89529c1d521b1b81cfc0a7cc3c3d8dd93f45cac31475854b9597",
+      "unchanged": true
+    }
+  ],
+  "effective_red": {
+    "tests": 4,
+    "failed": 3,
+    "passed": 1,
+    "receipt": {
+      "exit_code": 1,
+      "seconds": 6.198,
+      "targets": [
+        ".planning/c3-20261028/source-support-use/test_selection_suitability_red.py"
+      ],
+      "owned_temp": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c3su",
+      "owned_temp_absent": true
+    }
+  },
+  "actual": {
+    "selected_spans": 112,
+    "tasks": 59,
+    "support": 38,
+    "unresolved": 21,
+    "gold": 5
+  },
+  "proposed_added_owners": [
+    "narrative_finalize.py",
+    "narrative_budget.py",
+    "document_understanding/structure/table_purpose.py"
+  ],
+  "interface": "Reuse /4 support-use metadata in existing BudgetItem; complete support rank before unresolved, no new wire schema",
+  "caps_raised": false,
+  "original_reads": 0,
+  "model_calls": 0,
+  "cleanup": {
+    "c3su_absent": true
+  },
+  "scope_note": "Frozen design baseline hashes are historical v4, not signatures of current v5 implementation. SOURCE has been dispatched; no additional approval required."
+}

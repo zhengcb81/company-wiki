@@ -1,0 +1,21 @@
+{
+  "targets": [
+    "tests/unit/test_narrative_reading_transport.py::test_reading_context_group_identity_preserves_semantics_and_deduplicates_exact_rows",
+    "tests/unit/test_narrative_reading_transport.py::test_actual_shared_engine_context_passes_formal_transport_at_48k_shared_budget",
+    "tests/unit/test_narrative_reading_transport.py::test_actual_shared_engine_budget_diagnostics_survive_public_result_roundtrip",
+    "tests/unit/test_narrative_reading_transport.py::test_group_closure_limit_has_correct_dimension_through_public_result",
+    "tests/unit/document_understanding_selection/test_reading_production_selection.py::test_business_change_in_financial_note_is_not_dropped_as_finance",
+    "tests/unit/document_understanding_selection/test_reading_native_continuity.py::test_joint_closure_cannot_shrink_under_existing_span_budget",
+    "tests/unit/document_understanding_selection/test_reading_native_continuity.py::test_two_closed_windows_share_heading_cost_but_not_each_others_body",
+    "tests/unit/document_understanding_selection/test_reading_decision_inventory.py::test_w08_changed_source_implementation_invalidates_the_real_complete_decision[company_wiki.source_catalog.narrative_support_use]",
+    "tests/unit/document_understanding_selection/test_reading_decision_inventory.py::test_w08_changed_source_implementation_invalidates_the_real_complete_decision[company_wiki.document_understanding.reading_context_contract]",
+    "tests/unit/document_understanding_selection/test_reading_decision_inventory.py::test_w08_changed_source_implementation_invalidates_the_real_complete_decision[company_wiki.document_understanding.operating_states.assertion_roles]",
+    "tests/unit/document_understanding_selection/test_reading_decision_inventory.py::test_w08_changed_source_implementation_invalidates_the_real_complete_decision[company_wiki.source_catalog.narrative_budget]",
+    "tests/unit/document_understanding_root/test_operating_relation_production.py::test_source_fact_and_financial_status_share_one_owner_assessment"
+  ],
+  "exit_code": 1,
+  "seconds": 13.865,
+  "scratch_removed": true,
+  "supplier_calls": 0,
+  "SDK_calls": 0
+}

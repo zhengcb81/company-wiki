@@ -1,0 +1,18 @@
+{
+  "targets": [
+    "tests/unit/test_source_summary_capability.py",
+    "tests/unit/test_narrative_reading_transport.py",
+    "tests/unit/document_understanding_selection/test_reading_decision_inventory.py",
+    "tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py",
+    "tests/unit/document_understanding_selection/test_reading_untyped_numeric_quality.py",
+    "tests/unit/document_understanding_selection/test_reading_value_coverage.py",
+    "tests/unit/document_understanding_selection/test_reading_production_selection.py",
+    "tests/unit/document_understanding_selection/test_reading_native_dependency_closure.py",
+    "tests/unit/document_understanding_selection/test_reading_native_continuity.py"
+  ],
+  "exit_code": 1,
+  "seconds": 40.187,
+  "scratch_removed": true,
+  "supplier_calls": 0,
+  "SDK_calls": 0
+}

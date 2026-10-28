@@ -13,7 +13,6 @@ from company_wiki.automation.narrative_contracts import (
     PromptReviewValue,
     SourceRevisionEventPayload,
 )
-from company_wiki.automation.narrative_model import NarrativeModelRequest
 from company_wiki.automation.narrative_select import NarrativeSelectHandler
 from company_wiki.resource_budget import WorkBudget, WorkBudgetExceeded
 from company_wiki.source_catalog import narrative_reading as reading
@@ -630,7 +629,8 @@ def test_native_page_proofs_survive_public_select_transport_and_stay_out_of_mode
                      and group.get("source_proofs")]
     assert nested_groups
     assert any(target_id in group["source_proof_target_unit_ids"] for group in nested_groups)
-    request = NarrativeModelRequest.from_selection(public)
+    from company_wiki.automation.narrative_model_runtime import build_model_request
+    request = build_model_request(public, reading_projection_version='reading-model-input/4')
     assert "source_proofs" not in request.data_json
     assert "source_proof_unit_ids" not in request.data_json
     assert "source_proof_target_unit_ids" not in request.data_json

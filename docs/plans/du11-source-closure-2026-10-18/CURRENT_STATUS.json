@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-28",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_SOURCE_V4_SHARED_ASSESSMENT_ROOT_REPAIR",
+  "overall_status": "ACTIVE_SOURCE_SUPPORT_COMPONENT_ACCEPTED_PUBLICATION_PENDING",
   "parallel_packages_20261025": {
     "status": "W16_W17_W18_ROOT_COMPONENT_ACCEPTED_MERGED",
     "entry": "harness_lanes/20261025/README.md",
@@ -2344,7 +2344,7 @@
     "published": true,
     "push_failure": "47 targets /392 collected /600s; two regressions being root-fixed, not waived by narrower daily gate"
   },
-  "next_action": "Unified SOURCEv4 assessment: complete operating assertions versus typed refs, same-clause rule/product roles, one numeric-quality owner; focused failed nodes/real views/independent review before CWP producer release. No repeated unchanged full suites.",
+  "next_action": "Publish accepted SOURCEv6c/ROOT capability, exact CI; source-aware PDF enhancement preparation; new5-gold configured formal summary, independent response review/cache/FF-RF adoption, then holdouts and company audit loop.",
   "c3_runtime_recovery_20261026": {
     "entry": "review/pdf-c3-20261026/RUNTIME_RECOVERY.md",
     "environment_independent": "PASS_ZERO_OPEN_25_TESTS_AND_REAL_WORKER_ENTRYPOINTS",
@@ -2708,7 +2708,7 @@
     "wire": "du-production-reading/4",
     "status": "UNPUBLISHED_IMPLEMENTATION",
     "consumer": "FINAL_INDEPENDENT_PASS_59",
-    "source": "V3_REAL_CONTENT_AND_DOMAIN_REJECTED_V4_ROOT_DESIGN",
+    "source": "V6C_AND_ROOT_CONSUMER_INDEPENDENT_PASS",
     "cross_repository": {
       "rf_commit": "0991e25d5dca667a3fdafb7bc5ebf0e546a2272b",
       "rf_main_pushed": true,
@@ -2730,7 +2730,15 @@
     "public_current_producer_gate": "V3_PUBLIC_WORKER_CLI_RF_STOCKWIKI_1P_23_21S",
     "real_supplier_summary": "NOT_RUN",
     "interface": "review/pdf-c3-20261026/SOURCE_SUPPORT_INTERFACE.md",
-    "real_native_source": "2330_UNITS_101_SPANS_3_GOLD_PRESENT_BUT_SUPPORT_CONTENT_REVIEW_CHANGES_REQUIRED",
+    "real_native_source": {
+      "selected_spans": 81,
+      "support_tasks": 38,
+      "business_gold": "5/5",
+      "seconds": 4.139,
+      "work_used": 6175509,
+      "work_limit": 16000000,
+      "supplier_POST": 0
+    },
     "source_domain": {
       "passed": 2534,
       "failed": 11,
@@ -2738,8 +2746,18 @@
       "seconds": 77.04
     },
     "all_src_mypy": {
-      "files": 395,
+      "files": 396,
       "status": "PASS"
-    }
+    },
+    "source_review": {
+      "status": "PASS",
+      "tests": 32,
+      "seconds": 6.96,
+      "bound_files": 25
+    },
+    "root_protocol_check": "Original7 failures and4 cache mutation plus owner cache controls closed; old RED retained",
+    "formal_business_gold": "review/pdf-c3-20261026/business-recovery-checkpoints/hk-development-business5-gold.json",
+    "final_summary": "OPEN_NOT_EXECUTED_FOR_CURRENT_SOURCE",
+    "acceptance": "review/pdf-c3-20261026/SOURCE_USE_ACCEPTANCE.md"
   }
 }

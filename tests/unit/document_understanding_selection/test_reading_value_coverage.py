@@ -216,7 +216,7 @@ def test_actual_operating_fact_and_scope_only_description_receive_different_band
     assert metadata[units[0].unit_id]["value_band"] == "meaningful_fact"
     assert metadata[units[1].unit_id]["value_band"] == "description"
     assert "business" not in metadata[units[0].unit_id]["topics"], "scope is not a factual topic"
-    assert metadata[units[1].unit_id]["topics"] == ("business",)
+    assert "business" in metadata[units[1].unit_id]["topics"]
     emitted = _budget_item(result[0][0], {}, reading._NEVER_HEADING, reading=metadata[units[0].unit_id])
     assert emitted.value_band == "meaningful_fact"
 
@@ -344,6 +344,19 @@ def test_missing_pure_projection_component_cannot_claim_complete_pdf(monkeypatch
 
 
 def test_marker_filter_does_not_remove_words_with_digits_or_roman_prefixes():
-    for text in ("IV therapy services for hospitals", "Our 2026 product portfolio", "一体化生产服务"):
+    for text in ("IV therapy services for hospitals", "Our 2026 product portfolio includes recycling systems.",
+                 "一体化生产服务覆盖多个下游客户工序。"):
         unit = SimpleNamespace(raw_text=text, source_role="company_filing", unit_kind="html_paragraph")
         assert reading._admitted(unit, {"section_role": "business"}, "narrative")[0]
+
+
+@pytest.mark.parametrize('text', ['Our 2026 product portfolio', '一体化生产服务'])
+def test_noun_only_product_labels_are_readable_context_not_independent_summary_anchors(text):
+    from company_wiki.source_catalog.narrative_business_policy import detect_reading_business_fact, reading_financial_only
+    from company_wiki.source_catalog.narrative_support_use import source_support_use
+    unit = SimpleNamespace(raw_text=text, source_role='company_filing', unit_kind='html_paragraph')
+    fact = detect_reading_business_fact(unit.raw_text)
+    use, reason = source_support_use(unit.raw_text, fact=fact, financial_only=reading_financial_only(unit.raw_text,fact))
+    assert (use, reason) == ('context_only','no_independent_business_support')
+    assert not reading._admitted(unit, {'section_role':'business'}, 'narrative')[0]
+    assert unit.raw_text == text

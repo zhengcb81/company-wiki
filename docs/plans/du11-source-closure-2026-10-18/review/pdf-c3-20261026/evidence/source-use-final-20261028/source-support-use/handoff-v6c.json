@@ -1,0 +1,244 @@
+{
+  "schema_version": "source-support-use-handoff/6c",
+  "date": "2026-10-28",
+  "status": "FROZEN_READY_FOR_INDEPENDENT_RECHECK",
+  "files": [
+    {
+      "path": "src/company_wiki/source_catalog/narrative_reading.py",
+      "bytes": 101365,
+      "sha256": "ba55b183886528e3be16c125f8674de5227a95ed12afc058ca3840f5599d6614",
+      "lf_sha256": "c996bdc7c9a03f57d8ada08ada59399073cac590b8de579514ea69889de73c87",
+      "changed_since_v6b": true
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_policy.py",
+      "bytes": 60737,
+      "sha256": "74e8a02585d293d1eb6944ef1822df89316918268b8e958b6d8ebd503ce2752c",
+      "lf_sha256": "513c4df83baca59e80152121e6ded752b880391f8f715df61ec2c2718f973739",
+      "changed_since_v6b": false
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_source_purpose.py",
+      "bytes": 14732,
+      "sha256": "068314ff65c190d9635ebedfc723731e9253000ae076db1e83466c8ad7e8e12c",
+      "lf_sha256": "b838489bab1d2be4a87a1156e50173f2fc413caf4e94cb879f0d762b357ddfd8",
+      "changed_since_v6b": false
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_support_use.py",
+      "bytes": 3724,
+      "sha256": "c1487ab3a8b10efba9a4311508d69664f3de38c0894914f47cb00a5daf05edbc",
+      "lf_sha256": "c1487ab3a8b10efba9a4311508d69664f3de38c0894914f47cb00a5daf05edbc",
+      "changed_since_v6b": false
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+      "bytes": 41687,
+      "sha256": "af91e2f24a4ddf773402a43e1bf4884c7ff019795e13ffb9b48e7dbe8072830b",
+      "lf_sha256": "ac82f984e77a46c46a5c596b2000d9658dbf86a79004f946b08c1d92922a8e65",
+      "changed_since_v6b": false
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/relations.py",
+      "bytes": 57099,
+      "sha256": "5ea73a73c2e956f15f70d518cbee352d19d3b19d88f579015cbccc56054f261a",
+      "lf_sha256": "d440c148dc0634ab72c00f4a6464c926741ce1e8c5c2e8551457953d2559c524",
+      "changed_since_v6b": false
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/patterns.py",
+      "bytes": 25014,
+      "sha256": "46d2a264fdfdb56677a32d1bb48019c111bd58b8086cc1f6b65bbdda33cef4ed",
+      "lf_sha256": "49bb93ff207c329c9ed87c3b978c359b1ab3eaa98078978c83cbe78ab062b39c",
+      "changed_since_v6b": false
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/assertion_roles.py",
+      "bytes": 14207,
+      "sha256": "cf9bf579a26ba662b45e92ebf093c185d56a37da8d458122e1f396aa99b91726",
+      "lf_sha256": "d6f7293db07c195818c058eb889113f0b63ca4bab11ed84a91383f3fb3f07914",
+      "changed_since_v6b": false
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_source_support_use.py",
+      "bytes": 49021,
+      "sha256": "a64ca3a37bd294d9f553665f1fd419e19da1050c6489e3d5c36c5b45a227626d",
+      "lf_sha256": "6c6ed3ac05d772a2d78e557e5163a14c534669fb99bc1004459518a87f03b456",
+      "changed_since_v6b": true
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_budget.py",
+      "bytes": 49784,
+      "sha256": "b805b334233d2214d004774bbef8add00d99881346c5f48b4781a4f36c810be3",
+      "lf_sha256": "113645934c00dd82491413b5f4165a4e632e0a4f959b18dc4d71c88fa6e14a66",
+      "changed_since_v6b": false
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_finalize.py",
+      "bytes": 12331,
+      "sha256": "feb6feb3fce94f003ed832ae147151adf64f50af7ed762ce005a6e5fdbc13e04",
+      "lf_sha256": "1dfb75374e9e45c255045d2e677883985a9af50790d6184300a92e0d284fb37e",
+      "changed_since_v6b": true
+    },
+    {
+      "path": "src/company_wiki/document_understanding/structure/table_purpose.py",
+      "bytes": 19830,
+      "sha256": "2d87eec638175b4b1e1cce6f16fa9cf3c4809211194f48cfd9b53165d9113c46",
+      "lf_sha256": "0d92f12205582fbf04db5d282193fcd00aee18e207e92f549142f9a71bc5297b",
+      "changed_since_v6b": false
+    },
+    {
+      "path": "src/company_wiki/document_normalization/table_shapes.py",
+      "bytes": 3503,
+      "sha256": "5254f922332c5defebf083734622b1db511ab4e439ad382e5e62919b2af52484",
+      "lf_sha256": "321405419b5abc10b52e2f347a703017a68e4dde21ff2f8e33c8a53e14118dc3",
+      "changed_since_v6b": false
+    }
+  ],
+  "baseline": "handoff-v6b.json; FINAL source-review-v6b40unique38P2F remains unchanged",
+  "changes_since_v6b": [
+    "src/company_wiki/source_catalog/narrative_finalize.py",
+    "src/company_wiki/source_catalog/narrative_reading.py",
+    "tests/unit/document_understanding_selection/test_source_support_use.py"
+  ],
+  "unchanged_v6b_manifest_files": 10,
+  "root_cause": "Financial classification and all-dropped counters bypassed cached whole-scope structural completeness for mixed numeric material.",
+  "producer": "For every actual scope, a numeric run without complete raw structure vetoes empty-disposition proof. This applies to financial/raw-only disposition and administrative/route OR branches, without changing financial classification or counting.",
+  "finalizer": "Private _status consumes one empty_result_proven boolean after physical/error/omission checks. Current reading_plan/3 trusts only producer proof in the effective route; dropped_financial_count is diagnostic. Legacy and reading_plan/1-2 preserve former count-based replay adaptation before the status function.",
+  "red": {
+    "counts": {
+      "total": 14,
+      "failed": 2,
+      "errors": 0,
+      "skipped": 0
+    },
+    "receipt": {
+      "exit_code": 1,
+      "seconds": 8.445,
+      "targets": [
+        "tests/unit/document_understanding_selection/test_source_support_use.py::test_raw_only_skip_requires_whole_unit_coverage_not_numeric_run_presence",
+        "tests/unit/document_understanding_selection/test_source_support_use.py::test_complete_single_row_or_scalar_material_can_use_raw_only_skip",
+        ".planning/c3-20261028/source-support-use/source-review-v6b/test_financial_skip_composition.py"
+      ],
+      "owned_temp": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c3su",
+      "owned_temp_absent": true
+    }
+  },
+  "green": {
+    "counts": {
+      "total": 17,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "receipt": {
+      "exit_code": 0,
+      "seconds": 6.603,
+      "targets": [
+        "tests/unit/document_understanding_selection/test_source_support_use.py::test_raw_only_skip_requires_whole_unit_coverage_not_numeric_run_presence",
+        "tests/unit/document_understanding_selection/test_source_support_use.py::test_complete_single_row_or_scalar_material_can_use_raw_only_skip",
+        "tests/unit/document_understanding_selection/test_source_support_use.py::test_financial_drop_count_does_not_certify_unexplained_numeric_material",
+        ".planning/c3-20261028/source-support-use/source-review-v6b/test_financial_skip_composition.py"
+      ],
+      "owned_temp": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c3su",
+      "owned_temp_absent": true
+    }
+  },
+  "final": {
+    "counts": {
+      "total": 53,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "receipt": {
+      "exit_code": 0,
+      "seconds": 6.907,
+      "targets": [
+        "tests/unit/document_understanding_selection/test_source_support_use.py::test_raw_only_skip_requires_whole_unit_coverage_not_numeric_run_presence",
+        "tests/unit/document_understanding_selection/test_source_support_use.py::test_complete_single_row_or_scalar_material_can_use_raw_only_skip",
+        "tests/unit/document_understanding_selection/test_source_support_use.py::test_financial_drop_count_does_not_certify_unexplained_numeric_material",
+        "tests/unit/document_understanding_selection/test_source_support_use.py::test_administrative_route_cannot_certify_mixed_numeric_material",
+        "tests/unit/document_understanding_selection/test_source_support_use.py::test_current_finalizer_requires_source_disposition_proof_and_retains_legacy_counter_replay",
+        "tests/unit/document_understanding_selection/test_source_support_use.py::test_value_cell_presence_and_full_coverage_are_distinct_cached_structural_facts",
+        "tests/unit/document_understanding_selection/test_source_support_use.py::test_positive_offer_keeps_raw_unknown_required_context_and_its_full_cost",
+        "tests/unit/document_understanding_selection/test_source_support_use.py::test_unproved_prose_or_incomplete_source_cannot_use_raw_only_skip",
+        "tests/unit/document_understanding_selection/test_source_support_use.py::test_direct_admission_projects_use_and_relevance_from_one_preparation",
+        ".planning/c3-20261028/source-support-use/source-review-v6b/test_financial_skip_composition.py",
+        "tests/unit/document_understanding_selection/test_reading_production_selection.py::test_readable_financial_only_quarter_allows_zero_derived_material",
+        "tests/unit/document_understanding_selection/test_reading_production_selection.py::test_unread_page_cannot_be_reported_as_financial_only_skip",
+        "tests/unit/document_understanding_selection/test_reading_production_selection.py::test_real_structure_work_budget_stop_cannot_certify_financial_only_skip",
+        "tests/unit/test_narrative_selection_architecture.py::test_empty_results_skip_only_for_administrative_ir_documents",
+        "tests/unit/test_narrative_selection_architecture.py::test_unknown_document_route_cannot_auto_skip_an_empty_result",
+        "tests/unit/test_narrative_summarize_handler.py::test_summarize_handler_skip_uses_no_model_policy_or_review_lookup",
+        "tests/unit/test_narrative_summarize_handler.py::test_skipped_document_never_reserves_or_calls_paid_model"
+      ],
+      "owned_temp": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c3su",
+      "owned_temp_absent": true
+    }
+  },
+  "static": {
+    "checks": [
+      {
+        "status": "fulfilled",
+        "value": {
+          "chunk_id": "d9d126",
+          "wall_time_seconds": 0.9493093,
+          "exit_code": 0,
+          "original_token_count": 5,
+          "output": "All checks passed!\n"
+        }
+      },
+      {
+        "status": "fulfilled",
+        "value": {
+          "chunk_id": "f3d4ad",
+          "wall_time_seconds": 2.3393522,
+          "exit_code": 0,
+          "original_token_count": 11,
+          "output": "Success: no issues found in 2 source files\r\n"
+        }
+      },
+      {
+        "status": "fulfilled",
+        "value": {
+          "chunk_id": "8d2156",
+          "wall_time_seconds": 1.1391387,
+          "exit_code": 0,
+          "original_token_count": 2,
+          "output": "False\r\n"
+        }
+      }
+    ]
+  },
+  "tests_scope": [
+    "Original eight Other/prose whole-coverage/scalar controls and independent tax/depreciation compositions.",
+    "Tracked tax same-unit before/after and split-unit controls retain financial drop1, exact raw/source identities and needs_review.",
+    "Explicit administrative route cannot bypass mixed numeric coverage; current finalizer cannot infer proof from count1 while legacy/reading_plan1-2 replay remains unchanged.",
+    "Pure financial quarter, scalar/row positive, required-context atomic cost, unknown prose/unread/work-limited negatives and zero-model skip handlers."
+  ],
+  "frozen": [
+    "SourceAssertionRoles/table_shapes observations",
+    "Offer/use and source business/financial classification",
+    "Shared typed business proofs and accounting vocabulary",
+    "Support-first heap, identity/atomic closure costs",
+    "Wire /4, resources, production configuration and all other source semantics"
+  ],
+  "limits": "Narrow terminal correction only. Prior native38support/5gold evidence is unchanged and is not a new configured summary result. No original reread or new PDF/SDK/model/native run.",
+  "external_work": {
+    "original_PDF_reads": 0,
+    "SDK_runs": 0,
+    "paid_model_calls": 0,
+    "downloads": 0,
+    "fresh_holdout_access": 0
+  },
+  "cleanup": {
+    "owned_temp": ".c3su",
+    "absent": true,
+    "production_config_changes": false,
+    "committed": false
+  },
+  "pending": [
+    "ROOT independent v6c recheck and final dependency/native/fullsrc binding"
+  ]
+}
