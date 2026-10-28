@@ -1,0 +1,346 @@
+{
+  "schema_version": "c3-sdk-startup-diagnosis/1",
+  "status": "DIAGNOSTIC_COMPLETE_NOT_CONTENT_PASS",
+  "probe": {
+    "config_sha256": "077654bd7eeb016d57667ec3560e602f4de480a74c2cbb236fc1100dda942fd6",
+    "configured_python": "C:/Miniconda/python.exe",
+    "configured_environment_sha256": "c84a984ccb3a56dffbfd0d4538f14ce4a27de44dec4981527a2b0c4a545cdf44",
+    "configured_model_sha256": "00333a43451945aaf89db8ca9c0a17e75d1537c17db60fdb91aa95f4c7929e0c",
+    "environment": {
+      "SYSTEMROOT": "C:\\WINDOWS",
+      "WINDIR": "C:\\WINDOWS",
+      "COMSPEC": "C:\\WINDOWS\\system32\\cmd.exe",
+      "PATH": "C:\\Users\\郑曾波\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell;C:\\Users\\郑曾波\\.codex\\tmp\\arg0-windows\\codex-arg0UheTWM;C:\\Users\\郑曾波\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\libheif\\libheif\\bin;C:\\Users\\郑曾波\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\jxrlib\\jxrlib\\bin;C:\\Users\\郑曾波\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\poppler\\Library\\bin;C:\\Users\\郑曾波\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\bin\\override;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\WINDOWS\\System32\\OpenSSH\\;C:\\Program Files\\dotnet\\;C:\\Recovery\\OEM\\Backup\\;C:\\Recovery\\OEM\\Backup\\;C:\\Program Files\\Git\\cmd;C:\\Users\\郑曾波\\.local\\bin;C:\\Users\\郑曾波\\AppData\\Local\\agy\\bin;C:\\Users\\郑曾波\\bin;C:\\Program Files\\Git\\mingw64\\bin;C:\\Program Files\\Git\\usr\\local\\bin;C:\\Program Files\\Git\\usr\\bin;C:\\Miniconda;C:\\Miniconda\\Library\\mingw-w64\\bin;C:\\Miniconda\\Library\\usr\\bin;C:\\Miniconda\\Library\\bin;C:\\Miniconda\\Scripts;C:\\Users\\郑曾波\\nodejs;C:\\Users\\郑曾波\\AppData\\Local\\Programs\\Microsoft VS Code\\bin;C:\\Users\\郑曾波\\.bun\\bin;C:\\Program Files\\Git\\usr\\bin\\vendor_perl;C:\\Program Files\\Git\\usr\\bin\\core_perl;C:\\Users\\郑曾波\\.claude\\plugins\\cache\\planning-with-files\\planning-with-files\\2.1.2\\bin;C:\\Users\\郑曾波\\.claude\\plugins\\cache\\addy-agent-skills\\agent-skills\\6ce029897d2b\\bin;C:\\Users\\郑曾波\\ffmpeg\\ffmpeg-8.1.2-essentials_build\\bin;C:\\TdxClaw\\resources\\cli;C:\\Users\\郑曾波\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\bin\\fallback;C:\\Users\\郑曾波\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\node\\bin;C:\\Users\\郑曾波\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\git\\cmd;C:\\Users\\郑曾波\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\powershell;C:\\Users\\郑曾波\\AppData\\Local\\OpenAI\\Codex\\bin\\593bad775a30e636;C:\\Users\\郑曾波\\AppData\\Local\\OpenAI\\Codex\\bin\\08d187884f2330d1",
+      "PATHEXT": ".COM;.EXE;.BAT;.CMD;.VBS;.VBE;.JS;.JSE;.WSF;.WSH;.MSC;.CPL",
+      "SYSTEMDRIVE": "C:",
+      "USERPROFILE": "C:\\Users\\郑曾波",
+      "HOMEDRIVE": "C:",
+      "HOMEPATH": "\\Users\\郑曾波",
+      "APPDATA": "C:\\Users\\郑曾波\\AppData\\Roaming",
+      "LOCALAPPDATA": "C:\\Users\\郑曾波\\AppData\\Local\\Packages\\sandbox.{b55f607d-e750-4d1a-8c5f-12ae3743ee1c}\\AC",
+      "PROGRAMDATA": "C:\\ProgramData",
+      "HF_HUB_OFFLINE": "1",
+      "TRANSFORMERS_OFFLINE": "1",
+      "HF_HUB_DISABLE_TELEMETRY": "1",
+      "DO_NOT_TRACK": "1",
+      "TOKENIZERS_PARALLELISM": "false",
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTHONUTF8": "1",
+      "PYTHONIOENCODING": "utf-8",
+      "OMP_NUM_THREADS": "4",
+      "OPENBLAS_NUM_THREADS": "4",
+      "MKL_NUM_THREADS": "4",
+      "TEMP": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c3sdk28",
+      "TMP": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c3sdk28",
+      "TMPDIR": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c3sdk28"
+    },
+    "timeout_seconds": 30,
+    "max_memory_bytes": 4294967296,
+    "cpu_threads": 4,
+    "pdf_input_bytes": 0,
+    "attempts": 1,
+    "status": "ChildTimeout",
+    "returncode": null,
+    "wall_seconds": 30.018203,
+    "owned_temp_absent": true,
+    "stdout_bytes": 2661,
+    "stderr_bytes": 23130,
+    "stdout_sha256": "db27fa036fe27776a81f791d564e9189729e4318549fee49e53ab8e0cfeb2a2d",
+    "stderr_sha256": "727389e56eb4742d9b7300c4fc2b806e13218977bc8fcb0e0fb6fa703e4f620f",
+    "script_sha256": "fcc5684e60cdb41a895e128aec3e50daf34eed607a41970587cd25363b70ea28",
+    "controller_sha256": "2068e2d10c131472f2cb6a64f0b731433160e425fb99b43601837ee62458f85d"
+  },
+  "sdk_versions": {
+    "transformers": "5.18.0"
+  },
+  "events": [
+    {
+      "stage": "BOOT",
+      "active": "BOOT",
+      "seconds": 0.001924,
+      "cpu_seconds": 0.109375,
+      "pid": 22120,
+      "peak_job_commit_bytes": 10162176,
+      "python": "C:\\Miniconda\\python.exe",
+      "cpu_threads": 4,
+      "memory_limit_bytes": 4294967296,
+      "io": {
+        "read_ops": 110,
+        "write_ops": 0,
+        "other_ops": 3905,
+        "read_bytes": 1061934,
+        "write_bytes": 0,
+        "other_bytes": 402216
+      }
+    },
+    {
+      "stage": "BEGIN",
+      "active": "IMPORT_DOCUMENT_CONVERTER",
+      "seconds": 0.002028,
+      "cpu_seconds": 0.109375,
+      "pid": 22120,
+      "peak_job_commit_bytes": 10162176,
+      "io": {
+        "read_ops": 110,
+        "write_ops": 1,
+        "other_ops": 3905,
+        "read_bytes": 1061934,
+        "write_bytes": 347,
+        "other_bytes": 402216
+      }
+    },
+    {
+      "stage": "SAMPLE",
+      "active": "IMPORT_DOCUMENT_CONVERTER",
+      "seconds": 4.013183,
+      "cpu_seconds": 2.96875,
+      "pid": 22120,
+      "peak_job_commit_bytes": 187924480,
+      "io": {
+        "read_ops": 2164,
+        "write_ops": 2,
+        "other_ops": 91668,
+        "read_bytes": 19754404,
+        "write_bytes": 627,
+        "other_bytes": 3082170
+      }
+    },
+    {
+      "stage": "SAMPLE",
+      "active": "IMPORT_DOCUMENT_CONVERTER",
+      "seconds": 8.026635,
+      "cpu_seconds": 5.609375,
+      "pid": 22120,
+      "peak_job_commit_bytes": 190308352,
+      "io": {
+        "read_ops": 2508,
+        "write_ops": 1081,
+        "other_ops": 126634,
+        "read_bytes": 21567020,
+        "write_bytes": 8556,
+        "other_bytes": 3903734
+      }
+    },
+    {
+      "stage": "SAMPLE",
+      "active": "IMPORT_DOCUMENT_CONVERTER",
+      "seconds": 12.033112,
+      "cpu_seconds": 8.375,
+      "pid": 22120,
+      "peak_job_commit_bytes": 192409600,
+      "io": {
+        "read_ops": 2730,
+        "write_ops": 1082,
+        "other_ops": 160374,
+        "read_bytes": 22533265,
+        "write_bytes": 8847,
+        "other_bytes": 4680594
+      }
+    },
+    {
+      "stage": "SAMPLE",
+      "active": "IMPORT_DOCUMENT_CONVERTER",
+      "seconds": 16.044506,
+      "cpu_seconds": 11.765625,
+      "pid": 22120,
+      "peak_job_commit_bytes": 192409600,
+      "io": {
+        "read_ops": 2817,
+        "write_ops": 2161,
+        "other_ops": 202375,
+        "read_bytes": 23053887,
+        "write_bytes": 16792,
+        "other_bytes": 5618172
+      }
+    },
+    {
+      "stage": "SAMPLE",
+      "active": "IMPORT_DOCUMENT_CONVERTER",
+      "seconds": 20.057383,
+      "cpu_seconds": 15.25,
+      "pid": 22120,
+      "peak_job_commit_bytes": 197296128,
+      "io": {
+        "read_ops": 2892,
+        "write_ops": 2162,
+        "other_ops": 241201,
+        "read_bytes": 24927380,
+        "write_bytes": 17086,
+        "other_bytes": 6458230
+      }
+    },
+    {
+      "stage": "SAMPLE",
+      "active": "IMPORT_DOCUMENT_CONVERTER",
+      "seconds": 24.071878,
+      "cpu_seconds": 18.875,
+      "pid": 22120,
+      "peak_job_commit_bytes": 203968512,
+      "io": {
+        "read_ops": 2892,
+        "write_ops": 3259,
+        "other_ops": 280632,
+        "read_bytes": 24927380,
+        "write_bytes": 25206,
+        "other_bytes": 7324794
+      }
+    },
+    {
+      "stage": "SAMPLE",
+      "active": "IMPORT_DOCUMENT_CONVERTER",
+      "seconds": 28.086803,
+      "cpu_seconds": 22.046875,
+      "pid": 22120,
+      "peak_job_commit_bytes": 211144704,
+      "io": {
+        "read_ops": 2968,
+        "write_ops": 3260,
+        "other_ops": 317573,
+        "read_bytes": 25276948,
+        "write_bytes": 25497,
+        "other_bytes": 8095584
+      }
+    }
+  ],
+  "snapshots": 3,
+  "guards_rejected": [],
+  "bound_source_files": {
+    "C:/Miniconda/Lib/site-packages/transformers/utils/import_utils.py": {
+      "sha256": "6049342a95f78ef97f8e712e965d5e55435f00443010e169b9a88a762e3c2f0f",
+      "bytes": 127221
+    },
+    "C:/Miniconda/Lib/importlib/metadata/__init__.py": {
+      "sha256": "5476c7c22a65f9e8b5a07b799336d87fa70e792758fd95b161b53b530e3b2654",
+      "bytes": 34091
+    }
+  },
+  "local_metadata_inventory": {
+    "dist_info_directories": 426,
+    "without_top_level": 179,
+    "record_bytes": 9304802,
+    "largest_record_files": [
+      {
+        "distribution": "mkdocs_material-9.7.7.dist-info",
+        "record_bytes": 1608909,
+        "declared_top_level": false
+      },
+      {
+        "distribution": "torch-2.12.0.dist-info",
+        "record_bytes": 1257674,
+        "declared_top_level": true
+      },
+      {
+        "distribution": "transformers-5.18.0.dist-info",
+        "record_bytes": 509466,
+        "declared_top_level": true
+      },
+      {
+        "distribution": "kubernetes-36.0.3.dist-info",
+        "record_bytes": 335301,
+        "declared_top_level": true
+      },
+      {
+        "distribution": "modelscope-1.37.0.dist-info",
+        "record_bytes": 333249,
+        "declared_top_level": true
+      },
+      {
+        "distribution": "gradio-6.8.0.dist-info",
+        "record_bytes": 257168,
+        "declared_top_level": false
+      },
+      {
+        "distribution": "pandas-2.3.3.dist-info",
+        "record_bytes": 248078,
+        "declared_top_level": false
+      },
+      {
+        "distribution": "langchain_community-0.3.31.dist-info",
+        "record_bytes": 227117,
+        "declared_top_level": false
+      },
+      {
+        "distribution": "botocore-1.43.12.dist-info",
+        "record_bytes": 220630,
+        "declared_top_level": true
+      },
+      {
+        "distribution": "langchain-0.3.30.dist-info",
+        "record_bytes": 216832,
+        "declared_top_level": false
+      },
+      {
+        "distribution": "scikit_learn-1.9.1.dist-info",
+        "record_bytes": 154438,
+        "declared_top_level": false
+      },
+      {
+        "distribution": "scipy-1.17.1.dist-info",
+        "record_bytes": 146133,
+        "declared_top_level": false
+      }
+    ]
+  },
+  "observed_call_chain": [
+    "docling.document_converter:21",
+    "docling.backend.asciidoc_backend:20",
+    "docling.datamodel.base_models:38",
+    "docling.datamodel.pipeline_options:17",
+    "docling.datamodel.asr_model_specs:9",
+    "docling.datamodel.pipeline_options_asr_model:8",
+    "docling.datamodel.pipeline_options_vlm_model:9",
+    "transformers.utils.import_utils:51",
+    "importlib.metadata.packages_distributions:1045-1046"
+  ],
+  "diagnosis": "No-document cold first import remains in global installed-distribution metadata discovery for all three sampled stacks; no options/converter/page work reached.",
+  "production_claim_limit": "Does not establish all 120s of production timeout had the same stack; no production faulthandler was enabled.",
+  "caveats": [
+    "Only one 30s SDK process; no second probe or 120s replay.",
+    "Audit open-path resolution and sampling add overhead; exact timings are instrumented.",
+    "Environment uses safe locator whitelist plus identical offline/CPU flags; other inherited env vars intentionally excluded.",
+    "No Options, converter construction, model load or page conversion observed; downstream timings unknown.",
+    "Windows process I/O counters include pipe output and metadata operations, not pure disk transfer.",
+    "Audit guard covers Python I/O/network events, not a complete native filesystem/network trace.",
+    "Configured model weight SHA retained, not rehashed this round; actual model config SHA checked."
+  ],
+  "cleanup": {
+    "owned_temp_absent": true,
+    "observed_processes": [
+      {
+        "pid": 22120,
+        "alive": false
+      }
+    ],
+    "existing_bounded_process_owned_tree_cleanup": true
+  },
+  "production_source_freeze": [
+    {
+      "path": "src/company_wiki/source_catalog/narrative_pdf_enhancement.py",
+      "lf_sha256": "bb8aff2e74c0b757d8caa17ebe86806d59126dc46ad2d1b590f55504ff174f16",
+      "unchanged": true
+    },
+    {
+      "path": "src/company_wiki/source_catalog/_paragraph_worker.py",
+      "lf_sha256": "7ac1c62070273995cfe6b64d4c48a616f5c4ea7dfa6ecb0afa28baf8645b989b",
+      "unchanged": true
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_pdf_page_checkpoints.py",
+      "lf_sha256": "c6c697805caf4e18c556ecec4b2ae831ae2955544c340fadbde2ea61404c3f03",
+      "unchanged": true
+    },
+    {
+      "path": "tests/unit/test_pdf_page_checkpoints.py",
+      "lf_sha256": "e33796aaa00b0cc4e5d1e1d26501e2ccc674c664beac494bdc279dc211a883fa",
+      "unchanged": true
+    }
+  ],
+  "prohibited_work": {
+    "original_pdf_reads": 0,
+    "document_conversions": 0,
+    "paid_calls": 0,
+    "downloads": 0,
+    "persistent_cache_or_config_writes": 0,
+    "sdk_cold_attempts": 1
+  }
+}

@@ -42,9 +42,51 @@ def environment_sha256(*, roots=None, marker_environment=None):
     return sha256(json.dumps(packages, separators=(",", ":")).encode()).hexdigest()
 
 
+def _convert_pages(converter, document_stream, data, request, *, checkpoints=None, peak_commit=lambda: None):
+    """One hot converter, one atomic completed-page record, one output balance."""
+    items, total_items, written = [], 0, 0
+
+    def emit(encoded):
+        nonlocal written
+        if written + len(encoded) > request["max_output_bytes"]:
+            raise ValueError("paragraph checkpoint aggregate output exceeded")
+        sys.stdout.buffer.write(encoded)
+        sys.stdout.buffer.flush()
+        written += len(encoded)
+
+    for sequence, page in enumerate(request["pages"]):
+        stage("PAGE_" + str(page))
+        converted = converter.convert(document_stream(name="source.pdf", stream=BytesIO(data)),
+            page_range=(page, page), max_file_size=len(data), raises_on_error=False)
+        if str(converted.status) != "ConversionStatus.SUCCESS":
+            print("CWP_CONVERSION_STATUS=" + str(converted.status), file=sys.stderr, flush=True)
+            for error in converted.errors:
+                print(str(error), file=sys.stderr, flush=True)
+            raise ValueError("paragraph conversion incomplete")
+        page_items = []
+        for item, _ in converted.document.iterate_items():
+            if str(item.label) in {"text", "list_item"}:
+                page_items.append({"label": str(item.label), "text": getattr(item, "text", ""),
+                                   "provenance": [p.model_dump(mode="json") for p in getattr(item, "prov", [])]})
+                if total_items + len(page_items) > 2048:
+                    raise ValueError("paragraph item count exceeded")
+        total_items += len(page_items)
+        if checkpoints is not None:
+            emit(checkpoints.encode_page(request, page, sequence, page_items, peak_commit()))
+            stage("PAGE_COMMITTED_" + str(page))
+        else:
+            items.extend(page_items)
+    if checkpoints is not None:
+        emit(checkpoints.encode_complete(request, total_items))
+    return items
+
+
 def main():
     stage("INPUT")
-    request = json.loads(sys.stdin.buffer.read(96 * 1024 * 1024 + 1))
+    encoded_request = sys.stdin.buffer.read(96 * 1024 * 1024 + 1)
+    if len(encoded_request) > 96 * 1024 * 1024:
+        raise ValueError("paragraph request byte bound exceeded")
+    request = json.loads(encoded_request)
     schema = request.get("schema_version")
     if schema not in {"pdf-paragraph-request/1", "pdf-paragraph-request/2"}:
         raise ValueError("unsupported paragraph request")
@@ -52,11 +94,17 @@ def main():
         raise ValueError("unsupported paragraph environment algorithm")
     if schema.endswith("/1") and "environment_algorithm" in request:
         raise ValueError("legacy paragraph request cannot select a new algorithm")
+    _environment_module()  # Establish this existing source package path.
+    from company_wiki.source_catalog import narrative_pdf_page_checkpoints as checkpoint_wire
+    checkpoints: Any = None
+    if "checkpoint_protocol" in request:
+        checkpoints = checkpoint_wire
+        checkpoints.validate_request(request)
     pages = request["pages"]
-    if not isinstance(pages, list) or not 1 <= len(pages) <= 16 or any(type(p) is not int or p < 1 for p in pages):
+    if not isinstance(pages, list) or not 1 <= len(pages) <= checkpoint_wire.MAX_PAGES or any(type(p) is not int or p < 1 for p in pages):
         raise ValueError("invalid paragraph pages")
     data = base64.b64decode(request["pdf_base64"], validate=True)
-    if sha256(data).hexdigest() != request["source_sha256"]:
+    if len(data) > checkpoint_wire.MAX_INPUT_BYTES or sha256(data).hexdigest() != request["source_sha256"]:
         raise ValueError("source SHA mismatch")
     # Set an OS memory ceiling before any heavy imports. Parent already owns
     # this entire process tree, including descendants, via bounded_process.
@@ -110,31 +158,18 @@ def main():
     converter = DocumentConverter(allowed_formats=[InputFormat.PDF],
         format_options={InputFormat.PDF: PdfFormatOption(pipeline_options=options)})
     stage("CONVERTER_READY")
-    items = []
-    for page in pages:
-        stage("PAGE_" + str(page))
-        converted = converter.convert(DocumentStream(name="source.pdf", stream=BytesIO(data)),
-            page_range=(page, page), max_file_size=len(data), raises_on_error=False)
-        if str(converted.status) != "ConversionStatus.SUCCESS":
-            print("CWP_CONVERSION_STATUS=" + str(converted.status), file=sys.stderr, flush=True)
-            for error in converted.errors:
-                print(str(error), file=sys.stderr, flush=True)
-            raise ValueError("paragraph conversion incomplete")
-        for item, _ in converted.document.iterate_items():
-            if str(item.label) in {"text", "list_item"}:
-                items.append({"label": str(item.label), "text": getattr(item, "text", ""),
-                              "provenance": [p.model_dump(mode="json") for p in getattr(item, "prov", [])]})
-        if len(items) > 2048:
-            raise ValueError("paragraph item count exceeded")
+    items = _convert_pages(converter, DocumentStream, data, request, checkpoints=checkpoints,
+        peak_commit=lambda: memory_job.peak_commit_bytes() if memory_job is not None else None)
     algorithm_binding = ({"environment_algorithm": request["environment_algorithm"]} if roots is not None else {})
-    print(json.dumps({"schema_version": schema.replace("request", "response"), "source_sha256": request["source_sha256"],
-        "pages": pages, "docling_version": version("docling"), "model_sha256": request["model_sha256"],
-        "model_config_sha256": request["model_config_sha256"],
-        "runtime_versions": request["runtime_versions"],
-        "environment_sha256": request["environment_sha256"],
-        **algorithm_binding,
-        "peak_job_commit_bytes": memory_job.peak_commit_bytes() if memory_job is not None else None,
-        "converter_instances": 1, "items": items}, ensure_ascii=False), flush=True)
+    if checkpoints is None:
+        print(json.dumps({"schema_version": schema.replace("request", "response"), "source_sha256": request["source_sha256"],
+            "pages": pages, "docling_version": version("docling"), "model_sha256": request["model_sha256"],
+            "model_config_sha256": request["model_config_sha256"],
+            "runtime_versions": request["runtime_versions"],
+            "environment_sha256": request["environment_sha256"],
+            **algorithm_binding,
+            "peak_job_commit_bytes": memory_job.peak_commit_bytes() if memory_job is not None else None,
+            "converter_instances": 1, "items": items}, ensure_ascii=False), flush=True)
     # Do not close the nested kill-on-close job while this process is alive.
     # The OS closes its handle at exit; the parent always reaps the whole tree.
     _ = memory_job

@@ -1,6 +1,6 @@
 {
   "schema_version": "c3-core-ci-repair/1",
-  "status": "ACCEPTED_PENDING_NORMAL_PUBLICATION",
+  "status": "PUBLISHED_EXACT_CI_FAILED_2_NEW_QUALIFICATION_REGRESSIONS",
   "base_commit": "74d98a57391ae6fdcb54981999b4dc1bc021da11",
   "failed_ci": 40661418382,
   "accepted_files": 9,
@@ -16,5 +16,25 @@
   "new_paid_calls": 0,
   "PDF_status": "v4 CHANGES_REQUESTED3 pending author reactivation; no v5 run",
   "source_content_status": "Still0POST blocked, no new final",
-  "next": "Activate PDF author explicitly after publish; close resource/opaqueID/prefix3 issues, independent recheck, one changed-recipe real test"
+  "next": "Common event owner qualification-state preservation, full source-reading domain once at major node, independent recheck; PDFv5 stillactive",
+  "commit": "56ad2d313a32e5bcde9a3a8278128d8e5e49bd31",
+  "pushed": true,
+  "git_lf_sha_verified": 9,
+  "normal_precommit": "PASS",
+  "normal_prepush": {
+    "passed": 158,
+    "seconds": 45.69
+  },
+  "exact_ci": [
+    {
+      "id": 40670986975,
+      "head_sha": "56ad2d313a32e5bcde9a3a8278128d8e5e49bd31",
+      "status": "completed",
+      "conclusion": "failure",
+      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40670986975",
+      "updated_at": "2026-10-28T10:21:12Z"
+    }
+  ],
+  "type_repair": "evidence/core-ci-repair-20261028/core-type-repair.json",
+  "new_ci_failure_evidence": ".planning/c3-20261028/core-ci-annotations.json"
 }

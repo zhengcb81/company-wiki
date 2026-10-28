@@ -51,8 +51,8 @@ def test_product_subject_singular_and_plural_remain_objects_with_original_offset
 
 @pytest.mark.parametrize("text,objects", [
     ("II) These products have not obtained customer qualification.", ["These products"]),
-    ("该产品尚未完成客户认证。", ["产品", "客户"]),
-    ("該產品尚未完成客戶認證。", ["產品", "客戶"]),
+    ("该产品尚未完成客户认证。", ["产品"]),
+    ("該產品尚未完成客戶認證。", ["產品"]),
 ])
 def test_native_marker_and_script_preserve_exact_product_refs(text, objects):
     found = observe(text)
@@ -62,6 +62,13 @@ def test_native_marker_and_script_preserve_exact_product_refs(text, objects):
     assert found[0]["object_refs"] == [
         {"unit_id": "u", "char_start": text.index(subject),
          "char_end": text.index(subject) + len(subject)} for subject in objects]
+    # Customer qualification names its source/scope, not a second product.
+    # Preserve that exact text and offset rather than dropping the qualifier.
+    for scope in ("客户", "客戶"):
+        if scope in text:
+            assert scope in slices(text, found[0], "qualifier_refs")
+            assert {"unit_id": "u", "char_start": text.index(scope),
+                    "char_end": text.index(scope) + len(scope)} in found[0]["qualifier_refs"]
 
 
 @pytest.mark.parametrize("subject", [

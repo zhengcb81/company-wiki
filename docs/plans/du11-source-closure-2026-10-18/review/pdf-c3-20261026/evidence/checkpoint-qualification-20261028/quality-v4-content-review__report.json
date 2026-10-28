@@ -1,0 +1,1151 @@
+{
+  "schema_version": "independent-quality-v4-content-review/1",
+  "review_state": "FINAL",
+  "status": "PARTIAL",
+  "reviewer": "/root/c3_semantic_final_20261028",
+  "summary_author": false,
+  "run_id": "phaseC-090-9f3f43873512",
+  "producer_status": "PRE_RESERVATION_BLOCKED",
+  "source_admission": "FAIL",
+  "content_acceptance": "NOT_PASSED_NO_FINAL_AVAILABLE",
+  "identity": {
+    "source_sha256": "4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+    "captured_input_gzip_sha256": "7ea3074404423922851af68a6dd4aacb60c05c533032dc3098a7378a2f9a6649",
+    "captured_prepared_http_body_sha256": "8fa832d81525f7934e399a0ed5bf705c2989fedb5435d32966c0f84333ddaeba",
+    "captured_prepared_http_body_bytes": 67716,
+    "model_selected_input_sha256": "6c990285de78a1d5709f611af4a4c9655b3178e894c590064858fd513853770a",
+    "material_sha256": "147558c3c6d38298babf7a0b3c90b85f2057abd467c5aa1ca8de8101e16a8406",
+    "planned_final_generation_sha256": "a5629b4c995b49c3f63a0a9010425d170de8e58cf2955de32f233ebb666f13a3",
+    "selected_gzip_sha256": "d3a33b9cdd4a276ba08d71905badb4241a301c5c9ba402e1b6a391174b7d3176",
+    "selected_uncompressed_sha256": "f723e2761311d961f1849bd61cbbf29b2bf41a4895b1526e5aeaa1a52ebad0ff",
+    "selected_uncompressed_bytes": 428859,
+    "artifact_sha256": null,
+    "bundle_sha256": null,
+    "response_sha256": null,
+    "final_sha256": null
+  },
+  "scope": {
+    "prepared_tasks": 57,
+    "actual_http_tasks_sent": 0,
+    "selected_evidence_count": 112,
+    "selected_evidence_characters": 5675,
+    "task_support_to_selected_group_alignment": "All57 actual prepared tasks checked against selected citation support sets",
+    "output_plan": {
+      "configured_output_tokens": 8192,
+      "coverage": "selected_source_tasks_only",
+      "max_claims": 40,
+      "max_claims_per_task": 2,
+      "planning": "soft_target_within_existing_caps",
+      "target_claim_count": 24,
+      "target_text_chars": 240
+    },
+    "observer_sent_tasks_label": "Compiled request support scope, not evidence of actual HTTP transmission."
+  },
+  "gold_results": [
+    {
+      "id": "hk-industry-cloud-closure",
+      "prepared_support_status": "FAIL",
+      "summary_status": "NOT_EVALUATED_NO_FINAL",
+      "expected": "H1 RMB1340.4m versus prior RMB1245.4m,+7.6%, growing IT demand and replication of vertical industry solutions. 23.0% cannot replace 7.6%.",
+      "actual_source_scopes": [
+        {
+          "task": "t4",
+          "kind": "background",
+          "section_role": "management_discussion",
+          "topics": [
+            "business_revenue_measure"
+          ],
+          "reading": {
+            "priority": 1,
+            "purposes": [
+              "operating_metric"
+            ],
+            "score": 3,
+            "value_band": "meaningful_fact"
+          },
+          "support_parts": [
+            {
+              "part": "p2",
+              "source_key": "s33",
+              "text": "• \n來自行業雲服務的收入為人民幣1,340.4百萬元（187.1百萬美元），較二零二四年同期的人民幣1,245.4"
+            }
+          ],
+          "support_members": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:2e2b0672d2f2b1e6a292cb6daacc89a6e6dcaf8c94fa36070085d19f4b6a2da6",
+              "page": 13,
+              "locator": "loc:v1/page:13/paragraph:9",
+              "unit_kind": "pdf_text_block",
+              "table_id": null,
+              "selection_reasons": [
+                "reading_plan",
+                "business_revenue_measure"
+              ],
+              "value_band": "meaningful_fact",
+              "priority": 1
+            }
+          ],
+          "context": [
+            {
+              "text": "管理層討論與分析",
+              "span_id": "urn:company-wiki:evidence-span:sha256:4205dfeafe33386b0eb7fdae54f79a7495043804671710f601b081e6035dfc92",
+              "page": 13,
+              "locator": "loc:v1/page:13/paragraph:1",
+              "unit_kind": "pdf_text_block",
+              "table_id": null,
+              "selection_reasons": [
+                "reading_context"
+              ],
+              "value_band": "description",
+              "priority": 2
+            }
+          ],
+          "group_id": "urn:company-wiki:reading-group:sha256:366c34c39be4fa59bad76bf381d040cbcf7737887cce76ed9eaf30b583e855ac"
+        },
+        {
+          "task": "t35",
+          "kind": "native_continuity",
+          "section_role": "unknown",
+          "topics": [
+            "management_discussion"
+          ],
+          "reading": {
+            "priority": 1,
+            "purposes": [
+              "unknown"
+            ],
+            "score": 0,
+            "value_band": "description"
+          },
+          "support_parts": [
+            {
+              "part": "p2",
+              "source_key": "s34",
+              "text": "百萬元增加7.6%。該同比增加主要是由於不斷增長的IT需求及我們向垂直行業客戶複製行業解決方案\n的能力。"
+            }
+          ],
+          "support_members": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:30e9c240bf7c8d6ec8a44e716f4851d9a1f5e155586f21e3f1bdaef95d1b5959",
+              "page": 13,
+              "locator": "loc:v1/page:13/paragraph:10/chars:304-356",
+              "unit_kind": "pdf_native_range",
+              "table_id": null,
+              "selection_reasons": [
+                "reading_plan"
+              ],
+              "value_band": "description",
+              "priority": 1
+            }
+          ],
+          "context": [
+            {
+              "text": "管理層討論與分析",
+              "span_id": "urn:company-wiki:evidence-span:sha256:4205dfeafe33386b0eb7fdae54f79a7495043804671710f601b081e6035dfc92",
+              "page": 13,
+              "locator": "loc:v1/page:13/paragraph:1",
+              "unit_kind": "pdf_text_block",
+              "table_id": null,
+              "selection_reasons": [
+                "reading_context"
+              ],
+              "value_band": "description",
+              "priority": 2
+            }
+          ],
+          "group_id": "urn:company-wiki:reading-group:sha256:b259389f13a19b647aac055962ae867945d4b4ef47f4297993dc448e015bee2f"
+        }
+      ],
+      "additional_current_value_task": "t19 keeps RMB1340.4m but lacks this comparison and these two reasons; cannot complete another task."
+    },
+    {
+      "id": "hk-rd-period-scope",
+      "prepared_support_status": "PASS",
+      "summary_status": "NOT_EVALUATED_NO_FINAL",
+      "expected": "Reporting-period RMB420.5m / USD58.7m expense and R&D1094 people as of2025-06-30.",
+      "actual_source_scopes": [
+        {
+          "task": "t32",
+          "kind": "native_continuity",
+          "section_role": "unknown",
+          "topics": [
+            "operating_resources"
+          ],
+          "reading": {
+            "priority": 1,
+            "purposes": [
+              "operating"
+            ],
+            "score": 3,
+            "value_band": "meaningful_fact"
+          },
+          "support_parts": [
+            {
+              "part": "p3",
+              "source_key": "s27",
+              "text": "報告期內，我們的研發費用為人民幣420.5百萬元（58.7百萬美元），而截至二零二五年六月三十日，我們的\n研發人員達1,094人。"
+            }
+          ],
+          "support_members": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:ae5f4d14634776a788377b2a94cd69fc31a3cf0713f348ecfebfc2052412bf1f",
+              "page": 11,
+              "locator": "loc:v1/page:11/paragraph:21/chars:404-469",
+              "unit_kind": "pdf_native_range",
+              "table_id": null,
+              "selection_reasons": [
+                "reading_plan",
+                "operating_resource_stock"
+              ],
+              "value_band": "meaningful_fact",
+              "priority": 1
+            }
+          ],
+          "context": [
+            {
+              "text": "業務回顧及展望",
+              "span_id": "urn:company-wiki:evidence-span:sha256:748d79f02054c00c0de12c8de5ee706277f778d357af10587b23653c509d3cb7",
+              "page": 11,
+              "locator": "loc:v1/page:11/paragraph:1",
+              "unit_kind": "pdf_text_block",
+              "table_id": null,
+              "selection_reasons": [
+                "reading_context"
+              ],
+              "value_band": "description",
+              "priority": 2
+            },
+            {
+              "text": "研究與開發",
+              "span_id": "urn:company-wiki:evidence-span:sha256:105f5129e7dd5e77f8bc1e12d29b1774ad209abfc800f40eb5ae9ba114317d75",
+              "page": 11,
+              "locator": "loc:v1/page:11/paragraph:2",
+              "unit_kind": "pdf_text_block",
+              "table_id": null,
+              "selection_reasons": [
+                "reading_context"
+              ],
+              "value_band": "description",
+              "priority": 2
+            }
+          ],
+          "group_id": "urn:company-wiki:reading-group:sha256:0dfad0f8c1d8554cd3f2af22c4b54c29559488558651834128dc76fcba8a4932"
+        }
+      ],
+      "scope_control": {
+        "task": "t31",
+        "note": "Wuhan centre >620 including interns/outsourcing as of end2024 is separately supported; it cannot replace group R&D1094 as of2025-06-30."
+      }
+    },
+    {
+      "id": "hk-outlook-not-actual",
+      "prepared_support_status": "PASS",
+      "summary_status": "NOT_EVALUATED_NO_FINAL",
+      "expected": "H2 strategy, continued R&D and enhanced AI capabilities remain future/aimed actions.",
+      "actual_source_scopes": [
+        {
+          "task": "t33",
+          "kind": "native_continuity",
+          "section_role": "unknown",
+          "topics": [
+            "operating_plan"
+          ],
+          "reading": {
+            "priority": 1,
+            "purposes": [
+              "operating"
+            ],
+            "score": 3,
+            "value_band": "meaningful_fact"
+          },
+          "support_parts": [
+            {
+              "part": "p3",
+              "source_key": "s29",
+              "text": "展望下半年，我們將維持高質量發展和可持續發展戰略，不斷投資技術研發，並全面提升AI能力。同時，我\n們將積極擁抱AI時代小米和金山生態系統的雲需求。我們旨在持續為客戶、股東、員工和社會創造價值。"
+            }
+          ],
+          "support_members": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:e395049c60cd340ca2d8e90ef42468163895fbd38a73219c4a529f0ffbdd993d",
+              "page": 11,
+              "locator": "loc:v1/page:11/paragraph:24/chars:475-571",
+              "unit_kind": "pdf_native_range",
+              "table_id": null,
+              "selection_reasons": [
+                "reading_plan",
+                "operating_plan"
+              ],
+              "value_band": "meaningful_fact",
+              "priority": 1
+            }
+          ],
+          "context": [
+            {
+              "text": "業務回顧及展望",
+              "span_id": "urn:company-wiki:evidence-span:sha256:748d79f02054c00c0de12c8de5ee706277f778d357af10587b23653c509d3cb7",
+              "page": 11,
+              "locator": "loc:v1/page:11/paragraph:1",
+              "unit_kind": "pdf_text_block",
+              "table_id": null,
+              "selection_reasons": [
+                "reading_context"
+              ],
+              "value_band": "description",
+              "priority": 2
+            },
+            {
+              "text": "業務展望",
+              "span_id": "urn:company-wiki:evidence-span:sha256:873604e40dc40725270492807818ba2b00a3c7df44d8f16367776bfcc896c601",
+              "page": 11,
+              "locator": "loc:v1/page:11/paragraph:23",
+              "unit_kind": "pdf_text_block",
+              "table_id": null,
+              "selection_reasons": [
+                "reading_context"
+              ],
+              "value_band": "description",
+              "priority": 2
+            }
+          ],
+          "group_id": "urn:company-wiki:reading-group:sha256:543ff2daf35f3238302be8d60627dca82b9822f1421f819ab858868110d47b4d"
+        }
+      ],
+      "note": "展望下半年/將/旨在 are present in the actual prepared support; no output exists to assess rewritten modality."
+    }
+  ],
+  "findings": [
+    {
+      "id": "QCV4-IR-01",
+      "priority": "P2",
+      "status": "OPEN",
+      "title": "Industry-cloud revenue head and comparison/cause tail remain separate factual scopes",
+      "root_owner": "Native fallback statement grouping / source continuity / citation-support closure before model compilation",
+      "actual_tasks": [
+        "t4/p2=s33",
+        "t35/p2=s34"
+      ],
+      "cause": "The current amount and prior amount end inside a pdf_text_block; the unit, 7.6% and two causes begin in a separate pdf_native_range. Each group supports only its own span with a section heading as context. No task-local factual support contains the complete comparison and cause.",
+      "model_fault": false,
+      "guard_outcome": "Correctly refused before reservation/POST"
+    }
+  ],
+  "reading_execution": {
+    "observed": {
+      "accepted_groups": 0,
+      "checkpoint_protocol": "pdf-paragraph-page-checkpoints/1",
+      "completed_pages": [],
+      "last_stage": "IMPORT",
+      "pages": [
+        12,
+        13,
+        17
+      ],
+      "pending_pages": [
+        12,
+        13,
+        17
+      ],
+      "reason": "ChildTimeout",
+      "schema_version": "pdf-reading-execution/1",
+      "scope": "paragraph_boundary_proposals",
+      "seconds": 120.0252,
+      "status": "native_fallback",
+      "stream_complete": false,
+      "temporary_root_restored_absent": true,
+      "truncated_final_record": false
+    },
+    "interpretation": "No completed page existed to recover. This is native_fallback, not partial_enhanced or full enhanced. Last observed stage IMPORT spans subsequent imports/options/converter construction until the next marker; the checkpoint does not identify which internal operation consumed time. No inference about model file reads, downloads, or SDK internals."
+  },
+  "selection_coverage": {
+    "selected": {
+      "candidate_count": 1044,
+      "coverage_complete": false,
+      "dropped_financial_count": 615,
+      "lines_total": 0,
+      "omitted_candidate_count": 932,
+      "pages_read": 75,
+      "pages_total": 75,
+      "selected_count": 112,
+      "source_units": 1796,
+      "status": "partial",
+      "tables_scanned": 1,
+      "tables_total": 2
+    },
+    "layout_complete": false,
+    "native_planning": {
+      "complete": false,
+      "deferred_page_count": 1,
+      "deferred_pages": [
+        75
+      ],
+      "exploration_pages": [
+        58
+      ],
+      "feature_version": "pdf-reading-execution/1",
+      "navigation_missing": false,
+      "plan_digest": "09606872375c3c29b78385a25efad3f08808036b47e9c2b5f11690e764065ba3",
+      "policy_digest": "b4ed41b623ced12a85c78fcfb7bb45bce4d190a5e0f82dd892372dd2da90a56b",
+      "profile_id": "hk_periodic",
+      "profile_scope": {
+        "family": "interim",
+        "form_type": "unknown",
+        "profile_id": "hk_periodic",
+        "regime": "hkex"
+      },
+      "reason_counts": {
+        "candidate_observation_partial": 1,
+        "not_found": 8,
+        "not_requested_by_intent": 66,
+        "unknown_navigation_exploration": 1
+      },
+      "request_digest": "0386e743ac91b3c70318277b4074d30f650bfbf3c0fd52cc04ac4edf94f065ad",
+      "spent": {
+        "pages": 0,
+        "requests": 0
+      },
+      "unresolved_navigation_count": 7,
+      "window_count": 2
+    },
+    "native_fine_capture": {
+      "captured_page_count": 1,
+      "captured_pages": [
+        58
+      ],
+      "captured_pages_limited": false,
+      "complete": true,
+      "deferred_page_count": 0,
+      "deferred_pages": [],
+      "deferred_pages_limited": false,
+      "mode": "reading-policy",
+      "not_requested_page_count": 74,
+      "projected_page_count": 1,
+      "projected_pages": [
+        58
+      ],
+      "projected_pages_limited": false,
+      "request_sha256": "20aa65e49afd92d205787f54b16799a9ae480ca191b5df590e48d84869123bb4",
+      "requested_page_count": 1,
+      "requested_pages": [
+        58
+      ],
+      "requested_pages_limited": false,
+      "schema_version": "pdf-layout-capture/1",
+      "strategy": "requested-pages/1"
+    },
+    "note": "75 pages_read is native page scan scope, not complete fine geometry, paragraph enhancement, source support closure or summary coverage."
+  },
+  "whole_final_review": {
+    "status": "NOT_EVALUATED_NO_RESPONSE_OR_ARTIFACT",
+    "claim_citation_modality_currency_units": "No generated claims exist to validate. No hallucination, 23.0% substitution, 620 substitution, or plan-as-actual output can be alleged from this run.",
+    "major_omissions": "Industry-cloud full support is demonstrably unavailable before generation. Further final-output omission claims cannot be assessed."
+  },
+  "prepared_input_observations_not_final_findings": [
+    {
+      "tasks": [
+        "t2",
+        "t3",
+        "t9",
+        "t11",
+        "t12"
+      ],
+      "category": "footer_as_factual_support",
+      "observation": "Page/footer strings are independent support tasks; these are prepared-input observations, not generated-summary findings."
+    },
+    {
+      "tasks": [
+        "t5",
+        "t6",
+        "t7",
+        "t8"
+      ],
+      "category": "split_non_gaap_basis",
+      "observation": "Non-GAAP label split into 非公 / 認會計準則毛利 and 非公認 / 會計準則毛利率. Task-local support cannot reconstruct the basis from a different task."
+    },
+    {
+      "tasks": [
+        "t10"
+      ],
+      "category": "unbound_causal_tail",
+      "observation": "Standalone reason about fewer R&D staff and relocation has no supported result/metric antecedent in its task."
+    },
+    {
+      "tasks": [
+        "t15",
+        "t16",
+        "t17",
+        "t18",
+        "t21",
+        "t26",
+        "t29",
+        "t41",
+        "t42",
+        "t43",
+        "t53",
+        "t54"
+      ],
+      "category": "definition_policy_generic_content",
+      "observation": "Prepared scope includes non-GAAP definitions/reconciliation instructions, generic principles, incentive-plan rules and accounting policies; some are meaningful_fact. No final exists to verify whether soft-target generation would omit these."
+    }
+  ],
+  "compact_prepared_task_metadata": [
+    {
+      "task": "t2",
+      "kind": "background",
+      "section_role": "business",
+      "topics": [
+        "business"
+      ],
+      "reading": {
+        "priority": 1,
+        "purposes": [
+          "unknown"
+        ],
+        "score": 0,
+        "value_band": "description"
+      },
+      "support_parts": [
+        {
+          "part": "p3",
+          "source_key": "s16",
+          "text": "9  金山云控股有限公司"
+        }
+      ],
+      "support_members": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:cecd486774dd066455c0be36be9882cd70dfcefba010eed0aad16988f9088441",
+          "page": 10,
+          "locator": "loc:v1/page:10/paragraph:0",
+          "unit_kind": "pdf_text_block",
+          "table_id": null,
+          "selection_reasons": [
+            "reading_plan"
+          ],
+          "value_band": "description",
+          "priority": 1
+        }
+      ],
+      "context": [
+        {
+          "text": "業務回顧及展望",
+          "span_id": "urn:company-wiki:evidence-span:sha256:d2ab930f905ac83e8715f82885d7a804b966159f465a9ad622a0af7a1494994e",
+          "page": 9,
+          "locator": "loc:v1/page:9/paragraph:1",
+          "unit_kind": "pdf_text_block",
+          "table_id": null,
+          "selection_reasons": [
+            "reading_context"
+          ],
+          "value_band": "description",
+          "priority": 2
+        },
+        {
+          "text": "產品及行業特定解決方案",
+          "span_id": "urn:company-wiki:evidence-span:sha256:c18ea7efe772c8f3311dcfb92dafda2cd9652904f9bdf69301c4e570c9a5932e",
+          "page": 9,
+          "locator": "loc:v1/page:9/paragraph:22",
+          "unit_kind": "pdf_text_block",
+          "table_id": null,
+          "selection_reasons": [
+            "reading_context"
+          ],
+          "value_band": "description",
+          "priority": 2
+        }
+      ],
+      "group_id": "urn:company-wiki:reading-group:sha256:dd2a4a5ba813e564fd3d94305b885de5f6b984f156283d7389c3da1be6b24806"
+    },
+    {
+      "task": "t3",
+      "kind": "background",
+      "section_role": "outlook",
+      "topics": [
+        "outlook"
+      ],
+      "reading": {
+        "priority": 1,
+        "purposes": [
+          "unknown"
+        ],
+        "score": 0,
+        "value_band": "description"
+      },
+      "support_parts": [
+        {
+          "part": "p3",
+          "source_key": "s30",
+          "text": "11  金山云控股有限公司"
+        }
+      ],
+      "support_members": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:fbac5e444136c58303589c26329a4784ca5e387b8df1d7f287813a65c9c29b89",
+          "page": 12,
+          "locator": "loc:v1/page:12/paragraph:0",
+          "unit_kind": "pdf_text_block",
+          "table_id": null,
+          "selection_reasons": [
+            "reading_plan"
+          ],
+          "value_band": "description",
+          "priority": 1
+        }
+      ],
+      "context": [
+        {
+          "text": "業務回顧及展望",
+          "span_id": "urn:company-wiki:evidence-span:sha256:748d79f02054c00c0de12c8de5ee706277f778d357af10587b23653c509d3cb7",
+          "page": 11,
+          "locator": "loc:v1/page:11/paragraph:1",
+          "unit_kind": "pdf_text_block",
+          "table_id": null,
+          "selection_reasons": [
+            "reading_context"
+          ],
+          "value_band": "description",
+          "priority": 2
+        },
+        {
+          "text": "業務展望",
+          "span_id": "urn:company-wiki:evidence-span:sha256:873604e40dc40725270492807818ba2b00a3c7df44d8f16367776bfcc896c601",
+          "page": 11,
+          "locator": "loc:v1/page:11/paragraph:23",
+          "unit_kind": "pdf_text_block",
+          "table_id": null,
+          "selection_reasons": [
+            "reading_context"
+          ],
+          "value_band": "description",
+          "priority": 2
+        }
+      ],
+      "group_id": "urn:company-wiki:reading-group:sha256:89540f8f464c4376dedc3971be5ed73a68684687bbddaa8d1df00f1fbc56978d"
+    },
+    {
+      "task": "t5",
+      "kind": "background",
+      "section_role": "management_discussion",
+      "topics": [
+        "management_discussion"
+      ],
+      "reading": {
+        "priority": 1,
+        "purposes": [
+          "unknown"
+        ],
+        "score": 0,
+        "value_band": "description"
+      },
+      "support_parts": [
+        {
+          "part": "p2",
+          "source_key": "s37",
+          "text": "非公"
+        }
+      ],
+      "support_members": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:1f8afab671883b8b33c8af4d8cceb3ee1fa87cec192c204b10489c2d07b0d2ad",
+          "page": 13,
+          "locator": "loc:v1/page:13/paragraph:35",
+          "unit_kind": "pdf_text_block",
+          "table_id": null,
+          "selection_reasons": [
+            "reading_plan"
+          ],
+          "value_band": "description",
+          "priority": 1
+        }
+      ],
+      "context": [
+        {
+          "text": "管理層討論與分析",
+          "span_id": "urn:company-wiki:evidence-span:sha256:4205dfeafe33386b0eb7fdae54f79a7495043804671710f601b081e6035dfc92",
+          "page": 13,
+          "locator": "loc:v1/page:13/paragraph:1",
+          "unit_kind": "pdf_text_block",
+          "table_id": null,
+          "selection_reasons": [
+            "reading_context"
+          ],
+          "value_band": "description",
+          "priority": 2
+        }
+      ],
+      "group_id": "urn:company-wiki:reading-group:sha256:7f3623e2b5c164efb671c3806471e4ae7ae17acd153c63b56eacb2ff75e971c4"
+    },
+    {
+      "task": "t6",
+      "kind": "background",
+      "section_role": "management_discussion",
+      "topics": [
+        "management_discussion"
+      ],
+      "reading": {
+        "priority": 1,
+        "purposes": [
+          "unknown"
+        ],
+        "score": 0,
+        "value_band": "description"
+      },
+      "support_parts": [
+        {
+          "part": "p2",
+          "source_key": "s38",
+          "text": "認會計準則毛利為人民幣678.2百萬元（94.7百萬美元），而二零二四年同期則為人民幣622.5百萬元。"
+        }
+      ],
+      "support_members": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:47941377274a5356d4f342724471d4204c8d12c5bf4ef3583a1450be5853e41f",
+          "page": 13,
+          "locator": "loc:v1/page:13/paragraph:36",
+          "unit_kind": "pdf_text_block",
+          "table_id": null,
+          "selection_reasons": [
+            "reading_plan"
+          ],
+          "value_band": "description",
+          "priority": 1
+        }
+      ],
+      "context": [
+        {
+          "text": "管理層討論與分析",
+          "span_id": "urn:company-wiki:evidence-span:sha256:4205dfeafe33386b0eb7fdae54f79a7495043804671710f601b081e6035dfc92",
+          "page": 13,
+          "locator": "loc:v1/page:13/paragraph:1",
+          "unit_kind": "pdf_text_block",
+          "table_id": null,
+          "selection_reasons": [
+            "reading_context"
+          ],
+          "value_band": "description",
+          "priority": 2
+        }
+      ],
+      "group_id": "urn:company-wiki:reading-group:sha256:6112472bec83550a863e8ea6cae2f5bfb7fac5cfc26370ec3d5eab905acbb7eb"
+    },
+    {
+      "task": "t7",
+      "kind": "background",
+      "section_role": "management_discussion",
+      "topics": [
+        "management_discussion"
+      ],
+      "reading": {
+        "priority": 1,
+        "purposes": [
+          "unknown"
+        ],
+        "score": 0,
+        "value_band": "description"
+      },
+      "support_parts": [
+        {
+          "part": "p2",
+          "source_key": "s39",
+          "text": "非公認"
+        }
+      ],
+      "support_members": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:5166814da81fd9ff1f8869a69e151a27c23a9135df748f6c9c995ba6c06ef5f9",
+          "page": 13,
+          "locator": "loc:v1/page:13/paragraph:37",
+          "unit_kind": "pdf_text_block",
+          "table_id": null,
+          "selection_reasons": [
+            "reading_plan"
+          ],
+          "value_band": "description",
+          "priority": 1
+        }
+      ],
+      "context": [
+        {
+          "text": "管理層討論與分析",
+          "span_id": "urn:company-wiki:evidence-span:sha256:4205dfeafe33386b0eb7fdae54f79a7495043804671710f601b081e6035dfc92",
+          "page": 13,
+          "locator": "loc:v1/page:13/paragraph:1",
+          "unit_kind": "pdf_text_block",
+          "table_id": null,
+          "selection_reasons": [
+            "reading_context"
+          ],
+          "value_band": "description",
+          "priority": 2
+        }
+      ],
+      "group_id": "urn:company-wiki:reading-group:sha256:4fc1f62e742afbe34929ffd5f571d22eb85647f07023d3b7801df15d5f5181bc"
+    },
+    {
+      "task": "t8",
+      "kind": "background",
+      "section_role": "management_discussion",
+      "topics": [
+        "management_discussion"
+      ],
+      "reading": {
+        "priority": 1,
+        "purposes": [
+          "unknown"
+        ],
+        "score": 0,
+        "value_band": "description"
+      },
+      "support_parts": [
+        {
+          "part": "p2",
+          "source_key": "s40",
+          "text": "會計準則毛利率為15.7%，而二零二四年同期則為17.0%。"
+        }
+      ],
+      "support_members": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:512a9c40a0ae0dec1e948567dd96fe74cb9f017459303d64db2dfbe8ecfeff9c",
+          "page": 13,
+          "locator": "loc:v1/page:13/paragraph:38",
+          "unit_kind": "pdf_text_block",
+          "table_id": null,
+          "selection_reasons": [
+            "reading_plan"
+          ],
+          "value_band": "description",
+          "priority": 1
+        }
+      ],
+      "context": [
+        {
+          "text": "管理層討論與分析",
+          "span_id": "urn:company-wiki:evidence-span:sha256:4205dfeafe33386b0eb7fdae54f79a7495043804671710f601b081e6035dfc92",
+          "page": 13,
+          "locator": "loc:v1/page:13/paragraph:1",
+          "unit_kind": "pdf_text_block",
+          "table_id": null,
+          "selection_reasons": [
+            "reading_context"
+          ],
+          "value_band": "description",
+          "priority": 2
+        }
+      ],
+      "group_id": "urn:company-wiki:reading-group:sha256:e155afa31f2e18ba70a4cbe6409b57a6383f98ce1f5ae32902ecc08c8ea110e2"
+    },
+    {
+      "task": "t9",
+      "kind": "background",
+      "section_role": "management_discussion",
+      "topics": [
+        "management_discussion"
+      ],
+      "reading": {
+        "priority": 1,
+        "purposes": [
+          "unknown"
+        ],
+        "score": 0,
+        "value_band": "description"
+      },
+      "support_parts": [
+        {
+          "part": "p2",
+          "source_key": "s41",
+          "text": "13  金山云控股有限公司"
+        }
+      ],
+      "support_members": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:8aee134e1e60f0456500038139e4e3df663dbb145be4e722fcaa7d80f1a8525a",
+          "page": 14,
+          "locator": "loc:v1/page:14/paragraph:0",
+          "unit_kind": "pdf_text_block",
+          "table_id": null,
+          "selection_reasons": [
+            "reading_plan"
+          ],
+          "value_band": "description",
+          "priority": 1
+        }
+      ],
+      "context": [
+        {
+          "text": "管理層討論與分析",
+          "span_id": "urn:company-wiki:evidence-span:sha256:4205dfeafe33386b0eb7fdae54f79a7495043804671710f601b081e6035dfc92",
+          "page": 13,
+          "locator": "loc:v1/page:13/paragraph:1",
+          "unit_kind": "pdf_text_block",
+          "table_id": null,
+          "selection_reasons": [
+            "reading_context"
+          ],
+          "value_band": "description",
+          "priority": 2
+        }
+      ],
+      "group_id": "urn:company-wiki:reading-group:sha256:47786e301671e72daf9d7d2f76447bac223d8e4d94ab228db14fc6adc1ce13eb"
+    },
+    {
+      "task": "t10",
+      "kind": "background",
+      "section_role": "management_discussion",
+      "topics": [
+        "management_discussion"
+      ],
+      "reading": {
+        "priority": 1,
+        "purposes": [
+          "unknown"
+        ],
+        "score": 0,
+        "value_band": "description"
+      },
+      "support_parts": [
+        {
+          "part": "p2",
+          "source_key": "s43",
+          "text": "主要由於戰略結構調整導致研發人員減少以及研發團隊從北京戰略搬遷到武漢。"
+        }
+      ],
+      "support_members": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:54c282fc63428f8d4b59af5fc72e16771649629cd616252edb64466f0633cb7c",
+          "page": 14,
+          "locator": "loc:v1/page:14/paragraph:10",
+          "unit_kind": "pdf_text_block",
+          "table_id": null,
+          "selection_reasons": [
+            "reading_plan"
+          ],
+          "value_band": "description",
+          "priority": 1
+        }
+      ],
+      "context": [
+        {
+          "text": "管理層討論與分析",
+          "span_id": "urn:company-wiki:evidence-span:sha256:fdce5d584a579ce5b2532af91f0a69ef8107c6acf4667ea4bc38e8556bdbe6ab",
+          "page": 14,
+          "locator": "loc:v1/page:14/paragraph:1",
+          "unit_kind": "pdf_text_block",
+          "table_id": null,
+          "selection_reasons": [
+            "reading_context"
+          ],
+          "value_band": "description",
+          "priority": 2
+        }
+      ],
+      "group_id": "urn:company-wiki:reading-group:sha256:cbc425c9a081463ea054a70ab810b8a0065159716c4bc020c909b6cf3ee73e5e"
+    },
+    {
+      "task": "t11",
+      "kind": "background",
+      "section_role": "management_discussion",
+      "topics": [
+        "management_discussion"
+      ],
+      "reading": {
+        "priority": 1,
+        "purposes": [
+          "unknown"
+        ],
+        "score": 0,
+        "value_band": "description"
+      },
+      "support_parts": [
+        {
+          "part": "p2",
+          "source_key": "s44",
+          "text": "二零二五 中期報告  14"
+        }
+      ],
+      "support_members": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:1a90d1dfbf14b33d33eba140468c799b22bcc7cae747aef88e6e29fc30a2fd16",
+          "page": 15,
+          "locator": "loc:v1/page:15/paragraph:0",
+          "unit_kind": "pdf_text_block",
+          "table_id": null,
+          "selection_reasons": [
+            "reading_plan"
+          ],
+          "value_band": "description",
+          "priority": 1
+        }
+      ],
+      "context": [
+        {
+          "text": "管理層討論與分析",
+          "span_id": "urn:company-wiki:evidence-span:sha256:fdce5d584a579ce5b2532af91f0a69ef8107c6acf4667ea4bc38e8556bdbe6ab",
+          "page": 14,
+          "locator": "loc:v1/page:14/paragraph:1",
+          "unit_kind": "pdf_text_block",
+          "table_id": null,
+          "selection_reasons": [
+            "reading_context"
+          ],
+          "value_band": "description",
+          "priority": 2
+        }
+      ],
+      "group_id": "urn:company-wiki:reading-group:sha256:b39c679d90a10cfe820fb4f9c32868328602926899f58f0925e076a349b5e74c"
+    },
+    {
+      "task": "t12",
+      "kind": "background",
+      "section_role": "management_discussion",
+      "topics": [
+        "management_discussion"
+      ],
+      "reading": {
+        "priority": 1,
+        "purposes": [
+          "unknown"
+        ],
+        "score": 0,
+        "value_band": "description"
+      },
+      "support_parts": [
+        {
+          "part": "p3",
+          "source_key": "s53",
+          "text": "15  金山云控股有限公司"
+        }
+      ],
+      "support_members": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:c4f1fab25426fc772274b1869dfcef7753c93f1bb873410b26f2e502bce38e6f",
+          "page": 16,
+          "locator": "loc:v1/page:16/paragraph:0",
+          "unit_kind": "pdf_text_block",
+          "table_id": null,
+          "selection_reasons": [
+            "reading_plan"
+          ],
+          "value_band": "description",
+          "priority": 1
+        }
+      ],
+      "context": [
+        {
+          "text": "管理層討論與分析",
+          "span_id": "urn:company-wiki:evidence-span:sha256:b00b116fb37ff949fb5da26045aa67670ccb64d9fba503c51502a9ab4c053cfc",
+          "page": 15,
+          "locator": "loc:v1/page:15/paragraph:1",
+          "unit_kind": "pdf_text_block",
+          "table_id": null,
+          "selection_reasons": [
+            "reading_context"
+          ],
+          "value_band": "description",
+          "priority": 2
+        },
+        {
+          "text": "重大投資",
+          "span_id": "urn:company-wiki:evidence-span:sha256:0898473b0a9e2f44fada2bd3378efd1ae65da665bf4c990af86f97d7252862b2",
+          "page": 15,
+          "locator": "loc:v1/page:15/paragraph:20",
+          "unit_kind": "pdf_text_block",
+          "table_id": null,
+          "selection_reasons": [
+            "reading_context"
+          ],
+          "value_band": "description",
+          "priority": 2
+        }
+      ],
+      "group_id": "urn:company-wiki:reading-group:sha256:beb5f605287ea2b82759efe9ffddfb0c2269cd20b7ac38435573bc08ab315cdb"
+    }
+  ],
+  "lifecycle_this_run_only": {
+    "producer_batch_status": "failed",
+    "document_status": "dead_letter",
+    "error": "PHASE_C_GOLD_SUPPORT_MISSING",
+    "reserved": false,
+    "post_attempts": 0,
+    "native_usage_rows": 0,
+    "tokens": 0,
+    "micro_usd": 0,
+    "mother_before_equals_after": true,
+    "mother_tokens": 1800368,
+    "mother_micro_usd": 727945,
+    "activation_recovery": "REQUESTED_BUT_NOT_RUN_PRE_RESERVATION_BLOCKED",
+    "same_run_restart": "NOT_RUN",
+    "cross_run_cache": "NOT_RUN",
+    "public_FF_RF_consumers": "NOT_RUN_NO_NEW_ARTIFACT",
+    "forecast_adoption": "NOT_EVALUATED_CONSUMERS_NOT_RUN",
+    "duplicate_paid_usage": "No paid invocation in this run; restart/cross-run dedup not exercised and not claimed PASS",
+    "producer_cleanup": {
+      "protected_unchanged": true,
+      "sentinel_unchanged": true,
+      "temporary_lake_removed": true,
+      "all_prepared_protected_unchanged": true
+    }
+  },
+  "evidence": [
+    {
+      "path": ".planning/c3-20261028/hk-quality-v4/overall.json",
+      "sha256": "56a1e9ab600e26fc4469476bf4dd2565d1bd1b4677a6ee30fd24f5b6eaee46ed"
+    },
+    {
+      "path": ".planning/c3-20261028/hk-quality-v4/receipt.json",
+      "sha256": "4a9c6b5e4922f91049424a9ad7e8791fad99e7cb7c41b8343728d126d9561322"
+    },
+    {
+      "path": ".planning/c3-20261028/hk-quality-v4/events.jsonl",
+      "sha256": "baed5be3a2cdb985be5bf74edafb92c999d0cd0b20ffe6b77090bd639e1d6168"
+    },
+    {
+      "path": ".planning/c3-20261028/hk-quality-v4/materials/phaseC-090-9f3f43873512.input.json.gz",
+      "sha256": "7ea3074404423922851af68a6dd4aacb60c05c533032dc3098a7378a2f9a6649"
+    },
+    {
+      "path": ".planning/c3-20261028/hk-quality-v4/materials/phaseC-090-9f3f43873512.selection.json.gz",
+      "sha256": "d3a33b9cdd4a276ba08d71905badb4241a301c5c9ba402e1b6a391174b7d3176"
+    },
+    {
+      "path": ".planning/c3-20261028/hk-quality-v4/mother-after.json",
+      "sha256": "9372878767680e7876cc29de34b31d0510f8fdbe618a1d3c553edf1735f1526d"
+    },
+    {
+      "path": ".planning/c3-20261028/hk-quality-v4/phaseC-090-9f3f43873512.native-usage.json",
+      "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f"
+    },
+    {
+      "path": ".planning/c3-20261028/hk-quality-v4/phaseC-090-9f3f43873512.native-failures.json",
+      "sha256": "47bbd117cc74459ef5b3da3dc29428e308023a8ec1f3d09f0f517dc7e31bd501"
+    },
+    {
+      "path": ".planning/c3-20261028/quality-v4-launch.json",
+      "sha256": "9ee1394911a7079317caa3cd76b07c8cb6d5c2319b51753f8061748fdcaee3d0"
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/hk-development-gold.json",
+      "sha256": "2d6391a1f3f6d0c6e9bc7629e327f54c5bb4d2c651b202d38dd4f4364dbba568"
+    },
+    {
+      "path": ".planning/c3-20261028/pdf-checkpoints/independent.json",
+      "sha256": "96a93fad280f03223b10e125786318ef9d74ddb17109b29a5f661172a8ad3329"
+    },
+    {
+      "path": ".planning/c3-20261028/ci-source-review/source-actions-review.json",
+      "sha256": "45809805d623eb0c9092a2d1427373a472b4f2e6855db351abdcf22afc03ab3d"
+    }
+  ],
+  "review_cleanup": {
+    "only_new_files": [
+      ".planning/c3-20261028/quality-v4-content-review/report.md",
+      ".planning/c3-20261028/quality-v4-content-review/report.json"
+    ],
+    "new_temp": false,
+    "additional_worker_or_sdk_runs": 0,
+    "original_pdf_reads": 0,
+    "http_or_model_calls": 0,
+    "product_test_pwf_production_original_writes": 0,
+    "older_v3_report_modified": false,
+    "engineering_reports_modified": false,
+    "background_review_processes": 0
+  }
+}

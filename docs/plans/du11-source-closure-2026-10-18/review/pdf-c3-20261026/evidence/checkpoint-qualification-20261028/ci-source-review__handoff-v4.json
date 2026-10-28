@@ -1,0 +1,107 @@
+{
+  "schema_version": "ci-source-operating-actions-handoff/4",
+  "status": "FROZEN_READY_FOR_INDEPENDENT_RECHECK",
+  "author": "/root/ci_source_controls_review",
+  "files": [
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/patterns.py",
+      "lf_sha256": "7fd42e9b1a73e606cf6c55b4229f816b54b1cb2d51c372e98e37f9d43ff973a2"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/relations.py",
+      "lf_sha256": "a38092a0ae7832bfda51d80db608884501d00ef48e389b8c2f9127bed6524b66"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_source_operating_actions.py",
+      "lf_sha256": "011babf0655e6aef367ed727ff500a4aa161302d7ffe93a17c7b7e2e7a5d031f"
+    }
+  ],
+  "root_causes": [
+    "Explicit active product launch was absent from source relation grammar; text-only progress was correctly demoted but meaningful business recall was lost.",
+    "Destination shipment predicate plus qualification purpose was absent; an observed planned action was interpreted only as distant unknown qualification."
+  ],
+  "architecture": "Existing operating relation owner only: direct actor/product/action binding, same polarity/stage/modality/attribution and exact refs. Unknown remains description, no source_catalog permission or finance exemption changes.",
+  "minimal_fact_correction": "ROOT review caught initial commercialization activity overclaim. New activity product_launch is an open relation string; generic source state consumes it without commercial/revenue inference.",
+  "red": {
+    "initial": "10 failed/5 passed",
+    "pre_object_modifier": "2 failed/19 passed",
+    "launch_not_commercialization": "2 failed"
+  },
+  "final": {
+    "total": 276,
+    "failed": 0,
+    "permanent_new_cases_total": 45,
+    "independent_cases": 6,
+    "pytest_seconds": 7.91,
+    "receipt": {
+      "targets": [
+        "tests/unit/document_understanding_selection/test_source_operating_actions.py",
+        ".planning/c3-20261028/ci-source-review/test_independent_qualification_roles.py",
+        "tests/unit/document_understanding_selection/test_reading_local_qualification.py",
+        "tests/unit/document_understanding_selection/test_reading_qualification_scope_controls.py",
+        "tests/unit/document_understanding_selection/test_reading_product_plural_classification.py",
+        "tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py",
+        "tests/unit/document_understanding_selection/test_reading_guidance_source_controls.py",
+        "tests/unit/document_understanding_root/test_operating_relation_production.py",
+        "tests/unit/document_understanding_selection/test_reading_predicate_grammar_controls.py"
+      ],
+      "exit_code": 0,
+      "seconds": 8.759
+    },
+    "counts_overlap": true
+  },
+  "original_ci_tests_unchanged": [
+    "tests/unit/document_understanding_selection/test_reading_local_qualification.py",
+    "tests/unit/document_understanding_selection/test_reading_qualification_scope_controls.py",
+    "tests/unit/du11_source_quality/test_material_readiness.py",
+    "tests/unit/document_understanding_selection/test_reading_native_continuity.py"
+  ],
+  "original_ci_nodes_pass": true,
+  "static": {
+    "ruff": "PASS",
+    "mypy": "2 source files PASS"
+  },
+  "identity": "decision_inventory already includes operating_states.patterns and relations module hashes; no parallel cache owner/schema needed",
+  "limits_unchanged": true,
+  "originals_and_production_config_untouched": true,
+  "new_model_calls": 0,
+  "downloads": 0,
+  "true_docling_runs": 0,
+  "synthetic_pdf": "one-page in-memory fixture only",
+  "cleanup": {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c3cir",
+    "restored_absent": true,
+    "model_calls": 0,
+    "Docling_runs": 0
+  },
+  "limits": [
+    "Explicit direct active launch grammar; arbitrary issuer proper names/passive or embedded launch phrasing remain conservative descriptions.",
+    "Planned shipment source purpose is retained; no qualification pass or commercial revenue is inferred.",
+    "No independent author self-approval; ROOT to request separate reviewer."
+  ],
+  "next": "Separate independent grammar review; this author then independently reviews ROOT CI3file delta, never own grammar.",
+  "supersedes": "handoff-v3 for current SHA/role logic only; v3 intermediate failure remains historical",
+  "independent_findings_fixed": [
+    "Invalid candidate never commits overlap cursor, actor/topic, main predicate cursor or embedded range state; all commit transactionally after validation.",
+    "Accepted launch owns only actual predicate/object/qualifier extent, not its greedily captured coordinated tail; explicit new event object blocks inherited previous product.",
+    "Temporal frames are proved by shared time owner, not arbitrary leading text; source prefix is not reclassified as actor.",
+    "Disposal 将 is separated from product only with a bounded object boundary. Bare 将 without temporal proof stays unknown/uncertain; future time is planned, past/已将 is actual; internal 将 in 将星设备 remains part of product."
+  ],
+  "independent_review": "pending directed recheck by non-author, not author self-PASS",
+  "new_ci_root_cause": "The qualification argument slot is syntactically ambiguous. V3 correctly removed non-product classes as fake objects but wrongly made all arguments scope, including explicit products; old topic could then be inherited through an explicit new product.",
+  "new_fix": "Use existing _classify_np/product_head_suffix owner for each qualification_argument. A proven product NP becomes exact entity object (possessive 的 boundary excluded), blocking inherited old entity. Non-product customer/class terms remain exact qualifier refs; no class or company whitelist.",
+  "new_red": {
+    "independent_v3": "3 fail/7 pass",
+    "author_precise_entity_refs": "3 fail"
+  },
+  "not_done": "Separate v4 independent review and ROOT final acceptance pending; no self-certification or remote CI success claim.",
+  "preserved": [
+    "original two CI assertions and full local qualifier source closure",
+    "explicit shipment object precedence",
+    "validated event transactional state commit",
+    "launch != commercialization",
+    "temporal/disposal controls",
+    "customer is NOT a product",
+    "ROOT-updated plural/class qualifier source refs"
+  ]
+}

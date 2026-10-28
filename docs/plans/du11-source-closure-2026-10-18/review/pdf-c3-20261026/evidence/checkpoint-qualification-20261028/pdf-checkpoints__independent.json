@@ -1,0 +1,115 @@
+{
+  "schema_version": "independent-pdf-page-checkpoint-review/2",
+  "status": "PASS",
+  "reviewer": "/root/c3_semantic_final_20261028",
+  "author": "/root/c3_summary_root_design",
+  "handoff": "handoff-v5.json",
+  "files": [
+    {
+      "path": "src/company_wiki/source_catalog/narrative_pdf_enhancement.py",
+      "bytes": 20287,
+      "sha256": "d72cefdc9b6d5e8cd8d5f996b1530e24e920d28479984760cdeb984f469edb06",
+      "lf_sha256": "bb8aff2e74c0b757d8caa17ebe86806d59126dc46ad2d1b590f55504ff174f16"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/_paragraph_worker.py",
+      "bytes": 10736,
+      "sha256": "2aaf985fa783a134674b2f0f129a5adfcea133590e632f64b27fcd805edb115c",
+      "lf_sha256": "7ac1c62070273995cfe6b64d4c48a616f5c4ea7dfa6ecb0afa28baf8645b989b"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_pdf_page_checkpoints.py",
+      "bytes": 17603,
+      "sha256": "c6c697805caf4e18c556ecec4b2ae831ae2955544c340fadbde2ea61404c3f03",
+      "lf_sha256": "c6c697805caf4e18c556ecec4b2ae831ae2955544c340fadbde2ea61404c3f03"
+    },
+    {
+      "path": "tests/unit/test_pdf_page_checkpoints.py",
+      "bytes": 19103,
+      "sha256": "e33796aaa00b0cc4e5d1e1d26501e2ccc674c664beac494bdc279dc211a883fa",
+      "lf_sha256": "e33796aaa00b0cc4e5d1e1d26501e2ccc674c664beac494bdc279dc211a883fa"
+    }
+  ],
+  "same_raw_and_lf_before_after": true,
+  "open_findings": [],
+  "closed_findings": [
+    {
+      "id": "PDF-IR-01",
+      "resolution": "Existing public ceilings are single constants in the wire module consumed by public config and worker. Actual request fields remain hashed; deployment defaults are unchanged.",
+      "public_ceilings": {
+        "pages": 16,
+        "seconds": 300,
+        "memory_bytes": 8589934592,
+        "output_bytes": 33554432,
+        "input_bytes": 67108864,
+        "cpu_threads": 16
+      },
+      "production_defaults": {
+        "pages": 3,
+        "seconds": 120,
+        "memory_bytes": 4294967296,
+        "output_bytes": 2097152,
+        "input_bytes": 67108864,
+        "cpu_threads": 4
+      }
+    },
+    {
+      "id": "PDF-IR-02",
+      "resolution": "Finite nonempty opaque source_id is preserved verbatim and exact echoed; source SHA independently strict. Wrong echo rejects the stream without adding SourceRef/storage naming policy."
+    },
+    {
+      "id": "PDF-IR-03",
+      "resolution": "Iterative grammar tracks each object decoded-key set and UTF8/string/escape/number/literal prefixes. Valid Unicode cuts retain prior pages; duplicate keys and irreparable tails reject the whole stream. Complete JSON without newline is not committed."
+    }
+  ],
+  "tests": {
+    "total": 48,
+    "passed": 48,
+    "failed": 0,
+    "seconds": 4.04,
+    "own_frozen_cases": 18,
+    "focused_existing_cases": 30,
+    "cold_stdlib_child_cases_included": 2,
+    "real_docling_runs": 0,
+    "log": "independent-v5.log",
+    "junit": "independent-v5.xml",
+    "warning": "Known asyncio_mode config warning with autoload disabled; no failure"
+  },
+  "verified": [
+    "Every byte cut of actual encoded neutral frame including Chinese UTF8 and Unicode control escape",
+    "Duplicate decoded keys are local to object; deep stack and valid unfinished keys",
+    "OutputLimitExceeded never salvages",
+    "Requested order and aggregate 2048 items",
+    "All pages plus completion frame required for success; abnormal exit remains incomplete",
+    "Complete malformed or wrong-bound frame invalidates preceding pages",
+    "Exact source/model/environment/request identity",
+    "Native units, source bytes and membership retained on recovered page",
+    "Legacy successful /1 and /2 response with opaque IDs and strict bad JSON/type controls",
+    "Single converter and flush completed page before next conversion"
+  ],
+  "historical_red": {
+    "report": "independent-red-review.json",
+    "markdown": "independent-red-review.md",
+    "tests": 76,
+    "passed": 65,
+    "failed": 11,
+    "seconds": 8.25,
+    "scope": "v4 only; not rebound to v5"
+  },
+  "cleanup": {
+    "own_temp": ".pcir28",
+    "removed": true,
+    "parent_environment_unchanged": true,
+    "background_review_processes": 0,
+    "product_or_existing_test_writes": false,
+    "pwf_writes": false,
+    "original_pdf_reads": 0,
+    "http_or_model_calls": 0
+  },
+  "limits": [
+    "No real Docling/PDF execution or SDK filesystem behavior certified",
+    "No inference about HK timeout cause, industry-cloud source closure or final summary quality",
+    "No rerun of all165; author165 remains separate evidence",
+    "Review limited to four-file PDF delta; CI grammar and previous engineering reports remain separate"
+  ]
+}

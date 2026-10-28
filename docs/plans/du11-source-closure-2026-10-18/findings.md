@@ -1172,3 +1172,14 @@ CI0c988e8d/40406128851已于2026-10-26T21:44:13Z completed/success，正常hooks
 **唯一下一步：** 修PDF阅读层的全或无页结果可靠性缺口：保持单converter、120秒/4GiB/3pages/2MiB与全部SHA/环境绑定，逐完成页原子检查点，未完成页留partial缺口；纯wire/短子进程TDD→独立大节点审查→改变recipe后一次真实复验。测试观察同时保留typed selection及reading_execution，避免临时湖清理后丢诊断。不抬额度、不调公司/字体/页号特例、不恢复unknown业务豁免、不在摘要compiler跨task拼证。完整细则见[SUMMARY_QUALITY_PLAN](review/pdf-c3-20261026/SUMMARY_QUALITY_PLAN.md)。
 
 母账仍1,800,368tokens/$0.727945（6笔新unknown及旧7hold保留），配置10M/$20未升。原件/生产配置与其他owner WIP不变；测试湖、外层临时根均恢复。新holdout、实际RF预测及公司循环仍OPEN，Dashboard独立。下方均为历史，不覆盖本段及CURRENT_STATUS.json。
+
+
+## 2026-10-28 当前：工程复核通过，真实来源闭合与SDK启动根因待修
+
+8文件候选已按独审冻结版本通过：PDF检查点独审48项，经营行为/认证范围独审30项；ROOT完整source-reading领域2426通过/11跳过/65.65秒，全src392文件mypy通过，计数重叠不相加。原CI56ad2d31的两项客户验证/量产认证回归已修复；本候选尚待正常发布及精确CI，不能借旧CI代签。
+
+真实v4 `phaseC-090-9f3f43873512` 148.076秒在预留前阻断，source/prepared gold2/3，0POST/新增费用。新增执行观察证明增强停在IMPORT，120.0252秒后超时，三页均未完成，故没有页检查点可恢复。没有新摘要、激活/缓存/FF/RF验收。旧付费摘要2/3失败保留。一次受界30秒独立诊断定位Transformers导入在扫描Conda全局发行元数据，并非已进入PDF页转换；不以30秒探针断言完整120秒都消耗于该栈。
+
+**唯一下一步：** 发布本节点后，按阅读层内部原生项目符号/悬挂缩进物理证据修复续行，保留原bbox/ID/locator和严格跨段边界；并研究配置化SDK依赖运行时隔离，不改全局包、不重复同配冷启、不提高120秒/4GiB等额度。中性TDD→不同实际版面复验→独审，通过后才以改变recipe的一次正式运行检查实际发送材料、摘要与缓存。不得在摘要compiler跨task拼证或按公司打补丁。详细步骤见[SUMMARY_QUALITY_PLAN](review/pdf-c3-20261026/SUMMARY_QUALITY_PLAN.md)，本节点证据见[结果](review/pdf-c3-20261026/CHECKPOINT_QUALIFICATION_RESULT.json)。
+
+母账仍1,800,368tokens/$0.727945（6新unknown与旧7hold保留），10M/$20配置未升；本轮临时湖及外层测试根恢复。原件/生产配置/其他owner WIP不变。新holdout、实际RF预测和完整公司循环仍OPEN；Dashboard独立。以下为历史，不覆盖本段及CURRENT_STATUS.json。

@@ -1,0 +1,134 @@
+{
+  "schema_version": "c3-pdf-page-checkpoint-handoff/5",
+  "date": "2026-10-28",
+  "status": "FROZEN_READY_FOR_INDEPENDENT_REVIEW",
+  "author": "/root/c3_summary_root_design",
+  "base_head": "56ad2d313a32e5bcde9a3a8278128d8e5e49bd31",
+  "files": [
+    {
+      "path": "src/company_wiki/source_catalog/narrative_pdf_enhancement.py",
+      "bytes": 20287,
+      "sha256": "d72cefdc9b6d5e8cd8d5f996b1530e24e920d28479984760cdeb984f469edb06",
+      "lf_sha256": "bb8aff2e74c0b757d8caa17ebe86806d59126dc46ad2d1b590f55504ff174f16"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/_paragraph_worker.py",
+      "bytes": 10736,
+      "sha256": "2aaf985fa783a134674b2f0f129a5adfcea133590e632f64b27fcd805edb115c",
+      "lf_sha256": "7ac1c62070273995cfe6b64d4c48a616f5c4ea7dfa6ecb0afa28baf8645b989b"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_pdf_page_checkpoints.py",
+      "bytes": 17603,
+      "sha256": "c6c697805caf4e18c556ecec4b2ae831ae2955544c340fadbde2ea61404c3f03",
+      "lf_sha256": "c6c697805caf4e18c556ecec4b2ae831ae2955544c340fadbde2ea61404c3f03"
+    },
+    {
+      "path": "tests/unit/test_pdf_page_checkpoints.py",
+      "bytes": 19103,
+      "sha256": "e33796aaa00b0cc4e5d1e1d26501e2ccc674c664beac494bdc279dc211a883fa",
+      "lf_sha256": "e33796aaa00b0cc4e5d1e1d26501e2ccc674c664beac494bdc279dc211a883fa"
+    }
+  ],
+  "independent_v4_status": "CHANGES_REQUESTED; not overwritten",
+  "effective_v5_red": {
+    "total": 12,
+    "failed": 11,
+    "errors": 0,
+    "skipped": 0
+  },
+  "effective_v5_red_receipt": {
+    "exit_code": 1,
+    "seconds": 2.077,
+    "targets": [
+      ".planning/c3-20261028/pdf-checkpoints/test_independent.py"
+    ],
+    "owned_temp": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c3pc",
+    "owned_temp_absent": true
+  },
+  "final": {
+    "total": 165,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0
+  },
+  "final_receipt": {
+    "exit_code": 0,
+    "seconds": 7.85,
+    "targets": [
+      "tests/unit/test_pdf_page_checkpoints.py",
+      "tests/unit/test_pdf_paragraph_runtime.py",
+      "tests/unit/test_pdf_runtime_environment.py",
+      "tests/unit/test_pdf_paragraph_alignment.py",
+      "tests/unit/test_pdf_paragraph_reading_integration.py",
+      "tests/unit/test_pdf_reading_boundary.py",
+      ".planning/c3-20261028/pdf-checkpoints/test_independent.py",
+      ".planning/c3-20261028/pdf-checkpoints/test_independent_controls.py"
+    ],
+    "owned_temp": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c3pc",
+    "owned_temp_absent": true
+  },
+  "composition": {
+    "previous_author_suite": 131,
+    "new_same_root_controls": 16,
+    "independent_tests_replayed_by_author": 18,
+    "new_test_file_cases": 80,
+    "cold_real_stdlib_process_cases": 2
+  },
+  "static": {
+    "ruff": "All checks passed!",
+    "mypy": "Success: no issues found in 3 source files",
+    "diff_check": "PASS"
+  },
+  "repairs": {
+    "resource_policy_owner": "narrative_pdf_page_checkpoints.py; consumed by public config, wire, worker",
+    "existing_public_ceilings": {
+      "pages": 16,
+      "seconds": 300,
+      "memory_bytes": 8589934592,
+      "output_bytes": 33554432,
+      "input_bytes": 67108864,
+      "cpu_threads": 16
+    },
+    "production_defaults_unchanged": {
+      "pages": 3,
+      "seconds": 120,
+      "memory_bytes": 4294967296,
+      "output_bytes": 2097152,
+      "input_bytes": 67108864,
+      "cpu_threads": 4
+    },
+    "source_id": "nonempty string <=4096 characters, retained verbatim and exact echoed; SHA separately pinned",
+    "prefix": "iterative strict JSON object-prefix grammar; per-object decoded unique-key sets; UTF8/escape/number/literal boundary validation",
+    "atomicity": "complete invalid frames reject entire stream; only ChildTimeout/ChildFailed may discard final extendable unfinished object"
+  },
+  "protocol": "pdf-paragraph-page-checkpoints/1; recipe helper SHA changes with v5 implementation",
+  "preserved": [
+    "single converter",
+    "actual per-request limits and exact requested-page ordering",
+    "aggregate 2048 item bound and actual configured output byte bound",
+    "native source bytes, IDs and strict membership alignment",
+    "OutputLimitExceeded never salvaged",
+    "complete legacy response/1 and /2 compatibility",
+    "partial completed/pending diagnostics and no-first-page native fallback"
+  ],
+  "cleanup": {
+    "owned_short_temp": ".c3pc",
+    "owned_temp_absent": true,
+    "committed": false,
+    "production_config_written": false,
+    "originals_written": false
+  },
+  "unverified": [
+    "real Docling conversion and SDK filesystem behavior",
+    "real HK timeout cause",
+    "HK industry-cloud closure and paid final summary quality"
+  ],
+  "external_work": {
+    "real_original_pdf_reads": 0,
+    "real_docling_runs": 0,
+    "paid_model_calls": 0,
+    "downloads": 0,
+    "fresh_holdout_access": 0
+  }
+}

@@ -1,14 +1,14 @@
 # 当前行动计划（2026-10-25更新）
 
-## 2026-10-28 当前：已发布工程遇CI反证，补共用语义与PDF可靠性
+## 2026-10-28 当前：工程复核通过，真实来源闭合与SDK启动根因待修
 
-已完成来源用途/金融豁免、支持能力、priority/purpose投影、精确scope去重、软目标与输出cap共因修复。独审三项追加问题（无主体增长误闭合、逐task2未执行、metric平方扫描）均闭合，19文件工程独审PASS/51项，指标相关308项与全src391文件mypy通过，计数重叠不相加。[工程收据](review/pdf-c3-20261026/QUALITY_ENGINEERING.md)。
+8文件候选已按独审冻结版本通过：PDF检查点独审48项，经营行为/认证范围独审30项；ROOT完整source-reading领域2426通过/11跳过/65.65秒，全src392文件mypy通过，计数重叠不相加。原CI56ad2d31的两项客户验证/量产认证回归已修复；本候选尚待正常发布及精确CI，不能借旧CI代签。
 
-一次同配置真实复验146.072秒在费用预留前正确拒绝：行业云收入头与同比/原因尾分属两个task，prepared gold2/3；原文未全丢，但单组事实支持不完整。当前用途逻辑能保留旧已闭合4段组，尚不能证明新Docling具体为何未闭合。0POST、0预留、0新增费用/unknown；本run没有新final，也没有执行恢复/缓存/FF/RF，不能代签内容通过。[真实阻断](review/pdf-c3-20261026/QUALITY_REAL_RESULT.json)。旧唯一付费摘要2/3失败保持。
+真实v4 `phaseC-090-9f3f43873512` 148.076秒在预留前阻断，source/prepared gold2/3，0POST/新增费用。新增执行观察证明增强停在IMPORT，120.0252秒后超时，三页均未完成，故没有页检查点可恢复。没有新摘要、激活/缓存/FF/RF验收。旧付费摘要2/3失败保留。一次受界30秒独立诊断定位Transformers导入在扫描Conda全局发行元数据，并非已进入PDF页转换；不以30秒探针断言完整120秒都消耗于该栈。
 
-**唯一下一步：** 7个CI失败已在当前9文件根修及独审中闭合（集中184P/7.10秒，原CI两项语义断言保留），正常发布并观察新精确CI；明确重新激活已结束的PDF作者，修复v4独审3问题。原74d98a57精确CI40661418382仍保留failure。此前排查的7个失败（4协议/上限顺序、1歧义数表旧生成合同、2真实业务语法缺口，原关键断言保留），以及显式比较基准一致性根修；并行修PDF阅读层的全或无页结果可靠性缺口：保持单converter、120秒/4GiB/3pages/2MiB与全部SHA/环境绑定，逐完成页原子检查点，未完成页留partial缺口；纯wire/短子进程TDD→独立大节点审查→改变recipe后一次真实复验。测试观察同时保留typed selection及reading_execution，避免临时湖清理后丢诊断。不抬额度、不调公司/字体/页号特例、不恢复unknown业务豁免、不在摘要compiler跨task拼证。完整细则见[SUMMARY_QUALITY_PLAN](review/pdf-c3-20261026/SUMMARY_QUALITY_PLAN.md)。
+**唯一下一步：** 发布本节点后，按阅读层内部原生项目符号/悬挂缩进物理证据修复续行，保留原bbox/ID/locator和严格跨段边界；并研究配置化SDK依赖运行时隔离，不改全局包、不重复同配冷启、不提高120秒/4GiB等额度。中性TDD→不同实际版面复验→独审，通过后才以改变recipe的一次正式运行检查实际发送材料、摘要与缓存。不得在摘要compiler跨task拼证或按公司打补丁。详细步骤见[SUMMARY_QUALITY_PLAN](review/pdf-c3-20261026/SUMMARY_QUALITY_PLAN.md)，本节点证据见[结果](review/pdf-c3-20261026/CHECKPOINT_QUALIFICATION_RESULT.json)。
 
-母账仍1,800,368tokens/$0.727945（6笔新unknown及旧7hold保留），配置10M/$20未升。原件/生产配置与其他owner WIP不变；测试湖、外层临时根均恢复。新holdout、实际RF预测及公司循环仍OPEN，Dashboard独立。下方均为历史，不覆盖本段及CURRENT_STATUS.json。
+母账仍1,800,368tokens/$0.727945（6新unknown与旧7hold保留），10M/$20配置未升；本轮临时湖及外层测试根恢复。原件/生产配置/其他owner WIP不变。新holdout、实际RF预测和完整公司循环仍OPEN；Dashboard独立。以下为历史，不覆盖本段及CURRENT_STATUS.json。
 
 ## 2026-10-28 当前：C3共因工程已发布，真实摘要进行中
 
@@ -134,7 +134,7 @@ W18/W19作者工区、RF运行WIP、Dayu/IQS未写。以下旧“当前/下一�
 
 ## Next Step
 
-PDF owner逐完成页检查点与typed-selection观察：短TDD及大节点独审后，一次改变recipe的真实来源/摘要/恢复验收；原金标、预算与失败记录保持，之后继续holdout/RF循环。
+关闭共同event collector的新2项qualification回归与PDFv5三项wire问题；一次完整source-reading领域验收及独审后正常发布/精确CI，再一次变更recipe的真实HK来源/摘要/恢复测试。预算与gold不变。
 
 ## 历史记录（保留原过程，不作为当前待办）
 

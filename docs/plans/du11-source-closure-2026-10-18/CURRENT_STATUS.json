@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-28",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_C3_CORE_CI_ACCEPTED_PDF_REVIEW_FIX_PENDING",
+  "overall_status": "ACTIVE_NATIVE_CONTINUITY_AND_SDK_STARTUP_ROOT_FIX",
   "parallel_packages_20261025": {
     "status": "W16_W17_W18_ROOT_COMPONENT_ACCEPTED_MERGED",
     "entry": "harness_lanes/20261025/README.md",
@@ -26,14 +26,14 @@
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
-  "last_code_commit": "74d98a57391ae6fdcb54981999b4dc1bc021da11",
+  "last_code_commit": "56ad2d313a32e5bcde9a3a8278128d8e5e49bd31",
   "code_ci": {
-    "id": 40661418382,
-    "head_sha": "74d98a57391ae6fdcb54981999b4dc1bc021da11",
+    "id": 40670986975,
+    "head_sha": "56ad2d313a32e5bcde9a3a8278128d8e5e49bd31",
     "status": "completed",
     "conclusion": "failure",
-    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40661418382",
-    "updated_at": "2026-10-28T09:09:49Z"
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40670986975",
+    "updated_at": "2026-10-28T10:21:12Z"
   },
   "formal_v4_offline_selection_replay_20261025": {
     "status": "EXACT_REPRODUCED_NO_PAID_CALL",
@@ -2345,7 +2345,7 @@
     "published": true,
     "push_failure": "47 targets /392 collected /600s; two regressions being root-fixed, not waived by narrower daily gate"
   },
-  "next_action": "Activate PDF author explicitly after publish; close resource/opaqueID/prefix3 issues, independent recheck, one changed-recipe real test",
+  "next_action": "Publish accepted8; native bullet/hanging-indent proof TDD and configured SDK-runtime isolation research; no unchanged real retry.",
   "c3_runtime_recovery_20261026": {
     "entry": "review/pdf-c3-20261026/RUNTIME_RECOVERY.md",
     "environment_independent": "PASS_ZERO_OPEN_25_TESTS_AND_REAL_WORKER_ENTRYPOINTS",
@@ -2522,7 +2522,7 @@
   },
   "core_ci_repair_20261028": {
     "schema_version": "c3-core-ci-repair/1",
-    "status": "ACCEPTED_PENDING_NORMAL_PUBLICATION",
+    "status": "PUBLISHED_EXACT_CI_FAILED_2_NEW_QUALIFICATION_REGRESSIONS",
     "base_commit": "74d98a57391ae6fdcb54981999b4dc1bc021da11",
     "failed_ci": 40661418382,
     "accepted_files": 9,
@@ -2538,6 +2538,161 @@
     "new_paid_calls": 0,
     "PDF_status": "v4 CHANGES_REQUESTED3 pending author reactivation; no v5 run",
     "source_content_status": "Still0POST blocked, no new final",
-    "next": "Activate PDF author explicitly after publish; close resource/opaqueID/prefix3 issues, independent recheck, one changed-recipe real test"
+    "next": "Activate PDF author explicitly after publish; close resource/opaqueID/prefix3 issues, independent recheck, one changed-recipe real test",
+    "commit": "56ad2d313a32e5bcde9a3a8278128d8e5e49bd31",
+    "pushed": true,
+    "git_lf_sha_verified": 9,
+    "normal_precommit": "PASS",
+    "normal_prepush": {
+      "passed": 158,
+      "seconds": 45.69
+    },
+    "exact_ci": [
+      {
+        "id": 40670986975,
+        "head_sha": "56ad2d313a32e5bcde9a3a8278128d8e5e49bd31",
+        "status": "completed",
+        "conclusion": "failure",
+        "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40670986975",
+        "updated_at": "2026-10-28T10:21:12Z"
+      }
+    ],
+    "type_repair": "evidence/core-ci-repair-20261028/core-type-repair.json",
+    "original7failures": "Not present in newCI annotations",
+    "new_failure_count": 2
+  },
+  "checkpoint_qualification_20261028": {
+    "status": "ENGINEERING_PASS_REAL_SOURCE_BLOCKED",
+    "base_head": "56ad2d313a32e5bcde9a3a8278128d8e5e49bd31",
+    "engineering": {
+      "independent_pdf_tests": 48,
+      "independent_source_tests": 30,
+      "root_source_domain_passed": 2426,
+      "root_source_domain_skipped": 11,
+      "seconds": 65.65,
+      "mypy": "python -m mypy src:392 PASS",
+      "counts_overlap": true
+    },
+    "real": {
+      "run_id": "phaseC-090-9f3f43873512",
+      "seconds": 148.076,
+      "source_gold": "2/3; not summary score",
+      "POST": 0,
+      "new_tokens": 0,
+      "new_micro_usd": 0,
+      "last_stage": "IMPORT",
+      "requested_pages": [
+        12,
+        13,
+        17
+      ],
+      "completed_pages": [],
+      "timeout_seconds": 120.0252,
+      "cache_activation_consumers": "NOT_EXECUTED"
+    },
+    "owned_temp_restored_absent": true,
+    "publication": "PENDING",
+    "evidence": [
+      {
+        "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/checkpoint-qualification-20261028/final-candidate-review.json",
+        "sha256": "4f99161b27ddfa99f2bc3fe43a7e5e701b7b94eebd633018ae996c643a30756d",
+        "bytes": 2672
+      },
+      {
+        "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/checkpoint-qualification-20261028/source-domain-v4.json",
+        "sha256": "c030f5ee5439412fd1d6d17d01b531e4aef86eb9bb7810873e9e00182447b8f5",
+        "bytes": 372
+      },
+      {
+        "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/checkpoint-qualification-20261028/source-domain-v4.log.gz",
+        "sha256": "86455dce96be729978a0167f5feab306360a9236a00187b84dcc501ed4e05f76",
+        "bytes": 2444
+      },
+      {
+        "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/checkpoint-qualification-20261028/final-source-mypy-exact.log.gz",
+        "sha256": "95591609ca181b5f4506748257db43ed2de64ede54586fdc8617f3906e7e6e10",
+        "bytes": 66
+      },
+      {
+        "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/checkpoint-qualification-20261028/pdf-checkpoints__handoff-v5.json",
+        "sha256": "b119edae252769c2b3e2d19312bfb6b87bee54e20b4cc2623ae70017a5628d62",
+        "bytes": 4993
+      },
+      {
+        "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/checkpoint-qualification-20261028/pdf-checkpoints__independent.json",
+        "sha256": "96a93fad280f03223b10e125786318ef9d74ddb17109b29a5f661172a8ad3329",
+        "bytes": 4769
+      },
+      {
+        "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/checkpoint-qualification-20261028/pdf-checkpoints__independent.md",
+        "sha256": "5fdb4336a0704198d607a1a3de4b4b06310048dd5d81348f60a0c7df20271f03",
+        "bytes": 2222
+      },
+      {
+        "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/checkpoint-qualification-20261028/ci-source-review__handoff-v4.json",
+        "sha256": "ef2e38b499d882e96d33da0481ac1cc0ffc87ee961c5cf95f9448bf9cc090376",
+        "bytes": 6503
+      },
+      {
+        "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/checkpoint-qualification-20261028/ci-source-review__source-actions-review.json",
+        "sha256": "45809805d623eb0c9092a2d1427373a472b4f2e6855db351abdcf22afc03ab3d",
+        "bytes": 4231
+      },
+      {
+        "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/checkpoint-qualification-20261028/ci-source-review__source-actions-review.md",
+        "sha256": "00691d79a20c0a6fc1ca3097380d8a351326e8c514ed9f03581e3ab7c5458d3d",
+        "bytes": 2314
+      },
+      {
+        "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/checkpoint-qualification-20261028/quality-v4-finished.json",
+        "sha256": "7a9f402aad95e603ae2572b1729edb66614a45047e9b6343eed2922c9c5efbb7",
+        "bytes": 3309
+      },
+      {
+        "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/checkpoint-qualification-20261028/quality-v4-content-review__report.md",
+        "sha256": "cff6b19c6be0f9265d33278621ae1a7ea99a099ad722bf796bed66d165c90485",
+        "bytes": 3089
+      },
+      {
+        "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/checkpoint-qualification-20261028/quality-v4-content-review__report.json",
+        "sha256": "5231c54a67bfa7f40d3f7f247372c10f8b5957648e251da1bd83b415684c5618",
+        "bytes": 40607
+      },
+      {
+        "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/checkpoint-qualification-20261028/sdk-startup-diagnosis__report.md",
+        "sha256": "97ef8dc6972b479ae6409f6157d185445a4ad72c68366fb59edc546d2723fe73",
+        "bytes": 5547
+      },
+      {
+        "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/checkpoint-qualification-20261028/sdk-startup-diagnosis__report.json",
+        "sha256": "5ac786a3b360b5a8ad72e20d365f984ddf84c47e13387bf379fbbc6f84bc11a1",
+        "bytes": 13626
+      },
+      {
+        "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/checkpoint-qualification-20261028/sdk-startup-diagnosis__probe.json",
+        "sha256": "76b2b4c2a6050929882ae804c3264e2217a6c6a0452ad0de96d2687ea3d252e1",
+        "bytes": 4410
+      },
+      {
+        "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/checkpoint-qualification-20261028/real-v4/overall.json.gz",
+        "sha256": "d3014f57b306aae1a22852b944d4e5303774153309080ba916d06614f6d1f58f",
+        "bytes": 2092
+      },
+      {
+        "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/checkpoint-qualification-20261028/real-v4/events.jsonl",
+        "sha256": "baed5be3a2cdb985be5bf74edafb92c999d0cd0b20ffe6b77090bd639e1d6168",
+        "bytes": 3339
+      },
+      {
+        "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/checkpoint-qualification-20261028/real-v4/phaseC-090-9f3f43873512.input.json.gz",
+        "sha256": "7ea3074404423922851af68a6dd4aacb60c05c533032dc3098a7378a2f9a6649",
+        "bytes": 16114
+      },
+      {
+        "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/checkpoint-qualification-20261028/real-v4/phaseC-090-9f3f43873512.selection.json.gz",
+        "sha256": "d3a33b9cdd4a276ba08d71905badb4241a301c5c9ba402e1b6a391174b7d3176",
+        "bytes": 88733
+      }
+    ]
   }
 }

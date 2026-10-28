@@ -1,0 +1,77 @@
+{
+  "base_head": "56ad2d313a32e5bcde9a3a8278128d8e5e49bd31",
+  "frozen_files": [
+    {
+      "path": "src/company_wiki/source_catalog/narrative_pdf_enhancement.py",
+      "bytes": 20287,
+      "sha256": "d72cefdc9b6d5e8cd8d5f996b1530e24e920d28479984760cdeb984f469edb06",
+      "lf_sha256": "bb8aff2e74c0b757d8caa17ebe86806d59126dc46ad2d1b590f55504ff174f16"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/_paragraph_worker.py",
+      "bytes": 10736,
+      "sha256": "2aaf985fa783a134674b2f0f129a5adfcea133590e632f64b27fcd805edb115c",
+      "lf_sha256": "7ac1c62070273995cfe6b64d4c48a616f5c4ea7dfa6ecb0afa28baf8645b989b"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_pdf_page_checkpoints.py",
+      "bytes": 17603,
+      "sha256": "c6c697805caf4e18c556ecec4b2ae831ae2955544c340fadbde2ea61404c3f03",
+      "lf_sha256": "c6c697805caf4e18c556ecec4b2ae831ae2955544c340fadbde2ea61404c3f03"
+    },
+    {
+      "path": "tests/unit/test_pdf_page_checkpoints.py",
+      "bytes": 19103,
+      "sha256": "e33796aaa00b0cc4e5d1e1d26501e2ccc674c664beac494bdc279dc211a883fa",
+      "lf_sha256": "e33796aaa00b0cc4e5d1e1d26501e2ccc674c664beac494bdc279dc211a883fa"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/patterns.py",
+      "lf_sha256": "7fd42e9b1a73e606cf6c55b4229f816b54b1cb2d51c372e98e37f9d43ff973a2",
+      "author": "/root/ci_source_controls_review"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/relations.py",
+      "lf_sha256": "a38092a0ae7832bfda51d80db608884501d00ef48e389b8c2f9127bed6524b66",
+      "author": "/root/ci_source_controls_review"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_source_operating_actions.py",
+      "lf_sha256": "011babf0655e6aef367ed727ff500a4aa161302d7ffe93a17c7b7e2e7a5d031f",
+      "author": "/root/ci_source_controls_review"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_product_plural_classification.py",
+      "author": "/root",
+      "lf_sha256": "9dfcf67e7f15ca3b84311f3be237096fd0808df9ffa8046042e7e26a48fbc2a0",
+      "freeze_basis": "ROOT declared frozen exact source-customer qualifier assertions"
+    }
+  ],
+  "pid": 27084,
+  "output": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\c3-20261028\\hk-quality-v4",
+  "owned_tmp": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c328v4",
+  "protected_count": 7,
+  "mother_before": {
+    "charged_tokens": 1800368,
+    "charged_micro_usd": 727945,
+    "new_unknown_count": 6,
+    "token_limit": 10000000,
+    "micro_usd_limit": 20000000,
+    "prior_unknown7_retained": 7
+  },
+  "started_at": "2026-10-28T10:42:42.979521+00:00",
+  "runtime_config": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\c3-20261026\\pdf-env\\runtime-4g-v2.json",
+  "scope": "one canonical live attempt; no outer premature kill after possible paid POST",
+  "exit_code": 1,
+  "seconds": 148.076,
+  "mother_after": {
+    "charged_tokens": 1800368,
+    "charged_micro_usd": 727945,
+    "new_unknown_count": 6,
+    "token_limit": 10000000,
+    "micro_usd_limit": 20000000,
+    "prior_unknown7_retained": 7
+  },
+  "frozen_files_unchanged": true,
+  "cleanup_pending": true
+}

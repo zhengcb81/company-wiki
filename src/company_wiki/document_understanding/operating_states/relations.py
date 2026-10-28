@@ -687,6 +687,20 @@ def _clause_events(view: MatchingView, scan: _UnitScan,
                 group_end = group_start+len(group)
                 if not modifier_span or not (modifier_span[0] <= group_start and group_end <= modifier_span[1]):
                     event.qual_spans.append((group_start, group_end))
+        qualification_argument = groups.get("qualification_argument")
+        if qualification_argument:
+            argument_start = clause[0] + match.start("qualification_argument")
+            argument_end = argument_start + len(qualification_argument)
+            # A possessive boundary is grammar, not part of a product name.
+            # Reuse the same product/NP role proof as explicit subjects: a
+            # customer or certification class must not become a second product,
+            # and a genuinely explicit product must prevent old-topic donation.
+            entity_end = argument_end - int(qualification_argument.endswith("的"))
+            role, _attribution = _classify_np(view, (argument_start, entity_end), scan.name_classes)
+            if role == "object":
+                event.obj_spans.append((argument_start, entity_end))
+            else:
+                event.qual_spans.append((argument_start, argument_end))
         event.qual_spans = list(dict.fromkeys(event.qual_spans))
         obj_group = groups.get("obj")
         if obj_group:

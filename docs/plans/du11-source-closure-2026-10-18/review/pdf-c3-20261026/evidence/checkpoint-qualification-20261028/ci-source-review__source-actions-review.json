@@ -1,0 +1,87 @@
+{
+  "schema_version": "independent-source-actions-review/4",
+  "status": "PASS",
+  "reviewer": "/root/c3_semantic_final_20261028",
+  "handoff": "handoff-v4.json",
+  "files": [
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/patterns.py",
+      "lf_sha256": "7fd42e9b1a73e606cf6c55b4229f816b54b1cb2d51c372e98e37f9d43ff973a2",
+      "author": "/root/ci_source_controls_review"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/relations.py",
+      "lf_sha256": "a38092a0ae7832bfda51d80db608884501d00ef48e389b8c2f9127bed6524b66",
+      "author": "/root/ci_source_controls_review"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_source_operating_actions.py",
+      "lf_sha256": "011babf0655e6aef367ed727ff500a4aa161302d7ffe93a17c7b7e2e7a5d031f",
+      "author": "/root/ci_source_controls_review"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_product_plural_classification.py",
+      "author": "/root",
+      "lf_sha256": "9dfcf67e7f15ca3b84311f3be237096fd0808df9ffa8046042e7e26a48fbc2a0",
+      "freeze_basis": "ROOT declared frozen exact source-customer qualifier assertions"
+    }
+  ],
+  "same_lf_before_after": true,
+  "open_findings": [],
+  "closed_findings": [
+    {
+      "id": "ACT-IR-03",
+      "resolution": "Intermediate qualification argument is resolved with existing _classify_np/product_head_suffix. Explicit product entities get exact object_refs before inheritance; real category/customer text remains qualifier_refs. No company or category whitelist."
+    }
+  ],
+  "verified": [
+    "Original positive customer validation and negative pending approval remain distinct and close source dependencies from both selected directions.",
+    "Explicit different products inside qualification argument do not borrow earlier product and are not stored as scope.",
+    "Real production/safety/registration qualification categories retain proven previous product with exact qualifier refs.",
+    "Explicit changed product or supplier subject does not inherit the old object.",
+    "Chinese customer qualification is a scope/source qualifier with exact original offsets, never an extra product.",
+    "Genuine English Customers subject and product-plus-customers coordination keep actor role and other attribution."
+  ],
+  "root_test_adjustment": {
+    "author": "/root",
+    "reviewer": "/root/c3_semantic_final_20261028",
+    "judgment": "Correct semantic-contract repair: customer in product customer qualification is a source/scope attribute, not a second product. Exact qualifier offset assertions strengthen retention; independent Customers actor controls are unchanged and pass."
+  },
+  "tests": {
+    "total": 30,
+    "passed": 30,
+    "failed": 0,
+    "seconds": 3.81,
+    "own_frozen_cases": 6,
+    "original_two_ci_cases": 4,
+    "focused_author_role_cases": 8,
+    "root_plural_role_cases": 12,
+    "log": "independent-v4.log",
+    "junit": "independent-v4.xml",
+    "warning": "Known asyncio_mode config warning with autoload disabled; no failures"
+  },
+  "prior_evidence": {
+    "v3_red": "source-actions-review-v3-red.md/json;10total3F7P on v3 only",
+    "v2_pass": "source-actions-review-v2-pass.md/json;33P on v2 only",
+    "initial_red": "source-actions-review-red.json;14total6F8P on initial freeze only"
+  },
+  "preserved_by_source_diff_review": [
+    "Validated candidate state commits after acceptance",
+    "Accepted launch actual extent and explicit shipment object precedence",
+    "Launch separate from commercialization",
+    "Existing temporal/disposal owner and bare marker uncertainty"
+  ],
+  "cleanup": {
+    "own_temp": ".sair28",
+    "removed": true,
+    "parent_environment_unchanged": true,
+    "product_existing_tests_or_pwf_writes": false,
+    "pdf_docling_network_model_calls": 0,
+    "background_review_processes": 0
+  },
+  "limits": [
+    "Final directed recheck is30; author276 and ROOT whole source-reading integration are separate receipts",
+    "PDF v5 PASS48 remains immutable separate four-file approval",
+    "No true summary content or paid run certified"
+  ]
+}

@@ -115,7 +115,9 @@ COMMERCIALIZATION_EN = re.compile(
 QUALIFICATION_PENDING = re.compile(
     rf"(?P<qual>{_ABSENCE}|仍需|尚需|还需|有待|尚待)(?:取得|获得|获取|拿到|获|obtained?)?"
     rf"(?:客户|customer\s+)?(?:对其|对其)?(?:完成|通过|取得|获得)?"
-    rf"(?P<obj>{_CJK_OBJ_SHORT}?)?的?(?P<pred>认证|認證|qualification|validation)"
+    # This slot may name a certification class or an explicit product entity;
+    # the shared noun-phrase role owner resolves it before subject inheritance.
+    rf"(?P<qualification_argument>{_CJK_OBJ_SHORT}?)?的?(?P<pred>认证|認證|qualification|validation)"
     rf"{_NOT_COMPOUND}"
 )
 QUALIFICATION_RESULT = re.compile(

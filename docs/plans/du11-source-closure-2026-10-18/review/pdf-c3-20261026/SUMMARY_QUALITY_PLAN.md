@@ -71,3 +71,19 @@ A v3+B v2共19文件工程独审PASS/51项，全src391 mypy PASS，308项指标�
 同节点补出了bare-result的通用比较修饰词缺口；复用唯一比较词汇owner，前后显式yoy/qoq互斥不能借同一结果，比较仅绑定实际方向断言及reference marker，其他句的词不捐口径。原RED6F/51P、独审3F冻结，现177项相关语义通过及64永久source/work控制通过，待最终定向独审。没有改公司/文种gold、金额单位或预算。
 
 后续大节点本地验收必须复用这7项生产接缝及其新正反控制，再加有界PDF wire/读取接缝、source→scoped/paid recovery。它们是**大节点检查包**，不扩大每次commit/pre-push，不跑超时整批；完整unit仍由CI做反证，出现失败逐项判断产品或测试根因，不批量改期望换绿。
+
+## 56ad2d31精确CI第二轮反证：扩大到真实影响领域
+
+40670986975为failure，旧7个失败已消失但出现2项资格状态回归：已完成客户验证≠已获得量产认证；后者尚未取得时，原双向引用支持与状态区分必须保持。保留旧断言，继续由operating_states共同collector根修；新候选事务/占用调整影响所有construction，因此不能只跑新launch/shipment控制。
+
+冻结修复后ROOT一次运行完整tests/unit/document_understanding_selection来源阅读领域包及必要protocol/PDF接缝；这是大节点范围，不加入每commit，不跑全仓重型E2E/真SDK。若域包本身超时，依据输出定位慢项分区，不重复未改变的大批。独审聚焦已曝光根因和影响面，原7FAIL与本2FAIL均保留，不以本地184P冒签远端成功。
+
+调度改正：send_message不会启动completed agent；ROOT已用followup_task重启PDF作者，list_agents核实running。当前PDFv5有效11RED/1P已冻结并正在实施，不再等待idle。
+
+## 2026-10-28 下一阶段：来源物理闭合优先，SDK启动独立治理
+
+1. 已验收8文件按固定SHA发布；保留v3/v4真实失败与旧付费响应。全领域2426P/11skip、PDF48P/来源30P独审、mypy392P只证明工程，不代签内容。
+2. 原生层悬挂缩进：由实际native span字符区间和同基线项目符号/正文关系产生正文anchor证明；原bbox、unit ID、locator不改。不得单纯放宽2.1em阈值。先中性正反例：混合字体、不同字号/语言、缺测量、歧义、跨栏/跨页、下一项目、完整句边界、字符未对齐、有限work。复用既有native细粒度输入及共享continuity owner，不让业务层读取SDK。
+3. 实际HK页13证明：marker x99.1946、正文x121.8746、后续行x121.87457，同基线；原block左边界把22.68缩进误当正文差距。冻结原SHA，只读定点复验并加入另一不同版式控制；不修改金标、公司白名单或费用/工作限额。
+4. SDK根因：受界30秒探针确定document_converter→Transformers→packages_distributions扫描426发行包。研究显式配置、真实依赖闭包的隔离运行时，避免复制GB依赖/模型；不全局monkeypatch metadata、不改已安装包/ACL、不重复未改变冷启。方案先独审再实施，保持配置/环境指纹可重放。
+5. 大节点独审归一化源码SHA、正反例和真实召回。只有来源3/3后才执行一次配置内正式原语言摘要，再验激活/重启/跨run0重复费用、FF复用、RF实际采用。source2/3不能写摘要2/3，公共RF读取不能代签预测采用。余下fresh holdout/八步公司循环仍OPEN。

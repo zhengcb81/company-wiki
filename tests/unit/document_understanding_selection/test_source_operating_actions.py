@@ -158,3 +158,41 @@ def test_bare_disposal_marker_does_not_assert_time_or_split_a_product_name():
 def test_arbitrary_discussion_lead_is_not_a_proven_temporal_frame():
     text = 'During the meeting we discussed whether the company launched a new platform.'
     assert not [r for r in observed(text) if r['activity'] == 'product_launch']
+
+
+@pytest.mark.parametrize('scope', ['量产', '安全', '注册'])
+def test_qualification_class_does_not_replace_the_previous_product_subject(scope):
+    text = f'该设备已完成客户验证，但尚未获得{scope}认证。'
+    rows = observed(text)
+    restrictions = [r for r in rows if r['polarity'] == 'negative' and r['stage'] == 'not_yet']
+    assert restrictions
+    assert any(r['polarity'] == 'positive' and r['stage'] == 'current' for r in rows)
+    assert all([text[ref['char_start']:ref['char_end']] for ref in r['object_refs']] == ['设备']
+               for r in restrictions)
+    assert all(scope in [text[ref['char_start']:ref['char_end']] for ref in r['qualifier_refs']]
+               for r in restrictions)
+
+
+@pytest.mark.parametrize('next_subject,object_text,attribution', [
+    ('乙设备', '乙设备', 'unknown'), ('供应商', None, 'other'),
+])
+def test_new_explicit_qualification_subject_never_borrows_previous_product(next_subject, object_text, attribution):
+    text = f'甲设备已完成客户验证，但{next_subject}尚未获得量产认证。'
+    restrictions = [r for r in observed(text) if r['polarity'] == 'negative' and r['stage'] == 'not_yet']
+    assert restrictions and all(r['attribution'] == attribution for r in restrictions)
+    objects = [text[ref['char_start']:ref['char_end']] for r in restrictions for ref in r['object_refs']]
+    assert '甲设备' not in objects and ('乙设备' in objects if object_text else not objects)
+
+
+@pytest.mark.parametrize('text,entity', [
+    ('甲设备已完成客户验证，但尚未完成乙设备的认证。', '乙设备'),
+    ('甲设备已完成客户验证，但尚未获得Vega模块认证。', 'Vega模块'),
+    ('甲設備已完成客戶驗證，但尚未完成乙設備的認證。', '乙設備'),
+])
+def test_explicit_product_inside_qualification_slot_remains_an_entity(text, entity):
+    restrictions = [r for r in observed(text) if r['polarity'] == 'negative' and r['stage'] == 'not_yet']
+    assert restrictions
+    assert all([text[ref['char_start']:ref['char_end']] for ref in r['object_refs']] == [entity]
+               for r in restrictions)
+    assert all(entity not in [text[ref['char_start']:ref['char_end']] for ref in r['qualifier_refs']]
+               for r in restrictions)
