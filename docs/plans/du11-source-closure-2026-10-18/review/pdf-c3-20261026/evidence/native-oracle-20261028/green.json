@@ -1,0 +1,21 @@
+{
+  "exit": 0,
+  "seconds": 6.414,
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-m",
+    "pytest",
+    "-q",
+    "-o",
+    "addopts=",
+    "-o",
+    "cache_dir=C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\c3-20261028\\native-oracle-fix\\pytest-cache",
+    "--basetemp=C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.c3cir\\pytest",
+    "--junitxml=C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\c3-20261028\\native-oracle-fix\\green.xml",
+    "tools/document_understanding_benchmark/tests/test_native_range_quote_boundaries.py"
+  ],
+  "targets": [
+    "tools/document_understanding_benchmark/tests/test_native_range_quote_boundaries.py"
+  ],
+  "scratch_restored_absent": true
+}

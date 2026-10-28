@@ -1,0 +1,14 @@
+{
+  "exit_code": 1,
+  "seconds": 70.83,
+  "targets": [
+    "tests/unit/document_understanding_selection",
+    "tests/unit/document_understanding_root"
+  ],
+  "failure": "ChildFailed",
+  "source_config_unchanged": true,
+  "owned_temp": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c3dom",
+  "cleanup_pending": true,
+  "real_sdk_runs": 0,
+  "paid_model_calls": 0
+}

@@ -27,14 +27,15 @@ from company_wiki.document_normalization.table_shapes import has_tabular_value_t
 
 INPUT_SCHEMA_VERSION = "du-input/1"
 
-OBSERVATION_ADAPTER_VERSION = "du-observation-adapter/8"
+OBSERVATION_ADAPTER_VERSION = "du-observation-adapter/9"
 
 _READING_LAYOUT_FIELDS = frozenset({"bbox", "page", "column", "page_width", "page_height", "coordinate_frame", "rotation",
                                   "granularity", "font_size", "font_weight", "frame_converted", "cropbox", "cropbox_position"})
 _FINE_LAYOUT_FIELDS = frozenset({"text", "bbox", "native_index", "char_start", "char_end", "char_start_supplied", "char_end_supplied",
                                "char_alignment", "page", "coordinate_frame", "row", "column", "table_id", "font_size", "font_weight", "font",
                                "span_index", "line_index", "block_index", "block", "line", "span", "partial_span",
-                               "native_cell_char_start", "native_cell_char_end", "partial_cell", "flags", "source"})
+                               "native_cell_char_start", "native_cell_char_end", "partial_cell", "flags", "source",
+                               "origin", "direction"})
 
 
 def _fine_layout_field(key: str, value: Any) -> bool:

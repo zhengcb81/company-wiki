@@ -27,18 +27,40 @@ def _fold(text: str) -> str:
     return " ".join(unicodedata.normalize("NFC", text).split())
 
 
+def _cjk_boundary(left_char: str, right_char: str) -> bool:
+    """A proven layout edge may border a CJK quantity, never split a token."""
+    return bool(
+        _CJK.fullmatch(left_char) and (
+            _CJK.fullmatch(right_char) or right_char in _CJK_PUNCTUATION
+            or right_char in "0123456789"
+        )
+        or _CJK.fullmatch(right_char) and (
+            left_char in _CJK_PUNCTUATION or left_char in "0123456789"
+        )
+    )
+
+
 def _range_fold(text: str) -> str:
     """Observe CJK line wraps inside ONE byte-verified native range.
 
-    English words, decimal quantities and unit boundaries keep their spaces.
+    An actual line break can border a CJK quantity/unit or qualifier. Inline
+    spaces and English/numeric-token boundaries retain their separation.
     This is quote observation after source-owner replay, not range creation.
     """
     # Only actual source line layout after the CJK enumeration delimiter.
     # Preserve intentional inline spaces, punctuation and all English/number
     # boundaries. The caller already owns this range's native-byte proof.
     text = re.sub(r"(?<=、)[^\S\r\n]*\r?\n[^\S\r\n]*(?=\S)", "", text)
-    value = _fold(text)
-    return re.sub(r"(?<=[\u3400-\u9fff。，！？；：“”‘’（）]) +(?=[\u3400-\u9fff。，！？；：“”‘’（）])", "", value)
+
+    def line_edge(match: re.Match[str]) -> str:
+        left = match.group(1)
+        right = match.string[match.end()]
+        return left if _cjk_boundary(left, right) else match.group(0)
+
+    # Fold before whitespace normalization destroys the distinction between
+    # source layout and an intentional inline space. Require one actual break;
+    # blank lines, digit/digit, decimal/comma and English token edges stay apart.
+    return _fold(re.sub(r"(\S)[^\S\r\n]*(?:\r\n|\r|\n)[^\S\r\n]*(?=\S)", line_edge, text))
 
 
 def _terminal(text: str) -> bool:
@@ -90,16 +112,7 @@ def _join(chain: Sequence[EvidenceSpan]) -> str:
         # This only chooses a boundary between proven original fragments; it
         # does not delete whitespace inside either original span or join two
         # separated Latin tokens into an invented English word.
-        cjk_boundary = bool(
-            _CJK.fullmatch(left_char) and (
-                _CJK.fullmatch(right_char) or right_char in _CJK_PUNCTUATION
-                or right_char in "0123456789"
-            )
-            or _CJK.fullmatch(right_char) and (
-                left_char in _CJK_PUNCTUATION or left_char in "0123456789"
-            )
-        )
-        separator = "" if cjk_boundary else " "
+        separator = "" if _cjk_boundary(left_char, right_char) else " "
         result = result.rstrip() + separator + right.lstrip()
     return _fold(result)
 

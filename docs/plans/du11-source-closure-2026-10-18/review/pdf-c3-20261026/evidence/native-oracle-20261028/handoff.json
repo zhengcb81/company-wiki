@@ -1,0 +1,97 @@
+{
+  "schema_version": "native-range-oracle-handoff/1",
+  "status": "FROZEN_FOR_NON_AUTHOR_REVIEW",
+  "author": "/root/ci_source_controls_review",
+  "files": [
+    {
+      "path": "tools/document_understanding_benchmark/closed_group_support.py",
+      "sha256": "67180cdee5e260b9e25430b4b9489f9806a33d216ed50f49ae6d52e272de85b9",
+      "lf_sha256": "4f0b7127384339bebaba1d7150436d01ebfa08ecce4e4a70dbac2f042c336af9"
+    },
+    {
+      "path": "tools/document_understanding_benchmark/tests/test_native_range_quote_boundaries.py",
+      "sha256": "590835cf5a5b4c00a4ebf6ae08c12068fd46d7c670af60efe1b88b4fd8089bab",
+      "lf_sha256": "590835cf5a5b4c00a4ebf6ae08c12068fd46d7c670af60efe1b88b4fd8089bab"
+    }
+  ],
+  "root_cause": "Verified native-range actual line breaks were folded to spaces before quantity/CJK boundary observation; a complete selected original was falsely scored missing. The sibling fragment join already knew the same numeric/CJK edge.",
+  "fix": "Share the existing CJK boundary predicate between fragment and native-range observers. Observe actual single source line breaks before general whitespace folding; preserve intentional inline spaces, blank paragraph breaks, English and digit/decimal/comma token boundaries.",
+  "neutral_tdd": {
+    "red": {
+      "failed": 13,
+      "passed": 32
+    },
+    "green": {
+      "passed": 45
+    },
+    "red_receipt": "red.xml",
+    "green_receipt": "green.xml"
+  },
+  "related_matrix": {
+    "tests": 156,
+    "failures": 0,
+    "errors": 0,
+    "seconds": 3.836,
+    "receipt": "matrix.xml",
+    "targets_and_command": "matrix.json"
+  },
+  "static": {
+    "ruff_two_files": "PASS",
+    "mypy_oracle": "PASS"
+  },
+  "actual_offline_replay": {
+    "same_saved_selection_input_gold": {
+      ".planning\\c3-20261028\\hk-native-v5\\materials\\phaseC-090-64100fdc01a5.selection.json.gz": "497d9d140461f459c775d189bbc80d88a3ad847dfd226fecd88698b03f97ff21",
+      ".planning\\c3-20261028\\hk-native-v5\\materials\\phaseC-090-64100fdc01a5.input.json.gz": "767d2c3a0e47336d5553b8e23a001d56737f742b8753ce3f26fcb1b571d23adb",
+      "docs\\plans\\du11-source-closure-2026-10-18\\review\\pdf-c3-20261026\\hk-development-gold.json": "2d6391a1f3f6d0c6e9bc7629e327f54c5bb4d2c651b202d38dd4f4364dbba568"
+    },
+    "before": {
+      "full_selection": 2,
+      "sent_tasks": 2,
+      "required": 3
+    },
+    "after": {
+      "full_selection": 3,
+      "sent_tasks": 3,
+      "required": 3
+    },
+    "industry_task": "t33",
+    "receipts": [
+      "actual-red.json",
+      "actual-green.json"
+    ],
+    "compiler_material_byte_equivalence_assertions": "PASS through unchanged gold_observation",
+    "raw_and_gold_unchanged": true
+  },
+  "secondary_owner": {
+    "file": "tools/document_understanding_benchmark/phase_c_observer.py",
+    "sha256": "b175ac30b6063681778559642065f4a33a78cfc970bd559c652e591f37bf8a45",
+    "changed": false,
+    "reason": "_sent_task_gold and gold_observation both delegate directly to score_facts; no duplicated normalizer exists. Same fix closes both observations."
+  },
+  "preserved": [
+    "source identity",
+    "page anchor",
+    "source role",
+    "native-range parser boundary",
+    "complete group membership",
+    "claim factual/context partition",
+    "original raw text and IDs",
+    "digit/digit and decimal/comma/English token boundaries",
+    "gold contents"
+  ],
+  "cleanup": {
+    "scratch": ".c3cir",
+    "restored_absent": true
+  },
+  "new_pdf_sdk_calls": 0,
+  "new_model_calls": 0,
+  "downloads": 0,
+  "scope_limits": [
+    "Quote observation after typed source-owner validation is not PDF ingress proof or arbitrary claim entailment.",
+    "CJK range follows the existing boundary alphabet; Latin broken words and numeric token repair remain unsupported.",
+    "Actual selected/sent source 3/3 does not assert generated-summary factual/coverage quality or cache recovery.",
+    "Existing enumeration-delimiter actual-line-break handling remains unchanged."
+  ],
+  "next": "ROOT independent review and actual summary/recovery work; author makes no self-review approval or paid-call request."
+}

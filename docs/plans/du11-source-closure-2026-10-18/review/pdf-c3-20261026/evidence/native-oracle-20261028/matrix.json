@@ -1,0 +1,35 @@
+{
+  "exit": 0,
+  "seconds": 10.621,
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-m",
+    "pytest",
+    "-q",
+    "-o",
+    "addopts=",
+    "-o",
+    "cache_dir=C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\c3-20261028\\native-oracle-fix\\pytest-cache",
+    "--basetemp=C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.c3cir\\pytest",
+    "--junitxml=C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\c3-20261028\\native-oracle-fix\\matrix.xml",
+    "tools/document_understanding_benchmark/tests/test_native_range_quote_boundaries.py",
+    "tests/unit/document_understanding_selection/test_closed_group_support.py",
+    "tests/unit/test_closed_group_numeric_boundary.py",
+    "tests/unit/test_narrative_claim_grounding.py",
+    "tests/unit/test_phase_c_observer.py",
+    "tests/unit/test_scoped_source_admission.py",
+    "tests/unit/document_understanding_selection/test_attributed_context_quote_oracle.py",
+    "tests/unit/document_understanding_selection/test_reading_display_adapter.py"
+  ],
+  "targets": [
+    "tools/document_understanding_benchmark/tests/test_native_range_quote_boundaries.py",
+    "tests/unit/document_understanding_selection/test_closed_group_support.py",
+    "tests/unit/test_closed_group_numeric_boundary.py",
+    "tests/unit/test_narrative_claim_grounding.py",
+    "tests/unit/test_phase_c_observer.py",
+    "tests/unit/test_scoped_source_admission.py",
+    "tests/unit/document_understanding_selection/test_attributed_context_quote_oracle.py",
+    "tests/unit/document_understanding_selection/test_reading_display_adapter.py"
+  ],
+  "scratch_restored_absent": true
+}

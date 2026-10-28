@@ -147,7 +147,8 @@ def _versions(*, pdf_frontend: bool = False, mime_type: str | None = None,
             "continuity_algorithms": _digest({name: sha256(
                 _module_path(name).read_bytes().replace(b"\r\n", b"\n")).hexdigest()
                 for name in ("company_wiki.document_understanding.narrative_continuity",
-                             "company_wiki.document_understanding.indented_tail_geometry")}),
+                             "company_wiki.document_understanding.indented_tail_geometry",
+                             "company_wiki.document_understanding.hanging_indent_geometry")}),
             "table_purpose": table_purpose.FEATURE_VERSION,
             "script_matching": text_matching.SCRIPT_MATCHING_VERSION,
             "pipeline": PIPELINE_FEATURE_VERSION, "summary": SUMMARY_FEATURE_VERSION,

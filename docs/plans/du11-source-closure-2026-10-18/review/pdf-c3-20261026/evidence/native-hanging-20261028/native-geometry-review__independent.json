@@ -1,0 +1,172 @@
+{
+  "schema_version": "independent-native-hanging-geometry-review/1",
+  "review_state": "FINAL",
+  "status": "PASS",
+  "reviewer": "/root/c3_semantic_final_20261028",
+  "author": "/root",
+  "files": [
+    {
+      "path": "src/company_wiki/document_understanding/hanging_indent_geometry.py",
+      "lf_sha256": "11e7f6e3549a8970f8b34f13250850f20a8fae1aef08a19714f55f74c96fe161"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/narrative_continuity.py",
+      "lf_sha256": "b907b2e184613c388fae92fc46f1d552a934c4abf5a6e58036a6b96ef716eee4"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/observation_adapter.py",
+      "lf_sha256": "dc31fce72be2820c13b77e2042f66f3db52c07bb8f94d96e6b075b59fcd33dfa"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/decision_inventory.py",
+      "lf_sha256": "90ca4452b6879387a1474af3639f760804e14ad33b9ffe7449d827753b2e13fa"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_evidence.py",
+      "lf_sha256": "4982bca4385c82e637fd7fa2a84100b9b86b7bc47a745c496740c4e8e3aec8b8"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_pdf_layout.py",
+      "lf_sha256": "b34a0fdf5a709a7098b3b491a3d71620a2ea75591d788cf9cfbc9591e0f77d20"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_native_hanging_indent.py",
+      "lf_sha256": "995bfa207d4e47b7ee5ec81258ba5f2cad60e10f330243bfa00f11df7c0fe5f3"
+    },
+    {
+      "path": "tests/unit/du11_production/test_native_prose_continuity.py",
+      "lf_sha256": "eb6aab9b5178278c249ee1be4ffe3b9c6bbba190bb06f6c7cf7a1d7e6bffff21"
+    }
+  ],
+  "same_lf_before_after": true,
+  "refreeze_note": "The test-only final SHA995bfa... was already present in the independent pre-test before.json and executed71-case scope. Refreeze receipt matches all8; no old test SHA is rebound.",
+  "open_findings": [],
+  "closed_pre_review_notes": [
+    {
+      "id": "NG-IR-01",
+      "issue": "New helper absent from reading dependency hash closure",
+      "resolution": "decision_inventory includes hanging_indent_geometry in continuity_algorithms. Independent in-memory helper byte change invalidates the inventory without editing any source file."
+    },
+    {
+      "id": "NG-IR-02",
+      "issue": "A real new bullet at marker margin could bypass the hanging-only bullet guard and join via ordinary wrapped flow",
+      "resolution": "Same-page distinct-block statement boundary rejects a new bullet while preserving measured physical adjacency for source explicit-qualifier closure; all4 independent marker cases pass."
+    }
+  ],
+  "tests": {
+    "total": 71,
+    "passed": 71,
+    "failed": 0,
+    "seconds": 3.06,
+    "independent_cases": 23,
+    "author_neutral_cases": 34,
+    "native_producer_cases": 14,
+    "log": "tests.log",
+    "junit": "tests.xml",
+    "warning": "Known asyncio_mode config warning with plugin autoload disabled; no failures"
+  },
+  "independent_checks": [
+    "Missing/NaN/infinite/bool origin/box/direction or unknown producer abstains",
+    "Existing source, page, ordinal, role, section and coordinate-frame barriers remain authoritative",
+    "New bullet at marker margin remains a separate statement but retains physical adjacency",
+    "Helper implementation SHA participates in current inventory",
+    "Original retained source snapshot spans match replay bbox/origin and exact text; helper changes no unit",
+    "16/32/64 body spans visited17/33/65 times and charged36/68/132 units, one linear pass",
+    "Originals IDs/text/locators and legacy parse result remain equal in native producer fixtures",
+    "Measured font, rotation, NFC composition and exact-span abstention controls pass",
+    "One original native textpage read in synthetic default-parse bullet fixtures; no added parse"
+  ],
+  "source_evidence": {
+    "source_sha256": "4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+    "page": 13,
+    "raw_snapshot": "page13-native.json",
+    "measured_marker_x0": 99.19459533691406,
+    "measured_body_x0": 121.87459564208984,
+    "continuation_x0": 121.87457275390625,
+    "font_size": 9,
+    "marker_body_baseline": 276.1259765625,
+    "body_to_continuation_x0_delta": -2.288818359375e-05,
+    "vertical_gap": 3.555023193359375,
+    "native_window_member_count": 4,
+    "native_window_bases": [
+      "native_hanging_indent",
+      "native_block_character_ranges",
+      "native_wrapped_line"
+    ],
+    "interpretation": "The block bbox begins at the observed bullet marker. Complete same-baseline body spans prove the true prose margin; existing tolerance is applied to that measured body, not loosened."
+  },
+  "production_replay_author_receipt_reviewed": {
+    "seconds": 8.888,
+    "work_used": 5174255,
+    "selected_count": 112,
+    "parsed_units": 2330,
+    "source_unchanged": true,
+    "sdk_runs": 0,
+    "model_post": 0,
+    "limits_raised": false,
+    "selected_gold_group_id": "urn:company-wiki:reading-group:sha256:27a6966534749a8a8762f37e0f76315520bd90504bd0912f6760538dc75bb158",
+    "support_text_count": 1,
+    "all_industry_cloud_gold_anchors_in_one_support": true,
+    "scope": "Saved author production-profile native selector replay, checked for source geometry and actual group support. Not an independently repeated full-source parse or final summary acceptance."
+  },
+  "architecture": {
+    "single_geometry_owner": "hanging_indent_geometry only measures actual marker/body spans; existing continuity owner retains boundary/scope/order/style/column guards",
+    "canonical_source": "New bbox/origin/direction live in reading geometry hints; original text, IDs, locators are not rewritten",
+    "bounded_work": "Existing limits/caps unchanged; helper precharges spans+text and traverses spans once, producer uses existing interval indexes",
+    "versions": {
+      "continuity": "native-narrative-continuity/10",
+      "adapter": "du-observation-adapter/9",
+      "prose": "pdf-native-prose-layout/2",
+      "pdf_layout": "pdf-reading-layout/3",
+      "helper": "native-hanging-indent/1"
+    },
+    "no_company_or_quota_patch": true
+  },
+  "limits": [
+    "No paid final summary or lifecycle certified by native source closure",
+    "Real configured Docling startup timeout remains a separate OPEN runtime diagnosis, not solved by this native proof",
+    "No independent full source-reading domain rerun; ROOT domain and focused fixture repair receipts remain separate",
+    "Cross-source actual production control is ROOT work; independent review verifies synthetic source/scope barriers and retained HK geometry"
+  ],
+  "evidence": [
+    {
+      "path": ".planning/c3-20261028/native-geometry-diagnosis/freeze.json",
+      "sha256": "1ce2e71b1e11b044e2b7010d4aa14796839ecd92bb1e8cf08e9ce5c6a041d245"
+    },
+    {
+      "path": ".planning/c3-20261028/native-geometry-diagnosis/page13-native.json",
+      "sha256": "aebc6fee23fcab2cac3c920201daa516917dece2636cd51c016f1b0f9be0f56f"
+    },
+    {
+      "path": ".planning/c3-20261028/native-geometry-diagnosis/native-hanging-replay.json",
+      "sha256": "fb15c802fa814afddfa8f7d20df364c68eb2ea1e486c7a341fa4158cfc958479"
+    },
+    {
+      "path": ".planning/c3-20261028/native-geometry-diagnosis/native-hanging-production-replay.json",
+      "sha256": "5769fe30e79ee3dd02502c0755375c17d752c236e134f9bbb0f3498339e578f6"
+    },
+    {
+      "path": ".planning/c3-20261028/native-geometry-review/tests.log",
+      "sha256": "4a186e7f58d3f12545d9f615bbbbf4b6f889b613bd46ec27beb8c74b1d2d1c87"
+    },
+    {
+      "path": ".planning/c3-20261028/native-geometry-review/tests.xml",
+      "sha256": "ba76d6def9893ed7e78c59118498790367d63f28a02b5911083680a840de898a"
+    },
+    {
+      "path": ".planning/c3-20261028/native-geometry-review/test_independent_native_geometry.py",
+      "sha256": "d5fde54b49a4ff01630be175a64668de324a01ad93569065c1179dcdf782f76e"
+    }
+  ],
+  "cleanup": {
+    "own_temp": ".c3ngi",
+    "removed": true,
+    "parent_environment_unchanged": true,
+    "product_existing_tests_pwf_production_original_writes": false,
+    "new_original_pdf_reads": 0,
+    "docling_or_model_sdk_runs": 0,
+    "http_model_or_download_calls": 0,
+    "background_review_processes": 0,
+    "synthetic_native_pdf_fixtures_only": true
+  }
+}

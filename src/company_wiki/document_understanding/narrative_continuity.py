@@ -19,8 +19,9 @@ from typing import Any
 from company_wiki.resource_budget import WorkBudget, WorkBudgetExceeded
 
 from .indented_tail_geometry import indented_terminal_tail_proof
+from .hanging_indent_geometry import hanging_body_proof, is_bullet_start
 
-NARRATIVE_CONTINUITY_FEATURE_VERSION = "native-narrative-continuity/9"
+NARRATIVE_CONTINUITY_FEATURE_VERSION = "native-narrative-continuity/10"
 _LIMITS = {
     "max_units": 50_000,
     "max_window_units": 8,
@@ -580,6 +581,14 @@ class _Analysis:
                     "column_proof": column_proof}
         overlap = min(a[2], b[2]) - max(a[0], b[0])
         gap = b[1] - a[3]
+        hanging = None
+        if abs(a[0] - b[0]) > 2.1 * size:
+            hanging = hanging_body_proof(left.unit, bbox=a, page=left.page,
+                frame=str(left.frame[0]), size=size, charge=self.charge)
+            if hanging is not None:
+                a = hanging['body_bbox']
+                overlap = min(a[2], b[2]) - max(a[0], b[0])
+                gap = b[1] - a[3]
         if (
             abs(a[0] - b[0]) > 2.1 * size
             or overlap <= 0
@@ -594,7 +603,8 @@ class _Analysis:
         return {
             "left": left.unit["unit_id"],
             "right": right.unit["unit_id"],
-            "basis": "native_wrapped_line",
+            "basis": "native_hanging_indent" if hanging is not None else "native_wrapped_line",
+            **({"body_proof": hanging} if hanging is not None else {}),
             "x0_delta": b[0] - a[0],
             "vertical_gap": gap,
             "measured_font_size": size,
@@ -849,7 +859,8 @@ def build_native_continuity(
                     and state.charge()):
                 state.adjacency_edges.append({**adjacent, "source_id": left.source,
                     "basis": "source_body_adjacency", "physical_basis": adjacent["basis"]})
-            if left.page == current.page and left.block != current.block and _terminal(left.unit["text"]):
+            if (left.page == current.page and left.block != current.block
+                    and (_terminal(left.unit["text"]) or is_bullet_start(current.unit["text"]))):
                 edge = None
         if (run and current is not None and edge is None and source_page_flow is not None
                 and current.page == run[-1].page + 1

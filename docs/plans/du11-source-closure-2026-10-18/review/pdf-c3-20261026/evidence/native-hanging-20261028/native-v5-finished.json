@@ -1,0 +1,64 @@
+{
+  "base_head": "e3411d2e2961d4289caf427be84558e054410310",
+  "frozen_files": [
+    {
+      "path": "src/company_wiki/document_understanding/hanging_indent_geometry.py",
+      "lf_sha256": "11e7f6e3549a8970f8b34f13250850f20a8fae1aef08a19714f55f74c96fe161"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/narrative_continuity.py",
+      "lf_sha256": "b907b2e184613c388fae92fc46f1d552a934c4abf5a6e58036a6b96ef716eee4"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/observation_adapter.py",
+      "lf_sha256": "dc31fce72be2820c13b77e2042f66f3db52c07bb8f94d96e6b075b59fcd33dfa"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/decision_inventory.py",
+      "lf_sha256": "90ca4452b6879387a1474af3639f760804e14ad33b9ffe7449d827753b2e13fa"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_evidence.py",
+      "lf_sha256": "4982bca4385c82e637fd7fa2a84100b9b86b7bc47a745c496740c4e8e3aec8b8"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_pdf_layout.py",
+      "lf_sha256": "b34a0fdf5a709a7098b3b491a3d71620a2ea75591d788cf9cfbc9591e0f77d20"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_native_hanging_indent.py",
+      "lf_sha256": "995bfa207d4e47b7ee5ec81258ba5f2cad60e10f330243bfa00f11df7c0fe5f3"
+    },
+    {
+      "path": "tests/unit/du11_production/test_native_prose_continuity.py",
+      "lf_sha256": "eb6aab9b5178278c249ee1be4ffe3b9c6bbba190bb06f6c7cf7a1d7e6bffff21"
+    }
+  ],
+  "pid": 20944,
+  "output": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\c3-20261028\\hk-native-v5",
+  "owned_tmp": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c328v5",
+  "protected_count": 7,
+  "mother_before": {
+    "charged_tokens": 1800368,
+    "charged_micro_usd": 727945,
+    "new_unknown_count": 6,
+    "token_limit": 10000000,
+    "micro_usd_limit": 20000000,
+    "prior_unknown7_retained": 7
+  },
+  "started_at": "2026-10-28T11:18:25.316329+00:00",
+  "runtime_config": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\c3-20261026\\pdf-env\\runtime-4g-v2.json",
+  "scope": "one canonical live attempt; no outer premature kill after possible paid POST",
+  "exit_code": 1,
+  "seconds": 144.15,
+  "mother_after": {
+    "charged_tokens": 1800368,
+    "charged_micro_usd": 727945,
+    "new_unknown_count": 6,
+    "token_limit": 10000000,
+    "micro_usd_limit": 20000000,
+    "prior_unknown7_retained": 7
+  },
+  "frozen_files_unchanged": true,
+  "cleanup_pending": true
+}

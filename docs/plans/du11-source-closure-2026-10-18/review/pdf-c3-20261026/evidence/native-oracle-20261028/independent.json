@@ -1,0 +1,202 @@
+{
+  "schema_version": "independent-native-range-oracle-review/1",
+  "review_state": "FINAL",
+  "status": "PASS",
+  "reviewer": "/root/c3_semantic_final_20261028",
+  "author": "/root/ci_source_controls_review",
+  "handoff": "handoff.json",
+  "files": [
+    {
+      "path": "tools/document_understanding_benchmark/closed_group_support.py",
+      "sha256": "67180cdee5e260b9e25430b4b9489f9806a33d216ed50f49ae6d52e272de85b9",
+      "lf_sha256": "4f0b7127384339bebaba1d7150436d01ebfa08ecce4e4a70dbac2f042c336af9"
+    },
+    {
+      "path": "tools/document_understanding_benchmark/tests/test_native_range_quote_boundaries.py",
+      "sha256": "590835cf5a5b4c00a4ebf6ae08c12068fd46d7c670af60efe1b88b4fd8089bab",
+      "lf_sha256": "590835cf5a5b4c00a4ebf6ae08c12068fd46d7c670af60efe1b88b4fd8089bab"
+    }
+  ],
+  "same_raw_and_lf_before_after": true,
+  "open_findings": [],
+  "closed_finding": {
+    "id": "NV5-IR-01",
+    "resolution": "_range_fold observes a single actual source line break before general whitespace folding and reuses the existing CJK boundary predicate with _join. Complete quantity/unit quote now matches without modifying source text, IDs, locator, gold or citation support."
+  },
+  "source_review": [
+    "Diff is only shared boundary extraction, bounded actual-linebreak folding and neutral tests. Existing role/source/page/parser/citation and native membership guards remain intact.",
+    "Inline spaces, blank lines, English tokens, digit/digit, exponent/decimal/comma/sign boundaries stay separated.",
+    "The pre-existing enumeration-delimiter exception is unchanged; no general source text repair or arbitrary whitespace deletion.",
+    "Regex performs local line-edge substitution; no new whole-document merging, source acquisition, model call or resource-cap change.",
+    "phase_c_observer unchanged and delegates both selected-source and prepared-task observations to the same oracle."
+  ],
+  "tests": {
+    "total": 66,
+    "passed": 66,
+    "failed": 0,
+    "seconds": 4.51,
+    "independent_cases": 16,
+    "author_neutral_cases": 45,
+    "legacy_grounding_cases": 5,
+    "log": "independent-tests.log",
+    "junit": "independent-tests.xml",
+    "warning": "Known asyncio_mode config warning with plugin autoload disabled; no failure"
+  },
+  "independent_controls": [
+    "Chained CJK/quantity wraps preserve correct text without mutating EvidenceSpan",
+    "Single CR/LF/CRLF with observed horizontal padding accepted",
+    "Exponent/sign/decimal digit splits, English adjacency, inline CJK space and blank lines cannot invent contiguous facts",
+    "Complete wrapped native range in context cannot donate its number to a claim",
+    "Exact saved typed v5 material gives3/3 and t33, while altered prepared task body fails compiler material-equivalence assertion",
+    "Saved20-claim historical response still decodes unchanged; all6 reviewed wrong claims remain unsupported",
+    "Partial factual citation and wrong period/currency/negation controls remain strict"
+  ],
+  "actual_offline_observation": {
+    "source_run_id": "phaseC-090-64100fdc01a5",
+    "full_selection": {
+      "scope": "full_selected_source_availability",
+      "facts": [
+        {
+          "id": "hk-industry-cloud-closure",
+          "supported": true,
+          "all_anchors_individually_present": true,
+          "importance": "critical"
+        },
+        {
+          "id": "hk-rd-period-scope",
+          "supported": true,
+          "all_anchors_individually_present": true,
+          "importance": "critical"
+        },
+        {
+          "id": "hk-outlook-not-actual",
+          "supported": true,
+          "all_anchors_individually_present": true,
+          "importance": "critical"
+        }
+      ],
+      "required_count": 3,
+      "supported_count": 3,
+      "missing_ids": []
+    },
+    "prepared_task_support": {
+      "scope": "source_support_in_current_request_tasks",
+      "request_scope": "full_request",
+      "sent_task_keys": [
+        "t1",
+        "t2",
+        "t3",
+        "t4",
+        "t5",
+        "t6",
+        "t7",
+        "t8",
+        "t9",
+        "t10",
+        "t11",
+        "t12",
+        "t13",
+        "t14",
+        "t15",
+        "t16",
+        "t17",
+        "t18",
+        "t19",
+        "t20",
+        "t21",
+        "t22",
+        "t23",
+        "t24",
+        "t25",
+        "t26",
+        "t27",
+        "t28",
+        "t29",
+        "t30",
+        "t31",
+        "t32",
+        "t33",
+        "t34",
+        "t35",
+        "t36",
+        "t37",
+        "t38",
+        "t39",
+        "t40",
+        "t41",
+        "t42",
+        "t43",
+        "t44",
+        "t45",
+        "t46",
+        "t47",
+        "t48",
+        "t49",
+        "t50",
+        "t51",
+        "t52",
+        "t53",
+        "t54",
+        "t55"
+      ],
+      "facts": [
+        {
+          "id": "hk-industry-cloud-closure",
+          "supported": true,
+          "supported_task_keys": [
+            "t33"
+          ]
+        },
+        {
+          "id": "hk-rd-period-scope",
+          "supported": true,
+          "supported_task_keys": [
+            "t30"
+          ]
+        },
+        {
+          "id": "hk-outlook-not-actual",
+          "supported": true,
+          "supported_task_keys": [
+            "t31"
+          ]
+        }
+      ],
+      "required_count": 3,
+      "supported_count": 3,
+      "missing_ids": [],
+      "not_sent_ids": [],
+      "summary_claim_coverage": "not_evaluated"
+    },
+    "input_sha256": {
+      ".planning/c3-20261028/hk-native-v5/materials/phaseC-090-64100fdc01a5.selection.json.gz": "497d9d140461f459c775d189bbc80d88a3ad847dfd226fecd88698b03f97ff21",
+      ".planning/c3-20261028/hk-native-v5/materials/phaseC-090-64100fdc01a5.input.json.gz": "767d2c3a0e47336d5553b8e23a001d56737f742b8753ce3f26fcb1b571d23adb",
+      "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/hk-development-gold.json": "2d6391a1f3f6d0c6e9bc7629e327f54c5bb4d2c651b202d38dd4f4364dbba568"
+    },
+    "all_input_bytes_unchanged": true,
+    "compiler_material_equivalence_assertions": "PASS via unchanged gold_observation",
+    "scope_note": "Observer field sent_tasks names the compiled/prepared request scope. This source run had0POST; replay sends nothing. Source3/3 is not a generated-summary verdict.",
+    "new_POST": 0,
+    "new_model_calls": 0,
+    "new_PDF_or_Docling_runs": 0
+  },
+  "unchanged_observer": {
+    "path": "tools/document_understanding_benchmark/phase_c_observer.py",
+    "sha256": "b175ac30b6063681778559642065f4a33a78cfc970bd559c652e591f37bf8a45"
+  },
+  "limitations": [
+    "No final summary or paid lifecycle/recovery accepted by this oracle review",
+    "Saved v5 remains historically PRE_RESERVATION_BLOCKED; the new offline result does not rewrite that receipt",
+    "Optional Docling startup remains a separate OPEN issue",
+    "Quote observation presumes typed source-owner validation; it is not ingress geometry proof or general natural-language entailment"
+  ],
+  "cleanup": {
+    "own_temp": ".c3ori",
+    "removed": true,
+    "parent_environment_unchanged": true,
+    "background_review_processes": 0,
+    "source_author_tests_gold_observer_pwf_original_config_writes": false,
+    "network_or_downloads": 0,
+    "PDF_SDK_or_model_calls": 0
+  }
+}

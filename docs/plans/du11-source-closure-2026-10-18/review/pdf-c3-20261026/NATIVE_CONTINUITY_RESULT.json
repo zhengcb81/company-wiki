@@ -1,0 +1,520 @@
+{
+  "status": "SOURCE_AND_ENGINEERING_PASS_SUMMARY_NOT_EXECUTED",
+  "base_commit": "e3411d2e2961d4289caf427be84558e054410310",
+  "independent_tests": 71,
+  "root_related_tests": 114,
+  "full_domain": {
+    "passed": 2459,
+    "failed_new_fixture": 1,
+    "skipped": 11,
+    "fixture_only_corrected": true,
+    "runtime_unchanged_after_domain": true,
+    "repeat_full_domain": false
+  },
+  "counts_overlap": true,
+  "source_selected_gold_group_complete": true,
+  "native_selection_seconds": 8.888,
+  "native_work_units": 5174255,
+  "selected_spans": 112,
+  "mypy": "393 files PASS",
+  "real_status": "PRE_RESERVATION_BLOCKED",
+  "real_model_posts": 0,
+  "real_seconds": 144.15,
+  "mother_before": {
+    "charged_tokens": 1800368,
+    "charged_micro_usd": 727945,
+    "new_unknown_count": 6,
+    "token_limit": 10000000,
+    "micro_usd_limit": 20000000,
+    "prior_unknown7_retained": 7
+  },
+  "mother_after": {
+    "charged_tokens": 1800368,
+    "charged_micro_usd": 727945,
+    "new_unknown_count": 6,
+    "token_limit": 10000000,
+    "micro_usd_limit": 20000000,
+    "prior_unknown7_retained": 7
+  },
+  "SDK_startup_isolation": "DESIGNED_NOT_IMPLEMENTED",
+  "publication": "PENDING",
+  "real_review": {
+    "schema_version": "independent-native-v5-content-review/1",
+    "review_state": "FINAL",
+    "status": "PARTIAL",
+    "classification": "FALSE_NEGATIVE_ORACLE",
+    "reviewer": "/root/c3_semantic_final_20261028",
+    "run_id": "phaseC-090-64100fdc01a5",
+    "producer_status": "PRE_RESERVATION_BLOCKED",
+    "source_content_support": "PASS_ALL_THREE_CRITICAL_PREPARED_SCOPES",
+    "producer_gold_result": "2/3 (cloud false; all_anchors_individually_present false)",
+    "final_summary_acceptance": "NOT_EVALUATED_NO_RESPONSE",
+    "identity": {
+      "source_sha256": "4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+      "prepared_http_body_sha256": "02a04f4da82263bde62321a8848f950ebd527167f6b69a5d709ad6d22d8ee315",
+      "prepared_http_body_bytes": 66581,
+      "input_gzip_sha256": "767d2c3a0e47336d5553b8e23a001d56737f742b8753ce3f26fcb1b571d23adb",
+      "model_selected_input_sha256": "37895a86f1e4cf8032fad98c2856297af9fdc26c09fa7e1bddf2e55b19d7892c",
+      "material_sha256": "75968bdfbead8af9a453627350e2ed50311a8a9f18b6852c521f123441c11695",
+      "planned_generation_sha256": "418302e0a2708c29458b86773f173b97a5239cd267359d4f795b1ddf9b839e51",
+      "selected_uncompressed_sha256": "ef933da9308a6743574b1ade8b04721d9f0006315e03078a1a61eaa106f7758a",
+      "selected_uncompressed_bytes": 423013,
+      "selected_gzip_sha256": "497d9d140461f459c775d189bbc80d88a3ad847dfd226fecd88698b03f97ff21",
+      "actual_cloud_text_sha256": "6a6152d09a439460a702e4ab391707fbb34317157cf5ab3026db38a1162f44a1",
+      "replay_cloud_text_sha256": "6a6152d09a439460a702e4ab391707fbb34317157cf5ab3026db38a1162f44a1",
+      "artifact_sha256": null,
+      "bundle_sha256": null,
+      "response_sha256": null,
+      "final_sha256": null
+    },
+    "exact_cloud_scope": {
+      "task": "t33",
+      "part": "p2",
+      "source_key": "s35",
+      "support_parts": [
+        "p2"
+      ],
+      "group": {
+        "citation_views": [
+          {
+            "context_evidence_ids": [
+              "urn:company-wiki:evidence-span:sha256:4205dfeafe33386b0eb7fdae54f79a7495043804671710f601b081e6035dfc92"
+            ],
+            "support_evidence_ids": [
+              "urn:company-wiki:evidence-span:sha256:0f887d75ce8ca0b8f1286183e21da451e63f4e297e4efd79664d9414c7a26430"
+            ]
+          }
+        ],
+        "evidence_ids": [
+          "urn:company-wiki:evidence-span:sha256:4205dfeafe33386b0eb7fdae54f79a7495043804671710f601b081e6035dfc92",
+          "urn:company-wiki:evidence-span:sha256:0f887d75ce8ca0b8f1286183e21da451e63f4e297e4efd79664d9414c7a26430"
+        ],
+        "group_id": "urn:company-wiki:reading-group:sha256:27a6966534749a8a8762f37e0f76315520bd90504bd0912f6760538dc75bb158",
+        "kind": "native_continuity",
+        "section_role": "unknown"
+      },
+      "span_id": "urn:company-wiki:evidence-span:sha256:0f887d75ce8ca0b8f1286183e21da451e63f4e297e4efd79664d9414c7a26430",
+      "locator": "loc:v1/page:13/paragraph:9/chars:245-356",
+      "page": 13,
+      "unit_kind": "pdf_native_range",
+      "source_role": "company_filing",
+      "selection_reasons": [
+        "reading_plan",
+        "business_revenue_measure"
+      ],
+      "value_band": "meaningful_fact",
+      "raw_text": "• \n來自行業雲服務的收入為人民幣1,340.4百萬元（187.1百萬美元），較二零二四年同期的人民幣1,245.4\n百萬元增加7.6%。該同比增加主要是由於不斷增長的IT需求及我們向垂直行業客戶複製行業解決方案\n的能力。",
+      "source_unit_ids": [
+        "urn:company-wiki:narrative-unit:sha256:b11bcdfc7a70119162ae056aec1e118ae129a179db4dc76676c8211997fefd01",
+        "urn:company-wiki:narrative-unit:sha256:20f67260806fa261db163e8d55c01cb65518607208afbd8f0bee51dca311b4ed",
+        "urn:company-wiki:narrative-unit:sha256:618c9e9444f23fd84af4e6cb9cae7ea3adb8232ad8e1d5553994a63b569b024a",
+        "urn:company-wiki:narrative-unit:sha256:df657668dbf678513d1ab685b068334d701e7cd9f366da7e3b4ea749445c1ba6"
+      ],
+      "native_member_count": 4,
+      "reading": {
+        "priority": 1,
+        "purposes": [
+          "operating_metric"
+        ],
+        "score": 3,
+        "value_band": "meaningful_fact"
+      },
+      "context_texts": [
+        "管理層討論與分析"
+      ]
+    },
+    "anchor_comparison": [
+      {
+        "anchor": "來自行業雲服務的收入為人民幣1,340.4百萬元",
+        "literal_in_actual_span": true,
+        "existing_range_fold_supported": true,
+        "after_display_newline_removal_in_same_span": true
+      },
+      {
+        "anchor": "較二零二四年同期的人民幣1,245.4百萬元增加7.6%",
+        "literal_in_actual_span": false,
+        "existing_range_fold_supported": false,
+        "after_display_newline_removal_in_same_span": true
+      },
+      {
+        "anchor": "主要是由於不斷增長的IT需求",
+        "literal_in_actual_span": true,
+        "existing_range_fold_supported": true,
+        "after_display_newline_removal_in_same_span": true
+      },
+      {
+        "anchor": "向垂直行業客戶複製行業解決方案的能力",
+        "literal_in_actual_span": false,
+        "existing_range_fold_supported": true,
+        "after_display_newline_removal_in_same_span": true
+      }
+    ],
+    "finding": {
+      "id": "NV5-IR-01",
+      "priority": "P2",
+      "owner": "tools/document_understanding_benchmark/closed_group_support.py::_range_fold",
+      "status": "OPEN_PENDING_SEPARATE_FIX_REVIEW",
+      "root_cause": "The range quote observer folds native newline to ASCII space but only removes CJK-to-CJK spaces. At the verified native quantity/unit wrap 1,245.4\\n百萬元, it retains 1,245.4 百萬元, so the exact contiguous gold comparison fails. The same phrase is accepted by _join when represented as separate proven source fragments, an inconsistent oracle observation across equivalent source carriers.",
+      "sole_failed_anchor": "較二零二四年同期的人民幣1,245.4百萬元增加7.6%",
+      "actual_boundary": "1,245.4\n百萬元",
+      "old_folded_boundary": "1,245.4 百萬元",
+      "gold_boundary": "1,245.4百萬元",
+      "existing_fold_matches": [
+        true,
+        false,
+        true,
+        true
+      ],
+      "diagnosed_oracle_lf_sha256": "06698b1eacf9c384581f0f960e31d754d7701333b9a24c8fc9c848a41c206403",
+      "not_a_product_source_failure": true,
+      "safe_fix_scope": "Source-bound native range quote observation only; retain original text/IDs/gold, decimals/digit-digit/English/inline-space and source/citation boundaries. No broad whitespace deletion."
+    },
+    "comparison_to_native_production_replay": {
+      "cloud_support_text_byte_equal": true,
+      "cloud_group_id_equal": true,
+      "all_groups_equal": true,
+      "group_count_actual": 55,
+      "group_count_replay": 55,
+      "entire_selection_trace_equal": true,
+      "reading_policy_version_equal": true,
+      "constraints_equal": true,
+      "selection_diagnostics_equal": true,
+      "deferred_and_unread_equal": true,
+      "only_different_reading_context_keys": [
+        "layout_coverage"
+      ],
+      "only_different_native_frontend_keys": [
+        "diagnostics",
+        "reading_execution"
+      ],
+      "source_unit_count_both": 2330,
+      "conclusion": "No cloud source anchor, grouping, ordering, plan or admission flag divergence. Native closure reached the real compiled task unchanged; optional SDK runtime diagnostics differ."
+    },
+    "other_critical_scopes": [
+      {
+        "id": "hk-rd-period-scope",
+        "task": "t30",
+        "prepared_support": "PASS",
+        "reporting_period_expense": "RMB420.5m/USD58.7m",
+        "headcount": "1094 as of2025-06-30",
+        "summary_status": "NOT_EVALUATED_NO_FINAL"
+      },
+      {
+        "id": "hk-outlook-not-actual",
+        "task": "t31",
+        "prepared_support": "PASS",
+        "modality": "H2 展望/將/旨在 remain future/aimed in source",
+        "summary_status": "NOT_EVALUATED_NO_FINAL"
+      }
+    ],
+    "input_scope": {
+      "prepared_tasks": 55,
+      "actual_http_tasks_sent": 0,
+      "all_prepared_supports_checked_against_selected_groups": true,
+      "selected_evidence_count": 112,
+      "selected_characters": 5500,
+      "selection": {
+        "candidate_count": 1042,
+        "coverage_complete": false,
+        "dropped_financial_count": 616,
+        "lines_total": 0,
+        "omitted_candidate_count": 930,
+        "pages_read": 75,
+        "pages_total": 75,
+        "selected_count": 112,
+        "source_units": 1794,
+        "status": "partial",
+        "tables_scanned": 1,
+        "tables_total": 2
+      },
+      "output_plan": {
+        "configured_output_tokens": 8192,
+        "coverage": "selected_source_tasks_only",
+        "max_claims": 40,
+        "max_claims_per_task": 2,
+        "planning": "soft_target_within_existing_caps",
+        "target_claim_count": 24,
+        "target_text_chars": 240
+      }
+    },
+    "reading_execution": {
+      "accepted_groups": 0,
+      "checkpoint_protocol": "pdf-paragraph-page-checkpoints/1",
+      "completed_pages": [],
+      "last_stage": "IMPORT",
+      "pages": [
+        12,
+        17,
+        19
+      ],
+      "pending_pages": [
+        12,
+        17,
+        19
+      ],
+      "reason": "ChildTimeout",
+      "schema_version": "pdf-reading-execution/1",
+      "scope": "paragraph_boundary_proposals",
+      "seconds": 120.032,
+      "status": "native_fallback",
+      "stream_complete": false,
+      "temporary_root_restored_absent": true,
+      "truncated_final_record": false
+    },
+    "runtime_interpretation": "Requested[12,17,19], zero completed pages;120.032s timeout at last observed IMPORT. This separate startup diagnosis did not undo the native industry-cloud support. No new SDK probe was run.",
+    "lifecycle": {
+      "error": "PHASE_C_GOLD_SUPPORT_MISSING",
+      "reserved": false,
+      "model_post_attempts": 0,
+      "usage_rows": 0,
+      "tokens": 0,
+      "micro_usd": 0,
+      "mother_before_equals_after": true,
+      "mother_tokens": 1800368,
+      "mother_micro_usd": 727945,
+      "command_seconds": 140.053,
+      "activation_recovery": "NOT_RUN_PRE_RESERVATION_BLOCKED",
+      "same_run_restart": "NOT_RUN",
+      "cross_run_cache": "NOT_RUN",
+      "FF_RF_public_consumers": "NOT_RUN_NO_ARTIFACT",
+      "forecast_adoption": "NOT_EVALUATED",
+      "producer_cleanup": {
+        "protected_unchanged": true,
+        "sentinel_unchanged": true,
+        "temporary_lake_removed": true,
+        "all_prepared_protected_unchanged": true
+      }
+    },
+    "evidence": [
+      {
+        "path": ".planning/c3-20261028/hk-native-v5/overall.json",
+        "sha256": "1de15e32ed8cdfb43e84bc8fd9c8359540e18a03f3593e3eb2eaa95bcd801565"
+      },
+      {
+        "path": ".planning/c3-20261028/hk-native-v5/receipt.json",
+        "sha256": "91dd0b45725d3dba3ac08e49ed0fd1450806dc22d501f72c1cff80209526e52d"
+      },
+      {
+        "path": ".planning/c3-20261028/hk-native-v5/events.jsonl",
+        "sha256": "6bfe4c60150ee2d0edb65ad54d46e10ef6c19421cf04f9b9a98748b3926ac473"
+      },
+      {
+        "path": ".planning/c3-20261028/hk-native-v5/materials/phaseC-090-64100fdc01a5.input.json.gz",
+        "sha256": "767d2c3a0e47336d5553b8e23a001d56737f742b8753ce3f26fcb1b571d23adb"
+      },
+      {
+        "path": ".planning/c3-20261028/hk-native-v5/materials/phaseC-090-64100fdc01a5.selection.json.gz",
+        "sha256": "497d9d140461f459c775d189bbc80d88a3ad847dfd226fecd88698b03f97ff21"
+      },
+      {
+        "path": ".planning/c3-20261028/hk-native-v5/mother-after.json",
+        "sha256": "9372878767680e7876cc29de34b31d0510f8fdbe618a1d3c553edf1735f1526d"
+      },
+      {
+        "path": ".planning/c3-20261028/hk-native-v5/phaseC-090-64100fdc01a5.command.json",
+        "sha256": "56f19a4987eea379173cebd19f0f850049066c326808c8ce490044502ea9662d"
+      },
+      {
+        "path": ".planning/c3-20261028/hk-native-v5/phaseC-090-64100fdc01a5.native-usage.json",
+        "sha256": "a5338d955b09046ec0b16f3a9625b7955c763aae07dc722e474e6078745f932f"
+      },
+      {
+        "path": ".planning/c3-20261028/native-v5-launch.json",
+        "sha256": "3f468f3a3a073506bbf9b12e2b1e14a82b0c1d095e3b4ad732a639e1827c8861"
+      },
+      {
+        "path": ".planning/c3-20261028/native-geometry-diagnosis/native-hanging-production-replay.json",
+        "sha256": "5769fe30e79ee3dd02502c0755375c17d752c236e134f9bbb0f3498339e578f6"
+      },
+      {
+        "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/hk-development-gold.json",
+        "sha256": "2d6391a1f3f6d0c6e9bc7629e327f54c5bb4d2c651b202d38dd4f4364dbba568"
+      }
+    ],
+    "review_cleanup": {
+      "only_new_files": [
+        ".planning/c3-20261028/native-v5-content-review/report.md",
+        ".planning/c3-20261028/native-v5-content-review/report.json"
+      ],
+      "new_temp": false,
+      "original_pdf_reads": 0,
+      "SDK_or_worker_reruns": 0,
+      "model_network_downloads": 0,
+      "source_tests_pwf_original_config_writes": 0,
+      "previous_reports_changed": false,
+      "background_processes": 0
+    }
+  },
+  "evidence": [
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/native-hanging-20261028/native-final-review.json",
+      "sha256": "9ac609698b86f7ad0043e0d7620ad3d94b2ebcfb667788ad6f18b66b0602792c",
+      "bytes": 2119
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/native-hanging-20261028/native-geometry-diagnosis__freeze.json",
+      "sha256": "1ce2e71b1e11b044e2b7010d4aa14796839ecd92bb1e8cf08e9ce5c6a041d245",
+      "bytes": 1643
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/native-hanging-20261028/native-geometry-diagnosis__engineering-note.md",
+      "sha256": "589caa6dd7a75f5854c5d4c15a2d1d9891f8b6b3b70a483cdea1faa40aa0ec88",
+      "bytes": 2797
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/native-hanging-20261028/native-geometry-diagnosis__neutral-final-v2.log.gz",
+      "sha256": "d7f989320ec993d61cf94e3309b4f4024b4f0881ac0f64d051b597b25857462d",
+      "bytes": 659
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/native-hanging-20261028/native-geometry-diagnosis__mypy.log.gz",
+      "sha256": "ab263f6080187692dae5582005d997f516dd6ee8a484bd7c0e8e0aebbf81aace",
+      "bytes": 66
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/native-hanging-20261028/native-geometry-diagnosis__native-hanging-production-replay.json.gz",
+      "sha256": "d7bb72079bd15813631f0b9a7c3719534dcc3f55a10d7b9939ae9a997f25633b",
+      "bytes": 52481
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/native-hanging-20261028/native-domain-v1.json",
+      "sha256": "696530ac9bde0ddfd99c85bad2e8420e4c2558944465a3e7180b136f8b255a4f",
+      "bytes": 380
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/native-hanging-20261028/native-domain-v1.log.gz",
+      "sha256": "c572d7032183ca3e28ee683edfa3c507955ede05172843ca50339368b1c9b242",
+      "bytes": 2608
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/native-hanging-20261028/native-geometry-review__independent.md",
+      "sha256": "c8b4f32d8c60915e2bfa59b114a46bb29f5b5fce4034ee1a0f71ce4c88bcb200",
+      "bytes": 3441
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/native-hanging-20261028/native-geometry-review__independent.json",
+      "sha256": "9f7c3071865a3e7a61fc45d671760ab031ee2fec611c9cd664bf7fee9a62a690",
+      "bytes": 8419
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/native-hanging-20261028/native-geometry-review__design.md",
+      "sha256": "6337cfb57000ed9ca14c2537eb35a16e2e42f0a2e0d39cdd4a1a64e95710d6b7",
+      "bytes": 9208
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/native-hanging-20261028/native-geometry-review__tests.log.gz",
+      "sha256": "3a4ce50c86eda4eef7ea91314e9bf2c45d2c0b90b8359d6e2345a8e24f07324e",
+      "bytes": 765
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/native-hanging-20261028/sdk-startup-diagnosis__isolation-design.md",
+      "sha256": "3c37b7e30fd7b41958b51facb88d8943f515e31db94df2b4bba1d6529dc6b27c",
+      "bytes": 8907
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/native-hanging-20261028/sdk-startup-diagnosis__isolation-design.json",
+      "sha256": "aa8a9d84e245e1e11524a48a450f35e20bbd0d0484893fb69e8ca3018085f454",
+      "bytes": 12717
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/native-hanging-20261028/native-v5-finished.json",
+      "sha256": "7ad5818f9f41c106496b58d6dad9e25e86cae559aedf585cdeecb376660c1358",
+      "bytes": 2576
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/native-hanging-20261028/native-v5-content-review__report.json",
+      "sha256": "ae3baaa9ab5f5e27324c9b87c8fdf4f7ab3140e10ed5de00893458f6a207080b",
+      "bytes": 12815
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/native-hanging-20261028/native-v5-content-review__report.md",
+      "sha256": "fc2c28a36cd7806802443b840914a8ad79aa4673acd71fbbac68a853edda4f1a",
+      "bytes": 2831
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/native-hanging-20261028/real-v5/events.jsonl.gz",
+      "sha256": "5a5475839a1314d36ca468ef49d78cbbfc3367d850d4a1d1b33eb936dc990049",
+      "bytes": 1154
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/native-hanging-20261028/real-v5/harness-fingerprint.json.gz",
+      "sha256": "82b4de2899043633f9332a130b81e8d1ca4ba8a0bc5292aa11b012ba14bf8f80",
+      "bytes": 550
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/native-hanging-20261028/real-v5/mother-after.json.gz",
+      "sha256": "f52e096e5d3f72089dcae1e3099de1b726b095affae2ec574c1b67e4c9fef7e5",
+      "bytes": 137
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/native-hanging-20261028/real-v5/overall.json.gz",
+      "sha256": "8c082909efe70063418aebf27a1b96fd33a2095505ed29dc6afec04daf16f215",
+      "bytes": 2093
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/native-hanging-20261028/real-v5/phaseC-090-64100fdc01a5.command.json.gz",
+      "sha256": "e3c084c72c6fec0d5df5ffba76a1043093f8a3f19212c4d7f232bcdedb5a0bca",
+      "bytes": 432
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/native-hanging-20261028/real-v5/phaseC-090-64100fdc01a5.native-failures.json.gz",
+      "sha256": "d38844ddb62ac54642359d2f6e8129917684fc9472feefeb08ffe6f1822e5bc3",
+      "bytes": 311
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/native-hanging-20261028/real-v5/phaseC-090-64100fdc01a5.native-usage.json.gz",
+      "sha256": "9ee5a88c8d7dd7955e0f870eb72b92a69d3c4b7d43837f5eca5ead2e24fef6e2",
+      "bytes": 24
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/native-hanging-20261028/real-v5/phaseC-090-64100fdc01a5.stderr.log.gz",
+      "sha256": "9ceffb7310338057cfe71a4ae1e2c98d2c485d81cdef906532a801f457a38d64",
+      "bytes": 20
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/native-hanging-20261028/real-v5/phaseC-090-64100fdc01a5.stdout.json.gz",
+      "sha256": "a37f7e7e666ef8a92c581e4e3e8d9a36819816b48d4c94026438e81a02f42059",
+      "bytes": 375
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/native-hanging-20261028/real-v5/preparation.json.gz",
+      "sha256": "df3d6c8dd80731fc184eb0a0254d48df5b4dc17ab06a67ed9366911819272e56",
+      "bytes": 908
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/native-hanging-20261028/real-v5/receipt.json.gz",
+      "sha256": "edaa52a6202592d80bc98deb03dda69dc005ef113c599659560fd8bbd5bb8078",
+      "bytes": 2084
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/native-hanging-20261028/real-v5/registered-source.json.gz",
+      "sha256": "09425bb97888307502a1af0d93a2c7ac593ca3e94c7a11d9af83753e5067cb09",
+      "bytes": 831
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/native-hanging-20261028/real-v5/materials/phaseC-090-64100fdc01a5.input.json.gz",
+      "sha256": "767d2c3a0e47336d5553b8e23a001d56737f742b8753ce3f26fcb1b571d23adb",
+      "bytes": 15823
+    },
+    {
+      "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/native-hanging-20261028/real-v5/materials/phaseC-090-64100fdc01a5.selection.json.gz",
+      "sha256": "497d9d140461f459c775d189bbc80d88a3ad847dfd226fecd88698b03f97ff21",
+      "bytes": 87334
+    }
+  ],
+  "oracle": "INDEPENDENT_PASS; unchanged saved v5 full_source3/3 and actual_sent3/3; gold/input unchanged",
+  "oracle_evidence": [
+    "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/native-oracle-20261028/handoff.md",
+    "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/native-oracle-20261028/handoff.json",
+    "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/native-oracle-20261028/independent.md",
+    "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/native-oracle-20261028/independent.json",
+    "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/native-oracle-20261028/red.json",
+    "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/native-oracle-20261028/red.log.gz",
+    "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/native-oracle-20261028/green.json",
+    "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/native-oracle-20261028/green.log.gz",
+    "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/native-oracle-20261028/matrix.json",
+    "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/native-oracle-20261028/matrix.log.gz",
+    "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/native-oracle-20261028/actual-red.json",
+    "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/evidence/native-oracle-20261028/actual-green.json"
+  ]
+}

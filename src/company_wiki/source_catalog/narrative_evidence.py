@@ -75,7 +75,7 @@ from .transcript_versions import (
 NARRATIVE_PARSER_NAME = "selective_narrative_parser"
 NARRATIVE_PARSER_VERSION = QA_FRAGMENT_VERSION
 PDF_GEOMETRY_FEATURE_VERSION = "pdf-geometry/1"
-PDF_PROSE_LAYOUT_FEATURE_VERSION = "pdf-native-prose-layout/1"
+PDF_PROSE_LAYOUT_FEATURE_VERSION = "pdf-native-prose-layout/2"
 
 
 NARRATIVE_SELECTOR_NAME = "select_narrative_evidence"
@@ -994,8 +994,9 @@ def _pdf_text_blocks(
                 trim_start = len(full_text) - len(full_text.lstrip())
                 position = 0
                 fonts = []
-                for line in block.get("lines", ()):
-                    for span in line.get("spans", ()):
+                native_spans = []
+                for line_no, line in enumerate(block.get("lines", ())):
+                    for span_no, span in enumerate(line.get("spans", ())):
                         span_text = span.get("text", "")
                         end = position + len(span_text)
                         size = span.get("size")
@@ -1013,6 +1014,13 @@ def _pdf_text_blocks(
                             else None
                         )
                         if span_text.strip():
+                            native_spans.append({
+                                "char_start": max(0, position - trim_start),
+                                "char_end": min(len(text), end - trim_start),
+                                "bbox": span.get("bbox"), "origin": span.get("origin"),
+                                "direction": line.get("dir"), "line": line_no,
+                                "span": span_no, "block": raw_block_no,
+                            })
                             fonts.append(
                                 (
                                     max(0, position - trim_start),
@@ -1040,6 +1048,8 @@ def _pdf_text_blocks(
                 block_fonts[raw_block_no] = {
                     "runs": runs,
                     "ends": [run[1] for run in runs],
+                    "spans": native_spans,
+                    "span_ends": [span["char_end"] for span in native_spans],
                 }
     if geometry_out is not None:
         geometry_out.update(
@@ -1076,6 +1086,7 @@ def _project_native_prose(
         budget.charge(1 + len(units))
         geometry = state.page_geometry.get(page_number, {})
         bindings, wire = [], []
+        native_spans_by_unit = {}
         for unit in units:
             if unit.unit_kind != "pdf_text_block":
                 continue
@@ -1120,6 +1131,23 @@ def _project_native_prose(
                              "font_size": size, "font_weight": weight})
             bindings.append({"unit_id": unit.unit_id, "bbox": meta.get("bbox"),
                              "source": "pdf_native_single_textpage", "font_runs": runs})
+            fine = []
+            measured_spans = index.get("spans", ())
+            span_positions = (range(bisect_right(index.get("span_ends", ()), start), len(measured_spans))
+                              if fragment == unit.raw_text else ())
+            for position in span_positions:
+                budget.charge()
+                span = measured_spans[position]
+                a, b = span["char_start"], span["char_end"]
+                if a >= end:
+                    break
+                if a < start or b > end:
+                    continue  # A clipped span cannot prove the native body baseline.
+                fine.append({**span, "char_start": a - start, "char_end": b - start,
+                    "page": page_number, "coordinate_frame": "dict",
+                    "source": "pdf_dict_native_span", "partial_span": False,
+                    "char_alignment": "exact"})
+            native_spans_by_unit[unit.unit_id] = fine
             wire.append({"unit_id": unit.unit_id, "page": page_number, "text": unit.raw_text})
         snapshot = {"schema_version": "du-layout-snapshot/1", "pages": [{
             "page": page_number, "width": geometry.get("page_width"),
@@ -1132,6 +1160,9 @@ def _project_native_prose(
         for unit in units:
             budget.charge()
             patch = projected["unit_metadata"].get(unit.unit_id)
+            if patch:
+                patch = {**patch, "upstream_hints": {**patch["upstream_hints"],
+                    "spans": native_spans_by_unit.get(unit.unit_id, [])}}
             result.append(replace(unit, metadata={**unit.metadata, "reading_layout": {
                 "feature_version": PDF_PROSE_LAYOUT_FEATURE_VERSION, **patch}}) if patch else unit)
         return tuple(result)

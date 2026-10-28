@@ -20,7 +20,7 @@ from company_wiki.document_normalization.layout_snapshots import project_layout_
 from company_wiki.document_normalization.layout_snapshots.identity import resolve_limits
 from company_wiki.resource_budget import WorkBudget, WorkBudgetExceeded
 
-PDF_READING_LAYOUT_FEATURE_VERSION = "pdf-reading-layout/2"
+PDF_READING_LAYOUT_FEATURE_VERSION = "pdf-reading-layout/3"
 PDF_LAYOUT_CAPTURE_SCHEMA = "pdf-layout-capture/1"
 PDF_LAYOUT_CAPTURE_STRATEGY = "requested-pages/1"
 
@@ -303,6 +303,8 @@ class PdfLayoutCollector:
                             "start": start,
                             "end": end,
                             "bbox": _box(span.get("bbox")),
+                            "origin": span.get("origin"),
+                            "direction": line.get("dir"),
                             "font_size": span.get("size"),
                             "font": span.get("font"),
                             "font_weight": ("bold" if span["flags"] & 16 else "regular")
@@ -489,7 +491,7 @@ class PdfLayoutCollector:
                 spans.append(
                     {
                         k: span[k]
-                        for k in ("bbox", "native_index", "block", "line", "span")
+                        for k in ("bbox", "native_index", "block", "line", "span", "origin", "direction")
                     }
                     | {
                         "char_start": char_start,
@@ -498,6 +500,7 @@ class PdfLayoutCollector:
                         "page": record["page"],
                         "coordinate_frame": record["coordinate_frame"],
                         "source": "pdf_dict_native_span",
+                        "char_alignment": "exact",
                     }
                 )
         table_no, row_no = unit.coordinates.table_index, unit.coordinates.row_index

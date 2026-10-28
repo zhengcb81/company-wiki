@@ -87,3 +87,13 @@ A v3+B v2共19文件工程独审PASS/51项，全src391 mypy PASS，308项指标�
 3. 实际HK页13证明：marker x99.1946、正文x121.8746、后续行x121.87457，同基线；原block左边界把22.68缩进误当正文差距。冻结原SHA，只读定点复验并加入另一不同版式控制；不修改金标、公司白名单或费用/工作限额。
 4. SDK根因：受界30秒探针确定document_converter→Transformers→packages_distributions扫描426发行包。研究显式配置、真实依赖闭包的隔离运行时，避免复制GB依赖/模型；不全局monkeypatch metadata、不改已安装包/ACL、不重复未改变冷启。方案先独审再实施，保持配置/环境指纹可重放。
 5. 大节点独审归一化源码SHA、正反例和真实召回。只有来源3/3后才执行一次配置内正式原语言摘要，再验激活/重启/跨run0重复费用、FF复用、RF实际采用。source2/3不能写摘要2/3，公共RF读取不能代签预测采用。余下fresh holdout/八步公司循环仍OPEN。
+
+## 2026-10-28 原生闭合后实际观察与后续次序
+
+原生八文件冻结独审PASS/71P；同源生产context/实际v5的55groups与selection_trace一致，t33支持全文相同，关键行业云事实已物理/语义同组。v5停止144.15秒0POST，是oracle单range数字/CJK显示换行误报，不是来源再遗漏；人工准备3/3不代签模型。
+
+优先A：共同oracle一次中性TDD、原gold与实际typedselection/HTTP材料离线重放（不重解析原件、不重跑SDK），包括数字/小数/英文、inline空格、空行、wrongpage/source/partial引用反控。大节点独审后发布，不降低来源和引用要求。
+
+优先B：来源能力与摘要任务准入共因。v5前12个任务仍为unknown/description/priority1/score0，其中页脚、单位/期间、非GAAP碎片和纯财务数值能够占用生成槽。先检查现有source purpose/value/furniture/financial判定与compiler准入衔接，定义资料可见但不可单独形成业务摘要的类型；保留有价值的未知业务描述、风险、Q&A、经营资源及计划。中性正反例和实际保存材料复验，不用公司/页脚字面名单，不按全部unknown一刀切，不靠prompt软目标解决source能力缺口。
+
+后续SDK隔离按现有environment闭包owner/专用venv/RECORD硬链接设计另行实施；不复制GB权重/SDK、不改全局包、不抬120秒/4GiB。只有recipe或执行方案实质改变才再次端到端。来源、真实摘要、缓存、FF/RF实际采用、新holdout和公司循环分别留证，不能因本源节点通过宣布全部项目完成。

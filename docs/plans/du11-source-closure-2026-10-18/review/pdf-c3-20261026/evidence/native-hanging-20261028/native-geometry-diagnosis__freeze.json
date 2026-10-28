@@ -1,0 +1,38 @@
+{
+  "status": "FROZEN_CANDIDATE",
+  "files": [
+    {
+      "path": "src/company_wiki/document_understanding/hanging_indent_geometry.py",
+      "lf_sha256": "11e7f6e3549a8970f8b34f13250850f20a8fae1aef08a19714f55f74c96fe161"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/narrative_continuity.py",
+      "lf_sha256": "b907b2e184613c388fae92fc46f1d552a934c4abf5a6e58036a6b96ef716eee4"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/observation_adapter.py",
+      "lf_sha256": "dc31fce72be2820c13b77e2042f66f3db52c07bb8f94d96e6b075b59fcd33dfa"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/decision_inventory.py",
+      "lf_sha256": "90ca4452b6879387a1474af3639f760804e14ad33b9ffe7449d827753b2e13fa"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_evidence.py",
+      "lf_sha256": "4982bca4385c82e637fd7fa2a84100b9b86b7bc47a745c496740c4e8e3aec8b8"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_pdf_layout.py",
+      "lf_sha256": "b34a0fdf5a709a7098b3b491a3d71620a2ea75591d788cf9cfbc9591e0f77d20"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_native_hanging_indent.py",
+      "lf_sha256": "995bfa207d4e47b7ee5ec81258ba5f2cad60e10f330243bfa00f11df7c0fe5f3"
+    },
+    {
+      "path": "tests/unit/du11_production/test_native_prose_continuity.py",
+      "lf_sha256": "eb6aab9b5178278c249ee1be4ffe3b9c6bbba190bb06f6c7cf7a1d7e6bffff21"
+    }
+  ],
+  "superseded_test_only": "smallindent fixture length metadata synchronized; no runtime delta from domain2459P/1testfailure"
+}

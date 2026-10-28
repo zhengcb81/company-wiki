@@ -78,6 +78,33 @@ def test_native_prose_adds_no_canonical_or_legacy_changes():
     assert all("reading_layout" in unit.metadata for unit in current.units)
 
 
+@pytest.mark.parametrize('size',[9,12])
+@pytest.mark.parametrize('rotation',[0,90])
+def test_native_bullet_measurements_survive_default_parse_without_a_second_read(size,rotation,monkeypatch):
+    with fitz.open() as document:
+        page=document.new_page(width=600,height=800)
+        page.insert_text((60,100),'- ',fontsize=size)
+        page.insert_text((60+2.6*size,100),'Our service revenue increased from one hundred to',fontsize=size)
+        page.insert_text((60+2.6*size,100+1.55*size),'one hundred twenty million because demand improved.',fontsize=size)
+        page.set_rotation(rotation)
+        raw=document.tobytes()
+    calls=[]
+    original=fitz.Page.get_textpage
+    def counted(page,*args,**kwargs):
+        calls.append(page.number)
+        return original(page,*args,**kwargs)
+    monkeypatch.setattr(fitz.Page,'get_textpage',counted)
+    current=parse(raw,selector_version='0.9.0',table_pages=[])
+    result,observation=continuity(current)
+    assert calls==[0]
+    proof=[edge for window in result['windows'] for edge in window['proof']
+           if edge['basis']=='native_hanging_indent']
+    assert len(proof)==1
+    assert proof[0]['body_proof']['baseline']==100
+    assert observation['units'][0]['layout']['bbox'][0]==60
+    assert observation['units'][0]['hints']['spans'][0]['origin']==(60.0,100.0)
+
+
 def test_rotated_prose_records_actual_unrotated_dict_frame():
     parsed = parse(pdf(["The reactor received twelve customer orders",
                         "but commercial rollout remains conditional."], rotation=90),

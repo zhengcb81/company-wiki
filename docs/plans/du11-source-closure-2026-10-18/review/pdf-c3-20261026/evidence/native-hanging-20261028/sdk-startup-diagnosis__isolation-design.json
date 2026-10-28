@@ -1,0 +1,253 @@
+{
+  "schema_version": "c3-sdk-runtime-isolation-design/1",
+  "date": "2026-10-28",
+  "status": "READ_ONLY_DESIGN_NOT_DEPLOYED",
+  "scope": "Only isolation-design.md/json written; no further SDK cold process or global runtime changes",
+  "recommended": {
+    "option": "Dedicated standard venv, include-system-site-packages=false, explicit selected-distribution file projection using NTFS hardlinks",
+    "runtime_python": "New dedicated venv Scripts/python.exe referenced by explicit PDF runtime/2 profile",
+    "base_interpreter": "Existing C:/Miniconda/python.exe 3.13.9, shared base stdlib/DLLs through standard venv",
+    "dependencies": "Existing configured_runtime_roots + describe_environment own dependency/marker/extras closure; no second resolver",
+    "selected_distribution_count": 104,
+    "physical_bytes": "Reuse same-volume existing package files by hardlink; keep existing model artifact path. No SDK/model content copies.",
+    "namespace_rule": "Use selected RECORD-owned files rather than blanket top-level directory junctions when ownership overlaps",
+    "provisioning_rule": "Fresh deployment-owned env directory and manifest only; never mutate base Conda or source package metadata",
+    "environment_hygiene": "Dedicated runtime must not regain base/user site via PYTHONPATH/PYTHONHOME/.pth/sitecustomize; use one canonical configured launch environment owner",
+    "unchanged_actual_limits": {
+      "seconds": 120,
+      "memory_bytes": 4294967296,
+      "pages": 3,
+      "output_bytes": 2097152,
+      "cpu_threads": 4
+    }
+  },
+  "local_evidence": {
+    "environment_sha256": "c84a984ccb3a56dffbfd0d4538f14ce4a27de44dec4981527a2b0c4a545cdf44",
+    "matches_config": true,
+    "count": 104,
+    "without_top_level": 43,
+    "record_entries": 36228,
+    "record_bytes": 3369966,
+    "outside": 53,
+    "largest": [
+      {
+        "name": "torch",
+        "version": "2.12.0",
+        "metadata_path": "C:\\Miniconda\\Lib\\site-packages\\torch-2.12.0.dist-info",
+        "declared": true,
+        "record_entries": 11902,
+        "record_bytes": 1257674,
+        "outside": 2,
+        "tops": [
+          "functorch",
+          "torch",
+          "torch-2.12.0.dist-info",
+          "torchgen"
+        ]
+      },
+      {
+        "name": "transformers",
+        "version": "5.18.0",
+        "metadata_path": "C:\\Miniconda\\Lib\\site-packages\\transformers-5.18.0.dist-info",
+        "declared": true,
+        "record_entries": 5435,
+        "record_bytes": 504031,
+        "outside": 1,
+        "tops": [
+          "transformers",
+          "transformers-5.18.0.dist-info"
+        ]
+      },
+      {
+        "name": "pandas",
+        "version": "2.3.3",
+        "metadata_path": "C:\\Miniconda\\Lib\\site-packages\\pandas-2.3.3.dist-info",
+        "declared": false,
+        "record_entries": 2975,
+        "record_bytes": 245103,
+        "outside": 0,
+        "tops": [
+          "pandas",
+          "pandas-2.3.3.dist-info",
+          "pandas.libs"
+        ]
+      },
+      {
+        "name": "sympy",
+        "version": "1.14.0",
+        "metadata_path": "C:\\Miniconda\\Lib\\site-packages\\sympy-1.14.0.dist-info",
+        "declared": true,
+        "record_entries": 1573,
+        "record_bytes": 145616,
+        "outside": 2,
+        "tops": [
+          "isympy.py",
+          "sympy",
+          "sympy-1.14.0.dist-info"
+        ]
+      },
+      {
+        "name": "scipy",
+        "version": "1.17.1",
+        "metadata_path": "C:\\Miniconda\\Lib\\site-packages\\scipy-1.17.1.dist-info",
+        "declared": false,
+        "record_entries": 1534,
+        "record_bytes": 146133,
+        "outside": 0,
+        "tops": [
+          "scipy",
+          "scipy-1.17.1-cp313-cp313-win_amd64.whl",
+          "scipy-1.17.1.dist-info",
+          "scipy.libs"
+        ]
+      },
+      {
+        "name": "faker",
+        "version": "40.19.1",
+        "metadata_path": "C:\\Miniconda\\Lib\\site-packages\\faker-40.19.1.dist-info",
+        "declared": true,
+        "record_entries": 1463,
+        "record_bytes": 120276,
+        "outside": 1,
+        "tops": [
+          "faker",
+          "faker-40.19.1.dist-info"
+        ]
+      }
+    ],
+    "top_namespace_collisions_with_unselected": {
+      "pptx": [
+        "pypptx_with_oxml-1.0.3.dist-info",
+        "python_pptx-1.0.2.dist-info"
+      ]
+    },
+    "excludes_examples": {
+      "mkdocs-material": true,
+      "gradio": true,
+      "langchain": true,
+      "kubernetes": true
+    },
+    "conda_cache_sdk_matches": []
+  },
+  "namespace_and_filesystem": {
+    "pptx_shared_files": 110,
+    "different_record_hashes": 9,
+    "hash_examples": [
+      {
+        "path": "pptx/__init__.py",
+        "actual_matches_selected": true,
+        "actual_matches_unselected": false
+      },
+      {
+        "path": "pptx/oxml/__init__.py",
+        "actual_matches_selected": true,
+        "actual_matches_unselected": false
+      },
+      {
+        "path": "pptx/oxml/dml/fill.py",
+        "actual_matches_selected": true,
+        "actual_matches_unselected": false
+      },
+      {
+        "path": "pptx/oxml/ns.py",
+        "actual_matches_selected": true,
+        "actual_matches_unselected": false
+      },
+      {
+        "path": "pptx/oxml/shapes/groupshape.py",
+        "actual_matches_selected": true,
+        "actual_matches_unselected": false
+      },
+      {
+        "path": "pptx/oxml/simpletypes.py",
+        "actual_matches_selected": true,
+        "actual_matches_unselected": false
+      }
+    ],
+    "filesystem": "NTFS",
+    "pth_files": {
+      "distutils-precedence.pth": "import os; var = 'SETUPTOOLS_USE_DISTUTILS'; enabled = os.environ.get(var, 'local') == 'local'; enabled and __import__('_distutils_hack').add_shim(); \n",
+      "pywin32.pth": "# .pth file for the PyWin32 extensions\nwin32\nwin32\\lib\nPythonwin\n# And some hackery to deal with environments where the post_install script\n# isn't run.\nimport pywin32_bootstrap\n",
+      "sphinxcontrib_jsmath-1.0.1-py3.7-nspkg.pth": "import sys, types, os;has_mfs = sys.version_info > (3, 5);p = os.path.join(sys._getframe(1).f_locals['sitedir'], *('sphinxcontrib',));importlib = has_mfs and __import__('importlib.util');has_mfs and __import__('importlib.machinery');m = has_mfs and sys.modules.setdefault('sphinxcontrib', importlib.util.module_from_spec(importlib.machinery.PathFinder.find_spec('sphinxcontrib', [os.path.dirname(p)])));m = m or sys.modules.setdefault('sphinxcontrib', types.ModuleType('sphinxcontrib'));mp = (m or []) and m.__dict__.setdefault('__path__',[]);(p not in mp) and mp.append(p)\n",
+      "__editable__.company_wiki-0.1.0.pth": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\n",
+      "__editable__.dayu_agent-0.1.4.pth": "import __editable___dayu_agent_0_1_4_finder; __editable___dayu_agent_0_1_4_finder.install()"
+    }
+  },
+  "alternatives": [
+    {
+      "option": "No-system-site standard venv plus exact closure hardlinks",
+      "decision": "RECOMMENDED DESIGN",
+      "gain": "104 selected metadata directories instead of 426, no GB file duplication",
+      "limits": "43 selected dists still require inferred metadata scan; native DLL/PATH/RECORD collision/immutability must be checked"
+    },
+    {
+      "option": "Dedicated executable + _pth + selected file projection",
+      "decision": "SECONDARY",
+      "gain": "Stronger explicit Python path without global site",
+      "limits": "Windows launcher/DLL/_pth precedence and site hooks require separate runtime verification; no projection benefit without selected files"
+    },
+    {
+      "option": "Minimal separate Conda env using existing package cache/offline artifacts",
+      "decision": "LONGER_TERM_DEPLOYMENT_OPTION",
+      "gain": "Package-manager ownership and native dependency management",
+      "limits": "No docling/torch/transformers entries found in current Conda pkgs cache; offline exact provisioning not established; clone whole env retains 426"
+    },
+    {
+      "option": "venv --system-site-packages, .pth base-site injection, -I or PYTHONNOUSERSITE alone",
+      "decision": "DOES_NOT_SOLVE_BASE_SCAN",
+      "gain": "Little deployment work",
+      "limits": "Base site remains visible; flags alone do not remove interpreter's own site-packages"
+    },
+    {
+      "option": "Patch Transformers/importlib.metadata, synthesize top_level, remove global distributions, or keep a resident worker",
+      "decision": "REJECT_FOR_THIS_SCOPE",
+      "gain": "Potential apparent speedup",
+      "limits": "Changes third-party/global behavior or lifecycle instead of configuring clean dependency isolation"
+    }
+  ],
+  "compatibility": {
+    "existing_environment_algorithm": "pdf-runtime-closure/2",
+    "recomputed_matches_config": true,
+    "environment_sha256": "c84a984ccb3a56dffbfd0d4538f14ce4a27de44dec4981527a2b0c4a545cdf44",
+    "fingerprint_boundary": "Existing digest covers selected metadata, versions, dependencies, extras and marker env; it does not hash all package code/native bytes",
+    "model_sha256": "00333a43451945aaf89db8ca9c0a17e75d1537c17db60fdb91aa95f4c7929e0c",
+    "model_config_sha256": "fdea30805ce2f5666b147fca941dcdd27ad468e27d6ed21902207d3da056a97d",
+    "path_changes": "New python/profile deployment locator allowed; semantic recipe identity remains content/version based. Never relabel changed versions with old environment SHA.",
+    "existing_pdf_worker": "No new parser/ranker/persistent worker/cache; finite cold worker contract unchanged"
+  },
+  "steps": [
+    "Freeze exact existing resolver output and installed selected metadata/RECORD provenance; normalize both slash styles and validate projected target paths within new env.",
+    "Provision dedicated standard venv without pip or system-site inheritance; do not run pip/conda reinstall or download.",
+    "Project selected metadata and selected package data/native modules using hardlinks in same NTFS volume; handle namespaces per file and safe env-relative Scripts/resources, not a junction to whole base site.",
+    "Record hardlink provenance, unexpected selected file hash conflicts, unowned files and any native libraries outside site; fail closed on unresolved conflicts, never copy extra unrelated distributions to make imports pass.",
+    "Run only future separately authorized lightweight metadata/path validation: exact104 third-party version closure and same environment SHA, explicitly allowed first-party company_wiki.egg-info from repo/src, absent excluded examples and base/user site, unchanged model path/SHA/limits.",
+    "After design acceptance, one bounded no-document cold validation and independent review, then existing formal real verification under unchanged resource/budget configuration. This task performed none of these SDK validation/deployment steps."
+  ],
+  "risks": [
+    "Only the prior single30s instrumented probe exists; not proven isolated imports fit120s.",
+    "Selected 43 missing-top-level distributions still scan RECORD; valid closure isolation is necessary performance reduction, not a measured success.",
+    "Native libraries under base Library/bin and DLL search behavior may remain necessary; must inventory dependency paths rather than add base Python site path.",
+    "Hardlinks share in-place mutation; use deployment-owned frozen inputs and explicit update/refingerprint procedure; no ACL changes or global cache surgery.",
+    "pptx shared directory overlaps an unselected distribution:110 shared RECORD paths/9 differing hashes; first6 checked active files match selected python-pptx, remaining files not fully validated.",
+    "Source Conda metadata closure hash does not prove active file bytes match all RECORD hashes.",
+    "Standard venv behavior verified from local Python3.13 source; actual venv/link creation was not performed.",
+    "Repo/src contains company_wiki.egg-info and the existing worker exposes repo/src;104 is SDK third-party closure count, not a claim that no first-party metadata is visible."
+  ],
+  "provenance": {
+    "input_report": ".planning/c3-20261028/sdk-startup-diagnosis/report.json",
+    "input_inventory": ".planning/c3-20261028/sdk-startup-diagnosis/inventory.json",
+    "runtime_config": ".planning/c3-20261026/pdf-env/runtime-4g-v2.json",
+    "inspected_sources": [
+      "src/company_wiki/source_catalog/narrative_pdf_environment.py",
+      "C:/Miniconda/Lib/venv/__init__.py",
+      "C:/Miniconda/Lib/site.py",
+      "C:/Miniconda/Lib/site-packages/transformers/utils/import_utils.py",
+      "C:/Miniconda/Lib/importlib/metadata/__init__.py"
+    ],
+    "commands": "Only metadata/RECORD reads and local stdlib source/NTFS queries; no SDK imported",
+    "extra_sdk_cold_attempts": 0,
+    "downloads": 0,
+    "paid_calls": 0,
+    "global_environment_writes": 0
+  }
+}
