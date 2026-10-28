@@ -1,0 +1,54 @@
+{
+  "checks": [
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "490a19",
+        "wall_time_seconds": 1.2231651000000001,
+        "exit_code": 0,
+        "original_token_count": 5,
+        "output": "All checks passed!\n"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "f71cef",
+        "wall_time_seconds": 4.0290129,
+        "exit_code": 0,
+        "original_token_count": 11,
+        "output": "Success: no issues found in 4 source files\r\n"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "bec75c",
+        "wall_time_seconds": 1.229278,
+        "exit_code": 0,
+        "original_token_count": 78,
+        "output": "warning: in the working copy of 'src/company_wiki/source_catalog/narrative_support_use.py', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'tests/unit/document_understanding_selection/test_source_support_use.py', LF will be replaced by CRLF the next time Git touches it\n"
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "48d63a",
+        "wall_time_seconds": 1.1406023,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    },
+    {
+      "status": "fulfilled",
+      "value": {
+        "chunk_id": "cf2abf",
+        "wall_time_seconds": 1.1807282,
+        "exit_code": 0,
+        "original_token_count": 0,
+        "output": ""
+      }
+    }
+  ]
+}

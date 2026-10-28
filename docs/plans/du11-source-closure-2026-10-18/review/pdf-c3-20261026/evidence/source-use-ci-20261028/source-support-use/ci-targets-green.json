@@ -1,0 +1,18 @@
+{
+  "exit_code": 0,
+  "seconds": 8.807,
+  "targets": [
+    "tests/unit/test_main_ocr_selection.py::test_ocr_join_cannot_cross_identity_columns_missing_or_unreliable_lines",
+    "tests/unit/document_understanding_selection/test_reading_untyped_numeric_prose_controls.py::test_one_observed_value_plus_missing_markers_does_not_invent_two_numbers",
+    "tests/unit/document_understanding_selection/test_reading_guidance_source_controls.py::test_forecast_marker_before_year_and_issuer_closes_referenced_premise",
+    "tests/unit/du11_source_quality/test_business_admission.py::test_actual_operating_activity_survives_financial_vocabulary",
+    "tests/unit/document_understanding_selection/test_source_support_use.py::test_product_np_modifiers_do_not_supply_an_independent_predicate",
+    "tests/unit/document_understanding_selection/test_source_support_use.py::test_copular_and_finite_product_descriptions_have_real_predicates",
+    "tests/unit/document_understanding_selection/test_source_support_use.py::test_independent_acquisition_binds_local_actor_action_and_operating_object",
+    "tests/unit/document_understanding_selection/test_source_support_use.py::test_acquisition_word_without_local_operating_object_does_not_complete_a_proof",
+    "tests/unit/document_understanding_selection/test_source_support_use.py::test_real_guidance_clause_survives_a_separate_disclaimer_without_retyping_that_disclaimer",
+    "tests/unit/document_understanding_selection/test_source_support_use.py::test_single_operating_value_cells_keep_role_and_readable_offer_without_multiple_value_claim"
+  ],
+  "owned_temp": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c3su",
+  "owned_temp_absent": true
+}

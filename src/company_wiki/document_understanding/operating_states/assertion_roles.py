@@ -36,8 +36,9 @@ _EN_FUNCTION = re.compile(_EN_HEAD_TAIL + _EN_AUX +
     r"\b\s+(?P<target>[^,。;!?]{1,100})", re.I)
 _EN_PASSIVE_USE = re.compile(_EN_HEAD_TAIL + _EN_AUX +
     r"(?P<verb>used|utili[sz]ed|deployed)\s+(?:by|for|to|in)\s+(?P<target>[^,。;!?]{1,100})", re.I)
-_EN_DESCRIPTION = re.compile(_EN_HEAD_TAIL +
+_EN_DESCRIPTION = re.compile(_EN_HEAD_TAIL + _EN_AUX +
     r"(?P<verb>for|comes? in|available in|offered in)\s+(?P<target>[^,。;!?]{1,100})", re.I)
+_EN_COPULA = re.compile(r"\b(?:is|are|was|were|be|been)\b",re.I)
 _EN_STATE = re.compile(_EN_HEAD_TAIL + _EN_AUX +
     r"(?P<verb>(?:is|are|remains?)\s+(?:in|under)|remains?|expand\w*|enter\w*|start\w*|complet\w*|finish\w*|began|begin\w*)"
     r"\s+(?P<target>[^,。;!?]{1,100})", re.I)
@@ -56,7 +57,7 @@ _CN_STATE = re.compile(_CN_HEAD_TAIL + _CN_AUX +
     r"(?P<verb>进入|处于|开展|推进|进行|完成|启动|投入)?(?:客户)?(?P<target>认证|验证|试产|量产|生产|建设|投产|运行|运营|发布|上线)")
 _PROVISION_EN = re.compile(r"\b(?:provid\w*|offer\w*|suppl\w*|manufactur\w*|design\w*|deliver\w*|"
     r"hir\w*|employ\w*|recruit\w*|launch\w*|releas\w*|introduc\w*|deploy\w*|acquir\w*|commission\w*|open\w*)\b", re.I)
-_PROVISION_CN = re.compile(r"提供|供应|制造|设计|打造|交付|聘用|招聘|招募")
+_PROVISION_CN = re.compile(r"提供|供应|制造|设计|打造|交付|聘用|招聘|招募|收购|收購")
 _PROVISION_ACTOR_EN = re.compile(
     r"\s*(?:(?i:we|(?:the|our|this)\s+(?:company|group|team|supplier|partner))|"
     r"[A-Z][A-Za-z0-9&.-]*(?:\s+[A-Z][A-Za-z0-9&.-]*){0,4})"
@@ -102,7 +103,17 @@ def _clause_description(value: str) -> bool:
         # Only a bounded tail attached to this head is inspected. An earlier
         # noun cannot donate itself to a later clause's stage or predicate.
         tail = value[end:end + 160]
-        for grammar in (_EN_FUNCTION, _EN_PASSIVE_USE, _EN_DESCRIPTION, _EN_STATE, _EN_PLAN):
+        description = _EN_DESCRIPTION.match(tail)
+        if description is not None:
+            # 'product for ...' and 'product offered in ...' are NP modifiers.
+            # Copular predicates or finite 'comes in' form an assertion; a
+            # reduced relative must not fall through as a bare function verb.
+            if (_description_payload(description['target'])
+                    and (description['verb'].casefold().startswith('come')
+                         or _EN_COPULA.search(description['aux']))):
+                return True
+            continue
+        for grammar in (_EN_FUNCTION, _EN_PASSIVE_USE, _EN_STATE, _EN_PLAN):
             match = grammar.match(tail)
             if match is None or not _description_payload(match['target']):
                 continue
@@ -181,6 +192,7 @@ class SourceAssertionRoles:
     numeric_role: str = "unknown"
     bound_operating: bool = False
     raw_structure_complete: bool = False
+    numeric_cells_observed: bool = False
 
     @property
     def operating(self) -> bool:
@@ -213,5 +225,6 @@ def prepare_source_assertions(text: str) -> SourceAssertionRoles:
     shape=observe_value_cells(text)
     numeric=shape.unbound_numeric_cells
     return SourceAssertionRoles(tuple(clauses),numeric,
-        unbound_numeric_row_role(text) if numeric else "unknown",
-        raw_structure_complete=shape.complete_value_row)
+        unbound_numeric_row_role(text) if shape.has_numeric_cell else "unknown",
+        raw_structure_complete=shape.complete_value_row,
+        numeric_cells_observed=shape.has_numeric_cell)

@@ -1271,3 +1271,17 @@ ROOT补查协议/缓存相关九文件306P/7F：四个旧schema/codec/空请求�
 **唯一下一步：** 正常提交/推送本组件并观察精确CI→按需PDF增强准备（只修共同owner，不重复未变的120秒冷启）→新五项金标的新metadata revision配置内真实摘要→实际响应语义独审与activation/重启/跨run零重复费用→FF/RF实际采用→未曝光holdout及八步公司循环。正式摘要质量、缓存完整验收及RF模型采用仍OPEN。配置10M/$20不变，母账1,800,368tokens/$0.727945和unknown保留；原件/生产配置/Dayu/IQS/Dashboard/其他owner WIP不写。
 
 2026-10-28：来源用途共因组件已正常发布ec7c8d84，precommit PASS/prepush158P35.43s，精确CI40725371023 in_progress/None。PDF首次直接需求观察识别完整表行、页脚/标题误判，1.182s/440310work/0SDK/0POST；下一步PARAGRAPH_DEMAND_ROOT_PLAN，保持原件/limits及供应商摘要、缓存、RF采用OPEN。
+
+## 2026-10-28 当前：来源组件已发布，先关闭精确CI的兼容反证
+
+目标ACTIVE。唯一入口为本段及CURRENT_STATUS.json；下方旧状态是历史。源码ec7c8d84与PWF e5bee2f7均已推送。来源组件25文件独审PASS、真实81span/38support/5gold和396文件mypy均保持历史事实，但精确CI40725371023已completed/failure，不能记发布整体验收绿。
+
+ROOT只复现失败所在4组：26例中13F/13P、4.10秒，原断言未改、临时.c3cif已清、0SDK/模型/下载。10项同族OCR负例中identity/linkable/组隔离断言已通过，独立名词片段却仍入库；另3项是预测前提被漏选、1实数＋缺失标记的经营量行被漏选、会计句混合真实并购业务被漏选。公开注解只展示其中10项，不能将截断注解当全部失败数量。不是Linux类型检查失败或配额不足。
+
+**唯一下一步：** 在共享来源proof/描述完整性、数量形状与断言作用域owner修4类共因，保原失败断言，补中性正反例→只复验失败和必要影响包→集中独审及真实五金标复验→正常提交/推送和精确CI。PDF增强需求根修细则已准备但顺延，不与此修复混写。然后真实配置摘要/cache/FF-RF、新holdout及八步公司循环仍OPEN；不提高额度或写公司条件。
+
+静态pre-commit负责Ruff/mypy/宿主假设，不执行语义测试。pre-push按既有约定宽范围只跑158项smoke（35.43秒）；因此不能把本地fast PASS误称所有来源语义或跨旧版本边界通过。后续在本次大节点补当前与旧0.8/OCR真实接口的正反例覆盖，不扩成每小步全量门禁。
+
+配置10M/$20、母账1,800,368tokens/$0.727945与unknown不变；原件/生产配置/其他owner WIP保持。证据见[CI反证](review/pdf-c3-20261026/evidence/source-use-ci-20261028/)。
+
+2026-10-28：来源兼容CI四共因关闭，原四测试无diff，必要416unique通过，集中独审通过；真实5gold及396mypy通过，正常发布/新精确CI待完成。见SOURCE_USE_CI_REPAIR。未加额度、公司特判或小节点门禁。

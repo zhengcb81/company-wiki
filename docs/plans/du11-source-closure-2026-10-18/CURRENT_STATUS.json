@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-28",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_PDF_PARAGRAPH_DEMAND_ROOT_REPAIR",
+  "overall_status": "ACTIVE_SOURCE_CI_REPAIR_INDEPENDENT_PASS_PUBLICATION_PENDING",
   "parallel_packages_20261025": {
     "status": "W16_W17_W18_ROOT_COMPONENT_ACCEPTED_MERGED",
     "entry": "harness_lanes/20261025/README.md",
@@ -30,10 +30,10 @@
   "code_ci": {
     "id": 40725371023,
     "head_sha": "ec7c8d846a12f3f6f5f8c27a94063733e17187c7",
-    "status": "in_progress",
-    "conclusion": null,
+    "status": "completed",
+    "conclusion": "failure",
     "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40725371023",
-    "updated_at": "2026-10-28T16:22:51Z"
+    "updated_at": "2026-10-28T16:26:42Z"
   },
   "formal_v4_offline_selection_replay_20261025": {
     "status": "EXACT_REPRODUCED_NO_PAID_CALL",
@@ -2345,7 +2345,7 @@
     "published": true,
     "push_failure": "47 targets /392 collected /600s; two regressions being root-fixed, not waived by narrower daily gate"
   },
-  "next_action": "PARAGRAPH_DEMAND_ROOT_PLAN: TDD and shared structural/lexical/furniture owner fix inside PDF reader; true business breaks remain. Then new5-gold configured formal summary, independent response review/cache/FF-RF adoption, holdouts and audit loop.",
+  "next_action": "Publish independently accepted source CI root fix and observe new exactCI; then paragraph-demand root repair, configured actual summary/cache/FF-RF, new holdouts and audit loop.",
   "c3_runtime_recovery_20261026": {
     "entry": "review/pdf-c3-20261026/RUNTIME_RECOVERY.md",
     "environment_independent": "PASS_ZERO_OPEN_25_TESTS_AND_REAL_WORKER_ENTRYPOINTS",
@@ -2760,6 +2760,15 @@
     "formal_business_gold": "review/pdf-c3-20261026/business-recovery-checkpoints/hk-development-business5-gold.json",
     "final_summary": "OPEN_NOT_EXECUTED_FOR_CURRENT_SOURCE",
     "acceptance": "review/pdf-c3-20261026/SOURCE_USE_ACCEPTANCE.md",
-    "publication": "review/pdf-c3-20261026/SOURCE_USE_PUBLICATION.json"
+    "publication": "review/pdf-c3-20261026/SOURCE_USE_PUBLICATION.json",
+    "full_CI": "FAILURE; ROOT isolated26 cases13F13P; source component review remains scoped, overall publication not green",
+    "CI_repair": {
+      "status": "INDEPENDENT_PASS_PUBLICATION_PENDING",
+      "necessary_unique": 416,
+      "original_four_tests_changed": false,
+      "real_native_business_gold": "5/5",
+      "summary_quality": "OPEN",
+      "entry": "review/pdf-c3-20261026/SOURCE_USE_CI_REPAIR.md"
+    }
   }
 }

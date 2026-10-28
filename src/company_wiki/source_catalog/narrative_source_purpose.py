@@ -18,6 +18,7 @@ from company_wiki.document_understanding.operating_states.assertion_roles import
 from .narrative_business_disclosures import reporting_basis_relations
 from .narrative_business_meaning import concrete_operating_event, describes_business
 from .narrative_reporting_rules import reporting_rule_without_operating_event
+from .narrative_revenue_guidance import revenue_guidance
 
 
 NON_OPERATING_PURPOSES = frozenset({
@@ -162,6 +163,8 @@ def _clause_purpose(value: str, *, operating_proof: bool = False) -> str:
             or (_INCENTIVE_OBJECT.search(value) and _INCENTIVE_RULE.search(value))
             or (_RESULT_DEFINITION_OBJECT.search(value) and _RESULT_DEFINITION_RULE.search(value))):
         return "accounting_policy"
+    if revenue_guidance(value,issuer_only=True):
+        return "operating_guidance"
     basis = reporting_basis_relations(value)
     if "reporting_outlook_recast" in basis:
         return "operating_guidance"

@@ -52,7 +52,9 @@ def source_support_use(text: str, *, fact: OperatingFact, financial_only: bool |
         return "context_only", "financial_only"
     source_roles = source_roles if source_roles is not None else prepare_source_assertions(text)
     ambiguous=numeric_ambiguous if numeric_ambiguous is not None else source_roles.numeric_ambiguous
-    if ambiguous:
+    operating_cells=(source_roles.numeric_cells_observed and source_roles.numeric_role=='operating'
+                     and not source_roles.operating)
+    if ambiguous or operating_cells:
         if source_roles.numeric_role == "account" and not source_roles.operating:
             return "context_only", "financial_numeric_scope"
         return "unresolved", "source_numeric_scope_unresolved"

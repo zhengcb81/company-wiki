@@ -776,3 +776,82 @@ def test_current_finalizer_requires_source_disposition_proof_and_retains_legacy_
         heading_pattern=reading._NEVER_HEADING,dropped_financial_count=1,budget_policy=policy)
     assert result.dropped_financial_count==1 and result.coverage_complete
     assert result.status==('needs_review' if policy=='reading_plan/3' else 'skipped_no_narrative')
+
+
+def _ci_source_assessment(text):
+    from company_wiki.resource_budget import WorkBudget
+    from company_wiki.source_catalog.narrative_operating_relations import SourceOperatingSession
+    from company_wiki.source_catalog.narrative_support_use import source_support_use
+    parsed,_=source_fixture([(text,)])
+    unit=parsed.units[0]
+    session=SourceOperatingSession({unit.unit_id:unit},work_budget=WorkBudget(500000))
+    fact=session.fact(unit.unit_id)
+    roles=session.source_assertions(unit.unit_id)
+    use=source_support_use(text,fact=fact,financial_only=session.financial_only(unit.unit_id),source_roles=roles)
+    return fact,roles,use
+
+
+@pytest.mark.parametrize('text',(
+    'a new product for overseas customers.',
+    'Equipment available in several configurations.',
+    'A product offered in several configurations.',
+))
+def test_product_np_modifiers_do_not_supply_an_independent_predicate(text):
+    fact,roles,use=_ci_source_assessment(text)
+    assert not roles.operating and not fact.eligible and use[0]!='support'
+
+
+@pytest.mark.parametrize('text',(
+    'Our equipment is for hospitals to sterilise surgical tools.',
+    'Our products are available in several configurations.',
+    'Our product is offered in several configurations.',
+    'Our product comes in several configurations.',
+))
+def test_copular_and_finite_product_descriptions_have_real_predicates(text):
+    fact,roles,use=_ci_source_assessment(text)
+    assert roles.operating and fact.eligible and use[0]=='support'
+
+
+@pytest.mark.parametrize('text',(
+    '公司已收购设备企业，与现有产品形成客户协同。',
+    '公司采用期权定价模型计量股份支付。公司已收购设备企业，与现有产品形成客户协同。',
+    '公司已收購設備企業，與現有產品形成客戶協同。',
+    'The company acquired an equipment company. Equity investments are measured at fair value.',
+))
+def test_independent_acquisition_binds_local_actor_action_and_operating_object(text):
+    fact,roles,use=_ci_source_assessment(text)
+    assert roles.operating and fact.eligible and use[0]=='support'
+
+
+@pytest.mark.parametrize('text',(
+    '公司收购交易性金融资产。',
+    'The company acquired treasury assets.',
+    '收购。设备企业。',
+))
+def test_acquisition_word_without_local_operating_object_does_not_complete_a_proof(text):
+    _fact,roles,use=_ci_source_assessment(text)
+    assert not roles.operating and use[0]!='support'
+
+
+def test_real_guidance_clause_survives_a_separate_disclaimer_without_retyping_that_disclaimer():
+    from company_wiki.source_catalog.narrative_source_purpose import source_purpose
+    guidance='预计2029年公司整体收入达到125-140亿元。'
+    premise='上述2029年全年经营业绩展望以客户订单按期交付为前提，并不代表公司对全年经营业绩的盈利预测，不构成实质承诺。'
+    fact,_roles,use=_ci_source_assessment(guidance+premise)
+    assert fact.eligible and fact.purpose=='operating_guidance' and use[0]=='support'
+    assert source_purpose(premise)=='reporting_definition'
+
+
+@pytest.mark.parametrize('text',(
+    'Active customers\n—\n735\n–\nIncrease from new distribution channels',
+    'Capacity utilization\n—\n80\n–',
+    '客戶數量\n—\n164\n–\n增加源自海外渠道',
+))
+def test_single_operating_value_cells_keep_role_and_readable_offer_without_multiple_value_claim(text):
+    from company_wiki.document_normalization.table_shapes import has_unbound_numeric_cells
+    selected,packages,_parsed=_select_support_case([text],4)
+    _fact,roles,use=_ci_source_assessment(text)
+    assert not has_unbound_numeric_cells(text) and not roles.numeric_ambiguous
+    assert roles.numeric_role=='operating'
+    assert use==('unresolved','source_numeric_scope_unresolved')
+    assert packages and selected.evidence_spans

@@ -1,0 +1,15 @@
+{
+  "exit_code": 0,
+  "seconds": 14.731,
+  "targets": [
+    "tests/unit/document_understanding_selection/test_source_support_use.py",
+    "tests/unit/test_main_ocr_selection.py",
+    "tests/unit/document_understanding_selection/test_reading_untyped_numeric_prose_controls.py",
+    "tests/unit/document_understanding_selection/test_reading_untyped_numeric_quality.py",
+    "tests/unit/document_understanding_selection/test_reading_guidance_source_controls.py",
+    "tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py",
+    "tests/unit/du11_source_quality/test_business_admission.py"
+  ],
+  "owned_temp": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c3su",
+  "owned_temp_absent": true
+}

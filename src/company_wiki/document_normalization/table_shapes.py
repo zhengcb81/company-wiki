@@ -38,6 +38,7 @@ def has_tabular_value_tail(text: str) -> bool:
 class ValueCellObservation:
     unbound_numeric_cells: bool
     complete_value_row: bool
+    has_numeric_cell: bool = False
 
 
 def observe_value_cells(text: str) -> ValueCellObservation:
@@ -65,7 +66,7 @@ def observe_value_cells(text: str) -> ValueCellObservation:
             numeric_run = 0
             complete = complete and index == 0 and nominal and not any(
                 char in ".!?。！？;；" for char in cell)
-    return ValueCellObservation(has_label and has_values, complete and has_scalar)
+    return ValueCellObservation(has_label and has_values, complete and has_scalar, has_scalar)
 
 
 def has_unbound_numeric_cells(text: str) -> bool:

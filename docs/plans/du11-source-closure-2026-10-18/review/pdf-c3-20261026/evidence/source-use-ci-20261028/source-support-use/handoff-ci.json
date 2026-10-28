@@ -1,0 +1,325 @@
+{
+  "schema_version": "source-support-use-handoff/ci",
+  "date": "2026-10-28",
+  "status": "FROZEN_READY_FOR_INDEPENDENT_RECHECK",
+  "baseline": "Published ec7c8d84 / CI40725371023 failure",
+  "files": [
+    {
+      "path": "src/company_wiki/source_catalog/narrative_reading.py",
+      "bytes": 101365,
+      "sha256": "ba55b183886528e3be16c125f8674de5227a95ed12afc058ca3840f5599d6614",
+      "lf_sha256": "c996bdc7c9a03f57d8ada08ada59399073cac590b8de579514ea69889de73c87",
+      "changed_since_v6c": false
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_policy.py",
+      "bytes": 60737,
+      "sha256": "74e8a02585d293d1eb6944ef1822df89316918268b8e958b6d8ebd503ce2752c",
+      "lf_sha256": "513c4df83baca59e80152121e6ded752b880391f8f715df61ec2c2718f973739",
+      "changed_since_v6c": false
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_source_purpose.py",
+      "bytes": 14877,
+      "sha256": "9533140c4797f4ad56344ef2257a90d4cfee889be95cb896b7477dbe973ea7f1",
+      "lf_sha256": "e9b84f5dd70cdbeb353bc85c1fece91082afd4c268f675a4fd772a126d71b706",
+      "changed_since_v6c": true
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_support_use.py",
+      "bytes": 3896,
+      "sha256": "10b6bd5e0fa7a8895ba94a9e84c474cb3e0dea2043921898c143093bdb9696c4",
+      "lf_sha256": "10b6bd5e0fa7a8895ba94a9e84c474cb3e0dea2043921898c143093bdb9696c4",
+      "changed_since_v6c": true
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+      "bytes": 41687,
+      "sha256": "af91e2f24a4ddf773402a43e1bf4884c7ff019795e13ffb9b48e7dbe8072830b",
+      "lf_sha256": "ac82f984e77a46c46a5c596b2000d9658dbf86a79004f946b08c1d92922a8e65",
+      "changed_since_v6c": false
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/relations.py",
+      "bytes": 57099,
+      "sha256": "5ea73a73c2e956f15f70d518cbee352d19d3b19d88f579015cbccc56054f261a",
+      "lf_sha256": "d440c148dc0634ab72c00f4a6464c926741ce1e8c5c2e8551457953d2559c524",
+      "changed_since_v6c": false
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/patterns.py",
+      "bytes": 25014,
+      "sha256": "46d2a264fdfdb56677a32d1bb48019c111bd58b8086cc1f6b65bbdda33cef4ed",
+      "lf_sha256": "49bb93ff207c329c9ed87c3b978c359b1ab3eaa98078978c83cbe78ab062b39c",
+      "changed_since_v6c": false
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/assertion_roles.py",
+      "bytes": 14970,
+      "sha256": "e2973f090b0f42b4acca43fcbbf6ab159218674ceae2d9a8ac79bf0508ea36f4",
+      "lf_sha256": "37cdfcc484c4addea806da55fc34374b9ba0ce0043b5ec0398a4e6a2f3b4bfe3",
+      "changed_since_v6c": true
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_source_support_use.py",
+      "bytes": 52875,
+      "sha256": "4275e0d08c72e601486a8e16df062fb5e3395497595eb7732a23b788b242ec27",
+      "lf_sha256": "1ccccc426da1de651238d54773d97ba650b1e3b1eb4bdee70f609644f1939e47",
+      "changed_since_v6c": true
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_budget.py",
+      "bytes": 49784,
+      "sha256": "b805b334233d2214d004774bbef8add00d99881346c5f48b4781a4f36c810be3",
+      "lf_sha256": "113645934c00dd82491413b5f4165a4e632e0a4f959b18dc4d71c88fa6e14a66",
+      "changed_since_v6c": false
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_finalize.py",
+      "bytes": 12331,
+      "sha256": "feb6feb3fce94f003ed832ae147151adf64f50af7ed762ce005a6e5fdbc13e04",
+      "lf_sha256": "1dfb75374e9e45c255045d2e677883985a9af50790d6184300a92e0d284fb37e",
+      "changed_since_v6c": false
+    },
+    {
+      "path": "src/company_wiki/document_understanding/structure/table_purpose.py",
+      "bytes": 19830,
+      "sha256": "2d87eec638175b4b1e1cce6f16fa9cf3c4809211194f48cfd9b53165d9113c46",
+      "lf_sha256": "0d92f12205582fbf04db5d282193fcd00aee18e207e92f549142f9a71bc5297b",
+      "changed_since_v6c": false
+    },
+    {
+      "path": "src/company_wiki/document_normalization/table_shapes.py",
+      "bytes": 3551,
+      "sha256": "585f24ce6ac16de2ad8b73c72daab7cca8e906eed60d8f365fc74bd46c490a2d",
+      "lf_sha256": "13893250c0e51cdd4bdeb8737c3ef950a20859916243fdfaa4caae2a74e81c99",
+      "changed_since_v6c": true
+    }
+  ],
+  "changes_since_v6c": [
+    "src/company_wiki/document_normalization/table_shapes.py",
+    "src/company_wiki/document_understanding/operating_states/assertion_roles.py",
+    "src/company_wiki/source_catalog/narrative_source_purpose.py",
+    "src/company_wiki/source_catalog/narrative_support_use.py",
+    "tests/unit/document_understanding_selection/test_source_support_use.py"
+  ],
+  "unchanged_manifest_files": 8,
+  "original_red": "../source-use-ci-red/results.log+xml: ROOT original26=13F13P/4.10sec, unchanged",
+  "neutral_red": {
+    "counts": {
+      "total": 18,
+      "failed": 12,
+      "errors": 0,
+      "skipped": 0
+    },
+    "receipt": {
+      "exit_code": 1,
+      "seconds": 8.162,
+      "targets": [
+        "tests/unit/document_understanding_selection/test_source_support_use.py::test_product_np_modifiers_do_not_supply_an_independent_predicate",
+        "tests/unit/document_understanding_selection/test_source_support_use.py::test_copular_and_finite_product_descriptions_have_real_predicates",
+        "tests/unit/document_understanding_selection/test_source_support_use.py::test_independent_acquisition_binds_local_actor_action_and_operating_object",
+        "tests/unit/document_understanding_selection/test_source_support_use.py::test_acquisition_word_without_local_operating_object_does_not_complete_a_proof",
+        "tests/unit/document_understanding_selection/test_source_support_use.py::test_real_guidance_clause_survives_a_separate_disclaimer_without_retyping_that_disclaimer",
+        "tests/unit/document_understanding_selection/test_source_support_use.py::test_single_operating_value_cells_keep_role_and_readable_offer_without_multiple_value_claim"
+      ],
+      "owned_temp": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c3su",
+      "owned_temp_absent": true
+    }
+  },
+  "targeted": {
+    "counts": {
+      "total": 44,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "receipt": {
+      "exit_code": 0,
+      "seconds": 8.807,
+      "targets": [
+        "tests/unit/test_main_ocr_selection.py::test_ocr_join_cannot_cross_identity_columns_missing_or_unreliable_lines",
+        "tests/unit/document_understanding_selection/test_reading_untyped_numeric_prose_controls.py::test_one_observed_value_plus_missing_markers_does_not_invent_two_numbers",
+        "tests/unit/document_understanding_selection/test_reading_guidance_source_controls.py::test_forecast_marker_before_year_and_issuer_closes_referenced_premise",
+        "tests/unit/du11_source_quality/test_business_admission.py::test_actual_operating_activity_survives_financial_vocabulary",
+        "tests/unit/document_understanding_selection/test_source_support_use.py::test_product_np_modifiers_do_not_supply_an_independent_predicate",
+        "tests/unit/document_understanding_selection/test_source_support_use.py::test_copular_and_finite_product_descriptions_have_real_predicates",
+        "tests/unit/document_understanding_selection/test_source_support_use.py::test_independent_acquisition_binds_local_actor_action_and_operating_object",
+        "tests/unit/document_understanding_selection/test_source_support_use.py::test_acquisition_word_without_local_operating_object_does_not_complete_a_proof",
+        "tests/unit/document_understanding_selection/test_source_support_use.py::test_real_guidance_clause_survives_a_separate_disclaimer_without_retyping_that_disclaimer",
+        "tests/unit/document_understanding_selection/test_source_support_use.py::test_single_operating_value_cells_keep_role_and_readable_offer_without_multiple_value_claim"
+      ],
+      "owned_temp": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c3su",
+      "owned_temp_absent": true
+    }
+  },
+  "final": {
+    "counts": {
+      "total": 416,
+      "failed": 0,
+      "errors": 0,
+      "skipped": 0
+    },
+    "receipt": {
+      "exit_code": 0,
+      "seconds": 14.731,
+      "targets": [
+        "tests/unit/document_understanding_selection/test_source_support_use.py",
+        "tests/unit/test_main_ocr_selection.py",
+        "tests/unit/document_understanding_selection/test_reading_untyped_numeric_prose_controls.py",
+        "tests/unit/document_understanding_selection/test_reading_untyped_numeric_quality.py",
+        "tests/unit/document_understanding_selection/test_reading_guidance_source_controls.py",
+        "tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py",
+        "tests/unit/du11_source_quality/test_business_admission.py"
+      ],
+      "owned_temp": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c3su",
+      "owned_temp_absent": true
+    }
+  },
+  "unique_tests": {
+    "affected": 416,
+    "targeted_subset": 44,
+    "overlap": 44,
+    "total_unique": 416
+  },
+  "affected_counts_by_module": {
+    "tests.unit.document_understanding_selection.test_source_support_use": 261,
+    "tests.unit.document_understanding_selection.test_reading_guidance_condition_scope": 20,
+    "tests.unit.du11_source_quality.test_business_admission": 33,
+    "tests.unit.document_understanding_selection.test_reading_guidance_source_controls": 35,
+    "tests.unit.test_main_ocr_selection": 43,
+    "tests.unit.document_understanding_selection.test_reading_untyped_numeric_prose_controls": 8,
+    "tests.unit.document_understanding_selection.test_reading_untyped_numeric_quality": 16
+  },
+  "original_tests": [
+    {
+      "path": "tests/unit/test_main_ocr_selection.py",
+      "sha256": "718f73d134045d8bd5bb7f5d22867cdd81b2621360b8ff2e92dd588b1b14e3a6",
+      "lf_sha256": "02c8421d90ca1919c4c7eb33433beac7407873d92da123161b0129dc31d456ad"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_untyped_numeric_prose_controls.py",
+      "sha256": "c547c37ffd8b4984d0337e2c71e35c4e480c82cef054edb0b3a5e2e672891f92",
+      "lf_sha256": "40f99cadadde7ebac7e5868e8c51e5120502fa0100049c49563a1d98f3816a84"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_guidance_source_controls.py",
+      "sha256": "f1f6ab3bff1549a1fd38bb4975635dd3ace682202f00b42aa613be3f3f12f0db",
+      "lf_sha256": "f1f6ab3bff1549a1fd38bb4975635dd3ace682202f00b42aa613be3f3f12f0db"
+    },
+    {
+      "path": "tests/unit/du11_source_quality/test_business_admission.py",
+      "sha256": "daf303059c5fb6df434d07fd78a378e2ba21562597aaee439bb5a46aaaf123ae",
+      "lf_sha256": "85b1a3441ec183e6463c090ae3bb7b3756411f7fff9ea52513efd604718cd643"
+    }
+  ],
+  "original_test_changes": "git diff --exit-code HEAD -- all four original files returned0; no original assertions/fixtures edited",
+  "fixes": [
+    {
+      "root": "NP modifier is not a finite descriptive predicate",
+      "before": "product for / equipment available in / product offered in independently obtained operating_mechanism even with no event relation",
+      "after": "The shared head grammar distinguishes reduced/nominal modifiers from finite comes-in or copular is-for/are-available/is-offered assertions. Invalid reduced relatives cannot fall through as bare function verbs.",
+      "original_CI": "All12 OCR separation controls pass, including the10 prior failures; valid grouped OCR paths pass in the full43-case file."
+    },
+    {
+      "root": "Dynamic event projection lacked local operating acquisition completeness",
+      "before": "Independent Chinese acquisition was purpose operating but had no retained relation after dynamic-reason projection.",
+      "after": "Existing actor/predicate/operating-object provision proof includes Chinese acquisition verbs, with same-clause subject/object binding. Bare acquisition, financial assets and cross-clause object borrowing remain negative; no stage/progress is invented.",
+      "original_CI": "All12 actual-operating-activity variants pass, including accounting-note plus acquired equipment enterprise."
+    },
+    {
+      "root": "Forecast clause proof was not represented in clause purpose aggregation",
+      "before": "The forecast alone was valid, but a following reporting disclaimer supplied the entire closed-scope purpose.",
+      "after": "Existing issuer-bound revenue_guidance grammar supplies operating_guidance purpose to that exact clause before aggregate purpose choice. The disclaimer alone remains reporting_definition, and source adjacency/year/issuer/premise closure remain authoritative.",
+      "original_CI": "Original marker-before-year/issuer guidance and premise closure pass; all35 source controls plus20 condition-scope controls pass."
+    },
+    {
+      "root": "Single observed value was coupled to the multi-value ambiguity threshold",
+      "before": "The table-purpose role was only queried when>=2 numeric cells made numeric_ambiguous true;1 observed operating value plus missing markers lost its offer.",
+      "after": "Existing one cell sweep caches has_numeric_cell independently of unbound_numeric_cells and complete_value_row. Roles query the existing table-purpose owner on observed values. A positive operating row without a complete prose assertion is unresolved/readable, even with1 actual value; no>=2 quality flag or generation fact is fabricated.",
+      "original_CI": "Original Active-customers1-value control passes, plus complete numeric/prose files24cases and neutral customer/capacity/traditional Chinese1-value controls."
+    }
+  ],
+  "interfaces": "Only private ValueCellObservation.has_numeric_cell and SourceAssertionRoles.numeric_cells_observed appended with false defaults; formal reading_context/4, quality flags and model/consumer wire unchanged",
+  "unchanged": [
+    "Source raw/IDs/locators",
+    "Heap/support priority, atomic closure cost and resource caps",
+    "Account vocabulary and table-purpose algorithms",
+    "Legacy0.8 grammar and current terminal proof",
+    "OCR geometry/linkability/identity contracts",
+    "ROOT consumers/tools/PWF/Git and paragraph implementation"
+  ],
+  "static": {
+    "checks": [
+      {
+        "status": "fulfilled",
+        "value": {
+          "chunk_id": "490a19",
+          "wall_time_seconds": 1.2231651000000001,
+          "exit_code": 0,
+          "original_token_count": 5,
+          "output": "All checks passed!\n"
+        }
+      },
+      {
+        "status": "fulfilled",
+        "value": {
+          "chunk_id": "f71cef",
+          "wall_time_seconds": 4.0290129,
+          "exit_code": 0,
+          "original_token_count": 11,
+          "output": "Success: no issues found in 4 source files\r\n"
+        }
+      },
+      {
+        "status": "fulfilled",
+        "value": {
+          "chunk_id": "bec75c",
+          "wall_time_seconds": 1.229278,
+          "exit_code": 0,
+          "original_token_count": 78,
+          "output": "warning: in the working copy of 'src/company_wiki/source_catalog/narrative_support_use.py', LF will be replaced by CRLF the next time Git touches it\nwarning: in the working copy of 'tests/unit/document_understanding_selection/test_source_support_use.py', LF will be replaced by CRLF the next time Git touches it\n"
+        }
+      },
+      {
+        "status": "fulfilled",
+        "value": {
+          "chunk_id": "48d63a",
+          "wall_time_seconds": 1.1406023,
+          "exit_code": 0,
+          "original_token_count": 0,
+          "output": ""
+        }
+      },
+      {
+        "status": "fulfilled",
+        "value": {
+          "chunk_id": "cf2abf",
+          "wall_time_seconds": 1.1807282,
+          "exit_code": 0,
+          "original_token_count": 0,
+          "output": ""
+        }
+      }
+    ]
+  },
+  "cleanup": {
+    "owned_temp": ".c3su",
+    "absent": true,
+    "production_config_changes": false,
+    "committed": false
+  },
+  "external_work": {
+    "original_PDF_reads": 0,
+    "SDK_runs": 0,
+    "paid_model_calls": 0,
+    "downloads": 0,
+    "fresh_holdout_access": 0
+  },
+  "acceptance": "New positive single-value unresolved source offers are permitted. No invariant requires old38support/0unknown counts; bare Other/account rows/NPs must not gain support. ROOT independently checks actual five gold and full views.",
+  "pending": [
+    "ROOT independent CI-component review",
+    "ROOT one actual native five-gold/full-view replay",
+    "ROOT normal release/fullsrc/CI as needed; no new configured summary certified"
+  ]
+}

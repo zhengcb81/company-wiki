@@ -1,3 +1,5 @@
+> 2026-10-28最新：精确CI40725371023已FAIL，ROOT隔离26例13F/13P。下面组件独审/真实来源结果保留其范围；整体发布未验收通过，先按CURRENT_STATUS关闭兼容与完整性共因，再继续PDF/摘要。
+
 # 来源用途与选材共因：组件验收
 
 状态：SOURCE v6c＋ROOT consumer独立审查PASS；已正常提交推送ec7c8d84；precommit PASS，prepush158P/35.43秒，精确CI40725371023 in_progress/None。整体PWF继续ACTIVE，正式供应商摘要、恢复及RF预测采用不由本节点代签。

@@ -1,0 +1,14 @@
+{
+  "exit_code": 1,
+  "seconds": 8.162,
+  "targets": [
+    "tests/unit/document_understanding_selection/test_source_support_use.py::test_product_np_modifiers_do_not_supply_an_independent_predicate",
+    "tests/unit/document_understanding_selection/test_source_support_use.py::test_copular_and_finite_product_descriptions_have_real_predicates",
+    "tests/unit/document_understanding_selection/test_source_support_use.py::test_independent_acquisition_binds_local_actor_action_and_operating_object",
+    "tests/unit/document_understanding_selection/test_source_support_use.py::test_acquisition_word_without_local_operating_object_does_not_complete_a_proof",
+    "tests/unit/document_understanding_selection/test_source_support_use.py::test_real_guidance_clause_survives_a_separate_disclaimer_without_retyping_that_disclaimer",
+    "tests/unit/document_understanding_selection/test_source_support_use.py::test_single_operating_value_cells_keep_role_and_readable_offer_without_multiple_value_claim"
+  ],
+  "owned_temp": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c3su",
+  "owned_temp_absent": true
+}

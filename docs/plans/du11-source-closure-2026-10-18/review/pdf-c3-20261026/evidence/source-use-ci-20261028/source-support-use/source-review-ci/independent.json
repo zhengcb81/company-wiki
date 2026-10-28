@@ -1,0 +1,725 @@
+{
+  "schema_version": "independent-source-support-review/ci-final",
+  "status": "PASS",
+  "review_state": "FINAL",
+  "reviewer": "/root/c3_semantic_final_20261028",
+  "scope": "CI_COUNTERPROOF_SOURCE_COMPONENT_AND_STABLE_ROOT_WIRING",
+  "baseline": "ec7c8d84; CI40725371023 FAIL; original red26=13F13P retained",
+  "files": [
+    {
+      "path": "src/company_wiki/source_catalog/narrative_reading.py",
+      "sha256": "ba55b183886528e3be16c125f8674de5227a95ed12afc058ca3840f5599d6614",
+      "lf_sha256": "c996bdc7c9a03f57d8ada08ada59399073cac590b8de579514ea69889de73c87"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_policy.py",
+      "sha256": "74e8a02585d293d1eb6944ef1822df89316918268b8e958b6d8ebd503ce2752c",
+      "lf_sha256": "513c4df83baca59e80152121e6ded752b880391f8f715df61ec2c2718f973739"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_source_purpose.py",
+      "sha256": "9533140c4797f4ad56344ef2257a90d4cfee889be95cb896b7477dbe973ea7f1",
+      "lf_sha256": "e9b84f5dd70cdbeb353bc85c1fece91082afd4c268f675a4fd772a126d71b706"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_support_use.py",
+      "sha256": "10b6bd5e0fa7a8895ba94a9e84c474cb3e0dea2043921898c143093bdb9696c4",
+      "lf_sha256": "10b6bd5e0fa7a8895ba94a9e84c474cb3e0dea2043921898c143093bdb9696c4"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+      "sha256": "af91e2f24a4ddf773402a43e1bf4884c7ff019795e13ffb9b48e7dbe8072830b",
+      "lf_sha256": "ac82f984e77a46c46a5c596b2000d9658dbf86a79004f946b08c1d92922a8e65"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/relations.py",
+      "sha256": "5ea73a73c2e956f15f70d518cbee352d19d3b19d88f579015cbccc56054f261a",
+      "lf_sha256": "d440c148dc0634ab72c00f4a6464c926741ce1e8c5c2e8551457953d2559c524"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/patterns.py",
+      "sha256": "46d2a264fdfdb56677a32d1bb48019c111bd58b8086cc1f6b65bbdda33cef4ed",
+      "lf_sha256": "49bb93ff207c329c9ed87c3b978c359b1ab3eaa98078978c83cbe78ab062b39c"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/assertion_roles.py",
+      "sha256": "e2973f090b0f42b4acca43fcbbf6ab159218674ceae2d9a8ac79bf0508ea36f4",
+      "lf_sha256": "37cdfcc484c4addea806da55fc34374b9ba0ce0043b5ec0398a4e6a2f3b4bfe3"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_source_support_use.py",
+      "sha256": "4275e0d08c72e601486a8e16df062fb5e3395497595eb7732a23b788b242ec27",
+      "lf_sha256": "1ccccc426da1de651238d54773d97ba650b1e3b1eb4bdee70f609644f1939e47"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_budget.py",
+      "sha256": "b805b334233d2214d004774bbef8add00d99881346c5f48b4781a4f36c810be3",
+      "lf_sha256": "113645934c00dd82491413b5f4165a4e632e0a4f959b18dc4d71c88fa6e14a66"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_finalize.py",
+      "sha256": "feb6feb3fce94f003ed832ae147151adf64f50af7ed762ce005a6e5fdbc13e04",
+      "lf_sha256": "1dfb75374e9e45c255045d2e677883985a9af50790d6184300a92e0d284fb37e"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/structure/table_purpose.py",
+      "sha256": "2d87eec638175b4b1e1cce6f16fa9cf3c4809211194f48cfd9b53165d9113c46",
+      "lf_sha256": "0d92f12205582fbf04db5d282193fcd00aee18e207e92f549142f9a71bc5297b"
+    },
+    {
+      "path": "src/company_wiki/document_normalization/table_shapes.py",
+      "sha256": "585f24ce6ac16de2ad8b73c72daab7cca8e906eed60d8f365fc74bd46c490a2d",
+      "lf_sha256": "13893250c0e51cdd4bdeb8737c3ef950a20859916243fdfaa4caae2a74e81c99"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/decision_inventory.py",
+      "sha256": "9e8df7a11d3e21eaa51a82422e471047980ee16bb52c93fde9ac270e9473112e",
+      "lf_sha256": "2ffdae1dfee7d9200a57f01c538b3b57eef5100d5ca9ca43339d5055a5068e95"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_decision_inventory.py",
+      "sha256": "9e686dc091312e32d03e0775c34fbed74bf57044017f38c48a303712949790e1",
+      "lf_sha256": "63eb77c909cc5b7f354b4ef8b5cac364ecda83ad758c14bc14152b1e7a81294a"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py",
+      "sha256": "c51208649403682d6f5b6aa7e34f9a6ce6c44b4f6ef61dca094ee269a2895142",
+      "lf_sha256": "8d00f1f899b3ee6ff94b5f6a8b8a7e88a35574815e4e27a225bce2fade024560"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_multilevel_native_ancestry.py",
+      "sha256": "7c82d9b3f8837059738bb60f92a99d79eb85ac3fcf088e31d6938c178290893b",
+      "lf_sha256": "7c82d9b3f8837059738bb60f92a99d79eb85ac3fcf088e31d6938c178290893b"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_native_continuity.py",
+      "sha256": "cfab6382e91222aa7d028ee59d74d0f76ce5031c34f4d7701a7fd3367e2c1cb2",
+      "lf_sha256": "08d2ef04ad5dd3c5352b608880d5926ce411c3a92721f08d7bc8a93f19e7bb5e"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_native_dependency_closure.py",
+      "sha256": "aa1454780fc52a5017760218b64e08d1553c3440b9364c23a3a7346899b229cc",
+      "lf_sha256": "26ab4550dbe9f042be0713805e11c5fd025f9760ccfd7d79bb063254c6ad8561"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_production_selection.py",
+      "sha256": "3ea2648234bc2770307eaa425b31366bc655e0860c42ee197a831f3d14f7a5f8",
+      "lf_sha256": "1be6a28f9cf025346ee2980d047ba4e4280a7d65ab53c7d6fcf3e8b9bb426970"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_untyped_numeric_quality.py",
+      "sha256": "241b984f9f9230a7133e94d3faf26e10f2ebe52c3521de25ea1a8fc9994f5cf9",
+      "lf_sha256": "5febddfa0a8a879bbaaaa2ab02003593759384e100fbb0ddcf8043de063dc4fd"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_value_coverage.py",
+      "sha256": "6526e457a9b499e1c280782d773e6f81f7f6e2e972dd40a74e380a96e0835cc7",
+      "lf_sha256": "b63b7aff8c85c147df936973df5000232edbaca4d00a1a8c9d61a8404233c329"
+    },
+    {
+      "path": "tests/unit/document_understanding_root/test_operating_relation_production.py",
+      "sha256": "ed468c39c298fcda941d6636cb0726e69789f727dd094f127d1ee5277aa86acd",
+      "lf_sha256": "a516e01850f5fc49ae3521e92e7431b1f33c4f877256c787921b4dd9d6ceedf8"
+    },
+    {
+      "path": "tests/unit/test_narrative_reading_transport.py",
+      "sha256": "b02db7e9d6cbf9c6083248d612ce8077659a66da1a57e61d57a2966854ded4bf",
+      "lf_sha256": "1d65eafb44921be57edb308773a1245de039fab0930de0e2f84f56c263e3a7e2"
+    },
+    {
+      "path": "tests/unit/test_source_summary_capability.py",
+      "sha256": "d7f0900198dfb3779c5a29830f6881baf2ebc24fe4be6862af2d141afcc36d86",
+      "lf_sha256": "d7f0900198dfb3779c5a29830f6881baf2ebc24fe4be6862af2d141afcc36d86"
+    }
+  ],
+  "author_files": 13,
+  "stable_root_files": 12,
+  "changed_author_files": [
+    "src/company_wiki/document_normalization/table_shapes.py",
+    "src/company_wiki/document_understanding/operating_states/assertion_roles.py",
+    "src/company_wiki/source_catalog/narrative_source_purpose.py",
+    "src/company_wiki/source_catalog/narrative_support_use.py",
+    "tests/unit/document_understanding_selection/test_source_support_use.py"
+  ],
+  "binding": "13 author files match handoff-ci raw/LF SHA; all25 reviewed files verified before/after tests and final signing. Other8 author and12 ROOT files unchanged from the previous final review.",
+  "open_findings": [],
+  "root_cause_closure": {
+    "finite_predicate": "Bare product-for/available-in/offered-in NP modifiers cannot assert a descriptive predicate or fall through as function verbs. Finite comes-in and real copular assertions remain support; independent accounting/audit sentences cannot donate the missing predicate.",
+    "acquisition_roles": "Chinese acquisition consumes the existing same-clause actor/action/operating-object proof. Actual software/equipment business acquisition survives separate financial policy; bare assets/equity and audit procedure do not supply business completeness.",
+    "guidance_scope": "Purpose observes existing issuer-bound forecast proof on the exact source clause; a separate disclaimer no longer erases valid guidance. Standalone disclaimers remain non-operating; actual amounts/identifiers, other issuers and wrong-year premises cannot borrow the forecast.",
+    "numeric_axes": "One sweep caches any real scalar independently of multi-value ambiguity and whole-row coverage. Single operating measurement remains readable/unresolved, never generated support; Other/account rows do not gain independent business relevance. Missing marks alone do not invent real values.",
+    "preserved": "Whole-scope numeric terminal proof, current/legacy entrance isolation, original required context and cost, atomic heap/support priority, source IDs/locators, public /4 stage/wire and resource ceilings remain intact."
+  },
+  "code_quality": {
+    "verdict": "PASS",
+    "boundedness": "No new unbounded loop, text cache, payload inspection, budget or company/page/task condition. Description tails remain bounded; numeric observation adds one boolean in the same cell sweep. Clause-purpose guidance uses the existing scoped owner and cached source assessment.",
+    "version_pins": "assertion_roles, table_shapes, source-purpose/support-use and guidance owners are already in decision_inventory byte closure; changed source bytes invalidate the existing fingerprint. No new unregistered owner.",
+    "original_tests": "All4 original test files SHA-verified and git diff ec7c8d84 returned0; assertions and fixtures unchanged."
+  },
+  "independent_tests": {
+    "total_unique": 63,
+    "passed": 63,
+    "failed": 0,
+    "pytest_seconds": 9.19,
+    "runner_seconds": 10.289,
+    "original_CI_cases": 26,
+    "new_independent_neutral_controls": 17,
+    "necessary_regressions": 20,
+    "junit": "recheck.xml",
+    "log": "recheck.log",
+    "receipt": "recheck.json",
+    "nonproduct_warning": "asyncio_mode unregistered because unrelated plugin autoload is disabled; timeout plugin explicitly enabled.",
+    "not_aggregated": "Author416 and original red receipts are separate, overlapping evidence; no full-domain/416 rerun."
+  },
+  "root_validation": {
+    "mypy": {
+      "result": "PASS396src",
+      "artifact": {
+        "path": ".planning/c3-20261028/support-ci-final-mypy.log",
+        "sha256": "60bced76ab56e76b083157a70181a8162a3589e108419b3cad74bfd1a4f88c64",
+        "bytes": 46
+      }
+    },
+    "author": "416 unique PASS, including original44 subset; receipt-only not added to independent63.",
+    "native": {
+      "artifacts": [
+        {
+          "path": ".planning/c3-20261028/native-support-ci-final/result.json",
+          "sha256": "ad8e33f29a18a20109c322b2887963dfea1d1b6a702cf8d423686a7e61ef8d8d",
+          "bytes": 18496
+        },
+        {
+          "path": ".planning/c3-20261028/native-support-ci-final/selection.json.gz",
+          "sha256": "321a00f1dcd21fc6c9f629d6b8ea58e5664674fa7a6ce3ffb6432e4b5d56f8bf",
+          "bytes": 72074
+        },
+        {
+          "path": ".planning/c3-20261028/native-support-v6c/selection.json.gz",
+          "sha256": "321a00f1dcd21fc6c9f629d6b8ea58e5664674fa7a6ce3ffb6432e4b5d56f8bf",
+          "bytes": 72074
+        },
+        {
+          "path": "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/business-recovery-checkpoints/hk-development-business5-gold.json",
+          "sha256": "9feb80977944efb79c0d94b0975e6c464a2b95b0879e815559e70f2c541485a5",
+          "bytes": 6716
+        }
+      ],
+      "selection_uncompressed_sha256": "1fac11708ae79a78bc6c57e731ef29a21f820f22dc3a602d4f6a1b4ac26a6757",
+      "source_sha256": "4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+      "parsed_units": 2330,
+      "selected_spans": 81,
+      "support_tasks": 38,
+      "admitted_tasks": 38,
+      "all_38_support_raw_texts_exactly_equal_fully_reviewed_v6c": true,
+      "all_support_source_identity_and_locator_equal_v6c": true,
+      "gold_rescored": [
+        {
+          "id": "hk-industry-cloud-closure",
+          "supported": true,
+          "all_anchors_individually_present": true
+        },
+        {
+          "id": "hk-rd-period-scope",
+          "supported": true,
+          "all_anchors_individually_present": true
+        },
+        {
+          "id": "hk-outlook-not-actual",
+          "supported": true,
+          "all_anchors_individually_present": true
+        },
+        {
+          "id": "hk-cloud-server-c9a-x9a-release",
+          "supported": true,
+          "all_anchors_individually_present": true
+        },
+        {
+          "id": "hk-training-inference-platform-launch",
+          "supported": true,
+          "all_anchors_individually_present": true
+        }
+      ],
+      "oracle_scope": "single actual EvidenceSpan only; no legacy group-context substitution for current /4",
+      "gold_bindings": [
+        {
+          "id": "hk-industry-cloud-closure",
+          "task_keys": [
+            "t19"
+          ],
+          "support": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:0f887d75ce8ca0b8f1286183e21da451e63f4e297e4efd79664d9414c7a26430",
+              "source_id": "urn:company-wiki:source:sha256:4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+              "locator": "loc:v1/page:13/paragraph:9/chars:245-356",
+              "page": 13,
+              "text_sha256": "6a6152d09a439460a702e4ab391707fbb34317157cf5ab3026db38a1162f44a1"
+            }
+          ]
+        },
+        {
+          "id": "hk-rd-period-scope",
+          "task_keys": [
+            "t16"
+          ],
+          "support": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:ae5f4d14634776a788377b2a94cd69fc31a3cf0713f348ecfebfc2052412bf1f",
+              "source_id": "urn:company-wiki:source:sha256:4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+              "locator": "loc:v1/page:11/paragraph:21/chars:404-469",
+              "page": 11,
+              "text_sha256": "9303b865e4979fd3ef25c43997aa6ed8b0d857fa67949e50ef47b8a6402eb37e"
+            }
+          ]
+        },
+        {
+          "id": "hk-outlook-not-actual",
+          "task_keys": [
+            "t17"
+          ],
+          "support": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:e395049c60cd340ca2d8e90ef42468163895fbd38a73219c4a529f0ffbdd993d",
+              "source_id": "urn:company-wiki:source:sha256:4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+              "locator": "loc:v1/page:11/paragraph:24/chars:475-571",
+              "page": 11,
+              "text_sha256": "c9f9da0379c0fd23c230ea81b9c6058727b25f9b4f277d433ad4c6669cbaf82d"
+            }
+          ]
+        },
+        {
+          "id": "hk-cloud-server-c9a-x9a-release",
+          "task_keys": [
+            "t9"
+          ],
+          "support": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:1f7ecf4ec68b26351c21146cc74ec823968ed6019559489aafdaf001e7b63e7f",
+              "source_id": "urn:company-wiki:source:sha256:4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+              "locator": "loc:v1/page:10/paragraph:2/chars:21-178",
+              "page": 10,
+              "text_sha256": "f4fc31f0207cf0dc3143167893ea30a9ad4eaf41aa256f961d89b29c311c5311"
+            }
+          ]
+        },
+        {
+          "id": "hk-training-inference-platform-launch",
+          "task_keys": [
+            "t10"
+          ],
+          "support": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:39fa9abb35f7b6d484020457bf06034352188edd63872ebcd775865f6b64dceb",
+              "source_id": "urn:company-wiki:source:sha256:4f589193fae39fb53cb7d2121d93925b382bb052cfecbdc24e8e8271ea41bd36",
+              "locator": "loc:v1/page:10/paragraph:8/chars:178-299",
+              "page": 10,
+              "text_sha256": "e7264c6c458c2d9d71b5122fa83e54b31c80f61f227c5aa91755389451f7f3ec"
+            }
+          ]
+        }
+      ],
+      "old_critical": 3,
+      "incremental_business": 2,
+      "support_inventory": [
+        {
+          "task_key": "t1",
+          "support": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:a726230ce22d73e29e85d56b0c9e007d42f850066471cd7389639051f4502ff7",
+              "page": 60,
+              "text_sha256": "b9b40b09da444eb6b4e951fccf00326c4c8d163792503c10a53fa6d85d914257"
+            }
+          ]
+        },
+        {
+          "task_key": "t2",
+          "support": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:18b082e5dafeea15da624de42a54425e193ac1189ae90c7be539785e143c1878",
+              "page": 66,
+              "text_sha256": "6d58e0babe88560821b6ab09ac0d8db08b1386e41c5c0ad8c4b9308a698109dd"
+            }
+          ]
+        },
+        {
+          "task_key": "t3",
+          "support": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:4f4dc87550ede6b49625242286cc6e217104167a4cf5162d98cd15fdd1ebefef",
+              "page": 9,
+              "text_sha256": "006f46006ddc1c0311060a3764e952ddc623e310349ad80747c6bf49c1fa49d1"
+            }
+          ]
+        },
+        {
+          "task_key": "t4",
+          "support": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:b2bf738c04f0d3ac657b433f08a86862175de58bfde28936b72ca32b5eb8860b",
+              "page": 9,
+              "text_sha256": "d9d206b18b11702608c9db11bdb90b34411f3a49b47523ad2893840029674ea6"
+            }
+          ]
+        },
+        {
+          "task_key": "t5",
+          "support": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:210efbadac7b8c85edf037095059fdc8f0cc88a38e64224757ade2278eff7026",
+              "page": 9,
+              "text_sha256": "93f9d5521bbcdc13b9304c533478d68cf5a2385ead3dbc41f1d349b51e6cfd88"
+            }
+          ]
+        },
+        {
+          "task_key": "t6",
+          "support": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:936316afeb330e7e435731b866dfffd576596eba6186a0cdb2a0f9a491889ee2",
+              "page": 9,
+              "text_sha256": "2e66e9d1279633ca0367afaed01b4134c1d617277dd93c6b0538481c5a983016"
+            }
+          ]
+        },
+        {
+          "task_key": "t7",
+          "support": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:4be85a5a2ad4b0a8e79a4d340a7c50a3675aa07b651401ae003d1e14e040dead",
+              "page": 9,
+              "text_sha256": "cd55b108e0292e21a3005fbc54981be1ea852da40fd19ed3a17e1458888e40c9"
+            }
+          ]
+        },
+        {
+          "task_key": "t8",
+          "support": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:8818fc521557cd67fae4600425f2ee7100234303cd6172b22b37c636a9fa7316",
+              "page": 9,
+              "text_sha256": "ce0de1ea4304feed7a81db10fec98b295325905c2629588215188be2847a8168"
+            }
+          ]
+        },
+        {
+          "task_key": "t9",
+          "support": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:1f7ecf4ec68b26351c21146cc74ec823968ed6019559489aafdaf001e7b63e7f",
+              "page": 10,
+              "text_sha256": "f4fc31f0207cf0dc3143167893ea30a9ad4eaf41aa256f961d89b29c311c5311"
+            }
+          ]
+        },
+        {
+          "task_key": "t10",
+          "support": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:39fa9abb35f7b6d484020457bf06034352188edd63872ebcd775865f6b64dceb",
+              "page": 10,
+              "text_sha256": "e7264c6c458c2d9d71b5122fa83e54b31c80f61f227c5aa91755389451f7f3ec"
+            }
+          ]
+        },
+        {
+          "task_key": "t11",
+          "support": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:8facfc0d576e1a57a19bc09a369461f97dd092759766cd021359a17adedfbddc",
+              "page": 10,
+              "text_sha256": "8c9629329f9b1b8c4010d5cca8d4ee9a433333858e16090b2cc0db793ce31a43"
+            }
+          ]
+        },
+        {
+          "task_key": "t12",
+          "support": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:1de7e93f7bb352987434d1213901eae8f134591cb410248cda4b345e0bf67f36",
+              "page": 10,
+              "text_sha256": "e4fa609043e42d98233442cebf9cf4a07adc1e16cde9e39078f5b15290822be2"
+            }
+          ]
+        },
+        {
+          "task_key": "t13",
+          "support": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:525a35d6fe0dc8a88e169207582796b04116d50afb7af3962819cc81e1d13b03",
+              "page": 11,
+              "text_sha256": "5aaf63d16d84c4f21cde39a900fa14888715d23904f4a71d7f36974fc42361e8"
+            }
+          ]
+        },
+        {
+          "task_key": "t14",
+          "support": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:e7f50c2c92b0239ffc85cf16fdbaca4101461bfd4589735ec2bb5b4d8397a58b",
+              "page": 11,
+              "text_sha256": "a06bce3b25c4e30e8115e1b3cc093a43c5327c66837dc6aade407645d1996927"
+            }
+          ]
+        },
+        {
+          "task_key": "t15",
+          "support": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:4b0dcf1d2805672cfb61e7b85361f4e9c59eba7e0b3cb48600cce507332c9e77",
+              "page": 11,
+              "text_sha256": "b5445345e21dbf3e22af0cf4ab1f20b33aed9da28c4a851c7c58e77227f56541"
+            }
+          ]
+        },
+        {
+          "task_key": "t16",
+          "support": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:ae5f4d14634776a788377b2a94cd69fc31a3cf0713f348ecfebfc2052412bf1f",
+              "page": 11,
+              "text_sha256": "9303b865e4979fd3ef25c43997aa6ed8b0d857fa67949e50ef47b8a6402eb37e"
+            }
+          ]
+        },
+        {
+          "task_key": "t17",
+          "support": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:e395049c60cd340ca2d8e90ef42468163895fbd38a73219c4a529f0ffbdd993d",
+              "page": 11,
+              "text_sha256": "c9f9da0379c0fd23c230ea81b9c6058727b25f9b4f277d433ad4c6669cbaf82d"
+            }
+          ]
+        },
+        {
+          "task_key": "t18",
+          "support": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:a26ef156c5f0fb478d924f579b5dcff216786caba4f5ed126c68755b22913dd8",
+              "page": 13,
+              "text_sha256": "ec296777562c615e850f30a28e9b4497e90a5455a090c3ca4b5a68198b3e9b47"
+            }
+          ]
+        },
+        {
+          "task_key": "t19",
+          "support": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:0f887d75ce8ca0b8f1286183e21da451e63f4e297e4efd79664d9414c7a26430",
+              "page": 13,
+              "text_sha256": "6a6152d09a439460a702e4ab391707fbb34317157cf5ab3026db38a1162f44a1"
+            }
+          ]
+        },
+        {
+          "task_key": "t20",
+          "support": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:7b93bd1a2359ad75a22d86fc05f1d0499187f0a436a9eb346fc74a2181479183",
+              "page": 13,
+              "text_sha256": "6b0c3728102c0339579ed9c7cbf99c70e72c2db2292af8094e24482e9e56a4c0"
+            }
+          ]
+        },
+        {
+          "task_key": "t21",
+          "support": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:69ff7031971451decb1ea8bf50d13652db9f467b14c74b011cd9c1d64dd2ea0e",
+              "page": 13,
+              "text_sha256": "fd65e172efc7d2bf4e374cea9e23046cee441a141a6fd2ab4b37da33acc07e52"
+            }
+          ]
+        },
+        {
+          "task_key": "t22",
+          "support": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:46871741dd03ce6c6d8005c1d9104bbfd9cc64cbc01895e108b12d2023138253",
+              "page": 15,
+              "text_sha256": "96d709ce54262257755c2b1f54317fc0c50944156da22d5354b8830f4109046b"
+            }
+          ]
+        },
+        {
+          "task_key": "t23",
+          "support": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:5b61e1e80cdc9a1e4bf7fa418ca8a0ab6b41ffc92b4d12dd9d4c446cc50fb894",
+              "page": 15,
+              "text_sha256": "f8a4a82076e09114d30958a361124fa56b2ba89223bb83fbcfd1bd6e7ccf6f0d"
+            }
+          ]
+        },
+        {
+          "task_key": "t24",
+          "support": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:758fbd733944789866a438cab93fed0faece590487f4796fb19f5fd5106e6f4a",
+              "page": 16,
+              "text_sha256": "232bc5d3ef1ed6e52a95d08b42528921ff8b1053f945d12fb16f140b065f3c0d"
+            }
+          ]
+        },
+        {
+          "task_key": "t25",
+          "support": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:fbcc7fe501d4582332c63866c574c7150f7f38d840b50c1441e46f5ad2e6c847",
+              "page": 30,
+              "text_sha256": "67f2a4cf7fb0a023b9da984b79c07d5e712b9f94cf34f1f44617975991ebf1e1"
+            }
+          ]
+        },
+        {
+          "task_key": "t26",
+          "support": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:cbd98718fcaac669d6da0e7306544063dc66ddc9dfa45af23adb9cd085c0ce5a",
+              "page": 31,
+              "text_sha256": "d5597690d30faa3f1d3ee33caedf6f2bc7eb349584340686ba0877a629653a79"
+            }
+          ]
+        },
+        {
+          "task_key": "t27",
+          "support": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:0d37f44cedadb1ed894dd513356666eb2f10a4dd1252490d39b2ad38b19d982e",
+              "page": 43,
+              "text_sha256": "a3faf9e390701ae4c4be2ea8b1ff7a04e543158d22f294d48df6e7c5902383a6"
+            }
+          ]
+        },
+        {
+          "task_key": "t28",
+          "support": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:82b027b386d8f4eeba248557943b4fca6bcd36d49330efeadb801a5110372077",
+              "page": 43,
+              "text_sha256": "5d715657a0a4d29685b26bf015383ba8586730e84561b55f17c995799be30d62"
+            }
+          ]
+        },
+        {
+          "task_key": "t29",
+          "support": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:fd3bbf438dff21595e48fc4599558af7d5d00416ed1ca794b281428cd1b0bd11",
+              "page": 44,
+              "text_sha256": "90c309d3a6066730f5af0233f224add734b24cfe4f6052d4d6f6772df52c3939"
+            }
+          ]
+        },
+        {
+          "task_key": "t30",
+          "support": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:78fcb1f62afdbc8d331925ea874e7357653a1c4ef11b163d093d0b1772eb3bab",
+              "page": 45,
+              "text_sha256": "22a7a568ef481fd6aa1e73766e97d23440667f99b57ff20551e604077a56c3a8"
+            }
+          ]
+        },
+        {
+          "task_key": "t31",
+          "support": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:30988efa414e481761680d6c9b9b23b063166475d4fc4b66a9eb1cab5f0217bc",
+              "page": 50,
+              "text_sha256": "9dcc6e42e440b0f873ce2e3440db485ab604cf10227038d98e0a838da6f5a7f3"
+            }
+          ]
+        },
+        {
+          "task_key": "t32",
+          "support": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:2599b7c50356c1325e77d15a9bca58af805dd089dcfd2ee8763db140f98bc80d",
+              "page": 51,
+              "text_sha256": "3c486468691d397d5aea9ae9b28f5809ed2dbd4dc7f3925495f2b39ef1aa4cb6"
+            }
+          ]
+        },
+        {
+          "task_key": "t33",
+          "support": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:7d38f0f8a080a66f4bed83b4716c4c25caca6146f0386547e0e74eee0c33261f",
+              "page": 51,
+              "text_sha256": "dafe98612c2e69cc5c11b3761c9098643412ffb47d653f105fe085c41ce80b90"
+            }
+          ]
+        },
+        {
+          "task_key": "t34",
+          "support": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:5015d7057fcf95162916fc28736c4880ffee309b97ab29ccd761a19de0c3f27f",
+              "page": 51,
+              "text_sha256": "4b04b0ca0656016334c60927f8ab613017bb3dfc0a587c8d098625a156fd097a"
+            }
+          ]
+        },
+        {
+          "task_key": "t35",
+          "support": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:6c5b44fc8574de03949f029f89cec40c89facb281909f954e57d36fcb00a933e",
+              "page": 52,
+              "text_sha256": "4eb1f6ffeff78c8b9e467237f62c1156de5d95df9286220f60a146a5ace09c3f"
+            }
+          ]
+        },
+        {
+          "task_key": "t36",
+          "support": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:c52ff00d650c41765d408edfe0131dfd8fb52e4437d26dd27e9b9a500297482c",
+              "page": 52,
+              "text_sha256": "bad058015a90f00bde1be8e3d9de95b78add9eb1e115f757cf9e726f110e5c61"
+            }
+          ]
+        },
+        {
+          "task_key": "t37",
+          "support": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:dddd0d65fc9702548d62db123ca7b814d3d636f2debd1761ca6c0dd4337028e1",
+              "page": 52,
+              "text_sha256": "b9e090894932f95f60c733a5b7396cb02c26ac6940751ea0540f5d8a03c4b2fb"
+            }
+          ]
+        },
+        {
+          "task_key": "t38",
+          "support": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:3ba0b02f3f982b6e3e06fe47e74efac345952a0961629eac4d09766976295215",
+              "page": 52,
+              "text_sha256": "8f7ddf3ed257b39adbeaed3379872281434a42b8a8d8059e7a98a84c59c0f23e"
+            }
+          ]
+        }
+      ],
+      "seconds": 7.479,
+      "work_used": 6175509,
+      "max_work_units": 16000000,
+      "original_unchanged": true,
+      "SDK_calls": 0,
+      "model_POST": 0,
+      "summary_claim_coverage": "not evaluated; no new supplier summary"
+    }
+  },
+  "next_nodes_open": [
+    "Configured supplier actual summary and claim/citation content review",
+    "Current preparation revision actual restart/cross-run cache and fee/POST reuse",
+    "RF actual factual/model or forecast adoption; public reader compatibility is not adoption"
+  ],
+  "cleanup": {
+    "temporary": ".c3srci",
+    "absent": true,
+    "TEMP_TMP": "child environment only; parent unchanged",
+    "review_writes": "Only own source-review-ci evidence; no product/author-test/PWF/Git/config/original writes",
+    "review_PDF_SDK_model_HTTP_download": 0
+  }
+}

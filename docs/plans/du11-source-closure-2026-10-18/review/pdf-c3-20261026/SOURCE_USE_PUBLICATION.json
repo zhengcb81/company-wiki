@@ -11,10 +11,10 @@
   "exact_ci": {
     "id": 40725371023,
     "head_sha": "ec7c8d846a12f3f6f5f8c27a94063733e17187c7",
-    "status": "in_progress",
-    "conclusion": null,
+    "status": "completed",
+    "conclusion": "failure",
     "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40725371023",
-    "updated_at": "2026-10-28T16:22:51Z"
+    "updated_at": "2026-10-28T16:26:42Z"
   },
   "source_use_component": "INDEPENDENT_PASS",
   "native_business_gold": "5/5_SOURCE_AND_ADMITTED_TASK_ONLY",
@@ -24,5 +24,12 @@
   "limits_raised": false,
   "new_supplier_POST": 0,
   "originals_unchanged": true,
-  "next": "PARAGRAPH_DEMAND_ROOT_PLAN.md; then new5-gold configured formal summary/recovery/FF-RF and holdouts"
+  "next": "CI shared completeness and legacy scope root repair; then paragraph-demand and configured summary/cache/RF",
+  "overall_publication_acceptance": "CI_FAILED_ROOT_REPAIR_IN_PROGRESS",
+  "root_reproduction": {
+    "passed": 13,
+    "failed": 13,
+    "seconds": 4.1,
+    "group_count": 4
+  }
 }
