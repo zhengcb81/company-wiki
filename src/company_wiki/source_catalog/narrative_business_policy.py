@@ -56,7 +56,7 @@ _ACTIVITY = re.compile(
 
 # Only the opt-in ReadingPlan detector consumes these relations. Explicit
 # legacy selectors keep detect_business_fact and its historical predicates.
-READING_BUSINESS_POLICY_VERSION = "reading-business-policy/21"
+READING_BUSINESS_POLICY_VERSION = "reading-business-policy/22"
 READING_BUSINESS_SCAN_PASSES = (
     14 + READING_DISCLOSURE_SCAN_PASSES + READING_RECOGNITION_SCOPE_SCAN_PASSES
     + RESOURCE_READING_SCAN_PASSES
@@ -471,12 +471,31 @@ _REVENUE_CURRENCY = re.compile(
     r"[$¥€£]|人民币|人民幣|港币|港幣|美元|\b(?:USD|RMB|CNY|HKD)\b", re.I)
 
 
-_REVENUE_COMPARISON = re.compile(
-    r"同比|环比|環比|按年|按季|较上年|較上年|較去年|较去年|"
-    r"\b(?:yoy|qoq|mom|year[- ]over[- ]year|year[- ]on[- ]year|"
-    r"quarter[- ]over[- ]quarter|month[- ]over[- ]month)\b|"
-    r"\b(?:compared|relative)\s+(?:with|to)\s+(?:the\s+)?"
-    r"(?:prior|previous|preceding)\s+(?:year|quarter|month|period)\b", re.I)
+_PRIOR_COMPARISON = (r"\b(?:compared|relative)\s+(?:with|to)\s+(?:the\s+)?"
+                     r"(?:prior|previous|preceding)\s+")
+_SOURCE_COMPARISONS = (
+    ("year", r"同比|按年|较上年|較上年|較去年|较去年|"
+     r"\b(?:yoy|year[- ]over[- ]year|year[- ]on[- ]year)\b|" + _PRIOR_COMPARISON + r"year\b"),
+    ("quarter", r"按季|\b(?:qoq|quarter[- ]over[- ]quarter)\b|" + _PRIOR_COMPARISON + r"quarter\b"),
+    ("month", r"\b(?:mom|month[- ]over[- ]month)\b|" + _PRIOR_COMPARISON + r"month\b"),
+    ("period", r"环比|環比|" + _PRIOR_COMPARISON + r"period\b"),
+)
+# One vocabulary serves recognition, result qualifiers and comparison identity.
+# An unspecified prior period does not invent a quarter/month interval.
+SOURCE_COMPARISON_MODIFIER_PATTERN = "|".join("(?:" + pattern + ")" for _, pattern in _SOURCE_COMPARISONS)
+_REVENUE_COMPARISON = re.compile(SOURCE_COMPARISON_MODIFIER_PATTERN, re.I)
+_SOURCE_COMPARISON_BASIS = re.compile("|".join(
+    "(?P<" + basis + ">" + pattern + ")" for basis, pattern in _SOURCE_COMPARISONS), re.I)
+
+
+def source_comparison_bases(text: str, start: int | None = None,
+                            end: int | None = None) -> frozenset[str]:
+    """Explicit comparison identity in one assertion, never inferred periods."""
+    if start is not None and end is not None:
+        left, right = predicate_scope(text, start, end)
+        text = text[left:right]
+    return frozenset(match.lastgroup for match in _SOURCE_COMPARISON_BASIS.finditer(text)
+                     if match.lastgroup is not None and match.lastgroup != "period")
 
 
 _REVENUE_COMPARISON_SUFFIX = re.compile(
@@ -967,4 +986,5 @@ def project_reading_business_fact(text: str, source_relations: dict, *,
 
 __all__ = ["business_objects", "business_qualification", "detect_business_fact",
            "detect_reading_business_fact", "project_reading_business_fact",
-           "reject_finance_only_text", "source_result_subject", "READING_BUSINESS_POLICY_VERSION"]
+           "reject_finance_only_text", "source_result_subject", "READING_BUSINESS_POLICY_VERSION",
+           "SOURCE_COMPARISON_MODIFIER_PATTERN", "source_comparison_bases"]

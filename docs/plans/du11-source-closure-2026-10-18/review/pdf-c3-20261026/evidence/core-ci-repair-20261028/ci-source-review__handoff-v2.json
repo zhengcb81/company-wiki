@@ -1,0 +1,103 @@
+{
+  "schema_version": "ci-source-operating-actions-handoff/2",
+  "status": "FROZEN_READY_FOR_INDEPENDENT_RECHECK",
+  "author": "/root/ci_source_controls_review",
+  "files": [
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/patterns.py",
+      "lf_sha256": "38ff8d1633624d9f093ac13f2ef5800644bebba0bcc3f6103bc97bf79e227a9f"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/relations.py",
+      "lf_sha256": "0b9979fc5c5383842acdf3e9d95eb735decfd47a4ac39525bdcf6186d86e3e91"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_source_operating_actions.py",
+      "lf_sha256": "f8e00fe71c1e9bcd194013cc93137f88aae1c9e57e807f425a6469057820ea8d"
+    }
+  ],
+  "root_causes": [
+    "Explicit active product launch was absent from source relation grammar; text-only progress was correctly demoted but meaningful business recall was lost.",
+    "Destination shipment predicate plus qualification purpose was absent; an observed planned action was interpreted only as distant unknown qualification."
+  ],
+  "architecture": "Existing operating relation owner only: direct actor/product/action binding, same polarity/stage/modality/attribution and exact refs. Unknown remains description, no source_catalog permission or finance exemption changes.",
+  "minimal_fact_correction": "ROOT review caught initial commercialization activity overclaim. New activity product_launch is an open relation string; generic source state consumes it without commercial/revenue inference.",
+  "red": {
+    "initial": "10 failed/5 passed",
+    "pre_object_modifier": "2 failed/19 passed",
+    "launch_not_commercialization": "2 failed"
+  },
+  "final": {
+    "total": 133,
+    "failed": 0,
+    "permanent_new_cases": 37,
+    "independent_counterexamples_included": 11,
+    "pytest_seconds": 4.21,
+    "runner_receipt": {
+      "targets": [
+        "tests/unit/document_understanding_selection/test_source_operating_actions.py",
+        ".planning/c3-20261028/ci-source-review/test_independent_source_actions.py",
+        "tests/unit/du11_source_quality/test_material_readiness.py::test_production_keeps_heading_as_context_and_carries_source_priority",
+        "tests/unit/document_understanding_selection/test_reading_native_continuity.py::test_recorded_word_breaks_preserve_current_future_and_verification_qualifiers",
+        "tests/unit/document_understanding_root/test_operating_relation_production.py",
+        "tests/unit/document_understanding_selection/test_reading_predicate_grammar_controls.py",
+        "tests/unit/document_understanding_selection/test_reading_predicate_state_owner.py"
+      ],
+      "exit_code": 0,
+      "seconds": 5.046,
+      "files": [
+        {
+          "path": "src/company_wiki/document_understanding/operating_states/patterns.py",
+          "lf_sha256": "38ff8d1633624d9f093ac13f2ef5800644bebba0bcc3f6103bc97bf79e227a9f"
+        },
+        {
+          "path": "src/company_wiki/document_understanding/operating_states/relations.py",
+          "lf_sha256": "0b9979fc5c5383842acdf3e9d95eb735decfd47a4ac39525bdcf6186d86e3e91"
+        },
+        {
+          "path": "tests/unit/document_understanding_selection/test_source_operating_actions.py",
+          "lf_sha256": "f8e00fe71c1e9bcd194013cc93137f88aae1c9e57e807f425a6469057820ea8d"
+        }
+      ],
+      "same_files_after": true
+    },
+    "counts_overlap": true
+  },
+  "original_ci_tests_unchanged": [
+    "tests/unit/du11_source_quality/test_material_readiness.py",
+    "tests/unit/document_understanding_selection/test_reading_native_continuity.py"
+  ],
+  "original_ci_nodes_pass": true,
+  "static": {
+    "ruff": "PASS",
+    "mypy": "2 source files PASS",
+    "diff_check": "PASS"
+  },
+  "identity": "decision_inventory already includes operating_states.patterns and relations module hashes; no parallel cache owner/schema needed",
+  "limits_unchanged": true,
+  "originals_and_production_config_untouched": true,
+  "new_model_calls": 0,
+  "downloads": 0,
+  "true_docling_runs": 0,
+  "synthetic_pdf": "one-page in-memory fixture only",
+  "cleanup": {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c3cir",
+    "restored_absent": true,
+    "model_calls": 0,
+    "Docling_runs": 0
+  },
+  "limits": [
+    "Explicit direct active launch grammar; arbitrary issuer proper names/passive or embedded launch phrasing remain conservative descriptions.",
+    "Planned shipment source purpose is retained; no qualification pass or commercial revenue is inferred.",
+    "No independent author self-approval; ROOT to request separate reviewer."
+  ],
+  "next": "Separate independent grammar review; this author then independently reviews ROOT CI3file delta, never own grammar.",
+  "supersedes": "handoff.json for current SHA/tests; initial108P remains historical",
+  "independent_findings_fixed": [
+    "Invalid candidate never commits overlap cursor, actor/topic, main predicate cursor or embedded range state; all commit transactionally after validation.",
+    "Accepted launch owns only actual predicate/object/qualifier extent, not its greedily captured coordinated tail; explicit new event object blocks inherited previous product.",
+    "Temporal frames are proved by shared time owner, not arbitrary leading text; source prefix is not reclassified as actor.",
+    "Disposal 将 is separated from product only with a bounded object boundary. Bare 将 without temporal proof stays unknown/uncertain; future time is planned, past/已将 is actual; internal 将 in 将星设备 remains part of product."
+  ],
+  "independent_review": "pending directed recheck by non-author, not author self-PASS"
+}

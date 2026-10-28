@@ -61,3 +61,13 @@ A v3+B v2共19文件工程独审PASS/51项，全src391 mypy PASS，308项指标�
 2. PDF owner显式版本化完成页检查点协议/recipe；一热converter，单一现有deadline、内存和stdout字节预算。每页输出完整有序、源/模型/环境绑定的原子记录；父进程只采用完整并严格验真的页，原生完整成员对齐不变。迟到、重复、越界或错绑定整记录不能吞掉。只有异常结束时可忽略最后半帧；完成状态、已完成页与未完成页分别报告，partial不能冒称全量成功。
 3. 测试先RED：中性第一/二页完成后第三页超时；最后记录截断；错SHA/环境/页顺序/重复页/越界/超item/超字节；无第一页仍native fallback；完整旧单JSON兼容。用轻量模拟子进程验证真实TransportError.stdout清理及截止边界，不启动真Docling或新下载。
 4. A只改PDF增强/worker/纯wire helper及该层测试，ROOT只改observer/诊断与PWF；本工程19文件与原件不动。大节点独审全部修复后才做改变recipe的真实复验。新输出若仍缺证，使用已保留诊断定位，不提高限额或盲重试。成功后再独审最终摘要、实际恢复/缓存/FF-RF读取，后续RF模型采用单独验收。
+
+## 精确CI反证与来源泛化补强（2026-10-28，优先闭合）
+
+74d98a57精确CI40661418382已failure（不是运行中/绿）；公开annotations与本地7F/13P定向复现一致。四项属当前协议版本fixture陈旧及global40/per-task2同时超限时原有结构错误优先级漂移：当前fixture必须从唯一boundary owner取版本，但仍保留旧/stale paid pin拒绝；恢复先全局40后每task2，均在salvage前拒绝，不撤任何上限。
+
+一项数表旧测试的原文/flag/constraint断言继续保留，后半应验证完整source plan可诊断、known ambiguous support不送模型，不应为了旧测试把歧义数表重新送去生成。另两项是**真实业务召回缺口**：明确launched软件平台、即将发往客户产线验证，原unknown被过度提升掩盖了grammar owner缺动作识别；不得简单把meaningful断言改成description。由operating_states owner复用主体/对象/模态识别，否定/计划/供应商/launch cost/event名/无产品反控先RED，保留发往验证≠已验证。
+
+同节点补出了bare-result的通用比较修饰词缺口；复用唯一比较词汇owner，前后显式yoy/qoq互斥不能借同一结果，比较仅绑定实际方向断言及reference marker，其他句的词不捐口径。原RED6F/51P、独审3F冻结，现177项相关语义通过及64永久source/work控制通过，待最终定向独审。没有改公司/文种gold、金额单位或预算。
+
+后续大节点本地验收必须复用这7项生产接缝及其新正反控制，再加有界PDF wire/读取接缝、source→scoped/paid recovery。它们是**大节点检查包**，不扩大每次commit/pre-push，不跑超时整批；完整unit仍由CI做反证，出现失败逐项判断产品或测试根因，不批量改期望换绿。

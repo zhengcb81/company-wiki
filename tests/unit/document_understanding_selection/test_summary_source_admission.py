@@ -206,3 +206,51 @@ def test_frozen_review_unidentified_change_cannot_supply_a_result_subject(before
     assert result["status"] in {"missing", "partial"}
     assert not result["required_original_unit_ids"]
     assert not result["support_original_unit_ids"]
+
+
+@pytest.mark.parametrize("cause", (
+    "該同比增加主要是由於擴展我們的雲服務。",
+    "该环比增长主要由于增加云服务客户。",
+    "This year-on-year increase was due to expanding our cloud services.",
+))
+def test_comparison_qualifier_does_not_turn_an_orphan_result_into_a_fact(cause):
+    parsed, pipeline = source_fixture([("There was an increase of 12%.",), (cause,)])
+    _, _, packages, _, withheld = reading._candidates(parsed, pipeline)
+    uid = parsed.units[-1].unit_id
+    assert not [p for p in packages if uid in p.get("anchor_unit_ids", ())]
+    assert any(row["reason"] == "REFERENCE_UNRESOLVED" for row in withheld)
+
+
+@pytest.mark.parametrize("cause", (
+    "該同比增加主要是由於擴展我們的雲服務。",
+    "该环比增长主要由于增加云服务客户。",
+    "This year-on-year increase was due to expanding our cloud services.",
+))
+def test_comparison_qualified_result_keeps_the_same_source_subject_contract(cause):
+    session, ids = reference_case(["Our cloud service revenue increased by 12%.", cause])
+    result = session.reference(ids[-1])
+    assert result["status"] == "unique"
+    assert result["support_original_unit_ids"] == (ids[0],)
+
+
+@pytest.mark.parametrize("before,cause,closes", (
+    ("Our cloud service revenue increased by 12% year-over-year.",
+     "This quarter-over-quarter increase was due to higher customer demand.", False),
+    ("Our cloud service revenue declined by 12% quarter-over-quarter.",
+     "This year-over-year decline was due to lower customer demand.", False),
+    ("Our cloud service revenue increased by 12% year-over-year.",
+     "This year-on-year increase was due to higher customer demand.", True),
+    ("The glossary mentions year-on-year trends. Our cloud service revenue increased by 12% quarter-over-quarter.",
+     "This qoq increase was due to higher customer demand.", True),
+    ("Our cloud service revenue increased by 12% quarter-over-quarter.",
+     "This qoq increase was due to higher customer demand. The glossary mentions year-over-year trends.", True),
+))
+def test_result_comparison_identity_is_bound_to_the_direction_assertion(before, cause, closes):
+    session, ids = reference_case([before, cause])
+    result = session.reference(ids[-1])
+    if closes:
+        assert result["status"] == "unique"
+        assert result["support_original_unit_ids"] == (ids[0],)
+    else:
+        assert result["status"] in {"missing", "partial", "ambiguous"}
+        assert not result["support_original_unit_ids"]

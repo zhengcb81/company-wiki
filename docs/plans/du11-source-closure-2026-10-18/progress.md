@@ -1399,3 +1399,12 @@ CI0c988e8d/40406128851已于2026-10-26T21:44:13Z completed/success，正常hooks
 **唯一下一步：** 修PDF阅读层的全或无页结果可靠性缺口：保持单converter、120秒/4GiB/3pages/2MiB与全部SHA/环境绑定，逐完成页原子检查点，未完成页留partial缺口；纯wire/短子进程TDD→独立大节点审查→改变recipe后一次真实复验。测试观察同时保留typed selection及reading_execution，避免临时湖清理后丢诊断。不抬额度、不调公司/字体/页号特例、不恢复unknown业务豁免、不在摘要compiler跨task拼证。完整细则见[SUMMARY_QUALITY_PLAN](review/pdf-c3-20261026/SUMMARY_QUALITY_PLAN.md)。
 
 母账仍1,800,368tokens/$0.727945（6笔新unknown及旧7hold保留），配置10M/$20未升。原件/生产配置与其他owner WIP不变；测试湖、外层临时根均恢复。新holdout、实际RF预测及公司循环仍OPEN，Dashboard独立。下方均为历史，不覆盖本段及CURRENT_STATUS.json。
+
+
+2026-10-28：工程及诊断20文件已正常commit/push master74d98a57，Git LF SHA逐一等于独审清单，precommit PASS、prepush158P/49.54秒。精确CI40661418382运行中，尚不签远端成功。本次真实0POST阻断/旧付费2of3失败均原样保留；进入PDF层页检查点TDD，不抬资源上限。
+
+
+2026-10-28：精确CI40661418382 failure，7项本地定向复现。4协议/优先级项已63P，歧义数表按原检索断言+新生成合同修后35P；两真实launch/计划发往验证语义缺口由独立作者修共用operating_states owner，原断言保留。比较基准delta另有64P、待独审；PDF页检查点初版112P、作者继续严格反控。新增0外部模型/费用。
+
+
+2026-10-28：核心9文件三份独立审查均PASS，集中184P/7.10秒覆盖原CI7失败。新增发布/商业化区分、候选状态与占用范围事务提交、前置期间与将/处置模态、比较基准同断言闭合；raw/flag检索与各硬cap保留。PDF v4作者此前已结束，ROOT仅投递消息没有显式重新激活导致等待，已明确纠正调度；先正常发布核心修正，再用followup_task启动PDF v5，不将已投递当开工。0新增模型/费用。

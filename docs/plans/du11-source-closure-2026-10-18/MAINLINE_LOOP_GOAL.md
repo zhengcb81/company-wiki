@@ -1,12 +1,12 @@
 # 当前主线循环目标
 
-## 2026-10-28 当前：摘要共因工程通过，真实来源闭合仍待修复
+## 2026-10-28 当前：已发布工程遇CI反证，补共用语义与PDF可靠性
 
 已完成来源用途/金融豁免、支持能力、priority/purpose投影、精确scope去重、软目标与输出cap共因修复。独审三项追加问题（无主体增长误闭合、逐task2未执行、metric平方扫描）均闭合，19文件工程独审PASS/51项，指标相关308项与全src391文件mypy通过，计数重叠不相加。[工程收据](review/pdf-c3-20261026/QUALITY_ENGINEERING.md)。
 
 一次同配置真实复验146.072秒在费用预留前正确拒绝：行业云收入头与同比/原因尾分属两个task，prepared gold2/3；原文未全丢，但单组事实支持不完整。当前用途逻辑能保留旧已闭合4段组，尚不能证明新Docling具体为何未闭合。0POST、0预留、0新增费用/unknown；本run没有新final，也没有执行恢复/缓存/FF/RF，不能代签内容通过。[真实阻断](review/pdf-c3-20261026/QUALITY_REAL_RESULT.json)。旧唯一付费摘要2/3失败保持。
 
-**唯一下一步：** 修PDF阅读层的全或无页结果可靠性缺口：保持单converter、120秒/4GiB/3pages/2MiB与全部SHA/环境绑定，逐完成页原子检查点，未完成页留partial缺口；纯wire/短子进程TDD→独立大节点审查→改变recipe后一次真实复验。测试观察同时保留typed selection及reading_execution，避免临时湖清理后丢诊断。不抬额度、不调公司/字体/页号特例、不恢复unknown业务豁免、不在摘要compiler跨task拼证。完整细则见[SUMMARY_QUALITY_PLAN](review/pdf-c3-20261026/SUMMARY_QUALITY_PLAN.md)。
+**唯一下一步：** 7个CI失败已在当前9文件根修及独审中闭合（集中184P/7.10秒，原CI两项语义断言保留），正常发布并观察新精确CI；明确重新激活已结束的PDF作者，修复v4独审3问题。原74d98a57精确CI40661418382仍保留failure。此前排查的7个失败（4协议/上限顺序、1歧义数表旧生成合同、2真实业务语法缺口，原关键断言保留），以及显式比较基准一致性根修；并行修PDF阅读层的全或无页结果可靠性缺口：保持单converter、120秒/4GiB/3pages/2MiB与全部SHA/环境绑定，逐完成页原子检查点，未完成页留partial缺口；纯wire/短子进程TDD→独立大节点审查→改变recipe后一次真实复验。测试观察同时保留typed selection及reading_execution，避免临时湖清理后丢诊断。不抬额度、不调公司/字体/页号特例、不恢复unknown业务豁免、不在摘要compiler跨task拼证。完整细则见[SUMMARY_QUALITY_PLAN](review/pdf-c3-20261026/SUMMARY_QUALITY_PLAN.md)。
 
 母账仍1,800,368tokens/$0.727945（6笔新unknown及旧7hold保留），配置10M/$20未升。原件/生产配置与其他owner WIP不变；测试湖、外层临时根均恢复。新holdout、实际RF预测及公司循环仍OPEN，Dashboard独立。下方均为历史，不覆盖本段及CURRENT_STATUS.json。
 

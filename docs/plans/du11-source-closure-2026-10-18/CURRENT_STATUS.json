@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-28",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_C3_SOURCE_CLOSURE_REGRESSION_DIAGNOSIS",
+  "overall_status": "ACTIVE_C3_CORE_CI_ACCEPTED_PDF_REVIEW_FIX_PENDING",
   "parallel_packages_20261025": {
     "status": "W16_W17_W18_ROOT_COMPONENT_ACCEPTED_MERGED",
     "entry": "harness_lanes/20261025/README.md",
@@ -26,14 +26,14 @@
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
-  "last_code_commit": "0da0ca6c1894f4a73f8f86ca75e33baed288de92",
+  "last_code_commit": "74d98a57391ae6fdcb54981999b4dc1bc021da11",
   "code_ci": {
-    "id": 40647344290,
-    "head_sha": "0da0ca6c1894f4a73f8f86ca75e33baed288de92",
+    "id": 40661418382,
+    "head_sha": "74d98a57391ae6fdcb54981999b4dc1bc021da11",
     "status": "completed",
-    "conclusion": "success",
-    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40647344290",
-    "updated_at": "2026-10-28T07:06:13Z"
+    "conclusion": "failure",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40661418382",
+    "updated_at": "2026-10-28T09:09:49Z"
   },
   "formal_v4_offline_selection_replay_20261025": {
     "status": "EXACT_REPRODUCED_NO_PAID_CALL",
@@ -2345,7 +2345,7 @@
     "published": true,
     "push_failure": "47 targets /392 collected /600s; two regressions being root-fixed, not waived by narrower daily gate"
   },
-  "next_action": "Diagnose source native-continuity/carrier→closed group regression using saved fragments and neutral source fixtures, fix common owner without unknown-business exemption or compiler cross-task stitching, independent targeted review then one changed-recipe real revalidation. Preserve failed0POST and previous paid2/3.",
+  "next_action": "Activate PDF author explicitly after publish; close resource/opaqueID/prefix3 issues, independent recheck, one changed-recipe real test",
   "c3_runtime_recovery_20261026": {
     "entry": "review/pdf-c3-20261026/RUNTIME_RECOVERY.md",
     "environment_independent": "PASS_ZERO_OPEN_25_TESTS_AND_REAL_WORKER_ENTRYPOINTS",
@@ -2494,6 +2494,50 @@
     "mother_micro_usd": 727945,
     "publication_review": "review/pdf-c3-20261026/evidence/summary-quality-20261028/observer/observer-checkpoint-review.json",
     "observer_delta": "PASS_20_FINAL_FILES_13_INDEPENDENT_TESTS",
-    "page_checkpoint_plan": "review/pdf-c3-20261026/PDF_PAGE_CHECKPOINT_PLAN.md"
+    "page_checkpoint_plan": "review/pdf-c3-20261026/PDF_PAGE_CHECKPOINT_PLAN.md",
+    "publication": {
+      "schema_version": "c3-summary-quality-publication/1",
+      "commit": "74d98a57391ae6fdcb54981999b4dc1bc021da11",
+      "pushed": true,
+      "git_lf_sha_matches_independent_review": 20,
+      "normal_precommit": "PASS",
+      "normal_prepush": {
+        "passed": 158,
+        "seconds": 49.54
+      },
+      "exact_ci": [
+        {
+          "id": 40661418382,
+          "head_sha": "74d98a57391ae6fdcb54981999b4dc1bc021da11",
+          "status": "completed",
+          "conclusion": "failure",
+          "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40661418382",
+          "updated_at": "2026-10-28T09:09:49Z"
+        }
+      ],
+      "real_status": "PRE_RESERVATION_BLOCKED_0_POST_NOT_CONTENT_PASS",
+      "next": "PDF_PAGE_CHECKPOINT_PLAN.md",
+      "new_paid_calls": 0
+    }
+  },
+  "core_ci_repair_20261028": {
+    "schema_version": "c3-core-ci-repair/1",
+    "status": "ACCEPTED_PENDING_NORMAL_PUBLICATION",
+    "base_commit": "74d98a57391ae6fdcb54981999b4dc1bc021da11",
+    "failed_ci": 40661418382,
+    "accepted_files": 9,
+    "independent_reviews": [
+      "quality-content-review/source-comparison-review.json",
+      "ci-source-review/root-ci-review.json",
+      "ci-source-review/source-actions-review.json"
+    ],
+    "focused_tests": 184,
+    "seconds": 7.1,
+    "old_ci_failures_closed_in_local": "7_OF_7",
+    "limits_unchanged": true,
+    "new_paid_calls": 0,
+    "PDF_status": "v4 CHANGES_REQUESTED3 pending author reactivation; no v5 run",
+    "source_content_status": "Still0POST blocked, no new final",
+    "next": "Activate PDF author explicitly after publish; close resource/opaqueID/prefix3 issues, independent recheck, one changed-recipe real test"
   }
 }

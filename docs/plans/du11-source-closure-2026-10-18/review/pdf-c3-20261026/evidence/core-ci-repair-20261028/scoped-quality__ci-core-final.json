@@ -1,0 +1,19 @@
+{
+  "exit_code": 0,
+  "seconds": 7.941,
+  "targets": [
+    "tests/unit/test_scoped_source_admission.py",
+    "tests/unit/test_narrative_scoped_runtime.py",
+    "tests/unit/test_narrative_extractive_runtime.py",
+    "tests/unit/test_narrative_extractive_production.py::test_failed_batch_recovery_candidates_require_exact_frozen_paid_protocol",
+    "tests/unit/test_narrative_extractive_production.py::test_explicit_v5_request_roundtrip_and_explicit_v4_retains_its_original_protocol",
+    "tests/unit/du11_source_quality/test_material_readiness.py::test_production_keeps_heading_as_context_and_carries_source_priority",
+    "tests/unit/document_understanding_selection/test_reading_native_continuity.py::test_recorded_word_breaks_preserve_current_future_and_verification_qualifiers",
+    "tests/unit/document_understanding_root/test_native_table_production.py",
+    "tests/unit/document_understanding_selection/test_source_operating_actions.py",
+    "tests/unit/document_understanding_selection/test_summary_source_admission.py",
+    "tests/unit/document_understanding_selection/test_summary_source_metric_work.py"
+  ],
+  "owned_tmp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.sqt28ci-core-final",
+  "cleanup_pending": true
+}

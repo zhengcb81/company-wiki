@@ -1,0 +1,161 @@
+{
+  "total_count": 1,
+  "jobs": [
+    {
+      "id": 122725100614,
+      "run_id": 40661418382,
+      "workflow_name": "CI",
+      "head_branch": "master",
+      "run_url": "https://api.github.com/repos/zhengcb81/company-wiki/actions/runs/40661418382",
+      "run_attempt": 1,
+      "node_id": "CR_kwDOSGURns8AAAAckvxsRg",
+      "head_sha": "74d98a57391ae6fdcb54981999b4dc1bc021da11",
+      "url": "https://api.github.com/repos/zhengcb81/company-wiki/actions/jobs/122725100614",
+      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40661418382/job/122725100614",
+      "status": "completed",
+      "conclusion": "failure",
+      "created_at": "2026-10-28T09:04:32Z",
+      "started_at": "2026-10-28T09:04:34Z",
+      "completed_at": "2026-10-28T09:09:48Z",
+      "name": "Fast checks (Python 3.12)",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-10-28T09:04:35Z",
+          "completed_at": "2026-10-28T09:04:36Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-10-28T09:04:36Z",
+          "completed_at": "2026-10-28T09:04:40Z"
+        },
+        {
+          "name": "Set up Python 3.12",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-10-28T09:04:40Z",
+          "completed_at": "2026-10-28T09:04:44Z"
+        },
+        {
+          "name": "Install dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-10-28T09:04:44Z",
+          "completed_at": "2026-10-28T09:05:12Z"
+        },
+        {
+          "name": "Ruff lint",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-10-28T09:05:12Z",
+          "completed_at": "2026-10-28T09:05:12Z"
+        },
+        {
+          "name": "Strict type check on src",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-10-28T09:05:12Z",
+          "completed_at": "2026-10-28T09:05:25Z"
+        },
+        {
+          "name": "Compileall and config doctor",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-10-28T09:05:25Z",
+          "completed_at": "2026-10-28T09:05:29Z"
+        },
+        {
+          "name": "Unit tests",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 8,
+          "started_at": "2026-10-28T09:05:29Z",
+          "completed_at": "2026-10-28T09:09:45Z"
+        },
+        {
+          "name": "Unit test failure summary",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9,
+          "started_at": "2026-10-28T09:09:45Z",
+          "completed_at": "2026-10-28T09:09:45Z"
+        },
+        {
+          "name": "Focused contract tests",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 10,
+          "started_at": "2026-10-28T09:09:45Z",
+          "completed_at": "2026-10-28T09:09:45Z"
+        },
+        {
+          "name": "Focused contract failure summary",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11,
+          "started_at": "2026-10-28T09:09:45Z",
+          "completed_at": "2026-10-28T09:09:46Z"
+        },
+        {
+          "name": "CLI smoke test",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 12,
+          "started_at": "2026-10-28T09:09:46Z",
+          "completed_at": "2026-10-28T09:09:46Z"
+        },
+        {
+          "name": "Scan for hardcoded secrets",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 13,
+          "started_at": "2026-10-28T09:09:46Z",
+          "completed_at": "2026-10-28T09:09:46Z"
+        },
+        {
+          "name": "Post Set up Python 3.12",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 25,
+          "started_at": "2026-10-28T09:09:46Z",
+          "completed_at": "2026-10-28T09:09:46Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 26,
+          "started_at": "2026-10-28T09:09:46Z",
+          "completed_at": "2026-10-28T09:09:46Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 27,
+          "started_at": "2026-10-28T09:09:46Z",
+          "completed_at": "2026-10-28T09:09:46Z"
+        }
+      ],
+      "check_run_url": "https://api.github.com/repos/zhengcb81/company-wiki/check-runs/122725100614",
+      "labels": [
+        "ubuntu-latest"
+      ],
+      "runner_id": 1000002343,
+      "runner_name": "GitHub Actions 1000002343",
+      "runner_group_id": 0,
+      "runner_group_name": "GitHub Actions"
+    }
+  ]
+}

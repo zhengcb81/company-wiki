@@ -1,0 +1,79 @@
+{
+  "schema": "cwp-source-comparison-independent/2",
+  "status": "PASS",
+  "open": [],
+  "base_revision": "74d98a57",
+  "reviewer": "/root/c3_semantic_final_20261028",
+  "files": [
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_policy.py",
+      "lf_sha256": "57a2a8a74be95833613a78524109e6c82b3cd75649c769c384b17efeac81b235"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+      "lf_sha256": "73a14192e9cbeff0f59fae4fb79d526e4241a82f8093a5098f302346e12b70a9"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_summary_source_admission.py",
+      "lf_sha256": "5cb8ed07b3f9443422a6b4e778016f640108fc324997144d008987cc660499ed"
+    }
+  ],
+  "matches_final_freeze": true,
+  "source_unchanged_during_recheck": true,
+  "closed": [
+    {
+      "id": "CMP-IR-01",
+      "status": "CLOSED",
+      "root_fix": "One _SOURCE_COMPARISONS vocabulary derives recognition, result-modifier grammar and canonical comparison bases. Reference closure reads the previous actual direction assertion and the current reference marker, rejects incompatible explicit known bases, and does not infer quarter/month from generic prior-period wording.",
+      "evidence": "Original two explicit yoy/qoq conflict cases and actual _candidates failure now defer. Equivalent year-over-year/year-on-year, qoq/quarter-over-quarter and 同比/按年 remain unique; omitted previous basis can be clarified by a qualified result. Comparison cues in unrelated prior/cause assertions cannot donate basis."
+    }
+  ],
+  "tests": {
+    "passed": 32,
+    "failed": 0,
+    "seconds": 2.62,
+    "composition": "23 targeted author/legacy direction/modality/source/scope/basis cases plus 9 independent cases",
+    "red_preserved": "source-comparison-review-red.md/json and source-comparison-tests.log/xml: 22 pass/3 failures, not added to current count",
+    "interpreter": "C:/Miniconda/python.exe -B -X utf8",
+    "plugins": "pytest_timeout explicitly enabled; autoload disabled",
+    "warning": "one known asyncio_mode unknown config option"
+  },
+  "evidence": {
+    "source-comparison-recheck.log": {
+      "sha256": "84bbc38a5c73bc4c75cd59f3ba2572d8c82146ee2bd3b89167a3e660fac78734",
+      "bytes": 1699
+    },
+    "source-comparison-recheck.xml": {
+      "sha256": "0960578d478a9e3de42b51d0eeef4ec667dc8ae113138170bf2d12272a7f1022",
+      "bytes": 9472
+    },
+    "test_source_comparison_independent.py": {
+      "sha256": "bea066f759b239ce1985a2bc5f994f8be950d6d0c51c81a33972503169338141",
+      "bytes": 2588
+    },
+    "test_source_comparison_scope.py": {
+      "sha256": "4229286cadcc441b319f81545b2381edaee82d179f03dcee41bd31dfac3b3ff2",
+      "bytes": 872
+    },
+    "source-comparison-final-scope-before.json": {
+      "sha256": "c22bb7de498d6fcf07ec7bd2195e17472be9fdb741bc3b2487ea4d78e8f420e7",
+      "bytes": 544
+    },
+    "source-comparison-review-red.json": {
+      "sha256": "1b2c3f72b4ab9bb0b07addc63fb9d0636fc59601504d78b1761a2acaf3550c0b",
+      "bytes": 4043
+    }
+  },
+  "limits": [
+    "Only this 3-file comparison delta is independently accepted; CI/PDF owner changes and overall real acceptance remain separately pending",
+    "No PDF, model, network, or full published20 suite was run; engineering/source compatibility acceptance does not sign a new summary"
+  ],
+  "cleanup": {
+    "temp_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.scir28",
+    "absent": true,
+    "absolute_boundary_checked": true,
+    "product_existing_test_PWF_edits": 0,
+    "PDF_model_network_calls": 0,
+    "background_processes": 0
+  }
+}

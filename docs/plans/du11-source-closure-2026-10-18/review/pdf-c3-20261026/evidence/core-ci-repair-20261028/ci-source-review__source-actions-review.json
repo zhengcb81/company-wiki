@@ -1,0 +1,62 @@
+{
+  "schema_version": "independent-source-actions-review/2",
+  "status": "PASS",
+  "reviewer": "/root/c3_semantic_final_20261028",
+  "author": "/root/ci_source_controls_review",
+  "handoff": "handoff-v2.json",
+  "files": [
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/patterns.py",
+      "lf_sha256": "38ff8d1633624d9f093ac13f2ef5800644bebba0bcc3f6103bc97bf79e227a9f"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/relations.py",
+      "lf_sha256": "0b9979fc5c5383842acdf3e9d95eb735decfd47a4ac39525bdcf6186d86e3e91"
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_source_operating_actions.py",
+      "lf_sha256": "f8e00fe71c1e9bcd194013cc93137f88aae1c9e57e807f425a6469057820ea8d"
+    }
+  ],
+  "same_files_before_after": true,
+  "tests": {
+    "total": 33,
+    "passed": 33,
+    "failed": 0,
+    "seconds": 2.23,
+    "own_cases": 11,
+    "original_ci_cases": 3,
+    "focused_author_controls": 19,
+    "log": "independent-v2.log",
+    "junit": "independent-v2.xml",
+    "warning": "asyncio_mode configuration unavailable with plugin autoload disabled; no failures"
+  },
+  "closed_findings": [
+    {
+      "id": "ACT-IR-01",
+      "resolution": "Overlap cursor, actor/topic, main predicate cursor and embedded ranges commit only after validity. Accepted launch ends at actual object, and explicit later object does not inherit prior product."
+    },
+    {
+      "id": "ACT-IR-02",
+      "resolution": "Shared temporal-frame owner and bounded disposal-marker capture preserve explicit future/past and exact product refs. Bare disposal is uncertain; names containing 将 remain intact."
+    }
+  ],
+  "semantic_controls": [
+    "Direct active product_launch remains separate from commercialization/revenue, including free beta/research.",
+    "Negative/conditional/future qualifiers and issuer versus supplier attribution retained.",
+    "Purpose to validate is not completed qualification.",
+    "Valid launch and later shipment coexist; invalid launch cannot suppress valid shipment.",
+    "Explicit 下月 planned, 去年/已将 actual; arbitrary discussion prefix does not prove a direct action."
+  ],
+  "open_findings": [],
+  "historical_red": "source-actions-review-red.json (14 total, 6 failed, 8 passed; old hashes only)",
+  "cleanup": {
+    "own_temp": ".sair28",
+    "removed": true,
+    "parent_environment_unchanged": true,
+    "product_or_existing_test_writes": false,
+    "true_pdf_or_docling_runs": 0,
+    "http_or_model_calls": 0
+  },
+  "scope_limit": "Only this three-file grammar delta. Does not certify PDF WIP, earlier whole-suite CI or true content run."
+}

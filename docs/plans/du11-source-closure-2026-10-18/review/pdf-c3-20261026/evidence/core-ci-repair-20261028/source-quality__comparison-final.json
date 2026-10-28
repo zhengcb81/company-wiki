@@ -1,0 +1,9 @@
+{
+  "exit_code": 0,
+  "seconds": 4.07,
+  "targets": [
+    "tests/unit/document_understanding_selection/test_summary_source_admission.py",
+    "tests/unit/document_understanding_selection/test_summary_source_metric_work.py"
+  ],
+  "owned_temp_absent": true
+}

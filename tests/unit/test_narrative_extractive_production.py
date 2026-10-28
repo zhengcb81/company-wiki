@@ -8,6 +8,7 @@ import pytest
 
 from company_wiki.automation.narrative_generation import generation_manifest
 from company_wiki.automation.narrative_batch_request import NarrativeBatchRequest
+from company_wiki.automation.narrative_model_runtime import resolve_model_boundary
 from integration.test_narrative_legacy_effort_history import _request
 from unit.test_narrative_extractive_runtime import selected
 from unit.test_narrative_summarize_handler import _context
@@ -47,7 +48,7 @@ def test_explicit_v5_request_roundtrip_and_explicit_v4_retains_its_original_prot
     manifest = generation_manifest(request, _context(source).source_revision,
         execution_versions=request.execution_versions, reading_model_projection='reading-model-input/4')
     assert manifest['reading_model_projection'] == 'reading-model-input/4'
-    assert manifest['execution_versions']['prompt'] == 'reading-source-scoped/4.0.6'
+    assert manifest['execution_versions']['prompt'] == resolve_model_boundary('reading-model-input/4').prompt_version
 
 
 def test_legacy_nonreading_default_does_not_silently_opt_in():
@@ -119,14 +120,12 @@ def test_explicit_v5_worker_preserves_paid_response_and_audit_after_compaction_a
             state.catalog.close()
 
 
-@pytest.mark.parametrize('projection,prompt', [
-    ('reading-model-input/4', 'reading-source-scoped/4.0.6'),
-    ('reading-model-input/5', 'reading-source-extractive/5.0.0'),
-])
-def test_failed_batch_recovery_candidates_require_exact_frozen_paid_protocol(projection, prompt):
+@pytest.mark.parametrize('projection', ['reading-model-input/4', 'reading-model-input/5'])
+def test_failed_batch_recovery_candidates_require_exact_frozen_paid_protocol(projection):
     from company_wiki.automation.narrative_batch import _paid_summary_recovery_candidates
     from company_wiki.automation.narrative_paid_response import PaidResponsePin
     from company_wiki.automation.models import JobStatus
+    prompt = resolve_model_boundary(projection).prompt_version
     pin = PaidResponsePin(request_sha256='a'*64, body_sha256='b'*64,
         object_key='objects/sha256/bb/'+'b'*64+'.json', byte_size=2,
         model_id='configured', adapter_id='offline', prompt_version=prompt,
@@ -139,6 +138,9 @@ def test_failed_batch_recovery_candidates_require_exact_frozen_paid_protocol(pro
     binding = SimpleNamespace(generation_manifests={'doc': {'reading_model_projection':projection}})
     runs = SimpleNamespace(reservations_for_run=lambda _run: (record,))
     assert _paid_summary_recovery_candidates(binding, run, (job,), runs) == (('job', 'a'*64),)
+    record.paid_response_json = replace(pin, prompt_version=prompt + '-stale').to_json()
+    assert _paid_summary_recovery_candidates(binding, run, (job,), runs) == ()
+    record.paid_response_json = pin.to_json()
     for field, value in [('paid_response_json', None), ('output_bytes', 1), ('request_sha256', 'c'*64)]:
         original = getattr(record, field)
         setattr(record, field, value)

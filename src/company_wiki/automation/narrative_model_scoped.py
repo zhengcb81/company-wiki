@@ -236,12 +236,12 @@ def decode_scoped_draft(response, *, selected: NarrativeSelectResult) -> dict[st
     tasks = payload['drafts_by_task']
     if any(not isinstance(rows, list) for rows in tasks.values()):
         raise NarrativeContractError('scoped task clauses must be arrays')
-    per_task_cap = _scoped_output_plan(len(tasks))['max_claims_per_task']
-    if any(len(rows) > per_task_cap for rows in tasks.values()):
-        raise NarrativeContractError('scoped task clauses exceed per-task cap')
     count = sum(len(rows) for rows in tasks.values())
     if count > MAX_SUMMARY_CLAIMS:
         raise NarrativeContractError('summary claims exceed forty')
+    per_task_cap = _scoped_output_plan(len(tasks))['max_claims_per_task']
+    if any(len(rows) > per_task_cap for rows in tasks.values()):
+        raise NarrativeContractError('scoped task clauses exceed per-task cap')
     view = compile_scoped_model_view(selected, max_claims=MAX_SUMMARY_CLAIMS)
     if set(tasks) - {task.key for task in view.plan.tasks}:
         raise legacy.ModelCitationError('scoped draft references an unknown source task')

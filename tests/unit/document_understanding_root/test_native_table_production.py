@@ -108,15 +108,17 @@ def test_unproven_table_mapping_remains_visible_in_real_selected_material():
     uncertain = [span for span in package.evidence_spans if '18' in span.raw_text]
     assert uncertain and all('table_structure_ambiguous' in span.quality_flags for span in uncertain)
     assert any('table_structure_ambiguous' in text for text in package.reading_context['constraints'])
-    # Actual model compiler, using only its two required source-owned inputs.
+    # Retrieval keeps the original value and uncertainty; known unbound columns
+    # cannot become factual model support. The full source plan is inspectable.
     view = compile_scoped_model_view(SimpleNamespace(evidence_spans=package.evidence_spans,
-                 reading_context=package.reading_context), max_claims=20).to_model_dict()
-    fragments = view['shared_fragments'] + [part for task in view['tasks'] for part in task['parts']
-                                           if 'text' in part]
-    numeric = [row for row in fragments if '18' in row['text']]
-    assert numeric and all('table_structure_ambiguous' in
-                          row.get('quality_flags', view['fragment_defaults']['quality_flags'])
-                          for row in numeric)
+                 reading_context=package.reading_context), max_claims=20)
+    numeric_ids = {span.span_id for span in uncertain}
+    source_tasks = [task for task in view.plan.tasks if numeric_ids.intersection(task.support_ids)]
+    assert source_tasks
+    admission = view.to_binding()['source_admission']
+    assert all(admission[task.key]['status'] == 'unavailable'
+               and admission[task.key]['reason'] == 'source_table_unresolved' for task in source_tasks)
+    assert all(not numeric_ids.intersection(task.support_ids) for task in view.model_tasks)
 
 
 def test_complete_table_mapping_is_not_marked_ambiguous_and_native_identity_stays_exact():

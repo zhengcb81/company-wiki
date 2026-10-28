@@ -61,6 +61,7 @@ _ABSENCE_CONSTRUCTIONS = frozenset(
         "scope_en",
         "commercialization",
         "commercialization_en",
+        "product_launch_en",
     }
 )
 _VERBAL_CONSTRUCTIONS = frozenset(
@@ -72,6 +73,8 @@ _VERBAL_CONSTRUCTIONS = frozenset(
         "scope_en",
         "shipment",
         "shipment_en",
+        "shipment_destination",
+        "product_launch_en",
         "relation_contact",
         "relation_contact_en",
         "relation_sign",
@@ -90,6 +93,7 @@ _ACTIVITY_BY_CONSTRUCTION = {
     "production_en_suspend": "production",
     "commercialization": "commercialization",
     "commercialization_en": "commercialization",
+    "product_launch_en": "product_launch",
     "commercial_plan_en": "commercialization",
     "qualification_pending": "qualification",
     "qualification_result": "qualification",
@@ -100,6 +104,7 @@ _ACTIVITY_BY_CONSTRUCTION = {
     "unsuccessful_validation": "qualification",
     "shipment": "shipment",
     "shipment_en": "shipment",
+    "shipment_destination": "shipment",
     "scope_cn": "business_scope",
     "scope_en": "business_scope",
     "relation_contact": "business_relationship",
@@ -493,11 +498,11 @@ def _bind_event(view: MatchingView, scan: _UnitScan, clause: tuple[int, int],
                 actor_spans.append(span)
                 if attribution == "unknown" and actor_class != "unknown":
                     attribution = actor_class
-            elif role == "object" and not obj_spans:
+            elif role == "object" and not obj_spans and not event.obj_spans:
                 obj_spans.append(span)
     # An elided continuation may inherit the already bound object, separately
     # from its issuer actor. A new explicit subject blocks that inheritance.
-    if not spans and not obj_spans and scan.last_topic is not None:
+    if not spans and not obj_spans and not event.obj_spans and scan.last_topic is not None:
         role, _actor = _classify_np(view, scan.last_topic, scan.name_classes)
         if role == "object":
             obj_spans.append(scan.last_topic)
@@ -618,6 +623,15 @@ def _clause_events(view: MatchingView, scan: _UnitScan,
             continue
         construction = p.EVENT_PATTERNS[order][0]
         groups = match.groupdict()
+        temporal_frame = None
+        if construction in {"product_launch_en", "shipment_destination"}:
+            # This family proves a direct actor-to-action construction, not a
+            # mention embedded in "we discussed whether ..." or a heading.
+            lead, _ = strip_connector(clause_text[:match.start()].strip())
+            if lead.strip() and p.ACTION_TEMPORAL_FRAME.fullmatch(lead.strip()) is None:
+                continue
+            if lead.strip():
+                temporal_frame = (clause[0], start)
         if construction == "scope_cn" and _nominal_scope_event(clause_text, match):
             continue
         # The existing English shipment grammar binds its verbal phrase in
@@ -630,11 +644,12 @@ def _clause_events(view: MatchingView, scan: _UnitScan,
         pred_start = clause[0] + match.start(pred_key)
         # Bind a contiguous modifier suffix to every predicate family. Missing
         # optional regex groups cannot turn a denial or plan into completion.
-        while embedded_ranges and embedded_ranges[0][1] <= pred_start-64:
+        pending_ranges = deque(embedded_ranges)
+        while pending_ranges and pending_ranges[0][1] <= pred_start-64:
             budget.charge(1)
-            embedded_ranges.popleft()
+            pending_ranges.popleft()
         extra_qual, modifier_span, unresolved = _predicate_modifiers(
-            view, clause, pred_start, last_main_end, embedded_ranges, budget)
+            view, clause, pred_start, last_main_end, pending_ranges, budget)
         # A family grammar can explicitly bind its own object between modifier
         # and predicate (e.g. pending customer qualification). Keep that proof;
         # generic conservative fallback only covers otherwise unbound scope.
@@ -657,11 +672,12 @@ def _clause_events(view: MatchingView, scan: _UnitScan,
             # are list members, never assertions: a bound qualifier or a verbal
             # predicate construction is required.
             continue
-        taken_end = end
         if modifier_span:
             start = min(start, modifier_span[0])
         pred_end = pred_start + len(pred)
         event = _Event(construction, start, end, (pred_start, pred_end))
+        if temporal_frame:
+            event.qual_spans.append(temporal_frame)
         if modifier_span:
             event.qual_spans.append(modifier_span)
         for key in ("qual", "qual2", "restriction", "state"):
@@ -676,18 +692,32 @@ def _clause_events(view: MatchingView, scan: _UnitScan,
         if obj_group:
             raw_start = clause[0] + match.start("obj")
             raw = obj_group
+            if construction == "product_launch_en":
+                raw = p.LAUNCH_OBJECT_END.split(raw, maxsplit=1)[0].rstrip()
+                if product_head_suffix(raw.strip()) is None:
+                    continue
+                # The accepted object ends before any coordinated next action;
+                # a greedy candidate match does not own its discarded tail.
+                event.end = raw_start + len(raw)
+            elif construction == "shipment_destination":
+                obj = raw.strip()
+                if (product_head_suffix(obj) is None and not (
+                        groups.get("use") and p.PURPOSE_NAMED_OBJECT.fullmatch(obj))):
+                    continue
             if match.start("obj") < match.start(pred_key):
                 trimmed = _tail_np(_clean_np(raw))
             else:
                 trimmed = _clean_np(_obj_after(raw))
             if trimmed:
-                lead = raw.find(trimmed[:2]) if len(trimmed) >= 2 else -1
-                obj_start = raw_start + (lead if lead >= 0 else 0)
+                object_offset = raw.find(trimmed[:2]) if len(trimmed) >= 2 else -1
+                obj_start = raw_start + (object_offset if object_offset >= 0 else 0)
                 event.obj_spans.append((obj_start, obj_start + len(trimmed)))
                 if obj_start > raw_start and obj_start <= start:
                     # Object sat before the predicate ("…滤芯产线停产"); the
                     # discarded prefix is the subject candidate ("公司因").
                     event.actor_hint = (raw_start, obj_start)
+        if groups.get("actor"):
+            event.actor_hint = (clause[0] + match.start("actor"), clause[0] + match.end("actor"))
         partner = groups.get("partner")
         if partner:
             partner_start = clause[0] + match.start("partner")
@@ -708,6 +738,12 @@ def _clause_events(view: MatchingView, scan: _UnitScan,
             construction, qual_text, has_condition, has_future,
             bool(groups.get("restriction")),
         )
+        if (construction == "shipment_destination" and qual_text.strip() == "将"
+                and not has_future and not has_condition):
+            if p.PAST_TIME.search(clause_text) is not None:
+                stage, modality = "current", "actual"
+            else:
+                polarity, stage, modality = "unknown", "unknown", "uncertain"
         if unresolved:
             polarity, stage, modality = 'unknown', 'unknown', 'uncertain'
         if construction == "qualification_result" and modality == 'actual':
@@ -720,16 +756,19 @@ def _clause_events(view: MatchingView, scan: _UnitScan,
         # clause's issuer. It must not replace the main assertion's actor or
         # donate its negation to a following contract/shipment predicate.
         relative = p.ATTRIBUTIVE_PARTY.match(view.text[event.end:min(clause[1],event.end+24)])
+        pending_scan = _UnitScan(scan.view, scan.name_classes, scan.last_topic, list(scan.last_actors))
+        pending_main_end = last_main_end
         if relative and activity == 'qualification':
             actor = (event.end+relative.start('actor'),event.end+relative.end('actor'))
             event.embedded_actor = actor
             event.actor_spans = [actor]
             _role, event.attribution = _classify_np(view, actor, scan.name_classes)
             event.end = actor[1]
-            embedded_ranges.append((event.start,event.end))
+            pending_ranges.append((event.start,event.end))
         else:
-            _bind_event(view, scan, clause, event, last_main_end)
-            last_main_end = event.end
+            binding_clause = ((temporal_frame[1], clause[1]) if temporal_frame else clause)
+            _bind_event(view, pending_scan, binding_clause, event, last_main_end)
+            pending_main_end = event.end
         if any(
             p.ABSTRACT_OBJECT.fullmatch(view.text[span[0]:span[1]].strip())
             for span in event.obj_spans
@@ -745,6 +784,13 @@ def _clause_events(view: MatchingView, scan: _UnitScan,
             event.polarity = event.stage = "unknown"
             event.modality = "uncertain"
             event.qual_spans.append((pred_end + reported.start(), pred_end + reported.end()))
+        # All ownership and inherited context changes commit together only
+        # after the candidate is a validated event. Rejected mentions cannot
+        # hide another event or donate their actor/product to it.
+        taken_end = event.end
+        last_main_end = pending_main_end
+        embedded_ranges = pending_ranges
+        scan.last_topic, scan.last_actors = pending_scan.last_topic, pending_scan.last_actors
         events.append(event)
     return events
 

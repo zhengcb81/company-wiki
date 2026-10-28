@@ -1,0 +1,47 @@
+{
+  "schema_version": "ci-root-delta-independent-review/1",
+  "status": "PASS",
+  "open": [],
+  "reviewer": "/root/ci_source_controls_review",
+  "scope": "ROOT CI3file only; reviewer is NOT author of these changes. Reviewer separately authored operating-state grammar and does not self-review it.",
+  "files": [
+    {
+      "path": "src/company_wiki/automation/narrative_model_scoped.py",
+      "lf_sha256": "873a5ae5c027cd38c9068c9180b837e0b4950d2b2b62276ad732c98ea7b54685"
+    },
+    {
+      "path": "tests/unit/test_narrative_extractive_production.py",
+      "lf_sha256": "6e10c8f7ea12b62a87cadecd49c06fb1b539b43fa8090459e886e72175282825"
+    },
+    {
+      "path": "tests/unit/document_understanding_root/test_native_table_production.py",
+      "lf_sha256": "bd9b9f8ea408dc7f5ab2553e30ab11294fb04f9119662286035d324ef0b03a18"
+    }
+  ],
+  "tests": {
+    "passed": 9,
+    "seconds": 2.7,
+    "receipt": "root-ci-tests.json",
+    "own_adversarial": "test_root_ci_review.py"
+  },
+  "findings_closed": [
+    "Global40 deterministic structural error precedence restored; per-task2 still enforced before citation/prose salvage, both caps proven against invalid clauses.",
+    "Current active prompt fixtures consume one boundary owner. Stale paid prompt explicitly refuses recovery; request/projection/model/request hash/output/blocked controls retained.",
+    "Unbound table source raw value/flag/constraints assertions remain. Full source plan retains task while source admission blocks factual model support; complete native mapping remains exact and usable."
+  ],
+  "not_removed": [
+    "global40 cap",
+    "per-task2 cap",
+    "bad-clause whole discard",
+    "original source table value/flag/constraints",
+    "complete mapping locator identity",
+    "paid pin exactness and wrong projection rejection"
+  ],
+  "limits": "Did not rerun entire CI;9targeted tests only. Original3source fail classification in report below; no claim remote CI green.",
+  "cleanup": {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.c3cir",
+    "restored_absent": true,
+    "model_calls": 0,
+    "PDF_runs": 0
+  }
+}

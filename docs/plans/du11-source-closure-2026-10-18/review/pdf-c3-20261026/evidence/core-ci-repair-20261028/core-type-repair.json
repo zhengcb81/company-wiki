@@ -1,0 +1,11 @@
+{
+  "schema_version": "local-name-type-repair/1",
+  "path": "src/company_wiki/document_understanding/operating_states/relations.py",
+  "reviewed_lf_sha256": "0b9979fc5c5383842acdf3e9d95eb735decfd47a4ac39525bdcf6186d86e3e91",
+  "final_lf_sha256": "9c920726e4c1df3107297b4445af3f4f942e334474fbba137b31b16a35cf3fcd",
+  "change": "Split int object_offset from earlier str lead; no other AST change after mapping this local name back",
+  "alpha_ast_identical": true,
+  "full_mypy_command": "python -m mypy src",
+  "full_mypy_result": "392 source files PASS",
+  "hook_prevented_bad_commit": true
+}

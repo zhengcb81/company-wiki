@@ -1,0 +1,20 @@
+{
+  "schema_version": "c3-core-ci-repair/1",
+  "status": "ACCEPTED_PENDING_NORMAL_PUBLICATION",
+  "base_commit": "74d98a57391ae6fdcb54981999b4dc1bc021da11",
+  "failed_ci": 40661418382,
+  "accepted_files": 9,
+  "independent_reviews": [
+    "quality-content-review/source-comparison-review.json",
+    "ci-source-review/root-ci-review.json",
+    "ci-source-review/source-actions-review.json"
+  ],
+  "focused_tests": 184,
+  "seconds": 7.1,
+  "old_ci_failures_closed_in_local": "7_OF_7",
+  "limits_unchanged": true,
+  "new_paid_calls": 0,
+  "PDF_status": "v4 CHANGES_REQUESTED3 pending author reactivation; no v5 run",
+  "source_content_status": "Still0POST blocked, no new final",
+  "next": "Activate PDF author explicitly after publish; close resource/opaqueID/prefix3 issues, independent recheck, one changed-recipe real test"
+}

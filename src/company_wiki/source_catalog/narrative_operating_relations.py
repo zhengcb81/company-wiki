@@ -26,6 +26,8 @@ from .narrative_revenue_guidance import (
 from .narrative_business_policy import (
     READING_BUSINESS_SCAN_PASSES, assess_reading_business_fact, project_reading_business_fact,
     source_result_subject,
+    SOURCE_COMPARISON_MODIFIER_PATTERN,
+    source_comparison_bases,
 )
 from .narrative_predicate_state import observe_metric_predicate
 
@@ -64,8 +66,10 @@ _IGNORED_CONTEXT_PATTERN = re.compile(
 # does not match this deliberately narrow bare-result grammar.
 _RESULT_REFERENCE = re.compile(
     r"^\s*(?P<marker>(?:(?:有[关關]|上述|[该該此])\s*)"
+    r"(?:(?:" + SOURCE_COMPARISON_MODIFIER_PATTERN + r")\s*)?"
     r"(?P<cn>增加|增[长長]|上升|下降|減少|减少)|"
-    r"(?:this|that|the|such)\s+(?P<en>increase|growth|rise|decrease|decline|reduction))"
+    r"(?:this|that|the|such)\s+(?:(?:" + SOURCE_COMPARISON_MODIFIER_PATTERN + r")\s+)?"
+    r"(?P<en>increase|growth|rise|decrease|decline|reduction))"
     r"(?=\s*(?:主要|[是为為由]|was\b|is\b|arose\b|resulted\b|due\b))", re.I)
 _RESULT_CHANGE = re.compile(
     r"(?P<up>增加|增[长長]|上升|\b(?:increased?|increases|grew|rose)\b)|"
@@ -315,10 +319,14 @@ class SourceOperatingSession:
                 elif len(changes) == 1:
                     change = changes[0]
                     observation = observe_metric_predicate(previous.raw_text, change.start(), change.end())
+                    previous_basis = source_comparison_bases(previous.raw_text, change.start(), change.end())
+                    reference_basis = source_comparison_bases(marker.group("marker"))
+                    compatible_basis = (len(previous_basis) <= 1 and len(reference_basis) <= 1
+                        and (not previous_basis or not reference_basis or previous_basis == reference_basis))
                     if (source_result_subject(previous.raw_text, change.start(), change.end())
                             and _RESULT_REFERENCE.match(previous.raw_text) is None
                             and change.lastgroup == _result_direction(marker.group("cn") or marker.group("en"))
-                            and observation.observed):
+                            and observation.observed and compatible_basis):
                         declaration = {"unit_id": previous_id, "char_start": 0,
                                        "char_end": len(previous.raw_text)}
                         result.update(status="unique", declaration_refs=[declaration],

@@ -264,40 +264,7 @@ DOUBLE_NEGATION = re.compile(
     r"(?P<pred>生产|制造|商业化|涉及|生產|經營)"
 )
 
-EVENT_PATTERNS = (
-    ("uncertain", UNCERTAIN_SCOPE),
-    ("uncertain", UNCERTAIN_EN),
-    ("double_negation", DOUBLE_NEGATION),
-    ("approval_restricted", APPROVAL_RESTRICTED),
-    ("qualification_pending_en", QUALIFICATION_PENDING_EN),
-    ("qualification_pending", QUALIFICATION_PENDING),
-    ("qualification_result", QUALIFICATION_RESULT),
-    ("qualification_verb", QUALIFICATION_VERB),
-    ("qualification_en", QUALIFICATION_EN),
-    ("unsuccessful_validation", UNSUCCESSFUL_VALIDATION),
-    ("commercialization", COMMERCIALIZATION),
-    ("commercialization_en", COMMERCIALIZATION_EN),
-    ("commercial_plan_en", COMMERCIAL_PLAN_EN),
-    ("production_negation", PRODUCTION_NEGATION),
-    ("production_suspend", PRODUCTION_SUSPEND),
-    ("production_stop_action", PRODUCTION_STOP_ACTION),
-    ("production_stop", PRODUCTION_STOP),
-    ("production_aspect", PRODUCTION_ASPECT),
-    ("production_en", PRODUCTION_EN),
-    ("production_en_suspend", PRODUCTION_EN_SUSPEND),
-    ("shipment", SHIPMENT),
-    ("shipment_en", SHIPMENT_EN),
-    ("scope_cn", SCOPE_CN),
-    ("scope_en", SCOPE_EN),
-    ("relation_contact", RELATION_CONTACT),
-    ("relation_contact_en", RELATION_CONTACT_EN),
-    ("relation_sign", RELATION_SIGN),
-    ("relation_sign_en", RELATION_SIGN_EN),
-    ("relation_intended", RELATION_INTENDED),
-    ("relation_intended_en", RELATION_INTENDED_EN),
-    ("relation_plan", RELATION_PLAN),
-    ("relation_plan_en", RELATION_PLAN_EN),
-)
+
 
 # ---------------------------------------------------------------- clause guards
 
@@ -361,10 +328,19 @@ TIME_WORD = re.compile(
     re.IGNORECASE,
 )
 FUTURE_TIME = re.compile(
-    r"第[一二三四1-4]季度|明年|今年下半年|未来|下一年|即将|拟于|"
+    r"第[一二三四1-4]季度|明年|今年下半年|未来|下一年|即将|拟于|将会|下(?:个|一)?月|下(?:个|一)?季度|"
     r"next\s+(?:year|quarter|month)|in\s+the\s+(?:coming|next)",
     re.IGNORECASE,
 )
+PAST_TIME = re.compile(
+    r"去年|上年|上(?:个|一)?月|上(?:个|一)?季度|此前|"
+    r"\b(?:last|prior|previous)\s+(?:year|quarter|month|period)\b", re.I)
+CURRENT_TIME = re.compile(
+    r"报告期内|报告期|本期|本年度|目前|今年|"
+    r"\bthis\s+(?:year|quarter|month|period)\b|"
+    r"\b(?:during|in|for)\s+the\s+(?:(?:reporting|current)\s+)?period\b", re.I)
+ACTION_TEMPORAL_FRAME = re.compile(
+    rf"(?:(?:在|于)\s*)?(?:{PAST_TIME.pattern}|{CURRENT_TIME.pattern}|{FUTURE_TIME.pattern})", re.I)
 CONDITIONAL = re.compile(
     r"如果|若|一旦|前提|条件下|附条件|subject\s+to|upon\s+(?:obtaining|receiving)|"
     r"if\s+.{0,40}(?:is\s+obtained|are\s+met|is\s+approved|is\s+granted|passes)",
@@ -452,3 +428,68 @@ REPORTED_PROPOSITION_TAIL = re.compile(
     re.IGNORECASE,
 )
 POSSESSIVE_LINK = re.compile(r"^\s*(?:的|之|['’]s\b)", re.IGNORECASE)
+
+# Direct product actions reuse actor/modifier/product ownership from this
+# module. Actor capture prevents a nominal "discussed the launch" from being
+# mistaken for an asserted launch; objects are validated by the shared head
+# grammar in the relation binder.
+_DIRECT_ACTION_ACTOR = (rf"(?:{ISSUER_WORD.pattern}|"
+    rf"(?:(?:the|our|a)\s+)?(?:{RELATED_PARTY.pattern}|{THIRD_PARTY.pattern}))")
+PRODUCT_LAUNCH_EN = re.compile(
+    rf"(?P<actor>{_DIRECT_ACTION_ACTOR})"
+    rf"(?P<qual>(?:\s+(?:{MODIFIER_TOKENS.pattern})){{0,6}})\s+"
+    r"(?P<pred>launch(?:es|ed)?)\b(?P<obj>\s+(?:[A-Za-z][\w'&\-]*\s*){1,10})",
+    re.IGNORECASE)
+LAUNCH_OBJECT_END = re.compile(r"\b(?:for|to|with|at|in|on|during|but|and|which)\b", re.I)
+SHIPMENT_DESTINATION = re.compile(
+    rf"(?P<actor>{_DIRECT_ACTION_ACTOR})\s*"
+    rf"(?P<qual>(?:(?:{_ABSENCE}|已经|已|开始|即将|将会|计划|拟)\s*)?"
+    rf"(?:将)?(?:{ACTION_TEMPORAL_FRAME.pattern})\s*(?:将|把)|"
+    rf"(?:{_ABSENCE}|已经|已|开始|即将|将会|计划|拟)(?:将|把)|"
+    rf"将(?=\s*(?:[A-Za-z0-9]|{PRODUCT_SUFFIX.pattern.removesuffix('$')})))?"
+    r"(?:(?:用于|用於)(?P<use>[\w㐀-鿿（）()\- ]{1,64}?)的)?"
+    r"(?P<obj>[\w㐀-鿿（）()\- ]{1,48}?)\s*"
+    rf"(?P<qual2>{_ABSENCE}|已经|已|开始|即将|将会|计划|拟)?"
+    r"(?P<pred>发往|發往)"
+    r"(?P<partner>[\w㐀-鿿（）()\- ]{1,48}?)"
+    r"(?=(?:进行|進行|开展|開展)?(?:验证|驗證|认证|認證|测试|測試)|[。；;!?，,]|$)"
+    r"(?:(?:进行|進行|开展|開展)?(?:验证|驗證|认证|認證|测试|測試))?",
+    re.I)
+PURPOSE_NAMED_OBJECT = re.compile(r"[A-Z][A-Za-z0-9&./+\-]*(?:\s+[A-Z][A-Za-z0-9&./+\-]*){0,3}")
+
+EVENT_PATTERNS = (
+    ("uncertain", UNCERTAIN_SCOPE),
+    ("uncertain", UNCERTAIN_EN),
+    ("double_negation", DOUBLE_NEGATION),
+    ("approval_restricted", APPROVAL_RESTRICTED),
+    ("qualification_pending_en", QUALIFICATION_PENDING_EN),
+    ("qualification_pending", QUALIFICATION_PENDING),
+    ("qualification_result", QUALIFICATION_RESULT),
+    ("qualification_verb", QUALIFICATION_VERB),
+    ("qualification_en", QUALIFICATION_EN),
+    ("unsuccessful_validation", UNSUCCESSFUL_VALIDATION),
+    ("commercialization", COMMERCIALIZATION),
+    ("commercialization_en", COMMERCIALIZATION_EN),
+    ("product_launch_en", PRODUCT_LAUNCH_EN),
+    ("commercial_plan_en", COMMERCIAL_PLAN_EN),
+    ("production_negation", PRODUCTION_NEGATION),
+    ("production_suspend", PRODUCTION_SUSPEND),
+    ("production_stop_action", PRODUCTION_STOP_ACTION),
+    ("production_stop", PRODUCTION_STOP),
+    ("production_aspect", PRODUCTION_ASPECT),
+    ("production_en", PRODUCTION_EN),
+    ("production_en_suspend", PRODUCTION_EN_SUSPEND),
+    ("shipment_destination", SHIPMENT_DESTINATION),
+    ("shipment", SHIPMENT),
+    ("shipment_en", SHIPMENT_EN),
+    ("scope_cn", SCOPE_CN),
+    ("scope_en", SCOPE_EN),
+    ("relation_contact", RELATION_CONTACT),
+    ("relation_contact_en", RELATION_CONTACT_EN),
+    ("relation_sign", RELATION_SIGN),
+    ("relation_sign_en", RELATION_SIGN_EN),
+    ("relation_intended", RELATION_INTENDED),
+    ("relation_intended_en", RELATION_INTENDED_EN),
+    ("relation_plan", RELATION_PLAN),
+    ("relation_plan_en", RELATION_PLAN_EN),
+)

@@ -1,0 +1,24 @@
+{
+  "schema_version": "c3-summary-quality-publication/1",
+  "commit": "74d98a57391ae6fdcb54981999b4dc1bc021da11",
+  "pushed": true,
+  "git_lf_sha_matches_independent_review": 20,
+  "normal_precommit": "PASS",
+  "normal_prepush": {
+    "passed": 158,
+    "seconds": 49.54
+  },
+  "exact_ci": [
+    {
+      "id": 40661418382,
+      "head_sha": "74d98a57391ae6fdcb54981999b4dc1bc021da11",
+      "status": "in_progress",
+      "conclusion": null,
+      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40661418382",
+      "updated_at": "2026-10-28T09:04:35Z"
+    }
+  ],
+  "real_status": "PRE_RESERVATION_BLOCKED_0_POST_NOT_CONTENT_PASS",
+  "next": "PDF_PAGE_CHECKPOINT_PLAN.md",
+  "new_paid_calls": 0
+}
