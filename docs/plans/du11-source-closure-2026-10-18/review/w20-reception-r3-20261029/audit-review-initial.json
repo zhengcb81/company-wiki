@@ -1,0 +1,190 @@
+{
+  "card_id": "W20-AUDIT-CHECKPOINTS",
+  "review_round": "ROOT_R3_INITIAL",
+  "date": "2026-10-29",
+  "verdict": "NEEDS_ROOT_ISOLATED_FIX",
+  "author_head": "5b8aa7182e7f7b219b0ef279106f1fc1886137b1",
+  "implementation_commit": "d306ac059e249e6b600b7247ee350a33e302bcbe",
+  "source_file": "skills/revenue-forecast-audit/scripts/summary_checkpoint_observations.py",
+  "source_sha256": "6c32bd1b175da994cb9c43ac5fd4234210fd02c1145d69c0720926a1517a57d6",
+  "handoff_sha_count": 26,
+  "handoff_sha_mismatches": [],
+  "closed": [
+    {
+      "id": "W20-AUDIT-R1.INV1",
+      "evidence": "Claim class/scale uses declared unit only; previous parameterized amount/ratio/no-unit tests pass; no borrowing claim body."
+    },
+    {
+      "id": "W20-AUDIT-R2",
+      "evidence": "Shared explicit read availability remains intact; original unread assertions and entry wiring regressions pass."
+    }
+  ],
+  "open_findings": [
+    {
+      "id": "W20-AUDIT-R1",
+      "severity": "P2",
+      "status": "INV2_PARTIALLY_FIXED",
+      "title": "Candidate currency window is unbounded to the right and still donates another amount currency at short range",
+      "file": "skills/revenue-forecast-audit/scripts/summary_checkpoint_observations.py",
+      "lines": [
+        272,
+        286,
+        287,
+        288,
+        289
+      ],
+      "reproductions": [
+        {
+          "kind": "far_bound",
+          "source": "收入1,250,000,000业业业业业业业业业业业业业业业业业业业业业业业业业业业业业业业业业业业业业业业业人民币余额2元",
+          "claim": {
+            "value": "12.5",
+            "unit": "亿元人民币"
+          },
+          "actual": "scale_equivalent",
+          "expected": "No full equivalence; CNY belongs to other amount and is outside declared 12-character window."
+        },
+        {
+          "kind": "near_donation",
+          "source": "收入1,250,000,000和人民币余额2元",
+          "claim": {
+            "value": "12.5",
+            "unit": "亿元人民币"
+          },
+          "actual": "scale_equivalent",
+          "expected": "Ambiguous/incomplete candidate currency must remain unknown/partial, not donated by another amount."
+        },
+        {
+          "kind": "near_donation",
+          "source": "收入1,250,000,000及CNY现金2元",
+          "claim": {
+            "value": "12.5",
+            "unit": "亿元人民币"
+          },
+          "actual": "scale_equivalent",
+          "expected": "Same no-donation invariant; no sentence/actor keyword patch."
+        }
+      ],
+      "root_cause": "Right window checks end-right<12 while right>=end, so the supposed upper bound never applies. Correcting the sign only fixes the far case: short-range currency tokens can still belong to a different number. The currency owner needs a bounded, explicitly candidate-related attachment or unknown when ambiguous.",
+      "fix_boundary": "Only the existing candidate-local currency helper/typed anchor responsibility. Fix right-side bound and avoid attributing currency across nearby amounts without positive binding. Conservative unknown/partial is acceptable; no NLP production classifier, expanded dictionary, approval gate, FX guess or company-specific text."
+    }
+  ],
+  "tests": [
+    {
+      "name": "previous-root-typed4",
+      "command": [
+        "C:/Miniconda/python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:/Users/郑曾波/Projects/company-wiki/docs/plans/du11-source-closure-2026-10-18/review/w20-reception-r2-20261029/evidence/audit/test_typed_binding.py"
+      ],
+      "returncode": 0,
+      "seconds": 0.705,
+      "stdout_tail": "",
+      "stderr_tail": "test_currency_must_stay_bound_to_the_matching_number (__main__.TypedBindingRegression.test_currency_must_stay_bound_to_the_matching_number) ... ok\ntest_explicit_amount_unit_must_not_borrow_another_percent (__main__.TypedBindingRegression.test_explicit_amount_unit_must_not_borrow_another_percent) ... ok\ntest_plain_amount_literal_control (__main__.TypedBindingRegression.test_plain_amount_literal_control) ... ok\ntest_single_currency_conversion_control (__main__.TypedBindingRegression.test_single_currency_conversion_control) ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.009s\n\nOK\n"
+    },
+    {
+      "name": "original-root7",
+      "command": [
+        "C:/Miniconda/python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:/Users/郑曾波/Projects/company-wiki/docs/plans/du11-source-closure-2026-10-18/review/w20-reception-20261029/evidence/audit/test_independent_expectations.py"
+      ],
+      "returncode": 0,
+      "seconds": 0.516,
+      "stdout_tail": "",
+      "stderr_tail": "test_explicit_unchanged_period_remains_literal (__main__.RootRegressions.test_explicit_unchanged_period_remains_literal) ... ok\ntest_explicit_unread_support_cannot_be_positive_anchor (__main__.RootRegressions.test_explicit_unread_support_cannot_be_positive_anchor) ... ok\ntest_h2_is_not_full_h1_literal_anchor (__main__.RootRegressions.test_h2_is_not_full_h1_literal_anchor) ... ok\ntest_ratio_must_not_equal_monetary_amount (__main__.RootRegressions.test_ratio_must_not_equal_monetary_amount) ... ok\ntest_signed_value_must_not_lose_minus (__main__.RootRegressions.test_signed_value_must_not_lose_minus) ... ok\ntest_valid_same_currency_scale_equivalence_remains (__main__.RootRegressions.test_valid_same_currency_scale_equivalence_remains) ... ok\ntest_yen_is_not_literal_cny_token (__main__.RootRegressions.test_yen_is_not_literal_cny_token) ... ok\n\n----------------------------------------------------------------------\nRan 7 tests in 0.005s\n\nOK\n"
+    },
+    {
+      "name": "numeric-unit",
+      "command": [
+        "C:/Miniconda/python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_numeric_audit.py"
+      ],
+      "returncode": 0,
+      "seconds": 0.967,
+      "stdout_tail": "",
+      "stderr_tail": ".......\n----------------------------------------------------------------------\nRan 7 tests in 0.607s\n\nOK\n"
+    },
+    {
+      "name": "w20-unit",
+      "command": [
+        "C:/Miniconda/python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_w20_*.py"
+      ],
+      "returncode": 0,
+      "seconds": 0.627,
+      "stdout_tail": "{\"attempt_id\": \"20261029T202333Z-0de8b298\", \"attempt_dir\": \"C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\.planning\\\\w20-reception-r3-20261029\\\\audit\\\\temporary\\\\w20-helper-y0vjuca5\\\\out\\\\20261029T202333Z-0de8b298\", \"output_file\": \"C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\.planning\\\\w20-reception-r3-20261029\\\\audit\\\\temporary\\\\w20-helper-y0vjuca5\\\\out\\\\20261029T202333Z-0de8b298\\\\checkpoint-observations.json\"}\n",
+      "stderr_tail": "...........................................\n----------------------------------------------------------------------\nRan 43 tests in 0.142s\n\nOK\n"
+    },
+    {
+      "name": "w20-cli-e2e",
+      "command": [
+        "C:/Miniconda/python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "tests/fixtures/w20_checkpoints/run_e2e_chain.py",
+        "--work",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w20-reception-r3-20261029\\audit\\temporary\\cli",
+        "--repo",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit-w20-checkpoints"
+      ],
+      "returncode": 0,
+      "seconds": 5.405,
+      "stdout_tail": "{\"expert_input\": \"C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\.planning\\\\w20-reception-r3-20261029\\\\audit\\\\temporary\\\\cli\\\\expert-input\\\\expert-input.json\", \"steps\": 11, \"coverage_sufficiency\": \"records_complete\", \"coverage_gaps\": 0}\n",
+      "stderr_tail": ""
+    }
+  ],
+  "new_red": {
+    "command": [
+      "C:/Miniconda/python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w20-reception-r3-20261029\\audit\\test_window_bound.py"
+    ],
+    "exit_code": 1,
+    "test_methods": 3,
+    "failing_methods": 2,
+    "failed_subcases": 5,
+    "passed_controls": 1,
+    "source_commit": "d306ac059e249e6b600b7247ee350a33e302bcbe",
+    "material": "synthetic same local currency invariant; no real company analysis",
+    "repo_override": "W20_AUDIT_REPO environment for ROOT isolated final worktree; default is author tree"
+  },
+  "cleanup": {
+    "root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w20-reception-r3-20261029\\audit\\temporary",
+    "before_exists": false,
+    "after_exists": false,
+    "owned_files_removed": 45,
+    "end_bytes_before_cleanup": 235818,
+    "peak_bytes": null,
+    "peak_note": "not sampled",
+    "restored": true
+  },
+  "counterfactual": "Only in-memory source substitution end-right->right-end, no files modified. It repairs far range but retains two near-donation wrong positives; honest positive 元人民币 suffix remains valid.",
+  "scope": "No merge/install/source edits/external API by reviewer. Old 7+typed4+43 W20+7 numeric+11-step offline CLI all pass but do not cover this same-invariant defect. No full repository repeat.",
+  "next_action": "ROOT already chose isolated worktree revenue-forecast-audit-w20-root-final for the focused repair. This report is frozen initial evidence; after repair independently review actual final SHA and rerun bounded targeted tests. Do not ask user for another permission or launch another author round."
+}

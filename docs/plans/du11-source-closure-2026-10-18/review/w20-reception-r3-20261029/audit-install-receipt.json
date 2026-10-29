@@ -1,0 +1,113 @@
+{
+  "canonical_source": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\skills\\revenue-forecast-audit",
+  "source_commit": "55c29fe5f3a9554f883156e3a4232eece04bf581",
+  "source_file_sha256": {
+    "SKILL.md": "24434c4e60da95fd3869bbfe85f3d9ad672ac86f3f348b6ab549c65fcb0c20e1",
+    "agents/openai.yaml": "8747d2c15e4eda128dfc329d5d2b4590e3e030a71e3cde5e17d5e427da93ded6",
+    "scripts/analyst_risk_audit.py": "b3e92ff7e0d06e74cfce4734c997a697efd1d8447ca119171380bd25867e18a0",
+    "scripts/audit_blob_store.py": "ae2317875aaf064d396ac536c7e68838251c24370b6308abb245b4aa5cf966ad",
+    "scripts/audit_contracts.py": "751c233fc08523ff2cf3ae9c4d95591637afd34b26f82c192317f33948f4615d",
+    "scripts/audit_run.py": "ce14b66728ec7bd0b51d4e4820d202ba3bf2913fb0ff35cec9646934d8836324",
+    "scripts/authoring_provenance.py": "20d18f1ed4fc8adf65661f429738db64d81a025ed72b35f5b4e5a97b3d2c192c",
+    "scripts/coverage_observations.py": "bc0f91279502b9064b159433fda27f11f2224c00be72872c94d136aceadce948",
+    "scripts/document_status_join.py": "042e45610b439be538292ce684a303a58a5a71afb98cd6b510b3a83b72d43837",
+    "scripts/execution_request.py": "48fcc4a3a5eb84fed49a886a394f9d7058721c32a47237cd4f95ef13d976a2fa",
+    "scripts/financial_measure_audit.py": "fbd2e89305f77a9fdd9411752d564e6b70f2c8bf8445b4f934e402cfd73386f2",
+    "scripts/financial_measure_evidence.py": "1f58a7aaa97390b792ba4ba43bbb3ee30c55d71ca9642d83a31f57ba2558ec14",
+    "scripts/numeric_audit.py": "39cb4f8f561f14f406b5c79639f7395af915e1f9027b15a0e2ac8e0c40949aec",
+    "scripts/pool_progress.py": "fe7687793ac6e2690c9eab980b19f08465acde8f2ed3c6e1cb7b285ebceb7537",
+    "scripts/review_evidence.py": "c9f096a248f3a6bbbd87617be17472c3470666adb0e50a482ddafd5873b1d6b2",
+    "scripts/review_evidence_reconcile.py": "8d7a4e058aac11e439cc60e470d8fb8cd14495680c85ae9fcadddf543d11dbba",
+    "scripts/review_protocol.py": "7b16898ec727f1c47c4ce35ccfbffbefde52b410762caa74fdb0f5eb0bb9ee1a",
+    "scripts/summary_checkpoint_observations.py": "4283cd680c55f883dc1b095da008caa1beb467eaa7dd1f26a3965a831f949732",
+    "scripts/summary_review_contracts.py": "f6e34832f94cbea719517398c36ddc99513c58da07424330f1300c3826af424c",
+    "scripts/summary_review_import.py": "860af26a38bdfa03bc2a11932624c35c4cc822498763775dd12d48a4f6ff8aee",
+    "scripts/summary_review_packet.py": "8c06d3eea21ee5c0f0fdc8cb73dd7c422b2709a6c62e5bdec6e75bb0784296c8",
+    "references/analyst-risk-audit.md": "d0843a7a7440de333cee5f6c03a04aa323f44e28935bfb7240a38ee98fa265b6",
+    "references/artifact-contract.md": "3eef65ad07bfa883a8ae4a60e578d6f9a41a01b223bec8bb931a647dc94bdf4d",
+    "references/company-pool-loop.md": "461cc9ae8d0204698567f0e022cd176183521cebac70ce53d3c394bb2e634ef7",
+    "references/continuous-quality.md": "9ee3d29e2b03b491467ef87af405f31846e8b421bf18eef764faefddaef11560",
+    "references/coverage-observations.md": "27ca2335dd896b6ee8297360556843658736675c973db37f22edb5292f96f2a7",
+    "references/execution-artifact-contract.md": "f8b199309debb7738d2c7b27f31c2ac24da66af540a56e0e21fa92d8813a7c33",
+    "references/executor.md": "c9acb192a7a921d15a3da450832a6cd5f4e09bbaa7b7387b156cb613c165ba8e",
+    "references/financial-measure-audit.md": "26fe6796d27d125254b7b523fc7317ae12aa3db8c366efa07210a7af331a1faf",
+    "references/financial-measure-evidence.md": "d03e6bbde3224c23321a28d46576ae29bffcde7fb198c94a0834f6d7bc23cf22",
+    "references/numeric-ledger-example.json": "2f793ef0b2ec633a7a31bd8b42c7d7a0c8759667c928122d721e0677f4f33890",
+    "references/pool-progress-contract.md": "2a05e9bcc8edcc4b2d5f38eceeb2b82605b261089a36e7d911457f6549ba6eb7",
+    "references/remediation.md": "188a999b0aed95d03a426cf12c2fe3aeeb8b77a56400d01ae9240a5eb1767a9e",
+    "references/review-analyst.md": "a9b85ca1a69011b5ea374919836d047f5db0394036c17023b4153037a13f37d7",
+    "references/review-evidence-reconciliation.md": "ffe777df774209c448d309c38fbfa9da7019950e185fec130b0cc8e730e8efb4",
+    "references/review-fetch.md": "fe38b454c64b0e91e06e68f9a17e22c8d2c097cef0c460bfbe35d53394fa9d63",
+    "references/review-process.md": "99970a37aee6813db5332aaf3de8654cca22ad0277cb5f8f3dfa0e04859360a3",
+    "references/review-storage.md": "76d19f5401e3a057e943d5b3f5d0d5ae770f96b97fd3099cfd38013fc3f561c7",
+    "references/rf-checkpoints.md": "76a91e6509c3b982ef967fb868f3cddaaadc77fa45d19360918d9f921bb1e54f",
+    "references/summary-checkpoint-observations.md": "0d5793919f2f72c649607348c51289d48fe2520575b3ad692362e4905624d887",
+    "references/summary-review-import.md": "6466ad0042ba8b87d9fae862896a0e7deb9dee01bb1d169bdd9f589d40237ad1",
+    "references/summary-semantic-review.md": "57c28f9ce0ee0bac7c674a15a8bb0558e7f9db2c3904a34444ae093adea35da1",
+    "references/workflow.md": "7872a012487429f0078609e13e5c2a033a090431c4bf778859c5219eddf905a6"
+  },
+  "reports": [
+    {
+      "installation": {
+        "destination": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast-audit",
+        "files": 43,
+        "changed": [
+          "SKILL.md",
+          "scripts/summary_checkpoint_observations.py",
+          "scripts/summary_review_packet.py",
+          "references/review-analyst.md",
+          "references/review-fetch.md",
+          "references/review-process.md",
+          "references/review-storage.md",
+          "references/summary-checkpoint-observations.md"
+        ],
+        "mismatches": [],
+        "status": "MATCH"
+      },
+      "check": {
+        "destination": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast-audit",
+        "files": 43,
+        "changed": [],
+        "mismatches": [],
+        "status": "MATCH"
+      },
+      "unselected_files_unchanged": 0,
+      "fresh_cli_help": {
+        "exit_code": 0,
+        "stdout_bytes": 2106
+      }
+    },
+    {
+      "installation": {
+        "destination": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit",
+        "files": 43,
+        "changed": [
+          "SKILL.md",
+          "scripts/summary_checkpoint_observations.py",
+          "scripts/summary_review_packet.py",
+          "references/review-analyst.md",
+          "references/review-fetch.md",
+          "references/review-process.md",
+          "references/review-storage.md",
+          "references/summary-checkpoint-observations.md"
+        ],
+        "mismatches": [],
+        "status": "MATCH"
+      },
+      "check": {
+        "destination": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast-audit",
+        "files": 43,
+        "changed": [],
+        "mismatches": [],
+        "status": "MATCH"
+      },
+      "unselected_files_unchanged": 2,
+      "fresh_cli_help": {
+        "exit_code": 0,
+        "stdout_bytes": 2106
+      }
+    }
+  ],
+  "config_preserved": true,
+  "runtime": "C:/Miniconda/python.exe; no ACL/MIC changes"
+}

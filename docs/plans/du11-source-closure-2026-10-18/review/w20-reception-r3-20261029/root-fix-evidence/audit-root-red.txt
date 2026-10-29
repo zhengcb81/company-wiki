@@ -1,0 +1,63 @@
+FFFF..F
+======================================================================
+FAIL: test_another_amount_cannot_donate_currency_at_any_distance (test_w20_root_currency_binding.CurrencyAttachmentTests.test_another_amount_cannot_donate_currency_at_any_distance) (gap=1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\revenue-forecast-audit-w20-root-final\tests\test_w20_root_currency_binding.py", line 15, in test_another_amount_cannot_donate_currency_at_any_distance
+    self.assertEqual(row["status"], "partial_match", row)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'scale_equivalent' != 'partial_match'
+- scale_equivalent
++ partial_match
+ : {'anchor_kind': 'value', 'declared': '12.5', 'declared_unit': '亿元人民币', 'status': 'scale_equivalent', 'fragment_ids': ['f'], 'scale_equivalent_literals': [{'fragment_id': 'f', 'literal': '1,250,000,000'}]}
+
+======================================================================
+FAIL: test_another_amount_cannot_donate_currency_at_any_distance (test_w20_root_currency_binding.CurrencyAttachmentTests.test_another_amount_cannot_donate_currency_at_any_distance) (gap=1)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\revenue-forecast-audit-w20-root-final\tests\test_w20_root_currency_binding.py", line 15, in test_another_amount_cannot_donate_currency_at_any_distance
+    self.assertEqual(row["status"], "partial_match", row)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'scale_equivalent' != 'partial_match'
+- scale_equivalent
++ partial_match
+ : {'anchor_kind': 'value', 'declared': '12.5', 'declared_unit': '亿元人民币', 'status': 'scale_equivalent', 'fragment_ids': ['f'], 'scale_equivalent_literals': [{'fragment_id': 'f', 'literal': '1,250,000,000'}]}
+
+======================================================================
+FAIL: test_another_amount_cannot_donate_currency_at_any_distance (test_w20_root_currency_binding.CurrencyAttachmentTests.test_another_amount_cannot_donate_currency_at_any_distance) (gap=21)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\revenue-forecast-audit-w20-root-final\tests\test_w20_root_currency_binding.py", line 15, in test_another_amount_cannot_donate_currency_at_any_distance
+    self.assertEqual(row["status"], "partial_match", row)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'scale_equivalent' != 'partial_match'
+- scale_equivalent
++ partial_match
+ : {'anchor_kind': 'value', 'declared': '12.5', 'declared_unit': '亿元人民币', 'status': 'scale_equivalent', 'fragment_ids': ['f'], 'scale_equivalent_literals': [{'fragment_id': 'f', 'literal': '1,250,000,000'}]}
+
+======================================================================
+FAIL: test_another_amount_cannot_donate_currency_at_any_distance (test_w20_root_currency_binding.CurrencyAttachmentTests.test_another_amount_cannot_donate_currency_at_any_distance) (gap=81)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\revenue-forecast-audit-w20-root-final\tests\test_w20_root_currency_binding.py", line 15, in test_another_amount_cannot_donate_currency_at_any_distance
+    self.assertEqual(row["status"], "partial_match", row)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'scale_equivalent' != 'partial_match'
+- scale_equivalent
++ partial_match
+ : {'anchor_kind': 'value', 'declared': '12.5', 'declared_unit': '亿元人民币', 'status': 'scale_equivalent', 'fragment_ids': ['f'], 'scale_equivalent_literals': [{'fragment_id': 'f', 'literal': '1,250,000,000'}]}
+
+======================================================================
+FAIL: test_local_scan_is_bounded_for_long_unpunctuated_text (test_w20_root_currency_binding.CurrencyAttachmentTests.test_local_scan_is_bounded_for_long_unpunctuated_text)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\revenue-forecast-audit-w20-root-final\tests\test_w20_root_currency_binding.py", line 39, in test_local_scan_is_bounded_for_long_unpunctuated_text
+    self.assertEqual(result, set())
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^
+AssertionError: Items in the first set but not the second:
+'CNY'
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.078s
+
+FAILED (failures=5)

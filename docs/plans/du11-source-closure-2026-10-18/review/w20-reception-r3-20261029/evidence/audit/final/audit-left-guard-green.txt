@@ -1,0 +1,6 @@
+................................................
+{"attempt_id": "20261029T203357Z-52a21d45", "attempt_dir": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w20-helper-9fholx8e\\out\\20261029T203357Z-52a21d45", "output_file": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\w20-helper-9fholx8e\\out\\20261029T203357Z-52a21d45\\checkpoint-observations.json"}
+----------------------------------------------------------------------
+Ran 48 tests in 0.155s
+
+OK

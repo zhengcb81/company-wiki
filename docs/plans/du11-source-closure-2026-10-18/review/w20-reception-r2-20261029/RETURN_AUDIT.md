@@ -1,5 +1,7 @@
 # W20-AUDIT 第二轮定点补完（2026-10-29）
 
+> 已完成：本包最终修复/独审/并线结束，本文件为历史返工记录，勿重新实施；见[最新完成入口](../w20-reception-r3-20261029/README.md)。
+
 本文件取代上轮RETURN_AUDIT作为当前返工入口；同一原卡、原工区、原分支继续。只剩原R1一个P2共同根因，原R2已关闭，不重做整包。ROOT未并线/安装，主线公司循环仍暂停。
 
 - 工区：`C:/Users/郑曾波/Projects/revenue-forecast-audit-w20-checkpoints`

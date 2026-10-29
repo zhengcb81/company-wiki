@@ -1,0 +1,40 @@
+.FFFFFF                                                                  [100%]
+================================== FAILURES ===================================
+________ test_mid_import_requires_explicit_not_found[confirmed-False] _________
+tests\test_w20_root_mid_import_state.py:30: in test_mid_import_requires_explicit_not_found
+    assert (not errors) is passes, errors
+E   AssertionError: []
+E   assert not [] is False
+_______ test_mid_import_requires_explicit_not_found[probe_error-False] ________
+tests\test_w20_root_mid_import_state.py:30: in test_mid_import_requires_explicit_not_found
+    assert (not errors) is passes, errors
+E   AssertionError: []
+E   assert not [] is False
+___________ test_mid_import_requires_explicit_not_found[None-False] ___________
+tests\test_w20_root_mid_import_state.py:30: in test_mid_import_requires_explicit_not_found
+    assert (not errors) is passes, errors
+E   AssertionError: []
+E   assert not [] is False
+_________ test_mid_import_requires_explicit_not_found[unknown-False] __________
+tests\test_w20_root_mid_import_state.py:30: in test_mid_import_requires_explicit_not_found
+    assert (not errors) is passes, errors
+E   AssertionError: []
+E   assert not [] is False
+__________ test_mid_import_requires_explicit_not_found[False-False] ___________
+tests\test_w20_root_mid_import_state.py:30: in test_mid_import_requires_explicit_not_found
+    assert (not errors) is passes, errors
+E   AssertionError: []
+E   assert not [] is False
+_________ test_mid_import_requires_explicit_not_found[missing-False] __________
+tests\test_w20_root_mid_import_state.py:30: in test_mid_import_requires_explicit_not_found
+    assert (not errors) is passes, errors
+E   AssertionError: []
+E   assert not [] is False
+=========================== short test summary info ===========================
+FAILED tests/test_w20_root_mid_import_state.py::test_mid_import_requires_explicit_not_found[confirmed-False]
+FAILED tests/test_w20_root_mid_import_state.py::test_mid_import_requires_explicit_not_found[probe_error-False]
+FAILED tests/test_w20_root_mid_import_state.py::test_mid_import_requires_explicit_not_found[None-False]
+FAILED tests/test_w20_root_mid_import_state.py::test_mid_import_requires_explicit_not_found[unknown-False]
+FAILED tests/test_w20_root_mid_import_state.py::test_mid_import_requires_explicit_not_found[False-False]
+FAILED tests/test_w20_root_mid_import_state.py::test_mid_import_requires_explicit_not_found[missing-False]
+6 failed, 1 passed in 0.41s

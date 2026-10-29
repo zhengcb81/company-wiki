@@ -1,0 +1,8 @@
+{
+  "root_ff_pytest_directory": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\pytest-of-郑曾波\\pytest-3203",
+  "restored_absent": true,
+  "cleanup": "already removed by pytest retention before ROOT cleanup; ROOT performed no deletion",
+  "initial_cleanup_attempt": "ownership assertion found no fixture because directory was already absent; no files removed",
+  "other_pytest_directories": "untouched",
+  "audit_helper_temps_absent": true
+}

@@ -1,0 +1,88 @@
+{
+  "card_id": "W20-RF-ADOPTION",
+  "review_date": "2026-10-29",
+  "reviewer": "/root/w20_rf_reception",
+  "verdict": "PASS",
+  "open_findings": [],
+  "actual_head": "3e8fbc5522a814abc4db7d828c3e4dcf84f308b8",
+  "tested_code_commit": "3e8fbc5522a814abc4db7d828c3e4dcf84f308b8",
+  "reviewed_code_commit": "3e8fbc5522a814abc4db7d828c3e4dcf84f308b8",
+  "product_implementation_commit": "f75c9fe253a1f2114e83f0a84e58beb043450f31",
+  "preceding_fix_commit": "956b51d4",
+  "source_sha256": {
+    "tools/narrative_adoption_audit/audit.py": "f140cc0f3331e7076b7edbcac2b533e19c8215ea42b8f0bb8f3d5464317f7fb0",
+    "tools/narrative_adoption_audit/cli.py": "436c6487cca3d6d4591b7237098d49f8275d035b70ebf07d5684c08a6147ff35",
+    "tests/test_w20_narrative_adoption_audit.py": "d4dccbc6a4bf4f7413c7ee9d3597457d0708c345297e125174b372b346f53880",
+    "tests/test_w20_narrative_adoption_e2e.py": "aca860921a393734b67adf319aae27433748cedca170b5fb78990d5eff681b08"
+  },
+  "version_binding_note": "Product audit.py/cli.py unchanged f75..HEAD. Tests did change at HEAD: wall-clock-floor flake removed and always-executed t2<4*t1+0.05 assertion added. All 42 tests were run against actual HEAD, so no stale review receipt reuse. Author handoff only-docs note is inaccurate for test file, informational corrected here; ROOT can align record at integration without another author round.",
+  "tests": {
+    "passed": 42,
+    "failed": 0,
+    "seconds": 9.91,
+    "junit": "rf-evidence/pytest.xml",
+    "scope": "40 delivered unit + 2 synthetic actual subprocess RF/consume/backtest/audit CLI E2E; actual HEAD, not old frozen test file",
+    "command": "C:/Miniconda/python.exe -B -X utf8 -m pytest -q --tb=short -p no:cacheprovider -o addopts=\"\" <author>/tests/test_w20_narrative_adoption_audit.py <author>/tests/test_w20_narrative_adoption_e2e.py --basetemp <ROOT scratch>/pytest-temp --junitxml <ROOT scratch>/pytest.xml"
+  },
+  "finding_closures": [
+    {
+      "id": "RF-R2-01",
+      "status": "FIXED",
+      "actual": "Two genuine consume runs, same capture/claim/PID but different selected material; forecastA+receiptB now yields unverifiable, empty cited_by and receipt_claim_material_mismatch for both explicit locator and excerpt hash. Baseline matched A+A remains used.",
+      "evidence": [
+        "rf-evidence/material_probe.py",
+        "rf-evidence/material-probe-results.json"
+      ]
+    },
+    {
+      "id": "RF-R2-02",
+      "status": "FIXED",
+      "actual": "19-byte malformed DEFLATE through real subprocess CLI -> exit2/input_decompress_failed, no traceback/stdout/output. except adds precise zlib.error, streaming limit unchanged.",
+      "evidence": [
+        "rf-evidence/additional_probe.py",
+        "rf-evidence/additional-probe-results.json"
+      ]
+    },
+    {
+      "id": "PRIOR-R1-R3",
+      "status": "PRESERVED_FIXED",
+      "actual": "Foreign-source/fake-sourceID unverifiable; same span two used-year paths2026/2027 preserved; compressed input133B expanding100000B rejected at1024B limit.",
+      "evidence": [
+        "rf-evidence/probe.py",
+        "rf-evidence/probe-results.json"
+      ]
+    },
+    {
+      "id": "PROJECTED-AND-LENIENT",
+      "status": "PASS",
+      "actual": "Public /3 wire actual parent at refs[1]: normal used; missing receipt hash used+hash_missing_unknown; wrong refs[0] hash unverifiable. Delivered real two-span/two-claim same-parameter test and multi-receipt/order tests pass.",
+      "evidence": [
+        "rf-evidence/additional_probe.py",
+        "rf-evidence/additional-probe-results.json",
+        "rf-evidence/pytest.xml"
+      ]
+    }
+  ],
+  "compatibility": [
+    "No new human/permission gates; report remains diagnostic_not_a_permission_gate",
+    "Material identity rule scoped to existing consume contract: unique generated claim maps to selected span locator/projected source_locator and text_sha256(raw_text). Not a global requirement that all research quotes equal every support, and not a ban on multiple evidence/claim paths per parameter.",
+    "Missing optional hash/locator remains recorded unknown rather than new required-field refusal",
+    "Project /3 parent chosen by actual span.source_id, projectedness by context schema; legacy stray source_locator guard passes",
+    "Existing 42 tests and actual probe results cover formal synthetic artifacts only; no claim of real-company actual model adoption/analysis quality"
+  ],
+  "cleanup": {
+    "initial_temp": "absent",
+    "restored": true,
+    "production_writes": false,
+    "author_writes": false,
+    "network_requests": 0,
+    "paid_requests": 0,
+    "removed_files": 23,
+    "removed_bytes": 349665
+  },
+  "author_status_after_review": "clean",
+  "source_or_index_edits": false,
+  "install_or_merge": false,
+  "network_or_paid_run": false,
+  "merge_recommendation": "Accept W20 RF package engineering scope and integrate via ROOT; do not mark main real-company RF adoption or company loop complete. Keep old r1/r2 reports as historical evidence."
+}

@@ -1,0 +1,13 @@
+BOUND_HELPER C:\Users\郑曾波\Projects\revenue-forecast-audit-w20-root-final\skills\revenue-forecast-audit\scripts\summary_checkpoint_observations.py RAW_SHA256=6b3e060c345b91c240dd1b3b088734242267dc4114ad513ddaa75825a9bec73a
+test_explicit_unchanged_period_remains_literal (__main__.RootRegressions.test_explicit_unchanged_period_remains_literal) ... ok
+test_explicit_unread_support_cannot_be_positive_anchor (__main__.RootRegressions.test_explicit_unread_support_cannot_be_positive_anchor) ... ok
+test_h2_is_not_full_h1_literal_anchor (__main__.RootRegressions.test_h2_is_not_full_h1_literal_anchor) ... ok
+test_ratio_must_not_equal_monetary_amount (__main__.RootRegressions.test_ratio_must_not_equal_monetary_amount) ... ok
+test_signed_value_must_not_lose_minus (__main__.RootRegressions.test_signed_value_must_not_lose_minus) ... ok
+test_valid_same_currency_scale_equivalence_remains (__main__.RootRegressions.test_valid_same_currency_scale_equivalence_remains) ... ok
+test_yen_is_not_literal_cny_token (__main__.RootRegressions.test_yen_is_not_literal_cny_token) ... ok
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.001s
+
+OK

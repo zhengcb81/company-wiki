@@ -1,0 +1,388 @@
+{
+  "baseline": {
+    "kind": "span",
+    "id": "urn:company-wiki:evidence-span:sha256:cd7021cae5d0238a55aeb8f7398b6548acf632aaf24241e1b76f0a74432aa66f",
+    "id_scope": "canonical",
+    "source_sha256": "bbe21a0e34d1ad48c407a23d0a2e5fb065132c3626ff9a778e4b4b656af069b9",
+    "status": "used",
+    "support_use": "support",
+    "cited_by": [
+      {
+        "node_type": "coverage_dimension_parameter",
+        "location": "research_coverage.dimensions[1].parameter_ids[0]",
+        "ids": {
+          "dimension": "growth_curve",
+          "parameter_id": "0_base_2026"
+        }
+      },
+      {
+        "node_type": "driver_tree_parameter",
+        "location": "growth_driver_analysis.drivers[0].parameter_ids[0]",
+        "ids": {
+          "driver_id": "fixture_driver_Segment_A",
+          "parameter_id": "0_base_2026"
+        }
+      },
+      {
+        "node_type": "segment_scenario_driver",
+        "location": "segments[0].scenarios.base.driver_parameter_ids.revenue[0]",
+        "ids": {
+          "segment": "Segment A",
+          "scenario": "base",
+          "driver": "revenue",
+          "year": "2026",
+          "parameter_id": "0_base_2026"
+        }
+      }
+    ],
+    "reasons": [
+      "used_via_bound_claim",
+      "used_via_coverage_dimension",
+      "used_via_driver_tree_parameter",
+      "used_via_segment_driver_slot"
+    ]
+  },
+  "foreign_span_with_existing_capture": {
+    "span": {
+      "kind": "span",
+      "id": "urn:company-wiki:evidence-span:sha256:2aa043dc0e0f28b5828be35c4495dfe15449ace10449a6962a46ad85a6a9e0d2",
+      "id_scope": "canonical",
+      "source_sha256": "0cb80ccc14be4723ef40fab8b045d681e60e86926cd045a9b7579374ae9422ce",
+      "status": "unverifiable",
+      "support_use": "support",
+      "cited_by": [],
+      "reasons": [
+        "consumption_source_hash_mismatch",
+        "receipt_claim_material_mismatch",
+        "receipt_locator_mismatch",
+        "receipt_source_mismatch",
+        "receipt_span_hash_mismatch"
+      ]
+    },
+    "diagnostics": [
+      {
+        "code": "node_family_missing:probability_weighted_forecast",
+        "detail": "final artifact carries no probability_weighted_forecast family",
+        "severity": "info",
+        "item_id": null
+      },
+      {
+        "code": "receipt_source_mismatch",
+        "detail": "receipt[0] names source 'urn:company-wiki:source:sha256:bbe21a0e34d1ad48c407a23d0a2e5fb065132c3626ff9a778e4b4b656af069b9' but the transported span belongs to 'urn:company-wiki:source:sha256:0cb80ccc14be4723ef40fab8b045d681e60e86926cd045a9b7579374ae9422ce'",
+        "severity": "warn",
+        "item_id": "urn:company-wiki:evidence-span:sha256:2aa043dc0e0f28b5828be35c4495dfe15449ace10449a6962a46ad85a6a9e0d2"
+      },
+      {
+        "code": "receipt_locator_mismatch",
+        "detail": "receipt[0] locator disagrees with the transported span",
+        "severity": "warn",
+        "item_id": "urn:company-wiki:evidence-span:sha256:2aa043dc0e0f28b5828be35c4495dfe15449ace10449a6962a46ad85a6a9e0d2"
+      },
+      {
+        "code": "consumption_source_hash_mismatch",
+        "detail": "span urn:company-wiki:evidence-span:sha256:2aa043dc0e0f28b5828be35c4495dfe15449ace10449a6962a46ad85a6a9e0d2's canonical parent 0cb80ccc14be4723… is captured by no source of this input",
+        "severity": "warn",
+        "item_id": "urn:company-wiki:evidence-span:sha256:2aa043dc0e0f28b5828be35c4495dfe15449ace10449a6962a46ad85a6a9e0d2"
+      },
+      {
+        "code": "receipt_span_hash_mismatch",
+        "detail": "receipt[0] source_sha256 bbe21a0e34d1ad48… is not the transported span's canonical parent hash",
+        "severity": "warn",
+        "item_id": "urn:company-wiki:evidence-span:sha256:2aa043dc0e0f28b5828be35c4495dfe15449ace10449a6962a46ad85a6a9e0d2"
+      },
+      {
+        "code": "receipt_claim_material_mismatch",
+        "detail": "receipt[0] claim w20_cl carries material from another capture than the span's parent",
+        "severity": "warn",
+        "item_id": "urn:company-wiki:evidence-span:sha256:2aa043dc0e0f28b5828be35c4495dfe15449ace10449a6962a46ad85a6a9e0d2"
+      },
+      {
+        "code": "receipt_claim_material_mismatch",
+        "detail": "receipt[0] claim w20_cl locator points at other material than the transported span",
+        "severity": "warn",
+        "item_id": "urn:company-wiki:evidence-span:sha256:2aa043dc0e0f28b5828be35c4495dfe15449ace10449a6962a46ad85a6a9e0d2"
+      },
+      {
+        "code": "span_dependencies_aggregated",
+        "detail": "span urn:company-wiki:evidence-span:sha256:2aa043dc0e0f28b5828be35c4495dfe15449ace10449a6962a46ad85a6a9e0d2 aggregates 1 dependency path(s) across 1 receipt(s): 0 intact, 1 invalid",
+        "severity": "info",
+        "item_id": "urn:company-wiki:evidence-span:sha256:2aa043dc0e0f28b5828be35c4495dfe15449ace10449a6962a46ad85a6a9e0d2"
+      }
+    ],
+    "dependency": {
+      "span_id": "urn:company-wiki:evidence-span:sha256:2aa043dc0e0f28b5828be35c4495dfe15449ace10449a6962a46ad85a6a9e0d2",
+      "locator": "loc:v1/paragraph:3/chars:91-154",
+      "parser_name": "du11-fixture-parser",
+      "parser_version": "1.0.0",
+      "source_id": "urn:company-wiki:source:sha256:bbe21a0e34d1ad48c407a23d0a2e5fb065132c3626ff9a778e4b4b656af069b9",
+      "source_sha256": "bbe21a0e34d1ad48c407a23d0a2e5fb065132c3626ff9a778e4b4b656af069b9",
+      "claim_id": "w20_cl",
+      "parameter_id": "0_base_2026",
+      "formula_refs": [
+        {
+          "segment": "Segment A",
+          "scenario": "base",
+          "model": "direct_revenue",
+          "driver": "revenue",
+          "output": "recognized_revenue"
+        }
+      ]
+    },
+    "wire_source": {
+      "byte_size": 343,
+      "content_sha256": "0cb80ccc14be4723ef40fab8b045d681e60e86926cd045a9b7579374ae9422ce",
+      "document_id": "urn:company-wiki:document:sha256:0cb80ccc14be4723ef40fab8b045d681e60e86926cd045a9b7579374ae9422ce",
+      "mime_type": "text/plain",
+      "schema_version": "2.0",
+      "source_id": "urn:company-wiki:source:sha256:0cb80ccc14be4723ef40fab8b045d681e60e86926cd045a9b7579374ae9422ce"
+    }
+  },
+  "wrong_explicit_source_id": {
+    "span": {
+      "kind": "span",
+      "id": "urn:company-wiki:evidence-span:sha256:cd7021cae5d0238a55aeb8f7398b6548acf632aaf24241e1b76f0a74432aa66f",
+      "id_scope": "canonical",
+      "source_sha256": "bbe21a0e34d1ad48c407a23d0a2e5fb065132c3626ff9a778e4b4b656af069b9",
+      "status": "unverifiable",
+      "support_use": "support",
+      "cited_by": [],
+      "reasons": [
+        "receipt_source_mismatch"
+      ]
+    },
+    "diagnostics": [
+      {
+        "code": "node_family_missing:probability_weighted_forecast",
+        "detail": "final artifact carries no probability_weighted_forecast family",
+        "severity": "info",
+        "item_id": null
+      },
+      {
+        "code": "receipt_source_mismatch",
+        "detail": "receipt[0] names source 'urn:fake:source' but the transported span belongs to 'urn:company-wiki:source:sha256:bbe21a0e34d1ad48c407a23d0a2e5fb065132c3626ff9a778e4b4b656af069b9'",
+        "severity": "warn",
+        "item_id": "urn:company-wiki:evidence-span:sha256:cd7021cae5d0238a55aeb8f7398b6548acf632aaf24241e1b76f0a74432aa66f"
+      },
+      {
+        "code": "span_dependencies_aggregated",
+        "detail": "span urn:company-wiki:evidence-span:sha256:cd7021cae5d0238a55aeb8f7398b6548acf632aaf24241e1b76f0a74432aa66f aggregates 1 dependency path(s) across 1 receipt(s): 0 intact, 1 invalid",
+        "severity": "info",
+        "item_id": "urn:company-wiki:evidence-span:sha256:cd7021cae5d0238a55aeb8f7398b6548acf632aaf24241e1b76f0a74432aa66f"
+      }
+    ]
+  },
+  "two_valid_bindings": {
+    "span": {
+      "kind": "span",
+      "id": "urn:company-wiki:evidence-span:sha256:cd7021cae5d0238a55aeb8f7398b6548acf632aaf24241e1b76f0a74432aa66f",
+      "id_scope": "canonical",
+      "source_sha256": "bbe21a0e34d1ad48c407a23d0a2e5fb065132c3626ff9a778e4b4b656af069b9",
+      "status": "used",
+      "support_use": "support",
+      "cited_by": [
+        {
+          "node_type": "coverage_dimension_parameter",
+          "location": "research_coverage.dimensions[1].parameter_ids[0]",
+          "ids": {
+            "dimension": "growth_curve",
+            "parameter_id": "0_base_2026"
+          }
+        },
+        {
+          "node_type": "coverage_dimension_parameter",
+          "location": "research_coverage.dimensions[1].parameter_ids[1]",
+          "ids": {
+            "dimension": "growth_curve",
+            "parameter_id": "0_base_2027"
+          }
+        },
+        {
+          "node_type": "driver_tree_parameter",
+          "location": "growth_driver_analysis.drivers[0].parameter_ids[0]",
+          "ids": {
+            "driver_id": "fixture_driver_Segment_A",
+            "parameter_id": "0_base_2026"
+          }
+        },
+        {
+          "node_type": "driver_tree_parameter",
+          "location": "growth_driver_analysis.drivers[0].parameter_ids[1]",
+          "ids": {
+            "driver_id": "fixture_driver_Segment_A",
+            "parameter_id": "0_base_2027"
+          }
+        },
+        {
+          "node_type": "segment_scenario_driver",
+          "location": "segments[0].scenarios.base.driver_parameter_ids.revenue[0]",
+          "ids": {
+            "segment": "Segment A",
+            "scenario": "base",
+            "driver": "revenue",
+            "year": "2026",
+            "parameter_id": "0_base_2026"
+          }
+        },
+        {
+          "node_type": "segment_scenario_driver",
+          "location": "segments[0].scenarios.base.driver_parameter_ids.revenue[1]",
+          "ids": {
+            "segment": "Segment A",
+            "scenario": "base",
+            "driver": "revenue",
+            "year": "2027",
+            "parameter_id": "0_base_2027"
+          }
+        }
+      ],
+      "reasons": [
+        "used_via_bound_claim",
+        "used_via_coverage_dimension",
+        "used_via_driver_tree_parameter",
+        "used_via_segment_driver_slot"
+      ]
+    },
+    "diagnostics": [
+      {
+        "code": "node_family_missing:probability_weighted_forecast",
+        "detail": "final artifact carries no probability_weighted_forecast family",
+        "severity": "info",
+        "item_id": null
+      },
+      {
+        "code": "span_dependencies_aggregated",
+        "detail": "span urn:company-wiki:evidence-span:sha256:cd7021cae5d0238a55aeb8f7398b6548acf632aaf24241e1b76f0a74432aa66f aggregates 2 dependency path(s) across 1 receipt(s): 2 intact, 0 invalid",
+        "severity": "info",
+        "item_id": "urn:company-wiki:evidence-span:sha256:cd7021cae5d0238a55aeb8f7398b6548acf632aaf24241e1b76f0a74432aa66f"
+      }
+    ],
+    "dependencies": [
+      {
+        "span_id": "urn:company-wiki:evidence-span:sha256:cd7021cae5d0238a55aeb8f7398b6548acf632aaf24241e1b76f0a74432aa66f",
+        "locator": "loc:v1/paragraph:3/chars:91-154",
+        "parser_name": "du11-fixture-parser",
+        "parser_version": "1.0.0",
+        "source_id": "urn:company-wiki:source:sha256:bbe21a0e34d1ad48c407a23d0a2e5fb065132c3626ff9a778e4b4b656af069b9",
+        "source_sha256": "bbe21a0e34d1ad48c407a23d0a2e5fb065132c3626ff9a778e4b4b656af069b9",
+        "claim_id": "first",
+        "parameter_id": "0_base_2026",
+        "formula_refs": [
+          {
+            "segment": "Segment A",
+            "scenario": "base",
+            "model": "direct_revenue",
+            "driver": "revenue",
+            "output": "recognized_revenue"
+          }
+        ]
+      },
+      {
+        "span_id": "urn:company-wiki:evidence-span:sha256:cd7021cae5d0238a55aeb8f7398b6548acf632aaf24241e1b76f0a74432aa66f",
+        "locator": "loc:v1/paragraph:3/chars:91-154",
+        "parser_name": "du11-fixture-parser",
+        "parser_version": "1.0.0",
+        "source_id": "urn:company-wiki:source:sha256:bbe21a0e34d1ad48c407a23d0a2e5fb065132c3626ff9a778e4b4b656af069b9",
+        "source_sha256": "bbe21a0e34d1ad48c407a23d0a2e5fb065132c3626ff9a778e4b4b656af069b9",
+        "claim_id": "second",
+        "parameter_id": "0_base_2027",
+        "formula_refs": [
+          {
+            "segment": "Segment A",
+            "scenario": "base",
+            "model": "direct_revenue",
+            "driver": "revenue",
+            "output": "recognized_revenue"
+          }
+        ]
+      }
+    ],
+    "claims": [
+      {
+        "kind": "claim",
+        "id": "first",
+        "id_scope": "document_local_display_key",
+        "input_source_id": "filing",
+        "status": "used",
+        "cited_by": [
+          {
+            "node_type": "segment_scenario_driver",
+            "location": "segments[0].scenarios.base.driver_parameter_ids.revenue[0]",
+            "ids": {
+              "segment": "Segment A",
+              "scenario": "base",
+              "driver": "revenue",
+              "year": "2026",
+              "parameter_id": "0_base_2026"
+            }
+          },
+          {
+            "node_type": "driver_tree_parameter",
+            "location": "growth_driver_analysis.drivers[0].parameter_ids[0]",
+            "ids": {
+              "driver_id": "fixture_driver_Segment_A",
+              "parameter_id": "0_base_2026"
+            }
+          },
+          {
+            "node_type": "coverage_dimension_parameter",
+            "location": "research_coverage.dimensions[1].parameter_ids[0]",
+            "ids": {
+              "dimension": "growth_curve",
+              "parameter_id": "0_base_2026"
+            }
+          }
+        ],
+        "reasons": [
+          "used_via_segment_driver_slot",
+          "used_via_driver_tree_parameter",
+          "used_via_coverage_dimension"
+        ]
+      },
+      {
+        "kind": "claim",
+        "id": "second",
+        "id_scope": "document_local_display_key",
+        "input_source_id": "filing",
+        "status": "used",
+        "cited_by": [
+          {
+            "node_type": "segment_scenario_driver",
+            "location": "segments[0].scenarios.base.driver_parameter_ids.revenue[1]",
+            "ids": {
+              "segment": "Segment A",
+              "scenario": "base",
+              "driver": "revenue",
+              "year": "2027",
+              "parameter_id": "0_base_2027"
+            }
+          },
+          {
+            "node_type": "driver_tree_parameter",
+            "location": "growth_driver_analysis.drivers[0].parameter_ids[1]",
+            "ids": {
+              "driver_id": "fixture_driver_Segment_A",
+              "parameter_id": "0_base_2027"
+            }
+          },
+          {
+            "node_type": "coverage_dimension_parameter",
+            "location": "research_coverage.dimensions[1].parameter_ids[1]",
+            "ids": {
+              "dimension": "growth_curve",
+              "parameter_id": "0_base_2027"
+            }
+          }
+        ],
+        "reasons": [
+          "used_via_segment_driver_slot",
+          "used_via_driver_tree_parameter",
+          "used_via_coverage_dimension"
+        ]
+      }
+    ]
+  },
+  "gzip_bound": {
+    "rejected": true,
+    "error": "resource_limit: C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w20-reception-r3-20261029\\rf\\compressed.json.gz decompresses beyond --max-input-bytes 1024"
+  }
+}

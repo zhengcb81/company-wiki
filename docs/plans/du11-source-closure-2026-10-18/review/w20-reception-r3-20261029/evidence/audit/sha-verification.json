@@ -1,0 +1,158 @@
+[
+  {
+    "path": "skills/revenue-forecast-audit/scripts/summary_checkpoint_observations.py",
+    "sha256": "6c32bd1b175da994cb9c43ac5fd4234210fd02c1145d69c0720926a1517a57d6",
+    "actual_sha256": "6c32bd1b175da994cb9c43ac5fd4234210fd02c1145d69c0720926a1517a57d6",
+    "match": true
+  },
+  {
+    "path": "skills/revenue-forecast-audit/scripts/summary_review_packet.py",
+    "sha256": "8c06d3eea21ee5c0f0fdc8cb73dd7c422b2709a6c62e5bdec6e75bb0784296c8",
+    "actual_sha256": "8c06d3eea21ee5c0f0fdc8cb73dd7c422b2709a6c62e5bdec6e75bb0784296c8",
+    "match": true
+  },
+  {
+    "path": "skills/revenue-forecast-audit/references/summary-checkpoint-observations.md",
+    "sha256": "0d5793919f2f72c649607348c51289d48fe2520575b3ad692362e4905624d887",
+    "actual_sha256": "0d5793919f2f72c649607348c51289d48fe2520575b3ad692362e4905624d887",
+    "match": true
+  },
+  {
+    "path": "skills/revenue-forecast-audit/references/review-storage.md",
+    "sha256": "76d19f5401e3a057e943d5b3f5d0d5ae770f96b97fd3099cfd38013fc3f561c7",
+    "actual_sha256": "76d19f5401e3a057e943d5b3f5d0d5ae770f96b97fd3099cfd38013fc3f561c7",
+    "match": true
+  },
+  {
+    "path": "skills/revenue-forecast-audit/references/review-fetch.md",
+    "sha256": "fe38b454c64b0e91e06e68f9a17e22c8d2c097cef0c460bfbe35d53394fa9d63",
+    "actual_sha256": "fe38b454c64b0e91e06e68f9a17e22c8d2c097cef0c460bfbe35d53394fa9d63",
+    "match": true
+  },
+  {
+    "path": "skills/revenue-forecast-audit/references/review-process.md",
+    "sha256": "99970a37aee6813db5332aaf3de8654cca22ad0277cb5f8f3dfa0e04859360a3",
+    "actual_sha256": "99970a37aee6813db5332aaf3de8654cca22ad0277cb5f8f3dfa0e04859360a3",
+    "match": true
+  },
+  {
+    "path": "skills/revenue-forecast-audit/references/review-analyst.md",
+    "sha256": "a9b85ca1a69011b5ea374919836d047f5db0394036c17023b4153037a13f37d7",
+    "actual_sha256": "a9b85ca1a69011b5ea374919836d047f5db0394036c17023b4153037a13f37d7",
+    "match": true
+  },
+  {
+    "path": "skills/revenue-forecast-audit/SKILL.md",
+    "sha256": "24434c4e60da95fd3869bbfe85f3d9ad672ac86f3f348b6ab549c65fcb0c20e1",
+    "actual_sha256": "24434c4e60da95fd3869bbfe85f3d9ad672ac86f3f348b6ab549c65fcb0c20e1",
+    "match": true
+  },
+  {
+    "path": "tests/test_w20_checkpoint_observations.py",
+    "sha256": "46ecf5302bb967c282bf8f777e5da0b788933a4ac3bb90c4337cb1543ba32051",
+    "actual_sha256": "46ecf5302bb967c282bf8f777e5da0b788933a4ac3bb90c4337cb1543ba32051",
+    "match": true
+  },
+  {
+    "path": "tests/test_w20_packet_wiring.py",
+    "sha256": "efbfc4b383da4dfcc5c21cdbebc36814d4eef0b2ccd688769f8b8c3d916dbcc8",
+    "actual_sha256": "efbfc4b383da4dfcc5c21cdbebc36814d4eef0b2ccd688769f8b8c3d916dbcc8",
+    "match": true
+  },
+  {
+    "path": "tests/fixtures/w20_checkpoints/manifest.json",
+    "sha256": "abafc23c035adbe5764d5b27ccd181fa1e7a84916f91c81e6195a0a54f75aaa5",
+    "actual_sha256": "abafc23c035adbe5764d5b27ccd181fa1e7a84916f91c81e6195a0a54f75aaa5",
+    "match": true
+  },
+  {
+    "path": "tests/fixtures/w20_checkpoints/bundle_w20.json",
+    "sha256": "dea7f2d985efd073fa4e2ec5086d239135786a760e5b2957821068cfc592111d",
+    "actual_sha256": "dea7f2d985efd073fa4e2ec5086d239135786a760e5b2957821068cfc592111d",
+    "match": true
+  },
+  {
+    "path": "tests/fixtures/w20_checkpoints/targets_w20.json",
+    "sha256": "e39beea73b56e4b26d04ba72eb019ef8052311f11ee9599788f7a0f65ff4e960",
+    "actual_sha256": "e39beea73b56e4b26d04ba72eb019ef8052311f11ee9599788f7a0f65ff4e960",
+    "match": true
+  },
+  {
+    "path": "tests/fixtures/w20_checkpoints/make_execution_root.py",
+    "sha256": "c6de5fd1209da8a8e74ee6d41f95b147478c0bed08bc9dd08c0726675159d6c7",
+    "actual_sha256": "c6de5fd1209da8a8e74ee6d41f95b147478c0bed08bc9dd08c0726675159d6c7",
+    "match": true
+  },
+  {
+    "path": "tests/fixtures/w20_checkpoints/run_e2e_chain.py",
+    "sha256": "f3148d4f7f7466286c4feb65960f8a9c9715ddd7beaa9df96255534156dcdeb2",
+    "actual_sha256": "f3148d4f7f7466286c4feb65960f8a9c9715ddd7beaa9df96255534156dcdeb2",
+    "match": true
+  },
+  {
+    "path": "delivery/w20-audit-checkpoints/e2e/expert-input/expert-input.json",
+    "sha256": "268d02d2cfd2a2172c11c26400b73ab7156b5b68027280632b46620d48f6d9f8",
+    "actual_sha256": "268d02d2cfd2a2172c11c26400b73ab7156b5b68027280632b46620d48f6d9f8",
+    "match": true
+  },
+  {
+    "path": "delivery/w20-audit-checkpoints/e2e/RELOCATION.json",
+    "sha256": "cffcb6edf5db4e9176e0a26c7348a13ec3182b31c7832b7b0833cebc88f68632",
+    "actual_sha256": "cffcb6edf5db4e9176e0a26c7348a13ec3182b31c7832b7b0833cebc88f68632",
+    "match": true
+  },
+  {
+    "path": "delivery/w20-audit-checkpoints/review/rework-red-root-run.txt",
+    "sha256": "2d5499e80646c7ce6dd285ffe4ff9cdfb070642b14e518018a0025a462c4d016",
+    "actual_sha256": "2d5499e80646c7ce6dd285ffe4ff9cdfb070642b14e518018a0025a462c4d016",
+    "match": true
+  },
+  {
+    "path": "delivery/w20-audit-checkpoints/review/rework-red-own.txt",
+    "sha256": "557f9ea14ca7ae39bbd2088fa80d657f3eb756119dadf13dabadce18e06f9269",
+    "actual_sha256": "557f9ea14ca7ae39bbd2088fa80d657f3eb756119dadf13dabadce18e06f9269",
+    "match": true
+  },
+  {
+    "path": "delivery/w20-audit-checkpoints/review/rework-green-root-run.txt",
+    "sha256": "eea675033147fc951df05eef7992bcdb82839e0eb3a0e0e77e63596695cfd7b9",
+    "actual_sha256": "eea675033147fc951df05eef7992bcdb82839e0eb3a0e0e77e63596695cfd7b9",
+    "match": true
+  },
+  {
+    "path": "delivery/w20-audit-checkpoints/review/rework-r2-red-own.txt",
+    "sha256": "4a4ca47a6d4245328a3b9c6ed83b288cf25861cc8f716568f168fd145aeb8b7e",
+    "actual_sha256": "4a4ca47a6d4245328a3b9c6ed83b288cf25861cc8f716568f168fd145aeb8b7e",
+    "match": true
+  },
+  {
+    "path": "delivery/w20-audit-checkpoints/review/rework-r2-red-root.txt",
+    "sha256": "54b0b364dbd9674213a03a36a3e0b25e7807f6701f416faa50a53d8fcf6e6dd2",
+    "actual_sha256": "54b0b364dbd9674213a03a36a3e0b25e7807f6701f416faa50a53d8fcf6e6dd2",
+    "match": true
+  },
+  {
+    "path": "delivery/w20-audit-checkpoints/review/rework-r2-green-root.txt",
+    "sha256": "79d359abf7acf6d6d9bf3027358e97adcf73451c24a529f665eb3f1c32fc3989",
+    "actual_sha256": "79d359abf7acf6d6d9bf3027358e97adcf73451c24a529f665eb3f1c32fc3989",
+    "match": true
+  },
+  {
+    "path": "delivery/w20-audit-checkpoints/review/rework-r2-green-round1-root.txt",
+    "sha256": "10aac3b83952a72f42cc5754f131d252ee4adf9afe51ee24f20d6876df1539a1",
+    "actual_sha256": "10aac3b83952a72f42cc5754f131d252ee4adf9afe51ee24f20d6876df1539a1",
+    "match": true
+  },
+  {
+    "path": "delivery/w20-audit-checkpoints/review/r2-review.md",
+    "sha256": "8f82ba71d960cfbbbe3808542567828fd87e07269d386569dbcee1ccc8956681",
+    "actual_sha256": "8f82ba71d960cfbbbe3808542567828fd87e07269d386569dbcee1ccc8956681",
+    "match": true
+  },
+  {
+    "path": "delivery/w20-audit-checkpoints/review/r2-review.json",
+    "sha256": "969f10bea836999fafbd08bb09b76503adfafbb9a6ba2fdea9d3fd7a8098115b",
+    "actual_sha256": "969f10bea836999fafbd08bb09b76503adfafbb9a6ba2fdea9d3fd7a8098115b",
+    "match": true
+  }
+]

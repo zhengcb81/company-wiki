@@ -1,5 +1,15 @@
 # 当前项目状态与接手入口
 
+## 2026-10-29 W20三包最终完成并线，主线公司循环仍暂停（唯一当前状态）
+
+**W20-AUDIT/RF/FF均最终独审PASS、范围内OPEN=0并入main。** ROOT按用户授权在隔离工区直接修余下币种局部归属/左右边界与三态迁移遗漏，真实RED→共享owner修复→定向测试→独立终审后发布。唯一入口：[最终验收/并线/部署](review/w20-reception-r3-20261029/README.md)，此前两轮RETURN/待返工是历史，不再开工。
+
+RF主线/远端3e8fbc55、精确CI40949113523 success；FF主线/远端5ec54e02、精确CI40950402165 success。Audit本地main55c29fe5（该仓无remote，未擅建）；.claude/.agents两物理技能副本各8文件定点更新，全43文件MATCH、新进程入口通过，配置和未选文件保留。
+
+ROOT Audit48P与独审旧反例/guard/兼容/CLI通过；RF42P、正常prepush595P/1skip/36subtests；FF相关203P、独立final7/真链oracle、正常prepush935P/7skip/78subtests通过，范围重叠不相加，不宣称新全41矩阵/全仓。原作者工区只读，ROOT两个临时工区已并线后clean移除；测试目录恢复，原件/config/Dayu/IQS和RF三份WIP及CWP原hook mode保留。0新供应商POST/真实下载，母账/额度未变。
+
+本轮仅完成包接收/小遗漏修复/并线部署，不恢复暂停的主线公司循环。整体目标未完成；下一步等用户恢复，再按暂停交接的source信息量A/B、IR、SDK探针、正式摘要/cache/RF实际采用、holdout与公司loop继续。作者冻结handoff的READY不覆盖本页最终状态。下方旧“当前/待返工/暂停”仅是当时记录。
+
 ## 2026-10-29 W20返工第二轮已复验：剩余定点补完，主线仍暂停（唯一当前状态）
 
 三包新交接均已收到，ROOT三独立agent已完成实际短测/反例复验。原反例多数修复、有效进展保留；**五项实质遗漏仍在，暂不并线/安装**。当前唯一入口：[第二轮接收与收窄返工单](review/w20-reception-r2-20261029/README.md)。旧第一轮RETURN及其状态为历史，按新入口继续同工区/同分支，不重做整包。

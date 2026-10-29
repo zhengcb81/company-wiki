@@ -1,0 +1,188 @@
+{
+  "schema_version": "w20-root-reception/3-final",
+  "card_id": "W20-FF-REPLAY",
+  "reviewer": "/root/w20_ff_reception",
+  "date": "2026-10-29",
+  "verdict": "APPROVE",
+  "open_findings": [],
+  "reviewed_code_commit": "5ec54e02b8db69d0f38adfd0d7cee58f04f3a2b8",
+  "tested_code_commit": "5ec54e02b8db69d0f38adfd0d7cee58f04f3a2b8",
+  "workdir": "C:\\Users\\郑曾波\\Projects\\filing-fetch-w20-root-final",
+  "previous_author_head": "2b610881b9da509d6fb3f3bcbeb5b32707e051f2",
+  "source_file_sha256": {
+    "tools/offline_contract_matrix/w20_case_specs.py": {
+      "sha256": "439a4c522e6db25c6b5a16b1312a124ac58dd701c0f59cf4de7f0b34134a6c8a",
+      "lf_sha256": "bf5a835e4d60efa38b3148932166e0ea73448b79f13f0469eb52b3a7514cc662"
+    },
+    "tools/offline_contract_matrix/w20_fault_cases.py": {
+      "sha256": "437c620d4f4ef7f1053d813dad2f50f9183448098bbba578cc93d491c01821a3",
+      "lf_sha256": "437c620d4f4ef7f1053d813dad2f50f9183448098bbba578cc93d491c01821a3"
+    },
+    "tools/offline_contract_matrix/cwp_readback_probe.py": {
+      "sha256": "03877581d80d2551df33ea5f2f9079c8f327118c7570943d32dcd59e3319c790",
+      "lf_sha256": "03877581d80d2551df33ea5f2f9079c8f327118c7570943d32dcd59e3319c790"
+    },
+    "tests/test_w20_root_mid_import_state.py": {
+      "sha256": "4087cd0f32bafda1b786b1c53b29797d58d1a4c6ce8f2693239d0cc7c0fb56f7",
+      "lf_sha256": "ac6c196f84eef7896f8eab113d4476600f2706541693aaefe378d1a9b8dcadb0"
+    }
+  },
+  "closed_findings": [
+    {
+      "id": "FF-R2-1",
+      "status": "CLOSED",
+      "evidence": "Prior current-handler/actual lostreply report accepted scope preserved: same acquisition is recorded server-side at harness transport boundary, response not delivered to modeled external caller, public query+reader confirms the same Ref/SHA, FIRST recovery and next replay0GET. Exact final oracle re-audits actual retained dd7884e1 with zero findings. No claim of real external packet loss or commit-microsecond server kill."
+    },
+    {
+      "id": "FF-R2-2",
+      "status": "CLOSED",
+      "evidence": "Final code retains per-call bounded subprocess probe; parent stdio/shared last_error remain removed. Final independent concurrent pure boundary probe returns A/B own payload/ref, stdio unchanged, child rc7→probe_error. True-chain public read-back receipts retained unchanged."
+    },
+    {
+      "id": "FF-R3-1",
+      "status": "CLOSED",
+      "evidence": "Final owner now accepts only explicit actual.durable_state_public_readback ==not_found. Independent actual handler replay not_found→PASS, probe_error/confirmed→FAIL. Independent7 new tests pass: not_found true, confirmed/probe_error/None/unknown/legacyFalse/missing all false. Legacy False cannot bypass missing state."
+    }
+  ],
+  "tests": [
+    {
+      "command": "C:/Miniconda/python.exe -B -X utf8 -m pytest -q -p no:cacheprovider --basetemp=<ROOT owned final-pytest-tmp> tests/test_w20_root_mid_import_state.py",
+      "exit_code": 0,
+      "passed": 7,
+      "failed": 0,
+      "seconds": 0.17,
+      "scope": "Independent final new regression tests at exact committed source"
+    },
+    {
+      "command": "mid_import_probe.py --ff-root <final worktree>",
+      "exit_code": 0,
+      "scope": "Actual current handler replay with frozen real run traces and mocked external probe boundary; not a new live E2E",
+      "result": [
+        {
+          "probe_state": "not_found",
+          "handler_result": "PASS",
+          "actual": {
+            "interruption_phase": "mid_import_observed",
+            "recovery_branch": "not_durable_at_kill",
+            "durable_state_public_readback": "not_found",
+            "kill_reason": "harness interruption at observed boundary"
+          },
+          "diagnostics": [
+            "all supplemental assertions observed"
+          ]
+        },
+        {
+          "probe_state": "probe_error",
+          "handler_result": "FAIL",
+          "actual": {
+            "interruption_phase": "mid_import_observed",
+            "recovery_branch": "not_durable_at_kill",
+            "durable_state_public_readback": "probe_error",
+            "kill_reason": "harness interruption at observed boundary"
+          },
+          "diagnostics": [
+            "the mid-import kill requires public read-back state not_found (observed 'probe_error')"
+          ]
+        },
+        {
+          "probe_state": "confirmed",
+          "handler_result": "FAIL",
+          "actual": {
+            "interruption_phase": "mid_import_observed",
+            "recovery_branch": "not_durable_at_kill",
+            "durable_state_public_readback": "confirmed",
+            "kill_reason": "harness interruption at observed boundary"
+          },
+          "diagnostics": [
+            "the mid-import kill requires public read-back state not_found (observed 'confirmed')"
+          ]
+        }
+      ]
+    },
+    {
+      "command": "probe_isolation.py --ff-root <final worktree>",
+      "exit_code": 0,
+      "scope": "Independent pure subprocess-boundary concurrency and unknown-error probe; no real CWP/HTTP",
+      "result": {
+        "scope": "pure per-call subprocess boundary concurrency probe, not actual CWP reader E2E",
+        "requests": [
+          {
+            "entity": "b",
+            "wiki": "unused-b",
+            "sha": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+          },
+          {
+            "entity": "a",
+            "wiki": "unused-a",
+            "sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        ],
+        "results": {
+          "a": {
+            "state": "confirmed",
+            "ref": {
+              "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+            },
+            "error": null
+          },
+          "b": {
+            "state": "confirmed",
+            "ref": {
+              "content_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+            },
+            "error": null
+          }
+        },
+        "stdio_unchanged": true,
+        "nonzero_child_result": {
+          "state": "probe_error",
+          "ref": null,
+          "error": "probe rc=7 stderr=query failed"
+        },
+        "old_process_global_readback_removed": true,
+        "shared_last_error_removed": true
+      }
+    },
+    {
+      "command": "current final oracle.audit(<actual retained report>)",
+      "exit_code": 0,
+      "scope": "two full real bound reports read-only, not rerun acquisition",
+      "reports": [
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\_w20-runs\\out\\attempt-dd7884e11bd74adcb3d911736c893ca2\\report.json",
+          "sha256": "372fdbd2082f7a2925ea9f6abcfe69be3f403ce098311ee1ae6a875ecbb552ea",
+          "findings": []
+        },
+        {
+          "path": "C:\\Users\\郑曾波\\Projects\\_w20-runs\\out\\attempt-248e9d19be5b42d98cef08fa50401300\\report.json",
+          "sha256": "dae0f39b42679a53734f9403081312a06afcecb7698c8e65c506e13c727c7d83",
+          "findings": []
+        }
+      ]
+    }
+  ],
+  "root_prior_tests": {
+    "red": "6 failed/1 control before fix; ROOT receipt .planning/w20-reception-r3-20261029/ff-root-red.txt",
+    "green": "203 passed/10.20s at fixed implementation; ROOT receipt .planning/w20-reception-r3-20261029/ff-root-green.txt",
+    "independent_statement": "ROOT203 was read as prior validation, not falsely reported as independent re-run. Independent final7 plus actual handler and full existing report oracle are this reviewer tests."
+  },
+  "compatibility_scope": [
+    "Only W20 test-harness mid-import assertion owner plus narrow tests changed by ROOT; no product scripts/provider/CWP/ET/production config or originals changed",
+    "Required base authority41 remains; supplemental11 and selected-only partial run semantics retained",
+    "Old bool-shaped historical reports retain historical scope, not relabeled current PASS; current reports need explicit state",
+    "No full41/fullrepo/404s rerun required for this migration fix"
+  ],
+  "cleanup": {
+    "final_worktree_clean": true,
+    "owned_final_pytest_tmp_restored_absent": true,
+    "original_author_worktree_not_written": true,
+    "no_new_network_paid_supplier_calls": true
+  },
+  "remaining_nonblocking": [
+    "Existing reason provider_result_oversized on generic ET child failure remains acknowledged broad reason; not newly introduced by this card",
+    "Historical all41 full-run evidence remains historical; this final review approves card engineering and specific recovery/contract coverage, not current entire investment audit loop or real external download success",
+    "Root still owns merge/push and any CI follow-up; this review is not a remote-publication claim"
+  ],
+  "initial_review_preserved": "ff-review-initial.md/json",
+  "evidence": "evidence/ff/final-probes.json"
+}

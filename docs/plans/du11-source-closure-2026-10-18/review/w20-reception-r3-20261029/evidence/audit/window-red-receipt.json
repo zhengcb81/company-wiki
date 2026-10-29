@@ -1,0 +1,17 @@
+{
+  "command": [
+    "C:/Miniconda/python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\w20-reception-r3-20261029\\audit\\test_window_bound.py"
+  ],
+  "exit_code": 1,
+  "test_methods": 3,
+  "failing_methods": 2,
+  "failed_subcases": 5,
+  "passed_controls": 1,
+  "source_commit": "d306ac059e249e6b600b7247ee350a33e302bcbe",
+  "material": "synthetic same local currency invariant; no real company analysis",
+  "repo_override": "W20_AUDIT_REPO environment for ROOT isolated final worktree; default is author tree"
+}

@@ -1,0 +1,62 @@
+[
+  {
+    "lane": "audit",
+    "repository": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit",
+    "main": "55c29fe5f3a9554f883156e3a4232eece04bf581",
+    "author_head_merged": "5b8aa7182e7f7b219b0ef279106f1fc1886137b1",
+    "files": [
+      {
+        "path": "skills/revenue-forecast-audit/scripts/summary_checkpoint_observations.py",
+        "working_sha256": "4283cd680c55f883dc1b095da008caa1beb467eaa7dd1f26a3965a831f949732",
+        "git_lf_sha256": "4283cd680c55f883dc1b095da008caa1beb467eaa7dd1f26a3965a831f949732"
+      },
+      {
+        "path": "tests/test_w20_root_currency_binding.py",
+        "working_sha256": "cec3aea209226586b5986b6f4be3126ad01b8a58498a82a992985d07b1235855",
+        "git_lf_sha256": "cec3aea209226586b5986b6f4be3126ad01b8a58498a82a992985d07b1235855"
+      }
+    ],
+    "status": "",
+    "remote": ""
+  },
+  {
+    "lane": "rf",
+    "repository": "C:\\Users\\郑曾波\\Projects\\revenue-forecast",
+    "main": "3e8fbc5522a814abc4db7d828c3e4dcf84f308b8",
+    "author_head_merged": "3e8fbc5522a814abc4db7d828c3e4dcf84f308b8",
+    "files": [
+      {
+        "path": "tools/narrative_adoption_audit/audit.py",
+        "working_sha256": "f140cc0f3331e7076b7edbcac2b533e19c8215ea42b8f0bb8f3d5464317f7fb0",
+        "git_lf_sha256": "f140cc0f3331e7076b7edbcac2b533e19c8215ea42b8f0bb8f3d5464317f7fb0"
+      },
+      {
+        "path": "tools/narrative_adoption_audit/cli.py",
+        "working_sha256": "436c6487cca3d6d4591b7237098d49f8275d035b70ebf07d5684c08a6147ff35",
+        "git_lf_sha256": "436c6487cca3d6d4591b7237098d49f8275d035b70ebf07d5684c08a6147ff35"
+      }
+    ],
+    "status": "M assurance/runs/daily_alert.jsonl\n M assurance/runs/weekly_alert.jsonl\n M assurance/runs/weekly_manifest.json",
+    "remote": "origin\thttps://github.com/zhengcb81/revenue-forecast.git (fetch)\norigin\thttps://github.com/zhengcb81/revenue-forecast.git (push)"
+  },
+  {
+    "lane": "ff",
+    "repository": "C:\\Users\\郑曾波\\Projects\\filing-fetch",
+    "main": "5ec54e02b8db69d0f38adfd0d7cee58f04f3a2b8",
+    "author_head_merged": "2b610881b9da509d6fb3f3bcbeb5b32707e051f2",
+    "files": [
+      {
+        "path": "tools/offline_contract_matrix/w20_case_specs.py",
+        "working_sha256": "bf5a835e4d60efa38b3148932166e0ea73448b79f13f0469eb52b3a7514cc662",
+        "git_lf_sha256": "bf5a835e4d60efa38b3148932166e0ea73448b79f13f0469eb52b3a7514cc662"
+      },
+      {
+        "path": "tests/test_w20_root_mid_import_state.py",
+        "working_sha256": "ac6c196f84eef7896f8eab113d4476600f2706541693aaefe378d1a9b8dcadb0",
+        "git_lf_sha256": "ac6c196f84eef7896f8eab113d4476600f2706541693aaefe378d1a9b8dcadb0"
+      }
+    ],
+    "status": "",
+    "remote": "origin\thttps://github.com/zhengcb81/filing-fetch.git (fetch)\norigin\thttps://github.com/zhengcb81/filing-fetch.git (push)"
+  }
+]

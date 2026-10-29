@@ -1,0 +1,586 @@
+{
+  "checked_at_utc": "2026-10-29T20:22:51.068596+00:00",
+  "scope": "read_only_author_worktrees; no product implementation/merge/model/download",
+  "packages": [
+    {
+      "lane": "w20-audit-checkpoints",
+      "workdir": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit-w20-checkpoints",
+      "head": "5b8aa7182e7f7b219b0ef279106f1fc1886137b1",
+      "branch": "codex/w20-audit-checkpoints-20261028",
+      "status": "",
+      "base": "33200f8c947f35be75a77de38040982724e033a7",
+      "base_is_ancestor": true,
+      "tested_commit": "d306ac059e249e6b600b7247ee350a33e302bcbe",
+      "reviewed_commit": "d306ac059e249e6b600b7247ee350a33e302bcbe",
+      "changes_after_review": [
+        "delivery/w20-audit-checkpoints/handoff.json",
+        "delivery/w20-audit-checkpoints/handoff.md",
+        "delivery/w20-audit-checkpoints/review/r2-review.json",
+        "delivery/w20-audit-checkpoints/review/r2-review.md",
+        "docs/plans/w20-audit-checkpoints-2026-10-28/progress.md",
+        "docs/plans/w20-audit-checkpoints-2026-10-28/task_plan.md"
+      ],
+      "hashes": [
+        {
+          "path": "skills/revenue-forecast-audit/scripts/summary_checkpoint_observations.py",
+          "declared": "6c32bd1b175da994cb9c43ac5fd4234210fd02c1145d69c0720926a1517a57d6",
+          "actual": "6c32bd1b175da994cb9c43ac5fd4234210fd02c1145d69c0720926a1517a57d6",
+          "lf": "6c32bd1b175da994cb9c43ac5fd4234210fd02c1145d69c0720926a1517a57d6",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "skills/revenue-forecast-audit/scripts/summary_review_packet.py",
+          "declared": "8c06d3eea21ee5c0f0fdc8cb73dd7c422b2709a6c62e5bdec6e75bb0784296c8",
+          "actual": "8c06d3eea21ee5c0f0fdc8cb73dd7c422b2709a6c62e5bdec6e75bb0784296c8",
+          "lf": "8c06d3eea21ee5c0f0fdc8cb73dd7c422b2709a6c62e5bdec6e75bb0784296c8",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "skills/revenue-forecast-audit/references/summary-checkpoint-observations.md",
+          "declared": "0d5793919f2f72c649607348c51289d48fe2520575b3ad692362e4905624d887",
+          "actual": "0d5793919f2f72c649607348c51289d48fe2520575b3ad692362e4905624d887",
+          "lf": "0d5793919f2f72c649607348c51289d48fe2520575b3ad692362e4905624d887",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "skills/revenue-forecast-audit/references/review-storage.md",
+          "declared": "76d19f5401e3a057e943d5b3f5d0d5ae770f96b97fd3099cfd38013fc3f561c7",
+          "actual": "76d19f5401e3a057e943d5b3f5d0d5ae770f96b97fd3099cfd38013fc3f561c7",
+          "lf": "76d19f5401e3a057e943d5b3f5d0d5ae770f96b97fd3099cfd38013fc3f561c7",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "skills/revenue-forecast-audit/references/review-fetch.md",
+          "declared": "fe38b454c64b0e91e06e68f9a17e22c8d2c097cef0c460bfbe35d53394fa9d63",
+          "actual": "fe38b454c64b0e91e06e68f9a17e22c8d2c097cef0c460bfbe35d53394fa9d63",
+          "lf": "fe38b454c64b0e91e06e68f9a17e22c8d2c097cef0c460bfbe35d53394fa9d63",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "skills/revenue-forecast-audit/references/review-process.md",
+          "declared": "99970a37aee6813db5332aaf3de8654cca22ad0277cb5f8f3dfa0e04859360a3",
+          "actual": "99970a37aee6813db5332aaf3de8654cca22ad0277cb5f8f3dfa0e04859360a3",
+          "lf": "99970a37aee6813db5332aaf3de8654cca22ad0277cb5f8f3dfa0e04859360a3",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "skills/revenue-forecast-audit/references/review-analyst.md",
+          "declared": "a9b85ca1a69011b5ea374919836d047f5db0394036c17023b4153037a13f37d7",
+          "actual": "a9b85ca1a69011b5ea374919836d047f5db0394036c17023b4153037a13f37d7",
+          "lf": "a9b85ca1a69011b5ea374919836d047f5db0394036c17023b4153037a13f37d7",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "skills/revenue-forecast-audit/SKILL.md",
+          "declared": "24434c4e60da95fd3869bbfe85f3d9ad672ac86f3f348b6ab549c65fcb0c20e1",
+          "actual": "24434c4e60da95fd3869bbfe85f3d9ad672ac86f3f348b6ab549c65fcb0c20e1",
+          "lf": "24434c4e60da95fd3869bbfe85f3d9ad672ac86f3f348b6ab549c65fcb0c20e1",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "tests/test_w20_checkpoint_observations.py",
+          "declared": "46ecf5302bb967c282bf8f777e5da0b788933a4ac3bb90c4337cb1543ba32051",
+          "actual": "46ecf5302bb967c282bf8f777e5da0b788933a4ac3bb90c4337cb1543ba32051",
+          "lf": "46ecf5302bb967c282bf8f777e5da0b788933a4ac3bb90c4337cb1543ba32051",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "tests/test_w20_packet_wiring.py",
+          "declared": "efbfc4b383da4dfcc5c21cdbebc36814d4eef0b2ccd688769f8b8c3d916dbcc8",
+          "actual": "efbfc4b383da4dfcc5c21cdbebc36814d4eef0b2ccd688769f8b8c3d916dbcc8",
+          "lf": "efbfc4b383da4dfcc5c21cdbebc36814d4eef0b2ccd688769f8b8c3d916dbcc8",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "tests/fixtures/w20_checkpoints/manifest.json",
+          "declared": "abafc23c035adbe5764d5b27ccd181fa1e7a84916f91c81e6195a0a54f75aaa5",
+          "actual": "abafc23c035adbe5764d5b27ccd181fa1e7a84916f91c81e6195a0a54f75aaa5",
+          "lf": "abafc23c035adbe5764d5b27ccd181fa1e7a84916f91c81e6195a0a54f75aaa5",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "tests/fixtures/w20_checkpoints/bundle_w20.json",
+          "declared": "dea7f2d985efd073fa4e2ec5086d239135786a760e5b2957821068cfc592111d",
+          "actual": "dea7f2d985efd073fa4e2ec5086d239135786a760e5b2957821068cfc592111d",
+          "lf": "dea7f2d985efd073fa4e2ec5086d239135786a760e5b2957821068cfc592111d",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "tests/fixtures/w20_checkpoints/targets_w20.json",
+          "declared": "e39beea73b56e4b26d04ba72eb019ef8052311f11ee9599788f7a0f65ff4e960",
+          "actual": "e39beea73b56e4b26d04ba72eb019ef8052311f11ee9599788f7a0f65ff4e960",
+          "lf": "e39beea73b56e4b26d04ba72eb019ef8052311f11ee9599788f7a0f65ff4e960",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "tests/fixtures/w20_checkpoints/make_execution_root.py",
+          "declared": "c6de5fd1209da8a8e74ee6d41f95b147478c0bed08bc9dd08c0726675159d6c7",
+          "actual": "c6de5fd1209da8a8e74ee6d41f95b147478c0bed08bc9dd08c0726675159d6c7",
+          "lf": "c6de5fd1209da8a8e74ee6d41f95b147478c0bed08bc9dd08c0726675159d6c7",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "tests/fixtures/w20_checkpoints/run_e2e_chain.py",
+          "declared": "f3148d4f7f7466286c4feb65960f8a9c9715ddd7beaa9df96255534156dcdeb2",
+          "actual": "f3148d4f7f7466286c4feb65960f8a9c9715ddd7beaa9df96255534156dcdeb2",
+          "lf": "f3148d4f7f7466286c4feb65960f8a9c9715ddd7beaa9df96255534156dcdeb2",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "delivery/w20-audit-checkpoints/e2e/expert-input/expert-input.json",
+          "declared": "268d02d2cfd2a2172c11c26400b73ab7156b5b68027280632b46620d48f6d9f8",
+          "actual": "268d02d2cfd2a2172c11c26400b73ab7156b5b68027280632b46620d48f6d9f8",
+          "lf": "268d02d2cfd2a2172c11c26400b73ab7156b5b68027280632b46620d48f6d9f8",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "delivery/w20-audit-checkpoints/e2e/RELOCATION.json",
+          "declared": "cffcb6edf5db4e9176e0a26c7348a13ec3182b31c7832b7b0833cebc88f68632",
+          "actual": "cffcb6edf5db4e9176e0a26c7348a13ec3182b31c7832b7b0833cebc88f68632",
+          "lf": "cffcb6edf5db4e9176e0a26c7348a13ec3182b31c7832b7b0833cebc88f68632",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "delivery/w20-audit-checkpoints/review/rework-red-root-run.txt",
+          "declared": "2d5499e80646c7ce6dd285ffe4ff9cdfb070642b14e518018a0025a462c4d016",
+          "actual": "2d5499e80646c7ce6dd285ffe4ff9cdfb070642b14e518018a0025a462c4d016",
+          "lf": "8387734728a6b6b260a6b1df7a45a7762d5d97ca8ad9f7a2df6aa128857c0ebe",
+          "matches": true,
+          "lf_matches": false
+        },
+        {
+          "path": "delivery/w20-audit-checkpoints/review/rework-red-own.txt",
+          "declared": "557f9ea14ca7ae39bbd2088fa80d657f3eb756119dadf13dabadce18e06f9269",
+          "actual": "557f9ea14ca7ae39bbd2088fa80d657f3eb756119dadf13dabadce18e06f9269",
+          "lf": "61fbfe98a72b222a6ecb16e26f6785d766569ba1a147e50b507e4fe2bd99d90a",
+          "matches": true,
+          "lf_matches": false
+        },
+        {
+          "path": "delivery/w20-audit-checkpoints/review/rework-green-root-run.txt",
+          "declared": "eea675033147fc951df05eef7992bcdb82839e0eb3a0e0e77e63596695cfd7b9",
+          "actual": "eea675033147fc951df05eef7992bcdb82839e0eb3a0e0e77e63596695cfd7b9",
+          "lf": "077c611b53f380bf62d41b333860fd538c1ad2d120abdffe96fb8cfef2cd550e",
+          "matches": true,
+          "lf_matches": false
+        },
+        {
+          "path": "delivery/w20-audit-checkpoints/review/rework-r2-red-own.txt",
+          "declared": "4a4ca47a6d4245328a3b9c6ed83b288cf25861cc8f716568f168fd145aeb8b7e",
+          "actual": "4a4ca47a6d4245328a3b9c6ed83b288cf25861cc8f716568f168fd145aeb8b7e",
+          "lf": "dbf5548fbc9989a9e51be84f578e56e4ac536e47da5793d3d3fdd88da7637707",
+          "matches": true,
+          "lf_matches": false
+        },
+        {
+          "path": "delivery/w20-audit-checkpoints/review/rework-r2-red-root.txt",
+          "declared": "54b0b364dbd9674213a03a36a3e0b25e7807f6701f416faa50a53d8fcf6e6dd2",
+          "actual": "54b0b364dbd9674213a03a36a3e0b25e7807f6701f416faa50a53d8fcf6e6dd2",
+          "lf": "80cc42508f06509fb91c5304110fd01aad482b3457a6b0d1408336a2b9cae41c",
+          "matches": true,
+          "lf_matches": false
+        },
+        {
+          "path": "delivery/w20-audit-checkpoints/review/rework-r2-green-root.txt",
+          "declared": "79d359abf7acf6d6d9bf3027358e97adcf73451c24a529f665eb3f1c32fc3989",
+          "actual": "79d359abf7acf6d6d9bf3027358e97adcf73451c24a529f665eb3f1c32fc3989",
+          "lf": "94e45d2460517ba5a6246fe79d62eece6875aa0b71fcb0a46c28775740567b0f",
+          "matches": true,
+          "lf_matches": false
+        },
+        {
+          "path": "delivery/w20-audit-checkpoints/review/rework-r2-green-round1-root.txt",
+          "declared": "10aac3b83952a72f42cc5754f131d252ee4adf9afe51ee24f20d6876df1539a1",
+          "actual": "10aac3b83952a72f42cc5754f131d252ee4adf9afe51ee24f20d6876df1539a1",
+          "lf": "db79961757ea4fcaf2c66c2dd3c7d1742ebe5b28a18951a5b8a4277c5ee3c257",
+          "matches": true,
+          "lf_matches": false
+        },
+        {
+          "path": "delivery/w20-audit-checkpoints/review/r2-review.md",
+          "declared": "8f82ba71d960cfbbbe3808542567828fd87e07269d386569dbcee1ccc8956681",
+          "actual": "8f82ba71d960cfbbbe3808542567828fd87e07269d386569dbcee1ccc8956681",
+          "lf": "8f82ba71d960cfbbbe3808542567828fd87e07269d386569dbcee1ccc8956681",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "delivery/w20-audit-checkpoints/review/r2-review.json",
+          "declared": "969f10bea836999fafbd08bb09b76503adfafbb9a6ba2fdea9d3fd7a8098115b",
+          "actual": "969f10bea836999fafbd08bb09b76503adfafbb9a6ba2fdea9d3fd7a8098115b",
+          "lf": "969f10bea836999fafbd08bb09b76503adfafbb9a6ba2fdea9d3fd7a8098115b",
+          "matches": true,
+          "lf_matches": true
+        }
+      ],
+      "remote": "",
+      "tracking": "codex/w20-audit-checkpoints-20261028 5b8aa7182e7f7b219b0ef279106f1fc1886137b1"
+    },
+    {
+      "lane": "w20-rf-adoption",
+      "workdir": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-w20-adoption",
+      "head": "3e8fbc5522a814abc4db7d828c3e4dcf84f308b8",
+      "branch": "codex/w20-rf-adoption-20261028",
+      "status": "",
+      "base": "0991e25d5dca667a3fdafb7bc5ebf0e546a2272b",
+      "base_is_ancestor": true,
+      "tested_commit": "f75c9fe2",
+      "reviewed_commit": "f75c9fe2",
+      "changes_after_review": [
+        "delivery/w20-rf-adoption/handoff.json",
+        "delivery/w20-rf-adoption/handoff.md",
+        "delivery/w20-rf-adoption/review/rework-r2-review.md",
+        "docs/plans/w20-rf-adoption-2026-10-28/progress.md",
+        "tests/test_w20_narrative_adoption_audit.py"
+      ],
+      "hashes": [
+        {
+          "path": "tools/narrative_adoption_audit/__init__.py",
+          "declared": "1ff2cbed856cac6c465ac454003e9a1f63333d2f7e50239c88fddb483d745d1f",
+          "actual": "1ff2cbed856cac6c465ac454003e9a1f63333d2f7e50239c88fddb483d745d1f",
+          "lf": "1ff2cbed856cac6c465ac454003e9a1f63333d2f7e50239c88fddb483d745d1f",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "tools/narrative_adoption_audit/audit.py",
+          "declared": "f140cc0f3331e7076b7edbcac2b533e19c8215ea42b8f0bb8f3d5464317f7fb0",
+          "actual": "f140cc0f3331e7076b7edbcac2b533e19c8215ea42b8f0bb8f3d5464317f7fb0",
+          "lf": "f140cc0f3331e7076b7edbcac2b533e19c8215ea42b8f0bb8f3d5464317f7fb0",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "tools/narrative_adoption_audit/cli.py",
+          "declared": "436c6487cca3d6d4591b7237098d49f8275d035b70ebf07d5684c08a6147ff35",
+          "actual": "436c6487cca3d6d4591b7237098d49f8275d035b70ebf07d5684c08a6147ff35",
+          "lf": "436c6487cca3d6d4591b7237098d49f8275d035b70ebf07d5684c08a6147ff35",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "tools/narrative_adoption_audit/README.md",
+          "declared": "d632b26d1210f552fd5355342ddedb364e128e21ef49a2401288a9833a8e3cce",
+          "actual": "d632b26d1210f552fd5355342ddedb364e128e21ef49a2401288a9833a8e3cce",
+          "lf": "d632b26d1210f552fd5355342ddedb364e128e21ef49a2401288a9833a8e3cce",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "tests/test_w20_narrative_adoption_audit.py",
+          "declared": "d4dccbc6a4bf4f7413c7ee9d3597457d0708c345297e125174b372b346f53880",
+          "actual": "d4dccbc6a4bf4f7413c7ee9d3597457d0708c345297e125174b372b346f53880",
+          "lf": "dd9af88485d59bdb52c8426e6b976f36dc02ecbdcd027e23967ea4e3d917faba",
+          "matches": true,
+          "lf_matches": false
+        },
+        {
+          "path": "tests/test_w20_narrative_adoption_e2e.py",
+          "declared": "aca860921a393734b67adf319aae27433748cedca170b5fb78990d5eff681b08",
+          "actual": "aca860921a393734b67adf319aae27433748cedca170b5fb78990d5eff681b08",
+          "lf": "aca860921a393734b67adf319aae27433748cedca170b5fb78990d5eff681b08",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "docs/plans/w20-rf-adoption-2026-10-28/construction_card.md",
+          "declared": "135ef4a401440cbc722be8449c618c7656070ef980775ce16cf0e9e1c66214c5",
+          "actual": "135ef4a401440cbc722be8449c618c7656070ef980775ce16cf0e9e1c66214c5",
+          "lf": "30819f11a5dcccb3fe258aa2efef0fefc8572c187242c385f435957208990e65",
+          "matches": true,
+          "lf_matches": false
+        },
+        {
+          "path": "docs/plans/w20-rf-adoption-2026-10-28/findings.md",
+          "declared": "bf5107653a4f84a0934197d766ec23a51783087fe9f75bca4d60addd32673bb3",
+          "actual": "bf5107653a4f84a0934197d766ec23a51783087fe9f75bca4d60addd32673bb3",
+          "lf": "02ca9f91c1688e553d9a6be518647da2725256078814ddbef9b3e285ae46db2b",
+          "matches": true,
+          "lf_matches": false
+        },
+        {
+          "path": "docs/plans/w20-rf-adoption-2026-10-28/task_plan.md",
+          "declared": "322a9e5460beffe717c371accd9ff30d2555481b8906bafaa72b655ef6ebc064",
+          "actual": "322a9e5460beffe717c371accd9ff30d2555481b8906bafaa72b655ef6ebc064",
+          "lf": "7eef9267795d08a4f6a5cce6a5d3f00b38a8ad795953fb02ab2e84f2c3fc7b9c",
+          "matches": true,
+          "lf_matches": false
+        },
+        {
+          "path": "docs/plans/w20-rf-adoption-2026-10-28/progress.md",
+          "declared": "78ab05e028b32a4900fc4d8a1c2f59800a104c606645d2abecbfc8c3cf1022ec",
+          "actual": "3a2d2ecafe30f55f1aebdad9d3c39fb06d62f014a72aee60a9edd8b745cc9b55",
+          "lf": "fe16d0a370babeb8bcb3e200e5ee971de511db5cfaadf3c001d440b8c26a01f3",
+          "matches": false,
+          "lf_matches": false
+        },
+        {
+          "path": "delivery/w20-rf-adoption/review/initial.md",
+          "declared": "7af1e444b8b4dd2612ece8a64c0298e51f47f25d64847dad36583c584f419bc4",
+          "actual": "7af1e444b8b4dd2612ece8a64c0298e51f47f25d64847dad36583c584f419bc4",
+          "lf": "7af1e444b8b4dd2612ece8a64c0298e51f47f25d64847dad36583c584f419bc4",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "delivery/w20-rf-adoption/review/initial.json",
+          "declared": "ade843e8bce4f33777fdba2f7d572e4d6d89af4cf2a5a322912ac373d7583d8b",
+          "actual": "ade843e8bce4f33777fdba2f7d572e4d6d89af4cf2a5a322912ac373d7583d8b",
+          "lf": "ade843e8bce4f33777fdba2f7d572e4d6d89af4cf2a5a322912ac373d7583d8b",
+          "matches": true,
+          "lf_matches": true
+        }
+      ],
+      "remote": "origin\thttps://github.com/zhengcb81/revenue-forecast.git (fetch)\norigin\thttps://github.com/zhengcb81/revenue-forecast.git (push)",
+      "tracking": "codex/w20-rf-adoption-20261028 3e8fbc5522a814abc4db7d828c3e4dcf84f308b8"
+    },
+    {
+      "lane": "w20-ff-replay",
+      "workdir": "C:\\Users\\郑曾波\\Projects\\filing-fetch-w20-replay",
+      "head": "2b610881b9da509d6fb3f3bcbeb5b32707e051f2",
+      "branch": "codex/w20-ff-replay-20261028",
+      "status": "",
+      "base": "5396bd688e5b775e746fe3290852f0532d4548f8",
+      "base_is_ancestor": true,
+      "tested_commit": "aa49836",
+      "reviewed_commit": "aa49836",
+      "changes_after_review": [
+        "delivery/w20-ff-replay/handoff.json",
+        "delivery/w20-ff-replay/handoff.md",
+        "delivery/w20-ff-replay/review/return-r2-final.json",
+        "delivery/w20-ff-replay/review/return-r2-final.md",
+        "docs/plans/w20-ff-replay-2026-10-28/progress.md",
+        "docs/plans/w20-ff-replay-2026-10-28/receipts/run-receipts.json"
+      ],
+      "hashes": [
+        {
+          "path": "tools/offline_contract_matrix/case_selection.py",
+          "declared": "9b12cc21ec6e94630cd3ffa7737f9b0b7d36291fe15c8527206f64be37cb237e",
+          "actual": "9b12cc21ec6e94630cd3ffa7737f9b0b7d36291fe15c8527206f64be37cb237e",
+          "lf": "9b12cc21ec6e94630cd3ffa7737f9b0b7d36291fe15c8527206f64be37cb237e",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "tools/offline_contract_matrix/case_registry.py",
+          "declared": "d80c706cf4f070314650e9e360ec0b15864b5abbb1379e0fcf2d208d017043f7",
+          "actual": "d80c706cf4f070314650e9e360ec0b15864b5abbb1379e0fcf2d208d017043f7",
+          "lf": "d80c706cf4f070314650e9e360ec0b15864b5abbb1379e0fcf2d208d017043f7",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "tools/offline_contract_matrix/w20_case_specs.py",
+          "declared": "ed0aa677d30d010b2c88e8cd61142a3a6f1c86ae49706fe2124c844cd25f5c01",
+          "actual": "ed0aa677d30d010b2c88e8cd61142a3a6f1c86ae49706fe2124c844cd25f5c01",
+          "lf": "6ffd67d215f86f5ed58f876bfb9a9dc2effcd7ddd6cca15944916ba6c691ad07",
+          "matches": true,
+          "lf_matches": false
+        },
+        {
+          "path": "tools/offline_contract_matrix/w20_fault_cases.py",
+          "declared": "7dd8af5524cd38033f4adbc9a4f356151e4580a30f1188d9e769452ece30618f",
+          "actual": "7dd8af5524cd38033f4adbc9a4f356151e4580a30f1188d9e769452ece30618f",
+          "lf": "437c620d4f4ef7f1053d813dad2f50f9183448098bbba578cc93d491c01821a3",
+          "matches": true,
+          "lf_matches": false
+        },
+        {
+          "path": "tools/offline_contract_matrix/cwp_readback_probe.py",
+          "declared": "f9071e5b278262779585f768100fc264a83b829a7b7f9daf8faea843b7ab9a7e",
+          "actual": "f9071e5b278262779585f768100fc264a83b829a7b7f9daf8faea843b7ab9a7e",
+          "lf": "03877581d80d2551df33ea5f2f9079c8f327118c7570943d32dcd59e3319c790",
+          "matches": true,
+          "lf_matches": false
+        },
+        {
+          "path": "tools/offline_contract_matrix/cli_main.py",
+          "declared": "12c6be7446f3ad967731d4f9a7dffdf2f5d18b8903bcbc15ce8dc9e90330a9f7",
+          "actual": "12c6be7446f3ad967731d4f9a7dffdf2f5d18b8903bcbc15ce8dc9e90330a9f7",
+          "lf": "12c6be7446f3ad967731d4f9a7dffdf2f5d18b8903bcbc15ce8dc9e90330a9f7",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "tools/offline_contract_matrix/oracle.py",
+          "declared": "2795167935295adf3982bc4ae7f65559a71860d1427384a442c42aa0308b661b",
+          "actual": "2795167935295adf3982bc4ae7f65559a71860d1427384a442c42aa0308b661b",
+          "lf": "2795167935295adf3982bc4ae7f65559a71860d1427384a442c42aa0308b661b",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "tools/offline_contract_matrix/et_transcript_proxy.py",
+          "declared": "3f0d63b0a15b8125e48e37408cc85c11965a367a2c98d8cde0b1b8d048a18d19",
+          "actual": "3f0d63b0a15b8125e48e37408cc85c11965a367a2c98d8cde0b1b8d048a18d19",
+          "lf": "3f0d63b0a15b8125e48e37408cc85c11965a367a2c98d8cde0b1b8d048a18d19",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "tools/offline_contract_matrix/runtime.py",
+          "declared": "a419ccedfb3435a553f49f1175abe3211754aa15c24787220e3dff271e8d538b",
+          "actual": "a419ccedfb3435a553f49f1175abe3211754aa15c24787220e3dff271e8d538b",
+          "lf": "431206d0874db0ff372db50d0d48009e892faae65390dba95e244cc7b06971cd",
+          "matches": true,
+          "lf_matches": false
+        },
+        {
+          "path": "tools/offline_contract_matrix/matrix_cases.py",
+          "declared": "083cfb46394e62715227f2e8b0b977f770d3f67b25ca7dd550e47fc1e8c42bd0",
+          "actual": "083cfb46394e62715227f2e8b0b977f770d3f67b25ca7dd550e47fc1e8c42bd0",
+          "lf": "083cfb46394e62715227f2e8b0b977f770d3f67b25ca7dd550e47fc1e8c42bd0",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "tools/offline_contract_matrix/case_scheduling.py",
+          "declared": "2dc91ac6318ecaa064fb1df89a5fa7eaa157f9b1ed0e2d886030e4e6855cee39",
+          "actual": "2dc91ac6318ecaa064fb1df89a5fa7eaa157f9b1ed0e2d886030e4e6855cee39",
+          "lf": "2dc91ac6318ecaa064fb1df89a5fa7eaa157f9b1ed0e2d886030e4e6855cee39",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "tools/offline_contract_matrix/README.md",
+          "declared": "59ef20388656b7622e1c79454b7805b68368241444e99b4d7798e3907808f957",
+          "actual": "59ef20388656b7622e1c79454b7805b68368241444e99b4d7798e3907808f957",
+          "lf": "0d76ddb36c981af4804d742ab95f5a4a0fded43a92e3933c4f301ea2d6cd8ecc",
+          "matches": true,
+          "lf_matches": false
+        },
+        {
+          "path": "tests/test_w20_replay_selection.py",
+          "declared": "3d909940f03e70938426f734844d0c89b72a5dc69f79205ec46e6525ddfd4022",
+          "actual": "3d909940f03e70938426f734844d0c89b72a5dc69f79205ec46e6525ddfd4022",
+          "lf": "8f899410be44075fc93be20bdc84b8d6e48629aff827471f9c4f67a067bf7dca",
+          "matches": true,
+          "lf_matches": false
+        },
+        {
+          "path": "tests/test_w20_replay_faults.py",
+          "declared": "cf81441e0b795b6fbebbc18a3bcd8446742a4b81d9693c9e4deea18244149dfc",
+          "actual": "cf81441e0b795b6fbebbc18a3bcd8446742a4b81d9693c9e4deea18244149dfc",
+          "lf": "5078b5823c90bef8d8a7920b7f3fb0a19b39c66b10297542d9200628cf4128f5",
+          "matches": true,
+          "lf_matches": false
+        },
+        {
+          "path": "tests/test_w20_replay_return_r1.py",
+          "declared": "7d86bb3364fb4a1024e26a4a19017f1d89e7cea6da6c69a956aac086964b715b",
+          "actual": "7d86bb3364fb4a1024e26a4a19017f1d89e7cea6da6c69a956aac086964b715b",
+          "lf": "9f3ed4e694b4d15e42911ec98de39e8a8730bad6dab3f320a5d5874bad7f79d2",
+          "matches": true,
+          "lf_matches": false
+        },
+        {
+          "path": "tests/test_w20_replay_return_r2.py",
+          "declared": "3d2f0c4fea4215077fd9f63c72465a228587c1a488cf7db0db22173089d50de5",
+          "actual": "3d2f0c4fea4215077fd9f63c72465a228587c1a488cf7db0db22173089d50de5",
+          "lf": "68ee2b8d83abbb0a4df88c8371726b1d789b249932d67e77a3213a3cd8a25fee",
+          "matches": true,
+          "lf_matches": false
+        },
+        {
+          "path": "delivery/w20-ff-replay/handoff.md",
+          "declared": "6d0a455362bd42d4595e447d017db9c31989191149248180b6038600c8660547",
+          "actual": "6d0a455362bd42d4595e447d017db9c31989191149248180b6038600c8660547",
+          "lf": "be5d76676bf36f6bb0c3f6ec886205bdd281a5a3183f637d383de77b48eb7196",
+          "matches": true,
+          "lf_matches": false
+        },
+        {
+          "path": "delivery/w20-ff-replay/review/initial.md",
+          "declared": "f00c7c8bfe218a9be51c108c5286355713dd106b04cc9f3e29b19bb6123b1808",
+          "actual": "f00c7c8bfe218a9be51c108c5286355713dd106b04cc9f3e29b19bb6123b1808",
+          "lf": "f00c7c8bfe218a9be51c108c5286355713dd106b04cc9f3e29b19bb6123b1808",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "delivery/w20-ff-replay/review/initial.json",
+          "declared": "7c9684a496adc498f9bb7785c963c95129e70797c91c2251c4b173ab65f8bdff",
+          "actual": "7c9684a496adc498f9bb7785c963c95129e70797c91c2251c4b173ab65f8bdff",
+          "lf": "7c9684a496adc498f9bb7785c963c95129e70797c91c2251c4b173ab65f8bdff",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "delivery/w20-ff-replay/review/final.md",
+          "declared": "a063bb86cd4360768f010da33a7561d4f97f1182712d78d307b97533c19a20ef",
+          "actual": "a063bb86cd4360768f010da33a7561d4f97f1182712d78d307b97533c19a20ef",
+          "lf": "a063bb86cd4360768f010da33a7561d4f97f1182712d78d307b97533c19a20ef",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "delivery/w20-ff-replay/review/final.json",
+          "declared": "5628cceae01b82dbcde08da381f601cc9f4b1d56187df3341d78a23bcd037b3c",
+          "actual": "5628cceae01b82dbcde08da381f601cc9f4b1d56187df3341d78a23bcd037b3c",
+          "lf": "5628cceae01b82dbcde08da381f601cc9f4b1d56187df3341d78a23bcd037b3c",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "delivery/w20-ff-replay/review/return-r1-final.md",
+          "declared": "39408199402b4f819616ccfd6e49fd88582307ed75cbbd8bf75fc4a8b1c1e8ea",
+          "actual": "39408199402b4f819616ccfd6e49fd88582307ed75cbbd8bf75fc4a8b1c1e8ea",
+          "lf": "39408199402b4f819616ccfd6e49fd88582307ed75cbbd8bf75fc4a8b1c1e8ea",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "delivery/w20-ff-replay/review/return-r1-final.json",
+          "declared": "f97c1ad383c8f66905be274d7529925cc31fbf7695dc231349532ee8e8c05310",
+          "actual": "f97c1ad383c8f66905be274d7529925cc31fbf7695dc231349532ee8e8c05310",
+          "lf": "f97c1ad383c8f66905be274d7529925cc31fbf7695dc231349532ee8e8c05310",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "docs/plans/w20-ff-replay-2026-10-28/receipts/run-receipts.json",
+          "declared": "74c56df6d5acf9754440321eb32d97b9b0d3081b8d2465202422bb2982ae9a29",
+          "actual": "74c56df6d5acf9754440321eb32d97b9b0d3081b8d2465202422bb2982ae9a29",
+          "lf": "13f635ba1e4d4cd4d659d6e2fc013ad36f9fed5d00797cde755dd03e86e2f667",
+          "matches": true,
+          "lf_matches": false
+        },
+        {
+          "path": "docs/plans/w20-ff-replay-2026-10-28/receipts/dependency-record.json",
+          "declared": "21c96f1856df1f2a4c71362d63268de134b765743123e1ed05e0749ddc048146",
+          "actual": "21c96f1856df1f2a4c71362d63268de134b765743123e1ed05e0749ddc048146",
+          "lf": "696976e2eeb991d520f2f8fca802ee8de5489c0b5c0b236718462a0ba1dce5d5",
+          "matches": true,
+          "lf_matches": false
+        },
+        {
+          "path": "docs/plans/w20-ff-replay-2026-10-28/receipts/cleanup-receipt.json",
+          "declared": "634935867a28279a5ac542ff5f412954f3ce87316a22ecbbbe4e66df54dd4a71",
+          "actual": "634935867a28279a5ac542ff5f412954f3ce87316a22ecbbbe4e66df54dd4a71",
+          "lf": "647eebd65a13436a244b53ba7146ada1f048505bc2af15a6a8aa864c987182e7",
+          "matches": true,
+          "lf_matches": false
+        }
+      ],
+      "remote": "origin\thttps://github.com/zhengcb81/filing-fetch.git (fetch)\norigin\thttps://github.com/zhengcb81/filing-fetch.git (push)",
+      "tracking": "codex/w20-ff-replay-20261028 2b610881b9da509d6fb3f3bcbeb5b32707e051f2"
+    }
+  ]
+}

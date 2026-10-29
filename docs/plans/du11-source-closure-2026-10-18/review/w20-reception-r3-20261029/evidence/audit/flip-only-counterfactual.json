@@ -1,0 +1,29 @@
+{
+  "note": "In-memory counterfactual only; no author source modified; does not sign a final implementation.",
+  "rows": [
+    {
+      "text": "收入1,250,000,000和人民币余额2元",
+      "actual_published": "scale_equivalent",
+      "in_memory_flip_only": "scale_equivalent",
+      "expected": "not_scale_equivalent (currency of another amount must not donate)"
+    },
+    {
+      "text": "收入1,250,000,000及CNY现金2元",
+      "actual_published": "scale_equivalent",
+      "in_memory_flip_only": "scale_equivalent",
+      "expected": "not_scale_equivalent (currency of another amount must not donate)"
+    },
+    {
+      "text": "收入1,250,000,000业业业业业业业业业业业业业业业业业业业业业业业业业业业业业业业业业业业业业业业业人民币余额2元",
+      "actual_published": "scale_equivalent",
+      "in_memory_flip_only": "partial_match",
+      "expected": "not_scale_equivalent (currency of another amount must not donate)"
+    },
+    {
+      "text": "收入1,250,000,000元人民币",
+      "actual_published": "scale_equivalent",
+      "in_memory_flip_only": "scale_equivalent",
+      "expected": "scale_equivalent"
+    }
+  ]
+}

@@ -1,0 +1,55 @@
+{
+  "text": "收入1,250,000,000在年度经营报告的其他信息中在年度经营报告的其他信息中在年度经营报告的其他信息中在年度经营报告的其他信息中人民币余额2元",
+  "currency_distance_after_number": 52,
+  "local_families": [
+    "CNY"
+  ],
+  "actual": {
+    "claim_id": "c",
+    "risk_points": [],
+    "anchors": {
+      "rows": [
+        {
+          "anchor_kind": "value",
+          "declared": "12.5",
+          "declared_unit": "亿元人民币",
+          "status": "scale_equivalent",
+          "fragment_ids": [
+            "f"
+          ],
+          "scale_equivalent_literals": [
+            {
+              "fragment_id": "f",
+              "literal": "1,250,000,000"
+            }
+          ]
+        },
+        {
+          "anchor_kind": "period",
+          "declared": null,
+          "status": "not_declared",
+          "fragment_ids": []
+        },
+        {
+          "anchor_kind": "subject",
+          "declared": null,
+          "status": "not_declared",
+          "fragment_ids": []
+        },
+        {
+          "anchor_kind": "unit",
+          "declared": "亿元人民币",
+          "status": "partial_match",
+          "tokens_declared": [
+            "CNY",
+            "亿"
+          ],
+          "tokens_found": [
+            "CNY"
+          ],
+          "fragment_ids": []
+        }
+      ]
+    }
+  }
+}

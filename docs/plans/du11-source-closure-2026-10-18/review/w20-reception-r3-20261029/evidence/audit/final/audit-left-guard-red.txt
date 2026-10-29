@@ -1,0 +1,41 @@
+....FFF
+======================================================================
+FAIL: test_prefix_slice_keeps_word_boundary_guard (test_w20_root_currency_binding.CurrencyAttachmentTests.test_prefix_slice_keeps_word_boundary_guard) (token='CNY', lead='A')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\revenue-forecast-audit-w20-root-final\tests\test_w20_root_currency_binding.py", line 48, in test_prefix_slice_keeps_word_boundary_guard
+    self.assertEqual(fixtures.checkpoints._local_currency_families(
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        text, len(prefix), len(text)), expected)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Items in the first set but not the second:
+'CNY'
+
+======================================================================
+FAIL: test_prefix_slice_keeps_word_boundary_guard (test_w20_root_currency_binding.CurrencyAttachmentTests.test_prefix_slice_keeps_word_boundary_guard) (token='USD', lead='A')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\revenue-forecast-audit-w20-root-final\tests\test_w20_root_currency_binding.py", line 48, in test_prefix_slice_keeps_word_boundary_guard
+    self.assertEqual(fixtures.checkpoints._local_currency_families(
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        text, len(prefix), len(text)), expected)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Items in the first set but not the second:
+'USD'
+
+======================================================================
+FAIL: test_prefix_slice_keeps_word_boundary_guard (test_w20_root_currency_binding.CurrencyAttachmentTests.test_prefix_slice_keeps_word_boundary_guard) (token='RMB', lead='A')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\revenue-forecast-audit-w20-root-final\tests\test_w20_root_currency_binding.py", line 48, in test_prefix_slice_keeps_word_boundary_guard
+    self.assertEqual(fixtures.checkpoints._local_currency_families(
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        text, len(prefix), len(text)), expected)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Items in the first set but not the second:
+'CNY'
+
+----------------------------------------------------------------------
+Ran 5 tests in 0.105s
+
+FAILED (failures=3)

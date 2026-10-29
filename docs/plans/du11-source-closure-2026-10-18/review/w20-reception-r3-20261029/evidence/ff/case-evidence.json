@@ -1,0 +1,853 @@
+{
+  "hashes": [
+    {
+      "path": "tools/offline_contract_matrix/case_selection.py",
+      "expected": "9b12cc21ec6e94630cd3ffa7737f9b0b7d36291fe15c8527206f64be37cb237e",
+      "actual": "9b12cc21ec6e94630cd3ffa7737f9b0b7d36291fe15c8527206f64be37cb237e",
+      "matches": true
+    },
+    {
+      "path": "tools/offline_contract_matrix/case_registry.py",
+      "expected": "d80c706cf4f070314650e9e360ec0b15864b5abbb1379e0fcf2d208d017043f7",
+      "actual": "d80c706cf4f070314650e9e360ec0b15864b5abbb1379e0fcf2d208d017043f7",
+      "matches": true
+    },
+    {
+      "path": "tools/offline_contract_matrix/w20_case_specs.py",
+      "expected": "ed0aa677d30d010b2c88e8cd61142a3a6f1c86ae49706fe2124c844cd25f5c01",
+      "actual": "ed0aa677d30d010b2c88e8cd61142a3a6f1c86ae49706fe2124c844cd25f5c01",
+      "matches": true
+    },
+    {
+      "path": "tools/offline_contract_matrix/w20_fault_cases.py",
+      "expected": "7dd8af5524cd38033f4adbc9a4f356151e4580a30f1188d9e769452ece30618f",
+      "actual": "7dd8af5524cd38033f4adbc9a4f356151e4580a30f1188d9e769452ece30618f",
+      "matches": true
+    },
+    {
+      "path": "tools/offline_contract_matrix/cwp_readback_probe.py",
+      "expected": "f9071e5b278262779585f768100fc264a83b829a7b7f9daf8faea843b7ab9a7e",
+      "actual": "f9071e5b278262779585f768100fc264a83b829a7b7f9daf8faea843b7ab9a7e",
+      "matches": true
+    },
+    {
+      "path": "tools/offline_contract_matrix/cli_main.py",
+      "expected": "12c6be7446f3ad967731d4f9a7dffdf2f5d18b8903bcbc15ce8dc9e90330a9f7",
+      "actual": "12c6be7446f3ad967731d4f9a7dffdf2f5d18b8903bcbc15ce8dc9e90330a9f7",
+      "matches": true
+    },
+    {
+      "path": "tools/offline_contract_matrix/oracle.py",
+      "expected": "2795167935295adf3982bc4ae7f65559a71860d1427384a442c42aa0308b661b",
+      "actual": "2795167935295adf3982bc4ae7f65559a71860d1427384a442c42aa0308b661b",
+      "matches": true
+    },
+    {
+      "path": "tools/offline_contract_matrix/et_transcript_proxy.py",
+      "expected": "3f0d63b0a15b8125e48e37408cc85c11965a367a2c98d8cde0b1b8d048a18d19",
+      "actual": "3f0d63b0a15b8125e48e37408cc85c11965a367a2c98d8cde0b1b8d048a18d19",
+      "matches": true
+    },
+    {
+      "path": "tools/offline_contract_matrix/runtime.py",
+      "expected": "a419ccedfb3435a553f49f1175abe3211754aa15c24787220e3dff271e8d538b",
+      "actual": "a419ccedfb3435a553f49f1175abe3211754aa15c24787220e3dff271e8d538b",
+      "matches": true
+    },
+    {
+      "path": "tools/offline_contract_matrix/matrix_cases.py",
+      "expected": "083cfb46394e62715227f2e8b0b977f770d3f67b25ca7dd550e47fc1e8c42bd0",
+      "actual": "083cfb46394e62715227f2e8b0b977f770d3f67b25ca7dd550e47fc1e8c42bd0",
+      "matches": true
+    },
+    {
+      "path": "tools/offline_contract_matrix/case_scheduling.py",
+      "expected": "2dc91ac6318ecaa064fb1df89a5fa7eaa157f9b1ed0e2d886030e4e6855cee39",
+      "actual": "2dc91ac6318ecaa064fb1df89a5fa7eaa157f9b1ed0e2d886030e4e6855cee39",
+      "matches": true
+    },
+    {
+      "path": "tools/offline_contract_matrix/README.md",
+      "expected": "59ef20388656b7622e1c79454b7805b68368241444e99b4d7798e3907808f957",
+      "actual": "59ef20388656b7622e1c79454b7805b68368241444e99b4d7798e3907808f957",
+      "matches": true
+    },
+    {
+      "path": "tests/test_w20_replay_selection.py",
+      "expected": "3d909940f03e70938426f734844d0c89b72a5dc69f79205ec46e6525ddfd4022",
+      "actual": "3d909940f03e70938426f734844d0c89b72a5dc69f79205ec46e6525ddfd4022",
+      "matches": true
+    },
+    {
+      "path": "tests/test_w20_replay_faults.py",
+      "expected": "cf81441e0b795b6fbebbc18a3bcd8446742a4b81d9693c9e4deea18244149dfc",
+      "actual": "cf81441e0b795b6fbebbc18a3bcd8446742a4b81d9693c9e4deea18244149dfc",
+      "matches": true
+    },
+    {
+      "path": "tests/test_w20_replay_return_r1.py",
+      "expected": "7d86bb3364fb4a1024e26a4a19017f1d89e7cea6da6c69a956aac086964b715b",
+      "actual": "7d86bb3364fb4a1024e26a4a19017f1d89e7cea6da6c69a956aac086964b715b",
+      "matches": true
+    },
+    {
+      "path": "tests/test_w20_replay_return_r2.py",
+      "expected": "3d2f0c4fea4215077fd9f63c72465a228587c1a488cf7db0db22173089d50de5",
+      "actual": "3d2f0c4fea4215077fd9f63c72465a228587c1a488cf7db0db22173089d50de5",
+      "matches": true
+    },
+    {
+      "path": "delivery/w20-ff-replay/handoff.md",
+      "expected": "6d0a455362bd42d4595e447d017db9c31989191149248180b6038600c8660547",
+      "actual": "6d0a455362bd42d4595e447d017db9c31989191149248180b6038600c8660547",
+      "matches": true
+    },
+    {
+      "path": "delivery/w20-ff-replay/review/initial.md",
+      "expected": "f00c7c8bfe218a9be51c108c5286355713dd106b04cc9f3e29b19bb6123b1808",
+      "actual": "f00c7c8bfe218a9be51c108c5286355713dd106b04cc9f3e29b19bb6123b1808",
+      "matches": true
+    },
+    {
+      "path": "delivery/w20-ff-replay/review/initial.json",
+      "expected": "7c9684a496adc498f9bb7785c963c95129e70797c91c2251c4b173ab65f8bdff",
+      "actual": "7c9684a496adc498f9bb7785c963c95129e70797c91c2251c4b173ab65f8bdff",
+      "matches": true
+    },
+    {
+      "path": "delivery/w20-ff-replay/review/final.md",
+      "expected": "a063bb86cd4360768f010da33a7561d4f97f1182712d78d307b97533c19a20ef",
+      "actual": "a063bb86cd4360768f010da33a7561d4f97f1182712d78d307b97533c19a20ef",
+      "matches": true
+    },
+    {
+      "path": "delivery/w20-ff-replay/review/final.json",
+      "expected": "5628cceae01b82dbcde08da381f601cc9f4b1d56187df3341d78a23bcd037b3c",
+      "actual": "5628cceae01b82dbcde08da381f601cc9f4b1d56187df3341d78a23bcd037b3c",
+      "matches": true
+    },
+    {
+      "path": "delivery/w20-ff-replay/review/return-r1-final.md",
+      "expected": "39408199402b4f819616ccfd6e49fd88582307ed75cbbd8bf75fc4a8b1c1e8ea",
+      "actual": "39408199402b4f819616ccfd6e49fd88582307ed75cbbd8bf75fc4a8b1c1e8ea",
+      "matches": true
+    },
+    {
+      "path": "delivery/w20-ff-replay/review/return-r1-final.json",
+      "expected": "f97c1ad383c8f66905be274d7529925cc31fbf7695dc231349532ee8e8c05310",
+      "actual": "f97c1ad383c8f66905be274d7529925cc31fbf7695dc231349532ee8e8c05310",
+      "matches": true
+    },
+    {
+      "path": "docs/plans/w20-ff-replay-2026-10-28/receipts/run-receipts.json",
+      "expected": "74c56df6d5acf9754440321eb32d97b9b0d3081b8d2465202422bb2982ae9a29",
+      "actual": "74c56df6d5acf9754440321eb32d97b9b0d3081b8d2465202422bb2982ae9a29",
+      "matches": true
+    },
+    {
+      "path": "docs/plans/w20-ff-replay-2026-10-28/receipts/dependency-record.json",
+      "expected": "21c96f1856df1f2a4c71362d63268de134b765743123e1ed05e0749ddc048146",
+      "actual": "21c96f1856df1f2a4c71362d63268de134b765743123e1ed05e0749ddc048146",
+      "matches": true
+    },
+    {
+      "path": "docs/plans/w20-ff-replay-2026-10-28/receipts/cleanup-receipt.json",
+      "expected": "634935867a28279a5ac542ff5f412954f3ce87316a22ecbbbe4e66df54dd4a71",
+      "actual": "634935867a28279a5ac542ff5f412954f3ce87316a22ecbbbe4e66df54dd4a71",
+      "matches": true
+    }
+  ],
+  "reports": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\_w20-runs\\out\\attempt-dd7884e11bd74adcb3d911736c893ca2\\report.json",
+      "sha256": "372fdbd2082f7a2925ea9f6abcfe69be3f403ce098311ee1ae6a875ecbb552ea",
+      "cases": [
+        {
+          "id": "w20_call_lost_reply_after_durable",
+          "title": "one acquisition's success reply intercepted at the harness boundary after public read-back confirmed its Ref; recovery reuses with zero extra GETs and the same Ref/SHA",
+          "declared_layer": "ff+et",
+          "observed_layer": "w20 fault/recovery chain (real FF CLI + test-proxy boundary + real CWP import)",
+          "result": "PASS",
+          "scope": "THE critical durable scenario (return R2): ONE real new acquisition runs to completion server-side, its success reply is intercepted at the harness-owned transport boundary and NEVER delivered to the client, and the public query+reader read-back confirms THIS acquisition's Ref/SHA in between. The first recovery then reuses with ZERO extra provider GETs and the same Ref/SHA; the replay reuses with zero GETs. Server-side completion with a transport-lost reply is explicitly allowed; no microsecond kill point, no CWP product failpoint, no exactly-once promise",
+          "expected": {
+            "recovery_zero_requests": true,
+            "reply_intercepted": true
+          },
+          "actual": {
+            "reply_intercepted": true,
+            "verified_at_reply_loss": {
+              "document_id": "urn:company-wiki:document:sha256:976a43b9b049799ede2397d5d1c4c4cc6413597ee48de6a53f33665a2884ef61",
+              "source_id": "urn:company-wiki:source:sha256:976a43b9b049799ede2397d5d1c4c4cc6413597ee48de6a53f33665a2884ef61",
+              "content_sha256": "976a43b9b049799ede2397d5d1c4c4cc6413597ee48de6a53f33665a2884ef61",
+              "byte_size": 512,
+              "mime_type": "application/json"
+            },
+            "probe_state": "confirmed",
+            "probe_error": null,
+            "runs": [
+              {
+                "exit_code": 0,
+                "response": {
+                  "schema_version": "2.0",
+                  "status": "source_candidate",
+                  "request_period": {
+                    "mode": "exact",
+                    "fiscal_year": 2025,
+                    "fiscal_period": "FY",
+                    "as_of_date": "2026-12-31"
+                  },
+                  "filing": {
+                    "status": "source_candidate",
+                    "source_ref": {
+                      "byte_size": 619,
+                      "content_sha256": "a2961fd67b9924d2490ea7cb14fa046aaab6c391562a67fca89fb624b1db834f",
+                      "document_id": "urn:company-wiki:document:sha256:a2961fd67b9924d2490ea7cb14fa046aaab6c391562a67fca89fb624b1db834f",
+                      "mime_type": "application/pdf",
+                      "schema_version": "2.0",
+                      "source_id": "urn:company-wiki:source:sha256:a2961fd67b9924d2490ea7cb14fa046aaab6c391562a67fca89fb624b1db834f"
+                    },
+                    "byte_verification": "pending_verified_open",
+                    "document_kind": "annual_report",
+                    "fiscal_year": 2025,
+                    "fiscal_period": "FY",
+                    "resolution_outcome": "reused_existing",
+                    "download_events": 0
+                  },
+                  "transcript": {
+                    "status": "downloaded",
+                    "retryable": false,
+                    "source_ref": {
+                      "document_id": "urn:company-wiki:document:sha256:976a43b9b049799ede2397d5d1c4c4cc6413597ee48de6a53f33665a2884ef61",
+                      "source_id": "urn:company-wiki:source:sha256:976a43b9b049799ede2397d5d1c4c4cc6413597ee48de6a53f33665a2884ef61",
+                      "content_sha256": "976a43b9b049799ede2397d5d1c4c4cc6413597ee48de6a53f33665a2884ef61",
+                      "byte_size": 512,
+                      "mime_type": "application/json",
+                      "schema_version": "2.0"
+                    },
+                    "provider": "fmp",
+                    "fiscal_year": 2038,
+                    "fiscal_quarter": 1,
+                    "provider_document_id": "fmp:AAPL:2038:Q1:2025-12-01",
+                    "call_date": "2025-12-01",
+                    "publication_date": null,
+                    "as_of_cutoff_verified": false,
+                    "provider_calls": 1,
+                    "provider_requests": 1,
+                    "provider_response_bytes": 512,
+                    "provider_usage_complete": true
+                  },
+                  "calls": 5,
+                  "downloads": 0
+                },
+                "stderr": "",
+                "request_ref": "g1.w20_call_lost_reply_after_durable.run1.request.json",
+                "response_ref": "g1.w20_call_lost_reply_after_durable.run1.response.json",
+                "stderr_ref": "g1.w20_call_lost_reply_after_durable.run1.stderr.txt",
+                "et_fixture_requests": 1,
+                "adapter_fixture_requests": 0,
+                "receipt_tag": "w20_call_lost_reply_after_durable.run1",
+                "fixture_scenario": "success",
+                "fixture_ref": "g1.w20_call_lost_reply_after_durable.run1.fixture.json",
+                "fixture_sha256": "6373496dbcfe97b624e80d1d5642f994e056ef9f252feb38917f3480ad621374",
+                "expected_original_content_sha256": "106c2c9b772d14d8160c724b0589d03ee2d0b504a113f744bf0a99698ae06248",
+                "request_sha256": "7bccf7f978f4ee7cdffd212dd4b711e03f69a65bf27b4ccc8f4a641cc7fb2d09",
+                "response_sha256": "0ac2741f651fa36379949a1bb51a4eee297004adedaf36f855b6a4d4b4a3d76b",
+                "killed": false,
+                "kill_reason": null,
+                "adapter_fetch_requests": 0,
+                "et_result_receipt": {
+                  "file": "w20_call_lost_reply_after_durable.run1.result.json",
+                  "sha256": "dde950580aac232264cdc668d0d097c0e5d97f05b25b762dbf3486ec558a1f48"
+                },
+                "et_usage_receipt": {
+                  "file": "w20_call_lost_reply_after_durable.run1.usage.json",
+                  "sha256": "de0e6fa7d455327009c27d5a6f59f4350c3a35aea6f885397ea832b061b2d0c2"
+                },
+                "fixture_requests": 1,
+                "reply_intercepted": true
+              },
+              {
+                "exit_code": 0,
+                "response": {
+                  "schema_version": "2.0",
+                  "status": "source_candidate",
+                  "request_period": {
+                    "mode": "exact",
+                    "fiscal_year": 2025,
+                    "fiscal_period": "FY",
+                    "as_of_date": "2026-12-31"
+                  },
+                  "filing": {
+                    "status": "source_candidate",
+                    "source_ref": {
+                      "byte_size": 619,
+                      "content_sha256": "a2961fd67b9924d2490ea7cb14fa046aaab6c391562a67fca89fb624b1db834f",
+                      "document_id": "urn:company-wiki:document:sha256:a2961fd67b9924d2490ea7cb14fa046aaab6c391562a67fca89fb624b1db834f",
+                      "mime_type": "application/pdf",
+                      "schema_version": "2.0",
+                      "source_id": "urn:company-wiki:source:sha256:a2961fd67b9924d2490ea7cb14fa046aaab6c391562a67fca89fb624b1db834f"
+                    },
+                    "byte_verification": "pending_verified_open",
+                    "document_kind": "annual_report",
+                    "fiscal_year": 2025,
+                    "fiscal_period": "FY",
+                    "resolution_outcome": "reused_existing",
+                    "download_events": 0
+                  },
+                  "transcript": {
+                    "status": "unknown_publication",
+                    "reason": "publication_date_unknown",
+                    "retryable": false,
+                    "source_ref": {
+                      "schema_version": "2.0",
+                      "document_id": "urn:company-wiki:document:sha256:976a43b9b049799ede2397d5d1c4c4cc6413597ee48de6a53f33665a2884ef61",
+                      "source_id": "urn:company-wiki:source:sha256:976a43b9b049799ede2397d5d1c4c4cc6413597ee48de6a53f33665a2884ef61",
+                      "content_sha256": "976a43b9b049799ede2397d5d1c4c4cc6413597ee48de6a53f33665a2884ef61",
+                      "byte_size": 512,
+                      "mime_type": "application/json"
+                    },
+                    "provider": "fmp",
+                    "fiscal_year": 2038,
+                    "fiscal_quarter": 1,
+                    "publication_date": null,
+                    "as_of_cutoff_verified": false,
+                    "provider_calls": 0
+                  },
+                  "calls": 4,
+                  "downloads": 0
+                },
+                "stderr": "",
+                "request_ref": "g1.w20_call_lost_reply_after_durable.run2.request.json",
+                "response_ref": "g1.w20_call_lost_reply_after_durable.run2.response.json",
+                "stderr_ref": "g1.w20_call_lost_reply_after_durable.run2.stderr.txt",
+                "et_fixture_requests": 0,
+                "adapter_fixture_requests": 0,
+                "receipt_tag": "w20_call_lost_reply_after_durable.run2",
+                "fixture_scenario": "success",
+                "fixture_ref": "g1.w20_call_lost_reply_after_durable.run2.fixture.json",
+                "fixture_sha256": "7acc9c5b033be7e06d91486aa0a595b84852bdd3f9e66090d2021e3796b16684",
+                "expected_original_content_sha256": "106c2c9b772d14d8160c724b0589d03ee2d0b504a113f744bf0a99698ae06248",
+                "request_sha256": "7bccf7f978f4ee7cdffd212dd4b711e03f69a65bf27b4ccc8f4a641cc7fb2d09",
+                "response_sha256": "8492f1a93dd86a523d7bff49b26490afa09c2d9d82a05d3a73648f8e3c75af99",
+                "killed": false,
+                "kill_reason": null,
+                "adapter_fetch_requests": 0,
+                "fixture_requests": 0
+              },
+              {
+                "exit_code": 0,
+                "response": {
+                  "schema_version": "2.0",
+                  "status": "source_candidate",
+                  "request_period": {
+                    "mode": "exact",
+                    "fiscal_year": 2025,
+                    "fiscal_period": "FY",
+                    "as_of_date": "2026-12-31"
+                  },
+                  "filing": {
+                    "status": "source_candidate",
+                    "source_ref": {
+                      "byte_size": 619,
+                      "content_sha256": "a2961fd67b9924d2490ea7cb14fa046aaab6c391562a67fca89fb624b1db834f",
+                      "document_id": "urn:company-wiki:document:sha256:a2961fd67b9924d2490ea7cb14fa046aaab6c391562a67fca89fb624b1db834f",
+                      "mime_type": "application/pdf",
+                      "schema_version": "2.0",
+                      "source_id": "urn:company-wiki:source:sha256:a2961fd67b9924d2490ea7cb14fa046aaab6c391562a67fca89fb624b1db834f"
+                    },
+                    "byte_verification": "pending_verified_open",
+                    "document_kind": "annual_report",
+                    "fiscal_year": 2025,
+                    "fiscal_period": "FY",
+                    "resolution_outcome": "reused_existing",
+                    "download_events": 0
+                  },
+                  "transcript": {
+                    "status": "unknown_publication",
+                    "reason": "publication_date_unknown",
+                    "retryable": false,
+                    "source_ref": {
+                      "schema_version": "2.0",
+                      "document_id": "urn:company-wiki:document:sha256:976a43b9b049799ede2397d5d1c4c4cc6413597ee48de6a53f33665a2884ef61",
+                      "source_id": "urn:company-wiki:source:sha256:976a43b9b049799ede2397d5d1c4c4cc6413597ee48de6a53f33665a2884ef61",
+                      "content_sha256": "976a43b9b049799ede2397d5d1c4c4cc6413597ee48de6a53f33665a2884ef61",
+                      "byte_size": 512,
+                      "mime_type": "application/json"
+                    },
+                    "provider": "fmp",
+                    "fiscal_year": 2038,
+                    "fiscal_quarter": 1,
+                    "publication_date": null,
+                    "as_of_cutoff_verified": false,
+                    "provider_calls": 0
+                  },
+                  "calls": 4,
+                  "downloads": 0
+                },
+                "stderr": "",
+                "request_ref": "g1.w20_call_lost_reply_after_durable.run3.request.json",
+                "response_ref": "g1.w20_call_lost_reply_after_durable.run3.response.json",
+                "stderr_ref": "g1.w20_call_lost_reply_after_durable.run3.stderr.txt",
+                "et_fixture_requests": 0,
+                "adapter_fixture_requests": 0,
+                "receipt_tag": "w20_call_lost_reply_after_durable.run3",
+                "fixture_scenario": "success",
+                "fixture_ref": "g1.w20_call_lost_reply_after_durable.run3.fixture.json",
+                "fixture_sha256": "8c79f5bd4f9966913e7e7b56e2e58835fe731ecc76bb9b5733b554787a5cc3c3",
+                "expected_original_content_sha256": "106c2c9b772d14d8160c724b0589d03ee2d0b504a113f744bf0a99698ae06248",
+                "request_sha256": "7bccf7f978f4ee7cdffd212dd4b711e03f69a65bf27b4ccc8f4a641cc7fb2d09",
+                "response_sha256": "8492f1a93dd86a523d7bff49b26490afa09c2d9d82a05d3a73648f8e3c75af99",
+                "killed": false,
+                "kill_reason": null,
+                "adapter_fetch_requests": 0,
+                "fixture_requests": 0
+              }
+            ],
+            "elapsed_seconds": 26.5646
+          },
+          "provider_counters": {
+            "fixture_requests": 1
+          },
+          "request_ref": null,
+          "response_ref": null,
+          "receipt_refs": [],
+          "diagnostics": [
+            "all supplemental assertions observed"
+          ]
+        }
+      ],
+      "oracle_findings": []
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\_w20-runs\\out\\attempt-248e9d19be5b42d98cef08fa50401300\\report.json",
+      "sha256": "dae0f39b42679a53734f9403081312a06afcecb7698c8e65c506e13c727c7d83",
+      "cases": [
+        {
+          "id": "w20_call_kill_after_durable",
+          "title": "durable source confirmed by public read-back, then the re-request is killed before its return is delivered (post-durable receipt/return interruption); recovery reuses with zero extra GETs and the same Ref/SHA",
+          "declared_layer": "ff+et",
+          "observed_layer": "w20 fault/recovery chain (real FF CLI + test-proxy boundary + real CWP import)",
+          "result": "PASS",
+          "scope": "CONTROL ONLY (return R2): after a prior acquisition was already delivered, a later re-request is killed after the durable source is confirmed through CWP's public read-back. This proves the duplicate-suppression path survives a killed re-request; it is NOT the critical lost-reply proof, which is w20_call_lost_reply_after_durable",
+          "expected": {
+            "interruption_phase": "post_durable",
+            "recovery_zero_requests": true
+          },
+          "actual": {
+            "interruption_phase": "post_durable",
+            "verified_at_kill": {
+              "document_id": "urn:company-wiki:document:sha256:f1778c54ef796eaf7e0c14d3afc35aa17e440573b7cec06abf9ee9d43e9ad9a9",
+              "source_id": "urn:company-wiki:source:sha256:f1778c54ef796eaf7e0c14d3afc35aa17e440573b7cec06abf9ee9d43e9ad9a9",
+              "content_sha256": "f1778c54ef796eaf7e0c14d3afc35aa17e440573b7cec06abf9ee9d43e9ad9a9",
+              "byte_size": 512,
+              "mime_type": "application/json"
+            },
+            "probe_state": "confirmed",
+            "probe_error": null,
+            "kill_reason": "harness interruption at observed boundary",
+            "runs": [
+              {
+                "exit_code": 0,
+                "response": {
+                  "schema_version": "2.0",
+                  "status": "source_candidate",
+                  "request_period": {
+                    "mode": "exact",
+                    "fiscal_year": 2025,
+                    "fiscal_period": "FY",
+                    "as_of_date": "2026-12-31"
+                  },
+                  "filing": {
+                    "status": "source_candidate",
+                    "source_ref": {
+                      "byte_size": 619,
+                      "content_sha256": "a2961fd67b9924d2490ea7cb14fa046aaab6c391562a67fca89fb624b1db834f",
+                      "document_id": "urn:company-wiki:document:sha256:a2961fd67b9924d2490ea7cb14fa046aaab6c391562a67fca89fb624b1db834f",
+                      "mime_type": "application/pdf",
+                      "schema_version": "2.0",
+                      "source_id": "urn:company-wiki:source:sha256:a2961fd67b9924d2490ea7cb14fa046aaab6c391562a67fca89fb624b1db834f"
+                    },
+                    "byte_verification": "pending_verified_open",
+                    "document_kind": "annual_report",
+                    "fiscal_year": 2025,
+                    "fiscal_period": "FY",
+                    "resolution_outcome": "reused_existing",
+                    "download_events": 0
+                  },
+                  "transcript": {
+                    "status": "downloaded",
+                    "retryable": false,
+                    "source_ref": {
+                      "document_id": "urn:company-wiki:document:sha256:f1778c54ef796eaf7e0c14d3afc35aa17e440573b7cec06abf9ee9d43e9ad9a9",
+                      "source_id": "urn:company-wiki:source:sha256:f1778c54ef796eaf7e0c14d3afc35aa17e440573b7cec06abf9ee9d43e9ad9a9",
+                      "content_sha256": "f1778c54ef796eaf7e0c14d3afc35aa17e440573b7cec06abf9ee9d43e9ad9a9",
+                      "byte_size": 512,
+                      "mime_type": "application/json",
+                      "schema_version": "2.0"
+                    },
+                    "provider": "fmp",
+                    "fiscal_year": 2036,
+                    "fiscal_quarter": 1,
+                    "provider_document_id": "fmp:AAPL:2036:Q1:2025-12-01",
+                    "call_date": "2025-12-01",
+                    "publication_date": null,
+                    "as_of_cutoff_verified": false,
+                    "provider_calls": 1,
+                    "provider_requests": 1,
+                    "provider_response_bytes": 512,
+                    "provider_usage_complete": true
+                  },
+                  "calls": 5,
+                  "downloads": 0
+                },
+                "stderr": "",
+                "request_ref": "g1.w20_call_kill_after_durable.run1.request.json",
+                "response_ref": "g1.w20_call_kill_after_durable.run1.response.json",
+                "stderr_ref": "g1.w20_call_kill_after_durable.run1.stderr.txt",
+                "et_fixture_requests": 1,
+                "adapter_fixture_requests": 0,
+                "receipt_tag": "w20_call_kill_after_durable.run1",
+                "fixture_scenario": "success",
+                "fixture_ref": "g1.w20_call_kill_after_durable.run1.fixture.json",
+                "fixture_sha256": "a86378cb57182acc1ac57c9c295b4b6517a7737ca288e8e71b38a74a2d02d93e",
+                "expected_original_content_sha256": "e230a81e8ca2cabea77cf24db448dc446c83761c334eb0bf483de921482e506b",
+                "request_sha256": "5be3c86e259eabccbef233ae22ca58c57ca92e67f2d21c470c93725b8a16aec5",
+                "response_sha256": "1067429891cc297923114c6eb649284c371a56a8e1c8588c7b6ac86f9d7d7984",
+                "killed": false,
+                "kill_reason": null,
+                "adapter_fetch_requests": 0,
+                "et_result_receipt": {
+                  "file": "w20_call_kill_after_durable.run1.result.json",
+                  "sha256": "d1f1831f0ca95298611a60637dc9be16465b9c067788805e6696832cd64ef7c7"
+                },
+                "et_usage_receipt": {
+                  "file": "w20_call_kill_after_durable.run1.usage.json",
+                  "sha256": "fe17cb2d477b8be3f45441dd6e2385940a2def6cd7463ecbbcfb37e8906437bc"
+                },
+                "fixture_requests": 1
+              },
+              {
+                "exit_code": 1,
+                "response": {
+                  "_unparsed_stdout": ""
+                },
+                "stderr": "",
+                "request_ref": "g1.w20_call_kill_after_durable.run2.request.json",
+                "response_ref": "g1.w20_call_kill_after_durable.run2.response.json",
+                "stderr_ref": "g1.w20_call_kill_after_durable.run2.stderr.txt",
+                "et_fixture_requests": 0,
+                "adapter_fixture_requests": 0,
+                "receipt_tag": "w20_call_kill_after_durable.run2",
+                "fixture_scenario": "success",
+                "fixture_ref": "g1.w20_call_kill_after_durable.run2.fixture.json",
+                "fixture_sha256": "c8af374bffe2a7e2b24cd7ecc433cf475fa604cefa01e13347daf48ebdc853a8",
+                "expected_original_content_sha256": "e230a81e8ca2cabea77cf24db448dc446c83761c334eb0bf483de921482e506b",
+                "request_sha256": "5be3c86e259eabccbef233ae22ca58c57ca92e67f2d21c470c93725b8a16aec5",
+                "response_sha256": "3588f4eaf76fb6903641949289f655206205fe19715514d1e81dbc5af6901b0b",
+                "killed": true,
+                "kill_reason": "harness interruption at observed boundary",
+                "adapter_fetch_requests": 0,
+                "fixture_requests": 0
+              },
+              {
+                "exit_code": 0,
+                "response": {
+                  "schema_version": "2.0",
+                  "status": "source_candidate",
+                  "request_period": {
+                    "mode": "exact",
+                    "fiscal_year": 2025,
+                    "fiscal_period": "FY",
+                    "as_of_date": "2026-12-31"
+                  },
+                  "filing": {
+                    "status": "source_candidate",
+                    "source_ref": {
+                      "byte_size": 619,
+                      "content_sha256": "a2961fd67b9924d2490ea7cb14fa046aaab6c391562a67fca89fb624b1db834f",
+                      "document_id": "urn:company-wiki:document:sha256:a2961fd67b9924d2490ea7cb14fa046aaab6c391562a67fca89fb624b1db834f",
+                      "mime_type": "application/pdf",
+                      "schema_version": "2.0",
+                      "source_id": "urn:company-wiki:source:sha256:a2961fd67b9924d2490ea7cb14fa046aaab6c391562a67fca89fb624b1db834f"
+                    },
+                    "byte_verification": "pending_verified_open",
+                    "document_kind": "annual_report",
+                    "fiscal_year": 2025,
+                    "fiscal_period": "FY",
+                    "resolution_outcome": "reused_existing",
+                    "download_events": 0
+                  },
+                  "transcript": {
+                    "status": "unknown_publication",
+                    "reason": "publication_date_unknown",
+                    "retryable": false,
+                    "source_ref": {
+                      "schema_version": "2.0",
+                      "document_id": "urn:company-wiki:document:sha256:f1778c54ef796eaf7e0c14d3afc35aa17e440573b7cec06abf9ee9d43e9ad9a9",
+                      "source_id": "urn:company-wiki:source:sha256:f1778c54ef796eaf7e0c14d3afc35aa17e440573b7cec06abf9ee9d43e9ad9a9",
+                      "content_sha256": "f1778c54ef796eaf7e0c14d3afc35aa17e440573b7cec06abf9ee9d43e9ad9a9",
+                      "byte_size": 512,
+                      "mime_type": "application/json"
+                    },
+                    "provider": "fmp",
+                    "fiscal_year": 2036,
+                    "fiscal_quarter": 1,
+                    "publication_date": null,
+                    "as_of_cutoff_verified": false,
+                    "provider_calls": 0
+                  },
+                  "calls": 4,
+                  "downloads": 0
+                },
+                "stderr": "",
+                "request_ref": "g1.w20_call_kill_after_durable.run3.request.json",
+                "response_ref": "g1.w20_call_kill_after_durable.run3.response.json",
+                "stderr_ref": "g1.w20_call_kill_after_durable.run3.stderr.txt",
+                "et_fixture_requests": 0,
+                "adapter_fixture_requests": 0,
+                "receipt_tag": "w20_call_kill_after_durable.run3",
+                "fixture_scenario": "success",
+                "fixture_ref": "g1.w20_call_kill_after_durable.run3.fixture.json",
+                "fixture_sha256": "2d0c5a2a29971c8a789fe73805d8e0b4b2c1c34c14587fe04b997702ae023b40",
+                "expected_original_content_sha256": "e230a81e8ca2cabea77cf24db448dc446c83761c334eb0bf483de921482e506b",
+                "request_sha256": "5be3c86e259eabccbef233ae22ca58c57ca92e67f2d21c470c93725b8a16aec5",
+                "response_sha256": "7488682f36d5b1ec9e6eba1e60c4440f12333a3225dbcb17d8b13fc905306ebe",
+                "killed": false,
+                "kill_reason": null,
+                "adapter_fetch_requests": 0,
+                "fixture_requests": 0
+              }
+            ],
+            "elapsed_seconds": 21.7491
+          },
+          "provider_counters": {
+            "fixture_requests": 1
+          },
+          "request_ref": null,
+          "response_ref": null,
+          "receipt_refs": [],
+          "diagnostics": [
+            "all supplemental assertions observed"
+          ]
+        }
+      ],
+      "oracle_findings": []
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\_w20-runs\\out\\attempt-8a972aa642c545918d37df3b3cabfe4a\\report.json",
+      "sha256": "260384ef5857e27c41db6fba7ae1b72f7010c6a7adfb642e4761a0d6b406cb5f",
+      "cases": [
+        {
+          "id": "w20_call_kill_after_import",
+          "title": "FF tree killed on THIS request's canonical bytes (mid-import window); durable state observed, never assumed, and the strict post-durable proof is the separate post_durable case",
+          "declared_layer": "ff+et",
+          "observed_layer": "w20 fault/recovery chain (real FF CLI + test-proxy boundary + real CWP import)",
+          "result": "PASS",
+          "scope": "real FF+ET chain; mid-import interruption observed: the FF child tree is killed when THIS request's canonical original bytes appear (request-bound trigger), the durable-or-not state at kill is observed through the public CWP interface and cross-checked against the recovery branch. This case is explicitly NOT a durable-pass proxy; the strict post-durable proof is w20_call_kill_after_durable",
+          "expected": {
+            "interruption_phase": "mid_import_observed",
+            "recovery_branch_observed": true
+          },
+          "actual": {
+            "interruption_phase": "mid_import_observed",
+            "recovery_branch": "not_durable_at_kill",
+            "durable_at_kill_public_readback": false,
+            "kill_reason": "harness interruption at observed boundary",
+            "runs": [
+              {
+                "exit_code": 1,
+                "response": {
+                  "_unparsed_stdout": ""
+                },
+                "stderr": "",
+                "request_ref": "g1.w20_call_kill_after_import.run1.request.json",
+                "response_ref": "g1.w20_call_kill_after_import.run1.response.json",
+                "stderr_ref": "g1.w20_call_kill_after_import.run1.stderr.txt",
+                "et_fixture_requests": 1,
+                "adapter_fixture_requests": 0,
+                "receipt_tag": "w20_call_kill_after_import.run1",
+                "fixture_scenario": "success",
+                "fixture_ref": "g1.w20_call_kill_after_import.run1.fixture.json",
+                "fixture_sha256": "b910217a7f4d186e635255b81e0b4fe980db99fdd0058a989204c1203ec1fb74",
+                "expected_original_content_sha256": "d4142eeb8a3eae2e3c37d64d3e588de5faacfc16a57becea3dda75338f4acfeb",
+                "request_sha256": "eb6835adce9768f6e5605f83eb15bc604f917e885d8a92fe37bb38304c96c854",
+                "response_sha256": "3588f4eaf76fb6903641949289f655206205fe19715514d1e81dbc5af6901b0b",
+                "killed": true,
+                "kill_reason": "harness interruption at observed boundary",
+                "adapter_fetch_requests": 0,
+                "et_result_receipt": {
+                  "file": "w20_call_kill_after_import.run1.result.json",
+                  "sha256": "63de273fc496811213ac0425019c14baf84ef44541d51e6df4e6e08a25aa97be"
+                },
+                "et_usage_receipt": {
+                  "file": "w20_call_kill_after_import.run1.usage.json",
+                  "sha256": "ee61f75e36cf9d92d13e55d176b2df0aabca35ad99f1fb61789abcb1783b85e7"
+                },
+                "fixture_requests": 1
+              },
+              {
+                "exit_code": 0,
+                "response": {
+                  "schema_version": "2.0",
+                  "status": "source_candidate",
+                  "request_period": {
+                    "mode": "exact",
+                    "fiscal_year": 2025,
+                    "fiscal_period": "FY",
+                    "as_of_date": "2026-12-31"
+                  },
+                  "filing": {
+                    "status": "source_candidate",
+                    "source_ref": {
+                      "byte_size": 619,
+                      "content_sha256": "a2961fd67b9924d2490ea7cb14fa046aaab6c391562a67fca89fb624b1db834f",
+                      "document_id": "urn:company-wiki:document:sha256:a2961fd67b9924d2490ea7cb14fa046aaab6c391562a67fca89fb624b1db834f",
+                      "mime_type": "application/pdf",
+                      "schema_version": "2.0",
+                      "source_id": "urn:company-wiki:source:sha256:a2961fd67b9924d2490ea7cb14fa046aaab6c391562a67fca89fb624b1db834f"
+                    },
+                    "byte_verification": "pending_verified_open",
+                    "document_kind": "annual_report",
+                    "fiscal_year": 2025,
+                    "fiscal_period": "FY",
+                    "resolution_outcome": "reused_existing",
+                    "download_events": 0
+                  },
+                  "transcript": {
+                    "status": "downloaded",
+                    "retryable": false,
+                    "source_ref": {
+                      "document_id": "urn:company-wiki:document:sha256:4c73ce97711e5fce2029880f0716e003ef203b7bc0063cec9e3f42cc56a7f676",
+                      "source_id": "urn:company-wiki:source:sha256:4c73ce97711e5fce2029880f0716e003ef203b7bc0063cec9e3f42cc56a7f676",
+                      "content_sha256": "4c73ce97711e5fce2029880f0716e003ef203b7bc0063cec9e3f42cc56a7f676",
+                      "byte_size": 512,
+                      "mime_type": "application/json",
+                      "schema_version": "2.0"
+                    },
+                    "provider": "fmp",
+                    "fiscal_year": 2034,
+                    "fiscal_quarter": 2,
+                    "provider_document_id": "fmp:AAPL:2034:Q2:2025-12-01",
+                    "call_date": "2025-12-01",
+                    "publication_date": null,
+                    "as_of_cutoff_verified": false,
+                    "provider_calls": 1,
+                    "provider_requests": 1,
+                    "provider_response_bytes": 512,
+                    "provider_usage_complete": true
+                  },
+                  "calls": 5,
+                  "downloads": 0
+                },
+                "stderr": "",
+                "request_ref": "g1.w20_call_kill_after_import.run2.request.json",
+                "response_ref": "g1.w20_call_kill_after_import.run2.response.json",
+                "stderr_ref": "g1.w20_call_kill_after_import.run2.stderr.txt",
+                "et_fixture_requests": 1,
+                "adapter_fixture_requests": 0,
+                "receipt_tag": "w20_call_kill_after_import.run2",
+                "fixture_scenario": "success",
+                "fixture_ref": "g1.w20_call_kill_after_import.run2.fixture.json",
+                "fixture_sha256": "33ab945df0eb6e8aaaa8a5f56cded6f91fd3b0eaa22d6605d1982e6bf2a129c2",
+                "expected_original_content_sha256": "d4142eeb8a3eae2e3c37d64d3e588de5faacfc16a57becea3dda75338f4acfeb",
+                "request_sha256": "eb6835adce9768f6e5605f83eb15bc604f917e885d8a92fe37bb38304c96c854",
+                "response_sha256": "293402f9e361f6737316de0b10be0dff88b4673bdc09c4fa53bd8561a17d25d0",
+                "killed": false,
+                "kill_reason": null,
+                "adapter_fetch_requests": 0,
+                "et_result_receipt": {
+                  "file": "w20_call_kill_after_import.run2.result.json",
+                  "sha256": "c2a9e26d6cd05915dce1c8f6834cbd37fcd9ef110eef19e611000df91c0d82ec"
+                },
+                "et_usage_receipt": {
+                  "file": "w20_call_kill_after_import.run2.usage.json",
+                  "sha256": "ee61f75e36cf9d92d13e55d176b2df0aabca35ad99f1fb61789abcb1783b85e7"
+                },
+                "fixture_requests": 1
+              },
+              {
+                "exit_code": 0,
+                "response": {
+                  "schema_version": "2.0",
+                  "status": "source_candidate",
+                  "request_period": {
+                    "mode": "exact",
+                    "fiscal_year": 2025,
+                    "fiscal_period": "FY",
+                    "as_of_date": "2026-12-31"
+                  },
+                  "filing": {
+                    "status": "source_candidate",
+                    "source_ref": {
+                      "byte_size": 619,
+                      "content_sha256": "a2961fd67b9924d2490ea7cb14fa046aaab6c391562a67fca89fb624b1db834f",
+                      "document_id": "urn:company-wiki:document:sha256:a2961fd67b9924d2490ea7cb14fa046aaab6c391562a67fca89fb624b1db834f",
+                      "mime_type": "application/pdf",
+                      "schema_version": "2.0",
+                      "source_id": "urn:company-wiki:source:sha256:a2961fd67b9924d2490ea7cb14fa046aaab6c391562a67fca89fb624b1db834f"
+                    },
+                    "byte_verification": "pending_verified_open",
+                    "document_kind": "annual_report",
+                    "fiscal_year": 2025,
+                    "fiscal_period": "FY",
+                    "resolution_outcome": "reused_existing",
+                    "download_events": 0
+                  },
+                  "transcript": {
+                    "status": "unknown_publication",
+                    "reason": "publication_date_unknown",
+                    "retryable": false,
+                    "source_ref": {
+                      "schema_version": "2.0",
+                      "document_id": "urn:company-wiki:document:sha256:4c73ce97711e5fce2029880f0716e003ef203b7bc0063cec9e3f42cc56a7f676",
+                      "source_id": "urn:company-wiki:source:sha256:4c73ce97711e5fce2029880f0716e003ef203b7bc0063cec9e3f42cc56a7f676",
+                      "content_sha256": "4c73ce97711e5fce2029880f0716e003ef203b7bc0063cec9e3f42cc56a7f676",
+                      "byte_size": 512,
+                      "mime_type": "application/json"
+                    },
+                    "provider": "fmp",
+                    "fiscal_year": 2034,
+                    "fiscal_quarter": 2,
+                    "publication_date": null,
+                    "as_of_cutoff_verified": false,
+                    "provider_calls": 0
+                  },
+                  "calls": 4,
+                  "downloads": 0
+                },
+                "stderr": "",
+                "request_ref": "g1.w20_call_kill_after_import.run3.request.json",
+                "response_ref": "g1.w20_call_kill_after_import.run3.response.json",
+                "stderr_ref": "g1.w20_call_kill_after_import.run3.stderr.txt",
+                "et_fixture_requests": 0,
+                "adapter_fixture_requests": 0,
+                "receipt_tag": "w20_call_kill_after_import.run3",
+                "fixture_scenario": "success",
+                "fixture_ref": "g1.w20_call_kill_after_import.run3.fixture.json",
+                "fixture_sha256": "5b534d083f662e7edfce8a585db215251896dc164ac90495bd14a81551b8fa03",
+                "expected_original_content_sha256": "d4142eeb8a3eae2e3c37d64d3e588de5faacfc16a57becea3dda75338f4acfeb",
+                "request_sha256": "eb6835adce9768f6e5605f83eb15bc604f917e885d8a92fe37bb38304c96c854",
+                "response_sha256": "9a245ce15ecf0a182575af288ec1531a6ca3826912d6edb4ed96bfe054c33892",
+                "killed": false,
+                "kill_reason": null,
+                "adapter_fetch_requests": 0,
+                "fixture_requests": 0
+              }
+            ],
+            "elapsed_seconds": 29.6174
+          },
+          "provider_counters": {
+            "fixture_requests": 2
+          },
+          "request_ref": null,
+          "response_ref": null,
+          "receipt_refs": [],
+          "diagnostics": [
+            "all supplemental assertions observed"
+          ]
+        }
+      ],
+      "oracle_findings": []
+    }
+  ]
+}

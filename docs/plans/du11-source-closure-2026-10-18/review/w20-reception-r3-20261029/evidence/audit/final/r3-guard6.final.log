@@ -1,0 +1,11 @@
+test_far_currency_does_not_bind (__main__.LocalWindowBound.test_far_currency_does_not_bind) ... ok
+test_left_slice_cannot_drop_marker_word_guard (__main__.LocalWindowBound.test_left_slice_cannot_drop_marker_word_guard) ... ok
+test_near_currency_of_another_amount_does_not_donate (__main__.LocalWindowBound.test_near_currency_of_another_amount_does_not_donate) ... ok
+test_near_explicit_currency_still_binds (__main__.LocalWindowBound.test_near_explicit_currency_still_binds) ... ok
+test_right_guard_rejects_cut_currency_word (__main__.LocalWindowBound.test_right_guard_rejects_cut_currency_word) ... ok
+test_truly_attached_left_currency_at_window_edge (__main__.LocalWindowBound.test_truly_attached_left_currency_at_window_edge) ... ok
+
+----------------------------------------------------------------------
+Ran 6 tests in 0.005s
+
+OK

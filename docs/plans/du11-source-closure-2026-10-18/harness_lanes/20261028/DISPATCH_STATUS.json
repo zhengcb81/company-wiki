@@ -1,10 +1,10 @@
 {
-  "status": "R2_REWORK_DELIVERED_ROOT_REVIEW_FIVE_SCOPED_FINDINGS_REMAIN",
+  "status": "ALL_THREE_ACCEPTED_MERGED",
   "independent_card_review": "APPROVE_OPEN0",
   "priorities": {
-    "W20-AUDIT-CHECKPOINTS": "RETURN_FOR_IMPROVEMENT",
-    "W20-RF-ADOPTION": "RETURN_FOR_IMPROVEMENT",
-    "W20-FF-REPLAY": "RETURN_FOR_IMPROVEMENT"
+    "W20-AUDIT-CHECKPOINTS": "COMPLETE_MERGED",
+    "W20-RF-ADOPTION": "COMPLETE_MERGED",
+    "W20-FF-REPLAY": "COMPLETE_MERGED"
   },
   "card_sha256": {
     "W20-AUDIT-CHECKPOINTS": "1b5897fa7839cb9280b13c6dd45b50c9e4c3bdb7a7db299560d3a82dbc5dc4a9",
@@ -15,17 +15,18 @@
   "count_policy": "derive task count from remaining work, dependency and receiving cost; never fixed3",
   "no_author_implementation_started_by_root": true,
   "received_on": "2026-10-29",
-  "root_reception_entry": "../../review/w20-reception-r2-20261029/README.md",
+  "root_reception_entry": "../../review/w20-reception-r3-20261029/README.md",
   "mainline_loop": "PAUSED_NOT_RESUMED",
-  "merge_status": "NOT_MERGED",
+  "merge_status": "ALL_THREE_MAINLINES",
   "author_heads": {
     "W20-AUDIT-CHECKPOINTS": "da17f2b5b4404c650e77671601e10553b879d2e7",
     "W20-RF-ADOPTION": "b2979af6522dd4deb9d493f228f24c52a6aa03a5",
     "W20-FF-REPLAY": "a693e10da2fc14c96fa9e96e0c6406a6a3fbb1ec"
   },
-  "return_cards": {
-    "W20-AUDIT-CHECKPOINTS": "../../review/w20-reception-r2-20261029/RETURN_AUDIT.md",
-    "W20-RF-ADOPTION": "../../review/w20-reception-r2-20261029/RETURN_RF.md",
-    "W20-FF-REPLAY": "../../review/w20-reception-r2-20261029/RETURN_FF.md"
+  "return_cards": {},
+  "final_mainlines": {
+    "W20-AUDIT-CHECKPOINTS": "55c29fe5f3a9554f883156e3a4232eece04bf581",
+    "W20-RF-ADOPTION": "3e8fbc5522a814abc4db7d828c3e4dcf84f308b8",
+    "W20-FF-REPLAY": "5ec54e02b8db69d0f38adfd0d7cee58f04f3a2b8"
   }
 }

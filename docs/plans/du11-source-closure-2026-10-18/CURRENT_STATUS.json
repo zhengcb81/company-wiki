@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-29",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "MAINLINE_PAUSED_W20_REWORK_R2_REVIEW_COMPLETE_SCOPED_REWORK_REMAINS",
+  "overall_status": "MAINLINE_LOOP_PAUSED_W20_ALL_COMPONENTS_ACCEPTED_MERGED",
   "parallel_packages_20261025": {
     "status": "W16_W17_W18_ROOT_COMPONENT_ACCEPTED_MERGED",
     "entry": "harness_lanes/20261025/README.md",
@@ -21,7 +21,7 @@
     "new_downloads": 0,
     "annual14_grade_unchanged": "Historical8/6/0 and10/4/0 reports preserved; latest source/input12/2/0; response semantics NOT_REVIEWED and RF OPEN"
   },
-  "current_authorized_scope": "W20 returned-delivery reacceptance completed; five scoped findings remain. No mainline implementation/loop/paid/download resumed, no author source modified or branch merged.",
+  "current_authorized_scope": "User requested receipt, direct remaining small fixes, merge/push/update PWF. W20 complete; prior pause on mainline company loop remains. No new paid/download/source-production loop started.",
   "parent_plan_id": "document-understanding-2026-10-13",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
@@ -2345,7 +2345,7 @@
     "published": true,
     "push_failure": "47 targets /392 collected /600s; two regressions being root-fixed, not waived by narrower daily gate"
   },
-  "next_action": "WAIT_FOR_W20_SCOPED_REWORK_REDELIVERY_MAINLINE_PAUSED",
+  "next_action": "WAIT_FOR_USER_RESUME_SOURCE_QUALITY_MAINLINE",
   "c3_runtime_recovery_20261026": {
     "entry": "review/pdf-c3-20261026/RUNTIME_RECOVERY.md",
     "environment_independent": "PASS_ZERO_OPEN_25_TESTS_AND_REAL_WORKER_ENTRYPOINTS",
@@ -2959,7 +2959,7 @@
     "RF primary assurance/runs daily_alert/weekly_alert/weekly_manifest"
   ],
   "pause_requested_by_user": true,
-  "paused_scope": "ROOT mainline implementation/paid summary/company loop remains paused; W20 original harnesses may address the attached return cards if user forwards them.",
+  "paused_scope": "Mainline source production/paid summaries/company loop paused; W20 receipts/direct fixes/merge/deploy now complete, no outstanding W20 author rework",
   "own_uncommitted_runtime": [],
   "qa_provisional_publication": {
     "code_commit": "c6c446d0eebc8f6e6f6903bd677c04eebaf65077",
@@ -3016,6 +3016,21 @@
       "/root/w20_ff_reception"
     ],
     "new_supplier_posts": 0,
-    "new_downloads": 0
+    "new_downloads": 0,
+    "superseded_by": "review/w20-reception-r3-20261029/README.md"
+  },
+  "w20_reception_r3_20261029": {
+    "status": "ALL_THREE_ACCEPTED_MERGED",
+    "entry": "review/w20-reception-r3-20261029/README.md",
+    "summary": "review/w20-reception-r3-20261029/SUMMARY.json",
+    "publication": "review/w20-reception-r3-20261029/mainline-publication.json",
+    "audit_main": "55c29fe5f3a9554f883156e3a4232eece04bf581",
+    "audit_remote": "NOT_CONFIGURED",
+    "rf_main": "3e8fbc5522a814abc4db7d828c3e4dcf84f308b8",
+    "ff_main": "5ec54e02b8db69d0f38adfd0d7cee58f04f3a2b8",
+    "rf_ci": "SUCCESS_40949113523",
+    "ff_ci": "SUCCESS_40950402165",
+    "audit_installed": "TWO_TARGETS_43FILES_MATCH",
+    "overall_goal_complete": false
   }
 }

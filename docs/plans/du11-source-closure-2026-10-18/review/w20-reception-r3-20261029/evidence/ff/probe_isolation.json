@@ -1,0 +1,39 @@
+{
+  "scope": "pure per-call subprocess boundary concurrency probe, not actual CWP reader E2E",
+  "requests": [
+    {
+      "entity": "b",
+      "wiki": "unused-b",
+      "sha": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+    },
+    {
+      "entity": "a",
+      "wiki": "unused-a",
+      "sha": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+    }
+  ],
+  "results": {
+    "a": {
+      "state": "confirmed",
+      "ref": {
+        "content_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+      },
+      "error": null
+    },
+    "b": {
+      "state": "confirmed",
+      "ref": {
+        "content_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      },
+      "error": null
+    }
+  },
+  "stdio_unchanged": true,
+  "nonzero_child_result": {
+    "state": "probe_error",
+    "ref": null,
+    "error": "probe rc=7 stderr=query failed"
+  },
+  "old_process_global_readback_removed": true,
+  "shared_last_error_removed": true
+}

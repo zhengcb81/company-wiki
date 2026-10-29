@@ -1,0 +1,79 @@
+{
+  "schema_version": "w20-root-acceptance/1",
+  "date": "2026-10-29",
+  "status": "ALL_THREE_COMPONENTS_ACCEPTED_MERGED",
+  "mainline_company_loop": "PAUSED_UNCHANGED",
+  "overall_goal_complete": false,
+  "new_supplier_posts": 0,
+  "new_downloads": 0,
+  "repositories": [
+    {
+      "id": "W20-AUDIT-CHECKPOINTS",
+      "main": "55c29fe5f3a9554f883156e3a4232eece04bf581",
+      "author_head": "5b8aa7182e7f7b219b0ef279106f1fc1886137b1",
+      "independent_final": "audit-review-final.json",
+      "status": "LOCAL_MAIN_MERGED",
+      "remote": "NOT_CONFIGURED_NOT_CREATED",
+      "root_fixes": [
+        "b5cd51cec07147c541b54522954adec24b5068c0",
+        "55c29fe5f3a9554f883156e3a4232eece04bf581"
+      ],
+      "tests": "W20 final48P; original7/typed4/independent6/numeric7/DU5compat48/CLI11 steps PASS; overlapping scopes not summed",
+      "installed": "two physical .claude/.agents targets,8 files each,all43 files MATCH,fresh CLI0",
+      "remaining": "producer declared anchors / real company semantic audit remain ROOT followup, not this card acceptance"
+    },
+    {
+      "id": "W20-RF-ADOPTION",
+      "main": "3e8fbc5522a814abc4db7d828c3e4dcf84f308b8",
+      "author_head": "3e8fbc5522a814abc4db7d828c3e4dcf84f308b8",
+      "independent_final": "rf-review.json",
+      "status": "ORIGIN_MAIN_PUSHED_EXACT_CI_SUCCESS",
+      "tests": "independent42P/9.91s;normal prepush595P1skip36subtests/56.15s",
+      "ci": [
+        {
+          "id": 40949113523,
+          "head_sha": "3e8fbc5522a814abc4db7d828c3e4dcf84f308b8",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/40949113523",
+          "updated_at": "2026-10-29T20:27:52Z"
+        },
+        {
+          "id": 40945534363,
+          "head_sha": "3e8fbc5522a814abc4db7d828c3e4dcf84f308b8",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/40945534363",
+          "updated_at": "2026-10-29T20:03:55Z"
+        }
+      ],
+      "wip_preserved": "three assurance files verified byte SHA unchanged",
+      "remaining": "actual real-company adoption still OPEN; only read-only observation tool accepted"
+    },
+    {
+      "id": "W20-FF-REPLAY",
+      "main": "5ec54e02b8db69d0f38adfd0d7cee58f04f3a2b8",
+      "author_head": "2b610881b9da509d6fb3f3bcbeb5b32707e051f2",
+      "independent_final": "ff-review-final.json",
+      "status": "ORIGIN_MAIN_PUSHED_EXACT_CI_SUCCESS",
+      "root_fix": "5ec54e02b8db69d0f38adfd0d7cee58f04f3a2b8",
+      "tests": "ROOT203P/10.20s;independent final7P/0.17s and actual handler probe;normal prepush935P7skip78subtests/107.23s",
+      "ci": [
+        {
+          "id": 40950402165,
+          "head_sha": "5ec54e02b8db69d0f38adfd0d7cee58f04f3a2b8",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/zhengcb81/filing-fetch/actions/runs/40950402165",
+          "updated_at": "2026-10-29T20:37:17Z"
+        }
+      ],
+      "full_matrix": "41 required authority unchanged; two retained actual lost-reply/control reports rechecked by final oracle; no claim of a new complete41 replay"
+    }
+  ],
+  "root_worktree_cleanup": "two ROOT temporary worktrees removed only after clean check and merge; branches/commits retained; all three author worktrees untouched",
+  "source_originals_config": "unchanged",
+  "budget_ledger": "unchanged;10M tokens/$20 including old unknown, mother1800368 tokens/$0.727945",
+  "next_action": "WAIT_FOR_USER_RESUME_MAINLINE; then source information specificity A/B, IR source roles, SDK cold probe correction, real summary/cache/RF/holdout loop per pause handoff",
+  "author_handoffs": "preserved frozen delivery records; final integration status is this summary/mainline-publication.json, not old READY labels"
+}

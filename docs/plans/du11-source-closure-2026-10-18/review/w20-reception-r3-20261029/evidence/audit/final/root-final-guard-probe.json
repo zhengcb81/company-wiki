@@ -1,0 +1,32 @@
+[
+  {
+    "text": "ACNY         1,250,000,000",
+    "families": [
+      "CNY"
+    ],
+    "start": 13,
+    "end": 26
+  },
+  {
+    "text": "1,250,000,000         CNYx",
+    "families": [],
+    "start": 0,
+    "end": 13
+  },
+  {
+    "text": "CNY         1,250,000,000",
+    "families": [
+      "CNY"
+    ],
+    "start": 12,
+    "end": 25
+  },
+  {
+    "text": "1,250,000,000         CNY ",
+    "families": [
+      "CNY"
+    ],
+    "start": 0,
+    "end": 13
+  }
+]

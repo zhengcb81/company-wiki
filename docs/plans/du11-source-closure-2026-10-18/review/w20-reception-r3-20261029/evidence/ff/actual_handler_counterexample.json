@@ -1,0 +1,44 @@
+[
+  {
+    "probe_state": "not_found",
+    "handler_result": "FAIL",
+    "actual": {
+      "interruption_phase": "mid_import_observed",
+      "recovery_branch": "not_durable_at_kill",
+      "durable_state_public_readback": "not_found",
+      "kill_reason": "harness interruption at observed boundary"
+    },
+    "diagnostics": [
+      "durable state at kill must be observed through the public CWP interface",
+      "the mid-import kill must be observed as NOT durable (import not started)"
+    ]
+  },
+  {
+    "probe_state": "probe_error",
+    "handler_result": "FAIL",
+    "actual": {
+      "interruption_phase": "mid_import_observed",
+      "recovery_branch": "not_durable_at_kill",
+      "durable_state_public_readback": "probe_error",
+      "kill_reason": "harness interruption at observed boundary"
+    },
+    "diagnostics": [
+      "durable state at kill must be observed through the public CWP interface",
+      "the mid-import kill must be observed as NOT durable (import not started)"
+    ]
+  },
+  {
+    "probe_state": "confirmed",
+    "handler_result": "FAIL",
+    "actual": {
+      "interruption_phase": "mid_import_observed",
+      "recovery_branch": "not_durable_at_kill",
+      "durable_state_public_readback": "confirmed",
+      "kill_reason": "harness interruption at observed boundary"
+    },
+    "diagnostics": [
+      "durable state at kill must be observed through the public CWP interface",
+      "the mid-import kill must be observed as NOT durable (import not started)"
+    ]
+  }
+]

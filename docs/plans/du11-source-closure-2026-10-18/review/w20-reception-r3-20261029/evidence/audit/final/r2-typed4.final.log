@@ -1,0 +1,10 @@
+BOUND_HELPER C:\Users\郑曾波\Projects\revenue-forecast-audit-w20-root-final\skills\revenue-forecast-audit\scripts\summary_checkpoint_observations.py RAW_SHA256=6b3e060c345b91c240dd1b3b088734242267dc4114ad513ddaa75825a9bec73a
+test_currency_must_stay_bound_to_the_matching_number (__main__.TypedBindingRegression.test_currency_must_stay_bound_to_the_matching_number) ... ok
+test_explicit_amount_unit_must_not_borrow_another_percent (__main__.TypedBindingRegression.test_explicit_amount_unit_must_not_borrow_another_percent) ... ok
+test_plain_amount_literal_control (__main__.TypedBindingRegression.test_plain_amount_literal_control) ... ok
+test_single_currency_conversion_control (__main__.TypedBindingRegression.test_single_currency_conversion_control) ... ok
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.001s
+
+OK

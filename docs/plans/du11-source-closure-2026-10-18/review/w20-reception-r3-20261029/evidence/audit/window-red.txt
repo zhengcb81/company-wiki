@@ -1,0 +1,61 @@
+test_far_currency_does_not_bind (__main__.LocalWindowBound.test_far_currency_does_not_bind) ... 
+  test_far_currency_does_not_bind (__main__.LocalWindowBound.test_far_currency_does_not_bind) (distance=20) ... FAIL
+  test_far_currency_does_not_bind (__main__.LocalWindowBound.test_far_currency_does_not_bind) (distance=40) ... FAIL
+  test_far_currency_does_not_bind (__main__.LocalWindowBound.test_far_currency_does_not_bind) (distance=80) ... FAIL
+test_near_currency_of_another_amount_does_not_donate (__main__.LocalWindowBound.test_near_currency_of_another_amount_does_not_donate) ... 
+  test_near_currency_of_another_amount_does_not_donate (__main__.LocalWindowBound.test_near_currency_of_another_amount_does_not_donate) (text='收入1,250,000,000和人民币余额2元') ... FAIL
+  test_near_currency_of_another_amount_does_not_donate (__main__.LocalWindowBound.test_near_currency_of_another_amount_does_not_donate) (text='收入1,250,000,000及CNY现金2元') ... FAIL
+test_near_explicit_currency_still_binds (__main__.LocalWindowBound.test_near_explicit_currency_still_binds) ... ok
+
+======================================================================
+FAIL: test_far_currency_does_not_bind (__main__.LocalWindowBound.test_far_currency_does_not_bind) (distance=20)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\company-wiki\.planning\w20-reception-r3-20261029\audit\test_window_bound.py", line 11, in test_far_currency_does_not_bind
+    self.assertEqual(c._local_currency_families(text,match.start(),match.end()),set())
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Items in the first set but not the second:
+'CNY'
+
+======================================================================
+FAIL: test_far_currency_does_not_bind (__main__.LocalWindowBound.test_far_currency_does_not_bind) (distance=40)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\company-wiki\.planning\w20-reception-r3-20261029\audit\test_window_bound.py", line 11, in test_far_currency_does_not_bind
+    self.assertEqual(c._local_currency_families(text,match.start(),match.end()),set())
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Items in the first set but not the second:
+'CNY'
+
+======================================================================
+FAIL: test_far_currency_does_not_bind (__main__.LocalWindowBound.test_far_currency_does_not_bind) (distance=80)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\company-wiki\.planning\w20-reception-r3-20261029\audit\test_window_bound.py", line 11, in test_far_currency_does_not_bind
+    self.assertEqual(c._local_currency_families(text,match.start(),match.end()),set())
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: Items in the first set but not the second:
+'CNY'
+
+======================================================================
+FAIL: test_near_currency_of_another_amount_does_not_donate (__main__.LocalWindowBound.test_near_currency_of_another_amount_does_not_donate) (text='收入1,250,000,000和人民币余额2元')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\company-wiki\.planning\w20-reception-r3-20261029\audit\test_window_bound.py", line 20, in test_near_currency_of_another_amount_does_not_donate
+    self.assertNotEqual(anchor['status'],'scale_equivalent')
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'scale_equivalent' == 'scale_equivalent'
+
+======================================================================
+FAIL: test_near_currency_of_another_amount_does_not_donate (__main__.LocalWindowBound.test_near_currency_of_another_amount_does_not_donate) (text='收入1,250,000,000及CNY现金2元')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\company-wiki\.planning\w20-reception-r3-20261029\audit\test_window_bound.py", line 20, in test_near_currency_of_another_amount_does_not_donate
+    self.assertNotEqual(anchor['status'],'scale_equivalent')
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'scale_equivalent' == 'scale_equivalent'
+
+----------------------------------------------------------------------
+Ran 3 tests in 0.009s
+
+FAILED (failures=5)

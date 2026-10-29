@@ -1,0 +1,197 @@
+{
+  "card_id": "W20-AUDIT-CHECKPOINTS",
+  "date": "2026-10-29",
+  "review_round": "ROOT_R3_FINAL",
+  "verdict": "PASS",
+  "open_findings": [],
+  "approved_implementation_commit": "55c29fe5f3a9554f883156e3a4232eece04bf581",
+  "workdir": "C:/Users/郑曾波/Projects/revenue-forecast-audit-w20-root-final",
+  "source_binding": [
+    {
+      "path": "skills/revenue-forecast-audit/scripts/summary_checkpoint_observations.py",
+      "raw_sha256": "6b3e060c345b91c240dd1b3b088734242267dc4114ad513ddaa75825a9bec73a",
+      "lf_sha256": "4283cd680c55f883dc1b095da008caa1beb467eaa7dd1f26a3965a831f949732",
+      "commit_lf_match": true
+    },
+    {
+      "path": "skills/revenue-forecast-audit/scripts/summary_review_packet.py",
+      "raw_sha256": "8c06d3eea21ee5c0f0fdc8cb73dd7c422b2709a6c62e5bdec6e75bb0784296c8",
+      "lf_sha256": "8c06d3eea21ee5c0f0fdc8cb73dd7c422b2709a6c62e5bdec6e75bb0784296c8",
+      "commit_lf_match": true
+    },
+    {
+      "path": "skills/revenue-forecast-audit/scripts/numeric_audit.py",
+      "raw_sha256": "39cb4f8f561f14f406b5c79639f7395af915e1f9027b15a0e2ac8e0c40949aec",
+      "lf_sha256": "39cb4f8f561f14f406b5c79639f7395af915e1f9027b15a0e2ac8e0c40949aec",
+      "commit_lf_match": true
+    },
+    {
+      "path": "skills/revenue-forecast-audit/scripts/summary_review_contracts.py",
+      "raw_sha256": "f6e34832f94cbea719517398c36ddc99513c58da07424330f1300c3826af424c",
+      "lf_sha256": "f6e34832f94cbea719517398c36ddc99513c58da07424330f1300c3826af424c",
+      "commit_lf_match": true
+    },
+    {
+      "path": "tests/test_w20_root_currency_binding.py",
+      "raw_sha256": "c0f80306630e61a859b202ca3e34cc2ea35157a80d2c39b8f942b97badcbe3cc",
+      "lf_sha256": "cec3aea209226586b5986b6f4be3126ad01b8a58498a82a992985d07b1235855",
+      "commit_lf_match": true
+    }
+  ],
+  "binding_note": "Reviewed LF bytes match the approved commit blobs; raw bytes recorded separately because Windows mixed endings differ. Author handoff remains bound to d306ac0: this final ROOT receipt explicitly supersedes that helper/test binding; it does not falsely alter the author receipt. The original author worktree is unchanged.",
+  "root_causes": [
+    {
+      "id": "W20-AUDIT-R1.INV1",
+      "status": "FIXED",
+      "evidence": "Explicit declared unit determines class/scale only; identity amount scale does not borrow a different percentage from claim text; old typed4 and new W20 pass."
+    },
+    {
+      "id": "W20-AUDIT-R1.INV2",
+      "status": "FIXED",
+      "evidence": "Currency/amount-scale regex markers are derived from existing vocabularies; only directly attached prefixes/suffixes bind. Both sides use bounded 12-character payload plus one boundary guard. Cross-amount near/far donation, conflicting markers and cut-word false matches now stay unknown/partial. No sentence keyword patch."
+    },
+    {
+      "id": "W20-AUDIT-R2",
+      "status": "FIXED",
+      "evidence": "Shared explicit read availability remains enforced in both packet and standalone entry; retained metadata/context remains visible."
+    }
+  ],
+  "independent_tests": [
+    {
+      "name": "r1-independent7",
+      "command": [
+        "C:/Miniconda/python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w20-reception-r3-20261029\\audit\\run_bound_test.py",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit-w20-root-final",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\w20-reception-20261029\\evidence\\audit\\test_independent_expectations.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.31,
+      "output_tail": "_not_full_h1_literal_anchor) ... ok\ntest_ratio_must_not_equal_monetary_amount (__main__.RootRegressions.test_ratio_must_not_equal_monetary_amount) ... ok\ntest_signed_value_must_not_lose_minus (__main__.RootRegressions.test_signed_value_must_not_lose_minus) ... ok\ntest_valid_same_currency_scale_equivalence_remains (__main__.RootRegressions.test_valid_same_currency_scale_equivalence_remains) ... ok\ntest_yen_is_not_literal_cny_token (__main__.RootRegressions.test_yen_is_not_literal_cny_token) ... ok\n\n----------------------------------------------------------------------\nRan 7 tests in 0.001s\n\nOK\n"
+    },
+    {
+      "name": "r2-typed4",
+      "command": [
+        "C:/Miniconda/python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w20-reception-r3-20261029\\audit\\run_bound_test.py",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit-w20-root-final",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\w20-reception-r2-20261029\\evidence\\audit\\test_typed_binding.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.289,
+      "output_tail": "_the_matching_number (__main__.TypedBindingRegression.test_currency_must_stay_bound_to_the_matching_number) ... ok\ntest_explicit_amount_unit_must_not_borrow_another_percent (__main__.TypedBindingRegression.test_explicit_amount_unit_must_not_borrow_another_percent) ... ok\ntest_plain_amount_literal_control (__main__.TypedBindingRegression.test_plain_amount_literal_control) ... ok\ntest_single_currency_conversion_control (__main__.TypedBindingRegression.test_single_currency_conversion_control) ... ok\n\n----------------------------------------------------------------------\nRan 4 tests in 0.001s\n\nOK\n"
+    },
+    {
+      "name": "r3-guard6",
+      "command": [
+        "C:/Miniconda/python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w20-reception-r3-20261029\\audit\\test_root_final_guard.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.34,
+      "output_tail": "r_currency_of_another_amount_does_not_donate (__main__.LocalWindowBound.test_near_currency_of_another_amount_does_not_donate) ... ok\ntest_near_explicit_currency_still_binds (__main__.LocalWindowBound.test_near_explicit_currency_still_binds) ... ok\ntest_right_guard_rejects_cut_currency_word (__main__.LocalWindowBound.test_right_guard_rejects_cut_currency_word) ... ok\ntest_truly_attached_left_currency_at_window_edge (__main__.LocalWindowBound.test_truly_attached_left_currency_at_window_edge) ... ok\n\n----------------------------------------------------------------------\nRan 6 tests in 0.005s\n\nOK\n"
+    },
+    {
+      "name": "w20-unit48",
+      "command": [
+        "C:/Miniconda/python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_w20_*.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.54,
+      "output_tail": "{\"attempt_id\": \"20261029T203448Z-43069464\", \"attempt_dir\": \"C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\.planning\\\\w20-reception-r3-20261029\\\\audit\\\\final-temporary\\\\w20-helper-2_jl92mq\\\\out\\\\20261029T203448Z-43069464\", \"output_file\": \"C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\.planning\\\\w20-reception-r3-20261029\\\\audit\\\\final-temporary\\\\w20-helper-2_jl92mq\\\\out\\\\20261029T203448Z-43069464\\\\checkpoint-observations.json\"}\n................................................\n----------------------------------------------------------------------\nRan 48 tests in 0.205s\n\nOK\n"
+    },
+    {
+      "name": "numeric7",
+      "command": [
+        "C:/Miniconda/python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_numeric_audit.py"
+      ],
+      "exit_code": 0,
+      "seconds": 0.92,
+      "output_tail": ".......\n----------------------------------------------------------------------\nRan 7 tests in 0.524s\n\nOK\n"
+    },
+    {
+      "name": "du5-compat48",
+      "command": [
+        "C:/Miniconda/python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_du5_*.py"
+      ],
+      "exit_code": 0,
+      "seconds": 1.276,
+      "output_tail": "................................................\n----------------------------------------------------------------------\nRan 48 tests in 0.834s\n\nOK\n"
+    },
+    {
+      "name": "cli11",
+      "command": [
+        "C:/Miniconda/python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "tests/fixtures/w20_checkpoints/run_e2e_chain.py",
+        "--work",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w20-reception-r3-20261029\\audit\\final-temporary\\cli",
+        "--repo",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit-w20-root-final"
+      ],
+      "exit_code": 0,
+      "seconds": 2.954,
+      "output_tail": "{\"expert_input\": \"C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\.planning\\\\w20-reception-r3-20261029\\\\audit\\\\final-temporary\\\\cli\\\\expert-input\\\\expert-input.json\", \"steps\": 11, \"coverage_sufficiency\": \"records_complete\", \"coverage_gaps\": 0}\n"
+    }
+  ],
+  "cleanup": {
+    "root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w20-reception-r3-20261029\\audit\\final-temporary",
+    "before_exists": false,
+    "after_exists": false,
+    "restored": true,
+    "removed_files": 45,
+    "end_bytes_before_cleanup": 236658,
+    "peak_bytes": null,
+    "peak_note": "not sampled"
+  },
+  "before_after_source_stable": true,
+  "tracked_worktree_status_after": "",
+  "limits": [
+    "PASS covers this offline audit-checkpoint implementation, compatibility and synthetic public-CLI wiring. It does not sign true company forecasts, paid summaries, source completeness, RF adoption or the paused company loop.",
+    "The previously disclosed producer claim-anchor-field followup remains outside this card and unchanged. Missing/ambiguous data remains unknown rather than automated semantic approval.",
+    "No full-repository repeat or broadened audit domain. Default financial conversion truth remains owned by numeric/measure tools and independent reviewers.",
+    "Original initial reports/RED are preserved. Root-final-guard-probe.json is pre-left-fix evidence and must not be interpreted as current failure."
+  ],
+  "next_action": "ROOT may merge approved 55c29fe ancestry and perform its existing publication/install process. No further author return is required for this card. No new permissions or gates were introduced."
+}

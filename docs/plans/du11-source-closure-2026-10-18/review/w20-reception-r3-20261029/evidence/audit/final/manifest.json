@@ -1,0 +1,82 @@
+[
+  {
+    "path": "audit-left-guard-green.txt",
+    "sha256": "013394890a778792a676cb88e1d74ad251c0609cf2f9248c3fe252540011456c",
+    "bytes": 455
+  },
+  {
+    "path": "audit-left-guard-red.txt",
+    "sha256": "e891c4e0f00f675005ab01b392e7ed23879d2ed0dcd557abef957eed89437660",
+    "bytes": 2635
+  },
+  {
+    "path": "audit-root-green.txt",
+    "sha256": "d1ca8dcd3d3f5505d1f5c5a2155fa7589a3a3b1db7e327c092a6dc58ef8a8cc6",
+    "bytes": 454
+  },
+  {
+    "path": "audit-root-red.txt",
+    "sha256": "e933d6722ef1dd69e11e6898c893a5748668d8d4f4e417aedacd728dd486d9d1",
+    "bytes": 4763
+  },
+  {
+    "path": "cli11.final.log",
+    "sha256": "e16a397804a326b6d92adc6d5712bacde7bf819698b3db47f25ded38abcc1ab8",
+    "bytes": 243
+  },
+  {
+    "path": "du5-compat48.final.log",
+    "sha256": "6c8778f1013ab3905e97bbf7ba1263778e53c8a2bed675dceaddd0ea596ba1a5",
+    "bytes": 152
+  },
+  {
+    "path": "final-tests.json",
+    "sha256": "c2a36cf6f984a57e555f95659fb88c894647d8594b7ca6db7e433ece3453e5bc",
+    "bytes": 9834
+  },
+  {
+    "path": "numeric7.final.log",
+    "sha256": "136ffe4ed6f8d4b84321f416242e980eb4537e72004a4787136dfff023795e48",
+    "bytes": 110
+  },
+  {
+    "path": "r1-independent7.final.log",
+    "sha256": "8cdaf1a806625cb287a4a554ef03a761b6abc43343ee74a7880c50cdf0158f39",
+    "bytes": 1187
+  },
+  {
+    "path": "r2-typed4.final.log",
+    "sha256": "466487870a91e940a6650d9a8a53198f290e8b5246c7c02596349c0ee0475b6e",
+    "bytes": 870
+  },
+  {
+    "path": "r3-guard6.final.log",
+    "sha256": "b2ba3cdaed07a021960816a03db63acf66245d50d43da8d015491772a5b7da27",
+    "bytes": 845
+  },
+  {
+    "path": "root-final-guard-probe.json",
+    "sha256": "adb8a9f3a0be26960625bc33c5b270a7a13d03e4c82ee3c73b03d8febbbee94a",
+    "bytes": 489
+  },
+  {
+    "path": "run_bound_test.py",
+    "sha256": "bf8c1e2a7ea6c7c0a4cfcc9bbbd44507a0788a7c39bddb9b8ff57d9552ec0046",
+    "bytes": 513
+  },
+  {
+    "path": "run_final_tests.py",
+    "sha256": "5d09de8c9791b04f277a673e57fb1db06639ee79e267b788c316da1ae270a90c",
+    "bytes": 3674
+  },
+  {
+    "path": "test_root_final_guard.py",
+    "sha256": "f3f6abb71b3f161b65a26def5d2ce816a822aed950fab3690e02552f375890cd",
+    "bytes": 2664
+  },
+  {
+    "path": "w20-unit48.final.log",
+    "sha256": "f4ed78072f6a9d118c3ba13415cdcf52cb6c26b5ae125f8afad790950ae1af3d",
+    "bytes": 583
+  }
+]

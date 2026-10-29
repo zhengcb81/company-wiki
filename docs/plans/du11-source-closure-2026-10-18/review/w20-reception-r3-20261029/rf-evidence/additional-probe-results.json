@@ -1,0 +1,186 @@
+{
+  "projected_actual_parent_index": 1,
+  "normal": {
+    "item": {
+      "kind": "span",
+      "id": "urn:company-wiki:evidence-span:sha256:7ccd2568c69283c8bac1c8889e8896c0993db69415d9ff45af0ccb20169eb710",
+      "id_scope": "canonical",
+      "source_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "status": "used",
+      "support_use": null,
+      "cited_by": [
+        {
+          "node_type": "coverage_dimension_parameter",
+          "location": "research_coverage.dimensions[1].parameter_ids[0]",
+          "ids": {
+            "dimension": "growth_curve",
+            "parameter_id": "0_base_2026"
+          }
+        },
+        {
+          "node_type": "driver_tree_parameter",
+          "location": "growth_driver_analysis.drivers[0].parameter_ids[0]",
+          "ids": {
+            "driver_id": "fixture_driver_Segment_A",
+            "parameter_id": "0_base_2026"
+          }
+        },
+        {
+          "node_type": "segment_scenario_driver",
+          "location": "segments[0].scenarios.base.driver_parameter_ids.revenue[0]",
+          "ids": {
+            "segment": "Segment A",
+            "scenario": "base",
+            "driver": "revenue",
+            "year": "2026",
+            "parameter_id": "0_base_2026"
+          }
+        }
+      ],
+      "reasons": [
+        "used_via_bound_claim",
+        "used_via_coverage_dimension",
+        "used_via_driver_tree_parameter",
+        "used_via_segment_driver_slot"
+      ]
+    },
+    "diagnostics": [
+      {
+        "code": "node_family_missing:probability_weighted_forecast",
+        "detail": "final artifact carries no probability_weighted_forecast family",
+        "severity": "info",
+        "item_id": null
+      },
+      {
+        "code": "old_reading_schema_no_support_partition",
+        "detail": "reading 'du-production-reading/1' publishes no citation views; span support partition stays unknown",
+        "severity": "info",
+        "item_id": null
+      },
+      {
+        "code": "span_dependencies_aggregated",
+        "detail": "span urn:company-wiki:evidence-span:sha256:7ccd2568c69283c8bac1c8889e8896c0993db69415d9ff45af0ccb20169eb710 aggregates 1 dependency path(s) across 1 receipt(s): 1 intact, 0 invalid",
+        "severity": "info",
+        "item_id": "urn:company-wiki:evidence-span:sha256:7ccd2568c69283c8bac1c8889e8896c0993db69415d9ff45af0ccb20169eb710"
+      }
+    ]
+  },
+  "missing_hash": {
+    "item": {
+      "kind": "span",
+      "id": "urn:company-wiki:evidence-span:sha256:7ccd2568c69283c8bac1c8889e8896c0993db69415d9ff45af0ccb20169eb710",
+      "id_scope": "canonical",
+      "source_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "status": "used",
+      "support_use": null,
+      "cited_by": [
+        {
+          "node_type": "coverage_dimension_parameter",
+          "location": "research_coverage.dimensions[1].parameter_ids[0]",
+          "ids": {
+            "dimension": "growth_curve",
+            "parameter_id": "0_base_2026"
+          }
+        },
+        {
+          "node_type": "driver_tree_parameter",
+          "location": "growth_driver_analysis.drivers[0].parameter_ids[0]",
+          "ids": {
+            "driver_id": "fixture_driver_Segment_A",
+            "parameter_id": "0_base_2026"
+          }
+        },
+        {
+          "node_type": "segment_scenario_driver",
+          "location": "segments[0].scenarios.base.driver_parameter_ids.revenue[0]",
+          "ids": {
+            "segment": "Segment A",
+            "scenario": "base",
+            "driver": "revenue",
+            "year": "2026",
+            "parameter_id": "0_base_2026"
+          }
+        }
+      ],
+      "reasons": [
+        "used_via_bound_claim",
+        "used_via_coverage_dimension",
+        "used_via_driver_tree_parameter",
+        "used_via_segment_driver_slot"
+      ]
+    },
+    "diagnostics": [
+      {
+        "code": "node_family_missing:probability_weighted_forecast",
+        "detail": "final artifact carries no probability_weighted_forecast family",
+        "severity": "info",
+        "item_id": null
+      },
+      {
+        "code": "hash_missing_unknown",
+        "detail": "receipt[0] dependency carries no source hash; lenient policy: recorded unknown, chain judged from the transported span's canonical parent",
+        "severity": "info",
+        "item_id": "urn:company-wiki:evidence-span:sha256:7ccd2568c69283c8bac1c8889e8896c0993db69415d9ff45af0ccb20169eb710"
+      },
+      {
+        "code": "old_reading_schema_no_support_partition",
+        "detail": "reading 'du-production-reading/1' publishes no citation views; span support partition stays unknown",
+        "severity": "info",
+        "item_id": null
+      },
+      {
+        "code": "span_dependencies_aggregated",
+        "detail": "span urn:company-wiki:evidence-span:sha256:7ccd2568c69283c8bac1c8889e8896c0993db69415d9ff45af0ccb20169eb710 aggregates 1 dependency path(s) across 1 receipt(s): 1 intact, 0 invalid",
+        "severity": "info",
+        "item_id": "urn:company-wiki:evidence-span:sha256:7ccd2568c69283c8bac1c8889e8896c0993db69415d9ff45af0ccb20169eb710"
+      }
+    ]
+  },
+  "wrong_parent_hash": {
+    "item": {
+      "kind": "span",
+      "id": "urn:company-wiki:evidence-span:sha256:7ccd2568c69283c8bac1c8889e8896c0993db69415d9ff45af0ccb20169eb710",
+      "id_scope": "canonical",
+      "source_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+      "status": "unverifiable",
+      "support_use": null,
+      "cited_by": [],
+      "reasons": [
+        "receipt_span_hash_mismatch"
+      ]
+    },
+    "diagnostics": [
+      {
+        "code": "node_family_missing:probability_weighted_forecast",
+        "detail": "final artifact carries no probability_weighted_forecast family",
+        "severity": "info",
+        "item_id": null
+      },
+      {
+        "code": "receipt_span_hash_mismatch",
+        "detail": "receipt[0] source_sha256 0dab86616cffd094… is not the transported span's canonical parent hash",
+        "severity": "warn",
+        "item_id": "urn:company-wiki:evidence-span:sha256:7ccd2568c69283c8bac1c8889e8896c0993db69415d9ff45af0ccb20169eb710"
+      },
+      {
+        "code": "old_reading_schema_no_support_partition",
+        "detail": "reading 'du-production-reading/1' publishes no citation views; span support partition stays unknown",
+        "severity": "info",
+        "item_id": null
+      },
+      {
+        "code": "span_dependencies_aggregated",
+        "detail": "span urn:company-wiki:evidence-span:sha256:7ccd2568c69283c8bac1c8889e8896c0993db69415d9ff45af0ccb20169eb710 aggregates 1 dependency path(s) across 1 receipt(s): 0 intact, 1 invalid",
+        "severity": "info",
+        "item_id": "urn:company-wiki:evidence-span:sha256:7ccd2568c69283c8bac1c8889e8896c0993db69415d9ff45af0ccb20169eb710"
+      }
+    ]
+  },
+  "invalid_deflate_cli": {
+    "exit": 2,
+    "stderr": "narrative-adoption-audit: input_decompress_failed: C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w20-reception-r3-20261029\\rf\\invalid-deflate.json.gz is not readable gzip: Error -3 while decompressing data: invalid block type\n",
+    "stdout": "",
+    "output_exists": false,
+    "gzip_bytes_hex": "1f8b0800000000000003070000000000000000"
+  }
+}
