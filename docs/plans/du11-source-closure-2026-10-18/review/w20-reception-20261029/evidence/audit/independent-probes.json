@@ -1,0 +1,370 @@
+[
+  {
+    "label": "half_year_mismatch_matches_year_only",
+    "claim": {
+      "claim_id": "c",
+      "text": "claim",
+      "value": "1",
+      "unit": "亿元",
+      "period": "2024H1",
+      "subject": "foo",
+      "support": [
+        "f"
+      ]
+    },
+    "fragment": {
+      "fragment_id": "f",
+      "text": "foo 2024H2 revenue 100,000,000元",
+      "reading_state": "read",
+      "role": "narrative",
+      "source_ref": {}
+    },
+    "actual": {
+      "claim_id": "c",
+      "risk_points": [
+        {
+          "code": "script_differs",
+          "detail": "claim and support use different scripts (original-language risk); translation is never assumed or performed here",
+          "status": "observed",
+          "fragment_ids": [
+            "f"
+          ]
+        }
+      ],
+      "anchors": {
+        "rows": [
+          {
+            "anchor_kind": "value",
+            "declared": "1",
+            "declared_unit": "亿元",
+            "status": "scale_equivalent",
+            "fragment_ids": [
+              "f"
+            ],
+            "scale_equivalent_literals": [
+              {
+                "fragment_id": "f",
+                "literal": "100,000,000"
+              }
+            ]
+          },
+          {
+            "anchor_kind": "period",
+            "declared": "2024H1",
+            "status": "literal_match",
+            "fragment_ids": [
+              "f"
+            ]
+          },
+          {
+            "anchor_kind": "subject",
+            "declared": "foo",
+            "status": "literal_match",
+            "fragment_ids": [
+              "f"
+            ]
+          },
+          {
+            "anchor_kind": "unit",
+            "declared": "亿元",
+            "status": "partial_match",
+            "tokens_declared": [
+              "CNY",
+              "亿"
+            ],
+            "tokens_found": [
+              "CNY"
+            ],
+            "fragment_ids": []
+          }
+        ]
+      }
+    }
+  },
+  {
+    "label": "unread_with_present_text",
+    "claim": {
+      "claim_id": "c",
+      "text": "claim",
+      "value": "1",
+      "unit": "亿元",
+      "period": "2024H1",
+      "subject": "foo",
+      "support": [
+        "f"
+      ]
+    },
+    "fragment": {
+      "fragment_id": "f",
+      "text": "foo 2024H2 revenue 100,000,000元",
+      "reading_state": "unread",
+      "role": "narrative",
+      "source_ref": {}
+    },
+    "actual": {
+      "claim_id": "c",
+      "risk_points": [
+        {
+          "code": "script_differs",
+          "detail": "claim and support use different scripts (original-language risk); translation is never assumed or performed here",
+          "status": "observed",
+          "fragment_ids": [
+            "f"
+          ]
+        }
+      ],
+      "anchors": {
+        "rows": [
+          {
+            "anchor_kind": "value",
+            "declared": "1",
+            "declared_unit": "亿元",
+            "status": "scale_equivalent",
+            "fragment_ids": [
+              "f"
+            ],
+            "scale_equivalent_literals": [
+              {
+                "fragment_id": "f",
+                "literal": "100,000,000"
+              }
+            ]
+          },
+          {
+            "anchor_kind": "period",
+            "declared": "2024H1",
+            "status": "literal_match",
+            "fragment_ids": [
+              "f"
+            ]
+          },
+          {
+            "anchor_kind": "subject",
+            "declared": "foo",
+            "status": "literal_match",
+            "fragment_ids": [
+              "f"
+            ]
+          },
+          {
+            "anchor_kind": "unit",
+            "declared": "亿元",
+            "status": "partial_match",
+            "tokens_declared": [
+              "CNY",
+              "亿"
+            ],
+            "tokens_found": [
+              "CNY"
+            ],
+            "fragment_ids": []
+          }
+        ]
+      }
+    }
+  },
+  {
+    "label": "ratio_amount_equivalence",
+    "claim": {
+      "claim_id": "c",
+      "text": "amount 0.1元",
+      "value": "0.1",
+      "unit": "元"
+    },
+    "fragment": {
+      "fragment_id": "f",
+      "text": "ratio 10%",
+      "reading_state": "read",
+      "role": "narrative",
+      "source_ref": {},
+      "unit": "percent"
+    },
+    "actual": {
+      "claim_id": "c",
+      "risk_points": [
+        {
+          "code": "script_differs",
+          "detail": "claim and support use different scripts (original-language risk); translation is never assumed or performed here",
+          "status": "observed",
+          "fragment_ids": [
+            "f"
+          ]
+        },
+        {
+          "code": "unit_field_differs",
+          "detail": "claim unit '元' differs from fragment unit ['percent']",
+          "status": "observed",
+          "fragment_ids": [
+            "f"
+          ]
+        }
+      ],
+      "anchors": {
+        "rows": [
+          {
+            "anchor_kind": "value",
+            "declared": "0.1",
+            "declared_unit": "元",
+            "status": "scale_equivalent",
+            "fragment_ids": [
+              "f"
+            ],
+            "scale_equivalent_literals": [
+              {
+                "fragment_id": "f",
+                "literal": "10"
+              }
+            ]
+          },
+          {
+            "anchor_kind": "period",
+            "declared": null,
+            "status": "not_declared",
+            "fragment_ids": []
+          },
+          {
+            "anchor_kind": "subject",
+            "declared": null,
+            "status": "not_declared",
+            "fragment_ids": []
+          },
+          {
+            "anchor_kind": "unit",
+            "declared": "元",
+            "status": "anchor_absent",
+            "tokens_declared": [
+              "CNY"
+            ],
+            "tokens_found": [],
+            "fragment_ids": []
+          }
+        ]
+      }
+    }
+  },
+  {
+    "label": "unsigned_numeric_literal",
+    "claim": {
+      "claim_id": "c",
+      "text": "profit 5",
+      "value": "5",
+      "unit": "元"
+    },
+    "fragment": {
+      "fragment_id": "f",
+      "text": "loss -5元",
+      "reading_state": "read",
+      "role": "narrative",
+      "source_ref": {}
+    },
+    "actual": {
+      "claim_id": "c",
+      "risk_points": [
+        {
+          "code": "script_differs",
+          "detail": "claim and support use different scripts (original-language risk); translation is never assumed or performed here",
+          "status": "observed",
+          "fragment_ids": [
+            "f"
+          ]
+        }
+      ],
+      "anchors": {
+        "rows": [
+          {
+            "anchor_kind": "value",
+            "declared": "5",
+            "declared_unit": "元",
+            "status": "literal_match",
+            "fragment_ids": [
+              "f"
+            ],
+            "scale_equivalent_literals": []
+          },
+          {
+            "anchor_kind": "period",
+            "declared": null,
+            "status": "not_declared",
+            "fragment_ids": []
+          },
+          {
+            "anchor_kind": "subject",
+            "declared": null,
+            "status": "not_declared",
+            "fragment_ids": []
+          },
+          {
+            "anchor_kind": "unit",
+            "declared": "元",
+            "status": "literal_match",
+            "tokens_declared": [
+              "CNY"
+            ],
+            "tokens_found": [
+              "CNY"
+            ],
+            "fragment_ids": []
+          }
+        ]
+      }
+    }
+  },
+  {
+    "label": "unsupported_currency_yuan",
+    "claim": {
+      "claim_id": "c",
+      "text": "income 5人民币",
+      "value": "5",
+      "unit": "人民币"
+    },
+    "fragment": {
+      "fragment_id": "f",
+      "text": "income 5日元",
+      "reading_state": "read",
+      "role": "narrative",
+      "source_ref": {}
+    },
+    "actual": {
+      "claim_id": "c",
+      "risk_points": [],
+      "anchors": {
+        "rows": [
+          {
+            "anchor_kind": "value",
+            "declared": "5",
+            "declared_unit": "人民币",
+            "status": "literal_match",
+            "fragment_ids": [
+              "f"
+            ],
+            "scale_equivalent_literals": []
+          },
+          {
+            "anchor_kind": "period",
+            "declared": null,
+            "status": "not_declared",
+            "fragment_ids": []
+          },
+          {
+            "anchor_kind": "subject",
+            "declared": null,
+            "status": "not_declared",
+            "fragment_ids": []
+          },
+          {
+            "anchor_kind": "unit",
+            "declared": "人民币",
+            "status": "literal_match",
+            "tokens_declared": [
+              "CNY"
+            ],
+            "tokens_found": [
+              "CNY"
+            ],
+            "fragment_ids": []
+          }
+        ]
+      }
+    }
+  }
+]

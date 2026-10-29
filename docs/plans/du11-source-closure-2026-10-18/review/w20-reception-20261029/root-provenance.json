@@ -1,0 +1,492 @@
+{
+  "checked_at_utc": "2026-10-29T17:12:04.365625+00:00",
+  "scope": "read_only_author_worktrees; no product implementation/merge/model/download",
+  "packages": [
+    {
+      "lane": "w20-audit-checkpoints",
+      "workdir": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit-w20-checkpoints",
+      "head": "7ac295ffe9582533eb004ad10a8afc97f1bebc24",
+      "branch": "codex/w20-audit-checkpoints-20261028",
+      "status": "",
+      "base": "33200f8c947f35be75a77de38040982724e033a7",
+      "base_is_ancestor": true,
+      "tested_commit": "470e1f9f5e196f5e3975744036aa690507be55ba",
+      "reviewed_commit": "470e1f9f5e196f5e3975744036aa690507be55ba",
+      "changes_after_review": [
+        "delivery/w20-audit-checkpoints/handoff.json",
+        "delivery/w20-audit-checkpoints/handoff.md",
+        "delivery/w20-audit-checkpoints/review/final.json",
+        "delivery/w20-audit-checkpoints/review/final.md",
+        "docs/plans/w20-audit-checkpoints-2026-10-28/progress.md",
+        "docs/plans/w20-audit-checkpoints-2026-10-28/task_plan.md"
+      ],
+      "hashes": [
+        {
+          "path": "skills/revenue-forecast-audit/scripts/summary_checkpoint_observations.py",
+          "declared": "613766a9e3e134e8137e85ca5e511e3c1d1e4f4e2db2f5f0c7f8cf7c88677acd",
+          "actual": "613766a9e3e134e8137e85ca5e511e3c1d1e4f4e2db2f5f0c7f8cf7c88677acd",
+          "lf": "613766a9e3e134e8137e85ca5e511e3c1d1e4f4e2db2f5f0c7f8cf7c88677acd",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "skills/revenue-forecast-audit/scripts/summary_review_packet.py",
+          "declared": "8c06d3eea21ee5c0f0fdc8cb73dd7c422b2709a6c62e5bdec6e75bb0784296c8",
+          "actual": "8c06d3eea21ee5c0f0fdc8cb73dd7c422b2709a6c62e5bdec6e75bb0784296c8",
+          "lf": "8c06d3eea21ee5c0f0fdc8cb73dd7c422b2709a6c62e5bdec6e75bb0784296c8",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "skills/revenue-forecast-audit/references/summary-checkpoint-observations.md",
+          "declared": "9f56975a58534892615a71ca15dfffebc054351ae2ad803694446d8344a4c2ab",
+          "actual": "9f56975a58534892615a71ca15dfffebc054351ae2ad803694446d8344a4c2ab",
+          "lf": "9f56975a58534892615a71ca15dfffebc054351ae2ad803694446d8344a4c2ab",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "skills/revenue-forecast-audit/references/review-storage.md",
+          "declared": "76d19f5401e3a057e943d5b3f5d0d5ae770f96b97fd3099cfd38013fc3f561c7",
+          "actual": "76d19f5401e3a057e943d5b3f5d0d5ae770f96b97fd3099cfd38013fc3f561c7",
+          "lf": "76d19f5401e3a057e943d5b3f5d0d5ae770f96b97fd3099cfd38013fc3f561c7",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "skills/revenue-forecast-audit/references/review-fetch.md",
+          "declared": "fe38b454c64b0e91e06e68f9a17e22c8d2c097cef0c460bfbe35d53394fa9d63",
+          "actual": "fe38b454c64b0e91e06e68f9a17e22c8d2c097cef0c460bfbe35d53394fa9d63",
+          "lf": "fe38b454c64b0e91e06e68f9a17e22c8d2c097cef0c460bfbe35d53394fa9d63",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "skills/revenue-forecast-audit/references/review-process.md",
+          "declared": "99970a37aee6813db5332aaf3de8654cca22ad0277cb5f8f3dfa0e04859360a3",
+          "actual": "99970a37aee6813db5332aaf3de8654cca22ad0277cb5f8f3dfa0e04859360a3",
+          "lf": "99970a37aee6813db5332aaf3de8654cca22ad0277cb5f8f3dfa0e04859360a3",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "skills/revenue-forecast-audit/references/review-analyst.md",
+          "declared": "a9b85ca1a69011b5ea374919836d047f5db0394036c17023b4153037a13f37d7",
+          "actual": "a9b85ca1a69011b5ea374919836d047f5db0394036c17023b4153037a13f37d7",
+          "lf": "a9b85ca1a69011b5ea374919836d047f5db0394036c17023b4153037a13f37d7",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "skills/revenue-forecast-audit/SKILL.md",
+          "declared": "24434c4e60da95fd3869bbfe85f3d9ad672ac86f3f348b6ab549c65fcb0c20e1",
+          "actual": "24434c4e60da95fd3869bbfe85f3d9ad672ac86f3f348b6ab549c65fcb0c20e1",
+          "lf": "24434c4e60da95fd3869bbfe85f3d9ad672ac86f3f348b6ab549c65fcb0c20e1",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "tests/test_w20_checkpoint_observations.py",
+          "declared": "a84bd450c342e1888ff88dbfc54318326b520d32a77dc6ff7b69a5c8c3185a84",
+          "actual": "a84bd450c342e1888ff88dbfc54318326b520d32a77dc6ff7b69a5c8c3185a84",
+          "lf": "a84bd450c342e1888ff88dbfc54318326b520d32a77dc6ff7b69a5c8c3185a84",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "tests/test_w20_packet_wiring.py",
+          "declared": "2fb4ea8be390bc187b390167bc2a43174efc9cccd0013e29101bbdd4303c79cb",
+          "actual": "2fb4ea8be390bc187b390167bc2a43174efc9cccd0013e29101bbdd4303c79cb",
+          "lf": "2fb4ea8be390bc187b390167bc2a43174efc9cccd0013e29101bbdd4303c79cb",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "tests/fixtures/w20_checkpoints/manifest.json",
+          "declared": "abafc23c035adbe5764d5b27ccd181fa1e7a84916f91c81e6195a0a54f75aaa5",
+          "actual": "abafc23c035adbe5764d5b27ccd181fa1e7a84916f91c81e6195a0a54f75aaa5",
+          "lf": "abafc23c035adbe5764d5b27ccd181fa1e7a84916f91c81e6195a0a54f75aaa5",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "tests/fixtures/w20_checkpoints/bundle_w20.json",
+          "declared": "dea7f2d985efd073fa4e2ec5086d239135786a760e5b2957821068cfc592111d",
+          "actual": "dea7f2d985efd073fa4e2ec5086d239135786a760e5b2957821068cfc592111d",
+          "lf": "dea7f2d985efd073fa4e2ec5086d239135786a760e5b2957821068cfc592111d",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "tests/fixtures/w20_checkpoints/targets_w20.json",
+          "declared": "e39beea73b56e4b26d04ba72eb019ef8052311f11ee9599788f7a0f65ff4e960",
+          "actual": "e39beea73b56e4b26d04ba72eb019ef8052311f11ee9599788f7a0f65ff4e960",
+          "lf": "e39beea73b56e4b26d04ba72eb019ef8052311f11ee9599788f7a0f65ff4e960",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "tests/fixtures/w20_checkpoints/make_execution_root.py",
+          "declared": "c6de5fd1209da8a8e74ee6d41f95b147478c0bed08bc9dd08c0726675159d6c7",
+          "actual": "c6de5fd1209da8a8e74ee6d41f95b147478c0bed08bc9dd08c0726675159d6c7",
+          "lf": "c6de5fd1209da8a8e74ee6d41f95b147478c0bed08bc9dd08c0726675159d6c7",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "tests/fixtures/w20_checkpoints/run_e2e_chain.py",
+          "declared": "f3148d4f7f7466286c4feb65960f8a9c9715ddd7beaa9df96255534156dcdeb2",
+          "actual": "f3148d4f7f7466286c4feb65960f8a9c9715ddd7beaa9df96255534156dcdeb2",
+          "lf": "f3148d4f7f7466286c4feb65960f8a9c9715ddd7beaa9df96255534156dcdeb2",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "delivery/w20-audit-checkpoints/e2e/expert-input/expert-input.json",
+          "declared": "79e92ceba4518ff5916194c88c274080f70326fc04ba7a59879be1a46b92a215",
+          "actual": "79e92ceba4518ff5916194c88c274080f70326fc04ba7a59879be1a46b92a215",
+          "lf": "79e92ceba4518ff5916194c88c274080f70326fc04ba7a59879be1a46b92a215",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "delivery/w20-audit-checkpoints/e2e/RELOCATION.json",
+          "declared": "8608fbc7a02a079a28ce160ea906d82841689774a62a1b1bfc51ec369b326c54",
+          "actual": "8608fbc7a02a079a28ce160ea906d82841689774a62a1b1bfc51ec369b326c54",
+          "lf": "8608fbc7a02a079a28ce160ea906d82841689774a62a1b1bfc51ec369b326c54",
+          "matches": true,
+          "lf_matches": true
+        }
+      ],
+      "remote": "",
+      "tracking": "codex/w20-audit-checkpoints-20261028 7ac295ffe9582533eb004ad10a8afc97f1bebc24"
+    },
+    {
+      "lane": "w20-rf-adoption",
+      "workdir": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-w20-adoption",
+      "head": "7716c7daefd540a143a282e621e1b53f9c1d9d07",
+      "branch": "codex/w20-rf-adoption-20261028",
+      "status": "",
+      "base": "0991e25d5dca667a3fdafb7bc5ebf0e546a2272b",
+      "base_is_ancestor": true,
+      "tested_commit": "8b221153",
+      "reviewed_commit": "8b221153",
+      "changes_after_review": [
+        "delivery/w20-rf-adoption/handoff.json",
+        "delivery/w20-rf-adoption/handoff.md",
+        "delivery/w20-rf-adoption/review/final.json",
+        "delivery/w20-rf-adoption/review/final.md",
+        "docs/plans/w20-rf-adoption-2026-10-28/progress.md",
+        "docs/plans/w20-rf-adoption-2026-10-28/task_plan.md"
+      ],
+      "hashes": [
+        {
+          "path": "tools/narrative_adoption_audit/__init__.py",
+          "declared": "1ff2cbed856cac6c465ac454003e9a1f63333d2f7e50239c88fddb483d745d1f",
+          "actual": "1ff2cbed856cac6c465ac454003e9a1f63333d2f7e50239c88fddb483d745d1f",
+          "lf": "1ff2cbed856cac6c465ac454003e9a1f63333d2f7e50239c88fddb483d745d1f",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "tools/narrative_adoption_audit/audit.py",
+          "declared": "d9c2060bb2f22021835458bcb8a2b6957bbd110b7805d0dd914f40e36244861b",
+          "actual": "d9c2060bb2f22021835458bcb8a2b6957bbd110b7805d0dd914f40e36244861b",
+          "lf": "d9c2060bb2f22021835458bcb8a2b6957bbd110b7805d0dd914f40e36244861b",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "tools/narrative_adoption_audit/cli.py",
+          "declared": "5efc37db0b61ad4695bcfffffa54352c44250db9ef646bc0c3b9ed74ef3a60f6",
+          "actual": "5efc37db0b61ad4695bcfffffa54352c44250db9ef646bc0c3b9ed74ef3a60f6",
+          "lf": "5efc37db0b61ad4695bcfffffa54352c44250db9ef646bc0c3b9ed74ef3a60f6",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "tools/narrative_adoption_audit/README.md",
+          "declared": "d632b26d1210f552fd5355342ddedb364e128e21ef49a2401288a9833a8e3cce",
+          "actual": "d632b26d1210f552fd5355342ddedb364e128e21ef49a2401288a9833a8e3cce",
+          "lf": "d632b26d1210f552fd5355342ddedb364e128e21ef49a2401288a9833a8e3cce",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "tests/test_w20_narrative_adoption_audit.py",
+          "declared": "f9440b1bb96356bca33641caa672f6d0ed4263dadd90ed79dc4e008284de74e6",
+          "actual": "f9440b1bb96356bca33641caa672f6d0ed4263dadd90ed79dc4e008284de74e6",
+          "lf": "f6417fdd0e14888fb5095de7257e8cbcb76db8b32b626d099ab38f6befc31e78",
+          "matches": true,
+          "lf_matches": false
+        },
+        {
+          "path": "tests/test_w20_narrative_adoption_e2e.py",
+          "declared": "aca860921a393734b67adf319aae27433748cedca170b5fb78990d5eff681b08",
+          "actual": "aca860921a393734b67adf319aae27433748cedca170b5fb78990d5eff681b08",
+          "lf": "aca860921a393734b67adf319aae27433748cedca170b5fb78990d5eff681b08",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "docs/plans/w20-rf-adoption-2026-10-28/construction_card.md",
+          "declared": "135ef4a401440cbc722be8449c618c7656070ef980775ce16cf0e9e1c66214c5",
+          "actual": "135ef4a401440cbc722be8449c618c7656070ef980775ce16cf0e9e1c66214c5",
+          "lf": "30819f11a5dcccb3fe258aa2efef0fefc8572c187242c385f435957208990e65",
+          "matches": true,
+          "lf_matches": false
+        },
+        {
+          "path": "docs/plans/w20-rf-adoption-2026-10-28/findings.md",
+          "declared": "bf5107653a4f84a0934197d766ec23a51783087fe9f75bca4d60addd32673bb3",
+          "actual": "bf5107653a4f84a0934197d766ec23a51783087fe9f75bca4d60addd32673bb3",
+          "lf": "02ca9f91c1688e553d9a6be518647da2725256078814ddbef9b3e285ae46db2b",
+          "matches": true,
+          "lf_matches": false
+        },
+        {
+          "path": "docs/plans/w20-rf-adoption-2026-10-28/task_plan.md",
+          "declared": "17ff3c688a9f30133c1d0c4a31dd9f86a164f69df7863894f8036948f9333c13",
+          "actual": "322a9e5460beffe717c371accd9ff30d2555481b8906bafaa72b655ef6ebc064",
+          "lf": "7eef9267795d08a4f6a5cce6a5d3f00b38a8ad795953fb02ab2e84f2c3fc7b9c",
+          "matches": false,
+          "lf_matches": false
+        },
+        {
+          "path": "docs/plans/w20-rf-adoption-2026-10-28/progress.md",
+          "declared": "9342099b6c3f3182fd8156fa9b73c8aae9f0ec856cb049be50327ec4b9bfcc90",
+          "actual": "695d1adb905e0976ce631cd3d60e983e9296e3f8abdd2b0fc717f015b848d1b1",
+          "lf": "71aacccab48c7743d6410c7923de3818ce3edce0fb890e258c8dfffb11598360",
+          "matches": false,
+          "lf_matches": false
+        },
+        {
+          "path": "delivery/w20-rf-adoption/review/initial.md",
+          "declared": "7af1e444b8b4dd2612ece8a64c0298e51f47f25d64847dad36583c584f419bc4",
+          "actual": "7af1e444b8b4dd2612ece8a64c0298e51f47f25d64847dad36583c584f419bc4",
+          "lf": "7af1e444b8b4dd2612ece8a64c0298e51f47f25d64847dad36583c584f419bc4",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "delivery/w20-rf-adoption/review/initial.json",
+          "declared": "ade843e8bce4f33777fdba2f7d572e4d6d89af4cf2a5a322912ac373d7583d8b",
+          "actual": "ade843e8bce4f33777fdba2f7d572e4d6d89af4cf2a5a322912ac373d7583d8b",
+          "lf": "ade843e8bce4f33777fdba2f7d572e4d6d89af4cf2a5a322912ac373d7583d8b",
+          "matches": true,
+          "lf_matches": true
+        }
+      ],
+      "remote": "origin\thttps://github.com/zhengcb81/revenue-forecast.git (fetch)\norigin\thttps://github.com/zhengcb81/revenue-forecast.git (push)",
+      "tracking": "codex/w20-rf-adoption-20261028 7716c7daefd540a143a282e621e1b53f9c1d9d07"
+    },
+    {
+      "lane": "w20-ff-replay",
+      "workdir": "C:\\Users\\郑曾波\\Projects\\filing-fetch-w20-replay",
+      "head": "e81953dd8d122381265b7ba46c35117c3395cf1b",
+      "branch": "codex/w20-ff-replay-20261028",
+      "status": "",
+      "base": "5396bd688e5b775e746fe3290852f0532d4548f8",
+      "base_is_ancestor": true,
+      "tested_commit": "e07b424",
+      "reviewed_commit": "e07b424",
+      "changes_after_review": [
+        "delivery/w20-ff-replay/handoff.json",
+        "delivery/w20-ff-replay/review/final.json",
+        "delivery/w20-ff-replay/review/final.md",
+        "delivery/w20-ff-replay/review/initial.json",
+        "docs/plans/w20-ff-replay-2026-10-28/progress.md",
+        "docs/plans/w20-ff-replay-2026-10-28/receipts/implementation-files.json",
+        "docs/plans/w20-ff-replay-2026-10-28/receipts/run-receipts.json"
+      ],
+      "hashes": [
+        {
+          "path": "tools/offline_contract_matrix/case_selection.py",
+          "declared": "9b12cc21ec6e94630cd3ffa7737f9b0b7d36291fe15c8527206f64be37cb237e",
+          "actual": "9b12cc21ec6e94630cd3ffa7737f9b0b7d36291fe15c8527206f64be37cb237e",
+          "lf": "9b12cc21ec6e94630cd3ffa7737f9b0b7d36291fe15c8527206f64be37cb237e",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "tools/offline_contract_matrix/case_registry.py",
+          "declared": "d80c706cf4f070314650e9e360ec0b15864b5abbb1379e0fcf2d208d017043f7",
+          "actual": "d80c706cf4f070314650e9e360ec0b15864b5abbb1379e0fcf2d208d017043f7",
+          "lf": "d80c706cf4f070314650e9e360ec0b15864b5abbb1379e0fcf2d208d017043f7",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "tools/offline_contract_matrix/w20_case_specs.py",
+          "declared": "776f0cbaf865d8139900dee49ba65b5330b438ab5993a8cd2fce11f34731a0fe",
+          "actual": "776f0cbaf865d8139900dee49ba65b5330b438ab5993a8cd2fce11f34731a0fe",
+          "lf": "44b13df19f718afdfb2e663b5e70736552139e5f3c8ffc35bbaf930d2a03f5b3",
+          "matches": true,
+          "lf_matches": false
+        },
+        {
+          "path": "tools/offline_contract_matrix/w20_fault_cases.py",
+          "declared": "add5c17681523b166a1157aac1f862540ff4290c0729537a040d421db400c8dc",
+          "actual": "add5c17681523b166a1157aac1f862540ff4290c0729537a040d421db400c8dc",
+          "lf": "9ed01c23593010b6f5e701de960de033a3228f4943f98bc66d9579444fefa2c1",
+          "matches": true,
+          "lf_matches": false
+        },
+        {
+          "path": "tools/offline_contract_matrix/cli_main.py",
+          "declared": "12c6be7446f3ad967731d4f9a7dffdf2f5d18b8903bcbc15ce8dc9e90330a9f7",
+          "actual": "12c6be7446f3ad967731d4f9a7dffdf2f5d18b8903bcbc15ce8dc9e90330a9f7",
+          "lf": "12c6be7446f3ad967731d4f9a7dffdf2f5d18b8903bcbc15ce8dc9e90330a9f7",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "tools/offline_contract_matrix/oracle.py",
+          "declared": "2795167935295adf3982bc4ae7f65559a71860d1427384a442c42aa0308b661b",
+          "actual": "2795167935295adf3982bc4ae7f65559a71860d1427384a442c42aa0308b661b",
+          "lf": "2795167935295adf3982bc4ae7f65559a71860d1427384a442c42aa0308b661b",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "tools/offline_contract_matrix/et_transcript_proxy.py",
+          "declared": "3f0d63b0a15b8125e48e37408cc85c11965a367a2c98d8cde0b1b8d048a18d19",
+          "actual": "3f0d63b0a15b8125e48e37408cc85c11965a367a2c98d8cde0b1b8d048a18d19",
+          "lf": "3f0d63b0a15b8125e48e37408cc85c11965a367a2c98d8cde0b1b8d048a18d19",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "tools/offline_contract_matrix/runtime.py",
+          "declared": "a419ccedfb3435a553f49f1175abe3211754aa15c24787220e3dff271e8d538b",
+          "actual": "a419ccedfb3435a553f49f1175abe3211754aa15c24787220e3dff271e8d538b",
+          "lf": "431206d0874db0ff372db50d0d48009e892faae65390dba95e244cc7b06971cd",
+          "matches": true,
+          "lf_matches": false
+        },
+        {
+          "path": "tools/offline_contract_matrix/matrix_cases.py",
+          "declared": "083cfb46394e62715227f2e8b0b977f770d3f67b25ca7dd550e47fc1e8c42bd0",
+          "actual": "083cfb46394e62715227f2e8b0b977f770d3f67b25ca7dd550e47fc1e8c42bd0",
+          "lf": "083cfb46394e62715227f2e8b0b977f770d3f67b25ca7dd550e47fc1e8c42bd0",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "tools/offline_contract_matrix/case_scheduling.py",
+          "declared": "2dc91ac6318ecaa064fb1df89a5fa7eaa157f9b1ed0e2d886030e4e6855cee39",
+          "actual": "2dc91ac6318ecaa064fb1df89a5fa7eaa157f9b1ed0e2d886030e4e6855cee39",
+          "lf": "2dc91ac6318ecaa064fb1df89a5fa7eaa157f9b1ed0e2d886030e4e6855cee39",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "tools/offline_contract_matrix/README.md",
+          "declared": "59ef20388656b7622e1c79454b7805b68368241444e99b4d7798e3907808f957",
+          "actual": "59ef20388656b7622e1c79454b7805b68368241444e99b4d7798e3907808f957",
+          "lf": "0d76ddb36c981af4804d742ab95f5a4a0fded43a92e3933c4f301ea2d6cd8ecc",
+          "matches": true,
+          "lf_matches": false
+        },
+        {
+          "path": "tests/test_w20_replay_selection.py",
+          "declared": "4769479b277d54b7086dc0a501b2fcf1dffa73639e64e240f44c751ee42bb88f",
+          "actual": "4769479b277d54b7086dc0a501b2fcf1dffa73639e64e240f44c751ee42bb88f",
+          "lf": "4769479b277d54b7086dc0a501b2fcf1dffa73639e64e240f44c751ee42bb88f",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "tests/test_w20_replay_faults.py",
+          "declared": "cf81441e0b795b6fbebbc18a3bcd8446742a4b81d9693c9e4deea18244149dfc",
+          "actual": "cf81441e0b795b6fbebbc18a3bcd8446742a4b81d9693c9e4deea18244149dfc",
+          "lf": "5078b5823c90bef8d8a7920b7f3fb0a19b39c66b10297542d9200628cf4128f5",
+          "matches": true,
+          "lf_matches": false
+        },
+        {
+          "path": "delivery/w20-ff-replay/handoff.md",
+          "declared": "4241c3442545bb88347b128dea64162eee7d84033441a5b3f2f7c93382b127db",
+          "actual": "4241c3442545bb88347b128dea64162eee7d84033441a5b3f2f7c93382b127db",
+          "lf": "6c70492b2a8ad8eaf63d681ae8f4c5f895c2fe93c933fab22a943d302361cd13",
+          "matches": true,
+          "lf_matches": false
+        },
+        {
+          "path": "delivery/w20-ff-replay/review/initial.md",
+          "declared": "f00c7c8bfe218a9be51c108c5286355713dd106b04cc9f3e29b19bb6123b1808",
+          "actual": "f00c7c8bfe218a9be51c108c5286355713dd106b04cc9f3e29b19bb6123b1808",
+          "lf": "f00c7c8bfe218a9be51c108c5286355713dd106b04cc9f3e29b19bb6123b1808",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "docs/plans/w20-ff-replay-2026-10-28/receipts/dependency-record.json",
+          "declared": "21c96f1856df1f2a4c71362d63268de134b765743123e1ed05e0749ddc048146",
+          "actual": "21c96f1856df1f2a4c71362d63268de134b765743123e1ed05e0749ddc048146",
+          "lf": "696976e2eeb991d520f2f8fca802ee8de5489c0b5c0b236718462a0ba1dce5d5",
+          "matches": true,
+          "lf_matches": false
+        },
+        {
+          "path": "docs/plans/w20-ff-replay-2026-10-28/receipts/run-receipts.json",
+          "declared": "a863cc936fd9c632ded2baaf30612a08a930665ef90cab1a709f2ba40367bb2d",
+          "actual": "f93649c1c85e832d72b254fd28678195ad018acc6e9a9716bf344af741945d11",
+          "lf": "0e4d6f432f22d3afc79a8e7f1c9b36bc0a2c3f024d24c0dff9689ad97b5332ce",
+          "matches": false,
+          "lf_matches": false
+        },
+        {
+          "path": "docs/plans/w20-ff-replay-2026-10-28/receipts/cleanup-receipt.json",
+          "declared": "c782cfa2465fdc1c81cdee8828172972c5e49a511d05496ab24749828e50e975",
+          "actual": "c782cfa2465fdc1c81cdee8828172972c5e49a511d05496ab24749828e50e975",
+          "lf": "23a5dcc104f6336cda86e22a5bc8f7bbd95e9eb4fc0a40be0692abaa8ec660d4",
+          "matches": true,
+          "lf_matches": false
+        },
+        {
+          "path": "docs/plans/w20-ff-replay-2026-10-28/receipts/baseline-preexisting-failures.txt",
+          "declared": "b57fb7a2ba91bac9cefdb940a96e6991f7d9c289ca2045278b454b9e47ac3cd9",
+          "actual": "b57fb7a2ba91bac9cefdb940a96e6991f7d9c289ca2045278b454b9e47ac3cd9",
+          "lf": "bd747d6c665324757caebb1e39d953e841c91ce68c3f80bc358cfcfea4d2d598",
+          "matches": true,
+          "lf_matches": false
+        },
+        {
+          "path": "docs/plans/w20-ff-replay-2026-10-28/receipts/branch-failures.txt",
+          "declared": "9e9dea37ce280cd3e324004ac0b32a18e4a103969889b50151db38c98763744b",
+          "actual": "9e9dea37ce280cd3e324004ac0b32a18e4a103969889b50151db38c98763744b",
+          "lf": "2a8fcc87030c26a58bd021261f19b943873a988cee11702e7ea6246d3bc6532e",
+          "matches": true,
+          "lf_matches": false
+        },
+        {
+          "path": "delivery/w20-ff-replay/review/initial.json",
+          "declared": "7c9684a496adc498f9bb7785c963c95129e70797c91c2251c4b173ab65f8bdff",
+          "actual": "7c9684a496adc498f9bb7785c963c95129e70797c91c2251c4b173ab65f8bdff",
+          "lf": "7c9684a496adc498f9bb7785c963c95129e70797c91c2251c4b173ab65f8bdff",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "delivery/w20-ff-replay/review/final.md",
+          "declared": "a063bb86cd4360768f010da33a7561d4f97f1182712d78d307b97533c19a20ef",
+          "actual": "a063bb86cd4360768f010da33a7561d4f97f1182712d78d307b97533c19a20ef",
+          "lf": "a063bb86cd4360768f010da33a7561d4f97f1182712d78d307b97533c19a20ef",
+          "matches": true,
+          "lf_matches": true
+        },
+        {
+          "path": "delivery/w20-ff-replay/review/final.json",
+          "declared": "5628cceae01b82dbcde08da381f601cc9f4b1d56187df3341d78a23bcd037b3c",
+          "actual": "5628cceae01b82dbcde08da381f601cc9f4b1d56187df3341d78a23bcd037b3c",
+          "lf": "5628cceae01b82dbcde08da381f601cc9f4b1d56187df3341d78a23bcd037b3c",
+          "matches": true,
+          "lf_matches": true
+        }
+      ],
+      "remote": "origin\thttps://github.com/zhengcb81/filing-fetch.git (fetch)\norigin\thttps://github.com/zhengcb81/filing-fetch.git (push)",
+      "tracking": "codex/w20-ff-replay-20261028 e81953dd8d122381265b7ba46c35117c3395cf1b"
+    }
+  ]
+}

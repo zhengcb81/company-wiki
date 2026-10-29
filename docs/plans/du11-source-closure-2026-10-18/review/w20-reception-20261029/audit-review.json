@@ -1,0 +1,214 @@
+{
+  "card_id": "W20-AUDIT-CHECKPOINTS",
+  "date": "2026-10-29",
+  "verdict": "RETURN_FOR_IMPROVEMENT",
+  "open_findings": [
+    {
+      "id": "W20-AUDIT-R1",
+      "severity": "P2",
+      "title": "Typed numeric/period/currency constraints are discarded before positive anchor labels",
+      "files": [
+        {
+          "path": "skills/revenue-forecast-audit/scripts/summary_checkpoint_observations.py",
+          "lines": [
+            128,
+            237,
+            259,
+            275,
+            279,
+            303,
+            313,
+            200
+          ]
+        }
+      ],
+      "reproductions": [
+        {
+          "case": "amount-vs-ratio",
+          "claim": {
+            "value": "0.1",
+            "unit": "元"
+          },
+          "support": "比例10%",
+          "actual": "value scale_equivalent",
+          "expected": "No cross-dimension equivalence; unknown/incompatible remains explicit; existing numeric_audit.verify_row rejects ratio-to-amount conversion."
+        },
+        {
+          "case": "sign-loss",
+          "claim": {
+            "value": "5",
+            "unit": "元"
+          },
+          "support": "亏损-5元",
+          "actual": "value literal_match",
+          "expected": "Preserve numeric token sign; -5 is not the numeric literal 5."
+        },
+        {
+          "case": "period-granularity",
+          "claim": {
+            "period": "2024H1"
+          },
+          "support": "2024H2收入",
+          "actual": "period literal_match",
+          "expected": "Shared year may be a partial anchor only; no full literal_match for an absent H1 token."
+        },
+        {
+          "case": "currency-default",
+          "claim": {
+            "unit": "人民币"
+          },
+          "support": "5日元",
+          "actual": "currency_families returns CNY; unit literal_match and no currency risk",
+          "expected": "No invented CNY from substring 元 in 日元 (or other non-CNY units); retain unsupported currency as unknown, do not demand a new complete currency lexicon."
+        }
+      ],
+      "root_cause": "The new helper duplicates free-text numeric canonicalization instead of routing declared typed comparisons through the existing numeric checker; sign, ratio-vs-amount and currency evidence are lost. Period matching separately ORs a reduced year into full-period matching. Report-only status avoids a final semantic PASS, but positive anchor observations themselves are inaccurate.",
+      "required_fix": "Keep literal-token observation separate from typed conversion. Reuse numeric_audit owner for comparable declared values; unknown or incompatible quantity/currency stays unknown. Preserve signed numeric tokens. Separate full period literal from partial year token. Remove unconditional bare-元 CNY inference. No new manual gate, second conversion table, company-specific logic or semantic-verdict layer.",
+      "requirements": [
+        "R5",
+        "R6",
+        "T2"
+      ]
+    },
+    {
+      "id": "W20-AUDIT-R2",
+      "severity": "P2",
+      "title": "Explicit unread support with retained text still receives positive anchor observations",
+      "files": [
+        {
+          "path": "skills/revenue-forecast-audit/scripts/summary_checkpoint_observations.py",
+          "lines": [
+            266,
+            268,
+            306,
+            308,
+            328,
+            342,
+            503
+          ]
+        }
+      ],
+      "reproductions": [
+        {
+          "case": "unread-but-text-present",
+          "claim": {
+            "value": "1",
+            "unit": "亿元人民币",
+            "period": "2024H1",
+            "subject": "收入"
+          },
+          "support": {
+            "text": "2024H1收入1亿元人民币",
+            "reading_state": "unread"
+          },
+          "actual": "All four anchors literal_match",
+          "expected": "Explicit unavailable/unread material must not provide positive observed support anchors; preserve available metadata/context separately and report not_observed for this claim-support leg."
+        }
+      ],
+      "root_cause": "Every anchor method treats nonempty text as readable, ignoring explicit reading_state. Existing regression covers unread only when text is empty, so the declared missing-observation condition is never exercised with retained partial/cached text.",
+      "required_fix": "Resolve explicit availability once at the shared observation entry point, and apply consistently to standalone observe_map and prepare_output_packet; preserve role/context metadata and normal missing_fragment_reference diagnostics. Do not require new source reauthorization or add per-material approval. Add unread/partial-text, no-text, read controls and verify no false final success.",
+      "requirements": [
+        "R1",
+        "T9"
+      ]
+    }
+  ],
+  "binding": {
+    "base_commit": "33200f8c947f35be75a77de38040982724e033a7",
+    "actual_head": "7ac295ffe9582533eb004ad10a8afc97f1bebc24",
+    "tested_reviewed_implementation": "470e1f9f5e196f5e3975744036aa690507be55ba",
+    "head_delta": "handoff/review/PWF documents only; source unchanged",
+    "script": "skills/revenue-forecast-audit/scripts/summary_checkpoint_observations.py",
+    "sha256": "613766a9e3e134e8137e85ca5e511e3c1d1e4f4e2db2f5f0c7f8cf7c88677acd",
+    "handoff_sha_checks": {
+      "total": 17,
+      "match": 17,
+      "mismatch": 0
+    },
+    "author_status": "clean; no remotes configured"
+  },
+  "tests": [
+    {
+      "name": "w20-unit",
+      "command": [
+        "C:/Miniconda/python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_w20_*.py"
+      ],
+      "returncode": 0,
+      "seconds": 0.388,
+      "stdout_tail": "{\"attempt_id\": \"20261029T171301Z-c267459f\", \"attempt_dir\": \"C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\.planning\\\\w20-reception-20261029\\\\audit\\\\temporary\\\\w20-helper-a8xtl38n\\\\out\\\\20261029T171301Z-c267459f\", \"output_file\": \"C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\.planning\\\\w20-reception-20261029\\\\audit\\\\temporary\\\\w20-helper-a8xtl38n\\\\out\\\\20261029T171301Z-c267459f\\\\checkpoint-observations.json\"}\n",
+      "stderr_tail": "..........................\n----------------------------------------------------------------------\nRan 26 tests in 0.121s\n\nOK\n"
+    },
+    {
+      "name": "w20-cli-e2e",
+      "command": [
+        "C:/Miniconda/python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "tests/fixtures/w20_checkpoints/run_e2e_chain.py",
+        "--work",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w20-reception-20261029\\audit\\temporary\\cli",
+        "--repo",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit-w20-checkpoints"
+      ],
+      "returncode": 0,
+      "seconds": 3.451,
+      "stdout_tail": "{\"expert_input\": \"C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\.planning\\\\w20-reception-20261029\\\\audit\\\\temporary\\\\cli\\\\expert-input\\\\expert-input.json\", \"steps\": 11, \"coverage_sufficiency\": \"records_complete\", \"coverage_gaps\": 0}\n",
+      "stderr_tail": ""
+    }
+  ],
+  "independent_red": {
+    "material": "synthetic independent counterexamples, not real company research",
+    "command": [
+      "C:/Miniconda/python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w20-reception-20261029\\audit\\test_independent_expectations.py"
+    ],
+    "exit_code": 1,
+    "tests": 7,
+    "failed": 5,
+    "passed_controls": 2,
+    "seconds_reported_by_unittest": 0.005,
+    "source_commit": "470e1f9f5e196f5e3975744036aa690507be55ba"
+  },
+  "cleanup": {
+    "root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w20-reception-20261029\\audit\\temporary",
+    "before_exists": false,
+    "after_exists": false,
+    "owned_files_removed": 45,
+    "end_bytes_before_cleanup": 235365,
+    "peak_bytes": null,
+    "peak_note": "not sampled",
+    "restored": true
+  },
+  "positive_scope": [
+    "Allowlist respected; two runtime script owners only; four independent reviewer roles and expert ordering unchanged.",
+    "Existing packet is reused; no second coverage counter, classifier, budget store, deployment or cross-repository write.",
+    "Original initial/final independent reports retained; final source hash binding matches; author corrects initial deterministic-scale issue.",
+    "26 own tests pass; real CLI synthetic chain completes eleven steps with records_complete and zero gaps; this does not prove semantic correctness.",
+    "Real excerpt trial is honestly scoped; missing declaration anchors are recorded as not_declared and upstream followup, not hidden."
+  ],
+  "notes": [
+    {
+      "id": "INFO-1",
+      "text": "Producer-side missing claim value/period/subject/unit is disclosed and outside this card; do not silently infer fields or relabel this card as production numeric verification."
+    },
+    {
+      "id": "INFO-2",
+      "text": "No final semantic verdict is emitted. These findings concern inaccurate mechanical evidence labels, not a claim that all company forecasts are wrong."
+    }
+  ],
+  "next_action": "Return both root-cause findings and the seven-case regression to original harness; fix, run scoped tests/CLI, genuine independent re-review then new handoff. ROOT should not merge or install before resolution. Mainline company loop remains paused."
+}

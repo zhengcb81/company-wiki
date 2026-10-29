@@ -1,10 +1,10 @@
 {
-  "status": "READY_NOT_DISPATCHED",
+  "status": "ALL_THREE_DELIVERED_ROOT_CHANGES_REQUESTED",
   "independent_card_review": "APPROVE_OPEN0",
   "priorities": {
-    "W20-AUDIT-CHECKPOINTS": "PRIORITY_READY",
-    "W20-RF-ADOPTION": "PRIORITY_READY",
-    "W20-FF-REPLAY": "OPTIONAL_LATER"
+    "W20-AUDIT-CHECKPOINTS": "RETURN_FOR_IMPROVEMENT",
+    "W20-RF-ADOPTION": "RETURN_FOR_IMPROVEMENT",
+    "W20-FF-REPLAY": "RETURN_FOR_IMPROVEMENT"
   },
   "card_sha256": {
     "W20-AUDIT-CHECKPOINTS": "1b5897fa7839cb9280b13c6dd45b50c9e4c3bdb7a7db299560d3a82dbc5dc4a9",
@@ -13,5 +13,19 @@
   },
   "root_priority_adjustment": "After independent card review, ROOT changed only overview scheduling: two directly support current acceptance; FF is optional. No technical card or reviewed interfaces changed.",
   "count_policy": "derive task count from remaining work, dependency and receiving cost; never fixed3",
-  "no_author_implementation_started_by_root": true
+  "no_author_implementation_started_by_root": true,
+  "received_on": "2026-10-29",
+  "root_reception_entry": "../../review/w20-reception-20261029/README.md",
+  "mainline_loop": "PAUSED_NOT_RESUMED",
+  "merge_status": "NOT_MERGED",
+  "author_heads": {
+    "W20-AUDIT-CHECKPOINTS": "7ac295ffe9582533eb004ad10a8afc97f1bebc24",
+    "W20-RF-ADOPTION": "7716c7daefd540a143a282e621e1b53f9c1d9d07",
+    "W20-FF-REPLAY": "e81953dd8d122381265b7ba46c35117c3395cf1b"
+  },
+  "return_cards": {
+    "W20-AUDIT-CHECKPOINTS": "../../review/w20-reception-20261029/RETURN_AUDIT.md",
+    "W20-RF-ADOPTION": "../../review/w20-reception-20261029/RETURN_RF.md",
+    "W20-FF-REPLAY": "../../review/w20-reception-20261029/RETURN_FF.md"
+  }
 }

@@ -10,12 +10,13 @@
   "exact_ci": {
     "id": 40750555849,
     "head_sha": "c6c446d0eebc8f6e6f6903bd677c04eebaf65077",
-    "status": "in_progress",
-    "conclusion": null,
+    "status": "completed",
+    "conclusion": "success",
     "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40750555849",
-    "updated_at": "2026-10-28T19:01:50Z"
+    "updated_at": "2026-10-28T19:07:31Z"
   },
-  "full_CI_status": "PENDING_NOT_SIGNED",
+  "full_CI_status": "COMPLETED_SUCCESS",
   "independent_review": "evidence/qa-provisional-20261028/qa-single-independent/independent-v3.json",
-  "scope": "Single-column provisional Q/A discovery and prior-date compatibility only; real whole IR remains OPEN"
+  "scope": "Single-column provisional Q/A discovery and prior-date compatibility only; real whole IR remains OPEN",
+  "checked_on": "2026-10-29"
 }

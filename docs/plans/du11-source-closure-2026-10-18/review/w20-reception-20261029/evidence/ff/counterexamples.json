@@ -1,0 +1,17 @@
+{
+  "actual_retained_case": {
+    "result": "PASS",
+    "recovery_branch": "not_durable_at_kill",
+    "recovery_extra_gets": 1,
+    "assertion_errors_now": []
+  },
+  "synthetic_handler_probe": [
+    {
+      "index": 0,
+      "triggered_on_unrelated_preexisting_sidecar": true
+    }
+  ],
+  "probe_scope": "pure unittest.mock handler control flow only; NOT claimed a real cross-repo E2E",
+  "no_supplier_calls": true,
+  "no_author_worktree_writes": true
+}

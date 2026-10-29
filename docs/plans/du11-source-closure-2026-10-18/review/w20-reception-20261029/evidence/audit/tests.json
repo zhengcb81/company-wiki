@@ -1,0 +1,40 @@
+[
+  {
+    "name": "w20-unit",
+    "command": [
+      "C:/Miniconda/python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_w20_*.py"
+    ],
+    "returncode": 0,
+    "seconds": 0.388,
+    "stdout_tail": "{\"attempt_id\": \"20261029T171301Z-c267459f\", \"attempt_dir\": \"C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\.planning\\\\w20-reception-20261029\\\\audit\\\\temporary\\\\w20-helper-a8xtl38n\\\\out\\\\20261029T171301Z-c267459f\", \"output_file\": \"C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\.planning\\\\w20-reception-20261029\\\\audit\\\\temporary\\\\w20-helper-a8xtl38n\\\\out\\\\20261029T171301Z-c267459f\\\\checkpoint-observations.json\"}\n",
+    "stderr_tail": "..........................\n----------------------------------------------------------------------\nRan 26 tests in 0.121s\n\nOK\n"
+  },
+  {
+    "name": "w20-cli-e2e",
+    "command": [
+      "C:/Miniconda/python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "tests/fixtures/w20_checkpoints/run_e2e_chain.py",
+      "--work",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w20-reception-20261029\\audit\\temporary\\cli",
+      "--repo",
+      "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit-w20-checkpoints"
+    ],
+    "returncode": 0,
+    "seconds": 3.451,
+    "stdout_tail": "{\"expert_input\": \"C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\.planning\\\\w20-reception-20261029\\\\audit\\\\temporary\\\\cli\\\\expert-input\\\\expert-input.json\", \"steps\": 11, \"coverage_sufficiency\": \"records_complete\", \"coverage_gaps\": 0}\n",
+    "stderr_tail": ""
+  }
+]

@@ -1,0 +1,57 @@
+test_explicit_unchanged_period_remains_literal (__main__.RootRegressions.test_explicit_unchanged_period_remains_literal) ... ok
+test_explicit_unread_support_cannot_be_positive_anchor (__main__.RootRegressions.test_explicit_unread_support_cannot_be_positive_anchor) ... FAIL
+test_h2_is_not_full_h1_literal_anchor (__main__.RootRegressions.test_h2_is_not_full_h1_literal_anchor) ... FAIL
+test_ratio_must_not_equal_monetary_amount (__main__.RootRegressions.test_ratio_must_not_equal_monetary_amount) ... FAIL
+test_signed_value_must_not_lose_minus (__main__.RootRegressions.test_signed_value_must_not_lose_minus) ... FAIL
+test_valid_same_currency_scale_equivalence_remains (__main__.RootRegressions.test_valid_same_currency_scale_equivalence_remains) ... ok
+test_yen_is_not_literal_cny_token (__main__.RootRegressions.test_yen_is_not_literal_cny_token) ... FAIL
+
+======================================================================
+FAIL: test_explicit_unread_support_cannot_be_positive_anchor (__main__.RootRegressions.test_explicit_unread_support_cannot_be_positive_anchor)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\company-wiki\.planning\w20-reception-20261029\audit\test_independent_expectations.py", line 22, in test_explicit_unread_support_cannot_be_positive_anchor
+    self.assertFalse(any(a['status'] in ('literal_match','scale_equivalent') for a in obs['anchors']['rows']))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: True is not false
+
+======================================================================
+FAIL: test_h2_is_not_full_h1_literal_anchor (__main__.RootRegressions.test_h2_is_not_full_h1_literal_anchor)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\company-wiki\.planning\w20-reception-20261029\audit\test_independent_expectations.py", line 18, in test_h2_is_not_full_h1_literal_anchor
+    self.assertNotEqual(self.anchor({'text':'2024H1收入','period':'2024H1'},'2024H2收入','period')['status'],'literal_match')
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'literal_match' == 'literal_match'
+
+======================================================================
+FAIL: test_ratio_must_not_equal_monetary_amount (__main__.RootRegressions.test_ratio_must_not_equal_monetary_amount)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\company-wiki\.planning\w20-reception-20261029\audit\test_independent_expectations.py", line 12, in test_ratio_must_not_equal_monetary_amount
+    self.assertNotEqual(self.anchor({'text':'金额0.1元','value':'0.1','unit':'元'},'比例10%','value')['status'],'scale_equivalent')
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'scale_equivalent' == 'scale_equivalent'
+
+======================================================================
+FAIL: test_signed_value_must_not_lose_minus (__main__.RootRegressions.test_signed_value_must_not_lose_minus)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\company-wiki\.planning\w20-reception-20261029\audit\test_independent_expectations.py", line 14, in test_signed_value_must_not_lose_minus
+    self.assertNotEqual(self.anchor({'text':'利润5元','value':'5','unit':'元'},'亏损-5元','value')['status'],'literal_match')
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'literal_match' == 'literal_match'
+
+======================================================================
+FAIL: test_yen_is_not_literal_cny_token (__main__.RootRegressions.test_yen_is_not_literal_cny_token)
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\company-wiki\.planning\w20-reception-20261029\audit\test_independent_expectations.py", line 16, in test_yen_is_not_literal_cny_token
+    self.assertNotIn('CNY',c.currency_families('5日元'))
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'CNY' unexpectedly found in {'CNY'}
+
+----------------------------------------------------------------------
+Ran 7 tests in 0.004s
+
+FAILED (failures=5)

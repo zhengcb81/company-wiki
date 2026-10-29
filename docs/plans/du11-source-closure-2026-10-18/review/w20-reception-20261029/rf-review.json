@@ -1,0 +1,83 @@
+{
+  "card_id": "W20-RF-ADOPTION",
+  "reviewer": "/root/w20_rf_reception",
+  "review_date": "2026-10-29",
+  "verdict": "CHANGES_REQUESTED",
+  "actual_head": "7716c7daefd540a143a282e621e1b53f9c1d9d07",
+  "reviewed_implementation": "8b221153",
+  "source_sha256": {
+    "tools/narrative_adoption_audit/audit.py": "d9c2060bb2f22021835458bcb8a2b6957bbd110b7805d0dd914f40e36244861b",
+    "tools/narrative_adoption_audit/cli.py": "5efc37db0b61ad4695bcfffffa54352c44250db9ef646bc0c3b9ed74ef3a60f6",
+    "tests/test_w20_narrative_adoption_audit.py": "f9440b1bb96356bca33641caa672f6d0ed4263dadd90ed79dc4e008284de74e6",
+    "tests/test_w20_narrative_adoption_e2e.py": "aca860921a393734b67adf319aae27433748cedca170b5fb78990d5eff681b08"
+  },
+  "author_status_after_review": "clean",
+  "production_or_author_writes": false,
+  "tests": {
+    "scope": "two delivered W20 test files, real subprocess E2E with synthetic reader transport",
+    "passed": 26,
+    "failed": 0,
+    "seconds": 12.49,
+    "junit": "rf-evidence/pytest.xml",
+    "command": "C:/Miniconda/python.exe -B -X utf8 -m pytest -q --tb=short -p no:cacheprovider -o addopts=\"\" <workdir>/tests/test_w20_narrative_adoption_audit.py <workdir>/tests/test_w20_narrative_adoption_e2e.py --basetemp <ROOT-owned>/pytest-temp --junitxml <ROOT-owned>/pytest.xml"
+  },
+  "independent_probes": "rf-evidence/probe.py and probe-results.json; uses actual validated wire/consume/run_forecast helpers at reviewed source, no model or network",
+  "findings": [
+    {
+      "id": "RF-R1",
+      "severity": "P1",
+      "file": "tools/narrative_adoption_audit/audit.py",
+      "lines": [
+        466,
+        529,
+        831,
+        863
+      ],
+      "title": "Disconnected identifiers and arbitrary existing hash falsely certify foreign source adoption",
+      "observed": "Validated source-B wire + receipt whose span_id is B but source_sha/claim/parameter remain A -> B span used, no binding diagnostic. Explicit nonexistent canonical source_id also -> used.",
+      "root_cause": "_evaluate_dependency tests ID membership and hash existence independently; never validates receipt→transported span→captured parent→input claim→parameter edges. formula refs prove formula shape, not source lineage.",
+      "required_fix": "Build source/span/claim/parameter indexes once and validate actual known edges in a shared receipt-resolution step. Match canonical parent source vs RF local source through existing SourceRef/capture mapping; check provided hashes, locator/parser and claim target/material relationship where present. Keep missing-hash leniency/unknown; do not add permission gates. Invalid explicit bindings become unverifiable rather than used. Add different valid input sources, source ID/hash mismatch, wrong locator/material, wrong claim/parameter pairing and wrong run cases."
+    },
+    {
+      "id": "RF-R2",
+      "severity": "P2",
+      "file": "tools/narrative_adoption_audit/audit.py",
+      "lines": [
+        831,
+        863
+      ],
+      "title": "First intact dependency discards other legitimate uses of the same span",
+      "observed": "Real consume_narrative_input binds same canonical support span to distinct first/0_base_2026 and second/0_base_2027; real run_forecast emits both; observer span cited_by contains only 2026 chain. Diagnostic incorrectly calls dependencies from same receipt multiple receipts.",
+      "root_cause": "next(first intact) short-circuits per-span aggregation instead of unioning all valid dependency paths.",
+      "required_fix": "Aggregate/dedupe all valid bound claim/parameter paths into the one canonical span item. Retain diagnostics for each invalid path without losing valid uses. Add same-receipt and separate-receipt multi-year/scenario tests, order reversal invariant and no duplicate span counting."
+    },
+    {
+      "id": "RF-R3",
+      "severity": "P2",
+      "file": "tools/narrative_adoption_audit/cli.py",
+      "lines": [
+        38,
+        47
+      ],
+      "title": "Compressed inputs bypass the explicit byte resource limit",
+      "observed": "133-byte .gz passes limit1024 and returns100000 decompressed bytes; gzip.decompress allocates full expansion before validation.",
+      "root_cause": "Size limit checks compressed stat only, then unbounded decompression. max-items is later and cannot bound JSON/byte parsing.",
+      "required_fix": "Use bounded streaming reads/decompression with limit+1 for expanded data (and retain compressed physical bound); raise named resource_limit before JSON parsing/wire validation. Add small gzip bomb and truncated/corrupt gzip tests; deterministic exit2 and no partial output. No increased limits."
+    }
+  ],
+  "record_notes": [
+    "ROOT independently reports plan/progress handoff SHA stale after docs-only closure; core four source/test SHA match. Correct record only, not a reason to reject core code alone.",
+    "CodeGraph context attempted; author worktree not initialized. No index created because scope is read-only. Exact-file reads used thereafter.",
+    "No AGENTS.md exists at author root or Projects parent in the inspected locations; canonical main task scope observed."
+  ],
+  "cleanup": {
+    "author_worktree_tracked_clean_after_tests": true,
+    "supplier_requests": 0,
+    "downloads": 0,
+    "test_temp_initial_state": "absent",
+    "removed_owned_test_tree": true,
+    "removed_files": 14,
+    "removed_bytes": 295001
+  },
+  "merge_recommendation": "Hold this branch pending author root fixes and independent re-review; existing 26 green tests do not cover these counterexamples. Actual company RF adoption remains OPEN."
+}

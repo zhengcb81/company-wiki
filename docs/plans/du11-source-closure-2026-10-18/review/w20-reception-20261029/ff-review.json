@@ -1,0 +1,139 @@
+{
+  "schema_version": "w20-root-reception/1",
+  "card_id": "W20-FF-REPLAY",
+  "reviewer": "/root/w20_ff_reception",
+  "date": "2026-10-29",
+  "verdict": "REQUEST_CHANGES",
+  "base_commit": "5396bd688e5b775e746fe3290852f0532d4548f8",
+  "actual_head": "e81953dd8d122381265b7ba46c35117c3395cf1b",
+  "author_tested_reviewed_commit": "e07b424",
+  "implementation_changed_after_review": false,
+  "source_file_sha256": {
+    "tools/offline_contract_matrix/case_selection.py": "9b12cc21ec6e94630cd3ffa7737f9b0b7d36291fe15c8527206f64be37cb237e",
+    "tools/offline_contract_matrix/case_registry.py": "d80c706cf4f070314650e9e360ec0b15864b5abbb1379e0fcf2d208d017043f7",
+    "tools/offline_contract_matrix/w20_case_specs.py": "776f0cbaf865d8139900dee49ba65b5330b438ab5993a8cd2fce11f34731a0fe",
+    "tools/offline_contract_matrix/w20_fault_cases.py": "add5c17681523b166a1157aac1f862540ff4290c0729537a040d421db400c8dc",
+    "tools/offline_contract_matrix/cli_main.py": "12c6be7446f3ad967731d4f9a7dffdf2f5d18b8903bcbc15ce8dc9e90330a9f7",
+    "tools/offline_contract_matrix/oracle.py": "2795167935295adf3982bc4ae7f65559a71860d1427384a442c42aa0308b661b",
+    "tools/offline_contract_matrix/et_transcript_proxy.py": "3f0d63b0a15b8125e48e37408cc85c11965a367a2c98d8cde0b1b8d048a18d19",
+    "tools/offline_contract_matrix/runtime.py": "a419ccedfb3435a553f49f1175abe3211754aa15c24787220e3dff271e8d538b",
+    "tools/offline_contract_matrix/matrix_cases.py": "083cfb46394e62715227f2e8b0b977f770d3f67b25ca7dd550e47fc1e8c42bd0",
+    "tools/offline_contract_matrix/case_scheduling.py": "2dc91ac6318ecaa064fb1df89a5fa7eaa157f9b1ed0e2d886030e4e6855cee39",
+    "tools/offline_contract_matrix/README.md": "59ef20388656b7622e1c79454b7805b68368241444e99b4d7798e3907808f957",
+    "tests/test_w20_replay_selection.py": "4769479b277d54b7086dc0a501b2fcf1dffa73639e64e240f44c751ee42bb88f",
+    "tests/test_w20_replay_faults.py": "cf81441e0b795b6fbebbc18a3bcd8446742a4b81d9693c9e4deea18244149dfc"
+  },
+  "findings": [
+    {
+      "id": "FF-R1",
+      "severity": "P2",
+      "file": "tools/offline_contract_matrix/w20_case_specs.py",
+      "line": 327,
+      "title": "durable后丢回执分支尚未被验证，未durable重下载却可计同一case PASS",
+      "evidence": "4份保留真实report（3bb0a6bc/465ac1a/b9d326/d163ba8）的kill_after_import均PASS、recovery_branch=not_durable_at_kill、恢复GET=1/downloaded。ROOT用当前断言复核465ac1a得到[]，即该未durable分支被明文允许。没有一份证明durable成功后中断且首次恢复0额外GET。",
+      "root_cause": "用规范sidecar出现代替source已完成持久登记；并将两个不同故障阶段合成一个可任选成功条件，之后把case PASS扩大为R3已通过。",
+      "required_fix": "保留原历史报告及其真实PASS含义，纠正覆盖声明；在既有测试边界实现独立确定性durable后丢回执/返回中断用例，证明杀树前本请求source可通过公开CWP接口实读、杀树后首次恢复0GET且Ref/SHA相同，再次复用也0GET。未durable路径继续单列，不能代签durable路径。无需保证并发exactly-once，不提高预算，不重跑41全批；如真正需要CWP接缝，仅交ROOT最小需求，禁止跨仓改源码。",
+      "retest": "先加入会拒绝not_durable替代durable验收的断言回归，再仅运行新的durable代表case和原before_durable相关case，保存实际进程/HTTP计数/公开实读证明及清理。"
+    },
+    {
+      "id": "FF-R2",
+      "severity": "P2",
+      "file": "tools/offline_contract_matrix/w20_fault_cases.py",
+      "line": 298,
+      "title": "中断触发器会被前序期次的任意sidecar提前触发",
+      "evidence": "case_call_kill_after_import使用lambda: bool(_transcript_sidecars(ctx))，没有before delta/本请求过滤。ROOT纯handler探针只预放unrelated-period.source.json、没有本case新sidecar时，kill_when立即True。此探针是控制流单元反例，未假称真实E2E。",
+      "root_cause": "一个组内case共享fixture wiki，但trigger观察全公司文件，缺少本请求/期次的隔离；同文件before_durable和et_fault已使用before delta，此处遗漏。",
+      "required_fix": "以本case实际请求Ref/身份期次/新durable记录匹配触发，不以任意旧sidecar存在触发；复用已有owner公开接口，勿在FF复制存储逻辑。",
+      "retest": "预先存在另一期次/另一case sidecar时不得触发；只有本请求达预期持久阶段才触发。有界跑同组顺序A→本case及本case单独，确认都观察正确阶段，不要求整批全绿。"
+    },
+    {
+      "id": "FF-R3",
+      "severity": "P3",
+      "file": "delivery/w20-ff-replay/handoff.json",
+      "line": 188,
+      "title": "最终交接两项机器字段未随实际资料更新",
+      "evidence": "files[]中run-receipts.json期望a863cc936fd9c632ded2baaf30612a08a930665ef90cab1a709f2ba40367bb2d与当前实际SHA不符（其他22条一致，13个实现/测试SHA均一致）；tests[2]直接pytest命令申报1462 passed/13failed同时exit_code=0。13个基线失败已诚实披露，但pytest本身不应填0。",
+      "root_cause": "文档后置修正后未再生成交接摘要；把基线问题归因通过混同测试进程退出码。",
+      "required_fix": "刷新这一个收据SHA；按真实命令进程退出码更正tests[2]，若未知填null并解释，保留13failed及基线归因。明确全仓并非绿，不需重跑已知404秒全仓。最终更新本次返工独审/修复证据，不增人工审批。",
+      "retest": "重核实际changed文件SHA、读取原失败收据与实际运行记录；不重复全仓。"
+    }
+  ],
+  "tests": [
+    {
+      "command": "C:/Miniconda/python.exe -B -X utf8 -m pytest -q -p no:cacheprovider --basetemp=<ROOT owned ff/pytest-tmp> tests/test_w20_replay_selection.py tests/test_w20_replay_faults.py tests/test_w06_case_authority.py",
+      "exit_code": 0,
+      "passed": 183,
+      "failed": 0,
+      "seconds": 6.78,
+      "scope": "current W20 units + old authority, not a new cross-repo fault E2E"
+    },
+    {
+      "command": "C:/Miniconda/python.exe -B -X utf8 <ROOT ff/repro.py>",
+      "exit_code": 0,
+      "scope": "actual retained case current authority check + pure fake context trigger counterexample",
+      "output": {
+        "actual_retained_case": {
+          "result": "PASS",
+          "recovery_branch": "not_durable_at_kill",
+          "recovery_extra_gets": 1,
+          "assertion_errors_now": []
+        },
+        "synthetic_handler_probe": [
+          {
+            "index": 0,
+            "triggered_on_unrelated_preexisting_sidecar": true
+          }
+        ],
+        "probe_scope": "pure unittest.mock handler control flow only; NOT claimed a real cross-repo E2E",
+        "no_supplier_calls": true,
+        "no_author_worktree_writes": true
+      }
+    }
+  ],
+  "historical_reports": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\_w20-runs\\out\\attempt-3bb0a6bc38b94cf2b66e49b44e53f104\\report.json",
+      "sha256": "69dfc5c8414af99d12cb3158e13b0410c0e6d21c334f102ea6b7c3e2d8fd9cc0",
+      "result": "PASS",
+      "recovery_branch": "not_durable_at_kill"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\_w20-runs\\out\\attempt-465ac1a5b06444f98e261e705fc065a2\\report.json",
+      "sha256": "a7321b92b13e426a1468ceb7133fe3fcfd577bf8209be2b78999ea389fd59a7c",
+      "result": "PASS",
+      "recovery_branch": "not_durable_at_kill"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\_w20-runs\\out\\attempt-b9d326b57d8247ebb353c8ec721708f6\\report.json",
+      "sha256": "425e6c31e7b4fe3c3e08fe67d75f474a3375d03a6c9611a8d7723912c032b486",
+      "result": "PASS",
+      "recovery_branch": "not_durable_at_kill"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\_w20-runs\\out\\attempt-d163ba822efc474986326336c0e1b823\\report.json",
+      "sha256": "475c7a6368e60368e49e9fe6fb9dd3df3bd48b232e0a55aded7c351e4c33cffc",
+      "result": "PASS",
+      "recovery_branch": "not_durable_at_kill"
+    }
+  ],
+  "cleanup": {
+    "test_tmp_initially_absent": true,
+    "restored": true,
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w20-reception-20261029\\ff\\pytest-tmp",
+    "source_worktree_status_after": ""
+  },
+  "scope_limits": [
+    "No author source/index edits; no merge/commit/global installation",
+    "No supplier/network/LLM/download call",
+    "No full41/fullrepo rerun",
+    "Independent review initial own inspect.py name shadowed stdlib; renamed provenance_scan.py and corrected same pure probe; product not implicated",
+    "Original initial/final reviewer documents preserved; final three P3 items appear author-fixed but no counterfeit OPEN0 re-signing imposed"
+  ],
+  "positive_findings": [
+    "41-case authority intact; explicit supplemental selection never claims full matrix",
+    "Current actual tested 183 passed; 13 implementation/tests hashes match delivery",
+    "Current tree clean; last-source-through-HEAD only receipts/docs changes; product scripts untouched",
+    "CWP618df929 / ET2584b7ee committed dependency declaration correct; snapshots already deleted",
+    "Partial/failed attempts preserved instead of relabeled; no claim of concurrent exactly-once downloads"
+  ]
+}

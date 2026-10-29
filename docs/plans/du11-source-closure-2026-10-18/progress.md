@@ -1,16 +1,12 @@
 ## 2026-10-26 C3实测更新：基础根修已验收，业务选材共因待修
 
-HK正式attempt `phaseC-090-777179bc3756` 已终止：`PHASE_C_GOLD_SUPPORT_MISSING`，0 POST、0新费用/unknown，临时湖已清理。环境v2根修已独审PASS：按实际PDF依赖闭包绑定104项，不再把重复PYTHONPATH发行元数据计成环境变化，旧v1配置和算法可重放。一次真实整份HK读取已成功增强12/13/17页，117.40秒/3页/单converter，内存峰值约3.13GiB，未提高120秒/4GiB上限；这是引擎执行通过，不代表摘要内容通过。
+## 2026-10-29 W20已验收：原包返工，主线仍暂停（唯一当前状态）
 
-独立cache审查已PASS/0 OPEN：completed历史读取核对冻结publication，不要求今天的SDK相同；实际执行/未完成恢复仍校验当前recipe。独审补出的非对象JSON异常已在共享owner修复，32项独立短测通过。推送执行器独审PASS/0 OPEN：日常保留原FAST及小范围受影响unit，非unit显式留在大节点/CI；180秒总界限，Windows Job回收自身子进程，原失败产品节点另行修复，未删断言。Linux全src mypy（389文件）与聚焦ruff通过。
+三个外包包均有正式提交/交接、作者独审和干净工区，ROOT加三独立agent已完成只读验收，**全部CHANGES_REQUESTED，暂不并线/安装**。不是重做整包；有效框架与原绿测保留。唯一接收入口：[W20验收与三份原包返工单](review/w20-reception-20261029/README.md)。AUDIT需修typed锚点和显式unread观察；RF需修整链关系、多路径聚合及有界解压；FF需补真正durable后恢复证据及故障隔离，并更正交接字段。
 
-历史迁移测试另有夹具错误：exec旧sections但指纹仍读取当前物理包。已改为真实隔离旧源码部署，原25个assert AST完整保留；原单例1P/31.69秒，实际两次loopback POST、新旧材料不同、旧版本不变、新缓存0token，测试湖与13文件overlay已清理。另一独审确认执行路径/库存hash/现代部署回切一致，PASS/0 OPEN。已正常提交并推送`ad9a9a96`到master，包含此前`65f42d41`；正常pre-push154项/30.11秒通过，精确CI40402565591仍在运行，尚不记CI绿。见[发布收据](review/pdf-c3-20261026/runtime-publication.json)。
+作者现有短包分别26P＋11步合成CLI、26P、183P；独立中性反例仍复现实质问题，不能拿绿测数量代签质量。三包可在原独立工区/分支返工，修共同owner、相关短测/CLI、真正独立复审后更新原handoff/commit/SHA，再交ROOT；不增小节点审批、不重跑超时全域。RF/FF远端已核最终HEAD同SHA，AUDIT无remote只本地提交；ROOT没有修改或合并作者产品。
 
-**业务选材仍OPEN且已定位：** 页11研发投入/人数、下半年计划的完整原文已经被读取并允许候选，但通用语义识别未认出经营资源与行动，标为低优先级description，112切片额度被其他事实占满。额外native-only诊断4.31秒/3.64M work（16M内）确认不是重型转换超时或工作额度耗尽。下一步优先补共同语义owner的跨语言经营资源/计划及来源主题识别，保留planner防套话规则、financial边界、原gold和所有额度，不写公司/页码特例。中性正反例先RED，真实同源定点复验后才进行付费摘要。
-
-**唯一下一步：** [通用选材TDD/独审](review/pdf-c3-20261026/SELECTION_ROOT_DESIGN.md)→冻结内容覆盖通过→配置内真实摘要→激活/重启/跨run缓存→FF/RF消费→未曝光holdout及完整八步公司循环。母账仍1,783,378 tokens/$0.724836，配置10M/$20含unknown。本轮没有新模型/下载/原件副本；原件与生产配置/目录库不变。
-
-详见[本轮根修和真实结果](review/pdf-c3-20261026/RUNTIME_RECOVERY.md)。Dashboard计划已独立到Projects/investment-dashboard并交其他harness，本主线不承担其实现。下方旧“当前/下一步”仅为历史快照，以本段和CURRENT_STATUS.json为准。
+本轮仅验收与文档，不恢复用户已暂停的主线实施/收费摘要/下载/公司循环，预算母账及原件不变。总体目标未完成，主线等待用户恢复；W20等待作者返工重交。上次来源代码c6c446d0精确CI40750555849已completed/success（更新收据，旧失败不改写）。下方旧“当前/下一步/READY”按日期保留为历史，不覆盖本段及CURRENT_STATUS.json。
 
 ## 2026-10-26 C3已启动：新样本冻结、工程根因修复通过，进入正式摘要
 

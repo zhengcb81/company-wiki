@@ -1,0 +1,59 @@
+{
+  "schema_version": "w20-root-reception/1",
+  "date": "2026-10-29",
+  "verdict": "RETURN_ALL_THREE_FOR_SCOPED_IMPROVEMENT",
+  "mainline_loop": "PAUSED_NOT_RESUMED",
+  "merged": false,
+  "product_source_modified": false,
+  "new_supplier_posts": 0,
+  "new_downloads": 0,
+  "packages": [
+    {
+      "id": "W20-AUDIT-CHECKPOINTS",
+      "head": "7ac295ffe9582533eb004ad10a8afc97f1bebc24",
+      "verdict": "CHANGES_REQUESTED",
+      "report": "audit-review.md",
+      "return_card": "RETURN_AUDIT.md",
+      "findings": [
+        "AUDIT-R1:P2 typed anchors",
+        "AUDIT-R2:P2 availability"
+      ],
+      "independent_tests": "26 passed + synthetic CLI11/11; new7 expectations=5RED/2controls"
+    },
+    {
+      "id": "W20-RF-ADOPTION",
+      "head": "7716c7daefd540a143a282e621e1b53f9c1d9d07",
+      "verdict": "CHANGES_REQUESTED",
+      "report": "rf-review.md",
+      "return_card": "RETURN_RF.md",
+      "findings": [
+        "RF-R1:P1 disconnected adoption chain",
+        "RF-R2:P2 first-match drops uses",
+        "RF-R3:P2 expanded input not bounded"
+      ],
+      "independent_tests": "26 passed; three independent probes reproduce gaps"
+    },
+    {
+      "id": "W20-FF-REPLAY",
+      "head": "e81953dd8d122381265b7ba46c35117c3395cf1b",
+      "verdict": "CHANGES_REQUESTED",
+      "report": "ff-review.md",
+      "return_card": "RETURN_FF.md",
+      "findings": [
+        "FF-R1:P2 durable-after-import not proven",
+        "FF-R2:P2 unrelated sidecar triggers kill",
+        "FF-R3:P3 handoff machine fields"
+      ],
+      "independent_tests": "183 passed; retained actual cases inspected and isolated control-flow probe"
+    }
+  ],
+  "root_cause_across_packages": "Existing green tests exercise expected happy mappings but not contradictory typed/bound references or actual fault-phase coverage; count/exit/PASS alone cannot certify the intended semantic edge.",
+  "required_followup": "Each original harness fixes common owner, adds contradiction/phase RED plus positive controls, bounded targeted/CLI checks, independent final re-review, updates same handoff/commit/SHA, commits/pushes existing branch if remote; no new small-step approvals/full-suite repetition.",
+  "root_historical_ci": {
+    "head": "c6c446d0eebc8f6e6f6903bd677c04eebaf65077",
+    "id": 40750555849,
+    "status": "completed",
+    "conclusion": "success"
+  },
+  "limitations": "No new full41 replay, no paid summary, no real-company RF adoption and no acceptance by producer final APPROVE alone."
+}

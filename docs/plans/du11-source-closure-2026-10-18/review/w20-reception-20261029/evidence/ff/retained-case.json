@@ -1,0 +1,216 @@
+{
+  "scope": "Exact case object extracted from retained actual report; not the entire bound report or a newly run E2E",
+  "original_report": {
+    "path": "C:\\Users\\郑曾波\\Projects\\_w20-runs\\out\\attempt-465ac1a5b06444f98e261e705fc065a2\\report.json",
+    "sha256": "a7321b92b13e426a1468ceb7133fe3fcfd577bf8209be2b78999ea389fd59a7c"
+  },
+  "case": {
+    "id": "w20_call_kill_after_import",
+    "title": "FF tree killed when the canonical original appears; the durable-at-kill branch is read from recovery",
+    "declared_layer": "ff+et",
+    "observed_layer": "w20 fault/recovery chain (real FF CLI + test-proxy boundary + real CWP import)",
+    "result": "PASS",
+    "scope": "real FF+ET chain; FF child tree killed at the moment the canonical transcript original appears; the durable-at-kill branch is observed from the recovery run (reused = durable, downloaded = not yet durable) and the final run must reuse with zero requests",
+    "expected": {
+      "final_reuse_zero_requests": true,
+      "interruption": "at_import_kill",
+      "recovery_branch_observed": true
+    },
+    "actual": {
+      "recovery_branch": "not_durable_at_kill",
+      "sidecars_at_kill": 1,
+      "kill_reason": "harness interruption at observed boundary",
+      "runs": [
+        {
+          "exit_code": 1,
+          "response": {
+            "_unparsed_stdout": ""
+          },
+          "stderr": "",
+          "request_ref": "g1.w20_call_kill_after_import.run1.request.json",
+          "response_ref": "g1.w20_call_kill_after_import.run1.response.json",
+          "stderr_ref": "g1.w20_call_kill_after_import.run1.stderr.txt",
+          "et_fixture_requests": 1,
+          "adapter_fixture_requests": 0,
+          "receipt_tag": "w20_call_kill_after_import.run1",
+          "fixture_scenario": "success",
+          "fixture_ref": "g1.w20_call_kill_after_import.run1.fixture.json",
+          "fixture_sha256": "5e733be7da49b2b6e991520f515517ee3d89c46c933f48ee68cdf31aff244cd9",
+          "expected_original_content_sha256": "d4142eeb8a3eae2e3c37d64d3e588de5faacfc16a57becea3dda75338f4acfeb",
+          "request_sha256": "eb6835adce9768f6e5605f83eb15bc604f917e885d8a92fe37bb38304c96c854",
+          "response_sha256": "3588f4eaf76fb6903641949289f655206205fe19715514d1e81dbc5af6901b0b",
+          "killed": true,
+          "kill_reason": "harness interruption at observed boundary",
+          "adapter_fetch_requests": 0,
+          "et_result_receipt": {
+            "file": "w20_call_kill_after_import.run1.result.json",
+            "sha256": "1beb4f3b12a04347abbad7c6df6708cb88cf152ac5108c619b96c76902e9399b"
+          },
+          "et_usage_receipt": {
+            "file": "w20_call_kill_after_import.run1.usage.json",
+            "sha256": "ee61f75e36cf9d92d13e55d176b2df0aabca35ad99f1fb61789abcb1783b85e7"
+          },
+          "fixture_requests": 1
+        },
+        {
+          "exit_code": 0,
+          "response": {
+            "schema_version": "2.0",
+            "status": "source_candidate",
+            "request_period": {
+              "mode": "exact",
+              "fiscal_year": 2025,
+              "fiscal_period": "FY",
+              "as_of_date": "2026-12-31"
+            },
+            "filing": {
+              "status": "source_candidate",
+              "source_ref": {
+                "byte_size": 619,
+                "content_sha256": "a2961fd67b9924d2490ea7cb14fa046aaab6c391562a67fca89fb624b1db834f",
+                "document_id": "urn:company-wiki:document:sha256:a2961fd67b9924d2490ea7cb14fa046aaab6c391562a67fca89fb624b1db834f",
+                "mime_type": "application/pdf",
+                "schema_version": "2.0",
+                "source_id": "urn:company-wiki:source:sha256:a2961fd67b9924d2490ea7cb14fa046aaab6c391562a67fca89fb624b1db834f"
+              },
+              "byte_verification": "pending_verified_open",
+              "document_kind": "annual_report",
+              "fiscal_year": 2025,
+              "fiscal_period": "FY",
+              "resolution_outcome": "reused_existing",
+              "download_events": 0
+            },
+            "transcript": {
+              "status": "downloaded",
+              "retryable": false,
+              "source_ref": {
+                "document_id": "urn:company-wiki:document:sha256:4c73ce97711e5fce2029880f0716e003ef203b7bc0063cec9e3f42cc56a7f676",
+                "source_id": "urn:company-wiki:source:sha256:4c73ce97711e5fce2029880f0716e003ef203b7bc0063cec9e3f42cc56a7f676",
+                "content_sha256": "4c73ce97711e5fce2029880f0716e003ef203b7bc0063cec9e3f42cc56a7f676",
+                "byte_size": 512,
+                "mime_type": "application/json",
+                "schema_version": "2.0"
+              },
+              "provider": "fmp",
+              "fiscal_year": 2034,
+              "fiscal_quarter": 2,
+              "provider_document_id": "fmp:AAPL:2034:Q2:2025-12-01",
+              "call_date": "2025-12-01",
+              "publication_date": null,
+              "as_of_cutoff_verified": false,
+              "provider_calls": 1,
+              "provider_requests": 1,
+              "provider_response_bytes": 512,
+              "provider_usage_complete": true
+            },
+            "calls": 5,
+            "downloads": 0
+          },
+          "stderr": "",
+          "request_ref": "g1.w20_call_kill_after_import.run2.request.json",
+          "response_ref": "g1.w20_call_kill_after_import.run2.response.json",
+          "stderr_ref": "g1.w20_call_kill_after_import.run2.stderr.txt",
+          "et_fixture_requests": 1,
+          "adapter_fixture_requests": 0,
+          "receipt_tag": "w20_call_kill_after_import.run2",
+          "fixture_scenario": "success",
+          "fixture_ref": "g1.w20_call_kill_after_import.run2.fixture.json",
+          "fixture_sha256": "27bfcce89c6ba1fc4ffdb6fe683a9bbbb79490ea91c353ee25b0451a8b5fc75b",
+          "expected_original_content_sha256": "d4142eeb8a3eae2e3c37d64d3e588de5faacfc16a57becea3dda75338f4acfeb",
+          "request_sha256": "eb6835adce9768f6e5605f83eb15bc604f917e885d8a92fe37bb38304c96c854",
+          "response_sha256": "293402f9e361f6737316de0b10be0dff88b4673bdc09c4fa53bd8561a17d25d0",
+          "killed": false,
+          "kill_reason": null,
+          "adapter_fetch_requests": 0,
+          "et_result_receipt": {
+            "file": "w20_call_kill_after_import.run2.result.json",
+            "sha256": "d728a2a1fee9e514a76af8b8a745a30805d48b6c68a72e3af959802a0d30c2ef"
+          },
+          "et_usage_receipt": {
+            "file": "w20_call_kill_after_import.run2.usage.json",
+            "sha256": "ee61f75e36cf9d92d13e55d176b2df0aabca35ad99f1fb61789abcb1783b85e7"
+          },
+          "fixture_requests": 1
+        },
+        {
+          "exit_code": 0,
+          "response": {
+            "schema_version": "2.0",
+            "status": "source_candidate",
+            "request_period": {
+              "mode": "exact",
+              "fiscal_year": 2025,
+              "fiscal_period": "FY",
+              "as_of_date": "2026-12-31"
+            },
+            "filing": {
+              "status": "source_candidate",
+              "source_ref": {
+                "byte_size": 619,
+                "content_sha256": "a2961fd67b9924d2490ea7cb14fa046aaab6c391562a67fca89fb624b1db834f",
+                "document_id": "urn:company-wiki:document:sha256:a2961fd67b9924d2490ea7cb14fa046aaab6c391562a67fca89fb624b1db834f",
+                "mime_type": "application/pdf",
+                "schema_version": "2.0",
+                "source_id": "urn:company-wiki:source:sha256:a2961fd67b9924d2490ea7cb14fa046aaab6c391562a67fca89fb624b1db834f"
+              },
+              "byte_verification": "pending_verified_open",
+              "document_kind": "annual_report",
+              "fiscal_year": 2025,
+              "fiscal_period": "FY",
+              "resolution_outcome": "reused_existing",
+              "download_events": 0
+            },
+            "transcript": {
+              "status": "unknown_publication",
+              "reason": "publication_date_unknown",
+              "retryable": false,
+              "source_ref": {
+                "schema_version": "2.0",
+                "document_id": "urn:company-wiki:document:sha256:4c73ce97711e5fce2029880f0716e003ef203b7bc0063cec9e3f42cc56a7f676",
+                "source_id": "urn:company-wiki:source:sha256:4c73ce97711e5fce2029880f0716e003ef203b7bc0063cec9e3f42cc56a7f676",
+                "content_sha256": "4c73ce97711e5fce2029880f0716e003ef203b7bc0063cec9e3f42cc56a7f676",
+                "byte_size": 512,
+                "mime_type": "application/json"
+              },
+              "provider": "fmp",
+              "fiscal_year": 2034,
+              "fiscal_quarter": 2,
+              "publication_date": null,
+              "as_of_cutoff_verified": false,
+              "provider_calls": 0
+            },
+            "calls": 4,
+            "downloads": 0
+          },
+          "stderr": "",
+          "request_ref": "g1.w20_call_kill_after_import.run3.request.json",
+          "response_ref": "g1.w20_call_kill_after_import.run3.response.json",
+          "stderr_ref": "g1.w20_call_kill_after_import.run3.stderr.txt",
+          "et_fixture_requests": 0,
+          "adapter_fixture_requests": 0,
+          "receipt_tag": "w20_call_kill_after_import.run3",
+          "fixture_scenario": "success",
+          "fixture_ref": "g1.w20_call_kill_after_import.run3.fixture.json",
+          "fixture_sha256": "7061262b2107ce9bdc0fce010c3f946873b5bdeeee15f8febdde9a6cf3cd6cf1",
+          "expected_original_content_sha256": "d4142eeb8a3eae2e3c37d64d3e588de5faacfc16a57becea3dda75338f4acfeb",
+          "request_sha256": "eb6835adce9768f6e5605f83eb15bc604f917e885d8a92fe37bb38304c96c854",
+          "response_sha256": "9a245ce15ecf0a182575af288ec1531a6ca3826912d6edb4ed96bfe054c33892",
+          "killed": false,
+          "kill_reason": null,
+          "adapter_fetch_requests": 0,
+          "fixture_requests": 0
+        }
+      ],
+      "elapsed_seconds": 22.7219
+    },
+    "provider_counters": {
+      "fixture_requests": 2
+    },
+    "request_ref": null,
+    "response_ref": null,
+    "receipt_refs": [],
+    "diagnostics": [
+      "all supplemental assertions observed"
+    ]
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "author_worktree_tracked_clean_after_tests": true,
+  "supplier_requests": 0,
+  "downloads": 0,
+  "test_temp_initial_state": "absent",
+  "removed_owned_test_tree": true,
+  "removed_files": 14,
+  "removed_bytes": 295001
+}

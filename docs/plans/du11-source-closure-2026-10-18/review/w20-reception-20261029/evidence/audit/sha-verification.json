@@ -1,0 +1,104 @@
+[
+  {
+    "path": "skills/revenue-forecast-audit/scripts/summary_checkpoint_observations.py",
+    "declared": "613766a9e3e134e8137e85ca5e511e3c1d1e4f4e2db2f5f0c7f8cf7c88677acd",
+    "actual": "613766a9e3e134e8137e85ca5e511e3c1d1e4f4e2db2f5f0c7f8cf7c88677acd",
+    "match": true
+  },
+  {
+    "path": "skills/revenue-forecast-audit/scripts/summary_review_packet.py",
+    "declared": "8c06d3eea21ee5c0f0fdc8cb73dd7c422b2709a6c62e5bdec6e75bb0784296c8",
+    "actual": "8c06d3eea21ee5c0f0fdc8cb73dd7c422b2709a6c62e5bdec6e75bb0784296c8",
+    "match": true
+  },
+  {
+    "path": "skills/revenue-forecast-audit/references/summary-checkpoint-observations.md",
+    "declared": "9f56975a58534892615a71ca15dfffebc054351ae2ad803694446d8344a4c2ab",
+    "actual": "9f56975a58534892615a71ca15dfffebc054351ae2ad803694446d8344a4c2ab",
+    "match": true
+  },
+  {
+    "path": "skills/revenue-forecast-audit/references/review-storage.md",
+    "declared": "76d19f5401e3a057e943d5b3f5d0d5ae770f96b97fd3099cfd38013fc3f561c7",
+    "actual": "76d19f5401e3a057e943d5b3f5d0d5ae770f96b97fd3099cfd38013fc3f561c7",
+    "match": true
+  },
+  {
+    "path": "skills/revenue-forecast-audit/references/review-fetch.md",
+    "declared": "fe38b454c64b0e91e06e68f9a17e22c8d2c097cef0c460bfbe35d53394fa9d63",
+    "actual": "fe38b454c64b0e91e06e68f9a17e22c8d2c097cef0c460bfbe35d53394fa9d63",
+    "match": true
+  },
+  {
+    "path": "skills/revenue-forecast-audit/references/review-process.md",
+    "declared": "99970a37aee6813db5332aaf3de8654cca22ad0277cb5f8f3dfa0e04859360a3",
+    "actual": "99970a37aee6813db5332aaf3de8654cca22ad0277cb5f8f3dfa0e04859360a3",
+    "match": true
+  },
+  {
+    "path": "skills/revenue-forecast-audit/references/review-analyst.md",
+    "declared": "a9b85ca1a69011b5ea374919836d047f5db0394036c17023b4153037a13f37d7",
+    "actual": "a9b85ca1a69011b5ea374919836d047f5db0394036c17023b4153037a13f37d7",
+    "match": true
+  },
+  {
+    "path": "skills/revenue-forecast-audit/SKILL.md",
+    "declared": "24434c4e60da95fd3869bbfe85f3d9ad672ac86f3f348b6ab549c65fcb0c20e1",
+    "actual": "24434c4e60da95fd3869bbfe85f3d9ad672ac86f3f348b6ab549c65fcb0c20e1",
+    "match": true
+  },
+  {
+    "path": "tests/test_w20_checkpoint_observations.py",
+    "declared": "a84bd450c342e1888ff88dbfc54318326b520d32a77dc6ff7b69a5c8c3185a84",
+    "actual": "a84bd450c342e1888ff88dbfc54318326b520d32a77dc6ff7b69a5c8c3185a84",
+    "match": true
+  },
+  {
+    "path": "tests/test_w20_packet_wiring.py",
+    "declared": "2fb4ea8be390bc187b390167bc2a43174efc9cccd0013e29101bbdd4303c79cb",
+    "actual": "2fb4ea8be390bc187b390167bc2a43174efc9cccd0013e29101bbdd4303c79cb",
+    "match": true
+  },
+  {
+    "path": "tests/fixtures/w20_checkpoints/manifest.json",
+    "declared": "abafc23c035adbe5764d5b27ccd181fa1e7a84916f91c81e6195a0a54f75aaa5",
+    "actual": "abafc23c035adbe5764d5b27ccd181fa1e7a84916f91c81e6195a0a54f75aaa5",
+    "match": true
+  },
+  {
+    "path": "tests/fixtures/w20_checkpoints/bundle_w20.json",
+    "declared": "dea7f2d985efd073fa4e2ec5086d239135786a760e5b2957821068cfc592111d",
+    "actual": "dea7f2d985efd073fa4e2ec5086d239135786a760e5b2957821068cfc592111d",
+    "match": true
+  },
+  {
+    "path": "tests/fixtures/w20_checkpoints/targets_w20.json",
+    "declared": "e39beea73b56e4b26d04ba72eb019ef8052311f11ee9599788f7a0f65ff4e960",
+    "actual": "e39beea73b56e4b26d04ba72eb019ef8052311f11ee9599788f7a0f65ff4e960",
+    "match": true
+  },
+  {
+    "path": "tests/fixtures/w20_checkpoints/make_execution_root.py",
+    "declared": "c6de5fd1209da8a8e74ee6d41f95b147478c0bed08bc9dd08c0726675159d6c7",
+    "actual": "c6de5fd1209da8a8e74ee6d41f95b147478c0bed08bc9dd08c0726675159d6c7",
+    "match": true
+  },
+  {
+    "path": "tests/fixtures/w20_checkpoints/run_e2e_chain.py",
+    "declared": "f3148d4f7f7466286c4feb65960f8a9c9715ddd7beaa9df96255534156dcdeb2",
+    "actual": "f3148d4f7f7466286c4feb65960f8a9c9715ddd7beaa9df96255534156dcdeb2",
+    "match": true
+  },
+  {
+    "path": "delivery/w20-audit-checkpoints/e2e/expert-input/expert-input.json",
+    "declared": "79e92ceba4518ff5916194c88c274080f70326fc04ba7a59879be1a46b92a215",
+    "actual": "79e92ceba4518ff5916194c88c274080f70326fc04ba7a59879be1a46b92a215",
+    "match": true
+  },
+  {
+    "path": "delivery/w20-audit-checkpoints/e2e/RELOCATION.json",
+    "declared": "8608fbc7a02a079a28ce160ea906d82841689774a62a1b1bfc51ec369b326c54",
+    "actual": "8608fbc7a02a079a28ce160ea906d82841689774a62a1b1bfc51ec369b326c54",
+    "match": true
+  }
+]

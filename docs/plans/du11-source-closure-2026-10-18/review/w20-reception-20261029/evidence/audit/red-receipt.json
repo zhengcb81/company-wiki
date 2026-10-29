@@ -1,0 +1,16 @@
+{
+  "material": "synthetic independent counterexamples, not real company research",
+  "command": [
+    "C:/Miniconda/python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\w20-reception-20261029\\audit\\test_independent_expectations.py"
+  ],
+  "exit_code": 1,
+  "tests": 7,
+  "failed": 5,
+  "passed_controls": 2,
+  "seconds_reported_by_unittest": 0.005,
+  "source_commit": "470e1f9f5e196f5e3975744036aa690507be55ba"
+}
