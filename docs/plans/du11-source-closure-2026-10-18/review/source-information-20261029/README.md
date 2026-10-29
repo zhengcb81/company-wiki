@@ -1,10 +1,10 @@
-# 来源信息主线：A/B通过，正常发布中（2026-10-29）
+# 来源信息主线：A/B已发布，继续C（2026-10-29）
 
 这是本轮唯一实施入口。用户已恢复主线；W21-PDF-RUNTIME已发出，ROOT保留其runtime/worker/environment文件，不同时运行真实SDK。
 
 ## 当前边界
 
-A/B共享来源判断已完成：**2988 passed / 11既有条件skip，114.70秒**；396源文件mypy通过；最终16文件独审R7 PASS。正常commit/push及精确CI另记，不用旧CI代签。详见[实际验收收据](AB_ACCEPTANCE.json)、[独审](evidence/ab-independent__r7__review.md)及[紧凑证据索引](evidence/index.json)。这不是全仓测试，更不是实际新摘要/恢复/RF采用通过。
+A/B共享来源判断已完成：**2988 passed / 11既有条件skip，114.70秒**；396源文件mypy通过；最终16文件独审R7 PASS。已正常提交推送`e920b09d`；pre-push158P/37.74秒。精确[CI40974928800](https://github.com/zhengcb81/company-wiki/actions/runs/40974928800)仍in_progress，不能代签远端成功。详见[实际验收收据](AB_ACCEPTANCE.json)、[独审](evidence/ab-independent__r7__review.md)及[紧凑证据索引](evidence/index.json)。这不是全仓测试，更不是实际新摘要/恢复/RF采用通过。
 
 | 阶段 | 状态 | 具体边界 |
 |---|---|---|
@@ -26,7 +26,7 @@ A/B共享来源判断已完成：**2988 passed / 11既有条件skip，114.70秒*
 
 ## 真实下一步（不要重开已闭合工程）
 
-1. 正常提交推送本节点，记录实际commit/精确CI。保留root原pre-push mode WIP、RF三份外来WIP及作者工区；不stage历史.planning或原件。
+1. 本节点已正常提交推送，见[发布收据](PUBLICATION.json)，继续观察精确CI。保留root原pre-push mode WIP、RF三份外来WIP及作者工区；不stage历史.planning或原件。
 2. 先读已保存CNIR parsed/diagnostic，锁剩余Q/A成员材料化与role oracle；用中性最小RED修对应owner。旧0/6及v2 partial保留，不把question前提/qa shadow洗成事实。US已知等义段和真正缺项分开，先定位不再重跑整批。
 3. W21最终交付后ROOT验收、正常并线。其前不抢改runtime/worker/env、不重复已知cold失败；SDK option留在阅读层。
 4. 输入稳定后新metadata/output revision：实际sent task金标→配置内真实摘要→独立实际claim审查→真实恢复/跨run0重复费用→FF公共复用/RF实际model节点采用。公共可读不能代签RF采用，source5/5不能代签output。
@@ -38,4 +38,4 @@ A/B共享来源判断已完成：**2988 passed / 11既有条件skip，114.70秒*
 
 历史R1/R2/R4问题、R3/R5/R6当时PASS与后续兼容遗漏均原样留紧凑证据；只有最终R7绑定的源码用于本节点签收。中间未提交版本不是可checkout的历史Git版本，旧SHA收据不代签新源码。测试迁移共3种：部分结果提供真实typed材料、spy改新的prepared入口、伪UNKNOWN不再创造OperatingFact；原检查责任未删。
 
-当前按既有Config.load与10M tokens/$20累计上限；母账1,800,368tokens/$0.727945含unknown，本节点0新供应商POST/下载，无预算或逐材料授权阻塞。未提高总工作/费用/时间上限；新增观测按实际扫描预留计费。没有复制PDF/SDK/model，历史收据合并压缩，避免逐轮脚本/重复文件进入仓库；当前归档正文约79KiB，原件保留。
+当前按既有Config.load与10M tokens/$20累计上限；母账1,800,368tokens/$0.727945含unknown，本节点0新供应商POST/下载，无预算或逐材料授权阻塞。未提高总工作/费用/时间上限；新增观测按实际扫描计入工作量。没有复制PDF/SDK/model，历史收据合并压缩，避免逐轮脚本/重复文件进入仓库；当前归档正文约79KiB，原件保留。

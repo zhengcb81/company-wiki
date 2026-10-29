@@ -1,6 +1,6 @@
 {
   "schema_version": "source-information-milestone/1",
-  "status": "COMPONENT_PASS_READY_TO_PUBLISH",
+  "status": "COMPONENT_ACCEPTED_PUBLISHED_CI_PENDING",
   "date": "2026-10-29",
   "scope": "A/B source information, no real native/task/model/cache/RF acceptance",
   "policy_version": "reading-business-policy/23",
@@ -94,6 +94,33 @@
     "FF reuse and RF actual model adoption",
     "new holdout and company loop"
   ],
-  "publication": null,
+  "publication": {
+    "schema_version": "source-information-publication/1",
+    "date": "2026-10-29",
+    "code_commit": "e920b09d6f6afff7855dc48f89cd4d03fdb6e647",
+    "branch": "master",
+    "remote": "origin/master",
+    "pushed": true,
+    "pre_commit": "NORMAL_PASS_ruff_mypy_host_guard",
+    "pre_push": {
+      "normal_hooks": true,
+      "passed": 158,
+      "seconds": 37.74,
+      "scope": "normal CI smoke; wide affected set deferred to CI"
+    },
+    "ci": {
+      "id": 40974928800,
+      "head_sha": "e920b09d6f6afff7855dc48f89cd4d03fdb6e647",
+      "name": "CI",
+      "status": "in_progress",
+      "conclusion": null,
+      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40974928800"
+    },
+    "reviewed_16_file_raw_sha_still_match_after_commit": true,
+    "foreign_pre_push_mode_wip_preserved": true,
+    "new_supplier_posts": 0,
+    "new_downloads": 0,
+    "overall_goal_complete": false
+  },
   "overall_goal_complete": false
 }

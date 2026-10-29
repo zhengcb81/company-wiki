@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-29",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_AB_ACCEPTED_PUBLISHING_NEXT_NATIVE_SOURCE_GAPS",
+  "overall_status": "ACTIVE_AB_PUBLISHED_NEXT_NATIVE_SOURCE_GAPS",
   "parallel_packages_20261025": {
     "status": "W16_W17_W18_ROOT_COMPONENT_ACCEPTED_MERGED",
     "entry": "harness_lanes/20261025/README.md",
@@ -26,14 +26,14 @@
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
-  "last_code_commit": "c6c446d0eebc8f6e6f6903bd677c04eebaf65077",
+  "last_code_commit": "e920b09d6f6afff7855dc48f89cd4d03fdb6e647",
   "code_ci": {
-    "id": 40750555849,
-    "head_sha": "c6c446d0eebc8f6e6f6903bd677c04eebaf65077",
-    "status": "completed",
-    "conclusion": "success",
-    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40750555849",
-    "updated_at": "2026-10-28T19:07:31Z"
+    "id": 40974928800,
+    "head_sha": "e920b09d6f6afff7855dc48f89cd4d03fdb6e647",
+    "name": "CI",
+    "status": "in_progress",
+    "conclusion": null,
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40974928800"
   },
   "formal_v4_offline_selection_replay_20261025": {
     "status": "EXACT_REPRODUCED_NO_PAID_CALL",
@@ -3039,7 +3039,7 @@
     "native_goal_observed": "paused; tool has no resume operation; no duplicate created",
     "new_supplier_posts": 0,
     "new_downloads": 0,
-    "current_slice": "A/B implementation accepted R7; normal publication, then C native-source gaps",
+    "current_slice": "A/B published e920b09d; C saved CNIR diagnostics and remaining native QA/role oracle",
     "implementation_milestone": "COMPONENT_PASS; actual tasks/summaries/cache/RF/holdout OPEN"
   },
   "parallel_w21_runtime": {
@@ -3053,7 +3053,7 @@
   "source_information_ab_20261029": {
     "entry": "review/source-information-20261029/README.md",
     "receipt": "review/source-information-20261029/AB_ACCEPTANCE.json",
-    "status": "PASS_READY_TO_PUBLISH",
+    "status": "PUBLISHED_CI_PENDING",
     "tests": {
       "passed": 2988,
       "skipped": 11,
@@ -3061,9 +3061,17 @@
       "full_repo": false
     },
     "independent_review": "R7_PASS_16_SOURCE_TEST_FILES",
-    "code_commit": null,
+    "code_commit": "e920b09d6f6afff7855dc48f89cd4d03fdb6e647",
     "new_supplier_posts": 0,
     "new_downloads": 0,
     "overall_goal_complete": false
+  },
+  "previous_successful_code_ci": {
+    "id": 40750555849,
+    "head_sha": "c6c446d0eebc8f6e6f6903bd677c04eebaf65077",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40750555849",
+    "updated_at": "2026-10-28T19:07:31Z"
   }
 }
