@@ -1,5 +1,7 @@
 # W20-AUDIT-CHECKPOINTS 原包返工单 R1（2026-10-29）
 
+> 本轮后续返工已交付并复验，部分问题已关闭；本文件为第一轮历史。请改用[第二轮当前入口](../w20-reception-r2-20261029/RETURN_AUDIT.md)，不重复实施已关闭任务。
+
 这不是新施工卡。在原工区原分支续改，保留已有有效进展。ROOT结论RETURN_FOR_IMPROVEMENT，暂不并线/安装，主线循环仍暂停。
 
 - 工作目录：`C:/Users/郑曾波/Projects/revenue-forecast-audit-w20-checkpoints`

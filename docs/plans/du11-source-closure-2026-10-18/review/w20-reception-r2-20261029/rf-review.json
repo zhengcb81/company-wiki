@@ -1,0 +1,90 @@
+{
+  "card_id": "W20-RF-ADOPTION",
+  "reviewer": "/root/w20_rf_reception",
+  "review_date": "2026-10-29",
+  "verdict": "CHANGES_REQUESTED",
+  "actual_head": "b2979af6",
+  "tested_code_commit": "e4657377",
+  "source_sha256": {
+    "tools/narrative_adoption_audit/audit.py": "0329cc7275a6ff8b0cf3b499152973292f17e5d0a359638e569598593507bb43",
+    "tools/narrative_adoption_audit/cli.py": "e790715c0187d21416c273a9b8456c61f622820ea68b7d4ea457a08029f37141",
+    "tests/test_w20_narrative_adoption_audit.py": "484d630474ba70e5da2c49618c01059d026205d943ce8c8092854b826e18ab31",
+    "tests/test_w20_narrative_adoption_e2e.py": "aca860921a393734b67adf319aae27433748cedca170b5fb78990d5eff681b08"
+  },
+  "previous_report_preserved": "../w20-reception-20261029/rf-review.md",
+  "observed_fixed": [
+    "RF-R1 original foreign-span/source-id probes now unverifiable",
+    "RF-R2 both valid years aggregated once per canonical span",
+    "RF-R3 compressed expansion bound now resource_limit",
+    "Projected /3 actual parent at index1 normal used, missing hash used+unknown, wrong parent hash unverifiable"
+  ],
+  "tests": {
+    "passed": 37,
+    "failed": 0,
+    "seconds": 10.95,
+    "junit": "rf-evidence/pytest.xml",
+    "scope": "35 delivered unit + 2 synthetic actual subprocess RF/consume/backtest/audit CLI E2E",
+    "command": "C:/Miniconda/python.exe -B -X utf8 -m pytest -q --tb=short -p no:cacheprovider -o addopts=\"\" <author>/tests/test_w20_narrative_adoption_audit.py <author>/tests/test_w20_narrative_adoption_e2e.py --basetemp <ROOT scratch>/pytest-temp --junitxml <ROOT scratch>/pytest.xml"
+  },
+  "open_findings": [
+    {
+      "id": "RF-R2-01",
+      "severity": "P1",
+      "file": "tools/narrative_adoption_audit/audit.py",
+      "location": "_evaluate_dependency claim edges, approximately lines579-619",
+      "root_cause": "Known claim-material edge is still compared only at whole-document capture SHA, not span/claim locator or excerpt. Same-source runs with same local IDs and graph but different selected material remain interchangeable.",
+      "actual_reproduction": "Use two genuine consume_narrative_input runs against one real-validated synthetic wire: runA selects CEO added-two-lines answer; runB selects table Overseas|1240 with explicit view0, same claim_id w20_cl/PID. Give final forecastA plus receiptB to observer. Table span becomes used with no invalid-material diagnostic although final claim excerpt and locator point to CEO answer.",
+      "evidence": [
+        "rf-evidence/material_probe.py",
+        "rf-evidence/material-probe-results.json"
+      ],
+      "required_fix": "Compare the final input claim material against the actual transported span through the existing consumption contract: legacy locator/raw_text/excerpt hash; projected /3 structured source_locator/raw_text with actual-parent mapping. Preserve missing-field leniency as unknown where contract allows and do not add authorization gates. Explicit contradictory material must be unverifiable. Add same-capture/different-span real two-run tests, including projected-parent positive compatibility and unchanged valid case.",
+      "contract_basis": {
+        "file": "scripts/source_narrative_context.py",
+        "lines": [
+          62,
+          63,
+          70,
+          80,
+          133,
+          145,
+          150,
+          153
+        ],
+        "meaning": "This receipt producer creates one NEW unique claim for one selected span: claim.locator is actual span locator (projected source_locator), excerpt=raw_text and excerpt_sha=text_sha256(raw_text). Existing claim_id is rejected; receipt cannot be interpreted as adding another support span to an old claim. General multi-evidence support for a parameter remains legitimate through distinct claim records / explicit supported contract."
+      },
+      "explicit_material_conflicts": {
+        "forecast_claim_locator": "loc:v1/paragraph:3/chars:91-154",
+        "receipt_selected_span_locator": "loc:v1/table:1/row:2/chars:219-235",
+        "forecast_claim_excerpt_sha256": "fb18d51e652d0fe77c430bf832861226cb246dfcd50b7b86fa8abaab503e49b5",
+        "actual_receipt_produced_claim_excerpt_sha256": "72f2498e8150bfc40b0b0d05ffd6afc584615d5fb949db659f1987f2ce05aa29"
+      }
+    },
+    {
+      "id": "RF-R2-02",
+      "severity": "P2",
+      "file": "tools/narrative_adoption_audit/cli.py",
+      "location": "_gunzip_bounded except at approximately lines70-73",
+      "root_cause": "Bounded decompression catches EOFError/BadGzipFile/OSError but zlib.error is a different exception; malformed DEFLATE with valid gzip header escapes CLI named handling.",
+      "actual_reproduction": "19-byte gzip hex1f8b0800000000000003070000000000000000 through real subprocess CLI => exit1 with zlib.error traceback, not advertised exit2/input_decompress_failed. No output is created.",
+      "evidence": [
+        "rf-evidence/additional_probe.py",
+        "rf-evidence/additional-probe-results.json"
+      ],
+      "required_fix": "Normalize decompressor-specific zlib.error into existing input_decompress_failed named error, without widening unrelated exception catch or increasing limits. Add genuine CLI invalid-deflate test plus legal-at-limit/expansion-over-limit/truncation regression."
+    }
+  ],
+  "probe_setup_note": "First independent table-span harness omitted explicit citation_view and genuine adapter correctly refused ambiguous view; fixed harness by explicit group/view0. This was a probe setup error, not a product defect. Final repro uses two genuine adapter receipts and unmodified validated source wire.",
+  "cleanup": {
+    "initial_temp": "absent",
+    "restored": true,
+    "production_writes": false,
+    "author_writes": false,
+    "network_requests": 0,
+    "paid_requests": 0,
+    "removed_files": 19,
+    "removed_bytes": 322424
+  },
+  "boundary": "No real companies/models/providers; synthetic fixtures only. Do not mark actual RF adoption complete. Author worktree read-only; no source/installation/merge/network changes. CodeGraph previously not initialized and no index mutated.",
+  "merge_recommendation": "Do not merge until two residual same-root findings fixed and independently re-reviewed. Preserve earlier reviewer/green-test evidence rather than relabeling it."
+}

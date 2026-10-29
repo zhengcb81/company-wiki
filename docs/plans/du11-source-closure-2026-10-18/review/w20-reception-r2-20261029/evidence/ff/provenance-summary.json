@@ -1,0 +1,358 @@
+{
+  "hashes": [
+    {
+      "path": "tools/offline_contract_matrix/case_selection.py",
+      "expected": "9b12cc21ec6e94630cd3ffa7737f9b0b7d36291fe15c8527206f64be37cb237e",
+      "actual": "9b12cc21ec6e94630cd3ffa7737f9b0b7d36291fe15c8527206f64be37cb237e",
+      "matches": true
+    },
+    {
+      "path": "tools/offline_contract_matrix/case_registry.py",
+      "expected": "d80c706cf4f070314650e9e360ec0b15864b5abbb1379e0fcf2d208d017043f7",
+      "actual": "d80c706cf4f070314650e9e360ec0b15864b5abbb1379e0fcf2d208d017043f7",
+      "matches": true
+    },
+    {
+      "path": "tools/offline_contract_matrix/w20_case_specs.py",
+      "expected": "f8724a4a970161e62dc0a7a99642ef1282588b35c42922c6db85ae93dd5944a1",
+      "actual": "f8724a4a970161e62dc0a7a99642ef1282588b35c42922c6db85ae93dd5944a1",
+      "matches": true
+    },
+    {
+      "path": "tools/offline_contract_matrix/w20_fault_cases.py",
+      "expected": "9690571d3d634c72205308680320b18faac967971fe2625e660b588242e1307f",
+      "actual": "9690571d3d634c72205308680320b18faac967971fe2625e660b588242e1307f",
+      "matches": true
+    },
+    {
+      "path": "tools/offline_contract_matrix/cli_main.py",
+      "expected": "12c6be7446f3ad967731d4f9a7dffdf2f5d18b8903bcbc15ce8dc9e90330a9f7",
+      "actual": "12c6be7446f3ad967731d4f9a7dffdf2f5d18b8903bcbc15ce8dc9e90330a9f7",
+      "matches": true
+    },
+    {
+      "path": "tools/offline_contract_matrix/oracle.py",
+      "expected": "2795167935295adf3982bc4ae7f65559a71860d1427384a442c42aa0308b661b",
+      "actual": "2795167935295adf3982bc4ae7f65559a71860d1427384a442c42aa0308b661b",
+      "matches": true
+    },
+    {
+      "path": "tools/offline_contract_matrix/et_transcript_proxy.py",
+      "expected": "3f0d63b0a15b8125e48e37408cc85c11965a367a2c98d8cde0b1b8d048a18d19",
+      "actual": "3f0d63b0a15b8125e48e37408cc85c11965a367a2c98d8cde0b1b8d048a18d19",
+      "matches": true
+    },
+    {
+      "path": "tools/offline_contract_matrix/runtime.py",
+      "expected": "a419ccedfb3435a553f49f1175abe3211754aa15c24787220e3dff271e8d538b",
+      "actual": "a419ccedfb3435a553f49f1175abe3211754aa15c24787220e3dff271e8d538b",
+      "matches": true
+    },
+    {
+      "path": "tools/offline_contract_matrix/matrix_cases.py",
+      "expected": "083cfb46394e62715227f2e8b0b977f770d3f67b25ca7dd550e47fc1e8c42bd0",
+      "actual": "083cfb46394e62715227f2e8b0b977f770d3f67b25ca7dd550e47fc1e8c42bd0",
+      "matches": true
+    },
+    {
+      "path": "tools/offline_contract_matrix/case_scheduling.py",
+      "expected": "2dc91ac6318ecaa064fb1df89a5fa7eaa157f9b1ed0e2d886030e4e6855cee39",
+      "actual": "2dc91ac6318ecaa064fb1df89a5fa7eaa157f9b1ed0e2d886030e4e6855cee39",
+      "matches": true
+    },
+    {
+      "path": "tools/offline_contract_matrix/README.md",
+      "expected": "59ef20388656b7622e1c79454b7805b68368241444e99b4d7798e3907808f957",
+      "actual": "59ef20388656b7622e1c79454b7805b68368241444e99b4d7798e3907808f957",
+      "matches": true
+    },
+    {
+      "path": "tests/test_w20_replay_selection.py",
+      "expected": "c893ccde590787a18484aa251cb4f6cad38876a1d6baa7011afd8a7deeaf9218",
+      "actual": "c893ccde590787a18484aa251cb4f6cad38876a1d6baa7011afd8a7deeaf9218",
+      "matches": true
+    },
+    {
+      "path": "tests/test_w20_replay_faults.py",
+      "expected": "cf81441e0b795b6fbebbc18a3bcd8446742a4b81d9693c9e4deea18244149dfc",
+      "actual": "cf81441e0b795b6fbebbc18a3bcd8446742a4b81d9693c9e4deea18244149dfc",
+      "matches": true
+    },
+    {
+      "path": "tests/test_w20_replay_return_r1.py",
+      "expected": "7d86bb3364fb4a1024e26a4a19017f1d89e7cea6da6c69a956aac086964b715b",
+      "actual": "7d86bb3364fb4a1024e26a4a19017f1d89e7cea6da6c69a956aac086964b715b",
+      "matches": true
+    },
+    {
+      "path": "delivery/w20-ff-replay/review/initial.md",
+      "expected": "f00c7c8bfe218a9be51c108c5286355713dd106b04cc9f3e29b19bb6123b1808",
+      "actual": "f00c7c8bfe218a9be51c108c5286355713dd106b04cc9f3e29b19bb6123b1808",
+      "matches": true
+    },
+    {
+      "path": "delivery/w20-ff-replay/review/initial.json",
+      "expected": "7c9684a496adc498f9bb7785c963c95129e70797c91c2251c4b173ab65f8bdff",
+      "actual": "7c9684a496adc498f9bb7785c963c95129e70797c91c2251c4b173ab65f8bdff",
+      "matches": true
+    },
+    {
+      "path": "docs/plans/w20-ff-replay-2026-10-28/receipts/run-receipts.json",
+      "expected": "36d741d629ccfcd52eca58406486f50e8744f75a4df26d604b063a285dfc79a6",
+      "actual": "36d741d629ccfcd52eca58406486f50e8744f75a4df26d604b063a285dfc79a6",
+      "matches": true
+    },
+    {
+      "path": "docs/plans/w20-ff-replay-2026-10-28/receipts/dependency-record.json",
+      "expected": "21c96f1856df1f2a4c71362d63268de134b765743123e1ed05e0749ddc048146",
+      "actual": "21c96f1856df1f2a4c71362d63268de134b765743123e1ed05e0749ddc048146",
+      "matches": true
+    },
+    {
+      "path": "docs/plans/w20-ff-replay-2026-10-28/receipts/cleanup-receipt.json",
+      "expected": "30baacdcf8097b8d0fa3bd93d49c015a71144d5fed710243a0ce20700d21247b",
+      "actual": "30baacdcf8097b8d0fa3bd93d49c015a71144d5fed710243a0ce20700d21247b",
+      "matches": true
+    }
+  ],
+  "reports": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\_w20-runs\\out\\attempt-2a273f32a8034e4382ab43198f5d07d7\\report.json",
+      "sha256": "6eb12eddb6545941ce57596c9f453898f334011de4b2751115cc090f44266926",
+      "cases": [
+        {
+          "id": "w20_call_kill_after_durable",
+          "result": "PASS",
+          "interruption_phase": "post_durable",
+          "durable_readback": null,
+          "runs": [
+            {
+              "killed": false,
+              "exit_code": 0,
+              "gets": 1,
+              "status": "downloaded"
+            },
+            {
+              "killed": true,
+              "exit_code": 1,
+              "gets": 0,
+              "status": null
+            },
+            {
+              "killed": false,
+              "exit_code": 0,
+              "gets": 0,
+              "status": "unknown_publication"
+            }
+          ]
+        },
+        {
+          "id": "w20_call_kill_before_durable",
+          "result": "PARTIAL",
+          "interruption_phase": null,
+          "durable_readback": null,
+          "runs": [
+            {
+              "killed": true,
+              "exit_code": 1,
+              "gets": 1,
+              "status": null
+            },
+            {
+              "killed": false,
+              "exit_code": 0,
+              "gets": 1,
+              "status": "downloaded"
+            },
+            {
+              "killed": true,
+              "exit_code": 1,
+              "gets": 0,
+              "status": null
+            }
+          ]
+        },
+        {
+          "id": "w20_call_kill_after_import",
+          "result": "PARTIAL",
+          "interruption_phase": "mid_import_observed",
+          "durable_readback": false,
+          "runs": [
+            {
+              "killed": false,
+              "exit_code": 0,
+              "gets": 1,
+              "status": "downloaded"
+            },
+            {
+              "killed": false,
+              "exit_code": 0,
+              "gets": 0,
+              "status": "unknown_publication"
+            },
+            {
+              "killed": true,
+              "exit_code": 1,
+              "gets": 0,
+              "status": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\_w20-runs\\out\\attempt-2ebbf3d7be284304877137c80cf18226\\report.json",
+      "sha256": "f90bc27527538817e8be9850cc31d912881d12923667bcbee53c8596797ac005",
+      "cases": [
+        {
+          "id": "w20_call_kill_after_durable",
+          "result": "PASS",
+          "interruption_phase": "post_durable",
+          "durable_readback": null,
+          "runs": [
+            {
+              "killed": false,
+              "exit_code": 0,
+              "gets": 1,
+              "status": "downloaded"
+            },
+            {
+              "killed": true,
+              "exit_code": 1,
+              "gets": 0,
+              "status": null
+            },
+            {
+              "killed": false,
+              "exit_code": 0,
+              "gets": 0,
+              "status": "unknown_publication"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\_w20-runs\\out\\attempt-36e764e91ee94b53a23f15ee6915a4f9\\report.json",
+      "sha256": "849ba896af66d553ace0c75a06d09e31ab6489a7a289620f9964103945df5b22",
+      "cases": [
+        {
+          "id": "w20_call_kill_before_durable",
+          "result": "PARTIAL",
+          "interruption_phase": null,
+          "durable_readback": null,
+          "runs": [
+            {
+              "killed": true,
+              "exit_code": 1,
+              "gets": 1,
+              "status": null
+            },
+            {
+              "killed": false,
+              "exit_code": 0,
+              "gets": 1,
+              "status": "downloaded"
+            },
+            {
+              "killed": true,
+              "exit_code": 1,
+              "gets": 0,
+              "status": null
+            }
+          ]
+        },
+        {
+          "id": "w20_call_kill_after_import",
+          "result": "PARTIAL",
+          "interruption_phase": "mid_import_observed",
+          "durable_readback": false,
+          "runs": [
+            {
+              "killed": true,
+              "exit_code": 1,
+              "gets": 1,
+              "status": null
+            },
+            {
+              "killed": false,
+              "exit_code": 0,
+              "gets": 1,
+              "status": "downloaded"
+            },
+            {
+              "killed": true,
+              "exit_code": 1,
+              "gets": 0,
+              "status": null
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\_w20-runs\\out\\attempt-8a972aa642c545918d37df3b3cabfe4a\\report.json",
+      "sha256": "260384ef5857e27c41db6fba7ae1b72f7010c6a7adfb642e4761a0d6b406cb5f",
+      "cases": [
+        {
+          "id": "w20_call_kill_after_import",
+          "result": "PASS",
+          "interruption_phase": "mid_import_observed",
+          "durable_readback": false,
+          "runs": [
+            {
+              "killed": true,
+              "exit_code": 1,
+              "gets": 1,
+              "status": null
+            },
+            {
+              "killed": false,
+              "exit_code": 0,
+              "gets": 1,
+              "status": "downloaded"
+            },
+            {
+              "killed": false,
+              "exit_code": 0,
+              "gets": 0,
+              "status": "unknown_publication"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\_w20-runs\\out\\attempt-afb227f21b334f31a14e127d189d4f44\\report.json",
+      "sha256": "6853223065f963849d7704a1cd9d4ce2519101b628f9654ec08e310f450a82ac",
+      "cases": [
+        {
+          "id": "w20_call_kill_before_durable",
+          "result": "PASS",
+          "interruption_phase": null,
+          "durable_readback": null,
+          "runs": [
+            {
+              "killed": true,
+              "exit_code": 1,
+              "gets": 1,
+              "status": null
+            },
+            {
+              "killed": false,
+              "exit_code": 0,
+              "gets": 1,
+              "status": "downloaded"
+            },
+            {
+              "killed": false,
+              "exit_code": 0,
+              "gets": 0,
+              "status": "unknown_publication"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

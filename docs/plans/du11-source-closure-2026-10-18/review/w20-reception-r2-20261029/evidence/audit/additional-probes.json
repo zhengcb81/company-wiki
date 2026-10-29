@@ -1,0 +1,201 @@
+[
+  {
+    "label": "explicit_amount_unit_cannot_borrow_growth_percent",
+    "claim": {
+      "text": "公司收入1000元，同比增长10%",
+      "value": "1000",
+      "unit": "元"
+    },
+    "source_text": "公司收入1,000元，同比增长10%。",
+    "actual": {
+      "claim_id": "c",
+      "risk_points": [],
+      "anchors": {
+        "rows": [
+          {
+            "anchor_kind": "value",
+            "declared": "1000",
+            "declared_unit": "元",
+            "status": "anchor_absent",
+            "fragment_ids": []
+          },
+          {
+            "anchor_kind": "period",
+            "declared": null,
+            "status": "not_declared",
+            "fragment_ids": []
+          },
+          {
+            "anchor_kind": "subject",
+            "declared": null,
+            "status": "not_declared",
+            "fragment_ids": []
+          },
+          {
+            "anchor_kind": "unit",
+            "declared": "元",
+            "status": "not_declared",
+            "note": "declared unit carries no known scale/currency token; no anchor is fabricated"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "label": "candidate_cannot_borrow_currency_from_another_value",
+    "claim": {
+      "text": "海外收入12.5亿元人民币",
+      "value": "12.5",
+      "unit": "亿元人民币"
+    },
+    "source_text": "海外收入USD 1,250,000,000；人民币余额为2元。",
+    "actual": {
+      "claim_id": "c",
+      "risk_points": [],
+      "anchors": {
+        "rows": [
+          {
+            "anchor_kind": "value",
+            "declared": "12.5",
+            "declared_unit": "亿元人民币",
+            "status": "scale_equivalent",
+            "fragment_ids": [
+              "f"
+            ],
+            "scale_equivalent_literals": [
+              {
+                "fragment_id": "f",
+                "literal": "1,250,000,000"
+              }
+            ]
+          },
+          {
+            "anchor_kind": "period",
+            "declared": null,
+            "status": "not_declared",
+            "fragment_ids": []
+          },
+          {
+            "anchor_kind": "subject",
+            "declared": null,
+            "status": "not_declared",
+            "fragment_ids": []
+          },
+          {
+            "anchor_kind": "unit",
+            "declared": "亿元人民币",
+            "status": "partial_match",
+            "tokens_declared": [
+              "CNY",
+              "亿"
+            ],
+            "tokens_found": [
+              "CNY"
+            ],
+            "fragment_ids": []
+          }
+        ]
+      }
+    }
+  },
+  {
+    "label": "decimal_to_percent_existing_checker",
+    "claim": {
+      "text": "增长率0.1",
+      "value": "0.1",
+      "unit": "decimal"
+    },
+    "source_text": "增长率10%",
+    "actual": {
+      "claim_id": "c",
+      "risk_points": [],
+      "anchors": {
+        "rows": [
+          {
+            "anchor_kind": "value",
+            "declared": "0.1",
+            "declared_unit": "decimal",
+            "status": "anchor_absent",
+            "fragment_ids": []
+          },
+          {
+            "anchor_kind": "period",
+            "declared": null,
+            "status": "not_declared",
+            "fragment_ids": []
+          },
+          {
+            "anchor_kind": "subject",
+            "declared": null,
+            "status": "not_declared",
+            "fragment_ids": []
+          },
+          {
+            "anchor_kind": "unit",
+            "declared": "decimal",
+            "status": "not_declared",
+            "note": "declared unit carries no known scale/currency token; no anchor is fabricated"
+          }
+        ]
+      }
+    }
+  },
+  {
+    "label": "literal_bypasses_disjoint_currency",
+    "claim": {
+      "text": "人民币收入5元",
+      "value": "5",
+      "unit": "元人民币"
+    },
+    "source_text": "美元收入5元",
+    "actual": {
+      "claim_id": "c",
+      "risk_points": [
+        {
+          "code": "currency_tokens_differ",
+          "detail": "claim currency tokens ['CNY'] do not appear in these fragments' tokens; families are listed verbatim and any conversion must go through the existing numeric checker with explicit FX",
+          "status": "observed",
+          "fragment_ids": [
+            "f"
+          ]
+        }
+      ],
+      "anchors": {
+        "rows": [
+          {
+            "anchor_kind": "value",
+            "declared": "5",
+            "declared_unit": "元人民币",
+            "status": "literal_match",
+            "fragment_ids": [
+              "f"
+            ],
+            "scale_equivalent_literals": []
+          },
+          {
+            "anchor_kind": "period",
+            "declared": null,
+            "status": "not_declared",
+            "fragment_ids": []
+          },
+          {
+            "anchor_kind": "subject",
+            "declared": null,
+            "status": "not_declared",
+            "fragment_ids": []
+          },
+          {
+            "anchor_kind": "unit",
+            "declared": "元人民币",
+            "status": "anchor_absent",
+            "tokens_declared": [
+              "CNY"
+            ],
+            "tokens_found": [],
+            "fragment_ids": []
+          }
+        ]
+      }
+    }
+  }
+]

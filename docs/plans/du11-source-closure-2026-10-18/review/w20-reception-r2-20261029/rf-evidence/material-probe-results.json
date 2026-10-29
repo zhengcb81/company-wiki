@@ -1,0 +1,234 @@
+{
+  "scenario": "same source, source-validated table receipt belongs to different claim material than final CEO-claim forecast; same local claim/parameter IDs and same formula graph",
+  "actual_forecast_claim": {
+    "claim_id": "w20_cl",
+    "source_id": "filing",
+    "target_type": "parameter",
+    "target_id": "0_base_2026",
+    "support_type": "rationale_support",
+    "locator": "loc:v1/paragraph:3/chars:91-154",
+    "excerpt": "[CEO] We added two overseas lines and expect a third next year.",
+    "excerpt_sha256": "fb18d51e652d0fe77c430bf832861226cb246dfcd50b7b86fa8abaab503e49b5",
+    "content_sha256": "bbe21a0e34d1ad48c407a23d0a2e5fb065132c3626ff9a778e4b4b656af069b9",
+    "capture_receipt_sha256": "e6a6c17639cbc8ecdd416f3da6f6983d350fd61fa8e3bbe8705ce2e1d64fc4d9",
+    "verification_status": "opened_and_checked",
+    "verified_by": "RF narrative reader",
+    "verified_date": "2026-10-03"
+  },
+  "different_real_consumed_claim": {
+    "claim_id": "w20_cl",
+    "source_id": "filing",
+    "target_type": "parameter",
+    "target_id": "0_base_2026",
+    "support_type": "rationale_support",
+    "locator": "loc:v1/table:1/row:2/chars:219-235",
+    "excerpt": "Overseas | 1,240",
+    "excerpt_sha256": "72f2498e8150bfc40b0b0d05ffd6afc584615d5fb949db659f1987f2ce05aa29",
+    "content_sha256": "bbe21a0e34d1ad48c407a23d0a2e5fb065132c3626ff9a778e4b4b656af069b9",
+    "capture_receipt_sha256": "e6a6c17639cbc8ecdd416f3da6f6983d350fd61fa8e3bbe8705ce2e1d64fc4d9",
+    "verification_status": "opened_and_checked",
+    "verified_by": "RF narrative reader",
+    "verified_date": "2026-10-03"
+  },
+  "different_real_receipt": {
+    "schema_version": "revenue-narrative-consumption/1",
+    "status": "consumed",
+    "narrative_ref": {
+      "schema_version": "narrative-ref/1",
+      "artifact_version_id": "du11-fixture-narrative-v1",
+      "artifact_sha256": "92e8d38c68cbd452ae3b9a60055d042d973c9a8f4db43100250b2ba93f617202",
+      "byte_size": 14728,
+      "source_ref": {
+        "schema_version": "2.0",
+        "document_id": "urn:company-wiki:document:sha256:bbe21a0e34d1ad48c407a23d0a2e5fb065132c3626ff9a778e4b4b656af069b9",
+        "source_id": "urn:company-wiki:source:sha256:bbe21a0e34d1ad48c407a23d0a2e5fb065132c3626ff9a778e4b4b656af069b9",
+        "content_sha256": "bbe21a0e34d1ad48c407a23d0a2e5fb065132c3626ff9a778e4b4b656af069b9",
+        "byte_size": 329,
+        "mime_type": "text/plain"
+      }
+    },
+    "read_at": "2026-10-03T00:00:00Z",
+    "quality_status": "verified",
+    "selection": {
+      "candidate_count": 7,
+      "coverage_complete": true,
+      "dropped_financial_count": 0,
+      "lines_total": 8,
+      "omitted_candidate_count": 0,
+      "pages_read": 0,
+      "pages_total": 0,
+      "selected_count": 7,
+      "source_units": 7,
+      "status": "selected",
+      "tables_scanned": 1,
+      "tables_total": 1
+    },
+    "dependencies": [
+      {
+        "span_id": "urn:company-wiki:evidence-span:sha256:67bbc28292dfc8375b0a5b8204b2fceafca4dcf1fcc14100ec3649228a39981a",
+        "locator": "loc:v1/table:1/row:2/chars:219-235",
+        "parser_name": "du11-fixture-parser",
+        "parser_version": "1.0.0",
+        "source_id": "urn:company-wiki:source:sha256:bbe21a0e34d1ad48c407a23d0a2e5fb065132c3626ff9a778e4b4b656af069b9",
+        "source_sha256": "bbe21a0e34d1ad48c407a23d0a2e5fb065132c3626ff9a778e4b4b656af069b9",
+        "claim_id": "w20_cl",
+        "parameter_id": "0_base_2026",
+        "formula_refs": [
+          {
+            "segment": "Segment A",
+            "scenario": "base",
+            "model": "direct_revenue",
+            "driver": "revenue",
+            "output": "recognized_revenue"
+          }
+        ]
+      }
+    ],
+    "citation_trace": {
+      "schema_version": "revenue-narrative-citation-trace/1",
+      "status": "closed",
+      "reading": {
+        "present": true,
+        "schema_version": "du-production-reading/2",
+        "attribution": "source_owned_views",
+        "group_count": 2,
+        "citation_view_count": 4,
+        "unread": {
+          "counts": {
+            "opaque_pages": 5,
+            "deferred_pages": 4,
+            "deferred_unit_ids": 0,
+            "unassigned_unit_ids": 1
+          },
+          "limited": true,
+          "opaque_pages": 1,
+          "deferred_pages": 1,
+          "deferred_unit_ids": 0,
+          "unassigned_unit_ids": 1,
+          "native_scan": "complete",
+          "structure_complete": false
+        },
+        "deferred": {
+          "count": 3,
+          "listed": 1,
+          "limited": true
+        },
+        "selection_diagnostics": [
+          {
+            "code": "BOUND",
+            "count": 2
+          }
+        ],
+        "layout_complete": false,
+        "coverage_note": "diagnostic_only_not_a_permission_gate"
+      },
+      "dependencies": [
+        {
+          "claim_id": "w20_cl",
+          "parameter_id": "0_base_2026",
+          "span_id": "urn:company-wiki:evidence-span:sha256:67bbc28292dfc8375b0a5b8204b2fceafca4dcf1fcc14100ec3649228a39981a",
+          "closure": "citation_view",
+          "group_id": "urn:company-wiki:reading-group:sha256:segment-table",
+          "group_kind": "table_region",
+          "section_role": "business",
+          "view_index": 0,
+          "source_role": "company_filing",
+          "support_evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:67bbc28292dfc8375b0a5b8204b2fceafca4dcf1fcc14100ec3649228a39981a"
+          ],
+          "context_evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:f768a1ffef2bf61c92b38f910faa2c0d67ce4f718f7f23717d794823191d089f",
+            "urn:company-wiki:evidence-span:sha256:9c16ac3a0aefd8ab19a3d8117a900493e0e94618cbb0573a113979215444ab3d",
+            "urn:company-wiki:evidence-span:sha256:231104774fdc7a17c46a5351911c5bc43b4a9a96ed58bf19342f70828a78847c"
+          ],
+          "context_evidence": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:f768a1ffef2bf61c92b38f910faa2c0d67ce4f718f7f23717d794823191d089f",
+              "locator": "loc:v1/table:1/row:1/chars:181-218",
+              "source_role": "company_filing"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:9c16ac3a0aefd8ab19a3d8117a900493e0e94618cbb0573a113979215444ab3d",
+              "locator": "loc:v1/paragraph:7/chars:236-287",
+              "source_role": "company_filing"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:231104774fdc7a17c46a5351911c5bc43b4a9a96ed58bf19342f70828a78847c",
+              "locator": "loc:v1/paragraph:8/chars:288-329",
+              "source_role": "company_filing"
+            }
+          ],
+          "context_evidence_count": 3,
+          "context_evidence_limited": false,
+          "projected": null
+        }
+      ],
+      "counts": {
+        "dependencies": 1,
+        "view_closed": 1,
+        "group_only": 0,
+        "ungrouped": 0,
+        "context_evidence": 3,
+        "context_evidence_unknown": 0,
+        "context_evidence_limited": 0
+      }
+    }
+  },
+  "reported_span": {
+    "kind": "span",
+    "id": "urn:company-wiki:evidence-span:sha256:67bbc28292dfc8375b0a5b8204b2fceafca4dcf1fcc14100ec3649228a39981a",
+    "id_scope": "canonical",
+    "source_sha256": "bbe21a0e34d1ad48c407a23d0a2e5fb065132c3626ff9a778e4b4b656af069b9",
+    "status": "used",
+    "support_use": "support",
+    "cited_by": [
+      {
+        "node_type": "coverage_dimension_parameter",
+        "location": "research_coverage.dimensions[1].parameter_ids[0]",
+        "ids": {
+          "dimension": "growth_curve",
+          "parameter_id": "0_base_2026"
+        }
+      },
+      {
+        "node_type": "driver_tree_parameter",
+        "location": "growth_driver_analysis.drivers[0].parameter_ids[0]",
+        "ids": {
+          "driver_id": "fixture_driver_Segment_A",
+          "parameter_id": "0_base_2026"
+        }
+      },
+      {
+        "node_type": "segment_scenario_driver",
+        "location": "segments[0].scenarios.base.driver_parameter_ids.revenue[0]",
+        "ids": {
+          "segment": "Segment A",
+          "scenario": "base",
+          "driver": "revenue",
+          "year": "2026",
+          "parameter_id": "0_base_2026"
+        }
+      }
+    ],
+    "reasons": [
+      "used_via_bound_claim",
+      "used_via_coverage_dimension",
+      "used_via_driver_tree_parameter",
+      "used_via_segment_driver_slot"
+    ]
+  },
+  "diagnostics": [
+    {
+      "code": "node_family_missing:probability_weighted_forecast",
+      "detail": "final artifact carries no probability_weighted_forecast family",
+      "severity": "info",
+      "item_id": null
+    },
+    {
+      "code": "span_dependencies_aggregated",
+      "detail": "span urn:company-wiki:evidence-span:sha256:67bbc28292dfc8375b0a5b8204b2fceafca4dcf1fcc14100ec3649228a39981a aggregates 1 dependency path(s) across 1 receipt(s): 1 intact, 0 invalid",
+      "severity": "info",
+      "item_id": "urn:company-wiki:evidence-span:sha256:67bbc28292dfc8375b0a5b8204b2fceafca4dcf1fcc14100ec3649228a39981a"
+    }
+  ]
+}

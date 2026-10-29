@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-29",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "MAINLINE_PAUSED_W20_ROOT_REVIEW_COMPLETE_REWORK_REQUIRED",
+  "overall_status": "MAINLINE_PAUSED_W20_REWORK_R2_REVIEW_COMPLETE_SCOPED_REWORK_REMAINS",
   "parallel_packages_20261025": {
     "status": "W16_W17_W18_ROOT_COMPONENT_ACCEPTED_MERGED",
     "entry": "harness_lanes/20261025/README.md",
@@ -21,7 +21,7 @@
     "new_downloads": 0,
     "annual14_grade_unchanged": "Historical8/6/0 and10/4/0 reports preserved; latest source/input12/2/0; response semantics NOT_REVIEWED and RF OPEN"
   },
-  "current_authorized_scope": "User authorized W20 package reception only; ROOT review completed, all three returned for scoped improvement. No mainline implementation/loop or paid/download runs resumed.",
+  "current_authorized_scope": "W20 returned-delivery reacceptance completed; five scoped findings remain. No mainline implementation/loop/paid/download resumed, no author source modified or branch merged.",
   "parent_plan_id": "document-understanding-2026-10-13",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
@@ -2345,7 +2345,7 @@
     "published": true,
     "push_failure": "47 targets /392 collected /600s; two regressions being root-fixed, not waived by narrower daily gate"
   },
-  "next_action": "WAIT_FOR_W20_REWORK_DELIVERY_MAINLINE_PAUSED",
+  "next_action": "WAIT_FOR_W20_SCOPED_REWORK_REDELIVERY_MAINLINE_PAUSED",
   "c3_runtime_recovery_20261026": {
     "entry": "review/pdf-c3-20261026/RUNTIME_RECOVERY.md",
     "environment_independent": "PASS_ZERO_OPEN_25_TESTS_AND_REAL_WORKER_ENTRYPOINTS",
@@ -2994,7 +2994,8 @@
       "/root/w20_audit_reception",
       "/root/w20_rf_reception",
       "/root/w20_ff_reception"
-    ]
+    ],
+    "superseded_by": "review/w20-reception-r2-20261029/README.md"
   },
   "previous_top_level_code_ci_observation": {
     "id": 40729898744,
@@ -3003,5 +3004,18 @@
     "conclusion": "failure",
     "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40729898744",
     "updated_at": "2026-10-28T16:55:03Z"
+  },
+  "w20_rework_r2_20261029": {
+    "status": "THREE_RECEIVED_FIVE_SCOPED_FINDINGS_REMAIN",
+    "entry": "review/w20-reception-r2-20261029/README.md",
+    "machine_summary": "review/w20-reception-r2-20261029/SUMMARY.json",
+    "merged": false,
+    "independent_reviewers": [
+      "/root/w20_audit_reception",
+      "/root/w20_rf_reception",
+      "/root/w20_ff_reception"
+    ],
+    "new_supplier_posts": 0,
+    "new_downloads": 0
   }
 }

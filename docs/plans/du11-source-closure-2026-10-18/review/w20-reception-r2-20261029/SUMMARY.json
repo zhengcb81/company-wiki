@@ -1,0 +1,69 @@
+{
+  "schema_version": "w20-root-rework-reception/1",
+  "date": "2026-10-29",
+  "round": 2,
+  "status": "THREE_RECEIVED_FIVE_SCOPED_FINDINGS_REMAIN",
+  "mainline_loop": "PAUSED",
+  "merged": false,
+  "author_code_modified_by_root": false,
+  "new_supplier_posts": 0,
+  "new_downloads": 0,
+  "packages": [
+    {
+      "id": "W20-AUDIT-CHECKPOINTS",
+      "head": "da17f2b5b4404c650e77671601e10553b879d2e7",
+      "source_commit": "4ed94fcce99135d7c45ea1f16b5f0ed013b77313",
+      "closed": [
+        "unread availability (original R2)",
+        "original seven counterexamples"
+      ],
+      "remaining": [
+        "original R1:P2 explicit identity scale and candidate-local currency binding"
+      ],
+      "return_card": "RETURN_AUDIT.md",
+      "report": "audit-review.md",
+      "tests": "original7P; W20 35P; numeric7P; CLI11/11; new2 parameterized methods=6RED subcases, 2 positive controls PASS; counts overlap"
+    },
+    {
+      "id": "W20-RF-ADOPTION",
+      "head": "b2979af6522dd4deb9d493f228f24c52a6aa03a5",
+      "source_commit": "e4657377",
+      "closed": [
+        "original foreign-source/fake-source counterexamples",
+        "multi-path aggregation",
+        "expanded input size bound",
+        "real /3 multi-parent compatibility and missing-hash leniency"
+      ],
+      "remaining": [
+        "RF-R2-01:P1 same-capture different-material receipt mismatch",
+        "RF-R2-02:P2 damaged DEFLATE uncaught zlib.error"
+      ],
+      "return_card": "RETURN_RF.md",
+      "report": "rf-review.md",
+      "tests": "37P/10.95s plus independent actual-consume/forecast and CLI probes"
+    },
+    {
+      "id": "W20-FF-REPLAY",
+      "head": "a693e10da2fc14c96fa9e96e0c6406a6a3fbb1ec",
+      "source_commit": "3747e4a",
+      "closed": [
+        "unrelated sidecar live trigger",
+        "handoff receipt SHA and actual exit-code record (original R3)"
+      ],
+      "remaining": [
+        "FF-R2-1:P2 same-acquisition lost-response phase not proved",
+        "FF-R2-2:P2 process-global IO/error state races and unknown vs not-found"
+      ],
+      "return_card": "RETURN_FF.md",
+      "report": "ff-review.md",
+      "tests": "189P/4.87s; retained actual-case inspection plus deterministic Events probe, not new true-chain replay"
+    }
+  ],
+  "root_cause": "Local guards pass original examples while losing binding between a value and its unit/currency, a receipt and its exact source material, or a fault label and the same actual acquisition phase. Fix declared relationships/invariants in shared owners, not example-specific code.",
+  "followup": "Same original harness/workdir/branch; only remaining scope; meaningful parameterized RED + positive controls; bounded checks; independent re-review and exact source/SHA handoff; no new human gates or repeated full-suite runs.",
+  "remote_verified": {
+    "audit": "no configured remote; local only",
+    "rf": "origin branch b2979af6522dd4deb9d493f228f24c52a6aa03a5",
+    "ff": "origin branch a693e10da2fc14c96fa9e96e0c6406a6a3fbb1ec"
+  }
+}

@@ -1,0 +1,74 @@
+[
+  {
+    "name": "original-root7",
+    "command": [
+      "C:/Miniconda/python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "C:/Users/郑曾波/Projects/company-wiki/docs/plans/du11-source-closure-2026-10-18/review/w20-reception-20261029/evidence/audit/test_independent_expectations.py"
+    ],
+    "returncode": 0,
+    "seconds": 0.321,
+    "stdout_tail": "",
+    "stderr_tail": "test_explicit_unchanged_period_remains_literal (__main__.RootRegressions.test_explicit_unchanged_period_remains_literal) ... ok\ntest_explicit_unread_support_cannot_be_positive_anchor (__main__.RootRegressions.test_explicit_unread_support_cannot_be_positive_anchor) ... ok\ntest_h2_is_not_full_h1_literal_anchor (__main__.RootRegressions.test_h2_is_not_full_h1_literal_anchor) ... ok\ntest_ratio_must_not_equal_monetary_amount (__main__.RootRegressions.test_ratio_must_not_equal_monetary_amount) ... ok\ntest_signed_value_must_not_lose_minus (__main__.RootRegressions.test_signed_value_must_not_lose_minus) ... ok\ntest_valid_same_currency_scale_equivalence_remains (__main__.RootRegressions.test_valid_same_currency_scale_equivalence_remains) ... ok\ntest_yen_is_not_literal_cny_token (__main__.RootRegressions.test_yen_is_not_literal_cny_token) ... ok\n\n----------------------------------------------------------------------\nRan 7 tests in 0.001s\n\nOK\n"
+  },
+  {
+    "name": "numeric-unit",
+    "command": [
+      "C:/Miniconda/python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_numeric_audit.py"
+    ],
+    "returncode": 0,
+    "seconds": 0.599,
+    "stdout_tail": "",
+    "stderr_tail": ".......\n----------------------------------------------------------------------\nRan 7 tests in 0.348s\n\nOK\n"
+  },
+  {
+    "name": "w20-unit",
+    "command": [
+      "C:/Miniconda/python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "-m",
+      "unittest",
+      "discover",
+      "-s",
+      "tests",
+      "-p",
+      "test_w20_*.py"
+    ],
+    "returncode": 0,
+    "seconds": 0.39,
+    "stdout_tail": "{\"attempt_id\": \"20261029T184953Z-0379371b\", \"attempt_dir\": \"C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\.planning\\\\w20-reception-r2-20261029\\\\audit\\\\temporary\\\\w20-helper-zg2f2tn_\\\\out\\\\20261029T184953Z-0379371b\", \"output_file\": \"C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\.planning\\\\w20-reception-r2-20261029\\\\audit\\\\temporary\\\\w20-helper-zg2f2tn_\\\\out\\\\20261029T184953Z-0379371b\\\\checkpoint-observations.json\"}\n",
+    "stderr_tail": "...................................\n----------------------------------------------------------------------\nRan 35 tests in 0.131s\n\nOK\n"
+  },
+  {
+    "name": "w20-cli-e2e",
+    "command": [
+      "C:/Miniconda/python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "tests/fixtures/w20_checkpoints/run_e2e_chain.py",
+      "--work",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w20-reception-r2-20261029\\audit\\temporary\\cli",
+      "--repo",
+      "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit-w20-checkpoints"
+    ],
+    "returncode": 0,
+    "seconds": 3.954,
+    "stdout_tail": "{\"expert_input\": \"C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\.planning\\\\w20-reception-r2-20261029\\\\audit\\\\temporary\\\\cli\\\\expert-input\\\\expert-input.json\", \"steps\": 11, \"coverage_sufficiency\": \"records_complete\", \"coverage_gaps\": 0}\n",
+    "stderr_tail": ""
+  }
+]

@@ -1,5 +1,7 @@
 # W20-FF-REPLAY 原包返工单 R1（2026-10-29）
 
+> 本轮后续返工已交付并复验，部分问题已关闭；本文件为第一轮历史。请改用[第二轮当前入口](../w20-reception-r2-20261029/RETURN_FF.md)，不重复实施已关闭任务。
+
 这不是新施工卡。在原工区原分支续改，不重开A调查、不回退进度。ROOT结论CHANGES_REQUESTED，尚未并线；主线循环仍暂停。
 
 - 工作目录：`C:/Users/郑曾波/Projects/filing-fetch-w20-replay`

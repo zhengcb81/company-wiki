@@ -1,0 +1,19 @@
+{
+  "retained_actual_case": {
+    "id": "w20_call_kill_after_durable",
+    "result": "PASS",
+    "current_assertion_errors": [],
+    "first_run_success_delivered": "downloaded",
+    "second_run_immediate_kill": true,
+    "second_run_provider_gets": 0
+  },
+  "threaded_stdin_probe": [
+    {
+      "thread": "A",
+      "expected_entity": "Company A",
+      "observed_entity": "Company B"
+    }
+  ],
+  "probe_errors": [],
+  "scope": "pure boundary control-flow concurrency probe; no CWP data/code invoked; actual retained case only re-evaluated with current assertion, NOT a new live E2E"
+}

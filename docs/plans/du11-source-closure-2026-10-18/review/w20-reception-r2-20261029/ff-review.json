@@ -1,0 +1,113 @@
+{
+  "schema_version": "w20-root-reception/2",
+  "card_id": "W20-FF-REPLAY",
+  "reviewer": "/root/w20_ff_reception",
+  "date": "2026-10-29",
+  "verdict": "REQUEST_CHANGES",
+  "base_commit": "5396bd688e5b775e746fe3290852f0532d4548f8",
+  "actual_head": "a693e10da2fc14c96fa9e96e0c6406a6a3fbb1ec",
+  "author_implementation_commit": "3747e4a",
+  "author_independent_review_head": "ecc5a57",
+  "implementation_unchanged_from_3747e4a_to_head": true,
+  "source_file_sha256": {
+    "tools/offline_contract_matrix/case_selection.py": "9b12cc21ec6e94630cd3ffa7737f9b0b7d36291fe15c8527206f64be37cb237e",
+    "tools/offline_contract_matrix/case_registry.py": "d80c706cf4f070314650e9e360ec0b15864b5abbb1379e0fcf2d208d017043f7",
+    "tools/offline_contract_matrix/w20_case_specs.py": "f8724a4a970161e62dc0a7a99642ef1282588b35c42922c6db85ae93dd5944a1",
+    "tools/offline_contract_matrix/w20_fault_cases.py": "9690571d3d634c72205308680320b18faac967971fe2625e660b588242e1307f",
+    "tools/offline_contract_matrix/cli_main.py": "12c6be7446f3ad967731d4f9a7dffdf2f5d18b8903bcbc15ce8dc9e90330a9f7",
+    "tools/offline_contract_matrix/oracle.py": "2795167935295adf3982bc4ae7f65559a71860d1427384a442c42aa0308b661b",
+    "tools/offline_contract_matrix/et_transcript_proxy.py": "3f0d63b0a15b8125e48e37408cc85c11965a367a2c98d8cde0b1b8d048a18d19",
+    "tools/offline_contract_matrix/runtime.py": "a419ccedfb3435a553f49f1175abe3211754aa15c24787220e3dff271e8d538b",
+    "tools/offline_contract_matrix/matrix_cases.py": "083cfb46394e62715227f2e8b0b977f770d3f67b25ca7dd550e47fc1e8c42bd0",
+    "tools/offline_contract_matrix/case_scheduling.py": "2dc91ac6318ecaa064fb1df89a5fa7eaa157f9b1ed0e2d886030e4e6855cee39",
+    "tools/offline_contract_matrix/README.md": "59ef20388656b7622e1c79454b7805b68368241444e99b4d7798e3907808f957",
+    "tests/test_w20_replay_selection.py": "c893ccde590787a18484aa251cb4f6cad38876a1d6baa7011afd8a7deeaf9218",
+    "tests/test_w20_replay_faults.py": "cf81441e0b795b6fbebbc18a3bcd8446742a4b81d9693c9e4deea18244149dfc",
+    "tests/test_w20_replay_return_r1.py": "7d86bb3364fb4a1024e26a4a19017f1d89e7cea6da6c69a956aac086964b715b"
+  },
+  "handoff_hash_check": {
+    "checked": 19,
+    "mismatches": []
+  },
+  "findings": [
+    {
+      "id": "FF-R2-1",
+      "severity": "P2",
+      "file": "tools/offline_contract_matrix/w20_fault_cases.py",
+      "line": 519,
+      "title": "关键场景仍替换为成功返回后的另一条重试被立即杀死",
+      "evidence": "当前run0=_execute无kill完整收到downloaded/exit0；公开实读在run0成功返回之后；run1=_execute(kill_when=lambda:True)刚创建新进程即无条件终止，不观察该重试进入CLI/query或即将返回阶段。两份真实durable PASS（solo2ebbf3d7/prior2a273f32）均[(exit0,killedFalse,GET1,downloaded),(exit1,killedTrue,GET0,no envelope),(exit0,killedFalse,GET0,unknown_publication)]。新版assertion_errors均接受此形状。",
+      "root_cause": "把“系统里存在durable资料”与“导致这份资料durable的同一次未确认采集在返回边界中断”视为同一故障；所以测试实际只证明已有资料时杀一个新重试不会妨碍后续复用。",
+      "required_fix": "保留此已有资料重试中断用例作为有效但较弱的覆盖，不能签原卡R2/R3关键场景完成。增加一次真正同次采集持久成功但客户端尚未收到该次成功结果的边界丢响应反证；在测试/harness拥有的transport/FF公开CLI输出边界缓冲/截断/丢弃首次成功返回，先经公开query+reader实读验证本请求Ref/SHA，再模拟客户端未确认/中断，重启后首个同请求0额外GET且同Ref/SHA。允许真实FF进程已经处理完而响应在transport边界丢失；不要求产品CWP增加failpoint，不要求必须在服务器同一微秒杀中，也不要求exactly-once。",
+      "retest": "先加会拒绝“run0已交客户端成功＋新空请求kill”替代场景的单元，再只跑这一种新的同次lost-reply真实链；before/mid/preexisting-reuse分别标清。若现有边界确实不能观测，交付最小seam需求并标该项PARTIAL，由ROOT处理，不伪完成。"
+    },
+    {
+      "id": "FF-R2-2",
+      "severity": "P2",
+      "file": "tools/offline_contract_matrix/w20_fault_cases.py",
+      "line": 181,
+      "title": "线程组中的公共readback探针会串用全局stdin/stdout",
+      "evidence": "现有cli_main.py:492用ThreadPoolExecutor(workers最多2)同时跑case组；新cwp_public_readback设置全局sys.stdin及contextlib.redirect_stdout。ROOT Events纯边界mock确定性复现：A应该读取Company A，实际读到Company B（probe_errors=[]）。finally恢复不能防并发期间错读。全局_CWP_PROBE_LAST_ERROR同样共享。",
+      "root_cause": "用单线程CLI的process全局I/O作为线程内函数API；新的readback探针没有遵守原case组隔离。",
+      "required_fix": "保留公开接口边界，优先调用显式参数公共函数或将这段CLI调用放入既有有界隔离进程；如用局部锁，需完整覆盖stdin/stdout替换/恢复和探针结果，避免与其他组process全局重定向冲突。不要新增用户许可/生产状态库。readback返回值应区分明确not_found与probe失败/unknown，不能把异常None直接用is not None转换成“公开确认未durable=False”；这在mid-import相位断言会把探针失败当负证据。",
+      "retest": "在2workers等效并发下，A/B不同公司或资料根请求均进入各自公共查询，不串stdin/stdout、不串错误；加入query异常/rc非0不被当明确notdurable的断言测试。仅短测＋相关case，不跑全41。"
+    }
+  ],
+  "closed_previous_findings": [
+    "FF-R1 partially improved: public readback now verifies same requested source bytes, prior not-durable branch no longer stands in for durable; however exact lost-reply scenario remains open as FF-R2-1",
+    "FF-R2 prior unrelated-sidecar trigger removed from live path: receipt tag now request-scoped; old sidecars cannot trigger this receipt path. New SHA helper is tests-only, not claimed live trigger proof",
+    "FF-R3 closed: receipt SHA refreshed and original 13-failure pytest exit_code now null+truthful explanation; no 404-second rerun required"
+  ],
+  "tests": [
+    {
+      "command": "C:/Miniconda/python.exe -B -X utf8 -m pytest -q -p no:cacheprovider --basetemp=<ROOT owned ff/pytest-tmp> tests/test_w20_replay_return_r1.py tests/test_w20_replay_selection.py tests/test_w20_replay_faults.py tests/test_w06_case_authority.py",
+      "exit_code": 0,
+      "passed": 189,
+      "failed": 0,
+      "seconds": 4.87,
+      "scope": "current implementation unit/authority, not fresh fault E2E"
+    },
+    {
+      "command": "C:/Miniconda/python.exe -B -X utf8 <ROOT evidence/ff/replay_probe.py> --ff-root <author worktree>",
+      "exit_code": 0,
+      "scope": "same current public-readback function control-flow probe + retained actual case assertion",
+      "actual": {
+        "retained_actual_case": {
+          "id": "w20_call_kill_after_durable",
+          "result": "PASS",
+          "current_assertion_errors": [],
+          "first_run_success_delivered": "downloaded",
+          "second_run_immediate_kill": true,
+          "second_run_provider_gets": 0
+        },
+        "threaded_stdin_probe": [
+          {
+            "thread": "A",
+            "expected_entity": "Company A",
+            "observed_entity": "Company B"
+          }
+        ],
+        "probe_errors": [],
+        "scope": "pure boundary control-flow concurrency probe; no CWP data/code invoked; actual retained case only re-evaluated with current assertion, NOT a new live E2E"
+      }
+    }
+  ],
+  "cleanup": {
+    "author_status_after": "",
+    "owned_pytest_tmp_initially_absent": true,
+    "owned_pytest_tmp_restored": true,
+    "author_dependency_snapshot_absent": true,
+    "author_owned_scratch_absent": true
+  },
+  "scope_limits": [
+    "Author/source/index/global installation read-only; no merge or commit",
+    "No paid API/LLM/provider/download and no full41/fullrepo reruns",
+    "Retained actual reports do not record byte hashes for new harness functions; producer deps/actual phase are preserved, no claim old metadata HEAD alone certifies final harness. Current 189 units bind actual3747e4a-compatible source",
+    "No production defect assertion from this test-harness gap alone"
+  ],
+  "non_blocking_notes": [
+    "cleanup-receipt.return_r1 still says deleted=false/removed=false despite actual both absent and note saying deleted; align final snapshot when updating rework handoff",
+    "handoff reviewed report points old final.md; new return-r1-final.* is present and reviewed. Existing top counts9 vs new10 stale; correct with next documentation update, no new permission gate or separate expensive review needed",
+    "Historical PASS reports preserved; scope qualification does not relabel producer result or demand a green full batch"
+  ]
+}

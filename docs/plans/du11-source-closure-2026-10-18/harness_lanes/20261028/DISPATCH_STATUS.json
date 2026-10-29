@@ -1,5 +1,5 @@
 {
-  "status": "ALL_THREE_DELIVERED_ROOT_CHANGES_REQUESTED",
+  "status": "R2_REWORK_DELIVERED_ROOT_REVIEW_FIVE_SCOPED_FINDINGS_REMAIN",
   "independent_card_review": "APPROVE_OPEN0",
   "priorities": {
     "W20-AUDIT-CHECKPOINTS": "RETURN_FOR_IMPROVEMENT",
@@ -15,17 +15,17 @@
   "count_policy": "derive task count from remaining work, dependency and receiving cost; never fixed3",
   "no_author_implementation_started_by_root": true,
   "received_on": "2026-10-29",
-  "root_reception_entry": "../../review/w20-reception-20261029/README.md",
+  "root_reception_entry": "../../review/w20-reception-r2-20261029/README.md",
   "mainline_loop": "PAUSED_NOT_RESUMED",
   "merge_status": "NOT_MERGED",
   "author_heads": {
-    "W20-AUDIT-CHECKPOINTS": "7ac295ffe9582533eb004ad10a8afc97f1bebc24",
-    "W20-RF-ADOPTION": "7716c7daefd540a143a282e621e1b53f9c1d9d07",
-    "W20-FF-REPLAY": "e81953dd8d122381265b7ba46c35117c3395cf1b"
+    "W20-AUDIT-CHECKPOINTS": "da17f2b5b4404c650e77671601e10553b879d2e7",
+    "W20-RF-ADOPTION": "b2979af6522dd4deb9d493f228f24c52a6aa03a5",
+    "W20-FF-REPLAY": "a693e10da2fc14c96fa9e96e0c6406a6a3fbb1ec"
   },
   "return_cards": {
-    "W20-AUDIT-CHECKPOINTS": "../../review/w20-reception-20261029/RETURN_AUDIT.md",
-    "W20-RF-ADOPTION": "../../review/w20-reception-20261029/RETURN_RF.md",
-    "W20-FF-REPLAY": "../../review/w20-reception-20261029/RETURN_FF.md"
+    "W20-AUDIT-CHECKPOINTS": "../../review/w20-reception-r2-20261029/RETURN_AUDIT.md",
+    "W20-RF-ADOPTION": "../../review/w20-reception-r2-20261029/RETURN_RF.md",
+    "W20-FF-REPLAY": "../../review/w20-reception-r2-20261029/RETURN_FF.md"
   }
 }

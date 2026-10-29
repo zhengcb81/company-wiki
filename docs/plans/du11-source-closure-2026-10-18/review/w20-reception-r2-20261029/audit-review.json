@@ -1,0 +1,210 @@
+{
+  "card_id": "W20-AUDIT-CHECKPOINTS",
+  "date": "2026-10-29",
+  "verdict": "RETURN_FOR_FOCUSED_IMPROVEMENT",
+  "binding": {
+    "base_commit": "33200f8c947f35be75a77de38040982724e033a7",
+    "actual_head": "da17f2b5b4404c650e77671601e10553b879d2e7",
+    "implementation_commit": "4ed94fcce99135d7c45ea1f16b5f0ed013b77313",
+    "head_delta": [
+      "delivery/w20-audit-checkpoints/handoff.json",
+      "delivery/w20-audit-checkpoints/handoff.md",
+      "delivery/w20-audit-checkpoints/review/rework-final.json",
+      "delivery/w20-audit-checkpoints/review/rework-final.md",
+      "docs/plans/w20-audit-checkpoints-2026-10-28/progress.md",
+      "docs/plans/w20-audit-checkpoints-2026-10-28/task_plan.md"
+    ],
+    "source_sha256": "6b1dae0edbf45de4e9fe347fa6664e04e83f5819cc5d1d973f9f2346022006a9",
+    "handoff_sha_count": 20,
+    "handoff_sha_mismatches": [],
+    "author_worktree_status": ""
+  },
+  "previous_findings": [
+    {
+      "id": "W20-AUDIT-R1",
+      "status": "PARTIALLY_FIXED",
+      "evidence": "Old ratio/amount, sign, bare-yuan, H1/H2 examples pass; general typed binding still fails six parameterized subcases."
+    },
+    {
+      "id": "W20-AUDIT-R2",
+      "status": "FIXED",
+      "evidence": "Shared _available_fragments filters explicit read + nonempty text once; both observe_map and packet use same anchor entry; retained metadata/context unchanged; original unread and author two-entry tests pass."
+    }
+  ],
+  "open_findings": [
+    {
+      "id": "W20-AUDIT-R1",
+      "severity": "P2",
+      "status": "NOT_FULLY_FIXED",
+      "title": "Typed value comparison still borrows class/currency from unrelated text",
+      "file": "skills/revenue-forecast-audit/scripts/summary_checkpoint_observations.py",
+      "lines": [
+        298,
+        300,
+        316,
+        317,
+        318,
+        319,
+        320,
+        321,
+        322,
+        323,
+        324
+      ],
+      "reproductions": [
+        {
+          "case": "explicit_unit_donated_from_body_percent",
+          "claim": {
+            "text": "收入1000元，同比增长10%",
+            "value": "1000",
+            "unit": "元"
+          },
+          "support": "收入1,000元，同比增长10%",
+          "actual": "anchor_absent",
+          "expected": "literal_match for value 1000; an explicit amount unit must not be reclassified by another growth-ratio token in the claim body.",
+          "variants": "1000/1,000;2500/2,500;-1000/-1,000 all fail"
+        },
+        {
+          "case": "currency_donated_by_other_number",
+          "claim": {
+            "text": "收入12.5亿元人民币",
+            "value": "12.5",
+            "unit": "亿元人民币"
+          },
+          "support": "收入USD 1,250,000,000；人民币余额2元。",
+          "actual": "scale_equivalent",
+          "expected": "No CNY equivalence without candidate-bound currency/FX; another number's CNY token cannot support the USD number. Ambiguous association must stay unknown/partial, not full equivalence.",
+          "variants": "claim CNY/candidate USD; claim HKD/candidate CNY; claim USD/candidate HKD all fail"
+        }
+      ],
+      "root_cause": "The value owner still flattens typed scope before comparing: an explicit scale-1 amount unit is confused with absent unit and falls back to all claim text; candidate currency is inferred from the entire support paragraph instead of the matching numeric candidate. The ratio and currency checks added in rework are therefore not attached to the same typed value.",
+      "required_fix": [
+        "Distinguish declared unit with identity scale from missing/unknown unit. If explicit unit identifies an amount, do not derive its class or scale from other quantities/ratios in claim text.",
+        "Bind source value/scale/currency at one explicit local candidate scope; when correspondence is ambiguous retain unknown/partial. Do not borrow another amount's currency across a paragraph. A mixed-currency fragment may conservatively be unresolved rather than adding a large vocabulary.",
+        "Reuse existing numeric owner for explicit typed compatibility where applicable; lack of a particular function call alone is not the blocker. Do not create another unit table, approval gate or company-specific branches.",
+        "Add these parameterized cases alongside prior seven controls, bounded W20/numeric regressions and one offline CLI chain; then genuine independent re-review and final handoff SHA binding. No repeated full-repository suite is required."
+      ]
+    }
+  ],
+  "tests": [
+    {
+      "name": "original-root7",
+      "command": [
+        "C:/Miniconda/python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "C:/Users/郑曾波/Projects/company-wiki/docs/plans/du11-source-closure-2026-10-18/review/w20-reception-20261029/evidence/audit/test_independent_expectations.py"
+      ],
+      "returncode": 0,
+      "seconds": 0.321,
+      "stdout_tail": "",
+      "stderr_tail": "test_explicit_unchanged_period_remains_literal (__main__.RootRegressions.test_explicit_unchanged_period_remains_literal) ... ok\ntest_explicit_unread_support_cannot_be_positive_anchor (__main__.RootRegressions.test_explicit_unread_support_cannot_be_positive_anchor) ... ok\ntest_h2_is_not_full_h1_literal_anchor (__main__.RootRegressions.test_h2_is_not_full_h1_literal_anchor) ... ok\ntest_ratio_must_not_equal_monetary_amount (__main__.RootRegressions.test_ratio_must_not_equal_monetary_amount) ... ok\ntest_signed_value_must_not_lose_minus (__main__.RootRegressions.test_signed_value_must_not_lose_minus) ... ok\ntest_valid_same_currency_scale_equivalence_remains (__main__.RootRegressions.test_valid_same_currency_scale_equivalence_remains) ... ok\ntest_yen_is_not_literal_cny_token (__main__.RootRegressions.test_yen_is_not_literal_cny_token) ... ok\n\n----------------------------------------------------------------------\nRan 7 tests in 0.001s\n\nOK\n"
+    },
+    {
+      "name": "numeric-unit",
+      "command": [
+        "C:/Miniconda/python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_numeric_audit.py"
+      ],
+      "returncode": 0,
+      "seconds": 0.599,
+      "stdout_tail": "",
+      "stderr_tail": ".......\n----------------------------------------------------------------------\nRan 7 tests in 0.348s\n\nOK\n"
+    },
+    {
+      "name": "w20-unit",
+      "command": [
+        "C:/Miniconda/python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "-m",
+        "unittest",
+        "discover",
+        "-s",
+        "tests",
+        "-p",
+        "test_w20_*.py"
+      ],
+      "returncode": 0,
+      "seconds": 0.39,
+      "stdout_tail": "{\"attempt_id\": \"20261029T184953Z-0379371b\", \"attempt_dir\": \"C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\.planning\\\\w20-reception-r2-20261029\\\\audit\\\\temporary\\\\w20-helper-zg2f2tn_\\\\out\\\\20261029T184953Z-0379371b\", \"output_file\": \"C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\.planning\\\\w20-reception-r2-20261029\\\\audit\\\\temporary\\\\w20-helper-zg2f2tn_\\\\out\\\\20261029T184953Z-0379371b\\\\checkpoint-observations.json\"}\n",
+      "stderr_tail": "...................................\n----------------------------------------------------------------------\nRan 35 tests in 0.131s\n\nOK\n"
+    },
+    {
+      "name": "w20-cli-e2e",
+      "command": [
+        "C:/Miniconda/python.exe",
+        "-B",
+        "-X",
+        "utf8",
+        "tests/fixtures/w20_checkpoints/run_e2e_chain.py",
+        "--work",
+        "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w20-reception-r2-20261029\\audit\\temporary\\cli",
+        "--repo",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit-w20-checkpoints"
+      ],
+      "returncode": 0,
+      "seconds": 3.954,
+      "stdout_tail": "{\"expert_input\": \"C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\.planning\\\\w20-reception-r2-20261029\\\\audit\\\\temporary\\\\cli\\\\expert-input\\\\expert-input.json\", \"steps\": 11, \"coverage_sufficiency\": \"records_complete\", \"coverage_gaps\": 0}\n",
+      "stderr_tail": ""
+    }
+  ],
+  "new_counterexamples": {
+    "command": [
+      "C:/Miniconda/python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w20-reception-r2-20261029\\audit\\test_typed_binding.py"
+    ],
+    "exit_code": 1,
+    "test_methods": 4,
+    "failed_methods": 2,
+    "failed_subcases": 6,
+    "passed_controls": 2,
+    "source_commit": "4ed94fcce99135d7c45ea1f16b5f0ed013b77313",
+    "material": "synthetic neutral cases, not real company analysis"
+  },
+  "cleanup": {
+    "root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\w20-reception-r2-20261029\\audit\\temporary",
+    "before_exists": false,
+    "after_exists": false,
+    "owned_files_removed": 45,
+    "end_bytes_before_cleanup": 235818,
+    "peak_bytes": null,
+    "peak_note": "not sampled",
+    "restored": true
+  },
+  "scope": [
+    "No author source edits, no installation, merge, download, paid call or secret read.",
+    "Old report and old RED untouched; new tests are synthetic generic counterexamples, not company forecasts.",
+    "Existing source identity/role/four-reviewer/expert boundaries and budget unchanged.",
+    "Final claim semantic judgments still belong to independent reviewers. Positive mechanical labels must still be accurate."
+  ],
+  "notes": [
+    {
+      "id": "INFO-decimal",
+      "text": "Additional diagnostic shows declared unit=decimal with source10% is anchor_absent, although numeric_audit supports decimal/percent compatibility. Treat as another signal of duplicated class mapping, not a new separate blocker or a request to broaden vocabulary."
+    },
+    {
+      "id": "INFO-literal",
+      "text": "The literal numeric path does not test currency. Recorded as scope observation only; literal-only numeric presence can be distinct from typed equivalence, so no standalone new defect is asserted."
+    },
+    {
+      "id": "INFO-production",
+      "text": "Producer missing claim anchor fields remains the previously disclosed ROOT followup, not reopened as this card's obligation."
+    }
+  ],
+  "next_action": "Return only original R1 residual scope to original harness. Keep R2 closed. Do not merge/install this package until focused fix and independent re-review; unrelated accepted work need not wait."
+}

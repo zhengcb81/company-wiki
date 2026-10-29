@@ -1,0 +1,78 @@
+test_currency_must_stay_bound_to_the_matching_number (__main__.TypedBindingRegression.test_currency_must_stay_bound_to_the_matching_number) ... 
+  test_currency_must_stay_bound_to_the_matching_number (__main__.TypedBindingRegression.test_currency_must_stay_bound_to_the_matching_number) (claim_currency='人民币', amount_currency='USD') ... FAIL
+  test_currency_must_stay_bound_to_the_matching_number (__main__.TypedBindingRegression.test_currency_must_stay_bound_to_the_matching_number) (claim_currency='港币', amount_currency='CNY') ... FAIL
+  test_currency_must_stay_bound_to_the_matching_number (__main__.TypedBindingRegression.test_currency_must_stay_bound_to_the_matching_number) (claim_currency='美元', amount_currency='HKD') ... FAIL
+test_explicit_amount_unit_must_not_borrow_another_percent (__main__.TypedBindingRegression.test_explicit_amount_unit_must_not_borrow_another_percent) ... 
+  test_explicit_amount_unit_must_not_borrow_another_percent (__main__.TypedBindingRegression.test_explicit_amount_unit_must_not_borrow_another_percent) (value='1000') ... FAIL
+  test_explicit_amount_unit_must_not_borrow_another_percent (__main__.TypedBindingRegression.test_explicit_amount_unit_must_not_borrow_another_percent) (value='2500') ... FAIL
+  test_explicit_amount_unit_must_not_borrow_another_percent (__main__.TypedBindingRegression.test_explicit_amount_unit_must_not_borrow_another_percent) (value='-1000') ... FAIL
+test_plain_amount_literal_control (__main__.TypedBindingRegression.test_plain_amount_literal_control) ... ok
+test_single_currency_conversion_control (__main__.TypedBindingRegression.test_single_currency_conversion_control) ... ok
+
+======================================================================
+FAIL: test_currency_must_stay_bound_to_the_matching_number (__main__.TypedBindingRegression.test_currency_must_stay_bound_to_the_matching_number) (claim_currency='人民币', amount_currency='USD')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\company-wiki\.planning\w20-reception-r2-20261029\audit\test_typed_binding.py", line 17, in test_currency_must_stay_bound_to_the_matching_number
+    self.assertNotEqual(result['status'],'scale_equivalent',result)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'scale_equivalent' == 'scale_equivalent' : {'anchor_kind': 'value', 'declared': '12.5', 'declared_unit': '亿元人民币', 'status': 'scale_equivalent', 'fragment_ids': ['f'], 'scale_equivalent_literals': [{'fragment_id': 'f', 'literal': '1,250,000,000'}]}
+
+======================================================================
+FAIL: test_currency_must_stay_bound_to_the_matching_number (__main__.TypedBindingRegression.test_currency_must_stay_bound_to_the_matching_number) (claim_currency='港币', amount_currency='CNY')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\company-wiki\.planning\w20-reception-r2-20261029\audit\test_typed_binding.py", line 17, in test_currency_must_stay_bound_to_the_matching_number
+    self.assertNotEqual(result['status'],'scale_equivalent',result)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'scale_equivalent' == 'scale_equivalent' : {'anchor_kind': 'value', 'declared': '12.5', 'declared_unit': '亿元港币', 'status': 'scale_equivalent', 'fragment_ids': ['f'], 'scale_equivalent_literals': [{'fragment_id': 'f', 'literal': '1,250,000,000'}]}
+
+======================================================================
+FAIL: test_currency_must_stay_bound_to_the_matching_number (__main__.TypedBindingRegression.test_currency_must_stay_bound_to_the_matching_number) (claim_currency='美元', amount_currency='HKD')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\company-wiki\.planning\w20-reception-r2-20261029\audit\test_typed_binding.py", line 17, in test_currency_must_stay_bound_to_the_matching_number
+    self.assertNotEqual(result['status'],'scale_equivalent',result)
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'scale_equivalent' == 'scale_equivalent' : {'anchor_kind': 'value', 'declared': '12.5', 'declared_unit': '亿元美元', 'status': 'scale_equivalent', 'fragment_ids': ['f'], 'scale_equivalent_literals': [{'fragment_id': 'f', 'literal': '1,250,000,000'}]}
+
+======================================================================
+FAIL: test_explicit_amount_unit_must_not_borrow_another_percent (__main__.TypedBindingRegression.test_explicit_amount_unit_must_not_borrow_another_percent) (value='1000')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\company-wiki\.planning\w20-reception-r2-20261029\audit\test_typed_binding.py", line 12, in test_explicit_amount_unit_must_not_borrow_another_percent
+    self.assertEqual(result['status'],'literal_match',result)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'anchor_absent' != 'literal_match'
+- anchor_absent
++ literal_match
+ : {'anchor_kind': 'value', 'declared': '1000', 'declared_unit': '元', 'status': 'anchor_absent', 'fragment_ids': []}
+
+======================================================================
+FAIL: test_explicit_amount_unit_must_not_borrow_another_percent (__main__.TypedBindingRegression.test_explicit_amount_unit_must_not_borrow_another_percent) (value='2500')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\company-wiki\.planning\w20-reception-r2-20261029\audit\test_typed_binding.py", line 12, in test_explicit_amount_unit_must_not_borrow_another_percent
+    self.assertEqual(result['status'],'literal_match',result)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'anchor_absent' != 'literal_match'
+- anchor_absent
++ literal_match
+ : {'anchor_kind': 'value', 'declared': '2500', 'declared_unit': '元', 'status': 'anchor_absent', 'fragment_ids': []}
+
+======================================================================
+FAIL: test_explicit_amount_unit_must_not_borrow_another_percent (__main__.TypedBindingRegression.test_explicit_amount_unit_must_not_borrow_another_percent) (value='-1000')
+----------------------------------------------------------------------
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\company-wiki\.planning\w20-reception-r2-20261029\audit\test_typed_binding.py", line 12, in test_explicit_amount_unit_must_not_borrow_another_percent
+    self.assertEqual(result['status'],'literal_match',result)
+    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+AssertionError: 'anchor_absent' != 'literal_match'
+- anchor_absent
++ literal_match
+ : {'anchor_kind': 'value', 'declared': '-1000', 'declared_unit': '元', 'status': 'anchor_absent', 'fragment_ids': []}
+
+----------------------------------------------------------------------
+Ran 4 tests in 0.005s
+
+FAILED (failures=6)

@@ -1,0 +1,214 @@
+{
+  "scope": "Exact case object extracted from retained actual report, not whole bound E2E report",
+  "original_report": {
+    "path": "C:\\Users\\郑曾波\\Projects\\_w20-runs\\out\\attempt-2ebbf3d7be284304877137c80cf18226\\report.json",
+    "sha256": "f90bc27527538817e8be9850cc31d912881d12923667bcbee53c8596797ac005"
+  },
+  "case": {
+    "id": "w20_call_kill_after_durable",
+    "title": "durable source confirmed by public read-back, then the re-request is killed before its return is delivered (post-durable receipt/return interruption); recovery reuses with zero extra GETs and the same Ref/SHA",
+    "declared_layer": "ff+et",
+    "observed_layer": "w20 fault/recovery chain (real FF CLI + test-proxy boundary + real CWP import)",
+    "result": "PASS",
+    "scope": "real FF+ET chain; deterministic post-durable interruption: the kill fires only after THIS request's source is readable back through CWP's public interfaces (public transcript query + verified open) and hashes to this request's content; an unrelated-period original is pre-placed on disk as a control and can never fire the trigger. Recovery must reuse with ZERO extra provider GETs and the same Ref/SHA; the final replay reuses with zero GETs",
+    "expected": {
+      "interruption_phase": "post_durable",
+      "recovery_zero_requests": true
+    },
+    "actual": {
+      "interruption_phase": "post_durable",
+      "verified_at_kill": {
+        "document_id": "urn:company-wiki:document:sha256:f1778c54ef796eaf7e0c14d3afc35aa17e440573b7cec06abf9ee9d43e9ad9a9",
+        "source_id": "urn:company-wiki:source:sha256:f1778c54ef796eaf7e0c14d3afc35aa17e440573b7cec06abf9ee9d43e9ad9a9",
+        "content_sha256": "f1778c54ef796eaf7e0c14d3afc35aa17e440573b7cec06abf9ee9d43e9ad9a9",
+        "byte_size": 512,
+        "mime_type": "application/json"
+      },
+      "probe_last_error": null,
+      "kill_reason": "harness interruption at observed boundary",
+      "runs": [
+        {
+          "exit_code": 0,
+          "response": {
+            "schema_version": "2.0",
+            "status": "source_candidate",
+            "request_period": {
+              "mode": "exact",
+              "fiscal_year": 2025,
+              "fiscal_period": "FY",
+              "as_of_date": "2026-12-31"
+            },
+            "filing": {
+              "status": "source_candidate",
+              "source_ref": {
+                "byte_size": 619,
+                "content_sha256": "a2961fd67b9924d2490ea7cb14fa046aaab6c391562a67fca89fb624b1db834f",
+                "document_id": "urn:company-wiki:document:sha256:a2961fd67b9924d2490ea7cb14fa046aaab6c391562a67fca89fb624b1db834f",
+                "mime_type": "application/pdf",
+                "schema_version": "2.0",
+                "source_id": "urn:company-wiki:source:sha256:a2961fd67b9924d2490ea7cb14fa046aaab6c391562a67fca89fb624b1db834f"
+              },
+              "byte_verification": "pending_verified_open",
+              "document_kind": "annual_report",
+              "fiscal_year": 2025,
+              "fiscal_period": "FY",
+              "resolution_outcome": "reused_existing",
+              "download_events": 0
+            },
+            "transcript": {
+              "status": "downloaded",
+              "retryable": false,
+              "source_ref": {
+                "document_id": "urn:company-wiki:document:sha256:f1778c54ef796eaf7e0c14d3afc35aa17e440573b7cec06abf9ee9d43e9ad9a9",
+                "source_id": "urn:company-wiki:source:sha256:f1778c54ef796eaf7e0c14d3afc35aa17e440573b7cec06abf9ee9d43e9ad9a9",
+                "content_sha256": "f1778c54ef796eaf7e0c14d3afc35aa17e440573b7cec06abf9ee9d43e9ad9a9",
+                "byte_size": 512,
+                "mime_type": "application/json",
+                "schema_version": "2.0"
+              },
+              "provider": "fmp",
+              "fiscal_year": 2036,
+              "fiscal_quarter": 1,
+              "provider_document_id": "fmp:AAPL:2036:Q1:2025-12-01",
+              "call_date": "2025-12-01",
+              "publication_date": null,
+              "as_of_cutoff_verified": false,
+              "provider_calls": 1,
+              "provider_requests": 1,
+              "provider_response_bytes": 512,
+              "provider_usage_complete": true
+            },
+            "calls": 5,
+            "downloads": 0
+          },
+          "stderr": "",
+          "request_ref": "g1.w20_call_kill_after_durable.run1.request.json",
+          "response_ref": "g1.w20_call_kill_after_durable.run1.response.json",
+          "stderr_ref": "g1.w20_call_kill_after_durable.run1.stderr.txt",
+          "et_fixture_requests": 1,
+          "adapter_fixture_requests": 0,
+          "receipt_tag": "w20_call_kill_after_durable.run1",
+          "fixture_scenario": "success",
+          "fixture_ref": "g1.w20_call_kill_after_durable.run1.fixture.json",
+          "fixture_sha256": "8c17213ca71c5d32dc155e3d6573cbf4d28b4bb76df4e02177777b020daa7dec",
+          "expected_original_content_sha256": "e230a81e8ca2cabea77cf24db448dc446c83761c334eb0bf483de921482e506b",
+          "request_sha256": "5be3c86e259eabccbef233ae22ca58c57ca92e67f2d21c470c93725b8a16aec5",
+          "response_sha256": "1067429891cc297923114c6eb649284c371a56a8e1c8588c7b6ac86f9d7d7984",
+          "killed": false,
+          "kill_reason": null,
+          "adapter_fetch_requests": 0,
+          "et_result_receipt": {
+            "file": "w20_call_kill_after_durable.run1.result.json",
+            "sha256": "718472d5387415ad2e9ce5bac053c71880293ee742fd748e87e6c18f5e652142"
+          },
+          "et_usage_receipt": {
+            "file": "w20_call_kill_after_durable.run1.usage.json",
+            "sha256": "fe17cb2d477b8be3f45441dd6e2385940a2def6cd7463ecbbcfb37e8906437bc"
+          },
+          "fixture_requests": 1
+        },
+        {
+          "exit_code": 1,
+          "response": {
+            "_unparsed_stdout": ""
+          },
+          "stderr": "",
+          "request_ref": "g1.w20_call_kill_after_durable.run2.request.json",
+          "response_ref": "g1.w20_call_kill_after_durable.run2.response.json",
+          "stderr_ref": "g1.w20_call_kill_after_durable.run2.stderr.txt",
+          "et_fixture_requests": 0,
+          "adapter_fixture_requests": 0,
+          "receipt_tag": "w20_call_kill_after_durable.run2",
+          "fixture_scenario": "success",
+          "fixture_ref": "g1.w20_call_kill_after_durable.run2.fixture.json",
+          "fixture_sha256": "56b760fa0355a51584188b50f2bc63e3f4ad42d5c5869f2558a15967d64450d8",
+          "expected_original_content_sha256": "e230a81e8ca2cabea77cf24db448dc446c83761c334eb0bf483de921482e506b",
+          "request_sha256": "5be3c86e259eabccbef233ae22ca58c57ca92e67f2d21c470c93725b8a16aec5",
+          "response_sha256": "3588f4eaf76fb6903641949289f655206205fe19715514d1e81dbc5af6901b0b",
+          "killed": true,
+          "kill_reason": "harness interruption at observed boundary",
+          "adapter_fetch_requests": 0,
+          "fixture_requests": 0
+        },
+        {
+          "exit_code": 0,
+          "response": {
+            "schema_version": "2.0",
+            "status": "source_candidate",
+            "request_period": {
+              "mode": "exact",
+              "fiscal_year": 2025,
+              "fiscal_period": "FY",
+              "as_of_date": "2026-12-31"
+            },
+            "filing": {
+              "status": "source_candidate",
+              "source_ref": {
+                "byte_size": 619,
+                "content_sha256": "a2961fd67b9924d2490ea7cb14fa046aaab6c391562a67fca89fb624b1db834f",
+                "document_id": "urn:company-wiki:document:sha256:a2961fd67b9924d2490ea7cb14fa046aaab6c391562a67fca89fb624b1db834f",
+                "mime_type": "application/pdf",
+                "schema_version": "2.0",
+                "source_id": "urn:company-wiki:source:sha256:a2961fd67b9924d2490ea7cb14fa046aaab6c391562a67fca89fb624b1db834f"
+              },
+              "byte_verification": "pending_verified_open",
+              "document_kind": "annual_report",
+              "fiscal_year": 2025,
+              "fiscal_period": "FY",
+              "resolution_outcome": "reused_existing",
+              "download_events": 0
+            },
+            "transcript": {
+              "status": "unknown_publication",
+              "reason": "publication_date_unknown",
+              "retryable": false,
+              "source_ref": {
+                "schema_version": "2.0",
+                "document_id": "urn:company-wiki:document:sha256:f1778c54ef796eaf7e0c14d3afc35aa17e440573b7cec06abf9ee9d43e9ad9a9",
+                "source_id": "urn:company-wiki:source:sha256:f1778c54ef796eaf7e0c14d3afc35aa17e440573b7cec06abf9ee9d43e9ad9a9",
+                "content_sha256": "f1778c54ef796eaf7e0c14d3afc35aa17e440573b7cec06abf9ee9d43e9ad9a9",
+                "byte_size": 512,
+                "mime_type": "application/json"
+              },
+              "provider": "fmp",
+              "fiscal_year": 2036,
+              "fiscal_quarter": 1,
+              "publication_date": null,
+              "as_of_cutoff_verified": false,
+              "provider_calls": 0
+            },
+            "calls": 4,
+            "downloads": 0
+          },
+          "stderr": "",
+          "request_ref": "g1.w20_call_kill_after_durable.run3.request.json",
+          "response_ref": "g1.w20_call_kill_after_durable.run3.response.json",
+          "stderr_ref": "g1.w20_call_kill_after_durable.run3.stderr.txt",
+          "et_fixture_requests": 0,
+          "adapter_fixture_requests": 0,
+          "receipt_tag": "w20_call_kill_after_durable.run3",
+          "fixture_scenario": "success",
+          "fixture_ref": "g1.w20_call_kill_after_durable.run3.fixture.json",
+          "fixture_sha256": "aadaa1f8ff86ed8d541cfa84fce89365cf00bb548cb8f6cd8d17bc86fd693ccf",
+          "expected_original_content_sha256": "e230a81e8ca2cabea77cf24db448dc446c83761c334eb0bf483de921482e506b",
+          "request_sha256": "5be3c86e259eabccbef233ae22ca58c57ca92e67f2d21c470c93725b8a16aec5",
+          "response_sha256": "7488682f36d5b1ec9e6eba1e60c4440f12333a3225dbcb17d8b13fc905306ebe",
+          "killed": false,
+          "kill_reason": null,
+          "adapter_fetch_requests": 0,
+          "fixture_requests": 0
+        }
+      ],
+      "elapsed_seconds": 19.6089
+    },
+    "provider_counters": {
+      "fixture_requests": 1
+    },
+    "request_ref": null,
+    "response_ref": null,
+    "receipt_refs": [],
+    "diagnostics": [
+      "all supplemental assertions observed"
+    ]
+  }
+}

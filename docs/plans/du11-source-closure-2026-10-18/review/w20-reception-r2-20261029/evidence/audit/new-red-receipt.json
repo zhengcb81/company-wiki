@@ -1,0 +1,16 @@
+{
+  "command": [
+    "C:/Miniconda/python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.planning\\w20-reception-r2-20261029\\audit\\test_typed_binding.py"
+  ],
+  "exit_code": 1,
+  "test_methods": 4,
+  "failed_methods": 2,
+  "failed_subcases": 6,
+  "passed_controls": 2,
+  "source_commit": "4ed94fcce99135d7c45ea1f16b5f0ed013b77313",
+  "material": "synthetic neutral cases, not real company analysis"
+}
