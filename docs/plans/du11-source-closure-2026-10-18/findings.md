@@ -1,5 +1,11 @@
 # 调查与发现
 
+## 2026-10-29 用户恢复主线：来源信息量A/B实施（唯一当前状态）
+
+用户已撤销暂停，按[本轮唯一执行入口](review/source-information-20261029/README.md)继续来源信息量A→B，再真实来源/摘要/缓存/FF-RF实际采用及holdout循环。W20已完成，不重开。先用真实typed relation局部绑定关闭财务current豁免旁路，再共享prepared payload三态，清理套话/财务碎片占位并保具体功能、主营、计划/负面和融资条件。先TDD，关键节点独审，必要短测与真实样本，正常提交推送。
+
+原件/配置/他人WIP及10M/$20配置与母账保持。原生goal回读paused且API无resume，不造新重复目标；主线实施按本次用户明确授权已经恢复。下方旧暂停和返工状态都是历史，不覆盖本段和CURRENT_STATUS.json。
+
 ## 2026-10-29 W20三包最终完成并线，主线公司循环仍暂停（唯一当前状态）
 
 **W20-AUDIT/RF/FF均最终独审PASS、范围内OPEN=0并入main。** ROOT按用户授权在隔离工区直接修余下币种局部归属/左右边界与三态迁移遗漏，真实RED→共享owner修复→定向测试→独立终审后发布。唯一入口：[最终验收/并线/部署](review/w20-reception-r3-20261029/README.md)，此前两轮RETURN/待返工是历史，不再开工。
@@ -1381,3 +1387,7 @@ PDF三文件尚为独立WIP：旧独审42P2F指出双表行形状会吞真实金
 配置10M tokens/$20，母账1,800,368tokens/$0.727945及unknown不变，本节点0新供应商POST/下载。所有短测TEMP已恢复；只存紧凑证据，未提交SDK/env/原件大副本。下一步先等待用户明确恢复，再按暂停交接A→B/真实IR/SDK与正式摘要顺序继续。下方旧“当前/下一步/恢复运行”均为历史。
 
 2026-10-28：收尾文档首次diff --check发现findings/progress末尾多余空行，已仅整理EOF；不涉及产品、测试断言或额度变更。
+
+2026-10-29 A首次测试夹具使用非canonical unit ID而全部在构造失败，并非有效RED。已按NarrativeUnit原合同修正fixture，保留a-fixture-error.txt，不放松产品校验；有效RED另存。长basetemp在受限runtime被既有hook自动重定位并清理，后续用短owned路径。
+
+2026-10-29 新独立线已就位：[W21-PDF-RUNTIME](harness_lanes/20261029/W21-PDF-RUNTIME.md)，仅PDF增强启动/worker/env owner；ROOT语义A/B继续且不改该三文件，SDK实测由单一owner负责。工区仅稀疏工程，四seed为已知ROOT脚手架，未复制原件/历史.planning/SDK。READY不是RUNNING。

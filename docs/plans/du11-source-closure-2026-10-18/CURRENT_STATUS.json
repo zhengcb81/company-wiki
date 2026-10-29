@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-29",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "MAINLINE_LOOP_PAUSED_W20_ALL_COMPONENTS_ACCEPTED_MERGED",
+  "overall_status": "ACTIVE_SOURCE_INFORMATION_ROOT_FIX_A_B",
   "parallel_packages_20261025": {
     "status": "W16_W17_W18_ROOT_COMPONENT_ACCEPTED_MERGED",
     "entry": "harness_lanes/20261025/README.md",
@@ -21,7 +21,7 @@
     "new_downloads": 0,
     "annual14_grade_unchanged": "Historical8/6/0 and10/4/0 reports preserved; latest source/input12/2/0; response semantics NOT_REVIEWED and RF OPEN"
   },
-  "current_authorized_scope": "User requested receipt, direct remaining small fixes, merge/push/update PWF. W20 complete; prior pause on mainline company loop remains. No new paid/download/source-production loop started.",
+  "current_authorized_scope": "User explicitly resumed mainline source-quality fixes, then real summary/cache/RF adoption; direct root fixes and independent milestone review authorized.",
   "parent_plan_id": "document-understanding-2026-10-13",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
@@ -2345,7 +2345,7 @@
     "published": true,
     "push_failure": "47 targets /392 collected /600s; two regressions being root-fixed, not waived by narrower daily gate"
   },
-  "next_action": "WAIT_FOR_USER_RESUME_SOURCE_QUALITY_MAINLINE",
+  "next_action": "TDD_A_TYPED_LOCAL_RELATION_BINDING_THEN_B_SHARED_PAYLOAD",
   "c3_runtime_recovery_20261026": {
     "entry": "review/pdf-c3-20261026/RUNTIME_RECOVERY.md",
     "environment_independent": "PASS_ZERO_OPEN_25_TESTS_AND_REAL_WORKER_ENTRYPOINTS",
@@ -2958,8 +2958,8 @@
     ".githooks/pre-push mode-only",
     "RF primary assurance/runs daily_alert/weekly_alert/weekly_manifest"
   ],
-  "pause_requested_by_user": true,
-  "paused_scope": "Mainline source production/paid summaries/company loop paused; W20 receipts/direct fixes/merge/deploy now complete, no outstanding W20 author rework",
+  "pause_requested_by_user": false,
+  "paused_scope": "revoked by user mainline resume 2026-10-29",
   "own_uncommitted_runtime": [],
   "qa_provisional_publication": {
     "code_commit": "c6c446d0eebc8f6e6f6903bd677c04eebaf65077",
@@ -3032,5 +3032,20 @@
     "ff_ci": "SUCCESS_40950402165",
     "audit_installed": "TWO_TARGETS_43FILES_MATCH",
     "overall_goal_complete": false
+  },
+  "mainline_resume_20261029": {
+    "status": "EXECUTING_USER_RESUME",
+    "entry": "review/source-information-20261029/README.md",
+    "native_goal_observed": "paused; tool has no resume operation; no duplicate created",
+    "new_supplier_posts": 0,
+    "new_downloads": 0
+  },
+  "parallel_w21_runtime": {
+    "status": "READY_NOT_DISPATCHED",
+    "entry": "harness_lanes/20261029/W21-PDF-RUNTIME.md",
+    "workdir": "C:/Users/郑曾波/Projects/company-wiki-w21-pdf-runtime",
+    "branch": "codex/w21-pdf-runtime-20261029",
+    "base": "bb5d09c056ca36bba8061d761b5469d87aa6e5e0",
+    "root_preserves_owned_runtime_files": true
   }
 }

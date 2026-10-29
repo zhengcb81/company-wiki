@@ -1,0 +1,28 @@
+{
+  "card_id": "W21-PDF-RUNTIME",
+  "status": "READY_NOT_DISPATCHED",
+  "workdir": "C:\\Users\\郑曾波\\Projects\\company-wiki-w21-pdf-runtime",
+  "branch": "codex/w21-pdf-runtime-20261029",
+  "base_commit": "bb5d09c056ca36bba8061d761b5469d87aa6e5e0",
+  "card_sha256": "c072d3390f953081225792086bfdcda0b001c7b4626aaddca4fb50012d01ba62",
+  "root_main_uncommitted_semantics_not_copied": true,
+  "sparse_paths": [
+    "src",
+    "tests",
+    "tools",
+    "config",
+    ".github",
+    ".githooks",
+    "docs/plans/w21-pdf-runtime-2026-10-29"
+  ],
+  "no_companies_history_sdk_copy": true,
+  "initial_clean": true,
+  "seed_files": [
+    "construction_card.md",
+    "task_plan.md",
+    "findings.md",
+    "progress.md"
+  ],
+  "setup_notes": "--no-checkout starts with empty index; initialized own sparse read-tree. Windows filemode mismatch fixed only in new worktree config, primary original mode WIP preserved. No deletion of project files.",
+  "card_lf_sha256": "31daf54c8c818569aac87f46c6f8541fe0ded3846ab24cdc6ebddee162c1cc48"
+}
