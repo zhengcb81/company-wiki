@@ -38,7 +38,7 @@ _MODAL = re.compile(
     r"\b(?:expects?|expected|expecting|anticipat\w*|forecast\w*|"
     r"project(?:s|ed|ing)?|predict\w*|estimat\w*|outlook|guidance)\b)|"
     r"(?P<planned>计划|計劃|拟|擬|目标|目標|力争|力爭|(?<!已)(?<!已经)(?<!已經)[将將]|"
-    r"\b(?:plans?|planned|aims?|targets?|hopes?|seeks?|will)\b)", re.I)
+    r"\b(?:plans?|planned|aim(?:s|ed|ing)?|targets?|hopes?|seeks?|will)\b)", re.I)
 _FUTURE_PERIOD = re.compile(
     r"未来|明年|下一(?:年(?:度)?|季度|月)|"
     r"\b(?:future|next|upcoming)\s+(?:year|quarter|month|period|years|quarters|months|periods)\b|"
@@ -53,6 +53,22 @@ _PAST_PERIOD = re.compile(
 _COMPARISON = re.compile(
     r"(?:compared\s+(?:with|to)|relative\s+to|versus|than)\s+(?:the\s+)?$|(?:较|比)\s*$", re.I)
 _CURRENT_PERIOD = re.compile(r"本期|报告期|本年度|\b(?:currently|reporting\s+period|this\s+(?:year|quarter|month))\b", re.I)
+_INFINITIVE_PREFIX = re.compile(
+    r"\bto\s+(?:(?:further|significantly|substantially)\s+)?"
+    r"(?:[a-z]+\s+(?:(?:the|our|their|its|total|active|paid|licensed|new|average)\s+)*)?$", re.I)
+_ACTUAL_INFINITIVE_CONTROL = re.compile(
+    r"\b(?:continued?|continues?|began|begins?|started|starts?|managed|manages?)\s+to\s+"
+    r"(?:[a-z]+\s+)?(?:(?:the|our|their|its|total|active|paid|new|average)\s+)*$", re.I)
+_PREPOSITION_TO = re.compile(r"\b(?:due|owing|attributable|related|according|pursuant|subject|exposed)\s+to\s*$", re.I)
+_PURPOSE_CHANGE = re.compile(r"\bto\s+(?:(?:further|significantly|substantially)\s+)?"
+    r"(?P<verb>improve|increase|decrease|grow|reduce|expand|raise|lower|boost|cut|enhance|strengthen)\b", re.I)
+
+
+def purpose_infinitive(text: str, target_start: int, scope_start: int = 0) -> bool:
+    """Bounded local purpose/control syntax, never a new modality word list."""
+    prefix = text[max(scope_start, target_start-80):target_start]
+    return bool(_INFINITIVE_PREFIX.search(prefix) and not _ACTUAL_INFINITIVE_CONTROL.search(prefix)
+                and not _PREPOSITION_TO.search(prefix))
 _PRIOR_COMPLETION = re.compile(r"\bto\s+have\s+\w+\b", re.I)
 _DISCLOSURE_ACTION = re.compile(
     r"^\s*(?:(?:to|be)\s+)?(?:announce|report|publish|disclose|release|present)\b|"
@@ -135,6 +151,10 @@ class _Assertion:
     def __init__(self, text, left, right, *, future_frame=False, leading_condition=False):
         self.left, self.right = left, right
         local = text[left:right]
+        self.purpose_cues = tuple((left+m.start(), left+m.start('verb'))
+            for m in _PURPOSE_CHANGE.finditer(local)
+            if purpose_infinitive(text, left+m.start('verb'), left))
+        self.purpose_starts = tuple(end for _, end in self.purpose_cues)
         markers = tuple(_MODAL.finditer(local))
         future = bool(_FUTURE_PERIOD.search(local) or future_frame)
         past_markers = tuple(_PAST_PERIOD.finditer(local))
@@ -232,6 +252,10 @@ class _Assertion:
             return PredicateObservation(left, right, mode, period, a, b, has_condition)
         if has_condition:
             return PredicateObservation(left, right, "conditional", period, has_condition=True)
+        purpose = bisect_right(self.purpose_starts, start)-1
+        if purpose >= 0:
+            a, b = self.purpose_cues[purpose]
+            return PredicateObservation(left, right, "planned", period, a, b)
         return PredicateObservation(left, right, "actual", period)
 
 

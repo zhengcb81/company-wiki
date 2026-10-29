@@ -6,6 +6,7 @@ here. Legacy meaning predicates are preserved; consumers choose their policy.
 from __future__ import annotations
 
 from collections.abc import Callable
+from dataclasses import dataclass
 import re
 
 from .n6_candidate_operating_facts import (
@@ -147,7 +148,7 @@ def _business_event(clause: str) -> bool:
     return False
 
 
-def _business_fact(text: str) -> OperatingFact:
+def _business_fact(text: str, *, specific_observations: list[bool] | None = None) -> OperatingFact:
     reasons: list[str] = []
     for clause in _CLAUSES.split(text):
         if not clause or len(clause) > BUSINESS_CHARACTER_WINDOW:
@@ -159,6 +160,8 @@ def _business_fact(text: str) -> OperatingFact:
         if (_INDUSTRY_SUBJECT.search(clause) and _INDUSTRY_OPERATING_OBJECT.search(clause)
             and _INDUSTRY_CHANGE.search(clause)):
             reasons.append("current_industry_context")
+            if specific_observations is not None:
+                specific_observations.append(True)
         if not _OBJECT.search(clause):
             continue
         # Relations must occur in the same bounded clause, unlike a finance
@@ -193,15 +196,34 @@ def _detect_business_fact(
     text: str,
     operating_detector: Callable[[str], OperatingFact],
 ) -> OperatingFact:
-    legacy = operating_detector(text)
-    business = _business_fact(text)
-    return OperatingFact(
-        eligible=legacy.eligible or business.eligible,
-        topics=tuple(dict.fromkeys((*legacy.topics, *business.topics))),
-        reasons=tuple(dict.fromkeys((*legacy.reasons, *business.reasons))),
-        score=legacy.score + business.score,
-        financial_exempt=legacy.financial_exempt,
-    )
+    return prepare_business_observation(text, operating_detector).fact
+
+
+@dataclass(frozen=True)
+class BusinessObservation:
+    operating: OperatingFact
+    description: OperatingFact
+    specific_industry: bool = False
+
+    @property
+    def fact(self) -> OperatingFact:
+        legacy, business = self.operating, self.description
+        return OperatingFact(
+            eligible=legacy.eligible or business.eligible,
+            topics=tuple(dict.fromkeys((*legacy.topics, *business.topics))),
+            reasons=tuple(dict.fromkeys((*legacy.reasons, *business.reasons))),
+            score=legacy.score + business.score,
+            financial_exempt=legacy.financial_exempt,
+        )
+
+
+def prepare_business_observation(text: str,
+        operating_detector: Callable[[str], OperatingFact] = detect_operating_fact) -> BusinessObservation:
+    """Keep actual finite signal evidence before its descriptive union."""
+    observed: list[bool] = []
+    operating = operating_detector(text)
+    description = _business_fact(text, specific_observations=observed)
+    return BusinessObservation(operating, description, any(observed))
 
 
 def detect_business_fact(text: str) -> OperatingFact:

@@ -102,7 +102,7 @@ _REVENUE_RECOGNITION_RULE = re.compile(
     r"\b(?:revenue recognition|recognition of revenue|"
     r"revenue[\s\S]{0,24}recogniz\w*|revenue[\s\S]{0,24}recognis\w*|"
     r"recogniz\w*[\s\S]{0,24}revenue|recognis\w*[\s\S]{0,24}revenue)\b", re.I)
-_PERFORMANCE_OBLIGATION = re.compile(r"履约义务|履約義務|\bperformance obligations?\b", re.I)
+_PERFORMANCE_OBLIGATION = re.compile(r"履约义务|履約義務|履约责任|履約責任|\bperformance obligations?\b", re.I)
 _CUSTOMER_CONTROL_TRANSFER = re.compile(
     r"客户[\s\S]{0,60}(?:取得|获得)[\s\S]{0,40}控制权|"
     r"客户控制权[\s\S]{0,20}(?:转移|转让|移交)|"
@@ -115,6 +115,7 @@ _CUSTOMER_CONTROL_TRANSFER = re.compile(
     r"\b(?:transfer(?:ring|red)?|deliver\w*|provid\w*|sell\w*)\b.{0,40}"
     r"\b(?:goods|services)\b.{0,50}\bto customers?\b", re.I)
 _RECOGNITION_TIMING = re.compile(
+    r"收入(?:于|在)一段时间内确认|"
     r"履约义务[\s\S]{0,45}(?:在)?某一(?:时段|时间段|时点)(?:内)?履行|"
     r"某一(?:时段|时间段|时点)(?:内)?履行的?履约义务|"
     r"履约进度[\s\S]{0,80}(?:确认|計量|计量)收入|"

@@ -1,5 +1,15 @@
 # 主线进度记录
 
+## 2026-10-29 来源信息A/B实现通过，主线继续C（唯一当前状态）
+
+[本轮唯一入口](review/source-information-20261029/README.md)：typed局部来源证明及完整断言payload三态/普通描述价值已完成，最终R7独审PASS、2988P/11既有skip（114.70秒）、396文件mypy0。真实38保存文本复评3低价值context/5业务保留，26中英预期全匹配；未代签新native/task/模型、真实缓存恢复或RF采用。正在正常提交推送，精确CI/commit另记。
+
+**下一步：** CNIR剩余native QA和role oracle、US真实缺项定位；W21 runtime用户已发出，ROOT不抢改，接收后再真实PDF/摘要/恢复/FF-RF采用，最后新holdout与公司loop。W20已完成不重开；此前A/B实施中、暂停、R3等阶段状态均为历史。本节点0新供应商POST/下载、母账/额度不变，原件/配置/外来WIP保持。用户授权主线持续执行，整体目标未完成。
+
+## 2026-10-29 来源信息A/B实际实施与W21已发出
+
+唯一进展入口[来源信息执行](review/source-information-20261029/README.md)。W21用户确认发出，独立runtime工区保留不抢改；ROOT进行内部观测证明/三态与exact-view接线。真实saved-scope短测发现并正在修复旧union失证、抽象目标/财务背景误入与具体合同/风险附注丢失；未签整体通过。0新下载/模型调用。
+
 ## 2026-10-29 用户恢复主线：来源信息量A/B实施（唯一当前状态）
 
 用户已撤销暂停，按[本轮唯一执行入口](review/source-information-20261029/README.md)继续来源信息量A→B，再真实来源/摘要/缓存/FF-RF实际采用及holdout循环。W20已完成，不重开。先用真实typed relation局部绑定关闭财务current豁免旁路，再共享prepared payload三态，清理套话/财务碎片占位并保具体功能、主营、计划/负面和融资条件。先TDD，关键节点独审，必要短测与真实样本，正常提交推送。

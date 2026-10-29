@@ -6,10 +6,13 @@ text is classification input only; callers keep original bytes and locators.
 """
 from __future__ import annotations
 
-from dataclasses import replace
+from dataclasses import dataclass, replace
 import re
 
 from company_wiki.document_normalization.text_matching import matching_reading_text
+from company_wiki.document_understanding.operating_states.assertion_roles import (
+    SourceAssertionRoles, abstract_source_argument,
+)
 
 from .n6_candidate_operating_facts import OperatingFact
 from .narrative_source_purpose import (
@@ -47,6 +50,7 @@ from .narrative_business_meaning import (
     business_qualification,
     concrete_operating_event,
     detect_business_fact,
+    prepare_business_observation,
     reject_finance_only_text,
 )
 
@@ -58,9 +62,9 @@ _ACTIVITY = re.compile(
 
 # Only the opt-in ReadingPlan detector consumes these relations. Explicit
 # legacy selectors keep detect_business_fact and its historical predicates.
-READING_BUSINESS_POLICY_VERSION = "reading-business-policy/22"
+READING_BUSINESS_POLICY_VERSION = "reading-business-policy/23"
 READING_BUSINESS_SCAN_PASSES = (
-    14 + SOURCE_PURPOSE_EXTENSION_SCAN_PASSES + READING_DISCLOSURE_SCAN_PASSES + READING_RECOGNITION_SCOPE_SCAN_PASSES
+    16 + SOURCE_PURPOSE_EXTENSION_SCAN_PASSES + READING_DISCLOSURE_SCAN_PASSES + READING_RECOGNITION_SCOPE_SCAN_PASSES
     + RESOURCE_READING_SCAN_PASSES
 )
 _SOURCE_DYNAMIC_REASONS = frozenset({"operating_activity", "specific_business_event",
@@ -419,7 +423,10 @@ def _source_metric_relations(
             if nominal is not None:
                 direction_after = after[:nominal.end()] + re.sub(
                     r"^to\s+", "", after[nominal.end():], count=1, flags=re.I)
-        if (_MEASURE_DIRECTION_AFTER.match(direction_after) or (
+        abstract_goal = (right-metric.start() <= 160
+            and abstract_source_argument(clause[metric.start():right].strip(" ."))
+            and state.forward_outlook)
+        if not abstract_goal and (_MEASURE_DIRECTION_AFTER.match(direction_after) or (
                 _MEASURE_DIRECTION_BEFORE.search(before) and _MEASURE_NOMINAL_END.match(after))):
             relations.append((projection + "direction", metric.start(), metric.end()))
     # Component sales changes are source relations too. Causal consumers do
@@ -801,7 +808,8 @@ def _reading_relations(clauses: tuple[str, ...]) -> tuple[str, ...]:
     return tuple(dict.fromkeys(reasons))
 
 
-def _detect_reading_business_fact(text: str, recognize, *, source_roles=None) -> OperatingFact:
+def _detect_reading_business_fact(text: str, recognize, *, source_roles=None,
+                                  payload_observations: list[bool] | None = None) -> OperatingFact:
     """Operating activity and bounded business relationships, independent of issuer.
 
     Legacy replay keeps its historical recognizer. The reading policy admits
@@ -828,6 +836,10 @@ def _detect_reading_business_fact(text: str, recognize, *, source_roles=None) ->
     activity = any(concrete_operating_event(clause) or
                    (_OBJECT.search(clause) and _ACTIVITY.search(clause)) for clause in clauses)
     relations = _reading_relations(clauses)
+    if payload_observations is not None:
+        # These owners just observed actual disclosure/measurement arguments.
+        # Keep the proof here, before public descriptive reason projection.
+        payload_observations.append(bool(relations))
     if descriptive_operating_relation(text, prepared=source_roles):
         relations = tuple(dict.fromkeys((*relations, "operating_mechanism")))
     elif source_roles.numeric_ambiguous:
@@ -931,25 +943,58 @@ def source_has_operating_object(text: str) -> bool:
     return bool(_OBJECT.search(_reading_text(text)))
 
 
-def assess_reading_business_fact(text: str, source_relations: dict, *, ref_text=None, source_roles=None):
-    """One call-local description/finance assessment for one source owner."""
+@dataclass(frozen=True)
+class ReadingBusinessAssessment:
+    fact: OperatingFact
+    financial_only: bool
+    source_roles: SourceAssertionRoles
+
+
+def prepare_reading_business_assessment(text: str, source_relations: dict, *, ref_text=None,
+        source_roles: SourceAssertionRoles | None = None,
+        relation_bindings: tuple[bool, ...] = ()) -> ReadingBusinessAssessment:
+    """One charged exact-view assessment shared by every reading consumer."""
     legacy_facts: dict[str, OperatingFact] = {}
+    operating_observed: list[bool] = []
     def recognize(value):
         if value not in legacy_facts:
-            legacy_facts[value] = detect_business_fact(value)
+            prepared = prepare_business_observation(value)
+            legacy_facts[value] = prepared.fact
+            operating_observed.append(prepared.operating.eligible or prepared.specific_industry)
         return legacy_facts[value]
     from company_wiki.document_understanding.operating_states.assertion_roles import prepare_source_assertions
     source_roles = source_roles if source_roles is not None else prepare_source_assertions(text)
-    description = _purpose_fact(_detect_reading_business_fact(text, recognize, source_roles=source_roles),
+    observed: list[bool] = []
+    description = _purpose_fact(_detect_reading_business_fact(text, recognize, source_roles=source_roles,
+                                                            payload_observations=observed),
                                 source_purpose(text, prepared=source_roles))
+    from .narrative_operating_resources import operating_resource_relations
+    resource_reasons = operating_resource_relations(_reading_text(text))
+    recognition_scope = named_recognition_scope(_reading_text(text))
+    source_roles = replace(source_roles, bound_payload=bool(
+        source_roles.bound_payload or any(relation_bindings) or any(observed)
+        or any(operating_observed) or resource_reasons or recognition_scope
+        or revenue_recognition_mechanism(text)))
     fact = project_reading_business_fact(text, source_relations, description=description, ref_text=ref_text,
-                                       source_roles=source_roles)
-    return fact, reading_financial_only(text, fact, recognize=recognize)
+        source_roles=source_roles, relation_bindings=relation_bindings,
+        resource_reasons=resource_reasons, recognition_scope=recognition_scope)
+    return ReadingBusinessAssessment(fact, reading_financial_only(text, fact, recognize=recognize), source_roles)
+
+
+def assess_reading_business_fact(text: str, source_relations: dict, *, ref_text=None, source_roles=None,
+                                 relation_bindings: tuple[bool, ...] = ()):
+    """Read-compatible pair; production retains the complete prepared result."""
+    result = prepare_reading_business_assessment(text, source_relations, ref_text=ref_text,
+        source_roles=source_roles, relation_bindings=relation_bindings)
+    return result.fact, result.financial_only
 
 
 def project_reading_business_fact(text: str, source_relations: dict, *,
                                   include_description: bool = True, ref_text=None,
-                                  description: OperatingFact | None = None, source_roles=None) -> OperatingFact:
+                                  description: OperatingFact | None = None, source_roles=None,
+                                  relation_bindings: tuple[bool, ...] = (),
+                                  resource_reasons: tuple[str, ...] | None = None,
+                                  recognition_scope: bool | None = None) -> OperatingFact:
     """Combine independent descriptions with source-owned operating states.
 
     The text-only compatibility recognizer cannot assert progress in production.
@@ -960,7 +1005,8 @@ def project_reading_business_fact(text: str, source_relations: dict, *,
     fact = (description if description is not None else detect_reading_business_fact(text)) if include_description else OperatingFact()
     if include_description:
         from .narrative_operating_resources import operating_resource_relations
-        resource_reasons = operating_resource_relations(_reading_text(text))
+        if resource_reasons is None:
+            resource_reasons = operating_resource_relations(_reading_text(text))
         if resource_reasons:
             topic_for = {"operating_resource_stock": "operating_resources",
                          "operating_resource_allocation": "research_investment",
@@ -973,7 +1019,8 @@ def project_reading_business_fact(text: str, source_relations: dict, *,
         return fact
     # Only the source-owned 0.9 projection consumes the new reading use. The
     # text-only recognizer remains the real 0.8 compatibility entry point.
-    if include_description and named_recognition_scope(_reading_text(text)):
+    if include_description and (recognition_scope if recognition_scope is not None else
+                                named_recognition_scope(_reading_text(text))):
         fact = replace(fact,
             topics=tuple(dict.fromkeys((*fact.topics, "business_recognition_scope"))),
             reasons=tuple(dict.fromkeys((*fact.reasons, "business_recognition_scope"))))
@@ -987,7 +1034,12 @@ def project_reading_business_fact(text: str, source_relations: dict, *,
         # milestone. Preserve recall without a text-only completed-state label.
         reasons.append("operating_description_unknown")
         topics.append("core_business")
-    for relation in source_relations.get("relations", ()):
+    for index, relation in enumerate(source_relations.get("relations", ())):
+        # Only the source predicate/NP binder supplies this local proof. A
+        # recognized current state, arbitrary serialized refs, or a different
+        # complete clause cannot create an operating fact/finance exemption.
+        if index >= len(relation_bindings) or not relation_bindings[index]:
+            continue
         polarity, stage = relation["polarity"], relation["stage"]
         attribution, modality = relation["attribution"], relation["modality"]
         topics.append("core_business")
@@ -1016,10 +1068,16 @@ def project_reading_business_fact(text: str, source_relations: dict, *,
         if relation["activity"] == "production" and attribution == "issuer":
             topics.append("capacity_projects")
     substantive = set(reasons) - UNRESOLVED_READING_REASONS
+    if (source_roles is not None and source_roles.independent_payload is False
+            and not any(relation_bindings) and not resource_reasons):
+        # A legacy reason or stage string cannot overrule observed generic
+        # arguments. The original remains indexed/readable as context.
+        return OperatingFact(purpose=fact.purpose)
+    finance_proof = source_roles is None or source_roles.independent_payload is True
     return OperatingFact(bool(reasons), tuple(dict.fromkeys(topics)), tuple(dict.fromkeys(reasons)),
                          max(fact.score if independent else 0, 3 if reasons else 0),
-                         (fact.financial_exempt and bool(set(independent) - UNRESOLVED_READING_REASONS))
-                         or (include_description and bool(substantive)),
+                         finance_proof and ((fact.financial_exempt and bool(set(independent) - UNRESOLVED_READING_REASONS))
+                         or (include_description and bool(substantive))),
                          fact.purpose)
 
 

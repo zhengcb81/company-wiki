@@ -26,6 +26,8 @@ def source_narrative_relevance(*, fact: OperatingFact,
     """
     if fact.purpose in NON_OPERATING_PURPOSES or fact.purpose == 'unassessed':
         return False
+    if source_roles is not None and source_roles.independent_payload is False:
+        return table_qualified
     return (table_qualified or bool(source_roles and (
         source_roles.operating or source_roles.numeric_role == 'operating'))
         or bool(fact.eligible and set(fact.reasons) - UNRESOLVED_READING_REASONS))
@@ -58,14 +60,15 @@ def source_support_use(text: str, *, fact: OperatingFact, financial_only: bool |
         if source_roles.numeric_role == "account" and not source_roles.operating:
             return "context_only", "financial_numeric_scope"
         return "unresolved", "source_numeric_scope_unresolved"
-    # Unknown source stages do not manufacture progress. Independently observed
-    # business relationships/constraints remain usable without a known stage.
-    if fact.eligible and set(fact.reasons) - UNRESOLVED_READING_REASONS:
-        return "support", "source_business_relation"
+    if source_roles.independent_payload is False:
+        return "context_only", "source_generic_objective"
+    if source_roles.independent_payload is True:
+        return ("support", "source_business_relation" if fact.eligible
+                and set(fact.reasons) - UNRESOLVED_READING_REASONS else "source_operating_description")
     # Refs only locate characters. Completeness is the source owner's prepared
     # role proof, not a second vote from an unknown stage or arbitrary NP refs.
     # Optional relation/ref arguments remain read-compatible with earlier
     # callers; they cannot bypass the semantic assessment.
     if descriptive_operating_relation(text, prepared=source_roles):
-        return "support", "source_operating_description"
+        return "unresolved", "source_payload_unresolved"
     return "context_only", "no_independent_business_support"

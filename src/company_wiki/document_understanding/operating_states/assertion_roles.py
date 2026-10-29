@@ -8,6 +8,7 @@ from __future__ import annotations
 
 from dataclasses import dataclass
 from bisect import bisect_left
+from collections.abc import Iterator
 import re
 
 from company_wiki.document_normalization.text_matching import matching_reading_text
@@ -25,20 +26,25 @@ _DESCRIPTION_OBJECT = re.compile(r"云产品|服务器|服务|软件|平台|产�
     r"\b(?:products?|services?|equipment|platforms?|software|workloads?)\b", re.I)
 _MEMBERSHIP_FINANCIAL_HEAD = re.compile(
     r"成本|费用|收入|利润|资产|负债|毛利|"
+    r"会计和内部控制系统|\baccounting\s+and\s+internal\s+control\s+systems?\b|"
     r"\b(?:costs?|expenses?|revenues?|profits?|income|assets?|liabilit\w*)\b", re.I)
+_ARGUMENT_PURPOSE = re.compile(r"\b(?:to|in order to|so as to)\s+[a-z]+\b|"
+                               r"(?:以便|从而|来)(?:降低|减少|提高|提升)", re.I)
 _DESCRIPTION_SENTENCES = re.compile(r"[。！？；;]|(?<=[.!?])\s+")
 _DESCRIPTION_PARTS = re.compile(r"(?<!\d)[,，]|[,，](?!\d)|\b(?:and|but|while|whereas)\s+(?=we\b|the company\b)", re.I)
-_STATE_HEAD = re.compile(r"\b(?:projects?|plants?|factor(?:y|ies)|facilit(?:y|ies)|qualification|validation|certification)\b|项目|工厂|基地", re.I)
+_STATE_HEAD = re.compile(r"\b(?:projects?|plants?|factor(?:y|ies)|facilit(?:y|ies)|qualification|validation|certification)\b|项目|工厂|基地|生产设施|制造设施|厂房|生产线", re.I)
 _EN_HEAD_TAIL = r"(?:\s+(?:coverage|scope|portfolio|range|lineup|suite|family|editions?|versions?|configurations?|launch|rollout|delivery|deployment|release)){0,3}\s+"
 _EN_AUX = r"(?P<aux>(?:(?:is|are|was|were|can|may|will|would|could|has|have|had|been|be|not|also|currently|already|still|widely|further|now)\s+){0,8})"
 _EN_FUNCTION = re.compile(_EN_HEAD_TAIL + _EN_AUX +
     r"(?P<verb>provid\w*|offer\w*|suppl\w*|support\w*|rout\w*|process\w*|deliver\w*|manufactur\w*|"
-    r"includ\w*|compris\w*|cover\w*|serves?|uses?|produc\w*|identif\w*|utili[sz]\w*|launch\w*|releas\w*|introduc\w*|deploy\w*)"
-    r"\b\s+(?P<target>[^,。;!?]{1,100})", re.I)
+    r"includ\w*|compris\w*|forms?|cover\w*|serves?|uses?|produc\w*|identif\w*|utili[sz]\w*|launch\w*|releas\w*|introduc\w*|deploy\w*)"
+    r"\b\s+(?P<target>[^,。;!?]{1,160})", re.I)
 _EN_PASSIVE_USE = re.compile(_EN_HEAD_TAIL + _EN_AUX +
-    r"(?P<verb>used|utili[sz]ed|deployed)\s+(?:by|for|to|in)\s+(?P<target>[^,。;!?]{1,100})", re.I)
+    r"(?P<verb>used|utili[sz]ed|deployed)\s+(?:by|for|to|in)\s+(?P<target>[^,。;!?]{1,160})", re.I)
+_EN_CONSTRAINT = re.compile(_EN_HEAD_TAIL + _EN_AUX +
+    r"(?P<verb>subject to|dependent on|exposed to)\s+(?P<target>[^,。;!?]{1,160})", re.I)
 _EN_DESCRIPTION = re.compile(_EN_HEAD_TAIL + _EN_AUX +
-    r"(?P<verb>for|comes? in|available in|offered in)\s+(?P<target>[^,。;!?]{1,100})", re.I)
+    r"(?P<verb>for|comes? in|available in|offered in)\s+(?P<target>[^,。;!?]{1,160})", re.I)
 _EN_COPULA = re.compile(r"\b(?:is|are|was|were|be|been)\b",re.I)
 _EN_STATE = re.compile(_EN_HEAD_TAIL + _EN_AUX +
     r"(?P<verb>(?:is|are|remains?)\s+(?:in|under)|remains?|expand\w*|enter\w*|start\w*|complet\w*|finish\w*|began|begin\w*)"
@@ -50,31 +56,122 @@ _STATE_TARGET = re.compile(r"\b(?:qualification|validation|certification|product
 _CN_HEAD_TAIL = (r"(?:的|范围|组合|系列|产品线|覆盖范围|业务|功能){0,3}\s*"
     r"(?:[A-Za-z][A-Za-z0-9.-]{0,15}(?:(?:及|和|与|、|/)[A-Za-z][A-Za-z0-9.-]{0,15}){0,5})?\s*")
 _CN_AUX = r"(?P<aux>(?:已经|正在|尚未|持续|继续|计划|预计|可以|能够|主要|正式|亦|已|将|正|可|能|未){0,6})"
-_CN_PROVISION_BRIDGE = r"(?:(?:由|通过|经由)[^,，。;!?]{1,35}?(?=提供|供应|交付|制造))?"
+_CN_PROVISION_BRIDGE = r"(?:(?:由|通过|经由)[^,，。;!?]{1,35}?(?=提供|供应|交付|制造|路由|处理|组装))?"
 _CN_FUNCTION = re.compile(_CN_HEAD_TAIL + _CN_AUX + _CN_PROVISION_BRIDGE +
-    r"(?P<verb>用于|用作|作为|支持|提供|覆盖|涵盖|包括|包含|供应|制造|设计|交付|处理|连接|面向|应用于)"
-    r"(?P<target>[^,，。;!?]{1,100})")
+    r"(?P<verb>用于|用作|作为|支持|提供|覆盖|涵盖|包括|包含|供应|制造|设计|交付|处理|连接|面向|应用于|路由|组装)"
+    r"(?P<target>[^,，。;!?]{1,160})")
 _CN_STATE = re.compile(_CN_HEAD_TAIL + _CN_AUX +
     r"(?P<verb>进入|处于|开展|推进|进行|完成|启动|投入)?(?:客户)?(?P<target>认证|验证|试产|量产|生产|建设|投产|运行|运营|发布|上线)")
 _PROVISION_EN = re.compile(r"\b(?:provid\w*|offer\w*|suppl\w*|manufactur\w*|design\w*|deliver\w*|"
-    r"hir\w*|employ\w*|recruit\w*|launch\w*|releas\w*|introduc\w*|deploy\w*|acquir\w*|commission\w*|open\w*)\b", re.I)
-_PROVISION_CN = re.compile(r"提供|供应|制造|设计|打造|交付|聘用|招聘|招募|收购|收購")
+    r"hir\w*|employ\w*|recruit\w*|launch\w*|releas\w*|introduc\w*|deploy\w*|acquir\w*|commission\w*|open\w*|expand\w*)\b", re.I)
+_PROVISION_CN = re.compile(r"提供|供应|制造|设计|打造|交付|聘用|招聘|招募|收购|收購|建设|建造|搭建|定制")
 _PROVISION_ACTOR_EN = re.compile(
-    r"\s*(?:(?i:we|(?:the|our|this)\s+(?:company|group|team|supplier|partner))|"
+    r"\s*(?:(?i:we|(?:the|our|this)\s+(?:company|group|team|supplier|partner|bank))|"
     r"[A-Z][A-Za-z0-9&.-]*(?:\s+[A-Z][A-Za-z0-9&.-]*){0,4})"
     r"(?:\s+(?i:already|also|now|currently|still|will|can|may|have|has|had|"
     r"continue\s+to|continues\s+to|continued\s+to)){0,8}"
-    r"(?:\s+(?i:using|through|via|based\s+on)\s+[^,。;!?]{1,70})?\s*")
+    r"(?:\s+(?i:using|through|via|based\s+on)\s+[^,。;!?]{1,70})?"
+    r"(?:\s+[a-z][\w-]*(?:\s+[a-z][\w-]*){0,9}\s+(?:and|but))?\s*")
 _PROVISION_ACTOR_CN = re.compile(
-    r"\s*(?:我们|本公司|公司|本集团|集团|企业|供应商|厂商|团队)"
+    r"\s*(?:未来|今后)?(?:我们|本公司|公司|本集团|集团|企业|供应商|厂商|团队)"
     r"(?:已经|正在|持续|继续|计划|预计|主要|还|已|将|正){0,6}"
+    r"(?:(?:能够|可以|能)?(?:及时)?(?:响应|回应)(?:并|及|和))?"
     r"(?:(?:凭借|基于|通过|采用|向|为|在)[^,，。;!?]{1,70})?\s*")
 _RESOURCE_OBJECT = re.compile(r"\b(?:engineers|researchers|technical staff|research staff)\b|研发人员|工程师|研究人员", re.I)
 _ACTOR_PHASE = re.compile(r"^(?:本公司|公司|本集团|集团|我们|企业)[^,，。;!?]{0,32}"
-    r"(?:推进|开展|进入|进行|完成)(?:客户|产品|设备)?(?:认证|验证|生产|量产)")
-_ACTOR_SCOPE = re.compile(r"^(?:本公司|公司|本集团|集团|我们|企业)(?:已|正在|目前|尚未|不|未)?"
+    r"(?:推进|开展|进入|进行|完成)(?:客户|产品|设备)?(?:认证|验证|生产|量产)|"
+    r"^(?:本公司|公司|本集团|集团|我们|企业)(?:目前|现时|仍|尚|已经|已|正在){0,4}"
+    r"(?:处于|在)(?:客户|产品|设备)(?:认证|验证)(?:阶段|过程)")
+_ACTOR_SCOPE = re.compile(r"^(?:本公司|公司|本集团|集团|我们|企业)(?:主要|已|正在|目前|尚未|不|未)?"
     r"(?:参与|从事|经营|涉及)(?P<target>[^,，。;!?]{1,60})")
+_ENTITY_OPERATION = re.compile(
+    r"(?:本公司|公司|本集团|集团|我们)(?:主要)?通过[^。;!?]{1,160}"
+    r"(?:子公司|可变利益实体)[^。;!?]{0,80}(?:开展业务|进行(?:主要)?业务营运|进行(?:主要)?业务运营)|"
+    r"\b(?:we|the (?:company|group))\s+(?:operate[sd]?|conduct\w* (?:our )?business)\s+"
+    r"through\s+[^。;!?]{0,80}\b(?:subsidiaries|variable interest entities)\b", re.I)
+_CONSTRAINT_STATUS = re.compile(
+    r"^(?:(?:于|在)?报告期内[，,]?\s*)?(?:本公司|公司|本集团|集团|我们)"
+    r"(?:目前|现时|并|亦|尚|仍|已|未|无|不|涉及|任何){1,7}"
+    r"[^。;!?]{0,120}(?:诉讼|仲裁|申索)|"
+    r"\b(?:we|the (?:company|group))\s+(?:is|are|was|were)\s+(?:not\s+)?"
+    r"(?:involved in|subject to)\s+[^。;!?]{0,80}\b(?:litigation|arbitration|claims?)\b", re.I)
 _AGENT_DERIVATION = re.compile(r"^(?:者|人员|人員|商(?=的|使|及|和|与|为|向|$))")
+
+# Closed abstract-argument grammar. Only a fully observed generic objective is
+# negative evidence; an unfamiliar technical argument is never a stop word.
+# These are compositional argument roles, not sentences, issuers or industries.
+_ABSTRACT_EN_WORDS = frozenset((
+    "a an the our their its we us and or of for to in across all various "
+    "rich wide broad range high quality high-quality comprehensive diverse "
+    "product products service services platform platforms technology technical "
+    "business businesses industry industries customer customers client clients "
+    "development innovation transformation digital upgrade upgrading growth "
+    "needs need demand demands engagement satisfaction value success benefits "
+    "basis foundation changing continuously continually improve improving "
+    "support supporting meet meeting enable enabling aim aims aiming "
+    "help helping enhance enhancing can could will would allow allows "
+    "better evolving constantly is are be as capabilities ability "
+    "software equipment workloads solutions solution provide provides provided "
+    "support supports supported form forms formed"
+).split())
+_ABSTRACT_EN_TOKEN = re.compile(r"[a-z]+(?:-[a-z]+)*|[^\s.,:()]+", re.I)
+_ABSTRACT_CN = re.compile(
+    r"(?:我们|公司|本公司|集团|本集团|以|的|及|和|与|或|为|向|在|各|各个|各类|"
+    r"所有|广大|丰富|广泛|优质|全面|多样|产品|服务|技术|平台|业务|行业|客户|需求|"
+    r"发展|开发|创新|数字化|转型|升级|增长|基础|能力|价值|成功|利益|满意度|参与度|"
+    r"不断|持续|变化|提升|提高|满足|支持|提供|作为|软件|设备|工作负载|解决方案|"
+    r"助力|推动|促进|使|能够|可以|旨在|目标|是|"
+    r"[\s.。:：()（）])+")
+_OBJECTIVE_PREDICATE = re.compile(
+    r"旨在|目标|使我们|\b(?:aims?|aiming|enabl\w*|help\w*)\b", re.I)
+_FUNCTION_ARGUMENT = re.compile(
+    r"\b(?:process\w*|rout\w*|transactions?|maintenan\w*|repair\w*|diagnos\w*|"
+    r"filter\w*|sterili[sz]\w*|assembl\w*|comput\w*|sequenc\w*|access|connect\w*|collateral)\b|"
+    r"处理|维护|维修|诊断|过滤|消毒|装配|计算|接入|连接|抵押|质押", re.I)
+_SPECIFIC_APPLICATION = re.compile(r"云(?:产品|服务)|基础设施|网络|"
+    r"\b(?:cloud (?:products?|services?)|networks?|infrastructure)\b", re.I)
+_FUNCTIONAL_OFFERING = re.compile(
+    r"(?:管理|处理|维护|分析|计算|识别)(?:软件|平台|系统)\s*$|"
+    r"\b(?:management|processing|maintenance|analytics?|computation|identification)\s+"
+    r"(?:software|platforms?|systems?)\s*\.?$", re.I)
+_WEAK_FUNCTION = re.compile(r"^(?:support\w*|provid\w*|offer\w*|includ\w*|compris\w*|forms?|"
+                            r"suppl\w*|cover\w*|serves?|uses?|used|utili[sz]ed|deployed|for|subject to|dependent on|exposed to|"
+                            r"作为|支持|提供|覆盖|涵盖|包括|包含|面向|用于|用作|应用于)$", re.I)
+
+
+def abstract_source_argument(value: str) -> bool:
+    """Prove the whole local argument contains only abstract benefit roles."""
+    if _ABSTRACT_CN.fullmatch(value):
+        return True
+    tokens = _ABSTRACT_EN_TOKEN.findall(value.casefold())
+    return bool(tokens) and all(token in _ABSTRACT_EN_WORDS for token in tokens)
+
+
+def _argument_payload(value: str, *, concrete_action: bool = False,
+                      complete: bool = True) -> bool | None:
+    if not complete:
+        return None
+    if concrete_action:
+        return True
+    if abstract_source_argument(value):
+        return False
+    # Positive proof is independent of failure to match the abstract grammar:
+    # an actual operation, typed offering, or explicit application/function.
+    concrete_head = any(kind not in {"product", "platform", "solution", "service", "system"}
+                        for _, _, kind in product_head_spans(value))
+    financial = tuple(_MEMBERSHIP_FINANCIAL_HEAD.finditer(value))
+    # Lease-liability/stock-incentive management SOFTWARE is an offering; a
+    # technical modifier cannot reverse a governing financial noun head.
+    financial_offering = bool(financial and _DESCRIPTION_OBJECT.search(value, financial[-1].end()))
+    if (concrete_head or financial_offering or _FUNCTIONAL_OFFERING.search(value) or _FUNCTION_ARGUMENT.search(value)
+            or _SPECIFIC_APPLICATION.search(value)):
+        return True
+    return None
+
+
+def _argument_closed(value: str, end: int) -> bool:
+    # Do not copy/rescan a potentially huge unread suffix for every head.
+    return len(value)-end <= 8 and not value[end:].strip(" .。!?；;，,\t\r\n")
 
 
 def _source_clauses(value: str, *, descriptions: bool = True):
@@ -92,11 +189,26 @@ def _description_payload(value: str) -> bool:
     if not any(character.isalpha() for character in value):
         return False
     # A technical modifier cannot turn a financial noun head into an offering.
-    financial = tuple(_MEMBERSHIP_FINANCIAL_HEAD.finditer(value))
-    return not financial or bool(_DESCRIPTION_OBJECT.search(value, financial[-1].end()))
+    # A purpose adjunct is not the governing object: routing workloads to
+    # reduce costs remains a function, while service costs remain an account.
+    purpose = _ARGUMENT_PURPOSE.search(value)
+    argument = value[:purpose.start()] if purpose else value
+    financial = tuple(_MEMBERSHIP_FINANCIAL_HEAD.finditer(argument))
+    return not financial or bool(_DESCRIPTION_OBJECT.search(argument, financial[-1].end()))
 
 
-def _clause_description(value: str) -> bool:
+@dataclass(frozen=True)
+class _DescriptionProof:
+    independent: bool | None
+    witness: str
+    descriptive_only: bool = False
+
+
+_UNSPECIFIED_VARIANTS = re.compile(
+    r"(?:(?:several|multiple|various|different)\s+)+(?:editions?|versions?|configurations?)\.?", re.I)
+
+
+def _clause_description_proofs(value: str) -> Iterator[_DescriptionProof]:
     # One clause-local index supplies both head-first descriptions and
     # actor/action-first objects. Resource heads remain object-only here.
     heads = {(match.start(), match.end()): True for match in _DESCRIPTION_OBJECT.finditer(value)}
@@ -119,9 +231,12 @@ def _clause_description(value: str) -> bool:
             if (_description_payload(description['target'])
                     and (description['verb'].casefold().startswith('come')
                          or _EN_COPULA.search(description['aux']))):
-                return True
+                yield _DescriptionProof(_argument_payload(description['target'],
+                    concrete_action=description['verb'].casefold() != 'for',
+                    complete=_argument_closed(value, end+description.end('target'))), value,
+                    bool(_UNSPECIFIED_VARIANTS.fullmatch(description['target'].strip())))
             continue
-        for grammar in (_EN_FUNCTION, _EN_PASSIVE_USE, _EN_STATE, _EN_PLAN):
+        for grammar in (_EN_FUNCTION, _EN_PASSIVE_USE, _EN_CONSTRAINT, _EN_STATE, _EN_PLAN):
             match = grammar.match(tail)
             if match is None or not _description_payload(match['target']):
                 continue
@@ -129,37 +244,52 @@ def _clause_description(value: str) -> bool:
                 continue
             if grammar is _EN_PASSIVE_USE and not match['aux'].strip():
                 continue
+            if grammar is _EN_CONSTRAINT and not _EN_COPULA.search(match['aux']):
+                continue
             if grammar is _EN_FUNCTION:
                 verb, head = match['verb'].casefold(), value[start:end].casefold()
                 if not match['aux'] and not head.endswith('s') and not verb.endswith(('s', 'ed')):
                     continue
-            return True
+            yield _DescriptionProof(_argument_payload(match['target'],
+                concrete_action=not _WEAK_FUNCTION.fullmatch(match.groupdict().get('verb', 'for')),
+                complete=_argument_closed(value, end+match.end('target'))), value)
         match = _CN_FUNCTION.match(tail)
         if (match is not None and not _AGENT_DERIVATION.match(match['target'])
                 and _description_payload(match['target'])):
-            return True
+            yield _DescriptionProof(_argument_payload(match['target'],
+                concrete_action=not _WEAK_FUNCTION.fullmatch(match['verb']),
+                complete=_argument_closed(value, end+match.end('target'))), value)
         match = _CN_STATE.match(tail)
         if match is not None and (match['aux'] or match['verb']):
-            return True
+            yield _DescriptionProof(True, value)
     if _ACTOR_PHASE.search(value):
-        return True
+        yield _DescriptionProof(True, value)
     scope=_ACTOR_SCOPE.match(value)
-    if scope is not None and (product_head_spans(scope['target']) or _STATE_HEAD.search(scope['target'])):
-        return True
+    if scope is not None and (product_head_spans(scope['target']) or _STATE_HEAD.search(scope['target'])
+                              or _DESCRIPTION_OBJECT.search(scope['target'])):
+        yield _DescriptionProof(_argument_payload(scope['target'],
+            complete=_argument_closed(value, scope.end('target'))), value)
+    if _ENTITY_OPERATION.search(value) or _CONSTRAINT_STATUS.search(value):
+        yield _DescriptionProof(True, value)
     # Provision/hiring may name the operating object after its verb. There
     # still must be an actual subject before that verb in this same clause.
     for predicate in (*_PROVISION_EN.finditer(value), *_PROVISION_CN.finditer(value)):
         if predicate.start() > 100:
             continue
         subject = value[:predicate.start()]
-        target_end=min(len(value),predicate.end()+100)
+        target_end=min(len(value),predicate.end()+160)
         target = value[predicate.end():target_end]
         index=bisect_left(ordered_heads,(predicate.end(),-1))
         if ((_PROVISION_ACTOR_EN.fullmatch(subject) or _PROVISION_ACTOR_CN.fullmatch(subject))
                 and _description_payload(target)
                 and index<len(ordered_heads) and ordered_heads[index][1]<=target_end):
-            return True
-    return False
+            yield _DescriptionProof(_argument_payload(target,
+                concrete_action=not _WEAK_FUNCTION.fullmatch(predicate.group()),
+                complete=_argument_closed(value, target_end)), value)
+
+
+def _clause_description(value: str) -> bool:
+    return next(_clause_description_proofs(value), None) is not None
 
 
 def descriptive_operating_relation(text: str, *, prepared: SourceAssertionRoles | None = None) -> bool:
@@ -193,6 +323,10 @@ class AssertionRole:
     text: str
     operating: bool
     rule_purpose: str = ""
+    independent_payload: bool | None = None
+    # Normalized local witnesses, NOT original offsets or canonical EvidenceSpan.
+    payload_witnesses: tuple[str, ...] = ()
+    material_payload: bool = False
 
 
 @dataclass(frozen=True)
@@ -203,10 +337,27 @@ class SourceAssertionRoles:
     bound_operating: bool = False
     raw_structure_complete: bool = False
     numeric_cells_observed: bool = False
+    bound_payload: bool = False
 
     @property
     def operating(self) -> bool:
         return self.bound_operating or any(clause.operating and not clause.rule_purpose for clause in self.clauses)
+
+    @property
+    def independent_payload(self) -> bool | None:
+        if self.bound_payload:
+            return True
+        values = [clause.independent_payload for clause in self.clauses if not clause.rule_purpose]
+        if any(value is True for value in values):
+            return True
+        if self.clauses and all(value is False for value in values):
+            return False
+        return None
+
+    @property
+    def descriptive_only(self) -> bool:
+        return (not self.bound_payload and self.independent_payload is True
+                and not any(clause.material_payload for clause in self.clauses if not clause.rule_purpose))
 
 
 def prepare_source_assertions(text: str) -> SourceAssertionRoles:
@@ -214,7 +365,15 @@ def prepare_source_assertions(text: str) -> SourceAssertionRoles:
     value=matching_reading_text(text)
     clauses=[]
     for text_clause in _source_clauses(value,descriptions=False):
-        operating=any(_clause_description(part) for part in _source_clauses(text_clause))
+        parts = [(part, tuple(_clause_description_proofs(part)))
+                 for part in _source_clauses(text_clause)]
+        operating = any(proofs for _, proofs in parts)
+        payloads = [True if any(proof.independent is True for proof in proofs) else False if
+                    ((proofs and all(proof.independent is False for proof in proofs))
+                     or _OBJECTIVE_PREDICATE.search(part)) and abstract_source_argument(part) else None
+                    for part, proofs in parts]
+        independent = (True if any(value is True for value in payloads) else
+                       False if payloads and all(value is False for value in payloads) else None)
         meta_head=_METATEXT_HEAD.search(text_clause)
         meta_action=_METATEXT_ACTION.search(text_clause) if meta_head else None
         product_head=_DESCRIPTION_OBJECT.search(text_clause) if meta_action else None
@@ -231,7 +390,11 @@ def prepare_source_assertions(text: str) -> SourceAssertionRoles:
             purpose="accounting_policy"
         elif meta_rule or (not operating and _RESULT_HEAD.search(text_clause) and _RESULT_DISCLAIMER.search(text_clause)):
             purpose="reporting_definition"
-        clauses.append(AssertionRole(text_clause,operating,purpose))
+        witnesses = tuple(dict.fromkeys(proof.witness for _, proofs in parts
+                                        for proof in proofs if proof.independent is True))
+        material = any(proof.independent is True and not proof.descriptive_only
+                       for _, proofs in parts for proof in proofs)
+        clauses.append(AssertionRole(text_clause,operating,purpose,independent,witnesses,material))
     shape=observe_value_cells(text)
     numeric=shape.unbound_numeric_cells
     return SourceAssertionRoles(tuple(clauses),numeric,

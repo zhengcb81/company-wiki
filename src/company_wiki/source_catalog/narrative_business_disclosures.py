@@ -15,7 +15,31 @@ from .narrative_predicate_state import predicate_scope
 from .n6_scope_changes import scope_change_reasons
 
 
-READING_DISCLOSURE_SCAN_PASSES = 6
+READING_DISCLOSURE_SCAN_PASSES = 10  # Four new bounded mechanism/constraint proofs.
+_COMPONENT_DEPENDENCE = re.compile(
+    r"(?:组成部分|部件|组件)[^。;!?]{0,80}(?:相互依赖|双向依赖|相互结合)|"
+    r"\bcomponents?\b[^。;!?]{0,80}\b(?:interdependent|interdependence|mutually dependent)\b", re.I)
+_OPERATING_CONSTRAINT_EFFECT = re.compile(
+    r"(?:限制|受限|短缺|中断|瓶颈)[^。;!?]{0,40}(?:导致|使)"
+    r"(?:本公司|本集团|我们|公司|集团|的|新){0,4}(?:生产线|产线|工厂|生产设施|制造设施)"
+    r"(?:的|扩建|建设|改造|生产|项目){0,4}"
+    r"(?:延期|延迟|推迟|暂停|减少|受阻)|"
+    r"\b(?:limits?|restrictions?|shortages?|disruptions?|bottlenecks?)\b"
+    r"[^。;!?]{0,35}\b(?:delayed|disrupted|reduced|halted|constrained)\b"
+    r"\s+(?:(?:the|our|its|their|new|planned|expansion|construction|of)\s+){0,8}"
+    r"(?:(?:production|manufacturing)\s+(?:lines?|plants?|facilities|capacity)|"
+    r"(?:product|equipment|goods)\s+(?:deliveries|shipments)|factories|plants)\b", re.I)
+_FINANCING_COVENANT = re.compile(
+    r"\b(?:our|the (?:company|group)['’]s)\s+(?:(?:term|bank|long-term|short-term)\s+)?"
+    r"(?:loans?|borrowings?)\s+(?:bear|carry|have)\s+(?:a\s+)?"
+    r"(?:fixed|floating|variable)\s+interest(?:\s+rates?)?\b|"
+    r"(?:本集团|本公司|公司|集团|我们)(?:的)?(?:银行|长期|短期|定期)?(?:贷款|借款)"
+    r"(?:的利率)?(?:为|采用|按)(?:固定|浮动)利率", re.I)
+_RESTRICTED_CASH_USE = re.compile(
+    r"受限制现金[^。;!?]{0,80}(?:主要指|用于|代表)[^。;!?]{0,100}"
+    r"(?:担保|抵押|质押)[^。;!?]{0,60}(?:贷款|借款|供应商|应付)|"
+    r"\brestricted cash\b[^。;!?]{0,60}\b(?:represents?|is|was|used for)\b"
+    r"[^。;!?]{0,70}\b(?:collateral|security)\b[^。;!?]{0,50}\b(?:loans?|borrowings?|payables?)\b", re.I)
 _CN_SCOPE = re.compile(
     r"(?:业务(?:类型|范围)?|服务范围)(?:可以|主要|现有|目前|分别|可)?"
     r"(?:分为|包括|包含|由)(?P<parts>[^。；;!?]{1,240})|"
@@ -482,6 +506,14 @@ _DESCRIPTION_REASONS = frozenset({"operating_mechanism", "business_strategy",
 def disclosure_relations(clause: str) -> tuple[str, ...]:
     """Finite reading uses; no country/company list, numeric conversion or IO."""
     relations = []
+    if _COMPONENT_DEPENDENCE.search(clause):
+        relations.append("business_component_dependence")
+    if _OPERATING_CONSTRAINT_EFFECT.search(clause):
+        relations.append("business_operating_constraint")
+    if _RESTRICTED_CASH_USE.search(clause):
+        relations.append("business_collateral_use")
+    if _FINANCING_COVENANT.search(clause):
+        relations.append("business_financing_terms")
     for match in _CN_SCOPE.finditer(clause):
         parts = match.group("parts") or match.group("types")
         if (_component_structure("业务包括" + parts)
@@ -511,7 +543,10 @@ def disclosure_relations(clause: str) -> tuple[str, ...]:
     return tuple(dict.fromkeys(relations))
 
 
-def reading_material_value(fact: OperatingFact) -> Literal["meaningful_fact", "description"]:
+def reading_material_value(fact: OperatingFact, *, source_roles=None) -> Literal["meaningful_fact", "description"]:
     """Interpret source observations without changing admission or raw bytes."""
+    if source_roles is not None:
+        return ("meaningful_fact" if source_roles.independent_payload is True
+                and not source_roles.descriptive_only else "description")
     return ("meaningful_fact" if fact.eligible and set(fact.reasons) - _DESCRIPTION_REASONS
             else "description")

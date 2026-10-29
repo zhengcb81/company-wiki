@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "scope": "R6 to R7 governed financial NP / real offering delta only",
+  "bound_manifest": ".planning/source-information-20261029/ab-r7-freeze.json",
+  "manifest_sha256": "955a1e8bd18783e4c26ea1ab116f6af99d9a3ce2edb99b39aabfea9221e34de1",
+  "frozen_file_count": 16,
+  "all_sha_before_after_final_match": true,
+  "old_32_source_and_8_selection_results_preserved": true,
+  "new_np_boundary_controls": 5,
+  "pseudo_wire_controls": 2,
+  "previous_delta_controls_repeated": true,
+  "unknown_state_fixture_migration_preserves_source_contract": true,
+  "actual_financial_function_software_preserved": true,
+  "governance_head_not_operating_offering": true,
+  "repeat_work": 0,
+  "source_and_public_wire_unchanged": true,
+  "no_new_balance_and_raw_controls_pass": true,
+  "product_or_shared_pwf_write": false,
+  "original_holdout_sdk_network_supplier_calls": 0,
+  "does_not_accept": "Actual native/final tasks, real summaries, cache recovery or RF adoption."
+}

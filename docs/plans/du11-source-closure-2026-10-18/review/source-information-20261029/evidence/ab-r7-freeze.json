@@ -1,0 +1,24 @@
+{
+  "scope": "A/B r7 governing financial nominal versus actual functional offering; final freeze",
+  "files": {
+    "src/company_wiki/document_understanding/operating_states/assertion_roles.py": "5488264fe55475c2f555dcbef0faeeac382322db12eecc849a77acd2863e6e56",
+    "src/company_wiki/document_understanding/operating_states/relations.py": "b9da8b0438ea246b54739801ac9721c714823f754e81a18f7e3c1c019c2b3788",
+    "src/company_wiki/source_catalog/narrative_business_disclosures.py": "f065a4c500656e916cb062d58a5503b1820e099fbb4d75d49453854a8185dc97",
+    "src/company_wiki/source_catalog/narrative_business_meaning.py": "2898e590942e5a26551d8750402e409c5546390e965e11349ad126c4bd82201a",
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "698879be407dd3eb50095655d4da6e4b1b2bea83956a5443cd371ca9e1b35eeb",
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": "1c52537ab09fc682917b67ce12c22562aaf45e17cbf62afefcc65c1a5cecb86b",
+    "src/company_wiki/source_catalog/narrative_reading.py": "0c5e5e3fe0a08575ac0a45ec4b90979eea471545f60fcce32d54ecf75b974ff9",
+    "src/company_wiki/source_catalog/narrative_source_purpose.py": "42493222c643e45b719bd3cedae864e7721e31fa3ef1df8f87558fb1a5d611a5",
+    "src/company_wiki/source_catalog/narrative_support_use.py": "81d28de8cb2f6222e5efa762bebdbe3be622a06c44902f063dacd0b4420da8e9",
+    "tests/unit/du11_production/test_source_information_binding.py": "def72dd29070bd71a4ad5b0b7e8e146886f6608c7a760fbe207833d4563d4b2d",
+    "tests/unit/du11_production/test_source_information_payload.py": "25fef15ddb53cb0f7fc942d2a7cee9243a6d8f2ab933e561c3419dbf39a07f5a",
+    "tests/unit/document_understanding_selection/test_source_support_use.py": "ff4b3594bd49a8986d41d252cf7ef92140be5a773c7763e5a6a87c328d50f8c4",
+    "src/company_wiki/source_catalog/narrative_predicate_state.py": "d3054a7f364b5f5c64c23048719584954a21641dd1b616ef7a5ecf3abc1f2282",
+    "tests/unit/du11_production/test_source_information_parity.py": "a5dbaecb4aa39a31fb7429d58e5948fa3b923f9a2fb1f07bfa25041dd4c2458a",
+    "tests/unit/document_understanding_root/test_operating_relation_production.py": "c43cc51f16591e40b1e494d0211a085f3e777ba739a126cbf0d9d517d46f15cf",
+    "tests/unit/document_understanding_selection/test_summary_source_admission.py": "449c6a20ac372eebed9037bdceb22d146528c5806ee8602ab94adc55d977c3ba"
+  },
+  "no_w21_runtime_changes": true,
+  "new_supplier_posts": 0,
+  "new_downloads": 0
+}

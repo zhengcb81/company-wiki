@@ -32,6 +32,7 @@ from .narrative_business_policy import (
 )
 from .narrative_source_purpose import NON_OPERATING_PURPOSES
 from .narrative_candidates import EvidenceCandidate
+from .n6_candidate_operating_facts import OperatingFact
 from .narrative_document import DocumentStructure, NarrativeEvidencePackage
 from .narrative_finalize import finalize_selection
 from .narrative_routing import DocumentRoute, route_document
@@ -66,7 +67,7 @@ def _admitted(unit: Any, reading: Mapping[str, Any], kind: str, *, fact: Any = N
               required_unit_ids: Sequence[str] = (),
               support_use: tuple[str, str] | None = None,
               offer_relevant: bool | None = None) -> tuple[bool, Any]:
-    fact = fact or detect_reading_business_fact(unit.raw_text)
+    fact = fact if fact is not None else OperatingFact()
 
     def decision(admitted: bool, reason: str | None = None) -> tuple[bool, Any]:
         if trace is not None:
@@ -93,17 +94,9 @@ def _admitted(unit: Any, reading: Mapping[str, Any], kind: str, *, fact: Any = N
                 })
         return admitted, fact
 
-    if fact.purpose in NON_OPERATING_PURPOSES or fact.purpose == "unassessed":
-        return decision(False, "non_operating_purpose" if fact.purpose in NON_OPERATING_PURPOSES
-                        else "unassessed_purpose")
-    if kind == "operating_table" and not table_qualified:
-        return decision(False, "table_not_qualified")
-    if unit.source_role in _CONTEXT_ROLES:
-        return decision(False, "source_context_role")
-    if not table_qualified and (
-        financial_only if financial_only is not None else _financial_only(unit.raw_text, fact)
-    ):
-        return decision(False, "financial_only")
+    prepared_roles = None
+    if fact.purpose == "unassessed":
+        return decision(False, "unassessed_purpose")
     # Glyphs/page counters are observed text, not operating descriptions. A
     # numeric cell of an already qualified operating table is different: its
     # original headers, units and period travel in the complete dependency graph.
@@ -118,24 +111,48 @@ def _admitted(unit: Any, reading: Mapping[str, Any], kind: str, *, fact: Any = N
                                 else "bare_numeric_marker")
         if roman_marker or letter_marker:
             return decision(False, "outline_marker")
+    if support_use is None or offer_relevant is None:
+        # Standalone compatibility calls use the identical source owner, not
+        # an old fact union plus a separate new role preparation. Production
+        # always supplies both cached axes and never enters this branch.
+        from company_wiki.resource_budget import new_document_work_budget
+        from .narrative_operating_relations import SourceOperatingSession
+        if getattr(unit, "unit_id", None) is None:
+            # Text-only compatibility has no canonical source references. Use
+            # the same prepared reading owner without inventing identifiers.
+            from .narrative_business_policy import prepare_reading_business_assessment
+            assessment = prepare_reading_business_assessment(unit.raw_text, {"relations": []})
+            fact, prepared_roles = assessment.fact, assessment.source_roles
+            if financial_only is None:
+                financial_only = assessment.financial_only
+        else:
+            source = SourceOperatingSession({unit.unit_id: unit}, work_budget=new_document_work_budget())
+            fact = source.fact(unit.unit_id)
+            prepared_roles = source.source_assertions(unit.unit_id)
+            if financial_only is None:
+                financial_only = source.financial_only(unit.unit_id)
+    if fact.purpose in NON_OPERATING_PURPOSES or fact.purpose == "unassessed":
+        return decision(False, "non_operating_purpose" if fact.purpose in NON_OPERATING_PURPOSES
+                        else "unassessed_purpose")
+    if kind == "operating_table" and not table_qualified:
+        return decision(False, "table_not_qualified")
+    if unit.source_role in _CONTEXT_ROLES:
+        return decision(False, "source_context_role")
+    if not table_qualified and (
+        financial_only if financial_only is not None else _financial_only(unit.raw_text, fact)
+    ):
+        return decision(False, "financial_only")
     if (is_heading or unit.unit_kind.endswith("_heading")) and not fact.eligible:
         return decision(False, "heading_without_business_fact")
     # Reading intent is not proof of independent support. Descriptive business
     # material can still qualify without a known stage, number or duration.
-    prepared_roles=None
-    if support_use is None or offer_relevant is None:
-        # Compatibility callers also prepare once for both independent axes.
-        # Production supplies the cached exact-view use and relevance directly.
-        from company_wiki.document_understanding.operating_states.assertion_roles import prepare_source_assertions
-        prepared_roles=prepare_source_assertions(unit.raw_text)
     use, reason = support_use or source_support_use(unit.raw_text, fact=fact,
         financial_only=financial_only if financial_only is not None else _financial_only(unit.raw_text, fact),
         table_qualified=table_qualified,source_roles=prepared_roles)
     if offer_relevant is None:
         offer_relevant=source_narrative_relevance(fact=fact,table_qualified=table_qualified,
             source_roles=prepared_roles)
-    readable_business = offer_relevant and (use == "support" or (
-        use == "unresolved" and reason == "source_numeric_scope_unresolved"))
+    readable_business = offer_relevant and use in {"support", "unresolved"}
     if not offer_relevant and use == 'unresolved':
         return decision(False,'unresolved_without_business_relevance')
     return decision(readable_business, None if readable_business else reason)
@@ -1032,13 +1049,13 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
         support_groups = dict(session.groups)
         session.groups = support_groups
     scope_owners = {tuple(members): owner for owner, members in support_groups.items()}
-    scope_uses: dict[tuple[Any, ...], tuple[str, str, bool]] = {}
+    scope_uses: dict[tuple[Any, ...], tuple[str, str, bool, str]] = {}
 
     def scope_use(native_support, *, table_qualified=False):
         # A carrier stands for all original characters in its native range.
         # This key is exactly the scope later projected to canonical spans.
         if not scope_ready:
-            return "unresolved", "source_assessment_incomplete", False
+            return "unresolved", "source_assessment_incomplete", False, "description"
         members = tuple(dict.fromkeys(origins.get(uid, uid) for uid in native_support))
         key = (members, table_qualified)
         if key in scope_uses:
@@ -1068,10 +1085,12 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
                     or bool(source_roles and source_roles.numeric_ambiguous))
             relevance=source_narrative_relevance(fact=fact,source_roles=source_roles,
                                                  table_qualified=table_qualified)
-            assessed=(*use,relevance)
+            value = ("meaningful_fact" if table_qualified else
+                     reading_material_value(fact, source_roles=source_roles))
+            assessed=(*use,relevance,value)
         except (WorkBudgetExceeded, ValueError):
             session.complete = False
-            assessed = ("unresolved", "source_assessment_incomplete", False)
+            assessed = ("unresolved", "source_assessment_incomplete", False, "description")
         scope_uses[key] = assessed
         return assessed
 
@@ -1110,10 +1129,11 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
         use_views = []
         anchor_uses: dict[str, tuple[str, str]] = {}
         anchor_relevance: dict[str, bool] = {}
+        anchor_values: dict[str, str] = {}
         for native_support in _citation_support_views(original_package, original_units):
             if not native_support:
                 continue
-            use, reason, relevant = scope_use(native_support, table_qualified=table_qualified)
+            use, reason, relevant, value = scope_use(native_support, table_qualified=table_qualified)
             use_views.append({"support_unit_ids": list(native_support),
                               "reading_support_use": use, "reading_support_reason": reason})
             for uid in native_support:
@@ -1124,6 +1144,7 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
                         or relevant and not anchor_relevance.get(material_uid,False)):
                     anchor_uses[material_uid] = (use, reason)
                     anchor_relevance[material_uid] = relevant
+                    anchor_values[material_uid] = value
         packages[index] = {**original_package, "_reading_support_use_views": use_views}
         declared_anchors = list(package.get("anchor_unit_ids", ()))
         if package["kind"] == "qa_exchange":
@@ -1167,7 +1188,9 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
             if not admitted:
                 continue
             anchors.append(uid)
-            meaningful = reading_material_value(fact) == "meaningful_fact" or package["kind"] == "operating_table"
+            # Value follows the same closed citation view as its support/use;
+            # an anchor's larger analysis owner cannot donate another fact.
+            meaningful = anchor_values.get(uid) == "meaningful_fact"
             role = view.get("section_role")
             scope_topics = (role,) if not meaningful and role in _BUSINESS_ROLES else ()
             topics = tuple(dict.fromkeys((*fact.topics, *scope_topics)))
@@ -1629,7 +1652,8 @@ def select_reading_evidence(parsed: DocumentStructure, *, title: str,
         unexplained_numeric = unexplained_numeric or mixed_numeric
         raw_only=bool(source_roles and source_roles.raw_structure_complete
             and not source_narrative_relevance(fact=session.fact(uid),source_roles=source_roles))
-        proved_without_offer += bool(not mixed_numeric and (financial or raw_only))
+        generic_only = bool(source_roles and source_roles.independent_payload is False)
+        proved_without_offer += bool(not mixed_numeric and (financial or raw_only or generic_only))
     # Semantic 'unassigned' is not an unread page. It must not defeat a fully
     # read and positively classified finance-only document's zero-model result.
     # A bounded reference deferral removes one card, not the rest of the

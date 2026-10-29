@@ -1,0 +1,57 @@
+{
+  "scope": "A/B implementation acceptance only; source/wire proof and old failed rounds preserved; not new native/model/cache/RF acceptance",
+  "files": [
+    {
+      "source": "ab-r7-freeze.json",
+      "archived": "ab-r7-freeze.json",
+      "uncompressed_sha256": "955a1e8bd18783e4c26ea1ab116f6af99d9a3ce2edb99b39aabfea9221e34de1",
+      "bytes": 2465,
+      "gzip": false
+    },
+    {
+      "source": "ab-r7-domain.txt",
+      "archived": "ab-r7-domain.txt.gz",
+      "uncompressed_sha256": "014514f1f5b5fff42e6f7be5bcbd11fce8dd8860764e7aff85388d4b9c691b9b",
+      "bytes": 2804,
+      "gzip": true
+    },
+    {
+      "source": "mypy-r7.txt",
+      "archived": "mypy-r7.txt.gz",
+      "uncompressed_sha256": "60bced76ab56e76b083157a70181a8162a3589e108419b3cad74bfd1a4f88c64",
+      "bytes": 66,
+      "gzip": true
+    },
+    {
+      "source": "ab-independent/r7/probe.json",
+      "archived": "ab-independent__r7__probe.json.gz",
+      "uncompressed_sha256": "d0a160c97b07f9ce02ac6d51f39952072143a9f3a6e17676c8a1212641d17734",
+      "bytes": 2928,
+      "gzip": true
+    },
+    {
+      "source": "ab-independent/r7/review.json",
+      "archived": "ab-independent__r7__review.json",
+      "uncompressed_sha256": "def2a0a55ab499952dffbe50317b0b46ee2933d917f5c16be50a989942c69864",
+      "bytes": 995,
+      "gzip": false
+    },
+    {
+      "source": "ab-independent/r7/review.md",
+      "archived": "ab-independent__r7__review.md",
+      "uncompressed_sha256": "89665d4cc32ed913901b98ef30830319d997d54a9b47b43a33f9c5a16f8fca2e",
+      "bytes": 2637,
+      "gzip": false
+    },
+    {
+      "source": "historical_receipts",
+      "archived": "history.json.gz",
+      "uncompressed_sha256": "f508648a8db4fb06769b42e5f5d024ff6c6624a0c93d21f6f4bb339bacd9693a",
+      "bytes": 69344,
+      "gzip": true
+    }
+  ],
+  "total_bytes": 81239,
+  "historical_receipt_count": 46,
+  "dropped_one_off_driver_scripts": true
+}

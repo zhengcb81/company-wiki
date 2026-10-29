@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-29",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_SOURCE_INFORMATION_ROOT_FIX_A_B",
+  "overall_status": "ACTIVE_AB_ACCEPTED_PUBLISHING_NEXT_NATIVE_SOURCE_GAPS",
   "parallel_packages_20261025": {
     "status": "W16_W17_W18_ROOT_COMPONENT_ACCEPTED_MERGED",
     "entry": "harness_lanes/20261025/README.md",
@@ -3038,14 +3038,32 @@
     "entry": "review/source-information-20261029/README.md",
     "native_goal_observed": "paused; tool has no resume operation; no duplicate created",
     "new_supplier_posts": 0,
-    "new_downloads": 0
+    "new_downloads": 0,
+    "current_slice": "A/B implementation accepted R7; normal publication, then C native-source gaps",
+    "implementation_milestone": "COMPONENT_PASS; actual tasks/summaries/cache/RF/holdout OPEN"
   },
   "parallel_w21_runtime": {
-    "status": "READY_NOT_DISPATCHED",
+    "status": "DISPATCHED_BY_USER_20261029",
     "entry": "harness_lanes/20261029/W21-PDF-RUNTIME.md",
     "workdir": "C:/Users/郑曾波/Projects/company-wiki-w21-pdf-runtime",
     "branch": "codex/w21-pdf-runtime-20261029",
     "base": "bb5d09c056ca36bba8061d761b5469d87aa6e5e0",
     "root_preserves_owned_runtime_files": true
+  },
+  "source_information_ab_20261029": {
+    "entry": "review/source-information-20261029/README.md",
+    "receipt": "review/source-information-20261029/AB_ACCEPTANCE.json",
+    "status": "PASS_READY_TO_PUBLISH",
+    "tests": {
+      "passed": 2988,
+      "skipped": 11,
+      "seconds": 114.7,
+      "full_repo": false
+    },
+    "independent_review": "R7_PASS_16_SOURCE_TEST_FILES",
+    "code_commit": null,
+    "new_supplier_posts": 0,
+    "new_downloads": 0,
+    "overall_goal_complete": false
   }
 }

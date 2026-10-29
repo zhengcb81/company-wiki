@@ -24,7 +24,7 @@ from .narrative_revenue_guidance import (
     revenue_guidance_premise,
 )
 from .narrative_business_policy import (
-    READING_BUSINESS_SCAN_PASSES, assess_reading_business_fact, project_reading_business_fact,
+    READING_BUSINESS_SCAN_PASSES, prepare_reading_business_assessment, project_reading_business_fact,
     source_result_subject,
     SOURCE_COMPARISON_MODIFIER_PATTERN,
     source_comparison_bases,
@@ -141,6 +141,7 @@ class SourceOperatingSession:
         self.engine = OperatingRelationSession(
             _ObservedUnits(units, self.analysis, self.originals), work_budget=work_budget)
         self.results: dict[str, dict[str, Any]] = {}
+        self.bindings: dict[str, tuple[bool, ...]] = {}
         self.facts: dict[str, OperatingFact] = {}
         self.financial: dict[str, bool | None] = {}
         self.assertions: dict[str, Any] = {}
@@ -213,6 +214,8 @@ class SourceOperatingSession:
                 if owner in self.groups:
                     self._prepare_group(owner)
                 result = self.engine.detect(owner, self.contexts.get(owner, ()))
+                self.bindings[owner] = self.engine.relation_bindings(
+                    owner, self.contexts.get(owner, ()))
             except WorkBudgetExceeded:
                 result = {"schema_version": "du4-operating-relations/1", "unit_id": owner,
                     "relations": [], "diagnostics": [{"code": "work_budget_exhausted", "unit_id": owner}],
@@ -686,6 +689,7 @@ class SourceOperatingSession:
             return self.units[ref["unit_id"]].raw_text[ref["char_start"]:ref["char_end"]]
         # The compatibility recognizer also scans text. Reserve its work before
         # running it; exhaustion must not restart through a text-only fallback.
+        financial: bool | None
         try:
             if result["status"] == "partial" and self.work_budget.exhausted:
                 raise WorkBudgetExceeded("operating relation work exhausted")
@@ -693,14 +697,17 @@ class SourceOperatingSession:
             from company_wiki.document_understanding.operating_states.assertion_roles import prepare_source_assertions
             self.assertions[owner] = replace(prepare_source_assertions(text),
                 bound_operating=self.engine.complete_assertion(owner,self.contexts.get(owner,())))
-            fact, financial = assess_reading_business_fact(text, result, ref_text=ref_text,
-                                                           source_roles=self.assertions[owner])
+            assessment = prepare_reading_business_assessment(text, result, ref_text=ref_text,
+                source_roles=self.assertions[owner], relation_bindings=self.bindings.get(owner, ()))
+            fact, financial = assessment.fact, assessment.financial_only
+            self.assertions[owner] = assessment.source_roles
         except WorkBudgetExceeded:
             self.complete = False
             # Closed relations retain their exact qualifiers and states without
             # restarting the text recognizer or scanning an unexamined tail.
             fact = project_reading_business_fact(text, result,
-                include_description=False, ref_text=ref_text) if result["relations"] else OperatingFact()
+                include_description=False, ref_text=ref_text,
+                relation_bindings=self.bindings.get(owner, ())) if result["relations"] else OperatingFact()
             fact = replace(fact, purpose="unassessed")
             financial = False if fact.financial_exempt else None
         self.facts[owner] = fact

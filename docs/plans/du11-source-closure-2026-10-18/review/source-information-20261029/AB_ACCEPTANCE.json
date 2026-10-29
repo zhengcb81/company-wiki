@@ -1,0 +1,99 @@
+{
+  "schema_version": "source-information-milestone/1",
+  "status": "COMPONENT_PASS_READY_TO_PUBLISH",
+  "date": "2026-10-29",
+  "scope": "A/B source information, no real native/task/model/cache/RF acceptance",
+  "policy_version": "reading-business-policy/23",
+  "review_round": 7,
+  "independent_review": "evidence/ab-independent__r7__review.json",
+  "tested_raw_sha256": {
+    "src/company_wiki/document_understanding/operating_states/assertion_roles.py": "5488264fe55475c2f555dcbef0faeeac382322db12eecc849a77acd2863e6e56",
+    "src/company_wiki/document_understanding/operating_states/relations.py": "b9da8b0438ea246b54739801ac9721c714823f754e81a18f7e3c1c019c2b3788",
+    "src/company_wiki/source_catalog/narrative_business_disclosures.py": "f065a4c500656e916cb062d58a5503b1820e099fbb4d75d49453854a8185dc97",
+    "src/company_wiki/source_catalog/narrative_business_meaning.py": "2898e590942e5a26551d8750402e409c5546390e965e11349ad126c4bd82201a",
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "698879be407dd3eb50095655d4da6e4b1b2bea83956a5443cd371ca9e1b35eeb",
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": "1c52537ab09fc682917b67ce12c22562aaf45e17cbf62afefcc65c1a5cecb86b",
+    "src/company_wiki/source_catalog/narrative_reading.py": "0c5e5e3fe0a08575ac0a45ec4b90979eea471545f60fcce32d54ecf75b974ff9",
+    "src/company_wiki/source_catalog/narrative_source_purpose.py": "42493222c643e45b719bd3cedae864e7721e31fa3ef1df8f87558fb1a5d611a5",
+    "src/company_wiki/source_catalog/narrative_support_use.py": "81d28de8cb2f6222e5efa762bebdbe3be622a06c44902f063dacd0b4420da8e9",
+    "tests/unit/du11_production/test_source_information_binding.py": "def72dd29070bd71a4ad5b0b7e8e146886f6608c7a760fbe207833d4563d4b2d",
+    "tests/unit/du11_production/test_source_information_payload.py": "25fef15ddb53cb0f7fc942d2a7cee9243a6d8f2ab933e561c3419dbf39a07f5a",
+    "tests/unit/document_understanding_selection/test_source_support_use.py": "ff4b3594bd49a8986d41d252cf7ef92140be5a773c7763e5a6a87c328d50f8c4",
+    "src/company_wiki/source_catalog/narrative_predicate_state.py": "d3054a7f364b5f5c64c23048719584954a21641dd1b616ef7a5ecf3abc1f2282",
+    "tests/unit/du11_production/test_source_information_parity.py": "a5dbaecb4aa39a31fb7429d58e5948fa3b923f9a2fb1f07bfa25041dd4c2458a",
+    "tests/unit/document_understanding_root/test_operating_relation_production.py": "c43cc51f16591e40b1e494d0211a085f3e777ba739a126cbf0d9d517d46f15cf",
+    "tests/unit/document_understanding_selection/test_summary_source_admission.py": "449c6a20ac372eebed9037bdceb22d146528c5806ee8602ab94adc55d977c3ba"
+  },
+  "tested_lf_sha256": {
+    "src/company_wiki/document_understanding/operating_states/assertion_roles.py": "b9352c0e22b527576201578d5ac4054a9f5333fc85860b3ccc19386e94e44051",
+    "src/company_wiki/document_understanding/operating_states/relations.py": "1e406045c806e8c1752a37d91372ebb7c8f2992a9e3ac9135e054d2d2a20a0f6",
+    "src/company_wiki/source_catalog/narrative_business_disclosures.py": "b7727e1a5220ebd9638ea9fe5c62f999f12916b3247689adfb37f8e6523873f4",
+    "src/company_wiki/source_catalog/narrative_business_meaning.py": "7bfcdbd4611424448ff7be3b4fd23c5308d5e8a34bd376eff42aff35c97dbb0f",
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "a655190bc1b37cb60c4f0d3bbccd2ae582a731c4a70290a3f2aa846903f9c32f",
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": "68af62198d53cddbcc04c47b88eae5f235dba790af0b5cc0ba7dd8aa69822f01",
+    "src/company_wiki/source_catalog/narrative_reading.py": "9bcd2e281b944deaf830e64fe177b4678d4eebd5d7df733b52a6987360d25f85",
+    "src/company_wiki/source_catalog/narrative_source_purpose.py": "3421f6e124f4c30e38ccf4975488c5800d2ebfe3e9144f597686d34cfd0744f1",
+    "src/company_wiki/source_catalog/narrative_support_use.py": "81d28de8cb2f6222e5efa762bebdbe3be622a06c44902f063dacd0b4420da8e9",
+    "tests/unit/du11_production/test_source_information_binding.py": "2fde2ae05cc037c2673d995e13c901e9dccd637f801e82c7fbbf5a5a60e1cc8c",
+    "tests/unit/du11_production/test_source_information_payload.py": "25fef15ddb53cb0f7fc942d2a7cee9243a6d8f2ab933e561c3419dbf39a07f5a",
+    "tests/unit/document_understanding_selection/test_source_support_use.py": "9391c3b2df4738c2feafabac328ef3ff9c6457955d9cb937842389bd658e0335",
+    "src/company_wiki/source_catalog/narrative_predicate_state.py": "d3054a7f364b5f5c64c23048719584954a21641dd1b616ef7a5ecf3abc1f2282",
+    "tests/unit/du11_production/test_source_information_parity.py": "a5dbaecb4aa39a31fb7429d58e5948fa3b923f9a2fb1f07bfa25041dd4c2458a",
+    "tests/unit/document_understanding_root/test_operating_relation_production.py": "4ab5b55b1ac754b5c9d1570b63ed23175af2007a3aa679fb6af3d633a20b4523",
+    "tests/unit/document_understanding_selection/test_summary_source_admission.py": "449c6a20ac372eebed9037bdceb22d146528c5806ee8602ab94adc55d977c3ba"
+  },
+  "domain_test": {
+    "passed": 2988,
+    "skipped": 11,
+    "seconds": 114.7,
+    "scope": [
+      "tests/unit/document_understanding_root",
+      "tests/unit/document_understanding_selection",
+      "tests/unit/du11_production",
+      "tests/unit/du11_source_quality",
+      "tests/unit/test_narrative_legacy_final_output.py"
+    ],
+    "full_repo": false
+  },
+  "mypy": {
+    "files": 396,
+    "errors": 0
+  },
+  "saved_source_text_only": {
+    "task_count": 38,
+    "design_cases": 26,
+    "design_mismatches": 0,
+    "low_information_context": [
+      "t11",
+      "t14",
+      "t29"
+    ],
+    "business_supported": [
+      "t9",
+      "t10",
+      "t16",
+      "t17",
+      "t19"
+    ]
+  },
+  "w21_runtime_files_modified": false,
+  "new_supplier_posts": 0,
+  "new_downloads": 0,
+  "budget_limits_raised": false,
+  "mother_account": {
+    "tokens": 1800368,
+    "usd_including_unknown": 0.727945
+  },
+  "pending": [
+    "publication and exact CI",
+    "IR remaining native QA materialization and source-role oracle",
+    "US source gaps",
+    "W21 runtime reception",
+    "actual current-revision tasks and configured summaries",
+    "actual restart/cross-run no duplicate spend",
+    "FF reuse and RF actual model adoption",
+    "new holdout and company loop"
+  ],
+  "publication": null,
+  "overall_goal_complete": false
+}

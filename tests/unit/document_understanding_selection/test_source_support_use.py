@@ -431,7 +431,11 @@ def saved_native_source_assessments():
 def test_saved_native_source_scope_replays_real_business_not_prior_metadata(saved_native_source_assessments,number,ids,expected):
     session,observed=saved_native_source_assessments
     key=f"scope-{number}"
-    assert (observed[key][0]=="support") is expected, (number,observed[key],session.source_text(key))
+    # Preserve the original v3 observation above. Source-information A/B changes
+    # only these pre-reviewed expectations: two abstract benefits and a cash /
+    # existing-credit going-concern background cannot be summary support.
+    current_expected = False if number in {19, 22, 42} else expected
+    assert (observed[key][0]=="support") is current_expected, (number,observed[key],session.source_text(key))
     assert session.groups[key]==ids
 
 

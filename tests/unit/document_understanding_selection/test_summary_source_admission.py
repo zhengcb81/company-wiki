@@ -26,10 +26,13 @@ UNKNOWN = {"relations": [{"polarity": "positive", "stage": "unknown",
     "本期营业收入增长12%。",
     "本期營業收入增長12%。",
 ))
-def test_unknown_state_retains_description_without_financial_exemption(text):
+def test_unbound_unknown_state_cannot_manufacture_operating_eligibility(text):
     fact = policy.project_reading_business_fact(text, UNKNOWN, description=OperatingFact())
-    assert fact.eligible, "Keep readable source descriptions, without upgrading their meaning."
-    assert "operating_state_unknown" in fact.reasons
+    # Raw readability is owned by original storage. Arbitrary serialized state
+    # metadata has no typed source proof and cannot create a business offer.
+    plain = policy.project_reading_business_fact(text, {"relations": []}, description=OperatingFact())
+    assert fact == plain
+    assert not fact.eligible and "operating_state_unknown" not in fact.reasons
     assert not fact.financial_exempt
     assert policy.reading_material_value(fact) == "description"
 

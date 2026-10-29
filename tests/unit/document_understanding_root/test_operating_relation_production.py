@@ -210,7 +210,9 @@ def test_zero_budget_does_not_run_matching_or_plain_detector(monkeypatch):
 def test_partial_keeps_closed_states_and_does_not_restart_full_text_scan(monkeypatch):
     from company_wiki.source_catalog.narrative_operating_relations import SourceOperatingSession
     from company_wiki.source_catalog import narrative_business_policy as policy
-    text = "公司现无生产VC。公司尚未量产ZX-9产品。公司计划商业化新产品。"
+    # Partial replay retains genuinely typed closed facts; an untyped "VC"
+    # alone is no longer allowed to manufacture an operating-object proof.
+    text = "公司现无生产VC材料。公司尚未量产ZX-9产品。公司计划商业化新产品。"
     parsed, _ = native([(text,), ("公司已量产其他产品。",)])
     generous = relations.detect_operating_relations(observation(text), work_budget=WorkBudget(100000))
     budget = WorkBudget(generous["work_used"] * 2 // 3)
@@ -328,11 +330,11 @@ def test_source_fact_and_financial_status_share_one_owner_assessment(monkeypatch
     session = SourceOperatingSession({u.unit_id:u for u in (*first.units, *second.units)},
                                     work_budget=budget)
     calls = []
-    original = source_owner.assess_reading_business_fact
+    original = source_owner.prepare_reading_business_assessment
     def traced(value, *args, **kwargs):
         calls.append(value)
         return original(value, *args, **kwargs)
-    monkeypatch.setattr(source_owner, "assess_reading_business_fact", traced)
+    monkeypatch.setattr(source_owner, "prepare_reading_business_assessment", traced)
     for unit in (*first.units, *second.units):
         first_fact = session.fact(unit.unit_id)
         used = budget.used

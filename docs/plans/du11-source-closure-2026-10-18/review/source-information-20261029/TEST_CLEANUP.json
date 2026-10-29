@@ -1,0 +1,17 @@
+[
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.si29a",
+    "existed_before_cleanup": false,
+    "absent_after": true
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.si29b",
+    "existed_before_cleanup": true,
+    "absent_after": true
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.si29c",
+    "existed_before_cleanup": true,
+    "absent_after": true
+  }
+]

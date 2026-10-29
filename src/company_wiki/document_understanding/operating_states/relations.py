@@ -180,6 +180,8 @@ class _Event:
     modality: str = "actual"
     embedded_actor: tuple[int, int] | None = None
     bound_operating_object: bool = False
+    bound_business_relationship: bool = False
+    bound_business_party_count: int = 0
 
 
 @dataclass
@@ -453,6 +455,12 @@ def _classify_np(view: MatchingView, span: tuple[int, int],
 
 # ---------------------------------------------------------------- event binding
 
+_BUSINESS_RELATION_CONSTRUCTIONS = frozenset(
+    name for name, activity in _ACTIVITY_BY_CONSTRUCTION.items()
+    if activity == "business_relationship")
+_CONTRACT_RELATION_OBJECT = re.compile(
+    r"(?:合同|协议|協議)\s*$|\b(?:contracts?|agreements?)\b(?=\s*(?:(?:with|at|under|on)\b|$))", re.I)
+
 
 def _bind_event(view: MatchingView, scan: _UnitScan, clause: tuple[int, int],
                 event: _Event, previous_end: int | None) -> None:
@@ -493,6 +501,7 @@ def _bind_event(view: MatchingView, scan: _UnitScan, clause: tuple[int, int],
                 attribution = actor_class
         elif role == "actor":
             actor_spans.append(span)
+            event.bound_business_party_count += actor_class != "unknown"
             if attribution == "unknown" and actor_class != "unknown":
                 attribution = actor_class
     if not actor_spans:
@@ -503,6 +512,7 @@ def _bind_event(view: MatchingView, scan: _UnitScan, clause: tuple[int, int],
             role, actor_class = _classify_np(view, span, scan.name_classes)
             if role == "actor":
                 actor_spans.append(span)
+                event.bound_business_party_count += actor_class != "unknown"
                 if attribution == "unknown" and actor_class != "unknown":
                     attribution = actor_class
             elif role == "object" and not obj_spans and not event.obj_spans:
@@ -711,6 +721,7 @@ def _clause_events(view: MatchingView, scan: _UnitScan,
             else:
                 event.qual_spans.append((argument_start, argument_end))
         event.qual_spans = list(dict.fromkeys(event.qual_spans))
+        named_function_object = False
         obj_group = groups.get("obj")
         if obj_group:
             raw_start = clause[0] + match.start("obj")
@@ -724,8 +735,8 @@ def _clause_events(view: MatchingView, scan: _UnitScan,
                 event.end = raw_start + len(raw)
             elif construction == "shipment_destination":
                 obj = raw.strip()
-                if (product_head_suffix(obj) is None and not (
-                        groups.get("use") and p.PURPOSE_NAMED_OBJECT.fullmatch(obj))):
+                named_function_object = bool(groups.get("use") and p.PURPOSE_NAMED_OBJECT.fullmatch(obj))
+                if product_head_suffix(obj) is None and not named_function_object:
                     continue
             if match.start("obj") < match.start(pred_key):
                 trimmed = _tail_np(_clean_np(raw))
@@ -791,7 +802,24 @@ def _clause_events(view: MatchingView, scan: _UnitScan,
         else:
             binding_clause = ((temporal_frame[1], clause[1]) if temporal_frame else clause)
             _bind_event(view, pending_scan, binding_clause, event, last_main_end)
+            # The accepted grammar already bound a source-authored function
+            # relative to this proper product name; no second name scan.
+            event.bound_operating_object |= named_function_object
             pending_main_end = event.end
+        if construction in _BUSINESS_RELATION_CONSTRUCTIONS and event.actor_spans:
+            # A real contract/counterparty assertion need not name a product.
+            # Its proof comes from this grammar's bound arguments, never the
+            # projected activity/reason label or an arbitrary nearby actor.
+            event.bound_business_relationship = bool(partner) or any(
+                _CONTRACT_RELATION_OBJECT.search(view.text[left:right])
+                for left, right in event.obj_spans)
+            if construction in {"relation_contact", "relation_contact_en"}:
+                event.bound_business_relationship |= event.bound_business_party_count >= 2
+        if (event.embedded_actor is not None and activity == "qualification"
+                and event.attribution in {"other", "quoted_related_party"}):
+            # This relative binds the qualification to its actual business
+            # party. It is useful source context, never issuer progress.
+            event.bound_business_relationship = True
         if any(
             p.ABSTRACT_OBJECT.fullmatch(view.text[span[0]:span[1]].strip())
             for span in event.obj_spans
@@ -861,6 +889,9 @@ class OperatingRelationSession:
         self._results: dict[tuple[str, tuple[str, ...]], dict[str, Any]] = {}
         self._references: dict[tuple[str, tuple[str, ...], bool], dict[str, Any]] = {}
         self._complete_assertions: set[tuple[str, tuple[str, ...]]] = set()
+        # Private proof sidecar, in exactly the emitted relation order. A
+        # scope-level OR cannot supply another predicate's operating object.
+        self._relation_bindings: dict[tuple[str, tuple[str, ...]], list[bool]] = {}
 
     def unit(self, uid: str):
         if uid not in self._units:
@@ -900,6 +931,11 @@ class OperatingRelationSession:
         if result is None:
             result=self.detect(unit_id,context_unit_ids)
         return result['status']=='complete' and key in self._complete_assertions
+
+    def relation_bindings(self, unit_id: str,
+                          context_unit_ids: tuple[str, ...] = ()) -> tuple[bool, ...]:
+        """Already prepared local object proofs; never rescan or trust wire refs."""
+        return tuple(self._relation_bindings.get((unit_id, context_unit_ids), ()))
 
     def reference_closure(self, unit_id: str, predecessor_unit_ids: tuple[str, ...] = (), *,
                           window_complete: bool = True) -> dict[str, Any]:
@@ -1093,6 +1129,7 @@ def _detect_operating_relations(
     try:
         if prepared is None:
             prepared = OperatingRelationSession(units, work_budget=work_budget)
+        bindings = prepared._relation_bindings[(target, tuple(context_ids))] = []
         target_unit = prepared.unit(target)
         target_text = prepared.matching_text(target)
         target_parent = target_unit["parent_id"]
@@ -1179,6 +1216,7 @@ def _detect_operating_relations(
                     if condition_scope != clause:
                         extra_quals.append(condition_scope)
                 relations.append(_relation_dict(target, target_view, clause, event, extra_quals))
+                bindings.append(event.bound_operating_object or event.bound_business_relationship)
                 if event.bound_operating_object:
                     prepared._complete_assertions.add((target,tuple(context_ids)))
     except WorkBudgetExceeded:
