@@ -1,0 +1,64 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+============================= test session starts =============================
+collected 18 items
+
+tests\unit\test_w21_pdf_runtime_probe_guard.py FFF.........F.            [ 77%]
+tests\unit\test_w21_pdf_runtime_launch.py FFFF                           [100%]
+
+================================== FAILURES ===================================
+____________ test_true_devnull_device_is_allowed_in_any_write_mode ____________
+tests\unit\test_w21_pdf_runtime_probe_guard.py:24: in test_true_devnull_device_is_allowed_in_any_write_mode
+    assert classify_open(os.devnull, mode, 0, temp) is None
+E   AssertionError: assert 'persistent_write' is None
+E    +  where 'persistent_write' = classify_open('nul', 'r+b', 0, WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-3272/test_true_devnull_device_is_al0/owned-temp'))
+E    +    where 'nul' = os.devnull
+______________ test_devnull_with_integer_write_flags_is_allowed _______________
+tests\unit\test_w21_pdf_runtime_probe_guard.py:28: in test_devnull_with_integer_write_flags_is_allowed
+    assert classify_open(os.devnull, None, os.O_RDWR | os.O_CREAT, owned_temp(tmp_path)) is None
+E   AssertionError: assert 'persistent_write' is None
+E    +  where 'persistent_write' = classify_open('nul', None, (2 | 256), WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-3272/test_devnull_with_integer_writ0/owned-temp'))
+E    +    where 'nul' = os.devnull
+E    +    and   2 = os.O_RDWR
+E    +    and   256 = os.O_CREAT
+E    +    and   WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-3272/test_devnull_with_integer_writ0/owned-temp') = owned_temp(WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-3272/test_devnull_with_integer_writ0'))
+________ test_devnull_reads_and_case_variants_of_the_exact_device_pass ________
+tests\unit\test_w21_pdf_runtime_probe_guard.py:34: in test_devnull_reads_and_case_variants_of_the_exact_device_pass
+    assert classify_open(raw, "r+b", 0, temp) is None
+E   AssertionError: assert 'persistent_write' is None
+E    +  where 'persistent_write' = classify_open('NUL', 'r+b', 0, WindowsPath('C:/Users/郑曾波/AppData/Local/Temp/pytest-of-郑曾波/pytest-3272/test_devnull_reads_and_case_va0/owned-temp'))
+_________ test_audit_hook_raises_permission_error_and_reports_events __________
+tests\unit\test_w21_pdf_runtime_probe_guard.py:69: in test_audit_hook_raises_permission_error_and_reports_events
+    hook("open", (os.devnull, "r+b", 0))
+tools\pdf_runtime_probe\cold_runtime_probe.py:50: in audit
+    raise PermissionError("probe writes only owned TEMP")
+E   PermissionError: probe writes only owned TEMP
+__________ test_child_environment_omits_parent_python_search_config ___________
+tests\unit\test_w21_pdf_runtime_launch.py:58: in test_child_environment_omits_parent_python_search_config
+    env = owner.child_environment(cpu_threads=4)
+          ^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.source_catalog.narrative_pdf_enhancement' has no attribute 'child_environment'
+_____ test_real_child_rejects_injected_search_paths_and_keeps_parent_env ______
+tests\unit\test_w21_pdf_runtime_launch.py:71: in test_real_child_rejects_injected_search_paths_and_keeps_parent_env
+    command = owner.child_launch_command(sys.executable, script)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.source_catalog.narrative_pdf_enhancement' has no attribute 'child_launch_command'
+______ test_enhance_launches_through_isolated_owner_and_keeps_parent_env ______
+tests\unit\test_w21_pdf_runtime_launch.py:98: in test_enhance_launches_through_isolated_owner_and_keeps_parent_env
+    assert captured["command"][1:-1] == list(owner.CHILD_LAUNCH_FLAGS)
+                                             ^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.source_catalog.narrative_pdf_enhancement' has no attribute 'CHILD_LAUNCH_FLAGS'
+__ test_worker_identity_stage_survives_isolated_flags_with_real_interpreter ___
+tests\unit\test_w21_pdf_runtime_launch.py:119: in test_worker_identity_stage_survives_isolated_flags_with_real_interpreter
+    script = owner.child_launch_command(sys.executable, Path(owner.__file__).with_name("_paragraph_worker.py"))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: module 'company_wiki.source_catalog.narrative_pdf_enhancement' has no attribute 'child_launch_command'
+=========================== short test summary info ===========================
+FAILED tests/unit/test_w21_pdf_runtime_probe_guard.py::test_true_devnull_device_is_allowed_in_any_write_mode
+FAILED tests/unit/test_w21_pdf_runtime_probe_guard.py::test_devnull_with_integer_write_flags_is_allowed
+FAILED tests/unit/test_w21_pdf_runtime_probe_guard.py::test_devnull_reads_and_case_variants_of_the_exact_device_pass
+FAILED tests/unit/test_w21_pdf_runtime_probe_guard.py::test_audit_hook_raises_permission_error_and_reports_events
+FAILED tests/unit/test_w21_pdf_runtime_launch.py::test_child_environment_omits_parent_python_search_config
+FAILED tests/unit/test_w21_pdf_runtime_launch.py::test_real_child_rejects_injected_search_paths_and_keeps_parent_env
+FAILED tests/unit/test_w21_pdf_runtime_launch.py::test_enhance_launches_through_isolated_owner_and_keeps_parent_env
+FAILED tests/unit/test_w21_pdf_runtime_launch.py::test_worker_identity_stage_survives_isolated_flags_with_real_interpreter
+======================== 8 failed, 10 passed in 2.66s =========================

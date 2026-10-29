@@ -1,0 +1,213 @@
+Timeout (0:00:10)!
+Thread 0x00007870 (most recent call first):
+  File "C:\Miniconda\Lib\threading.py", line 363 in wait
+  File "C:\Miniconda\Lib\threading.py", line 659 in wait
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki-w21-pdf-runtime\tools\pdf_runtime_probe\cold_runtime_probe.py", line 113 in sample
+  File "C:\Miniconda\Lib\threading.py", line 994 in run
+  File "C:\Miniconda\Lib\threading.py", line 1043 in _bootstrap_inner
+  File "C:\Miniconda\Lib\threading.py", line 1014 in _bootstrap
+
+Thread 0x0000777c (most recent call first):
+  File "C:\Miniconda\Lib\pathlib\_local.py", line 537 in open
+  File "C:\Miniconda\Lib\pathlib\_abc.py", line 632 in read_text
+  File "C:\Miniconda\Lib\pathlib\_local.py", line 546 in read_text
+  File "C:\Miniconda\Lib\importlib\metadata\__init__.py", line 915 in read_text
+  File "C:\Miniconda\Lib\importlib\metadata\__init__.py", line 463 in metadata
+  File "C:\Miniconda\Lib\importlib\metadata\__init__.py", line 1046 in packages_distributions
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\transformers\utils\import_utils.py", line 51 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\transformers\utils\generic.py", line 39 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\transformers\utils\auto_docstring.py", line 33 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\transformers\utils\__init__.py", line 22 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1310 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\transformers\dependency_versions_check.py", line 16 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1415 in _handle_fromlist
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\transformers\__init__.py", line 30 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\docling\datamodel\pipeline_options_vlm_model.py", line 9 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\docling\datamodel\pipeline_options_asr_model.py", line 8 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\docling\datamodel\asr_model_specs.py", line 9 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1415 in _handle_fromlist
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\docling\datamodel\pipeline_options.py", line 17 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\docling\datamodel\base_models.py", line 38 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\docling\backend\asciidoc_backend.py", line 20 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\docling\document_converter.py", line 21 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki-w21-pdf-runtime\tools\pdf_runtime_probe\cold_runtime_probe.py", line 124 in main
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki-w21-pdf-runtime\tools\pdf_runtime_probe\cold_runtime_probe.py", line 156 in <module>
+Timeout (0:00:10)!
+Thread 0x00007870 (most recent call first):
+  File "C:\Miniconda\Lib\threading.py", line 363 in wait
+  File "C:\Miniconda\Lib\threading.py", line 659 in wait
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki-w21-pdf-runtime\tools\pdf_runtime_probe\cold_runtime_probe.py", line 113 in sample
+  File "C:\Miniconda\Lib\threading.py", line 994 in run
+  File "C:\Miniconda\Lib\threading.py", line 1043 in _bootstrap_inner
+  File "C:\Miniconda\Lib\threading.py", line 1014 in _bootstrap
+
+Thread 0x0000777c (most recent call first):
+  File "<frozen importlib._bootstrap_external>", line 1218 in get_data
+  File "<frozen importlib._bootstrap_external>", line 1160 in get_code
+  File "<frozen importlib._bootstrap_external>", line 1023 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\anyio\_core\_synchronization.py", line 13 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\anyio\abc\__init__.py", line 43 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\anyio\to_thread.py", line 14 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1415 in _handle_fromlist
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\anyio\_core\_fileio.py", line 27 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\anyio\__init__.py", line 26 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\httpcore\_synchronization.py", line 17 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\httpcore\_sync\connection.py", line 14 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\httpcore\_sync\__init__.py", line 1 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1310 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\httpcore\_api.py", line 7 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\httpcore\__init__.py", line 1 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\huggingface_hub\hf_api.py", line 35 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1387 in _gcd_import
+  File "C:\Miniconda\Lib\importlib\__init__.py", line 88 in import_module
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\huggingface_hub\__init__.py", line 1224 in __getattr__
+  File "<frozen importlib._bootstrap>", line 1412 in _handle_fromlist
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\transformers\utils\hub.py", line 29 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\transformers\utils\__init__.py", line 77 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap>", line 1310 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\transformers\dependency_versions_check.py", line 16 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked

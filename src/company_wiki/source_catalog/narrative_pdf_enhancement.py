@@ -110,6 +110,30 @@ def configured_paragraph_runtime() -> ParagraphEnhancement | None:
     return ParagraphEnhancement(ParagraphRuntimeConfig(**raw))
 
 
+# The child reads no parent Python search configuration: isolated interpreter
+# flags plus an explicit OS-essential allowlist keep injected PYTHONPATH/
+# PYTHONHOME/user sites out, while the configured interpreter's own
+# site-packages and the first-party source tree stay authoritative.
+CHILD_LAUNCH_FLAGS = ("-B", "-I", "-X", "utf8")
+_CHILD_ENV_ALLOWLIST = ("APPDATA", "COMSPEC", "HOMEDRIVE", "HOMEPATH", "LOCALAPPDATA",
+    "PATH", "PATHEXT", "PROGRAMDATA", "SYSTEMDRIVE", "SYSTEMROOT", "USERPROFILE", "WINDIR")
+
+
+def child_launch_command(python: str, script: Path) -> list[str]:
+    return [python, *CHILD_LAUNCH_FLAGS, str(script)]
+
+
+def child_environment(cpu_threads: int) -> dict[str, str]:
+    env = {name: os.environ[name] for name in _CHILD_ENV_ALLOWLIST if name in os.environ}
+    env.update(HF_HUB_OFFLINE="1", TRANSFORMERS_OFFLINE="1", HF_HUB_DISABLE_TELEMETRY="1",
+        PYTHONDONTWRITEBYTECODE="1", PYTHONUTF8="1", PYTHONIOENCODING="utf-8",
+        DO_NOT_TRACK="1", TOKENIZERS_PARALLELISM="false",
+        PYTHONNOUSERSITE="1", PYTHON_DOTENV_DISABLED="1",
+        OMP_NUM_THREADS=str(cpu_threads), OPENBLAS_NUM_THREADS=str(cpu_threads),
+        MKL_NUM_THREADS=str(cpu_threads))
+    return env
+
+
 def proposals_from_items(parsed: DocumentStructure, items: list[dict[str, Any]],
                          pages: tuple[int, ...]) -> tuple[ParagraphProposal, ...]:
     frames: dict[int | None, dict[str, Any]] = {}
@@ -191,11 +215,7 @@ class ParagraphEnhancement:
                         "max_seconds": remaining, "max_memory_bytes": self.config.max_memory_bytes,
                         "max_output_bytes": self.config.max_output_bytes}
                     request["request_sha256"] = page_checkpoints.request_sha256(request)
-                    env = dict(os.environ, HF_HUB_OFFLINE="1", TRANSFORMERS_OFFLINE="1", HF_HUB_DISABLE_TELEMETRY="1",
-                               PYTHONDONTWRITEBYTECODE="1", PYTHONUTF8="1", PYTHONIOENCODING="utf-8",
-                               DO_NOT_TRACK="1", TOKENIZERS_PARALLELISM="false",
-                               OMP_NUM_THREADS=str(self.config.cpu_threads), OPENBLAS_NUM_THREADS=str(self.config.cpu_threads),
-                               MKL_NUM_THREADS=str(self.config.cpu_threads))
+                    env = child_environment(self.config.cpu_threads)
                     # Input cap is checked before base64 allocation; output is
                     # bounded before decoding. The child has no file output.
                     encoded = json.dumps(request).encode()
@@ -203,7 +223,8 @@ class ParagraphEnhancement:
                     with tempfile.TemporaryDirectory(prefix="cw-paragraph-") as folder:
                         env.update(TEMP=folder, TMP=folder, TMPDIR=folder)
                         try:
-                            raw = self._runner([self.config.python, "-B", str(Path(__file__).with_name("_paragraph_worker.py"))],
+                            raw = self._runner(child_launch_command(self.config.python,
+                                Path(__file__).with_name("_paragraph_worker.py")),
                                 input_bytes=encoded, env=env, timeout_seconds=max(0.001, remaining-(time.monotonic()-tick)),
                                 stdout_cap_bytes=self.config.max_output_bytes, stderr_cap_bytes=65536)
                         except (ChildTimeout, ChildFailed) as failure:
