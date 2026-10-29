@@ -1,0 +1,51 @@
+{
+  "schema_version": "independent-ci-boundary-review/1",
+  "reviewer": "/root/context_cache_boundary_review",
+  "baseline_commit": "7a110b59",
+  "status": "PASS",
+  "open_findings": [],
+  "scope": "CI40974928800 context-cache uncharged traversal and repeated tuple-key hashing; source/wire/partial-proof behavior",
+  "files": {
+    "src/company_wiki/document_understanding/operating_states/relations.py": {
+      "raw_sha256": "d19ba4e8870c7612aedbd59f284c8d328f78b4161ae4fe025d374baebb624b3b",
+      "lf_sha256": "f8b0b2e53cdcb7b175ad9f453d1302aea208102d3608b0e8193db4456a2d219d"
+    },
+    "tests/unit/du4_operating_states/test_root_boundaries.py": {
+      "raw_sha256": "4a9cf7e325931a9dd65d4b8331ed2d3900f73cd43d75c370f5141685ec8450f0",
+      "lf_sha256": "4a9cf7e325931a9dd65d4b8331ed2d3900f73cd43d75c370f5141685ec8450f0"
+    }
+  },
+  "closed_findings": [
+    {
+      "id": "R-CACHE-HASH-01",
+      "priority": "P2",
+      "root": "Python tuple hash is not cached: per-event set.add(binding_key) still walked all context members.",
+      "before_probe": "100 contexts, 1/20 bound events => 1900/3800 context hash calls in private detector",
+      "after_probe": "100 contexts, 1/20 bound events => constant 2200 hash calls through cached public session; first set insertion only; tuple copy/dict hash/set hash prepaid."
+    }
+  ],
+  "tests": {
+    "command": "C:/Miniconda/python.exe -B -X utf8 -m pytest tests/unit/du4_operating_states/test_root_boundaries.py -q --tb=short --basetemp=.planning/source-information-20261029/ci-boundary-review/tmp",
+    "passed": 28,
+    "seconds": 3.61,
+    "full_repository": false,
+    "neutral_probes": "probe.json; 1/20 relation hash equality and 6 bounded partial budgets; 2/17 retained partial relations have 2/17 aligned proofs, never complete_assertion."
+  },
+  "test_edits_authorized_by_root": [
+    "test_context_identity_work_does_not_multiply_with_relation_count",
+    "test_prepared_target_stops_mid_context_before_an_unpaid_index_read"
+  ],
+  "cleanup": {
+    "requested_basetemp_exists": false,
+    "host_relocated_basetemp": "C:/Users/郑曾波/AppData/Local/Packages/sandbox.{94cc1000-aba9-4db7-b842-f079fc8d0f69}/AC/Temp/cw-pytest-basetemp/20261029-235603-0045e4eb",
+    "host_cleanup_reported_removed": true,
+    "originals_configs_W21_author_worktree_read_or_modified": false,
+    "product_changes_by_reviewer": "only two authorized regression test functions; no product implementation changes"
+  },
+  "network_calls": 0,
+  "vendor_posts": 0,
+  "downloads": 0,
+  "limitations": [
+    "Root affected-domain/mypy checks and exact remote CI are separate responsibilities; this review does not declare remote green or real summary/cache/RF acceptance."
+  ]
+}

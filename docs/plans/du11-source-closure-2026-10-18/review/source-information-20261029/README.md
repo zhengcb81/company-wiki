@@ -1,3 +1,7 @@
+# CI后续优先（2026-10-29）
+
+40974928800已failure，ROOT已在Windows复现上下文缓存的未收费复制；[CI根修与短域复验](CI_BOUNDARY_FOLLOWUP.md)优先于C。以下A/B本地结果保留，不表示全仓通过或远端绿。
+
 # 来源信息主线：A/B已发布，继续C（2026-10-29）
 
 这是本轮唯一实施入口。用户已恢复主线；W21-PDF-RUNTIME已发出，ROOT保留其runtime/worker/environment文件，不同时运行真实SDK。

@@ -15,14 +15,14 @@
   "ci": {
     "id": 40974928800,
     "head_sha": "e920b09d6f6afff7855dc48f89cd4d03fdb6e647",
-    "name": "CI",
-    "status": "in_progress",
-    "conclusion": null,
+    "status": "completed",
+    "conclusion": "failure",
     "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40974928800"
   },
   "reviewed_16_file_raw_sha_still_match_after_commit": true,
   "foreign_pre_push_mode_wip_preserved": true,
   "new_supplier_posts": 0,
   "new_downloads": 0,
-  "overall_goal_complete": false
+  "overall_goal_complete": false,
+  "ci_followup": "CI_BOUNDARY_FOLLOWUP.md"
 }

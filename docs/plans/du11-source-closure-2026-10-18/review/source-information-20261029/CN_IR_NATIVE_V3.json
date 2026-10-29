@@ -1,0 +1,56 @@
+{
+  "scope": "one canonical native diagnostic, no optional SDK/model/download",
+  "native_parse_calls": 1,
+  "source_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+  "original_unchanged": true,
+  "seconds": 4.357,
+  "units": 252,
+  "roles": {
+    "qa_text_shadow": 219,
+    "unknown": 2,
+    "investor_question": 8,
+    "management": 23
+  },
+  "pages_read": 6,
+  "errors": [],
+  "opaque_pages": [],
+  "measured_pages": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "native_table_rows": 2,
+  "parse_work": 155795,
+  "total_work": 744551,
+  "selected_spans": 2,
+  "coverage_complete": false,
+  "status": "partial",
+  "artifacts": [
+    {
+      "path": "parsed.json.gz",
+      "sha256": "fc818c2136c726a07d382ce54c9f75697638221fc79e35a0b4c86dc44aa7ca71",
+      "bytes": 104752
+    },
+    {
+      "path": "measured.json.gz",
+      "sha256": "46b0bdeb4965bd908fb3c23dee671982b6157d70b3106c4d04b57fa766403f09",
+      "bytes": 13088
+    },
+    {
+      "path": "selection.json.gz",
+      "sha256": "832404ae69fef1e228db767e9df04430d52b2d219e809dacc92ab4202916f72c",
+      "bytes": 23617
+    },
+    {
+      "path": "diagnostic.json.gz",
+      "sha256": "1093b1732ddb7c51de22df86bbc1030d288a0b6a7a8e54255c37476322532fee",
+      "bytes": 160804
+    }
+  ],
+  "supplier_posts": 0,
+  "sdk_calls": 0,
+  "downloads": 0
+}

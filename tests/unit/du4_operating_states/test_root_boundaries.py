@@ -69,6 +69,93 @@ def test_exhausted_budget_does_not_copy_the_context_tail():
     assert result['status']=='partial'
 
 
+@pytest.mark.parametrize('limit', [0, 1, 20])
+def test_context_proof_key_never_traverses_unpaid_tail(limit):
+    class Contexts(list):
+        def __iter__(self):
+            pytest.fail('proof key traversed the unpaid context tail')
+        def __getitem__(self, index):
+            pytest.fail('context accessed before target preparation was paid')
+    observation = {'schema_version':detector.OBSERVATION_SCHEMA, 'unit_id':'u',
+                   'units':{'u':make_unit('公司未生产ZX-9产品。'*100)},
+                   'context_unit_ids':Contexts(['missing']*10000)}
+    budget = WorkBudget(limit)
+    result = detector.detect_operating_relations(observation, work_budget=budget)
+    assert result['status']=='partial'
+    assert result['relations']==[]
+    assert budget.used <= limit
+
+
+def test_context_proof_key_uses_the_once_validated_order_for_all_relations():
+    class Contexts(list):
+        reads = 0
+        def __iter__(self):
+            pytest.fail('validated contexts must not be traversed again')
+        def __getitem__(self, index):
+            self.reads += 1
+            return super().__getitem__(index)
+    contexts = Contexts(['b', 'a'])
+    units = {'u':make_unit('本公司已交付ZX-9产品。本公司的设备已完成客户认证。'),
+             'a':make_unit('本公司从事设备制造。'), 'b':make_unit('本公司制造新型设备。')}
+    session = detector.OperatingRelationSession(units, work_budget=WorkBudget(100000))
+    result = detector._detect_operating_relations(
+        {'schema_version':detector.OBSERVATION_SCHEMA, 'unit_id':'u',
+         'units':units, 'context_unit_ids':contexts},
+        work_budget=session.work_budget, prepared=session)
+    assert result['status']=='complete' and len(result['relations']) >= 2
+    assert contexts.reads == 2
+    assert len(session.relation_bindings('u', ('b', 'a'))) == len(result['relations'])
+    assert not session.relation_bindings('u', ('a', 'b'))
+
+
+def test_context_identity_work_does_not_multiply_with_relation_count():
+    class CountedId(str):
+        hashes = 0
+        def __hash__(self):
+            self.__class__.hashes += 1
+            return super().__hash__()
+
+    counts = []
+    for relation_count in (1, 20):
+        contexts = tuple(CountedId(f'c{i}') for i in range(100))
+        units = {'u':make_unit('公司已交付ZX-9产品。'*relation_count),
+                 **{str(uid):make_unit('') for uid in contexts}}
+        session = detector.OperatingRelationSession(units, work_budget=WorkBudget(100000))
+        CountedId.hashes = 0
+        result = session.detect('u', contexts)
+        assert result['status']=='complete'
+        assert len(result['relations'])==relation_count
+        counts.append(CountedId.hashes)
+    # Cache identity depends on this source scope, not on how many operating
+    # predicates it contains. Counting work avoids a machine-dependent timer.
+    assert counts[1] == counts[0]
+
+
+def test_prepared_target_stops_mid_context_before_an_unpaid_index_read():
+    class Contexts(list):
+        reads = 0
+        def __iter__(self):
+            pytest.fail('context source must be consumed by charged indexes')
+        def __getitem__(self, index):
+            self.reads += 1
+            return super().__getitem__(index)
+
+    text = '公司已交付ZX-9产品。'
+    contexts = Contexts([f'missing-{i}' for i in range(10000)])
+    budget = WorkBudget(1 + len(text) + 2)
+    units = {'u':make_unit(text)}
+    session = detector.OperatingRelationSession(units, work_budget=budget)
+    session.matching_text('u')
+    assert budget.used == 1 + len(text)
+    result = detector._detect_operating_relations(
+        {'schema_version':detector.OBSERVATION_SCHEMA, 'unit_id':'u',
+         'units':units, 'context_unit_ids':contexts}, work_budget=budget, prepared=session)
+    assert result['status']=='partial' and result['relations']==[]
+    assert contexts.reads == 2
+    assert budget.used == budget.max_work_units
+    assert result['diagnostics'][-1]['code']=='work_budget_exhausted'
+
+
 def test_conditional_qualification_cannot_be_overwritten_by_result_construction():
     text='如果客户验证通过，公司将交付ZX-9产品。'
     result, _units, _budget=run_text(text)

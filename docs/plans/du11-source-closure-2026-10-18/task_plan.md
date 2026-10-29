@@ -1,3 +1,7 @@
+## 2026-10-29 CI后续：上下文缓存键工作边界
+
+精确CI40974928800已failure，本机重现同一已有单测，并非Linux差异。原A/B 2988P/R7仅证明已列领域，漏选du4_operating_states，不能代签完整回归。新增私有证明键在预算前tuple(context_ids)，且事件循环重复构造。现以TDD修为验证/收费后构建一次缓存键，首次complete登记也只hash一次；234P/9.52秒、396源文件mypy、ruff及独审PASS/OPEN=0，待正常发布。见[CI根修](review/source-information-20261029/CI_BOUNDARY_FOLLOWUP.md)。下一步先发布此根修、观察精确CI，再继续CNIR native/US来源缺口；W21边界及预算保持。
+
 # 当前行动计划（2026-10-25更新）
 
 ## 2026-10-29 来源信息A/B实现通过，主线继续C（唯一当前状态）

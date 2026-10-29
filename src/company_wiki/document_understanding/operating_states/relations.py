@@ -1129,11 +1129,11 @@ def _detect_operating_relations(
     try:
         if prepared is None:
             prepared = OperatingRelationSession(units, work_budget=work_budget)
-        bindings = prepared._relation_bindings[(target, tuple(context_ids))] = []
         target_unit = prepared.unit(target)
         target_text = prepared.matching_text(target)
         target_parent = target_unit["parent_id"]
         seen_contexts: set[str] = set()
+        validated_context_ids: list[str] = []
         for index in range(len(context_ids)):
             work_budget.charge(1)
             context_id = context_ids[index]
@@ -1142,6 +1142,7 @@ def _detect_operating_relations(
             if context_id in seen_contexts:
                 raise ValueError("duplicate context_unit_ids")
             seen_contexts.add(context_id)
+            validated_context_ids.append(context_id)
             if context_id not in units:
                 diagnostics.append({"code": "context_unit_missing", "unit_id": context_id})
                 continue
@@ -1150,6 +1151,14 @@ def _detect_operating_relations(
                 diagnostics.append({"code": "context_parent_mismatch", "unit_id": context_id})
                 continue
             contexts_used.append(context_id)
+
+        # Cache identity is source work too. Build it once from the already
+        # charged, validated sequence, never by iterating an unpaid source
+        # container up front or copying it again for every emitted relation.
+        work_budget.charge(2 * len(validated_context_ids))
+        binding_key = (target, tuple(validated_context_ids))
+        bindings = prepared._relation_bindings[binding_key] = []
+        complete_assertion_recorded = False
 
         if not target_text.text.strip():
             diagnostics.append({"code": "unit_text_unavailable", "unit_id": target})
@@ -1217,8 +1226,12 @@ def _detect_operating_relations(
                         extra_quals.append(condition_scope)
                 relations.append(_relation_dict(target, target_view, clause, event, extra_quals))
                 bindings.append(event.bound_operating_object or event.bound_business_relationship)
-                if event.bound_operating_object:
-                    prepared._complete_assertions.add((target,tuple(context_ids)))
+                if event.bound_operating_object and not complete_assertion_recorded:
+                    # tuple hashes are not cached by Python: inserting this
+                    # same key for every event would still rewalk all members.
+                    work_budget.charge(len(validated_context_ids))
+                    prepared._complete_assertions.add(binding_key)
+                    complete_assertion_recorded = True
     except WorkBudgetExceeded:
         exhausted = True
 

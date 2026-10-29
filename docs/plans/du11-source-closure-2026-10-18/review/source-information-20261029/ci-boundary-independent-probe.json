@@ -1,0 +1,71 @@
+{
+  "source_raw_sha256": {
+    "src/company_wiki/document_understanding/operating_states/relations.py": "d19ba4e8870c7612aedbd59f284c8d328f78b4161ae4fe025d374baebb624b3b",
+    "tests/unit/du4_operating_states/test_root_boundaries.py": "4a9cf7e325931a9dd65d4b8331ed2d3900f73cd43d75c370f5141685ec8450f0"
+  },
+  "source_unchanged": true,
+  "context_hash_cases": [
+    {
+      "events": 1,
+      "relations": 1,
+      "status": "complete",
+      "hashes": 2200,
+      "work": 1050
+    },
+    {
+      "events": 20,
+      "relations": 20,
+      "status": "complete",
+      "hashes": 2200,
+      "work": 11481
+    }
+  ],
+  "partial_cases": [
+    {
+      "limit": 125,
+      "status": "partial",
+      "relations": 0,
+      "proofs": 0,
+      "used": 1
+    },
+    {
+      "limit": 500,
+      "status": "partial",
+      "relations": 0,
+      "proofs": 0,
+      "used": 489
+    },
+    {
+      "limit": 1000,
+      "status": "partial",
+      "relations": 0,
+      "proofs": 0,
+      "used": 729
+    },
+    {
+      "limit": 1500,
+      "status": "partial",
+      "relations": 0,
+      "proofs": 0,
+      "used": 1449
+    },
+    {
+      "limit": 2500,
+      "status": "partial",
+      "relations": 2,
+      "proofs": 2,
+      "used": 2494
+    },
+    {
+      "limit": 10000,
+      "status": "partial",
+      "relations": 17,
+      "proofs": 17,
+      "used": 9991
+    }
+  ],
+  "network_calls": 0,
+  "vendor_posts": 0,
+  "original_reads": 0,
+  "SDK_calls": 0
+}

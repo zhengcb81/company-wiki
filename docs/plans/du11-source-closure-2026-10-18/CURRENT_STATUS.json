@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-29",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_AB_PUBLISHED_NEXT_NATIVE_SOURCE_GAPS",
+  "overall_status": "ACTIVE_FIXING_CI_CONTEXT_CACHE_BOUNDARY",
   "parallel_packages_20261025": {
     "status": "W16_W17_W18_ROOT_COMPONENT_ACCEPTED_MERGED",
     "entry": "harness_lanes/20261025/README.md",
@@ -30,9 +30,8 @@
   "code_ci": {
     "id": 40974928800,
     "head_sha": "e920b09d6f6afff7855dc48f89cd4d03fdb6e647",
-    "name": "CI",
-    "status": "in_progress",
-    "conclusion": null,
+    "status": "completed",
+    "conclusion": "failure",
     "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40974928800"
   },
   "formal_v4_offline_selection_replay_20261025": {
@@ -3073,5 +3072,22 @@
     "conclusion": "success",
     "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40750555849",
     "updated_at": "2026-10-28T19:07:31Z"
+  },
+  "source_information_ci_followup_20261029": {
+    "status": "LOCAL_PASS_INDEPENDENT_PASS_PENDING_PUBLICATION",
+    "entry": "review/source-information-20261029/CI_BOUNDARY_FOLLOWUP.md",
+    "root_cause": "Uncharged context tuple copy for private proof cache; local milestone scope omitted du4_operating_states.",
+    "passed": 234,
+    "seconds": 9.52,
+    "mypy_files": 396,
+    "independent": "review/source-information-20261029/ci-boundary-independent-review.json"
+  },
+  "cn_ir_native_v3_20261029": {
+    "status": "PARTIAL_REMAINING_DISCOVERY_ROOT_LOCATED",
+    "entry": "review/source-information-20261029/CN_IR_NATIVE_V3.md",
+    "units": 252,
+    "selected_spans": 2,
+    "original_unchanged": true,
+    "new_supplier_posts": 0
   }
 }
