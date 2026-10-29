@@ -14,3 +14,23 @@ enhance改用之；探针guard改为字面量+realpath双条件discard-device规
 isolated/safe_path/utf8=True，prefix=env；fauilthandler栈=importlib.metadata读元数据（transformers扫描，IO-bound：
 8.6s CPU/25s wall）。根因：本机冷文件缓存下固定SDK import>30s，与旧探针（热缓存仍死于18.8s、从未到DONE）一致；
 30s界内完成性如实记PARTIAL，SDK启动完成性由C阶段120s生产界E2E复验。
+
+2026-10-29 C完成。E2E与冷启动迭代出完整根因链（每步都有receipt）：
+- rev2/rev3：pycache前缀引入后，探针guard与tempfile探测交互暴露更深根因——隔离env python.exe文件带
+  Mandatory Label Low (I)(NW)（继承自Low标签的部署树），子进程恒Low IL，无法写Medium的%TEMP%；
+  dill.session在import期调用tempfile.gettempdir()，所有候选目录对Low child均不可写 -> FileNotFoundError。
+  生产enhance原把TEMP指向parent %TEMP%下的TemporaryDirectory -> 生产child从来不可能在本机完成导入（主线SDK阻点的完整根因）。
+- 修复（均在launch owner范围内）：child TEMP/TMP/TMPDIR指向repo-local Low树 (__pycache__/pdf-paragraph/tmp)；
+  pycache_prefix同根（worktree整树Low, child可写）；allowlist补USERNAME（getpass.getuser()在无console无env时崩溃）。
+- rev5冷启动：DONE_NO_DOCUMENT于16.2s（30s界内），guard_rejections=0，peak 616MB，isolated/safe_path/utf8=True。
+- canonical E2E（ROOT profile原python路径）：triage 2页gap信号触发，真实worker经生产入口完成
+  identity+import+CONVERTER_READY，PAGE_1处ChildFailed：docling-parse 6.2.0 C++窄串路径
+  （pybind11 UTF-8语义）在ACP=GBK机器上无法从非ASCII部署路径打开pdf_resources
+  （fopen对照证据：GBK字节OK / UTF-8字节FAIL）-> ConversionStatus.FAILURE -> 诚实native_fallback。
+- ASCII别名E2E（junction同一env，--python诊断参数）：同一生产入口全管线成功——
+  completed_pages=[1,2], stream_complete=True, actual_engine=docling 2.96.0, 真实model_sha,
+  converter_instances=1, peak 3.25GB(与卡内~3.10GiB特征一致), 43.2s<120s界,
+  alignment拒绝2组 -> 诚实unaligned_native_fallback, 原文text/hash保留, replay不重启模型。
+- 故障恢复：既有checkpoint测试覆盖超时/损坏尾记录/finished-page保留（test_pdf_page_checkpoints.py 53测试）。
+- 清理：junction已删，ROOT importtime.log误写已删，诊断脚本已删，env/receipt/model SHA全部核对不变
+  （profile bcc427…/probe bb67326a…/model 00333a…/config fdea30…），env今日零写入，prefix/tmp无残留。

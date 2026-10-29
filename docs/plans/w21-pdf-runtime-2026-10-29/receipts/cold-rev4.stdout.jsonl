@@ -1,0 +1,5 @@
+{"stage": "BOOT", "active": "BOOT", "seconds": 0.001297, "cpu_seconds": 0.0625, "pid": 5148, "peak_job_commit_bytes": 10027008, "python_name": "python.exe", "prefix_name": "env", "base_prefix_name": "Miniconda", "flags": {"isolated": true, "safe_path": true, "utf8": true, "no_site": false}}
+{"stage": "BEGIN", "active": "IMPORT_DOCUMENT_CONVERTER", "seconds": 0.001381, "cpu_seconds": 0.0625, "pid": 5148, "peak_job_commit_bytes": 10027008}
+{"stage": "SAMPLE", "active": "IMPORT_DOCUMENT_CONVERTER", "seconds": 5.006176, "cpu_seconds": 4.796875, "pid": 5148, "peak_job_commit_bytes": 333615104}
+{"stage": "SAMPLE", "active": "IMPORT_DOCUMENT_CONVERTER", "seconds": 10.008552, "cpu_seconds": 9.234375, "pid": 5148, "peak_job_commit_bytes": 440311808}
+{"stage": "ERROR", "active": "IMPORT_DOCUMENT_CONVERTER", "seconds": 11.17913, "cpu_seconds": 10.296875, "pid": 5148, "peak_job_commit_bytes": 470794240, "error_type": "OSError", "message": "No username set in the environment"}

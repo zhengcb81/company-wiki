@@ -113,20 +113,52 @@ def configured_paragraph_runtime() -> ParagraphEnhancement | None:
 # The child reads no parent Python search configuration: isolated interpreter
 # flags plus an explicit OS-essential allowlist keep injected PYTHONPATH/
 # PYTHONHOME/user sites out, while the configured interpreter's own
-# site-packages and the first-party source tree stay authoritative.
-CHILD_LAUNCH_FLAGS = ("-B", "-I", "-X", "utf8")
+# site-packages and the first-party source tree stay authoritative. Bytecode
+# and per-run scratch live under this repo-local cache root: the deployed
+# interpreter executable carries a Windows Low integrity label, so the child
+# process cannot create files in the parent's Medium %TEMP%, and the pinned
+# SDK (dill's session module) needs a usable tempdir at import time. The
+# repository tree shares the Low label, which makes it writable for the child
+# without touching any ACL or label.
+CHILD_LAUNCH_FLAGS = ("-I", "-X", "utf8")
 _CHILD_ENV_ALLOWLIST = ("APPDATA", "COMSPEC", "HOMEDRIVE", "HOMEPATH", "LOCALAPPDATA",
-    "PATH", "PATHEXT", "PROGRAMDATA", "SYSTEMDRIVE", "SYSTEMROOT", "USERPROFILE", "WINDIR")
+    "PATH", "PATHEXT", "PROGRAMDATA", "SYSTEMDRIVE", "SYSTEMROOT", "USERNAME",
+    "USERPROFILE", "WINDIR")
 
 
 def child_launch_command(python: str, script: Path) -> list[str]:
-    return [python, *CHILD_LAUNCH_FLAGS, str(script)]
+    prefix = _child_bytecode_prefix()
+    if prefix is None:  # Unwritable tree: no cache and, critically, no writes.
+        return [python, "-B", *CHILD_LAUNCH_FLAGS, str(script)]
+    return [python, *CHILD_LAUNCH_FLAGS, "-X", f"pycache_prefix={prefix}", str(script)]
+
+
+def _child_bytecode_prefix() -> Path | None:
+    candidate = Path(__file__).resolve().parents[3] / "__pycache__" / "pdf-paragraph"
+    try:
+        candidate.mkdir(parents=True, exist_ok=True)
+    except OSError:
+        return None
+    return candidate
+
+
+def _child_temp_root() -> str | None:
+    """Per-run scratch root the integrity-limited child is able to write."""
+    prefix = _child_bytecode_prefix()
+    if prefix is None:
+        return None
+    root = prefix / "tmp"
+    try:
+        root.mkdir(exist_ok=True)
+    except OSError:
+        return None
+    return str(root)
 
 
 def child_environment(cpu_threads: int) -> dict[str, str]:
     env = {name: os.environ[name] for name in _CHILD_ENV_ALLOWLIST if name in os.environ}
     env.update(HF_HUB_OFFLINE="1", TRANSFORMERS_OFFLINE="1", HF_HUB_DISABLE_TELEMETRY="1",
-        PYTHONDONTWRITEBYTECODE="1", PYTHONUTF8="1", PYTHONIOENCODING="utf-8",
+        PYTHONUTF8="1", PYTHONIOENCODING="utf-8",
         DO_NOT_TRACK="1", TOKENIZERS_PARALLELISM="false",
         PYTHONNOUSERSITE="1", PYTHON_DOTENV_DISABLED="1",
         OMP_NUM_THREADS=str(cpu_threads), OPENBLAS_NUM_THREADS=str(cpu_threads),
@@ -220,7 +252,7 @@ class ParagraphEnhancement:
                     # bounded before decoding. The child has no file output.
                     encoded = json.dumps(request).encode()
                     process_failure: ChildTimeout | ChildFailed | None = None
-                    with tempfile.TemporaryDirectory(prefix="cw-paragraph-") as folder:
+                    with tempfile.TemporaryDirectory(prefix="cw-paragraph-", dir=_child_temp_root()) as folder:
                         env.update(TEMP=folder, TMP=folder, TMPDIR=folder)
                         try:
                             raw = self._runner(child_launch_command(self.config.python,

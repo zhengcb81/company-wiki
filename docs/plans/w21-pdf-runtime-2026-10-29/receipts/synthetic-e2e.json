@@ -1,0 +1,130 @@
+{
+  "scope": "one synthetic two-page PDF through the real production entry",
+  "profile_relative": "ROOT/.planning/c3-20261028/pdf-sdk-isolated/runtime-isolated.json",
+  "profile_sha256": "bcc427114955f6d045c5848b1885b24f1ec1666d1397bfb60ba4f404a225ff2a",
+  "python_origin": "profile",
+  "worktree_companies_present": false,
+  "worktree_raw_present": false,
+  "status": "native_fallback",
+  "seconds": 16.53,
+  "cleanup": {
+    "scratch_restored_absent": true,
+    "pdf_deleted": true,
+    "config_deleted": true
+  },
+  "pdf_bytes": 2115,
+  "pdf_sha256": "d0a5e932ff09a1cec7b0109e166c3e1b5e4dde175fc687e0e873c058cd347465",
+  "page_count": 2,
+  "diagnostic": {
+    "status": "native_fallback",
+    "pages": [
+      1,
+      2
+    ],
+    "gap_signals": [
+      {
+        "page": 1,
+        "reason": "unproven_wrapped_prose",
+        "priority": 1,
+        "left": "urn:company-wiki:narrative-unit:sha256:69cb00735b82a668b792dd1bc73696fbffd21d49f3d2963d6471fd3d96180472",
+        "right": "urn:company-wiki:narrative-unit:sha256:969e14a8519908bc1984d7f671a02759b21aaa81696abaed4cbe7f4faf421158"
+      },
+      {
+        "page": 2,
+        "reason": "unproven_wrapped_prose",
+        "priority": 1,
+        "left": "urn:company-wiki:narrative-unit:sha256:3aa8cb9356770ef11e79c294d33a150545e494b64364c0a920e5d3f78caa189e",
+        "right": "urn:company-wiki:narrative-unit:sha256:f81e2b45a57bed114ae7c27f085e2685fe09817c67e8b64b4abe5bee81a56ed2"
+      }
+    ],
+    "accepted_groups": 0,
+    "rejected_groups": null,
+    "actual_engine": null,
+    "engine_version": null,
+    "model_sha256": null,
+    "converter_instances": null,
+    "peak_job_commit_bytes": null,
+    "seconds": 16.1598,
+    "reason": "ChildFailed",
+    "last_stage": "PAGE_1",
+    "worker_error": "ValueError",
+    "worker_returncode": 1,
+    "temporary_root_restored_absent": true,
+    "completed_pages": [],
+    "pending_pages": [
+      1,
+      2
+    ],
+    "stream_complete": false,
+    "truncated_final_record": false,
+    "checkpoint_protocol": "pdf-paragraph-page-checkpoints/1"
+  },
+  "reading_execution": {
+    "schema_version": "pdf-reading-execution/1",
+    "scope": "paragraph_boundary_proposals",
+    "status": "native_fallback",
+    "pages": [
+      1,
+      2
+    ],
+    "accepted_groups": 0,
+    "seconds": 16.1598,
+    "reason": "ChildFailed",
+    "last_stage": "PAGE_1",
+    "worker_error": "ValueError",
+    "worker_returncode": 1,
+    "temporary_root_restored_absent": true,
+    "completed_pages": [],
+    "pending_pages": [
+      1,
+      2
+    ],
+    "stream_complete": false,
+    "truncated_final_record": false,
+    "checkpoint_protocol": "pdf-paragraph-page-checkpoints/1"
+  },
+  "runtime_identity": {
+    "environment_sha256": "c84a984ccb3a56dffbfd0d4538f14ce4a27de44dec4981527a2b0c4a545cdf44",
+    "docling_version": "2.96.0",
+    "runtime_versions": {
+      "docling-core": "2.78.0",
+      "docling-ibm-models": "3.13.2",
+      "torch": "2.12.0",
+      "pymupdf": "1.26.7",
+      "pypdfium2": "4.30.0",
+      "python": "3.13.9"
+    },
+    "recipe_keys": [
+      "alignment",
+      "alignment_sha256",
+      "checkpoint_implementation_sha256",
+      "checkpoint_protocol",
+      "cpu_threads",
+      "engine",
+      "engine_version",
+      "environment_algorithm",
+      "environment_implementation_sha256",
+      "environment_sha256",
+      "max_input_bytes",
+      "max_memory_bytes",
+      "max_output_bytes",
+      "max_pages",
+      "max_seconds",
+      "model_config_sha256",
+      "model_sha256",
+      "ocr",
+      "offline",
+      "orchestration_sha256",
+      "runtime_versions",
+      "table_structure",
+      "triage_dependencies",
+      "worker_sha256"
+    ]
+  },
+  "source_preserved": true,
+  "evidence_span_count": 0,
+  "replay_verified": 0,
+  "replay_failed": [],
+  "enhanced_claim_valid": false,
+  "alignment_scope": "no_aligned_groups_documented_honestly"
+}

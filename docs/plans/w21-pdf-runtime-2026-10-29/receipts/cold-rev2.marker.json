@@ -1,0 +1,9 @@
+{
+  "revision": "rev2",
+  "attempts": 1,
+  "deadline_seconds": 30,
+  "profile_relative": "ROOT/.planning/c3-20261028/pdf-sdk-isolated/runtime-isolated.json",
+  "profile_sha256": "bcc427114955f6d045c5848b1885b24f1ec1666d1397bfb60ba4f404a225ff2a",
+  "probe_sha256": "f454f76df0737a96260477afdebab0367269768153b249fc8fcf81b3653c28c0",
+  "controller_sha256": "b88ec2ba9f83f631bc6f50e78f59bb24bc0d2512e850496d384a21fec6ec328f"
+}

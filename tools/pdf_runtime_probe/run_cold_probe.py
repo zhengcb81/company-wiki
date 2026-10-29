@@ -23,9 +23,9 @@ sys.path.insert(0, str(WORKTREE / "src"))
 
 from company_wiki._bounded_process import TransportError, run_bounded  # noqa: E402
 from company_wiki.source_catalog.narrative_pdf_enhancement import (  # noqa: E402
-    CHILD_LAUNCH_FLAGS, child_environment)
+    child_environment, child_launch_command)
 
-REVISION = "rev1"
+REVISION = "rev5"
 PROFILE_RELATIVE = "ROOT/.planning/c3-20261028/pdf-sdk-isolated/runtime-isolated.json"
 CPU_THREADS = 4
 DOCUMENT_TIMEOUT_SECONDS = 120
@@ -62,19 +62,29 @@ def main() -> None:
         "controller_sha256": sha256(controller.read_bytes()).hexdigest()}
     marker_path.write_text(json.dumps(fingerprint, indent=2), encoding="utf-8")
 
-    scratch = Path(tempfile.mkdtemp(prefix="cw-w21-cold-"))
+    command = child_launch_command(profile["python"], probe)
+    bytecode_prefix = next((flag.split("=", 1)[1] for flag in command[1:-1]
+                            if flag.startswith("pycache_prefix=")), None)
+    # The deployed interpreter runs at Low integrity and cannot write the
+    # parent's Medium %TEMP%; the owned scratch must live inside the repo-local
+    # launch cache root, which shares the repository's Low label.
+    scratch_root = None if bytecode_prefix is None else Path(bytecode_prefix) / "tmp"
+    if scratch_root is not None:
+        scratch_root.mkdir(parents=True, exist_ok=True)
+    scratch = Path(tempfile.mkdtemp(prefix="cw-w21-cold-", dir=str(scratch_root) if scratch_root else None))
     environment = child_environment(cpu_threads=CPU_THREADS)
     environment.update(TEMP=str(scratch), TMP=str(scratch), TMPDIR=str(scratch),
         HF_HOME=str(scratch / "hf"), XDG_CACHE_HOME=str(scratch / "cache"))
-    command = [profile["python"], *CHILD_LAUNCH_FLAGS, str(probe)]
     request = {"artifacts": profile["artifacts"], "max_memory_bytes": profile["max_memory_bytes"],
-               "temp": str(scratch), "document_timeout": DOCUMENT_TIMEOUT_SECONDS, "cpu_threads": CPU_THREADS}
+               "temp": str(scratch), "document_timeout": DOCUMENT_TIMEOUT_SECONDS, "cpu_threads": CPU_THREADS,
+               "bytecode_prefix": bytecode_prefix}
     started = time.monotonic()
     receipt = {**fingerprint, "pdf_bytes": 0, "sdk_model_copies": 0, "cpu_threads": CPU_THREADS,
         "memory_bytes": profile["max_memory_bytes"],
         "environment_sha256": profile["environment_sha256"],
         "docling_version": profile["docling_version"],
-        "launch_flags": list(CHILD_LAUNCH_FLAGS), "audit_scope": "python_audit_events_only",
+        "launch_command": [Path(command[0]).name, *command[1:-1], Path(command[-1]).name],
+        "audit_scope": "python_audit_events_only",
         "status": None, "returncode": None, "seconds": None, "events": [],
         "stdout_sha256": None, "stderr_sha256": None, "done_no_document": False,
         "guard_rejections": None, "scratch_restored_absent": False}

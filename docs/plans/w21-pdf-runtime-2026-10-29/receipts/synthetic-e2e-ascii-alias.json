@@ -1,0 +1,132 @@
+{
+  "scope": "one synthetic two-page PDF through the real production entry",
+  "profile_relative": "ROOT/.planning/c3-20261028/pdf-sdk-isolated/runtime-isolated.json",
+  "profile_sha256": "bcc427114955f6d045c5848b1885b24f1ec1666d1397bfb60ba4f404a225ff2a",
+  "python_origin": "ascii_alias_diagnostic",
+  "worktree_companies_present": false,
+  "worktree_raw_present": false,
+  "status": "unaligned_native_fallback",
+  "seconds": 43.16,
+  "cleanup": {
+    "scratch_restored_absent": true,
+    "pdf_deleted": true,
+    "config_deleted": true
+  },
+  "pdf_bytes": 2115,
+  "pdf_sha256": "5270ba80363d7953bf87c329e5589f1816127f46cc625c2dfc24ad7ba1b289f4",
+  "page_count": 2,
+  "diagnostic": {
+    "status": "unaligned_native_fallback",
+    "pages": [
+      1,
+      2
+    ],
+    "gap_signals": [
+      {
+        "page": 1,
+        "reason": "unproven_wrapped_prose",
+        "priority": 1,
+        "left": "urn:company-wiki:narrative-unit:sha256:f0653a2eb9c1671abc2a1665e61b94bbb56ddfd117f53dc939415f85e73ef91c",
+        "right": "urn:company-wiki:narrative-unit:sha256:5612ccb598262270034227e0c8c69065218ea9e8db0a0b060576edc8ac79befa"
+      },
+      {
+        "page": 2,
+        "reason": "unproven_wrapped_prose",
+        "priority": 1,
+        "left": "urn:company-wiki:narrative-unit:sha256:fe7c952508fedfcb10eb7d9abecf449d40b97f0d6882092be8b2bf3807002aae",
+        "right": "urn:company-wiki:narrative-unit:sha256:f034c93897121cb1995d23d4e3c3072634bea46b4a7f7b8d00e3f60ca383c86e"
+      }
+    ],
+    "accepted_groups": 0,
+    "rejected_groups": 2,
+    "actual_engine": "docling",
+    "engine_version": "2.96.0",
+    "model_sha256": "00333a43451945aaf89db8ca9c0a17e75d1537c17db60fdb91aa95f4c7929e0c",
+    "converter_instances": 1,
+    "peak_job_commit_bytes": 3250298880,
+    "seconds": 42.3866,
+    "reason": null,
+    "last_stage": null,
+    "worker_error": null,
+    "worker_returncode": null,
+    "temporary_root_restored_absent": true,
+    "completed_pages": [
+      1,
+      2
+    ],
+    "pending_pages": [],
+    "stream_complete": true,
+    "truncated_final_record": false,
+    "checkpoint_protocol": "pdf-paragraph-page-checkpoints/1"
+  },
+  "reading_execution": {
+    "schema_version": "pdf-reading-execution/1",
+    "scope": "paragraph_boundary_proposals",
+    "status": "unaligned_native_fallback",
+    "pages": [
+      1,
+      2
+    ],
+    "accepted_groups": 0,
+    "rejected_groups": 2,
+    "actual_engine": "docling",
+    "engine_version": "2.96.0",
+    "model_sha256": "00333a43451945aaf89db8ca9c0a17e75d1537c17db60fdb91aa95f4c7929e0c",
+    "converter_instances": 1,
+    "peak_job_commit_bytes": 3250298880,
+    "seconds": 42.3866,
+    "temporary_root_restored_absent": true,
+    "completed_pages": [
+      1,
+      2
+    ],
+    "pending_pages": [],
+    "stream_complete": true,
+    "truncated_final_record": false,
+    "checkpoint_protocol": "pdf-paragraph-page-checkpoints/1"
+  },
+  "runtime_identity": {
+    "environment_sha256": "c84a984ccb3a56dffbfd0d4538f14ce4a27de44dec4981527a2b0c4a545cdf44",
+    "docling_version": "2.96.0",
+    "runtime_versions": {
+      "docling-core": "2.78.0",
+      "docling-ibm-models": "3.13.2",
+      "torch": "2.12.0",
+      "pymupdf": "1.26.7",
+      "pypdfium2": "4.30.0",
+      "python": "3.13.9"
+    },
+    "recipe_keys": [
+      "alignment",
+      "alignment_sha256",
+      "checkpoint_implementation_sha256",
+      "checkpoint_protocol",
+      "cpu_threads",
+      "engine",
+      "engine_version",
+      "environment_algorithm",
+      "environment_implementation_sha256",
+      "environment_sha256",
+      "max_input_bytes",
+      "max_memory_bytes",
+      "max_output_bytes",
+      "max_pages",
+      "max_seconds",
+      "model_config_sha256",
+      "model_sha256",
+      "ocr",
+      "offline",
+      "orchestration_sha256",
+      "runtime_versions",
+      "table_structure",
+      "triage_dependencies",
+      "worker_sha256"
+    ]
+  },
+  "source_preserved": true,
+  "evidence_span_count": 0,
+  "replay_verified": 0,
+  "replay_failed": [],
+  "enhanced_claim_valid": false,
+  "alignment_scope": "no_aligned_groups_documented_honestly"
+}

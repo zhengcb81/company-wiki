@@ -32,14 +32,15 @@ def _is_discard_device(raw) -> bool:
         return False
 
 
-def classify_open(raw, mode, flags, temp) -> str | None:
+def classify_open(raw, mode, flags, temp, extra_write_roots=()) -> str | None:
     """Return a rejection reason for one guarded open(), or None when allowed.
 
     ``temp`` is the one owned directory root that may receive persistent
-    writes. The standard discard device (``os.devnull``) persists no bytes and
-    is therefore allowed in any mode — torch/dill legitimately open it during
-    import. Original documents (.pdf) and secret files (.env) are never opened
-    even for reading.
+    writes; ``extra_write_roots`` carries the production launch contract's
+    own writable roots (the bytecode cache prefix). The standard discard
+    device (``os.devnull``) persists no bytes and is therefore allowed in any
+    mode — torch/dill legitimately open it during import. Original documents
+    (.pdf) and secret files (.env) are never opened even for reading.
     """
     if not isinstance(raw, (str, bytes, os.PathLike)):
         return None
@@ -48,13 +49,25 @@ def classify_open(raw, mode, flags, temp) -> str | None:
         return "original_or_secret"
     write = isinstance(mode, str) and any(char in mode for char in "wax+") or (
         isinstance(flags, int) and flags & (os.O_WRONLY | os.O_RDWR | os.O_CREAT | os.O_TRUNC | os.O_APPEND))
-    if write and not _is_discard_device(raw) and not Path(text).resolve().is_relative_to(Path(temp).resolve()):
+    if write and not _is_discard_device(raw) and not _within(text, temp, *extra_write_roots):
         return "persistent_write"
     return None
 
 
-def make_audit_hook(temp, emit):
+def _within(text, *roots) -> bool:
+    resolved = Path(text).resolve()
+    for root in roots:
+        try:
+            if resolved.is_relative_to(Path(root).resolve()):
+                return True
+        except OSError:
+            continue
+    return False
+
+
+def make_audit_hook(temp, emit, extra_write_roots=()):
     """Build the probe audit hook; callers install it inside the child only."""
+    write_roots = (temp, *extra_write_roots)
 
     def audit(name, arguments):
         if name in {"socket.connect", "socket.getaddrinfo", "socket.sendto"}:
@@ -63,19 +76,18 @@ def make_audit_hook(temp, emit):
         if name == "open":
             reason = classify_open(arguments[0] if arguments else None,
                 arguments[1] if len(arguments) > 1 else "r",
-                arguments[2] if len(arguments) > 2 else 0, temp)
+                arguments[2] if len(arguments) > 2 else 0, temp, extra_write_roots)
             if reason == "original_or_secret":
                 emit("GUARD_REJECTED", operation=reason)
                 raise PermissionError("probe forbids original documents and secret files")
             if reason == "persistent_write":
                 emit("GUARD_REJECTED", operation=reason)
-                raise PermissionError("probe writes only owned TEMP")
+                raise PermissionError("probe writes only owned TEMP and the launch bytecode prefix")
         if name in {"os.mkdir", "os.remove", "os.rmdir", "os.rename"}:
             for value in arguments[:2] if name == "os.rename" else arguments[:1]:
-                if isinstance(value, (str, bytes, os.PathLike)) and not Path(
-                        os.fsdecode(value)).resolve().is_relative_to(temp):
+                if isinstance(value, (str, bytes, os.PathLike)) and not _within(os.fsdecode(value), *write_roots):
                     emit("GUARD_REJECTED", operation=name)
-                    raise PermissionError("probe directory changes only in owned TEMP")
+                    raise PermissionError("probe directory changes only in owned TEMP and the launch bytecode prefix")
 
     return audit
 
@@ -97,6 +109,8 @@ def main() -> None:
     kernel.GetCurrentProcess.restype = ctypes.c_void_p
     job = WindowsJob(kernel.GetCurrentProcess(), memory_limit_bytes=request["max_memory_bytes"])
     temp = Path(request["temp"]).resolve()
+    bytecode_prefix = request.get("bytecode_prefix")
+    extra_write_roots = (Path(bytecode_prefix).resolve(),) if bytecode_prefix else ()
     active = "BOOT"
 
     def event(stage, **extra):
@@ -104,7 +118,7 @@ def main() -> None:
             "seconds": round(time.monotonic() - started, 6), "cpu_seconds": round(time.process_time(), 6),
             "pid": os.getpid(), "peak_job_commit_bytes": job.peak_commit_bytes(), **extra}, ensure_ascii=True), flush=True)
 
-    sys.addaudithook(make_audit_hook(temp, lambda stage, **extra: event(stage, **extra)))
+    sys.addaudithook(make_audit_hook(temp, lambda stage, **extra: event(stage, **extra), extra_write_roots))
     faulthandler.enable()
     faulthandler.dump_traceback_later(10, repeat=True)
     stop = threading.Event()

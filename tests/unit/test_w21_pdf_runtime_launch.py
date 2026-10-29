@@ -44,6 +44,8 @@ SENTINEL = (
     "info = {'pythonpath_env': os.environ.get('PYTHONPATH'),\n"
     "        'isolated': bool(sys.flags.isolated), 'safe_path': bool(sys.flags.safe_path),\n"
     "        'utf8_mode': bool(sys.flags.utf8_mode), 'user_site': bool(site.ENABLE_USER_SITE),\n"
+    "        'dont_write_bytecode': bool(sys.flags.dont_write_bytecode),\n"
+    "        'pycache_prefix': None if sys.pycache_prefix is None else sys.pycache_prefix,\n"
     "        'poison_path_entries': [p for p in sys.path if 'poison' in p]}\n"
     "spec = importlib.util.find_spec('docling')\n"
     "info['docling_origin'] = None if spec is None or spec.origin is None else spec.origin\n"
@@ -56,11 +58,26 @@ SENTINEL = (
 def test_child_environment_omits_parent_python_search_config(monkeypatch, tmp_path):
     poison_parent_environment(monkeypatch, tmp_path)
     env = owner.child_environment(cpu_threads=4)
-    assert not {"PYTHONPATH", "PYTHONHOME", "PYTHONUSERBASE", "PYTHONSTARTUP"} & set(env)
+    assert not {"PYTHONPATH", "PYTHONHOME", "PYTHONUSERBASE", "PYTHONSTARTUP",
+                "PYTHONDONTWRITEBYTECODE", "PYTHONPYCACHEPREFIX"} & set(env)
     assert env["PYTHONNOUSERSITE"] == "1"
     assert env["HF_HUB_OFFLINE"] == "1" and env["TRANSFORMERS_OFFLINE"] == "1"
     assert env["OMP_NUM_THREADS"] == env["OPENBLAS_NUM_THREADS"] == env["MKL_NUM_THREADS"] == "4"
     assert {"PATH", "SYSTEMROOT"} <= set(env), "OS essentials must survive the allowlist"
+
+
+def test_launch_command_caches_bytecode_outside_the_deployed_environment():
+    command = owner.child_launch_command("python-exe", Path("sentinel.py"))
+    assert command[0] == "python-exe" and command[-1] == "sentinel.py"
+    assert "-B" not in command, "bytecode writing must stay enabled for the owned prefix"
+    assert {"-I", "-X", "utf8"} <= set(command)
+    prefix_flags = [value for value in command if value.startswith("pycache_prefix=")]
+    assert len(prefix_flags) == 1
+    prefix = Path(prefix_flags[0].split("=", 1)[1])
+    assert prefix == Path(owner.__file__).resolve().parents[3] / "__pycache__" / "pdf-paragraph"
+    assert "__pycache__" in prefix.parts and "site-packages" not in prefix.parts
+    assert prefix.is_dir(), "the parent pre-creates the owned prefix"
+    assert not any(prefix.glob("*.py")), "the prefix never receives source files"
 
 
 def test_real_child_rejects_injected_search_paths_and_keeps_parent_env(monkeypatch, tmp_path):
@@ -75,6 +92,8 @@ def test_real_child_rejects_injected_search_paths_and_keeps_parent_env(monkeypat
     info = json.loads(result["stdout"])
     assert info["isolated"] and info["safe_path"] and info["utf8_mode"]
     assert not info["user_site"]
+    assert info["dont_write_bytecode"] is False
+    assert info["pycache_prefix"] is not None and Path(info["pycache_prefix"]).name == "pdf-paragraph"
     assert info["pythonpath_env"] is None
     assert info["poison_path_entries"] == []
     assert info["docling_origin"] is None or not Path(info["docling_origin"]).is_relative_to(poison)
@@ -95,12 +114,18 @@ def test_enhance_launches_through_isolated_owner_and_keeps_parent_env(monkeypatc
         data, parsed, work_budget=WorkBudget(100000), deadline=None)
     assert dict(os.environ) == before
     assert Path(captured["command"][-1]).name == "_paragraph_worker.py"
-    assert captured["command"][1:-1] == list(owner.CHILD_LAUNCH_FLAGS)
     assert captured["command"][0] == config().python
+    assert {"-I", "-X", "utf8"} <= set(captured["command"][1:-1])
+    assert "-B" not in captured["command"]
+    assert any(flag.startswith("pycache_prefix=") for flag in captured["command"][1:-1])
     env = captured["kwargs"]["env"]
     assert "PYTHONPATH" not in env and "PYTHONHOME" not in env and "PYTHONSTARTUP" not in env
+    assert "PYTHONDONTWRITEBYTECODE" not in env
     assert env["PYTHONNOUSERSITE"] == "1" and env["HF_HUB_OFFLINE"] == "1"
-    assert Path(env["TEMP"]).name.startswith("cw-paragraph-")
+    temp = Path(env["TEMP"])
+    assert temp.name.startswith("cw-paragraph-")
+    assert temp.parent.name == "tmp" and temp.parent.parent.name == "pdf-paragraph", (
+        "child scratch must live inside the repo-local Low-integrity cache root")
     assert env["TEMP"] == env["TMP"] == env["TMPDIR"]
     assert result.layout_diagnostics[-1]["status"] == "native_fallback"
     assert result.layout_diagnostics[-1]["reason"] == "ValueError"

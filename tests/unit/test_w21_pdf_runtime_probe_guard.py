@@ -52,6 +52,18 @@ def test_temp_writes_are_allowed_and_originals_or_secrets_rejected(tmp_path):
     assert classify_open("outside.txt", "w", 0, temp) == "persistent_write"
 
 
+def test_launch_bytecode_prefix_is_a_write_root_but_stays_bounded(tmp_path):
+    temp = owned_temp(tmp_path)
+    prefix = tmp_path / "cache-prefix"
+    nested = prefix / "mirror" / "torch"
+    nested.mkdir(parents=True)
+    assert classify_open(prefix / "module.pyc", "wb", 0, temp, (prefix,)) is None
+    assert classify_open(nested / "other.cpython-313.pyc", None, os.O_WRONLY | os.O_CREAT | os.O_TRUNC, temp, (prefix,)) is None
+    assert classify_open(prefix / "module.pyc", "wb", 0, temp) == "persistent_write"
+    assert classify_open(temp.parent / "escape.pyc", "wb", 0, temp, (prefix,)) == "persistent_write"
+    assert classify_open(str(prefix) + "-sibling/inside.pyc", "wb", 0, temp, (prefix,)) == "persistent_write"
+
+
 def test_non_path_and_fd_opens_are_outside_the_file_rules(tmp_path):
     temp = owned_temp(tmp_path)
     assert classify_open(3, "r+b", 0, temp) is None
@@ -60,14 +72,18 @@ def test_non_path_and_fd_opens_are_outside_the_file_rules(tmp_path):
 
 def test_audit_hook_raises_permission_error_and_reports_events(tmp_path):
     temp = owned_temp(tmp_path)
+    prefix = tmp_path / "cache-prefix"
+    prefix.mkdir()
     events = []
-    hook = make_audit_hook(temp, lambda stage, **extra: events.append((stage, extra)))
+    hook = make_audit_hook(temp, lambda stage, **extra: events.append((stage, extra)), (prefix,))
     with pytest.raises(PermissionError, match="owned TEMP"):
         hook("open", ("outside.txt", "w", 0))
     with pytest.raises(PermissionError, match="networking"):
         hook("socket.connect", ("10.0.0.1", 443))
     hook("open", (os.devnull, "r+b", 0))
     hook("open", (temp / "fine.bin", "wb", 0))
+    hook("open", (prefix / "mod.cpython-313.pyc", "wb", 0))
+    hook("os.mkdir", (prefix / "mirror",))
     assert [stage for stage, _ in events] == ["GUARD_REJECTED", "GUARD_REJECTED"]
     assert events[0][1]["operation"] == "persistent_write"
 
