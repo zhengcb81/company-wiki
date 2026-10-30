@@ -30,7 +30,7 @@ _BOUNDARY = re.compile(
 _MODAL = re.compile(
     r"(?P<conditional>假设|假定|假如|如果|若(?!干)|\b(?:if|unless|assuming)\b|"
     r"\bassumptions?\s+(?:that|of)\b)|"
-    r"(?P<negative>尚未|未能|没有|沒有|并未|並未|不曾|不是|不明|暂无|暫無|并无|並無|"
+    r"(?P<negative>尚未|未能|没有|沒有|并未|並未|并非|並非|不曾|不是|不明|暂无|暫無|并无|並無|"
     r"不(?=计划|計劃|拟|擬|打算)|\bno\s+(?:(?:current|immediate|present)\s+)?plans?\b|"
     r"\b(?:not|never|unknown|don't|doesn't|didn't|can't|cannot|isn't|aren't|wasn't|weren't)\b)|"
     r"(?P<uncertain>是否|可能|\b(?:may|might|could|would|whether|uncertain|unclear)\b)|"

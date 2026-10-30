@@ -62,7 +62,7 @@ _ACTIVITY = re.compile(
 
 # Only the opt-in ReadingPlan detector consumes these relations. Explicit
 # legacy selectors keep detect_business_fact and its historical predicates.
-READING_BUSINESS_POLICY_VERSION = "reading-business-policy/23"
+READING_BUSINESS_POLICY_VERSION = "reading-business-policy/24"
 READING_BUSINESS_SCAN_PASSES = (
     16 + SOURCE_PURPOSE_EXTENSION_SCAN_PASSES + READING_DISCLOSURE_SCAN_PASSES + READING_RECOGNITION_SCOPE_SCAN_PASSES
     + RESOURCE_READING_SCAN_PASSES
@@ -140,9 +140,15 @@ _PRODUCT_SUBJECT = re.compile(
 _REVENUE_GROWTH = re.compile(
     r"\b(?:revenue|sales)\b[^。.!?;]{0,45}\b(?:increas\w*|grew|growth|declin\w*|decreas\w*)\b|"
     r"(?:收入|销售|銷售).{0,20}(?:增长|增長|下降|减少|減少)", re.I)
-_DRIVER_LINK = re.compile(r"\b(?:driven by|due to|reflecting)\b|主要由|由于|因为|受.{0,12}带动|得益于", re.I)
+_DRIVER_LINK = re.compile(r"\b(?:driven by|due to|reflecting|because)\b|主要由|主要原因(?:是|为)|由于|因为|受.{0,12}带动|得益于", re.I)
 _OPERATING_MEASURE = re.compile(
     r"客户复购率|客戶復購率|\b(?:customer )?repeat.purchase rate\b|"
+    # Demand needs its actual operating subject. Bare demand may be for audit
+    # or accounting work; it is not made a business driver by a nearby revenue.
+    # Longest metric heads come first so `customer demand` remains one subject,
+    # rather than allowing `customer` to donate a separate direction proof.
+    r"\b(?:customer|consumer|market|downstream|product|service|end-market)\s+demand\b|"
+    r"(?:客户|客戶|下游|市场|市場|产品|產品|服务|服務|终端|終端)需求|"
     r"\b(?:consumption|usage|subscribers?|seats?|customers?|users?|units?|volumes?|pricing)\b|"
     r"capacity utilization|product mix|\b(?:projects?|orders?|capacity|output|total volume)\b|"
     r"使用量|用量|订阅|訂閱|席位|用户|用戶|客户|客戶|销量|銷量|价格|價格|"

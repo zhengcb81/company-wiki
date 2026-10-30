@@ -1,0 +1,281 @@
+{
+  "seconds": 0.902,
+  "work": 1230010,
+  "status": "partial",
+  "coverage_complete": false,
+  "spans": [
+    {
+      "page": 1,
+      "text": "投资者关系活动类别 | □特定对象调研 □分析师会议\n□媒体采访 □业绩说明会\n□新闻发布会 □路演活动\n□现场参观\n☑其他 2026 年山东辖区上市公司投资者网上集体接待日活动",
+      "role": "company_filing"
+    },
+    {
+      "page": 1,
+      "text": "1、问：公司主要业务 80%多都在国外，目前公司在国内业务开拓面\n临哪些挑战和机遇？公司如何服务国内统一大市场？",
+      "role": "investor_question"
+    },
+    {
+      "page": 1,
+      "text": "答：您好，公司积极开发国内市场，持续完善国内市场战略布局，提\n高公司的抗风险能力，2025 年度公司境内收入约8.19 亿元，占比约22%，\n较比 2024 年度有所提升。",
+      "role": "management"
+    },
+    {
+      "page": 1,
+      "text": "未来公司也会努力在电子信息材料产业、环保\n材料产业、新能源材料产业、生命科学与医药产业四大领域向国内市场提\n供更多优质产品。",
+      "role": "management"
+    },
+    {
+      "page": 1,
+      "text": "感谢您对公司的关注！",
+      "role": "management"
+    },
+    {
+      "page": 2,
+      "text": "3、问：公司业绩在 23 年度达到历史新高后，24 年度断崖式下降，\n25 年仍未有明显起色，主要是因为沸石原因么？公司有什么举措尽快恢\n复乃至超过 23 年度的经营业绩？",
+      "role": "investor_question"
+    },
+    {
+      "page": 2,
+      "text": "答：您好！",
+      "role": "management"
+    },
+    {
+      "page": 2,
+      "text": "公司 2024 年度影响收入的主要原因为沸石系列环保材料\n业务及部分医药业务下游需求减少，公司 2025 年度沸石分子筛产品收入\n略低于 2024 年度。",
+      "role": "management"
+    },
+    {
+      "page": 2,
+      "text": "公司 2025 年度及2026 年一季度收入及归属于上市公\n司股东的净利润均实现同比增长，其中2025 年度公司实现营业收入37.17\n亿元，同比增长约 0.63%，实现归属于上市公司股东的净利润约 2.84 亿\n元，同比增长约 15.51%；",
+      "role": "management"
+    },
+    {
+      "page": 2,
+      "text": "2026 年一季度实现营业收入约 10.15 亿元，同\n比增长约17.89%，实现归属于上市公司股东的净利润约0.88 亿元，同比\n增长约9.96%。",
+      "role": "management"
+    },
+    {
+      "page": 2,
+      "text": "未来公司将持续推进现四大产业产品的研发与产业化，在\n巩固现有业务领域优势地位的基础上，进一步优化新产品研发与产业化效\n率，持续丰富产品线，提升公司核心竞争力，争取获得更多产品领域的业\n内优势地位，并也希望通过努力实现更好的业绩。",
+      "role": "management"
+    },
+    {
+      "page": 2,
+      "text": "感谢您对公司的关注！",
+      "role": "management"
+    },
+    {
+      "page": 3,
+      "text": "5、问：控股股东在支持上市公司层面，具体做了哪些工作？有没有\n能推动与宁德时代等行业龙头达成电池电解液添加剂VC 的带量采购等具\n体业务，推动上市公司快速做大做强？",
+      "role": "investor_question"
+    },
+    {
+      "page": 3,
+      "text": "答：您好，公司现无生产 VC（碳酸亚乙烯酯）的情况，根据公司控\n股股东中国节能信息，中国节能与宁德时代已经建立了联系，并希望建立\n业务协同与合作。",
+      "role": "management"
+    },
+    {
+      "page": 3,
+      "text": "公司控股股东中国节能基于对公司未来发展前景的信心\n和对公司长期投资价值的认可，为切实维护广大投资者利益，促进公司持\n续、健康、稳定发展，增强投资者信心，计划自 2025 年 11 月 24 日起 6\n个月内（即 2025 年 11 月 24 日至 2026 年5 月23 日），以自有资金及股\n票增持专项贷款通过集中竞价交易方式，择机以适当的价格增持公司股\n份，截至2026 年5 月14日，中国节能本次已累计增持公司股份3,594.5807\n万股，合计持股比例已经达 29.08%，感谢您对公司的关注！",
+      "role": "management"
+    },
+    {
+      "page": 5,
+      "text": "13、问：公司预计半导体制造等相关材料，何时能为公司贡献 10 以\n上收益？",
+      "role": "investor_question"
+    },
+    {
+      "page": 5,
+      "text": "答：您好！",
+      "role": "management"
+    },
+    {
+      "page": 5,
+      "text": "目前公司在半导体制造材料领域已销售的产品主要为光刻\n胶单体、树脂、光酸以及半导体制程中清洗剂添加材料等，现已开发了超\n300 种化合物，在所涉足的产品方面技术已经处于国内领先水平。",
+      "role": "management"
+    },
+    {
+      "page": 5,
+      "text": "公司结\n合实际情况与下游客户需求，在新产能方面积极布局，2025 年公司启动\n了万润工业园二期 C05 建设项目，该项目包含半导体光刻胶用相关材料产\n能约 751 吨/年，项目建成后将为公司半导体制造材料业务发展提供产能\n保障。",
+      "role": "management"
+    },
+    {
+      "page": 5,
+      "text": "谢谢！",
+      "role": "management"
+    }
+  ],
+  "isolated_owners": [
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:0af71b078ebaa7425962f65aeb74a0352eeab0b68a7404729be53aa7bf84a6da",
+      "text": "公司 2024 年度影响收入的主要原因为沸石系列环保材料\n业务及部分医药业务下游需求减少，公司 2025 年度沸石分子筛产品收入\n略低于 2024 年度。",
+      "use": [
+        "support",
+        "source_business_relation"
+      ],
+      "bindings": [],
+      "unknown_argument": false,
+      "relations": {
+        "schema_version": "du4-operating-relations/1",
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:0af71b078ebaa7425962f65aeb74a0352eeab0b68a7404729be53aa7bf84a6da",
+        "relations": [],
+        "diagnostics": [],
+        "status": "complete",
+        "work_used": 153
+      }
+    },
+    {
+      "unit_id": "urn:company-wiki:narrative-unit:sha256:bd75a8c377fefb5f82492bb8191c62d815aa2dae2233cdb3e077107a2dc0b087",
+      "text": "答：您好，公司现无生产 VC（碳酸亚乙烯酯）的情况，根据公司控\n股股东中国节能信息，中国节能与宁德时代已经建立了联系，并希望建立\n业务协同与合作。",
+      "use": [
+        "support",
+        "source_business_relation"
+      ],
+      "bindings": [
+        false,
+        true,
+        false
+      ],
+      "unknown_argument": true,
+      "relations": {
+        "schema_version": "du4-operating-relations/1",
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:bd75a8c377fefb5f82492bb8191c62d815aa2dae2233cdb3e077107a2dc0b087",
+        "relations": [
+          {
+            "assertion_refs": [
+              {
+                "unit_id": "urn:company-wiki:narrative-unit:sha256:bd75a8c377fefb5f82492bb8191c62d815aa2dae2233cdb3e077107a2dc0b087",
+                "char_start": 5,
+                "char_end": 25
+              }
+            ],
+            "actor_refs": [
+              {
+                "unit_id": "urn:company-wiki:narrative-unit:sha256:bd75a8c377fefb5f82492bb8191c62d815aa2dae2233cdb3e077107a2dc0b087",
+                "char_start": 5,
+                "char_end": 7
+              }
+            ],
+            "object_refs": [
+              {
+                "unit_id": "urn:company-wiki:narrative-unit:sha256:bd75a8c377fefb5f82492bb8191c62d815aa2dae2233cdb3e077107a2dc0b087",
+                "char_start": 12,
+                "char_end": 22
+              }
+            ],
+            "predicate_refs": [
+              {
+                "unit_id": "urn:company-wiki:narrative-unit:sha256:bd75a8c377fefb5f82492bb8191c62d815aa2dae2233cdb3e077107a2dc0b087",
+                "char_start": 9,
+                "char_end": 11
+              }
+            ],
+            "qualifier_refs": [
+              {
+                "unit_id": "urn:company-wiki:narrative-unit:sha256:bd75a8c377fefb5f82492bb8191c62d815aa2dae2233cdb3e077107a2dc0b087",
+                "char_start": 7,
+                "char_end": 9
+              }
+            ],
+            "activity": "production",
+            "polarity": "negative",
+            "stage": "current",
+            "attribution": "issuer",
+            "modality": "actual"
+          },
+          {
+            "assertion_refs": [
+              {
+                "unit_id": "urn:company-wiki:narrative-unit:sha256:bd75a8c377fefb5f82492bb8191c62d815aa2dae2233cdb3e077107a2dc0b087",
+                "char_start": 42,
+                "char_end": 58
+              }
+            ],
+            "actor_refs": [
+              {
+                "unit_id": "urn:company-wiki:narrative-unit:sha256:bd75a8c377fefb5f82492bb8191c62d815aa2dae2233cdb3e077107a2dc0b087",
+                "char_start": 42,
+                "char_end": 46
+              },
+              {
+                "unit_id": "urn:company-wiki:narrative-unit:sha256:bd75a8c377fefb5f82492bb8191c62d815aa2dae2233cdb3e077107a2dc0b087",
+                "char_start": 47,
+                "char_end": 51
+              }
+            ],
+            "object_refs": [],
+            "predicate_refs": [
+              {
+                "unit_id": "urn:company-wiki:narrative-unit:sha256:bd75a8c377fefb5f82492bb8191c62d815aa2dae2233cdb3e077107a2dc0b087",
+                "char_start": 53,
+                "char_end": 58
+              }
+            ],
+            "qualifier_refs": [
+              {
+                "unit_id": "urn:company-wiki:narrative-unit:sha256:bd75a8c377fefb5f82492bb8191c62d815aa2dae2233cdb3e077107a2dc0b087",
+                "char_start": 51,
+                "char_end": 53
+              }
+            ],
+            "activity": "business_relationship",
+            "polarity": "positive",
+            "stage": "contact_established",
+            "attribution": "quoted_related_party",
+            "modality": "actual"
+          },
+          {
+            "assertion_refs": [
+              {
+                "unit_id": "urn:company-wiki:narrative-unit:sha256:bd75a8c377fefb5f82492bb8191c62d815aa2dae2233cdb3e077107a2dc0b087",
+                "char_start": 59,
+                "char_end": 72
+              }
+            ],
+            "actor_refs": [
+              {
+                "unit_id": "urn:company-wiki:narrative-unit:sha256:bd75a8c377fefb5f82492bb8191c62d815aa2dae2233cdb3e077107a2dc0b087",
+                "char_start": 42,
+                "char_end": 46
+              },
+              {
+                "unit_id": "urn:company-wiki:narrative-unit:sha256:bd75a8c377fefb5f82492bb8191c62d815aa2dae2233cdb3e077107a2dc0b087",
+                "char_start": 47,
+                "char_end": 51
+              }
+            ],
+            "object_refs": [
+              {
+                "unit_id": "urn:company-wiki:narrative-unit:sha256:bd75a8c377fefb5f82492bb8191c62d815aa2dae2233cdb3e077107a2dc0b087",
+                "char_start": 65,
+                "char_end": 72
+              }
+            ],
+            "predicate_refs": [
+              {
+                "unit_id": "urn:company-wiki:narrative-unit:sha256:bd75a8c377fefb5f82492bb8191c62d815aa2dae2233cdb3e077107a2dc0b087",
+                "char_start": 62,
+                "char_end": 64
+              }
+            ],
+            "qualifier_refs": [
+              {
+                "unit_id": "urn:company-wiki:narrative-unit:sha256:bd75a8c377fefb5f82492bb8191c62d815aa2dae2233cdb3e077107a2dc0b087",
+                "char_start": 60,
+                "char_end": 62
+              }
+            ],
+            "activity": "business_relationship",
+            "polarity": "positive",
+            "stage": "intended_cooperation",
+            "attribution": "quoted_related_party",
+            "modality": "aspirational"
+          }
+        ],
+        "diagnostics": [],
+        "status": "complete",
+        "work_used": 2994
+      }
+    }
+  ]
+}

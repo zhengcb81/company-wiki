@@ -1,0 +1,26 @@
+# C：参数三轴及业务因果（2026-10-30，实施中）
+
+承接已绿f05576e5/d6d3a5a0；不恢复旧W20返工，不抢W21 runtime/worker/env，不跑SDK。详细设计仍为../source-information-20261029/C_NEXT_IMPLEMENTATION.md。
+
+## 已做
+
+- 先中性RED：未知生产对象与已知材料词尾的差异、会计/抽象/数字/问题/截断、股东与未知对手方；单独及组合的业务需求因果、会计需求、泛计划、跨断言和否认因果。
+- 相同relation owner准备语法position、entity_kind、attribution三轴；未知实体保持unknown。真实制造frame+闭合原文argument+actor只登记未知参数的语法观察：`relation_bindings=False`、`independent_payload=None`、`use=unresolved`，仍保relevance、原文可读和否定/归属，不凭大小写、公司/化学品词库或排除词命中与否授qualified资格。已知产品继续支持。
+- 实际counterparty不需额外识别其企业类型，但必须有本地关系frame、已知来源party锚和另一独立参数；不变发行人/签约/合作完成。
+- 因果/经营测量复用同policy的实际predicate/metric proof，需求需客户/下游/市场等业务主语，bare会计需求不成业务proof。早期只加裸demand曾错误支持会计需求，已RED根修为完整metric主语，旧红测保留。
+- 独审初轮RETURN：财务缩写可借制造语法、嵌入式是否只限报告动词、中文并非因果误作actual、未知实体大小写/汉字偏差。已在共享账户身份、操作符索引、predicate模态与参数位置层修复，不新加消费者判断。table-purpose/6、reading-policy/24使现recipe依赖反映变化，不影响旧封存读取。
+- 最后短测168P/2.72秒，396src mypy/ruff通过。旧162P和实际两个owner初探发生在unknown合约收窄之前，仅历史，不代签最终源码。最终真实保存parsed重选20 spans、partial/coverage=false，0.902秒/1,230,010work；沸石support，VC单元因实际contact为support，但生产未知对象绑定False，三relation绑定False/True/False，不把股东联系变发行人合作完成。选材仍夹感谢/财务后文，Q1–Q3未闭环，不能代签summary/gold。
+
+## 当前与后续
+
+新独立agent semantic_axes_release_review正在对最终10文件终审；发现问题仍由ROOT修，不代签。首个完整领域3184P/11skip/3失败：known-party联系分支误伤已恢复；mixed-proof原测试依赖“是否”命题产生未qualified关系，保留原文本/断言并补真实已断言财务状态，继续验证proof不跨关系捐赠；一个loopback测试沙箱0POST，同一未改测试在授权宿主1P/7.98秒，验证一次POST和失败恢复零POST。兼容81P/2.16秒，最终宿主受影响领域正在执行，尚不签全部绿。
+
+真实重选的首版在完整selection快照落盘后，诊断脚本误取NarrativeUnit.text引起AttributeError。改为raw_text并复用已存快照，没有重读/重选去掩盖该次错误；其计时/work记null。known-party兼容修复后，另存最终源码重选收据，计时/work如上。脚本失败与原收据均保留。
+
+QA闭合支持视图/实际发送成本同scope投影仍未实施；后续按Q1–Q3先RED再复用现session/reference/qualification闭包，不能[[uid]]盲拆，也不能保留all-members重复成本。角色oracle、US RPO、W21接收、真实摘要/恢复/FF-RF/holdout和总公司循环仍OPEN。
+
+本节点0供应商POST/下载/SDK；原件/config/预算母账及外来hook mode未改。最初一次table helper插入位置错误导致SyntaxError，在任何发布前已通过collection RED发现并修正；实际错误和源码修正记录保留，不当平台问题。测试fixture最初把另一断言的合法计划一律当不应支持，已校准为不允许因果捐赠，而非删除计划内容。
+
+## 最终工程验收
+
+3187P/11既有skip/64.19秒（含恢复到原样的本地模拟服务端到端），396src mypy/ruff通过；独立25P/1.95秒，最终10文件raw/LF SHA绑定，PASS/0OPEN。独立测试、旧失败探针、最终领域日志与真实选择紧凑收据保留在本目录；计数不相加。正式摘要、缓存和RF采用未签。原hook mode不属于本次提交。

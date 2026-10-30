@@ -1,0 +1,800 @@
+{
+  "count": 15,
+  "seconds": 0.06102670000109356,
+  "observations": [
+    {
+      "text": "We do not manufacture EBITDA.",
+      "use": [
+        "support",
+        "source_business_relation"
+      ],
+      "bindings": [
+        true
+      ],
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "operating_mechanism",
+          "core_business",
+          "capacity_projects"
+        ],
+        "reasons": [
+          "operating_mechanism",
+          "operating_restriction"
+        ],
+        "score": 3,
+        "financial_exempt": true,
+        "purpose": "unknown"
+      },
+      "causal": false,
+      "relations": [
+        {
+          "assertion_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 0,
+              "char_end": 28
+            }
+          ],
+          "actor_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 0,
+              "char_end": 2
+            }
+          ],
+          "object_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 22,
+              "char_end": 28
+            }
+          ],
+          "predicate_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 10,
+              "char_end": 21
+            }
+          ],
+          "qualifier_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 3,
+              "char_end": 9
+            }
+          ],
+          "activity": "production",
+          "polarity": "negative",
+          "stage": "current",
+          "attribution": "issuer",
+          "modality": "actual"
+        }
+      ]
+    },
+    {
+      "text": "We do not manufacture Cash Flow.",
+      "use": [
+        "support",
+        "source_business_relation"
+      ],
+      "bindings": [
+        true
+      ],
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "operating_mechanism",
+          "core_business",
+          "capacity_projects"
+        ],
+        "reasons": [
+          "operating_mechanism",
+          "operating_restriction"
+        ],
+        "score": 3,
+        "financial_exempt": true,
+        "purpose": "unknown"
+      },
+      "causal": false,
+      "relations": [
+        {
+          "assertion_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 0,
+              "char_end": 31
+            }
+          ],
+          "actor_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 0,
+              "char_end": 2
+            }
+          ],
+          "object_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 22,
+              "char_end": 31
+            }
+          ],
+          "predicate_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 10,
+              "char_end": 21
+            }
+          ],
+          "qualifier_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 3,
+              "char_end": 9
+            }
+          ],
+          "activity": "production",
+          "polarity": "negative",
+          "stage": "current",
+          "attribution": "issuer",
+          "modality": "actual"
+        }
+      ]
+    },
+    {
+      "text": "We do not manufacture Working Capital.",
+      "use": [
+        "support",
+        "source_business_relation"
+      ],
+      "bindings": [
+        true
+      ],
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "operating_mechanism",
+          "core_business",
+          "capacity_projects"
+        ],
+        "reasons": [
+          "operating_mechanism",
+          "operating_restriction"
+        ],
+        "score": 3,
+        "financial_exempt": true,
+        "purpose": "unknown"
+      },
+      "causal": false,
+      "relations": [
+        {
+          "assertion_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 0,
+              "char_end": 37
+            }
+          ],
+          "actor_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 0,
+              "char_end": 2
+            }
+          ],
+          "object_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 22,
+              "char_end": 37
+            }
+          ],
+          "predicate_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 10,
+              "char_end": 21
+            }
+          ],
+          "qualifier_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 3,
+              "char_end": 9
+            }
+          ],
+          "activity": "production",
+          "polarity": "negative",
+          "stage": "current",
+          "attribution": "issuer",
+          "modality": "actual"
+        }
+      ]
+    },
+    {
+      "text": "We do not manufacture ROI.",
+      "use": [
+        "support",
+        "source_business_relation"
+      ],
+      "bindings": [
+        true
+      ],
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "operating_mechanism",
+          "core_business",
+          "capacity_projects"
+        ],
+        "reasons": [
+          "operating_mechanism",
+          "operating_restriction"
+        ],
+        "score": 3,
+        "financial_exempt": true,
+        "purpose": "unknown"
+      },
+      "causal": false,
+      "relations": [
+        {
+          "assertion_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 0,
+              "char_end": 25
+            }
+          ],
+          "actor_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 0,
+              "char_end": 2
+            }
+          ],
+          "object_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 22,
+              "char_end": 25
+            }
+          ],
+          "predicate_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 10,
+              "char_end": 21
+            }
+          ],
+          "qualifier_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 3,
+              "char_end": 9
+            }
+          ],
+          "activity": "production",
+          "polarity": "negative",
+          "stage": "current",
+          "attribution": "issuer",
+          "modality": "actual"
+        }
+      ]
+    },
+    {
+      "text": "本公司现无生产EBITDA的情况。",
+      "use": [
+        "support",
+        "source_business_relation"
+      ],
+      "bindings": [
+        true
+      ],
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "operating_mechanism",
+          "core_business",
+          "capacity_projects"
+        ],
+        "reasons": [
+          "operating_mechanism",
+          "operating_restriction"
+        ],
+        "score": 3,
+        "financial_exempt": true,
+        "purpose": "unknown"
+      },
+      "causal": false,
+      "relations": [
+        {
+          "assertion_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 0,
+              "char_end": 16
+            }
+          ],
+          "actor_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 0,
+              "char_end": 3
+            }
+          ],
+          "object_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 7,
+              "char_end": 13
+            }
+          ],
+          "predicate_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 5,
+              "char_end": 7
+            }
+          ],
+          "qualifier_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 3,
+              "char_end": 5
+            }
+          ],
+          "activity": "production",
+          "polarity": "negative",
+          "stage": "current",
+          "attribution": "issuer",
+          "modality": "actual"
+        }
+      ]
+    },
+    {
+      "text": "We currently manufacture KZ-4.",
+      "use": [
+        "support",
+        "source_business_relation"
+      ],
+      "bindings": [
+        true
+      ],
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "operating_mechanism",
+          "core_business",
+          "business_progress",
+          "capacity_projects"
+        ],
+        "reasons": [
+          "operating_mechanism",
+          "operating_milestone"
+        ],
+        "score": 3,
+        "financial_exempt": true,
+        "purpose": "unknown"
+      },
+      "causal": false,
+      "relations": [
+        {
+          "assertion_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 0,
+              "char_end": 29
+            }
+          ],
+          "actor_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 0,
+              "char_end": 2
+            }
+          ],
+          "object_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 25,
+              "char_end": 29
+            }
+          ],
+          "predicate_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 13,
+              "char_end": 24
+            }
+          ],
+          "qualifier_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 3,
+              "char_end": 12
+            }
+          ],
+          "activity": "production",
+          "polarity": "positive",
+          "stage": "current",
+          "attribution": "issuer",
+          "modality": "actual"
+        }
+      ]
+    },
+    {
+      "text": "We currently manufacture qx-7.",
+      "use": [
+        "context_only",
+        "no_independent_business_support"
+      ],
+      "bindings": [
+        false
+      ],
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "causal": false,
+      "relations": [
+        {
+          "assertion_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 0,
+              "char_end": 29
+            }
+          ],
+          "actor_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 0,
+              "char_end": 2
+            }
+          ],
+          "object_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 25,
+              "char_end": 29
+            }
+          ],
+          "predicate_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 13,
+              "char_end": 24
+            }
+          ],
+          "qualifier_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 3,
+              "char_end": 12
+            }
+          ],
+          "activity": "production",
+          "polarity": "positive",
+          "stage": "current",
+          "attribution": "issuer",
+          "modality": "actual"
+        }
+      ]
+    },
+    {
+      "text": "本公司目前不生产六氟环氧丙烷材料。",
+      "use": [
+        "support",
+        "source_business_relation"
+      ],
+      "bindings": [
+        true
+      ],
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "operating_mechanism",
+          "core_business",
+          "capacity_projects"
+        ],
+        "reasons": [
+          "operating_mechanism",
+          "operating_restriction"
+        ],
+        "score": 3,
+        "financial_exempt": true,
+        "purpose": "unknown"
+      },
+      "causal": false,
+      "relations": [
+        {
+          "assertion_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 0,
+              "char_end": 16
+            }
+          ],
+          "actor_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 0,
+              "char_end": 3
+            }
+          ],
+          "object_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 8,
+              "char_end": 16
+            }
+          ],
+          "predicate_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 6,
+              "char_end": 8
+            }
+          ],
+          "qualifier_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 3,
+              "char_end": 6
+            }
+          ],
+          "activity": "production",
+          "polarity": "negative",
+          "stage": "current",
+          "attribution": "issuer",
+          "modality": "actual"
+        }
+      ]
+    },
+    {
+      "text": "我们讨论客户是否已生产QX-7。",
+      "use": [
+        "context_only",
+        "no_independent_business_support"
+      ],
+      "bindings": [],
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "causal": false,
+      "relations": []
+    },
+    {
+      "text": "我们研究客户是否已生产QX-7。",
+      "use": [
+        "support",
+        "source_business_relation"
+      ],
+      "bindings": [
+        true
+      ],
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "operating_mechanism",
+          "core_business"
+        ],
+        "reasons": [
+          "operating_mechanism",
+          "operating_other_party_state"
+        ],
+        "score": 3,
+        "financial_exempt": true,
+        "purpose": "unknown"
+      },
+      "causal": false,
+      "relations": [
+        {
+          "assertion_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 0,
+              "char_end": 15
+            }
+          ],
+          "actor_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 0,
+              "char_end": 8
+            }
+          ],
+          "object_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 11,
+              "char_end": 15
+            }
+          ],
+          "predicate_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 9,
+              "char_end": 11
+            }
+          ],
+          "qualifier_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 8,
+              "char_end": 9
+            }
+          ],
+          "activity": "production",
+          "polarity": "positive",
+          "stage": "current",
+          "attribution": "other",
+          "modality": "actual"
+        }
+      ]
+    },
+    {
+      "text": "We considered whether our suppliers currently manufacture KZ-4.",
+      "use": [
+        "support",
+        "source_business_relation"
+      ],
+      "bindings": [
+        true
+      ],
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "operating_mechanism",
+          "core_business"
+        ],
+        "reasons": [
+          "operating_mechanism",
+          "operating_other_party_state"
+        ],
+        "score": 3,
+        "financial_exempt": true,
+        "purpose": "unknown"
+      },
+      "causal": false,
+      "relations": [
+        {
+          "assertion_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 0,
+              "char_end": 62
+            }
+          ],
+          "actor_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 0,
+              "char_end": 35
+            }
+          ],
+          "object_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 58,
+              "char_end": 62
+            }
+          ],
+          "predicate_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 46,
+              "char_end": 57
+            }
+          ],
+          "qualifier_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 36,
+              "char_end": 45
+            }
+          ],
+          "activity": "production",
+          "polarity": "positive",
+          "stage": "current",
+          "attribution": "other",
+          "modality": "actual"
+        }
+      ]
+    },
+    {
+      "text": "本公司收入下降，主要原因不是客户需求减少。",
+      "use": [
+        "context_only",
+        "financial_only"
+      ],
+      "bindings": [],
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "causal": false,
+      "relations": []
+    },
+    {
+      "text": "本公司收入下降，并非因为下游需求减少。",
+      "use": [
+        "support",
+        "source_business_relation"
+      ],
+      "bindings": [],
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "operating_causal_driver",
+          "operating_metric_change"
+        ],
+        "reasons": [
+          "operating_causal_driver",
+          "operating_metric_change"
+        ],
+        "score": 3,
+        "financial_exempt": true,
+        "purpose": "operating_metric"
+      },
+      "causal": true,
+      "relations": []
+    },
+    {
+      "text": "Our revenue rose because internal accounting demand increased.",
+      "use": [
+        "context_only",
+        "financial_only"
+      ],
+      "bindings": [],
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "causal": false,
+      "relations": []
+    },
+    {
+      "text": "Our revenue rose because accounting customer demand increased.",
+      "use": [
+        "support",
+        "source_business_relation"
+      ],
+      "bindings": [],
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "operating_causal_driver",
+          "operating_metric_change"
+        ],
+        "reasons": [
+          "operating_causal_driver",
+          "operating_metric_change"
+        ],
+        "score": 3,
+        "financial_exempt": true,
+        "purpose": "operating_metric"
+      },
+      "causal": true,
+      "relations": []
+    }
+  ]
+}

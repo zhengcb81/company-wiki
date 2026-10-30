@@ -94,7 +94,10 @@ def test_serialized_refs_alone_cannot_supply_typed_operating_proof():
 
 def test_mixed_source_does_not_donate_binding_to_financial_relations():
     session, _ = session_for([
-        "本公司的设备已完成客户认证。 " + FINANCIAL_BACKGROUND])
+        "本公司的设备已完成客户认证。 " + FINANCIAL_BACKGROUND
+        # An asserted financial state, rather than the embedded 是否 question,
+        # supplies the unqualified relation needed for the mixed-proof control.
+        + "本公司财务资源仍持续经营。"])
     result = session.relations(unit_id(0))
     bindings = session.engine.relation_bindings(unit_id(0))
     assert any(bindings) and not all(bindings)

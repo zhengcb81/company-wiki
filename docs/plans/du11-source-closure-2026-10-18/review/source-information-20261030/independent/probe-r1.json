@@ -1,0 +1,864 @@
+{
+  "count": 25,
+  "seconds": 0.29970480000338284,
+  "observations": [
+    {
+      "text": "本公司目前不生产六氟环氧丙烷。",
+      "use": [
+        "context_only",
+        "no_independent_business_support"
+      ],
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "bindings": [
+        false
+      ],
+      "relations": [
+        {
+          "assertion_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 0,
+              "char_end": 14
+            }
+          ],
+          "actor_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 0,
+              "char_end": 3
+            }
+          ],
+          "object_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 8,
+              "char_end": 14
+            }
+          ],
+          "predicate_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 6,
+              "char_end": 8
+            }
+          ],
+          "qualifier_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 3,
+              "char_end": 6
+            }
+          ],
+          "activity": "production",
+          "polarity": "negative",
+          "stage": "current",
+          "attribution": "issuer",
+          "modality": "actual"
+        }
+      ],
+      "causal": false,
+      "payload": null
+    },
+    {
+      "text": "本公司目前不生产天穹七号。",
+      "use": [
+        "context_only",
+        "no_independent_business_support"
+      ],
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "bindings": [
+        false
+      ],
+      "relations": [
+        {
+          "assertion_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 0,
+              "char_end": 12
+            }
+          ],
+          "actor_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 0,
+              "char_end": 3
+            }
+          ],
+          "object_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 8,
+              "char_end": 12
+            }
+          ],
+          "predicate_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 6,
+              "char_end": 8
+            }
+          ],
+          "qualifier_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 3,
+              "char_end": 6
+            }
+          ],
+          "activity": "production",
+          "polarity": "negative",
+          "stage": "current",
+          "attribution": "issuer",
+          "modality": "actual"
+        }
+      ],
+      "causal": false,
+      "payload": null
+    },
+    {
+      "text": "公司未生产qx-7。",
+      "use": [
+        "context_only",
+        "no_independent_business_support"
+      ],
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "bindings": [
+        false
+      ],
+      "relations": [
+        {
+          "assertion_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 0,
+              "char_end": 9
+            }
+          ],
+          "actor_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 0,
+              "char_end": 2
+            }
+          ],
+          "object_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 5,
+              "char_end": 9
+            }
+          ],
+          "predicate_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 3,
+              "char_end": 5
+            }
+          ],
+          "qualifier_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 2,
+              "char_end": 3
+            }
+          ],
+          "activity": "production",
+          "polarity": "negative",
+          "stage": "current",
+          "attribution": "issuer",
+          "modality": "actual"
+        }
+      ],
+      "causal": false,
+      "payload": null
+    },
+    {
+      "text": "公司尚未生产PX-3。",
+      "use": [
+        "support",
+        "source_business_relation"
+      ],
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "operating_mechanism",
+          "core_business",
+          "capacity_projects"
+        ],
+        "reasons": [
+          "operating_mechanism",
+          "operating_restriction"
+        ],
+        "score": 3,
+        "financial_exempt": true,
+        "purpose": "unknown"
+      },
+      "bindings": [
+        true
+      ],
+      "relations": [
+        {
+          "assertion_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 0,
+              "char_end": 10
+            }
+          ],
+          "actor_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 0,
+              "char_end": 2
+            }
+          ],
+          "object_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 6,
+              "char_end": 10
+            }
+          ],
+          "predicate_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 4,
+              "char_end": 6
+            }
+          ],
+          "qualifier_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 2,
+              "char_end": 4
+            }
+          ],
+          "activity": "production",
+          "polarity": "negative",
+          "stage": "not_yet",
+          "attribution": "issuer",
+          "modality": "actual"
+        }
+      ],
+      "causal": false,
+      "payload": true
+    },
+    {
+      "text": "We manufacture KZ-4.",
+      "use": [
+        "context_only",
+        "no_independent_business_support"
+      ],
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "bindings": [],
+      "relations": [],
+      "causal": false,
+      "payload": null
+    },
+    {
+      "text": "We plan to manufacture KZ-4.",
+      "use": [
+        "support",
+        "source_business_relation"
+      ],
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "operating_mechanism",
+          "core_business",
+          "new_business",
+          "capacity_projects"
+        ],
+        "reasons": [
+          "operating_mechanism",
+          "operating_plan"
+        ],
+        "score": 3,
+        "financial_exempt": true,
+        "purpose": "unknown"
+      },
+      "bindings": [
+        true
+      ],
+      "relations": [
+        {
+          "assertion_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 0,
+              "char_end": 27
+            }
+          ],
+          "actor_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 0,
+              "char_end": 2
+            }
+          ],
+          "object_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 23,
+              "char_end": 27
+            }
+          ],
+          "predicate_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 11,
+              "char_end": 22
+            }
+          ],
+          "qualifier_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 3,
+              "char_end": 10
+            }
+          ],
+          "activity": "production",
+          "polarity": "positive",
+          "stage": "planned",
+          "attribution": "issuer",
+          "modality": "planned"
+        }
+      ],
+      "causal": false,
+      "payload": true
+    },
+    {
+      "text": "We denied that we manufacture KZ-4.",
+      "use": [
+        "context_only",
+        "no_independent_business_support"
+      ],
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "bindings": [],
+      "relations": [],
+      "causal": false,
+      "payload": null
+    },
+    {
+      "text": "We considered whether we manufacture KZ-4.",
+      "use": [
+        "context_only",
+        "no_independent_business_support"
+      ],
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "bindings": [],
+      "relations": [],
+      "causal": false,
+      "payload": null
+    },
+    {
+      "text": "We discussed whether we manufacture KZ-4.",
+      "use": [
+        "context_only",
+        "no_independent_business_support"
+      ],
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "bindings": [],
+      "relations": [],
+      "causal": false,
+      "payload": null
+    },
+    {
+      "text": "We manufacture Financial Statements.",
+      "use": [
+        "context_only",
+        "no_independent_business_support"
+      ],
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "bindings": [],
+      "relations": [],
+      "causal": false,
+      "payload": null
+    },
+    {
+      "text": "We manufacture Efficiency.",
+      "use": [
+        "context_only",
+        "no_independent_business_support"
+      ],
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "bindings": [],
+      "relations": [],
+      "causal": false,
+      "payload": null
+    },
+    {
+      "text": "We manufacture 2025.",
+      "use": [
+        "context_only",
+        "no_independent_business_support"
+      ],
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "bindings": [],
+      "relations": [],
+      "causal": false,
+      "payload": null
+    },
+    {
+      "text": "Our sensor revenue rose because lower customer demand.",
+      "use": [
+        "support",
+        "source_business_relation"
+      ],
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "core_business",
+          "operating_causal_driver",
+          "operating_metric_change"
+        ],
+        "reasons": [
+          "operating_mechanism",
+          "operating_causal_driver",
+          "operating_metric_change"
+        ],
+        "score": 3,
+        "financial_exempt": true,
+        "purpose": "operating"
+      },
+      "bindings": [],
+      "relations": [],
+      "causal": false,
+      "payload": true
+    },
+    {
+      "text": "Our revenue rose because lower customer demand for accounting adjustments.",
+      "use": [
+        "support",
+        "source_business_relation"
+      ],
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "core_business",
+          "operating_causal_driver",
+          "operating_metric_change"
+        ],
+        "reasons": [
+          "operating_mechanism",
+          "operating_causal_driver",
+          "operating_metric_change"
+        ],
+        "score": 3,
+        "financial_exempt": true,
+        "purpose": "operating"
+      },
+      "bindings": [],
+      "relations": [],
+      "causal": true,
+      "payload": true
+    },
+    {
+      "text": "Our revenue rose because lower customer demand for audit work.",
+      "use": [
+        "support",
+        "source_business_relation"
+      ],
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "core_business",
+          "operating_causal_driver",
+          "operating_metric_change"
+        ],
+        "reasons": [
+          "operating_mechanism",
+          "operating_causal_driver",
+          "operating_metric_change"
+        ],
+        "score": 3,
+        "financial_exempt": true,
+        "purpose": "operating"
+      },
+      "bindings": [],
+      "relations": [],
+      "causal": true,
+      "payload": true
+    },
+    {
+      "text": "Our revenue rose because customer demand increased.",
+      "use": [
+        "support",
+        "source_business_relation"
+      ],
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "operating_causal_driver",
+          "operating_metric_change"
+        ],
+        "reasons": [
+          "operating_causal_driver",
+          "operating_metric_change"
+        ],
+        "score": 3,
+        "financial_exempt": true,
+        "purpose": "operating_metric"
+      },
+      "bindings": [],
+      "relations": [],
+      "causal": true,
+      "payload": true
+    },
+    {
+      "text": "Our revenue rose because customer demand will increase.",
+      "use": [
+        "context_only",
+        "financial_only"
+      ],
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "bindings": [],
+      "relations": [],
+      "causal": false,
+      "payload": null
+    },
+    {
+      "text": "Our revenue rose not because customer demand increased.",
+      "use": [
+        "context_only",
+        "financial_only"
+      ],
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "bindings": [],
+      "relations": [],
+      "causal": false,
+      "payload": null
+    },
+    {
+      "text": "本公司收入增长，并非因为客户需求增加。",
+      "use": [
+        "support",
+        "source_business_relation"
+      ],
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "core_business",
+          "operating_causal_driver",
+          "operating_metric_change"
+        ],
+        "reasons": [
+          "operating_mechanism",
+          "operating_causal_driver",
+          "operating_metric_change"
+        ],
+        "score": 3,
+        "financial_exempt": true,
+        "purpose": "operating"
+      },
+      "bindings": [],
+      "relations": [],
+      "causal": true,
+      "payload": true
+    },
+    {
+      "text": "本公司收入增长，因为会计客户需求增加。",
+      "use": [
+        "support",
+        "source_business_relation"
+      ],
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "core_business",
+          "operating_causal_driver",
+          "operating_metric_change"
+        ],
+        "reasons": [
+          "operating_mechanism",
+          "operating_causal_driver",
+          "operating_metric_change"
+        ],
+        "score": 3,
+        "financial_exempt": true,
+        "purpose": "operating"
+      },
+      "bindings": [],
+      "relations": [],
+      "causal": true,
+      "payload": true
+    },
+    {
+      "text": "本公司收入增长，因为客户需求增加是未来目标。",
+      "use": [
+        "support",
+        "source_business_relation"
+      ],
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "core_business",
+          "operating_plan"
+        ],
+        "reasons": [
+          "operating_mechanism",
+          "operating_plan"
+        ],
+        "score": 3,
+        "financial_exempt": true,
+        "purpose": "operating"
+      },
+      "bindings": [],
+      "relations": [],
+      "causal": false,
+      "payload": true
+    },
+    {
+      "text": "本公司收入增长，因为另一公司客户需求增加。",
+      "use": [
+        "support",
+        "source_business_relation"
+      ],
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "core_business",
+          "operating_causal_driver",
+          "operating_metric_change"
+        ],
+        "reasons": [
+          "operating_mechanism",
+          "operating_causal_driver",
+          "operating_metric_change"
+        ],
+        "score": 3,
+        "financial_exempt": true,
+        "purpose": "operating"
+      },
+      "bindings": [],
+      "relations": [],
+      "causal": true,
+      "payload": true
+    },
+    {
+      "text": "Our revenue declined. The market increased because customer demand increased.",
+      "use": [
+        "support",
+        "source_business_relation"
+      ],
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "operating_causal_driver",
+          "operating_metric_change"
+        ],
+        "reasons": [
+          "operating_causal_driver",
+          "operating_metric_change"
+        ],
+        "score": 3,
+        "financial_exempt": true,
+        "purpose": "operating_metric"
+      },
+      "bindings": [],
+      "relations": [],
+      "causal": true,
+      "payload": true
+    },
+    {
+      "text": "本公司与经营风险建立了联系。",
+      "use": [
+        "context_only",
+        "no_independent_business_support"
+      ],
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "bindings": [
+        false
+      ],
+      "relations": [
+        {
+          "assertion_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 0,
+              "char_end": 13
+            }
+          ],
+          "actor_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 0,
+              "char_end": 3
+            }
+          ],
+          "object_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 6,
+              "char_end": 13
+            }
+          ],
+          "predicate_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 4,
+              "char_end": 6
+            }
+          ],
+          "qualifier_refs": [],
+          "activity": "business_scope",
+          "polarity": "positive",
+          "stage": "current",
+          "attribution": "issuer",
+          "modality": "actual"
+        }
+      ],
+      "causal": false,
+      "payload": null
+    },
+    {
+      "text": "本公司与2025建立了联系。",
+      "use": [
+        "context_only",
+        "no_independent_business_support"
+      ],
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "bindings": [
+        false
+      ],
+      "relations": [
+        {
+          "assertion_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 0,
+              "char_end": 13
+            }
+          ],
+          "actor_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 0,
+              "char_end": 3
+            },
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 4,
+              "char_end": 8
+            }
+          ],
+          "object_refs": [],
+          "predicate_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 8,
+              "char_end": 13
+            }
+          ],
+          "qualifier_refs": [],
+          "activity": "business_relationship",
+          "polarity": "positive",
+          "stage": "contact_established",
+          "attribution": "issuer",
+          "modality": "actual"
+        }
+      ],
+      "causal": false,
+      "payload": null
+    }
+  ]
+}

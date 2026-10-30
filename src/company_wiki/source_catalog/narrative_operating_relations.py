@@ -696,7 +696,8 @@ class SourceOperatingSession:
             self.work_budget.charge(READING_BUSINESS_SCAN_PASSES * len(text))
             from company_wiki.document_understanding.operating_states.assertion_roles import prepare_source_assertions
             self.assertions[owner] = replace(prepare_source_assertions(text),
-                bound_operating=self.engine.complete_assertion(owner,self.contexts.get(owner,())))
+                bound_operating=(self.engine.complete_assertion(owner,self.contexts.get(owner,()))
+                    or self.engine.unknown_argument(owner,self.contexts.get(owner,()))))
             assessment = prepare_reading_business_assessment(text, result, ref_text=ref_text,
                 source_roles=self.assertions[owner], relation_bindings=self.bindings.get(owner, ()))
             fact, financial = assessment.fact, assessment.financial_only

@@ -287,6 +287,9 @@ INTERROGATIVE_MARKER = re.compile(
     r"问[：:]|Q[：:]|哪些|哪个|多少|何时|多久|何处|吗[？?]?|呢[？?]?|\?$|？$",
     re.IGNORECASE,
 )
+INTERROGATIVE_OPERATOR = re.compile(r"是否|能否|\bwhether\b", re.IGNORECASE)
+NEGATED_PROPOSITION_OPERATOR = re.compile(
+    r"否认|否認|否定|辟谣|闢謠|\bden(?:y|ies|ied|ying)\b", re.IGNORECASE)
 DEFINITION = re.compile(
     r"是指|定义为|定义為|的定义|的定義|术语表|術語表|词汇表|詞彙表|术语|術語|"
     r"is defined as|defined as|refers to as|\bmeans\b|glossary|definition\s*[:：]|"

@@ -13,7 +13,7 @@ import re
 
 from company_wiki.document_normalization.text_matching import matching_reading_text
 from company_wiki.document_normalization.table_shapes import observe_value_cells
-from company_wiki.document_understanding.structure.table_purpose import unbound_numeric_row_role
+from company_wiki.document_understanding.structure.table_purpose import accounting_field, unbound_numeric_row_role
 from .product_reference import product_head_spans
 
 # A new explicit actor starts an independent assertion even after a comma.
@@ -107,6 +107,7 @@ _ABSTRACT_EN_WORDS = frozenset((
     "business businesses industry industries customer customers client clients "
     "development innovation transformation digital upgrade upgrading growth "
     "needs need demand demands engagement satisfaction value success benefits "
+    "efficiency happiness joy excellence prosperity "
     "basis foundation changing continuously continually improve improving "
     "support supporting meet meeting enable enabling aim aims aiming "
     "help helping enhance enhancing can could will would allow allows "
@@ -118,7 +119,7 @@ _ABSTRACT_EN_TOKEN = re.compile(r"[a-z]+(?:-[a-z]+)*|[^\s.,:()]+", re.I)
 _ABSTRACT_CN = re.compile(
     r"(?:我们|公司|本公司|集团|本集团|以|的|及|和|与|或|为|向|在|各|各个|各类|"
     r"所有|广大|丰富|广泛|优质|全面|多样|产品|服务|技术|平台|业务|行业|客户|需求|"
-    r"发展|开发|创新|数字化|转型|升级|增长|基础|能力|价值|成功|利益|满意度|参与度|"
+    r"发展|开发|创新|数字化|转型|升级|增长|基础|能力|价值|成功|利益|效益|繁荣|幸福|快乐|满意度|参与度|"
     r"不断|持续|变化|提升|提高|满足|支持|提供|作为|软件|设备|工作负载|解决方案|"
     r"助力|推动|促进|使|能够|可以|旨在|目标|是|"
     r"[\s.。:：()（）])+")
@@ -316,6 +317,21 @@ _METATEXT_HEAD = re.compile(r"前瞻性.{0,4}(?:陈述|陳述)|\bforward.looking
 _METATEXT_ACTION = re.compile(r"识别|識別|字眼|词语|語句|历史事实|歷史事實|\b(?:identif\w*|words?|historical facts?)\b",re.I)
 _RESULT_HEAD = re.compile(r"经营业绩|經營業績|\b(?:operating|interim) results?\b",re.I)
 _RESULT_DISCLAIMER = re.compile(r"未必|不代表|并不反映|並不反映|\b(?:not necessarily|not indicative|not representative)\b",re.I)
+
+
+def source_argument_purpose(value: str) -> str:
+    """Local nominal purpose, independent of its grammatical argument slot.
+
+    Unknown is not a product classification. The predicate binder can retain
+    a named argument without turning an accounting object or abstract benefit
+    into physical operations. Real typed offerings keep their governing head.
+    """
+    if (accounting_field(value) or _MEMBERSHIP_FINANCIAL_HEAD.search(value)
+            or _REPORTING_HEAD.search(value)):
+        return 'accounting'
+    if abstract_source_argument(value):
+        return 'abstract'
+    return 'unknown'
 
 
 @dataclass(frozen=True)

@@ -1,0 +1,180 @@
+{
+  "schema": "source-semantic-independent-review/1",
+  "reviewer": "/root/semantic_axes_release_review",
+  "status": "PASS",
+  "open_findings_within_scope": 0,
+  "signed_at_utc": "2026-10-30T01:08:36.164678+00:00",
+  "base_head": "d6d3a5a038456d1d010a6c6aebde83b852833d7d",
+  "binding": "Ten actual working-copy files, raw/LF hashes captured before final tests and rechecked at signing.",
+  "files": [
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/relations.py",
+      "raw_sha256": "8544f0faef483bcbb1563d03e83b6eaa49852a3d629c808ea2560e24c02c1b6d",
+      "lf_sha256": "a91d2c2ad3e22f0ac796bb9a872879efa5d6ae7ef3516fbfab695b4a905b4345"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/assertion_roles.py",
+      "raw_sha256": "a2121b809717da729aa5c6cca95a6d93b98e2f60bdae308e8b32a2d673a0ee51",
+      "lf_sha256": "13b723cadf138cab04d15c189ac02bef5c9dd9ae6cc0a2e008f2ff537ae2f0e3"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/patterns.py",
+      "raw_sha256": "4c345aac8e59fd79b8e3625cf2d9c928986343b2da5c86b6f0e2c773a1e85a3c",
+      "lf_sha256": "54654a11e3ccc3da471c69200bdaa49a2a32c7b780cef75942e6ef4067e919a2"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/structure/table_purpose.py",
+      "raw_sha256": "e5cee27b8ffea2078996db8b01f3ef02d16cd3abc152cd2354efcbb22c1d2e38",
+      "lf_sha256": "1b7b4e718eaec2ebe5431f9442184fedcd4915713c34a030612df251bf0a405f"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_policy.py",
+      "raw_sha256": "ba1fdd27c14c77b5aed36734d7e683fa4bcb871a329b05e9b09dfed96d3f920e",
+      "lf_sha256": "9d201ff93a80762ed41c0e45c790b3fca753f306ecb00d670b3097ea254c82d1"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+      "raw_sha256": "040f6d8dd5146199f7c3a3b99418fd9830a448ddd5d91e3df3f6f08d11a10227",
+      "lf_sha256": "214e6c74d3036423198041e71e2369a72d159021e9ed1a55f119b75688dcabf5"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_predicate_state.py",
+      "raw_sha256": "78021e1e3fff2c97bfadef784f212c310f11f56e1821d0071168dfff7ccd3c57",
+      "lf_sha256": "78021e1e3fff2c97bfadef784f212c310f11f56e1821d0071168dfff7ccd3c57"
+    },
+    {
+      "path": "tests/unit/du11_production/test_operating_argument_axes.py",
+      "raw_sha256": "873936ed0bf245d474d99c3551e2bdce90901eb832496dc74dde5406b6d281db",
+      "lf_sha256": "873936ed0bf245d474d99c3551e2bdce90901eb832496dc74dde5406b6d281db"
+    },
+    {
+      "path": "tests/unit/du11_production/test_business_causal_payload.py",
+      "raw_sha256": "16e6f76cbaf258193bd979da2fb5f47d872177139affec9031ff8b9df0d34a00",
+      "lf_sha256": "16e6f76cbaf258193bd979da2fb5f47d872177139affec9031ff8b9df0d34a00"
+    },
+    {
+      "path": "tests/unit/du11_production/test_source_information_binding.py",
+      "raw_sha256": "124e4d60f1e8f825f434310ff5f772284b6e805d1b76b41b735897d40d85b7b1",
+      "lf_sha256": "55fb83e1d8dc0b7993dbbbf43225c8dd33c636db4c0db390b97b574259a01763"
+    }
+  ],
+  "test_scope": "Independent neutral source owners, source support/relevance, native reading selection, table compatibility and cache/ref controls. No whole-repo rerun.",
+  "final_tests": {
+    "tests": 25,
+    "passed": 25,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "pytest_seconds": 1.95,
+    "command_wall_seconds": 4.23,
+    "xml_seconds": 1.807,
+    "log": "independent-final-r4-strengthened.log",
+    "junit": "independent-final-r4-strengthened.xml"
+  },
+  "history_not_additive": [
+    {
+      "scope": "initial self tests before lazy preparation ordering adjustment",
+      "tests": 14,
+      "passed": 4,
+      "failed": 10,
+      "pytest_seconds": 3.18
+    },
+    {
+      "scope": "corrected preparation ordering, same initial product",
+      "tests": 14,
+      "passed": 4,
+      "failed": 10,
+      "pytest_seconds": 2.14
+    },
+    {
+      "scope": "first ROOT repair",
+      "tests": 14,
+      "passed": 14,
+      "failed": 0,
+      "pytest_seconds": 1.44
+    },
+    {
+      "scope": "additional purpose and proposition denial controls",
+      "tests": 18,
+      "passed": 14,
+      "failed": 4,
+      "pytest_seconds": 1.63
+    },
+    {
+      "scope": "tri-state contract before known-party compatibility repair",
+      "tests": 24,
+      "passed": 24,
+      "failed": 0,
+      "pytest_seconds": 1.91
+    },
+    {
+      "scope": "known-party compatibility final",
+      "tests": 25,
+      "passed": 25,
+      "failed": 0,
+      "pytest_seconds": 1.75
+    },
+    {
+      "scope": "same final product, stronger no-positive-actual question assertion",
+      "tests": 25,
+      "passed": 25,
+      "failed": 0,
+      "pytest_seconds": 1.95
+    }
+  ],
+  "saved_owner_probes": {
+    "inputs": 40,
+    "files": [
+      "probe-r1.json",
+      "probe-r2.json"
+    ],
+    "not_counted_as_tests": true
+  },
+  "closed_findings": [
+    "financial nominal manufacturing proof",
+    "embedded interrogative proposition",
+    "Chinese explicitly denied demand cause",
+    "case and Unicode argument recall",
+    "abstract benefit manufacturing proof",
+    "denial promoted to actual issuer event"
+  ],
+  "compatibility_followup": "ROOT-discovered known-party contact branch restored; independent added contact control passes. Mixed typed/untyped test retains original financial background and adds an asserted financial state; no actual assertion is demanded from an embedded question.",
+  "unknown_expectation_migration": "Unknown grammatical manufacturing arguments remain readable/selectable/relevant and unresolved, independent_payload=None and relation_bindings=False. Known products and proved business causal relations still support. This replaces the overbroad support expectation; prior inputs and failed probes are retained.",
+  "static_budget_review": "Operator, argument and participant scans prepaid; unknown sidecar registered once per scope with context charge; cached reads have no new scan/work; complete status required. Existing budget and public relation wire retained.",
+  "root_reported_not_independently_counted": {
+    "short_owner_tests": 168,
+    "seconds": 2.72,
+    "mypy_source_files": 396,
+    "later_compatibility_tests": 81,
+    "later_seconds": 2.16,
+    "wide_domain_previous": "3184 passed / 11 skipped / 3 failed before compatibility fixes; not represented as green",
+    "loopback": "ROOT reports host-isolated 1 passed / 7.98s; not run by reviewer"
+  },
+  "outside_scope_open": [
+    "QA support closure views",
+    "whole real source gold",
+    "formal summary",
+    "cache recovery",
+    "FF/RF adoption",
+    "W21",
+    "holdout",
+    "company loop"
+  ],
+  "cleanup": {
+    "writes_only_review_directory": true,
+    "product_or_author_test_edits": false,
+    "shared_plan_edits": false,
+    "config_diff_empty": true,
+    "original_hook_mode_wip_preserved": true,
+    "hook_numstat": "0\t0\t.githooks/pre-push",
+    "review_cache_directories": [],
+    "evidence_retained": true,
+    "python_no_bytecode": true,
+    "pytest_cacheprovider_disabled": true,
+    "supplier_calls": 0,
+    "downloads": 0,
+    "pdf_originals_read": false,
+    "sdk_or_secrets_read": false,
+    "other_repository_writes": false
+  }
+}

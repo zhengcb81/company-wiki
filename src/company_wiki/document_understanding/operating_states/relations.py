@@ -21,6 +21,7 @@ from __future__ import annotations
 
 import re
 from collections import deque
+from bisect import bisect_right
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass, field
 from functools import lru_cache
@@ -37,6 +38,7 @@ from .product_reference import (find_product_deictic, head_class,
 from .text_view import (MatchingText, MatchingView, build_matching_view,
                         build_prepared_matching_view, prepare_matching_text,
                         split_clauses, strip_connector)
+from .assertion_roles import source_argument_purpose
 
 OBSERVATION_SCHEMA = "du4-operating-observation/1"
 RELATIONS_SCHEMA = "du4-operating-relations/1"
@@ -180,6 +182,7 @@ class _Event:
     modality: str = "actual"
     embedded_actor: tuple[int, int] | None = None
     bound_operating_object: bool = False
+    bound_unknown_argument: bool = False
     bound_business_relationship: bool = False
     bound_business_party_count: int = 0
 
@@ -380,7 +383,8 @@ def _np_candidates(view: MatchingView, region: str, base: int) -> list[tuple[int
         leading += trimmed.end()
         core = core[trimmed.end():]
     cut = None
-    for regex in (p.ACTOR_CUT, p.EN_AUX_BOUNDARY, p.CN_TOPIC_BOUNDARY):
+    for regex in (p.ACTOR_CUT, p.EN_AUX_BOUNDARY, p.CN_TOPIC_BOUNDARY,
+                  p.NEGATED_PROPOSITION_OPERATOR):
         match = (_subject_predicate_boundary(core) if regex is p.EN_AUX_BOUNDARY
                  else regex.search(core))
         if match is not None:
@@ -428,29 +432,68 @@ def _split_conjuncts(view: MatchingView, span: tuple[int, int]) -> list[tuple[in
     return cleaned
 
 
-def _classify_np(view: MatchingView, span: tuple[int, int],
-                 name_classes: Mapping[str, str]) -> tuple[str, str]:
-    """Return (role, attribution class) for one NP span."""
+@dataclass(frozen=True)
+class _ArgumentObservation:
+    position: str
+    entity_kind: str
+    attribution: str
+
+
+def _observe_argument(view: MatchingView, span: tuple[int, int],
+                      name_classes: Mapping[str, str], *, position: str) -> _ArgumentObservation:
+    """Keep source syntax, entity semantics and attribution as separate axes."""
     text = view.text[span[0]:span[1]].strip()
     if not text:
-        return "none", "unknown"
+        return _ArgumentObservation(position, 'empty', 'unknown')
     product = product_head_suffix(text)
     if product or p.OPERATING_THEME_HEAD.search(text):
         prefix = text[:product[0]] if product else text
         for marker, attribution in ((p.THIRD_PARTY, "other"), (p.RELATED_PARTY, "quoted_related_party")):
             party = marker.search(prefix)
             if party and p.POSSESSIVE_LINK.match(prefix[party.end():]):
-                return "object", attribution
-        return "object", "unknown"
+                return _ArgumentObservation(position, 'operating_object', attribution)
+        return _ArgumentObservation(position, 'operating_object', 'unknown')
     if p.RELATED_PARTY.search(text):
-        return "actor", "quoted_related_party"
+        return _ArgumentObservation(position, 'related_party', 'quoted_related_party')
     if p.THIRD_PARTY.search(text):
-        return "actor", "other"
+        return _ArgumentObservation(position, 'third_party', 'other')
     if p.ISSUER_WORD.search(text):
-        return "actor", "issuer"
+        return _ArgumentObservation(position, 'issuer', 'issuer')
     if text in name_classes:
-        return "actor", name_classes[text]
-    return "actor", "unknown"
+        return _ArgumentObservation(position, 'named_party', name_classes[text])
+    return _ArgumentObservation(position, 'unknown', 'unknown')
+
+
+def _classify_np(view: MatchingView, span: tuple[int, int],
+                 name_classes: Mapping[str, str]) -> tuple[str, str]:
+    """Compatibility projection for leading subjects/inherited topics only."""
+    observed = _observe_argument(view, span, name_classes, position='subject')
+    return ('none' if observed.entity_kind == 'empty' else
+            'object' if observed.entity_kind == 'operating_object' else 'actor', observed.attribution)
+
+
+_DEFINED_ARGUMENT = re.compile(r'(?P<name>[^（）()]{1,80})(?:[（(](?P<definition>[^（）()]{1,80})[）)])?')
+
+
+def _observed_manufacturing_argument(view, span, clause, event, scan) -> bool:
+    """A closed source argument; unknown entity type is NOT business payload."""
+    observed = _observe_argument(view, span, scan.name_classes, position='object')
+    if observed.entity_kind == 'operating_object':
+        return True
+    if (observed.entity_kind != 'unknown' or event.activity != 'production'
+            or span[0] < event.pred_span[1] or not event.actor_spans):
+        return False
+    remaining = clause[1] - span[1]
+    if remaining > 8 or view.text[span[1]:clause[1]].strip(' .。!?；;，,\t\r\n') not in ('', '的情况', '的业务'):
+        return False
+    text = view.text[span[0]:span[1]].strip()
+    named = _DEFINED_ARGUMENT.fullmatch(text)
+    if named is None or not any(c.isalpha() for c in named.group('name')):
+        return False
+    if source_argument_purpose(text) != 'unknown':
+        return False
+    definition = named.group('definition')
+    return definition is None or any(c.isalpha() for c in definition)
 
 
 # ---------------------------------------------------------------- event binding
@@ -467,7 +510,8 @@ def _bind_event(view: MatchingView, scan: _UnitScan, clause: tuple[int, int],
     # Explicit object slots and inherited subject NPs use the identical role
     # owner. A typed object bound by the predicate is complete source evidence
     # even when its state/modifier remains unknown.
-    event.bound_operating_object = any(_classify_np(view, span, scan.name_classes)[0] == "object"
+    event.bound_operating_object = any(_observe_argument(view, span, scan.name_classes,
+                                       position='object').entity_kind == 'operating_object'
                                        for span in event.obj_spans)
     lower = clause[0] if previous_end is None else max(clause[0], previous_end)
     region = view.text[lower:event.start]
@@ -621,6 +665,12 @@ def _predicate_modifiers(view, clause, pred_start, previous_main_end, embedded_r
 
 def _clause_events(view: MatchingView, scan: _UnitScan,
                    clause: tuple[int, int], clause_text: str, budget: WorkBudget) -> list[_Event]:
+    # Operators scope an embedded proposition regardless of the reporting verb
+    # or the spelling/case of its entities. Index once, not once per event.
+    budget.charge(2 * len(clause_text))
+    interrogative_ends = tuple(match.end() for match in p.INTERROGATIVE_OPERATOR.finditer(clause_text))
+    denied_propositions = tuple(p.NEGATED_PROPOSITION_OPERATOR.finditer(clause_text))
+    denied_ends = tuple(match.end() for match in denied_propositions)
     candidates: list[tuple[int, int, int, re.Match[str]]] = []
     for order, (construction, regex) in enumerate(p.EVENT_PATTERNS):
         budget.charge(len(clause_text))
@@ -661,6 +711,8 @@ def _clause_events(view: MatchingView, scan: _UnitScan,
         if not pred:
             continue
         pred_start = clause[0] + match.start(pred_key)
+        if construction != 'uncertain' and bisect_right(interrogative_ends, match.start(pred_key)):
+            continue
         # Bind a contiguous modifier suffix to every predicate family. Missing
         # optional regex groups cannot turn a denial or plan into completion.
         pending_ranges = deque(embedded_ranges)
@@ -802,6 +854,12 @@ def _clause_events(view: MatchingView, scan: _UnitScan,
         else:
             binding_clause = ((temporal_frame[1], clause[1]) if temporal_frame else clause)
             _bind_event(view, pending_scan, binding_clause, event, last_main_end)
+            if event.activity == 'production' and not event.bound_operating_object:
+                for span in event.obj_spans:
+                    budget.charge(1 + 16 * (span[1] - span[0]))
+                    if _observed_manufacturing_argument(view, span, binding_clause, event, pending_scan):
+                        event.bound_unknown_argument = True
+                        break
             # The accepted grammar already bound a source-authored function
             # relative to this proper product name; no second name scan.
             event.bound_operating_object |= named_function_object
@@ -815,6 +873,16 @@ def _clause_events(view: MatchingView, scan: _UnitScan,
                 for left, right in event.obj_spans)
             if construction in {"relation_contact", "relation_contact_en"}:
                 event.bound_business_relationship |= event.bound_business_party_count >= 2
+                # A source-bound counterpart need not have a preclassified
+                # entity type. One explicit issuer/related/third-party anchor
+                # and a distinct local participant establish contact syntax;
+                # actor attribution and unknown entity type remain unchanged.
+                if (not event.bound_business_relationship
+                        and event.bound_business_party_count >= 1 and len(event.actor_spans) >= 2):
+                    budget.charge(len(event.actor_spans) + 10 * sum(right-left for left, right in event.actor_spans))
+                    participants = {view.text[left:right].strip() for left, right in event.actor_spans}
+                    event.bound_business_relationship |= (len(participants) >= 2
+                        and all(source_argument_purpose(value) == 'unknown' for value in participants))
         if (event.embedded_actor is not None and activity == "qualification"
                 and event.attribution in {"other", "quoted_related_party"}):
             # This relative binds the qualification to its actual business
@@ -835,6 +903,15 @@ def _clause_events(view: MatchingView, scan: _UnitScan,
             event.polarity = event.stage = "unknown"
             event.modality = "uncertain"
             event.qual_spans.append((pred_end + reported.start(), pred_end + reported.end()))
+        denial_index = bisect_right(denied_ends, match.start(pred_key)) - 1
+        if denial_index >= 0:
+            denial = denied_propositions[denial_index]
+            # A denial is about a proposition; it is not an actual completed
+            # manufacturing predicate or a piece of the source actor's name.
+            # Do not invert a potentially double-negated quoted proposition.
+            event.polarity = event.stage = 'unknown'
+            event.modality = 'uncertain'
+            event.qual_spans.append((clause[0]+denial.start(), clause[0]+denial.end()))
         # All ownership and inherited context changes commit together only
         # after the candidate is a validated event. Rejected mentions cannot
         # hide another event or donate their actor/product to it.
@@ -889,6 +966,7 @@ class OperatingRelationSession:
         self._results: dict[tuple[str, tuple[str, ...]], dict[str, Any]] = {}
         self._references: dict[tuple[str, tuple[str, ...], bool], dict[str, Any]] = {}
         self._complete_assertions: set[tuple[str, tuple[str, ...]]] = set()
+        self._unknown_arguments: set[tuple[str, tuple[str, ...]]] = set()
         # Private proof sidecar, in exactly the emitted relation order. A
         # scope-level OR cannot supply another predicate's operating object.
         self._relation_bindings: dict[tuple[str, tuple[str, ...]], list[bool]] = {}
@@ -936,6 +1014,14 @@ class OperatingRelationSession:
                           context_unit_ids: tuple[str, ...] = ()) -> tuple[bool, ...]:
         """Already prepared local object proofs; never rescan or trust wire refs."""
         return tuple(self._relation_bindings.get((unit_id, context_unit_ids), ()))
+
+    def unknown_argument(self, unit_id: str, context_unit_ids: tuple[str, ...] = ()) -> bool:
+        """Cached complete syntax with unknown semantics, never a payload license."""
+        key = (unit_id, context_unit_ids)
+        result = self._results.get(key)
+        if result is None:
+            result = self.detect(unit_id, context_unit_ids)
+        return result['status'] == 'complete' and key in self._unknown_arguments
 
     def reference_closure(self, unit_id: str, predecessor_unit_ids: tuple[str, ...] = (), *,
                           window_complete: bool = True) -> dict[str, Any]:
@@ -1159,6 +1245,7 @@ def _detect_operating_relations(
         binding_key = (target, tuple(validated_context_ids))
         bindings = prepared._relation_bindings[binding_key] = []
         complete_assertion_recorded = False
+        unknown_argument_recorded = False
 
         if not target_text.text.strip():
             diagnostics.append({"code": "unit_text_unavailable", "unit_id": target})
@@ -1232,6 +1319,10 @@ def _detect_operating_relations(
                     work_budget.charge(len(validated_context_ids))
                     prepared._complete_assertions.add(binding_key)
                     complete_assertion_recorded = True
+                if event.bound_unknown_argument and not unknown_argument_recorded:
+                    work_budget.charge(len(validated_context_ids))
+                    prepared._unknown_arguments.add(binding_key)
+                    unknown_argument_recorded = True
     except WorkBudgetExceeded:
         exhausted = True
 

@@ -17,7 +17,7 @@ from company_wiki.document_normalization.text_matching import matching_reading_t
 
 from ..profiles.registry import configured_table_signal
 
-FEATURE_VERSION = "operating-table-purpose/5"
+FEATURE_VERSION = "operating-table-purpose/6"
 MAX_PURPOSE_CHARS = 2_000_000
 
 # These are account identities, not financial-section locations. Operating
@@ -106,6 +106,21 @@ def operating_header(text: str) -> bool:
                 and (_OPERATING_FIELD.search(folded) or configured_table_signal(folded)))
         )
     )
+
+
+_ACCOUNT_MEASURE_IDENTITY = re.compile(
+    r"\b(?:EBITDA|EBIT|EPS|ROI|ROE|ROA|ROIC|OCI|FCF|D&A|cash[ -]+flows?|working\s+capital)\b|"
+    r"现金流|現金流|营运资金|營運資金", re.I)
+
+
+def accounting_field(text: str) -> bool:
+    """Shared nominal account identity; no table/operating qualification implied.
+
+    Callers supply their already normalized reading view. A product/software
+    governing head is handled by its argument owner before this account test.
+    """
+    return bool(_ACCOUNT_MEASURE_IDENTITY.search(text) or _ACCOUNT_PURPOSE.search(text)
+                or _FINANCIAL_TOTAL_ROW.match(text))
 
 
 @dataclass(frozen=True)
