@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-30",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_REAL_QUOTE_FIDELITY_REVIEW_THEN_PRODUCTION_SELECTION_RF_ADOPTION",
+  "overall_status": "ACTIVE_RF_DUPLICATE_SOURCE_FRESHNESS_ROOT_FIX_THEN_ADOPTION_ACCEPTANCE",
   "parallel_packages_20261025": {
     "status": "W16_W17_W18_ROOT_COMPONENT_ACCEPTED_MERGED",
     "entry": "harness_lanes/20261025/README.md",
@@ -26,13 +26,13 @@
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
-  "last_code_commit": "bf58769b6287b5b6f268ce5bccbd619fb2061943",
+  "last_code_commit": "8b939b9cbd78f908dcff3bf06ed3970a7bf9c0aa",
   "code_ci": {
-    "id": 41056460382,
-    "head_sha": "bf58769b6287b5b6f268ce5bccbd619fb2061943",
+    "id": 41064827392,
+    "head_sha": "8b939b9cbd78f908dcff3bf06ed3970a7bf9c0aa",
     "status": "completed",
-    "conclusion": "failure",
-    "root": "malformed JSON identity lookup TypeError; source root fix reviewed, publication pending"
+    "conclusion": "success",
+    "previous_failed_run": 41056460382
   },
   "formal_v4_offline_selection_replay_20261025": {
     "status": "EXACT_REPRODUCED_NO_PAID_CALL",
@@ -333,7 +333,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "Independent /5 fidelity review, then explicit new-request production choice and genuine RF native adoption.",
+  "next_step_now": "M6 RF freshness root fix; see next_action.",
   "parallel_work_packages": [
     {
       "id": "IR-REPORT-GENERATION",
@@ -840,8 +840,8 @@
     "a02_prior_growth_subfact_restored": true
   },
   "next_steps": [
-    "Independent /5 fidelity review, then explicit new-request production choice and genuine RF native adoption.",
-    "W21 canonicalC2/long path; US RPO; new holdout; eight-step company loop."
+    "M6 RF source freshness TDD/replay/independent review, then actual adoption acceptance.",
+    "W21 canonicalC2/long path, US RPO, new cross-market holdout and eight-step company loop."
   ],
   "last_updated_utc": "2026-10-28T19:02:25.220588+00:00",
   "latest_publish_validation": {
@@ -2344,7 +2344,7 @@
     "published": true,
     "push_failure": "47 targets /392 collected /600s; two regressions being root-fixed, not waived by narrower daily gate"
   },
-  "next_action": "Independent /5 fidelity review, then explicit new-request production choice and genuine RF native adoption.",
+  "next_action": "M6 TDD source-distinct freshness with historical confidence-version compatibility, then real same-company adoption independent acceptance.",
   "c3_runtime_recovery_20261026": {
     "entry": "review/pdf-c3-20261026/RUNTIME_RECOVERY.md",
     "environment_independent": "PASS_ZERO_OPEN_25_TESTS_AND_REAL_WORKER_ENTRYPOINTS",
@@ -2950,10 +2950,7 @@
     "no_author_implementation_started_by_root": true
   },
   "owned_uncommitted_runtime": [
-    "src/company_wiki/automation/narrative_summary_protocols.py",
-    "tools/document_understanding_benchmark/phase_c_runner.py",
-    "tools/document_understanding_benchmark/phase_c_observer.py",
-    "tools/pre_push_gate.py"
+    "src/company_wiki/source_catalog/official_source_flow.py (delegated new-template policy; not yet accepted)"
   ],
   "foreign_wip_preserved": [
     ".githooks/pre-push mode-only",
@@ -2962,10 +2959,7 @@
   "pause_requested_by_user": false,
   "paused_scope": "revoked by user mainline resume 2026-10-29",
   "own_uncommitted_runtime": [
-    "src/company_wiki/automation/narrative_summary_protocols.py",
-    "tools/document_understanding_benchmark/phase_c_runner.py",
-    "tools/document_understanding_benchmark/phase_c_observer.py",
-    "tools/pre_push_gate.py"
+    "src/company_wiki/source_catalog/official_source_flow.py (delegated new-template policy; not yet accepted)"
   ],
   "qa_provisional_publication": {
     "code_commit": "c6c446d0eebc8f6e6f6903bd677c04eebaf65077",
@@ -4032,8 +4026,11 @@
     "entry": "review/source-information-20261030/description-final/atomic-production-wiring/README.md"
   },
   "m5_source_quote_primary": {
-    "status": "REAL5_PASS_CONTENT_REVIEW_PENDING_DEFAULT_UNCHANGED",
-    "entry": "review/source-information-20261030/description-final/M5_SOURCE_QUOTE_PRIMARY.md"
+    "status": "REAL5_FIDELITY_RECOVERY_INDEPENDENT_PASS_NEW_TEMPLATE_POLICY_REVIEWED_PUBLICATION_IN_PROGRESS",
+    "entry": "review/source-information-20261030/description-final/M5_SOURCE_QUOTE_PRIMARY.md",
+    "new_template_scope": "explicit selector0.9; missing projection; no sources/items; not global default",
+    "author_tests": 65,
+    "independent_tests": 38
   },
   "real_atomic_and_quote_20261030": {
     "atomic_original_run": "FAIL_PUBLIC_READ_AFTER_PAID_GENERATION",
@@ -4056,7 +4053,7 @@
       "semantic_review": "OPEN",
       "RF_actual_forecast_adoption": "OPEN"
     },
-    "quote_real_run": "PASS_ENGINEERING_INDEPENDENT_CONTENT_REVIEW_PENDING",
+    "quote_real_run": "PASS_DEVELOPMENT_SOURCE_QUOTE_FIDELITY_AND_CAPTURED_CWP_RECOVERY",
     "quote_paid_posts": 1,
     "quote_paid_tokens": 6272,
     "quote_paid_micro_usd": 1076,
@@ -4078,6 +4075,22 @@
       "prior_unknown7_retained": 7
     },
     "original_config_foreign_WIP_preserved": true,
-    "next": "Independent /5 fidelity review, then explicit new-request production choice and genuine RF native adoption."
+    "next": "Independent /5 fidelity review, then explicit new-request production choice and genuine RF native adoption.",
+    "cwp_publication": {
+      "commit": "8b939b9cbd78f908dcff3bf06ed3970a7bf9c0aa",
+      "ci": 41064827392,
+      "conclusion": "success",
+      "push_tests": "167P/54.15s"
+    }
+  },
+  "m6_rf_source_freshness": {
+    "status": "OPEN_P2_REAL_ACTUAL_ADOPTION_EXECUTED_FRESHNESS_DUPLICATE_WEIGHTING",
+    "entry": "review/source-information-20261030/description-final/M6_RF_SOURCE_FRESHNESS.md",
+    "before_confidence": 65.38058062293638,
+    "after_confidence": 65.39469303281442,
+    "revenue_numbers_unchanged": true,
+    "new_model_calls": 0,
+    "real_source_clock_verified": true,
+    "whole_adoption_accepted": false
   }
 }

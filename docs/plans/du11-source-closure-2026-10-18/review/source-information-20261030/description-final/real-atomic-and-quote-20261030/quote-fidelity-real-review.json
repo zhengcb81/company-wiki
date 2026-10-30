@@ -1,0 +1,410 @@
+{
+  "schema_version": "independent-real-source-quote-review/1",
+  "status": "PASS_DEVELOPMENT_SOURCE_QUOTE_FIDELITY_AND_CAPTURED_CWP_RECOVERY",
+  "scope": "one actual /5 developer IR source with8 preexisting source checkpoints; not full recall/crossmarket/RF adoption",
+  "artifact_ref": {
+    "artifact_version_id": "narrative-148d14050b5949828de653be706542f3",
+    "byte_size": 163606,
+    "content_sha256": "7a1cef66da05bb91b47f895c8a8eef452efff35d762a9b3c5711ac40d7166244",
+    "document_id": "urn:company-wiki:document:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+    "source_id": "urn:company-wiki:source:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+    "source_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7"
+  },
+  "body_sha256": "7a1cef66da05bb91b47f895c8a8eef452efff35d762a9b3c5711ac40d7166244",
+  "body_bytes": 163606,
+  "prepare_public_rebuilt_bytes_equal": true,
+  "selection_sha256": "beabd01dfa743cc8c285620ea80c1987367a27c3f672d9aba7c9656b1077e7ae",
+  "same_selection_as_actual_seven": true,
+  "generation_sha256": "ab6dd8151aa51ae6ef8fc1131ee9be52f1bc405ff5bb131ea4c419fcc438363f",
+  "native_response_sha256": "44f10bf6eb8aea5ae21410cfac2f284929094955964c6c8936cf88b98598bb3f",
+  "native_charge": {
+    "posts": 1,
+    "input_tokens": 6093,
+    "output_tokens": 179,
+    "charged_tokens": 6272,
+    "proxy_micro_usd": 1076,
+    "invoice_cost_asserted": false
+  },
+  "checks": {
+    "whole_support_quotes": true,
+    "context_exact_separate_refs": true,
+    "model_returned_rank_only": true,
+    "admitted8_retained8": true,
+    "new_relationships_or_numbers": false,
+    "mixed_modality_uncertain_honest": true,
+    "selection_partial_preserved": true,
+    "prepare_not_activation_proof": true,
+    "public_locator_replay_receipt_verified": true,
+    "initial_activation_pending_then_complete": true,
+    "same_run_same_artifact_and_cumulative_budget": true,
+    "cross_run_same_artifact_zero_new_usage": true,
+    "total_post_events": 1,
+    "no_summary_semantic_truth_inferred": true
+  },
+  "source_execution": {
+    "schema_version": "source-extractive-execution/1",
+    "plan_sha256": "0cdc1dffc33cd4443ea27d1feb252924851063688a41bc9b8856e10cb80593e5",
+    "tasks": [
+      {
+        "task": "t1",
+        "task_binding_sha256": "d10331c21e750efabf3ef765660c342d9a8d3c85b6f20a429044be78f8456a04",
+        "source_disposition": "admitted",
+        "reason": "source_card",
+        "claim_id": "t1-source",
+        "model_disposition": "consider",
+        "priority": "high"
+      },
+      {
+        "task": "t2",
+        "task_binding_sha256": "6752892374f49999648957ca9bffc9d3ae654c48c155a6cf0dbac15bebf9b237",
+        "source_disposition": "admitted",
+        "reason": "source_card",
+        "claim_id": "t2-source",
+        "model_disposition": "consider",
+        "priority": "high"
+      },
+      {
+        "task": "t3",
+        "task_binding_sha256": "c0ae886e491dc0548daa6d7c84b251c0cb5f221ff4da61d63aedd86d705551e8",
+        "source_disposition": "admitted",
+        "reason": "source_card",
+        "claim_id": "t3-source",
+        "model_disposition": "consider",
+        "priority": "normal"
+      },
+      {
+        "task": "t4",
+        "task_binding_sha256": "953acf1f410c09c1f54a0d874b9191a94eb0c0425de6f9bab8a2c5426eba6064",
+        "source_disposition": "admitted",
+        "reason": "source_card",
+        "claim_id": "t4-source",
+        "model_disposition": "consider",
+        "priority": "high"
+      },
+      {
+        "task": "t5",
+        "task_binding_sha256": "c81e3290fd49e2797f102e28387a6120932014e33caf6e68ec7392dcfa27a058",
+        "source_disposition": "admitted",
+        "reason": "source_card",
+        "claim_id": "t5-source",
+        "model_disposition": "consider",
+        "priority": "high"
+      },
+      {
+        "task": "t6",
+        "task_binding_sha256": "4d2aabe15f797d0bd040e730ee48d99fd902cfa92fd2c0e3089c6067dd363ecb",
+        "source_disposition": "admitted",
+        "reason": "source_card",
+        "claim_id": "t6-source",
+        "model_disposition": "consider",
+        "priority": "normal"
+      },
+      {
+        "task": "t7",
+        "task_binding_sha256": "5ba8a296d296957d648fe0e3c7d338f29233ece4d671eb91b65df5b598188c34",
+        "source_disposition": "admitted",
+        "reason": "source_card",
+        "claim_id": "t7-source",
+        "model_disposition": "consider",
+        "priority": "normal"
+      },
+      {
+        "task": "t8",
+        "task_binding_sha256": "7e8c84a6636da9478c5a34c512b9546f38cbc29ca327cc0b94f1717faae70282",
+        "source_disposition": "admitted",
+        "reason": "source_card",
+        "claim_id": "t8-source",
+        "model_disposition": "consider",
+        "priority": "high"
+      }
+    ],
+    "source_coverage_complete": true,
+    "model_coverage_complete": true,
+    "model_diagnostic": null
+  },
+  "claim_order": [
+    "t1-source",
+    "t2-source",
+    "t4-source",
+    "t5-source",
+    "t8-source",
+    "t3-source",
+    "t6-source",
+    "t7-source"
+  ],
+  "cards": [
+    {
+      "task": "t1",
+      "claim_id": "t1-source",
+      "text": "答：您好，公司积极开发国内市场，持续完善国内市场战略布局，提\n高公司的抗风险能力，2025 年度公司境内收入约8.19 亿元，占比约22%，\n较比 2024 年度有所提升。",
+      "support_ids": [
+        "urn:company-wiki:evidence-span:sha256:9eff140488704704348de7188fb027201325c1fcfefbd9083eadd6a241490484"
+      ],
+      "context_ids": [
+        "urn:company-wiki:evidence-span:sha256:27d4283d845ae0477e183af35c8e2103569b77365652f313250b7c64b2b01d25",
+        "urn:company-wiki:evidence-span:sha256:c693558ed1a732901d27bf44e29b3790b77680d870fce141d9511c3bbbb8a169"
+      ],
+      "support_roles": [
+        "management"
+      ],
+      "context_roles": [
+        "company_filing",
+        "investor_question"
+      ],
+      "locators": [
+        "loc:v1/page:1/table:0/row:6/column:1/chars:57-143"
+      ],
+      "exact_complete_support": true,
+      "modality": "uncertain",
+      "needs_review": true
+    },
+    {
+      "task": "t2",
+      "claim_id": "t2-source",
+      "text": "答：您好，根据相应新闻报道，您所描述的情况涉及该公司的家电产\n品，该事项未对九目化学经营构成重大影响。",
+      "support_ids": [
+        "urn:company-wiki:evidence-span:sha256:b436b6238aba6713ec6f8320cf4e7902af80cf5f5a253f6c5f9dab3b981705f0"
+      ],
+      "context_ids": [
+        "urn:company-wiki:evidence-span:sha256:27d4283d845ae0477e183af35c8e2103569b77365652f313250b7c64b2b01d25",
+        "urn:company-wiki:evidence-span:sha256:8b63d3b40762ee6904d6c5e37d58a45a3d9c8667b851889299b4495e4c464b64",
+        "urn:company-wiki:evidence-span:sha256:8fea8360efae264182a74c099273af328ec67654d1bbf60f44e2810187cd4f46"
+      ],
+      "support_roles": [
+        "management"
+      ],
+      "context_roles": [
+        "company_filing",
+        "investor_question",
+        "investor_question"
+      ],
+      "locators": [
+        "loc:v1/page:2/table:0/row:0/column:1/chars:69-120"
+      ],
+      "exact_complete_support": true,
+      "modality": "uncertain",
+      "needs_review": true
+    },
+    {
+      "task": "t4",
+      "claim_id": "t4-source",
+      "text": "九目化学已于 3 月11 日收到北交所第二轮审核问\n询函，因前期报送的财务数据有效期已过，九目化学申请了中止审核，待\n财务数据按要求完成更新后，将申请恢复审核，并回复问询。",
+      "support_ids": [
+        "urn:company-wiki:evidence-span:sha256:d19dc6627ef1c7d54806979bdf5983a89920e768163adef67275f9d5adfe2a11"
+      ],
+      "context_ids": [
+        "urn:company-wiki:evidence-span:sha256:27d4283d845ae0477e183af35c8e2103569b77365652f313250b7c64b2b01d25",
+        "urn:company-wiki:evidence-span:sha256:8b63d3b40762ee6904d6c5e37d58a45a3d9c8667b851889299b4495e4c464b64",
+        "urn:company-wiki:evidence-span:sha256:8fea8360efae264182a74c099273af328ec67654d1bbf60f44e2810187cd4f46"
+      ],
+      "support_roles": [
+        "management"
+      ],
+      "context_roles": [
+        "company_filing",
+        "investor_question",
+        "investor_question"
+      ],
+      "locators": [
+        "loc:v1/page:2/table:0/row:0/column:1/chars:222-308"
+      ],
+      "exact_complete_support": true,
+      "modality": "uncertain",
+      "needs_review": true
+    },
+    {
+      "task": "t5",
+      "claim_id": "t5-source",
+      "text": "公司 2024 年度影响收入的主要原因为沸石系列环保材料\n业务及部分医药业务下游需求减少，公司 2025 年度沸石分子筛产品收入\n略低于 2024 年度。",
+      "support_ids": [
+        "urn:company-wiki:evidence-span:sha256:2de93d6d9c9dd480988fe091a007c5edca50466373623d550fa4de5e03945529"
+      ],
+      "context_ids": [
+        "urn:company-wiki:evidence-span:sha256:5f3031be56c17df63110a52c6f7f2d287e7a43c6d7f47843df79d0dd6206fa6c"
+      ],
+      "support_roles": [
+        "management"
+      ],
+      "context_roles": [
+        "investor_question"
+      ],
+      "locators": [
+        "loc:v1/page:2/table:0/row:0/column:1/chars:412-489"
+      ],
+      "exact_complete_support": true,
+      "modality": "uncertain",
+      "needs_review": true
+    },
+    {
+      "task": "t8",
+      "claim_id": "t8-source",
+      "text": "公司结\n合实际情况与下游客户需求，在新产能方面积极布局，2025 年公司启动\n了万润工业园二期 C05 建设项目，该项目包含半导体光刻胶用相关材料产\n能约 751 吨/年，项目建成后将为公司半导体制造材料业务发展提供产能\n保障。",
+      "support_ids": [
+        "urn:company-wiki:evidence-span:sha256:215bf09ec23969301d270ae22317bc3802a1550335736eb54fee678125516104"
+      ],
+      "context_ids": [
+        "urn:company-wiki:evidence-span:sha256:fe6376f23f7df04805045fd0633c4fcee77cc85f06ed67c8b79aa2f8c84f3536"
+      ],
+      "support_roles": [
+        "management"
+      ],
+      "context_roles": [
+        "investor_question"
+      ],
+      "locators": [
+        "loc:v1/page:5/table:0/row:0/column:1/chars:554-668"
+      ],
+      "exact_complete_support": true,
+      "modality": "uncertain",
+      "needs_review": true
+    },
+    {
+      "task": "t3",
+      "claim_id": "t3-source",
+      "text": "九目化学主要产品为 OLED\n升华前材料，下游客户为国内外OLED 成品材料企业，OLED 成品材料生产\n企业下游主要为 OLED 显示面板生产企业，OLED 显示面板生产企业下游为\n各类显示屏应用企业。",
+      "support_ids": [
+        "urn:company-wiki:evidence-span:sha256:6f86a0041396bcb67b69493f4032dc2f862d318d8f98f97a195bd5f26e036a4d"
+      ],
+      "context_ids": [
+        "urn:company-wiki:evidence-span:sha256:27d4283d845ae0477e183af35c8e2103569b77365652f313250b7c64b2b01d25",
+        "urn:company-wiki:evidence-span:sha256:8b63d3b40762ee6904d6c5e37d58a45a3d9c8667b851889299b4495e4c464b64",
+        "urn:company-wiki:evidence-span:sha256:8fea8360efae264182a74c099273af328ec67654d1bbf60f44e2810187cd4f46"
+      ],
+      "support_roles": [
+        "management"
+      ],
+      "context_roles": [
+        "company_filing",
+        "investor_question",
+        "investor_question"
+      ],
+      "locators": [
+        "loc:v1/page:2/table:0/row:0/column:1/chars:120-222"
+      ],
+      "exact_complete_support": true,
+      "modality": "uncertain",
+      "needs_review": true
+    },
+    {
+      "task": "t6",
+      "claim_id": "t6-source",
+      "text": "答：您好，公司现无生产 VC（碳酸亚乙烯酯）的情况，根据公司控\n股股东中国节能信息，中国节能与宁德时代已经建立了联系，并希望建立\n业务协同与合作。",
+      "support_ids": [
+        "urn:company-wiki:evidence-span:sha256:35d9b362bb2496cd504e4f235d2a969b2f906e77761916b15f556a3bbb9c5fcf"
+      ],
+      "context_ids": [
+        "urn:company-wiki:evidence-span:sha256:a5f5fa88d28bd69848d73859eb2564c7d6b9ea22ed99f4f65d139f4418c2c3c8"
+      ],
+      "support_roles": [
+        "management"
+      ],
+      "context_roles": [
+        "investor_question"
+      ],
+      "locators": [
+        "loc:v1/page:3/table:0/row:0/column:1/chars:336-409"
+      ],
+      "exact_complete_support": true,
+      "modality": "uncertain",
+      "needs_review": true
+    },
+    {
+      "task": "t7",
+      "claim_id": "t7-source",
+      "text": "目前公司在半导体制造材料领域已销售的产品主要为光刻\n胶单体、树脂、光酸以及半导体制程中清洗剂添加材料等，现已开发了超\n300 种化合物，在所涉足的产品方面技术已经处于国内领先水平。",
+      "support_ids": [
+        "urn:company-wiki:evidence-span:sha256:df16a6f002508cf66b1d4425a4b94c51e2fc2c1bd46cf93c247158860ec9fdb3"
+      ],
+      "context_ids": [
+        "urn:company-wiki:evidence-span:sha256:fe6376f23f7df04805045fd0633c4fcee77cc85f06ed67c8b79aa2f8c84f3536"
+      ],
+      "support_roles": [
+        "management"
+      ],
+      "context_roles": [
+        "investor_question"
+      ],
+      "locators": [
+        "loc:v1/page:5/table:0/row:0/column:1/chars:464-554"
+      ],
+      "exact_complete_support": true,
+      "modality": "uncertain",
+      "needs_review": true
+    }
+  ],
+  "gold": [
+    {
+      "id": "domestic-market-share",
+      "complete_source_quote_present": true,
+      "claim_ids": [
+        "t1-source"
+      ]
+    },
+    {
+      "id": "reported-material-impact",
+      "complete_source_quote_present": true,
+      "claim_ids": [
+        "t2-source"
+      ]
+    },
+    {
+      "id": "subsidiary-customer-chain",
+      "complete_source_quote_present": true,
+      "claim_ids": [
+        "t3-source"
+      ]
+    },
+    {
+      "id": "listing-process-conditions",
+      "complete_source_quote_present": true,
+      "claim_ids": [
+        "t4-source"
+      ]
+    },
+    {
+      "id": "demand-cause",
+      "complete_source_quote_present": true,
+      "claim_ids": [
+        "t5-source"
+      ]
+    },
+    {
+      "id": "vc-denial-contact-and-hope",
+      "complete_source_quote_present": true,
+      "claim_ids": [
+        "t6-source"
+      ]
+    },
+    {
+      "id": "sold-roster-developed-compounds",
+      "complete_source_quote_present": true,
+      "claim_ids": [
+        "t7-source"
+      ]
+    },
+    {
+      "id": "capacity-plan",
+      "complete_source_quote_present": true,
+      "claim_ids": [
+        "t8-source"
+      ]
+    }
+  ],
+  "open_product_content_findings_in_this_selected_scope": [],
+  "P1": 0,
+  "P2": 0,
+  "P3": 0,
+  "limitations": [
+    "Source role/company statements/third-party reporting are quotations, not independently proven facts.",
+    "Context must be visibly separate when presenting pronouns such as 该公司; this bundle preserves refs, not a UI guarantee.",
+    "source_coverage_complete applies only to admitted selection task plan; whole selection remains partial.",
+    "This sample longest quote114chars; long-text/crossmarket still require separate acceptance.",
+    "RF consumers explicitly NOT_RUN in overall; no actual RF numerical or forecast adoption signed.",
+    "Temporary native DB removed; this review cross-checks retained real commands/native charge/events/bytes, not live re-query of removed rows.",
+    "Production default and old omitted-request migration remain future TDD."
+  ],
+  "new_model_posts": 0,
+  "downloads": 0,
+  "pdf_parses": 0,
+  "runtime_edits": 0
+}

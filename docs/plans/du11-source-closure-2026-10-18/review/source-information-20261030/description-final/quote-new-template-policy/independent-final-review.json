@@ -1,0 +1,101 @@
+{
+  "schema_version": "quote-request-policy-independent-review/1",
+  "reviewed_at": "2026-10-30T13:52:31.221665+00:00",
+  "status": "INDEPENDENT_PASS_NEW_RAW_TEMPLATE_POLICY_ONLY",
+  "open_in_scope": 0,
+  "files": [
+    {
+      "path": "src/company_wiki/source_catalog/official_source_flow.py",
+      "raw_sha256": "a2292d5eab8d1091fda500540019c8e49f5273e996360b759c04d856890fe597",
+      "lf_sha256": "c93d376cc1ee5d1d01ad336b7d755c4ee73f95f9c5b77a6c0b1e3c5e4a331083",
+      "bytes": 50279
+    },
+    {
+      "path": "tests/unit/test_narrative_quote_request_policy.py",
+      "raw_sha256": "db56a3c108bc78aa794b4a4ae2a5b1ee6623960240c5537d53a939baa6297fe7",
+      "lf_sha256": "db56a3c108bc78aa794b4a4ae2a5b1ee6623960240c5537d53a939baa6297fe7",
+      "bytes": 6788
+    }
+  ],
+  "author_files_unchanged_by_reviewer": true,
+  "author_handoff_sha_matched_before_execution": true,
+  "source_scope_check": {
+    "outside_builder_ast_unchanged": true,
+    "two_author_files_byte_stable": true
+  },
+  "tests": {
+    "passed": 38,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 4.38,
+    "independent_neutral_cases": 15,
+    "author_frozen_cases_reexecuted": 23,
+    "command": [
+      "C:/Miniconda/python.exe",
+      "-B",
+      "-m",
+      "pytest",
+      ".planning/summary-quality-20261030/quote-request-policy-independent/test_independent.py",
+      "tests/unit/test_narrative_quote_request_policy.py",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "--basetemp=.cwpquotepolicyfinal"
+    ]
+  },
+  "ruff": "PASS_AUTHOR_TWO_PATHS",
+  "initial_probe_fixture_error": {
+    "failed": 12,
+    "passed": 3,
+    "reason": "reviewer neutral SourceRef used opaque source_id while CWP DTO requires SHA-derived canonical source_id",
+    "fix": "corrected independent synthetic Ref to canonical sha-derived ID; no production/test-contract weakening",
+    "log": "independent-tests.log",
+    "not_a_product_red": true
+  },
+  "policy_checked": {
+    "new_raw_template": "explicit selector0.9 + absent projection + neither sources nor items key injects existing /5",
+    "explicit_override": "/4 /5 /6 /7 unchanged; explicit null/invalid not repaired",
+    "complete_dto": "missing projection remains None; normalized DTO/request SHA/input hash unchanged when identical sources reused",
+    "legacy_parse_resume": "schema1/2 parse still effective /4; actual persisted fixture resume checks request/run/jobs/budget/no attempts unchanged",
+    "imports": "generator consumes once, no caller dict mutation",
+    "configuration": "model/provider/pricing/resources retained, no second defaults or model-free replacement"
+  },
+  "caller_default_scope": {
+    "builder": "new raw-template composition only",
+    "cli": "reads saved JSON directly through NarrativeBatchRequest.from_dict, bypassing new-template preference",
+    "benchmark": "its explicit legacy /4 default and explicit recipe requests remain authoritative",
+    "generation_unset": "selector0.9 with unset projection still binds /4",
+    "projected_schema": "builder does not newly support schema2; schema2 parsing/resume remain old owner responsibility",
+    "codegraph": "no statically resolved callers in current index; not evidence that dynamic/local-import callers do not exist",
+    "global_default_switched": false
+  },
+  "baseline_publication": {
+    "head": "8b939b9cbd78f908dcff3bf06ed3970a7bf9c0aa",
+    "exact_ci": 41064827392,
+    "status": "success as reported by ROOT; this is baseline, not uncommitted M5 acceptance",
+    "old_failure_41056460382": "historical preserved, not current baseline"
+  },
+  "cleanup": [
+    {
+      "within_workspace": true,
+      "name": ".cwpquotepolicyind",
+      "removed": true
+    },
+    {
+      "within_workspace": true,
+      "name": ".cwpquotepolicyfinal",
+      "removed": true
+    }
+  ],
+  "model_posts": 0,
+  "downloads": 0,
+  "original_parses": 0,
+  "not_signed": [
+    "global CLI/parser default changed",
+    "production projected-source builder migration",
+    "fresh paid full workflow of this exact new-template policy",
+    "RF actual adoption",
+    "cross-market holdout/full company loop",
+    "new feature remote CI before publication"
+  ]
+}

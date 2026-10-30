@@ -19,7 +19,7 @@
     "semantic_review": "OPEN",
     "RF_actual_forecast_adoption": "OPEN"
   },
-  "quote_real_run": "PASS_ENGINEERING_INDEPENDENT_CONTENT_REVIEW_PENDING",
+  "quote_real_run": "PASS_DEVELOPMENT_SOURCE_QUOTE_FIDELITY_AND_CAPTURED_CWP_RECOVERY",
   "quote_paid_posts": 1,
   "quote_paid_tokens": 6272,
   "quote_paid_micro_usd": 1076,
@@ -41,5 +41,11 @@
     "prior_unknown7_retained": 7
   },
   "original_config_foreign_WIP_preserved": true,
-  "next": "Independent /5 fidelity review, then explicit new-request production choice and genuine RF native adoption."
+  "next": "Independent /5 fidelity review, then explicit new-request production choice and genuine RF native adoption.",
+  "cwp_publication": {
+    "commit": "8b939b9cbd78f908dcff3bf06ed3970a7bf9c0aa",
+    "ci": 41064827392,
+    "conclusion": "success",
+    "push_tests": "167P/54.15s"
+  }
 }

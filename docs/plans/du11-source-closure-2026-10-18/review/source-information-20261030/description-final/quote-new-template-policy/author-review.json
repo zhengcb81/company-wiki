@@ -1,0 +1,108 @@
+{
+  "schema_version": "quote-request-policy-author/1",
+  "created_at": "2026-10-30T13:46:02.358081+00:00",
+  "status": "READY_FOR_SEPARATE_INDEPENDENT_REVIEW",
+  "open_author_findings": [],
+  "source_policy": {
+    "selector": "explicit 0.9.0",
+    "projection": "absent only",
+    "template_membership": "neither sources nor items key, even empty membership blocks preference",
+    "new_preference": "existing reading-model-input/5",
+    "explicit_recipes_preserved": [
+      "4",
+      "5",
+      "6",
+      "7"
+    ],
+    "model": "actual configured model advisory ranking, never a model-free substitute"
+  },
+  "scope": {
+    "owned": [
+      {
+        "path": "src/company_wiki/source_catalog/official_source_flow.py",
+        "bytes": 50279,
+        "raw_sha256": "a2292d5eab8d1091fda500540019c8e49f5273e996360b759c04d856890fe597",
+        "lf_sha256": "c93d376cc1ee5d1d01ad336b7d755c4ee73f95f9c5b77a6c0b1e3c5e4a331083"
+      },
+      {
+        "path": "tests/unit/test_narrative_quote_request_policy.py",
+        "bytes": 6788,
+        "raw_sha256": "db56a3c108bc78aa794b4a4ae2a5b1ee6623960240c5537d53a939baa6297fe7",
+        "lf_sha256": "db56a3c108bc78aa794b4a4ae2a5b1ee6623960240c5537d53a939baa6297fe7"
+      }
+    ],
+    "protected_unchanged": [
+      {
+        "path": "src/company_wiki/automation/narrative_batch_request.py",
+        "bytes": 15239,
+        "raw_sha256": "fc019a855607680f439a6449df77efd2c4505f43e29f496ce500a162f04358f2",
+        "lf_sha256": "fc019a855607680f439a6449df77efd2c4505f43e29f496ce500a162f04358f2"
+      },
+      {
+        "path": "src/company_wiki/automation/narrative_model_runtime.py",
+        "bytes": 3771,
+        "raw_sha256": "89c71ca89939322271fc0e7e4bb3e02c3a8e3b70d7de950ab35c0dc62abdff5b",
+        "lf_sha256": "89c71ca89939322271fc0e7e4bb3e02c3a8e3b70d7de950ab35c0dc62abdff5b"
+      },
+      {
+        "path": "src/company_wiki/automation/narrative_generation.py",
+        "bytes": 27421,
+        "raw_sha256": "4fcc792d7a949c19ffe86bb952e9902fae35a4653281901b65152540d22d4e2f",
+        "lf_sha256": "da4a53c5e000d063735dad1ac9a561c57df6900b28c2bced8b43e7066003f61d"
+      }
+    ],
+    "outside_builder_ast_matches_git_head": true,
+    "commits": 0,
+    "downloads": 0,
+    "model_calls": 0,
+    "real_original_parses": 0,
+    "deployment": 0,
+    "canonical_pwf_edits": 0
+  },
+  "tdd": {
+    "initial_red": {
+      "failed": 6,
+      "passed": 15,
+      "fixture_ref_size_mismatches": 2,
+      "true_policy_failures": 4
+    },
+    "corrected_red": {
+      "failed": 4,
+      "passed": 17
+    },
+    "final_green": {
+      "passed": 65,
+      "new_tests": 23,
+      "seconds": 7.15
+    },
+    "ruff": "PASS_2_PATHS"
+  },
+  "compatibility": [
+    "complete raw DTO does not get injected projection",
+    "legacy schema1/2 direct parsing retains /4 generation and request/input identities",
+    "actual three frozen modes resume without changed run/jobs/budget/attempts",
+    "explicit projection including invalid/null delegated unchanged",
+    "absent/legacy selector not upgraded",
+    "schema2 builder not expanded",
+    "input dictionaries unchanged"
+  ],
+  "limitations": [
+    "this is raw new-template composition, not global parser default",
+    "manual JSON and existing complete DTOs remain their original choices",
+    "old complete requests deliberately selecting /5 must specify it and use a new run on changed identity",
+    "no real model summary, provider, company or RF-adoption acceptance"
+  ],
+  "evidence": [
+    "design.md",
+    "before.json",
+    "after.json",
+    "red.log",
+    "red.xml",
+    "red-scoped.log",
+    "red-scoped.xml",
+    "final-green.log",
+    "final-green.xml",
+    "final-ruff.log",
+    "cleanup.json"
+  ]
+}

@@ -929,9 +929,22 @@ def capture_official_source(catalog, *, request, budget=None, transport=None):
 
 
 def prepare_official_narrative_request(imports, *, batch_template):
-    """Use caller/current-config settings; delegate all validation/ledger to AUTO."""
+    """Compose a new raw-source request; AUTO still owns validation and runs.
+
+    A membership-free template explicitly selecting the shared engine gets the
+    existing quote-primary recipe unless the caller specifies a projection.
+    Complete serialized requests (sources/items present) preserve their prior
+    intent, including an omitted projection. Resume parses saved requests via
+    NarrativeBatchRequest directly; it must not reconstruct them as templates.
+    """
     from company_wiki.automation.narrative_batch_request import NarrativeBatchRequest
 
     value = dict(batch_template)
+    if (value.get("selector_version") == "0.9.0"
+            and "reading_model_projection" not in value
+            and not {"sources", "items"}.intersection(value)):
+        from company_wiki.automation.narrative_model_extractive import EXTRACTIVE_MODEL_PROJECTION_VERSION
+
+        value["reading_model_projection"] = EXTRACTIVE_MODEL_PROJECTION_VERSION
     value["sources"] = [item["source_ref"] for item in imports]
     return NarrativeBatchRequest.from_dict(value)

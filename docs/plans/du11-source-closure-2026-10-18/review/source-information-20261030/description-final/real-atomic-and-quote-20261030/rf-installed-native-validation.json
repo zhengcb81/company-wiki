@@ -1,0 +1,18 @@
+{
+  "status": "PASS",
+  "rows": [
+    {
+      "target": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+      "exit": 0,
+      "stdout": "valid",
+      "mode": "validate-only draft; no publication registry writes"
+    },
+    {
+      "target": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast",
+      "exit": 0,
+      "stdout": "valid",
+      "mode": "validate-only draft; no publication registry writes"
+    }
+  ],
+  "adoption_not_claimed": true
+}

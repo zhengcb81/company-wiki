@@ -1,0 +1,248 @@
+{
+  "schema_version": "atomic-read-capture-final-review/1",
+  "reviewed_at": "2026-10-30T13:34:26.412007+00:00",
+  "status": "PASS_SCOPED_ENGINEERING_AND_SAVED_RESTORED_CACHE_EVIDENCE",
+  "open_findings": [],
+  "resolved_findings": [
+    {
+      "id": "READ-C3",
+      "priority": 1,
+      "status": "FIXED_BY_ROOT_AND_INDEPENDENTLY_REPLAYED",
+      "issue": "Exact NOT_EVALUATED mode sent today as_of_date, still applying temporal qualification",
+      "fix": "exact mode as_of_date=null; qualified/default retain date and filters",
+      "red": "asof-red.log/xml: 1F observing 2026-10-30 versus null",
+      "green": "final-tests.log/xml: 42P",
+      "reviewer_correction": "Initial green assertion only rejected historic descriptor date; withdrawn/replaced before acceptance"
+    }
+  ],
+  "files": [
+    {
+      "path": "tools/document_understanding_benchmark/phase_c_runner.py",
+      "bytes": 97995,
+      "raw_sha256": "0a1ff316ea66a9fd5b5c999302c9dfba194188e160f3246abfb4ce8f2472965a",
+      "lf_sha256": "0a1ff316ea66a9fd5b5c999302c9dfba194188e160f3246abfb4ce8f2472965a"
+    },
+    {
+      "path": "tools/document_understanding_benchmark/phase_c_observer.py",
+      "bytes": 32729,
+      "raw_sha256": "f08ca1f80e96103f67fbfb3c8f325b408ff5b5c9c368cee16fd59a71dabf970c",
+      "lf_sha256": "f08ca1f80e96103f67fbfb3c8f325b408ff5b5c9c368cee16fd59a71dabf970c"
+    },
+    {
+      "path": "tests/unit/test_phase_c_read_capture.py",
+      "bytes": 12325,
+      "raw_sha256": "70be29c5458d676ac42f619f8708551c76364dea85109dd6ea43141db4cdc085",
+      "lf_sha256": "70be29c5458d676ac42f619f8708551c76364dea85109dd6ea43141db4cdc085"
+    }
+  ],
+  "superseded_initial_seal": [
+    {
+      "path": "tools/document_understanding_benchmark/phase_c_runner.py",
+      "bytes": 97850,
+      "raw_sha256": "a8d6823e0d715639de78522a37be4d1410bf1a7c6c4769b2893be622bed6c612",
+      "lf_sha256": "a8d6823e0d715639de78522a37be4d1410bf1a7c6c4769b2893be622bed6c612"
+    },
+    {
+      "path": "tools/document_understanding_benchmark/phase_c_observer.py",
+      "bytes": 32729,
+      "raw_sha256": "f08ca1f80e96103f67fbfb3c8f325b408ff5b5c9c368cee16fd59a71dabf970c",
+      "lf_sha256": "f08ca1f80e96103f67fbfb3c8f325b408ff5b5c9c368cee16fd59a71dabf970c"
+    },
+    {
+      "path": "tests/unit/test_phase_c_read_capture.py",
+      "bytes": 12219,
+      "raw_sha256": "8a823381926a81479493f06de079653b5e95eb6d5d1f899a76b0d54b694bce27",
+      "lf_sha256": "8a823381926a81479493f06de079653b5e95eb6d5d1f899a76b0d54b694bce27"
+    }
+  ],
+  "protected_prior_evidence": [
+    {
+      "path": ".planning/summary-quality-20261030/atomic-read-capture-independent/review.md",
+      "sha256": "b6ca44b46d7424f2bd6279f4f6afac4de4b2e142e50792cb7fa0c396b4a51e76"
+    },
+    {
+      "path": ".planning/summary-quality-20261030/atomic-read-capture-independent/review.json",
+      "sha256": "3ab39bc8e17a7010c11f6110b72790ba2befa0ddfd988b2bad277b2db338fef2"
+    },
+    {
+      "path": ".planning/summary-quality-20261030/atomic-read-capture-independent/seal.json",
+      "sha256": "c979dfd400e6f979af7a703ae8b01d6564354cb5925b1b352f851c2272ec59b9"
+    },
+    {
+      "path": ".planning/summary-quality-20261030/atomic-read-capture-independent/seal-check.json",
+      "sha256": "c56bbcb78809869677177041c63ad0d52fcc9268a2ae2b3b2230d240d7ba9ab3"
+    },
+    {
+      "path": ".planning/summary-quality-20261030/real-atomic-v2/receipt.json",
+      "sha256": "fa37e571c3af9c4c5942261158963a557edf307d2966ce9f8367a3f8e78ca500"
+    }
+  ],
+  "final_source_and_protected_evidence_unchanged_during_replay": true,
+  "tests": {
+    "passed": 42,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 18.26,
+    "existing_short_domain": 38,
+    "external_final_assertions": 4,
+    "ruff": "PASS_3_PATHS"
+  },
+  "initial_tests": {
+    "passed": 41,
+    "asof_assertion_insufficient": true,
+    "superseded_not_added_to_final_count": true
+  },
+  "checks": {
+    "exact_no_asof_or_optional_issuer_qualification": "PASS",
+    "qualified_and_legacy_semantics": "PASS",
+    "full_ref_and_artifact_sha": "PASS",
+    "failed_read_request_retained_before_io": "PASS",
+    "bounded_immutable_original_prepared_bytes": "PASS",
+    "actual_generation_bound_or_honest_not_observed": "PASS",
+    "prepared_not_activation_proof": "PASS",
+    "fresh_child_install_formal_prepare_before_owner_visibility": "PASS"
+  },
+  "saved_real_v5": {
+    "status": "PASS_DERIVED_CACHE_RESTORATION_NOT_ORIGINAL_AUTO_HISTORY",
+    "review_method": "read script/receipts and pure captured JSON/generation validation; reviewer did not rerun actual CLI/model",
+    "artifact_bytes": 170748,
+    "artifact_sha256": "216827368a284843c661e6b00c722e659e11e0838b1bae6dcc0aaf5c6d725311",
+    "generation_sha256": "d929ea90aa03988cbdda27122f1fbcbf4aaefb28af2be62762d6967280af3fa4",
+    "public_read": "verified/null asof/full Ref/hash; partial and needs_review retained",
+    "first_same_cross": "all reused same artifact version, budget0, native usage empty",
+    "POST_events": 0,
+    "charged_tokens": 0,
+    "raw_copies": 0,
+    "temporary_lake_actual_path_absent": true,
+    "source_config_mother_ledger": "actual run script assertions and PASS receipt; not independently rerun",
+    "original_AUTO_history_restored": false,
+    "original_artifact_uuid_restored": false
+  },
+  "prior_failed_tool_attempts": [
+    {
+      "version": 1,
+      "error": "source_publication_unknown",
+      "resolution": "null exact-mode date, not weakened qualified checks"
+    },
+    {
+      "version": 2,
+      "error": "live native usage needs explicit existing mother ledger",
+      "resolution": "bind existing ledger"
+    },
+    {
+      "version": 3,
+      "error": "PHASE_C_CACHE_WOULD_GENERATE / DEPENDENCY_TERMINAL",
+      "resolution": "correctly refuse different-metadata/model-material cache reuse; preserve generation identity"
+    },
+    {
+      "version": 4,
+      "error": "SourceRef.from_dict nonexistent",
+      "resolution": "actual typed constructor"
+    }
+  ],
+  "qualification_cache_miss_is_correct": {
+    "original_source_metadata": {
+      "source_class": "filing",
+      "title": "万润股份：投资者关系活动记录表20260515",
+      "document_kind": "investor_relations",
+      "language": "zh"
+    },
+    "qualified_v3_source_metadata": {
+      "document_kind": "investor_relations",
+      "language": "zh",
+      "source_class": "filing",
+      "title": "中节能万润股份有限公司投资者关系活动记录表"
+    },
+    "original_material_sha256": "d8856c5dac04a466b3bf010926428d997b80c34bcb82e757d60a780d82338acd",
+    "qualified_v3_material_sha256": "87527507d8a9e1cea752115065083d9bc8da2a4f8a58f083700dbbfef46996bc",
+    "same_evidence_sha256": true,
+    "different_top_level_generation_keys": [
+      "selection_generation",
+      "source_metadata"
+    ]
+  },
+  "saved_real_evidence_sha256": [
+    {
+      "path": ".planning/summary-quality-20261030/atomic-real-recovery/run_restored_cache_v5.py",
+      "bytes": 7829,
+      "sha256": "4d1e39b621784ef0cdf4c94faa2ae9087bd38ee8eeb1faff5d09036684ad6ef1"
+    },
+    {
+      "path": ".planning/summary-quality-20261030/atomic-real-recovery/restore_cache.py",
+      "bytes": 5101,
+      "sha256": "e985642f60ee208f9591ce85ec7d89d83f72da5aa90cc135ca1aa984a8dd976f"
+    },
+    {
+      "path": ".planning/summary-quality-20261030/atomic-real-recovery/original-canonical-bundle.json",
+      "bytes": 170748,
+      "sha256": "216827368a284843c661e6b00c722e659e11e0838b1bae6dcc0aaf5c6d725311"
+    },
+    {
+      "path": ".planning/summary-quality-20261030/atomic-real-recovery/original-generation-final.json",
+      "bytes": 94566,
+      "sha256": "b0cf2a2a6cb8d69abec92c7cae35462fb0551f74ab3b9ab6b6917abc2fc65ed0"
+    },
+    {
+      "path": ".planning/summary-quality-20261030/atomic-real-recovery/restored-cache-v5/receipt.json",
+      "bytes": 668,
+      "sha256": "4e13bcf5452022e459b3ae524ab4b36813c616023142526fddd2d54498303247"
+    },
+    {
+      "path": ".planning/summary-quality-20261030/atomic-real-recovery/restored-cache-v5/results.json",
+      "bytes": 4125,
+      "sha256": "ac229a229dbe5b6a9f668cf60ddb3a755f8c2e71ec974cba1029fc1a9af768ec"
+    },
+    {
+      "path": ".planning/summary-quality-20261030/atomic-real-recovery/restored-cache-v5/recovered-public-read.stderr.log",
+      "bytes": 1747,
+      "sha256": "b0be313d84d65b1735c01b5cf89fd3bb6c764410aa4c952ff26a3aa5d154ac91"
+    },
+    {
+      "path": ".planning/summary-quality-20261030/atomic-real-recovery/restored-cache-v5/recovered-reference.json",
+      "bytes": 891,
+      "sha256": "7f10654535fb14493276774c3dd22228ac8bda095c022f3e1910e8da4470ec54"
+    },
+    {
+      "path": ".planning/summary-quality-20261030/atomic-real-recovery/restored-cache-v5/events.jsonl",
+      "bytes": 187,
+      "sha256": "cb14cabc363e0e672b5a6383b97e681673397beed6bfc3e1f022ee577a276737"
+    },
+    {
+      "path": ".planning/summary-quality-20261030/restored-cache-v1-console.log",
+      "bytes": 364,
+      "sha256": "4c32fef5dffe3c59ede882cb35f4e56dc1847e39d8fdfefefc9217481925ad3e"
+    },
+    {
+      "path": ".planning/summary-quality-20261030/restored-cache-v2-console.log",
+      "bytes": 1006,
+      "sha256": "518e8a490bfc67793c542917a2e0f18cfc047a96a6a3a9d4ee99143bb9abc3b1"
+    },
+    {
+      "path": ".planning/summary-quality-20261030/restored-cache-v3-console.log",
+      "bytes": 870,
+      "sha256": "074fa109f686e4834a8c759f11545e5d9476136d7988690de8b2e07278aa1084"
+    },
+    {
+      "path": ".planning/summary-quality-20261030/restored-cache-v4-console.log",
+      "bytes": 503,
+      "sha256": "b19495625bf78bbb5b6a99f51c6885228da6d3b8279cc1b73e3955dcd774abad"
+    }
+  ],
+  "not_signed": [
+    "actual summary semantic fidelity",
+    "RF actual forecast adoption",
+    "original AUTO history/UUID restoration",
+    "complete company loop",
+    "full repository CI"
+  ],
+  "reviewer_scope": {
+    "author_source_edits": 0,
+    "model_calls": 0,
+    "downloads": 0,
+    "original_parses": 0,
+    "real_paid_batch_reruns": 0,
+    "commits": 0,
+    "deployment": 0
+  },
+  "fixture_cleanup": "final-tests.log records owned short-basetemp relocated and removed"
+}

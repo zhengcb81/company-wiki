@@ -1,12 +1,12 @@
-## 2026-10-30 当前：真实/7仍有保真缺陷，已精确恢复缓存，转做引用式对照
+## 2026-10-30 当前：真实引用与恢复通过，RF采用暴露同源新鲜度计票共因
 
-唯一当前入口 CURRENT_STATUS.md/json；具体下一步 [M5](review/source-information-20261030/description-final/M5_SOURCE_QUOTE_PRIMARY.md)，真实证据见[本节点](review/source-information-20261030/description-final/real-atomic-and-quote-20261030/README.md)。
+唯一入口 CURRENT_STATUS.md/json；已通过部分见[M5](review/source-information-20261030/description-final/M5_SOURCE_QUOTE_PRIMARY.md)，**当前唯一下一步 [M6置信度来源新鲜度根修](review/source-information-20261030/description-final/M6_RF_SOURCE_FRESHNESS.md)**。原/7四P2/两P3仍保留；完整support/context的/5真实8卡已独审保真通过、真实激活/同run/跨run总1POST，母账1,827,558tokens/$0.732814含unknown、额度不变。不是全文/holdout完成。
 
-已完成：来源准入8个开发检查点；非期次精确SourceRef复用工程；/7原bundle与generation精确恢复、正式读取和同/跨run0POST；RF可选summary-use血缘7b82d7ca推main/CI41064039519 success/定点安装与重复零写。真实/7逐条审查仍4P2/2P3，不以工程通过代签语义。当前/5原文卡/模型只排序真实实验已PASS，1POST/6272tokens/$0.001076预算代理，激活/同run/跨run0重复费用；内容独审进行中，默认仍/4。母账1,827,558tokens/$0.732814含旧unknown，额度10M/$20未提升，原件/config及外来WIP保持。
+已发布CWP8b939b9c/CI41064827392 success（短门167P/54.15秒），RF7b82d7ca/CI41064039519 success，RF两runtime定点部署、重复零写、两新进程真实native输入validate-only通过。新raw模板的共享引擎显式/5选择65P作者/38P独审，旧DTO/旧省略/4及冻结恢复不变；当前提交发布，不称全局默认已切。
 
-CWP bf58769b CI41056460382失败已定位协议lookup畸形JSON处理；共享owner根修、52P短域与21P独审通过，既有push快测仅加1个六参数节点，未增加全仓/超时。代码和PWF正等待本次正常提交推送。
+中微已付费H1 /5经正式原字节/旧generation恢复、2026-10-08可靠prior_verified_capture读回和112locator验证、RF summary_use→实际equipment_units_base_2026/units公式→原生formal报告/snapshot实际走通。模型数值/单位/币种/期次与三情景不变；confidence却因同H1多一条rationale由65.38058062293638→65.39469303281442，已确定published_date新鲜度按claim条数平均的共因。**P2未关闭，不能总签RF验收。** 零新增模型/网络；原v3仅收尾NameError，保留failure并从保存产物纯finish，不伪造原整体成功。
 
-**唯一下一步：** 完成/5真实内容独审，发布read/capture/协议类型修复及PWF并观察精确CI，再TDD生产新请求选择/旧run兼容，以真实中微等同公司来源/本机native模型完成RF参数-公式实际采用。W21 canonicalC2/长路径、US RPO、新holdout和八步公司循环继续OPEN；不宣称项目已完成。
+下一步先在RF confidence责任层做同源重复不变/真实新来源有效的TDD、旧算法历史兼容和独审，复用真实input复算，再完成实际采用独审。之后W21 canonicalC2/长路径、US RPO、跨市场holdout与完整八步公司loop继续OPEN。原件/config/他人WIP/Dayu/IQS/Dashboard保持，不新增人审许可。
 
 ---
 以下为历史记录，不是额外执行入口。

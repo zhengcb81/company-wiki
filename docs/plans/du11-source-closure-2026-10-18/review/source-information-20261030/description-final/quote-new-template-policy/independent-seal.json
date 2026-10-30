@@ -1,0 +1,19 @@
+{
+  "schema_version": "quote-request-policy-independent-seal/1",
+  "status": "INDEPENDENT_PASS_NEW_RAW_TEMPLATE_POLICY_ONLY",
+  "sealed_at": "2026-10-30T13:52:31.221665+00:00",
+  "files": [
+    {
+      "path": "src/company_wiki/source_catalog/official_source_flow.py",
+      "raw_sha256": "a2292d5eab8d1091fda500540019c8e49f5273e996360b759c04d856890fe597",
+      "lf_sha256": "c93d376cc1ee5d1d01ad336b7d755c4ee73f95f9c5b77a6c0b1e3c5e4a331083",
+      "bytes": 50279
+    },
+    {
+      "path": "tests/unit/test_narrative_quote_request_policy.py",
+      "raw_sha256": "db56a3c108bc78aa794b4a4ae2a5b1ee6623960240c5537d53a939baa6297fe7",
+      "lf_sha256": "db56a3c108bc78aa794b4a4ae2a5b1ee6623960240c5537d53a939baa6297fe7",
+      "bytes": 6788
+    }
+  ]
+}

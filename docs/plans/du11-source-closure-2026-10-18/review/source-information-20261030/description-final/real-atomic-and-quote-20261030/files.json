@@ -43,13 +43,33 @@
     "bytes": 4057,
     "sha256": "5ceeefbf50540f1e974ba0f4d98d9753a2556cd00867b072b79e0aec8b1b7c25"
   },
+  "owned-temp-cleanup.json": {
+    "bytes": 1076,
+    "sha256": "8192e0c25b91eed96d99a447207f9dd5dbb3b64c9dd08586919a5978c950e810"
+  },
+  "quote-fidelity-real-review.json": {
+    "bytes": 15873,
+    "sha256": "da5d5ac8a09f19151b2940c5631c4fbd344540404665196f0328bd5aaa950183"
+  },
+  "quote-fidelity-real-review.md": {
+    "bytes": 4363,
+    "sha256": "ac3b20dfe14c67d78309479b6fe773c49b84685f333488a2c637aee78cbdded7"
+  },
   "quote-offline-comparison.md": {
     "bytes": 8726,
     "sha256": "7e930676546cb5dd694aec77eddfe7dac076c810e0680c0cb5f89ebabd6add53"
   },
+  "read-capture-final-review.json": {
+    "bytes": 10364,
+    "sha256": "79e08607e24fdb21de1f600f9e05ba82bf5c799b928deb118889c168a57fabb9"
+  },
+  "read-capture-final-review.md": {
+    "bytes": 4751,
+    "sha256": "6b508d8ee18fd066ddb31f4ca9fbbfe3846399caeb0cbafdb3d87328708f386b"
+  },
   "README.md": {
-    "bytes": 1480,
-    "sha256": "38c4d7d3e8c9bc126463e4468712741be531bdd860b648bc818936c7dbdae179"
+    "bytes": 1978,
+    "sha256": "444333bdf63f3c70ea604006ae3b0ee5bd3eecd9f95668b119e44b4235247bc9"
   },
   "real-quote-bundle.json.gz": {
     "bytes": 27654,
@@ -99,9 +119,17 @@
     "bytes": 5101,
     "sha256": "e985642f60ee208f9591ce85ec7d89d83f72da5aa90cc135ca1aa984a8dd976f"
   },
+  "rf-cn-native-baseline-validation.log": {
+    "bytes": 7,
+    "sha256": "5be86f95bd4bb3848e802afa321452f38330ecec2d48f7a1d1cb8de4efbe7295"
+  },
   "rf-installed-fresh-entry.json": {
     "bytes": 500,
     "sha256": "f9d76769666c0baa43071e7dca27c23fd057f3950a148eabe277165b4cfe84ce"
+  },
+  "rf-installed-native-validation.json": {
+    "bytes": 482,
+    "sha256": "2f4ae6af9da0c093a428a3d4c1eeaeaf7b11451e7826b2c5aa11713847fff732"
   },
   "rf-installed-repeat.json": {
     "bytes": 1453,
@@ -112,7 +140,7 @@
     "sha256": "cdd6e0c2b24f3ab909d260ae07acd05717eb0c07907e398b3af4650481d38055"
   },
   "summary.json": {
-    "bytes": 1786,
-    "sha256": "a4102f57c6d96a27203c1c489506b30705a0ceab727a350fcd3f9a09b1d5537d"
+    "bytes": 1977,
+    "sha256": "a8650664252fa1606b197f258423edd182953a5d2b316fe809029a92a07af50d"
   }
 }

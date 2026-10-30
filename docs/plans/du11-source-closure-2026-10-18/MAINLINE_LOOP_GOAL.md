@@ -1,3 +1,15 @@
+## 2026-10-30 当前：真实引用与恢复通过，RF采用暴露同源新鲜度计票共因
+
+唯一入口 CURRENT_STATUS.md/json；已通过部分见[M5](review/source-information-20261030/description-final/M5_SOURCE_QUOTE_PRIMARY.md)，**当前唯一下一步 [M6置信度来源新鲜度根修](review/source-information-20261030/description-final/M6_RF_SOURCE_FRESHNESS.md)**。原/7四P2/两P3仍保留；完整support/context的/5真实8卡已独审保真通过、真实激活/同run/跨run总1POST，母账1,827,558tokens/$0.732814含unknown、额度不变。不是全文/holdout完成。
+
+已发布CWP8b939b9c/CI41064827392 success（短门167P/54.15秒），RF7b82d7ca/CI41064039519 success，RF两runtime定点部署、重复零写、两新进程真实native输入validate-only通过。新raw模板的共享引擎显式/5选择65P作者/38P独审，旧DTO/旧省略/4及冻结恢复不变；当前提交发布，不称全局默认已切。
+
+中微已付费H1 /5经正式原字节/旧generation恢复、2026-10-08可靠prior_verified_capture读回和112locator验证、RF summary_use→实际equipment_units_base_2026/units公式→原生formal报告/snapshot实际走通。模型数值/单位/币种/期次与三情景不变；confidence却因同H1多一条rationale由65.38058062293638→65.39469303281442，已确定published_date新鲜度按claim条数平均的共因。**P2未关闭，不能总签RF验收。** 零新增模型/网络；原v3仅收尾NameError，保留failure并从保存产物纯finish，不伪造原整体成功。
+
+下一步先在RF confidence责任层做同源重复不变/真实新来源有效的TDD、旧算法历史兼容和独审，复用真实input复算，再完成实际采用独审。之后W21 canonicalC2/长路径、US RPO、跨市场holdout与完整八步公司loop继续OPEN。原件/config/他人WIP/Dayu/IQS/Dashboard保持，不新增人审许可。
+
+---
+
 ## 2026-10-30 当前：原子限定新/7工程已独审，进入真实新摘要与恢复验收
 
 已发布source frame组件f1b51f06精确CI41052385243 success；44中性测试及真实15span重放通过。现在同一scoped引擎以有限registry支持新/7（prompt4.3/request8/decoder7、紧凑source hints、assessor1.1），旧/4/5/6输入gold和原真实/6 artifact保持原解释；默认仍/4。新版本按单条保留归属/主体/合作方/条件，当前进行与计划、项目规格与投产/销量分开，程序只给possible诊断，不称NLI通过。
