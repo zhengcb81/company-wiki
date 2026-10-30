@@ -172,7 +172,17 @@ def generation_manifest(
         assert_no_physical_paths(parser_components)
         result["parser_components"] = json.loads(json.dumps(parser_components))
     _bind_reading_projection(result, versions, reading_model_projection)
+    _bind_summary_bundle_format(result)
     return result
+
+
+def _bind_summary_bundle_format(manifest):
+    from .narrative_summary_protocols import summary_bundle_format
+    recipe=summary_bundle_format(manifest['execution_versions'].get('prompt'))
+    if recipe.assessed:
+        manifest['bundle_schema']=(recipe.projected_schema if manifest['schema_version']=='narrative-generation/2'
+                                   else recipe.raw_schema)
+        manifest['bundle_producer']=recipe.producer
 
 
 def _projection_identity_json(value: Any) -> Any:
@@ -399,6 +409,7 @@ def projection_generation_manifest(
             raise ValueError("projection generation metadata language differs")
         result["source_metadata"] = metadata
     _bind_reading_projection(result, versions, reading_model_projection)
+    _bind_summary_bundle_format(result)
     return _projection_identity_json(result)
 
 

@@ -38,6 +38,7 @@ from .models import (
     require_utc_timestamp,
 )
 from .narrative_contracts import BUNDLE_MAX_BYTES, NarrativeBundle, NarrativeContractError
+from .narrative_summary_protocols import LEGACY_BUNDLE, ASSESSED_BUNDLE
 from .narrative_verify import EFFECT_TYPE
 from .narrative_official_json import VerifiedProjectionView
 from .narrative_replay import replay_verified_projection
@@ -142,7 +143,7 @@ class NarrativeBundleReader:
             ) from exc
         source = bundle.source_ref
         if (
-            bundle.schema_version != "narrative-bundle/2.0"
+            bundle.schema_version not in {LEGACY_BUNDLE.raw_schema,ASSESSED_BUNDLE.raw_schema}
             or source.document_id != artifact.document_id
             or source.source_id != artifact.source_id
             or source.content_sha256 != artifact.source_sha256

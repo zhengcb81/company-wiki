@@ -1,0 +1,140 @@
+{
+  "schema_version": "fidelity-tools-independent-review/1",
+  "reviewed_at": "2026-10-30T11:28:51.398118+00:00",
+  "status": "PASS_SCOPED_TEST_TOOL_ENGINEERING",
+  "open_in_scope": 0,
+  "scope": [
+    "tools/document_understanding_benchmark/phase_c_runner.py",
+    "tools/document_understanding_benchmark/phase_c_observer.py",
+    "tests/test_phase_c_extractive.py",
+    "tests/unit/test_phase_c_registered_consumer.py"
+  ],
+  "tests": {
+    "passed": 34,
+    "deselected": 2,
+    "seconds": 4.13,
+    "command": [
+      "C:/Miniconda/python.exe",
+      "-B",
+      "-m",
+      "pytest",
+      "tests/unit/test_phase_c_registered_consumer.py",
+      "tests/test_phase_c_extractive.py",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "-k",
+      "not existing_http_adapter",
+      "--basetemp=.cwpf30dtogreen"
+    ],
+    "deselected_reason": "existing localhost HTTP transport tests are ROOT host-runtime responsibility; no test assertions removed"
+  },
+  "ruff": "PASS_4_PATHS",
+  "findings": [
+    {
+      "id": "TOOLS-1",
+      "priority": "P1",
+      "status": "FIXED",
+      "description": "consumer acceptance did not compare new summary_assessment; missing/laundered quality observations could be called full context verified",
+      "fix": "if present on exact bundle, require presence and exact value from RF context; dedicated removed/changed negative tests and positive receipt"
+    },
+    {
+      "id": "TOOLS-2",
+      "priority": "P1",
+      "status": "FIXED",
+      "reported_by": "ROOT actual-run preparation",
+      "description": "CLI accepted /6 but reading_projection_for rejected it before owned run creation",
+      "fix": "shared FIDELITY_SCOPED.projection accepted by runner resolver, permanent resolver positive/legacy negative"
+    },
+    {
+      "id": "TOOLS-3",
+      "priority": "P1",
+      "status": "FIXED",
+      "reported_by": "ROOT requested deeper branch inspection",
+      "description": "success observer assumed every execution was extractive and would KeyError plan_sha256 on actual assessment; missing assessment was silently accepted for fidelity",
+      "fix": "explicit protocol-specific report requirement; /6 observation retains assessment metadata and does not fabricate source_card_execution or semantics"
+    },
+    {
+      "id": "TOOLS-4",
+      "priority": "P1",
+      "status": "FIXED",
+      "reported_by": "ROOT real fidelity v1 consumer failure",
+      "description": "registered candidate download_events was [] but RF DTO requires exact integer0; permissive mock failed to catch shape mismatch",
+      "fix": "actual runner emits integer0; every registered mock boundary asserts exact int and0; actual RF candidate validator passes generated candidate and rejects six wrong representations"
+    }
+  ],
+  "checks": [
+    "/7 explicitly selected, /4 default unchanged",
+    "new observer obtains marker40 from protocol owner; exact full material; valid strict subset refused",
+    "unknown fiscal period pinned SourceRef calls existing RF registered reader; no fiscal period or latest invented",
+    "filing-fetch NOT_REQUESTED lacks fake exit/receipt and does not claim invocation",
+    "known fiscal year uses prior FF/RF discovery path",
+    "exact source failure cannot fall back to alternate document/provider",
+    "offline child context retains network block",
+    "RF assessment retained exactly, not rerun semantic/source algorithms",
+    "CLI /6 survives actual runner resolver; old0.8 selector remains legacy",
+    "actual program-built assessment success metadata distinct from extractive audit",
+    "/6 refuses missing assessment or old extractive report; semantics/subfact remain not_evaluated"
+  ],
+  "not_signed": [
+    "real paid summary quality",
+    "RF actual parameter/formula adoption",
+    "actual installed RF subprocess end-to-end",
+    "real cache/recovery",
+    "whole repository CI"
+  ],
+  "model_posts": 0,
+  "downloads": 0,
+  "files": [
+    {
+      "path": "tools/document_understanding_benchmark/phase_c_runner.py",
+      "bytes": 96117,
+      "raw_sha256": "aa7342d6bdcbc9dc0a98a091b86cb3c52f9ed0a0b942f4f0882ad69cdf7029b0",
+      "lf_sha256": "aa7342d6bdcbc9dc0a98a091b86cb3c52f9ed0a0b942f4f0882ad69cdf7029b0"
+    },
+    {
+      "path": "tools/document_understanding_benchmark/phase_c_observer.py",
+      "bytes": 26117,
+      "raw_sha256": "0f0cd667f85fe644d283a2b45f7a952cd5626239faafea884a6fad4da06bc092",
+      "lf_sha256": "d1add86eb1030bc10dfda62f1a84dfe5898864447109ac3c810ddd255cc053b9"
+    },
+    {
+      "path": "tests/test_phase_c_extractive.py",
+      "bytes": 16628,
+      "raw_sha256": "338f6991228d0468b1fd3e106d6245f0cc6aa649d779d9cfda5deb9fea670a82",
+      "lf_sha256": "3c8085e849f9e29faea9173f6159af4559fd2365a808cea274a6c1ba836d6515"
+    },
+    {
+      "path": "tests/unit/test_phase_c_registered_consumer.py",
+      "bytes": 7407,
+      "raw_sha256": "a8b0316588237e87cde923367f27e9e3645f9c081433047587009c206a68c1c6",
+      "lf_sha256": "a8b0316588237e87cde923367f27e9e3645f9c081433047587009c206a68c1c6"
+    }
+  ],
+  "prior_tests_not_added": {
+    "passed": 30,
+    "seconds": 5.09
+  },
+  "red_evidence": {
+    "first": "followup-red.log includes 3 product RED plus 1 initial test fixture AttributeError",
+    "corrected_fixture": "followup-red2.log confirms actual assessment KeyError plan_sha256; fixture error not attributed to production"
+  },
+  "real_fidelity_v1_failure": {
+    "overall_status": "FAIL_PRESERVED",
+    "consumer_error": "CompanyWikiSourceError: download events mismatch",
+    "raw_receipt_not_modified": true,
+    "no_paid_rerun": true,
+    "no_claim_of_real_consumer_adoption": true
+  },
+  "actual_rf_boundary_probe": {
+    "status": "PASS_ACTUAL_RF_CANDIDATE_BOUNDARY_ONLY",
+    "pure_validator_calls": 7,
+    "wrong_representations_rejected": 6,
+    "downloads": 0,
+    "model_posts": 0,
+    "source_byte_opens": 0,
+    "script": "actual_rf_candidate_probe.py",
+    "result": "actual-rf-candidate.json",
+    "validator_file_sha256": "f3c1cf617b856fb83d252e64c290d95e28c0be3fd472060ed17130548bbeda01"
+  }
+}

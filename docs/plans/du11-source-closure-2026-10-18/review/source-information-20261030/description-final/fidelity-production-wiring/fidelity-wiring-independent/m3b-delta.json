@@ -1,0 +1,17 @@
+{
+  "changed_since_m3a": {
+    "src/company_wiki/automation/narrative_summary_assessment.py": {
+      "before": "7b0721d183af218a14830e7551c96a338c2bc3c4bfb93ddede0438e99078bd72",
+      "now": "f6187beefa382b50f762fb4952857c038a39440dfb632cae131e3a71814c75fb"
+    },
+    "src/company_wiki/automation/narrative_summary_execution.py": {
+      "before": "efe6e34b1da4df39785216111458137a85d47b5ad3cd682d4b589c0ab675da9e",
+      "now": "1fad86947391ca0b0794540eaaeaa9af1a00257ed10fd8d996205b16474c5426"
+    },
+    "tests/unit/test_narrative_fidelity_artifacts.py": {
+      "before": "d49df904f5c3d5d638b94cafd2263173cb0427680fcaf16a6dc817ecf569b9fb",
+      "now": "9217f92bd7ab9d879ed46adf16eb7aa827e3c1b6ce2e660abb1e49a92b144f99"
+    }
+  },
+  "new_integration": "tests/integration/test_narrative_fidelity_recovery.py"
+}

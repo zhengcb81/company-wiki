@@ -1,0 +1,61 @@
+{
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/unit/test_narrative_fidelity_artifacts.py",
+    "tests/unit/test_narrative_summary_assessment.py",
+    "tests/integration/test_narrative_fidelity_recovery.py"
+  ],
+  "exit": 1,
+  "elapsed_seconds": 25.179,
+  "sha256_before": {
+    "src/company_wiki/automation/narrative_summary_protocols.py": "c7040f8e57019a847a25d5611bd3b8712b7698683765d95634f07f4b0f083833",
+    "src/company_wiki/automation/narrative_model_scoped.py": "b7351be85c0a3d7e99c281a2a4018abc57f8170002c8fdf04bec78674c962c70",
+    "src/company_wiki/automation/narrative_model_runtime.py": "e3b996a52027a69e1baaf09a909f8a8ff6d59eb3af13bf9bbbc15c8cf353bc03",
+    "src/company_wiki/automation/narrative_summary_assessment.py": "f6187beefa382b50f762fb4952857c038a39440dfb632cae131e3a71814c75fb",
+    "src/company_wiki/automation/narrative_summary_execution.py": "1fad86947391ca0b0794540eaaeaa9af1a00257ed10fd8d996205b16474c5426",
+    "src/company_wiki/automation/narrative_summarize.py": "21c7a7586e2385ea02eb906e1658433984002a21a76feb13602296a0fa898351",
+    "src/company_wiki/automation/narrative_verify.py": "dd6d8d60d38a198586acccf5d452e398b5bfdf19ab126ea3bab14df89756d5a1",
+    "src/company_wiki/automation/narrative_generation.py": "4fcc792d7a949c19ffe86bb952e9902fae35a4653281901b65152540d22d4e2f",
+    "src/company_wiki/automation/narrative_contracts.py": "15924fdbeaa180808d0bf79716c083d5d38593b157356afc3d12de342371a8a5",
+    "src/company_wiki/automation/narrative_projection.py": "fa23c5520f386310ec0b7a5b149c4157967cdcec2d9d0d1a91658e093698c1dd",
+    "src/company_wiki/automation/narrative_batch_request.py": "acc7ea846edc39e0f46adeab4d6228ca671315c39eee12c9ba48877b6475e5a8",
+    "src/company_wiki/automation/narrative_batch.py": "94f0bd78e49809d81f24aaf561c86bebe4e6902faeccfbb09c9714dbf61d6e16",
+    "tests/unit/test_narrative_fidelity_runtime.py": "42bbbc554dad46e180e607ce41382981b079bcfa0def68193651d96352bf01a1",
+    "tests/unit/test_narrative_fidelity_artifacts.py": "9217f92bd7ab9d879ed46adf16eb7aa827e3c1b6ce2e660abb1e49a92b144f99",
+    "tests/integration/test_narrative_fidelity_recovery.py": "bbbdd0f4cb121e0f61f207ca467f53377b390e24d5085fccc42116181bf16438"
+  },
+  "sha256_after": {
+    "src/company_wiki/automation/narrative_summary_protocols.py": "c7040f8e57019a847a25d5611bd3b8712b7698683765d95634f07f4b0f083833",
+    "src/company_wiki/automation/narrative_model_scoped.py": "b7351be85c0a3d7e99c281a2a4018abc57f8170002c8fdf04bec78674c962c70",
+    "src/company_wiki/automation/narrative_model_runtime.py": "e3b996a52027a69e1baaf09a909f8a8ff6d59eb3af13bf9bbbc15c8cf353bc03",
+    "src/company_wiki/automation/narrative_summary_assessment.py": "f6187beefa382b50f762fb4952857c038a39440dfb632cae131e3a71814c75fb",
+    "src/company_wiki/automation/narrative_summary_execution.py": "1fad86947391ca0b0794540eaaeaa9af1a00257ed10fd8d996205b16474c5426",
+    "src/company_wiki/automation/narrative_summarize.py": "21c7a7586e2385ea02eb906e1658433984002a21a76feb13602296a0fa898351",
+    "src/company_wiki/automation/narrative_verify.py": "dd6d8d60d38a198586acccf5d452e398b5bfdf19ab126ea3bab14df89756d5a1",
+    "src/company_wiki/automation/narrative_generation.py": "4fcc792d7a949c19ffe86bb952e9902fae35a4653281901b65152540d22d4e2f",
+    "src/company_wiki/automation/narrative_contracts.py": "15924fdbeaa180808d0bf79716c083d5d38593b157356afc3d12de342371a8a5",
+    "src/company_wiki/automation/narrative_projection.py": "fa23c5520f386310ec0b7a5b149c4157967cdcec2d9d0d1a91658e093698c1dd",
+    "src/company_wiki/automation/narrative_batch_request.py": "acc7ea846edc39e0f46adeab4d6228ca671315c39eee12c9ba48877b6475e5a8",
+    "src/company_wiki/automation/narrative_batch.py": "94f0bd78e49809d81f24aaf561c86bebe4e6902faeccfbb09c9714dbf61d6e16",
+    "tests/unit/test_narrative_fidelity_runtime.py": "42bbbc554dad46e180e607ce41382981b079bcfa0def68193651d96352bf01a1",
+    "tests/unit/test_narrative_fidelity_artifacts.py": "9217f92bd7ab9d879ed46adf16eb7aa827e3c1b6ce2e660abb1e49a92b144f99",
+    "tests/integration/test_narrative_fidelity_recovery.py": "bbbdd0f4cb121e0f61f207ca467f53377b390e24d5085fccc42116181bf16438"
+  },
+  "stable_during_test": true,
+  "foreign_guard_before": {
+    ".githooks/pre-push": "ce4822bb5a082f9d940a0181498215ffb5584f49aee351a38a5651885b03687d",
+    "config/source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968"
+  },
+  "foreign_guard_after": {
+    ".githooks/pre-push": "ce4822bb5a082f9d940a0181498215ffb5584f49aee351a38a5651885b03687d",
+    "config/source_catalog.yaml": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968"
+  },
+  "foreign_guards_unchanged": true,
+  "stdout": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"relocated\": false, \"reason\": \"no-explicit-basetemp\", \"detail\": \"pytest derives its default basetemp from %TEMP%; short by construction\"}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nbenchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\nconfigfile: pytest.ini\nplugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollected 25 items\n\ntests\\unit\\test_narrative_fidelity_artifacts.py ..............           [ 56%]\ntests\\unit\\test_narrative_summary_assessment.py ..........               [ 96%]\ntests\\integration\\test_narrative_fidelity_recovery.py F                  [100%]\n\n================================== FAILURES ===================================\n_________ test_explicit_fidelity_actual_http_and_same_cross_run_cache _________\ntests\\integration\\test_narrative_fidelity_recovery.py:45: in test_explicit_fidelity_actual_http_and_same_cross_run_cache\n    assert first['status']=='completed',first\nE   AssertionError: {'schema_version': 'narrative-batch-result/1', 'run_id': 'legacy-effort-1', 'status': 'failed', 'documents': [{'docume...22f8', 'status': 'dead_letter', 'artifact_ref': None, 'errors': ['MODEL_HTTP_TRANSPORT', 'DEPENDENCY_TERMINAL']}], ...}\nE   assert 'failed' == 'completed'\nE     \nE     - completed\nE     + failed\n=========================== short test summary info ===========================\nFAILED tests/integration/test_narrative_fidelity_recovery.py::test_explicit_fidelity_actual_http_and_same_cross_run_cache\n======================== 1 failed, 24 passed in 13.80s ========================\n",
+  "stderr": ""
+}

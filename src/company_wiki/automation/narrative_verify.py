@@ -35,8 +35,6 @@ from .narrative_formats import parser_component
 from company_wiki.source_catalog.narrative_normalization import NarrativeNormalization
 from company_wiki.source_catalog.narrative_pdf_reading import PdfReading
 from .narrative_contracts import (
-    BUNDLE_SCHEMA,
-    PROJECTED_BUNDLE_SCHEMA,
     ContractSizeError,
     NarrativeBundle,
     NarrativeContractError,
@@ -238,13 +236,15 @@ class NarrativeVerifyHandler:
         context.checkpoint()
         payload = self._payload(context)
         selected, summary = _dependencies(context)
+        reading_projection_version=(self._reading_model_projection(selected.subject)
+                                    if self._reading_model_projection is not None else None)
         _validate_dependency_identity(payload, selected, summary, self._normalization,
             selector_version=self._selector_version,
             pdf_reading=self._pdf_reading,
-            reading_projection_version=self._reading_model_projection(selected.subject)
-                if self._reading_model_projection is not None else None)
+            reading_projection_version=reading_projection_version)
         if payload.subject.kind == "official_json":
-            return self._execute_projection(context, payload, selected, summary)
+            return self._execute_projection(context, payload, selected, summary,
+                                             reading_projection_version=reading_projection_version)
         ref = source_ref(payload)
         opened = self._reader.open_version(
             ref,
@@ -256,7 +256,7 @@ class NarrativeVerifyHandler:
         review = self._current_review(selected, summary)
         context.checkpoint()
         self._replay(opened.data, selected)
-        bundle = self._bundle(selected, summary, review)
+        bundle = self._bundle(selected, summary, review,reading_projection_version=reading_projection_version)
         context.checkpoint()
         effect = self._effect(context, bundle)
         return HandlerResult(
@@ -271,6 +271,7 @@ class NarrativeVerifyHandler:
     def _execute_projection(
         self, context: JobExecutionContext, payload: SourceRevisionEventPayload,
         selected: NarrativeSelectResult, summary: NarrativeSummaryResult,
+        *, reading_projection_version: str | None = None,
     ) -> HandlerResult:
         if self._projection_catalog is None:
             raise _VerifyFailure(
@@ -301,7 +302,7 @@ class NarrativeVerifyHandler:
                 "LOCATOR_REPLAY_FAILED", HandlerOutcome.TERMINAL_FAILURE,
                 "selected official fields differ from the verified source view",
             ) from exc
-        bundle = self._bundle(selected, summary, review)
+        bundle = self._bundle(selected, summary, review,reading_projection_version=reading_projection_version)
         generation = self._projection_generation(selected.subject)
         context.checkpoint()
         effect = self._effect(context, bundle, generation_sha256=generation)
@@ -368,8 +369,13 @@ class NarrativeVerifyHandler:
         selected: NarrativeSelectResult,
         summary: NarrativeSummaryResult,
         review: PromptReviewValue,
+        *, reading_projection_version: str | None = None,
     ) -> NarrativeBundle:
         summary_raw = summary.to_dict()
+        from .narrative_summary_protocols import summary_bundle_format, FIDELITY_SCOPED
+        declared_prompt=(FIDELITY_SCOPED.prompt if reading_projection_version==FIDELITY_SCOPED.projection
+                         else summary.model.prompt_version if summary.model else None)
+        recipe=summary_bundle_format(declared_prompt)
         quality = (
             "skipped_no_narrative"
             if summary.status == "summary_not_needed"
@@ -380,7 +386,7 @@ class NarrativeVerifyHandler:
             )
         )
         raw = {
-            "schema_version": BUNDLE_SCHEMA,
+            "schema_version": recipe.raw_schema,
             "source_ref": selected.source_ref.to_dict(),
             "expected_read_policy_sha256": selected.expected_read_policy_sha256,
             "source_metadata": selected.source_metadata.to_dict(),
@@ -412,9 +418,9 @@ class NarrativeVerifyHandler:
                 ),
                 "model": summary.model.model_id if summary.model is not None else None,
                 "prompt": (
-                    summary.model.prompt_version if summary.model is not None else None
+                    declared_prompt
                 ),
-                "bundle_producer": BUNDLE_PRODUCER_VERSION,
+                "bundle_producer": recipe.producer,
             },
             "replay": {
                 "required": True,
@@ -424,10 +430,19 @@ class NarrativeVerifyHandler:
         if selected.reading_context is not None:
             raw["reading_context"] = selected.to_dict()["reading_context"]
         if selected.subject.kind == "official_json":
-            raw["schema_version"] = PROJECTED_BUNDLE_SCHEMA
+            raw["schema_version"] = recipe.projected_schema
             raw["subject_binding"] = selected.subject.to_dict()
             for key in ("source_ref", "expected_read_policy_sha256", "transcript_lineage", "transcript_byte_bindings"):
                 raw.pop(key)
+        if recipe.assessed and summary.draft is not None:
+            from .narrative_model_scoped import compile_scoped_model_view
+            from .narrative_summary_assessment import assess_summary
+            view=compile_scoped_model_view(selected,max_claims=FIDELITY_SCOPED.plan_max_claims)
+            raw['summary_assessment']=assess_summary(selected,summary_raw['draft']['claims'],
+                requested_task_keys=[task.key for task in view.model_tasks],
+                plan_max_claims=FIDELITY_SCOPED.plan_max_claims)
+        elif recipe.assessed:
+            raw['summary_assessment']=None
         try:
             bundle = NarrativeBundle.from_dict(raw)
             bundle.validate_against(selected, summary)
@@ -460,7 +475,7 @@ class NarrativeVerifyHandler:
             target,
             canonical_json_hash({"verification_job_id": context.job.job_id,
                                  "bundle_sha256": bundle_hash}),
-            BUNDLE_PRODUCER_VERSION,
+            bundle.versions.bundle_producer,
         )
         return Effect(
             effect_id=f"eff-{effect_key[:32]}",

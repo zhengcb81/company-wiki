@@ -1,0 +1,11 @@
+# M3b explicit assessed summary protocol engineering
+
+Shared scoped engine now supports explicit reading-model-input/6, prompt4.2, request7 and plan marker40, single modality/attribution/degree/condition instructions. There is no hidden task subset or paid repair. Legacy4/5 and old raw2.0/projected3.0 remain byte-compatible; default remains4 until real acceptance.
+
+New raw2.1/projected3.1 producer1.1 carries program-owned summary_assessment through internal wrapper2 and public artifacts. Generation/verification/effect use the actual frozen protocol. Skipped no-narrative documents carry null model/assessment and matching manifest. Quality projection retains conservative known risks. Compact terminal receipts retain bounded metadata diagnostics; only full bundle/source validation proves claim/source binding. semantic/subfact remain not_evaluated, not a semantic pass.
+
+Actual host loopback /6 HTTP -> publication -> public artifact read -> terminal diagnostics -> same-run restart -> separate cross-run cache passed1/21.74s with one request total. Old scoped recovery2P/43.50s. A sandbox-only localhost failure is preserved, not fixed by assertion removal or larger timeout. Source12-file mypy passes. ROOT RF related177P/2.13s, fixed CI mypy15 sources, independent41P/1.49s. New RF consumer preserves the observations without importing CWP or duplicating PDF/source policies.
+
+Benchmark explicitly permits6 and observes actual material marker, refuses subset7, preserves original unknown fiscal metadata and uses the existing registered-source RF entry. FF is recorded NOT_REQUESTED_ALREADY_REGISTERED, never a forged successful invocation; known-period FF discovery chain remains. RF dropping/tampering with assessment fails the acceptance harness. Independent reports bind final snapshots in subdirectories.
+
+This is engineering acceptance, not real paid prose or actual forecast adoption. Next: configured real IR8-checkpoint summary in a new owned directory, activation/restart/crossrun zero extra POST, independent original-vs-prose attribution/modality/subfact review, then actual RF parameter/formula dependency. W21 canonical SDK C2/longpath, US RPO, holdout and whole company audit loop remain OPEN. No production originals/config, external hook, RF assurance WIP, Dayu/IQS/Dashboard changed.

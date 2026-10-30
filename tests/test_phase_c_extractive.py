@@ -54,7 +54,7 @@ def test_mother_budget_rejects_invalid_accounting(value):
         runner.mother_budget_fits(totals, tokens_bound=1, micro_usd_bound=1)
 
 
-@pytest.mark.parametrize("version", ["reading-model-input/4", VERSION])
+@pytest.mark.parametrize("version", ["reading-model-input/4", VERSION, "reading-model-input/6"])
 def test_gold_observer_validates_the_actual_scoped_request_and_rejects_changed_material(version):
     from copy import deepcopy
     from tools.document_understanding_benchmark.phase_c_observer import gold_observation
@@ -73,6 +73,26 @@ def test_gold_observer_validates_the_actual_scoped_request_and_rejects_changed_m
     changed["material"]["tasks"] = []
     with pytest.raises(AssertionError):
         gold_observation(gold, source, changed)
+
+
+def test_fidelity_observer_rejects_an_otherwise_valid_partial_task_material():
+    from dataclasses import replace
+    from company_wiki.automation.narrative_model_scoped import compile_scoped_model_view
+    from company_wiki.automation.narrative_summary_protocols import FIDELITY_SCOPED
+    from tools.document_understanding_benchmark.phase_c_observer import gold_observation
+
+    source = selected(3)
+    envelope = json.loads(build_model_request(
+        source, reading_projection_version=FIDELITY_SCOPED.projection).data_json)
+    view = compile_scoped_model_view(source, max_claims=FIDELITY_SCOPED.plan_max_claims)
+    tasks = envelope["material"]["tasks"]
+    assert len(tasks) > 1
+    envelope["material"] = replace(view, visible_keys=frozenset({tasks[0]["key"]})).to_model_dict()
+    gold = {"facts": [{"id": "source-check", "target_kind": "required_business",
+        "any_support_sets": [[{"page": source.evidence_spans[0].coordinates.page_number,
+            "exact_quote": source.evidence_spans[0].raw_text}]]}]}
+    with pytest.raises(AssertionError):
+        gold_observation(gold, source, envelope)
 
 
 def test_observer_adapts_v3_context_membership_for_the_independent_oracle():

@@ -1,10 +1,12 @@
-## 2026-10-30 当前：非期次复用与来源scope已发布CI绿；M3a观察核心通过，生产摘要仍待接线
+## 2026-10-30 当前：M3b显式摘要协议与RF消费者工程完成，真实保真和采用待验
 
-M1 RF **a1c077183127a3266e0bafc0da7734a20e343442**主线/远端、精确CI41034901632成功；实际IR source准备/输入合同通过，5运行时文件安装、重复零写/新进程通过。M2 CWP **6c12970609024b3cc09eeb238e4d66cd8296d186**已推master，正常pre-push161P/64.99秒、精确CI41037070445成功。来源客户链/已售范围/已开发数量重要性及模板/会计/软件功能边界已闭，真实native重放8gold全支持，全文仍partial。见[来源节点](review/source-information-20261030/description-final/source-business-scope/README.md)。
+实际/6 v1已生成20条/8任务，1POST/6969tokens/$0.001286预算代理，activation/same/cross0新增POST；独立自然语言审查进行中，不签语义通过。原整体FAIL为测试工具download_events列表/int错配，现已修并以同一正式bundle字节在新隔离湖零付费重放RF来源＋叙述消费者，PASS且assessment完整保留；不是新模型/缓存generation，也不是实际预测采用。母累计1,813,988tokens/$0.730398（含旧unknown），原件/config/清理通过。RF消费者4bbf4528已推main，精确CI41047503062 success，三运行时定点部署/重复零写/2新进程通过。
 
-M3a新增纯assessment核心独审通过：36相关域P、10永久unit、独立21P/12中性对照/2稳定SHA/0OPEN。真实已捕获v3可见6/8、t3/t7遗漏与四处归属/语态风险；精确scope歧义、marker20/40、诊断限幅/全风险claim IDs、7依赖recipe均保留，semantic/subfact始终not_evaluated。**这只是观察核心，尚未接入生产；新摘要质量、缓存和RF实际采用未通过。** 见[核心验收](review/source-information-20261030/description-final/summary-assessment-core/README.md)。
+M1非期次原文复用、M2来源scope已发布CI绿；M3a核心bab7248a精确CI41039311443成功。M3b现有明确/6、prompt4.2/request7、raw2.1/projected3.1/producer1.1、assessment/wrapper与generation/effect接线。旧4/5和历史wire保持，生产默认仍4。跳过文档用null模型/assessment；风险质量不被覆盖；终态压缩只保留诊断，不冒称完整来源验证。
 
-**下一步：** 按[生产接线细则](review/source-information-20261030/description-final/M3_PRODUCTION_WIRING.md)完成明确/6协议、4.2提示、wrapper、新bundle/producer/generation/effect及RF兼容后，再真实摘要/恢复/RF参数采用。新默认最后切换，旧/4、/5、2.0/3.0历史wire不重标，禁止恢复自动付费repair。W21 canonical C2/长路径/US RPO/holdout/完整公司loop继续OPEN。按用户授权主线持续执行，原件/config/外来hook/RF三WIP及Dayu/IQS/Dashboard保持，本轮0新POST/下载。
+本机真实HTTP6→发布→公共读回→终态诊断→同run/跨run缓存1P/21.74秒、总请求1；12源mypy通过。RF相关177P、固定CI15源mypy、独立41P/0OPEN；观察信息在context与消费收据保留。工具已修unknownFY原件走正式registered SourceRef复用、FF明确未请求及assessment漏验，未填假日期/年份。见[工程节点](review/source-information-20261030/description-final/fidelity-production-wiring/README.md)。本段不等于真实摘要/完整RF预测验收。
+
+**唯一下一步：** 收尾真实自然语言独审，处理真正归属/程度/条件/子事实问题；再按M3_PRODUCTION_WIRING.md验RF参数/公式实际采用（不能把读取metadata或原文span当摘要采用）；通过后最后改生产默认。不重打旧paid回复标签、不自动付费repair、不抬额度。W21 canonicalC2/长路径/US RPO/holdout/公司loop继续OPEN。原件/config/外来hook和RF三WIP、Dayu/IQS/Dashboard保持。
 
 ---
 以下为历史记录，不是额外执行入口。

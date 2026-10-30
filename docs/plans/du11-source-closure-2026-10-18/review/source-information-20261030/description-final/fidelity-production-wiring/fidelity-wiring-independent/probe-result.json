@@ -1,0 +1,88 @@
+{
+  "schema_version": "independent-fidelity-wiring-probe/1",
+  "offline_only_no_paid_no_pdf": true,
+  "new_request": {
+    "prompt": "reading-source-scoped/4.2.0",
+    "schema": "narrative-model-request/7",
+    "material_cap": 40,
+    "output_cap": 40
+  },
+  "raw": {
+    "schema": "narrative-bundle/2.1",
+    "producer": "1.1.0",
+    "manifest_matches": true,
+    "wrapper_schema": "narrative-summary-execution/2",
+    "wrapper_rechecks": true,
+    "risk_flags_retained": true,
+    "draft_status": "needs_review",
+    "semantic_status": "not_evaluated"
+  },
+  "projected": {
+    "schema": "narrative-bundle/3.1",
+    "manifest_matches": true
+  },
+  "legacy_projected": {
+    "schema": "narrative-bundle/3.0",
+    "producer": "1.0.0",
+    "assessment_absent": true,
+    "exact_roundtrip": true
+  },
+  "forgery_rejections": {
+    "missing_report": true,
+    "legacy_schema": true,
+    "wrong_producer": true,
+    "forged_plan": true,
+    "forged_admitted_set": true,
+    "quality_erased": true,
+    "bare_summary": true,
+    "wrapper1_downgrade": true,
+    "wrapper_source_forgery": true
+  },
+  "batch_assessment_visible_without_reasoning_meter": true,
+  "historical_recipe_preserved_as_descriptive_metadata": true,
+  "legacy_actual_capture_roundtrip_exact_bytes": true,
+  "legacy_actual_capture_sha256": "3a33d89419d325bdfc3be4facb1c7f85761384ba9a5e304c2c16008577ee5679",
+  "legacy4_request_data_unchanged": true,
+  "legacy4_instruction_unchanged": true,
+  "legacy4_request_hash_unchanged": true,
+  "legacy5_request_data_unchanged": true,
+  "legacy5_instruction_unchanged": true,
+  "legacy5_request_hash_unchanged": true,
+  "default_generation": {
+    "projection": "reading-model-input/4",
+    "schema": "narrative-bundle/2.0",
+    "prompt": "reading-source-scoped/4.1.0"
+  },
+  "raw_skip": {
+    "kind": "raw",
+    "bundle_schema": "narrative-bundle/2.1",
+    "producer": "1.1.0",
+    "manifest_bundle_schema": "narrative-bundle/2.1",
+    "manifest_producer": "1.1.0",
+    "format_matches_manifest": true,
+    "quality_status": "skipped_no_narrative",
+    "summary_status": "summary_not_needed",
+    "summary_model": null,
+    "declared_prompt": "reading-source-scoped/4.2.0",
+    "versions_model": null,
+    "assessment_field_present": true,
+    "assessment": null,
+    "exact_roundtrip": true
+  },
+  "projected_skip": {
+    "kind": "official_json",
+    "bundle_schema": "narrative-bundle/3.1",
+    "producer": "1.1.0",
+    "manifest_bundle_schema": "narrative-bundle/3.1",
+    "manifest_producer": "1.1.0",
+    "format_matches_manifest": true,
+    "quality_status": "skipped_no_narrative",
+    "summary_status": "summary_not_needed",
+    "summary_model": null,
+    "declared_prompt": "reading-source-scoped/4.2.0",
+    "versions_model": null,
+    "assessment_field_present": true,
+    "assessment": null,
+    "exact_roundtrip": true
+  }
+}

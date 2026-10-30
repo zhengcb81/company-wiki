@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-30",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_M1_M2_PUBLISHED_CI_GREEN_M3A_REVIEWED_PRODUCTION_WIRING_OPEN",
+  "overall_status": "ACTIVE_M3B_ENGINEERING_REVIEWED_REAL_FIDELITY_RECOVERY_RF_ADOPTION_OPEN",
   "parallel_packages_20261025": {
     "status": "W16_W17_W18_ROOT_COMPONENT_ACCEPTED_MERGED",
     "entry": "harness_lanes/20261025/README.md",
@@ -2344,7 +2344,7 @@
     "published": true,
     "push_failure": "47 targets /392 collected /600s; two regressions being root-fixed, not waived by narrower daily gate"
   },
-  "next_action": "M3 production wiring explicit /6 protocol and fidelity prompt, wrapper, bundle/generation/effect resolver and RF compatibility; then real summary/cache/RF adoption.",
+  "next_action": "Finish independent real prose fidelity review, then actual RF parameter/formula summary adoption; reading metadata or original spans alone is insufficient.",
   "c3_runtime_recovery_20261026": {
     "entry": "review/pdf-c3-20261026/RUNTIME_RECOVERY.md",
     "environment_independent": "PASS_ZERO_OPEN_25_TESTS_AND_REAL_WORKER_ENTRYPOINTS",
@@ -3510,10 +3510,9 @@
     "ff_rf_consumers": "OPEN: explicit nonperiodic source reference needed; unknown fiscal_year is not latest-as-of proof"
   },
   "mother_usage_current": {
-    "tokens": 1807019,
-    "micro_usd": 729112,
-    "historical_unknowns_preserved": true,
-    "new_unknowns": 0
+    "tokens": 1813988,
+    "micro_usd": 730398,
+    "historical_unknowns_preserved": true
   },
   "w21_root_reception": {
     "state": "ROOT_ENGINEERING_MERGED_PUSHED_CANONICAL_C2_OPEN",
@@ -3963,5 +3962,36 @@
     "open_in_scope": 0,
     "production_summary": "UNCHANGED_OPEN",
     "entry": "review/source-information-20261030/description-final/summary-assessment-core/README.md"
+  },
+  "summary_fidelity_wiring_20261030": {
+    "status": "ENGINEERING_REVIEWED_REAL_ACCEPTANCE_OPEN",
+    "protocol": "reading-model-input/6",
+    "production_default": "reading-model-input/4",
+    "host_http_recovery": "1P/21.74s;1POST total",
+    "rf_tests": 177,
+    "rf_independent_tests": 41,
+    "entry": "review/source-information-20261030/description-final/fidelity-production-wiring/README.md",
+    "rf_commit": "4bbf4528e108142784c81f857eb9f9ab81dfa89a",
+    "rf_ci": {
+      "id": 41047503062,
+      "head_sha": "4bbf4528e108142784c81f857eb9f9ab81dfa89a",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/41047503062"
+    }
+  },
+  "real_fidelity_v1": {
+    "summary_claims": 20,
+    "tasks_emitted": 8,
+    "semantic_review": "IN_PROGRESS",
+    "original_overall_status": "FAIL_TOOL_CANDIDATE_DTO",
+    "model_posts": 1,
+    "tokens": 6969,
+    "micro_usd": 1286,
+    "activation_recovery": "PASS",
+    "same_run_zero_POST": true,
+    "cross_run_zero_POST": true,
+    "zero_paid_consumer_replay": "PASS_READONLY_NOT_FORECAST_ADOPTION",
+    "whole_source": "partial"
   }
 }

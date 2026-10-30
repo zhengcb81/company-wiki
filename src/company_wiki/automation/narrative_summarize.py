@@ -535,6 +535,14 @@ class NarrativeSummarizeHandler:
                 reading_projection_version, projected=selected.subject.kind == "official_json",
             ).source_owned:
                 result = _observe_output_language(result, selected)
+            from .narrative_summary_protocols import FIDELITY_SCOPED
+            if reading_projection_version==FIDELITY_SCOPED.projection and execution_report is not None:
+                from .narrative_model_scoped import compile_scoped_model_view
+                from .narrative_summary_assessment import assess_summary
+                view=compile_scoped_model_view(selected,max_claims=FIDELITY_SCOPED.plan_max_claims)
+                execution_report.update(assess_summary(selected,result.to_dict()['draft']['claims'],
+                    requested_task_keys=[task.key for task in view.model_tasks],
+                    plan_max_claims=FIDELITY_SCOPED.plan_max_claims))
             return result
         except ContractSizeError as exc:
             raise _SummaryFailure(

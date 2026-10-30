@@ -14,9 +14,10 @@ from typing import Any
 from company_wiki.document_normalization.text_matching import matching_reading_text
 from company_wiki.source_catalog.narrative_evidence import summary_claim_type_for_roles
 from company_wiki.document_understanding.summary_tasks import SourceSummaryTask
+from company_wiki.source_contract import EvidenceSpan
 from .models import canonical_json_hash
 from .narrative_contracts import NarrativeSelectResult
-from .narrative_model_scoped import compile_scoped_model_view
+from .narrative_model_scoped import compile_scoped_material_view
 
 ASSESSMENT_SCHEMA = 'summary-assessment/1'
 ASSESSMENT_VERSION = 'source-summary-assessment/1.0.0'
@@ -114,7 +115,16 @@ def assess_summary(
     requested_task_keys: Sequence[str], plan_max_claims: int,
 ) -> dict[str, Any]:
     """Bind final retained clauses to exact source scopes, not claim-ID aliases."""
-    view=compile_scoped_model_view(selected,max_claims=plan_max_claims)
+    return assess_summary_material(selected.evidence_spans,selected.reading_context,claims,
+        requested_task_keys=requested_task_keys,plan_max_claims=plan_max_claims)
+
+
+def assess_summary_material(
+    evidence_spans: Sequence[EvidenceSpan], reading_context: Mapping[str,Any] | None,
+    claims: Sequence[Mapping[str,Any]], *, requested_task_keys: Sequence[str], plan_max_claims: int,
+) -> dict[str,Any]:
+    """Consume the same owned source material from a selection or final bundle."""
+    view=compile_scoped_material_view(evidence_spans,reading_context,max_claims=plan_max_claims)
     admission=view.to_binding()['source_admission']
     admitted=view.admitted_task_keys
     requested=set(requested_task_keys)
@@ -125,7 +135,7 @@ def assess_summary(
         if task.key in requested:
             key=(task.support_ids,task.context_ids,summary_claim_type_for_roles(task.support_roles))
             by_scope.setdefault(key,[]).append(task)
-    known={span.span_id:span for span in selected.evidence_spans}
+    known={span.span_id:span for span in evidence_spans}
     emitted=set()
     diagnostics: list[dict[str, Any]]=[]
     diagnostic_count=0
@@ -177,3 +187,124 @@ def assess_summary(
     if len(canonical_json(result).encode('utf-8'))>ASSESSMENT_MAX_BYTES:
         raise ValueError('summary assessment exceeds its finite byte bound')
     return result
+
+
+def validate_assessment_wire(value: Any, claims: Sequence[Mapping[str,Any]] | None) -> dict[str,Any]:
+    """Shape/algebra only without source material; full binding is checked below."""
+    import json
+    from .models import canonical_json, _to_plain
+    fields={'schema_version','validator','source_plan_sha256','plan_max_claims',
+        'source_admission_sha256','claims_sha256','scope','source_admitted_task_keys',
+        'requested_task_keys','emitted_task_keys','missing_requested_task_keys',
+        'budget_deferred_task_keys','excluded_tasks','requested_emission_complete',
+        'admitted_emission_complete','subfact_coverage_status','semantic_status',
+        'known_constraint_status','diagnostics','diagnostic_count','diagnostics_limited','diagnostic_claim_ids'}
+    if not isinstance(value,Mapping) or set(value)!=fields:
+        raise ValueError('invalid summary assessment fields')
+    encoded=canonical_json(_to_plain(value)).encode('utf-8')
+    if len(encoded)>ASSESSMENT_MAX_BYTES:
+        raise ValueError('summary assessment exceeds its finite byte bound')
+    report=json.loads(encoded)
+
+    def require(condition: bool) -> None:
+        if not condition:
+            raise ValueError('invalid summary assessment')
+
+    def sha(value: Any) -> bool:
+        return isinstance(value,str) and re.fullmatch(r'[a-f0-9]{64}',value) is not None
+
+    require(report['schema_version']==ASSESSMENT_SCHEMA)
+    require(report['scope']=='selected_source_tasks_only')
+    require(report['semantic_status']==report['subfact_coverage_status']=='not_evaluated')
+    require(type(report['plan_max_claims']) is int and report['plan_max_claims']>0)
+    require(all(sha(report[key]) for key in ('source_plan_sha256','source_admission_sha256','claims_sha256')))
+    if claims is not None:
+        require(report['claims_sha256']==canonical_json_hash(list(claims)))
+    validator=report['validator']
+    require(isinstance(validator,dict) and set(validator)=={'version','implementation_sha256','dependencies'})
+    require(validator['version']==ASSESSMENT_VERSION)
+    deps=validator['dependencies']
+    require(isinstance(deps,dict) and set(deps)=={'matching','task_plan','admission','scoped_view','encoding','claim_roles','assessment'})
+    require(all(sha(digest) for digest in deps.values()))
+    require(validator['implementation_sha256']==canonical_json_hash(deps))
+    keys={}
+    for name in ('source_admitted_task_keys','requested_task_keys','emitted_task_keys',
+                 'missing_requested_task_keys','budget_deferred_task_keys'):
+        rows=report[name]
+        require(isinstance(rows,list) and all(isinstance(k,str) and re.fullmatch(r't[1-9][0-9]*',k) for k in rows))
+        require(len(rows)==len(set(rows)))
+        keys[name]=set(rows)
+    admitted=keys['source_admitted_task_keys']
+    requested=keys['requested_task_keys']
+    emitted=keys['emitted_task_keys']
+    require(emitted<=requested<=admitted)
+    require(keys['missing_requested_task_keys']==requested-emitted)
+    require(keys['budget_deferred_task_keys']==admitted-requested)
+    for key,actual in (('requested_emission_complete',emitted==requested),
+                       ('admitted_emission_complete',emitted==admitted)):
+        require(type(report[key]) is bool and report[key]==actual)
+    excluded=report['excluded_tasks']
+    require(isinstance(excluded,list))
+    excluded_keys: set[str]=set()
+    for row in excluded:
+        require(isinstance(row,dict) and row.get('status') in ('unavailable','duplicate'))
+        expected={'task_key','status','reason'}|({'representative'} if row['status']=='duplicate' else set())
+        require(set(row)==expected)
+        require(isinstance(row['task_key'],str) and re.fullmatch(r't[1-9][0-9]*',row['task_key']) is not None)
+        require(row['task_key'] not in admitted|excluded_keys)
+        excluded_keys.add(row['task_key'])
+        require(isinstance(row['reason'],str) and re.fullmatch(r'[a-z][a-z0-9_]{0,79}',row['reason']) is not None)
+        if row['status']=='duplicate':
+            require(isinstance(row['representative'],str) and row['representative'] in admitted)
+    count=report['diagnostic_count']
+    diagnostics=report['diagnostics']
+    require(isinstance(diagnostics,list) and len(diagnostics)<=MAX_DIAGNOSTICS)
+    require(type(count) is int and count>=len(diagnostics))
+    require(type(report['diagnostics_limited']) is bool and report['diagnostics_limited']==(count>len(diagnostics)))
+    require(report['known_constraint_status']==('diagnostics_found' if count else 'no_known_violation'))
+    risks=report['diagnostic_claim_ids']
+    require(isinstance(risks,list) and all(isinstance(key,str) and bool(key)
+        and key==key.strip() and len(key)<=128 for key in risks))
+    if claims is not None:
+        claim_ids={claim['claim_id'] for claim in claims}
+        require(all(key in claim_ids for key in risks))
+    require(len(risks)==len(set(risks)) and bool(risks)==bool(count))
+    rules={'possible_attribution_loss','possible_negation_degree_loss','possible_modality_mismatch',
+           'unmatched_claim_scope','ambiguous_claim_scope'}
+    for row in diagnostics:
+        require(isinstance(row,dict) and set(row)=={'task_key','claim_id','source_span_id','rule_code'})
+        require(isinstance(row['rule_code'],str) and row['rule_code'] in rules and row['claim_id'] in risks)
+        if row['rule_code'] in {'unmatched_claim_scope','ambiguous_claim_scope'}:
+            require(row['task_key'] is None and row['source_span_id'] is None)
+        else:
+            require(isinstance(row['task_key'],str) and row['task_key'] in requested)
+            require(isinstance(row['source_span_id'],str) and re.fullmatch(
+                r'urn:company-wiki:evidence-span:sha256:[a-f0-9]{64}',row['source_span_id']) is not None)
+    return report
+
+
+def validate_assessment_material(
+    value: Any, evidence_spans: Sequence[EvidenceSpan], reading_context: Mapping[str,Any] | None,
+    claims: Sequence[Mapping[str,Any]], *, plan_max_claims: int,
+) -> dict[str,Any]:
+    """Recompute all source observations; recorded software recipe stays historical."""
+    report=validate_assessment_wire(value,claims)
+    view=compile_scoped_material_view(evidence_spans,reading_context,max_claims=plan_max_claims)
+    expected=assess_summary_material(evidence_spans,reading_context,claims,
+        requested_task_keys=[task.key for task in view.model_tasks],plan_max_claims=plan_max_claims)
+    # This field records the producing implementation, not permission or a
+    # claim that today's installed files are identical to immutable history.
+    expected['validator']=report['validator']
+    if report!=expected:
+        raise ValueError('summary assessment differs from its actual source/claims')
+    return report
+
+
+def validate_assessment_quality(report: Mapping[str,Any], claims: Sequence[Mapping[str,Any]],
+                                draft_status: str) -> None:
+    """Program diagnostics remain visible after every later quality projection."""
+    if (report['diagnostic_count'] or not report['requested_emission_complete']) and draft_status!='needs_review':
+        raise ValueError('incomplete or risky assessed summary must retain quality diagnostics')
+    risks=set(report['diagnostic_claim_ids'])
+    if any(claim['claim_id'] in risks and claim.get('needs_review') is not True for claim in claims):
+        raise ValueError('assessed claim lost its program quality diagnostic')

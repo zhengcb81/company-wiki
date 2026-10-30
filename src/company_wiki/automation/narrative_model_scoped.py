@@ -22,6 +22,7 @@ from company_wiki.source_contract import EvidenceSpan
 
 from .models import canonical_json, canonical_json_hash
 from .narrative_contracts import NarrativeSelectResult
+from .narrative_summary_protocols import LEGACY_SCOPED, ScopedSummaryProtocol, scoped_protocol_for_prompt
 
 
 SCOPED_VIEW_SCHEMA = "source-scoped-model-view/1"
@@ -61,6 +62,28 @@ SCOPED_INSTRUCTION = (
     'Markdown, research conclusions, valuation, ratings or paths. Valid local citations do '
     'not prove that rewritten prose is true.'
 )
+FIDELITY_INSTRUCTION = (
+    'Summarize the supplied original-language source tasks. No translation. '
+    'Return only one JSON object with drafts_by_task, keyed by supplied task keys. '
+    'Each task is an array of clauses with only text, basis_parts and modality. '
+    'Use unique task-local pN factual support parts; never context-only parts or another task. '
+    'Cover each supplied supported task before adding detail. Include useful customer chains, '
+    'already-sold product ranges and developed-product counts; do not merge developed and sold sets. '
+    'Preserve subject, subsidiary, product, stage, period, value, currency and unit. '
+    'Preserve reported/news attribution, the degree of a denial, completion conditions and intentions. '
+    'Each clause must have a single modality: actual, planned, forecast, negation, question or uncertain. '
+    'Separate completed actions, negative statements and future intentions into distinct clauses. '
+    'A pending application is not an approval, an intention is not a signed contract, and a source '
+    'question is not management confirmation. Do not remove material from a denial of material impact. '
+    'Use only directly supported complete facts, not headings, generic aspirations, unresolved table '
+    'numbers or inferred company claims. Preserve original names and product codes. '
+    'Program reading hints and task defaults are not business facts. '
+    'Respect output_plan.max_claims and max_claims_per_task and the configured output token limit. '
+    'Each clause is at most 280 characters. When the finite output budget cannot cover everything, '
+    'prioritize distinct material facts and their causes; do not invent facts to fill a task. '
+    'Do not output identities, quality flags, reasoning, Markdown, paths, investment conclusions or ratings. '
+    'Correct citations do not prove that paraphrased prose is true.'
+)
 
 
 def scoped_response_schema(per_task_cap: int = 20) -> dict[str, Any]:
@@ -82,13 +105,13 @@ def scoped_response_schema(per_task_cap: int = 20) -> dict[str, Any]:
                 }}}}}}
 
 
-def scoped_boundary_identity(boundary) -> dict[str, Any]:
+def scoped_boundary_identity(boundary, *, protocol: ScopedSummaryProtocol = LEGACY_SCOPED) -> dict[str, Any]:
     from company_wiki.document_understanding import (
         summary_tasks, source_cards as source_card_module, reading_context_contract,
     )
     from company_wiki.source_catalog import narrative_evidence
     from company_wiki import narrative_subject
-    from . import models, narrative_contracts, narrative_model, narrative_model_runtime
+    from . import models, narrative_contracts, narrative_model, narrative_model_runtime, narrative_summary_protocols
 
     dependencies = {}
     for name, module in {
@@ -98,29 +121,36 @@ def scoped_boundary_identity(boundary) -> dict[str, Any]:
             'source_use_contract': reading_context_contract,
             'legacy_utilities': narrative_model, 'canonical_contracts': narrative_contracts,
             'canonical_encoding': models, 'subject_contracts': narrative_subject,
+            'summary_protocol_recipes': narrative_summary_protocols,
         }.items():
         filename = module.__file__
         if filename is None:
             raise narrative_model.ModelResponseError('READING_MODEL_IMPLEMENTATION_UNAVAILABLE')
         dependencies[name] = hashlib.sha256(Path(filename).read_bytes()
             .replace(b'\r\n', b'\n').replace(b'\r', b'\n')).hexdigest()
+    if protocol.assess_fidelity:
+        from .narrative_summary_assessment import assessment_identity
+        dependencies['summary_assessment'] = canonical_json_hash(assessment_identity())
+    instruction = FIDELITY_INSTRUCTION if protocol.assess_fidelity else SCOPED_INSTRUCTION
     return {'schema_version': 'reading-model-boundary/1',
         'reading_projection_version': boundary.reading_projection_version,
         'prompt_version': boundary.prompt_version, 'request_schema': boundary.request_schema,
         'decoder_version': boundary.decoder_version,
-        'instruction_sha256': hashlib.sha256(SCOPED_INSTRUCTION.encode()).hexdigest(),
+        'instruction_sha256': hashlib.sha256(instruction.encode()).hexdigest(),
         'response_schema_sha256': canonical_json_hash(scoped_response_schema()),
         'decoder_sha256': canonical_json_hash(dependencies), 'implementation_dependencies': dependencies}
 
 
 def _scoped_output_plan(task_count: int, max_output_tokens: int | None = None,
-                        *, target_override: int | None = None) -> dict[str, Any]:
+                        *, target_override: int | None = None,
+                        protocol: ScopedSummaryProtocol = LEGACY_SCOPED) -> dict[str, Any]:
     from .narrative_model import ModelResponseError
     if max_output_tokens is not None and (type(max_output_tokens) is not int or max_output_tokens <= 0):
         raise ModelResponseError('model output budget must be a positive integer')
     # Ask for fewer than the hard cap so a model that overshoots by a clause or
     # two still lands inside the contract instead of dead-lettering the item.
-    target = min(MAX_SUMMARY_CLAIMS - 4, max(1, task_count))
+    target = (min(MAX_SUMMARY_CLAIMS,max(1,task_count*2)) if protocol.assess_fidelity
+              else min(MAX_SUMMARY_CLAIMS - 4, max(1, task_count)))
     if target_override is not None:
         target = max(1, min(target, int(target_override)))
     if max_output_tokens is not None:
@@ -128,7 +158,8 @@ def _scoped_output_plan(task_count: int, max_output_tokens: int | None = None,
     return {'max_claims': MAX_SUMMARY_CLAIMS, 'target_claim_count': target, 'target_text_chars': 240,
         # The response schema can only bound each task array; this is the hard
         # per-task share of the global cap the decoder actually enforces.
-        'max_claims_per_task': 2,
+        'max_claims_per_task': (min(6,max(2,MAX_SUMMARY_CLAIMS//max(1,task_count)))
+                                if protocol.assess_fidelity else 2),
         'configured_output_tokens': max_output_tokens, 'coverage': 'selected_source_tasks_only',
         'planning': 'soft_target_within_existing_caps'}
 
@@ -143,9 +174,10 @@ class ScopedModelRequest(_LegacyModelRequest):
         from .narrative_model import ModelResponseError
         try:
             envelope = json.loads(self.data_json)
-            if envelope['schema_version'] != SCOPED_REQUEST_SCHEMA:
+            protocol = scoped_protocol_for_prompt(self.prompt_version)
+            if envelope['schema_version'] != protocol.request_schema:
                 raise ModelResponseError('MODEL_REQUEST_INVALID')
-            plan = _scoped_output_plan(envelope['material']['available_task_count'], max_output_tokens)
+            plan = _scoped_output_plan(envelope['material']['available_task_count'], max_output_tokens,protocol=protocol)
         except (ValueError, KeyError, TypeError) as exc:
             raise ModelResponseError('MODEL_REQUEST_INVALID') from exc
         if envelope.get('output_plan') == plan:
@@ -156,14 +188,17 @@ class ScopedModelRequest(_LegacyModelRequest):
 
 
 def build_scoped_request(selected: NarrativeSelectResult, *, only_tasks=None,
-                         target_claims: int | None = None) -> ScopedModelRequest:
+                         target_claims: int | None = None,
+                         protocol: ScopedSummaryProtocol = LEGACY_SCOPED) -> ScopedModelRequest:
     from . import narrative_model as legacy
     if selected.reading_context is None:
         raise legacy.ModelResponseError('READING_MODEL_CONTEXT_UNAVAILABLE')
     # The task-plan binding keeps its original twenty-claim marker for wire
     # compatibility; the effective summary budget is output_plan.max_claims
     # (MAX_SUMMARY_CLAIMS) and the decoder enforces the same number.
-    view = compile_scoped_model_view(selected, max_claims=20)
+    if protocol.assess_fidelity and (only_tasks is not None or target_claims is not None):
+        raise legacy.ModelResponseError('MODEL_REQUEST_INVALID')
+    view = compile_scoped_model_view(selected, max_claims=protocol.plan_max_claims)
     if only_tasks is not None:
         visible = [task for task in view.model_tasks if task.key in only_tasks]
         if not visible:
@@ -173,20 +208,21 @@ def build_scoped_request(selected: NarrativeSelectResult, *, only_tasks=None,
         raise legacy.ModelResponseError('SUMMARY_INPUT_UNAVAILABLE')
     aliases = ['r' + str(i) for i in range(1, len(selected.reading_context['groups']) + 1)]
     strategy = legacy._reading_model_context(selected.reading_context, aliases,
-                                             version=SCOPED_MODEL_PROJECTION_VERSION)
+                                             version=protocol.projection)
     strategy.pop('groups')
-    envelope = {'schema_version': SCOPED_REQUEST_SCHEMA,
+    envelope = {'schema_version': protocol.request_schema,
         'subject' if selected.subject.kind == 'official_json' else 'source': {
             'language': selected.source_metadata.language, 'title': selected.source_metadata.title,
             'document_kind': selected.source_metadata.document_kind},
         'material': view.to_model_dict(), 'reading_strategy': strategy,
         'output_plan': (plan := _scoped_output_plan(
             len(view.model_tasks),
-            target_override=target_claims)),
+            target_override=target_claims,protocol=protocol)),
         'response_schema': scoped_response_schema(plan['max_claims_per_task'])}
     data_json = canonical_json(envelope)
-    return ScopedModelRequest(SCOPED_PROMPT_VERSION, SCOPED_INSTRUCTION, data_json,
-        canonical_json_hash({'prompt_version': SCOPED_PROMPT_VERSION, 'instruction': SCOPED_INSTRUCTION,
+    instruction = FIDELITY_INSTRUCTION if protocol.assess_fidelity else SCOPED_INSTRUCTION
+    return ScopedModelRequest(protocol.prompt, instruction, data_json,
+        canonical_json_hash({'prompt_version': protocol.prompt, 'instruction': instruction,
             'data_json': data_json, 'task_binding': view.to_binding(), 'subject': selected.subject.to_dict(),
             'selection': selected.selection.to_dict()}))
 
@@ -209,7 +245,8 @@ def _clause_object(raw: Any) -> dict[str, Any] | None:
     return None
 
 
-def decode_scoped_draft(response, *, selected: NarrativeSelectResult) -> dict[str, Any]:
+def decode_scoped_draft(response, *, selected: NarrativeSelectResult,
+                        protocol: ScopedSummaryProtocol = LEGACY_SCOPED) -> dict[str, Any]:
     """Recover whole local clauses, never repair IDs or authorize their prose."""
     from company_wiki.source_catalog.narrative_evidence import (
         SummaryValidationError, project_summary_claim_quality, summary_claim_type_for_roles,
@@ -217,7 +254,7 @@ def decode_scoped_draft(response, *, selected: NarrativeSelectResult) -> dict[st
     )
     from . import narrative_model as legacy
     from .narrative_contracts import NarrativeContractError, _claim_from_dict, _claim_to_dict, assert_no_physical_paths
-    if response.prompt_version != SCOPED_PROMPT_VERSION:
+    if response.prompt_version != protocol.prompt:
         raise legacy.ModelResponseError('model response prompt version differs from request')
     if selected.reading_context is None:
         raise legacy.ModelResponseError('READING_MODEL_CONTEXT_UNAVAILABLE')
@@ -242,10 +279,11 @@ def decode_scoped_draft(response, *, selected: NarrativeSelectResult) -> dict[st
     count = sum(len(rows) for rows in tasks.values())
     if count > MAX_SUMMARY_CLAIMS:
         raise NarrativeContractError('summary claims exceed forty')
-    per_task_cap = _scoped_output_plan(len(tasks))['max_claims_per_task']
+    view = compile_scoped_model_view(selected, max_claims=MAX_SUMMARY_CLAIMS)
+    per_task_cap = _scoped_output_plan(len(view.model_tasks) if protocol.assess_fidelity else len(tasks),
+                                      protocol=protocol)['max_claims_per_task']
     if any(len(rows) > per_task_cap for rows in tasks.values()):
         raise NarrativeContractError('scoped task clauses exceed per-task cap')
-    view = compile_scoped_model_view(selected, max_claims=MAX_SUMMARY_CLAIMS)
     if set(tasks) - {task.key for task in view.plan.tasks}:
         raise legacy.ModelCitationError('scoped draft references an unknown source task')
     known = {span.span_id: span for span in selected.evidence_spans}
@@ -292,8 +330,18 @@ def decode_scoped_draft(response, *, selected: NarrativeSelectResult) -> dict[st
     identity = ({'subject_id': selected.subject.item_key, 'subject_sha256': selected.subject.subject_sha256}
                 if selected.subject.kind == 'official_json' else
                 {'source_id': selected.source_ref.source_id, 'source_sha256': selected.source_ref.content_sha256})
+    wire_claims = [_claim_to_dict(claim) for claim in claims]
+    if protocol.assess_fidelity:
+        from .narrative_summary_assessment import assess_summary
+        report = assess_summary(selected,wire_claims,plan_max_claims=protocol.plan_max_claims,
+                                requested_task_keys=[task.key for task in view.model_tasks])
+        for claim in wire_claims:
+            if claim['claim_id'] in report['diagnostic_claim_ids']:
+                claim['needs_review'] = True
+        if report['diagnostic_count'] or not report['requested_emission_complete']:
+            status = 'needs_review'
     return {**identity, 'language': selected.source_metadata.language,
-            'claims': [_claim_to_dict(claim) for claim in claims], 'status': status}
+            'claims': wire_claims, 'status': status}
 
 
 @dataclass(frozen=True)
@@ -415,9 +463,13 @@ class ScopedModelView:
 
 def compile_scoped_model_view(selected: NarrativeSelectResult, *, max_claims: int) -> ScopedModelView:
     """Compile a transient view of this pinned selection, with no extra IO."""
-    plan = build_summary_task_plan(selected.evidence_spans,
-                                   reading_context=selected.reading_context, max_claims=max_claims)
-    known = {span.span_id: span for span in selected.evidence_spans}
+    return compile_scoped_material_view(selected.evidence_spans,selected.reading_context,max_claims=max_claims)
+
+
+def compile_scoped_material_view(evidence_spans, reading_context, *, max_claims: int) -> ScopedModelView:
+    """The same compiler for an already validated selection or public bundle."""
+    plan = build_summary_task_plan(evidence_spans,reading_context=reading_context,max_claims=max_claims)
+    known = {span.span_id: span for span in evidence_spans}
     cards = tuple(source_cards(plan, known))
     admission = source_task_admission(cards)
     return ScopedModelView(plan,

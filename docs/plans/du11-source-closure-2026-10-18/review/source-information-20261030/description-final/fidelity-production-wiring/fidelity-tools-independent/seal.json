@@ -1,0 +1,31 @@
+{
+  "schema_version": "fidelity-tools-independent-seal/1",
+  "status": "PASS_SCOPED_TEST_TOOL_ENGINEERING",
+  "sealed_at": "2026-10-30T11:28:51.398118+00:00",
+  "files": [
+    {
+      "path": "tools/document_understanding_benchmark/phase_c_runner.py",
+      "bytes": 96117,
+      "raw_sha256": "aa7342d6bdcbc9dc0a98a091b86cb3c52f9ed0a0b942f4f0882ad69cdf7029b0",
+      "lf_sha256": "aa7342d6bdcbc9dc0a98a091b86cb3c52f9ed0a0b942f4f0882ad69cdf7029b0"
+    },
+    {
+      "path": "tools/document_understanding_benchmark/phase_c_observer.py",
+      "bytes": 26117,
+      "raw_sha256": "0f0cd667f85fe644d283a2b45f7a952cd5626239faafea884a6fad4da06bc092",
+      "lf_sha256": "d1add86eb1030bc10dfda62f1a84dfe5898864447109ac3c810ddd255cc053b9"
+    },
+    {
+      "path": "tests/test_phase_c_extractive.py",
+      "bytes": 16628,
+      "raw_sha256": "338f6991228d0468b1fd3e106d6245f0cc6aa649d779d9cfda5deb9fea670a82",
+      "lf_sha256": "3c8085e849f9e29faea9173f6159af4559fd2365a808cea274a6c1ba836d6515"
+    },
+    {
+      "path": "tests/unit/test_phase_c_registered_consumer.py",
+      "bytes": 7407,
+      "raw_sha256": "a8b0316588237e87cde923367f27e9e3645f9c081433047587009c206a68c1c6",
+      "lf_sha256": "a8b0316588237e87cde923367f27e9e3645f9c081433047587009c206a68c1c6"
+    }
+  ]
+}

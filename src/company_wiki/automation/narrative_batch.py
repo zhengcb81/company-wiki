@@ -1473,8 +1473,10 @@ def _paid_summary_recovery_candidates(binding, run, jobs, runs):
     """
     from .narrative_model_scoped import SCOPED_MODEL_PROJECTION_VERSION, SCOPED_PROMPT_VERSION
     from .narrative_model_extractive import EXTRACTIVE_MODEL_PROJECTION_VERSION, EXTRACTIVE_PROMPT_VERSION
+    from .narrative_summary_protocols import FIDELITY_SCOPED
     from .narrative_paid_response import PaidResponsePin, PaidResponseError
     recoverable_protocols = {
+        FIDELITY_SCOPED.projection:FIDELITY_SCOPED.prompt,
         SCOPED_MODEL_PROJECTION_VERSION: SCOPED_PROMPT_VERSION,
         EXTRACTIVE_MODEL_PROJECTION_VERSION: EXTRACTIVE_PROMPT_VERSION,
     }
@@ -2129,11 +2131,11 @@ def _receipt(run_id, status, documents, runs, guard):
 
 def _attempt_model_diagnostics(store, reservations, summary_job):
     """Read optional observed meters; old receipts keep their original shape."""
-    from .narrative_summary_execution import extract_summary_execution
+    from .narrative_summary_execution import extract_summary_execution, SUMMARY_EXECUTION_MARKERS
     observations = []
     for attempt in store.list_attempts(summary_job.job_id):
         raw = attempt.result_json
-        if raw is None or not any(field in raw for field in ('"reasoning_tokens":', '"usage_diagnostic":', '"failed_final":', '"execution"', '"narrative-summary-execution/1"')):
+        if raw is None or not any(field in raw for field in ('"reasoning_tokens":', '"usage_diagnostic":', '"failed_final":', '"execution"', *SUMMARY_EXECUTION_MARKERS)):
             continue
         try:
             parsed = HandlerResult.from_dict(json.loads(raw))

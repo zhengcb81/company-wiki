@@ -1,0 +1,54 @@
+{
+  "mode": "apply",
+  "schema": "rf-install-result/1",
+  "selected": [
+    "scripts/company_wiki_narrative_contracts.py",
+    "scripts/narrative_summary_observations.py",
+    "scripts/source_narrative_context.py"
+  ],
+  "status": "completed",
+  "targets": [
+    {
+      "conflicts": [],
+      "destination": "C:\\Users\\\u90d1\u66fe\u6ce2\\.agents\\skills",
+      "drifted": [],
+      "failed": [],
+      "remaining_selected_drift": 0,
+      "remaining_unselected_drift": 0,
+      "selected": [
+        "scripts/company_wiki_narrative_contracts.py",
+        "scripts/narrative_summary_observations.py",
+        "scripts/source_narrative_context.py"
+      ],
+      "status": "completed",
+      "target": "C:\\Users\\\u90d1\u66fe\u6ce2\\.agents\\skills\\revenue-forecast",
+      "unchanged": [],
+      "written": [
+        "scripts/company_wiki_narrative_contracts.py",
+        "scripts/narrative_summary_observations.py",
+        "scripts/source_narrative_context.py"
+      ]
+    },
+    {
+      "conflicts": [],
+      "destination": "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\skills",
+      "drifted": [],
+      "failed": [],
+      "remaining_selected_drift": 0,
+      "remaining_unselected_drift": 0,
+      "selected": [
+        "scripts/company_wiki_narrative_contracts.py",
+        "scripts/narrative_summary_observations.py",
+        "scripts/source_narrative_context.py"
+      ],
+      "status": "completed",
+      "target": "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\skills\\revenue-forecast",
+      "unchanged": [],
+      "written": [
+        "scripts/company_wiki_narrative_contracts.py",
+        "scripts/narrative_summary_observations.py",
+        "scripts/source_narrative_context.py"
+      ]
+    }
+  ]
+}

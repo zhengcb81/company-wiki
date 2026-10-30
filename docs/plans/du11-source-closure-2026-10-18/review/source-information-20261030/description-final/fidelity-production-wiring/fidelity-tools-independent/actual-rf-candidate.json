@@ -1,0 +1,13 @@
+{
+  "status": "PASS",
+  "valid_download_events": 0,
+  "type": "int",
+  "negative_shapes_rejected": [
+    "list:[]",
+    "bool:False",
+    "str:'0'",
+    "float:0.0",
+    "NoneType:None",
+    "int:1"
+  ]
+}

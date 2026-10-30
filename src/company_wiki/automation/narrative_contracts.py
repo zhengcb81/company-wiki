@@ -43,6 +43,8 @@ SUMMARY_RESULT_SCHEMA = "narrative-summary-result/2.0"
 PROJECTED_SUMMARY_RESULT_SCHEMA = "narrative-summary-result/3.0"
 BUNDLE_SCHEMA = "narrative-bundle/2.0"
 PROJECTED_BUNDLE_SCHEMA = "narrative-bundle/3.0"
+ASSESSED_BUNDLE_SCHEMA = "narrative-bundle/2.1"
+ASSESSED_PROJECTED_BUNDLE_SCHEMA = "narrative-bundle/3.1"
 SELECT_RESULT_MAX_BYTES = 1024 * 1024
 SUMMARY_RESULT_MAX_BYTES = 64 * 1024
 BUNDLE_MAX_BYTES = 1280 * 1024
@@ -2030,6 +2032,7 @@ class NarrativeBundle:
     encoded_size: int
     subject_binding: NarrativeSubject | None = None
     reading_context: Mapping[str, Any] | None = None
+    summary_assessment: Mapping[str,Any] | None = None
 
     @classmethod
     def from_dict(cls, value: object) -> "NarrativeBundle":
@@ -2051,8 +2054,12 @@ class NarrativeBundle:
         }
         projected = (
             isinstance(value, Mapping)
-            and value.get("schema_version") == PROJECTED_BUNDLE_SCHEMA
+            and value.get("schema_version") in {PROJECTED_BUNDLE_SCHEMA,ASSESSED_PROJECTED_BUNDLE_SCHEMA}
         )
+        assessed = isinstance(value,Mapping) and value.get('schema_version') in {
+            ASSESSED_BUNDLE_SCHEMA,ASSESSED_PROJECTED_BUNDLE_SCHEMA}
+        if assessed:
+            keys.add('summary_assessment')
         if projected:
             keys = (
                 keys
@@ -2066,7 +2073,8 @@ class NarrativeBundle:
         if isinstance(value, Mapping) and "reading_context" in value:
             keys.add("reading_context")
         item = _exact(value, keys, "narrative bundle")
-        if item["schema_version"] not in {BUNDLE_SCHEMA, PROJECTED_BUNDLE_SCHEMA}:
+        if item["schema_version"] not in {BUNDLE_SCHEMA, PROJECTED_BUNDLE_SCHEMA,
+                                          ASSESSED_BUNDLE_SCHEMA,ASSESSED_PROJECTED_BUNDLE_SCHEMA}:
             raise NarrativeContractError("unsupported narrative bundle schema")
         quality = _text(item["quality_status"], "quality_status")
         if quality not in _QUALITY_STATUSES:
@@ -2106,6 +2114,8 @@ class NarrativeBundle:
             subject,
         )
         object.__setattr__(result, "reading_context", _reading_context(item.get("reading_context"), result.evidence_spans))
+        if assessed:
+            object.__setattr__(result,'summary_assessment',_freeze_json(item['summary_assessment']))
         result._validate()
         cap = (
             SKIP_BUNDLE_MAX_BYTES
@@ -2117,6 +2127,33 @@ class NarrativeBundle:
         return result
 
     def _validate(self) -> None:
+        from .narrative_summary_protocols import summary_bundle_format, FIDELITY_SCOPED
+        recipe=summary_bundle_format(self.summary.model.prompt_version if self.summary.model else self.versions.prompt)
+        expected_schema=recipe.projected_schema if self.subject_binding is not None else recipe.raw_schema
+        if self.schema_version!=expected_schema:
+            raise NarrativeContractError('bundle schema differs from its summary protocol')
+        if recipe.assessed and self.summary.model is None:
+            if (self.summary.status!='summary_not_needed' or self.summary.draft is not None
+                    or self.summary_assessment is not None or self.quality_status!='skipped_no_narrative'
+                    or self.versions.model is not None or self.versions.bundle_producer!=recipe.producer):
+                raise NarrativeContractError('assessed skip bundle contains model or assessment')
+        elif recipe.assessed:
+            from .narrative_summary_assessment import validate_assessment_material, validate_assessment_quality
+            if (self.versions.bundle_producer!=recipe.producer or self.summary.draft is None
+                    or self.summary.model is None):
+                raise NarrativeContractError('assessed bundle producer or summary is invalid')
+            try:
+                report=validate_assessment_material(self.summary_assessment,self.evidence_spans,self.reading_context,
+                    self.summary.to_dict()['draft']['claims'],plan_max_claims=FIDELITY_SCOPED.plan_max_claims)
+                validate_assessment_quality(report,self.summary.to_dict()['draft']['claims'],self.summary.draft.status)
+                if (self.versions.prompt!=self.summary.model.prompt_version
+                        or self.versions.model!=self.summary.model.model_id
+                        or self.quality_status!=('needs_review' if self.summary.draft.status=='needs_review' else 'verified')):
+                    raise ValueError('assessed bundle version/quality differs from summary')
+            except (ValueError,TypeError,KeyError) as exc:
+                raise NarrativeContractError('invalid bundle summary assessment') from exc
+        elif self.summary_assessment is not None:
+            raise NarrativeContractError('legacy bundle cannot contain summary assessment')
         if self.subject_binding is not None:
             _validate_projection_evidence(
                 self.subject_binding, self.evidence_spans, self.selection
@@ -2227,6 +2264,8 @@ class NarrativeBundle:
         }
         if self.reading_context is not None:
             value["reading_context"] = _to_plain(self.reading_context)
+        if self.schema_version in {ASSESSED_BUNDLE_SCHEMA,ASSESSED_PROJECTED_BUNDLE_SCHEMA}:
+            value['summary_assessment']=_to_plain(self.summary_assessment)
         return _subject_wire(
             value,
             self.subject_binding,

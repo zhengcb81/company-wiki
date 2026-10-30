@@ -713,95 +713,124 @@ def consumers(root, output, env, catalog_config, descriptor, narrative_request, 
     write_json(narrative_file, narrative_request)
     offline = {**env, "CWP_PHASE_C_NO_NETWORK": "1"}
     results = []
-    code, value, stderr, _ = _cli(
-        root,
-        output,
-        "ff-reuse",
-        [
-            sys.executable,
-            "-B",
-            "-X",
-            "utf8",
-            str(ff / "scripts/fetch_filing.py"),
-            "--config",
-            str(connection),
-            "--request-file",
-            str(filing_request),
-            "--source-ref-v2",
-        ],
-        offline,
-        timeout=90,
-    )
-    results.append({"consumer": "filing-fetch", "exit": code, "receipt": value})
-    assert code == 0 and value["downloads"] == 0
-    code, value, stderr, _ = _cli(
-        root,
-        output,
-        "rf-source",
-        [
-            sys.executable,
-            "-B",
-            "-X",
-            "utf8",
-            str(rf / "scripts/source_preparation.py"),
-            "--request-file",
-            str(filing_request),
-            "--company-wiki-config",
-            str(connection),
-            "--company-wiki-catalog-config",
-            str(catalog_config),
-            "--filing-fetch-root",
-            str(ff),
-            "--result-envelope",
-            "--narrative-request-file",
-            str(narrative_file),
-            "--timeout-seconds",
-            "90",
-        ],
-        offline,
-        timeout=100,
-    )
-    results.append({"consumer": "RF-source+narrative", "exit": code, "receipt": value})
-    if code != 0:
+    if descriptor["fiscal_year"] is None:
+        # The caller already holds the exact registered SourceRef. Unknown
+        # fiscal periods are not "latest" and need no provider discovery.
         ref = narrative_request["narrative_ref"]["source_ref"]
-        reader_code, _, reader_stderr, reader_body = _cli(
+        candidate = {key: descriptor.get(key) for key in
+                     ("document_kind", "fiscal_year", "fiscal_period")}
+        candidate.update(status="source_candidate", source_ref=ref,
+                         byte_verification="pending_verified_open",
+                         resolution_outcome="reused_existing", download_events=0)
+        script = (
+            "import json,sys; from pathlib import Path; "
+            "sys.path.insert(0,sys.argv[1]); "
+            "from source_preparation import prepare_registered_source_result; "
+            "r=json.load(sys.stdin); "
+            "v=prepare_registered_source_result(r['candidate'],as_of_date=r['as_of_date'],"
+            "company_wiki_catalog_config=Path(r['config']),source_reader_receipt_version='2.2'); "
+            "print(json.dumps(v,ensure_ascii=False))"
+        )
+        code, value, stderr, _ = _cli(
+            root, output, "rf-registered-source",
+            [sys.executable, "-B", "-X", "utf8", "-c", script, str(rf / "scripts")],
+            offline, {"candidate": candidate, "as_of_date": request["as_of_date"],
+                      "config": str(catalog_config)}, timeout=90,
+        )
+        results.append({"consumer": "filing-fetch", "status": "NOT_REQUESTED_ALREADY_REGISTERED",
+                        "reason": "exact SourceRef read; no fiscal/latest discovery requested", "downloads": 0})
+        results.append({"consumer": "RF-registered-source", "exit": code, "receipt": value})
+        assert code == 0 and value["filing_fetch"] is None
+    else:
+        code, value, stderr, _ = _cli(
             root,
             output,
-            "rf-source-failure-public-reader",
+            "ff-reuse",
             [
                 sys.executable,
                 "-B",
                 "-X",
                 "utf8",
-                "-m",
-                "company_wiki.source_catalog.source_reader_cli",
+                str(ff / "scripts/fetch_filing.py"),
                 "--config",
-                str(catalog_config),
-                "--document-id",
-                ref["document_id"],
-                "--source-id",
-                ref["source_id"],
-                "--content-sha256",
-                ref["content_sha256"],
-                "--purpose",
-                "filing_reuse",
+                str(connection),
+                "--request-file",
+                str(filing_request),
+                "--source-ref-v2",
             ],
             offline,
             timeout=90,
-            compact_stdout=True,
-            parse_json=False,
         )
-        write_json(
-            output / "rf-source-failure-diagnostic.json",
-            {
-                "public_reader_exit": reader_code,
-                "public_reader_receipt": json.loads(reader_stderr),
-                "body_sha256": hashlib.sha256(reader_body).hexdigest(),
-                "body_bytes": len(reader_body),
-            },
+        results.append({"consumer": "filing-fetch", "exit": code, "receipt": value})
+        assert code == 0 and value["downloads"] == 0
+        code, value, stderr, _ = _cli(
+            root,
+            output,
+            "rf-source",
+            [
+                sys.executable,
+                "-B",
+                "-X",
+                "utf8",
+                str(rf / "scripts/source_preparation.py"),
+                "--request-file",
+                str(filing_request),
+                "--company-wiki-config",
+                str(connection),
+                "--company-wiki-catalog-config",
+                str(catalog_config),
+                "--filing-fetch-root",
+                str(ff),
+                "--result-envelope",
+                "--narrative-request-file",
+                str(narrative_file),
+                "--timeout-seconds",
+                "90",
+            ],
+            offline,
+            timeout=100,
         )
-    assert code == 0 and value["filing_fetch"]["downloads"] == 0
-    assert value["narrative"]["narrative_ref"] == narrative_request["narrative_ref"]
+        results.append({"consumer": "RF-source+narrative", "exit": code, "receipt": value})
+        if code != 0:
+            ref = narrative_request["narrative_ref"]["source_ref"]
+            reader_code, _, reader_stderr, reader_body = _cli(
+                root,
+                output,
+                "rf-source-failure-public-reader",
+                [
+                    sys.executable,
+                    "-B",
+                    "-X",
+                    "utf8",
+                    "-m",
+                    "company_wiki.source_catalog.source_reader_cli",
+                    "--config",
+                    str(catalog_config),
+                    "--document-id",
+                    ref["document_id"],
+                    "--source-id",
+                    ref["source_id"],
+                    "--content-sha256",
+                    ref["content_sha256"],
+                    "--purpose",
+                    "filing_reuse",
+                ],
+                offline,
+                timeout=90,
+                compact_stdout=True,
+                parse_json=False,
+            )
+            write_json(
+                output / "rf-source-failure-diagnostic.json",
+                {
+                    "public_reader_exit": reader_code,
+                    "public_reader_receipt": json.loads(reader_stderr),
+                    "body_sha256": hashlib.sha256(reader_body).hexdigest(),
+                    "body_bytes": len(reader_body),
+                },
+            )
+        assert code == 0 and value["filing_fetch"]["downloads"] == 0
+        assert value["narrative"]["narrative_ref"] == narrative_request["narrative_ref"]
     code, value, stderr, _ = _cli(
         root,
         output,
@@ -830,6 +859,10 @@ def consumers(root, output, env, catalog_config, descriptor, narrative_request, 
     assert value["reading_context"] == expected_bundle["reading_context"]
     assert value["evidence_spans"] == expected_bundle["evidence_spans"]
     assert value["summary"] == expected_bundle["summary"]
+    if "summary_assessment" in expected_bundle:
+        assert "summary_assessment" in value
+        assert value["summary_assessment"] == expected_bundle["summary_assessment"]
+        results[-1]["summary_assessment_preserved"] = True
     assert value["read_receipt"]["replay_status"] == "verified"
     results[-1]["historical_exact_ref_full_context_verified"] = True
     return results
@@ -848,11 +881,13 @@ def selector_versions(value: str | None) -> tuple[str, ...]:
 
 
 def reading_projection_for(selector_version: str, requested: str | None) -> str | None:
-    """One runner boundary: v4 scoped-summary production path; explicit v5 remains."""
+    """One runner boundary: legacy v4 default; v5 and assessed v6 are explicit."""
     from company_wiki.automation.narrative_model_extractive import EXTRACTIVE_MODEL_PROJECTION_VERSION
     from company_wiki.automation.narrative_model_scoped import SCOPED_MODEL_PROJECTION_VERSION
+    from company_wiki.automation.narrative_summary_protocols import FIDELITY_SCOPED
 
-    if requested not in {None, SCOPED_MODEL_PROJECTION_VERSION, EXTRACTIVE_MODEL_PROJECTION_VERSION}:
+    if requested not in {None, SCOPED_MODEL_PROJECTION_VERSION, EXTRACTIVE_MODEL_PROJECTION_VERSION,
+                         FIDELITY_SCOPED.projection}:
         raise ValueError("unsupported phase C reading model projection")
     return (requested or SCOPED_MODEL_PROJECTION_VERSION) if selector_version == "0.9.0" else None
 
@@ -868,13 +903,21 @@ def successful_model_observation(receipt, native, events, materials: Path, run_i
     from company_wiki.automation.narrative_model import MODEL_RESPONSE_MAX_BYTES
     from company_wiki.automation.narrative_summary_execution import extract_summary_execution
     from company_wiki.automation.narrative_model_extractive import EXTRACTIVE_MODEL_PROJECTION_VERSION
+    from company_wiki.automation.narrative_summary_assessment import ASSESSMENT_SCHEMA
+    from company_wiki.automation.narrative_summary_protocols import FIDELITY_SCOPED
 
     executions = [extract_summary_execution({"schema_version": "narrative-terminal-receipt/1.0", "execution": item["execution"]})
                   for document in receipt.get("documents", [])
                   for item in document.get("model_diagnostics", []) if "execution" in item]
     if reading_model_projection == EXTRACTIVE_MODEL_PROJECTION_VERSION and not executions:
         raise ValueError("PHASE_C_EXTRACTIVE_EXECUTION_NOT_OBSERVED")
-    execution = executions[-1] if executions else None
+    fidelity = reading_model_projection == FIDELITY_SCOPED.projection
+    if fidelity and (not executions or any(
+        report["schema_version"] != ASSESSMENT_SCHEMA for report in executions
+    )):
+        raise ValueError("PHASE_C_FIDELITY_ASSESSMENT_NOT_OBSERVED")
+    assessment = executions[-1] if fidelity else None
+    execution = executions[-1] if executions and not fidelity else None
     audit = None if execution is None else {
         "schema_version": execution["schema_version"], "plan_sha256": execution["plan_sha256"],
         "report_sha256": canonical_json_hash(execution), "task_count": len(execution["tasks"]),
@@ -912,7 +955,25 @@ def successful_model_observation(receipt, native, events, materials: Path, run_i
             raise ValueError("PHASE_C_CAPTURE_IDENTITY_DIFFERS")
         captures.append({"attempt_id": record["attempt_id"], "status": "CAPTURED_AND_NATIVE_HASH_MATCHED",
                          "sha256": sha, "bytes": len(raw), "usage_status": record["usage_status"]})
-    return {"source_card_execution": audit, "paid_response_capture": captures}
+    result = {"source_card_execution": audit, "paid_response_capture": captures}
+    if assessment is not None:
+        # This is program-owned emission/diagnostic metadata, not the old
+        # extractive source-card report and never a semantic-quality verdict.
+        result["summary_assessment_observation"] = {
+            key: assessment[key] for key in (
+                "schema_version", "source_plan_sha256", "claims_sha256",
+                "source_admitted_task_keys", "requested_task_keys", "emitted_task_keys",
+                "missing_requested_task_keys", "budget_deferred_task_keys",
+                "requested_emission_complete", "admitted_emission_complete",
+                "diagnostic_count", "diagnostics_limited", "diagnostic_claim_ids",
+                "semantic_status", "subfact_coverage_status",
+            )
+        }
+        result["summary_assessment_observation"].update(
+            report_sha256=canonical_json_hash(assessment),
+            report_origin="native_batch_receipt.model_diagnostics.execution",
+        )
+    return result
 
 def run_pair(
     sample,
@@ -1662,7 +1723,7 @@ def loopback_draft(material, *, invalid_summary=False):
         return {"decisions": [{"task": task["key"],
             "priority": "invalid" if invalid_summary else "normal",
             "disposition": "consider"} for task in material["material"]["tasks"]]}
-    if material["schema_version"] == "narrative-model-request/5":
+    if material["schema_version"] in {"narrative-model-request/5", "narrative-model-request/7"}:
         view = material["material"]
         task = view["tasks"][0]
         support = task.get("support_parts", view["task_defaults"]["support_parts"])
@@ -1785,9 +1846,9 @@ def argument_parser() -> argparse.ArgumentParser:
                         help="New owned receipt directory; existing outputs are never replaced.")
     parser.add_argument("--consumer-projects", type=Path,
                         help="Explicit sibling FF/RF checkout root; omission records consumers NOT_RUN.")
-    parser.add_argument("--reading-model-projection", choices=("reading-model-input/4", "reading-model-input/5"),
+    parser.add_argument("--reading-model-projection", choices=("reading-model-input/4", "reading-model-input/5", "reading-model-input/6"),
                         default="reading-model-input/4",
-                        help="Selector 0.9 uses v4 task-scoped summaries by default; v5 is explicit ranking compatibility.")
+                        help="Selector 0.9 defaults to legacy v4; v5 ranking and v6 assessed fidelity are explicit.")
     parser.add_argument("--source-mode", choices=("isolated-copy", "registered_readonly"), default="isolated-copy",
                         help="Keep the historical local import, or register existing roots without copying raw bytes.")
     parser.add_argument("--source-catalog-config", type=Path,

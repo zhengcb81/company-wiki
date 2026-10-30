@@ -23,6 +23,8 @@ from .narrative_contracts import (
 from .terminal_receipt_contracts import is_terminal_receipt
 
 INTERNAL_SCHEMA = "narrative-summary-execution/1"
+ASSESSED_INTERNAL_SCHEMA = "narrative-summary-execution/2"
+SUMMARY_EXECUTION_MARKERS = tuple(json.dumps(schema) for schema in (INTERNAL_SCHEMA,ASSESSED_INTERNAL_SCHEMA))
 EXECUTION_SCHEMA = "source-extractive-execution/1"
 EXECUTION_MAX_BYTES = 32 * 1024
 _REPORT_KEYS = {
@@ -266,6 +268,18 @@ def _bind_summary(
 
 
 def wrap_summary(summary: NarrativeSummaryResult, execution: Mapping) -> dict[str, Any]:
+    from .narrative_summary_assessment import ASSESSMENT_SCHEMA, validate_assessment_wire, validate_assessment_quality
+    if execution.get('schema_version')==ASSESSMENT_SCHEMA:
+        from .narrative_summary_protocols import FIDELITY_SCOPED
+        _require(summary.model is not None and summary.model.prompt_version==FIDELITY_SCOPED.prompt
+                 and summary.draft is not None,'assessment requires its explicit summary protocol')
+        assert summary.draft is not None
+        try:
+            report=validate_assessment_wire(execution,summary.to_dict()['draft']['claims'])
+            validate_assessment_quality(report,summary.to_dict()['draft']['claims'],summary.draft.status)
+        except (ValueError,TypeError,KeyError) as exc:
+            raise NarrativeContractError('invalid summary assessment wrapper') from exc
+        return {'schema_version':ASSESSED_INTERNAL_SCHEMA,'summary':summary.to_dict(),'assessment':report}
     _require(
         isinstance(summary, NarrativeSummaryResult),
         "wrapper requires a canonical typed summary",
@@ -284,21 +298,45 @@ def wrap_summary(summary: NarrativeSummaryResult, execution: Mapping) -> dict[st
 def parse_summary_job_result(
     value: object, *, selected: NarrativeSelectResult | None = None
 ) -> NarrativeSummaryResult:
+    if isinstance(value,Mapping) and value.get('schema_version')==ASSESSED_INTERNAL_SCHEMA:
+        from .narrative_summary_protocols import FIDELITY_SCOPED
+        from .narrative_summary_assessment import validate_assessment_wire, validate_assessment_material, validate_assessment_quality
+        _require(set(value)=={'schema_version','summary','assessment'},'invalid assessed summary wrapper fields')
+        summary=NarrativeSummaryResult.from_dict(value['summary'])
+        _require(summary.model is not None and summary.model.prompt_version==FIDELITY_SCOPED.prompt
+                 and summary.draft is not None,'assessment requires its explicit summary protocol')
+        assert summary.draft is not None
+        claims=summary.to_dict()['draft']['claims']
+        try:
+            if selected is None:
+                report=validate_assessment_wire(value['assessment'],claims)
+            else:
+                summary.validate_against(selected)
+                report=validate_assessment_material(value['assessment'],selected.evidence_spans,selected.reading_context,
+                    claims,plan_max_claims=FIDELITY_SCOPED.plan_max_claims)
+            validate_assessment_quality(report,claims,summary.draft.status)
+        except (ValueError,TypeError,KeyError) as exc:
+            raise NarrativeContractError('invalid assessed summary wrapper') from exc
+        return summary
     if isinstance(value, Mapping) and value.get("schema_version") == INTERNAL_SCHEMA:
         _require(
             set(value) == {"schema_version", "summary", "execution"},
             "summary execution wrapper fields are invalid",
         )
         summary = NarrativeSummaryResult.from_dict(value["summary"])
+        from .narrative_summary_protocols import FIDELITY_SCOPED
+        _require(summary.model is None or summary.model.prompt_version!=FIDELITY_SCOPED.prompt,
+                 'assessed protocol requires its assessment wrapper')
         report = _report(value["execution"])
         _bind_summary(summary, report, selected)
         return summary
     summary = NarrativeSummaryResult.from_dict(value)
     from .narrative_model_extractive import EXTRACTIVE_PROMPT_VERSION
+    from .narrative_summary_protocols import FIDELITY_SCOPED
 
     _require(
         summary.model is None
-        or summary.model.prompt_version != EXTRACTIVE_PROMPT_VERSION,
+        or summary.model.prompt_version not in {EXTRACTIVE_PROMPT_VERSION,FIDELITY_SCOPED.prompt},
         "source-extractive job result requires its execution wrapper",
     )
     if selected is not None:
@@ -309,9 +347,22 @@ def parse_summary_job_result(
 def extract_summary_execution(value: object) -> dict[str, Any] | None:
     if not isinstance(value, Mapping):
         return None
+    if value.get('schema_version')==ASSESSED_INTERNAL_SCHEMA:
+        parse_summary_job_result(value)
+        from .models import _to_plain
+        return _to_plain(value['assessment'])
     if value.get("schema_version") == INTERNAL_SCHEMA:
         parse_summary_job_result(value)
         return _report(value["execution"])
     if is_terminal_receipt(value) and "execution" in value:
+        from .narrative_summary_assessment import ASSESSMENT_SCHEMA, validate_assessment_wire
+        execution=value['execution']
+        if isinstance(execution,Mapping) and execution.get('schema_version')==ASSESSMENT_SCHEMA:
+            # The compact receipt intentionally discarded claims/prose. This
+            # is bounded diagnostic shape/algebra, never source/semantic proof.
+            try:
+                return validate_assessment_wire(execution,None)
+            except (ValueError,TypeError,KeyError) as exc:
+                raise NarrativeContractError('invalid terminal summary assessment') from exc
         return _report(value["execution"])
     return None

@@ -1,0 +1,67 @@
+{
+  "schema_version": "independent-fidelity-wiring-seal/2",
+  "status": "PASS_CWP_M3B_DELTA_AND_LOOPBACK_LIFECYCLE_SCOPED",
+  "sealed_at": "2026-10-30T11:25:29.938676+00:00",
+  "prior_engineering_seal": "seal-m3a.json",
+  "prior_seal_sha256": "83934c744672457419710a3fc1ac10e1351c13e09512646de122b67c57feb6f7",
+  "product_sha256": {
+    "src/company_wiki/automation/narrative_summary_protocols.py": "c7040f8e57019a847a25d5611bd3b8712b7698683765d95634f07f4b0f083833",
+    "src/company_wiki/automation/narrative_model_scoped.py": "b7351be85c0a3d7e99c281a2a4018abc57f8170002c8fdf04bec78674c962c70",
+    "src/company_wiki/automation/narrative_model_runtime.py": "e3b996a52027a69e1baaf09a909f8a8ff6d59eb3af13bf9bbbc15c8cf353bc03",
+    "src/company_wiki/automation/narrative_summary_assessment.py": "f6187beefa382b50f762fb4952857c038a39440dfb632cae131e3a71814c75fb",
+    "src/company_wiki/automation/narrative_summary_execution.py": "1fad86947391ca0b0794540eaaeaa9af1a00257ed10fd8d996205b16474c5426",
+    "src/company_wiki/automation/narrative_summarize.py": "21c7a7586e2385ea02eb906e1658433984002a21a76feb13602296a0fa898351",
+    "src/company_wiki/automation/narrative_verify.py": "dd6d8d60d38a198586acccf5d452e398b5bfdf19ab126ea3bab14df89756d5a1",
+    "src/company_wiki/automation/narrative_generation.py": "4fcc792d7a949c19ffe86bb952e9902fae35a4653281901b65152540d22d4e2f",
+    "src/company_wiki/automation/narrative_contracts.py": "15924fdbeaa180808d0bf79716c083d5d38593b157356afc3d12de342371a8a5",
+    "src/company_wiki/automation/narrative_projection.py": "fa23c5520f386310ec0b7a5b149c4157967cdcec2d9d0d1a91658e093698c1dd",
+    "src/company_wiki/automation/narrative_batch_request.py": "acc7ea846edc39e0f46adeab4d6228ca671315c39eee12c9ba48877b6475e5a8",
+    "src/company_wiki/automation/narrative_batch.py": "94f0bd78e49809d81f24aaf561c86bebe4e6902faeccfbb09c9714dbf61d6e16",
+    "tests/unit/test_narrative_fidelity_runtime.py": "42bbbc554dad46e180e607ce41382981b079bcfa0def68193651d96352bf01a1",
+    "tests/unit/test_narrative_fidelity_artifacts.py": "3915ea996319062c200607b57b205ce5ac5e3e945dae0a1f3b7caf48e06b5695",
+    "tests/integration/test_narrative_fidelity_recovery.py": "ac6279ca116ec93b4e03e1d99b8516207d6d7f49df1744e1b2e63b12b4371903"
+  },
+  "snapshot_file_count": 15,
+  "host_tests": {
+    "artifact": "host-tests-m3b.json",
+    "passed": 25,
+    "unit_tests": 24,
+    "loopback_tests": 1,
+    "pytest_seconds": 20.72
+  },
+  "sandbox_attempt": {
+    "artifact": "final-tests-m3b.json",
+    "result": "24P/1transportfailure_preserved_not_acceptance"
+  },
+  "ruff_delta_source_and_tests": "PASS",
+  "host_snapshot_unchanged_since_monitor_and_at_seal": true,
+  "foreign_hook_and_config_bytes_unchanged": true,
+  "metadata_boundary": "terminal_shape_algebra_only;fullclaims_source_validation_unchanged_and_retested",
+  "loopback_engineering_evidence": {
+    "total_HTTP_POSTs": 1,
+    "additional_same_cross_run_POSTs": 0,
+    "public_read": "separatePythonCLI_syntheticTXT",
+    "terminal_diagnostics": "preserved_after_compaction",
+    "same_run_database_dump": "unchanged"
+  },
+  "review_paid_provider_calls": 0,
+  "review_downloads": 0,
+  "review_PDF_parse_calls": 0,
+  "product_source_changes_by_reviewer": 0,
+  "reviewer_test_lint_fixes": [
+    "fixturealiasregistration",
+    "unusedReaderremoved"
+  ],
+  "real_model_semantics": "NOT_SIGNED_SEPARATE_REVIEW",
+  "RF_adoption": "NOT_SIGNED_BY_THIS_REVIEW",
+  "interrupted_paid_recovery": "NOT_EXERCISED",
+  "artifact_sha256": {
+    "review.md": "4eadebb38f0e31265217711801c403c16c96d5e802d36555f0d4e39ef36159ce",
+    "review.json": "06073ee55c5fa24aa4dc864cc40dde253ed99d59b6e23e18ca2feaf45e5e6f8e",
+    "metadata_probe.py": "b4735b663a30e2443088cf9003bedff72a0fcb95e6bcd1ce42c89ccbbe27090f",
+    "metadata-boundary-probe.json": "186046c762d7f308df009d099432831265385c37db31e945d8d1f66b8a3e2211",
+    "host-tests-m3b.json": "b2d60d2f8cfbb96e95c23f3e599971802f77978ac0df2dc0f2da69a7a9764c0f",
+    "final-tests-m3b.json": "8f5147fc13b6975c0745c9d664b30f12fa8245f9f054ce4339409515022de27a",
+    "m3b-delta.json": "c0e5863aff7f1bc7957c267de1cc83a33b32e994105303a9784a351e409536f8"
+  }
+}

@@ -1,6 +1,6 @@
-# M3 接线细则（未实施部分）
+# M3 接线细则（工程已实施，真实节点继续）
 
-当前源层M2已发布6c129706，精确CI41037070445成功。M3a纯assessment组件只具备离线观察能力，**未接入生产，不等于摘要已改好**。本细则补充SUMMARY_QUALITY_IMPLEMENTATION.md，不另建主线入口。
+当前M3b工程实现见 fidelity-production-wiring/README.md；下文为设计合同，真实保真、恢复和RF实际采用仍须分别验收。生产默认尚未切换。
 
 ## 必须固定的行为
 

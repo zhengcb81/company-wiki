@@ -1,0 +1,51 @@
+{
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-m",
+    "pytest",
+    "-q",
+    "-p",
+    "no:cacheprovider",
+    "tests/unit/test_narrative_fidelity_runtime.py",
+    "tests/unit/test_narrative_fidelity_artifacts.py",
+    "tests/unit/test_narrative_summary_assessment.py",
+    "tests/unit/test_narrative_scoped_runtime.py"
+  ],
+  "exit": 0,
+  "elapsed_seconds": 10.712,
+  "sha256_before": {
+    "src/company_wiki/automation/narrative_summary_protocols.py": "c7040f8e57019a847a25d5611bd3b8712b7698683765d95634f07f4b0f083833",
+    "src/company_wiki/automation/narrative_model_scoped.py": "b7351be85c0a3d7e99c281a2a4018abc57f8170002c8fdf04bec78674c962c70",
+    "src/company_wiki/automation/narrative_model_runtime.py": "e3b996a52027a69e1baaf09a909f8a8ff6d59eb3af13bf9bbbc15c8cf353bc03",
+    "src/company_wiki/automation/narrative_summary_assessment.py": "7b0721d183af218a14830e7551c96a338c2bc3c4bfb93ddede0438e99078bd72",
+    "src/company_wiki/automation/narrative_summary_execution.py": "efe6e34b1da4df39785216111458137a85d47b5ad3cd682d4b589c0ab675da9e",
+    "src/company_wiki/automation/narrative_summarize.py": "21c7a7586e2385ea02eb906e1658433984002a21a76feb13602296a0fa898351",
+    "src/company_wiki/automation/narrative_verify.py": "dd6d8d60d38a198586acccf5d452e398b5bfdf19ab126ea3bab14df89756d5a1",
+    "src/company_wiki/automation/narrative_generation.py": "4fcc792d7a949c19ffe86bb952e9902fae35a4653281901b65152540d22d4e2f",
+    "src/company_wiki/automation/narrative_contracts.py": "15924fdbeaa180808d0bf79716c083d5d38593b157356afc3d12de342371a8a5",
+    "src/company_wiki/automation/narrative_projection.py": "fa23c5520f386310ec0b7a5b149c4157967cdcec2d9d0d1a91658e093698c1dd",
+    "src/company_wiki/automation/narrative_batch_request.py": "acc7ea846edc39e0f46adeab4d6228ca671315c39eee12c9ba48877b6475e5a8",
+    "src/company_wiki/automation/narrative_batch.py": "94f0bd78e49809d81f24aaf561c86bebe4e6902faeccfbb09c9714dbf61d6e16",
+    "tests/unit/test_narrative_fidelity_runtime.py": "42bbbc554dad46e180e607ce41382981b079bcfa0def68193651d96352bf01a1",
+    "tests/unit/test_narrative_fidelity_artifacts.py": "d49df904f5c3d5d638b94cafd2263173cb0427680fcaf16a6dc817ecf569b9fb"
+  },
+  "sha256_after": {
+    "src/company_wiki/automation/narrative_summary_protocols.py": "c7040f8e57019a847a25d5611bd3b8712b7698683765d95634f07f4b0f083833",
+    "src/company_wiki/automation/narrative_model_scoped.py": "b7351be85c0a3d7e99c281a2a4018abc57f8170002c8fdf04bec78674c962c70",
+    "src/company_wiki/automation/narrative_model_runtime.py": "e3b996a52027a69e1baaf09a909f8a8ff6d59eb3af13bf9bbbc15c8cf353bc03",
+    "src/company_wiki/automation/narrative_summary_assessment.py": "7b0721d183af218a14830e7551c96a338c2bc3c4bfb93ddede0438e99078bd72",
+    "src/company_wiki/automation/narrative_summary_execution.py": "efe6e34b1da4df39785216111458137a85d47b5ad3cd682d4b589c0ab675da9e",
+    "src/company_wiki/automation/narrative_summarize.py": "21c7a7586e2385ea02eb906e1658433984002a21a76feb13602296a0fa898351",
+    "src/company_wiki/automation/narrative_verify.py": "dd6d8d60d38a198586acccf5d452e398b5bfdf19ab126ea3bab14df89756d5a1",
+    "src/company_wiki/automation/narrative_generation.py": "4fcc792d7a949c19ffe86bb952e9902fae35a4653281901b65152540d22d4e2f",
+    "src/company_wiki/automation/narrative_contracts.py": "15924fdbeaa180808d0bf79716c083d5d38593b157356afc3d12de342371a8a5",
+    "src/company_wiki/automation/narrative_projection.py": "fa23c5520f386310ec0b7a5b149c4157967cdcec2d9d0d1a91658e093698c1dd",
+    "src/company_wiki/automation/narrative_batch_request.py": "acc7ea846edc39e0f46adeab4d6228ca671315c39eee12c9ba48877b6475e5a8",
+    "src/company_wiki/automation/narrative_batch.py": "94f0bd78e49809d81f24aaf561c86bebe4e6902faeccfbb09c9714dbf61d6e16",
+    "tests/unit/test_narrative_fidelity_runtime.py": "42bbbc554dad46e180e607ce41382981b079bcfa0def68193651d96352bf01a1",
+    "tests/unit/test_narrative_fidelity_artifacts.py": "d49df904f5c3d5d638b94cafd2263173cb0427680fcaf16a6dc817ecf569b9fb"
+  },
+  "stable_during_test": true,
+  "stdout": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"relocated\": false, \"reason\": \"no-explicit-basetemp\", \"detail\": \"pytest derives its default basetemp from %TEMP%; short by construction\"}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nbenchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\nconfigfile: pytest.ini\nplugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollected 58 items\n\ntests\\unit\\test_narrative_fidelity_runtime.py .....                      [  8%]\ntests\\unit\\test_narrative_fidelity_artifacts.py .............            [ 31%]\ntests\\unit\\test_narrative_summary_assessment.py ..........               [ 48%]\ntests\\unit\\test_narrative_scoped_runtime.py ............................ [ 96%]\n..                                                                       [100%]\n\n============================= 58 passed in 5.30s ==============================\n",
+  "stderr": ""
+}

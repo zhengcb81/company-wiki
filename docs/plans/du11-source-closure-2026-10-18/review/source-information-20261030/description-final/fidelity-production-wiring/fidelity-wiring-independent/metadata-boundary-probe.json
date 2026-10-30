@@ -1,0 +1,15 @@
+{
+  "terminal_keeps_valid_metadata": true,
+  "full_wrapper_source_recheck": true,
+  "semantic_upgrade_terminal_rejected": true,
+  "bad_algebra_terminal_rejected": true,
+  "unknown_field_terminal_rejected": true,
+  "bad_digest_shape_terminal_rejected": true,
+  "claims_hash_unbound_metadata_only_accepts": true,
+  "claims_hash_unbound_full_claim_validation_rejects": true,
+  "claims_hash_unbound_full_bundle_rejects": true,
+  "foreign_risk_claim_metadata_only_accepts": true,
+  "foreign_risk_claim_full_claim_validation_rejects": true,
+  "foreign_risk_claim_full_bundle_rejects": true,
+  "metadata_is_not_source_or_claim_validation": true
+}

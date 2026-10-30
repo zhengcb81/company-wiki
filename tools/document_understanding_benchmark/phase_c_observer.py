@@ -142,17 +142,25 @@ def gold_observation(gold: dict, selected, envelope: dict) -> dict:
 
     view = None
     sent_keys = frozenset()
-    if envelope["schema_version"] in {"narrative-model-request/5", "narrative-model-request/6"}:
+    if envelope["schema_version"] in {"narrative-model-request/5", "narrative-model-request/6", "narrative-model-request/7"}:
         from company_wiki.automation.narrative_model_scoped import compile_scoped_model_view
 
         # Observe exactly the current compiler's material, including shared
         # references and task-local support/context. Only after byte-equivalent
         # material proof may the existing native-source oracle score selection.
-        max_claims = max(1, len(selected.evidence_spans) * 2) if envelope["schema_version"] == "narrative-model-request/6" else 20
+        if envelope["schema_version"] == "narrative-model-request/7":
+            from company_wiki.automation.narrative_summary_protocols import FIDELITY_SCOPED
+
+            max_claims = FIDELITY_SCOPED.plan_max_claims
+        else:
+            max_claims = max(1, len(selected.evidence_spans) * 2) if envelope["schema_version"] == "narrative-model-request/6" else 20
         view = compile_scoped_model_view(selected, max_claims=max_claims)
         full_material = view.to_model_dict()
         sent_keys = frozenset(row["key"] for row in envelope["material"]["tasks"])
         if envelope["material"] != full_material:
+            # The fidelity protocol sends all admitted tasks and has no paid
+            # subset-repair path. Do not bless a dropped task as a retry.
+            assert envelope["schema_version"] != "narrative-model-request/7"
             # A coverage-repair retry sends only the still-uncovered tasks; its
             # material must equal the same compiler restricted to those keys.
             from dataclasses import replace
