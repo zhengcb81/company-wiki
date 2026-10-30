@@ -1,0 +1,68 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.ci30-version-red", "requested_basetemp_len": 52, "cwd_len": 34, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\郑曾波\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 99 items
+
+tests\unit\test_narrative_english_business_recall.py FFFF
+
+================================== FAILURES ===================================
+_ test_actual_english_business_milestone_is_selected_with_unchanged_text_and_locator[We entered two new markets and signed pilot agreements with three customers.] _
+tests\unit\test_narrative_english_business_recall.py:69: in test_actual_english_business_milestone_is_selected_with_unchanged_text_and_locator
+    parsed, package, source_id, digest = _select(path.read_text(encoding="utf-8"))
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_english_business_recall.py:51: in _select
+    parsed = parse_transcript_text(
+src\company_wiki\source_catalog\narrative_evidence.py:2159: in parse_transcript_text
+    contract = transcript_parser_contract(parser_version)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\transcript_versions.py:34: in transcript_parser_contract
+    raise ValueError("unsupported transcript parser version")
+E   ValueError: unsupported transcript parser version
+_ test_actual_english_business_milestone_is_selected_with_unchanged_text_and_locator[We entered two new markets during the quarter.] _
+tests\unit\test_narrative_english_business_recall.py:69: in test_actual_english_business_milestone_is_selected_with_unchanged_text_and_locator
+    parsed, package, source_id, digest = _select(path.read_text(encoding="utf-8"))
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_english_business_recall.py:51: in _select
+    parsed = parse_transcript_text(
+src\company_wiki\source_catalog\narrative_evidence.py:2159: in parse_transcript_text
+    contract = transcript_parser_contract(parser_version)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\transcript_versions.py:34: in transcript_parser_contract
+    raise ValueError("unsupported transcript parser version")
+E   ValueError: unsupported transcript parser version
+_ test_actual_english_business_milestone_is_selected_with_unchanged_text_and_locator[We signed pilot agreements with three customers.] _
+tests\unit\test_narrative_english_business_recall.py:69: in test_actual_english_business_milestone_is_selected_with_unchanged_text_and_locator
+    parsed, package, source_id, digest = _select(path.read_text(encoding="utf-8"))
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_english_business_recall.py:51: in _select
+    parsed = parse_transcript_text(
+src\company_wiki\source_catalog\narrative_evidence.py:2159: in parse_transcript_text
+    contract = transcript_parser_contract(parser_version)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\transcript_versions.py:34: in transcript_parser_contract
+    raise ValueError("unsupported transcript parser version")
+E   ValueError: unsupported transcript parser version
+_ test_actual_english_business_milestone_is_selected_with_unchanged_text_and_locator[Our new logistics business began commercial operations in October.] _
+tests\unit\test_narrative_english_business_recall.py:69: in test_actual_english_business_milestone_is_selected_with_unchanged_text_and_locator
+    parsed, package, source_id, digest = _select(path.read_text(encoding="utf-8"))
+                                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_narrative_english_business_recall.py:51: in _select
+    parsed = parse_transcript_text(
+src\company_wiki\source_catalog\narrative_evidence.py:2159: in parse_transcript_text
+    contract = transcript_parser_contract(parser_version)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\transcript_versions.py:34: in transcript_parser_contract
+    raise ValueError("unsupported transcript parser version")
+E   ValueError: unsupported transcript parser version
+=========================== short test summary info ===========================
+FAILED tests/unit/test_narrative_english_business_recall.py::test_actual_english_business_milestone_is_selected_with_unchanged_text_and_locator[We entered two new markets and signed pilot agreements with three customers.]
+FAILED tests/unit/test_narrative_english_business_recall.py::test_actual_english_business_milestone_is_selected_with_unchanged_text_and_locator[We entered two new markets during the quarter.]
+FAILED tests/unit/test_narrative_english_business_recall.py::test_actual_english_business_milestone_is_selected_with_unchanged_text_and_locator[We signed pilot agreements with three customers.]
+FAILED tests/unit/test_narrative_english_business_recall.py::test_actual_english_business_milestone_is_selected_with_unchanged_text_and_locator[Our new logistics business began commercial operations in October.]
+!!!!!!!!!!!!!!!!!!!!!!!!!! stopping after 4 failures !!!!!!!!!!!!!!!!!!!!!!!!!!
+============================== 4 failed in 2.29s ==============================

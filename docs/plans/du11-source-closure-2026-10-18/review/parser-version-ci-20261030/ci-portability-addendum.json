@@ -1,0 +1,35 @@
+{
+  "schema_version": "w21-root-ci-portability-addendum/1",
+  "date": "2026-10-30",
+  "verdict": "PASS",
+  "blocking_findings": [],
+  "scope": [
+    "tests/unit/test_w21_pdf_runtime_launch.py::test_child_environment_omits_parent_python_search_config"
+  ],
+  "root_head": "1e4e9eb51804cd1857ad73245880320efa6171d8",
+  "file": "tests/unit/test_w21_pdf_runtime_launch.py",
+  "raw_sha256": "0b77af14dded28a4741f37721612147084826d6f90d8489144b356aadd063693",
+  "lf_sha256": "ef65b760922147977487c03c614e09cfd3708ffc7c59fb1fcaf85d697b40d58e",
+  "raw_bytes": 8682,
+  "production_owner_diff_empty": true,
+  "cause": "Linux CI has no ambient SYSTEMROOT; original preservation assertion assumed a Windows ambient variable",
+  "change": "monkeypatch PATH and SYSTEMROOT explicitly; retain presence assertion and check exact preserved values",
+  "semantic_check": "child_environment preserves allowlisted variables only when present; test no longer expects manufacture of absent host values",
+  "validation": {
+    "receipt": ".planning/w21-root-reception-20261030/root-env-green.txt",
+    "receipt_raw_sha256": "5c4767b38cdb34ca8f05b292f7e1da0cfbcb090eda13d7a2a6141703298256fe",
+    "modules": 2,
+    "passed": 20,
+    "seconds": 2.57,
+    "platform": "Windows",
+    "reviewer_rerun": false
+  },
+  "ci_status": {
+    "run": "41020271499",
+    "prior_outcome": "FAILED",
+    "linux_reverification": "PENDING_NEXT_CI",
+    "other_33_failures": "outside this addendum; ROOT separately handles prior PDF/TXT fixture coupling"
+  },
+  "canonical_sdk_c2": "PARTIAL_OPEN unchanged",
+  "prohibited_expansion": "no SDK/198-test rerun, production changes, or CI-green claim"
+}

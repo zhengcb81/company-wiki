@@ -57,6 +57,12 @@ SENTINEL = (
 
 def test_child_environment_omits_parent_python_search_config(monkeypatch, tmp_path):
     poison_parent_environment(monkeypatch, tmp_path)
+    # Supply the OS inputs whose preservation is under test. Linux CI has no
+    # ambient SYSTEMROOT; its absence is not an allowlist failure.
+    essentials = {"PATH": str(tmp_path / "host-bin"),
+                  "SYSTEMROOT": str(tmp_path / "host-system")}
+    for name, value in essentials.items():
+        monkeypatch.setenv(name, value)
     env = owner.child_environment(cpu_threads=4)
     assert not {"PYTHONPATH", "PYTHONHOME", "PYTHONUSERBASE", "PYTHONSTARTUP",
                 "PYTHONDONTWRITEBYTECODE", "PYTHONPYCACHEPREFIX"} & set(env)
@@ -64,6 +70,7 @@ def test_child_environment_omits_parent_python_search_config(monkeypatch, tmp_pa
     assert env["HF_HUB_OFFLINE"] == "1" and env["TRANSFORMERS_OFFLINE"] == "1"
     assert env["OMP_NUM_THREADS"] == env["OPENBLAS_NUM_THREADS"] == env["MKL_NUM_THREADS"] == "4"
     assert {"PATH", "SYSTEMROOT"} <= set(env), "OS essentials must survive the allowlist"
+    assert {name: env[name] for name in essentials} == essentials
 
 
 def test_launch_command_caches_bytecode_outside_the_deployed_environment():

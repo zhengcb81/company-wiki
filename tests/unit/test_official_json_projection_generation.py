@@ -433,6 +433,8 @@ def test_old_raw_manifest_retains_exact_canonical_contract():
     }
     # The historical wire predates explicit effort. That absence remains exact;
     # requests with explicit effort now bind the real HTTP generation input.
+    # This tests the old wire shape with today's unpinned raw producer; saved
+    # producer recipes have separate frozen-version replay tests.
     actual = generation.generation_manifest(
         _request(reasoning_effort=None), payload, execution_versions=versions
     )
@@ -444,7 +446,7 @@ def test_old_raw_manifest_retains_exact_canonical_contract():
         "bundle_schema": "narrative-bundle/2.0",
         "select_schema": "narrative-select-result/2.0",
         "summary_schema": "narrative-summary-result/2.0",
-        "parser_component": {"name": "selective_narrative_parser", "version": "0.1.1"},
+        "parser_component": {"name": "selective_narrative_parser", "version": "0.1.2"},
         "bundle_producer": "1.0.0",
         "profile": "P2",
         "model": {

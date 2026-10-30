@@ -66,6 +66,11 @@ GIT_REPOSITORY_CONTEXT = (
     "GIT_NAMESPACE", "GIT_QUARANTINE_PATH", "GIT_SHALLOW_FILE",
 )
 CURRENT_CI_REGRESSION_CASES = (
+    # CI 41019504113: PDF and TXT producers evolve independently. Three
+    # in-process witnesses catch version-coupled fixtures without a full suite.
+    "tests/unit/test_narrative_english_business_recall.py::test_recall_semantics_are_versioned_and_legacy_txt_locators_stay_unchanged",
+    "tests/unit/test_narrative_verify_handler.py::test_verify_handler_transcript_replays_bytes_without_provider_policy",
+    "tests/unit/test_official_json_projection_generation.py::test_old_raw_manifest_retains_exact_canonical_contract",
     "tests/unit/test_automation_migrations.py::test_m14_classification_uses_one_snapshot_during_concurrent_init",
     "tests/contract/test_zr203_reader_rewire.py::test_read_entrypoints_never_construct_catalog_store",
     "tests/contract/test_zr1003_shadow_assertions.py::test_c2_recorded_review_is_diagnostic_metadata",

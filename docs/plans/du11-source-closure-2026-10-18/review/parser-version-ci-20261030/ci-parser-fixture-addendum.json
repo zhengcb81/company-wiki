@@ -1,0 +1,56 @@
+{
+  "schema_version": "ci-parser-fixture-addendum/1",
+  "status": "PASS",
+  "open_findings": 0,
+  "head": "1e4e9eb51804cd1857ad73245880320efa6171d8",
+  "reviewed_files": {
+    "tests/unit/test_narrative_english_business_recall.py": {
+      "bytes": 7553,
+      "raw_sha256": "338cd02c72b3ba4084b6221bb34a6bb7e4915e6ea8787836fe164016c4eb8443",
+      "lf_sha256": "338cd02c72b3ba4084b6221bb34a6bb7e4915e6ea8787836fe164016c4eb8443"
+    },
+    "tests/unit/test_narrative_verify_handler.py": {
+      "bytes": 22113,
+      "raw_sha256": "5955ee5b49e0c8ef3f47b4efa5427b768845a912c47e574e9b4cc7e309d6a3e4",
+      "lf_sha256": "5955ee5b49e0c8ef3f47b4efa5427b768845a912c47e574e9b4cc7e309d6a3e4"
+    },
+    "tests/unit/test_official_json_projection_generation.py": {
+      "bytes": 17077,
+      "raw_sha256": "63d39a1be7c3b455fdf6ad802b90706d85a481f72e2ce312ec5c3fe8fb54cbb8",
+      "lf_sha256": "232c802b895996731399747bebed1cf3a1d9b71d16973df56fcff20ed3f10c70"
+    }
+  },
+  "scope": "Three test-fixture producer/version ownership corrections after PDF default parser 0.1.2 migration. Read-only review; no product/FF/RF/model changes.",
+  "decisions": [
+    {
+      "file": "tests/unit/test_narrative_english_business_recall.py",
+      "decision": "Legacy TXT regression fixtures must explicitly pin transcript legacy layout 0.1.1 rather than use PDF current version. Existing paragraph=1, exact text/range and replay checks remain; legacy 0.1.0 comparison remains. PDF synthetic-unit cases still use the PDF constant."
+    },
+    {
+      "file": "tests/unit/test_narrative_verify_handler.py",
+      "decision": "Select-result parser metadata now comes from the actual parsed unit producer. Current transcript parser 0.4.0 cannot be mislabeled by PDF default 0.1.2. The deterministic supplied fixture inputs produce nonempty units, including skipped-policy PDF."
+    },
+    {
+      "file": "tests/unit/test_official_json_projection_generation.py",
+      "decision": "Raw JSON mime plus filing source_class does not select official projection or transcript parser. With no explicit recipe, current fallback producer is native default 0.1.2. The legacy canonical wire-shape assertions remain exact and the comment now distinguishes that shape from a frozen producer recipe."
+    }
+  ],
+  "regression_tests": {
+    "root_log": ".planning/source-description-20261030/parser-version-ci-green.txt",
+    "observed_result": "113 passed in 4.15s",
+    "modules": 4,
+    "raw_log_sha256": "2e18269af2e3ab6c3a78c7e6eb1ecd70ded66368f945d276bd5b3b257296511e",
+    "independent_rerun": false,
+    "basis": "Root explicitly requested static final review without redundant 113-case rerun; independent read inspected final source diff and final log."
+  },
+  "ci_inventory_recommendation": "Add the three specific previously failing representative nodes to the existing regression inventory. They must exercise legacy TXT layout, transcript actual producer and raw-manifest current fallback respectively. Retain the existing parameterized tests and current CI mechanism; no broad module/full-repo gate is needed.",
+  "consumer_experiment_state": "consumer-scope-addendum is SUPERSEDED_WITHDRAWN_EXPERIMENT; no production acceptance. Independent SourceRef/non-periodic source reuse design remains OPEN.",
+  "limitations": "Fixture engineering review only; does not establish a final whole-repository/remote-CI green result, model summary quality or RF adoption.",
+  "reviewer_operations": {
+    "product_edits": 0,
+    "SDK_model_calls": 0,
+    "downloads": 0,
+    "original_pdf_reads": 0,
+    "FF_RF_invocations": 0
+  }
+}

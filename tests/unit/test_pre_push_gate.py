@@ -10,7 +10,8 @@ def test_fast_inventory_keeps_the_four_reuse_receipt_regressions_without_a_whole
         path + "::test_reuse_final_receipt_has_one_owner_read_per_operation",
         path + "::test_new_operation_rejects_changed_reused_original_before_new_fee",
     )
-    assert len(gate.FAST_CONTRACT_CASES) == 31  # original 29 targets plus two nodes / four cases
+    # 31 existing targets plus three in-process format/version witnesses.
+    assert len(gate.FAST_CONTRACT_CASES) == 34
     assert path not in gate.FAST_CONTRACT_CASES
     assert all(gate.FAST_CONTRACT_CASES.count(node) == 1 for node in required)
     assert gate.DAILY_PUSH_TIMEOUT_SECONDS == 180

@@ -1,12 +1,12 @@
-## 2026-10-30 当前：W21工程接收通过，合并发布；摘要质量/非期次复用继续根修
+## 2026-10-30 当前：W21已合并推送，CI版本/平台夹具修复发布中
 
-唯一入口 CURRENT_STATUS.md/json。W21-PDF-RUNTIME正式交付f6c2b9d4，ROOT独审0工程阻塞；42文件已无冲突接入，8相关模块198P/18.69秒、397源mypy/ruff通过，兼容native parser0.1.2。作者工区保持干净、只读，无SDK/模型/下载/原件改动。见[ROOT接收包](review/w21-root-reception-20261030/README.md)。本节点正常合并提交推送，另观察精确CI。
+唯一入口 CURRENT_STATUS.md/json。W21工程已正式合并推送1e4e9eb5（ROOT独审0阻塞、198P/18.69秒、397源mypy/ruff，正常pre-push158P/25.16秒）。canonical SDK C2仍native_fallback，alias不等于对齐成功，范围见[W21接收](review/w21-root-reception-20261030/README.md)。
 
-W21 canonical SDK仍PAGE_1 native_fallback；ASCII alias只是两页完成、0accepted/2rejected/0spans的诊断，不冒签生产增强。长路径反例已独立复现254成功/270 ENOENT，进入共享原子写入/测试布局根修，不删测试、不加权限门禁。现有来源SHA/locator和缓存版本均保持其所属层责任。
+精确CI41019504113失败33项、W21 CI41020271499失败34项：3处PDF/TXT/current-vs-frozen producer夹具耦合及1处Linux无SYSTEMROOT的宿主假设。已按共因修正夹具、不改生产去迎合错误测试，原业务/拒错/历史回放断言保留；113P/4.15秒、W21两模块20P/2.57秒、ruff及独审6文件0OPEN。pre-push既有清单仅加3个已失败具体节点（9P/1.70秒），不增加整模块/全仓检查或超时。见[CI修复](review/parser-version-ci-20261030/README.md)。本补丁正常提交推送后观察自身CI，旧失败不冒签绿色。
 
-前主线97e8a290已推送（pre-push158P/30.94秒），含定位源码0bf2805f及旧PDF默认版本合同修正；精确CI41019504113最后观察进行中，不能宣称远端绿。真实MiMo v3 1POST/6651tokens/$0.001167预算代理，activation/restart/crossrun全部0重复POST，母累计1807019tokens/$0.729112含旧unknown；原件/config/临时湖恢复检查通过。
+真实MiMo v3 1POST/6651tokens/$0.001167预算代理，activation/restart/crossrun0重复POST；母累计1807019tokens/$0.729112含旧unknown，原件/config/临时湖恢复检查通过。8来源任务仅6输出，新闻归属丢失及mixed modality等4质量OPEN；FF/RF非期次指定SourceRef复用仍OPEN，不拿未知FY冒充latest。
 
-**下一步：** 先发布本节点，再按[摘要共因细则](review/source-information-20261030/description-final/SUMMARY_QUALITY_NEXT.md)修8任务只生成6项、新闻限定丢失、mixed modality与回放verified误代语义通过；再定义FF/RF非期次指定SourceRef复用，不能给IR填假FY或用latest冒充已指定文档。复用已有实际response/snapshot作TDD，不重复收费或整批解析。canonical SDK路径、US RPO、holdout、RF实际预测及完整八步公司loop仍OPEN；目标active，不触Dayu/IQS/Dashboard及外来hook mode。
+**下一步：** 发布本次CI修复并观察精确结果，再按[主线细则](review/source-information-20261030/description-final/SUMMARY_QUALITY_NEXT.md)在已捕获真实回复上做共因TDD、独审和定向复验，避免重复收费/整批解析。W21 canonical SDK路径、共享原子写入长路径、US RPO、holdout、实际RF预测及八步公司loop继续OPEN；目标active，Dayu/IQS/Dashboard、原件/config及外来hook mode不动。
 
 ---
 以下为历史记录，不是额外执行入口。

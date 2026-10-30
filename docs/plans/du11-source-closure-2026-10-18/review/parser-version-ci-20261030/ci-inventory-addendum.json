@@ -1,0 +1,57 @@
+{
+  "schema_version": "ci-inventory-addendum/1",
+  "status": "PASS",
+  "open_findings": 0,
+  "head": "1e4e9eb51804cd1857ad73245880320efa6171d8",
+  "reviewed_files": {
+    "tools/pre_push_gate.py": {
+      "bytes": 21620,
+      "raw_sha256": "6f43247b9667ef46128e263f21cc01b91ace8ded6f3aeac3b3ec15c60c0d2811",
+      "lf_sha256": "a6f00fbfeb2114e7b916a7c5e0719a46a8a92f9e5b80b6fa17879b22e8183a35"
+    },
+    "tests/unit/test_pre_push_gate.py": {
+      "bytes": 3041,
+      "raw_sha256": "7f4bc852df776af304a956870add943d412d997ea1bde9e54be48899d0928eac",
+      "lf_sha256": "7f4bc852df776af304a956870add943d412d997ea1bde9e54be48899d0928eac"
+    }
+  },
+  "added_exact_nodes": [
+    "tests/unit/test_narrative_english_business_recall.py::test_recall_semantics_are_versioned_and_legacy_txt_locators_stay_unchanged",
+    "tests/unit/test_narrative_verify_handler.py::test_verify_handler_transcript_replays_bytes_without_provider_policy",
+    "tests/unit/test_official_json_projection_generation.py::test_old_raw_manifest_retains_exact_canonical_contract"
+  ],
+  "scope": "Two-file bounded regression inventory follow-up to the three reviewed fixture corrections. No product/parser/FF/RF behavior change.",
+  "static_proof": {
+    "old_CURRENT_case_order_preserved": true,
+    "added_nodes": 3,
+    "new_whole_module_entries": 0,
+    "FAST_tuple_AST_unchanged_except_expansion_result": true,
+    "daily_timeout_unchanged": 180,
+    "affected_target_cap_unchanged": 32,
+    "output_caps_unchanged": true,
+    "meta_count_expectation": "31 -> 34; existing invariants/assertions remain",
+    "added_node_functions_exist": true
+  },
+  "test_log": {
+    "path": ".planning/source-description-20261030/parser-version-gate-green.txt",
+    "observed_result": "9 passed in 1.70s",
+    "composition": "6 pre-push meta cases plus the three exact added nodes",
+    "raw_sha256": "e685ce674806e048235b9e8507347e3b779c85a442a82a5af53f3d04b0b44e04",
+    "independent_rerun": false,
+    "original_count_red_root_reported": "1 failed / 8 passed before literal count adjustment"
+  },
+  "related_three_file_review": {
+    "receipt": "ci-parser-fixture-addendum.json",
+    "all_three_current_raw_SHA_match_prior_seal": true,
+    "previous_log_result": "113 passed in 4.15s"
+  },
+  "conclusion": "Three targeted existing regression nodes close the observed parser-format fixture blind spots without expanding every push to full modules or the repository. Normal pre-push validation and failure handling remain intact.",
+  "limits": "Does not certify remote CI, whole repository, paid-summary semantics or RF acceptance. Actual timing of normal push remains its own receipt; no unsupported incremental-runtime guarantee is made.",
+  "reviewer_operations": {
+    "product_edits": 0,
+    "original_pdf_reads": 0,
+    "SDK_model_calls": 0,
+    "downloads": 0,
+    "tests_rerun": false
+  }
+}

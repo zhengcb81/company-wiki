@@ -33,8 +33,6 @@ from company_wiki.automation.narrative_contracts import (
 from company_wiki.automation.narrative_model import NARRATIVE_PROMPT_VERSION
 from company_wiki.automation.narrative_verify import NarrativeVerifyHandler
 from company_wiki.source_catalog.narrative_evidence import (
-    NARRATIVE_PARSER_NAME,
-    NARRATIVE_PARSER_VERSION,
     NARRATIVE_SELECTOR_NAME,
     NARRATIVE_SELECTOR_VERSION,
     parse_pdf_bytes,
@@ -195,7 +193,8 @@ def _selected(
             "document_kind": kind,
             "language": language,
         },
-        "parser": {"name": NARRATIVE_PARSER_NAME, "version": NARRATIVE_PARSER_VERSION},
+        "parser": {"name": parsed.units[0].parser_name,
+                   "version": parsed.units[0].parser_version},
         "selector": {
             "name": NARRATIVE_SELECTOR_NAME,
             "version": NARRATIVE_SELECTOR_VERSION,

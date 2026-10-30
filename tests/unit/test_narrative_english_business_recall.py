@@ -44,8 +44,12 @@ NON_BUSINESS = (
     "We entered gains in the accounts and signed financial statement approval documents.",
 )
 
+# These assertions deliberately exercise the historical line layout, including
+# paragraph_index=1. PDF parser upgrades must not reinterpret its TXT pin.
+LEGACY_TXT_LAYOUT_VERSION = "0.1.1"
 
-def _select(text, *, parser_version=NARRATIVE_PARSER_VERSION):
+
+def _select(text, *, parser_version=LEGACY_TXT_LAYOUT_VERSION):
     digest = hashlib.sha256(text.encode("utf-8")).hexdigest()
     source_id = source_id_for_sha256(digest)
     parsed = parse_transcript_text(
@@ -75,7 +79,7 @@ def test_actual_english_business_milestone_is_selected_with_unchanged_text_and_l
     assert span.coordinates.paragraph_index == 1
     assert span.coordinates.char_start == 0
     assert span.coordinates.char_end == len(sentence)
-    assert span.parser_version == NARRATIVE_PARSER_VERSION
+    assert span.parser_version == LEGACY_TXT_LAYOUT_VERSION
     assert parsed.coverage_complete
     verified, failed = verify_transcript_evidence_spans(
         text,
@@ -147,7 +151,7 @@ def test_english_financial_table_remains_dropped_and_business_milestone_stays_se
 
 
 def test_recall_semantics_are_versioned_and_legacy_txt_locators_stay_unchanged():
-    # PDF Q&A may upgrade the shared parser pin; TXT source attribution,
+    # PDF Q&A may upgrade its parser pin independently; TXT source attribution,
     # source wording and coordinates still replay identically under the old pin.
     assert tuple(int(part) for part in NARRATIVE_SELECTOR_VERSION.split(".")) >= (0, 2, 0)
     text = f"Full Conference Call Transcript\nCEO: {BUSINESS[0]}\n"
