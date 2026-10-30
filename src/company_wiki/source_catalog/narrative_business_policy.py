@@ -62,7 +62,7 @@ _ACTIVITY = re.compile(
 
 # Only the opt-in ReadingPlan detector consumes these relations. Explicit
 # legacy selectors keep detect_business_fact and its historical predicates.
-READING_BUSINESS_POLICY_VERSION = "reading-business-policy/25"
+READING_BUSINESS_POLICY_VERSION = "reading-business-policy/26"
 READING_BUSINESS_SCAN_PASSES = (
     16 + SOURCE_PURPOSE_EXTENSION_SCAN_PASSES + READING_DISCLOSURE_SCAN_PASSES + READING_RECOGNITION_SCOPE_SCAN_PASSES
     + RESOURCE_READING_SCAN_PASSES
@@ -830,7 +830,8 @@ def _reading_relations(clauses: tuple[str, ...]) -> tuple[str, ...]:
 
 
 def _detect_reading_business_fact(text: str, recognize, *, source_roles=None,
-                                  payload_observations: list[bool] | None = None) -> OperatingFact:
+                                  payload_observations: list[bool] | None = None,
+                                  include_source_descriptions: bool = True) -> OperatingFact:
     """Operating activity and bounded business relationships, independent of issuer.
 
     Legacy replay keeps its historical recognizer. The reading policy admits
@@ -861,7 +862,8 @@ def _detect_reading_business_fact(text: str, recognize, *, source_roles=None,
         # These owners just observed actual disclosure/measurement arguments.
         # Keep the proof here, before public descriptive reason projection.
         payload_observations.append(bool(relations))
-    if descriptive_operating_relation(text, prepared=source_roles):
+    if descriptive_operating_relation(text, prepared=source_roles,
+                                     include_source_descriptions=include_source_descriptions):
         relations = tuple(dict.fromkeys((*relations, "operating_mechanism")))
     elif source_roles.numeric_ambiguous:
         # Flattening unidentified cells cannot manufacture a risk/event or a
@@ -895,11 +897,12 @@ def _detect_reading_business_fact(text: str, recognize, *, source_roles=None,
                          bool(_FINANCIAL_BUSINESS_RELATIONS.intersection(relations)))
 
 
-def detect_reading_business_fact(text: str) -> OperatingFact:
+def detect_reading_business_fact(text: str, *, include_source_descriptions: bool = True) -> OperatingFact:
     """Compatibility text recognizer; production supplies source relationships."""
     from company_wiki.document_understanding.operating_states.assertion_roles import prepare_source_assertions
     roles = prepare_source_assertions(text)
-    return _purpose_fact(_detect_reading_business_fact(text, detect_business_fact, source_roles=roles),
+    return _purpose_fact(_detect_reading_business_fact(text, detect_business_fact, source_roles=roles,
+                         include_source_descriptions=include_source_descriptions),
                          source_purpose(text, prepared=roles))
 
 

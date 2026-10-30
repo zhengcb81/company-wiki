@@ -1,0 +1,252 @@
+[
+  {
+    "text": "公司主营业务包括高端装备研发、生产和销售，持续关注行业发展。",
+    "raw_payload": true,
+    "raw_descriptive_only": true,
+    "material": [
+      false
+    ],
+    "reading": {
+      "eligible": true,
+      "topics": [
+        "operating_mechanism"
+      ],
+      "reasons": [
+        "operating_mechanism"
+      ],
+      "score": 3,
+      "financial_exempt": false,
+      "purpose": "operating"
+    },
+    "prepared_payload": true,
+    "prepared_descriptive_only": true,
+    "legacy": {
+      "eligible": true,
+      "topics": [
+        "operating_mechanism"
+      ],
+      "reasons": [
+        "operating_mechanism"
+      ],
+      "score": 6,
+      "financial_exempt": false,
+      "purpose": "unknown"
+    }
+  },
+  {
+    "text": "公司主营业务包括多类产品和配套解决方案。",
+    "raw_payload": true,
+    "raw_descriptive_only": true,
+    "material": [
+      false
+    ],
+    "reading": {
+      "eligible": true,
+      "topics": [
+        "operating_mechanism"
+      ],
+      "reasons": [
+        "operating_mechanism"
+      ],
+      "score": 3,
+      "financial_exempt": false,
+      "purpose": "operating"
+    },
+    "prepared_payload": true,
+    "prepared_descriptive_only": true,
+    "legacy": {
+      "eligible": true,
+      "topics": [
+        "operating_mechanism"
+      ],
+      "reasons": [
+        "operating_mechanism"
+      ],
+      "score": 6,
+      "financial_exempt": false,
+      "purpose": "unknown"
+    }
+  },
+  {
+    "text": "公司主营业务是指高端装备研发、生产和销售，海外市场是公司未来的发展方向。",
+    "raw_payload": true,
+    "raw_descriptive_only": true,
+    "material": [
+      false
+    ],
+    "reading": {
+      "eligible": true,
+      "topics": [
+        "operating_mechanism"
+      ],
+      "reasons": [
+        "operating_mechanism"
+      ],
+      "score": 3,
+      "financial_exempt": false,
+      "purpose": "operating"
+    },
+    "prepared_payload": true,
+    "prepared_descriptive_only": true,
+    "legacy": {
+      "eligible": true,
+      "topics": [
+        "operating_mechanism"
+      ],
+      "reasons": [
+        "operating_mechanism"
+      ],
+      "score": 6,
+      "financial_exempt": false,
+      "purpose": "unknown"
+    }
+  },
+  {
+    "text": "Our paid seats increased to 3 million.",
+    "raw_payload": null,
+    "raw_descriptive_only": false,
+    "material": [
+      false
+    ],
+    "reading": {
+      "eligible": true,
+      "topics": [
+        "operating_quantity",
+        "operating_metric_change"
+      ],
+      "reasons": [
+        "operating_quantity",
+        "operating_metric_change"
+      ],
+      "score": 3,
+      "financial_exempt": true,
+      "purpose": "operating_metric"
+    },
+    "prepared_payload": true,
+    "prepared_descriptive_only": false,
+    "legacy": {
+      "eligible": true,
+      "topics": [
+        "operating_quantity",
+        "operating_metric_change"
+      ],
+      "reasons": [
+        "operating_quantity",
+        "operating_metric_change",
+        "quantified_operating_status"
+      ],
+      "score": 6,
+      "financial_exempt": true,
+      "purpose": "unknown"
+    }
+  },
+  {
+    "text": "Our service revenue is based on actual customer usage.",
+    "raw_payload": null,
+    "raw_descriptive_only": false,
+    "material": [
+      false
+    ],
+    "reading": {
+      "eligible": true,
+      "topics": [
+        "business_billing_basis"
+      ],
+      "reasons": [
+        "business_billing_basis"
+      ],
+      "score": 3,
+      "financial_exempt": true,
+      "purpose": "unknown"
+    },
+    "prepared_payload": true,
+    "prepared_descriptive_only": false,
+    "legacy": {
+      "eligible": true,
+      "topics": [
+        "business_billing_basis"
+      ],
+      "reasons": [
+        "business_billing_basis"
+      ],
+      "score": 6,
+      "financial_exempt": true,
+      "purpose": "unknown"
+    }
+  },
+  {
+    "text": "公司设备已完成客户认证。",
+    "raw_payload": true,
+    "raw_descriptive_only": false,
+    "material": [
+      true
+    ],
+    "reading": {
+      "eligible": true,
+      "topics": [
+        "operating_mechanism",
+        "business_progress",
+        "capacity_projects"
+      ],
+      "reasons": [
+        "operating_mechanism",
+        "operating_activity"
+      ],
+      "score": 3,
+      "financial_exempt": false,
+      "purpose": "operating"
+    },
+    "prepared_payload": true,
+    "prepared_descriptive_only": false,
+    "legacy": {
+      "eligible": true,
+      "topics": [
+        "operating_mechanism",
+        "business_progress",
+        "capacity_projects"
+      ],
+      "reasons": [
+        "operating_mechanism",
+        "operating_activity",
+        "new_product_commercialization_milestone"
+      ],
+      "score": 6,
+      "financial_exempt": false,
+      "purpose": "unknown"
+    }
+  },
+  {
+    "text": "Our main products are XN-7 and RX-3.",
+    "raw_payload": true,
+    "raw_descriptive_only": true,
+    "material": [
+      false
+    ],
+    "reading": {
+      "eligible": true,
+      "topics": [
+        "operating_mechanism"
+      ],
+      "reasons": [
+        "operating_mechanism"
+      ],
+      "score": 3,
+      "financial_exempt": false,
+      "purpose": "operating"
+    },
+    "prepared_payload": true,
+    "prepared_descriptive_only": true,
+    "legacy": {
+      "eligible": true,
+      "topics": [
+        "operating_mechanism"
+      ],
+      "reasons": [
+        "operating_mechanism"
+      ],
+      "score": 6,
+      "financial_exempt": false,
+      "purpose": "unknown"
+    }
+  }
+]

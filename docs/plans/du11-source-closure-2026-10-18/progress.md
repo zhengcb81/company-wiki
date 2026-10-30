@@ -1,8 +1,19 @@
-## 2026-10-30 当前：来源描述大节点已通过，正常发布中
+## 2026-10-30 当前：0.8兼容根修已验收，正常发布中
+
+前次b7665531精确CI40996278861的3失败已本地复现并根修；原测试不删不改。0.8 adapter明确只在共享描述→mechanism分支排除新构成family，计量/计费/真实事件保留，0.9仍有静态来源说明价值；泛化修饰grammar排除多类/配套套话，policy/26。最终扩展影响域3525P/11既有skip/75.37秒，397mypy/ruff，独立4文件9P/1.41秒/PASS0OPEN；见[CI根修](review/source-information-20261030/description-final/CI_COMPATIBILITY_FOLLOWUP.md)。旧3383绿仅当时范围，不代签旧失败CI。
+
+真实保存parsed复验仍15spans/8卡，8来源输入检查点true，原件不变，全文partial。已按配置准备MiMo-v2.6-flash真实v4摘要（单次50k tokens/$0.05、计入旧母账），尚0POST；无optional PDF runtime配置，不会运行W21 SDK。
+
+**下一步：** 正常提交/推送兼容根修并看新精确CI，再执行真实摘要/缓存激活-重启-跨run恢复与FF-RF采用；US RPO、W21生产接收、holdout及完整公司loop继续OPEN。外包工区/runtime owner、原件/config/外来hook mode保持，goal active。
+
+
+## 2026-10-30 当前：来源描述大节点已发布，精确CI进行中
 
 已从共因修好构成/客户链/上市程序/经营影响的来源proof与QA边界，流程模板误入、成本事件财务误杀、英文未知枚举预切和平方扫描全部闭合。最终3383P/11既有skip/64.89秒、397源mypy/ruff；独立27P/1.75秒、稳定6文件raw/LF SHA/PASS/0OPEN。真实IR原件未变，15spans/8实际SourceCards，8来源检查点全true，归档重放selection字节一致；全文partial不冒签全量召回/摘要/缓存/RF。见[验收包](review/source-information-20261030/description-final/README.md)。
 
-**下一步：** 正常提交/推送并观察精确CI，再推进正式摘要、恢复/跨run0重复POST、FF复用/RF实际采用；US RPO、W21生产接收、holdout及完整公司循环仍OPEN。外包W21三个runtime owner及工区、原件/config/外来hook mode保持；本节点0新付费/下载/SDK。目标active，历史暂停/待复审已被本段替代。
+已正常提交推送`b7665531`，pre-push158P/25.00秒；提交Git字节与独审LF SHA全匹配，精确[CI40996278861](https://github.com/zhengcb81/company-wiki/actions/runs/40996278861)进行中，不宣称远端绿。
+
+**下一步：** 观察精确CI并准备当前配置内正式v4摘要，再推进正式摘要、恢复/跨run0重复POST、FF复用/RF实际采用；US RPO、W21生产接收、holdout及完整公司循环仍OPEN。外包W21三个runtime owner及工区、原件/config/外来hook mode保持；本节点0新付费/下载/SDK。目标active，历史暂停/待复审已被本段替代。
 
 ## 2026-10-30 当前：来源描述复验完成，独立大节点复审中
 

@@ -192,7 +192,7 @@ def _description_subjects(value: str):
 # These are compositional argument roles, not sentences, issuers or industries.
 _ABSTRACT_EN_WORDS = frozenset((
     "a an the our their its we us and or of for to in across all various "
-    "rich wide broad range high quality high-quality comprehensive diverse "
+    "rich wide broad range high quality high-quality comprehensive diverse multiple types complementary "
     "product products service services platform platforms technology technical "
     "business businesses industry industries customer customers client clients "
     "development innovation transformation digital upgrade upgrading growth "
@@ -208,7 +208,7 @@ _ABSTRACT_EN_WORDS = frozenset((
 _ABSTRACT_EN_TOKEN = re.compile(r"[a-z]+(?:-[a-z]+)*|[^\s.,:()]+", re.I)
 _ABSTRACT_CN = re.compile(
     r"(?:我们|公司|本公司|集团|本集团|以|的|及|和|与|或|为|向|在|各|各个|各类|"
-    r"所有|广大|丰富|广泛|优质|全面|多样|产品|服务|技术|平台|业务|行业|客户|需求|"
+    r"所有|广大|丰富|广泛|优质|全面|多样|多类|配套|产品|服务|技术|平台|业务|行业|客户|需求|"
     r"发展|开发|创新|数字化|转型|升级|增长|基础|能力|价值|成功|利益|效益|繁荣|幸福|快乐|满意度|参与度|"
     r"不断|持续|变化|提升|提高|满足|支持|提供|作为|软件|设备|工作负载|解决方案|"
     r"助力|推动|促进|使|能够|可以|旨在|目标|是|"
@@ -508,9 +508,14 @@ def _clause_description(value: str) -> bool:
     return next(_clause_description_proofs(value), None) is not None
 
 
-def descriptive_operating_relation(text: str, *, prepared: SourceAssertionRoles | None = None) -> bool:
+def descriptive_operating_relation(text: str, *, prepared: SourceAssertionRoles | None = None,
+                                  include_source_descriptions: bool = True) -> bool:
     """Same-clause subject/head--predicate--function proof, never a stage label."""
-    return (prepared if prepared is not None else prepare_source_assertions(text)).operating
+    roles = prepared if prepared is not None else prepare_source_assertions(text)
+    if include_source_descriptions:
+        return roles.operating
+    return roles.bound_operating or any(clause.operating and clause.function_or_event
+                                       and not clause.rule_purpose for clause in roles.clauses)
 
 
 # These are grammatical head/predicate roles, not a list of filing locations.
@@ -558,6 +563,10 @@ class AssertionRole:
     # Normalized local witnesses, NOT original offsets or canonical EvidenceSpan.
     payload_witnesses: tuple[str, ...] = ()
     material_payload: bool = False
+    # Syntax family is separate from payload strength. The 0.8 compatibility
+    # adapter keeps its event/function scope without erasing independently
+    # proved quantity/billing disclosures or changing the 0.9 reading policy.
+    function_or_event: bool = True
 
 
 @dataclass(frozen=True)
@@ -625,7 +634,9 @@ def prepare_source_assertions(text: str) -> SourceAssertionRoles:
                                         for proof in proofs if proof.independent is True))
         material = any(proof.independent is True and not proof.descriptive_only
                        for _, proofs in parts for proof in proofs)
-        clauses.append(AssertionRole(text_clause,operating,purpose,independent,witnesses,material))
+        function_or_event = any(not proof.descriptive_only for _, proofs in parts for proof in proofs)
+        clauses.append(AssertionRole(text_clause,operating,purpose,independent,witnesses,material,
+                                     function_or_event))
     shape=observe_value_cells(text)
     numeric=shape.unbound_numeric_cells
     return SourceAssertionRoles(tuple(clauses),numeric,

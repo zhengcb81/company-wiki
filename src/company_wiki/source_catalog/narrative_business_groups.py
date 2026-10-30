@@ -349,7 +349,7 @@ def _operating_fact(text: str, rules: CandidateRules | None = None) -> Operating
     # Current recall extends established scope/operating facts; it cannot
     # suppress valid reporting, M&A or platform metrics before evaluating them.
     old = detect_business_fact(text)
-    reading = detect_reading_business_fact(text)
+    reading = detect_reading_business_fact(text, include_source_descriptions=False)
     if reading_financial_only(text, reading):
         reading = OperatingFact()
     reasons = [reason for reason in old.reasons

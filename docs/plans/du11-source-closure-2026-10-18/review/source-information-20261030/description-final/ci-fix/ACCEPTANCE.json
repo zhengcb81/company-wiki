@@ -1,0 +1,66 @@
+{
+  "status": "ACCEPTED_REPAIR_READY_NORMAL_PUBLICATION",
+  "prior_failed_ci": 40996278861,
+  "prior_failed_commit": "b76655318af1f936d85b1beb15406e64810479b2",
+  "original_default_tests_unchanged": true,
+  "independent_passed": 9,
+  "independent_seconds": 1.41,
+  "domain": {
+    "passed": 3525,
+    "skipped": 11,
+    "seconds": 75.37,
+    "includes_old_default_recall_generation": true,
+    "full_repository": false
+  },
+  "mypy_source_files": 397,
+  "ruff": "PASS",
+  "reading_policy": "reading-business-policy/26",
+  "files": [
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/assertion_roles.py",
+      "raw_sha256": "41d8613b738e852ce8be62cc333b3c496cba3b355842ab946d0cdd0c8ae1b32e",
+      "lf_sha256": "e75242a746a5acead3872d3d1cdcd93e7830fbdf4ba73ce3b74d2ef7400e9c92"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_policy.py",
+      "raw_sha256": "e7ca56e59a912d896823c980016205a7678aaeec0b939f41bb1d520cb3a166eb",
+      "lf_sha256": "4edd99959304dfab124a381cef43e1fa7f977efe4e23a5f1e96711b947de0614"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_groups.py",
+      "raw_sha256": "fa8e013f41cbfc71c74f204a6da167d0cb87b13f7df886f2cc2fcb1a8882e7a0",
+      "lf_sha256": "589319a021c92f8f08fe5e6f654a4c73843c703c204cf90da0db70904961c4d3"
+    },
+    {
+      "path": "tests/unit/du11_production/test_source_description_relations.py",
+      "raw_sha256": "04cfd80b25e6bc4393787656edb1a36bd0bf67b70338bfcab9bfefa008ec80b7",
+      "lf_sha256": "04cfd80b25e6bc4393787656edb1a36bd0bf67b70338bfcab9bfefa008ec80b7"
+    }
+  ],
+  "real_source": {
+    "status": "partial",
+    "spans": 15,
+    "admitted_cards": 8,
+    "checkpoints": {
+      "sold_roster_and_300_compounds": true,
+      "subsidiary_customer_chain": true,
+      "listing_receipt_application_and_conditional_resume": true,
+      "reported_material_impact_denial": true,
+      "demand_cause_preserved": true,
+      "vc_denial_and_contact_not_approved_cooperation": true,
+      "capacity_plan_751": true,
+      "future_generic_rhetoric_not_admitted": true
+    },
+    "same_exact_selection_bytes_as_archived_before_compat_repair": false,
+    "current_selection_sha256": "338d328939c3e42dd98b9774e10d07495665c661aa40073f80918030e098b1fe",
+    "seconds": 0.832,
+    "work": 1352979,
+    "original_unchanged": true
+  },
+  "summary_cache_rf": "OPEN",
+  "new_supplier_posts": 0,
+  "new_downloads": 0,
+  "no_w21_changes": true,
+  "normal_publication_next": true,
+  "goal_complete": false
+}

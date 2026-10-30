@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-30",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_SOURCE_DESCRIPTION_ACCEPTED_PUBLICATION_NEXT",
+  "overall_status": "ACTIVE_CI_COMPATIBILITY_ACCEPTED_PUBLICATION_NEXT",
   "parallel_packages_20261025": {
     "status": "W16_W17_W18_ROOT_COMPONENT_ACCEPTED_MERGED",
     "entry": "harness_lanes/20261025/README.md",
@@ -26,13 +26,13 @@
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
-  "last_code_commit": "121d2b264f14a9b4d8e9d050d11aefcb4393bd3c",
+  "last_code_commit": "b76655318af1f936d85b1beb15406e64810479b2",
   "code_ci": {
-    "id": 40989629573,
-    "head_sha": "121d2b264f14a9b4d8e9d050d11aefcb4393bd3c",
+    "id": 40996278861,
+    "head_sha": "b76655318af1f936d85b1beb15406e64810479b2",
     "status": "completed",
-    "conclusion": "success",
-    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40989629573"
+    "conclusion": "failure",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40996278861"
   },
   "formal_v4_offline_selection_replay_20261025": {
     "status": "EXACT_REPRODUCED_NO_PAID_CALL",
@@ -2295,7 +2295,7 @@
     "implementation_authorized_by_user": true,
     "observed_date": "2026-10-26"
   },
-  "current_task_override": "Source description 6file engineering independently PASS27/0OPEN; affected3383P11skip; real source8input checkpoints PASS with whole-source partial. Normal publication then real summary/cache/FF-RF/holdouts and full company loop remain.",
+  "current_task_override": "Compatibility root repair independently9P/0OPEN and expanded3525P11skip accepted; normal publication then new exact CI. Prior CI40996278861 failure retained. Source input8 checkpoints true/partial, real summaries/cache/FF-RF remainOPEN.",
   "skill_sync_root_cause_20261026": {
     "status": "COMPLETE_INDEPENDENT_PASS_ZERO_OPEN",
     "entry": "review/skill-sync-root-cause-20261026/README.md",
@@ -2344,7 +2344,7 @@
     "published": true,
     "push_failure": "47 targets /392 collected /600s; two regressions being root-fixed, not waived by narrower daily gate"
   },
-  "next_action": "Normally commit/push accepted source-description node and observe exact CI, then formal real summaries/cache/FF-RF adoption. Whole-source coverage, US RPO/W21/holdouts/audit loop remain OPEN.",
+  "next_action": "Publish accepted compatibility root repair and observe new exact CI; then execute already-prepared CNIR v4 real summary/recovery and downstream adoption. Preserve whole-source partial/unknown dates and full company loop responsibilities.",
   "c3_runtime_recovery_20261026": {
     "entry": "review/pdf-c3-20261026/RUNTIME_RECOVERY.md",
     "environment_independent": "PASS_ZERO_OPEN_25_TESTS_AND_REAL_WORKER_ENTRYPOINTS",
@@ -2961,9 +2961,8 @@
   "paused_scope": "revoked by user mainline resume 2026-10-29",
   "own_uncommitted_runtime": [
     "src/company_wiki/document_understanding/operating_states/assertion_roles.py",
-    "src/company_wiki/document_understanding/operating_states/relations.py",
     "src/company_wiki/source_catalog/narrative_business_policy.py",
-    "src/company_wiki/source_catalog/narrative_qa_scopes.py"
+    "src/company_wiki/source_catalog/narrative_business_groups.py"
   ],
   "qa_provisional_publication": {
     "code_commit": "c6c446d0eebc8f6e6f6903bd677c04eebaf65077",
@@ -3187,7 +3186,7 @@
     "ci_id": 40989629573
   },
   "source_description_next": {
-    "status": "ACCEPTED_NORMAL_PUBLICATION_NEXT",
+    "status": "COMPATIBILITY_REPAIR_ACCEPTED_PUBLICATION_NEXT",
     "entry": "review/source-information-20261030/SOURCE_DESCRIPTION_NEXT.md",
     "implementation_started": true,
     "real_content_recall_accepted": false,
@@ -3247,6 +3246,29 @@
       "open": 0,
       "entry": "review/source-information-20261030/description-final/independent/review.json"
     },
-    "acceptance": "review/source-information-20261030/description-final/ACCEPTANCE.json"
+    "acceptance": "review/source-information-20261030/description-final/ACCEPTANCE.json",
+    "source_commit": "b76655318af1f936d85b1beb15406e64810479b2",
+    "ci_id": 40996278861,
+    "pushed": true,
+    "ci_failures": 3,
+    "ci_failure_local_reproduction": {
+      "failed": 3,
+      "passed": 62,
+      "seconds": 3.47
+    },
+    "compatibility_fix_related": {
+      "passed": 136,
+      "seconds": 4.14
+    },
+    "policy_version": "reading-business-policy/26",
+    "compatibility_fix": {
+      "independent_passed": 9,
+      "seconds": 1.41,
+      "open": 0,
+      "domain_passed": 3525,
+      "domain_skipped": 11,
+      "domain_seconds": 75.37,
+      "entry": "review/source-information-20261030/description-final/ci-fix/ACCEPTANCE.json"
+    }
   }
 }

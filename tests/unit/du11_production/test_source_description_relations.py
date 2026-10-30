@@ -24,6 +24,9 @@ def test_self_contained_source_descriptions_have_independent_reading_value(text)
 @pytest.mark.parametrize('text', (
     '显示器件制造企业',
     '公司主要产品为各类优质产品及全方位服务。',
+    '公司主营业务包括多类产品和配套解决方案。',
+    '公司主營業務包括多類產品和配套解決方案。',
+    'Our main business includes multiple types of products and complementary solutions.',
     '公司主要产品是否为精密设备？',
     '公司持续遵守监管要求，规范完善信息披露。',
     '审计师已收到财务报表，并将在数据更新后恢复财务审计。',
@@ -153,3 +156,23 @@ def test_explicit_future_subject_does_not_borrow_previous_business_support():
 def test_product_that_actually_processes_procedural_text_keeps_its_function(text):
     session,_=session_for([text])
     assert observed_use(session,unit_id(0))[0]=='support'
+
+@pytest.mark.parametrize('text', (
+    '公司主要产品为精密设备、传感器和光学材料。',
+    '公司主要产品为XN-7和QR-4。',
+    '公司主营业务是指高端装备研发、生产和销售。',
+))
+def test_compatibility_event_policy_does_not_implicitly_opt_in_source_rosters(text):
+    from company_wiki.source_catalog.narrative_business_groups import _operating_fact
+    session,_=session_for([text])
+    assert observed_use(session,unit_id(0))[0]=='support'
+    assert not _operating_fact(text).eligible
+
+@pytest.mark.parametrize('text', (
+    'Our paid seats increased to 3 million.',
+    'Our service revenue is based on actual customer usage.',
+    '本公司提供企业级软件，用于实时处理客户订单。',
+))
+def test_compatibility_keeps_independent_measures_billing_and_functions(text):
+    from company_wiki.source_catalog.narrative_business_groups import _operating_fact
+    assert _operating_fact(text).eligible

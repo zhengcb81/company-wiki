@@ -37,3 +37,7 @@ ROOT拥有上述共享描述/来源语义；W21三个runtime owner、原件、�
 最终稳定版追加：独审又检出“产品介绍模板”标题只靠前有产品名词绕过用途、成本事件错误污染经营影响；5RED/57PASS后修为真实head→predicate→模板支配、经营影响由business/operations目标支配。正式62项，相关132P/3.64秒，最终受影响域3383P/11skip/64.89秒，397mypy/ruff；以前3377为修第二轮前历史观察。真实real-r3仍15spans/8卡/8检查点全true；归档重放selection gzip SHA f18b589eed76ea6286e1e6a39a1eed25ffae18c560f87ac5a6dceb1f92f3372d完全一致。隔离测试根及额外重放输出清理，复现紧凑包约195KB，不复制原PDF/SDK/数据库。最终独审尚待签署，不冒签发布。
 
 最终独审：27项通过/1.75秒，6文件raw/LF SHA绑定，7类共因闭合/OPEN0；实际8卡局部内容初筛无语义冲突。见description-final/independent/review.json；仅工程与输入局部通过，正式摘要等仍OPEN。当前正常发布下一步。
+
+发布：b76655318af1f936d85b1beb15406e64810479b2已正常推送master，pre-push158P/25秒，精确CI40996278861进行中；已核Git原始blob规范LF SHA与独审一致。见description-final/PUBLICATION.json。后续原语言正式摘要/缓存/FF-RF依旧需实际跑，不以组件通过代签。
+
+CI发现并修复兼容传播共因：旧默认API3原测试失败保留原断言；扩展3525P/11skip，独立4文件9P/0OPEN已通过，policy26。description-final/ci-fix/ACCEPTANCE.json为当前稳定根修范围；旧描述6文件签署不能代签该传播。正常发布下一步，模型0调用。

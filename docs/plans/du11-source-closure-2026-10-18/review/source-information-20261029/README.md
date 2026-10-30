@@ -1,3 +1,7 @@
+# 2026-10-30 当前：旧默认0.8传播根修已验收，待正常发布和新CI
+
+[唯一当前状态](../../CURRENT_STATUS.md)，[CI根修](../source-information-20261030/description-final/CI_COMPATIBILITY_FOLLOWUP.md)。3525P/11skip、独立9P/0OPEN；旧精确CI40996278861失败如实保留。真实8来源检查点保持，摘要/缓存/RF等仍OPEN。下文为历史。
+
 # 2026-10-30 当前：来源描述独审27P/0OPEN，正常发布下一步
 
 [当前唯一状态](../../CURRENT_STATUS.md)，[节点验收](../source-information-20261030/description-final/README.md)。3383P/11skip、8真实来源输入检查点PASS，全文partial；后续正式摘要/缓存/FF-RF/holdout仍OPEN。下文旧待复审等为历史。

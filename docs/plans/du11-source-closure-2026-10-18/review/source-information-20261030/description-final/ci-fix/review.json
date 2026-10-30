@@ -1,0 +1,125 @@
+{
+  "schema": "source-description-compat-ci-independent/1",
+  "status": "PASS",
+  "open_within_repair_scope": 0,
+  "reviewer": "/root/semantic_axes_release_review",
+  "signed_at_utc": "2026-10-30T03:30:57.659052+00:00",
+  "base_head": "b76655318af1f936d85b1beb15406e64810479b2",
+  "binding": "Four actual working-copy files raw/LF hashes captured before final tests and rechecked at signing.",
+  "files": [
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/assertion_roles.py",
+      "raw_sha256": "41d8613b738e852ce8be62cc333b3c496cba3b355842ab946d0cdd0c8ae1b32e",
+      "lf_sha256": "e75242a746a5acead3872d3d1cdcd93e7830fbdf4ba73ce3b74d2ef7400e9c92"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_policy.py",
+      "raw_sha256": "e7ca56e59a912d896823c980016205a7678aaeec0b939f41bb1d520cb3a166eb",
+      "lf_sha256": "4edd99959304dfab124a381cef43e1fa7f977efe4e23a5f1e96711b947de0614"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_groups.py",
+      "raw_sha256": "fa8e013f41cbfc71c74f204a6da167d0cb87b13f7df886f2cc2fcb1a8882e7a0",
+      "lf_sha256": "589319a021c92f8f08fe5e6f654a4c73843c703c204cf90da0db70904961c4d3"
+    },
+    {
+      "path": "tests/unit/du11_production/test_source_description_relations.py",
+      "raw_sha256": "04cfd80b25e6bc4393787656edb1a36bd0bf67b70338bfcab9bfefa008ec80b7",
+      "lf_sha256": "04cfd80b25e6bc4393787656edb1a36bd0bf67b70338bfcab9bfefa008ec80b7"
+    }
+  ],
+  "tests": {
+    "independent_cases": 9,
+    "passed": 9,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "pytest_seconds": 1.41,
+    "command_wall_seconds": 3.35,
+    "log": "final-r2.log",
+    "junit": "final-r2.xml"
+  },
+  "history_not_additive": [
+    {
+      "scope": "initial final-boundary controls",
+      "cases": 8,
+      "passed": 8,
+      "pytest_seconds": 1.75
+    },
+    {
+      "scope": "final plus unknown-singleton contract",
+      "cases": 9,
+      "passed": 9,
+      "pytest_seconds": 1.41
+    }
+  ],
+  "observations": {
+    "inputs": 7,
+    "file": "observations-initial.json",
+    "not_tests": true
+  },
+  "root_cause": "Default 0.8 operating group merged the unversioned 0.9 descriptive relation projection through reading.eligible/operating_mechanism. Concrete static rosters, generic rosters and definitions could enter legacy event-oriented selection.",
+  "repair_assessment": "Correct narrow interface: explicit include_source_descriptions=False only at the 0.8 adapter; shared prepared syntax family distinguishes source composition from existing event/function proof. Measurement, billing and legacy fact branches remain intact. Raw material gating on the entire reading fact would be wrong because quantity/billing raw roles may be None.",
+  "verified": [
+    "three original CI static inputs remain unselected in actual default selector",
+    "existing seats quantity and usage billing retained in actual default selector",
+    "existing customer-certification event retained",
+    "specific unknown composition supports 0.9 but does not enter 0.8",
+    "unknown singleton is unresolved in 0.9 and not a legacy event",
+    "generic multi-type/complementary modifiers do not yield independent 0.9 payload"
+  ],
+  "static_checks": [
+    "function_or_event syntax family kept separate from material strength",
+    "0.9 default includes source descriptions",
+    "only 0.8 group adapter opts out of new source descriptions",
+    "existing _reading_relations quantity/billing proof paths unchanged",
+    "old detect_business_fact and milestone/planned/resource contributions unchanged",
+    "policy/26 plus existing module hashes invalidate semantic cache identity"
+  ],
+  "root_report_not_independently_counted": {
+    "focused_passed": 136,
+    "seconds": 4.14,
+    "original_evidence_cases": 65,
+    "original_ci_failures_now_passed": 3,
+    "source_description_cases": 71,
+    "affected_domain_passed": 3525,
+    "affected_domain_skipped": 11,
+    "affected_domain_seconds": 75.37,
+    "mypy_source_files": 397,
+    "ruff": "PASS",
+    "saved_source_spans": 15,
+    "saved_source_cards": 8,
+    "saved_source_checkpoints": 8
+  },
+  "ci_status_limit": "CI40996278861 was observed failed; this local repair review does not claim that run or a future exact CI is green.",
+  "previous_review_limit": "Previous six-file source-description engineering PASS remains historical; it did not attest this legacy CI boundary.",
+  "outside_scope_open": [
+    "exact CI after publication",
+    "formal summary",
+    "cache recovery",
+    "FF/RF adoption",
+    "W21",
+    "holdout",
+    "whole company loop"
+  ],
+  "not_independently_attested": [
+    "ROOT latest affected-domain run",
+    "ROOT latest real-ci-r1 saved source output"
+  ],
+  "cleanup": {
+    "writes_only_ci_independent": true,
+    "product_or_author_tests_modified": false,
+    "shared_plans_modified": false,
+    "config_diff_empty": true,
+    "original_hook_mode_wip_preserved": true,
+    "hook_numstat": "0\t0\t.githooks/pre-push",
+    "python_no_bytecode": true,
+    "pytest_cacheprovider_disabled": true,
+    "review_cache_directories": [],
+    "artifacts_retained": true,
+    "pdf_or_sdk_or_keys_read": false,
+    "external_calls": 0,
+    "downloads": 0,
+    "other_repository_writes": false
+  }
+}
