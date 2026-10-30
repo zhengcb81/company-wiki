@@ -1,6 +1,6 @@
 # W21-PDF-RUNTIME：PDF增强运行时冷启动、隔离与真实入口验收
 
-状态：READY，可立即独立开始。这是本轮唯一新包，直接解决主线已知SDK阻点，不是重新做PDF选材或已完成W20。
+状态：DISPATCHED / AUTHOR_IN_PROGRESS。用户已确认发出；2026-10-30只读观察作者HEAD为5a33d923、progress文档尚有在途改动，卡上指定路径尚无最终handoff，不能代签验收或重复开包。这是本轮唯一新包，直接解决主线已知SDK阻点，不是重新做PDF选材或已完成W20。
 
 - 工作目录：`C:/Users/郑曾波/Projects/company-wiki-w21-pdf-runtime`
 - 分支：`codex/w21-pdf-runtime-20261029`

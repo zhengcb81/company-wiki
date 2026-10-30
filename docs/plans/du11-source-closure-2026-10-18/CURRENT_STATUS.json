@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-30",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_C_QA_ENGINEERING_PASS_PENDING_PUBLICATION",
+  "overall_status": "ACTIVE_C_QA_PUBLISHED_NEXT_ASSERTION_SCOPE_ROOTS",
   "parallel_packages_20261025": {
     "status": "W16_W17_W18_ROOT_COMPONENT_ACCEPTED_MERGED",
     "entry": "harness_lanes/20261025/README.md",
@@ -26,13 +26,13 @@
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
-  "last_code_commit": "ad34ce6e594ffc50a6936f566264617abb284b6e",
+  "last_code_commit": "f05576e5b864b7bf1dc49a863e4a78c72a8e8492",
   "code_ci": {
-    "id": 40977151896,
-    "head_sha": "ad34ce6e594ffc50a6936f566264617abb284b6e",
+    "id": 40979295107,
+    "head_sha": "f05576e5b864b7bf1dc49a863e4a78c72a8e8492",
     "status": "completed",
     "conclusion": "success",
-    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40977151896"
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40979295107"
   },
   "formal_v4_offline_selection_replay_20261025": {
     "status": "EXACT_REPRODUCED_NO_PAID_CALL",
@@ -2344,7 +2344,7 @@
     "published": true,
     "push_failure": "47 targets /392 collected /600s; two regressions being root-fixed, not waived by narrower daily gate"
   },
-  "next_action": "TDD_A_TYPED_LOCAL_RELATION_BINDING_THEN_B_SHARED_PAYLOAD",
+  "next_action": "Freeze neutral TDD for syntactic argument role vs entity type, and shared prepared business-driver vs accounting-result proof (single-unit income early return is a root); then QA assertion support scopes. Do not reparse saved IR or edit W21 runtime.",
   "c3_runtime_recovery_20261026": {
     "entry": "review/pdf-c3-20261026/RUNTIME_RECOVERY.md",
     "environment_independent": "PASS_ZERO_OPEN_25_TESTS_AND_REAL_WORKER_ENTRYPOINTS",
@@ -3066,12 +3066,11 @@
     "overall_goal_complete": false
   },
   "previous_successful_code_ci": {
-    "id": 40750555849,
-    "head_sha": "c6c446d0eebc8f6e6f6903bd677c04eebaf65077",
+    "id": 40977151896,
+    "head_sha": "ad34ce6e594ffc50a6936f566264617abb284b6e",
     "status": "completed",
     "conclusion": "success",
-    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40750555849",
-    "updated_at": "2026-10-28T19:07:31Z"
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40977151896"
   },
   "source_information_ci_followup_20261029": {
     "status": "PUBLISHED_EXACT_CI_SUCCESS",
@@ -3102,12 +3101,22 @@
     "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40974928800"
   },
   "c_qa_engineering_20261030": {
-    "status": "PASS_PENDING_PUBLICATION",
+    "status": "PUBLISHED_EXACT_CI_SUCCESS",
     "entry": "review/source-information-20261029/C_QA_PROGRESS.md",
     "acceptance": "review/source-information-20261029/C_QA_ACCEPTANCE.json",
     "passed": 2592,
     "seconds": 147.41,
     "real_source_status": "PARTIAL_10_SPANS_REMAINING_SCOPE_GAPS",
-    "summary_cache_rf": "OPEN"
+    "summary_cache_rf": "OPEN",
+    "code_commit": "f05576e5b864b7bf1dc49a863e4a78c72a8e8492"
+  },
+  "c_source_semantic_next": {
+    "status": "READY_NEXT_NOT_IMPLEMENTED",
+    "entry": "review/source-information-20261029/C_NEXT_IMPLEMENTATION.md",
+    "root_owns_implementation": true,
+    "independent_design_review_received": true,
+    "neutral_groups": 9,
+    "already_executed": "6 short owner cases + 4 NP observations only, not full proposed matrix",
+    "w21_reserved_files_unchanged": true
   }
 }

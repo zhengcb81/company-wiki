@@ -1,0 +1,130 @@
+{
+  "schema_version": "c-source-design-observation/1",
+  "execution": "actual bounded stdin probe, transcribed from its output; no product changes",
+  "PDF_parses": 0,
+  "SDK_runs": 0,
+  "vendor_posts": 0,
+  "downloads": 0,
+  "cases": [
+    {
+      "text": "本公司现无生产QX-7（甲基环氧乙烷）的情况。",
+      "eligible": false,
+      "financial_only": false,
+      "independent_payload": null,
+      "use": [
+        "context_only",
+        "no_independent_business_support"
+      ],
+      "relations": 1,
+      "polarity": "negative",
+      "stage": "current",
+      "attribution": "issuer",
+      "explicit_object_refs_present": true,
+      "local_binding": [
+        false
+      ]
+    },
+    {
+      "text": "本公司现无生产QX-7材料的情况。",
+      "eligible": true,
+      "financial_only": false,
+      "independent_payload": true,
+      "use": [
+        "support",
+        "source_business_relation"
+      ],
+      "relations": 1,
+      "polarity": "negative",
+      "stage": "current",
+      "attribution": "issuer",
+      "explicit_object_refs_present": true,
+      "local_binding": [
+        true
+      ]
+    },
+    {
+      "text": "公司编制财务报表。",
+      "eligible": false,
+      "purpose": "accounting_policy",
+      "independent_payload": false,
+      "use": [
+        "context_only",
+        "non_operating_purpose"
+      ]
+    },
+    {
+      "text": "公司新材料业务下游客户需求减少，导致订单下降。",
+      "eligible": true,
+      "financial_only": false,
+      "independent_payload": true,
+      "use": [
+        "support",
+        "source_business_relation"
+      ]
+    },
+    {
+      "text": "公司新材料业务收入下降主要由于下游客户需求减少。",
+      "eligible": false,
+      "financial_only": true,
+      "independent_payload": null,
+      "use": [
+        "context_only",
+        "financial_only"
+      ]
+    },
+    {
+      "saved_source": "cn-ir-native-v4/critical-admission.json, entry containing 略低于",
+      "input_scope": "only that one original unit, not the whole QA group",
+      "eligible": true,
+      "reasons": [
+        "operating_mechanism"
+      ],
+      "purpose": "operating",
+      "financial_only": true,
+      "independent_payload": null,
+      "use": [
+        "context_only",
+        "financial_only"
+      ]
+    }
+  ],
+  "NP_probes": [
+    {
+      "np": "QX-7（甲基环氧乙烷）",
+      "role": "actor",
+      "attribution": "unknown"
+    },
+    {
+      "np": "QX-7材料",
+      "role": "object",
+      "attribution": "unknown"
+    },
+    {
+      "np": "控股股东青岚实业",
+      "role": "actor",
+      "attribution": "quoted_related_party"
+    },
+    {
+      "np": "青岚实业",
+      "role": "actor",
+      "attribution": "unknown"
+    }
+  ],
+  "conclusion": "QA whole-view contamination exists, but unit splitting alone cannot fix the causal-business sentence: the same exact local unit is vetoed by the accounting cue. Unknown entity type is also conflated with actor role despite an explicit syntactic object already present.",
+  "saved_inputs": {
+    "critical_admission": {
+      "path": ".planning/source-information-20261029/cn-ir-native-v4/critical-admission.json",
+      "sha256": "3fe13d03c852e25c8a808633db826ce3c70666735fa032fc7e5b0bb4369db496"
+    }
+  },
+  "current_read_source_lf_sha256": {
+    "src/company_wiki/document_understanding/operating_states/relations.py": "f8b0b2e53cdcb7b175ad9f453d1302aea208102d3608b0e8193db4456a2d219d",
+    "src/company_wiki/document_understanding/operating_states/assertion_roles.py": "b9352c0e22b527576201578d5ac4054a9f5333fc85860b3ccc19386e94e44051",
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": "68af62198d53cddbcc04c47b88eae5f235dba790af0b5cc0ba7dd8aa69822f01",
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "a655190bc1b37cb60c4f0d3bbccd2ae582a731c4a70290a3f2aa846903f9c32f",
+    "src/company_wiki/source_catalog/narrative_support_use.py": "81d28de8cb2f6222e5efa762bebdbe3be622a06c44902f063dacd0b4420da8e9",
+    "src/company_wiki/source_catalog/narrative_reading.py": "7fb6dd0544dcfef82eada48967b2a1139cde0a3417d2f03be311aa8ba45e904b",
+    "src/company_wiki/document_understanding/orchestration.py": "378f12572807f6e6f8e720740427f8c6191dc66904eb7b572338ce1851185858"
+  },
+  "source_hash_note": "source hashes read for design handoff after publication; the probe did not freeze before/after hashes, so these are not a falsely claimed frozen test acceptance."
+}

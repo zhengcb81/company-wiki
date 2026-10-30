@@ -1,3 +1,9 @@
+## 2026-10-30 当前：问答工程已发布，继续来源断言/scope根修
+
+唯一执行入口：[来源信息主线](review/source-information-20261029/README.md)。已正常提交推送`f05576e5`：单列问答实测缩进、物理表格不覆盖QA语义、orphan答案保留可读且公开partial；2592P/147.41秒、396源文件mypy0、独审PASS/0OPEN，pre-push158P/95.28秒。精确CI40979295107已completed/success；此前CI根修ad34ce6e/40977151896 success，旧失败保留。
+
+**下一步：** 按[已接收的独立设计与9组TDD实施细则](review/source-information-20261029/C_NEXT_IMPLEMENTATION.md)，先修语法参数/实体类型两轴和业务因果/会计结果，再在已存IR parsed上验证闭合QA支持scope，修真正VC/沸石/九目等遗漏；不按公司补词或抬额度，不重读已有快照猜因。真实6页已材料化，最终10spans仍partial，不代表六个业务检查点或正式摘要/缓存/RF采用通过；US RPO归因、W21接收及holdout/公司loop继续OPEN。W21只读核HEAD5a33d923已有施工，尚无最终handoff；其runtime/worker/env保持作者独占，ROOT无SDK/付费/下载。0新供应商POST、母账/额度不变，原件/config/外来WIP保持。下方旧当前/待发布/暂停均为历史，不覆盖本段及CURRENT_STATUS.json。
+
 ## 2026-10-30 主线：CI根修远端通过，C问答共因正在最终验收
 
 [唯一入口](review/source-information-20261029/README.md)。ad34ce6e已正常提交推送，精确CI40977151896 success；原失败40974928800保留。C已修按测量字号的首行缩进发现、QA语义不受物理table误判（问句不捐业务给财务/套话）；独审补漏的orphan答案保留可读且显式partial，修后71P/396mypy0，最终短域2592P/147.41秒、独审25P/4.59秒/PASS/0OPEN（不相加），待正常发布。真实6页302units，保存parsed重选10spans但仍partial；VC/沸石等剩余scope问题没有签通过。详见[C进度和具体后续](review/source-information-20261029/C_QA_PROGRESS.md)。W21保留不改、不运行SDK；0供应商POST/下载，母账不变。下方旧当前/下一步均为历史。

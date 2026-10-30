@@ -1,3 +1,9 @@
+## 2026-10-30 当前：问答工程已发布，继续来源断言/scope根修
+
+唯一执行入口：[来源信息主线](review/source-information-20261029/README.md)。已正常提交推送`f05576e5`：单列问答实测缩进、物理表格不覆盖QA语义、orphan答案保留可读且公开partial；2592P/147.41秒、396源文件mypy0、独审PASS/0OPEN，pre-push158P/95.28秒。精确CI40979295107已completed/success；此前CI根修ad34ce6e/40977151896 success，旧失败保留。
+
+**下一步：** 按[已接收的独立设计与9组TDD实施细则](review/source-information-20261029/C_NEXT_IMPLEMENTATION.md)，先修语法参数/实体类型两轴和业务因果/会计结果，再在已存IR parsed上验证闭合QA支持scope，修真正VC/沸石/九目等遗漏；不按公司补词或抬额度，不重读已有快照猜因。真实6页已材料化，最终10spans仍partial，不代表六个业务检查点或正式摘要/缓存/RF采用通过；US RPO归因、W21接收及holdout/公司loop继续OPEN。W21只读核HEAD5a33d923已有施工，尚无最终handoff；其runtime/worker/env保持作者独占，ROOT无SDK/付费/下载。0新供应商POST、母账/额度不变，原件/config/外来WIP保持。下方旧当前/待发布/暂停均为历史，不覆盖本段及CURRENT_STATUS.json。
+
 # 当前主线循环目标
 
 ## 2026-10-29 来源信息A/B实现通过，主线继续C（唯一当前状态）

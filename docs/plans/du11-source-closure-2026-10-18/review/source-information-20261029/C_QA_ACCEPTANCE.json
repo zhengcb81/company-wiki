@@ -1,7 +1,7 @@
 {
   "schema_version": "source-qa-engineering-acceptance/1",
   "date": "2026-10-30",
-  "status": "PASS_PENDING_PUBLICATION",
+  "status": "PUBLISHED_EXACT_CI_SUCCESS",
   "scope": "geometry QA discovery, discourse vs physical table, explicit partial QA propagation; NOT whole C, summary or RF acceptance",
   "review": "qa-independent-review.json",
   "source_files": {
@@ -81,5 +81,21 @@
     "all_absent_after_cleanup": true,
     "only_owned_test_directories_removed": true,
     "originals_configs_w21_preserved": true
+  },
+  "code_commit": "f05576e5b864b7bf1dc49a863e4a78c72a8e8492",
+  "pushed": true,
+  "ci": {
+    "id": 40979295107,
+    "head_sha": "f05576e5b864b7bf1dc49a863e4a78c72a8e8492",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40979295107"
+  },
+  "pre_commit": "NORMAL_PASS",
+  "pre_push": {
+    "normal_hooks": true,
+    "passed": 158,
+    "seconds": 95.28,
+    "wide_scope_deferred_to_ci": true
   }
 }
