@@ -15,7 +15,7 @@
 | reviewed commit | 初审=5a33d923；终审见文末 |
 | 是否已推远端 | 见文末终审记录 |
 
-改动范围：**33 文件，+930/−7**（生产 1 文件 +60/−7；探针/新测试 6 文件 +765/−7；本卡PWF+收据 26 文件 +165）。生产仅 `narrative_pdf_enhancement.py`；`_paragraph_worker.py`、`narrative_pdf_environment.py`、checkpoint/alignment、`_bounded_process.py`/`_process_tree.py`、ROOT WIP 区零改动（无缺陷不强改）。未新增 `narrative_pdf_runtime_env.py`（launch实现留在enhancement模块内，由既有 `orchestration_sha256` 入recipe身份）。
+改动范围：**33 文件，+930/−7**（生产+探针+新测试 6 件 +765/−7；本卡PWF+收据 27 件 +165）。生产仅 `narrative_pdf_enhancement.py`；`_paragraph_worker.py`、`narrative_pdf_environment.py`、checkpoint/alignment、`_bounded_process.py`/`_process_tree.py`、ROOT WIP 区零改动（无缺陷不强改）。未新增 `narrative_pdf_runtime_env.py`（launch实现留在enhancement模块内，由既有 `orchestration_sha256` 入recipe身份）。
 
 ## 逐需求状态
 
@@ -75,7 +75,13 @@
 
 - 初审：`delivery/w21-pdf-runtime/review-initial.md`（独立agent，2026-10-29/30；10项必查全PASS、0阻塞、6 INFO）。
 - INFO采纳：数字更正（33文件/+930、~160MB缓存、3.03GiB表述、20例新测试、80例checkpoint测试）、handoff.json落盘（含icacls/SHA/stderr摘录/fopen证据）、`%TEMP%`残留目录已删、progress措辞收敛；guard偏严语义在需求表标注。
-- 终审：见 `delivery/w21-pdf-runtime/review-final.md`（第二次独立agent复审后落盘）。
+- 终审：`delivery/w21-pdf-runtime/review-final.md`（第二次独立agent，7项必查全PASS、0阻塞、2条不阻塞INFO已由作者补记）。终审独立复核了根因#5（自跑fopen对照：GBK OK/UTF-8 FAIL，GetACP=936）。
+
+## 交付状态
+
+- final tested commit：`eab239d9`（终审对象，全部测试在其上通过）
+- 终审结论：**通过，可交付/可推送**（2026-10-30）
+- 推送：见下方"是否已推远端"终审后更新
 
 ## OPEN（如实交ROOT的跨层接口需求）
 

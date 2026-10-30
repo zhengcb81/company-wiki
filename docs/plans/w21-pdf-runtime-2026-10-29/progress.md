@@ -42,3 +42,10 @@ isolated/safe_path/utf8=True，prefix=env；fauilthandler栈=importlib.metadata�
 工区车道内禁止使用stash。DU2失败在干净基线上同样失败（稀疏缺docs/plans/document-understanding-2026-10-13），非本包回归。
 
 2026-10-30 措辞更正（采纳初审INFO）：本文件早前ASCII别名E2E一句中的 replay 表述，在 replay_verified=0（0 spans）下不承载证明，收敛为：replay入口在0 spans时为平凡通过；replay不重启模型的证明由既有integration测试（mock runner，9例）承载。独立审查报告见 delivery/w21-pdf-runtime/review-initial.md（10项全PASS、0阻塞、6 INFO已采纳）。
+
+2026-10-30 推送处置：pre-push gate contract smoke 在本工区确定性阻断 test_projected_two_parents_cannot_borrow_one_raw_proof
+（gate外单独运行必过）。根因（gate精确复现+逐帧+长度对照）：persist_projection 走 atomic_output 的82字符staging名，
+文件全路径在 gate 的 worktree 内 basetemp 布局下达270字符，超 MAX_PATH=259（LongPathsEnabled=0）；ROOT 主工区同布局254字符
+故从未触发。属共享层（official_json_projection/_atomic_file/pre_push_gate）既有潜伏缺陷，非W21改动；按卡不跨范围补，
+交最小反例 receipts/push-gate-path-length-counterexample.md。pushed_to_remote=false，交付STOP等ROOT验收。
+诊断残留 gate_repro.py 已删。

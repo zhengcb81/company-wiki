@@ -5,8 +5,8 @@
 | 大节点 | 状态 | 产物 |
 |---|---|---|
 | A 调查与冻结 | complete | 现有证据/接口/正反预期 |
-| B TDD与共享runtime修复 | pending | RED/修复/短测 |
-| C 真入口/独审/清理/交付 | pending | handoff与最终独审 |
+| B TDD与共享runtime修复 | complete | RED/修复/短测 |
+| C 真入口/独审/清理/交付 | complete | handoff与最终独审 |
 
 ## Next Step
-核本工区HEAD/branch/status，读本卡和已保存compact证据；不等ROOT额外签收。
+交付完成：A/B/C三阶段+双独立审查全PASS。推送被共享层MAX_PATH潜伏缺陷阻断（反例已交ROOT），STOP等ROOT验收。
