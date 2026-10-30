@@ -1,0 +1,63 @@
+{
+  "schema_version":"rf-actual-summary-adoption-design/1",
+  "review_date":"2026-10-30",
+  "type":"read_only_design",
+  "rf_release_baseline_reported_by_root":"4bbf4528",
+  "product_modified":false,
+  "forecast_executed":false,
+  "downloads":0,
+  "model_posts":0,
+  "real_pdf_parses":0,
+  "source_sha256":"221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+  "real_bundle":{
+    "path":"real-fidelity-v1/phaseC-090-ac0779f182e9.bundle.json.gz",
+    "artifact_sha256":"c996577bbe4930bc12bd86deac68d3ed813dd2a372feee3989cc5aba9ac1d27b",
+    "schema_version":"narrative-bundle/2.1",
+    "summary_claim_count":20,
+    "source_task_count":8,
+    "selected_span_count":15,
+    "selection_status":"partial",
+    "coverage_complete":false,
+    "quality_status":"needs_review",
+    "draft_status":"needs_review",
+    "semantic_status":"not_evaluated",
+    "cwp_public_read_exit":0,
+    "cwp_public_read_bytes":170428,
+    "cwp_public_read_is_not_rf_forecast_adoption":true
+  },
+  "existing_api":{
+    "name":"source_narrative_context.consume_narrative_input",
+    "standalone_cli":false,
+    "required_binding_fields":["span_id","claim_id","parameter_id","support_type"],
+    "optional_binding_fields":["citation_group_id","citation_view"],
+    "supported_support_type":"rationale_support",
+    "writes_evidence_excerpt_from":"original span.raw_text",
+    "checks_used_parameter_and_formula_refs":true,
+    "selects_or_binds_summary_claim":false,
+    "assessment_retained_only_as_source_observation":true,
+    "consumed_currently_means":"original span rationale used by native parameter/formula"
+  },
+  "company_input_search":{
+    "directories":["revenue-forecast/output","revenue-forecast/artifacts"],
+    "file_types":["json","md"],
+    "terms":["002643","万润股份","Wanrun"],
+    "matching_real_company_input_or_forecast_found":false,
+    "not_a_whole_disk_claim":true
+  },
+  "gaps":[
+    {"id":"ADOPT-01","owner":"RF source_narrative_context/research consumption","gap":"No summary claim ID/hash and research decision lineage to native evidence claim/parameter/formula"},
+    {"id":"ADOPT-02","owner":"RF actual company research","gap":"No genuine Wanrun native input/forecast found in inspected output/artifacts; cannot substitute fixture or unrelated company"}
+  ],
+  "minimum_sequence":[
+    "Legally preserve/restore exact raw and retained native artifact through existing CWP owner without new paid summary",
+    "Registered source capture and RF public narrative read with partial/needs_review and actual clocks preserved",
+    "Researcher examines actual summary claims and supporting/context originals; records truthful research treatment",
+    "Add narrow versioned optional summary-use lineage in existing RF consumer owner, preserving original evidence excerpts",
+    "Only bind to existing genuine company used parameters and native formula refs; do not invent volume/price/revenue assumptions",
+    "Validate and compute new genuine input via existing RF CLI, support diagnostics, snapshot and owned registry",
+    "Independently review source/summary lineage, research reasoning and native dependency/output with quality limitations intact"
+  ],
+  "recommended_extension":{"location":"existing RF consumption receipt","candidate_schema":"revenue-summary-use/1","new_context_schema_required":false,"new_forecast_engine_required":false,"new_database_or_approval_required":false},
+  "not_allowed_as_success":["loading a context only","synthetic bindings or fixture forecast","renaming another company input","summary text presented as opened original quote","partial/needs_review upgraded to complete/verified","manufactured FY/publication/volume/price or growth assumptions","source ID attached to economically unrelated or unused parameter"],
+  "actual_summary_forecast_adoption_status":"OPEN_NOT_EXECUTED"
+}

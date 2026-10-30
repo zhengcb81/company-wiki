@@ -1,12 +1,14 @@
-## 2026-10-30 当前：M3b显式摘要协议与RF消费者工程完成，真实保真和采用待验
+## 2026-10-30 当前：M3b两仓主线CI绿；真实摘要恢复通过，3项限定/状态问题继续根修
 
-实际/6 v1已生成20条/8任务，1POST/6969tokens/$0.001286预算代理，activation/same/cross0新增POST；独立自然语言审查进行中，不签语义通过。原整体FAIL为测试工具download_events列表/int错配，现已修并以同一正式bundle字节在新隔离湖零付费重放RF来源＋叙述消费者，PASS且assessment完整保留；不是新模型/缓存generation，也不是实际预测采用。母累计1,813,988tokens/$0.730398（含旧unknown），原件/config/清理通过。RF消费者4bbf4528已推main，精确CI41047503062 success，三运行时定点部署/重复零写/2新进程通过。
+CWP **ee27c962d120febcff62b50fb350f6b41650cac6**、RF **4bbf4528e108142784c81f857eb9f9ab81dfa89a**已正常提交推送，精确CI41048837091/41047503062均success。正常pre-push分别161P/45.67秒和595P/1skip/36subtests/65.40秒；大节点独审和原有门禁通过，未增加小节点许可。RF三运行时定点同步、重复零写/2新进程通过。
 
-M1非期次原文复用、M2来源scope已发布CI绿；M3a核心bab7248a精确CI41039311443成功。M3b现有明确/6、prompt4.2/request7、raw2.1/projected3.1/producer1.1、assessment/wrapper与generation/effect接线。旧4/5和历史wire保持，生产默认仍4。跳过文档用null模型/assessment；风险质量不被覆盖；终态压缩只保留诊断，不冒称完整来源验证。
+真实配置MiMo `/6` 1POST产生20条/8任务，6969tokens/$0.001286预算代理；activation恢复、同run重启和跨run缓存0新增POST。独审20条/8gold，旧客户链/已售清单/300开发及新闻/重大限定改善，但0P1/3P2仍OPEN：当前进行被标planned、拆句丢归属/合作对象、项目设计产能阶段风险。有限diagnostics0不等于语义通过，整源partial/needs_review保持。见[真实节点](review/source-information-20261030/description-final/real-fidelity-v1/README.md)。
 
-本机真实HTTP6→发布→公共读回→终态诊断→同run/跨run缓存1P/21.74秒、总请求1；12源mypy通过。RF相关177P、固定CI15源mypy、独立41P/0OPEN；观察信息在context与消费收据保留。工具已修unknownFY原件走正式registered SourceRef复用、FF明确未请求及assessment漏验，未填假日期/年份。见[工程节点](review/source-information-20261030/description-final/fidelity-production-wiring/README.md)。本段不等于真实摘要/完整RF预测验收。
+原整体FAIL（工具下载次数DTO错误）保留，修后同bundle正式字节在新独立湖零付费重放RF来源/叙述消费者PASS；未知FY/URL/日期、assessment保留，原件/config/母账不改，清理通过。不冒称新模型/缓存generation或实际预测采用。母累计1,813,988tokens/$0.730398含旧unknown。既有M1非期次复用已实读通过，不填假年或以latest替代，FF准确记未请求。
 
-**唯一下一步：** 收尾真实自然语言独审，处理真正归属/程度/条件/子事实问题；再按M3_PRODUCTION_WIRING.md验RF参数/公式实际采用（不能把读取metadata或原文span当摘要采用）；通过后最后改生产默认。不重打旧paid回复标签、不自动付费repair、不抬额度。W21 canonicalC2/长路径/US RPO/holdout/公司loop继续OPEN。原件/config/外来hook和RF三WIP、Dayu/IQS/Dashboard保持。
+**唯一下一步：** 按[单条限定/真实采用细则](review/source-information-20261030/description-final/M4_ADOPTION_AND_ATOMIC_SCOPE.md)先完成source framing中性TDD/独审、明确协议与历史回放边界，修3项共因并有界真实复验；再补RF原文与具体summary claim的采用lineage，准备真实本公司native模型并验参数/公式。不能把fixture、metadata或仅原文span引用当摘要实际采用。当前纯framing组件施工中、尚未生产接线，旧/6数据及旧assessment算法保持，生产默认仍/4。
+
+W21 canonical C2/长路径/US RPO/holdout/完整公司循环仍OPEN。原件/config/外来hook、RF三WIP、Dayu/IQS/Dashboard保持；36个自有测试目录已清理约5.72MB。目标持续进行，无暂停、无项目完成宣告。
 
 ---
 以下为历史记录，不是额外执行入口。

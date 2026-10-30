@@ -1,0 +1,40 @@
+{
+  "original": {
+    "artifact_sha256": "c996577bbe4930bc12bd86deac68d3ed813dd2a372feee3989cc5aba9ac1d27b",
+    "artifact_version_id": "narrative-0f2cc866acd441189106d7096ef75afa",
+    "byte_size": 170428,
+    "schema_version": "narrative-ref/1",
+    "source_ref": {
+      "byte_size": 153851,
+      "content_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "document_id": "urn:company-wiki:document:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "mime_type": "application/pdf",
+      "schema_version": "2.0",
+      "source_id": "urn:company-wiki:source:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7"
+    }
+  },
+  "owned_replay": {
+    "artifact_sha256": "c996577bbe4930bc12bd86deac68d3ed813dd2a372feee3989cc5aba9ac1d27b",
+    "artifact_version_id": "narrative-1ea85c2fd8f8412c903d1cef17463a93",
+    "byte_size": 170428,
+    "schema_version": "narrative-ref/1",
+    "source_ref": {
+      "byte_size": 153851,
+      "content_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "document_id": "urn:company-wiki:document:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "mime_type": "application/pdf",
+      "schema_version": "2.0",
+      "source_id": "urn:company-wiki:source:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7"
+    }
+  },
+  "official_store": {
+    "original_artifact_version_id": "narrative-0f2cc866acd441189106d7096ef75afa",
+    "prepared_artifact_version_id": "narrative-1ea85c2fd8f8412c903d1cef17463a93",
+    "visible_artifact_version_id": "narrative-1ea85c2fd8f8412c903d1cef17463a93",
+    "artifact_sha256": "c996577bbe4930bc12bd86deac68d3ed813dd2a372feee3989cc5aba9ac1d27b",
+    "byte_size": 170428,
+    "status": "visible"
+  },
+  "bundle_bytes_unchanged": true,
+  "not_a_new_model_or_cache_generation": true
+}

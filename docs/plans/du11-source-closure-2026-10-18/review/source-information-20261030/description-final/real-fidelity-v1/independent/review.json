@@ -1,0 +1,730 @@
+{
+  "schema_version": "independent-real-fidelity-language-review/1",
+  "date": "2026-10-30",
+  "verdict": "PARTIAL_QUALITY_WITH_3_P2_OPEN",
+  "scope": "One developmentIRsource,20actualclaims,eightpreexistinggoldcheckpoints;notfullIRrecall/holdout",
+  "no_new_model_calls": true,
+  "no_new_downloads": true,
+  "no_PDF_reparse": true,
+  "no_product_gold_or_engineering_seal_edits": true,
+  "source_identity": {
+    "path": "companies/万润股份/raw/research/万润股份：投资者关系活动记录表20260515.pdf",
+    "original_bytes_verified": 153851,
+    "original_sha256_verified": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+    "method": "ReadexistingoriginalbytesforSHA;wordingreviewusescapturedIRspans/locators/rowcells;noPDFparser."
+  },
+  "counts": {
+    "claims_reviewed": 20,
+    "no_additional_perclaim_issue": 17,
+    "confirmed_structured_modality_errors": 1,
+    "independent_clause_context_or_basis_risks": 2,
+    "P1": 0,
+    "P2": 3,
+    "gold_key_fact_union_preserved": 8,
+    "gold_denominator": 8,
+    "new_emitted_tasks": 8,
+    "old_emitted_tasks": 6,
+    "old_required_source_texts_same_as_new": 8,
+    "traceable_to_provided_source_text": 20
+  },
+  "product_observation": {
+    "quality_status": "needs_review",
+    "selection_status": "partial",
+    "selection_coverage_complete": false,
+    "selected_spans": 15,
+    "candidate_count": 229,
+    "semantic_status": "not_evaluated",
+    "subfact_coverage_status": "not_evaluated",
+    "known_constraint_status": "no_known_violation",
+    "diagnostic_count": 0,
+    "machine_needs_review_claims": [
+      "t2-1"
+    ]
+  },
+  "response_to_final_text_and_modality_unchanged": true,
+  "process_separate_from_semantics": {
+    "original_run_status": "FAIL",
+    "original_run_failure_scope": "consumer download_events type mismatch reported byROOT; not a modelgeneration failure",
+    "consumer_acceptance": "NOT_SIGNED_BY_THIS_NATURALLANGUAGE_REVIEW;separatezero-paidreplayreportedbyROOT",
+    "model_POSTs": 1,
+    "charged_tokens": 6969,
+    "input_tokens": 6226,
+    "output_tokens": 743,
+    "proxy_micro_usd": 1286,
+    "cost_kind": "budget_proxy_or_unknown_hold_not_invoice",
+    "activation_recovery": "PASS",
+    "same_run_zero_additional_POST": true,
+    "cross_run_zero_additional_POST": true,
+    "protected_unchanged": true,
+    "cleanup": true
+  },
+  "claims": [
+    {
+      "claim_id": "t1-1",
+      "task_key": "t1",
+      "text": "公司积极开发国内市场，持续完善国内市场战略布局，提高公司的抗风险能力。",
+      "modality": "planned",
+      "machine_needs_review": false,
+      "review_status": "P2_CONFIRMED_MODALITY_ERROR",
+      "finding_id": "NL1",
+      "assessment": "原文积极开发、持续完善描述当前实施中的行动；没有将/拟/计划。planned把正在做的行动改成计划口径。正文仍忠实，但结构化语态不忠实。",
+      "support": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:9eff140488704704348de7188fb027201325c1fcfefbd9083eadd6a241490484",
+          "locator": "loc:v1/page:1/table:0/row:6/column:1/chars:57-143",
+          "text": "答：您好，公司积极开发国内市场，持续完善国内市场战略布局，提\n高公司的抗风险能力，2025 年度公司境内收入约8.19 亿元，占比约22%，\n较比 2024 年度有所提升。"
+        }
+      ],
+      "context_evidence_ids": [
+        "urn:company-wiki:evidence-span:sha256:27d4283d845ae0477e183af35c8e2103569b77365652f313250b7c64b2b01d25",
+        "urn:company-wiki:evidence-span:sha256:c693558ed1a732901d27bf44e29b3790b77680d870fce141d9511c3bbbb8a169"
+      ],
+      "body_grounded_in_full_cited_source": true
+    },
+    {
+      "claim_id": "t1-2",
+      "task_key": "t1",
+      "text": "2025 年度公司境内收入约8.19 亿元，占比约22%，较比 2024 年度有所提升。",
+      "modality": "actual",
+      "machine_needs_review": false,
+      "review_status": "PASS",
+      "finding_id": null,
+      "assessment": "保留2025年度、境内收入约8.19亿元、占比约22%和较2024年度提升；不将问句80%多口径当管理层数据，不扩大比较结论。",
+      "support": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:9eff140488704704348de7188fb027201325c1fcfefbd9083eadd6a241490484",
+          "locator": "loc:v1/page:1/table:0/row:6/column:1/chars:57-143",
+          "text": "答：您好，公司积极开发国内市场，持续完善国内市场战略布局，提\n高公司的抗风险能力，2025 年度公司境内收入约8.19 亿元，占比约22%，\n较比 2024 年度有所提升。"
+        }
+      ],
+      "context_evidence_ids": [
+        "urn:company-wiki:evidence-span:sha256:27d4283d845ae0477e183af35c8e2103569b77365652f313250b7c64b2b01d25",
+        "urn:company-wiki:evidence-span:sha256:c693558ed1a732901d27bf44e29b3790b77680d870fce141d9511c3bbbb8a169"
+      ],
+      "body_grounded_in_full_cited_source": true
+    },
+    {
+      "claim_id": "t2-1",
+      "task_key": "t2",
+      "text": "根据相应新闻报道，投资者所描述的情况涉及三星的家电产品。",
+      "modality": "uncertain",
+      "machine_needs_review": true,
+      "review_status": "PASS",
+      "finding_id": null,
+      "assessment": "保留根据相应新闻报道和投资者所描述的情况；三星仅用于解析该公司的指代，未确认退出整个中国市场或第一大客户前提。uncertain与needs_review保留。",
+      "support": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:b436b6238aba6713ec6f8320cf4e7902af80cf5f5a253f6c5f9dab3b981705f0",
+          "locator": "loc:v1/page:2/table:0/row:0/column:1/chars:69-120",
+          "text": "答：您好，根据相应新闻报道，您所描述的情况涉及该公司的家电产\n品，该事项未对九目化学经营构成重大影响。"
+        }
+      ],
+      "context_evidence_ids": [
+        "urn:company-wiki:evidence-span:sha256:27d4283d845ae0477e183af35c8e2103569b77365652f313250b7c64b2b01d25",
+        "urn:company-wiki:evidence-span:sha256:8b63d3b40762ee6904d6c5e37d58a45a3d9c8667b851889299b4495e4c464b64",
+        "urn:company-wiki:evidence-span:sha256:8fea8360efae264182a74c099273af328ec67654d1bbf60f44e2810187cd4f46"
+      ],
+      "body_grounded_in_full_cited_source": true
+    },
+    {
+      "claim_id": "t2-2",
+      "task_key": "t2",
+      "text": "该事项未对九目化学经营构成重大影响。",
+      "modality": "negation",
+      "machine_needs_review": false,
+      "review_status": "PASS",
+      "finding_id": null,
+      "assessment": "否定限于九目化学经营和重大影响，未改为零影响或母公司整体无影响。该事项可由同一support原文定位。 独立引用须从原始support/Qcontext展开该事项，不能借上一条派生claim充当原始证据。",
+      "support": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:b436b6238aba6713ec6f8320cf4e7902af80cf5f5a253f6c5f9dab3b981705f0",
+          "locator": "loc:v1/page:2/table:0/row:0/column:1/chars:69-120",
+          "text": "答：您好，根据相应新闻报道，您所描述的情况涉及该公司的家电产\n品，该事项未对九目化学经营构成重大影响。"
+        }
+      ],
+      "context_evidence_ids": [
+        "urn:company-wiki:evidence-span:sha256:27d4283d845ae0477e183af35c8e2103569b77365652f313250b7c64b2b01d25",
+        "urn:company-wiki:evidence-span:sha256:8b63d3b40762ee6904d6c5e37d58a45a3d9c8667b851889299b4495e4c464b64",
+        "urn:company-wiki:evidence-span:sha256:8fea8360efae264182a74c099273af328ec67654d1bbf60f44e2810187cd4f46"
+      ],
+      "body_grounded_in_full_cited_source": true
+    },
+    {
+      "claim_id": "t3-1",
+      "task_key": "t3",
+      "text": "九目化学主要产品为 OLED 升华前材料，下游客户为国内外OLED 成品材料企业。",
+      "modality": "actual",
+      "machine_needs_review": false,
+      "review_status": "PASS",
+      "finding_id": null,
+      "assessment": "九目化学产品是OLED升华前材料；直接下游为国内外OLED成品材料企业，没有将下游企业制造活动改为发行人生产事件。",
+      "support": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:6f86a0041396bcb67b69493f4032dc2f862d318d8f98f97a195bd5f26e036a4d",
+          "locator": "loc:v1/page:2/table:0/row:0/column:1/chars:120-222",
+          "text": "九目化学主要产品为 OLED\n升华前材料，下游客户为国内外OLED 成品材料企业，OLED 成品材料生产\n企业下游主要为 OLED 显示面板生产企业，OLED 显示面板生产企业下游为\n各类显示屏应用企业。"
+        }
+      ],
+      "context_evidence_ids": [
+        "urn:company-wiki:evidence-span:sha256:27d4283d845ae0477e183af35c8e2103569b77365652f313250b7c64b2b01d25",
+        "urn:company-wiki:evidence-span:sha256:8b63d3b40762ee6904d6c5e37d58a45a3d9c8667b851889299b4495e4c464b64",
+        "urn:company-wiki:evidence-span:sha256:8fea8360efae264182a74c099273af328ec67654d1bbf60f44e2810187cd4f46"
+      ],
+      "body_grounded_in_full_cited_source": true
+    },
+    {
+      "claim_id": "t3-2",
+      "task_key": "t3",
+      "text": "OLED 成品材料生产企业的下游主要为 OLED 显示面板生产企业，OLED 显示面板生产企业的下游为各类显示屏应用企业。",
+      "modality": "actual",
+      "machine_needs_review": false,
+      "review_status": "PASS",
+      "finding_id": null,
+      "assessment": "完整保留成品材料企业→显示面板企业→显示屏应用企业两级关系；没有把三星问句客户前提纳入确认事实。",
+      "support": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:6f86a0041396bcb67b69493f4032dc2f862d318d8f98f97a195bd5f26e036a4d",
+          "locator": "loc:v1/page:2/table:0/row:0/column:1/chars:120-222",
+          "text": "九目化学主要产品为 OLED\n升华前材料，下游客户为国内外OLED 成品材料企业，OLED 成品材料生产\n企业下游主要为 OLED 显示面板生产企业，OLED 显示面板生产企业下游为\n各类显示屏应用企业。"
+        }
+      ],
+      "context_evidence_ids": [
+        "urn:company-wiki:evidence-span:sha256:27d4283d845ae0477e183af35c8e2103569b77365652f313250b7c64b2b01d25",
+        "urn:company-wiki:evidence-span:sha256:8b63d3b40762ee6904d6c5e37d58a45a3d9c8667b851889299b4495e4c464b64",
+        "urn:company-wiki:evidence-span:sha256:8fea8360efae264182a74c099273af328ec67654d1bbf60f44e2810187cd4f46"
+      ],
+      "body_grounded_in_full_cited_source": true
+    },
+    {
+      "claim_id": "t4-1",
+      "task_key": "t4",
+      "text": "九目化学已于 3 月11 日收到北交所第二轮审核问询函。",
+      "modality": "actual",
+      "machine_needs_review": false,
+      "review_status": "PASS",
+      "finding_id": null,
+      "assessment": "保留3月11日、北交所第二轮审核问询函及收到的已发生状态；不补原文没有的年份或已回复事实。",
+      "support": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:d19dc6627ef1c7d54806979bdf5983a89920e768163adef67275f9d5adfe2a11",
+          "locator": "loc:v1/page:2/table:0/row:0/column:1/chars:222-308",
+          "text": "九目化学已于 3 月11 日收到北交所第二轮审核问\n询函，因前期报送的财务数据有效期已过，九目化学申请了中止审核，待\n财务数据按要求完成更新后，将申请恢复审核，并回复问询。"
+        }
+      ],
+      "context_evidence_ids": [
+        "urn:company-wiki:evidence-span:sha256:27d4283d845ae0477e183af35c8e2103569b77365652f313250b7c64b2b01d25",
+        "urn:company-wiki:evidence-span:sha256:8b63d3b40762ee6904d6c5e37d58a45a3d9c8667b851889299b4495e4c464b64",
+        "urn:company-wiki:evidence-span:sha256:8fea8360efae264182a74c099273af328ec67654d1bbf60f44e2810187cd4f46"
+      ],
+      "body_grounded_in_full_cited_source": true
+    },
+    {
+      "claim_id": "t4-2",
+      "task_key": "t4",
+      "text": "因前期报送的财务数据有效期已过，九目化学申请了中止审核。",
+      "modality": "actual",
+      "machine_needs_review": false,
+      "review_status": "PASS",
+      "finding_id": null,
+      "assessment": "财务数据有效期已过是申请中止原因；只写申请了，不变成交易所已批准或项目终止。",
+      "support": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:d19dc6627ef1c7d54806979bdf5983a89920e768163adef67275f9d5adfe2a11",
+          "locator": "loc:v1/page:2/table:0/row:0/column:1/chars:222-308",
+          "text": "九目化学已于 3 月11 日收到北交所第二轮审核问\n询函，因前期报送的财务数据有效期已过，九目化学申请了中止审核，待\n财务数据按要求完成更新后，将申请恢复审核，并回复问询。"
+        }
+      ],
+      "context_evidence_ids": [
+        "urn:company-wiki:evidence-span:sha256:27d4283d845ae0477e183af35c8e2103569b77365652f313250b7c64b2b01d25",
+        "urn:company-wiki:evidence-span:sha256:8b63d3b40762ee6904d6c5e37d58a45a3d9c8667b851889299b4495e4c464b64",
+        "urn:company-wiki:evidence-span:sha256:8fea8360efae264182a74c099273af328ec67654d1bbf60f44e2810187cd4f46"
+      ],
+      "body_grounded_in_full_cited_source": true
+    },
+    {
+      "claim_id": "t4-3",
+      "task_key": "t4",
+      "text": "待财务数据按要求完成更新后，九目化学将申请恢复审核，并回复问询。",
+      "modality": "planned",
+      "machine_needs_review": false,
+      "review_status": "PASS",
+      "finding_id": null,
+      "assessment": "财务数据按要求更新后才将申请恢复并回复问询；主体九目清楚，planned保留条件和未来申请，不写成已恢复。",
+      "support": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:d19dc6627ef1c7d54806979bdf5983a89920e768163adef67275f9d5adfe2a11",
+          "locator": "loc:v1/page:2/table:0/row:0/column:1/chars:222-308",
+          "text": "九目化学已于 3 月11 日收到北交所第二轮审核问\n询函，因前期报送的财务数据有效期已过，九目化学申请了中止审核，待\n财务数据按要求完成更新后，将申请恢复审核，并回复问询。"
+        }
+      ],
+      "context_evidence_ids": [
+        "urn:company-wiki:evidence-span:sha256:27d4283d845ae0477e183af35c8e2103569b77365652f313250b7c64b2b01d25",
+        "urn:company-wiki:evidence-span:sha256:8b63d3b40762ee6904d6c5e37d58a45a3d9c8667b851889299b4495e4c464b64",
+        "urn:company-wiki:evidence-span:sha256:8fea8360efae264182a74c099273af328ec67654d1bbf60f44e2810187cd4f46"
+      ],
+      "body_grounded_in_full_cited_source": true
+    },
+    {
+      "claim_id": "t5-1",
+      "task_key": "t5",
+      "text": "公司 2024 年度影响收入的主要原因为沸石系列环保材料业务及部分医药业务下游需求减少。",
+      "modality": "actual",
+      "machine_needs_review": false,
+      "review_status": "PASS",
+      "finding_id": null,
+      "assessment": "2024年度收入影响原因限于沸石系列环保材料及部分医药业务下游需求减少；未泛化到全部医药或改变期间。",
+      "support": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:2de93d6d9c9dd480988fe091a007c5edca50466373623d550fa4de5e03945529",
+          "locator": "loc:v1/page:2/table:0/row:0/column:1/chars:412-489",
+          "text": "公司 2024 年度影响收入的主要原因为沸石系列环保材料\n业务及部分医药业务下游需求减少，公司 2025 年度沸石分子筛产品收入\n略低于 2024 年度。"
+        }
+      ],
+      "context_evidence_ids": [
+        "urn:company-wiki:evidence-span:sha256:5f3031be56c17df63110a52c6f7f2d287e7a43c6d7f47843df79d0dd6206fa6c"
+      ],
+      "body_grounded_in_full_cited_source": true
+    },
+    {
+      "claim_id": "t5-2",
+      "task_key": "t5",
+      "text": "公司 2025 年度沸石分子筛产品收入略低于 2024 年度。",
+      "modality": "actual",
+      "machine_needs_review": false,
+      "review_status": "PASS",
+      "finding_id": null,
+      "assessment": "2025年度沸石分子筛收入略低于2024年度的期间、产品和程度均保留。",
+      "support": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:2de93d6d9c9dd480988fe091a007c5edca50466373623d550fa4de5e03945529",
+          "locator": "loc:v1/page:2/table:0/row:0/column:1/chars:412-489",
+          "text": "公司 2024 年度影响收入的主要原因为沸石系列环保材料\n业务及部分医药业务下游需求减少，公司 2025 年度沸石分子筛产品收入\n略低于 2024 年度。"
+        }
+      ],
+      "context_evidence_ids": [
+        "urn:company-wiki:evidence-span:sha256:5f3031be56c17df63110a52c6f7f2d287e7a43c6d7f47843df79d0dd6206fa6c"
+      ],
+      "body_grounded_in_full_cited_source": true
+    },
+    {
+      "claim_id": "t6-1",
+      "task_key": "t6",
+      "text": "公司现无生产 VC（碳酸亚乙烯酯）的情况。",
+      "modality": "negation",
+      "machine_needs_review": false,
+      "review_status": "PASS",
+      "finding_id": null,
+      "assessment": "发行人当前无VC生产，保留碳酸亚乙烯酯产品名和现时否定；没有补成在研或永久不生产。",
+      "support": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:35d9b362bb2496cd504e4f235d2a969b2f906e77761916b15f556a3bbb9c5fcf",
+          "locator": "loc:v1/page:3/table:0/row:0/column:1/chars:336-409",
+          "text": "答：您好，公司现无生产 VC（碳酸亚乙烯酯）的情况，根据公司控\n股股东中国节能信息，中国节能与宁德时代已经建立了联系，并希望建立\n业务协同与合作。"
+        }
+      ],
+      "context_evidence_ids": [
+        "urn:company-wiki:evidence-span:sha256:a5f5fa88d28bd69848d73859eb2564c7d6b9ea22ed99f4f65d139f4418c2c3c8"
+      ],
+      "body_grounded_in_full_cited_source": true
+    },
+    {
+      "claim_id": "t6-2",
+      "task_key": "t6",
+      "text": "根据公司控股股东中国节能信息，中国节能与宁德时代已经建立了联系。",
+      "modality": "actual",
+      "machine_needs_review": false,
+      "review_status": "PASS",
+      "finding_id": null,
+      "assessment": "明确根据控股股东中国节能信息，联系主体是中国节能与宁德时代；不是上市公司签约、供货或带量采购。",
+      "support": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:35d9b362bb2496cd504e4f235d2a969b2f906e77761916b15f556a3bbb9c5fcf",
+          "locator": "loc:v1/page:3/table:0/row:0/column:1/chars:336-409",
+          "text": "答：您好，公司现无生产 VC（碳酸亚乙烯酯）的情况，根据公司控\n股股东中国节能信息，中国节能与宁德时代已经建立了联系，并希望建立\n业务协同与合作。"
+        }
+      ],
+      "context_evidence_ids": [
+        "urn:company-wiki:evidence-span:sha256:a5f5fa88d28bd69848d73859eb2564c7d6b9ea22ed99f4f65d139f4418c2c3c8"
+      ],
+      "body_grounded_in_full_cited_source": true
+    },
+    {
+      "claim_id": "t6-3",
+      "task_key": "t6",
+      "text": "中国节能希望建立业务协同与合作。",
+      "modality": "planned",
+      "machine_needs_review": false,
+      "review_status": "P2_INDEPENDENT_CLAUSE_CONTEXT_RISK",
+      "finding_id": "NL2",
+      "assessment": "独立条目未带根据控股股东信息，也未明确宁德时代对象，需上一条才能恢复转述来源和合作对象。不能把两个独立claim作为完整句子的代词补丁。未发生已签约虚构。",
+      "support": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:35d9b362bb2496cd504e4f235d2a969b2f906e77761916b15f556a3bbb9c5fcf",
+          "locator": "loc:v1/page:3/table:0/row:0/column:1/chars:336-409",
+          "text": "答：您好，公司现无生产 VC（碳酸亚乙烯酯）的情况，根据公司控\n股股东中国节能信息，中国节能与宁德时代已经建立了联系，并希望建立\n业务协同与合作。"
+        }
+      ],
+      "context_evidence_ids": [
+        "urn:company-wiki:evidence-span:sha256:a5f5fa88d28bd69848d73859eb2564c7d6b9ea22ed99f4f65d139f4418c2c3c8"
+      ],
+      "body_grounded_in_full_cited_source": true
+    },
+    {
+      "claim_id": "t7-1",
+      "task_key": "t7",
+      "text": "目前公司在半导体制造材料领域已销售的产品主要为光刻胶单体、树脂、光酸以及半导体制程中清洗剂添加材料等。",
+      "modality": "actual",
+      "machine_needs_review": false,
+      "review_status": "PASS",
+      "finding_id": null,
+      "assessment": "已销售产品清单完整：光刻胶单体、树脂、光酸、清洗剂添加材料；没有擅自加量产或收入规模。",
+      "support": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:df16a6f002508cf66b1d4425a4b94c51e2fc2c1bd46cf93c247158860ec9fdb3",
+          "locator": "loc:v1/page:5/table:0/row:0/column:1/chars:464-554",
+          "text": "目前公司在半导体制造材料领域已销售的产品主要为光刻\n胶单体、树脂、光酸以及半导体制程中清洗剂添加材料等，现已开发了超\n300 种化合物，在所涉足的产品方面技术已经处于国内领先水平。"
+        }
+      ],
+      "context_evidence_ids": [
+        "urn:company-wiki:evidence-span:sha256:fe6376f23f7df04805045fd0633c4fcee77cc85f06ed67c8b79aa2f8c84f3536"
+      ],
+      "body_grounded_in_full_cited_source": true
+    },
+    {
+      "claim_id": "t7-2",
+      "task_key": "t7",
+      "text": "公司在该领域现已开发了超300 种化合物。",
+      "modality": "actual",
+      "machine_needs_review": false,
+      "review_status": "PASS",
+      "finding_id": null,
+      "assessment": "超300种是开发的化合物种类数量；该领域承接同一半导体材料support，未说300种全部销售或已量产。 该领域的指代应从同一原始support的半导体制造材料范围恢复，不能只靠上一条派生claim。",
+      "support": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:df16a6f002508cf66b1d4425a4b94c51e2fc2c1bd46cf93c247158860ec9fdb3",
+          "locator": "loc:v1/page:5/table:0/row:0/column:1/chars:464-554",
+          "text": "目前公司在半导体制造材料领域已销售的产品主要为光刻\n胶单体、树脂、光酸以及半导体制程中清洗剂添加材料等，现已开发了超\n300 种化合物，在所涉足的产品方面技术已经处于国内领先水平。"
+        }
+      ],
+      "context_evidence_ids": [
+        "urn:company-wiki:evidence-span:sha256:fe6376f23f7df04805045fd0633c4fcee77cc85f06ed67c8b79aa2f8c84f3536"
+      ],
+      "body_grounded_in_full_cited_source": true
+    },
+    {
+      "claim_id": "t7-3",
+      "task_key": "t7",
+      "text": "在所涉足的产品方面，公司技术已经处于国内领先水平。",
+      "modality": "actual",
+      "machine_needs_review": false,
+      "review_status": "PASS",
+      "finding_id": null,
+      "assessment": "国内领先限定于所涉足的产品方面，属于有source角色的公司自述；不可视为本审查或独立第三方完成技术排名验证。",
+      "support": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:df16a6f002508cf66b1d4425a4b94c51e2fc2c1bd46cf93c247158860ec9fdb3",
+          "locator": "loc:v1/page:5/table:0/row:0/column:1/chars:464-554",
+          "text": "目前公司在半导体制造材料领域已销售的产品主要为光刻\n胶单体、树脂、光酸以及半导体制程中清洗剂添加材料等，现已开发了超\n300 种化合物，在所涉足的产品方面技术已经处于国内领先水平。"
+        }
+      ],
+      "context_evidence_ids": [
+        "urn:company-wiki:evidence-span:sha256:fe6376f23f7df04805045fd0633c4fcee77cc85f06ed67c8b79aa2f8c84f3536"
+      ],
+      "body_grounded_in_full_cited_source": true
+    },
+    {
+      "claim_id": "t8-1",
+      "task_key": "t8",
+      "text": "公司结合实际情况与下游客户需求，在新产能方面积极布局。",
+      "modality": "actual",
+      "machine_needs_review": false,
+      "review_status": "PASS",
+      "finding_id": null,
+      "assessment": "积极布局为当前行动描述，保留与实际情况及下游客户需求的关系；不推导已投产产能或出货。",
+      "support": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:215bf09ec23969301d270ae22317bc3802a1550335736eb54fee678125516104",
+          "locator": "loc:v1/page:5/table:0/row:0/column:1/chars:554-668",
+          "text": "公司结\n合实际情况与下游客户需求，在新产能方面积极布局，2025 年公司启动\n了万润工业园二期 C05 建设项目，该项目包含半导体光刻胶用相关材料产\n能约 751 吨/年，项目建成后将为公司半导体制造材料业务发展提供产能\n保障。"
+        }
+      ],
+      "context_evidence_ids": [
+        "urn:company-wiki:evidence-span:sha256:fe6376f23f7df04805045fd0633c4fcee77cc85f06ed67c8b79aa2f8c84f3536"
+      ],
+      "body_grounded_in_full_cited_source": true
+    },
+    {
+      "claim_id": "t8-2",
+      "task_key": "t8",
+      "text": "2025 年公司启动了万润工业园二期 C05 建设项目，该项目包含半导体光刻胶用相关材料产能约 751 吨/年。",
+      "modality": "actual",
+      "machine_needs_review": false,
+      "review_status": "P2_PROJECT_CAPACITY_BASIS_RISK",
+      "finding_id": "NL3",
+      "assessment": "文本准确保留2025启动C05建设项目与项目包含约751吨/年。没有写已经投产。但actual混载实际启动和项目设计产能规格，数值缺独立的规划/项目阶段口径；不得当成现有产能或出货量。",
+      "support": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:215bf09ec23969301d270ae22317bc3802a1550335736eb54fee678125516104",
+          "locator": "loc:v1/page:5/table:0/row:0/column:1/chars:554-668",
+          "text": "公司结\n合实际情况与下游客户需求，在新产能方面积极布局，2025 年公司启动\n了万润工业园二期 C05 建设项目，该项目包含半导体光刻胶用相关材料产\n能约 751 吨/年，项目建成后将为公司半导体制造材料业务发展提供产能\n保障。"
+        }
+      ],
+      "context_evidence_ids": [
+        "urn:company-wiki:evidence-span:sha256:fe6376f23f7df04805045fd0633c4fcee77cc85f06ed67c8b79aa2f8c84f3536"
+      ],
+      "body_grounded_in_full_cited_source": true
+    },
+    {
+      "claim_id": "t8-3",
+      "task_key": "t8",
+      "text": "项目建成后将为公司半导体制造材料业务发展提供产能保障。",
+      "modality": "forecast",
+      "machine_needs_review": false,
+      "review_status": "PASS",
+      "finding_id": null,
+      "assessment": "建成后条件和未来产能保障保留；forecast为管理层条件性未来结果，没有变成本期收入或已实现能力。 单条使用时项目身份必须由原始support恢复，不把上一条派生claim当作新证据。",
+      "support": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:215bf09ec23969301d270ae22317bc3802a1550335736eb54fee678125516104",
+          "locator": "loc:v1/page:5/table:0/row:0/column:1/chars:554-668",
+          "text": "公司结\n合实际情况与下游客户需求，在新产能方面积极布局，2025 年公司启动\n了万润工业园二期 C05 建设项目，该项目包含半导体光刻胶用相关材料产\n能约 751 吨/年，项目建成后将为公司半导体制造材料业务发展提供产能\n保障。"
+        }
+      ],
+      "context_evidence_ids": [
+        "urn:company-wiki:evidence-span:sha256:fe6376f23f7df04805045fd0633c4fcee77cc85f06ed67c8b79aa2f8c84f3536"
+      ],
+      "body_grounded_in_full_cited_source": true
+    }
+  ],
+  "gold_checkpoints": [
+    {
+      "gold_id": "domestic-market-share",
+      "task_key": "t1",
+      "source_quote_match_after_whitespace_normalization": true,
+      "claim_ids": [
+        "t1-1",
+        "t1-2"
+      ],
+      "source_key_facts_preserved_in_task_text": true,
+      "independent_clause_warnings": [],
+      "status": "KEY_FACTS_PRESENT_IN_TASK_TEXT_UNION",
+      "gold_is_not_overall_summary_semantic_approval": true
+    },
+    {
+      "gold_id": "reported-material-impact",
+      "task_key": "t2",
+      "source_quote_match_after_whitespace_normalization": true,
+      "claim_ids": [
+        "t2-1",
+        "t2-2"
+      ],
+      "source_key_facts_preserved_in_task_text": true,
+      "independent_clause_warnings": [],
+      "status": "KEY_FACTS_PRESENT_IN_TASK_TEXT_UNION",
+      "gold_is_not_overall_summary_semantic_approval": true
+    },
+    {
+      "gold_id": "subsidiary-customer-chain",
+      "task_key": "t3",
+      "source_quote_match_after_whitespace_normalization": true,
+      "claim_ids": [
+        "t3-1",
+        "t3-2"
+      ],
+      "source_key_facts_preserved_in_task_text": true,
+      "independent_clause_warnings": [],
+      "status": "KEY_FACTS_PRESENT_IN_TASK_TEXT_UNION",
+      "gold_is_not_overall_summary_semantic_approval": true
+    },
+    {
+      "gold_id": "listing-process-conditions",
+      "task_key": "t4",
+      "source_quote_match_after_whitespace_normalization": true,
+      "claim_ids": [
+        "t4-1",
+        "t4-2",
+        "t4-3"
+      ],
+      "source_key_facts_preserved_in_task_text": true,
+      "independent_clause_warnings": [],
+      "status": "KEY_FACTS_PRESENT_IN_TASK_TEXT_UNION",
+      "gold_is_not_overall_summary_semantic_approval": true
+    },
+    {
+      "gold_id": "demand-cause",
+      "task_key": "t5",
+      "source_quote_match_after_whitespace_normalization": true,
+      "claim_ids": [
+        "t5-1",
+        "t5-2"
+      ],
+      "source_key_facts_preserved_in_task_text": true,
+      "independent_clause_warnings": [],
+      "status": "KEY_FACTS_PRESENT_IN_TASK_TEXT_UNION",
+      "gold_is_not_overall_summary_semantic_approval": true
+    },
+    {
+      "gold_id": "vc-denial-contact-and-hope",
+      "task_key": "t6",
+      "source_quote_match_after_whitespace_normalization": true,
+      "claim_ids": [
+        "t6-1",
+        "t6-2",
+        "t6-3"
+      ],
+      "source_key_facts_preserved_in_task_text": true,
+      "independent_clause_warnings": [
+        "NL2"
+      ],
+      "status": "KEY_FACTS_PRESENT_IN_TASK_TEXT_UNION",
+      "gold_is_not_overall_summary_semantic_approval": true
+    },
+    {
+      "gold_id": "sold-roster-developed-compounds",
+      "task_key": "t7",
+      "source_quote_match_after_whitespace_normalization": true,
+      "claim_ids": [
+        "t7-1",
+        "t7-2",
+        "t7-3"
+      ],
+      "source_key_facts_preserved_in_task_text": true,
+      "independent_clause_warnings": [],
+      "status": "KEY_FACTS_PRESENT_IN_TASK_TEXT_UNION",
+      "gold_is_not_overall_summary_semantic_approval": true
+    },
+    {
+      "gold_id": "capacity-plan",
+      "task_key": "t8",
+      "source_quote_match_after_whitespace_normalization": true,
+      "claim_ids": [
+        "t8-1",
+        "t8-2",
+        "t8-3"
+      ],
+      "source_key_facts_preserved_in_task_text": true,
+      "independent_clause_warnings": [
+        "NL3"
+      ],
+      "status": "KEY_FACTS_PRESENT_IN_TASK_TEXT_UNION",
+      "gold_is_not_overall_summary_semantic_approval": true
+    }
+  ],
+  "findings": [
+    {
+      "id": "NL1",
+      "severity": "P2",
+      "claim_ids": [
+        "t1-1"
+      ],
+      "certainty": "CONFIRMED_STRUCTURED_MODALITY_ERROR",
+      "source_basis": "积极开发/持续完善 are current ongoing actions, not a futureplan inthissupport.",
+      "observed": "planned;needs_reviewfalse;assessment0diagnostics",
+      "not_claimed": "No fabricatedbusinessfact inprose; problem is currentaction→planned state.",
+      "common_root": "Prompt distinguishes completed actions and futureintentions but doesnot explicitlycoveractual ongoing actions; finiteguard mostlyfuture→actual and misses reverse state downgrade.",
+      "next_generic_acceptance": "Currentongoing action vs plannedfuture/goal contrasts across subjects/languages; do not require completion to classify observedongoing asactual."
+    },
+    {
+      "id": "NL2",
+      "severity": "P2",
+      "claim_ids": [
+        "t6-3"
+      ],
+      "certainty": "CONFIRMED_MISSING_QUALIFIERS_IN_INDEPENDENT_CLAUSE;CONTEXT_RISK_NOT_SIGNED_CONTRACT_HALLUCINATION",
+      "source_basis": "根据控股股东中国节能信息 scopes contact and connectedwish;宁德时代 is the partner in the same statement.",
+      "observed": "Only中国节能希望建立业务协同与合作;sourceattribution andpartner need previousclaim.",
+      "not_claimed": "The summary doesnot say anissuercontract, CATLpurchase or mutualsignedcommitment exists.",
+      "common_root": "Atomization separates modality but inheritedattribution/participants remain inneighboringclaim; task-levelfullsupport doesnot make isolatedprose self-contained. News-onlyreportedpattern doesnot cover information-source attribution.",
+      "next_generic_acceptance": "Every splitproposition carries its applicable reporting source, actor/party andcondition; unknownintent holder staysuncertain; no companykeyword patch. Do notgloballycopyshareholderattribution ontoissuerVCdenial: binditonlytocontact/conjoinedwishwithinitsactualgoverningscope."
+    },
+    {
+      "id": "NL3",
+      "severity": "P2",
+      "claim_ids": [
+        "t8-2"
+      ],
+      "certainty": "PROJECT_SPEC_DATA_INTERPRETATION_RISK;NOT_FALSE_PRODUCTION_CLAIM",
+      "source_basis": "Actual2025projectstart andapprox751t/year includedprojectspec; futurecapacity benefit conditionedoncompletion.",
+      "observed": "Singleactual label coversstart+projectspec; condition appearsinseparateforecastclaim.",
+      "not_claimed": "Actualtext doesNOT say751tonnes/year hasbeencommissioned.751tonnes/year also isNOT shipmentvolume.",
+      "common_root": "Oneclause still mixes observedprojectevent andquantitybasis; lexicalfutureguard isnot a quantity-stage/conditionbinding verifier.",
+      "next_generic_acceptance": "Bindprojectcapacity asdesign/planned specification andcondition atnumericproposition; distinguishstart, completion,commissioning, existingcapacity, outputandshipments."
+    }
+  ],
+  "comparison_with_old_real_summary_v3": [
+    {
+      "dimension": "news-premise attribution",
+      "old": "t2 directSamsung matter withoutaccordingnews",
+      "new": "t2-1 retainsreported/investorqualification;denialseparatenegation",
+      "result": "SOLVED_FOR_THIS_REPORTED_NEWS_CASE;GENERALATTRIBUTIONOPEN_NL2"
+    },
+    {
+      "dimension": "customerchain",
+      "old": "t3 absentalthoughsupplied",
+      "new": "t3-1/2preserveproductandallthreecustomerlevels",
+      "result": "RECOVERED_MATERIALOMISSION"
+    },
+    {
+      "dimension": "soldroster/developedcount",
+      "old": "t7 absentalthoughsupplied",
+      "new": "t7-1/2preservesoldrosterand>300developedseparately",
+      "result": "RECOVERED_MATERIALOMISSION_NOSETMERGE"
+    },
+    {
+      "dimension": "listingprocedure",
+      "old": "oneactualwithhistory+futurecondition",
+      "new": "actualreceipt,actualsuspensionapplication,plannedconditionalfutureapplication",
+      "result": "MIXEDSTATE_RESOLVED_FOR_THIS_CHAIN"
+    },
+    {
+      "dimension": "VC/shareholdercontact/wish",
+      "old": "oneactualwithnegation/contact/wish",
+      "new": "negation/actual/plannedseparated",
+      "result": "STATE_SEPARATION_IMPROVED_BUTQUALIFIERS_LOST_ON_WISH_NL2"
+    },
+    {
+      "dimension": "capacity",
+      "old": "oneactualwithprojectstartandconditionalfuture",
+      "new": "actualstart/spec+forecastbenefit",
+      "result": "PARTLY_IMPROVED_NUMERICPROJECTBASIS_OPEN_NL3"
+    },
+    {
+      "dimension": "qualitycommunication",
+      "old": "bundleverified;noemissionreport",
+      "new": "needs_review;taskemission8/8;semanticandsubfactnot_evaluated",
+      "result": "HONESTER_ENGINEERINGOBSERVABILITY_NOT_SEMANTICPASS"
+    }
+  ],
+  "comparison_limits": [
+    "Sameeightfactualsupporttexts;readingvalueoft3/t7changeddescription→meaningful,protocol/prompt/outputplanalsochanged.",
+    "Oneactualcallperversion,notrandomizedcausalisolationorrepeatedholdout.",
+    "20clausesmostlysplit existingpropositions;not20newbusinessfacts.",
+    "8/8taskemissionandgoldfactpresence doNOT override3P2or semanticnot_evaluated."
+  ],
+  "artifact_hashes": {
+    ".planning\\summary-quality-20261030\\real-fidelity-v1\\phaseC-090-ac0779f182e9.bundle.json.gz": {
+      "sha256": "fbf925e8e6a92c7e7872748535edf31544499165cc8fe6883aa5333b2a12710a",
+      "uncompressed_sha256": "c996577bbe4930bc12bd86deac68d3ed813dd2a372feee3989cc5aba9ac1d27b"
+    },
+    ".planning\\summary-quality-20261030\\real-fidelity-v1\\materials\\phaseC-090-ac0779f182e9.input.json.gz": {
+      "sha256": "0f385767a39ae814959dcaeac234f665cd37a5be2c912c366b708457b80fb89e",
+      "uncompressed_sha256": "1ffdf408f5a545fe0d5545cf29ae1e82421b28a40eae48b39a974581f0c55c3e"
+    },
+    ".planning\\summary-quality-20261030\\real-fidelity-v1\\materials\\phaseC-090-ac0779f182e9.17d16cb730354c3e96a79a0557164773.response.json.gz": {
+      "sha256": "50d7ffd2d261f59ba174e1b035dea84639f71f5da701a0b333522a20012c0313",
+      "uncompressed_sha256": "8d533612c00b02aac5aeb770f46f9afad6937720f6d58b632c1ba873416e5685"
+    },
+    ".planning\\summary-quality-20261030\\real-fidelity-v1\\materials\\phaseC-090-ac0779f182e9.selection.json.gz": {
+      "sha256": "9a9216c2b4183c20be0dd7f627f2b292aba0d45d9b3f1f229c5f2b7f693b45c4",
+      "uncompressed_sha256": "08ee5c26a28a494d489bdfe90fd19d6cf24467cb6f92de3b134d00100c8f05f3"
+    },
+    ".planning\\source-description-20261030\\cn-ir-development-gold-v3.json": {
+      "sha256": "b9af48e7eefc3a97c496e3a337584b01f0118bd15fbd170014ca7bb08f89d2e4"
+    },
+    ".planning\\source-description-20261030\\real-summary-v3\\phaseC-090-96b820232f6b.bundle.json.gz": {
+      "sha256": "c8c7fb1220f1d6f2da9030bc26473fdb65cd13cfb6c09983e26a1dc27ab17789",
+      "uncompressed_sha256": "3a33d89419d325bdfc3be4facb1c7f85761384ba9a5e304c2c16008577ee5679"
+    }
+  },
+  "consumer_status_note": "OriginaloverallFAIL remainshistorical;ROOTreportsseparatezero-paidconsumerreplayreceipt atreal-fidelity-consumer-v1/receipt.json withsamebodySHA. Thislanguageauditdoesnotindependentlysignconsumeracceptance."
+}

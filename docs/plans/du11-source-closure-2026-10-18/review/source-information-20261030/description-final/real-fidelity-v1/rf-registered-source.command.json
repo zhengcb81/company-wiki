@@ -1,0 +1,15 @@
+{
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "-c",
+    "import json,sys; from pathlib import Path; sys.path.insert(0,sys.argv[1]); from source_preparation import prepare_registered_source_result; r=json.load(sys.stdin); v=prepare_registered_source_result(r['candidate'],as_of_date=r['as_of_date'],company_wiki_catalog_config=Path(r['config']),source_reader_receipt_version='2.2'); print(json.dumps(v,ensure_ascii=False))",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts"
+  ],
+  "exit": 1,
+  "seconds": 3.558,
+  "stdout_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+  "stdout_bytes": 0
+}

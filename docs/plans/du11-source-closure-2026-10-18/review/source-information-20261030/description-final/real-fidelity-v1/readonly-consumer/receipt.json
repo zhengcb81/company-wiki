@@ -1,0 +1,14 @@
+{
+  "status": "PASS_READONLY_CONSUMERS_NOT_FORECAST_ADOPTION",
+  "model_posts": 0,
+  "downloads": 0,
+  "raw_copies": 0,
+  "original_and_config_unchanged": true,
+  "mother_ledger_unchanged": true,
+  "owned_lake_removed": true,
+  "artifact_body_sha256": "c996577bbe4930bc12bd86deac68d3ed813dd2a372feee3989cc5aba9ac1d27b",
+  "unknown_period_and_url_preserved": true,
+  "summary_assessment_preserved": true,
+  "semantic_status": "not_evaluated",
+  "observed_at": "2026-10-30T11:28:14.089909+00:00"
+}

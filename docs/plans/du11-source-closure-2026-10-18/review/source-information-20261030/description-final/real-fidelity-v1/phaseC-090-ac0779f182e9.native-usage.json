@@ -1,0 +1,30 @@
+[
+  {
+    "kind": "native_model_charge",
+    "mode": "live",
+    "database": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwplC-8dpolvlg\\AUTO.sqlite",
+    "attempt_id": "17d16cb730354c3e96a79a0557164773",
+    "run_id": "phaseC-090-ac0779f182e9",
+    "job_id": "284c14f95a51e064",
+    "request_sha256": "912052476f92ec82d05a6b78030842dd3d436b793d75836a5d688aafd3da178a",
+    "input_tokens_bound": 29719,
+    "max_output_tokens": 8192,
+    "output_bytes_bound": 2097152,
+    "reserved_micro_usd": 7684,
+    "usage_status": "known",
+    "input_tokens": 6226,
+    "output_tokens": 743,
+    "estimated_micro_usd": 1286,
+    "response_sha256": "8d533612c00b02aac5aeb770f46f9afad6937720f6d58b632c1ba873416e5685",
+    "error_code": null,
+    "output_bytes": 170428,
+    "output_sha256": "c996577bbe4930bc12bd86deac68d3ed813dd2a372feee3989cc5aba9ac1d27b",
+    "reserved_at": "2026-10-30T11:24:25Z",
+    "usage_settled_at": "2026-10-30T11:24:54Z",
+    "output_settled_at": "2026-10-30T11:24:59Z",
+    "paid_response_json": "{\"adapter_id\":\"openai-compatible-http/1\",\"body_sha256\":\"55db3db5e74eaa90a7118eec378f4d09f4ed956cb11df91ce7455dee38f82ad4\",\"byte_size\":3639,\"duration_ms\":29124,\"http_status\":200,\"model_id\":\"mimo-v2.6-flash\",\"object_key\":\"objects/sha256/55/55db3db5e74eaa90a7118eec378f4d09f4ed956cb11df91ce7455dee38f82ad4.json\",\"prompt_version\":\"reading-source-scoped/4.2.0\",\"request_sha256\":\"912052476f92ec82d05a6b78030842dd3d436b793d75836a5d688aafd3da178a\",\"schema_version\":\"narrative-paid-response/1\"}",
+    "charged_tokens": 6969,
+    "charged_micro_usd": 1286,
+    "cost_kind": "budget_proxy_or_unknown_hold_not_invoice"
+  }
+]

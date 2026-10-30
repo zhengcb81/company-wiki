@@ -1,0 +1,50 @@
+{
+  "schema_version": "real-fidelity-guard-observation/1",
+  "paid_response_final_text_modality_match": true,
+  "rows": [
+    {
+      "kind": "actual_captured_claim",
+      "claim_id": "t1-1",
+      "source": "答：您好，公司积极开发国内市场，持续完善国内市场战略布局，提\n高公司的抗风险能力，2025 年度公司境内收入约8.19 亿元，占比约22%，\n较比 2024 年度有所提升。",
+      "text": "公司积极开发国内市场，持续完善国内市场战略布局，提高公司的抗风险能力。",
+      "modality": "planned",
+      "machine_needs_review": false,
+      "finite_guard_diagnostics": []
+    },
+    {
+      "kind": "actual_captured_claim",
+      "claim_id": "t6-3",
+      "source": "答：您好，公司现无生产 VC（碳酸亚乙烯酯）的情况，根据公司控\n股股东中国节能信息，中国节能与宁德时代已经建立了联系，并希望建立\n业务协同与合作。",
+      "text": "中国节能希望建立业务协同与合作。",
+      "modality": "planned",
+      "machine_needs_review": false,
+      "finite_guard_diagnostics": []
+    },
+    {
+      "kind": "actual_captured_claim",
+      "claim_id": "t8-2",
+      "source": "公司结\n合实际情况与下游客户需求，在新产能方面积极布局，2025 年公司启动\n了万润工业园二期 C05 建设项目，该项目包含半导体光刻胶用相关材料产\n能约 751 吨/年，项目建成后将为公司半导体制造材料业务发展提供产能\n保障。",
+      "text": "2025 年公司启动了万润工业园二期 C05 建设项目，该项目包含半导体光刻胶用相关材料产能约 751 吨/年。",
+      "modality": "actual",
+      "machine_needs_review": false,
+      "finite_guard_diagnostics": []
+    },
+    {
+      "kind": "synthetic_guard_boundary_probe_NOT_MODEL_OUTPUT",
+      "source": "公司结\n合实际情况与下游客户需求，在新产能方面积极布局，2025 年公司启动\n了万润工业园二期 C05 建设项目，该项目包含半导体光刻胶用相关材料产\n能约 751 吨/年，项目建成后将为公司半导体制造材料业务发展提供产能\n保障。",
+      "text": "公司半导体光刻胶用相关材料约751吨/年产能已经投产。",
+      "modality": "actual",
+      "finite_guard_diagnostics": [
+        {
+          "rule_code": "possible_modality_mismatch"
+        }
+      ],
+      "meaning": "Positivecontrol: explicitfalseproductionrewriteisflagged byfiniteguard; NOTrealmodeloutput. Actualt8-2didNOTclaimproduction."
+    }
+  ],
+  "no_model_calls": true,
+  "no_original_reparse": true,
+  "observed_assessment_code_sha256": "f6187beefa382b50f762fb4952857c038a39440dfb632cae131e3a71814c75fb",
+  "historical_report_assessment_dependency": "f6187beefa382b50f762fb4952857c038a39440dfb632cae131e3a71814c75fb",
+  "matches_historical_assessment_dependency": true
+}

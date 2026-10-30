@@ -1,0 +1,22 @@
+Traceback (most recent call last):
+  File "<string>", line 1, in <module>
+    import json,sys; from pathlib import Path; sys.path.insert(0,sys.argv[1]); from source_preparation import prepare_registered_source_result; r=json.load(sys.stdin); v=prepare_registered_source_result(r['candidate'],as_of_date=r['as_of_date'],company_wiki_catalog_config=Path(r['config']),source_reader_receipt_version='2.2'); print(json.dumps(v,ensure_ascii=False))
+                                                                                                                                                                          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\郑曾波\Projects\revenue-forecast\scripts\source_preparation.py", line 384, in prepare_registered_source_result
+    source = _prepare_source_ref_v2(request, candidate,
+        _catalog_config_for_reader(company_wiki_catalog_config), timeout_seconds=timeout_seconds,
+        source_reader_receipt_version=source_reader_receipt_version, registered_read=True)
+  File "C:\Users\郑曾波\Projects\revenue-forecast\scripts\source_preparation.py", line 272, in _prepare_source_ref_v2
+    record = build_revenue_source_record_from_verified_read(
+        source_ref=handle["source_ref"],
+    ...<8 lines>...
+        prompt_injection_status=handle.get("prompt_injection_status"),
+    )
+  File "C:\Users\郑曾波\Projects\revenue-forecast\scripts\company_wiki_source_v2.py", line 148, in build_revenue_source_record_from_verified_read
+    candidate = _validate_candidate(source_candidate, ref, manifest)
+  File "C:\Users\郑曾波\Projects\revenue-forecast\scripts\company_wiki_source_v2.py", line 75, in _validate_candidate
+    _same(candidate["download_events"], int(outcome == "downloaded_new"), "download events")
+    ~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\郑曾波\Projects\revenue-forecast\scripts\company_wiki_source_v2.py", line 38, in _same
+    raise CompanyWikiSourceError(f"{label} mismatch")
+company_wiki_source.CompanyWikiSourceError: download events mismatch

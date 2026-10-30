@@ -1,0 +1,32 @@
+{
+  "files": {
+    "phase_c_runner.py": {
+      "sha256": "5a354d27dc9b1c76eddef6f4225a6370c3265b4aebb34fedb885bd95dd3de37d",
+      "bytes": 96118,
+      "mtime_ns": 1793359332988215200
+    },
+    "phase_c_observer.py": {
+      "sha256": "0f0cd667f85fe644d283a2b45f7a952cd5626239faafea884a6fad4da06bc092",
+      "bytes": 26117,
+      "mtime_ns": 1793358962729288900
+    },
+    "phase_c_launcher.py": {
+      "sha256": "3c860463ba04df71a474024b25383729aea39c8294b6d6ed82bdc63a8220f6d8",
+      "bytes": 322,
+      "mtime_ns": 1792192305514128200
+    },
+    "phase_c_failure_review_material.py": {
+      "sha256": "d84d17b02691d2596c9fd60fcf9538dabc2aaf1d2318b2f8c7bc53b09ea14aa8",
+      "bytes": 8276,
+      "mtime_ns": 1792882163283543300
+    },
+    "phase_c_bootstrap/sitecustomize.py": {
+      "sha256": "c907ca970dfaa9fe98bb09f96dcde41d38fe6d31fde03694a61c146d9e4db5b7",
+      "bytes": 239,
+      "mtime_ns": 1792192305514128200
+    }
+  },
+  "repository_head": "bab7248a0e71d58d4cbcdcd25c5583b9c6466bf1",
+  "tracked_source_dirty": true,
+  "purpose": "reproducibility observation only; not permission or source acceptance"
+}
