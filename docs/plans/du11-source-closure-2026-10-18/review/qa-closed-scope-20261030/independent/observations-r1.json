@@ -1,0 +1,162 @@
+{
+  "seconds": 0.3069984000030672,
+  "count": 4,
+  "rows": [
+    {
+      "parts": [
+        "本公司已交付27台专用设备至客户进行生产验证。",
+        "公司表示，该设备尚未完成量产认证。",
+        "公司2025年营业收入为37.17亿元，归属于上市公司股东的净利润为2.84亿元。"
+      ],
+      "supports": [
+        [
+          "本公司已交付27台专用设备至客户进行生产验证。"
+        ],
+        [
+          "公司表示，该设备尚未完成量产认证。"
+        ]
+      ],
+      "cards": [
+        {
+          "members": [
+            "本公司已交付27台专用设备至客户进行生产验证。",
+            "请介绍公司的主要业务与产品进展？"
+          ],
+          "support": [
+            "urn:company-wiki:evidence-span:sha256:d2400d81edcad2466631bbcd4bbac4c7288e68b1df67c6faeffd1de258de5570"
+          ],
+          "context": [
+            "urn:company-wiki:evidence-span:sha256:4928435edd630898eaf538423dcf8de169b5db87e7ca46f8de0d22b9a29a7de8"
+          ]
+        },
+        {
+          "members": [
+            "公司表示，该设备尚未完成量产认证。",
+            "请介绍公司的主要业务与产品进展？"
+          ],
+          "support": [
+            "urn:company-wiki:evidence-span:sha256:877d3caa0b2819d510cad8b5fb7a74057e661bc5ce4e012e7389289dfd3de13c"
+          ],
+          "context": [
+            "urn:company-wiki:evidence-span:sha256:4928435edd630898eaf538423dcf8de169b5db87e7ca46f8de0d22b9a29a7de8"
+          ]
+        }
+      ],
+      "spans": [
+        "请介绍公司的主要业务与产品进展？",
+        "本公司已交付27台专用设备至客户进行生产验证。",
+        "公司表示，该设备尚未完成量产认证。"
+      ]
+    },
+    {
+      "parts": [
+        "本公司已交付27台专用设备至客户进行生产验证。",
+        "公司2025年营业收入为37.17亿元，归属于上市公司股东的净利润为2.84亿元。",
+        "该设备尚未完成量产认证。"
+      ],
+      "supports": [
+        [
+          "本公司已交付27台专用设备至客户进行生产验证。"
+        ],
+        [
+          "公司2025年营业收入为37.17亿元，归属于上市公司股东的净利润为2.84亿元。",
+          "该设备尚未完成量产认证。"
+        ]
+      ],
+      "cards": [
+        {
+          "members": [
+            "本公司已交付27台专用设备至客户进行生产验证。",
+            "请介绍公司的主要业务与产品进展？"
+          ],
+          "support": [
+            "urn:company-wiki:evidence-span:sha256:d2400d81edcad2466631bbcd4bbac4c7288e68b1df67c6faeffd1de258de5570"
+          ],
+          "context": [
+            "urn:company-wiki:evidence-span:sha256:4928435edd630898eaf538423dcf8de169b5db87e7ca46f8de0d22b9a29a7de8"
+          ]
+        },
+        {
+          "members": [
+            "公司2025年营业收入为37.17亿元，归属于上市公司股东的净利润为2.84亿元。",
+            "该设备尚未完成量产认证。",
+            "请介绍公司的主要业务与产品进展？"
+          ],
+          "support": [
+            "urn:company-wiki:evidence-span:sha256:e036117e3c454f3e8a98b2299a42a90f5994d382b0293c168dd07d0d7763f83c",
+            "urn:company-wiki:evidence-span:sha256:e7be0d46ba4509fa9b7061767e360b5cea79e3c612328e6516b24572945eebe1"
+          ],
+          "context": [
+            "urn:company-wiki:evidence-span:sha256:4928435edd630898eaf538423dcf8de169b5db87e7ca46f8de0d22b9a29a7de8"
+          ]
+        }
+      ],
+      "spans": [
+        "请介绍公司的主要业务与产品进展？",
+        "本公司已交付27台专用设备至客户进行生产验证。",
+        "公司2025年营业收入为37.17亿元，归属于上市公司股东的净利润为2.84亿元。",
+        "该设备尚未完成量产认证。"
+      ]
+    },
+    {
+      "parts": [
+        "公司催化材料业务收入下降。",
+        "公司认为，这一变化主要由于下游需求减少。",
+        "感谢您对公司的关注！"
+      ],
+      "supports": [
+        [
+          "公司认为，这一变化主要由于下游需求减少。"
+        ]
+      ],
+      "cards": [
+        {
+          "members": [
+            "公司认为，这一变化主要由于下游需求减少。",
+            "请介绍公司的主要业务与产品进展？"
+          ],
+          "support": [
+            "urn:company-wiki:evidence-span:sha256:8232fac1661c1c18c3eedcaa28af75bda83747f0177d070703410ff5e1315002"
+          ],
+          "context": [
+            "urn:company-wiki:evidence-span:sha256:4928435edd630898eaf538423dcf8de169b5db87e7ca46f8de0d22b9a29a7de8"
+          ]
+        }
+      ],
+      "spans": [
+        "请介绍公司的主要业务与产品进展？",
+        "公司认为，这一变化主要由于下游需求减少。"
+      ]
+    },
+    {
+      "parts": [
+        "本公司已交付27台专用设备至客户进行生产验证。",
+        "公司2025年营业收入为37.17亿元，归属于上市公司股东的净利润为2.84亿元。",
+        "感谢您对公司的关注！"
+      ],
+      "supports": [
+        [
+          "本公司已交付27台专用设备至客户进行生产验证。"
+        ]
+      ],
+      "cards": [
+        {
+          "members": [
+            "本公司已交付27台专用设备至客户进行生产验证。",
+            "请介绍公司的主要业务与产品进展？"
+          ],
+          "support": [
+            "urn:company-wiki:evidence-span:sha256:d2400d81edcad2466631bbcd4bbac4c7288e68b1df67c6faeffd1de258de5570"
+          ],
+          "context": [
+            "urn:company-wiki:evidence-span:sha256:4928435edd630898eaf538423dcf8de169b5db87e7ca46f8de0d22b9a29a7de8"
+          ]
+        }
+      ],
+      "spans": [
+        "请介绍公司的主要业务与产品进展？",
+        "本公司已交付27台专用设备至客户进行生产验证。"
+      ]
+    }
+  ]
+}

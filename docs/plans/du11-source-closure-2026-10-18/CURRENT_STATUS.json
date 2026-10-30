@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-30",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_C_ARGUMENT_CAUSAL_PUBLISHED_Q_SCOPE_TDD",
+  "overall_status": "ACTIVE_QA_SCOPE_ACCEPTED_RELEASE_PENDING_SOURCE_DESCRIPTION_NEXT",
   "parallel_packages_20261025": {
     "status": "W16_W17_W18_ROOT_COMPONENT_ACCEPTED_MERGED",
     "entry": "harness_lanes/20261025/README.md",
@@ -3128,8 +3128,8 @@
     "source_commit": "69c9b178e4b23ff9bb57b804b7c954893bcd5e13"
   },
   "qa_closed_scope_next": {
-    "status": "DESIGN_ACCEPTED_TDD_BASELINE_FROZEN_READY_IMPLEMENT",
-    "entry": "review/source-information-20261030/QA_CLOSURE_IMPLEMENTATION.md",
+    "status": "ENGINEERING_ACCEPTED_PENDING_COMMIT_CI",
+    "entry": "review/qa-closed-scope-20261030/README.md",
     "actual_corrected_tests": {
       "failed": 3,
       "passed": 1,
@@ -3144,7 +3144,36 @@
       "no forged physical adjacency from QA membership"
     ],
     "independent_design": "review/source-information-20261030/q-scope-design/README.md",
+    "implementation_started": true,
+    "next": "Expand Q1-Q3 owner/public task controls; implement same-session QA scope service before package-index sidecars; preserve physical validation and immutable owner/context.",
+    "first_tdd": {
+      "failed": 7,
+      "passed": 3
+    },
+    "first_implementation": {
+      "passed": 73,
+      "seconds": 2.99
+    },
+    "mypy_source_files": 397,
+    "initial_domain": {
+      "passed": 3288,
+      "skipped": 11,
+      "failed": 5,
+      "seconds": 61.47
+    },
+    "real_source_recall_open": [
+      "offering roster and 300 compounds isolated owner unknown",
+      "subsidiary product and listing-review status unknown"
+    ],
+    "domain_passed": 3320,
+    "domain_skipped": 11,
+    "independent_passed": 15,
+    "independent_open": 0
+  },
+  "source_description_next": {
+    "status": "DESIGN_ACCEPTED_READY_NEXT",
+    "entry": "review/source-information-20261030/SOURCE_DESCRIPTION_NEXT.md",
     "implementation_started": false,
-    "next": "Expand Q1-Q3 owner/public task controls; implement same-session QA scope service before package-index sidecars; preserve physical validation and immutable owner/context."
+    "real_content_recall_accepted": false
   }
 }

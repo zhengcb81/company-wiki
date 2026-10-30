@@ -1,0 +1,59 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.qs30a", "requested_basetemp_len": 41, "cwd_len": 34, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\郑曾波\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 10 items
+
+tests\unit\du11_production\test_qa_closed_scopes.py FF.FFFF..F           [100%]
+
+================================== FAILURES ===================================
+_ test_financial_and_thanks_do_not_borrow_business_support_or_prompt_membership[answers0] _
+tests\unit\du11_production\test_qa_closed_scopes.py:38: in test_financial_and_thanks_do_not_borrow_business_support_or_prompt_membership
+    assert {FINANCIAL, GREETING}.isdisjoint(s.raw_text for s in selected.evidence_spans)
+E   AssertionError: assert False
+E    +  where False = <built-in method isdisjoint of set object at 0x000002765B725E00>(<generator object test_financial_and_thanks_do_not_borrow_business_support_or_prompt_membership.<locals>.<genexpr> at 0x000002765A57BAC0>)
+E    +    where <built-in method isdisjoint of set object at 0x000002765B725E00> = {'公司2025年营业收入为37.17亿元，归属于上市公司股东的净利润为2.84亿元。', '感谢您对公司的关注！'}.isdisjoint
+_ test_financial_and_thanks_do_not_borrow_business_support_or_prompt_membership[answers1] _
+tests\unit\du11_production\test_qa_closed_scopes.py:38: in test_financial_and_thanks_do_not_borrow_business_support_or_prompt_membership
+    assert {FINANCIAL, GREETING}.isdisjoint(s.raw_text for s in selected.evidence_spans)
+E   AssertionError: assert False
+E    +  where False = <built-in method isdisjoint of set object at 0x000002765B7773E0>(<generator object test_financial_and_thanks_do_not_borrow_business_support_or_prompt_membership.<locals>.<genexpr> at 0x000002765A57AA40>)
+E    +    where <built-in method isdisjoint of set object at 0x000002765B7773E0> = {'公司2025年营业收入为37.17亿元，归属于上市公司股东的净利润为2.84亿元。', '感谢您对公司的关注！'}.isdisjoint
+___ test_independent_business_answers_remain_distinct_closed_support_scopes ___
+tests\unit\du11_production\test_qa_closed_scopes.py:58: in test_independent_business_answers_remain_distinct_closed_support_scopes
+    assert any(BUSINESS in scope and other not in scope for scope in scopes)
+E   assert False
+E    +  where False = any(<generator object test_independent_business_answers_remain_distinct_closed_support_scopes.<locals>.<genexpr> at 0x000002765A676DC0>)
+_ test_unfinished_or_dependent_answer_fragments_travel_together_to_actual_tasks[parts0] _
+tests\unit\du11_production\test_qa_closed_scopes.py:73: in test_unfinished_or_dependent_answer_fragments_travel_together_to_actual_tasks
+    assert all(FINANCIAL not in members and GREETING not in members for _, members in cards)
+E   assert False
+E    +  where False = all(<generator object test_unfinished_or_dependent_answer_fragments_travel_together_to_actual_tasks.<locals>.<genexpr> at 0x000002765B7AB440>)
+_ test_unfinished_or_dependent_answer_fragments_travel_together_to_actual_tasks[parts1] _
+tests\unit\du11_production\test_qa_closed_scopes.py:73: in test_unfinished_or_dependent_answer_fragments_travel_together_to_actual_tasks
+    assert all(FINANCIAL not in members and GREETING not in members for _, members in cards)
+E   assert False
+E    +  where False = all(<generator object test_unfinished_or_dependent_answer_fragments_travel_together_to_actual_tasks.<locals>.<genexpr> at 0x000002765B66C6C0>)
+_ test_unfinished_or_dependent_answer_fragments_travel_together_to_actual_tasks[parts2] _
+tests\unit\du11_production\test_qa_closed_scopes.py:73: in test_unfinished_or_dependent_answer_fragments_travel_together_to_actual_tasks
+    assert all(FINANCIAL not in members and GREETING not in members for _, members in cards)
+E   assert False
+E    +  where False = all(<generator object test_unfinished_or_dependent_answer_fragments_travel_together_to_actual_tasks.<locals>.<genexpr> at 0x000002765B66D2F0>)
+_ test_scope_owner_is_immutable_and_includes_meaning_context_in_cache_identity _
+tests\unit\du11_production\test_qa_closed_scopes.py:91: in test_scope_owner_is_immutable_and_includes_meaning_context_in_cache_identity
+    first = session.support_owner(support)
+            ^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'SourceOperatingSession' object has no attribute 'support_owner'
+=========================== short test summary info ===========================
+FAILED tests/unit/du11_production/test_qa_closed_scopes.py::test_financial_and_thanks_do_not_borrow_business_support_or_prompt_membership[answers0]
+FAILED tests/unit/du11_production/test_qa_closed_scopes.py::test_financial_and_thanks_do_not_borrow_business_support_or_prompt_membership[answers1]
+FAILED tests/unit/du11_production/test_qa_closed_scopes.py::test_independent_business_answers_remain_distinct_closed_support_scopes
+FAILED tests/unit/du11_production/test_qa_closed_scopes.py::test_unfinished_or_dependent_answer_fragments_travel_together_to_actual_tasks[parts0]
+FAILED tests/unit/du11_production/test_qa_closed_scopes.py::test_unfinished_or_dependent_answer_fragments_travel_together_to_actual_tasks[parts1]
+FAILED tests/unit/du11_production/test_qa_closed_scopes.py::test_unfinished_or_dependent_answer_fragments_travel_together_to_actual_tasks[parts2]
+FAILED tests/unit/du11_production/test_qa_closed_scopes.py::test_scope_owner_is_immutable_and_includes_meaning_context_in_cache_identity
+========================= 7 failed, 3 passed in 2.26s =========================

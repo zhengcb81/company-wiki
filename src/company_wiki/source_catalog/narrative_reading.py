@@ -19,7 +19,9 @@ from company_wiki.document_understanding.pipeline import understand_units
 from company_wiki.document_understanding.narrative_continuity import (
     NativeSourceContext, SourcePageFlow, build_native_continuity, native_section_key,
 )
-from company_wiki.document_understanding.operating_states.relations import independent_statement_start
+from company_wiki.document_understanding.operating_states.relations import (
+    independent_statement_start, DEPENDENT_STATEMENT,
+)
 from company_wiki.document_understanding.reading_context_contract import CURRENT_READING_CONTEXT_SCHEMA
 from company_wiki.document_understanding.selection_bridge import build_context_graph
 from company_wiki.document_understanding.summary_input import _sent_policies, _unread, _SHARED_CONSTRAINTS
@@ -442,12 +444,7 @@ def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, An
     grouped: set[str] = set()
     generated = []
     joint_facts: dict[Any, Any] = {}
-    dependent_statement = re.compile(
-        r"该|上述|这一|此项|这些|其|尚未|未能|未经|并未|不代表|不意味着|"
-        r"然而|但是|但|仍需|须|需先|如果|除非|未来|下半年|预计|预期|计划|将|拟|可能|"
-        r"\b(?:this|these|that|those|it|however|but|not|never|unless|if|before|"
-        r"still|required|requires|subject to|will|would|could|may|expect\w*|plan\w*)\b",
-        re.IGNORECASE)
+    dependent_statement = DEPENDENT_STATEMENT
     cjk_character = re.compile(r"[\u3400-\u9fff]")
     cjk_punctuation = frozenset("。！？；，、：）》】”’（《【“‘")
 
@@ -838,6 +835,9 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
                 explicit_reference_sections[uid] = section_id
     session = SourceOperatingSession(units, work_budget=work_budget, contexts={},
         groups=analysis_groups, antecedents=antecedents, originals=original_units)
+    from .narrative_qa_scopes import close_qa_packages
+    packages, budget_packages, qa_withheld = close_qa_packages(packages, budget_packages, session)
+    withheld.extend(qa_withheld)
     # Readiness precedes both the graph and any fact/cache work: a product
     # deictic whose declaration is missing, ambiguous, truncated or outside
     # the combined original envelope defers only its own card.
@@ -1015,7 +1015,7 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
                 owner = "analysis:" + package["package_id"] + ":" + str(index)
                 analysis_groups[owner] = tuple(view)
                 contexts[owner] = context_ids - set(view)
-    session.contexts = {uid: tuple(sorted(ids)) for uid, ids in contexts.items()}
+    session.contexts = {**session.contexts, **{uid: tuple(sorted(ids)) for uid, ids in contexts.items()}}
     graph = build_context_graph({**pipeline["packages"], "packages": budget_packages}, texts)
     # One union of readable native ancestry, product deictics and restrictions.
     # Proven running furniture pays source work, never a new model-material fee.
@@ -1067,18 +1067,23 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
     scope_owners = {tuple(members): owner for owner, members in support_groups.items()}
     scope_uses: dict[tuple[Any, ...], tuple[str, str, bool, str]] = {}
 
-    def scope_use(native_support, *, table_qualified=False):
+    def scope_use(native_support, *, table_qualified=False, prepared_owner=None):
         # A carrier stands for all original characters in its native range.
         # This key is exactly the scope later projected to canonical spans.
         if not scope_ready:
             return "unresolved", "source_assessment_incomplete", False, "description"
         members = tuple(dict.fromkeys(origins.get(uid, uid) for uid in native_support))
-        key = (members, table_qualified)
+        key = (members, table_qualified, prepared_owner)
         if key in scope_uses:
             return scope_uses[key]
         try:
             work_budget.charge(len(members) + 1)
-            owner = scope_owners.get(members)
+            if prepared_owner is not None and session.groups.get(prepared_owner) != members:
+                # Generic source qualification may enlarge a closed QA quote.
+                # Prepare the actual final support, not the smaller proof.
+                context = tuple(uid for uid in session.context_for(prepared_owner) if uid not in members)
+                prepared_owner = session.support_owner(members, meaning_context=context)
+            owner = prepared_owner or scope_owners.get(members)
             if owner is None:
                 if len(members) == 1 and session.owner_for(members[0]) == members[0]:
                     owner = members[0]
@@ -1149,7 +1154,10 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
         for native_support in _citation_support_views(original_package, original_units):
             if not native_support:
                 continue
-            use, reason, relevant, value = scope_use(native_support, table_qualified=table_qualified)
+            use, reason, relevant, value = scope_use(native_support, table_qualified=table_qualified,
+                prepared_owner=original_package.get('_source_scope_owner'))
+            if original_package.get('_qa_scope_complete') is False and use == 'support':
+                use, reason = 'unresolved', 'source_scope_partial'
             use_views.append({"support_unit_ids": list(native_support),
                               "reading_support_use": use, "reading_support_reason": reason})
             for uid in native_support:

@@ -1,0 +1,199 @@
+{
+  "schema": "qa-scope-independent-review/1",
+  "reviewer": "/root/semantic_axes_release_review",
+  "status": "PASS",
+  "open_within_reviewed_engineering_scope": 0,
+  "signed_at_utc": "2026-10-30T02:00:15.042715+00:00",
+  "base_head": "320ee6c7b7b84a03c0a23f5a4d4859cbdc3f87d8",
+  "binding": "Actual eight working-copy raw/LF hashes frozen before final tests and rechecked at signing; final type correction included.",
+  "files": [
+    {
+      "path": "src/company_wiki/document_understanding/decision_inventory.py",
+      "raw_sha256": "fc361e3d0bf05cfa4bd8eb6ebba6677fe2f8e4c331197d84ba3bd50fa7176337",
+      "lf_sha256": "87c8e167863a5a1116bed8ffbf443ef5670f106e675785f5d4c70b72fcba27d9"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/patterns.py",
+      "raw_sha256": "23b9fe6ad447140d4bd67b38e4b0dbe0fa03900a1858a6aaefd872cfbc74a897",
+      "lf_sha256": "cbff390bba8c9d685ad450ecb8ec7d1a0f6595309bba8668bc609cd980e53b9c"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/relations.py",
+      "raw_sha256": "a9f81e0bd576dd03c785d0f2017098ea8342f23aa064d1899b2df457fba0f177",
+      "lf_sha256": "3e7808446e03ddd7f0267e042f82636e65c236a45c646d13e9812385ac347420"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_policy.py",
+      "raw_sha256": "ec5cf9d62e89184cacdc9e3658438486f5c2ac1710ef3e7e08f5f004dd5a55a5",
+      "lf_sha256": "f12a2adff4a10a20c7ed94956c6ee6df6ccb7770f20181d190798b6e23cc23ec"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+      "raw_sha256": "f3e611231b207467c15b25d3fbe1d65ddf771c705934111550e496b10fdac97d",
+      "lf_sha256": "f1f5a71cf5db377aa37d469ed4267ff35d537a95e5424aa8beed1207d14c0edf"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_reading.py",
+      "raw_sha256": "96197a81170e18b275527403fdf80c9fa90b7782aad11f563daf96b562b4ab73",
+      "lf_sha256": "215df869a9a5d24ad5891605d0d12ef4f516b185d8a407e270069a7e1dc95fea"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_qa_scopes.py",
+      "raw_sha256": "283ff3c7431fda6abd1d445a21b0852b078c8691420f12438365cec9e1b00154",
+      "lf_sha256": "283ff3c7431fda6abd1d445a21b0852b078c8691420f12438365cec9e1b00154"
+    },
+    {
+      "path": "tests/unit/du11_production/test_qa_closed_scopes.py",
+      "raw_sha256": "ae5ed280c2e75c02b8661d08149d18fd640542cf0aaa7cb31995f9e9052cda8f",
+      "lf_sha256": "ae5ed280c2e75c02b8661d08149d18fd640542cf0aaa7cb31995f9e9052cda8f"
+    }
+  ],
+  "final_tests": {
+    "independent_cases": 15,
+    "passed": 15,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "pytest_seconds": 1.98,
+    "command_wall_seconds": 4.01,
+    "xml_seconds": 1.835,
+    "log": "final-r4.log",
+    "junit": "final-r4.xml"
+  },
+  "scope": [
+    "actual source-card support/member/context closure",
+    "financial and courtesy cost isolation",
+    "postposed restriction and nonadjacent original dependency",
+    "causal result and explanation closure",
+    "multiple qualifications sharing one original object identity",
+    "true two-object ambiguity partial",
+    "question and other QA record non-donation",
+    "original partial QA readable but not admitted",
+    "immutable context identity and cached zero work",
+    "actual pipeline meaning context before assessment",
+    "unpaid context traversal and exhausted member-read barrier"
+  ],
+  "closed_findings": [
+    {
+      "id": "QA-01",
+      "priority": "P2",
+      "issue": "issuer-prefixed restriction detached from the positive source card"
+    },
+    {
+      "id": "QA-02",
+      "priority": "P2",
+      "issue": "intervening finance hid restriction and entered another support quote"
+    },
+    {
+      "id": "QA-03",
+      "priority": "P2",
+      "issue": "issuer-prefixed causal explanation lost its source result half"
+    },
+    {
+      "id": "QA-04",
+      "priority": "P2",
+      "issue": "scope registration copied unrelated accumulated contexts without work charge"
+    },
+    {
+      "id": "QA-05",
+      "priority": "P2",
+      "issue": "original partial orphan QA was admitted as whole support"
+    },
+    {
+      "id": "QA-06",
+      "priority": "P2",
+      "issue": "ordinary Chinese and English courtesy variants entered business source-card cost"
+    },
+    {
+      "id": "QA-07",
+      "priority": "P2",
+      "issue": "multiple restrictions on one original object were falsely treated as multiple object identities"
+    }
+  ],
+  "history_not_additive": [
+    {
+      "stage": "initial independent package",
+      "cases": 8,
+      "passed": 4,
+      "failed": 4,
+      "pytest_seconds": 2.15
+    },
+    {
+      "stage": "first stable repair before multiple-qualification fix",
+      "cases": 11,
+      "passed": 11,
+      "failed": 0,
+      "pytest_seconds": 1.96
+    },
+    {
+      "stage": "object-identity repair",
+      "cases": 13,
+      "passed": 13,
+      "failed": 0,
+      "pytest_seconds": 2.16
+    },
+    {
+      "stage": "two-object ambiguity and exhausted-read controls added",
+      "cases": 15,
+      "passed": 15,
+      "failed": 0,
+      "pytest_seconds": 1.86
+    },
+    {
+      "stage": "final source bytes including last type correction",
+      "cases": 15,
+      "passed": 15,
+      "failed": 0,
+      "pytest_seconds": 1.98
+    }
+  ],
+  "saved_probes": {
+    "file": "observations-r1.json",
+    "inputs": 4,
+    "seconds": 0.307,
+    "not_counted_as_tests": true
+  },
+  "static_review": {
+    "physical_entry": "qa_sequence defaults False; original physical basis/source/role/page/turn/paragraph/section checks and leading-deictic check retained.",
+    "identity": "private frozen local qualification carries actual original object span tuple; QA propagates a proven root; distinct actual source object refs stay partial.",
+    "context": "private per-scope meaning context is fixed at registration and consumed by explicit child owner; questions excluded; enlarged final support is reassessed with actual members.",
+    "budget": "one existing WorkBudget/session; input/member and semantic scans charged, no accumulated-context copy; bounded prepared lookup reuses cache; partial/exhausted scopes do not gain support.",
+    "recipe": "new narrative_qa_scopes module included in decision inventory; no public relation wire/raw ID rewrite."
+  },
+  "root_reports_not_counted_as_independent": {
+    "compatibility_cases": 126,
+    "seconds": 3.58,
+    "last_scoped_cases": 115,
+    "last_scoped_seconds": 3.0,
+    "mypy_source_files": 397,
+    "whole_affected_domain_final": "ROOT running; independent review does not attest its result"
+  },
+  "outside_scope_open": [
+    "real saved-source roster unknown/context-only omissions",
+    "formal summary",
+    "restart and cross-run cache adoption",
+    "FF/RF adoption",
+    "W21",
+    "US RPO",
+    "holdout",
+    "company loop"
+  ],
+  "cleanup": {
+    "only_review_directory_written": true,
+    "product_test_or_shared_plan_edits": false,
+    "config_diff_empty": true,
+    "original_hook_mode_wip_preserved": true,
+    "hook_numstat": "0\t0\t.githooks/pre-push",
+    "python_no_bytecode": true,
+    "pytest_cacheprovider_disabled": true,
+    "review_cache_directories": [],
+    "scripts_probes_logs_xml_retained": true,
+    "pdf_originals_read": false,
+    "sdk_or_secrets_read": false,
+    "w21_read_or_write": false,
+    "external_api_calls": 0,
+    "model_calls": 0,
+    "downloads": 0,
+    "other_repository_writes": false
+  }
+}

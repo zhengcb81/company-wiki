@@ -502,6 +502,12 @@ _SOURCE_COMPARISONS = (
 # An unspecified prior period does not invent a quarter/month interval.
 SOURCE_COMPARISON_MODIFIER_PATTERN = "|".join("(?:" + pattern + ")" for _, pattern in _SOURCE_COMPARISONS)
 _REVENUE_COMPARISON = re.compile(SOURCE_COMPARISON_MODIFIER_PATTERN, re.I)
+_REVENUE_VALUE_UNIT = re.compile(
+    r"\s*(?:百|千)?(?:" + _REVENUE_MEASURE_UNIT.pattern.removeprefix(r"^\s*") + r")\s*", re.I)
+_REVENUE_COMPARISON_VALUE = re.compile(
+    r"\s*(?:" + SOURCE_COMPARISON_MODIFIER_PATTERN + r")\s*(?:同期|same\s+period)?\s*"
+    r"(?:" + _REVENUE_CURRENCY.pattern + r")?\s*\d[\d,]*(?:\.\d+)?\s*"
+    r"(?:百|千)?(?:" + _REVENUE_MEASURE_UNIT.pattern.removeprefix(r"^\s*") + r")\s*", re.I)
 _SOURCE_COMPARISON_BASIS = re.compile("|".join(
     "(?P<" + basis + ">" + pattern + ")" for basis, pattern in _SOURCE_COMPARISONS), re.I)
 
@@ -639,12 +645,20 @@ def source_result_subject(text: str, start: int, end: int) -> bool:
         if (kind in {"quantity", "direction", "revenue"} and left <= start
                 and prepared.scope(left, right) == scope):
             return True
+        # A source-owned revenue level followed by its explicit numeric
+        # comparison retains the same subject across that comma. A new profit
+        # or other metric noun cannot pass this amount-only comparison frame.
+        if (kind == 'revenue' and left <= start and right <= scope[0]
+                and _REVENUE_VALUE_UNIT.fullmatch(text[right:scope[0]].strip(' ,，'))
+                and _REVENUE_COMPARISON_VALUE.fullmatch(text[scope[0]:start])):
+            return True
     # A named business revenue subject is still explicit when its percentage
     # lacks a comparison basis. Reuse the very same business-to-revenue owner
     # proof; do not promote it to the complete growth relation above.
     return any(change.start() <= start < end <= change.end()
                and _owned_revenue_subject(text, change.start())
-               for change in _REVENUE_RATE_CHANGE.finditer(text))
+               for matcher in (_REVENUE_RATE_CHANGE, _REVENUE_GROWTH)
+               for change in matcher.finditer(text))
 
 
 def _segment_reporting_relation(clause: str) -> bool:

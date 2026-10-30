@@ -141,6 +141,21 @@ def _subject_predicate_boundary(text: str, start: int = 0) -> re.Match[str] | No
                  if match.group().casefold() not in _NONPREDICATE_BOUNDARIES), None)
 
 
+DEPENDENT_STATEMENT = re.compile(
+    r"该|上述|这一|此项|这些|其|尚未|未能|未经|并未|不代表|不意味着|"
+    r"然而|但是|但|仍需|须|需先|如果|除非|未来|下半年|预计|预期|计划|将|拟|可能|"
+    r"\b(?:this|these|that|those|it|however|but|not|never|unless|if|before|"
+    r"still|required|requires|subject to|will|would|could|may|expect\w*|plan\w*)\b", re.I)
+
+
+def closed_source_statement(text: str) -> bool:
+    return text.rstrip().rstrip("\"'”’）)]》").endswith(("。", "！", "？", ".", "!", "?", ";", "；"))
+
+
+def source_courtesy_statement(text: str) -> bool:
+    return p.COURTESY.fullmatch(text.strip().rstrip('。.!！?？')) is not None
+
+
 def independent_statement_start(text: str) -> bool:
     """Conservative source boundary using the existing script and NP grammar.
 

@@ -4,7 +4,7 @@ No parsing, IO, registry or extra work balance. The source owner fixes native
 carriers and structural context first; consumers share the resulting facts.
 """
 from collections.abc import Iterable, Mapping
-from dataclasses import replace
+from dataclasses import dataclass, replace
 from bisect import bisect_right
 from itertools import chain
 import re
@@ -12,6 +12,7 @@ from typing import Any
 
 from company_wiki.document_understanding.layout_hints.contract import WorkBudget, WorkBudgetExceeded
 from company_wiki.document_understanding.operating_states.relations import OperatingRelationSession
+from company_wiki.document_understanding.operating_states.relations import independent_statement_start
 from company_wiki.document_understanding.operating_states.product_reference import (
     find_product_deictic, head_class, product_head_spans,
 )
@@ -65,11 +66,13 @@ _IGNORED_CONTEXT_PATTERN = re.compile(
 # A named result ("the increase in service revenue") is self-contained and
 # does not match this deliberately narrow bare-result grammar.
 _RESULT_REFERENCE = re.compile(
-    r"^\s*(?P<marker>(?:(?:有[关關]|上述|[该該此])\s*)"
+    r"(?:^|[，,;；。.!?])\s*(?P<marker>(?:(?:有[关關]|上述|[该該此])\s*)"
     r"(?:(?:" + SOURCE_COMPARISON_MODIFIER_PATTERN + r")\s*)?"
     r"(?P<cn>增加|增[长長]|上升|下降|減少|减少)|"
     r"(?:this|that|the|such)\s+(?:(?:" + SOURCE_COMPARISON_MODIFIER_PATTERN + r")\s+)?"
-    r"(?P<en>increase|growth|rise|decrease|decline|reduction))"
+    r"(?P<en>increase|growth|rise|decrease|decline|reduction)|"
+    r"(?P<neutral>(?:这一|這一|这个|這個|上述)(?:变化|變化|变动|變動)|"
+    r"(?:this|that|such)\s+(?:change|movement)))"
     r"(?=\s*(?:主要|[是为為由]|was\b|is\b|arose\b|resulted\b|due\b))", re.I)
 _RESULT_CHANGE = re.compile(
     r"(?P<up>增加|增[长長]|上升|\b(?:increased?|increases|grew|rose)\b)|"
@@ -97,6 +100,12 @@ def _specific_context_terms(text: str) -> frozenset[str]:
         term for term in terms
         if term not in _GENERIC_CONTEXT_TERMS
     )
+
+
+@dataclass(frozen=True)
+class _LocalQualification:
+    head: str | None = None
+    object_ref: tuple[str, int, int] | None = None
 
 
 class _ObservedUnits(Mapping):
@@ -132,7 +141,9 @@ class SourceOperatingSession:
         self.units = units
         self.work_budget = work_budget
         self.contexts = contexts or {}
-        self.groups = groups or {}
+        self.groups = dict(groups or {})
+        self._support_owners: dict[tuple[tuple[str, ...], tuple[str, ...]], str] = {}
+        self._support_contexts: dict[str, tuple[str, ...]] = {}
         self.owners = {uid: gid for gid, members in self.groups.items() for uid in members}
         self.antecedents = antecedents or {}
         self.originals = originals or {}
@@ -151,6 +162,41 @@ class SourceOperatingSession:
 
     def owner_for(self, uid: str) -> str:
         return self.owners.get(uid, uid)
+
+    def support_owner(self, support: tuple[str, ...], *,
+                      meaning_context: tuple[str, ...] = ()) -> str:
+        """Register one immutable semantic scope without replacing unit owners.
+
+        Questions belong to model context, not this semantic context. Callers
+        first establish source closure; this method only owns preparation/cache
+        identity and the original-character projection already used by groups.
+        """
+        if (type(support) is not tuple or type(meaning_context) is not tuple
+                or not support or len(support) + len(meaning_context) > 64):
+            raise ValueError('invalid source support scope')
+        # Bounded canonical-ID cache identity is not another source scan.
+        # Reject custom hash/iterator objects before the free prepared lookup.
+        if any(type(uid) is not str for uid in (*support, *meaning_context)):
+            raise ValueError('invalid source support identity')
+        key = (support, meaning_context)
+        cached = self._support_owners.get(key)
+        if cached is not None:
+            return cached
+        self.work_budget.charge(1 + len(support) + len(meaning_context))
+        if (any(type(uid) is not str or uid not in self.units for uid in (*support, *meaning_context))
+                or len(set(support)) != len(support) or set(support) & set(meaning_context)):
+            raise ValueError('invalid source support members')
+        source = self.units[support[0]].source_id
+        if any(self.units[uid].source_id != source for uid in (*support, *meaning_context)):
+            raise ValueError('source support cannot cross originals')
+        owner = 'source-scope:' + str(len(self._support_owners))
+        self.groups[owner] = support
+        self._support_contexts[owner] = meaning_context
+        self._support_owners[key] = owner
+        return owner
+
+    def context_for(self, owner: str) -> tuple[str, ...]:
+        return self._support_contexts.get(owner, self.contexts.get(owner, ()))
 
     def source_text(self, uid: str) -> str:
         owner = self.owner_for(uid)
@@ -213,9 +259,9 @@ class SourceOperatingSession:
             try:
                 if owner in self.groups:
                     self._prepare_group(owner)
-                result = self.engine.detect(owner, self.contexts.get(owner, ()))
+                result = self.engine.detect(owner, self.context_for(owner))
                 self.bindings[owner] = self.engine.relation_bindings(
-                    owner, self.contexts.get(owner, ()))
+                    owner, self.context_for(owner))
             except WorkBudgetExceeded:
                 result = {"schema_version": "du4-operating-relations/1", "unit_id": owner,
                     "relations": [], "diagnostics": [{"code": "work_budget_exhausted", "unit_id": owner}],
@@ -297,9 +343,23 @@ class SourceOperatingSession:
         used_before = self.work_budget.used
         text = self.source_text(owner)
         self.work_budget.charge(len(text) + 1)
-        marker = _RESULT_REFERENCE.match(text)
+        marker = _RESULT_REFERENCE.search(text)
         if marker is None:
             return None
+        # A reference inside one original statement may already have its own
+        # named result. Do not force it to find a second statement outside.
+        internal = text[:marker.start()]
+        self.work_budget.charge((3 + READING_BUSINESS_SCAN_PASSES) * len(internal) + 1)
+        internal_changes = tuple(_RESULT_CHANGE.finditer(internal))
+        if len(internal_changes) == 1:
+            change = internal_changes[0]
+            observation = observe_metric_predicate(internal, change.start(), change.end())
+            if (source_result_subject(internal, change.start(), change.end()) and observation.observed
+                    and (marker.group('neutral') or change.lastgroup == _result_direction(marker.group('cn') or marker.group('en')))):
+                return {'schema_version':'du11-reference-closure/1','unit_id':owner,
+                    'status':'not_applicable','reference_refs':[], 'declaration_refs':[],
+                    'member_refs':[],'required_original_unit_ids':(), 'attribution':'unknown',
+                    'diagnostics':[],'work_used':self.work_budget.used-used_before}
         reference = {"unit_id": owner, "char_start": marker.start("marker"),
                      "char_end": marker.end("marker")}
         result: dict[str, Any] = {"schema_version": "du11-reference-closure/1", "unit_id": owner,
@@ -328,8 +388,8 @@ class SourceOperatingSession:
                     compatible_basis = (len(previous_basis) <= 1 and len(reference_basis) <= 1
                         and (not previous_basis or not reference_basis or previous_basis == reference_basis))
                     if (source_result_subject(previous.raw_text, change.start(), change.end())
-                            and _RESULT_REFERENCE.match(previous.raw_text) is None
-                            and change.lastgroup == _result_direction(marker.group("cn") or marker.group("en"))
+                            and _RESULT_REFERENCE.search(previous.raw_text) is None
+                            and (marker.group('neutral') or change.lastgroup == _result_direction(marker.group("cn") or marker.group("en")))
                             and observation.observed and compatible_basis):
                         declaration = {"unit_id": previous_id, "char_start": 0,
                                        "char_end": len(previous.raw_text)}
@@ -381,6 +441,80 @@ class SourceOperatingSession:
                                       "char_end": len(original.raw_text)}
         return None
 
+    def _qualification_pair(self, left, right, left_scope, right_scope, *,
+                            inherited_head=None, left_owner=None, right_owner=None,
+                            qa_sequence=False):
+        """Semantic match only; callers own their physical/QA sequence proof."""
+        a, b = self.units[left], self.units[right]
+        def intersects(ref, marker):
+            return (ref["unit_id"] == marker["unit_id"]
+                    and ref["char_start"] < marker["char_end"]
+                    and marker["char_start"] < ref["char_end"])
+        right_text, right_marker = right_scope
+        self.work_budget.charge(2 * len(right_text))
+        # Revenue outlooks are not product objects. Their explicit
+        # local premise uses this same source dependency projection,
+        # while the caller owns transitive envelope/budget closure.
+        if left != right:
+            self.work_budget.charge(2 * (len(a.raw_text) + len(b.raw_text)))
+            if (revenue_guidance_premise(a.raw_text, b.raw_text, follows=True)
+                    or revenue_guidance_premise(b.raw_text, a.raw_text, follows=False)):
+                return _LocalQualification()
+        deictics = find_product_deictic(right_text)
+        if len(deictics) != 1:
+            return None
+        deictic = deictics[0]
+        prefix = strip_connector(right_text[:deictic.span[0]])[0].strip(' ,，:：')
+        if prefix and not (qa_sequence and independent_statement_start(prefix)):
+            return None
+        marker = {**right_marker,
+                  "char_start": right_marker["char_start"] + deictic.span[0],
+                  "char_end": right_marker["char_start"] + deictic.span[1]}
+        result = self.relations(right_owner or right)
+        if result["status"] != "complete":
+            return None
+        restriction = False
+        for relation in result["relations"]:
+            self.work_budget.charge(1 + len(relation["object_refs"]))
+            if (relation["attribution"] in {"other", "quoted_related_party"}
+                    or relation["modality"] not in {"actual", "conditional"}
+                    or not (relation["polarity"] == "negative" or relation["stage"] in {
+                        "not_yet", "conditional", "suspended", "discontinued"})):
+                continue
+            if any(intersects(ref, marker) for ref in relation["object_refs"]):
+                restriction = True
+                break
+        if not restriction:
+            return None
+        previous = self.relations(left_owner or left)
+        if previous["status"] != "complete":
+            return None
+        objects: list[tuple[str, int, int]] = []
+        left_marker = left_scope[1]
+        self.work_budget.charge(len(previous["relations"]))
+        for relation in previous["relations"]:
+            inherited = (relation["attribution"] == "unknown"
+                         and inherited_head == head_class(deictic.head))
+            if ((relation["attribution"] != "issuer" and not inherited)
+                    or relation["modality"] not in {"actual", "conditional"}):
+                continue
+            self.work_budget.charge(len(relation["object_refs"]))
+            for ref in relation["object_refs"]:
+                if not intersects(ref, left_marker):
+                    continue
+                unit = self.units.get(ref["unit_id"]) or self.originals.get(ref["unit_id"])
+                if unit is None or not 0 <= ref["char_start"] < ref["char_end"] <= len(unit.raw_text):
+                    continue
+                text = unit.raw_text[ref["char_start"]:ref["char_end"]]
+                self.work_budget.charge(len(text))
+                objects.extend((ref["unit_id"], ref["char_start"] + start,
+                                ref["char_start"] + end)
+                               for start, end, head in product_head_spans(text)
+                               if head == head_class(deictic.head))
+        if len(set(objects)) != 1:
+            return None
+        return _LocalQualification(head_class(deictic.head), next(iter(set(objects))))
+
     def local_qualification_dependencies(self, edges, *, origins=None, section_ids=None) -> dict[str, tuple[str, ...]]:
         """Explicit restrictions on original neighbours, projected to material.
 
@@ -396,11 +530,6 @@ class SourceOperatingSession:
         origins = origins if origins is not None else {}
         dependencies: dict[str, tuple[str, ...]] = {}
         bound_heads: dict[str, str] = {}
-
-        def intersects(ref, marker):
-            return (ref["unit_id"] == marker["unit_id"]
-                    and ref["char_start"] < marker["char_end"]
-                    and marker["char_start"] < ref["char_end"])
 
         try:
             # Native parsers already own turn identity and reset it at headings,
@@ -449,74 +578,13 @@ class SourceOperatingSession:
                 right_scope = self._source_material_range(right_original, right)
                 if left_scope is None or right_scope is None:
                     continue
-                right_text, right_marker = right_scope
-                self.work_budget.charge(2 * len(right_text))
-                # Revenue outlooks are not product objects. Their explicit
-                # local premise uses this same source dependency projection,
-                # while the caller owns transitive envelope/budget closure.
-                if left != right:
-                    self.work_budget.charge(2 * (len(a.raw_text) + len(b.raw_text)))
-                    if (revenue_guidance_premise(a.raw_text, b.raw_text, follows=True)
-                            or revenue_guidance_premise(b.raw_text, a.raw_text, follows=False)):
+                matched = self._qualification_pair(left, right, left_scope, right_scope,
+                    inherited_head=bound_heads.get(left_original))
+                if matched is not None:
+                    if matched.head:
+                        bound_heads[right_original] = matched.head
+                    if left != right:
                         dependencies[left] = tuple(dict.fromkeys((*dependencies.get(left, ()), right)))
-                        continue
-                deictics = find_product_deictic(right_text)
-                if len(deictics) != 1:
-                    continue
-                deictic = deictics[0]
-                if strip_connector(right_text[:deictic.span[0]])[0].strip(" ,，:："):
-                    continue
-                marker = {**right_marker,
-                          "char_start": right_marker["char_start"] + deictic.span[0],
-                          "char_end": right_marker["char_start"] + deictic.span[1]}
-                result = self.relations(right)
-                if result["status"] != "complete":
-                    continue
-                restriction = False
-                for relation in result["relations"]:
-                    self.work_budget.charge(1 + len(relation["object_refs"]))
-                    if (relation["attribution"] in {"other", "quoted_related_party"}
-                            or relation["modality"] not in {"actual", "conditional"}
-                            or not (relation["polarity"] == "negative" or relation["stage"] in {
-                                "not_yet", "conditional", "suspended", "discontinued"})):
-                        continue
-                    if any(intersects(ref, marker) for ref in relation["object_refs"]):
-                        restriction = True
-                        break
-                if not restriction:
-                    continue
-                previous = self.relations(left)
-                if previous["status"] != "complete":
-                    continue
-                objects: list[tuple[str, int, int]] = []
-                left_marker = left_scope[1]
-                self.work_budget.charge(len(previous["relations"]))
-                for relation in previous["relations"]:
-                    inherited = (relation["attribution"] == "unknown"
-                                 and bound_heads.get(left_original) == head_class(deictic.head))
-                    if ((relation["attribution"] != "issuer" and not inherited)
-                            or relation["modality"] not in {"actual", "conditional"}):
-                        continue
-                    self.work_budget.charge(len(relation["object_refs"]))
-                    for ref in relation["object_refs"]:
-                        if not intersects(ref, left_marker):
-                            continue
-                        unit = self.units.get(ref["unit_id"]) or self.originals.get(ref["unit_id"])
-                        if unit is None or not 0 <= ref["char_start"] < ref["char_end"] <= len(unit.raw_text):
-                            continue
-                        text = unit.raw_text[ref["char_start"]:ref["char_end"]]
-                        self.work_budget.charge(len(text))
-                        objects.extend((ref["unit_id"], ref["char_start"] + start,
-                                        ref["char_start"] + end)
-                                       for start, end, head in product_head_spans(text)
-                                       if head == head_class(deictic.head))
-                if len(set(objects)) != 1:
-                    continue
-                bound_heads[right_original] = head_class(deictic.head)
-                # Internal carrier edges still establish the next original's
-                # identity. Only the published material graph suppresses self.
-                if left != right:
-                    dependencies[left] = tuple(dict.fromkeys((*dependencies.get(left, ()), right)))
             # An explicit source-authored outlook reference may point past one
             # same-page paragraph. It still needs the same source, role, and
             # uniquely known section, plus exact paragraph coordinates. This
@@ -696,8 +764,8 @@ class SourceOperatingSession:
             self.work_budget.charge(READING_BUSINESS_SCAN_PASSES * len(text))
             from company_wiki.document_understanding.operating_states.assertion_roles import prepare_source_assertions
             self.assertions[owner] = replace(prepare_source_assertions(text),
-                bound_operating=(self.engine.complete_assertion(owner,self.contexts.get(owner,()))
-                    or self.engine.unknown_argument(owner,self.contexts.get(owner,()))))
+                bound_operating=(self.engine.complete_assertion(owner,self.context_for(owner))
+                    or self.engine.unknown_argument(owner,self.context_for(owner))))
             assessment = prepare_reading_business_assessment(text, result, ref_text=ref_text,
                 source_roles=self.assertions[owner], relation_bindings=self.bindings.get(owner, ()))
             fact, financial = assessment.fact, assessment.financial_only

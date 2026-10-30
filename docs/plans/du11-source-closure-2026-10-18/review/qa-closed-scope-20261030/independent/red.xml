@@ -1,0 +1,81 @@
+<?xml version="1.0" encoding="utf-8"?><testsuites name="pytest tests"><testsuite name="pytest" errors="0" failures="4" skipped="0" tests="8" time="1.996" timestamp="2026-10-30T01:36:27.404851+00:00" hostname="DESKTOP-156V213"><testcase classname=".planning.qa-scope-20261030.independent.test_independent_qa" name="test_reporting_subject_cannot_detach_postposed_restriction" time="0.231"><failure message="assert False&#10; +  where False = any(&lt;generator object _joint_in_actual_cards.&lt;locals&gt;.&lt;genexpr&gt; at 0x0000016C1BEAFD30&gt;)">def test_reporting_subject_cannot_detach_postposed_restriction():
+        restriction = '公司表示，该设备尚未完成量产认证。'
+&gt;       _joint_in_actual_cards([BUSINESS, restriction], [BUSINESS, restriction, FINANCIAL], forbidden=[FINANCIAL])
+
+.planning\qa-scope-20261030\independent\test_independent_qa.py:19: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+parts = ['本公司已交付27台专用设备至客户进行生产验证。', '公司表示，该设备尚未完成量产认证。']
+answers = ['本公司已交付27台专用设备至客户进行生产验证。', '公司表示，该设备尚未完成量产认证。', '公司2025年营业收入为37.17亿元，归属于上市公司股东的净利润为2.84亿元。']
+forbidden = ['公司2025年营业收入为37.17亿元，归属于上市公司股东的净利润为2.84亿元。']
+
+    def _joint_in_actual_cards(parts, answers, *, forbidden=()):
+        _, selected = case(answers)
+        cards = admitted_cards(selected)
+        assert cards
+&gt;       assert any(set(parts) &lt;= members for _, members in cards)
+E       assert False
+E        +  where False = any(&lt;generator object _joint_in_actual_cards.&lt;locals&gt;.&lt;genexpr&gt; at 0x0000016C1BEAFD30&gt;)
+
+.planning\qa-scope-20261030\independent\test_independent_qa.py:11: AssertionError</failure></testcase><testcase classname=".planning.qa-scope-20261030.independent.test_independent_qa" name="test_intervening_finance_cannot_hide_restriction_or_attach_to_it" time="0.031"><failure message="assert False&#10; +  where False = any(&lt;generator object _joint_in_actual_cards.&lt;locals&gt;.&lt;genexpr&gt; at 0x0000016C1C09BE20&gt;)">def test_intervening_finance_cannot_hide_restriction_or_attach_to_it():
+        restriction = '该设备尚未完成量产认证。'
+&gt;       _joint_in_actual_cards([BUSINESS, restriction], [BUSINESS, FINANCIAL, restriction], forbidden=[FINANCIAL])
+
+.planning\qa-scope-20261030\independent\test_independent_qa.py:23: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+parts = ['本公司已交付27台专用设备至客户进行生产验证。', '该设备尚未完成量产认证。']
+answers = ['本公司已交付27台专用设备至客户进行生产验证。', '公司2025年营业收入为37.17亿元，归属于上市公司股东的净利润为2.84亿元。', '该设备尚未完成量产认证。']
+forbidden = ['公司2025年营业收入为37.17亿元，归属于上市公司股东的净利润为2.84亿元。']
+
+    def _joint_in_actual_cards(parts, answers, *, forbidden=()):
+        _, selected = case(answers)
+        cards = admitted_cards(selected)
+        assert cards
+&gt;       assert any(set(parts) &lt;= members for _, members in cards)
+E       assert False
+E        +  where False = any(&lt;generator object _joint_in_actual_cards.&lt;locals&gt;.&lt;genexpr&gt; at 0x0000016C1C09BE20&gt;)
+
+.planning\qa-scope-20261030\independent\test_independent_qa.py:11: AssertionError</failure></testcase><testcase classname=".planning.qa-scope-20261030.independent.test_independent_qa" name="test_reporting_subject_keeps_both_sides_of_an_explicit_cause" time="0.026"><failure message="assert False&#10; +  where False = any(&lt;generator object _joint_in_actual_cards.&lt;locals&gt;.&lt;genexpr&gt; at 0x0000016C1C0BD210&gt;)">def test_reporting_subject_keeps_both_sides_of_an_explicit_cause():
+        result = '公司催化材料业务收入下降。'
+        cause = '公司认为，这一变化主要由于下游需求减少。'
+&gt;       _joint_in_actual_cards([result, cause], [result, cause, GREETING], forbidden=[GREETING])
+
+.planning\qa-scope-20261030\independent\test_independent_qa.py:28: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+parts = ['公司催化材料业务收入下降。', '公司认为，这一变化主要由于下游需求减少。']
+answers = ['公司催化材料业务收入下降。', '公司认为，这一变化主要由于下游需求减少。', '感谢您对公司的关注！']
+forbidden = ['感谢您对公司的关注！']
+
+    def _joint_in_actual_cards(parts, answers, *, forbidden=()):
+        _, selected = case(answers)
+        cards = admitted_cards(selected)
+        assert cards
+&gt;       assert any(set(parts) &lt;= members for _, members in cards)
+E       assert False
+E        +  where False = any(&lt;generator object _joint_in_actual_cards.&lt;locals&gt;.&lt;genexpr&gt; at 0x0000016C1C0BD210&gt;)
+
+.planning\qa-scope-20261030\independent\test_independent_qa.py:11: AssertionError</failure></testcase><testcase classname=".planning.qa-scope-20261030.independent.test_independent_qa" name="test_plain_financial_and_thanks_are_absent_from_actual_card_cost" time="0.028" /><testcase classname=".planning.qa-scope-20261030.independent.test_independent_qa" name="test_qualified_question_never_donates_an_answer_actor_or_product" time="0.022" /><testcase classname=".planning.qa-scope-20261030.independent.test_independent_qa" name="test_another_record_cannot_donate_qualification" time="0.028" /><testcase classname=".planning.qa-scope-20261030.independent.test_independent_qa" name="test_scope_registration_does_not_copy_unrelated_contexts_without_work" time="0.002"><failure message="AssertionError: assert 100 &lt;= (2 - 0)&#10; +  where 100 = &lt;test_independent_qa.test_scope_registration_does_not_copy_unrelated_contexts_without_work.&lt;locals&gt;.Contexts object at 0x0000016C1BF2A270&gt;.visits&#10; +  and   2 = WorkBudget(max_work_units=16000000, used=2, exhausted=False, phase='document').used">def test_scope_registration_does_not_copy_unrelated_contexts_without_work():
+        from company_wiki.source_catalog.narrative_operating_relations import SourceOperatingSession
+        from company_wiki.resource_budget import new_document_work_budget
+        class Contexts(Mapping):
+            def __init__(self): self.visits=0
+            def __len__(self): return 100
+            def __iter__(self):
+                for index in range(100):
+                    self.visits += 1
+                    yield 'irrelevant-scope-' + str(index)
+            def __getitem__(self, key): return ()
+        unit = _unit(BUSINESS,'management',0)
+        contexts = Contexts()
+        budget = new_document_work_budget()
+        session = SourceOperatingSession({unit.unit_id:unit},work_budget=budget,contexts=contexts)
+        before = budget.used
+        session.support_owner((unit.unit_id,))
+&gt;       assert contexts.visits &lt;= budget.used-before
+E       AssertionError: assert 100 &lt;= (2 - 0)
+E        +  where 100 = &lt;test_independent_qa.test_scope_registration_does_not_copy_unrelated_contexts_without_work.&lt;locals&gt;.Contexts object at 0x0000016C1BF2A270&gt;.visits
+E        +  and   2 = WorkBudget(max_work_units=16000000, used=2, exhausted=False, phase='document').used
+
+.planning\qa-scope-20261030\independent\test_independent_qa.py:66: AssertionError</failure></testcase><testcase classname=".planning.qa-scope-20261030.independent.test_independent_qa" name="test_different_meaning_context_has_distinct_immutable_prepared_scope" time="0.002" /></testsuite></testsuites>

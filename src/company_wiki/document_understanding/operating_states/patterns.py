@@ -313,8 +313,9 @@ GENERIC_WISH = re.compile(
     re.IGNORECASE,
 )
 COURTESY = re.compile(
-    r"感谢[^。！？!?]{0,20}(?:关注|支持|厚爱|阅读)|"
-    r"thank\s+you\s+for\s+your\s+(?:interest|attention|support|time)",
+    r"^\s*(?:谢谢|謝謝|thanks|thank\s+you)[。.!！\s]*$|"
+    r"(?:感谢|感謝|谢谢|謝謝)[^。！？!?]{0,20}(?:关注|關注|支持|厚爱|阅读)|"
+    r"thank\s+you\s+for\s+your\s+(?:[a-z]+\s+){0,3}(?:interest|attention|support|time)",
     re.IGNORECASE,
 )
 VISION = re.compile(

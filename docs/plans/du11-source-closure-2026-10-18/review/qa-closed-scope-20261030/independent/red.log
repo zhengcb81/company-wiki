@@ -1,0 +1,101 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+FFF...F.                                                                 [100%]
+================================== FAILURES ===================================
+_________ test_reporting_subject_cannot_detach_postposed_restriction __________
+
+    def test_reporting_subject_cannot_detach_postposed_restriction():
+        restriction = '��˾��ʾ�����豸��δ���������֤��'
+>       _joint_in_actual_cards([BUSINESS, restriction], [BUSINESS, restriction, FINANCIAL], forbidden=[FINANCIAL])
+
+.planning\qa-scope-20261030\independent\test_independent_qa.py:19: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+parts = ['����˾�ѽ���27̨ר���豸���ͻ�����������֤��', '��˾��ʾ�����豸��δ���������֤��']
+answers = ['����˾�ѽ���27̨ר���豸���ͻ�����������֤��', '��˾��ʾ�����豸��δ���������֤��', '��˾2025��Ӫҵ����Ϊ37.17��Ԫ�����������й�˾�ɶ��ľ�����Ϊ2.84��Ԫ��']
+forbidden = ['��˾2025��Ӫҵ����Ϊ37.17��Ԫ�����������й�˾�ɶ��ľ�����Ϊ2.84��Ԫ��']
+
+    def _joint_in_actual_cards(parts, answers, *, forbidden=()):
+        _, selected = case(answers)
+        cards = admitted_cards(selected)
+        assert cards
+>       assert any(set(parts) <= members for _, members in cards)
+E       assert False
+E        +  where False = any(<generator object _joint_in_actual_cards.<locals>.<genexpr> at 0x0000016C1BEAFD30>)
+
+.planning\qa-scope-20261030\independent\test_independent_qa.py:11: AssertionError
+______ test_intervening_finance_cannot_hide_restriction_or_attach_to_it _______
+
+    def test_intervening_finance_cannot_hide_restriction_or_attach_to_it():
+        restriction = '���豸��δ���������֤��'
+>       _joint_in_actual_cards([BUSINESS, restriction], [BUSINESS, FINANCIAL, restriction], forbidden=[FINANCIAL])
+
+.planning\qa-scope-20261030\independent\test_independent_qa.py:23: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+parts = ['����˾�ѽ���27̨ר���豸���ͻ�����������֤��', '���豸��δ���������֤��']
+answers = ['����˾�ѽ���27̨ר���豸���ͻ�����������֤��', '��˾2025��Ӫҵ����Ϊ37.17��Ԫ�����������й�˾�ɶ��ľ�����Ϊ2.84��Ԫ��', '���豸��δ���������֤��']
+forbidden = ['��˾2025��Ӫҵ����Ϊ37.17��Ԫ�����������й�˾�ɶ��ľ�����Ϊ2.84��Ԫ��']
+
+    def _joint_in_actual_cards(parts, answers, *, forbidden=()):
+        _, selected = case(answers)
+        cards = admitted_cards(selected)
+        assert cards
+>       assert any(set(parts) <= members for _, members in cards)
+E       assert False
+E        +  where False = any(<generator object _joint_in_actual_cards.<locals>.<genexpr> at 0x0000016C1C09BE20>)
+
+.planning\qa-scope-20261030\independent\test_independent_qa.py:11: AssertionError
+________ test_reporting_subject_keeps_both_sides_of_an_explicit_cause _________
+
+    def test_reporting_subject_keeps_both_sides_of_an_explicit_cause():
+        result = '��˾�߻�����ҵ�������½���'
+        cause = '��˾��Ϊ����һ�仯��Ҫ��������������١�'
+>       _joint_in_actual_cards([result, cause], [result, cause, GREETING], forbidden=[GREETING])
+
+.planning\qa-scope-20261030\independent\test_independent_qa.py:28: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _
+
+parts = ['��˾�߻�����ҵ�������½���', '��˾��Ϊ����һ�仯��Ҫ��������������١�']
+answers = ['��˾�߻�����ҵ�������½���', '��˾��Ϊ����һ�仯��Ҫ��������������١�', '��л���Թ�˾�Ĺ�ע��']
+forbidden = ['��л���Թ�˾�Ĺ�ע��']
+
+    def _joint_in_actual_cards(parts, answers, *, forbidden=()):
+        _, selected = case(answers)
+        cards = admitted_cards(selected)
+        assert cards
+>       assert any(set(parts) <= members for _, members in cards)
+E       assert False
+E        +  where False = any(<generator object _joint_in_actual_cards.<locals>.<genexpr> at 0x0000016C1C0BD210>)
+
+.planning\qa-scope-20261030\independent\test_independent_qa.py:11: AssertionError
+____ test_scope_registration_does_not_copy_unrelated_contexts_without_work ____
+
+    def test_scope_registration_does_not_copy_unrelated_contexts_without_work():
+        from company_wiki.source_catalog.narrative_operating_relations import SourceOperatingSession
+        from company_wiki.resource_budget import new_document_work_budget
+        class Contexts(Mapping):
+            def __init__(self): self.visits=0
+            def __len__(self): return 100
+            def __iter__(self):
+                for index in range(100):
+                    self.visits += 1
+                    yield 'irrelevant-scope-' + str(index)
+            def __getitem__(self, key): return ()
+        unit = _unit(BUSINESS,'management',0)
+        contexts = Contexts()
+        budget = new_document_work_budget()
+        session = SourceOperatingSession({unit.unit_id:unit},work_budget=budget,contexts=contexts)
+        before = budget.used
+        session.support_owner((unit.unit_id,))
+>       assert contexts.visits <= budget.used-before
+E       AssertionError: assert 100 <= (2 - 0)
+E        +  where 100 = <test_independent_qa.test_scope_registration_does_not_copy_unrelated_contexts_without_work.<locals>.Contexts object at 0x0000016C1BF2A270>.visits
+E        +  and   2 = WorkBudget(max_work_units=16000000, used=2, exhausted=False, phase='document').used
+
+.planning\qa-scope-20261030\independent\test_independent_qa.py:66: AssertionError
+=========================== short test summary info ===========================
+FAILED .planning/qa-scope-20261030/independent/test_independent_qa.py::test_reporting_subject_cannot_detach_postposed_restriction
+FAILED .planning/qa-scope-20261030/independent/test_independent_qa.py::test_intervening_finance_cannot_hide_restriction_or_attach_to_it
+FAILED .planning/qa-scope-20261030/independent/test_independent_qa.py::test_reporting_subject_keeps_both_sides_of_an_explicit_cause
+FAILED .planning/qa-scope-20261030/independent/test_independent_qa.py::test_scope_registration_does_not_copy_unrelated_contexts_without_work
+4 failed, 4 passed in 2.15s

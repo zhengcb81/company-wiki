@@ -32,3 +32,9 @@ QA闭合支持视图/实际发送成本同scope投影仍未实施；后续按Q1�
 Q1–Q3公共链基线为3RED/1PASS：两种顺序均让财务/感谢借业务回答入选，独立回答合为同一个support；现有全答复仍保护后置否定，此正控必须保留。第一探针误用私有support_unit_ids访问公共reading_context导致KeyError，已改用support_evidence_ids→EvidenceSpan原文验证；原错误日志保留，不当产品缺陷。此节点尚未实施，不以shared owner旧绿代签。独审设计补充：先冻结完整support/含义context再assessment，owner缓存不能随后改变context；QA归属不等于物理邻接，禁止伪造source_body_adjacency。
 
 QA后续独立设计已接收：[具体实施细则](QA_CLOSURE_IMPLEMENTATION.md)、[只读设计审查](q-scope-design/README.md)。实际公共source card中夹带的probe已保存；接口/接线顺序、不可变scope/context缓存、禁止伪造物理边及10组RED均明确。状态READY_IMPLEMENT，QA产品代码尚未实施；不能把本轮已绿参数/因果工程当QA范围关闭。
+
+## QA范围实施中（不覆盖上节点已发布结果）
+
+新公共任务/上下文缓存测试7RED/3PASS已先冻结；同session不可变support owner、共享闭合语句边界、语义pair matcher抽取（旧物理入口不放宽）及QA子包同序投影已接线。首次73P/2.99秒；397源mypy通过。尚需来源fragment/指代/额度与跨QA反控、真实保存parsed复验和独立终审，未验收/未发布。抽取脚本初次保留了几处外层continue，在实际运行前py_compile阶段纠正为return None；未按此暂态签任何测试/发布。
+
+QA独审另发现报告前缀/跨财务段后置限制/包装因果两端、无谓contexts整表复制及原partial输入漏处理；已在共享pair语义、有界来源序列、子句级结果指代/已有业务收入主语证明、immutable source scope和partial投影层根修，未发布。首领域3288P/11skip/5F暴露旧物理前缀校验与同单元自闭合因果回归，仍在修，不重跑全仓。真实已存parsed中财务/独立thanks退出，但半导体产品名单/300化合物及九目描述各自owner未识别，旧选材曾借邻段产能proof；此真实召回缺口OPEN，不能把10spans下降当质量通过。母账/原件/config/W21均不变。

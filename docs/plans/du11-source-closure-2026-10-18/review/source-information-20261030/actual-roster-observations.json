@@ -1,0 +1,46 @@
+[
+  {
+    "id": "urn:company-wiki:narrative-unit:sha256:861153b7ffc155d70c045724804e683f6e1ae88619ba27f96dfc4dc1213a93fc",
+    "text": "答：您好，根据相应新闻报道，您所描述的情况涉及该公司的家电产\n品，该事项未对九目化学经营构成重大影响。",
+    "fact": "OperatingFact(eligible=False, topics=(), reasons=(), score=0, financial_exempt=False, purpose='unknown')",
+    "roles": "SourceAssertionRoles(clauses=(AssertionRole(text='答：您好，根据相应新闻报道，您所描述的情况涉及该公司的家电产品，该事项未对九目化学经营构成重大影响', operating=False, rule_purpose='', independent_payload=None, payload_witnesses=(), material_payload=False),), numeric_ambiguous=False, numeric_role='unknown', bound_operating=False, raw_structure_complete=False, numeric_cells_observed=False, bound_payload=False)",
+    "use": [
+      "context_only",
+      "no_independent_business_support"
+    ],
+    "relevance": false
+  },
+  {
+    "id": "urn:company-wiki:narrative-unit:sha256:9b448ed7bef763959253d5c5d1437f99e7f33de486e3905d74cdd0cd3f24e3ff",
+    "text": "九目化学主要产品为 OLED\n升华前材料，下游客户为国内外OLED 成品材料企业，OLED 成品材料生产\n企业下游主要为 OLED 显示面板生产企业，OLED 显示面板生产企业下游为\n各类显示屏应用企业。",
+    "fact": "OperatingFact(eligible=False, topics=(), reasons=(), score=0, financial_exempt=False, purpose='unknown')",
+    "roles": "SourceAssertionRoles(clauses=(AssertionRole(text='九目化学主要产品为 OLED 升华前材料，下游客户为国内外OLED 成品材料企业，OLED 成品材料生产企业下游主要为 OLED 显示面板生产企业，OLED 显示面板生产企业下游为各类显示屏应用企业', operating=False, rule_purpose='', independent_payload=None, payload_witnesses=(), material_payload=False),), numeric_ambiguous=False, numeric_role='unknown', bound_operating=False, raw_structure_complete=False, numeric_cells_observed=False, bound_payload=False)",
+    "use": [
+      "context_only",
+      "no_independent_business_support"
+    ],
+    "relevance": false
+  },
+  {
+    "id": "urn:company-wiki:narrative-unit:sha256:86ec4f73742546f6be87159215393f6ebac98b8debe1b5b160f4ee4636d40d94",
+    "text": "九目化学已于 3 月11 日收到北交所第二轮审核问\n询函，因前期报送的财务数据有效期已过，九目化学申请了中止审核，待\n财务数据按要求完成更新后，将申请恢复审核，并回复问询。",
+    "fact": "OperatingFact(eligible=False, topics=(), reasons=(), score=0, financial_exempt=False, purpose='unknown')",
+    "roles": "SourceAssertionRoles(clauses=(AssertionRole(text='九目化学已于 3 月11 日收到北交所第二轮审核问询函，因前期报送的财务数据有效期已过，九目化学申请了中止审核，待财务数据按要求完成更新后，将申请恢复审核，并回复问询', operating=False, rule_purpose='', independent_payload=None, payload_witnesses=(), material_payload=False),), numeric_ambiguous=False, numeric_role='unknown', bound_operating=False, raw_structure_complete=False, numeric_cells_observed=False, bound_payload=False)",
+    "use": [
+      "context_only",
+      "no_independent_business_support"
+    ],
+    "relevance": false
+  },
+  {
+    "id": "urn:company-wiki:narrative-unit:sha256:4835ca7a70a2e417a6f9487dc14fa0cc4c35b7f47aacfa8f11a258f263585dad",
+    "text": "目前公司在半导体制造材料领域已销售的产品主要为光刻\n胶单体、树脂、光酸以及半导体制程中清洗剂添加材料等，现已开发了超\n300 种化合物，在所涉足的产品方面技术已经处于国内领先水平。",
+    "fact": "OperatingFact(eligible=False, topics=(), reasons=(), score=0, financial_exempt=False, purpose='unknown')",
+    "roles": "SourceAssertionRoles(clauses=(AssertionRole(text='目前公司在半导体制造材料领域已销售的产品主要为光刻胶单体、树脂、光酸以及半导体制程中清洗剂添加材料等，现已开发了超 300 种化合物，在所涉足的产品方面技术已经处于国内领先水平', operating=False, rule_purpose='', independent_payload=None, payload_witnesses=(), material_payload=False),), numeric_ambiguous=False, numeric_role='unknown', bound_operating=False, raw_structure_complete=False, numeric_cells_observed=False, bound_payload=False)",
+    "use": [
+      "context_only",
+      "no_independent_business_support"
+    ],
+    "relevance": false
+  }
+]

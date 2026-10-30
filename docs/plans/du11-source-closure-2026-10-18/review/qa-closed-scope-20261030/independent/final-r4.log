@@ -1,0 +1,3 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+...............                                                          [100%]
+15 passed in 1.98s
