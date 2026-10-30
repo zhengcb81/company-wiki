@@ -3128,8 +3128,8 @@
     "source_commit": "69c9b178e4b23ff9bb57b804b7c954893bcd5e13"
   },
   "qa_closed_scope_next": {
-    "status": "TDD_BASELINE_FROZEN_DESIGN_REVIEW_IN_PROGRESS",
-    "entry": "review/source-information-20261030/README.md",
+    "status": "DESIGN_ACCEPTED_TDD_BASELINE_FROZEN_READY_IMPLEMENT",
+    "entry": "review/source-information-20261030/QA_CLOSURE_IMPLEMENTATION.md",
     "actual_corrected_tests": {
       "failed": 3,
       "passed": 1,
@@ -3142,6 +3142,9 @@
       "same exact scope for packages/citations/prompt cost",
       "immutable assessment owner/context identity",
       "no forged physical adjacency from QA membership"
-    ]
+    ],
+    "independent_design": "review/source-information-20261030/q-scope-design/README.md",
+    "implementation_started": false,
+    "next": "Expand Q1-Q3 owner/public task controls; implement same-session QA scope service before package-index sidecars; preserve physical validation and immutable owner/context."
   }
 }

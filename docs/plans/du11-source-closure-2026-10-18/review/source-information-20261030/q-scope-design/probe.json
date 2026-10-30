@@ -1,0 +1,27 @@
+{
+  "scope": "one synthetic public selection -> summary task plan -> source cards; no provider",
+  "status": "partial",
+  "coverage_complete": false,
+  "selected_spans": 5,
+  "tasks": [
+    {
+      "key": "t1",
+      "support": [
+        "公司新产品完成客户验证，第四季度开始批量交付。",
+        "本期营业收入为12亿元，净利润为1亿元。",
+        "感谢投资者的关注！",
+        "本公司的设备尚未完成客户认证。"
+      ],
+      "context": [
+        "新产品和项目进展如何？"
+      ],
+      "support_use": "support",
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      }
+    }
+  ],
+  "vendor_posts": 0,
+  "PDF_parses": 0
+}

@@ -30,3 +30,5 @@ QA闭合支持视图/实际发送成本同scope投影仍未实施；后续按Q1�
 `69c9b178`已正常提交推送，所有提交钩子通过；pre-push158P/26.08秒，精确CI40984342776 completed/success。见ci.json/acceptance.json。已清理ROOT测试临时根约3MB，外来hook mode与历史产物未碰。
 
 Q1–Q3公共链基线为3RED/1PASS：两种顺序均让财务/感谢借业务回答入选，独立回答合为同一个support；现有全答复仍保护后置否定，此正控必须保留。第一探针误用私有support_unit_ids访问公共reading_context导致KeyError，已改用support_evidence_ids→EvidenceSpan原文验证；原错误日志保留，不当产品缺陷。此节点尚未实施，不以shared owner旧绿代签。独审设计补充：先冻结完整support/含义context再assessment，owner缓存不能随后改变context；QA归属不等于物理邻接，禁止伪造source_body_adjacency。
+
+QA后续独立设计已接收：[具体实施细则](QA_CLOSURE_IMPLEMENTATION.md)、[只读设计审查](q-scope-design/README.md)。实际公共source card中夹带的probe已保存；接口/接线顺序、不可变scope/context缓存、禁止伪造物理边及10组RED均明确。状态READY_IMPLEMENT，QA产品代码尚未实施；不能把本轮已绿参数/因果工程当QA范围关闭。
