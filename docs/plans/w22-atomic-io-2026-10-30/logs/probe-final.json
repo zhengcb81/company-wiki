@@ -1,0 +1,65 @@
+[
+ {
+  "section": "target_valid_old_stage_breaks",
+  "parent_chars": 55,
+  "target_name_chars": 196,
+  "target_path_chars": 252,
+  "legacy_stage_path_chars": 265,
+  "long_paths_enabled_registry_note": "not read here; capability is measured behaviorally below",
+  "target_plain_create": "OK",
+  "legacy_stage_create": {
+   "type": "FileNotFoundError",
+   "str": "[Errno 2] No such file or directory: 'C:\\\\Users\\\\郑曾波\\\\AppData\\\\Local\\\\Temp\\\\w22-probe-r4ravss8\\\\sec1\\\\ttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttttt.json.12345678.tmp'",
+   "errno": 2,
+   "winerror": null
+  },
+  "atomic_output": "OK",
+  "target_bytes_after": "replacement body"
+ },
+ {
+  "section": "deep_directory_beyond_native",
+  "deep_path_chars": 457,
+  "extended_mkdir": "OK",
+  "plain_stat": {
+   "type": "FileNotFoundError",
+   "str": "[WinError 3] 系统找不到指定的路径。: 'C:\\\\Users\\\\郑曾波\\\\AppData\\\\Local\\\\Temp\\\\w22-probe-r4ravss8\\\\sec2\\\\dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd\\\\dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd'",
+   "errno": 2,
+   "winerror": 3
+  },
+  "extended_stage_create": "OK",
+  "extended_replace": "OK",
+  "extended_unlink_destination": "OK"
+ },
+ {
+  "section": "real_contention_error_shape",
+  "replace_onto_open_file": {
+   "type": "PermissionError",
+   "str": "[WinError 5] 拒绝访问。: 'C:\\\\Users\\\\郑曾波\\\\AppData\\\\Local\\\\Temp\\\\w22-probe-r4ravss8\\\\sec3\\\\moving.json' -> 'C:\\\\Users\\\\郑曾波\\\\AppData\\\\Local\\\\Temp\\\\w22-probe-r4ravss8\\\\sec3\\\\destination.json'",
+   "errno": 13,
+   "winerror": 5
+  },
+  "errno_constants": {
+   "ENOENT": 2,
+   "EACCES": 13
+  }
+ },
+ {
+  "section": "plain_boundaries",
+  "parent_chars": 55,
+  "plain_file_create_259": "OK",
+  "plain_file_create_260": {
+   "type": "FileNotFoundError",
+   "str": "[Errno 2] No such file or directory: 'C:\\\\Users\\\\郑曾波\\\\AppData\\\\Local\\\\Temp\\\\w22-probe-r4ravss8\\\\sec4\\\\fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff.json'",
+   "errno": 2,
+   "winerror": null
+  },
+  "plain_mkdir_247": "OK",
+  "plain_mkdir_248": {
+   "type": "FileNotFoundError",
+   "str": "[WinError 206] 文件名或扩展名太长。: 'C:\\\\Users\\\\郑曾波\\\\AppData\\\\Local\\\\Temp\\\\w22-probe-r4ravss8\\\\sec4\\\\dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd'",
+   "errno": 2,
+   "winerror": 206
+  },
+  "mixed_extended_to_plain_replace": "OK"
+ }
+]

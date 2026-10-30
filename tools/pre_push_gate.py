@@ -188,10 +188,60 @@ def _explicit_test_paths(cmd: list[str]) -> int:
     return sum(1 for item in cmd if item.startswith("tests/"))
 
 
+def _scratch_candidate_roots() -> list[str]:
+    """Bounded scratch-root candidates, shortest first.
+
+    The Git hook's process may have restricted access, so no candidate is
+    trusted here: each is verified by actually creating the owned scratch
+    (see _open_scratch). The environment's own temp hints come first, the
+    standard system temp directory backs them up, and PROJECT_ROOT stays as
+    the in-checkout fallback for hosts where nothing outside is writable.
+    Keeping the list ordered by length stops checkout depth from eating the
+    child's path budget.
+    """
+    env_roots = [os.environ.get(name) for name in ("TEMP", "TMP", "TMPDIR")]
+    candidates = [root for root in env_roots if root]
+    if not candidates:
+        candidates.append(tempfile.gettempdir())
+    candidates.append(str(PROJECT_ROOT))
+    return sorted(dict.fromkeys(candidates), key=lambda root: (len(root), root))
+
+
+def _open_scratch(candidates: list[str]) -> tempfile.TemporaryDirectory:
+    """Create this invocation's owned scratch at the first usable candidate.
+
+    Every candidate is verified once with a real directory and one probe
+    file; a rejected attempt is recorded and never retried. When no candidate
+    is usable the error names every attempt, so a red gate explains itself
+    instead of failing deep inside a child.
+    """
+    attempts: list[str] = []
+    for root in candidates:
+        try:
+            scratch = tempfile.TemporaryDirectory(prefix="cwpp-", dir=root)
+        except OSError as exc:
+            attempts.append(f"{root}: cannot create scratch ({exc})")
+            continue
+        try:
+            probe = Path(scratch.name) / "write-probe"
+            with probe.open("wb") as stream:
+                stream.write(b"probe")
+            probe.unlink()
+        except OSError as exc:
+            scratch.cleanup()
+            attempts.append(f"{root}: scratch not writable ({exc})")
+            continue
+        return scratch
+    raise RuntimeError(
+        "no writable scratch root for the pytest gate; tried:\n  "
+        + "\n  ".join(attempts))
+
+
 def _run_pytest_gate(cmd: list[str], label: str) -> int:
-    # Scratch belongs to this invocation, independent of checkout depth. Pytest's
-    # existing Windows fallback handles path placement; its log is diagnostic.
-    # TemporaryDirectory restores this owned root on success, failure or timeout.
+    # Scratch belongs to this invocation, is verified writable before any
+    # child starts, and stays path-bounded regardless of checkout depth.
+    # Pytest's existing Windows fallback handles path placement; its log is
+    # diagnostic. Cleanup covers the success, failure and timeout paths.
     # Full bootstrap progress is captured (not streamed on successful pushes).
     # On timeout it identifies the last test; successful output lists slow cases.
     daily = label.startswith(DAILY_PUSH_LABEL_PREFIX)
@@ -210,10 +260,11 @@ def _run_pytest_gate(cmd: list[str], label: str) -> int:
     # --basetemp. Keep all three roots inside this invocation's owned scratch:
     # the host TEMP may be inaccessible to the Git hook's restricted process,
     # which otherwise turns a large WAL write into SQLITE_CANTOPEN mid-test.
-    with tempfile.TemporaryDirectory(prefix="cwpp-", dir=PROJECT_ROOT) as basetemp:
-        owned_temp = str(Path(basetemp).resolve())
+    scratch = _open_scratch(_scratch_candidate_roots())
+    try:
+        owned_temp = str(Path(scratch.name).resolve())
         return _run(
-            [*cmd, "--basetemp", basetemp, "-p", "no:cacheprovider"],
+            [*cmd, "--basetemp", scratch.name, "-p", "no:cacheprovider"],
             label,
             timeout=DAILY_PUSH_TIMEOUT_SECONDS if daily else 600,
             env_extra={
@@ -226,6 +277,8 @@ def _run_pytest_gate(cmd: list[str], label: str) -> int:
                 "SQLITE_TMPDIR": owned_temp,
             },
         )
+    finally:
+        scratch.cleanup()
 
 
 def _push_targets(selected: list[str]) -> tuple[list[str], str]:

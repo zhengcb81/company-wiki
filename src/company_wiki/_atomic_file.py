@@ -3,6 +3,10 @@
 Callers own immutable-content checks and concurrency scope. This primitive only
 owns its exclusive same-directory staging file, closes it before replacement,
 and cleans that file on failure; it never deletes another operation's staging.
+The staging name is short, random and independent of the destination basename,
+and Windows paths beyond the native limit are opened through
+_atomic_path.openable, so neither the staging shape nor any extended-length
+form is visible to callers.
 """
 from __future__ import annotations
 
@@ -13,8 +17,10 @@ import tempfile
 import time
 from typing import IO, Iterator, Literal
 
+from company_wiki._atomic_path import openable, stage_dir
 
-def _replace_closed_stage(source: Path, destination: Path) -> None:
+
+def _replace_closed_stage(source: str, destination: Path) -> None:
     """Windows can reject simultaneous renames even when all files are closed.
 
     Retry only known Windows contention codes, on this same owned staging file.
@@ -27,7 +33,7 @@ def _replace_closed_stage(source: Path, destination: Path) -> None:
         if delay:
             time.sleep(delay)
         try:
-            os.replace(source, destination)
+            os.replace(openable(source), openable(destination))
             return
         except OSError as exc:
             if getattr(exc, "winerror", None) not in {5, 32, 33} or attempt == len(delays) - 1:
@@ -46,21 +52,24 @@ def atomic_output(
     """
     if mode not in {"w", "wb"}:
         raise ValueError("atomic output mode must be w or wb")
-    temporary: Path | None = None
+    stage: str | None = None
     try:
         with tempfile.NamedTemporaryFile(
             mode=mode, encoding=encoding, newline=newline,
-            dir=path.parent, prefix=path.name + ".", suffix=".tmp", delete=False,
+            dir=stage_dir(path.parent), prefix=".atomic-", suffix=".tmp", delete=False,
         ) as stream:
-            temporary = Path(stream.name)
+            stage = stream.name
             yield stream
             stream.flush()
             if sync:
                 os.fsync(stream.fileno())
-        _replace_closed_stage(temporary, path)
+        _replace_closed_stage(stage, path)
     finally:
-        if temporary is not None:
-            temporary.unlink(missing_ok=True)
+        if stage is not None:
+            try:
+                os.unlink(openable(stage))
+            except FileNotFoundError:
+                pass
 
 
 __all__ = ["atomic_output"]
