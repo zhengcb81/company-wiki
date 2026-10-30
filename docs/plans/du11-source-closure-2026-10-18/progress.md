@@ -1,3 +1,11 @@
+## 2026-10-30 新独立施工批 W22（不改变主线下一步）
+
+[总表与接线责任](harness_lanes/20261030/README.md)；本批两卡 READY_TO_DISPATCH，不冒称已发出/开工。[W22-CWP-ATOMIC-IO](harness_lanes/20261030/W22-CWP-ATOMIC-IO.md)修共享原子写入与深目录临时路径；[W22-PDF-DEPLOY](harness_lanes/20261030/W22-PDF-DEPLOY.md)完成实际ASCII资源部署及既有PDF入口验收。两工区已从662f821e建立、tracked clean，仅各四份已知计划seed未跟踪；工区/分支/精确HEAD见[setup](harness_lanes/20261030/setup.json)。不复制原件/SDK，不接管M8语义/QA/actor/摘要/缓存/RF，也不动生产config、外来hook mode及RF三WIP。
+
+两包文件与测试目录分开，可并发。ROOT暂不改各包owner，SDK实测由DEPLOY单一负责；作者A/B自主施工，C交接前独立agent全面审查并修复，正常提交推分支。ROOT先集成ATOMIC再接部署工具/配置，做必要短域与精确CI；不是逐小步签收。新部署env须显式列为交付，测试PDF/缓存/DB须恢复；不允许大复制、全仓反复检查或提高限额。
+
+主线仍先完成M8来源准入/上下文/限定根修与最终独审，再真实摘要/缓存恢复/RF实际采用。W21工程已并线，canonical C2/对齐仍OPEN；新卡不代签这部分或完整公司loop。
+
 ## 2026-10-30 当前：M1–M6局部验收发布；M7新来源暴露遗漏，进入M8共因修复
 
 唯一入口 CURRENT_STATUS.md/json。已发布的[M6源quote/恢复/非期次/RF采用节点](review/source-information-20261030/description-final/m6-source-evidence-2/README.md)保持通过：CWP599f6cf6、RF09be0974均精确CI成功；技能定点同步/重复零写/新进程验收通过。真实H1 quote→RF实际参数/公式、同input旧registry保留、新方法两份全confidence65.38058062293638一致；不是完整新公司研究。

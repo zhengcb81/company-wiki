@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-30",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_M1_M6_LOCAL_CLOSED_M7_FROZEN_2P2_OPEN_M8_ROOT_FIX_NEXT",
+  "overall_status": "ACTIVE_M8_SOURCE_ROOT_FIX_IMPLEMENTING_NO_NEW_PAID_CALL",
   "parallel_packages_20261025": {
     "status": "W16_W17_W18_ROOT_COMPONENT_ACCEPTED_MERGED",
     "entry": "harness_lanes/20261025/README.md",
@@ -2958,7 +2958,19 @@
   ],
   "pause_requested_by_user": false,
   "paused_scope": "revoked by user mainline resume 2026-10-29",
-  "own_uncommitted_runtime": [],
+  "own_uncommitted_runtime": [
+    "src/company_wiki/document_understanding/decision_inventory.py",
+    "src/company_wiki/document_understanding/narrative_continuity.py",
+    "src/company_wiki/document_understanding/operating_states/assertion_roles.py",
+    "src/company_wiki/document_understanding/structure/layout.py",
+    "src/company_wiki/document_understanding/structure/qa.py",
+    "src/company_wiki/source_catalog/narrative_business_policy.py",
+    "src/company_wiki/source_catalog/narrative_operating_relations.py",
+    "src/company_wiki/source_catalog/narrative_qa_scopes.py",
+    "src/company_wiki/source_catalog/narrative_reading.py",
+    "src/company_wiki/source_catalog/narrative_source_purpose.py",
+    "src/company_wiki/source_catalog/narrative_support_use.py"
+  ],
   "qa_provisional_publication": {
     "code_commit": "c6c446d0eebc8f6e6f6903bd677c04eebaf65077",
     "branch": "master",
@@ -4151,8 +4163,45 @@
   },
   "m8_next": {
     "entry": "review/source-information-20261030/description-final/M8_SOURCE_ADMISSION_AND_CONTEXT.md",
-    "status": "ROOT_CAUSE_DESIGN_TDD_NEXT",
+    "status": "TDD_IMPLEMENTED_INDEPENDENT_REWORK_AND_REAL_SOURCE_REPLAY_IN_PROGRESS",
     "new_model_calls": 0,
-    "runtime_implementation_started": false
+    "runtime_implementation_started": true,
+    "source_replays": [
+      ".planning/summary-quality-20261030/m8-real-source-replay/r1",
+      ".planning/summary-quality-20261030/m8-real-source-replay/r2"
+    ],
+    "source_stage_accepted": false,
+    "paid_stage_started": false,
+    "actual_open": [
+      "Source-passage rhetorical-question/courtesy clause scope and shared causal-description followup",
+      "Final stable-source replay including production model compilation",
+      "Affected-domain tests and integrated independent source/engineering review"
+    ],
+    "long_qa_narrow_review": "PASS final source b06c77031dea0c68f2328dda0e5fc5a801b0d1fa85fb60361ac48937849e3e0b; not overall M8 acceptance",
+    "last_passage_agent": "Usage-limit error; remaining passage followup is not signed complete; ROOT resumes separately"
+  },
+  "parallel_lanes_w22_20261030": {
+    "status": "READY_TO_DISPATCH",
+    "entry": "harness_lanes/20261030/README.md",
+    "setup": "harness_lanes/20261030/setup.json",
+    "cards": [
+      "W22-CWP-ATOMIC-IO",
+      "W22-PDF-DEPLOY"
+    ],
+    "worktrees_created": true,
+    "authors_started": false,
+    "scope_disjoint": true,
+    "root_owns_shared_pwf_and_integration": true,
+    "mainline_next_unchanged": "M8 source admission/context -> real summary/recovery -> actual RF use",
+    "merge_order": [
+      "W22-CWP-ATOMIC-IO",
+      "W22-PDF-DEPLOY"
+    ],
+    "sdk_live_test_owner": "W22-PDF-DEPLOY",
+    "required_final_independent_review": true,
+    "new_model_calls": 0,
+    "new_downloads": 0,
+    "new_original_copies": 0,
+    "new_sdk_copies": 0
   }
 }

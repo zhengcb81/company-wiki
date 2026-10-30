@@ -8,6 +8,15 @@
 
 M6/M7无新模型费用；母账仍1,827,558tokens/$0.732814含历史unknown，原件/config、外来hook mode、RF3WIP/147output及Dayu/IQS/Dashboard保持。W21 canonicalC2/长路径、US RPO及真US监管PDF/HK新coverage、药明康德W12新attempt→药明合联→Snowflake和完整八步公司清单仍OPEN。旧暂停/待签收/旧next均为历史，不增加小节点门禁。
 
+## 2026-10-30 新独立施工批 W22（不改变主线下一步）
+
+[总表与接线责任](harness_lanes/20261030/README.md)；本批两卡 READY_TO_DISPATCH，不冒称已发出/开工。[W22-CWP-ATOMIC-IO](harness_lanes/20261030/W22-CWP-ATOMIC-IO.md)修共享原子写入与深目录临时路径；[W22-PDF-DEPLOY](harness_lanes/20261030/W22-PDF-DEPLOY.md)完成实际ASCII资源部署及既有PDF入口验收。两工区已从662f821e建立、tracked clean，仅各四份已知计划seed未跟踪；工区/分支/精确HEAD见[setup](harness_lanes/20261030/setup.json)。不复制原件/SDK，不接管M8语义/QA/actor/摘要/缓存/RF，也不动生产config、外来hook mode及RF三WIP。
+
+两包文件与测试目录分开，可并发。ROOT暂不改各包owner，SDK实测由DEPLOY单一负责；作者A/B自主施工，C交接前独立agent全面审查并修复，正常提交推分支。ROOT先集成ATOMIC再接部署工具/配置，做必要短域与精确CI；不是逐小步签收。新部署env须显式列为交付，测试PDF/缓存/DB须恢复；不允许大复制、全仓反复检查或提高限额。
+
+主线仍先完成M8来源准入/上下文/限定根修与最终独审，再真实摘要/缓存恢复/RF实际采用。W21工程已并线，canonical C2/对齐仍OPEN；新卡不代签这部分或完整公司loop。
+
+
 ---
 以下为历史记录，不是额外执行入口。
 

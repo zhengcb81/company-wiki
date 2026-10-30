@@ -1,0 +1,58 @@
+{
+  "schema_version": "harness-lane-setup/1",
+  "date": "2026-10-30",
+  "base_commit": "662f821e749bc221c8c308986e54e00465834332",
+  "status": "READY_TO_DISPATCH",
+  "lanes": [
+    {
+      "card_id": "W22-CWP-ATOMIC-IO",
+      "workdir": "C:\\Users\\郑曾波\\Projects\\company-wiki-w22-atomic-io",
+      "branch": "codex/w22-atomic-io-20261030",
+      "head": "662f821e749bc221c8c308986e54e00465834332",
+      "tracked_status": "",
+      "plan_id": "w22-atomic-io-2026-10-30",
+      "pwf_plan_root": "docs/plans",
+      "plan_seed_files": [
+        "TASK_CARD.md",
+        "task_plan.md",
+        "findings.md",
+        "progress.md"
+      ],
+      "sparse_directories": [
+        "src",
+        "tools",
+        "tests",
+        "scripts",
+        "config"
+      ],
+      "new_original_copies": 0,
+      "new_sdk_copies": 0,
+      "author_started": false
+    },
+    {
+      "card_id": "W22-PDF-DEPLOY",
+      "workdir": "C:\\Users\\郑曾波\\Projects\\company-wiki-w22-pdf-deploy",
+      "branch": "codex/w22-pdf-deploy-20261030",
+      "head": "662f821e749bc221c8c308986e54e00465834332",
+      "tracked_status": "",
+      "plan_id": "w22-pdf-deploy-2026-10-30",
+      "pwf_plan_root": "docs/plans",
+      "plan_seed_files": [
+        "TASK_CARD.md",
+        "task_plan.md",
+        "findings.md",
+        "progress.md"
+      ],
+      "sparse_directories": [
+        "src",
+        "tools",
+        "tests",
+        "scripts",
+        "config"
+      ],
+      "new_original_copies": 0,
+      "new_sdk_copies": 0,
+      "author_started": false
+    }
+  ]
+}
