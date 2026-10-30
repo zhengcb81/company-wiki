@@ -1,0 +1,196 @@
+{
+  "card_id": "W21-PDF-RUNTIME",
+  "plan_id": "w21-pdf-runtime-2026-10-29",
+  "workdir": "C:/Users/郑曾波/Projects/company-wiki-w21-pdf-runtime",
+  "branch": "codex/w21-pdf-runtime-20261029",
+  "base_commit": "bb5d09c056ca36bba8061d761b5469d87aa6e5e0",
+  "implementation_commits": [
+    "e173c977",
+    "cf888f0d",
+    "5a33d923"
+  ],
+  "final_tested_commit": "eab239d9",
+  "reviewed_commits": {
+    "initial_review_target": "5a33d923",
+    "final_review_target": null
+  },
+  "pushed_to_remote": false,
+  "requirements": [
+    {
+      "id": "B-guard-discard-device",
+      "status": "implemented/tested",
+      "evidence": "tests/unit/test_w21_pdf_runtime_probe_guard.py 15例; 初审第3节实测正反例"
+    },
+    {
+      "id": "B-child-search-path-isolation",
+      "status": "implemented/tested",
+      "evidence": "child_launch_command/child_environment + sentinel子进程测试; 初审第4节"
+    },
+    {
+      "id": "B-probe-new-revision-receipts",
+      "status": "implemented",
+      "evidence": "receipts/cold-rev1..rev5+markers; ROOT侧SHA未变"
+    },
+    {
+      "id": "B-recipe-identity",
+      "status": "implemented",
+      "evidence": "orchestration_sha256自动绑定; recipe键集未变"
+    },
+    {
+      "id": "C1-cold-start-observation",
+      "status": "DONE",
+      "evidence": "receipts/cold-rev5.json: done_no_document=true, 16.22s<30s, guard_rejections=0, peak=615989248B"
+    },
+    {
+      "id": "C2-synthetic-e2e-canonical",
+      "status": "PARTIAL",
+      "evidence": "receipts/synthetic-e2e.json: native_fallback, ChildFailed@PAGE_1, 根因=receipts/canonical-stderr-diagnosis.txt(sha 67876680...); 跨层需求交ROOT"
+    },
+    {
+      "id": "C2-synthetic-e2e-ascii-alias",
+      "status": "DONE-diagnostic",
+      "evidence": "receipts/synthetic-e2e-ascii-alias.json: unaligned_native_fallback, completed=[1,2], stream_complete=true, peak=3250298880B, 42.4s<120s, python_origin=ascii_alias_diagnostic"
+    },
+    {
+      "id": "C3-fault-recovery",
+      "status": "implemented/tested",
+      "evidence": "tests/unit/test_pdf_page_checkpoints.py 80例全过(超时/损坏尾/finished-page保留/真实冷小child)"
+    },
+    {
+      "id": "C4-cleanup-and-sha",
+      "status": "implemented",
+      "evidence": "见cleanup_receipts; ROOT SHA与env零写入经初审复核"
+    },
+    {
+      "id": "C5-independent-review",
+      "status": "initial=PASS/0阻塞; final见review-final.md",
+      "evidence": "delivery/w21-pdf-runtime/review-initial.md"
+    }
+  ],
+  "commands_and_durations": {
+    "cold_probe_rev5": {
+      "command": "python tools/pdf_runtime_probe/run_cold_probe.py",
+      "deadline_seconds": 30,
+      "actual_seconds": 16.22,
+      "bound_source": "card-pinned 30s, not raised"
+    },
+    "e2e_canonical": {
+      "command": "python tools/pdf_runtime_probe/synthetic_e2e.py",
+      "seconds": 16.53,
+      "production_bound_seconds": 120
+    },
+    "e2e_ascii_alias": {
+      "command": "python tools/pdf_runtime_probe/synthetic_e2e.py --python <ascii-alias> --receipt-name synthetic-e2e-ascii-alias",
+      "seconds": 43.16,
+      "production_bound_seconds": 120
+    },
+    "test_counts": {
+      "w21_related_files": 137,
+      "import_surface_superset": 237,
+      "new_tests": 20,
+      "full_unit_suite": "9400 passed / 40 failed / 60 errors -- 全部失败经基线对照为已有状态"
+    }
+  },
+  "root_causes": [
+    {
+      "id": 1,
+      "title": "probe guard devnull false positive (ROOT已知)",
+      "fix": "device-aware guard (literal+realpath)",
+      "receipt": "cold-rev1.json guard_rejections=0"
+    },
+    {
+      "id": 2,
+      "title": "部署env python.exe带Low IL, 子进程不可写Medium %TEMP%",
+      "fix": "TEMP/pycache指向repo-local Low树",
+      "receipt": "cold-rev2/3 stderr + evidence-integrity.json icacls"
+    },
+    {
+      "id": 3,
+      "title": "SDK无字节码, 每次全量重编译(~67s)",
+      "fix": "-X pycache_prefix=<repo>/__pycache__/pdf-paragraph",
+      "receipt": "rev5 16.2s DONE"
+    },
+    {
+      "id": 4,
+      "title": "allowlist缺USERNAME, torch inductor->getpass.getuser()崩溃",
+      "fix": "allowlist补USERNAME",
+      "receipt": "cold-rev4 stderr"
+    },
+    {
+      "id": 5,
+      "title": "docling-parse 6.2.0 C++窄串UTF-8路径在ACP=GBK下无法打开非ASCII部署路径资源",
+      "fix": "跨层需求: env须ASCII路径(junction/重定位)或机器级UTF-8 ACP或上游修复",
+      "receipt": "receipts/canonical-stderr-diagnosis.txt + canonical-fopen-comparison.txt"
+    }
+  ],
+  "boundaries_respected": {
+    "production_files_changed": [
+      "src/company_wiki/source_catalog/narrative_pdf_enhancement.py"
+    ],
+    "unchanged_by_design": [
+      "_paragraph_worker.py",
+      "narrative_pdf_environment.py",
+      "_bounded_process.py",
+      "_process_tree.py",
+      "narrative_pdf_reading*",
+      "operating_states/",
+      "narrative_business_*",
+      "ROOT共享PWF"
+    ],
+    "new_helper_file": false,
+    "no_new_gates_in_production": true
+  },
+  "resource_config": {
+    "max_seconds": 120,
+    "max_pages": 3,
+    "max_memory_bytes": 4294967296,
+    "cpu_threads": 4,
+    "max_input_bytes": 67108864,
+    "max_output_bytes": 2097152,
+    "limits_raised": false,
+    "environment_sha256": "c84a984ccb3a56dffbfd0d4538f14ce4a27de44dec4981527a2b0c4a545cdf44"
+  },
+  "disk": {
+    "env_rebuild_or_copy": false,
+    "new_bytes": "工区 __pycache__/pdf-paragraph bytecode镜像(apparent ~160MB), git-ignored",
+    "root_shared_logical_bytes": "1,233,549,343 不变"
+  },
+  "cleanup_receipts": {
+    "junction_removed": "C:/Users/Public/cw-w21-ascii-env rmdir, dir /AL复查不存在",
+    "root_untouched": {
+      "runtime-isolated.json_sha256": "bcc427114955f6d045c5848b1885b24f1ec1666d1397bfb60ba4f404a225ff2a",
+      "cold_probe.py_sha256": "bb67326ad942a865d95b26ba60f0390ab83809d36dc2f651d7b520967470b06b",
+      "single_cold_attempt": "attempts=1原文未动",
+      "env_writes_on_2026_10_29_30": 0,
+      "model_sha256": "00333a43451945aaf89db8ca9c0a17e75d1537c17db60fdb91aa95f4c7929e0c",
+      "model_config_sha256": "fdea30805ce2f5666b147fca941dcdd27ad468e27d6ed21902207d3da056a97d"
+    },
+    "temp_scratch_restored_absent": true,
+    "incident": "工区内一次误用git stash pop弹出ROOT共享stash, 已git reset --hard恢复; ROOT stash未drop无损; 工区车道禁止stash已入项目记忆"
+  },
+  "review": {
+    "initial": {
+      "report": "delivery/w21-pdf-runtime/review-initial.md",
+      "verdict": "PASS all 10 checks, 0 blocking, 6 INFO(已采纳)",
+      "agent": "independent general-purpose agent"
+    },
+    "final": {
+      "report": "delivery/w21-pdf-runtime/review-final.md",
+      "verdict": "PASS all 7 checks, 0 blocking (2026-10-30); push-blocked by out-of-scope shared-layer defect, counterexample delivered"
+    }
+  },
+  "open_items_for_root": [
+    "部署路径ASCII化(阻塞canonical SDK转换): 见root_causes#5; 满足后同配置即达ascii-alias E2E实测状态",
+    "首跑字节码冷编译一次性代价(~67s导入): 建议warmup或接受首文档fallback自愈",
+    "对齐质量: 合成样张alignment拒绝2组为真实行为; 真实文档召回/对齐验收归ROOT批次",
+    "推送门禁路径长度缺陷: persist_projection无MAX_PATH预算, 被长工区名+gate basetemp重定位触发(270>259; ROOT=254 OK); 反例与修复选项见 receipts/push-gate-path-length-counterexample.md"
+  ],
+  "compatibility_limits": [
+    "旧publication冻结recipe继续可读; 正在执行/恢复用当前真实配置(orchestration_sha256已随实现更新)",
+    "env字节码缓存依赖repo-local可写树; 若部署树不可写, 自动回退-B慢路径(零写入, 首跑代价回归)",
+    "guard为探针专用; 生产无人工门禁"
+  ],
+  "generated_at": "2026-10-30",
+  "generator": "W21 implementation lane (author), fields pending final review",
+  "push_status": "BLOCKED by pre-push gate contract smoke: shared-layer latent defect (projection persistence exceeds MAX_PATH when gate relocates basetemp into the longer-named W21 worktree; ROOT main worktree unaffected at 254<259 chars). Minimal counterexample handed to ROOT per card boundary; no bypass, no out-of-scope fix."
+}

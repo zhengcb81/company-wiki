@@ -1,0 +1,12 @@
+{"stage": "BOOT", "active": "BOOT", "seconds": 0.001402, "cpu_seconds": 0.046875, "pid": 25848, "peak_job_commit_bytes": 10039296, "python_name": "python.exe", "prefix_name": "env", "base_prefix_name": "Miniconda", "flags": {"isolated": true, "safe_path": true, "utf8": true, "no_site": false}}
+{"stage": "BEGIN", "active": "IMPORT_DOCUMENT_CONVERTER", "seconds": 0.001489, "cpu_seconds": 0.046875, "pid": 25848, "peak_job_commit_bytes": 10039296}
+{"stage": "SAMPLE", "active": "IMPORT_DOCUMENT_CONVERTER", "seconds": 5.010955, "cpu_seconds": 4.75, "pid": 25848, "peak_job_commit_bytes": 327589888}
+{"stage": "SAMPLE", "active": "IMPORT_DOCUMENT_CONVERTER", "seconds": 10.011793, "cpu_seconds": 9.625, "pid": 25848, "peak_job_commit_bytes": 412389376}
+{"stage": "END", "active": "IMPORT_DOCUMENT_CONVERTER", "seconds": 14.153162, "cpu_seconds": 13.21875, "pid": 25848, "peak_job_commit_bytes": 615723008}
+{"stage": "BEGIN", "active": "IMPORT_BASE_MODELS", "seconds": 14.153281, "cpu_seconds": 13.21875, "pid": 25848, "peak_job_commit_bytes": 615723008}
+{"stage": "END", "active": "IMPORT_BASE_MODELS", "seconds": 14.153345, "cpu_seconds": 13.21875, "pid": 25848, "peak_job_commit_bytes": 615723008}
+{"stage": "BEGIN", "active": "IMPORT_OPTIONS", "seconds": 14.153405, "cpu_seconds": 13.21875, "pid": 25848, "peak_job_commit_bytes": 615723008}
+{"stage": "END", "active": "IMPORT_OPTIONS", "seconds": 14.15344, "cpu_seconds": 13.21875, "pid": 25848, "peak_job_commit_bytes": 615723008}
+{"stage": "BEGIN", "active": "CONSTRUCT_NO_DOCUMENT", "seconds": 14.153466, "cpu_seconds": 13.21875, "pid": 25848, "peak_job_commit_bytes": 615723008}
+{"stage": "END", "active": "CONSTRUCT_NO_DOCUMENT", "seconds": 14.155603, "cpu_seconds": 13.21875, "pid": 25848, "peak_job_commit_bytes": 615989248, "constructed": "DocumentConverter"}
+{"stage": "DONE", "active": "DONE_NO_DOCUMENT", "seconds": 14.155678, "cpu_seconds": 13.21875, "pid": 25848, "peak_job_commit_bytes": 615989248}

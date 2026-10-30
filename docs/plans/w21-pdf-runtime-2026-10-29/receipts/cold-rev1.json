@@ -1,0 +1,97 @@
+{
+  "revision": "rev1",
+  "attempts": 1,
+  "deadline_seconds": 30,
+  "profile_relative": "ROOT/.planning/c3-20261028/pdf-sdk-isolated/runtime-isolated.json",
+  "profile_sha256": "bcc427114955f6d045c5848b1885b24f1ec1666d1397bfb60ba4f404a225ff2a",
+  "probe_sha256": "f454f76df0737a96260477afdebab0367269768153b249fc8fcf81b3653c28c0",
+  "controller_sha256": "00f7916a0381487d9cfd9a4c7eeb46d6cc7c6fa6573461b92ac9b02552c3b4ac",
+  "pdf_bytes": 0,
+  "sdk_model_copies": 0,
+  "cpu_threads": 4,
+  "memory_bytes": 4294967296,
+  "environment_sha256": "c84a984ccb3a56dffbfd0d4538f14ce4a27de44dec4981527a2b0c4a545cdf44",
+  "docling_version": "2.96.0",
+  "launch_flags": [
+    "-B",
+    "-I",
+    "-X",
+    "utf8"
+  ],
+  "audit_scope": "python_audit_events_only",
+  "status": "ChildTimeout",
+  "returncode": null,
+  "seconds": 30.015313,
+  "events": [
+    {
+      "stage": "BOOT",
+      "active": "BOOT",
+      "seconds": 0.001118,
+      "cpu_seconds": 0.046875,
+      "pid": 33020,
+      "peak_job_commit_bytes": 10031104,
+      "python_name": "python.exe",
+      "prefix_name": "env",
+      "base_prefix_name": "Miniconda",
+      "flags": {
+        "isolated": true,
+        "safe_path": true,
+        "utf8": true,
+        "no_site": false
+      }
+    },
+    {
+      "stage": "BEGIN",
+      "active": "IMPORT_DOCUMENT_CONVERTER",
+      "seconds": 0.001207,
+      "cpu_seconds": 0.046875,
+      "pid": 33020,
+      "peak_job_commit_bytes": 10031104
+    },
+    {
+      "stage": "SAMPLE",
+      "active": "IMPORT_DOCUMENT_CONVERTER",
+      "seconds": 5.011091,
+      "cpu_seconds": 1.203125,
+      "pid": 33020,
+      "peak_job_commit_bytes": 136376320
+    },
+    {
+      "stage": "SAMPLE",
+      "active": "IMPORT_DOCUMENT_CONVERTER",
+      "seconds": 10.023734,
+      "cpu_seconds": 3.53125,
+      "pid": 33020,
+      "peak_job_commit_bytes": 190656512
+    },
+    {
+      "stage": "SAMPLE",
+      "active": "IMPORT_DOCUMENT_CONVERTER",
+      "seconds": 15.024861,
+      "cpu_seconds": 5.90625,
+      "pid": 33020,
+      "peak_job_commit_bytes": 190656512
+    },
+    {
+      "stage": "SAMPLE",
+      "active": "IMPORT_DOCUMENT_CONVERTER",
+      "seconds": 20.038279,
+      "cpu_seconds": 7.953125,
+      "pid": 33020,
+      "peak_job_commit_bytes": 193708032
+    },
+    {
+      "stage": "SAMPLE",
+      "active": "IMPORT_DOCUMENT_CONVERTER",
+      "seconds": 25.049303,
+      "cpu_seconds": 8.625,
+      "pid": 33020,
+      "peak_job_commit_bytes": 196751360
+    }
+  ],
+  "stdout_sha256": "d00e4dbe2f78089b5ce1e713cc4e72b7946b41f8072876257f81406012df48b6",
+  "stderr_sha256": "2b1efb6f72bec17a91a17c83dc18b53a794cb741cc376f6acc13ad095b631059",
+  "done_no_document": false,
+  "guard_rejections": 0,
+  "scratch_restored_absent": true
+}

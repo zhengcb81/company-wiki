@@ -1,6 +1,6 @@
 # 唯一下一步：摘要覆盖/保真与非期次文档消费共因
 
-先正常发布0bf2805f及PDF默认版本合同补丁（pre-push本次确实拦住，不能绕过）。来源准备f88221d2精确CI41009349866成功。真实v3 paid输出与恢复/cache已有可复用小证据，禁止再花费整批重跑来诊断。
+0bf2805f及PDF默认版本合同补丁已随97e8a290正常发布，pre-push158P/30.94秒；W21工程ROOT独审与198P通过，合并发布中。来源准备f88221d2精确CI41009349866成功。真实v3 paid输出与恢复/cache已有可复用小证据，禁止再花费整批重跑来诊断。
 
 ## 已冻结检查点与真实结果
 
@@ -8,7 +8,7 @@
 
 独审 `real-summary-v3/independent/review.json`：客户链t3、已售产品与超过300研发数量t7缺失；t2把“根据相应新闻报道”限定省略。t4/t6/t8正文条件大体保留，不声称已恢复/已投产，但单个actual结构标记覆盖多个状态。bundle verified是回放/来源证明，不能冒充语义通过。8输入gold不是6输出都达标；关键正文忠实按独审为5/8，不能刷成100%。
 
-## A：ROOT接收W21（用户已通知完成）
+## A：ROOT接收W21（工程已通过，canonical SDK C2仍OPEN）
 
 作者工区 `C:/Users/郑曾波/Projects/company-wiki-w21-pdf-runtime` HEAD f6c2b9d4，源代码在eab239d9后没变，仅新增交接/终审/计划。工区干净。只读核对原卡/终审/源码差异，再在ROOT隔离整合其单一narrative_pdf_enhancement owner及专用tests/tools/PWF；不得把作者的native_fallback与ASCII alias诊断当canonical增强成功。不覆盖当前QA parser1.2/缓存依赖。正常跑受影响unit/checkpoint/launch，不重复全仓或大SDK；root处理作者留下的canonical路径/推送路径长度反例，生产SDK问题另保留责任，不要求作者再签空JSON。
 
@@ -29,3 +29,5 @@
 ## D：关键大节点验收与发布
 
 先offline冻结真实回复与中性变体、定向受影响测试；独立审查绑定稳定代码和版本接口，再真实小样本验证原语言摘要、恢复与FF/RF采用。各步无需人工签收许可。只存小收据和必要压缩材料，原件不动，paid native ledger不清零。通过节点及时commit/push、观察精确CI、同步CURRENT_STATUS五份正文及JSON。US RPO/W21生产增强/holdout及八步公司loop仍OPEN；不能因本条开发样本完成就关闭母目标。
+
+W21 ROOT最新接收：[review/w21-root-reception-20261030/README.md](../../w21-root-reception-20261030/README.md)。长路径254/270字符反例已独立复现，作为storage atomic-write/工程测试布局的通用缺陷处理；不要用改业务文档/取消SHA校验来修，也不要重复失败的SDK整批。

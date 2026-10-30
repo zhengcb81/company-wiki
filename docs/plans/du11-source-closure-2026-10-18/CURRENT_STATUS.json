@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-30",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_REAL_SUMMARY_QUALITY_AND_NONPERIODIC_REUSE_ROOT_FIX_W21_RECEIVED",
+  "overall_status": "ACTIVE_W21_ENGINEERING_ACCEPTED_MERGE_PUBLICATION_SUMMARY_QUALITY_OPEN",
   "parallel_packages_20261025": {
     "status": "W16_W17_W18_ROOT_COMPONENT_ACCEPTED_MERGED",
     "entry": "harness_lanes/20261025/README.md",
@@ -26,13 +26,13 @@
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
-  "last_code_commit": "0bf2805fa229c5d843483b9c22b2a4637776bd15",
+  "last_code_commit": "97e8a290fcfaea4335aad3e5e058f2b8850d287b",
   "code_ci": {
-    "id": 41009349866,
-    "head_sha": "f88221d2578eac078bb7b30d9a8c00b08f2ee6d2",
-    "status": "completed",
-    "conclusion": "success",
-    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41009349866"
+    "id": 41019504113,
+    "head_sha": "97e8a290fcfaea4335aad3e5e058f2b8850d287b",
+    "status": "in_progress",
+    "conclusion": null,
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41019504113"
   },
   "formal_v4_offline_selection_replay_20261025": {
     "status": "EXACT_REPRODUCED_NO_PAID_CALL",
@@ -2344,7 +2344,7 @@
     "published": true,
     "push_failure": "47 targets /392 collected /600s; two regressions being root-fixed, not waived by narrower daily gate"
   },
-  "next_action": "Publish reviewed parser contract patch + real summary evidence, then ROOT receive W21 and implement SUMMARY_QUALITY_NEXT common roots without new paid full replays.",
+  "next_action": "Normally commit/push reviewed W21 merge; observe exact CI. Continue SUMMARY_QUALITY_NEXT common-root coverage/attribution/modality work using captured response; explicit SourceRef nonperiodic FF/RF reuse remains OPEN.",
   "c3_runtime_recovery_20261026": {
     "entry": "review/pdf-c3-20261026/RUNTIME_RECOVERY.md",
     "environment_independent": "PASS_ZERO_OPEN_25_TESTS_AND_REAL_WORKER_ENTRYPOINTS",
@@ -3482,8 +3482,10 @@
     }
   },
   "publication": {
-    "current_code_pushed": false,
-    "reason": "normal pre-push identified stale PDF default assertion; corrected contract and independent addendum ready; push remains required"
+    "current_code_pushed": true,
+    "pre_push_passed": 158,
+    "pre_push_seconds": 30.94,
+    "w21_merge": "staged, tests/review PASS, normal merge commit/push pending"
   },
   "real_summary_v3": {
     "overall_status": "FAIL",
@@ -3512,12 +3514,377 @@
     "new_unknowns": 0
   },
   "w21_root_reception": {
-    "state": "DELIVERY_RECEIVED_ROOT_TESTS_PENDING",
+    "state": "ROOT_ENGINEERING_ACCEPTED_CANONICAL_C2_OPEN",
     "head": "f6c2b9d420f4b78a4fb825eb2f77bc1c912c9e9d",
     "clean": true,
     "source_review_target": "eab239d93560efe6f1eb974b547be0bd9e93b3e7",
     "later_commits_docs_only": true,
     "canonical_sdk": "native_fallback_not_enhancement_success",
-    "branch_pushed": false
+    "branch_pushed": false,
+    "root_tests": {
+      "passed": 198,
+      "seconds": 18.69
+    },
+    "mypy_source_files": 397,
+    "ruff": "PASS",
+    "review": "review/w21-root-reception-20261030/review.json",
+    "root_review": {
+      "schema_version": "w21-root-reception/1",
+      "date": "2026-10-30",
+      "reviewer": "ROOT independent reception agent",
+      "verdict": "PASS_ENGINEERING_C2_PARTIAL_OPEN",
+      "blocking_engineering_findings": [],
+      "author_head": "f6c2b9d420f4b78a4fb825eb2f77bc1c912c9e9d",
+      "author_tree": "7dc3106ffa2cc12ba402284158ae94f2ad902ff5",
+      "base_commit": "bb5d09c056ca36bba8061d761b5469d87aa6e5e0",
+      "root_premerge_commit": "97e8a290fcfaea4335aad3e5e058f2b8850d287b",
+      "author_final_review_target": "eab239d93560efe6f1eb974b547be0bd9e93b3e7",
+      "post_review_suffix_source_changes": false,
+      "author_worktree_clean_observed": true,
+      "allowed_merge_files": [
+        {
+          "path": "delivery/w21-pdf-runtime/evidence-integrity.json",
+          "bytes": 644,
+          "sha256": "20da05d8a955fef479bc1f6a711c2d612525db36498d09ad4a5431e914864a98",
+          "role": "delivery_evidence"
+        },
+        {
+          "path": "delivery/w21-pdf-runtime/handoff.json",
+          "bytes": 8212,
+          "sha256": "9ec06f521d05c60a9e56680efa42754f03698924912a65a54d0089c109a308dd",
+          "role": "delivery_evidence"
+        },
+        {
+          "path": "delivery/w21-pdf-runtime/handoff.md",
+          "bytes": 12405,
+          "sha256": "41b8d37cd12989424247b6433dc8e4c1a16bdf2d2c918e69f580f96ccc1b3cbb",
+          "role": "delivery_evidence"
+        },
+        {
+          "path": "delivery/w21-pdf-runtime/review-final.md",
+          "bytes": 14001,
+          "sha256": "cb88cbabfe05ebbc431aa39a36457637c8e0945c6d8590e2a96c80f75990c823",
+          "role": "delivery_evidence"
+        },
+        {
+          "path": "delivery/w21-pdf-runtime/review-initial.md",
+          "bytes": 18930,
+          "sha256": "d900398fd2e790c853c35808cfcdf4b5556b4941f11dda2f64e2f408549e8b6c",
+          "role": "delivery_evidence"
+        },
+        {
+          "path": "docs/plans/w21-pdf-runtime-2026-10-29/construction_card.md",
+          "bytes": 9921,
+          "sha256": "31daf54c8c818569aac87f46c6f8541fe0ded3846ab24cdc6ebddee162c1cc48",
+          "role": "delivery_evidence"
+        },
+        {
+          "path": "docs/plans/w21-pdf-runtime-2026-10-29/findings.md",
+          "bytes": 4922,
+          "sha256": "79ab68fa81718557c33222136c3040ed48216a94347a10f7d2de94a4ef61698e",
+          "role": "delivery_evidence"
+        },
+        {
+          "path": "docs/plans/w21-pdf-runtime-2026-10-29/progress.md",
+          "bytes": 5629,
+          "sha256": "91d64f6a86c6517f42a5030438052c9fc4f4557a73abd618ac272f6b10c205ee",
+          "role": "delivery_evidence"
+        },
+        {
+          "path": "docs/plans/w21-pdf-runtime-2026-10-29/receipts/b-red-initial.txt",
+          "bytes": 5743,
+          "sha256": "89a489417d88a3c56a6be9e8e8f8a3af6096a07a4d2fbe6f9c2bbaf93cbc4a76",
+          "role": "delivery_evidence"
+        },
+        {
+          "path": "docs/plans/w21-pdf-runtime-2026-10-29/receipts/canonical-fopen-comparison.txt",
+          "bytes": 952,
+          "sha256": "4e778225c4c57c0e735a22fc0816d57dce459717a99ae038b6692de6f1f3e404",
+          "role": "delivery_evidence"
+        },
+        {
+          "path": "docs/plans/w21-pdf-runtime-2026-10-29/receipts/canonical-stderr-diagnosis.txt",
+          "bytes": 747,
+          "sha256": "678766800e1155133bfbadce84d36db2239ccf14ab4f841a689f5708e70ad2c0",
+          "role": "delivery_evidence"
+        },
+        {
+          "path": "docs/plans/w21-pdf-runtime-2026-10-29/receipts/cold-rev1.json",
+          "bytes": 2816,
+          "sha256": "8d706c5c8c6b4ab58cebd38d580f800557b81562c607408f4f8da59671336057",
+          "role": "delivery_evidence"
+        },
+        {
+          "path": "docs/plans/w21-pdf-runtime-2026-10-29/receipts/cold-rev1.marker.json",
+          "bytes": 431,
+          "sha256": "7c580d4ebb1ce512ec026a48c569f39fad7ed1a431fde21cef6711077ff50226",
+          "role": "delivery_evidence"
+        },
+        {
+          "path": "docs/plans/w21-pdf-runtime-2026-10-29/receipts/cold-rev1.stderr.log",
+          "bytes": 18075,
+          "sha256": "2b1efb6f72bec17a91a17c83dc18b53a794cb741cc376f6acc13ad095b631059",
+          "role": "delivery_evidence"
+        },
+        {
+          "path": "docs/plans/w21-pdf-runtime-2026-10-29/receipts/cold-rev1.stdout.jsonl",
+          "bytes": 1229,
+          "sha256": "d00e4dbe2f78089b5ce1e713cc4e72b7946b41f8072876257f81406012df48b6",
+          "role": "delivery_evidence"
+        },
+        {
+          "path": "docs/plans/w21-pdf-runtime-2026-10-29/receipts/cold-rev2.json",
+          "bytes": 183020,
+          "sha256": "212400ddc0038c3940b2387a925f790b1193397a8f2f59daf3966423cea25626",
+          "role": "delivery_evidence"
+        },
+        {
+          "path": "docs/plans/w21-pdf-runtime-2026-10-29/receipts/cold-rev2.marker.json",
+          "bytes": 431,
+          "sha256": "7064b35cc0008d8f9d63ceae935f7aa6203938e36808b67f42e3388201dec251",
+          "role": "delivery_evidence"
+        },
+        {
+          "path": "docs/plans/w21-pdf-runtime-2026-10-29/receipts/cold-rev2.stderr.log",
+          "bytes": 8587,
+          "sha256": "cb8a17a554b0d37c40d14a833e68dcc46c5f37ebeb0229674d4a9aa4279068d7",
+          "role": "delivery_evidence"
+        },
+        {
+          "path": "docs/plans/w21-pdf-runtime-2026-10-29/receipts/cold-rev2.stdout.jsonl",
+          "bytes": 138705,
+          "sha256": "a2d18f93bc6c4de35030126f01d1808c9c8af78bd22205ff55cadcaa6221f6ef",
+          "role": "delivery_evidence"
+        },
+        {
+          "path": "docs/plans/w21-pdf-runtime-2026-10-29/receipts/cold-rev3.json",
+          "bytes": 182056,
+          "sha256": "1cfa73a9237b6fca96cdddcb4fd6b354e08b151c2d69d0b20a7cd758cecf4eb2",
+          "role": "delivery_evidence"
+        },
+        {
+          "path": "docs/plans/w21-pdf-runtime-2026-10-29/receipts/cold-rev3.marker.json",
+          "bytes": 431,
+          "sha256": "20c935d7b2df1e5f48f6df5bf4ef6542992cf71d79a6db1089ffd6b24c64db62",
+          "role": "delivery_evidence"
+        },
+        {
+          "path": "docs/plans/w21-pdf-runtime-2026-10-29/receipts/cold-rev3.stderr.log",
+          "bytes": 8587,
+          "sha256": "f1d45080ca87ebb05f38066e54a2acf4c79bdf2e3244fae37e3bceb3c39ca825",
+          "role": "delivery_evidence"
+        },
+        {
+          "path": "docs/plans/w21-pdf-runtime-2026-10-29/receipts/cold-rev3.stdout.jsonl",
+          "bytes": 137803,
+          "sha256": "5a20c1097e8583d7e8bf1fadd8f519911c15463211fe154b9d5818efe7edf283",
+          "role": "delivery_evidence"
+        },
+        {
+          "path": "docs/plans/w21-pdf-runtime-2026-10-29/receipts/cold-rev4.json",
+          "bytes": 2636,
+          "sha256": "9a3e937324d2437c2bdb26dfb8a21326398951c14776d2f13b97ac43363114db",
+          "role": "delivery_evidence"
+        },
+        {
+          "path": "docs/plans/w21-pdf-runtime-2026-10-29/receipts/cold-rev4.marker.json",
+          "bytes": 431,
+          "sha256": "2cf0d26e3ecb398cc6c50879834761c05331fd33e296d10669fdcc0e0e3ba32f",
+          "role": "delivery_evidence"
+        },
+        {
+          "path": "docs/plans/w21-pdf-runtime-2026-10-29/receipts/cold-rev4.stderr.log",
+          "bytes": 16528,
+          "sha256": "307019fcbb26e17373197287cd58f54e8c62fd1b8788b0e107fc8dcf2e40bec2",
+          "role": "delivery_evidence"
+        },
+        {
+          "path": "docs/plans/w21-pdf-runtime-2026-10-29/receipts/cold-rev4.stdout.jsonl",
+          "bytes": 984,
+          "sha256": "a94b4130edb78622a84d4b9c736d669b66cb34e19c0530c04d73c630d23e59b5",
+          "role": "delivery_evidence"
+        },
+        {
+          "path": "docs/plans/w21-pdf-runtime-2026-10-29/receipts/cold-rev5.json",
+          "bytes": 3997,
+          "sha256": "2a25a3b51b7302965f216113959ed915e659d316fbf509959a19073dfe5e14e5",
+          "role": "delivery_evidence"
+        },
+        {
+          "path": "docs/plans/w21-pdf-runtime-2026-10-29/receipts/cold-rev5.marker.json",
+          "bytes": 431,
+          "sha256": "8d265c02a58c0a45edb119184fff3a06453f6f402330f278e48482a665f600fd",
+          "role": "delivery_evidence"
+        },
+        {
+          "path": "docs/plans/w21-pdf-runtime-2026-10-29/receipts/cold-rev5.stderr.log",
+          "bytes": 9622,
+          "sha256": "93d925c7e8e494ece26be37dc12abd2e507be7aee6a793e33979017cb7b6da6f",
+          "role": "delivery_evidence"
+        },
+        {
+          "path": "docs/plans/w21-pdf-runtime-2026-10-29/receipts/cold-rev5.stdout.jsonl",
+          "bytes": 1977,
+          "sha256": "f07cf208351d57075c2a305613640afcebb27e88347dfba83f0a78177d27313c",
+          "role": "delivery_evidence"
+        },
+        {
+          "path": "docs/plans/w21-pdf-runtime-2026-10-29/receipts/full-unit-summary-current.txt",
+          "bytes": 71790,
+          "sha256": "2f87053572a0d9ef5fe4d2b5a40f93f48e7d17834e70d91995832693b73b571d",
+          "role": "delivery_evidence"
+        },
+        {
+          "path": "docs/plans/w21-pdf-runtime-2026-10-29/receipts/push-gate-path-length-counterexample.md",
+          "bytes": 3332,
+          "sha256": "8657280517c921c724de6688a1950ffa46b231a8e251b9e70a496ce2532eae2b",
+          "role": "delivery_evidence"
+        },
+        {
+          "path": "docs/plans/w21-pdf-runtime-2026-10-29/receipts/synthetic-e2e-ascii-alias.json",
+          "bytes": 4224,
+          "sha256": "6674ee8f626c19f419747f96f96778fe9b9ee29856486c5bf604041bd1b1a998",
+          "role": "delivery_evidence"
+        },
+        {
+          "path": "docs/plans/w21-pdf-runtime-2026-10-29/receipts/synthetic-e2e.json",
+          "bytes": 3996,
+          "sha256": "ef3e0e50c7c7c3f7fa49463f42dcc67681b3429780535f29abdbee4e6b06e42d",
+          "role": "delivery_evidence"
+        },
+        {
+          "path": "docs/plans/w21-pdf-runtime-2026-10-29/task_plan.md",
+          "bytes": 471,
+          "sha256": "8f99653b1b3f5dd628d284fd213d4fae28860e6c3d985e0cd550c5c453128a85",
+          "role": "delivery_evidence"
+        },
+        {
+          "path": "src/company_wiki/source_catalog/narrative_pdf_enhancement.py",
+          "bytes": 22144,
+          "sha256": "d697d4e34b2579c5be10651b7c3eb79807c46250ac07fc5dac88bc94b007064b",
+          "role": "engineering"
+        },
+        {
+          "path": "tests/unit/test_w21_pdf_runtime_launch.py",
+          "bytes": 8114,
+          "sha256": "14bca37e408e364593621c9f6a27d5af1a41256153cdc781438c3176618e9109",
+          "role": "engineering"
+        },
+        {
+          "path": "tests/unit/test_w21_pdf_runtime_probe_guard.py",
+          "bytes": 4363,
+          "sha256": "141bcfd23f96a982f1883ccf856e9d9b86dd616dfe5c8bac1bb8a7166d66db4d",
+          "role": "engineering"
+        },
+        {
+          "path": "tools/pdf_runtime_probe/cold_runtime_probe.py",
+          "bytes": 7719,
+          "sha256": "685dbbcd376bfad4554afc59101b2305f977a8ea2decd5706f5453d60214dc87",
+          "role": "engineering"
+        },
+        {
+          "path": "tools/pdf_runtime_probe/run_cold_probe.py",
+          "bytes": 6331,
+          "sha256": "5a9c70655443b52f54ff2ccdc7d49b63706e8f099bcef95b4d54bf0a6ca8159c",
+          "role": "engineering"
+        },
+        {
+          "path": "tools/pdf_runtime_probe/synthetic_e2e.py",
+          "bytes": 9013,
+          "sha256": "e2b202ce4d7d4e9f7483eeff7ad48fbc5b4f5a661acdff78cf4b2b2a7deb69ce",
+          "role": "engineering"
+        }
+      ],
+      "file_count": 42,
+      "total_git_blob_bytes": 942380,
+      "compatibility": {
+        "production_owner_base_matches_premerge_root": true,
+        "native_parser": "0.1.2 retained",
+        "qa_native_range_changes_retained": true,
+        "recipe_binding": "existing orchestration_sha256 changes with implementation",
+        "cache_or_source_proof_owner_changes": false,
+        "new_production_human_gate": false,
+        "global_config_or_original_file_changes_in_delivery": false
+      },
+      "canonical_c2": {
+        "status": "PARTIAL_OPEN",
+        "canonical": {
+          "status": "native_fallback",
+          "last_stage": "PAGE_1",
+          "completed_pages": [],
+          "accepted_groups": 0,
+          "evidence_spans": 0,
+          "source_preserved": true
+        },
+        "ascii_alias": {
+          "scope": "diagnostic_only",
+          "status": "unaligned_native_fallback",
+          "completed_pages": [
+            1,
+            2
+          ],
+          "stream_complete": true,
+          "accepted_groups": 0,
+          "rejected_groups": 2,
+          "evidence_spans": 0,
+          "peak_job_commit_bytes": 3250298880
+        },
+        "remaining": [
+          "supported canonical environment path/resource-open remedy",
+          "fresh bounded canonical E2E under actual current recipe",
+          "aligned enhancement and content/recall acceptance remain unproven"
+        ]
+      },
+      "no_document_startup": {
+        "done": true,
+        "seconds": 16.222824,
+        "bound_seconds": 30,
+        "guard_rejections": 0,
+        "scope": "import and constructor only"
+      },
+      "path_length": {
+        "independent_small_probe": true,
+        "long_paths_enabled": 0,
+        "staging_basename_chars": 82,
+        "at_254": "created",
+        "at_270": "FileNotFoundError errno 2",
+        "scratch_restored_absent": true,
+        "classification": "gate layout portability trigger plus shared atomic-write long-path robustness limit; no demonstrated PDF/source-proof semantic regression",
+        "not_established": "persist_projection uniquely owns product contract violation",
+        "do_not_bypass_push_gate": true
+      },
+      "validation": {
+        "root_integration_receipts_read": [
+          "root-tests.txt",
+          "root-mypy.txt"
+        ],
+        "root_test_modules": 8,
+        "root_passed": 198,
+        "root_test_seconds": 18.69,
+        "mypy_source_files": 397,
+        "mypy_result": "no issues",
+        "ruff": "PASS reported by ROOT",
+        "reviewer_repeated_sdk_runs": 0,
+        "reviewer_repeated_full_suite_runs": 0
+      },
+      "recommended_bounded_followups": [
+        "test_pdf_paragraph_reading_integration.py only if integration source/replay boundary changes",
+        "existing focused recipe/cache recovery test only if that boundary changes",
+        "fresh canonical two-page synthetic E2E after deployment remedy; new owned receipts/current recipe"
+      ],
+      "nonblocking_metadata": [
+        "reviewed_commits.final_review_target remains null",
+        "generator pending-final-review wording stale; exact freeze supplied by independent review",
+        "pushed_to_remote=false with push gate blocked retained as provenance"
+      ],
+      "review_limits": [
+        "SDK/fopen experiment inspected through frozen receipts; not rerun",
+        "no author checkout/index changes",
+        "no keys/downloads/global writes",
+        "no real-company original reads",
+        "no ROOT body-quality conclusion upgrade"
+      ],
+      "root_profile_sha256_observed": "bcc427114955f6d045c5848b1885b24f1ec1666d1397bfb60ba4f404a225ff2a"
+    }
   }
 }

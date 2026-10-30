@@ -1,0 +1,86 @@
+{
+  "revision": "rev4",
+  "attempts": 1,
+  "deadline_seconds": 30,
+  "profile_relative": "ROOT/.planning/c3-20261028/pdf-sdk-isolated/runtime-isolated.json",
+  "profile_sha256": "bcc427114955f6d045c5848b1885b24f1ec1666d1397bfb60ba4f404a225ff2a",
+  "probe_sha256": "685dbbcd376bfad4554afc59101b2305f977a8ea2decd5706f5453d60214dc87",
+  "controller_sha256": "51c0eae5a644950f3ec6bb37be89df0e8334aaa0b9ea13e1e4abc72053e8b178",
+  "pdf_bytes": 0,
+  "sdk_model_copies": 0,
+  "cpu_threads": 4,
+  "memory_bytes": 4294967296,
+  "environment_sha256": "c84a984ccb3a56dffbfd0d4538f14ce4a27de44dec4981527a2b0c4a545cdf44",
+  "docling_version": "2.96.0",
+  "launch_command": [
+    "python.exe",
+    "-I",
+    "-X",
+    "utf8",
+    "-X",
+    "pycache_prefix=C:\\Users\\郑曾波\\Projects\\company-wiki-w21-pdf-runtime\\__pycache__\\pdf-paragraph",
+    "cold_runtime_probe.py"
+  ],
+  "audit_scope": "python_audit_events_only",
+  "status": "ChildFailed",
+  "returncode": 1,
+  "seconds": 12.469763,
+  "events": [
+    {
+      "stage": "BOOT",
+      "active": "BOOT",
+      "seconds": 0.001297,
+      "cpu_seconds": 0.0625,
+      "pid": 5148,
+      "peak_job_commit_bytes": 10027008,
+      "python_name": "python.exe",
+      "prefix_name": "env",
+      "base_prefix_name": "Miniconda",
+      "flags": {
+        "isolated": true,
+        "safe_path": true,
+        "utf8": true,
+        "no_site": false
+      }
+    },
+    {
+      "stage": "BEGIN",
+      "active": "IMPORT_DOCUMENT_CONVERTER",
+      "seconds": 0.001381,
+      "cpu_seconds": 0.0625,
+      "pid": 5148,
+      "peak_job_commit_bytes": 10027008
+    },
+    {
+      "stage": "SAMPLE",
+      "active": "IMPORT_DOCUMENT_CONVERTER",
+      "seconds": 5.006176,
+      "cpu_seconds": 4.796875,
+      "pid": 5148,
+      "peak_job_commit_bytes": 333615104
+    },
+    {
+      "stage": "SAMPLE",
+      "active": "IMPORT_DOCUMENT_CONVERTER",
+      "seconds": 10.008552,
+      "cpu_seconds": 9.234375,
+      "pid": 5148,
+      "peak_job_commit_bytes": 440311808
+    },
+    {
+      "stage": "ERROR",
+      "active": "IMPORT_DOCUMENT_CONVERTER",
+      "seconds": 11.17913,
+      "cpu_seconds": 10.296875,
+      "pid": 5148,
+      "peak_job_commit_bytes": 470794240,
+      "error_type": "OSError",
+      "message": "No username set in the environment"
+    }
+  ],
+  "stdout_sha256": "a94b4130edb78622a84d4b9c736d669b66cb34e19c0530c04d73c630d23e59b5",
+  "stderr_sha256": "307019fcbb26e17373197287cd58f54e8c62fd1b8788b0e107fc8dcf2e40bec2",
+  "done_no_document": false,
+  "guard_rejections": 0,
+  "scratch_restored_absent": true
+}

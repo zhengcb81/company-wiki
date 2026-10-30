@@ -1,0 +1,186 @@
+Timeout (0:00:10)!
+Thread 0x00001e60 (most recent call first):
+  File "C:\Miniconda\Lib\threading.py", line 363 in wait
+  File "C:\Miniconda\Lib\threading.py", line 659 in wait
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki-w21-pdf-runtime\tools\pdf_runtime_probe\cold_runtime_probe.py", line 127 in sample
+  File "C:\Miniconda\Lib\threading.py", line 994 in run
+  File "C:\Miniconda\Lib\threading.py", line 1043 in _bootstrap_inner
+  File "C:\Miniconda\Lib\threading.py", line 1014 in _bootstrap
+
+Thread 0x00005930 (most recent call first):
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\torch\fx\experimental\recording.py", line 260 in decorator
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\torch\fx\experimental\symbolic_shapes.py", line 6700 in ShapeEnv
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\torch\fx\experimental\symbolic_shapes.py", line 3782 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\torch\distributed\tensor\_collective_utils.py", line 28 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\torch\distributed\tensor\placement_types.py", line 16 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\torch\distributed\tensor\_dtensor_spec.py", line 10 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\torch\distributed\tensor\_ops\_conv_ops.py", line 7 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\torch\distributed\tensor\_ops\__init__.py", line 2 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\torch\distributed\tensor\__init__.py", line 4 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\transformers\distributed\tensor_parallel.py", line 31 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\transformers\distributed\fsdp.py", line 22 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\transformers\generation\utils.py", line 39 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1387 in _gcd_import
+  File "C:\Miniconda\Lib\importlib\__init__.py", line 88 in import_module
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\transformers\utils\import_utils.py", line 2813 in _get_module
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\transformers\utils\import_utils.py", line 2584 in __getattr__
+  File "<frozen importlib._bootstrap>", line 1412 in _handle_fromlist
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\transformers\models\auto\auto_factory.py", line 41 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\transformers\models\auto\modeling_auto.py", line 21 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "<frozen importlib._bootstrap>", line 1387 in _gcd_import
+  File "C:\Miniconda\Lib\importlib\__init__.py", line 88 in import_module
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\transformers\utils\import_utils.py", line 2813 in _get_module
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\transformers\utils\import_utils.py", line 2584 in __getattr__
+  File "<frozen importlib._bootstrap>", line 1412 in _handle_fromlist
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\docling\models\stages\chart_extraction\granite_vision.py", line 27 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\docling\pipeline\base_pipeline.py", line 36 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+  File "<frozen importlib._bootstrap>", line 1331 in _find_and_load_unlocked
+  File "<frozen importlib._bootstrap>", line 1360 in _find_and_load
+  File "C:\Users\\u90d1\u66fe\u6ce2\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\docling\pipeline\asr_pipeline.py", line 33 in <module>
+  File "<frozen importlib._bootstrap>", line 488 in _call_with_frames_removed
+  File "<frozen importlib._bootstrap_external>", line 1027 in exec_module
+  File "<frozen importlib._bootstrap>", line 935 in _load_unlocked
+Traceback (most recent call last):
+  File "C:\Miniconda\Lib\getpass.py", line 172, in getuser
+    import pwd
+ModuleNotFoundError: No module named 'pwd'
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\company-wiki-w21-pdf-runtime\tools\pdf_runtime_probe\cold_runtime_probe.py", line 170, in <module>
+    main()
+    ~~~~^^
+  File "C:\Users\郑曾波\Projects\company-wiki-w21-pdf-runtime\tools\pdf_runtime_probe\cold_runtime_probe.py", line 138, in main
+    from docling.document_converter import DocumentConverter, PdfFormatOption  # type: ignore[import-not-found]
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\郑曾波\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\docling\document_converter.py", line 68, in <module>
+    from docling.pipeline.asr_pipeline import AsrPipeline
+  File "C:\Users\郑曾波\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\docling\pipeline\asr_pipeline.py", line 33, in <module>
+    from docling.pipeline.base_pipeline import BasePipeline
+  File "C:\Users\郑曾波\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\docling\pipeline\base_pipeline.py", line 36, in <module>
+    from docling.models.stages.chart_extraction.granite_vision import (
+    ...<2 lines>...
+    )
+  File "C:\Users\郑曾波\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\docling\models\stages\chart_extraction\granite_vision.py", line 27, in <module>
+    from transformers import AutoModelForImageTextToText, AutoProcessor
+  File "<frozen importlib._bootstrap>", line 1412, in _handle_fromlist
+  File "C:\Users\郑曾波\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\transformers\utils\import_utils.py", line 2584, in __getattr__
+    module = self._get_module(self._class_to_module[name])
+  File "C:\Users\郑曾波\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\transformers\utils\import_utils.py", line 2815, in _get_module
+    raise e
+  File "C:\Users\郑曾波\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\transformers\utils\import_utils.py", line 2813, in _get_module
+    return importlib.import_module("." + module_name, self.__name__)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Miniconda\Lib\importlib\__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\郑曾波\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\transformers\models\auto\modeling_auto.py", line 21, in <module>
+    from .auto_factory import (
+    ...<4 lines>...
+    )
+  File "C:\Users\郑曾波\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\transformers\models\auto\auto_factory.py", line 41, in <module>
+    from ...generation import GenerationMixin
+  File "<frozen importlib._bootstrap>", line 1412, in _handle_fromlist
+  File "C:\Users\郑曾波\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\transformers\utils\import_utils.py", line 2584, in __getattr__
+    module = self._get_module(self._class_to_module[name])
+  File "C:\Users\郑曾波\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\transformers\utils\import_utils.py", line 2815, in _get_module
+    raise e
+  File "C:\Users\郑曾波\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\transformers\utils\import_utils.py", line 2813, in _get_module
+    return importlib.import_module("." + module_name, self.__name__)
+           ~~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Miniconda\Lib\importlib\__init__.py", line 88, in import_module
+    return _bootstrap._gcd_import(name[level:], package, level)
+           ~~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\郑曾波\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\transformers\generation\utils.py", line 48, in <module>
+    from ..masking_utils import create_masks_for_generate
+  File "C:\Users\郑曾波\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\transformers\masking_utils.py", line 44, in <module>
+    from torch._dynamo._trace_wrapped_higher_order_op import TransformGetItemToIndex
+  File "C:\Users\郑曾波\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\torch\_dynamo\__init__.py", line 13, in <module>
+    from . import (
+    ...<7 lines>...
+    )
+  File "C:\Users\郑曾波\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\torch\_dynamo\aot_compile.py", line 19, in <module>
+    from torch._dynamo.package import SystemInfo
+  File "C:\Users\郑曾波\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\torch\_dynamo\package.py", line 1206, in <module>
+    DynamoCache = DiskDynamoCache(os.path.join(cache_dir(), "dynamo"))
+                                               ~~~~~~~~~^^
+  File "C:\Users\郑曾波\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\torch\_dynamo\package.py", line 1203, in cache_dir
+    return cache_dir()
+  File "C:\Users\郑曾波\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\torch\_inductor\runtime\cache_dir_utils.py", line 17, in cache_dir
+    os.environ["TORCHINDUCTOR_CACHE_DIR"] = cache_dir = default_cache_dir()
+                                                        ~~~~~~~~~~~~~~~~~^^
+  File "C:\Users\郑曾波\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\torch\_inductor\runtime\cache_dir_utils.py", line 23, in default_cache_dir
+    sanitized_username = re.sub(r'[\\/:*?"<>|]', "_", getpass.getuser())
+                                                      ~~~~~~~~~~~~~~~^^
+  File "C:\Miniconda\Lib\getpass.py", line 175, in getuser
+    raise OSError('No username set in the environment') from e
+OSError: No username set in the environment

@@ -1,0 +1,141 @@
+{
+  "revision": "rev5",
+  "attempts": 1,
+  "deadline_seconds": 30,
+  "profile_relative": "ROOT/.planning/c3-20261028/pdf-sdk-isolated/runtime-isolated.json",
+  "profile_sha256": "bcc427114955f6d045c5848b1885b24f1ec1666d1397bfb60ba4f404a225ff2a",
+  "probe_sha256": "685dbbcd376bfad4554afc59101b2305f977a8ea2decd5706f5453d60214dc87",
+  "controller_sha256": "5a9c70655443b52f54ff2ccdc7d49b63706e8f099bcef95b4d54bf0a6ca8159c",
+  "pdf_bytes": 0,
+  "sdk_model_copies": 0,
+  "cpu_threads": 4,
+  "memory_bytes": 4294967296,
+  "environment_sha256": "c84a984ccb3a56dffbfd0d4538f14ce4a27de44dec4981527a2b0c4a545cdf44",
+  "docling_version": "2.96.0",
+  "launch_command": [
+    "python.exe",
+    "-I",
+    "-X",
+    "utf8",
+    "-X",
+    "pycache_prefix=C:\\Users\\郑曾波\\Projects\\company-wiki-w21-pdf-runtime\\__pycache__\\pdf-paragraph",
+    "cold_runtime_probe.py"
+  ],
+  "audit_scope": "python_audit_events_only",
+  "status": "completed",
+  "returncode": 0,
+  "seconds": 16.222824,
+  "events": [
+    {
+      "stage": "BOOT",
+      "active": "BOOT",
+      "seconds": 0.001402,
+      "cpu_seconds": 0.046875,
+      "pid": 25848,
+      "peak_job_commit_bytes": 10039296,
+      "python_name": "python.exe",
+      "prefix_name": "env",
+      "base_prefix_name": "Miniconda",
+      "flags": {
+        "isolated": true,
+        "safe_path": true,
+        "utf8": true,
+        "no_site": false
+      }
+    },
+    {
+      "stage": "BEGIN",
+      "active": "IMPORT_DOCUMENT_CONVERTER",
+      "seconds": 0.001489,
+      "cpu_seconds": 0.046875,
+      "pid": 25848,
+      "peak_job_commit_bytes": 10039296
+    },
+    {
+      "stage": "SAMPLE",
+      "active": "IMPORT_DOCUMENT_CONVERTER",
+      "seconds": 5.010955,
+      "cpu_seconds": 4.75,
+      "pid": 25848,
+      "peak_job_commit_bytes": 327589888
+    },
+    {
+      "stage": "SAMPLE",
+      "active": "IMPORT_DOCUMENT_CONVERTER",
+      "seconds": 10.011793,
+      "cpu_seconds": 9.625,
+      "pid": 25848,
+      "peak_job_commit_bytes": 412389376
+    },
+    {
+      "stage": "END",
+      "active": "IMPORT_DOCUMENT_CONVERTER",
+      "seconds": 14.153162,
+      "cpu_seconds": 13.21875,
+      "pid": 25848,
+      "peak_job_commit_bytes": 615723008
+    },
+    {
+      "stage": "BEGIN",
+      "active": "IMPORT_BASE_MODELS",
+      "seconds": 14.153281,
+      "cpu_seconds": 13.21875,
+      "pid": 25848,
+      "peak_job_commit_bytes": 615723008
+    },
+    {
+      "stage": "END",
+      "active": "IMPORT_BASE_MODELS",
+      "seconds": 14.153345,
+      "cpu_seconds": 13.21875,
+      "pid": 25848,
+      "peak_job_commit_bytes": 615723008
+    },
+    {
+      "stage": "BEGIN",
+      "active": "IMPORT_OPTIONS",
+      "seconds": 14.153405,
+      "cpu_seconds": 13.21875,
+      "pid": 25848,
+      "peak_job_commit_bytes": 615723008
+    },
+    {
+      "stage": "END",
+      "active": "IMPORT_OPTIONS",
+      "seconds": 14.15344,
+      "cpu_seconds": 13.21875,
+      "pid": 25848,
+      "peak_job_commit_bytes": 615723008
+    },
+    {
+      "stage": "BEGIN",
+      "active": "CONSTRUCT_NO_DOCUMENT",
+      "seconds": 14.153466,
+      "cpu_seconds": 13.21875,
+      "pid": 25848,
+      "peak_job_commit_bytes": 615723008
+    },
+    {
+      "stage": "END",
+      "active": "CONSTRUCT_NO_DOCUMENT",
+      "seconds": 14.155603,
+      "cpu_seconds": 13.21875,
+      "pid": 25848,
+      "peak_job_commit_bytes": 615989248,
+      "constructed": "DocumentConverter"
+    },
+    {
+      "stage": "DONE",
+      "active": "DONE_NO_DOCUMENT",
+      "seconds": 14.155678,
+      "cpu_seconds": 13.21875,
+      "pid": 25848,
+      "peak_job_commit_bytes": 615989248
+    }
+  ],
+  "stdout_sha256": "f07cf208351d57075c2a305613640afcebb27e88347dfba83f0a78177d27313c",
+  "stderr_sha256": "93d925c7e8e494ece26be37dc12abd2e507be7aee6a793e33979017cb7b6da6f",
+  "done_no_document": true,
+  "guard_rejections": 0,
+  "scratch_restored_absent": true
+}

@@ -1,12 +1,12 @@
-## 2026-10-30 当前：真实摘要/缓存已实跑，质量和非期次消费根修 OPEN；W21已交付待ROOT接收
+## 2026-10-30 当前：W21工程接收通过，合并发布；摘要质量/非期次复用继续根修
 
-唯一入口 CURRENT_STATUS.md/json。来源准备f88221d2已推送、精确CI41009349866成功。定位工程0bf2805f通过7文件独审60P、相关160P、397源mypy/ruff；正常pre-push抓到1项旧PDF默认版本literal仍1.1，已按实际迁移改1.2（transcript旧回放不改），10P/1.58秒及独审补充通过；待正常重推，未绕hook。
+唯一入口 CURRENT_STATUS.md/json。W21-PDF-RUNTIME正式交付f6c2b9d4，ROOT独审0工程阻塞；42文件已无冲突接入，8相关模块198P/18.69秒、397源mypy/ruff通过，兼容native parser0.1.2。作者工区保持干净、只读，无SDK/模型/下载/原件改动。见[ROOT接收包](review/w21-root-reception-20261030/README.md)。本节点正常合并提交推送，另观察精确CI。
 
-真实配置MiMo完成1次POST：6303输入+348输出=6651tokens，预算代理$0.001167（非现金账单）。activation恢复、同run重启和crossrun复用全部0新增POST；原件/config/sentinel保持、临时湖清理。母累计1807019tokens/$0.729112，旧unknown保留。输入8/8全部在实际sent task支持中，但实际生成6/8；独审判FAIL_QUALITY_OPEN，客户链和产品/研发数量遗漏、新闻归属限定丢失，3处mixed modality元数据。不能用bundle的来源回放verified代替摘要语义通过。
+W21 canonical SDK仍PAGE_1 native_fallback；ASCII alias只是两页完成、0accepted/2rejected/0spans的诊断，不冒签生产增强。长路径反例已独立复现254成功/270 ENOENT，进入共享原子写入/测试布局根修，不删测试、不加权限门禁。现有来源SHA/locator和缓存版本均保持其所属层责任。
 
-FF/RF消费者尚未通过。原benchmark对无FY IR发exact，FF拒绝；实验改latest_as_of也不成立，它会进入“需咨询provider判最新”的语义，不能拿未知期次冒充最新。实验runner修改已撤回、未提交；测试探针0下载/POST、隔离湖恢复。下一步应统一显式SourceRef文档复用与财年/最新期次请求的区别，不能填假年份或绕路。详见[真实独审](review/source-information-20261030/description-final/real-summary-v3/independent/review.md)及[下一根修细则](review/source-information-20261030/description-final/SUMMARY_QUALITY_NEXT.md)。
+前主线97e8a290已推送（pre-push158P/30.94秒），含定位源码0bf2805f及旧PDF默认版本合同修正；精确CI41019504113最后观察进行中，不能宣称远端绿。真实MiMo v3 1POST/6651tokens/$0.001167预算代理，activation/restart/crossrun全部0重复POST，母累计1807019tokens/$0.729112含旧unknown；原件/config/临时湖恢复检查通过。
 
-W21作者已正式通知交付，ROOT只读核到HEAD f6c2b9d4且工区干净；eab239d9以后仅交接/计划/终审/收据变动，产品源码仍对应独审eab239d9。其canonical SDK native_fallback与ASCII alias诊断不能当生产增强成功，作者push门禁路径长度反例留ROOT；不因handoff旧null字段另加人工签收。先提交本轮成果，再隔离ROOT验收/接线W21与摘要共因，保留原件、不碰Dayu/IQS/Dashboard。US RPO/holdout/实际RF预测/完整八步公司loop继续OPEN，目标active。
+**下一步：** 先发布本节点，再按[摘要共因细则](review/source-information-20261030/description-final/SUMMARY_QUALITY_NEXT.md)修8任务只生成6项、新闻限定丢失、mixed modality与回放verified误代语义通过；再定义FF/RF非期次指定SourceRef复用，不能给IR填假FY或用latest冒充已指定文档。复用已有实际response/snapshot作TDD，不重复收费或整批解析。canonical SDK路径、US RPO、holdout、RF实际预测及完整八步公司loop仍OPEN；目标active，不触Dayu/IQS/Dashboard及外来hook mode。
 
 ---
 以下为历史记录，不是额外执行入口。
