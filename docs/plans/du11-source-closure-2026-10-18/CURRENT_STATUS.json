@@ -2344,7 +2344,7 @@
     "published": true,
     "push_failure": "47 targets /392 collected /600s; two regressions being root-fixed, not waived by narrower daily gate"
   },
-  "next_action": "Fix source assertion atomic qualifiers/ongoing state and project capacity basis with versioned history-safe integration; bounded real recheck; then RF summary-use lineage and genuine native model adoption.",
+  "next_action": "Wire explicit atomic scoped recipe preserving legacy input/assessor semantics; new compact hints and1.1 assessor, full artifact/cache/RF wire; then real quality recheck before actual forecast adoption.",
   "c3_runtime_recovery_20261026": {
     "entry": "review/pdf-c3-20261026/RUNTIME_RECOVERY.md",
     "environment_independent": "PASS_ZERO_OPEN_25_TESTS_AND_REAL_WORKER_ENTRYPOINTS",
@@ -2959,10 +2959,7 @@
   ],
   "pause_requested_by_user": false,
   "paused_scope": "revoked by user mainline resume 2026-10-29",
-  "own_uncommitted_runtime": [
-    "src/company_wiki/document_understanding/assertion_frames.py",
-    "tests/unit/test_source_assertion_frames.py"
-  ],
+  "own_uncommitted_runtime": [],
   "qa_provisional_publication": {
     "code_commit": "c6c446d0eebc8f6e6f6903bd677c04eebaf65077",
     "branch": "master",
@@ -3998,5 +3995,13 @@
     "whole_source": "partial",
     "review": "review/source-information-20261030/description-final/real-fidelity-v1/independent/review.json",
     "actual_rf_forecast_adoption": "OPEN_NO_SUMMARY_USE_LINEAGE_OR_REAL_WANRUN_NATIVE_INPUT"
+  },
+  "source_assertion_frames_20261030": {
+    "status": "PURE_COMPONENT_REVIEWED_NOT_PRODUCTION_WIRED",
+    "independent_tests": 44,
+    "real_support_spans": 15,
+    "real_source_hints": 3,
+    "model_posts": 0,
+    "entry": "review/source-information-20261030/description-final/source-assertion-frames/README.md"
   }
 }

@@ -1,0 +1,41 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.cwpf31framesr1", "requested_basetemp_len": 50, "cwd_len": 34, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\֣����\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 14 items
+
+tests\unit\test_source_assertion_frames.py .F............                [100%]
+
+================================== FAILURES ===================================
+_ test_observed_ongoing_activity_is_not_a_future_plan[\u5718\u968a\u6b63\u5728\u958b\u767c\u65b0\u6e20\u9053\uff0c\u6301\u7e8c\u5b8c\u5584\u670d\u52d9\u3002-\u6b63\u5728\u958b\u767c] _
+tests\unit\test_source_assertion_frames.py:14: in test_observed_ongoing_activity_is_not_a_future_plan
+    frame = next(frame for frame in source_assertion_frames(source) if needle in frame.text)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E   StopIteration
+
+The above exception was the direct cause of the following exception:
+C:\Miniconda\Lib\site-packages\_pytest\runner.py:361: in from_call
+    result: TResult | None = func()
+                             ^^^^^^
+C:\Miniconda\Lib\site-packages\_pytest\runner.py:250: in <lambda>
+    lambda: runtest_hook(item=item, **kwds),
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\pluggy\_hooks.py:513: in __call__
+    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\pluggy\_manager.py:120: in _hookexec
+    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+C:\Miniconda\Lib\site-packages\_pytest\logging.py:865: in pytest_runtest_call
+    yield
+C:\Miniconda\Lib\site-packages\_pytest\capture.py:900: in pytest_runtest_call
+    return (yield)
+            ^^^^^
+E   RuntimeError: generator raised StopIteration
+=========================== short test summary info ===========================
+FAILED tests/unit/test_source_assertion_frames.py::test_observed_ongoing_activity_is_not_a_future_plan[\u5718\u968a\u6b63\u5728\u958b\u767c\u65b0\u6e20\u9053\uff0c\u6301\u7e8c\u5b8c\u5584\u670d\u52d9\u3002-\u6b63\u5728\u958b\u767c]
+======================== 1 failed, 13 passed in 2.28s =========================

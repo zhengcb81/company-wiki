@@ -6,7 +6,9 @@ CWP **ee27c962d120febcff62b50fb350f6b41650cac6**、RF **4bbf4528e108142784c81f85
 
 原整体FAIL（工具下载次数DTO错误）保留，修后同bundle正式字节在新独立湖零付费重放RF来源/叙述消费者PASS；未知FY/URL/日期、assessment保留，原件/config/母账不改，清理通过。不冒称新模型/缓存generation或实际预测采用。母累计1,813,988tokens/$0.730398含旧unknown。既有M1非期次复用已实读通过，不填假年或以latest替代，FF准确记未请求。
 
-**唯一下一步：** 按[单条限定/真实采用细则](review/source-information-20261030/description-final/M4_ADOPTION_AND_ATOMIC_SCOPE.md)先完成source framing中性TDD/独审、明确协议与历史回放边界，修3项共因并有界真实复验；再补RF原文与具体summary claim的采用lineage，准备真实本公司native模型并验参数/公式。不能把fixture、metadata或仅原文span引用当摘要实际采用。当前纯framing组件施工中、尚未生产接线，旧/6数据及旧assessment算法保持，生产默认仍/4。
+纯source frame组件已独审44P/0OPEN，ROOT用真实15个保存support重放发现并根修裸“项目建成后”回指断链；最终3项来源提示均出现，0.021842秒/0POST/0PDF解析。matching_text不冒充原文定位，未知不新增准入门。组件尚未生产接线，真实3P2仍OPEN。见[frame工程](review/source-information-20261030/description-final/source-assertion-frames/README.md)。
+
+**唯一下一步：** 按[单条限定/真实采用细则](review/source-information-20261030/description-final/M4_ADOPTION_AND_ATOMIC_SCOPE.md)先完成source framing中性TDD/独审、明确协议与历史回放边界，修3项共因并有界真实复验；再补RF原文与具体summary claim的采用lineage，准备真实本公司native模型并验参数/公式。不能把fixture、metadata或仅原文span引用当摘要实际采用。当前纯framing组件已通过独审和保存源重放、尚未生产接线，旧/6数据及旧assessment算法保持，生产默认仍/4。
 
 W21 canonical C2/长路径/US RPO/holdout/完整公司循环仍OPEN。原件/config/外来hook、RF三WIP、Dayu/IQS/Dashboard保持；36个自有测试目录已清理约5.72MB。目标持续进行，无暂停、无项目完成宣告。
 

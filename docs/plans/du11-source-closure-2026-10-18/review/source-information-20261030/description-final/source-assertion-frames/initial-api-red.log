@@ -1,0 +1,172 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.cwpframesred", "requested_basetemp_len": 48, "cwd_len": 34, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\֣����\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 28 items
+
+tests\unit\test_source_assertion_frames.py FFFF....F..FF.FFFFF.FFFFFFFF  [100%]
+
+================================== FAILURES ===================================
+_ test_observed_ongoing_activity_is_not_a_future_plan[\u7532\u65b9\u79ef\u6781\u5f00\u53d1\u65b0\u5e02\u573a\uff0c\u6301\u7eed\u5b8c\u5584\u670d\u52a1\u7f51\u7edc\u3002-\u79ef\u6781\u5f00\u53d1] _
+tests\unit\test_source_assertion_frames.py:16: in test_observed_ongoing_activity_is_not_a_future_plan
+    frame = next(frame for frame in source_assertion_frames(source) if matching_reading_text(needle) in frame.matching_text)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_source_assertion_frames.py:16: in <genexpr>
+    frame = next(frame for frame in source_assertion_frames(source) if matching_reading_text(needle) in frame.matching_text)
+                                                                                                        ^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'SourceAssertionFrame' object has no attribute 'matching_text'
+_ test_observed_ongoing_activity_is_not_a_future_plan[\u5718\u968a\u6b63\u5728\u958b\u767c\u65b0\u6e20\u9053\uff0c\u6301\u7e8c\u5b8c\u5584\u670d\u52d9\u3002-\u6b63\u5728\u958b\u767c] _
+tests\unit\test_source_assertion_frames.py:16: in test_observed_ongoing_activity_is_not_a_future_plan
+    frame = next(frame for frame in source_assertion_frames(source) if matching_reading_text(needle) in frame.matching_text)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_source_assertion_frames.py:16: in <genexpr>
+    frame = next(frame for frame in source_assertion_frames(source) if matching_reading_text(needle) in frame.matching_text)
+                                                                                                        ^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'SourceAssertionFrame' object has no attribute 'matching_text'
+_ test_observed_ongoing_activity_is_not_a_future_plan[The supplier is actively expanding its sales network.-expanding] _
+tests\unit\test_source_assertion_frames.py:16: in test_observed_ongoing_activity_is_not_a_future_plan
+    frame = next(frame for frame in source_assertion_frames(source) if matching_reading_text(needle) in frame.matching_text)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_source_assertion_frames.py:16: in <genexpr>
+    frame = next(frame for frame in source_assertion_frames(source) if matching_reading_text(needle) in frame.matching_text)
+                                                                                                        ^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'SourceAssertionFrame' object has no attribute 'matching_text'
+_ test_observed_ongoing_activity_is_not_a_future_plan[The operator continues to improve its distribution.-continues] _
+tests\unit\test_source_assertion_frames.py:16: in test_observed_ongoing_activity_is_not_a_future_plan
+    frame = next(frame for frame in source_assertion_frames(source) if matching_reading_text(needle) in frame.matching_text)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_source_assertion_frames.py:16: in <genexpr>
+    frame = next(frame for frame in source_assertion_frames(source) if matching_reading_text(needle) in frame.matching_text)
+                                                                                                        ^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'SourceAssertionFrame' object has no attribute 'matching_text'
+_ test_reporting_scope_follows_explicit_coordination_but_not_another_statement _
+tests\unit\test_source_assertion_frames.py:36: in test_reporting_scope_follows_explicit_coordination_but_not_another_statement
+    wish = next(frame for frame in frames if 'ϣ��' in frame.matching_text)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_source_assertion_frames.py:36: in <genexpr>
+    wish = next(frame for frame in frames if 'ϣ��' in frame.matching_text)
+                                                     ^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'SourceAssertionFrame' object has no attribute 'matching_text'
+_ test_project_capacity_specification_is_distinct_from_start_and_actual_production _
+tests\unit\test_source_assertion_frames.py:58: in test_project_capacity_specification_is_distinct_from_start_and_actual_production
+    spec = next(frame for frame in frames if '500' in frame.matching_text)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_source_assertion_frames.py:58: in <genexpr>
+    spec = next(frame for frame in frames if '500' in frame.matching_text)
+                                                      ^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'SourceAssertionFrame' object has no attribute 'matching_text'
+________ test_english_project_specification_is_not_a_shipment_quantity ________
+tests\unit\test_source_assertion_frames.py:68: in test_english_project_specification_is_not_a_shipment_quantity
+    spec = next(frame for frame in frames if '450' in frame.matching_text)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_source_assertion_frames.py:68: in <genexpr>
+    spec = next(frame for frame in frames if '450' in frame.matching_text)
+                                                      ^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'SourceAssertionFrame' object has no attribute 'matching_text'
+_ test_english_attribution_without_a_delimited_prefix_never_discards_the_statement[According to reports Alpha is expanding its network.] _
+tests\unit\test_source_assertion_frames.py:86: in test_english_attribution_without_a_delimited_prefix_never_discards_the_statement
+    assert frames and ' '.join(f.matching_text for f in frames) == source
+E   assert (())
+_ test_english_attribution_without_a_delimited_prefix_never_discards_the_statement[According to the subsidiary it will expand capacity to 500 tonnes.] _
+tests\unit\test_source_assertion_frames.py:86: in test_english_attribution_without_a_delimited_prefix_never_discards_the_statement
+    assert frames and ' '.join(f.matching_text for f in frames) == source
+E   assert (())
+_ test_explicit_new_subject_after_coordinator_does_not_borrow_reporting_scope[According to the supplier, Alpha contacted Beta, and Gamma is expanding.-Gamma] _
+tests\unit\test_source_assertion_frames.py:95: in test_explicit_new_subject_after_coordinator_does_not_borrow_reporting_scope
+    independent = next(f for f in source_assertion_frames(source) if needle in f.matching_text)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_source_assertion_frames.py:95: in <genexpr>
+    independent = next(f for f in source_assertion_frames(source) if needle in f.matching_text)
+                                                                               ^^^^^^^^^^^^^^^
+E   AttributeError: 'SourceAssertionFrame' object has no attribute 'matching_text'
+_ test_explicit_new_subject_after_coordinator_does_not_borrow_reporting_scope[\u636e\u7b2c\u4e09\u65b9\u4fe1\u606f\uff0c\u7532\u65b9\u5df2\u7ecf\u5efa\u7acb\u8054\u7cfb\uff0c\u5e76\u4e59\u65b9\u6b63\u5728\u5f00\u53d1\u6e20\u9053\u3002-\u4e59\u65b9] _
+tests\unit\test_source_assertion_frames.py:95: in test_explicit_new_subject_after_coordinator_does_not_borrow_reporting_scope
+    independent = next(f for f in source_assertion_frames(source) if needle in f.matching_text)
+                  ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_source_assertion_frames.py:95: in <genexpr>
+    independent = next(f for f in source_assertion_frames(source) if needle in f.matching_text)
+                                                                               ^^^^^^^^^^^^^^^
+E   AttributeError: 'SourceAssertionFrame' object has no attribute 'matching_text'
+_ test_questions_and_governing_templates_do_not_assert_operating_state_or_quantity[\u8bf7\u95ee\u516c\u53f8\u662f\u5426\u6b63\u5728\u5f00\u53d1\u65b0\u6e20\u9053\uff1f] _
+tests\unit\test_source_assertion_frames.py:108: in test_questions_and_governing_templates_do_not_assert_operating_state_or_quantity
+    assert all(not f.ongoing_activity and f.quantity_basis is None for f in frames)
+E   assert False
+E    +  where False = all(<generator object test_questions_and_governing_templates_do_not_assert_operating_state_or_quantity.<locals>.<genexpr> at 0x000001EDA1BE31D0>)
+_ test_questions_and_governing_templates_do_not_assert_operating_state_or_quantity[\u6a21\u677f\uff1a\u4f01\u4e1a\u6b63\u5728\u5efa\u8bbe\u9879\u76ee\uff0c\u8bbe\u8ba1\u4ea7\u80fd500\u5428\u3002] _
+tests\unit\test_source_assertion_frames.py:108: in test_questions_and_governing_templates_do_not_assert_operating_state_or_quantity
+    assert all(not f.ongoing_activity and f.quantity_basis is None for f in frames)
+E   assert False
+E    +  where False = all(<generator object test_questions_and_governing_templates_do_not_assert_operating_state_or_quantity.<locals>.<genexpr> at 0x000001EDA1C54E10>)
+_ test_questions_and_governing_templates_do_not_assert_operating_state_or_quantity[Accounting policy example: the existing capacity of 500 tonnes is depreciated.] _
+tests\unit\test_source_assertion_frames.py:108: in test_questions_and_governing_templates_do_not_assert_operating_state_or_quantity
+    assert all(not f.ongoing_activity and f.quantity_basis is None for f in frames)
+E   assert False
+E    +  where False = all(<generator object test_questions_and_governing_templates_do_not_assert_operating_state_or_quantity.<locals>.<genexpr> at 0x000001EDA1BE2190>)
+_ test_commissioned_project_capacity_keeps_its_existing_stage_across_subjectless_clause[\u4e00\u671f\u9879\u76ee\u5df2\u7ecf\u6295\u4ea7\uff0c\u4ea7\u80fd500\u5428\u3002] _
+tests\unit\test_source_assertion_frames.py:116: in test_commissioned_project_capacity_keeps_its_existing_stage_across_subjectless_clause
+    frame = next(f for f in source_assertion_frames(source) if '500' in f.matching_text)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_source_assertion_frames.py:116: in <genexpr>
+    frame = next(f for f in source_assertion_frames(source) if '500' in f.matching_text)
+                                                                        ^^^^^^^^^^^^^^^
+E   AttributeError: 'SourceAssertionFrame' object has no attribute 'matching_text'
+_ test_commissioned_project_capacity_keeps_its_existing_stage_across_subjectless_clause[The first project is commissioned, with capacity of 500 tonnes.] _
+tests\unit\test_source_assertion_frames.py:116: in test_commissioned_project_capacity_keeps_its_existing_stage_across_subjectless_clause
+    frame = next(f for f in source_assertion_frames(source) if '500' in f.matching_text)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_source_assertion_frames.py:116: in <genexpr>
+    frame = next(f for f in source_assertion_frames(source) if '500' in f.matching_text)
+                                                                        ^^^^^^^^^^^^^^^
+E   AttributeError: 'SourceAssertionFrame' object has no attribute 'matching_text'
+_ test_capacity_or_condition_cannot_come_from_an_unrelated_project_in_the_same_sentence _
+tests\unit\test_source_assertion_frames.py:125: in test_capacity_or_condition_cannot_come_from_an_unrelated_project_in_the_same_sentence
+    frame = next(f for f in frames if '500' in f.matching_text)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_source_assertion_frames.py:125: in <genexpr>
+    frame = next(f for f in frames if '500' in f.matching_text)
+                                               ^^^^^^^^^^^^^^^
+E   AttributeError: 'SourceAssertionFrame' object has no attribute 'matching_text'
+_ test_independent_project_condition_does_not_attach_to_earlier_project_specification _
+tests\unit\test_source_assertion_frames.py:131: in test_independent_project_condition_does_not_attach_to_earlier_project_specification
+    frame = next(f for f in frames if '500' in f.matching_text)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_source_assertion_frames.py:131: in <genexpr>
+    frame = next(f for f in frames if '500' in f.matching_text)
+                                               ^^^^^^^^^^^^^^^
+E   AttributeError: 'SourceAssertionFrame' object has no attribute 'matching_text'
+_ test_traditional_quantity_and_decimal_separators_are_matching_views_not_raw_quotes _
+tests\unit\test_source_assertion_frames.py:138: in test_traditional_quantity_and_decimal_separators_are_matching_views_not_raw_quotes
+    assert frames[0].matching_text == '����Ŀ��Ʋ���Լ��ٶ�'
+           ^^^^^^^^^^^^^^^^^^^^^^^
+E   AttributeError: 'SourceAssertionFrame' object has no attribute 'matching_text'
+_ test_accounting_capacity_word_without_a_quantity_is_not_a_project_specification _
+tests\unit\test_source_assertion_frames.py:146: in test_accounting_capacity_word_without_a_quantity_is_not_a_project_specification
+    assert all(f.quantity_basis is None for f in frames)
+E   assert False
+E    +  where False = all(<generator object test_accounting_capacity_word_without_a_quantity_is_not_a_project_specification.<locals>.<genexpr> at 0x000001EDA1C55700>)
+=========================== short test summary info ===========================
+FAILED tests/unit/test_source_assertion_frames.py::test_observed_ongoing_activity_is_not_a_future_plan[\u7532\u65b9\u79ef\u6781\u5f00\u53d1\u65b0\u5e02\u573a\uff0c\u6301\u7eed\u5b8c\u5584\u670d\u52a1\u7f51\u7edc\u3002-\u79ef\u6781\u5f00\u53d1]
+FAILED tests/unit/test_source_assertion_frames.py::test_observed_ongoing_activity_is_not_a_future_plan[\u5718\u968a\u6b63\u5728\u958b\u767c\u65b0\u6e20\u9053\uff0c\u6301\u7e8c\u5b8c\u5584\u670d\u52d9\u3002-\u6b63\u5728\u958b\u767c]
+FAILED tests/unit/test_source_assertion_frames.py::test_observed_ongoing_activity_is_not_a_future_plan[The supplier is actively expanding its sales network.-expanding]
+FAILED tests/unit/test_source_assertion_frames.py::test_observed_ongoing_activity_is_not_a_future_plan[The operator continues to improve its distribution.-continues]
+FAILED tests/unit/test_source_assertion_frames.py::test_reporting_scope_follows_explicit_coordination_but_not_another_statement
+FAILED tests/unit/test_source_assertion_frames.py::test_project_capacity_specification_is_distinct_from_start_and_actual_production
+FAILED tests/unit/test_source_assertion_frames.py::test_english_project_specification_is_not_a_shipment_quantity
+FAILED tests/unit/test_source_assertion_frames.py::test_english_attribution_without_a_delimited_prefix_never_discards_the_statement[According to reports Alpha is expanding its network.]
+FAILED tests/unit/test_source_assertion_frames.py::test_english_attribution_without_a_delimited_prefix_never_discards_the_statement[According to the subsidiary it will expand capacity to 500 tonnes.]
+FAILED tests/unit/test_source_assertion_frames.py::test_explicit_new_subject_after_coordinator_does_not_borrow_reporting_scope[According to the supplier, Alpha contacted Beta, and Gamma is expanding.-Gamma]
+FAILED tests/unit/test_source_assertion_frames.py::test_explicit_new_subject_after_coordinator_does_not_borrow_reporting_scope[\u636e\u7b2c\u4e09\u65b9\u4fe1\u606f\uff0c\u7532\u65b9\u5df2\u7ecf\u5efa\u7acb\u8054\u7cfb\uff0c\u5e76\u4e59\u65b9\u6b63\u5728\u5f00\u53d1\u6e20\u9053\u3002-\u4e59\u65b9]
+FAILED tests/unit/test_source_assertion_frames.py::test_questions_and_governing_templates_do_not_assert_operating_state_or_quantity[\u8bf7\u95ee\u516c\u53f8\u662f\u5426\u6b63\u5728\u5f00\u53d1\u65b0\u6e20\u9053\uff1f]
+FAILED tests/unit/test_source_assertion_frames.py::test_questions_and_governing_templates_do_not_assert_operating_state_or_quantity[\u6a21\u677f\uff1a\u4f01\u4e1a\u6b63\u5728\u5efa\u8bbe\u9879\u76ee\uff0c\u8bbe\u8ba1\u4ea7\u80fd500\u5428\u3002]
+FAILED tests/unit/test_source_assertion_frames.py::test_questions_and_governing_templates_do_not_assert_operating_state_or_quantity[Accounting policy example: the existing capacity of 500 tonnes is depreciated.]
+FAILED tests/unit/test_source_assertion_frames.py::test_commissioned_project_capacity_keeps_its_existing_stage_across_subjectless_clause[\u4e00\u671f\u9879\u76ee\u5df2\u7ecf\u6295\u4ea7\uff0c\u4ea7\u80fd500\u5428\u3002]
+FAILED tests/unit/test_source_assertion_frames.py::test_commissioned_project_capacity_keeps_its_existing_stage_across_subjectless_clause[The first project is commissioned, with capacity of 500 tonnes.]
+FAILED tests/unit/test_source_assertion_frames.py::test_capacity_or_condition_cannot_come_from_an_unrelated_project_in_the_same_sentence
+FAILED tests/unit/test_source_assertion_frames.py::test_independent_project_condition_does_not_attach_to_earlier_project_specification
+FAILED tests/unit/test_source_assertion_frames.py::test_traditional_quantity_and_decimal_separators_are_matching_views_not_raw_quotes
+FAILED tests/unit/test_source_assertion_frames.py::test_accounting_capacity_word_without_a_quantity_is_not_a_project_specification
+======================== 20 failed, 8 passed in 2.74s =========================

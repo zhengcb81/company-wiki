@@ -1,0 +1,116 @@
+{
+  "schema_version": "source-assertion-frames-independent-review/1",
+  "reviewed_at": "2026-10-30T11:54:44.659064+00:00",
+  "status": "PASS_PURE_UNWIRED_COMPONENT",
+  "open_in_scope": 0,
+  "scope": [
+    "src/company_wiki/document_understanding/assertion_frames.py",
+    "tests/unit/test_source_assertion_frames.py"
+  ],
+  "tests": {
+    "passed": 44,
+    "failed": 0,
+    "skipped": 0,
+    "seconds": 2.16,
+    "command": [
+      "C:/Miniconda/python.exe",
+      "-B",
+      "-m",
+      "pytest",
+      "tests/unit/test_source_assertion_frames.py",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "--basetemp=.cwpframesbarefinal"
+    ]
+  },
+  "ruff": "PASS_TWO_PATHS",
+  "mypy": "PASS_ONE_SOURCE",
+  "findings": [
+    {
+      "id": "FRAME-1",
+      "status": "FIXED",
+      "description": "text implicitly looked like raw quote although matching owner simplifies traditional Chinese",
+      "fix": "public field matching_text explicitly denotes normalized local matching view; no source byte locator or verbatim quote claim; original span remains authority"
+    },
+    {
+      "id": "FRAME-2",
+      "status": "FIXED",
+      "description": "English according-to regex could consume an undelimited whole statement",
+      "fix": "source-only reporting prefix requires following delimited clause and no finite predicate/procedure; otherwise preserve full clause unclassified"
+    },
+    {
+      "id": "FRAME-3",
+      "status": "FIXED",
+      "description": "coordinator allowed reporting inheritance across explicitly independent subject",
+      "fix": "finite subjectless predicate continuation only; explicit new subject resets attribution; preserve并且/and also variants"
+    },
+    {
+      "id": "FRAME-4",
+      "status": "FIXED",
+      "description": "question/template/accounting words and negated ongoing could be classified as observed operations/capacity",
+      "fix": "governing nonassertion boundaries plus quantified-capacity requirement and local negation; no global keyword suppression of actual prose"
+    },
+    {
+      "id": "FRAME-5",
+      "status": "FIXED",
+      "description": "whole-sentence project/condition donated stage and completion condition to unrelated project or department",
+      "fix": "local project chain with explicit anaphor/subjectless continuation; independent project resets chain; finite condition marker stored without consequence duplication"
+    },
+    {
+      "id": "FRAME-6",
+      "status": "FIXED",
+      "description": "commissioned project comma-following capacity lost existing stage; negated/future English commissioning became existing",
+      "fix": "carry existing only inside same project chain, respect local negation/future; 3RED commissioning probes now positive"
+    },
+    {
+      "id": "FRAME-7",
+      "status": "FIXED",
+      "reported_by": "ROOT real captured support replay",
+      "description": "bare project-completion anaphor opened new project chain and lost preceding capacity condition",
+      "fix": "only immediately active project chain accepts bare 项目+completion marker or the project+(after/upon/following) completion; independent named/another projects and an interrupted chain remain separate",
+      "red": {
+        "failed": 2,
+        "passed_negative_cases": 5
+      },
+      "no_company_product_or_quantity_lookup": true
+    }
+  ],
+  "contract": {
+    "matching_text": "normalized local view, not source quote",
+    "reporting_prefix": "finite normalized source-only prefix; only explicit subjectless continuation inherits",
+    "quantity_basis": "existing_capacity/project_capacity_specification/None; not numeric evidence or shipment/production claim",
+    "project_condition": "finite matching marker only, e.g. 建成后/following completion",
+    "unknown_grammar": "unclassified; no universal NLP/NLI promise"
+  },
+  "not_signed": [
+    "production wiring",
+    "historical /4 /5 /6 assessment interpretation",
+    "real 3P2 issues fixed",
+    "new paid summary quality",
+    "RF actual adoption",
+    "full source recall",
+    "whole repository CI"
+  ],
+  "model_posts": 0,
+  "downloads": 0,
+  "original_parses": 0,
+  "files": [
+    {
+      "path": "src/company_wiki/document_understanding/assertion_frames.py",
+      "bytes": 7842,
+      "raw_sha256": "fd0013204643cefcee3136a3042d7bd2ab0459214a8708abb9ac8d7156138d91",
+      "lf_sha256": "fd0013204643cefcee3136a3042d7bd2ab0459214a8708abb9ac8d7156138d91"
+    },
+    {
+      "path": "tests/unit/test_source_assertion_frames.py",
+      "bytes": 10566,
+      "raw_sha256": "1b05f2a43b5093f7b26feca1c5f9f403d02285b2283c08fae2e342b214d05611",
+      "lf_sha256": "1b05f2a43b5093f7b26feca1c5f9f403d02285b2283c08fae2e342b214d05611"
+    }
+  ],
+  "prior_tests_not_added": {
+    "passed": 37,
+    "seconds": 1.42
+  }
+}

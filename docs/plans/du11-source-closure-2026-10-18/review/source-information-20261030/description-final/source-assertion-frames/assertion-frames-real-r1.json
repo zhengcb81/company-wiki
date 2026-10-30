@@ -1,0 +1,167 @@
+{
+  "scope": "real captured support; prototype only; no model/summary rewrite",
+  "rows": [
+    {
+      "claim_id": "t1-1",
+      "span_id": "urn:company-wiki:evidence-span:sha256:9eff140488704704348de7188fb027201325c1fcfefbd9083eadd6a241490484",
+      "frames": [
+        {
+          "matching_text": "答：您好",
+          "reporting_prefix": null,
+          "reporting_inherited": false,
+          "ongoing_activity": false,
+          "future_marker": false,
+          "quantity_basis": null,
+          "project_condition": null
+        },
+        {
+          "matching_text": "公司积极开发国内市场",
+          "reporting_prefix": null,
+          "reporting_inherited": false,
+          "ongoing_activity": true,
+          "future_marker": false,
+          "quantity_basis": null,
+          "project_condition": null
+        },
+        {
+          "matching_text": "持续完善国内市场战略布局",
+          "reporting_prefix": null,
+          "reporting_inherited": false,
+          "ongoing_activity": true,
+          "future_marker": false,
+          "quantity_basis": null,
+          "project_condition": null
+        },
+        {
+          "matching_text": "提高公司的抗风险能力",
+          "reporting_prefix": null,
+          "reporting_inherited": false,
+          "ongoing_activity": false,
+          "future_marker": false,
+          "quantity_basis": null,
+          "project_condition": null
+        },
+        {
+          "matching_text": "2025 年度公司境内收入约8.19 亿元",
+          "reporting_prefix": null,
+          "reporting_inherited": false,
+          "ongoing_activity": false,
+          "future_marker": false,
+          "quantity_basis": null,
+          "project_condition": null
+        },
+        {
+          "matching_text": "占比约22%",
+          "reporting_prefix": null,
+          "reporting_inherited": false,
+          "ongoing_activity": false,
+          "future_marker": false,
+          "quantity_basis": null,
+          "project_condition": null
+        },
+        {
+          "matching_text": "较比 2024 年度有所提升",
+          "reporting_prefix": null,
+          "reporting_inherited": false,
+          "ongoing_activity": false,
+          "future_marker": false,
+          "quantity_basis": null,
+          "project_condition": null
+        }
+      ]
+    },
+    {
+      "claim_id": "t6-3",
+      "span_id": "urn:company-wiki:evidence-span:sha256:35d9b362bb2496cd504e4f235d2a969b2f906e77761916b15f556a3bbb9c5fcf",
+      "frames": [
+        {
+          "matching_text": "答：您好",
+          "reporting_prefix": null,
+          "reporting_inherited": false,
+          "ongoing_activity": false,
+          "future_marker": false,
+          "quantity_basis": null,
+          "project_condition": null
+        },
+        {
+          "matching_text": "公司现无生产 VC（碳酸亚乙烯酯）的情况",
+          "reporting_prefix": null,
+          "reporting_inherited": false,
+          "ongoing_activity": false,
+          "future_marker": false,
+          "quantity_basis": null,
+          "project_condition": null
+        },
+        {
+          "matching_text": "中国节能与宁德时代已经建立了联系",
+          "reporting_prefix": "根据公司控股股东中国节能信息",
+          "reporting_inherited": false,
+          "ongoing_activity": false,
+          "future_marker": false,
+          "quantity_basis": null,
+          "project_condition": null
+        },
+        {
+          "matching_text": "并希望建立业务协同与合作",
+          "reporting_prefix": "根据公司控股股东中国节能信息",
+          "reporting_inherited": true,
+          "ongoing_activity": false,
+          "future_marker": true,
+          "quantity_basis": null,
+          "project_condition": null
+        }
+      ]
+    },
+    {
+      "claim_id": "t8-2",
+      "span_id": "urn:company-wiki:evidence-span:sha256:215bf09ec23969301d270ae22317bc3802a1550335736eb54fee678125516104",
+      "frames": [
+        {
+          "matching_text": "公司结合实际情况与下游客户需求",
+          "reporting_prefix": null,
+          "reporting_inherited": false,
+          "ongoing_activity": false,
+          "future_marker": false,
+          "quantity_basis": null,
+          "project_condition": null
+        },
+        {
+          "matching_text": "在新产能方面积极布局",
+          "reporting_prefix": null,
+          "reporting_inherited": false,
+          "ongoing_activity": false,
+          "future_marker": false,
+          "quantity_basis": null,
+          "project_condition": null
+        },
+        {
+          "matching_text": "2025 年公司启动了万润工业园二期 C05 建设项目",
+          "reporting_prefix": null,
+          "reporting_inherited": false,
+          "ongoing_activity": false,
+          "future_marker": false,
+          "quantity_basis": null,
+          "project_condition": null
+        },
+        {
+          "matching_text": "该项目包含半导体光刻胶用相关材料产能约 751 吨/年",
+          "reporting_prefix": null,
+          "reporting_inherited": false,
+          "ongoing_activity": false,
+          "future_marker": false,
+          "quantity_basis": "project_capacity_specification",
+          "project_condition": null
+        },
+        {
+          "matching_text": "项目建成后将为公司半导体制造材料业务发展提供产能保障",
+          "reporting_prefix": null,
+          "reporting_inherited": false,
+          "ongoing_activity": false,
+          "future_marker": true,
+          "quantity_basis": null,
+          "project_condition": null
+        }
+      ]
+    }
+  ]
+}

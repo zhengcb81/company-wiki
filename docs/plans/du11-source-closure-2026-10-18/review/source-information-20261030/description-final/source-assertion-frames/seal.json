@@ -1,0 +1,19 @@
+{
+  "schema_version": "source-assertion-frames-independent-seal/1",
+  "status": "PASS_PURE_UNWIRED_COMPONENT",
+  "sealed_at": "2026-10-30T11:54:44.659064+00:00",
+  "files": [
+    {
+      "path": "src/company_wiki/document_understanding/assertion_frames.py",
+      "bytes": 7842,
+      "raw_sha256": "fd0013204643cefcee3136a3042d7bd2ab0459214a8708abb9ac8d7156138d91",
+      "lf_sha256": "fd0013204643cefcee3136a3042d7bd2ab0459214a8708abb9ac8d7156138d91"
+    },
+    {
+      "path": "tests/unit/test_source_assertion_frames.py",
+      "bytes": 10566,
+      "raw_sha256": "1b05f2a43b5093f7b26feca1c5f9f403d02285b2283c08fae2e342b214d05611",
+      "lf_sha256": "1b05f2a43b5093f7b26feca1c5f9f403d02285b2283c08fae2e342b214d05611"
+    }
+  ]
+}
