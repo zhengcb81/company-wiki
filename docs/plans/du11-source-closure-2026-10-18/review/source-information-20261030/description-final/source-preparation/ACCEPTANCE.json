@@ -1,0 +1,35 @@
+{
+  "status": "PASS_ENGINEERING_AND_REAL_COLD_SOURCE_PREPARATION",
+  "base_commit": "a6fea4541143bfebb61ea9c209fc4d316f52ea66",
+  "final_domain": {
+    "passed": 295,
+    "seconds": 157.53,
+    "all_repository_tests": false
+  },
+  "mypy": {
+    "files": 397,
+    "errors": 0
+  },
+  "independent": {
+    "passed": 19,
+    "seconds": 2.39,
+    "open_findings": 0,
+    "sealed_files": 11
+  },
+  "cold_source": {
+    "security_id": "002643",
+    "document_kind": "investor_relations",
+    "published_date": null,
+    "original_unchanged": true,
+    "raw_copies": 0,
+    "downloads": 0,
+    "model_posts": 0
+  },
+  "remaining": [
+    "real summary and claim quality",
+    "activation/restart/cross-run cache",
+    "FF reuse and RF actual adoption",
+    "whole-document recall/holdout/full company loop"
+  ],
+  "foreign_hook_mode_and_w21_preserved": true
+}

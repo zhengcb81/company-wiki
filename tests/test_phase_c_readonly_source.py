@@ -649,6 +649,38 @@ def test_registered_source_facts_use_existing_public_owner_without_copy(tmp_path
     assert not (tmp_path / "production-db").exists()
 
 
+def test_registered_cn_ir_runs_canonical_preparation_for_a_display_name_folder(tmp_path):
+    from datetime import UTC,datetime
+    import pymupdf
+    from company_wiki.source_catalog.security_identity import SecurityMasterStore,SecurityRecord
+    from tools.document_understanding_benchmark.phase_c_readonly_source import prepare_registered_source
+    raw=tmp_path/'source/companies/和光科技/raw/research/record.pdf'
+    raw.parent.mkdir(parents=True)
+    with pymupdf.open() as doc:
+        page=doc.new_page()
+        page.insert_text((40,50),'证券代码：600999\n证券简称：和光科技\n海川先进材料股份有限公司投资者关系活动记录表',
+                         fontname='china-s',fontsize=12)
+        raw.write_bytes(doc.tobytes())
+    source_config=tmp_path/'source/config.json'
+    source_config.write_text(json.dumps({'schema_version':'1.0','catalog_dir':str(tmp_path/'production-db'),
+        'roots':[{'root_id':'raw','path':str(tmp_path/'source/companies'),'kind':'company_raw'}]}),encoding='utf-8')
+    owned=tmp_path/'owned'
+    master=SecurityMasterStore(owned/'catalog/security_master')
+    master.write_market('CN',(SecurityRecord('和光科技','CN','SSE','600999','600999',(),True,
+        'fixture','https://fixture.test/securities','600999',{}),),retrieved_at='2026-10-01T00:00:00Z',sources=('fixture',))
+    descriptor={'entity':'和光科技','market':'CN','security_id':'600999','document_kind':'investor_relations'}
+    sha=hashlib.sha256(raw.read_bytes()).hexdigest()
+    before={p:_fingerprint(p) for p in (raw,source_config)}
+    result=prepare_registered_source(source_config=source_config,owned_root=owned,original=raw,
+        expected_sha256=sha,descriptor=descriptor,as_of_date=datetime.now(UTC).date().isoformat())
+    assert result['manifest']['security_id']=='600999'
+    assert result['manifest']['document_kind']=='investor_relations'
+    assert result['manifest']['published_date'] is None
+    assert result['raw_copies']==0 and result['download_events']==0
+    assert all(_fingerprint(p)==value for p,value in before.items())
+    assert not (tmp_path/'production-db').exists()
+
+
 def test_registered_source_fact_proof_is_bound_to_original_sha(tmp_path):
     from tools.document_understanding_benchmark.phase_c_readonly_source import prepare_registered_source, ReadonlySourceGap
 

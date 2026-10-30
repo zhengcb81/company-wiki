@@ -1,11 +1,13 @@
-## 2026-10-30 当前：来源产品CI成功，真实摘要前工程已通过
+## 2026-10-30 当前：来源准备根修验收通过，发布后进入真实摘要
 
-来源描述/0.8兼容共因c9ac0b29已正常推送，精确CI40998178796 success；3525P/11skip、397mypy/ruff、独立9P/0OPEN。随后发现收费前gold可变0/0空验证，已在评测/observer共用类别owner根修，保留原测试意图并加强两个真实锚点夹具；4RED+2RED→phaseC90P/71.78秒、独立4文件8P/1.55秒/PASS0OPEN。新预审代码正常发布中，不新建人工门禁。
+唯一入口是 CURRENT_STATUS.md/json；以下历史段落中的“当前/待审/进行中”只代表当时观察。来源准备稳定11文件通过受影响域295P/157.53秒、397源文件mypy、ruff和独立19P/2.39秒/0OPEN。独审raw/LF字节已核对。前源码a6fea454的精确CI41000149392已成功；本节点提交后另记自己的CI，不能借旧绿。
 
-独审当前真实compiler8非空任务/8原文检查点全在support，源仍partial。配置MiMo-v2.6-flash、单次50k/$0.05、旧母账1,800,368/$0.727945未变；0真实模型POST/下载/SDK。正确活跃准备meta-v4/gold-v3；activity时间不当published时间。完整下一命令、审查和恢复检查点见[RUN_NEXT](review/source-information-20261030/description-final/summary-preflight/RUN_NEXT.md)。
+根因已闭合：证券代码证明后识别完整法定名/换行标题且排除“请查阅”等引用；US发现持久保存原文实际scope与固有文种，泛regulatory可检索annual但精确annual不借季度；已证明的旧期间可排除，无完整期间证据仍不能正向命中；benchmark在未命中时委托既有local prepare。原US停滞失败在旧a6fea也复现，原测试不减断言、不加次数/额度。真实IR冷启动ready=002643，发布日期仍未知，0复制/下载/POST，原件与生产配置保持。
 
-**下一步：** 正常发布预审修复→真实registered-readonly/v4/activation-recovery摘要，实际claim独审、恢复和跨run0重复收费、FF复用及RF实际采用；US RPO/W21/holdout/完整八步循环继续OPEN。产品和外包runtime owner、原件/config/他人工区/hook mode保持，goal active。
+**唯一下一步：** 正常提交推送本节点，观察精确CI，再以meta-v4/gold-v3在新目录real-summary-v2运行当前配置MiMo原语言摘要；先检查8个实际输入gold，再真实claim独审、activation/restart/crossrun零重复POST和FF/RF消费，最终RF实际预测采用仍须单独完成。详见[本轮验收](review/source-information-20261030/description-final/source-preparation/README.md)和[实施入口](review/source-information-20261030/description-final/SOURCE_PREPARATION_NEXT.md)。保留首轮NOT_RUN证据；W21 runtime/作者工区、Dayu/IQS/Dashboard及外来hook mode不碰。总goal active，US RPO/W21/holdout/完整八步循环仍OPEN，本次没有新付费。
 
+---
+以下为历史记录，不是额外的执行入口。
 
 ## 2026-10-30 当前：来源描述大节点已发布，精确CI进行中
 

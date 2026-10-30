@@ -1,0 +1,81 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.sd30-header-red", "requested_basetemp_len": 51, "cwd_len": 34, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\郑曾波\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 12 items
+
+tests\unit\test_cn_source_header_titles.py .F...FFFFF..                  [100%]
+
+================================== FAILURES ===================================
+_ test_code_bound_standalone_title_is_independent_of_the_short_name[-\u6295\u8d44\u8005\u5173\u7cfb\n\u6d3b\u52a8\u8bb0\u5f55\u8868-investor_relations-None] _
+tests\unit\test_cn_source_header_titles.py:32: in test_code_bound_standalone_title_is_independent_of_the_short_name
+    facts,proof=observe(prefix+title)
+                ^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_cn_source_header_titles.py:20: in observe
+    return _cn_cover_scope(original,identity,SimpleNamespace(check=lambda:None),allow_other_kinds=allow_other)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\local_reconcile.py:281: in _cn_cover_scope
+    raise SourceReadError("blocked", "local_metadata_incomplete")
+E   company_wiki.source_catalog.source_reader.SourceReadError: blocked: local_metadata_incomplete
+_ test_code_bound_standalone_title_is_independent_of_the_short_name[\u6d77\u5ddd\u5148\u8fdb\u6750\u6599\u80a1\u4efd\u6709\u9650\u516c\u53f8-\u6295\u8d44\u8005\u5173\u7cfb\u6d3b\u52a8\u8bb0\u5f55\u8868-investor_relations-None] _
+tests\unit\test_cn_source_header_titles.py:32: in test_code_bound_standalone_title_is_independent_of_the_short_name
+    facts,proof=observe(prefix+title)
+                ^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_cn_source_header_titles.py:20: in observe
+    return _cn_cover_scope(original,identity,SimpleNamespace(check=lambda:None),allow_other_kinds=allow_other)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\local_reconcile.py:256: in _cn_cover_scope
+    raise SourceReadError("blocked", "local_document_kind_unresolved")
+E   company_wiki.source_catalog.source_reader.SourceReadError: blocked: local_document_kind_unresolved
+_ test_code_bound_standalone_title_is_independent_of_the_short_name[\u6d77\u5ddd\u5148\u8fdb\u6750\u6599\u80a1\u4efd\u6709\u9650\u516c\u53f8-\u6295\u8d44\u8005\u5173\u7cfb\n\u6d3b\u52a8\u8bb0\u5f55\u8868-investor_relations-None] _
+tests\unit\test_cn_source_header_titles.py:32: in test_code_bound_standalone_title_is_independent_of_the_short_name
+    facts,proof=observe(prefix+title)
+                ^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_cn_source_header_titles.py:20: in observe
+    return _cn_cover_scope(original,identity,SimpleNamespace(check=lambda:None),allow_other_kinds=allow_other)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\local_reconcile.py:281: in _cn_cover_scope
+    raise SourceReadError("blocked", "local_metadata_incomplete")
+E   company_wiki.source_catalog.source_reader.SourceReadError: blocked: local_metadata_incomplete
+_ test_code_bound_standalone_title_is_independent_of_the_short_name[\u6d77\u5ddd\u5148\u8fdb\u6750\u6599\u80a1\u4efd\u6709\u9650\u516c\u53f8-2026\u5e74\u5e74\u5ea6\u62a5\u544a-annual_report-FY] _
+tests\unit\test_cn_source_header_titles.py:32: in test_code_bound_standalone_title_is_independent_of_the_short_name
+    facts,proof=observe(prefix+title)
+                ^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_cn_source_header_titles.py:20: in observe
+    return _cn_cover_scope(original,identity,SimpleNamespace(check=lambda:None),allow_other_kinds=allow_other)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\local_reconcile.py:281: in _cn_cover_scope
+    raise SourceReadError("blocked", "local_metadata_incomplete")
+E   company_wiki.source_catalog.source_reader.SourceReadError: blocked: local_metadata_incomplete
+_ test_code_bound_standalone_title_is_independent_of_the_short_name[\u6d77\u5ddd\u5148\u8fdb\u6750\u6599\u80a1\u4efd\u6709\u9650\u516c\u53f8-2026\u5e74\u534a\u5e74\u5ea6\u62a5\u544a-semi_annual_report-H1] _
+tests\unit\test_cn_source_header_titles.py:32: in test_code_bound_standalone_title_is_independent_of_the_short_name
+    facts,proof=observe(prefix+title)
+                ^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_cn_source_header_titles.py:20: in observe
+    return _cn_cover_scope(original,identity,SimpleNamespace(check=lambda:None),allow_other_kinds=allow_other)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\local_reconcile.py:281: in _cn_cover_scope
+    raise SourceReadError("blocked", "local_metadata_incomplete")
+E   company_wiki.source_catalog.source_reader.SourceReadError: blocked: local_metadata_incomplete
+_ test_code_bound_standalone_title_is_independent_of_the_short_name[\u6d77\u5ddd\u5148\u8fdb\u6750\u6599\u80a1\u4efd\u6709\u9650\u516c\u53f8-2026\u5e74\u7b2c\u4e09\u5b63\u5ea6\u62a5\u544a-quarterly_report-Q3] _
+tests\unit\test_cn_source_header_titles.py:32: in test_code_bound_standalone_title_is_independent_of_the_short_name
+    facts,proof=observe(prefix+title)
+                ^^^^^^^^^^^^^^^^^^^^^
+tests\unit\test_cn_source_header_titles.py:20: in observe
+    return _cn_cover_scope(original,identity,SimpleNamespace(check=lambda:None),allow_other_kinds=allow_other)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+src\company_wiki\source_catalog\local_reconcile.py:281: in _cn_cover_scope
+    raise SourceReadError("blocked", "local_metadata_incomplete")
+E   company_wiki.source_catalog.source_reader.SourceReadError: blocked: local_metadata_incomplete
+=========================== short test summary info ===========================
+FAILED tests/unit/test_cn_source_header_titles.py::test_code_bound_standalone_title_is_independent_of_the_short_name[-\u6295\u8d44\u8005\u5173\u7cfb\n\u6d3b\u52a8\u8bb0\u5f55\u8868-investor_relations-None]
+FAILED tests/unit/test_cn_source_header_titles.py::test_code_bound_standalone_title_is_independent_of_the_short_name[\u6d77\u5ddd\u5148\u8fdb\u6750\u6599\u80a1\u4efd\u6709\u9650\u516c\u53f8-\u6295\u8d44\u8005\u5173\u7cfb\u6d3b\u52a8\u8bb0\u5f55\u8868-investor_relations-None]
+FAILED tests/unit/test_cn_source_header_titles.py::test_code_bound_standalone_title_is_independent_of_the_short_name[\u6d77\u5ddd\u5148\u8fdb\u6750\u6599\u80a1\u4efd\u6709\u9650\u516c\u53f8-\u6295\u8d44\u8005\u5173\u7cfb\n\u6d3b\u52a8\u8bb0\u5f55\u8868-investor_relations-None]
+FAILED tests/unit/test_cn_source_header_titles.py::test_code_bound_standalone_title_is_independent_of_the_short_name[\u6d77\u5ddd\u5148\u8fdb\u6750\u6599\u80a1\u4efd\u6709\u9650\u516c\u53f8-2026\u5e74\u5e74\u5ea6\u62a5\u544a-annual_report-FY]
+FAILED tests/unit/test_cn_source_header_titles.py::test_code_bound_standalone_title_is_independent_of_the_short_name[\u6d77\u5ddd\u5148\u8fdb\u6750\u6599\u80a1\u4efd\u6709\u9650\u516c\u53f8-2026\u5e74\u534a\u5e74\u5ea6\u62a5\u544a-semi_annual_report-H1]
+FAILED tests/unit/test_cn_source_header_titles.py::test_code_bound_standalone_title_is_independent_of_the_short_name[\u6d77\u5ddd\u5148\u8fdb\u6750\u6599\u80a1\u4efd\u6709\u9650\u516c\u53f8-2026\u5e74\u7b2c\u4e09\u5b63\u5ea6\u62a5\u544a-quarterly_report-Q3]
+========================= 6 failed, 6 passed in 1.14s =========================

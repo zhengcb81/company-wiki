@@ -44,7 +44,7 @@ def _same(left, right):
 
 def scope_relatedness(scope: SourceScope, request: SourceRequest) -> ScopeRelation:
     """A known different period is irrelevant; an unproven identity is not an empty lake."""
-    if scope.authority not in {"source-facts", "historical-canonical-request"}:
+    if scope.authority not in {"source-facts", "source-facts-partial", "historical-canonical-request"}:
         return ScopeRelation.UNKNOWN
     facts = scope.facts
     for key in ("entity", "market", "security_id"):
@@ -58,8 +58,12 @@ def scope_relatedness(scope: SourceScope, request: SourceRequest) -> ScopeRelati
                 "provider", "provider_document_id", "language"):
         expected = getattr(request, key)
         actual = facts.get(key)
-        if expected is not None and actual is not None and not _same(expected, actual):
+        from .document_kinds import document_kind_matches
+        matches=document_kind_matches(expected,actual) if key == 'document_kind' and expected is not None and actual is not None else _same(expected,actual)
+        if expected is not None and actual is not None and not matches:
             return ScopeRelation.NOT_RELEVANT
+    if scope.authority == 'source-facts-partial':
+        return ScopeRelation.UNKNOWN
     if any(getattr(request, key) is not None and facts.get(key) is None
            for key in ("fiscal_year", "fiscal_period", "form_type", "provider",
                        "provider_document_id", "language")):
@@ -155,9 +159,13 @@ def qualified_source_scope(catalog, ref, document, *, historical=None) -> Source
             raise ValueError("source facts must be a nonempty object of known fields")
         _validate_source_facts(facts, evidence)
         if _sec_original(ref, facts.get("market") or market, facts.get("document_kind")):
-            from .assertion_service import _proved_sec_issuer
+            from .assertion_service import _proved_sec_issuer, _proved_sec_identity, _observed_sec_scope_fields
             if _proved_sec_issuer(ref, facts, facts, evidence) is None:
-                return SourceScope({}, {}, "primary-original-required")
+                if _proved_sec_identity(ref,facts,facts,evidence) is None:
+                    return SourceScope({}, {}, "primary-original-required")
+                return SourceScope(_observed_sec_scope_fields(ref,facts,evidence),evidence,'source-facts-partial')
+            from .document_kinds import sec_primary_document_kind
+            facts={**facts,'document_kind':sec_primary_document_kind(facts['form_type'])}
         commit = payload.get("canonical_commit")
         if commit is not None:
             from .source_reader import SourceReadError

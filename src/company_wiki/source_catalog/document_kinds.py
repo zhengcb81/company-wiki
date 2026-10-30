@@ -26,3 +26,20 @@ PERIODIC_DOCUMENT_KINDS = frozenset({
     "annual_report", "semi_annual_report", "quarterly_report",
     "regulatory_filing", "investor_call_transcript",
 })
+
+
+def sec_primary_document_kind(form_type: str) -> str:
+    """Classify an observed primary SEC form independently of a query."""
+    return 'annual_report' if form_type.removesuffix('/A') in {'10-K','20-F'} else 'regulatory_filing'
+
+
+def requested_kind_candidates(requested: str) -> tuple[str, ...]:
+    """A generic regulatory request includes its concrete financial families."""
+    if requested == 'regulatory_filing':
+        return tuple(sorted(kind for kind, source_type in SOURCE_FACT_KINDS.items()
+                            if source_type == SourceType.REGULATORY_FILING.value))
+    return (requested,)
+
+
+def document_kind_matches(requested: str, observed: str) -> bool:
+    return observed in requested_kind_candidates(requested)

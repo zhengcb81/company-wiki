@@ -239,13 +239,8 @@ def _registered_sec_cik(metadata):
     return next(iter(ciks), None)
 
 
-def _proved_sec_issuer(ref, metadata, patch, proof):
-    """Restore the original-to-registered-company binding, not URL identity.
-
-    These are the existing source owner's complete, original DEI observations.
-    They are reusable only while the SHA, field values, locators, issuer record
-    and current labels agree. Import declarations cannot create this binding.
-    """
+def _proved_sec_identity(ref, metadata, patch, proof):
+    """Original issuer binding does not depend on unrelated date completeness."""
     from types import SimpleNamespace
 
     observation = proof.get("entity")
@@ -263,7 +258,42 @@ def _proved_sec_issuer(ref, metadata, patch, proof):
     identity = SimpleNamespace(canonical_name=patch.get("entity"), market=patch.get("market"),
                                security_id=patch.get("security_id"), source_record_id=record_id,
                                identifiers={"cik": str(int(cik))})
+    for key in ('entity','market','security_id'):
+        item=proof.get(key)
+        if (not isinstance(item,dict) or item.get('value') != patch.get(key)
+                or item.get('content_sha256') != ref.content_sha256
+                or item.get('locator') != 'primary-dei:/EntityCentralIndexKey'
+                or item.get('extraction_method') != SOURCE_SCOPE_METHOD
+                or item.get('issuer_record_id') != record_id
+                or item.get('primary_cik') != str(int(cik))):
+            return None
+    return identity
+
+
+def _proved_sec_issuer(ref, metadata, patch, proof):
+    """Reuse only complete original DEI scope for positive filing access."""
+    identity=_proved_sec_identity(ref,metadata,patch,proof)
+    if identity is None:
+        return None
     return identity if _reusable_sec_scope(ref, identity, patch, proof) is not None else None
+
+
+def _observed_sec_scope_fields(ref, patch, proof):
+    """Project only individually bound fields; unknowns cannot make a match."""
+    from .document_kinds import sec_primary_document_kind
+    fields={'fiscal_year':'DocumentFiscalYearFocus','fiscal_period':'DocumentFiscalPeriodFocus',
+            'form_type':'DocumentType','period_end':'DocumentPeriodEndDate'}
+    observed={key:patch[key] for key in ('entity','market','security_id')}
+    for key,field in fields.items():
+        item=proof.get(key)
+        if (isinstance(item,dict) and item.get('value') == patch.get(key)
+                and item.get('content_sha256') == ref.content_sha256
+                and item.get('locator') == 'primary-dei:/'+field
+                and item.get('extraction_method') == SOURCE_SCOPE_METHOD):
+            observed[key]=patch.get(key)
+    if observed.get('form_type'):
+        observed['document_kind']=sec_primary_document_kind(observed['form_type'])
+    return observed
 
 
 def source_scope_qualification(catalog, ref, *, metadata, request=None, identity=None, identity_cache_dir=None):

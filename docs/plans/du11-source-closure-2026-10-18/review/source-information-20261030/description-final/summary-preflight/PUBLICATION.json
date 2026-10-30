@@ -1,0 +1,15 @@
+{
+  "commit": "a6fea4541143bfebb61ea9c209fc4d316f52ea66",
+  "pushed": true,
+  "pre_push": {
+    "passed": 158,
+    "seconds": 22.57
+  },
+  "ci": {
+    "id": 41000149392,
+    "head_sha": "a6fea4541143bfebb61ea9c209fc4d316f52ea66",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41000149392"
+  }
+}

@@ -1,0 +1,100 @@
+{
+  "module": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\local_reconcile.py",
+  "function_globals_shared": true,
+  "events": [
+    {
+      "call": "qualified_source_scope",
+      "relative": null,
+      "result": "SourceScope(facts={}, evidence={}, authority='primary-original-required')"
+    },
+    {
+      "call": "scope_relatedness",
+      "relative": null,
+      "result": "<ScopeRelation.UNKNOWN: 'unknown'>"
+    },
+    {
+      "call": "qualified_source_scope",
+      "relative": null,
+      "result": "SourceScope(facts={}, evidence={}, authority='primary-original-required')"
+    },
+    {
+      "call": "scope_relatedness",
+      "relative": null,
+      "result": "<ScopeRelation.UNKNOWN: 'unknown'>"
+    },
+    {
+      "call": "qualified_source_scope",
+      "relative": null,
+      "result": "SourceScope(facts={}, evidence={}, authority='primary-original-required')"
+    },
+    {
+      "call": "scope_relatedness",
+      "relative": null,
+      "result": "<ScopeRelation.UNKNOWN: 'unknown'>"
+    },
+    {
+      "call": "qualified_source_scope",
+      "relative": null,
+      "result": "SourceScope(facts={}, evidence={}, authority='primary-original-required')"
+    },
+    {
+      "call": "scope_relatedness",
+      "relative": null,
+      "result": "<ScopeRelation.UNKNOWN: 'unknown'>"
+    },
+    {
+      "call": "restore_document_facts",
+      "relative": null,
+      "result": "{'status': 'not_relevant', 'source_ref': SourceRef(document_id='urn:company-wiki:document:sha256:0e3c2d3c8a0ed83b512599b5d12710773601fa2e68323047e144dd1e5398cdca', source_id='urn:company-wiki:source:sha256:0e3c2d3c8a0ed83b512599b5d12710773601fa2e68323047e144dd1e5398cdca', content_sha256='0e3c2d3c8a0ed83b512599b5d12710773601fa2e68323047e144dd1e5398cdca', byte_size=396, mime_type='text/html', schema_version='2.0')}"
+    },
+    {
+      "call": "restore_document_facts",
+      "relative": null,
+      "result": "{'status': 'not_relevant', 'source_ref': SourceRef(document_id='urn:company-wiki:document:sha256:ed19aa622ca5b1b2d243ecb0f2cb6d83a07ea3e3350492a2d3b23082f1c6add3', source_id='urn:company-wiki:source:sha256:ed19aa622ca5b1b2d243ecb0f2cb6d83a07ea3e3350492a2d3b23082f1c6add3', content_sha256='ed19aa622ca5b1b2d243ecb0f2cb6d83a07ea3e3350492a2d3b23082f1c6add3', byte_size=396, mime_type='text/html', schema_version='2.0')}"
+    },
+    {
+      "call": "restore_document_facts",
+      "relative": null,
+      "result": "{'status': 'not_relevant', 'source_ref': SourceRef(document_id='urn:company-wiki:document:sha256:c4cdb3e1da1ae098fb95c9c6f8f69f3f1b0e0341d9ed673f262be9ca9f34f9d2', source_id='urn:company-wiki:source:sha256:c4cdb3e1da1ae098fb95c9c6f8f69f3f1b0e0341d9ed673f262be9ca9f34f9d2', content_sha256='c4cdb3e1da1ae098fb95c9c6f8f69f3f1b0e0341d9ed673f262be9ca9f34f9d2', byte_size=396, mime_type='text/html', schema_version='2.0')}"
+    },
+    {
+      "call": "restore_document_facts",
+      "relative": null,
+      "result": "{'status': 'not_relevant', 'source_ref': SourceRef(document_id='urn:company-wiki:document:sha256:d71bfe02a0427cc6ed30af703846d37dd2f1541f529dc73c44a382be4b373c2d', source_id='urn:company-wiki:source:sha256:d71bfe02a0427cc6ed30af703846d37dd2f1541f529dc73c44a382be4b373c2d', content_sha256='d71bfe02a0427cc6ed30af703846d37dd2f1541f529dc73c44a382be4b373c2d', byte_size=396, mime_type='text/html', schema_version='2.0')}"
+    }
+  ],
+  "result": {
+    "schema_version": "local-source-prepare/1",
+    "status": "unavailable",
+    "reason": "local_candidate_limit",
+    "source_ref": null,
+    "blocks_download": true,
+    "operations": [
+      {
+        "schema_version": "local-read-budget/1",
+        "operation": "local_read_budget",
+        "usage_scope": "local_original_verification",
+        "phase": "source_entry_discovery",
+        "reason": "local_candidate_limit",
+        "limits": {
+          "max_candidates": 4,
+          "max_bytes": 268435456,
+          "timeout_seconds": 30.0,
+          "max_discovery_groups": 256,
+          "max_discovery_entries": 4096
+        },
+        "consumed": {
+          "candidates": 4,
+          "charged_read_bytes": 1584,
+          "observed_charge_bytes": 1584,
+          "discovery_groups": 1,
+          "discovery_entries": 40,
+          "elapsed_seconds": 0.275384
+        },
+        "triggered_bound": null
+      }
+    ],
+    "diagnostics": [],
+    "download_events": 0
+  }
+}

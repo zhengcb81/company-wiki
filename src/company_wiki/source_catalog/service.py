@@ -266,6 +266,10 @@ class SourceCatalog:
             raise ValueError("offset must be non-negative")
         if not document_kind or not source_statuses:
             raise ValueError("document_kind/source_statuses required")
+        from .document_kinds import requested_kind_candidates
+        kind_values=requested_kind_candidates(document_kind)
+        kind_clause=('d.document_kind = ?' if len(kind_values)==1 else
+                     'd.document_kind IN ('+', '.join('?' for _ in kind_values)+')')
         placeholders = ", ".join("?" for _ in source_statuses)
         root_clause = ""
         root_params: tuple[str, ...] = ()
@@ -324,7 +328,7 @@ class SourceCatalog:
                        s.content_sha256, s.byte_size
                 FROM documents d
                 LEFT JOIN sources s ON s.source_id = d.primary_source_id
-                WHERE d.document_kind = ?
+                WHERE {kind_clause}
                   AND d.source_status IN ({placeholders})
                   {entity_clause}
                   {root_clause}
@@ -334,7 +338,7 @@ class SourceCatalog:
                 LIMIT ? OFFSET ?
                 """,
             (
-                document_kind,
+                *kind_values,
                 *source_statuses,
                 *entity_params,
                 *root_params,

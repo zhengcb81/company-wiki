@@ -1339,7 +1339,8 @@ class SourceResolver:
             if not self._entity_matches(request.entity, document, metadata=metadata):
                 entity_gate_rejected += 1
                 continue
-            if document["document_kind"] != request.document_kind:
+            from .document_kinds import document_kind_matches
+            if not document_kind_matches(request.document_kind, document["document_kind"]):
                 trace.append(f"{document['title']}: document_kind_mismatch")
                 continue
             # WU-3.1 (F-024) defense-in-depth: even if the query layer leaked

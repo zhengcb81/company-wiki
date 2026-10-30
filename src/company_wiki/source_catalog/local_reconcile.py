@@ -218,6 +218,43 @@ def _scope_matches(primary, request):
 
 
 
+_CN_CODE_BOUND_TITLE = re.compile(
+    r"[^,，。:：;；!?]{1,100}(?:公司|集团)"
+    r"(?P<title>(?:20\d{2}|投资者关系活动|投资者交流活动).*)")
+_CN_TITLE_REFERENCE = re.compile(r"^(?:请(?:查阅|参阅|参考)|参见|详见)")
+
+
+def _cn_cover_titles(lines, name, *, coded):
+    """Bounded standalone headings; a matching code permits a legal-name prefix.
+
+    Display abbreviations are not legal-name dictionaries. Identity has already
+    been checked on this page; prose punctuation never becomes a title prefix.
+    """
+    # A wrapped reference and its bare title suffix remain the same source
+    # proposition. A newline cannot turn a referenced report into this report.
+    referenced=set()
+    reference_open=False
+    for index,line in enumerate(lines):
+        reference_open = reference_open or bool(_CN_TITLE_REFERENCE.match(line))
+        if reference_open:
+            referenced.add(index)
+            if line.rstrip('”’\"）)]').endswith(('。','；',';','！','!','？','?')):
+                reference_open=False
+    for start in range(min(12,len(lines))):
+        for width in range(1,4):
+            if referenced.intersection(range(start,min(start+width,len(lines)))):
+                continue
+            original=''.join(lines[start:start+width])
+            if _CN_TITLE_REFERENCE.match(original):
+                continue
+            title=original.removeprefix(name)
+            if coded:
+                match=_CN_CODE_BOUND_TITLE.fullmatch(original)
+                if match:
+                    title=match['title']
+            yield original,title
+
+
 def _cn_cover_scope(original, identity, budget, *, allow_other_kinds=False):
     """Observe a bounded periodic cover, never turn its filename into facts."""
     import pymupdf as fitz
@@ -243,7 +280,8 @@ def _cn_cover_scope(original, identity, budget, *, allow_other_kinds=False):
         if not (named or coded):
             continue
         lines = [re.sub(r"\s+", "", line) for line in text.splitlines() if line.strip()][:40]
-        ir_title = next((line for line in lines[:12] if line.removeprefix(name) in {
+        titles=tuple(_cn_cover_titles(lines,name,coded=coded))
+        ir_title = next((original for original,title in titles if title in {
             "投资者关系活动记录表", "投资者关系活动记录", "投资者交流活动记录表"}), None)
         if ir_title and allow_other_kinds:
             facts = {"entity": identity.canonical_name, "market": identity.market,
@@ -255,14 +293,8 @@ def _cn_cover_scope(original, identity, budget, *, allow_other_kinds=False):
         if any(re.search(r"投资者关系活动记录|招股说明书|募集说明书|[问答][:：]", line) for line in lines[:12]):
             raise SourceReadError("blocked", "local_document_kind_unresolved")
         match = None
-        for start in range(min(12, len(lines))):
-            for width in range(1, 4):
-                title = "".join(lines[start:start + width])
-                if title.startswith(name):
-                    title = title[len(name):]
-                match = re.fullmatch(r"(20\d{2})年?(半年度|年度|第一季度|第二季度|第三季度|第四季度)报告(?:[（(](?:修订|更正|更新).*?[）)])?", title)
-                if match is not None:
-                    break
+        for _,title in titles:
+            match = re.fullmatch(r"(20\d{2})年?(半年度|年度|第一季度|第二季度|第三季度|第四季度)报告(?:[（(](?:修订|更正|更新).*?[）)])?", title)
             if match is not None:
                 break
         if match is None:
@@ -290,32 +322,35 @@ def _proven_facts(catalog, original, identity, request, budget, *, claimed_match
             request=request, identity=identity)
         reused_scope = not qualification.needs_original
         primary = qualification.scope(original.data, budget=budget, extractor=extract_sec_scope)
-        if match_scope and not _scope_matches(primary, request):
+        matches = _scope_matches(primary, request)
+        if match_scope and not matches:
             if claimed_match:
                 raise SourceReadError("blocked", "primary_scope_conflict")
             return None, None
-        if not reused_scope:
+        if not reused_scope and matches:
             primary = complete_sec_primary(primary)
-        cache = _sec_cache(original, primary, budget)
-        if cache is None and prior_patch.get("published_date") is None:
+        # Discovery records the source's actual observed scope, including a
+        # different period, so bounded retries can move past it. Irrelevance
+        # does not require publication/provider details from another period.
+        cache = _sec_cache(original, primary, budget) if matches else None
+        if matches and cache is None and prior_patch.get("published_date") is None:
             cache = _sec_sidecar(original, identity, budget)
         # A prior verified assertion is already hash-bound, but legacy row/filename/mtime is not proof.
         published = (
             cache["published_date"] if cache else prior_patch.get("published_date")
         )
         source_url = cache["source_url"] if cache else prior_patch.get("source_url")
+        from .document_kinds import sec_primary_document_kind
         facts = {
             "entity": identity.canonical_name,
             "market": identity.market,
             "security_id": identity.security_id,
-            "document_kind": ("regulatory_filing" if not match_scope and request.document_kind == "annual_report"
-                              and primary["form_type"].removesuffix("/A") not in {"10-K", "20-F"}
-                              else request.document_kind),
+            "document_kind": sec_primary_document_kind(primary['form_type']),
             "fiscal_year": primary["fiscal_year"],
             "fiscal_period": primary["fiscal_period"],
-            "period_end": primary["report_date"],
+            "period_end": primary.get("report_date"),
             "form_type": primary["form_type"],
-            "title": primary["title"],
+            "title": primary.get("title"),
             "published_date": published,
             "filing_date": published,
             "source_url": source_url,
@@ -410,7 +445,9 @@ def _facts_with_availability(catalog, original, identity, request, budget, **opt
                        "locator": "source-observation:publication-unknown"}
         # Preserve the earliest owner-verified observation across retries.
         observation.setdefault("verified_open", verified_open_observation(original))
-        captured = capture_observation(catalog, original.ref, budget=budget)
+        irrelevant_sec_scope = (options.get("match_scope") is False and identity.market == "US"
+                                and not _scope_matches(facts,request))
+        captured = None if irrelevant_sec_scope else capture_observation(catalog, original.ref, budget=budget)
         if captured is not None:
             observation["availability_capture"] = captured
         evidence["published_date"] = observation
@@ -492,7 +529,8 @@ def _discover_source_groups(catalog, identity, budget, request, *, historical=No
             period_known = scope.facts.get("document_kind") not in PERIODIC_DOCUMENT_KINDS or (
                 type(scope.facts.get("fiscal_year")) is int and bool(scope.facts.get("fiscal_period")))
             date_observed = bool(scope.facts.get("published_date")) or stored_availability_evidence(catalog, ref) is not None
-            if relation is ScopeRelation.MATCH and scope.authority == "source-facts" and period_known and date_observed:
+            if (relation is ScopeRelation.MATCH and scope.authority == "source-facts" and period_known
+                    and date_observed and row['document_kind'] == scope.facts['document_kind']):
                 # Discovery consumes stored scope proof. The final selected
                 # version is opened once below; do not re-open every old PDF.
                 continue
@@ -502,9 +540,11 @@ def _discover_source_groups(catalog, identity, budget, request, *, historical=No
                 # issuer directory, and an unknown original is not absence.
                 identity = scope.identity() or _identity(catalog, request, getattr(identity, "_identity_cache_dir", None))
             def prove(original):
-                # Determine relevance from the actual request before dates or
-                # ancillary sidecars. Latest already carries its open scope.
-                return _facts_with_availability(catalog, original, identity, request, budget)
+                # Persist source scope rather than a transient request-specific
+                # "not relevant" result. The next bounded retry can then skip
+                # a proved old period without rereading the same originals.
+                return _facts_with_availability(catalog, original, identity, request, budget,
+                                                match_scope=False)
             try:
                 operation = restore_document_facts(catalog, ref=ref, retirement_observation=observe_document(catalog, ref.document_id),
                                                    budget=budget, fact_replay=prove)
@@ -705,6 +745,7 @@ def _prepare_local_source(
                 facts, evidence = _facts_with_availability(
                     catalog, checked, identity, request, budget,
                     claimed_match=ref.document_id in claimed_matches,
+                    match_scope=False,
                 )
                 observed_facts.append(facts)
                 return facts, evidence
@@ -720,9 +761,14 @@ def _prepare_local_source(
                 progress.not_relevant_documents.add(ref.document_id)
                 continue
             facts = observed_facts[0]
+            progress.record_operation(operation)
+            observed_scope = qualified_source_scope(catalog,ref,
+                {"document_kind":facts["document_kind"]},historical=historical)
+            if scope_relatedness(observed_scope,request) is ScopeRelation.NOT_RELEVANT:
+                progress.not_relevant_documents.add(ref.document_id)
+                continue
             targeted = True
             qualified_documents.add(ref.document_id)
-            progress.record_operation(operation)
             if facts["published_date"] is not None and facts["published_date"] > request.as_of_date:
                 diagnostics.append(
                     {

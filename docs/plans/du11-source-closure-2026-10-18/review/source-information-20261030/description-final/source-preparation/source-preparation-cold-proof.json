@@ -1,0 +1,87 @@
+{
+  "mount": {
+    "source_ref": {
+      "document_id": "urn:company-wiki:document:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "source_id": "urn:company-wiki:source:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "content_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "byte_size": 153851,
+      "mime_type": "application/pdf",
+      "schema_version": "2.0"
+    },
+    "manifest": {
+      "document_id": "urn:company-wiki:document:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "source_id": "urn:company-wiki:source:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "content_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "byte_size": 153851,
+      "mime_type": "application/pdf",
+      "title": "中节能万润股份有限公司投资者关系活动记录表",
+      "document_kind": "investor_relations",
+      "published_date": null,
+      "source_url": null,
+      "retrieved_at": null,
+      "collector_name": null,
+      "collector_version": null,
+      "canonical_entity_id": null,
+      "display_name": "万润股份",
+      "market": "CN",
+      "security_id": "002643",
+      "fiscal_year": null,
+      "fiscal_period": null,
+      "period_end": null,
+      "form_type": null,
+      "provider": null,
+      "provider_document_id": null,
+      "language": null
+    },
+    "descriptor_diagnostics": {
+      "language": {
+        "expected": "zh",
+        "observed": null
+      }
+    },
+    "selection": {
+      "mode": "qualified_source_request",
+      "filing_identity_period_asof_qualification": "REQUEST_APPLIED"
+    },
+    "source_fact_registration": null,
+    "local_preparation": {
+      "schema_version": "local-source-prepare/1",
+      "status": "ready",
+      "reason": "local_source_reconciled",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+        "source_id": "urn:company-wiki:source:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+        "content_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+        "byte_size": 153851,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      },
+      "blocks_download": false,
+      "operations": [
+        {
+          "status": "recorded",
+          "assertion_id": "sa-3351495efc0d4ca2bdcb351d56b2c17f",
+          "restore_audit_id": null
+        }
+      ],
+      "diagnostics": [],
+      "download_events": 0
+    },
+    "catalog_config": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\source-description-20261030\\source-preparation-cold-proof\\config\\source_catalog.yaml",
+    "raw_copies": 0,
+    "verified_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+    "registration": {
+      "root_id": "company_raw",
+      "relative_paths": [
+        "万润股份/raw/research/万润股份：投资者关系活动记录表20260515.pdf"
+      ],
+      "files_seen": 2
+    },
+    "download_events": 0
+  },
+  "protected_unchanged": true,
+  "new_model_posts": 0,
+  "downloads": 0,
+  "raw_copies": 0,
+  "production_catalog_writer": false
+}

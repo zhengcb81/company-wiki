@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-30",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_SUMMARY_PREFLIGHT_ACCEPTED_PUBLICATION_NEXT",
+  "overall_status": "ACTIVE_SOURCE_PREPARATION_ACCEPTED_PUBLICATION_THEN_REAL_SUMMARY",
   "parallel_packages_20261025": {
     "status": "W16_W17_W18_ROOT_COMPONENT_ACCEPTED_MERGED",
     "entry": "harness_lanes/20261025/README.md",
@@ -26,13 +26,13 @@
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
-  "last_code_commit": "c9ac0b295cc6cf1ef92804b43679c58fa0572f16",
+  "last_code_commit": "a6fea4541143bfebb61ea9c209fc4d316f52ea66",
   "code_ci": {
-    "id": 40998178796,
-    "head_sha": "c9ac0b295cc6cf1ef92804b43679c58fa0572f16",
+    "id": 41000149392,
+    "head_sha": "a6fea4541143bfebb61ea9c209fc4d316f52ea66",
     "status": "completed",
     "conclusion": "success",
-    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40998178796"
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41000149392"
   },
   "formal_v4_offline_selection_replay_20261025": {
     "status": "EXACT_REPRODUCED_NO_PAID_CALL",
@@ -406,7 +406,7 @@
   "initial_execution_paid_calls_preserved": 2,
   "r1_engineering_closeout_ref": "r1-holdout-20261021/engineering-closeout-20261022.json",
   "publication_status_owner": "review/pdf-c3-20261026/QA_PROVISIONAL_PUBLICATION.json",
-  "resume_handoff": "review/source-information-20261030/description-final/summary-preflight/RUN_NEXT.md",
+  "resume_handoff": "review/source-information-20261030/description-final/SOURCE_PREPARATION_NEXT.md",
   "resumed_at": "2026-10-23T18:41:33.912794+00:00",
   "previous_pause_request": "Superseded by user continue2026-10-23",
   "last_updated_at": "2026-10-28",
@@ -2295,7 +2295,7 @@
     "implementation_authorized_by_user": true,
     "observed_date": "2026-10-26"
   },
-  "current_task_override": "Source product c9ac0b29 preciseCI green; nonvacuous source-oracle4files independent8P/0OPEN plus90phaseC accepted. Publish preflight fix then execute actual v4 summary/recovery; zero paid calls so far. Full source/claims/cache/RF/holdout and company loop responsibilities remain.",
+  "current_task_override": "Source product c9ac0b29 CI success and preflight oracle a6fea454 pushed. First real registered-readonly run NOT_RUN before model: registered security_id is folder display name; benchmark skipped canonical local preparation. Local CN cover had only short-name prefix title parsing. Generic code-bound legal-name heading fix12PDF tests implemented; wider53 domain has oldUS discovery stall reproduced at unchanged a6fea baseline. Repair preparation/recovery before retry; all0POST/charge.",
   "skill_sync_root_cause_20261026": {
     "status": "COMPLETE_INDEPENDENT_PASS_ZERO_OPEN",
     "entry": "review/skill-sync-root-cause-20261026/README.md",
@@ -2344,7 +2344,7 @@
     "published": true,
     "push_failure": "47 targets /392 collected /600s; two regressions being root-fixed, not waived by narrower daily gate"
   },
-  "next_action": "Publish accepted nonvacuous source oracle repair then execute canonical registered-readonly CNIR v4 live summary with activation recovery and FF/RF read-only consumers; independently inspect real claims and true adoption, never count source preflight as output/RF completion.",
+  "next_action": "Publish sealed source-preparation fix, observe exact CI, then real-summary-v2 using prepared metadata v4/gold v3; do not rerun v1 or overwrite its NOT_RUN receipt.",
   "c3_runtime_recovery_20261026": {
     "entry": "review/pdf-c3-20261026/RUNTIME_RECOVERY.md",
     "environment_independent": "PASS_ZERO_OPEN_25_TESTS_AND_REAL_WORKER_ENTRYPOINTS",
@@ -2959,7 +2959,19 @@
   ],
   "pause_requested_by_user": false,
   "paused_scope": "revoked by user mainline resume 2026-10-29",
-  "own_uncommitted_runtime": [],
+  "own_uncommitted_runtime": [
+    "src/company_wiki/source_catalog/assertion_service.py",
+    "src/company_wiki/source_catalog/canonical_scope.py",
+    "src/company_wiki/source_catalog/document_kinds.py",
+    "src/company_wiki/source_catalog/local_reconcile.py",
+    "src/company_wiki/source_catalog/resolver.py",
+    "src/company_wiki/source_catalog/service.py",
+    "tools/document_understanding_benchmark/phase_c_readonly_source.py",
+    "tests/integration/test_legacy_local_reconcile.py",
+    "tests/test_phase_c_readonly_source.py",
+    "tests/unit/test_cn_source_header_titles.py",
+    "tests/unit/test_document_kind_scope.py"
+  ],
   "qa_provisional_publication": {
     "code_commit": "c6c446d0eebc8f6e6f6903bd677c04eebaf65077",
     "branch": "master",
@@ -3289,5 +3301,57 @@
     "preflight_acceptance": "review/source-information-20261030/description-final/summary-preflight/ACCEPTANCE.json",
     "input_checks": "8actual tasks/8required supported",
     "zero_model_posts": true
+  },
+  "real_summary_attempt_20261030": {
+    "output": ".planning/source-description-20261030/real-summary-v1",
+    "status": "NOT_RUN",
+    "reason": "registered_source_not_found",
+    "new_model_post_attempts": 0,
+    "new_model_charges": 0,
+    "downloads": 0,
+    "protected_unchanged": true,
+    "temporary_lake_removed": true,
+    "manifest_diagnosis": ".planning/source-description-20261030/registration-probe.json",
+    "source_header_tdd": {
+      "failed": 6,
+      "passed": 6,
+      "current_positive": 12
+    },
+    "known_unrelated_baseline_failure": "test_bounded_discovery_keeps_progress_and_does_not_invent_absence fails on unchanged a6fea source too; ROOT will fix, not weaken test"
+  },
+  "source_preparation_20261030": {
+    "status": "PASS_ENGINEERING_AND_REAL_COLD_SOURCE_PREPARATION",
+    "base_commit": "a6fea4541143bfebb61ea9c209fc4d316f52ea66",
+    "final_domain": {
+      "passed": 295,
+      "seconds": 157.53,
+      "all_repository_tests": false
+    },
+    "mypy": {
+      "files": 397,
+      "errors": 0
+    },
+    "independent": {
+      "passed": 19,
+      "seconds": 2.39,
+      "open_findings": 0,
+      "sealed_files": 11
+    },
+    "cold_source": {
+      "security_id": "002643",
+      "document_kind": "investor_relations",
+      "published_date": null,
+      "original_unchanged": true,
+      "raw_copies": 0,
+      "downloads": 0,
+      "model_posts": 0
+    },
+    "remaining": [
+      "real summary and claim quality",
+      "activation/restart/cross-run cache",
+      "FF reuse and RF actual adoption",
+      "whole-document recall/holdout/full company loop"
+    ],
+    "foreign_hook_mode_and_w21_preserved": true
   }
 }

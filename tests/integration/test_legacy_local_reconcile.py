@@ -635,6 +635,51 @@ def test_misleading_current_filename_is_not_fiscal_proof(lake):
     assert SourceVersionReader(lake).describe_version(SourceRef(**result["source_ref"]))["fiscal_year"] == 2026
 
 
+def test_nonmatching_original_scope_is_persisted_without_becoming_the_requested_period(lake):
+    from company_wiki.source_catalog.local_reconcile import prepare_local_source
+    from company_wiki.source_catalog.local_inventory import LocalPrepareLimits
+    path=_legacy_sec_group(lake,2001,name='old-original.htm')
+    before={p:p.read_bytes() for p in path.parent.iterdir()}
+    result=prepare_local_source(lake,business(),limits=LocalPrepareLimits(max_candidates=4))
+    assert result['status']=='not_found' and result['download_events']==0,result
+    sha=hashlib.sha256(path.read_bytes()).hexdigest()
+    rows=[row for row in lake.query(text=sha,limit=2) if row.get('content_sha256')==sha]
+    assert len(rows)==1
+    row=rows[0]
+    reader=SourceVersionReader(lake)
+    ref=reader.query_ref(row['document_id'],row['source_id'],sha)
+    manifest=reader.describe_version(ref)
+    assert manifest['fiscal_year']==2001 and manifest['fiscal_period']=='Q2'
+    assert manifest['published_date'] is None
+    assert reader.query_local(business()).status=='not_found'
+    again=prepare_local_source(lake,business(),limits=LocalPrepareLimits(max_candidates=4))
+    assert again['status']=='not_found' and again['download_events']==0,again
+    assert before=={p:p.read_bytes() for p in path.parent.iterdir()}
+
+
+def test_annual_kind_survives_an_earlier_regulatory_quarter_request(lake):
+    from datetime import datetime,timezone
+    from company_wiki.source_catalog.local_reconcile import prepare_local_source
+    _=lake.store
+    raw=lake.config.roots[0].path/'Acme/old.htm'
+    raw.parent.mkdir()
+    data=DATA.replace(b'>2026</',b'>2001</').replace(b'>Q2</',b'>FY</').replace(b'>10-Q</',b'>10-K</')
+    raw.write_bytes(data)
+    assert prepare_local_source(lake,business())['status']=='not_found'
+    today=datetime.now(timezone.utc).date().isoformat()
+    request=SourceRequest(entity='Acme',market='US',security_id='ACME',document_kind='annual_report',
+                          fiscal_year=2001,fiscal_period='FY',as_of_date=today)
+    found=prepare_local_source(lake,request)
+    assert found['status']=='ready',found
+    reader=SourceVersionReader(lake)
+    ref=SourceRef(**found['source_ref'])
+    assert reader.describe_version(ref)['document_kind']=='annual_report'
+    generic=SourceRequest(entity='Acme',market='US',security_id='ACME',document_kind='regulatory_filing',
+                          fiscal_year=2001,fiscal_period='FY',as_of_date=today)
+    assert reader.query_local(generic).matches==(ref,)
+    assert raw.read_bytes()==data
+
+
 def test_cold_explicit_prepare_bootstraps_without_turning_query_into_writer(lake):
     from company_wiki.source_catalog.local_reconcile import prepare_local_source
     from company_wiki.source_catalog.source_reader import SourceReadError

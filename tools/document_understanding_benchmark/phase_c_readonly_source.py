@@ -115,6 +115,7 @@ def prepare_registered_source(
             if pinned_ref != expected_ref:
                 raise ReadonlySourceGap("registered_source_ref_pin_mismatch")
         fact_registration = None
+        local_preparation = None
         if source_facts is not None:
             if source_facts.get("content_sha256") != expected_sha256:
                 raise ReadonlySourceGap("registered_source_fact_sha_mismatch")
@@ -145,10 +146,19 @@ def prepare_registered_source(
                 allow_download=False,
             )
             query = reader.query_local(request)
+            if query.status == "not_found":
+                # Registration retains discovery labels, including old company
+                # display-name folders. Let the existing source owner prove
+                # identity/type/current availability from this owned catalog;
+                # never seed upper-layer facts or register the same file twice.
+                from company_wiki.source_catalog.local_reconcile import prepare_local_source
+                local_preparation = prepare_local_source(catalog,request)
+                query = reader.query_local(request)
             if query.status != "found" or len(query.matches) != 1:
                 raise ReadonlySourceGap(
                     "registered_source_" + query.status,
-                    detail={"reason": query.reason, "excluded_candidates": list(query.excluded_candidates)},
+                    detail={"reason": query.reason, "excluded_candidates": list(query.excluded_candidates),
+                            "local_preparation":local_preparation},
                 )
             ref = query.matches[0]
         else:
@@ -194,6 +204,7 @@ def prepare_registered_source(
                 "filing_identity_period_asof_qualification": "NOT_EVALUATED" if pinned_ref is not None else "REQUEST_APPLIED",
             },
             "source_fact_registration": fact_registration,
+            "local_preparation": local_preparation,
             "catalog_config": str(target),
             "raw_copies": 0,
             "verified_sha256": opened.content_sha256,

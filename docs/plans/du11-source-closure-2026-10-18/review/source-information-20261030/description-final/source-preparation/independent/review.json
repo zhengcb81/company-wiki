@@ -1,0 +1,93 @@
+{
+  "status": "PASS",
+  "open_findings_in_engineering_scope": 0,
+  "sealed_at_utc": "2026-10-30T05:14:07.200056+00:00",
+  "files": {
+    "src/company_wiki/source_catalog/assertion_service.py": {
+      "raw_sha256": "53e7f15cc1c3356edb498cbcd5b60caa2e2c2963d916fd0b18e49ccdf12f1e7f",
+      "lf_sha256": "fe12908012db32f64c0dbdf691606f40f868f167221b27b04117021ceaa81112",
+      "raw_bytes": 53674
+    },
+    "src/company_wiki/source_catalog/canonical_scope.py": {
+      "raw_sha256": "6d996727a99944b9f05a2d987d0cd3184e19a7ef86c18d9c7771e696cab114c7",
+      "lf_sha256": "504344242d7e55e810d956f24e63c9b3ba4f234c0492181195681b1a29146a46",
+      "raw_bytes": 10058
+    },
+    "src/company_wiki/source_catalog/document_kinds.py": {
+      "raw_sha256": "fef89e7f6b77937e7e91ffd4b7a557eb4e79e013e247c93995712fa12206556b",
+      "lf_sha256": "2ed148adb15bc76086b0595aee6762f092e057dc098fa33bfc6b88911ab379b4",
+      "raw_bytes": 2476
+    },
+    "src/company_wiki/source_catalog/local_reconcile.py": {
+      "raw_sha256": "49bff86b968d3851cbe19e30d9e7763a47eab5919287ecf698333ba4353db38b",
+      "lf_sha256": "32769e5da22f4137923c5b1e3fa7f78b37ecbb2475dda08eb2226cdc23dad607",
+      "raw_bytes": 44666
+    },
+    "src/company_wiki/source_catalog/resolver.py": {
+      "raw_sha256": "0d710a2b0b706a4eb98f3a2bd6ecd352030c932b107a5aad018194b42807f363",
+      "lf_sha256": "c696a7f48b2043484de1a0c7ef63d007a525448cc0063e1ff8e2851d3ea6d5d9",
+      "raw_bytes": 104120
+    },
+    "src/company_wiki/source_catalog/service.py": {
+      "raw_sha256": "9b83157652a8997f8e74f7891710d29d070b50ee241148215adca156c6c90abc",
+      "lf_sha256": "324410239a8f125c295d13477c8eb1558faf799f8b73216ab62f48b615cde8c2",
+      "raw_bytes": 63344
+    },
+    "tools/document_understanding_benchmark/phase_c_readonly_source.py": {
+      "raw_sha256": "7575e3119f475db1671364abe6854acd4c01e522160238ab8aae5279f4457995",
+      "lf_sha256": "1d8e984ad211703ddc148c9631ebeffb6284ad92d866295e60b44c87e602d5c7",
+      "raw_bytes": 10055
+    },
+    "tests/integration/test_legacy_local_reconcile.py": {
+      "raw_sha256": "da89d65917f95aac46d9b62ee6c531636e4b5e0948a5ffede915b5d59b8905df",
+      "lf_sha256": "08a4915d40bb1e5a1e4a54cb6ccc1f684008f716ec8c267ccf55f96270e9e65d",
+      "raw_bytes": 29060
+    },
+    "tests/test_phase_c_readonly_source.py": {
+      "raw_sha256": "a52e296da2f50ed7ab7c3fd5b17c2bb3247ebb3cb2f31a27a1920c9abd9f386b",
+      "lf_sha256": "a8609dddcd92afcbd7aeff69e85d081cdefcc49411d8d8468025ebc93b112932",
+      "raw_bytes": 29906
+    },
+    "tests/unit/test_cn_source_header_titles.py": {
+      "raw_sha256": "950f181a0574dba67efb5d18165c5ac919ef7798a3a91f4fcad8d27cc6b107b9",
+      "lf_sha256": "950f181a0574dba67efb5d18165c5ac919ef7798a3a91f4fcad8d27cc6b107b9",
+      "raw_bytes": 2528
+    },
+    "tests/unit/test_document_kind_scope.py": {
+      "raw_sha256": "619e47e89da23f1a5988b3a2e9aaa0c95ee55e0e6233bd09389926b7ce08ceca",
+      "lf_sha256": "619e47e89da23f1a5988b3a2e9aaa0c95ee55e0e6233bd09389926b7ce08ceca",
+      "raw_bytes": 2004
+    }
+  },
+  "tests": {
+    "tests": 19,
+    "failures": 0,
+    "errors": 0,
+    "skipped": 0,
+    "pytest_reported_seconds": 2.39,
+    "stdout": "replay-final.txt",
+    "junit": "replay-final.xml",
+    "scope": "19 independent local synthetic/pure checks; no full-repository replay"
+  },
+  "reviewer_originals_read": 0,
+  "reviewer_network_calls": 0,
+  "reviewer_model_posts": 0,
+  "real_cold_receipt_reviewed": ".planning/source-description-20261030/source-preparation-cold-proof.json",
+  "real_cold_receipt_raw_sha256": "65e37a2ea8e02410f6309679a2bf05462d27ce20aee7d01fa79ecf6da36708ca",
+  "remaining_responsibilities": [
+    "real model POST and output claim audit",
+    "durable response/activation/restart/cross-run cache",
+    "whole-source recall gold",
+    "FF/RF actual downstream adoption"
+  ],
+  "cleanup": {
+    "temporary_synthetic_pdfs": "in-memory for CN unit probes; fixture files under pytest-owned temporary paths",
+    "product_writes": 0,
+    "author_test_writes": 0,
+    "configuration_diff_empty": true,
+    "preexisting_hook_mode_wip_preserved": true,
+    "own_pyc_files": [],
+    "final_pytest_basetemp": "repository Windows-path owner relocated and removed it; explicit removed=true receipt in replay-final.txt",
+    "prior_failed_probes": "retained; r2 collection import error is reviewer harness only"
+  }
+}
