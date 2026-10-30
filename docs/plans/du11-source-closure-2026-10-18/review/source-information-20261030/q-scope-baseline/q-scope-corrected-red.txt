@@ -1,0 +1,25 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+FF.F                                                                     [100%]
+================================== FAILURES ===================================
+_ test_financial_and_thanks_do_not_borrow_business_support_or_prompt_membership[answers0] _
+.planning\source-information-20261030\test_qa_scope_red.py:27: in test_financial_and_thanks_do_not_borrow_business_support_or_prompt_membership
+    assert {FINANCIAL, GREETING}.isdisjoint(s.raw_text for s in selected.evidence_spans)
+E   AssertionError: assert False
+E    +  where False = <built-in method isdisjoint of set object at 0x000001AD0DEBA7A0>(<generator object test_financial_and_thanks_do_not_borrow_business_support_or_prompt_membership.<locals>.<genexpr> at 0x000001AD0DE6D300>)
+E    +    where <built-in method isdisjoint of set object at 0x000001AD0DEBA7A0> = {'公司2025年营业收入为37.17亿元，归属于上市公司股东的净利润为2.84亿元。', '感谢您对公司的关注！'}.isdisjoint
+_ test_financial_and_thanks_do_not_borrow_business_support_or_prompt_membership[answers1] _
+.planning\source-information-20261030\test_qa_scope_red.py:27: in test_financial_and_thanks_do_not_borrow_business_support_or_prompt_membership
+    assert {FINANCIAL, GREETING}.isdisjoint(s.raw_text for s in selected.evidence_spans)
+E   AssertionError: assert False
+E    +  where False = <built-in method isdisjoint of set object at 0x000001AD0DF03220>(<generator object test_financial_and_thanks_do_not_borrow_business_support_or_prompt_membership.<locals>.<genexpr> at 0x000001AD0DF353C0>)
+E    +    where <built-in method isdisjoint of set object at 0x000001AD0DF03220> = {'公司2025年营业收入为37.17亿元，归属于上市公司股东的净利润为2.84亿元。', '感谢您对公司的关注！'}.isdisjoint
+___ test_independent_business_answers_remain_distinct_closed_support_scopes ___
+.planning\source-information-20261030\test_qa_scope_red.py:42: in test_independent_business_answers_remain_distinct_closed_support_scopes
+    assert any(BUSINESS in scope and other not in scope for scope in scopes)
+E   assert False
+E    +  where False = any(<generator object test_independent_business_answers_remain_distinct_closed_support_scopes.<locals>.<genexpr> at 0x000001AD0DE71630>)
+=========================== short test summary info ===========================
+FAILED .planning/source-information-20261030/test_qa_scope_red.py::test_financial_and_thanks_do_not_borrow_business_support_or_prompt_membership[answers0]
+FAILED .planning/source-information-20261030/test_qa_scope_red.py::test_financial_and_thanks_do_not_borrow_business_support_or_prompt_membership[answers1]
+FAILED .planning/source-information-20261030/test_qa_scope_red.py::test_independent_business_answers_remain_distinct_closed_support_scopes
+3 failed, 1 passed in 2.01s

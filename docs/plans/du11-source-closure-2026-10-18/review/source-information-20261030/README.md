@@ -24,3 +24,9 @@ QA闭合支持视图/实际发送成本同scope投影仍未实施；后续按Q1�
 ## 最终工程验收
 
 3187P/11既有skip/64.19秒（含恢复到原样的本地模拟服务端到端），396src mypy/ruff通过；独立25P/1.95秒，最终10文件raw/LF SHA绑定，PASS/0OPEN。独立测试、旧失败探针、最终领域日志与真实选择紧凑收据保留在本目录；计数不相加。正式摘要、缓存和RF采用未签。原hook mode不属于本次提交。
+
+## 发布与下一节点
+
+`69c9b178`已正常提交推送，所有提交钩子通过；pre-push158P/26.08秒，精确CI40984342776 completed/success。见ci.json/acceptance.json。已清理ROOT测试临时根约3MB，外来hook mode与历史产物未碰。
+
+Q1–Q3公共链基线为3RED/1PASS：两种顺序均让财务/感谢借业务回答入选，独立回答合为同一个support；现有全答复仍保护后置否定，此正控必须保留。第一探针误用私有support_unit_ids访问公共reading_context导致KeyError，已改用support_evidence_ids→EvidenceSpan原文验证；原错误日志保留，不当产品缺陷。此节点尚未实施，不以shared owner旧绿代签。独审设计补充：先冻结完整support/含义context再assessment，owner缓存不能随后改变context；QA归属不等于物理邻接，禁止伪造source_body_adjacency。

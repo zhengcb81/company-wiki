@@ -1,5 +1,5 @@
 {
-  "status": "ACCEPTED_ENGINEERING_PENDING_COMMIT_CI",
+  "status": "ACCEPTED_PUBLISHED_EXACT_CI_SUCCESS",
   "files": [
     {
       "path": "src/company_wiki/document_understanding/operating_states/relations.py",
@@ -81,5 +81,17 @@
     "W21 runtime reception",
     "real summary/cache/FF/RF adoption",
     "holdout and full audit loop"
-  ]
+  ],
+  "commit": "69c9b178e4b23ff9bb57b804b7c954893bcd5e13",
+  "ci": {
+    "id": 40984342776,
+    "head_sha": "69c9b178e4b23ff9bb57b804b7c954893bcd5e13",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40984342776"
+  },
+  "pre_push": {
+    "passed": 158,
+    "seconds": 26.08
+  }
 }
