@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-30",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_QA_LOCATOR_ACCEPTED_PUBLICATION_THEN_REAL_SUMMARY_V3",
+  "overall_status": "ACTIVE_REAL_SUMMARY_QUALITY_AND_NONPERIODIC_REUSE_ROOT_FIX_W21_RECEIVED",
   "parallel_packages_20261025": {
     "status": "W16_W17_W18_ROOT_COMPONENT_ACCEPTED_MERGED",
     "entry": "harness_lanes/20261025/README.md",
@@ -26,7 +26,7 @@
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
-  "last_code_commit": "f88221d2578eac078bb7b30d9a8c00b08f2ee6d2",
+  "last_code_commit": "0bf2805fa229c5d843483b9c22b2a4637776bd15",
   "code_ci": {
     "id": 41009349866,
     "head_sha": "f88221d2578eac078bb7b30d9a8c00b08f2ee6d2",
@@ -406,7 +406,7 @@
   "initial_execution_paid_calls_preserved": 2,
   "r1_engineering_closeout_ref": "r1-holdout-20261021/engineering-closeout-20261022.json",
   "publication_status_owner": "review/pdf-c3-20261026/QA_PROVISIONAL_PUBLICATION.json",
-  "resume_handoff": "review/source-information-20261030/description-final/QA_LOCATOR_NEXT.md",
+  "resume_handoff": "review/source-information-20261030/description-final/SUMMARY_QUALITY_NEXT.md",
   "resumed_at": "2026-10-23T18:41:33.912794+00:00",
   "previous_pause_request": "Superseded by user continue2026-10-23",
   "last_updated_at": "2026-10-28",
@@ -2344,7 +2344,7 @@
     "published": true,
     "push_failure": "47 targets /392 collected /600s; two regressions being root-fixed, not waived by narrower daily gate"
   },
-  "next_action": "Publish reviewed QA locators then real-summary-v3, meta-v4/gold-v3, configured MiMo; no reuse/overwrite of failed v1/v2 outputs.",
+  "next_action": "Publish reviewed parser contract patch + real summary evidence, then ROOT receive W21 and implement SUMMARY_QUALITY_NEXT common roots without new paid full replays.",
   "c3_runtime_recovery_20261026": {
     "entry": "review/pdf-c3-20261026/RUNTIME_RECOVERY.md",
     "environment_independent": "PASS_ZERO_OPEN_25_TESTS_AND_REAL_WORKER_ENTRYPOINTS",
@@ -2959,15 +2959,7 @@
   ],
   "pause_requested_by_user": false,
   "paused_scope": "revoked by user mainline resume 2026-10-29",
-  "own_uncommitted_runtime": [
-    "src/company_wiki/source_catalog/narrative_evidence.py",
-    "src/company_wiki/source_catalog/narrative_pdf_qa.py",
-    "src/company_wiki/source_catalog/narrative_replay.py",
-    "src/company_wiki/source_catalog/narrative_native_ranges.py",
-    "src/company_wiki/document_understanding/decision_inventory.py",
-    "tests/unit/test_pdf_qa_cell_range_locators.py",
-    "tests/unit/test_narrative_native_ranges.py"
-  ],
+  "own_uncommitted_runtime": [],
   "qa_provisional_publication": {
     "code_commit": "c6c446d0eebc8f6e6f6903bd677c04eebaf65077",
     "branch": "master",
@@ -3488,5 +3480,44 @@
       "changed_files_since_previous_fingerprint": [],
       "suite_scope": "Targeted 60-case final proof only; no final broad-suite pass claim. Earlier broad run under strict flag equality had a real existing-contract failure. This final reviewed source and targeted proof supersede that implementation, not the historical failure log."
     }
+  },
+  "publication": {
+    "current_code_pushed": false,
+    "reason": "normal pre-push identified stale PDF default assertion; corrected contract and independent addendum ready; push remains required"
+  },
+  "real_summary_v3": {
+    "overall_status": "FAIL",
+    "model_completed": true,
+    "model_posts": 1,
+    "input_tokens": 6303,
+    "output_tokens": 348,
+    "budget_micro_usd": 1167,
+    "activation_recovery": "PASS",
+    "same_run_zero_post": true,
+    "cross_run_zero_post": true,
+    "source_and_config_unchanged": true,
+    "temporary_lake_removed": true,
+    "sent_gold_supported": 8,
+    "sent_gold_required": 8,
+    "summary_tasks_returned": 6,
+    "summary_tasks_supplied": 8,
+    "semantic_review": "FAIL_QUALITY_OPEN",
+    "review": "review/source-information-20261030/description-final/real-summary-v3/independent/review.json",
+    "ff_rf_consumers": "OPEN: explicit nonperiodic source reference needed; unknown fiscal_year is not latest-as-of proof"
+  },
+  "mother_usage_current": {
+    "tokens": 1807019,
+    "micro_usd": 729112,
+    "historical_unknowns_preserved": true,
+    "new_unknowns": 0
+  },
+  "w21_root_reception": {
+    "state": "DELIVERY_RECEIVED_ROOT_TESTS_PENDING",
+    "head": "f6c2b9d420f4b78a4fb825eb2f77bc1c912c9e9d",
+    "clean": true,
+    "source_review_target": "eab239d93560efe6f1eb974b547be0bd9e93b3e7",
+    "later_commits_docs_only": true,
+    "canonical_sdk": "native_fallback_not_enhancement_success",
+    "branch_pushed": false
   }
 }

@@ -1,12 +1,12 @@
-## 2026-10-30 当前：QA定位工程验收完成，发布后真实摘要v3
+## 2026-10-30 当前：真实摘要/缓存已实跑，质量和非期次消费根修 OPEN；W21已交付待ROOT接收
 
-唯一入口为 CURRENT_STATUS.md/json。来源准备f88221d2已正常提交推送，精确CI41009349866成功、pre-push158P/26.35秒。真实v2进入select后因所有QA片段默认不稳定定位而失败，0POST/0费用，原件/config/sentinel保持、临时湖已恢复。
+唯一入口 CURRENT_STATUS.md/json。来源准备f88221d2已推送、精确CI41009349866成功。定位工程0bf2805f通过7文件独审60P、相关160P、397源mypy/ruff；正常pre-push抓到1项旧PDF默认版本literal仍1.1，已按实际迁移改1.2（transcript旧回放不改），10P/1.58秒及独审补充通过；待正常重推，未绕hook。
 
-现已从共因修复：native0.1.2有真实cell字符范围，旧0.1.0/0.1.1字节与定位回放保持；native-range按版本绑定base，cache不混用。独审发现的来源quality标记可被清除问题已修，保留原生限制且允许新增保守诊断，不新加人工门禁。真实原件302units/15选中/0unstable、统一admission接受、原文回放15/15、业务gold8/8；全文仍partial，不冒签摘要或RF。
+真实配置MiMo完成1次POST：6303输入+348输出=6651tokens，预算代理$0.001167（非现金账单）。activation恢复、同run重启和crossrun复用全部0新增POST；原件/config/sentinel保持、临时湖清理。母累计1807019tokens/$0.729112，旧unknown保留。输入8/8全部在实际sent task支持中，但实际生成6/8；独审判FAIL_QUALITY_OPEN，客户链和产品/研发数量遗漏、新闻归属限定丢失，3处mixed modality元数据。不能用bundle的来源回放verified代替摘要语义通过。
 
-验证：先876P/24.77秒；严格相等flag的后续广域877P/1F揭示既有诊断兼容，已修并用相关6模块160P/17.81秒验收，不重复32分钟整批；397源mypy/ruff和独立稳定7文件审查通过。详见[验收包](review/source-information-20261030/description-final/qa-locators/README.md)。
+FF/RF消费者尚未通过。原benchmark对无FY IR发exact，FF拒绝；实验改latest_as_of也不成立，它会进入“需咨询provider判最新”的语义，不能拿未知期次冒充最新。实验runner修改已撤回、未提交；测试探针0下载/POST、隔离湖恢复。下一步应统一显式SourceRef文档复用与财年/最新期次请求的区别，不能填假年份或绕路。详见[真实独审](review/source-information-20261030/description-final/real-summary-v3/independent/review.md)及[下一根修细则](review/source-information-20261030/description-final/SUMMARY_QUALITY_NEXT.md)。
 
-**下一步：** 正常提交推送本节点、观察自己的CI，再以meta-v4/gold-v3在新目录real-summary-v3执行当前MiMo原语言摘要；不改gold事实/不提高预算。再真实claim独审、持久响应/activation/restart/crossrun零重复POST、FF复用与RF实际采用。W21外包runtime/工区、原件/config/外来hook保持。US RPO/W21/holdout/完整八步公司loop仍OPEN，目标active。
+W21作者已正式通知交付，ROOT只读核到HEAD f6c2b9d4且工区干净；eab239d9以后仅交接/计划/终审/收据变动，产品源码仍对应独审eab239d9。其canonical SDK native_fallback与ASCII alias诊断不能当生产增强成功，作者push门禁路径长度反例留ROOT；不因handoff旧null字段另加人工签收。先提交本轮成果，再隔离ROOT验收/接线W21与摘要共因，保留原件、不碰Dayu/IQS/Dashboard。US RPO/holdout/实际RF预测/完整八步公司loop继续OPEN，目标active。
 
 ---
 以下为历史记录，不是额外执行入口。

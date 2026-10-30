@@ -148,7 +148,7 @@ def test_legacy_version_replays_original_heading_layout_and_new_identity_is_sepa
     )
     assert parser_component("application/pdf") == (
         "selective_narrative_parser",
-        "0.1.1",
+        "0.1.2",
     )
 
 

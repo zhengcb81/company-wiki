@@ -1,0 +1,100 @@
+{
+  "scope": "captured_json_replay_only_no_model_no_pdf_parse",
+  "sent_task_keys": [
+    "t1",
+    "t2",
+    "t3",
+    "t4",
+    "t5",
+    "t6",
+    "t7",
+    "t8"
+  ],
+  "response_task_keys": [
+    "t1",
+    "t2",
+    "t4",
+    "t5",
+    "t6",
+    "t8"
+  ],
+  "final_task_keys": [
+    "t1",
+    "t2",
+    "t4",
+    "t5",
+    "t6",
+    "t8"
+  ],
+  "decoded_claim_count": 6,
+  "decoded_matches_final_draft": true,
+  "decoded_status": "draft",
+  "decoded_needs_review": [
+    false,
+    false,
+    false,
+    false,
+    false,
+    false
+  ],
+  "bundle_quality_status": "verified",
+  "computed_task_coverage": {
+    "scope": "selected_source_tasks_only",
+    "max_claims": 40,
+    "available_task_count": 8,
+    "emitted_task_count": 6,
+    "not_emitted_task_keys": [
+      "t3",
+      "t7"
+    ],
+    "source_task_coverage_complete": false,
+    "semantic_status": "not_evaluated"
+  },
+  "coverage_serialized_in_bundle": false,
+  "output_plan": {
+    "configured_output_tokens": 8192,
+    "coverage": "selected_source_tasks_only",
+    "max_claims": 40,
+    "max_claims_per_task": 2,
+    "planning": "soft_target_within_existing_caps",
+    "target_claim_count": 8,
+    "target_text_chars": 240
+  },
+  "mutation_probe": {
+    "synthetic_not_model_output": true,
+    "unsupported_acquisition_claim_retained": {
+      "claim_id": "t2-1",
+      "text": "九目化学已完成对三星家电业务的收购。",
+      "evidence_ids": [
+        "urn:company-wiki:evidence-span:sha256:b436b6238aba6713ec6f8320cf4e7902af80cf5f5a253f6c5f9dab3b981705f0"
+      ],
+      "claim_type": "company_statement",
+      "modality": "actual",
+      "needs_review": false,
+      "context_evidence_ids": [
+        "urn:company-wiki:evidence-span:sha256:27d4283d845ae0477e183af35c8e2103569b77365652f313250b7c64b2b01d25",
+        "urn:company-wiki:evidence-span:sha256:8b63d3b40762ee6904d6c5e37d58a45a3d9c8667b851889299b4495e4c464b64",
+        "urn:company-wiki:evidence-span:sha256:8fea8360efae264182a74c099273af328ec67654d1bbf60f44e2810187cd4f46"
+      ]
+    },
+    "decoded_status": "draft"
+  },
+  "artifact_hashes": {
+    ".planning\\source-description-20261030\\real-summary-v3\\materials\\phaseC-090-96b820232f6b.input.json.gz": {
+      "compressed_sha256": "5f27e2dd34895a45bebbf9720db69dd607a452d4741103424fc2dfca634fcc89",
+      "uncompressed_sha256": "021164426ff7010f587eb42b5673fc0213d2d04000f17f62e1659e790259fad7"
+    },
+    ".planning\\source-description-20261030\\real-summary-v3\\materials\\phaseC-090-96b820232f6b.184f870cca0647c99204735ffb6f6a43.response.json.gz": {
+      "compressed_sha256": "88d7bcc45ae30cddef893cebab9522cd143fd8bed740f443383c686107dcce3d",
+      "uncompressed_sha256": "26f69cc2838cd67e3183e8f2fbac80df01f812b0a8617b1398ae3f2db6874442"
+    },
+    ".planning\\source-description-20261030\\real-summary-v3\\materials\\phaseC-090-96b820232f6b.selection.json.gz": {
+      "compressed_sha256": "c6bf7881a72708bdb0b82e377ba4e40cd36f1e6b1f3609cc4249557f6f5037c4",
+      "uncompressed_sha256": "4d87b1f8aa2c367e5e94496e27d65f734c5997737960a503ca16ce51c8bcb74f"
+    },
+    ".planning\\source-description-20261030\\real-summary-v3\\phaseC-090-96b820232f6b.bundle.json.gz": {
+      "compressed_sha256": "c8c7fb1220f1d6f2da9030bc26473fdb65cd13cfb6c09983e26a1dc27ab17789",
+      "uncompressed_sha256": "3a33d89419d325bdfc3be4facb1c7f85761384ba9a5e304c2c16008577ee5679"
+    }
+  }
+}

@@ -1,0 +1,15 @@
+{
+  "schema_version": "2.0",
+  "market": "CN",
+  "company_query": "002643",
+  "document_kind": "investor_relations",
+  "mode": "latest_as_of",
+  "fiscal_year": null,
+  "as_of_date": "2026-10-30",
+  "filing_intent": "reuse_only",
+  "acquisition_limits": {
+    "max_bytes": 4194304,
+    "timeout_seconds": 90,
+    "max_cost_usd": 0
+  }
+}

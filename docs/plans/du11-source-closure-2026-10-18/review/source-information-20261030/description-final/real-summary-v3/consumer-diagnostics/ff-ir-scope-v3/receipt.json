@@ -1,0 +1,69 @@
+{
+  "status": "FAIL",
+  "exit": 2,
+  "receipt": {
+    "schema_version": "2.0",
+    "status": "fatal",
+    "request_period": {
+      "mode": "latest_as_of",
+      "fiscal_year": null,
+      "fiscal_period": null,
+      "as_of_date": "2026-10-30"
+    },
+    "filing": {
+      "status": "fatal",
+      "reason": "company-wiki ensure exited 1",
+      "retryable": false,
+      "upstream_cause": {
+        "schema_version": "filing-upstream-cause/1",
+        "operation": "ensure",
+        "code": "acquisition_validation_failed",
+        "provider_started": false,
+        "usage_complete": true,
+        "retry_scope": "none"
+      },
+      "acquisition_failure": {
+        "acquisition_usage": {
+          "cost_usd": "0",
+          "response_bytes": 0,
+          "schema_version": "1.0"
+        },
+        "code": "acquisition_validation_failed",
+        "provider_started": false,
+        "retryable": null,
+        "schema_version": "acquisition-failure/1",
+        "usage_complete": true,
+        "usage_scope": "operation"
+      },
+      "stage": "ensure",
+      "attempts": 1
+    },
+    "transcript": {
+      "status": "not_requested",
+      "retryable": false
+    },
+    "calls": 2,
+    "downloads": 0,
+    "acquisition_observation": {
+      "schema_version": "acquisition-observation/1",
+      "usage_scope": "operation",
+      "outcome": "failed",
+      "provider_started": false,
+      "usage_complete": true,
+      "wire_usage_complete": true,
+      "http_exchanges_complete": true,
+      "wire_body_bytes": 0,
+      "entity_body_bytes": 0,
+      "http_exchanges": 0,
+      "cost_usd": null,
+      "http_observation": null
+    }
+  },
+  "downloads": 0,
+  "network_blocked": true,
+  "model_posts": 0,
+  "raw_copies": 0,
+  "protected_unchanged": true,
+  "scope": "FF actual CLI reuse only; RF narrative/forecast not exercised",
+  "owned_temporary_lake_removed": true
+}

@@ -1,0 +1,37 @@
+{
+  "status": "FAIL",
+  "exit": 2,
+  "receipt": {
+    "schema_version": "2.0",
+    "status": "request_error",
+    "request_period": {
+      "mode": "latest_as_of",
+      "fiscal_year": null,
+      "fiscal_period": null,
+      "as_of_date": "2026-10-30"
+    },
+    "filing": {
+      "status": "request_error",
+      "reason": "latest_as_of reuse_only requires max_bytes, timeout_seconds and max_cost_usd limits",
+      "retryable": false,
+      "request_diagnostic": {
+        "schema_version": "filing-request-diagnostic/1",
+        "reason": "latest_reuse_requires_acquisition_limits",
+        "field_path": "acquisition_limits"
+      }
+    },
+    "transcript": {
+      "status": "not_requested",
+      "retryable": false
+    },
+    "calls": 0,
+    "downloads": 0
+  },
+  "downloads": 0,
+  "network_blocked": true,
+  "model_posts": 0,
+  "raw_copies": 0,
+  "protected_unchanged": true,
+  "scope": "FF actual CLI reuse only; RF narrative/forecast not exercised",
+  "owned_temporary_lake_removed": true
+}

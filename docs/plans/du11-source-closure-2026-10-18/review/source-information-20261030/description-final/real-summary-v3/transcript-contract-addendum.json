@@ -1,0 +1,35 @@
+{
+  "schema_version": "qa-locator-contract-addendum/1",
+  "status": "PASS",
+  "open_findings": 0,
+  "head": "0bf2805fa229c5d843483b9c22b2a4637776bd15",
+  "scope": "Read-only review of one existing PDF current-default assertion update. No summary semantic review.",
+  "file": "tests/contract/test_official_transcript_layouts.py",
+  "bytes": 7743,
+  "raw_sha256": "06ed87582ae11030f52f6602a74fd9fad6232122e98bfc56e84f30a492bc1b29",
+  "lf_sha256": "785f7aeb018e35a687bda094396d649b842fe46fef4259207fb281e021a46527",
+  "verified_diff": [
+    "-        \"0.1.1\",",
+    "+        \"0.1.2\","
+  ],
+  "finding": "Updating application/pdf current native parser default from 0.1.1 to 0.1.2 is consistent with the reviewed cell-range parser migration and PdfReading advertised identity. This assertion is not a transcript legacy parser pin.",
+  "legacy_preserved": [
+    "explicit transcript parser 0.1.1 parse",
+    "old and new transcript unit identities remain separate",
+    "old transcript evidence replay count and zero-failure assertions",
+    "explicit text/html transcript 0.1.1 routing assertion",
+    "explicit text/html transcript 0.2.0 routing assertion"
+  ],
+  "tests": {
+    "root_reported": "10 passed in 1.58s",
+    "independent_rerun": false,
+    "reason": "Assigned only one-line read-only review; previous independent source/parser migration proof remains separate."
+  },
+  "operations": {
+    "product_edits": 0,
+    "original_pdf_reads": 0,
+    "sdk_or_model_calls": 0,
+    "downloads": 0,
+    "hook_bypass": false
+  }
+}
