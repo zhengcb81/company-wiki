@@ -14,7 +14,7 @@ import sys
 
 from . import deployment
 
-REPO_SRC = Path(__file__).resolve().parents[3] / "src"
+REPO_SRC = Path(__file__).resolve().parents[2] / "src"
 
 
 def _compact(payload: dict) -> str:
@@ -26,7 +26,8 @@ def cmd_plan(arguments) -> int:
     profile = json.loads(source_config.read_text(encoding="utf-8-sig"))
     probe = deployment.describe_source(source_config, repo_src=Path(arguments.repo_src))
     plan = deployment.build_plan(Path(arguments.target), profile, probe,
-                                 source_config_sha256=sha256(source_config.read_bytes()).hexdigest())
+                                 source_config_sha256=sha256(source_config.read_bytes()).hexdigest(),
+                                 source_config_path=str(source_config))
     if plan["blocking_errors"]:
         Path(arguments.plan_out).write_text(json.dumps(plan, ensure_ascii=True), encoding="utf-8")
         print(_compact({"status": "BLOCKED", "blocking_errors": plan["blocking_errors"][:20],
@@ -61,19 +62,30 @@ def cmd_verify(arguments) -> int:
     light = deployment.verify_light(config_path, repo_src=Path(arguments.repo_src))
     loaded = deployment.verify_config_load(config_path, repo_src=Path(arguments.repo_src))
     after = deployment.snapshot_tree(config_path.parent)
-    print(_compact({"light": light, "config_load": loaded,
-                    "zero_write_verified": before == after,
-                    "tree_files": after["files"], "tree_bytes": after["bytes"]}))
+    result = {"light": light, "config_load": loaded,
+              "zero_write_verified": before == after,
+              "tree_files": after["files"], "tree_bytes": after["bytes"]}
+    # Record the lightweight fresh-process verification in the owned receipt
+    # itself so deployment.json carries the card-required verification result,
+    # not only this command's stdout. Only the marker file is touched.
+    receipt = deployment._read_receipt(config_path.parent)  # noqa: SLF001
+    if receipt is not None and receipt.get("status") in {"COMPLETE", "REUSED"}:
+        receipt["light_verification"] = {**result,
+                                         "python": light["prefix"],
+                                         "environment_sha256": light["environment_sha256"]}
+        deployment.write_receipt(config_path.parent, receipt)
+        result["recorded_in_receipt"] = True
+    print(_compact(result))
     return 0
 
 
 def cmd_status(arguments) -> int:
     target = Path(arguments.target)
-    receipt = deployment._read_receipt(target)  # noqa: SLF001 - status reads own marker
+    receipt = deployment._read_receipt(target) if target.is_dir() else None  # noqa: SLF001
     if receipt is None:
         print(_compact({"target": str(target), "classification":
                         "ABSENT" if not target.exists() else
-                        ("EMPTY" if not any(target.iterdir()) else "FOREIGN_OR_UNKNOWN")}))
+                        ("EMPTY" if target.is_dir() and not any(target.iterdir()) else "FOREIGN_OR_UNKNOWN")}))
         return 0
     classification = ("OWNED_COMPLETE" if receipt.get("status") == "COMPLETE"
                       else "OWNED_INCOMPLETE")

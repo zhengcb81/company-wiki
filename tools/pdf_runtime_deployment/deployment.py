@@ -35,7 +35,6 @@ PROBE_TIMEOUT_SECONDS = 300
 CONSTRUCTOR_DEADLINE_SECONDS = 30
 
 _HERE = Path(__file__).resolve().parent
-_REPO_ROOT = _HERE.parents[2]
 
 
 class DeploymentError(RuntimeError):
@@ -117,7 +116,8 @@ def plan_digest(plan: dict[str, Any]) -> str:
 
 
 def build_plan(target: Path, source_profile: dict[str, Any], probe: dict[str, Any], *,
-               source_config_sha256: str | None = None) -> dict[str, Any]:
+               source_config_sha256: str | None = None,
+               source_config_path: str | None = None) -> dict[str, Any]:
     """Freeze the projection plan from a describe-probe result. Read-only."""
     target = Path(target)
     require_ascii(target)
@@ -237,7 +237,8 @@ def build_plan(target: Path, source_profile: dict[str, Any], probe: dict[str, An
         "schema_version": PLAN_SCHEMA,
         "tool": {"name": TOOL_NAME, "implementation_sha256": implementation_sha256()},
         "target": str(target),
-        "source": {"config_sha256": source_config_sha256, "python": probe["python"],
+        "source": {"config_sha256": source_config_sha256, "config_path": source_config_path,
+                   "python": probe["python"],
                    "prefix": probe["prefix"], "base_prefix": probe["base_prefix"],
                    "site_packages": str(site), "artifacts": str(artifacts_source)},
         "closure": probe["closure"],
@@ -280,11 +281,36 @@ def tool_identity() -> dict[str, str]:
 
 
 def receipt_stub(plan: dict[str, Any], status: str) -> dict[str, Any]:
+    """Compact receipt covering every interface field the card requires.
+
+    Includes the exact input source paths, dependency/model SHAs, the output
+    config path plus its content SHA (set by deploy once written), an explicit
+    statement that actual NTFS allocation is unknown, and the zero-copy source
+    protection result. No secrets and no parent environment.
+    """
     return {"schema_version": DEPLOYMENT_SCHEMA, "tool": tool_identity(),
             "plan_sha256": plan["plan_sha256"], "status": status, "target": plan["target"],
             "environment_sha256": plan["environment_sha256"],
+            "environment_algorithm": plan["closure"]["environment_algorithm"],
             "distribution_count": len(plan["distribution_summary"]),
-            "source_config_sha256": plan["source"]["config_sha256"]}
+            "source": {"config_sha256": plan["source"]["config_sha256"],
+                       "config_path": plan["source"].get("config_path"),
+                       "python": plan["source"]["python"], "prefix": plan["source"]["prefix"],
+                       "base_prefix": plan["source"]["base_prefix"],
+                       "site_packages": plan["source"]["site_packages"],
+                       "artifacts": plan["source"]["artifacts"]},
+            "source_config_sha256": plan["source"]["config_sha256"],
+            "model_sha256": plan["source_profile"]["model_sha256"],
+            "model_config_sha256": plan["source_profile"]["model_config_sha256"],
+            "output_config_path": plan["output_config"]["path"],
+            "logical_shared_bytes": sum(row["bytes"] for row in
+                                        (*plan["env_rows"], *plan["artifact_rows"])),
+            "actual_allocation": "unknown; NTFS directory/link metadata not measurable here "
+                                 "(logical shared bytes only; no on-disk claim)",
+            "source_protection": {"rehash_each_source_before_link": True,
+                                  "samefile_verified_per_link": True,
+                                  "byte_copies_of_packages_or_models": 0,
+                                  "sources_modified": False}}
 
 
 def write_receipt(target: Path, receipt: dict[str, Any]) -> None:
@@ -382,7 +408,12 @@ def _reconcile(plan: dict[str, Any], *, link: Callable[[Path, Path], None],
         ):
             raise SourceChanged(f"selected source changed after its snapshot: {row['target']}")
         if destination.exists():
-            if _sha256_file(destination) == row["sha256"]:
+            # The contract is samefile + matching SHA, not merely equal bytes:
+            # a plain copy planted at an owned path is foreign content, not a
+            # reused hardlink, and must never silently pass as projection.
+            if _sha256_file(destination) == row["sha256"] and (
+                os.path.samefile(source, destination)
+            ):
                 created["reused"] += 1
                 continue
             raise TargetConflict(f"owned path holds different content: {row['target']}")
@@ -452,8 +483,6 @@ def deploy(plan: dict[str, Any], *, host_python: str,
                    "created_links": counters["made"], "reused_links": counters["reused"],
                    "venv_created": venv_created,
                    "new_scaffold_file_bytes": scaffold,
-                   "logical_shared_bytes": sum(row["bytes"] for row in
-                                               (*plan["env_rows"], *plan["artifact_rows"])),
                    "sdk_bytes_copied": 0, "model_bytes_copied": 0,
                    "output_config_sha256": sha256(expected_config).hexdigest(),
                    "diagnostic_counts": {

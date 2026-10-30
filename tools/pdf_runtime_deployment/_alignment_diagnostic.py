@@ -49,7 +49,7 @@ def child_main(artifacts: str, pdf_path: Path) -> None:
 
 
 def parent_main(receipts: Path, config_path: Path) -> None:
-    sys.path.insert(0, str(Path(__file__).resolve().parents[3] / "src"))
+    sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
     import subprocess
     import tempfile
 

@@ -136,6 +136,24 @@ def test_build_plan_reports_missing_record_source_as_blocker(tmp_path):
     assert [row["kind"] for row in plan["blocking_errors"]] == ["missing_record_source"]
 
 
+def test_build_plan_projects_env_local_script_entries_and_blocks_escaping(tmp_path):
+    profile, probe = mini_source(tmp_path)
+    scripts = tmp_path / "source-env" / "Scripts"
+    scripts.mkdir()
+    script = scripts / "acme-cli.exe"
+    script.write_bytes(b"launcher")
+    escaped = tmp_path / "outside-root.exe"
+    escaped.write_bytes(b"escapes")
+    entry = probe["distributions"]["acme-pkg"]
+    entry["record"].append(["../../Scripts/acme-cli.exe", "", ""])
+    entry["record"].append(["../../../outside-root.exe", "", ""])
+    plan = deployment.build_plan(Path(temporary_ascii(tmp_path)), profile, probe)
+    rows = record_rows(plan)
+    assert "env/Scripts/acme-cli.exe" in rows
+    assert plan["diagnostics"]["script_entries"] == 1
+    assert [row["kind"] for row in plan["blocking_errors"]] == ["escaping_record_path"]
+
+
 def test_classify_target_distinguishes_absent_empty_owned_and_foreign(tmp_path):
     profile, probe = mini_source(tmp_path)
     target = tmp_path / "deploy"
