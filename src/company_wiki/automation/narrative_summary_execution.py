@@ -270,12 +270,14 @@ def _bind_summary(
 def wrap_summary(summary: NarrativeSummaryResult, execution: Mapping) -> dict[str, Any]:
     from .narrative_summary_assessment import ASSESSMENT_SCHEMA, validate_assessment_wire, validate_assessment_quality
     if execution.get('schema_version')==ASSESSMENT_SCHEMA:
-        from .narrative_summary_protocols import FIDELITY_SCOPED
-        _require(summary.model is not None and summary.model.prompt_version==FIDELITY_SCOPED.prompt
+        from .narrative_summary_protocols import ASSESSED_PROMPTS, scoped_protocol_for_prompt
+        _require(summary.model is not None and summary.model.prompt_version in ASSESSED_PROMPTS
                  and summary.draft is not None,'assessment requires its explicit summary protocol')
-        assert summary.draft is not None
+        assert summary.draft is not None and summary.model is not None
+        protocol = scoped_protocol_for_prompt(summary.model.prompt_version)
         try:
             report=validate_assessment_wire(execution,summary.to_dict()['draft']['claims'])
+            _require(report['validator']['version']==protocol.assessor_version,'assessment protocol version mismatch')
             validate_assessment_quality(report,summary.to_dict()['draft']['claims'],summary.draft.status)
         except (ValueError,TypeError,KeyError) as exc:
             raise NarrativeContractError('invalid summary assessment wrapper') from exc
@@ -299,13 +301,14 @@ def parse_summary_job_result(
     value: object, *, selected: NarrativeSelectResult | None = None
 ) -> NarrativeSummaryResult:
     if isinstance(value,Mapping) and value.get('schema_version')==ASSESSED_INTERNAL_SCHEMA:
-        from .narrative_summary_protocols import FIDELITY_SCOPED
+        from .narrative_summary_protocols import ASSESSED_PROMPTS, scoped_protocol_for_prompt
         from .narrative_summary_assessment import validate_assessment_wire, validate_assessment_material, validate_assessment_quality
         _require(set(value)=={'schema_version','summary','assessment'},'invalid assessed summary wrapper fields')
         summary=NarrativeSummaryResult.from_dict(value['summary'])
-        _require(summary.model is not None and summary.model.prompt_version==FIDELITY_SCOPED.prompt
+        _require(summary.model is not None and summary.model.prompt_version in ASSESSED_PROMPTS
                  and summary.draft is not None,'assessment requires its explicit summary protocol')
-        assert summary.draft is not None
+        assert summary.draft is not None and summary.model is not None
+        protocol = scoped_protocol_for_prompt(summary.model.prompt_version)
         claims=summary.to_dict()['draft']['claims']
         try:
             if selected is None:
@@ -313,7 +316,8 @@ def parse_summary_job_result(
             else:
                 summary.validate_against(selected)
                 report=validate_assessment_material(value['assessment'],selected.evidence_spans,selected.reading_context,
-                    claims,plan_max_claims=FIDELITY_SCOPED.plan_max_claims)
+                    claims,plan_max_claims=protocol.plan_max_claims,assessor_version=protocol.assessor_version)
+            _require(report['validator']['version']==protocol.assessor_version,'assessment protocol version mismatch')
             validate_assessment_quality(report,claims,summary.draft.status)
         except (ValueError,TypeError,KeyError) as exc:
             raise NarrativeContractError('invalid assessed summary wrapper') from exc
@@ -324,19 +328,19 @@ def parse_summary_job_result(
             "summary execution wrapper fields are invalid",
         )
         summary = NarrativeSummaryResult.from_dict(value["summary"])
-        from .narrative_summary_protocols import FIDELITY_SCOPED
-        _require(summary.model is None or summary.model.prompt_version!=FIDELITY_SCOPED.prompt,
+        from .narrative_summary_protocols import ASSESSED_PROMPTS, scoped_protocol_for_prompt
+        _require(summary.model is None or summary.model.prompt_version not in ASSESSED_PROMPTS,
                  'assessed protocol requires its assessment wrapper')
         report = _report(value["execution"])
         _bind_summary(summary, report, selected)
         return summary
     summary = NarrativeSummaryResult.from_dict(value)
     from .narrative_model_extractive import EXTRACTIVE_PROMPT_VERSION
-    from .narrative_summary_protocols import FIDELITY_SCOPED
+    from .narrative_summary_protocols import ASSESSED_PROMPTS, scoped_protocol_for_prompt
 
     _require(
         summary.model is None
-        or summary.model.prompt_version not in {EXTRACTIVE_PROMPT_VERSION,FIDELITY_SCOPED.prompt},
+        or summary.model.prompt_version not in ({EXTRACTIVE_PROMPT_VERSION} | ASSESSED_PROMPTS),
         "source-extractive job result requires its execution wrapper",
     )
     if selected is not None:

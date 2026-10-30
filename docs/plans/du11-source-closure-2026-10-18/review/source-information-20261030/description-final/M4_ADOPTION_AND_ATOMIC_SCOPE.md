@@ -2,6 +2,8 @@
 
 唯一总入口仍为本计划 CURRENT_STATUS.md/json。本文件补充 SUMMARY_QUALITY_IMPLEMENTATION.md，不建立第二目标或执行队列。M3b工程已发布 ee27c962；真实 `/6` v1、消费者零付费重放和自然语言独审分别保留，不能互相代签。
 
+2026-10-30 本轮明确冻结的新recipe为 `/7`、prompt `reading-source-scoped/4.3.0`、request `/8`、decoder `/7`、assessor `source-summary-assessment/1.1.0`；仍复用bundle2.1/3.1、producer1.1、wrapper2，不因语义行为新增无关字段版本。1.1新增assertion_frames依赖（共8），新有限规则为possible_current_action_as_future、possible_project_capacity_basis_loss，归属扩展仍possible_attribution_loss。旧 `/6`、prompt4.2、assessor1.0/7依赖/旧规则保持严格配对；生产默认仍 `/4`。这是工程实施的明确接口，不代表已通过真实新摘要或RF预测采用。
+
 ## 已经明确的根因
 
 1. 原始来源可用不代表摘要完整。M2共享准入已恢复客户链、已售清单、已开发数量；新摘要显式覆盖8任务，实际20条。子事实和语义仍须看独审，任务8/8不是全文召回。

@@ -1,0 +1,114 @@
+{
+  "schema_version": "atomic-production-independent-review/1",
+  "status": "PASS_ENGINEERING_SCOPE_AFTER_FIX",
+  "scope": "CWP explicit /7 offline recipe and artifact wiring; RF published-wire compatibility only",
+  "seal": "seal.json",
+  "fixed_findings": [
+    {
+      "id": "AP-01",
+      "severity": "P2",
+      "status": "FIXED",
+      "title": "Final recomputation silently defaulted atomic protocol to assessor 1.0",
+      "owners": [
+        "src/company_wiki/automation/narrative_summarize.py:_completed_result",
+        "src/company_wiki/automation/narrative_verify.py:_bundle"
+      ],
+      "reproduction": "new test_atomic_summary_artifacts.py first run: completed report validator 1.0 instead of 1.1; raw and projected bundle rejected as SUMMARY_INVALID; 3 RED before product fix",
+      "root_cause": "Both final assess_summary calls omitted protocol.assessor_version; helper default is deliberately historical 1.0. Decoder already ran 1.1.",
+      "fix": "Pass explicit protocol.assessor_version at both final source/claims recomputations.",
+      "regression": "12 permanent new artifact cases plus old and new runtime/artifact suites, 40 PASS."
+    }
+  ],
+  "open_findings": [],
+  "open_P1": 0,
+  "open_P2": 0,
+  "typing_fixes": [
+    "Annotate compact hint rows list",
+    "Narrow assessed prompt after format resolution in contracts",
+    "Narrow declared assessed prompt in verification"
+  ],
+  "verification": {
+    "cwp_tests": {
+      "status": "PASS",
+      "passed": 40,
+      "seconds": 6.89,
+      "log": "final-tests.log",
+      "modules": [
+        "test_atomic_summary_artifacts.py",
+        "test_atomic_summary_recipe.py",
+        "test_narrative_fidelity_artifacts.py",
+        "test_narrative_fidelity_runtime.py"
+      ]
+    },
+    "mypy": {
+      "status": "PASS",
+      "source_files": 11,
+      "log": "mypy.log"
+    },
+    "ruff": {
+      "status": "PASS",
+      "source_files": 11,
+      "test_files": 2,
+      "log": "ruff.log"
+    },
+    "rf_tests": {
+      "status": "PASS",
+      "passed": 57,
+      "seconds": 0.92,
+      "command": "CWP venv python -m pytest tests/test_assessed_narrative_consumer.py -q -p no:cacheprovider; PYTHONDONTWRITEBYTECODE=1; cwd RF"
+    },
+    "rf_actual_producer_wire": {
+      "status": "PASS",
+      "cases": 4,
+      "evidence": "rf-actual-producer-wire.json",
+      "repro": "probe_rf_wire.py"
+    },
+    "legacy_captured_bundle": {
+      "status": "PASS",
+      "evidence": "old-six-captured-replay.json",
+      "body_sha256": "c996577bbe4930bc12bd86deac68d3ed813dd2a372feee3989cc5aba9ac1d27b",
+      "prompt": "reading-source-scoped/4.2.0",
+      "assessor": "source-summary-assessment/1.0.0",
+      "diagnostics": 0
+    },
+    "old_request_gold": "Exact /4,/5,/6 instruction/data/input SHA fixture assertions pass.",
+    "risk_preservation": "Actual completed_result language observer same and uncertain branches preserve needs_review and final claims hash; new wrapper/bundle reject rehashed claims with erased risk flags; terminal rejects inconsistent diagnostic algebra."
+  },
+  "rf_review": {
+    "author_handoff_reviewed": true,
+    "actual_three_file_hashes_match_author_seal": true,
+    "prompt_assessor_pairs": [
+      [
+        "reading-source-scoped/4.2.0",
+        "source-summary-assessment/1.0.0"
+      ],
+      [
+        "reading-source-scoped/4.3.0",
+        "source-summary-assessment/1.1.0"
+      ]
+    ],
+    "dependency_counts": [
+      7,
+      8
+    ],
+    "rule_counts": [
+      5,
+      7
+    ],
+    "cwp_import_or_source_recompute": false,
+    "new_human_gate": false,
+    "forecast_receipt_status": "not_consumed"
+  },
+  "limitations": [
+    "No local HTTP integration assertion; parent owns integration scope.",
+    "No paid /7 generation, real /7 prose review, provider/cache acceptance, or RF forecast adoption signed.",
+    "Known finite diagnostic observations do not prove semantic entailment or subfact completeness; both statuses remain not_evaluated.",
+    "Independent base heads and actual working-file hashes are bound in seal; no commit or deployment performed."
+  ],
+  "model_posts": 0,
+  "downloads": 0,
+  "pdf_parses": 0,
+  "production_config_changes": 0,
+  "commits": 0,
+  "deployments": 0
+}

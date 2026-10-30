@@ -183,12 +183,11 @@ class NarrativeBatchRequest:
             selector = resolve_narrative_selector_version(_text(value["selector_version"], "selector_version"))
         projection = None
         if "reading_model_projection" in value:
-            from .narrative_model_scoped import SCOPED_MODEL_PROJECTION_VERSION
             from .narrative_model_extractive import EXTRACTIVE_MODEL_PROJECTION_VERSION
-            from .narrative_summary_protocols import FIDELITY_SCOPED
+            from .narrative_summary_protocols import SCOPED_PROJECTIONS
 
             projection = _text(value["reading_model_projection"], "reading_model_projection")
-            if projection not in {SCOPED_MODEL_PROJECTION_VERSION, EXTRACTIVE_MODEL_PROJECTION_VERSION,FIDELITY_SCOPED.projection}:
+            if projection not in (SCOPED_PROJECTIONS | {EXTRACTIVE_MODEL_PROJECTION_VERSION}):
                 raise ValueError("unsupported reading_model_projection")
             if selector != "0.9.0":
                 raise ValueError("explicit reading_model_projection requires selector_version 0.9.0")

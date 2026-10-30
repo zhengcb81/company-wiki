@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "path": ".planning\\summary-quality-20261030\\real-fidelity-v1\\phaseC-090-ac0779f182e9.bundle.json.gz",
+  "body_sha256": "c996577bbe4930bc12bd86deac68d3ed813dd2a372feee3989cc5aba9ac1d27b",
+  "prompt": "reading-source-scoped/4.2.0",
+  "assessor": "source-summary-assessment/1.0.0",
+  "diagnostic_count": 0,
+  "model_posts": 0
+}

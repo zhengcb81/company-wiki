@@ -1,0 +1,37 @@
+{
+  "status": "PASS",
+  "scope": "offline wire only; no forecast consumption",
+  "cases": [
+    {
+      "projection": "reading-model-input/6",
+      "projected": false,
+      "assessor": "source-summary-assessment/1.0.0",
+      "actual_producer_wire_accepted": true,
+      "mixed_assessor_rejected": true
+    },
+    {
+      "projection": "reading-model-input/6",
+      "projected": true,
+      "assessor": "source-summary-assessment/1.0.0",
+      "actual_producer_wire_accepted": true,
+      "mixed_assessor_rejected": true
+    },
+    {
+      "projection": "reading-model-input/7",
+      "projected": false,
+      "assessor": "source-summary-assessment/1.1.0",
+      "actual_producer_wire_accepted": true,
+      "mixed_assessor_rejected": true
+    },
+    {
+      "projection": "reading-model-input/7",
+      "projected": true,
+      "assessor": "source-summary-assessment/1.1.0",
+      "actual_producer_wire_accepted": true,
+      "mixed_assessor_rejected": true
+    }
+  ],
+  "model_posts": 0,
+  "downloads": 0,
+  "pdf_parses": 0
+}

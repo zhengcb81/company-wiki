@@ -142,33 +142,32 @@ def gold_observation(gold: dict, selected, envelope: dict) -> dict:
 
     view = None
     sent_keys = frozenset()
-    if envelope["schema_version"] in {"narrative-model-request/5", "narrative-model-request/6", "narrative-model-request/7"}:
+    from company_wiki.automation.narrative_summary_protocols import scoped_protocol_for_request
+    protocol = scoped_protocol_for_request(envelope['schema_version'])
+    if protocol is not None or envelope['schema_version'] == 'narrative-model-request/6':
         from company_wiki.automation.narrative_model_scoped import compile_scoped_model_view
 
         # Observe exactly the current compiler's material, including shared
         # references and task-local support/context. Only after byte-equivalent
         # material proof may the existing native-source oracle score selection.
-        if envelope["schema_version"] == "narrative-model-request/7":
-            from company_wiki.automation.narrative_summary_protocols import FIDELITY_SCOPED
-
-            max_claims = FIDELITY_SCOPED.plan_max_claims
-        else:
-            max_claims = max(1, len(selected.evidence_spans) * 2) if envelope["schema_version"] == "narrative-model-request/6" else 20
+        max_claims = protocol.plan_max_claims if protocol is not None else max(1,len(selected.evidence_spans)*2)
         view = compile_scoped_model_view(selected, max_claims=max_claims)
-        full_material = view.to_model_dict()
+        from company_wiki.automation.narrative_model_scoped import scoped_model_material
+        full_material = scoped_model_material(view,protocol) if protocol is not None else view.to_model_dict()
         sent_keys = frozenset(row["key"] for row in envelope["material"]["tasks"])
         if envelope["material"] != full_material:
             # The fidelity protocol sends all admitted tasks and has no paid
             # subset-repair path. Do not bless a dropped task as a retry.
-            assert envelope["schema_version"] != "narrative-model-request/7"
+            assert protocol is None or protocol.allows_subset
             # A coverage-repair retry sends only the still-uncovered tasks; its
             # material must equal the same compiler restricted to those keys.
             from dataclasses import replace
 
             full_keys = {row["key"] for row in full_material["tasks"]}
             assert sent_keys and sent_keys < full_keys
-            assert envelope["material"] == replace(
-                view, visible_keys=sent_keys).to_model_dict()
+            restricted = replace(view, visible_keys=sent_keys)
+            assert envelope['material'] == (scoped_model_material(restricted,protocol)
+                if protocol is not None else restricted.to_model_dict())
         assert view.plan.evidence_order == tuple(span.span_id for span in selected.evidence_spans)
         rows = [[span.span_id, span.raw_text] for span in selected.evidence_spans]
         actual_groups = _group_mapping(selected)

@@ -1,0 +1,47 @@
+{
+  "schema_version": "atomic-tools-independent-seal/1",
+  "status": "PASS_SCOPED_TOOL_HINT_ENGINEERING",
+  "sealed_at": "2026-10-30T12:23:02.196588+00:00",
+  "files": [
+    {
+      "path": "tools/document_understanding_benchmark/phase_c_runner.py",
+      "bytes": 96506,
+      "raw_sha256": "863bf98c0dd1d232128ab20237e12cbf4516420e206d6060e9405e0a81b33069",
+      "lf_sha256": "863bf98c0dd1d232128ab20237e12cbf4516420e206d6060e9405e0a81b33069"
+    },
+    {
+      "path": "tools/document_understanding_benchmark/phase_c_observer.py",
+      "bytes": 25728,
+      "raw_sha256": "463385dfc733bbacf1086d94cfa84c6183bb4a389b8768de9c6541d0d46bd4db",
+      "lf_sha256": "463385dfc733bbacf1086d94cfa84c6183bb4a389b8768de9c6541d0d46bd4db"
+    },
+    {
+      "path": "tests/test_phase_c_extractive.py",
+      "bytes": 19026,
+      "raw_sha256": "76de070ed71cbdba3d23e547783d386a19b5625e3e7dba4e83b56985ecdde381",
+      "lf_sha256": "76de070ed71cbdba3d23e547783d386a19b5625e3e7dba4e83b56985ecdde381"
+    },
+    {
+      "path": "tests/integration/test_narrative_fidelity_recovery.py",
+      "bytes": 6311,
+      "raw_sha256": "afca23e3c9141d42ebcbc6cd2538f4dea7c7f1c75dec0f65808033cc2a56510c",
+      "lf_sha256": "afca23e3c9141d42ebcbc6cd2538f4dea7c7f1c75dec0f65808033cc2a56510c"
+    },
+    {
+      "path": "tests/unit/test_narrative_frame_hints.py",
+      "bytes": 5497,
+      "raw_sha256": "54d42df6f2241b24fc426e9a61b2b884c19ba36f54d7393b00a94c65911f0449",
+      "lf_sha256": "54d42df6f2241b24fc426e9a61b2b884c19ba36f54d7393b00a94c65911f0449"
+    }
+  ],
+  "readonly_dependency_hashes": {
+    "src/company_wiki/automation/narrative_summary_protocols.py": "4a97efc847d2f634a2a1b03b65540a28f7b6f4a5fbf222e5f03c0c91daa0b356",
+    "src/company_wiki/automation/narrative_model_scoped.py": "962edd1842f0eee2906f5997cab8c6bb867000cb90c33968645c746c3624c4d9",
+    "src/company_wiki/automation/narrative_frame_hints.py": "ed952e4693e2792049ecd86977d777f16448f81f82878321eba2b0bb955ffa9c",
+    "src/company_wiki/automation/narrative_summary_assessment.py": "84ebfbe49413347d0a0f8018c4d8d054c249a3b86a2ae72f2f4eb8fa2391b651",
+    "src/company_wiki/automation/narrative_summary_execution.py": "1c4d8a955ec822be917000ef1a774b215bbfe9933c73b834be003d55b8fa9ca5",
+    "src/company_wiki/automation/narrative_model_caller.py": "4eacaee1476a073eba2f948b461278ff3c473ca6572418e488344d310b165b4f",
+    "src/company_wiki/automation/narrative_model_runtime.py": "89c71ca89939322271fc0e7e4bb3e02c3a8e3b70d7de950ab35c0dc62abdff5b",
+    "src/company_wiki/document_understanding/assertion_frames.py": "fd0013204643cefcee3136a3042d7bd2ab0459214a8708abb9ac8d7156138d91"
+  }
+}

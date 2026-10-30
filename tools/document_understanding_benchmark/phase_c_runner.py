@@ -881,13 +881,12 @@ def selector_versions(value: str | None) -> tuple[str, ...]:
 
 
 def reading_projection_for(selector_version: str, requested: str | None) -> str | None:
-    """One runner boundary: legacy v4 default; v5 and assessed v6 are explicit."""
+    """One runner boundary: legacy v4 default; registered recipes are explicit."""
     from company_wiki.automation.narrative_model_extractive import EXTRACTIVE_MODEL_PROJECTION_VERSION
     from company_wiki.automation.narrative_model_scoped import SCOPED_MODEL_PROJECTION_VERSION
-    from company_wiki.automation.narrative_summary_protocols import FIDELITY_SCOPED
+    from company_wiki.automation.narrative_summary_protocols import SCOPED_PROJECTIONS
 
-    if requested not in {None, SCOPED_MODEL_PROJECTION_VERSION, EXTRACTIVE_MODEL_PROJECTION_VERSION,
-                         FIDELITY_SCOPED.projection}:
+    if requested not in (SCOPED_PROJECTIONS | {None, EXTRACTIVE_MODEL_PROJECTION_VERSION}):
         raise ValueError("unsupported phase C reading model projection")
     return (requested or SCOPED_MODEL_PROJECTION_VERSION) if selector_version == "0.9.0" else None
 
@@ -904,16 +903,17 @@ def successful_model_observation(receipt, native, events, materials: Path, run_i
     from company_wiki.automation.narrative_summary_execution import extract_summary_execution
     from company_wiki.automation.narrative_model_extractive import EXTRACTIVE_MODEL_PROJECTION_VERSION
     from company_wiki.automation.narrative_summary_assessment import ASSESSMENT_SCHEMA
-    from company_wiki.automation.narrative_summary_protocols import FIDELITY_SCOPED
+    from company_wiki.automation.narrative_summary_protocols import scoped_protocol_for_projection
 
     executions = [extract_summary_execution({"schema_version": "narrative-terminal-receipt/1.0", "execution": item["execution"]})
                   for document in receipt.get("documents", [])
                   for item in document.get("model_diagnostics", []) if "execution" in item]
     if reading_model_projection == EXTRACTIVE_MODEL_PROJECTION_VERSION and not executions:
         raise ValueError("PHASE_C_EXTRACTIVE_EXECUTION_NOT_OBSERVED")
-    fidelity = reading_model_projection == FIDELITY_SCOPED.projection
+    protocol = scoped_protocol_for_projection(reading_model_projection)
+    fidelity = protocol is not None and protocol.assess_fidelity
     if fidelity and (not executions or any(
-        report["schema_version"] != ASSESSMENT_SCHEMA for report in executions
+        report["schema_version"] != ASSESSMENT_SCHEMA or report["validator"]["version"] != protocol.assessor_version for report in executions
     )):
         raise ValueError("PHASE_C_FIDELITY_ASSESSMENT_NOT_OBSERVED")
     assessment = executions[-1] if fidelity else None
@@ -971,6 +971,8 @@ def successful_model_observation(receipt, native, events, materials: Path, run_i
         }
         result["summary_assessment_observation"].update(
             report_sha256=canonical_json_hash(assessment),
+            assessor_version=assessment["validator"]["version"],
+            validator_implementation_sha256=assessment["validator"]["implementation_sha256"],
             report_origin="native_batch_receipt.model_diagnostics.execution",
         )
     return result
@@ -1723,7 +1725,8 @@ def loopback_draft(material, *, invalid_summary=False):
         return {"decisions": [{"task": task["key"],
             "priority": "invalid" if invalid_summary else "normal",
             "disposition": "consider"} for task in material["material"]["tasks"]]}
-    if material["schema_version"] in {"narrative-model-request/5", "narrative-model-request/7"}:
+    from company_wiki.automation.narrative_summary_protocols import scoped_protocol_for_request
+    if scoped_protocol_for_request(material['schema_version']) is not None:
         view = material["material"]
         task = view["tasks"][0]
         support = task.get("support_parts", view["task_defaults"]["support_parts"])
@@ -1835,6 +1838,7 @@ def loopback_preparation():
 
 
 def argument_parser() -> argparse.ArgumentParser:
+    from company_wiki.automation.narrative_model_runtime import DURABLE_PAID_RESPONSE_PROJECTIONS
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--mode", choices=("loopback", "live"), default="loopback")
     parser.add_argument("--sample", help="exact sample_id from the explicit preparation metadata")
@@ -1846,9 +1850,9 @@ def argument_parser() -> argparse.ArgumentParser:
                         help="New owned receipt directory; existing outputs are never replaced.")
     parser.add_argument("--consumer-projects", type=Path,
                         help="Explicit sibling FF/RF checkout root; omission records consumers NOT_RUN.")
-    parser.add_argument("--reading-model-projection", choices=("reading-model-input/4", "reading-model-input/5", "reading-model-input/6"),
+    parser.add_argument("--reading-model-projection", choices=tuple(sorted(DURABLE_PAID_RESPONSE_PROJECTIONS)),
                         default="reading-model-input/4",
-                        help="Selector 0.9 defaults to legacy v4; v5 ranking and v6 assessed fidelity are explicit.")
+                        help="Selector 0.9 defaults to legacy v4; other registered durable protocols are explicit.")
     parser.add_argument("--source-mode", choices=("isolated-copy", "registered_readonly"), default="isolated-copy",
                         help="Keep the historical local import, or register existing roots without copying raw bytes.")
     parser.add_argument("--source-catalog-config", type=Path,

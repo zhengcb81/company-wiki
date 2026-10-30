@@ -1471,13 +1471,11 @@ def _paid_summary_recovery_candidates(binding, run, jobs, runs):
     existing caller checks those bytes and exact request binding before use;
     any mismatch stays failed without acquiring another provider allowance.
     """
-    from .narrative_model_scoped import SCOPED_MODEL_PROJECTION_VERSION, SCOPED_PROMPT_VERSION
     from .narrative_model_extractive import EXTRACTIVE_MODEL_PROJECTION_VERSION, EXTRACTIVE_PROMPT_VERSION
-    from .narrative_summary_protocols import FIDELITY_SCOPED
+    from .narrative_summary_protocols import SCOPED_PROTOCOLS
     from .narrative_paid_response import PaidResponsePin, PaidResponseError
     recoverable_protocols = {
-        FIDELITY_SCOPED.projection:FIDELITY_SCOPED.prompt,
-        SCOPED_MODEL_PROJECTION_VERSION: SCOPED_PROMPT_VERSION,
+        **{protocol.projection: protocol.prompt for protocol in SCOPED_PROTOCOLS},
         EXTRACTIVE_MODEL_PROJECTION_VERSION: EXTRACTIVE_PROMPT_VERSION,
     }
     if run is None or run.blocked:

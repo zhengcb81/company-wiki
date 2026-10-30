@@ -2127,8 +2127,13 @@ class NarrativeBundle:
         return result
 
     def _validate(self) -> None:
-        from .narrative_summary_protocols import summary_bundle_format, FIDELITY_SCOPED
-        recipe=summary_bundle_format(self.summary.model.prompt_version if self.summary.model else self.versions.prompt)
+        from .narrative_summary_protocols import summary_bundle_format, scoped_protocol_for_prompt
+        prompt = self.summary.model.prompt_version if self.summary.model else self.versions.prompt
+        recipe=summary_bundle_format(prompt)
+        protocol = None
+        if recipe.assessed:
+            assert prompt is not None
+            protocol = scoped_protocol_for_prompt(prompt)
         expected_schema=recipe.projected_schema if self.subject_binding is not None else recipe.raw_schema
         if self.schema_version!=expected_schema:
             raise NarrativeContractError('bundle schema differs from its summary protocol')
@@ -2138,13 +2143,15 @@ class NarrativeBundle:
                     or self.versions.model is not None or self.versions.bundle_producer!=recipe.producer):
                 raise NarrativeContractError('assessed skip bundle contains model or assessment')
         elif recipe.assessed:
+            assert protocol is not None
             from .narrative_summary_assessment import validate_assessment_material, validate_assessment_quality
             if (self.versions.bundle_producer!=recipe.producer or self.summary.draft is None
                     or self.summary.model is None):
                 raise NarrativeContractError('assessed bundle producer or summary is invalid')
             try:
                 report=validate_assessment_material(self.summary_assessment,self.evidence_spans,self.reading_context,
-                    self.summary.to_dict()['draft']['claims'],plan_max_claims=FIDELITY_SCOPED.plan_max_claims)
+                    self.summary.to_dict()['draft']['claims'],plan_max_claims=protocol.plan_max_claims,
+                    assessor_version=protocol.assessor_version)
                 validate_assessment_quality(report,self.summary.to_dict()['draft']['claims'],self.summary.draft.status)
                 if (self.versions.prompt!=self.summary.model.prompt_version
                         or self.versions.model!=self.summary.model.model_id

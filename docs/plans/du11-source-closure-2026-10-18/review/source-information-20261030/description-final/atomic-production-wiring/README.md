@@ -1,0 +1,15 @@
+# Atomic scoped summary recipe engineering
+
+Shared finite scoped registry owns /4, /6, /7 descriptor mapping; extractive /5 retains its separate family. New /7=prompt4.3/request8/decoder7, compact source_frame_hints and assessor1.1, still bundle2.1/3.1/producer1.1/wrapper2. Old /4/5/6 actual synthetic source selection instruction/data/input SHA gold remain exact. Old recorded real /6 c996 artifact validates with1.0 and its0 original diagnostics; new rules never rewrite it. Current module implementation fingerprints can legitimately change; original history hashes/manifests stay intact, not forged for cache hits.
+
+Hints use source_key/clause ordinal and finite markers, never copied body/quote/locator, only true factual support, shared source framed once; per-source64/global256 annotation bounds remain visible. Unknown hints do not drop tasks or establish business facts. Full actual HTTP body including hints is budgeted and request-hashed before any POST. Same scoped builder supplies observer material, no second source/admission algorithm.
+
+New atomic prompt requires independently usable actors/parties/reporters/conditions, observed ongoing activity is actual, project capacity is distinguished from commissioning/output. Assessor1.1 extends finite possible diagnostics for ongoing-as-future and lost project-capacity basis; information-source attribution follows a local coordinated scope. No semantic/subfact approval is claimed.
+
+TDD4RED/5PASS→24 relatedPASS; independent core40P/6.89s with12 permanent atomic artifact tests,11source mypy/ruff. Fixed two final-stage assessor defaults (3RED→pass), preserving risks after language/quality projection. ROOT offline producer→RF raw/projected /6,/7 four wire probes and mismatch checks pass; RF independently57P, author related262P and fixed CI15source mypy. Tools independent37P/2.55s and5paths ruff, no unresolved scope issues.
+
+Host old/new HTTP and original paid recovery4P/57.12s; after stronger terminal assessor/crossrun body SHA assertions, affected2HTTP cases rerun2P/32.65s. Both protocols publish/read via public logical refs and reuse same/cross-run with one request total. Initial intermediate /7 HANDLER_EXCEPTION remains documented from omitted assessor propagation; no assertion removed/timeouts raised and no external model called for these tests.
+
+RF06dc3ed5 published with normal pre-push595P/1skip/36subtests61.78s, exact CI receipt attached. Only its observation runtime module deployed through canonical installer, repeat0writes,2fresh processes×4old/new raw/projected cases pass; preexisting assurance/output retained.
+
+This accepts engineering only. Real /7 prose, actual paid activation/restart/crossrun and actual company forecast adoption still require the next nodes. Default remains/4. Original real /6 v1 still partial3P2, not retroactively corrected. Next a bounded actual configured /7 IR summary with8existing checkpoints and independent20-style clause review; no quota increase/retranslation/raw copies. Then RF summary-use lineage and a genuine same-company native model, never a renamed fixture.

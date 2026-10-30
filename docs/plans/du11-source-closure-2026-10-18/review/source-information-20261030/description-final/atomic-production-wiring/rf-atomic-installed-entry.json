@@ -1,0 +1,20 @@
+{
+  "status": "PASS",
+  "repeat_zero_writes": true,
+  "cases_per_process": 4,
+  "fresh_processes": [
+    {
+      "destination": "C:\\Users\\郑曾波\\.agents\\skills",
+      "exit": 0,
+      "stdout": "PASS 4 installed old/new raw/projected wire cases\n",
+      "stderr": ""
+    },
+    {
+      "destination": "C:\\Users\\郑曾波\\.codex\\skills",
+      "exit": 0,
+      "stdout": "PASS 4 installed old/new raw/projected wire cases\n",
+      "stderr": ""
+    }
+  ],
+  "preexisting_wip_unchanged": true
+}

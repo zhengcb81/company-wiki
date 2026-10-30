@@ -21,6 +21,8 @@ from .narrative_model_scoped import compile_scoped_material_view
 
 ASSESSMENT_SCHEMA = 'summary-assessment/1'
 ASSESSMENT_VERSION = 'source-summary-assessment/1.0.0'
+ATOMIC_ASSESSMENT_VERSION = 'source-summary-assessment/1.1.0'
+ASSESSMENT_VERSIONS = frozenset({ASSESSMENT_VERSION, ATOMIC_ASSESSMENT_VERSION})
 MAX_DIAGNOSTICS = 64
 ASSESSMENT_MAX_BYTES = 64 * 1024
 _PARTS = re.compile(r'(?<!\d)[,，]|[,，](?!\d)|[。；;!?]|(?<=[.!?])\s+')
@@ -42,8 +44,11 @@ _FUNCTION_WORDS = frozenset('a an the this that these those our their its we the
                            'to for of in on by and or not'.split())
 
 
-def assessment_identity() -> dict[str, Any]:
+def assessment_identity(version: str | None = None) -> dict[str, Any]:
     """A software recipe, not a copied source or a human review receipt."""
+    version = version or ASSESSMENT_VERSION
+    if version not in ASSESSMENT_VERSIONS:
+        raise ValueError('unknown summary assessor version')
     from company_wiki.document_normalization import text_matching
     from company_wiki.document_understanding import summary_tasks, source_cards
     from company_wiki.source_catalog import narrative_evidence
@@ -52,9 +57,12 @@ def assessment_identity() -> dict[str, Any]:
              'scoped_view':narrative_model_scoped,'encoding':models,'claim_roles':narrative_evidence}
     files={key:Path(module.__file__) for key,module in modules.items() if module.__file__}
     files['assessment']=Path(__file__)
+    if version == ATOMIC_ASSESSMENT_VERSION:
+        from company_wiki.document_understanding import assertion_frames
+        files['assertion_frames'] = Path(assertion_frames.__file__)
     dependencies={key:hashlib.sha256(path.read_bytes().replace(b'\r\n',b'\n')).hexdigest()
                   for key,path in files.items()}
-    return {'version':ASSESSMENT_VERSION,'implementation_sha256':canonical_json_hash(dependencies),
+    return {'version':version,'implementation_sha256':canonical_json_hash(dependencies),
             'dependencies':dependencies}
 
 
@@ -110,20 +118,47 @@ def prose_diagnostics(source: str, claim: str, modality: str) -> list[dict[str, 
     return [dict(rule_code=code) for code in dict.fromkeys(row['rule_code'] for row in result)]
 
 
+def atomic_prose_diagnostics(source: str, claim: str, modality: str) -> list[dict[str, str]]:
+    """Additional finite observations; v1 rules above retain their interpretation."""
+    from company_wiki.document_understanding.assertion_frames import source_assertion_frames
+    result = prose_diagnostics(source, claim, modality)
+    claim_frames = source_assertion_frames(claim)
+    for frame in source_assertion_frames(source):
+        matches = [part for part in claim_frames
+                   if _same_proposition(frame.matching_text, part.matching_text)]
+        if not matches:
+            continue
+        if frame.ongoing_activity and modality == 'planned':
+            result.append({'rule_code': 'possible_current_action_as_future'})
+        if frame.reporting_prefix and not any(part.reporting_prefix for part in matches):
+            result.append({'rule_code': 'possible_attribution_loss'})
+        if (frame.quantity_basis == 'project_capacity_specification' and modality == 'actual'
+                and any(re.search(r'产能|\bcapacity\b', part.matching_text, re.I)
+                        and part.quantity_basis != 'project_capacity_specification' for part in matches)):
+            result.append({'rule_code': 'possible_project_capacity_basis_loss'})
+    return [dict(rule_code=code) for code in dict.fromkeys(row['rule_code'] for row in result)]
+
+
 def assess_summary(
     selected: NarrativeSelectResult, claims: Sequence[Mapping[str, Any]], *,
     requested_task_keys: Sequence[str], plan_max_claims: int,
+    assessor_version: str | None = None,
 ) -> dict[str, Any]:
     """Bind final retained clauses to exact source scopes, not claim-ID aliases."""
     return assess_summary_material(selected.evidence_spans,selected.reading_context,claims,
-        requested_task_keys=requested_task_keys,plan_max_claims=plan_max_claims)
+        requested_task_keys=requested_task_keys,plan_max_claims=plan_max_claims,
+        assessor_version=assessor_version)
 
 
 def assess_summary_material(
     evidence_spans: Sequence[EvidenceSpan], reading_context: Mapping[str,Any] | None,
     claims: Sequence[Mapping[str,Any]], *, requested_task_keys: Sequence[str], plan_max_claims: int,
+    assessor_version: str | None = None,
 ) -> dict[str,Any]:
     """Consume the same owned source material from a selection or final bundle."""
+    version = assessor_version or ASSESSMENT_VERSION
+    identity = assessment_identity(version)
+    diagnostics_for_prose = atomic_prose_diagnostics if version == ATOMIC_ASSESSMENT_VERSION else prose_diagnostics
     view=compile_scoped_material_view(evidence_spans,reading_context,max_claims=plan_max_claims)
     admission=view.to_binding()['source_admission']
     admitted=view.admitted_task_keys
@@ -160,11 +195,11 @@ def assess_summary_material(
         task=matches[0]
         emitted.add(task.key)
         for sid in task.support_ids:
-            for row in prose_diagnostics(known[sid].raw_text or '',claim['text'],claim['modality']):
+            for row in diagnostics_for_prose(known[sid].raw_text or '',claim['text'],claim['modality']):
                 record({'task_key':task.key,'claim_id':claim['claim_id'],
                                     'source_span_id':sid,**row})
     order=[task.key for task in view.plan.tasks]
-    result={'schema_version':ASSESSMENT_SCHEMA,'validator':assessment_identity(),
+    result={'schema_version':ASSESSMENT_SCHEMA,'validator':identity,
             'source_plan_sha256':view.plan.binding_sha256,
             'plan_max_claims':plan_max_claims,
             'source_admission_sha256':canonical_json_hash(admission),
@@ -222,9 +257,12 @@ def validate_assessment_wire(value: Any, claims: Sequence[Mapping[str,Any]] | No
         require(report['claims_sha256']==canonical_json_hash(list(claims)))
     validator=report['validator']
     require(isinstance(validator,dict) and set(validator)=={'version','implementation_sha256','dependencies'})
-    require(validator['version']==ASSESSMENT_VERSION)
+    require(isinstance(validator['version'],str) and validator['version'] in ASSESSMENT_VERSIONS)
     deps=validator['dependencies']
-    require(isinstance(deps,dict) and set(deps)=={'matching','task_plan','admission','scoped_view','encoding','claim_roles','assessment'})
+    dep_keys = {'matching','task_plan','admission','scoped_view','encoding','claim_roles','assessment'}
+    if validator['version'] == ATOMIC_ASSESSMENT_VERSION:
+        dep_keys.add('assertion_frames')
+    require(isinstance(deps,dict) and set(deps)==dep_keys)
     require(all(sha(digest) for digest in deps.values()))
     require(validator['implementation_sha256']==canonical_json_hash(deps))
     keys={}
@@ -271,6 +309,8 @@ def validate_assessment_wire(value: Any, claims: Sequence[Mapping[str,Any]] | No
     require(len(risks)==len(set(risks)) and bool(risks)==bool(count))
     rules={'possible_attribution_loss','possible_negation_degree_loss','possible_modality_mismatch',
            'unmatched_claim_scope','ambiguous_claim_scope'}
+    if validator['version'] == ATOMIC_ASSESSMENT_VERSION:
+        rules |= {'possible_current_action_as_future', 'possible_project_capacity_basis_loss'}
     for row in diagnostics:
         require(isinstance(row,dict) and set(row)=={'task_key','claim_id','source_span_id','rule_code'})
         require(isinstance(row['rule_code'],str) and row['rule_code'] in rules and row['claim_id'] in risks)
@@ -286,12 +326,17 @@ def validate_assessment_wire(value: Any, claims: Sequence[Mapping[str,Any]] | No
 def validate_assessment_material(
     value: Any, evidence_spans: Sequence[EvidenceSpan], reading_context: Mapping[str,Any] | None,
     claims: Sequence[Mapping[str,Any]], *, plan_max_claims: int,
+    assessor_version: str | None = None,
 ) -> dict[str,Any]:
     """Recompute all source observations; recorded software recipe stays historical."""
     report=validate_assessment_wire(value,claims)
+    version = report['validator']['version']
+    if assessor_version is not None and assessor_version != version:
+        raise ValueError('summary assessor differs from the declared protocol')
     view=compile_scoped_material_view(evidence_spans,reading_context,max_claims=plan_max_claims)
     expected=assess_summary_material(evidence_spans,reading_context,claims,
-        requested_task_keys=[task.key for task in view.model_tasks],plan_max_claims=plan_max_claims)
+        requested_task_keys=[task.key for task in view.model_tasks],plan_max_claims=plan_max_claims,
+        assessor_version=version)
     # This field records the producing implementation, not permission or a
     # claim that today's installed files are identical to immutable history.
     expected['validator']=report['validator']

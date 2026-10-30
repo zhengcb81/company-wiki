@@ -1,0 +1,36 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.cwpf31atomicr2", "requested_basetemp_len": 50, "cwd_len": 34, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\֣����\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 60 items / 2 deselected / 58 selected
+
+tests\unit\test_atomic_summary_recipe.py .........                       [ 15%]
+tests\unit\test_narrative_fidelity_artifacts.py ..............           [ 39%]
+tests\unit\test_phase_c_registered_consumer.py ...F.......               [ 58%]
+tests\test_phase_c_extractive.py ............F...........                [100%]
+
+================================== FAILURES ===================================
+_________ test_fidelity_option_survives_runner_projection_resolution __________
+tests\unit\test_phase_c_registered_consumer.py:60: in test_fidelity_option_survives_runner_projection_resolution
+    assert runner.reading_projection_for("0.9.0", FIDELITY_SCOPED.projection) == FIDELITY_SCOPED.projection
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tools\document_understanding_benchmark\phase_c_runner.py:890: in reading_projection_for
+    FIDELITY_SCOPED.projection}:
+    ^^^^^^^^^^^^^^^
+E   NameError: name 'FIDELITY_SCOPED' is not defined
+__ test_default_projection_uses_v4_and_explicit_v5_and_legacy_stay_separate ___
+tests\test_phase_c_extractive.py:172: in test_default_projection_uses_v4_and_explicit_v5_and_legacy_stay_separate
+    assert runner.reading_projection_for("0.9.0", None) == "reading-model-input/4"
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+tools\document_understanding_benchmark\phase_c_runner.py:890: in reading_projection_for
+    FIDELITY_SCOPED.projection}:
+    ^^^^^^^^^^^^^^^
+E   NameError: name 'FIDELITY_SCOPED' is not defined
+=========================== short test summary info ===========================
+FAILED tests/unit/test_phase_c_registered_consumer.py::test_fidelity_option_survives_runner_projection_resolution
+FAILED tests/test_phase_c_extractive.py::test_default_projection_uses_v4_and_explicit_v5_and_legacy_stay_separate
+================= 2 failed, 56 passed, 2 deselected in 6.32s ==================

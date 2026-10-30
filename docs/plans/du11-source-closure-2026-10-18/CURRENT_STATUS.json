@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-30",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_REAL_FIDELITY_P2_SCOPE_STATE_ROOT_FIX_BEFORE_RF_ACTUAL_ADOPTION",
+  "overall_status": "ACTIVE_ATOMIC_RECIPE_ENGINEERING_REVIEWED_REAL7_FIDELITY_RECOVERY_AND_RF_ADOPTION_NEXT",
   "parallel_packages_20261025": {
     "status": "W16_W17_W18_ROOT_COMPONENT_ACCEPTED_MERGED",
     "entry": "harness_lanes/20261025/README.md",
@@ -26,13 +26,13 @@
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
-  "last_code_commit": "ee27c962d120febcff62b50fb350f6b41650cac6",
+  "last_code_commit": "f1b51f0657cc97776db37b8848e5f707d1e7df94",
   "code_ci": {
-    "id": 41048837091,
-    "head_sha": "ee27c962d120febcff62b50fb350f6b41650cac6",
+    "id": 41052385243,
+    "head_sha": "f1b51f0657cc97776db37b8848e5f707d1e7df94",
     "status": "completed",
     "conclusion": "success",
-    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41048837091"
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41052385243"
   },
   "formal_v4_offline_selection_replay_20261025": {
     "status": "EXACT_REPRODUCED_NO_PAID_CALL",
@@ -2344,7 +2344,7 @@
     "published": true,
     "push_failure": "47 targets /392 collected /600s; two regressions being root-fixed, not waived by narrower daily gate"
   },
-  "next_action": "Wire explicit atomic scoped recipe preserving legacy input/assessor semantics; new compact hints and1.1 assessor, full artifact/cache/RF wire; then real quality recheck before actual forecast adoption.",
+  "next_action": "Publish atomic recipe engineering, then actual configured /7 bounded summary8 checkpoints + paid response activation/restart/crossrun no repeat POST and independent clause review; then genuine RF summary-use and native model adoption.",
   "c3_runtime_recovery_20261026": {
     "entry": "review/pdf-c3-20261026/RUNTIME_RECOVERY.md",
     "environment_independent": "PASS_ZERO_OPEN_25_TESTS_AND_REAL_WORKER_ENTRYPOINTS",
@@ -4003,5 +4003,25 @@
     "real_source_hints": 3,
     "model_posts": 0,
     "entry": "review/source-information-20261030/description-final/source-assertion-frames/README.md"
+  },
+  "atomic_summary_recipe_20261030": {
+    "status": "ENGINEERING_INDEPENDENT_PASS_PUBLICATION_IN_PROGRESS_REAL7_NOT_RUN",
+    "projection": "reading-model-input/7",
+    "prompt": "reading-source-scoped/4.3.0",
+    "assessor": "source-summary-assessment/1.1.0",
+    "core_tests": 40,
+    "tool_tests": 37,
+    "host_final_http_tests": 2,
+    "host_final_http_seconds": 32.65,
+    "default": "reading-model-input/4",
+    "rf_commit": "06dc3ed5a3bdf4aef64cc47215d9c8b86d848204",
+    "rf_ci": {
+      "id": 41055153644,
+      "head_sha": "06dc3ed5a3bdf4aef64cc47215d9c8b86d848204",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/41055153644"
+    },
+    "entry": "review/source-information-20261030/description-final/atomic-production-wiring/README.md"
   }
 }

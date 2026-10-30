@@ -1,0 +1,145 @@
+{
+  "schema_version": "atomic-production-independent-seal/1",
+  "observed_at": "2026-10-30T12:16:18.408716+00:00",
+  "scope": "offline engineering only; no real /7 or RF forecast adoption",
+  "cwp": {
+    "root": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+    "base_head": "f1b51f0657cc97776db37b8848e5f707d1e7df94",
+    "owned_files": [
+      {
+        "path": "src/company_wiki/automation/narrative_summary_protocols.py",
+        "bytes": 2929,
+        "raw_sha256": "4a97efc847d2f634a2a1b03b65540a28f7b6f4a5fbf222e5f03c0c91daa0b356",
+        "lf_sha256": "4a97efc847d2f634a2a1b03b65540a28f7b6f4a5fbf222e5f03c0c91daa0b356"
+      },
+      {
+        "path": "src/company_wiki/automation/narrative_model_runtime.py",
+        "bytes": 3771,
+        "raw_sha256": "89c71ca89939322271fc0e7e4bb3e02c3a8e3b70d7de950ab35c0dc62abdff5b",
+        "lf_sha256": "89c71ca89939322271fc0e7e4bb3e02c3a8e3b70d7de950ab35c0dc62abdff5b"
+      },
+      {
+        "path": "src/company_wiki/automation/narrative_model_scoped.py",
+        "bytes": 31742,
+        "raw_sha256": "962edd1842f0eee2906f5997cab8c6bb867000cb90c33968645c746c3624c4d9",
+        "lf_sha256": "dc668e423fa886270ce492b86102cbcae95e989a750a3aeea840ee31fa8bd1f2"
+      },
+      {
+        "path": "src/company_wiki/automation/narrative_frame_hints.py",
+        "bytes": 1988,
+        "raw_sha256": "ed952e4693e2792049ecd86977d777f16448f81f82878321eba2b0bb955ffa9c",
+        "lf_sha256": "ed952e4693e2792049ecd86977d777f16448f81f82878321eba2b0bb955ffa9c"
+      },
+      {
+        "path": "src/company_wiki/automation/narrative_summary_assessment.py",
+        "bytes": 20541,
+        "raw_sha256": "84ebfbe49413347d0a0f8018c4d8d054c249a3b86a2ae72f2f4eb8fa2391b651",
+        "lf_sha256": "84ebfbe49413347d0a0f8018c4d8d054c249a3b86a2ae72f2f4eb8fa2391b651"
+      },
+      {
+        "path": "src/company_wiki/automation/narrative_contracts.py",
+        "bytes": 102958,
+        "raw_sha256": "1e37cd191e827961088c069dfbcfbee55dfea6ba1b92897688658a64cd6dc4ea",
+        "lf_sha256": "1e37cd191e827961088c069dfbcfbee55dfea6ba1b92897688658a64cd6dc4ea"
+      },
+      {
+        "path": "src/company_wiki/automation/narrative_summary_execution.py",
+        "bytes": 16230,
+        "raw_sha256": "1c4d8a955ec822be917000ef1a774b215bbfe9933c73b834be003d55b8fa9ca5",
+        "lf_sha256": "1c4d8a955ec822be917000ef1a774b215bbfe9933c73b834be003d55b8fa9ca5"
+      },
+      {
+        "path": "src/company_wiki/automation/narrative_verify.py",
+        "bytes": 21307,
+        "raw_sha256": "a0fa995f6e62137da6a069a95238ae6ba629067f0c156566cda3923d11733735",
+        "lf_sha256": "a0fa995f6e62137da6a069a95238ae6ba629067f0c156566cda3923d11733735"
+      },
+      {
+        "path": "src/company_wiki/automation/narrative_summarize.py",
+        "bytes": 24530,
+        "raw_sha256": "0d808100766b15d250fb3eeec6bbaa8f95084789cf4afd67ce846292b10c65bc",
+        "lf_sha256": "0d808100766b15d250fb3eeec6bbaa8f95084789cf4afd67ce846292b10c65bc"
+      },
+      {
+        "path": "src/company_wiki/automation/narrative_batch_request.py",
+        "bytes": 15239,
+        "raw_sha256": "fc019a855607680f439a6449df77efd2c4505f43e29f496ce500a162f04358f2",
+        "lf_sha256": "fc019a855607680f439a6449df77efd2c4505f43e29f496ce500a162f04358f2"
+      },
+      {
+        "path": "src/company_wiki/automation/narrative_batch.py",
+        "bytes": 104702,
+        "raw_sha256": "c8146bdebcdab1539b9ad384515aab58ef27ca850a21d1719076d8d435f3d0d3",
+        "lf_sha256": "c8146bdebcdab1539b9ad384515aab58ef27ca850a21d1719076d8d435f3d0d3"
+      },
+      {
+        "path": "tests/unit/test_atomic_summary_recipe.py",
+        "bytes": 3781,
+        "raw_sha256": "6f0628a337fbbe1478063bd54929f72cbf8c9733aae9b9ab356836ae8ee5cc1a",
+        "lf_sha256": "6f0628a337fbbe1478063bd54929f72cbf8c9733aae9b9ab356836ae8ee5cc1a"
+      },
+      {
+        "path": "tests/unit/test_atomic_summary_artifacts.py",
+        "bytes": 8822,
+        "raw_sha256": "f698aa5d3cd90a621f1df6c416bb20f7ae070320d69a74ecb3d3572fe3d4debc",
+        "lf_sha256": "f698aa5d3cd90a621f1df6c416bb20f7ae070320d69a74ecb3d3572fe3d4debc"
+      },
+      {
+        "path": "tests/fixtures/atomic_recipe_legacy_requests.json",
+        "bytes": 24570,
+        "raw_sha256": "2be3eaebf88763484324162d4d20a39042320a0b7ee8d3d0520fc86b6568b53d",
+        "lf_sha256": "637098faecaea0996026d43f86e60be461ed09e34506ecdd4950fe6f0f2a0e9f"
+      }
+    ],
+    "readonly_compatibility_files": [
+      {
+        "path": "src/company_wiki/automation/narrative_generation.py",
+        "bytes": 27421,
+        "raw_sha256": "4fcc792d7a949c19ffe86bb952e9902fae35a4653281901b65152540d22d4e2f",
+        "lf_sha256": "da4a53c5e000d063735dad1ac9a561c57df6900b28c2bced8b43e7066003f61d"
+      },
+      {
+        "path": "src/company_wiki/automation/narrative_projection.py",
+        "bytes": 25911,
+        "raw_sha256": "fa23c5520f386310ec0b7a5b149c4157967cdcec2d9d0d1a91658e093698c1dd",
+        "lf_sha256": "97e92c507d165289bac0768a60af814d7d940b12d83fb3c44a9c3adb3eb232da"
+      },
+      {
+        "path": "src/company_wiki/document_understanding/assertion_frames.py",
+        "bytes": 7842,
+        "raw_sha256": "fd0013204643cefcee3136a3042d7bd2ab0459214a8708abb9ac8d7156138d91",
+        "lf_sha256": "fd0013204643cefcee3136a3042d7bd2ab0459214a8708abb9ac8d7156138d91"
+      }
+    ]
+  },
+  "rf": {
+    "root": "C:\\Users\\郑曾波\\Projects\\revenue-forecast",
+    "base_head": "4bbf4528e108142784c81f857eb9f9ab81dfa89a",
+    "files": [
+      {
+        "path": "scripts/narrative_summary_observations.py",
+        "bytes": 10141,
+        "raw_sha256": "2b5ae57c923f14f6db6f64adbc47bd57a7c883fca9b20847aa01d1881c9ac94a",
+        "lf_sha256": "2b5ae57c923f14f6db6f64adbc47bd57a7c883fca9b20847aa01d1881c9ac94a"
+      },
+      {
+        "path": "scripts/company_wiki_narrative_contracts.py",
+        "bytes": 71902,
+        "raw_sha256": "e606b3ceacebd49681d566bc577f69d0e546587db89316a95fcd42400c73ca53",
+        "lf_sha256": "e606b3ceacebd49681d566bc577f69d0e546587db89316a95fcd42400c73ca53"
+      },
+      {
+        "path": "tests/test_assessed_narrative_consumer.py",
+        "bytes": 18789,
+        "raw_sha256": "6575fa465c6ce6d91329cc25c642e006c095d4c46c66932801f7ad0f8b02560c",
+        "lf_sha256": "6575fa465c6ce6d91329cc25c642e006c095d4c46c66932801f7ad0f8b02560c"
+      }
+    ],
+    "matches_author_final_seal": true
+  },
+  "model_posts": 0,
+  "downloads": 0,
+  "pdf_parses": 0,
+  "commits": 0,
+  "deployments": 0
+}

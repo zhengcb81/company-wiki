@@ -54,7 +54,7 @@ def test_mother_budget_rejects_invalid_accounting(value):
         runner.mother_budget_fits(totals, tokens_bound=1, micro_usd_bound=1)
 
 
-@pytest.mark.parametrize("version", ["reading-model-input/4", VERSION, "reading-model-input/6"])
+@pytest.mark.parametrize("version", ["reading-model-input/4", VERSION, "reading-model-input/6", "reading-model-input/7"])
 def test_gold_observer_validates_the_actual_scoped_request_and_rejects_changed_material(version):
     from copy import deepcopy
     from tools.document_understanding_benchmark.phase_c_observer import gold_observation
@@ -75,24 +75,67 @@ def test_gold_observer_validates_the_actual_scoped_request_and_rejects_changed_m
         gold_observation(gold, source, changed)
 
 
-def test_fidelity_observer_rejects_an_otherwise_valid_partial_task_material():
+@pytest.mark.parametrize('version', ['reading-model-input/6', 'reading-model-input/7'])
+def test_fidelity_observer_rejects_an_otherwise_valid_partial_task_material(version):
     from dataclasses import replace
-    from company_wiki.automation.narrative_model_scoped import compile_scoped_model_view
-    from company_wiki.automation.narrative_summary_protocols import FIDELITY_SCOPED
+    from company_wiki.automation.narrative_model_scoped import compile_scoped_model_view, scoped_model_material
+    from company_wiki.automation.narrative_summary_protocols import scoped_protocol_for_projection
     from tools.document_understanding_benchmark.phase_c_observer import gold_observation
 
     source = selected(3)
+    protocol = scoped_protocol_for_projection(version)
     envelope = json.loads(build_model_request(
-        source, reading_projection_version=FIDELITY_SCOPED.projection).data_json)
-    view = compile_scoped_model_view(source, max_claims=FIDELITY_SCOPED.plan_max_claims)
+        source, reading_projection_version=version).data_json)
+    view = compile_scoped_model_view(source, max_claims=protocol.plan_max_claims)
     tasks = envelope["material"]["tasks"]
     assert len(tasks) > 1
-    envelope["material"] = replace(view, visible_keys=frozenset({tasks[0]["key"]})).to_model_dict()
+    envelope["material"] = scoped_model_material(replace(view, visible_keys=frozenset({tasks[0]["key"]})), protocol)
     gold = {"facts": [{"id": "source-check", "target_kind": "required_business",
         "any_support_sets": [[{"page": source.evidence_spans[0].coordinates.page_number,
             "exact_quote": source.evidence_spans[0].raw_text}]]}]}
     with pytest.raises(AssertionError):
         gold_observation(gold, source, envelope)
+
+
+@pytest.mark.parametrize('fault', ['missing', 'changed'])
+def test_atomic_observer_does_not_certify_missing_or_altered_frame_hints(fault):
+    from copy import deepcopy
+    from tools.document_understanding_benchmark.phase_c_observer import gold_observation
+
+    source = selected(2, text_suffix='甲方正在完善服务网络。')
+    envelope = json.loads(build_model_request(source, reading_projection_version='reading-model-input/7').data_json)
+    assert envelope['material']['source_frame_hints']['sources']
+    altered = deepcopy(envelope)
+    if fault == 'missing':
+        del altered['material']['source_frame_hints']
+    else:
+        altered['material']['source_frame_hints']['sources'] = {}
+    gold = {'facts': [{'id': 'source-check', 'target_kind': 'required_business',
+        'any_support_sets': [[{'page': source.evidence_spans[0].coordinates.page_number,
+            'exact_quote': source.evidence_spans[0].raw_text}]]}]}
+    with pytest.raises(AssertionError):
+        gold_observation(gold, source, altered)
+
+
+@pytest.mark.parametrize('projection', ['reading-model-input/6', 'reading-model-input/7'])
+@pytest.mark.parametrize('wrong_assessor', [False, True])
+def test_success_observation_requires_recipe_assessor_and_preserves_its_identity(tmp_path, projection, wrong_assessor):
+    from unit.test_atomic_summary_artifacts import materials
+    from company_wiki.automation.narrative_summary_protocols import scoped_protocol_for_projection
+
+    report_version = ('reading-model-input/7' if projection == 'reading-model-input/6' else 'reading-model-input/6') if wrong_assessor else projection
+    _, _, report = materials(version=report_version)
+    receipt = {'documents': [{'model_diagnostics': [{'execution': report}]}]}
+    if wrong_assessor:
+        with pytest.raises(ValueError, match='PHASE_C_FIDELITY_ASSESSMENT_NOT_OBSERVED'):
+            runner.successful_model_observation(receipt, [], [], tmp_path, 'run', reading_model_projection=projection)
+    else:
+        result = runner.successful_model_observation(receipt, [], [], tmp_path, 'run', reading_model_projection=projection)
+        observation = result['summary_assessment_observation']
+        assert observation['assessor_version'] == scoped_protocol_for_projection(projection).assessor_version
+        assert observation['validator_implementation_sha256'] == report['validator']['implementation_sha256']
+        assert observation['semantic_status'] == observation['subfact_coverage_status'] == 'not_evaluated'
+        assert result['source_card_execution'] is None
 
 
 def test_observer_adapts_v3_context_membership_for_the_independent_oracle():

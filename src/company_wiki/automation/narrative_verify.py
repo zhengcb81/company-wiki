@@ -372,8 +372,9 @@ class NarrativeVerifyHandler:
         *, reading_projection_version: str | None = None,
     ) -> NarrativeBundle:
         summary_raw = summary.to_dict()
-        from .narrative_summary_protocols import summary_bundle_format, FIDELITY_SCOPED
-        declared_prompt=(FIDELITY_SCOPED.prompt if reading_projection_version==FIDELITY_SCOPED.projection
+        from .narrative_summary_protocols import summary_bundle_format, scoped_protocol_for_projection, scoped_protocol_for_prompt
+        declared = scoped_protocol_for_projection(reading_projection_version)
+        declared_prompt=(declared.prompt if declared is not None and declared.assess_fidelity
                          else summary.model.prompt_version if summary.model else None)
         recipe=summary_bundle_format(declared_prompt)
         quality = (
@@ -435,12 +436,15 @@ class NarrativeVerifyHandler:
             for key in ("source_ref", "expected_read_policy_sha256", "transcript_lineage", "transcript_byte_bindings"):
                 raw.pop(key)
         if recipe.assessed and summary.draft is not None:
+            assert declared_prompt is not None
+            protocol = scoped_protocol_for_prompt(declared_prompt)
             from .narrative_model_scoped import compile_scoped_model_view
             from .narrative_summary_assessment import assess_summary
-            view=compile_scoped_model_view(selected,max_claims=FIDELITY_SCOPED.plan_max_claims)
+            view=compile_scoped_model_view(selected,max_claims=protocol.plan_max_claims)
             raw['summary_assessment']=assess_summary(selected,summary_raw['draft']['claims'],
                 requested_task_keys=[task.key for task in view.model_tasks],
-                plan_max_claims=FIDELITY_SCOPED.plan_max_claims)
+                plan_max_claims=protocol.plan_max_claims,
+                    assessor_version=protocol.assessor_version)
         elif recipe.assessed:
             raw['summary_assessment']=None
         try:

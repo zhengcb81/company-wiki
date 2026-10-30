@@ -84,6 +84,37 @@ FIDELITY_INSTRUCTION = (
     'Do not output identities, quality flags, reasoning, Markdown, paths, investment conclusions or ratings. '
     'Correct citations do not prove that paraphrased prose is true.'
 )
+ATOMIC_INSTRUCTION = FIDELITY_INSTRUCTION + (
+    ' Every clause can be selected independently: repeat its necessary actor, counterparty, '
+    'reporting source and conditions instead of relying on a previous summary clause or pronoun. '
+    'A source-only reporting prefix also governs its explicitly coordinated continuation; '
+    'do not turn one party reporting a wish into both parties agreeing. Preserve that distinction '
+    'even when contact and future cooperation are separate clauses. '
+    'Actual includes explicitly ongoing current activities, not only completed events. '
+    'Actively developing or continuously improving without a future marker is not a planned action. '
+    'Separate project-start events from project design/planned capacity specifications. '
+    'Attach the project stage and completion condition to the numeric capacity statement itself; '
+    'do not present designed capacity as commissioned capacity, output or shipments. '
+    'source_frame_hints are bounded, possibly incomplete source observations referenced by '
+    'source_key and normalized clause ordinal, not quotations, business facts or truth judgments. '
+    'Always check original source text; absent or limited hints never mean a task may be omitted.'
+)
+
+
+def scoped_instruction(protocol: ScopedSummaryProtocol) -> str:
+    return {'legacy': SCOPED_INSTRUCTION, 'fidelity': FIDELITY_INSTRUCTION,
+            'atomic': ATOMIC_INSTRUCTION}[protocol.instruction_profile]
+
+
+def scoped_model_material(view, protocol: ScopedSummaryProtocol) -> dict[str, Any]:
+    material = view.to_model_dict()
+    if protocol.material_profile == 'source_frames/1':
+        from .narrative_frame_hints import compact_frame_hints
+        supported = {sid for task in view.model_tasks for sid in task.support_ids}
+        material['source_frame_hints'] = compact_frame_hints(
+            (view._source_keys[sid], view._spans[sid].raw_text or '')
+            for sid in view.plan.evidence_order if sid in supported)
+    return material
 
 
 def scoped_response_schema(per_task_cap: int = 20) -> dict[str, Any]:
@@ -130,8 +161,12 @@ def scoped_boundary_identity(boundary, *, protocol: ScopedSummaryProtocol = LEGA
             .replace(b'\r\n', b'\n').replace(b'\r', b'\n')).hexdigest()
     if protocol.assess_fidelity:
         from .narrative_summary_assessment import assessment_identity
-        dependencies['summary_assessment'] = canonical_json_hash(assessment_identity())
-    instruction = FIDELITY_INSTRUCTION if protocol.assess_fidelity else SCOPED_INSTRUCTION
+        dependencies['summary_assessment'] = canonical_json_hash(assessment_identity(protocol.assessor_version))
+    if protocol.material_profile == 'source_frames/1':
+        from . import narrative_frame_hints
+        dependencies['source_frame_hints'] = hashlib.sha256(
+            Path(narrative_frame_hints.__file__).read_bytes().replace(b'\r\n', b'\n')).hexdigest()
+    instruction = scoped_instruction(protocol)
     return {'schema_version': 'reading-model-boundary/1',
         'reading_projection_version': boundary.reading_projection_version,
         'prompt_version': boundary.prompt_version, 'request_schema': boundary.request_schema,
@@ -149,7 +184,7 @@ def _scoped_output_plan(task_count: int, max_output_tokens: int | None = None,
         raise ModelResponseError('model output budget must be a positive integer')
     # Ask for fewer than the hard cap so a model that overshoots by a clause or
     # two still lands inside the contract instead of dead-lettering the item.
-    target = (min(MAX_SUMMARY_CLAIMS,max(1,task_count*2)) if protocol.assess_fidelity
+    target = (min(MAX_SUMMARY_CLAIMS,max(1,task_count*2)) if protocol.output_profile == 'coverage'
               else min(MAX_SUMMARY_CLAIMS - 4, max(1, task_count)))
     if target_override is not None:
         target = max(1, min(target, int(target_override)))
@@ -159,7 +194,7 @@ def _scoped_output_plan(task_count: int, max_output_tokens: int | None = None,
         # The response schema can only bound each task array; this is the hard
         # per-task share of the global cap the decoder actually enforces.
         'max_claims_per_task': (min(6,max(2,MAX_SUMMARY_CLAIMS//max(1,task_count)))
-                                if protocol.assess_fidelity else 2),
+                                if protocol.output_profile == 'coverage' else 2),
         'configured_output_tokens': max_output_tokens, 'coverage': 'selected_source_tasks_only',
         'planning': 'soft_target_within_existing_caps'}
 
@@ -196,7 +231,7 @@ def build_scoped_request(selected: NarrativeSelectResult, *, only_tasks=None,
     # The task-plan binding keeps its original twenty-claim marker for wire
     # compatibility; the effective summary budget is output_plan.max_claims
     # (MAX_SUMMARY_CLAIMS) and the decoder enforces the same number.
-    if protocol.assess_fidelity and (only_tasks is not None or target_claims is not None):
+    if not protocol.allows_subset and (only_tasks is not None or target_claims is not None):
         raise legacy.ModelResponseError('MODEL_REQUEST_INVALID')
     view = compile_scoped_model_view(selected, max_claims=protocol.plan_max_claims)
     if only_tasks is not None:
@@ -214,13 +249,13 @@ def build_scoped_request(selected: NarrativeSelectResult, *, only_tasks=None,
         'subject' if selected.subject.kind == 'official_json' else 'source': {
             'language': selected.source_metadata.language, 'title': selected.source_metadata.title,
             'document_kind': selected.source_metadata.document_kind},
-        'material': view.to_model_dict(), 'reading_strategy': strategy,
+        'material': scoped_model_material(view, protocol), 'reading_strategy': strategy,
         'output_plan': (plan := _scoped_output_plan(
             len(view.model_tasks),
             target_override=target_claims,protocol=protocol)),
         'response_schema': scoped_response_schema(plan['max_claims_per_task'])}
     data_json = canonical_json(envelope)
-    instruction = FIDELITY_INSTRUCTION if protocol.assess_fidelity else SCOPED_INSTRUCTION
+    instruction = scoped_instruction(protocol)
     return ScopedModelRequest(protocol.prompt, instruction, data_json,
         canonical_json_hash({'prompt_version': protocol.prompt, 'instruction': instruction,
             'data_json': data_json, 'task_binding': view.to_binding(), 'subject': selected.subject.to_dict(),
@@ -334,7 +369,8 @@ def decode_scoped_draft(response, *, selected: NarrativeSelectResult,
     if protocol.assess_fidelity:
         from .narrative_summary_assessment import assess_summary
         report = assess_summary(selected,wire_claims,plan_max_claims=protocol.plan_max_claims,
-                                requested_task_keys=[task.key for task in view.model_tasks])
+                                requested_task_keys=[task.key for task in view.model_tasks],
+                                assessor_version=protocol.assessor_version)
         for claim in wire_claims:
             if claim['claim_id'] in report['diagnostic_claim_ids']:
                 claim['needs_review'] = True

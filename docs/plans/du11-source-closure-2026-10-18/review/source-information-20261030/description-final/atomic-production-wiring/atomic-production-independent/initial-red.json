@@ -1,0 +1,13 @@
+{
+  "status": "EXPECTED_RED_BEFORE_PRODUCT_FIX",
+  "passed": 0,
+  "failed_before_maxfail": 3,
+  "root_cause": "AP-01",
+  "observations": [
+    "completed_result report validator source-summary-assessment/1.0.0 != expected1.1.0",
+    "raw bundle invalid summary assessment: summary assessor differs from declared protocol",
+    "projected bundle same mismatch"
+  ],
+  "command": "python -m pytest tests/unit/test_atomic_summary_artifacts.py -q --disable-warnings --maxfail=3",
+  "note": "First actual run before explicit-assessor fixes. Later test-only corrections fixed field name, allowed draft status, projected effect generation argument, and exception expectation; final cases independently PASS."
+}
