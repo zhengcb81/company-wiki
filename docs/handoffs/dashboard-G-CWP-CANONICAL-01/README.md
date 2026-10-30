@@ -10,7 +10,7 @@
 | worktree（绝对路径） | `C:\Users\郑曾波\Projects\dashboard-owner-cwp-canonical` |
 | base（绝对 SHA） | `b04e9a80d37aff0a121fac06fd2b443cf1519ae2`（已审 CWP readiness 修复头） |
 | branch | `codex/dashboard-cwp-canonical` |
-| head | 见 §6 提交记录；main `7a110b59` 等外部推进未并入，无旧 loop/C3/生产配置/钩子 WIP |
+| head | `47bca250…`（`47bca250a` = 复审补漏提交；首提交 `a58cd3d8…`；此后若有 docs-only 追加以 `git log codex/dashboard-cwp-canonical` 实时为准）。main `7a110b59` 等外部推进未并入，无旧 loop/C3/生产配置/钩子 WIP |
 | StockWiki 依赖（只读、未改动） | `C:\Users\郑曾波\Projects\StockWiki` @ `8a5ac1cad831a7f0ea1acae4dc2e107d8ff6b917`（owner master，工作区仅既有未跟踪 `runs/c16b`，实现文件未动） |
 | 冻结合同 | `investment-dashboard/.planning/unified-dashboard-2026-10-26/owner_extension_requests/contracts/stockwiki.dashboard_issuer_proof-1.schema.json`（未修改） |
 
