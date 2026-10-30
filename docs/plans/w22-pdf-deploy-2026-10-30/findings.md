@@ -71,3 +71,43 @@
 - Low 完整性子进程对新 ASCII 树（`C:/cwp-runtime/...` 默认 Medium 继承）的**可写性未证明**：worker 需要的
   TEMP/bytecode 在 repo-local（Low 可写），但 dill/transformers 的其他临时写如落入 ASCII 树可能被拒。
   C 阶段以真实日志判定，不预先抬权限/改 ACL。
+
+## B/C 阶段实测记录（2026-10-30）
+
+### C1 部署实况（C:/cwp-runtime/w22-pdf-sdk，首次创建，无外来冲突）
+
+- plan：104 dist / 36,121 env 文件（与 W21 逐项同源）+ 6 模型文件 + 53 条 env 内 script 行；plan SHA
+  `327891cf…`；源配置 SHA `bcc42711…`（即 W21 接收 review 独立冻结的同一 runtime profile 字节）。
+- deploy：36,127 hardlinks、SDK/模型**零字节复制**、scaffold 516,976B、共享逻辑 1,405,313,714B、417s、
+  `environment_sha256=c84a984c…` 与源一致；NTFS metadata 开销如实"未精测"。
+- verify：L0 fresh-process（104 dist 全部位于部署 site-packages、无 pip/user site/base site、ASCII prefix、
+  零 SDK import）PASS；L1 生产 `configured_paragraph_runtime()` 加载 PASS（python/artifacts=ASCII 路径，
+  其余字段与源逐值相同）；零写复核 `zero_write_verified=true`。
+- RECORD provenance 诊断 12 条（已知 6 dist INSTALLER 4B/5B）与 2 条标准 .pth hook 仅记录，未升门禁。
+
+### C2 真实入口（两轮，均如实记录）
+
+1. 首跑（内置 `china-s` 字体夹具）：native_fallback @120s 封顶——根因是**生产子进程 repo-local
+   pycache_prefix 冷编译**吃满预算（缓存镜像 75MB 产物佐证）。处置：经生产 `child_launch_command`
+   做 no-document 预热（13.7s/10.4s，非就绪收据），不改任何封顶。
+2. 预热后 E2E 仍 accepted0/rejected2（`unaligned_native_fallback`）→ 按 C4 审夹具：真 SDK items 文本
+   乱码（`_alignment_diagnostic` 收据 `w22-alignment-diagnostic.json`）——**根因是 pymupdf 内置
+   `china-s` 字体无 ToUnicode CMap，docling/pdfminer 解码失败**，与部署路径无关（W21 alias 对照
+   rejected2 同因）。改用带 ToUnicode 的嵌入系统字体（simhei.ttf，按常见路径发现）后：
+   - 对齐诊断：真实 SDK 提案 2/2 通过生产 `align_paragraphs`（accepted 2 / rejected 0）；
+   - canonical E2E 收据 `w22-synthetic-e2e.json`：**status=enhanced，accepted_groups=2，
+     rejected_groups=0**，completed [1,2] / stream_complete，worker 17.04s/120s，
+     peak 3,330,412,544B/4GiB，`known_non_ascii_failure=false`，source_preserved=true，
+     负对照（单字符篡改+有效几何）仍被拒绝，清理恢复 absent。
+- integration 4/4 通过（L0/L1/L2/L3，显式 opt-in）；unit 19 + 既有 environment/paragraph/alignment
+  43 = 62 全绿；mypy 11 文件 0 错误、ruff 全绿。
+- W22 版 Intergration 收据 evidence_span_count=0（合成文档无业务选段信号，replay 0）——与 W21 相同，
+  属 selector 语义，非部署缺陷；真实正文质量/召回仍归 ROOT C2 收口。
+
+### 工程事实（部署协议层）
+
+- ROOT 仓 `.venv` python.exe 带 Low 完整性标签（AGENTS 既有记录复现）：Low 进程不能写 Medium 的
+  `C:/cwp-runtime`（mkdir PermissionError），Medium 部署子进程可写 Low 工区树——E2E pytest 用 .venv 跑时
+  收据必须落工区 delivery/，部署 CLI 用基 Python（C:/Miniconda，Medium）跑。
+- 每链接前重算源 SHA + link 后 samefile/SHA 双证；对规划路径上的外来内容冲突即止（不覆盖不删除）；
+  失败收据由工具原子写入目标 deployment.json。

@@ -147,7 +147,10 @@ def build_plan(target: Path, source_profile: dict[str, Any], probe: dict[str, An
     hooks: list[dict[str, Any]] = []
     site_hooks: list[str] = []
     missing_unhashed_bytecode = 0
+    script_entries = 0
     distributions_summary = []
+    env_root = target / ENV_DIRNAME
+    source_env_root = Path(probe["python"]).resolve().parents[1]
     for item in probe["closure"]["distributions"]:
         name = item["name"]
         entry = probe["distributions"].get(name)
@@ -161,15 +164,31 @@ def build_plan(target: Path, source_profile: dict[str, Any], probe: dict[str, An
                                       "record_sha256": entry["record_sha256"],
                                       "record_entries": len(entry["record"])})
         for relative, declared, declared_size in entry["record"]:
-            if not _safe_relative(relative):
+            pure = _rel_posix(relative)
+            if not relative or "\x00" in relative or pure.is_absolute() or ":" in relative:
                 blocking.append({"kind": "invalid_record_path", "distribution": name, "path": relative})
                 continue
-            pure = _rel_posix(relative)
-            source = site.joinpath(*pure.parts).resolve()
-            if not source.is_relative_to(site.resolve()):
-                blocking.append({"kind": "escaping_record_path", "distribution": name, "path": relative})
-                continue
-            target_relative = "env/Lib/site-packages/" + pure.as_posix()
+            if ".." in pure.parts:
+                # Wheel data/scripts recorded outside site-packages (console
+                # launchers). The W21-verified deployment hardlinked exactly
+                # these inside its env root; projectable only when the same
+                # site-relative path resolves inside both env roots.
+                source = site.joinpath(*pure.parts).resolve()
+                target_abs = Path(os.path.normpath(str(
+                    env_root.joinpath("Lib", "site-packages", *pure.parts))))
+                if not source.is_file() or not source.is_relative_to(source_env_root) or (
+                    not target_abs.is_relative_to(env_root)
+                ):
+                    blocking.append({"kind": "escaping_record_path", "distribution": name, "path": relative})
+                    continue
+                target_relative = f"{ENV_DIRNAME}/" + target_abs.relative_to(env_root).as_posix()
+                script_entries += 1
+            else:
+                source = site.joinpath(*pure.parts).resolve()
+                if not source.is_relative_to(site.resolve()):
+                    blocking.append({"kind": "escaping_record_path", "distribution": name, "path": relative})
+                    continue
+                target_relative = f"{ENV_DIRNAME}/Lib/site-packages/" + pure.as_posix()
             if not source.is_file():
                 if source.suffix.lower() in {".pyc", ".pyo"} and not declared and not declared_size:
                     missing_unhashed_bytecode += 1
@@ -193,7 +212,8 @@ def build_plan(target: Path, source_profile: dict[str, Any], probe: dict[str, An
                 owners[key].append(name)
                 continue
             env_rows[key], owners[key] = row, [name]
-            if pure.suffix.lower() == ".pth":
+            if pure.suffix.lower() == ".pth" and target_relative.startswith(
+                    f"{ENV_DIRNAME}/Lib/site-packages/"):
                 lines = source.read_text(encoding="utf-8", errors="replace").splitlines()
                 if any(line.strip() and not line.lstrip().startswith("#") for line in lines):
                     hooks.append({"path": target_relative, "lines": lines})
@@ -227,6 +247,7 @@ def build_plan(target: Path, source_profile: dict[str, Any], probe: dict[str, An
         "artifact_rows": sorted(artifact_rows, key=lambda row: str(row["target"])),
         "diagnostics": {"record_deviations": sorted(deviations, key=lambda row: (str(row["kind"]), str(row["path"]))),
                         "missing_unhashed_bytecode": missing_unhashed_bytecode,
+                        "script_entries": script_entries,
                         "active_pth_hooks": sorted(hooks, key=lambda row: str(row["path"])),
                         "site_hooks": sorted(site_hooks)},
         "blocking_errors": sorted(blocking, key=lambda row: (str(row["kind"]), str(row.get("path", "")))),
@@ -576,3 +597,39 @@ def constructor_probe(python: str, artifacts: str, *,
         raise DeploymentError("no-document constructor failed: "
                               + completed.stderr.decode("utf-8", "replace")[-4000:])
     return json.loads(completed.stdout.decode("utf-8"))
+
+
+def warm_child_bytecode_cache(config_path: Path, *, repo_src: Path,
+                              timeout: float = 600) -> dict[str, Any]:
+    """Pay the documented one-time child bytecode-compile cost.
+
+    The production child launches with a repo-local ``pycache_prefix``, so its
+    very first run after deployment compiles the whole closure there and can
+    exhaust a bounded run on that alone (observed honestly in this card's
+    first E2E receipt: native_fallback at the 120s ceiling, cache partially
+    written). This runs the same no-document constructor through the exact
+    production ``child_launch_command`` — same isolated flags, same prefix —
+    so the canonical E2E measures conversion, not compilation. It is a
+    deployment action, not a readiness receipt: constructor readiness is
+    proven separately under the 30s cap.
+    """
+    config_path = Path(config_path)
+    config = json.loads(config_path.read_text(encoding="utf-8-sig"))
+    sys.path.insert(0, str(repo_src))
+    try:
+        from company_wiki.source_catalog.narrative_pdf_enhancement import child_launch_command
+    finally:
+        sys.path.remove(str(repo_src))
+    command = child_launch_command(config["python"], _HERE / "_constructor_probe.py")
+    started = time.monotonic()
+    completed = subprocess.run([*command, config["artifacts"]],
+                               stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                               env=_probe_env(HF_HUB_OFFLINE="1", TRANSFORMERS_OFFLINE="1"),
+                               timeout=timeout)
+    observation = {"status": "WARM_OK" if completed.returncode == 0 else "WARM_FAILED",
+                   "seconds": round(time.monotonic() - started, 3),
+                   "launch_shape": [str(part) for part in command[:4]]}
+    if completed.returncode != 0:
+        raise DeploymentError("child bytecode warm-up failed: "
+                              + completed.stderr.decode("utf-8", "replace")[-4000:])
+    return observation

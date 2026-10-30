@@ -93,6 +93,14 @@ def cmd_constructor_probe(arguments) -> int:
     return 0
 
 
+def cmd_warm_cache(arguments) -> int:
+    observation = deployment.warm_child_bytecode_cache(Path(arguments.config),
+                                                       repo_src=Path(arguments.repo_src),
+                                                       timeout=arguments.deadline)
+    print(_compact(observation))
+    return 0
+
+
 def main(argv: list[str] | None = None) -> int:
     from argparse import ArgumentParser
     parser = ArgumentParser(description=__doc__)
@@ -122,6 +130,13 @@ def main(argv: list[str] | None = None) -> int:
     probe_parser.add_argument("--config", required=True)
     probe_parser.add_argument("--deadline", type=float, default=deployment.CONSTRUCTOR_DEADLINE_SECONDS)
     probe_parser.set_defaults(handler=cmd_constructor_probe)
+
+    warm_parser = subparsers.add_parser("warm-cache",
+                                        help="one-time child bytecode warm-up via the production launch command")
+    warm_parser.add_argument("--config", required=True)
+    warm_parser.add_argument("--deadline", type=float, default=600.0)
+    warm_parser.add_argument("--repo-src", default=str(REPO_SRC))
+    warm_parser.set_defaults(handler=cmd_warm_cache)
 
     arguments = parser.parse_args(argv)
     try:
