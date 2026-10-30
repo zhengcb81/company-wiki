@@ -1,0 +1,369 @@
+{
+  "schema_version": "independent-summary-assessment-probe/1",
+  "no_paid_no_pdf_parse": true,
+  "module_sha256": "559f42adb11e4f271f2fc2d22738ee6d598ee510527fc6e38ad760f6ce891a58",
+  "real_v3": {
+    "schema_version": "summary-assessment/1",
+    "validator": {
+      "version": "source-summary-assessment/1.0.0",
+      "implementation_sha256": "76b3e2b2c78ca5d20a5fc57124ecebf9c54e7805f8940f99573be3d2516a6553",
+      "dependencies": {
+        "matching": "a7bdc28965536167a4c55b6132f9b7a2ae004edb4c56211f513482de59225352",
+        "task_plan": "d9b87bcf8998564e778806adeb993ec4f997037b6a3c86689c5d5b8365f9b1b7",
+        "admission": "3bc0c2992eaf815297e63df0afc4aab259b7dc99af11bf914147701bc78eb7a4",
+        "scoped_view": "9f952a923887f373578253e69d976777945c6216d3517b7513a472326bb930af",
+        "encoding": "2746b0195891b35b9e7acb98cf184973c4e5da65823d142d653fcb40c40f1899",
+        "claim_roles": "ad91844d645f4ede86ad772e23b0f12e3f1465f610fa73952f700aec20b1806d",
+        "assessment": "559f42adb11e4f271f2fc2d22738ee6d598ee510527fc6e38ad760f6ce891a58"
+      }
+    },
+    "source_plan_sha256": "2f1a1fa1272b1144d8ccee5f5b44b7c444bc95ffe1038c778bf434d8d42e35dc",
+    "plan_max_claims": 20,
+    "source_admission_sha256": "1ebe257af89cb3d1adcb18a0ad24d4ec4156cbf03179d1cbd901f5b9844ccab6",
+    "claims_sha256": "d761bd5d8ce73e9b0ef18c073bc83bcaa32a8766fa0ca09f0d4f47184964454a",
+    "scope": "selected_source_tasks_only",
+    "source_admitted_task_keys": [
+      "t1",
+      "t2",
+      "t3",
+      "t4",
+      "t5",
+      "t6",
+      "t7",
+      "t8"
+    ],
+    "requested_task_keys": [
+      "t1",
+      "t2",
+      "t3",
+      "t4",
+      "t5",
+      "t6",
+      "t7",
+      "t8"
+    ],
+    "emitted_task_keys": [
+      "t1",
+      "t2",
+      "t4",
+      "t5",
+      "t6",
+      "t8"
+    ],
+    "missing_requested_task_keys": [
+      "t3",
+      "t7"
+    ],
+    "budget_deferred_task_keys": [],
+    "excluded_tasks": [],
+    "requested_emission_complete": false,
+    "admitted_emission_complete": false,
+    "subfact_coverage_status": "not_evaluated",
+    "semantic_status": "not_evaluated",
+    "known_constraint_status": "diagnostics_found",
+    "diagnostics": [
+      {
+        "task_key": "t2",
+        "claim_id": "t2-1",
+        "source_span_id": "urn:company-wiki:evidence-span:sha256:b436b6238aba6713ec6f8320cf4e7902af80cf5f5a253f6c5f9dab3b981705f0",
+        "rule_code": "possible_attribution_loss"
+      },
+      {
+        "task_key": "t4",
+        "claim_id": "t4-1",
+        "source_span_id": "urn:company-wiki:evidence-span:sha256:d19dc6627ef1c7d54806979bdf5983a89920e768163adef67275f9d5adfe2a11",
+        "rule_code": "possible_modality_mismatch"
+      },
+      {
+        "task_key": "t6",
+        "claim_id": "t6-1",
+        "source_span_id": "urn:company-wiki:evidence-span:sha256:35d9b362bb2496cd504e4f235d2a969b2f906e77761916b15f556a3bbb9c5fcf",
+        "rule_code": "possible_modality_mismatch"
+      },
+      {
+        "task_key": "t8",
+        "claim_id": "t8-1",
+        "source_span_id": "urn:company-wiki:evidence-span:sha256:215bf09ec23969301d270ae22317bc3802a1550335736eb54fee678125516104",
+        "rule_code": "possible_modality_mismatch"
+      }
+    ],
+    "diagnostic_count": 4,
+    "diagnostics_limited": false,
+    "diagnostic_claim_ids": [
+      "t2-1",
+      "t4-1",
+      "t6-1",
+      "t8-1"
+    ]
+  },
+  "actual_request_plan_sha256": "2f1a1fa1272b1144d8ccee5f5b44b7c444bc95ffe1038c778bf434d8d42e35dc",
+  "actual_captured_material_max_claims": 20,
+  "captured_output_plan_max_claims": 40,
+  "plan_matches_request": true,
+  "explicit_40_marker_matches": true,
+  "neutral_cases": [
+    {
+      "name": "narrow_actual_en",
+      "source": "The company will apply to resume review. The company received second-round inquiry.",
+      "claim": "The company received second-round inquiry.",
+      "modality": "actual",
+      "expected_codes": [],
+      "actual_codes": [],
+      "match": true
+    },
+    {
+      "name": "narrow_actual_report_en",
+      "source": "According to news reports, the company lost revenue. The company employs 120 people.",
+      "claim": "The company employs 120 people.",
+      "modality": "actual",
+      "expected_codes": [],
+      "actual_codes": [],
+      "match": true
+    },
+    {
+      "name": "actual_disposal_cn",
+      "source": "公司已将设备转入商业化生产。",
+      "claim": "公司已将设备转入商业化生产。",
+      "modality": "actual",
+      "expected_codes": [],
+      "actual_codes": [],
+      "match": true
+    },
+    {
+      "name": "actual_plan_completion_cn",
+      "source": "公司本年计划完成率达到100%。",
+      "claim": "公司本年计划完成率达到100%。",
+      "modality": "actual",
+      "expected_codes": [],
+      "actual_codes": [],
+      "match": true
+    },
+    {
+      "name": "correct_narrow_denial_cn",
+      "source": "据报道，所述情况涉及家电产品，该事项未对子公司经营构成重大影响。",
+      "claim": "该事项未对子公司经营构成重大影响。",
+      "modality": "negation",
+      "expected_codes": [],
+      "actual_codes": [],
+      "match": true
+    },
+    {
+      "name": "actual_narrow_received_cn",
+      "source": "公司将申请恢复审核。公司已收到问询函。",
+      "claim": "公司已收到问询函。",
+      "modality": "actual",
+      "expected_codes": [],
+      "actual_codes": [],
+      "match": true
+    },
+    {
+      "name": "true_future_en",
+      "source": "The company will apply to resume review.",
+      "claim": "The company will apply to resume review.",
+      "modality": "actual",
+      "expected_codes": [
+        "possible_modality_mismatch"
+      ],
+      "actual_codes": [
+        "possible_modality_mismatch"
+      ],
+      "match": true
+    },
+    {
+      "name": "future_preserved_en",
+      "source": "The company will apply to resume review.",
+      "claim": "The company will apply to resume review.",
+      "modality": "planned",
+      "expected_codes": [],
+      "actual_codes": [],
+      "match": true
+    },
+    {
+      "name": "degree_retained_en",
+      "source": "The incident did not materially affect operations.",
+      "claim": "The incident did not materially affect operations.",
+      "modality": "negation",
+      "expected_codes": [],
+      "actual_codes": [],
+      "match": true
+    },
+    {
+      "name": "degree_missing_en",
+      "source": "The incident did not materially affect operations.",
+      "claim": "The incident did not affect operations.",
+      "modality": "negation",
+      "expected_codes": [
+        "possible_negation_degree_loss"
+      ],
+      "actual_codes": [
+        "possible_negation_degree_loss"
+      ],
+      "match": true
+    },
+    {
+      "name": "degree_hidden_unrelated_en",
+      "source": "The incident did not materially affect operations.",
+      "claim": "The incident did not affect operations; a material facility began construction.",
+      "modality": "negation",
+      "expected_codes": [
+        "possible_negation_degree_loss"
+      ],
+      "actual_codes": [
+        "possible_negation_degree_loss"
+      ],
+      "match": true
+    },
+    {
+      "name": "report_hidden_unrelated_en",
+      "source": "According to news reports, the event involves home appliances.",
+      "claim": "According to reports, a plant opened. The event involves home appliances.",
+      "modality": "actual",
+      "expected_codes": [
+        "possible_attribution_loss"
+      ],
+      "actual_codes": [
+        "possible_attribution_loss"
+      ],
+      "match": true
+    }
+  ],
+  "scope_collision": {
+    "admission": {
+      "t1": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "t2": {
+        "status": "admitted",
+        "reason": "source_card"
+      }
+    },
+    "requested_first": {
+      "schema_version": "summary-assessment/1",
+      "validator": {
+        "version": "source-summary-assessment/1.0.0",
+        "implementation_sha256": "76b3e2b2c78ca5d20a5fc57124ecebf9c54e7805f8940f99573be3d2516a6553",
+        "dependencies": {
+          "matching": "a7bdc28965536167a4c55b6132f9b7a2ae004edb4c56211f513482de59225352",
+          "task_plan": "d9b87bcf8998564e778806adeb993ec4f997037b6a3c86689c5d5b8365f9b1b7",
+          "admission": "3bc0c2992eaf815297e63df0afc4aab259b7dc99af11bf914147701bc78eb7a4",
+          "scoped_view": "9f952a923887f373578253e69d976777945c6216d3517b7513a472326bb930af",
+          "encoding": "2746b0195891b35b9e7acb98cf184973c4e5da65823d142d653fcb40c40f1899",
+          "claim_roles": "ad91844d645f4ede86ad772e23b0f12e3f1465f610fa73952f700aec20b1806d",
+          "assessment": "559f42adb11e4f271f2fc2d22738ee6d598ee510527fc6e38ad760f6ce891a58"
+        }
+      },
+      "source_plan_sha256": "2b6174856f59ab03006cbdd02ef507b792657c55bdcf32f0f569576c131a98d1",
+      "plan_max_claims": 40,
+      "source_admission_sha256": "5c9c54cd0483386791aed5911d54911ca79023f90d25181c9d518e0bb14c5432",
+      "claims_sha256": "d76e02202f034d98db4ac254d533fe3ac71a86278d02bb75c7ec9fceaa4c74e4",
+      "scope": "selected_source_tasks_only",
+      "source_admitted_task_keys": [
+        "t1",
+        "t2"
+      ],
+      "requested_task_keys": [
+        "t1"
+      ],
+      "emitted_task_keys": [
+        "t1"
+      ],
+      "missing_requested_task_keys": [],
+      "budget_deferred_task_keys": [
+        "t2"
+      ],
+      "excluded_tasks": [],
+      "requested_emission_complete": true,
+      "admitted_emission_complete": false,
+      "subfact_coverage_status": "not_evaluated",
+      "semantic_status": "not_evaluated",
+      "known_constraint_status": "no_known_violation",
+      "diagnostics": [],
+      "diagnostic_count": 0,
+      "diagnostics_limited": false,
+      "diagnostic_claim_ids": []
+    },
+    "requested_both": {
+      "schema_version": "summary-assessment/1",
+      "validator": {
+        "version": "source-summary-assessment/1.0.0",
+        "implementation_sha256": "76b3e2b2c78ca5d20a5fc57124ecebf9c54e7805f8940f99573be3d2516a6553",
+        "dependencies": {
+          "matching": "a7bdc28965536167a4c55b6132f9b7a2ae004edb4c56211f513482de59225352",
+          "task_plan": "d9b87bcf8998564e778806adeb993ec4f997037b6a3c86689c5d5b8365f9b1b7",
+          "admission": "3bc0c2992eaf815297e63df0afc4aab259b7dc99af11bf914147701bc78eb7a4",
+          "scoped_view": "9f952a923887f373578253e69d976777945c6216d3517b7513a472326bb930af",
+          "encoding": "2746b0195891b35b9e7acb98cf184973c4e5da65823d142d653fcb40c40f1899",
+          "claim_roles": "ad91844d645f4ede86ad772e23b0f12e3f1465f610fa73952f700aec20b1806d",
+          "assessment": "559f42adb11e4f271f2fc2d22738ee6d598ee510527fc6e38ad760f6ce891a58"
+        }
+      },
+      "source_plan_sha256": "2b6174856f59ab03006cbdd02ef507b792657c55bdcf32f0f569576c131a98d1",
+      "plan_max_claims": 40,
+      "source_admission_sha256": "5c9c54cd0483386791aed5911d54911ca79023f90d25181c9d518e0bb14c5432",
+      "claims_sha256": "d76e02202f034d98db4ac254d533fe3ac71a86278d02bb75c7ec9fceaa4c74e4",
+      "scope": "selected_source_tasks_only",
+      "source_admitted_task_keys": [
+        "t1",
+        "t2"
+      ],
+      "requested_task_keys": [
+        "t1",
+        "t2"
+      ],
+      "emitted_task_keys": [],
+      "missing_requested_task_keys": [
+        "t1",
+        "t2"
+      ],
+      "budget_deferred_task_keys": [],
+      "excluded_tasks": [],
+      "requested_emission_complete": false,
+      "admitted_emission_complete": false,
+      "subfact_coverage_status": "not_evaluated",
+      "semantic_status": "not_evaluated",
+      "known_constraint_status": "diagnostics_found",
+      "diagnostics": [
+        {
+          "task_key": null,
+          "claim_id": "arbitrary",
+          "source_span_id": null,
+          "rule_code": "ambiguous_claim_scope"
+        }
+      ],
+      "diagnostic_count": 1,
+      "diagnostics_limited": false,
+      "diagnostic_claim_ids": [
+        "arbitrary"
+      ]
+    }
+  },
+  "bounds_identity": {
+    "identity": {
+      "version": "source-summary-assessment/1.0.0",
+      "implementation_sha256": "76b3e2b2c78ca5d20a5fc57124ecebf9c54e7805f8940f99573be3d2516a6553",
+      "dependencies": {
+        "matching": "a7bdc28965536167a4c55b6132f9b7a2ae004edb4c56211f513482de59225352",
+        "task_plan": "d9b87bcf8998564e778806adeb993ec4f997037b6a3c86689c5d5b8365f9b1b7",
+        "admission": "3bc0c2992eaf815297e63df0afc4aab259b7dc99af11bf914147701bc78eb7a4",
+        "scoped_view": "9f952a923887f373578253e69d976777945c6216d3517b7513a472326bb930af",
+        "encoding": "2746b0195891b35b9e7acb98cf184973c4e5da65823d142d653fcb40c40f1899",
+        "claim_roles": "ad91844d645f4ede86ad772e23b0f12e3f1465f610fa73952f700aec20b1806d",
+        "assessment": "559f42adb11e4f271f2fc2d22738ee6d598ee510527fc6e38ad760f6ce891a58"
+      }
+    },
+    "valid_two_clauses_one_task_33spans": true,
+    "retained_diagnostics": 64,
+    "diagnostic_count": 132,
+    "diagnostics_limited": true,
+    "emitted_tasks": [
+      "t1"
+    ],
+    "diagnostic_claim_ids": [
+      "c1",
+      "c2"
+    ],
+    "semantic_status": "not_evaluated",
+    "subfact_status": "not_evaluated"
+  }
+}

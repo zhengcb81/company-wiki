@@ -1,0 +1,193 @@
+{
+  "binding": {
+    "schema_version": "source-scoped-model-view/1",
+    "source_plan": {
+      "schema_version": "source-summary-task-plan/1",
+      "evidence_order": [
+        "urn:company-wiki:evidence-span:sha256:bb06fea5780bf35339815b57a1148042f02e3f1dd2081092cb9dc84e3b85d5f8"
+      ],
+      "max_claims": 40,
+      "tasks": [
+        {
+          "key": "t1",
+          "source_id": "urn:company-wiki:source:sha256:4d8193c55d4e7a77d9342b52362c5ef02c45d6e308fe4426d8beacae4944d569",
+          "origin_group_id": "native-a",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:bb06fea5780bf35339815b57a1148042f02e3f1dd2081092cb9dc84e3b85d5f8"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:bb06fea5780bf35339815b57a1148042f02e3f1dd2081092cb9dc84e3b85d5f8"
+          ],
+          "context_ids": [],
+          "kind": "business_progress",
+          "section_role": "business",
+          "topics": [
+            "overseas",
+            "business_progress"
+          ],
+          "selection_reasons": [
+            "diagnostic_rule_0",
+            "diagnostic_rule_1",
+            "diagnostic_rule_2",
+            "diagnostic_rule_3",
+            "diagnostic_rule_4",
+            "diagnostic_rule_5",
+            "diagnostic_rule_6",
+            "diagnostic_rule_7",
+            "diagnostic_rule_8",
+            "diagnostic_rule_9",
+            "diagnostic_rule_10",
+            "diagnostic_rule_11",
+            "diagnostic_rule_12",
+            "diagnostic_rule_13",
+            "diagnostic_rule_14",
+            "diagnostic_rule_15",
+            "diagnostic_rule_16",
+            "diagnostic_rule_17",
+            "diagnostic_rule_18",
+            "diagnostic_rule_19"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        },
+        {
+          "key": "t2",
+          "source_id": "urn:company-wiki:source:sha256:4d8193c55d4e7a77d9342b52362c5ef02c45d6e308fe4426d8beacae4944d569",
+          "origin_group_id": "native-b",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:bb06fea5780bf35339815b57a1148042f02e3f1dd2081092cb9dc84e3b85d5f8"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:bb06fea5780bf35339815b57a1148042f02e3f1dd2081092cb9dc84e3b85d5f8"
+          ],
+          "context_ids": [],
+          "kind": "business_progress",
+          "section_role": "risk",
+          "topics": [
+            "overseas",
+            "business_progress"
+          ],
+          "selection_reasons": [
+            "diagnostic_rule_0",
+            "diagnostic_rule_1",
+            "diagnostic_rule_2",
+            "diagnostic_rule_3",
+            "diagnostic_rule_4",
+            "diagnostic_rule_5",
+            "diagnostic_rule_6",
+            "diagnostic_rule_7",
+            "diagnostic_rule_8",
+            "diagnostic_rule_9",
+            "diagnostic_rule_10",
+            "diagnostic_rule_11",
+            "diagnostic_rule_12",
+            "diagnostic_rule_13",
+            "diagnostic_rule_14",
+            "diagnostic_rule_15",
+            "diagnostic_rule_16",
+            "diagnostic_rule_17",
+            "diagnostic_rule_18",
+            "diagnostic_rule_19"
+          ],
+          "support_roles": [
+            "company_filing"
+          ]
+        }
+      ]
+    },
+    "source_keys": {
+      "urn:company-wiki:evidence-span:sha256:bb06fea5780bf35339815b57a1148042f02e3f1dd2081092cb9dc84e3b85d5f8": "s1"
+    },
+    "task_parts": {
+      "t1": {
+        "p1": "urn:company-wiki:evidence-span:sha256:bb06fea5780bf35339815b57a1148042f02e3f1dd2081092cb9dc84e3b85d5f8"
+      },
+      "t2": {
+        "p1": "urn:company-wiki:evidence-span:sha256:bb06fea5780bf35339815b57a1148042f02e3f1dd2081092cb9dc84e3b85d5f8"
+      }
+    },
+    "source_admission": {
+      "t1": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "t2": {
+        "status": "admitted",
+        "reason": "source_card"
+      }
+    }
+  },
+  "report_requested_t1_only": {
+    "schema_version": "summary-assessment/1",
+    "validator": {
+      "version": "source-summary-assessment/1.0.0",
+      "implementation_sha256": "227365ca71e8d56ff0c1a115df92c1c53fd52fbcfe60d10187fc6e79b7f9b589"
+    },
+    "source_plan_sha256": "2b6174856f59ab03006cbdd02ef507b792657c55bdcf32f0f569576c131a98d1",
+    "source_admission_sha256": "5c9c54cd0483386791aed5911d54911ca79023f90d25181c9d518e0bb14c5432",
+    "claims_sha256": "d76e02202f034d98db4ac254d533fe3ac71a86278d02bb75c7ec9fceaa4c74e4",
+    "scope": "selected_source_tasks_only",
+    "source_admitted_task_keys": [
+      "t1",
+      "t2"
+    ],
+    "requested_task_keys": [
+      "t1"
+    ],
+    "emitted_task_keys": [],
+    "missing_requested_task_keys": [
+      "t1"
+    ],
+    "budget_deferred_task_keys": [
+      "t2"
+    ],
+    "excluded_tasks": [],
+    "requested_emission_complete": false,
+    "admitted_emission_complete": false,
+    "subfact_coverage_status": "not_evaluated",
+    "semantic_status": "not_evaluated",
+    "known_constraint_status": "diagnostics_found",
+    "diagnostics": [
+      {
+        "task_key": null,
+        "claim_id": "arbitrary",
+        "source_span_id": null,
+        "rule_code": "unmatched_claim_scope"
+      }
+    ]
+  },
+  "report_requested_both": {
+    "schema_version": "summary-assessment/1",
+    "validator": {
+      "version": "source-summary-assessment/1.0.0",
+      "implementation_sha256": "227365ca71e8d56ff0c1a115df92c1c53fd52fbcfe60d10187fc6e79b7f9b589"
+    },
+    "source_plan_sha256": "2b6174856f59ab03006cbdd02ef507b792657c55bdcf32f0f569576c131a98d1",
+    "source_admission_sha256": "5c9c54cd0483386791aed5911d54911ca79023f90d25181c9d518e0bb14c5432",
+    "claims_sha256": "d76e02202f034d98db4ac254d533fe3ac71a86278d02bb75c7ec9fceaa4c74e4",
+    "scope": "selected_source_tasks_only",
+    "source_admitted_task_keys": [
+      "t1",
+      "t2"
+    ],
+    "requested_task_keys": [
+      "t1",
+      "t2"
+    ],
+    "emitted_task_keys": [
+      "t2"
+    ],
+    "missing_requested_task_keys": [
+      "t1"
+    ],
+    "budget_deferred_task_keys": [],
+    "excluded_tasks": [],
+    "requested_emission_complete": false,
+    "admitted_emission_complete": false,
+    "subfact_coverage_status": "not_evaluated",
+    "semantic_status": "not_evaluated",
+    "known_constraint_status": "no_known_violation",
+    "diagnostics": []
+  }
+}

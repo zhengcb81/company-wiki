@@ -1,10 +1,10 @@
-## 2026-10-30 当前：RF非期次复用已发布且CI成功；来源scope大节点通过待发布
+## 2026-10-30 当前：非期次复用与来源scope已发布CI绿；M3a观察核心通过，生产摘要仍待接线
 
-唯一入口CURRENT_STATUS.md/json。M1 RF **a1c077183127a3266e0bafc0da7734a20e343442**已推主线，精确CI41034901632 success；正常pre-push595P/1skip/36subtests，5运行时文件同步2物理技能副本、重复零写与2新进程实际source验证通过。真实IR owner打开及source输入通过、未知元数据保持、0下载/POST/raw复制及测试湖恢复；不等于叙述或预测采用。见[复用发布](review/source-information-20261030/description-final/nonperiodic-reuse/publication.json)。
+M1 RF **a1c077183127a3266e0bafc0da7734a20e343442**主线/远端、精确CI41034901632成功；实际IR source准备/输入合同通过，5运行时文件安装、重复零写/新进程通过。M2 CWP **6c12970609024b3cc09eeb238e4d66cd8296d186**已推master，正常pre-push161P/64.99秒、精确CI41037070445成功。来源客户链/已售范围/已开发数量重要性及模板/会计/软件功能边界已闭，真实native重放8gold全支持，全文仍partial。见[来源节点](review/source-information-20261030/description-final/source-business-scope/README.md)。
 
-M2共享source owner已修客户链/已售范围/已开发数量重要性，静态关系不伪造事件，模板/会计/未来客户负对照及真正软件功能保留。196P定向、153P兼容、397源mypy/ruff，独审21固定probe+31P/0OPEN/稳定3SHA。真实captured native→当前SourceCard 8gold支持、t3/t7 meaningful，3.14秒/work1246717、0PDF解析/模型/下载、原件不变；全文仍partial。见[M2验收](review/source-information-20261030/description-final/source-business-scope/README.md)。当前待正常提交推送M2，不冒签远端结果。
+M3a新增纯assessment核心独审通过：36相关域P、10永久unit、独立21P/12中性对照/2稳定SHA/0OPEN。真实已捕获v3可见6/8、t3/t7遗漏与四处归属/语态风险；精确scope歧义、marker20/40、诊断限幅/全风险claim IDs、7依赖recipe均保留，semantic/subfact始终not_evaluated。**这只是观察核心，尚未接入生产；新摘要质量、缓存和RF实际采用未通过。** 见[核心验收](review/source-information-20261030/description-final/summary-assessment-core/README.md)。
 
-**下一步：** 发布M2并观察精确CI，按[实施细则](review/source-information-20261030/description-final/SUMMARY_QUALITY_IMPLEMENTATION.md)实施M3摘要归属/程度/条件保真及明确coverage，再真实摘要、缓存恢复、RF实际参数/公式采用。M3尚未实施，不把来源优先级改善当摘要遗漏已闭。W21 canonical C2、长路径、US RPO、holdout和公司loop继续OPEN。目标按授权持续执行；原件/config/外来WIP及Dayu/IQS/Dashboard保持。
+**下一步：** 按[生产接线细则](review/source-information-20261030/description-final/M3_PRODUCTION_WIRING.md)完成明确/6协议、4.2提示、wrapper、新bundle/producer/generation/effect及RF兼容后，再真实摘要/恢复/RF参数采用。新默认最后切换，旧/4、/5、2.0/3.0历史wire不重标，禁止恢复自动付费repair。W21 canonical C2/长路径/US RPO/holdout/完整公司loop继续OPEN。按用户授权主线持续执行，原件/config/外来hook/RF三WIP及Dayu/IQS/Dashboard保持，本轮0新POST/下载。
 
 ---
 以下为历史记录，不是额外执行入口。

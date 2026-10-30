@@ -1,0 +1,55 @@
+{
+  "schema_version": "independent-summary-assessment-seal/1",
+  "status": "PASS_PURE_MODULE_SCOPED",
+  "sealed_at": "2026-10-30T10:10:36.684868+00:00",
+  "product_sha256": {
+    "src/company_wiki/automation/narrative_summary_assessment.py": "559f42adb11e4f271f2fc2d22738ee6d598ee510527fc6e38ad760f6ce891a58",
+    "tests/unit/test_narrative_summary_assessment.py": "096ec432f68b9977a0b2796b953e1c5aebd50ceaa8464ee6687c29e5338698ed"
+  },
+  "validator_recipe": {
+    "version": "source-summary-assessment/1.0.0",
+    "implementation_sha256": "76b3e2b2c78ca5d20a5fc57124ecebf9c54e7805f8940f99573be3d2516a6553",
+    "dependencies": {
+      "matching": "a7bdc28965536167a4c55b6132f9b7a2ae004edb4c56211f513482de59225352",
+      "task_plan": "d9b87bcf8998564e778806adeb993ec4f997037b6a3c86689c5d5b8365f9b1b7",
+      "admission": "3bc0c2992eaf815297e63df0afc4aab259b7dc99af11bf914147701bc78eb7a4",
+      "scoped_view": "9f952a923887f373578253e69d976777945c6216d3517b7513a472326bb930af",
+      "encoding": "2746b0195891b35b9e7acb98cf184973c4e5da65823d142d653fcb40c40f1899",
+      "claim_roles": "ad91844d645f4ede86ad772e23b0f12e3f1465f610fa73952f700aec20b1806d",
+      "assessment": "559f42adb11e4f271f2fc2d22738ee6d598ee510527fc6e38ad760f6ce891a58"
+    }
+  },
+  "tests_passed": 21,
+  "neutral_probes_passed": 12,
+  "actual_v3_risk_tasks": [
+    "t2",
+    "t4",
+    "t6",
+    "t8"
+  ],
+  "actual_v3_missing_tasks": [
+    "t3",
+    "t7"
+  ],
+  "diagnostic_cap_probe": {
+    "total": 132,
+    "retained": 64,
+    "limited": true,
+    "risk_claim_ids": [
+      "c1",
+      "c2"
+    ]
+  },
+  "M3_overall": "OPEN_NOT_INTEGRATED_NOT_ACCEPTED",
+  "paid_model_calls": 0,
+  "new_downloads": 0,
+  "pdf_parse_calls": 0,
+  "source_locator_replay": "NOT_EXECUTED",
+  "review_artifact_sha256": {
+    "review.md": "cfeb4dbf2c9c8edfa410e74b11e6334767dda64d09b2fe48ddb6f9f1f82e45d7",
+    "review.json": "b6568e3d899d0db6baed24f892fae408993a7cca3d0d3d5c02332d4a95b54968",
+    "probe.py": "6c774c77b47b67800ac444c2877ac6befddc2ec2ac408cfa049270f3bc0dc875",
+    "probe-result.json": "f6f04eba5bd1823ad60e9bd06eb2e35e51a344fb1b1c85a0bf0efe7368f365f0",
+    "final-tests.json": "e758b78616959f30d3434d7d30e98ba6cb30dc84b5ae46a2518e94a6e288b3be"
+  }
+}

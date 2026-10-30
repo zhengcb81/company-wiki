@@ -1,0 +1,213 @@
+{
+  "schema_version": "summary-assessment-independent-initial-probe/1",
+  "module_sha256": "b2dfe032e3e6c0eaa0049fe66265bf0cf5a1173b6150b13030c18ba10750d1f5",
+  "actual_capture_assessment": {
+    "schema_version": "summary-assessment/1",
+    "validator": {
+      "version": "source-summary-assessment/1.0.0",
+      "implementation_sha256": "b2dfe032e3e6c0eaa0049fe66265bf0cf5a1173b6150b13030c18ba10750d1f5"
+    },
+    "source_plan_sha256": "2f1a1fa1272b1144d8ccee5f5b44b7c444bc95ffe1038c778bf434d8d42e35dc",
+    "source_admission_sha256": "1ebe257af89cb3d1adcb18a0ad24d4ec4156cbf03179d1cbd901f5b9844ccab6",
+    "claims_sha256": "d761bd5d8ce73e9b0ef18c073bc83bcaa32a8766fa0ca09f0d4f47184964454a",
+    "scope": "selected_source_tasks_only",
+    "source_admitted_task_keys": [
+      "t1",
+      "t2",
+      "t3",
+      "t4",
+      "t5",
+      "t6",
+      "t7",
+      "t8"
+    ],
+    "requested_task_keys": [
+      "t1",
+      "t2",
+      "t3",
+      "t4",
+      "t5",
+      "t6",
+      "t7",
+      "t8"
+    ],
+    "emitted_task_keys": [
+      "t1",
+      "t2",
+      "t4",
+      "t5",
+      "t6",
+      "t8"
+    ],
+    "missing_requested_task_keys": [
+      "t3",
+      "t7"
+    ],
+    "budget_deferred_task_keys": [],
+    "excluded_tasks": [],
+    "requested_emission_complete": false,
+    "admitted_emission_complete": false,
+    "subfact_coverage_status": "not_evaluated",
+    "semantic_status": "not_evaluated",
+    "known_constraint_status": "diagnostics_found",
+    "diagnostics": [
+      {
+        "task_key": "t2",
+        "claim_id": "t2-1",
+        "source_span_id": "urn:company-wiki:evidence-span:sha256:b436b6238aba6713ec6f8320cf4e7902af80cf5f5a253f6c5f9dab3b981705f0",
+        "rule_code": "possible_attribution_loss"
+      },
+      {
+        "task_key": "t4",
+        "claim_id": "t4-1",
+        "source_span_id": "urn:company-wiki:evidence-span:sha256:d19dc6627ef1c7d54806979bdf5983a89920e768163adef67275f9d5adfe2a11",
+        "rule_code": "possible_modality_mismatch"
+      },
+      {
+        "task_key": "t6",
+        "claim_id": "t6-1",
+        "source_span_id": "urn:company-wiki:evidence-span:sha256:35d9b362bb2496cd504e4f235d2a969b2f906e77761916b15f556a3bbb9c5fcf",
+        "rule_code": "possible_modality_mismatch"
+      },
+      {
+        "task_key": "t8",
+        "claim_id": "t8-1",
+        "source_span_id": "urn:company-wiki:evidence-span:sha256:215bf09ec23969301d270ae22317bc3802a1550335736eb54fee678125516104",
+        "rule_code": "possible_modality_mismatch"
+      }
+    ],
+    "actual_request_plan_sha256": "709347bb5af638dfd6bd03b3688b0a9b53204aedf07e8b1e56a913f2a3bc428c",
+    "actual_request_plan_max_claims": 40,
+    "matches_actual_request_plan": false
+  },
+  "neutral_cases": [
+    {
+      "name": "narrow_actual_en",
+      "source": "The company will apply to resume review. The company received second-round inquiry.",
+      "claim": "The company received second-round inquiry.",
+      "modality": "actual",
+      "expected_codes": [],
+      "actual_codes": [
+        "possible_modality_mismatch"
+      ],
+      "match": false
+    },
+    {
+      "name": "narrow_actual_report_en",
+      "source": "According to news reports, the company lost revenue. The company employs 120 people.",
+      "claim": "The company employs 120 people.",
+      "modality": "actual",
+      "expected_codes": [],
+      "actual_codes": [
+        "possible_attribution_loss"
+      ],
+      "match": false
+    },
+    {
+      "name": "actual_disposal_cn",
+      "source": "公司已将设备转入商业化生产。",
+      "claim": "公司已将设备转入商业化生产。",
+      "modality": "actual",
+      "expected_codes": [],
+      "actual_codes": [
+        "possible_modality_mismatch"
+      ],
+      "match": false
+    },
+    {
+      "name": "actual_plan_completion_cn",
+      "source": "公司本年计划完成率达到100%。",
+      "claim": "公司本年计划完成率达到100%。",
+      "modality": "actual",
+      "expected_codes": [],
+      "actual_codes": [
+        "possible_modality_mismatch"
+      ],
+      "match": false
+    },
+    {
+      "name": "correct_narrow_denial_cn",
+      "source": "据报道，所述情况涉及家电产品，该事项未对子公司经营构成重大影响。",
+      "claim": "该事项未对子公司经营构成重大影响。",
+      "modality": "negation",
+      "expected_codes": [],
+      "actual_codes": [],
+      "match": true
+    },
+    {
+      "name": "actual_narrow_received_cn",
+      "source": "公司将申请恢复审核。公司已收到问询函。",
+      "claim": "公司已收到问询函。",
+      "modality": "actual",
+      "expected_codes": [],
+      "actual_codes": [],
+      "match": true
+    },
+    {
+      "name": "true_future_en",
+      "source": "The company will apply to resume review.",
+      "claim": "The company has resumed review.",
+      "modality": "actual",
+      "expected_codes": [
+        "possible_modality_mismatch"
+      ],
+      "actual_codes": [
+        "possible_modality_mismatch"
+      ],
+      "match": true
+    },
+    {
+      "name": "future_preserved_en",
+      "source": "The company will apply to resume review.",
+      "claim": "The company will apply to resume review.",
+      "modality": "planned",
+      "expected_codes": [],
+      "actual_codes": [],
+      "match": true
+    },
+    {
+      "name": "degree_retained_en",
+      "source": "The incident did not materially affect operations.",
+      "claim": "The incident did not materially affect operations.",
+      "modality": "negation",
+      "expected_codes": [],
+      "actual_codes": [],
+      "match": true
+    },
+    {
+      "name": "degree_missing_en",
+      "source": "The incident did not materially affect operations.",
+      "claim": "The incident did not affect operations.",
+      "modality": "negation",
+      "expected_codes": [
+        "possible_negation_degree_loss"
+      ],
+      "actual_codes": [
+        "possible_negation_degree_loss"
+      ],
+      "match": true
+    },
+    {
+      "name": "degree_hidden_unrelated_en",
+      "source": "The incident did not materially affect operations.",
+      "claim": "The incident did not affect operations; a material facility began construction.",
+      "modality": "negation",
+      "expected_codes": [
+        "possible_negation_degree_loss"
+      ],
+      "actual_codes": [],
+      "match": false
+    },
+    {
+      "name": "report_hidden_unrelated_en",
+      "source": "According to news reports, the event involves home appliances.",
+      "claim": "According to reports, a plant opened. The event involves home appliances.",
+      "modality": "actual",
+      "expected_codes": [
+        "possible_attribution_loss"
+      ],
+      "actual_codes": [],
+      "match": false
+    }
+  ]
+}

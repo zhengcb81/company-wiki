@@ -1,0 +1,94 @@
+{
+  "schema_version": "independent-summary-assessment-review/1",
+  "status": "PASS_PURE_MODULE_SCOPED_M3_OVERALL_OPEN",
+  "review_scope": "Unwired pure module only; M3 production protocol/bundle/RF integration not accepted",
+  "baseline": "6c12970609024b3cc09eeb238e4d66cd8296d186",
+  "no_paid_no_pdf_parse": true,
+  "initial_findings": [
+    {
+      "id": "A1",
+      "finding": "Hardcoded plan marker cannot express frozenprotocol20/40",
+      "state": "FIXED_EXPLICIT_PARAMETER",
+      "correction": "Initial-probe field actual_request_plan40 was decoder-view marker, not actual capturedHTTP material marker20; captured outputplan40 differed. Explicit plan_max_claims is required for each actual frozen request."
+    },
+    {
+      "id": "A2",
+      "finding": "CommonEnglishsubject and bare将/计划 cause unrelated or retrospective future/report diagnostics",
+      "state": "FIXED_12CASE_RETEST"
+    },
+    {
+      "id": "A3",
+      "finding": "Unrelated claim material/report clause could hide loss on current proposition",
+      "state": "FIXED_12CASE_RETEST"
+    },
+    {
+      "id": "A4",
+      "finding": "Distinct admitted tasks with same support/context/role overwrite by_scope; one arbitrary match selected",
+      "state": "FIXED_REQUESTED_FILTER_AND_AMBIGUITY_DIAGNOSTIC"
+    },
+    {
+      "id": "A5",
+      "finding": "Realcapturedt8 diagnostic lost after futuregrammar narrowing:建成后将为...提供保障",
+      "state": "FIXED_REAL_T8_RETESTED"
+    },
+    {
+      "id": "A6",
+      "finding": "Recipe dependency fingerprint and bounded diagnostic output must be explicit before bundle integration",
+      "state": "FIXED_SEVEN_DEPENDENCIES_64DETAILS_TOTALCOUNT_ALLRISKCLAIMS"
+    }
+  ],
+  "known_limits": [
+    "Possible constraints are finite diagnostics, not NLI/semantic entailment proof.",
+    "Taskemitted is notsubfact complete; both staynot_evaluated.",
+    "Allsource reads here are capturedJSON; source locator replay itself not executed."
+  ],
+  "final_verification": {
+    "product_sha256": {
+      "src/company_wiki/automation/narrative_summary_assessment.py": "559f42adb11e4f271f2fc2d22738ee6d598ee510527fc6e38ad760f6ce891a58",
+      "tests/unit/test_narrative_summary_assessment.py": "096ec432f68b9977a0b2796b953e1c5aebd50ceaa8464ee6687c29e5338698ed"
+    },
+    "stable_during_test": true,
+    "tests_passed": 21,
+    "pytest_elapsed_seconds": 4.61,
+    "neutral_cases_passed": 12,
+    "real_v3": {
+      "task_emission": "6/8",
+      "missing_tasks": [
+        "t3",
+        "t7"
+      ],
+      "constraint_diagnostic_tasks": [
+        "t2",
+        "t4",
+        "t6",
+        "t8"
+      ],
+      "entailment_status": "not_evaluated",
+      "subfact_status": "not_evaluated"
+    },
+    "captured_request_material_marker": 20,
+    "captured_request_output_cap": 40,
+    "explicit_new_marker_40_binds": true,
+    "scope_ambiguity": "one requested→t1;two matching requested→ambiguous/noemission",
+    "bounded_diagnostics": {
+      "retained": 64,
+      "total": 132,
+      "limited": true,
+      "risk_claims": [
+        "c1",
+        "c2"
+      ]
+    },
+    "recipe_dependencies": [
+      "matching",
+      "task_plan",
+      "admission",
+      "scoped_view",
+      "encoding",
+      "claim_roles",
+      "assessment"
+    ],
+    "current_pure_module_open_findings": 0,
+    "M3_overall": "OPEN_NOT_INTEGRATED_NOT_ACCEPTED"
+  }
+}

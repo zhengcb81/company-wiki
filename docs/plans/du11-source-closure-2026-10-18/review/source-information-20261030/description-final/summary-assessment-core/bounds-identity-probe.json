@@ -1,0 +1,23 @@
+{
+  "identity": {
+    "version": "source-summary-assessment/1.0.0",
+    "implementation_sha256": "f51749c63ec8bfeed69a005d9855e6dd0727206c0412d99d9890104ab16c799a",
+    "dependencies": {
+      "matching": "a7bdc28965536167a4c55b6132f9b7a2ae004edb4c56211f513482de59225352",
+      "task_plan": "d9b87bcf8998564e778806adeb993ec4f997037b6a3c86689c5d5b8365f9b1b7",
+      "admission": "3bc0c2992eaf815297e63df0afc4aab259b7dc99af11bf914147701bc78eb7a4",
+      "scoped_view": "9f952a923887f373578253e69d976777945c6216d3517b7513a472326bb930af",
+      "encoding": "2746b0195891b35b9e7acb98cf184973c4e5da65823d142d653fcb40c40f1899",
+      "assessment": "8b7c03b6f0f3980eba3ff590cc6943067dac1b1ccddde59deb6c7b1a30fdeefb"
+    }
+  },
+  "valid_two_clauses_one_task_33spans": true,
+  "retained_diagnostics": 64,
+  "diagnostic_count": 66,
+  "diagnostics_limited": true,
+  "emitted_tasks": [
+    "t1"
+  ],
+  "semantic_status": "not_evaluated",
+  "subfact_status": "not_evaluated"
+}
