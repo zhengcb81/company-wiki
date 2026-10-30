@@ -1,0 +1,92 @@
+{
+  "schema_version": "independent-qa-discovery-review/1",
+  "reviewer": "/root/context_cache_boundary_review",
+  "date": "2026-10-30",
+  "baseline_commit": "ad34ce6e",
+  "status": "PASS",
+  "open_findings_in_scope": [],
+  "scope": "Measured one-column PDF QA indentation discovery; shared QA discourse qualification independent of physical table; explicit partial-QA public coverage propagation.",
+  "files": {
+    "src/company_wiki/source_catalog/narrative_pdf_candidates.py": {
+      "raw_sha256": "b41656451270dbde0568d4833965edd18174c6428008f8f1b14a5d169d043546",
+      "lf_sha256": "d49108ae4d1d3ad64cb7b2cd0d43d803121d167b95910596d9c22c1a8e832bf0"
+    },
+    "src/company_wiki/source_catalog/narrative_reading.py": {
+      "raw_sha256": "b8265b57158fe9d0bc66b5b6fb1ce6bbbcdd1cdd8c0022558441ba2deca2fb16",
+      "lf_sha256": "7fb6dd0544dcfef82eada48967b2a1139cde0a3417d2f03be311aa8ba45e904b"
+    },
+    "tests/unit/du11_production/test_pdf_single_column_qa.py": {
+      "raw_sha256": "53ae1a92bfc1b6fa4782db924f77f826365c11e4da0f8992aadc83d4cd45ce75",
+      "lf_sha256": "53ae1a92bfc1b6fa4782db924f77f826365c11e4da0f8992aadc83d4cd45ce75"
+    },
+    "tests/unit/du11_production/test_qa_physical_container.py": {
+      "raw_sha256": "f8c15b95710121f04cdd635b136c06ede97d39c49029999063af2fd0e89781c2",
+      "lf_sha256": "f8c15b95710121f04cdd635b136c06ede97d39c49029999063af2fd0e89781c2"
+    }
+  },
+  "source_unchanged_after_final_test_and_probe": true,
+  "closed_findings": [
+    {
+      "id": "QA-ORPHAN-PARTIAL",
+      "priority": "P2",
+      "root": "Shared selection admitted an independently meaningful orphan answer but dropped structure-owner QA completeness: PDF and JSON both reported selected/coverage true without the explicit incomplete exchange.",
+      "minimal_source": "management, qa_state=orphan_answer_needs_review, complete standalone negative product assertion, no question.",
+      "before": "structure qa_exchange completeness=partial + ANSWER_WITHOUT_QUESTION; public selected/coverage_complete=true",
+      "after": "answer retained with original locator, public status=partial and coverage_complete=false; existing deferred reason QA_CONTEXT_PARTIAL; no new permission or source-rejection gate."
+    }
+  ],
+  "tests": {
+    "command": "C:/Miniconda/python.exe -B -X utf8 -m pytest tests/unit/du11_production/test_pdf_single_column_qa.py tests/unit/du11_production/test_qa_physical_container.py -q --tb=short --basetemp=.planning/source-information-20261029/qa-discovery-independent/tmp",
+    "passed": 25,
+    "seconds": 4.59,
+    "full_repository": false,
+    "diff_check": "PASS",
+    "synthetic_probe": "probe.json",
+    "coverage": [
+      "actual 24/24.1/24.24 point indentation allowed with 12-point measured bbox height; 24.25/36/80 denied",
+      "geometry discovery never emits business eligibility; zero work gives partial/no candidate",
+      "unknown and financial answers cannot inherit question relevance; English negative actual business assertion retains answer support and question context",
+      "orphan partial QA same behavior in PDF and JSON, source answer retained, public partial/deferred marker present",
+      "saved v4 has no question ID among support IDs; no reread/reparse of originals"
+    ]
+  },
+  "saved_real_snapshot_only": {
+    "path": ".planning\\source-information-20261029\\cn-ir-native-v4\\selection-after-qa-purpose.json.gz",
+    "sha256": "316711f4f368834b996503cce6f52e7dc3e83375406187c620442ca5bb7e7b13",
+    "spans": 10,
+    "status": "partial",
+    "coverage_complete": false,
+    "question_support_overlap": 0
+  },
+  "cleanup": {
+    "requested_basetemp_exists": false,
+    "effective_basetemp": "C:/Users/郑曾波/AppData/Local/Packages/sandbox.{816a6ea8-abac-4680-912c-30d65e7eda68}/AC/Temp/cw-pytest-basetemp/20261030-001422-e81cf884",
+    "host_cleanup_reported_removed": true,
+    "previous_23_case_revision_temp_also_removed": true,
+    "product_or_tests_modified_by_reviewer": false,
+    "W21_files_or_author_worktrees_modified": false,
+    "originals_or_config_read_or_modified": false
+  },
+  "probe_development_errors": [
+    {
+      "error": "NameError: EvidenceCoordinates",
+      "cause": "independent stdin probe omitted its import",
+      "resolution": "added explicit import; no product failure"
+    },
+    {
+      "error": "AttributeError: EvidenceSpan.source_role",
+      "cause": "independent probe assumed non-existent direct role property",
+      "resolution": "use known question raw text for synthetic source, structured_value.source_role for saved wire; source unchanged"
+    }
+  ],
+  "PDF_parses": 0,
+  "vendor_posts": 0,
+  "downloads": 0,
+  "SDK_runs": 0,
+  "limitations": [
+    "PASS covers this four-file engineering node, not whole C.",
+    "Saved v4 10 spans is partial; critical VC denial attribution/closure still OPEN under ROOT C_QA_PROGRESS, not source gold complete.",
+    "No real summary, restart/cache, FF reuse or RF actual model adoption acceptance is claimed.",
+    "ROOT broad affected-domain/mypy and remote CI publication are separate."
+  ]
+}

@@ -10,3 +10,7 @@
 - W21 author runtime三文件不改；不同时运行SDK，0新供应商POST/下载。原件及外来WIP保持。
 
 独审补漏也已修复：Python tuple hash不缓存，首次complete登记计费并只做一次；1/20条关系、100contexts同2200次ID hash。缓存target后只剩2work只读取2个context，partial不伪完成，关系与proof仍逐项对齐。不新增gate、不修改pre-push策略。
+
+已正常提交推送 `ad34ce6e594ffc50a6936f566264617abb284b6e`；pre-commit全通过，pre-push158P/65.85秒。新精确[CI40977151896](https://github.com/zhengcb81/company-wiki/actions/runs/40977151896)已启动，当前in_progress；旧40974928800继续failure，不重复改历史。
+
+最新已核：40977151896 completed/success，绑定上述完整ad34ce6e SHA。CI根修闭合，继续C，不重新运行旧失败或扩充每次commit门禁。

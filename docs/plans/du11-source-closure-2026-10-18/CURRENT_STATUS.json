@@ -1,8 +1,8 @@
 {
   "schema_version": "company-wiki-current-plan-status/1",
-  "as_of_date": "2026-10-29",
+  "as_of_date": "2026-10-30",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_FIXING_CI_CONTEXT_CACHE_BOUNDARY",
+  "overall_status": "ACTIVE_C_QA_ENGINEERING_PASS_PENDING_PUBLICATION",
   "parallel_packages_20261025": {
     "status": "W16_W17_W18_ROOT_COMPONENT_ACCEPTED_MERGED",
     "entry": "harness_lanes/20261025/README.md",
@@ -26,13 +26,13 @@
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
-  "last_code_commit": "e920b09d6f6afff7855dc48f89cd4d03fdb6e647",
+  "last_code_commit": "ad34ce6e594ffc50a6936f566264617abb284b6e",
   "code_ci": {
-    "id": 40974928800,
-    "head_sha": "e920b09d6f6afff7855dc48f89cd4d03fdb6e647",
+    "id": 40977151896,
+    "head_sha": "ad34ce6e594ffc50a6936f566264617abb284b6e",
     "status": "completed",
-    "conclusion": "failure",
-    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40974928800"
+    "conclusion": "success",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40977151896"
   },
   "formal_v4_offline_selection_replay_20261025": {
     "status": "EXACT_REPRODUCED_NO_PAID_CALL",
@@ -3074,13 +3074,16 @@
     "updated_at": "2026-10-28T19:07:31Z"
   },
   "source_information_ci_followup_20261029": {
-    "status": "LOCAL_PASS_INDEPENDENT_PASS_PENDING_PUBLICATION",
+    "status": "PUBLISHED_EXACT_CI_SUCCESS",
     "entry": "review/source-information-20261029/CI_BOUNDARY_FOLLOWUP.md",
     "root_cause": "Uncharged context tuple copy for private proof cache; local milestone scope omitted du4_operating_states.",
     "passed": 234,
     "seconds": 9.52,
     "mypy_files": 396,
-    "independent": "review/source-information-20261029/ci-boundary-independent-review.json"
+    "independent": "review/source-information-20261029/ci-boundary-independent-review.json",
+    "code_commit": "ad34ce6e594ffc50a6936f566264617abb284b6e",
+    "normal_pre_push_passed": 158,
+    "normal_pre_push_seconds": 65.85
   },
   "cn_ir_native_v3_20261029": {
     "status": "PARTIAL_REMAINING_DISCOVERY_ROOT_LOCATED",
@@ -3088,6 +3091,23 @@
     "units": 252,
     "selected_spans": 2,
     "original_unchanged": true,
-    "new_supplier_posts": 0
+    "new_supplier_posts": 0,
+    "followup": "review/source-information-20261029/C_QA_PROGRESS.md"
+  },
+  "previous_failed_code_ci": {
+    "id": 40974928800,
+    "head_sha": "e920b09d6f6afff7855dc48f89cd4d03fdb6e647",
+    "status": "completed",
+    "conclusion": "failure",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40974928800"
+  },
+  "c_qa_engineering_20261030": {
+    "status": "PASS_PENDING_PUBLICATION",
+    "entry": "review/source-information-20261029/C_QA_PROGRESS.md",
+    "acceptance": "review/source-information-20261029/C_QA_ACCEPTANCE.json",
+    "passed": 2592,
+    "seconds": 147.41,
+    "real_source_status": "PARTIAL_10_SPANS_REMAINING_SCOPE_GAPS",
+    "summary_cache_rf": "OPEN"
   }
 }

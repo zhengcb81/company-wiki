@@ -1,0 +1,69 @@
+{
+  "seconds": 2.631,
+  "selected_spans": 10,
+  "status": "partial",
+  "coverage_complete": false,
+  "work": 1225384,
+  "spans": [
+    {
+      "id": "urn:company-wiki:evidence-span:sha256:27d4283d845ae0477e183af35c8e2103569b77365652f313250b7c64b2b01d25",
+      "role": "company_filing",
+      "page": 1,
+      "text": "投资者关系活动类别 | □特定对象调研 □分析师会议\n□媒体采访 □业绩说明会\n□新闻发布会 □路演活动\n□现场参观\n☑其他 2026 年山东辖区上市公司投资者网上集体接待日活动"
+    },
+    {
+      "id": "urn:company-wiki:evidence-span:sha256:c28cccb35a9b95f7742d2b0e45bee0a403d388c91bb4e5f5dc57db37fbd650c9",
+      "role": "investor_question",
+      "page": 1,
+      "text": "1、问：公司主要业务 80%多都在国外，目前公司在国内业务开拓面\n临哪些挑战和机遇？公司如何服务国内统一大市场？"
+    },
+    {
+      "id": "urn:company-wiki:evidence-span:sha256:1551293fc0e9cca34e1123370c11d1a62b634ba82ffae55ce3315bee3f18c542",
+      "role": "management",
+      "page": 1,
+      "text": "答：您好，公司积极开发国内市场，持续完善国内市场战略布局，提\n高公司的抗风险能力，2025 年度公司境内收入约8.19 亿元，占比约22%，\n较比 2024 年度有所提升。"
+    },
+    {
+      "id": "urn:company-wiki:evidence-span:sha256:0e27c335a108c20f6ada31af74f33165912e10a00c4006a64456c63cd25e70b6",
+      "role": "management",
+      "page": 1,
+      "text": "未来公司也会努力在电子信息材料产业、环保\n材料产业、新能源材料产业、生命科学与医药产业四大领域向国内市场提\n供更多优质产品。"
+    },
+    {
+      "id": "urn:company-wiki:evidence-span:sha256:03bb57ea9e84cba8b33cc439507eb8f448ce2ea1b39081429412ce21641be3fe",
+      "role": "management",
+      "page": 1,
+      "text": "感谢您对公司的关注！"
+    },
+    {
+      "id": "urn:company-wiki:evidence-span:sha256:5eb6776c1eebd45b48c7850ff6039b065dcd26ab59c2970c6290ddb824c21fe4",
+      "role": "investor_question",
+      "page": 5,
+      "text": "13、问：公司预计半导体制造等相关材料，何时能为公司贡献 10 以\n上收益？"
+    },
+    {
+      "id": "urn:company-wiki:evidence-span:sha256:4c61063e5f5b45e96baa4c39a95d3927d79d5d6c171a223663591ea3916a6676",
+      "role": "management",
+      "page": 5,
+      "text": "答：您好！"
+    },
+    {
+      "id": "urn:company-wiki:evidence-span:sha256:3233ca3f30cb7dcb05f80ab55361cadbeffeb2d506fc6b3af5363b93cca3c9ee",
+      "role": "management",
+      "page": 5,
+      "text": "目前公司在半导体制造材料领域已销售的产品主要为光刻\n胶单体、树脂、光酸以及半导体制程中清洗剂添加材料等，现已开发了超\n300 种化合物，在所涉足的产品方面技术已经处于国内领先水平。"
+    },
+    {
+      "id": "urn:company-wiki:evidence-span:sha256:0e86fd5f9b941f79daac34effa99e4c4f6b6ecf79232f37c7984b422e68d86cd",
+      "role": "management",
+      "page": 5,
+      "text": "公司结\n合实际情况与下游客户需求，在新产能方面积极布局，2025 年公司启动\n了万润工业园二期 C05 建设项目，该项目包含半导体光刻胶用相关材料产\n能约 751 吨/年，项目建成后将为公司半导体制造材料业务发展提供产能\n保障。"
+    },
+    {
+      "id": "urn:company-wiki:evidence-span:sha256:f0306474a95dcc3a6a689b9f295b9af587cba29ad66386247878cebb3279c88c",
+      "role": "management",
+      "page": 5,
+      "text": "谢谢！"
+    }
+  ]
+}

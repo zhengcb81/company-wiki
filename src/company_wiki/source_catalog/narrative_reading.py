@@ -658,6 +658,22 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
             withheld.append({"package_id": str(package["package_id"]),
                              "reason": "OPERATING_WORK_BUDGET", "known_unit_ids": []})
             break
+        # A table is a physical source container, not a discourse purpose.
+        # The structure owner has already bound Q/A members and roles; requiring
+        # operating-table headers here loses actual answers, while qualifying
+        # the whole cell lets a question donate business relevance to a purely
+        # financial or boilerplate answer. Q/A keeps its exact citation views
+        # and passes the ordinary answer-level source assessment below.
+        if package["kind"] == "qa_exchange":
+            if package.get("completeness") == "partial" and package.get("anchor_unit_ids"):
+                # A self-contained answer remains readable, but missing Q/A
+                # context reported by the structure owner cannot become a
+                # complete exchange merely because its text can be selected.
+                withheld.append({"package_id": str(package["package_id"]),
+                    "reason": "QA_CONTEXT_PARTIAL",
+                    "known_unit_ids": [uid for uid in package.get("member_unit_ids", ()) if uid in units]})
+            scoped_packages.append(package)
+            continue
         table_members = [units[uid] for uid in package.get("member_unit_ids", ()) if uid in units]
         native_tables = {(unit.source_id, unit.coordinates.page_number, unit.coordinates.table_index)
                          for unit in table_members if unit.coordinates.table_index is not None}

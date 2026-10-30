@@ -1,3 +1,7 @@
+## 2026-10-30 主线：CI根修远端通过，C问答共因正在最终验收
+
+[唯一入口](review/source-information-20261029/README.md)。ad34ce6e已正常提交推送，精确CI40977151896 success；原失败40974928800保留。C已修按测量字号的首行缩进发现、QA语义不受物理table误判（问句不捐业务给财务/套话）；独审补漏的orphan答案保留可读且显式partial，修后71P/396mypy0，最终短域2592P/147.41秒、独审25P/4.59秒/PASS/0OPEN（不相加），待正常发布。真实6页302units，保存parsed重选10spans但仍partial；VC/沸石等剩余scope问题没有签通过。详见[C进度和具体后续](review/source-information-20261029/C_QA_PROGRESS.md)。W21保留不改、不运行SDK；0供应商POST/下载，母账不变。下方旧当前/下一步均为历史。
+
 ## 2026-10-29 CI后续：上下文缓存键工作边界
 
 精确CI40974928800已failure，本机重现同一已有单测，并非Linux差异。原A/B 2988P/R7仅证明已列领域，漏选du4_operating_states，不能代签完整回归。新增私有证明键在预算前tuple(context_ids)，且事件循环重复构造。现以TDD修为验证/收费后构建一次缓存键，首次complete登记也只hash一次；234P/9.52秒、396源文件mypy、ruff及独审PASS/OPEN=0，待正常发布。见[CI根修](review/source-information-20261029/CI_BOUNDARY_FOLLOWUP.md)。下一步先发布此根修、观察精确CI，再继续CNIR native/US来源缺口；W21边界及预算保持。

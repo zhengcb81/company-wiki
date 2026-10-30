@@ -169,8 +169,23 @@ def _aligned(first, second, budget, *, exact=False, qa=False):
     # only requests discovery: native extraction still owns cells and speakers.
     # A wide prose box overlaps almost any other box, so one-column continuity
     # needs the measured text margin rather than the multi-column overlap rule.
+    # First-line indentation may move that margin by up to two measured glyph
+    # heights. Require substantial overlap as well; nearby narrow columns or a
+    # shared right edge alone cannot donate a Q/A marker.
     if qa and len(first) == len(second) == 1:
-        return [(0, 0)] if abs(first[0]['x0'] - second[0]['x0']) <= 8 else []
+        left, right = first[0], second[0]
+        margin = abs(left['x0'] - right['x0'])
+        if margin <= 8:
+            return [(0, 0)]
+        heights = [c['y1'] - c['y0'] for c in (left, right)
+                   if 'y0' in c and 'y1' in c]
+        overlap = min(left['x1'], right['x1']) - max(left['x0'], right['x0'])
+        width = min(left['x1'] - left['x0'], right['x1'] - right['x0'])
+        # Native font boxes and advances are independently rounded. The same
+        # 1% geometry tolerance used for page shape allows their boundary to
+        # agree without relaxing the two-character indentation to another column.
+        return ([(0, 0)] if heights and margin <= 2 * min(heights) * 1.01
+                and overlap >= .8 * width else [])
     if not 2 <= len(first) <= MAX_COLUMNS or not 2 <= len(second) <= MAX_COLUMNS:
         return []
     if exact and len(first) != len(second):

@@ -1,0 +1,185 @@
+{
+  "source_raw_sha256": {
+    "src/company_wiki/source_catalog/narrative_pdf_candidates.py": "b41656451270dbde0568d4833965edd18174c6428008f8f1b14a5d169d043546",
+    "src/company_wiki/source_catalog/narrative_reading.py": "b8265b57158fe9d0bc66b5b6fb1ce6bbbcdd1cdd8c0022558441ba2deca2fb16",
+    "tests/unit/du11_production/test_pdf_single_column_qa.py": "53ae1a92bfc1b6fa4782db924f77f826365c11e4da0f8992aadc83d4cd45ce75",
+    "tests/unit/du11_production/test_qa_physical_container.py": "f8c15b95710121f04cdd635b136c06ede97d39c49029999063af2fd0e89781c2"
+  },
+  "unchanged": true,
+  "geometry": [
+    {
+      "indent": 24,
+      "candidate": true,
+      "partial": false
+    },
+    {
+      "indent": 24.1,
+      "candidate": true,
+      "partial": false
+    },
+    {
+      "indent": 24.24,
+      "candidate": true,
+      "partial": false
+    },
+    {
+      "indent": 24.25,
+      "candidate": false,
+      "partial": false
+    },
+    {
+      "indent": 36,
+      "candidate": false,
+      "partial": false
+    },
+    {
+      "indent": 80,
+      "candidate": false,
+      "partial": false
+    }
+  ],
+  "zero_work": {
+    "candidate": false,
+    "continuation": null,
+    "reason": "work_budget_exhausted",
+    "partial": true
+  },
+  "QA": [
+    {
+      "question": "公司已量产新材料属实吗？",
+      "answer": "这需要进一步确认。",
+      "selected_texts": [],
+      "groups": []
+    },
+    {
+      "question": "Has the company launched a new product?",
+      "answer": "Revenue increased by 12% to 100 million.",
+      "selected_texts": [],
+      "groups": []
+    },
+    {
+      "question": "Has the company launched a new product?",
+      "answer": "We have not started manufacturing the new device.",
+      "selected_texts": [
+        "Has the company launched a new product?",
+        "We have not started manufacturing the new device."
+      ],
+      "groups": [
+        {
+          "kind": "qa_exchange",
+          "section_role": "unknown",
+          "evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:70fc75411cd011678e9a828b2976f84fc3330a3dce8bcc93794cfb790c34fd94",
+            "urn:company-wiki:evidence-span:sha256:91fc8489ae90ffc70d239aad7de48b4c870f5c2cd2447e6c6b2997f8ba85440b"
+          ],
+          "citation_views": [
+            {
+              "support_evidence_ids": [
+                "urn:company-wiki:evidence-span:sha256:91fc8489ae90ffc70d239aad7de48b4c870f5c2cd2447e6c6b2997f8ba85440b"
+              ],
+              "context_evidence_ids": [
+                "urn:company-wiki:evidence-span:sha256:70fc75411cd011678e9a828b2976f84fc3330a3dce8bcc93794cfb790c34fd94"
+              ],
+              "reading_support_use": "support",
+              "reading_support_reason": "source_business_relation"
+            }
+          ],
+          "group_id": "urn:company-wiki:reading-group:sha256:d626212f421942365fa76bc23a63d0a55897712c25906152730ac8a66c11e734"
+        }
+      ]
+    }
+  ],
+  "orphan_boundary": [
+    {
+      "pdf": false,
+      "semantic": [
+        {
+          "semantic_id": "m1",
+          "kind": "qa_exchange",
+          "section_ids": [
+            "s1"
+          ],
+          "member_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:706695a3f7ab2f095281b5d8691c518a66301fb78c0a1ec6e1389a7d76fcab2a"
+          ],
+          "anchor_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:706695a3f7ab2f095281b5d8691c518a66301fb78c0a1ec6e1389a7d76fcab2a"
+          ],
+          "required_context_unit_ids": [],
+          "completeness": "partial",
+          "diagnostics": [
+            {
+              "code": "ANSWER_WITHOUT_QUESTION",
+              "unit_ids": [
+                "urn:company-wiki:narrative-unit:sha256:706695a3f7ab2f095281b5d8691c518a66301fb78c0a1ec6e1389a7d76fcab2a"
+              ],
+              "detail": "source record contains an answer without a question"
+            }
+          ]
+        }
+      ],
+      "status": "partial",
+      "coverage_complete": false,
+      "selection_diagnostics": [],
+      "public_deferred": [
+        {
+          "package_id": "m1",
+          "reason": "QA_CONTEXT_PARTIAL"
+        }
+      ],
+      "spans": 1,
+      "group_count": 1
+    },
+    {
+      "pdf": true,
+      "semantic": [
+        {
+          "semantic_id": "m1",
+          "kind": "qa_exchange",
+          "section_ids": [
+            "s1"
+          ],
+          "member_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:706695a3f7ab2f095281b5d8691c518a66301fb78c0a1ec6e1389a7d76fcab2a"
+          ],
+          "anchor_unit_ids": [
+            "urn:company-wiki:narrative-unit:sha256:706695a3f7ab2f095281b5d8691c518a66301fb78c0a1ec6e1389a7d76fcab2a"
+          ],
+          "required_context_unit_ids": [],
+          "completeness": "partial",
+          "diagnostics": [
+            {
+              "code": "ANSWER_WITHOUT_QUESTION",
+              "unit_ids": [
+                "urn:company-wiki:narrative-unit:sha256:706695a3f7ab2f095281b5d8691c518a66301fb78c0a1ec6e1389a7d76fcab2a"
+              ],
+              "detail": "source record contains an answer without a question"
+            }
+          ]
+        }
+      ],
+      "status": "partial",
+      "coverage_complete": false,
+      "selection_diagnostics": [],
+      "public_deferred": [
+        {
+          "package_id": "m1",
+          "reason": "QA_CONTEXT_PARTIAL"
+        }
+      ],
+      "spans": 1,
+      "group_count": 1
+    }
+  ],
+  "saved_v4": {
+    "path": ".planning\\source-information-20261029\\cn-ir-native-v4\\selection-after-qa-purpose.json.gz",
+    "sha256": "316711f4f368834b996503cce6f52e7dc3e83375406187c620442ca5bb7e7b13",
+    "spans": 10,
+    "status": "partial",
+    "coverage_complete": false,
+    "question_support_overlap": 0
+  },
+  "PDF_parses": 0,
+  "vendor_posts": 0,
+  "downloads": 0
+}

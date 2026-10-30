@@ -1,0 +1,85 @@
+{
+  "schema_version": "source-qa-engineering-acceptance/1",
+  "date": "2026-10-30",
+  "status": "PASS_PENDING_PUBLICATION",
+  "scope": "geometry QA discovery, discourse vs physical table, explicit partial QA propagation; NOT whole C, summary or RF acceptance",
+  "review": "qa-independent-review.json",
+  "source_files": {
+    "src/company_wiki/source_catalog/narrative_pdf_candidates.py": {
+      "raw_sha256": "b41656451270dbde0568d4833965edd18174c6428008f8f1b14a5d169d043546",
+      "lf_sha256": "d49108ae4d1d3ad64cb7b2cd0d43d803121d167b95910596d9c22c1a8e832bf0"
+    },
+    "src/company_wiki/source_catalog/narrative_reading.py": {
+      "raw_sha256": "b8265b57158fe9d0bc66b5b6fb1ce6bbbcdd1cdd8c0022558441ba2deca2fb16",
+      "lf_sha256": "7fb6dd0544dcfef82eada48967b2a1139cde0a3417d2f03be311aa8ba45e904b"
+    },
+    "tests/unit/du11_production/test_pdf_single_column_qa.py": {
+      "raw_sha256": "53ae1a92bfc1b6fa4782db924f77f826365c11e4da0f8992aadc83d4cd45ce75",
+      "lf_sha256": "53ae1a92bfc1b6fa4782db924f77f826365c11e4da0f8992aadc83d4cd45ce75"
+    },
+    "tests/unit/du11_production/test_qa_physical_container.py": {
+      "raw_sha256": "f8c15b95710121f04cdd635b136c06ede97d39c49029999063af2fd0e89781c2",
+      "lf_sha256": "f8c15b95710121f04cdd635b136c06ede97d39c49029999063af2fd0e89781c2"
+    }
+  },
+  "tests": {
+    "scope": [
+      "tests/unit/du11_production",
+      "tests/unit/document_understanding_selection",
+      "tests/unit/document_understanding_root/test_operating_relation_production.py",
+      "tests/unit/du4_operating_states"
+    ],
+    "passed": 2592,
+    "skipped": 0,
+    "seconds": 147.41,
+    "full_repository": false,
+    "log": "qa-domain-final.txt.gz"
+  },
+  "mypy": {
+    "files": 396,
+    "errors": 0
+  },
+  "ruff": "PASS",
+  "actual_native_reads": {
+    "v3_seconds": 4.357,
+    "v4_seconds": 7.212,
+    "each_parse_calls": 1,
+    "optional_sdk_calls": 0,
+    "supplier_posts": 0,
+    "downloads": 0
+  },
+  "final_saved_parse_selection": {
+    "spans": 10,
+    "status": "partial",
+    "coverage_complete": false,
+    "work_used": 1225384,
+    "seconds": 2.631,
+    "pdf_reparse": 0,
+    "artifact": "cn-ir-source-final.json.gz"
+  },
+  "original_unchanged": true,
+  "w21_reserved_files_modified": false,
+  "next_open": [
+    "Named product definition/negative production grammar and actor binding",
+    "Independent QA assertion support scopes, finance rejection must not contaminate business explanation",
+    "QA role/context quote oracle without rewriting old gold",
+    "US RPO true omitted vs oracle gap attribution",
+    "W21 runtime reception then actual configured summaries/cache/FF/RF/holdout"
+  ],
+  "cleanup": {
+    "owned_roots": [
+      ".si30a",
+      ".si30b",
+      ".si30c",
+      ".si30d",
+      ".si30e",
+      ".si30f",
+      ".si30g",
+      ".si30h",
+      ".si30i"
+    ],
+    "all_absent_after_cleanup": true,
+    "only_owned_test_directories_removed": true,
+    "originals_configs_w21_preserved": true
+  }
+}

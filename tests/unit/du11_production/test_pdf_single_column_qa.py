@@ -24,6 +24,39 @@ def test_wide_single_cell_qa_is_a_provisional_discovery_without_qualification():
     assert value == before
 
 
+@pytest.mark.parametrize('indent', (24, 24.1))
+def test_two_character_first_line_indent_is_not_a_different_qa_column(indent):
+    value = snapshot(
+        (100, [(50+indent, 550, '问题：新材料的客户验证进展如何，')]),
+        (120, [(50, 455, '是否已经完成量产验收？')]),
+        (140, [(50+indent, 550, '回答：设备尚未完成客户验收，')]),
+        (160, [(50, 550, '当前仍在开展验证工作。')]),
+    )
+    before = deepcopy(value)
+    result = observe(value, qa=True)
+    assert result['candidate'] and not result['partial']
+    assert not result.get('business_eligible', False)
+    assert value == before
+    assert not observe(value, qa=False)['candidate']
+
+
+@pytest.mark.parametrize('shift', (36, 80, 250))
+def test_single_column_qa_does_not_borrow_a_marker_from_another_margin(shift):
+    value = snapshot(
+        (100, [(50, 550, '问题：是否已经投产？')]),
+        (120, [(50+shift, 550, '回答：尚在建设。')]),
+    )
+    assert not observe(value, qa=True)['candidate']
+
+
+def test_small_nearby_columns_cannot_use_indentation_to_borrow_qa_markers():
+    value = snapshot(
+        (100, [(50, 90, '问题：项目进度？')]),
+        (120, [(74, 114, '回答：在建。')]),
+    )
+    assert not observe(value, qa=True)['candidate']
+
+
 def test_wide_qa_without_qa_reading_intent_cannot_request_discovery():
     assert not observe(qa_page(), qa=False)['candidate']
 
