@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-30",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_W21_MERGED_CI_GREEN_CONTINUE_SUMMARY_QUALITY",
+  "overall_status": "ACTIVE_M1_PUBLISHED_CI_GREEN_M2_REVIEWED_READY_TO_PUBLISH_M3_OPEN",
   "parallel_packages_20261025": {
     "status": "W16_W17_W18_ROOT_COMPONENT_ACCEPTED_MERGED",
     "entry": "harness_lanes/20261025/README.md",
@@ -2344,7 +2344,7 @@
     "published": true,
     "push_failure": "47 targets /392 collected /600s; two regressions being root-fixed, not waived by narrower daily gate"
   },
-  "next_action": "Continue SUMMARY_QUALITY_NEXT B: offline captured-response TDD for selected task coverage, attribution, mixed modality and explicit source/semantic quality dimensions; C nonperiodic SourceRef FF/RF reuse and W21 canonical SDK C2 remain OPEN. No new paid full replay for diagnosis.",
+  "next_action": "Publish M2 source scope; implement M3 explicit summary fidelity/coverage protocol before real summary/cache/RF adoption.",
   "c3_runtime_recovery_20261026": {
     "entry": "review/pdf-c3-20261026/RUNTIME_RECOVERY.md",
     "environment_independent": "PASS_ZERO_OPEN_25_TESTS_AND_REAL_WORKER_ENTRYPOINTS",
@@ -3920,5 +3920,32 @@
       "conclusion": "success",
       "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41021403161"
     }
+  },
+  "nonperiodic_reuse_20261030": {
+    "status": "ENGINEERING_PUBLISHED_REAL_SOURCE_PREPARATION_PASS",
+    "commit": "a1c077183127a3266e0bafc0da7734a20e343442",
+    "ci": {
+      "id": 41034901632,
+      "head_sha": "a1c077183127a3266e0bafc0da7734a20e343442",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/41034901632"
+    },
+    "review_open": 0,
+    "independent_tests": 25,
+    "real_receipt": "review/source-information-20261030/description-final/nonperiodic-reuse/real-ir-receipt.json",
+    "narrative_and_forecast_adoption": "OPEN",
+    "installation": "PASS_SELECTED_REPEAT_ZERO_WRITES_FRESH_PROCESS"
+  },
+  "summary_quality_implementation": "review/source-information-20261030/description-final/SUMMARY_QUALITY_IMPLEMENTATION.md",
+  "source_business_scope_20261030": {
+    "status": "INDEPENDENT_PASS_READY_TO_PUBLISH",
+    "entry": "review/source-information-20261030/description-final/source-business-scope/README.md",
+    "root_tests": 196,
+    "compat_tests": 153,
+    "independent_tests": 31,
+    "independent_open": 0,
+    "real_source_tasks_gold_supported": 8,
+    "real_summary": "NOT_RUN_NEW_PROTOCOL"
   }
 }

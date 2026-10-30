@@ -1,0 +1,66 @@
+{
+  "schema_version": "nonperiodic-independent-engineering-review/1",
+  "stage": "final_m1",
+  "verdict": "PASS_ENGINEERING_SCOPE",
+  "open_findings": 0,
+  "sealed_paths": 6,
+  "seal_file": "publication-seal.json",
+  "prior_engineering_seal_file": "final-seal.json",
+  "independent_test_file": "test_independent_provenance.py",
+  "independent_test_result": {
+    "passed": 25,
+    "failed": 0,
+    "seconds": 0.47,
+    "log": "final-tests.log",
+    "junit": "final-junit.xml"
+  },
+  "resolved_findings": [
+    "M1-I1 HTTP invalid URL Collector regression",
+    "M1-I2 incomplete final source manifest/period/time contract",
+    "M1-I3 source receipt/capture/host binding gaps",
+    "M1-I4 malformed capture and host structural Collector safety including signature pair",
+    "M1-I5 fiscal_period optional trimmed text validation"
+  ],
+  "architecture": {
+    "single_pure_original_dto_owner": true,
+    "source_preparation_and_persisted_evidence_share_rules": true,
+    "valid_source_url_remains_http_only": true,
+    "explicit_null_only_for_verified_original": true,
+    "null_original_requires_capture_even_when_require_capture_false": true,
+    "legacy_opaque_document_ids_preserved": true,
+    "no_new_approval_or_signature_requirement": true,
+    "no_provider_or_filesystem_logic_added_to_contracts": true
+  },
+  "product_modified_by_reviewer": false,
+  "external_downloads": 0,
+  "model_posts": 0,
+  "real_pdf_parses": 0,
+  "rf_preexisting_wip_unchanged_at_initial_final_seal": true,
+  "rf_preexisting_wip_raw_unchanged_at_publication_refresh": false,
+  "rf_preexisting_wip_content_unchanged": true,
+  "publication_refresh": {
+    "changed_product_paths": 0,
+    "changed_test_paths": 1,
+    "neutral_changes": ["explicit E402 bootstrap import markers", "tmp_path negative fixture paths"],
+    "independent_passed": 25,
+    "independent_failed": 0,
+    "seconds": 0.53,
+    "log": "publication-tests.log",
+    "junit": "publication-junit.xml",
+    "tool_side_effect": "pre-commit stash/restore normalized preexisting weekly_manifest CRLF to LF; CRLF restoration hash equals original baseline; ROOT will restore exact original bytes after commit/push and provide protection receipt"
+  },
+  "root_owned_real_source_preparation_receipt": {
+    "path": "../real-registered-ir-v2/receipt.json",
+    "status": "PASS",
+    "scope": "real registered IR owner byte open + RF source input validation only",
+    "independently_rerun": false,
+    "downloads": 0,
+    "model_posts": 0,
+    "raw_copies": 0
+  },
+  "not_claimed_complete": [
+    "real canonical narrative reference/read consumption",
+    "forecast claim to used parameter and actual formula adoption",
+    "existing 6/8 summary coverage and semantic audit"
+  ]
+}

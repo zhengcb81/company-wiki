@@ -1,0 +1,26 @@
+{
+  "schema_version": "independent-source-scope-seal/1",
+  "status": "PASS_M2_SCOPED",
+  "sealed_at": "2026-10-30T09:48:59.496599+00:00",
+  "source_scope": "M2 source businessscope only",
+  "product_sha256": {
+    "src/company_wiki/document_understanding/operating_states/assertion_roles.py": "15591a3cff5c9b5ec01b1d3a10912fbd2c3a51f6d7aa96311fa57e51d3758a8d",
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "c9236ff506feef5f83aa1a42a4f024603de92c4121d071c87737229a4bca58fb",
+    "tests/unit/du11_production/test_source_observed_business_scope.py": "b7622d6d7e987e55e31f0fd6437dcf73dfbe4b2dd2613de13970f235e0521908"
+  },
+  "independent_probe_cases": 21,
+  "independent_tests_passed": 31,
+  "final_test_file_stable": true,
+  "M3": "NOT_IMPLEMENTED_NOT_ACCEPTED",
+  "full08_pdf_replay": "NOT_EXECUTED",
+  "paid_model_calls": 0,
+  "new_downloads": 0,
+  "pdf_parse_calls": 0,
+  "review_artifact_sha256": {
+    "review.md": "debfae7dedd753648832cc02031760ec6d2ba39a4e7f26dcdbe29c3d446024ab",
+    "review.json": "2c6a4b916d64272119415efeff7f79d8c824102c0d171c13c6931757fbd0884f",
+    "probe.py": "bd4fe915e2ee8b926acc4b6186a8cd4653b7dcb03c7fcc079f8d84620dc1fb51",
+    "probe-result.json": "436d71b323b5818c81c1ef1c3d642d0c66b0804490a337baf1a1fce6079a7457",
+    "final-tests.json": "d7cb7c198ef246498a5ca7372a0776893011a95abb8b9c7325fc5949e54fcae1"
+  }
+}

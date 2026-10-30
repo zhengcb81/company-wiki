@@ -1,0 +1,33 @@
+{
+  "status": "PUSHED_EXACT_CI_SUCCESS_INSTALLED",
+  "repo": "revenue-forecast",
+  "commit": "a1c077183127a3266e0bafc0da7734a20e343442",
+  "pre_push": "595 passed, 1 skipped, 36 subtests; 52.54 seconds",
+  "preexisting_wip": [
+    {
+      "path": "assurance/runs/daily_alert.jsonl",
+      "sha256": "a3f8b3f0c5a9831aa73d4b7468626daff57639602afa5282487fcdf2b338120a",
+      "unchanged": true
+    },
+    {
+      "path": "assurance/runs/weekly_alert.jsonl",
+      "sha256": "b57727e979a65f2313f9a80033dd71f8d8406aeb070f283640ed9bbb354cfc0e",
+      "unchanged": true
+    },
+    {
+      "path": "assurance/runs/weekly_manifest.json",
+      "sha256": "44e46cd57e5373803fbdaa5dff5e93041840b8e8cc671e710e0346a133c4df97",
+      "unchanged": true
+    }
+  ],
+  "hook_side_effect": "pre-commit stash normalized weekly manifest CRLF to LF; restored exact original bytes after normal publication",
+  "scope": "source preparation/input validation only; summary/narrative/forecast adoption OPEN",
+  "ci": {
+    "id": 41034901632,
+    "head_sha": "a1c077183127a3266e0bafc0da7734a20e343442",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/41034901632"
+  },
+  "installation": "5 selected runtime files; 2 physical destinations for 3 logical roots; repeat zero writes; two fresh installed entry processes PASS"
+}

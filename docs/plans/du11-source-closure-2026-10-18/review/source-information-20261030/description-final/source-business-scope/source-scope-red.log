@@ -1,0 +1,70 @@
+CW-BASETEMP-DECISION {"event": "decision", "requested_basetemp": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.cwp-scope-red", "requested_basetemp_len": 49, "cwd_len": 34, "threshold": 60, "win32_path_limit": 210, "generation_reserve": 150, "relocated": false, "reason": "within-budget"}
+============================= test session starts =============================
+platform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0
+benchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)
+rootdir: C:\Users\郑曾波\Projects\company-wiki
+configfile: pytest.ini
+plugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0
+asyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function
+collected 17 items
+
+tests\unit\du11_production\test_source_observed_business_scope.py FFFFFF [ 35%]
+FF........F                                                              [100%]
+
+================================== FAILURES ===================================
+_ test_closed_observed_scope_is_material_without_requiring_growth[\u516c\u53f8\u76ee\u524d\u5df2\u9500\u552e\u7684\u4ea7\u54c1\u4e3b\u8981\u4e3a\u7532\u7d20\u3001\u4e59\u7d20\u53ca\u4e19\u7d20\uff0c\u73b0\u5df2\u5f00\u53d1\u4e86\u8d85300\u79cd\u76f8\u5173\u5316\u5408\u7269\u3002] _
+tests\unit\du11_production\test_source_observed_business_scope.py:23: in test_closed_observed_scope_is_material_without_requiring_growth
+    assert not roles.descriptive_only
+E   AssertionError: assert not True
+E    +  where True = SourceAssertionRoles(clauses=(AssertionRole(text='公司目前已销售的产品主要为甲素、乙素及丙素，现已开发了超300种相关化合物', operating=True, rule_purpose...role='unknown', bound_operating=False, raw_structure_complete=False, numeric_cells_observed=False, bound_payload=False).descriptive_only
+_ test_closed_observed_scope_is_material_without_requiring_growth[\u672c\u516c\u53f8\u7684\u4e0b\u6e38\u5ba2\u6237\u4e3b\u8981\u4e3a\u5236\u5242\u751f\u4ea7\u5546\u548c\u68c0\u6d4b\u673a\u6784\u3002] _
+tests\unit\du11_production\test_source_observed_business_scope.py:23: in test_closed_observed_scope_is_material_without_requiring_growth
+    assert not roles.descriptive_only
+E   AssertionError: assert not True
+E    +  where True = SourceAssertionRoles(clauses=(AssertionRole(text='本公司的下游客户主要为制剂生产商和检测机构', operating=True, rule_purpose='', independent...role='unknown', bound_operating=False, raw_structure_complete=False, numeric_cells_observed=False, bound_payload=False).descriptive_only
+_ test_closed_observed_scope_is_material_without_requiring_growth[\u5149\u5b66\u6750\u6599\u7684\u4e0b\u6e38\u5ba2\u6237\u4e3b\u8981\u4e3a\u5668\u4ef6\u5236\u9020\u5546\u548c\u7ec8\u7aef\u663e\u793a\u5382\u5546\u3002] _
+tests\unit\du11_production\test_source_observed_business_scope.py:23: in test_closed_observed_scope_is_material_without_requiring_growth
+    assert not roles.descriptive_only
+E   AssertionError: assert not True
+E    +  where True = SourceAssertionRoles(clauses=(AssertionRole(text='光学材料的下游客户主要为器件制造商和终端显示厂商', operating=True, rule_purpose='', independ...role='unknown', bound_operating=False, raw_structure_complete=False, numeric_cells_observed=False, bound_payload=False).descriptive_only
+_ test_closed_observed_scope_is_material_without_requiring_growth[Our customers include hospitals and independent laboratories.] _
+tests\unit\du11_production\test_source_observed_business_scope.py:23: in test_closed_observed_scope_is_material_without_requiring_growth
+    assert not roles.descriptive_only
+E   AssertionError: assert not True
+E    +  where True = SourceAssertionRoles(clauses=(AssertionRole(text='Our customers include hospitals and independent laboratories.', oper...role='unknown', bound_operating=False, raw_structure_complete=False, numeric_cells_observed=False, bound_payload=False).descriptive_only
+_ test_closed_observed_scope_is_material_without_requiring_growth[\u672c\u516c\u53f8\u5df2\u5f00\u53d1\u8d85\u8fc780\u79cd\u68c0\u6d4b\u8bd5\u5242\u3002] _
+tests\unit\du11_production\test_source_observed_business_scope.py:22: in test_closed_observed_scope_is_material_without_requiring_growth
+    assert roles.independent_payload is True
+E   AssertionError: assert None is True
+E    +  where None = SourceAssertionRoles(clauses=(AssertionRole(text='本公司已开发超过80种检测试剂', operating=False, rule_purpose='', independent_payl...role='unknown', bound_operating=False, raw_structure_complete=False, numeric_cells_observed=False, bound_payload=False).independent_payload
+_ test_closed_observed_scope_is_material_without_requiring_growth[\u73b0\u5df2\u5f00\u53d1\u4e86\u8d85300\u79cd\u76f8\u5173\u5316\u5408\u7269\u3002] _
+tests\unit\du11_production\test_source_observed_business_scope.py:22: in test_closed_observed_scope_is_material_without_requiring_growth
+    assert roles.independent_payload is True
+E   AssertionError: assert None is True
+E    +  where None = SourceAssertionRoles(clauses=(AssertionRole(text='现已开发了超300种相关化合物', operating=False, rule_purpose='', independent_payl...role='unknown', bound_operating=False, raw_structure_complete=False, numeric_cells_observed=False, bound_payload=False).independent_payload
+_ test_closed_observed_scope_is_material_without_requiring_growth[We have developed over 80 diagnostic assays.] _
+tests\unit\du11_production\test_source_observed_business_scope.py:22: in test_closed_observed_scope_is_material_without_requiring_growth
+    assert roles.independent_payload is True
+E   AssertionError: assert None is True
+E    +  where None = SourceAssertionRoles(clauses=(AssertionRole(text='We have developed over 80 diagnostic assays.', operating=False, rule...role='unknown', bound_operating=False, raw_structure_complete=False, numeric_cells_observed=False, bound_payload=False).independent_payload
+_ test_closed_observed_scope_is_material_without_requiring_growth[Our company currently sells sterile tools and diagnostic cartridges.] _
+tests\unit\du11_production\test_source_observed_business_scope.py:22: in test_closed_observed_scope_is_material_without_requiring_growth
+    assert roles.independent_payload is True
+E   AssertionError: assert None is True
+E    +  where None = SourceAssertionRoles(clauses=(AssertionRole(text='Our company currently sells sterile tools and diagnostic cartridges....role='unknown', bound_operating=False, raw_structure_complete=False, numeric_cells_observed=False, bound_payload=False).independent_payload
+_______ test_static_customer_scope_does_not_become_manufacturing_event ________
+tests\unit\du11_production\test_source_observed_business_scope.py:44: in test_static_customer_scope_does_not_become_manufacturing_event
+    assert not roles.descriptive_only
+E   AssertionError: assert not True
+E    +  where True = SourceAssertionRoles(clauses=(AssertionRole(text='光学材料的下游客户主要为器件制造商和终端显示厂商', operating=True, rule_purpose='', independ...role='unknown', bound_operating=False, raw_structure_complete=False, numeric_cells_observed=False, bound_payload=False).descriptive_only
+=========================== short test summary info ===========================
+FAILED tests/unit/du11_production/test_source_observed_business_scope.py::test_closed_observed_scope_is_material_without_requiring_growth[\u516c\u53f8\u76ee\u524d\u5df2\u9500\u552e\u7684\u4ea7\u54c1\u4e3b\u8981\u4e3a\u7532\u7d20\u3001\u4e59\u7d20\u53ca\u4e19\u7d20\uff0c\u73b0\u5df2\u5f00\u53d1\u4e86\u8d85300\u79cd\u76f8\u5173\u5316\u5408\u7269\u3002]
+FAILED tests/unit/du11_production/test_source_observed_business_scope.py::test_closed_observed_scope_is_material_without_requiring_growth[\u672c\u516c\u53f8\u7684\u4e0b\u6e38\u5ba2\u6237\u4e3b\u8981\u4e3a\u5236\u5242\u751f\u4ea7\u5546\u548c\u68c0\u6d4b\u673a\u6784\u3002]
+FAILED tests/unit/du11_production/test_source_observed_business_scope.py::test_closed_observed_scope_is_material_without_requiring_growth[\u5149\u5b66\u6750\u6599\u7684\u4e0b\u6e38\u5ba2\u6237\u4e3b\u8981\u4e3a\u5668\u4ef6\u5236\u9020\u5546\u548c\u7ec8\u7aef\u663e\u793a\u5382\u5546\u3002]
+FAILED tests/unit/du11_production/test_source_observed_business_scope.py::test_closed_observed_scope_is_material_without_requiring_growth[Our customers include hospitals and independent laboratories.]
+FAILED tests/unit/du11_production/test_source_observed_business_scope.py::test_closed_observed_scope_is_material_without_requiring_growth[\u672c\u516c\u53f8\u5df2\u5f00\u53d1\u8d85\u8fc780\u79cd\u68c0\u6d4b\u8bd5\u5242\u3002]
+FAILED tests/unit/du11_production/test_source_observed_business_scope.py::test_closed_observed_scope_is_material_without_requiring_growth[\u73b0\u5df2\u5f00\u53d1\u4e86\u8d85300\u79cd\u76f8\u5173\u5316\u5408\u7269\u3002]
+FAILED tests/unit/du11_production/test_source_observed_business_scope.py::test_closed_observed_scope_is_material_without_requiring_growth[We have developed over 80 diagnostic assays.]
+FAILED tests/unit/du11_production/test_source_observed_business_scope.py::test_closed_observed_scope_is_material_without_requiring_growth[Our company currently sells sterile tools and diagnostic cartridges.]
+FAILED tests/unit/du11_production/test_source_observed_business_scope.py::test_static_customer_scope_does_not_become_manufacturing_event
+========================= 9 failed, 8 passed in 2.72s =========================

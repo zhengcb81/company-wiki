@@ -1,0 +1,12 @@
+{
+  "status": "PASS",
+  "scope": "real registered IR owner byte open + RF source input validation; not narrative/forecast adoption",
+  "source_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+  "unknown_metadata_preserved": true,
+  "downloads": 0,
+  "model_posts": 0,
+  "network_blocked": true,
+  "raw_copies": 0,
+  "owned_temporary_lake_removed": true,
+  "protected_unchanged": true
+}

@@ -1,0 +1,101 @@
+{
+  "canonical": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\revenue-forecast",
+  "schema": "rf-install-plan/1",
+  "selected": [
+    "scripts/company_wiki_source_v2.py",
+    "scripts/contracts/company_wiki_original.py",
+    "scripts/contracts/document.py",
+    "scripts/contracts/evidence.py",
+    "scripts/contracts/source_provenance.py"
+  ],
+  "targets": [
+    {
+      "destination": "C:\\Users\\\u90d1\u66fe\u6ce2\\.agents\\skills",
+      "files": [
+        {
+          "before_sha256": "f78940d7169b3d572aa29bc731f9efc0f0ac75ee6356b60f5aa0705cbdc9ce58",
+          "operation": "replace",
+          "path": "scripts/company_wiki_source_v2.py",
+          "size": 9551,
+          "source_sha256": "f3c1cf617b856fb83d252e64c290d95e28c0be3fd472060ed17130548bbeda01"
+        },
+        {
+          "before_sha256": null,
+          "operation": "new",
+          "path": "scripts/contracts/company_wiki_original.py",
+          "size": 11106,
+          "source_sha256": "b79d05216f45582dee225413c9a1110c698378292a4d53d106c5ef9016d96a42"
+        },
+        {
+          "before_sha256": "ff83f5d8e8c4c6e2226b90e4495c1c397b59930429cbf4e198564c7f4a2715f3",
+          "operation": "replace",
+          "path": "scripts/contracts/document.py",
+          "size": 54133,
+          "source_sha256": "8f5c6fee259670e76ab9abcbfa75e89083a3cb64b23b99fdc0465c5d0797d7af"
+        },
+        {
+          "before_sha256": "a5f086f7be822acc01f82c53ecd05985cbeb65e095480572e1b059b4d23f4964",
+          "operation": "replace",
+          "path": "scripts/contracts/evidence.py",
+          "size": 16993,
+          "source_sha256": "13f54e95790763ebf75e795ee97e7fcd22ba377d0223cc70bd018d531aa22321"
+        },
+        {
+          "before_sha256": null,
+          "operation": "new",
+          "path": "scripts/contracts/source_provenance.py",
+          "size": 4077,
+          "source_sha256": "a15bde04c812bf54c84ba309535541875bfbb0513d2cbf4386040de1e76994df"
+        }
+      ],
+      "installed": true,
+      "selected_drift": 5,
+      "target": "C:\\Users\\\u90d1\u66fe\u6ce2\\.agents\\skills\\revenue-forecast",
+      "unselected_drift": 0
+    },
+    {
+      "destination": "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\skills",
+      "files": [
+        {
+          "before_sha256": "f78940d7169b3d572aa29bc731f9efc0f0ac75ee6356b60f5aa0705cbdc9ce58",
+          "operation": "replace",
+          "path": "scripts/company_wiki_source_v2.py",
+          "size": 9551,
+          "source_sha256": "f3c1cf617b856fb83d252e64c290d95e28c0be3fd472060ed17130548bbeda01"
+        },
+        {
+          "before_sha256": null,
+          "operation": "new",
+          "path": "scripts/contracts/company_wiki_original.py",
+          "size": 11106,
+          "source_sha256": "b79d05216f45582dee225413c9a1110c698378292a4d53d106c5ef9016d96a42"
+        },
+        {
+          "before_sha256": "ff83f5d8e8c4c6e2226b90e4495c1c397b59930429cbf4e198564c7f4a2715f3",
+          "operation": "replace",
+          "path": "scripts/contracts/document.py",
+          "size": 54133,
+          "source_sha256": "8f5c6fee259670e76ab9abcbfa75e89083a3cb64b23b99fdc0465c5d0797d7af"
+        },
+        {
+          "before_sha256": "a5f086f7be822acc01f82c53ecd05985cbeb65e095480572e1b059b4d23f4964",
+          "operation": "replace",
+          "path": "scripts/contracts/evidence.py",
+          "size": 16993,
+          "source_sha256": "13f54e95790763ebf75e795ee97e7fcd22ba377d0223cc70bd018d531aa22321"
+        },
+        {
+          "before_sha256": null,
+          "operation": "new",
+          "path": "scripts/contracts/source_provenance.py",
+          "size": 4077,
+          "source_sha256": "a15bde04c812bf54c84ba309535541875bfbb0513d2cbf4386040de1e76994df"
+        }
+      ],
+      "installed": true,
+      "selected_drift": 5,
+      "target": "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\skills\\revenue-forecast",
+      "unselected_drift": 0
+    }
+  ]
+}

@@ -1,0 +1,70 @@
+{
+  "schema_version": "nonperiodic-review-seal/1",
+  "sealed_at": "2026-10-30T09:36:23.654507+00:00",
+  "files": [
+    {
+      "path": "scripts/contracts/company_wiki_original.py",
+      "bytes": 11106,
+      "raw_sha256": "b79d05216f45582dee225413c9a1110c698378292a4d53d106c5ef9016d96a42",
+      "lf_sha256": "b79d05216f45582dee225413c9a1110c698378292a4d53d106c5ef9016d96a42"
+    },
+    {
+      "path": "scripts/contracts/source_provenance.py",
+      "bytes": 4077,
+      "raw_sha256": "a15bde04c812bf54c84ba309535541875bfbb0513d2cbf4386040de1e76994df",
+      "lf_sha256": "a15bde04c812bf54c84ba309535541875bfbb0513d2cbf4386040de1e76994df"
+    },
+    {
+      "path": "scripts/contracts/document.py",
+      "bytes": 54133,
+      "raw_sha256": "8f5c6fee259670e76ab9abcbfa75e89083a3cb64b23b99fdc0465c5d0797d7af",
+      "lf_sha256": "98ef5833edebd52ef8acbf9da4747a82e20e5199d83845f0c2a0f1ab37e30a45"
+    },
+    {
+      "path": "scripts/contracts/evidence.py",
+      "bytes": 16993,
+      "raw_sha256": "13f54e95790763ebf75e795ee97e7fcd22ba377d0223cc70bd018d531aa22321",
+      "lf_sha256": "13f54e95790763ebf75e795ee97e7fcd22ba377d0223cc70bd018d531aa22321"
+    },
+    {
+      "path": "scripts/company_wiki_source_v2.py",
+      "bytes": 9551,
+      "raw_sha256": "f3c1cf617b856fb83d252e64c290d95e28c0be3fd472060ed17130548bbeda01",
+      "lf_sha256": "8be91dcfd1874480339501a0ae116734e4ec13f7faed614c77a4fedf6bdda679"
+    },
+    {
+      "path": "tests/test_source_provenance.py",
+      "bytes": 10033,
+      "raw_sha256": "1b607f1e67128590bc0afa7a104d237b1ef1c7d6df26e9a4764eaa63f1c91725",
+      "lf_sha256": "1b607f1e67128590bc0afa7a104d237b1ef1c7d6df26e9a4764eaa63f1c91725"
+    }
+  ],
+  "preexisting_wip": [
+    {
+      "path": "assurance/runs/daily_alert.jsonl",
+      "baseline_sha256": "a3f8b3f0c5a9831aa73d4b7468626daff57639602afa5282487fcdf2b338120a",
+      "observed_sha256": "a3f8b3f0c5a9831aa73d4b7468626daff57639602afa5282487fcdf2b338120a",
+      "unchanged": true,
+      "crlf_bytes_sha256": "a3f8b3f0c5a9831aa73d4b7468626daff57639602afa5282487fcdf2b338120a",
+      "only_crlf_to_lf_drift": false
+    },
+    {
+      "path": "assurance/runs/weekly_alert.jsonl",
+      "baseline_sha256": "b57727e979a65f2313f9a80033dd71f8d8406aeb070f283640ed9bbb354cfc0e",
+      "observed_sha256": "b57727e979a65f2313f9a80033dd71f8d8406aeb070f283640ed9bbb354cfc0e",
+      "unchanged": true,
+      "crlf_bytes_sha256": "b57727e979a65f2313f9a80033dd71f8d8406aeb070f283640ed9bbb354cfc0e",
+      "only_crlf_to_lf_drift": false
+    },
+    {
+      "path": "assurance/runs/weekly_manifest.json",
+      "baseline_sha256": "44e46cd57e5373803fbdaa5dff5e93041840b8e8cc671e710e0346a133c4df97",
+      "observed_sha256": "4098f5a347b3dbb882d656712021eb407dfd9cfe9fbe12285957dafabff4ee9b",
+      "unchanged": false,
+      "crlf_bytes_sha256": "44e46cd57e5373803fbdaa5dff5e93041840b8e8cc671e710e0346a133c4df97",
+      "only_crlf_to_lf_drift": true
+    }
+  ],
+  "all_preexisting_wip_unchanged": false,
+  "all_preexisting_wip_content_unchanged": true
+}

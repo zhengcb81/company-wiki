@@ -1,0 +1,202 @@
+{
+  "status": "PASS",
+  "scope": "current selection/source cards on captured real native; not new PDF replay, summary or forecast",
+  "seconds": 3.14,
+  "source_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+  "selected": 15,
+  "source_cards": [
+    {
+      "task_key": "t1",
+      "support": [
+        "答：您好，公司积极开发国内市场，持续完善国内市场战略布局，提\n高公司的抗风险能力，2025 年度公司境内收入约8.19 亿元，占比约22%，\n较比 2024 年度有所提升。"
+      ],
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "reading_hint": {
+        "priority": 2,
+        "value_band": "meaningful_fact",
+        "score": 3,
+        "purposes": [
+          "unknown"
+        ]
+      }
+    },
+    {
+      "task_key": "t2",
+      "support": [
+        "答：您好，根据相应新闻报道，您所描述的情况涉及该公司的家电产\n品，该事项未对九目化学经营构成重大影响。"
+      ],
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "reading_hint": {
+        "priority": 2,
+        "value_band": "meaningful_fact",
+        "score": 3,
+        "purposes": [
+          "operating"
+        ]
+      }
+    },
+    {
+      "task_key": "t3",
+      "support": [
+        "九目化学主要产品为 OLED\n升华前材料，下游客户为国内外OLED 成品材料企业，OLED 成品材料生产\n企业下游主要为 OLED 显示面板生产企业，OLED 显示面板生产企业下游为\n各类显示屏应用企业。"
+      ],
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "reading_hint": {
+        "priority": 2,
+        "value_band": "meaningful_fact",
+        "score": 3,
+        "purposes": [
+          "operating"
+        ]
+      }
+    },
+    {
+      "task_key": "t4",
+      "support": [
+        "九目化学已于 3 月11 日收到北交所第二轮审核问\n询函，因前期报送的财务数据有效期已过，九目化学申请了中止审核，待\n财务数据按要求完成更新后，将申请恢复审核，并回复问询。"
+      ],
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "reading_hint": {
+        "priority": 2,
+        "value_band": "meaningful_fact",
+        "score": 3,
+        "purposes": [
+          "operating"
+        ]
+      }
+    },
+    {
+      "task_key": "t5",
+      "support": [
+        "公司 2024 年度影响收入的主要原因为沸石系列环保材料\n业务及部分医药业务下游需求减少，公司 2025 年度沸石分子筛产品收入\n略低于 2024 年度。"
+      ],
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "reading_hint": {
+        "priority": 2,
+        "value_band": "meaningful_fact",
+        "score": 3,
+        "purposes": [
+          "operating"
+        ]
+      }
+    },
+    {
+      "task_key": "t6",
+      "support": [
+        "答：您好，公司现无生产 VC（碳酸亚乙烯酯）的情况，根据公司控\n股股东中国节能信息，中国节能与宁德时代已经建立了联系，并希望建立\n业务协同与合作。"
+      ],
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "reading_hint": {
+        "priority": 2,
+        "value_band": "meaningful_fact",
+        "score": 3,
+        "purposes": [
+          "unknown"
+        ]
+      }
+    },
+    {
+      "task_key": "t7",
+      "support": [
+        "目前公司在半导体制造材料领域已销售的产品主要为光刻\n胶单体、树脂、光酸以及半导体制程中清洗剂添加材料等，现已开发了超\n300 种化合物，在所涉足的产品方面技术已经处于国内领先水平。"
+      ],
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "reading_hint": {
+        "priority": 2,
+        "value_band": "meaningful_fact",
+        "score": 3,
+        "purposes": [
+          "operating"
+        ]
+      }
+    },
+    {
+      "task_key": "t8",
+      "support": [
+        "公司结\n合实际情况与下游客户需求，在新产能方面积极布局，2025 年公司启动\n了万润工业园二期 C05 建设项目，该项目包含半导体光刻胶用相关材料产\n能约 751 吨/年，项目建成后将为公司半导体制造材料业务发展提供产能\n保障。"
+      ],
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "reading_hint": {
+        "priority": 2,
+        "value_band": "meaningful_fact",
+        "score": 6,
+        "purposes": [
+          "operating"
+        ]
+      }
+    }
+  ],
+  "business_input_scores": [
+    {
+      "id": "domestic-market-share",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "reported-material-impact",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "subsidiary-customer-chain",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "listing-process-conditions",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "demand-cause",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "vc-denial-contact-and-hope",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "sold-roster-developed-compounds",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "capacity-plan",
+      "supported": true,
+      "all_anchors_individually_present": true
+    }
+  ],
+  "work": 1246717,
+  "new_pdf_parses": 0,
+  "new_model_posts": 0,
+  "downloads": 0,
+  "original_unchanged": true,
+  "selection_status": "partial",
+  "full_document_coverage_complete": false
+}

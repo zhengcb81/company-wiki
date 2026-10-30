@@ -1,3 +1,14 @@
+## 2026-10-30 当前：RF非期次复用已发布且CI成功；来源scope大节点通过待发布
+
+唯一入口CURRENT_STATUS.md/json。M1 RF **a1c077183127a3266e0bafc0da7734a20e343442**已推主线，精确CI41034901632 success；正常pre-push595P/1skip/36subtests，5运行时文件同步2物理技能副本、重复零写与2新进程实际source验证通过。真实IR owner打开及source输入通过、未知元数据保持、0下载/POST/raw复制及测试湖恢复；不等于叙述或预测采用。见[复用发布](review/source-information-20261030/description-final/nonperiodic-reuse/publication.json)。
+
+M2共享source owner已修客户链/已售范围/已开发数量重要性，静态关系不伪造事件，模板/会计/未来客户负对照及真正软件功能保留。196P定向、153P兼容、397源mypy/ruff，独审21固定probe+31P/0OPEN/稳定3SHA。真实captured native→当前SourceCard 8gold支持、t3/t7 meaningful，3.14秒/work1246717、0PDF解析/模型/下载、原件不变；全文仍partial。见[M2验收](review/source-information-20261030/description-final/source-business-scope/README.md)。当前待正常提交推送M2，不冒签远端结果。
+
+**下一步：** 发布M2并观察精确CI，按[实施细则](review/source-information-20261030/description-final/SUMMARY_QUALITY_IMPLEMENTATION.md)实施M3摘要归属/程度/条件保真及明确coverage，再真实摘要、缓存恢复、RF实际参数/公式采用。M3尚未实施，不把来源优先级改善当摘要遗漏已闭。W21 canonical C2、长路径、US RPO、holdout和公司loop继续OPEN。目标按授权持续执行；原件/config/外来WIP及Dayu/IQS/Dashboard保持。
+
+---
+以下为历史记录，不是额外执行入口。
+
 ## 2026-10-30 当前：W21已合并推送，CI版本/平台夹具修复已发布且精确CI成功
 
 唯一入口 CURRENT_STATUS.md/json。W21工程已正式合并推送1e4e9eb5（ROOT独审0阻塞、198P/18.69秒、397源mypy/ruff，正常pre-push158P/25.16秒）。canonical SDK C2仍native_fallback，alias不等于对齐成功，范围见[W21接收](review/w21-root-reception-20261030/README.md)。

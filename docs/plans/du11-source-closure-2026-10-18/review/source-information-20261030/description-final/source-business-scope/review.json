@@ -1,0 +1,79 @@
+{
+  "schema_version": "independent-source-scope-review/1",
+  "status": "PASS_M2_SCOPED",
+  "scope": "M2 only, M3 not implemented/not accepted",
+  "baseline": "6894f5ee21f4c883c7c4376984c962a88f0ed076",
+  "no_paid_no_pdf_parse": true,
+  "rounds": [
+    {
+      "id": 1,
+      "observed_diff_blob_prefix": "bd428d65",
+      "findings": [
+        "real capturedt3 remained description because composition target greedily swallowed downstream chain",
+        "real capturedt7 developedcount not independently recognized before later comma; materiality only from soldscope",
+        "count grammar promoted CN/EN accounting policies and templates to operating",
+        "static customer/sold examples promoted template text"
+      ],
+      "state": "FIXED_AND_RETESTED_WITH_CURRENT_ROOT",
+      "evidence": "Original read-only probe output delivered to root; current probe-result covers source changes."
+    },
+    {
+      "id": 2,
+      "observed_sha256": "aa811c800eb4c1ab58f4a4e8264eeccbb68e9ab0f35046de6e49cc16d852967e",
+      "finding": "future major customers not excluded by immediate-prefix prospective scope",
+      "state": "FIXED_AND_RETESTED_CN_EN"
+    },
+    {
+      "id": 3,
+      "finding": "financial head exclusion rejects actual governing software function whose object is accounting policies",
+      "examples": [
+        "Our software provides accounting policy management tools.",
+        "Our software identifies accounting policies and automates compliance."
+      ],
+      "baseline_roles_operating": true,
+      "current_roles_operating": false,
+      "current_source_use": "context_only",
+      "state": "FIXED_AND_RETESTED_BASELINE_TRUE_TO_TRUE"
+    }
+  ],
+  "tests": [
+    {
+      "command": "python -m pytest -q -p no:cacheprovider tests/unit/du11_production/test_source_observed_business_scope.py",
+      "result": "17 passed in3.29s; earlier implementation, not final acceptance"
+    },
+    {
+      "command": "python -m pytest -q -p no:cacheprovider tests/unit/du11_production/test_source_observed_business_scope.py tests/unit/document_understanding_selection/test_reading_value_coverage.py::test_legacy_and_semantic_do_not_consume_reading_value tests/unit/document_understanding_selection/test_reading_value_coverage.py::test_v1_reading_replay_retains_original_strict_priority_ranking",
+      "result": "28 passed in6.04s; pre-final software regression fix"
+    },
+    {
+      "artifact": "final-tests.json",
+      "result": "31 passed in12.14s, stable3 fileSHA throughout; includes29 M2 tests+2 oldpolicy/budget compatibility checks"
+    }
+  ],
+  "honest_limits": [
+    "Source materiality is not assertion of issuer event/actuality. Conditional and denial text can be meaningful; no stage relations were fabricated in those probes.",
+    "Legacy detect_business_fact remains false for standalone developed/sell examples. include_source_descriptions=False helper changes for newly recognized development, but full0.8 replay not independently rerun here.",
+    "Initial probe cache rereads added0 work. Added local regex windows finite; root raised scan passes6→10 for3 bounded boundary scans+1 developed scan. No motherbudget increase observed.",
+    "Final fixed21-case source/session probe plus31 tests is scopedM2 acceptance; it does not establish complete0.8 PDF replay, broad natural-language recall, or repaired live summary semantics."
+  ],
+  "final_verification": {
+    "stable_files_sha256": {
+      "src/company_wiki/document_understanding/operating_states/assertion_roles.py": "15591a3cff5c9b5ec01b1d3a10912fbd2c3a51f6d7aa96311fa57e51d3758a8d",
+      "src/company_wiki/source_catalog/narrative_business_policy.py": "c9236ff506feef5f83aa1a42a4f024603de92c4121d071c87737229a4bca58fb",
+      "tests/unit/du11_production/test_source_observed_business_scope.py": "b7622d6d7e987e55e31f0fd6437dcf73dfbe4b2dd2613de13970f235e0521908"
+    },
+    "stable_during_test": true,
+    "independent_fixed_probe_cases": 21,
+    "test_count": 31,
+    "test_elapsed_pytest_seconds": 12.14,
+    "process_elapsed_seconds": 26.608,
+    "tests_exit": 0,
+    "source_description_scan_passes": 10,
+    "all_probe_cache_reloads_extra_work": 0,
+    "captured_t3_meaningful_without_event": true,
+    "captured_t7_meaningful_with_developed_count_boundary": true,
+    "open_M2_findings": 0,
+    "M3_status": "NOT_IMPLEMENTED_NOT_ACCEPTED",
+    "no_source_model_replay_or_entailment_acceptance": true
+  }
+}

@@ -1,0 +1,931 @@
+{
+  "schema_version": "independent-source-scope-probe/1",
+  "baseline": "6894f5ee21f4c883c7c4376984c962a88f0ed076",
+  "source_description_scan_passes": 10,
+  "product_sha256": "15591a3cff5c9b5ec01b1d3a10912fbd2c3a51f6d7aa96311fa57e51d3758a8d",
+  "no_paid_no_pdf_parse": true,
+  "cases": [
+    {
+      "name": "accounting_cn",
+      "kind": "non_operating_control",
+      "text": "本公司已开发80项会计政策。",
+      "before_material": false,
+      "after_material": false,
+      "before_event_helper": false,
+      "after_event_helper": false,
+      "legacy_detect_business_eligible": false,
+      "reading_band": "description",
+      "reading_eligible": false,
+      "purpose": "accounting_policy",
+      "source_use": [
+        "context_only",
+        "non_operating_purpose"
+      ],
+      "relations": [],
+      "cached_observation_extra_work": 0,
+      "roles": [
+        {
+          "text": "本公司已开发80项会计政策",
+          "independent_payload": null,
+          "material_payload": false,
+          "function_or_event": false,
+          "rule_purpose": ""
+        }
+      ],
+      "local_match_details": [
+        {
+          "part": "本公司已开发80项会计政策",
+          "compositions": [],
+          "developed": [
+            {
+              "cn": "会计政策",
+              "en": null,
+              "closed": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "accounting_en",
+      "kind": "non_operating_control",
+      "text": "We have developed over 80 accounting policies.",
+      "before_material": false,
+      "after_material": false,
+      "before_event_helper": false,
+      "after_event_helper": false,
+      "legacy_detect_business_eligible": false,
+      "reading_band": "description",
+      "reading_eligible": false,
+      "purpose": "accounting_policy",
+      "source_use": [
+        "context_only",
+        "non_operating_purpose"
+      ],
+      "relations": [],
+      "cached_observation_extra_work": 0,
+      "roles": [
+        {
+          "text": "We have developed over 80 accounting policies.",
+          "independent_payload": null,
+          "material_payload": false,
+          "function_or_event": false,
+          "rule_purpose": ""
+        }
+      ],
+      "local_match_details": [
+        {
+          "part": "We have developed over 80 accounting policies.",
+          "compositions": [],
+          "developed": [
+            {
+              "cn": null,
+              "en": "accounting policies.",
+              "closed": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "template_developed_en",
+      "kind": "template_control",
+      "text": "The template says: we have developed over 80 diagnostic assays.",
+      "before_material": false,
+      "after_material": false,
+      "before_event_helper": false,
+      "after_event_helper": false,
+      "legacy_detect_business_eligible": false,
+      "reading_band": "description",
+      "reading_eligible": false,
+      "purpose": "unknown",
+      "source_use": [
+        "context_only",
+        "no_independent_business_support"
+      ],
+      "relations": [],
+      "cached_observation_extra_work": 0,
+      "roles": [
+        {
+          "text": "The template says: we have developed over 80 diagnostic assays.",
+          "independent_payload": null,
+          "material_payload": false,
+          "function_or_event": false,
+          "rule_purpose": ""
+        }
+      ],
+      "local_match_details": [
+        {
+          "part": "The template says: we have developed over 80 diagnostic assays.",
+          "compositions": [],
+          "developed": [
+            {
+              "cn": null,
+              "en": "diagnostic assays.",
+              "closed": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "template_developed_cn",
+      "kind": "template_control",
+      "text": "流程要求：公司已开发超过80种检测试剂时应填报本表。",
+      "before_material": false,
+      "after_material": false,
+      "before_event_helper": false,
+      "after_event_helper": false,
+      "legacy_detect_business_eligible": false,
+      "reading_band": "description",
+      "reading_eligible": false,
+      "purpose": "unknown",
+      "source_use": [
+        "context_only",
+        "no_independent_business_support"
+      ],
+      "relations": [],
+      "cached_observation_extra_work": 0,
+      "roles": [
+        {
+          "text": "流程要求：公司已开发超过80种检测试剂时应填报本表",
+          "independent_payload": null,
+          "material_payload": false,
+          "function_or_event": false,
+          "rule_purpose": ""
+        }
+      ],
+      "local_match_details": [
+        {
+          "part": "流程要求：公司已开发超过80种检测试剂时应填报本表",
+          "compositions": [],
+          "developed": [
+            {
+              "cn": "检测试剂时应填报本表",
+              "en": null,
+              "closed": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "question",
+      "kind": "question_control",
+      "text": "请问公司已开发超过80种检测试剂吗？",
+      "before_material": false,
+      "after_material": false,
+      "before_event_helper": false,
+      "after_event_helper": false,
+      "legacy_detect_business_eligible": false,
+      "reading_band": "description",
+      "reading_eligible": false,
+      "purpose": "unknown",
+      "source_use": [
+        "context_only",
+        "no_independent_business_support"
+      ],
+      "relations": [],
+      "cached_observation_extra_work": 0,
+      "roles": [
+        {
+          "text": "请问公司已开发超过80种检测试剂吗",
+          "independent_payload": null,
+          "material_payload": false,
+          "function_or_event": false,
+          "rule_purpose": ""
+        }
+      ],
+      "local_match_details": [
+        {
+          "part": "请问公司已开发超过80种检测试剂吗",
+          "compositions": [],
+          "developed": [
+            {
+              "cn": "检测试剂吗",
+              "en": null,
+              "closed": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "conditional",
+      "kind": "modality_observation_not_actuality_test",
+      "text": "如果公司已开发80种检测试剂，则申请专项补贴。",
+      "before_material": false,
+      "after_material": true,
+      "before_event_helper": false,
+      "after_event_helper": true,
+      "legacy_detect_business_eligible": false,
+      "reading_band": "meaningful_fact",
+      "reading_eligible": true,
+      "purpose": "operating",
+      "source_use": [
+        "support",
+        "source_business_relation"
+      ],
+      "relations": [],
+      "cached_observation_extra_work": 0,
+      "roles": [
+        {
+          "text": "如果公司已开发80种检测试剂，则申请专项补贴",
+          "independent_payload": true,
+          "material_payload": true,
+          "function_or_event": true,
+          "rule_purpose": ""
+        }
+      ],
+      "local_match_details": [
+        {
+          "part": "如果公司已开发80种检测试剂",
+          "compositions": [],
+          "developed": [
+            {
+              "cn": "检测试剂",
+              "en": null,
+              "closed": true
+            }
+          ]
+        },
+        {
+          "part": "则申请专项补贴",
+          "compositions": [],
+          "developed": []
+        }
+      ]
+    },
+    {
+      "name": "negative",
+      "kind": "negation_observation_not_zero_fact_test",
+      "text": "公司并未确认已开发超过80种检测试剂。",
+      "before_material": false,
+      "after_material": true,
+      "before_event_helper": false,
+      "after_event_helper": true,
+      "legacy_detect_business_eligible": false,
+      "reading_band": "meaningful_fact",
+      "reading_eligible": true,
+      "purpose": "operating",
+      "source_use": [
+        "support",
+        "source_business_relation"
+      ],
+      "relations": [],
+      "cached_observation_extra_work": 0,
+      "roles": [
+        {
+          "text": "公司并未确认已开发超过80种检测试剂",
+          "independent_payload": true,
+          "material_payload": true,
+          "function_or_event": true,
+          "rule_purpose": ""
+        }
+      ],
+      "local_match_details": [
+        {
+          "part": "公司并未确认已开发超过80种检测试剂",
+          "compositions": [],
+          "developed": [
+            {
+              "cn": "检测试剂",
+              "en": null,
+              "closed": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "developed_actual",
+      "kind": "positive",
+      "text": "本公司已开发超过80种检测试剂。",
+      "before_material": false,
+      "after_material": true,
+      "before_event_helper": false,
+      "after_event_helper": true,
+      "legacy_detect_business_eligible": false,
+      "reading_band": "meaningful_fact",
+      "reading_eligible": true,
+      "purpose": "operating",
+      "source_use": [
+        "support",
+        "source_business_relation"
+      ],
+      "relations": [],
+      "cached_observation_extra_work": 0,
+      "roles": [
+        {
+          "text": "本公司已开发超过80种检测试剂",
+          "independent_payload": true,
+          "material_payload": true,
+          "function_or_event": true,
+          "rule_purpose": ""
+        }
+      ],
+      "local_match_details": [
+        {
+          "part": "本公司已开发超过80种检测试剂",
+          "compositions": [],
+          "developed": [
+            {
+              "cn": "检测试剂",
+              "en": null,
+              "closed": true
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "developed_wrong_count_unit",
+      "kind": "count_grammar_control",
+      "text": "本公司已开发80吨检测试剂。",
+      "before_material": false,
+      "after_material": false,
+      "before_event_helper": false,
+      "after_event_helper": false,
+      "legacy_detect_business_eligible": false,
+      "reading_band": "description",
+      "reading_eligible": false,
+      "purpose": "unknown",
+      "source_use": [
+        "context_only",
+        "no_independent_business_support"
+      ],
+      "relations": [],
+      "cached_observation_extra_work": 0,
+      "roles": [
+        {
+          "text": "本公司已开发80吨检测试剂",
+          "independent_payload": null,
+          "material_payload": false,
+          "function_or_event": false,
+          "rule_purpose": ""
+        }
+      ],
+      "local_match_details": [
+        {
+          "part": "本公司已开发80吨检测试剂",
+          "compositions": [],
+          "developed": []
+        }
+      ]
+    },
+    {
+      "name": "sold_future",
+      "kind": "prospective_control",
+      "text": "公司未来拟销售的产品主要为试剂和耗材。",
+      "before_material": false,
+      "after_material": false,
+      "before_event_helper": false,
+      "after_event_helper": false,
+      "legacy_detect_business_eligible": false,
+      "reading_band": "description",
+      "reading_eligible": true,
+      "purpose": "operating",
+      "source_use": [
+        "support",
+        "source_business_relation"
+      ],
+      "relations": [],
+      "cached_observation_extra_work": 0,
+      "roles": [
+        {
+          "text": "公司未来拟销售的产品主要为试剂和耗材",
+          "independent_payload": true,
+          "material_payload": false,
+          "function_or_event": false,
+          "rule_purpose": ""
+        }
+      ],
+      "local_match_details": [
+        {
+          "part": "公司未来拟销售的产品主要为试剂和耗材",
+          "compositions": [
+            {
+              "head": "产品",
+              "target": "试剂和耗材",
+              "closed": true
+            }
+          ],
+          "developed": []
+        }
+      ]
+    },
+    {
+      "name": "sold_negative",
+      "kind": "negative_scope_control",
+      "text": "公司未曾销售的产品主要为试剂和耗材。",
+      "before_material": false,
+      "after_material": false,
+      "before_event_helper": false,
+      "after_event_helper": false,
+      "legacy_detect_business_eligible": false,
+      "reading_band": "description",
+      "reading_eligible": true,
+      "purpose": "operating",
+      "source_use": [
+        "support",
+        "source_business_relation"
+      ],
+      "relations": [],
+      "cached_observation_extra_work": 0,
+      "roles": [
+        {
+          "text": "公司未曾销售的产品主要为试剂和耗材",
+          "independent_payload": true,
+          "material_payload": false,
+          "function_or_event": false,
+          "rule_purpose": ""
+        }
+      ],
+      "local_match_details": [
+        {
+          "part": "公司未曾销售的产品主要为试剂和耗材",
+          "compositions": [
+            {
+              "head": "产品",
+              "target": "试剂和耗材",
+              "closed": true
+            }
+          ],
+          "developed": []
+        }
+      ]
+    },
+    {
+      "name": "template_sold",
+      "kind": "template_control",
+      "text": "填报示例：公司已销售的产品主要为试剂和耗材。",
+      "before_material": false,
+      "after_material": false,
+      "before_event_helper": false,
+      "after_event_helper": false,
+      "legacy_detect_business_eligible": false,
+      "reading_band": "description",
+      "reading_eligible": false,
+      "purpose": "unknown",
+      "source_use": [
+        "context_only",
+        "no_independent_business_support"
+      ],
+      "relations": [],
+      "cached_observation_extra_work": 0,
+      "roles": [
+        {
+          "text": "填报示例：公司已销售的产品主要为试剂和耗材",
+          "independent_payload": null,
+          "material_payload": false,
+          "function_or_event": false,
+          "rule_purpose": ""
+        }
+      ],
+      "local_match_details": [
+        {
+          "part": "填报示例：公司已销售的产品主要为试剂和耗材",
+          "compositions": [
+            {
+              "head": "产品",
+              "target": "试剂和耗材",
+              "closed": true
+            }
+          ],
+          "developed": []
+        }
+      ]
+    },
+    {
+      "name": "target_customer",
+      "kind": "prospective_control",
+      "text": "Our target customers include hospitals and laboratories.",
+      "before_material": false,
+      "after_material": false,
+      "before_event_helper": false,
+      "after_event_helper": false,
+      "legacy_detect_business_eligible": false,
+      "reading_band": "description",
+      "reading_eligible": true,
+      "purpose": "operating",
+      "source_use": [
+        "support",
+        "source_business_relation"
+      ],
+      "relations": [],
+      "cached_observation_extra_work": 0,
+      "roles": [
+        {
+          "text": "Our target customers include hospitals and laboratories.",
+          "independent_payload": true,
+          "material_payload": false,
+          "function_or_event": false,
+          "rule_purpose": ""
+        }
+      ],
+      "local_match_details": [
+        {
+          "part": "Our target customers include hospitals and laboratories.",
+          "compositions": [],
+          "developed": []
+        }
+      ]
+    },
+    {
+      "name": "modified_future_customer",
+      "kind": "prospective_control",
+      "text": "Our future major customers include hospitals and laboratories.",
+      "before_material": false,
+      "after_material": false,
+      "before_event_helper": false,
+      "after_event_helper": false,
+      "legacy_detect_business_eligible": false,
+      "reading_band": "description",
+      "reading_eligible": true,
+      "purpose": "operating",
+      "source_use": [
+        "support",
+        "source_business_relation"
+      ],
+      "relations": [],
+      "cached_observation_extra_work": 0,
+      "roles": [
+        {
+          "text": "Our future major customers include hospitals and laboratories.",
+          "independent_payload": true,
+          "material_payload": false,
+          "function_or_event": false,
+          "rule_purpose": ""
+        }
+      ],
+      "local_match_details": [
+        {
+          "part": "Our future major customers include hospitals and laboratories.",
+          "compositions": [],
+          "developed": []
+        }
+      ]
+    },
+    {
+      "name": "template_customer",
+      "kind": "template_control",
+      "text": "模板示例：客户包括医院和实验室。",
+      "before_material": false,
+      "after_material": false,
+      "before_event_helper": false,
+      "after_event_helper": false,
+      "legacy_detect_business_eligible": false,
+      "reading_band": "description",
+      "reading_eligible": false,
+      "purpose": "unknown",
+      "source_use": [
+        "context_only",
+        "no_independent_business_support"
+      ],
+      "relations": [],
+      "cached_observation_extra_work": 0,
+      "roles": [
+        {
+          "text": "模板示例：客户包括医院和实验室",
+          "independent_payload": null,
+          "material_payload": false,
+          "function_or_event": false,
+          "rule_purpose": ""
+        }
+      ],
+      "local_match_details": [
+        {
+          "part": "模板示例：客户包括医院和实验室",
+          "compositions": [
+            {
+              "head": "客户",
+              "target": "医院和实验室",
+              "closed": true
+            }
+          ],
+          "developed": []
+        }
+      ]
+    },
+    {
+      "name": "foreign_subject",
+      "kind": "attribution_observation_not_issuer_fact_test",
+      "text": "客户已开发80种检测试剂，本公司尚未开发相关产品。",
+      "before_material": false,
+      "after_material": true,
+      "before_event_helper": false,
+      "after_event_helper": true,
+      "legacy_detect_business_eligible": false,
+      "reading_band": "meaningful_fact",
+      "reading_eligible": true,
+      "purpose": "operating",
+      "source_use": [
+        "support",
+        "source_business_relation"
+      ],
+      "relations": [],
+      "cached_observation_extra_work": 0,
+      "roles": [
+        {
+          "text": "客户已开发80种检测试剂",
+          "independent_payload": true,
+          "material_payload": true,
+          "function_or_event": true,
+          "rule_purpose": ""
+        },
+        {
+          "text": "本公司尚未开发相关产品",
+          "independent_payload": null,
+          "material_payload": false,
+          "function_or_event": false,
+          "rule_purpose": ""
+        }
+      ],
+      "local_match_details": [
+        {
+          "part": "客户已开发80种检测试剂",
+          "compositions": [],
+          "developed": [
+            {
+              "cn": "检测试剂",
+              "en": null,
+              "closed": true
+            }
+          ]
+        },
+        {
+          "part": "本公司尚未开发相关产品",
+          "compositions": [],
+          "developed": []
+        }
+      ]
+    },
+    {
+      "name": "software_governing_policy_tools",
+      "kind": "positive_function_regression_control",
+      "text": "Our software provides accounting policy management tools.",
+      "before_material": true,
+      "after_material": true,
+      "before_event_helper": true,
+      "after_event_helper": true,
+      "legacy_detect_business_eligible": false,
+      "reading_band": "meaningful_fact",
+      "reading_eligible": true,
+      "purpose": "operating",
+      "source_use": [
+        "support",
+        "source_business_relation"
+      ],
+      "relations": [],
+      "cached_observation_extra_work": 0,
+      "roles": [
+        {
+          "text": "Our software provides accounting policy management tools.",
+          "independent_payload": true,
+          "material_payload": true,
+          "function_or_event": true,
+          "rule_purpose": ""
+        }
+      ],
+      "local_match_details": [
+        {
+          "part": "Our software provides accounting policy management tools.",
+          "compositions": [],
+          "developed": []
+        }
+      ]
+    },
+    {
+      "name": "software_governing_policy_identification",
+      "kind": "positive_function_regression_control",
+      "text": "Our software identifies accounting policies and automates compliance.",
+      "before_material": true,
+      "after_material": true,
+      "before_event_helper": true,
+      "after_event_helper": true,
+      "legacy_detect_business_eligible": false,
+      "reading_band": "meaningful_fact",
+      "reading_eligible": true,
+      "purpose": "operating",
+      "source_use": [
+        "support",
+        "source_business_relation"
+      ],
+      "relations": [],
+      "cached_observation_extra_work": 0,
+      "roles": [
+        {
+          "text": "Our software identifies accounting policies and automates compliance.",
+          "independent_payload": true,
+          "material_payload": true,
+          "function_or_event": true,
+          "rule_purpose": ""
+        }
+      ],
+      "local_match_details": [
+        {
+          "part": "Our software identifies accounting policies and automates compliance.",
+          "compositions": [],
+          "developed": []
+        }
+      ]
+    },
+    {
+      "name": "policy_software_product",
+      "kind": "positive_function_regression_control",
+      "text": "Our products include accounting policy management software.",
+      "before_material": true,
+      "after_material": true,
+      "before_event_helper": true,
+      "after_event_helper": true,
+      "legacy_detect_business_eligible": false,
+      "reading_band": "meaningful_fact",
+      "reading_eligible": true,
+      "purpose": "operating",
+      "source_use": [
+        "support",
+        "source_business_relation"
+      ],
+      "relations": [],
+      "cached_observation_extra_work": 0,
+      "roles": [
+        {
+          "text": "Our products include accounting policy management software.",
+          "independent_payload": true,
+          "material_payload": true,
+          "function_or_event": true,
+          "rule_purpose": ""
+        }
+      ],
+      "local_match_details": [
+        {
+          "part": "Our products include accounting policy management software.",
+          "compositions": [],
+          "developed": []
+        }
+      ]
+    },
+    {
+      "name": "captured_t3",
+      "kind": "real_capture_positive",
+      "text": "九目化学主要产品为 OLED\n升华前材料，下游客户为国内外OLED 成品材料企业，OLED 成品材料生产\n企业下游主要为 OLED 显示面板生产企业，OLED 显示面板生产企业下游为\n各类显示屏应用企业。",
+      "before_material": false,
+      "after_material": true,
+      "before_event_helper": false,
+      "after_event_helper": false,
+      "legacy_detect_business_eligible": false,
+      "reading_band": "meaningful_fact",
+      "reading_eligible": true,
+      "purpose": "operating",
+      "source_use": [
+        "support",
+        "source_business_relation"
+      ],
+      "relations": [],
+      "cached_observation_extra_work": 0,
+      "roles": [
+        {
+          "text": "九目化学主要产品为 OLED 升华前材料，下游客户为国内外OLED 成品材料企业，OLED 成品材料生产企业下游主要为 OLED 显示面板生产企业，OLED 显示面板生产企业下游为各类显示屏应用企业",
+          "independent_payload": true,
+          "material_payload": true,
+          "function_or_event": false,
+          "rule_purpose": ""
+        }
+      ],
+      "local_match_details": [
+        {
+          "part": "九目化学主要产品为 OLED 升华前材料",
+          "compositions": [
+            {
+              "head": "主要产品",
+              "target": " OLED 升华前材料",
+              "closed": true
+            }
+          ],
+          "developed": []
+        },
+        {
+          "part": "下游客户为国内外OLED 成品材料企业",
+          "compositions": [
+            {
+              "head": "下游客户",
+              "target": "国内外OLED 成品材料企业",
+              "closed": true
+            }
+          ],
+          "developed": []
+        },
+        {
+          "part": "OLED 成品材料生产企业下游主要为 OLED 显示面板生产企业",
+          "compositions": [
+            {
+              "head": "下游",
+              "target": " OLED 显示面板生产企业",
+              "closed": true
+            }
+          ],
+          "developed": []
+        },
+        {
+          "part": "OLED 显示面板生产企业下游为各类显示屏应用企业",
+          "compositions": [
+            {
+              "head": "下游",
+              "target": "各类显示屏应用企业",
+              "closed": true
+            }
+          ],
+          "developed": []
+        }
+      ]
+    },
+    {
+      "name": "captured_t7",
+      "kind": "real_capture_positive",
+      "text": "目前公司在半导体制造材料领域已销售的产品主要为光刻\n胶单体、树脂、光酸以及半导体制程中清洗剂添加材料等，现已开发了超\n300 种化合物，在所涉足的产品方面技术已经处于国内领先水平。",
+      "before_material": false,
+      "after_material": true,
+      "before_event_helper": false,
+      "after_event_helper": true,
+      "legacy_detect_business_eligible": false,
+      "reading_band": "meaningful_fact",
+      "reading_eligible": true,
+      "purpose": "operating",
+      "source_use": [
+        "support",
+        "source_business_relation"
+      ],
+      "relations": [
+        {
+          "assertion_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 68,
+              "char_end": 89
+            }
+          ],
+          "actor_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 68,
+              "char_end": 70
+            }
+          ],
+          "object_refs": [],
+          "predicate_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 70,
+              "char_end": 72
+            }
+          ],
+          "qualifier_refs": [],
+          "activity": "business_scope",
+          "polarity": "positive",
+          "stage": "current",
+          "attribution": "unknown",
+          "modality": "actual"
+        }
+      ],
+      "cached_observation_extra_work": 0,
+      "roles": [
+        {
+          "text": "目前公司在半导体制造材料领域已销售的产品主要为光刻胶单体、树脂、光酸以及半导体制程中清洗剂添加材料等，现已开发了超 300 种化合物，在所涉足的产品方面技术已经处于国内领先水平",
+          "independent_payload": true,
+          "material_payload": true,
+          "function_or_event": true,
+          "rule_purpose": ""
+        }
+      ],
+      "local_match_details": [
+        {
+          "part": "目前公司在半导体制造材料领域已销售的产品主要为光刻胶单体、树脂、光酸以及半导体制程中清洗剂添加材料等",
+          "compositions": [
+            {
+              "head": "产品",
+              "target": "光刻胶单体、树脂、光酸以及半导体制程中清洗剂添加材料等",
+              "closed": true
+            }
+          ],
+          "developed": []
+        },
+        {
+          "part": "现已开发了超 300 种化合物",
+          "compositions": [],
+          "developed": [
+            {
+              "cn": "化合物",
+              "en": null,
+              "closed": true
+            }
+          ]
+        },
+        {
+          "part": "在所涉足的产品方面技术已经处于国内领先水平",
+          "compositions": [],
+          "developed": []
+        }
+      ]
+    }
+  ]
+}

@@ -19,7 +19,7 @@ from . import patterns as source_grammar
 
 # Composition/process indexes and the bounded comma-continuation preparation.
 # The caller reserves these passes on its existing document account.
-SOURCE_DESCRIPTION_SCAN_PASSES = 6
+SOURCE_DESCRIPTION_SCAN_PASSES = 10
 
 # A new explicit actor starts an independent assertion even after a comma.
 # Subordinate audit test descriptions do not manufacture a company event.
@@ -68,7 +68,7 @@ _CN_FUNCTION = re.compile(_CN_HEAD_TAIL + _CN_AUX + _CN_PROVISION_BRIDGE +
 _CN_STATE = re.compile(_CN_HEAD_TAIL + _CN_AUX +
     r"(?P<verb>进入|处于|开展|推进|进行|完成|启动|投入)?(?:客户)?(?P<target>认证|验证|试产|量产|生产|建设|投产|运行|运营|发布|上线)")
 _PROVISION_EN = re.compile(r"\b(?:provid\w*|offer\w*|suppl\w*|manufactur\w*|design\w*|deliver\w*|"
-    r"hir\w*|employ\w*|recruit\w*|launch\w*|releas\w*|introduc\w*|deploy\w*|acquir\w*|commission\w*|open\w*|expand\w*)\b", re.I)
+    r"hir\w*|employ\w*|recruit\w*|launch\w*|releas\w*|introduc\w*|deploy\w*|acquir\w*|commission\w*|open\w*|expand\w*|sells?|sold)\b", re.I)
 _PROVISION_CN = re.compile(r"提供|供应|制造|设计|打造|交付|聘用|招聘|招募|收购|收購|建设|建造|搭建|定制")
 _PROVISION_ACTOR_EN = re.compile(
     r"\s*(?:(?i:we|(?:the|our|this)\s+(?:company|group|team|supplier|partner|bank))|"
@@ -105,15 +105,33 @@ _AGENT_DERIVATION = re.compile(
     r"^(?:companies|enterprises|firms|manufacturers|vendors)\b|"
     r"^(?:company|enterprise|firm)(?=\s*(?:$|that\b|which\b))", re.I)
 
-_COMPOSITION_CN = re.compile(
+_COMPOSITION_FRAME_CN = (
     r"(?P<head>主要产品|主营业务|产品|服务|解决方案|下游客户|客户|下游)"
-    r"(?:的(?:构成|组合|范围))?(?:主要|目前|通常)?(?:为|是|包括|包含|涵盖)"
-    r"(?P<target>[^。;!?]{1,160})")
-_COMPOSITION_EN = re.compile(
+    r"(?:的(?:构成|组合|范围))?(?:主要|目前|通常)?(?:为|是|包括|包含|涵盖)")
+_COMPOSITION_FRAME_EN = (
     r"\b(?P<head>products?|services?|solutions?|businesses|customers?|clients?)\s+"
     r"(?:(?:mainly|primarily|principally|currently)\s+)?"
-    r"(?:are|is|include[sd]?|comprise[sd]?|consist(?:s)?\s+of)\s+"
-    r"(?P<target>[^。;!?]{1,160})", re.I)
+    r"(?:are|is|include[sd]?|comprise[sd]?|consist(?:s)?\s+of)\s+")
+_COMPOSITION_CN = re.compile(_COMPOSITION_FRAME_CN + r"(?P<target>[^。;!?]{1,160})")
+_COMPOSITION_EN = re.compile(_COMPOSITION_FRAME_EN + r"(?P<target>[^。;!?]{1,160})", re.I)
+# A fresh predicate after a comma ends a nominal list even without a new
+# issuer pronoun. Reuse the exact frame grammar, not a second product lexicon.
+_COMPOSITION_BOUNDARIES = (
+    re.compile(r"[,，]\s*(?=" + _COMPOSITION_FRAME_CN + r")"),
+    re.compile(r"[,，]\s*(?=" + _COMPOSITION_FRAME_EN + r")", re.I),
+    re.compile(r"[,，]\s*(?=(?:现|目前)?已(?:经)?开发(?:了)?(?:超(?:过)?|逾|近|约)?\s*\d)"),
+)
+_CUSTOMER_HEAD = re.compile(r"^(?:下游客户|客户|下游|customers?|clients?)$", re.I)
+_PROSPECTIVE_SCOPE = re.compile(
+    r"(?:目标|潜在|拟定|未来)(?:主要|重点|核心|重要|的){0,4}$|"
+    r"\b(?:target|potential|prospective|future)\s+(?:[A-Za-z-]+\s+){0,3}$", re.I)
+_SOLD_SCOPE = re.compile(r"(?:已(?:经)?销售|已(?:经)?出售)(?:的)?$")
+_DEVELOPED_SCOPE = re.compile(
+    r"(?:已(?:经)?开发(?:了)?(?:超(?:过)?|逾|近|约)?\s*\d+(?:\.\d+)?\s*(?:种|款|项)"
+    r"(?P<cn>[^,，。;!?]{1,65})|"
+    r"\b(?:have|has)\s+developed\s+(?:(?:over|more than|approximately)\s+)?"
+    r"\d+(?:\.\d+)?\s+(?P<en>[^,。;!?]{1,65}))", re.I)
+_DEVELOPED_POLICY_OBJECT = re.compile(r"会计政策|\baccounting polic(?:y|ies)\b", re.I)
 _NOMINAL_MEMBER_SEPARATOR = re.compile(r"[,，、]|及|和|\band\b|\bor\b", re.I)
 _DEPENDENT_SUBJECT_PREFIX = re.compile(r"^(?:该|其|上述|这一|这些|有关|"
     r"this\b|that\b|these\b|those\b|their\b|its\b)", re.I)
@@ -153,9 +171,9 @@ _REGULATORY_RECEIPT_EN = re.compile(
 _PROCESS_FORM_TAIL = re.compile(r"\s*(?:的)?(?:流程|说明|模板|程序|指南|条件)|"
                               r"\s+(?:procedure|template|definition|manual)\b", re.I)
 _PROCESS_RULE_SUBJECT = re.compile(
-    r"(?:流程|程序|模板|指南|规则)(?:规定|说明|介绍|定义|是指|如下|描述|[:：])|"
+    r"(?:流程|程序|模板|指南|规则|填报)(?:规定|要求|示例|说明|介绍|定义|是指|如下|描述|[:：])|"
     r"\b(?:procedure|process|template|definition|guidelines?|manuals?|instructions?|policy)"
-    r"(?:\s*[:：]|\s+(?:to|for|of|is|states?|describes?)\b)", re.I)
+    r"(?:\s*[:：]|\s+(?:to|for|of|is|states?|says?|examples?|describes?)\b)", re.I)
 _NORMATIVE_CONSEQUENCE = re.compile(r"后\s*(?:应当|应|须|必须)|\b(?:should|must|shall)\b", re.I)
 _COMPLETED_RECEIPT = re.compile(r"(?:已经|已)\s*$|\b(?:has|have|had)\s*$", re.I)
 _ALPHA = re.compile(r"[^\W\d_]", re.UNICODE)
@@ -279,7 +297,9 @@ def _source_clauses(value: str, *, descriptions: bool = True):
                                        *_COMPOSITION_EN.finditer(sentence)),key=lambda match:match.start()):
                 start,end = composition.span('target')
                 actor = _ASSERTION_ACTOR.search(sentence,start,end)
-                protected.append((start,actor.start() if actor else end))
+                boundaries = [match.start() for grammar in _COMPOSITION_BOUNDARIES
+                              if (match := grammar.search(sentence,start,end)) is not None]
+                protected.append((start,min(end,actor.start() if actor else end,*boundaries)))
         cuts = (_DESCRIPTION_PARTS if descriptions else _ASSERTION_ACTOR).finditer(sentence)
         parts = []
         offset = 0
@@ -342,6 +362,7 @@ class _DescriptionProof:
     independent: bool | None
     witness: str
     descriptive_only: bool = False
+    material_scope: bool = False
 
 
 def _source_process_proofs(value: str) -> Iterator[_DescriptionProof]:
@@ -408,6 +429,13 @@ def _clause_description_proofs(value: str) -> Iterator[_DescriptionProof]:
     if not (source_grammar.INTERROGATIVE_OPERATOR.search(value)
             or source_grammar.INTERROGATIVE_MARKER.search(value)):
         yield from _source_process_proofs(value)
+        for developed in _DEVELOPED_SCOPE.finditer(value):
+            target = developed['cn'] or developed['en']
+            policy_object = _DEVELOPED_POLICY_OBJECT.search(target)
+            if (_description_payload(target) and not abstract_source_argument(target)
+                    and (not policy_object or _DESCRIPTION_OBJECT.search(target,policy_object.end()))
+                    and _argument_closed(value, developed.end())):
+                yield _DescriptionProof(True, value)
         for relation in (*_COMPOSITION_CN.finditer(value), *_COMPOSITION_EN.finditer(value)):
             target = relation['target'].strip()
             if not _description_payload(target):
@@ -422,7 +450,16 @@ def _clause_description_proofs(value: str) -> Iterator[_DescriptionProof]:
                 if len(members) >= 2 and all(any(c.isalpha() for c in part)
                         and not abstract_source_argument(part) for part in members):
                     payload = True
-            yield _DescriptionProof(payload, value, descriptive_only=True)
+            prefix = value[max(0, relation.start('head')-45):relation.start('head')]
+            # A customer class or explicitly sold range is a current business
+            # scope, not a manufactured expansion/manufacturing event. Targets
+            # remain prospective descriptions. No issuer/product vocabulary.
+            observed_scope = bool(closed and not _PROSPECTIVE_SCOPE.search(prefix)
+                and (_CUSTOMER_HEAD.fullmatch(relation['head']) or _SOLD_SCOPE.search(prefix)))
+            if observed_scope and payload is None and not abstract_source_argument(target):
+                payload = True
+            yield _DescriptionProof(payload, value, descriptive_only=True,
+                                    material_scope=observed_scope)
     # One clause-local index supplies both head-first descriptions and
     # actor/action-first objects. Resource heads remain object-only here.
     heads = {(match.start(), match.end()): True for match in _DESCRIPTION_OBJECT.finditer(value)}
@@ -632,7 +669,7 @@ def prepare_source_assertions(text: str) -> SourceAssertionRoles:
             purpose="reporting_definition"
         witnesses = tuple(dict.fromkeys(proof.witness for _, proofs in parts
                                         for proof in proofs if proof.independent is True))
-        material = any(proof.independent is True and not proof.descriptive_only
+        material = any(proof.independent is True and (not proof.descriptive_only or proof.material_scope)
                        for _, proofs in parts for proof in proofs)
         function_or_event = any(not proof.descriptive_only for _, proofs in parts for proof in proofs)
         clauses.append(AssertionRole(text_clause,operating,purpose,independent,witnesses,material,
