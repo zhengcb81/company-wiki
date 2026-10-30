@@ -1,0 +1,12 @@
+# canonical-path worker stderr excerpt (evidence for handoff root-cause #5)
+# production launch owner, canonical profile python (non-ASCII deployment path)
+# captured 2026-10-30; expected outcome reproduced: ChildFailed/ValueError at PAGE_1
+CWP_PARAGRAPH_STAGE=INPUT
+CWP_PARAGRAPH_STAGE=IDENTITY
+CWP_PARAGRAPH_STAGE=IMPORT
+CWP_PARAGRAPH_STAGE=CONVERTER_READY
+CWP_PARAGRAPH_STAGE=PAGE_1
+RuntimeError: filename does not exists: C:\Users\郑曾波\Projects\company-wiki\.planning\c3-20261028\pdf-sdk-isolated\env\Lib\site-packages\docling_parse\pdf_resources/glyphs//standard/additional.dat
+CWP_CONVERSION_STATUS=ConversionStatus.FAILURE
+    raise ValueError("paragraph conversion incomplete")
+ValueError: paragraph conversion incomplete

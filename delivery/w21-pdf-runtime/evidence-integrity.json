@@ -1,0 +1,15 @@
+{
+  "env_python_exe_icacls": [
+    "Mandatory Label\\Low Mandatory Level:(I)(NW)"
+  ],
+  "root_repo_icacls": [
+    "Mandatory Label\\Low Mandatory Level:(OI)(CI)(NW)"
+  ],
+  "w21_worktree_icacls": [
+    "Mandatory Label\\Low Mandatory Level:(I)(OI)(CI)(NW)"
+  ],
+  "profile_sha256": "bcc427114955f6d045c5848b1885b24f1ec1666d1397bfb60ba4f404a225ff2a",
+  "root_probe_sha256": "bb67326ad942a865d95b26ba60f0390ab83809d36dc2f651d7b520967470b06b",
+  "canonical_stderr_excerpt_sha256": "678766800e1155133bfbadce84d36db2239ccf14ab4f841a689f5708e70ad2c0",
+  "fopen_comparison_sha256": "4e778225c4c57c0e735a22fc0816d57dce459717a99ae038b6692de6f1f3e404"
+}

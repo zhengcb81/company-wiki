@@ -1,0 +1,14 @@
+# docling-parse non-ASCII path mechanism evidence (handoff root-cause #5)
+# Method: msvcrt.fopen via ctypes on the EXACT resource path from the failure,
+# encoding the identical Windows path as (a) system ANSI codepage bytes
+# (mbcs=GBK on this machine) and (b) UTF-8 bytes (pybind11 str->std::string
+# semantics). Machine ACP=GBK.
+# Path used (exists=True via os.path.exists):
+#   C:/Users/郑曾波/Projects/company-wiki/.planning/c3-20261028/pdf-sdk-isolated/env/Lib/site-packages/docling_parse/pdf_resources/glyphs/standard/additional.dat
+# Results (2026-10-30, parent Miniconda python):
+#   gbk(A)  fopen -> OK
+#   utf-8   fopen -> FAIL
+# Interpretation: the C++ layer receives the resources path as UTF-8 narrow
+# bytes; std::ifstream resolves them against the ANSI codepage (GBK), so any
+# non-ASCII deployment path fails. ASCII-only paths coincide in both encodings,
+# which is why the ASCII-alias E2E succeeds with byte-identical env content.

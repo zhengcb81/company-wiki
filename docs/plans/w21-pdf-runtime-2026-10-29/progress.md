@@ -34,3 +34,11 @@ isolated/safe_path/utf8=True，prefix=env；fauilthandler栈=importlib.metadata�
 - 故障恢复：既有checkpoint测试覆盖超时/损坏尾记录/finished-page保留（test_pdf_page_checkpoints.py 53测试）。
 - 清理：junction已删，ROOT importtime.log误写已删，诊断脚本已删，env/receipt/model SHA全部核对不变
   （profile bcc427…/probe bb67326a…/model 00333a…/config fdea30…），env今日零写入，prefix/tmp无残留。
+
+2026-10-29 事故与恢复记录：为验证DU2测试是否基线已有，误在共享stash语义下运行了 git stash / git stash pop——
+工区树上无未提交改动，pop实际弹出ROOT共享stash@{0}("c3 semantic WIP")并部分应用到本工区（UU冲突）。
+立即git reset --hard HEAD恢复（HEAD=5a33d923完好），ROOT stash两条目未drop、完整保留；"already exists"条目
+实为稀疏索引缺席文件，reset后按稀疏规则正确不在盘上。工区现已干净。教训：linked worktree的stash列表与主仓共享，
+工区车道内禁止使用stash。DU2失败在干净基线上同样失败（稀疏缺docs/plans/document-understanding-2026-10-13），非本包回归。
+
+2026-10-30 措辞更正（采纳初审INFO）：本文件早前ASCII别名E2E一句中的 replay 表述，在 replay_verified=0（0 spans）下不承载证明，收敛为：replay入口在0 spans时为平凡通过；replay不重启模型的证明由既有integration测试（mock runner，9例）承载。独立审查报告见 delivery/w21-pdf-runtime/review-initial.md（10项全PASS、0阻塞、6 INFO已采纳）。
