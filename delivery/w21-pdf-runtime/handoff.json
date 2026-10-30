@@ -9,7 +9,7 @@
     "cf888f0d",
     "5a33d923"
   ],
-  "final_tested_commit": "eab239d9",
+  "final_tested_commit": "f6c2b9d4",
   "reviewed_commits": {
     "initial_review_target": "5a33d923",
     "final_review_target": null
@@ -192,5 +192,26 @@
   ],
   "generated_at": "2026-10-30",
   "generator": "W21 implementation lane (author), fields pending final review",
-  "push_status": "BLOCKED by pre-push gate contract smoke: shared-layer latent defect (projection persistence exceeds MAX_PATH when gate relocates basetemp into the longer-named W21 worktree; ROOT main worktree unaffected at 254<259 chars). Minimal counterexample handed to ROOT per card boundary; no bypass, no out-of-scope fix."
+  "push_status": "BLOCKED by pre-push gate contract smoke: shared-layer latent defect (projection persistence exceeds MAX_PATH when gate relocates basetemp into the longer-named W21 worktree; ROOT main worktree unaffected at 254<259 chars). Minimal counterexample handed to ROOT per card boundary; no bypass, no out-of-scope fix.",
+  "file_sha256_at_final_commit": {
+    "src/company_wiki/source_catalog/narrative_pdf_enhancement.py": "d64f67e3b291a398b918ef70ff42ff6b857325b8bf58bd4aaaf474c4cd8e5915",
+    "src/company_wiki/source_catalog/_paragraph_worker.py": "2aaf985fa783a134674b2f0f129a5adfcea133590e632f64b27fcd805edb115c",
+    "src/company_wiki/source_catalog/narrative_pdf_environment.py": "088b13057354cd8a404b27cd45a590962e9d20d6013ad3252b59449fbed14921",
+    "tools/pdf_runtime_probe/cold_runtime_probe.py": "685dbbcd376bfad4554afc59101b2305f977a8ea2decd5706f5453d60214dc87",
+    "tools/pdf_runtime_probe/run_cold_probe.py": "5a9c70655443b52f54ff2ccdc7d49b63706e8f099bcef95b4d54bf0a6ca8159c",
+    "tools/pdf_runtime_probe/synthetic_e2e.py": "e2b202ce4d7d4e9f7483eeff7ad48fbc5b4f5a661acdff78cf4b2b2a7deb69ce",
+    "tests/unit/test_w21_pdf_runtime_launch.py": "14bca37e408e364593621c9f6a27d5af1a41256153cdc781438c3176618e9109",
+    "tests/unit/test_w21_pdf_runtime_probe_guard.py": "141bcfd23f96a982f1883ccf856e9d9b86dd616dfe5c8bac1bb8a7166d66db4d",
+    "delivery/w21-pdf-runtime/handoff.md": "f90815baf3fa8a71830631fc532208161bb862b256a07b45242f6d8035f7a95e",
+    "delivery/w21-pdf-runtime/review-initial.md": "d900398fd2e790c853c35808cfcdf4b5556b4941f11dda2f64e2f408549e8b6c",
+    "delivery/w21-pdf-runtime/review-final.md": "cb88cbabfe05ebbc431aa39a36457637c8e0945c6d8590e2a96c80f75990c823",
+    "delivery/w21-pdf-runtime/evidence-integrity.json": "21c7c1819878d2807237ef223d7c8ad3e0dc6a0a4e059f890eee6b322c4936e1",
+    "docs/plans/w21-pdf-runtime-2026-10-29/receipts/cold-rev5.json": "2a25a3b51b7302965f216113959ed915e659d316fbf509959a19073dfe5e14e5",
+    "docs/plans/w21-pdf-runtime-2026-10-29/receipts/synthetic-e2e.json": "ef3e0e50c7c7c3f7fa49463f42dcc67681b3429780535f29abdbee4e6b06e42d",
+    "docs/plans/w21-pdf-runtime-2026-10-29/receipts/synthetic-e2e-ascii-alias.json": "6674ee8f626c19f419747f96f96778fe9b9ee29856486c5bf604041bd1b1a998",
+    "docs/plans/w21-pdf-runtime-2026-10-29/receipts/canonical-stderr-diagnosis.txt": "678766800e1155133bfbadce84d36db2239ccf14ab4f841a689f5708e70ad2c0",
+    "docs/plans/w21-pdf-runtime-2026-10-29/receipts/canonical-fopen-comparison.txt": "4e778225c4c57c0e735a22fc0816d57dce459717a99ae038b6692de6f1f3e404",
+    "docs/plans/w21-pdf-runtime-2026-10-29/receipts/push-gate-path-length-counterexample.md": "8657280517c921c724de6688a1950ffa46b231a8e251b9e70a496ce2532eae2b"
+  },
+  "tested_at_final_commit": "six-file W21-related suite rerun at f6c2b9d4 (docs-only delta since eab239d9): all pass"
 }
