@@ -11,3 +11,5 @@ b7665531已推送，但[精确CI40996278861](https://github.com/zhengcb81/compan
 实现边界：AssertionRole.function_or_event记录语法族，强度与family分离；descriptive_operating_relation/detect_reading_business_fact只在共享描述→mechanism分支接受显式兼容参数，narrative_business_groups的0.8 adapter关闭构成。不能用raw roles.material gate过滤整份reading结果，否则丢掉由独立owner证明的quantity/billing（其rawroles可None）。不加公共reason白名单、公司名/产品词库，不改生产runtime/配置。
 
 最终根修验收：独立9P/1.41秒/4文件rawLF SHA/PASS0OPEN；扩展3525P/11skip/75.37秒、397mypy/ruff。真实15spans8卡8检查点保持，0POST/下载。旧40996278861仍failure，待正常发布并观察新CI。见ci-fix/ACCEPTANCE.json。
+
+发布闭合：c9ac0b295cc6cf1ef92804b43679c58fa0572f16已正常提交推送；pre-push158P/23.06秒，精确CI40998178796 completed/success。Git blob规范LF SHA与独审4文件一致，见ci-fix/PUBLICATION.json。旧失败未改写。

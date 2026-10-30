@@ -1,0 +1,25 @@
+{
+  "status": "ACCEPTED_PRE_POST_ENGINEERING",
+  "independent": {
+    "passed": 8,
+    "seconds": 1.55,
+    "open": 0
+  },
+  "phase_c_domain": {
+    "passed": 90,
+    "seconds": 71.78,
+    "full_repository": false
+  },
+  "ruff": "PASS",
+  "source_product_commit": "c9ac0b295cc6cf1ef92804b43679c58fa0572f16",
+  "source_product_ci": {
+    "id": 40998178796,
+    "conclusion": "success"
+  },
+  "actual_compiled_task_count": 8,
+  "actual_gold_supported_count": 8,
+  "source_status": "partial",
+  "new_supplier_posts": 0,
+  "new_downloads": 0,
+  "model_output_cache_rf": "OPEN"
+}

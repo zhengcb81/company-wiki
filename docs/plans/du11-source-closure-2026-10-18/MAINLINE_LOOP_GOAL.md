@@ -1,10 +1,10 @@
-## 2026-10-30 当前：0.8兼容根修已验收，正常发布中
+## 2026-10-30 当前：来源产品CI成功，真实摘要前工程已通过
 
-前次b7665531精确CI40996278861的3失败已本地复现并根修；原测试不删不改。0.8 adapter明确只在共享描述→mechanism分支排除新构成family，计量/计费/真实事件保留，0.9仍有静态来源说明价值；泛化修饰grammar排除多类/配套套话，policy/26。最终扩展影响域3525P/11既有skip/75.37秒，397mypy/ruff，独立4文件9P/1.41秒/PASS0OPEN；见[CI根修](review/source-information-20261030/description-final/CI_COMPATIBILITY_FOLLOWUP.md)。旧3383绿仅当时范围，不代签旧失败CI。
+来源描述/0.8兼容共因c9ac0b29已正常推送，精确CI40998178796 success；3525P/11skip、397mypy/ruff、独立9P/0OPEN。随后发现收费前gold可变0/0空验证，已在评测/observer共用类别owner根修，保留原测试意图并加强两个真实锚点夹具；4RED+2RED→phaseC90P/71.78秒、独立4文件8P/1.55秒/PASS0OPEN。新预审代码正常发布中，不新建人工门禁。
 
-真实保存parsed复验仍15spans/8卡，8来源输入检查点true，原件不变，全文partial。已按配置准备MiMo-v2.6-flash真实v4摘要（单次50k tokens/$0.05、计入旧母账），尚0POST；无optional PDF runtime配置，不会运行W21 SDK。
+独审当前真实compiler8非空任务/8原文检查点全在support，源仍partial。配置MiMo-v2.6-flash、单次50k/$0.05、旧母账1,800,368/$0.727945未变；0真实模型POST/下载/SDK。正确活跃准备meta-v4/gold-v3；activity时间不当published时间。完整下一命令、审查和恢复检查点见[RUN_NEXT](review/source-information-20261030/description-final/summary-preflight/RUN_NEXT.md)。
 
-**下一步：** 正常提交/推送兼容根修并看新精确CI，再执行真实摘要/缓存激活-重启-跨run恢复与FF-RF采用；US RPO、W21生产接收、holdout及完整公司loop继续OPEN。外包工区/runtime owner、原件/config/外来hook mode保持，goal active。
+**下一步：** 正常发布预审修复→真实registered-readonly/v4/activation-recovery摘要，实际claim独审、恢复和跨run0重复收费、FF复用及RF实际采用；US RPO/W21/holdout/完整八步循环继续OPEN。产品和外包runtime owner、原件/config/他人工区/hook mode保持，goal active。
 
 
 ## 2026-10-30 当前：来源描述大节点已发布，精确CI进行中

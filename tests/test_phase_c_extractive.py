@@ -62,8 +62,11 @@ def test_gold_observer_validates_the_actual_scoped_request_and_rejects_changed_m
     source = selected(3)
     request = build_model_request(source, reading_projection_version=version)
     envelope = json.loads(request.data_json)
-    gold = {"facts": []}
+    gold = {"facts": [{"id": "real-source-check", "target_kind": "required_business",
+        "any_support_sets": [[{"page": source.evidence_spans[0].coordinates.page_number,
+            "exact_quote": source.evidence_spans[0].raw_text}]]}]}
     report = gold_observation(gold, source, envelope)
+    assert report["required_count"] == report["supported_count"] == 1
     assert report["evidence_count"] == len(source.evidence_spans)
     assert report["evidence_characters"] == sum(len(span.raw_text) for span in source.evidence_spans)
     changed = deepcopy(envelope)

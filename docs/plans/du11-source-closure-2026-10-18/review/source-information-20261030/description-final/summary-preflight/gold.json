@@ -1,0 +1,159 @@
+{
+  "source_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+  "sample_id": "source-description-cn-ir-20260515",
+  "language": "zh",
+  "scope": "development",
+  "facts": [
+    {
+      "id": "domestic-market-share",
+      "target_kind": "required_business",
+      "importance": "critical",
+      "any_support_sets": [
+        [
+          {
+            "page": 1,
+            "exact_quote": "答：您好，公司积极开发国内市场，持续完善国内市场战略布局，提\n高公司的抗风险能力，2025 年度公司境内收入约8.19 亿元，占比约22%，\n较比 2024 年度有所提升。",
+            "locator": "loc:v1/page:1/table:0/row:6/column:1"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "答：您好，公司积极开发国内市场，持续完善国内市场战略布局，提\n高公司的抗风险能力，2025 年度公司境内收入约8.19 亿元，占比约22%，\n较比 2024 年度有所提升。"
+      ]
+    },
+    {
+      "id": "reported-material-impact",
+      "target_kind": "required_business",
+      "importance": "critical",
+      "any_support_sets": [
+        [
+          {
+            "page": 2,
+            "exact_quote": "答：您好，根据相应新闻报道，您所描述的情况涉及该公司的家电产\n品，该事项未对九目化学经营构成重大影响。",
+            "locator": "loc:v1/page:2/table:0/row:0/column:1"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "答：您好，根据相应新闻报道，您所描述的情况涉及该公司的家电产\n品，该事项未对九目化学经营构成重大影响。"
+      ]
+    },
+    {
+      "id": "subsidiary-customer-chain",
+      "target_kind": "required_business",
+      "importance": "critical",
+      "any_support_sets": [
+        [
+          {
+            "page": 2,
+            "exact_quote": "九目化学主要产品为 OLED\n升华前材料，下游客户为国内外OLED 成品材料企业，OLED 成品材料生产\n企业下游主要为 OLED 显示面板生产企业，OLED 显示面板生产企业下游为\n各类显示屏应用企业。",
+            "locator": "loc:v1/page:2/table:0/row:0/column:1"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "九目化学主要产品为 OLED\n升华前材料，下游客户为国内外OLED 成品材料企业，OLED 成品材料生产\n企业下游主要为 OLED 显示面板生产企业，OLED 显示面板生产企业下游为\n各类显示屏应用企业。"
+      ]
+    },
+    {
+      "id": "listing-process-conditions",
+      "target_kind": "required_business",
+      "importance": "critical",
+      "any_support_sets": [
+        [
+          {
+            "page": 2,
+            "exact_quote": "九目化学已于 3 月11 日收到北交所第二轮审核问\n询函，因前期报送的财务数据有效期已过，九目化学申请了中止审核，待\n财务数据按要求完成更新后，将申请恢复审核，并回复问询。",
+            "locator": "loc:v1/page:2/table:0/row:0/column:1"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "九目化学已于 3 月11 日收到北交所第二轮审核问\n询函，因前期报送的财务数据有效期已过，九目化学申请了中止审核，待\n财务数据按要求完成更新后，将申请恢复审核，并回复问询。"
+      ]
+    },
+    {
+      "id": "demand-cause",
+      "target_kind": "required_business",
+      "importance": "critical",
+      "any_support_sets": [
+        [
+          {
+            "page": 2,
+            "exact_quote": "公司 2024 年度影响收入的主要原因为沸石系列环保材料\n业务及部分医药业务下游需求减少，公司 2025 年度沸石分子筛产品收入\n略低于 2024 年度。",
+            "locator": "loc:v1/page:2/table:0/row:0/column:1"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "公司 2024 年度影响收入的主要原因为沸石系列环保材料\n业务及部分医药业务下游需求减少，公司 2025 年度沸石分子筛产品收入\n略低于 2024 年度。"
+      ]
+    },
+    {
+      "id": "vc-denial-contact-and-hope",
+      "target_kind": "required_business",
+      "importance": "critical",
+      "any_support_sets": [
+        [
+          {
+            "page": 3,
+            "exact_quote": "答：您好，公司现无生产 VC（碳酸亚乙烯酯）的情况，根据公司控\n股股东中国节能信息，中国节能与宁德时代已经建立了联系，并希望建立\n业务协同与合作。",
+            "locator": "loc:v1/page:3/table:0/row:0/column:1"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "答：您好，公司现无生产 VC（碳酸亚乙烯酯）的情况，根据公司控\n股股东中国节能信息，中国节能与宁德时代已经建立了联系，并希望建立\n业务协同与合作。"
+      ]
+    },
+    {
+      "id": "sold-roster-developed-compounds",
+      "target_kind": "required_business",
+      "importance": "critical",
+      "any_support_sets": [
+        [
+          {
+            "page": 5,
+            "exact_quote": "目前公司在半导体制造材料领域已销售的产品主要为光刻\n胶单体、树脂、光酸以及半导体制程中清洗剂添加材料等，现已开发了超\n300 种化合物，在所涉足的产品方面技术已经处于国内领先水平。",
+            "locator": "loc:v1/page:5/table:0/row:0/column:1"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "目前公司在半导体制造材料领域已销售的产品主要为光刻\n胶单体、树脂、光酸以及半导体制程中清洗剂添加材料等，现已开发了超\n300 种化合物，在所涉足的产品方面技术已经处于国内领先水平。"
+      ]
+    },
+    {
+      "id": "capacity-plan",
+      "target_kind": "required_business",
+      "importance": "critical",
+      "any_support_sets": [
+        [
+          {
+            "page": 5,
+            "exact_quote": "公司结\n合实际情况与下游客户需求，在新产能方面积极布局，2025 年公司启动\n了万润工业园二期 C05 建设项目，该项目包含半导体光刻胶用相关材料产\n能约 751 吨/年，项目建成后将为公司半导体制造材料业务发展提供产能\n保障。",
+            "locator": "loc:v1/page:5/table:0/row:0/column:1"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "公司结\n合实际情况与下游客户需求，在新产能方面积极布局，2025 年公司启动\n了万润工业园二期 C05 建设项目，该项目包含半导体光刻胶用相关材料产\n能约 751 吨/年，项目建成后将为公司半导体制造材料业务发展提供产能\n保障。"
+      ]
+    }
+  ],
+  "negative_controls": [
+    "Future generic products/services rhetoric must not become an independent business claim."
+  ],
+  "interpretation_checks": [
+    "Keep reported/home-appliance premise and denial of MATERIAL impact; do not say zero impact.",
+    "Customer manufacturer categories are not issuer manufacturing events.",
+    "Inquiry receipt, application to suspend and conditional future application to resume differ.",
+    "Already sold product roster does not imply all 300 developed compounds were sold or mass produced.",
+    "No VC production; shareholder contact and wish are not a signed issuer cooperation.",
+    "751 tonnes/year is planned project capacity after completion."
+  ],
+  "schema_version": "du-gold/1",
+  "gold_revision": "CNIR-development-gold-v3-20261030",
+  "prior_unexecuted_preparation_note": "v1 used unsupported quote-only fact rows; no model POST occurred. This schema now exercises the actual existing closed-source oracle with required_business/page/exact_quote/locator.",
+  "scope_note": "source-input eight checkpoints, not complete recall/holdout or output semantics acceptance"
+}

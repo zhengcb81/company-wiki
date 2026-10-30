@@ -1,0 +1,181 @@
+{
+  "schema": "summary-preflight-independent/1",
+  "reviewer": "/root/semantic_axes_release_review",
+  "status": "PASS",
+  "open_within_preflight_engineering_scope": 0,
+  "signed_at_utc": "2026-10-30T03:51:47.778871+00:00",
+  "base_head": "c9ac0b295cc6cf1ef92804b43679c58fa0572f16",
+  "binding": "Four actual raw/LF file hashes frozen before final neutral tests and actual-material replay, rechecked at signing.",
+  "files": [
+    {
+      "path": "tools/document_understanding_benchmark/phase_c_observer.py",
+      "raw_sha256": "3a35643d438c233b5a80512b2f1af6c969948518f2e1c79d181609c0c5b24cce",
+      "lf_sha256": "1f2896038c8d27227ab3a765e22a225fec17213e1c708e57d86720c06b14fd2d"
+    },
+    {
+      "path": "tools/document_understanding_benchmark/records.py",
+      "raw_sha256": "4e4dd2e726ae7c9b04d8627039ee9aab5fc0f2d50c19d7da131f5e6f9234337c",
+      "lf_sha256": "1befe0b04bcd806f6c38d705d64be84bc242ac4ce342e8dc61124a7045d5656c"
+    },
+    {
+      "path": "tests/unit/test_phase_c_observer.py",
+      "raw_sha256": "fed97d1cc8888a3d8fd663632d6f09ec677d640bc54e123f6baeaf5f5d275d0f",
+      "lf_sha256": "fed97d1cc8888a3d8fd663632d6f09ec677d640bc54e123f6baeaf5f5d275d0f"
+    },
+    {
+      "path": "tests/test_phase_c_extractive.py",
+      "raw_sha256": "cd4a5798973c44f6e0e95b5931a8076a8fccdd9844ee106435106c43be49f50f",
+      "lf_sha256": "e510801862024d34d7bc0ea20be24ab804db875276cce91b42f7f73cb8810f94"
+    }
+  ],
+  "tests": {
+    "independent_cases": 8,
+    "passed": 8,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "pytest_seconds": 1.55,
+    "combined_test_and_actual_replay_command_seconds": 5.36,
+    "log": "final.log",
+    "junit": "final.xml"
+  },
+  "found_and_closed": {
+    "priority": "P2",
+    "issue": "One valid required fact hid a typo/None target kind and allowed an authored two-fact gold to pass 1/1.",
+    "evidence": "mixed-kind-r1.json",
+    "repair": "records.gold_fact_target_kind is the shared canonical enum/default owner; observer validates every fact before required filtering."
+  },
+  "static_checks": [
+    "omitted narrative kind defaults required_business",
+    "only document_meta defaults disposition_context",
+    "no required business facts cannot produce 0/0 approval",
+    "unknown/None explicit kind rejected even beside valid required facts",
+    "validate_gold and observer reuse the same owner",
+    "extractive fixtures replaced vacuous gold with real source anchor and required=supported=1, all material tamper assertions retained"
+  ],
+  "active_inputs": {
+    "gold": ".planning\\source-description-20261030\\cn-ir-development-gold-v3.json",
+    "gold_sha256": "b9af48e7eefc3a97c496e3a337584b01f0118bd15fbd170014ca7bb08f89d2e4",
+    "metadata": ".planning\\source-description-20261030\\prepared-cn-ir-summary-v4.json",
+    "metadata_sha256": "98da1cb3845594a66b40ff81a3838ba0236e9711a9bdd23d123ab6c10c9770e6",
+    "selection": ".planning\\source-description-20261030\\real-ci-r1\\selection.json.gz",
+    "selection_gzip_sha256": "338d328939c3e42dd98b9774e10d07495665c661aa40073f80918030e098b1fe",
+    "source_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+    "source_status": "partial",
+    "coverage_complete": false
+  },
+  "actual_material_replay": {
+    "compiler": "compile_scoped_model_view(max_claims=20)",
+    "material_sha256": "29e2e1537ec7fdc600c9a12108e5f0067e781fed598abe4a11e7d42227dc1fad",
+    "tasks": 8,
+    "nonempty_support": true,
+    "member_union_valid": true,
+    "required_gold_quotes_in_factual_support": true,
+    "oracle_required": 8,
+    "oracle_supported": 8,
+    "missing_ids": [],
+    "fact_task_mapping": [
+      {
+        "id": "domestic-market-share",
+        "supported": true,
+        "supported_task_keys": [
+          "t1"
+        ]
+      },
+      {
+        "id": "reported-material-impact",
+        "supported": true,
+        "supported_task_keys": [
+          "t2"
+        ]
+      },
+      {
+        "id": "subsidiary-customer-chain",
+        "supported": true,
+        "supported_task_keys": [
+          "t3"
+        ]
+      },
+      {
+        "id": "listing-process-conditions",
+        "supported": true,
+        "supported_task_keys": [
+          "t4"
+        ]
+      },
+      {
+        "id": "demand-cause",
+        "supported": true,
+        "supported_task_keys": [
+          "t5"
+        ]
+      },
+      {
+        "id": "vc-denial-contact-and-hope",
+        "supported": true,
+        "supported_task_keys": [
+          "t6"
+        ]
+      },
+      {
+        "id": "sold-roster-developed-compounds",
+        "supported": true,
+        "supported_task_keys": [
+          "t7"
+        ]
+      },
+      {
+        "id": "capacity-plan",
+        "supported": true,
+        "supported_task_keys": [
+          "t8"
+        ]
+      }
+    ],
+    "actual_http_or_worker_run": false,
+    "summary_claim_coverage": "not_evaluated",
+    "evidence": "actual-preflight.json / actual-material.json"
+  },
+  "input_semantic_qualifications": [
+    "reported/home-appliance premise and material-impact denial, not zero impact",
+    "customer manufacturing categories, not issuer production",
+    "inquiry receipt versus suspension application versus conditional future resumption application",
+    "sold product roster versus more than 300 developed compounds and management self-description",
+    "no VC production; shareholder contact and hoped-for cooperation are not signed issuer business",
+    "approximately 751 tonnes/year after construction, not commissioned current capacity"
+  ],
+  "runtime_and_budget_limit": "Metadata records native mode and no optional SDK. Current cumulative budget and actual request reservation remain canonical runtime duties; historical metadata balance is not independently re-audited. Per-request 50k/$0.05 is an existing bound, not a new authorization or invoice claim.",
+  "root_reports_not_independently_counted": {
+    "host_phase_c_cases": 90,
+    "seconds": 71.78,
+    "ruff_files": 4,
+    "source_exact_ci": "c9ac0b29 / 40998178796 reported success; benchmark patch separate"
+  },
+  "remaining_real_run_responsibilities": [
+    "source identity/configuration and active gold hashes at runtime",
+    "canonical current mother ledger and pre-reservation accounting retaining unknowns",
+    "actual transport/request verification and durable paid result/outbox",
+    "independent actual draft/claim semantic and citation review",
+    "activation/restart/cross-run zero duplicate POST recovery",
+    "FF/RF adoption",
+    "whole-source recall/holdout/company loop"
+  ],
+  "cleanup": {
+    "writes_only_summary_preflight_directory": true,
+    "product_author_tests_shared_plans_modified": false,
+    "config_diff_empty": true,
+    "original_hook_mode_wip_preserved": true,
+    "hook_numstat": "0\t0\t.githooks/pre-push",
+    "python_no_bytecode": true,
+    "pytest_cacheprovider_disabled": true,
+    "review_cache_directories": [],
+    "evidence_retained": true,
+    "original_pdf_read": false,
+    "keys_read": false,
+    "sdk_run": false,
+    "w21_touched": false,
+    "provider_calls": 0,
+    "network_posts": 0,
+    "downloads": 0
+  }
+}

@@ -43,6 +43,32 @@ def _envelope(source, version, sent=None):
     return value
 
 
+@pytest.mark.parametrize(('facts','error'), (([],'REQUIRED_BUSINESS_EMPTY'),
+    ([{'id':'context','target_kind':'disposition_context'}],'REQUIRED_BUSINESS_EMPTY'),
+    ([{'id':'typo','target_kind':'required_bussiness'}],'target_kind')))
+def test_live_source_oracle_cannot_pass_with_no_required_business_checks(facts,error):
+    source=selected(3)
+    with pytest.raises(ValueError,match=error):
+        observer.gold_observation({'facts':facts},source,_envelope(source,'reading-model-input/4'))
+
+
+def test_omitted_fact_kind_uses_the_canonical_business_default_instead_of_zero_checks():
+    source=selected(3)
+    gold=_gold(source)
+    for fact in gold['facts']:
+        fact.pop('target_kind')
+    report=observer.gold_observation(gold,source,_envelope(source,'reading-model-input/4'))
+    assert report['required_count']==report['supported_count']==3
+
+
+def test_a_valid_fact_does_not_hide_an_invalid_target_kind_from_the_source_oracle():
+    source=selected(3)
+    gold=_gold(source)
+    gold['facts'].append({'id':'typo','target_kind':'required_bussiness'})
+    with pytest.raises(ValueError,match='target_kind'):
+        observer.gold_observation(gold,source,_envelope(source,'reading-model-input/4'))
+
+
 @pytest.mark.parametrize("version", ["reading-model-input/4", "reading-model-input/5"])
 def test_repair_subset_cannot_borrow_gold_from_an_unsent_task(version):
     source = selected(3)

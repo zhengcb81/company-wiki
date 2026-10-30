@@ -1,0 +1,34 @@
+{
+  "status": "PREPARED_ZERO_POST",
+  "model": "mimo-v2.6-flash",
+  "endpoint": "https://token-plan-cn.xiaomimimo.com/v1/chat/completions",
+  "raw_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+  "gold_source_checkpoints": 8,
+  "mother": {
+    "charged_tokens": 1800368,
+    "charged_micro_usd": 727945,
+    "new_unknown_count": 6,
+    "token_limit": 10000000,
+    "micro_usd_limit": 20000000,
+    "prior_unknown7_retained": 7
+  },
+  "candidate_tokens": 50000,
+  "candidate_max_usd": "0.05",
+  "source_publication_date": "unknown; do not infer from activity/filename/mtime",
+  "source_status": "partial",
+  "w21_unmodified": true,
+  "model_calls": 0,
+  "downloads": 0,
+  "next": "Publish compatibility repair with exact green CI, then run canonical registered-readonly v4 activation recovery and independently inspect actual claims; 0 paid calls so far.",
+  "active_metadata": ".planning\\source-description-20261030\\prepared-cn-ir-summary-v4.json",
+  "retired_unexecuted_metadata": ".planning\\source-description-20261030\\prepared-cn-ir-summary-v1.json",
+  "runtime": {
+    "configuration_owner": "configured_paragraph_runtime",
+    "explicit_environment_present": false,
+    "current_mode": "native PDF; no optional SDK configured in this process",
+    "w21_author_worktree_untouched": true
+  },
+  "active_gold": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\source-description-20261030\\cn-ir-development-gold-v3.json",
+  "canonical_validate_gold_pass": true,
+  "oracle_required_count": 8
+}

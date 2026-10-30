@@ -1,0 +1,237 @@
+{
+  "scope": "Actual scoped-compiler material replay from saved selection; not an executed HTTP request or worker/Catalog run.",
+  "gold": ".planning\\source-description-20261030\\cn-ir-development-gold-v3.json",
+  "gold_sha256": "b9af48e7eefc3a97c496e3a337584b01f0118bd15fbd170014ca7bb08f89d2e4",
+  "metadata": ".planning\\source-description-20261030\\prepared-cn-ir-summary-v4.json",
+  "metadata_sha256": "98da1cb3845594a66b40ff81a3838ba0236e9711a9bdd23d123ab6c10c9770e6",
+  "selection": ".planning\\source-description-20261030\\real-ci-r1\\selection.json.gz",
+  "selection_gzip_sha256": "338d328939c3e42dd98b9774e10d07495665c661aa40073f80918030e098b1fe",
+  "source_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+  "source_status": "partial",
+  "coverage_complete": false,
+  "compiler_tasks": 8,
+  "all_support_nonempty": true,
+  "all_member_unions_valid": true,
+  "gold_exact_quotes_in_factual_support_not_just_context": true,
+  "material_sha256": "29e2e1537ec7fdc600c9a12108e5f0067e781fed598abe4a11e7d42227dc1fad",
+  "observation": {
+    "scope": "full_selected_source_availability",
+    "facts": [
+      {
+        "id": "domestic-market-share",
+        "supported": true,
+        "all_anchors_individually_present": true,
+        "importance": "critical"
+      },
+      {
+        "id": "reported-material-impact",
+        "supported": true,
+        "all_anchors_individually_present": true,
+        "importance": "critical"
+      },
+      {
+        "id": "subsidiary-customer-chain",
+        "supported": true,
+        "all_anchors_individually_present": true,
+        "importance": "critical"
+      },
+      {
+        "id": "listing-process-conditions",
+        "supported": true,
+        "all_anchors_individually_present": true,
+        "importance": "critical"
+      },
+      {
+        "id": "demand-cause",
+        "supported": true,
+        "all_anchors_individually_present": true,
+        "importance": "critical"
+      },
+      {
+        "id": "vc-denial-contact-and-hope",
+        "supported": true,
+        "all_anchors_individually_present": true,
+        "importance": "critical"
+      },
+      {
+        "id": "sold-roster-developed-compounds",
+        "supported": true,
+        "all_anchors_individually_present": true,
+        "importance": "critical"
+      },
+      {
+        "id": "capacity-plan",
+        "supported": true,
+        "all_anchors_individually_present": true,
+        "importance": "critical"
+      }
+    ],
+    "required_count": 8,
+    "supported_count": 8,
+    "missing_ids": [],
+    "evidence_count": 15,
+    "groups": 8,
+    "citation_units": 0,
+    "evidence_characters": 1128,
+    "unique_aliases": true,
+    "quality_oracle": "tools.document_understanding_benchmark.closed_group_support.score_facts",
+    "full_selection": {
+      "scope": "full_selected_source_availability",
+      "facts": [
+        {
+          "id": "domestic-market-share",
+          "supported": true,
+          "all_anchors_individually_present": true,
+          "importance": "critical"
+        },
+        {
+          "id": "reported-material-impact",
+          "supported": true,
+          "all_anchors_individually_present": true,
+          "importance": "critical"
+        },
+        {
+          "id": "subsidiary-customer-chain",
+          "supported": true,
+          "all_anchors_individually_present": true,
+          "importance": "critical"
+        },
+        {
+          "id": "listing-process-conditions",
+          "supported": true,
+          "all_anchors_individually_present": true,
+          "importance": "critical"
+        },
+        {
+          "id": "demand-cause",
+          "supported": true,
+          "all_anchors_individually_present": true,
+          "importance": "critical"
+        },
+        {
+          "id": "vc-denial-contact-and-hope",
+          "supported": true,
+          "all_anchors_individually_present": true,
+          "importance": "critical"
+        },
+        {
+          "id": "sold-roster-developed-compounds",
+          "supported": true,
+          "all_anchors_individually_present": true,
+          "importance": "critical"
+        },
+        {
+          "id": "capacity-plan",
+          "supported": true,
+          "all_anchors_individually_present": true,
+          "importance": "critical"
+        }
+      ],
+      "required_count": 8,
+      "supported_count": 8,
+      "missing_ids": []
+    },
+    "sent_tasks": {
+      "scope": "source_support_in_current_request_tasks",
+      "request_scope": "full_request",
+      "sent_task_keys": [
+        "t1",
+        "t2",
+        "t3",
+        "t4",
+        "t5",
+        "t6",
+        "t7",
+        "t8"
+      ],
+      "facts": [
+        {
+          "id": "domestic-market-share",
+          "supported": true,
+          "supported_task_keys": [
+            "t1"
+          ]
+        },
+        {
+          "id": "reported-material-impact",
+          "supported": true,
+          "supported_task_keys": [
+            "t2"
+          ]
+        },
+        {
+          "id": "subsidiary-customer-chain",
+          "supported": true,
+          "supported_task_keys": [
+            "t3"
+          ]
+        },
+        {
+          "id": "listing-process-conditions",
+          "supported": true,
+          "supported_task_keys": [
+            "t4"
+          ]
+        },
+        {
+          "id": "demand-cause",
+          "supported": true,
+          "supported_task_keys": [
+            "t5"
+          ]
+        },
+        {
+          "id": "vc-denial-contact-and-hope",
+          "supported": true,
+          "supported_task_keys": [
+            "t6"
+          ]
+        },
+        {
+          "id": "sold-roster-developed-compounds",
+          "supported": true,
+          "supported_task_keys": [
+            "t7"
+          ]
+        },
+        {
+          "id": "capacity-plan",
+          "supported": true,
+          "supported_task_keys": [
+            "t8"
+          ]
+        }
+      ],
+      "required_count": 8,
+      "supported_count": 8,
+      "missing_ids": [],
+      "not_sent_ids": [],
+      "summary_claim_coverage": "not_evaluated"
+    }
+  },
+  "metadata_ready_for_post": true,
+  "native_runtime_observation": {
+    "configuration_owner": "configured_paragraph_runtime",
+    "explicit_environment_present": false,
+    "current_mode": "native PDF; no optional SDK configured in this process",
+    "w21_author_worktree_untouched": true
+  },
+  "limits": {
+    "max_tokens": 50000,
+    "max_cost_usd": "0.05",
+    "max_seconds": 300,
+    "model_transport_only": {
+      "timeout_seconds": 120,
+      "max_request_bytes": 262144,
+      "max_response_bytes": 262144
+    },
+    "max_final_bytes": 2097152,
+    "max_persistent_bytes": 67108864,
+    "max_scratch_bytes": 33554432
+  },
+  "provider_calls": 0,
+  "sdk_calls": 0,
+  "pdf_reads": 0,
+  "claim_semantics": "not_evaluated; interpretation_checks and exact source qualifications retained for real output review",
+  "mother_usage": "Use canonical current ledger before reservation; historical metadata baseline is not an independent current-balance audit."
+}

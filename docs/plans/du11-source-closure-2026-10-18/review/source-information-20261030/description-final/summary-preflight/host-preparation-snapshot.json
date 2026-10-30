@@ -1,0 +1,214 @@
+{
+  "schema_version": "shared-reading-live-preparation/1",
+  "providers": [
+    {
+      "provider": "mimo",
+      "loader": "Config.load(llm_provider=provider)",
+      "purpose": "narrative",
+      "options": {
+        "model_id": "mimo-v2.6-flash",
+        "endpoint": "https://token-plan-cn.xiaomimimo.com/v1/chat/completions",
+        "api_key_env": "MIMO_API_KEY",
+        "max_output_tokens": 8192,
+        "temperature": 1.0,
+        "output_token_field": "max_completion_tokens",
+        "thinking": "disabled"
+      },
+      "credential_present": true,
+      "price_proxy": {
+        "version": "phase-c-mimo-v2.6-flash-cn-fx6-proxy/2026-10-14",
+        "input_micro_usd_per_million_tokens": 166667,
+        "output_micro_usd_per_million_tokens": 333334,
+        "source": [
+          "https://mimo.mi.com/models/zh-CN/mimo-v2.6-flash",
+          "https://mimo.mi.com/docs/price",
+          "https://mimo.mi.com/docs/zh-CN/tokenplan"
+        ],
+        "kind": "budget_proxy_only_not_cash_invoice",
+        "configuration_billing": "token-plan subscription Credits: cache-miss input100/output200 Credits per token; exhausted quota pauses instead of deducting balance",
+        "provenance": "ROOT primary documentation review"
+      },
+      "official_generation_control": "https://mimo.mi.com/docs/en-US/usage-guide/passing-back-reasoning_content"
+    }
+  ],
+  "samples": [
+    {
+      "sample_id": "source-description-cn-ir-20260515",
+      "provider": "mimo",
+      "original": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\万润股份\\raw\\research\\万润股份：投资者关系活动记录表20260515.pdf",
+      "fingerprint": {
+        "sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+        "bytes": 153851,
+        "mtime_ns": 1779228233262998600
+      },
+      "gold": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\source-description-20261030\\cn-ir-development-gold-v3.json",
+      "mime_type": "application/pdf",
+      "source_metadata_observation": {
+        "entity": "万润股份",
+        "publisher": "万润股份",
+        "market": "CN",
+        "security_id": "002643",
+        "document_kind": "investor_relations",
+        "title": "万润股份：投资者关系活动记录表20260515.pdf",
+        "language": "zh",
+        "fiscal_year": null,
+        "fiscal_period": null,
+        "period_end": null,
+        "published_date": null,
+        "filing_date": null,
+        "source_url": null,
+        "form_type": null,
+        "activity_date_observed": "2026-05-15",
+        "metadata_basis": "native source header: securities code002643/name万润股份; activity timestamp does not establish publication date"
+      }
+    }
+  ],
+  "mother_budget": {
+    "mother_receipt": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\cross-market-rf-e2e-2026-10-08\\phase6\\post_w03_original_research_2026-10-11\\budget-observation-native-20261011T0140.json",
+    "mother_receipt_sha256": "b711ca14414ea7aa1bf5ee93bae14d6a83141e4a95da29f91a28e3051b69b3c0",
+    "native_observations": [
+      {
+        "company": "CN-688012",
+        "database": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mW03-ahg078jp\\CN-688012\\auto\\narrative.sqlite3",
+        "exists": true,
+        "actual_attempts": 4,
+        "known_tokens": 41510,
+        "known_micro_usd": 41249,
+        "unknown_count": 0,
+        "current_attempt_ids": [
+          "2a7a28c51a0f4c64b6a8887274e355a1",
+          "65b8f662c1014475a6b49488987d008b",
+          "907c0519e66f40b18eebc63f75e7e4b5",
+          "f95ccb29b80a4fa793817c3454c152e9"
+        ],
+        "matches_prior": true,
+        "unchanged": true,
+        "fingerprint": {
+          "sha256": "1ad307d5abb6097eb46cd63a8da35bc7e2049ae2e4930e82914196f0d63651a9",
+          "bytes": 1363968,
+          "mtime_ns": 1791682032944844500
+        }
+      },
+      {
+        "company": "HK-00700",
+        "database": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mW03-ahg078jp\\HK-00700\\auto\\narrative.sqlite3",
+        "exists": true,
+        "actual_attempts": 2,
+        "known_tokens": 12718,
+        "known_micro_usd": 13347,
+        "unknown_count": 0,
+        "current_attempt_ids": [
+          "336c1e8df62743339a52dd27bf040a57",
+          "95b9e0f6adb24e3487fe1d0e6cc8f730"
+        ],
+        "matches_prior": true,
+        "unchanged": true,
+        "fingerprint": {
+          "sha256": "1b583c5226c1ed02b7460fa2a0a995c9e1bb629ddcfb4806a061148c99267b6b",
+          "bytes": 258048,
+          "mtime_ns": 1791682087784297000
+        }
+      },
+      {
+        "company": "US-MSFT",
+        "database": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\mW03-ahg078jp\\US-MSFT\\auto\\narrative.sqlite3",
+        "exists": true,
+        "actual_attempts": 3,
+        "known_tokens": 27535,
+        "known_micro_usd": 29177,
+        "unknown_count": 0,
+        "current_attempt_ids": [
+          "25140a7bd9cf455e8b36509ff1e24324",
+          "46b4794b738245a7a13dac28b1041576",
+          "738214660fa540df86b0961f2baaa860"
+        ],
+        "matches_prior": true,
+        "unchanged": true,
+        "fingerprint": {
+          "sha256": "45aad9855a0d2fd83e1b107f4621e9489d3584a0f76d6a64ae63d86d664aabfa",
+          "bytes": 622592,
+          "mtime_ns": 1791682107922701600
+        }
+      }
+    ],
+    "matches_recorded_mother": true,
+    "token_limit": 2000000,
+    "micro_usd_limit": 20000000,
+    "prior_charged_tokens": 413778,
+    "prior_charged_micro_usd": 334463,
+    "retained_fx_hold_micro_usd": 2764,
+    "old_unknown_hold_count_already_in_baseline": 7,
+    "remaining_tokens_if_native_unchanged": 1586222,
+    "remaining_micro_usd_after_fx_if_native_unchanged": 19662773,
+    "unknown_rule": "Keep full current reservations; never subtract historical unknown7 or FXhold. New unexplained native rows require reconciliation before further spending.",
+    "future_append_only_usage": "live/usage.jsonl contains only newly created native attempt IDs; deduplicate by database+attempt_id, include failed/truncated attempts, and add its conservative charges to mother."
+  },
+  "candidate_per_paid_request_limits": {
+    "max_tokens": 50000,
+    "max_cost_usd": "0.05",
+    "max_seconds": 300,
+    "model_transport_only": {
+      "timeout_seconds": 120,
+      "max_request_bytes": 262144,
+      "max_response_bytes": 262144
+    },
+    "max_final_bytes": 2097152,
+    "max_persistent_bytes": 67108864,
+    "max_scratch_bytes": 33554432
+  },
+  "protected_fingerprints": {
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\config.yaml": {
+      "sha256": "b63d6bced845e0dc2ae60ee0f1bc87b9d57cf4065133ac8ed28f29df37280865",
+      "bytes": 3987,
+      "mtime_ns": 1792883013091663600
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\models.yaml": {
+      "sha256": "387bdce7ff8b688422311a2f74c6c05b4ed25a3796aa7efb25490a0d1abe3d93",
+      "bytes": 827,
+      "mtime_ns": 1792444048881863700
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\source_catalog.yaml": {
+      "sha256": "3d159a4edc8e0e4d09b83afa95601c5ec885a18f7bd5d163579f3ff446e3f968",
+      "bytes": 866,
+      "mtime_ns": 1790542565101886700
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\config\\resource_budget.yaml": {
+      "sha256": "148f22816bf0b8935bbb2c1618f3199d46ff52f41377e3e582c26a96ea7be3b5",
+      "bytes": 364,
+      "mtime_ns": 1792800028427242200
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\万润股份\\raw\\research\\万润股份：投资者关系活动记录表20260515.pdf": {
+      "sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "bytes": 153851,
+      "mtime_ns": 1779228233262998600
+    },
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\source-description-20261030\\cn-ir-development-gold-v3.json": {
+      "sha256": "b9af48e7eefc3a97c496e3a337584b01f0118bd15fbd170014ca7bb08f89d2e4",
+      "bytes": 8087,
+      "mtime_ns": 1793331582975516800
+    }
+  },
+  "prior_source_acceptance": {
+    "source_commit": "c9ac0b295cc6cf1ef92804b43679c58fa0572f16",
+    "source_cards": 8,
+    "status": "partial",
+    "no_whole_source_completion_claim": true,
+    "reading_policy": "reading-business-policy/26"
+  },
+  "metadata_not_authorization": true,
+  "observed_at": "2026-10-30T03:30:57.137439+00:00",
+  "preparation_revision": "source-description-CNIR-summary-v4-20261030",
+  "status": "PREPARED_NOT_EXECUTED",
+  "model_calls": 0,
+  "provider_api_calls": 0,
+  "ready_for_post": true,
+  "no_post_by_construction": true,
+  "previous_unexecuted_preparation": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\source-description-20261030\\prepared-cn-ir-summary-v3.json",
+  "runtime": {
+    "configuration_owner": "configured_paragraph_runtime",
+    "explicit_environment_present": false,
+    "current_mode": "native PDF; no optional SDK configured in this process",
+    "w21_author_worktree_untouched": true
+  },
+  "scope": "one real source, original language v4 summaries, activation/restart/cross-run paid-response reuse; no download/translation/whole-source-complete claim"
+}

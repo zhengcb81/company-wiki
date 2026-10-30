@@ -1,0 +1,21 @@
+{
+  "code_commit": "c9ac0b295cc6cf1ef92804b43679c58fa0572f16",
+  "branch": "master",
+  "pushed": true,
+  "normal_pre_commit": "PASS",
+  "normal_pre_push": {
+    "passed": 158,
+    "seconds": 23.06
+  },
+  "independent_lf_hashes_match_committed_blobs": true,
+  "ci": {
+    "id": 40998178796,
+    "head_sha": "c9ac0b295cc6cf1ef92804b43679c58fa0572f16",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40998178796"
+  },
+  "old_failed_ci_preserved": 40996278861,
+  "summary_cache_rf": "OPEN",
+  "goal_complete": false
+}

@@ -130,6 +130,7 @@ def gold_admission_missing(observation, *, attempt_no):
 
 def gold_observation(gold: dict, selected, envelope: dict) -> dict:
     from company_wiki.automation.narrative_model import _group_mapping
+    from tools.document_understanding_benchmark.records import gold_fact_target_kind
 
     # This is the same test oracle used by ROOT's same-source replay. The
     # observer only adapts actual model aliases; it has no support/normalizing
@@ -201,7 +202,12 @@ def gold_observation(gold: dict, selected, envelope: dict) -> dict:
             assert groups == [[alias, [alias_by_span[sid] for sid in members]]
                 for alias, (_, members) in actual_groups.items()]
     context = _oracle_reading_context(selected.reading_context)
-    required = [fact for fact in gold["facts"] if fact.get("target_kind") == "required_business"]
+    # Match du-gold's default: an omitted kind is a business fact unless it
+    # explicitly describes document metadata. Silently selecting zero checks
+    # would admit a paid request with a vacuous 0/0 source-quality result.
+    required = [fact for fact in gold["facts"] if gold_fact_target_kind(fact) == "required_business"]
+    if not required:
+        raise ValueError("PHASE_C_GOLD_REQUIRED_BUSINESS_EMPTY")
     scored = score_facts(required, evidence_spans=selected.evidence_spans,
         reading_context=context, source_id=selected.source_ref.source_id)
     if context is None and actual_groups:

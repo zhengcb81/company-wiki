@@ -64,6 +64,13 @@ def _validate_quote_anchor(anchor: Any, where: str) -> dict[str, Any]:
     }
 
 
+def gold_fact_target_kind(fact: Mapping[str, Any], *, where: str = "gold.fact") -> str:
+    """One default/enum owner for corpus validation and live source checks."""
+    record = _require_mapping(fact, where)
+    default = DISPOSITION_CONTEXT if record.get("fact_scope") == "document_meta" else REQUIRED_BUSINESS
+    return _require_enum(record.get("target_kind", default), TARGET_KINDS, f"{where}.target_kind")
+
+
 def validate_gold(gold: Mapping[str, Any]) -> dict[str, Any]:
     """Validate and normalize one ``du-gold/1`` record."""
 
@@ -102,9 +109,7 @@ def validate_gold(gold: Mapping[str, Any]) -> dict[str, Any]:
             {
                 "id": fact_id,
                 "importance": importance,
-                "target_kind": _require_enum(
-                    fact.get("target_kind", DISPOSITION_CONTEXT if fact.get("fact_scope") == "document_meta" else REQUIRED_BUSINESS),
-                    TARGET_KINDS, f"{where}.target_kind"),
+                "target_kind": gold_fact_target_kind(fact, where=where),
                 "require_same_scope": _optional_boolean(fact.get("require_same_scope"), f"{where}.require_same_scope"),
                 "any_support_sets": support_sets,
                 "must_preserve": [
