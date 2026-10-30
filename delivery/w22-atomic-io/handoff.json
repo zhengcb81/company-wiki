@@ -1,0 +1,196 @@
+{
+  "schema_version": "harness-handoff/1",
+  "card_id": "W22-CWP-ATOMIC-IO",
+  "status": "READY_FOR_ROOT",
+  "workdir": "C:/Users/郑曾波/Projects/company-wiki-w22-atomic-io",
+  "branch": "codex/w22-atomic-io-20261030",
+  "base_commit": "662f821e749bc221c8c308986e54e00465834332",
+  "implementation_commits": [
+    "d04b72b2bae9ea8442474997263dbed5f84d9f3a",
+    "e8896a84fe5995829a7a84a6b01c5d71da95d513"
+  ],
+  "tested_commit": "e8896a84fe5995829a7a84a6b01c5d71da95d513",
+  "reviewed_commit": "e8896a84fe5995829a7a84a6b01c5d71da95d513",
+  "code_files": [
+    {
+      "path": "src/company_wiki/_atomic_file.py",
+      "raw_sha256": "8b5d5ed5fb2eb64488a8702c7f504eb786a30513614795ea9c8f3cef7740d0f6",
+      "lf_sha256": "77696e3dbad50c7a8e940ddd9ccc83edbc51e64f2ba393e887c7c5bbbad35d8c"
+    },
+    {
+      "path": "src/company_wiki/_atomic_path.py",
+      "raw_sha256": "4347217836740a5c9994893e34033a86d6f111880cf4855b59a850b41054ac0c",
+      "lf_sha256": "4347217836740a5c9994893e34033a86d6f111880cf4855b59a850b41054ac0c"
+    },
+    {
+      "path": "tools/pre_push_gate.py",
+      "raw_sha256": "365d363c382980c856e083ced3e057123d531578f991942cfd3c097887e1e474",
+      "lf_sha256": "96f57f5468f47c9194642a0b9f7279c9209fea2bab1568daefb53c5d4293eb19"
+    },
+    {
+      "path": "tools/w22_atomic_probe.py",
+      "raw_sha256": "5196d4ed92e32ae869a315f719b66b970f6164ae507433fefb914174ec4e8c1d",
+      "lf_sha256": "5196d4ed92e32ae869a315f719b66b970f6164ae507433fefb914174ec4e8c1d"
+    },
+    {
+      "path": "tests/unit/test_w22_atomic_paths.py",
+      "raw_sha256": "f2b0b3b449babda2ee8ed5faeb3b16f12c276b897df196f3b44169b387d9abb2",
+      "lf_sha256": "f2b0b3b449babda2ee8ed5faeb3b16f12c276b897df196f3b44169b387d9abb2"
+    },
+    {
+      "path": "tests/unit/test_w22_atomic_consumer_integration.py",
+      "raw_sha256": "fab59cab46c8d3ee68183d8438546bbca422c42fc07e564add640d028ef39615",
+      "lf_sha256": "fab59cab46c8d3ee68183d8438546bbca422c42fc07e564add640d028ef39615"
+    },
+    {
+      "path": "tests/unit/test_w22_gate_scratch.py",
+      "raw_sha256": "e11e76965e5d3fdbe59e841cefb0c208d829d2d7acfcf45030831299e67ead11",
+      "lf_sha256": "e11e76965e5d3fdbe59e841cefb0c208d829d2d7acfcf45030831299e67ead11"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "storage-primitive-path-compat",
+      "summary": "stage 名短/独占/与目标解耦；Windows >259 用扩展长度形式；非 Windows 与短路径恒等；表示不向上层泄漏；PermissionError 不误判为路径长度",
+      "state": "implemented",
+      "tested": "test_w22_atomic_paths.py（含 openable/stage_dir 边界与幂等）、probe plain_boundaries、审查方独立反例（目标 255/276 字符、深目录 300+ 字符）"
+    },
+    {
+      "id": "atomic-contract-preserved",
+      "summary": "同目录 exclusive stage、关闭后 os.replace、失败不丢原目标、不删他人 stage、5/32/33 有界重试、其他错误立即传播、mode/encoding/newline/sync 不变、无新锁/后台重试/cross-volume",
+      "state": "implemented",
+      "tested": "test_atomic_replace_contention.py 6 用例＋test_architecture_quality_io.py 6 用例全绿；w22 新用例覆盖 fsync 失败、cleanup 不掩盖、并发 stage 不互删（审查方 8 线程真实并发反例零残留）"
+    },
+    {
+      "id": "gate-scratch-bounded-writable",
+      "summary": "调用专属、有界候选探测、deny-ACE 立即回落、全败逐候选报错、child temp env 统一隔离、成功/失败/超时全清理；不改选测/超时/退出码/输出上限政策",
+      "state": "implemented",
+      "tested": "test_w22_gate_scratch.py 10 用例（含 deny-write 场景、3 条真实 child 路径）；审查方真实 icacls deny-ACE 复验 0.001s 有界回落；git diff 确认政策行零改动"
+    },
+    {
+      "id": "consumer-integration-real-chain",
+      "summary": "真实 persist_projection/derived writer 保存小 fixture 读回 SHA；不调模型/SDK",
+      "state": "implemented",
+      "tested": "test_w22_atomic_consumer_integration.py：persist_projection→load_projection 回环＋边界目录变体、SourceCatalog._atomic_write 边界写"
+    },
+    {
+      "id": "evidence-and-platform-facts",
+      "summary": "两类失败分开复现并记录 winerror/errno/长度；Windows 实测 NTFS probe；NOT_RUN 诚实",
+      "state": "implemented",
+      "tested": "tools/w22_atomic_probe.py 四段，logs/probe-final.json；POSIX 恒等测试在 Windows 诚实 skip"
+    },
+    {
+      "id": "independent-review-before-handoff",
+      "summary": "交接大节点调用真正独立审查并修完范围内问题",
+      "state": "implemented",
+      "tested": "首轮 FIX_FIRST 5 项→修复 e8896a84→复审 SHIP（真实 icacls/句柄复验）"
+    }
+  ],
+  "tests": [
+    {
+      "command": "C:/Miniconda/python.exe -B -X utf8 -m pytest -q --tb=short -p no:cacheprovider tests/unit/test_w22_atomic_paths.py tests/unit/test_w22_atomic_consumer_integration.py tests/unit/test_w22_gate_scratch.py tests/unit/test_atomic_replace_contention.py tests/unit/test_architecture_quality_io.py tests/unit/test_pre_push_gate.py --basetemp=.w22-a-tmp",
+      "cwd": "worktree",
+      "exit": 0,
+      "duration_seconds": 14.02,
+      "result": "43 passed, 1 skipped",
+      "evidence": "docs/plans/w22-atomic-io-2026-10-30/logs/green-review-fixes.log",
+      "note": "skip=POSIX-only identity test on Windows (honest NOT_RUN)"
+    },
+    {
+      "command": "同上短域命令（审查方独立 basetemp，系统 temp 下）",
+      "exit": 0,
+      "duration_seconds": 21.33,
+      "result": "43 passed, 1 skipped",
+      "evidence": "独立审查 agent 复审报告"
+    },
+    {
+      "command": "RED：pytest tests/unit/test_w22_atomic_paths.py（基线代码）",
+      "exit": 1,
+      "result": "6 failed, 4 passed, 1 skipped（含 _atomic_path ImportError）",
+      "evidence": "docs/plans/w22-atomic-io-2026-10-30/logs/red-atomic-tests.log"
+    },
+    {
+      "command": "RED：pytest tests/unit/test_w22_gate_scratch.py（基线代码）",
+      "exit": 1,
+      "result": "5 failed, 3 passed",
+      "evidence": "docs/plans/w22-atomic-io-2026-10-30/logs/red-gate-tests.log"
+    },
+    {
+      "command": "ruff check（7 个变更/新增文件）",
+      "exit": 0,
+      "result": "All checks passed"
+    },
+    {
+      "command": "mypy src/company_wiki/_atomic_file.py src/company_wiki/_atomic_path.py",
+      "exit": 0,
+      "result": "Success: no issues found in 2 source files"
+    }
+  ],
+  "real_windows_probe": {
+    "command": "C:/Miniconda/python.exe -B -X utf8 tools/w22_atomic_probe.py",
+    "exit": 0,
+    "evidence": "docs/plans/w22-atomic-io-2026-10-30/logs/probe-final.json",
+    "host": "NTFS, LongPathsEnabled=0（只读观察，未改注册表）",
+    "facts": [
+      "目标 252 字符 OK；旧命名 stage 265 字符 FileNotFoundError errno 2；修复后同一目标 atomic_output OK 且原目标字节保留",
+      "普通文件创建 ≤259 OK / 260 失败 errno 2；普通 mkdir ≤247 OK / 248 winerror 206",
+      "457 字符深目录：扩展长度 mkdir/create/replace/unlink 全 OK，plain stat winerror 3",
+      "混合 extended-stage→plain-dest os.replace OK",
+      "真实句柄占用竞争：PermissionError errno 13 winerror 5（与路径长度失败形态可区分）"
+    ]
+  },
+  "consumer_integration": {
+    "entrypoints": [
+      "persist_projection → load_projection 回环（真实 store、canonical JSON、hash 身份）＋SHA 边界目录变体",
+      "SourceCatalog._atomic_write 边界写（destination 247 字符、legacy stage 会越界）"
+    ],
+    "no_model_or_sdk": true,
+    "all_five_production_call_sites_covered_by_unit_domain": true
+  },
+  "independent_review": {
+    "reviewer": "general-purpose 独立审查 agent（未参与施工）",
+    "rounds": [
+      {
+        "target": "d04b72b2bae9ea8442474997263dbed5f84d9f3a",
+        "verdict": "FIX_FIRST",
+        "findings": "5（P1 deny-ACE 无限重试挂起；P2 cleanup 掩盖原始故障；P2 scratch 残留；P3 stage_dir 非幂等；P3 probe 文档）"
+      },
+      {
+        "target": "e8896a84fe5995829a7a84a6b01c5d71da95d513",
+        "verdict": "SHIP",
+        "note": "5 项全 CLOSED；真实 icacls deny-ACE 与真实句柄复验；4 项 P3 观察不阻塞"
+      }
+    ],
+    "reports": [
+      "首轮与复审报告全文见本卡会话记录；关键证据：审查方独立复跑短域 43P/1S exit 0、probe 四段逐字节一致、18 文件 diff 全在边界内、8 线程真实并发反例零 stage 残留"
+    ],
+    "open_findings": [
+      "N1 (P3) _probe_writable 与 mkdtemp 之间理论 TOCTOU；无实用修复路径",
+      "N2 (P3) deny-ACE 测试在未来回归时会挂起而非快速红（测试设计观察）",
+      "N3 (P3, pre-existing) add_note 需 ≥3.11 而 pyproject 声明 ≥3.10；_bounded_process.py 既有同样用法，属全局 floor 清理",
+      "N4 (P3) 探测 rmdir 与 AV/indexer 极端竞态可残留随机名空目录，有界可接受"
+    ]
+  },
+  "cleanup": {
+    "test_scratch_removed": true,
+    "method": "extended-length (\\\\?\\) rmtree 删除含 >259 字符深层残留的 .w22-a-tmp/",
+    "worktree_clean_at_handoff": true,
+    "no_production_config_or_originals_touched": true,
+    "probe_and_counterexample_scratch": "probe 自带 owned scratch 自动删除；审查方 scratch 在系统 temp 自行清理"
+  },
+  "compatibility": {
+    "public_signature_unchanged": "atomic_output(path, mode, encoding, newline, sync) 签名与同目录 stage 行为不变",
+    "no_new_dto": true,
+    "wire_or_recipe_change": "无；上层调用接口零变化",
+    "private_changes": "_replace_closed_stage 参数 Path→str（私有，唯一调用方 atomic_output）；新增私有 leaf _atomic_path.py",
+    "gate_policy_untouched": "选测、FAST_CONTRACT_CASES（35）、180/600 超时、退出码、输出上限、GIT_REPOSITORY_CONTEXT、xdist 规则均未改动",
+    "posix": "非 Windows 全部路径恒等（恒等测试在 Windows 诚实 NOT_RUN；审查方与作者均未伪造跨平台绿）"
+  },
+  "remaining": [
+    "消费方深目录局限：official_json_projection._projections_root 的普通 mkdir(parents=True) 在目录 >247 字符报 winerror 206；不在本卡允许文件清单内未改，ROOT 决定是否另开卡",
+    "4 项审查 P3 观察（见 independent_review.open_findings）",
+    "ROOT 集成后按需跑 consumer/cache 短域；作者不替 ROOT 签 M8 摘要或 RF 验收"
+  ],
+  "pushed_to_remote": true,
+  "remote_branch_url": "https://github.com/zhengcb81/company-wiki/tree/codex/w22-atomic-io-20261030"
+}
