@@ -10,10 +10,14 @@ def test_fast_inventory_keeps_the_four_reuse_receipt_regressions_without_a_whole
         path + "::test_reuse_final_receipt_has_one_owner_read_per_operation",
         path + "::test_new_operation_rejects_changed_reused_original_before_new_fee",
     )
-    # 31 existing targets plus three in-process format/version witnesses.
-    assert len(gate.FAST_CONTRACT_CASES) == 34
+    # Existing bounded inventory plus one protocol-shape regression node.
+    assert len(gate.FAST_CONTRACT_CASES) == 35
     assert path not in gate.FAST_CONTRACT_CASES
     assert all(gate.FAST_CONTRACT_CASES.count(node) == 1 for node in required)
+    protocol_path = 'tests/unit/test_narrative_protocol_identity_shapes.py'
+    protocol_node = protocol_path + '::test_protocol_lookup_does_not_hash_non_string_json'
+    assert gate.CURRENT_CI_REGRESSION_CASES.count(protocol_node) == 1
+    assert protocol_path not in gate.FAST_CONTRACT_CASES
     assert gate.DAILY_PUSH_TIMEOUT_SECONDS == 180
 
 

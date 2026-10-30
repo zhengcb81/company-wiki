@@ -1,0 +1,117 @@
+{
+  "schema_version": "atomic-ci-diagnosis/1",
+  "diagnosed_at": "2026-10-30T13:28:52.444330+00:00",
+  "status": "ROOT_CAUSE_CONFIRMED_FIX_NOT_IMPLEMENTED_BY_REVIEWER",
+  "run": {
+    "id": 41056460382,
+    "head_sha": "bf58769b6287b5b6f268ce5bccbd619fb2061943",
+    "status": "completed",
+    "conclusion": "failure",
+    "job_id": 124065108741,
+    "job_name": "Fast checks (Python 3.12)",
+    "failure_step": "Unit tests",
+    "step_started_at": "2026-10-30T12:36:00Z",
+    "step_completed_at": "2026-10-30T12:39:56Z",
+    "run_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41056460382"
+  },
+  "public_evidence": {
+    "run_api": "https://api.github.com/repos/zhengcb81/company-wiki/actions/runs/41056460382",
+    "job_api": "https://api.github.com/repos/zhengcb81/company-wiki/actions/runs/41056460382/jobs?per_page=50",
+    "annotation_api": "https://api.github.com/repos/zhengcb81/company-wiki/check-runs/124065108741/annotations?per_page=100",
+    "failure_annotations": [
+      "tests.unit.test_narrative_scoped_runtime::test_unknown_projection_does_not_fall_back[version3] [TypeError]",
+      "tests.unit.test_narrative_scoped_runtime::test_unknown_projection_does_not_fall_back[version2] [TypeError]\\nFailure groups (2 failed cases):\\ntests.unit.test_narrative_scoped_runtime::test_unknown_projection_does_not_fall_back [TypeError] x2"
+    ],
+    "job_logs_api_status": 403,
+    "credentials_read": false
+  },
+  "reproduction": {
+    "command": [
+      "C:/Miniconda/python.exe",
+      "-B",
+      "-m",
+      "pytest",
+      "tests/unit/test_narrative_scoped_runtime.py::test_unknown_projection_does_not_fall_back",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "--basetemp=.cwpatomiccired"
+    ],
+    "passed": 2,
+    "failed": 2,
+    "seconds": 6.53,
+    "python": "3.13.9 local vs CI3.12",
+    "matches_remote_node_ids": true,
+    "failure": "TypeError: unhashable type list/dict",
+    "frame": "narrative_summary_protocols.py:41: _BY_PROJECTION.get(version)"
+  },
+  "root_cause": {
+    "classification": "runtime public invalid-input regression, not incorrect test or Linux-only environment",
+    "description": "new dictionary-backed scoped-protocol registry hashes an unvalidated projection value. JSON-like list/dict versions previously rejected through ModelResponseError now raise TypeError before existing legacy validation can run.",
+    "wrong_inputs": [
+      "[]",
+      "{}"
+    ],
+    "existing_test_should_be_kept": true,
+    "valid_current_protocols_affected_by_this_observed_failure": false
+  },
+  "precommit_and_push": {
+    "precommit": "static ruff/mypy/config/host checks only, type hints do not reject malformed runtime values",
+    "actual_push_receipt": ".planning/summary-quality-20261030/atomic-push.log",
+    "push_scope": "resource dependency scope unknown; planned34targets; full unit suite recommendation deferred to CI",
+    "actual_push_tests": 161,
+    "actual_push_seconds": 38.4,
+    "coverage_claim": "local_fast_pass only; full_validation_pending",
+    "failed_node_was_in_fixed_push_smoke": false,
+    "full_suite_in_every_commit_recommended": false
+  },
+  "suggested_tdd_fix": [
+    "retain existing four-case projection test as RED/green witness",
+    "central registry lookup should accept strings only; invalid types must not be hashed. For projection/request recognizers return no matching recipe; caller preserves its existing strict invalid-version error instead of defaulting to a valid protocol",
+    "prompt resolver/summary_bundle_format and other registry family boundaries should receive finite invalid-shape tests so same root does not recur via another entry; preserve old /4 /5 /6 request bytes and new /7 matching",
+    "after fix run this precise four-case node plus public dispatch/boundary unit modules and new atomic recipe/artifact modules, then normal static/push checks and observe exact CI; no timeout increase, no removed negative assertions",
+    "a shared public protocol micro-contract can be included in existing major-node affected-domain acceptance; do not make all commits run full unit suite or introduce permission/receipt gates"
+  ],
+  "unrelated_annotations": [
+    "Node20 action deprecation warning",
+    "Ubuntu-latest image migration notice"
+  ],
+  "not_run": [
+    "full unit suite",
+    "paid model",
+    "downloads",
+    "raw parsing"
+  ],
+  "product_source_edits": false,
+  "model_posts": 0,
+  "files_observed": [
+    {
+      "path": "src/company_wiki/automation/narrative_summary_protocols.py",
+      "raw_sha256": "ff88f8db4d5935f70462ec4268d15ba9495e77df57138714cbc62e54f1689a45"
+    },
+    {
+      "path": "src/company_wiki/automation/narrative_model_runtime.py",
+      "raw_sha256": "89c71ca89939322271fc0e7e4bb3e02c3a8e3b70d7de950ab35c0dc62abdff5b"
+    },
+    {
+      "path": "tests/unit/test_narrative_scoped_runtime.py",
+      "raw_sha256": "8680784685f8941da769ec417fc1812294bf0fa1d2e47c2a8f85db6203650d57"
+    },
+    {
+      "path": ".github/workflows/ci.yml",
+      "raw_sha256": "f2fec1e5e2815f649812e57302a027e690afe36c8c181a7f031cba9245ac3f80"
+    },
+    {
+      "path": ".pre-commit-config.yaml",
+      "raw_sha256": "b126f9d2bacd3c2d127603e681048021e23fdf7e32d7cf560265ead30e7046c8"
+    },
+    {
+      "path": "tools/pre_push_gate.py",
+      "raw_sha256": "6f43247b9667ef46128e263f21cc01b91ace8ded6f3aeac3b3ec15c60c0d2811"
+    },
+    {
+      "path": "tools/changed_unit_tests.py",
+      "raw_sha256": "17ebda2877525410b4bce8b9b36b6278e1c294964d59b905cdc3495310bcbf3e"
+    }
+  ]
+}

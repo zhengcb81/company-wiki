@@ -1,0 +1,31 @@
+{
+  "schema_version": "atomic-ci-fix-independent-seal/1",
+  "sealed_at": "2026-10-30T13:33:12.301020+00:00",
+  "status": "INDEPENDENT_PASS_EXACT_NEW_CI_PENDING",
+  "files": [
+    {
+      "path": "src/company_wiki/automation/narrative_summary_protocols.py",
+      "bytes": 3183,
+      "raw_sha256": "ff88f8db4d5935f70462ec4268d15ba9495e77df57138714cbc62e54f1689a45",
+      "lf_sha256": "ff88f8db4d5935f70462ec4268d15ba9495e77df57138714cbc62e54f1689a45"
+    },
+    {
+      "path": "tests/unit/test_narrative_protocol_identity_shapes.py",
+      "bytes": 1457,
+      "raw_sha256": "f59747e551c4643e7bcac466286b469da44faea1535bc62f03c95446e517e707",
+      "lf_sha256": "f59747e551c4643e7bcac466286b469da44faea1535bc62f03c95446e517e707"
+    },
+    {
+      "path": "tools/pre_push_gate.py",
+      "bytes": 21891,
+      "raw_sha256": "a9c8a7a14108facb747263302de0e1d5d519f8e67e836d14faef509c877c23d6",
+      "lf_sha256": "ebab93bc5d6a4a2d2c82ecd54c2706cf940849f9ab38381c6995a89a50462373"
+    },
+    {
+      "path": "tests/unit/test_pre_push_gate.py",
+      "bytes": 3335,
+      "raw_sha256": "b12a7ea4c7f84029c44c3292cdbdf50879cda8ead0b7e128326aeedc2a574c62",
+      "lf_sha256": "b12a7ea4c7f84029c44c3292cdbdf50879cda8ead0b7e128326aeedc2a574c62"
+    }
+  ]
+}

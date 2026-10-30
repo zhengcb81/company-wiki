@@ -1,3 +1,16 @@
+## 2026-10-30 当前：真实/7仍有保真缺陷，已精确恢复缓存，转做引用式对照
+
+唯一当前入口 CURRENT_STATUS.md/json；具体下一步 [M5](review/source-information-20261030/description-final/M5_SOURCE_QUOTE_PRIMARY.md)，真实证据见[本节点](review/source-information-20261030/description-final/real-atomic-and-quote-20261030/README.md)。
+
+已完成：来源准入8个开发检查点；非期次精确SourceRef复用工程；/7原bundle与generation精确恢复、正式读取和同/跨run0POST；RF可选summary-use血缘7b82d7ca推main/CI41064039519 success/定点安装与重复零写。真实/7逐条审查仍4P2/2P3，不以工程通过代签语义。当前/5原文卡/模型只排序真实实验已PASS，1POST/6272tokens/$0.001076预算代理，激活/同run/跨run0重复费用；内容独审进行中，默认仍/4。母账1,827,558tokens/$0.732814含旧unknown，额度10M/$20未提升，原件/config及外来WIP保持。
+
+CWP bf58769b CI41056460382失败已定位协议lookup畸形JSON处理；共享owner根修、52P短域与21P独审通过，既有push快测仅加1个六参数节点，未增加全仓/超时。代码和PWF正等待本次正常提交推送。
+
+**唯一下一步：** 完成/5真实内容独审，发布read/capture/协议类型修复及PWF并观察精确CI，再TDD生产新请求选择/旧run兼容，以真实中微等同公司来源/本机native模型完成RF参数-公式实际采用。W21 canonicalC2/长路径、US RPO、新holdout和八步公司循环继续OPEN；不宣称项目已完成。
+
+---
+以下为历史记录，不是额外执行入口。
+
 ## 2026-10-30 当前：原子限定新/7工程已独审，进入真实新摘要与恢复验收
 
 已发布source frame组件f1b51f06精确CI41052385243 success；44中性测试及真实15span重放通过。现在同一scoped引擎以有限registry支持新/7（prompt4.3/request8/decoder7、紧凑source hints、assessor1.1），旧/4/5/6输入gold和原真实/6 artifact保持原解释；默认仍/4。新版本按单条保留归属/主体/合作方/条件，当前进行与计划、项目规格与投产/销量分开，程序只给possible诊断，不称NLI通过。

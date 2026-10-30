@@ -71,6 +71,9 @@ CURRENT_CI_REGRESSION_CASES = (
     "tests/unit/test_narrative_english_business_recall.py::test_recall_semantics_are_versioned_and_legacy_txt_locators_stay_unchanged",
     "tests/unit/test_narrative_verify_handler.py::test_verify_handler_transcript_replays_bytes_without_provider_policy",
     "tests/unit/test_official_json_projection_generation.py::test_old_raw_manifest_retains_exact_canonical_contract",
+    # CI 41056460382: reject malformed JSON protocol identifiers through the
+    # existing named boundary, even when a wide push defers other unit files.
+    "tests/unit/test_narrative_protocol_identity_shapes.py::test_protocol_lookup_does_not_hash_non_string_json",
     "tests/unit/test_automation_migrations.py::test_m14_classification_uses_one_snapshot_during_concurrent_init",
     "tests/contract/test_zr203_reader_rewire.py::test_read_entrypoints_never_construct_catalog_store",
     "tests/contract/test_zr1003_shadow_assertions.py::test_c2_recorded_review_is_diagnostic_metadata",

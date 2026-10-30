@@ -1,0 +1,11 @@
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\company-wiki\.planning\summary-quality-20261030\atomic-real-recovery\run_restored_cache_v2.py", line 99, in <module>
+    native = runner.append_native(database, run_id, OUT, 'live')
+  File "C:\Users\郑曾波\Projects\company-wiki\tools\document_understanding_benchmark\phase_c_runner.py", line 399, in append_native
+    _append_native_rows(database, run_id, records,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        journal_sha256=fingerprint(output / (run_id + ".native-usage.json"))["sha256"])
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\郑曾波\Projects\company-wiki\tools\document_understanding_benchmark\phase_c_runner.py", line 428, in _append_native_rows
+    raise ValueError("live native usage needs the explicit existing mother ledger")
+ValueError: live native usage needs the explicit existing mother ledger

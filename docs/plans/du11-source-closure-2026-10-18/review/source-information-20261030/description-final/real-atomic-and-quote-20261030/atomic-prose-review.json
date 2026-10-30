@@ -1,0 +1,838 @@
+{
+  "schema_version": "independent-atomic-real-prose-review/1",
+  "date": "2026-10-30",
+  "verdict": "PARTIAL_QUALITY_4_P2_2_P3_OPEN",
+  "artifact_body_sha256": "216827368a284843c661e6b00c722e659e11e0838b1bae6dcc0aaf5c6d725311",
+  "artifact_bytes": 170748,
+  "generation_sha256": "d929ea90aa03988cbdda27122f1fbcbf4aaefb28af2be62762d6967280af3fa4",
+  "scope": "one captured native /7 development source; all20 final claims vs captured support/context and existing8gold; no full-IR/holdout acceptance",
+  "counts": {
+    "claims": 20,
+    "P1": 0,
+    "P2": 4,
+    "P3": 2,
+    "no_additional_perclaim_issue": 14,
+    "source_checkpoints_present": 8,
+    "source_checkpoint_denominator": 8,
+    "gold_groups_no_issue": 4,
+    "gold_groups_P3": 1,
+    "gold_groups_P2": 3
+  },
+  "product_observation": {
+    "selection_status": "partial",
+    "selection_coverage_complete": false,
+    "quality_status": "needs_review",
+    "semantic_status": "not_evaluated",
+    "subfact_coverage_status": "not_evaluated",
+    "diagnostic_count": 1,
+    "diagnostic_claim_ids": [
+      "t6-3"
+    ],
+    "flag_does_not_correct_prose": true,
+    "zero_diagnostic_does_not_prove_correct": true
+  },
+  "comparison_to_six": [
+    {
+      "old_issue": "NL1 current_action_as_planned",
+      "new_status": "RESOLVED_IN_CAPTURE",
+      "evidence": "t1-1 actual + 正在; original current ongoing preserved."
+    },
+    {
+      "old_issue": "NL2 inherited_reporting_and_counterparty_loss",
+      "new_status": "PARTIAL_COUNTERPARTY_FIXED_REPORTING_STILL_OPEN",
+      "evidence": "t6-3 now names 宁德时代 and is flagged; still drops 据控股股东信息."
+    },
+    {
+      "old_issue": "NL3 mixed_startup_and_project_capacity_basis",
+      "new_status": "PARTIAL_STATE_SPLIT_FIXED_NEW_INTERPRETATION_ADDED",
+      "evidence": "t8-1 actual startup vs t8-2 planned correct direction; new design/commissioning wording is not original disclosure."
+    },
+    {
+      "old_issue": "prior /6 t2 faithful event wording",
+      "new_status": "REGRESSION",
+      "evidence": "/6 t2-1 named 三星 as referent without customer relation; /7 adds question-only relation and t2-2 broad event."
+    },
+    {
+      "old_issue": "prior /6 t3主要 qualifier",
+      "new_status": "MINOR_REGRESSION",
+      "evidence": "/6 retains 主要; /7 t3-2 drops it."
+    }
+  ],
+  "findings": [
+    {
+      "id": "AP-NL1",
+      "severity": "P2",
+      "claim_ids": [
+        "t2-1"
+      ],
+      "certainty": "CONFIRMED_UNSUPPORTED_RELATION_FROM_QUESTION",
+      "title": "问句中的客户关系进入答复事实并归给新闻",
+      "source_basis": "根据相应新闻报道，您所描述的情况涉及该公司的家电产品",
+      "question_only_basis": "控股子公司九目化学第一大客户就是三星",
+      "observed": "根据相应新闻报道，所述情况涉及九目化学客户三星的家电产品。",
+      "not_claimed": "不判断现实中三星是否为九目客户；本材料的公司答复未独立确认。",
+      "common_root": "context允许用于实体消歧，但生成式改写把上下文中的关系谓词一起搬入support归属；basis_parts合法只能证明引用范围，不能证明关系蕴含。"
+    },
+    {
+      "id": "AP-NL2",
+      "severity": "P2",
+      "claim_ids": [
+        "t2-2"
+      ],
+      "certainty": "CONFIRMED_EVENT_SCOPE_AND_REPORTING_BROADENING",
+      "title": "家电报道事项被扩大为整体退出中国市场相关事项",
+      "source_basis": "根据相应新闻报道…涉及该公司的家电产品，该事项未对九目化学经营构成重大影响。",
+      "observed": "三星电子退出中国市场相关事项未对九目化学经营构成重大影响。",
+      "not_claimed": "重大否定本身保留，没有改为零影响；问题是其适用事项范围及新闻归属。",
+      "common_root": "为消除代词而生成更具体事件名，却从question取了比answer限定更宽的前提；独立条目不能靠邻条补新闻/家电限定。"
+    },
+    {
+      "id": "AP-NL3",
+      "severity": "P2",
+      "claim_ids": [
+        "t6-3"
+      ],
+      "certainty": "CONFIRMED_INHERITED_REPORTING_LOSS",
+      "title": "独立合作愿望条目仍缺股东信息来源",
+      "source_basis": "根据公司控股股东中国节能信息，中国节能与宁德时代已经建立了联系，并希望建立业务协同与合作。",
+      "observed": "中国节能希望建立与宁德时代的业务协同与合作。",
+      "not_claimed": "未写成上市公司签约/采购，也未把希望写成已合作。补回宁德时代和1.1风险标记是实际改善。",
+      "common_root": "拆分并列命题后报告来源只留在前一条；finite assessor已诊断，但没有把问题从交付正文消除。"
+    },
+    {
+      "id": "AP-NL4",
+      "severity": "P2",
+      "claim_ids": [
+        "t8-2"
+      ],
+      "certainty": "CONFIRMED_UNMARKED_INTERPRETIVE_ADDITION",
+      "title": "设计/投产解释被写进源事实正文",
+      "source_basis": "该项目包含…产能约751吨/年，项目建成后将…提供产能保障。",
+      "observed": "该产能为项目设计口径，以项目建成投产为条件。",
+      "not_claimed": "未声称已投产；项目产能应区别既有出货量的方向正确。但原文未用设计口径/投产作为明确披露条件。",
+      "common_root": "提示要求显式阶段口径，模型以常识解释补足源文未陈述的标签和条件；来源观察hint不能充当新增事实。"
+    },
+    {
+      "id": "AP-NL5",
+      "severity": "P3",
+      "claim_ids": [
+        "t3-2"
+      ],
+      "certainty": "CONFIRMED_MINOR_QUALIFIER_LOSS",
+      "title": "客户链第二级下游的主要被省略",
+      "source_basis": "OLED成品材料生产企业下游主要为OLED显示面板生产企业",
+      "observed": "OLED成品材料生产企业下游为OLED显示面板生产企业",
+      "not_claimed": "链条层级正确，普通为字未必断言排他；因此列P3而非重大客户链错误。",
+      "common_root": "流畅压缩删除程度/范围限定。"
+    },
+    {
+      "id": "AP-NL6",
+      "severity": "P3",
+      "claim_ids": [
+        "t8-3"
+      ],
+      "certainty": "CONFIRMED_STANDALONE_REFERENT_DEPENDENCY",
+      "title": "独立产能保障条目未重述具体项目名称",
+      "source_basis": "2025年启动万润工业园二期C05建设项目…项目建成后将…提供产能保障",
+      "observed": "项目建成后将为公司半导体制造材料业务发展提供产能保障。",
+      "not_claimed": "条件未来及保障内容忠实，完整绑定support可辨识C05；不是凭空捏造另一个项目。小问题是/7承诺可单独选择条目，但单取该条无法仅靠正文识别项目。",
+      "common_root": "原样保留代词但原生段落已被拆成独立可选条目；需要每条具备必要名称，或展示完整支持段及上下文。"
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "t1-1",
+      "text": "公司正在积极开发国内市场并持续完善国内市场战略布局，以提高抗风险能力。",
+      "modality": "actual",
+      "machine_needs_review": false,
+      "assessment": "当前积极开发/持续完善，被准确写成正在实施的actual；没有凭空加入已完成或量化成果。",
+      "status": "NO_ADDITIONAL_ISSUE_IN_SCOPE",
+      "finding_id": null,
+      "support": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:9eff140488704704348de7188fb027201325c1fcfefbd9083eadd6a241490484",
+          "locator": "loc:v1/page:1/table:0/row:6/column:1/chars:57-143",
+          "text": "答：您好，公司积极开发国内市场，持续完善国内市场战略布局，提\n高公司的抗风险能力，2025 年度公司境内收入约8.19 亿元，占比约22%，\n较比 2024 年度有所提升。"
+        }
+      ],
+      "context": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:27d4283d845ae0477e183af35c8e2103569b77365652f313250b7c64b2b01d25",
+          "source_role": "company_filing",
+          "text": "投资者关系活动类别 | □特定对象调研 □分析师会议\n□媒体采访 □业绩说明会\n□新闻发布会 □路演活动\n□现场参观\n☑其他 2026 年山东辖区上市公司投资者网上集体接待日活动"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:c693558ed1a732901d27bf44e29b3790b77680d870fce141d9511c3bbbb8a169",
+          "source_role": "investor_question",
+          "text": "1、问：公司主要业务 80%多都在国外，目前公司在国内业务开拓面\n临哪些挑战和机遇？公司如何服务国内统一大市场？"
+        }
+      ],
+      "model_text_and_modality_unchanged": true
+    },
+    {
+      "claim_id": "t1-2",
+      "text": "2025年度公司境内收入约8.19亿元，占比约22%，较2024年度有所提升。",
+      "modality": "actual",
+      "machine_needs_review": false,
+      "assessment": "年度、境内收入约8.19亿元、占比约22%及同比方向均保留，金额/占比没有混换。",
+      "status": "NO_ADDITIONAL_ISSUE_IN_SCOPE",
+      "finding_id": null,
+      "support": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:9eff140488704704348de7188fb027201325c1fcfefbd9083eadd6a241490484",
+          "locator": "loc:v1/page:1/table:0/row:6/column:1/chars:57-143",
+          "text": "答：您好，公司积极开发国内市场，持续完善国内市场战略布局，提\n高公司的抗风险能力，2025 年度公司境内收入约8.19 亿元，占比约22%，\n较比 2024 年度有所提升。"
+        }
+      ],
+      "context": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:27d4283d845ae0477e183af35c8e2103569b77365652f313250b7c64b2b01d25",
+          "source_role": "company_filing",
+          "text": "投资者关系活动类别 | □特定对象调研 □分析师会议\n□媒体采访 □业绩说明会\n□新闻发布会 □路演活动\n□现场参观\n☑其他 2026 年山东辖区上市公司投资者网上集体接待日活动"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:c693558ed1a732901d27bf44e29b3790b77680d870fce141d9511c3bbbb8a169",
+          "source_role": "investor_question",
+          "text": "1、问：公司主要业务 80%多都在国外，目前公司在国内业务开拓面\n临哪些挑战和机遇？公司如何服务国内统一大市场？"
+        }
+      ],
+      "model_text_and_modality_unchanged": true
+    },
+    {
+      "claim_id": "t2-1",
+      "text": "根据相应新闻报道，所述情况涉及九目化学客户三星的家电产品。",
+      "modality": "uncertain",
+      "machine_needs_review": true,
+      "assessment": "P2：三星名称可用于解析该公司，但九目化学客户这一关系只在投资者问句中出现；答复只限定新闻涉及家电产品，没有确认客户关系。uncertain/needs_review不使新增关系获得来源支持。",
+      "status": "P2",
+      "finding_id": "AP-NL1",
+      "support": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:b436b6238aba6713ec6f8320cf4e7902af80cf5f5a253f6c5f9dab3b981705f0",
+          "locator": "loc:v1/page:2/table:0/row:0/column:1/chars:69-120",
+          "text": "答：您好，根据相应新闻报道，您所描述的情况涉及该公司的家电产\n品，该事项未对九目化学经营构成重大影响。"
+        }
+      ],
+      "context": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:27d4283d845ae0477e183af35c8e2103569b77365652f313250b7c64b2b01d25",
+          "source_role": "company_filing",
+          "text": "投资者关系活动类别 | □特定对象调研 □分析师会议\n□媒体采访 □业绩说明会\n□新闻发布会 □路演活动\n□现场参观\n☑其他 2026 年山东辖区上市公司投资者网上集体接待日活动"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:8b63d3b40762ee6904d6c5e37d58a45a3d9c8667b851889299b4495e4c464b64",
+          "source_role": "investor_question",
+          "text": "2、问：三星电子退出中国市场，控股子公司九目化学第一大客户就"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:8fea8360efae264182a74c099273af328ec67654d1bbf60f44e2810187cd4f46",
+          "source_role": "investor_question",
+          "text": "是三星，请问这个公司九目的影响？九目化学目前北交所上市的进度？\n年报都披露已超过半个月了，为什么第二轮问询还没有回复，是碰到哪\n些障碍？"
+        }
+      ],
+      "model_text_and_modality_unchanged": true
+    },
+    {
+      "claim_id": "t2-2",
+      "text": "三星电子退出中国市场相关事项未对九目化学经营构成重大影响。",
+      "modality": "negation",
+      "machine_needs_review": false,
+      "assessment": "P2：独立条目把根据新闻的家电产品事项扩大为三星电子退出中国市场相关事项。未构成重大影响的否定程度保留，但适用事件范围和报道限定丢失；不可借上一条补足。",
+      "status": "P2",
+      "finding_id": "AP-NL2",
+      "support": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:b436b6238aba6713ec6f8320cf4e7902af80cf5f5a253f6c5f9dab3b981705f0",
+          "locator": "loc:v1/page:2/table:0/row:0/column:1/chars:69-120",
+          "text": "答：您好，根据相应新闻报道，您所描述的情况涉及该公司的家电产\n品，该事项未对九目化学经营构成重大影响。"
+        }
+      ],
+      "context": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:27d4283d845ae0477e183af35c8e2103569b77365652f313250b7c64b2b01d25",
+          "source_role": "company_filing",
+          "text": "投资者关系活动类别 | □特定对象调研 □分析师会议\n□媒体采访 □业绩说明会\n□新闻发布会 □路演活动\n□现场参观\n☑其他 2026 年山东辖区上市公司投资者网上集体接待日活动"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:8b63d3b40762ee6904d6c5e37d58a45a3d9c8667b851889299b4495e4c464b64",
+          "source_role": "investor_question",
+          "text": "2、问：三星电子退出中国市场，控股子公司九目化学第一大客户就"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:8fea8360efae264182a74c099273af328ec67654d1bbf60f44e2810187cd4f46",
+          "source_role": "investor_question",
+          "text": "是三星，请问这个公司九目的影响？九目化学目前北交所上市的进度？\n年报都披露已超过半个月了，为什么第二轮问询还没有回复，是碰到哪\n些障碍？"
+        }
+      ],
+      "model_text_and_modality_unchanged": true
+    },
+    {
+      "claim_id": "t3-1",
+      "text": "九目化学主要产品为OLED升华前材料。",
+      "modality": "actual",
+      "machine_needs_review": false,
+      "assessment": "主体是九目化学，主要产品OLED升华前材料准确，没有变成发行人新投产事件。",
+      "status": "NO_ADDITIONAL_ISSUE_IN_SCOPE",
+      "finding_id": null,
+      "support": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:6f86a0041396bcb67b69493f4032dc2f862d318d8f98f97a195bd5f26e036a4d",
+          "locator": "loc:v1/page:2/table:0/row:0/column:1/chars:120-222",
+          "text": "九目化学主要产品为 OLED\n升华前材料，下游客户为国内外OLED 成品材料企业，OLED 成品材料生产\n企业下游主要为 OLED 显示面板生产企业，OLED 显示面板生产企业下游为\n各类显示屏应用企业。"
+        }
+      ],
+      "context": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:27d4283d845ae0477e183af35c8e2103569b77365652f313250b7c64b2b01d25",
+          "source_role": "company_filing",
+          "text": "投资者关系活动类别 | □特定对象调研 □分析师会议\n□媒体采访 □业绩说明会\n□新闻发布会 □路演活动\n□现场参观\n☑其他 2026 年山东辖区上市公司投资者网上集体接待日活动"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:8b63d3b40762ee6904d6c5e37d58a45a3d9c8667b851889299b4495e4c464b64",
+          "source_role": "investor_question",
+          "text": "2、问：三星电子退出中国市场，控股子公司九目化学第一大客户就"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:8fea8360efae264182a74c099273af328ec67654d1bbf60f44e2810187cd4f46",
+          "source_role": "investor_question",
+          "text": "是三星，请问这个公司九目的影响？九目化学目前北交所上市的进度？\n年报都披露已超过半个月了，为什么第二轮问询还没有回复，是碰到哪\n些障碍？"
+        }
+      ],
+      "model_text_and_modality_unchanged": true
+    },
+    {
+      "claim_id": "t3-2",
+      "text": "九目化学下游客户为国内外OLED成品材料企业，OLED成品材料生产企业下游为OLED显示面板生产企业，面板企业下游为各类显示屏应用企业。",
+      "modality": "actual",
+      "machine_needs_review": false,
+      "assessment": "P3：客户→成品材料企业→面板企业→显示应用企业链条层级正确；原文第二级下游主要为的主要被省略，范围表述略变强。未判断其排他性必然成立。",
+      "status": "P3",
+      "finding_id": "AP-NL5",
+      "support": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:6f86a0041396bcb67b69493f4032dc2f862d318d8f98f97a195bd5f26e036a4d",
+          "locator": "loc:v1/page:2/table:0/row:0/column:1/chars:120-222",
+          "text": "九目化学主要产品为 OLED\n升华前材料，下游客户为国内外OLED 成品材料企业，OLED 成品材料生产\n企业下游主要为 OLED 显示面板生产企业，OLED 显示面板生产企业下游为\n各类显示屏应用企业。"
+        }
+      ],
+      "context": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:27d4283d845ae0477e183af35c8e2103569b77365652f313250b7c64b2b01d25",
+          "source_role": "company_filing",
+          "text": "投资者关系活动类别 | □特定对象调研 □分析师会议\n□媒体采访 □业绩说明会\n□新闻发布会 □路演活动\n□现场参观\n☑其他 2026 年山东辖区上市公司投资者网上集体接待日活动"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:8b63d3b40762ee6904d6c5e37d58a45a3d9c8667b851889299b4495e4c464b64",
+          "source_role": "investor_question",
+          "text": "2、问：三星电子退出中国市场，控股子公司九目化学第一大客户就"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:8fea8360efae264182a74c099273af328ec67654d1bbf60f44e2810187cd4f46",
+          "source_role": "investor_question",
+          "text": "是三星，请问这个公司九目的影响？九目化学目前北交所上市的进度？\n年报都披露已超过半个月了，为什么第二轮问询还没有回复，是碰到哪\n些障碍？"
+        }
+      ],
+      "model_text_and_modality_unchanged": true
+    },
+    {
+      "claim_id": "t4-1",
+      "text": "九目化学已于3月11日收到北交所第二轮审核问询函。",
+      "modality": "actual",
+      "machine_needs_review": false,
+      "assessment": "已收到第二轮问询，3月11日/北交所准确；没有把收到问询写成审核通过。",
+      "status": "NO_ADDITIONAL_ISSUE_IN_SCOPE",
+      "finding_id": null,
+      "support": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:d19dc6627ef1c7d54806979bdf5983a89920e768163adef67275f9d5adfe2a11",
+          "locator": "loc:v1/page:2/table:0/row:0/column:1/chars:222-308",
+          "text": "九目化学已于 3 月11 日收到北交所第二轮审核问\n询函，因前期报送的财务数据有效期已过，九目化学申请了中止审核，待\n财务数据按要求完成更新后，将申请恢复审核，并回复问询。"
+        }
+      ],
+      "context": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:27d4283d845ae0477e183af35c8e2103569b77365652f313250b7c64b2b01d25",
+          "source_role": "company_filing",
+          "text": "投资者关系活动类别 | □特定对象调研 □分析师会议\n□媒体采访 □业绩说明会\n□新闻发布会 □路演活动\n□现场参观\n☑其他 2026 年山东辖区上市公司投资者网上集体接待日活动"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:8b63d3b40762ee6904d6c5e37d58a45a3d9c8667b851889299b4495e4c464b64",
+          "source_role": "investor_question",
+          "text": "2、问：三星电子退出中国市场，控股子公司九目化学第一大客户就"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:8fea8360efae264182a74c099273af328ec67654d1bbf60f44e2810187cd4f46",
+          "source_role": "investor_question",
+          "text": "是三星，请问这个公司九目的影响？九目化学目前北交所上市的进度？\n年报都披露已超过半个月了，为什么第二轮问询还没有回复，是碰到哪\n些障碍？"
+        }
+      ],
+      "model_text_and_modality_unchanged": true
+    },
+    {
+      "claim_id": "t4-2",
+      "text": "因前期报送的财务数据有效期已过，九目化学申请了中止北交所审核。",
+      "modality": "actual",
+      "machine_needs_review": false,
+      "assessment": "财务数据有效期已过导致申请中止审核准确；没有把申请写成监管决定或终止上市。",
+      "status": "NO_ADDITIONAL_ISSUE_IN_SCOPE",
+      "finding_id": null,
+      "support": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:d19dc6627ef1c7d54806979bdf5983a89920e768163adef67275f9d5adfe2a11",
+          "locator": "loc:v1/page:2/table:0/row:0/column:1/chars:222-308",
+          "text": "九目化学已于 3 月11 日收到北交所第二轮审核问\n询函，因前期报送的财务数据有效期已过，九目化学申请了中止审核，待\n财务数据按要求完成更新后，将申请恢复审核，并回复问询。"
+        }
+      ],
+      "context": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:27d4283d845ae0477e183af35c8e2103569b77365652f313250b7c64b2b01d25",
+          "source_role": "company_filing",
+          "text": "投资者关系活动类别 | □特定对象调研 □分析师会议\n□媒体采访 □业绩说明会\n□新闻发布会 □路演活动\n□现场参观\n☑其他 2026 年山东辖区上市公司投资者网上集体接待日活动"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:8b63d3b40762ee6904d6c5e37d58a45a3d9c8667b851889299b4495e4c464b64",
+          "source_role": "investor_question",
+          "text": "2、问：三星电子退出中国市场，控股子公司九目化学第一大客户就"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:8fea8360efae264182a74c099273af328ec67654d1bbf60f44e2810187cd4f46",
+          "source_role": "investor_question",
+          "text": "是三星，请问这个公司九目的影响？九目化学目前北交所上市的进度？\n年报都披露已超过半个月了，为什么第二轮问询还没有回复，是碰到哪\n些障碍？"
+        }
+      ],
+      "model_text_and_modality_unchanged": true
+    },
+    {
+      "claim_id": "t4-3",
+      "text": "待财务数据按要求完成更新后，九目化学将申请恢复北交所审核，并回复问询。",
+      "modality": "planned",
+      "machine_needs_review": false,
+      "assessment": "待完成更新后将申请恢复并回复，条件及未来动作均保留；未断言已恢复。",
+      "status": "NO_ADDITIONAL_ISSUE_IN_SCOPE",
+      "finding_id": null,
+      "support": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:d19dc6627ef1c7d54806979bdf5983a89920e768163adef67275f9d5adfe2a11",
+          "locator": "loc:v1/page:2/table:0/row:0/column:1/chars:222-308",
+          "text": "九目化学已于 3 月11 日收到北交所第二轮审核问\n询函，因前期报送的财务数据有效期已过，九目化学申请了中止审核，待\n财务数据按要求完成更新后，将申请恢复审核，并回复问询。"
+        }
+      ],
+      "context": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:27d4283d845ae0477e183af35c8e2103569b77365652f313250b7c64b2b01d25",
+          "source_role": "company_filing",
+          "text": "投资者关系活动类别 | □特定对象调研 □分析师会议\n□媒体采访 □业绩说明会\n□新闻发布会 □路演活动\n□现场参观\n☑其他 2026 年山东辖区上市公司投资者网上集体接待日活动"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:8b63d3b40762ee6904d6c5e37d58a45a3d9c8667b851889299b4495e4c464b64",
+          "source_role": "investor_question",
+          "text": "2、问：三星电子退出中国市场，控股子公司九目化学第一大客户就"
+        },
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:8fea8360efae264182a74c099273af328ec67654d1bbf60f44e2810187cd4f46",
+          "source_role": "investor_question",
+          "text": "是三星，请问这个公司九目的影响？九目化学目前北交所上市的进度？\n年报都披露已超过半个月了，为什么第二轮问询还没有回复，是碰到哪\n些障碍？"
+        }
+      ],
+      "model_text_and_modality_unchanged": true
+    },
+    {
+      "claim_id": "t5-1",
+      "text": "公司2024年度影响收入的主要原因为沸石系列环保材料业务及部分医药业务下游需求减少。",
+      "modality": "actual",
+      "machine_needs_review": false,
+      "assessment": "2024年度、主要原因、沸石系列环保材料及部分医药下游需求减少均准确。",
+      "status": "NO_ADDITIONAL_ISSUE_IN_SCOPE",
+      "finding_id": null,
+      "support": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:2de93d6d9c9dd480988fe091a007c5edca50466373623d550fa4de5e03945529",
+          "locator": "loc:v1/page:2/table:0/row:0/column:1/chars:412-489",
+          "text": "公司 2024 年度影响收入的主要原因为沸石系列环保材料\n业务及部分医药业务下游需求减少，公司 2025 年度沸石分子筛产品收入\n略低于 2024 年度。"
+        }
+      ],
+      "context": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:5f3031be56c17df63110a52c6f7f2d287e7a43c6d7f47843df79d0dd6206fa6c",
+          "source_role": "investor_question",
+          "text": "3、问：公司业绩在 23 年度达到历史新高后，24 年度断崖式下降，\n25 年仍未有明显起色，主要是因为沸石原因么？公司有什么举措尽快恢\n复乃至超过 23 年度的经营业绩？"
+        }
+      ],
+      "model_text_and_modality_unchanged": true
+    },
+    {
+      "claim_id": "t5-2",
+      "text": "公司2025年度沸石分子筛产品收入略低于2024年度。",
+      "modality": "actual",
+      "machine_needs_review": false,
+      "assessment": "2025对2024、沸石分子筛产品收入略低保留；未改为大幅下降或公司全部收入。",
+      "status": "NO_ADDITIONAL_ISSUE_IN_SCOPE",
+      "finding_id": null,
+      "support": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:2de93d6d9c9dd480988fe091a007c5edca50466373623d550fa4de5e03945529",
+          "locator": "loc:v1/page:2/table:0/row:0/column:1/chars:412-489",
+          "text": "公司 2024 年度影响收入的主要原因为沸石系列环保材料\n业务及部分医药业务下游需求减少，公司 2025 年度沸石分子筛产品收入\n略低于 2024 年度。"
+        }
+      ],
+      "context": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:5f3031be56c17df63110a52c6f7f2d287e7a43c6d7f47843df79d0dd6206fa6c",
+          "source_role": "investor_question",
+          "text": "3、问：公司业绩在 23 年度达到历史新高后，24 年度断崖式下降，\n25 年仍未有明显起色，主要是因为沸石原因么？公司有什么举措尽快恢\n复乃至超过 23 年度的经营业绩？"
+        }
+      ],
+      "model_text_and_modality_unchanged": true
+    },
+    {
+      "claim_id": "t6-1",
+      "text": "公司现无生产VC（碳酸亚乙烯酯）的情况。",
+      "modality": "negation",
+      "machine_needs_review": false,
+      "assessment": "现无VC生产的否定、产品括号名称准确；不等同无相关研发或未来永不生产。",
+      "status": "NO_ADDITIONAL_ISSUE_IN_SCOPE",
+      "finding_id": null,
+      "support": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:35d9b362bb2496cd504e4f235d2a969b2f906e77761916b15f556a3bbb9c5fcf",
+          "locator": "loc:v1/page:3/table:0/row:0/column:1/chars:336-409",
+          "text": "答：您好，公司现无生产 VC（碳酸亚乙烯酯）的情况，根据公司控\n股股东中国节能信息，中国节能与宁德时代已经建立了联系，并希望建立\n业务协同与合作。"
+        }
+      ],
+      "context": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:a5f5fa88d28bd69848d73859eb2564c7d6b9ea22ed99f4f65d139f4418c2c3c8",
+          "source_role": "investor_question",
+          "text": "5、问：控股股东在支持上市公司层面，具体做了哪些工作？有没有\n能推动与宁德时代等行业龙头达成电池电解液添加剂VC 的带量采购等具\n体业务，推动上市公司快速做大做强？"
+        }
+      ],
+      "model_text_and_modality_unchanged": true
+    },
+    {
+      "claim_id": "t6-2",
+      "text": "根据公司控股股东中国节能的信息，中国节能与宁德时代已经建立了联系。",
+      "modality": "actual",
+      "machine_needs_review": false,
+      "assessment": "根据控股股东信息、主体中国节能、联系对象宁德时代、已经联系均保留；没有发行人签约/订单。",
+      "status": "NO_ADDITIONAL_ISSUE_IN_SCOPE",
+      "finding_id": null,
+      "support": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:35d9b362bb2496cd504e4f235d2a969b2f906e77761916b15f556a3bbb9c5fcf",
+          "locator": "loc:v1/page:3/table:0/row:0/column:1/chars:336-409",
+          "text": "答：您好，公司现无生产 VC（碳酸亚乙烯酯）的情况，根据公司控\n股股东中国节能信息，中国节能与宁德时代已经建立了联系，并希望建立\n业务协同与合作。"
+        }
+      ],
+      "context": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:a5f5fa88d28bd69848d73859eb2564c7d6b9ea22ed99f4f65d139f4418c2c3c8",
+          "source_role": "investor_question",
+          "text": "5、问：控股股东在支持上市公司层面，具体做了哪些工作？有没有\n能推动与宁德时代等行业龙头达成电池电解液添加剂VC 的带量采购等具\n体业务，推动上市公司快速做大做强？"
+        }
+      ],
+      "model_text_and_modality_unchanged": true
+    },
+    {
+      "claim_id": "t6-3",
+      "text": "中国节能希望建立与宁德时代的业务协同与合作。",
+      "modality": "planned",
+      "machine_needs_review": true,
+      "assessment": "P2：补回宁德时代使愿望对象清楚，planned仍是愿望；独立条目未保留根据控股股东信息的报告来源，1.1已flag但正文问题仍在。",
+      "status": "P2",
+      "finding_id": "AP-NL3",
+      "support": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:35d9b362bb2496cd504e4f235d2a969b2f906e77761916b15f556a3bbb9c5fcf",
+          "locator": "loc:v1/page:3/table:0/row:0/column:1/chars:336-409",
+          "text": "答：您好，公司现无生产 VC（碳酸亚乙烯酯）的情况，根据公司控\n股股东中国节能信息，中国节能与宁德时代已经建立了联系，并希望建立\n业务协同与合作。"
+        }
+      ],
+      "context": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:a5f5fa88d28bd69848d73859eb2564c7d6b9ea22ed99f4f65d139f4418c2c3c8",
+          "source_role": "investor_question",
+          "text": "5、问：控股股东在支持上市公司层面，具体做了哪些工作？有没有\n能推动与宁德时代等行业龙头达成电池电解液添加剂VC 的带量采购等具\n体业务，推动上市公司快速做大做强？"
+        }
+      ],
+      "model_text_and_modality_unchanged": true
+    },
+    {
+      "claim_id": "t7-1",
+      "text": "公司在半导体制造材料领域已销售的产品主要为光刻胶单体、树脂、光酸以及半导体制程中清洗剂添加材料等。",
+      "modality": "actual",
+      "machine_needs_review": false,
+      "assessment": "已销售产品名录及主要/等保留；没有把光刻胶单体/树脂/光酸替换成全部成品光刻胶。",
+      "status": "NO_ADDITIONAL_ISSUE_IN_SCOPE",
+      "finding_id": null,
+      "support": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:df16a6f002508cf66b1d4425a4b94c51e2fc2c1bd46cf93c247158860ec9fdb3",
+          "locator": "loc:v1/page:5/table:0/row:0/column:1/chars:464-554",
+          "text": "目前公司在半导体制造材料领域已销售的产品主要为光刻\n胶单体、树脂、光酸以及半导体制程中清洗剂添加材料等，现已开发了超\n300 种化合物，在所涉足的产品方面技术已经处于国内领先水平。"
+        }
+      ],
+      "context": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:fe6376f23f7df04805045fd0633c4fcee77cc85f06ed67c8b79aa2f8c84f3536",
+          "source_role": "investor_question",
+          "text": "13、问：公司预计半导体制造等相关材料，何时能为公司贡献 10 以\n上收益？"
+        }
+      ],
+      "model_text_and_modality_unchanged": true
+    },
+    {
+      "claim_id": "t7-2",
+      "text": "公司现已开发超300种半导体制造材料领域化合物。",
+      "modality": "actual",
+      "machine_needs_review": false,
+      "assessment": "已开发超300种、种为化合物数量、半导体材料上下文准确；没有宣称300种均已销售/量产。",
+      "status": "NO_ADDITIONAL_ISSUE_IN_SCOPE",
+      "finding_id": null,
+      "support": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:df16a6f002508cf66b1d4425a4b94c51e2fc2c1bd46cf93c247158860ec9fdb3",
+          "locator": "loc:v1/page:5/table:0/row:0/column:1/chars:464-554",
+          "text": "目前公司在半导体制造材料领域已销售的产品主要为光刻\n胶单体、树脂、光酸以及半导体制程中清洗剂添加材料等，现已开发了超\n300 种化合物，在所涉足的产品方面技术已经处于国内领先水平。"
+        }
+      ],
+      "context": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:fe6376f23f7df04805045fd0633c4fcee77cc85f06ed67c8b79aa2f8c84f3536",
+          "source_role": "investor_question",
+          "text": "13、问：公司预计半导体制造等相关材料，何时能为公司贡献 10 以\n上收益？"
+        }
+      ],
+      "model_text_and_modality_unchanged": true
+    },
+    {
+      "claim_id": "t7-3",
+      "text": "在所涉足的产品方面，公司技术已处于国内领先水平。",
+      "modality": "actual",
+      "machine_needs_review": false,
+      "assessment": "所涉足产品方面的国内领先为公司自身陈述，摘要忠实保留该范围；不是本审查验证了外部技术排名。",
+      "status": "NO_ADDITIONAL_ISSUE_IN_SCOPE",
+      "finding_id": null,
+      "support": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:df16a6f002508cf66b1d4425a4b94c51e2fc2c1bd46cf93c247158860ec9fdb3",
+          "locator": "loc:v1/page:5/table:0/row:0/column:1/chars:464-554",
+          "text": "目前公司在半导体制造材料领域已销售的产品主要为光刻\n胶单体、树脂、光酸以及半导体制程中清洗剂添加材料等，现已开发了超\n300 种化合物，在所涉足的产品方面技术已经处于国内领先水平。"
+        }
+      ],
+      "context": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:fe6376f23f7df04805045fd0633c4fcee77cc85f06ed67c8b79aa2f8c84f3536",
+          "source_role": "investor_question",
+          "text": "13、问：公司预计半导体制造等相关材料，何时能为公司贡献 10 以\n上收益？"
+        }
+      ],
+      "model_text_and_modality_unchanged": true
+    },
+    {
+      "claim_id": "t8-1",
+      "text": "2025年公司启动了万润工业园二期C05建设项目。",
+      "modality": "actual",
+      "machine_needs_review": false,
+      "assessment": "2025启动C05建设项目准确，actual是启动行为，不是项目建成投产。",
+      "status": "NO_ADDITIONAL_ISSUE_IN_SCOPE",
+      "finding_id": null,
+      "support": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:215bf09ec23969301d270ae22317bc3802a1550335736eb54fee678125516104",
+          "locator": "loc:v1/page:5/table:0/row:0/column:1/chars:554-668",
+          "text": "公司结\n合实际情况与下游客户需求，在新产能方面积极布局，2025 年公司启动\n了万润工业园二期 C05 建设项目，该项目包含半导体光刻胶用相关材料产\n能约 751 吨/年，项目建成后将为公司半导体制造材料业务发展提供产能\n保障。"
+        }
+      ],
+      "context": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:fe6376f23f7df04805045fd0633c4fcee77cc85f06ed67c8b79aa2f8c84f3536",
+          "source_role": "investor_question",
+          "text": "13、问：公司预计半导体制造等相关材料，何时能为公司贡献 10 以\n上收益？"
+        }
+      ],
+      "model_text_and_modality_unchanged": true
+    },
+    {
+      "claim_id": "t8-2",
+      "text": "万润工业园二期C05建设项目包含半导体光刻胶用相关材料产能约751吨/年，该产能为项目设计口径，以项目建成投产为条件。",
+      "modality": "planned",
+      "machine_needs_review": false,
+      "assessment": "P2：约751吨/年、项目身份及planned方向保留；项目设计口径和建成投产是未标注的解释性新增，原文只说项目包含该产能、建成后保障。没有说已建成/已投产，但不能归为原始披露条件。",
+      "status": "P2",
+      "finding_id": "AP-NL4",
+      "support": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:215bf09ec23969301d270ae22317bc3802a1550335736eb54fee678125516104",
+          "locator": "loc:v1/page:5/table:0/row:0/column:1/chars:554-668",
+          "text": "公司结\n合实际情况与下游客户需求，在新产能方面积极布局，2025 年公司启动\n了万润工业园二期 C05 建设项目，该项目包含半导体光刻胶用相关材料产\n能约 751 吨/年，项目建成后将为公司半导体制造材料业务发展提供产能\n保障。"
+        }
+      ],
+      "context": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:fe6376f23f7df04805045fd0633c4fcee77cc85f06ed67c8b79aa2f8c84f3536",
+          "source_role": "investor_question",
+          "text": "13、问：公司预计半导体制造等相关材料，何时能为公司贡献 10 以\n上收益？"
+        }
+      ],
+      "model_text_and_modality_unchanged": true
+    },
+    {
+      "claim_id": "t8-3",
+      "text": "项目建成后将为公司半导体制造材料业务发展提供产能保障。",
+      "modality": "planned",
+      "machine_needs_review": false,
+      "assessment": "P3：建成后将提供产能保障的条件未来及内容准确；但独立条目仅称项目，没有重述C05名称，仍依赖前条或完整support消歧，不符合/7独立选择承诺。",
+      "status": "P3",
+      "finding_id": "AP-NL6",
+      "support": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:215bf09ec23969301d270ae22317bc3802a1550335736eb54fee678125516104",
+          "locator": "loc:v1/page:5/table:0/row:0/column:1/chars:554-668",
+          "text": "公司结\n合实际情况与下游客户需求，在新产能方面积极布局，2025 年公司启动\n了万润工业园二期 C05 建设项目，该项目包含半导体光刻胶用相关材料产\n能约 751 吨/年，项目建成后将为公司半导体制造材料业务发展提供产能\n保障。"
+        }
+      ],
+      "context": [
+        {
+          "span_id": "urn:company-wiki:evidence-span:sha256:fe6376f23f7df04805045fd0633c4fcee77cc85f06ed67c8b79aa2f8c84f3536",
+          "source_role": "investor_question",
+          "text": "13、问：公司预计半导体制造等相关材料，何时能为公司贡献 10 以\n上收益？"
+        }
+      ],
+      "model_text_and_modality_unchanged": true
+    }
+  ],
+  "gold": [
+    {
+      "gold_id": "domestic-market-share",
+      "task_key": "t1",
+      "claim_ids": [
+        "t1-1",
+        "t1-2"
+      ],
+      "main_business_fact_present": true,
+      "faithfulness_status": "PASS_IN_SCOPE",
+      "findings": [],
+      "gold_is_source_checkpoint_not_semantic_approval": true
+    },
+    {
+      "gold_id": "reported-material-impact",
+      "task_key": "t2",
+      "claim_ids": [
+        "t2-1",
+        "t2-2"
+      ],
+      "main_business_fact_present": true,
+      "faithfulness_status": "P2_SCOPE_ATTRIBUTION_RELATION",
+      "findings": [
+        "AP-NL1",
+        "AP-NL2"
+      ],
+      "gold_is_source_checkpoint_not_semantic_approval": true
+    },
+    {
+      "gold_id": "subsidiary-customer-chain",
+      "task_key": "t3",
+      "claim_ids": [
+        "t3-1",
+        "t3-2"
+      ],
+      "main_business_fact_present": true,
+      "faithfulness_status": "P3_MINOR_QUALIFIER",
+      "findings": [
+        "AP-NL5"
+      ],
+      "gold_is_source_checkpoint_not_semantic_approval": true
+    },
+    {
+      "gold_id": "listing-process-conditions",
+      "task_key": "t4",
+      "claim_ids": [
+        "t4-1",
+        "t4-2",
+        "t4-3"
+      ],
+      "main_business_fact_present": true,
+      "faithfulness_status": "PASS_IN_SCOPE",
+      "findings": [],
+      "gold_is_source_checkpoint_not_semantic_approval": true
+    },
+    {
+      "gold_id": "demand-cause",
+      "task_key": "t5",
+      "claim_ids": [
+        "t5-1",
+        "t5-2"
+      ],
+      "main_business_fact_present": true,
+      "faithfulness_status": "PASS_IN_SCOPE",
+      "findings": [],
+      "gold_is_source_checkpoint_not_semantic_approval": true
+    },
+    {
+      "gold_id": "vc-denial-contact-and-hope",
+      "task_key": "t6",
+      "claim_ids": [
+        "t6-1",
+        "t6-2",
+        "t6-3"
+      ],
+      "main_business_fact_present": true,
+      "faithfulness_status": "P2_INHERITED_REPORTING",
+      "findings": [
+        "AP-NL3"
+      ],
+      "gold_is_source_checkpoint_not_semantic_approval": true
+    },
+    {
+      "gold_id": "sold-roster-developed-compounds",
+      "task_key": "t7",
+      "claim_ids": [
+        "t7-1",
+        "t7-2",
+        "t7-3"
+      ],
+      "main_business_fact_present": true,
+      "faithfulness_status": "PASS_IN_SCOPE",
+      "findings": [],
+      "gold_is_source_checkpoint_not_semantic_approval": true
+    },
+    {
+      "gold_id": "capacity-plan",
+      "task_key": "t8",
+      "claim_ids": [
+        "t8-1",
+        "t8-2",
+        "t8-3"
+      ],
+      "main_business_fact_present": true,
+      "faithfulness_status": "P2_INTERPRETIVE_ADDITION",
+      "findings": [
+        "AP-NL4",
+        "AP-NL6"
+      ],
+      "gold_is_source_checkpoint_not_semantic_approval": true
+    }
+  ],
+  "systemic_recommendations": [
+    "Primary source quotation with visible separate question/context avoids fact injection through paraphrased antecedents.",
+    "Keep generative wording optional and labeled; explicit support IDs are not an entailment proof.",
+    "Preserve inherited reporting per independent output or keep the original complete support paragraph.",
+    "Represent inferred project capacity stage as diagnostic metadata; do not rewrite explanatory design/commissioning terms as source quotations."
+  ],
+  "process_separate_from_semantics": {
+    "native_model_posts": 1,
+    "native_tokens": 7298,
+    "native_proxy_micro_usd": 1340,
+    "activation_recovery": "captured PASS",
+    "original_run_overall": "FAIL at wrong consumer identity request; original FAIL preserved",
+    "original_AUTO_ledger_restored": false,
+    "same_cross_recovery_signed": false,
+    "consumer_pass_signed_here": false
+  },
+  "new_model_posts": 0,
+  "downloads": 0,
+  "pdf_parses": 0,
+  "product_edits": 0,
+  "gold_edits": 0,
+  "recorded_text_edits": 0
+}

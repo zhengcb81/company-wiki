@@ -1,0 +1,16 @@
+{
+  "status": "PASS_DERIVED_CACHE_RESTORATION_NOT_ORIGINAL_AUTO_HISTORY",
+  "model_posts": 0,
+  "charged_tokens": 0,
+  "same_run_zero_POST": true,
+  "cross_run_zero_POST": true,
+  "source_and_config_unchanged": true,
+  "mother_ledger_unchanged": true,
+  "owned_lake_removed": true,
+  "raw_copies": 0,
+  "source_selection_mode": "exact_source_version_NOT_EVALUATED_no_historical_filing_qualification",
+  "artifact_sha256": "216827368a284843c661e6b00c722e659e11e0838b1bae6dcc0aaf5c6d725311",
+  "generation_sha256": "d929ea90aa03988cbdda27122f1fbcbf4aaefb28af2be62762d6967280af3fa4",
+  "semantic_review": "OPEN",
+  "RF_actual_forecast_adoption": "OPEN"
+}

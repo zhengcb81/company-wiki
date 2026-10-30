@@ -1,0 +1,16 @@
+{
+  "status": "PASS",
+  "scope": "two fresh physical installation imports, not real forecast adoption",
+  "rows": [
+    {
+      "status": "PASS_installed_fresh_import",
+      "target": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+      "summary_schema": "revenue-summary-use/1"
+    },
+    {
+      "status": "PASS_installed_fresh_import",
+      "target": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast",
+      "summary_schema": "revenue-summary-use/1"
+    }
+  ]
+}

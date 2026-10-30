@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\company-wiki\.planning\summary-quality-20261030\atomic-real-recovery\run_restored_cache.py", line 74, in <module>
+    assert code == 0, stderr
+           ^^^^^^^^^
+AssertionError: b'{"reason":"source_publication_unknown","schema_version":"narrative-read-receipt/1","status":"blocked"}\n'

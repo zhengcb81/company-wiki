@@ -8,12 +8,146 @@ import http.client
 import json
 import os
 from pathlib import Path
+import re
 import socket
 import sys
+import tempfile
 from urllib.parse import urlsplit
 
 INSTALLED = False
 _pending: dict | None = None
+
+PREPARED_PAYLOAD_MAX_BYTES = 2 * 1024 * 1024
+CHECKPOINT_METADATA_MAX_BYTES = 512 * 1024
+
+
+def _checkpoint_name(run_id: str, suffix: str) -> str:
+    if not isinstance(run_id, str) or re.fullmatch(r'[A-Za-z0-9_-]{1,128}', run_id) is None:
+        raise ValueError('OBSERVED_CHECKPOINT_PATH_INVALID')
+    return run_id + suffix
+
+
+def _checkpoint_read(path: Path, limit: int) -> bytes:
+    if path.is_symlink():
+        raise ValueError('OBSERVED_CHECKPOINT_PATH_INVALID')
+    try:
+        with gzip.open(path, 'rb') as stream:
+            body = stream.read(limit + 1)
+    except (OSError, EOFError) as exc:
+        raise ValueError('OBSERVED_CHECKPOINT_CORRUPT') from exc
+    if len(body) > limit:
+        raise ValueError('OBSERVED_CHECKPOINT_BOUND_EXCEEDED')
+    return body
+
+
+def _capture_checkpoint(body: bytes, directory: Path, name: str, limit: int) -> dict:
+    if type(limit) is not int or limit < 1 or len(body) > limit:
+        raise ValueError('OBSERVED_CHECKPOINT_BOUND_EXCEEDED')
+    directory = directory.resolve(strict=True)
+    path = directory / name
+    if path.parent.resolve() != directory or path.is_symlink():
+        raise ValueError('OBSERVED_CHECKPOINT_PATH_INVALID')
+
+    def compare():
+        if _checkpoint_read(path, limit) != body:
+            raise ValueError('OBSERVED_CHECKPOINT_CHANGED')
+
+    if path.exists():
+        compare()
+    else:
+        # Publish only complete gzip bytes. Linking is atomic/no-overwrite;
+        # another process may win, but it must have recorded identical bytes.
+        temporary = None
+        try:
+            with tempfile.NamedTemporaryFile(dir=directory, prefix='.checkpoint-', delete=False) as stream:
+                temporary = Path(stream.name)
+                stream.write(gzip.compress(body, mtime=0))
+                stream.flush()
+                os.fsync(stream.fileno())
+            try:
+                os.link(temporary, path)
+            except FileExistsError:
+                compare()
+        finally:
+            if temporary is not None:
+                temporary.unlink(missing_ok=True)
+    return {'file': name, 'sha256': hashlib.sha256(body).hexdigest(), 'bytes': len(body)}
+
+
+def capture_generation_checkpoint(generation, directory: Path, run_id: str) -> dict:
+    from company_wiki.automation.models import canonical_json
+
+    return _capture_checkpoint(canonical_json(generation).encode(), directory,
+        _checkpoint_name(run_id, '.generation.json.gz'), CHECKPOINT_METADATA_MAX_BYTES)
+
+
+def capture_prepared_checkpoint(draft, payload: bytes, version, config: dict) -> dict:
+    """Record exact owner-prepared bytes, never an activation/acceptance claim."""
+    from dataclasses import asdict
+    from company_wiki.automation.models import canonical_json
+
+    limit = config.get('prepared_payload_max_bytes', PREPARED_PAYLOAD_MAX_BYTES)
+    if type(limit) is not int or not 0 < limit <= PREPARED_PAYLOAD_MAX_BYTES or len(payload) > limit:
+        raise ValueError('OBSERVED_PREPARED_PAYLOAD_BOUND_EXCEEDED')
+    if (draft.source_sha256 != config['source_sha256']
+            or hashlib.sha256(payload).hexdigest() != version.content_sha256
+            or len(payload) != version.byte_size):
+        raise ValueError('OBSERVED_PREPARED_PAYLOAD_BINDING_DIFFERS')
+    prepared_draft = asdict(draft)
+    for key, value in prepared_draft.items():
+        if key != 'created_at' and getattr(version, key) != value:
+            raise ValueError('OBSERVED_PREPARED_DRAFT_BINDING_DIFFERS')
+    # prepare() may reuse a durable record while a retry supplies a fresh
+    # timestamp. Preserve the owner's original persisted creation time.
+    prepared_draft['created_at'] = version.created_at
+    directory = Path(config['materials']).resolve(strict=True)
+    run_id = config['activation_run_id']
+    suffix = '.' + hashlib.sha256(draft.effect_id.encode()).hexdigest() + '.prepared'
+    payload_name = _checkpoint_name(run_id, suffix + '.bundle.json.gz')
+    capsule_name = _checkpoint_name(run_id, suffix + '.capsule.json.gz')
+    generation_path = directory / _checkpoint_name(run_id, '.generation.json.gz')
+    generation_pin = None
+    if generation_path.exists():
+        generation = _checkpoint_read(generation_path, CHECKPOINT_METADATA_MAX_BYTES)
+        generation_pin = {'file': generation_path.name, 'sha256': hashlib.sha256(generation).hexdigest(),
+                          'bytes': len(generation)}
+        declared = json.loads(draft.metadata_json).get('generation_sha256')
+        if declared is not None and declared != generation_pin['sha256']:
+            raise ValueError('OBSERVED_PREPARED_GENERATION_CHANGED')
+    payload_pin = {'file': payload_name, 'sha256': version.content_sha256, 'bytes': version.byte_size}
+    capsule = {
+        'schema_version': 'phase-c-prepared-checkpoint/1',
+        'checkpoint_stage': 'prepared_not_activation_proof',
+        'run_id': run_id, 'prepared_draft': prepared_draft,
+        'artifact_version_id': version.artifact_version_id,
+        'payload': payload_pin, 'generation_checkpoint': generation_pin,
+        'generation_status': 'captured' if generation_pin else 'not_observed',
+    }
+    capsule_body = canonical_json(capsule).encode()
+    if len(capsule_body) > CHECKPOINT_METADATA_MAX_BYTES:
+        raise ValueError('OBSERVED_PREPARED_CAPSULE_BOUND_EXCEEDED')
+    # Check existing history before creating either new file.
+    for name, body, bound in ((payload_name, payload, limit),
+                              (capsule_name, capsule_body, CHECKPOINT_METADATA_MAX_BYTES)):
+        path = directory / name
+        if path.exists() and _checkpoint_read(path, bound) != body:
+            raise ValueError('OBSERVED_PREPARED_CHECKPOINT_CHANGED')
+    payload_pin = _capture_checkpoint(payload, directory, payload_name, limit)
+    capsule_pin = _capture_checkpoint(capsule_body, directory, capsule_name, CHECKPOINT_METADATA_MAX_BYTES)
+    return {'payload': payload_pin, 'capsule': capsule_pin, 'stage': 'prepared_not_activation_proof'}
+
+
+def prepared_artifact_observer(original_prepare, config: dict):
+    def prepare(store, draft, payload):
+        version = original_prepare(store, draft, payload)
+        pin = capture_prepared_checkpoint(draft, payload, version, config)
+        if config.get('events'):
+            _append(config['events'], {'event': 'artifact_prepared_checkpoint',
+                'run_id': config['activation_run_id'], 'checkpoint': pin,
+                'owner_return_status': version.status, 'activation_proven': False})
+        return version
+
+    return prepare
 
 
 def capture_selection_checkpoint(selected, directory: Path, run_id: str) -> dict:
@@ -264,6 +398,8 @@ def install() -> None:
     if not config_path:
         raise RuntimeError("PHASE_C_OBSERVER_CONFIG_MISSING")
     config = json.loads(Path(config_path).read_text(encoding="utf8"))
+    from company_wiki.source_catalog.narrative_artifact_store import NarrativeArtifactStore
+    NarrativeArtifactStore.prepare = prepared_artifact_observer(NarrativeArtifactStore.prepare, config)
     if config.get("hold_activation"):
         # Test-only post-payment boundary: the normal worker has already
         # persisted its verified output and outbox before activation is called.
@@ -388,6 +524,8 @@ def install() -> None:
         observation = gold_observation(gold, selected, envelope)
         selection_checkpoint = capture_selection_checkpoint(
             selected, Path(config['materials']), caller._run_id)
+        generation_checkpoint = (capture_generation_checkpoint(final, Path(config['materials']), caller._run_id)
+                                 if final is not None else None)
         event = {
             "event": "pre_reservation_material",
             "run_id": caller._run_id,
@@ -404,6 +542,7 @@ def install() -> None:
             else None,
             "gold": observation,
             "selection_checkpoint": selection_checkpoint,
+            "generation_checkpoint": generation_checkpoint,
             "mode": config["mode"],
         }
         _append(config["events"], event)

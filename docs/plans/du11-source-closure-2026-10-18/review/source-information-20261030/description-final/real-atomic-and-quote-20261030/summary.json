@@ -1,0 +1,45 @@
+{
+  "atomic_original_run": "FAIL_PUBLIC_READ_AFTER_PAID_GENERATION",
+  "atomic_semantic_review": "PARTIAL_4P2_2P3",
+  "atomic_paid_tokens": 7298,
+  "atomic_paid_micro_usd": 1340,
+  "atomic_restored_cache": {
+    "status": "PASS_DERIVED_CACHE_RESTORATION_NOT_ORIGINAL_AUTO_HISTORY",
+    "model_posts": 0,
+    "charged_tokens": 0,
+    "same_run_zero_POST": true,
+    "cross_run_zero_POST": true,
+    "source_and_config_unchanged": true,
+    "mother_ledger_unchanged": true,
+    "owned_lake_removed": true,
+    "raw_copies": 0,
+    "source_selection_mode": "exact_source_version_NOT_EVALUATED_no_historical_filing_qualification",
+    "artifact_sha256": "216827368a284843c661e6b00c722e659e11e0838b1bae6dcc0aaf5c6d725311",
+    "generation_sha256": "d929ea90aa03988cbdda27122f1fbcbf4aaefb28af2be62762d6967280af3fa4",
+    "semantic_review": "OPEN",
+    "RF_actual_forecast_adoption": "OPEN"
+  },
+  "quote_real_run": "PASS_ENGINEERING_INDEPENDENT_CONTENT_REVIEW_PENDING",
+  "quote_paid_posts": 1,
+  "quote_paid_tokens": 6272,
+  "quote_paid_micro_usd": 1076,
+  "quote_activation_same_cross_run_zero_repeat_POST": true,
+  "production_default": "reading-model-input/4_UNCHANGED",
+  "rf_summary_use": {
+    "commit": "7b82d7ca949bb6aa02dadc45c29e005e948ef3fb",
+    "ci": 41064039519,
+    "conclusion": "success",
+    "installed": true,
+    "real_forecast_adoption": "OPEN"
+  },
+  "mother": {
+    "charged_tokens": 1827558,
+    "charged_micro_usd": 732814,
+    "new_unknown_count": 6,
+    "token_limit": 10000000,
+    "micro_usd_limit": 20000000,
+    "prior_unknown7_retained": 7
+  },
+  "original_config_foreign_WIP_preserved": true,
+  "next": "Independent /5 fidelity review, then explicit new-request production choice and genuine RF native adoption."
+}

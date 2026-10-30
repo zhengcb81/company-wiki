@@ -627,8 +627,26 @@ def seed_identity(root: Path, mode: str, descriptor: dict, *, source_catalog_con
     }
 
 
-def public_bundle(root, output, env, config, imported, descriptor, label):
+def _public_read_expectation(descriptor, selection):
+    fields = ('canonical_entity_id', 'market', 'security_id', 'document_kind', 'fiscal_year', 'fiscal_period')
+    if selection is None or selection == {
+        'mode': 'qualified_source_request', 'filing_identity_period_asof_qualification': 'REQUEST_APPLIED'
+    }:
+        return {key: descriptor.get(key) for key in fields}
+    if selection == {
+        'mode': 'exact_source_version', 'filing_identity_period_asof_qualification': 'NOT_EVALUATED'
+    }:
+        # These labels were observed, not independently qualified as filing
+        # filters. The exact public Ref, source bytes and artifact SHA remain
+        # mandatory; this is not a claim of issuer/period/as-of eligibility.
+        return dict.fromkeys(fields)
+    raise ValueError('unsupported or contradictory public read selection')
+
+
+def public_bundle(root, output, env, config, imported, descriptor, label, *, source_selection=None):
     from company_wiki.automation.narrative_contracts import NarrativeBundle
+
+    expected = _public_read_expectation(descriptor, source_selection)
 
     command = [
         sys.executable,
@@ -652,23 +670,20 @@ def public_bundle(root, output, env, config, imported, descriptor, label):
         },
     )
     assert code == 0 and reference is not None
-    expected = {
-        key: descriptor.get(key)
-        for key in (
-            "canonical_entity_id",
-            "market",
-            "security_id",
-            "document_kind",
-            "fiscal_year",
-            "fiscal_period",
-        )
-    }
     request = {
         "schema_version": "narrative-read-request/1",
         "narrative_ref": reference,
-        "as_of_date": datetime.now(UTC).date().isoformat(),
+        "as_of_date": (None if source_selection is not None
+                       and source_selection['mode'] == 'exact_source_version'
+                       else datetime.now(UTC).date().isoformat()),
         "expected_source": expected,
     }
+    write_json(output / (label + ".read-request.json"), request)
+    write_json(output / (label + ".read-selection.json"), {
+        'selection': source_selection or {'mode': 'legacy_qualified_request'},
+        'expected_source_basis': 'qualified_request' if source_selection is None
+            or source_selection['mode'] == 'qualified_source_request' else 'exact_content_pin_no_filing_qualification',
+    })
     code, wire, stderr, raw = _cli(
         root,
         output,
@@ -687,7 +702,6 @@ def public_bundle(root, output, env, config, imported, descriptor, label):
     assert bundle.source_ref.to_dict() == imported["source_ref"]
     with gzip.open(output / (label + ".bundle.json.gz"), "wb") as stream:
         stream.write(raw)
-    write_json(output / (label + ".read-request.json"), request)
     return reference, bundle, request, receipt
 
 
@@ -1388,7 +1402,8 @@ def _run_pair_in_owned_root(
             if mode == "loopback":
                 command += ["--llm-config", str(llm), "--allow-local-model-http"]
             observer_config.update(hold_activation=activation_recovery,
-                                   activation_run_id=current_run)
+                                   activation_run_id=current_run,
+                                   prepared_payload_max_bytes=limits['max_final_bytes'])
             write_json(observer, observer_config)
             code, receipt, _, _ = _cli(root, output, current_run, command, env)
             # Persist native charges before resuming any paid output. A fresh
@@ -1517,7 +1532,8 @@ def _run_pair_in_owned_root(
                 receipt, native, read_rows(events), materials, current_run,
                 reading_model_projection=projections[version]))
             reference, bundle, read_request, replay = public_bundle(
-                root, output, env, config, imported, descriptor, current_run
+                root, output, env, config, imported, descriptor, current_run,
+                source_selection=outcome.get('source_registration', {}).get('selection'),
             )
             runs = NarrativeRunStore(database)
             final = runs.final_generations(current_run).get(
@@ -1579,6 +1595,8 @@ def _run_pair_in_owned_root(
             cache_command[cache_command.index("--work-dir") + 1] = str(
                 root / template["run_id"]
             )
+            observer_config['activation_run_id'] = template['run_id']
+            write_json(observer, observer_config)
             code, cached, _, _ = _cli(
                 root, output, current_run + "-cross-run", cache_command, env
             )

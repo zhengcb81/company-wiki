@@ -1,0 +1,25 @@
+{
+  "schema_version": "atomic-artifact-reconstruction/1",
+  "expected_sha256": "216827368a284843c661e6b00c722e659e11e0838b1bae6dcc0aaf5c6d725311",
+  "expected_bytes": 170748,
+  "actual_sha256": "216827368a284843c661e6b00c722e659e11e0838b1bae6dcc0aaf5c6d725311",
+  "actual_bytes": 170748,
+  "exact_original_artifact": true,
+  "selection_sha256": "beabd01dfa743cc8c285620ea80c1987367a27c3f672d9aba7c9656b1077e7ae",
+  "response_sha256": "d490c4208f3c6db59103047434fe9e919f438aaeb71a1edeef616d803f6f6208",
+  "prompt": "reading-source-scoped/4.3.0",
+  "assessor": "source-summary-assessment/1.1.0",
+  "quality_status": "needs_review",
+  "original_artifact_ref": {
+    "artifact_version_id": "narrative-fad1cb8480464e4386507b22f5229f0d",
+    "byte_size": 170748,
+    "content_sha256": "216827368a284843c661e6b00c722e659e11e0838b1bae6dcc0aaf5c6d725311",
+    "document_id": "urn:company-wiki:document:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+    "source_id": "urn:company-wiki:source:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+    "source_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7"
+  },
+  "provenance": "Offline owner execution from captured native paid selection+final response; no new model generation.",
+  "model_posts": 0,
+  "downloads": 0,
+  "pdf_parses": 0
+}

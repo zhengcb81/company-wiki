@@ -38,14 +38,16 @@ ASSESSED_PROMPTS = frozenset(item.prompt for item in SCOPED_PROTOCOLS if item.as
 
 
 def scoped_protocol_for_projection(version: str | None) -> ScopedSummaryProtocol | None:
-    return _BY_PROJECTION.get(version) if version is not None else None
+    return _BY_PROJECTION.get(version) if isinstance(version, str) else None
 
 
 def scoped_protocol_for_request(version: str) -> ScopedSummaryProtocol | None:
-    return _BY_REQUEST.get(version)
+    return _BY_REQUEST.get(version) if isinstance(version, str) else None
 
 
 def scoped_protocol_for_prompt(prompt: str) -> ScopedSummaryProtocol:
+    if not isinstance(prompt, str):
+        raise ValueError('unknown scoped summary prompt')
     try:
         return _BY_PROMPT[prompt]
     except KeyError as exc:
@@ -65,6 +67,8 @@ ASSESSED_BUNDLE = SummaryBundleFormat('narrative-bundle/2.1','narrative-bundle/3
 
 
 def summary_bundle_format(prompt: str | None) -> SummaryBundleFormat:
+    if prompt is not None and not isinstance(prompt, str):
+        raise ValueError('unknown scoped summary prompt')
     if prompt in ASSESSED_PROMPTS:
         return ASSESSED_BUNDLE
     if prompt is not None and prompt.startswith('reading-source-scoped/'):

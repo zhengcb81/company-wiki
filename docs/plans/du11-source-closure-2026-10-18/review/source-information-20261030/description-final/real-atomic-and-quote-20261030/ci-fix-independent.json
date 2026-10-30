@@ -1,0 +1,105 @@
+{
+  "schema_version": "atomic-ci-fix-independent-review/1",
+  "reviewed_at": "2026-10-30T13:33:12.301020+00:00",
+  "status": "INDEPENDENT_PASS_EXACT_NEW_CI_PENDING",
+  "open_in_scope": 0,
+  "original_failed_ci": {
+    "id": 41056460382,
+    "head_sha": "bf58769b6287b5b6f268ce5bccbd619fb2061943",
+    "status": "FAIL_PRESERVED"
+  },
+  "review_only_root_paths": [
+    "src/company_wiki/automation/narrative_summary_protocols.py",
+    "tests/unit/test_narrative_protocol_identity_shapes.py"
+  ],
+  "reviewer_changed_paths": [
+    "tools/pre_push_gate.py",
+    "tests/unit/test_pre_push_gate.py"
+  ],
+  "readonly_legacy_failed_test": {
+    "path": "tests/unit/test_narrative_scoped_runtime.py",
+    "raw_sha256": "8680784685f8941da769ec417fc1812294bf0fa1d2e47c2a8f85db6203650d57",
+    "unchanged_by_reviewer": true
+  },
+  "checks": [
+    "AGENTS and precommit config read before gate change; production data/auth/config unchanged",
+    "all three registry lookups explicitly handle non-string JSON values before dictionary hash",
+    "summary_bundle_format rejects malformed shapes by ValueError, None and known identities keep prior meaning",
+    "existing runtime API still raises named PROJECTION error for list/dict, not TypeError or valid default downgrade",
+    "one existing recent-CI inventory node added, no whole module/new gate/full suite/timeout increase",
+    "direct gate tests preserve one dispatch, fixed bounded inventory and no duplicate target expansion"
+  ],
+  "tests": {
+    "passed": 21,
+    "failed": 0,
+    "seconds": 5.64,
+    "command": [
+      "C:/Miniconda/python.exe",
+      "-B",
+      "-m",
+      "pytest",
+      "tests/unit/test_pre_push_gate.py",
+      "tests/unit/test_pre_push_parallel_phases.py",
+      "tests/unit/test_narrative_protocol_identity_shapes.py",
+      "tests/unit/test_narrative_scoped_runtime.py::test_unknown_projection_does_not_fall_back",
+      "-q",
+      "-p",
+      "no:cacheprovider",
+      "--basetemp=.cwpprotocolgatefinal"
+    ]
+  },
+  "earlier_not_added": {
+    "independent_fixed_node_passed": 11,
+    "seconds": 3.73
+  },
+  "ruff": "PASS_FOUR_PATHS",
+  "diff_check": "PASS",
+  "gate_change": {
+    "node": "tests/unit/test_narrative_protocol_identity_shapes.py::test_protocol_lookup_does_not_hash_non_string_json",
+    "parameter_cases": 6,
+    "known_absent_identity_seventh_case": "reviewed separately, not an extra daily target",
+    "inventory_targets_before": 34,
+    "inventory_targets_after": 35,
+    "daily_deadline_seconds_before": 180,
+    "daily_deadline_seconds_after": 180,
+    "new_gate_count": 0,
+    "tdd_inventory_red_failed": 1,
+    "whole_module_added": false
+  },
+  "files": [
+    {
+      "path": "src/company_wiki/automation/narrative_summary_protocols.py",
+      "bytes": 3183,
+      "raw_sha256": "ff88f8db4d5935f70462ec4268d15ba9495e77df57138714cbc62e54f1689a45",
+      "lf_sha256": "ff88f8db4d5935f70462ec4268d15ba9495e77df57138714cbc62e54f1689a45"
+    },
+    {
+      "path": "tests/unit/test_narrative_protocol_identity_shapes.py",
+      "bytes": 1457,
+      "raw_sha256": "f59747e551c4643e7bcac466286b469da44faea1535bc62f03c95446e517e707",
+      "lf_sha256": "f59747e551c4643e7bcac466286b469da44faea1535bc62f03c95446e517e707"
+    },
+    {
+      "path": "tools/pre_push_gate.py",
+      "bytes": 21891,
+      "raw_sha256": "a9c8a7a14108facb747263302de0e1d5d519f8e67e836d14faef509c877c23d6",
+      "lf_sha256": "ebab93bc5d6a4a2d2c82ecd54c2706cf940849f9ab38381c6995a89a50462373"
+    },
+    {
+      "path": "tests/unit/test_pre_push_gate.py",
+      "bytes": 3335,
+      "raw_sha256": "b12a7ea4c7f84029c44c3292cdbdf50879cda8ead0b7e128326aeedc2a574c62",
+      "lf_sha256": "b12a7ea4c7f84029c44c3292cdbdf50879cda8ead0b7e128326aeedc2a574c62"
+    }
+  ],
+  "not_signed": [
+    "new remote CI success before push",
+    "all unit suite",
+    "real /7 summary fidelity",
+    "RF forecast adoption",
+    "whole loop completion"
+  ],
+  "model_posts": 0,
+  "downloads": 0,
+  "product_config_changes": false
+}

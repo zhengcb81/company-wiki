@@ -1,0 +1,5 @@
+Traceback (most recent call last):
+  File "C:\Users\郑曾波\Projects\company-wiki\.planning\summary-quality-20261030\atomic-real-recovery\run_restored_cache_v4.py", line 52, in <module>
+    descriptor=descriptor, as_of_date=datetime.now(UTC).date().isoformat(), expected_ref=SourceRef.from_dict(sample['source_ref']))
+                                                                                         ^^^^^^^^^^^^^^^^^^^
+AttributeError: type object 'SourceRef' has no attribute 'from_dict'
