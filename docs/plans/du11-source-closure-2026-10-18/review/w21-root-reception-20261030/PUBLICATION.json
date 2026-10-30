@@ -1,0 +1,24 @@
+{
+  "code_commit": "52cd0227dce998b6a8352fd34457b763c540c782",
+  "pushed": true,
+  "pre_push": {
+    "passed": 161,
+    "seconds": 24.24
+  },
+  "ci": {
+    "id": 41021403161,
+    "head_sha": "52cd0227dce998b6a8352fd34457b763c540c782",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41021403161"
+  },
+  "w21_merge_commit": "1e4e9eb51804cd1857ad73245880320efa6171d8",
+  "engineering_accepted": true,
+  "canonical_sdk_c2": "PARTIAL_OPEN",
+  "real_summary_quality": "FOUR_OPEN",
+  "nonperiodic_ff_rf_reuse": "OPEN",
+  "goal": "ACTIVE_NOT_COMPLETE",
+  "originals_configs_unchanged": true,
+  "foreign_hook_mode_wip_preserved": true,
+  "author_worktree_unchanged": true
+}

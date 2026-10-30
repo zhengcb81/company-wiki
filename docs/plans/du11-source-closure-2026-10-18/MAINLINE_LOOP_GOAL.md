@@ -1,12 +1,12 @@
-## 2026-10-30 当前：W21已合并推送，CI版本/平台夹具修复发布中
+## 2026-10-30 当前：W21已合并推送，CI版本/平台夹具修复已发布且精确CI成功
 
 唯一入口 CURRENT_STATUS.md/json。W21工程已正式合并推送1e4e9eb5（ROOT独审0阻塞、198P/18.69秒、397源mypy/ruff，正常pre-push158P/25.16秒）。canonical SDK C2仍native_fallback，alias不等于对齐成功，范围见[W21接收](review/w21-root-reception-20261030/README.md)。
 
-精确CI41019504113失败33项、W21 CI41020271499失败34项：3处PDF/TXT/current-vs-frozen producer夹具耦合及1处Linux无SYSTEMROOT的宿主假设。已按共因修正夹具、不改生产去迎合错误测试，原业务/拒错/历史回放断言保留；113P/4.15秒、W21两模块20P/2.57秒、ruff及独审6文件0OPEN。pre-push既有清单仅加3个已失败具体节点（9P/1.70秒），不增加整模块/全仓检查或超时。见[CI修复](review/parser-version-ci-20261030/README.md)。本补丁正常提交推送后观察自身CI，旧失败不冒签绿色。
+精确CI41019504113失败33项、W21 CI41020271499失败34项：3处PDF/TXT/current-vs-frozen producer夹具耦合及1处Linux无SYSTEMROOT的宿主假设。已按共因修正夹具、不改生产去迎合错误测试，原业务/拒错/历史回放断言保留；113P/4.15秒、W21两模块20P/2.57秒、ruff及独审6文件0OPEN。pre-push既有清单仅加3个已失败具体节点（9P/1.70秒），不增加整模块/全仓检查或超时。见[CI修复](review/parser-version-ci-20261030/README.md)。修复已正常提交推送52cd0227；精确CI41021403161 completed/success。正常pre-push161P/24.24秒，旧33/34失败保留且已由该版本修复。
 
 真实MiMo v3 1POST/6651tokens/$0.001167预算代理，activation/restart/crossrun0重复POST；母累计1807019tokens/$0.729112含旧unknown，原件/config/临时湖恢复检查通过。8来源任务仅6输出，新闻归属丢失及mixed modality等4质量OPEN；FF/RF非期次指定SourceRef复用仍OPEN，不拿未知FY冒充latest。
 
-**下一步：** 发布本次CI修复并观察精确结果，再按[主线细则](review/source-information-20261030/description-final/SUMMARY_QUALITY_NEXT.md)在已捕获真实回复上做共因TDD、独审和定向复验，避免重复收费/整批解析。W21 canonical SDK路径、共享原子写入长路径、US RPO、holdout、实际RF预测及八步公司loop继续OPEN；目标active，Dayu/IQS/Dashboard、原件/config及外来hook mode不动。
+**下一步：** 按[主线细则](review/source-information-20261030/description-final/SUMMARY_QUALITY_NEXT.md)在已捕获真实回复上做共因TDD、独审和定向复验，避免重复收费/整批解析。W21 canonical SDK路径、共享原子写入长路径、US RPO、holdout、实际RF预测及八步公司loop继续OPEN；目标active，Dayu/IQS/Dashboard、原件/config及外来hook mode不动。
 
 ---
 以下为历史记录，不是额外执行入口。

@@ -1,6 +1,6 @@
 # 唯一下一步：摘要覆盖/保真与非期次文档消费共因
 
-0bf2805f及PDF默认版本合同补丁已随97e8a290正常发布，pre-push158P/30.94秒；W21工程ROOT独审与198P通过，合并发布中。来源准备f88221d2精确CI41009349866成功。真实v3 paid输出与恢复/cache已有可复用小证据，禁止再花费整批重跑来诊断。
+0bf2805f及PDF默认版本合同补丁已随97e8a290正常发布，pre-push158P/30.94秒；W21工程已随1e4e9eb5合并推送，ROOT独审与198P通过；CI夹具/平台修复52cd0227的精确CI41021403161成功，pre-push161P/24.24秒。来源准备f88221d2精确CI41009349866成功。真实v3 paid输出与恢复/cache已有可复用小证据，禁止再花费整批重跑来诊断。
 
 ## 已冻结检查点与真实结果
 
@@ -15,7 +15,7 @@
 ## B：响应覆盖与语义责任分开
 
 1. 在已捕获input/response/bundle上先写中性TDD：有支持且预算可容纳的任务遗漏、明确无支持跳过、预算deferred、同一支持复用/去重的区别。已发8返6不能默认为完整。不要把所有静态description全强塞摘要；已售/研发等实际经营事实不应被语法description分类吞成低价值。
-2. 输出协议应明确每个source-admitted task的处理结果与合法原因；覆盖信息从真实response推导，不能相信模型自报complete。预算不足时分批/按task恢复并复用已有付费响应，缺两项只修两项；不重发全部已有6条。已有scoped repair子集协议优先复用，不加第二任务库/人工许可。
+2. 输出协议应明确每个source-admitted task的处理结果与合法原因；覆盖信息从真实response推导，不能相信模型自报complete。预算不足时分批/按task恢复并复用已有付费响应，缺两项只修两项；不重发全部已有6条。`ScopedModelView.visible_keys`是现有的子集呈现能力；但`narrative_summarize._legacy_partial_result`已明确退役旧best-effort付费覆盖修补，不能直接复活旧partial DTO、写immutable零slot或无界自动重试。先离线验证现有实际回复；若新增显式有界continuation，仍放在现有AUTO Store的run/lease/outbox和真实配方/预算中，保留旧paid-response原生账和原始版本，不加第二任务库/人工许可。
 3. 按共用来源约束保留归属、程度、主体、否定和条件；单modality clause必须拆actual/planned/negation等原子事实。先用中英文、繁体、跨行业对照证明，禁用公司名词库或对当前t2写专用补丁。引用ID正确不能代表改写正确。
 4. source-byte replay、candidate/source coverage、summary task coverage、summary semantic audit必须分别可观察；现有verified名称由所属layer明确作用域，不把未审语义改成通过。诊断不变成逐材料许可。语义检查无法确定时如实传递不确定性，不用宽松标签掩盖缺失。
 

@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-30",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_W21_MERGED_CI_FIX_PUBLICATION_THEN_SUMMARY_QUALITY",
+  "overall_status": "ACTIVE_W21_MERGED_CI_GREEN_CONTINUE_SUMMARY_QUALITY",
   "parallel_packages_20261025": {
     "status": "W16_W17_W18_ROOT_COMPONENT_ACCEPTED_MERGED",
     "entry": "harness_lanes/20261025/README.md",
@@ -26,13 +26,13 @@
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
-  "last_code_commit": "1e4e9eb51804cd1857ad73245880320efa6171d8",
+  "last_code_commit": "52cd0227dce998b6a8352fd34457b763c540c782",
   "code_ci": {
-    "id": 41020271499,
-    "head_sha": "1e4e9eb51804cd1857ad73245880320efa6171d8",
+    "id": 41021403161,
+    "head_sha": "52cd0227dce998b6a8352fd34457b763c540c782",
     "status": "completed",
-    "conclusion": "failure",
-    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41020271499"
+    "conclusion": "success",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41021403161"
   },
   "formal_v4_offline_selection_replay_20261025": {
     "status": "EXACT_REPRODUCED_NO_PAID_CALL",
@@ -2344,7 +2344,7 @@
     "published": true,
     "push_failure": "47 targets /392 collected /600s; two regressions being root-fixed, not waived by narrower daily gate"
   },
-  "next_action": "Normally publish six-file reviewed CI fixture/inventory fix; observe its exact Linux CI, then continue SUMMARY_QUALITY_NEXT common-root fixes using captured real response.",
+  "next_action": "Continue SUMMARY_QUALITY_NEXT B: offline captured-response TDD for selected task coverage, attribution, mixed modality and explicit source/semantic quality dimensions; C nonperiodic SourceRef FF/RF reuse and W21 canonical SDK C2 remain OPEN. No new paid full replay for diagnosis.",
   "c3_runtime_recovery_20261026": {
     "entry": "review/pdf-c3-20261026/RUNTIME_RECOVERY.md",
     "environment_independent": "PASS_ZERO_OPEN_25_TESTS_AND_REAL_WORKER_ENTRYPOINTS",
@@ -3483,10 +3483,11 @@
   },
   "publication": {
     "current_code_pushed": true,
-    "pre_push_passed": 158,
-    "pre_push_seconds": 25.16,
+    "pre_push_passed": 161,
+    "pre_push_seconds": 24.24,
     "w21_merge": "MERGED_AND_PUSHED",
-    "ci_fix": "reviewed six files, normal publication pending"
+    "w21_merge_commit": "1e4e9eb51804cd1857ad73245880320efa6171d8",
+    "ci_fix": "PUBLISHED_EXACT_CI_SUCCESS"
   },
   "real_summary_v3": {
     "overall_status": "FAIL",
@@ -3890,7 +3891,7 @@
     "merge_commit": "1e4e9eb51804cd1857ad73245880320efa6171d8"
   },
   "ci_parser_platform_fix": {
-    "status": "REVIEWED_READY_PUBLICATION",
+    "status": "PUBLISHED_EXACT_CI_SUCCESS",
     "production_changes": 0,
     "sealed_files": [
       "tests/unit/test_narrative_english_business_recall.py",
@@ -3910,6 +3911,14 @@
     },
     "review": "review/parser-version-ci-20261030/README.md",
     "new_model_calls": 0,
-    "new_downloads": 0
+    "new_downloads": 0,
+    "commit": "52cd0227dce998b6a8352fd34457b763c540c782",
+    "code_ci": {
+      "id": 41021403161,
+      "head_sha": "52cd0227dce998b6a8352fd34457b763c540c782",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41021403161"
+    }
   }
 }
