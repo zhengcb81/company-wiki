@@ -1,0 +1,125 @@
+{
+  "schema_version": "m7-source-freeze-seal/1",
+  "files": {
+    "c3-cn-huali-ir-202305.freeze-receipt.json": {
+      "sha256": "c2d79b71bfe646a3477041ef5971c2b508bf811fb122a503f640900965490fbc",
+      "bytes": 8045
+    },
+    "c3-cn-huali-ir-202305.offline-admission.json.gz": {
+      "sha256": "d498b1246247eb9ef8a30ce759baef479469d58967688fa3397ff9928b328bab",
+      "bytes": 10098
+    },
+    "c3-us-berkshire-letter-2008.freeze-receipt.json": {
+      "sha256": "c7021b649e2f5592dc8da79fc6a815adc557489483f3b00d4f16530fd7311089",
+      "bytes": 7945
+    },
+    "c3-us-berkshire-letter-2008.offline-admission.json.gz": {
+      "sha256": "077f2c567b603ebbde59eb1f8b22f3ef099f812b9afbd808f1a57c081c55082b",
+      "bytes": 49813
+    },
+    "evaluate_frozen.py": {
+      "sha256": "99eef57569ad30eafd219a2faf66e25c915c22a6cc9dc3e6c03c7ad8c1a26a46",
+      "bytes": 5566
+    },
+    "freeze.json": {
+      "sha256": "8feb6d0512e6cf9b8825c7f60dc9a5e760f7ff44aba0c7e7616cad9525b1bc0f",
+      "bytes": 22069
+    },
+    "freeze_candidates.py": {
+      "sha256": "679856316f7c130c791cd513e171c62cbaaad178c3553905f1df4af7d2a928f7",
+      "bytes": 7909
+    },
+    "freeze_candidates_r2.py": {
+      "sha256": "4158d440ca7340f427a4a562073936251d3323fea5f755a6f0cace64baab80b8",
+      "bytes": 7538
+    },
+    "gold-visibility.json": {
+      "sha256": "a9edb69c5273e808e460b2eef3c0bd47a2cdc1cd893bb69a0aad8a29e9d9a393",
+      "bytes": 221260
+    },
+    "offline-replay.json": {
+      "sha256": "82a13f4f95e17806a37ce96a49e8fc59dde137417faa5141ceaffb8de856402b",
+      "bytes": 629
+    },
+    "README.md": {
+      "sha256": "08e8662c9d96ae67d691a725fbe4cb8f06a155d2545f015533f7f84d43473fc1",
+      "bytes": 392
+    },
+    "replay_normalized.py": {
+      "sha256": "0861a77a78c4cba6034af08a1a0aef62a3e872481c3ea0d6b1de3e992ea035bf",
+      "bytes": 3413
+    },
+    "review.json": {
+      "sha256": "c11a4e8bacde30a2742e3529acf86d54345ea2f89b55083b5849bc54229d55b2",
+      "bytes": 19164
+    },
+    "review.md": {
+      "sha256": "07cc9f34f960e1c3c63f22e792a8f41ad87a5d323971774b84d2d7c87293374a",
+      "bytes": 6379
+    },
+    "snapshot-observer-failure.json": {
+      "sha256": "a2951a6f1655d84bba6c84d996dcf2a23f64a7cb7b0d64e0311793d385d772e0",
+      "bytes": 508
+    },
+    "start.json": {
+      "sha256": "f60cf1ec23869eac39409353b3ba6eed7e6897450d8a9019488e6f87a2ab4646",
+      "bytes": 3385
+    },
+    "r2/c3-cn-huali-ir-202305.freeze-receipt.json": {
+      "sha256": "608e499543a34e09efd6db8e7516a91d0911c5d4b2940221e9a2e5322b60cb34",
+      "bytes": 4206
+    },
+    "r2/c3-cn-huali-ir-202305.normalized.json.gz": {
+      "sha256": "ad71973d627c590691918cac116a546f657d20fcfa55c51535a4e0676b4476ca",
+      "bytes": 75819
+    },
+    "r2/c3-cn-huali-ir-202305.request.json.gz": {
+      "sha256": "81ef33ada9efa6c37d9d7653a044a42926356ab8720d8cccaffca99701181ae8",
+      "bytes": 6568
+    },
+    "r2/c3-cn-huali-ir-202305.selection.json.gz": {
+      "sha256": "734e96ea0a502c85e15cf81a7a2f21e862baf930b91bb7fff858d3e67d08a680",
+      "bytes": 22787
+    },
+    "r2/c3-us-berkshire-letter-2008.freeze-receipt.json": {
+      "sha256": "8d76bfd834d62ef8926a6f21d416f00abf4cff156e98ef3d7ba3c3536399b920",
+      "bytes": 3767
+    },
+    "r2/c3-us-berkshire-letter-2008.selection.json.gz": {
+      "sha256": "07aa2650f6163abd087585dfe02e5dfc55c578974aa848089d3d3ae885f8fbf3",
+      "bytes": 151
+    },
+    "r2/freeze.json": {
+      "sha256": "d96b419992d9cda75b8687204d7bbd3e434df9feecd9645d0bfabf90392da5cf",
+      "bytes": 14052
+    },
+    "r2/start.json": {
+      "sha256": "f60cf1ec23869eac39409353b3ba6eed7e6897450d8a9019488e6f87a2ab4646",
+      "bytes": 3385
+    },
+    "r3/c3-us-berkshire-letter-2008.freeze-receipt.json": {
+      "sha256": "fa76631643c848efe52ae6adabbf85bff3f38255a7d03ddd1d2f972a140949a9",
+      "bytes": 4123
+    },
+    "r3/c3-us-berkshire-letter-2008.normalized.json.gz": {
+      "sha256": "00694ef7f28a9164b3316598c985141fc97d51d53866c6fff8177838ad660793",
+      "bytes": 461095
+    },
+    "r3/c3-us-berkshire-letter-2008.request.json.gz": {
+      "sha256": "0bb018cc8559a45bd1345b31faa92ecf7ccd70cbc18d2b46f3821e8ec613c7f4",
+      "bytes": 3345
+    },
+    "r3/c3-us-berkshire-letter-2008.selection.json.gz": {
+      "sha256": "7ecbf8c0af042e8a14d6d8834e4fbf3ab1e4d5de729e97093c8211215130109b",
+      "bytes": 17999
+    },
+    "r3/freeze.json": {
+      "sha256": "8d95022d5b285128d889912b88fde2379b96c24ec0888afce9aab924541b08f1",
+      "bytes": 10182
+    },
+    "r3/start.json": {
+      "sha256": "f60cf1ec23869eac39409353b3ba6eed7e6897450d8a9019488e6f87a2ab4646",
+      "bytes": 3385
+    }
+  }
+}

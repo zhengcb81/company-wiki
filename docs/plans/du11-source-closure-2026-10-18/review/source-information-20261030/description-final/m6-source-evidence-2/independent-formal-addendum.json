@@ -1,0 +1,84 @@
+{
+  "schema_version": "rf-confidence-m6-final-formal-addendum/1",
+  "verified_at": "2026-10-30T15:21:45.033250+00:00",
+  "status": "PASS_READ_ONLY_FINAL_ACTUAL_SAME_INPUT_AND_LEGACY_REGISTRY_COEXISTENCE",
+  "formal_artifact_root": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\.planning\\source-quote-adoption-20261030\\m6-final-formal",
+  "open_findings": [],
+  "source_review_main_seal_sha256": "28153b6c7bae79e5e92ff6622566402cbe55451482bf69f3540dc7eaeb288c2a",
+  "main_16_path_seal_unchanged": true,
+  "same_actual_v3_inputs_and_input_hashes": true,
+  "full_confidence_equal": true,
+  "confidence_baseline": 65.38058062293638,
+  "confidence_adopted": 65.38058062293638,
+  "economic_paths_and_parameter_trace_equal_except_expected_one_claim": true,
+  "expected_claim_parameter": [
+    "equipment_units_base_2026"
+  ],
+  "native_results_and_snapshot_strong_validated": true,
+  "registry_audit": [],
+  "old_rows": 4,
+  "old_registry_byte_prefix_sha256": "a74759cc460321d00917aaef60621b1da68e1e60d08c546cf77131f2c47ec7ec",
+  "new_rows": 4,
+  "new_rows_all_explicit_revision": "source-evidence/2",
+  "registry_and_all_evidence_files_unchanged_by_review": true,
+  "reviewer_calls": {
+    "run_native": 0,
+    "run_forecast": 0,
+    "create_snapshot": 0,
+    "API_model_network": 0,
+    "raw_reads": 0
+  },
+  "scope": "same M6 acceptance, final combined evidence; not fresh whole-company research or assumption calibration",
+  "artifact_seals": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\.planning\\source-quote-adoption-20261030\\m6-final-formal\\adopted-forecast.json",
+      "bytes": 530312,
+      "sha256": "adc4134098b6e78d5a01f066b15431905fc2c9a32c9d04e17143fb1f9df9113c"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\.planning\\source-quote-adoption-20261030\\m6-final-formal\\adopted-input.json",
+      "bytes": 253026,
+      "sha256": "5eee8759fb9a6e6062c996711a47baad99d82e1ec2de2c4a82507ad6834054d2"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\.planning\\source-quote-adoption-20261030\\m6-final-formal\\baseline-forecast.json",
+      "bytes": 527906,
+      "sha256": "6898709b4cabbecf8d55e7120652a17b192ac16c39a015ddf70735c52206e635"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\.planning\\source-quote-adoption-20261030\\m6-final-formal\\baseline-input.json",
+      "bytes": 251823,
+      "sha256": "5056d8893adfec0eda7d7c62eee77aecbb6dbc0ad944ea31da2048c43b9eee4c"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\.planning\\source-quote-adoption-20261030\\m6-final-formal\\publication-registry.jsonl",
+      "bytes": 6398,
+      "sha256": "a4c3323f6b7ef14307cdd09f78d85c837bbc35e6397631d96bced89686c3a920"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\.planning\\source-quote-adoption-20261030\\m6-final-formal\\receipt.json",
+      "bytes": 710,
+      "sha256": "6f74e5ddd00c910404f255f4381f1772af5bc1da6eb043ea7f12c06daf14530b"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\.planning\\source-quote-adoption-20261030\\m6-final-formal\\report.md",
+      "bytes": 110074,
+      "sha256": "20599cd3ebe87385d95d0d1821984f56ba9b734f5f08ff0e4ba1330b0972ff17"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\.planning\\source-quote-adoption-20261030\\m6-final-formal\\run_native.py",
+      "bytes": 4345,
+      "sha256": "f6c60817ea3265ddb3e66db86249cdfe7bdc80652586cce65afa4c8d4b8f59cd"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\.planning\\source-quote-adoption-20261030\\m6-final-formal\\snapshot.json",
+      "bytes": 783875,
+      "sha256": "11d497fec39efe45e5374e95c87eaef39b67cfdf4068f061329336bb7b1674da"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\.planning\\source-quote-adoption-20261030\\m6-final-formal\\TRUST_BOUNDARY.md",
+      "bytes": 590,
+      "sha256": "2c0b96322f607077bf60763fa31f008273524584e8b345035ddab32584479475"
+    }
+  ]
+}

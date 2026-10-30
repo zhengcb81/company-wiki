@@ -1,0 +1,15 @@
+{
+  "same_input_sha": true,
+  "old_revision": "stable-fsum/1",
+  "new_revision": "source-evidence/2",
+  "same_engine": true,
+  "same_schema": true,
+  "old_result_sha": "22f71d66e60eb4a23b2131a0919c88446c552c6274fe4949504a8a19aba4516f",
+  "new_result_sha": "deab414d7587b570e3596a0e70a62c693c85d6e6e206bd6910d8457f3921004f",
+  "registry_audit": [],
+  "native_computations": 1,
+  "model_calls": 0,
+  "network": 0,
+  "production_registry_writes": 0,
+  "original_real_legacy_rows_byte_prefix_preserved": true
+}

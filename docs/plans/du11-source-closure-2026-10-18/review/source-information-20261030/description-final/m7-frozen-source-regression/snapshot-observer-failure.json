@@ -1,0 +1,10 @@
+{
+  "scope": "author snapshot serialization; not source parser failure",
+  "r1": "non-string tuple mapping keys; fixed local serializer only",
+  "r2_berkshire": "snapshot cap 8MiB; repeated transient native_source_view made expanded normalized JSON exceed cap",
+  "expanded_bytes": 9504760,
+  "cap_bytes": 8388608,
+  "cap_would_reject": true,
+  "r3": "deduplicate identical native_source_view in bounded snapshot; production parsed object/selector unchanged",
+  "pdf_reparsed_by_this_probe": false
+}

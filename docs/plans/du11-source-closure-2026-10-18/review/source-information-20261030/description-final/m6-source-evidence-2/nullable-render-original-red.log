@@ -1,0 +1,88 @@
+FF                                                                       [100%]
+================================== FAILURES ===================================
+__ test_registered_original_rows_do_not_fabricate_missing_url_or_date[False] __
+
+tmp_path = WindowsPath('C:/Users/郑曾波/Projects/revenue-forecast/.planning/source-quote-adoption-20261030/root-render-red/test_registered_original_rows_0')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000023DA1018640>
+unknown_publication = False
+
+    @pytest.mark.parametrize("unknown_publication", [False, True])
+    def test_registered_original_rows_do_not_fabricate_missing_url_or_date(tmp_path, monkeypatch, unknown_publication):
+        from fix_hashes import apply_hash_fixes
+        from test_recognition_bridge import forecast_document
+        from test_source_provenance import AS_OF, local_record
+        from revenue_report import render_markdown
+    
+        monkeypatch.setenv('REVENUE_PUBLICATION_REGISTRY', str(tmp_path / 'publications.jsonl'))
+        source = local_record(unknown=unknown_publication)
+        frozen = deepcopy(source)
+        def relink(value):
+            if isinstance(value, dict):
+                return {key: AS_OF.isoformat() if key in {'checked_date', 'verified_date'} else relink(item)
+                        for key, item in value.items()}
+            if isinstance(value, list):
+                return [relink(item) for item in value]
+            return source['source_id'] if value == 'filing' else value
+        data = relink(forecast_document())
+        data['as_of_date'] = AS_OF.isoformat()
+        data['sources'] = [source]
+        for claim in data['evidence_claims']:
+            claim['content_sha256'] = source['capture']['snapshot_sha256']
+            claim['capture_receipt_sha256'] = source['capture']['receipt_sha256']
+        apply_hash_fixes(data)
+        result = run_forecast(data)
+        report = render_markdown(result)
+        source_table = report.split('## 参数来源', 1)[1]
+>       assert '](None)' not in source_table
+E       AssertionError: assert '](None)' not in '\n\n| ID | ...l Report |\n'
+E         
+E         '](None)' is contained here:
+E           844d48b740](None) | 1 | regulatory_filing | U.S. Securities and Exchange Commission | 2026-02-20 | Revenue note, page 42 | Acme 2025 Annual Report |
+E         ?           +++++++
+
+tests\test_real_source_quote_confidence.py:86: AssertionError
+__ test_registered_original_rows_do_not_fabricate_missing_url_or_date[True] ___
+
+tmp_path = WindowsPath('C:/Users/郑曾波/Projects/revenue-forecast/.planning/source-quote-adoption-20261030/root-render-red/test_registered_original_rows_1')
+monkeypatch = <_pytest.monkeypatch.MonkeyPatch object at 0x0000023DA10196E0>
+unknown_publication = True
+
+    @pytest.mark.parametrize("unknown_publication", [False, True])
+    def test_registered_original_rows_do_not_fabricate_missing_url_or_date(tmp_path, monkeypatch, unknown_publication):
+        from fix_hashes import apply_hash_fixes
+        from test_recognition_bridge import forecast_document
+        from test_source_provenance import AS_OF, local_record
+        from revenue_report import render_markdown
+    
+        monkeypatch.setenv('REVENUE_PUBLICATION_REGISTRY', str(tmp_path / 'publications.jsonl'))
+        source = local_record(unknown=unknown_publication)
+        frozen = deepcopy(source)
+        def relink(value):
+            if isinstance(value, dict):
+                return {key: AS_OF.isoformat() if key in {'checked_date', 'verified_date'} else relink(item)
+                        for key, item in value.items()}
+            if isinstance(value, list):
+                return [relink(item) for item in value]
+            return source['source_id'] if value == 'filing' else value
+        data = relink(forecast_document())
+        data['as_of_date'] = AS_OF.isoformat()
+        data['sources'] = [source]
+        for claim in data['evidence_claims']:
+            claim['content_sha256'] = source['capture']['snapshot_sha256']
+            claim['capture_receipt_sha256'] = source['capture']['receipt_sha256']
+        apply_hash_fixes(data)
+        result = run_forecast(data)
+        report = render_markdown(result)
+        source_table = report.split('## 参数来源', 1)[1]
+>       assert '](None)' not in source_table
+E       AssertionError: assert '](None)' not in '\n\n| ID | ...l Report |\n'
+E         
+E         '](None)' is contained here:
+E           844d48b740](None) | 1 | regulatory_filing | U.S. Securities and Exchange Commission | None | Revenue note, page 42 | Acme 2025 Annual Report |
+E         ?           +++++++
+
+tests\test_real_source_quote_confidence.py:86: AssertionError
+=========================== short test summary info ===========================
+FAILED tests/test_real_source_quote_confidence.py::test_registered_original_rows_do_not_fabricate_missing_url_or_date[False]
+FAILED tests/test_real_source_quote_confidence.py::test_registered_original_rows_do_not_fabricate_missing_url_or_date[True]
+2 failed, 3 deselected in 0.58s

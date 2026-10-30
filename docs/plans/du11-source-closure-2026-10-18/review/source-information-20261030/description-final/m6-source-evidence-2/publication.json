@@ -1,0 +1,24 @@
+{
+  "status": "PUBLISHED_EXACT_CI_SUCCESS_INSTALLED",
+  "repository": "revenue-forecast",
+  "branch": "main",
+  "commit": "09be09742013eac244cecd201f97e108a4dd5d99",
+  "ci": {
+    "id": 41079560122,
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/41079560122"
+  },
+  "normal_pre_push": {
+    "passed": 650,
+    "skipped": 1,
+    "subtests_passed": 36,
+    "seconds": 46.16
+  },
+  "independent_final": "PASS_0_OPEN_16_PATHS_PLUS_FORMAL_ADDENDUM",
+  "installed": "3runtime+2references in2physical targets; repeated0writes; fresh native+legacy/registry/null rendering PASS",
+  "new_model_calls": 0,
+  "new_downloads": 0,
+  "unchanged": "originals/config/mother/RF3WIP/147baselineoutputs; foreignCWP hook mode",
+  "full_pwf_and_company_loop": "OPEN_NOT_CLAIMED"
+}

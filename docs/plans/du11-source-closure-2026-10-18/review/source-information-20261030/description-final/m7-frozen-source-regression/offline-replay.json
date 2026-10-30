@@ -1,0 +1,18 @@
+[
+  {
+    "sample_id": "c3-cn-huali-ir-202305",
+    "selected_spans_equal": false,
+    "admission_calls": 88,
+    "work_note": "replay starts fresh work account; does not claim original total work equivalence",
+    "pdf_reads": 0,
+    "output": "c3-cn-huali-ir-202305.offline-admission.json.gz"
+  },
+  {
+    "sample_id": "c3-us-berkshire-letter-2008",
+    "selected_spans_equal": true,
+    "admission_calls": 229,
+    "work_note": "replay starts fresh work account; does not claim original total work equivalence",
+    "pdf_reads": 0,
+    "output": "c3-us-berkshire-letter-2008.offline-admission.json.gz"
+  }
+]

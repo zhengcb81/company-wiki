@@ -1,0 +1,216 @@
+{
+  "schema_version": "rf-confidence-m6-independent-review/1",
+  "reviewed_at": "2026-10-30T15:12:53.157876+00:00",
+  "status": "PASS_SCOPED_CODE_NATIVE_AND_HISTORICAL_COMPATIBILITY",
+  "open_findings": [],
+  "owned_final_paths": 16,
+  "source_edits_by_reviewer": 0,
+  "tests": {
+    "initial_short_domain": {
+      "tests": 122,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    "final_changed_paths": {
+      "tests": 39,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    },
+    "independent_neutral_and_full_M1_native": {
+      "tests": 5,
+      "errors": 0,
+      "failures": 0,
+      "skipped": 0
+    }
+  },
+  "test_count_policy": "initial and changed-path replays overlap; counts are separate, never added as unique tests",
+  "scoped_ruff": "PASS_9_PYTHON_PATHS",
+  "mypy": "PASS_confidence_and_publication_registry_2_sources",
+  "revenue_report_whole_mypy": "author compared 12 existing errors with HEAD; not represented as configured-gate success or new failure",
+  "resolved_findings": [
+    {
+      "id": "M6-ORIGIN-VOTES",
+      "status": "FIXED",
+      "scope": "origin freshness; origin/support_type quality; preserve all claims"
+    },
+    {
+      "id": "M6-LEGAL-UNKNOWN-PUBLICATION",
+      "status": "FIXED_AND_FULL_NATIVE_VERIFIED",
+      "scope": "complete valid M1 source2.2 record -> source validation -> formal run -> strong validation -> Markdown; unknown publication yields0credit, no fabricated dates"
+    },
+    {
+      "id": "M6-REGISTRY-GENERATION",
+      "status": "INDEPENDENT_RED_TO_GREEN",
+      "red": "authentic legacy record plus same-input new native emission caused false audit conflict",
+      "green": "actual historical JSONL original byte prefix preserved and same-input new emission now audit=[]",
+      "scope": "finite revision derived from actual forecast/nested snapshot, old missing stays legacy, same-revision conflict and hash-chain checks retained"
+    },
+    {
+      "id": "M6-MISSING-URL-RENDER",
+      "status": "INDEPENDENT_RED_TO_GREEN",
+      "red": "legal null-URL source rendered ](None) and publication None",
+      "green": "full native independent case and permanent known/unknown cases; plain sourceID/unknown date, JSONnull untouched, HTTP unchanged"
+    }
+  ],
+  "versioning": {
+    "new": "source-evidence/2",
+    "old_marked": "stable-fsum/1 exact",
+    "old_unmarked": "old algorithm with existing64ULP only",
+    "bad_markers": "null/unknown/malformed rejected",
+    "engine_schema_bump": false,
+    "old_v3_output_or_seal_rewritten": false
+  },
+  "origin_checks": [
+    "sameSHA alias and repeated same role invariant",
+    "new source/new role can affect score",
+    "earliest known date for conflicting aliases",
+    "allunknown gives0freshness; availability not substituted",
+    "order/hashseed invariance",
+    "unused source cannot affect used-parameter score",
+    "claims/measurements not deleted"
+  ],
+  "formal_real_acceptance": {
+    "status": "PASS_NATIVE_FORMAL_AND_SNAPSHOT_NEW_CALCULATION_REVISION",
+    "company": "CN-688012",
+    "as_of_date": "2026-10-08",
+    "confidence_before": 65.38058062293638,
+    "confidence_after": 65.38058062293638,
+    "full_confidence_equal": true,
+    "consolidated_forecast_equal": true,
+    "economic_parameter_trace_equal": true,
+    "expected_added_claim_trace": [
+      "equipment_units_base_2026"
+    ],
+    "historical_v3_exact_seal_retained": true,
+    "new_model_posts": 0,
+    "new_downloads": 0,
+    "original_reads": 0,
+    "registry_scope": "owned_m6_formal_only",
+    "root_quality_review": "PENDING_INDEPENDENT_FINAL_REVIEW",
+    "whole_company_fresh_research": "NOT_CLAIMED"
+  },
+  "historical_scores_preserved": [
+    65.38058062293638,
+    65.39469303281442
+  ],
+  "new_real_baseline_and_adopted_score": 65.38058062293638,
+  "real_fixtures": {
+    "fixtures": [
+      {
+        "label": "baseline",
+        "decompressed_sha256": "c35b518cc99629347f6fb67f8c405696b129817059aac7bfbdfba101ff506801",
+        "matches_sealed_v3": true,
+        "raw_original_or_credentials_included": false
+      },
+      {
+        "label": "adopted",
+        "decompressed_sha256": "13077ffa09437bd6e9d393d753f54250f8fa1df1034b82620ee2774fb0566e65",
+        "matches_sealed_v3": true,
+        "raw_original_or_credentials_included": false
+      }
+    ],
+    "fresh_process": {
+      "status": "PASS_FRESH_PROCESS_NO_UPSTREAM_NO_NETWORK",
+      "confidence": 65.38058062293638
+    },
+    "independent_formal_runs": 2,
+    "models": 0,
+    "network": 0,
+    "raw_PDF_parses": 0,
+    "portable_cwd_not_repository": true,
+    "publication_registry_isolated": true
+  },
+  "CI": "three focused regression modules are in existing single SMOKE_TESTS pytest invocation; inventory asserts coverage; no new job/stage/approval/full suite",
+  "ownership": "formal RF artifacts in RF/.planning; CWP full native intermediate copies already SHA-checked then cleaned; only technical reception here",
+  "migration_receipt": ".planning/summary-quality-20261030/real-rf-adoption-relocation/cwp-native-cleanup.json",
+  "cleanup": "explicit review native registry fixtures removed after read-only attribute prevented generic rmtree; cleanup.json/final-cleanup.json retain evidence; own mypy cache removed",
+  "scope_limits": [
+    "not full repository/remote CI",
+    "not provider/model/download/PDF validation",
+    "not fresh whole-company buy-side research",
+    "not calibration of1620chambers or forecast accuracy",
+    "not publication/deployment"
+  ],
+  "paid_calls": 0,
+  "downloads": 0,
+  "raw_PDF_parses": 0,
+  "production_registry_writes": 0,
+  "publication_deployment_performed": false,
+  "retained_failed_logs": [
+    "registry-probe.log/json",
+    "render-red.log/xml",
+    "neutral-tests.log initial cleanupfalse",
+    "inspection/author logs referenced externally"
+  ],
+  "next": "ROOT publish/push, point-sync3runtime+2refs preserving configuration, then continue PWF main loop",
+  "seal": "seal.json",
+  "actual_evidence_sha256": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\.planning\\source-quote-adoption-20261030\\m6-formal\\baseline-input.json",
+      "bytes": 251843,
+      "sha256": "578f706b7a18eceb5080b5230eaef6c960797122f5d33f290e796e15749a3a14"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\.planning\\source-quote-adoption-20261030\\m6-formal\\adopted-input.json",
+      "bytes": 253028,
+      "sha256": "c485588488fbc5246058b909550fd637ed85504dabe7d333c1fa9b6f9b392438"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\.planning\\source-quote-adoption-20261030\\m6-formal\\baseline-forecast.json",
+      "bytes": 527946,
+      "sha256": "e909358ac3d143dfd2a11dee6465eccc5285c6263cc2a6c14d48138ad95b3bb2"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\.planning\\source-quote-adoption-20261030\\m6-formal\\adopted-forecast.json",
+      "bytes": 530316,
+      "sha256": "8c1402cd68906a114c25948e2b4045d4bdd82c276cb81cc93312031ce286b1ca"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\.planning\\source-quote-adoption-20261030\\m6-formal\\snapshot.json",
+      "bytes": 783883,
+      "sha256": "f54bf260703f2c606beddeaf2de62374cc206e5d05d6011307b7d09d2ffe2aa5"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\.planning\\source-quote-adoption-20261030\\m6-formal\\publication-registry.jsonl",
+      "bytes": 3058,
+      "sha256": "92eff5782a7802afea00b89d323eedc06373e6e13fbe5f416cea0f780e60cc2d"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\.planning\\source-quote-adoption-20261030\\m6-formal\\report.md",
+      "bytes": 110076,
+      "sha256": "4558d72b7400d58a84885ce43b3e3348978952c792cc997c7db1297177ef4330"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\.planning\\source-quote-adoption-20261030\\m6-formal\\failed-check.json",
+      "bytes": 332,
+      "sha256": "96410c7332424bfbecd4baf6ec3830f63b0d06f980b1d921c3b5992589f1c2d7"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\.planning\\source-quote-adoption-20261030\\m6-formal\\TRUST_BOUNDARY.md",
+      "bytes": 777,
+      "sha256": "d0358a3a4181cf013d4eed9c5dc25f8ba1ee32f3273a8e5bb2c108c537240940"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\.planning\\source-quote-adoption-20261030\\m6-formal\\verify_formal.py",
+      "bytes": 2774,
+      "sha256": "84c7a5a9593a9fccff0d7d07176f265385d9af50ad7b1fa2048c899766b6a2a6"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\.planning\\source-quote-adoption-20261030\\v3\\seal.json",
+      "bytes": 9480,
+      "sha256": "1fe14aad75586e18ccfa66a9d5ba8b03119f35ddd4256cbc4df4236a572feb3f"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\.planning\\source-quote-adoption-20261030\\v3\\relocation-seal.json",
+      "bytes": 11046,
+      "sha256": "9ecd01024b716374122fd3c5c8fde18374c228b25e093816cdd4d84746f0c2b3"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\summary-quality-20261030\\real-rf-adoption-relocation\\cwp-native-cleanup.json",
+      "bytes": 4626,
+      "sha256": "c9e7a409e84428b2423eed50776a14f7871b50f285b8d48f834e27fcdc2eac41"
+    }
+  ]
+}

@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-30",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_RF_DUPLICATE_SOURCE_FRESHNESS_ROOT_FIX_THEN_ADOPTION_ACCEPTANCE",
+  "overall_status": "ACTIVE_M1_M6_LOCAL_CLOSED_M7_FROZEN_2P2_OPEN_M8_ROOT_FIX_NEXT",
   "parallel_packages_20261025": {
     "status": "W16_W17_W18_ROOT_COMPONENT_ACCEPTED_MERGED",
     "entry": "harness_lanes/20261025/README.md",
@@ -26,13 +26,12 @@
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
-  "last_code_commit": "8b939b9cbd78f908dcff3bf06ed3970a7bf9c0aa",
+  "last_code_commit": "599f6cf6a5a686c0ec5ce38be1f985515d7b7b46",
   "code_ci": {
-    "id": 41064827392,
-    "head_sha": "8b939b9cbd78f908dcff3bf06ed3970a7bf9c0aa",
+    "id": 41068344080,
+    "head_sha": "599f6cf6a5a686c0ec5ce38be1f985515d7b7b46",
     "status": "completed",
-    "conclusion": "success",
-    "previous_failed_run": 41056460382
+    "conclusion": "success"
   },
   "formal_v4_offline_selection_replay_20261025": {
     "status": "EXACT_REPRODUCED_NO_PAID_CALL",
@@ -304,8 +303,9 @@
     {
       "id": "R1",
       "task": "freeze independent-company holdout and run RF audit loop",
-      "status": "ANNUAL14_SOURCE12_2; CROSS_MARKET_CF1_CF4_SHARED_SOURCE_DEFECTS_OPEN; FINALIZATION_ACCOUNTING_FIX_REVIEWING; FORMAL_RESPONSES_NOT_REVIEWED; RF_OPEN; THREE_AUTHOR_WORKTREES_ISOLATED",
-      "mainline": true
+      "status": "M1_M6_LOCAL_SOURCE_QUOTE_RECOVERY_RF_ADOPTION_PUBLISHED; M7_C3_HOLDOUT_THEN_W12_NEW_ATTEMPT_NEXT",
+      "mainline": true,
+      "next": "See m7_next.entry; no old author worktree or P2 pending state."
     },
     {
       "id": "R2",
@@ -320,7 +320,8 @@
     {
       "id": "R4",
       "task": "complexity lint config duplication module boundaries coverage and exception debt",
-      "status": "BACKLOG_NO_NEW_GATES_AUTHORED"
+      "status": "BACKLOG_NO_NEW_GATES_AUTHORED",
+      "known_untouched_debt": "12 pre-existing revenue_report mypy errors outside the configured gate; unchanged baseline. Address in bounded code-quality work, not by adding a gate or repeating the whole suite."
     },
     {
       "id": "R5",
@@ -333,7 +334,7 @@
       "status": "CURRENT_FF_RF_OFFLINE_COMBINATION_AND_INSTALL_RESULTS_IN_CLOSEOUT_RECEIPT_HISTORICAL_OTHER_WIP_PRESERVED"
     }
   ],
-  "next_step_now": "M6 RF freshness root fix; see next_action.",
+  "next_step_now": "M8: root-fix shared source admission and continuity/attribution using saved M7 normalized snapshots; neutral positive/negative TDD, independent milestone review; no paid rank or full PDF replay until source checkpoint passes.",
   "parallel_work_packages": [
     {
       "id": "IR-REPORT-GENERATION",
@@ -354,7 +355,7 @@
       "review_before_handoff": true
     }
   ],
-  "next_step_after_user_resumes": "ALREADY_RESUMED; use next_action",
+  "next_step_after_user_resumes": "ALREADY_RESUMED; follow next_action.",
   "budget_snapshot": {
     "observed_on": "2026-10-25",
     "observation_ref": "review/market-family-upgrade-20261024/formal-v4-and-cards-root-acceptance-20261025.md",
@@ -805,7 +806,7 @@
     },
     "publication_docs_commit": "fa667547"
   },
-  "next_step_after_publication": "Observe exact CI then continue M5; no pause requested.",
+  "next_step_after_publication": "M8: root-fix shared source admission and continuity/attribution using saved M7 normalized snapshots; neutral positive/negative TDD, independent milestone review; no paid rank or full PDF replay until source checkpoint passes.",
   "w08_current_review": {
     "selection_path": "review/r1-w08-material-value-20261024/publication/final-source/selection.json",
     "selection_sha256": "44a9ac20e9b83f67bf99976820cf88b7de592b74b0104fca09abc434c0287904",
@@ -840,8 +841,9 @@
     "a02_prior_growth_subfact_restored": true
   },
   "next_steps": [
-    "M6 RF source freshness TDD/replay/independent review, then actual adoption acceptance.",
-    "W21 canonicalC2/long path, US RPO, new cross-market holdout and eight-step company loop."
+    "M8: root-fix shared source admission and continuity/attribution using saved M7 normalized snapshots; neutral positive/negative TDD, independent milestone review; no paid rank or full PDF replay until source checkpoint passes.",
+    "W12 WuXi AppTec new attempt, then WuXi XDC, Snowflake; preserve old attempts and full eight-step reviews.",
+    "US RPO / W21 canonicalC2 and long path / actual unseen crossmarket coverage remain open."
   ],
   "last_updated_utc": "2026-10-28T19:02:25.220588+00:00",
   "latest_publish_validation": {
@@ -2344,7 +2346,7 @@
     "published": true,
     "push_failure": "47 targets /392 collected /600s; two regressions being root-fixed, not waived by narrower daily gate"
   },
-  "next_action": "M6 TDD source-distinct freshness with historical confidence-version compatibility, then real same-company adoption independent acceptance.",
+  "next_action": "M8: root-fix shared source admission and continuity/attribution using saved M7 normalized snapshots; neutral positive/negative TDD, independent milestone review; no paid rank or full PDF replay until source checkpoint passes.",
   "c3_runtime_recovery_20261026": {
     "entry": "review/pdf-c3-20261026/RUNTIME_RECOVERY.md",
     "environment_independent": "PASS_ZERO_OPEN_25_TESTS_AND_REAL_WORKER_ENTRYPOINTS",
@@ -2949,18 +2951,14 @@
     "count_policy": "derive task count from remaining work, dependency and receiving cost; never fixed3",
     "no_author_implementation_started_by_root": true
   },
-  "owned_uncommitted_runtime": [
-    "src/company_wiki/source_catalog/official_source_flow.py (delegated new-template policy; not yet accepted)"
-  ],
+  "owned_uncommitted_runtime": [],
   "foreign_wip_preserved": [
     ".githooks/pre-push mode-only",
     "RF primary assurance/runs daily_alert/weekly_alert/weekly_manifest"
   ],
   "pause_requested_by_user": false,
   "paused_scope": "revoked by user mainline resume 2026-10-29",
-  "own_uncommitted_runtime": [
-    "src/company_wiki/source_catalog/official_source_flow.py (delegated new-template policy; not yet accepted)"
-  ],
+  "own_uncommitted_runtime": [],
   "qa_provisional_publication": {
     "code_commit": "c6c446d0eebc8f6e6f6903bd677c04eebaf65077",
     "branch": "master",
@@ -4026,7 +4024,7 @@
     "entry": "review/source-information-20261030/description-final/atomic-production-wiring/README.md"
   },
   "m5_source_quote_primary": {
-    "status": "REAL5_FIDELITY_RECOVERY_INDEPENDENT_PASS_NEW_TEMPLATE_POLICY_REVIEWED_PUBLICATION_IN_PROGRESS",
+    "status": "REAL5_FIDELITY_RECOVERY_AND_NEW_TEMPLATE_POLICY_PUBLISHED_EXACT_CI_SUCCESS",
     "entry": "review/source-information-20261030/description-final/M5_SOURCE_QUOTE_PRIMARY.md",
     "new_template_scope": "explicit selector0.9; missing projection; no sources/items; not global default",
     "author_tests": 65,
@@ -4084,13 +4082,77 @@
     }
   },
   "m6_rf_source_freshness": {
-    "status": "OPEN_P2_REAL_ACTUAL_ADOPTION_EXECUTED_FRESHNESS_DUPLICATE_WEIGHTING",
-    "entry": "review/source-information-20261030/description-final/M6_RF_SOURCE_FRESHNESS.md",
+    "status": "INDEPENDENT_PASS_PUBLISHED_EXACT_CI_SUCCESS_INSTALLED",
+    "entry": "review/source-information-20261030/description-final/m6-source-evidence-2/README.md",
     "before_confidence": 65.38058062293638,
-    "after_confidence": 65.39469303281442,
+    "after_confidence": 65.38058062293638,
     "revenue_numbers_unchanged": true,
     "new_model_calls": 0,
     "real_source_clock_verified": true,
-    "whole_adoption_accepted": false
+    "whole_adoption_accepted": "LOCAL_HISTORICAL_ASOF_SOURCE_SUMMARY_NATIVE_PARAMETER_FORMULA_NODE_PASS; NOT_FRESH_COMPANY_LOOP",
+    "algorithm_revision": "source-evidence/2",
+    "rf_reception": "INDEPENDENT_FINAL_PASS_0_OPEN_SOURCE_AND_ACTUAL_NATIVE_ADOPTION",
+    "formal_artifact_owner": "revenue-forecast/.planning/source-quote-adoption-20261030/m6-final-formal",
+    "cwp_native_copies_removed": true,
+    "rf_author_wip": null,
+    "registry_followup": "Actual old/new same-input audit false conflict fixed by finite calculation revision; old rows remain exact.",
+    "nullable_source_render": "None URL now plain source ID; unknown publication label; JSON unchanged.",
+    "root_real_fixture": "135KB two compressed historical native outputs; no network/native regression in existing smoke batch.",
+    "final_new_formal_snapshot": "RF/.planning/source-quote-adoption-20261030/m6-final-formal; exact prior input/4-row prefix retained; four source-evidence/2 rows, audit clean; confidence equal65.38058062293638.",
+    "publication": {
+      "status": "PUBLISHED_EXACT_CI_SUCCESS_INSTALLED",
+      "repository": "revenue-forecast",
+      "branch": "main",
+      "commit": "09be09742013eac244cecd201f97e108a4dd5d99",
+      "ci": {
+        "id": 41079560122,
+        "status": "completed",
+        "conclusion": "success",
+        "url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/41079560122"
+      },
+      "normal_pre_push": {
+        "passed": 650,
+        "skipped": 1,
+        "subtests_passed": 36,
+        "seconds": 46.16
+      },
+      "independent_final": "PASS_0_OPEN_16_PATHS_PLUS_FORMAL_ADDENDUM",
+      "installed": "3runtime+2references in2physical targets; repeated0writes; fresh native+legacy/registry/null rendering PASS",
+      "new_model_calls": 0,
+      "new_downloads": 0,
+      "unchanged": "originals/config/mother/RF3WIP/147baselineoutputs; foreignCWP hook mode",
+      "full_pwf_and_company_loop": "OPEN_NOT_CLAIMED"
+    },
+    "original_fault_after_confidence": 65.39469303281442
+  },
+  "m7_next": {
+    "entry": "review/source-information-20261030/description-final/M7_C3_SOURCE_HOLDOUT_NEXT.md",
+    "status": "FROZEN_SOURCE_REGRESSION_2P2_OPEN_NOT_BLIND",
+    "existing_frozen_sources": [
+      "c3-us-berkshire-letter-2008",
+      "c3-cn-huali-ir-202305"
+    ],
+    "candidate_started_this_turn": true,
+    "w18_not_blind": true,
+    "paid_run_started": false,
+    "archive": "review/source-information-20261030/description-final/m7-frozen-source-regression/README.md",
+    "normalized_support_sets_present": 20,
+    "fully_selected_support_sets": 0,
+    "count_interpretation": "all-support sets include identity/industry/financial context; not20 semantic errors or20 mandatory primary cards",
+    "open": [
+      "M7-01 important operating source admission/continuity omissions",
+      "M7-02 antecedent/conditions omitted"
+    ],
+    "replay": {
+      "berkshire": "exact selected spans",
+      "huali": "fresh work account differs; original r2 authoritative"
+    },
+    "observer_error": "snapshot native_source_view duplication >8MiB fixed in observer only, not product parser"
+  },
+  "m8_next": {
+    "entry": "review/source-information-20261030/description-final/M8_SOURCE_ADMISSION_AND_CONTEXT.md",
+    "status": "ROOT_CAUSE_DESIGN_TDD_NEXT",
+    "new_model_calls": 0,
+    "runtime_implementation_started": false
   }
 }

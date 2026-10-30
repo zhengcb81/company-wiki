@@ -1,0 +1,261 @@
+{
+  "schema_version": "rf-actual-adoption-independent-review/1",
+  "reviewed_at": "2026-10-30T14:13:17.049536+00:00",
+  "status": "REAL_LINEAGE_AND_NATIVE_PUBLICATION_VERIFIED_WITH_P2_OPEN",
+  "formal_RF_artifact_root": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\.planning\\source-quote-adoption-20261030\\v3",
+  "CWP_transient_originals_pending_ROOT_cleanup": true,
+  "open_findings": [
+    {
+      "id": "RF-DUPLICATE-CAPTURE-FRESHNESS",
+      "severity": "P2",
+      "owner": "scripts/analysis/confidence.py:calculate_confidence",
+      "cause": "Per-parameter freshness averages claim IDs; another quote from an already-used capture adds a fresh-source vote against an older independent source.",
+      "evidence": {
+        "baseline_score": 65.38058062293638,
+        "after_score": 65.39469303281442,
+        "observed_delta": 0.014112409878038079,
+        "independently_explained_delta": 0.014112409878040487,
+        "old_claim_mean": 0.95,
+        "new_claim_mean": 0.96,
+        "component_changes": {
+          "source_freshness": {
+            "baseline": 8.679411732699949,
+            "after": 8.693524142577989
+          }
+        }
+      },
+      "same_source_count_delta": 0,
+      "checked_date_is_not_cause": true,
+      "new_information": false,
+      "required_fix": "versioned evidence-origin aggregation invariant to duplicate same-capture claims/aliases; retain declared old confidence recomputation and old artifact bytes",
+      "M6_ROOT_fix_in_progress": true
+    }
+  ],
+  "passed_checks": {
+    "author_actual_artifact_seals": 25,
+    "preparation_code_seals": 8,
+    "recorded_RF_producer_paths": 8,
+    "RF_byte_identical_relocation_files": 26,
+    "actual_protocol": "reading-model-input/5",
+    "body_bytes": 532224,
+    "body_sha256": "c8ba536b8c64fcdbae64e7eeb5162507f57caeb5bcaab7d952efd331ae65a6b5",
+    "generation_sha256": "cd7d8244fd1887dc4b14fa28824d1c6663c02d8f04d9bcaa1ff4212727a1a4dc",
+    "bundle_parser": "0.1.1",
+    "actual_used_span_parser": "native_pdf_range_parser/0.1.0",
+    "original_bytes_new_official_publication_UUID_not_AUTO_restore": true,
+    "asof": "2026-10-08",
+    "prior_capture_evidence": {
+      "schema_version": "source-availability-evidence/1",
+      "source_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "available_by": "2026-10-08",
+      "basis": "prior_verified_capture",
+      "evidence_ref": "source-provenance:urn:company-wiki:document:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe:4b8cfb21c55f138416a1df5f0e75804f1ede71c32f265cd296765edf92452cef",
+      "locator": "/receipt/content_sha256 + /receipt/retrieved_at + /receipt/http_status"
+    },
+    "parameter_id": "equipment_units_base_2026",
+    "parameter_kind": "analyst_assumption",
+    "value": 1620,
+    "unit": "chambers",
+    "period": "FY2026",
+    "support_type": "rationale_support",
+    "formula": "Equipment/base/unit_sales/units/recognized_revenue",
+    "all_parameter_values_units_periods_currencies_kinds_preserved": true,
+    "unchanged_numeric_paths": {
+      "segments": 138,
+      "consolidated_forecast": 87
+    },
+    "partial_and_needs_review_preserved": true,
+    "registry_chain_verified_entries": 4,
+    "RF_output_metadata_unchanged": 147,
+    "extra_weekly_manifest_byte_hash_unchanged": true,
+    "temporary_lake_absent": true
+  },
+  "historical_producer": {
+    "git": "7b82d7ca949bb6aa02dadc45c29e005e948ef3fb",
+    "confidence_source_sha256": "8c1e6aca45b8698af0b734e833690a469bd56dc702724c41529dc8b68dae332b",
+    "current_reader_frontier_is_not_original_producer": true,
+    "source_hash_policy": "recorded producer paths verified against Git7b; current M6 code may legitimately differ, no pretend hash equality"
+  },
+  "old_failure_preservation": {
+    "v1": "sandbox native hardlink failure",
+    "v2": "author script used wrong summary_use.status assertion",
+    "v3": "formal run/report/snapshot complete, then final-receipt NameError; original failure.json retained",
+    "finalization": "saved artifacts only revalidated and receipt recovered, not a new v4 read/compute/snapshot",
+    "reviewer_probe_failure": "own inspection helper initially lacked subprocess import; corrected only own helper, no author-code change"
+  },
+  "review_methods": [
+    "author --check-only executed once after source inspection, before M6 implementation",
+    "own pure saved JSON, exact raw source sidecar/DownloadReceipt and original event generation validation",
+    "own exact full parameter and scenario-path comparison",
+    "own recorded Git7b parameter-weight owner plus arithmetic duplicate-freshness counterexample"
+  ],
+  "reviewer_calls": {
+    "model": 0,
+    "network": 0,
+    "downloads": 0,
+    "public_source_read": 0,
+    "PDF_parse": 0,
+    "formal_forecast_run": 0,
+    "snapshot_creation": 0,
+    "RF_writes": 0
+  },
+  "not_accepted": [
+    "P2 source-freshness scoring",
+    "numeric assumption calibrated by quote",
+    "precise accepted chamber count or revenue timing proved by product stages",
+    "full company buy-side workflow",
+    "all model numeric facts independently true",
+    "forecast accuracy",
+    "original AUTO history or artifact UUID restored"
+  ],
+  "next": "M6 independent review/new-source-evidence-2 real baseline+after recomputation; retain v3 old algorithm/bytes unchanged",
+  "artifact_seals": [
+    {
+      "path": ".planning\\summary-quality-20261030\\real-rf-adoption-v3\\baseline-after-comparison.json",
+      "bytes": 71258,
+      "sha256": "7aca0f86c78c76a72d9e0dd6c4c1c276afcf62e07428f221bf2246009f85f1d8"
+    },
+    {
+      "path": ".planning\\summary-quality-20261030\\real-rf-adoption-v3\\baseline-current-engine.json",
+      "bytes": 623305,
+      "sha256": "c35b518cc99629347f6fb67f8c405696b129817059aac7bfbdfba101ff506801"
+    },
+    {
+      "path": ".planning\\summary-quality-20261030\\real-rf-adoption-v3\\bindings.json",
+      "bytes": 1038,
+      "sha256": "bdd016a3d007bee0eebe4227f3d82daab72355ff2529ef582a941c00a610120c"
+    },
+    {
+      "path": ".planning\\summary-quality-20261030\\real-rf-adoption-v3\\cleanup.json",
+      "bytes": 123,
+      "sha256": "8d9331891e57de9514c2f82184519b23564617cf6a2ab9fe37e87c897238a037"
+    },
+    {
+      "path": ".planning\\summary-quality-20261030\\real-rf-adoption-v3\\confidence-diagnosis.json",
+      "bytes": 4532,
+      "sha256": "28f81ea5de36c3db8c46fe95531084f9359637822295b52169d164b696deee86"
+    },
+    {
+      "path": ".planning\\summary-quality-20261030\\real-rf-adoption-v3\\consumed-input-before-version.json",
+      "bytes": 290166,
+      "sha256": "7a4d72166ba5014e744aa78f56aded5c0ba25eb4afa4c19ad1575a9be76eb1e2"
+    },
+    {
+      "path": ".planning\\summary-quality-20261030\\real-rf-adoption-v3\\consumption-receipt.json",
+      "bytes": 10783,
+      "sha256": "65dce8afeafbca6f1d93d551207262c17d2ae811df556b14702f3a9d549652bc"
+    },
+    {
+      "path": ".planning\\summary-quality-20261030\\real-rf-adoption-v3\\failure.json",
+      "bytes": 251,
+      "sha256": "86634ed89a81568b76deecdd9565a7ffac95958874058e7b9b25a52960263299"
+    },
+    {
+      "path": ".planning\\summary-quality-20261030\\real-rf-adoption-v3\\finalization-recovered.json",
+      "bytes": 205,
+      "sha256": "4103de0bfec1da2450a702357bf53429366f3c1f549a6db37cc1c5ded8e61769"
+    },
+    {
+      "path": ".planning\\summary-quality-20261030\\real-rf-adoption-v3\\forecast.json",
+      "bytes": 626021,
+      "sha256": "13077ffa09437bd6e9d393d753f54250f8fa1df1034b82620ee2774fb0566e65"
+    },
+    {
+      "path": ".planning\\summary-quality-20261030\\real-rf-adoption-v3\\HANDOFF.md",
+      "bytes": 4198,
+      "sha256": "f2dca608ff9717f43505e6945f950e53be58f0e7205ef6db227a4a47aef36367"
+    },
+    {
+      "path": ".planning\\summary-quality-20261030\\real-rf-adoption-v3\\input.json",
+      "bytes": 290184,
+      "sha256": "1b1d9eba2242fb13968ff96880b375cf69690a505c90200aa8638a1827347d8c"
+    },
+    {
+      "path": ".planning\\summary-quality-20261030\\real-rf-adoption-v3\\network-attempts.jsonl",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": ".planning\\summary-quality-20261030\\real-rf-adoption-v3\\progress.json",
+      "bytes": 143,
+      "sha256": "67ec80811b26374b8a1e2e9136ec331b0bf61cf4a0b85276edfbcdbf78e59cc4"
+    },
+    {
+      "path": ".planning\\summary-quality-20261030\\real-rf-adoption-v3\\protected-before.json",
+      "bytes": 2488,
+      "sha256": "9e14de94cd1a0b6f43e35f7b66626e5a0ac5ab716d5db1bfcb716d8e854951c2"
+    },
+    {
+      "path": ".planning\\summary-quality-20261030\\real-rf-adoption-v3\\public-read-command.json",
+      "bytes": 496,
+      "sha256": "aca077c9c69135539b6994f956eae4a4f6d349c239fca18b9fc76ec460fdbc7c"
+    },
+    {
+      "path": ".planning\\summary-quality-20261030\\real-rf-adoption-v3\\public-read.body.json.gz",
+      "bytes": 116361,
+      "sha256": "52fb7b375221ada10fa81d7f88e8cdb6d1a7c063b83f1f6a2248f9c640a08c9a"
+    },
+    {
+      "path": ".planning\\summary-quality-20261030\\real-rf-adoption-v3\\public-read.stderr.json",
+      "bytes": 2399,
+      "sha256": "5e44b31f18dd40d4833137e22f8822bbef951a1078deb2e07e8d5aa6d772783e"
+    },
+    {
+      "path": ".planning\\summary-quality-20261030\\real-rf-adoption-v3\\publication-registry.jsonl",
+      "bytes": 3058,
+      "sha256": "a74759cc460321d00917aaef60621b1da68e1e60d08c546cf77131f2c47ec7ec"
+    },
+    {
+      "path": ".planning\\summary-quality-20261030\\real-rf-adoption-v3\\read-request.json",
+      "bytes": 1021,
+      "sha256": "708e801a4997fd84f14321be52cfa222aa38755a52a62009ff1c4b8d46e49340"
+    },
+    {
+      "path": ".planning\\summary-quality-20261030\\real-rf-adoption-v3\\receipt.json",
+      "bytes": 2152,
+      "sha256": "f25c8516ea901f10e7b99384d6b5e20714ef60ab1b427b565d8ecc18b3499a8f"
+    },
+    {
+      "path": ".planning\\summary-quality-20261030\\real-rf-adoption-v3\\report.md",
+      "bytes": 110074,
+      "sha256": "20599cd3ebe87385d95d0d1821984f56ba9b734f5f08ff0e4ba1330b0972ff17"
+    },
+    {
+      "path": ".planning\\summary-quality-20261030\\real-rf-adoption-v3\\run-history.json",
+      "bytes": 744,
+      "sha256": "483a2ee1f06d7933a8a973459f9beec93e2f42af5fef670b287a366bcfc448a8"
+    },
+    {
+      "path": ".planning\\summary-quality-20261030\\real-rf-adoption-v3\\snapshot.json",
+      "bytes": 942709,
+      "sha256": "374226b71f72ae61a2e7bd2ba8ef36630167a9c939f0d586ceb5537bd3eacefb"
+    },
+    {
+      "path": ".planning\\summary-quality-20261030\\real-rf-adoption-v3\\source-registration.json",
+      "bytes": 2285,
+      "sha256": "27ee25dae85980270541a6bf578674dc31860dd5dc30a7c12df4b90f69a11c20"
+    }
+  ],
+  "reception_evidence_seals": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\.planning\\source-quote-adoption-20261030\\v3\\seal.json",
+      "bytes": 9480,
+      "sha256": "1fe14aad75586e18ccfa66a9d5ba8b03119f35ddd4256cbc4df4236a572feb3f"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\.planning\\source-quote-adoption-20261030\\v3\\relocation-seal.json",
+      "bytes": 11046,
+      "sha256": "9ecd01024b716374122fd3c5c8fde18374c228b25e093816cdd4d84746f0c2b3"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\summary-quality-20261030\\rf-actual-adoption-independent\\pure-checks.json",
+      "bytes": 1721,
+      "sha256": "0326cd0826b801916d688cc6e1eeb4bbddd1b23a8548067c6bed364300e220e4"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\summary-quality-20261030\\rf-actual-adoption-independent\\inspection.json",
+      "bytes": 15140,
+      "sha256": "e1d3d1ed0b6520b5293463fc11b1299f3887cfc1a7dd8b4c0b540410d011c978"
+    }
+  ]
+}

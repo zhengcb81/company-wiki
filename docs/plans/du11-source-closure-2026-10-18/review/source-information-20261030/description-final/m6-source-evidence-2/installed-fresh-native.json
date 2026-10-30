@@ -1,0 +1,21 @@
+{
+  "status": "PASS",
+  "targets": [
+    {
+      "status": "PASS_FRESH_INSTALLED_NATIVE_LEGACY_NEW_NULLABLE_AND_REGISTRY",
+      "target": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+      "confidence": 65.38058062293638,
+      "network_calls": 0,
+      "schema_engine_unchanged": true
+    },
+    {
+      "status": "PASS_FRESH_INSTALLED_NATIVE_LEGACY_NEW_NULLABLE_AND_REGISTRY",
+      "target": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast",
+      "confidence": 65.38058062293638,
+      "network_calls": 0,
+      "schema_engine_unchanged": true
+    }
+  ],
+  "owned_test_roots_removed": true,
+  "repeat_install_written": 0
+}

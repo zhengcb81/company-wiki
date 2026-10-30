@@ -1,0 +1,192 @@
+{
+  "schema_version": "rf-confidence-m6-independent-seal/1",
+  "sealed_at": "2026-10-30T15:12:53.157876+00:00",
+  "status": "PASS_SCOPED_FINAL",
+  "files": [
+    {
+      "path": "scripts/analysis/confidence.py",
+      "bytes": 17909,
+      "raw_sha256": "ba54a0c28a568a68aebb6cb8a1fde438c73fcfada4ffc3bfb16613d91f95b820",
+      "lf_sha256": "ba54a0c28a568a68aebb6cb8a1fde438c73fcfada4ffc3bfb16613d91f95b820"
+    },
+    {
+      "path": "scripts/revenue_report.py",
+      "bytes": 96329,
+      "raw_sha256": "ed59022cd0e67968d79eaf4bf16fa1ea886d46be17afa1c5aa478ab23c2eb62f",
+      "lf_sha256": "1d077e6bfb11c17c56a92d1341a7132e4fdee8acec68ba4f106e6f1c085a0eb5"
+    },
+    {
+      "path": "tests/test_confidence_source_freshness.py",
+      "bytes": 9707,
+      "raw_sha256": "14181b9bfa208251653b1d2320a6dc27255c4355526a02ca476b3ca928962513",
+      "lf_sha256": "14181b9bfa208251653b1d2320a6dc27255c4355526a02ca476b3ca928962513"
+    },
+    {
+      "path": "tests/test_confidence_determinism.py",
+      "bytes": 9180,
+      "raw_sha256": "c28f81089db16b138256273e5753cfa1be1f128632c85513d372cb62579a10f5",
+      "lf_sha256": "c28f81089db16b138256273e5753cfa1be1f128632c85513d372cb62579a10f5"
+    },
+    {
+      "path": "docs/implementation/confidence-stability/source-evidence-2.md",
+      "bytes": 1478,
+      "raw_sha256": "3cb92befd5be23c5dd9e5753879dfda225ef0d107b1f31d97aa1f2047b0da99e",
+      "lf_sha256": "c7d4b32f17c6fd64652bd62bf5fa45cdab1c46aaf3e33d79e583ee0bcc36e8cb"
+    },
+    {
+      "path": "references/output-schema.md",
+      "bytes": 8473,
+      "raw_sha256": "0ccfe9074fd249403387066bfdaa50da12f1c598d6a99ef96b1a7c08b72cd30e",
+      "lf_sha256": "3eed9e77328bc96bb0ee183e85f95058ba9f1bcb52312ceac216ce2854ef9e95"
+    },
+    {
+      "path": "references/data-governance.md",
+      "bytes": 7915,
+      "raw_sha256": "a29aa15e9e9ca00c736a5c659ffd7358d82017b71ef1cc07bfa9db31b5e6c2b1",
+      "lf_sha256": "a5a368e6e80f5948046c867c3717e6df6dccbfa426a78169fe098e32378a6d6b"
+    },
+    {
+      "path": "tests/test_real_source_quote_confidence.py",
+      "bytes": 4652,
+      "raw_sha256": "02afc48f8c72ab2cac9d232499cc7ea7b343d72f21edbbf0b207b3f258e95202",
+      "lf_sha256": "5729802adb553dc135ee51c52124792a50721978175d61e87ea92b7189eecaa1"
+    },
+    {
+      "path": "tests/fixtures/source_quote_confidence/baseline-stable-fsum-1.json.gz",
+      "bytes": 66767,
+      "raw_sha256": "b72be93ce429c10f9e61c10b9c408017607b2d6ebbf01951007c958e6ce11244",
+      "lf_sha256": "b72be93ce429c10f9e61c10b9c408017607b2d6ebbf01951007c958e6ce11244"
+    },
+    {
+      "path": "tests/fixtures/source_quote_confidence/adopted-stable-fsum-1.json.gz",
+      "bytes": 67588,
+      "raw_sha256": "30455f9caad7e7e5d888994d301fbb3b0d0cdd523ea46580309940d660a31278",
+      "lf_sha256": "30455f9caad7e7e5d888994d301fbb3b0d0cdd523ea46580309940d660a31278"
+    },
+    {
+      "path": "tests/fixtures/source_quote_confidence/README.md",
+      "bytes": 1003,
+      "raw_sha256": "0732878a32190404ee0d69e9eea500a1b9a648ef7647c1087bc83aaeb2c2b19c",
+      "lf_sha256": "7b90654be5a0584273ecd930683dba9296a54c86fa36486496efce40cff6b1f8"
+    },
+    {
+      "path": "tools/pre_push_gate.py",
+      "bytes": 5407,
+      "raw_sha256": "f09d879cd050c74d362dcbf525fcedc37afac4e6a747d0e3ba840e33cd08f0c4",
+      "lf_sha256": "b795fa660417c89f01c7660fee7d130fc06ab29146969d492d632d8e2d9f1ffa"
+    },
+    {
+      "path": "tests/test_ci_smoke_plan.py",
+      "bytes": 2920,
+      "raw_sha256": "29018dfdb531596350cf72a7991c58114ca06c84418713e63bb2a55a5aa79bd0",
+      "lf_sha256": "d851c04cfd61157795f26f171de5be47ab00d1ec6cfaf12133c87c7f8dcef91a"
+    },
+    {
+      "path": "scripts/publication_registry.py",
+      "bytes": 12023,
+      "raw_sha256": "abe227876730c720a14eaacc78ebe99b07d248492299fae0f4a94284b17850dd",
+      "lf_sha256": "abe227876730c720a14eaacc78ebe99b07d248492299fae0f4a94284b17850dd"
+    },
+    {
+      "path": "tests/test_registry_confidence_generations.py",
+      "bytes": 7176,
+      "raw_sha256": "5b2809818bf41974b878cc33c7dcf9d49ebfb098835b2a512e094d1081c53df9",
+      "lf_sha256": "5b2809818bf41974b878cc33c7dcf9d49ebfb098835b2a512e094d1081c53df9"
+    },
+    {
+      "path": "docs/implementation/confidence-stability/registry-generations.md",
+      "bytes": 1170,
+      "raw_sha256": "e5f75275af9b092e17d7a16bb16a6831503a41fcdb6c33b5fee2f2972742e43f",
+      "lf_sha256": "156d43c6c124145d78b5f2de256ff20e1132693318f68601e823f8511a54b6ce"
+    }
+  ],
+  "protected_wip": [
+    {
+      "path": "assurance/runs/daily_alert.jsonl",
+      "bytes": 7215,
+      "raw_sha256": "a3f8b3f0c5a9831aa73d4b7468626daff57639602afa5282487fcdf2b338120a",
+      "lf_sha256": "c3966654778acabc6a29625cf2797443098f58cce3e993194c7d193ba8518637"
+    },
+    {
+      "path": "assurance/runs/weekly_alert.jsonl",
+      "bytes": 1182,
+      "raw_sha256": "b57727e979a65f2313f9a80033dd71f8d8406aeb070f283640ed9bbb354cfc0e",
+      "lf_sha256": "6f5c7f6d08dae8959253de074cf73d696f9728dafdaa11d22af5a44576491946"
+    },
+    {
+      "path": "assurance/runs/weekly_manifest.json",
+      "bytes": 364,
+      "raw_sha256": "44e46cd57e5373803fbdaa5dff5e93041840b8e8cc671e710e0346a133c4df97",
+      "lf_sha256": "4098f5a347b3dbb882d656712021eb407dfd9cfe9fbe12285957dafabff4ee9b"
+    }
+  ],
+  "RF_output_metadata_unchanged_files": 147,
+  "final_frontier_stable_during_replay": true,
+  "actual_evidence_sha256": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\.planning\\source-quote-adoption-20261030\\m6-formal\\baseline-input.json",
+      "bytes": 251843,
+      "sha256": "578f706b7a18eceb5080b5230eaef6c960797122f5d33f290e796e15749a3a14"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\.planning\\source-quote-adoption-20261030\\m6-formal\\adopted-input.json",
+      "bytes": 253028,
+      "sha256": "c485588488fbc5246058b909550fd637ed85504dabe7d333c1fa9b6f9b392438"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\.planning\\source-quote-adoption-20261030\\m6-formal\\baseline-forecast.json",
+      "bytes": 527946,
+      "sha256": "e909358ac3d143dfd2a11dee6465eccc5285c6263cc2a6c14d48138ad95b3bb2"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\.planning\\source-quote-adoption-20261030\\m6-formal\\adopted-forecast.json",
+      "bytes": 530316,
+      "sha256": "8c1402cd68906a114c25948e2b4045d4bdd82c276cb81cc93312031ce286b1ca"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\.planning\\source-quote-adoption-20261030\\m6-formal\\snapshot.json",
+      "bytes": 783883,
+      "sha256": "f54bf260703f2c606beddeaf2de62374cc206e5d05d6011307b7d09d2ffe2aa5"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\.planning\\source-quote-adoption-20261030\\m6-formal\\publication-registry.jsonl",
+      "bytes": 3058,
+      "sha256": "92eff5782a7802afea00b89d323eedc06373e6e13fbe5f416cea0f780e60cc2d"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\.planning\\source-quote-adoption-20261030\\m6-formal\\report.md",
+      "bytes": 110076,
+      "sha256": "4558d72b7400d58a84885ce43b3e3348978952c792cc997c7db1297177ef4330"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\.planning\\source-quote-adoption-20261030\\m6-formal\\failed-check.json",
+      "bytes": 332,
+      "sha256": "96410c7332424bfbecd4baf6ec3830f63b0d06f980b1d921c3b5992589f1c2d7"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\.planning\\source-quote-adoption-20261030\\m6-formal\\TRUST_BOUNDARY.md",
+      "bytes": 777,
+      "sha256": "d0358a3a4181cf013d4eed9c5dc25f8ba1ee32f3273a8e5bb2c108c537240940"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\.planning\\source-quote-adoption-20261030\\m6-formal\\verify_formal.py",
+      "bytes": 2774,
+      "sha256": "84c7a5a9593a9fccff0d7d07176f265385d9af50ad7b1fa2048c899766b6a2a6"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\.planning\\source-quote-adoption-20261030\\v3\\seal.json",
+      "bytes": 9480,
+      "sha256": "1fe14aad75586e18ccfa66a9d5ba8b03119f35ddd4256cbc4df4236a572feb3f"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\.planning\\source-quote-adoption-20261030\\v3\\relocation-seal.json",
+      "bytes": 11046,
+      "sha256": "9ecd01024b716374122fd3c5c8fde18374c228b25e093816cdd4d84746f0c2b3"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\summary-quality-20261030\\real-rf-adoption-relocation\\cwp-native-cleanup.json",
+      "bytes": 4626,
+      "sha256": "c9e7a409e84428b2423eed50776a14f7871b50f285b8d48f834e27fcdc2eac41"
+    }
+  ]
+}

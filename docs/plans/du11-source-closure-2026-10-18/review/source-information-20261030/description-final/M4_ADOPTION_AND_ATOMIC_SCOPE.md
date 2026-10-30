@@ -1,3 +1,7 @@
+> 2026-10-30 M6发布后当前指针：/7工程/真实不足与RF采用计划已被M5引用式主线及M6完整验收接续；旧/7问题不重写为已消失，也不要再复制其付费实验。 唯一当前状态在上级CURRENT_STATUS.md/json；下一操作见 [M7](M7_C3_SOURCE_HOLDOUT_NEXT.md)，最终证据见 [M6验收](m6-source-evidence-2/README.md)。
+
+---
+
 # M4 后续：单条摘要限定与真实 RF 采用
 
 唯一总入口仍为本计划 CURRENT_STATUS.md/json。本文件补充 SUMMARY_QUALITY_IMPLEMENTATION.md，不建立第二目标或执行队列。M3b工程已发布 ee27c962；真实 `/6` v1、消费者零付费重放和自然语言独审分别保留，不能互相代签。

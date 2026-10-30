@@ -1,3 +1,7 @@
+> 2026-10-30 M6发布后当前指针：此文件保留/6接线的历史责任；当前主线新raw模板用既有/5原文引用，旧/4/6/7按原声明读取。 唯一当前状态在上级CURRENT_STATUS.md/json；下一操作见 [M7](M7_C3_SOURCE_HOLDOUT_NEXT.md)，最终证据见 [M6验收](m6-source-evidence-2/README.md)。
+
+---
+
 # M3 接线细则（工程已实施，真实节点继续）
 
 当前M3b工程实现见 fidelity-production-wiring/README.md；下文为设计合同，真实保真、恢复和RF实际采用仍须分别验收。生产默认尚未切换。

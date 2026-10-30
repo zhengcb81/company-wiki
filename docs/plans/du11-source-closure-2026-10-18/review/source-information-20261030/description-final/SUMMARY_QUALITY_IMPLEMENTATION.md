@@ -1,3 +1,7 @@
+> 2026-10-30 M6发布后当前指针：M1–M6本局部已验收发布；本文件是原实施细则，禁止作为新待办重开。 唯一当前状态在上级CURRENT_STATUS.md/json；下一操作见 [M7](M7_C3_SOURCE_HOLDOUT_NEXT.md)，最终证据见 [M6验收](m6-source-evidence-2/README.md)。
+
+---
+
 # 实施细则：摘要覆盖/保真与非期次复用
 
 基线6894f5ee，选定PWF不变。独立设计审查在本机 `.planning/summary-quality-20261030/{summary-design.md,nonperiodic-design/review.md}`，发布工程节点时归档。只在大节点独审，不增加材料授权或小节点签收；原件、生产配置、原生收费账保持。

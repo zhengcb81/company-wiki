@@ -1,12 +1,12 @@
-## 2026-10-30 当前：真实引用与恢复通过，RF采用暴露同源新鲜度计票共因
+## 2026-10-30 当前：M1–M6局部验收发布；M7新来源暴露遗漏，进入M8共因修复
 
-唯一入口 CURRENT_STATUS.md/json；已通过部分见[M5](review/source-information-20261030/description-final/M5_SOURCE_QUOTE_PRIMARY.md)，**当前唯一下一步 [M6置信度来源新鲜度根修](review/source-information-20261030/description-final/M6_RF_SOURCE_FRESHNESS.md)**。原/7四P2/两P3仍保留；完整support/context的/5真实8卡已独审保真通过、真实激活/同run/跨run总1POST，母账1,827,558tokens/$0.732814含unknown、额度不变。不是全文/holdout完成。
+唯一入口 CURRENT_STATUS.md/json。已发布的[M6源quote/恢复/非期次/RF采用节点](review/source-information-20261030/description-final/m6-source-evidence-2/README.md)保持通过：CWP599f6cf6、RF09be0974均精确CI成功；技能定点同步/重复零写/新进程验收通过。真实H1 quote→RF实际参数/公式、同input旧registry保留、新方法两份全confidence65.38058062293638一致；不是完整新公司研究。
 
-已发布CWP8b939b9c/CI41064827392 success（短门167P/54.15秒），RF7b82d7ca/CI41064039519 success，RF两runtime定点部署、重复零写、两新进程真实native输入validate-only通过。新raw模板的共享引擎显式/5选择65P作者/38P独审，旧DTO/旧省略/4及冻结恢复不变；当前提交发布，不称全局默认已切。
+[M7两份既有冻结来源](review/source-information-20261030/description-final/m7-frozen-source-regression/README.md)已完成0POST候选冻结。华利80units/17candidates/4spans/2tasks，Berkshire269/66/7/2；原文20/20支持均可见，但重要业务信息未进入候选，GEICO we/our缺主体、华利“活性。”缺前置条件。两项P2仍OPEN；先修源，不用付费rank掩盖，也不把旧gold全当独立主卡。该回归非blind。
 
-中微已付费H1 /5经正式原字节/旧generation恢复、2026-10-08可靠prior_verified_capture读回和112locator验证、RF summary_use→实际equipment_units_base_2026/units公式→原生formal报告/snapshot实际走通。模型数值/单位/币种/期次与三情景不变；confidence却因同H1多一条rationale由65.38058062293638→65.39469303281442，已确定published_date新鲜度按claim条数平均的共因。**P2未关闭，不能总签RF验收。** 零新增模型/网络；原v3仅收尾NameError，保留failure并从保存产物纯finish，不伪造原整体成功。
+**唯一下一步：M8共享准入与段落/主体上下文根修。** 先按实际阶段追踪，区分原文可读性/支持能力、业务相关性排序和预算deferred；中英未知实体、静态描述、客户/行业/子业务、条件/否定与纯财务/套话负对照TDD。细则进入[M8实施计划](review/source-information-20261030/description-final/M8_SOURCE_ADMISSION_AND_CONTEXT.md)。不补公司词、不抬额度、不重读整PDF；关键节点独审后才真实rank/恢复/RF复验。
 
-下一步先在RF confidence责任层做同源重复不变/真实新来源有效的TDD、旧算法历史兼容和独审，复用真实input复算，再完成实际采用独审。之后W21 canonicalC2/长路径、US RPO、跨市场holdout与完整八步公司loop继续OPEN。原件/config/他人WIP/Dayu/IQS/Dashboard保持，不新增人审许可。
+M6/M7无新模型费用；母账仍1,827,558tokens/$0.732814含历史unknown，原件/config、外来hook mode、RF3WIP/147output及Dayu/IQS/Dashboard保持。W21 canonicalC2/长路径、US RPO及真US监管PDF/HK新coverage、药明康德W12新attempt→药明合联→Snowflake和完整八步公司清单仍OPEN。旧暂停/待签收/旧next均为历史，不增加小节点门禁。
 
 ---
 以下为历史记录，不是额外执行入口。

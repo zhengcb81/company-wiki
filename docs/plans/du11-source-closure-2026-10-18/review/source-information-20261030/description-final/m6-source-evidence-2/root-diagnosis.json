@@ -1,0 +1,101 @@
+{
+  "synthetic_calculation_only": {
+    "baseline": {
+      "score": 63.0,
+      "freshness": 9.0,
+      "quality": 14.0,
+      "coverage": 1.0
+    },
+    "clone_new_id_same_source_excerpt": {
+      "score": 63.33333333333333,
+      "freshness": 9.333333333333332,
+      "quality": 13.999999999999996,
+      "coverage": 1.0
+    },
+    "clone_older_source": {
+      "score": 62.666666666666664,
+      "freshness": 8.666666666666668,
+      "quality": 13.999999999999996,
+      "coverage": 1.0
+    },
+    "same_content_rechecked_later": {
+      "score": 63.0,
+      "freshness": 9.0,
+      "quality": 14.0,
+      "coverage": 1.0
+    },
+    "same_sha_alias_equal_date": {
+      "score": 63.33333333333333,
+      "freshness": 9.333333333333332,
+      "quality": 13.999999999999996,
+      "coverage": 1.0
+    },
+    "same_sha_alias_conflicting_newer_date": {
+      "score": 63.33333333333333,
+      "freshness": 9.333333333333332,
+      "quality": 13.999999999999996,
+      "coverage": 1.0
+    },
+    "genuine_new_capture": {
+      "score": 63.33333333333333,
+      "freshness": 9.333333333333332,
+      "quality": 13.999999999999996,
+      "coverage": 1.0
+    },
+    "independent_measurement_same_capture": {
+      "score": 63.33333333333333,
+      "freshness": 9.333333333333332,
+      "quality": 13.999999999999996,
+      "coverage": 1.0
+    },
+    "same_claims_different_evidence_role": {
+      "score": 66.0,
+      "freshness": 9.0,
+      "quality": 17.0,
+      "coverage": 1.0
+    },
+    "mixed_quality_baseline": {
+      "score": 66.0,
+      "freshness": 9.0,
+      "quality": 17.0,
+      "coverage": 1.0
+    },
+    "mixed_quality_duplicate_exact": {
+      "score": 66.66666666666667,
+      "freshness": 8.666666666666668,
+      "quality": 18.0,
+      "coverage": 1.0
+    }
+  },
+  "legal_m1_null_publication": {
+    "source_contract": "PASS",
+    "published_date": null,
+    "confidence": "ERROR",
+    "type": "ForecastInputError",
+    "message": "published_date must be an ISO date"
+  },
+  "actual_case": {
+    "baseline": {
+      "input_validation": "PASS",
+      "score": 65.38058062293638,
+      "freshness": 8.679411732699949,
+      "quality": 14.0,
+      "coverage": 1.0
+    },
+    "adopted": {
+      "input_validation": "PASS",
+      "score": 65.39469303281442,
+      "freshness": 8.693524142577989,
+      "quality": 14.0,
+      "coverage": 1.0
+    },
+    "delta": 0.014112409878038079,
+    "freshness_delta": 0.014112409878039855,
+    "same_source_sha_reused": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+    "actual_input_sha256": "1b1d9eba2242fb13968ff96880b375cf69690a505c90200aa8638a1827347d8c"
+  },
+  "network_attempts": 0,
+  "model_posts": 0,
+  "raw_opens": 0,
+  "production_edits": false
+}

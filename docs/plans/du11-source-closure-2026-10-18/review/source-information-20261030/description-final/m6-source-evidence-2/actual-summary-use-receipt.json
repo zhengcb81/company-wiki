@@ -1,0 +1,246 @@
+{
+  "schema_version": "revenue-narrative-consumption/1",
+  "status": "consumed",
+  "narrative_ref": {
+    "schema_version": "narrative-ref/1",
+    "artifact_version_id": "narrative-94f6a866a1044675a80ae8ff9a1be2dc",
+    "artifact_sha256": "c8ba536b8c64fcdbae64e7eeb5162507f57caeb5bcaab7d952efd331ae65a6b5",
+    "byte_size": 532224,
+    "source_ref": {
+      "schema_version": "2.0",
+      "document_id": "urn:company-wiki:document:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "byte_size": 3149962,
+      "mime_type": "application/pdf"
+    }
+  },
+  "read_at": "2026-10-30T13:53:29.201305+00:00",
+  "quality_status": "needs_review",
+  "selection": {
+    "candidate_count": 1836,
+    "coverage_complete": false,
+    "dropped_financial_count": 219,
+    "lines_total": 0,
+    "omitted_candidate_count": 1724,
+    "pages_read": 210,
+    "pages_total": 210,
+    "selected_count": 112,
+    "source_units": 4614,
+    "status": "partial",
+    "tables_scanned": 3,
+    "tables_total": 123
+  },
+  "dependencies": [
+    {
+      "span_id": "urn:company-wiki:evidence-span:sha256:486e7fc6e0bdcc46de022cbbca9b39a9a1630c6e9621abce1e725c66f270e763",
+      "locator": "loc:v1/page:16/paragraph:5/chars:176-347",
+      "parser_name": "native_pdf_range_parser",
+      "parser_version": "0.1.0",
+      "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "source_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+      "claim_id": "claim_cwp_h1_icp_quote_adoption_20261030",
+      "parameter_id": "equipment_units_base_2026",
+      "formula_refs": [
+        {
+          "segment": "Equipment",
+          "scenario": "base",
+          "model": "unit_sales",
+          "driver": "units",
+          "output": "recognized_revenue"
+        }
+      ]
+    }
+  ],
+  "citation_trace": {
+    "schema_version": "revenue-narrative-citation-trace/1",
+    "status": "closed",
+    "reading": {
+      "present": true,
+      "schema_version": "du-production-reading/3",
+      "attribution": "source_owned_views",
+      "group_count": 69,
+      "citation_view_count": 69,
+      "unread": {
+        "counts": {
+          "opaque_pages": 0,
+          "deferred_pages": 120,
+          "deferred_unit_ids": 256,
+          "unassigned_unit_ids": 1069
+        },
+        "limited": true,
+        "opaque_pages": 0,
+        "deferred_pages": 32,
+        "deferred_unit_ids": 32,
+        "unassigned_unit_ids": 32,
+        "native_scan": "partial",
+        "structure_complete": false
+      },
+      "deferred": {
+        "count": 624,
+        "listed": 32,
+        "limited": true
+      },
+      "selection_diagnostics": [
+        {
+          "code": "budget_full",
+          "count": 464
+        }
+      ],
+      "layout_complete": false,
+      "coverage_note": "diagnostic_only_not_a_permission_gate"
+    },
+    "dependencies": [
+      {
+        "claim_id": "claim_cwp_h1_icp_quote_adoption_20261030",
+        "parameter_id": "equipment_units_base_2026",
+        "span_id": "urn:company-wiki:evidence-span:sha256:486e7fc6e0bdcc46de022cbbca9b39a9a1630c6e9621abce1e725c66f270e763",
+        "closure": "citation_view",
+        "group_id": "urn:company-wiki:reading-group:sha256:deae0a3442900efd0c362aaadd1850a9613fccf8547c5953f6d710b3c75711db",
+        "group_kind": "native_continuity",
+        "section_role": "unknown",
+        "view_index": 0,
+        "source_role": "company_filing",
+        "support_evidence_ids": [
+          "urn:company-wiki:evidence-span:sha256:486e7fc6e0bdcc46de022cbbca9b39a9a1630c6e9621abce1e725c66f270e763"
+        ],
+        "context_evidence_ids": [
+          "urn:company-wiki:evidence-span:sha256:c4276269b7f3ea91b2d9efe041dc00ab8f1ae30b48ada307bfe41aa6c03a68ed",
+          "urn:company-wiki:evidence-span:sha256:1fb92ca6c3d7e8cc750c257a7040cb5ca4169930c7d5542cf558d0412c431b6c"
+        ],
+        "context_evidence": [
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:c4276269b7f3ea91b2d9efe041dc00ab8f1ae30b48ada307bfe41aa6c03a68ed",
+            "locator": "loc:v1/page:9/paragraph:19",
+            "source_role": "company_filing"
+          },
+          {
+            "span_id": "urn:company-wiki:evidence-span:sha256:1fb92ca6c3d7e8cc750c257a7040cb5ca4169930c7d5542cf558d0412c431b6c",
+            "locator": "loc:v1/page:15/paragraph:43",
+            "source_role": "company_filing"
+          }
+        ],
+        "context_evidence_count": 2,
+        "context_evidence_limited": false,
+        "projected": null
+      }
+    ],
+    "counts": {
+      "dependencies": 1,
+      "view_closed": 1,
+      "group_only": 0,
+      "ungrouped": 0,
+      "context_evidence": 2,
+      "context_evidence_unknown": 0,
+      "context_evidence_limited": 0
+    }
+  },
+  "summary_use": {
+    "schema_version": "revenue-summary-use/1",
+    "status": "used_in_parameter_rationale",
+    "narrative_ref": {
+      "schema_version": "narrative-ref/1",
+      "artifact_version_id": "narrative-94f6a866a1044675a80ae8ff9a1be2dc",
+      "artifact_sha256": "c8ba536b8c64fcdbae64e7eeb5162507f57caeb5bcaab7d952efd331ae65a6b5",
+      "byte_size": 532224,
+      "source_ref": {
+        "schema_version": "2.0",
+        "document_id": "urn:company-wiki:document:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+        "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+        "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+        "byte_size": 3149962,
+        "mime_type": "application/pdf"
+      }
+    },
+    "claims_sha256": "fe19d99b6302d05e6ff1816e99f2b837f0c1f9df54b44d992bbbce06a90fc8e8",
+    "quality_status": "needs_review",
+    "selection": {
+      "candidate_count": 1836,
+      "coverage_complete": false,
+      "dropped_financial_count": 219,
+      "lines_total": 0,
+      "omitted_candidate_count": 1724,
+      "pages_read": 210,
+      "pages_total": 210,
+      "selected_count": 112,
+      "source_units": 4614,
+      "status": "partial",
+      "tables_scanned": 3,
+      "tables_total": 123
+    },
+    "draft_status": "needs_review",
+    "assessment_sha256": null,
+    "semantic_status": null,
+    "subfact_coverage_status": null,
+    "entries": [
+      {
+        "summary_claim_id": "t24-source",
+        "summary_claim_sha256": "8cd71d6fe5fda95e41b2bdd31b7406de108b3740e2c3136c60d98792f81e3347",
+        "claim_type": "company_statement",
+        "modality": "uncertain",
+        "needs_review": true,
+        "support_evidence_ids": [
+          "urn:company-wiki:evidence-span:sha256:486e7fc6e0bdcc46de022cbbca9b39a9a1630c6e9621abce1e725c66f270e763"
+        ],
+        "context_evidence_ids": [
+          "urn:company-wiki:evidence-span:sha256:c4276269b7f3ea91b2d9efe041dc00ab8f1ae30b48ada307bfe41aa6c03a68ed",
+          "urn:company-wiki:evidence-span:sha256:1fb92ca6c3d7e8cc750c257a7040cb5ca4169930c7d5542cf558d0412c431b6c"
+        ],
+        "source_ref": {
+          "byte_size": 3149962,
+          "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+          "document_id": "urn:company-wiki:document:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+          "mime_type": "application/pdf",
+          "schema_version": "2.0",
+          "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe"
+        },
+        "span_id": "urn:company-wiki:evidence-span:sha256:486e7fc6e0bdcc46de022cbbca9b39a9a1630c6e9621abce1e725c66f270e763",
+        "rf_claim_id": "claim_cwp_h1_icp_quote_adoption_20261030",
+        "parameter_id": "equipment_units_base_2026",
+        "formula_refs": [
+          {
+            "segment": "Equipment",
+            "scenario": "base",
+            "model": "unit_sales",
+            "driver": "units",
+            "output": "recognized_revenue"
+          }
+        ],
+        "research_reason": "The source describes ICP customer production and Angnova customer validation with repeat orders. I use this quoted product-stage and demand evidence as direction/rationale support for the already-existing FY2026 equipment-volume assumption. The model parameter remains an analyst assumption in accepted chambers: production at a customer, validation and repeat orders do not establish a delivered/accepted chamber count or revenue recognition. This is re-reading the same H1 source already used in the baseline, not new information or a reason to increase confidence or the parameter value.",
+        "citation": {
+          "claim_id": "claim_cwp_h1_icp_quote_adoption_20261030",
+          "parameter_id": "equipment_units_base_2026",
+          "span_id": "urn:company-wiki:evidence-span:sha256:486e7fc6e0bdcc46de022cbbca9b39a9a1630c6e9621abce1e725c66f270e763",
+          "closure": "citation_view",
+          "group_id": "urn:company-wiki:reading-group:sha256:deae0a3442900efd0c362aaadd1850a9613fccf8547c5953f6d710b3c75711db",
+          "group_kind": "native_continuity",
+          "section_role": "unknown",
+          "view_index": 0,
+          "source_role": "company_filing",
+          "support_evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:486e7fc6e0bdcc46de022cbbca9b39a9a1630c6e9621abce1e725c66f270e763"
+          ],
+          "context_evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:c4276269b7f3ea91b2d9efe041dc00ab8f1ae30b48ada307bfe41aa6c03a68ed",
+            "urn:company-wiki:evidence-span:sha256:1fb92ca6c3d7e8cc750c257a7040cb5ca4169930c7d5542cf558d0412c431b6c"
+          ],
+          "context_evidence": [
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:c4276269b7f3ea91b2d9efe041dc00ab8f1ae30b48ada307bfe41aa6c03a68ed",
+              "locator": "loc:v1/page:9/paragraph:19",
+              "source_role": "company_filing"
+            },
+            {
+              "span_id": "urn:company-wiki:evidence-span:sha256:1fb92ca6c3d7e8cc750c257a7040cb5ca4169930c7d5542cf558d0412c431b6c",
+              "locator": "loc:v1/page:15/paragraph:43",
+              "source_role": "company_filing"
+            }
+          ],
+          "context_evidence_count": 2,
+          "context_evidence_limited": false,
+          "projected": null
+        }
+      }
+    ]
+  }
+}

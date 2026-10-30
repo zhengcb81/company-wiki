@@ -1,0 +1,9 @@
+# M6 Registry代际根因修复 — 待独审
+
+独审发现同input/engine/schema/artifact type的stable-fsum/1与source-evidence/2产物都能strong通过，却被既有registry audit误报冲突。本次没有要求用户改forecast_version或重写旧产物：只在既有row增加由实际forecast.confidence通过唯一finite owner派生的confidence_calculation_version，snapshot则从forecast_result读取；audit把该维度加入generation。
+
+历史缺字段按stable-fsum/1解释，旧row/line SHA/chain没有重写。显式null、未知、list/dict与坏confidence容器不能伪装成新代；同revision不同result SHA仍冲突，重复相同SHA不冲突。旧版本/新版本以及forecast/snapshot区分仍各自有效；hash与链检查照常。
+
+TDD：24F/1P→38P/2.92s，包含真正同一input的两次native formal生成且两份strong验证通过；其forecast_version相同而confidence revision不同，audit无冲突。旧行原字节前缀、旧missing与显式stable同代冲突、快照nested revision、非法值与重排链均有负对照。两文件ruff与registry单文件mypy通过。一次既有CLI子进程编码失败记录保留，设置PYTHONUTF8继承后通过，未修改已有测试断言。
+
+源码/新测试/窄说明SHA见review.json。原M6四paths全部对封印SHA一致，三份原WIP一致；只用独立测试registry，未写生产registry/output，0模型/原件/API费用。未commit/push/install。请rf_summary_use_review仅补审本次新路径，再由ROOT统一发布。

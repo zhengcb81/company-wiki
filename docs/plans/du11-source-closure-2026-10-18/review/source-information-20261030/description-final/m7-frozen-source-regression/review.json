@@ -1,0 +1,422 @@
+{
+  "schema_version": "m7-source-freeze-review/1",
+  "completed_at": "2026-10-30T15:54:45.927574+00:00",
+  "verdict": "CANDIDATE_FREEZE_COMPLETED_CONTENT_GAPS_OPEN_NOT_READY_FOR_PAID",
+  "scope": "exact source content and important-business source recall; not_paid/not_RF_company_loop; not independent blind acceptance",
+  "candidate_freeze_order": "Both final candidate selections/requests serialized and hashed before evaluate_frozen.py opened formal gold bodies; embedded old freeze-script targets were previously displayed and disclosed.",
+  "producer_commit": "599f6cf6a5a686c0ec5ce38be1f985515d7b7b46",
+  "selector": "0.9.0",
+  "reading_model_projection": "reading-model-input/5",
+  "source_counts": {
+    "samples": 2,
+    "gold_checkpoints": 20,
+    "normalized_full_support_sets": 20,
+    "selected_full_support_sets": 0,
+    "model_support_full_sets": 0,
+    "warning": "Strict all-support mechanical denominator includes identity/industry/financial context; not a claim all20 are mandatory standalone business output or semantic failures."
+  },
+  "sample_results": [
+    {
+      "sample_id": "c3-cn-huali-ir-202305",
+      "revision": "r2",
+      "selection": {
+        "candidate_count": 17,
+        "coverage_complete": false,
+        "dropped_financial_count": 39,
+        "lines_total": 0,
+        "omitted_candidate_count": 13,
+        "pages_read": 5,
+        "pages_total": 5,
+        "selected_count": 4,
+        "source_units": 80,
+        "status": "partial",
+        "tables_scanned": 0,
+        "tables_total": 0
+      },
+      "tasks": 2,
+      "admission": {
+        "admitted_count": 2,
+        "count": 37,
+        "limited": true,
+        "rejected_count": 35,
+        "rejection_counts": {
+          "financial_only": 11,
+          "no_independent_business_support": 23,
+          "source_operating_description": 1
+        }
+      },
+      "deferred": [
+        {
+          "package_id": "native-continuity",
+          "reason": "INCOMPLETE_NATIVE_CONTINUITY"
+        }
+      ],
+      "source_metadata": {
+        "document_kind": "investor_relations",
+        "language": "zh",
+        "source_class": "filing",
+        "title": "华利集团：300979华利集团调研活动信息20230519"
+      }
+    },
+    {
+      "sample_id": "c3-us-berkshire-letter-2008",
+      "revision": "r3",
+      "selection": {
+        "candidate_count": 66,
+        "coverage_complete": false,
+        "dropped_financial_count": 88,
+        "lines_total": 0,
+        "omitted_candidate_count": 59,
+        "pages_read": 22,
+        "pages_total": 22,
+        "selected_count": 7,
+        "source_units": 269,
+        "status": "partial",
+        "tables_scanned": 1,
+        "tables_total": 11
+      },
+      "tasks": 2,
+      "admission": {
+        "admitted_count": 3,
+        "count": 199,
+        "limited": true,
+        "rejected_count": 196,
+        "rejection_counts": {
+          "financial_only": 60,
+          "no_independent_business_support": 114,
+          "non_narrative_unit": 18,
+          "non_operating_purpose": 1,
+          "unresolved_without_business_relevance": 3
+        }
+      },
+      "deferred": [
+        {
+          "package_id": "native-continuity",
+          "reason": "INCOMPLETE_NATIVE_CONTINUITY"
+        }
+      ],
+      "source_metadata": {
+        "document_kind": "broker_research",
+        "language": "en",
+        "source_class": "filing",
+        "title": "berkshire2008"
+      }
+    }
+  ],
+  "checkpoint_review": [
+    {
+      "sample_id": "c3-cn-huali-ir-202305",
+      "checkpoint_id": "HUALI-01",
+      "observed_state": "CONTEXT_INCOMPLETE",
+      "note": "公司名/记录编号在context；活动日及证券代码未完整进入。身份context单列。",
+      "all_original_support_normalized_visible": true,
+      "all_required_support_in_selected": false,
+      "all_required_support_in_task_support": false,
+      "support_unit_visible_count": 0,
+      "support_unit_count": 4,
+      "semantic_status": "NOT_PAID_NOT_GENERATED_NO_PROSE_ASSESSED"
+    },
+    {
+      "sample_id": "c3-cn-huali-ir-202305",
+      "checkpoint_id": "HUALI-02",
+      "observed_state": "MISSING_BUSINESS",
+      "note": "去库存对订单影响、品牌差异及部分品牌Q2预期均未进入。",
+      "all_original_support_normalized_visible": true,
+      "all_required_support_in_selected": false,
+      "all_required_support_in_task_support": false,
+      "support_unit_visible_count": 0,
+      "support_unit_count": 13,
+      "semantic_status": "NOT_PAID_NOT_GENERATED_NO_PROSE_ASSESSED"
+    },
+    {
+      "sample_id": "c3-cn-huali-ir-202305",
+      "checkpoint_id": "HUALI-03",
+      "observed_state": "MISSING_BUSINESS",
+      "note": "部分客户降、部分增及新客户订单预计部分弥补缺口未进入。",
+      "all_original_support_normalized_visible": true,
+      "all_required_support_in_selected": false,
+      "all_required_support_in_task_support": false,
+      "support_unit_visible_count": 0,
+      "support_unit_count": 6,
+      "semantic_status": "NOT_PAID_NOT_GENERATED_NO_PROSE_ASSESSED"
+    },
+    {
+      "sample_id": "c3-cn-huali-ir-202305",
+      "checkpoint_id": "HUALI-04",
+      "observed_state": "MISSING_BUSINESS",
+      "note": "部分急单2–3周、急单不加价及规模效率未进入。",
+      "all_original_support_normalized_visible": true,
+      "all_required_support_in_selected": false,
+      "all_required_support_in_task_support": false,
+      "support_unit_visible_count": 0,
+      "support_unit_count": 9,
+      "semantic_status": "NOT_PAID_NOT_GENERATED_NO_PROSE_ASSESSED"
+    },
+    {
+      "sample_id": "c3-cn-huali-ir-202305",
+      "checkpoint_id": "HUALI-05",
+      "observed_state": "MISSING_BUSINESS",
+      "note": "客户/产品组合、精益制造与工厂效率等经营解释未进入。",
+      "all_original_support_normalized_visible": true,
+      "all_required_support_in_selected": false,
+      "all_required_support_in_task_support": false,
+      "support_unit_visible_count": 0,
+      "support_unit_count": 6,
+      "semantic_status": "NOT_PAID_NOT_GENERATED_NO_PROSE_ASSESSED"
+    },
+    {
+      "sample_id": "c3-cn-huali-ir-202305",
+      "checkpoint_id": "HUALI-06",
+      "observed_state": "PARTIAL",
+      "note": "保留积极扩产、土地手续后施工验收1–2年；前面的订单/规划弹性前提未全带入，支持开头仅“活性”。",
+      "all_original_support_normalized_visible": true,
+      "all_required_support_in_selected": false,
+      "all_required_support_in_task_support": false,
+      "support_unit_visible_count": 7,
+      "support_unit_count": 9,
+      "semantic_status": "NOT_PAID_NOT_GENERATED_NO_PROSE_ASSESSED"
+    },
+    {
+      "sample_id": "c3-cn-huali-ir-202305",
+      "checkpoint_id": "HUALI-07",
+      "observed_state": "MISSING_BUSINESS",
+      "note": "印尼两期5000–6000万双/年、一期预计2023投产及订单/施工/审批条件未进入。",
+      "all_original_support_normalized_visible": true,
+      "all_required_support_in_selected": false,
+      "all_required_support_in_task_support": false,
+      "support_unit_visible_count": 0,
+      "support_unit_count": 10,
+      "semantic_status": "NOT_PAID_NOT_GENERATED_NO_PROSE_ASSESSED"
+    },
+    {
+      "sample_id": "c3-cn-huali-ir-202305",
+      "checkpoint_id": "HUALI-08",
+      "observed_state": "PARTIAL_FINANCIAL_CONTEXT",
+      "note": "保留2022收益8200万元、2023Q1损失约3500万元；各实体本位币前提缺。不可把此项当业务营收数字。",
+      "all_original_support_normalized_visible": true,
+      "all_required_support_in_selected": false,
+      "all_required_support_in_task_support": false,
+      "support_unit_visible_count": 5,
+      "support_unit_count": 14,
+      "semantic_status": "NOT_PAID_NOT_GENERATED_NO_PROSE_ASSESSED"
+    },
+    {
+      "sample_id": "c3-cn-huali-ir-202305",
+      "checkpoint_id": "HUALI-09",
+      "observed_state": "MISSING_SCOPE_CONTEXT",
+      "note": "Converse/Vans各自收入占比与鞋类范围关系未进入；属范围/分母误归属反控。",
+      "all_original_support_normalized_visible": true,
+      "all_required_support_in_selected": false,
+      "all_required_support_in_task_support": false,
+      "support_unit_visible_count": 0,
+      "support_unit_count": 4,
+      "semantic_status": "NOT_PAID_NOT_GENERATED_NO_PROSE_ASSESSED"
+    },
+    {
+      "sample_id": "c3-cn-huali-ir-202305",
+      "checkpoint_id": "HUALI-10",
+      "observed_state": "MISSING_BUSINESS",
+      "note": "工厂服务品牌/团队及新客户先借独立场地后足量设专厂的条件阶段未进入。",
+      "all_original_support_normalized_visible": true,
+      "all_required_support_in_selected": false,
+      "all_required_support_in_task_support": false,
+      "support_unit_visible_count": 0,
+      "support_unit_count": 7,
+      "semantic_status": "NOT_PAID_NOT_GENERATED_NO_PROSE_ASSESSED"
+    },
+    {
+      "sample_id": "c3-us-berkshire-letter-2008",
+      "checkpoint_id": "BRK-01",
+      "observed_state": "CONTEXT_INCOMPLETE",
+      "note": "公司/2008/签署者及签署日期未完整带入。旧HK/broker标签仍只是来源观察，未替其造metadata。",
+      "all_original_support_normalized_visible": true,
+      "all_required_support_in_selected": false,
+      "all_required_support_in_task_support": false,
+      "support_unit_visible_count": 0,
+      "support_unit_count": 4,
+      "semantic_status": "NOT_PAID_NOT_GENERATED_NO_PROSE_ASSESSED"
+    },
+    {
+      "sample_id": "c3-us-berkshire-letter-2008",
+      "checkpoint_id": "BRK-02",
+      "observed_state": "MISSING_BUSINESS",
+      "note": "经济敏感业务受损与保险/公用事业表现分化未进入。",
+      "all_original_support_normalized_visible": true,
+      "all_required_support_in_selected": false,
+      "all_required_support_in_task_support": false,
+      "support_unit_visible_count": 0,
+      "support_unit_count": 1,
+      "semantic_status": "NOT_PAID_NOT_GENERATED_NO_PROSE_ASSESSED"
+    },
+    {
+      "sample_id": "c3-us-berkshire-letter-2008",
+      "checkpoint_id": "BRK-03",
+      "observed_state": "MISSING_OPERATING_FINANCIAL_CONTEXT",
+      "note": "保险承保连续盈利、float与负成本未进入；须保留行业业务口径，不能把财务数强当营收。",
+      "all_original_support_normalized_visible": true,
+      "all_required_support_in_selected": false,
+      "all_required_support_in_task_support": false,
+      "support_unit_visible_count": 0,
+      "support_unit_count": 1,
+      "semantic_status": "NOT_PAID_NOT_GENERATED_NO_PROSE_ASSESSED"
+    },
+    {
+      "sample_id": "c3-us-berkshire-letter-2008",
+      "checkpoint_id": "BRK-04",
+      "observed_state": "MISSING_BUSINESS",
+      "note": "MidAmerican持股及公用事业/管道业务范围未进入。",
+      "all_original_support_normalized_visible": true,
+      "all_required_support_in_selected": false,
+      "all_required_support_in_task_support": false,
+      "support_unit_visible_count": 0,
+      "support_unit_count": 4,
+      "semantic_status": "NOT_PAID_NOT_GENERATED_NO_PROSE_ASSESSED"
+    },
+    {
+      "sample_id": "c3-us-berkshire-letter-2008",
+      "checkpoint_id": "BRK-05",
+      "observed_state": "MISSING_BUSINESS",
+      "note": "PacifiCorp风电33→794MW及2008投资口径未进入。",
+      "all_original_support_normalized_visible": true,
+      "all_required_support_in_selected": false,
+      "all_required_support_in_task_support": false,
+      "support_unit_visible_count": 0,
+      "support_unit_count": 2,
+      "semantic_status": "NOT_PAID_NOT_GENERATED_NO_PROSE_ASSESSED"
+    },
+    {
+      "sample_id": "c3-us-berkshire-letter-2008",
+      "checkpoint_id": "BRK-06",
+      "observed_state": "MISSING_CAPITAL_ALLOCATION_CONTEXT",
+      "note": "未分红/收益再投公用事业系统未进入；作为原文来源context，非CWP投资结论。",
+      "all_original_support_normalized_visible": true,
+      "all_required_support_in_selected": false,
+      "all_required_support_in_task_support": false,
+      "support_unit_visible_count": 0,
+      "support_unit_count": 1,
+      "semantic_status": "NOT_PAID_NOT_GENERATED_NO_PROSE_ASSESSED"
+    },
+    {
+      "sample_id": "c3-us-berkshire-letter-2008",
+      "checkpoint_id": "BRK-07",
+      "observed_state": "MISSING_INDUSTRY_CONTEXT",
+      "note": "保险行业8.5% vs Fortune50014%及25年截至2007比较未进入。",
+      "all_original_support_normalized_visible": true,
+      "all_required_support_in_selected": false,
+      "all_required_support_in_task_support": false,
+      "support_unit_visible_count": 0,
+      "support_unit_count": 1,
+      "semantic_status": "NOT_PAID_NOT_GENERATED_NO_PROSE_ASSESSED"
+    },
+    {
+      "sample_id": "c3-us-berkshire-letter-2008",
+      "checkpoint_id": "BRK-08",
+      "observed_state": "MISSING_BUSINESS",
+      "note": "GEICO份额7.2→7.7%及第三名未进入，同时是下一条的主体前提。",
+      "all_original_support_normalized_visible": true,
+      "all_required_support_in_selected": false,
+      "all_required_support_in_task_support": false,
+      "support_unit_visible_count": 0,
+      "support_unit_count": 2,
+      "semantic_status": "NOT_PAID_NOT_GENERATED_NO_PROSE_ASSESSED"
+    },
+    {
+      "sample_id": "c3-us-berkshire-letter-2008",
+      "checkpoint_id": "BRK-09",
+      "observed_state": "PARTIAL_ATTRIBUTION_RISK",
+      "note": "23.4%、6%→7%+及新险种正文保留；只给Insurance/(2)context，缺GEICO antecedent，we/our不可按Berkshire总体现有业务解读。",
+      "all_original_support_normalized_visible": true,
+      "all_required_support_in_selected": false,
+      "all_required_support_in_task_support": false,
+      "support_unit_visible_count": 1,
+      "support_unit_count": 5,
+      "semantic_status": "NOT_PAID_NOT_GENERATED_NO_PROSE_ASSESSED"
+    },
+    {
+      "sample_id": "c3-us-berkshire-letter-2008",
+      "checkpoint_id": "BRK-10",
+      "observed_state": "MISSING_OUTLOOK_CONTEXT",
+      "note": "2009经济展望及“不预测股市方向”的否定限定未进入。",
+      "all_original_support_normalized_visible": true,
+      "all_required_support_in_selected": false,
+      "all_required_support_in_task_support": false,
+      "support_unit_visible_count": 0,
+      "support_unit_count": 1,
+      "semantic_status": "NOT_PAID_NOT_GENERATED_NO_PROSE_ASSESSED"
+    }
+  ],
+  "findings": [
+    {
+      "id": "M7-01",
+      "severity": "P2",
+      "status": "OPEN",
+      "owner_boundary": "shared source admission / continuity / business scope; not model decoder",
+      "finding": "Important already-normalized business evidence fails to enter final source material in both languages.",
+      "evidence": "HUALI-02/03/04/07/10 and BRK-02/04/05/08; captured admission rejected counts 35/37 and 196/199. Reasons alone do not prove final shared root.",
+      "next": "Use frozen normalized snapshots and actual source-scope decisions for neutral TDD; distinguish operating quantity/qualitative change from routine financial totals and context-only fragments. No company lexicon/cap increase."
+    },
+    {
+      "id": "M7-02",
+      "severity": "P2",
+      "status": "OPEN",
+      "owner_boundary": "source continuity / subject context construction",
+      "finding": "Berkshire retained motorcycle/RV/ATV/commercial-auto quote has we/our with only Insurance and (2) as context; GEICO antecedent is absent.",
+      "evidence": "r3 request t1 support + context; BRK-08/09 source units in saved normalized. Huali t1 similarly starts with fragment 活性。",
+      "next": "Shared antecedent/answer-continuity owner must preserve local business subject and qualified premise; extraction quote fidelity alone cannot supply omitted subject."
+    }
+  ],
+  "source_qualification": "Exact SourceRefs/bytes verified. Original tags and absent FY/date/URL retained. No issuer/period/historical-asof/official-download qualification asserted or required for this source-only test. Berkshire remains broker_research/HK/Unresolved in actual registration, reading language en inferred by source owner; no FF/RF market override.",
+  "snapshot_replay": {
+    "results": [
+      {
+        "sample_id": "c3-cn-huali-ir-202305",
+        "selected_spans_equal": false,
+        "admission_calls": 88,
+        "work_note": "replay starts fresh work account; does not claim original total work equivalence",
+        "pdf_reads": 0,
+        "output": "c3-cn-huali-ir-202305.offline-admission.json.gz"
+      },
+      {
+        "sample_id": "c3-us-berkshire-letter-2008",
+        "selected_spans_equal": true,
+        "admission_calls": 229,
+        "work_note": "replay starts fresh work account; does not claim original total work equivalence",
+        "pdf_reads": 0,
+        "output": "c3-us-berkshire-letter-2008.offline-admission.json.gz"
+      }
+    ],
+    "limitation": "Berkshire selected EvidenceSpans exact replay PASS. Huali fresh-work-account replay differed; original parse charges not captured and snapshot is pre-selection. It is a source probe, not an exact reproduction of original budget/selection. Actual r2 selection/request remain authoritative, not replaced by replay."
+  },
+  "author_observation_failures": {
+    "scope": "author snapshot serialization; not source parser failure",
+    "r1": "non-string tuple mapping keys; fixed local serializer only",
+    "r2_berkshire": "snapshot cap 8MiB; repeated transient native_source_view made expanded normalized JSON exceed cap",
+    "expanded_bytes": 9504760,
+    "cap_bytes": 8388608,
+    "cap_would_reject": true,
+    "r3": "deduplicate identical native_source_view in bounded snapshot; production parsed object/selector unchanged",
+    "pdf_reparsed_by_this_probe": false
+  },
+  "bounded_reads": {
+    "pdf_owner_read_attempts": 5,
+    "breakdown": "r1 two (tuple-key serializer failure); r2 two (Huali success, Berkshire author 8MiB snapshot cap); r3 Berkshire success after dedup. No further PDF reads; all evaluations/probes used snapshots.",
+    "limitation": "Two avoidable author serialization retries; preserved, not product parser defects."
+  },
+  "integrity": {
+    "final_freeze_receipts": [
+      "r2/freeze.json",
+      "r3/freeze.json"
+    ],
+    "all_protected_unchanged": true,
+    "all_owned_temps_removed": true,
+    "POSTs": 0,
+    "network_attempts": 0,
+    "downloads": 0,
+    "SDK_calls": 0,
+    "raw_copies": 0,
+    "product_changes": 0,
+    "mother_plan_changes": 0,
+    "new_native_generations": 0
+  },
+  "next": "ROOT source-owner targeted TDD and independent source review; retain frozen gold. Do not schedule paid /5 rank until source gaps are resolved or explicitly scoped. This does not sign complete RF company loop."
+}

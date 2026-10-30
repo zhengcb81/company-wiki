@@ -1,0 +1,95 @@
+{
+  "rows": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\summary-quality-20261030\\real-rf-adoption-v1\\baseline-current-engine.json",
+      "sha256": "c35b518cc99629347f6fb67f8c405696b129817059aac7bfbdfba101ff506801",
+      "bytes": 623305,
+      "version": "v1",
+      "basis": "disposable failed-trial native intermediate; originals and final v3 preserved",
+      "removed": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\summary-quality-20261030\\real-rf-adoption-v1\\publication-registry.jsonl",
+      "sha256": "bdb29c758b9e3ec479cccee61585b71b342c8e6b38118d653c8f77878779dcf7",
+      "bytes": 710,
+      "version": "v1",
+      "basis": "disposable failed-trial native intermediate; originals and final v3 preserved",
+      "removed": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\summary-quality-20261030\\real-rf-adoption-v2\\baseline-current-engine.json",
+      "sha256": "c35b518cc99629347f6fb67f8c405696b129817059aac7bfbdfba101ff506801",
+      "bytes": 623305,
+      "version": "v2",
+      "basis": "disposable failed-trial native intermediate; originals and final v3 preserved",
+      "removed": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\summary-quality-20261030\\real-rf-adoption-v2\\publication-registry.jsonl",
+      "sha256": "654424442555dfb144d7fa48be9ec2d579f04eefec022211705511d986f9276d",
+      "bytes": 710,
+      "version": "v2",
+      "basis": "disposable failed-trial native intermediate; originals and final v3 preserved",
+      "removed": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\summary-quality-20261030\\real-rf-adoption-v3\\baseline-current-engine.json",
+      "sha256": "c35b518cc99629347f6fb67f8c405696b129817059aac7bfbdfba101ff506801",
+      "bytes": 623305,
+      "version": "v3",
+      "basis": "RF owner exact mirror verified after independent review",
+      "removed": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\summary-quality-20261030\\real-rf-adoption-v3\\consumed-input-before-version.json",
+      "sha256": "7a4d72166ba5014e744aa78f56aded5c0ba25eb4afa4c19ad1575a9be76eb1e2",
+      "bytes": 290166,
+      "version": "v3",
+      "basis": "RF owner exact mirror verified after independent review",
+      "removed": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\summary-quality-20261030\\real-rf-adoption-v3\\input.json",
+      "sha256": "1b1d9eba2242fb13968ff96880b375cf69690a505c90200aa8638a1827347d8c",
+      "bytes": 290184,
+      "version": "v3",
+      "basis": "RF owner exact mirror verified after independent review",
+      "removed": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\summary-quality-20261030\\real-rf-adoption-v3\\forecast.json",
+      "sha256": "13077ffa09437bd6e9d393d753f54250f8fa1df1034b82620ee2774fb0566e65",
+      "bytes": 626021,
+      "version": "v3",
+      "basis": "RF owner exact mirror verified after independent review",
+      "removed": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\summary-quality-20261030\\real-rf-adoption-v3\\snapshot.json",
+      "sha256": "374226b71f72ae61a2e7bd2ba8ef36630167a9c939f0d586ceb5537bd3eacefb",
+      "bytes": 942709,
+      "version": "v3",
+      "basis": "RF owner exact mirror verified after independent review",
+      "removed": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\summary-quality-20261030\\real-rf-adoption-v3\\report.md",
+      "sha256": "20599cd3ebe87385d95d0d1821984f56ba9b734f5f08ff0e4ba1330b0972ff17",
+      "bytes": 110074,
+      "version": "v3",
+      "basis": "RF owner exact mirror verified after independent review",
+      "removed": true
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\summary-quality-20261030\\real-rf-adoption-v3\\publication-registry.jsonl",
+      "sha256": "a74759cc460321d00917aaef60621b1da68e1e60d08c546cf77131f2c47ec7ec",
+      "bytes": 3058,
+      "version": "v3",
+      "basis": "RF owner exact mirror verified after independent review",
+      "removed": true
+    }
+  ],
+  "rf_owner": "C:/Users/郑曾波/Projects/revenue-forecast/.planning/source-quote-adoption-20261030/v3",
+  "originals_removed": 0,
+  "scope": "RF native reports belong to RF; CWP retains source and technical receipts"
+}

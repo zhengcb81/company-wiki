@@ -1,0 +1,94 @@
+{
+  "actual-summary-use-receipt.json": {
+    "bytes": 10783,
+    "sha256": "65dce8afeafbca6f1d93d551207262c17d2ae811df556b14702f3a9d549652bc"
+  },
+  "author-review.md": {
+    "bytes": 2657,
+    "sha256": "4e179da973adee6574dd0dbf270e0b9f1e75ddaa3ce4afcc37e22d3dbce2c387"
+  },
+  "cwp-native-cleanup.json": {
+    "bytes": 4626,
+    "sha256": "c9e7a409e84428b2423eed50776a14f7871b50f285b8d48f834e27fcdc2eac41"
+  },
+  "git-reviewed-blob-verification.json": {
+    "bytes": 138,
+    "sha256": "5a809a8e28956b30484649881c44c46880592e3c5482d090bbc74517783ea4ad"
+  },
+  "independent-formal-addendum.json": {
+    "bytes": 4168,
+    "sha256": "68d9fa21f650bb460ff05db5471bbb5c008dd73d3b5d806f33c1c15dcf798368"
+  },
+  "independent-formal-addendum.md": {
+    "bytes": 1892,
+    "sha256": "e7a4d878afabd90d44ba2086e8ebd55692d317d0915543393e286c156d8c247e"
+  },
+  "independent-review.json": {
+    "bytes": 9541,
+    "sha256": "84938cba91ffce9c13b8888459d289b992ad0f88559c572cc3e89084c7af1331"
+  },
+  "independent-review.md": {
+    "bytes": 7926,
+    "sha256": "d276cb2e150dffac17a575edeb85f308336ac7b1e08d0ee8b7f38ffbf66305ec"
+  },
+  "independent-seal.json": {
+    "bytes": 8911,
+    "sha256": "28153b6c7bae79e5e92ff6622566402cbe55451482bf69f3540dc7eaeb288c2a"
+  },
+  "installed-five-files.json": {
+    "bytes": 2001,
+    "sha256": "2aa5da3401ba7afe0593ea1b993a96534275513ba0932995a39bdba8b1138dbd"
+  },
+  "installed-fresh-native.json": {
+    "bytes": 669,
+    "sha256": "8f7f6c541f83ae579358f6bf1e26ac1dad346ee7c6199b0491e269f9de37b4c8"
+  },
+  "installed-repeat-zero-write.json": {
+    "bytes": 2001,
+    "sha256": "02e5ac67e12dd9a8e1f7e9f6f7ec0f080562f3fa8a62620c1b41d5eb359f4676"
+  },
+  "native-final-receipt.json": {
+    "bytes": 710,
+    "sha256": "6f74e5ddd00c910404f255f4381f1772af5bc1da6eb043ea7f12c06daf14530b"
+  },
+  "nullable-render-final-green.log": {
+    "bytes": 100,
+    "sha256": "2d323c0b7be6a9b14d448fb5044b96ba0105c4f62f5bba2425270969d4fff51c"
+  },
+  "nullable-render-original-red.log": {
+    "bytes": 5152,
+    "sha256": "7bb24516dcdd1002d041a3f84b81043e102cb9e5846185f1d6e20428da5171b5"
+  },
+  "prior-actual-adoption-review.json": {
+    "bytes": 12011,
+    "sha256": "01b9ff05100b3c559b12c39f2e78a7904e726f193ed7fb5254d2ad23bf1ce731"
+  },
+  "prior-actual-adoption-review.md": {
+    "bytes": 6176,
+    "sha256": "727b89acc2ddcc7188dd4e7e2a568cee58d5cd336fd897be40d7ac4cbf32fe43"
+  },
+  "publication.json": {
+    "bytes": 863,
+    "sha256": "e96263ec7dbab356504b35e38ab21f2bbc66ae075f2058181ee004b92480b0a1"
+  },
+  "README.md": {
+    "bytes": 1978,
+    "sha256": "09adcc2e31cb82caa1de92a4e2e9e621c9d295df83488459d7a446219786cca1"
+  },
+  "registry-followup.md": {
+    "bytes": 1541,
+    "sha256": "f57f3b86bf57d5aa232beae0f1d6cdc00de1a1cf432e0c1a1caf9015ae4d7227"
+  },
+  "root-diagnosis.json": {
+    "bytes": 2831,
+    "sha256": "66713dfaf9ad52701a3f08fb25d41cdc5607e1bdc4a092aa986e8163bef9b42a"
+  },
+  "root-test-cleanup.json": {
+    "bytes": 192,
+    "sha256": "abbe840814fff24ee65a975a09ab58abe1ad8861984c06888b6b1c682b5eb1d3"
+  },
+  "same-input-old-new-registry.json": {
+    "bytes": 522,
+    "sha256": "723d49b5cbab9cc39c1081e86bd4472ea1858066fe83cc5142910e56cde2b1a4"
+  }
+}

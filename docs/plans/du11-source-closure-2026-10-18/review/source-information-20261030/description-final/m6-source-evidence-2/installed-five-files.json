@@ -1,0 +1,64 @@
+{
+  "mode": "apply",
+  "schema": "rf-install-result/1",
+  "selected": [
+    "references/data-governance.md",
+    "references/output-schema.md",
+    "scripts/analysis/confidence.py",
+    "scripts/publication_registry.py",
+    "scripts/revenue_report.py"
+  ],
+  "status": "completed",
+  "targets": [
+    {
+      "conflicts": [],
+      "destination": "C:\\Users\\\u90d1\u66fe\u6ce2\\.agents\\skills",
+      "drifted": [],
+      "failed": [],
+      "remaining_selected_drift": 0,
+      "remaining_unselected_drift": 0,
+      "selected": [
+        "references/data-governance.md",
+        "references/output-schema.md",
+        "scripts/analysis/confidence.py",
+        "scripts/publication_registry.py",
+        "scripts/revenue_report.py"
+      ],
+      "status": "completed",
+      "target": "C:\\Users\\\u90d1\u66fe\u6ce2\\.agents\\skills\\revenue-forecast",
+      "unchanged": [],
+      "written": [
+        "references/data-governance.md",
+        "references/output-schema.md",
+        "scripts/analysis/confidence.py",
+        "scripts/publication_registry.py",
+        "scripts/revenue_report.py"
+      ]
+    },
+    {
+      "conflicts": [],
+      "destination": "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\skills",
+      "drifted": [],
+      "failed": [],
+      "remaining_selected_drift": 0,
+      "remaining_unselected_drift": 0,
+      "selected": [
+        "references/data-governance.md",
+        "references/output-schema.md",
+        "scripts/analysis/confidence.py",
+        "scripts/publication_registry.py",
+        "scripts/revenue_report.py"
+      ],
+      "status": "completed",
+      "target": "C:\\Users\\\u90d1\u66fe\u6ce2\\.codex\\skills\\revenue-forecast",
+      "unchanged": [],
+      "written": [
+        "references/data-governance.md",
+        "references/output-schema.md",
+        "scripts/analysis/confidence.py",
+        "scripts/publication_registry.py",
+        "scripts/revenue_report.py"
+      ]
+    }
+  ]
+}
