@@ -1,0 +1,585 @@
+{
+  "seconds": 0.807,
+  "work": 1352979,
+  "source_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+  "status": "partial",
+  "coverage_complete": false,
+  "spans": 15,
+  "source_cards": [
+    {
+      "task": {
+        "key": "t1",
+        "source_id": "urn:company-wiki:source:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+        "origin_group_id": "urn:company-wiki:reading-group:sha256:aa3c9c6356cb3787d288e96ccc5be739cfb6bb6f16902d452f8b5d42bdc904b5",
+        "member_ids": [
+          "urn:company-wiki:evidence-span:sha256:27d4283d845ae0477e183af35c8e2103569b77365652f313250b7c64b2b01d25",
+          "urn:company-wiki:evidence-span:sha256:c28cccb35a9b95f7742d2b0e45bee0a403d388c91bb4e5f5dc57db37fbd650c9",
+          "urn:company-wiki:evidence-span:sha256:1551293fc0e9cca34e1123370c11d1a62b634ba82ffae55ce3315bee3f18c542"
+        ],
+        "support_ids": [
+          "urn:company-wiki:evidence-span:sha256:1551293fc0e9cca34e1123370c11d1a62b634ba82ffae55ce3315bee3f18c542"
+        ],
+        "context_ids": [
+          "urn:company-wiki:evidence-span:sha256:27d4283d845ae0477e183af35c8e2103569b77365652f313250b7c64b2b01d25",
+          "urn:company-wiki:evidence-span:sha256:c28cccb35a9b95f7742d2b0e45bee0a403d388c91bb4e5f5dc57db37fbd650c9"
+        ],
+        "kind": "qa_exchange",
+        "section_role": "unknown",
+        "topics": [
+          "core_business"
+        ],
+        "selection_reasons": [
+          "reading_plan",
+          "quantified_operating_status"
+        ],
+        "support_roles": [
+          "management"
+        ],
+        "support_use": "support",
+        "support_reason": "source_business_relation"
+      },
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "support": [
+        "答：您好，公司积极开发国内市场，持续完善国内市场战略布局，提\n高公司的抗风险能力，2025 年度公司境内收入约8.19 亿元，占比约22%，\n较比 2024 年度有所提升。"
+      ],
+      "context": [
+        "投资者关系活动类别 | □特定对象调研 □分析师会议\n□媒体采访 □业绩说明会\n□新闻发布会 □路演活动\n□现场参观\n☑其他 2026 年山东辖区上市公司投资者网上集体接待日活动",
+        "1、问：公司主要业务 80%多都在国外，目前公司在国内业务开拓面\n临哪些挑战和机遇？公司如何服务国内统一大市场？"
+      ],
+      "raw_member_bytes": 607
+    },
+    {
+      "task": {
+        "key": "t2",
+        "source_id": "urn:company-wiki:source:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+        "origin_group_id": "urn:company-wiki:reading-group:sha256:94b04d73cb71d76ad6046f11f6c4e9a86356710c2941720bdc7b99e06178554b",
+        "member_ids": [
+          "urn:company-wiki:evidence-span:sha256:27d4283d845ae0477e183af35c8e2103569b77365652f313250b7c64b2b01d25",
+          "urn:company-wiki:evidence-span:sha256:d4bb34f6c7db61d67ffe87cbd182da68240816c078e71d5aa4bd342ede62e424",
+          "urn:company-wiki:evidence-span:sha256:135f9b6ca79a8b1e0dda66b5fb56a2341536fab4c5d56a38212f049cb2452d89",
+          "urn:company-wiki:evidence-span:sha256:5e6bf587ff1d4c3764e93909a1fca01ebe59046379e75c28ff2b8494da0285dc"
+        ],
+        "support_ids": [
+          "urn:company-wiki:evidence-span:sha256:5e6bf587ff1d4c3764e93909a1fca01ebe59046379e75c28ff2b8494da0285dc"
+        ],
+        "context_ids": [
+          "urn:company-wiki:evidence-span:sha256:27d4283d845ae0477e183af35c8e2103569b77365652f313250b7c64b2b01d25",
+          "urn:company-wiki:evidence-span:sha256:d4bb34f6c7db61d67ffe87cbd182da68240816c078e71d5aa4bd342ede62e424",
+          "urn:company-wiki:evidence-span:sha256:135f9b6ca79a8b1e0dda66b5fb56a2341536fab4c5d56a38212f049cb2452d89"
+        ],
+        "kind": "qa_exchange",
+        "section_role": "operating_metrics",
+        "topics": [
+          "operating_mechanism"
+        ],
+        "selection_reasons": [
+          "reading_plan",
+          "operating_mechanism"
+        ],
+        "support_roles": [
+          "management"
+        ],
+        "support_use": "support",
+        "support_reason": "source_business_relation"
+      },
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "support": [
+        "答：您好，根据相应新闻报道，您所描述的情况涉及该公司的家电产\n品，该事项未对九目化学经营构成重大影响。"
+      ],
+      "context": [
+        "投资者关系活动类别 | □特定对象调研 □分析师会议\n□媒体采访 □业绩说明会\n□新闻发布会 □路演活动\n□现场参观\n☑其他 2026 年山东辖区上市公司投资者网上集体接待日活动",
+        "2、问：三星电子退出中国市场，控股子公司九目化学第一大客户就",
+        "是三星，请问这个公司九目的影响？九目化学目前北交所上市的进度？\n年报都披露已超过半个月了，为什么第二轮问询还没有回复，是碰到哪\n些障碍？"
+      ],
+      "raw_member_bytes": 674
+    },
+    {
+      "task": {
+        "key": "t3",
+        "source_id": "urn:company-wiki:source:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+        "origin_group_id": "urn:company-wiki:reading-group:sha256:9be4730c36514a769e1d5d4520a8dc35aa0b5e11d46448a8c4cdda774ac29de6",
+        "member_ids": [
+          "urn:company-wiki:evidence-span:sha256:27d4283d845ae0477e183af35c8e2103569b77365652f313250b7c64b2b01d25",
+          "urn:company-wiki:evidence-span:sha256:d4bb34f6c7db61d67ffe87cbd182da68240816c078e71d5aa4bd342ede62e424",
+          "urn:company-wiki:evidence-span:sha256:135f9b6ca79a8b1e0dda66b5fb56a2341536fab4c5d56a38212f049cb2452d89",
+          "urn:company-wiki:evidence-span:sha256:d6e61621033fc639137e1d211221cd5a079ecd3b412370d778b9d2d1bbdcc5f0"
+        ],
+        "support_ids": [
+          "urn:company-wiki:evidence-span:sha256:d6e61621033fc639137e1d211221cd5a079ecd3b412370d778b9d2d1bbdcc5f0"
+        ],
+        "context_ids": [
+          "urn:company-wiki:evidence-span:sha256:27d4283d845ae0477e183af35c8e2103569b77365652f313250b7c64b2b01d25",
+          "urn:company-wiki:evidence-span:sha256:d4bb34f6c7db61d67ffe87cbd182da68240816c078e71d5aa4bd342ede62e424",
+          "urn:company-wiki:evidence-span:sha256:135f9b6ca79a8b1e0dda66b5fb56a2341536fab4c5d56a38212f049cb2452d89"
+        ],
+        "kind": "qa_exchange",
+        "section_role": "operating_metrics",
+        "topics": [
+          "operating_mechanism",
+          "operating_metrics"
+        ],
+        "selection_reasons": [
+          "reading_plan",
+          "operating_mechanism"
+        ],
+        "support_roles": [
+          "management"
+        ],
+        "support_use": "support",
+        "support_reason": "source_business_relation"
+      },
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "support": [
+        "九目化学主要产品为 OLED\n升华前材料，下游客户为国内外OLED 成品材料企业，OLED 成品材料生产\n企业下游主要为 OLED 显示面板生产企业，OLED 显示面板生产企业下游为\n各类显示屏应用企业。"
+      ],
+      "context": [
+        "投资者关系活动类别 | □特定对象调研 □分析师会议\n□媒体采访 □业绩说明会\n□新闻发布会 □路演活动\n□现场参观\n☑其他 2026 年山东辖区上市公司投资者网上集体接待日活动",
+        "2、问：三星电子退出中国市场，控股子公司九目化学第一大客户就",
+        "是三星，请问这个公司九目的影响？九目化学目前北交所上市的进度？\n年报都披露已超过半个月了，为什么第二轮问询还没有回复，是碰到哪\n些障碍？"
+      ],
+      "raw_member_bytes": 771
+    },
+    {
+      "task": {
+        "key": "t4",
+        "source_id": "urn:company-wiki:source:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+        "origin_group_id": "urn:company-wiki:reading-group:sha256:5979ae630716c6ab8acf3a99499cb969a5dcd285196737707e6f6616184a5347",
+        "member_ids": [
+          "urn:company-wiki:evidence-span:sha256:27d4283d845ae0477e183af35c8e2103569b77365652f313250b7c64b2b01d25",
+          "urn:company-wiki:evidence-span:sha256:d4bb34f6c7db61d67ffe87cbd182da68240816c078e71d5aa4bd342ede62e424",
+          "urn:company-wiki:evidence-span:sha256:135f9b6ca79a8b1e0dda66b5fb56a2341536fab4c5d56a38212f049cb2452d89",
+          "urn:company-wiki:evidence-span:sha256:efe93c96cba4a40d675701cc04955913cb3f7ae05baced356749a462fb088a4a"
+        ],
+        "support_ids": [
+          "urn:company-wiki:evidence-span:sha256:efe93c96cba4a40d675701cc04955913cb3f7ae05baced356749a462fb088a4a"
+        ],
+        "context_ids": [
+          "urn:company-wiki:evidence-span:sha256:27d4283d845ae0477e183af35c8e2103569b77365652f313250b7c64b2b01d25",
+          "urn:company-wiki:evidence-span:sha256:d4bb34f6c7db61d67ffe87cbd182da68240816c078e71d5aa4bd342ede62e424",
+          "urn:company-wiki:evidence-span:sha256:135f9b6ca79a8b1e0dda66b5fb56a2341536fab4c5d56a38212f049cb2452d89"
+        ],
+        "kind": "qa_exchange",
+        "section_role": "operating_metrics",
+        "topics": [
+          "operating_mechanism"
+        ],
+        "selection_reasons": [
+          "reading_plan",
+          "operating_mechanism"
+        ],
+        "support_roles": [
+          "management"
+        ],
+        "support_use": "support",
+        "support_reason": "source_business_relation"
+      },
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "support": [
+        "九目化学已于 3 月11 日收到北交所第二轮审核问\n询函，因前期报送的财务数据有效期已过，九目化学申请了中止审核，待\n财务数据按要求完成更新后，将申请恢复审核，并回复问询。"
+      ],
+      "context": [
+        "投资者关系活动类别 | □特定对象调研 □分析师会议\n□媒体采访 □业绩说明会\n□新闻发布会 □路演活动\n□现场参观\n☑其他 2026 年山东辖区上市公司投资者网上集体接待日活动",
+        "2、问：三星电子退出中国市场，控股子公司九目化学第一大客户就",
+        "是三星，请问这个公司九目的影响？九目化学目前北交所上市的进度？\n年报都披露已超过半个月了，为什么第二轮问询还没有回复，是碰到哪\n些障碍？"
+      ],
+      "raw_member_bytes": 765
+    },
+    {
+      "task": {
+        "key": "t5",
+        "source_id": "urn:company-wiki:source:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+        "origin_group_id": "urn:company-wiki:reading-group:sha256:98b2680c8300574c0551ee5328df62fe44df122bc05994c38df8d33b123c663e",
+        "member_ids": [
+          "urn:company-wiki:evidence-span:sha256:e63387c78b9a6d891543f82e134e429d8e8e64f74bd30ec2427a4185c777622b",
+          "urn:company-wiki:evidence-span:sha256:c7953d7400659ee912c4d7c370ec25d6802ce8caf36574309abb7cd53c3c9b66"
+        ],
+        "support_ids": [
+          "urn:company-wiki:evidence-span:sha256:c7953d7400659ee912c4d7c370ec25d6802ce8caf36574309abb7cd53c3c9b66"
+        ],
+        "context_ids": [
+          "urn:company-wiki:evidence-span:sha256:e63387c78b9a6d891543f82e134e429d8e8e64f74bd30ec2427a4185c777622b"
+        ],
+        "kind": "qa_exchange",
+        "section_role": "operating_metrics",
+        "topics": [
+          "core_business",
+          "operating_causal_driver",
+          "operating_metric_change"
+        ],
+        "selection_reasons": [
+          "reading_plan",
+          "operating_mechanism",
+          "operating_causal_driver",
+          "operating_metric_change"
+        ],
+        "support_roles": [
+          "management"
+        ],
+        "support_use": "support",
+        "support_reason": "source_business_relation"
+      },
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "support": [
+        "公司 2024 年度影响收入的主要原因为沸石系列环保材料\n业务及部分医药业务下游需求减少，公司 2025 年度沸石分子筛产品收入\n略低于 2024 年度。"
+      ],
+      "context": [
+        "3、问：公司业绩在 23 年度达到历史新高后，24 年度断崖式下降，\n25 年仍未有明显起色，主要是因为沸石原因么？公司有什么举措尽快恢\n复乃至超过 23 年度的经营业绩？"
+      ],
+      "raw_member_bytes": 415
+    },
+    {
+      "task": {
+        "key": "t6",
+        "source_id": "urn:company-wiki:source:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+        "origin_group_id": "urn:company-wiki:reading-group:sha256:b5239f92f28e3a4789f7223eb6cf5245fd77f08476caa3a80b12ba866a6a6144",
+        "member_ids": [
+          "urn:company-wiki:evidence-span:sha256:d1cc4683043885fe887c26a66f2093352bb9b186e1b95ff55be78d20c56c2b39",
+          "urn:company-wiki:evidence-span:sha256:b3b925dcab14dd965b7797b4a41f2f2f3e5ac2bf2dda3ec7d9e63a8c7cc50c12"
+        ],
+        "support_ids": [
+          "urn:company-wiki:evidence-span:sha256:b3b925dcab14dd965b7797b4a41f2f2f3e5ac2bf2dda3ec7d9e63a8c7cc50c12"
+        ],
+        "context_ids": [
+          "urn:company-wiki:evidence-span:sha256:d1cc4683043885fe887c26a66f2093352bb9b186e1b95ff55be78d20c56c2b39"
+        ],
+        "kind": "qa_exchange",
+        "section_role": "unknown",
+        "topics": [
+          "operating_mechanism",
+          "core_business"
+        ],
+        "selection_reasons": [
+          "reading_plan",
+          "operating_mechanism",
+          "operating_other_party_state"
+        ],
+        "support_roles": [
+          "management"
+        ],
+        "support_use": "support",
+        "support_reason": "source_business_relation"
+      },
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "support": [
+        "答：您好，公司现无生产 VC（碳酸亚乙烯酯）的情况，根据公司控\n股股东中国节能信息，中国节能与宁德时代已经建立了联系，并希望建立\n业务协同与合作。"
+      ],
+      "context": [
+        "5、问：控股股东在支持上市公司层面，具体做了哪些工作？有没有\n能推动与宁德时代等行业龙头达成电池电解液添加剂VC 的带量采购等具\n体业务，推动上市公司快速做大做强？"
+      ],
+      "raw_member_bytes": 443
+    },
+    {
+      "task": {
+        "key": "t7",
+        "source_id": "urn:company-wiki:source:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+        "origin_group_id": "urn:company-wiki:reading-group:sha256:d689e266f2e822cf745f896a3915fe5ed91dc7d8d7395770dedb9382230e2102",
+        "member_ids": [
+          "urn:company-wiki:evidence-span:sha256:5eb6776c1eebd45b48c7850ff6039b065dcd26ab59c2970c6290ddb824c21fe4",
+          "urn:company-wiki:evidence-span:sha256:36ee30966da040e0a370a23eeec4bfc25950ed581210c2661d415678d7c13704"
+        ],
+        "support_ids": [
+          "urn:company-wiki:evidence-span:sha256:36ee30966da040e0a370a23eeec4bfc25950ed581210c2661d415678d7c13704"
+        ],
+        "context_ids": [
+          "urn:company-wiki:evidence-span:sha256:5eb6776c1eebd45b48c7850ff6039b065dcd26ab59c2970c6290ddb824c21fe4"
+        ],
+        "kind": "qa_exchange",
+        "section_role": "unknown",
+        "topics": [
+          "operating_mechanism"
+        ],
+        "selection_reasons": [
+          "reading_plan",
+          "operating_mechanism"
+        ],
+        "support_roles": [
+          "management"
+        ],
+        "support_use": "support",
+        "support_reason": "source_business_relation"
+      },
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "support": [
+        "目前公司在半导体制造材料领域已销售的产品主要为光刻\n胶单体、树脂、光酸以及半导体制程中清洗剂添加材料等，现已开发了超\n300 种化合物，在所涉足的产品方面技术已经处于国内领先水平。"
+      ],
+      "context": [
+        "13、问：公司预计半导体制造等相关材料，何时能为公司贡献 10 以\n上收益？"
+      ],
+      "raw_member_bytes": 358
+    },
+    {
+      "task": {
+        "key": "t8",
+        "source_id": "urn:company-wiki:source:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+        "origin_group_id": "urn:company-wiki:reading-group:sha256:57391a75ba9c8ecde610d825c7f40f80f41d91ff22dbe5edf9e7b4896ea6b424",
+        "member_ids": [
+          "urn:company-wiki:evidence-span:sha256:5eb6776c1eebd45b48c7850ff6039b065dcd26ab59c2970c6290ddb824c21fe4",
+          "urn:company-wiki:evidence-span:sha256:0e86fd5f9b941f79daac34effa99e4c4f6b6ecf79232f37c7984b422e68d86cd"
+        ],
+        "support_ids": [
+          "urn:company-wiki:evidence-span:sha256:0e86fd5f9b941f79daac34effa99e4c4f6b6ecf79232f37c7984b422e68d86cd"
+        ],
+        "context_ids": [
+          "urn:company-wiki:evidence-span:sha256:5eb6776c1eebd45b48c7850ff6039b065dcd26ab59c2970c6290ddb824c21fe4"
+        ],
+        "kind": "qa_exchange",
+        "section_role": "unknown",
+        "topics": [
+          "capacity_projects",
+          "operating_mechanism",
+          "core_business"
+        ],
+        "selection_reasons": [
+          "reading_plan",
+          "project_execution_timeline",
+          "project_plan_or_status",
+          "operating_mechanism",
+          "operating_description_unknown"
+        ],
+        "support_roles": [
+          "management"
+        ],
+        "support_use": "support",
+        "support_reason": "source_business_relation"
+      },
+      "admission": {
+        "status": "admitted",
+        "reason": "source_card"
+      },
+      "support": [
+        "公司结\n合实际情况与下游客户需求，在新产能方面积极布局，2025 年公司启动\n了万润工业园二期 C05 建设项目，该项目包含半导体光刻胶用相关材料产\n能约 751 吨/年，项目建成后将为公司半导体制造材料业务发展提供产能\n保障。"
+      ],
+      "context": [
+        "13、问：公司预计半导体制造等相关材料，何时能为公司贡献 10 以\n上收益？"
+      ],
+      "raw_member_bytes": 402
+    }
+  ],
+  "before": {
+    "spans": 10,
+    "source_cards": [
+      {
+        "task": {
+          "key": "t1",
+          "source_id": "urn:company-wiki:source:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:263a00bf1ad642a09d178e9258b7707c920d1c97a9ce6b1fa7f8eecc6a4aa42d",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:27d4283d845ae0477e183af35c8e2103569b77365652f313250b7c64b2b01d25",
+            "urn:company-wiki:evidence-span:sha256:c28cccb35a9b95f7742d2b0e45bee0a403d388c91bb4e5f5dc57db37fbd650c9",
+            "urn:company-wiki:evidence-span:sha256:1551293fc0e9cca34e1123370c11d1a62b634ba82ffae55ce3315bee3f18c542",
+            "urn:company-wiki:evidence-span:sha256:0e27c335a108c20f6ada31af74f33165912e10a00c4006a64456c63cd25e70b6"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:1551293fc0e9cca34e1123370c11d1a62b634ba82ffae55ce3315bee3f18c542",
+            "urn:company-wiki:evidence-span:sha256:0e27c335a108c20f6ada31af74f33165912e10a00c4006a64456c63cd25e70b6"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:27d4283d845ae0477e183af35c8e2103569b77365652f313250b7c64b2b01d25",
+            "urn:company-wiki:evidence-span:sha256:c28cccb35a9b95f7742d2b0e45bee0a403d388c91bb4e5f5dc57db37fbd650c9"
+          ],
+          "kind": "qa_exchange",
+          "section_role": "unknown",
+          "topics": [
+            "core_business"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "quantified_operating_status"
+          ],
+          "support_roles": [
+            "management"
+          ],
+          "support_use": "support",
+          "support_reason": "source_business_relation"
+        },
+        "admission": {
+          "status": "admitted",
+          "reason": "source_card"
+        },
+        "support": [
+          "答：您好，公司积极开发国内市场，持续完善国内市场战略布局，提\n高公司的抗风险能力，2025 年度公司境内收入约8.19 亿元，占比约22%，\n较比 2024 年度有所提升。",
+          "未来公司也会努力在电子信息材料产业、环保\n材料产业、新能源材料产业、生命科学与医药产业四大领域向国内市场提\n供更多优质产品。"
+        ],
+        "context": [
+          "投资者关系活动类别 | □特定对象调研 □分析师会议\n□媒体采访 □业绩说明会\n□新闻发布会 □路演活动\n□现场参观\n☑其他 2026 年山东辖区上市公司投资者网上集体接待日活动",
+          "1、问：公司主要业务 80%多都在国外，目前公司在国内业务开拓面\n临哪些挑战和机遇？公司如何服务国内统一大市场？"
+        ],
+        "raw_member_bytes": 789
+      },
+      {
+        "task": {
+          "key": "t2",
+          "source_id": "urn:company-wiki:source:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:98b2680c8300574c0551ee5328df62fe44df122bc05994c38df8d33b123c663e",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:e63387c78b9a6d891543f82e134e429d8e8e64f74bd30ec2427a4185c777622b",
+            "urn:company-wiki:evidence-span:sha256:c7953d7400659ee912c4d7c370ec25d6802ce8caf36574309abb7cd53c3c9b66"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:c7953d7400659ee912c4d7c370ec25d6802ce8caf36574309abb7cd53c3c9b66"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:e63387c78b9a6d891543f82e134e429d8e8e64f74bd30ec2427a4185c777622b"
+          ],
+          "kind": "qa_exchange",
+          "section_role": "operating_metrics",
+          "topics": [
+            "core_business",
+            "operating_causal_driver",
+            "operating_metric_change"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "operating_mechanism",
+            "operating_causal_driver",
+            "operating_metric_change"
+          ],
+          "support_roles": [
+            "management"
+          ],
+          "support_use": "support",
+          "support_reason": "source_business_relation"
+        },
+        "admission": {
+          "status": "admitted",
+          "reason": "source_card"
+        },
+        "support": [
+          "公司 2024 年度影响收入的主要原因为沸石系列环保材料\n业务及部分医药业务下游需求减少，公司 2025 年度沸石分子筛产品收入\n略低于 2024 年度。"
+        ],
+        "context": [
+          "3、问：公司业绩在 23 年度达到历史新高后，24 年度断崖式下降，\n25 年仍未有明显起色，主要是因为沸石原因么？公司有什么举措尽快恢\n复乃至超过 23 年度的经营业绩？"
+        ],
+        "raw_member_bytes": 415
+      },
+      {
+        "task": {
+          "key": "t3",
+          "source_id": "urn:company-wiki:source:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:b5239f92f28e3a4789f7223eb6cf5245fd77f08476caa3a80b12ba866a6a6144",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:d1cc4683043885fe887c26a66f2093352bb9b186e1b95ff55be78d20c56c2b39",
+            "urn:company-wiki:evidence-span:sha256:b3b925dcab14dd965b7797b4a41f2f2f3e5ac2bf2dda3ec7d9e63a8c7cc50c12"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:b3b925dcab14dd965b7797b4a41f2f2f3e5ac2bf2dda3ec7d9e63a8c7cc50c12"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:d1cc4683043885fe887c26a66f2093352bb9b186e1b95ff55be78d20c56c2b39"
+          ],
+          "kind": "qa_exchange",
+          "section_role": "unknown",
+          "topics": [
+            "operating_mechanism",
+            "core_business"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "operating_mechanism",
+            "operating_other_party_state"
+          ],
+          "support_roles": [
+            "management"
+          ],
+          "support_use": "support",
+          "support_reason": "source_business_relation"
+        },
+        "admission": {
+          "status": "admitted",
+          "reason": "source_card"
+        },
+        "support": [
+          "答：您好，公司现无生产 VC（碳酸亚乙烯酯）的情况，根据公司控\n股股东中国节能信息，中国节能与宁德时代已经建立了联系，并希望建立\n业务协同与合作。"
+        ],
+        "context": [
+          "5、问：控股股东在支持上市公司层面，具体做了哪些工作？有没有\n能推动与宁德时代等行业龙头达成电池电解液添加剂VC 的带量采购等具\n体业务，推动上市公司快速做大做强？"
+        ],
+        "raw_member_bytes": 443
+      },
+      {
+        "task": {
+          "key": "t4",
+          "source_id": "urn:company-wiki:source:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+          "origin_group_id": "urn:company-wiki:reading-group:sha256:57391a75ba9c8ecde610d825c7f40f80f41d91ff22dbe5edf9e7b4896ea6b424",
+          "member_ids": [
+            "urn:company-wiki:evidence-span:sha256:5eb6776c1eebd45b48c7850ff6039b065dcd26ab59c2970c6290ddb824c21fe4",
+            "urn:company-wiki:evidence-span:sha256:0e86fd5f9b941f79daac34effa99e4c4f6b6ecf79232f37c7984b422e68d86cd"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:0e86fd5f9b941f79daac34effa99e4c4f6b6ecf79232f37c7984b422e68d86cd"
+          ],
+          "context_ids": [
+            "urn:company-wiki:evidence-span:sha256:5eb6776c1eebd45b48c7850ff6039b065dcd26ab59c2970c6290ddb824c21fe4"
+          ],
+          "kind": "qa_exchange",
+          "section_role": "unknown",
+          "topics": [
+            "capacity_projects",
+            "operating_mechanism",
+            "core_business"
+          ],
+          "selection_reasons": [
+            "reading_plan",
+            "project_execution_timeline",
+            "project_plan_or_status",
+            "operating_mechanism",
+            "operating_description_unknown"
+          ],
+          "support_roles": [
+            "management"
+          ],
+          "support_use": "support",
+          "support_reason": "source_business_relation"
+        },
+        "admission": {
+          "status": "admitted",
+          "reason": "source_card"
+        },
+        "support": [
+          "公司结\n合实际情况与下游客户需求，在新产能方面积极布局，2025 年公司启动\n了万润工业园二期 C05 建设项目，该项目包含半导体光刻胶用相关材料产\n能约 751 吨/年，项目建成后将为公司半导体制造材料业务发展提供产能\n保障。"
+        ],
+        "context": [
+          "13、问：公司预计半导体制造等相关材料，何时能为公司贡献 10 以\n上收益？"
+        ],
+        "raw_member_bytes": 402
+      }
+    ]
+  },
+  "partial_not_full_recall": true,
+  "source_checkpoints": {
+    "sold_roster_and_300_compounds": true,
+    "subsidiary_customer_chain": true,
+    "listing_receipt_application_and_conditional_resume": true,
+    "reported_material_impact_denial": true,
+    "demand_cause_preserved": true,
+    "vc_denial_and_contact_not_approved_cooperation": true,
+    "capacity_plan_751": true,
+    "future_generic_rhetoric_not_admitted": true
+  },
+  "open_checkpoints": [],
+  "new_model_posts": 0,
+  "new_downloads": 0,
+  "pdf_parse_calls": 0,
+  "member_bytes_are_only_source_text_proxy_not_final_prompt_or_billed_cost": true
+}

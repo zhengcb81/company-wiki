@@ -1,0 +1,35 @@
+[
+  {
+    "steps": 100,
+    "source_chars": 903,
+    "prefix_search_calls": 4,
+    "prefix_search_chars": 3208,
+    "charged_work": 64918,
+    "use": [
+      "support",
+      "source_business_relation"
+    ]
+  },
+  {
+    "steps": 200,
+    "source_chars": 1803,
+    "prefix_search_calls": 4,
+    "prefix_search_chars": 6408,
+    "charged_work": 129618,
+    "use": [
+      "support",
+      "source_business_relation"
+    ]
+  },
+  {
+    "steps": 400,
+    "source_chars": 3603,
+    "prefix_search_calls": 4,
+    "prefix_search_chars": 12808,
+    "charged_work": 259018,
+    "use": [
+      "support",
+      "source_business_relation"
+    ]
+  }
+]

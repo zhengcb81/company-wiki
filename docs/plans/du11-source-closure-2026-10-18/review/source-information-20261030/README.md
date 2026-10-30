@@ -1,3 +1,11 @@
+# 2026-10-30 当前：来源描述独审27P/0OPEN，正常发布下一步
+
+[当前唯一状态](../../CURRENT_STATUS.md)，[节点验收](../source-information-20261030/description-final/README.md)。3383P/11skip、8真实来源输入检查点PASS，全文partial；后续正式摘要/缓存/FF-RF/holdout仍OPEN。下文旧待复审等为历史。
+
+# 2026-10-30 当前指向：QA已发布，来源描述最终复审中
+
+当前唯一状态见[CURRENT_STATUS](../../CURRENT_STATUS.md)与[来源描述实施细则](../source-information-20261030/SOURCE_DESCRIPTION_NEXT.md)。已发布QA121d2b26/精确CI40989629573 success；后续来源描述最终受影响域3383P/11skip/64.89秒、397mypy/ruff，真实8来源检查点全true，但独立最终复审和本节点发布仍pending。整文partial，正式摘要/恢复/RF/holdout/公司loop仍OPEN。下文带日期的实施中/待修/旧CI是历史，不覆盖此段。W21独占runtime文件保持。
+
 # C：参数三轴及业务因果（2026-10-30，实施中）
 
 承接已绿f05576e5/d6d3a5a0；不恢复旧W20返工，不抢W21 runtime/worker/env，不跑SDK。详细设计仍为../source-information-20261029/C_NEXT_IMPLEMENTATION.md。

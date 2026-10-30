@@ -11,7 +11,7 @@ import re
 
 from company_wiki.document_normalization.text_matching import matching_reading_text
 from company_wiki.document_understanding.operating_states.assertion_roles import (
-    SourceAssertionRoles, abstract_source_argument,
+    SourceAssertionRoles, abstract_source_argument, SOURCE_DESCRIPTION_SCAN_PASSES,
 )
 
 from .n6_candidate_operating_facts import OperatingFact
@@ -62,10 +62,11 @@ _ACTIVITY = re.compile(
 
 # Only the opt-in ReadingPlan detector consumes these relations. Explicit
 # legacy selectors keep detect_business_fact and its historical predicates.
-READING_BUSINESS_POLICY_VERSION = "reading-business-policy/24"
+READING_BUSINESS_POLICY_VERSION = "reading-business-policy/25"
 READING_BUSINESS_SCAN_PASSES = (
     16 + SOURCE_PURPOSE_EXTENSION_SCAN_PASSES + READING_DISCLOSURE_SCAN_PASSES + READING_RECOGNITION_SCOPE_SCAN_PASSES
     + RESOURCE_READING_SCAN_PASSES
+    + SOURCE_DESCRIPTION_SCAN_PASSES
 )
 _SOURCE_DYNAMIC_REASONS = frozenset({"operating_activity", "specific_business_event",
     "applied_operating_milestone", "customer_adoption_milestone"})

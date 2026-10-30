@@ -1,0 +1,20 @@
+{
+  "selection_gzip_sha256": "f18b589eed76ea6286e1e6a39a1eed25ffae18c560f87ac5a6dceb1f92f3372d",
+  "archive_replay_exact_selection_bytes": true,
+  "source_checkpoints": {
+    "sold_roster_and_300_compounds": true,
+    "subsidiary_customer_chain": true,
+    "listing_receipt_application_and_conditional_resume": true,
+    "reported_material_impact_denial": true,
+    "demand_cause_preserved": true,
+    "vc_denial_and_contact_not_approved_cooperation": true,
+    "capacity_plan_751": true,
+    "future_generic_rhetoric_not_admitted": true
+  },
+  "original_unchanged": true,
+  "seconds": 0.829,
+  "work": 1352979,
+  "new_supplier_posts": 0,
+  "new_downloads": 0,
+  "temporary_output_cleaned_after_record": true
+}

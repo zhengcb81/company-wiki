@@ -1,0 +1,67 @@
+{
+  "status": "ACCEPTED_READY_FOR_NORMAL_PUBLICATION",
+  "base_head": "8bf85b6428aff676f8e1af32bff99614f9a05bae",
+  "files": [
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/assertion_roles.py",
+      "raw_sha256": "c866fbc72ef3f7e1a10ac90b793c021b2520c57b8c00bebfa6b689ebd04341b8",
+      "lf_sha256": "c7d4c5268c55d44c48cadc8774d9e53b24469b655adaa817d280267dfacdd4b0"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/relations.py",
+      "raw_sha256": "96789acce8d88fb5a42d4b85e0b0def24c0a2c11dc50c1a8b7d6cb6bca83c141",
+      "lf_sha256": "ad857f6aad0d2ade209b12124404612942b46f0d373bfc8fa1a1a49bfe66675f"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_policy.py",
+      "raw_sha256": "d2273629d042dc0fd9354f7f9cb3009ac47e513d2909ed92b8e20c91f632632d",
+      "lf_sha256": "f109bebdf224b41aaaff6e7e055e58795e9ca52077ccf2fe65a7686035da9b5a"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_qa_scopes.py",
+      "raw_sha256": "9d71b61f28b52b401feb1686a02545c50f0920f9a98c9f6ce9269c40f8caa847",
+      "lf_sha256": "9d71b61f28b52b401feb1686a02545c50f0920f9a98c9f6ce9269c40f8caa847"
+    },
+    {
+      "path": "tests/unit/du11_production/test_source_description_relations.py",
+      "raw_sha256": "dd4889774c74adc0406bc485e93cfd3b2f427a8ffab5a52e9bddd4c27836b32b",
+      "lf_sha256": "dd4889774c74adc0406bc485e93cfd3b2f427a8ffab5a52e9bddd4c27836b32b"
+    },
+    {
+      "path": "tests/unit/du11_source_closure/test_source_dependency_scope.py",
+      "raw_sha256": "1ad0709e6d5e2b9e7e35a4465538b427b7a23b95c3001bd391503ef06f69db32",
+      "lf_sha256": "3ccc7b71672c8a5c4c651ed52b60a685efcd5c269787fd37640b01066d8d70a7"
+    }
+  ],
+  "affected_domain": {
+    "passed": 3383,
+    "skipped": 11,
+    "seconds": 64.89,
+    "full_repository": false
+  },
+  "mypy_source_files": 397,
+  "ruff": "PASS",
+  "independent": {
+    "status": "PASS",
+    "open": 0,
+    "passed": 27,
+    "seconds": 1.75,
+    "entry": "independent/review.json"
+  },
+  "real_source": {
+    "spans": 15,
+    "admitted_cards": 8,
+    "source_checkpoints_passed": 8,
+    "complete_recall": false,
+    "status": "partial",
+    "original_unchanged": true,
+    "entry": "real-source-cards.json",
+    "archive_replay_exact": true
+  },
+  "summary_cache_rf": "OPEN",
+  "w21_reserved_files_unchanged": true,
+  "hook_mode_wip_unstaged": true,
+  "new_supplier_posts": 0,
+  "new_downloads": 0,
+  "goal_complete": false
+}

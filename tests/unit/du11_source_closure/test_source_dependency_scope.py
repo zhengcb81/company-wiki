@@ -10,6 +10,7 @@ from company_wiki.document_understanding import decision_inventory
 @pytest.mark.parametrize("name", [
     "company_wiki.document_understanding.operating_states.relations",
     "company_wiki.document_understanding.operating_states.patterns",
+    "company_wiki.document_understanding.operating_states.assertion_roles",
     "company_wiki.document_understanding.operating_states.text_view",
     "company_wiki.document_normalization.text_matching",
     "company_wiki.source_catalog.n6_candidate_operating_facts",

@@ -130,7 +130,8 @@ _NEGATIVE_QUAL = re.compile(
     re.IGNORECASE,
 )
 _OBJ_TRIM = re.compile(r"^(?:关于|關於|就|对于|對於|about|on|for|regarding|re)\s*")
-_STATEMENT_LEAD = re.compile(r"^\s*(?:(?:报告期内|本期|目前|同时|此外)[，,\s]*)?")
+_STATEMENT_LEAD = re.compile(
+    rf"^\s*(?:(?:{p.ACTION_TEMPORAL_FRAME.pattern}|本期|同时|此外)[，,\s]*)?", re.I)
 _NONPREDICATE_BOUNDARIES = frozenset({"and", "but", "or", "yet", "so", "then", "also",
                                         "still", "just", "not", "never"})
 

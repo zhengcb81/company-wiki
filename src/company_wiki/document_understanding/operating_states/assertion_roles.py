@@ -15,6 +15,11 @@ from company_wiki.document_normalization.text_matching import matching_reading_t
 from company_wiki.document_normalization.table_shapes import observe_value_cells
 from company_wiki.document_understanding.structure.table_purpose import accounting_field, unbound_numeric_row_role
 from .product_reference import product_head_spans
+from . import patterns as source_grammar
+
+# Composition/process indexes and the bounded comma-continuation preparation.
+# The caller reserves these passes on its existing document account.
+SOURCE_DESCRIPTION_SCAN_PASSES = 6
 
 # A new explicit actor starts an independent assertion even after a comma.
 # Subordinate audit test descriptions do not manufacture a company event.
@@ -33,7 +38,7 @@ _ARGUMENT_PURPOSE = re.compile(r"\b(?:to|in order to|so as to)\s+[a-z]+\b|"
 _DESCRIPTION_SENTENCES = re.compile(r"[。！？；;]|(?<=[.!?])\s+")
 _DESCRIPTION_PARTS = re.compile(r"(?<!\d)[,，]|[,，](?!\d)|\b(?:and|but|while|whereas)\s+(?=we\b|the company\b)", re.I)
 _STATE_HEAD = re.compile(r"\b(?:projects?|plants?|factor(?:y|ies)|facilit(?:y|ies)|qualification|validation|certification)\b|项目|工厂|基地|生产设施|制造设施|厂房|生产线", re.I)
-_EN_HEAD_TAIL = r"(?:\s+(?:coverage|scope|portfolio|range|lineup|suite|family|editions?|versions?|configurations?|launch|rollout|delivery|deployment|release)){0,3}\s+"
+_EN_HEAD_TAIL = r"(?:\s+(?:coverage|scope|portfolio|range|lineup|suite|family|editions?|versions?|configurations?|launch|rollout|delivery|deployment|release)){0,3}\s*(?:,\s*)?\s+"
 _EN_AUX = r"(?P<aux>(?:(?:is|are|was|were|can|may|will|would|could|has|have|had|been|be|not|also|currently|already|still|widely|further|now)\s+){0,8})"
 _EN_FUNCTION = re.compile(_EN_HEAD_TAIL + _EN_AUX +
     r"(?P<verb>provid\w*|offer\w*|suppl\w*|support\w*|rout\w*|process\w*|deliver\w*|manufactur\w*|"
@@ -54,11 +59,11 @@ _EN_PLAN = re.compile(_EN_HEAD_TAIL + r"(?:is|are|remains?)\s+(?:planned|schedul
 _STATE_TARGET = re.compile(r"\b(?:qualification|validation|certification|production|delivery|development|construction|"
     r"commercialization|pending|regions?|markets?)\b|认证|验证|生产|交付|研发|地区|市场", re.I)
 _CN_HEAD_TAIL = (r"(?:的|范围|组合|系列|产品线|覆盖范围|业务|功能){0,3}\s*"
-    r"(?:[A-Za-z][A-Za-z0-9.-]{0,15}(?:(?:及|和|与|、|/)[A-Za-z][A-Za-z0-9.-]{0,15}){0,5})?\s*")
+    r"(?:[A-Za-z][A-Za-z0-9.-]{0,15}(?:(?:及|和|与|、|/)[A-Za-z][A-Za-z0-9.-]{0,15}){0,5})?\s*(?:[,，]\s*)?")
 _CN_AUX = r"(?P<aux>(?:已经|正在|尚未|持续|继续|计划|预计|可以|能够|主要|正式|亦|已|将|正|可|能|未){0,6})"
 _CN_PROVISION_BRIDGE = r"(?:(?:由|通过|经由)[^,，。;!?]{1,35}?(?=提供|供应|交付|制造|路由|处理|组装))?"
 _CN_FUNCTION = re.compile(_CN_HEAD_TAIL + _CN_AUX + _CN_PROVISION_BRIDGE +
-    r"(?P<verb>用于|用作|作为|支持|提供|覆盖|涵盖|包括|包含|供应|制造|设计|交付|处理|连接|面向|应用于|路由|组装)"
+    r"(?P<verb>用于|用作|作为|支持|提供|覆盖|涵盖|包括|包含|供应|制造|设计|交付|处理|识别|连接|面向|应用于|路由|组装)"
     r"(?P<target>[^,，。;!?]{1,160})")
 _CN_STATE = re.compile(_CN_HEAD_TAIL + _CN_AUX +
     r"(?P<verb>进入|处于|开展|推进|进行|完成|启动|投入)?(?:客户)?(?P<target>认证|验证|试产|量产|生产|建设|投产|运行|运营|发布|上线)")
@@ -95,7 +100,92 @@ _CONSTRAINT_STATUS = re.compile(
     r"[^。;!?]{0,120}(?:诉讼|仲裁|申索)|"
     r"\b(?:we|the (?:company|group))\s+(?:is|are|was|were)\s+(?:not\s+)?"
     r"(?:involved in|subject to)\s+[^。;!?]{0,80}\b(?:litigation|arbitration|claims?)\b", re.I)
-_AGENT_DERIVATION = re.compile(r"^(?:者|人员|人員|商(?=的|使|及|和|与|为|向|$))")
+_AGENT_DERIVATION = re.compile(
+    r"^(?:者|人员|人員|企业(?!级)|单位|机构|厂商|商(?=的|使|及|和|与|为|向|$))|"
+    r"^(?:companies|enterprises|firms|manufacturers|vendors)\b|"
+    r"^(?:company|enterprise|firm)(?=\s*(?:$|that\b|which\b))", re.I)
+
+_COMPOSITION_CN = re.compile(
+    r"(?P<head>主要产品|主营业务|产品|服务|解决方案|下游客户|客户|下游)"
+    r"(?:的(?:构成|组合|范围))?(?:主要|目前|通常)?(?:为|是|包括|包含|涵盖)"
+    r"(?P<target>[^。;!?]{1,160})")
+_COMPOSITION_EN = re.compile(
+    r"\b(?P<head>products?|services?|solutions?|businesses|customers?|clients?)\s+"
+    r"(?:(?:mainly|primarily|principally|currently)\s+)?"
+    r"(?:are|is|include[sd]?|comprise[sd]?|consist(?:s)?\s+of)\s+"
+    r"(?P<target>[^。;!?]{1,160})", re.I)
+_NOMINAL_MEMBER_SEPARATOR = re.compile(r"[,，、]|及|和|\band\b|\bor\b", re.I)
+_DEPENDENT_SUBJECT_PREFIX = re.compile(r"^(?:该|其|上述|这一|这些|有关|"
+    r"this\b|that\b|these\b|those\b|their\b|its\b)", re.I)
+_SUBJECT_MODIFIERS_ONLY = re.compile(
+    r"(?:(?:已|已经|将|拟|正在|目前|现|未来|今后|主要|主营|核心|销售|出售|推出|的|于|年|月|日)|"
+    r"\b(?:our|the|main|primary|principal|currently|already|will|in|during|for)\b|[\d\s,，.-])+", re.I)
+
+
+def explicit_description_subject(text: str) -> bool:
+    """A source's explicit nominal subject, without assigning entity/issuer type.
+
+    This only supplies a statement boundary. Deictic/qualifier dependencies
+    and factual use are still closed/prepared by the existing source session.
+    """
+    value = matching_reading_text(text)
+    if _DEPENDENT_SUBJECT_PREFIX.match(value):
+        return False
+    for relation, subject_end in _description_subjects(value):
+        prefix = value[:subject_end].strip()
+        if prefix and _SUBJECT_MODIFIERS_ONLY.fullmatch(prefix) is None:
+            return True
+    return False
+_LISTING_CONTEXT = re.compile(r"上市|发行|挂牌|招股|审核问询|"
+    r"\b(?:IPO|listing review|listing application|public listing|securities offering|registration statement)\b", re.I)
+_REGULATORY_RECEIPT = re.compile(
+    r"(?P<action>收到|接获|接到|回复|答复|提交)(?:了)?[^,，。;!?]{0,48}?"
+    r"审核问询(?:函|意见|问题)?(?!流程|程序|制度)")
+_LISTING_PROCESS_STEP = re.compile(
+    r"(?:申请|已|拟|将|正在)[^,，。;!?]{0,12}?"
+    r"(?:中止|暂停|恢复|撤回|终止)(?:(?:上市|发行|挂牌)(?:申请)?)?(?:审核|审查|注册)|"
+    r"\b(?:applied|applies|apply|requested|requests|will|plans? to|has|have)\s+[^,。;!?]{0,24}?"
+    r"\b(?:suspend\w*|resum\w*|withdraw\w*)\b[^,。;!?]{0,24}?"
+    r"\b(?:listing review|listing application|IPO review|registration statement)\b", re.I)
+_REGULATORY_RECEIPT_EN = re.compile(
+    r"\b(?P<action>received|receives|responded|responds|submitted|submits)\b[^,。;!?]{0,48}?"
+    r"\b(?:listing|IPO|registration)[^,。;!?]{0,24}?\b(?:inquir\w*|questions?|comments?)\b", re.I)
+_PROCESS_FORM_TAIL = re.compile(r"\s*(?:的)?(?:流程|说明|模板|程序|指南|条件)|"
+                              r"\s+(?:procedure|template|definition|manual)\b", re.I)
+_PROCESS_RULE_SUBJECT = re.compile(
+    r"(?:流程|程序|模板|指南|规则)(?:规定|说明|介绍|定义|是指|如下|描述|[:：])|"
+    r"\b(?:procedure|process|template|definition|guidelines?|manuals?|instructions?|policy)"
+    r"(?:\s*[:：]|\s+(?:to|for|of|is|states?|describes?)\b)", re.I)
+_NORMATIVE_CONSEQUENCE = re.compile(r"后\s*(?:应当|应|须|必须)|\b(?:should|must|shall)\b", re.I)
+_COMPLETED_RECEIPT = re.compile(r"(?:已经|已)\s*$|\b(?:has|have|had)\s*$", re.I)
+_ALPHA = re.compile(r"[^\W\d_]", re.UNICODE)
+_OPERATING_IMPACT = re.compile(
+    r"(?P<event>[^,，。;!?]{1,60}?)(?:未|不|没有|并未|已|已经)?对"
+    r"(?P<subject>[^,，。;!?]{1,60}?)(?:的)?(?:生产经营|经营|业务|运营)"
+    r"(?:构成|造成|产生|带来)[^,，。;!?]{0,12}?影响")
+_OPERATING_IMPACT_EN = re.compile(
+    r"(?P<event>[^,。;!?]{1,60}?)\s+(?:(?:did|does|do|has|have|had|will|would)\s+)?"
+    r"(?:not\s+)?(?:materially\s+)?(?:affect\w*|impact\w*)\s+"
+    r"(?P<subject>[^,。;!?]{1,60}?)\s+(?:operations|business)\b", re.I)
+
+
+def _description_subjects(value: str):
+    """One grammar inventory for factual roles and QA statement boundaries.
+
+    The returned position identifies only the explicit source subject; it
+    neither assigns that subject to the issuer nor upgrades event modality.
+    """
+    for grammar in (_COMPOSITION_CN, _COMPOSITION_EN):
+        for match in grammar.finditer(value):
+            yield match, match.start('head')
+    for grammar in (_REGULATORY_RECEIPT, _REGULATORY_RECEIPT_EN):
+        for match in grammar.finditer(value):
+            yield match, match.start('action')
+    for match in _LISTING_PROCESS_STEP.finditer(value):
+        yield match, match.start()
+    for grammar in (_OPERATING_IMPACT, _OPERATING_IMPACT_EN):
+        for match in grammar.finditer(value):
+            yield match, match.end('event')
 
 # Closed abstract-argument grammar. Only a fully observed generic objective is
 # negative evidence; an unfamiliar technical argument is never a stop word.
@@ -180,10 +270,51 @@ def _source_clauses(value: str, *, descriptions: bool = True):
         # A rule's object can precede a comma and its measurement predicate
         # follow it. Purpose retains that assertion; descriptive proofs use
         # smaller clauses so unrelated heads cannot donate a predicate.
-        for clause in (_DESCRIPTION_PARTS if descriptions else _ASSERTION_ACTOR).split(sentence):
+        # A complete composition frame owns its bounded comma-separated
+        # nominal list. Splitting that list before reading its predicate loses
+        # unfamiliar member identities; explicit new actors still end it.
+        protected = []
+        if descriptions:
+            for composition in sorted((*_COMPOSITION_CN.finditer(sentence),
+                                       *_COMPOSITION_EN.finditer(sentence)),key=lambda match:match.start()):
+                start,end = composition.span('target')
+                actor = _ASSERTION_ACTOR.search(sentence,start,end)
+                protected.append((start,actor.start() if actor else end))
+        cuts = (_DESCRIPTION_PARTS if descriptions else _ASSERTION_ACTOR).finditer(sentence)
+        parts = []
+        offset = 0
+        protection = 0
+        for cut in cuts:
+            while protection < len(protected) and protected[protection][1] <= cut.start():
+                protection += 1
+            if (protection < len(protected) and protected[protection][0] <= cut.start()
+                    < protected[protection][1]):
+                continue
+            parts.append(sentence[offset:cut.start()])
+            offset = cut.end()
+        parts.append(sentence[offset:])
+        pending = None
+        for clause in parts:
             clause = clause.strip()
-            if clause:
+            if not clause:
+                continue
+            if not descriptions:
                 yield clause
+                continue
+            if pending is not None:
+                # A bare supplied function can govern the immediately preceding
+                # product head across its comma. A new subject cannot do so.
+                cn = _CN_FUNCTION.match(clause)
+                en = _EN_FUNCTION.match(' '+clause)
+                bare = bool(cn and cn.start('verb') == 0 or en and en.start('verb') == 1)
+                if bare and any(head.end() == len(pending) for head in _DESCRIPTION_OBJECT.finditer(pending)):
+                    yield pending + ', ' + clause
+                    pending = None
+                    continue
+                yield pending
+            pending = clause
+        if pending is not None:
+            yield pending
 
 
 def _description_payload(value: str) -> bool:
@@ -194,6 +325,14 @@ def _description_payload(value: str) -> bool:
     # reduce costs remains a function, while service costs remain an account.
     purpose = _ARGUMENT_PURPOSE.search(value)
     argument = value[:purpose.start()] if purpose else value
+    # A post-nominal complement cannot reverse its governing account head:
+    # financial statements of software are statements, while cash-flow
+    # management software is still software. Aliases share the table owner.
+    nominal = re.split(r"\b(?:of|for)\b", argument, maxsplit=1, flags=re.I)[0].strip()
+    if accounting_field(nominal):
+        offerings = tuple(_DESCRIPTION_OBJECT.finditer(nominal))
+        if not offerings or nominal[offerings[-1].end():].strip(' .。'):
+            return False
     financial = tuple(_MEMBERSHIP_FINANCIAL_HEAD.finditer(argument))
     return not financial or bool(_DESCRIPTION_OBJECT.search(argument, financial[-1].end()))
 
@@ -205,11 +344,85 @@ class _DescriptionProof:
     descriptive_only: bool = False
 
 
+def _source_process_proofs(value: str) -> Iterator[_DescriptionProof]:
+    """Source assertions about a typed process/impact, not state conversions.
+
+    A received inquiry, a suspension application and a conditional restart
+    remain distinct original statements. This observation never produces a
+    production halt, issuer attribution or a completed listing/restart event.
+    """
+    if source_grammar.DEFINITION.search(value):
+        return
+    # Observe prefixes once. Scanning value[:step.start()] for each repeated
+    # event would be quadratic while the document account reserves linear work.
+    alpha = _ALPHA.search(value)
+    rule = _PROCESS_RULE_SUBJECT.search(value)
+    normative = _NORMATIVE_CONSEQUENCE.search(value)
+    rule_start = rule.start() if rule else len(value)
+    for received in (*_REGULATORY_RECEIPT.finditer(value), *_REGULATORY_RECEIPT_EN.finditer(value)):
+        start = received.start('action')
+        is_rule = bool(normative and normative.start() >= received.end()
+                       and _COMPLETED_RECEIPT.search(value[max(0,start-12):start]) is None)
+        if alpha and alpha.start() < start < rule_start and not is_rule:
+            yield _DescriptionProof(True, value)
+    if _LISTING_CONTEXT.search(value):
+        for step in _LISTING_PROCESS_STEP.finditer(value):
+            if (_PROCESS_FORM_TAIL.match(value, step.end()) is None
+                    and step.start() < rule_start
+                    and (alpha and alpha.start() < step.start()
+                         or value.startswith(('已','将','拟','正在')))):
+                yield _DescriptionProof(True, value)
+    for grammar in (_OPERATING_IMPACT, _OPERATING_IMPACT_EN):
+        for impact in grammar.finditer(value):
+            # Costs may cause a business impact. This predicate's governing
+            # target is explicitly operations/business, not the event's
+            # financial modifier. Impact on statements/accounts never matches.
+            yield _DescriptionProof(True, value)
+
+
 _UNSPECIFIED_VARIANTS = re.compile(
     r"(?:(?:several|multiple|various|different)\s+)+(?:editions?|versions?|configurations?)\.?", re.I)
 
 
+def _rule_is_function_argument(value: str, rule_start: int) -> bool:
+    """A real head/predicate governs the rule text, rather than a title noun."""
+    for head in _DESCRIPTION_OBJECT.finditer(value,0,rule_start):
+        tail = value[head.end():head.end()+160]
+        cn = _CN_FUNCTION.match(tail)
+        if cn and head.end()+cn.start('verb') < rule_start:
+            return True
+        en = _EN_FUNCTION.match(tail)
+        if (en and head.end()+en.start('verb') < rule_start
+                and (en['aux'] or head.group().casefold().endswith('s')
+                     or en['verb'].casefold().endswith(('s','ed')))):
+            return True
+    return False
+
+
 def _clause_description_proofs(value: str) -> Iterator[_DescriptionProof]:
+    rule = _PROCESS_RULE_SUBJECT.search(value)
+    if rule and not _rule_is_function_argument(value,rule.start()):
+        # A governing template/procedure owns all its quoted examples. A real
+        # product that processes such templates has its own earlier predicate.
+        return
+    if not (source_grammar.INTERROGATIVE_OPERATOR.search(value)
+            or source_grammar.INTERROGATIVE_MARKER.search(value)):
+        yield from _source_process_proofs(value)
+        for relation in (*_COMPOSITION_CN.finditer(value), *_COMPOSITION_EN.finditer(value)):
+            target = relation['target'].strip()
+            if not _description_payload(target):
+                continue
+            closed = _argument_closed(value, relation.end('target'))
+            payload = _argument_payload(target, complete=closed)
+            if payload is None and closed:
+                # The source explicitly declares a product/customer class.
+                # A closed enumeration supplies member identity, independently
+                # of capitalization or the argument's unknown entity type.
+                members = [part.strip() for part in _NOMINAL_MEMBER_SEPARATOR.split(target)]
+                if len(members) >= 2 and all(any(c.isalpha() for c in part)
+                        and not abstract_source_argument(part) for part in members):
+                    payload = True
+            yield _DescriptionProof(payload, value, descriptive_only=True)
     # One clause-local index supplies both head-first descriptions and
     # actor/action-first objects. Resource heads remain object-only here.
     heads = {(match.start(), match.end()): True for match in _DESCRIPTION_OBJECT.finditer(value)}
@@ -248,6 +461,8 @@ def _clause_description_proofs(value: str) -> Iterator[_DescriptionProof]:
             if grammar is _EN_CONSTRAINT and not _EN_COPULA.search(match['aux']):
                 continue
             if grammar is _EN_FUNCTION:
+                if _AGENT_DERIVATION.match(match['target']):
+                    continue
                 verb, head = match['verb'].casefold(), value[start:end].casefold()
                 if not match['aux'] and not head.endswith('s') and not verb.endswith(('s', 'ed')):
                     continue

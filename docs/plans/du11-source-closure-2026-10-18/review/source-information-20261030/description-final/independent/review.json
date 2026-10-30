@@ -1,0 +1,190 @@
+{
+  "schema": "source-description-independent-review/1",
+  "reviewer": "/root/semantic_axes_release_review",
+  "status": "PASS",
+  "open_within_engineering_scope": 0,
+  "signed_at_utc": "2026-10-30T03:11:12.220692+00:00",
+  "base_head": "8bf85b6428aff676f8e1af32bff99614f9a05bae",
+  "binding": "Actual six working-copy raw/LF hashes frozen before final 27 tests and rechecked at signing.",
+  "files": [
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/assertion_roles.py",
+      "raw_sha256": "c866fbc72ef3f7e1a10ac90b793c021b2520c57b8c00bebfa6b689ebd04341b8",
+      "lf_sha256": "c7d4c5268c55d44c48cadc8774d9e53b24469b655adaa817d280267dfacdd4b0"
+    },
+    {
+      "path": "src/company_wiki/document_understanding/operating_states/relations.py",
+      "raw_sha256": "96789acce8d88fb5a42d4b85e0b0def24c0a2c11dc50c1a8b7d6cb6bca83c141",
+      "lf_sha256": "ad857f6aad0d2ade209b12124404612942b46f0d373bfc8fa1a1a49bfe66675f"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_business_policy.py",
+      "raw_sha256": "d2273629d042dc0fd9354f7f9cb3009ac47e513d2909ed92b8e20c91f632632d",
+      "lf_sha256": "f109bebdf224b41aaaff6e7e055e58795e9ca52077ccf2fe65a7686035da9b5a"
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_qa_scopes.py",
+      "raw_sha256": "9d71b61f28b52b401feb1686a02545c50f0920f9a98c9f6ce9269c40f8caa847",
+      "lf_sha256": "9d71b61f28b52b401feb1686a02545c50f0920f9a98c9f6ce9269c40f8caa847"
+    },
+    {
+      "path": "tests/unit/du11_production/test_source_description_relations.py",
+      "raw_sha256": "dd4889774c74adc0406bc485e93cfd3b2f427a8ffab5a52e9bddd4c27836b32b",
+      "lf_sha256": "dd4889774c74adc0406bc485e93cfd3b2f427a8ffab5a52e9bddd4c27836b32b"
+    },
+    {
+      "path": "tests/unit/du11_source_closure/test_source_dependency_scope.py",
+      "raw_sha256": "1ad0709e6d5e2b9e7e35a4465538b427b7a23b95c3001bd391503ef06f69db32",
+      "lf_sha256": "3ccc7b71672c8a5c4c651ed52b60a685efcd5c269787fd37640b01066d8d70a7"
+    }
+  ],
+  "final_tests": {
+    "independent_cases": 27,
+    "passed": 27,
+    "failed": 0,
+    "errors": 0,
+    "skipped": 0,
+    "pytest_seconds": 1.75,
+    "command_wall_seconds": 3.56,
+    "xml_seconds": 1.614,
+    "log": "final.log",
+    "junit": "final.xml"
+  },
+  "history_not_additive": [
+    {
+      "stage": "first repair independent package",
+      "cases": 20,
+      "passed": 20,
+      "pytest_seconds": 1.93
+    },
+    {
+      "stage": "final repair including template governing relation and cost-event impact",
+      "cases": 27,
+      "passed": 27,
+      "pytest_seconds": 1.75
+    }
+  ],
+  "saved_probes": {
+    "owner_inputs": 14,
+    "file": "observations-r1.json",
+    "not_counted_as_tests": true,
+    "resource_red": "resource-r1.json",
+    "resource_first_green": "resource-r2.json",
+    "resource_final": "resource-final.json",
+    "resource_artifact_note": "A first green probe reused the red output filename. The actual red measurements were restored verbatim from recorded tool output; green retained separately and probe output filename made explicit."
+  },
+  "closed_findings": [
+    {
+      "id": "SD-01",
+      "priority": "P2",
+      "issue": "receipt and composition template purposes granted factual payload"
+    },
+    {
+      "id": "SD-02",
+      "priority": "P2",
+      "issue": "explicit named process or impact subject failed QA boundary and carried financial cost"
+    },
+    {
+      "id": "SD-03",
+      "priority": "P2",
+      "issue": "unknown comma-separated members split before composition frame"
+    },
+    {
+      "id": "SD-04",
+      "priority": "P2",
+      "issue": "English operating-impact denial missing source value"
+    },
+    {
+      "id": "SD-05",
+      "priority": "P2",
+      "issue": "repeated process rule prefix caused quadratic scans against linear work reservation"
+    },
+    {
+      "id": "SD-06",
+      "priority": "P2",
+      "issue": "mere Product noun before a template bypassed purpose guard"
+    },
+    {
+      "id": "SD-07",
+      "priority": "P2",
+      "issue": "financial event cue suppressed an explicit operating-impact target"
+    }
+  ],
+  "resources": [
+    {
+      "steps": 100,
+      "source_chars": 903,
+      "prefix_search_calls": 4,
+      "prefix_search_chars": 3208,
+      "charged_work": 64918,
+      "use": [
+        "support",
+        "source_business_relation"
+      ]
+    },
+    {
+      "steps": 200,
+      "source_chars": 1803,
+      "prefix_search_calls": 4,
+      "prefix_search_chars": 6408,
+      "charged_work": 129618,
+      "use": [
+        "support",
+        "source_business_relation"
+      ]
+    },
+    {
+      "steps": 400,
+      "source_chars": 3603,
+      "prefix_search_calls": 4,
+      "prefix_search_chars": 12808,
+      "charged_work": 259018,
+      "use": [
+        "support",
+        "source_business_relation"
+      ]
+    }
+  ],
+  "static_review": {
+    "budget": "New description passes join the existing reading work reservation; process alpha/rule/normative positions prepared once; real rule-function check uses bounded 160-character tails; cache repeat adds zero work.",
+    "scope": "One grammar inventory feeds prepared source proof and explicit QA subject boundary; comma protection bounded to composition target and stops at explicit new actors; actual task membership tested in both orders.",
+    "meaning": "No new issuer/entity inference or manufacturing/listing state conversion. Source text and original refs remain source-owned. Accounting target and templates remain negative; actual software operating on procedural text stays supported.",
+    "recipe": "reading-business-policy/25 and source grammar dependency hash test preserve actual semantic change in recipe/cache identity."
+  },
+  "real_content_review": "real-content-review.json",
+  "root_reports_not_counted_as_independent": {
+    "affected_domain_passed": 3383,
+    "skipped": 11,
+    "seconds": 64.89,
+    "mypy_source_files": 397,
+    "ruff": "PASS"
+  },
+  "outside_scope_open": [
+    "complete source recall gold",
+    "formal model summary",
+    "activation/restart/cross-run cache",
+    "FF/RF adoption",
+    "US RPO",
+    "W21",
+    "holdout",
+    "whole company loop"
+  ],
+  "cleanup": {
+    "only_review_directory_written": true,
+    "product_author_tests_shared_plans_modified": false,
+    "config_diff_empty": true,
+    "original_hook_mode_wip_preserved": true,
+    "hook_numstat": "0\t0\t.githooks/pre-push",
+    "python_no_bytecode": true,
+    "pytest_cacheprovider_disabled": true,
+    "review_cache_directories": [],
+    "probes_scripts_logs_xml_retained": true,
+    "pdf_originals_read": false,
+    "sdk_or_secrets_read": false,
+    "w21_or_holdouts_read": false,
+    "external_api_calls": 0,
+    "model_calls": 0,
+    "downloads": 0,
+    "other_repo_writes": false
+  }
+}

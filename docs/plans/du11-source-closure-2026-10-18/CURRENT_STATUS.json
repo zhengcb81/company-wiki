@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-30",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_QA_PUBLISHED_SOURCE_DESCRIPTION_TDD",
+  "overall_status": "ACTIVE_SOURCE_DESCRIPTION_ACCEPTED_PUBLICATION_NEXT",
   "parallel_packages_20261025": {
     "status": "W16_W17_W18_ROOT_COMPONENT_ACCEPTED_MERGED",
     "entry": "harness_lanes/20261025/README.md",
@@ -406,7 +406,7 @@
   "initial_execution_paid_calls_preserved": 2,
   "r1_engineering_closeout_ref": "r1-holdout-20261021/engineering-closeout-20261022.json",
   "publication_status_owner": "review/pdf-c3-20261026/QA_PROVISIONAL_PUBLICATION.json",
-  "resume_handoff": "review/pdf-c3-20261026/PAUSE_HANDOFF_20261028.md",
+  "resume_handoff": "review/source-information-20261030/SOURCE_DESCRIPTION_NEXT.md",
   "resumed_at": "2026-10-23T18:41:33.912794+00:00",
   "previous_pause_request": "Superseded by user continue2026-10-23",
   "last_updated_at": "2026-10-28",
@@ -2295,7 +2295,7 @@
     "implementation_authorized_by_user": true,
     "observed_date": "2026-10-26"
   },
-  "current_task_override": "User requested wrap then pause; only QA provisional completed/published. Source information A/B, actual whole IR, SDK startup, summaries/cache/RF and goal remain incomplete.",
+  "current_task_override": "Source description 6file engineering independently PASS27/0OPEN; affected3383P11skip; real source8input checkpoints PASS with whole-source partial. Normal publication then real summary/cache/FF-RF/holdouts and full company loop remain.",
   "skill_sync_root_cause_20261026": {
     "status": "COMPLETE_INDEPENDENT_PASS_ZERO_OPEN",
     "entry": "review/skill-sync-root-cause-20261026/README.md",
@@ -2344,7 +2344,7 @@
     "published": true,
     "push_failure": "47 targets /392 collected /600s; two regressions being root-fixed, not waived by narrower daily gate"
   },
-  "next_action": "Follow review/source-information-20261030/SOURCE_DESCRIPTION_NEXT.md: frozen 10 RED/5 controls, shared composition/customer-chain/process/impact semantics; then actual source/task recall before paid summary/cache/FF/RF and holdouts.",
+  "next_action": "Normally commit/push accepted source-description node and observe exact CI, then formal real summaries/cache/FF-RF adoption. Whole-source coverage, US RPO/W21/holdouts/audit loop remain OPEN.",
   "c3_runtime_recovery_20261026": {
     "entry": "review/pdf-c3-20261026/RUNTIME_RECOVERY.md",
     "environment_independent": "PASS_ZERO_OPEN_25_TESTS_AND_REAL_WORKER_ENTRYPOINTS",
@@ -2959,7 +2959,12 @@
   ],
   "pause_requested_by_user": false,
   "paused_scope": "revoked by user mainline resume 2026-10-29",
-  "own_uncommitted_runtime": [],
+  "own_uncommitted_runtime": [
+    "src/company_wiki/document_understanding/operating_states/assertion_roles.py",
+    "src/company_wiki/document_understanding/operating_states/relations.py",
+    "src/company_wiki/source_catalog/narrative_business_policy.py",
+    "src/company_wiki/source_catalog/narrative_qa_scopes.py"
+  ],
   "qa_provisional_publication": {
     "code_commit": "c6c446d0eebc8f6e6f6903bd677c04eebaf65077",
     "branch": "master",
@@ -3182,14 +3187,66 @@
     "ci_id": 40989629573
   },
   "source_description_next": {
-    "status": "TDD_BASELINE_FROZEN_READY_IMPLEMENT",
+    "status": "ACCEPTED_NORMAL_PUBLICATION_NEXT",
     "entry": "review/source-information-20261030/SOURCE_DESCRIPTION_NEXT.md",
-    "implementation_started": false,
+    "implementation_started": true,
     "real_content_recall_accepted": false,
     "actual_isolated_tests": {
       "failed": 10,
       "passed": 5,
       "seconds": 1.48
-    }
+    },
+    "first_formal_tests": {
+      "failed": 12,
+      "passed": 14,
+      "seconds": 1.85
+    },
+    "named_task_regression": {
+      "failed": 2,
+      "passed": 35,
+      "seconds": 2.25
+    },
+    "latest_related_tests": {
+      "passed": 132,
+      "seconds": 3.64
+    },
+    "independent_r1": {
+      "status": "RETURN_FIXED_PENDING_R2",
+      "common_causes": 5,
+      "formal_red_failed": 13,
+      "formal_red_passed": 42
+    },
+    "domain": {
+      "passed": 3383,
+      "skipped": 11,
+      "seconds": 64.89
+    },
+    "mypy_files": 397,
+    "real_saved": {
+      "source_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "units": 302,
+      "spans": 15,
+      "admitted_cards": 8,
+      "source_checkpoints_passed": 8,
+      "seconds": 1.01,
+      "work": 1352979,
+      "status": "partial",
+      "summary_cache_rf": "OPEN"
+    },
+    "new_supplier_posts": 0,
+    "new_downloads": 0,
+    "second_review_tdd": {
+      "failed": 5,
+      "passed": 57,
+      "root": "governing function versus title; business-impact target versus financial event modifier"
+    },
+    "archive_replay_exact_selection": true,
+    "independent": {
+      "passed": 27,
+      "seconds": 1.75,
+      "open": 0,
+      "entry": "review/source-information-20261030/description-final/independent/review.json"
+    },
+    "acceptance": "review/source-information-20261030/description-final/ACCEPTANCE.json"
   }
 }

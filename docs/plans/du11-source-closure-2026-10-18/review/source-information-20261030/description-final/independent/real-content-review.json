@@ -1,0 +1,65 @@
+{
+  "scope": "Initial source-input content screen only; all eight saved admitted cards read, no PDF or model run.",
+  "comparison": {
+    "r2_sha256": "ad76138ddf6599c0f2102e06148ad78d87cc10404c198ed9eb5b5aa91dce915b",
+    "r3_sha256": "8bd2a76ba884f43dff830ec3919cf7458422f325c1251f0fa72189d349f06f19",
+    "source_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+    "status": "partial",
+    "coverage_complete": false,
+    "spans": 15,
+    "cards": 8,
+    "raw_support_context_admission_identical_to_manually_read_r2": true,
+    "all_member_union_checks": true,
+    "new_model_posts": 0,
+    "new_downloads": 0,
+    "pdf_parse_calls": 0
+  },
+  "cards": [
+    {
+      "task": "t1",
+      "status": "source_scope_preserved",
+      "check": "Domestic revenue amount/share and disclosed prior-year comparison are retained as source text; not a new forecast."
+    },
+    {
+      "task": "t2",
+      "status": "source_scope_preserved",
+      "check": "News premise and management response stay attributed; appliance-product distinction and no material business impact retain their qualification; not zero impact or independent news verification."
+    },
+    {
+      "task": "t3",
+      "status": "source_scope_preserved",
+      "check": "Chemical materials to finished materials to display panels to applications remain successive customer categories, not a new direct customer edge or production event."
+    },
+    {
+      "task": "t4",
+      "status": "source_scope_preserved",
+      "check": "March 11 receipt, application to suspend, and financial-data-update condition before future application to resume/reply all remain distinct; no year supplied, no approval/completed restart asserted."
+    },
+    {
+      "task": "t5",
+      "status": "source_scope_preserved",
+      "check": "Demand explanation and affected business revenue comparison retained together; original stated years are not silently corrected."
+    },
+    {
+      "task": "t6",
+      "status": "source_scope_preserved",
+      "check": "No VC production, controlling-shareholder contact, and hoped-for cooperation remain separate; question procurement scenario is context only."
+    },
+    {
+      "task": "t7",
+      "status": "source_scope_preserved",
+      "check": "Sold-product list and more-than-300 developed compounds remain different statements; no claim that all compounds were sold or mass-produced; leading technology remains management self-description."
+    },
+    {
+      "task": "t8",
+      "status": "source_scope_preserved",
+      "check": "2025 project initiation and approximately 751 tonnes/year after construction are not current commissioned capacity or a revenue contribution."
+    }
+  ],
+  "limits": [
+    "Saved result stays partial with coverage_complete=False.",
+    "Checkpoints are not a complete source recall gold.",
+    "No generated summary, full prompt or billed-cost verification.",
+    "raw_member_bytes is only a source-text proxy."
+  ]
+}

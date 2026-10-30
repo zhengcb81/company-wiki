@@ -15,6 +15,7 @@ from company_wiki.document_understanding.operating_states.relations import (
     source_courtesy_statement,
 )
 from .narrative_antecedent import MAX_WINDOW_UNITS, MAX_ENVELOPE_CHARS
+from company_wiki.document_understanding.operating_states.assertion_roles import explicit_description_subject
 
 QA_SCOPE_FEATURE_VERSION = 'source-qa-scopes/1'
 
@@ -64,7 +65,7 @@ def _segments(ids, units, budget, dependencies):
         # An explicit new source subject does not become dependent merely
         # because a later clause contains a plan, negation or “其中”. Actual
         # deictic/restriction dependencies are closed by the shared owner below.
-        independent = independent_statement_start(text)
+        independent = independent_statement_start(text) or explicit_description_subject(text)
         if pending and previous_closed and (courtesy or independent or uid in dependencies):
             result.append(pending)
             pending = []

@@ -1,0 +1,57 @@
+{
+  "scope": "one canonical native diagnostic, no optional SDK/model/download",
+  "native_parse_calls": 1,
+  "source_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+  "original_unchanged": true,
+  "seconds": 7.212,
+  "units": 302,
+  "roles": {
+    "qa_text_shadow": 219,
+    "company_filing": 8,
+    "investor_question": 18,
+    "management": 55,
+    "unknown": 2
+  },
+  "pages_read": 6,
+  "errors": [],
+  "opaque_pages": [],
+  "measured_pages": [
+    1,
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "native_table_rows": 14,
+  "parse_work": 151690,
+  "total_work": 1056194,
+  "selected_spans": 4,
+  "coverage_complete": false,
+  "status": "partial",
+  "artifacts": [
+    {
+      "path": "parsed.json.gz",
+      "sha256": "825392716c8a82f350f55f111b45968d6872bdba0c45f3cacefefcfe1610b4b1",
+      "bytes": 118507
+    },
+    {
+      "path": "measured.json.gz",
+      "sha256": "9afdd985770d1e5ddad7341a9a90f7fe22ea04e82c2997fd1af1b7812f01fe8c",
+      "bytes": 16616
+    },
+    {
+      "path": "selection.json.gz",
+      "sha256": "fe090beb66815eed626ed4e2ff02b3a5a4a98c478f01e8b6e49f454dd23d6852",
+      "bytes": 24681
+    },
+    {
+      "path": "diagnostic.json.gz",
+      "sha256": "8a7c02a77f6d9ea8db8b6d4565a3a35907a747247f2abce1012be13dc1d66a0a",
+      "bytes": 194768
+    }
+  ],
+  "supplier_posts": 0,
+  "sdk_calls": 0,
+  "downloads": 0
+}

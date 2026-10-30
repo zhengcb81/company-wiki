@@ -1,3 +1,21 @@
+## 2026-10-30 当前：来源描述大节点已通过，正常发布中
+
+已从共因修好构成/客户链/上市程序/经营影响的来源proof与QA边界，流程模板误入、成本事件财务误杀、英文未知枚举预切和平方扫描全部闭合。最终3383P/11既有skip/64.89秒、397源mypy/ruff；独立27P/1.75秒、稳定6文件raw/LF SHA/PASS/0OPEN。真实IR原件未变，15spans/8实际SourceCards，8来源检查点全true，归档重放selection字节一致；全文partial不冒签全量召回/摘要/缓存/RF。见[验收包](review/source-information-20261030/description-final/README.md)。
+
+**下一步：** 正常提交/推送并观察精确CI，再推进正式摘要、恢复/跨run0重复POST、FF复用/RF实际采用；US RPO、W21生产接收、holdout及完整公司循环仍OPEN。外包W21三个runtime owner及工区、原件/config/外来hook mode保持；本节点0新付费/下载/SDK。目标active，历史暂停/待复审已被本段替代。
+
+## 2026-10-30 当前：来源描述复验完成，独立大节点复审中
+
+QA工程121d2b26之后，共享来源描述/流程owner新增正式TDD：独审复现13RED/42PASS已从共因修复，另真实“未来公司”套话跨段借proof先1RED再修。中英/繁体构成与客户链、上市流程、经营影响共用主体/用途/边界，未知成员不依赖产品词库；规则前缀只观察一次，母work额度未提高。受影响域3383P/11既有skip/64.89秒，397源mypy及ruff PASS；独立最终复审尚未签署，不宣称已发布。
+
+保存的真实IR原件SHA未变，302units无PDF重解析：15spans/8实际admitted SourceCards，8来源输入检查点全true，单独未来套话已退出。原QA基线10spans/4卡；原始成员文字代理4435B较2049B增加是恢复有价值信息及任务上下文重复，非实际收费。完整来源仍partial；不代签全量召回、正式摘要、缓存或RF。详见[来源描述节点](review/source-information-20261030/SOURCE_DESCRIPTION_NEXT.md)。
+
+**唯一下一步：** 修完独审余项、绑定稳定字节并正常提交/推送，观察精确CI；再正式摘要/缓存恢复/FF复用与RF实际采用、跨市场holdout及八步公司loop。W21三个runtime owner、外包工区、原件/config、外来hook mode保持；本节点0新付费/下载/SDK，目标active，历史暂停/待实施不覆盖此段。
+
+## 2026-10-30 当前：来源描述/流程共同owner实施中
+
+已在QA主线121d2b26/8bf85b64精确CI成功之上实施来源描述TDD：正式26例先12RED/14PASS，随后构成/名词类别、同断言裸功能连接、过程对象及经营影响proof逐步修复；具名新主体的任务夹带另2RED，已根修同QA边界，相关98P/2.80秒。尚未独审/发布/签真实召回。新增扫描在同work母账先预留，额度不提高；reading policy/25与既有源码digest作缓存依赖。下一步真实保存parsed/实际SourceCards复验、独立大节点与受影响域，再正式摘要/缓存/FF-RF/holdout及公司loop。W21工区与三个runtime owner、原件/config/外来hook mode保持，0新付费/下载/SDK。总体goal active，旧当前/待实施仅历史。
+
 ## 2026-10-30 当前：QA闭包已发布，推进独立来源描述TDD
 
 [QA工程](review/qa-closed-scope-20261030/README.md) `121d2b26`已正常提交推送，pre-push158P/24.67秒，精确CI40989629573 completed/success；3320P/11既有skip/63.17秒、独立15P/0OPEN、397源mypy/ruff。真实保存parsed10spans/4卡仍partial，不代表内容召回通过。下一步[共享描述细则](review/source-information-20261030/SOURCE_DESCRIPTION_NEXT.md)：15中性孤立对照10RED/5PASS已冻结，修构成/客户链/监管流程/经营影响，禁止借邻段proof、产品名词库和审核状态误读。W21只读看到eab239d9及独立终审报告，canonical SDK仍partial、仅handoff.md有WIP；保留作者工区独占，不把ASCII别名诊断当生产完成。真实摘要/缓存/FF-RF实际采用及holdout/八步循环仍OPEN，原件/config/外来hook mode保持，0新付费/下载/SDK；总goal active。下方旧当前/待发布/暂停均为历史。

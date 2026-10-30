@@ -1,0 +1,345 @@
+{
+  "count": 14,
+  "seconds": 0.07799360000353772,
+  "rows": [
+    {
+      "text": "流程说明：申请人收到上市审核问询函后应提交补充资料。",
+      "use": [
+        "support",
+        "source_business_relation"
+      ],
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "operating_mechanism"
+        ],
+        "reasons": [
+          "operating_mechanism"
+        ],
+        "score": 3,
+        "financial_exempt": true,
+        "purpose": "operating"
+      },
+      "payload": true,
+      "relations": [],
+      "work": 1873
+    },
+    {
+      "text": "The procedure states that the applicant received IPO review questions.",
+      "use": [
+        "support",
+        "source_business_relation"
+      ],
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "operating_mechanism"
+        ],
+        "reasons": [
+          "operating_mechanism"
+        ],
+        "score": 3,
+        "financial_exempt": true,
+        "purpose": "operating"
+      },
+      "payload": true,
+      "relations": [],
+      "work": 5041
+    },
+    {
+      "text": "模板：公司主要产品为传感器和光学材料。",
+      "use": [
+        "support",
+        "source_business_relation"
+      ],
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "operating_mechanism"
+        ],
+        "reasons": [
+          "operating_mechanism"
+        ],
+        "score": 3,
+        "financial_exempt": true,
+        "purpose": "operating"
+      },
+      "payload": true,
+      "relations": [],
+      "work": 1369
+    },
+    {
+      "text": "公司主要产品为ZX-9、QM-4和RX-3。",
+      "use": [
+        "support",
+        "source_business_relation"
+      ],
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "operating_mechanism"
+        ],
+        "reasons": [
+          "operating_mechanism"
+        ],
+        "score": 3,
+        "financial_exempt": true,
+        "purpose": "operating"
+      },
+      "payload": true,
+      "relations": [],
+      "work": 1585
+    },
+    {
+      "text": "公司主要產品為ZX-9、QM-4和RX-3。",
+      "use": [
+        "support",
+        "source_business_relation"
+      ],
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "operating_mechanism"
+        ],
+        "reasons": [
+          "operating_mechanism"
+        ],
+        "score": 3,
+        "financial_exempt": true,
+        "purpose": "operating"
+      },
+      "payload": true,
+      "relations": [],
+      "work": 1585
+    },
+    {
+      "text": "甲公司下游客戶為顯示器件製造企業。",
+      "use": [
+        "support",
+        "source_business_relation"
+      ],
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "operating_mechanism"
+        ],
+        "reasons": [
+          "operating_mechanism"
+        ],
+        "score": 3,
+        "financial_exempt": true,
+        "purpose": "operating"
+      },
+      "payload": true,
+      "relations": [],
+      "work": 1998
+    },
+    {
+      "text": "甲公司已收到第二輪上市審核問詢函，因資料過期申請中止審核，待更新後將申請恢復審核。",
+      "use": [
+        "support",
+        "source_business_relation"
+      ],
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "operating_mechanism"
+        ],
+        "reasons": [
+          "operating_mechanism"
+        ],
+        "score": 3,
+        "financial_exempt": true,
+        "purpose": "operating"
+      },
+      "payload": true,
+      "relations": [],
+      "work": 2953
+    },
+    {
+      "text": "據報道，所述事項未對甲公司經營構成重大影響。",
+      "use": [
+        "support",
+        "source_business_relation"
+      ],
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "operating_mechanism"
+        ],
+        "reasons": [
+          "operating_mechanism"
+        ],
+        "score": 3,
+        "financial_exempt": true,
+        "purpose": "operating"
+      },
+      "payload": true,
+      "relations": [
+        {
+          "assertion_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 4,
+              "char_end": 21
+            }
+          ],
+          "actor_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 4,
+              "char_end": 8
+            }
+          ],
+          "object_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 15,
+              "char_end": 21
+            }
+          ],
+          "predicate_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 13,
+              "char_end": 15
+            }
+          ],
+          "qualifier_refs": [
+            {
+              "unit_id": "urn:company-wiki:narrative-unit:sha256:5feceb66ffc86f38d952786c6d696c79c2dbc239dd4e91b46729d73a27fb57e9",
+              "char_start": 8,
+              "char_end": 9
+            }
+          ],
+          "activity": "business_scope",
+          "polarity": "negative",
+          "stage": "current",
+          "attribution": "unknown",
+          "modality": "actual"
+        }
+      ],
+      "work": 2467
+    },
+    {
+      "text": "The incident did not materially affect the subsidiary operations.",
+      "use": [
+        "context_only",
+        "no_independent_business_support"
+      ],
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "payload": null,
+      "relations": [],
+      "work": 4681
+    },
+    {
+      "text": "The subsidiary will apply to resume its listing review after updating financial statements.",
+      "use": [
+        "support",
+        "source_business_relation"
+      ],
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "operating_mechanism"
+        ],
+        "reasons": [
+          "operating_mechanism"
+        ],
+        "score": 3,
+        "financial_exempt": true,
+        "purpose": "operating"
+      },
+      "payload": true,
+      "relations": [],
+      "work": 6553
+    },
+    {
+      "text": "公司主要产品不包括传感器和光学材料。",
+      "use": [
+        "context_only",
+        "no_independent_business_support"
+      ],
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "payload": null,
+      "relations": [],
+      "work": 1297
+    },
+    {
+      "text": "公司否认主要产品为传感器和光学材料的说法。",
+      "use": [
+        "support",
+        "source_business_relation"
+      ],
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "operating_mechanism"
+        ],
+        "reasons": [
+          "operating_mechanism"
+        ],
+        "score": 3,
+        "financial_exempt": true,
+        "purpose": "operating"
+      },
+      "payload": true,
+      "relations": [],
+      "work": 1513
+    },
+    {
+      "text": "We discussed whether our products are sensors and optical materials.",
+      "use": [
+        "context_only",
+        "no_independent_business_support"
+      ],
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "payload": null,
+      "relations": [],
+      "work": 4897
+    },
+    {
+      "text": "Our products are XN-7, RX-3 and HM-2.",
+      "use": [
+        "unresolved",
+        "source_payload_unresolved"
+      ],
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "operating_mechanism"
+        ],
+        "reasons": [
+          "operating_mechanism"
+        ],
+        "score": 3,
+        "financial_exempt": false,
+        "purpose": "operating"
+      },
+      "payload": null,
+      "relations": [],
+      "work": 2665
+    }
+  ]
+}
