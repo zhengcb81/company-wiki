@@ -52,6 +52,7 @@ import json
 import re
 import subprocess
 from dataclasses import dataclass
+from datetime import datetime
 from typing import Any
 
 from .assertion_service import get_verified_assertion, source_scope_qualification
@@ -506,6 +507,10 @@ class PublicCanonicalBrowser:
         as_of = _required_text(request["as_of"], "as_of", max_length=40)
         if not _AS_OF_RE.fullmatch(as_of):
             raise CanonicalBrowseError("invalid_as_of")
+        try:
+            datetime.fromisoformat(as_of.replace("Z", "+00:00"))
+        except ValueError as exc:
+            raise CanonicalBrowseError("invalid_as_of") from exc
         limit = request["limit"]
         if limit is None:
             limit = _DEFAULT_LIMIT
