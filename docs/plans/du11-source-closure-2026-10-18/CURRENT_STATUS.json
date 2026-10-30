@@ -30,8 +30,8 @@
   "code_ci": {
     "id": 40989629573,
     "head_sha": "121d2b264f14a9b4d8e9d050d11aefcb4393bd3c",
-    "status": "in_progress",
-    "conclusion": null,
+    "status": "completed",
+    "conclusion": "success",
     "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40989629573"
   },
   "formal_v4_offline_selection_replay_20261025": {
@@ -3137,7 +3137,7 @@
     "source_commit": "69c9b178e4b23ff9bb57b804b7c954893bcd5e13"
   },
   "qa_closed_scope_next": {
-    "status": "ENGINEERING_PUBLISHED_EXACT_CI_RUNNING",
+    "status": "ACCEPTED_PUBLISHED_EXACT_CI_SUCCESS",
     "entry": "review/qa-closed-scope-20261030/README.md",
     "actual_corrected_tests": {
       "failed": 3,

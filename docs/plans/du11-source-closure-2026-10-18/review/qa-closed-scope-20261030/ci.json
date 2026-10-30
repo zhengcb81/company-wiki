@@ -1,7 +1,7 @@
 {
   "id": 40989629573,
   "head_sha": "121d2b264f14a9b4d8e9d050d11aefcb4393bd3c",
-  "status": "in_progress",
-  "conclusion": null,
+  "status": "completed",
+  "conclusion": "success",
   "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40989629573"
 }
