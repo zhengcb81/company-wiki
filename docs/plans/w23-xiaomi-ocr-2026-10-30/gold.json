@@ -1,0 +1,330 @@
+{
+ "schema_version": "cwp-ocr-gold/1",
+ "plan_id": "w23-xiaomi-ocr-2026-10-30",
+ "frozen_before_engine_outputs": true,
+ "method": "gold = visual transcription verified against the frozen 200-DPI page renders.  For born-digital pages the PDF text layer served only as a candidate base and every page was visually checked and corrected (checkbox glyphs, footnote-marker merges, page-number reading order, row-major participant order, garbled-layer replacements).  Native text alone was never accepted as gold.  Number tokens for the number accuracy metric are derived from gold full_text by the comparator.",
+ "table_linearization": "table content kept row-major in visual reading order; cells whitespace separated",
+ "superscript_note": "ksy_q1_2026_p002: '392.0' carries a superscript footnote marker '1' on the page; the marker is not part of the number and is excluded from full_text; engines emitting '392.01' count as a wrong number",
+ "pages": {
+  "byd_ar_2024_p021": {
+   "role": "eval",
+   "full_text": "比亚迪股份有限公司 2024 年年度报告全文\n\n22\n\n消费电子业务方面，本集团凭借领先的技术优势和强大的制造能力，深度参与客户的新产品开发，助力客户提升产品\n\n竞争力。本集团持续深耕安卓高端市场，为客户提供高品质的全方位服务，年内，受国内和海外客户需求增长驱动，安卓\n\n零部件和整机组装业务均实现增长。海外大客户业务方面，凭借卓越的业务能力，本集团的业务份额持续提升，带动出货\n\n量和收入同比增长。此外，随着本集团并表二零二三年年底完成收购的业务，拉动零部件业务规模快速扩大，并通过资源\n\n整合和自动化快速提升运营效率。\n\n新型智能产品业务方面，本集团持续加强与各板块的行业头部客户的战略合作，无人机、智能家居、游戏硬件等业务\n\n板块均保持稳健发展。同时，本集团持续发力新产品研发，抢抓市场机遇，积极拓展新业务，持续完善在AI数据中心、AI\n\n机器人等赛道的布局。其中，3D打印机、AI服务器于年内实现量产，液冷和电源产品完成开发，为本集团业务增长注入新\n\n动力。\n\n二、报告期内公司从事的主要业务 \n\n公司需遵守《深圳证券交易所上市公司自律监管指引第 3 号——行业信息披露》中汽车制造相关业的披露要求\n\n本集团主要从事以新能源汽车为主的汽车业务，手机部件及组装业务，二次充电电池及光伏业务，同时利用自身的技\n\n术优势拓展城市轨道交通业务领域。\n\n作为全球新能源汽车行业先行者和领导者，本集团凭借在汽车电动化及智能化等关键领域的雄厚技术积累，通过技术\n\n的持续创新，打造出长期、可持续的核心竞争优势，夯实了本集团于全球新能源汽车行业的领导地位，加速推动全球汽车\n\n产业转型升级进程。\n\n本集团为全球领先的二次充电电池制造商之一。消费类电池领域，本集团生产的锂离子电池广泛应用于各类消费类电\n\n子产品及新型智能产品领域。动力电池领域，本集团开发了高度安全的磷酸铁锂电池—“刀片电池”，更好解决市场安全\n\n痛点，加速磷酸铁锂电池重回动力电池主流赛道，助力全球新能源汽车产业行稳致远。储能电池领域，本集团在电源侧储\n\n能、电网储能、工商业储能、家庭储能等应用领域发力，为客户提供更加清洁可持续的储能解决方案。\n\n光伏业务作为本集团在清洁能源领域的重要布局之一，致力于用清洁能源改变人类生活方式，以实现能源的可持续发\n\n展为目标，拥有硅片、电池片、光伏组件、光伏系统应用等全产业链布局。本集团将继续积极布局新技术，推动产品不断\n\n升级。\n\n作为全球领先的高科技创新产品提供商，本集团业务广泛，涵盖消费电子、新型智能产品等多元化领域，拥有电子信\n\n息技术、AI技术、5G和物联网技术、热管理技术、新材料技术、精密模具技术和数字化制造技术等核心优势，以及高效规\n\n模化的生产经验和丰富的产品组合，为全球客户提供一站式产品解决方案。\n\n凭借在新能源业务领域建立的技术和成本优势，本集团在城市轨道交通领域成功研发出高效率、低成本的中运量“云\n\n轨”和低运量“云巴”产品，配合新能源汽车实现对城市公共交通的立体化覆盖，在帮助城市解决交通拥堵和空气污染的\n\n同时，实现本集团的长远及可持续发展。\n\n报告期内整车制造生产经营情况\n\n☑适用 □不适用\n\n整车产品产销情况\n\n快报产量 快报销量\n\n本报告期 上年同期 与上年同比增减 本报告期 上年同期 与上年同比增减\n\n按车型类别\n\n-乘用车 4,281,084 3,033,662 41.12% 4,250,370 3,012,906 41.07%\n",
+   "provenance": "native text layer as base; visually verified against frozen 200-DPI render",
+   "corrections": [
+    "checkbox glyph restored: 适用 □不适用 -> ☑适用 □不适用 (native layer lost the checked-box glyph)",
+    "page footer number 22 moved to reading-order end"
+   ],
+   "facts": [
+    "消费电子业务深度参与客户新产品开发,安卓零部件和整机组装业务年内均实现增长",
+    "海外大客户业务份额持续提升,带动出货量和收入同比增长",
+    "并表二零二三年年底完成收购的业务,零部件业务规模快速扩大",
+    "3D打印机、AI服务器于年内实现量产,液冷和电源产品完成开发",
+    "主营:以新能源汽车为主的汽车业务、手机部件及组装业务、二次充电电池及光伏业务,并拓展城市轨道交通业务",
+    "动力电池开发磷酸铁锂'刀片电池';储能覆盖电源侧/电网/工商业/家庭",
+    "光伏业务拥有硅片、电池片、光伏组件、光伏系统应用等全产业链布局",
+    "城市轨道交通领域研发中运量'云轨'和低运量'云巴'产品",
+    "乘用车快报产量4,281,084辆(上年同期3,033,662辆,+41.12%),快报销量4,250,370辆(上年同期3,012,906辆,+41.07%)"
+   ],
+   "conditions": [
+    "报告期内整车制造生产经营情况:☑适用(□不适用未勾选)"
+   ],
+   "non_text_regions": []
+  },
+  "amec_h1_2026_p009": {
+   "role": "eval",
+   "full_text": "中微半导体设备（上海）股份有限公司2026 年半年度报告\n\n10 / 210\n\n关注的硬科技产业之一。\n\n半导体设备是集成电路和泛半导体微观器件产业的基石，而集成电路和泛半导体微观器件，\n\n又是数码产业的基础。半导体设备微观加工的能力是数码产业发展的关键。没有能加工微米和纳\n\n米尺度的光刻机、等离子体刻蚀机和薄膜沉积等设备，就不可能制造出集成电路和微观器件。随\n\n着微观器件尺寸越做越小，结构从平面 2D 到三维立体，半导体设备的极端重要性更加凸显出来。\n（下图内文字：软件网络电商 传媒 大数据等应用；年产值几十万亿美金；电子系统；年产值几万亿美金；AMEC；中微公司）\n\n中国的集成电路和泛半导体产业近年来持续兴旺。在政府的大力推动和业界的努力下，在半\n\n导体设备的门类、性能和大规模量产能力等方面，国产设备和国外设备相比正在快速缩小差距，\n\n发展迅速并已初具规模，中国大陆半导体设备市场规模在全球的占比逐年提升。根据国际半导体\n\n产业协会（SEMI）在发布《年中总半导体设备市场预测报告》中指出，预测 2026 年全球半导体\n\n制造设备（OEM）总销售额将创下 1659 亿美元的历史新高，同比增长 23.2%。人工智能正在加速\n\n对更强大、更高效芯片的需求，重塑半导体制造投资格局，推动整个半导体设备市场的规模快速\n\n增长。\n\n（二）公司主营业务情况\n\n中微公司主要从事高端半导体设备及泛半导体设备的研发、生产和销售。公司瞄准世界科技\n\n前沿，基于在半导体设备制造产业多年积累的专业技术，涉足半导体集成电路制造、先进封装、\n\nLED 外延片生产、功率器件、MEMS 制造以及其他微观工艺的高端设备领域。\n\n中微公司开发的 CCP 高能等离子体和 ICP 低能等离子体刻蚀两大类、包括二十几种细分刻蚀\n\n设备已可以覆盖大多数刻蚀应用。中微公司的等离子体刻蚀设备已被广泛应用于国内和国际一线\n\n客户，从 65 纳米到 3 纳米及更先进工艺的众多刻蚀应用，并已实现 CMP 湿法设备多种应用研发\n\n和客户验证。中微公司最近十年着重开发多种导体和半导体化学薄膜设备，如 MOCVD，LPCVD，\n",
+   "provenance": "native text layer as base; visually verified; in-figure marketing text added manually",
+   "corrections": [
+    "page footer '10 / 210' moved to reading-order end",
+    "in-figure stylized text transcribed from the frozen render and inserted at the figure's reading-order position"
+   ],
+   "facts": [
+    "预测2026年全球半导体制造设备(OEM)总销售额将创下1659亿美元的历史新高,同比增长23.2%",
+    "中微公司主要从事高端半导体设备及泛半导体设备的研发、生产和销售",
+    "CCP高能等离子体和ICP低能等离子体刻蚀两大类、包括二十几种细分刻蚀设备,已可覆盖大多数刻蚀应用",
+    "等离子体刻蚀设备已广泛应用于国内和国际一线客户,覆盖65纳米到3纳米及更先进工艺",
+    "已实现CMP湿法设备多种应用研发和客户验证",
+    "最近十年着重开发多种导体和半导体化学薄膜设备,如MOCVD、LPCVD(行至页尾未完)"
+   ],
+   "conditions": [
+    "没有能加工微米和纳米尺度的光刻机、等离子体刻蚀机和薄膜沉积等设备,就不可能制造出集成电路和微观器件(否定条件)"
+   ],
+   "non_text_regions": [
+    "配图下层金字塔小字(半导体器件/封装测试层级与'年产值约…美金')在200DPI下不可靠,记不可判,不入分母"
+   ]
+  },
+  "amec_h1_2026_p011": {
+   "role": "eval",
+   "full_text": "中微半导体设备（上海）股份有限公司2026 年半年度报告\n\n12 / 210\n\n的机械设计、工艺开发、产品管理和技术支持团队，而在电气工程、平台工程、软件工程等方面\n\n则采用共享的方式进行研发支持。通过这种矩阵管理的方法，实现了人才、营运等资源在不同的\n\n产品及技术服务之间灵活分配，实现共享经验知识，优化资源使用效率，使公司能够快速响应不\n\n断变化的研发要求，进行持续的技术创新。\n\n3、采购模式\n\n为保证公司产品的质量和性能，公司制定了严格的供应商选择和审核制度。达到经营资质、\n\n研发和设计能力、技术水平、质量管控能力、生产能力、产品价格、交货周期及付款周期等众多\n\n标准要求的供应商，被纳入公司合格供应商名录，并定期审核。目前，公司已经与全球众多供应\n\n商建立了长期、稳定的合作关系。\n\n4、生产模式\n\n公司主要实行订单式生产为主，结合少量库存式生产为辅的生产方式。订单式生产是指公司\n\n在与客户签订订单后，根据订单情况进行定制化设计及生产制造，以应对客户的差异化需求。库\n\n存式生产是指公司对设备通用组件或成批量出货设备常用组件根据内部需求及生产计划进行预生\n\n产，主要为快速响应交期及平衡产能。\n\n5、营销及销售模式\n\n公司采取直销为主的销售模式，因欧洲市场的客户较为分散，公司在该区域通过代理商模式\n\n进行销售。公司设有全球业务部负责公司所有产品的销售管理，下设中国大陆、中国台湾、韩\n\n国、新加坡、美国等国家或地区的区域销售和支持部门。\n\n新增重要非主营业务情况\n\n□适用 √不适用\n\n二、 经营情况的讨论与分析\n\n数码产业已成为国民经济发展的重要引擎，而作为数码产业的基石，加工集成电路和各种微\n\n观器件的半导体设备产业，正成为备受关注的硬科技领域。作为国内外半导体高端设备的领先公\n\n司，中微公司迎来了快速发展机遇。\n\n中微公司的主打产品等离子体刻蚀设备和薄膜沉积设备是除光刻机以外的核心微观加工设备，\n\n具有制程步骤最多、工艺过程开发难度最高的特点。微观器件的不断缩小推动了器件结构和加工\n\n工艺的变化。存储器件从平面 2D 到立体 3D 架构的转换，显著提升了等离子体刻蚀和薄膜沉积工\n\n艺的关键性，相应设备的需求量大大增加。同时，光刻机由于波长的限制，更小的微观结构要靠\n\n等离子体刻蚀和薄膜沉积设备的组合“二重模板”和“四重模板”工艺技术来加工，刻蚀机和薄膜设\n\n备的重要性和市场空间持续提升，相关设备市场的年平均增长速度远高于其他种类的设备，为中\n\n微公司带来了强劲增长动力。此外，随着半导体工艺节点持续缩小，量检测设备需满足更高精度\n\n要求，推动该设备市场快速增长，已成为占半导体前道设备总市场约 13%的第四大设备门类。量\n\n检测设备主要涵盖光学量检测设备和电子束量检测设备。中微公司于 2024 年新发起设立了超微\n",
+   "provenance": "native text layer as base; visually verified against frozen render",
+   "corrections": [
+    "page footer '12 / 210' moved to reading-order end"
+   ],
+   "facts": [
+    "采购模式:严格的供应商选择和审核制度,合格供应商名录并定期审核,与全球众多供应商建立长期稳定合作关系",
+    "生产模式:订单式生产为主,结合少量库存式生产为辅",
+    "营销及销售模式:直销为主;欧洲市场客户较为分散,该区域通过代理商模式销售",
+    "下设中国大陆、中国台湾、韩国、新加坡、美国等国家或地区的区域销售和支持部门",
+    "新增重要非主营业务情况:□适用 √不适用",
+    "量检测设备已成为占半导体前道设备总市场约13%的第四大设备门类",
+    "中微公司于2024年新发起设立了超微(行至页尾未完)"
+   ],
+   "conditions": [
+    "欧洲市场客户较为分散,公司在该区域通过代理商模式进行销售(条件)",
+    "订单式生产:与客户签订订单后,根据订单情况进行定制化设计及生产制造"
+   ],
+   "non_text_regions": []
+  },
+  "meituan_ar_2024_p011": {
+   "role": "eval",
+   "full_text": "11 美團 2024 年度報告\n主席報告\n2024年，即時配送業務實現了穩健增長。如今，外賣已成為餐飲行業增長的重要驅動力，而即時零售已成為零售行業不可或缺的組成部分。我們順應不斷演變的消費趨勢，強化了「省」的用戶心智，構建更高效且普惠的消費生態。我們深入推進供應鏈創新，優化運營，以滿足消費者的多樣化需求。我們的新供給模式為商家帶來新的增長機遇，幫助他們抵禦外部挑戰。通過「拼好飯」，大量餐飲商家成功提升了銷售額，吸引了新客。與此同時，消費者也獲得了更多價格實惠的外賣選擇。我們進一步拓展了「拼好飯」供給，加強食品安全管控，提升用戶體驗，這激發了更多場景下的消費需求，並提高了消費者的購買頻次。「品牌衛星店」成為品牌餐飲商家低成本擴張的有效途徑。這些「品牌衛星店」，借助商家品牌資產和採用更優的成本結構，為消費者提供了相較於堂食價格更為實惠的高品質餐品。我們還優化了「神搶手」的選品，更好地滿足消費者對品質餐飲的需求。此外，在2024年，「美團閃電倉」實現了顯著增長，尤其在低線市場，它已經成為各類零售商重要的新增長渠道。許多大型傳統零售商積極採用「美團閃電倉」模式，其與傳統線下零售供應形成互補，提升即時零售的便利性，進一步激發消費需求。即時零售現已穩固成為一種高確定性的生活方式。我們還不斷改善了不同品類即時配送的服務。例如，消費者在我們的平台購買藥品時，可以享受涵蓋居家檢測、線上診斷、醫保支付以及即時配送的一站式服務。\n隨著即時配送業務的發展，我們始終致力於構建一個可持續發展的生態系統。在商家方面，我們簡化了促銷體系，規範了營銷活動，加強了食品安全管理，並完善了對惡意差評的治理。我們亦於第四季度推出人民幣10億元的商家扶持計劃。通過現金支持及平台補貼，我們幫助商家提高服務質量、優化效率及探索創新。在騎手方面，保障騎手權益、改善他們的工作體驗是我們的首要任務。自2022年7月以來，在政府部門的指導下，我們已為7個試點省市的所有騎手提供了累計人民幣14億元的職業傷害保障資金。此外，我們還推出了一系列關愛騎手的措施，其中包括在系統中引入防疲勞功能，以及為有聽力障礙的騎手提供特殊關懷和便利措施。另外，我們為大量面臨重大疾病或需要教育幫扶的騎手家庭提供支持。展望未來，我們將繼續保持對生態系統的投入，致力於行業可持續發展。特別是通過深入調研並在相關部門的指導下，我們制定出了一項針對騎手的社保試點方案。我們預計在2025年第二季度開始在部分城市試點實施。\n",
+   "provenance": "full manual transcription from the frozen 200-DPI render; the native text layer of this page has broken reading order (fragments reversed/interleaved) and was NOT used",
+   "corrections": [
+    "native layer unusable (scrambled order, e.g. 年2024); every character from visual transcription"
+   ],
+   "facts": [
+    "2024年即時配送業務實現穩健增長;外賣成為餐飲行業增長的重要驅動力,即時零售成為零售行業不可或缺的組成部分",
+    "通過「拼好飯」大量餐飲商家提升銷售額並吸引新客;「品牌衛星店」成為品牌餐飲商家低成本擴張的有效途徑",
+    "優化了「神搶手」的選品;2024年「美團閃電倉」實現顯著增長,尤其低線市場",
+    "藥品即時配送可享受居家檢測、線上診斷、醫保支付一站式服務",
+    "第四季度推出人民幣10億元的商家扶持計劃",
+    "自2022年7月以來為7個試點省市的所有騎手提供累計人民幣14億元職業傷害保障資金",
+    "推出防疲勞功能,為聽力障礙騎手提供特殊關懷",
+    "制定針對騎手的社保試點方案,預計2025年第二季度開始在部分城市試點實施"
+   ],
+   "conditions": [
+    "社保試點方案預計2025年第二季度開始在部分城市試點實施(時間條件)"
+   ],
+   "non_text_regions": [
+    "页面下部大幅装饰留白与浅色吉祥物插画,无文字(编造负对照)"
+   ]
+  },
+  "ksy_q1_2026_p002": {
+   "role": "eval",
+   "full_text": "\n附件一\n\n金山云公佈未經審計的二零二六年第一季度財務業績\n\n金山云控股有限公司（「金山云」或「本公司」）（納斯達克：KC及港交所：3896），\n\n一間於中國的領先雲服務提供商，今日公佈其截至二零二六年三月三十一日止第\n\n一季度的未經審計財務業績。\n\n金山云董事長兼首席執行官鄒濤先生表示：「我們持續推進「高質量可持續發展」\n\n戰略，智算雲業務賬單收入同比增長90%，佔公有雲收入比重首次突破半數。隨\n\n著我們持續投資基礎設施、錘煉自身能力，並強化生態系統內外的客戶基礎，從\n\n算力到垂直領域解決方案，我們對新時代帶來的廣闊機遇倍感振奮。」\n\n金山云首席財務官李翊女士補充：「本季度業績表現穩健，總收入達到人民幣\n\n2,703.7百萬元，同比增長37.2%。儘管面臨整體供應鏈挑戰，我們的經調整毛\n\n利仍達到人民幣351.4百萬元，同比增長7.2%。我們的經調整EBITDA利潤率為\n\n27.6%，同比增長11.4個百分點，與我們的智算雲業務增長趨勢一致。鑒於各行\n\n業需求強勁，我們堅定不移地加大基礎設施投入，第一季度資本開支及取得的租\n\n賃資產合計達人民幣30億元，且我們預計全年將繼續投資，以推動業務進一步擴\n\n張。」\n\n二零二六年第一季度財務業績\n\n總收入達人民幣2,703.7百萬元（392.0百萬美元），較二零二五年同季的人民幣\n\n1,970.0百萬元同比增加37.2%，及較二零二五年第四季度的人民幣2,761.4百萬元\n\n環比下降2.1%。該同比增加主要是由於來自小米和金山生態系統以及人工智能相\n\n關客戶的收入增長以及我們對行業雲客戶的進一步滲透。環比減少主要是由於行\n\n業雲受到季節性影響。\n\n公有雲服務收入為人民幣1,996.3百萬元（289.4百萬美元），較二零二五年同\n\n季的人民幣1,353.5百萬元同比增加47.5%及較上一季度的人民幣1,902.4百萬\n\n元環比增加4.9%。該增加主要是由於人工智能需求增長帶動整體收入提升所\n\n致。\n\n行業雲服務收入為人民幣707.4百萬元（102.6百萬美元），較二零二五年同季\n\n的人民幣616.5百萬元同比增長14.7%及較上一季度的人民幣859.0百萬元環比\n\n減少17.6%。該環比減少主要是由於春節帶來的影響及各個項目的交付時間\n\n表有所不同。\n\n1 本公告載有若干人民幣金額按特定匯率換算成美元，僅為方便讀者。除非另有說明，否則\n\n人民幣兌美元的匯率為人民幣6.8980元兌1.00美元，即經紐約聯邦儲備銀行核實（就海關\n\n目的而言）於二零二六年三月三十一日有效的午間買入匯率。\n3\n",
+   "provenance": "native text layer as base; visually verified against frozen render",
+   "corrections": [
+    "native '392.01百萬美元' merged the superscript footnote marker into the number; visual reading is 392.0 with a superscript footnote 1",
+    "page footer number 3 moved to reading-order end"
+   ],
+   "facts": [
+    "金山云控股(納斯達克:KC及港交所:3896)公佈截至二零二六年三月三十一日止第一季度未經審計財務業績",
+    "智算雲業務賬單收入同比增長90%,佔公有雲收入比重首次突破半數",
+    "總收入人民幣2,703.7百萬元(392.0百萬美元),同比+37.2%,環比-2.1%",
+    "經調整毛利人民幣351.4百萬元,同比+7.2%;經調整EBITDA利潤率27.6%,同比增長11.4個百分點",
+    "第一季度資本開支及取得的租賃資產合計達人民幣30億元",
+    "公有雲服務收入人民幣1,996.3百萬元(289.4百萬美元),同比+47.5%,環比+4.9%",
+    "行業雲服務收入人民幣707.4百萬元(102.6百萬美元),同比+14.7%,環比-17.6%",
+    "匯率:人民幣6.8980元兌1.00美元(二零二六年三月三十一日有效的午間買入匯率,經紐約聯邦儲備銀行核實)"
+   ],
+   "conditions": [
+    "總收入環比減少主要由於行業雲受到季節性影響",
+    "行業雲環比減少主要由於春節帶來的影響及各個項目的交付時間表有所不同"
+   ],
+   "non_text_regions": []
+  },
+  "ir_wanrun_20241104_p000": {
+   "role": "eval",
+   "full_text": "\n证券代码：002643 证券简称：万润股份\n\n中节能万润股份有限公司投资者关系活动记录表 \n\n 编号：20241104\n\n投资者关系活动类别\n\n☑特定对象调研 □分析师会议\n\n□媒体采访 □业绩说明会\n\n□新闻发布会 □路演活动\n\n□现场参观\n\n□其他 \n\n活动参与人员\n\n天风证券：郭建奇\n\n国泰君安：周志鹏\n\n恒安标准人寿：王祉蘅\n\n时间 2024 年 11 月 04 日 14:00~15:30\n\n地点 中节能万润股份有限公司本部三楼会议室\n\n形式 现场会议\n\n上市公司接待人员姓名\n\n董事会秘书：于书敏\n\n证券事务代表：肖新玲\n\n证券部其他工作人员\n\n交流内容及具体问答记\n\n录\n\n1、问：公司今年半导体制造材料情况如何？ \n\n答：公司 2024 年三季度半导体制造材料整体收入继续保持同比增长，\n\n近年来公司在半导体材料领域结合下游需求持续投入研发，产品主要包括\n\n光刻胶单体、光刻胶树脂、光致产酸剂以及半导体制程中清洗剂添加材料，\n\n公司在上述材料领域已经具有国内领先的技术水平。公司目前各类半导体\n\n制造材料的产品开发及量产都在顺利推进，未来随着更多产品通过下游客\n\n户验证，将为公司在该领域的发展带来更多市场机会。\n\n2、问：请介绍公司销售的 PI 产品情况？\n\n答：公司已销售的聚酰亚胺材料包括多种电子与显示领域的 PI 单体\n1\n",
+   "provenance": "native text layer as base; visually verified against frozen render",
+   "corrections": [
+    "checkbox glyph restored: □√特定对象调研 -> ☑特定对象调研",
+    "participant rows re-ordered to visual row-major order (天风/恒安标准 first row, 国泰君安 second row)",
+    "page footer number 1 moved to reading-order end"
+   ],
+   "facts": [
+    "投资者关系活动类别:特定对象调研(☑),分析师会议/媒体采访/业绩说明会/新闻发布会/路演活动/现场参观/其他均未勾选",
+    "时间:2024年11月04日14:00~15:30;地点:中节能万润股份有限公司本部三楼会议室;形式:现场会议",
+    "参与人员:天风证券郭建奇、恒安标准人寿王祉蘅、国泰君安周志鹏",
+    "接待人员:董事会秘书于书敏、证券事务代表肖新玲、证券部其他工作人员",
+    "问1:2024年三季度半导体制造材料整体收入继续保持同比增长;产品主要包括光刻胶单体、光刻胶树脂、光致产酸剂以及半导体制程中清洗剂添加材料,国内领先技术水平",
+    "问2:已销售的聚酰亚胺材料包括多种电子与显示领域的PI单体(行至页尾未完)"
+   ],
+   "conditions": [],
+   "non_text_regions": []
+  },
+  "ksy_q1_2026_p002_synthetic_degraded": {
+   "role": "eval_degraded",
+   "full_text": "\n附件一\n\n金山云公佈未經審計的二零二六年第一季度財務業績\n\n金山云控股有限公司（「金山云」或「本公司」）（納斯達克：KC及港交所：3896），\n\n一間於中國的領先雲服務提供商，今日公佈其截至二零二六年三月三十一日止第\n\n一季度的未經審計財務業績。\n\n金山云董事長兼首席執行官鄒濤先生表示：「我們持續推進「高質量可持續發展」\n\n戰略，智算雲業務賬單收入同比增長90%，佔公有雲收入比重首次突破半數。隨\n\n著我們持續投資基礎設施、錘煉自身能力，並強化生態系統內外的客戶基礎，從\n\n算力到垂直領域解決方案，我們對新時代帶來的廣闊機遇倍感振奮。」\n\n金山云首席財務官李翊女士補充：「本季度業績表現穩健，總收入達到人民幣\n\n2,703.7百萬元，同比增長37.2%。儘管面臨整體供應鏈挑戰，我們的經調整毛\n\n利仍達到人民幣351.4百萬元，同比增長7.2%。我們的經調整EBITDA利潤率為\n\n27.6%，同比增長11.4個百分點，與我們的智算雲業務增長趨勢一致。鑒於各行\n\n業需求強勁，我們堅定不移地加大基礎設施投入，第一季度資本開支及取得的租\n\n賃資產合計達人民幣30億元，且我們預計全年將繼續投資，以推動業務進一步擴\n\n張。」\n\n二零二六年第一季度財務業績\n\n總收入達人民幣2,703.7百萬元（392.0百萬美元），較二零二五年同季的人民幣\n\n1,970.0百萬元同比增加37.2%，及較二零二五年第四季度的人民幣2,761.4百萬元\n\n環比下降2.1%。該同比增加主要是由於來自小米和金山生態系統以及人工智能相\n\n關客戶的收入增長以及我們對行業雲客戶的進一步滲透。環比減少主要是由於行\n\n業雲受到季節性影響。\n\n公有雲服務收入為人民幣1,996.3百萬元（289.4百萬美元），較二零二五年同\n\n季的人民幣1,353.5百萬元同比增加47.5%及較上一季度的人民幣1,902.4百萬\n\n元環比增加4.9%。該增加主要是由於人工智能需求增長帶動整體收入提升所\n\n致。\n\n行業雲服務收入為人民幣707.4百萬元（102.6百萬美元），較二零二五年同季\n\n的人民幣616.5百萬元同比增長14.7%及較上一季度的人民幣859.0百萬元環比\n\n減少17.6%。該環比減少主要是由於春節帶來的影響及各個項目的交付時間\n\n表有所不同。\n\n1 本公告載有若干人民幣金額按特定匯率換算成美元，僅為方便讀者。除非另有說明，否則\n\n人民幣兌美元的匯率為人民幣6.8980元兌1.00美元，即經紐約聯邦儲備銀行核實（就海關\n\n目的而言）於二零二六年三月三十一日有效的午間買入匯率。\n3\n",
+   "provenance": "same page content as ksy_q1_2026_p002; synthetic_degradation variant (0.55x downscale + 1.3deg tilt).  NOT real scan coverage.",
+   "corrections": [
+    "native '392.01百萬美元' merged the superscript footnote marker into the number; visual reading is 392.0 with a superscript footnote 1",
+    "page footer number 3 moved to reading-order end"
+   ],
+   "facts": [
+    "金山云控股(納斯達克:KC及港交所:3896)公佈截至二零二六年三月三十一日止第一季度未經審計財務業績",
+    "智算雲業務賬單收入同比增長90%,佔公有雲收入比重首次突破半數",
+    "總收入人民幣2,703.7百萬元(392.0百萬美元),同比+37.2%,環比-2.1%",
+    "經調整毛利人民幣351.4百萬元,同比+7.2%;經調整EBITDA利潤率27.6%,同比增長11.4個百分點",
+    "第一季度資本開支及取得的租賃資產合計達人民幣30億元",
+    "公有雲服務收入人民幣1,996.3百萬元(289.4百萬美元),同比+47.5%,環比+4.9%",
+    "行業雲服務收入人民幣707.4百萬元(102.6百萬美元),同比+14.7%,環比-17.6%",
+    "匯率:人民幣6.8980元兌1.00美元(二零二六年三月三十一日有效的午間買入匯率,經紐約聯邦儲備銀行核實)"
+   ],
+   "conditions": [
+    "總收入環比減少主要由於行業雲受到季節性影響",
+    "行業雲環比減少主要由於春節帶來的影響及各個項目的交付時間表有所不同"
+   ],
+   "non_text_regions": []
+  },
+  "hrjp_cb_prospectus_p006": {
+   "role": "eval",
+   "full_text": "株洲华锐精密工具股份有限公司 募集说明书\n\n6\n\n的主要竞争对手之一。厦门金鹭母公司厦门钨业是国内领先的具有国资背景的\n\n大型上市公司，拥有“钨冶炼-硬质合金-刀具制造”的全产业链，厦门钨业子\n\n公司九江金鹭和厦门金鹭均是原材料碳化钨的生产企业。\n\n株洲钻石、厦门金鹭拥有集团内自给原材料的产业协同优势，原材料供应\n\n更为及时、稳定。如果株洲钻石的母公司中钨高新为增强株洲钻石的竞争地位，\n\n限制向公司供应原材料，将对公司采购、生产和销售等经营计划的正常组织产\n\n生不利影响。\n\n（五）募集资金投资项目新增产能无法消化风险\n\n公司现有主要产品硬质合金数控刀片 2021 年的产能约为 6,300 万片，通过\n\n本次募集资金投资项目，公司将在现有数控刀片产品的基础上，新增了与之相\n\n配套的包括刀杆、刀盘在内的刀体产品，同时新增高效钻削刀具产品进一步完\n\n善公司产品品类。本次募投项目达产后，公司预计新增精密数控刀体产品 50\n\n万件和各类高效钻削刀具 140 万支。\n\n经过多年的生产和技术沉淀，公司已形成了稳定的研发人员团队和相应技\n\n术储备，并建立了以华东、华南、华北刀具集散市场为核心，覆盖全国市场的\n\n经销商体系，积淀了一批较为稳定的终端客户，在行业内拥有一定的认可度。\n\n本次募投项目是公司顺应国家产业政策，实现公司发展战略目标的必经之路，\n\n但在项目的实施过程中，如果产业政策、销售渠道开拓、市场供需情况、行业\n\n竞争态势等出现不利变化，公司将面临新增产能无法及时消化从而对公司经营\n\n业绩产生不利影响的风险。\n\n六、关于填补即期回报的措施和承诺\n\n（一）发行人关于应对本次发行摊薄即期回报采取的措施\n\n1、严格执行募集资金管理办法，保证募集资金合理规范使用\n\n根据《科创板上市公司证券发行注册管理办法（试行）》《上海证券交易所\n\n科创板股票上市规则》《上市公司监管指引第 2 号——上市公司募集资金管理\n\n和使用的监管要求》并结合《公司章程》和实际情况，公司制定了相关的募集\n",
+   "provenance": "native text layer as base; visually verified against frozen render",
+   "corrections": [
+    "page footer number 6 moved to reading-order end"
+   ],
+   "facts": [
+    "厦门金鹭母公司厦门钨业是国内领先的具有国资背景的大型上市公司,拥有'钨冶炼-硬质合金-刀具制造'全产业链",
+    "厦门钨业子公司九江金鹭和厦门金鹭均是原材料碳化钨的生产企业",
+    "公司现有主要产品硬质合金数控刀片2021年的产能约为6,300万片",
+    "募投项目达产后预计新增精密数控刀体产品50万件和各类高效钻削刀具140万支",
+    "建立了以华东、华南、华北刀具集散市场为核心,覆盖全国市场的经销商体系"
+   ],
+   "conditions": [
+    "如果株洲钻石的母公司中钨高新为增强株洲钻石的竞争地位,限制向公司供应原材料,将对公司采购、生产和销售等经营计划的正常组织产生不利影响(条件句)",
+    "如果产业政策、销售渠道开拓、市场供需情况、行业竞争态势等出现不利变化,公司将面临新增产能无法及时消化风险(条件句)"
+   ],
+   "non_text_regions": []
+  },
+  "bili_call_4q22_en_p001": {
+   "role": "eval",
+   "full_text": "\nSam Fan\n\nThank you, Juliet. And thank you everyone for participating in our 2022 fourth \n\nquarter and fiscal year financial and operating results conference call. I’m pleased to \n\ndeliver today’s opening remarks on behalf of Mr. Chen.\n\nIn 2022, we proactively adjusted our strategies and reprioritized our goals to better \n\nalign ourselves with the new industry paradigm. Specifically, we placed our focus on \n\nDAU growth and how to reach profitability. Digging into our progress on these two \n\nfronts…\n\nFirst, our users and their engagement within our community remain the foundation \n\nof our business. By focusing on DAU growth, we are bringing higher quality users to \n\nour platform, which ties-in more closely to our monetization potential. In Q4, our \n\nDAUs increased to 93 million, up 29% year-on-year. This brought our DAU-to-MAU \n\nratio to 28%, a meaningful improvement from 26% in the same period last year. The \n\naverage daily time spent per user on our platform reached 96 minutes, driving the \n\ntotal time spent on our platform up by 51% year-on-year. We will continue to\n\ncultivate our DAUs with optimized product offerings and algorithms, and further \n\nsupport our commercial prospects with controlled sales and marketing spending.\n\nSecond, we improved our commercialization efficiency and elevated our cost\n\nreduction measures to bring us closer to our goal of profitability. Our total net \n\nrevenues for 2022 were RMB 21.9 billion, and total net revenues for Q4 were RMB \n\n6.1 billion, up 6% year-on-year. Our gross margin improved to 20% in Q4, compared \n\nwith 18% in the previous quarter. We continued to take measures to control our \n\nexpenses and improve our organizational efficiency. Specifically, in the fourth quarter, \n\nwe cut S&M expenses by 28% year-on-year. S&M expense as percentage of total net \n\nrevenues reduced from 30% in the same period last year to 21% in the fourth quarter. \n\nWe have also streamlined our personnel, and trimmed our non-core and under\u0002performing businesses. As a result, our non-GAAP net loss in the fourth quarter \n\nnarrowed by 21% year-on-year and 26% quarter-on-quarter. \n\nAs we move through 2023, our operational goal is to become a more efficient \n\ncompany. We will centralize our resources to focus on less but more important tasks. \n\nSpecifically, we plan to continue growing our DAUs, improving our gross margin and \n\ntightening our expenses. As we are executing on these actions, we believe we are on \n\nthe right track to achieve our break-even target by 2024.\n2\n",
+   "provenance": "native text layer as base; visually verified against frozen render",
+   "corrections": [
+    "page footer number 2 moved to reading-order end"
+   ],
+   "facts": [
+    "Sam Fan delivered opening remarks on behalf of Mr. Chen",
+    "2022 strategy refocused on DAU growth and profitability",
+    "DAUs increased to 93 million, up 29% year-on-year",
+    "DAU-to-MAU ratio reached 28% vs 26% in the same period last year",
+    "Average daily time spent per user reached 96 minutes, up 51% year-on-year",
+    "2022 total net revenues RMB 21.9 billion; Q4 net revenues RMB 6.1 billion, up 6% year-on-year",
+    "Gross margin improved to 20% in Q4 from 18% in the previous quarter",
+    "Q4 S&M expenses cut by 28% year-on-year; S&M as % of total net revenues reduced from 30% to 21%",
+    "Non-GAAP net loss in Q4 narrowed by 21% year-on-year and 26% quarter-on-quarter",
+    "2023 operational goal: grow DAUs, improve gross margin, tighten expenses"
+   ],
+   "conditions": [
+    "believe we are on the right track to achieve our break-even target by 2024"
+   ],
+   "non_text_regions": []
+  },
+  "byd_ar_2024_p022": {
+   "role": "holdout",
+   "full_text": "比亚迪股份有限公司 2024 年年度报告全文\n\n23\n\n -轿车 2,370,709 1,610,694 47.19% 2,358,032 1,599,360 47.44%\n\n -SUV 1,805,441 1,300,396 38.84% 1,788,787 1,292,397 38.41%\n\n -MPV 104,934 122,572 -14.39% 103,551 121,149 -14.53%\n\n-商用车 22,989 11,569 98.71% 21,775 11,511 89.17%\n\n -客车 5,580 4,705 18.60% 5,580 4,705 18.60%\n\n -其他 17,409 6,864 153.63% 16,195 6,806 137.95%\n\n合计 4,304,073 3,045,231 41.34% 4,272,145 3,024,417 41.26%\n\n同比变化 30%以上的原因说明\n\n适用 □不适用\n\n报告期内，分车型类别产销量数据发生变化主要是公司业务增长以及产品结构变化所致。\n\n零部件配套体系建设情况\n\n公司在零部件供应链体系建设上，始终坚持垂直整合的战略方向，牢牢掌控电池、电机、电控及芯片等新能源车全产\n\n业链核心产品部件的自主研发和生产，未来还将持续加大研发投入，推动公司供应链持续自主创新发展；同时，公司坚持\n\n以市场化方式激发供应链活力，打造内外竞争的开放生态；秉持合作共赢、扶优扶强的原则，发展业界领先、优势互补的\n\n核心及战略供应商，形成协同发展共存共荣的伙伴关系，共同促进行业技术创新升级；从技术、质量、成本、交付、风险\n\n等多维度订制完善的供应商准入制度，高标准、严要求建设汽车供应链体系，从而最终提升公司整车的产品竞争力。\n\n报告期内汽车零部件生产经营情况\n\n□适用 不适用\n\n公司开展汽车金融业务\n\n□适用 不适用\n\n公司开展新能源汽车相关业务\n\n适用 □不适用\n\n新能源汽车整车及零部件的生产经营情况。\n\n产品类别 产能状况 快报产量 快报销量 销售收入（元）\n\n乘用车 4,281,084 4,281,084 4,250,370 525,989,680,000.00\n\n商用车 22,989 22,989 21,775 7,340,435,000.00\n\n注:产能状况指报告期产量，单位为辆。 \n\n三、核心竞争力分析 \n\n公司需遵守《深圳证券交易所上市公司自律监管指引第 3 号——行业信息披露》中汽车制造相关业的披露要求\n\n本集团秉持“技术为王、创新为本”的发展理念，致力于用技术创新满足人们对美好生活的向往，业务横跨汽车、电\n\n子、新能源和轨道交通四大产业。\n\n新能源汽车领域，本集团作为全球新能源汽车产业的先行者和领导者，拥有庞大技术研发团队和强大科技创新能力，\n\n开发出一系列全球领先的前瞻性技术，打造出长期、可持续的核心竞争优势。在汽车电动化上半场，本集团坚持纯电动及\n\n插电式混合动力“两条腿、齐步走”，以全球领先的电动化技术持续引领市场。在汽车智能化下半场，本集团贯彻整车智\n\n能战略，依托自身完善的产品矩阵、百万级的销售体量以及强大的研发落地能力，率先推动智驾技术全面普及，引领汽车\n\n行业智能化变革。本集团凭借在汽车电动化、智能化等关键领域的核心技术，实现新能源汽车在安全保护、动力性能和能\n\n源消费等方面的多重跨越，加速推动全球汽车产业转型升级进程。\n\n在已建立起全球领先的技术优势的基础之上，本集团积极布局产业链关键环节，具备显著的成本优势。此外，为满足\n\n日益增长的产品需求，本集团快速提升整车及关键零部件领域产能，亦建立起领先的规模优势。\n",
+   "provenance": "native text layer as base; visually verified against frozen 200-DPI render",
+   "corrections": [
+    "four checkbox rows restored: ☑适用/□不适用, □适用/☑不适用, □适用/☑不适用, ☑适用/□不适用",
+    "page footer number 23 moved to reading-order end"
+   ],
+   "facts": [
+    "轿车产量2,370,709(+47.19%),销量2,358,032(+47.44%)",
+    "SUV产量1,805,441(+38.84%),销量1,788,787(+38.41%)",
+    "MPV产量104,934(-14.39%),销量103,551(-14.53%)",
+    "商用车产量22,989(+98.71%),销量21,775(+89.17%)",
+    "客车产量与销量均为5,580(+18.60%)",
+    "其他产量17,409(+153.63%),销量16,195(+137.95%)",
+    "合计产量4,304,073(+41.34%),销量4,272,145(+41.26%)",
+    "分车型类别产销量数据变化主要是公司业务增长以及产品结构变化所致",
+    "新能源乘用车产能4,281,084、快报产量4,281,084、快报销量4,250,370、销售收入525,989,680,000.00元",
+    "新能源商用车产能22,989、快报产量22,989、快报销量21,775、销售收入7,340,435,000.00元",
+    "产能状况指报告期产量,单位为辆",
+    "公司秉持'技术为王、创新为本'理念,业务横跨汽车、电子、新能源和轨道交通四大产业",
+    "纯电动及插电式混合动力'两条腿、齐步走';率先推动智驾技术全面普及"
+   ],
+   "conditions": [
+    "同比变化30%以上的原因说明:☑适用 □不适用",
+    "报告期内汽车零部件生产经营情况:□适用 ☑不适用",
+    "公司开展汽车金融业务:□适用 ☑不适用",
+    "公司开展新能源汽车相关业务:☑适用 □不适用"
+   ],
+   "non_text_regions": []
+  },
+  "meituan_ar_2024_p000": {
+   "role": "holdout",
+   "full_text": "美团\nMeituan\n（於開曼群島註冊成立以不同投票權控制的有限公司）\n港幣櫃臺股份代號：3690\n人民幣櫃臺股份代號：83690\n2024\n年度報告\n",
+   "provenance": "full manual transcription from the frozen 200-DPI render; page is an image cover with no text layer",
+   "corrections": [],
+   "facts": [
+    "於開曼群島註冊成立以不同投票權控制的有限公司",
+    "港幣櫃臺股份代號:3690",
+    "人民幣櫃臺股份代號:83690",
+    "2024年度報告"
+   ],
+   "conditions": [],
+   "non_text_regions": [
+    "插画城市/无人机/自动配送车/吉祥物骑手为装饰图形;楼体横幅'#Eat Better Live Bette…'为艺术字且被裁切,无人机箱体'美团无人机'为微小印刷字,均记不可判,不入分母",
+    "大面积纯装饰区域无文字(编造负对照)"
+   ]
+  },
+  "ir_wanrun_20241104_p002": {
+   "role": "holdout",
+   "full_text": "\n同期相对平稳。\n\n7、问：公司在新能源材料方面 2024 年三季度主要有哪些新进展？ \n\n答：在钙钛矿材料方面，2024 年三季度公司继续推进产品开发和市\n\n场推广工作，产品种类与客户数量均有增加。今年以来业内下游企业及新\n\n进入企业持续推进钙钛矿光伏组件性能优化开发，技术水平不断进步，相\n\n应尺寸效率不断创新高，公司的目标是向下游供应优质的材料，努力通过\n\n材料助力产业发展。在氢燃料电池质子膜材料方面，2024 年三季度公司\n\n控股子公司九目化学的无氟氢燃料电池质子膜材料中试产品有向下游销\n\n售，下游客户在产品应用端的开发也在持续推进中，如果未来能够成功产\n\n业化，有望为公司带来新的业绩增长点。\n\n \n\n8、问：公司液晶材料今年的销售情况？ \n\n答：公司液晶材料业务在 2024 年三季度收入较比去年同期相对平稳。\n\n未来希望下游终端消费及液晶面板行业能够向好，从而带动上游液晶材料\n\n需求。\n\n公司是以研发创新驱动的平台型企业，在几十年的发展历程中，公司\n\n通过持续开发更加先进的新材料工艺，不断生产更加优质的新材料产品，\n\n逐渐积累了深厚的化学合成优势和快速的产业化优势。市场上关注公司的\n\n投资者们见证了我们多种产品从无到有的发展变化，也期待更多投资者认\n\n可公司作为研发创新平台型企业的价值，我们将继续向着成为世界先进化\n\n学材料制造者的目标砥砺前行。\n\n关于本次活动是否涉及\n\n应披露重大信息的说明\n\n否\n\n活动过程中所使用的演\n\n示文稿、提供的文档等附\n\n件（如有，可作为附件）\n\n无\n3\n",
+   "provenance": "native text layer as base; visually verified against frozen render",
+   "corrections": [
+    "page footer number 3 moved to reading-order end"
+   ],
+   "facts": [
+    "问7:钙钛矿材料方面,2024年三季度公司继续推进产品开发和市场推广,产品种类与客户数量均有增加",
+    "业内下游企业及新进入企业持续推进钙钛矿光伏组件性能优化开发,相应尺寸效率不断创新高",
+    "控股子公司九目化学的无氟氢燃料电池质子膜材料中试产品有向下游销售",
+    "问8:液晶材料业务2024年三季度收入较去年同期相对平稳",
+    "关于本次活动是否涉及应披露重大信息的说明:否",
+    "活动过程中所使用的演示文稿、提供的文档等附件:无",
+    "公司是以研发创新驱动的平台型企业,向着成为世界先进化学材料制造者的目标砥砺前行"
+   ],
+   "conditions": [
+    "如果未来能够成功产业化,有望为公司带来新的业绩增长点(条件句)",
+    "未来希望下游终端消费及液晶面板行业能够向好,从而带动上游液晶材料需求(条件)"
+   ],
+   "non_text_regions": []
+  },
+  "hrjp_cb_prospectus_p037": {
+   "role": "holdout",
+   "full_text": "株洲华锐精密工具股份有限公司 募集说明书\n\n37\n\n新槽型的产品，欧美和日韩等知名刀具企业不断加大中国市场的开拓力度，公\n\n司将面临进一步加剧的市场竞争风险。如果公司不能保持并强化自身的竞争优\n\n势和核心竞争力，公司产品的市场份额及价格可能会因市场竞争加剧而下降。\n\n（四）受下游应用领域需求变化影响的风险\n\n公司的数控刀具产品主要应用于模具、通用机械和汽车行业等领域。其中，\n\n模具和通用机械行业作为我国的基础工业，其下游涵盖制造业的众多细分领域，\n\n与国内制造业发展息息相关；汽车作为耐用消费品，其消费受产业政策、行业\n\n周期性及居民消费习惯的影响，最近两年我国汽车产销量连续下滑。若未来宏\n\n观经济不景气、产业政策发生重大调整或居民消费习惯发生重大变化，将有可\n\n能导致模具、通用机械及汽车行业的需求增速放缓或萎缩，进而减少对上游刀\n\n具行业的需求，对公司产品的销售造成不利影响。\n\n（五）公司主要国内竞争对手与供应商紧耦合的风险\n\n株洲钻石是国内第一大刀具供应商，是公司主要竞争对手之一，同时是中\n\n钨高新的二级子公司。中钨高新是由中国五矿集团有限公司控制的一家钨产业\n\n集团，其子公司自贡硬质合金有限责任公司及株洲硬质合金集团有限公司均是\n\n公司的重要原材料碳化钨粉及钴粉供应商。报告期内，公司向自贡硬质合金有\n\n限责任公司采购碳化钨粉的金额占材料采购总额的比例分别为 34.52%、32.59%\n\n和 29.03%，向株洲硬质合金集团有限公司采购碳化钨粉、钴粉及其他金属粉末\n\n的金额占材料采购总额的比例分别为 1.72%、2.95%和 1.73%。\n\n厦门金鹭是具有影响力的国产数控刀具制造企业，是公司在数控刀具市场\n\n的主要竞争对手之一。厦门金鹭母公司厦门钨业是国内领先的具有国资背景的\n\n大型上市公司，拥有“钨冶炼-硬质合金-刀具制造”的全产业链，厦门钨业子\n\n公司九江金鹭和厦门金鹭均是原材料碳化钨的生产企业。\n\n株洲钻石、厦门金鹭拥有集团内自给原材料的产业协同优势，原材料供应\n\n更为及时、稳定。如果株洲钻石的母公司中钨高新为增强株洲钻石的竞争地位，\n\n限制向公司供应原材料，将对公司采购、生产和销售等经营计划的正常组织产\n\n生不利影响。\n",
+   "provenance": "native text layer as base; visually verified against frozen render",
+   "corrections": [
+    "page footer number 37 moved to reading-order end"
+   ],
+   "facts": [
+    "数控刀具产品主要应用于模具、通用机械和汽车行业等领域",
+    "最近两年我国汽车产销量连续下滑",
+    "株洲钻石是国内第一大刀具供应商,是公司主要竞争对手之一,同时是中钨高新的二级子公司",
+    "中钨高新是由中国五矿集团有限公司控制的一家钨产业集团",
+    "自贡硬质合金有限责任公司及株洲硬质合金集团有限公司均是公司重要原材料碳化钨粉及钴粉供应商",
+    "向自贡硬质合金采购碳化钨粉金额占材料采购总额的比例分别为34.52%、32.59%和29.03%",
+    "向株洲硬质合金集团采购碳化钨粉、钴粉及其他金属粉末金额占比分别为1.72%、2.95%和1.73%",
+    "厦门金鹭母公司厦门钨业拥有'钨冶炼-硬质合金-刀具制造'全产业链"
+   ],
+   "conditions": [
+    "如果公司不能保持并强化自身的竞争优势和核心竞争力,公司产品的市场份额及价格可能会因市场竞争加剧而下降(条件句)",
+    "若未来宏观经济不景气、产业政策发生重大调整或居民消费习惯发生重大变化,将有可能导致模具、通用机械及汽车行业的需求增速放缓或萎缩(条件句)"
+   ],
+   "non_text_regions": []
+  },
+  "bili_call_4q22_en_p003": {
+   "role": "holdout",
+   "full_text": "\nyear, and our full year revenues grew by 13% to RMB 21.9 billion. We are now more \n\nfocusing on improving our commercialization efficiency, and specifically on \n\nimproving our gross margin at the company level. Now I’d like to share more color on \n\neach of our commercial business lines:\n\nFirst on our VAS business.\n\nRevenues from VAS were RMB2.3 billion for the fourth quarter and RMB8.7 billion \n\nfor the year, up 24% and 26% year-on-year, respectively. \n\nLive broadcasting, in particular, has shown solid growth. For 2022, revenues from \n\nlive broadcasting increased by over 30%. Our strategy to integrate live broadcasting \n\nwithin our video ecosystem has prompted more creators to tap into the live \n\nbroadcasting universe. This has helped to penetrate more video users, convert paying \n\nusers and optimize our revenue sharing structure organically. In the fourth quarter, \n\nthe number of monthly active live broadcasting hosts increased by over 70% and\n\nMPUs for live broadcasting grew by over 40%, both on a year-on-year basis. Looking \n\nahead, live broadcasting will continue to be one of our primary revenue growth \n\ndrivers. We expect to optimize our revenue-sharing ratio and further improve live \n\nbroadcasting’s gross margin.\n\nBy the end of the fourth quarter, we had added nearly one million premium members \n\nfrom the prior period, reaching a total of 21.4 million premium memberships. We \n\nlaunched multiple Chinese anime titles during the period, including the highly \n\nanticipated sci-fi thriller The Three-Body Problem. In January 2023, our co-produced \n\ntraditional Chinese-style graphic anime Yao-Chinese Folktale 中国奇谭 became a \n\nsmash hit, generating over 200 million views on our platform. \n\nAs for our Advertising arm, we continued to gain market share in 2022. Advertising \n\nrevenues were up by 12% reaching RMB 5.1 billion in 2022, and RMB 1.5 billion in \n\n4Q. Our top performing verticals in the fourth quarter were mobile games, e\u0002commerce, digital products & home appliances, automotive and skincare & \n\ncosmetics.\n\nIn 2022, we further opened-up our ecosystem to embrace more advertising \n\nopportunities across various video viewing scenarios. The new ad scenario we \n\nintroduced in Story Mode and improved sales conversion modules have proven a \n\nsuccess in performance-based ads and carry higher ROIs. In the fourth quarter, our\n\nperformance-based ad revenue grew by over 50% year-on-year. In addition, as our \n\nusers getting mature and enter into new life stages, their new consumption needs,\n4\n",
+   "provenance": "native text layer as base; visually verified against frozen render",
+   "corrections": [
+    "page footer number 4 moved to reading-order end"
+   ],
+   "facts": [
+    "Full year revenues grew by 13% to RMB 21.9 billion",
+    "VAS revenues RMB2.3 billion in Q4 and RMB8.7 billion for the year, up 24% and 26% year-on-year",
+    "2022 live broadcasting revenues increased by over 30%",
+    "Monthly active live broadcasting hosts increased by over 70%; MPUs for live broadcasting grew by over 40%",
+    "Added nearly one million premium members in Q4, reaching 21.4 million premium memberships",
+    "Launched Chinese anime titles including The Three-Body Problem and Yao-Chinese Folktale (中国奇谭)",
+    "Yao-Chinese Folktale generated over 200 million views",
+    "Advertising revenues up by 12%, reaching RMB 5.1 billion in 2022 and RMB 1.5 billion in 4Q",
+    "Top Q4 advertising verticals: mobile games, e-commerce, digital products & home appliances, automotive, skincare & cosmetics",
+    "Q4 performance-based ad revenue grew by over 50% year-on-year"
+   ],
+   "conditions": [],
+   "non_text_regions": []
+  }
+ }
+}
