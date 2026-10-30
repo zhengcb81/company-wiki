@@ -6,6 +6,7 @@ one owned root, and must explain itself when no candidate is usable. Candidate
 probing is bounded: each listed root is tried once with a real directory and a
 real probe file.
 """
+import os
 import sys
 from pathlib import Path
 
@@ -49,6 +50,33 @@ def test_unwritable_candidate_falls_back_and_records_the_attempt(tmp_path):
     finally:
         scratch.cleanup()
     assert not list(good.iterdir())
+
+
+def test_write_denied_candidate_is_rejected_in_bounded_time(tmp_path, monkeypatch):
+    # A Windows ACL that denies writes keeps os.access(W_OK) true while
+    # mkdtemp retries random names toward TMP_MAX; the gate must decide with
+    # one bounded mkdir probe instead of hanging. Simulated here at the probe
+    # boundary, since a real deny ACL needs host policy rights.
+    denied = tmp_path / "denied"
+    denied.mkdir()
+    good = tmp_path / "good"
+    good.mkdir()
+    real_mkdir = os.mkdir
+
+    def selective_mkdir(path, mode=0o777):
+        if str(path).startswith(str(denied)):
+            error = PermissionError("write denied by ACL")
+            error.winerror = 5
+            raise error
+        return real_mkdir(path, mode)
+
+    monkeypatch.setattr(os, "mkdir", selective_mkdir)
+    scratch = gate._open_scratch([str(denied), str(good)])
+    try:
+        assert Path(scratch.name).is_relative_to(good)
+    finally:
+        scratch.cleanup()
+    assert list(denied.iterdir()) == []  # no probe residue in the denied root
 
 
 def test_all_candidates_unwritable_reports_every_attempt(tmp_path):

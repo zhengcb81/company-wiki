@@ -207,16 +207,41 @@ def _scratch_candidate_roots() -> list[str]:
     return sorted(dict.fromkeys(candidates), key=lambda root: (len(root), root))
 
 
+def _probe_writable(root: str) -> OSError | None:
+    """One bounded mkdir+rmdir decides whether root accepts new directories.
+
+    On Windows os.access(W_OK) can report True for a directory whose ACL
+    denies writes, while tempfile.mkdtemp then treats the resulting
+    PermissionError as "name taken" and retries up to os.TMP_MAX instead of
+    raising; this probe rejects such a candidate in bounded time instead.
+    """
+    probe = Path(root) / f".cwpp-probe-{os.urandom(4).hex()}"
+    try:
+        os.mkdir(probe)
+    except OSError as exc:
+        return exc
+    finally:
+        try:
+            probe.rmdir()
+        except OSError:
+            pass
+    return None
+
+
 def _open_scratch(candidates: list[str]) -> tempfile.TemporaryDirectory:
     """Create this invocation's owned scratch at the first usable candidate.
 
-    Every candidate is verified once with a real directory and one probe
-    file; a rejected attempt is recorded and never retried. When no candidate
-    is usable the error names every attempt, so a red gate explains itself
+    Every candidate is probed once with a real directory and one probe file;
+    a rejected attempt is recorded and never retried. When no candidate is
+    usable the error names every attempt, so a red gate explains itself
     instead of failing deep inside a child.
     """
     attempts: list[str] = []
     for root in candidates:
+        failure = _probe_writable(root)
+        if failure is not None:
+            attempts.append(f"{root}: candidate not writable ({failure})")
+            continue
         try:
             scratch = tempfile.TemporaryDirectory(prefix="cwpp-", dir=root)
         except OSError as exc:

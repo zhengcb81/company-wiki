@@ -11,6 +11,9 @@ removes it. Produces one JSON record per section on stdout:
    whether plain and extended-length access work there.
 3. real_contention_error_shape: a genuine Windows sharing violation, so
    path-length handling can never be confused with a PermissionError.
+4. plain_boundaries: the native Win32 limits the wrapper encodes (plain file
+   creation works to 259 characters, plain directory creation only to 247)
+   and one mixed extended-to-plain replacement.
 
 Usage: python tools/w22_atomic_probe.py [--keep-scratch]
 Exit code 0 means every section ran to a recorded verdict, not that paths are

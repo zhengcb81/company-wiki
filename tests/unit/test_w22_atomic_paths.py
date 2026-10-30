@@ -124,6 +124,32 @@ def test_fsync_failure_cleans_stage_and_preserves_target(tmp_path, monkeypatch):
     assert list(tmp_path.iterdir()) == [target]
 
 
+def test_cleanup_failure_never_masks_the_original_body_failure(
+        tmp_path, monkeypatch):
+    # Another handle keeps the owned stage open, so cleanup hits a sharing
+    # violation; the body's original fault must still surface, with the
+    # cleanup problem attached as a note instead of replacing it.
+    target = tmp_path / "out.bin"
+    target.write_bytes(b"original")
+    real_unlink = os.unlink
+
+    def locked_stage(path, *args, **kwargs):
+        if Path(path).name.startswith(".atomic-"):
+            error = PermissionError("stage held open")
+            error.winerror = 32
+            raise error
+        return real_unlink(path, *args, **kwargs)
+
+    monkeypatch.setattr(os, "unlink", locked_stage)
+    with pytest.raises(RuntimeError, match="serialization failed") as excinfo:
+        with atomic_output(target) as stream:
+            stream.write(b"partial")
+            raise RuntimeError("serialization failed")
+    assert any("atomic stage cleanup failed" in note
+               for note in excinfo.value.__notes__)
+    assert target.read_bytes() == b"original"
+
+
 def test_text_modes_encoding_and_newline_are_preserved(tmp_path):
     # newline="\n" means "no output translation": LF must survive even on
     # Windows, where newline=None would rewrite it to CRLF.
@@ -206,6 +232,9 @@ def test_stage_dir_wraps_only_when_a_stage_name_would_not_fit():
     one_over = "C:\\" + "x" * (_atomic_path.NATIVE_PATH_LIMIT
                                - _atomic_path.STAGE_NAME_RESERVE - 2)
     assert _atomic_path.stage_dir(one_over) == "\\\\?\\" + one_over
+    # Idempotent on already-extended input, like openable: a prefixed parent
+    # must never be re-wrapped into a UNC-shaped mangle.
+    assert _atomic_path.stage_dir("\\\\?\\" + one_over) == "\\\\?\\" + one_over
 
 
 def test_short_basename_target_near_limit_still_writes(tmp_path):

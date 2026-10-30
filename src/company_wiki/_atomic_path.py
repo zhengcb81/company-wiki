@@ -66,6 +66,8 @@ def stage_dir(parent: Path | str) -> str:
     given = os.fspath(parent)
     if os.name != "nt":
         return given
+    if given.startswith("\\\\?\\"):
+        return given
     absolute = given if os.path.isabs(given) else os.path.abspath(given)
     if not _needs_extension(absolute, STAGE_NAME_RESERVE):
         return given

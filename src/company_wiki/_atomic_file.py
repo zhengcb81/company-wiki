@@ -13,6 +13,7 @@ from __future__ import annotations
 from contextlib import contextmanager
 import os
 from pathlib import Path
+import sys
 import tempfile
 import time
 from typing import IO, Iterator, Literal
@@ -66,10 +67,22 @@ def atomic_output(
         _replace_closed_stage(stage, path)
     finally:
         if stage is not None:
+            # A stage that another handle keeps open must not replace the
+            # fault that got us here: the inert leftover file stays visible,
+            # the original failure stays raised, and the cleanup problem is
+            # attached as a note. Only a genuinely unexpected cleanup failure
+            # with nothing in flight propagates on its own.
+            original = sys.exc_info()[1]
             try:
                 os.unlink(openable(stage))
             except FileNotFoundError:
                 pass
+            except OSError as cleanup_error:
+                if original is None:
+                    raise
+                original.add_note(
+                    f"atomic stage cleanup failed "
+                    f"({type(cleanup_error).__name__}: {cleanup_error})")
 
 
 __all__ = ["atomic_output"]
