@@ -1265,3 +1265,82 @@ def test_missing_catalog_is_unavailable_via_cli(tmp_path):
     completed = _run_cli(tmp_path, config_path, None, _request())
     assert completed.returncode == 2
     assert _stderr_json(completed)["state"] == "unavailable"
+
+
+# --- request bounds: nonfinite & depth (card: UTF8/duplicate/nonfinite/depth) ----
+
+
+def test_nonfinite_and_deep_requests_are_blocked(workspace):
+    tmp_path, catalog, config_path = workspace
+    # NaN/Infinity literals are refused outright, not parsed as floats.
+    good = json.dumps(_request())
+    for literal in ('NaN', 'Infinity', '-Infinity'):
+        payload = good[:-1] + ',"language":' + literal + '}'
+        completed = _run_cli(tmp_path, config_path, None, payload)
+        assert completed.returncode == 2, literal
+        assert _stderr_json(completed)["state"] == "blocked"
+    # Deeply nested unknown fields are a bounded refusal, never a traceback.
+    deep = good[:-1] + ',"x":' + '[' * 20000 + ']' * 20000 + '}'
+    completed = _run_cli(tmp_path, config_path, None, deep)
+    assert completed.returncode == 2
+    error = _stderr_json(completed)
+    assert error["state"] == "blocked"
+
+
+# --- reopen interop: canonical tokens reopen through the EXISTING reader -------
+
+
+def test_canonical_item_reopens_through_existing_public_cli(workspace):
+    tmp_path, catalog, config_path = workspace
+    sw_root = _build_sw_workspace(tmp_path, [_acme_scenario(ACME_URN)])
+    result = _stdout_json(_run_cli(tmp_path, config_path, sw_root, _request()))
+    item = result["items"][0]
+    # The exact version reopen is the EXISTING public CLI (untouched); the
+    # canonical bridge only hands out tokens that reader accepts verbatim.
+    reopen_request = {
+        "schema_version": "company-wiki-public-document-version-request/1",
+        "document_version_id": item["document_version_id"],
+    }
+    completed = subprocess.run(
+        [sys.executable, "-B", "-m",
+         "company_wiki.source_catalog.public_document_browser_cli",
+         "--config", str(config_path)],
+        input=json.dumps(reopen_request).encode("utf-8"),
+        capture_output=True, cwd=str(tmp_path),
+        env={**os.environ,
+             "PYTHONPATH": str(Path(__file__).resolve().parents[2] / "src")},
+    )
+    assert completed.returncode == 0, completed.stderr.decode("utf-8")
+    reopened = json.loads(completed.stdout.decode("utf-8"))
+    assert reopened["state"] == "available"
+    assert reopened["document"]["source_ref"] == item["source_ref"]
+    assert reopened["document"]["storage_state"] == "resolvable"
+
+
+def test_incomplete_us_dei_evidence_is_missing_evidence_not_guess(workspace):
+    tmp_path, catalog, config_path = workspace
+    # The amended US annual gets plain sidecar facts (no original-DEI
+    # observations): the issuer channel demands the original read, which
+    # browse never performs, and the security master cache is absent —
+    # named missing-evidence, never a guess from name/ticker.
+    plain_facts = {
+        "entity": "ACME CORP", "market": "US", "security_id": "ACME",
+        "document_kind": "annual_report", "fiscal_year": 2025,
+        "period_end": "2025-12-31",
+    }
+    plain_evidence = {
+        key: {"locator": "sidecar:" + key, "value": value}
+        for key, value in plain_facts.items()
+    }
+    _record_facts(catalog, ACME_AMENDED_BODY, "text/html", plain_facts,
+                  plain_evidence)
+    sw_root = _build_sw_workspace(tmp_path, [_acme_scenario(ACME_URN)])
+    result = _stdout_json(_run_cli(tmp_path, config_path, sw_root, _request()))
+    assert result["binding"]["status"] == "verified"
+    assert {item["source_ref"]["source_id"]
+            for item in result["items"]} == {ACME_URN}
+    amended = [entry for entry in result["unverified_candidates"]
+               if entry["document_id"] == _document_urn(ACME_AMENDED_BODY)]
+    assert amended and amended[0]["reason_code"] == "issuer_proof_missing"
+    # And the proven binding still pins the complete-DEI source only.
+    assert result["binding"]["issuer"]["source_id"] == ACME_URN

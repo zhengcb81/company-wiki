@@ -78,8 +78,8 @@ python -B -m company_wiki.source_catalog.public_canonical_browser_cli \
 
 ## 6. 验证与提交记录
 
-- 新契约测试：`tests/contract/test_public_canonical_browser.py` **35 passed**（正例 2 + 跨 owner 负例 11 + seam 完整性负例 4 + 旧版本/分页 2 + 请求校验 16）。
-- 既有回归（受影响面，按实 collect）：`test_public_document_browser.py` **15 passed**（含 exact/reopen 语义 9 项），`test_public_source_readiness.py` **86 passed**；合计 101 passed。未跑全仓 CI（按卡以边界验证为准）。
+- 新契约测试：`tests/contract/test_public_canonical_browser.py` **38 passed**（正例 2 + reopen 互通 1 + 跨 owner 负例 11 + seam 完整性负例 4 + 旧版本/分页 2 + 请求校验 16 + 边界/缺证据 2）。
+- 既有回归（受影响面，按实 collect）：`test_public_document_browser.py` **15 passed**；exact9 = `test_source_reader_exact_history.py` **9 passed**；相邻 `test_exact_source_read_policy.py` 13 passed 一并核过；`test_public_source_readiness.py` **86 passed**。受影响合计 123 passed。未跑全仓 CI（按卡以边界验证为准）。
 - 静态：ruff（repo 配置）+ mypy（contract strict, follow_imports=skip）双清零。
 - RED→根修→GREEN（本会话真实记录，输出在会话日志/verification.md）：
   1. fixture 证据缺 `document_kind` → 真实引擎 `_validate_source_facts` named 拒绝 → 补 DEI 证据项 → GREEN；
@@ -88,6 +88,11 @@ python -B -m company_wiki.source_catalog.public_canonical_browser_cli \
   4. 无 proof 配置 + 缺 catalog 时 exit 0 in-band（应为 transport unavailable）→ 根修：CLI 构造后一次只读 catalog 探测 → unavailable exit 2/GREEN；
   5. CLI 错误路径缺 `RESPONSE_SCHEMA` 导入 → NameError exit 1 → 补导入 → named blocked/GREEN。
   6. **sabotage RED**：把 `ISSUER_NAMESPACE_SEC_CIK` 改为 `"sec.cik-SABOTAGE"` → 正例立即失败（issuer 断言不匹配）→ 恢复后 GREEN，证明正例测试真实敏感。
+- **复审补漏（2026-10-30 第二遍逐条对卡）**：
+  a. exact9 此前漏跑 → 补跑 `test_source_reader_exact_history.py` 9/9 通过（见上计数修正）；
+  b. CLI stdin 缺 nonfinite/depth 边界（违反卡"UTF8/duplicate/nonfinite/depth/64KiB等bounded"，深层嵌套会 exit 1 traceback）→ 根修：stdin 解析加 `parse_constant` 拒绝 + `RecursionError`→named blocked → 新测试 NaN/Infinity/20000 层嵌套 blocked → GREEN；
+  c. 卡规则 5"旧 document_version reopen 走既有 reader"此前只有文档声明 → 补互通测试：canonical item 的 `cwpdv1-` token 经**既有** `public_document_browser_cli` reopen 精确还原同一 SourceRef（storage_state=resolvable）→ GREEN；
+  d. "缺证据"负例缺 US 通道（证据不完整需读原件）分支 → 补测试：amended US 文档记 plain sidecar facts（无 DEI 观察证据）→ 既有 verifier 要求原件读（browse 不做）+ security master 缓存缺失 → named missing-evidence，binding 仍以完整 DEI 源为 pin，候选 issuer_proof_missing → GREEN。
 
 ## 7. 成本 / 清理 / NOT_RUN
 

@@ -50,11 +50,24 @@ def _unique_pairs(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
     return result
 
 
+def _reject_constant(name: str) -> Any:
+    raise ValueError(f"nonfinite JSON constant: {name}")
+
+
 def _read_request() -> dict[str, Any]:
     raw = sys.stdin.buffer.read(_MAX_REQUEST_BYTES + 1)
     if len(raw) > _MAX_REQUEST_BYTES:
         raise ValueError("request exceeds limit")
-    request = json.loads(raw.decode("utf-8"), object_pairs_hook=_unique_pairs)
+    try:
+        text = raw.decode("utf-8")
+    except UnicodeDecodeError as exc:
+        raise ValueError("request is not UTF-8") from exc
+    try:
+        request = json.loads(
+            text, object_pairs_hook=_unique_pairs, parse_constant=_reject_constant,
+        )
+    except RecursionError:
+        raise ValueError("request nesting too deep") from None
     if not isinstance(request, dict):
         raise ValueError("request must be an object")
     if request.get("schema_version") != REQUEST_SCHEMA:
