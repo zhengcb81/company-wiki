@@ -13,6 +13,8 @@ from typing import Any
 
 
 QA_FRAGMENT_VERSION = '0.1.1'
+QA_CELL_RANGE_VERSION = '0.1.2'
+QA_FRAGMENT_VERSIONS = frozenset({QA_FRAGMENT_VERSION, QA_CELL_RANGE_VERSION})
 _EXPLICIT = re.compile(r'(?m)(?:^|\n|\s)(?P<number>\d{1,3}\s*[、.．]\s*)?(?:问|问题)\s*[:：]')
 _NUMBERED = re.compile(r'(?m)^[ \t]*(?P<number>\d{1,3})[ \t]*[:：][ \t]*'
                        r'(?:(?:问|问题)[ \t]*[:：][ \t]*)?')
@@ -107,4 +109,5 @@ def pdf_qa_parts(text: str, *, group_prefix: str) -> list[dict[str, Any]]:
     return parts
 
 
-__all__ = ['QA_FRAGMENT_VERSION', 'pdf_qa_parts', 'question_markers']
+__all__ = ['QA_FRAGMENT_VERSION', 'QA_CELL_RANGE_VERSION', 'QA_FRAGMENT_VERSIONS',
+           'pdf_qa_parts', 'question_markers']

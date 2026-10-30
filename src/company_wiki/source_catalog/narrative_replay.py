@@ -10,10 +10,9 @@ from pathlib import Path
 from company_wiki.source_contract import EvidenceSpan
 
 from .narrative_document import NarrativeUnit
-from .narrative_pdf_qa import QA_FRAGMENT_VERSION
+from .narrative_pdf_qa import QA_FRAGMENT_VERSIONS
 from .narrative_native_ranges import (
-    NATIVE_RANGE_BASE_PARSER_VERSION, NATIVE_RANGE_PARSER_NAME,
-    NATIVE_RANGE_PARSER_VERSION, verify_native_range_span,
+    NATIVE_RANGE_BASE_VERSIONS, NATIVE_RANGE_PARSER_NAME, verify_native_range_span,
 )
 
 
@@ -83,12 +82,12 @@ def _parser_version(
         if native:
             binding = metadata.get("native_range", {})
             if (span.parser_name != NATIVE_RANGE_PARSER_NAME
-                or span.parser_version != NATIVE_RANGE_PARSER_VERSION
+                or span.parser_version not in NATIVE_RANGE_BASE_VERSIONS
                 or metadata.get("unit_kind") != "pdf_native_range"
                 or not isinstance(binding, Mapping)
-                or binding.get("base_parser_version") != NATIVE_RANGE_BASE_PARSER_VERSION):
+                or binding.get("base_parser_version") != NATIVE_RANGE_BASE_VERSIONS[span.parser_version]):
                 raise ValueError("unverified native range parser version")
-            versions.add(NATIVE_RANGE_BASE_PARSER_VERSION)
+            versions.add(NATIVE_RANGE_BASE_VERSIONS[span.parser_version])
         else:
             versions.add(span.parser_version)
     if len(versions) > 1:
@@ -180,7 +179,7 @@ def _available_units(
 
 def _qa_fragment_matches(unit: NarrativeUnit, span: EvidenceSpan) -> bool:
     expected = span.structured_value
-    if QA_FRAGMENT_VERSION in {unit.parser_version, span.parser_version}:
+    if QA_FRAGMENT_VERSIONS.intersection({unit.parser_version, span.parser_version}):
         if unit.parser_name != span.parser_name or unit.parser_version != span.parser_version:
             return False
         if any(unit.metadata.get(key) != expected.get(key) for key in (
@@ -199,7 +198,10 @@ def _qa_fragment_matches(unit: NarrativeUnit, span: EvidenceSpan) -> bool:
 def _span_matches(span: EvidenceSpan, matches: Sequence[NarrativeUnit]) -> bool:
     matches = tuple(unit for unit in matches
                     if (unit.source_id, unit.parser_name, unit.parser_version)
-                    == (span.source_id, span.parser_name, span.parser_version))
+                    == (span.source_id, span.parser_name, span.parser_version)
+                    # Consumers may add conservative diagnostics, but cannot
+                    # erase a quality limitation observed by the source owner.
+                    and set(unit.quality_flags).issubset(span.quality_flags))
     if not matches:
         return False
     if span.structured_value.get("unit_kind") != "pdf_table_qa_fragment":

@@ -183,7 +183,7 @@ def _versions(*, pdf_frontend: bool = False, mime_type: str | None = None,
             ("pdf_capture", "company_wiki.source_catalog.narrative_pdf_layout", "PDF_LAYOUT_CAPTURE_STRATEGY"),
             ("pdf_projection", "company_wiki.document_normalization.layout_snapshots", "FEATURE_VERSION"),
             ("pdf_native_range", "company_wiki.source_catalog.narrative_native_ranges", "NATIVE_PAGE_VIEW_FEATURE_VERSION"),
-            ("pdf_native_range_parser", "company_wiki.source_catalog.narrative_native_ranges", "NATIVE_RANGE_PARSER_VERSION"),
+            ("pdf_native_range_parser", "company_wiki.source_catalog.narrative_native_ranges", "NATIVE_RANGE_CURRENT_PARSER_VERSION"),
             ("pdf_page_intent", "company_wiki.source_catalog.narrative_pdf_intent", "PDF_INTENT_EXECUTION_VERSION"),
         ):
             try:

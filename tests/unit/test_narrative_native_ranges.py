@@ -327,11 +327,14 @@ def tiny_pdf():
     return raw, source_id_for_sha256(digest), digest
 
 
-def test_real_small_pdf_range_reopens_exactly_and_can_coexist_with_old_spans():
+@pytest.mark.parametrize('parser_version', ['0.1.1', '0.1.2'])
+def test_real_small_pdf_range_reopens_exactly_and_can_coexist_with_old_spans(parser_version):
     raw, source, digest = tiny_pdf()
-    legacy = parse_pdf_bytes(raw, source_id=source, source_sha256=digest)
+    legacy = parse_pdf_bytes(raw, source_id=source, source_sha256=digest,
+                             parser_version=parser_version)
     parsed = parse_pdf_bytes(
-        raw, source_id=source, source_sha256=digest, selector_version="0.9.0"
+        raw, source_id=source, source_sha256=digest, selector_version="0.9.0",
+        parser_version=parser_version,
     )
     assert [u.unit_id for u in parsed.units] == [u.unit_id for u in legacy.units]
     assert [as_span(u) for u in parsed.units] == [as_span(u) for u in legacy.units]
@@ -352,7 +355,7 @@ def test_real_small_pdf_range_reopens_exactly_and_can_coexist_with_old_spans():
         evidence_spans=[native, old],
         default_parser_version="9.9.9",
     )
-    assert plan.parser_version == "0.1.1" and plan.native_ranges is True
+    assert plan.parser_version == parser_version and plan.native_ranges is True
     verified, failed = verify_pdf_evidence_spans_bytes(
         raw, source_id=source, source_sha256=digest, evidence_spans=[native, old]
     )

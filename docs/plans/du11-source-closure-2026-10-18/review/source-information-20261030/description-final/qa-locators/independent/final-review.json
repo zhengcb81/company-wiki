@@ -1,0 +1,99 @@
+{
+  "status": "PASS",
+  "open_findings": 0,
+  "review_kind": "independent_engineering_review_not_summary_adoption",
+  "reviewed_head": "f88221d2578eac078bb7b30d9a8c00b08f2ee6d2",
+  "reviewed_files": {
+    "src/company_wiki/source_catalog/narrative_evidence.py": {
+      "bytes": 118180,
+      "raw_sha256": "60decd880f2c059fd7a2c2a3740143b8f36d604b0d464d6dc20b434363b81987",
+      "lf_sha256": "ad91844d645f4ede86ad772e23b0f12e3f1465f610fa73952f700aec20b1806d"
+    },
+    "src/company_wiki/source_catalog/narrative_pdf_qa.py": {
+      "bytes": 5172,
+      "raw_sha256": "e47b7bbd7020e7f686086d74ffc65843e2ce328c4a07e4a07223db41769ece49",
+      "lf_sha256": "e47b7bbd7020e7f686086d74ffc65843e2ce328c4a07e4a07223db41769ece49"
+    },
+    "src/company_wiki/source_catalog/narrative_replay.py": {
+      "bytes": 8725,
+      "raw_sha256": "c85e044ca8ae691115311dd097854a917d2679eec3edbe55e0eaf2a626e24ed3",
+      "lf_sha256": "c85e044ca8ae691115311dd097854a917d2679eec3edbe55e0eaf2a626e24ed3"
+    },
+    "src/company_wiki/source_catalog/narrative_native_ranges.py": {
+      "bytes": 12553,
+      "raw_sha256": "52c98582dce20157a64209c53c9f64c20774db30e8121228762c81da09033915",
+      "lf_sha256": "52c98582dce20157a64209c53c9f64c20774db30e8121228762c81da09033915"
+    },
+    "src/company_wiki/document_understanding/decision_inventory.py": {
+      "bytes": 28677,
+      "raw_sha256": "e660e42687c166b8b86e13129fb0e6b9e0b1b46fe38e23c776a1f03ae7736ba2",
+      "lf_sha256": "30b1c161bf47a1c884260b9164d367a41d49a1fa53d481f6854b0de13bcc2413"
+    },
+    "tests/unit/test_pdf_qa_cell_range_locators.py": {
+      "bytes": 8728,
+      "raw_sha256": "ccd530e47da81581553b017c10b2f83e39d35e3d50380f2bed952d3664eb3a7f",
+      "lf_sha256": "ccd530e47da81581553b017c10b2f83e39d35e3d50380f2bed952d3664eb3a7f"
+    },
+    "tests/unit/test_narrative_native_ranges.py": {
+      "bytes": 18687,
+      "raw_sha256": "e68440e83982ca40e398cbc1d738e8e7e027d88fec94f631151e3aad56aef066",
+      "lf_sha256": "e68440e83982ca40e398cbc1d738e8e7e027d88fec94f631151e3aad56aef066"
+    }
+  },
+  "independent_test": {
+    "path": ".planning/source-description-20261030/qa-locator-independent/test_independent.py",
+    "independent_cases": 28,
+    "total_with_two_product_modules": 60,
+    "result": "60 passed in 8.09s",
+    "stdout": ".planning/source-description-20261030/qa-locator-independent/tests-final-superset.txt",
+    "product_modules": [
+      "tests/unit/test_narrative_quality_projection.py",
+      "tests/unit/test_pdf_qa_cell_range_locators.py"
+    ]
+  },
+  "resolved_findings": [
+    {
+      "id": "QA-QUALITY-DOWNGRADE",
+      "severity": "P1",
+      "before": "Old 0.1.1 native QA unit with locator_unstable was accepted by replay and production material guard after span flags were cleared, all other fields unchanged.",
+      "fix": "_span_matches enforces monotonic source quality: set(unit.quality_flags).issubset(span.quality_flags), together with source/parser identity. Existing source restrictions cannot be removed or replaced; additional conservative diagnostics and flag reordering are permitted. Native-range proof is unchanged.",
+      "independent_retest": "28 neutral cases plus 32 existing/current product cases passed. Includes old/new quality downgrade controls, actual material guards, additive diagnostics, flag reordering, partial deletion/replacement rejection, and the previously failing quality projection contract."
+    }
+  ],
+  "coverage": [
+    "baseline git-source legacy0.1.0/0.1.1 raw unit byte and ID comparison including NFD/CRLF",
+    "conservative noncanonical fragment rejection",
+    "range/discourse metadata and coordinate tamper rejection",
+    "cross-page multi-answer linking with next-cell negative",
+    "old native range baseline byte identity and new distinct identity",
+    "mixed base/mismatched binding/version replay rejection",
+    "current native recipe and decision inventory range identity",
+    "actual generation_manifest and generation_sha256 old/new separation",
+    "monotonic conservative quality diagnostics: additions/reordering accepted, deletion/replacement rejected, actual downstream needs_review replay contract passes"
+  ],
+  "reviewer_source_io": {
+    "original_pdf_reads": 0,
+    "downloads": 0,
+    "sdk_model_calls": 0,
+    "product_writes": 0
+  },
+  "observed_root_real_receipt": {
+    "path": ".planning/source-description-20261030/qa-range-real-v1/receipt.json",
+    "status": "PASS",
+    "units": 302,
+    "selected": 15,
+    "unstable_selected": 0,
+    "original_replay_verified": 15,
+    "model_posts": 0,
+    "downloads": 0,
+    "scope": "Receipt inspection only; reviewer did not reopen original and does not certify summary or RF adoption."
+  },
+  "test_fixture_adjustment": "Initial 2 failures were the reviewer attempting EvidenceSpan conversion of non-NFC row_cells, rejected consistently by existing contract; baseline comparison was corrected to compare raw unit bytes/IDs. No product fix requested for this fixture mistake.",
+  "test_fingerprint": {
+    "raw_sha256": "f2523fa5c6cdf1d7e908338601341f9fdc5780fe95609403e4e34937e70fdb6c"
+  },
+  "revision": "final_conservative_quality_superset",
+  "previous_review_archive": "final-review-prior-text-v1.json",
+  "changed_files_since_previous_fingerprint": [],
+  "suite_scope": "Targeted 60-case final proof only; no final broad-suite pass claim. Earlier broad run under strict flag equality had a real existing-contract failure. This final reviewed source and targeted proof supersede that implementation, not the historical failure log."
+}

@@ -1,13 +1,15 @@
-## 2026-10-30 当前：来源准备根修验收通过，发布后进入真实摘要
+## 2026-10-30 当前：QA定位工程验收完成，发布后真实摘要v3
 
-唯一入口是 CURRENT_STATUS.md/json；以下历史段落中的“当前/待审/进行中”只代表当时观察。来源准备稳定11文件通过受影响域295P/157.53秒、397源文件mypy、ruff和独立19P/2.39秒/0OPEN。独审raw/LF字节已核对。前源码a6fea454的精确CI41000149392已成功；本节点提交后另记自己的CI，不能借旧绿。
+唯一入口为 CURRENT_STATUS.md/json。来源准备f88221d2已正常提交推送，精确CI41009349866成功、pre-push158P/26.35秒。真实v2进入select后因所有QA片段默认不稳定定位而失败，0POST/0费用，原件/config/sentinel保持、临时湖已恢复。
 
-根因已闭合：证券代码证明后识别完整法定名/换行标题且排除“请查阅”等引用；US发现持久保存原文实际scope与固有文种，泛regulatory可检索annual但精确annual不借季度；已证明的旧期间可排除，无完整期间证据仍不能正向命中；benchmark在未命中时委托既有local prepare。原US停滞失败在旧a6fea也复现，原测试不减断言、不加次数/额度。真实IR冷启动ready=002643，发布日期仍未知，0复制/下载/POST，原件与生产配置保持。
+现已从共因修复：native0.1.2有真实cell字符范围，旧0.1.0/0.1.1字节与定位回放保持；native-range按版本绑定base，cache不混用。独审发现的来源quality标记可被清除问题已修，保留原生限制且允许新增保守诊断，不新加人工门禁。真实原件302units/15选中/0unstable、统一admission接受、原文回放15/15、业务gold8/8；全文仍partial，不冒签摘要或RF。
 
-**唯一下一步：** 正常提交推送本节点，观察精确CI，再以meta-v4/gold-v3在新目录real-summary-v2运行当前配置MiMo原语言摘要；先检查8个实际输入gold，再真实claim独审、activation/restart/crossrun零重复POST和FF/RF消费，最终RF实际预测采用仍须单独完成。详见[本轮验收](review/source-information-20261030/description-final/source-preparation/README.md)和[实施入口](review/source-information-20261030/description-final/SOURCE_PREPARATION_NEXT.md)。保留首轮NOT_RUN证据；W21 runtime/作者工区、Dayu/IQS/Dashboard及外来hook mode不碰。总goal active，US RPO/W21/holdout/完整八步循环仍OPEN，本次没有新付费。
+验证：先876P/24.77秒；严格相等flag的后续广域877P/1F揭示既有诊断兼容，已修并用相关6模块160P/17.81秒验收，不重复32分钟整批；397源mypy/ruff和独立稳定7文件审查通过。详见[验收包](review/source-information-20261030/description-final/qa-locators/README.md)。
+
+**下一步：** 正常提交推送本节点、观察自己的CI，再以meta-v4/gold-v3在新目录real-summary-v3执行当前MiMo原语言摘要；不改gold事实/不提高预算。再真实claim独审、持久响应/activation/restart/crossrun零重复POST、FF复用与RF实际采用。W21外包runtime/工区、原件/config/外来hook保持。US RPO/W21/holdout/完整八步公司loop仍OPEN，目标active。
 
 ---
-以下为历史记录，不是额外的执行入口。
+以下为历史记录，不是额外执行入口。
 
 ## 2026-10-30 当前：来源描述大节点已发布，精确CI进行中
 

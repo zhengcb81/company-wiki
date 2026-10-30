@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-30",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_SOURCE_PREPARATION_ACCEPTED_PUBLICATION_THEN_REAL_SUMMARY",
+  "overall_status": "ACTIVE_QA_LOCATOR_ACCEPTED_PUBLICATION_THEN_REAL_SUMMARY_V3",
   "parallel_packages_20261025": {
     "status": "W16_W17_W18_ROOT_COMPONENT_ACCEPTED_MERGED",
     "entry": "harness_lanes/20261025/README.md",
@@ -26,13 +26,13 @@
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
-  "last_code_commit": "a6fea4541143bfebb61ea9c209fc4d316f52ea66",
+  "last_code_commit": "f88221d2578eac078bb7b30d9a8c00b08f2ee6d2",
   "code_ci": {
-    "id": 41000149392,
-    "head_sha": "a6fea4541143bfebb61ea9c209fc4d316f52ea66",
+    "id": 41009349866,
+    "head_sha": "f88221d2578eac078bb7b30d9a8c00b08f2ee6d2",
     "status": "completed",
     "conclusion": "success",
-    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41000149392"
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41009349866"
   },
   "formal_v4_offline_selection_replay_20261025": {
     "status": "EXACT_REPRODUCED_NO_PAID_CALL",
@@ -406,7 +406,7 @@
   "initial_execution_paid_calls_preserved": 2,
   "r1_engineering_closeout_ref": "r1-holdout-20261021/engineering-closeout-20261022.json",
   "publication_status_owner": "review/pdf-c3-20261026/QA_PROVISIONAL_PUBLICATION.json",
-  "resume_handoff": "review/source-information-20261030/description-final/SOURCE_PREPARATION_NEXT.md",
+  "resume_handoff": "review/source-information-20261030/description-final/QA_LOCATOR_NEXT.md",
   "resumed_at": "2026-10-23T18:41:33.912794+00:00",
   "previous_pause_request": "Superseded by user continue2026-10-23",
   "last_updated_at": "2026-10-28",
@@ -2344,7 +2344,7 @@
     "published": true,
     "push_failure": "47 targets /392 collected /600s; two regressions being root-fixed, not waived by narrower daily gate"
   },
-  "next_action": "Publish sealed source-preparation fix, observe exact CI, then real-summary-v2 using prepared metadata v4/gold v3; do not rerun v1 or overwrite its NOT_RUN receipt.",
+  "next_action": "Publish reviewed QA locators then real-summary-v3, meta-v4/gold-v3, configured MiMo; no reuse/overwrite of failed v1/v2 outputs.",
   "c3_runtime_recovery_20261026": {
     "entry": "review/pdf-c3-20261026/RUNTIME_RECOVERY.md",
     "environment_independent": "PASS_ZERO_OPEN_25_TESTS_AND_REAL_WORKER_ENTRYPOINTS",
@@ -2960,17 +2960,13 @@
   "pause_requested_by_user": false,
   "paused_scope": "revoked by user mainline resume 2026-10-29",
   "own_uncommitted_runtime": [
-    "src/company_wiki/source_catalog/assertion_service.py",
-    "src/company_wiki/source_catalog/canonical_scope.py",
-    "src/company_wiki/source_catalog/document_kinds.py",
-    "src/company_wiki/source_catalog/local_reconcile.py",
-    "src/company_wiki/source_catalog/resolver.py",
-    "src/company_wiki/source_catalog/service.py",
-    "tools/document_understanding_benchmark/phase_c_readonly_source.py",
-    "tests/integration/test_legacy_local_reconcile.py",
-    "tests/test_phase_c_readonly_source.py",
-    "tests/unit/test_cn_source_header_titles.py",
-    "tests/unit/test_document_kind_scope.py"
+    "src/company_wiki/source_catalog/narrative_evidence.py",
+    "src/company_wiki/source_catalog/narrative_pdf_qa.py",
+    "src/company_wiki/source_catalog/narrative_replay.py",
+    "src/company_wiki/source_catalog/narrative_native_ranges.py",
+    "src/company_wiki/document_understanding/decision_inventory.py",
+    "tests/unit/test_pdf_qa_cell_range_locators.py",
+    "tests/unit/test_narrative_native_ranges.py"
   ],
   "qa_provisional_publication": {
     "code_commit": "c6c446d0eebc8f6e6f6903bd677c04eebaf65077",
@@ -3352,6 +3348,145 @@
       "FF reuse and RF actual adoption",
       "whole-document recall/holdout/full company loop"
     ],
-    "foreign_hook_mode_and_w21_preserved": true
+    "foreign_hook_mode_and_w21_preserved": true,
+    "commit": "f88221d2578eac078bb7b30d9a8c00b08f2ee6d2",
+    "pushed": true
+  },
+  "real_summary_v2": {
+    "status": "FAIL_PRE_MODEL_SELECT",
+    "error": "PARSER_INCOMPLETE: selected material is not reliable parsed source evidence",
+    "model_posts": 0,
+    "charged_tokens": 0,
+    "charged_micro_usd": 0,
+    "protected_unchanged": true,
+    "temporary_lake_removed": true
+  },
+  "qa_locator_root_fix": {
+    "status": "ENGINEERING_ACCEPTED_NOT_REAL_SUMMARY",
+    "new_native_parser_version": "0.1.2",
+    "legacy_versions_preserved": [
+      "0.1.0",
+      "0.1.1"
+    ],
+    "real_units": 302,
+    "selected_spans": 15,
+    "unstable_selected": 0,
+    "gold_supported": 8,
+    "gold_required": 8,
+    "native_replay_verified": 15,
+    "model_posts": 0,
+    "final_targeted_tests": {
+      "passed": 160,
+      "seconds": 17.81
+    },
+    "earlier_broad_domain": {
+      "passed": 876,
+      "seconds": 24.77
+    },
+    "intermediate_broad_domain": {
+      "passed": 877,
+      "failed": 1,
+      "seconds": 1921.26,
+      "remaining_failure": "fixed by monotonic quality flags, original contract retained; targeted final160P"
+    },
+    "independent": {
+      "status": "PASS",
+      "open_findings": 0,
+      "review_kind": "independent_engineering_review_not_summary_adoption",
+      "reviewed_head": "f88221d2578eac078bb7b30d9a8c00b08f2ee6d2",
+      "reviewed_files": {
+        "src/company_wiki/source_catalog/narrative_evidence.py": {
+          "bytes": 118180,
+          "raw_sha256": "60decd880f2c059fd7a2c2a3740143b8f36d604b0d464d6dc20b434363b81987",
+          "lf_sha256": "ad91844d645f4ede86ad772e23b0f12e3f1465f610fa73952f700aec20b1806d"
+        },
+        "src/company_wiki/source_catalog/narrative_pdf_qa.py": {
+          "bytes": 5172,
+          "raw_sha256": "e47b7bbd7020e7f686086d74ffc65843e2ce328c4a07e4a07223db41769ece49",
+          "lf_sha256": "e47b7bbd7020e7f686086d74ffc65843e2ce328c4a07e4a07223db41769ece49"
+        },
+        "src/company_wiki/source_catalog/narrative_replay.py": {
+          "bytes": 8725,
+          "raw_sha256": "c85e044ca8ae691115311dd097854a917d2679eec3edbe55e0eaf2a626e24ed3",
+          "lf_sha256": "c85e044ca8ae691115311dd097854a917d2679eec3edbe55e0eaf2a626e24ed3"
+        },
+        "src/company_wiki/source_catalog/narrative_native_ranges.py": {
+          "bytes": 12553,
+          "raw_sha256": "52c98582dce20157a64209c53c9f64c20774db30e8121228762c81da09033915",
+          "lf_sha256": "52c98582dce20157a64209c53c9f64c20774db30e8121228762c81da09033915"
+        },
+        "src/company_wiki/document_understanding/decision_inventory.py": {
+          "bytes": 28677,
+          "raw_sha256": "e660e42687c166b8b86e13129fb0e6b9e0b1b46fe38e23c776a1f03ae7736ba2",
+          "lf_sha256": "30b1c161bf47a1c884260b9164d367a41d49a1fa53d481f6854b0de13bcc2413"
+        },
+        "tests/unit/test_pdf_qa_cell_range_locators.py": {
+          "bytes": 8728,
+          "raw_sha256": "ccd530e47da81581553b017c10b2f83e39d35e3d50380f2bed952d3664eb3a7f",
+          "lf_sha256": "ccd530e47da81581553b017c10b2f83e39d35e3d50380f2bed952d3664eb3a7f"
+        },
+        "tests/unit/test_narrative_native_ranges.py": {
+          "bytes": 18687,
+          "raw_sha256": "e68440e83982ca40e398cbc1d738e8e7e027d88fec94f631151e3aad56aef066",
+          "lf_sha256": "e68440e83982ca40e398cbc1d738e8e7e027d88fec94f631151e3aad56aef066"
+        }
+      },
+      "independent_test": {
+        "path": ".planning/source-description-20261030/qa-locator-independent/test_independent.py",
+        "independent_cases": 28,
+        "total_with_two_product_modules": 60,
+        "result": "60 passed in 8.09s",
+        "stdout": ".planning/source-description-20261030/qa-locator-independent/tests-final-superset.txt",
+        "product_modules": [
+          "tests/unit/test_narrative_quality_projection.py",
+          "tests/unit/test_pdf_qa_cell_range_locators.py"
+        ]
+      },
+      "resolved_findings": [
+        {
+          "id": "QA-QUALITY-DOWNGRADE",
+          "severity": "P1",
+          "before": "Old 0.1.1 native QA unit with locator_unstable was accepted by replay and production material guard after span flags were cleared, all other fields unchanged.",
+          "fix": "_span_matches enforces monotonic source quality: set(unit.quality_flags).issubset(span.quality_flags), together with source/parser identity. Existing source restrictions cannot be removed or replaced; additional conservative diagnostics and flag reordering are permitted. Native-range proof is unchanged.",
+          "independent_retest": "28 neutral cases plus 32 existing/current product cases passed. Includes old/new quality downgrade controls, actual material guards, additive diagnostics, flag reordering, partial deletion/replacement rejection, and the previously failing quality projection contract."
+        }
+      ],
+      "coverage": [
+        "baseline git-source legacy0.1.0/0.1.1 raw unit byte and ID comparison including NFD/CRLF",
+        "conservative noncanonical fragment rejection",
+        "range/discourse metadata and coordinate tamper rejection",
+        "cross-page multi-answer linking with next-cell negative",
+        "old native range baseline byte identity and new distinct identity",
+        "mixed base/mismatched binding/version replay rejection",
+        "current native recipe and decision inventory range identity",
+        "actual generation_manifest and generation_sha256 old/new separation",
+        "monotonic conservative quality diagnostics: additions/reordering accepted, deletion/replacement rejected, actual downstream needs_review replay contract passes"
+      ],
+      "reviewer_source_io": {
+        "original_pdf_reads": 0,
+        "downloads": 0,
+        "sdk_model_calls": 0,
+        "product_writes": 0
+      },
+      "observed_root_real_receipt": {
+        "path": ".planning/source-description-20261030/qa-range-real-v1/receipt.json",
+        "status": "PASS",
+        "units": 302,
+        "selected": 15,
+        "unstable_selected": 0,
+        "original_replay_verified": 15,
+        "model_posts": 0,
+        "downloads": 0,
+        "scope": "Receipt inspection only; reviewer did not reopen original and does not certify summary or RF adoption."
+      },
+      "test_fixture_adjustment": "Initial 2 failures were the reviewer attempting EvidenceSpan conversion of non-NFC row_cells, rejected consistently by existing contract; baseline comparison was corrected to compare raw unit bytes/IDs. No product fix requested for this fixture mistake.",
+      "test_fingerprint": {
+        "raw_sha256": "f2523fa5c6cdf1d7e908338601341f9fdc5780fe95609403e4e34937e70fdb6c"
+      },
+      "revision": "final_conservative_quality_superset",
+      "previous_review_archive": "final-review-prior-text-v1.json",
+      "changed_files_since_previous_fingerprint": [],
+      "suite_scope": "Targeted 60-case final proof only; no final broad-suite pass claim. Earlier broad run under strict flag equality had a real existing-contract failure. This final reviewed source and targeted proof supersede that implementation, not the historical failure log."
+    }
   }
 }

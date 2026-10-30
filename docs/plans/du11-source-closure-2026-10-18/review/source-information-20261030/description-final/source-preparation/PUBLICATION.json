@@ -1,0 +1,16 @@
+{
+  "commit": "f88221d2578eac078bb7b30d9a8c00b08f2ee6d2",
+  "pushed": true,
+  "pre_push": {
+    "passed": 158,
+    "seconds": 26.35
+  },
+  "reviewed_lf_git_blobs_matched": 11,
+  "ci": {
+    "id": 41009349866,
+    "head_sha": "f88221d2578eac078bb7b30d9a8c00b08f2ee6d2",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41009349866"
+  }
+}

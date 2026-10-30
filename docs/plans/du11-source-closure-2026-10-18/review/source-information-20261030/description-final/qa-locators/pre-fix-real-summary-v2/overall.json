@@ -1,0 +1,202 @@
+{
+  "mode": "live",
+  "sample": "source-description-cn-ir-20260515",
+  "source_mode": "registered_readonly",
+  "selector_versions": [
+    "0.9.0"
+  ],
+  "reading_model_projections": {
+    "0.9.0": "reading-model-input/4"
+  },
+  "comparison_scope": "single_selector_no_paired_improvement_claim",
+  "scope": "development regression, not holdout",
+  "states": [
+    {
+      "version": "0.9.0",
+      "run_id": "phaseC-090-68befe24f11e",
+      "exit": 2,
+      "receipt": {
+        "budget": {
+          "estimated_micro_usd": 0,
+          "tokens": 0,
+          "unknown_reservations": 0,
+          "unsettled_reservations": 0
+        },
+        "documents": [
+          {
+            "artifact_ref": null,
+            "document_id": "urn:company-wiki:document:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+            "errors": [
+              "DEPENDENCY_TERMINAL",
+              "PARSER_INCOMPLETE",
+              "DEPENDENCY_TERMINAL"
+            ],
+            "status": "dead_letter"
+          }
+        ],
+        "run_id": "phaseC-090-68befe24f11e",
+        "schema_version": "narrative-batch-result/1",
+        "status": "failed",
+        "storage": {
+          "persistent_added_bytes": 205009,
+          "scratch_peak_bytes": 0
+        }
+      },
+      "native_usage": [],
+      "activation_recovery": {
+        "status": "NOT_RECOVERABLE",
+        "reason": "initial_document_not_activation_pending",
+        "initial_exit": 2,
+        "document_statuses": [
+          "dead_letter"
+        ],
+        "document_errors": [
+          "DEPENDENCY_TERMINAL",
+          "PARSER_INCOMPLETE",
+          "DEPENDENCY_TERMINAL"
+        ],
+        "native_usage_statuses": [],
+        "response_hashes_present": true
+      }
+    }
+  ],
+  "internal_algorithm_caps": {
+    "0.8.0": "No internal 48000-char cap",
+    "0.9.0": 48000
+  },
+  "public_span_limits": {
+    "default": 96,
+    "financial_reports": 112,
+    "prospectus": 160
+  },
+  "activation_recovery_requested": true,
+  "model_settings": {
+    "model_id": "mimo-v2.6-flash",
+    "endpoint": "https://token-plan-cn.xiaomimimo.com/v1/chat/completions",
+    "api_key_env": "MIMO_API_KEY",
+    "max_output_tokens": 8192,
+    "temperature": 1.0,
+    "output_token_field": "max_completion_tokens",
+    "thinking": "disabled"
+  },
+  "capture_origin": "existing local bytes; descriptor URL does not prove remote or historical download SHA",
+  "availability_date_provenance": {
+    "observed_published_date": null,
+    "observed_filing_date": null,
+    "registered_published_date": null,
+    "method": "unknown_public_availability",
+    "mtime_used": false
+  },
+  "language_provenance": {
+    "registered_language": "zh",
+    "gold_language_label": "zh",
+    "basis": "prepared_source_descriptor",
+    "translation": false
+  },
+  "identity_snapshot": {
+    "kind": "byte_exact_existing_official_security_snapshot_no_refresh",
+    "original": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.source_catalog\\security_master\\cn.json",
+    "fingerprint": {
+      "sha256": "d9a4860f3b6eb407d32ae813c0d61647bfcb77b2c0d8b159c3f5fc5854ef3301",
+      "bytes": 2294033,
+      "mtime_ns": 1784447621230223100
+    }
+  },
+  "source_registration": {
+    "source_ref": {
+      "document_id": "urn:company-wiki:document:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "source_id": "urn:company-wiki:source:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "content_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "byte_size": 153851,
+      "mime_type": "application/pdf",
+      "schema_version": "2.0"
+    },
+    "manifest": {
+      "document_id": "urn:company-wiki:document:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "source_id": "urn:company-wiki:source:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "content_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+      "byte_size": 153851,
+      "mime_type": "application/pdf",
+      "title": "中节能万润股份有限公司投资者关系活动记录表",
+      "document_kind": "investor_relations",
+      "published_date": null,
+      "source_url": null,
+      "retrieved_at": null,
+      "collector_name": null,
+      "collector_version": null,
+      "canonical_entity_id": null,
+      "display_name": "万润股份",
+      "market": "CN",
+      "security_id": "002643",
+      "fiscal_year": null,
+      "fiscal_period": null,
+      "period_end": null,
+      "form_type": null,
+      "provider": null,
+      "provider_document_id": null,
+      "language": null
+    },
+    "descriptor_diagnostics": {
+      "language": {
+        "expected": "zh",
+        "observed": null
+      }
+    },
+    "selection": {
+      "mode": "qualified_source_request",
+      "filing_identity_period_asof_qualification": "REQUEST_APPLIED"
+    },
+    "source_fact_registration": null,
+    "local_preparation": {
+      "schema_version": "local-source-prepare/1",
+      "status": "ready",
+      "reason": "local_source_reconciled",
+      "source_ref": {
+        "document_id": "urn:company-wiki:document:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+        "source_id": "urn:company-wiki:source:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+        "content_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+        "byte_size": 153851,
+        "mime_type": "application/pdf",
+        "schema_version": "2.0"
+      },
+      "blocks_download": false,
+      "operations": [
+        {
+          "status": "recorded",
+          "assertion_id": "sa-ae963fd6a0d84ca7b59fee0b93b18375",
+          "restore_audit_id": null
+        }
+      ],
+      "diagnostics": [],
+      "download_events": 0
+    },
+    "catalog_config": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwplC-r9v_5fuk\\config\\source_catalog.yaml",
+    "raw_copies": 0,
+    "verified_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+    "registration": {
+      "root_id": "company_raw",
+      "relative_paths": [
+        "万润股份/raw/research/万润股份：投资者关系活动记录表20260515.pdf"
+      ],
+      "files_seen": 2
+    },
+    "download_events": 0
+  },
+  "source_ref": {
+    "document_id": "urn:company-wiki:document:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+    "source_id": "urn:company-wiki:source:sha256:221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+    "content_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+    "byte_size": 153851,
+    "mime_type": "application/pdf",
+    "schema_version": "2.0"
+  },
+  "status": "FAIL",
+  "error": "RuntimeError: ACTIVATION_RECOVERY_NOT_AVAILABLE",
+  "error_file": "phase_c_runner.py",
+  "error_line": 1415,
+  "model_post_attempts": 0,
+  "protected_unchanged": true,
+  "sentinel_unchanged": true,
+  "temporary_lake_removed": true,
+  "all_prepared_protected_unchanged": true
+}

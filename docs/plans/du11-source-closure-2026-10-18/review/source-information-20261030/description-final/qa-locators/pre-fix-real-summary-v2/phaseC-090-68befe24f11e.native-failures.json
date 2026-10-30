@@ -1,0 +1,10 @@
+[
+  {
+    "attempt_id": "91f380d4909e451c9f710baf759fc4a6",
+    "job_id": "8f45dcca77b429d3",
+    "outcome": "terminal_failure",
+    "error_code": "PARSER_INCOMPLETE",
+    "error_detail": "selected material is not reliable parsed source evidence",
+    "result_json": "{\"artifacts\":[],\"effects\":[],\"error\":{\"code\":\"PARSER_INCOMPLETE\",\"detail\":\"selected material is not reliable parsed source evidence\"},\"metrics\":{\"cost_usd\":0.0,\"duration_ms\":0,\"tokens\":0},\"outcome\":\"terminal_failure\",\"result\":{}}"
+  }
+]

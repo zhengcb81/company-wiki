@@ -24,6 +24,13 @@ NATIVE_RANGE_SCHEMA_VERSION = "native-pdf-range/1"
 NATIVE_RANGE_PARSER_NAME = "native_pdf_range_parser"
 NATIVE_RANGE_PARSER_VERSION = "0.1.0"
 NATIVE_RANGE_BASE_PARSER_VERSION = "0.1.1"
+NATIVE_RANGE_CURRENT_PARSER_VERSION = "0.1.1"
+# Historical range/base bindings are immutable. The new base produces a
+# distinct range identity, even when the source text and coordinates agree.
+NATIVE_RANGE_BASE_VERSIONS = MappingProxyType({
+    NATIVE_RANGE_PARSER_VERSION: NATIVE_RANGE_BASE_PARSER_VERSION,
+    NATIVE_RANGE_CURRENT_PARSER_VERSION: "0.1.2",
+})
 NATIVE_RANGE_LIMITS = MappingProxyType(
     {"max_total_chars": 2_000_000, "max_page_chars": 200_000}
 )
@@ -167,6 +174,10 @@ def native_range_unit(members: Sequence[NarrativeUnit]) -> NarrativeUnit | None:
     ):
         return None
     first = members[0]
+    range_version = next((version for version, base in NATIVE_RANGE_BASE_VERSIONS.items()
+                          if base == first.parser_version), None)
+    if range_version is None:
+        return None
     view = first.metadata.get("native_source_view")
     if (
         not isinstance(view, MappingProxyType)
@@ -192,7 +203,7 @@ def native_range_unit(members: Sequence[NarrativeUnit]) -> NarrativeUnit | None:
             or unit.language != first.language
             or unit.unit_kind != "pdf_text_block"
             or unit.parser_name != "selective_narrative_parser"
-            or unit.parser_version != NATIVE_RANGE_BASE_PARSER_VERSION
+            or unit.parser_version != first.parser_version
             or unit.metadata.get("native_source_view") is not view
             or unit.coordinates.table_index is not None
             or (
@@ -228,7 +239,7 @@ def native_range_unit(members: Sequence[NarrativeUnit]) -> NarrativeUnit | None:
     identity = {
         "coordinates": coordinates.locator(),
         "parser_name": NATIVE_RANGE_PARSER_NAME,
-        "parser_version": NATIVE_RANGE_PARSER_VERSION,
+        "parser_version": range_version,
         "source_id": first.source_id,
         "text_sha256": sha256(raw.encode()).hexdigest(),
         "unit_kind": "pdf_native_range",
@@ -244,7 +255,7 @@ def native_range_unit(members: Sequence[NarrativeUnit]) -> NarrativeUnit | None:
     binding = MappingProxyType(
         {
             "schema_version": NATIVE_RANGE_SCHEMA_VERSION,
-            "base_parser_version": NATIVE_RANGE_BASE_PARSER_VERSION,
+            "base_parser_version": first.parser_version,
             "coordinate_space": "native_page_view",
             "page_view_sha256": view["page_view_sha256"],
             "source_unit_ids": tuple(u.unit_id for u in members),
@@ -255,7 +266,7 @@ def native_range_unit(members: Sequence[NarrativeUnit]) -> NarrativeUnit | None:
         unit_id=unit_id,
         source_id=first.source_id,
         parser_name=NATIVE_RANGE_PARSER_NAME,
-        parser_version=NATIVE_RANGE_PARSER_VERSION,
+        parser_version=range_version,
         coordinates=coordinates,
         raw_text=raw,
         unit_kind="pdf_native_range",
@@ -275,7 +286,7 @@ def verify_native_range_span(
     """Bind every member and its exact view substring to fresh pinned-parser units."""
     if (
         span.parser_name != NATIVE_RANGE_PARSER_NAME
-        or span.parser_version != NATIVE_RANGE_PARSER_VERSION
+        or span.parser_version not in NATIVE_RANGE_BASE_VERSIONS
         or not isinstance(span.structured_value, Mapping)
         or span.structured_value.get("unit_kind") != "pdf_native_range"
     ):
@@ -284,6 +295,7 @@ def verify_native_range_span(
     if (
         not isinstance(binding, Mapping)
         or binding.get("schema_version") != NATIVE_RANGE_SCHEMA_VERSION
+        or binding.get("base_parser_version") != NATIVE_RANGE_BASE_VERSIONS[span.parser_version]
     ):
         return False
     ids = binding.get("source_unit_ids")
@@ -304,6 +316,7 @@ def verify_native_range_span(
     rebuilt = native_range_unit([available[uid] for uid in ids])
     return bool(
         rebuilt
+        and rebuilt.parser_version == span.parser_version
         and rebuilt.source_id == span.source_id
         and rebuilt.coordinates == span.coordinates
         and rebuilt.raw_text == span.raw_text

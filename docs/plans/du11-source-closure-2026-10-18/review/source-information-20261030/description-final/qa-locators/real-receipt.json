@@ -1,0 +1,64 @@
+{
+  "status": "PASS",
+  "source_sha256": "221467c15a24180205a8226f96fea9bda0262c866d5ba8aa31889ec96e6466d7",
+  "original_and_config_unchanged": true,
+  "native_parser_version": "0.1.2",
+  "units": 302,
+  "selected": 15,
+  "unstable_selected": 0,
+  "production_material_admission": "PASS",
+  "selected_status": "partial",
+  "coverage_complete": false,
+  "business_input_scores": [
+    {
+      "id": "domestic-market-share",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "reported-material-impact",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "subsidiary-customer-chain",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "listing-process-conditions",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "demand-cause",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "vc-denial-contact-and-hope",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "sold-roster-developed-compounds",
+      "supported": true,
+      "all_anchors_individually_present": true
+    },
+    {
+      "id": "capacity-plan",
+      "supported": true,
+      "all_anchors_individually_present": true
+    }
+  ],
+  "locator_replay": {
+    "verified": 15,
+    "failed": []
+  },
+  "select_parse_seconds": 1.243,
+  "work": 1352979,
+  "model_posts": 0,
+  "downloads": 0,
+  "parse_calls": 2,
+  "scope": "native select plus actual original reopen locator proof; not real summary/RF adoption"
+}

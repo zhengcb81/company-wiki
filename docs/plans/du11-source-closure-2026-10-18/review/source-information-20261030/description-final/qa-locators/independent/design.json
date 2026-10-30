@@ -1,0 +1,80 @@
+{
+  "schema_version": "qa-locator-independent-design/1",
+  "baseline_head": "f88221d2578eac078bb7b30d9a8c00b08f2ee6d2",
+  "status": "design_conditionally_supported",
+  "product_code_modified": false,
+  "original_pdf_read_or_parsed": false,
+  "sdk_or_paid_or_download_calls": 0,
+  "root_cause": "Fragments have exact metadata ranges but coordinates omit ranges and every QA fragment is marked locator_unstable; pre-model guard correctly rejects them.",
+  "snapshot": {
+    "path": ".planning/source-information-20261029/cn-ir-native-v4/parsed.json.gz",
+    "unit_count": 302,
+    "parser_version": "0.1.1",
+    "qa_fragment_count": 75,
+    "qa_unstable_count": 75,
+    "distinct_qa_cell_coordinates": 6,
+    "duplicate_qa_coordinates": 69,
+    "range_slice_cell_sha_fragment_sha_failures": 0,
+    "states": {
+      "question_paired": 13,
+      "answer_paired": 43,
+      "question_paired_cross_page": 5,
+      "answer_paired_cross_page": 12,
+      "before_first_question": 2
+    }
+  },
+  "existing_failure": {
+    "run_id": "phaseC-090-68befe24f11e",
+    "error_code": "PARSER_INCOMPLETE",
+    "model_post_attempts": 0,
+    "tokens": 0,
+    "estimated_micro_usd": 0,
+    "activation_recovery": "NOT_RECOVERABLE"
+  },
+  "required_native_parser_version": "0.1.2",
+  "historical_native_versions_to_freeze": [
+    "0.1.0",
+    "0.1.1"
+  ],
+  "recommended_range_parser_to_base_version": {
+    "0.1.0": "0.1.1",
+    "0.1.1": "0.1.2"
+  },
+  "required_changes": [
+    "finite modern-QA and stable-locator dispatch",
+    "verified cell-relative half-open character coordinates",
+    "strict QA replay and metadata/range binding",
+    "same-cell comparison excluding fragment range",
+    "native-range version mapping for global default bump"
+  ],
+  "guard_change_required": false,
+  "schema_or_database_change_required": false,
+  "risks": [
+    "Naive bump selects legacy QA grammar and weaker replay",
+    "Full coordinate equality breaks answer continuation",
+    "Changing fixed old range base breaks historical replay",
+    "Same range parser with two bases can alias unit identity",
+    "NFC/CRLF can invalidate exact cell slices",
+    "Relabeled snapshots retain stale IDs and dependencies"
+  ],
+  "acceptance": [
+    "old and manually unstable new span guard negative controls",
+    "legacy byte identity stability",
+    "new source slices and unique ranges",
+    "modern QA and cross-page compatibility",
+    "coordinate/metadata/source/role/parser tamper rejection",
+    "old and new native range generation/pinned replay with mixed-version rejection",
+    "cache generation separation without old artifact mutation",
+    "all 75 frozen QA fragments including 17 cross-page paired fragments"
+  ],
+  "implementation_certified": false,
+  "final_engineering_review": {
+    "status": "PASS",
+    "open_findings": 0,
+    "receipt": "final-review.json",
+    "independent_tests": "28 neutral cases; 60 total with quality projection and QA locator modules passed",
+    "resolved_finding": "QA-QUALITY-DOWNGRADE",
+    "not_summary_adoption": true,
+    "revision": "final_conservative_quality_superset"
+  }
+}

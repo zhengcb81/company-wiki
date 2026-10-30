@@ -50,7 +50,9 @@ from .narrative_matching import matching_document, matching_text, original_candi
 from .narrative_neighbors import NeighborRules, enrich_neighbor_context
 from .narrative_ocr_groups import build_ocr_context_groups
 from .narrative_pdf_groups import PdfGroupRules, build_pdf_context_groups
-from .narrative_pdf_qa import QA_FRAGMENT_VERSION, pdf_qa_parts, question_markers
+from .narrative_pdf_qa import (
+    QA_CELL_RANGE_VERSION, QA_FRAGMENT_VERSIONS, pdf_qa_parts, question_markers,
+)
 from .narrative_project_context import enrich_fundraising_table_context
 from .narrative_replay import (
     prepare_pdf_replay,
@@ -73,7 +75,7 @@ from .transcript_versions import (
 
 
 NARRATIVE_PARSER_NAME = "selective_narrative_parser"
-NARRATIVE_PARSER_VERSION = QA_FRAGMENT_VERSION
+NARRATIVE_PARSER_VERSION = QA_CELL_RANGE_VERSION
 PDF_GEOMETRY_FEATURE_VERSION = "pdf-geometry/1"
 PDF_PROSE_LAYOUT_FEATURE_VERSION = "pdf-native-prose-layout/2"
 
@@ -608,7 +610,7 @@ def _make_unit(
         "text_sha256": hashlib.sha256(canonical_text.encode("utf-8")).hexdigest(),
         "unit_kind": unit_kind,
     }
-    if parser_version == QA_FRAGMENT_VERSION and unit_kind == "pdf_table_qa_fragment":
+    if parser_version in QA_FRAGMENT_VERSIONS and unit_kind == "pdf_table_qa_fragment":
         identity_fields["cell_fragment_range"] = (
             metadata.get("cell_fragment_start"),
             metadata.get("cell_fragment_end"),
@@ -662,7 +664,7 @@ def _pdf_qa_parts(
     parser_version: str = NARRATIVE_PARSER_VERSION,
 ) -> list[dict[str, Any]]:
     """Split repeated investor Q&A markers inside one extracted table cell."""
-    if parser_version == QA_FRAGMENT_VERSION:
+    if parser_version in QA_FRAGMENT_VERSIONS:
         return pdf_qa_parts(text, group_prefix=group_prefix)
     questions = list(_QA_QUESTION.finditer(text))
     if not questions:
@@ -809,7 +811,7 @@ class _CrossPageQaLinker:
 
     @staticmethod
     def compatible(left: NarrativeUnit, right: NarrativeUnit) -> bool:
-        if QA_FRAGMENT_VERSION not in {left.parser_version, right.parser_version}:
+        if not QA_FRAGMENT_VERSIONS.intersection({left.parser_version, right.parser_version}):
             return True  # replay the historical linking policy unchanged
         lp, rp = left.coordinates.page_number, right.coordinates.page_number
         return bool(
@@ -823,12 +825,13 @@ class _CrossPageQaLinker:
         )
 
     def continue_answer(self, index: int, unit: NarrativeUnit) -> bool:
-        if self.last_answer_index is None or unit.parser_version != QA_FRAGMENT_VERSION:
+        if self.last_answer_index is None or unit.parser_version not in QA_FRAGMENT_VERSIONS:
             return False
         previous = self.output[self.last_answer_index]
         if not (
             self.compatible(previous, unit)
-            and previous.coordinates == unit.coordinates
+            and replace(previous.coordinates, char_start=None, char_end=None)
+            == replace(unit.coordinates, char_start=None, char_end=None)
             and previous.metadata.get("cell_sha256") == unit.metadata.get("cell_sha256")
             and unit.metadata["cell_fragment_start"]
             >= previous.metadata["cell_fragment_end"]
@@ -877,7 +880,7 @@ class _CrossPageQaLinker:
         answer_meta = dict(unit.metadata)
         answer_meta["qa_group_id"] = group_id
         answer_meta["qa_state"] = "answer_paired_cross_page"
-        if unit.parser_version == QA_FRAGMENT_VERSION:
+        if unit.parser_version in QA_FRAGMENT_VERSIONS:
             answer_meta["qa_question_number"] = question.metadata.get(
                 "qa_question_number"
             )
@@ -1432,6 +1435,19 @@ def _emit_pdf_qa_fragment(
     fragment_text = str(fragment["text"]).strip()
     if not fragment_text:
         return
+    start, end = int(fragment["start"]), int(fragment["end"])
+    cell = row[column_index]
+    # New locators use Python character offsets into this exact extracted
+    # cell, not PDF bytes or a page-wide view. Never clear an unreliable flag
+    # unless the producer can prove the parent and the complete substring.
+    stable_range = bool(
+        state.parser_version == QA_CELL_RANGE_VERSION
+        and 0 <= start < end <= len(cell)
+        and cell[start:end] == fragment_text
+        and "\r\n" not in fragment_text
+        and unicodedata.normalize("NFC", fragment_text) == fragment_text
+        and hashlib.sha256(cell.encode("utf-8")).hexdigest() == cell_sha
+    )
     state.units.append(
         _make_unit(
             source_id=state.source_id,
@@ -1441,12 +1457,14 @@ def _emit_pdf_qa_fragment(
                 table_index=table_index,
                 row_index=row_index,
                 column_index=column_index,
+                char_start=start if stable_range else None,
+                char_end=end if stable_range else None,
             ),
             raw_text=fragment_text,
             unit_kind="pdf_table_qa_fragment",
             source_role=str(fragment["role"]),
             language=state.language,
-            quality_flags=("locator_unstable",),
+            quality_flags=() if stable_range else ("locator_unstable",),
             metadata={
                 "bbox": bbox,
                 "cell_fragment_end": int(fragment["end"]),
@@ -2370,7 +2388,7 @@ def _topics(text: str) -> tuple[str, ...]:
 def _has_pdf_question(text: str, parser_version: str) -> bool:
     return (
         bool(question_markers(text))
-        if parser_version == QA_FRAGMENT_VERSION
+        if parser_version in QA_FRAGMENT_VERSIONS
         else bool(_QA_QUESTION.search(text))
     )
 

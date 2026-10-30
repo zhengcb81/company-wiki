@@ -1,0 +1,47 @@
+[
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.sd30-qa-range-r1",
+    "bytes": null,
+    "removed": true
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.sd30-qa-range-r2",
+    "bytes": null,
+    "removed": true
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.sd30-qa-flags-green",
+    "bytes": null,
+    "removed": true
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.sd30-qa-domain",
+    "bytes": 4460043.0,
+    "removed": true
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.sd30-qa-final",
+    "bytes": 4460043.0,
+    "removed": true
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.sd30-qa-proof-final",
+    "bytes": 4390.0,
+    "removed": true
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\source-description-20261030\\registration-probe-owned",
+    "bytes": 2783349.0,
+    "removed": true
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\source-description-20261030\\us-discovery-probe-owned",
+    "bytes": 763333.0,
+    "removed": true
+  },
+  {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\source-description-20261030\\source-preparation-cold-proof",
+    "bytes": 2659754.0,
+    "removed": true
+  }
+]
