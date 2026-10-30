@@ -8,6 +8,12 @@
 
 M6/M7无新模型费用；母账仍1,827,558tokens/$0.732814含历史unknown，原件/config、外来hook mode、RF3WIP/147output及Dayu/IQS/Dashboard保持。W21 canonicalC2/长路径、US RPO及真US监管PDF/HK新coverage、药明康德W12新attempt→药明合联→Snowflake和完整八步公司清单仍OPEN。旧暂停/待签收/旧next均为历史，不增加小节点门禁。
 
+## 2026-10-30 W23：Xiaomi-OCR-0 独立对照试验
+
+用户新要求已拆成[W23施工卡](harness_lanes/20261030/W23-XIAOMI-OCR.md)，[调查依据](harness_lanes/20261030/W23-SOURCE-NOTES.md)与[独立工区](harness_lanes/20261030/W23-setup.json)齐备，状态READY_TO_DISPATCH，未启动模型推理/下载。当前明确基线RapidOCR3.8.1+ORT1.26.0 CPU/本地PP-OCRv4；普通PDF原生提取与do_ocr=False的Docling增强分开。小米代码/HF revision已公开API冻结，CPU可行性/质量仍未验证。
+
+仅tools/ocr_comparison和专属测试，零生产src修改；不抢M8或W22两owner。约12页分市场/文种固定原图gold，page/region/现有OCR/原生控制分别报告，兼顾遗漏/编造/数字/定位与速度空间；新增下载≤6GiB/持久实验≤8GiB，不复制整份原件，不改全局MCP或依赖。重型测速错峰，交接前独立agent审查并修完范围内问题，测试目录恢复。比较结论不等于生产接入/主线摘要/RF验收，唯一主线下一步保持M8。
+
 ## 2026-10-30 新独立施工批 W22（不改变主线下一步）
 
 [总表与接线责任](harness_lanes/20261030/README.md)；本批两卡 READY_TO_DISPATCH，不冒称已发出/开工。[W22-CWP-ATOMIC-IO](harness_lanes/20261030/W22-CWP-ATOMIC-IO.md)修共享原子写入与深目录临时路径；[W22-PDF-DEPLOY](harness_lanes/20261030/W22-PDF-DEPLOY.md)完成实际ASCII资源部署及既有PDF入口验收。两工区已从662f821e建立、tracked clean，仅各四份已知计划seed未跟踪；工区/分支/精确HEAD见[setup](harness_lanes/20261030/setup.json)。不复制原件/SDK，不接管M8语义/QA/actor/摘要/缓存/RF，也不动生产config、外来hook mode及RF三WIP。

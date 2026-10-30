@@ -1,0 +1,39 @@
+{
+  "schema_version": "harness-lane-setup/1",
+  "date": "2026-10-30",
+  "card_id": "W23-XIAOMI-OCR",
+  "status": "READY_TO_DISPATCH",
+  "workdir": "C:\\Users\\郑曾波\\Projects\\company-wiki-w23-xiaomi-ocr",
+  "branch": "codex/w23-xiaomi-ocr-20261030",
+  "base_commit": "de7ffe48aee3f9decfb4be6dfc2f561dcd3aa29d",
+  "plan_id": "w23-xiaomi-ocr-2026-10-30",
+  "pwf_plan_root": "docs/plans",
+  "tracked_status": "",
+  "seed_files": [
+    "TASK_CARD.md",
+    "SOURCE_NOTES.md",
+    "task_plan.md",
+    "findings.md",
+    "progress.md"
+  ],
+  "authors_started": false,
+  "new_original_copies": 0,
+  "new_model_downloads": 0,
+  "new_model_inferences": 0,
+  "upstream": {
+    "github": {
+      "url": "https://api.github.com/repos/xiaomi-research/Xiaomi-OCR-0/commits/main",
+      "resolved_url": "https://api.github.com/repos/xiaomi-research/Xiaomi-OCR-0/commits/main",
+      "sha": "b1a9bb4c07060c453785e9151715ccda6b96f0b1",
+      "metadata_sha256": "dba4541c524498f330c4dbfaf36738daaf035f320bad97e89e14198b71dda0ca"
+    },
+    "model": {
+      "url": "https://huggingface.co/api/models/xiaomi-research/Xiaomi-OCR-0",
+      "resolved_url": "https://huggingface.co/api/models/xiaomi-research/Xiaomi-OCR-0",
+      "sha": "bbd8cf8d21f256b3644b44cb860f3a7cecb93c30",
+      "metadata_sha256": "394437cb528e4ca881c9dddfc62a66666621be44392d1891ab0d78747897399f",
+      "model_id": "xiaomi-research/Xiaomi-OCR-0",
+      "license": "apache-2.0"
+    }
+  }
+}

@@ -4203,5 +4203,18 @@
     "new_downloads": 0,
     "new_original_copies": 0,
     "new_sdk_copies": 0
+  },
+  "parallel_lane_w23_20261030": {
+    "status": "READY_TO_DISPATCH",
+    "card": "harness_lanes/20261030/W23-XIAOMI-OCR.md",
+    "research": "harness_lanes/20261030/W23-SOURCE-NOTES.md",
+    "setup": "harness_lanes/20261030/W23-setup.json",
+    "workdir": "C:/Users/郑曾波/Projects/company-wiki-w23-xiaomi-ocr",
+    "production_files_allowed": false,
+    "new_model_downloads": 0,
+    "new_model_inferences": 0,
+    "existing_ocr": "RapidOCR3.8.1/ORT1.26.0/CPU/PP-OCRv4",
+    "mainline_next_unchanged": true,
+    "final_independent_review_required": true
   }
 }

@@ -25,3 +25,9 @@
 每张卡的 `handoff.md` 给人读，`.json` 给 ROOT 检查；schema/必需字段在独立卡内完整列出。包含实现提交、最终代码 raw/LF SHA、实际测试与命令、独立审查目标和报告、清理与磁盘收据、范围内 OPEN、PARTIAL 和未运行事项。不要求人工授权 JSON、审批签收链或逐节点报告。
 
 作者正常提交并推自己的分支，不合主线、不安装全局技能、不改他人工区。ROOT 负责集成、当前版本回归、精确远端 CI、共享 PWF 更新与后续真实业务验收。
+
+## 后增独立试验 W23-XIAOMI-OCR
+
+用户另要求比较新OCR，新增[独立施工卡](W23-XIAOMI-OCR.md)和[调查依据](W23-SOURCE-NOTES.md)。工区 `C:/Users/郑曾波/Projects/company-wiki-w23-xiaomi-ocr`，分支 `codex/w23-xiaomi-ocr-20261030`，setup见[W23清单](W23-setup.json)。仅新增 `tools/ocr_comparison/` 与专属测试/PWF/delivery，不改任何生产src、W22两包owner或ROOT M8。可独立开工；重型测速记录主机负载，与W22 SDK实测错峰，繁忙时先做轻量工具/测试，不把竞争造成的延迟当模型结论。
+
+这不是W22第三卡或生产OCR切换。当前CPU RapidOCR与小米page/region、原生提取控制分开比较；固定真实样本/gold、版本与资源界，最终独立agent全面审查并修复后交接。ROOT在比较结果接收后决定是否另在阅读抽象层接入，未经试验不替换生产。
