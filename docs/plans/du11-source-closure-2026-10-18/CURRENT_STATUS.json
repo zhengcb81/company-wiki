@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-30",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_QA_SCOPE_ACCEPTED_RELEASE_PENDING_SOURCE_DESCRIPTION_NEXT",
+  "overall_status": "ACTIVE_QA_PUBLISHED_SOURCE_DESCRIPTION_TDD",
   "parallel_packages_20261025": {
     "status": "W16_W17_W18_ROOT_COMPONENT_ACCEPTED_MERGED",
     "entry": "harness_lanes/20261025/README.md",
@@ -26,13 +26,13 @@
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
-  "last_code_commit": "69c9b178e4b23ff9bb57b804b7c954893bcd5e13",
+  "last_code_commit": "121d2b264f14a9b4d8e9d050d11aefcb4393bd3c",
   "code_ci": {
-    "id": 40984342776,
-    "head_sha": "69c9b178e4b23ff9bb57b804b7c954893bcd5e13",
-    "status": "completed",
-    "conclusion": "success",
-    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40984342776"
+    "id": 40989629573,
+    "head_sha": "121d2b264f14a9b4d8e9d050d11aefcb4393bd3c",
+    "status": "in_progress",
+    "conclusion": null,
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40989629573"
   },
   "formal_v4_offline_selection_replay_20261025": {
     "status": "EXACT_REPRODUCED_NO_PAID_CALL",
@@ -2344,7 +2344,7 @@
     "published": true,
     "push_failure": "47 targets /392 collected /600s; two regressions being root-fixed, not waived by narrower daily gate"
   },
-  "next_action": "Freeze neutral TDD for syntactic argument role vs entity type, and shared prepared business-driver vs accounting-result proof (single-unit income early return is a root); then QA assertion support scopes. Do not reparse saved IR or edit W21 runtime.",
+  "next_action": "Follow review/source-information-20261030/SOURCE_DESCRIPTION_NEXT.md: frozen 10 RED/5 controls, shared composition/customer-chain/process/impact semantics; then actual source/task recall before paid summary/cache/FF/RF and holdouts.",
   "c3_runtime_recovery_20261026": {
     "entry": "review/pdf-c3-20261026/RUNTIME_RECOVERY.md",
     "environment_independent": "PASS_ZERO_OPEN_25_TESTS_AND_REAL_WORKER_ENTRYPOINTS",
@@ -3042,12 +3042,21 @@
     "implementation_milestone": "COMPONENT_PASS; actual tasks/summaries/cache/RF/holdout OPEN"
   },
   "parallel_w21_runtime": {
-    "status": "DISPATCHED_BY_USER_20261029",
+    "status": "READONLY_HEAD_AND_FINAL_REVIEW_OBSERVED_CANONICAL_E2E_PARTIAL",
     "entry": "harness_lanes/20261029/W21-PDF-RUNTIME.md",
     "workdir": "C:/Users/郑曾波/Projects/company-wiki-w21-pdf-runtime",
     "branch": "codex/w21-pdf-runtime-20261029",
     "base": "bb5d09c056ca36bba8061d761b5469d87aa6e5e0",
-    "root_preserves_owned_runtime_files": true
+    "root_preserves_owned_runtime_files": true,
+    "observed_head": "eab239d93560efe6f1eb974b547be0bd9e93b3e7",
+    "observed_tracked_wip": [
+      "delivery/w21-pdf-runtime/handoff.md"
+    ],
+    "final_review_target": "eab239d93560efe6f1eb974b547be0bd9e93b3e7",
+    "handoff_final_tested_commit": null,
+    "handoff_pushed_to_remote": false,
+    "canonical_sdk_e2e": "native_fallback: author diagnosis non-ASCII environment path/fopen; ASCII alias diagnostic runs but is not production deployment",
+    "root_action": "Read-only reception evidence only; no author file/index/SDK changes. Canonical integration and true alignment remain ROOT acceptance responsibility, do not infer runtime is stopped from WIP."
   },
   "source_information_ab_20261029": {
     "entry": "review/source-information-20261029/README.md",
@@ -3124,11 +3133,11 @@
     "domain_passed": 3187,
     "domain_skipped": 11,
     "independent_passed": 25,
-    "next": "Q1-Q3 closed QA scopes: 3 RED/1 PASS frozen; complete same-session design, then implement.",
+    "next": "Continue source_description_next after QA scope publication.",
     "source_commit": "69c9b178e4b23ff9bb57b804b7c954893bcd5e13"
   },
   "qa_closed_scope_next": {
-    "status": "ENGINEERING_ACCEPTED_PENDING_COMMIT_CI",
+    "status": "ENGINEERING_PUBLISHED_EXACT_CI_RUNNING",
     "entry": "review/qa-closed-scope-20261030/README.md",
     "actual_corrected_tests": {
       "failed": 3,
@@ -3168,12 +3177,19 @@
     "domain_passed": 3320,
     "domain_skipped": 11,
     "independent_passed": 15,
-    "independent_open": 0
+    "independent_open": 0,
+    "source_commit": "121d2b264f14a9b4d8e9d050d11aefcb4393bd3c",
+    "ci_id": 40989629573
   },
   "source_description_next": {
-    "status": "DESIGN_ACCEPTED_READY_NEXT",
+    "status": "TDD_BASELINE_FROZEN_READY_IMPLEMENT",
     "entry": "review/source-information-20261030/SOURCE_DESCRIPTION_NEXT.md",
     "implementation_started": false,
-    "real_content_recall_accepted": false
+    "real_content_recall_accepted": false,
+    "actual_isolated_tests": {
+      "failed": 10,
+      "passed": 5,
+      "seconds": 1.48
+    }
   }
 }

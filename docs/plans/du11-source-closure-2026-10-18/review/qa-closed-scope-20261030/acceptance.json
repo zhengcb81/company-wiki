@@ -1,5 +1,5 @@
 {
-  "status": "ACCEPTED_ENGINEERING_PENDING_COMMIT_CI",
+  "status": "ENGINEERING_PUBLISHED_EXACT_CI_RUNNING",
   "source_files": [
     {
       "path": "src/company_wiki/document_understanding/decision_inventory.py",
@@ -70,5 +70,17 @@
   "new_downloads": 0,
   "new_pdf_parse_calls": 0,
   "overall_goal_complete": false,
-  "next": "../source-information-20261030/SOURCE_DESCRIPTION_NEXT.md"
+  "next": "../source-information-20261030/SOURCE_DESCRIPTION_NEXT.md",
+  "source_commit": "121d2b264f14a9b4d8e9d050d11aefcb4393bd3c",
+  "ci": {
+    "id": 40989629573,
+    "head_sha": "121d2b264f14a9b4d8e9d050d11aefcb4393bd3c",
+    "status": "in_progress",
+    "conclusion": null,
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40989629573"
+  },
+  "pre_push": {
+    "passed": 158,
+    "seconds": 24.67
+  }
 }

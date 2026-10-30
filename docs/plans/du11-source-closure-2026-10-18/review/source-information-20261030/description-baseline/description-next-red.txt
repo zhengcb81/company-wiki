@@ -1,0 +1,82 @@
+CW-BASETEMP-DECISION {"event": "decision", "relocated": false, "reason": "no-explicit-basetemp", "detail": "pytest derives its default basetemp from %TEMP%; short by construction"}
+FFFFFFFFFF.....                                                          [100%]
+================================== FAILURES ===================================
+_ test_self_contained_source_descriptions_have_independent_reading_value[\u516c\u53f8\u4e3b\u8981\u4ea7\u54c1\u4e3a\u7cbe\u5bc6\u8bbe\u5907\u3001\u4f20\u611f\u5668\u548c\u5149\u5b66\u6750\u6599\u3002] _
+.planning\qa-scope-20261030\test_description_next_red.py:18: in test_self_contained_source_descriptions_have_independent_reading_value
+    assert observed_use(session,uid)[0]=='support'
+E   AssertionError: assert 'context_only' == 'support'
+E     
+E     - support
+E     + context_only
+_ test_self_contained_source_descriptions_have_independent_reading_value[\u6f9c\u82af\u6750\u6599\u4e3b\u8981\u4ea7\u54c1\u4e3a\u7cbe\u5bc6\u8bbe\u5907\u3001\u4f20\u611f\u5668\u548c\u5149\u5b66\u6750\u6599\u3002] _
+.planning\qa-scope-20261030\test_description_next_red.py:18: in test_self_contained_source_descriptions_have_independent_reading_value
+    assert observed_use(session,uid)[0]=='support'
+E   AssertionError: assert 'context_only' == 'support'
+E     
+E     - support
+E     + context_only
+_ test_self_contained_source_descriptions_have_independent_reading_value[\u516c\u53f8\u4e3b\u8981\u7522\u54c1\u70ba\u7cbe\u5bc6\u8a2d\u5099\u3001\u611f\u6e2c\u5668\u548c\u5149\u5b78\u6750\u6599\u3002] _
+.planning\qa-scope-20261030\test_description_next_red.py:18: in test_self_contained_source_descriptions_have_independent_reading_value
+    assert observed_use(session,uid)[0]=='support'
+E   AssertionError: assert 'context_only' == 'support'
+E     
+E     - support
+E     + context_only
+_ test_self_contained_source_descriptions_have_independent_reading_value[Our main products are precision equipment, sensors and optical materials.] _
+.planning\qa-scope-20261030\test_description_next_red.py:18: in test_self_contained_source_descriptions_have_independent_reading_value
+    assert observed_use(session,uid)[0]=='support'
+E   AssertionError: assert 'context_only' == 'support'
+E     
+E     - support
+E     + context_only
+_ test_self_contained_source_descriptions_have_independent_reading_value[\u76ee\u524d\u516c\u53f8\u5728\u7cbe\u5bc6\u6750\u6599\u9886\u57df\u5df2\u9500\u552e\u7684\u4ea7\u54c1\u4e3b\u8981\u4e3a\u50ac\u5316\u5242\u3001\u805a\u5408\u7269\u548c\u5149\u5b66\u6750\u6599\uff0c\u73b0\u5df2\u5f00\u53d1\u8d85300\u79cd\u5316\u5408\u7269\u3002] _
+.planning\qa-scope-20261030\test_description_next_red.py:18: in test_self_contained_source_descriptions_have_independent_reading_value
+    assert observed_use(session,uid)[0]=='support'
+E   AssertionError: assert 'context_only' == 'support'
+E     
+E     - support
+E     + context_only
+_ test_self_contained_source_descriptions_have_independent_reading_value[\u6f9c\u82af\u6750\u6599\u4e3b\u8981\u4ea7\u54c1\u4e3a\u663e\u793a\u6750\u6599\uff0c\u4e0b\u6e38\u5ba2\u6237\u4e3a\u663e\u793a\u6750\u6599\u751f\u4ea7\u4f01\u4e1a\uff0c\u663e\u793a\u6750\u6599\u751f\u4ea7\u4f01\u4e1a\u7684\u4e0b\u6e38\u4e3a\u9762\u677f\u751f\u4ea7\u4f01\u4e1a\u3002] _
+.planning\qa-scope-20261030\test_description_next_red.py:18: in test_self_contained_source_descriptions_have_independent_reading_value
+    assert observed_use(session,uid)[0]=='support'
+E   AssertionError: assert 'context_only' == 'support'
+E     
+E     - support
+E     + context_only
+_ test_self_contained_source_descriptions_have_independent_reading_value[\u6f9c\u82af\u6750\u6599\u5df2\u6536\u5230\u4ea4\u6613\u6240\u7b2c\u4e8c\u8f6e\u4e0a\u5e02\u5ba1\u6838\u95ee\u8be2\u51fd\uff0c\u56e0\u524d\u671f\u62a5\u9001\u7684\u8d22\u52a1\u6570\u636e\u8fc7\u671f\u7533\u8bf7\u4e2d\u6b62\u5ba1\u6838\uff0c\u5f85\u8d44\u6599\u66f4\u65b0\u540e\u5c06\u7533\u8bf7\u6062\u590d\u5ba1\u6838\u3002] _
+.planning\qa-scope-20261030\test_description_next_red.py:18: in test_self_contained_source_descriptions_have_independent_reading_value
+    assert observed_use(session,uid)[0]=='support'
+E   AssertionError: assert 'context_only' == 'support'
+E     
+E     - support
+E     + context_only
+_ test_self_contained_source_descriptions_have_independent_reading_value[\u6f9c\u82af\u6750\u6599\u5df2\u6536\u5230\u4ea4\u6613\u6240\u7b2c\u4e8c\u8f6e\u4e0a\u5e02\u5ba1\u6838\u95ee\u8be2\u51fd\uff0c\u56e0\u8d44\u6599\u6709\u6548\u671f\u5df2\u8fc7\u7533\u8bf7\u4e2d\u6b62\u5ba1\u6838\uff0c\u5f85\u8d44\u6599\u66f4\u65b0\u540e\u5c06\u7533\u8bf7\u6062\u590d\u5ba1\u6838\u3002] _
+.planning\qa-scope-20261030\test_description_next_red.py:18: in test_self_contained_source_descriptions_have_independent_reading_value
+    assert observed_use(session,uid)[0]=='support'
+E   AssertionError: assert 'context_only' == 'support'
+E     
+E     - support
+E     + context_only
+_ test_self_contained_source_descriptions_have_independent_reading_value[\u636e\u62a5\u9053\uff0c\u6240\u8ff0\u4e8b\u9879\u672a\u5bf9\u6f9c\u82af\u6750\u6599\u7ecf\u8425\u6784\u6210\u91cd\u5927\u5f71\u54cd\u3002] _
+.planning\qa-scope-20261030\test_description_next_red.py:18: in test_self_contained_source_descriptions_have_independent_reading_value
+    assert observed_use(session,uid)[0]=='support'
+E   AssertionError: assert 'context_only' == 'support'
+E     
+E     - support
+E     + context_only
+_ test_noun_classes_generic_rhetoric_and_accounting_are_not_operating_assertions[\u663e\u793a\u5668\u4ef6\u5236\u9020\u4f01\u4e1a] _
+.planning\qa-scope-20261030\test_description_next_red.py:30: in test_noun_classes_generic_rhetoric_and_accounting_are_not_operating_assertions
+    assert observed_use(session,uid)[0]!='support'
+E   AssertionError: assert 'support' != 'support'
+=========================== short test summary info ===========================
+FAILED .planning/qa-scope-20261030/test_description_next_red.py::test_self_contained_source_descriptions_have_independent_reading_value[\u516c\u53f8\u4e3b\u8981\u4ea7\u54c1\u4e3a\u7cbe\u5bc6\u8bbe\u5907\u3001\u4f20\u611f\u5668\u548c\u5149\u5b66\u6750\u6599\u3002]
+FAILED .planning/qa-scope-20261030/test_description_next_red.py::test_self_contained_source_descriptions_have_independent_reading_value[\u6f9c\u82af\u6750\u6599\u4e3b\u8981\u4ea7\u54c1\u4e3a\u7cbe\u5bc6\u8bbe\u5907\u3001\u4f20\u611f\u5668\u548c\u5149\u5b66\u6750\u6599\u3002]
+FAILED .planning/qa-scope-20261030/test_description_next_red.py::test_self_contained_source_descriptions_have_independent_reading_value[\u516c\u53f8\u4e3b\u8981\u7522\u54c1\u70ba\u7cbe\u5bc6\u8a2d\u5099\u3001\u611f\u6e2c\u5668\u548c\u5149\u5b78\u6750\u6599\u3002]
+FAILED .planning/qa-scope-20261030/test_description_next_red.py::test_self_contained_source_descriptions_have_independent_reading_value[Our main products are precision equipment, sensors and optical materials.]
+FAILED .planning/qa-scope-20261030/test_description_next_red.py::test_self_contained_source_descriptions_have_independent_reading_value[\u76ee\u524d\u516c\u53f8\u5728\u7cbe\u5bc6\u6750\u6599\u9886\u57df\u5df2\u9500\u552e\u7684\u4ea7\u54c1\u4e3b\u8981\u4e3a\u50ac\u5316\u5242\u3001\u805a\u5408\u7269\u548c\u5149\u5b66\u6750\u6599\uff0c\u73b0\u5df2\u5f00\u53d1\u8d85300\u79cd\u5316\u5408\u7269\u3002]
+FAILED .planning/qa-scope-20261030/test_description_next_red.py::test_self_contained_source_descriptions_have_independent_reading_value[\u6f9c\u82af\u6750\u6599\u4e3b\u8981\u4ea7\u54c1\u4e3a\u663e\u793a\u6750\u6599\uff0c\u4e0b\u6e38\u5ba2\u6237\u4e3a\u663e\u793a\u6750\u6599\u751f\u4ea7\u4f01\u4e1a\uff0c\u663e\u793a\u6750\u6599\u751f\u4ea7\u4f01\u4e1a\u7684\u4e0b\u6e38\u4e3a\u9762\u677f\u751f\u4ea7\u4f01\u4e1a\u3002]
+FAILED .planning/qa-scope-20261030/test_description_next_red.py::test_self_contained_source_descriptions_have_independent_reading_value[\u6f9c\u82af\u6750\u6599\u5df2\u6536\u5230\u4ea4\u6613\u6240\u7b2c\u4e8c\u8f6e\u4e0a\u5e02\u5ba1\u6838\u95ee\u8be2\u51fd\uff0c\u56e0\u524d\u671f\u62a5\u9001\u7684\u8d22\u52a1\u6570\u636e\u8fc7\u671f\u7533\u8bf7\u4e2d\u6b62\u5ba1\u6838\uff0c\u5f85\u8d44\u6599\u66f4\u65b0\u540e\u5c06\u7533\u8bf7\u6062\u590d\u5ba1\u6838\u3002]
+FAILED .planning/qa-scope-20261030/test_description_next_red.py::test_self_contained_source_descriptions_have_independent_reading_value[\u6f9c\u82af\u6750\u6599\u5df2\u6536\u5230\u4ea4\u6613\u6240\u7b2c\u4e8c\u8f6e\u4e0a\u5e02\u5ba1\u6838\u95ee\u8be2\u51fd\uff0c\u56e0\u8d44\u6599\u6709\u6548\u671f\u5df2\u8fc7\u7533\u8bf7\u4e2d\u6b62\u5ba1\u6838\uff0c\u5f85\u8d44\u6599\u66f4\u65b0\u540e\u5c06\u7533\u8bf7\u6062\u590d\u5ba1\u6838\u3002]
+FAILED .planning/qa-scope-20261030/test_description_next_red.py::test_self_contained_source_descriptions_have_independent_reading_value[\u636e\u62a5\u9053\uff0c\u6240\u8ff0\u4e8b\u9879\u672a\u5bf9\u6f9c\u82af\u6750\u6599\u7ecf\u8425\u6784\u6210\u91cd\u5927\u5f71\u54cd\u3002]
+FAILED .planning/qa-scope-20261030/test_description_next_red.py::test_noun_classes_generic_rhetoric_and_accounting_are_not_operating_assertions[\u663e\u793a\u5668\u4ef6\u5236\u9020\u4f01\u4e1a]
+10 failed, 5 passed in 1.48s
