@@ -338,21 +338,24 @@
   "parallel_work_packages": [
     {
       "id": "IR-REPORT-GENERATION",
-      "status": "ROOT_ACCEPTED_DELIVERY_NOT_MERGED",
+      "status": "ROOT_ACCEPTED_MERGED_PUSHED",
       "path": "harness_lanes/20261024-independent/IR-REPORT-GENERATION.md",
-      "review_before_handoff": true
+      "review_before_handoff": true,
+      "publication": "review/older-packages-merge-20261031/receipt.json"
     },
     {
       "id": "QA-RAG-SAFE-REBUILD",
-      "status": "ROOT_ACCEPTED_DELIVERY_NOT_MERGED",
+      "status": "ROOT_ACCEPTED_MERGED_PUSHED",
       "path": "harness_lanes/20261024-independent/QA-RAG-SAFE-REBUILD.md",
-      "review_before_handoff": true
+      "review_before_handoff": true,
+      "publication": "review/older-packages-merge-20261031/receipt.json"
     },
     {
       "id": "MC-OUTPUT-INTEGRITY",
-      "status": "ROOT_ACCEPTED_DELIVERY_NOT_MERGED",
+      "status": "ROOT_ACCEPTED_MERGED_PUSHED",
       "path": "harness_lanes/20261024-independent/MC-OUTPUT-INTEGRITY.md",
-      "review_before_handoff": true
+      "review_before_handoff": true,
+      "publication": "review/older-packages-merge-20261031/receipt.json"
     }
   ],
   "next_step_after_user_resumes": "ALREADY_RESUMED; follow next_action.",
@@ -4236,10 +4239,15 @@
     },
     "repair_card": "harness_lanes/20261031/W23-OCR-R1.md",
     "repair_status": "READY_TO_DISPATCH",
-    "older_three_accepted_unmerged": true,
+    "older_three_accepted_unmerged": false,
     "new_model_calls": 0,
     "new_original_downloads": 0,
-    "whole_project_complete": false
+    "whole_project_complete": false,
+    "latest_runtime_ci": {
+      "id": 41238915399,
+      "conclusion": "failure",
+      "root_fix": "Linux platform import and platform-specific fixture; under independent recheck"
+    }
   },
   "parallel_w23_r1_20261031": {
     "schema_version": "harness-lane-setup/1",
@@ -4258,5 +4266,21 @@
     "model_copies": 0,
     "original_copies": 0,
     "authors_started": false
+  },
+  "older_packages_publication_20261031": {
+    "status": "ALL_THREE_MERGED_AND_PUSHED",
+    "entry": "review/older-packages-merge-20261031/README.md",
+    "receipt": "review/older-packages-merge-20261031/receipt.json",
+    "heads": {
+      "industry-research": "98640a9a1f52fc87ba9813676a3cc5ab9bf045c9",
+      "QAbyLLM": "1f5514744d7677ff4e59d992c7489bff754d2230",
+      "MeetingConverter": "6c857a8be148f187dfb0389e48265ebbe19713c1"
+    },
+    "tests": {
+      "IR": "67 unittest/2.701s",
+      "QA": "28 unit+temporary real-chroma/78.27s (only pre-existing PyPDF2 deprecation)",
+      "MC": "76 output+pipeline/1.30s"
+    },
+    "IR_private_repo_created": true
   }
 }

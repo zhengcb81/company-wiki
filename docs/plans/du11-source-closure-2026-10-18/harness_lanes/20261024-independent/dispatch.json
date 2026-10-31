@@ -17,7 +17,7 @@
         "tests/test_report_generator.py",
         "tests/fixtures/report_generator/**"
       ],
-      "status": "ROOT_ACCEPTED_DELIVERY_NOT_MERGED",
+      "status": "ROOT_ACCEPTED_MERGED_PUSHED",
       "review_before_handoff": true,
       "root_acceptance": {
         "status": "ROOT_ACCEPTED_DELIVERY_NOT_MERGED",
@@ -32,6 +32,12 @@
           "golden": "deterministic"
         },
         "publication": "repository has no remote; no push claimed; cleanup receipt present"
+      },
+      "publication_20261031": {
+        "main_after": "98640a9a1f52fc87ba9813676a3cc5ab9bf045c9",
+        "remote": "https://github.com/zhengcb81/industry-research.git",
+        "remote_head": "98640a9a1f52fc87ba9813676a3cc5ab9bf045c9",
+        "record": "../../review/older-packages-merge-20261031/receipt.json"
       }
     },
     {
@@ -47,7 +53,7 @@
         "tests/integration/test_rag_rebuild_lifecycle.py",
         "tests/fixtures/rag_safe_rebuild/**"
       ],
-      "status": "ROOT_ACCEPTED_DELIVERY_NOT_MERGED",
+      "status": "ROOT_ACCEPTED_MERGED_PUSHED",
       "review_before_handoff": true,
       "root_acceptance": {
         "status": "ROOT_ACCEPTED_DELIVERY_NOT_MERGED",
@@ -61,6 +67,12 @@
           "repository": "97 passed"
         },
         "preservation": "source vector_db inventory and SHA unchanged; cleanup receipt present"
+      },
+      "publication_20261031": {
+        "main_after": "1f5514744d7677ff4e59d992c7489bff754d2230",
+        "remote": "https://github.com/zhengcb81/QAbyLLM.git",
+        "remote_head": "1f5514744d7677ff4e59d992c7489bff754d2230",
+        "record": "../../review/older-packages-merge-20261031/receipt.json"
       }
     },
     {
@@ -75,7 +87,7 @@
         "core/output.py",
         "tests/test_output.py"
       ],
-      "status": "ROOT_ACCEPTED_DELIVERY_NOT_MERGED",
+      "status": "ROOT_ACCEPTED_MERGED_PUSHED",
       "review_before_handoff": true,
       "root_acceptance": {
         "status": "ROOT_ACCEPTED_DELIVERY_NOT_MERGED",
@@ -90,7 +102,13 @@
         },
         "preservation": "pre-existing source .coverage unchanged; no remote push claimed; cleanup receipt present"
       },
-      "root_acceptance_ref": "review/market-family-upgrade-20261024/formal-v4-and-cards-root-acceptance-20261025.md"
+      "root_acceptance_ref": "review/market-family-upgrade-20261024/formal-v4-and-cards-root-acceptance-20261025.md",
+      "publication_20261031": {
+        "main_after": "6c857a8be148f187dfb0389e48265ebbe19713c1",
+        "remote": "https://github.com/zhengcb81/MeetingConverter.git",
+        "remote_head": "6c857a8be148f187dfb0389e48265ebbe19713c1",
+        "record": "../../review/older-packages-merge-20261031/receipt.json"
+      }
     }
   ],
   "isolation": {
@@ -102,5 +120,5 @@
   },
   "handoff_rule": "A card is not complete until an independent non-implementer agent returns PASS on the exact final commit, all findings are fixed and rechecked, acceptance tests pass, and test-owned storage is restored.",
   "root_acceptance_date": "2026-10-25",
-  "root_acceptance_summary": "All three deliveries accepted against final code SHA, independent review, tests and cleanup evidence; external branches remain unmerged/unpushed by this project."
+  "root_acceptance_summary": "All three previously accepted deliveries now tested, merged into respective main/master, PWF committed and pushed; see20261031 receipt."
 }
