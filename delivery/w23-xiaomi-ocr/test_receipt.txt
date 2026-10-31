@@ -1,1 +1,2 @@
-============================= 41 passed in 45.69s =============================
+-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html
+======================= 47 passed, 1 warning in 48.05s ========================

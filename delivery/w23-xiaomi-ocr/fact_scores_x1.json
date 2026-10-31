@@ -1,0 +1,75 @@
+{
+  "schema_version": "cwp-ocr-fact-scores/1",
+  "arm": "X1F (mapped-f32 variant); upstream-bf16 arm noted separately",
+  "method": "author judgment pairing gold facts/conditions against X1F full outputs (delivery/w23-xiaomi-ocr/raw_x1.json and .w23_cache/x1_texts staged copies); every judgment cites verified string presence or its absence. All 13 executed pages finished with EOS (finish_reason stop); bili_call_4q22_en_p003 was not attempted (30-minute budget exhausted).",
+  "eval_pages": {
+    "byd_ar_2024_p021": {
+      "facts": {"hit": 9, "partial": 0, "miss": 0, "notes": "F8 table numbers all present verbatim ('4,281,084' etc.) though cells are concatenated by the OTSL-to-text path ('乘用车4,281,0843,033,66241.12%…') — content present, layout linearized; digit-present recall recovers it"},
+      "conditions": {"hit": 1, "partial": 0, "miss": 0, "notes": "C0 checkbox read correctly as '☑适用 □不适用' — the exact class R0 failed"}
+    },
+    "amec_h1_2026_p009": {
+      "facts": {"hit": 6, "partial": 0, "miss": 0, "notes": "1659亿美元/23.2% verbatim"},
+      "conditions": {"hit": 1, "partial": 0, "miss": 0, "notes": "the negation line R0 dropped ('没有能加工微米和纳米尺度…就不可能制造出…') is complete"}
+    },
+    "amec_h1_2026_p011": {
+      "facts": {"hit": 7, "partial": 0, "miss": 0, "notes": "13% fourth-largest segment present; end-of-page 超微 clause present"},
+      "conditions": {"hit": 2, "partial": 0, "miss": 0}
+    },
+    "meituan_ar_2024_p011": {
+      "facts": {"hit": 8, "partial": 0, "miss": 0, "notes": "10億元/14億元/7個試點省市/2025年第二季度/拼好飯/品牌衛星店/神搶手/閃電倉 all present (CER 0.022)"},
+      "conditions": {"hit": 1, "partial": 0, "miss": 0}
+    },
+    "ksy_q1_2026_p002": {
+      "facts": {"hit": 8, "partial": 0, "miss": 0, "notes": "納斯達克 spelled correctly (R0 read 斯逹克); superscript handled: 392.0 without the footnote merge (R0 produced 392.01); 2,703.7/351.4/27.6%/1,996.3/707.4/6.8980/30億 all present"},
+      "conditions": {"hit": 2, "partial": 0, "miss": 0}
+    },
+    "ksy_q1_2026_p002_synthetic_degraded": {
+      "facts": {"hit": 8, "partial": 0, "miss": 0, "notes": "same-page degraded variant (0.55x + 1.3deg): output quality matches the clean page (CER 0.051 both) — robust to low-resolution tilt"},
+      "conditions": {"hit": 2, "partial": 0, "miss": 0}
+    },
+    "ir_wanrun_20241104_p000": {
+      "facts": {"hit": 6, "partial": 0, "miss": 0, "notes": "checkbox state read correctly ('☑特定对象调研 □分析师会议…' — R0 lost it); all participants/time/place fields present (王祉蘅 with the correct 蘅)"},
+      "conditions": {"hit": 0, "partial": 0, "miss": 0, "notes": "gold has no condition entries on this page"}
+    },
+    "hrjp_cb_prospectus_p006": {
+      "facts": {"hit": 5, "partial": 0, "miss": 0, "notes": "6,300万片/50万件/140万支 verbatim"},
+      "conditions": {"hit": 2, "partial": 0, "miss": 0, "notes": "both 如果…将… sentences complete"}
+    },
+    "bili_call_4q22_en_p001": {
+      "facts": {"hit": 10, "partial": 0, "miss": 0, "notes": "opening 'Thank you, Juliet' line present (R0 dropped it); 93 million/28% vs 26%/96 minutes/51%/21.9B/6.1B/20%/18%/S&M cut 28%/30%→21%/narrowed 21% & 26% all present (percentages arrive as LaTeX '$ 28\\% $' and are unwrapped by the declared markup normalization)"},
+      "conditions": {"hit": 1, "partial": 0, "miss": 0, "notes": "break-even target by 2024 present"}
+    }
+  },
+  "holdout_pages": {
+    "byd_ar_2024_p022": {
+      "facts": {"hit": 13, "partial": 0, "miss": 0, "notes": "both tables' numbers present ('4,304,073'/'4,272,145'/'525,989,680'/'7,340,435,000.00' etc.), concatenated cells as on p021; 两条腿/垂直整合 present"},
+      "conditions": {"hit": 4, "partial": 0, "miss": 0, "notes": "all four checkbox rows with correct states (R0 lost every one)"}
+    },
+    "meituan_ar_2024_p000": {
+      "facts": {"hit": 3, "partial": 0, "miss": 1, "notes": "miss: the stylized '2024 年度報告' year art was not transcribed (49-token output ends at the RMB counter code); 3690/83690/Cayman line correct"},
+      "conditions": {"hit": 0, "partial": 0, "miss": 0}
+    },
+    "ir_wanrun_20241104_p002": {
+      "facts": {"hit": 7, "partial": 0, "miss": 0, "notes": "九目化学/质子膜/钙钛矿 present; the short-form answers 否 and 无 both present (R0 lost 否)"},
+      "conditions": {"hit": 2, "partial": 0, "miss": 0}
+    },
+    "hrjp_cb_prospectus_p037": {
+      "facts": {"hit": 8, "partial": 0, "miss": 0, "notes": "34.52%/32.59%/29.03%/1.72%/2.95%/1.73% verbatim"},
+      "conditions": {"hit": 2, "partial": 0, "miss": 0}
+    },
+    "bili_call_4q22_en_p003": {
+      "facts": {"hit": 0, "partial": 0, "miss": 0, "notes": "not attempted: total_inference_budget_exhausted (card 30-minute batch budget)"},
+      "conditions": {"hit": 0, "partial": 0, "miss": 0}
+    }
+  },
+  "totals": {
+    "eval": {"facts": "76 hit / 0 partial / 0 miss of 76", "conditions": "10 hit / 0 lost of 10"},
+    "holdout": {"facts": "31 hit / 0 partial / 1 miss of 32", "conditions": "8 hit / 0 lost of 8"}
+  },
+  "fabrication_and_repetition": {
+    "no_source_text_invented": "no fabricated numbers or claims observed in any output; decorative-area negative control (meituan cover) produced no invented text",
+    "repetition_loops": 0,
+    "notes": "the only observed loss classes are linearized table cells, one stylized year-art string, and VLM-native summarization-free full-text output"
+  },
+  "upstream_bf16_arm": "one attempt on byd_ar_2024_p021: timeout at the 600 s upstream request deadline with 242 correct partial tokens (CER 0.676 against full gold — partial coverage); not re-attempted per card"
+}

@@ -2,9 +2,14 @@
 
 PLAN_ID=w23-xiaomi-ocr-2026-10-30 · worktree `company-wiki-w23-xiaomi-ocr` · branch `codex/w23-xiaomi-ocr-20261030`
 
-**Verdict up front: PARTIAL, by resource bounds — not by engine quality.** The
-comparison ran the production RapidOCR arm (R0) and the born-digital control
-(N0) over the full frozen 14-page sample. The Xiaomi arm (X1) is UNSUPPORTED
+**Verdict up front: PARTIAL.** The comparison executed the production RapidOCR
+arm (R0), the born-digital control (N0) and the Xiaomi arm over the frozen
+14-page sample — Xiaomi via a declared variant (X1F: exact fp32 upcast of the
+frozen checkpoint, read-only file mapping) after the upstream-exact load path
+proved impossible under the card memory bound on this host (§2). X1F completed
+13/14 pages with EOS inside the card budget; the 14th is not_run (30-minute
+budget exhausted), and the upstream-exact bf16 arm timed out once with partial
+text. X2 (two-stage) remains not_run.
 on this host under the card's frozen memory bound, and the two-stage arm (X2)
 is NOT_RUN for the same dependency reason. No accuracy claim about Xiaomi-OCR-0
 is made anywhere in this report.
@@ -14,7 +19,8 @@ is made anywhere in this report.
 | arm | identity | result |
 |-----|----------|--------|
 | R0 | production `LocalOCRConfig` (RapidOCR 3.8.1 / ORT 1.26.0, PP-OCRv4 mobile det/rec + ppocr v2 cls, 2/1 threads), executed through the production `IsolatedOCRAdapter` boundary incl. bounded region recovery; three model SHAs verified against `config/local_ocr.json` | 14/14 pages ok |
-| X1 | HF `xiaomi-research/Xiaomi-OCR-0@bbd8cf8d…` (Qwen3.5-0.8B VLM; `model.safetensors` 1,746,937,856 B, SHA-256 `d4551e9f…b5d5348` = HF LFS blob), transformers 5.18.0 native `qwen3_5`, upstream prompt/non-thinking/greedy, upstream 2048-bound resize | 14/14 pages **unsupported** |
+| X1F | same frozen checkpoint (SHA above), widened losslessly bf16→fp32 (`model.fp32.safetensors`, SHA-256 `ddd3b661…9dcc71f`), read-only file mapping, upstream prompt/non-thinking/greedy/2048-bound/postprocess, manual greedy decode with explicit cache | **13/14 pages ok (all EOS)**; 1 not_run (budget) |
+| X1-bf16 | upstream-exact dtype arm (same everything, bf16) | 1 attempt: timeout at the 600 s upstream request deadline with 242 correct partial tokens |
 | X2 | two-stage PP-DocLayoutV3 upstream pipeline | **not_run** (paddlex stack outside resource bounds; never merged into X1) |
 | N0 | pypdfium2 text layer, born-digital control only | 12 ok + 1 empty (image cover) + 1 unsupported (degraded variant) |
 
@@ -31,38 +37,83 @@ engine output existed** (`gold.json.frozen_before_engine_outputs=true`); native
 PDF text was only a correction base (meituan p11's native layer is scrambled
 and both meituan pages are full manual transcriptions).
 
-## 2. X1/X2 not runnable — the measured reason (root cause)
+## 2. X1 execution on this host: what failed, why, and what ran
 
-Card bound per pilot page: peak commit ≤ min(8 GiB, **available-RAM ÷ 2**),
-measured at each run start. Host: 15.77 GB total RAM, ~1.8–2.3 GB available
-across the attempts (desktop applications hold the rest; no W22 task was
-running), giving recorded caps of 0.995 GiB (pilot), 0.84 GiB and 1.155 GiB
-(subsequent runs) — all recorded in each artifact's run manifest and in the
-X1 records' `cap_bytes`.
+**What ran (final state):** X1F — the frozen checkpoint widened losslessly to
+fp32 (bf16 is truncated fp32, so the numbers are identical; no quantization),
+mapped read-only into the process, upstream prompt/template/decoding/postprocess,
+manual greedy decode with an explicit cache. Card-compliant pilot on the lightest
+page: ok in 69 s with EOS, job peak 2.582 GiB under cap 3.895 GiB. Full batch:
+13/14 pages ok, every ok page finished with EOS, 1801.6 s of request time under
+the 1800 s card budget, job peak 2.812 GiB under cap 3.864 GiB. The upstream-exact
+bf16 arm got one attempt and timed out at the upstream 600 s request deadline
+with 242 correct partial tokens (peak 2.321 GiB, within bounds).
 
-The minimum possible load peak of the X1 checkpoint is **2 × weight bytes =
-3,493,875,712 B ≈ 3.25 GiB** even in checkpoint-native bf16 (mmap'd
-safetensors + in-RAM weight copy, before torch runtime or activations). Every
-measured cap (0.84–1.16 GiB) is far below that, so no load strategy complies;
-the preflight refuses with this arithmetic (`cap_bytes`/`weight_bytes/`
-`minimum_peak_bytes` are recorded in every X1 record:
-`memory_cap_below_minimum_load_peak`) instead of thrashing the host. Re-running the same replayable tool on a host with more free RAM is
-the intended path; nothing in the tool was tuned to "fit".
+**What failed first, and the measured root causes** (each fixed in the tool, no
+card bound was ever raised; full history in `x1_feasibility_measured.json` v3):
 
-Consequently: no CER/WER/number metric exists for X1/X2 (all `null` with
-per-page reasons — never `0`), no latency/VRAM claims, and the card's
-"do not extrapolate lighter/faster from 0.8B" rule is respected.
+1. `from_pretrained` copy-loading needs ~3.1 GiB of private commit for weights +
+   stack; every measured card cap (1.14–2.34 GiB) refused it (OS error 1455).
+2. `torch.from_file(shared=False)` maps copy-on-write, which Windows charges in
+   full against commit — an invisible 1.63–3.26 GiB surcharge that masqueraded as
+   model memory. Fixed with a true read-only section (`mmap` ACCESS_READ +
+   `torch.frombuffer`): commit-free, verified tensor-byte-identical to
+   `safe_open` copies.
+3. Prefill computed logits for all ~3000 positions: one ~2.85 GiB tensor.
+   Eliminated with `logits_to_keep=1` (exactly what generate() does).
+4. `generate()` ran without an effective cache for this hybrid linear-attention
+   architecture — every decode step recomputed the prefix (~15× slower).
+   Replaced by a manual greedy loop passing `past_key_values` explicitly (same
+   greedy math; measured 1.4 s/step vs 15–22 s).
+5. This CPU (Alder Lake, no AMX/AVX512-BF16) runs torch's large bf16 GEMM at
+   **0.5 GFLOPS** vs **330 GFLOPS** fp32 (measured on 2048³). The bf16 arm
+   therefore cannot prefill a page within any card deadline — its honest result
+   is the recorded timeout. The exact fp32 upcast computes at full speed with
+   identical numbers; this dtype/loading variant is declared in the arm identity
+   and never equated with the official GPU leaderboard.
 
-## 3. R0 baseline results (production current state)
+**Consequence for reading the numbers:** X1F results below are the frozen model's
+numbers on this CPU through a declared load/compute variant — real measured
+quality, not a leaderboard reproduction; X2 (PP-DocLayoutV3 two-stage) remains
+not_run for its own dependency reason.
+
+## 3. Results (R0 baseline vs executed X1F)
 
 Aggregate over gold-verified pages (macro = mean per-page, micro = pooled
 chars; strict CER keeps real char differences; narrow CER is the declared
-NFC+whitespace normalization):
+NFC+whitespace normalization; X1F scored on all 9 eval pages and 4/5 holdout
+pages, the 5th being not_run):
 
 | split | pages | macro CER strict | micro CER strict | macro CER narrow | English WER | number recall | number precision |
 |-------|-------|------------------|------------------|------------------|-------------|---------------|------------------|
 | eval (8+1 degraded) | 9 | 0.1599 | 0.1737 | 0.1250 | 0.300 (n=1) | 0.9219 (gold 118/128) | 0.9833 |
 | holdout (5) | 5 | 0.1694 | 0.1732 | 0.1290 | 0.1917 (n=1) | 0.9367 (gold 74/79) | 0.9737 |
+
+X1F (mapped-f32) on the same frozen pages:
+
+| split | pages | macro CER strict | micro CER strict | macro CER narrow | English WER | number recall (exact tokens) | number digit-present | precision |
+|-------|-------|------------------|------------------|------------------|-------------|------------------------------|----------------------|-----------|
+| eval (8+1 degraded) | 9 | **0.0860** | **0.0734** | **0.0376** | **0.1025** (n=1) | 0.7266 | 0.8870 | 0.8532 |
+| holdout (4 run + 1 not_run) | 4 | **0.1158** | 0.0899 | 0.0400 | — | 0.2459 | 0.8131 | 0.5000 |
+
+X1F vs R0, eval: character errors roughly halve (0.086 vs 0.160 strict; 0.038 vs
+0.125 narrow) and the English page WER drops from 0.300 to 0.102. Two structural
+differences drive the exact-token number gap: X1F's OTSL-to-text path
+concatenates table cells ("乘用车4,281,0843,033,66241.12%…"), which exact tokens
+undercount (digit-present recall 0.887 recovers it — the digits are all there),
+and holdout page byd p022 is almost entirely one such table (token recall 0.085,
+digit-present 0.90+). Where R0 structurally fails, X1F succeeds: every checkbox
+state is read correctly ("☑适用 □不适用", "☑特定对象调研"; R0 lost all of them),
+the negation line and the English opening line R0 dropped are complete, and the
+superscript footnote is handled right (392.0, where R0 reads 392.01). Where X1F
+loses: the stylized "2024 年度報告" year art on the meituan cover (its single
+fact miss), and one holdout page not attempted at all (budget). The degraded
+(synthetic 0.55×/1.3°) page scores identically to its clean twin (CER 0.051
+both) — markedly more robust to low-resolution tilt than a classical pipeline
+needs to be. Human fact scoring (`fact_scores_x1.json`): eval 76/76 facts and
+10/10 conditions; holdout 31/32 facts and 8/8 conditions; zero fabrication, zero
+repetition loops. X1F cost: 57–235 s per page (median ~130 s) at 1 batch, single
+model process, plus ~12 s cold load — vs R0's ~16 s/page.
 
 English WER covers exactly one page per split (the US-listed earnings-call
 document); with a single-page denominator it is indicative, not a
@@ -116,11 +167,18 @@ R0's recurring defect classes (the honest baseline picture):
 - **局部困难页补救** is the one evidence-backed gap worth tracking: checked
   checkbox states and the rare dropped-line classes above. These are reading-
   layer concerns and out of this card's scope to fix.
-- **可进一步接入 (Xiaomi)**: cannot be assessed on this host — no CPU-feasible
-  path exists under the card bounds. If ROOT wants the X1 answer, re-run
-  `tools/ocr_comparison.run_comparison --arms X1` on a host with ≥4 GB free
-  RAM (bf16) or a GPU; the tool, manifest, gold and cache keys are ready for
-  that replay and will refuse to silently change any identity axis.
+- **可进一步接入 (Xiaomi)**: now a measured answer, with two caveats. On
+  TEXT quality X1F halves R0's character error (0.086 vs 0.160 strict) and
+  reads checkbox states, negations and the superscript footnote that R0
+  structurally misses; on dense numeric tables the OTSL-to-text path
+  concatenates cells (digits present, tokens scrambled) and its exact-token
+  number recall trails R0 (0.73 vs 0.92 eval; digit-present 0.89 closes most
+  of the gap). Cost on this CPU: 57–235 s/page vs R0's ~16 s, via a declared
+  load/compute variant (exact fp32 upcast, read-only mapping, manual greedy
+  decode) — NOT the upstream bf16 runtime, which cannot prefill a page here
+  (bf16 large-GEMM 0.5 GFLOPS on this AMX-less CPU; recorded timeout), and
+  never the GPU leaderboard. Integration decisions stay with ROOT; the
+  reading-layer adapter sketch below remains design-only.
 - Minimum internal wiring for a future reading-layer adapter (design only,
   NOT implemented): a `transcribe(bytes, limits) -> ImageOCRResult`-shaped
   adapter returning empty `lines` plus a markdown payload would violate the
@@ -139,7 +197,14 @@ R0's recurring defect classes (the honest baseline picture):
 - `raw_r0.json` / `raw_n0.json` / `raw_x1.json` / `raw_x2.json` — per-page
   records incl. statuses, timings, error strings.
 - `fact_scores.json` — human fact/condition scoring with evidence.
-- `pilot_r0.json` / `pilot_x1.json` — pilot receipts; `memwatch_r0_receipt.json` — R0 peak-memory instrumented run.
+- `pilot_r0.json` — R0 pilot receipt; `memwatch_r0_receipt.json` — R0 engine peak-memory run (schema /2).
+- X1 execution: `x1_pilot_f32_final_receipt.json` (card-compliant pilot, ok),
+  `x1_full_f32_receipt.json` (13/14 batch), `x1_pilot_bf16_receipt.json`
+  (upstream-arm timeout with partial text), `fact_scores_x1.json` (human fact
+  scoring), `x1_feasibility_measured.json` v3 (full root-cause history).
+  Copy-load failure history: `x1_pilot_real/stage/cap_now/after_chrome_receipt.json`;
+  probes `probe_x1_commit_steps.py`, `probe_mmap_under_job.py`.
+  Superseded: `pilot_x1.json` (preflight-based record, retracted in §2).
 - `test_receipt.txt` — 40/40 W23 tests (31 unit + 9 integration).
 - Frozen inputs (committed): `docs/plans/w23-xiaomi-ocr-2026-10-30/
   {sample_manifest,gold}.json`; code under `tools/ocr_comparison/` (committed).

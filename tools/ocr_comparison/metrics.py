@@ -176,3 +176,25 @@ def counts_as_pass(status: str) -> bool:
     """Only a completed successful run passes; timeout/truncated/empty/error
     /not_run/unsupported never count as a pass."""
     return status in _PASS_STATUSES
+
+
+_HTML_TAG_RE = re.compile(r"</?[A-Za-z][^<>]*>")
+_MD_HEADING_RE = re.compile(r"^[ \t]*#{1,6}[ \t]*", re.MULTILINE)
+# upstream postprocess renders inline math as "$ ... $" with escaped symbols
+_MATH_WRAP_RE = re.compile(r"\$ ([^$\n]{1,40}?) \$")
+
+
+def markup_strip(text: str) -> str:
+    """Declared scoring normalization for VLM markdown: removes HTML tags
+    (upstream OTSL tables become <table>/<td> markup), markdown heading
+    markers, bold markers, the upstream "$ ... $" inline-math wrappers and the
+    LaTeX percent escape ("29\\%").  Nothing else changes; it is applied
+    identically to every arm and is a no-op for plain-text output such as
+    RapidOCR's."""
+    if not isinstance(text, str):
+        raise TypeError("text must be str")
+    text = _HTML_TAG_RE.sub("", text)
+    text = _MD_HEADING_RE.sub("", text)
+    text = text.replace("**", "")
+    text = _MATH_WRAP_RE.sub(r"\1", text)
+    return text.replace("\\%", "%")

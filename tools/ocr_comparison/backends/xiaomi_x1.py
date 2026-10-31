@@ -1,24 +1,27 @@
 """X1 arm: Xiaomi-OCR-0 whole-page parsing on CPU transformers.
 
-Follows the upstream evaluation contract at the frozen commit: the official
-document prompt, non-thinking chat template, temperature 0 / top_p 0.8, the
-2048-bound fit_image preprocessing, and the upstream postprocess (math
-delimiters, OTSL tables, truncated-repeat cleanup).  No vLLM/Ollama/quantized
-variant is involved; results are HF-checkpoint CPU behaviour, never the
-official GPU leaderboard.
+Follows the upstream evaluation contract at the frozen commit b1a9bb4c: the
+document prompt, the non-thinking chat template (enable_thinking=False),
+greedy decoding, the 2048-bound fit_image resize, and the upstream
+postprocessing (truncated-repeat cleanup, OTSL tables to HTML), vendored
+byte-identically under ../_upstream.  Scoring text removes only declared
+markup syntax (metrics.markup_strip).  No vLLM/Ollama/quantized variant.
+
+Timing contract: a page request is measured from run_page entry and includes
+model load when the model is cold, preprocessing, generation and
+postprocessing.  Interpreter and library import time is reported separately.
 
 VLM output has no word boxes or confidences: bbox/confidence stay null and
-locator_quality is "none" (whole-page) — never fabricated.
+locator_quality is "none" (whole-page), never fabricated.
 """
 
 from __future__ import annotations
 
-import base64
-import threading
+import sys
 import time
-from io import BytesIO
 from pathlib import Path
 
+from ..metrics import markup_strip
 from .base import (
     classify_raw_output,
     detect_repetition,
@@ -26,6 +29,11 @@ from .base import (
     serialize_lines,
     sha256_text,
 )
+
+_UPSTREAM_ROOT = Path(__file__).resolve().parents[1] / "_upstream"
+if str(_UPSTREAM_ROOT) not in sys.path:
+    sys.path.insert(0, str(_UPSTREAM_ROOT))
+from postprocess.document import _clean_truncated_repeats, postprocess_e2e_markdown  # noqa: E402
 
 # Verbatim upstream prompt (evaluation_pipeline/e2e_img2md.py, frozen commit).
 PROMPT_DOCUMENT = (
@@ -35,57 +43,8 @@ PROMPT_DOCUMENT = (
     "parsing should be organized according to the reading order."
 )
 MAX_IMAGE_EDGE = 2048
-
-
-class MemoryCapExceeded(RuntimeError):
-    pass
-
-
-def _process_commit_bytes() -> int:
-    import ctypes
-    from ctypes import wintypes
-
-    class PROCESS_MEMORY_COUNTERS(ctypes.Structure):
-        _fields_ = [
-            ("cb", wintypes.DWORD), ("PageFaultCount", wintypes.DWORD),
-            ("PeakWorkingSetSize", ctypes.c_size_t),
-            ("WorkingSetSize", ctypes.c_size_t),
-            ("QuotaPeakPagedPoolUsage", ctypes.c_size_t),
-            ("QuotaPagedPoolUsage", ctypes.c_size_t),
-            ("QuotaPeakNonPagedPoolUsage", ctypes.c_size_t),
-            ("QuotaNonPagedPoolUsage", ctypes.c_size_t),
-            ("PagefileUsage", ctypes.c_size_t),
-            ("PeakPagefileUsage", ctypes.c_size_t),
-        ]
-
-    counters = PROCESS_MEMORY_COUNTERS()
-    counters.cb = ctypes.sizeof(PROCESS_MEMORY_COUNTERS)
-    handle = ctypes.windll.kernel32.GetCurrentProcess()
-    if not ctypes.windll.psapi.GetProcessMemoryInfo(
-        handle, ctypes.byref(counters), ctypes.sizeof(PROCESS_MEMORY_COUNTERS)
-    ):
-        return 0
-    return counters.PagefileUsage  # commit charge of this process
-
-
-def start_memory_watchdog(cap_bytes: int, state: dict) -> threading.Thread:
-    """Sample this process's commit every 0.5s; flag a cap violation.
-
-    Generation cannot be safely interrupted mid-op, so the violation is
-    reported honestly (status error) instead of silently ignored.
-    """
-
-    def sample():
-        while not state.get("stop"):
-            state["peak_commit"] = max(state.get("peak_commit", 0), _process_commit_bytes())
-            if state["peak_commit"] > cap_bytes:
-                state["exceeded"] = True
-                return
-            time.sleep(0.5)
-
-    thread = threading.Thread(target=sample, daemon=True)
-    thread.start()
-    return thread
+UPSTREAM_COMMIT = "b1a9bb4c07060c453785e9151715ccda6b96f0b1"
+MODEL_REVISION = "bbd8cf8d21f256b3644b44cb860f3a7cecb93c30"
 
 
 class XiaomiX1:
@@ -96,109 +55,111 @@ class XiaomiX1:
         *,
         model_dir: str,
         deadline_seconds: float,
-        max_new_tokens: int = 2048,
+        max_new_tokens: int = 4096,
         output_char_cap: int = 60000,
-        memory_cap_bytes: int | None = None,
         dtype: str = "bfloat16",
+        on_stage=None,
+        weights_mode: str = "copy",
     ):
+        # weights_mode: "copy" = from_pretrained private copies (upstream load
+        # path); "mapped" = frozen bf16 file mapping; "mapped-f32" = exact
+        # fp32 upcast copy mapping (bf16 numbers widened losslessly; chosen on
+        # this host because its CPU lacks AMX/AVX512-BF16 and torch's bf16
+        # GEMM path falls back to an unoptimized kernel, see the receipts).
         self.model_dir = str(model_dir)
-        self.deadline_seconds = deadline_seconds
-        self.max_new_tokens = max_new_tokens
-        self.output_char_cap = output_char_cap
-        self.memory_cap_bytes = memory_cap_bytes
+        self.deadline_seconds = float(deadline_seconds)
+        self.max_new_tokens = int(max_new_tokens)
+        self.output_char_cap = int(output_char_cap)
         self.dtype = dtype
+        self.on_stage = on_stage
+        if weights_mode not in ("copy", "mapped", "mapped-f32"):
+            raise ValueError("weights_mode must be 'copy', 'mapped' or 'mapped-f32'")
+        self.weights_mode = weights_mode
         self.identity_manifest = {
             "arm": self.arm,
             "backend": "xiaomi-ocr-0-transformers-cpu",
-            "model_revision": "bbd8cf8d21f256b3644b44cb860f3a7cecb93c30",
+            "upstream_commit": UPSTREAM_COMMIT,
+            "model_revision": MODEL_REVISION,
             "precision": f"checkpoint-native-{dtype}-cpu",
             "prompt_sha256": sha256_text(PROMPT_DOCUMENT),
-            "preprocess": f"fit_image_thumbnail_{MAX_IMAGE_EDGE}",
-            "decoding": "greedy_temperature_0_top_p_0.8_no_think",
-            "max_new_tokens": max_new_tokens,
-            "output_char_cap": output_char_cap,
+            "preprocess": (
+                f"upstream fit_image thumbnail to {MAX_IMAGE_EDGE}px longest edge, "
+                "then processor smart_resize"
+            ),
+            "decoding": "greedy; chat template enable_thinking=False",
+            "max_new_tokens": self.max_new_tokens,
+            "request_deadline_seconds": self.deadline_seconds,
+            "output_char_cap": self.output_char_cap,
+            "weights_loading": {
+                "copy": "from_pretrained private copies",
+                "mapped": ("torch.from_file read-only file mapping of the frozen bf16 "
+                           "checkpoint (meta init + assign); loading strategy only"),
+                "mapped-f32": ("torch.from_file read-only file mapping of the exact fp32 "
+                               "upcast copy (bf16 widened losslessly, sha256 of that file "
+                               "recorded by the loader); loading strategy and compute dtype "
+                               "only, no quantization"),
+            }[weights_mode],
+            "postprocess": (
+                "upstream postprocess.document: _clean_truncated_repeats + "
+                "postprocess_e2e_markdown(convert_otsl=True); scoring strips declared markup "
+                "(metrics.markup_strip: HTML tags, markdown heading and bold markers)"
+            ),
         }
         self._model = None
         self._processor = None
         self.load_seconds = None
 
+    def _stage(self, name: str) -> None:
+        """Observation hook only: lets the parent attribute a failure to a stage."""
+        if self.on_stage is not None:
+            self.on_stage(name)
+
     def load(self) -> None:
-        """Load once per process in the checkpoint's own dtype (bf16), CPU."""
+        """Load once per process in the checkpoint's own dtype, on CPU."""
         if self._model is not None:
             return
         import torch
-        from transformers import AutoProcessor, AutoModelForImageTextToText
+        from transformers import AutoModelForImageTextToText, AutoProcessor
 
         start = time.perf_counter()
-        self._processor = AutoProcessor.from_pretrained(
-            self.model_dir, trust_remote_code=False
-        )
-        self._model = AutoModelForImageTextToText.from_pretrained(
-            self.model_dir,
-            torch_dtype=getattr(torch, self.dtype),
-            device_map="cpu",
-            trust_remote_code=False,
-        )
-        self._model.eval()
+        self._stage("processor_load_start")
+        self._processor = AutoProcessor.from_pretrained(self.model_dir, trust_remote_code=False)
+        self._stage("processor_loaded")
+        self._stage("model_load_start")
+        if self.weights_mode in ("mapped", "mapped-f32"):
+            from ..mmap_loader import load_model_with_mapped_weights
+
+            weights_file = "model.safetensors" if self.weights_mode == "mapped"                 else "model.fp32.safetensors"
+            self._model, self._load_info = load_model_with_mapped_weights(
+                self.model_dir, weights_file=weights_file)
+        else:
+            self._model = AutoModelForImageTextToText.from_pretrained(
+                self.model_dir,
+                dtype=getattr(torch, self.dtype),
+                trust_remote_code=False,
+            )
+            self._load_info = {"weights_loading": "from_pretrained copies"}
+        self._stage("model_loaded")
         self.load_seconds = time.perf_counter() - start
 
-    def preflight_memory(self) -> dict | None:
-        """Return an UNSUPPORTED record when the frozen memory cap cannot hold
-        even the smallest possible load, with the arithmetic shown.
-
-        Minimum feasible peak ≈ weight bytes on disk (bf16) × 2: the mmap'd
-        safetensors plus the in-RAM weight copy, before activations or torch
-        runtime overhead.  When the card cap (min(8GiB, avail/2), measured at
-        run start) is below that, no load strategy can comply and thrashing
-        the host would only produce noise.
-        """
-        if self.memory_cap_bytes is None:
-            return None
-        weights = Path(self.model_dir) / "model.safetensors"
-        weight_bytes = weights.stat().st_size
-        minimum_peak = weight_bytes * 2
-        if minimum_peak > self.memory_cap_bytes:
-            return {
-                "status": "unsupported",
-                "error": "memory_cap_below_minimum_load_peak",
-                "cap_bytes": self.memory_cap_bytes,
-                "weight_bytes": weight_bytes,
-                "minimum_peak_bytes": minimum_peak,
-                "arithmetic": (
-                    f"cap={self.memory_cap_bytes} < 2 x weight_bytes({weight_bytes}) = "
-                    f"{minimum_peak}; even a bf16 load (mmap + RAM copy) cannot comply"
-                ),
-            }
-        return None
-
-    def run_page(self, png_path: str | Path) -> dict:
+    def run_page(self, png_path: str | Path, *, budget_seconds: float | None = None) -> dict:
         import torch
         from PIL import Image
 
-        preflight = self.preflight_memory()
-        if preflight is not None:
-            return preflight
-        watchdog_state: dict = {"stop": False, "peak_commit": 0, "exceeded": False}
-        if self.memory_cap_bytes is not None:
-            start_memory_watchdog(self.memory_cap_bytes, watchdog_state)
+        budget = self.deadline_seconds if budget_seconds is None else float(budget_seconds)
+        request_start = time.perf_counter()
+        self._stage("page_start")
+        cold = self._model is None
         self.load()
-        if watchdog_state["exceeded"]:
-            return {
-                "status": "error",
-                "error": (
-                    f"memory_cap_exceeded during load: peak_commit="
-                    f"{watchdog_state['peak_commit']} > cap={self.memory_cap_bytes}"
-                ),
-            }
-        start = time.perf_counter()
+        load_seconds = self.load_seconds if cold else 0.0
+
         with Image.open(png_path) as source:
             image = source.convert("RGB")
-            if image.width > MAX_IMAGE_EDGE or image.height > MAX_IMAGE_EDGE:
-                image.thumbnail((MAX_IMAGE_EDGE, MAX_IMAGE_EDGE), Image.Resampling.LANCZOS)
-            preprocess = {
-                "resized_px": list(image.size),
-                "source_px": list(source.size),
-            }
+            source_px = list(source.size)
+        if image.width > MAX_IMAGE_EDGE or image.height > MAX_IMAGE_EDGE:
+            from PIL import Image as _Image
+
+            image.thumbnail((MAX_IMAGE_EDGE, MAX_IMAGE_EDGE), _Image.Resampling.LANCZOS)
         conversation = [{"role": "user", "content": [
             {"type": "text", "text": PROMPT_DOCUMENT},
             {"type": "image", "image": image},
@@ -209,74 +170,111 @@ class XiaomiX1:
             tokenize=True,
             return_dict=True,
             return_tensors="pt",
+            enable_thinking=False,
         )
-        with torch.inference_mode():
-            from transformers import StoppingCriteria
+        inputs = {
+            key: (value.to(self._model.dtype) if torch.is_floating_point(value) else value)
+            for key, value in inputs.items()
+        }
+        input_len = int(inputs["input_ids"].shape[1])
+        self._stage("preprocess_done")
 
-            class WallDeadline(StoppingCriteria):
-                def __init__(self, limit):
-                    self.limit = limit
+        # Manual greedy decode (same math as upstream greedy temperature-0).
+        # transformers' generate() ran each decode step without an effective
+        # cache for this hybrid linear-attention architecture (measured in the
+        # X1 receipts); explicit past_key_values use is ~15x faster per step.
+        tokenizer = getattr(self._processor, "tokenizer", None)
+        eos_ids = set()
+        eos_attr = getattr(tokenizer, "eos_token_id", None)
+        if isinstance(eos_attr, int):
+            eos_ids.add(eos_attr)
+        if tokenizer is not None:
+            im_end = tokenizer.convert_tokens_to_ids("<|im_end|>")
+            if isinstance(im_end, int):
+                eos_ids.add(im_end)
 
-                def __call__(self, input_ids, scores, **kwargs) -> bool:
-                    return time.perf_counter() - start >= self.limit
-
-            deadline_exceeded = False
-            generated = self._model.generate(
-                **inputs,
-                max_new_tokens=self.max_new_tokens,
-                do_sample=False,
-                temperature=None,
-                top_p=None,
-                stopping_criteria=[WallDeadline(self.deadline_seconds)],
-            )
-            if time.perf_counter() - start >= self.deadline_seconds and (
-                len(generated[0]) - inputs["input_ids"].shape[1] < self.max_new_tokens
-            ):
-                deadline_exceeded = True
-        text = self._processor.batch_decode(
-            generated[:, inputs["input_ids"].shape[1]:],
-            skip_special_tokens=True,
-        )[0]
-        engine_seconds = time.perf_counter() - start
-        if watchdog_state["exceeded"]:
-            return {
-                "status": "error",
-                "error": (
-                    f"memory_cap_exceeded during generation: peak_commit="
-                    f"{watchdog_state['peak_commit']} > cap={self.memory_cap_bytes}"
-                ),
-            }
-        watchdog_state["stop"] = True
-        if deadline_exceeded:
-            return {
-                "status": "timeout",
-                "error": f"wall deadline {self.deadline_seconds}s exceeded during generation",
-                "generated_tokens": int(len(generated[0]) - inputs["input_ids"].shape[1]),
-                "engine_seconds": engine_seconds,
-                "peak_commit_bytes": watchdog_state["peak_commit"],
-                "raw_output": text,
-            }
+        gen_start = time.perf_counter()
+        self._stage("generate_start")
         finish = "stop"
-        if len(generated[0]) - inputs["input_ids"].shape[1] >= self.max_new_tokens:
-            finish = "length"
-        status = classify_raw_output(text, finish_reason=finish)
-        capped, cap_status = enforce_output_cap(text, cap=self.output_char_cap)
-        if status == "ok" and cap_status == "truncated":
+        prefill_overran = False
+        with torch.inference_mode():
+            # logits_to_keep=1: the giant all-positions logits tensor
+            # (~3 GB fp32 at page-scale vocab) is both unnecessary for greedy
+            # decode and the single largest allocation of the request.
+            out = self._model(**inputs, use_cache=True, logits_to_keep=1)
+            self._stage("prefill_done")
+            if time.perf_counter() - request_start >= budget:
+                # Prefill itself is one uninterruptible forward; the wall
+                # clock past the budget is reported, never truncated.
+                prefill_overran = True
+                finish = "deadline"
+                step_ids = []
+            else:
+                cache = out.past_key_values
+                next_id = out.logits[:, -1, :].argmax(dim=-1, keepdim=True)
+                step_ids = [next_id]
+                while int(next_id.item()) not in eos_ids and len(step_ids) < self.max_new_tokens:
+                    if time.perf_counter() - request_start >= budget:
+                        finish = "deadline"
+                        break
+                    out = self._model(
+                        input_ids=next_id, past_key_values=cache, use_cache=True,
+                    )
+                    next_id = out.logits[:, -1, :].argmax(dim=-1, keepdim=True)
+                    step_ids.append(next_id)
+                if finish == "stop" and len(step_ids) >= self.max_new_tokens:
+                    finish = "length"
+        engine_seconds = time.perf_counter() - gen_start
+        if step_ids:
+            new_ids = torch.cat(step_ids, dim=1)
+            generated_tokens = int(new_ids.shape[1])
+            raw = self._processor.batch_decode(new_ids, skip_special_tokens=True)[0]
+        else:
+            generated_tokens = 0
+            raw = ""
+        self._stage("generate_done")
+
+        error = None
+        try:
+            post = postprocess_e2e_markdown(_clean_truncated_repeats(raw), convert_otsl=True)
+        except Exception as exc:  # noqa: BLE001 - recorded, raw output kept
+            post = raw
+            error = f"postprocess_{type(exc).__name__}"
+        scoring, cap_status = enforce_output_cap(markup_strip(post), cap=self.output_char_cap)
+        self._stage("postprocess_done")
+
+        status = {"deadline": "timeout", "length": "truncated"}.get(finish, "ok")
+        if status == "ok":
+            status = classify_raw_output(scoring, finish_reason="stop")
+        if cap_status == "truncated" and status == "ok":
             status = "truncated"
-        repetition = detect_repetition(capped)
+
+        from ..job_limit import self_peak_commit_bytes
+
         return {
             "status": status,
-            "text": capped.strip(),
-            "raw_output": text,
-            "raw_output_sha256": sha256_text(text),
+            "text": scoring.strip(),
+            "postprocessed_text": post,
+            "raw_output": raw,
+            "raw_output_sha256": sha256_text(raw),
+            "text_sha256": sha256_text(scoring.strip()),
             "lines": serialize_lines([
-                {"text": capped.strip(), "bbox": None, "confidence": None,
+                {"text": scoring.strip(), "bbox": None, "confidence": None,
                  "locator_quality": "none"},
-            ]) if capped.strip() else [],
+            ]) if scoring.strip() else [],
+            "finish_reason": finish,
+            "prefill_overran_deadline": prefill_overran,
+            "generated_tokens": generated_tokens,
+            "max_new_tokens": self.max_new_tokens,
+            "request_seconds": time.perf_counter() - request_start,
+            "budget_seconds": budget,
+            "load_seconds_cold": load_seconds,
             "engine_seconds": engine_seconds,
-            "load_seconds_cold": self.load_seconds,
-            "peak_commit_bytes": watchdog_state["peak_commit"],
-            "preprocess": preprocess,
-            "repetition": repetition,
-            "generated_tokens": int(len(generated[0]) - inputs["input_ids"].shape[1]),
+            "input_tokens": input_len,
+            "source_px": source_px,
+            "resized_px": list(image.size),
+            "repetition": detect_repetition(scoring),
+            "error": error,
+            "process_peak_commit_bytes_self": self_peak_commit_bytes(),
+            "weights_load_info": getattr(self, "_load_info", None),
         }

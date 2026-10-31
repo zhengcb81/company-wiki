@@ -1,0 +1,201 @@
+{
+ "schema_version": "cwp-ocr-x1-run/1",
+ "tag": "pilot_f32_final",
+ "pages_selected": [
+  "meituan_ar_2024_p000"
+ ],
+ "receipt": {
+  "schema_version": "cwp-ocr-x1-run-receipt/1",
+  "created_at_utc": "2026-10-31T12:31:23.209675+00:00",
+  "method": "pages rendered in the parent with the shared pypdfium2 renderer; one child process loads Xiaomi-OCR-0 on CPU and runs the pages in order under a Windows Job Object ProcessMemoryLimit (committed bytes); the peak is read from the job object",
+  "config": {
+   "deadline_seconds_per_request": 180.0,
+   "total_inference_budget_seconds": 1800.0,
+   "max_new_tokens": 16384,
+   "dtype": "bfloat16",
+   "weights_mode": "mapped-f32",
+   "threads": "torch default (reported by the child)"
+  },
+  "memory": {
+   "cap_bytes": 4182743040,
+   "cap_gib": 3.895,
+   "rule": "min(8 GiB, available physical RAM / 2) at run start",
+   "job_peak_process_bytes": 2772910080,
+   "job_peak_process_gib": 2.582
+  },
+  "host_before": {
+   "memory_load_pct": 50,
+   "total_phys_bytes": 16931512320,
+   "avail_phys_bytes": 8365486080,
+   "commit_free_bytes": 24568909824
+  },
+  "host_after": {
+   "memory_load_pct": 49,
+   "total_phys_bytes": 16931512320,
+   "avail_phys_bytes": 8480022528,
+   "commit_free_bytes": 24686727168
+  },
+  "child": {
+   "return_code": 0,
+   "backstop_hit": false,
+   "wall_seconds": 72.83,
+   "events": [
+    {
+     "event": "child_ready",
+     "import_seconds": 2.244924599999649,
+     "torch_threads": 10,
+     "process_peak_commit_bytes_self": 555470848
+    },
+    {
+     "event": "stage",
+     "stage": "page_start",
+     "page_id": "meituan_ar_2024_p000",
+     "t_seconds": 0.033,
+     "peak_commit_self": 556171264
+    },
+    {
+     "event": "stage",
+     "stage": "processor_load_start",
+     "page_id": "meituan_ar_2024_p000",
+     "t_seconds": 9.474,
+     "peak_commit_self": 1150541824
+    },
+    {
+     "event": "stage",
+     "stage": "processor_loaded",
+     "page_id": "meituan_ar_2024_p000",
+     "t_seconds": 10.58,
+     "peak_commit_self": 1430523904
+    },
+    {
+     "event": "stage",
+     "stage": "model_load_start",
+     "page_id": "meituan_ar_2024_p000",
+     "t_seconds": 10.58,
+     "peak_commit_self": 1430523904
+    },
+    {
+     "event": "stage",
+     "stage": "model_loaded",
+     "page_id": "meituan_ar_2024_p000",
+     "t_seconds": 10.675,
+     "peak_commit_self": 1430523904
+    },
+    {
+     "event": "stage",
+     "stage": "preprocess_done",
+     "page_id": "meituan_ar_2024_p000",
+     "t_seconds": 10.916,
+     "peak_commit_self": 1556639744
+    },
+    {
+     "event": "stage",
+     "stage": "generate_start",
+     "page_id": "meituan_ar_2024_p000",
+     "t_seconds": 10.916,
+     "peak_commit_self": 1556639744
+    },
+    {
+     "event": "stage",
+     "stage": "prefill_done",
+     "page_id": "meituan_ar_2024_p000",
+     "t_seconds": 61.226,
+     "peak_commit_self": 2772910080
+    },
+    {
+     "event": "stage",
+     "stage": "generate_done",
+     "page_id": "meituan_ar_2024_p000",
+     "t_seconds": 69.031,
+     "peak_commit_self": 2772910080
+    },
+    {
+     "event": "stage",
+     "stage": "postprocess_done",
+     "page_id": "meituan_ar_2024_p000",
+     "t_seconds": 69.032,
+     "peak_commit_self": 2772910080
+    },
+    {
+     "event": "child_done",
+     "total_request_seconds": 68.99953310000092
+    }
+   ],
+   "stderr_tail": "C:\\Users\\郑曾波\\Projects\\company-wiki-w23-xiaomi-ocr\\tools\\ocr_comparison\\mmap_loader.py:46: UserWarning: The given buffer is not writable, and PyTorch does not support non-writable tensors. This means you can write to the underlying (supposedly non-writable) buffer using the tensor. You may want to copy the buffer to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\torch\\csrc\\utils\\tensor_new.cpp:1582.)\n  return torch.frombuffer(view, dtype=torch.uint8, count=view.size())\n"
+  },
+  "identity": {
+   "arm": "X1",
+   "backend": "xiaomi-ocr-0-transformers-cpu",
+   "upstream_commit": "b1a9bb4c07060c453785e9151715ccda6b96f0b1",
+   "model_revision": "bbd8cf8d21f256b3644b44cb860f3a7cecb93c30",
+   "precision": "checkpoint-native-bfloat16-cpu",
+   "prompt_sha256": "fd7abd1ca91c0133edb93a6da0d52d6d57a51a9076867fd467ab1ddd7e50fb20",
+   "preprocess": "upstream fit_image thumbnail to 2048px longest edge, then processor smart_resize",
+   "decoding": "greedy; chat template enable_thinking=False",
+   "max_new_tokens": 16384,
+   "request_deadline_seconds": 180.0,
+   "output_char_cap": 60000,
+   "weights_loading": "torch.from_file read-only file mapping of the exact fp32 upcast copy (bf16 widened losslessly, sha256 of that file recorded by the loader); loading strategy and compute dtype only, no quantization",
+   "postprocess": "upstream postprocess.document: _clean_truncated_repeats + postprocess_e2e_markdown(convert_otsl=True); scoring strips declared markup (metrics.markup_strip: HTML tags, markdown heading and bold markers)"
+  }
+ },
+ "records": [
+  {
+   "status": "ok",
+   "text": "美团 Meituan\n\n（於開曼群島註冊成立以不同投票權控制的有限公司）\n\n港幣櫃臺股份代號：3690\n\n人民幣櫃臺股份代號：83690",
+   "postprocessed_text": "## 美团 Meituan\n\n（於開曼群島註冊成立以不同投票權控制的有限公司）\n\n港幣櫃臺股份代號：3690\n\n人民幣櫃臺股份代號：83690",
+   "raw_output": "## 美团 Meituan\n\n（於開曼群島註冊成立以不同投票權控制的有限公司）\n\n港幣櫃臺股份代號：3690\n\n人民幣櫃臺股份代號：83690",
+   "raw_output_sha256": "9282cb0ef4f62f86c1b34f707f24b026130f7bfbe1cb68a26602bd86d90f2e5d",
+   "text_sha256": "35eb9d98bad262e387e0dec1d2bf11b9f0456edeaa39d26dafe516a55c6b971f",
+   "lines": [
+    {
+     "text": "美团 Meituan\n\n（於開曼群島註冊成立以不同投票權控制的有限公司）\n\n港幣櫃臺股份代號：3690\n\n人民幣櫃臺股份代號：83690",
+     "bbox": null,
+     "confidence": null,
+     "locator_quality": "none"
+    }
+   ],
+   "finish_reason": "stop",
+   "prefill_overran_deadline": false,
+   "generated_tokens": 49,
+   "max_new_tokens": 16384,
+   "request_seconds": 68.99953310000092,
+   "budget_seconds": 180.0,
+   "load_seconds_cold": 1.2011676999991323,
+   "engine_seconds": 58.114888500000234,
+   "input_tokens": 3080,
+   "source_px": [
+    1654,
+    2245
+   ],
+   "resized_px": [
+    1509,
+    2048
+   ],
+   "repetition": {
+    "suspicious": false,
+    "reasons": []
+   },
+   "error": null,
+   "process_peak_commit_bytes_self": 2772910080,
+   "weights_load_info": {
+    "weights_file": "C:\\Users\\郑曾波\\Projects\\company-wiki-w23-xiaomi-ocr\\.w23_cache\\hub\\models--xiaomi-research--Xiaomi-OCR-0\\snapshots\\bbd8cf8d21f256b3644b44cb860f3a7cecb93c30\\model.fp32.safetensors",
+    "weights_mode_file": "model.fp32.safetensors",
+    "weights_bytes": 3493815312,
+    "n_tensors": 473,
+    "dtypes": [
+     "F32"
+    ],
+    "skipped_mtp_keys": 15,
+    "rebuilt_cpu_modules": [
+     "model.language_model.rotary_emb",
+     "model.visual.rotary_pos_emb"
+    ],
+    "missing_keys_allowed": [
+     "lm_head.weight"
+    ]
+   },
+   "page_id": "meituan_ar_2024_p000"
+  }
+ ]
+}

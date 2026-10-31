@@ -22,12 +22,19 @@ from .metrics import (
 )
 
 
+# Pages whose produced text is scored: complete output, plus output cut short by
+# the length cap or the request deadline (the partial text is what the arm
+# produced within its bound; it counts as a quality result, never as a pass).
+PRODUCED_OUTPUT_STATUSES = frozenset({"ok", "truncated", "timeout"})
+
+
 def evaluate_page(gold_text: str, record: dict, *, english: bool) -> dict:
     result: dict = {"page_status": record["status"]}
-    if record["status"] != "ok":
+    text = record.get("text") or ""
+    if record["status"] not in PRODUCED_OUTPUT_STATUSES or not text.strip():
         result["reason_excluded"] = record["status"]
         return result
-    hyp = record["text"]
+    hyp = text
     result["hyp_sha256"] = sha256_text(hyp)
     strict_dist, ops = cer_strict_ops(gold_text, hyp)
     gold_len = len(gold_text)
@@ -43,6 +50,24 @@ def evaluate_page(gold_text: str, record: dict, *, english: bool) -> dict:
         result["wer"] = w_dist / w_ref if w_ref else None
         result["wer_ops"] = w_ops
     result["numbers"] = number_prf(extract_numbers(gold_text), extract_numbers(hyp))
+    # Supplementary, declared lenient view: VLM tables concatenate cells
+    # ("4,281,0843,033,662"), so exact tokens undercount.  A gold number counts
+    # as digit-present when its comma/space-stripped digit string occurs in the
+    # hypothesis digit string.  Reported alongside, never instead of, the exact
+    # token metric above.
+    import re as _re
+
+    def digits(s):
+        return _re.sub(r"[^0-9]", "", s)
+    gold_digits = digits(gold_text)
+    hyp_digits = digits(hyp)
+    gold_nums = {n["value"].replace(",", "") for n in extract_numbers(gold_text)}
+    hit = sum(1 for v in gold_nums if digits(v) and digits(v) in hyp_digits)
+    result["numbers_digit_present"] = {
+        "gold_total": len(gold_nums),
+        "hits": hit,
+        "recall": hit / len(gold_nums) if gold_nums else None,
+    }
     result["hyp_chars"] = len(hyp)
     result["gold_chars"] = gold_len
     result["repetition_flagged"] = bool(record.get("repetition", {}).get("suspicious"))
@@ -78,8 +103,12 @@ def aggregate(per_page: list[dict]) -> dict:
     gold_nums = sum(n["gold_total"] for n in numbers)
     hyp_nums = sum(n["hyp_total"] for n in numbers)
     precision_hits = sum(n["precision_hits"] for n in numbers)
+    status_counts: dict[str, int] = {}
+    for p in per_page:
+        status_counts[p["page_status"]] = status_counts.get(p["page_status"], 0) + 1
     return {
         "pages_scored": len(scored),
+        "page_status_counts": status_counts,
         "pages_failed": [p["page_status"] for p in failed],
         "macro_cer_strict": macro_cer_strict,
         "macro_cer_narrow": macro_cer_narrow,

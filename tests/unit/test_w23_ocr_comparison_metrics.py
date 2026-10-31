@@ -335,3 +335,110 @@ def test_truncation_marker_repetition_guard_flags_loops():
     assert report["suspicious"] is True
     ok = detect_repetition("正常的一段话，不含循环。", min_repeats=8)
     assert ok["suspicious"] is False
+
+
+def test_job_memory_limit_is_enforced_on_child_commit():
+    """Card memory bound is enforced by the OS, not predicted: a child that
+    commits 300 MiB under a 120 MiB job limit must fail its allocation."""
+    import subprocess
+    import sys
+
+    if str(REPO) not in sys.path:
+        sys.path.insert(0, str(REPO))
+    from tools.ocr_comparison.job_limit import JobMemoryLimit
+
+    limit = 120 * 1024 * 1024
+    job = JobMemoryLimit(limit)
+    try:
+        proc = subprocess.Popen(
+            [sys.executable, "-c",
+             "import sys\n"
+             "try:\n"
+             "    buf = bytearray(300 * 1024 * 1024)\n"
+             "    buf[-1] = 1\n"
+             "    print('alloc ok')\n"
+             "except MemoryError:\n"
+             "    print('alloc refused')\n"
+             "    sys.exit(3)\n"],
+            stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True,
+        )
+        job.assign(proc.pid)
+        out, _ = proc.communicate(timeout=60)
+        peak = job.peak_process_bytes()
+    finally:
+        job.close()
+    assert "alloc ok" not in out
+    assert proc.returncode != 0
+    assert peak <= limit + 64 * 1024 * 1024
+
+
+def test_markup_strip_declared_scope():
+    from tools.ocr_comparison.metrics import markup_strip
+
+    assert markup_strip("## 标题\n<td>营收</td>\n**粗**") == "标题\n营收\n粗"
+    assert markup_strip("plain RMB 21.9 billion | 13%") == "plain RMB 21.9 billion | 13%"
+
+
+def test_partial_timeout_output_is_scored_not_excluded():
+    """Completion-aware policy: a deadline-cut page contributes its partial text
+    to quality metrics; a page with no output is excluded and counted."""
+    import sys
+
+    if str(REPO) not in sys.path:
+        sys.path.insert(0, str(REPO))
+    from tools.ocr_comparison.compare import aggregate, evaluate_page
+
+    gold = "总收入2703.7百万元"
+    timed_out = evaluate_page(gold, {"status": "timeout", "text": "总收入2703.7"}, english=False)
+    assert timed_out.get("cer_strict") is not None
+    assert "reason_excluded" not in timed_out
+    empty = evaluate_page(gold, {"status": "unsupported", "text": ""}, english=False)
+    assert empty.get("reason_excluded") == "unsupported"
+    agg = aggregate([timed_out, empty])
+    assert agg["page_status_counts"] == {"timeout": 1, "unsupported": 1}
+    assert agg["pages_scored"] == 1
+
+
+def test_x1_missing_model_is_an_explicit_refusal(tmp_path):
+    import sys
+
+    if str(REPO) not in sys.path:
+        sys.path.insert(0, str(REPO))
+    from tools.ocr_comparison.run_x1 import _model_dir
+
+    with pytest.raises(FileNotFoundError):
+        _model_dir(str(tmp_path / "absent"))
+
+
+def test_markup_strip_latex_percent_and_math_wrap():
+    from tools.ocr_comparison.metrics import markup_strip
+
+    assert markup_strip("up $ 29\% $ to $ 28\% $") == "up 29% to 28%"
+    assert markup_strip("plain 13% stays") == "plain 13% stays"
+
+
+def test_safetensors_read_only_mapping_roundtrip(tmp_path):
+    """Header parse + read-only mapped storage return byte-identical tensors."""
+    import sys
+
+    import torch
+    from safetensors.torch import save_file
+
+    if str(REPO) not in sys.path:
+        sys.path.insert(0, str(REPO))
+    from tools.ocr_comparison.mmap_loader import (
+        _DTYPES, _read_only_mapped_storage, parse_safetensors_header,
+    )
+
+    small = torch.arange(0, 16, dtype=torch.bfloat16).view(4, 4)
+    big = torch.randn(8, 5, dtype=torch.bfloat16)
+    path = tmp_path / "tiny.safetensors"
+    save_file({"small": small, "big": big}, str(path))
+    tensors, base = parse_safetensors_header(path)
+    assert set(tensors) == {"small", "big"}
+    assert base > 8
+    storage = _read_only_mapped_storage(path)
+    got = storage[tensors["small"][2]:tensors["small"][3]].view(torch.bfloat16).view(4, 4)
+    assert torch.equal(got, small)
+    got_big = storage[tensors["big"][2]:tensors["big"][3]].view(torch.bfloat16).view(8, 5)
+    assert torch.equal(got_big, big)

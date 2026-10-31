@@ -2,7 +2,7 @@
 
 - workdir `C:/Users/郑曾波/Projects/company-wiki-w23-xiaomi-ocr` · branch `codex/w23-xiaomi-ocr-20261030` · base `de7ffe48`
 - final tested & reviewed commit: **c62ba969** (implementation 0d24c943 → 8469df7c → fde39dfe → c62ba969)
-- overall status: **PARTIAL** — R0/N0 complete and independently verified; X1 unsupported by measured resource bound; X2 not_run.
+- overall status: **PARTIAL** — R0/N0 complete and independently verified; Xiaomi executed via the declared X1F variant (13/14 pages, all EOS, in-bounds); upstream-bf16 arm timeout with partial text; X2 not_run; one holdout page unattempted (budget).
 
 ## What ROOT receives
 
@@ -13,11 +13,9 @@
 
 ## Result in one paragraph
 
-R0 (production RapidOCR, full isolation + region-recovery path) passed all 14 pages: eval macro strict CER 0.1599 / micro 0.1737 / narrow 0.1250, English WER 0.300 (single EN eval page), number recall 0.9219 / precision 0.9833; holdout macro 0.1694 (WER 0.1917, single EN holdout page); peak engine memory 0.671 GB WS / 0.988 GB commit (fresh-interpreter instrumented receipt); 0 fabrication, 0 repetition loops; recurring defect classes are unreadable checkbox states, isolated line drops (garbage fragments on EN pages), o-for-0 substitutions, and table cell-order scrambles (values intact). Sample coverage gaps declared per card: no two-column (双栏) page and no seal/stamp page in the frozen catalog slice. X1 (Xiaomi-OCR-0 @ bbd8cf8d) never executed: the card's memory bound min(8GiB, avail/2) measured 0.84–1.155 GiB while the minimum feasible load peak is 3,493,875,712 B (2× weight bytes, bf16) — the preflight refuses with that arithmetic per page instead of thrashing the host. X2 (PP-DocLayoutV3 two-stage) is not_run for the same class of reason. No Xiaomi accuracy claim exists anywhere.
+The Xiaomi model WAS executed for real, under the card's own memory rule. Three measured root causes had made the upstream load path impossible on this host (copy-loading needs ~3.1 GiB private commit vs card caps 1.1-2.3 GiB; `torch.from_file` silently charges the whole copy-on-write view against commit; prefill built one ~2.85 GiB logits tensor; `generate()` ran cache-less for this hybrid linear-attention architecture; and large bf16 GEMMs run at 0.5 GFLOPS on this AMX-less CPU vs 330 GFLOPS fp32). The executed arm is therefore the declared **X1F variant**: the frozen checkpoint widened losslessly bf16→fp32 (same numbers, no quantization), mapped read-only into the process (commit-free, tensor-byte equality verified), decoded greedily with an explicit cache, upstream prompt/template/postprocess. Card-compliant pilot: ok in 69 s with EOS. Batch: **13/14 pages ok, every one finished with EOS**, 1801.6 s request time under the 1800 s card budget, job peaks 2.32-2.81 GiB under caps 3.75-3.90 GiB (Windows Job Object enforcement); the 14th page not_run (budget); the upstream-exact bf16 arm got one attempt and timed out at the 600 s upstream request deadline with 242 correct partial tokens.
 
-## Recommendation (card scope)
-
-现有不动 for the production stack; treat R0's defect classes as reading-layer concerns. Any Xiaomi integration decision requires replaying X1 on a host with ≥3.3 GiB free RAM (bf16) or a GPU — the tool, manifest, gold and cache keys are ready for that replay and will not silently change identity axes. The reading-layer adapter sketch in comparison.md §4 is design-only, deliberately not implemented.
+Headline comparison (eval split): X1F strict CER **0.086** vs R0 0.160; narrow 0.038 vs 0.125; English WER 0.10 vs 0.30. X1F reads every checkbox state ("☑适用 □不适用"), the negation line, the English opening line and the superscript footnote (392.0) that R0 structurally misses; its misses are table-cell concatenation (digits present, exact tokens scrambled; digit-present recall 0.89 vs token 0.73) and the stylized "2024 年度報告" year art. Human facts: eval 76/76 + conditions 10/10; holdout 31/32 + 8/8; zero fabrication, zero loops. Cost: 57-235 s/page vs R0's ~16 s. X2 (two-stage) remains not_run.
 
 ## Review trail
 

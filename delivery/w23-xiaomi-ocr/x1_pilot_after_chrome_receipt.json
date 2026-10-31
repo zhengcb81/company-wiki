@@ -1,0 +1,106 @@
+{
+ "schema_version": "cwp-ocr-x1-run/1",
+ "tag": "pilot_after_chrome",
+ "pages_selected": [
+  "byd_ar_2024_p021"
+ ],
+ "receipt": {
+  "schema_version": "cwp-ocr-x1-run-receipt/1",
+  "created_at_utc": "2026-10-31T11:32:06.848292+00:00",
+  "method": "pages rendered in the parent with the shared pypdfium2 renderer; one child process loads Xiaomi-OCR-0 on CPU and runs the pages in order under a Windows Job Object ProcessMemoryLimit (committed bytes); the peak is read from the job object",
+  "config": {
+   "deadline_seconds_per_request": 180.0,
+   "total_inference_budget_seconds": 1800.0,
+   "max_new_tokens": 4096,
+   "dtype": "bfloat16",
+   "threads": "torch default (reported by the child)"
+  },
+  "memory": {
+   "cap_bytes": 2462464000,
+   "cap_gib": 2.293,
+   "rule": "min(8 GiB, available physical RAM / 2) at run start",
+   "job_peak_process_bytes": 1430564864,
+   "job_peak_process_gib": 1.332
+  },
+  "host_before": {
+   "memory_load_pct": 70,
+   "total_phys_bytes": 16931512320,
+   "avail_phys_bytes": 4924928000,
+   "commit_free_bytes": 24450424832
+  },
+  "host_after": {
+   "memory_load_pct": 70,
+   "total_phys_bytes": 16931512320,
+   "avail_phys_bytes": 4966371328,
+   "commit_free_bytes": 24507838464
+  },
+  "child": {
+   "return_code": 0,
+   "backstop_hit": false,
+   "wall_seconds": 15.04,
+   "events": [
+    {
+     "event": "child_ready",
+     "import_seconds": 2.5504587000004904,
+     "torch_threads": 10,
+     "process_peak_commit_bytes_self": 555479040
+    },
+    {
+     "event": "stage",
+     "stage": "page_start",
+     "page_id": "byd_ar_2024_p021",
+     "t_seconds": 4.779,
+     "peak_commit_self": 587583488
+    },
+    {
+     "event": "stage",
+     "stage": "processor_load_start",
+     "page_id": "byd_ar_2024_p021",
+     "t_seconds": 10.177,
+     "peak_commit_self": 1150083072
+    },
+    {
+     "event": "stage",
+     "stage": "processor_loaded",
+     "page_id": "byd_ar_2024_p021",
+     "t_seconds": 11.28,
+     "peak_commit_self": 1430564864
+    },
+    {
+     "event": "stage",
+     "stage": "model_load_start",
+     "page_id": "byd_ar_2024_p021",
+     "t_seconds": 11.28,
+     "peak_commit_self": 1430564864
+    },
+    {
+     "event": "child_done",
+     "total_request_seconds": 0.0
+    }
+   ],
+   "stderr_tail": ""
+  },
+  "identity": {
+   "arm": "X1",
+   "backend": "xiaomi-ocr-0-transformers-cpu",
+   "upstream_commit": "b1a9bb4c07060c453785e9151715ccda6b96f0b1",
+   "model_revision": "bbd8cf8d21f256b3644b44cb860f3a7cecb93c30",
+   "precision": "checkpoint-native-bfloat16-cpu",
+   "prompt_sha256": "fd7abd1ca91c0133edb93a6da0d52d6d57a51a9076867fd467ab1ddd7e50fb20",
+   "preprocess": "upstream fit_image thumbnail to 2048px longest edge, then processor smart_resize",
+   "decoding": "greedy; chat template enable_thinking=False",
+   "max_new_tokens": 4096,
+   "request_deadline_seconds": 180.0,
+   "output_char_cap": 60000,
+   "postprocess": "upstream postprocess.document: _clean_truncated_repeats + postprocess_e2e_markdown(convert_otsl=True); scoring strips declared markup (metrics.markup_strip: HTML tags, markdown heading and bold markers)"
+  }
+ },
+ "records": [
+  {
+   "status": "error",
+   "error": "OSError: 页面文件太小，无法完成操作。 (os error 1455)",
+   "process_peak_commit_bytes_self": 1430564864,
+   "page_id": "byd_ar_2024_p021"
+  }
+ ]
+}

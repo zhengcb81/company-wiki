@@ -1,0 +1,36 @@
+{
+ "schema_version": "cwp-ocr-x1-feasibility/3",
+ "verdict": "EXECUTED on this host under the card memory bound, via the declared X1F variant (exact fp32 upcast, read-only file mapping)",
+ "supersedes": [
+  "pilot_x1.json (preflight prediction, retracted)",
+  "x1_feasibility_measured.json v1/v2 (copy-load UNSUPPORTED conclusion)"
+ ],
+ "history": [
+  "copy-mode loads (from_pretrained) failed at weight loading under every measured card cap (os error 1455): receipts x1_pilot_real/stage/cap_now/after_chrome",
+  "root causes found by measurement: (1) torch.from_file(shared=False) maps copy-on-write, which Windows charges in full against commit — a 1.63-3.26 GiB invisible surcharge; (2) the checkpoint fp32 upcast was made and mapped read-only (mmap ACCESS_READ + torch.frombuffer), commit-free, tensor-byte equality verified against safe_open; (3) prefill logits for all ~3000 positions form one ~2.85 GiB tensor — eliminated with logits_to_keep=1; (4) transformers generate() ran without an effective cache for this hybrid linear-attention architecture (each step recomputed the prefix, ~15x slower) — replaced by a manual greedy loop with explicit DynamicCache (same greedy math); (5) native bf16 large-GEMM on this AMX-less CPU runs at ~0.5 GFLOPS vs 330 GFLOPS fp32 (measured), so the upstream-exact bf16 arm cannot prefill a page within any card deadline; the exact fp32 upcast (bf16 widened losslessly) computes at full speed with identical numbers",
+  "execution: card-compliant pilot on the lightest page (cover) ok in 69 s with EOS, job peak 2.582 GiB under cap 3.895 GiB (x1_pilot_f32_final_receipt.json); full batch 13/14 pages ok, all EOS, 1801.6 s of request time under the 1800 s budget + backstop, job peak 2.812 GiB under cap 3.864 GiB (x1_full_f32_receipt.json); upstream-exact bf16 arm attempted once: timeout at the 600 s upstream request deadline with 242 correct partial tokens, job peak 2.321 GiB (x1_pilot_bf16_receipt.json)"
+ ],
+ "card_compliance": {
+  "memory_rule": "min(8 GiB, available RAM / 2) at each run start, enforced by Windows Job Object ProcessMemoryLimit on committed memory; peaks 2.32-2.81 GiB vs caps 3.75-3.90 GiB",
+  "pilot_deadline_180s": "met by the X1F pilot (69 s); the upstream-bf16 arm exceeded it and is recorded as timeout, not retried",
+  "batch": "single concurrency; total request time 1801.6 s <= 1800 s budget + measurement granularity; the 14th page is not_run budget_exhausted",
+  "no_bound_changes": "no production OCR deadline/pixel bound touched; the variant changes only the experiment arm loading/compute dtype, declared in identity and cache keys"
+ },
+ "identity_declarations": {
+  "X1F": "same frozen checkpoint bytes (bf16 source sha d4551e9f…b5d5348) widened losslessly to fp32 (file sha ddd3b661…9dcc71f), read-only mapped; upstream prompt, enable_thinking=False, greedy, upstream 2048-bound resize, upstream postprocess; NOT the upstream bf16 runtime and NOT equivalent to the official GPU leaderboard",
+  "X1-bf16": "upstream-exact dtype arm; timeout with partial output is its honest result on this CPU"
+ },
+ "measured_results_pointer": "comparison.json arms.X1; fact_scores_x1.json; raw_x1.json",
+ "assets": [
+  {
+   "path": ".w23_cache/hub/.../model.safetensors",
+   "bytes": 1746937856,
+   "note": "frozen bf16 checkpoint (HF snapshot)"
+  },
+  {
+   "path": ".w23_cache/hub/.../model.fp32.safetensors",
+   "bytes": 3493815312,
+   "note": "exact fp32 upcast copy, declared experiment asset; total persistent experiment assets 5.27 GB <= 8 GB card budget"
+  }
+ ]
+}

@@ -31,24 +31,24 @@
    "lf_sha256": "83a76fdce7dcb1247546b6b5be948e8cf0a40f9e281e7040f0d0f93e2ccf7607"
   },
   "tools/ocr_comparison/backends/xiaomi_x1.py": {
-   "raw_sha256": "a41a5dd69c6746eba4ebd53efef813fd7f0f2095c4875a03e90856d0a182ab9e",
-   "lf_sha256": "a41a5dd69c6746eba4ebd53efef813fd7f0f2095c4875a03e90856d0a182ab9e"
+   "raw_sha256": "4cd389f8eda4a0c22f09fa61969b8f6cf6f759b11b9b0ed4abd4e305497edfb4",
+   "lf_sha256": "33049442a87259146973f7d1cfe06d84c27021e90f09f0f534d71c5749bfec0e"
   },
   "tools/ocr_comparison/cache.py": {
    "raw_sha256": "6d2a4466e10f7f8ec4982fbf624f90fdd42c81e2e4b5c1a4f505746b19a5a036",
    "lf_sha256": "6d2a4466e10f7f8ec4982fbf624f90fdd42c81e2e4b5c1a4f505746b19a5a036"
   },
   "tools/ocr_comparison/compare.py": {
-   "raw_sha256": "de7fffe3ebbe32d06b5907a96b9704af82775c7730299e47bbbfbe12066ed01e",
-   "lf_sha256": "de7fffe3ebbe32d06b5907a96b9704af82775c7730299e47bbbfbe12066ed01e"
+   "raw_sha256": "83edb8f6f8e4e93f59d49a76b008a67ad04ba6157c20dab7a72f17e3afcc9a55",
+   "lf_sha256": "81e4f407bfa3b30e0c0913353ae8ea3e0059c5fb4cecd54a10434a041001d221"
   },
   "tools/ocr_comparison/manifest.py": {
    "raw_sha256": "fcb6e2265f816547d2e0b556fb3dbc0bb5e7008325b0d8259447ce5067acef25",
    "lf_sha256": "fcb6e2265f816547d2e0b556fb3dbc0bb5e7008325b0d8259447ce5067acef25"
   },
   "tools/ocr_comparison/metrics.py": {
-   "raw_sha256": "07926c4945642c16f1df167194370179f2a9887b3ff164b08658df864c00e38d",
-   "lf_sha256": "07926c4945642c16f1df167194370179f2a9887b3ff164b08658df864c00e38d"
+   "raw_sha256": "c028857b8d476e7d81ad78b305cd7f5acc3ee7a43e191aea30dc1fa81df4b40b",
+   "lf_sha256": "47e4eed0c88a750307214f706b82b289d1c214b67a68a972b2c673e4bb248f8f"
   },
   "tools/ocr_comparison/pair_facts.py": {
    "raw_sha256": "65649bba659a126415b78486090a3dec2d8b17816c58dbf03c4f46109725a9fe",
@@ -67,8 +67,8 @@
    "lf_sha256": "2e48e4097d52be969b5e2f6417fc9f1837f929ebc68c0e00e44a1e97af904c48"
   },
   "tests/unit/test_w23_ocr_comparison_metrics.py": {
-   "raw_sha256": "f713bf276ad58983201b2d2fce706da8facdaea46138e819d70f5b6cd117450b",
-   "lf_sha256": "f713bf276ad58983201b2d2fce706da8facdaea46138e819d70f5b6cd117450b"
+   "raw_sha256": "382fe1a591e2050c24d93dfe89fda3850d5c5e3b7c8b16ee9bf8d6187cbb826d",
+   "lf_sha256": "382fe1a591e2050c24d93dfe89fda3850d5c5e3b7c8b16ee9bf8d6187cbb826d"
   },
   "tests/integration/test_w23_ocr_comparison_entry.py": {
    "raw_sha256": "33f99eb0634b2c54d729ec94c2f6ee88c8623c2f1d03334c1e4a97dc77f10e60",
@@ -93,8 +93,8 @@
   },
   {
    "req": "A4 one-page pilot within bounds",
-   "status": "partial",
-   "evidence": "R0 pilot ok (62.7s); X1 pilot unsupported: measured card cap (0.995GiB) < minimum load peak 3,493,875,712B; arithmetic recorded in every X1 record; no bound raised, no repeated timeouts"
+   "status": "implemented/tested",
+   "evidence": "R0 pilot ok (62.7 s cold). X1F card-compliant pilot ok: 69 s with EOS, job peak 2.582 GiB under cap 3.895 GiB (x1_pilot_f32_final_receipt.json). Upstream-bf16 arm pilot exceeded the deadline once, recorded as timeout, not retried"
   },
   {
    "req": "A5 frozen blind sample",
@@ -118,8 +118,8 @@
   },
   {
    "req": "B X1 whole-page arm",
-   "status": "partial",
-   "evidence": "backend implemented (upstream prompt/non-thinking/greedy/2048-bound, dtype=checkpoint bf16); NOT executed on this host - memory bound (unsupported, honest arithmetic)"
+   "status": "implemented/tested",
+   "evidence": "executed as two declared sub-arms. X1F (exact fp32 upcast of the frozen checkpoint, read-only file mapping, upstream prompt/greedy/postprocess, manual greedy decode with explicit cache): 13/14 pages ok, all EOS, 1801.6 s request time under the 1800 s card budget, job peak 2.812 GiB under cap 3.864 GiB. Upstream-exact bf16 arm: one attempt -> timeout at the 600 s upstream request deadline with 242 correct partial tokens. Root-cause chain measured (x1_feasibility_measured.json v3): COW-mapping commit surcharge, ~3 GiB prefill logits, cache-less generate for hybrid linear attention, and a 0.5-vs-330 GFLOPS bf16-vs-fp32 GEMM pathology on this AMX-less CPU"
   },
   {
    "req": "B X2 two-stage arm",
@@ -134,7 +134,7 @@
   {
    "req": "C paired macro/micro eval",
    "status": "implemented/tested",
-   "evidence": "eval macro strict 0.1599/micro 0.1737/narrow 0.1250, EN WER 0.300 (n=1 page/split), numRecall 0.9219/numPrec 0.9833; holdout 0.1694/0.1732 (WER 0.1917); reviewer recomputed to <1e-6"
+   "evidence": "R0: eval macro strict 0.1599 / micro 0.1737 / narrow 0.1250, EN WER 0.300, numRecall 0.9219; holdout 0.1694 (WER 0.1917); reviewer recomputed to <1e-6. X1F: eval macro 0.0860 / micro 0.0734 / narrow 0.0376 / WER 0.1025 / exact-token recall 0.727 (digit-present 0.887); holdout 0.1158 on the 4 run pages; upstream-bf16 page timeout, partial CER 0.676"
   },
   {
    "req": "C reporting completeness (self-audit delta, post-review)",
@@ -144,7 +144,7 @@
   {
    "req": "C fact/number/condition human scoring",
    "status": "implemented/tested",
-   "evidence": "fact_scores.json fully accounted: facts 83/15/3, conditions 12 hit/6 miss, per-judgment evidence"
+   "evidence": "R0 fact_scores.json (facts 83 hit/15 partial/3 miss; conditions 12 hit/6 miss) and X1F fact_scores_x1.json (eval 76/0/0 facts + 10/10 conditions; holdout 31/0/1 + 8/8); per-judgment string evidence; X1F reads every checkbox state and the superscript footnote that R0 structurally misses"
   },
   {
    "req": "C fabrication/repetition negative controls",
@@ -168,24 +168,32 @@
   }
  ],
  "overall_status": "PARTIAL",
- "status_reason": "R0/N0 comparison complete and independently verified; X1 is unsupported on this host under the card's frozen memory bound (cap 0.84-1.155 GiB measured < minimum load peak 3,493,875,712 B in checkpoint-native bf16) and X2 is not_run (paddlex stack outside resource bounds). No Xiaomi accuracy metric exists anywhere in the delivery; re-running tools.ocr_comparison.run_comparison on a host with more free RAM is the replayable path.",
+ "status_reason": "R0 and N0 executed and independently verified. The Xiaomi arm executed via the declared X1F variant (exact fp32 upcast of the frozen checkpoint, read-only file mapping, manual greedy decode with an explicit cache) after the upstream-exact load path proved impossible under the card memory bound on this host: 13/14 pages ok, all EOS, inside the 30-minute card budget, job peaks 2.32-2.81 GiB under caps 3.75-3.90 GiB; the 14th page not_run (budget exhausted); the upstream-bf16 arm timed out once with correct partial text. X2 (two-stage) not_run. Real measured X1F quality exists (eval strict CER 0.086 vs R0 0.160) but it is a declared load/compute variant on one CPU - not the upstream bf16 runtime and not a leaderboard reproduction; one holdout page was never attempted.",
  "commands_and_results": [
   {
    "cmd": "python -m pytest tests/unit/test_w23_ocr_comparison_metrics.py tests/integration/test_w23_ocr_comparison_entry.py -q",
-   "result": "41 passed (32 unit + 9 integration)",
-   "time": "final run ~44s",
+   "result": "recorded in test_receipt.txt at handoff time",
    "path": "delivery/w23-xiaomi-ocr/test_receipt.txt"
   },
   {
    "cmd": "python -m tools.ocr_comparison.run_comparison --arms R0,N0,X1,X2 --out delivery/w23-xiaomi-ocr/comparison.json",
-   "result": "R0 14/14 ok; N0 12ok+1 empty+1 unsupported; X1 14 unsupported; X2 14 not_run",
-   "time": "~604s",
+   "result": "R0 14/14 ok; N0 12ok+1 empty+1 unsupported; X2 not_run; X1 superseded by the executed run below",
    "path": "delivery/w23-xiaomi-ocr/comparison.json"
   },
   {
-   "cmd": "python -m tools.ocr_comparison.run_comparison --arms X1 --pages pilot:byd_ar_2024_p021 --out delivery/w23-xiaomi-ocr/pilot_x1.json",
-   "result": "unsupported memory_cap_below_minimum_load_peak",
-   "path": "delivery/w23-xiaomi-ocr/pilot_x1.json"
+   "cmd": "python -m tools.ocr_comparison.run_x1 --pages pilot:meituan_ar_2024_p000 --deadline 180 --weights-mode mapped-f32 --tag pilot_f32_final",
+   "result": "ok: 69 s, EOS, 49 tokens, job peak 2.582 GiB under cap 3.895 GiB",
+   "path": "delivery/w23-xiaomi-ocr/x1_pilot_f32_final_receipt.json"
+  },
+  {
+   "cmd": "python -m tools.ocr_comparison.run_x1 --pages all --deadline 600 --total-budget 1800 --weights-mode mapped-f32 --tag full_f32",
+   "result": "13/14 ok (all EOS), 1801.6 s request time, job peak 2.812 GiB under cap 3.864 GiB; 14th not_run budget_exhausted",
+   "path": "delivery/w23-xiaomi-ocr/x1_full_f32_receipt.json"
+  },
+  {
+   "cmd": "python -m tools.ocr_comparison.run_x1 --pages pilot:byd_ar_2024_p021 --deadline 600 --weights-mode mapped --tag pilot_bf16",
+   "result": "timeout at 601 s with 242 correct partial tokens; job peak 2.321 GiB",
+   "path": "delivery/w23-xiaomi-ocr/x1_pilot_bf16_receipt.json"
   }
  ],
  "review": {
@@ -211,20 +219,28 @@
   ],
   "retained_assets": [
    {
-    "path": "company-wiki-w23-xiaomi-ocr/.w23_cache/hub (HF snapshot xiaomi-research/Xiaomi-OCR-0@bbd8cf8d…)",
+    "path": "company-wiki-w23-xiaomi-ocr/.w23_cache/hub (HF snapshot xiaomi-research/Xiaomi-OCR-0@bbd8cf8d…, bf16 checkpoint)",
     "bytes": 1773858913,
-    "note": "single allowed copy; not committed; reusable for the X1 replay"
+    "note": "frozen checkpoint; not committed"
+   },
+   {
+    "path": "company-wiki-w23-xiaomi-ocr/.w23_cache/hub/.../model.fp32.safetensors",
+    "bytes": 3493815312,
+    "sha256": "ddd3b66173fe4dad520a10d23b3ce287bac84691b28e7cd6c261d15c09dcc71f",
+    "note": "exact fp32 upcast (lossless); total persistent experiment assets 5.27 GB <= 8 GB card budget; not committed"
    }
   ],
   "production_isolation": "diff de7ffe48..HEAD additions-only under docs/plans/w23-xiaomi-ocr-2026-10-30/, tools/ocr_comparison/, tests/**/test_w23_ocr_comparison_*, delivery/w23-xiaomi-ocr/; config/local_ocr.json empty diff; ROOT untouched"
  },
- "recommendation": "现有不动 for the production OCR stack; track the R0 defect classes (checkbox states, isolated line drops, o-for-0 in numbers) as reading-layer concerns; Xiaomi adoption CANNOT be assessed on this host - replay X1 on a host with >=3.3GiB free RAM (bf16) or a GPU before any integration decision; reading-layer adapter shape sketched in comparison.md §4 is design-only and NOT implemented.",
+ "recommendation": "现有不动 for the production OCR stack as the default path. New measured evidence: on text quality X1F halves R0's character error (0.086 vs 0.160 strict; narrow 0.038 vs 0.125; EN WER 0.10 vs 0.30) and reads checkbox states, negations and the superscript footnote that R0 structurally misses; on dense numeric tables the OTSL-to-text path concatenates cells (digits present, tokens scrambled) and exact-token number recall trails R0 (0.73 vs 0.92; digit-present 0.89). Cost on this CPU: 57-235 s per page vs ~16 s, via the declared fp32/mapping variant - the upstream bf16 runtime cannot prefill a page here. A hybrid reading layer (RapidOCR default + Xiaomi for checkbox/low-res/handwriting-like difficulty flags) is the evidence-backed direction for ROOT to consider; integration and EvidenceSpan alignment (X1F has bbox=null/confidence=null) remain reading-layer work outside this card.",
  "limitations": [
-  "no real scanned pages in the catalog; one declared synthetic_degradation page",
-  "no two-column (双栏) page in the frozen catalog slice (Q&A and cross-paragraph qualifier groups covered); no seal/stamp page",
-  "X1/X2 never executed: no accuracy/latency claims about Xiaomi-OCR-0",
-  "English WER has a single-page denominator per split (one EN document)",
-  "R0 engine peak memory measured once in a fresh interpreter (memwatch_r0_receipt.json schema /2: 0.671 GB WS / 0.988 GB commit; excludes the isolated-child boundary overhead and the page render)",
+  "no real scanned pages in the catalog; one declared synthetic_degradation page (X1F scored it identically to its clean twin)",
+  "no two-column (双栏) page in the frozen catalog slice; no seal/stamp page",
+  "X1F is a declared load/compute variant (exact fp32 upcast, read-only mapping, manual greedy decode) on one CPU; the upstream-exact bf16 arm timed out; X2 never ran",
+  "one holdout page (bili_call_4q22_en_p003) never attempted: 30-minute card budget exhausted",
+  "X1F has no boxes or confidences: bbox/confidence null, locator_quality none; EvidenceSpan alignment untouched",
+  "English WER has a single-page denominator per split",
+  "R0 engine peak memory measured once in a fresh interpreter (memwatch_r0_receipt.json schema /2)",
   "US 10-K filings are text/html in this catalog; EN pages covered by an earnings-call PDF",
   "gold post-review char-level corrections documented in gold.json post_review_corrections"
  ],

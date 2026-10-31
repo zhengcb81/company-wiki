@@ -33,3 +33,9 @@
 - delta复审R1抓到2项：raw_r0.json被仪表化pilot覆盖(恢复自c62ba969+重新联接+provenance记录全程;根因修复=raw文件名per-invocation唯一+测试)；内存收据误标(实为pdfium渲染峰值)→改为fresh-interpreter法实测引擎：0.671GB WS/0.988GB commit(schema /2,审查员独立复现~0.1%一致)。
 - delta复审R2：READY_FOR_ROOT(0 OPEN)；两个文档nit已修(comparison.md峰值数值落位、handoff limitations /2措辞)。测试41/41(32 unit+9 integration)。
 - 全部推送至origin/codex/w23-xiaomi-ocr-20261030(070c8489)。
+2026-10-31 X1 真实执行成功（用户腾出内存后继续攻坚）：
+- 用户关闭 Chrome 等应用，avail 升至 7.7 GiB（cap 3.7-3.9 GiB）。逐层测量定位五个真根因：(1) from_pretrained 复制加载需 ~3.1 GiB 私有提交，任何卡限内必败（error 1455）；(2) torch.from_file(shared=False) 是 COW 映射，Windows 全额计入提交——隐形 1.6-3.3 GiB；(3) prefill 对全部 ~3000 位置算 logits，单张量 ~2.85 GiB；(4) generate() 对该混合线性注意力架构未有效用 cache，每步全前缀重算（~15×慢）；(5) 本机无 AMX/AVX512-BF16，bf16 大 GEMM 0.5 GFLOPS vs fp32 330 GFLOPS（实测）。
+- 修复（全部声明、不动卡界）：mmap ACCESS_READ + torch.frombuffer 真只读映射（提交为零，张量与 safe_open 逐位相等）；meta 初始化 + rotary 缓冲 CPU 重建；logits_to_keep=1；手写贪心循环显式 DynamicCache（同上游贪心数学）；bf16→fp32 无损上转换副本（3.49 GB，总实验资产 5.27 GB ≤ 8 GB）。
+- 执行：X1F 卡合规 pilot 成功（封面页 69 秒 EOS，job 峰值 2.582<3.895 GiB）；全量 13/14 页全部 EOS 完成，请求时间 1801.6 s ≤ 1800 s 卡预算（第 14 页 not_run budget_exhausted），job 峰值 2.812<3.864 GiB；bf16 原样臂一次尝试 600 s 上游请求超时，242 正确部分 token，未重试。
+- 结果：X1F eval strict CER 0.0860/narrow 0.0376/EN WER 0.1025 vs R0 0.1599/0.1250/0.300；事实判定 eval 76/76+条件 10/10，holdout 31/32+8/8；勾选框/否定句/上标脚注 X1F 全对（R0 结构性丢失）；表格单元格连排→token 召回 0.73 但 digit-present 0.89；0 编造 0 循环；每页 57-235 s vs R0 ~16 s。
+- 交付更新：raw_x1.json（双子臂）、comparison.json/md、fact_scores_x1.json、x1_feasibility_measured.json v3、handoff；markup 归一化纳入 LaTeX $…$/%；新测试（只读映射 roundtrip、LaTeX 规则、完成度感知评价），47/47 绿。

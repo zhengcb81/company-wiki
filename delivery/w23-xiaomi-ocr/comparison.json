@@ -1178,26 +1178,87 @@
    "identity": {
     "arm": "X1",
     "backend": "xiaomi-ocr-0-transformers-cpu",
+    "upstream_commit": "b1a9bb4c07060c453785e9151715ccda6b96f0b1",
     "model_revision": "bbd8cf8d21f256b3644b44cb860f3a7cecb93c30",
     "precision": "checkpoint-native-bfloat16-cpu",
     "prompt_sha256": "fd7abd1ca91c0133edb93a6da0d52d6d57a51a9076867fd467ab1ddd7e50fb20",
-    "preprocess": "fit_image_thumbnail_2048",
-    "decoding": "greedy_temperature_0_top_p_0.8_no_think",
-    "max_new_tokens": 2048,
-    "output_char_cap": 60000
+    "preprocess": "upstream fit_image thumbnail to 2048px longest edge, then processor smart_resize",
+    "decoding": "greedy; chat template enable_thinking=False",
+    "max_new_tokens": 16384,
+    "request_deadline_seconds": 600.0,
+    "output_char_cap": 60000,
+    "weights_loading": "torch.from_file read-only file mapping of the exact fp32 upcast copy (bf16 widened losslessly, sha256 of that file recorded by the loader); loading strategy and compute dtype only, no quantization",
+    "postprocess": "upstream postprocess.document: _clean_truncated_repeats + postprocess_e2e_markdown(convert_otsl=True); scoring strips declared markup (metrics.markup_strip: HTML tags, markdown heading and bold markers)"
+   },
+   "upstream_bf16_identity": {
+    "arm": "X1",
+    "backend": "xiaomi-ocr-0-transformers-cpu",
+    "upstream_commit": "b1a9bb4c07060c453785e9151715ccda6b96f0b1",
+    "model_revision": "bbd8cf8d21f256b3644b44cb860f3a7cecb93c30",
+    "precision": "checkpoint-native-bfloat16-cpu",
+    "prompt_sha256": "fd7abd1ca91c0133edb93a6da0d52d6d57a51a9076867fd467ab1ddd7e50fb20",
+    "preprocess": "upstream fit_image thumbnail to 2048px longest edge, then processor smart_resize",
+    "decoding": "greedy; chat template enable_thinking=False",
+    "max_new_tokens": 16384,
+    "request_deadline_seconds": 600.0,
+    "output_char_cap": 60000,
+    "weights_loading": "torch.from_file read-only file mapping of the frozen bf16 checkpoint (meta init + assign); loading strategy only",
+    "postprocess": "upstream postprocess.document: _clean_truncated_repeats + postprocess_e2e_markdown(convert_otsl=True); scoring strips declared markup (metrics.markup_strip: HTML tags, markdown heading and bold markers)"
    },
    "summary": {
     "pages_total": 14,
-    "pages_ok": 0,
-    "batch_status": "failed"
+    "pages_ok": 13,
+    "batch_status": "partial",
+    "sub_arms": {
+     "X1F": "declared variant: exact fp32 upcast of the frozen bf16 checkpoint, read-only file mapping, CPU; 13/14 ok, all ok pages finished with EOS",
+     "X1-bf16": "upstream-exact dtype arm; one attempt on byd_ar_2024_p021 -> timeout at the 600 s upstream request deadline with 242 partial tokens; not re-attempted (card: no repeated timeouts)"
+    },
+    "pilot": "x1_pilot_f32_final_receipt.json (cover page ok in 69 s, EOS, peak 2.58 GiB under cap)",
+    "budget": {
+     "total_inference_seconds": 1800,
+     "spent_request_seconds": 1801.6
+    },
+    "memory": {
+     "cap_gib": 3.864,
+     "job_peak_gib": 2.812,
+     "enforcement": "Windows Job Object ProcessMemoryLimit at min(8 GiB, avail RAM/2)"
+    }
    },
    "evaluation": {
-    "arm": "X1",
+    "arm": "X1F",
     "eval": {
      "per_page": [
       {
-       "page_status": "unsupported",
-       "reason_excluded": "unsupported",
+       "page_status": "ok",
+       "hyp_sha256": "e9d9a3b13fe8e31c485aa9b066f983dabe0e2328f872bfe08698487a82a54001",
+       "cer_strict": 0.06171983356449376,
+       "cer_strict_ops": {
+        "insertions": 0,
+        "deletions": 89,
+        "substitutions": 0
+       },
+       "cer_narrow": 0.01704966641957005,
+       "cer_narrow_ops": {
+        "insertions": 0,
+        "deletions": 23,
+        "substitutions": 0
+       },
+       "numbers": {
+        "gold_total": 10,
+        "hyp_total": 4,
+        "recall_hits": 2,
+        "precision_hits": 2,
+        "recall": 0.2,
+        "precision": 0.5
+       },
+       "numbers_digit_present": {
+        "gold_total": 10,
+        "hits": 8,
+        "recall": 0.8
+       },
+       "hyp_chars": 1353,
+       "gold_chars": 1442,
+       "repetition_flagged": false,
        "page_id": "byd_ar_2024_p021",
        "page_identity": {
         "source_id": "urn:company-wiki:source:sha256:e9c2d7fdd088e151ccb6c8ad3d95587b2b014b10f2c9731508d23ce07fde4de3",
@@ -1211,8 +1272,36 @@
        }
       },
       {
-       "page_status": "unsupported",
-       "reason_excluded": "unsupported",
+       "page_status": "ok",
+       "hyp_sha256": "0c12b67c170b05679699a5adda500ce228cbe95e3b164e1d32413bed5ff359f0",
+       "cer_strict": 0.15239154616240266,
+       "cer_strict_ops": {
+        "insertions": 0,
+        "deletions": 137,
+        "substitutions": 0
+       },
+       "cer_narrow": 0.10722891566265061,
+       "cer_narrow_ops": {
+        "insertions": 0,
+        "deletions": 89,
+        "substitutions": 0
+       },
+       "numbers": {
+        "gold_total": 8,
+        "hyp_total": 6,
+        "recall_hits": 6,
+        "precision_hits": 6,
+        "recall": 0.75,
+        "precision": 1.0
+       },
+       "numbers_digit_present": {
+        "gold_total": 8,
+        "hits": 6,
+        "recall": 0.75
+       },
+       "hyp_chars": 762,
+       "gold_chars": 899,
+       "repetition_flagged": false,
        "page_id": "amec_h1_2026_p009",
        "page_identity": {
         "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
@@ -1226,8 +1315,36 @@
        }
       },
       {
-       "page_status": "unsupported",
-       "reason_excluded": "unsupported",
+       "page_status": "ok",
+       "hyp_sha256": "28be0318904a228d82c5e8d60e0cc43461fa5b1db9b4e14f1a7f1795cc80f9d8",
+       "cer_strict": 0.07738095238095238,
+       "cer_strict_ops": {
+        "insertions": 0,
+        "deletions": 91,
+        "substitutions": 0
+       },
+       "cer_narrow": 0.030136986301369864,
+       "cer_narrow_ops": {
+        "insertions": 0,
+        "deletions": 33,
+        "substitutions": 0
+       },
+       "numbers": {
+        "gold_total": 9,
+        "hyp_total": 6,
+        "recall_hits": 6,
+        "precision_hits": 6,
+        "recall": 0.6666666666666666,
+        "precision": 1.0
+       },
+       "numbers_digit_present": {
+        "gold_total": 9,
+        "hits": 6,
+        "recall": 0.6666666666666666
+       },
+       "hyp_chars": 1085,
+       "gold_chars": 1176,
+       "repetition_flagged": false,
        "page_id": "amec_h1_2026_p011",
        "page_identity": {
         "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
@@ -1241,8 +1358,36 @@
        }
       },
       {
-       "page_status": "unsupported",
-       "reason_excluded": "unsupported",
+       "page_status": "ok",
+       "hyp_sha256": "2a5398a83d9af6c892d2921d725de47243ef7d16f14cab5310b8d83c4245f844",
+       "cer_strict": 0.022243713733075435,
+       "cer_strict_ops": {
+        "insertions": 1,
+        "deletions": 16,
+        "substitutions": 6
+       },
+       "cer_narrow": 0.01557935735150925,
+       "cer_narrow_ops": {
+        "insertions": 0,
+        "deletions": 12,
+        "substitutions": 4
+       },
+       "numbers": {
+        "gold_total": 7,
+        "hyp_total": 6,
+        "recall_hits": 6,
+        "precision_hits": 6,
+        "recall": 0.8571428571428571,
+        "precision": 1.0
+       },
+       "numbers_digit_present": {
+        "gold_total": 7,
+        "hits": 6,
+        "recall": 0.8571428571428571
+       },
+       "hyp_chars": 1019,
+       "gold_chars": 1034,
+       "repetition_flagged": false,
        "page_id": "meituan_ar_2024_p011",
        "page_identity": {
         "source_id": "urn:company-wiki:source:sha256:36eae4d0397187bef187286e394b7d85421eac75f7380d1a95de9f1bfa25e70a",
@@ -1256,8 +1401,36 @@
        }
       },
       {
-       "page_status": "unsupported",
-       "reason_excluded": "unsupported",
+       "page_status": "ok",
+       "hyp_sha256": "230299bc3a98c0bb915df26f2a0970b1eb097e567b8d4138777d686a2fdbbf62",
+       "cer_strict": 0.050784856879039705,
+       "cer_strict_ops": {
+        "insertions": 1,
+        "deletions": 52,
+        "substitutions": 2
+       },
+       "cer_narrow": 0.0049261083743842365,
+       "cer_narrow_ops": {
+        "insertions": 1,
+        "deletions": 2,
+        "substitutions": 2
+       },
+       "numbers": {
+        "gold_total": 29,
+        "hyp_total": 27,
+        "recall_hits": 25,
+        "precision_hits": 25,
+        "recall": 0.8620689655172413,
+        "precision": 0.9259259259259259
+       },
+       "numbers_digit_present": {
+        "gold_total": 29,
+        "hits": 29,
+        "recall": 1.0
+       },
+       "hyp_chars": 1032,
+       "gold_chars": 1083,
+       "repetition_flagged": false,
        "page_id": "ksy_q1_2026_p002",
        "page_identity": {
         "source_id": "urn:company-wiki:source:sha256:37f0eb13fc9748d6f2f56e76e9a586bcee7cc9482dd77cdceb7a37fc0890ba2f",
@@ -1271,8 +1444,36 @@
        }
       },
       {
-       "page_status": "unsupported",
-       "reason_excluded": "unsupported",
+       "page_status": "ok",
+       "hyp_sha256": "46a81850bbd8879c4a4ce3b0134922b20467894cf7cba2fee24678260e0c9f79",
+       "cer_strict": 0.050784856879039705,
+       "cer_strict_ops": {
+        "insertions": 1,
+        "deletions": 52,
+        "substitutions": 2
+       },
+       "cer_narrow": 0.0049261083743842365,
+       "cer_narrow_ops": {
+        "insertions": 1,
+        "deletions": 2,
+        "substitutions": 2
+       },
+       "numbers": {
+        "gold_total": 29,
+        "hyp_total": 27,
+        "recall_hits": 25,
+        "precision_hits": 25,
+        "recall": 0.8620689655172413,
+        "precision": 0.9259259259259259
+       },
+       "numbers_digit_present": {
+        "gold_total": 29,
+        "hits": 29,
+        "recall": 1.0
+       },
+       "hyp_chars": 1032,
+       "gold_chars": 1083,
+       "repetition_flagged": false,
        "page_id": "ksy_q1_2026_p002_synthetic_degraded",
        "page_identity": {
         "source_id": "urn:company-wiki:source:sha256:37f0eb13fc9748d6f2f56e76e9a586bcee7cc9482dd77cdceb7a37fc0890ba2f",
@@ -1286,8 +1487,36 @@
        }
       },
       {
-       "page_status": "unsupported",
-       "reason_excluded": "unsupported",
+       "page_status": "ok",
+       "hyp_sha256": "7bbdedbfb1f22235c5899ad3ce491bde222b70294789fa803eb70d39d75717ef",
+       "cer_strict": 0.22395833333333334,
+       "cer_strict_ops": {
+        "insertions": 6,
+        "deletions": 102,
+        "substitutions": 21
+       },
+       "cer_narrow": 0.11224489795918367,
+       "cer_narrow_ops": {
+        "insertions": 11,
+        "deletions": 29,
+        "substitutions": 15
+       },
+       "numbers": {
+        "gold_total": 11,
+        "hyp_total": 10,
+        "recall_hits": 10,
+        "precision_hits": 10,
+        "recall": 0.9090909090909091,
+        "precision": 1.0
+       },
+       "numbers_digit_present": {
+        "gold_total": 11,
+        "hits": 10,
+        "recall": 0.9090909090909091
+       },
+       "hyp_chars": 480,
+       "gold_chars": 576,
+       "repetition_flagged": false,
        "page_id": "ir_wanrun_20241104_p000",
        "page_identity": {
         "source_id": "urn:company-wiki:source:sha256:6abdef50aecf03f85e5c5b10299abc4c6442c4d8f1ffe356ba72a421b64f97fc",
@@ -1301,8 +1530,36 @@
        }
       },
       {
-       "page_status": "unsupported",
-       "reason_excluded": "unsupported",
+       "page_status": "ok",
+       "hyp_sha256": "a3f3a2715b8937a771f16fcc84f9c2927e4a0a3cf246fa9aac6bbd88ce5e4264",
+       "cer_strict": 0.08165680473372781,
+       "cer_strict_ops": {
+        "insertions": 0,
+        "deletions": 69,
+        "substitutions": 0
+       },
+       "cer_narrow": 0.02564102564102564,
+       "cer_narrow_ops": {
+        "insertions": 0,
+        "deletions": 20,
+        "substitutions": 0
+       },
+       "numbers": {
+        "gold_total": 7,
+        "hyp_total": 6,
+        "recall_hits": 5,
+        "precision_hits": 5,
+        "recall": 0.7142857142857143,
+        "precision": 0.8333333333333334
+       },
+       "numbers_digit_present": {
+        "gold_total": 7,
+        "hits": 7,
+        "recall": 1.0
+       },
+       "hyp_chars": 776,
+       "gold_chars": 845,
+       "repetition_flagged": false,
        "page_id": "hrjp_cb_prospectus_p006",
        "page_identity": {
         "source_id": "urn:company-wiki:source:sha256:c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
@@ -1316,8 +1573,42 @@
        }
       },
       {
-       "page_status": "unsupported",
-       "reason_excluded": "unsupported",
+       "page_status": "ok",
+       "hyp_sha256": "4c740679a46d21048c79a143f3b7de788adad68817b84ca651c8a6287feb2029",
+       "cer_strict": 0.053423031262366444,
+       "cer_strict_ops": {
+        "insertions": 74,
+        "deletions": 56,
+        "substitutions": 5
+       },
+       "cer_narrow": 0.02077294685990338,
+       "cer_narrow_ops": {
+        "insertions": 38,
+        "deletions": 2,
+        "substitutions": 3
+       },
+       "wer": 0.1025,
+       "wer_ops": {
+        "insertions": 24,
+        "deletions": 1,
+        "substitutions": 16
+       },
+       "numbers": {
+        "gold_total": 18,
+        "hyp_total": 17,
+        "recall_hits": 8,
+        "precision_hits": 8,
+        "recall": 0.4444444444444444,
+        "precision": 0.47058823529411764
+       },
+       "numbers_digit_present": {
+        "gold_total": 18,
+        "hits": 18,
+        "recall": 1.0
+       },
+       "hyp_chars": 2545,
+       "gold_chars": 2527,
+       "repetition_flagged": false,
        "page_id": "bili_call_4q22_en_p001",
        "page_identity": {
         "source_id": "urn:company-wiki:source:sha256:55d3581c9b6e6b4be5793c80d65894a6d998194ba9f5027493d167f84e48d168",
@@ -1332,35 +1623,56 @@
       }
      ],
      "aggregate": {
-      "pages_scored": 0,
-      "pages_failed": [
-       "unsupported",
-       "unsupported",
-       "unsupported",
-       "unsupported",
-       "unsupported",
-       "unsupported",
-       "unsupported",
-       "unsupported",
-       "unsupported"
-      ],
-      "macro_cer_strict": null,
-      "macro_cer_narrow": null,
-      "micro_cer_strict": null,
-      "micro_cer_narrow": null,
-      "macro_wer": null,
-      "number_recall": null,
-      "number_precision": null,
-      "number_gold_total": 0,
-      "number_hyp_total": 0,
+      "pages_scored": 9,
+      "page_status_counts": {
+       "ok": 9
+      },
+      "pages_failed": [],
+      "macro_cer_strict": 0.08603821432538125,
+      "macro_cer_narrow": 0.03761177921599788,
+      "micro_cer_strict": 0.07341772151898734,
+      "micro_cer_narrow": 0.027097984060009378,
+      "macro_wer": 0.1025,
+      "number_recall": 0.7265625,
+      "number_precision": 0.8532110091743119,
+      "number_gold_total": 128,
+      "number_hyp_total": 109,
       "repetition_flagged_pages": 0
      }
     },
     "holdout": {
      "per_page": [
       {
-       "page_status": "unsupported",
-       "reason_excluded": "unsupported",
+       "page_status": "ok",
+       "hyp_sha256": "1752f1168ae60e8cd1433aa4e081961f28800b0854ec91451a2fb694a8daa7e3",
+       "cer_strict": 0.08758169934640522,
+       "cer_strict_ops": {
+        "insertions": 0,
+        "deletions": 131,
+        "substitutions": 3
+       },
+       "cer_narrow": 0.018129079042784626,
+       "cer_narrow_ops": {
+        "insertions": 0,
+        "deletions": 22,
+        "substitutions": 3
+       },
+       "numbers": {
+        "gold_total": 47,
+        "hyp_total": 19,
+        "recall_hits": 4,
+        "precision_hits": 4,
+        "recall": 0.0851063829787234,
+        "precision": 0.21052631578947367
+       },
+       "numbers_digit_present": {
+        "gold_total": 47,
+        "hits": 46,
+        "recall": 0.9787234042553191
+       },
+       "hyp_chars": 1399,
+       "gold_chars": 1530,
+       "repetition_flagged": false,
        "page_id": "byd_ar_2024_p022",
        "page_identity": {
         "source_id": "urn:company-wiki:source:sha256:e9c2d7fdd088e151ccb6c8ad3d95587b2b014b10f2c9731508d23ce07fde4de3",
@@ -1374,8 +1686,36 @@
        }
       },
       {
-       "page_status": "unsupported",
-       "reason_excluded": "unsupported",
+       "page_status": "ok",
+       "hyp_sha256": "35eb9d98bad262e387e0dec1d2bf11b9f0456edeaa39d26dafe516a55c6b971f",
+       "cer_strict": 0.19736842105263158,
+       "cer_strict_ops": {
+        "insertions": 3,
+        "deletions": 11,
+        "substitutions": 1
+       },
+       "cer_narrow": 0.11594202898550725,
+       "cer_narrow_ops": {
+        "insertions": 0,
+        "deletions": 8,
+        "substitutions": 0
+       },
+       "numbers": {
+        "gold_total": 3,
+        "hyp_total": 2,
+        "recall_hits": 2,
+        "precision_hits": 2,
+        "recall": 0.6666666666666666,
+        "precision": 1.0
+       },
+       "numbers_digit_present": {
+        "gold_total": 3,
+        "hits": 2,
+        "recall": 0.6666666666666666
+       },
+       "hyp_chars": 68,
+       "gold_chars": 76,
+       "repetition_flagged": false,
        "page_id": "meituan_ar_2024_p000",
        "page_identity": {
         "source_id": "urn:company-wiki:source:sha256:36eae4d0397187bef187286e394b7d85421eac75f7380d1a95de9f1bfa25e70a",
@@ -1389,8 +1729,36 @@
        }
       },
       {
-       "page_status": "unsupported",
-       "reason_excluded": "unsupported",
+       "page_status": "ok",
+       "hyp_sha256": "6856e3454f52a420dc5a1d115413658337f13d5fcd8ad87ef30f8992f3ee742f",
+       "cer_strict": 0.1019786910197869,
+       "cer_strict_ops": {
+        "insertions": 0,
+        "deletions": 67,
+        "substitutions": 0
+       },
+       "cer_narrow": 0.001692047377326565,
+       "cer_narrow_ops": {
+        "insertions": 0,
+        "deletions": 1,
+        "substitutions": 0
+       },
+       "numbers": {
+        "gold_total": 4,
+        "hyp_total": 3,
+        "recall_hits": 3,
+        "precision_hits": 3,
+        "recall": 0.75,
+        "precision": 1.0
+       },
+       "numbers_digit_present": {
+        "gold_total": 4,
+        "hits": 3,
+        "recall": 0.75
+       },
+       "hyp_chars": 590,
+       "gold_chars": 657,
+       "repetition_flagged": false,
        "page_id": "ir_wanrun_20241104_p002",
        "page_identity": {
         "source_id": "urn:company-wiki:source:sha256:6abdef50aecf03f85e5c5b10299abc4c6442c4d8f1ffe356ba72a421b64f97fc",
@@ -1404,8 +1772,36 @@
        }
       },
       {
-       "page_status": "unsupported",
-       "reason_excluded": "unsupported",
+       "page_status": "ok",
+       "hyp_sha256": "0b71283367799193c87d7405215099c1ca92453f5ab0deae3e688f21bb89784c",
+       "cer_strict": 0.07626208378088077,
+       "cer_strict_ops": {
+        "insertions": 0,
+        "deletions": 71,
+        "substitutions": 0
+       },
+       "cer_narrow": 0.024165707710011506,
+       "cer_narrow_ops": {
+        "insertions": 0,
+        "deletions": 21,
+        "substitutions": 0
+       },
+       "numbers": {
+        "gold_total": 7,
+        "hyp_total": 6,
+        "recall_hits": 6,
+        "precision_hits": 6,
+        "recall": 0.8571428571428571,
+        "precision": 1.0
+       },
+       "numbers_digit_present": {
+        "gold_total": 7,
+        "hits": 6,
+        "recall": 0.8571428571428571
+       },
+       "hyp_chars": 860,
+       "gold_chars": 931,
+       "repetition_flagged": false,
        "page_id": "hrjp_cb_prospectus_p037",
        "page_identity": {
         "source_id": "urn:company-wiki:source:sha256:c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
@@ -1419,8 +1815,8 @@
        }
       },
       {
-       "page_status": "unsupported",
-       "reason_excluded": "unsupported",
+       "page_status": "not_run",
+       "reason_excluded": "not_run",
        "page_id": "bili_call_4q22_en_p003",
        "page_identity": {
         "source_id": "urn:company-wiki:source:sha256:55d3581c9b6e6b4be5793c80d65894a6d998194ba9f5027493d167f84e48d168",
@@ -1435,28 +1831,133 @@
       }
      ],
      "aggregate": {
-      "pages_scored": 0,
+      "pages_scored": 4,
+      "page_status_counts": {
+       "ok": 4,
+       "not_run": 1
+      },
       "pages_failed": [
-       "unsupported",
-       "unsupported",
-       "unsupported",
-       "unsupported",
-       "unsupported"
+       "not_run"
       ],
-      "macro_cer_strict": null,
-      "macro_cer_narrow": null,
-      "micro_cer_strict": null,
-      "micro_cer_narrow": null,
+      "macro_cer_strict": 0.11579772379992612,
+      "macro_cer_narrow": 0.03998221577890749,
+      "micro_cer_strict": 0.08985597996242956,
+      "micro_cer_narrow": 0.017219787100814028,
       "macro_wer": null,
-      "number_recall": null,
-      "number_precision": null,
-      "number_gold_total": 0,
-      "number_hyp_total": 0,
+      "number_recall": 0.2459016393442623,
+      "number_precision": 0.5,
+      "number_gold_total": 61,
+      "number_hyp_total": 30,
       "repetition_flagged_pages": 0
      }
     }
    },
-   "raw_output_file": "raw_x1.json"
+   "upstream_bf16_attempt_evaluation": {
+    "per_page": [
+     {
+      "page_status": "timeout",
+      "hyp_sha256": "2deea39428c4b11dd7445c95711eef1cb3d77c539f4e0277c32669c244fdd8ea",
+      "cer_strict": 0.6761442441054092,
+      "cer_strict_ops": {
+       "insertions": 0,
+       "deletions": 975,
+       "substitutions": 0
+      },
+      "cer_narrow": 0.6597479614529281,
+      "cer_narrow_ops": {
+       "insertions": 0,
+       "deletions": 890,
+       "substitutions": 0
+      },
+      "numbers": {
+       "gold_total": 10,
+       "hyp_total": 1,
+       "recall_hits": 1,
+       "precision_hits": 1,
+       "recall": 0.1,
+       "precision": 1.0
+      },
+      "numbers_digit_present": {
+       "gold_total": 10,
+       "hits": 1,
+       "recall": 0.1
+      },
+      "hyp_chars": 467,
+      "gold_chars": 1442,
+      "repetition_flagged": false,
+      "page_id": "byd_ar_2024_p021"
+     },
+     {
+      "page_status": "not_run",
+      "reason_excluded": "not_run",
+      "page_id": "amec_h1_2026_p009"
+     },
+     {
+      "page_status": "not_run",
+      "reason_excluded": "not_run",
+      "page_id": "amec_h1_2026_p011"
+     },
+     {
+      "page_status": "not_run",
+      "reason_excluded": "not_run",
+      "page_id": "meituan_ar_2024_p011"
+     },
+     {
+      "page_status": "not_run",
+      "reason_excluded": "not_run",
+      "page_id": "ksy_q1_2026_p002"
+     },
+     {
+      "page_status": "not_run",
+      "reason_excluded": "not_run",
+      "page_id": "ksy_q1_2026_p002_synthetic_degraded"
+     },
+     {
+      "page_status": "not_run",
+      "reason_excluded": "not_run",
+      "page_id": "ir_wanrun_20241104_p000"
+     },
+     {
+      "page_status": "not_run",
+      "reason_excluded": "not_run",
+      "page_id": "hrjp_cb_prospectus_p006"
+     },
+     {
+      "page_status": "not_run",
+      "reason_excluded": "not_run",
+      "page_id": "bili_call_4q22_en_p001"
+     }
+    ],
+    "aggregate": {
+     "pages_scored": 1,
+     "page_status_counts": {
+      "timeout": 1,
+      "not_run": 8
+     },
+     "pages_failed": [
+      "not_run",
+      "not_run",
+      "not_run",
+      "not_run",
+      "not_run",
+      "not_run",
+      "not_run",
+      "not_run"
+     ],
+     "macro_cer_strict": 0.6761442441054092,
+     "macro_cer_narrow": 0.6597479614529281,
+     "micro_cer_strict": 0.6761442441054092,
+     "micro_cer_narrow": 0.6171983356449375,
+     "macro_wer": null,
+     "number_recall": 0.1,
+     "number_precision": 1.0,
+     "number_gold_total": 10,
+     "number_hyp_total": 1,
+     "repetition_flagged_pages": 0
+    }
+   },
+   "raw_output_file": "raw_x1.json",
+   "feasibility_record": "x1_feasibility_measured.json"
   },
   "X2": {
    "identity": {
