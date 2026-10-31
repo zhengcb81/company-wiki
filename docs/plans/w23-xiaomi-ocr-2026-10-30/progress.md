@@ -39,3 +39,4 @@
 - 执行：X1F 卡合规 pilot 成功（封面页 69 秒 EOS，job 峰值 2.582<3.895 GiB）；全量 13/14 页全部 EOS 完成，请求时间 1801.6 s,对 1800 s 卡预算超出 0.09%(调度点检查,最后在途页允许完成,如实披露)（第 14 页 not_run budget_exhausted），job 峰值 2.812<3.864 GiB；bf16 原样臂一次尝试 600 s 上游请求超时，242 正确部分 token，未重试。
 - 结果：X1F eval strict CER 0.0860/narrow 0.0376/EN WER 0.1025 vs R0 0.1599/0.1250/0.300；事实判定 eval 76/76+条件 10/10，holdout 31/32+8/8；勾选框/否定句/上标脚注 X1F 全对（R0 结构性丢失）；表格单元格连排→token 召回 0.73 但 digit-present 0.89；0 编造 0 循环；每页 57-235 s vs R0 ~16 s。
 - 交付更新：raw_x1.json（双子臂）、comparison.json/md、fact_scores_x1.json、x1_feasibility_measured.json v3、handoff；markup 归一化纳入 LaTeX $…$/%；新测试（只读映射 roundtrip、LaTeX 规则、完成度感知评价），47/47 绿。
+2026-10-31 X1 独审终验：delta 三轮复核（实质主张全部由审查员独立复现——fp32 无损逐位验证 9 张量、卡限 OS 强制核对、指标末位复算一致、冻结未动、47/47 测试），文档残项全部修复（超跑措辞、loader-sha 措辞、身份重建+provenance note、handoff 哈希钉扎 20/20）。终态 READY_FOR_ROOT（0 OPEN）。交付定稿于 9c1047e5 并推送。
