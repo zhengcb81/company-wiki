@@ -2,15 +2,15 @@
 
 PLAN_ID=w23-xiaomi-ocr-2026-10-30; PWF_PLAN_ROOT=docs/plans.
 
-唯一入口TASK_CARD.md，调查依据SOURCE_NOTES.md。ROOT只预置独立工区与五个seed文件，状态READY_TO_DISPATCH，尚无Xiaomi推理、模型下载或独审。五seed可纳入首次提交。
+唯一入口TASK_CARD.md，调查依据SOURCE_NOTES.md。独立工区自基线de7ffe48推进；样本与gold在引擎输出前冻结（0d24c943）。
 
 ## 阶段
 
-- A 现状/固定revision/资源路线/冻结样本gold：done（见progress.md 2026-10-30 A条目；样本与gold均在引擎输出前冻结）
-- B 比较器TDD/真实baseline/小米pilot：in_progress
-- C 固定样本对照/holdout/清理/真正独立审查：pending
-- 交接并STOP：pending，不把硬件不支持或NOT_RUN冒签准确率比较完成。
+- A 现状/固定revision/资源路线/冻结样本gold：done
+- B 比较器TDD/真实baseline/小米pilot：done（8469df7c）
+- C 固定样本对照/holdout/清理/真正独立审查：done（fde39dfe + 独审NEEDS_FIXES→修复c62ba969）
+- 终审与交接：in_progress（独审复审中）
 
 ## Next Step
 
-B：tools/ocr_comparison 先TDD（CER/WER已知例、缓存键、超时/空回复不计通过、null bbox/confidence、恢复0重复推理），再实现runner与R0/X1 backend，一页pilot（≤180s、峰值≤min(8GiB committed, avail/2)），然后固定样本对照。X2两阶段按资源界，不允许则NOT_RUN。
+独审READY_FOR_ROOT后：删除frozen_pages、写handoff.md/json、push分支、STOP。X1=unsupported（实测cap<最小加载峰值，算术入档）；X2=not_run；最终结论限定为PARTIAL，不冒签准确率比较完成。

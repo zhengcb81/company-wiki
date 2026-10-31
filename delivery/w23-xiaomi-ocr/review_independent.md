@@ -352,3 +352,68 @@ items must be fixed and re-reviewed before READY_FOR_ROOT:
    the "reading-order end" wording for byd/amec/hrjp footer numbers.
 
 — Independent reviewer, 2026-10-30.
+
+---
+
+## Closing re-review (2026-10-31, commit `c62ba969`)
+
+All five OPEN items re-verified against the final code and artifacts; none
+remain open.
+
+1. **Runner passthrough — RESOLVED.** `runner.py` now passes every backend
+   result key through (only `page_id`/`status`/`engine_seconds` are
+   runner-owned). New pipeline test
+   `test_runner_preserves_accounting_fields_end_to_end` locks it; 39/39 tests
+   pass (30 unit + 9 integration). Delivered records confirm:
+   `raw_r0.json` carries `dropped_regions` (8 total) and `recovery_attempts`
+   (3 total) per page; every `raw_x1.json` record now carries
+   `cap_bytes=1,240,171,806 / weight_bytes=1,746,937,856 /
+   minimum_peak_bytes=3,493,875,712` plus the arithmetic string.
+2. **Resource narrative — RESOLVED.** comparison.md §2 cites the recorded
+   per-run caps (0.995 GiB pilot / 0.84 / 1.155 GiB — verified in the run
+   manifests) and the 2 × weight-bytes minimum peak
+   (3,493,875,712 B ≈ 3.25 GiB, now correctly GiB-labeled); the "0.92 GB /
+   入档 pilot_x1.json" wording is gone.
+3. **fact_scores accounting — RESOLVED.** Programmatic check: every gold
+   fact/condition is in exactly one bucket on every page (eval 59/59 facts,
+   holdout 42/42; conditions 10/10 and 8/8). Totals: facts 83 hit / 15
+   partial / 3 miss (eval 48/10/1, holdout 35/5/2); conditions 12 hit /
+   6 miss (eval 8/2, holdout 4/4) — match comparison.md and progress.md.
+   Evidence path now cites `delivery/w23-xiaomi-ocr/raw_r0.json`; the
+   ir_p000 condition entry is now honestly 0/0/0 (gold has no conditions
+   there).
+4. **§5 provenance — RESOLVED.** comparison.md now states the final
+   invocation ran all four arms in-process and explains
+   `comparison_n0.json` as the earlier import-bug workaround.
+5. **Gold corrections — RESOLVED.** `gold.json` gained a dated
+   `post_review_corrections` block; verified programmatically: U+0002 count
+   2→0, PUA U+F052 2→0, U+2611 ×4 in byd_p022, six footer numbers
+   repositioned to reading-order end (fix script committed for audit).
+   `sample_manifest.json` is untouched since the freeze
+   (`git diff 0d24c943 HEAD` on it is empty). Ordering is proven by the
+   re-run's recorded `gold_sha256` matching the corrected file (run
+   00:49:53Z, commit 00:51:49Z). R0 texts are byte-identical between the
+   pre- and post-fix runs (verified), so the "engines not re-run" note is
+   accurate; the re-run regenerated raw records with the new accounting.
+
+**Independent recompute against the corrected gold** (my own Levenshtein and
+number canon, from the re-run `raw_r0.json`): eval macro strict 0.1599 /
+micro 0.1737 / narrow macro 0.1250, numRecall 0.9219 / numPrecision 0.9833
+(128 gold numbers); holdout macro 0.1694 / micro 0.1732 — all match
+`comparison.json` to <1e-6. Final-run latency claim verified (median 15.6 s,
+max 20.2 s). Diff `de7ffe48..HEAD` remains additions-only in the allowed
+areas; no temp dirs, `.w23_cache` unchanged (hub 1.7 GB + 14 frozen pages);
+`handoff.md/json` correctly still absent.
+
+Non-blocking observations for the handoff step:
+- progress.md keeps the superseded C-phase entry as history; the dated
+  2026-10-31 entry documents the corrections — ROOT should read final
+  numbers from comparison.md/comparison.json.
+- The final run's manifest records `branch_commit=fde39dfe` (pre-commit HEAD)
+  with a dirty worktree, but every `code_file_sha256` matches the `c62ba969`
+  files — handoff should record `c62ba969` as the final tested/reviewed
+  commit.
+- Per the card, `.w23_cache/frozen_pages/` (13 MB) can now be deleted after
+  this closing review; keep the hub snapshot.
+
+## Final verdict: **READY_FOR_ROOT** — no remaining [OPEN] items.
