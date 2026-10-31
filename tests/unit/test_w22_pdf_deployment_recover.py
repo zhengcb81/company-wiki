@@ -126,6 +126,36 @@ def test_venv_failure_is_explicit_and_leaves_target_incomplete(tmp_path):
     assert deployment.classify_target(target, plan["plan_sha256"]) in {"EMPTY", "OWNED_INCOMPLETE"}
 
 
+def test_unwritable_receipt_target_fails_loudly_and_never_claims_ready(tmp_path, monkeypatch):
+    """Card fault injection 'unwritable scratch': this tool's scratch is the
+    owned receipt write inside the target. If it fails, deploy must surface
+    the failure and the tree must never classify as ready — a linked tree
+    without a valid receipt is FOREIGN, and a retry fails closed rather than
+    silently adopting unknown content."""
+    target, plan = make_plan(tmp_path)
+    real_write = deployment.write_receipt
+    denied = {"armed": True}
+
+    def deny_first_write(target_path, receipt):
+        if denied["armed"]:
+            denied["armed"] = False
+            raise OSError("injected unwritable receipt target")
+        real_write(target_path, receipt)
+
+    monkeypatch.setattr(deployment, "write_receipt", deny_first_write)
+    with pytest.raises(OSError, match="unwritable"):
+        deploy(plan)
+    # No receipt was written: the linked tree is foreign, never "ready".
+    assert deployment.classify_target(target, plan["plan_sha256"]) == "FOREIGN"
+    # Fail closed on retry: unknown trees are never adopted in place.
+    with pytest.raises(deployment.TargetConflict):
+        deploy(plan)
+    # The planted bytes are untouched by the refusal.
+    row = plan["env_rows"][0]
+    destination = target.joinpath(*row["target"].split("/"))
+    assert os.path.samefile(row["source"], destination)
+
+
 def test_base_python_requirement_is_explicit(tmp_path):
     profile, probe = mini_source(tmp_path)
     with pytest.raises(deployment.DeploymentError, match="base"):

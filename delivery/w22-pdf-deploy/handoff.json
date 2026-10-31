@@ -58,8 +58,8 @@
     },
     {
       "path": "tests/unit/test_w22_pdf_deployment_recover.py",
-      "raw_sha256": "6bf7b1e0d34ba26ab43ad11729bd9af5bee696eeb08f2f4ded7c24d7776b1f97",
-      "lf_sha256": "6bf7b1e0d34ba26ab43ad11729bd9af5bee696eeb08f2f4ded7c24d7776b1f97"
+      "raw_sha256": "98bf06e5c8a99e596cced0fc6228e948f48f31402a79e1cdafba691a9456a449",
+      "lf_sha256": "98bf06e5c8a99e596cced0fc6228e948f48f31402a79e1cdafba691a9456a449"
     },
     {
       "path": "tests/unit/test_w22_pdf_deployment_config.py",
@@ -215,5 +215,17 @@
   },
   "remaining_interface_needs": [],
   "pushed_to_remote": true,
-  "pushed_branch_head": "4d2294a3 (pre-push); pushed_to_remote reflects codex/w22-pdf-deploy-20261030 on origin"
+  "pushed_branch_head": "updated in final push commit; see git log codex/w22-pdf-deploy-20261030",
+  "documentation_only_commits": [
+    "4d2294a3",
+    "b4490e3e"
+  ],
+  "review_finding_closure": {
+    "D1": "fixed e962198c; re-review verified closed",
+    "D2": "fixed ee8138cf (+binding rounds through 2562d3b4); re-review verified closed",
+    "D3": "fixed e962198c; re-review verified closed",
+    "samefile_recovery": "fixed e962198c; reviewer test rebound",
+    "R3_reuse_samefile": "fixed 2562d3b4 per reviewer minimal fix; reviewer verification PASSED",
+    "card_scratch_injection": "post-handoff recheck vs the original card added the explicit 'unwritable receipt target' fault injection test (deployment's scratch equivalent) in tests/unit/test_w22_pdf_deployment_recover.py; 8/8 recover suite passed"
+  }
 }
