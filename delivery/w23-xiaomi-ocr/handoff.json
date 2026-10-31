@@ -11,7 +11,7 @@
   "fde39dfe feat: run W23 comparison with R0 baseline, N0 control and recorded X1/X2 resource bounds",
   "c62ba969 fix: address independent review findings - runner field passthrough, gold char-level corrections, fact accounting"
  ],
- "final_tested_commit": "ca3bbbcb",
+ "final_tested_commit": "PENDING_FINAL",
  "final_reviewed_commit": "ca3bbbcb (delta re-review by the same independent agent, see review_independent.md)",
  "code_file_sha256": {
   "tools/ocr_comparison/__init__.py": {
@@ -59,16 +59,16 @@
    "lf_sha256": "8960c0969883a251020bf04f081db66b3e25e9208979a679b80f951fe57df4eb"
   },
   "tools/ocr_comparison/run_comparison.py": {
-   "raw_sha256": "5510076f6c4119367d36d3e85f10fc7cfd518fb6cdcc28d34b718adaeec34190",
-   "lf_sha256": "5510076f6c4119367d36d3e85f10fc7cfd518fb6cdcc28d34b718adaeec34190"
+   "raw_sha256": "f4a376f803704876c636d7cbbab7a268154544f39832bd7e1d8f3d52d1a1430c",
+   "lf_sha256": "f4a376f803704876c636d7cbbab7a268154544f39832bd7e1d8f3d52d1a1430c"
   },
   "tools/ocr_comparison/runner.py": {
    "raw_sha256": "2e48e4097d52be969b5e2f6417fc9f1837f929ebc68c0e00e44a1e97af904c48",
    "lf_sha256": "2e48e4097d52be969b5e2f6417fc9f1837f929ebc68c0e00e44a1e97af904c48"
   },
   "tests/unit/test_w23_ocr_comparison_metrics.py": {
-   "raw_sha256": "7f648029aa3167d9f7dfa8ecec6bf538cbacc1da277d7c8b481b010c131301b7",
-   "lf_sha256": "7f648029aa3167d9f7dfa8ecec6bf538cbacc1da277d7c8b481b010c131301b7"
+   "raw_sha256": "f713bf276ad58983201b2d2fce706da8facdaea46138e819d70f5b6cd117450b",
+   "lf_sha256": "f713bf276ad58983201b2d2fce706da8facdaea46138e819d70f5b6cd117450b"
   },
   "tests/integration/test_w23_ocr_comparison_entry.py": {
    "raw_sha256": "33f99eb0634b2c54d729ec94c2f6ee88c8623c2f1d03334c1e4a97dc77f10e60",
@@ -109,7 +109,7 @@
   {
    "req": "B TDD comparator",
    "status": "implemented/tested",
-   "evidence": "40/40 tests (31 unit + 9 integration); card-required locks: CER/WER ops, timeout/empty/truncated never pass, dedup numbers, cache-key axes, cache-hit latency, partial-failure batch, output cap, temp-dir cleanup, fault-injection retry, repetition guard, runner field passthrough"
+   "evidence": "41/41 tests (32 unit + 9 integration); card-required locks: CER/WER ops, timeout/empty/truncated never pass, dedup numbers, cache-key axes, cache-hit latency, partial-failure batch, output cap, temp-dir cleanup, fault-injection retry, repetition guard, runner field passthrough"
   },
   {
    "req": "B R0 real production path",
@@ -139,7 +139,7 @@
   {
    "req": "C reporting completeness (self-audit delta, post-review)",
    "status": "implemented/tested",
-   "evidence": "per-page source/page/image_SHA joined into comparison.json + raw files (page_identity_provenance noted); R0 peak memory instrumented once (memwatch_r0_receipt.json, 0.183GB WS / 0.512GB commit); two-column and seal coverage gaps declared in comparison.md; three-run policy documented (R0 texts byte-identical, no output selection)"
+   "evidence": "per-page source/page/image_SHA joined into comparison.json + raw files (page_identity_provenance noted); raw_r0.json restored after the one-page instrumented pilot clobbered it (delta D2), engine fields byte-identical to c62ba969, provenance recorded; raw filenames now per-invocation unique (raw_output_path + test); R0 engine peak memory re-measured with a fresh-interpreter method (memwatch_r0_receipt.json schema /2: 0.671GB WS / 0.988GB commit, supersedes mislabeled /1); two-column and seal coverage gaps declared; three-run policy documented (R0 texts byte-identical, no output selection)"
   },
   {
    "req": "C fact/number/condition human scoring",
@@ -172,7 +172,7 @@
  "commands_and_results": [
   {
    "cmd": "python -m pytest tests/unit/test_w23_ocr_comparison_metrics.py tests/integration/test_w23_ocr_comparison_entry.py -q",
-   "result": "40 passed (31 unit + 9 integration)",
+   "result": "41 passed (32 unit + 9 integration)",
    "time": "final run ~44s",
    "path": "delivery/w23-xiaomi-ocr/test_receipt.txt"
   },

@@ -417,3 +417,140 @@ Non-blocking observations for the handoff step:
   this closing review; keep the hub snapshot.
 
 ## Final verdict: **READY_FOR_ROOT** — no remaining [OPEN] items.
+
+---
+
+# Delta Re-Review (2026-10-31) — self-audit commits `ca3bbbcb` / `d45f23e2`
+
+Independent delta reviewer (not the author). Scope: only the five self-audit
+fixes added after the closing re-review above. Every claim below was
+re-verified first-hand with `PYTHONUTF8=1 C:/Miniconda/python.exe` inside the
+lane worktree; no file under review was modified except this appended section.
+Where a claim depends on the delivered `raw_r0.json`, note that HEAD's copy
+differs from the delivered final-run copy — see D2 — and the final-run copy
+(`c62ba969`, texts verified byte-identical to `fde39dfe`) was used.
+
+### D1. English WER reporting — [OK]
+
+- comparison.md §3 aggregate table now carries the English WER column:
+  eval `0.300 (n=1)`, holdout `0.1917 (n=1)`, with the explicit caveat
+  "English WER covers exactly one page per split … with a single-page
+  denominator it is indicative, not a population estimate", and points at the
+  per-page values. Per-page `wer`/`wer_ops` exist in
+  `comparison.json arms.R0.evaluation` on exactly the two EN pages
+  (`bili_call_4q22_en_p001` wer 0.3, ops i26/d77/s17; `bili_call_4q22_en_p003`
+  wer 0.19170984…, ops i15/d51/s8; all other pages `None`, never 0).
+- Own recompute with `tools.ocr_comparison.metrics.wer` (token-level,
+  lowercase, edge-punctuation strip) against `gold.json` `full_text` and the
+  delivered R0 texts: p001 120/400 = **0.300**, p003 74/386 =
+  **0.191709844…**, operation counts identical to `comparison.json`.
+
+### D2. Per-page identity and raw_r0.json integrity — [OPEN]
+
+- Verified: `page_identity` (source_id / document_id / content_sha256 /
+  pdf_page_index / page_image_sha256 / market / language / genre) matches
+  `docs/plans/w23-xiaomi-ocr-2026-10-30/sample_manifest.json` exactly for all
+  14 pages in `comparison.json` (all four arms, both splits) and in
+  `raw_n0/raw_x1/raw_x2.json` (sampled byd_ar_2024_p021,
+  bili_call_4q22_en_p003, meituan_ar_2024_p011, then swept all pages: 0
+  mismatches). Engine fields of raw_n0/x1/x2 are unchanged vs `c62ba969`
+  (additions-only identity join).
+- **OPEN:** the delivered 14-page `raw_r0.json` no longer exists at HEAD.
+  `run_comparison.py` writes `raw_{arm}.json` derived from `--out`'s
+  directory, so the self-audit session's single-page verification re-run
+  (byd_ar_2024_p021 only) overwrote it. HEAD's `raw_r0.json` holds 1 record
+  from an invocation *later* than the one `comparison.json` records
+  (00:49:53Z): engine_seconds 21.74 vs the final run's 19.88, **no
+  `page_identity`** (0/1) and no `page_identity_provenance` — contradicting
+  the "raw_*.json records now carry page_identity" claim. `comparison.json`
+  `arms.R0.raw_output_file`, comparison.md §3/§5 and handoff.json still cite
+  `raw_r0.json` as per-page evidence, and §3's latency claim (median 15.6 s /
+  cold max 20.2 s) is no longer verifiable from the delivery (I re-verified
+  it against `c62ba969`: median 15.6 / max 20.2 — true at delivery time). The
+  surviving page's text/lines/dimensions are identical to the final run
+  (text sha `20f87913…`).
+- Fix (either): restore the `c62ba969` `raw_r0.json` and re-apply the
+  identity join, or re-run the full R0 arm once into the delivery dir (texts
+  are deterministic — four independent executions verified byte-identical,
+  D4) and re-enrich.
+
+### D3. R0 peak-memory receipt — [OPEN]
+
+- `memwatch_r0_receipt.json` (0.183 GB working set / 0.512 GB commit,
+  byd_ar_2024_p021) claims "LocalOCRAdapter engine in-process … excludes
+  child-process boundary overhead"; comparison.md §5 repeats it as "R0
+  peak-memory instrumented run". The committed reproduction script
+  (`docs/plans/w23-xiaomi-ocr-2026-10-30/memwatch_r0.py`) instead calls
+  `RapidOCRR0.run_page` → production `IsolatedOCRAdapter` → a real native
+  child (`subprocess.Popen` + `_worker_main`); the script's
+  `K32GetProcessMemoryInfo(GetCurrentProcess())` measures the **parent only**.
+- Empirical replication (in-memory, no artifacts written): parent peaks after
+  imports 0.049/0.037 GB (matches the receipt's "before"), after the pdfium
+  render of the 14 pages **0.183/0.512 GB**, and after the engine call
+  **unchanged** — exactly the receipt's numbers. The 0.512 GB commit is the
+  pypdfium2 rendering footprint (pypdfium2 import alone ≈ 376 MB commit); the
+  OCR engine's memory (in the child) was never measured. "Excludes
+  child-process boundary overhead" in fact excludes the entire engine — the
+  same three ONNX sessions the receipt's own note says the child holds. The
+  number is trivially plausible (well under the card caps and the 15.77 GB
+  host RAM) but is not "R0 peak memory with the engine loaded in-process".
+- Fix (either): re-measure by constructing `LocalOCRAdapter` directly
+  in-process, or relabel the receipt honestly as parent-side
+  render/adapter-boundary overhead only, not an engine-peak measurement.
+
+### D4. Coverage-gap declaration and three-run byte-identity — [OK]
+
+- comparison.md §1 declares the missing two-column (双栏) group ("the two-
+  column group is not [covered]") and that "no seal/stamp (印章) pages exist
+  among the frozen documents", explicitly not filled post-freeze;
+  handoff.json `limitations` carries both, plus the single-page WER
+  denominator and the once-only memory measurement caveat (its label is D3's
+  problem; the disclosure itself is present). The three-run policy note lives
+  in handoff.json's reporting-completeness evidence ("R0 texts byte-identical,
+  no output selection"); comparison.md itself discloses the N0 re-run but has
+  no three-run sentence — acceptable, the claim is in the handoff.
+- Claim verified by hashing, not trust: run1 (`fde39dfe`) vs run2
+  (`c62ba969`) — all 14 R0 texts byte-identical; run3 (the ca3bbbcb
+  single-page re-run, current `raw_r0.json`) — byd_ar_2024_p021 identical
+  (sha16 `20f87913338caf8b`); the pilot's `arms.R0.evaluation` `hyp_sha256`
+  equals the final run's for the same page; and this review's own in-process
+  execution reproduced the identical text (a fourth independent
+  confirmation). "No output selection" holds for texts; note the delivered
+  `raw_r0.json` is run3's file (D2).
+
+### D5. Temp-cleanup test lock — [OK]
+
+- `tools/ocr_comparison/run_comparison.py` defines `owned_tmp_dir` (context
+  manager, `shutil.rmtree(..., ignore_errors=True)` on exit) and `main()`
+  executes the entire run inside it. New unit test
+  `test_owned_tmp_dir_always_cleans_up` covers both the normal-exit and the
+  injected-exception path.
+- Re-ran `python -m pytest tests/unit/test_w23_ocr_comparison_metrics.py
+  tests/integration/test_w23_ocr_comparison_entry.py -q -p no:cacheprovider`
+  → **40 passed** (31 unit + 9 integration) in 43.0 s;
+  `delivery/w23-xiaomi-ocr/test_receipt.txt` records 40 passed.
+
+### D6. Consistency — [OK]
+
+- `handoff.json` `final_tested_commit` = `ca3bbbcb`, the commit carrying all
+  five self-audit fixes; `d45f23e2` is docs-only (handoff backfill,
+  `gen_handoff.py`, removal of the three probe `.ps1` leftovers).
+  `final_reviewed_commit` references this delta re-review.
+- `code_file_sha256` spot-check 3/3 (`tools/ocr_comparison/run_comparison.py`,
+  `tools/ocr_comparison/metrics.py`, `tests/unit/test_w23_ocr_comparison_metrics.py`):
+  both raw and CRLF→LF sha256 match the current file contents.
+- `git diff --numstat de7ffe48..HEAD`: additions-only (0 deletions on every
+  file; no net deleted files — the ca3bbbcb probe `.ps1` additions were
+  removed again in `d45f23e2`), all paths inside `delivery/w23-xiaomi-ocr/`,
+  `docs/plans/w23-xiaomi-ocr-2026-10-30/`, `tests/*/test_w23_ocr_comparison_*`,
+  `tools/ocr_comparison/`; `config/local_ocr.json` and all root/production
+  files untouched. Only untracked path: `.w23_cache/` (the declared 1.77 GB
+  HF snapshot asset, not committed — as documented).
+
+## Delta verdict: **NEEDS_FIXES** — OPEN: D2 (delivered 14-page `raw_r0.json`
+destroyed and replaced by the later 1-page re-run; identity join and final-run
+timings lost from the delivery), D3 (memwatch receipt mislabeled: measured
+number is the parent-side pdfium render footprint; the engine ran in the
+isolated child and its peak was never measured). D1, D4, D5, D6 verified
+[OK]. Both fixes are artifact-integrity repairs; no metric result, engine
+quality conclusion, or X1/X2 unsupported verdict is affected by them.

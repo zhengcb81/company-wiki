@@ -1,18 +1,30 @@
 {
- "schema_version": "cwp-ocr-memwatch-receipt/1",
- "purpose": "self-audit gap: R0 peak memory on a representative page (instrumented re-run, not for accuracy)",
+ "schema_version": "cwp-ocr-memwatch-receipt/2",
+ "purpose": "self-audit gap: R0 engine peak memory on a representative page (instrumented run, not for accuracy)",
  "page": "byd_ar_2024_p021",
- "engine": "LocalOCRAdapter engine in-process (same ONNX models/runtime/threads as the IsolatedOCRAdapter child); excludes child-process boundary overhead",
+ "method": "fresh-interpreter child process; process-lifetime peaks cover stdlib baseline + LocalOCRAdapter engine load (three ONNX sessions) + one transcribe; the pypdfium2 page render happened in the parent, so it does not pollute the child's peaks",
+ "excludes": "the IsolatedOCRAdapter child-process boundary overhead; the production child performs the same ONNX work with the same model bytes, so this is the engine footprint, not a whole-request figure",
  "status": "ok",
- "before": {
-  "peak_workingset_bytes": 53026816,
-  "peak_commit_bytes": 40050688
+ "line_count": 49,
+ "engine_seconds": 17.61,
+ "baseline_import": {
+  "peak_workingset_bytes": 17022976,
+  "peak_commit_bytes": 9207808
  },
- "after": {
-  "peak_workingset_bytes": 197013504,
-  "peak_commit_bytes": 549990400
+ "after_import": {
+  "peak_workingset_bytes": 53047296,
+  "peak_commit_bytes": 40562688
  },
- "peak_workingset_gb": 0.183,
- "peak_commit_gb": 0.512,
- "note": "the isolated child holds the same three ONNX sessions; parent-side accounting in the delivered runs records engine_seconds only"
+ "after_engine_load": {
+  "peak_workingset_bytes": 143581184,
+  "peak_commit_bytes": 483864576
+ },
+ "final": {
+  "peak_workingset_bytes": 720424960,
+  "peak_commit_bytes": 1060950016
+ },
+ "engine_peak_workingset_gb": 0.671,
+ "engine_peak_commit_gb": 0.988,
+ "engine_delta_over_import_commit_gb": 0.95,
+ "supersedes": "cwp-ocr-memwatch-receipt/1 (mislabeled: measured the parent process whose peak was the pdfium render; delta review OPEN D3)"
 }

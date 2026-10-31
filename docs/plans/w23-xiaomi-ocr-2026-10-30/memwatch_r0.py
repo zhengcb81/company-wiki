@@ -1,77 +1,72 @@
-"""One-page instrumented R0 memory measurement (self-audit gap: peak RAM).
+"""Driver for the R0 engine-peak measurement (delta review OPEN D3).
 
-Runs the same engine/runtime as the isolated child (LocalOCRAdapter via the
-R0 backend wrapper's config path) in-process and reads this process's peak
-working set / peak commit around it.  Labelled honestly: it excludes the
-child-process boundary overhead of IsolatedOCRAdapter; the production child
-does the same ONNX work with the same model bytes.
+Renders one representative page with pypdfium2 in THIS process, then launches
+a fresh interpreter (memwatch_r0_engine_child.py) whose process-lifetime peaks
+measure the R0 engine (ONNX det/cls/rec sessions) without render pollution.
+Writes the corrected receipt over the mislabeled one.
 """
-import ctypes
 import json
 import shutil
+import subprocess
 import sys
 import tempfile
-from ctypes import wintypes
 from pathlib import Path
 
 REPO = Path(__file__).resolve().parents[3]
 sys.path.insert(0, str(REPO))
 
-
-class PMC(ctypes.Structure):
-    _fields_ = [
-        ("cb", wintypes.DWORD), ("PageFaultCount", wintypes.DWORD),
-        ("PeakWorkingSetSize", ctypes.c_size_t), ("WorkingSetSize", ctypes.c_size_t),
-        ("Q1", ctypes.c_size_t), ("Q2", ctypes.c_size_t),
-        ("Q3", ctypes.c_size_t), ("Q4", ctypes.c_size_t),
-        ("PagefileUsage", ctypes.c_size_t), ("PeakPagefileUsage", ctypes.c_size_t),
-    ]
-
-
-k32 = ctypes.windll.kernel32
-k32.GetCurrentProcess.restype = ctypes.c_void_p
-k32.K32GetProcessMemoryInfo.argtypes = [ctypes.c_void_p, ctypes.POINTER(PMC), wintypes.DWORD]
-k32.K32GetProcessMemoryInfo.restype = wintypes.BOOL
-
-
-def peaks():
-    pmc = PMC()
-    pmc.cb = ctypes.sizeof(PMC)
-    assert k32.K32GetProcessMemoryInfo(k32.GetCurrentProcess(), ctypes.byref(pmc), ctypes.sizeof(PMC))
-    return {"peak_workingset_bytes": pmc.PeakWorkingSetSize,
-            "peak_commit_bytes": pmc.PeakPagefileUsage}
+from tools.ocr_comparison.render_pages import render_pages  # noqa: E402
 
 
 def main():
-    from tools.ocr_comparison.backends.rapidocr_r0 import RapidOCRR0, load_production_config
-    from tools.ocr_comparison.render_pages import render_pages
-
-    baseline = peaks()
-    cfg = load_production_config(REPO / "config" / "local_ocr.json")
-    backend = RapidOCRR0(cfg, deadline_seconds=180.0)
-    tmp = Path(tempfile.mkdtemp(prefix="w23-mem-"))
+    tmp = Path(tempfile.mkdtemp(prefix="w23-mem-engine-"))
     try:
-        rendered = render_pages(REPO / "docs/plans/w23-xiaomi-ocr-2026-10-30/sample_manifest.json", tmp)
+        rendered = render_pages(
+            REPO / "docs/plans/w23-xiaomi-ocr-2026-10-30/sample_manifest.json", tmp)
         png = next(r for r in rendered if r["page_id"] == "byd_ar_2024_p021")["png"]
-        out = backend.run_page(png)
+        proc = subprocess.run(
+            [sys.executable, str(REPO / "docs/plans/w23-xiaomi-ocr-2026-10-30/memwatch_r0_engine_child.py"), png],
+            capture_output=True, text=True, encoding="utf-8", timeout=300,
+            cwd=str(REPO), env={"PYTHONUTF8": "1", "SYSTEMROOT": __import__("os").environ["SYSTEMROOT"],
+                                 "USERPROFILE": __import__("os").environ["USERPROFILE"]},
+        )
+        if proc.returncode != 0:
+            raise RuntimeError(f"child failed: {proc.stderr[-800:]}")
+        child = json.loads(proc.stdout.strip().splitlines()[-1])
     finally:
         shutil.rmtree(tmp, ignore_errors=True)
-    after = peaks()
+
     receipt = {
-        "schema_version": "cwp-ocr-memwatch-receipt/1",
-        "purpose": "self-audit gap: R0 peak memory on a representative page (instrumented re-run, not for accuracy)",
+        "schema_version": "cwp-ocr-memwatch-receipt/2",
+        "purpose": "self-audit gap: R0 engine peak memory on a representative page (instrumented run, not for accuracy)",
         "page": "byd_ar_2024_p021",
-        "engine": "LocalOCRAdapter engine in-process (same ONNX models/runtime/threads as the IsolatedOCRAdapter child); excludes child-process boundary overhead",
-        "status": out["status"],
-        "before": baseline,
-        "after": after,
-        "peak_workingset_gb": round(after["peak_workingset_bytes"] / 1024 ** 3, 3),
-        "peak_commit_gb": round(after["peak_commit_bytes"] / 1024 ** 3, 3),
-        "note": "the isolated child holds the same three ONNX sessions; parent-side accounting in the delivered runs records engine_seconds only",
+        "method": (
+            "fresh-interpreter child process; process-lifetime peaks cover stdlib baseline + "
+            "LocalOCRAdapter engine load (three ONNX sessions) + one transcribe; the pypdfium2 "
+            "page render happened in the parent, so it does not pollute the child's peaks"
+        ),
+        "excludes": (
+            "the IsolatedOCRAdapter child-process boundary overhead; the production child "
+            "performs the same ONNX work with the same model bytes, so this is the engine "
+            "footprint, not a whole-request figure"
+        ),
+        "status": child["status"],
+        "line_count": child["line_count"],
+        "engine_seconds": child["engine_seconds"],
+        "baseline_import": child["baseline"],
+        "after_import": child["after_import"],
+        "after_engine_load": child["after_engine_load"],
+        "final": child["final"],
+        "engine_peak_workingset_gb": child["engine_peak_workingset_gb"],
+        "engine_peak_commit_gb": child["engine_peak_commit_gb"],
+        "engine_delta_over_import_commit_gb": child["engine_delta_over_import_commit_gb"],
+        "supersedes": "cwp-ocr-memwatch-receipt/1 (mislabeled: measured the parent process whose peak was the pdfium render; delta review OPEN D3)",
     }
     out_path = REPO / "delivery/w23-xiaomi-ocr/memwatch_r0_receipt.json"
     out_path.write_text(json.dumps(receipt, ensure_ascii=False, indent=1), encoding="utf-8")
-    print(json.dumps({k: receipt[k] for k in ("status", "peak_workingset_gb", "peak_commit_gb")}, indent=1))
+    print(json.dumps({k: receipt[k] for k in (
+        "status", "line_count", "engine_peak_workingset_gb", "engine_peak_commit_gb",
+        "engine_delta_over_import_commit_gb")}, indent=1))
     print("WROTE", out_path)
 
 

@@ -46,6 +46,17 @@ class owned_tmp_dir:
             shutil.rmtree(self.path, ignore_errors=True)
 
 
+_RAW_SEQ = __import__("itertools").count()
+
+
+def raw_output_path(out_dir: Path, arm: str) -> Path:
+    """Per-invocation raw filename: two runs sharing an out dir must never
+    clobber each other's per-page records (delta-review finding D2).  Unique
+    via UTC stamp + pid + a strictly monotonic per-process counter."""
+    stamp = time.strftime("%Y%m%dT%H%M%S", time.gmtime())
+    return out_dir / f"raw_{arm.lower()}_{stamp}_{os.getpid()}_{next(_RAW_SEQ)}.json"
+
+
 def _plan_dir(repo: Path) -> Path:
     return repo / "docs" / "plans" / "w23-xiaomi-ocr-2026-10-30"
 
@@ -190,7 +201,7 @@ def main(argv: list[str] | None = None) -> int:
             split = evaluate_split(gold, records, manifest, arm=arm)
             out_dir = Path(args.out).parent
             out_dir.mkdir(parents=True, exist_ok=True)
-            raw_path = out_dir / f"raw_{arm.lower()}.json"
+            raw_path = raw_output_path(out_dir, arm)
             raw_path.write_text(
                 json.dumps({"records": records, "summary": summary}, ensure_ascii=False, indent=1),
                 encoding="utf-8",

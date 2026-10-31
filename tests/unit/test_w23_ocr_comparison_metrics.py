@@ -313,6 +313,21 @@ def test_owned_tmp_dir_always_cleans_up():
     assert not seen[1].exists()
 
 
+def test_raw_output_names_never_collide_across_invocations():
+    """Delta-review D2 lock: two invocations sharing an out dir must not
+    overwrite each other's per-page raw records."""
+    import sys
+
+    if str(REPO) not in sys.path:
+        sys.path.insert(0, str(REPO))
+    from tools.ocr_comparison.run_comparison import raw_output_path
+
+    first = raw_output_path(REPO / "delivery" / "w23-xiaomi-ocr", "R0")
+    second = raw_output_path(REPO / "delivery" / "w23-xiaomi-ocr", "R0")
+    assert first != second
+    assert first.name.startswith("raw_r0_")
+
+
 def test_truncation_marker_repetition_guard_flags_loops():
     from tools.ocr_comparison.backends.base import detect_repetition
 
