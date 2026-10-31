@@ -1,7 +1,7 @@
 # W23-XIAOMI-OCR Handoff (harness-handoff/1)
 
 - workdir `C:/Users/郑曾波/Projects/company-wiki-w23-xiaomi-ocr` · branch `codex/w23-xiaomi-ocr-20261030` · base `de7ffe48`
-- final tested & reviewed commit: **a2288b4c** (X1 execution chain 845972fc → a2288b4c; earlier R0 chain 0d24c943 → c62ba969) · **47 tests** (38 unit + 9 integration, `test_receipt.txt`; the CI domain loads no models and touches no network — torch itself is imported only by the read-only-mapping roundtrip test)
+- final tested & reviewed commit: **60d26fd8** (X1 execution chain 845972fc → 60d26fd8; earlier R0 chain 0d24c943 → c62ba969) · **47 tests** (38 unit + 9 integration, `test_receipt.txt`; the CI domain loads no models and touches no network — torch itself is imported only by the read-only-mapping roundtrip test)
 - overall status: **PARTIAL** — R0/N0 complete and independently verified; Xiaomi executed via the declared X1F variant (13/14 pages, all EOS, in-bounds); upstream-bf16 arm timeout with partial text; X2 not_run; one holdout page unattempted (budget).
 
 ## What ROOT receives

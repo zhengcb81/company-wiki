@@ -1958,7 +1958,7 @@
    },
    "raw_output_file": "raw_x1.json",
    "feasibility_record": "x1_feasibility_measured.json",
-   "identity_provenance_note": "identity regenerated 2026-10-31 with the corrected weights_loading wording (the loader records no sha; the fp32 file sha256 lives in x1_feasibility_measured.json and the handoff assets). The five x1 receipt JSONs keep their original recorded identity strings verbatim as run records; the difference is wording only - the executed behavior and model bytes are unchanged (delta review X8/X11)."
+   "identity_provenance_note": "identity regenerated 2026-10-31 with the corrected weights_loading wording (the loader records no sha; the fp32 file sha256 lives in x1_feasibility_measured.json and the handoff assets). The ten x1 receipt JSONs keep their original recorded identity strings verbatim as run records; the difference is wording only - the executed behavior and model bytes are unchanged (delta review X8/X11)."
   },
   "X2": {
    "identity": {

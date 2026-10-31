@@ -869,3 +869,142 @@ wording from `backends/xiaomi_x1.py` and regenerate comparison.json or annotate
 the recorded manifests, (3) update handoff.md lines 4 and 9 (and optionally
 handoff.json review evidence) to a2288b4c / 47 tests with the torch caveat. No
 re-execution of any run is required.
+
+# X1 delta re-verification of fix commit `e9956441` (2026-10-31)
+
+Scope: the three residual claims only, verified against HEAD = `e9956441`
+(worktree clean except untracked `.w23_cache/`; `git diff e9956441` empty, so
+the worktree is byte-identical to the commit).
+
+**Drift check — discrepancy in the claim itself.** `git diff 1071b743..e9956441`
+touches exactly FIVE files: `delivery/w23-xiaomi-ocr/{comparison.md, handoff.md,
+review_independent.md, x1_feasibility_measured.json}` and
+`tools/ocr_comparison/backends/xiaomi_x1.py`. The claimed six-file list
+included `delivery/w23-xiaomi-ocr/comparison.json` — it is NOT in the commit.
+The review_independent.md change is additions-only (the reviewer's e9956441-
+predecessor section committed verbatim).
+
+### (1) Overshoot wording in comparison.md §1 and x1_feasibility_measured.json — [OK]
+
+comparison.md line 10 now reads "13/14 pages with EOS, 1801.6 s of request time
+against the 1800 s card budget (+0.09% in-flight overshoot, disclosed)" —
+verified verbatim at HEAD. `card_compliance.batch` now reads "single
+concurrency; total request time 1801.6 s against the 1800 s budget (+0.09%
+in-flight overshoot: budget enforcement fires at dispatch, so the last
+in-flight page was allowed to finish — disclosed); the 14th page is not_run
+budget_exhausted" — verified verbatim. No "inside the card budget"/"under the
+1800 s" claim remains in either file.
+
+### (2) Loader-sha wording — source fixed, comparison.json claim FALSE — [OPEN]
+
+- Source VERIFIED: `backends/xiaomi_x1.py` mapped-f32 identity now states the
+  fp32 sha256 "is recorded in the run receipt and x1_feasibility_measured.json,
+  not by the loader" — accurate (the loader records no sha; reviewer confirmed
+  in the previous round that the sha lives in the feasibility record and
+  handoff assets).
+- comparison.json NOT DONE: the file was not touched by the commit; its
+  `arms.X1.identity.weights_loading` (line 1190) still carries the old "sha256
+  of that file recorded by the loader" string, and no `identity_provenance_note`
+  exists anywhere in delivery/, docs/plans/, or tools/ (grep-verified). The
+  claim that the delivered comparison.json was "regenerated with the corrected
+  builder and carries an identity_provenance_note" is false. The five x1
+  receipt JSONs keeping their original strings verbatim is consistent with the
+  declared run-record policy — but the note that declares that policy does not
+  exist, so comparison.json (the primary machine manifest ROOT reads) still
+  carries the inaccurate wording with no annotation.
+
+### (3) handoff.md header — [OK]
+
+Line 4 now reads "final tested & reviewed commit: **a2288b4c** (X1 execution
+chain 845972fc → a2288b4c; earlier R0 chain 0d24c943 → c62ba969) · **47 tests**
+(38 unit + 9 integration, `test_receipt.txt`; … torch itself is imported only
+by the read-only-mapping roundtrip test)" and the ROOT-receives bullet says 47
+tests with the same caveat. Matches the verified facts (reviewer re-ran the
+suites at this commit: 47 passed).
+
+### X11. New defect introduced by this commit: stale handoff hash pin — [OPEN]
+
+The commit modified `tools/ocr_comparison/backends/xiaomi_x1.py` — one of the
+20 files pinned in `handoff.json` `code_file_sha256` — without regenerating
+handoff.json. Reviewer re-hashed all 20 pinned files against disk at HEAD:
+19/20 match; `xiaomi_x1.py` is stale (pinned `4cd389f8…` vs disk `184f6779…`).
+This is exactly the X8-class defect the pinning exists to prevent: the handoff
+no longer describes the delivered identity-builder bytes. Tests are unaffected
+(re-run: 47 passed — the change is wording-only inside an identity string).
+
+## Final verdict: **NEEDS_FIXES**
+
+Claims (1) and (3) are genuinely fixed and verified. Claim (2) is fixed in the
+source but its comparison.json half (regeneration + provenance note) was not
+done, and the commit introduced a stale `code_file_sha256` pin for the one code
+file it changed. Remaining work, all provenance-level: (a) regenerate
+`comparison.json` `arms.X1.identity` with the corrected builder — or add the
+promised `identity_provenance_note` explaining the receipts' verbatim strings;
+(b) regenerate `handoff.json` (gen_handoff.py, final commit id) so
+`code_file_sha256` matches disk. No re-execution of any OCR run is required;
+no metric, receipt, or frozen artifact is affected.
+
+# X1 delta re-verification of fix commits `60d26fd8` + `1432022d` (2026-10-31) — final
+
+Verified against HEAD = `1432022d`; worktree clean except untracked
+`.w23_cache/` and the reviewer's own uncommitted review-file appends (see
+drift note).
+
+**Drift check — one inaccuracy in the claim.** `git diff e9956441..1432022d`
+touches exactly THREE files: `delivery/w23-xiaomi-ocr/{comparison.json,
+handoff.json}` and `docs/plans/w23-xiaomi-ocr-2026-10-30/gen_handoff.py`.
+The claimed list included `review_independent.md` — it is NOT in the commit
+range at all; this reviewer's two re-verification sections (for `1071b743`
+was committed at `e9956441`; for `e9956441` and this final round) remain
+UNCOMMITTED in the worktree. Follow-up: commit them so the review-of-record
+on the branch is complete. All three committed diffs are surgical:
+comparison.json 2 hunks (identity + note), handoff.json 2 hunks
+(final_tested_commit + xiaomi_x1.py pin), gen_handoff.py 1 line.
+
+### (a) comparison.json identity regeneration + provenance note — [OK]
+
+- `arms.X1.identity.weights_loading` now carries the corrected wording and is
+  VERBATIM-EQUAL to the corrected builder's string (reviewer instantiated
+  `XiaomiX1(weights_mode='mapped-f32')` and compared: exact match); the old
+  "recorded by the loader" string is gone from comparison.json.
+- `arms.X1.identity_provenance_note` present, declaring exactly the claimed
+  policy (receipts keep original recorded identity strings verbatim as run
+  records; wording-only difference; executed behavior and model bytes
+  unchanged; delta review X8/X11).
+- Nothing else in comparison.json changed (2-hunk diff); aggregates are
+  byte-identical to the reviewer's round-1 recomputation (macro_cer_strict
+  0.08603821432538125, micro 0.07341772151898734, macro_cer_narrow
+  0.03761177921599788, macro_wer 0.1025, number_recall 0.7265625).
+- Receipts untouched: none of the 10 x1 receipt JSONs changed in the range, so
+  every one keeps its original recorded string verbatim, as the note declares.
+  Nit (cosmetic): the note says "the five x1 receipt JSONs"; there are ten x1
+  receipt JSONs, four of which carried the old mapped-f32 wording. The policy
+  statement itself is true for all ten.
+
+### (b) handoff.json regeneration — [OK]
+
+- `final_tested_commit` = `60d26fd861f10dde8e9d84846de0b7f01dfdd11b`.
+- Reviewer re-hashed all 20 pinned files against disk at HEAD: raw_sha256
+  20/20 match AND lf_sha256 20/20 match. The previously stale
+  `xiaomi_x1.py` pin is fixed (pinned raw `184f6779…` = disk raw hash; the
+  author's LF-normalization claim also holds — the pin matches under both
+  interpretations).
+- `gen_handoff.py` updated so a future regeneration reproduces this state.
+
+## Final verdict: **READY_FOR_ROOT**
+
+Both remaining items are genuinely fixed and mechanically verified: the
+delivered machine manifest no longer carries the inaccurate loader-sha wording
+and now declares the receipt provenance policy; the handoff hash pin covers
+all 20 code/test files at HEAD under both raw and LF-normalized hashing, with
+final_tested_commit at the true final commit. Combined with the earlier rounds
+of this delta review (bit-exact fp32 widening; OS-enforced card caps with
+honest not_run/timeout records; aggregates reproducing to the last digit;
+freezes untouched; truthful variant/timeout labeling; budget overshoot
+disclosed everywhere), no [OPEN] item remains.
+
+Non-blocking follow-ups (housekeeping only): (1) commit the reviewer's
+uncommitted review-file sections so review_independent.md on the branch
+carries the complete delta record; (2) cosmetic: align the `final_reviewed_commit`
+field / handoff.md line-4 pointer with the 60d26fd8 final state, and fix the
+"five receipts" count in the provenance note to "all x1 receipt JSONs".
