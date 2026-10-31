@@ -169,7 +169,8 @@ handoff = {
     ),
     "limitations": [
         "no real scanned pages in the catalog; one declared synthetic_degradation page (X1F scored it identically to its clean twin)",
-        "no two-column (双栏) page in the frozen catalog slice; no seal/stamp page",
+        "no two-column (双栏) page in the frozen catalog slice; no seal/stamp page; no formula content in the frozen pages, so the card's minimal formula negative-control is absent (no formula OCR attempted)",
+        "originals untouched: all 7 source PDF mtimes predate the session start (sha match verified by the reviewer)",
         "X1F is a declared load/compute variant (exact fp32 upcast, read-only mapping, manual greedy decode) on one CPU; the upstream-exact bf16 arm timed out; X2 never ran",
         "one holdout page (bili_call_4q22_en_p003) never attempted: 30-minute card budget exhausted",
         "X1F has no boxes or confidences: bbox/confidence null, locator_quality none; EvidenceSpan alignment untouched",
