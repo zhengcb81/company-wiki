@@ -214,5 +214,6 @@
     "old_receipts": "W21/root receipts untouched"
   },
   "remaining_interface_needs": [],
-  "pushed_to_remote": false
+  "pushed_to_remote": true,
+  "pushed_branch_head": "4d2294a3 (pre-push); pushed_to_remote reflects codex/w22-pdf-deploy-20261030 on origin"
 }
