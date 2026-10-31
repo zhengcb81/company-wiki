@@ -438,11 +438,11 @@ def test_real_structure_work_budget_stop_cannot_certify_financial_only_skip(monk
     assert selected.coverage_complete is False
 
 
-def test_large_actual_candidate_pool_keeps_all_three_important_late_scopes(monkeypatch):
-    # This is a supplied ReadingPlan seam, not a parser/layout acceptance test.
-    # All 20,000 canonical originals and actual per-unit policies are presented;
-    # a bounded planner must first compare the complete candidate population.
-    count = 20000
+def test_actual_reading_profiles_preserve_important_late_scope_priority(monkeypatch):
+    # Exercise actual source interpretation and priority propagation on material
+    # that fits its bounded native/semantic owners. Scale belongs to the
+    # already-assessed candidate frontier test below, not an unbounded parser.
+    count = 64
     units = tuple(_unit(f"Our product {index} service expanded to a new operating region during the reporting period.",
                         page=1 + index // 25, paragraph=index % 25) for index in range(count))
     document = _document(*units)
@@ -467,6 +467,87 @@ def test_large_actual_candidate_pool_keeps_all_three_important_late_scopes(monke
     assert selected.candidate_count == count
     assert selected.omitted_candidate_count == count - 3
     assert selected.status == "partial"
+    trace = selected.reading_context["selection_trace"]
+    assert trace["admission"]["admitted_count"] == count
+    assert trace["withheld"]["count"] == 0
+    assert not any(row["code"] == "work_budget_exhausted" for row in selected.selection_diagnostics)
     assert len(json.dumps(selected.reading_context, ensure_ascii=False).encode()) < 64000, (
         "Deferred diagnostics must use bounded examples and exact totals, not persist the complete candidate inventory"
     )
+
+
+def test_large_assessed_candidate_frontier_keeps_all_three_important_late_scopes():
+    from company_wiki.source_catalog.narrative_budget import READING_BUDGET_POLICY
+    from company_wiki.source_catalog.narrative_candidates import EvidenceCandidate
+    from company_wiki.source_catalog.narrative_finalize import finalize_selection
+    from company_wiki.source_catalog.narrative_routing import DocumentRoute
+
+    # All 20,000 entries really are assessed candidates at this layer. Keep the
+    # complete frontier, canonical IDs, actual planner, spans and exact counts.
+    count = 20000
+    units = tuple(_unit(
+        f"Our product {index} service expanded to a new operating region during the reporting period.",
+        page=1 + index // 25, paragraph=index % 25,
+    ) for index in range(count))
+    candidates = tuple(EvidenceCandidate(unit, ("core_business",), ("reading_plan",), 3) for unit in units)
+    metadata = {unit.unit_id: {
+        "priority": 1 if index >= count - 3 else 3,
+        "topics": ("core_business",), "value_band": "meaningful_fact",
+        "support_use": "support", "required": (), "context_only": False,
+    } for index, unit in enumerate(units)}
+    selected = finalize_selection(
+        _document(*units), DocumentRoute("annual_report", 3, False), candidates,
+        group_ids={}, heading_pattern=_reading_port()._NEVER_HEADING,
+        dropped_financial_count=0, budget_policy=READING_BUDGET_POLICY,
+        reading_metadata=metadata, max_chars=48000,
+    )
+    assert _texts(selected) == {unit.raw_text for unit in units[-3:]}
+    assert selected.candidate_count == count
+    assert selected.omitted_candidate_count == count - 3
+    assert selected.status == "partial"
+    diagnostics = selected.selection_diagnostics
+    assert not any(row["code"] == "work_budget_exhausted" for row in diagnostics)
+    assert sum(row["count"] for row in diagnostics) == count - 3
+    assert len(json.dumps(diagnostics, ensure_ascii=False).encode()) < 64000
+
+
+def test_unassessed_source_work_is_explicitly_partial(monkeypatch):
+    from company_wiki.document_understanding.layout_hints.contract import WorkBudget
+
+    count = 128
+    units = tuple(_unit(
+        f"Our product {index} service expanded to a new operating region during the reporting period.",
+        page=1 + index // 25, paragraph=index % 25,
+    ) for index in range(count))
+    pipeline = understand_units(units[:1], source_id=SOURCE_ID, source_sha256=SOURCE_SHA,
+                               title="Annual report", language="en")
+    pipeline["observation"] = build_observation(units, source_id=SOURCE_ID, source_sha256=SOURCE_SHA,
+                                               title="Annual report", language="en")
+    base = pipeline["reading_plan"]["unit_profiles"][units[0].unit_id]
+    pipeline["reading_plan"]["unit_profiles"] = {
+        unit.unit_id: {**base, "section_role": "business", "priority": 1}
+        for unit in units
+    }
+    pipeline["packages"].update(packages=[_package(str(i), u) for i, u in enumerate(units)],
+                                package_count=count)
+    pipeline["structure"]["coverage"].update(complete=True, deferred_unit_ids=[], unassigned_unit_ids=[])
+    pipeline["diagnostics"] = []
+    port = _reading_port()
+    monkeypatch.setattr(port, "understand_units", lambda *_args, **_kwargs: pipeline)
+    budget = WorkBudget(1000000)
+    selected = port.select_reading_evidence(_document(*units), title="Annual report",
+                                          existing_kind="annual_report", max_selected=3,
+                                          work_budget=budget)
+    assert budget.exhausted and budget.used <= budget.max_work_units
+    assert selected.status in {"partial", "needs_review"}
+    assert not selected.coverage_complete
+    assert any(row["code"] == "work_budget_exhausted" for row in selected.selection_diagnostics)
+    trace = selected.reading_context["selection_trace"]
+    assert trace["source_unit_count"] == count
+    assert trace["admission"]["count"] < count
+    assert trace["withheld"]["count"] > 0
+    assert trace["selected"]["count"] == len(selected.evidence_spans)
+    assert selected.omitted_candidate_count == selected.candidate_count - len(selected.evidence_spans)
+    # The legacy outer candidate total may include known withheld source IDs;
+    # actual source admission and missing work remain separately observable.
+    assert len(json.dumps(selected.reading_context, ensure_ascii=False).encode()) < 64000

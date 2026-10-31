@@ -13,13 +13,10 @@ import re
 
 from . import layout as layout_mod
 from .contract import ObservationUnit
+from ..source_turn_markers import explicit_qa_marker, ROLE_INVESTOR, ROLE_MANAGEMENT
 
-_QUESTION_MARK = re.compile(r"^\s*(?:\d{1,3}\s*[、.．]\s*)?(?:问|问题)\s*[:：]")
-_ANSWER_MARK = re.compile(r"^\s*(?:答复|回答|答|回复)\s*[:：]")
 _SENTENCE_END = re.compile(r"[。！？!?；;]+[”’\"'）】》」』]*")
 
-ROLE_INVESTOR = "investor_question"
-ROLE_MANAGEMENT = "management"
 
 
 @dataclass
@@ -54,7 +51,7 @@ def _is_question_start(unit: ObservationUnit) -> bool:
         return True
     if unit.role == ROLE_MANAGEMENT or unit.speaker in {"management", "company"}:
         return False
-    if _QUESTION_MARK.match(unit.text):
+    if explicit_qa_marker(unit.text) == ROLE_INVESTOR:
         return True
     if unit.speaker and unit.speaker.casefold() in {"investor", "analyst", "questioner"}:
         return True
@@ -66,7 +63,7 @@ def _is_answer_start(unit: ObservationUnit) -> bool:
         return False
     if unit.role == ROLE_INVESTOR or unit.speaker in {"investor", "analyst", "questioner"}:
         return False
-    if _ANSWER_MARK.match(unit.text):
+    if explicit_qa_marker(unit.text) == ROLE_MANAGEMENT:
         return True
     if unit.speaker and unit.speaker.casefold() in {"management", "company", "speaker"}:
         # Speaker attribution is source evidence. A manager's rhetorical
@@ -188,10 +185,11 @@ def build_qa_exchanges(
 
         # An open question whose sentence ran off the bottom of the page keeps
         # its tail, even when that tail carries no marker of its own.  This is
-        # checked first so the tail is not mistaken for a fresh question.
+        # A positively marked new question is a boundary, never that tail.
         if (
             current is not None
             and not is_answer
+            and not is_question
             and not current.answer_ids
             and _tail_open(current, by_id)
             and not layout_mod.is_heading(unit)
@@ -245,6 +243,15 @@ def build_qa_exchanges(
                 continue
             if unit.is_table_furniture:
                 continue
+            if current.member_ids and unit.role == 'company_filing':
+                last_body = by_id[current.member_ids[-1]]
+                overlap = layout_mod.visual_overlap(last_body, unit)
+                if ((unit.page == last_body.page and overlap is not None and overlap <= 0)
+                        or not layout_mod.same_column(last_body, unit)):
+                    # Unmarked side-column text is not an answer continuation.
+                    # Keep the source unit for its own structure/package owner;
+                    # do not promote an IR form label or another lane to speech.
+                    continue
             # A question that has not been answered yet only keeps absorbing
             # text when its own sentence is still unfinished (the IR question
             # that runs off the bottom of a page).  Otherwise a new topic

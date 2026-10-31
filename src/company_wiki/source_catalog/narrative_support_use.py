@@ -12,18 +12,22 @@ from .n6_candidate_operating_facts import OperatingFact
 from .narrative_business_disclosures import UNRESOLVED_READING_REASONS
 from .narrative_source_purpose import NON_OPERATING_PURPOSES, descriptive_operating_relation
 from company_wiki.document_understanding.operating_states.assertion_roles import SourceAssertionRoles, prepare_source_assertions
+from .narrative_source_passage import SourcePassageCapability
 
 SUPPORT_USE_SCAN_PASSES = 8
 
 
 def source_narrative_relevance(*, fact: OperatingFact,
                                source_roles: SourceAssertionRoles | None,
-                               table_qualified: bool = False) -> bool:
+                               table_qualified: bool = False,
+                               passage: SourcePassageCapability | None = None) -> bool:
     """Independent offer relevance from already observed source evidence.
 
     Readability and numeric uncertainty alone confer no operating relevance.
     This consumes the shared assessment; it never scans or classifies text.
     """
+    if passage is not None:
+        return table_qualified or passage.relevant
     if fact.purpose in NON_OPERATING_PURPOSES or fact.purpose == 'unassessed':
         return False
     if source_roles is not None and source_roles.independent_payload is False:
@@ -38,12 +42,20 @@ def source_support_use(text: str, *, fact: OperatingFact, financial_only: bool |
                        source_relations: Mapping[str, Any] | None = None,
                        support_unit_ids: Sequence[str] = (),
                        source_roles: SourceAssertionRoles | None = None,
-                       numeric_ambiguous: bool | None = None) -> tuple[str, str]:
+                       numeric_ambiguous: bool | None = None,
+                       passage: SourcePassageCapability | None = None) -> tuple[str, str]:
     """Describe one source scope; neither score nor unknown purpose is a gate."""
     if context_role:
         return "context_only", "attribution_context"
     if table_qualified:
         return "support", "qualified_operating_table"
+    if passage is not None:
+        if passage.use == 'support' and numeric_ambiguous is True:
+            # The exact scope's structural observation takes precedence over
+            # general prose readability. Keep its relevance for source offer;
+            # do not manufacture numerical support or call it finance-only.
+            return 'unresolved', 'source_numeric_scope_unresolved'
+        return passage.use, passage.reason
     if financial_only is None or fact.purpose == "unassessed":
         return "unresolved", "source_assessment_incomplete"
     if not text.strip():

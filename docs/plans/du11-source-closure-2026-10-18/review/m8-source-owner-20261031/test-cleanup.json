@@ -1,0 +1,26 @@
+[
+  {
+    "path": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.m8-acceptance-tmp",
+    "removed_bytes": 956845,
+    "files": 133,
+    "state": "restored_absent"
+  },
+  {
+    "path": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.m8-final-affected-tmp",
+    "removed_bytes": 956845,
+    "files": 133,
+    "state": "restored_absent"
+  },
+  {
+    "path": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.m8-pool-split-tmp",
+    "removed_bytes": 0,
+    "files": 0,
+    "state": "restored_absent"
+  },
+  {
+    "path": "C:\\Users\\\u90d1\u66fe\u6ce2\\Projects\\company-wiki\\.m8-pool-64-tmp",
+    "removed_bytes": 0,
+    "files": 0,
+    "state": "restored_absent"
+  }
+]

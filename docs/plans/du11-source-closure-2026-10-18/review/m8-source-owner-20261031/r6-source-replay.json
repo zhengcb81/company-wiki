@@ -1,0 +1,275 @@
+{
+  "scope": "frozen-source regression, not blind/not paid/not fresh PDF parsing/not RF company loop",
+  "runtime_stable": true,
+  "pdf_reads": 0,
+  "model_posts": 0,
+  "downloads": 0,
+  "samples": [
+    {
+      "sample_id": "c3-cn-huali-ir-202305",
+      "normalized_sha256": "ad71973d627c590691918cac116a546f657d20fcfa55c51535a4e0676b4476ca",
+      "source_sha256": "d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "scope": "new normalized replay; fresh WorkBudget, no original parse charges; not exact old live budget replay",
+      "work": {
+        "entry": 0,
+        "exit": 721420,
+        "limit": 16000000,
+        "exhausted": false
+      },
+      "status": "partial",
+      "source_units": 131,
+      "candidates": 100,
+      "spans": 84,
+      "tasks": 15,
+      "checkpoints": [
+        {
+          "checkpoint": "HUALI-01",
+          "role": [
+            "identity",
+            "period",
+            "document_kind"
+          ],
+          "selected": false,
+          "task_support": false,
+          "task_context_or_support": false,
+          "production_compiled_material": false
+        },
+        {
+          "checkpoint": "HUALI-02",
+          "role": [
+            "industry",
+            "forward_looking"
+          ],
+          "selected": true,
+          "task_support": false,
+          "task_context_or_support": true,
+          "production_compiled_material": true
+        },
+        {
+          "checkpoint": "HUALI-03",
+          "role": [
+            "business_progress",
+            "new_customer"
+          ],
+          "selected": true,
+          "task_support": false,
+          "task_context_or_support": true,
+          "production_compiled_material": true
+        },
+        {
+          "checkpoint": "HUALI-04",
+          "role": [
+            "operating_number",
+            "negation"
+          ],
+          "selected": true,
+          "task_support": false,
+          "task_context_or_support": true,
+          "production_compiled_material": true
+        },
+        {
+          "checkpoint": "HUALI-05",
+          "role": [
+            "business_progress",
+            "attribution"
+          ],
+          "selected": true,
+          "task_support": false,
+          "task_context_or_support": true,
+          "production_compiled_material": true
+        },
+        {
+          "checkpoint": "HUALI-06",
+          "role": [
+            "capacity",
+            "forward_looking"
+          ],
+          "selected": true,
+          "task_support": false,
+          "task_context_or_support": true,
+          "production_compiled_material": true
+        },
+        {
+          "checkpoint": "HUALI-07",
+          "role": [
+            "new_capacity",
+            "operating_number",
+            "forward_looking"
+          ],
+          "selected": true,
+          "task_support": false,
+          "task_context_or_support": true,
+          "production_compiled_material": true
+        },
+        {
+          "checkpoint": "HUALI-08",
+          "role": [
+            "operating_number",
+            "negation",
+            "currency"
+          ],
+          "selected": true,
+          "task_support": false,
+          "task_context_or_support": true,
+          "production_compiled_material": true
+        },
+        {
+          "checkpoint": "HUALI-09",
+          "role": [
+            "attribution",
+            "negative_control"
+          ],
+          "selected": true,
+          "task_support": false,
+          "task_context_or_support": true,
+          "production_compiled_material": true
+        },
+        {
+          "checkpoint": "HUALI-10",
+          "role": [
+            "new_customer",
+            "business_process"
+          ],
+          "selected": true,
+          "task_support": false,
+          "task_context_or_support": true,
+          "production_compiled_material": true
+        }
+      ],
+      "compiled_tasks": 15
+    },
+    {
+      "sample_id": "c3-us-berkshire-letter-2008",
+      "normalized_sha256": "00694ef7f28a9164b3316598c985141fc97d51d53866c6fff8177838ad660793",
+      "source_sha256": "46920242cbb861fd844453d5e20edd8b0ecea977d85111cf2a7cfb249913c6cf",
+      "scope": "new normalized replay; fresh WorkBudget, no original parse charges; not exact old live budget replay",
+      "work": {
+        "entry": 0,
+        "exit": 10704955,
+        "limit": 16000000,
+        "exhausted": false
+      },
+      "status": "partial",
+      "source_units": 299,
+      "candidates": 272,
+      "spans": 96,
+      "tasks": 77,
+      "checkpoints": [
+        {
+          "checkpoint": "BRK-01",
+          "role": [
+            "identity",
+            "period",
+            "document_kind"
+          ],
+          "selected": false,
+          "task_support": false,
+          "task_context_or_support": false,
+          "production_compiled_material": false
+        },
+        {
+          "checkpoint": "BRK-02",
+          "role": [
+            "business_progress",
+            "attribution"
+          ],
+          "selected": true,
+          "task_support": true,
+          "task_context_or_support": true,
+          "production_compiled_material": true
+        },
+        {
+          "checkpoint": "BRK-03",
+          "role": [
+            "operating_number",
+            "negation"
+          ],
+          "selected": true,
+          "task_support": true,
+          "task_context_or_support": true,
+          "production_compiled_material": true
+        },
+        {
+          "checkpoint": "BRK-04",
+          "role": [
+            "ownership",
+            "business_scope"
+          ],
+          "selected": true,
+          "task_support": true,
+          "task_context_or_support": true,
+          "production_compiled_material": false
+        },
+        {
+          "checkpoint": "BRK-05",
+          "role": [
+            "business_progress",
+            "operating_number"
+          ],
+          "selected": true,
+          "task_support": true,
+          "task_context_or_support": true,
+          "production_compiled_material": true
+        },
+        {
+          "checkpoint": "BRK-06",
+          "role": [
+            "negation",
+            "reinvestment"
+          ],
+          "selected": true,
+          "task_support": true,
+          "task_context_or_support": true,
+          "production_compiled_material": true
+        },
+        {
+          "checkpoint": "BRK-07",
+          "role": [
+            "industry",
+            "third_party_attribution"
+          ],
+          "selected": true,
+          "task_support": true,
+          "task_context_or_support": true,
+          "production_compiled_material": false
+        },
+        {
+          "checkpoint": "BRK-08",
+          "role": [
+            "operating_number",
+            "business_progress"
+          ],
+          "selected": true,
+          "task_support": true,
+          "task_context_or_support": true,
+          "production_compiled_material": true
+        },
+        {
+          "checkpoint": "BRK-09",
+          "role": [
+            "new_business",
+            "operating_number"
+          ],
+          "selected": true,
+          "task_support": true,
+          "task_context_or_support": true,
+          "production_compiled_material": true
+        },
+        {
+          "checkpoint": "BRK-10",
+          "role": [
+            "forward_looking",
+            "negation"
+          ],
+          "selected": false,
+          "task_support": false,
+          "task_context_or_support": false,
+          "production_compiled_material": false
+        }
+      ],
+      "compiled_tasks": 64
+    }
+  ],
+  "limits": "Not blind/not fresh PDF/not paid/not RF company acceptance. BRK04/07 source-covered but deferred by draft byte limit;77 admitted is not77 compiled.",
+  "full_local_receipt_sha256": "075d4e9718348ab37ceec9d0617a1cd8cc695d27df7957badee113c1a66dc0f5"
+}

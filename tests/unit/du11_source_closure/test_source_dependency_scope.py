@@ -14,6 +14,10 @@ from company_wiki.document_understanding import decision_inventory
     "company_wiki.document_understanding.operating_states.text_view",
     "company_wiki.document_normalization.text_matching",
     "company_wiki.source_catalog.n6_candidate_operating_facts",
+    "company_wiki.source_catalog.narrative_source_passage",
+    "company_wiki.source_catalog.narrative_causal_links",
+    "company_wiki.source_catalog.narrative_actor_context",
+    "company_wiki.document_understanding.source_turn_markers",
 ])
 def test_actual_source_grammar_bytes_invalidate_decision_without_a_version_bump(name, tmp_path, monkeypatch):
     module = import_module(name)

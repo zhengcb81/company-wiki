@@ -33,6 +33,9 @@ from .narrative_business_policy import (
 from .narrative_predicate_state import observe_metric_predicate
 
 _MAX_EXPLICIT_GUIDANCE_SKIP_PARAGRAPHS = 1
+# Existing prepared source-scope contract, distinct from the bounded
+# antecedent search window. Physical fragmentation does not change meaning.
+SOURCE_SUPPORT_MAX_MEMBERS = 64
 _CJK_CONTEXT_RUN = re.compile(r"[\u3400-\u9fff]{2,}")
 _LATIN_CONTEXT_TERM = re.compile(r"\b[a-z][a-z0-9-]{2,}\b", re.IGNORECASE)
 _GENERIC_PHASE_CONTEXT_TERM = re.compile(
@@ -156,6 +159,7 @@ class SourceOperatingSession:
         self.facts: dict[str, OperatingFact] = {}
         self.financial: dict[str, bool | None] = {}
         self.assertions: dict[str, Any] = {}
+        self.passages: dict[str, Any] = {}
         self.references: dict[str, dict[str, Any]] = {}
         self.complete = True
         self.qualifications: dict[tuple[int, int, int], tuple[Any, Any, dict[str, tuple[str, ...]]]] = {}
@@ -172,7 +176,7 @@ class SourceOperatingSession:
         identity and the original-character projection already used by groups.
         """
         if (type(support) is not tuple or type(meaning_context) is not tuple
-                or not support or len(support) + len(meaning_context) > 64):
+                or not support or len(support) + len(meaning_context) > SOURCE_SUPPORT_MAX_MEMBERS):
             raise ValueError('invalid source support scope')
         # Bounded canonical-ID cache identity is not another source scan.
         # Reject custom hash/iterator objects before the free prepared lookup.
@@ -318,6 +322,23 @@ class SourceOperatingSession:
                       "attribution": "unknown",
                       "diagnostics": [{"code": "invalid_antecedent_scope", "unit_id": uid}],
                       "work_used": 0}
+        if result['status'] == 'not_applicable':
+            # Product and causal-result identity keep their existing stronger
+            # closure. First-person narration only needs its adjacent source
+            # context retained; it must not invent a resolved issuer identity.
+            from .narrative_actor_context import actor_context_closure
+            self.work_budget.charge(1 + len(predecessors))
+            observed = {entry: self.units.get(entry, self.originals.get(entry))
+                        for entry in predecessors}
+            if key in self.analysis:
+                first = self.units[self.groups[key][0]]
+                observed[key] = {**self.analysis[key], 'metadata': first.metadata}
+            else:
+                observed[key] = self.units[key]
+            result = actor_context_closure(key, tuple(predecessors), units=observed,
+                window_complete=complete, work_budget=self.work_budget)
+            if key in self.maps and result['reference_refs']:
+                result = {**result, 'reference_refs': self._original_refs(key, result['reference_refs'])}
         if result["status"] in {"unique", "collective"}:
             declarations = self._validate_original_refs(result["declaration_refs"])
             members = self._validate_original_refs(result["member_refs"])
@@ -770,6 +791,7 @@ class SourceOperatingSession:
                 source_roles=self.assertions[owner], relation_bindings=self.bindings.get(owner, ()))
             fact, financial = assessment.fact, assessment.financial_only
             self.assertions[owner] = assessment.source_roles
+            self.passages[owner] = assessment.passage
         except WorkBudgetExceeded:
             self.complete = False
             # Closed relations retain their exact qualifiers and states without
@@ -791,3 +813,8 @@ class SourceOperatingSession:
         """The exact owner's already charged role proof, never a second scan."""
         self.fact(uid)
         return self.assertions.get(self.owner_for(uid))
+
+    def source_passage(self, uid: str):
+        """The same charged owner's quote capability, not an event proof."""
+        self.fact(uid)
+        return self.passages.get(self.owner_for(uid))

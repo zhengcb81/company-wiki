@@ -13,6 +13,7 @@ from company_wiki.document_normalization.text_matching import matching_reading_t
 from company_wiki.document_understanding.operating_states.assertion_roles import (
     SourceAssertionRoles, prepare_source_assertions,
     descriptive_operating_relation as descriptive_operating_relation,
+    source_reporting_purpose,
 )
 
 from .narrative_business_disclosures import reporting_basis_relations
@@ -160,6 +161,9 @@ def _clause_purpose(value: str, *, operating_proof: bool = False) -> str:
         return "navigation"
     if _GOVERNANCE_TRAINING.search(value):
         return "governance_training"
+    reporting_purpose = source_reporting_purpose(value) if not operating_proof else ''
+    if reporting_purpose:
+        return reporting_purpose
     if not operating_proof and ((_VALUATION_OBJECT.search(value) and _VALUATION_RULE.search(value))
             or (_INCENTIVE_OBJECT.search(value) and _INCENTIVE_RULE.search(value))
             or (_RESULT_DEFINITION_OBJECT.search(value) and _RESULT_DEFINITION_RULE.search(value))):

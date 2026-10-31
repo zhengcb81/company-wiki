@@ -1,0 +1,42 @@
+{
+  "scope": "M8 final source engineering; overlapping counts not additive",
+  "historical_affected_runs": [
+    {
+      "passed": 2934,
+      "failed": 8,
+      "seconds": 149.88
+    },
+    {
+      "passed": 2941,
+      "failed": 18,
+      "seconds": 111.0
+    }
+  ],
+  "final_failed_domain_regression": {
+    "passed": 634,
+    "failed": 0,
+    "seconds": 36.63,
+    "note": "Seven actual affected files; covers prior18 failures, precision/source/quantity/priority regression. No third whole-domain rerun."
+  },
+  "selection_split": {
+    "passed": 3,
+    "seconds": 17.84,
+    "enhanced_public_node_passed": 1,
+    "enhanced_public_node_seconds": 5.93
+  },
+  "static": {
+    "ruff": "all24 changed/new src/tests PASS",
+    "mypy": "15 changed/new source files PASS"
+  },
+  "real_source_replay": "r6-source-replay.json",
+  "independent_source_review": {
+    "verdict": "ENGINEERING_SOURCE_PASS",
+    "open_in_scope": 0,
+    "independent_tests_passed": 12,
+    "seconds": 2.85,
+    "scope": "source engineering/r6 quote integrity only; paid/cache/RF excluded"
+  },
+  "new_paid_calls": 0,
+  "new_downloads": 0,
+  "new_pdf_parses": 0
+}

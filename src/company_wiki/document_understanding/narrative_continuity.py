@@ -10,7 +10,7 @@ from __future__ import annotations
 
 from collections import Counter
 from collections.abc import Callable, Mapping, Sequence
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from hashlib import sha256
 from itertools import chain, groupby
 from math import isfinite
@@ -20,8 +20,9 @@ from company_wiki.resource_budget import WorkBudget, WorkBudgetExceeded
 
 from .indented_tail_geometry import indented_terminal_tail_proof
 from .hanging_indent_geometry import hanging_body_proof, is_bullet_start
+from .source_turn_markers import explicit_qa_marker, observed_source_turn, SOURCE_TURN_MARKER_PREFIX_CHARS
 
-NARRATIVE_CONTINUITY_FEATURE_VERSION = "native-narrative-continuity/10"
+NARRATIVE_CONTINUITY_FEATURE_VERSION = "native-narrative-continuity/11"
 _LIMITS = {
     "max_units": 50_000,
     "max_window_units": 8,
@@ -94,6 +95,26 @@ class NativePhysicalObservation:
 class _Native(NativePhysicalObservation):
     scope: tuple[Any, ...]
     left_closed: bool
+    turn_scope: tuple[str | None, str | None]
+
+
+def _observed_turn(hints: Mapping[str, Any]) -> tuple[str | None, str | None]:
+    return observed_source_turn(hints)
+
+
+def _compatible_turn(left: Mapping[str, Any], right: Mapping[str, Any]) -> bool:
+    # Absence is not evidence of a speaker change; a positively observed
+    # conflicting speaker/turn is. Source roles and explicit Q/A stay separate.
+    return _compatible_turn_values(_observed_turn(left), _observed_turn(right))
+
+
+def _compatible_turn_values(left, right) -> bool:
+    return all(a is None or b is None or a == b for a, b in zip(left, right))
+
+
+def _same_source_scope(left: _Native, right: _Native) -> bool:
+    return (left.scope == right.scope
+            and _compatible_turn_values(left.turn_scope, right.turn_scope))
 
 
 def _observe_native_font(unit: Mapping[str, Any], frame: str, charge: Callable[[int], bool]) -> tuple[float, str] | None:
@@ -399,7 +420,7 @@ class _Analysis:
 
     def native(
         self, unit: Mapping[str, Any], provenance: Mapping[str, Any],
-        profile: Mapping[str, Any], section: Any, headings: set[str], left_closed: bool,
+        _profile: Mapping[str, Any], section: Any, headings: set[str], left_closed: bool,
     ) -> _Native | None:
         if unit.get("unit_id") in headings:
             self.charge()
@@ -421,11 +442,15 @@ class _Analysis:
         if actual is None:
             return None
         key = native_section_key(unit.get("hints", {}), section)
+        # Reading profiles are relevance/strategy annotations, not observed
+        # sentence boundaries. They may be sparse or differ across two pieces
+        # of the same physical statement. Real sections, roles, source order,
+        # geometry and font still establish (or veto) every physical edge.
         return _Native(unit, actual.provenance, actual.source, actual.page,
                        actual.ordinal, actual.paragraph, actual.block, actual.bbox,
                        actual.frame, actual.column, actual.font,
-                       (key, profile.get("reading_profile_key"), profile.get("section_role")),
-                       left_closed)
+                       (key,),
+                       left_closed, _observed_turn(unit.get('hints', {})))
 
     def tail_column_proof(self, left: _Native, right: _Native,
                           witnesses: Sequence[_Native]) -> dict[str, Any] | None:
@@ -445,7 +470,7 @@ class _Analysis:
             if not self.charge():
                 return None
             if (anchor.source != left.source or anchor.page != left.page
-                    or anchor.frame != left.frame or anchor.scope != left.scope
+                    or anchor.frame != left.frame or not _same_source_scope(anchor, left)
                     or anchor.font != left.font or anchor.column != column
                     or anchor.unit.get("role") != left.unit.get("role")
                     or anchor.ordinal != previous.ordinal + 1
@@ -481,11 +506,11 @@ class _Analysis:
     def pending_page_transition(self, left: _Native, right: _Native) -> bool:
         flow = self.source_page_flow
         if (flow is None or not _native_page_candidate(left, right)
-                or left.scope != right.scope or _terminal(left.unit["text"])):
+                or not _same_source_scope(left, right) or _terminal(left.unit["text"])):
             return False
         if not self.charge(8 * len(right.unit["text"])):
             return False
-        return not flow.independent_start(right.unit["text"])
+        return not explicit_qa_marker(right.unit['text']) and not flow.independent_start(right.unit["text"])
 
     def page_edge(self, left: _Native, right: _Native,
                   furniture: Sequence[Mapping[str, Any]]) -> dict[str, Any] | None:
@@ -519,12 +544,14 @@ class _Analysis:
             or right.ordinal != left.ordinal + 1
             or right.paragraph != left.paragraph + 1
             or left.frame != right.frame
-            or left.scope != right.scope
+            or not _same_source_scope(left, right)
             or left.font != right.font
             or left.unit.get("role") != right.unit.get("role")
         ):
             return None
         if left.column != right.column:
+            return None
+        if not self.charge(min(len(right.unit['text']), SOURCE_TURN_MARKER_PREFIX_CHARS)) or explicit_qa_marker(right.unit['text']):
             return None
         a_hint = left.unit.get("hints", {}).get("paragraph_membership", {})
         b_hint = right.unit.get("hints", {}).get("paragraph_membership", {})
@@ -785,7 +812,11 @@ def build_native_continuity(
                               "kind": meta.get("observed_kind", unit.get("kind")),
                               "paragraph_index": meta["paragraph_index"]})
             continue
-        left_closed = type(meta.get("block_char_start")) is int and meta["block_char_start"] == 0
+        if not state.charge(min(len(unit.get('text', '')), SOURCE_TURN_MARKER_PREFIX_CHARS)):
+            unexamined = seen - 1
+            break
+        explicit_turn = explicit_qa_marker(unit.get('text', '')) is not None
+        left_closed = explicit_turn or (type(meta.get("block_char_start")) is int and meta["block_char_start"] == 0)
         if not left_closed and previous_observed is not None:
             previous_unit_id = previous_observed.get("unit_id")
             previous_meta = provenance.get(previous_unit_id, {}) if isinstance(previous_unit_id, str) else {}
@@ -825,7 +856,6 @@ def build_native_continuity(
                 unresolved_page_tail = []
         elif page_tail_candidate:
             unresolved_page_tail = list(run)
-        previous_observed = unit
         if state.stopped:
             unexamined = seen - 1
             break
@@ -871,6 +901,24 @@ def build_native_continuity(
             # first body. It is not positive furniture proof, but cannot erase
             # a pending dependency before the actual top-body is observed.
             unresolved_page_tail = list(run)
+        if (edge is None and current is not None and current.left_closed and not explicit_turn
+                and previous_observed is not None and previous_observed.get('kind') == 'paragraph'
+                and previous_observed.get('role') == unit.get('role')
+                and _compatible_turn(previous_observed.get('hints', {}), unit.get('hints', {}))
+                and (not run or _same_source_scope(run[-1], current))
+                and previous_observed.get('hints', {}).get('source_id') == current.source
+                and native_section_key(previous_observed.get('hints', {}),
+                                       unit_section.get(previous_observed.get('unit_id'))) == current.scope[0]
+                and previous_observed.get('unit_id') not in headings
+                and not _terminal(previous_observed.get('text', ''))):
+            # Physical edges already prove continuation; only an unjoined new
+            # run needs this language check. A PDF block start alone must not
+            # certify an orphan suffix, nor trigger rescans of joined prose.
+            if not state.charge(8 * len(unit['text'])):
+                current = replace(current, left_closed=False)
+            elif not (source_page_flow is not None and source_page_flow.independent_start(unit['text'])):
+                current = replace(current, left_closed=False)
+        previous_observed = unit
         furniture = []
         if state.stopped:
             # Exhausting lookahead/edge work cannot turn the left half of an
@@ -880,7 +928,14 @@ def build_native_continuity(
             run, proof = [], []
             break
         if edge:
-            run.append(current)  # type: ignore[arg-type]
+            # Carry positively observed scope through the physical run. An
+            # omitted middle hint must not bridge two conflicting speakers or
+            # turns. The original unit hints themselves are never rewritten.
+            assert current is not None and run
+            a, b = run[-1].turn_scope, current.turn_scope
+            current = replace(current, turn_scope=(a[0] if a[0] is not None else b[0],
+                                                   a[1] if a[1] is not None else b[1]))
+            run.append(current)
             proof.append(edge)
         else:
             unfinished_tail = state.finish(run, proof)
