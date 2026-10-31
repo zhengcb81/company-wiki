@@ -14,5 +14,12 @@
   ],
   "model_copies": 0,
   "original_copies": 0,
-  "authors_started": false
+  "authors_started": false,
+  "required_runtime_fix_before_start": {
+    "commit": "20dd0143197462be31a467cdd53bcff1a31b4d94",
+    "exact_ci": 41241389817,
+    "conclusion": "success",
+    "preserve_existing_lane_wip": true,
+    "original_setup_head_is_historical": true
+  }
 }

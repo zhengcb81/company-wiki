@@ -4,7 +4,7 @@
 
 - 独立工作目录：**`C:/Users/郑曾波/Projects/company-wiki-w23-xiaomi-ocr-r1`**。
 - 分支：`codex/w23-ocr-r1-20261031`。
-- 实现基线：**`946537d0`**（精确SHA见同目录R1-setup.json；后续ROOT文档提交不改变这批实现）。
+- 原工区创建基线：`946537d0`，仅表示创建时点。**启动实现前须纳入已发布平台修复 `20dd0143197462be31a467cdd53bcff1a31b4d94`**（精确CI41241389817 success），不能继续使用旧Windows/Linux不兼容工具。已有本卡WIP先保留并核对冲突，不擅自reset/覆盖。后续ROOT的M8生产语义代码不属本卡范围。
 - `PLAN_ID=w23-ocr-r1-2026-10-31`；`PWF_PLAN_ROOT=docs/plans`；本地唯一计划 `docs/plans/w23-ocr-r1-2026-10-31/`，先读TASK_CARD/task_plan/progress/findings。
 - 交付：本工区 `delivery/w23-ocr-r1/handoff.md/json`、`comparison.md/json`、新冻结样本/gold/实际运行manifest和紧凑收据。ROOT共享PWF只读。
 

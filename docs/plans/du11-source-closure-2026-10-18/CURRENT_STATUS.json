@@ -2,7 +2,7 @@
   "schema_version": "company-wiki-current-plan-status/1",
   "as_of_date": "2026-10-31",
   "canonical_entry": "CURRENT_STATUS.md",
-  "overall_status": "ACTIVE_M8_SOURCE_ROOT_FIX_IMPLEMENTING_NO_NEW_PAID_CALL",
+  "overall_status": "ACTIVE_M8_SOURCE_ENGINEERING_ACCEPTED_REAL_SUMMARY_CACHE_RF_OPEN",
   "parallel_packages_20261025": {
     "status": "W16_W17_W18_ROOT_COMPONENT_ACCEPTED_MERGED",
     "entry": "harness_lanes/20261025/README.md",
@@ -26,12 +26,12 @@
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
-  "last_code_commit": "20dd0143197462be31a467cdd53bcff1a31b4d94",
+  "last_code_commit": "daa9106fca2dfba17ea486d6e15fd3289a3d5a25",
   "code_ci": {
-    "id": 41241389817,
-    "head_sha": "20dd0143197462be31a467cdd53bcff1a31b4d94",
-    "status": "completed",
-    "conclusion": "success"
+    "head_sha": null,
+    "status": "not_yet_observed",
+    "conclusion": null,
+    "note": "Observe final publication head, not reused20dd green"
   },
   "formal_v4_offline_selection_replay_20261025": {
     "status": "EXACT_REPRODUCED_NO_PAID_CALL",
@@ -4283,5 +4283,28 @@
     },
     "IR_private_repo_created": true
   },
-  "current_next_step": "M8 source-admission precision and bounded-source-vs-candidate-layer test responsibility; independent review then stable r5 replay; real summary/cache/RF adoption still OPEN."
+  "current_next_step": "Observe exact publication-head CI; configured bounded /5 real summary + activation/recovery/zero duplicate POST; independent semantics then actual RF summary_use/native parameters/formula. BRK remaining batch and company loops OPEN.",
+  "previous_green_code_ci": {
+    "id": 41241389817,
+    "head_sha": "20dd0143197462be31a467cdd53bcff1a31b4d94",
+    "status": "completed",
+    "conclusion": "success"
+  },
+  "mainline_m8_20261031": {
+    "code_commit": "daa9106fca2dfba17ea486d6e15fd3289a3d5a25",
+    "engineering_scope": "ENGINEERING_SOURCE_PASS",
+    "independent_open_in_scope": 0,
+    "owned_code_tests": 24,
+    "final_targeted_tests": 634,
+    "independent_tests": 12,
+    "source_replay": "review/m8-source-owner-20261031/r6-source-replay.json",
+    "real_summary_cache_rf": "OPEN",
+    "berkshire_admitted": 77,
+    "berkshire_compiled": 64,
+    "berkshire_deferred": 13,
+    "limits_raised": false,
+    "new_paid_calls": 0,
+    "new_downloads": 0,
+    "new_pdf_reads": 0
+  }
 }

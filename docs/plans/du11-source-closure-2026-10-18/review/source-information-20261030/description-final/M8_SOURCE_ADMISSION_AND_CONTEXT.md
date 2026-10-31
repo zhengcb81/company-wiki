@@ -1,6 +1,17 @@
 # M8：共享来源准入、连续性与主体前提
 
-状态：根因调查/TDD准备；未签代码、源召回或真实摘要通过。唯一入口仍 CURRENT_STATUS.md/json。M1–M6已发布局部成果保持，不重复旧付费摘要，不以本步替代完整RF公司循环。
+状态：2026-10-31共享来源工程已独审通过（本scope0OPEN），源码daa9106f；r6真实源结果仍有显式budget延期，不签全量召回、真实rank/缓存或RF通过。见[最终接收包](../../m8-source-owner-20261031/README.md)。唯一入口仍 CURRENT_STATUS.md/json。M1–M6已发布局部成果保持，不重复旧付费摘要，不以本步替代完整RF公司循环。
+
+## 当前实际进度（2026-10-30，未发布代码）
+
+- 已把source quote可消费性与旧OperatingFact/issuer事件proof分开；同一prepared capability由support/relevance复用，旧support单调保留，原纯财务/模板/套话负例继续锁定。source-passage/1、reading-business-policy/28，旧immutable未重写。
+- 物理连续性/11不把阅读profile当源边界，保留实证section/role/speaker/turn；明确新Q优先于未完Q，source marker共用64字前缀leaf。独审发现并修正missing提示桥接已知不同speaker、actor未读native turn、However被how前缀误判等；中性红例和失败日志保留，不冒称最初即通过。
+- actor只在明确跨段回指（如Beyond this/在此基础上）时保留最近合法正文；普通第一人称不强加邻段、不形成新门禁，身份仍unknown。初版使独立1slot业务段成本变2slot的3旧回归已从共因修复，旧测试断言未改，41P/2.47秒。
+- 真实snapshot r1暴露ROOT无条件语言扫描导致局部continuity工作提前停止；16M母账并未耗尽。已改为只在未获物理edge的新run做fallback、Q/A格式只读有界前缀、cap消费不重复线性收费，未提高任何上限。新r2同预算BRK重要02–09均进入实际source cards，GEICO t36确实携带p7明确GEICO原段context；仍partial/非新监管PDF或完整公司loop。
+- 华利r2重要产能/条件原文现已selected，但若长QA总answer超过8碎片，旧scope在分段前整体降unresolved，不能误修成移除numeric guard。进一步确认8是antecedent回看上限，不是已闭合支持集合的合同；共享session本来允许support+meaning context共64成员。正将两者解耦：lookback/pair仍8、O(8n)，完整原文组件沿既有64成员合同及2048chars，不截掉条件、不提高token/费用/字数/selection额度。IR表单侧栏和附件目录已由结构owner区分，不应混入发言；最终真样本/独审仍待完成。
+- BRK会计rule/每股口径/表引言仍有源角色误判，正按统一source-purpose治理；普通可读性不冒充meaningful_fact，费用与新rank均0。源阶段通过和独审完成后才真实摘要、恢复与RF重新采用。
+
+本地可复核目录 `.planning/summary-quality-20261030/m8-*`：admission-design、continuity-design、replay-budget-design、admission-implementation、actor-implementation、independent及real-source-replay/r1,r2。两个新run都绑定入口/出口work和执行前后源码SHA，r2稳定；未重读PDF/付费/新下载，旧r1/r2冻结结果不覆盖。原先M7未封全live work，不能宣称其fresh replay差异是预算bug。
 
 ## 固定输入与问题
 
