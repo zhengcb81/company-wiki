@@ -1,32 +1,24 @@
 {
   "schema_version": "company-wiki-current-plan-status/2",
   "as_of_date": "2026-10-31",
-  "observed_at_utc": "2026-10-31T21:47:30.534535+00:00",
+  "observed_at_utc": "2026-10-31T22:49:14.367832+00:00",
   "canonical_entry": "CURRENT_STATUS.md",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
-  "project_status": "P0_LOCAL_REVIEW_PASS_WAIT_EXACT_CI_THEN_P1_P2",
+  "project_status": "P0_COMPLETE_P1_HUALI_COMPONENT_PASS_BERKSHIRE_OPEN_P2_IN_PROGRESS",
   "scope_this_update": "User resumed P0-P2 mainline implementation; no new outsourcing packages",
   "last_code_commit": "daa9106fca2dfba17ea486d6e15fd3289a3d5a25",
   "verified_publication_before_docs": {
     "local_branch": "master",
-    "local_and_remote_head": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6"
+    "local_and_remote_head": "c92aa4f2a978c4068ebbcd3cc9da7488a00c361b"
   },
   "code_ci": {
-    "id": 41243937903,
-    "head_sha": "2e56e14e1940025d60e258cdd8d53473f6ecb49f",
+    "id": 41247282332,
+    "head_sha": "c92aa4f2a978c4068ebbcd3cc9da7488a00c361b",
     "status": "completed",
-    "conclusion": "failure",
-    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41243937903",
-    "failed_cases": 3,
-    "node": "tests/unit/du11_tail_integration/test_tail_source_wiring.py::test_lookahead_exhaustion_never_releases_unproven_left_fragment",
-    "parameters": [
-      4,
-      5,
-      6
-    ],
-    "local_reproduction": "3 failed in1.72s",
-    "finding": "Fixed work limits now stop before lookahead; compact frontier0 covers all units. Existing assertion requires explicit deferred-ID examples. No windows/standalone released in observed cases; repair/verify representation and real-consumer contract before changing assertion."
+    "conclusion": "success",
+    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41247282332",
+    "completed_at_utc": "2026-10-31T22:20:41Z"
   },
   "native_goal": {
     "observed_status": "blocked",
@@ -41,15 +33,15 @@
     "cumulative_micro_usd": 20000000,
     "company_allocation": "soft target150000tokens/$1",
     "latest_verified_usage": {
-      "tokens": 1827558,
-      "micro_usd": 732814,
+      "tokens": 1835775,
+      "micro_usd": 734239,
       "includes_historical_unknowns": true,
-      "evidence": "review/source-information-20261030/description-final/m6-source-evidence-2/README.md",
-      "note": "Last verified task ledger observation; not supplier invoice or service quota; this update made0paid calls"
+      "evidence": "review/mainline-closeout-20261031/p1/README.md",
+      "note": "Actual one new MiMo request8217tokens/$0.001425; old unknown holds retained"
     }
   },
   "m8_source_engineering": {
-    "status": "COMPONENT_REVIEW_PASS_WITH_LATER_CI_REGRESSION_OPEN",
+    "status": "COMPONENT_REVIEW_AND_EXACT_CI_PASS_PRODUCT_ACCEPTANCE_PENDING",
     "independent_open_at_acceptance": 0,
     "source_tests": 634,
     "independent_tests": 12,
@@ -74,17 +66,17 @@
   "remaining_stages": [
     {
       "id": "P0",
-      "status": "LOCAL_TEST_REVIEW_PASS_WAIT_CI",
+      "status": "COMPLETE",
       "task": "Exact CI compact-frontier/lookahead contract repair"
     },
     {
       "id": "P1",
-      "status": "NOT_ACCEPTED",
+      "status": "HUALI_COMPONENT_REVIEW_PASS_BERKSHIRE_BOUNDED_REMAINDER_OPEN",
       "task": "M8 real source summary/rank plus activation/recovery and explicit remaining batch"
     },
     {
       "id": "P2",
-      "status": "NOT_ACCEPTED",
+      "status": "IN_PROGRESS_FINANCIAL_BASIS_VERIFICATION",
       "task": "Same new artifact actually consumed by RF native parameters/formula"
     },
     {
@@ -93,7 +85,7 @@
       "task": "W12 original-company rerun, new-company generalization, fixed8company fullaudit/skillimprovement and finalclean streak"
     }
   ],
-  "next_action": "观察P0测试修复发布的精确CI；通过后进入已准备的P1真实来源/5运行、激活/中断恢复与0重复POST；随后P2实际RF采用。不扩施工包。",
+  "next_action": "继续P2同华利artifact实际参数/公式采用，先验证新浪收入单位/基线与原文2023内容时间；P1 Berkshire有界余项仍OPEN，不提高额度或代签。不扩包。",
   "package_status_registry": "PACKAGE_STATUS.json",
   "handoff": "HANDOFF.md",
   "goal_definition": "MAINLINE_LOOP_GOAL.md",
@@ -113,11 +105,74 @@
   ],
   "execution_mode": "manual_authorized_mainline_implementation",
   "p0_repair": {
-    "status": "LOCAL_REVIEW_PASS_CI_PENDING",
+    "status": "PUBLISHED_EXACT_CI_PASS",
     "evidence": "review/mainline-closeout-20261031/p0/README.md",
     "production_src_changed": false,
     "test_module_passed": 39,
     "related_passed": 101,
-    "independent_open": 0
+    "independent_open": 0,
+    "pre_push_passed": 206
+  },
+  "historical_failed_ci": {
+    "id": 41243937903,
+    "head_sha": "2e56e14e1940025d60e258cdd8d53473f6ecb49f",
+    "status": "completed",
+    "conclusion": "failure",
+    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41243937903",
+    "failed_cases": 3,
+    "node": "tests/unit/du11_tail_integration/test_tail_source_wiring.py::test_lookahead_exhaustion_never_releases_unproven_left_fragment",
+    "parameters": [
+      4,
+      5,
+      6
+    ],
+    "local_reproduction": "3 failed in1.72s",
+    "finding": "Fixed work limits now stop before lookahead; compact frontier0 covers all units. Existing assertion requires explicit deferred-ID examples. No windows/standalone released in observed cases; repair/verify representation and real-consumer contract before changing assertion."
+  },
+  "last_test_commit": "c92aa4f2a978c4068ebbcd3cc9da7488a00c361b",
+  "p1_first_attempt": {
+    "run_id": "phaseC-090-90105df58fd7",
+    "status": "PRE_RESERVATION_BLOCKED",
+    "error": "PHASE_C_GOLD_SUPPORT_MISSING",
+    "model_posts": 0,
+    "tokens": 0,
+    "micro_usd": 0,
+    "gold_required": 9,
+    "supported": 4,
+    "missing": [
+      "HUALI-02",
+      "HUALI-04",
+      "HUALI-06",
+      "HUALI-07",
+      "HUALI-08"
+    ],
+    "all_anchors_individually_present": true,
+    "evidence": ".planning/mainline-closeout-20261031/p1-huali-live-v1/",
+    "finding": "Multi-proposition checkpoint was incorrectly treated as a single-claim closed-group requirement; independently reviewed atomic adapter needed, no production oracle weakening."
+  },
+  "p1_huali": {
+    "status": "COMPONENT_REVIEW_PASS",
+    "model_posts": 1,
+    "model": "mimo-v2.6-flash",
+    "tokens": 8217,
+    "micro_usd": 1425,
+    "cards": 15,
+    "required_atoms": 12,
+    "generated_prose": false,
+    "source_file_coverage": "partial",
+    "activation_recovery": "PASS",
+    "same_run_zero_POST": true,
+    "cross_run_zero_POST": true,
+    "actual_RF_read": "PASS",
+    "actual_RF_formula": "NOT_ACCEPTED",
+    "evidence": "review/mainline-closeout-20261031/p1/README.md"
+  },
+  "p1_berkshire": {
+    "status": "NOT_PROCESSED_PRE_HTTP_SINGLE_REQUEST_CAP",
+    "post": 0,
+    "tokens_bound_basis": "HTTP body74249B+output8192; bound exceeds50000",
+    "mother_budget_exhausted": false,
+    "draft_deferred_cards": 13,
+    "important_remainder_open": true
   }
 }

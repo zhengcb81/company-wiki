@@ -170,6 +170,33 @@ def prepare_registered_source(
             raise ReadonlySourceGap("registered_source_sha_mismatch")
         opened = reader.open_version(ref, purpose="narrative_derivation")
         manifest = reader.describe_version(ref)
+        availability_registration = None
+        from company_wiki.source_catalog.source_availability import stored_availability_evidence
+
+        if (source_facts is not None and manifest.get("published_date") is None
+                and stored_availability_evidence(catalog, ref) is None):
+            # This explicit test intake already writes source facts in its
+            # owned catalog. Preserve the source owner's actual verified-open
+            # event for current-as-of consumers, preserving an earlier bound
+            # observation if one was already supplied, without inventing publication,
+            # an old download, or an earlier availability date. Plain preview
+            # (source_facts=None) remains read-only. Original roots are untouched.
+            from company_wiki.source_catalog.source_availability import (
+                verified_open_observation,
+            )
+            from types import SimpleNamespace
+
+            availability_registration = catalog.record_source_facts(
+                ref=ref,
+                facts={"published_date": None},
+                evidence={"published_date": {
+                    "value": None,
+                    "locator": "isolated-intake/verified-original-open",
+                    "verified_open": verified_open_observation(
+                        SimpleNamespace(ref=ref, data=opened.data)
+                    ),
+                }},
+            )
         # query_local owns issuer/period/kind/as-of qualification. Display facts
         # and language declarations are observations, not a second admission
         # contract: formal narrative preparation normalizes/detects language.
@@ -204,6 +231,7 @@ def prepare_registered_source(
                 "filing_identity_period_asof_qualification": "NOT_EVALUATED" if pinned_ref is not None else "REQUEST_APPLIED",
             },
             "source_fact_registration": fact_registration,
+            "current_availability_registration": availability_registration,
             "local_preparation": local_preparation,
             "catalog_config": str(target),
             "raw_copies": 0,

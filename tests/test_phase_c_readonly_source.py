@@ -1,6 +1,7 @@
 """Phase C mounts actual registered roots; no raw copy or production DB writes."""
 
 import hashlib
+from contextlib import closing
 import json
 from pathlib import Path
 import sys
@@ -34,6 +35,55 @@ def _fixture_source(catalog, imported):
     manifest = SourceVersionReader(catalog).describe_version(SourceRef(**ref))
     descriptor = {**manifest, "entity": "Acme"}
     return original, descriptor
+
+
+@pytest.mark.parametrize("explicit_intake,prior_open", [
+    (False, None), (True, None), (True, "2026-10-01T00:00:00Z"),
+])
+def test_isolated_intake_persists_current_verified_open_without_inventing_publication(
+    tmp_path, explicit_intake, prior_open
+):
+    from datetime import datetime, timezone
+    from company_wiki.source_catalog.source_availability import stored_availability_evidence
+    from company_wiki.source_catalog.source_reader import SourceRef
+    from tools.document_understanding_benchmark.phase_c_readonly_source import prepare_registered_source
+
+    with reuse.setup_source("http://127.0.0.1:1/chat/completions") as (
+        _root, catalog, config, _, imported, _kind
+    ):
+        original, descriptor = _fixture_source(catalog, imported)
+        ref = SourceRef(**imported["source_ref"])
+        protected = {p: _fingerprint(p) for p in [original, config, catalog.config.database_path]}
+        descriptor["published_date"] = None
+        facts = {"content_sha256": ref.content_sha256,
+                 "facts": {"published_date": None},
+                 "evidence": {"published_date": {"value": None, "locator": "fixture/date-unknown"}}}
+        if prior_open:
+            facts["evidence"]["published_date"]["verified_open"] = {
+                "schema_version": "source-verified-open/1", "source_ref": imported["source_ref"],
+                "verified_at": prior_open,
+            }
+        result = prepare_registered_source(
+            source_config=config, owned_root=tmp_path / "owned", original=original,
+            expected_sha256=ref.content_sha256, descriptor=descriptor,
+            as_of_date=datetime.now(timezone.utc).date().isoformat(), expected_ref=ref,
+            source_facts=facts if explicit_intake else None,
+        )
+        with closing(SourceCatalog(load_catalog_config(Path(result["catalog_config"])))) as isolated:
+            proof = stored_availability_evidence(isolated, ref)
+            if explicit_intake:
+                assert result["manifest"]["published_date"] is None
+                assert proof["basis"] == "current_verified_open"
+                assert proof["source_sha256"] == ref.content_sha256
+                assert proof["available_by"] == (
+                    prior_open[:10] if prior_open else datetime.now(timezone.utc).date().isoformat()
+                ), "current intake must not erase an earlier exact-byte observation"
+                # No permission/date backfill and no export of a made-up old capture.
+                assert result["selection"]["filing_identity_period_asof_qualification"] == "NOT_EVALUATED"
+            else:
+                assert proof is None, "plain exact preview is not an intake writer"
+        assert result["raw_copies"] == 0
+        assert all(_fingerprint(p) == fp for p, fp in protected.items())
 
 
 def test_exact_source_content_read_is_separate_from_historical_filing_qualification(tmp_path):

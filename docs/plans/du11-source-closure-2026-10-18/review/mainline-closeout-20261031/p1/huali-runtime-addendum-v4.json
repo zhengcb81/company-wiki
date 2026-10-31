@@ -1,0 +1,146 @@
+{
+  "schema_version": "independent-p1-huali-runtime-addendum/1",
+  "reviewed_at": "2026-10-31T22:57:13.597520+00:00",
+  "component_review": "PASS",
+  "P1_overall": "OPEN",
+  "P2_formula_adoption": "NOT_SIGNED",
+  "reviewed_current_code": [
+    {
+      "path": "tools/document_understanding_benchmark/phase_c_readonly_source.py",
+      "bytes": 11341,
+      "sha256": "ce31b57e1661a8991cff0c92c73cbebf013ac2e2158ea9de91ece0aea5c132e7",
+      "lf_sha256": "ce31b57e1661a8991cff0c92c73cbebf013ac2e2158ea9de91ece0aea5c132e7"
+    },
+    {
+      "path": "tests/test_phase_c_readonly_source.py",
+      "bytes": 32058,
+      "sha256": "0ffe11af757d6a496919ec0164ee77909d691d2d28185701ecd02e5eeb67e2dc",
+      "lf_sha256": "0ffe11af757d6a496919ec0164ee77909d691d2d28185701ecd02e5eeb67e2dc"
+    }
+  ],
+  "closed_findings": [
+    {
+      "id": "P1-RECEIPT-01",
+      "status": "CLOSED",
+      "correction_sha256": "60480ae952bdc3b01f2fb297e01e3e71ba1c3e7c69be09c27124c2b1d472fe21",
+      "rationale": "Original erroneous receipt retained, explicit superseding correction removes unmeasured all-PDF-zero claim, records no new source selection and positive locator replay with unmeasured count. Body/generation/model usage remain identical."
+    }
+  ],
+  "guard_review": {
+    "status": "PASS",
+    "rationale": "When explicit source-facts intake already stores valid availability evidence for the exact SourceRef, do not replace earlier proof with today. Existing owner function binds document/source/hash/size/type and rejects future verified-open timestamps. Unknown publication remains null, source bytes are really opened before recording any new current observation. Plain preview still does not persist this evidence. No new permission/manual-review gate.",
+    "test_coverage_reviewed": "Three parameter variants: plain preview, first explicit intake, earlier valid exact-byte proof retained. Original/config/production catalog protected in all cases. Latest guard-only 3 target green reported by ROOT; 37 related and separate host loopback1 logs inspected. No paid/full repeat run by reviewer."
+  },
+  "packaging_finding": {
+    "id": "P1-PACKAGING-01",
+    "severity": "minor",
+    "status": "OPEN_AT_ADDENDUM_WRITE",
+    "summary": "Manifest was built before LF normalization; 16 text entries bind CRLF byte lengths/hashes while package files are LF. All mismatches are proven newline-only, no semantic/source/raw data change. Rebuild final package manifest after normalizing text and adding this addendum. No test/model rerun needed.",
+    "entry_count": 24,
+    "mismatches": [
+      {
+        "path": "cleanup.json",
+        "recorded_bytes": 155,
+        "actual_bytes": 150,
+        "only_CRLF_LF_delta_proven": true
+      },
+      {
+        "path": "continue_p1_consumers.py",
+        "recorded_bytes": 6953,
+        "actual_bytes": 6840,
+        "only_CRLF_LF_delta_proven": true
+      },
+      {
+        "path": "huali-runtime-review.json",
+        "recorded_bytes": 12346,
+        "actual_bytes": 12053,
+        "only_CRLF_LF_delta_proven": true
+      },
+      {
+        "path": "huali-runtime-review.md",
+        "recorded_bytes": 3750,
+        "actual_bytes": 3722,
+        "only_CRLF_LF_delta_proven": true
+      },
+      {
+        "path": "p1-berkshire-live-v1.json",
+        "recorded_bytes": 1010,
+        "actual_bytes": 974,
+        "only_CRLF_LF_delta_proven": true
+      },
+      {
+        "path": "p1-huali-live-v1.json",
+        "recorded_bytes": 764,
+        "actual_bytes": 735,
+        "only_CRLF_LF_delta_proven": true
+      },
+      {
+        "path": "p1-huali-live-v2.json",
+        "recorded_bytes": 2990,
+        "actual_bytes": 2905,
+        "only_CRLF_LF_delta_proven": true
+      },
+      {
+        "path": "p1-intake-final.txt",
+        "recorded_bytes": 1312,
+        "actual_bytes": 1298,
+        "only_CRLF_LF_delta_proven": true
+      },
+      {
+        "path": "p1-intake-tests.txt",
+        "recorded_bytes": 3916,
+        "actual_bytes": 3868,
+        "only_CRLF_LF_delta_proven": true
+      },
+      {
+        "path": "p1-loopback-tests.txt",
+        "recorded_bytes": 1203,
+        "actual_bytes": 1190,
+        "only_CRLF_LF_delta_proven": true
+      },
+      {
+        "path": "receipt-correction-v3.json",
+        "recorded_bytes": 3076,
+        "actual_bytes": 3008,
+        "only_CRLF_LF_delta_proven": true
+      },
+      {
+        "path": "v5-adaptation-review.json",
+        "recorded_bytes": 20625,
+        "actual_bytes": 19964,
+        "only_CRLF_LF_delta_proven": true
+      },
+      {
+        "path": "v5-adaptation-review.md",
+        "recorded_bytes": 3473,
+        "actual_bytes": 3444,
+        "only_CRLF_LF_delta_proven": true
+      },
+      {
+        "path": "frozen-gold/c3-cn-huali-ir-202305.gold.json",
+        "recorded_bytes": 22205,
+        "actual_bytes": 21628,
+        "only_CRLF_LF_delta_proven": true
+      },
+      {
+        "path": "frozen-gold/c3-us-berkshire-letter-2008.gold.json",
+        "recorded_bytes": 17893,
+        "actual_bytes": 17585,
+        "only_CRLF_LF_delta_proven": true
+      },
+      {
+        "path": "frozen-gold/gold-bridge.json",
+        "recorded_bytes": 115992,
+        "actual_bytes": 113515,
+        "only_CRLF_LF_delta_proven": true
+      }
+    ]
+  },
+  "scope_retained": [
+    "Huali source-extractive cards and advisory ranking only, not newly generated natural-language summary.",
+    "Full-document selection remains partial.",
+    "Berkshire refused before POST; budget reservation denial and important unprocessed material remain open.",
+    "P2 must bind original content-time context; 2026 current verified-open is not 2023 meeting time.",
+    "RF transport read is not economically meaningful parameter/formula/report adoption."
+  ]
+}

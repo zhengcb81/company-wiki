@@ -1,0 +1,308 @@
+{
+  "schema_version": "du-gold/1",
+  "sample_id": "c3-us-berkshire-letter-2008",
+  "source_sha256": "46920242cbb861fd844453d5e20edd8b0ecea977d85111cf2a7cfb249913c6cf",
+  "language": "en",
+  "scope": "development",
+  "support_set_frozen_before_output": true,
+  "facts": [
+    {
+      "id": "BRK-01",
+      "importance": "critical",
+      "target_kind": "disposition_context",
+      "fact_scope": "document_meta",
+      "require_same_scope": false,
+      "any_support_sets": [
+        [
+          {
+            "page": 2,
+            "exact_quote": "BERKSHIRE HATHAWAY INC."
+          },
+          {
+            "page": 2,
+            "exact_quote": "To the Shareholders of Berkshire Hathaway Inc.:"
+          },
+          {
+            "page": 2,
+            "exact_quote": "Our decrease in net worth during 2008 was $11.5 billion, which reduced the per-share book value of\nboth our Class A and Class B stock by 9.6%. Over the last 44 years (that is, since present management took over)\nbook value has grown from $19 to $70,530, a rate of 20.3% compounded annually.*"
+          },
+          {
+            "page": 22,
+            "exact_quote": "February 27, 2009\nWarren E. Buffett\nChairman of the Board"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "Berkshire Hathaway Inc. shareholder letter about 2008, signed by Warren E. Buffett on February 27, 2009; standalone letter excerpt, not a complete SEC 10-K."
+      ],
+      "must_not_assert": [
+        "Do not label the business year 2009 because that is the signature year.",
+        "Do not promote the catalog broker_research/HK labels as document truth."
+      ],
+      "reason": "Original frozen source checkpoint; target role separates context from required business card, does not replace source truth."
+    },
+    {
+      "id": "BRK-02",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "fact_scope": "narrative",
+      "require_same_scope": false,
+      "any_support_sets": [
+        [
+          {
+            "page": 3,
+            "exact_quote": "Most of the Berkshire businesses whose results are significantly affected by the economy earned below\ntheir potential last year, and that will be true in 2009 as well. Our retailers were hit particularly hard, as were our\noperations tied to residential construction. In aggregate, however, our manufacturing, service and retail\nbusinesses earned substantial sums and most of them – particularly the larger ones – continue to strengthen their\ncompetitive positions. Moreover, we are fortunate that Berkshire’s two most important businesses – our\ninsurance and utility groups – produce earnings that are not correlated to those of the general economy. Both\nbusinesses delivered outstanding results in 2008 and have excellent prospects."
+          }
+        ]
+      ],
+      "must_preserve": [
+        "In 2008, most economically sensitive businesses earned below potential; retailers and residential-construction operations were particularly hurt, while insurance and utilities delivered outstanding results."
+      ],
+      "must_not_assert": [
+        "Do not claim every Berkshire business contracted or that insurance/utilities had weak 2008 results."
+      ],
+      "reason": "Original frozen source checkpoint; target role separates context from required business card, does not replace source truth."
+    },
+    {
+      "id": "BRK-03",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "fact_scope": "narrative",
+      "require_same_scope": false,
+      "any_support_sets": [
+        [
+          {
+            "page": 3,
+            "exact_quote": "As predicted in last year’s report, the exceptional underwriting profits that our insurance businesses\nrealized in 2007 were not repeated in 2008. Nevertheless, the insurance group delivered an underwriting gain for\nthe sixth consecutive year. This means that our $58.5 billion of insurance “float” – money that doesn’t belong to\nus but that we hold and invest for our own benefit – cost us less than zero. In fact, we were paid $2.8 billion to\nhold our float during 2008. Charlie and I find this enjoyable."
+          }
+        ]
+      ],
+      "must_preserve": [
+        "Insurance did not repeat exceptional 2007 underwriting profits, but had its sixth consecutive underwriting gain in 2008; $58.5 billion float cost less than zero and Berkshire was paid $2.8 billion to hold it."
+      ],
+      "must_not_assert": [
+        "Do not turn lower underwriting profit into an underwriting loss.",
+        "Float is not Berkshire revenue or owned capital."
+      ],
+      "reason": "Original frozen source checkpoint; target role separates context from required business card, does not replace source truth."
+    },
+    {
+      "id": "BRK-04",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "fact_scope": "narrative",
+      "require_same_scope": false,
+      "any_support_sets": [
+        [
+          {
+            "page": 5,
+            "exact_quote": "Berkshire has an 87.4% (diluted) interest in MidAmerican Energy Holdings, which owns a wide\nvariety of utility operations. The largest of these are (1) Yorkshire Electricity and Northern Electric, whose\n3.8 million end users make it the U.K.’s third largest distributor of electricity;"
+          },
+          {
+            "page": 5,
+            "exact_quote": "(2) MidAmerican Energy, which\nserves 723,000 electric customers, primarily in Iowa;"
+          },
+          {
+            "page": 5,
+            "exact_quote": "(3) Pacific Power and Rocky Mountain Power, serving\nabout 1.7 million electric customers in six western states;"
+          },
+          {
+            "page": 5,
+            "exact_quote": "and (4) Kern River and Northern Natural pipelines,\nwhich carry about 9% of the natural gas consumed in the U.S."
+          }
+        ]
+      ],
+      "must_preserve": [
+        "Berkshire owned an 87.4% diluted interest in MidAmerican; its listed utility operations include UK electricity distribution, Iowa and western US electric operations, and Kern River/Northern Natural pipelines."
+      ],
+      "must_not_assert": [
+        "Do not say 100% ownership or assign UK end users to Iowa."
+      ],
+      "reason": "Original frozen source checkpoint; target role separates context from required business card, does not replace source truth."
+    },
+    {
+      "id": "BRK-05.A1",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "fact_scope": "narrative",
+      "require_same_scope": false,
+      "any_support_sets": [
+        [
+          {
+            "page": 6,
+            "exact_quote": "Similarly, when we purchased PacifiCorp in 2006, we moved aggressively to expand wind generation.\nWind capacity was then 33 megawatts. It’s now 794, with more coming. (Arriving at PacifiCorp, we found\n“wind” of a different sort: The company had 98 committees that met frequently. Now there are 28. Meanwhile,\nwe generate and deliver considerably more electricity, doing so with 2% fewer employees.)"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "PacifiCorp wind capacity was 33 MW at 2006 purchase and now 794 MW, not employees or incremental annual MW."
+      ],
+      "must_not_assert": [
+        "Do not call 794 an employee count or 2008 incremental MW.",
+        "Do not assign all MidAmerican wind expenditure solely to PacifiCorp."
+      ],
+      "reason": "Atomic subproposition of original BRK-05; parent requires ALL atoms, full original meaning/quotes preserved in bridge."
+    },
+    {
+      "id": "BRK-05.A2",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "fact_scope": "narrative",
+      "require_same_scope": false,
+      "any_support_sets": [
+        [
+          {
+            "page": 6,
+            "exact_quote": "In 2008 alone, MidAmerican spent $1.8 billion on wind generation at our two operations, and today the\ncompany is number one in the nation among regulated utilities in ownership of wind capacity. By the way,\ncompare that $1.8 billion to the $1.1 billion of pre-tax earnings of PacifiCorp (shown in the table as “Western”)\nand Iowa. In our utility business, we spend all we earn, and then some, in order to fulfill the needs of our service\nareas. Indeed, MidAmerican has not paid a dividend since Berkshire bought into the company in early 2000. Its\nearnings have instead been reinvested to develop the utility systems our customers require and deserve. In\nexchange, we have been allowed to earn a fair return on the huge sums we have invested. It’s a great partnership\nfor all concerned."
+          }
+        ]
+      ],
+      "must_preserve": [
+        "MidAmerican spent $1.8 billion on wind in 2008 at TWO operations, not PacifiCorp alone."
+      ],
+      "must_not_assert": [
+        "Do not call 794 an employee count or 2008 incremental MW.",
+        "Do not assign all MidAmerican wind expenditure solely to PacifiCorp."
+      ],
+      "reason": "Atomic subproposition of original BRK-05; parent requires ALL atoms, full original meaning/quotes preserved in bridge."
+    },
+    {
+      "id": "BRK-06",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "fact_scope": "narrative",
+      "require_same_scope": false,
+      "any_support_sets": [
+        [
+          {
+            "page": 6,
+            "exact_quote": "In 2008 alone, MidAmerican spent $1.8 billion on wind generation at our two operations, and today the\ncompany is number one in the nation among regulated utilities in ownership of wind capacity. By the way,\ncompare that $1.8 billion to the $1.1 billion of pre-tax earnings of PacifiCorp (shown in the table as “Western”)\nand Iowa. In our utility business, we spend all we earn, and then some, in order to fulfill the needs of our service\nareas. Indeed, MidAmerican has not paid a dividend since Berkshire bought into the company in early 2000. Its\nearnings have instead been reinvested to develop the utility systems our customers require and deserve. In\nexchange, we have been allowed to earn a fair return on the huge sums we have invested. It’s a great partnership\nfor all concerned."
+          }
+        ]
+      ],
+      "must_preserve": [
+        "MidAmerican had not paid a dividend since Berkshire invested in early 2000; earnings were reinvested to develop utility systems."
+      ],
+      "must_not_assert": [
+        "Do not describe this statement as Berkshire parent dividend history or as a future perpetual prohibition."
+      ],
+      "reason": "Original frozen source checkpoint; target role separates context from required business card, does not replace source truth."
+    },
+    {
+      "id": "BRK-07",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "fact_scope": "narrative",
+      "require_same_scope": false,
+      "any_support_sets": [
+        [
+          {
+            "page": 7,
+            "exact_quote": "Our insurance group has propelled Berkshire’s growth since we first entered the business in 1967. This\nhappy result has not been due to general prosperity in the industry. During the 25 years ending in 2007, return on\nnet worth for insurers averaged 8.5% versus 14.0% for the Fortune 500. Clearly our insurance CEOs have not\nhad the wind at their back. Yet these managers have excelled to a degree Charlie and I never dreamed possible in\nthe early days. Why do I love them?"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "For the 25 years ending 2007, insurers averaged 8.5% return on net worth versus 14.0% for the Fortune 500; these are industry comparisons, not Berkshire/GEICO returns."
+      ],
+      "must_not_assert": [
+        "Do not attach either industry average to Berkshire actual 2008 ROE."
+      ],
+      "reason": "Original frozen source checkpoint; target role separates context from required business card, does not replace source truth."
+    },
+    {
+      "id": "BRK-08.A1",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "fact_scope": "narrative",
+      "require_same_scope": false,
+      "any_support_sets": [
+        [
+          {
+            "page": 7,
+            "exact_quote": "At GEICO, Tony Nicely – now in his 48th year at the company after joining it when he was 18 –\ncontinues to gobble up market share while maintaining disciplined underwriting. When Tony became CEO in\n1993, GEICO had 2.0% of the auto insurance market, a level at which the company had long been stuck. Now we\nhave a 7.7% share, up from 7.2% in 2007."
+          }
+        ]
+      ],
+      "must_preserve": [
+        "GEICO AUTO insurance market share 7.7%, up from 7.2% in 2007; not premium growth or all Berkshire insurance."
+      ],
+      "must_not_assert": [
+        "Do not assign 7.7% to all Berkshire insurance or confuse it with premium growth."
+      ],
+      "reason": "Atomic subproposition of original BRK-08; parent requires ALL atoms, full original meaning/quotes preserved in bridge."
+    },
+    {
+      "id": "BRK-08.A2",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "fact_scope": "narrative",
+      "require_same_scope": false,
+      "any_support_sets": [
+        [
+          {
+            "page": 7,
+            "exact_quote": "The combination of new business gains and an improvement in the renewal rate on existing business\nhas moved GEICO into the number three position among auto insurers. In 1995, when Berkshire purchased\ncontrol, GEICO was number seven. Now we trail only State Farm and Allstate."
+          }
+        ]
+      ],
+      "must_preserve": [
+        "GEICO new business and better existing-business renewals moved it to number three among auto insurers."
+      ],
+      "must_not_assert": [
+        "Do not assign 7.7% to all Berkshire insurance or confuse it with premium growth."
+      ],
+      "reason": "Atomic subproposition of original BRK-08; parent requires ALL atoms, full original meaning/quotes preserved in bridge."
+    },
+    {
+      "id": "BRK-09.A1",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "fact_scope": "narrative",
+      "require_same_scope": false,
+      "any_support_sets": [
+        [
+          {
+            "page": 7,
+            "exact_quote": "As we view GEICO’s current opportunities, Tony and I feel like two hungry mosquitoes in a nudist\ncamp. Juicy targets are everywhere. First, and most important, our new business in auto insurance is now\nexploding. Americans are focused on saving money as never before, and they are flocking to GEICO. In January\n2009, we set a monthly record – by a wide margin – for growth in policyholders. That record will last exactly 28\ndays: As we go to press, it’s clear February’s gain will be even better."
+          },
+          {
+            "page": 7,
+            "exact_quote": "Beyond this, we are gaining ground in allied lines. Last year, our motorcycle policies increased by\n23.4%, which raised our market share from about 6% to more than 7%. Our RV and ATV businesses are also\ngrowing rapidly, albeit from a small base. And, finally, we recently began insuring commercial autos, a big\nmarket that offers real promise."
+          }
+        ]
+      ],
+      "must_preserve": [
+        "GEICO motorcycle policies grew 23.4% in 2008; share about 6% to over 7%; RV/ATV grew from SMALL BASE and commercial autos RECENTLY began; p7/8 binds the owner and 2009 narration, not consolidated revenue growth or a new standalone Berkshire segment."
+      ],
+      "must_not_assert": [
+        "Do not report 23.4% as consolidated revenue growth.",
+        "Commercial-auto entry is GEICO activity, not a new Berkshire standalone reportable segment."
+      ],
+      "reason": "Atomic subproposition of original BRK-09; parent requires ALL atoms, full original meaning/quotes preserved in bridge."
+    },
+    {
+      "id": "BRK-10",
+      "importance": "critical",
+      "target_kind": "disposition_context",
+      "fact_scope": "narrative",
+      "require_same_scope": false,
+      "any_support_sets": [
+        [
+          {
+            "page": 3,
+            "exact_quote": "Take a look again at the 44-year table on page 2. In 75% of those years, the S&P stocks recorded a\ngain. I would guess that a roughly similar percentage of years will be positive in the next 44. But neither Charlie\nMunger, my partner in running Berkshire, nor I can predict the winning and losing years in advance. (In our\nusual opinionated view, we don’t think anyone else can either.) We’re certain, for example, that the economy will\nbe in shambles throughout 2009 – and, for that matter, probably well beyond – but that conclusion does not tell\nus whether the stock market will rise or fall."
+          }
+        ]
+      ],
+      "must_preserve": [
+        "Management expected the economy to remain in shambles in 2009, probably beyond, but explicitly said this did not predict whether the stock market would rise or fall."
+      ],
+      "must_not_assert": [
+        "Do not convert the economic outlook into a guaranteed stock-market decline or a current 2026 forecast."
+      ],
+      "reason": "Original frozen source checkpoint; target role separates context from required business card, does not replace source truth."
+    }
+  ],
+  "notes": "DEVELOPMENT, exposed source diagnostic. Atomic reviewed adapter; never blind. See gold-bridge.json for unchanged original checkpoints and anchors."
+}

@@ -1,0 +1,140 @@
+{
+  "scope": "Final component packet; excludes manifest itself",
+  "files": [
+    {
+      "path": "cleanup.json",
+      "sha256": "cf6842f196f520a035d904b694fefd1269160c3d7fec0d129de0592720cecec3",
+      "bytes": 150
+    },
+    {
+      "path": "continue_p1_consumers.py",
+      "sha256": "d2bf9a594bba3b65e6e0ad881a103597b8695900d53f70be61f460f2787c1a20",
+      "bytes": 6840
+    },
+    {
+      "path": "huali-runtime-addendum-v4.json",
+      "sha256": "37d190899382db63855765b8d23593add453b659b92b45540dee21ba5b9235ce",
+      "bytes": 5747
+    },
+    {
+      "path": "huali-runtime-addendum-v4.md",
+      "sha256": "0918f9c092acdc5ad4abf55a738e8405878d87c68c372ebbaf5d0a80f43aa581",
+      "bytes": 1444
+    },
+    {
+      "path": "huali-runtime-review.json",
+      "sha256": "976198b2df02f27574ffc362e7a4076c13d677176edf0727265affc49a21fd6d",
+      "bytes": 12053
+    },
+    {
+      "path": "huali-runtime-review.md",
+      "sha256": "fda99b72f2b6e269ccc15079390989952fe3d4e42e0d9e84480df0027e823ecb",
+      "bytes": 3722
+    },
+    {
+      "path": "p1-berkshire-live-v1.json",
+      "sha256": "f9444fe2fe2d04756f3f6a07fb173119d91efd4e3a9c7880790b14fdf01efd68",
+      "bytes": 974
+    },
+    {
+      "path": "p1-huali-live-v1.json",
+      "sha256": "3e48f4f6f5999587ff5327f3a6624ecb9399443c8b2b3f962ecd76a233566a24",
+      "bytes": 735
+    },
+    {
+      "path": "p1-huali-live-v2.json",
+      "sha256": "431d9dba94ca377687f1277453ecf994e5fa6320eb33acadc324ef709aa47115",
+      "bytes": 2905
+    },
+    {
+      "path": "p1-intake-final.log.gz",
+      "sha256": "6e0cc7c212f10e6ce6c70a7351a7cd93d159bba99ff13bf83672fc6123b7b8fb",
+      "bytes": 751
+    },
+    {
+      "path": "p1-intake-tests.log.gz",
+      "sha256": "2b04edbff1e62c19df1b3b4bebdc5b31c0044856952aa409a330e641bcc017ee",
+      "bytes": 1391
+    },
+    {
+      "path": "p1-loopback-tests.log.gz",
+      "sha256": "47d6825ff7de0e205de9051926ba25edc013493e83c114d7b631b053be10564d",
+      "bytes": 703
+    },
+    {
+      "path": "prepare_p1_atomic.py",
+      "sha256": "fa571bdc62b9870d7d688c90a80ef4e15d5a5aee359dcb290da9a3e1a3f89408",
+      "bytes": 7796
+    },
+    {
+      "path": "README.md",
+      "sha256": "70fe74e49faaf05aef80ac09cf9dba28bac2b5f794638ca0d1871d653cf3715f",
+      "bytes": 2258
+    },
+    {
+      "path": "receipt-correction-v3.json",
+      "sha256": "60480ae952bdc3b01f2fb297e01e3e71ba1c3e7c69be09c27124c2b1d472fe21",
+      "bytes": 3008
+    },
+    {
+      "path": "v5-adaptation-review.json",
+      "sha256": "545e7801d77d9ef7696bff61532b5351de7c2853284e125b84e0e9e248c0ee59",
+      "bytes": 19964
+    },
+    {
+      "path": "v5-adaptation-review.md",
+      "sha256": "1850f8e8b01ee38212c7f50311fefc8b18bdd32d666a63749466408af6c967b5",
+      "bytes": 3444
+    },
+    {
+      "path": "frozen-gold/c3-cn-huali-ir-202305.gold.json",
+      "sha256": "5c0e5a74e32f21a3a602abd76c5c2838ed2277796c652c26a7c73fa2c82da51b",
+      "bytes": 21628
+    },
+    {
+      "path": "frozen-gold/c3-us-berkshire-letter-2008.gold.json",
+      "sha256": "f285bbbb3bd8a8548d1563afa22aa509bd2ddc3026437c2767098e18c4442616",
+      "bytes": 17585
+    },
+    {
+      "path": "frozen-gold/gold-bridge.json",
+      "sha256": "92f567a2e8f453167345b6eb5536d321fc8b27b3532c35d0286fcf86da14fa3d",
+      "bytes": 113515
+    },
+    {
+      "path": "huali-capture/phaseC-090-d37daaa8f4dd.92aae34d82a7473f9e4ab6694cb45ae2.response.json.gz",
+      "sha256": "b135462b654c60722df1f82558bf17c552b1987063ac05232ae32e1ee36e1866",
+      "bytes": 260
+    },
+    {
+      "path": "huali-capture/phaseC-090-d37daaa8f4dd.d6990c1ef1859d1d4e652662b571763d8eff8dccd5539e8b5b777a8a8739e223.prepared.bundle.json.gz",
+      "sha256": "f479da91303d478b3416a95e528754723fadda26bf8a88e88ab4ca864fb7a733",
+      "bytes": 50290
+    },
+    {
+      "path": "huali-capture/phaseC-090-d37daaa8f4dd.d6990c1ef1859d1d4e652662b571763d8eff8dccd5539e8b5b777a8a8739e223.prepared.capsule.json.gz",
+      "sha256": "0230cb387cf14a0a6ffd7919a884add5b255ab5f34e7b0b7e736f115cc9553c0",
+      "bytes": 7848
+    },
+    {
+      "path": "huali-capture/phaseC-090-d37daaa8f4dd.generation.json.gz",
+      "sha256": "90180c2f87142b36da46a7e530287502d726cfee552f3c7e81a8687a223f5351",
+      "bytes": 7040
+    },
+    {
+      "path": "huali-capture/phaseC-090-d37daaa8f4dd.input.json.gz",
+      "sha256": "5b64d7339416f0baa86daa4d81283789592be6423126dba70737ab961b9d7a16",
+      "bytes": 11079
+    },
+    {
+      "path": "huali-capture/phaseC-090-d37daaa8f4dd.selection.json.gz",
+      "sha256": "ce80ec966074e0863225de034e348f288ae85cf2b1a767938f55fcddd42658e4",
+      "bytes": 48879
+    },
+    {
+      "path": "huali-capture/verified-bundle.json.gz",
+      "sha256": "526a4ad949dcc6dbcb4eab82e8b14b79b210a395c7dbe9b86d0127ff882be90d",
+      "bytes": 50326
+    }
+  ]
+}

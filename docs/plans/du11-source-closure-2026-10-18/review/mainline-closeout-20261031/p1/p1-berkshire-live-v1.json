@@ -1,0 +1,36 @@
+{
+  "status": "FAIL",
+  "error": "RuntimeError: ACTIVATION_RECOVERY_NOT_AVAILABLE",
+  "error_file": "phase_c_runner.py",
+  "error_line": 1493,
+  "model_post_attempts": 0,
+  "protected_unchanged": true,
+  "sentinel_unchanged": true,
+  "temporary_lake_removed": true,
+  "attempt": "p1-berkshire-live-v1",
+  "states": [
+    {
+      "run_id": "phaseC-090-0b720a227ad2",
+      "exit": 2,
+      "activation_recovery": {
+        "status": "NOT_RECOVERABLE",
+        "reason": "initial_document_not_activation_pending",
+        "initial_exit": 2,
+        "document_statuses": [
+          "dead_letter"
+        ],
+        "document_errors": [
+          "DEPENDENCY_TERMINAL",
+          "MODEL_BUDGET_DENIED"
+        ],
+        "native_usage_statuses": [],
+        "response_hashes_present": true
+      },
+      "same_run_zero_POST": null,
+      "cross_run_zero_POST": null,
+      "model_observation": null,
+      "source_card_execution": null,
+      "artifact_ref": null
+    }
+  ]
+}

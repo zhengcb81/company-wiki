@@ -1,0 +1,29 @@
+{
+  "status": "PRE_RESERVATION_BLOCKED",
+  "error": null,
+  "error_file": null,
+  "error_line": null,
+  "model_post_attempts": 0,
+  "protected_unchanged": true,
+  "sentinel_unchanged": true,
+  "temporary_lake_removed": true,
+  "attempt": "p1-huali-live-v1",
+  "states": [
+    {
+      "run_id": "phaseC-090-90105df58fd7",
+      "exit": 2,
+      "activation_recovery": {
+        "status": "PRE_RESERVATION_BLOCKED",
+        "code": "PHASE_C_GOLD_SUPPORT_MISSING",
+        "reserved": false,
+        "post_attempts": 0,
+        "native_usage_rows": 0
+      },
+      "same_run_zero_POST": null,
+      "cross_run_zero_POST": null,
+      "model_observation": null,
+      "source_card_execution": null,
+      "artifact_ref": null
+    }
+  ]
+}
