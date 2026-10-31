@@ -106,3 +106,24 @@ bare 形态保留为冷诊断并在 findings 如实记录。
   `load_plan` 重算 digest + 行数/抽样 samefile 代替）；环境独审 R2（另一并行 agent）另有报告。
 - 既有 nonblocking 观察维持：unknown RECORD hash algorithm 静默忽略（诚实性小缺口）；目标树内空
   `receipts/` 目录无害存在。
+
+## R3 fix verification（2026-10-31 追加，HEAD `2562d3b4`）
+
+- **修复核验（任务1）**：`git show 2562d3b4 -- tools/pdf_runtime_deployment/deployment.py` 为 11 行 diff：
+  `_reconcile_fully_consistent` 的条件由 hash-only 扩为
+  `not destination.is_file() or _sha256_file(...) != row["sha256"] or not os.path.samefile(row["source"], destination)`
+  ——与本报告 R3 最小修复建议一致；非 samefile 返回 False → 落入 `_reconcile` → TargetConflict，
+  与恢复路径对称 fail-closed。commit 内 deployment.py 无其他行为变更（另含文档与审查者文件入库）。
+- **重绑核验（任务2）**：`test_zero_write_reuse_enforces_samefile_and_conflicts_on_plain_copy` 断言修复后契约
+  ——TargetConflict + 被拷贝字节保留 + 移除后 relink COMPLETE + 再次 deploy 零写 REUSED 且
+  samefile 实证 + 恢复路径对称冲突——更强非弱化。（唯一 cosmetic：该文件 module 级 docstring 仍描述修复前
+  gap，建议顺手更新，不影响断言。）
+- **测试/静态核验（任务3）**：W22 专属 36 passed（author 19 + R2 reviewer 8 + round-1 7）；既有
+  environment/paragraph/alignment 43 passed；`mypy tools/pdf_runtime_deployment/` clean（7 files）；`ruff` clean。
+- **绑定核验（任务4）**：部署收据 `tool.implementation_sha256 == git show HEAD:...deployment.py ==
+  worktree == be7dcf3407afd0bc76d8f173954e96ab8722fdfcb909750a67c9875e7c19eab5`（审查者重算，三方一致）；
+  `plan_sha256 == 498b75554fdab844991c0945d8b781f1ffe31418a89dfba9b4c1a37b7734c482`；COMPLETE，
+  36,127 links / 0 reused；`light_verification` PASS + `zero_write_verified=true`；`source_protection`
+  证明字段齐备。R3 由代码 + 测试 + 收据三方闭环。
+- **最终结论：READY_FOR_ROOT**。R3 已关闭；其余交接前流程要求（handoff.json 定稿补齐并列
+  `tested_commit/reviewed_commit >= 2562d3b4`、未提交文档收尾入库）维持前文所述，无新增阻塞。

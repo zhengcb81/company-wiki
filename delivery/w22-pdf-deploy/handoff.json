@@ -5,21 +5,214 @@
   "workdir": "C:/Users/郑曾波/Projects/company-wiki-w22-pdf-deploy",
   "branch": "codex/w22-pdf-deploy-20261030",
   "base_commit": "662f821e749bc221c8c308986e54e00465834332",
-  "implementation_commits": null,
-  "tested_commit": null,
-  "reviewed_commit": null,
-  "code_files": null,
-  "requirements": null,
-  "commands": null,
-  "deployment": null,
-  "config": null,
-  "sdk_e2e": null,
-  "alignment": null,
-  "independent_review": null,
+  "implementation_commits": [
+    "7ef80ff01fb7e5fdd472868d54ae92e4f8aaaf0f",
+    "0434d88f8c69623c95958cacdf7dfefc35b556e4",
+    "e962198c253ea235fd3be26c71f1c44ab2119631",
+    "ee8138cfcf79e985cccdf2b2e8ffda71b5887722",
+    "cb37d82b1f0271679bd1c15a20070f8b93ebbf80",
+    "2562d3b402c3504b56e2ed7dd8363d495bbc2f16"
+  ],
+  "tested_commit": "2562d3b402c3504b56e2ed7dd8363d495bbc2f16",
+  "reviewed_commit": "2562d3b402c3504b56e2ed7dd8363d495bbc2f16",
+  "code_files": [
+    {
+      "path": "tools/pdf_runtime_deployment/deployment.py",
+      "raw_sha256": "be7dcf3407afd0bc76d8f173954e96ab8722fdfcb909750a67c9875e7c19eab5",
+      "lf_sha256": "be7dcf3407afd0bc76d8f173954e96ab8722fdfcb909750a67c9875e7c19eab5"
+    },
+    {
+      "path": "tools/pdf_runtime_deployment/__main__.py",
+      "raw_sha256": "a49206a283ad2b3eae6e744ffda45973c2f4867dd92b88076416a0de75693747",
+      "lf_sha256": "a49206a283ad2b3eae6e744ffda45973c2f4867dd92b88076416a0de75693747"
+    },
+    {
+      "path": "tools/pdf_runtime_deployment/_describe_probe.py",
+      "raw_sha256": "0e14bee097bf1784eecde652c4614b6830d681f33e49187747ff0f23395ee6a8",
+      "lf_sha256": "0e14bee097bf1784eecde652c4614b6830d681f33e49187747ff0f23395ee6a8"
+    },
+    {
+      "path": "tools/pdf_runtime_deployment/_constructor_probe.py",
+      "raw_sha256": "474f5af34b0254f8e62a59655b68a0668e93dd950af7af0d138a822ed5a231ca",
+      "lf_sha256": "474f5af34b0254f8e62a59655b68a0668e93dd950af7af0d138a822ed5a231ca"
+    },
+    {
+      "path": "tools/pdf_runtime_deployment/_synthetic_pdf.py",
+      "raw_sha256": "2cc651c50b70c3a7ab63f76976220e0f57b70aaa81eb004645cab35d74180be4",
+      "lf_sha256": "2cc651c50b70c3a7ab63f76976220e0f57b70aaa81eb004645cab35d74180be4"
+    },
+    {
+      "path": "tools/pdf_runtime_deployment/_alignment_diagnostic.py",
+      "raw_sha256": "9580b1ae03eba7b5e041de360938ded47d120aeb80d627d395847802be28a6f8",
+      "lf_sha256": "9580b1ae03eba7b5e041de360938ded47d120aeb80d627d395847802be28a6f8"
+    },
+    {
+      "path": "tools/pdf_runtime_deployment/README.md",
+      "raw_sha256": "123f56060eae317d7a7cf119dfb823393ab4efa47b721977384abf3ed21e08fa",
+      "lf_sha256": "123f56060eae317d7a7cf119dfb823393ab4efa47b721977384abf3ed21e08fa"
+    },
+    {
+      "path": "tests/unit/test_w22_pdf_deployment_plan.py",
+      "raw_sha256": "3e1cc25ff4ee002c8ed093f6697f4ad3b3bf517b6aa9af379bf258e9f7a93c65",
+      "lf_sha256": "3111990700ed33bda4f10c4f7bb0253b226eb4585f881b9f5c8c16b968f8ad52"
+    },
+    {
+      "path": "tests/unit/test_w22_pdf_deployment_recover.py",
+      "raw_sha256": "6bf7b1e0d34ba26ab43ad11729bd9af5bee696eeb08f2f4ded7c24d7776b1f97",
+      "lf_sha256": "6bf7b1e0d34ba26ab43ad11729bd9af5bee696eeb08f2f4ded7c24d7776b1f97"
+    },
+    {
+      "path": "tests/unit/test_w22_pdf_deployment_config.py",
+      "raw_sha256": "5bca28155691e3ea75e78aef4a34efdb827689828e9d67675eacdf543ac1c286",
+      "lf_sha256": "5bca28155691e3ea75e78aef4a34efdb827689828e9d67675eacdf543ac1c286"
+    },
+    {
+      "path": "tests/unit/test_w22_review_code.py",
+      "raw_sha256": "d1f06e33143553e2a2ae994ac0a501c303d26cd61fade22e3ba885775428c812",
+      "lf_sha256": "d1f06e33143553e2a2ae994ac0a501c303d26cd61fade22e3ba885775428c812"
+    },
+    {
+      "path": "tests/unit/test_w22_review_counterexamples.py",
+      "raw_sha256": "15ee8a8fdbcd73be6ab30b0bd6b569dab1d19202abf4b5eec1506bc5c0095450",
+      "lf_sha256": "15ee8a8fdbcd73be6ab30b0bd6b569dab1d19202abf4b5eec1506bc5c0095450"
+    },
+    {
+      "path": "tests/unit/test_w22_review_code_r2.py",
+      "raw_sha256": "833c50bee3d58b7e2c299e453a3f08a246efb8c3cb535b5f894599dbb8b91d82",
+      "lf_sha256": "833c50bee3d58b7e2c299e453a3f08a246efb8c3cb535b5f894599dbb8b91d82"
+    },
+    {
+      "path": "tests/integration/test_w22_pdf_deployment_entry.py",
+      "raw_sha256": "a77d406d023514e65c92d5986f65898afce0b9c27afb291deef7df807bcef423",
+      "lf_sha256": "a77d406d023514e65c92d5986f65898afce0b9c27afb291deef7df807bcef423"
+    }
+  ],
+  "requirements": {
+    "ascii_deployment_no_alias": "PASS: C:/cwp-runtime/w22-pdf-sdk is a real ASCII venv+artifacts tree (plan 498b7555), not a junction/alias; known non-ASCII resource failure gone (known_non_ascii_failure=false in E2E receipt).",
+    "zero_byte_copy_hardlink": "PASS: 36,127 NTFS hardlinks (36,121 env + 6 model), sdk_bytes_copied=0, model_bytes_copied=0, per-link source rehash + samefile; scaffold 516,976B (9 files); logical shared 1,405,313,714B; actual_allocation honestly 'unknown'.",
+    "existing_resolver_reuse": "PASS: closure resolved by the existing pdf-runtime-closure/2 resolver inside the source interpreter (metadata-only probe); 104 distributions identical to the W21-verified set; environment_sha256 c84a984c unchanged.",
+    "emitted_config_contract": "PASS: pdf-paragraph-runtime/2 config differs from source profile (bcc42711) only in python/artifacts; loads via configured_paragraph_runtime (L1); caps untouched (120s/3p/64MiB/2MiB/4GiB/CPU4); selected only via COMPANY_WIKI_PDF_ENHANCEMENT_CONFIG in owned verification subprocesses.",
+    "idempotent_recoverable_deploy": "PASS: target classes ABSENT/EMPTY/OWNED_COMPLETE/OWNED_INCOMPLETE/FOREIGN; fault injections covered (mid-link failure, source change, foreign conflict, venv failure, permission denial, corrupt receipt, externally modified config, plain-copy tamper on both recovery and reuse paths); zero-write reuse proven by snapshot; 36 unit tests.",
+    "real_entry_evidence": "PASS: L0 fresh-process verify PASS + zero_write_verified + recorded_in_receipt; L2 production-launch constructor CONSTRUCTOR_OK 12.708s/30s (bare cold form honestly timed out twice >30s; no cap raised); L3 canonical E2E status=enhanced accepted_groups=2 rejected_groups=0, completed [1,2], worker 15.99s/120s, peak 3,329,736,704B/4GiB, source preserved, negative control rejected.",
+    "alignment_not_faked": "PASS: real SDK proposals 2/2 accepted by the untouched production align_paragraphs (alignment diagnostic receipt); the earlier accepted-0 root cause was the fixture font lacking ToUnicode CMap (SDK extracted mojibake), not deployment or alignment; ROOT alignment layer untouched.",
+    "no_scope_creep": "PASS: git diff 662f821e..HEAD touches only tools/pdf_runtime_deployment/, tests/unit/test_w22_pdf_deployment_*/test_w22_review_*, tests/integration/test_w22_pdf_deployment_entry.py, docs/plans/w22-pdf-deploy-2026-10-30/, delivery/w22-pdf-deploy/; production PDF files byte-identical to base (verified by reviewers).",
+    "independent_review": "PASS: two independent agents, two rounds. Environment r1 ACCEPTABLE + r2 ACCEPTABLE (fresh-tree A-F all pass, tool SHA four-way match). Code r1 NOT READY (D1/D2/D3) -> all fixed -> r2 READY_FOR_ROOT with R3 (nonblocking) -> R3 fixed per reviewer's minimal fix + rebound test + full binding chain rerun.",
+    "handoff_artifacts": "PASS: this handoff.json (harness-handoff/1) + handoff.md; compact deployment.json in the deployed target; per-file plan manifest retained locally at C:/cwp-runtime/w22-pdf-sdk-plan.local.json (not committed, per card)."
+  },
+  "commands": [
+    {
+      "command": "python -m tools.pdf_runtime_deployment plan --source-config <W21 profile> --target C:/cwp-runtime/w22-pdf-sdk --plan-out C:/cwp-runtime/w22-pdf-sdk-plan.local.json",
+      "exit_code": 0,
+      "seconds": "plan ~6min first run (1.2GB rehash); final rerun after R3",
+      "log": "plan stdout captured in session; plan manifest local"
+    },
+    {
+      "command": "python -m tools.pdf_runtime_deployment deploy --plan C:/cwp-runtime/w22-pdf-sdk-plan.local.json",
+      "exit_code": 0,
+      "seconds": 110.568,
+      "log": "final binding round; earlier rounds 417.079/562.963"
+    },
+    {
+      "command": "python -m tools.pdf_runtime_deployment verify --config C:/cwp-runtime/w22-pdf-sdk/paragraph-runtime.config.json",
+      "exit_code": 0,
+      "seconds": "15-40",
+      "log": "light PASS + config_load PASS + zero_write_verified + recorded_in_receipt"
+    },
+    {
+      "command": "python -m tools.pdf_runtime_deployment constructor-probe --config ... --production-launch --deadline 30",
+      "exit_code": 0,
+      "seconds": 12.708,
+      "log": "CONSTRUCTOR_OK launch=production_child_launch"
+    },
+    {
+      "command": "W22_PDF_DEPLOYMENT_E2E=1 pytest tests/integration/test_w22_pdf_deployment_entry.py",
+      "exit_code": 0,
+      "seconds": 44.25,
+      "log": "4 passed (L0-L3)"
+    },
+    {
+      "command": "pytest tests/unit/test_w22_pdf_deployment_*.py tests/unit/test_w22_review_*.py + existing runtime nodes",
+      "exit_code": 0,
+      "seconds": "~3",
+      "log": "36 author+reviewer unit passed; existing environment/paragraph/alignment nodes 43 passed (62 total at C-phase; 79 at r2 review including reviewer files)"
+    },
+    {
+      "command": "mypy tools/pdf_runtime_deployment/ + tests; ruff check",
+      "exit_code": 0,
+      "seconds": "~10",
+      "log": "clean"
+    }
+  ],
+  "deployment": {
+    "status": "COMPLETE_DEPLOYED_AND_BOUND",
+    "target": "C:/cwp-runtime/w22-pdf-sdk",
+    "plan_sha256": "498b75554fdab844991c0945d8b781f1ffe31418a89dfba9b4c1a37b7734c482",
+    "plan_manifest_local": "C:/cwp-runtime/w22-pdf-sdk-plan.local.json",
+    "receipt_tool_sha256": "be7dcf3407afd0bc76d8f173954e96ab8722fdfcb909750a67c9875e7c19eab5",
+    "receipt_tool_matches_committed_code": true,
+    "created_links": 36127,
+    "sdk_bytes_copied": 0,
+    "model_bytes_copied": 0,
+    "environment_sha256": "c84a984ccb3a56dffbfd0d4538f14ce4a27de44dec4981527a2b0c4a545cdf44",
+    "model_sha256": "00333a43451945aaf89db8ca9c0a17e75d1537c17db60fdb91aa95f4c7929e0c",
+    "model_config_sha256": "fdea30805ce2f5666b147fca941dcdd27ad468e27d6ed21902207d3da056a97d",
+    "intermediate_revisions_preserved": [
+      "review/deployment-intermediate-revision-99a5d250.json"
+    ]
+  },
+  "config": {
+    "schema_version": "pdf-paragraph-runtime/2",
+    "path": "C:/cwp-runtime/w22-pdf-sdk/paragraph-runtime.config.json",
+    "content_sha256": "bd88ad431822b5af0361e9b8fed1e991947a79036b42207126fca61181d6bd22",
+    "differs_from_source_only_in": [
+      "python",
+      "artifacts"
+    ],
+    "production_entry": "configured_paragraph_runtime() via COMPANY_WIKI_PDF_ENHANCEMENT_CONFIG (unchanged interface)"
+  },
+  "sdk_e2e": {
+    "status": "PASS",
+    "receipt": "delivery/w22-pdf-deploy/receipts/w22-synthetic-e2e.json",
+    "warmup": "WARM_OK (production child_launch_command, one-time repo-local bytecode cost; no readiness claim)",
+    "diagnostic": "enhanced, completed [1,2], stream_complete, worker 15.99s/120s, peak 3,329,736,704B/4GiB, known_non_ascii_failure=false"
+  },
+  "alignment": {
+    "status": "PASS_SYNTHETIC",
+    "accepted_groups": 2,
+    "rejected_groups": 0,
+    "negative_control_rejected": true,
+    "source_preserved": true,
+    "diagnostic_receipt": "delivery/w22-pdf-deploy/receipts/w22-alignment-diagnostic.json",
+    "note": "evidence_span_count=0 on the synthetic document is selector semantics (as in W21), not a deployment defect; real-document C2 body quality/recall remains ROOT's scope."
+  },
+  "independent_review": {
+    "agents": 2,
+    "rounds": 2,
+    "environment_r1": "ACCEPTABLE (review/environment-review-20261030.md, against intermediate tree)",
+    "environment_r2": "ACCEPTABLE (review/environment-review-r2-20261030.md, against final bound tree)",
+    "code_r1": "NOT READY: D1 repo-src off-by-one, D2 tool-identity drift, D3 receipt field gaps + samefile recovery counterexample",
+    "code_r2": "READY_FOR_ROOT with R3 (REUSED path samefile) nonblocking (review/code-review-r2-20261030.md)",
+    "r3_fix": "Applied at 2562d3b4 per reviewer's minimal fix (11-line diff, nothing else in deployment.py changed); reviewer test rebound to the fixed contract; full binding chain rerun (plan 498b7555, tool SHA be7dcf34 == HEAD); reviewer R3 verification PASSED with final verdict READY_FOR_ROOT (appended to review/code-review-r2-20261030.md); suite 36+43 passed, mypy/ruff clean",
+    "reviewer_owned_tests": [
+      "tests/unit/test_w22_review_counterexamples.py",
+      "tests/unit/test_w22_review_code.py",
+      "tests/unit/test_w22_review_code_r2.py"
+    ],
+    "final_verdict": "READY_FOR_ROOT (code r2 + R3 verification; environment r2 ACCEPTABLE)"
+  },
   "open": [],
-  "cleanup": null,
-  "sources_unchanged": null,
+  "cleanup": {
+    "unit_basetemp_residue": "removed (.w22t)",
+    "e2e_scratch": "restored absent (receipt cleanup block)",
+    "child_temp_roots": "restored absent (temporary_root_restored_absent=true)",
+    "deployed_env": "RETAINED as explicit deliverable at C:/cwp-runtime/w22-pdf-sdk (not test garbage); retire by removing only owned link names after verifying the exact target; never follow hardlinks to sources",
+    "plan_manifest": "retained locally at C:/cwp-runtime/w22-pdf-sdk-plan.local.json (per-file inventory not committed)"
+  },
+  "sources_unchanged": {
+    "w21_source_env": "C:/Users/郑曾波/Projects/company-wiki/.planning/c3-20261028/pdf-sdk-isolated/env intact; per-link rehash+samefile at deploy; reviewer spot-checks r1(14)+r2(15) all passed; model SHA re-verified after each retirement",
+    "hf_model_snapshot": "model.safetensors sha256 00333a43… unchanged",
+    "old_receipts": "W21/root receipts untouched"
+  },
   "remaining_interface_needs": [],
-  "pushed_to_remote": false,
-  "_note": "POPULATED AFTER FINAL BINDING RUN; do not hand off this draft"
+  "pushed_to_remote": false
 }

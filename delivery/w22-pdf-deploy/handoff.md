@@ -1,6 +1,6 @@
 # W22-PDF-DEPLOY handoff
 
-状态：READY_FOR_ROOT（两轮独立审查的阻塞项已全部修复并复审；详见
+状态：READY_FOR_ROOT（两轮独立审查全部通过；代码复审最终判定 READY_FOR_ROOT，R3 修复核验 PASSED；详见
 `handoff.json` 的 `independent_review`）。配套 `handoff.json` 为
 `harness-handoff/1`。
 

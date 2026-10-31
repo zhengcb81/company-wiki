@@ -2,12 +2,12 @@
 
 Targets NEW code introduced by the D1-D3 fix commits (e962198c/ee8138cf) that
 neither the author's suite nor either earlier reviewer round attacks: the
-zero-write reuse path. The samefile contract was tightened in ``_reconcile``
-(recovery), but ``_reconcile_fully_consistent`` (OWNED_COMPLETE zero-write
-reuse) still verifies content hashes only — and the shared ``receipt_stub``
-still asserts ``source_protection.samefile_verified_per_link: true`` on the
-REUSED receipt it emits. Documents the observed behavior; the accompanying
-re-review report lists the one-line minimal fix.
+zero-write reuse path. Originally this file documented the R3 gap (reuse
+verified content hashes but not samefile while attesting the opposite); the
+author fixed R3 at 2562d3b4 and the first test was rebound to assert the
+fixed contract — non-samefile content at an owned path now fails closed on
+both the reuse and recovery paths. The second test guards the new
+production-launch constructor mode.
 """
 from __future__ import annotations
 

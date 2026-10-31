@@ -104,6 +104,54 @@
 - W22 版 Intergration 收据 evidence_span_count=0（合成文档无业务选段信号，replay 0）——与 W21 相同，
   属 selector 语义，非部署缺陷；真实正文质量/召回仍归 ROOT C2 收口。
 
+### 独审与修复（2026-10-30，两个独立 agent）
+
+- 环境独审（ACCEPTABLE）：14 项硬链接源抽查（含 171MB model.safetensors）samefile+源 SHA 全过；
+  verify 复现 PASS；配置逐字段同源仅 python/artifacts 差异；磁盘账目精确（scaffold 9 文件 516,976B；
+  2,489 个运行时 pyc 正确排除）；0 symlink/junction；无密钥；报告
+  `delivery/w22-pdf-deploy/review/environment-review-20261030.md`。
+- 代码独审（初判 NOT READY，3 阻塞）：
+  - **D1**：CLI 默认 `--repo-src` 用 `parents[3]`（解析到 Projects/src，不存在）——已修
+    `parents[2]/src`（`__main__.py`、`_alignment_diagnostic.py`），删除 deployment.py 死变量；重跑
+    plan 未传 `--repo-src` 由默认值成功，实证修复。
+  - **D2**：部署收据绑定的是未提交中间版本工具（SHA 99a5d250）；plan 含工具身份 → 新 plan 对旧树
+    分类 FOREIGN。处置：保存中间收据为
+    `review/deployment-intermediate-revision-99a5d250.json`；核实目标确为本卡产物后退役旧树
+    （rm 只删链接名；退役后模型源 SHA 复核未变）；此后每轮工具代码变更都以同一纪律重跑绑定链
+    （退役→plan→deploy→verify→constructor→L0-L3）。**最终绑定**：plan `1cba5f2e…`（其后 R3 修复
+    轮再更新）→ 36,127 links COMPLETE → 收据工具 SHA 与对应 HEAD `deployment.py` 逐字节一致
+    （最终轮为 R3 修复后的 HEAD；四向一致由环境复审独立证明）。
+  - **D3**：receipt 缺卡要求字段——已扩展：源输入路径、model/config SHA、输出配置路径+内容 SHA、
+    `actual_allocation=unknown` 显式声明、source_protection 证明字段；verify 把轻量 fresh-process
+    验证结果写回收据（`recorded_in_receipt=true`）。
+  - samefile 契约收紧（审查者 round-1 反例）：恢复路径上字节相同但非 samefile 的普通拷贝按外来内容
+    fail-closed（TargetConflict），不再计 reused；author+reviewer 测试全部重绑（round-2 两个
+    REPO_SRC xfail 转正为断言修复后行为）。
+- 修复后 unit 34 个（author 19 + reviewer 15）全绿；mypy 10 文件/ruff 干净。
+- 审查者新增测试文件（reviewer-owned，author 重绑到修复后契约）：
+  `tests/unit/test_w22_review_counterexamples.py`、`tests/unit/test_w22_review_code.py`、
+  `tests/unit/test_w22_review_code_r2.py`。
+- 复审（两 agent 第二轮）：环境复审 **ACCEPTABLE**（新树 15 项抽查全过、独立 verify 与收据
+  light_verification 逐字段吻合、工具 SHA 四向一致）；代码复审 **READY_FOR_ROOT**（D1/D2/D3 全闭合、
+  重绑无弱化），报告 `review/environment-review-r2-20261030.md`、`review/code-review-r2-20261030.md`。
+  复审遗留唯一非阻塞项 **R3**（REUSED 零写路径只查哈希未查 samefile，与收据 attestation 不对称）
+  ——已按审查者最小修复采纳：`_reconcile_fully_consistent` 增加 samefile 证明，非 samefile 落入
+  恢复路径 fail-closed；R3 反例测试重绑为断言修复后契约；36 unit 全绿；再做一轮绑定链。
+
+### L2 constructor 形态修正（最终绑定轮实测）
+
+- D2 重绑定后重部署的 env 是冷树：bare `python -I` constructor 两次诚实超时 >30s（首次部署时
+  22.748s 压线通过，靠的是 deploy 全量重哈希后的 OS 缓存热度）。**未抬 30s 封顶、未改历史收据、
+  未反复重试同配方**（两次后停止）。
+- 根因：bare 导入把整个 torch/transformers 树冷编译进 env 本地 __pycache__；而**生产 worker 从不
+  裸启动**——永远带 repo-local `pycache_prefix`（W21 launch owner 设计）。因此 constructor-probe
+  新增显式 `--production-launch`（走真实 `child_launch_command`），L2 集成测试重绑到生产启动形态：
+  最终部署 CONSTRUCTOR_OK **22.95s/30s**，`launch=production_child_launch`。bare 形态保留为冷诊断。
+- 最终绑定链（全部以最终提交代码执行）：plan `1cba5f2e…` → deploy 36,127 links COMPLETE（收据工具
+  SHA `302bf87d…` == HEAD `deployment.py` 逐字节）→ verify PASS+零写+`recorded_in_receipt=true` →
+  constructor 生产形态 OK → L0-L3 集成 4/4（L3 E2E enhanced，accepted2/rejected0，worker
+  21.38s/120s，峰值 3.10GiB/4GiB）。
+
 ### 工程事实（部署协议层）
 
 - ROOT 仓 `.venv` python.exe 带 Low 完整性标签（AGENTS 既有记录复现）：Low 进程不能写 Medium 的
