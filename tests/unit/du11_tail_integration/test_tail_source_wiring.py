@@ -195,15 +195,109 @@ def test_native_window_cannot_expand_one_project_into_unbounded_citation_views()
     assert set(plan.tasks[0].support_ids) == set(mapped.values())
 
 
-@pytest.mark.parametrize("work", [4, 5, 6])
-def test_lookahead_exhaustion_never_releases_unproven_left_fragment(work):
+def _unknown_column_tail_with_anchor():
     pair = rows()
     for wire, _, _ in pair:
         wire["layout"].pop("column")
     anchor = native("公司持续推进客户验证。", 2, box=[89.88, 140.8, 530.76, 151.25])
     anchor[0]["hints"]["font_runs"][0]["font_size"] = 10.45
-    result = run([*pair, anchor], max_work_units=work)
+    return [*pair, anchor]
+
+
+@pytest.mark.parametrize("work", [4, 5, 6])
+def test_prefix_exhaustion_marks_entire_unexamined_frontier_without_listing_ids(work):
+    original = _unknown_column_tail_with_anchor()
+    before = deepcopy(original)
+    result = run(original, max_work_units=work)
+    # The source-prefix observation can stop before native/lookahead begins.
+    # An empty diagnostic sample is not an empty deferred source population.
     assert not result["complete"]
     assert not result["windows"]
-    assert {r[0]["unit_id"] for r in pair} <= set(result["deferred_unit_ids"])
+    assert result["unexamined_from_index"] == 0
     assert result["standalone_unit_count"] == 0
+    assert any(row["code"] == "CONTINUITY_WORK_LIMIT" for row in result["diagnostics"])
+    assert result["work_units"] <= work
+    assert original == before
+
+
+@pytest.mark.parametrize("stage", ["witness_native", "tail_geometry"])
+def test_lookahead_exhaustion_never_releases_unproven_left_fragment(monkeypatch, stage):
+    from company_wiki.document_understanding import narrative_continuity as module
+
+    original = _unknown_column_tail_with_anchor()
+    before = deepcopy(original)
+    first = {r[0]["unit_id"] for r in original[:2]}
+    # Real successful source geometry, not an artificial always-failing pair.
+    complete = run(original)
+    assert complete["complete"]
+    assert any(set(w["member_unit_ids"]) == first for w in complete["windows"])
+    entered = []
+    native_method = module._Analysis.native
+    tail_method = module._Analysis.tail_column_proof
+
+    def stop_during_native(self, unit, *args, **kwargs):
+        if unit["unit_id"] == original[2][0]["unit_id"]:
+            # The first visit to this source is the bounded lookahead witness.
+            # Fault the real account at this stage; do not guess total scans.
+            assert args[-1] is False
+            entered.append("witness_native")
+            assert not self.charge(self.account.max_work_units + 1)
+        return native_method(self, unit, *args, **kwargs)
+
+    def stop_during_tail(self, *args, **kwargs):
+        entered.append("tail_geometry")
+        assert not self.charge(self.account.max_work_units + 1)
+        return tail_method(self, *args, **kwargs)
+
+    monkeypatch.setattr(module._Analysis, "native" if stage == "witness_native" else "tail_column_proof",
+                        stop_during_native if stage == "witness_native" else stop_during_tail)
+    result = run(original)
+    assert entered == [stage], "This must test exhaustion inside the intended phase"
+    assert not result["complete"] and not result["windows"]
+    assert result["standalone_unit_count"] == 0
+    assert first <= set(result["deferred_unit_ids"])
+    assert result["unexamined_from_index"] == 0
+    assert any(row["code"] == "CONTINUITY_WORK_LIMIT" for row in result["diagnostics"])
+    assert original == before
+
+
+@pytest.mark.parametrize("representation", ["ids_with_complete_ranges", "ranges_without_id_samples", "frontier"])
+def test_real_source_consumer_blocks_all_compact_deferred_material(monkeypatch, representation):
+    from company_wiki.source_catalog import narrative_reading as reading
+
+    parsed, pipeline = source_case([], native_rows=_unknown_column_tail_with_anchor())
+    before = deepcopy(pipeline)
+    expected = {unit.unit_id for unit in parsed.units}
+    # A positive real source path proves the later empty result is caused by
+    # the injected unresolved-source disposition, not an irrelevant fixture.
+    positive = reading._candidates(parsed, deepcopy(pipeline))
+    assert positive[0]
+    source_owner = reading.build_native_continuity
+    called = []
+
+    def unresolved(units, **kwargs):
+        result = source_owner(units, **kwargs)
+        assert result["windows"]
+        called.append(True)
+        # IDs are bounded examples. The ranges/frontier carry complete coverage.
+        result.update(complete=False, windows=[], adjacency_edges=[],
+                      standalone_unit_count=0, deferred_unit_ids=[],
+                      deferred_unit_ranges=[], unexamined_from_index=None)
+        if representation == "frontier":
+            result["unexamined_from_index"] = 0
+        else:
+            result.update(deferred_unit_count=len(units), deferred_limited=True)
+            result["deferred_unit_ranges"] = [{
+                "source_id": units[0]["hints"]["source_id"], "page": units[0]["page"],
+                "first_ordinal": units[0]["ordinal"], "last_ordinal": units[-1]["ordinal"],
+            }]
+            if representation == "ids_with_complete_ranges":
+                result["deferred_unit_ids"] = [units[0]["unit_id"]]
+        return result
+
+    monkeypatch.setattr(reading, "build_native_continuity", unresolved)
+    candidates, _metadata, eligible, complete, withheld = reading._candidates(parsed, pipeline)
+    assert called == [True]
+    assert not candidates and not eligible and not complete
+    assert expected <= {uid for row in withheld for uid in row["known_unit_ids"]}
+    assert pipeline == before

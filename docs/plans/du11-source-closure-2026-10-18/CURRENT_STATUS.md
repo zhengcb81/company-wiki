@@ -1,6 +1,6 @@
 # 当前项目状态 — 2026-10-31
 
-**项目未完成。基础设施和共享阅读来源工程已大幅完成；当前先处理3个CI回归，再完成M8新版真实摘要→恢复→RF采用→公司审查循环。** 本页是唯一当前入口；机器视图是[CURRENT_STATUS.json](CURRENT_STATUS.json)，接手看[HANDOFF](HANDOFF.md)，执行看[task_plan](task_plan.md)。历史全文在[HISTORY](HISTORY.md)，不再把旧“当前/下一步/暂停”叠在本页。
+**项目未完成。基础设施和共享阅读来源工程已大幅完成；P0三个CI断言的根因修复已本地测试/独审通过，正等待新精确CI；接着完成M8新版真实摘要→恢复→RF采用→公司审查循环。** 本页是唯一当前入口；机器视图是[CURRENT_STATUS.json](CURRENT_STATUS.json)，接手看[HANDOFF](HANDOFF.md)，执行看[task_plan](task_plan.md)。历史全文在[HISTORY](HISTORY.md)，不再把旧“当前/下一步/暂停”叠在本页。
 
 ## 真实位置
 
@@ -30,7 +30,7 @@ M8的634项相关测试、独立12例和此前167项pre-push均是真实局部�
 
 ## 唯一下一步
 
-按[task_plan的P0](task_plan.md#next-step)修复上述CI合同：起步早停、真正lookahead中停、三种延期表示在真实消费者中一致。通过短域和一个大节点独审后发布、观察精确CI，再进入P1真实摘要/恢复。**本次只整理文档和只读诊断，没有恢复产品代码实施，也没有收费调用。**
+[P0根修](review/mainline-closeout-20261031/p0/README.md)已39P/101相关/3复验和独审0OPEN，生产逻辑与限额未改。观察新精确CI后进入P1真实摘要/恢复；不能沿用下面保留的旧失败结论或把本地绿写成远端绿。**用户已恢复主线实施，当前正在P0；不再新增施工包。**
 
 ## 调度、预算和旁线
 

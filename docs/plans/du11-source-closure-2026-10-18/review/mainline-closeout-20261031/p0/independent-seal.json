@@ -1,0 +1,26 @@
+[
+  {
+    "path": "src/company_wiki/document_understanding/narrative_continuity.py",
+    "raw_sha256": "d8c8be3d1556fed569fb825db3d0541f806ebb39cfb72008ee952772712db32d",
+    "lf_sha256": "53a2bdf43f74e947e9d790688fc5a799e7d7619297b67e95a820af3dc96c7b6f",
+    "bytes": 49505
+  },
+  {
+    "path": "src/company_wiki/source_catalog/narrative_reading.py",
+    "raw_sha256": "eeff9113fbb9437993e03c562acadba33025d7e9e5acbf67bff77003d0bb6ba7",
+    "lf_sha256": "b21d0b7ad3943d5aea381cc477eaf711ce67acb4636b6d4a31342805c81cf42d",
+    "bytes": 105351
+  },
+  {
+    "path": "tests/unit/du11_tail_integration/test_tail_source_wiring.py",
+    "raw_sha256": "18bae30ecce241ac37c687b867c9b69dff9c2e6be15dfaa2ca24ce00a0f9ef55",
+    "lf_sha256": "18bae30ecce241ac37c687b867c9b69dff9c2e6be15dfaa2ca24ce00a0f9ef55",
+    "bytes": 14098
+  },
+  {
+    "path": "tests/unit/document_understanding_selection/test_reading_native_continuity.py",
+    "raw_sha256": "cfab6382e91222aa7d028ee59d74d0f76ce5031c34f4d7701a7fd3367e2c1cb2",
+    "lf_sha256": "08d2ef04ad5dd3c5352b608880d5926ce411c3a92721f08d7bc8a93f19e7bb5e",
+    "bytes": 44106
+  }
+]

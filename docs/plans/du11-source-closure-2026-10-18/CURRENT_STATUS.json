@@ -5,8 +5,8 @@
   "canonical_entry": "CURRENT_STATUS.md",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
-  "project_status": "INCOMPLETE_CI_REGRESSION_THEN_M8_REAL_ACCEPTANCE",
-  "scope_this_update": "PWF reconciliation only; no product implementation, paid provider call or download",
+  "project_status": "P0_LOCAL_REVIEW_PASS_WAIT_EXACT_CI_THEN_P1_P2",
+  "scope_this_update": "User resumed P0-P2 mainline implementation; no new outsourcing packages",
   "last_code_commit": "daa9106fca2dfba17ea486d6e15fd3289a3d5a25",
   "verified_publication_before_docs": {
     "local_branch": "master",
@@ -74,7 +74,7 @@
   "remaining_stages": [
     {
       "id": "P0",
-      "status": "READY_TO_IMPLEMENT",
+      "status": "LOCAL_TEST_REVIEW_PASS_WAIT_CI",
       "task": "Exact CI compact-frontier/lookahead contract repair"
     },
     {
@@ -93,7 +93,7 @@
       "task": "W12 original-company rerun, new-company generalization, fixed8company fullaudit/skillimprovement and finalclean streak"
     }
   ],
-  "next_action": "P0：修复并验证低工作额度下“起步早停／真正lookahead中停／IDs-ranges-frontier消费者一致性”合同；先三个精确失败节点和受影响消费者短域，再独审、正常发布并观察对应CI；不改业务源码来迎合固定4/5/6预算，不重复全仓。",
+  "next_action": "观察P0测试修复发布的精确CI；通过后进入已准备的P1真实来源/5运行、激活/中断恢复与0重复POST；随后P2实际RF采用。不扩施工包。",
   "package_status_registry": "PACKAGE_STATUS.json",
   "handoff": "HANDOFF.md",
   "goal_definition": "MAINLINE_LOOP_GOAL.md",
@@ -110,5 +110,14 @@
     "W21 canonicalC2 actual enhanced read/alignment; do not count nativefallback as enhancement",
     "Long-source finite frontier fairness/resumption and BRK13deferred tasks",
     "US regulatoryPDF/HK newcoverage/US_RPO and truly unexposedholdout evidence as required in P1/P3"
-  ]
+  ],
+  "execution_mode": "manual_authorized_mainline_implementation",
+  "p0_repair": {
+    "status": "LOCAL_REVIEW_PASS_CI_PENDING",
+    "evidence": "review/mainline-closeout-20261031/p0/README.md",
+    "production_src_changed": false,
+    "test_module_passed": 39,
+    "related_passed": 101,
+    "independent_open": 0
+  }
 }
