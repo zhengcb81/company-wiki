@@ -30,8 +30,13 @@ Sample: 7 documents / 14 pages = 8 eval + 5 holdout + 1 declared
 the catalog; not counted as scan coverage). Known coverage gaps, listed per
 the card's "样本不足列缺口" rule and NOT filled post-freeze: no two-column
 (双栏) page in the catalog slice selected — the Q&A and cross-paragraph
-qualifier groups are covered, the two-column group is not; and no seal/stamp
-(印章) pages exist among the frozen documents. Markets CN zh-CN / HK zh / US en;
+qualifier groups are covered, the two-column group is not; no seal/stamp
+(印章) pages exist among the frozen documents; and the frozen business-section
+pages contain no mathematical formulas, so the card's minimal formula
+negative-control is absent rather than minimal (no formula OCR was attempted,
+per the card's do-not-expand rule). Original-file integrity: all 7 source
+PDFs' mtimes predate the session start (zero writes to originals; SHA match
+already verified by the reviewer). Markets CN zh-CN / HK zh / US en;
 genres annual/semi-annual/quarterly reports, IR Q&A, convertible-bond
 prospectus, EN earnings call. Sample manifest and gold were frozen **before any
 engine output existed** (`gold.json.frozen_before_engine_outputs=true`); native
