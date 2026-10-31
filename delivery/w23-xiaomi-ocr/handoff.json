@@ -9,10 +9,11 @@
   "0d24c943 docs: freeze W23 OCR comparison sample and gold before any engine output",
   "8469df7c feat: add W23 OCR comparison tool with frozen metrics contracts",
   "fde39dfe feat: run W23 comparison with R0 baseline, N0 control and recorded X1/X2 resource bounds",
-  "c62ba969 fix: address independent review findings - runner field passthrough, gold char-level corrections, fact accounting"
+  "c62ba969 fix: address independent review findings - runner field passthrough, gold char-level corrections, fact accounting",
+  "845972fc feat: execute Xiaomi X1 arm under card bounds via read-only mapped exact-fp32 variant"
  ],
- "final_tested_commit": "c2e5dcf8",
- "final_reviewed_commit": "ca3bbbcb (delta re-review by the same independent agent, see review_independent.md)",
+ "final_tested_commit": "a2288b4c0fe2eaa57b521d8b18cab59a670bd757",
+ "final_reviewed_commit": "a2288b4c0fe2eaa57b521d8b18cab59a670bd757 (delta re-review for the X1 execution, see review_independent.md)",
  "code_file_sha256": {
   "tools/ocr_comparison/__init__.py": {
    "raw_sha256": "061e0e74ef802f57d09dc23d5951756161442dab116343921838616b8cd449c4",
@@ -67,12 +68,12 @@
    "lf_sha256": "2e48e4097d52be969b5e2f6417fc9f1837f929ebc68c0e00e44a1e97af904c48"
   },
   "tests/unit/test_w23_ocr_comparison_metrics.py": {
-   "raw_sha256": "382fe1a591e2050c24d93dfe89fda3850d5c5e3b7c8b16ee9bf8d6187cbb826d",
-   "lf_sha256": "382fe1a591e2050c24d93dfe89fda3850d5c5e3b7c8b16ee9bf8d6187cbb826d"
+   "raw_sha256": "8c4572b5e3ed05e5c67b0e31acdb9af99acc68605e63cb089bb2b32b7a4b045a",
+   "lf_sha256": "8c4572b5e3ed05e5c67b0e31acdb9af99acc68605e63cb089bb2b32b7a4b045a"
   },
   "tests/integration/test_w23_ocr_comparison_entry.py": {
-   "raw_sha256": "33f99eb0634b2c54d729ec94c2f6ee88c8623c2f1d03334c1e4a97dc77f10e60",
-   "lf_sha256": "33f99eb0634b2c54d729ec94c2f6ee88c8623c2f1d03334c1e4a97dc77f10e60"
+   "raw_sha256": "1de7fca534619c269552064502804c90f19209083fd243d974c0970e264b7215",
+   "lf_sha256": "5947cb1b854db267ff339e2b6b664cdf5262926910aaaf451906255911533b33"
   }
  },
  "requirements": [
