@@ -11,8 +11,8 @@
   "fde39dfe feat: run W23 comparison with R0 baseline, N0 control and recorded X1/X2 resource bounds",
   "c62ba969 fix: address independent review findings - runner field passthrough, gold char-level corrections, fact accounting"
  ],
- "final_tested_commit": "PENDING_COMMIT",
- "final_reviewed_commit": "c62ba969 (delta re-review pending for the self-audit fixes)",
+ "final_tested_commit": "ca3bbbcb",
+ "final_reviewed_commit": "ca3bbbcb (delta re-review by the same independent agent, see review_independent.md)",
  "code_file_sha256": {
   "tools/ocr_comparison/__init__.py": {
    "raw_sha256": "061e0e74ef802f57d09dc23d5951756161442dab116343921838616b8cd449c4",
