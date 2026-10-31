@@ -1,0 +1,79 @@
+{
+ "records": [
+  {
+   "page_id": "byd_ar_2024_p021",
+   "status": "not_run",
+   "retries": 0
+  },
+  {
+   "page_id": "byd_ar_2024_p022",
+   "status": "not_run",
+   "retries": 0
+  },
+  {
+   "page_id": "amec_h1_2026_p009",
+   "status": "not_run",
+   "retries": 0
+  },
+  {
+   "page_id": "amec_h1_2026_p011",
+   "status": "not_run",
+   "retries": 0
+  },
+  {
+   "page_id": "meituan_ar_2024_p000",
+   "status": "not_run",
+   "retries": 0
+  },
+  {
+   "page_id": "meituan_ar_2024_p011",
+   "status": "not_run",
+   "retries": 0
+  },
+  {
+   "page_id": "ksy_q1_2026_p002",
+   "status": "not_run",
+   "retries": 0
+  },
+  {
+   "page_id": "ksy_q1_2026_p002_synthetic_degraded",
+   "status": "not_run",
+   "retries": 0
+  },
+  {
+   "page_id": "ir_wanrun_20241104_p000",
+   "status": "not_run",
+   "retries": 0
+  },
+  {
+   "page_id": "ir_wanrun_20241104_p002",
+   "status": "not_run",
+   "retries": 0
+  },
+  {
+   "page_id": "hrjp_cb_prospectus_p006",
+   "status": "not_run",
+   "retries": 0
+  },
+  {
+   "page_id": "hrjp_cb_prospectus_p037",
+   "status": "not_run",
+   "retries": 0
+  },
+  {
+   "page_id": "bili_call_4q22_en_p001",
+   "status": "not_run",
+   "retries": 0
+  },
+  {
+   "page_id": "bili_call_4q22_en_p003",
+   "status": "not_run",
+   "retries": 0
+  }
+ ],
+ "summary": {
+  "pages_total": 14,
+  "pages_ok": 0,
+  "batch_status": "failed"
+ }
+}

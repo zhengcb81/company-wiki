@@ -122,6 +122,7 @@ def main(argv: list[str] | None = None) -> int:
                     model_dir=model_dir,
                     deadline_seconds=args.deadline,
                     max_new_tokens=args.max_new_tokens,
+                    memory_cap_bytes=int(args.memory_cap_gb * (1024 ** 3)),
                 )
                 arm_identity["X1"] = backend.identity_manifest
 
@@ -138,8 +139,8 @@ def main(argv: list[str] | None = None) -> int:
                     if hit is not None and not args.no_cache:
                         return hit
                     out = _backend.run_page(png)
-                    out["text_sha256"] = hashlib.sha256(out["text"].encode()).hexdigest()
-                    out["engine_seconds_original"] = out.get("engine_seconds")
+                    if "text" in out:
+                        out["text_sha256"] = hashlib.sha256(out["text"].encode()).hexdigest()
                     cache.put(key, out)
                     return out
 

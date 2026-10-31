@@ -66,10 +66,15 @@ def render_pages(manifest_path: str | Path, out_dir: str | Path) -> list[dict]:
 
 
 def _resolve_physical(doc: dict) -> str:
+    """Resolve a root-relative location against the project that owns the
+    original bytes (read-only).  ``CWP_SOURCE_BASE`` defaults to the sibling
+    ``company-wiki`` checkout because the sparse W23 worktree holds no raw
+    documents of its own."""
     import os
 
+    base = Path(os.environ.get("CWP_SOURCE_BASE")
+                or (Path(__file__).resolve().parents[2].parent / "company-wiki"))
     root_id = doc["root_id"]
-    base = Path(os.environ["CWP_PROJECT_ROOT"])
     if root_id == "company_raw":
         return str(base / "companies" / doc["relative_path"])
     if root_id == "dayu_portfolio":

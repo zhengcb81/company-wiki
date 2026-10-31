@@ -1,0 +1,135 @@
+{
+ "records": [
+  {
+   "page_id": "byd_ar_2024_p021",
+   "status": "unsupported",
+   "engine_seconds": 6.2590369999816176,
+   "wall_seconds": 6.2590369999816176,
+   "retries": 0,
+   "inference_runs": 1,
+   "error": "memory_cap_below_minimum_load_peak"
+  },
+  {
+   "page_id": "byd_ar_2024_p022",
+   "status": "unsupported",
+   "engine_seconds": 0.00044860001071356237,
+   "wall_seconds": 0.00044860001071356237,
+   "retries": 0,
+   "inference_runs": 1,
+   "error": "memory_cap_below_minimum_load_peak"
+  },
+  {
+   "page_id": "amec_h1_2026_p009",
+   "status": "unsupported",
+   "engine_seconds": 0.00028219999512657523,
+   "wall_seconds": 0.00028219999512657523,
+   "retries": 0,
+   "inference_runs": 1,
+   "error": "memory_cap_below_minimum_load_peak"
+  },
+  {
+   "page_id": "amec_h1_2026_p011",
+   "status": "unsupported",
+   "engine_seconds": 0.0002406999992672354,
+   "wall_seconds": 0.0002406999992672354,
+   "retries": 0,
+   "inference_runs": 1,
+   "error": "memory_cap_below_minimum_load_peak"
+  },
+  {
+   "page_id": "meituan_ar_2024_p000",
+   "status": "unsupported",
+   "engine_seconds": 0.00022640000679530203,
+   "wall_seconds": 0.00022640000679530203,
+   "retries": 0,
+   "inference_runs": 1,
+   "error": "memory_cap_below_minimum_load_peak"
+  },
+  {
+   "page_id": "meituan_ar_2024_p011",
+   "status": "unsupported",
+   "engine_seconds": 0.000218700006371364,
+   "wall_seconds": 0.000218700006371364,
+   "retries": 0,
+   "inference_runs": 1,
+   "error": "memory_cap_below_minimum_load_peak"
+  },
+  {
+   "page_id": "ksy_q1_2026_p002",
+   "status": "unsupported",
+   "engine_seconds": 0.0002523000002838671,
+   "wall_seconds": 0.0002523000002838671,
+   "retries": 0,
+   "inference_runs": 1,
+   "error": "memory_cap_below_minimum_load_peak"
+  },
+  {
+   "page_id": "ksy_q1_2026_p002_synthetic_degraded",
+   "status": "unsupported",
+   "engine_seconds": 0.000228599994443357,
+   "wall_seconds": 0.000228599994443357,
+   "retries": 0,
+   "inference_runs": 1,
+   "error": "memory_cap_below_minimum_load_peak"
+  },
+  {
+   "page_id": "ir_wanrun_20241104_p000",
+   "status": "unsupported",
+   "engine_seconds": 0.00022609997540712357,
+   "wall_seconds": 0.00022609997540712357,
+   "retries": 0,
+   "inference_runs": 1,
+   "error": "memory_cap_below_minimum_load_peak"
+  },
+  {
+   "page_id": "ir_wanrun_20241104_p002",
+   "status": "unsupported",
+   "engine_seconds": 0.0002106999745592475,
+   "wall_seconds": 0.0002106999745592475,
+   "retries": 0,
+   "inference_runs": 1,
+   "error": "memory_cap_below_minimum_load_peak"
+  },
+  {
+   "page_id": "hrjp_cb_prospectus_p006",
+   "status": "unsupported",
+   "engine_seconds": 0.00020359997870400548,
+   "wall_seconds": 0.00020359997870400548,
+   "retries": 0,
+   "inference_runs": 1,
+   "error": "memory_cap_below_minimum_load_peak"
+  },
+  {
+   "page_id": "hrjp_cb_prospectus_p037",
+   "status": "unsupported",
+   "engine_seconds": 0.00019779999274760485,
+   "wall_seconds": 0.00019779999274760485,
+   "retries": 0,
+   "inference_runs": 1,
+   "error": "memory_cap_below_minimum_load_peak"
+  },
+  {
+   "page_id": "bili_call_4q22_en_p001",
+   "status": "unsupported",
+   "engine_seconds": 0.00021570001263171434,
+   "wall_seconds": 0.00021570001263171434,
+   "retries": 0,
+   "inference_runs": 1,
+   "error": "memory_cap_below_minimum_load_peak"
+  },
+  {
+   "page_id": "bili_call_4q22_en_p003",
+   "status": "unsupported",
+   "engine_seconds": 0.00021410000044852495,
+   "wall_seconds": 0.00021410000044852495,
+   "retries": 0,
+   "inference_runs": 1,
+   "error": "memory_cap_below_minimum_load_peak"
+  }
+ ],
+ "summary": {
+  "pages_total": 14,
+  "pages_ok": 0,
+  "batch_status": "failed"
+ }
+}

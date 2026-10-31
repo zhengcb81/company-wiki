@@ -38,6 +38,8 @@ class RapidOCRR0:
         self.identity_manifest["recovery"] = "production-bounded-source-roi"
 
     def run_page(self, png_path: str | Path) -> dict:
+        import time
+
         from company_wiki.document_normalization.local_ocr import OCRLimits
         from company_wiki.document_normalization.ocr_region_recovery import (
             RecoveryBudget,
@@ -45,8 +47,11 @@ class RapidOCRR0:
         )
 
         data = Path(png_path).read_bytes()
-        limits = OCRLimits(deadline=self.deadline_seconds)
-        with IsolatedOCRAdapter(self.config, deadline=self.deadline_seconds) as adapter:
+        # Production deadline semantics: absolute monotonic timestamp that
+        # includes native startup (isolated child launch).
+        deadline = time.monotonic() + self.deadline_seconds
+        limits = OCRLimits(deadline=deadline)
+        with IsolatedOCRAdapter(self.config, deadline=deadline) as adapter:
             adapter.validate_environment()
             result = adapter.transcribe(data, limits=limits)
             recovered = ()

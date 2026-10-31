@@ -17,7 +17,10 @@ import re
 import unicodedata
 
 _NUMBER_RE = re.compile(
-    r"[+-]?\d[\d,]*(?:\.\d+)?(?:%)?"
+    # OCR thousands-group artifact: whitespace may follow a group comma or the
+    # decimal point ("4, 281, 084", "41. 12%"), but bare digit-space-digit
+    # stays separate tokens.
+    r"[+-]?\d+(?:[ \t]*,[ \t]*\d+)*(?:[ \t]*\.[ \t]*\d+)?(?:%)?"
 )
 # Longer suffixes first so 百萬元 wins over 百萬.
 _UNIT_SUFFIXES = (
@@ -144,7 +147,10 @@ def extract_numbers(text: str) -> list[dict]:
 
 
 def _canon_number(token: dict) -> tuple[str, str]:
-    text = token["value"].replace(",", "")
+    # Declared narrow canon: drop group separators and OCR-introduced internal
+    # whitespace from the value ("4, 281, 084" == "4,281,084"); percent sign
+    # and unit stay part of the identity.
+    text = re.sub(r"[, \t]", "", token["value"])
     return text, token["unit"]
 
 

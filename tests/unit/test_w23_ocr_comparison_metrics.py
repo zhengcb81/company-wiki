@@ -129,6 +129,15 @@ def test_superscript_marker_not_a_number():
     assert prf["recall_hits"] == 0
 
 
+def test_ocr_internal_whitespace_in_numbers_stays_one_token():
+    # R0-style table spacing: "4,281, 084" and "41. 12%" are single numbers
+    tokens = extract_numbers("4,281, 084 41. 12% 2, 703. 7百萬元")
+    assert [t["text"] for t in tokens] == ["4,281, 084", "41. 12%", "2, 703. 7"]
+    gold = extract_numbers("4,281,084")
+    prf = number_prf(gold, tokens[:1])
+    assert prf["recall_hits"] == 1
+
+
 @pytest.mark.parametrize(
     "status,expected_pass",
     [

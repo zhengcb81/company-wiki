@@ -1,0 +1,1315 @@
+{
+ "schema_version": "cwp-ocr-comparison/1",
+ "arms": {
+  "R0": {
+   "identity": {
+    "schema_version": "cwp-local-ocr-config/1",
+    "adapter": "rapidocr-cpu/1",
+    "engine_version": "3.8.1",
+    "runtime_version": "1.26.0",
+    "base_config_sha256": "e753d39c0222297f0180e1bdcde1799bc26218f315356763362810846b6afa84",
+    "models": {
+     "det": "d2a7720d45a54257208b1e13e36a8479894cb74155a5efe29462512d42f49da9",
+     "cls": "e47acedf663230f8863ff1ab0e64dd2d82b838fceb5957146dab185a89d6215c",
+     "rec": "48fc40f24f6d2a207a2b1091d3437eb3cc3eb6b676dc3ef9c37384005483683b"
+    },
+    "device": "cpu",
+    "text_score": 0.5,
+    "low_confidence_threshold": 0.8,
+    "max_side_len": 3000,
+    "intra_op_threads": 2,
+    "inter_op_threads": 1,
+    "box_round_decimals": 3,
+    "confidence_round_decimals": 6,
+    "reading_order": "top-left-box/1",
+    "transform": "rapidocr-image-rgb/1",
+    "region_diagnostics": "cwp-ocr-region-diagnostics/1",
+    "engine_text_score_floor": 0.0,
+    "region_recovery": "cwp-ocr-region-recovery/1",
+    "region_recovery_algorithm": "bounded-source-roi/2",
+    "arm": "R0",
+    "recovery": "production-bounded-source-roi"
+   },
+   "summary": {
+    "pages_total": 14,
+    "pages_ok": 14,
+    "batch_status": "ok"
+   },
+   "evaluation": {
+    "arm": "R0",
+    "eval": {
+     "per_page": [
+      {
+       "page_status": "ok",
+       "hyp_sha256": "20f87913338caf8b9a965374fbfbbe2d0a210ea611ef7eabae9de39a709db215",
+       "cer_strict": 0.1158113730929265,
+       "cer_strict_ops": {
+        "insertions": 27,
+        "deletions": 123,
+        "substitutions": 17
+       },
+       "cer_narrow": 0.07635285396590066,
+       "cer_narrow_ops": {
+        "insertions": 19,
+        "deletions": 76,
+        "substitutions": 8
+       },
+       "numbers": {
+        "gold_total": 10,
+        "hyp_total": 9,
+        "recall_hits": 9,
+        "precision_hits": 9,
+        "recall": 0.9,
+        "precision": 1.0
+       },
+       "hyp_chars": 1346,
+       "gold_chars": 1442,
+       "repetition_flagged": false,
+       "page_id": "byd_ar_2024_p021"
+      },
+      {
+       "page_status": "ok",
+       "hyp_sha256": "ac06a03be41c4c5454d9b85d2e0fa2f2db1fe55a0154296cf8974e8cc10c1eab",
+       "cer_strict": 0.17018909899888765,
+       "cer_strict_ops": {
+        "insertions": 33,
+        "deletions": 95,
+        "substitutions": 25
+       },
+       "cer_narrow": 0.11566265060240964,
+       "cer_narrow_ops": {
+        "insertions": 23,
+        "deletions": 52,
+        "substitutions": 21
+       },
+       "numbers": {
+        "gold_total": 8,
+        "hyp_total": 8,
+        "recall_hits": 8,
+        "precision_hits": 8,
+        "recall": 1.0,
+        "precision": 1.0
+       },
+       "hyp_chars": 837,
+       "gold_chars": 899,
+       "repetition_flagged": false,
+       "page_id": "amec_h1_2026_p009"
+      },
+      {
+       "page_status": "ok",
+       "hyp_sha256": "09d00360f3fdadf3312ca401d8243621dda2634c23891d9675698d6f360c6a54",
+       "cer_strict": 0.1130952380952381,
+       "cer_strict_ops": {
+        "insertions": 6,
+        "deletions": 126,
+        "substitutions": 1
+       },
+       "cer_narrow": 0.07671232876712329,
+       "cer_narrow_ops": {
+        "insertions": 6,
+        "deletions": 77,
+        "substitutions": 1
+       },
+       "numbers": {
+        "gold_total": 9,
+        "hyp_total": 8,
+        "recall_hits": 8,
+        "precision_hits": 8,
+        "recall": 0.8888888888888888,
+        "precision": 1.0
+       },
+       "hyp_chars": 1056,
+       "gold_chars": 1176,
+       "repetition_flagged": false,
+       "page_id": "amec_h1_2026_p011"
+      },
+      {
+       "page_status": "ok",
+       "hyp_sha256": "9084a7c98d60049b186363588003a1126c5b6c651a9ddbe2e5e451d9616c4979",
+       "cer_strict": 0.09574468085106383,
+       "cer_strict_ops": {
+        "insertions": 16,
+        "deletions": 36,
+        "substitutions": 47
+       },
+       "cer_narrow": 0.07692307692307693,
+       "cer_narrow_ops": {
+        "insertions": 0,
+        "deletions": 36,
+        "substitutions": 43
+       },
+       "numbers": {
+        "gold_total": 7,
+        "hyp_total": 7,
+        "recall_hits": 7,
+        "precision_hits": 7,
+        "recall": 1.0,
+        "precision": 1.0
+       },
+       "hyp_chars": 1014,
+       "gold_chars": 1034,
+       "repetition_flagged": false,
+       "page_id": "meituan_ar_2024_p011"
+      },
+      {
+       "page_status": "ok",
+       "hyp_sha256": "dd4318ff3aee91d9a91e4a276bfe851a68c63b1f6188da8d748e47ceb90d81e5",
+       "cer_strict": 0.11357340720221606,
+       "cer_strict_ops": {
+        "insertions": 1,
+        "deletions": 80,
+        "substitutions": 42
+       },
+       "cer_narrow": 0.08669950738916256,
+       "cer_narrow_ops": {
+        "insertions": 1,
+        "deletions": 45,
+        "substitutions": 42
+       },
+       "numbers": {
+        "gold_total": 29,
+        "hyp_total": 28,
+        "recall_hits": 27,
+        "precision_hits": 27,
+        "recall": 0.9310344827586207,
+        "precision": 0.9642857142857143
+       },
+       "hyp_chars": 1004,
+       "gold_chars": 1083,
+       "repetition_flagged": false,
+       "page_id": "ksy_q1_2026_p002"
+      },
+      {
+       "page_status": "ok",
+       "hyp_sha256": "a00bdaae2e46b2eee1431bfb553d568fcca609f05290b180591b963068cba93d",
+       "cer_strict": 0.2188365650969529,
+       "cer_strict_ops": {
+        "insertions": 1,
+        "deletions": 188,
+        "substitutions": 48
+       },
+       "cer_narrow": 0.1960591133004926,
+       "cer_narrow_ops": {
+        "insertions": 1,
+        "deletions": 150,
+        "substitutions": 48
+       },
+       "numbers": {
+        "gold_total": 29,
+        "hyp_total": 26,
+        "recall_hits": 25,
+        "precision_hits": 25,
+        "recall": 0.8620689655172413,
+        "precision": 0.9615384615384616
+       },
+       "hyp_chars": 896,
+       "gold_chars": 1083,
+       "repetition_flagged": false,
+       "page_id": "ksy_q1_2026_p002_synthetic_degraded"
+      },
+      {
+       "page_status": "ok",
+       "hyp_sha256": "5d036c568a74c967113fba8bb0b0f66362ba1d87d193522fe018ba0f619935ba",
+       "cer_strict": 0.2795138888888889,
+       "cer_strict_ops": {
+        "insertions": 30,
+        "deletions": 83,
+        "substitutions": 48
+       },
+       "cer_narrow": 0.2163265306122449,
+       "cer_narrow_ops": {
+        "insertions": 34,
+        "deletions": 37,
+        "substitutions": 35
+       },
+       "numbers": {
+        "gold_total": 11,
+        "hyp_total": 11,
+        "recall_hits": 11,
+        "precision_hits": 11,
+        "recall": 1.0,
+        "precision": 1.0
+       },
+       "hyp_chars": 523,
+       "gold_chars": 576,
+       "repetition_flagged": false,
+       "page_id": "ir_wanrun_20241104_p000"
+      },
+      {
+       "page_status": "ok",
+       "hyp_sha256": "51a7e5eb743b051929fbf00cc0e18c58c1ed541d4424ebd01896c38615a82d1d",
+       "cer_strict": 0.0650887573964497,
+       "cer_strict_ops": {
+        "insertions": 7,
+        "deletions": 44,
+        "substitutions": 4
+       },
+       "cer_narrow": 0.020512820512820513,
+       "cer_narrow_ops": {
+        "insertions": 6,
+        "deletions": 6,
+        "substitutions": 4
+       },
+       "numbers": {
+        "gold_total": 7,
+        "hyp_total": 7,
+        "recall_hits": 7,
+        "precision_hits": 7,
+        "recall": 1.0,
+        "precision": 1.0
+       },
+       "hyp_chars": 808,
+       "gold_chars": 845,
+       "repetition_flagged": false,
+       "page_id": "hrjp_cb_prospectus_p006"
+      },
+      {
+       "page_status": "ok",
+       "hyp_sha256": "1a2aa7c417ee19c6d2ab47599ecd17deb1b1d905e7d420e814db20ba38f552bd",
+       "cer_strict": 0.3003561535417491,
+       "cer_strict_ops": {
+        "insertions": 172,
+        "deletions": 577,
+        "substitutions": 10
+       },
+       "cer_narrow": 0.2893719806763285,
+       "cer_narrow_ops": {
+        "insertions": 148,
+        "deletions": 444,
+        "substitutions": 7
+       },
+       "wer": 0.3,
+       "wer_ops": {
+        "insertions": 26,
+        "deletions": 77,
+        "substitutions": 17
+       },
+       "numbers": {
+        "gold_total": 18,
+        "hyp_total": 16,
+        "recall_hits": 16,
+        "precision_hits": 16,
+        "recall": 0.8888888888888888,
+        "precision": 1.0
+       },
+       "hyp_chars": 2122,
+       "gold_chars": 2527,
+       "repetition_flagged": false,
+       "page_id": "bili_call_4q22_en_p001"
+      }
+     ],
+     "aggregate": {
+      "pages_scored": 9,
+      "pages_failed": [],
+      "macro_cer_strict": 0.16357879590715252,
+      "macro_cer_narrow": 0.12829120697217328,
+      "micro_cer_strict": 0.1769338959212377,
+      "micro_cer_narrow": 0.12845757149554618,
+      "macro_wer": 0.3,
+      "number_recall": 0.921875,
+      "number_precision": 0.9833333333333333,
+      "number_gold_total": 128,
+      "number_hyp_total": 120,
+      "repetition_flagged_pages": 0
+     }
+    },
+    "holdout": {
+     "per_page": [
+      {
+       "page_status": "ok",
+       "hyp_sha256": "f33bcb69c9043f2714e2bd58c6d62d9917dbdb89d0ada6d2ab10977a215e5b86",
+       "cer_strict": 0.2111111111111111,
+       "cer_strict_ops": {
+        "insertions": 42,
+        "deletions": 135,
+        "substitutions": 146
+       },
+       "cer_narrow": 0.13995649021029732,
+       "cer_narrow_ops": {
+        "insertions": 30,
+        "deletions": 88,
+        "substitutions": 75
+       },
+       "numbers": {
+        "gold_total": 47,
+        "hyp_total": 47,
+        "recall_hits": 47,
+        "precision_hits": 47,
+        "recall": 1.0,
+        "precision": 1.0
+       },
+       "hyp_chars": 1437,
+       "gold_chars": 1530,
+       "repetition_flagged": false,
+       "page_id": "byd_ar_2024_p022"
+      },
+      {
+       "page_status": "ok",
+       "hyp_sha256": "7373f3eb1b3d9f72c670e347bd6633cd8321e7f2cce13425c67ee02d8fb3b900",
+       "cer_strict": 0.2236842105263158,
+       "cer_strict_ops": {
+        "insertions": 10,
+        "deletions": 6,
+        "substitutions": 1
+       },
+       "cer_narrow": 0.2028985507246377,
+       "cer_narrow_ops": {
+        "insertions": 8,
+        "deletions": 5,
+        "substitutions": 1
+       },
+       "numbers": {
+        "gold_total": 3,
+        "hyp_total": 3,
+        "recall_hits": 3,
+        "precision_hits": 3,
+        "recall": 1.0,
+        "precision": 1.0
+       },
+       "hyp_chars": 80,
+       "gold_chars": 76,
+       "repetition_flagged": false,
+       "page_id": "meituan_ar_2024_p000"
+      },
+      {
+       "page_status": "ok",
+       "hyp_sha256": "4208c6eca4b91d00d2bfc303c37c65caa7ca2cdc9c0f486bb92529434fad23f9",
+       "cer_strict": 0.167427701674277,
+       "cer_strict_ops": {
+        "insertions": 2,
+        "deletions": 107,
+        "substitutions": 1
+       },
+       "cer_narrow": 0.11336717428087986,
+       "cer_narrow_ops": {
+        "insertions": 1,
+        "deletions": 65,
+        "substitutions": 1
+       },
+       "numbers": {
+        "gold_total": 4,
+        "hyp_total": 4,
+        "recall_hits": 4,
+        "precision_hits": 4,
+        "recall": 1.0,
+        "precision": 1.0
+       },
+       "hyp_chars": 552,
+       "gold_chars": 657,
+       "repetition_flagged": false,
+       "page_id": "ir_wanrun_20241104_p002"
+      },
+      {
+       "page_status": "ok",
+       "hyp_sha256": "15a2680e6de077f01e1fabde38323265dae8bea062c61cc613cca62c2a32ffc9",
+       "cer_strict": 0.05370569280343716,
+       "cer_strict_ops": {
+        "insertions": 8,
+        "deletions": 41,
+        "substitutions": 1
+       },
+       "cer_narrow": 0.01726121979286536,
+       "cer_narrow_ops": {
+        "insertions": 7,
+        "deletions": 7,
+        "substitutions": 1
+       },
+       "numbers": {
+        "gold_total": 7,
+        "hyp_total": 7,
+        "recall_hits": 7,
+        "precision_hits": 7,
+        "recall": 1.0,
+        "precision": 1.0
+       },
+       "hyp_chars": 898,
+       "gold_chars": 931,
+       "repetition_flagged": false,
+       "page_id": "hrjp_cb_prospectus_p037"
+      },
+      {
+       "page_status": "ok",
+       "hyp_sha256": "9d20e786e5b5dd63f069cb37c980377341b836b94210dc7e47b216f5aa4cad05",
+       "cer_strict": 0.19659810126582278,
+       "cer_strict_ops": {
+        "insertions": 85,
+        "deletions": 405,
+        "substitutions": 7
+       },
+       "cer_narrow": 0.17954872779644743,
+       "cer_narrow_ops": {
+        "insertions": 71,
+        "deletions": 296,
+        "substitutions": 7
+       },
+       "wer": 0.19170984455958548,
+       "wer_ops": {
+        "insertions": 15,
+        "deletions": 51,
+        "substitutions": 8
+       },
+       "numbers": {
+        "gold_total": 18,
+        "hyp_total": 15,
+        "recall_hits": 13,
+        "precision_hits": 13,
+        "recall": 0.7222222222222222,
+        "precision": 0.8666666666666667
+       },
+       "hyp_chars": 2208,
+       "gold_chars": 2528,
+       "repetition_flagged": false,
+       "page_id": "bili_call_4q22_en_p003"
+      }
+     ],
+     "aggregate": {
+      "pages_scored": 5,
+      "pages_failed": [],
+      "macro_cer_strict": 0.17050536347619277,
+      "macro_cer_narrow": 0.13060643256102553,
+      "micro_cer_strict": 0.1742397763019923,
+      "micro_cer_narrow": 0.11586857742048234,
+      "macro_wer": 0.19170984455958548,
+      "number_recall": 0.9367088607594937,
+      "number_precision": 0.9736842105263158,
+      "number_gold_total": 79,
+      "number_hyp_total": 76,
+      "repetition_flagged_pages": 0
+     }
+    }
+   },
+   "raw_output_file": "raw_r0.json"
+  },
+  "N0": {
+   "identity": {
+    "arm": "N0",
+    "backend": "pypdfium2-textpage",
+    "note": "born-digital control only; not OCR"
+   },
+   "summary": {
+    "pages_total": 14,
+    "pages_ok": 12,
+    "batch_status": "partial"
+   },
+   "evaluation": {
+    "arm": "N0",
+    "eval": {
+     "per_page": [
+      {
+       "page_status": "ok",
+       "hyp_sha256": "87ccd2113da576ca3b29d0d45acd2544690ce68998dc6549f09670c60698767c",
+       "cer_strict": 0.027045769764216365,
+       "cer_strict_ops": {
+        "insertions": 0,
+        "deletions": 2,
+        "substitutions": 37
+       },
+       "cer_narrow": 0.0007412898443291327,
+       "cer_narrow_ops": {
+        "insertions": 0,
+        "deletions": 1,
+        "substitutions": 0
+       },
+       "numbers": {
+        "gold_total": 10,
+        "hyp_total": 10,
+        "recall_hits": 10,
+        "precision_hits": 10,
+        "recall": 1.0,
+        "precision": 1.0
+       },
+       "hyp_chars": 1440,
+       "gold_chars": 1442,
+       "repetition_flagged": false,
+       "page_id": "byd_ar_2024_p021"
+      },
+      {
+       "page_status": "ok",
+       "hyp_sha256": "3a121fea88661827105c90ccf5ca03f6cd745ca9bf1964aee115ba484f119a0d",
+       "cer_strict": 0.09010011123470522,
+       "cer_strict_ops": {
+        "insertions": 0,
+        "deletions": 60,
+        "substitutions": 21
+       },
+       "cer_narrow": 0.06746987951807229,
+       "cer_narrow_ops": {
+        "insertions": 0,
+        "deletions": 56,
+        "substitutions": 0
+       },
+       "numbers": {
+        "gold_total": 8,
+        "hyp_total": 8,
+        "recall_hits": 8,
+        "precision_hits": 8,
+        "recall": 1.0,
+        "precision": 1.0
+       },
+       "hyp_chars": 839,
+       "gold_chars": 899,
+       "repetition_flagged": false,
+       "page_id": "amec_h1_2026_p009"
+      },
+      {
+       "page_status": "ok",
+       "hyp_sha256": "d4d3de2fc1c0b679b3a043a79269d865916762e0f504866dfd687787e61b47c2",
+       "cer_strict": 0.02976190476190476,
+       "cer_strict_ops": {
+        "insertions": 0,
+        "deletions": 1,
+        "substitutions": 34
+       },
+       "cer_narrow": 0.0,
+       "cer_narrow_ops": {
+        "insertions": 0,
+        "deletions": 0,
+        "substitutions": 0
+       },
+       "numbers": {
+        "gold_total": 9,
+        "hyp_total": 9,
+        "recall_hits": 9,
+        "precision_hits": 9,
+        "recall": 1.0,
+        "precision": 1.0
+       },
+       "hyp_chars": 1175,
+       "gold_chars": 1176,
+       "repetition_flagged": false,
+       "page_id": "amec_h1_2026_p011"
+      },
+      {
+       "page_status": "ok",
+       "hyp_sha256": "2c4ba85d57f2c38f9a332ba94d0df5a5ee0b2608d81cf1c16b9b525c93ece580",
+       "cer_strict": 0.7388781431334622,
+       "cer_strict_ops": {
+        "insertions": 139,
+        "deletions": 97,
+        "substitutions": 528
+       },
+       "cer_narrow": 0.7215189873417721,
+       "cer_narrow_ops": {
+        "insertions": 118,
+        "deletions": 118,
+        "substitutions": 505
+       },
+       "numbers": {
+        "gold_total": 7,
+        "hyp_total": 7,
+        "recall_hits": 5,
+        "precision_hits": 5,
+        "recall": 0.7142857142857143,
+        "precision": 0.7142857142857143
+       },
+       "hyp_chars": 1076,
+       "gold_chars": 1034,
+       "repetition_flagged": false,
+       "page_id": "meituan_ar_2024_p011"
+      },
+      {
+       "page_status": "ok",
+       "hyp_sha256": "a6f3cc5a84d0ade845627848dcf9628ebc2e9a1d7c90683e91325ce332133338",
+       "cer_strict": 0.03508771929824561,
+       "cer_strict_ops": {
+        "insertions": 3,
+        "deletions": 3,
+        "substitutions": 32
+       },
+       "cer_narrow": 0.002955665024630542,
+       "cer_narrow_ops": {
+        "insertions": 2,
+        "deletions": 1,
+        "substitutions": 0
+       },
+       "numbers": {
+        "gold_total": 29,
+        "hyp_total": 29,
+        "recall_hits": 28,
+        "precision_hits": 28,
+        "recall": 0.9655172413793104,
+        "precision": 0.9655172413793104
+       },
+       "hyp_chars": 1083,
+       "gold_chars": 1083,
+       "repetition_flagged": false,
+       "page_id": "ksy_q1_2026_p002"
+      },
+      {
+       "page_status": "unsupported",
+       "reason_excluded": "unsupported",
+       "page_id": "ksy_q1_2026_p002_synthetic_degraded"
+      },
+      {
+       "page_status": "ok",
+       "hyp_sha256": "0177a9e5a03188514a54f2f6a6e9a856758f0b502e092fb9352b22da7f85dd13",
+       "cer_strict": 0.0642361111111111,
+       "cer_strict_ops": {
+        "insertions": 3,
+        "deletions": 3,
+        "substitutions": 31
+       },
+       "cer_narrow": 0.00816326530612245,
+       "cer_narrow_ops": {
+        "insertions": 2,
+        "deletions": 1,
+        "substitutions": 1
+       },
+       "numbers": {
+        "gold_total": 11,
+        "hyp_total": 11,
+        "recall_hits": 11,
+        "precision_hits": 11,
+        "recall": 1.0,
+        "precision": 1.0
+       },
+       "hyp_chars": 576,
+       "gold_chars": 576,
+       "repetition_flagged": false,
+       "page_id": "ir_wanrun_20241104_p000"
+      },
+      {
+       "page_status": "ok",
+       "hyp_sha256": "2bf42fc5e620820369b09dd937aec98d089155c8e4eed3cf7e598cd49e3d4987",
+       "cer_strict": 0.033136094674556214,
+       "cer_strict_ops": {
+        "insertions": 0,
+        "deletions": 1,
+        "substitutions": 27
+       },
+       "cer_narrow": 0.0,
+       "cer_narrow_ops": {
+        "insertions": 0,
+        "deletions": 0,
+        "substitutions": 0
+       },
+       "numbers": {
+        "gold_total": 7,
+        "hyp_total": 7,
+        "recall_hits": 7,
+        "precision_hits": 7,
+        "recall": 1.0,
+        "precision": 1.0
+       },
+       "hyp_chars": 844,
+       "gold_chars": 845,
+       "repetition_flagged": false,
+       "page_id": "hrjp_cb_prospectus_p006"
+      },
+      {
+       "page_status": "ok",
+       "hyp_sha256": "c0fcb1896d0a5e76ae5824fac41dc8585a2fb7d9740f9da9a8dc4429fd6261a0",
+       "cer_strict": 0.014246141669964385,
+       "cer_strict_ops": {
+        "insertions": 2,
+        "deletions": 3,
+        "substitutions": 31
+       },
+       "cer_narrow": 0.000966183574879227,
+       "cer_narrow_ops": {
+        "insertions": 1,
+        "deletions": 1,
+        "substitutions": 0
+       },
+       "wer": 0.005,
+       "wer_ops": {
+        "insertions": 1,
+        "deletions": 1,
+        "substitutions": 0
+       },
+       "numbers": {
+        "gold_total": 18,
+        "hyp_total": 18,
+        "recall_hits": 18,
+        "precision_hits": 18,
+        "recall": 1.0,
+        "precision": 1.0
+       },
+       "hyp_chars": 2526,
+       "gold_chars": 2527,
+       "repetition_flagged": false,
+       "page_id": "bili_call_4q22_en_p001"
+      }
+     ],
+     "aggregate": {
+      "pages_scored": 8,
+      "pages_failed": [
+       "unsupported"
+      ],
+      "macro_cer_strict": 0.12906149945602075,
+      "macro_cer_narrow": 0.10022690882622572,
+      "micro_cer_strict": 0.11041536213734085,
+      "micro_cer_narrow": 0.08422041327489042,
+      "macro_wer": 0.005,
+      "number_recall": 0.9696969696969697,
+      "number_precision": 0.9696969696969697,
+      "number_gold_total": 99,
+      "number_hyp_total": 99,
+      "repetition_flagged_pages": 0
+     }
+    },
+    "holdout": {
+     "per_page": [
+      {
+       "page_status": "ok",
+       "hyp_sha256": "7442fee7c8cf4645dbf392783649fa09b5905415896e204266afe425a5d7b47c",
+       "cer_strict": 0.02679738562091503,
+       "cer_strict_ops": {
+        "insertions": 0,
+        "deletions": 1,
+        "substitutions": 40
+       },
+       "cer_narrow": 0.0,
+       "cer_narrow_ops": {
+        "insertions": 0,
+        "deletions": 0,
+        "substitutions": 0
+       },
+       "numbers": {
+        "gold_total": 47,
+        "hyp_total": 47,
+        "recall_hits": 47,
+        "precision_hits": 47,
+        "recall": 1.0,
+        "precision": 1.0
+       },
+       "hyp_chars": 1529,
+       "gold_chars": 1530,
+       "repetition_flagged": false,
+       "page_id": "byd_ar_2024_p022"
+      },
+      {
+       "page_status": "empty_response",
+       "reason_excluded": "empty_response",
+       "page_id": "meituan_ar_2024_p000"
+      },
+      {
+       "page_status": "ok",
+       "hyp_sha256": "bb3f903ff1a6d6eba1a778b22cab7eb5f010c3417a5e59c971085e07b0f4aa37",
+       "cer_strict": 0.0487062404870624,
+       "cer_strict_ops": {
+        "insertions": 2,
+        "deletions": 3,
+        "substitutions": 27
+       },
+       "cer_narrow": 0.00338409475465313,
+       "cer_narrow_ops": {
+        "insertions": 1,
+        "deletions": 1,
+        "substitutions": 0
+       },
+       "numbers": {
+        "gold_total": 4,
+        "hyp_total": 4,
+        "recall_hits": 4,
+        "precision_hits": 4,
+        "recall": 1.0,
+        "precision": 1.0
+       },
+       "hyp_chars": 656,
+       "gold_chars": 657,
+       "repetition_flagged": false,
+       "page_id": "ir_wanrun_20241104_p002"
+      },
+      {
+       "page_status": "ok",
+       "hyp_sha256": "613083fad51edbe3a5225eba9a318a43579b13c9d04b9fe01308dd0f1c699ffb",
+       "cer_strict": 0.031149301825993556,
+       "cer_strict_ops": {
+        "insertions": 0,
+        "deletions": 1,
+        "substitutions": 28
+       },
+       "cer_narrow": 0.0,
+       "cer_narrow_ops": {
+        "insertions": 0,
+        "deletions": 0,
+        "substitutions": 0
+       },
+       "numbers": {
+        "gold_total": 7,
+        "hyp_total": 7,
+        "recall_hits": 7,
+        "precision_hits": 7,
+        "recall": 1.0,
+        "precision": 1.0
+       },
+       "hyp_chars": 930,
+       "gold_chars": 931,
+       "repetition_flagged": false,
+       "page_id": "hrjp_cb_prospectus_p037"
+      },
+      {
+       "page_status": "ok",
+       "hyp_sha256": "ba96784dfe7fab741a8e1dc35f3ce500b13bc3b39a28dbbba50f9be83a7cc948",
+       "cer_strict": 0.014636075949367089,
+       "cer_strict_ops": {
+        "insertions": 2,
+        "deletions": 3,
+        "substitutions": 32
+       },
+       "cer_narrow": 0.0009601536245799327,
+       "cer_narrow_ops": {
+        "insertions": 1,
+        "deletions": 1,
+        "substitutions": 0
+       },
+       "wer": 0.0051813471502590676,
+       "wer_ops": {
+        "insertions": 1,
+        "deletions": 1,
+        "substitutions": 0
+       },
+       "numbers": {
+        "gold_total": 18,
+        "hyp_total": 18,
+        "recall_hits": 18,
+        "precision_hits": 18,
+        "recall": 1.0,
+        "precision": 1.0
+       },
+       "hyp_chars": 2527,
+       "gold_chars": 2528,
+       "repetition_flagged": false,
+       "page_id": "bili_call_4q22_en_p003"
+      }
+     ],
+     "aggregate": {
+      "pages_scored": 4,
+      "pages_failed": [
+       "empty_response"
+      ],
+      "macro_cer_strict": 0.03032225097083452,
+      "macro_cer_narrow": 0.0010860620948082657,
+      "micro_cer_strict": 0.024619199433227063,
+      "micro_cer_narrow": 0.0007084661707403471,
+      "macro_wer": 0.0051813471502590676,
+      "number_recall": 1.0,
+      "number_precision": 1.0,
+      "number_gold_total": 76,
+      "number_hyp_total": 76,
+      "repetition_flagged_pages": 0
+     }
+    }
+   },
+   "raw_output_file": "raw_n0.json"
+  },
+  "X1": {
+   "identity": {
+    "arm": "X1",
+    "backend": "xiaomi-ocr-0-transformers-cpu",
+    "model_revision": "bbd8cf8d21f256b3644b44cb860f3a7cecb93c30",
+    "precision": "checkpoint-native-bfloat16-cpu",
+    "prompt_sha256": "fd7abd1ca91c0133edb93a6da0d52d6d57a51a9076867fd467ab1ddd7e50fb20",
+    "preprocess": "fit_image_thumbnail_2048",
+    "decoding": "greedy_temperature_0_top_p_0.8_no_think",
+    "max_new_tokens": 2048,
+    "output_char_cap": 60000
+   },
+   "summary": {
+    "pages_total": 14,
+    "pages_ok": 0,
+    "batch_status": "failed"
+   },
+   "evaluation": {
+    "arm": "X1",
+    "eval": {
+     "per_page": [
+      {
+       "page_status": "unsupported",
+       "reason_excluded": "unsupported",
+       "page_id": "byd_ar_2024_p021"
+      },
+      {
+       "page_status": "unsupported",
+       "reason_excluded": "unsupported",
+       "page_id": "amec_h1_2026_p009"
+      },
+      {
+       "page_status": "unsupported",
+       "reason_excluded": "unsupported",
+       "page_id": "amec_h1_2026_p011"
+      },
+      {
+       "page_status": "unsupported",
+       "reason_excluded": "unsupported",
+       "page_id": "meituan_ar_2024_p011"
+      },
+      {
+       "page_status": "unsupported",
+       "reason_excluded": "unsupported",
+       "page_id": "ksy_q1_2026_p002"
+      },
+      {
+       "page_status": "unsupported",
+       "reason_excluded": "unsupported",
+       "page_id": "ksy_q1_2026_p002_synthetic_degraded"
+      },
+      {
+       "page_status": "unsupported",
+       "reason_excluded": "unsupported",
+       "page_id": "ir_wanrun_20241104_p000"
+      },
+      {
+       "page_status": "unsupported",
+       "reason_excluded": "unsupported",
+       "page_id": "hrjp_cb_prospectus_p006"
+      },
+      {
+       "page_status": "unsupported",
+       "reason_excluded": "unsupported",
+       "page_id": "bili_call_4q22_en_p001"
+      }
+     ],
+     "aggregate": {
+      "pages_scored": 0,
+      "pages_failed": [
+       "unsupported",
+       "unsupported",
+       "unsupported",
+       "unsupported",
+       "unsupported",
+       "unsupported",
+       "unsupported",
+       "unsupported",
+       "unsupported"
+      ],
+      "macro_cer_strict": null,
+      "macro_cer_narrow": null,
+      "micro_cer_strict": null,
+      "micro_cer_narrow": null,
+      "macro_wer": null,
+      "number_recall": null,
+      "number_precision": null,
+      "number_gold_total": 0,
+      "number_hyp_total": 0,
+      "repetition_flagged_pages": 0
+     }
+    },
+    "holdout": {
+     "per_page": [
+      {
+       "page_status": "unsupported",
+       "reason_excluded": "unsupported",
+       "page_id": "byd_ar_2024_p022"
+      },
+      {
+       "page_status": "unsupported",
+       "reason_excluded": "unsupported",
+       "page_id": "meituan_ar_2024_p000"
+      },
+      {
+       "page_status": "unsupported",
+       "reason_excluded": "unsupported",
+       "page_id": "ir_wanrun_20241104_p002"
+      },
+      {
+       "page_status": "unsupported",
+       "reason_excluded": "unsupported",
+       "page_id": "hrjp_cb_prospectus_p037"
+      },
+      {
+       "page_status": "unsupported",
+       "reason_excluded": "unsupported",
+       "page_id": "bili_call_4q22_en_p003"
+      }
+     ],
+     "aggregate": {
+      "pages_scored": 0,
+      "pages_failed": [
+       "unsupported",
+       "unsupported",
+       "unsupported",
+       "unsupported",
+       "unsupported"
+      ],
+      "macro_cer_strict": null,
+      "macro_cer_narrow": null,
+      "micro_cer_strict": null,
+      "micro_cer_narrow": null,
+      "macro_wer": null,
+      "number_recall": null,
+      "number_precision": null,
+      "number_gold_total": 0,
+      "number_hyp_total": 0,
+      "repetition_flagged_pages": 0
+     }
+    }
+   },
+   "raw_output_file": "raw_x1.json"
+  },
+  "X2": {
+   "identity": {
+    "arm": "X2",
+    "backend": "xiaomi-ocr-0-two-stage-paddlex",
+    "status": "not_run",
+    "reason": "PP-DocLayoutV3 requires the upstream paddlex dependency stack (new heavy runtime).  Under the frozen resource bounds (avail RAM envelope, no GPU, download budget) this run does not install it; X2 is NOT_RUN and is never merged into X1 scores."
+   },
+   "summary": {
+    "pages_total": 14,
+    "pages_ok": 0,
+    "batch_status": "failed"
+   },
+   "evaluation": {
+    "arm": "X2",
+    "eval": {
+     "per_page": [
+      {
+       "page_status": "not_run",
+       "reason_excluded": "not_run",
+       "page_id": "byd_ar_2024_p021"
+      },
+      {
+       "page_status": "not_run",
+       "reason_excluded": "not_run",
+       "page_id": "amec_h1_2026_p009"
+      },
+      {
+       "page_status": "not_run",
+       "reason_excluded": "not_run",
+       "page_id": "amec_h1_2026_p011"
+      },
+      {
+       "page_status": "not_run",
+       "reason_excluded": "not_run",
+       "page_id": "meituan_ar_2024_p011"
+      },
+      {
+       "page_status": "not_run",
+       "reason_excluded": "not_run",
+       "page_id": "ksy_q1_2026_p002"
+      },
+      {
+       "page_status": "not_run",
+       "reason_excluded": "not_run",
+       "page_id": "ksy_q1_2026_p002_synthetic_degraded"
+      },
+      {
+       "page_status": "not_run",
+       "reason_excluded": "not_run",
+       "page_id": "ir_wanrun_20241104_p000"
+      },
+      {
+       "page_status": "not_run",
+       "reason_excluded": "not_run",
+       "page_id": "hrjp_cb_prospectus_p006"
+      },
+      {
+       "page_status": "not_run",
+       "reason_excluded": "not_run",
+       "page_id": "bili_call_4q22_en_p001"
+      }
+     ],
+     "aggregate": {
+      "pages_scored": 0,
+      "pages_failed": [
+       "not_run",
+       "not_run",
+       "not_run",
+       "not_run",
+       "not_run",
+       "not_run",
+       "not_run",
+       "not_run",
+       "not_run"
+      ],
+      "macro_cer_strict": null,
+      "macro_cer_narrow": null,
+      "micro_cer_strict": null,
+      "micro_cer_narrow": null,
+      "macro_wer": null,
+      "number_recall": null,
+      "number_precision": null,
+      "number_gold_total": 0,
+      "number_hyp_total": 0,
+      "repetition_flagged_pages": 0
+     }
+    },
+    "holdout": {
+     "per_page": [
+      {
+       "page_status": "not_run",
+       "reason_excluded": "not_run",
+       "page_id": "byd_ar_2024_p022"
+      },
+      {
+       "page_status": "not_run",
+       "reason_excluded": "not_run",
+       "page_id": "meituan_ar_2024_p000"
+      },
+      {
+       "page_status": "not_run",
+       "reason_excluded": "not_run",
+       "page_id": "ir_wanrun_20241104_p002"
+      },
+      {
+       "page_status": "not_run",
+       "reason_excluded": "not_run",
+       "page_id": "hrjp_cb_prospectus_p037"
+      },
+      {
+       "page_status": "not_run",
+       "reason_excluded": "not_run",
+       "page_id": "bili_call_4q22_en_p003"
+      }
+     ],
+     "aggregate": {
+      "pages_scored": 0,
+      "pages_failed": [
+       "not_run",
+       "not_run",
+       "not_run",
+       "not_run",
+       "not_run"
+      ],
+      "macro_cer_strict": null,
+      "macro_cer_narrow": null,
+      "micro_cer_strict": null,
+      "micro_cer_narrow": null,
+      "macro_wer": null,
+      "number_recall": null,
+      "number_precision": null,
+      "number_gold_total": 0,
+      "number_hyp_total": 0,
+      "repetition_flagged_pages": 0
+     }
+    }
+   },
+   "raw_output_file": "raw_x2.json"
+  }
+ },
+ "run": {
+  "created_at_utc": "2026-10-31T00:04:54.526959+00:00",
+  "pages_selected": [
+   "byd_ar_2024_p021",
+   "byd_ar_2024_p022",
+   "amec_h1_2026_p009",
+   "amec_h1_2026_p011",
+   "meituan_ar_2024_p000",
+   "meituan_ar_2024_p011",
+   "ksy_q1_2026_p002",
+   "ksy_q1_2026_p002_synthetic_degraded",
+   "ir_wanrun_20241104_p000",
+   "ir_wanrun_20241104_p002",
+   "hrjp_cb_prospectus_p006",
+   "hrjp_cb_prospectus_p037",
+   "bili_call_4q22_en_p001",
+   "bili_call_4q22_en_p003"
+  ],
+  "wall_seconds": 738.032,
+  "cache_entries": 28
+ },
+ "run_manifest": {
+  "schema_version": "cwp-ocr-comparison-run-manifest/1",
+  "created_at_utc": "2026-10-31T00:04:54.543558+00:00",
+  "code": {
+   "branch_commit": "8469df7c87d7fe6cec712fab81fe9782303c2eda",
+   "worktree_dirty_entries": 11,
+   "code_file_sha256": {
+    "tools/ocr_comparison/__init__.py": "061e0e74ef802f57d09dc23d5951756161442dab116343921838616b8cd449c4",
+    "tools/ocr_comparison/cache.py": "6d2a4466e10f7f8ec4982fbf624f90fdd42c81e2e4b5c1a4f505746b19a5a036",
+    "tools/ocr_comparison/compare.py": "de7fffe3ebbe32d06b5907a96b9704af82775c7730299e47bbbfbe12066ed01e",
+    "tools/ocr_comparison/manifest.py": "fcb6e2265f816547d2e0b556fb3dbc0bb5e7008325b0d8259447ce5067acef25",
+    "tools/ocr_comparison/metrics.py": "07926c4945642c16f1df167194370179f2a9887b3ff164b08658df864c00e38d",
+    "tools/ocr_comparison/render_pages.py": "8960c0969883a251020bf04f081db66b3e25e9208979a679b80f951fe57df4eb",
+    "tools/ocr_comparison/run_comparison.py": "fa777feeaa2a60fcc74d006b8e170f07ac5364e1748a0d5ef716d6981f24a9fe",
+    "tools/ocr_comparison/runner.py": "967126e1411649b5857bdb0590c8b95b3f9a10ec6858c3d2efb9413236b497fc",
+    "tools/ocr_comparison/backends/__init__.py": "3ef4e2a40cc7f8ca2f80ee4eeeee1d06e38bdb87f3d398d2c8210a863ebb7518",
+    "tools/ocr_comparison/backends/base.py": "fafdd92af4e0faa5f9d24689fd713e9aea06457752905f310f6abe19e3be4ff4",
+    "tools/ocr_comparison/backends/rapidocr_r0.py": "83a76fdce7dcb1247546b6b5be948e8cf0a40f9e281e7040f0d0f93e2ccf7607",
+    "tools/ocr_comparison/backends/xiaomi_x1.py": "a41a5dd69c6746eba4ebd53efef813fd7f0f2095c4875a03e90856d0a182ab9e",
+    "tools/ocr_comparison/backends/native_n0.py": "5871eccaebed63a5d86f834245d4316f748bc121fb587a72237fedbba49ef7a9"
+   },
+   "python": "3.13.9",
+   "platform": "Windows-11-10.0.26300-SP0"
+  },
+  "runtime": {
+   "package_versions": {
+    "transformers": "5.18.0",
+    "torch": "2.12.0",
+    "pypdfium2": "4.30.0",
+    "rapidocr": "3.8.1",
+    "onnxruntime": "1.26.0"
+   }
+  },
+  "resources_at_start": {
+   "memory_load_pct": 87,
+   "avail_phys_gb": 1.94,
+   "total_phys_gb": 15.77,
+   "avail_commit_gb": 9.86,
+   "gpu_note": "no discrete GPU on this host; all arms CPU"
+  },
+  "limits": {
+   "deadline_seconds_per_page": 180.0,
+   "process_memory_cap_gb": 0.84,
+   "batch_concurrency": 1,
+   "output_char_cap": 60000,
+   "max_new_tokens": 2048
+  },
+  "cache": {
+   "enabled": true,
+   "key_axes": [
+    "backend_identity",
+    "page_image_sha256",
+    "prompt_sha256",
+    "params"
+   ]
+  },
+  "arms": {
+   "R0": {
+    "schema_version": "cwp-local-ocr-config/1",
+    "adapter": "rapidocr-cpu/1",
+    "engine_version": "3.8.1",
+    "runtime_version": "1.26.0",
+    "base_config_sha256": "e753d39c0222297f0180e1bdcde1799bc26218f315356763362810846b6afa84",
+    "models": {
+     "det": "d2a7720d45a54257208b1e13e36a8479894cb74155a5efe29462512d42f49da9",
+     "cls": "e47acedf663230f8863ff1ab0e64dd2d82b838fceb5957146dab185a89d6215c",
+     "rec": "48fc40f24f6d2a207a2b1091d3437eb3cc3eb6b676dc3ef9c37384005483683b"
+    },
+    "device": "cpu",
+    "text_score": 0.5,
+    "low_confidence_threshold": 0.8,
+    "max_side_len": 3000,
+    "intra_op_threads": 2,
+    "inter_op_threads": 1,
+    "box_round_decimals": 3,
+    "confidence_round_decimals": 6,
+    "reading_order": "top-left-box/1",
+    "transform": "rapidocr-image-rgb/1",
+    "region_diagnostics": "cwp-ocr-region-diagnostics/1",
+    "engine_text_score_floor": 0.0,
+    "region_recovery": "cwp-ocr-region-recovery/1",
+    "region_recovery_algorithm": "bounded-source-roi/2",
+    "arm": "R0",
+    "recovery": "production-bounded-source-roi"
+   },
+   "N0": {
+    "arm": "N0",
+    "backend": "pypdfium2-textpage",
+    "note": "born-digital control only; not OCR"
+   },
+   "X1": {
+    "arm": "X1",
+    "backend": "xiaomi-ocr-0-transformers-cpu",
+    "model_revision": "bbd8cf8d21f256b3644b44cb860f3a7cecb93c30",
+    "precision": "checkpoint-native-bfloat16-cpu",
+    "prompt_sha256": "fd7abd1ca91c0133edb93a6da0d52d6d57a51a9076867fd467ab1ddd7e50fb20",
+    "preprocess": "fit_image_thumbnail_2048",
+    "decoding": "greedy_temperature_0_top_p_0.8_no_think",
+    "max_new_tokens": 2048,
+    "output_char_cap": 60000
+   },
+   "X2": {
+    "arm": "X2",
+    "backend": "xiaomi-ocr-0-two-stage-paddlex",
+    "status": "not_run",
+    "reason": "PP-DocLayoutV3 requires the upstream paddlex dependency stack (new heavy runtime).  Under the frozen resource bounds (avail RAM envelope, no GPU, download budget) this run does not install it; X2 is NOT_RUN and is never merged into X1 scores."
+   }
+  },
+  "inputs": {
+   "sample_manifest_sha256": "6c0076d3d2747506e166648ac5ee5268ea4e621a00e2b46dd96ecd3ea251415d",
+   "gold_sha256": "773692ddc3fda7728ed454367d6859046c9ed695998c28db8f5d59cca0b5307c"
+  }
+ }
+}

@@ -1,0 +1,231 @@
+{
+ "schema_version": "cwp-ocr-comparison/1",
+ "arms": {
+  "X1": {
+   "identity": {
+    "arm": "X1",
+    "backend": "xiaomi-ocr-0-transformers-cpu",
+    "model_revision": "bbd8cf8d21f256b3644b44cb860f3a7cecb93c30",
+    "precision": "bfloat16->float32-cpu-offload",
+    "prompt_sha256": "fd7abd1ca91c0133edb93a6da0d52d6d57a51a9076867fd467ab1ddd7e50fb20",
+    "preprocess": "fit_image_thumbnail_2048",
+    "decoding": "greedy_temperature_0_top_p_0.8_no_think",
+    "max_new_tokens": 2048,
+    "output_char_cap": 60000
+   },
+   "summary": {
+    "pages_total": 1,
+    "pages_ok": 0,
+    "batch_status": "failed"
+   },
+   "evaluation": {
+    "arm": "X1",
+    "eval": {
+     "per_page": [
+      {
+       "page_status": "unsupported",
+       "reason_excluded": "unsupported",
+       "page_id": "byd_ar_2024_p021"
+      },
+      {
+       "page_status": "not_run",
+       "reason_excluded": "not_run",
+       "page_id": "amec_h1_2026_p009"
+      },
+      {
+       "page_status": "not_run",
+       "reason_excluded": "not_run",
+       "page_id": "amec_h1_2026_p011"
+      },
+      {
+       "page_status": "not_run",
+       "reason_excluded": "not_run",
+       "page_id": "meituan_ar_2024_p011"
+      },
+      {
+       "page_status": "not_run",
+       "reason_excluded": "not_run",
+       "page_id": "ksy_q1_2026_p002"
+      },
+      {
+       "page_status": "not_run",
+       "reason_excluded": "not_run",
+       "page_id": "ksy_q1_2026_p002_synthetic_degraded"
+      },
+      {
+       "page_status": "not_run",
+       "reason_excluded": "not_run",
+       "page_id": "ir_wanrun_20241104_p000"
+      },
+      {
+       "page_status": "not_run",
+       "reason_excluded": "not_run",
+       "page_id": "hrjp_cb_prospectus_p006"
+      },
+      {
+       "page_status": "not_run",
+       "reason_excluded": "not_run",
+       "page_id": "bili_call_4q22_en_p001"
+      }
+     ],
+     "aggregate": {
+      "pages_scored": 0,
+      "pages_failed": [
+       "unsupported",
+       "not_run",
+       "not_run",
+       "not_run",
+       "not_run",
+       "not_run",
+       "not_run",
+       "not_run",
+       "not_run"
+      ],
+      "macro_cer_strict": null,
+      "macro_cer_narrow": null,
+      "micro_cer_strict": null,
+      "micro_cer_narrow": null,
+      "macro_wer": null,
+      "number_recall": null,
+      "number_precision": null,
+      "number_gold_total": 0,
+      "number_hyp_total": 0,
+      "repetition_flagged_pages": 0
+     }
+    },
+    "holdout": {
+     "per_page": [
+      {
+       "page_status": "not_run",
+       "reason_excluded": "not_run",
+       "page_id": "byd_ar_2024_p022"
+      },
+      {
+       "page_status": "not_run",
+       "reason_excluded": "not_run",
+       "page_id": "meituan_ar_2024_p000"
+      },
+      {
+       "page_status": "not_run",
+       "reason_excluded": "not_run",
+       "page_id": "ir_wanrun_20241104_p002"
+      },
+      {
+       "page_status": "not_run",
+       "reason_excluded": "not_run",
+       "page_id": "hrjp_cb_prospectus_p037"
+      },
+      {
+       "page_status": "not_run",
+       "reason_excluded": "not_run",
+       "page_id": "bili_call_4q22_en_p003"
+      }
+     ],
+     "aggregate": {
+      "pages_scored": 0,
+      "pages_failed": [
+       "not_run",
+       "not_run",
+       "not_run",
+       "not_run",
+       "not_run"
+      ],
+      "macro_cer_strict": null,
+      "macro_cer_narrow": null,
+      "micro_cer_strict": null,
+      "micro_cer_narrow": null,
+      "macro_wer": null,
+      "number_recall": null,
+      "number_precision": null,
+      "number_gold_total": 0,
+      "number_hyp_total": 0,
+      "repetition_flagged_pages": 0
+     }
+    }
+   },
+   "raw_output_file": "raw_x1.json"
+  }
+ },
+ "run": {
+  "created_at_utc": "2026-10-30T23:08:02.276694+00:00",
+  "pages_selected": [
+   "byd_ar_2024_p021"
+  ],
+  "wall_seconds": 7.969,
+  "cache_entries": 1
+ },
+ "run_manifest": {
+  "schema_version": "cwp-ocr-comparison-run-manifest/1",
+  "created_at_utc": "2026-10-30T23:08:02.278924+00:00",
+  "code": {
+   "branch_commit": "8469df7c87d7fe6cec712fab81fe9782303c2eda",
+   "worktree_dirty_entries": 7,
+   "code_file_sha256": {
+    "tools/ocr_comparison/__init__.py": "061e0e74ef802f57d09dc23d5951756161442dab116343921838616b8cd449c4",
+    "tools/ocr_comparison/cache.py": "6d2a4466e10f7f8ec4982fbf624f90fdd42c81e2e4b5c1a4f505746b19a5a036",
+    "tools/ocr_comparison/compare.py": "de7fffe3ebbe32d06b5907a96b9704af82775c7730299e47bbbfbe12066ed01e",
+    "tools/ocr_comparison/manifest.py": "fcb6e2265f816547d2e0b556fb3dbc0bb5e7008325b0d8259447ce5067acef25",
+    "tools/ocr_comparison/metrics.py": "2b79caeb35ddf98db9435cd83336c89eb7c4c42c8408d7c616af369e6b2a019c",
+    "tools/ocr_comparison/render_pages.py": "8960c0969883a251020bf04f081db66b3e25e9208979a679b80f951fe57df4eb",
+    "tools/ocr_comparison/run_comparison.py": "fa777feeaa2a60fcc74d006b8e170f07ac5364e1748a0d5ef716d6981f24a9fe",
+    "tools/ocr_comparison/runner.py": "967126e1411649b5857bdb0590c8b95b3f9a10ec6858c3d2efb9413236b497fc",
+    "tools/ocr_comparison/backends/__init__.py": "3ef4e2a40cc7f8ca2f80ee4eeeee1d06e38bdb87f3d398d2c8210a863ebb7518",
+    "tools/ocr_comparison/backends/base.py": "fafdd92af4e0faa5f9d24689fd713e9aea06457752905f310f6abe19e3be4ff4",
+    "tools/ocr_comparison/backends/rapidocr_r0.py": "83a76fdce7dcb1247546b6b5be948e8cf0a40f9e281e7040f0d0f93e2ccf7607",
+    "tools/ocr_comparison/backends/xiaomi_x1.py": "e2084cc399fd145dc293c5274898d6556804f85b6030b87768b3e6cdbfccf861",
+    "tools/ocr_comparison/backends/native_n0.py": "d9a1448f9fa191b34ccecd3ed43ecc794305f95970f7acf4186c272b50333360"
+   },
+   "python": "3.13.9",
+   "platform": "Windows-11-10.0.26300-SP0"
+  },
+  "runtime": {
+   "package_versions": {
+    "transformers": "5.18.0",
+    "torch": "2.12.0",
+    "pypdfium2": "4.30.0",
+    "rapidocr": "3.8.1",
+    "onnxruntime": "1.26.0"
+   }
+  },
+  "resources_at_start": {
+   "memory_load_pct": 85,
+   "avail_phys_gb": 2.22,
+   "total_phys_gb": 15.77,
+   "avail_commit_gb": 9.35,
+   "gpu_note": "no discrete GPU on this host; all arms CPU"
+  },
+  "limits": {
+   "deadline_seconds_per_page": 180.0,
+   "process_memory_cap_gb": 0.995,
+   "batch_concurrency": 1,
+   "output_char_cap": 60000,
+   "max_new_tokens": 2048
+  },
+  "cache": {
+   "enabled": true,
+   "key_axes": [
+    "backend_identity",
+    "page_image_sha256",
+    "prompt_sha256",
+    "params"
+   ]
+  },
+  "arms": {
+   "X1": {
+    "arm": "X1",
+    "backend": "xiaomi-ocr-0-transformers-cpu",
+    "model_revision": "bbd8cf8d21f256b3644b44cb860f3a7cecb93c30",
+    "precision": "bfloat16->float32-cpu-offload",
+    "prompt_sha256": "fd7abd1ca91c0133edb93a6da0d52d6d57a51a9076867fd467ab1ddd7e50fb20",
+    "preprocess": "fit_image_thumbnail_2048",
+    "decoding": "greedy_temperature_0_top_p_0.8_no_think",
+    "max_new_tokens": 2048,
+    "output_char_cap": 60000
+   }
+  },
+  "inputs": {
+   "sample_manifest_sha256": "6c0076d3d2747506e166648ac5ee5268ea4e621a00e2b46dd96ecd3ea251415d",
+   "gold_sha256": "773692ddc3fda7728ed454367d6859046c9ed695998c28db8f5d59cca0b5307c"
+  }
+ }
+}

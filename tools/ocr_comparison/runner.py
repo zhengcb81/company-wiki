@@ -27,7 +27,7 @@ def run_pages(page_ids, backend_fn, *, max_retries: int = 0, retry_on: tuple = (
                     continue
                 result = {"status": "error", "engine_seconds": time.perf_counter() - start}
             except Exception as exc:  # noqa: BLE001 - runner reports, does not raise
-                result = {"status": "error", "error": f"{type(exc).__name__}"}
+                result = {"status": "error", "error": f"{type(exc).__name__}: {exc}"}
             break
         wall = time.perf_counter() - start
         record = {

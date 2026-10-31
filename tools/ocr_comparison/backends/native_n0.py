@@ -32,13 +32,13 @@ class NativeN0:
     def run_page(self, page_id: str) -> dict:
         page = next(p for p in self.manifest["pages"] if p["page_id"] == page_id)
         if page["role"] == "eval_degraded":
-            return {"status": "unsupported", "error": "synthetic_degradation_has_no_native_layer_semantics"}
+            # The degraded variant shares the same PDF page; a second native
+            # read would double-count one page in the control denominators.
+            return {"status": "unsupported", "error": "degraded_variant_shares_one_native_page"}
         doc = self.manifest["documents"][page["doc"]]
-        if page["page_id"].endswith("_p000") and doc["label"].startswith("美團"):
-            return {"status": "unsupported", "error": "image_cover_no_text_layer"}
         import pypdfium2 as pdfium
 
-        from .render_pages import _resolve_physical
+        from ..render_pages import _resolve_physical
 
         pdf = pdfium.PdfDocument(_resolve_physical(doc))
         try:
