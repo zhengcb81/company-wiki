@@ -11,8 +11,8 @@
   "fde39dfe feat: run W23 comparison with R0 baseline, N0 control and recorded X1/X2 resource bounds",
   "c62ba969 fix: address independent review findings - runner field passthrough, gold char-level corrections, fact accounting"
  ],
- "final_tested_commit": "c62ba969",
- "final_reviewed_commit": "c62ba969",
+ "final_tested_commit": "PENDING_COMMIT",
+ "final_reviewed_commit": "c62ba969 (delta re-review pending for the self-audit fixes)",
  "code_file_sha256": {
   "tools/ocr_comparison/__init__.py": {
    "raw_sha256": "061e0e74ef802f57d09dc23d5951756161442dab116343921838616b8cd449c4",
@@ -59,16 +59,16 @@
    "lf_sha256": "8960c0969883a251020bf04f081db66b3e25e9208979a679b80f951fe57df4eb"
   },
   "tools/ocr_comparison/run_comparison.py": {
-   "raw_sha256": "fa777feeaa2a60fcc74d006b8e170f07ac5364e1748a0d5ef716d6981f24a9fe",
-   "lf_sha256": "fa777feeaa2a60fcc74d006b8e170f07ac5364e1748a0d5ef716d6981f24a9fe"
+   "raw_sha256": "5510076f6c4119367d36d3e85f10fc7cfd518fb6cdcc28d34b718adaeec34190",
+   "lf_sha256": "5510076f6c4119367d36d3e85f10fc7cfd518fb6cdcc28d34b718adaeec34190"
   },
   "tools/ocr_comparison/runner.py": {
    "raw_sha256": "2e48e4097d52be969b5e2f6417fc9f1837f929ebc68c0e00e44a1e97af904c48",
    "lf_sha256": "2e48e4097d52be969b5e2f6417fc9f1837f929ebc68c0e00e44a1e97af904c48"
   },
   "tests/unit/test_w23_ocr_comparison_metrics.py": {
-   "raw_sha256": "0f027d19a2d53ba63b1f2908c05a5d50adb4ac7e58d5b1ed66b75cfd48bc2342",
-   "lf_sha256": "0f027d19a2d53ba63b1f2908c05a5d50adb4ac7e58d5b1ed66b75cfd48bc2342"
+   "raw_sha256": "7f648029aa3167d9f7dfa8ecec6bf538cbacc1da277d7c8b481b010c131301b7",
+   "lf_sha256": "7f648029aa3167d9f7dfa8ecec6bf538cbacc1da277d7c8b481b010c131301b7"
   },
   "tests/integration/test_w23_ocr_comparison_entry.py": {
    "raw_sha256": "33f99eb0634b2c54d729ec94c2f6ee88c8623c2f1d03334c1e4a97dc77f10e60",
@@ -109,7 +109,7 @@
   {
    "req": "B TDD comparator",
    "status": "implemented/tested",
-   "evidence": "39/39 tests (30 unit + 9 integration); card-required locks: CER/WER ops, timeout/empty/truncated never pass, dedup numbers, cache-key axes, cache-hit latency, partial-failure batch, output cap, fault-injection retry, repetition guard"
+   "evidence": "40/40 tests (31 unit + 9 integration); card-required locks: CER/WER ops, timeout/empty/truncated never pass, dedup numbers, cache-key axes, cache-hit latency, partial-failure batch, output cap, temp-dir cleanup, fault-injection retry, repetition guard, runner field passthrough"
   },
   {
    "req": "B R0 real production path",
@@ -134,7 +134,12 @@
   {
    "req": "C paired macro/micro eval",
    "status": "implemented/tested",
-   "evidence": "eval macro strict 0.1599/micro 0.1737/narrow 0.1250, numRecall 0.9219/numPrec 0.9833; holdout 0.1694/0.1732; reviewer recomputed to <1e-6"
+   "evidence": "eval macro strict 0.1599/micro 0.1737/narrow 0.1250, EN WER 0.300 (n=1 page/split), numRecall 0.9219/numPrec 0.9833; holdout 0.1694/0.1732 (WER 0.1917); reviewer recomputed to <1e-6"
+  },
+  {
+   "req": "C reporting completeness (self-audit delta, post-review)",
+   "status": "implemented/tested",
+   "evidence": "per-page source/page/image_SHA joined into comparison.json + raw files (page_identity_provenance noted); R0 peak memory instrumented once (memwatch_r0_receipt.json, 0.183GB WS / 0.512GB commit); two-column and seal coverage gaps declared in comparison.md; three-run policy documented (R0 texts byte-identical, no output selection)"
   },
   {
    "req": "C fact/number/condition human scoring",
@@ -167,8 +172,9 @@
  "commands_and_results": [
   {
    "cmd": "python -m pytest tests/unit/test_w23_ocr_comparison_metrics.py tests/integration/test_w23_ocr_comparison_entry.py -q",
-   "result": "39 passed",
-   "time": "final run ~47s"
+   "result": "40 passed (31 unit + 9 integration)",
+   "time": "final run ~44s",
+   "path": "delivery/w23-xiaomi-ocr/test_receipt.txt"
   },
   {
    "cmd": "python -m tools.ocr_comparison.run_comparison --arms R0,N0,X1,X2 --out delivery/w23-xiaomi-ocr/comparison.json",
@@ -215,9 +221,12 @@
  "recommendation": "现有不动 for the production OCR stack; track the R0 defect classes (checkbox states, isolated line drops, o-for-0 in numbers) as reading-layer concerns; Xiaomi adoption CANNOT be assessed on this host - replay X1 on a host with >=3.3GiB free RAM (bf16) or a GPU before any integration decision; reading-layer adapter shape sketched in comparison.md §4 is design-only and NOT implemented.",
  "limitations": [
   "no real scanned pages in the catalog; one declared synthetic_degradation page",
+  "no two-column (双栏) page in the frozen catalog slice (Q&A and cross-paragraph qualifier groups covered); no seal/stamp page",
   "X1/X2 never executed: no accuracy/latency claims about Xiaomi-OCR-0",
+  "English WER has a single-page denominator per split (one EN document)",
+  "R0 peak memory measured once in-process (memwatch_r0_receipt.json), excluding the isolated-child boundary overhead",
   "US 10-K filings are text/html in this catalog; EN pages covered by an earnings-call PDF",
   "gold post-review char-level corrections documented in gold.json post_review_corrections"
  ],
- "pushed_to_remote": "origin/codex/w23-xiaomi-ocr-20261030 (commit f8e0bdc6 + this recording commit)"
+ "pushed_to_remote": null
 }

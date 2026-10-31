@@ -1,0 +1,18 @@
+{
+ "schema_version": "cwp-ocr-memwatch-receipt/1",
+ "purpose": "self-audit gap: R0 peak memory on a representative page (instrumented re-run, not for accuracy)",
+ "page": "byd_ar_2024_p021",
+ "engine": "LocalOCRAdapter engine in-process (same ONNX models/runtime/threads as the IsolatedOCRAdapter child); excludes child-process boundary overhead",
+ "status": "ok",
+ "before": {
+  "peak_workingset_bytes": 53026816,
+  "peak_commit_bytes": 40050688
+ },
+ "after": {
+  "peak_workingset_bytes": 197013504,
+  "peak_commit_bytes": 549990400
+ },
+ "peak_workingset_gb": 0.183,
+ "peak_commit_gb": 0.512,
+ "note": "the isolated child holds the same three ONNX sessions; parent-side accounting in the delivered runs records engine_seconds only"
+}

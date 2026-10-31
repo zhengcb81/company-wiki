@@ -29,6 +29,23 @@ from .runner import batch_summary, run_pages
 from .render_pages import render_pages
 
 
+class owned_tmp_dir:
+    """Card-required temp hygiene as a testable primitive: the directory is
+    created owned by this run and always removed on exit."""
+
+    def __init__(self, prefix: str = "w23-ocr-run-"):
+        self.prefix = prefix
+        self.path: Path | None = None
+
+    def __enter__(self) -> Path:
+        self.path = Path(tempfile.mkdtemp(prefix=self.prefix))
+        return self.path
+
+    def __exit__(self, *exc) -> None:
+        if self.path is not None:
+            shutil.rmtree(self.path, ignore_errors=True)
+
+
 def _plan_dir(repo: Path) -> Path:
     return repo / "docs" / "plans" / "w23-xiaomi-ocr-2026-10-30"
 
@@ -80,10 +97,10 @@ def main(argv: list[str] | None = None) -> int:
         selected = [p["page_id"] for p in pages if p["page_id"] in wanted]
 
     arms = [a.strip().upper() for a in args.arms.split(",") if a.strip()]
-    run_dir = Path(tempfile.mkdtemp(prefix="w23-ocr-run-"))
-    started = time.perf_counter()
-    results: dict = {"schema_version": "cwp-ocr-comparison/1", "arms": {}}
-    try:
+    with owned_tmp_dir() as run_dir:
+        run_dir = Path(run_dir)
+        started = time.perf_counter()
+        results: dict = {"schema_version": "cwp-ocr-comparison/1", "arms": {}}
         rendered = render_pages(manifest_path, run_dir / "pages")
         by_id = {r["page_id"]: r for r in rendered}
         cache = ResultCache()
@@ -203,8 +220,6 @@ def main(argv: list[str] | None = None) -> int:
         out_path.parent.mkdir(parents=True, exist_ok=True)
         out_path.write_text(json.dumps(results, ensure_ascii=False, indent=1), encoding="utf-8")
         print("WROTE", out_path)
-    finally:
-        shutil.rmtree(run_dir, ignore_errors=True)
     return 0
 
 

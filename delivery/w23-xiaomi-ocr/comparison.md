@@ -20,7 +20,11 @@ is made anywhere in this report.
 
 Sample: 7 documents / 14 pages = 8 eval + 5 holdout + 1 declared
 `synthetic_degradation` (KSX p2 same-page 0.55×/1.3° — no real scans exist in
-the catalog; not counted as scan coverage). Markets CN zh-CN / HK zh / US en;
+the catalog; not counted as scan coverage). Known coverage gaps, listed per
+the card's "样本不足列缺口" rule and NOT filled post-freeze: no two-column
+(双栏) page in the catalog slice selected — the Q&A and cross-paragraph
+qualifier groups are covered, the two-column group is not; and no seal/stamp
+(印章) pages exist among the frozen documents. Markets CN zh-CN / HK zh / US en;
 genres annual/semi-annual/quarterly reports, IR Q&A, convertible-bond
 prospectus, EN earnings call. Sample manifest and gold were frozen **before any
 engine output existed** (`gold.json.frozen_before_engine_outputs=true`); native
@@ -55,10 +59,14 @@ Aggregate over gold-verified pages (macro = mean per-page, micro = pooled
 chars; strict CER keeps real char differences; narrow CER is the declared
 NFC+whitespace normalization):
 
-| split | pages | macro CER strict | micro CER strict | macro CER narrow | number recall | number precision |
-|-------|-------|------------------|------------------|------------------|---------------|------------------|
-| eval (8+1 degraded) | 9 | 0.1599 | 0.1737 | 0.1250 | 0.9219 (gold 118/128) | 0.9833 |
-| holdout (5) | 5 | 0.1694 | 0.1732 | 0.1290 | 0.9367 (gold 74/79) | 0.9737 |
+| split | pages | macro CER strict | micro CER strict | macro CER narrow | English WER | number recall | number precision |
+|-------|-------|------------------|------------------|------------------|-------------|---------------|------------------|
+| eval (8+1 degraded) | 9 | 0.1599 | 0.1737 | 0.1250 | 0.300 (n=1) | 0.9219 (gold 118/128) | 0.9833 |
+| holdout (5) | 5 | 0.1694 | 0.1732 | 0.1290 | 0.1917 (n=1) | 0.9367 (gold 74/79) | 0.9737 |
+
+English WER covers exactly one page per split (the US-listed earnings-call
+document); with a single-page denominator it is indicative, not a
+population estimate. Per-page `wer`/`wer_ops` are in comparison.json.
 
 Number identity uses the declared narrow canon: OCR thousands-group spacing
 ("4, 281, 084") is one token; `392.0¹ → 392.01` stays a wrong number.
@@ -125,7 +133,8 @@ R0's recurring defect classes (the honest baseline picture):
 - `raw_r0.json` / `raw_n0.json` / `raw_x1.json` / `raw_x2.json` — per-page
   records incl. statuses, timings, error strings.
 - `fact_scores.json` — human fact/condition scoring with evidence.
-- `pilot_r0.json` / `pilot_x1.json` — pilot receipts.
+- `pilot_r0.json` / `pilot_x1.json` — pilot receipts; `memwatch_r0_receipt.json` — R0 peak-memory instrumented run.
+- `test_receipt.txt` — 40/40 W23 tests (31 unit + 9 integration).
 - Frozen inputs (committed): `docs/plans/w23-xiaomi-ocr-2026-10-30/
   {sample_manifest,gold}.json`; code under `tools/ocr_comparison/` (committed).
 

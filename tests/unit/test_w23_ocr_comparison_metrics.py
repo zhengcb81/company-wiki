@@ -292,6 +292,27 @@ def test_runner_preserves_accounting_fields_end_to_end():
     assert records[0]["recovery_attempts"] == 3
 
 
+def test_owned_tmp_dir_always_cleans_up():
+    """Card lock: run temp dirs (page renders) are removed on exit, also on error."""
+    import sys
+
+    if str(REPO) not in sys.path:
+        sys.path.insert(0, str(REPO))
+    from tools.ocr_comparison.run_comparison import owned_tmp_dir
+
+    seen = []
+    with owned_tmp_dir() as path:
+        seen.append(path)
+        assert path.is_dir()
+    assert not seen[0].exists()
+
+    with pytest.raises(RuntimeError):
+        with owned_tmp_dir() as path2:
+            seen.append(path2)
+            raise RuntimeError("injected")
+    assert not seen[1].exists()
+
+
 def test_truncation_marker_repetition_guard_flags_loops():
     from tools.ocr_comparison.backends.base import detect_repetition
 

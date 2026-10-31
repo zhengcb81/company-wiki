@@ -17,7 +17,17 @@
      "confidence": null,
      "locator_quality": "pdf_text_layer"
     }
-   ]
+   ],
+   "page_identity": {
+    "source_id": "urn:company-wiki:source:sha256:e9c2d7fdd088e151ccb6c8ad3d95587b2b014b10f2c9731508d23ce07fde4de3",
+    "document_id": "urn:company-wiki:document:sha256:e9c2d7fdd088e151ccb6c8ad3d95587b2b014b10f2c9731508d23ce07fde4de3",
+    "content_sha256": "e9c2d7fdd088e151ccb6c8ad3d95587b2b014b10f2c9731508d23ce07fde4de3",
+    "pdf_page_index": 21,
+    "page_image_sha256": "f3055b94202cc6a8f830da5bf3643dae0b495b9f51545367c94a97909e684681",
+    "market": "CN",
+    "language": "zh-CN",
+    "genre": "annual_report"
+   }
   },
   {
    "page_id": "byd_ar_2024_p022",
@@ -36,7 +46,17 @@
      "confidence": null,
      "locator_quality": "pdf_text_layer"
     }
-   ]
+   ],
+   "page_identity": {
+    "source_id": "urn:company-wiki:source:sha256:e9c2d7fdd088e151ccb6c8ad3d95587b2b014b10f2c9731508d23ce07fde4de3",
+    "document_id": "urn:company-wiki:document:sha256:e9c2d7fdd088e151ccb6c8ad3d95587b2b014b10f2c9731508d23ce07fde4de3",
+    "content_sha256": "e9c2d7fdd088e151ccb6c8ad3d95587b2b014b10f2c9731508d23ce07fde4de3",
+    "pdf_page_index": 22,
+    "page_image_sha256": "081c5b63e0b3fecf07bf22c833e735d057e9c7ed655109914aae6109430b14ed",
+    "market": "CN",
+    "language": "zh-CN",
+    "genre": "annual_report"
+   }
   },
   {
    "page_id": "amec_h1_2026_p009",
@@ -55,7 +75,17 @@
      "confidence": null,
      "locator_quality": "pdf_text_layer"
     }
-   ]
+   ],
+   "page_identity": {
+    "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+    "document_id": "urn:company-wiki:document:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+    "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+    "pdf_page_index": 9,
+    "page_image_sha256": "0ca3476c87116a3616011855253b19a8371c0902a27d8c469cb3063637254ace",
+    "market": "CN",
+    "language": "zh-CN",
+    "genre": "semi_annual_report"
+   }
   },
   {
    "page_id": "amec_h1_2026_p011",
@@ -74,7 +104,17 @@
      "confidence": null,
      "locator_quality": "pdf_text_layer"
     }
-   ]
+   ],
+   "page_identity": {
+    "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+    "document_id": "urn:company-wiki:document:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+    "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+    "pdf_page_index": 11,
+    "page_image_sha256": "219305089be419f56ed7f5ecbfe50e5521b21969db0b32f2eb1c19aa3d472733",
+    "market": "CN",
+    "language": "zh-CN",
+    "genre": "semi_annual_report"
+   }
   },
   {
    "page_id": "meituan_ar_2024_p000",
@@ -86,7 +126,17 @@
    "text": "",
    "raw_output": "",
    "raw_output_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-   "lines": []
+   "lines": [],
+   "page_identity": {
+    "source_id": "urn:company-wiki:source:sha256:36eae4d0397187bef187286e394b7d85421eac75f7380d1a95de9f1bfa25e70a",
+    "document_id": "urn:company-wiki:document:sha256:36eae4d0397187bef187286e394b7d85421eac75f7380d1a95de9f1bfa25e70a",
+    "content_sha256": "36eae4d0397187bef187286e394b7d85421eac75f7380d1a95de9f1bfa25e70a",
+    "pdf_page_index": 0,
+    "page_image_sha256": "6b19752d20d5ea2e19fe3fb04b900a8fa243c087715e8d801c25da4c12d6eaae",
+    "market": "HK",
+    "language": "zh",
+    "genre": "annual_report"
+   }
   },
   {
    "page_id": "meituan_ar_2024_p011",
@@ -105,7 +155,17 @@
      "confidence": null,
      "locator_quality": "pdf_text_layer"
     }
-   ]
+   ],
+   "page_identity": {
+    "source_id": "urn:company-wiki:source:sha256:36eae4d0397187bef187286e394b7d85421eac75f7380d1a95de9f1bfa25e70a",
+    "document_id": "urn:company-wiki:document:sha256:36eae4d0397187bef187286e394b7d85421eac75f7380d1a95de9f1bfa25e70a",
+    "content_sha256": "36eae4d0397187bef187286e394b7d85421eac75f7380d1a95de9f1bfa25e70a",
+    "pdf_page_index": 11,
+    "page_image_sha256": "8e461d4d0c26c9118b463c4f6e108d6a7173ad201619b1b3ca378396fb37631d",
+    "market": "HK",
+    "language": "zh",
+    "genre": "annual_report"
+   }
   },
   {
    "page_id": "ksy_q1_2026_p002",
@@ -124,7 +184,17 @@
      "confidence": null,
      "locator_quality": "pdf_text_layer"
     }
-   ]
+   ],
+   "page_identity": {
+    "source_id": "urn:company-wiki:source:sha256:37f0eb13fc9748d6f2f56e76e9a586bcee7cc9482dd77cdceb7a37fc0890ba2f",
+    "document_id": "urn:company-wiki:document:sha256:37f0eb13fc9748d6f2f56e76e9a586bcee7cc9482dd77cdceb7a37fc0890ba2f",
+    "content_sha256": "37f0eb13fc9748d6f2f56e76e9a586bcee7cc9482dd77cdceb7a37fc0890ba2f",
+    "pdf_page_index": 2,
+    "page_image_sha256": "5d34483092eae59b3dda6af4ce08834fdc45e303dc0e79e56763e71844294e79",
+    "market": "HK",
+    "language": "zh",
+    "genre": "quarterly_report"
+   }
   },
   {
    "page_id": "ksy_q1_2026_p002_synthetic_degraded",
@@ -133,7 +203,17 @@
    "wall_seconds": 7.399998139590025e-06,
    "retries": 0,
    "inference_runs": 1,
-   "error": "degraded_variant_shares_one_native_page"
+   "error": "degraded_variant_shares_one_native_page",
+   "page_identity": {
+    "source_id": "urn:company-wiki:source:sha256:37f0eb13fc9748d6f2f56e76e9a586bcee7cc9482dd77cdceb7a37fc0890ba2f",
+    "document_id": "urn:company-wiki:document:sha256:37f0eb13fc9748d6f2f56e76e9a586bcee7cc9482dd77cdceb7a37fc0890ba2f",
+    "content_sha256": "37f0eb13fc9748d6f2f56e76e9a586bcee7cc9482dd77cdceb7a37fc0890ba2f",
+    "pdf_page_index": 2,
+    "page_image_sha256": "0bdadbe1f0ecaa66577b407911442841c27de1c51e468dcd2a0bdf450206494d",
+    "market": "HK",
+    "language": "zh",
+    "genre": "quarterly_report"
+   }
   },
   {
    "page_id": "ir_wanrun_20241104_p000",
@@ -152,7 +232,17 @@
      "confidence": null,
      "locator_quality": "pdf_text_layer"
     }
-   ]
+   ],
+   "page_identity": {
+    "source_id": "urn:company-wiki:source:sha256:6abdef50aecf03f85e5c5b10299abc4c6442c4d8f1ffe356ba72a421b64f97fc",
+    "document_id": "urn:company-wiki:document:sha256:6abdef50aecf03f85e5c5b10299abc4c6442c4d8f1ffe356ba72a421b64f97fc",
+    "content_sha256": "6abdef50aecf03f85e5c5b10299abc4c6442c4d8f1ffe356ba72a421b64f97fc",
+    "pdf_page_index": 0,
+    "page_image_sha256": "8258bb098ad5648eb16c15561f3f6a21cc60866973717b1cb1fa52c21d9fa31b",
+    "market": "CN",
+    "language": "zh-CN",
+    "genre": "investor_relations"
+   }
   },
   {
    "page_id": "ir_wanrun_20241104_p002",
@@ -171,7 +261,17 @@
      "confidence": null,
      "locator_quality": "pdf_text_layer"
     }
-   ]
+   ],
+   "page_identity": {
+    "source_id": "urn:company-wiki:source:sha256:6abdef50aecf03f85e5c5b10299abc4c6442c4d8f1ffe356ba72a421b64f97fc",
+    "document_id": "urn:company-wiki:document:sha256:6abdef50aecf03f85e5c5b10299abc4c6442c4d8f1ffe356ba72a421b64f97fc",
+    "content_sha256": "6abdef50aecf03f85e5c5b10299abc4c6442c4d8f1ffe356ba72a421b64f97fc",
+    "pdf_page_index": 2,
+    "page_image_sha256": "657a458b4fc2199a6b69fea91202fc6ff696df49898ea576dc193c411093efc3",
+    "market": "CN",
+    "language": "zh-CN",
+    "genre": "investor_relations"
+   }
   },
   {
    "page_id": "hrjp_cb_prospectus_p006",
@@ -190,7 +290,17 @@
      "confidence": null,
      "locator_quality": "pdf_text_layer"
     }
-   ]
+   ],
+   "page_identity": {
+    "source_id": "urn:company-wiki:source:sha256:c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
+    "document_id": "urn:company-wiki:document:sha256:c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
+    "content_sha256": "c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
+    "pdf_page_index": 6,
+    "page_image_sha256": "ffeeb3587d68729c79b747dc19623d94604240f5ab9f8ffbc5645c02391c3a66",
+    "market": "CN",
+    "language": "zh-CN",
+    "genre": "prospectus_convertible_bond"
+   }
   },
   {
    "page_id": "hrjp_cb_prospectus_p037",
@@ -209,7 +319,17 @@
      "confidence": null,
      "locator_quality": "pdf_text_layer"
     }
-   ]
+   ],
+   "page_identity": {
+    "source_id": "urn:company-wiki:source:sha256:c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
+    "document_id": "urn:company-wiki:document:sha256:c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
+    "content_sha256": "c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
+    "pdf_page_index": 37,
+    "page_image_sha256": "00ed11da67ad1870fdaa6dadcc217d365e69dacccda2acfa53582f8cbc6ce3d1",
+    "market": "CN",
+    "language": "zh-CN",
+    "genre": "prospectus_convertible_bond"
+   }
   },
   {
    "page_id": "bili_call_4q22_en_p001",
@@ -228,7 +348,17 @@
      "confidence": null,
      "locator_quality": "pdf_text_layer"
     }
-   ]
+   ],
+   "page_identity": {
+    "source_id": "urn:company-wiki:source:sha256:55d3581c9b6e6b4be5793c80d65894a6d998194ba9f5027493d167f84e48d168",
+    "document_id": "urn:company-wiki:document:sha256:55d3581c9b6e6b4be5793c80d65894a6d998194ba9f5027493d167f84e48d168",
+    "content_sha256": "55d3581c9b6e6b4be5793c80d65894a6d998194ba9f5027493d167f84e48d168",
+    "pdf_page_index": 1,
+    "page_image_sha256": "fbbfe725204cb631655f971792d92c42bd01ae8da0efdb8b605971b0f5ce2c7c",
+    "market": "US",
+    "language": "en",
+    "genre": "investor_call_transcript"
+   }
   },
   {
    "page_id": "bili_call_4q22_en_p003",
@@ -247,12 +377,23 @@
      "confidence": null,
      "locator_quality": "pdf_text_layer"
     }
-   ]
+   ],
+   "page_identity": {
+    "source_id": "urn:company-wiki:source:sha256:55d3581c9b6e6b4be5793c80d65894a6d998194ba9f5027493d167f84e48d168",
+    "document_id": "urn:company-wiki:document:sha256:55d3581c9b6e6b4be5793c80d65894a6d998194ba9f5027493d167f84e48d168",
+    "content_sha256": "55d3581c9b6e6b4be5793c80d65894a6d998194ba9f5027493d167f84e48d168",
+    "pdf_page_index": 3,
+    "page_image_sha256": "99780cd6d283ae44c50bfc55f278a0e55cab2338b537089c4e876df40ded5aa4",
+    "market": "US",
+    "language": "en",
+    "genre": "investor_call_transcript"
+   }
   }
  ],
  "summary": {
   "pages_total": 14,
   "pages_ok": 12,
   "batch_status": "partial"
- }
+ },
+ "page_identity_provenance": "joined from docs/plans/w23-xiaomi-ocr-2026-10-30/sample_manifest.json (frozen, commit 0d24c943) in the post-review enrichment step; engine fields untouched"
 }
