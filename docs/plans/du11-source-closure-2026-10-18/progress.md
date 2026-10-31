@@ -2,7 +2,7 @@
 
 [IR/QA-RAG/MeetingConverter最终并线记录](review/older-packages-merge-20261031/README.md)：三仓分别98640a9a/1f551474/6c857a8b，远端HEAD逐一相等；67/28/76针对性测试通过，各仓PWF已提交推送。IR新建私有GitHub仓库按用户明确要求完成，MC原.coverage字节不变，作者树/原件/配置不动。
 
-CWP已发布946537d0的CI41238915399实际失败，11例集中于Linux导入WindowsJob接口及跨盘夹具；ROOT隔离小域修复/独审中，不扩测试范围，不把上轮本地绿写成CI成功。**唯一主线下一步：继续M8疑问/礼貌句准入及共享业务因果根修，完成最终源复验/独审后真实摘要、缓存恢复与RF实际采用。** 新agent已在既有M8WIP上实施，未付费/下载/重读PDF。W23-OCR-R1已发卡待用户分派，实证仍PARTIAL。全项目/公司loop仍OPEN。
+CWP平台兼容修复已发布20dd0143；精确CI41241389817 completed/success。旧41238915399的11失败保留；Windows边界、Linux观测和跨盘夹具已按责任层修复，正常pre-push167P/50.14秒。**唯一主线下一步：继续M8疑问/礼貌句准入及共享业务因果根修，完成最终源复验/独审后真实摘要、缓存恢复与RF实际采用。** 新agent已在既有M8WIP上实施，未付费/下载/重读PDF。W23-OCR-R1已发卡待用户分派，实证仍PARTIAL。全项目/公司loop仍OPEN。
 
 ---
 以下为历史记录，不是额外执行入口。
