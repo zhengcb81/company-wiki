@@ -1,0 +1,238 @@
+{
+  "pdf_sha256": "f03e003a89fbc047ccff0b47681499c4f59173a45dff312edec6ee5acbd20d65",
+  "docling_version": "2.96.0",
+  "native_units": [
+    {
+      "page": 1,
+      "paragraph_index": 0,
+      "text": "报告期内，公司第1季度的新型自动化产线已进入安装调试阶段，并在期末前完成联动试车并获得",
+      "bbox": [
+        60.0,
+        92.26126098632812,
+        442.5,
+        101.26126098632812
+      ],
+      "font_size": 9.0,
+      "page_size": [
+        600.0,
+        800.0
+      ],
+      "frame": "dict"
+    },
+    {
+      "page": 1,
+      "paragraph_index": 1,
+      "text": "客户的最终验收确认，但尚未转入大规模量产。",
+      "bbox": [
+        83.0,
+        106.26126098632812,
+        272.0,
+        115.26126098632812
+      ],
+      "font_size": 9.0,
+      "page_size": [
+        600.0,
+        800.0
+      ],
+      "frame": "dict"
+    },
+    {
+      "page": 2,
+      "paragraph_index": 0,
+      "text": "报告期内，公司第2季度的新型自动化产线已进入安装调试阶段，并在期末前完成联动试车并获得",
+      "bbox": [
+        60.0,
+        92.26126098632812,
+        442.5,
+        101.26126098632812
+      ],
+      "font_size": 9.0,
+      "page_size": [
+        600.0,
+        800.0
+      ],
+      "frame": "dict"
+    },
+    {
+      "page": 2,
+      "paragraph_index": 1,
+      "text": "客户的最终验收确认，但尚未转入大规模量产。",
+      "bbox": [
+        83.0,
+        106.26126098632812,
+        272.0,
+        115.26126098632812
+      ],
+      "font_size": 9.0,
+      "page_size": [
+        600.0,
+        800.0
+      ],
+      "frame": "dict"
+    }
+  ],
+  "sdk_items": [
+    {
+      "page": 1,
+      "label": "text",
+      "text": "报告期内，公司第1季度的新型自动化产线已进入安装调试阶段，并在期末前完成联动试车并获得 客户的最终验收确认，但尚未转入大规模量产。",
+      "provenance": [
+        {
+          "page_no": 1,
+          "bbox": {
+            "l": 60.0,
+            "t": 707.731,
+            "r": 442.5,
+            "b": 684.74,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            65
+          ]
+        }
+      ]
+    },
+    {
+      "page": 2,
+      "label": "text",
+      "text": "报告期内，公司第2季度的新型自动化产线已进入安装调试阶段，并在期末前完成联动试车并获得 客户的最终验收确认，但尚未转入大规模量产。",
+      "provenance": [
+        {
+          "page_no": 2,
+          "bbox": {
+            "l": 60.0,
+            "t": 707.731,
+            "r": 442.5,
+            "b": 684.74,
+            "coord_origin": "BOTTOMLEFT"
+          },
+          "charspan": [
+            0,
+            65
+          ]
+        }
+      ]
+    }
+  ],
+  "proposals": [
+    {
+      "page": 1,
+      "text": "报告期内，公司第1季度的新型自动化产线已进入安装调试阶段，并在期末前完成联动试车并获得 客户的最终验收确认，但尚未转入大规模量产。",
+      "bbox": [
+        60.0,
+        92.269,
+        442.5,
+        115.25999999999999
+      ],
+      "page_size": [
+        600.0,
+        800.0
+      ],
+      "frame": "dict",
+      "joined_native_matches": true,
+      "centers": [
+        {
+          "text": "报告期内，公司第1季度的新型自动化产",
+          "center": [
+            251.25,
+            96.76126098632812
+          ],
+          "inside_xy": [
+            true,
+            true
+          ]
+        },
+        {
+          "text": "客户的最终验收确认，但尚未转入大规模",
+          "center": [
+            177.5,
+            110.76126098632812
+          ],
+          "inside_xy": [
+            true,
+            true
+          ]
+        }
+      ],
+      "tolerance": 2.25
+    },
+    {
+      "page": 2,
+      "text": "报告期内，公司第2季度的新型自动化产线已进入安装调试阶段，并在期末前完成联动试车并获得 客户的最终验收确认，但尚未转入大规模量产。",
+      "bbox": [
+        60.0,
+        92.269,
+        442.5,
+        115.25999999999999
+      ],
+      "page_size": [
+        600.0,
+        800.0
+      ],
+      "frame": "dict",
+      "joined_native_matches": true,
+      "centers": [
+        {
+          "text": "报告期内，公司第2季度的新型自动化产",
+          "center": [
+            251.25,
+            96.76126098632812
+          ],
+          "inside_xy": [
+            true,
+            true
+          ]
+        },
+        {
+          "text": "客户的最终验收确认，但尚未转入大规模",
+          "center": [
+            177.5,
+            110.76126098632812
+          ],
+          "inside_xy": [
+            true,
+            true
+          ]
+        }
+      ],
+      "tolerance": 2.25
+    }
+  ],
+  "accepted_groups": 2,
+  "rejected_groups": 0,
+  "aligned_units": [
+    {
+      "version": "pdf-paragraph-membership/1",
+      "group": "d9c779090176ca2ba64b9f6026b4f5332cac19c5cb93038ad4e49ec48a8629b8",
+      "position": 0,
+      "count": 2,
+      "previous": null,
+      "next": "urn:company-wiki:narrative-unit:sha256:0833f8e7e8c7e5cb64909b7efa3e3486daecee4af316a572981fa08ab9aea6cf"
+    },
+    {
+      "version": "pdf-paragraph-membership/1",
+      "group": "d9c779090176ca2ba64b9f6026b4f5332cac19c5cb93038ad4e49ec48a8629b8",
+      "position": 1,
+      "count": 2,
+      "previous": "urn:company-wiki:narrative-unit:sha256:7c7329c0dfa02b83c62c73f5c9d85723e0e90dc2ae706787c0cd485b524ac6de",
+      "next": null
+    },
+    {
+      "version": "pdf-paragraph-membership/1",
+      "group": "06dcc59465666862adf41ee41d35df42a63524a21753b8c6927044fa44134004",
+      "position": 0,
+      "count": 2,
+      "previous": null,
+      "next": "urn:company-wiki:narrative-unit:sha256:86db59495310e9d37d777c2df1628c89f839a615d451c5d8b240077a2ec19017"
+    },
+    {
+      "version": "pdf-paragraph-membership/1",
+      "group": "06dcc59465666862adf41ee41d35df42a63524a21753b8c6927044fa44134004",
+      "position": 1,
+      "count": 2,
+      "previous": "urn:company-wiki:narrative-unit:sha256:4a46bf94dfe532966f9d2aaaedf1941e46043a6aa3a93478ea669505ef2f9075",
+      "next": null
+    }
+  ]
+}

@@ -1,0 +1,25 @@
+{
+  "config_load": {
+    "artifacts": "C:\\cwp-runtime\\w22-pdf-sdk\\artifacts",
+    "docling_version": "2.96.0",
+    "environment_algorithm": "pdf-runtime-closure/2",
+    "environment_sha256": "c84a984ccb3a56dffbfd0d4538f14ce4a27de44dec4981527a2b0c4a545cdf44",
+    "max_pages": 3,
+    "max_seconds": 120,
+    "model_sha256": "00333a43451945aaf89db8ca9c0a17e75d1537c17db60fdb91aa95f4c7929e0c",
+    "python": "C:\\cwp-runtime\\w22-pdf-sdk\\env\\Scripts\\python.exe",
+    "status": "PASS"
+  },
+  "light": {
+    "distribution_count": 104,
+    "enable_user_site": false,
+    "environment_sha256": "c84a984ccb3a56dffbfd0d4538f14ce4a27de44dec4981527a2b0c4a545cdf44",
+    "prefix": "C:\\cwp-runtime\\w22-pdf-sdk\\env",
+    "sdk_imports": 0,
+    "status": "PASS",
+    "third_party_count": 104
+  },
+  "tree_bytes": 1461229415,
+  "tree_files": 38627,
+  "zero_write_verified": true
+}

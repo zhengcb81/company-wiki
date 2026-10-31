@@ -1,0 +1,22 @@
+{
+ "artifacts": [
+  "DIR",
+  null
+ ],
+ "deployment.json": [
+  "ea54468a10f4bbf8063c2040809de3fa8e9214e9e6e3ed43042d94f1415bd348",
+  1793395309361451700
+ ],
+ "env": [
+  "DIR",
+  null
+ ],
+ "paragraph-runtime.config.json": [
+  "bd88ad431822b5af0361e9b8fed1e991947a79036b42207126fca61181d6bd22",
+  1793395309355162700
+ ],
+ "receipts": [
+  "DIR",
+  null
+ ]
+}

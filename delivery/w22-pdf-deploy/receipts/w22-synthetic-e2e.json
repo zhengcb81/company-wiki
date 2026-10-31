@@ -1,0 +1,78 @@
+{
+  "scope": "two-page synthetic PDF through the real production entry",
+  "config_path": "C:\\cwp-runtime\\w22-pdf-sdk\\paragraph-runtime.config.json",
+  "status": "enhanced",
+  "warmup": {
+    "status": "WARM_OK",
+    "seconds": 11.456,
+    "launch_shape": [
+      "C:\\cwp-runtime\\w22-pdf-sdk\\env\\Scripts\\python.exe",
+      "-I",
+      "-X",
+      "utf8"
+    ]
+  },
+  "error": null,
+  "seconds": 17.662,
+  "pdf_sha256": "3ec9508f837794ff5feaa9b6f9d75eecb17a2a16f3decd78b77bc1b95832143f",
+  "page_count": 2,
+  "diagnostic": {
+    "status": "enhanced",
+    "pages": [
+      1,
+      2
+    ],
+    "gap_signals": [
+      {
+        "page": 1,
+        "reason": "unproven_wrapped_prose",
+        "priority": 1,
+        "left": "urn:company-wiki:narrative-unit:sha256:3d3af27d0b39035f8efae3ffa21ba8d085280268a17e3926df06b6bb5cd4cc6c",
+        "right": "urn:company-wiki:narrative-unit:sha256:c77ebc1dd57bb345ac786fccc4238ad658171621bbdf0ce15e7984b449922973"
+      },
+      {
+        "page": 2,
+        "reason": "unproven_wrapped_prose",
+        "priority": 1,
+        "left": "urn:company-wiki:narrative-unit:sha256:43cd16f4fc5baf3d4e2b92e3309c60c42392d18750cec64b398e6874efc5ab72",
+        "right": "urn:company-wiki:narrative-unit:sha256:d6a908e5e567dc33aab22106cafde8f7537ceee4223cecb747c20c9a7030b556"
+      }
+    ],
+    "accepted_groups": 2,
+    "rejected_groups": 0,
+    "actual_engine": "docling",
+    "engine_version": "2.96.0",
+    "model_sha256": "00333a43451945aaf89db8ca9c0a17e75d1537c17db60fdb91aa95f4c7929e0c",
+    "converter_instances": 1,
+    "peak_job_commit_bytes": 3329736704,
+    "seconds": 15.9895,
+    "reason": null,
+    "last_stage": null,
+    "worker_error": null,
+    "worker_returncode": null,
+    "temporary_root_restored_absent": true,
+    "completed_pages": [
+      1,
+      2
+    ],
+    "pending_pages": [],
+    "stream_complete": true,
+    "truncated_final_record": false,
+    "checkpoint_protocol": "pdf-paragraph-page-checkpoints/1"
+  },
+  "runtime_identity": {
+    "python_ascii": true,
+    "artifacts_ascii": true,
+    "environment_sha256": "c84a984ccb3a56dffbfd0d4538f14ce4a27de44dec4981527a2b0c4a545cdf44",
+    "docling_version": "2.96.0"
+  },
+  "source_preserved": true,
+  "evidence_span_count": 0,
+  "replay_verified": 0,
+  "replay_failed": [],
+  "negative_control_rejected": true,
+  "known_non_ascii_failure": false,
+  "cleanup": {
+    "scratch_restored_absent": true
+  }
+}

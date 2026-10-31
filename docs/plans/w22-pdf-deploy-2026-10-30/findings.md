@@ -1,0 +1,161 @@
+# W22-PDF-DEPLOY 调查记录
+
+已知证据、读路径、接口与禁止范围见TASK_CARD.md。旧结果保持原状态，不拿工程已合线替代真实C2/主线召回验收。作者在A/B记录新证据和失败，保持小而可复核。
+
+## A 阶段：根因与部署设计（2026-10-30）
+
+### 已核对证据（只读，未改动任何来源）
+
+1. ROOT 接收 review（`review/w21-root-reception-20261030/review.md`）：no-document SDK constructor
+   16.222824s/30s 通过；canonical 中文路径 env 在 PAGE_1 `ChildFailed`/`native_fallback`；同一 env 临时
+   ASCII alias 完成2页但 accepted0/rejected2（`unaligned_native_fallback`，诊断性质）。
+2. 隔离部署（`.planning/c3-20261028/pdf-sdk-isolated/`）：104 distributions/36,121 hardlink/共享逻辑
+   1,233,549,343B，scaffold 517,241B，SDK/模型零字节复制；`runtime-isolated.json` 与原 profile 仅差 python
+   路径，`environment_sha256=c84a984c…`（pdf-runtime-closure/2）；6 处 INSTALLER 4B/5B RECORD provenance
+   差异与 2 个标准 .pth hook 为诊断记录，非门禁。
+3. 生产契约（本工区源码）：
+   - `configured_paragraph_runtime()` 读 `COMPANY_WIKI_PDF_ENHANCEMENT_CONFIG` 指向的 JSON，schema
+     `pdf-paragraph-runtime/2` 须绑 `environment_algorithm=pdf-runtime-closure/2`；
+   - `ParagraphRuntimeConfig` 必填 `python/artifacts/model_sha256/model_config_sha256/docling_version/runtime_versions(精确6键)/environment_sha256`，封顶 120s/3页/64MiB入/2MiB出/4GiB committed/CPU4；
+   - 子进程启动 `[python, -I, -X utf8, (-X pycache_prefix=repo-local)] _paragraph_worker.py`，env 走 allowlist
+     +offline flags，TEMP/TMP 指向 repo-local scratch（Low 完整性子进程可写）；
+   - worker 身份校验：docling/6个 runtime_versions/`environment_sha256(roots=v2)` 全部须与配置一致；模型
+     `config.json`+`model.safetensors` 逐 SHA 核对后 `artifacts_path` 交给 docling。
+4. 对齐层（`narrative_pdf_paragraphs.py`，ROOT owner 不改）：proposal 文本 NFKC 归一后须等于 ≥2 个连续
+   native `pdf_text_block` 拼接，且整块 native bbox（含 2–3pt 字号容差）落在 proposal bbox 内；重叠 proposal
+   全部作废。
+
+### 根因判读（区分五类路径）
+
+| 路径 | 实际值 | 判读 |
+|---|---|---|
+| 解释器/site-packages | `…company-wiki\.planning\c3-20261028\…\env\Scripts\python.exe`（含中文用户名） | **判别变量**。W21 对照：中文 env 路径 PAGE_1 失败，ASCII alias 同 env 完成2页。docling-parse 6.2.0 的打包资源（fopen/ACP936 对照）随 site-packages 路径解析，非 ASCII 即失败 |
+| 模型 artifacts | `C:\Users\郑曾波\.cache\huggingface\hub\models--docling-project--docling-layout-heron\snapshots\8f39ad3c…`（含中文用户名，6 文件/171,764,371B） | alias 对照运行中保持中文仍完成转换 → 非阻塞，但非 ASCII；按 A4 在 owned ASCII 树 hardlink 原文件（零字节复制），使配置自包含且全树 ASCII |
+| 第一方源码/repo scratch | 工区树（中文） | 生产已由 W21 launch owner 处理（隔离 flags + repo-local bytecode/scratch）；W21 alias 对照中 scratch 保持中文且转换完成 → 不动 |
+| 临时 alias/junction | W21 诊断用 | 不作为正式环境；本包建真实 ASCII 资源树 |
+| 配置文件路径 | 验收子进程显式 `COMPANY_WIKI_PDF_ENHANCEMENT_CONFIG` | 父进程内 JSON 读取与路径无关；不持久改 ROOT 环境 |
+
+### 部署设计（B/C 实施依据）
+
+1. **来源与 resolver**：`--source-config` 显式给出现有 runtime 配置（本次用 W21 已验证的
+   `runtime-isolated.json`）；closure 由既有 `describe_environment(configured_runtime_roots(runtime_versions))`
+   在**源解释器内**（`-B -I` metadata-only probe）解析，文件清单来自各 dist RECORD；绝不重新发明依赖身份。
+   INSTALLER provenance 差异、活动 .pth 记为诊断字段，不升级为门禁。
+2. **目标**：ASCII-only 新目录（首验 `C:/cwp-runtime/w22-pdf-sdk` 不存在、同 C: 卷、可写）。结构：
+   `env/`（普通 venv `--without-pip --copies`，include-system-site-packages=false）+ `artifacts/`（模型逐文件
+   hardlink）+ `w22-paragraph-runtime.json`（输出配置）+ `deployment.json`（owned 收据，含 plan SHA 与工具
+   身份）+ 本地 `plan.local.json`（不提交）。
+3. **零大复制边界**：venv scaffold 小复制（记 `new_scaffold_file_bytes`）；104 dist 文件与 6 个模型文件全部
+   NTFS hardlink，逐链接前重算源 SHA（actual-source 保护）+ `samefile` 证明；逻辑共享字节单列，不冒充新增
+   磁盘；NTFS metadata 开销如实声明"未精测"。不做就地编辑/chmod；不沿 hardlink 删源。
+4. **基解释器一致性**：CLI 必须由与源 env 同 base 的基 Python 运行（`sys.prefix==sys.base_prefix` 且
+   prefix 与 probe 返回的 `base_prefix` 一致），否则显式报错。
+5. **幂等/恢复**：目标分类 `ABSENT/EMPTY/OWNED_COMPLETE/OWNED_INCOMPLETE/FOREIGN`。OWNED_COMPLETE 且
+   plan SHA 相同 → 复核后零写复用；OWNED_INCOMPLETE → 按 plan 对账恢复（缺→link；已存在且
+   samefile+SHA 同→保留；存在但不同→冲突中止，不覆盖不删除非 owned 文件）；FOREIGN/未知 → 明确报错，
+   换 owned 目标。绝不误报"已就绪"。
+6. **输出配置**：与 source profile 逐字段相同，仅 `python/artifacts` 替换为 ASCII 路径；schema/SHAs/封顶/
+   `environment_sha256` 不变（路径变化下 metadata-closure SHA 相同属合法，不虚构代码身份变化）。仍由
+   `COMPANY_WIKI_PDF_ENHANCEMENT_CONFIG` 显式选择，上层接口不变。
+7. **验证分级**：L0 轻量（新解释器 fresh process：closure 全等 + environment_sha256 + 104 dist 全在目标
+   site-packages + 无 user/base site/pip + 零 SDK import）；L1 生产配置加载（repo Python fresh process，
+   `configured_paragraph_runtime()` → recipe 绑定核对）；L2 no-document constructor（显式 opt-in，30s 封顶）；
+   L3 真实入口 E2E（合成 ≤2 页 PDF → `PdfReading` → 真 worker → 离线 SDK → 现有对齐），转换与对齐分开记录。
+8. **同配置第二次轻量复核零环境写入**：verify 前 snapshot 目标树（count/bytes/mtime 摘要），复核后比对。
+
+### 风险与诚实边界（预记）
+
+- alias 对照 accepted0/rejected2 说明**对齐风险真实存在**：即使全 ASCII 部署，E2E 仍可能 accepted0。
+  届时先审合成夹具是否真的无增强需求，再给最小对齐反例；对齐层是 ROOT owner，不改。C2 结论按实际
+  结果记录，不因部署工程 PASS 而签全部完成。
+- Low 完整性子进程对新 ASCII 树（`C:/cwp-runtime/...` 默认 Medium 继承）的**可写性未证明**：worker 需要的
+  TEMP/bytecode 在 repo-local（Low 可写），但 dill/transformers 的其他临时写如落入 ASCII 树可能被拒。
+  C 阶段以真实日志判定，不预先抬权限/改 ACL。
+
+## B/C 阶段实测记录（2026-10-30）
+
+### C1 部署实况（C:/cwp-runtime/w22-pdf-sdk，首次创建，无外来冲突）
+
+- plan：104 dist / 36,121 env 文件（与 W21 逐项同源）+ 6 模型文件 + 53 条 env 内 script 行；plan SHA
+  `327891cf…`；源配置 SHA `bcc42711…`（即 W21 接收 review 独立冻结的同一 runtime profile 字节）。
+- deploy：36,127 hardlinks、SDK/模型**零字节复制**、scaffold 516,976B、共享逻辑 1,405,313,714B、417s、
+  `environment_sha256=c84a984c…` 与源一致；NTFS metadata 开销如实"未精测"。
+- verify：L0 fresh-process（104 dist 全部位于部署 site-packages、无 pip/user site/base site、ASCII prefix、
+  零 SDK import）PASS；L1 生产 `configured_paragraph_runtime()` 加载 PASS（python/artifacts=ASCII 路径，
+  其余字段与源逐值相同）；零写复核 `zero_write_verified=true`。
+- RECORD provenance 诊断 12 条（已知 6 dist INSTALLER 4B/5B）与 2 条标准 .pth hook 仅记录，未升门禁。
+
+### C2 真实入口（两轮，均如实记录）
+
+1. 首跑（内置 `china-s` 字体夹具）：native_fallback @120s 封顶——根因是**生产子进程 repo-local
+   pycache_prefix 冷编译**吃满预算（缓存镜像 75MB 产物佐证）。处置：经生产 `child_launch_command`
+   做 no-document 预热（13.7s/10.4s，非就绪收据），不改任何封顶。
+2. 预热后 E2E 仍 accepted0/rejected2（`unaligned_native_fallback`）→ 按 C4 审夹具：真 SDK items 文本
+   乱码（`_alignment_diagnostic` 收据 `w22-alignment-diagnostic.json`）——**根因是 pymupdf 内置
+   `china-s` 字体无 ToUnicode CMap，docling/pdfminer 解码失败**，与部署路径无关（W21 alias 对照
+   rejected2 同因）。改用带 ToUnicode 的嵌入系统字体（simhei.ttf，按常见路径发现）后：
+   - 对齐诊断：真实 SDK 提案 2/2 通过生产 `align_paragraphs`（accepted 2 / rejected 0）；
+   - canonical E2E 收据 `w22-synthetic-e2e.json`：**status=enhanced，accepted_groups=2，
+     rejected_groups=0**，completed [1,2] / stream_complete，worker 17.04s/120s，
+     peak 3,330,412,544B/4GiB，`known_non_ascii_failure=false`，source_preserved=true，
+     负对照（单字符篡改+有效几何）仍被拒绝，清理恢复 absent。
+- integration 4/4 通过（L0/L1/L2/L3，显式 opt-in）；unit 19 + 既有 environment/paragraph/alignment
+  43 = 62 全绿；mypy 11 文件 0 错误、ruff 全绿。
+- W22 版 Intergration 收据 evidence_span_count=0（合成文档无业务选段信号，replay 0）——与 W21 相同，
+  属 selector 语义，非部署缺陷；真实正文质量/召回仍归 ROOT C2 收口。
+
+### 独审与修复（2026-10-30，两个独立 agent）
+
+- 环境独审（ACCEPTABLE）：14 项硬链接源抽查（含 171MB model.safetensors）samefile+源 SHA 全过；
+  verify 复现 PASS；配置逐字段同源仅 python/artifacts 差异；磁盘账目精确（scaffold 9 文件 516,976B；
+  2,489 个运行时 pyc 正确排除）；0 symlink/junction；无密钥；报告
+  `delivery/w22-pdf-deploy/review/environment-review-20261030.md`。
+- 代码独审（初判 NOT READY，3 阻塞）：
+  - **D1**：CLI 默认 `--repo-src` 用 `parents[3]`（解析到 Projects/src，不存在）——已修
+    `parents[2]/src`（`__main__.py`、`_alignment_diagnostic.py`），删除 deployment.py 死变量；重跑
+    plan 未传 `--repo-src` 由默认值成功，实证修复。
+  - **D2**：部署收据绑定的是未提交中间版本工具（SHA 99a5d250）；plan 含工具身份 → 新 plan 对旧树
+    分类 FOREIGN。处置：保存中间收据为
+    `review/deployment-intermediate-revision-99a5d250.json`；核实目标确为本卡产物后退役旧树
+    （rm 只删链接名；退役后模型源 SHA 复核未变）；此后每轮工具代码变更都以同一纪律重跑绑定链
+    （退役→plan→deploy→verify→constructor→L0-L3）。**最终绑定**：plan `1cba5f2e…`（其后 R3 修复
+    轮再更新）→ 36,127 links COMPLETE → 收据工具 SHA 与对应 HEAD `deployment.py` 逐字节一致
+    （最终轮为 R3 修复后的 HEAD；四向一致由环境复审独立证明）。
+  - **D3**：receipt 缺卡要求字段——已扩展：源输入路径、model/config SHA、输出配置路径+内容 SHA、
+    `actual_allocation=unknown` 显式声明、source_protection 证明字段；verify 把轻量 fresh-process
+    验证结果写回收据（`recorded_in_receipt=true`）。
+  - samefile 契约收紧（审查者 round-1 反例）：恢复路径上字节相同但非 samefile 的普通拷贝按外来内容
+    fail-closed（TargetConflict），不再计 reused；author+reviewer 测试全部重绑（round-2 两个
+    REPO_SRC xfail 转正为断言修复后行为）。
+- 修复后 unit 34 个（author 19 + reviewer 15）全绿；mypy 10 文件/ruff 干净。
+- 审查者新增测试文件（reviewer-owned，author 重绑到修复后契约）：
+  `tests/unit/test_w22_review_counterexamples.py`、`tests/unit/test_w22_review_code.py`、
+  `tests/unit/test_w22_review_code_r2.py`。
+- 复审（两 agent 第二轮）：环境复审 **ACCEPTABLE**（新树 15 项抽查全过、独立 verify 与收据
+  light_verification 逐字段吻合、工具 SHA 四向一致）；代码复审 **READY_FOR_ROOT**（D1/D2/D3 全闭合、
+  重绑无弱化），报告 `review/environment-review-r2-20261030.md`、`review/code-review-r2-20261030.md`。
+  复审遗留唯一非阻塞项 **R3**（REUSED 零写路径只查哈希未查 samefile，与收据 attestation 不对称）
+  ——已按审查者最小修复采纳：`_reconcile_fully_consistent` 增加 samefile 证明，非 samefile 落入
+  恢复路径 fail-closed；R3 反例测试重绑为断言修复后契约；36 unit 全绿；再做一轮绑定链。
+
+### L2 constructor 形态修正（最终绑定轮实测）
+
+- D2 重绑定后重部署的 env 是冷树：bare `python -I` constructor 两次诚实超时 >30s（首次部署时
+  22.748s 压线通过，靠的是 deploy 全量重哈希后的 OS 缓存热度）。**未抬 30s 封顶、未改历史收据、
+  未反复重试同配方**（两次后停止）。
+- 根因：bare 导入把整个 torch/transformers 树冷编译进 env 本地 __pycache__；而**生产 worker 从不
+  裸启动**——永远带 repo-local `pycache_prefix`（W21 launch owner 设计）。因此 constructor-probe
+  新增显式 `--production-launch`（走真实 `child_launch_command`），L2 集成测试重绑到生产启动形态：
+  最终部署 CONSTRUCTOR_OK **22.95s/30s**，`launch=production_child_launch`。bare 形态保留为冷诊断。
+- 最终绑定链（全部以最终提交代码执行）：plan `1cba5f2e…` → deploy 36,127 links COMPLETE（收据工具
+  SHA `302bf87d…` == HEAD `deployment.py` 逐字节）→ verify PASS+零写+`recorded_in_receipt=true` →
+  constructor 生产形态 OK → L0-L3 集成 4/4（L3 E2E enhanced，accepted2/rejected0，worker
+  21.38s/120s，峰值 3.10GiB/4GiB）。
+
+### 工程事实（部署协议层）
+
+- ROOT 仓 `.venv` python.exe 带 Low 完整性标签（AGENTS 既有记录复现）：Low 进程不能写 Medium 的
+  `C:/cwp-runtime`（mkdir PermissionError），Medium 部署子进程可写 Low 工区树——E2E pytest 用 .venv 跑时
+  收据必须落工区 delivery/，部署 CLI 用基 Python（C:/Miniconda，Medium）跑。
+- 每链接前重算源 SHA + link 后 samefile/SHA 双证；对规划路径上的外来内容冲突即止（不覆盖不删除）；
+  失败收据由工具原子写入目标 deployment.json。
