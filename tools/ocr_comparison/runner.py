@@ -38,9 +38,13 @@ def run_pages(page_ids, backend_fn, *, max_retries: int = 0, retry_on: tuple = (
             "retries": attempts - 1,
             "inference_runs": attempts,
         }
-        for key in ("text", "text_sha256", "raw_output_sha256", "error", "lines"):
-            if key in result:
-                record[key] = result[key]
+        # Card-required accounting must survive into the delivery: repetition
+        # flags, recovery/drop counts, cache provenance and preflight
+        # arithmetic all ride along instead of being silently dropped.
+        dropped_keys = {"page_id", "status", "engine_seconds"}
+        for key, value in result.items():
+            if key not in dropped_keys:
+                record[key] = value
         records.append(record)
     return records
 

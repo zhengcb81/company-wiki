@@ -267,6 +267,31 @@ def test_fault_injected_retry_records_inference_not_duplicate_page():
     assert len({r["page_id"] for r in records}) == 2
 
 
+def test_runner_preserves_accounting_fields_end_to_end():
+    """Repetition flags, recovery/drop counts, cache provenance and preflight
+    arithmetic must survive the runner into the delivered records."""
+    from tools.ocr_comparison.runner import run_pages
+
+    def backend(page):
+        return {
+            "status": "ok",
+            "engine_seconds": 2.0,
+            "text": "内容",
+            "repetition": {"suspicious": False, "reasons": []},
+            "recovery_attempts": 3,
+            "dropped_regions": 2,
+            "cache_hit": True,
+            "cap_bytes": 988, "weight_bytes": 1000, "minimum_peak_bytes": 2000,
+        }
+
+    records = run_pages(["p1"], backend)
+    for key in ("repetition", "recovery_attempts", "dropped_regions", "cache_hit",
+                "cap_bytes", "weight_bytes", "minimum_peak_bytes"):
+        assert key in records[0], key
+    assert records[0]["cache_hit"] is True
+    assert records[0]["recovery_attempts"] == 3
+
+
 def test_truncation_marker_repetition_guard_flags_loops():
     from tools.ocr_comparison.backends.base import detect_repetition
 

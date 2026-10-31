@@ -1,92 +1,231 @@
 {
-  "schema_version": "cwp-ocr-fact-scores/1",
-  "arm": "R0",
-  "method": "human (author) judgment pairing gold facts/conditions against R0 full outputs under .w23_cache/r0_outputs; every judgment below cites the output evidence. X1/X2 have no outputs (unsupported/not_run), so no fact scores exist for them.",
-  "eval_pages": {
-    "byd_ar_2024_p021": {
-      "facts": {"hit": 9, "partial": 0, "miss": 0, "notes": "F8 all six table numbers present (4,281,084 / 3,033,662 / 41.12% / 4,250,370 / 3,012,906 / 41.07%) though cell order interleaved by line sorting"},
-      "conditions": {"hit": 0, "partial": 0, "miss": 1, "notes": "C0 checkbox state lost: output reads 适用口不适用; the checked ☑ glyph is unreadable in R0 output (recurring defect class)"},
-      "wrong_subject": 0, "negation_loss": 0
-    },
-    "amec_h1_2026_p009": {
-      "facts": {"hit": 6, "partial": 0, "miss": 0, "notes": "F0 1659亿美元/23.2% verbatim; in-figure marketing text read more completely than the gold's minimum (年产值约万亿美金 etc.), counted as recall not fabrication — all read strings exist on the page"},
-      "conditions": {"hit": 0, "partial": 0, "miss": 1, "notes": "C0 negation line truncated: output jumps from 没有能加工微米和纳 to 着微观器件尺寸越做越小; the 米尺度的光刻机…就不可能制造出集成电路和微观器件 clause is dropped (one physical line lost)"},
-      "wrong_subject": 0, "negation_loss": 1
-    },
-    "amec_h1_2026_p011": {
-      "facts": {"hit": 7, "partial": 0, "miss": 0, "notes": "13% fourth-largest segment and 2024 超微 line-ending both present; checkbox pair 口适用√不适用 keeps the checked √"},
-      "conditions": {"hit": 2, "partial": 0, "miss": 0},
-      "wrong_subject": 0, "negation_loss": 0,
-      "extra_line_loss_not_in_facts": "one non-fact line lost between 更小的微观结构要靠 and 备的重要性 (二重模板/四重模板 clause)"
-    },
-    "meituan_ar_2024_p011": {
-      "facts": {"hit": 5, "partial": 3, "miss": 0, "notes": "F2 partial (神搶手→神手, 閃電倉 once→閃電詹); F3 partial (居家檢測→居家測, 線上診斷→線上; 一站式服務/醫保支付 preserved); F6 partial (防疲勞→防疲, 聽力障礙→有力障). F4/F5/F7 numbers 10億元/7個試點省市/14億元/2025年第二季度 all present"},
-      "conditions": {"hit": 1, "partial": 0, "miss": 0},
-      "wrong_subject": 0, "negation_loss": 0,
-      "notes_extra": "騎手 repeatedly loses 騎 (所有手/手權益) — char loss, not subject reassignment"
-    },
-    "ksy_q1_2026_p002": {
-      "facts": {"hit": 6, "partial": 1, "miss": 0, "notes": "F0 partial (納斯達克→斯逹克); all numeric facts present. Critical number defect: R0 outputs 392.01百萬美元 — same superscript-footnote merge the native layer has; gold is 392.0"},
-      "conditions": {"hit": 2, "partial": 0, "miss": 0},
-      "wrong_subject": 0, "negation_loss": 0
-    },
-    "ir_wanrun_20241104_p000": {
-      "facts": {"hit": 5, "partial": 1, "miss": 0, "notes": "F0 partial: checked ☑特定对象调研 glyph lost (box state unreadable); participant names include one wrong char 王祉蘅→王祉衡"},
-      "conditions": {"hit": 0, "partial": 0, "miss": 1, "notes": "checkbox state of 活动类别 unreadable (same defect class as byd_p021 C0)"},
-      "wrong_subject": 0, "negation_loss": 0
-    },
-    "hrjp_cb_prospectus_p006": {
-      "facts": {"hit": 5, "partial": 0, "miss": 0, "notes": "6,300万片 / 50万件 / 140万支 verbatim"},
-      "conditions": {"hit": 2, "partial": 0, "miss": 0, "notes": "both 如果…将… condition sentences fully preserved"},
-      "wrong_subject": 0, "negation_loss": 0
-    },
-    "bili_call_4q22_en_p001": {
-      "facts": {"hit": 4, "partial": 4, "miss": 1, "notes": "F0 partial (opening line Thank you, Juliet… lost; on behalf of Mr. Chen present); F4 partial (96 minutes present, up 51% lost as garbage '- q d o o'); F5 partial (6.1 billion present, RMB 21.9 billion line lost); F7 partial (30%→21% present, cut S&M by 28% lost as fragment 's'); F8 miss (narrowed by 21%/26% quarter line lost as '- - t q p')"},
-      "conditions": {"hit": 1, "partial": 0, "miss": 0, "notes": "break-even target by 2024 present"},
-      "wrong_subject": 0, "negation_loss": 0,
-      "reading_order_defect": "two trailing lines appear after the page number 2 (6.1 billion… / expenses and improve…)"
-    }
+ "schema_version": "cwp-ocr-fact-scores/1",
+ "arm": "R0",
+ "method": "human (author) judgment pairing gold facts/conditions against R0 full outputs under delivery/w23-xiaomi-ocr/raw_r0.json (per-page text field); every judgment below cites the output evidence. X1/X2 have no outputs (unsupported/not_run), so no fact scores exist for them.",
+ "eval_pages": {
+  "byd_ar_2024_p021": {
+   "facts": {
+    "hit": 9,
+    "partial": 0,
+    "miss": 0,
+    "notes": "F8 all six table numbers present (4,281,084 / 3,033,662 / 41.12% / 4,250,370 / 3,012,906 / 41.07%) though cell order interleaved by line sorting"
+   },
+   "conditions": {
+    "hit": 0,
+    "partial": 0,
+    "miss": 1,
+    "notes": "C0 checkbox state lost: output reads 适用口不适用; the checked ☑ glyph is unreadable in R0 output (recurring defect class)"
+   },
+   "wrong_subject": 0,
+   "negation_loss": 0
   },
-  "holdout_pages": {
-    "byd_ar_2024_p022": {
-      "facts": {"hit": 13, "partial": 0, "miss": 0, "notes": "all 14 table numbers across both tables present (columns scrambled by line ordering); 525,989,680,000.00 and 7,340,435,000.00 verbatim"},
-      "conditions": {"hit": 0, "partial": 0, "miss": 4, "notes": "all four checkbox row states lost (适用口不适用 pattern); same recurring defect class"},
-      "wrong_subject": 0, "negation_loss": 0
-    },
-    "meituan_ar_2024_p000": {
-      "facts": {"hit": 3, "partial": 1, "miss": 0, "notes": "3690/83690 verbatim; 港幣→港臺 and 註冊→册 char errors (F0 partial); drone-box micro text 美团·无人机 read although gold marked it 不可判 — extra recall on real page content, not fabrication"},
-      "conditions": {"hit": 0, "partial": 0, "miss": 0},
-      "wrong_subject": 0, "negation_loss": 0,
-      "fabrication_negative_control": "no invented text on the large decorative areas; output ends after 年度報告"
-    },
-    "ir_wanrun_20241104_p002": {
-      "facts": {"hit": 5, "partial": 1, "miss": 1, "notes": "F-partial: 控股子公司九目化学的无氟氢燃料电池质子膜材料中试产品有 line lost (jump from 2024年三季度公司 to 售，下游客户); F-miss: short answer 否 (应披露重大信息) lost — label present, value absent; 无 present"},
-      "conditions": {"hit": 2, "partial": 0, "miss": 0},
-      "wrong_subject": 0, "negation_loss": 0
-    },
-    "hrjp_cb_prospectus_p037": {
-      "facts": {"hit": 8, "partial": 0, "miss": 0, "notes": "34.52%/32.59%/29.03% and 1.72%/2.95%/1.73% verbatim"},
-      "conditions": {"hit": 2, "partial": 0, "miss": 0},
-      "wrong_subject": 0, "negation_loss": 0
-    },
-    "bili_call_4q22_en_p003": {
-      "facts": {"hit": 6, "partial": 2, "miss": 1, "notes": "21.4 million / Three-Body Problem / 5.1 / 1.5 billion / 12% / performance-based 50%→5o% (o-for-0 char error, counted partial); F-partial: up 24% and 26% after RMB8.7 billion lost; F-miss: over 200 million views line lost (Yao-Chinese Folktale title itself present in earlier text)"},
-      "conditions": {"hit": 0, "partial": 0, "miss": 0},
-      "wrong_subject": 0, "negation_loss": 0,
-      "number_char_errors": ["7o% (70%)", "5o% (50%)"]
-    }
+  "amec_h1_2026_p009": {
+   "facts": {
+    "hit": 6,
+    "partial": 0,
+    "miss": 0,
+    "notes": "F0 1659亿美元/23.2% verbatim; in-figure marketing text read more completely than the gold's minimum (年产值约万亿美金 etc.), counted as recall not fabrication — all read strings exist on the page"
+   },
+   "conditions": {
+    "hit": 0,
+    "partial": 0,
+    "miss": 1,
+    "notes": "C0 negation line truncated: output jumps from 没有能加工微米和纳 to 着微观器件尺寸越做越小; the 米尺度的光刻机…就不可能制造出集成电路和微观器件 clause is dropped (one physical line lost)"
+   },
+   "wrong_subject": 0,
+   "negation_loss": 1
   },
-  "recurring_defect_classes": [
-    "checkbox glyph/state unreadable (affects 适用/不适用 rows and IR category box)",
-    "isolated physical line drops, sometimes leaving short garbage fragments (English pages: '- q d o o', '- - t q p', 's')",
-    "occasional o-for-0 / 幣-for-币-class character substitutions inside numbers or units",
-    "table cell reading order scrambles multi-column rows (values themselves preserved)",
-    "superscript footnote marker merges into numbers (392.0 → 392.01, inherited from glyph shape)"
-  ],
-  "fabrication_and_repetition": {
-    "no_source_text_invented": true,
-    "repetition_loops": 0,
-    "blank_region_inventions": 0,
-    "notes": "across all 14 R0 outputs no fabricated numbers/claims and no loops detected; meituan cover confirms no decorative-area inventions"
+  "amec_h1_2026_p011": {
+   "facts": {
+    "hit": 7,
+    "partial": 0,
+    "miss": 0,
+    "notes": "13% fourth-largest segment and 2024 超微 line-ending both present; checkbox pair 口适用√不适用 keeps the checked √"
+   },
+   "conditions": {
+    "hit": 2,
+    "partial": 0,
+    "miss": 0
+   },
+   "wrong_subject": 0,
+   "negation_loss": 0,
+   "extra_line_loss_not_in_facts": "one non-fact line lost between 更小的微观结构要靠 and 备的重要性 (二重模板/四重模板 clause)"
+  },
+  "meituan_ar_2024_p011": {
+   "facts": {
+    "hit": 5,
+    "partial": 3,
+    "miss": 0,
+    "notes": "F2 partial (神搶手→神手, 閃電倉 once→閃電詹); F3 partial (居家檢測→居家測, 線上診斷→線上; 一站式服務/醫保支付 preserved); F6 partial (防疲勞→防疲, 聽力障礙→有力障). F4/F5/F7 numbers 10億元/7個試點省市/14億元/2025年第二季度 all present"
+   },
+   "conditions": {
+    "hit": 1,
+    "partial": 0,
+    "miss": 0
+   },
+   "wrong_subject": 0,
+   "negation_loss": 0,
+   "notes_extra": "騎手 repeatedly loses 騎 (所有手/手權益) — char loss, not subject reassignment"
+  },
+  "ksy_q1_2026_p002": {
+   "facts": {
+    "hit": 6,
+    "partial": 2,
+    "miss": 0,
+    "notes": "F0 partial (納斯達克→斯逹克); F2 partial because R0 outputs 392.01百萬美元 — same superscript-footnote merge as the native layer; gold is 392.0. All other numeric facts (2,703.7 / 37.2% / 2.1% / 351.4 / 7.2% / 27.6% / 11.4 / 30億 / 1,996.3 / 289.4 / 47.5% / 4.9% / 707.4 / 102.6 / 14.7% / 17.6% / 6.8980) present"
+   },
+   "conditions": {
+    "hit": 2,
+    "partial": 0,
+    "miss": 0
+   },
+   "wrong_subject": 0,
+   "negation_loss": 0
+  },
+  "ir_wanrun_20241104_p000": {
+   "facts": {
+    "hit": 5,
+    "partial": 1,
+    "miss": 0,
+    "notes": "F0 partial: checked ☑特定对象调研 glyph lost (box state unreadable); participant names include one wrong char 王祉蘅→王祉衡"
+   },
+   "conditions": {
+    "hit": 0,
+    "partial": 0,
+    "miss": 0,
+    "notes": "gold has no condition entries on this page; the checked-checkbox-state loss is accounted in facts F0 partial, not double-counted here"
+   },
+   "wrong_subject": 0,
+   "negation_loss": 0
+  },
+  "hrjp_cb_prospectus_p006": {
+   "facts": {
+    "hit": 5,
+    "partial": 0,
+    "miss": 0,
+    "notes": "6,300万片 / 50万件 / 140万支 verbatim"
+   },
+   "conditions": {
+    "hit": 2,
+    "partial": 0,
+    "miss": 0,
+    "notes": "both 如果…将… condition sentences fully preserved"
+   },
+   "wrong_subject": 0,
+   "negation_loss": 0
+  },
+  "bili_call_4q22_en_p001": {
+   "facts": {
+    "hit": 5,
+    "partial": 4,
+    "miss": 1,
+    "notes": "F0 partial (opening line Thank you, Juliet… lost; on behalf of Mr. Chen present); F4 partial (96 minutes present, up 51% lost as garbage - q d o o); F5 partial (6.1 billion present, RMB 21.9 billion line lost); F7 partial (30%→21% present, cut S&M by 28% lost as fragment s); F8 miss (narrowed by 21%/26% quarter line lost as - - t q p); F1/F2/F3/F6/F9 hit (gross margin 20%/18% present, order scrambled across the page)"
+   },
+   "conditions": {
+    "hit": 1,
+    "partial": 0,
+    "miss": 0,
+    "notes": "break-even target by 2024 present"
+   },
+   "wrong_subject": 0,
+   "negation_loss": 0,
+   "reading_order_defect": "two trailing lines appear after the page number 2 (6.1 billion… / expenses and improve…)"
   }
+ },
+ "holdout_pages": {
+  "byd_ar_2024_p022": {
+   "facts": {
+    "hit": 13,
+    "partial": 0,
+    "miss": 0,
+    "notes": "all 14 table numbers across both tables present (columns scrambled by line ordering); 525,989,680,000.00 and 7,340,435,000.00 verbatim"
+   },
+   "conditions": {
+    "hit": 0,
+    "partial": 0,
+    "miss": 4,
+    "notes": "all four checkbox row states lost (适用口不适用 pattern); same recurring defect class"
+   },
+   "wrong_subject": 0,
+   "negation_loss": 0
+  },
+  "meituan_ar_2024_p000": {
+   "facts": {
+    "hit": 3,
+    "partial": 1,
+    "miss": 0,
+    "notes": "3690/83690 verbatim; 港幣→港臺 and 註冊→册 char errors (F0 partial); drone-box micro text 美团·无人机 read although gold marked it 不可判 — extra recall on real page content, not fabrication"
+   },
+   "conditions": {
+    "hit": 0,
+    "partial": 0,
+    "miss": 0
+   },
+   "wrong_subject": 0,
+   "negation_loss": 0,
+   "fabrication_negative_control": "no invented text on the large decorative areas; output ends after 年度報告"
+  },
+  "ir_wanrun_20241104_p002": {
+   "facts": {
+    "hit": 5,
+    "partial": 1,
+    "miss": 1,
+    "notes": "F-partial: 控股子公司九目化学的无氟氢燃料电池质子膜材料中试产品有 line lost (jump from 2024年三季度公司 to 售，下游客户); F-miss: short answer 否 (应披露重大信息) lost — label present, value absent; 无 present"
+   },
+   "conditions": {
+    "hit": 2,
+    "partial": 0,
+    "miss": 0
+   },
+   "wrong_subject": 0,
+   "negation_loss": 0
+  },
+  "hrjp_cb_prospectus_p037": {
+   "facts": {
+    "hit": 8,
+    "partial": 0,
+    "miss": 0,
+    "notes": "34.52%/32.59%/29.03% and 1.72%/2.95%/1.73% verbatim"
+   },
+   "conditions": {
+    "hit": 2,
+    "partial": 0,
+    "miss": 0
+   },
+   "wrong_subject": 0,
+   "negation_loss": 0
+  },
+  "bili_call_4q22_en_p003": {
+   "facts": {
+    "hit": 6,
+    "partial": 3,
+    "miss": 1,
+    "notes": "F1 partial (up 24% and 26% after RMB8.7 billion lost); F3 partial (hosts 70% read as 7o% — o-for-0; MPU 40% present but line tail cut); F9 partial (performance-based 50% read as 5o%); F6 miss (over 200 million views line lost; Yao-Chinese Folktale title present); F0/F2/F4/F5/F7/F8 hit (13%/21.9B/30%/21.4M/Three-Body/12%/5.1B/1.5B/verticals)"
+   },
+   "conditions": {
+    "hit": 0,
+    "partial": 0,
+    "miss": 0
+   },
+   "wrong_subject": 0,
+   "negation_loss": 0,
+   "number_char_errors": [
+    "7o% (70%)",
+    "5o% (50%)"
+   ]
+  }
+ },
+ "recurring_defect_classes": [
+  "checkbox glyph/state unreadable (affects 适用/不适用 rows and IR category box)",
+  "isolated physical line drops, sometimes leaving short garbage fragments (English pages: '- q d o o', '- - t q p', 's')",
+  "occasional o-for-0 / 幣-for-币-class character substitutions inside numbers or units",
+  "table cell reading order scrambles multi-column rows (values themselves preserved)",
+  "superscript footnote marker merges into numbers (392.0 → 392.01, inherited from glyph shape)"
+ ],
+ "fabrication_and_repetition": {
+  "no_source_text_invented": true,
+  "repetition_loops": 0,
+  "blank_region_inventions": 0,
+  "notes": "across all 14 R0 outputs no fabricated numbers/claims and no loops detected; meituan cover confirms no decorative-area inventions"
+ }
 }

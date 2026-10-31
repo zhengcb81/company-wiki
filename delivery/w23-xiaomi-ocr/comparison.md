@@ -30,16 +30,19 @@ and both meituan pages are full manual transcriptions).
 ## 2. X1/X2 not runnable — the measured reason (root cause)
 
 Card bound per pilot page: peak commit ≤ min(8 GiB, **available-RAM ÷ 2**),
-measured at run start. Host at run time: 15.77 GB total RAM,
-**1.84 GB available** (desktop applications hold the rest; no W22 task was
-running), so the card cap was **0.92 GB**.
+measured at each run start. Host: 15.77 GB total RAM, ~1.8–2.3 GB available
+across the attempts (desktop applications hold the rest; no W22 task was
+running), giving recorded caps of 0.995 GiB (pilot), 0.84 GiB and 1.155 GiB
+(subsequent runs) — all recorded in each artifact's run manifest and in the
+X1 records' `cap_bytes`.
 
 The minimum possible load peak of the X1 checkpoint is **2 × weight bytes =
-3.49 GB** even in checkpoint-native bf16 (mmap'd safetensors + in-RAM weight
-copy, before torch runtime or activations). `0.92 GB < 3.49 GB` → no load
-strategy complies; the preflight refuses with this arithmetic
-(`pilot_x1.json`: `memory_cap_below_minimum_load_peak`) instead of thrashing
-the host. Re-running the same replayable tool on a host with more free RAM is
+3,493,875,712 B ≈ 3.25 GiB** even in checkpoint-native bf16 (mmap'd
+safetensors + in-RAM weight copy, before torch runtime or activations). Every
+measured cap (0.84–1.16 GiB) is far below that, so no load strategy complies;
+the preflight refuses with this arithmetic (`cap_bytes`/`weight_bytes/`
+`minimum_peak_bytes` are recorded in every X1 record:
+`memory_cap_below_minimum_load_peak`) instead of thrashing the host. Re-running the same replayable tool on a host with more free RAM is
 the intended path; nothing in the tool was tuned to "fit".
 
 Consequently: no CER/WER/number metric exists for X1/X2 (all `null` with
@@ -54,19 +57,23 @@ NFC+whitespace normalization):
 
 | split | pages | macro CER strict | micro CER strict | macro CER narrow | number recall | number precision |
 |-------|-------|------------------|------------------|------------------|---------------|------------------|
-| eval (8+1 degraded) | 9 | 0.1636 | 0.1769 | 0.1283 | 0.9219 (gold 118/128) | 0.9833 |
-| holdout (5) | 5 | 0.1705 | 0.1742 | 0.1306 | 0.9367 (gold 74/79) | 0.9737 |
+| eval (8+1 degraded) | 9 | 0.1599 | 0.1737 | 0.1250 | 0.9219 (gold 118/128) | 0.9833 |
+| holdout (5) | 5 | 0.1694 | 0.1732 | 0.1290 | 0.9367 (gold 74/79) | 0.9737 |
 
 Number identity uses the declared narrow canon: OCR thousands-group spacing
 ("4, 281, 084") is one token; `392.0¹ → 392.01` stays a wrong number.
 
-Latency: R0 cold pilot 62.7 s (isolated child launch + det/cls/rec),
-per-page engine seconds in `raw_r0.json`; single concurrency, no deadline
-violations (limits untouched: production pixel/deadline bounds as configured).
+Latency: per-page engine seconds in `raw_r0.json` (median 15.6 s, cold max 20.2 s in
+the final run; the 62.7 s pilot cold-start included first-launch ONNX session
+setup); single concurrency, no deadline violations (limits untouched:
+production pixel/deadline bounds as configured). Region diagnostics:
+8 dropped low-score regions, 3 bounded recovery attempts across the sample,
+0 repetition flags — all recorded per page in the raw JSON.
 
 Human fact scoring (`fact_scores.json`, author-judged with per-judgment
-evidence): eval pages 36 fact-hits / 4 partial / 1 miss; holdout 35 hit /
-3 partial / 2 miss; conditions lost concentrate in one recurring class.
+evidence, fully accounted against gold): eval pages 48 fact-hits / 10 partial /
+1 miss (59 facts) + 8 condition-hits / 2 condition-losses; holdout 35 hit /
+5 partial / 2 miss (42 facts) + 4 condition-hits / 4 condition-losses; conditions lost concentrate in one recurring class.
 No fabrication, no loops, no blank-region inventions on any of the 14 pages
 (meituan image cover is the negative control — output contains only real
 cover strings, and even reads the drone-box micro print gold had marked
@@ -112,7 +119,9 @@ R0's recurring defect classes (the honest baseline picture):
 ## 5. Artifacts
 
 - `comparison.json` — machine report (`cwp-ocr-comparison/1`): run manifest,
-  per-arm identity/summary/evaluation, merged N0 re-run provenance note.
+  per-arm identity/summary/evaluation; the final invocation ran all four arms
+  in-process (an earlier N0-only re-run `comparison_n0.json` exists because the
+  first invocation's N0 arm hit an import bug, fixed before the final run).
 - `raw_r0.json` / `raw_n0.json` / `raw_x1.json` / `raw_x2.json` — per-page
   records incl. statuses, timings, error strings.
 - `fact_scores.json` — human fact/condition scoring with evidence.

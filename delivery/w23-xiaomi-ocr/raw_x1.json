@@ -3,128 +3,184 @@
   {
    "page_id": "byd_ar_2024_p021",
    "status": "unsupported",
-   "engine_seconds": 6.2590369999816176,
-   "wall_seconds": 6.2590369999816176,
+   "engine_seconds": 3.4015404999954626,
+   "wall_seconds": 3.4015404999954626,
    "retries": 0,
    "inference_runs": 1,
-   "error": "memory_cap_below_minimum_load_peak"
+   "error": "memory_cap_below_minimum_load_peak",
+   "cap_bytes": 1240171806,
+   "weight_bytes": 1746937856,
+   "minimum_peak_bytes": 3493875712,
+   "arithmetic": "cap=1240171806 < 2 x weight_bytes(1746937856) = 3493875712; even a bf16 load (mmap + RAM copy) cannot comply"
   },
   {
    "page_id": "byd_ar_2024_p022",
    "status": "unsupported",
-   "engine_seconds": 0.00044860001071356237,
-   "wall_seconds": 0.00044860001071356237,
+   "engine_seconds": 0.0002720999764278531,
+   "wall_seconds": 0.0002720999764278531,
    "retries": 0,
    "inference_runs": 1,
-   "error": "memory_cap_below_minimum_load_peak"
+   "error": "memory_cap_below_minimum_load_peak",
+   "cap_bytes": 1240171806,
+   "weight_bytes": 1746937856,
+   "minimum_peak_bytes": 3493875712,
+   "arithmetic": "cap=1240171806 < 2 x weight_bytes(1746937856) = 3493875712; even a bf16 load (mmap + RAM copy) cannot comply"
   },
   {
    "page_id": "amec_h1_2026_p009",
    "status": "unsupported",
-   "engine_seconds": 0.00028219999512657523,
-   "wall_seconds": 0.00028219999512657523,
+   "engine_seconds": 0.00021399999968707561,
+   "wall_seconds": 0.00021399999968707561,
    "retries": 0,
    "inference_runs": 1,
-   "error": "memory_cap_below_minimum_load_peak"
+   "error": "memory_cap_below_minimum_load_peak",
+   "cap_bytes": 1240171806,
+   "weight_bytes": 1746937856,
+   "minimum_peak_bytes": 3493875712,
+   "arithmetic": "cap=1240171806 < 2 x weight_bytes(1746937856) = 3493875712; even a bf16 load (mmap + RAM copy) cannot comply"
   },
   {
    "page_id": "amec_h1_2026_p011",
    "status": "unsupported",
-   "engine_seconds": 0.0002406999992672354,
-   "wall_seconds": 0.0002406999992672354,
+   "engine_seconds": 0.0002043000131379813,
+   "wall_seconds": 0.0002043000131379813,
    "retries": 0,
    "inference_runs": 1,
-   "error": "memory_cap_below_minimum_load_peak"
+   "error": "memory_cap_below_minimum_load_peak",
+   "cap_bytes": 1240171806,
+   "weight_bytes": 1746937856,
+   "minimum_peak_bytes": 3493875712,
+   "arithmetic": "cap=1240171806 < 2 x weight_bytes(1746937856) = 3493875712; even a bf16 load (mmap + RAM copy) cannot comply"
   },
   {
    "page_id": "meituan_ar_2024_p000",
    "status": "unsupported",
-   "engine_seconds": 0.00022640000679530203,
-   "wall_seconds": 0.00022640000679530203,
+   "engine_seconds": 0.00019439999596215785,
+   "wall_seconds": 0.00019439999596215785,
    "retries": 0,
    "inference_runs": 1,
-   "error": "memory_cap_below_minimum_load_peak"
+   "error": "memory_cap_below_minimum_load_peak",
+   "cap_bytes": 1240171806,
+   "weight_bytes": 1746937856,
+   "minimum_peak_bytes": 3493875712,
+   "arithmetic": "cap=1240171806 < 2 x weight_bytes(1746937856) = 3493875712; even a bf16 load (mmap + RAM copy) cannot comply"
   },
   {
    "page_id": "meituan_ar_2024_p011",
    "status": "unsupported",
-   "engine_seconds": 0.000218700006371364,
-   "wall_seconds": 0.000218700006371364,
+   "engine_seconds": 0.00019069999689236283,
+   "wall_seconds": 0.00019069999689236283,
    "retries": 0,
    "inference_runs": 1,
-   "error": "memory_cap_below_minimum_load_peak"
+   "error": "memory_cap_below_minimum_load_peak",
+   "cap_bytes": 1240171806,
+   "weight_bytes": 1746937856,
+   "minimum_peak_bytes": 3493875712,
+   "arithmetic": "cap=1240171806 < 2 x weight_bytes(1746937856) = 3493875712; even a bf16 load (mmap + RAM copy) cannot comply"
   },
   {
    "page_id": "ksy_q1_2026_p002",
    "status": "unsupported",
-   "engine_seconds": 0.0002523000002838671,
-   "wall_seconds": 0.0002523000002838671,
+   "engine_seconds": 0.00018820000695995986,
+   "wall_seconds": 0.00018820000695995986,
    "retries": 0,
    "inference_runs": 1,
-   "error": "memory_cap_below_minimum_load_peak"
+   "error": "memory_cap_below_minimum_load_peak",
+   "cap_bytes": 1240171806,
+   "weight_bytes": 1746937856,
+   "minimum_peak_bytes": 3493875712,
+   "arithmetic": "cap=1240171806 < 2 x weight_bytes(1746937856) = 3493875712; even a bf16 load (mmap + RAM copy) cannot comply"
   },
   {
    "page_id": "ksy_q1_2026_p002_synthetic_degraded",
    "status": "unsupported",
-   "engine_seconds": 0.000228599994443357,
-   "wall_seconds": 0.000228599994443357,
+   "engine_seconds": 0.0002159999858122319,
+   "wall_seconds": 0.0002159999858122319,
    "retries": 0,
    "inference_runs": 1,
-   "error": "memory_cap_below_minimum_load_peak"
+   "error": "memory_cap_below_minimum_load_peak",
+   "cap_bytes": 1240171806,
+   "weight_bytes": 1746937856,
+   "minimum_peak_bytes": 3493875712,
+   "arithmetic": "cap=1240171806 < 2 x weight_bytes(1746937856) = 3493875712; even a bf16 load (mmap + RAM copy) cannot comply"
   },
   {
    "page_id": "ir_wanrun_20241104_p000",
    "status": "unsupported",
-   "engine_seconds": 0.00022609997540712357,
-   "wall_seconds": 0.00022609997540712357,
+   "engine_seconds": 0.0001981999957934022,
+   "wall_seconds": 0.0001981999957934022,
    "retries": 0,
    "inference_runs": 1,
-   "error": "memory_cap_below_minimum_load_peak"
+   "error": "memory_cap_below_minimum_load_peak",
+   "cap_bytes": 1240171806,
+   "weight_bytes": 1746937856,
+   "minimum_peak_bytes": 3493875712,
+   "arithmetic": "cap=1240171806 < 2 x weight_bytes(1746937856) = 3493875712; even a bf16 load (mmap + RAM copy) cannot comply"
   },
   {
    "page_id": "ir_wanrun_20241104_p002",
    "status": "unsupported",
-   "engine_seconds": 0.0002106999745592475,
-   "wall_seconds": 0.0002106999745592475,
+   "engine_seconds": 0.00019120000069960952,
+   "wall_seconds": 0.00019120000069960952,
    "retries": 0,
    "inference_runs": 1,
-   "error": "memory_cap_below_minimum_load_peak"
+   "error": "memory_cap_below_minimum_load_peak",
+   "cap_bytes": 1240171806,
+   "weight_bytes": 1746937856,
+   "minimum_peak_bytes": 3493875712,
+   "arithmetic": "cap=1240171806 < 2 x weight_bytes(1746937856) = 3493875712; even a bf16 load (mmap + RAM copy) cannot comply"
   },
   {
    "page_id": "hrjp_cb_prospectus_p006",
    "status": "unsupported",
-   "engine_seconds": 0.00020359997870400548,
-   "wall_seconds": 0.00020359997870400548,
+   "engine_seconds": 0.0001838000025600195,
+   "wall_seconds": 0.0001838000025600195,
    "retries": 0,
    "inference_runs": 1,
-   "error": "memory_cap_below_minimum_load_peak"
+   "error": "memory_cap_below_minimum_load_peak",
+   "cap_bytes": 1240171806,
+   "weight_bytes": 1746937856,
+   "minimum_peak_bytes": 3493875712,
+   "arithmetic": "cap=1240171806 < 2 x weight_bytes(1746937856) = 3493875712; even a bf16 load (mmap + RAM copy) cannot comply"
   },
   {
    "page_id": "hrjp_cb_prospectus_p037",
    "status": "unsupported",
-   "engine_seconds": 0.00019779999274760485,
-   "wall_seconds": 0.00019779999274760485,
+   "engine_seconds": 0.00019049999536946416,
+   "wall_seconds": 0.00019049999536946416,
    "retries": 0,
    "inference_runs": 1,
-   "error": "memory_cap_below_minimum_load_peak"
+   "error": "memory_cap_below_minimum_load_peak",
+   "cap_bytes": 1240171806,
+   "weight_bytes": 1746937856,
+   "minimum_peak_bytes": 3493875712,
+   "arithmetic": "cap=1240171806 < 2 x weight_bytes(1746937856) = 3493875712; even a bf16 load (mmap + RAM copy) cannot comply"
   },
   {
    "page_id": "bili_call_4q22_en_p001",
    "status": "unsupported",
-   "engine_seconds": 0.00021570001263171434,
-   "wall_seconds": 0.00021570001263171434,
+   "engine_seconds": 0.00021170001127757132,
+   "wall_seconds": 0.00021170001127757132,
    "retries": 0,
    "inference_runs": 1,
-   "error": "memory_cap_below_minimum_load_peak"
+   "error": "memory_cap_below_minimum_load_peak",
+   "cap_bytes": 1240171806,
+   "weight_bytes": 1746937856,
+   "minimum_peak_bytes": 3493875712,
+   "arithmetic": "cap=1240171806 < 2 x weight_bytes(1746937856) = 3493875712; even a bf16 load (mmap + RAM copy) cannot comply"
   },
   {
    "page_id": "bili_call_4q22_en_p003",
    "status": "unsupported",
-   "engine_seconds": 0.00021410000044852495,
-   "wall_seconds": 0.00021410000044852495,
+   "engine_seconds": 0.000179799972102046,
+   "wall_seconds": 0.000179799972102046,
    "retries": 0,
    "inference_runs": 1,
-   "error": "memory_cap_below_minimum_load_peak"
+   "error": "memory_cap_below_minimum_load_peak",
+   "cap_bytes": 1240171806,
+   "weight_bytes": 1746937856,
+   "minimum_peak_bytes": 3493875712,
+   "arithmetic": "cap=1240171806 < 2 x weight_bytes(1746937856) = 3493875712; even a bf16 load (mmap + RAM copy) cannot comply"
   }
  ],
  "summary": {
