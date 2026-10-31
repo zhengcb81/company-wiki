@@ -101,7 +101,7 @@ handoff = {
         "fde39dfe feat: run W23 comparison with R0 baseline, N0 control and recorded X1/X2 resource bounds",
         "c62ba969 fix: address independent review findings - runner field passthrough, gold char-level corrections, fact accounting",
     ],
-    "final_tested_commit": "PENDING_FINAL",
+    "final_tested_commit": "c2e5dcf8",
     "final_reviewed_commit": "ca3bbbcb (delta re-review by the same independent agent, see review_independent.md)",
     "code_file_sha256": code_shas,
     "requirements": requirements,
