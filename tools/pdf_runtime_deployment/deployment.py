@@ -506,11 +506,18 @@ def deploy(plan: dict[str, Any], *, host_python: str,
 
 
 def _reconcile_fully_consistent(plan: dict[str, Any]) -> bool:
-    """Zero-write reuse check: every owned file exactly where the plan put it."""
+    """Zero-write reuse check: every owned file exactly where the plan put it.
+
+    The reuse attestation claims samefile per link, so the check must prove
+    it: a byte-identical plain copy at an owned path is not a reused hardlink
+    (review finding R3; the recovery path already fails closed on the same
+    tamper).
+    """
     target = Path(plan["target"])
     for row in (*plan["env_rows"], *plan["artifact_rows"]):
         destination = target.joinpath(*_rel_posix(row["target"]).parts)
-        if not destination.is_file() or _sha256_file(destination) != row["sha256"]:
+        if (not destination.is_file() or _sha256_file(destination) != row["sha256"]
+                or not os.path.samefile(row["source"], destination)):
             return False
     config_path = Path(plan["output_config"]["path"])
     python_exe = target / ENV_DIRNAME / "Scripts" / "python.exe"
