@@ -28,10 +28,11 @@
   "baseline_before_documentation": "44d4e1a4a3e1ce1b95445ceb2519ef020f6f85bc",
   "last_code_commit": "daa9106fca2dfba17ea486d6e15fd3289a3d5a25",
   "code_ci": {
-    "head_sha": null,
-    "status": "not_yet_observed",
+    "id": 41243937903,
+    "head_sha": "2e56e14e1940025d60e258cdd8d53473f6ecb49f",
+    "status": "in_progress",
     "conclusion": null,
-    "note": "Observe final publication head, not reused20dd green"
+    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41243937903"
   },
   "formal_v4_offline_selection_replay_20261025": {
     "status": "EXACT_REPRODUCED_NO_PAID_CALL",
@@ -4305,6 +4306,8 @@
     "limits_raised": false,
     "new_paid_calls": 0,
     "new_downloads": 0,
-    "new_pdf_reads": 0
+    "new_pdf_reads": 0,
+    "publication": "MERGED_PUSHED_MAIN",
+    "pre_push": "167 passed in39.56s"
   }
 }

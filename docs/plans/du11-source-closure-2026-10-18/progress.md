@@ -4,7 +4,7 @@
 
 r6两份冻结normalized源前后SHA稳定、0新PDF/POST/下载。华利业务02–10进入15实际编译任务；Berkshire77准入但只编译64，13延期含04/07，不能冒称全消费。来源scope通过不代签真实rank、activation、同/跨run恢复或RF采用。母账仍1,827,558tokens/$0.732814含历史unknown。
 
-IR/QA-RAG/MeetingConverter均已各自主线提交推送（98640a9a/1f551474/6c857a8b）；IR已按要求新建私有GitHub仓库。上轮平台修复20dd0143精确CI41241389817 success；本批新增源码的最新精确CI待观察，不能沿用旧绿。原件/config、外来hook mode、RF三WIP及作者工区/模型缓存保持；ROOT四个已结束临时测试目录恢复。
+IR/QA-RAG/MeetingConverter均已各自主线提交推送（98640a9a/1f551474/6c857a8b）；IR已按要求新建私有GitHub仓库。上轮平台修复20dd0143精确CI41241389817 success；本批精确CI41243937903（发布HEAD2e56e14e）进行中，尚未结论，不能沿用旧绿。原件/config、外来hook mode、RF三WIP及作者工区/模型缓存保持；ROOT四个已结束临时测试目录恢复。
 
 **唯一下一步：** 核对本批发布HEAD精确CI，再按实际配置运行有界/5真实摘要，验activation/中断/同run/跨run0重复POST，独审语义后验RF实际summary_use→native参数/公式。Berkshire余下任务需显式后续batch；长文有限前沿公平性/恢复、W21 canonicalC2、跨市场holdout与完整公司循环继续OPEN。W23-OCR-R1仅实证返修，启动须纳入20dd平台修复，未动作者工区。
 
