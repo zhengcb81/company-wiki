@@ -219,5 +219,5 @@
   "US 10-K filings are text/html in this catalog; EN pages covered by an earnings-call PDF",
   "gold post-review char-level corrections documented in gold.json post_review_corrections"
  ],
- "pushed_to_remote": null
+ "pushed_to_remote": "origin/codex/w23-xiaomi-ocr-20261030 (commit f8e0bdc6 + this recording commit)"
 }
