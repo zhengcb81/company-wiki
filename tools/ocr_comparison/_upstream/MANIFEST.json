@@ -1,0 +1,23 @@
+{
+ "upstream_repo": "https://github.com/xiaomi-research/Xiaomi-OCR-0",
+ "upstream_commit": "b1a9bb4c07060c453785e9151715ccda6b96f0b1",
+ "license": "Apache-2.0 (see LICENSE in this directory)",
+ "vendoring": "byte-identical copies of the frozen upstream postprocess modules; imported via sys.path insert in backends/xiaomi_x1.py; no install scripts executed",
+ "files": {
+  "postprocess/document.py": {
+   "source": "postprocess_document.py",
+   "sha256": "fcfc0d2286ccc8c5ca2c95497886ee649c63bdc44938f27585658dcd291e65b0",
+   "bytes": 3666
+  },
+  "postprocess/otsl.py": {
+   "source": "postprocess_otsl.py",
+   "sha256": "db46f5a05d9742a7bcfd3931428bdd9e8de845892b66fa4cf09bd21f83cf2b14",
+   "bytes": 8094
+  },
+  "postprocess/repetition_guard.py": {
+   "source": "postprocess_repetition_guard.py",
+   "sha256": "fa120e764ead8ff9a3902282f76cff496b71b4d596844e14e4ee481236b9a7af",
+   "bytes": 4514
+  }
+ }
+}

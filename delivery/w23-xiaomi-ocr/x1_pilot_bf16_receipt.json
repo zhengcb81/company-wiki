@@ -1,0 +1,201 @@
+{
+ "schema_version": "cwp-ocr-x1-run/1",
+ "tag": "pilot_bf16",
+ "pages_selected": [
+  "byd_ar_2024_p021"
+ ],
+ "receipt": {
+  "schema_version": "cwp-ocr-x1-run-receipt/1",
+  "created_at_utc": "2026-10-31T13:12:59.748621+00:00",
+  "method": "pages rendered in the parent with the shared pypdfium2 renderer; one child process loads Xiaomi-OCR-0 on CPU and runs the pages in order under a Windows Job Object ProcessMemoryLimit (committed bytes); the peak is read from the job object",
+  "config": {
+   "deadline_seconds_per_request": 600.0,
+   "total_inference_budget_seconds": 1800.0,
+   "max_new_tokens": 16384,
+   "dtype": "bfloat16",
+   "weights_mode": "mapped",
+   "threads": "torch default (reported by the child)"
+  },
+  "memory": {
+   "cap_bytes": 4032163840,
+   "cap_gib": 3.755,
+   "rule": "min(8 GiB, available physical RAM / 2) at run start",
+   "job_peak_process_bytes": 2491813888,
+   "job_peak_process_gib": 2.321
+  },
+  "host_before": {
+   "memory_load_pct": 52,
+   "total_phys_bytes": 16931512320,
+   "avail_phys_bytes": 8064327680,
+   "commit_free_bytes": 24120909824
+  },
+  "host_after": {
+   "memory_load_pct": 50,
+   "total_phys_bytes": 16931512320,
+   "avail_phys_bytes": 8393809920,
+   "commit_free_bytes": 24610377728
+  },
+  "child": {
+   "return_code": 0,
+   "backstop_hit": false,
+   "wall_seconds": 604.73,
+   "events": [
+    {
+     "event": "child_ready",
+     "import_seconds": 2.1419006000014633,
+     "torch_threads": 10,
+     "process_peak_commit_bytes_self": 555028480
+    },
+    {
+     "event": "stage",
+     "stage": "page_start",
+     "page_id": "byd_ar_2024_p021",
+     "t_seconds": 0.03,
+     "peak_commit_self": 555933696
+    },
+    {
+     "event": "stage",
+     "stage": "processor_load_start",
+     "page_id": "byd_ar_2024_p021",
+     "t_seconds": 10.647,
+     "peak_commit_self": 1149075456
+    },
+    {
+     "event": "stage",
+     "stage": "processor_loaded",
+     "page_id": "byd_ar_2024_p021",
+     "t_seconds": 11.89,
+     "peak_commit_self": 1429680128
+    },
+    {
+     "event": "stage",
+     "stage": "model_load_start",
+     "page_id": "byd_ar_2024_p021",
+     "t_seconds": 11.89,
+     "peak_commit_self": 1429680128
+    },
+    {
+     "event": "stage",
+     "stage": "model_loaded",
+     "page_id": "byd_ar_2024_p021",
+     "t_seconds": 12.006,
+     "peak_commit_self": 1429680128
+    },
+    {
+     "event": "stage",
+     "stage": "preprocess_done",
+     "page_id": "byd_ar_2024_p021",
+     "t_seconds": 12.248,
+     "peak_commit_self": 1547259904
+    },
+    {
+     "event": "stage",
+     "stage": "generate_start",
+     "page_id": "byd_ar_2024_p021",
+     "t_seconds": 12.248,
+     "peak_commit_self": 1547259904
+    },
+    {
+     "event": "stage",
+     "stage": "prefill_done",
+     "page_id": "byd_ar_2024_p021",
+     "t_seconds": 221.421,
+     "peak_commit_self": 2491813888
+    },
+    {
+     "event": "stage",
+     "stage": "generate_done",
+     "page_id": "byd_ar_2024_p021",
+     "t_seconds": 601.268,
+     "peak_commit_self": 2491813888
+    },
+    {
+     "event": "stage",
+     "stage": "postprocess_done",
+     "page_id": "byd_ar_2024_p021",
+     "t_seconds": 601.269,
+     "peak_commit_self": 2491813888
+    },
+    {
+     "event": "child_done",
+     "total_request_seconds": 601.2387202999998
+    }
+   ],
+   "stderr_tail": "C:\\Users\\郑曾波\\Projects\\company-wiki-w23-xiaomi-ocr\\tools\\ocr_comparison\\mmap_loader.py:46: UserWarning: The given buffer is not writable, and PyTorch does not support non-writable tensors. This means you can write to the underlying (supposedly non-writable) buffer using the tensor. You may want to copy the buffer to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\torch\\csrc\\utils\\tensor_new.cpp:1582.)\n  return torch.frombuffer(view, dtype=torch.uint8, count=view.size())\n"
+  },
+  "identity": {
+   "arm": "X1",
+   "backend": "xiaomi-ocr-0-transformers-cpu",
+   "upstream_commit": "b1a9bb4c07060c453785e9151715ccda6b96f0b1",
+   "model_revision": "bbd8cf8d21f256b3644b44cb860f3a7cecb93c30",
+   "precision": "checkpoint-native-bfloat16-cpu",
+   "prompt_sha256": "fd7abd1ca91c0133edb93a6da0d52d6d57a51a9076867fd467ab1ddd7e50fb20",
+   "preprocess": "upstream fit_image thumbnail to 2048px longest edge, then processor smart_resize",
+   "decoding": "greedy; chat template enable_thinking=False",
+   "max_new_tokens": 16384,
+   "request_deadline_seconds": 600.0,
+   "output_char_cap": 60000,
+   "weights_loading": "torch.from_file read-only file mapping of the frozen bf16 checkpoint (meta init + assign); loading strategy only",
+   "postprocess": "upstream postprocess.document: _clean_truncated_repeats + postprocess_e2e_markdown(convert_otsl=True); scoring strips declared markup (metrics.markup_strip: HTML tags, markdown heading and bold markers)"
+  }
+ },
+ "records": [
+  {
+   "status": "timeout",
+   "text": "消费电子业务方面，本集团凭借领先的技术优势和强大的制造能力，深度参与客户的新产品开发，助力客户提升产品竞争力。本集团持续深耕安卓高端市场，为客户提供高品质的全方位服务，年内，受国内和海外客户需求增长驱动，安卓零部件和整机组装业务均实现增长。海外大客户业务方面，凭借卓越的业务能力，本集团的业务份额持续提升，带动出货量和收入同比增长。此外，随着本集团并表二零二三年年底完成收购的业务，拉动零部件业务规模快速扩大，并通过资源整合和自动化快速提升运营效率。\n\n新型智能产品业务方面，本集团持续加强与各板块的行业头部客户的战略合作，无人机、智能家居、游戏硬件等业务板块均保持稳健发展。同时，本集团持续发力新产品研发，抢抓市场机遇，积极拓展新业务，持续完善在AI数据中心、AI机器人等赛道的布局。其中，3D打印机、AI服务器于年内实现量产，液冷和电源产品完成开发，为本集团业务增长注入新动力。\n\n二、报告期内公司从事的主要业务\n\n公司需遵守《深圳证券交易所上市公司自律监管指引第3号——行业信息披露》中汽车制造相关业的披露要求\n\n本集团主要从事",
+   "postprocessed_text": "消费电子业务方面，本集团凭借领先的技术优势和强大的制造能力，深度参与客户的新产品开发，助力客户提升产品竞争力。本集团持续深耕安卓高端市场，为客户提供高品质的全方位服务，年内，受国内和海外客户需求增长驱动，安卓零部件和整机组装业务均实现增长。海外大客户业务方面，凭借卓越的业务能力，本集团的业务份额持续提升，带动出货量和收入同比增长。此外，随着本集团并表二零二三年年底完成收购的业务，拉动零部件业务规模快速扩大，并通过资源整合和自动化快速提升运营效率。\n\n新型智能产品业务方面，本集团持续加强与各板块的行业头部客户的战略合作，无人机、智能家居、游戏硬件等业务板块均保持稳健发展。同时，本集团持续发力新产品研发，抢抓市场机遇，积极拓展新业务，持续完善在AI数据中心、AI机器人等赛道的布局。其中，3D打印机、AI服务器于年内实现量产，液冷和电源产品完成开发，为本集团业务增长注入新动力。\n\n## 二、报告期内公司从事的主要业务\n\n公司需遵守《深圳证券交易所上市公司自律监管指引第3号——行业信息披露》中汽车制造相关业的披露要求\n\n本集团主要从事",
+   "raw_output": "消费电子业务方面，本集团凭借领先的技术优势和强大的制造能力，深度参与客户的新产品开发，助力客户提升产品竞争力。本集团持续深耕安卓高端市场，为客户提供高品质的全方位服务，年内，受国内和海外客户需求增长驱动，安卓零部件和整机组装业务均实现增长。海外大客户业务方面，凭借卓越的业务能力，本集团的业务份额持续提升，带动出货量和收入同比增长。此外，随着本集团并表二零二三年年底完成收购的业务，拉动零部件业务规模快速扩大，并通过资源整合和自动化快速提升运营效率。\n\n新型智能产品业务方面，本集团持续加强与各板块的行业头部客户的战略合作，无人机、智能家居、游戏硬件等业务板块均保持稳健发展。同时，本集团持续发力新产品研发，抢抓市场机遇，积极拓展新业务，持续完善在AI数据中心、AI机器人等赛道的布局。其中，3D打印机、AI服务器于年内实现量产，液冷和电源产品完成开发，为本集团业务增长注入新动力。\n\n## 二、报告期内公司从事的主要业务\n\n公司需遵守《深圳证券交易所上市公司自律监管指引第3号——行业信息披露》中汽车制造相关业的披露要求\n\n本集团主要从事",
+   "raw_output_sha256": "760115447dcd463af33aa25b081398bec543084470c2589c4c737aed5ed54a8f",
+   "text_sha256": "2deea39428c4b11dd7445c95711eef1cb3d77c539f4e0277c32669c244fdd8ea",
+   "lines": [
+    {
+     "text": "消费电子业务方面，本集团凭借领先的技术优势和强大的制造能力，深度参与客户的新产品开发，助力客户提升产品竞争力。本集团持续深耕安卓高端市场，为客户提供高品质的全方位服务，年内，受国内和海外客户需求增长驱动，安卓零部件和整机组装业务均实现增长。海外大客户业务方面，凭借卓越的业务能力，本集团的业务份额持续提升，带动出货量和收入同比增长。此外，随着本集团并表二零二三年年底完成收购的业务，拉动零部件业务规模快速扩大，并通过资源整合和自动化快速提升运营效率。\n\n新型智能产品业务方面，本集团持续加强与各板块的行业头部客户的战略合作，无人机、智能家居、游戏硬件等业务板块均保持稳健发展。同时，本集团持续发力新产品研发，抢抓市场机遇，积极拓展新业务，持续完善在AI数据中心、AI机器人等赛道的布局。其中，3D打印机、AI服务器于年内实现量产，液冷和电源产品完成开发，为本集团业务增长注入新动力。\n\n二、报告期内公司从事的主要业务\n\n公司需遵守《深圳证券交易所上市公司自律监管指引第3号——行业信息披露》中汽车制造相关业的披露要求\n\n本集团主要从事",
+     "bbox": null,
+     "confidence": null,
+     "locator_quality": "none"
+    }
+   ],
+   "finish_reason": "deadline",
+   "prefill_overran_deadline": false,
+   "generated_tokens": 242,
+   "max_new_tokens": 16384,
+   "request_seconds": 601.2387202999998,
+   "budget_seconds": 600.0,
+   "load_seconds_cold": 1.3593935999997484,
+   "engine_seconds": 589.0193347000004,
+   "input_tokens": 2952,
+   "source_px": [
+    1654,
+    2339
+   ],
+   "resized_px": [
+    1448,
+    2048
+   ],
+   "repetition": {
+    "suspicious": false,
+    "reasons": []
+   },
+   "error": null,
+   "process_peak_commit_bytes_self": 2491813888,
+   "weights_load_info": {
+    "weights_file": "C:\\Users\\郑曾波\\Projects\\company-wiki-w23-xiaomi-ocr\\.w23_cache\\hub\\models--xiaomi-research--Xiaomi-OCR-0\\snapshots\\bbd8cf8d21f256b3644b44cb860f3a7cecb93c30\\model.safetensors",
+    "weights_mode_file": "model.safetensors",
+    "weights_bytes": 1746937856,
+    "n_tensors": 473,
+    "dtypes": [
+     "BF16"
+    ],
+    "skipped_mtp_keys": 15,
+    "rebuilt_cpu_modules": [
+     "model.language_model.rotary_emb",
+     "model.visual.rotary_pos_emb"
+    ],
+    "missing_keys_allowed": [
+     "lm_head.weight"
+    ]
+   },
+   "page_id": "byd_ar_2024_p021"
+  }
+ ]
+}

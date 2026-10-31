@@ -1,0 +1,321 @@
+{
+ "schema_version": "cwp-ocr-sample-manifest/1",
+ "plan_id": "w23-xiaomi-ocr-2026-10-30",
+ "frozen_at_note": "frozen before any engine output was generated or inspected",
+ "render": {
+  "renderer": "pypdfium2",
+  "dpi": 200,
+  "draw_scale": 2.7777777777777777,
+  "color": "RGB",
+  "rotation": "none",
+  "format": "png"
+ },
+ "pypdfium2_version": "4.30.0",
+ "documents": {
+  "byd_ar_2024": {
+   "label": "比亚迪2024年年度报告",
+   "market": "CN",
+   "language": "zh-CN",
+   "genre": "annual_report",
+   "document_id": "urn:company-wiki:document:sha256:e9c2d7fdd088e151ccb6c8ad3d95587b2b014b10f2c9731508d23ce07fde4de3",
+   "source_id": "urn:company-wiki:source:sha256:e9c2d7fdd088e151ccb6c8ad3d95587b2b014b10f2c9731508d23ce07fde4de3",
+   "content_sha256": "e9c2d7fdd088e151ccb6c8ad3d95587b2b014b10f2c9731508d23ce07fde4de3",
+   "byte_size": 10092140,
+   "root_id": "company_raw",
+   "relative_path": "比亚迪/raw/financial_reports/annual/2025-03-24_cninfo_1222881496_2024年年度报告.pdf",
+   "published_date": "2025-03-24"
+  },
+  "amec_h1_2026": {
+   "label": "中微公司2026年半年度报告",
+   "market": "CN",
+   "language": "zh-CN",
+   "genre": "semi_annual_report",
+   "document_id": "urn:company-wiki:document:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+   "source_id": "urn:company-wiki:source:sha256:182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+   "content_sha256": "182e2062fed950cd32310099cdf47f392c791440ce251f5e3bab7137dbc932fe",
+   "byte_size": 3149962,
+   "root_id": "company_raw",
+   "relative_path": "中微公司/raw/financial_reports/semi_annual/2026-08-19_cninfo_1225482884_2026年半年度报告.pdf",
+   "published_date": "2026-08-20"
+  },
+  "meituan_ar_2024": {
+   "label": "美團2024年年度報告(繁中)",
+   "market": "HK",
+   "language": "zh",
+   "genre": "annual_report",
+   "document_id": "urn:company-wiki:document:sha256:36eae4d0397187bef187286e394b7d85421eac75f7380d1a95de9f1bfa25e70a",
+   "source_id": "urn:company-wiki:source:sha256:36eae4d0397187bef187286e394b7d85421eac75f7380d1a95de9f1bfa25e70a",
+   "content_sha256": "36eae4d0397187bef187286e394b7d85421eac75f7380d1a95de9f1bfa25e70a",
+   "byte_size": 4386772,
+   "root_id": "company_raw",
+   "relative_path": "美團－Ｗ/raw/financial_reports/annual/2025-04-28_hkexnews_11645024_2024年年報.pdf",
+   "published_date": "2025-04-28"
+  },
+  "ksy_q1_2026": {
+   "label": "金山雲2026年第一季度未經審計財務業績公告(繁中)",
+   "market": "HK",
+   "language": "zh",
+   "genre": "quarterly_report",
+   "document_id": "urn:company-wiki:document:sha256:37f0eb13fc9748d6f2f56e76e9a586bcee7cc9482dd77cdceb7a37fc0890ba2f",
+   "source_id": "urn:company-wiki:source:sha256:37f0eb13fc9748d6f2f56e76e9a586bcee7cc9482dd77cdceb7a37fc0890ba2f",
+   "content_sha256": "37f0eb13fc9748d6f2f56e76e9a586bcee7cc9482dd77cdceb7a37fc0890ba2f",
+   "byte_size": 309955,
+   "root_id": "dayu_portfolio",
+   "relative_path": "3896/filings/fil_cn_92947f125218ff0345f1e8c5504afc82e845e2f1/fil_cn_92947f125218ff0345f1e8c5504afc82e845e2f1.pdf",
+   "published_date": "2026-05-27"
+  },
+  "ir_wanrun_20241104": {
+   "label": "万润股份投资者关系活动记录表20241104",
+   "market": "CN",
+   "language": "zh-CN",
+   "genre": "investor_relations",
+   "document_id": "urn:company-wiki:document:sha256:6abdef50aecf03f85e5c5b10299abc4c6442c4d8f1ffe356ba72a421b64f97fc",
+   "source_id": "urn:company-wiki:source:sha256:6abdef50aecf03f85e5c5b10299abc4c6442c4d8f1ffe356ba72a421b64f97fc",
+   "content_sha256": "6abdef50aecf03f85e5c5b10299abc4c6442c4d8f1ffe356ba72a421b64f97fc",
+   "byte_size": 158279,
+   "root_id": "company_raw",
+   "relative_path": "万润股份/raw/research/万润股份：投资者关系活动记录表20241104.pdf",
+   "published_date": null
+  },
+  "hrjp_cb_prospectus": {
+   "label": "华锐精密向不特定对象发行可转换公司债券募集说明书",
+   "market": "CN",
+   "language": "zh-CN",
+   "genre": "prospectus_convertible_bond",
+   "document_id": "urn:company-wiki:document:sha256:c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
+   "source_id": "urn:company-wiki:source:sha256:c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
+   "content_sha256": "c6ed566631e123f159abf2697c157f1868f8e994ccf8e3352132046a6c5ca0a1",
+   "byte_size": 4756322,
+   "root_id": "company_raw",
+   "relative_path": "华锐精密/raw/research/华锐精密：向不特定对象发行可转换公司债券证券募集说明书.PDF",
+   "published_date": "2022-06-22"
+  },
+  "bili_call_4q22_en": {
+   "label": "Bilibili 4Q2022 earnings call script (English, US-listed)",
+   "market": "US",
+   "language": "en",
+   "genre": "investor_call_transcript",
+   "document_id": "urn:company-wiki:document:sha256:55d3581c9b6e6b4be5793c80d65894a6d998194ba9f5027493d167f84e48d168",
+   "source_id": "urn:company-wiki:source:sha256:55d3581c9b6e6b4be5793c80d65894a6d998194ba9f5027493d167f84e48d168",
+   "content_sha256": "55d3581c9b6e6b4be5793c80d65894a6d998194ba9f5027493d167f84e48d168",
+   "byte_size": 218121,
+   "root_id": "company_raw",
+   "relative_path": "哔哩哔哩/raw/research/bilibili-4q-2022-conference-call-script.pdf",
+   "published_date": null
+  }
+ },
+ "pages": [
+  {
+   "page_id": "byd_ar_2024_p021",
+   "doc": "byd_ar_2024",
+   "pdf_page_index": 21,
+   "role": "eval",
+   "reason": "简中业务描述(消费电子/客户)+整车产销数字表开头",
+   "degradation": null,
+   "png_sha256": "f3055b94202cc6a8f830da5bf3643dae0b495b9f51545367c94a97909e684681",
+   "png_px": [
+    1654,
+    2339
+   ],
+   "png_bytes": 845692
+  },
+  {
+   "page_id": "byd_ar_2024_p022",
+   "doc": "byd_ar_2024",
+   "pdf_page_index": 22,
+   "role": "holdout",
+   "reason": "分车型产销多行数字表+多个勾选行(适用/不适用)",
+   "degradation": null,
+   "png_sha256": "081c5b63e0b3fecf07bf22c833e735d057e9c7ed655109914aae6109430b14ed",
+   "png_px": [
+    1654,
+    2339
+   ],
+   "png_bytes": 731190
+  },
+  {
+   "page_id": "amec_h1_2026_p009",
+   "doc": "amec_h1_2026",
+   "pdf_page_index": 9,
+   "role": "eval",
+   "reason": "业务描述+内嵌营销图(图内艺术字,编造负对照)",
+   "degradation": null,
+   "png_sha256": "0ca3476c87116a3616011855253b19a8371c0902a27d8c469cb3063637254ace",
+   "png_px": [
+    1654,
+    2339
+   ],
+   "png_bytes": 1342959
+  },
+  {
+   "page_id": "amec_h1_2026_p011",
+   "doc": "amec_h1_2026",
+   "pdf_page_index": 11,
+   "role": "eval",
+   "reason": "采购/生产/营销模式跨段条件+勾选行",
+   "degradation": null,
+   "png_sha256": "219305089be419f56ed7f5ecbfe50e5521b21969db0b32f2eb1c19aa3d472733",
+   "png_px": [
+    1654,
+    2339
+   ],
+   "png_bytes": 816680
+  },
+  {
+   "page_id": "meituan_ar_2024_p000",
+   "doc": "meituan_ar_2024",
+   "pdf_page_index": 0,
+   "role": "holdout",
+   "reason": "纯图像封面:繁中文字烧录在图内,大量装饰图形(编造负对照)",
+   "degradation": null,
+   "png_sha256": "6b19752d20d5ea2e19fe3fb04b900a8fa243c087715e8d801c25da4c12d6eaae",
+   "png_px": [
+    1654,
+    2245
+   ],
+   "png_bytes": 2890127
+  },
+  {
+   "page_id": "meituan_ar_2024_p011",
+   "doc": "meituan_ar_2024",
+   "pdf_page_index": 11,
+   "role": "eval",
+   "reason": "主席報告繁中密集正文+数字(人民幣10億元/7個試點省市)",
+   "degradation": null,
+   "png_sha256": "8e461d4d0c26c9118b463c4f6e108d6a7173ad201619b1b3ca378396fb37631d",
+   "png_px": [
+    1654,
+    2245
+   ],
+   "png_bytes": 871150
+  },
+  {
+   "page_id": "ksy_q1_2026_p002",
+   "doc": "ksy_q1_2026",
+   "pdf_page_index": 2,
+   "role": "eval",
+   "reason": "繁中数字密集业绩页(2,703.7百萬/37.2%/匯率6.8980)",
+   "degradation": null,
+   "png_sha256": "5d34483092eae59b3dda6af4ce08834fdc45e303dc0e79e56763e71844294e79",
+   "png_px": [
+    1654,
+    2205
+   ],
+   "png_bytes": 1057209
+  },
+  {
+   "page_id": "ksy_q1_2026_p002_synthetic_degraded",
+   "doc": "ksy_q1_2026",
+   "pdf_page_index": 2,
+   "role": "eval_degraded",
+   "reason": "同页synthetic_degradation:低清+倾斜,非真实扫描",
+   "degradation": {
+    "scale": 0.55,
+    "rotate_deg": 1.3,
+    "resample": "lanczos",
+    "note": "synthetic_degradation,不代表真实扫描覆盖"
+   },
+   "png_sha256": "0bdadbe1f0ecaa66577b407911442841c27de1c51e468dcd2a0bdf450206494d",
+   "png_px": [
+    938,
+    1235
+   ],
+   "png_bytes": 790715
+  },
+  {
+   "page_id": "ir_wanrun_20241104_p000",
+   "doc": "ir_wanrun_20241104",
+   "pdf_page_index": 0,
+   "role": "eval",
+   "reason": "IR问答:勾选框+活动信息表+问答跨段",
+   "degradation": null,
+   "png_sha256": "8258bb098ad5648eb16c15561f3f6a21cc60866973717b1cb1fa52c21d9fa31b",
+   "png_px": [
+    1655,
+    2340
+   ],
+   "png_bytes": 491456
+  },
+  {
+   "page_id": "ir_wanrun_20241104_p002",
+   "doc": "ir_wanrun_20241104",
+   "pdf_page_index": 2,
+   "role": "holdout",
+   "reason": "IR问答后续:问7/答与新能源材料进展",
+   "degradation": null,
+   "png_sha256": "657a458b4fc2199a6b69fea91202fc6ff696df49898ea576dc193c411093efc3",
+   "png_px": [
+    1655,
+    2340
+   ],
+   "png_bytes": 562965
+  },
+  {
+   "page_id": "hrjp_cb_prospectus_p006",
+   "doc": "hrjp_cb_prospectus",
+   "pdf_page_index": 6,
+   "role": "eval",
+   "reason": "竞争对手/原材料供应条件句(如果...将...)+产能数字(6,300万片/50万件/140万支)",
+   "degradation": null,
+   "png_sha256": "ffeeb3587d68729c79b747dc19623d94604240f5ab9f8ffbc5645c02391c3a66",
+   "png_px": [
+    1654,
+    2339
+   ],
+   "png_bytes": 715511
+  },
+  {
+   "page_id": "hrjp_cb_prospectus_p037",
+   "doc": "hrjp_cb_prospectus",
+   "pdf_page_index": 37,
+   "role": "holdout",
+   "reason": "核心竞争力/行业对比段落",
+   "degradation": null,
+   "png_sha256": "00ed11da67ad1870fdaa6dadcc217d365e69dacccda2acfa53582f8cbc6ce3d1",
+   "png_px": [
+    1654,
+    2339
+   ],
+   "png_bytes": 786514
+  },
+  {
+   "page_id": "bili_call_4q22_en_p001",
+   "doc": "bili_call_4q22_en",
+   "pdf_page_index": 1,
+   "role": "eval",
+   "reason": "English business remarks with dense numerals (93 million DAUs, RMB 21.9 billion)",
+   "degradation": null,
+   "png_sha256": "fbbfe725204cb631655f971792d92c42bd01ae8da0efdb8b605971b0f5ce2c7c",
+   "png_px": [
+    1700,
+    2200
+   ],
+   "png_bytes": 569350
+  },
+  {
+   "page_id": "bili_call_4q22_en_p003",
+   "doc": "bili_call_4q22_en",
+   "pdf_page_index": 3,
+   "role": "holdout",
+   "reason": "English VAS/advertising segment with dense numerals + inline Chinese title",
+   "degradation": null,
+   "png_sha256": "99780cd6d283ae44c50bfc55f278a0e55cab2338b537089c4e876df40ded5aa4",
+   "png_px": [
+    1700,
+    2200
+   ],
+   "png_bytes": 579223
+  }
+ ],
+ "counts": {
+  "documents": 7,
+  "pages": 14,
+  "eval": 8,
+  "holdout": 5,
+  "synthetic_degradation": 1
+ },
+ "notes": [
+  "真实扫描件在目录内缺失;ksy_q1_2026_p002_synthetic_degraded 为同页人工退化,标注 synthetic_degradation,不计真实扫描覆盖。",
+  "US 市场年报在目录中为 text/html(NVIDIA/Apple 10-K),不纳入页图OCR样本;英文页由US上市电话会脚本PDF覆盖。"
+ ]
+}

@@ -1,0 +1,124 @@
+{
+ "schema_version": "cwp-ocr-x1-run/1",
+ "tag": "pilot_f32",
+ "pages_selected": [
+  "meituan_ar_2024_p000"
+ ],
+ "receipt": {
+  "schema_version": "cwp-ocr-x1-run-receipt/1",
+  "created_at_utc": "2026-10-31T12:17:06.054425+00:00",
+  "method": "pages rendered in the parent with the shared pypdfium2 renderer; one child process loads Xiaomi-OCR-0 on CPU and runs the pages in order under a Windows Job Object ProcessMemoryLimit (committed bytes); the peak is read from the job object",
+  "config": {
+   "deadline_seconds_per_request": 180.0,
+   "total_inference_budget_seconds": 1800.0,
+   "max_new_tokens": 16384,
+   "dtype": "bfloat16",
+   "weights_mode": "mapped-f32",
+   "threads": "torch default (reported by the child)"
+  },
+  "memory": {
+   "cap_bytes": 3801612288,
+   "cap_gib": 3.541,
+   "rule": "min(8 GiB, available physical RAM / 2) at run start",
+   "job_peak_process_bytes": 1549500416,
+   "job_peak_process_gib": 1.443
+  },
+  "host_before": {
+   "memory_load_pct": 55,
+   "total_phys_bytes": 16931512320,
+   "avail_phys_bytes": 7603224576,
+   "commit_free_bytes": 24636534784
+  },
+  "host_after": {
+   "memory_load_pct": 54,
+   "total_phys_bytes": 16931512320,
+   "avail_phys_bytes": 7640473600,
+   "commit_free_bytes": 24698900480
+  },
+  "child": {
+   "return_code": 3221225477,
+   "backstop_hit": false,
+   "wall_seconds": 18.62,
+   "events": [
+    {
+     "event": "child_ready",
+     "import_seconds": 2.6031514999995125,
+     "torch_threads": 10,
+     "process_peak_commit_bytes_self": 555126784
+    },
+    {
+     "event": "stage",
+     "stage": "page_start",
+     "page_id": "meituan_ar_2024_p000",
+     "t_seconds": 0.033,
+     "peak_commit_self": 555630592
+    },
+    {
+     "event": "stage",
+     "stage": "processor_load_start",
+     "page_id": "meituan_ar_2024_p000",
+     "t_seconds": 14.297,
+     "peak_commit_self": 1149100032
+    },
+    {
+     "event": "stage",
+     "stage": "processor_loaded",
+     "page_id": "meituan_ar_2024_p000",
+     "t_seconds": 15.451,
+     "peak_commit_self": 1429860352
+    },
+    {
+     "event": "stage",
+     "stage": "model_load_start",
+     "page_id": "meituan_ar_2024_p000",
+     "t_seconds": 15.451,
+     "peak_commit_self": 1429860352
+    },
+    {
+     "event": "stage",
+     "stage": "model_loaded",
+     "page_id": "meituan_ar_2024_p000",
+     "t_seconds": 15.577,
+     "peak_commit_self": 1429860352
+    },
+    {
+     "event": "stage",
+     "stage": "preprocess_done",
+     "page_id": "meituan_ar_2024_p000",
+     "t_seconds": 15.852,
+     "peak_commit_self": 1549500416
+    },
+    {
+     "event": "stage",
+     "stage": "generate_start",
+     "page_id": "meituan_ar_2024_p000",
+     "t_seconds": 15.852,
+     "peak_commit_self": 1549500416
+    }
+   ],
+   "stderr_tail": ""
+  },
+  "identity": {
+   "arm": "X1",
+   "backend": "xiaomi-ocr-0-transformers-cpu",
+   "upstream_commit": "b1a9bb4c07060c453785e9151715ccda6b96f0b1",
+   "model_revision": "bbd8cf8d21f256b3644b44cb860f3a7cecb93c30",
+   "precision": "checkpoint-native-bfloat16-cpu",
+   "prompt_sha256": "fd7abd1ca91c0133edb93a6da0d52d6d57a51a9076867fd467ab1ddd7e50fb20",
+   "preprocess": "upstream fit_image thumbnail to 2048px longest edge, then processor smart_resize",
+   "decoding": "greedy; chat template enable_thinking=False",
+   "max_new_tokens": 16384,
+   "request_deadline_seconds": 180.0,
+   "output_char_cap": 60000,
+   "weights_loading": "torch.from_file read-only file mapping of the exact fp32 upcast copy (bf16 widened losslessly, sha256 of that file recorded by the loader); loading strategy and compute dtype only, no quantization",
+   "postprocess": "upstream postprocess.document: _clean_truncated_repeats + postprocess_e2e_markdown(convert_otsl=True); scoring strips declared markup (metrics.markup_strip: HTML tags, markdown heading and bold markers)"
+  }
+ },
+ "records": [
+  {
+   "page_id": "meituan_ar_2024_p000",
+   "status": "no_record",
+   "error": "child_exit_code=3221225477; backstop_hit=False"
+  }
+ ]
+}

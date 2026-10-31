@@ -1,0 +1,129 @@
+{
+ "schema_version": "cwp-ocr-x1-run/1",
+ "tag": "pilot_f32_ro",
+ "pages_selected": [
+  "meituan_ar_2024_p000"
+ ],
+ "receipt": {
+  "schema_version": "cwp-ocr-x1-run-receipt/1",
+  "created_at_utc": "2026-10-31T12:29:17.694315+00:00",
+  "method": "pages rendered in the parent with the shared pypdfium2 renderer; one child process loads Xiaomi-OCR-0 on CPU and runs the pages in order under a Windows Job Object ProcessMemoryLimit (committed bytes); the peak is read from the job object",
+  "config": {
+   "deadline_seconds_per_request": 180.0,
+   "total_inference_budget_seconds": 1800.0,
+   "max_new_tokens": 16384,
+   "dtype": "bfloat16",
+   "weights_mode": "mapped-f32",
+   "threads": "torch default (reported by the child)"
+  },
+  "memory": {
+   "cap_bytes": 3990679552,
+   "cap_gib": 3.717,
+   "rule": "min(8 GiB, available physical RAM / 2) at run start",
+   "job_peak_process_bytes": 2773016576,
+   "job_peak_process_gib": 2.583
+  },
+  "host_before": {
+   "memory_load_pct": 52,
+   "total_phys_bytes": 16931512320,
+   "avail_phys_bytes": 7981359104,
+   "commit_free_bytes": 24334204928
+  },
+  "host_after": {
+   "memory_load_pct": 50,
+   "total_phys_bytes": 16931512320,
+   "avail_phys_bytes": 8345694208,
+   "commit_free_bytes": 24716615680
+  },
+  "child": {
+   "return_code": 0,
+   "backstop_hit": false,
+   "wall_seconds": 73.13,
+   "events": [
+    {
+     "event": "child_ready",
+     "import_seconds": 7.443451299999651,
+     "torch_threads": 10,
+     "process_peak_commit_bytes_self": 555053056
+    },
+    {
+     "event": "stage",
+     "stage": "page_start",
+     "page_id": "meituan_ar_2024_p000",
+     "t_seconds": 0.107,
+     "peak_commit_self": 555954176
+    },
+    {
+     "event": "stage",
+     "stage": "processor_load_start",
+     "page_id": "meituan_ar_2024_p000",
+     "t_seconds": 11.23,
+     "peak_commit_self": 1149943808
+    },
+    {
+     "event": "stage",
+     "stage": "processor_loaded",
+     "page_id": "meituan_ar_2024_p000",
+     "t_seconds": 12.338,
+     "peak_commit_self": 1430048768
+    },
+    {
+     "event": "stage",
+     "stage": "model_load_start",
+     "page_id": "meituan_ar_2024_p000",
+     "t_seconds": 12.339,
+     "peak_commit_self": 1430048768
+    },
+    {
+     "event": "stage",
+     "stage": "model_loaded",
+     "page_id": "meituan_ar_2024_p000",
+     "t_seconds": 12.44,
+     "peak_commit_self": 1430048768
+    },
+    {
+     "event": "stage",
+     "stage": "preprocess_done",
+     "page_id": "meituan_ar_2024_p000",
+     "t_seconds": 12.683,
+     "peak_commit_self": 1556725760
+    },
+    {
+     "event": "stage",
+     "stage": "generate_start",
+     "page_id": "meituan_ar_2024_p000",
+     "t_seconds": 12.683,
+     "peak_commit_self": 1556725760
+    },
+    {
+     "event": "child_done",
+     "total_request_seconds": 0.0
+    }
+   ],
+   "stderr_tail": "C:\\Users\\郑曾波\\Projects\\company-wiki-w23-xiaomi-ocr\\tools\\ocr_comparison\\mmap_loader.py:46: UserWarning: The given buffer is not writable, and PyTorch does not support non-writable tensors. This means you can write to the underlying (supposedly non-writable) buffer using the tensor. You may want to copy the buffer to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\torch\\csrc\\utils\\tensor_new.cpp:1582.)\n  return torch.frombuffer(view, dtype=torch.uint8, count=view.size())\n"
+  },
+  "identity": {
+   "arm": "X1",
+   "backend": "xiaomi-ocr-0-transformers-cpu",
+   "upstream_commit": "b1a9bb4c07060c453785e9151715ccda6b96f0b1",
+   "model_revision": "bbd8cf8d21f256b3644b44cb860f3a7cecb93c30",
+   "precision": "checkpoint-native-bfloat16-cpu",
+   "prompt_sha256": "fd7abd1ca91c0133edb93a6da0d52d6d57a51a9076867fd467ab1ddd7e50fb20",
+   "preprocess": "upstream fit_image thumbnail to 2048px longest edge, then processor smart_resize",
+   "decoding": "greedy; chat template enable_thinking=False",
+   "max_new_tokens": 16384,
+   "request_deadline_seconds": 180.0,
+   "output_char_cap": 60000,
+   "weights_loading": "torch.from_file read-only file mapping of the exact fp32 upcast copy (bf16 widened losslessly, sha256 of that file recorded by the loader); loading strategy and compute dtype only, no quantization",
+   "postprocess": "upstream postprocess.document: _clean_truncated_repeats + postprocess_e2e_markdown(convert_otsl=True); scoring strips declared markup (metrics.markup_strip: HTML tags, markdown heading and bold markers)"
+  }
+ },
+ "records": [
+  {
+   "status": "error",
+   "error": "RuntimeError: [enforce fail at alloc_cpu.cpp:117] data. DefaultCPUAllocator: not enough memory: you tried to allocate 3059302400 bytes.",
+   "process_peak_commit_bytes_self": 2773016576,
+   "page_id": "meituan_ar_2024_p000"
+  }
+ ]
+}

@@ -1,0 +1,1 @@
+Get-Process | Sort-Object WorkingSet64 -Descending | Select-Object -First 14 Name,@{n='WS_MB';e={[math]::Round($_.WorkingSet64/1MB)}},@{n='Commit_MB';e={[math]::Round($_.PagedMemorySize64/1MB)}} | Format-Table -AutoSize | Out-String -Width 200
