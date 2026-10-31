@@ -2935,7 +2935,7 @@
   },
   "parallel_harness_dispatch": {
     "entry": "harness_lanes/20261028/README.md",
-    "status": "READY_NOT_DISPATCHED",
+    "status": "HISTORICAL_W20_ALL_THREE_ACCEPTED_MERGED_SEE_R3",
     "independent_card_review": "APPROVE_OPEN0",
     "priorities": {
       "W20-AUDIT-CHECKPOINTS": "PRIORITY_READY",
@@ -2949,7 +2949,8 @@
     },
     "root_priority_adjustment": "After independent card review, ROOT changed only overview scheduling: two directly support current acceptance; FF is optional. No technical card or reviewed interfaces changed.",
     "count_policy": "derive task count from remaining work, dependency and receiving cost; never fixed3",
-    "no_author_implementation_started_by_root": true
+    "no_author_implementation_started_by_root": true,
+    "superseded_by": "w20_reception_r3_20261029"
   },
   "owned_uncommitted_runtime": [],
   "foreign_wip_preserved": [
@@ -3053,7 +3054,7 @@
     "implementation_milestone": "COMPONENT_PASS; actual tasks/summaries/cache/RF/holdout OPEN"
   },
   "parallel_w21_runtime": {
-    "status": "READONLY_HEAD_AND_FINAL_REVIEW_OBSERVED_CANONICAL_E2E_PARTIAL",
+    "status": "ROOT_ENGINEERING_MERGED_W22_DEPLOYMENT_SUPERSEDES_OLD_PROGRESS",
     "entry": "harness_lanes/20261029/W21-PDF-RUNTIME.md",
     "workdir": "C:/Users/郑曾波/Projects/company-wiki-w21-pdf-runtime",
     "branch": "codex/w21-pdf-runtime-20261029",
@@ -4181,7 +4182,7 @@
     "last_passage_agent": "Usage-limit error; remaining passage followup is not signed complete; ROOT resumes separately"
   },
   "parallel_lanes_w22_20261030": {
-    "status": "READY_TO_DISPATCH",
+    "status": "ROOT_ENGINEERING_ACCEPTED_MERGED_PUSHED",
     "entry": "harness_lanes/20261030/README.md",
     "setup": "harness_lanes/20261030/setup.json",
     "cards": [
@@ -4205,7 +4206,7 @@
     "new_sdk_copies": 0
   },
   "parallel_lane_w23_20261030": {
-    "status": "READY_TO_DISPATCH",
+    "status": "TOOLING_ACCEPTED_MERGED_EMPIRICAL_R1_REQUIRED",
     "card": "harness_lanes/20261030/W23-XIAOMI-OCR.md",
     "research": "harness_lanes/20261030/W23-SOURCE-NOTES.md",
     "setup": "harness_lanes/20261030/W23-setup.json",
@@ -4216,5 +4217,46 @@
     "existing_ocr": "RapidOCR3.8.1/ORT1.26.0/CPU/PP-OCRv4",
     "mainline_next_unchanged": true,
     "final_independent_review_required": true
+  },
+  "outsourced_reception_20261031": {
+    "status": "ENGINEERING_ACCEPTED_MERGED_PUSHED_OCR_EMPIRICAL_REWORK_REQUIRED",
+    "entry": "review/w22-w23-reception-20261031/README.md",
+    "summary": "review/w22-w23-reception-20261031/summary.json",
+    "runtime_commit": "946537d0d75ac36b22ac0bb24e0f484a896b4c95",
+    "ci": {
+      "runs": [
+        {
+          "id": 41238915399,
+          "head_sha": "946537d0d75ac36b22ac0bb24e0f484a896b4c95",
+          "status": "in_progress",
+          "conclusion": null,
+          "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41238915399"
+        }
+      ]
+    },
+    "repair_card": "harness_lanes/20261031/W23-OCR-R1.md",
+    "repair_status": "READY_TO_DISPATCH",
+    "older_three_accepted_unmerged": true,
+    "new_model_calls": 0,
+    "new_original_downloads": 0,
+    "whole_project_complete": false
+  },
+  "parallel_w23_r1_20261031": {
+    "schema_version": "harness-lane-setup/1",
+    "status": "READY_TO_DISPATCH",
+    "workdir": "C:\\Users\\郑曾波\\Projects\\company-wiki-w23-xiaomi-ocr-r1",
+    "branch": "codex/w23-ocr-r1-20261031",
+    "base_commit": "946537d0d75ac36b22ac0bb24e0f484a896b4c95",
+    "plan_id": "w23-ocr-r1-2026-10-31",
+    "pwf_plan_root": "docs/plans",
+    "seed_files": [
+      "TASK_CARD.md",
+      "task_plan.md",
+      "findings.md",
+      "progress.md"
+    ],
+    "model_copies": 0,
+    "original_copies": 0,
+    "authors_started": false
   }
 }

@@ -1,0 +1,115 @@
+{
+  "schema_version": "w22-w23-root-reception/1",
+  "date": "2026-10-31",
+  "runtime_commit": "946537d0d75ac36b22ac0bb24e0f484a896b4c95",
+  "runtime_pushed": true,
+  "main_fast_forwarded": true,
+  "cards": {
+    "W22-CWP-ATOMIC-IO": {
+      "verdict": "ENGINEERING_ACCEPTED_AFTER_ROOT_FIX",
+      "independent_cross_review": "PASS",
+      "fixes": "absolute/UTF16 paths; preserve original exceptions on3.10; exact-owned cleanup; finite <=60 UTF16 scratch selection; POSIX test portability"
+    },
+    "W22-PDF-DEPLOY": {
+      "verdict": "ENGINEERING_ACCEPTED_AFTER_ROOT_FIX",
+      "independent_cross_review": "PASS",
+      "fixes": "blocked/old-tool plans; target containment; reparse destinations; scaffold existence/isolation/content binding; receipt write alias protection",
+      "real_sdk": "author2page enhanced/accepted2 verified by receipts; newtool does not rewrite old deployed receipt",
+      "actual_environment": "36127 samefile/size,18sourceSHA,0reparse confirmed; no new SDK run",
+      "remaining": "real-document canonical C2/body quality remains ROOT mainline;87MB author warm cache retained and disclosed"
+    },
+    "W23-XIAOMI-OCR": {
+      "tooling": "ACCEPTED_AFTER_ROOT_FIX",
+      "empirical_verdict": "CHANGES_REQUESTED_PARTIAL_EXPLORATORY_ONLY",
+      "rework_card": "../../harness_lanes/20261031/W23-OCR-R1.md",
+      "reasons": [
+        "600s requests vs180 cap; cumulative recorded2471.8s plus diagnostics",
+        "holdout page reused as pilot",
+        "actual run parameter/manifest mismatch",
+        "per-page fact/condition totals differ from claimed aggregates",
+        "X2 not_run and scan/two-column/formula coverage gaps"
+      ],
+      "weight_storage_check": "488/488 exact BF16-to-F32 zero-extension; no compute parity claim"
+    }
+  },
+  "tests": {
+    "root_combined_final": {
+      "passed": 35,
+      "seconds": 3.2,
+      "scope": "new reception counterexamples only"
+    },
+    "root_ocr_encoding_final": {
+      "passed": 14,
+      "seconds": 1.61,
+      "warnings": 0
+    },
+    "normal_pre_push": {
+      "passed": 167,
+      "seconds": 37.23,
+      "scope": "daily contract smoke; no full-suite claim"
+    },
+    "author_domain_replays": "See independent reports; overlapping counts are not summed"
+  },
+  "static": "all changed tools except vendored upstream ruff PASS; atomic2source mypy PASS",
+  "ci": {
+    "runs": [
+      {
+        "id": 41238915399,
+        "head_sha": "946537d0d75ac36b22ac0bb24e0f484a896b4c95",
+        "status": "in_progress",
+        "conclusion": null,
+        "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41238915399"
+      }
+    ]
+  },
+  "preservation": "ROOT M8/hook byte snapshots equal before/after; author trees/originals/config/models/other repositories untouched",
+  "older_accepted": [
+    {
+      "repo": "industry-research",
+      "author_head": "1e84336eda1505748e5497b3910e29ba55cd43fe",
+      "main_head": "4a80f9988f9325fb0a348c8acd9e41d615005c5f",
+      "author_ancestor_of_main": false,
+      "ancestor_exit": 1,
+      "main_status": "",
+      "author_status": ""
+    },
+    {
+      "repo": "QAbyLLM",
+      "author_head": "5e5f22b2d7d652738e54bbfaced1982117616c7a",
+      "main_head": "ad389f84cd15e54207fc6fcfe4881f86edac63f1",
+      "author_ancestor_of_main": false,
+      "ancestor_exit": 1,
+      "main_status": "",
+      "author_status": ""
+    },
+    {
+      "repo": "MeetingConverter",
+      "author_head": "ecf9ae82e77d6b9629e0919dd28d581540c800b8",
+      "main_head": "8a33a7f96292af8e6574d98b959703c6d11919eb",
+      "author_ancestor_of_main": false,
+      "ancestor_exit": 1,
+      "main_status": "M .coverage",
+      "author_status": ""
+    }
+  ],
+  "test_cleanup": {
+    "owned_roots": [
+      ".root-ocr-tmp",
+      ".root-final-tmp"
+    ],
+    "removed_this_attempt": [
+      ".root-final-tmp"
+    ],
+    "all_absent": true,
+    "initial_cleanup_error": "unprefixed Win32 non-BMP path lstat failed; repeated only cleanup with verified extended paths",
+    "author_cache_removed": false,
+    "model_inferences": 0,
+    "downloads": 0
+  },
+  "one_time_inventory_policy": "two unselected discovery inventories totaling6280282B absent from main HEAD, author Git history retained; not a claim of disk freed",
+  "new_supplier_calls": 0,
+  "new_model_inferences": 0,
+  "new_original_downloads": 0,
+  "mother_budget_unchanged": true,
+  "scope_limit": "Not whole PWF/company loop completion"
+}

@@ -1,0 +1,12 @@
+[
+  {
+    "path": "docs/plans/w23-xiaomi-ocr-2026-10-30/discovered_candidates.json",
+    "source_tree_record": "100644 blob bf19ab5d357806c34edc04eda4ce77dfed397a3d  455124\tdocs/plans/w23-xiaomi-ocr-2026-10-30/discovered_candidates.json",
+    "reason": "one-time unselected full discovery inventory; selected manifest/gold/raw outputs and author commits retained"
+  },
+  {
+    "path": "docs/plans/w23-xiaomi-ocr-2026-10-30/discovered_candidates2.json",
+    "source_tree_record": "100644 blob cb09cf65ea5d726dfdfc9557f4ff730dfd9c9d4e 5646646\tdocs/plans/w23-xiaomi-ocr-2026-10-30/discovered_candidates2.json",
+    "reason": "one-time unselected full discovery inventory; selected manifest/gold/raw outputs and author commits retained"
+  }
+]

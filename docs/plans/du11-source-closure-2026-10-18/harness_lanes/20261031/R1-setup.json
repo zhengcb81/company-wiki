@@ -1,0 +1,18 @@
+{
+  "schema_version": "harness-lane-setup/1",
+  "status": "READY_TO_DISPATCH",
+  "workdir": "C:\\Users\\郑曾波\\Projects\\company-wiki-w23-xiaomi-ocr-r1",
+  "branch": "codex/w23-ocr-r1-20261031",
+  "base_commit": "946537d0d75ac36b22ac0bb24e0f484a896b4c95",
+  "plan_id": "w23-ocr-r1-2026-10-31",
+  "pwf_plan_root": "docs/plans",
+  "seed_files": [
+    "TASK_CARD.md",
+    "task_plan.md",
+    "findings.md",
+    "progress.md"
+  ],
+  "model_copies": 0,
+  "original_copies": 0,
+  "authors_started": false
+}

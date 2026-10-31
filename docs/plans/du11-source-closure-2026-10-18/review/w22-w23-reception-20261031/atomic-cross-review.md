@@ -1,0 +1,27 @@
+# ATOMIC final independent cross-review — 2026-10-31
+
+Verdict: **PASS for the final ROOT patch scope**, with explicit platform/placement limits. I did not author or modify ATOMIC product/test fixes. Reviewed the original d19bda0453faaa10d58764a5fd233596f2fc7cb5 diff against the current integration files, the full primitive/path/probe/gate implementations, path and gate tests, original/final test receipts, cleanup receipt, and the atomic agent's final source bindings. All eight integration files in that receipt were independently raw/LF rehashed and match; see atomic-cross-sha256.json.
+
+The relative-path fix resolves the target against the actual cwd before deciding extension; short valid caller representations remain unchanged. stage_dir uses the same absolute budget. UTF-16 code units with surrogatepass handle non-BMP Windows paths. The shared writer still owns one exclusive same-directory stage, closes it before replacement, keeps existing bounded contention retry/exception policy, and cleans only its own stage. The Python 3.10 API guard preserves the original exception if add_note is absent. Probe cleanup now traverses its owned deep tree through extended Windows syntax and surfaces cleanup failure instead of silently claiming success. POSIX path-test readback uses the native target; no claim of an actual Linux run is made.
+
+The final gate placement fix normalizes all candidate roots to absolute forms and orders them by native path units; on Windows it rejects root +14 scratch-name reserve above the existing repository basetemp budget of 60 before probing. It rechecks the actual created scratch, cleans it before continuing if the actual name exceeds that bound, tries only the finite configured candidates, and reports each refusal if no root qualifies. The 60 value is the same existing root-conftest boundary (not a new test-selection, permission, spending or review gate). Ordinary gate success/failure/timeout and child TEMP/TMP/TMPDIR/SQLITE_TMPDIR isolation assertions were retained. Short fixture root changes shorten names without removing those assertions.
+
+Independent executions were deliberately small:
+
+- Before the final gate-budget increment: five ROOT regressions passed (0.36s), covering native relative target, UTF-16 parent, simulated Python3.10 missing API, real deep probe cleanup, and absolute candidate ordering. atomic-cross-tests.txt.
+- An earlier independent real tiny child from a deep cwd with TEMP='.' confirmed candidate resolution and child TEMP stability, with owned scratch removed. atomic-cross-neutral.json. That receipt precedes the final 60-budget increment and is not claimed as a rerun of the final gate.
+- Against the final gate bytes: three representative nodes passed (0.31s): over-budget-to-short candidate fallback, exact 60 boundary acceptance, and actual-name-overrun cleanup. atomic-cross-final-tests.txt. I did not rerun the full 43/47 domain.
+
+No newly introduced blocking defect was found in the final patch. The earlier all-candidates-deep gap is now a bounded, explicit failure rather than a false placement guarantee: the tool cannot manufacture a writable short root when none of its finite candidates qualifies. Thus “any checkout depth always succeeds” remains an invalid conclusion, while “a launched Windows child uses within-budget scratch or fails before launch with diagnostics” is supported. Candidate creation/ACL TOCTOU remains outside this patch's proof; no ACL changes were performed. Python3.10 actual runtime, Linux actual runtime, and network UNC actual filesystem remain NOT_RUN; simulated missing-add_note, Windows native paths and structural UNC tests must stay distinct.
+
+Reviewer cleanup: owned .px-tmp and .px-neutral restored absent; no ATOMIC source/test file was modified by this cross-reviewer. Logs/reports are only under ROOT's requested pdf receipt directory.
+
+Final source binding (raw / LF):
+- `C:\Users\郑曾波\Projects\_w22r\src\company_wiki\_atomic_file.py`: `cbe20ea2066aeba85fdb9c47cf66ae66134fb6b2ec0d8e28e0433c48139d5453` / `13a80a2e65b81bd05f87d79b317cd4da581563a4e97cba139ca45d48a52cb305`.
+- `C:\Users\郑曾波\Projects\_w22r\src\company_wiki\_atomic_path.py`: `62d8f4e3c7163c5a1972efc6e659f5bb1ec94a2b30a4a74a39dfecc4eb1e0f86` / `b3cc1ebfc6f3b899a5b4693978c3f1f697436c422f5c74dc40a94a447428c372`.
+- `C:\Users\郑曾波\Projects\_w22r\tools\pre_push_gate.py`: `b0d0c42f4e535980cbefb9cd81c03916cf5959bca08b6cf3261d44077adc59e6` / `db5d9e7378d0145abbdfd84bb2710d8e4940cc096ab65cffc26a79a60a5cd371`.
+- `C:\Users\郑曾波\Projects\_w22r\tools\w22_atomic_probe.py`: `cdeabd57f9118ec2510436eff4a5ba33a979e4b0a0b937b0c8d25b6c1ac7d3d7` / `372fbbb28424f28c4e9da80459e770baf0fecf59ba1eab5b8eb219241356fcfd`.
+- `C:\Users\郑曾波\Projects\_w22r\tests\unit\test_w22_atomic_paths.py`: `23e296755896d0e9083d042f7fd1fadaeec615ceac1d8ab1efd9ee337dfe75a5` / `5e57db7de11caa8f5d99634db1edd9f6f98db7d1fa982b192284210375062afb`.
+- `C:\Users\郑曾波\Projects\_w22r\tests\unit\test_w22_atomic_consumer_integration.py`: `575f85ba0991fe3fe0232eb01b29cb58ef737902186aa8b0b7b5bd20ca516ceb` / `fab59cab46c8d3ee68183d8438546bbca422c42fc07e564add640d028ef39615`.
+- `C:\Users\郑曾波\Projects\_w22r\tests\unit\test_w22_gate_scratch.py`: `7c5e1fde503c782ecdf893fc0d22174fe0b2dda86d333e4bb94212f743c5970f` / `8f66e90cf647b4d10cc1528c81734107a557f2f2ccb45725e146158c58853920`.
+- `C:\Users\郑曾波\Projects\_w22r\tests\unit\test_w22_reception_regressions.py`: `a4102b187a32d7029789fa584bed31e3fa7e78e5a05aabb801623046aa95548f` / `a4102b187a32d7029789fa584bed31e3fa7e78e5a05aabb801623046aa95548f`.

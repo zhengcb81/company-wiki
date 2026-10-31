@@ -1,3 +1,14 @@
+## 2026-10-31 当前：三包工程验收并线发布；小米真实比较单独返修
+
+[最终接收与完整证据](review/w22-w23-reception-20261031/README.md)，工程主线/远端946537d0。W22原子写入与PDF部署经独立反例、ROOT修复和交叉独审后接收；W23比较器工程已修复接收，历史实验只保留探索性PARTIAL，不能追认严格时限/盲测或小米优胜。[W23-OCR-R1返修卡](harness_lanes/20261031/W23-OCR-R1.md)及独立工区已就位，READY_TO_DISPATCH，未擅自启动新模型。
+
+最终新反例合跑35P/3.20秒；正常pre-push167P/37.23秒；静态/type检查通过。已有域计数重叠不累加；精确CI41238915399最近观察in_progress，尚不冒称远端绿。ROOT M8/hook字节、作者树/缓存、原件/config及其他仓WIP保持；本节点0新模型推理/供应商调用/原件下载。两份一次性发现大清单不再物化主线，历史保留。
+
+较早IR/QA-RAG/MeetingConverter三包仍是已验收、未并各自主线，已用实际祖先核实并列待办；W20/W21既有工程祖先已确认，不重开旧验收。**唯一下一步：回M8来源遗漏与限定共因修复，之后真实摘要/缓存恢复/RF实际采用；R1新试验可独立交他人并行。** 全PWF及完整公司loop仍OPEN。
+
+---
+以下为历史记录，不是额外执行入口。
+
 ## 2026-10-30 W23：Xiaomi-OCR-0 独立对照试验
 
 用户新要求已拆成[W23施工卡](harness_lanes/20261030/W23-XIAOMI-OCR.md)，[调查依据](harness_lanes/20261030/W23-SOURCE-NOTES.md)与[独立工区](harness_lanes/20261030/W23-setup.json)齐备，状态READY_TO_DISPATCH，未启动模型推理/下载。当前明确基线RapidOCR3.8.1+ORT1.26.0 CPU/本地PP-OCRv4；普通PDF原生提取与do_ocr=False的Docling增强分开。小米代码/HF revision已公开API冻结，CPU可行性/质量仍未验证。
