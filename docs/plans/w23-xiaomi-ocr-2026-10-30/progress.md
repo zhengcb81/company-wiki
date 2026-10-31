@@ -28,3 +28,8 @@
 - 清理：render_probe/gold_candidates/r0_outputs已删；run临时目录已回收；ROOT无新增改动。frozen_pages保留至终审完成后删除。
 
 2026-10-31 终审与交接：独审复审 READY_FOR_ROOT（0 OPEN，指标独立复算<1e-6一致，39/39测试）；frozen_pages已删；handoff.md/json交付（harness-handoff/1，PARTIAL如实限定）；分支push至origin/codex/w23-xiaomi-ocr-20261030（a430e984）。STOP。
+2026-10-31 对照任务卡自审与两轮delta复审：
+- 自审发现5处遗漏并修复：英文WER未入报告(已入表,单页分母注明)；comparison.json/raw缺每页source/page/image_SHA(从冻结清单联接page_identity)；R0峰值内存未测(memwatch收据)；双栏/印章样本缺口未声明(已列入comparison.md与handoff limitations)；临时清理无测试锁(owned_tmp_dir上下文+测试)。
+- delta复审R1抓到2项：raw_r0.json被仪表化pilot覆盖(恢复自c62ba969+重新联接+provenance记录全程;根因修复=raw文件名per-invocation唯一+测试)；内存收据误标(实为pdfium渲染峰值)→改为fresh-interpreter法实测引擎：0.671GB WS/0.988GB commit(schema /2,审查员独立复现~0.1%一致)。
+- delta复审R2：READY_FOR_ROOT(0 OPEN)；两个文档nit已修(comparison.md峰值数值落位、handoff limitations /2措辞)。测试41/41(32 unit+9 integration)。
+- 全部推送至origin/codex/w23-xiaomi-ocr-20261030(070c8489)。
