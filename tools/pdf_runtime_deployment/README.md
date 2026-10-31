@@ -16,7 +16,8 @@ non-alias remedy.
    and freezes an integrity-digested plan. Diagnostics (RECORD provenance
    deviations, active `.pth` hooks) are recorded, never upgraded into gates.
    Blocking errors (missing/escaping record sources, conflicting duplicate
-   claims) stop the plan.
+   claims) stop the plan. A blocked plan cannot be deployed; plans from a
+   different tool revision must be rebuilt.
 2. `deploy` — creates a plain venv (`--without-pip --copies`,
    `include-system-site-packages = false`) at an **ASCII** target on the same
    NTFS volume, hardlinks every planned file (re-hashing each source just
@@ -27,6 +28,10 @@ non-alias remedy.
    `ABSENT/EMPTY/OWNED_COMPLETE/OWNED_INCOMPLETE/FOREIGN`: complete owned
    deployments are reused with **zero writes**, incomplete owned deployments
    are recovered row-by-row, anything else conflicts and is never modified.
+   Destination paths must be real directories/files: symlinks and Windows
+   reparse aliases in the target or any planned parent are rejected before
+   writes. The output config stays under the owned target. Reuse also checks
+   that the interpreter exists and venv isolation remains enabled.
 3. `verify` — fresh-process light checks: the deployed interpreter re-resolves
    the closure (digest must match the receipt), proves isolation (no pip, no
    user/base site, all distributions under the deployed site-packages, ASCII
@@ -57,3 +62,9 @@ it with `COMPANY_WIKI_PDF_ENHANCEMENT_CONFIG`; no upper layer learns Python or
 SDK paths. Nothing here changes ROOT production profiles, global environment
 state, or any source byte; hardlinked sources must never be edited or
 re-privileged in place.
+
+Complete receipts bind the interpreter and pyvenv.cfg bytes with SHA-256.
+Reuse rejects changed scaffold bytes; a legacy complete receipt without those
+bindings requires scaffold verification or a new owned deployment, and is never
+silently attested as ready. Missing scaffold can recover only to the recorded
+bytes. The existing deployed environment and its older receipt are not rewritten.

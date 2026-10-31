@@ -15,6 +15,7 @@ import json
 import os
 from pathlib import Path, PurePosixPath
 import re
+import stat
 import subprocess
 import sys
 import tempfile
@@ -28,6 +29,7 @@ RECEIPT_NAME = "deployment.json"
 CONFIG_NAME = "paragraph-runtime.config.json"
 ENV_DIRNAME = "env"
 ARTIFACTS_DIRNAME = "artifacts"
+SCAFFOLD_FILES = ("env/Scripts/python.exe", "env/pyvenv.cfg")
 SUPPORTED_SOURCE_SCHEMA = "pdf-paragraph-runtime/2"
 
 VENV_TIMEOUT_SECONDS = 300
@@ -91,6 +93,37 @@ def _safe_relative(relative: str) -> bool:
             and ".." not in pure.parts and ":" not in relative)
 
 
+def _require_real_paths(paths: list[Path]) -> None:
+    """Reject aliases before any owned-tree write, including recovery writes.
+
+    Check existing components with lstat: resolve/exists alone follows junctions
+    and would let an empty alias or an owned tree's replaced parent escape.
+    Sources may intentionally be links; only destination paths are constrained.
+    """
+    components: set[Path] = set()
+    for path in paths:
+        absolute = Path(os.path.abspath(path))
+        components.add(absolute)
+        components.update(absolute.parents)
+    for component in sorted(components, key=lambda value: (len(value.parts), str(value))):
+        try:
+            info = component.lstat()
+        except FileNotFoundError:
+            continue
+        if stat.S_ISLNK(info.st_mode) or getattr(info, "st_file_attributes", 0) & getattr(
+                stat, "FILE_ATTRIBUTE_REPARSE_POINT", 0x400):
+            raise TargetConflict(f"deployment destination contains a link/reparse alias: {component!s}")
+
+
+def _venv_is_isolated(config_path: Path) -> bool:
+    settings = {}
+    for line in config_path.read_text(encoding="utf-8").splitlines():
+        key, separator, value = line.partition("=")
+        if separator:
+            settings[key.strip().lower()] = value.strip().lower()
+    return settings.get("include-system-site-packages") == "false"
+
+
 def _declared_hash_matches(path: Path, declared: str) -> bool | None:
     """RECORD digest check; None when the declared algorithm is unknown here."""
     algorithm, _, encoded = declared.partition("=")
@@ -119,8 +152,9 @@ def build_plan(target: Path, source_profile: dict[str, Any], probe: dict[str, An
                source_config_sha256: str | None = None,
                source_config_path: str | None = None) -> dict[str, Any]:
     """Freeze the projection plan from a describe-probe result. Read-only."""
-    target = Path(target)
+    target = Path(os.path.abspath(target))
     require_ascii(target)
+    _require_real_paths([target])
     if source_profile.get("schema_version") != SUPPORTED_SOURCE_SCHEMA:
         raise DeploymentError(f"source config must be {SUPPORTED_SOURCE_SCHEMA}")
     if source_profile.get("environment_algorithm") != probe["closure"].get("environment_algorithm"):
@@ -266,6 +300,18 @@ def load_plan(plan: dict[str, Any]) -> dict[str, Any]:
         raise DeploymentError(f"plan schema must be {PLAN_SCHEMA}")
     if plan.get("plan_sha256") != plan_digest(plan):
         raise DeploymentError("plan integrity digest mismatch")
+    if plan.get("blocking_errors"):
+        raise DeploymentError("plan contains blocking errors; fix the source and rebuild the plan")
+    if plan.get("tool") != tool_identity():
+        raise DeploymentError("plan tool revision differs from this implementation; rebuild the plan")
+    target = Path(plan["target"])
+    if not target.is_absolute():
+        raise DeploymentError("plan target must be absolute")
+    expected_config = target / CONFIG_NAME
+    if (plan["output_config"].get("config_name") != CONFIG_NAME or
+            os.path.normcase(os.path.abspath(plan["output_config"]["path"])) !=
+            os.path.normcase(os.path.abspath(expected_config))):
+        raise DeploymentError("plan output config must be the owned target config")
     for row in (*plan["env_rows"], *plan["artifact_rows"]):
         if not _safe_relative(row["target"]):
             raise DeploymentError(f"unsafe plan row target: {row['target']!s}")
@@ -316,6 +362,7 @@ def receipt_stub(plan: dict[str, Any], status: str) -> dict[str, Any]:
 def write_receipt(target: Path, receipt: dict[str, Any]) -> None:
     """Atomic-enough marker write inside the owned tree only."""
     destination = target / RECEIPT_NAME
+    _require_real_paths([target, destination])
     handle = tempfile.NamedTemporaryFile("w", encoding="utf-8", dir=target,
                                          prefix="receipt-", suffix=".tmp", delete=False)
     try:
@@ -391,6 +438,11 @@ def _scaffold_bytes(env_path: Path, plan: dict[str, Any]) -> int:
                and path.as_posix().lower()[len(prefix):] not in planned)
 
 
+
+def _scaffold_identity(target: Path) -> dict[str, str]:
+    return {relative: _sha256_file(target / relative) for relative in SCAFFOLD_FILES}
+
+
 def _expected_config_bytes(plan: dict[str, Any], python: str) -> bytes:
     emitted = {**plan["source_profile"], "python": python,
                "artifacts": str(Path(plan["target"]) / ARTIFACTS_DIRNAME)}
@@ -438,6 +490,11 @@ def deploy(plan: dict[str, Any], *, host_python: str,
     link = link or _default_link
     target = Path(plan["target"])
     require_ascii(target)
+    _require_real_paths([target, target / RECEIPT_NAME, target / CONFIG_NAME,
+                         target / ENV_DIRNAME / "Scripts" / "python.exe",
+                         target / ENV_DIRNAME / "pyvenv.cfg",
+                         *(target.joinpath(*_rel_posix(row["target"]).parts)
+                           for row in (*plan["env_rows"], *plan["artifact_rows"]))])
     started = time.monotonic()
     classification = classify_target(target, plan["plan_sha256"])
     if classification == "FOREIGN":
@@ -447,12 +504,31 @@ def deploy(plan: dict[str, Any], *, host_python: str,
     if classification == "ABSENT":
         target.mkdir(parents=True)
         classification = "EMPTY"
+    scaffold_binding: dict[str, str] | None = None
+    if classification in {"OWNED_COMPLETE", "OWNED_INCOMPLETE"}:
+        previous = _read_receipt(target) or {}
+        recorded = previous.get("scaffold_sha256")
+        if recorded is None:
+            if classification == "OWNED_COMPLETE" or all(
+                    (target / relative).is_file() for relative in SCAFFOLD_FILES):
+                raise DeploymentError("owned deployment lacks scaffold byte binding; "
+                                      "verify its scaffold or use a new owned target")
+        elif (not isinstance(recorded, dict) or set(recorded) != set(SCAFFOLD_FILES)
+              or not all(isinstance(value, str) and re.fullmatch(r"[0-9a-f]{64}", value)
+                         for value in recorded.values())):
+            raise DeploymentError("invalid scaffold byte binding in deployment receipt")
+        else:
+            scaffold_binding = recorded
+            for relative, digest in recorded.items():
+                path = target / relative
+                if path.exists() and _sha256_file(path) != digest:
+                    raise TargetConflict("owned scaffold bytes changed: interpreter or system site configuration")
     counters = {"made": 0, "reused": 0}
     receipt: dict[str, Any]
     try:
         if classification == "OWNED_COMPLETE" and _reconcile_fully_consistent(plan):
             receipt = {**receipt_stub(plan, "REUSED"),
-                       "created_links": 0,
+                       "created_links": 0, "scaffold_sha256": scaffold_binding,
                        "reused_links": len(plan["env_rows"]) + len(plan["artifact_rows"]),
                        "sdk_bytes_copied": 0, "model_bytes_copied": 0,
                        "seconds": round(time.monotonic() - started, 3)}
@@ -468,9 +544,12 @@ def deploy(plan: dict[str, Any], *, host_python: str,
             except BaseException as failure:
                 raise DeploymentError(f"venv creation failed: {failure}") from failure
             venv_created = True
-        pyvenv = (env_path / "pyvenv.cfg").read_text(encoding="utf-8")
-        if "include-system-site-packages = false" not in pyvenv:
+        if not _venv_is_isolated(env_path / "pyvenv.cfg"):
             raise DeploymentError("deployed venv must not include system site-packages")
+        observed_scaffold = _scaffold_identity(target)
+        if scaffold_binding is not None and observed_scaffold != scaffold_binding:
+            raise TargetConflict("recovered scaffold bytes differ from the recorded binding")
+        scaffold_binding = observed_scaffold
         scaffold = _scaffold_bytes(env_path, plan)
         _reconcile(plan, link=link, created=counters)
         config_path = Path(plan["output_config"]["path"])
@@ -479,7 +558,7 @@ def deploy(plan: dict[str, Any], *, host_python: str,
             raise TargetConflict("owned config content was modified externally")
         if not config_path.exists():
             config_path.write_bytes(expected_config)
-        receipt = {**receipt_stub(plan, "COMPLETE"),
+        receipt = {**receipt_stub(plan, "COMPLETE"), "scaffold_sha256": scaffold_binding,
                    "created_links": counters["made"], "reused_links": counters["reused"],
                    "venv_created": venv_created,
                    "new_scaffold_file_bytes": scaffold,
@@ -492,7 +571,7 @@ def deploy(plan: dict[str, Any], *, host_python: str,
                        "site_hooks": len(plan["diagnostics"]["site_hooks"])},
                    "seconds": round(time.monotonic() - started, 3)}
     except BaseException as failure:
-        failure_receipt = {**receipt_stub(plan, "INCOMPLETE"),
+        failure_receipt = {**receipt_stub(plan, "INCOMPLETE"), "scaffold_sha256": scaffold_binding,
                            "error_type": type(failure).__name__, "error": str(failure)[:2000],
                            "created_links": counters["made"], "reused_links": counters["reused"],
                            "seconds": round(time.monotonic() - started, 3)}
@@ -514,13 +593,16 @@ def _reconcile_fully_consistent(plan: dict[str, Any]) -> bool:
     tamper).
     """
     target = Path(plan["target"])
+    python_exe = target / ENV_DIRNAME / "Scripts" / "python.exe"
+    pyvenv = target / ENV_DIRNAME / "pyvenv.cfg"
+    if not python_exe.is_file() or not pyvenv.is_file() or not _venv_is_isolated(pyvenv):
+        return False
     for row in (*plan["env_rows"], *plan["artifact_rows"]):
         destination = target.joinpath(*_rel_posix(row["target"]).parts)
         if (not destination.is_file() or _sha256_file(destination) != row["sha256"]
                 or not os.path.samefile(row["source"], destination)):
             return False
     config_path = Path(plan["output_config"]["path"])
-    python_exe = target / ENV_DIRNAME / "Scripts" / "python.exe"
     if not config_path.is_file() or config_path.read_bytes() != _expected_config_bytes(plan, str(python_exe)):
         return False
     return True

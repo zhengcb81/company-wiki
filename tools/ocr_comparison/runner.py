@@ -36,7 +36,7 @@ def run_pages(page_ids, backend_fn, *, max_retries: int = 0, retry_on: tuple = (
             "engine_seconds": result.get("engine_seconds", wall),
             "wall_seconds": wall,
             "retries": attempts - 1,
-            "inference_runs": attempts,
+            "inference_runs": 0 if result.get("cache_hit") else attempts,
         }
         # Card-required accounting must survive into the delivery: repetition
         # flags, recovery/drop counts, cache provenance and preflight

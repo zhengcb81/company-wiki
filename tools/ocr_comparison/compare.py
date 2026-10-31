@@ -9,12 +9,10 @@ zero-cost successes.
 
 from __future__ import annotations
 
-from pathlib import Path
 
 from .backends.base import sha256_text
 from .metrics import (
     cer_strict_ops,
-    char_error_rate,
     extract_numbers,
     narrow_normalize,
     number_prf,
@@ -59,7 +57,6 @@ def evaluate_page(gold_text: str, record: dict, *, english: bool) -> dict:
 
     def digits(s):
         return _re.sub(r"[^0-9]", "", s)
-    gold_digits = digits(gold_text)
     hyp_digits = digits(hyp)
     gold_nums = {n["value"].replace(",", "") for n in extract_numbers(gold_text)}
     hit = sum(1 for v in gold_nums if digits(v) and digits(v) in hyp_digits)
@@ -70,6 +67,7 @@ def evaluate_page(gold_text: str, record: dict, *, english: bool) -> dict:
     }
     result["hyp_chars"] = len(hyp)
     result["gold_chars"] = gold_len
+    result["gold_chars_narrow"] = len(gold_n)
     result["repetition_flagged"] = bool(record.get("repetition", {}).get("suspicious"))
     return result
 
@@ -85,6 +83,7 @@ def aggregate(per_page: list[dict]) -> dict:
         sum(p["cer_narrow"] for p in scored) / len(scored) if scored else None
     )
     gold_total = sum(p["gold_chars"] for p in scored)
+    narrow_gold_total = sum(p["gold_chars_narrow"] for p in scored)
     strict_dist_total = sum(
         p["cer_strict_ops"]["insertions"]
         + p["cer_strict_ops"]["deletions"]
@@ -113,7 +112,7 @@ def aggregate(per_page: list[dict]) -> dict:
         "macro_cer_strict": macro_cer_strict,
         "macro_cer_narrow": macro_cer_narrow,
         "micro_cer_strict": strict_dist_total / gold_total if gold_total else None,
-        "micro_cer_narrow": narrow_dist_total / gold_total if gold_total else None,
+        "micro_cer_narrow": narrow_dist_total / narrow_gold_total if narrow_gold_total else None,
         "macro_wer": sum(wer_scores) / len(wer_scores) if wer_scores else None,
         "number_recall": recall_hits / gold_nums if gold_nums else None,
         "number_precision": precision_hits / hyp_nums if hyp_nums else None,
@@ -129,7 +128,23 @@ def evaluate_split(gold: dict, records: list[dict], manifest: dict, *, arm: str)
         doc_id for doc_id, spec in manifest["documents"].items()
         if spec["language"] == "en"
     }
-    by_page = {r["page_id"]: r for r in records}
+    expected = {p["page_id"]: p for p in manifest["pages"]}
+    by_page = {}
+    for record in records:
+        pid = record["page_id"]
+        if pid in by_page or pid not in expected:
+            raise ValueError(f"duplicate or unknown page record: {pid}")
+        identity = record.get("page_identity")
+        if identity is not None:
+            page = expected[pid]
+            doc = manifest["documents"][page["doc"]]
+            checks = {"page_image_sha256": page["png_sha256"],
+                      "content_sha256": doc["content_sha256"],
+                      "pdf_page_index": page["pdf_page_index"],
+                      "source_id": doc["source_id"]}
+            if any(identity.get(k) != value for k, value in checks.items()):
+                raise ValueError(f"page identity mismatch: {pid}")
+        by_page[pid] = record
     out: dict = {"arm": arm}
     for split in ("eval", "holdout"):
         per_page = []

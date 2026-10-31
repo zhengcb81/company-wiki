@@ -17,7 +17,7 @@ REPO = Path(__file__).resolve().parents[2]
 if str(REPO) not in sys.path:
     sys.path.insert(0, str(REPO))
 
-from tools.ocr_comparison.metrics import (
+from tools.ocr_comparison.metrics import (  # noqa: E402 - explicit repository bootstrap
     cer_strict,
     cer_strict_ops,
     char_error_rate,
@@ -29,8 +29,18 @@ from tools.ocr_comparison.metrics import (
 
 
 def test_no_heavy_imports_at_unit_level():
-    heavy = [name for name in sys.modules if name.split(".")[0] in {"torch", "transformers", "rapidocr", "onnxruntime"}]
-    assert heavy == []
+    # Test this module's import boundary in a new interpreter; unrelated
+    # pytest collection may already have imported optional backends.
+    import subprocess
+    probe = (
+        "import sys; before=set(sys.modules); "
+        "import tools.ocr_comparison.metrics; "
+        "added=set(sys.modules)-before; "
+        "assert not {n.split('.')[0] for n in added} & "
+        "{'torch','transformers','rapidocr','onnxruntime'}"
+    )
+    subprocess.run([sys.executable, "-c", probe], cwd=REPO, check=True,
+                   capture_output=True, text=True, timeout=30)
 
 
 def test_cer_strict_known_example():
@@ -421,13 +431,13 @@ def test_safetensors_read_only_mapping_roundtrip(tmp_path):
     """Header parse + read-only mapped storage return byte-identical tensors."""
     import sys
 
-    import torch
-    from safetensors.torch import save_file
+    torch = pytest.importorskip("torch", reason="optional mapped backend")
+    save_file = pytest.importorskip("safetensors.torch", reason="optional mapped backend").save_file
 
     if str(REPO) not in sys.path:
         sys.path.insert(0, str(REPO))
     from tools.ocr_comparison.mmap_loader import (
-        _DTYPES, _read_only_mapped_storage, parse_safetensors_header,
+        _read_only_mapped_storage, parse_safetensors_header,
     )
 
     small = torch.arange(0, 16, dtype=torch.bfloat16).view(4, 4)

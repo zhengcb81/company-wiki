@@ -10,12 +10,15 @@ all document identity comes from the frozen sample manifest.
 from __future__ import annotations
 
 import hashlib
-import json
 import platform
 import subprocess
 import sys
-from datetime import UTC, datetime
+from datetime import datetime, timezone
+
 from pathlib import Path
+
+UTC = timezone.utc
+
 
 CODE_FILES = [
     "tools/ocr_comparison/__init__.py",
@@ -47,7 +50,10 @@ def code_identity(repo: Path) -> dict:
     except (OSError, subprocess.SubprocessError):
         commit, dirty = None, ""
     file_shas = {}
-    for rel in CODE_FILES:
+    # Include the entire executable tool closure, including X1 child/loading,
+    # job enforcement and the vendored postprocessor.
+    for rel in sorted(str(p.relative_to(repo)).replace("\\", "/")
+                      for p in (repo / "tools/ocr_comparison").rglob("*.py")):
         data = (repo / rel).read_bytes()
         file_shas[rel] = hashlib.sha256(data).hexdigest()
     return {

@@ -1,63 +1,90 @@
-"""One-off converter: bf16 checkpoint -> fp32 safetensors copy (exact upcast).
+"""Explicit, bounded-memory BF16 -> F32 checkpoint conversion.
 
-bf16 is a truncated fp32, so the upcast is exact — the fp32 file carries the
-same numbers, no quantization.  The output is written once next to the HF
-snapshot as a declared experiment asset; the comparator loads it with the same
-read-only file mapping (mapped pages, no private commit).  Streaming
-tensor-by-tensor so peak private memory stays at the largest single tensor.
+The caller must choose both paths; no cache/snapshot is implicitly modified.
+Conversion widens stored values exactly. It does not establish compute parity.
 """
 from __future__ import annotations
-
+import argparse
 import hashlib
 import json
-import sys
+import os
+import struct
+import tempfile
 from pathlib import Path
 
-import torch
-from safetensors.torch import save_file
 
-sys.path.insert(0, str(Path(__file__).resolve().parents[2]))
-from tools.ocr_comparison.mmap_loader import parse_safetensors_header  # noqa: E402
-
-SNAP = (Path(__file__).resolve().parents[2] / ".w23_cache" / "hub"
-        / "models--xiaomi-research--Xiaomi-OCR-0" / "snapshots"
-        / "bbd8cf8d21f256b3644b44cb860f3a7cecb93c30")
-SRC = SNAP / "model.safetensors"
-DST = SNAP / "model.fp32.safetensors"
+def _sha(path: Path) -> str:
+    h = hashlib.sha256()
+    with path.open("rb") as source:
+        for chunk in iter(lambda: source.read(1024 * 1024), b""):
+            h.update(chunk)
+    return h.hexdigest()
 
 
-def main() -> None:
-    if DST.exists():
-        print("exists", DST, DST.stat().st_size)
-        return
-    tensors, _ = parse_safetensors_header(SRC)
-    storage = torch.from_file(str(SRC), shared=False, size=SRC.stat().st_size, dtype=torch.uint8)
-    out: dict[str, torch.Tensor] = {}
-    n = 0
-    for name, (dt, shape, start, end) in tensors.items():
-        view = storage[start:end].view(torch.bfloat16).view(shape)
-        out[name] = view.to(torch.float32)  # exact upcast, new private tensor
-        n += 1
-        if n % 100 == 0:
-            print("converted", n, flush=True)
-    save_file(out, str(DST), metadata={"source": "model.safetensors bf16 exact upcast"})
-    # spot-verify exactness against the source mapping
-    check = {"model.language_model.embed_tokens.weight",
-             "model.visual.blocks.0.mlp.fc1.weight"}
-    for name in check & set(tensors):
-        dt, shape, start, end = tensors[name]
-        bf = storage[start:end].view(torch.bfloat16).view(shape)
-        f32 = out[name]
-        assert torch.equal(bf.to(torch.float32), f32), name
-    digest = hashlib.sha256()
-    with open(DST, "rb") as fh:
-        for chunk in iter(lambda: fh.read(1 << 20), b""):
-            digest.update(chunk)
-    print(json.dumps({
-        "written": str(DST), "bytes": DST.stat().st_size,
-        "sha256": digest.hexdigest(), "n_tensors": len(out),
-    }))
+def convert_checkpoint(source: Path, output: Path) -> dict:
+    source, output = Path(source).resolve(), Path(output).resolve()
+    if source == output or output.exists():
+        raise FileExistsError("output must be a new, explicitly selected file")
+    source_sha = _sha(source)
+    with source.open("rb") as inp:
+        length = struct.unpack("<Q", inp.read(8))[0]
+        header = json.loads(inp.read(length))
+        base = 8 + length
+        converted = {"__metadata__": {"conversion": "BF16 exact value widening to F32",
+                                      "source_sha256": source_sha}}
+        offset = 0
+        for key, spec in header.items():
+            if key == "__metadata__":
+                continue
+            if spec["dtype"] != "BF16":
+                raise ValueError(f"expected BF16 tensor: {key}")
+            start, end = spec["data_offsets"]
+            if start < 0 or end < start or (end - start) % 2 or base + end > source.stat().st_size:
+                raise ValueError(f"invalid tensor extent: {key}")
+            size = 2 * (end - start)
+            converted[key] = {"dtype": "F32", "shape": spec["shape"],
+                              "data_offsets": [offset, offset + size]}
+            offset += size
+        encoded = json.dumps(converted, separators=(",", ":")).encode("utf-8")
+        encoded += b" " * (-len(encoded) % 8)
+        fd, name = tempfile.mkstemp(prefix="w23-fp32-", suffix=".tmp", dir=output.parent)
+        temporary = Path(name)
+        try:
+            with os.fdopen(fd, "wb") as out:
+                out.write(struct.pack("<Q", len(encoded)))
+                out.write(encoded)
+                for key, spec in header.items():
+                    if key == "__metadata__":
+                        continue
+                    start, end = spec["data_offsets"]
+                    inp.seek(base + start)
+                    remaining = end - start
+                    while remaining:
+                        raw = inp.read(min(remaining, 1024 * 1024))
+                        if not raw:
+                            raise ValueError("truncated checkpoint")
+                        widened = bytearray(len(raw) * 2)
+                        widened[2::4], widened[3::4] = raw[::2], raw[1::2]
+                        out.write(widened)
+                        remaining -= len(raw)
+                out.flush()
+                os.fsync(out.fileno())
+            # Hard-link publication is atomic and refuses a concurrent output.
+            os.link(temporary, output)
+        finally:
+            temporary.unlink(missing_ok=True)
+    return {"source_sha256": source_sha, "output_sha256": _sha(output),
+            "bytes": output.stat().st_size, "tensors": len(converted) - 1}
+
+
+def main(argv=None) -> int:
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--source", required=True, type=Path)
+    parser.add_argument("--output", required=True, type=Path)
+    args = parser.parse_args(argv)
+    print(json.dumps(convert_checkpoint(args.source, args.output)))
+    return 0
 
 
 if __name__ == "__main__":
-    main()
+    raise SystemExit(main())

@@ -75,12 +75,32 @@ class XiaomiX1:
         if weights_mode not in ("copy", "mapped", "mapped-f32"):
             raise ValueError("weights_mode must be 'copy', 'mapped' or 'mapped-f32'")
         self.weights_mode = weights_mode
+        # Identity describes the loaded artifact, not the caller's dtype hint.
+        from ..manifest import runtime_identity, sha256_file
+        model_path = Path(self.model_dir)
+        weight_name = "model.fp32.safetensors" if weights_mode == "mapped-f32" else "model.safetensors"
+        artifacts = {}
+        identity_files = {weight_name, "config.json", "processor_config.json",
+                          "preprocessor_config.json", "tokenizer_config.json", "tokenizer.json",
+                          "special_tokens_map.json", "added_tokens.json", "generation_config.json",
+                          "chat_template.jinja", "vocab.json", "merges.txt", "tokenizer.model"}
+        for path in sorted(model_path.iterdir()) if model_path.is_dir() else []:
+            if path.is_file() and path.name in identity_files:
+                artifacts[path.name] = sha256_file(path)
         self.identity_manifest = {
             "arm": self.arm,
             "backend": "xiaomi-ocr-0-transformers-cpu",
             "upstream_commit": UPSTREAM_COMMIT,
             "model_revision": MODEL_REVISION,
-            "precision": f"checkpoint-native-{dtype}-cpu",
+            "precision": "float32-cpu" if weights_mode == "mapped-f32" else f"{dtype}-cpu",
+            "checkpoint_precision": "bfloat16",
+            "weights_mode": weights_mode,
+            "artifact_sha256": artifacts,
+            "runtime": runtime_identity(),
+            "implementation_sha256": {
+                str(path.relative_to(_UPSTREAM_ROOT.parent)).replace("\\", "/"): sha256_file(path)
+                for path in sorted(_UPSTREAM_ROOT.parent.rglob("*.py"))
+            },
             "prompt_sha256": sha256_text(PROMPT_DOCUMENT),
             "preprocess": (
                 f"upstream fit_image thumbnail to {MAX_IMAGE_EDGE}px longest edge, "

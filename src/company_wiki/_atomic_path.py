@@ -32,7 +32,9 @@ def _extended_form(absolute: str) -> str:
 
 
 def _needs_extension(absolute: str, required: int) -> bool:
-    return os.name == "nt" and len(absolute) + required > NATIVE_PATH_LIMIT
+    # Win32 counts UTF-16 code units; non-BMP characters occupy two units.
+    units = len(absolute.encode("utf-16-le", errors="surrogatepass")) // 2
+    return os.name == "nt" and units + required > NATIVE_PATH_LIMIT
 
 
 def openable(path: Path | str) -> str:
@@ -46,11 +48,14 @@ def openable(path: Path | str) -> str:
     returned unchanged, so the function is idempotent.
     """
     given = os.fspath(path)
-    if os.name != "nt" or len(given) <= NATIVE_PATH_LIMIT:
+    if os.name != "nt":
         return given
     if given.startswith("\\\\?\\"):
         return given
-    return _extended_form(os.path.abspath(given))
+    absolute = os.path.abspath(given)
+    if not _needs_extension(absolute, 0):
+        return given
+    return _extended_form(absolute)
 
 
 def stage_dir(parent: Path | str) -> str:
@@ -68,7 +73,7 @@ def stage_dir(parent: Path | str) -> str:
         return given
     if given.startswith("\\\\?\\"):
         return given
-    absolute = given if os.path.isabs(given) else os.path.abspath(given)
+    absolute = os.path.abspath(given)
     if not _needs_extension(absolute, STAGE_NAME_RESERVE):
         return given
     return _extended_form(absolute)

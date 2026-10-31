@@ -126,7 +126,14 @@ def test_ci_domain_stays_light():
     be imported by the safetensors read-only-mapping roundtrip test (a library
     import, not a model); transformers/rapidocr/onnxruntime/pypdfium2 must stay
     absent in this domain."""
+    import subprocess
     import sys
-
-    heavy = [name for name in sys.modules if name.split(".")[0] in {"transformers", "rapidocr", "onnxruntime", "pypdfium2"}]
-    assert heavy == []
+    probe = (
+        "import sys; before=set(sys.modules); "
+        "import tools.ocr_comparison.compare, tools.ocr_comparison.cache; "
+        "added=set(sys.modules)-before; "
+        "assert not {n.split('.')[0] for n in added} & "
+        "{'torch','transformers','rapidocr','onnxruntime','pypdfium2'}"
+    )
+    subprocess.run([sys.executable, "-c", probe], cwd=REPO, check=True,
+                   capture_output=True, text=True, timeout=30)

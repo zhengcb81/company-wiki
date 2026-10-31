@@ -58,3 +58,22 @@ are kept under `--out`'s directory.
 
 X2 is only scored when actually run; the report labels it NOT_RUN with the
 resource reason, per the W23 task card.
+
+## ROOT reception corrections (2026-10-31)
+
+Historical receipts remain exploratory PARTIAL evidence: some requests used
+600 seconds, the cumulative trial exceeded 30 minutes, and a declared holdout
+was used as a pilot. These cannot be repaired by changing code or relabeling
+old outputs. Exact stored BF16-to-F32 values do not prove compute parity.
+
+The common CLI now delegates X1 to the isolated runner, enforces request <=180
+seconds and batch <=1800 seconds, records actual artifact/runtime/code identity,
+and accepts `--x1-weights-mode mapped-f32` only as an explicit variant.
+Use `--cache-dir <owned-experiment-directory>` to persist checksummed per-page
+results across restarts. A hit preserves measured latency and performs zero
+inference; corrupt entries are misses. `--no-cache` explicitly re-executes.
+The caller must account for cumulative time across separate invocations.
+
+Checkpoint conversion is explicit and streaming:
+`python -m tools.ocr_comparison.make_fp32_copy --source <bf16-file> --output <new-fp32-file>`.
+It never selects or overwrites a model snapshot implicitly.

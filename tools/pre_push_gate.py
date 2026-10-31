@@ -60,6 +60,11 @@ DAILY_PUSH_TIMEOUT_SECONDS = 180
 DAILY_PUSH_LABEL_PREFIX = "daily push fast feedback:"
 STDOUT_CAP_BYTES = 4 * 1024 * 1024
 STDERR_CAP_BYTES = 512 * 1024
+# Same existing Windows basetemp boundary as root conftest.py: 60 units.
+# This affects scratch placement only, not test selection or gate timeouts.
+PYTEST_SCRATCH_MAX_UNITS = 60
+# Separator + "cwpp-" + tempfile's eight-character random suffix.
+PYTEST_SCRATCH_NAME_RESERVE = 14
 GIT_REPOSITORY_CONTEXT = (
     "GIT_DIR", "GIT_WORK_TREE", "GIT_COMMON_DIR", "GIT_INDEX_FILE",
     "GIT_OBJECT_DIRECTORY", "GIT_ALTERNATE_OBJECT_DIRECTORIES", "GIT_PREFIX",
@@ -204,7 +209,17 @@ def _scratch_candidate_roots() -> list[str]:
     if not candidates:
         candidates.append(tempfile.gettempdir())
     candidates.append(str(PROJECT_ROOT))
-    return sorted(dict.fromkeys(candidates), key=lambda root: (len(root), root))
+    # Relative environment hints must compete on their real path length and
+    # remain valid when the child switches to PROJECT_ROOT (also on 3.10,
+    # where mkdtemp may preserve a relative dir argument).
+    candidates = [os.path.abspath(root) for root in candidates]
+    return sorted(dict.fromkeys(candidates), key=lambda root: (_scratch_path_units(root), root))
+
+
+def _scratch_path_units(path: str) -> int:
+    if os.name == "nt":
+        return len(path.encode("utf-16-le", errors="surrogatepass")) // 2
+    return len(path)
 
 
 def _probe_writable(root: str) -> OSError | None:
@@ -238,6 +253,14 @@ def _open_scratch(candidates: list[str]) -> tempfile.TemporaryDirectory:
     """
     attempts: list[str] = []
     for root in candidates:
+        root = os.path.abspath(root)
+        required = _scratch_path_units(root) + PYTEST_SCRATCH_NAME_RESERVE
+        if os.name == "nt" and required > PYTEST_SCRATCH_MAX_UNITS:
+            attempts.append(
+                f"{root}: candidate path too deep (root plus scratch reserve "
+                f"{PYTEST_SCRATCH_NAME_RESERVE} requires {required} UTF-16 units; "
+                f"budget {PYTEST_SCRATCH_MAX_UNITS})")
+            continue
         failure = _probe_writable(root)
         if failure is not None:
             attempts.append(f"{root}: candidate not writable ({failure})")
@@ -246,6 +269,13 @@ def _open_scratch(candidates: list[str]) -> tempfile.TemporaryDirectory:
             scratch = tempfile.TemporaryDirectory(prefix="cwpp-", dir=root)
         except OSError as exc:
             attempts.append(f"{root}: cannot create scratch ({exc})")
+            continue
+        actual_units = _scratch_path_units(os.path.abspath(scratch.name))
+        if os.name == "nt" and actual_units > PYTEST_SCRATCH_MAX_UNITS:
+            scratch.cleanup()
+            attempts.append(
+                f"{root}: created scratch path too deep ({actual_units} UTF-16 "
+                f"units; budget {PYTEST_SCRATCH_MAX_UNITS})")
             continue
         try:
             probe = Path(scratch.name) / "write-probe"
@@ -258,7 +288,7 @@ def _open_scratch(candidates: list[str]) -> tempfile.TemporaryDirectory:
             continue
         return scratch
     raise RuntimeError(
-        "no writable scratch root for the pytest gate; tried:\n  "
+        "no writable scratch root within the pytest path budget; tried:\n  "
         + "\n  ".join(attempts))
 
 

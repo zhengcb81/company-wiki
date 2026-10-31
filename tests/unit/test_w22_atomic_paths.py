@@ -92,7 +92,8 @@ def test_deep_directory_beyond_native_limit_writes_atomically(tmp_path):
         stream.write(b"deep body")
     # A native plain read of this path may be impossible on Windows; the
     # extended-length form is the same file and proves the write landed.
-    assert Path(_extended(str(target))).read_bytes() == b"deep body"
+    readable = Path(_extended(str(target))) if os.name == "nt" else target
+    assert readable.read_bytes() == b"deep body"
 
 
 def test_relative_target_keeps_plain_representation(tmp_path, monkeypatch):

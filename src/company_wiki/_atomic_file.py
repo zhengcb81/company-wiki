@@ -80,9 +80,13 @@ def atomic_output(
             except OSError as cleanup_error:
                 if original is None:
                     raise
-                original.add_note(
-                    f"atomic stage cleanup failed "
-                    f"({type(cleanup_error).__name__}: {cleanup_error})")
+                # Python 3.10 lacks BaseException.add_note. Diagnostics must
+                # never replace the original error on a supported runtime.
+                add_note = getattr(original, "add_note", None)
+                if add_note is not None:
+                    add_note(
+                        f"atomic stage cleanup failed "
+                        f"({type(cleanup_error).__name__}: {cleanup_error})")
 
 
 __all__ = ["atomic_output"]

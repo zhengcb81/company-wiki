@@ -21,10 +21,14 @@ import subprocess
 import sys
 import tempfile
 import time
-from datetime import UTC, datetime
+from datetime import datetime, timezone
+
 from pathlib import Path
 
 from .job_limit import GIB, JobMemoryLimit, card_memory_cap_bytes, host_memory_snapshot
+
+UTC = timezone.utc
+
 
 REPO = Path(__file__).resolve().parents[2]
 PLAN = REPO / "docs" / "plans" / "w23-xiaomi-ocr-2026-10-30"
@@ -42,6 +46,27 @@ def _model_dir(explicit: str | None) -> Path:
     return path
 
 
+def validate_card_limits(deadline: float, total_budget: float) -> None:
+    import math
+    if not math.isfinite(deadline) or not 0 < deadline <= 180:
+        raise ValueError("card request deadline must be in (0, 180] seconds")
+    if not math.isfinite(total_budget) or not 0 < total_budget <= 1800:
+        raise ValueError("card total inference budget must be in (0, 1800] seconds")
+
+
+def _progress(path: Path) -> list[dict]:
+    if not path.exists():
+        return []
+    objects = []
+    for line in path.read_text(encoding="utf-8").splitlines():
+        try:
+            objects.append(json.loads(line))
+        except json.JSONDecodeError:
+            # The child may still be writing its final line.
+            continue
+    return objects
+
+
 def run_x1_batch(
     pages: list[dict],
     *,
@@ -53,17 +78,22 @@ def run_x1_batch(
     cap_bytes: int | None = None,
     model_dir: str | None = None,
     workdir: str | Path | None = None,
+    backend_identity: dict | None = None,
 ) -> dict:
     from .backends.xiaomi_x1 import XiaomiX1
 
+    validate_card_limits(deadline, total_budget)
     model = _model_dir(model_dir)
-    identity = XiaomiX1(
+    identity = backend_identity or XiaomiX1(
         model_dir=str(model), deadline_seconds=deadline,
         max_new_tokens=max_new_tokens, dtype=dtype, weights_mode=weights_mode,
     ).identity_manifest
 
     host_before = host_memory_snapshot()
-    cap = int(cap_bytes) if cap_bytes else card_memory_cap_bytes(host_before["avail_phys_bytes"])
+    card_cap = card_memory_cap_bytes(host_before["avail_phys_bytes"])
+    cap = int(cap_bytes) if cap_bytes is not None else card_cap
+    if cap <= 0 or cap > card_cap:
+        raise ValueError("memory cap exceeds min(8 GiB, available physical RAM / 2)")
 
     owned = None
     if workdir is None:
@@ -97,8 +127,9 @@ def run_x1_batch(
         with (work / "child_stdout.log").open("w", encoding="utf-8") as so, \
                 (work / "child_stderr.log").open("w", encoding="utf-8") as se:
             started = time.perf_counter()
+            watchdog_started = time.monotonic()
             proc = subprocess.Popen(
-                [sys.executable, "-m", "tools.ocr_comparison.x1_child", str(cfg_path)],
+                [sys.executable, "-B", "-X", "utf8", "-m", "tools.ocr_comparison.x1_child", str(cfg_path)],
                 cwd=str(REPO), stdout=so, stderr=se, env=env,
             )
             try:
@@ -107,14 +138,41 @@ def run_x1_batch(
                 proc.kill()
                 proc.wait()
                 raise
-            backstop = total_budget + deadline + 300
+            # Independent parent watchdog covers blocking load/prefill/native
+            # calls. Child-side checks alone cannot interrupt one forward.
             backstop_hit = False
-            try:
-                return_code = proc.wait(timeout=backstop)
-            except subprocess.TimeoutExpired:
-                job.terminate()
-                return_code = proc.wait()
-                backstop_hit = True
+            stopped_page = None
+            stop_reason = None
+            first_page = pages[0]["page_id"] if pages else None
+            while proc.poll() is None:
+                observed = _progress(out_jsonl)
+                completed = {o["page_id"] for o in observed if "event" not in o}
+                active = first_page
+                page_started = watchdog_started
+                for event in observed:
+                    if event.get("event") == "stage" and event.get("stage") == "page_start":
+                        active = event["page_id"]
+                        if active != first_page:
+                            page_started = event.get("monotonic_seconds", watchdog_started)
+                if active in completed:
+                    active = None
+                now = time.monotonic()
+                # perf_counter and monotonic share the same Windows clock, but
+                # use monotonic consistently for the watchdog origin.
+                if now - watchdog_started >= total_budget:
+                    stop_reason = "total_inference_budget_exhausted"
+                elif active is not None and now - page_started >= deadline:
+                    stop_reason = "request_deadline_exhausted"
+                if stop_reason:
+                    stopped_page = active
+                    job.terminate()
+                    backstop_hit = True
+                    break
+                try:
+                    proc.wait(timeout=0.05)
+                except subprocess.TimeoutExpired:
+                    pass
+            return_code = proc.wait()
         wall_seconds = time.perf_counter() - started
         peak_bytes = job.peak_process_bytes()
     finally:
@@ -134,8 +192,9 @@ def run_x1_batch(
         if page["page_id"] not in done:
             records.append({
                 "page_id": page["page_id"],
-                "status": "no_record",
-                "error": f"child_exit_code={return_code}; backstop_hit={backstop_hit}",
+                "status": "timeout" if page["page_id"] == stopped_page else (
+                    "not_run" if backstop_hit else "no_record"),
+                "error": stop_reason or f"child_exit_code={return_code}; backstop_hit={backstop_hit}",
             })
     order = {p["page_id"]: i for i, p in enumerate(pages)}
     records.sort(key=lambda r: order[r["page_id"]])
@@ -195,6 +254,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument("--model-dir", default=None)
     parser.add_argument("--tag", required=True)
     args = parser.parse_args(argv)
+    validate_card_limits(args.deadline, args.total_budget)
 
     manifest_path = PLAN / "sample_manifest.json"
     manifest = json.loads(manifest_path.read_text(encoding="utf-8"))

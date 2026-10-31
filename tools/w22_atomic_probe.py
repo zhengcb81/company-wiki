@@ -236,7 +236,10 @@ def main(argv: list[str] | None = None) -> int:
         if args.keep_scratch:
             print(f"SCRATCH_KEPT={scratch}", file=sys.stderr)
         else:
-            shutil.rmtree(scratch, ignore_errors=True)
+            # sec2 deliberately exceeds the native path limit. Traverse its
+            # owned tree through the same Windows-capable representation and
+            # surface cleanup failures instead of reporting a false success.
+            shutil.rmtree(_extended(str(scratch)) if os.name == "nt" else scratch)
     json.dump(sections, sys.stdout, indent=1, ensure_ascii=False)
     sys.stdout.write("\n")
     return 0

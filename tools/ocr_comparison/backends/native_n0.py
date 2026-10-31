@@ -8,7 +8,6 @@ against a generative VLM.
 
 from __future__ import annotations
 
-import os
 from pathlib import Path
 
 from .base import serialize_lines, sha256_text

@@ -138,20 +138,25 @@ def extract_numbers(text: str) -> list[dict]:
                 break
         value = raw[:-1] if raw.endswith("%") else raw
         unit = "%" if raw.endswith("%") else unit
-        key = raw
+        prefix = re.search(r"(US\$|HK\$|RMB|CNY|USD|HKD|\$|￥|¥|人民币|人民幣)\s*$", text[:match.start()])
+        currency = ""
+        if prefix:
+            currency = {"US$": "USD", "HK$": "HKD", "RMB": "CNY", "￥": "CNY",
+                        "¥": "CNY", "人民币": "CNY", "人民幣": "CNY"}.get(prefix[1], prefix[1])
+        key = (raw, unit, currency)
         if key in seen:
             continue
         seen.add(key)
-        found.append({"text": raw, "value": value, "unit": unit})
+        found.append({"text": raw, "value": value, "unit": unit, "currency": currency})
     return found
 
 
-def _canon_number(token: dict) -> tuple[str, str]:
+def _canon_number(token: dict) -> tuple[str, str, str]:
     # Declared narrow canon: drop group separators and OCR-introduced internal
     # whitespace from the value ("4, 281, 084" == "4,281,084"); percent sign
     # and unit stay part of the identity.
     text = re.sub(r"[, \t]", "", token["value"])
-    return text, token["unit"]
+    return text, token["unit"], token.get("currency", "")
 
 
 def number_prf(gold_numbers: list[dict], hyp_numbers: list[dict]) -> dict:

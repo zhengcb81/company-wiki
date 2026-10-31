@@ -15,6 +15,13 @@ import pytest
 from tools import pre_push_gate as gate
 
 
+@pytest.fixture
+def tmp_path(tmp_path_factory):
+    # Keep the gate's own real-child fixtures inside its existing Windows
+    # 60-unit scratch budget; descriptive pytest node names are too long.
+    return tmp_path_factory.mktemp("g")
+
+
 def test_candidate_roots_are_deduped_length_ordered_and_explainable(
         tmp_path, monkeypatch):
     env_temp = tmp_path / "env-temp"
@@ -40,7 +47,7 @@ def test_without_temp_env_the_standard_tempdir_is_a_candidate(
 
 
 def test_unwritable_candidate_falls_back_and_records_the_attempt(tmp_path):
-    broken = tmp_path / "missing-parent" / "cwpp-candidate"
+    broken = tmp_path / "a" / "x"
     good = tmp_path / "good"
     good.mkdir()
     scratch = gate._open_scratch([str(broken), str(good)])
@@ -80,8 +87,8 @@ def test_write_denied_candidate_is_rejected_in_bounded_time(tmp_path, monkeypatc
 
 
 def test_all_candidates_unwritable_reports_every_attempt(tmp_path):
-    broken_a = tmp_path / "missing-a" / "cwpp-candidate"
-    broken_b = tmp_path / "missing-b" / "cwpp-candidate"
+    broken_a = tmp_path / "missing-a"
+    broken_b = tmp_path / "missing-b"
     with pytest.raises(RuntimeError) as excinfo:
         gate._open_scratch([str(broken_a), str(broken_b)])
     message = str(excinfo.value)

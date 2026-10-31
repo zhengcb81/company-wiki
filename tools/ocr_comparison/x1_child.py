@@ -40,6 +40,7 @@ def main(argv: list[str]) -> int:
                     "stage": stage,
                     "page_id": current["page_id"],
                     "t_seconds": round(time.perf_counter() - child_start, 3),
+                    "monotonic_seconds": time.monotonic(),
                     "peak_commit_self": self_peak_commit_bytes(),
                 })
             except Exception:  # noqa: BLE001 - observation must never change results
@@ -70,8 +71,11 @@ def main(argv: list[str]) -> int:
             elif spent >= cfg["total_inference_budget_seconds"]:
                 record = {"status": "not_run", "error": "total_inference_budget_exhausted"}
             else:
+                request_started = time.monotonic()
                 try:
-                    record = backend.run_page(page["png"])
+                    record = backend.run_page(
+                        page["png"], budget_seconds=min(
+                            cfg["deadline_seconds"], cfg["total_inference_budget_seconds"] - spent))
                 except MemoryError as exc:
                     record = {"status": "error", "error": f"MemoryError: {exc}",
                               "process_peak_commit_bytes_self": self_peak_commit_bytes()}
@@ -82,7 +86,10 @@ def main(argv: list[str]) -> int:
                               "process_peak_commit_bytes_self": self_peak_commit_bytes()}
                     if backend._model is None:
                         load_failed = type(exc).__name__
-                spent += float(record.get("request_seconds") or 0.0)
+                # Failed load/forward work consumes the same budget as success.
+                actual_elapsed = time.monotonic() - request_started
+                record.setdefault("request_seconds", actual_elapsed)
+                spent += actual_elapsed
             record["page_id"] = page["page_id"]
             emit(record)
         emit({"event": "child_done", "total_request_seconds": spent})
