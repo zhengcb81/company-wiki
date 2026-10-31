@@ -67,6 +67,26 @@
    "raw_sha256": "2e48e4097d52be969b5e2f6417fc9f1837f929ebc68c0e00e44a1e97af904c48",
    "lf_sha256": "2e48e4097d52be969b5e2f6417fc9f1837f929ebc68c0e00e44a1e97af904c48"
   },
+  "tools/ocr_comparison/run_x1.py": {
+   "raw_sha256": "26c1bc42adc772f8a32c92b46856028642666788cdabd29794dc9d23833e723c",
+   "lf_sha256": "3e0a22dde08790fd0deb62d9a50e4bcf462bd7292e008f6fdd21e7e09f7cc132"
+  },
+  "tools/ocr_comparison/x1_child.py": {
+   "raw_sha256": "67c5ec08a161f933e61fe3d49e7d5ed5254a05ad8171ea2e5be70d4f10d4f370",
+   "lf_sha256": "327256c583cd0bc0ca72244457aff85a8cbc2a366cff7006fcfbaa66b4348d4c"
+  },
+  "tools/ocr_comparison/job_limit.py": {
+   "raw_sha256": "408647020660a7ecf67e34c6246bbbb08ec8461abff858b1de7fa4a160f83d18",
+   "lf_sha256": "408647020660a7ecf67e34c6246bbbb08ec8461abff858b1de7fa4a160f83d18"
+  },
+  "tools/ocr_comparison/mmap_loader.py": {
+   "raw_sha256": "c8e1b421433470efd73031b8a42d153118c6a12eccc4c094ae3dbb96f6893596",
+   "lf_sha256": "9cfeaac0f502abe0573fc7de9f0fac43b95579ce931f06961585cc7587f0a357"
+  },
+  "tools/ocr_comparison/make_fp32_copy.py": {
+   "raw_sha256": "3eb860f94934ce3a9f1a8bef7d42266f45bc8314efa6e534a741409194a00777",
+   "lf_sha256": "e79bec4307bf6b2db5281e0d914a2fe8ed207557649275aa02ab47a5c2badecf"
+  },
   "tests/unit/test_w23_ocr_comparison_metrics.py": {
    "raw_sha256": "8c4572b5e3ed05e5c67b0e31acdb9af99acc68605e63cb089bb2b32b7a4b045a",
    "lf_sha256": "8c4572b5e3ed05e5c67b0e31acdb9af99acc68605e63cb089bb2b32b7a4b045a"
@@ -120,7 +140,7 @@
   {
    "req": "B X1 whole-page arm",
    "status": "implemented/tested",
-   "evidence": "executed as two declared sub-arms. X1F (exact fp32 upcast of the frozen checkpoint, read-only file mapping, upstream prompt/greedy/postprocess, manual greedy decode with explicit cache): 13/14 pages ok, all EOS, 1801.6 s request time under the 1800 s card budget, job peak 2.812 GiB under cap 3.864 GiB. Upstream-exact bf16 arm: one attempt -> timeout at the 600 s upstream request deadline with 242 correct partial tokens. Root-cause chain measured (x1_feasibility_measured.json v3): COW-mapping commit surcharge, ~3 GiB prefill logits, cache-less generate for hybrid linear attention, and a 0.5-vs-330 GFLOPS bf16-vs-fp32 GEMM pathology on this AMX-less CPU"
+   "evidence": "executed as two declared sub-arms. X1F (exact fp32 upcast of the frozen checkpoint, read-only file mapping, upstream prompt/greedy/postprocess, manual greedy decode with explicit cache): 13/14 pages ok, all EOS, 1801.6 s of request time against the 1800 s card budget (+0.09% in-flight overshoot, disclosed), job peak 2.812 GiB under cap 3.864 GiB. Upstream-exact bf16 arm: one attempt -> timeout at the 600 s upstream request deadline with 242 correct partial tokens. Root-cause chain measured (x1_feasibility_measured.json v3): COW-mapping commit surcharge, ~3 GiB prefill logits, cache-less generate for hybrid linear attention, and a 0.5-vs-330 GFLOPS bf16-vs-fp32 GEMM pathology on this AMX-less CPU"
   },
   {
    "req": "B X2 two-stage arm",
@@ -169,7 +189,7 @@
   }
  ],
  "overall_status": "PARTIAL",
- "status_reason": "R0 and N0 executed and independently verified. The Xiaomi arm executed via the declared X1F variant (exact fp32 upcast of the frozen checkpoint, read-only file mapping, manual greedy decode with an explicit cache) after the upstream-exact load path proved impossible under the card memory bound on this host: 13/14 pages ok, all EOS, inside the 30-minute card budget, job peaks 2.32-2.81 GiB under caps 3.75-3.90 GiB; the 14th page not_run (budget exhausted); the upstream-bf16 arm timed out once with correct partial text. X2 (two-stage) not_run. Real measured X1F quality exists (eval strict CER 0.086 vs R0 0.160) but it is a declared load/compute variant on one CPU - not the upstream bf16 runtime and not a leaderboard reproduction; one holdout page was never attempted.",
+ "status_reason": "R0 and N0 executed and independently verified. The Xiaomi arm executed via the declared X1F variant (exact fp32 upcast of the frozen checkpoint, read-only file mapping, manual greedy decode with an explicit cache) after the upstream-exact load path proved impossible under the card memory bound on this host: 13/14 pages ok, all EOS, 1801.6 s of request time against the 1800 s card budget (+0.09% overshoot: budget enforcement fires at dispatch, the last in-flight page was allowed to finish), job peaks 2.32-2.81 GiB under caps 3.75-3.90 GiB; the 14th page not_run (budget exhausted); the upstream-bf16 arm timed out once with correct partial text. X2 (two-stage) not_run. Real measured X1F quality exists (eval strict CER 0.086 vs R0 0.160) but it is a declared load/compute variant on one CPU - not the upstream bf16 runtime and not a leaderboard reproduction; one holdout page was never attempted.",
  "commands_and_results": [
   {
    "cmd": "python -m pytest tests/unit/test_w23_ocr_comparison_metrics.py tests/integration/test_w23_ocr_comparison_entry.py -q",

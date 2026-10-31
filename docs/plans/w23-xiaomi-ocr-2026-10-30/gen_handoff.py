@@ -35,6 +35,11 @@ CODE_FILES = [
     "tools/ocr_comparison/render_pages.py",
     "tools/ocr_comparison/run_comparison.py",
     "tools/ocr_comparison/runner.py",
+    "tools/ocr_comparison/run_x1.py",
+    "tools/ocr_comparison/x1_child.py",
+    "tools/ocr_comparison/job_limit.py",
+    "tools/ocr_comparison/mmap_loader.py",
+    "tools/ocr_comparison/make_fp32_copy.py",
 ]
 TEST_FILES = [
     "tests/unit/test_w23_ocr_comparison_metrics.py",
@@ -67,7 +72,7 @@ requirements = [
     {"req": "B R0 real production path", "status": "implemented/tested",
      "evidence": "IsolatedOCRAdapter + recover_regions ladder + production config; reviewer verified fairness"},
     {"req": "B X1 whole-page arm", "status": "implemented/tested",
-     "evidence": "executed as two declared sub-arms. X1F (exact fp32 upcast of the frozen checkpoint, read-only file mapping, upstream prompt/greedy/postprocess, manual greedy decode with explicit cache): 13/14 pages ok, all EOS, 1801.6 s request time under the 1800 s card budget, job peak 2.812 GiB under cap 3.864 GiB. Upstream-exact bf16 arm: one attempt -> timeout at the 600 s upstream request deadline with 242 correct partial tokens. Root-cause chain measured (x1_feasibility_measured.json v3): COW-mapping commit surcharge, ~3 GiB prefill logits, cache-less generate for hybrid linear attention, and a 0.5-vs-330 GFLOPS bf16-vs-fp32 GEMM pathology on this AMX-less CPU"},
+     "evidence": "executed as two declared sub-arms. X1F (exact fp32 upcast of the frozen checkpoint, read-only file mapping, upstream prompt/greedy/postprocess, manual greedy decode with explicit cache): 13/14 pages ok, all EOS, 1801.6 s of request time against the 1800 s card budget (+0.09% in-flight overshoot, disclosed), job peak 2.812 GiB under cap 3.864 GiB. Upstream-exact bf16 arm: one attempt -> timeout at the 600 s upstream request deadline with 242 correct partial tokens. Root-cause chain measured (x1_feasibility_measured.json v3): COW-mapping commit surcharge, ~3 GiB prefill logits, cache-less generate for hybrid linear attention, and a 0.5-vs-330 GFLOPS bf16-vs-fp32 GEMM pathology on this AMX-less CPU"},
     {"req": "B X2 two-stage arm", "status": "partial",
      "evidence": "declared NOT_RUN with resource reason; never merged into X1"},
     {"req": "B N0 born-digital control", "status": "implemented/tested",
@@ -111,7 +116,7 @@ handoff = {
         "R0 and N0 executed and independently verified. The Xiaomi arm executed via the declared X1F variant "
         "(exact fp32 upcast of the frozen checkpoint, read-only file mapping, manual greedy decode with an "
         "explicit cache) after the upstream-exact load path proved impossible under the card memory bound on "
-        "this host: 13/14 pages ok, all EOS, inside the 30-minute card budget, job peaks 2.32-2.81 GiB under "
+        "this host: 13/14 pages ok, all EOS, 1801.6 s of request time against the 1800 s card budget (+0.09% overshoot: budget enforcement fires at dispatch, the last in-flight page was allowed to finish), job peaks 2.32-2.81 GiB under "
         "caps 3.75-3.90 GiB; the 14th page not_run (budget exhausted); the upstream-bf16 arm timed out once "
         "with correct partial text. X2 (two-stage) not_run. Real measured X1F quality exists (eval strict CER "
         "0.086 vs R0 0.160) but it is a declared load/compute variant on one CPU - not the upstream bf16 "

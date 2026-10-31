@@ -640,3 +640,166 @@ Both round-1 OPEN items are fixed and independently verified (D2 restored +
 clobber-proof; D3 genuinely measured and reproduced to ~0.1%); noted nits
 (comparison.md §5 one-liner not refreshed, stale limitations wording) are
 non-blocking documentation polish.
+
+# Delta Re-Review: X1 execution (2026-10-31)
+
+Scope: commits `845972fc..7980261b` only — the first real execution of the
+Xiaomi X1 arm (previously declared unsupported). Everything below was verified
+by the reviewer directly (hashing both weight files, parsing safetensors
+headers, tensor-level equality, recomputing aggregates from `raw_x1.json`
+against `gold.json`, re-running the test suites); author claims were not taken
+on trust. Environment: `PYTHONUTF8=1`, `C:/Miniconda/python.exe`,
+`sys.path.insert(0,'.')` from the worktree root.
+
+### X1. Exact-upcast honesty (fp32 widening is lossless) — [OK]
+
+- Both files exist under `.w23_cache/hub/models--xiaomi-research--Xiaomi-OCR-0/
+  snapshots/bbd8cf8d21f256b3644b44cb860f3a7cecb93c30/` at exactly the claimed
+  sizes: `model.safetensors` 1,746,937,856 B, `model.fp32.safetensors`
+  3,493,815,312 B.
+- Reviewer-recomputed SHA-256: bf16
+  `d4551e9f6127ac9e35cff7b4f7a72a90410e03e6c8676a36f0e2b7eaeb5d5348` (matches
+  the recorded frozen-checkpoint hash); fp32
+  `ddd3b66173fe4dad520a10d23b3ce287bac84691b28e7cd6c261d15c09dcc71f` (matches
+  `x1_feasibility_measured.json` v3, `handoff.json` `cleanup_and_assets`, and
+  comparison.md).
+- Headers parsed with `tools.ocr_comparison.mmap_loader.parse_safetensors_header`:
+  both files carry the identical 488-key set; bf16 file is all-BF16, fp32 file
+  all-F32; every shape identical; every fp32 byte span is exactly 2x the bf16
+  span; fp32 data offsets are non-overlapping and end exactly at the file size.
+- Tensor equality via the module's own read-only mapped storages: 9 keys
+  spanning small (32-B `linear_attn.A_log`, `dt_bias`), visual
+  (`blocks.0.attn.proj.bias`, `qkv.bias`, 18.9-MB `merger.linear_fc1.weight`),
+  mid language (`layers.20.linear_attn.in_proj_b.weight`), mtp (`mtp.fc.weight`
+  4.2 MB, `mtp.pre_fc_norm_hidden.weight`), and the largest tensor
+  `model.language_model.embed_tokens.weight` (508,559,360 bf16 bytes): all nine
+  `torch.equal(bf16.to(torch.float32), fp32)` — TRUE. The widening is exactly
+  the conversion `make_fp32_copy.py` performs. Losslessness confirmed.
+
+### X2. Card-bound compliance of the three executed runs — [OK]
+
+- Cap arithmetic recomputed from each receipt's own `host_before`: pilot f32
+  avail 8,365,486,080 -> cap 4,182,743,040 B (3.895 GiB) exact; full f32 avail
+  8,298,373,120 -> cap 4,149,186,560 B (3.864 GiB) exact; bf16 attempt avail
+  8,064,327,680 -> cap 4,032,163,840 B (3.755 GiB) exact. All equal
+  min(8 GiB, avail/2); rule lives in `job_limit.card_memory_cap_bytes`.
+- Job peaks 2.582 / 2.812 / 2.321 GiB — all under their caps.
+- Single concurrency: one `subprocess.Popen` per run (`run_x1.py`), receipts
+  each show exactly one `child_ready` and one `child_done`, `return_code` 0,
+  `backstop_hit` false; pages run sequentially inside the child.
+- Pilot: `deadline_seconds_per_request` 180 s in receipt config; the ok page
+  took 68.9995 s. Full batch: per-request deadline 600 s, max observed 234.4 s.
+- 14th page honestly not_run: receipt record is `{status: not_run, error:
+  total_inference_budget_exhausted}` with no text/raw_output fields;
+  `raw_x1.json` and the comparison holdout entry (`reason_excluded: not_run`,
+  no metrics) never zero-fill it.
+- Budget accounting (see X7 for the wording nit): sum of the 13 ok pages'
+  `request_seconds` = 1801.5966 s; the child's `child_done` event independently
+  records 1801.5966 s. Enforcement is dispatch-time (`spent >= budget` ->
+  not_run), so the last in-flight page completed after the nominal 1800 s.
+
+### X3. No silent bound changes; Job Object enforcement real — [OK]
+
+- `git diff ca3bbbcb..HEAD -- config/ src/ requirements.txt pyproject.toml`
+  is EMPTY. Every path changed in the range lives under `tools/ocr_comparison/`,
+  `tests/`, `delivery/w23-xiaomi-ocr/`, or `docs/plans/w23-xiaomi-ocr-2026-10-30/`.
+- `run_x1.py` assigns the child to a Windows Job Object with
+  `JOB_OBJECT_LIMIT_PROCESS_MEMORY` (`job_limit.JobMemoryLimit`), limit =
+  `min(8 GiB, avail/2)` at run start; the peak is read back from the OS.
+- `tests/unit/test_w23_ocr_comparison_metrics.py::test_job_memory_limit_is_enforced_on_child_commit`
+  exists (spawns a child that tries to commit 300 MiB under a 120 MiB job limit
+  and asserts the OS refuses). Reviewer re-ran the suites:
+  `47 passed` (unit + integration), matching `test_receipt.txt`.
+
+### X4. Metric honesty (aggregate recomputed from raw records) — [OK]
+
+Recomputed with `tools.ocr_comparison.compare.evaluate_split` over the 13
+`arm=X1F, status=ok` records of `raw_x1.json` against the frozen `gold.json`;
+matches `comparison.json arms.X1.evaluation.eval.aggregate` to the last digit:
+macro_cer_strict 0.08603821432538125, micro 0.07341772151898734,
+macro_cer_narrow 0.03761177921599788, macro_wer 0.1025, number_recall
+0.7265625; digit-present recall mean 0.886988936988937 (9 eval pages). The
+holdout aggregate (4 scored pages) also matches exactly (0.1158 / 0.0899 /
+0.0400). All 13 ok records carry `finish_reason: "stop"` (EOS) — no partial
+output presented as complete. The bf16 attempt is scored separately under
+`upstream_bf16_attempt_evaluation` (timeout, CER 0.6761) and is NOT merged:
+byd_ar_2024_p021 inside X1F scores 0.0617 from the X1F output.
+
+### X5. Fact-score spot checks — [OK]
+
+- (a) byd_ar_2024_p021: raw text contains the exact line `☑适用 □不适用` — the
+  checkbox condition is genuinely read correctly.
+- (b) ksy_q1_2026_p002: text contains `392.0` and does NOT contain `392.01`
+  (the superscript footnote `¹` stays a footnote; no digit merge).
+- (c) meituan_ar_2024_p000: the 49-token output contains none of
+  `年度報告` / `年度报告` / `2024` — the year-art miss is honestly recorded, not
+  silently repaired.
+
+### X6. Freeze integrity untouched — [OK]
+
+- `git diff 0d24c943 HEAD -- docs/plans/w23-xiaomi-ocr-2026-10-30/sample_manifest.json`
+  is empty.
+- `git diff c62ba969 HEAD -- docs/plans/w23-xiaomi-ocr-2026-10-30/gold.json`
+  is empty (only the already-reviewed post_review_corrections state remains).
+
+### X7. Batch budget wording overstates the arithmetic — [OPEN]
+
+The measured batch total is 1801.5966 s of request time (reviewer-summed from
+the ok pages; the receipt's `total_request_seconds` agrees). Enforcement is
+honest — the budget is checked before each dispatch, the last in-flight page
+was allowed to complete, no page started after exhaustion, and the 14th page is
+not_run — and the machine records disclose the number
+(`comparison.json` `summary.budget = {1800, spent 1801.6}`). But four prose
+statements present it as within budget: progress.md `请求时间 1801.6 s ≤ 1800 s
+卡预算` (literally false), comparison.md §2 and handoff.md `1801.6 s of request
+time under the 1800 s card budget`, and handoff.json `status_reason` `inside
+the 30-minute card budget`. Fix: reword to state the +1.6 s (+0.09%) in-flight
+completion explicitly. Documentation-only; no re-run needed.
+
+### X8. Handoff pinning incomplete for the new enforcement code — [OPEN]
+
+`handoff.json` `code_file_sha256` (15 entries) omits the five files added by
+the execution commit — `run_x1.py`, `x1_child.py`, `job_limit.py`,
+`mmap_loader.py`, `make_fp32_copy.py` — because `gen_handoff.py`'s `CODE_FILES`
+list was not extended. The handoff's own pinning mechanism therefore does not
+cover exactly the code that implements and enforces the card bound
+(`xiaomi_x1.py` and both test files are hashed and match disk, verified).
+Related nit: the X1F identity string says "sha256 of that file recorded by the
+loader", but neither the loader's `weights_load_info` in the receipts nor
+`raw_x1.json`/`comparison.json` machine manifests carries the fp32 sha (it is
+recorded — and reviewer-verified correct — in x1_feasibility_measured.json v3,
+handoff.json, comparison.md). Extend CODE_FILES (and ideally have the loader
+record the sha or fix the sentence), regenerate the handoff.
+
+### X9. handoff.md header stale after the X1 commits — [OPEN]
+
+handoff.md line 4 still says "final tested & reviewed commit: c62ba969" and
+"What ROOT receives" still counts "41 tests (32 unit + 9 integration)", while
+handoff.json records `final_tested_commit`/`final_reviewed_commit` = a2288b4c
+and `test_receipt.txt` shows 47 passed. The results paragraph was updated but
+the header was not; handoff.md is internally inconsistent until refreshed.
+
+### X10. Declared-variant labeling; no hidden success claims — [OK]
+
+comparison.md §2 declares X1F as a load/compute variant (exact fp32 upcast,
+read-only mapping, manual greedy decode with explicit cache — the loop with
+`use_cache=True`/`past_key_values`/`logits_to_keep=1` exists in
+`backends/xiaomi_x1.py`), lists the five measured root causes, and explicitly
+states it is NOT the upstream bf16 runtime and never a GPU-leaderboard
+reproduction (also handoff.json `status_reason`, feasibility v3). The bf16
+timeout (600 s deadline, 242 partial tokens, peak 2.321 GiB) is disclosed in
+every artifact including progress.md; no text anywhere claims the upstream bf16
+runtime executed successfully. The fp32 asset is declared in
+`cleanup_and_assets` with sha and the 5.27 GB ≤ 8 GB total.
+
+## Delta re-review verdict: **NEEDS_FIXES**
+
+All substantive execution claims verified true by direct measurement: the
+fp32 widening is bit-exact (hashes + 9-tensor `torch.equal` incl. the 508-MB
+embedding), the three runs obeyed `min(8 GiB, avail/2)` Job-Object caps with
+honest not_run/timeout records, aggregates reproduce to the last digit from
+raw records, freezes are untouched, and the variant/timeout labeling is
+truthful. The three OPEN items (X7 budget wording `1801.6 ≤ 1800` is false as
+written; X8 handoff `code_file_sha256` missing the five new enforcement files;
+X9 stale handoff.md header) are documentation/provenance fixes only — no
+re-execution required.

@@ -44,8 +44,9 @@ fp32 (bf16 is truncated fp32, so the numbers are identical; no quantization),
 mapped read-only into the process, upstream prompt/template/decoding/postprocess,
 manual greedy decode with an explicit cache. Card-compliant pilot on the lightest
 page: ok in 69 s with EOS, job peak 2.582 GiB under cap 3.895 GiB. Full batch:
-13/14 pages ok, every ok page finished with EOS, 1801.6 s of request time under
-the 1800 s card budget, job peak 2.812 GiB under cap 3.864 GiB. The upstream-exact
+13/14 pages ok, every ok page finished with EOS, 1801.6 s of request time against
+the 1800 s card budget (+0.09%: budget enforcement fires at dispatch, so the last
+in-flight page was allowed to finish — disclosed), job peak 2.812 GiB under cap 3.864 GiB. The upstream-exact
 bf16 arm got one attempt and timed out at the upstream 600 s request deadline
 with 242 correct partial tokens (peak 2.321 GiB, within bounds).
 
