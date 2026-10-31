@@ -803,3 +803,69 @@ truthful. The three OPEN items (X7 budget wording `1801.6 ≤ 1800` is false as
 written; X8 handoff `code_file_sha256` missing the five new enforcement files;
 X9 stale handoff.md header) are documentation/provenance fixes only — no
 re-execution required.
+
+# X1 delta re-verification of fix commit `1071b743` (2026-10-31)
+
+Reviewer re-checked only the three fix claims against the worktree at HEAD =
+`1071b743` (worktree clean except untracked `.w23_cache/`; worktree handoff.md
+byte-identical to the committed version). Drift check first: `git diff
+a2288b4c..1071b743` touches exactly `delivery/w23-xiaomi-ocr/{comparison.md,
+handoff.md, handoff.json, review_independent.md}` and `docs/plans/
+w23-xiaomi-ocr-2026-10-30/{gen_handoff.py, progress.md}`; the review_independent.md
+change is additions-only (this reviewer's X1 section committed verbatim, verdict
+line intact). No other drift.
+
+### X7 (budget arithmetic wording) — fixed in all five named spots — [OK]
+
+Every flagged statement now reads "1801.6 s of request time against the 1800 s
+card budget" with the +0.09% in-flight overshoot disclosed, and the
+"enforcement fires at dispatch / last in-flight page allowed to finish"
+mechanism stated: comparison.md §2, handoff.md results paragraph, handoff.json
+`status_reason`, handoff.json B-X1 `evidence` (via gen_handoff.py), and
+progress.md (`对 1800 s 卡预算超出 0.09%…如实披露`). Verified by reading each
+file at HEAD. Residual note: two same-class spots the original finding did not
+list still carry the old framing — comparison.md §1 summary line 10 ("13/14
+pages with EOS **inside the card budget**", now contradicting §2 two paragraphs
+below) and x1_feasibility_measured.json v3 ("1801.6 s of request time **under
+the 1800 s budget** + backstop", backstop-qualified and therefore arguably a
+statement about the enforcement envelope). The claim "no ≤/under-budget claim
+remains" does not hold for these two; one-line edits each.
+
+### X8 (code file list + identity wording) — half fixed — [OPEN]
+
+- List part VERIFIED: `gen_handoff.py` `CODE_FILES` extended by exactly the
+  five files; `handoff.json` `code_file_sha256` now has 20 entries and the
+  reviewer re-hashed all 20 against disk — 20/20 match, including
+  `run_x1.py`, `x1_child.py`, `job_limit.py`, `mmap_loader.py`,
+  `make_fp32_copy.py`.
+- Wording part NOT DONE: the string "sha256 of that file recorded by the
+  loader" still exists in `tools/ocr_comparison/backends/xiaomi_x1.py` (the
+  identity builder — every future run regenerates it), in the delivered
+  `comparison.json` (line 1190), and in all five x1 f32 receipt JSONs. No file
+  containing the phrase was touched by the fix commit (`handoff.json` never
+  carried it). The claim that the loose wording "was removed" is false.
+
+### X9 (handoff.md header) — NOT done — [OPEN]
+
+handoff.md at HEAD still reads "final tested & reviewed commit: **c62ba969**
+(implementation 0d24c943 → 8469df7c → fde39dfe → c62ba969)" (line 4) and "41
+tests (32 unit + 9 integration)" (line 9); no torch-import caveat exists
+anywhere. The fix commit's handoff.md diff touches only the results paragraph
+(budget wording). The claim that the header "now" names a2288b4c with 47 tests
+(38 unit + 9 integration) is false. For reference the correct values are:
+final tested commit a2288b4c (fixes are docs-only through 1071b743), 38 unit +
+9 integration = 47 passed (reviewer-run and `test_receipt.txt` agree); handoff.json
+line 133's "41/41" is a round-1 historical record and acceptable as history, but
+handoff.md line 9 is a present-tense claim about the deliverable and is wrong.
+
+## Re-verification verdict: **NEEDS_FIXES**
+
+X7 is genuinely fixed (residual two spots noted above, same one-line class).
+X8's list part is genuinely fixed and fully hash-verified, but its wording part
+and all of X9 were not implemented despite being reported as done. Remaining
+work is exactly: (1) edit comparison.md line 10 and x1_feasibility_measured.json
+v3 to the "against (+0.09%)" phrasing, (2) actually remove the loader-sha
+wording from `backends/xiaomi_x1.py` and regenerate comparison.json or annotate
+the recorded manifests, (3) update handoff.md lines 4 and 9 (and optionally
+handoff.json review evidence) to a2288b4c / 47 tests with the torch caveat. No
+re-execution of any run is required.

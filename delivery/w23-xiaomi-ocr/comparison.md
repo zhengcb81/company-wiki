@@ -7,7 +7,8 @@ arm (R0), the born-digital control (N0) and the Xiaomi arm over the frozen
 14-page sample — Xiaomi via a declared variant (X1F: exact fp32 upcast of the
 frozen checkpoint, read-only file mapping) after the upstream-exact load path
 proved impossible under the card memory bound on this host (§2). X1F completed
-13/14 pages with EOS inside the card budget; the 14th is not_run (30-minute
+13/14 pages with EOS, 1801.6 s of request time against the 1800 s card budget
+(+0.09% in-flight overshoot, disclosed); the 14th is not_run (30-minute
 budget exhausted), and the upstream-exact bf16 arm timed out once with partial
 text. X2 (two-stage) remains not_run.
 on this host under the card's frozen memory bound, and the two-stage arm (X2)

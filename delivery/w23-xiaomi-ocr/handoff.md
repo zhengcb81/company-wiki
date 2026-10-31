@@ -1,12 +1,12 @@
 # W23-XIAOMI-OCR Handoff (harness-handoff/1)
 
 - workdir `C:/Users/郑曾波/Projects/company-wiki-w23-xiaomi-ocr` · branch `codex/w23-xiaomi-ocr-20261030` · base `de7ffe48`
-- final tested & reviewed commit: **c62ba969** (implementation 0d24c943 → 8469df7c → fde39dfe → c62ba969)
+- final tested & reviewed commit: **a2288b4c** (X1 execution chain 845972fc → a2288b4c; earlier R0 chain 0d24c943 → c62ba969) · **47 tests** (38 unit + 9 integration, `test_receipt.txt`; the CI domain loads no models and touches no network — torch itself is imported only by the read-only-mapping roundtrip test)
 - overall status: **PARTIAL** — R0/N0 complete and independently verified; Xiaomi executed via the declared X1F variant (13/14 pages, all EOS, in-bounds); upstream-bf16 arm timeout with partial text; X2 not_run; one holdout page unattempted (budget).
 
 ## What ROOT receives
 
-- `tools/ocr_comparison/` — the replayable comparator (R0 production path, X1 HF checkpoint arm with upstream prompt/decoding/resize, X2 declared slot, N0 control), frozen metrics contracts, run manifest builder. 41 tests (32 unit + 9 integration), no network/model in CI domain (`test_receipt.txt`).
+- `tools/ocr_comparison/` — the replayable comparator (R0 production path, X1 arms with upstream prompt/decoding/resize and the declared mapped-f32 variant, X2 declared slot, N0 control), frozen metrics contracts, run manifest builder, Windows Job Object memory enforcement. **47 tests** (38 unit + 9 integration), no network/model in CI domain (`test_receipt.txt`; torch is imported only by the mapping-roundtrip test).
 - `docs/plans/w23-xiaomi-ocr-2026-10-30/sample_manifest.json` — 7 documents / 14 pages (8 eval + 5 holdout + 1 declared synthetic degradation), frozen before any engine output; exact catalog identity + page PNG SHAs (200 DPI pypdfium2 4.30.0).
 - `docs/plans/w23-xiaomi-ocr-2026-10-30/gold.json` — human-verified gold (frozen pre-engine-output; post-review char-level corrections documented in `post_review_corrections`).
 - `delivery/w23-xiaomi-ocr/comparison.{md,json}` (`cwp-ocr-comparison/1`), `raw_{r0,n0,x1,x2}.json`, `fact_scores.json`, `pilot_{r0,x1}.json`, `review_independent.md`, `handoff.json`.

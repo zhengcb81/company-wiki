@@ -13,7 +13,7 @@
  "card_compliance": {
   "memory_rule": "min(8 GiB, available RAM / 2) at each run start, enforced by Windows Job Object ProcessMemoryLimit on committed memory; peaks 2.32-2.81 GiB vs caps 3.75-3.90 GiB",
   "pilot_deadline_180s": "met by the X1F pilot (69 s); the upstream-bf16 arm exceeded it and is recorded as timeout, not retried",
-  "batch": "single concurrency; total request time 1801.6 s <= 1800 s budget + measurement granularity; the 14th page is not_run budget_exhausted",
+  "batch": "single concurrency; total request time 1801.6 s against the 1800 s budget (+0.09% in-flight overshoot: budget enforcement fires at dispatch, so the last in-flight page was allowed to finish — disclosed); the 14th page is not_run budget_exhausted",
   "no_bound_changes": "no production OCR deadline/pixel bound touched; the variant changes only the experiment arm loading/compute dtype, declared in identity and cache keys"
  },
  "identity_declarations": {

@@ -94,10 +94,11 @@ class XiaomiX1:
                 "copy": "from_pretrained private copies",
                 "mapped": ("torch.from_file read-only file mapping of the frozen bf16 "
                            "checkpoint (meta init + assign); loading strategy only"),
-                "mapped-f32": ("torch.from_file read-only file mapping of the exact fp32 "
-                               "upcast copy (bf16 widened losslessly, sha256 of that file "
-                               "recorded by the loader); loading strategy and compute dtype "
-                               "only, no quantization"),
+                "mapped-f32": ("torch.from_file replaced by a true read-only mmap section "
+                               "of the exact fp32 upcast copy (bf16 widened losslessly); the "
+                               "fp32 file's sha256 is recorded in the run receipt and "
+                               "x1_feasibility_measured.json, not by the loader; loading "
+                               "strategy and compute dtype only, no quantization"),
             }[weights_mode],
             "postprocess": (
                 "upstream postprocess.document: _clean_truncated_repeats + "
