@@ -1,6 +1,7 @@
 """Deploy is idempotent, recovers owned incomplete trees and protects others."""
 import hashlib
 import json
+import os
 from pathlib import Path
 
 import pytest
@@ -44,9 +45,8 @@ def deploy(plan, *, fail_link_at=None, venv=None):
         calls["n"] += 1
         if fail_link_at is not None and calls["n"] == fail_link_at:
             raise OSError("injected link failure")
-        # Copy semantics emulate a same-volume hardlink in tests.
         destination.parent.mkdir(parents=True, exist_ok=True)
-        destination.write_bytes(source.read_bytes())
+        os.link(source, destination)
 
     receipt = deployment.deploy(plan, host_python="unused",
                                 venv_runner=venv or FakeVenv(), link=link)
