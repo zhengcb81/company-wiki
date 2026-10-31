@@ -1,7 +1,5 @@
-# 旧接手入口重定向
+# 历史交接入口：harness-handoff.md
 
-2026-10-22：从[CURRENT_STATUS](../CURRENT_STATUS.md)接手。用户最新“继续”已恢复实施，取代此前暂停。
+本文件已停止维护当前调度。请从[当前状态](../CURRENT_STATUS.md)→[当前交接](../HANDOFF.md)→[剩余实施计划](../task_plan.md)接手。
 
-当前完成项、剩余任务及唯一下一步只维护在该入口；[10月22日交接](../HANDOFF-2026-10-22.md)给出当前收尾CI/发布证据、W03实施顺序、配置/预算和测试边界。
-
-四包W01/W02/W04/W05工程已完成并独审，不重派，不重开B2/R5，不新建逐材料审批链。历史交接和冻结设计中的“暂停/未施工/Next Step”不覆盖唯一入口。
+[原交接全文](https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/du11-source-closure-2026-10-18/review/harness-handoff.md)保留原日期的暂停/失败/费用与命令，不能当作今天的下一步或新增许可。原始收据和独审文件留在原目录，未改成PASS。

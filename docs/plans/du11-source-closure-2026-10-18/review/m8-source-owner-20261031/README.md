@@ -1,6 +1,6 @@
 # M8 来源工程接收（2026-10-31）
 
-**ENGINEERING_SOURCE_PASS；本节点0个未闭合问题。** 独立审查覆盖24个源码/测试文件（最后一处测试EOF空白修正见formatting-delta.json，AST无变化），核对r6前后15个生产源码SHA及79条实际编译quote的原文、支持/context ID、parent hash。此处只接收来源工程，不接收尚未运行的真实rank、缓存恢复、RF采用或完整公司循环。
+**接收当时：ENGINEERING_SOURCE_PASS；该局部scope0个未闭合问题。** 独立审查覆盖24个源码/测试文件（最后一处测试EOF空白修正见formatting-delta.json，AST无变化），核对r6前后15个生产源码SHA及79条实际编译quote的原文、支持/context ID、parent hash。此处只接收来源工程，不接收尚未运行的真实rank、缓存恢复、RF采用或完整公司循环。
 
 共享source owner把可读来源叙述与issuer事件/数值proof分离，同一prepared scope供准入/相关性复用。物理连续性独立于策略profile，原生turn/QA共用边界；长回答保留既有64成员支持合同与8回看及2048字界，条件不丢。问题、礼貌和元文本只屏蔽分类视图，不改raw/locator/ref；已证明因果/数量关系优先于弱语法fallback，同一规范子句缓存一次，避免循环财务解释或重复语义门禁。
 
@@ -14,8 +14,11 @@
 
 r6是既有冻结normalized快照的免费回归，不是blind、新PDF资格验收或原历史live预算精确重演。华利131units、100候选、84spans、15编译任务；业务02–10均在实际编译材料。Berkshire299units、272候选、96spans、77准入卡，实际编译64：04/07仍在13个draft-byte延期任务中，不能说77全部已消费。身份/期间与宏观股票展望不强求作为业务主卡。r1–r5历史不覆盖；见r6-source-replay.json。
 
-## 唯一下一步
+## 当时下一步（当前执行已转P0）
 
 正常提交推送并核对精确CI后，按实际配置运行有界/5真实摘要/rank，验activation、中断恢复、同run及跨run0重复POST；独立审真实语义，再验RF实际summary_use→native参数/公式。Berkshire余下材料须有显式后续batch才能称全消费。长文有限前沿公平性/恢复仍是生产改进项，20k已评估候选测试不能代签20k源全召回。完整公司循环继续OPEN。
 
 本节点0供应商POST/下载/PDF重解析，母账仍1,827,558tokens/$0.732814含历史unknown。原件/config、外来hook mode、RF WIP、作者工区与模型缓存不动；ROOT四个已结束临时测试目录恢复原先不存在状态（约1.91MB夹具）。
+
+
+2026-10-31对账：本说明保留接收当时范围，不能代表后来精确CI全绿。CI41243937903已失败3例，当前唯一下一步在[总计划](../../task_plan.md)。原独审JSON/SHA/失败和测试收据不变。

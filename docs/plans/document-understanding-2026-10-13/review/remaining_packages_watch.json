@@ -65,5 +65,8 @@
     "ci_url": "https://github.com/zhengcb81/company-wiki/actions/runs/39047038268",
     "conclusion": "success"
   },
-  "all_current_packages_received": true
+  "all_current_packages_received": true,
+  "document_role": "HISTORICAL_WATCH_BASELINE_NOT_CURRENT_QUEUE",
+  "current_status_ref": "../../du11-source-closure-2026-10-18/PACKAGE_STATUS.json",
+  "not_restarted_this_update": true
 }

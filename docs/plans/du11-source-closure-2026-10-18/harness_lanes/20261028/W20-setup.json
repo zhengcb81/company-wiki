@@ -57,5 +57,8 @@
       "model_calls": 0,
       "provider_calls": 0
     }
-  ]
+  ],
+  "document_role": "CREATION_OR_HANDOFF_SNAPSHOT_NOT_CURRENT_DISPATCH",
+  "current_status_registry": "../../PACKAGE_STATUS.json",
+  "snapshot_note": "Existing status/base/authors_started/remote fields retain original observation; do not infer present execution from them."
 }

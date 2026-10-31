@@ -1,6 +1,6 @@
 # W23-OCR-R1：只补真实比较证据，不重做已修工具
 
-状态：READY_TO_DISPATCH。用户已要求“小问题ROOT直接修，大问题给返修包”；本包只返修不能靠代码追认的实验质量缺口。W22两包不返工，W23原工具工程修复已进入ROOT代码基线。
+派工时状态快照：READY_TO_DISPATCH；当前施工未知，统一看[PACKAGE_STATUS](../../PACKAGE_STATUS.md)，本卡是规格而非进度。用户已要求“小问题ROOT直接修，大问题给返修包”；本包只返修不能靠代码追认的实验质量缺口。W22两包不返工，W23原工具工程修复已进入ROOT代码基线。
 
 - 独立工作目录：**`C:/Users/郑曾波/Projects/company-wiki-w23-xiaomi-ocr-r1`**。
 - 分支：`codex/w23-ocr-r1-20261031`。

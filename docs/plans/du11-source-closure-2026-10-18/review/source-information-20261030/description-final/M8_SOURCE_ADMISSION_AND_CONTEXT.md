@@ -1,8 +1,10 @@
 # M8：共享来源准入、连续性与主体前提
 
+当前执行看本计划task_plan的P0–P3；下方A/B/C是已执行方法，不能当作新待办。精确CI41243937903后来出现3个延期表示断言失败，已纳入P0，不再描述为进行中。
+
 状态：2026-10-31共享来源工程已独审通过（本scope0OPEN），源码daa9106f；r6真实源结果仍有显式budget延期，不签全量召回、真实rank/缓存或RF通过。见[最终接收包](../../m8-source-owner-20261031/README.md)。唯一入口仍 CURRENT_STATUS.md/json。M1–M6已发布局部成果保持，不重复旧付费摘要，不以本步替代完整RF公司循环。
 
-## 当前实际进度（2026-10-30，未发布代码）
+## 历史实施进度（2026-10-30快照，源码随后已发布）
 
 - 已把source quote可消费性与旧OperatingFact/issuer事件proof分开；同一prepared capability由support/relevance复用，旧support单调保留，原纯财务/模板/套话负例继续锁定。source-passage/1、reading-business-policy/28，旧immutable未重写。
 - 物理连续性/11不把阅读profile当源边界，保留实证section/role/speaker/turn；明确新Q优先于未完Q，source marker共用64字前缀leaf。独审发现并修正missing提示桥接已知不同speaker、actor未读native turn、However被how前缀误判等；中性红例和失败日志保留，不冒称最初即通过。

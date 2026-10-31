@@ -94,5 +94,8 @@
   "readme_mirror_path_only_adjustment": "CWP inputs/research README final construction-card link rewritten to ../construction_card.md; source observations and fixtures byte-exact",
   "packet_review": "W19-packet-review.json",
   "setup_errors_resolved": "Initial empty index blocked before commit; read-tree populated sparse HEAD and ROOT-owned staged seed was regenerated. Global precommit cache was readonly; same normal hooks ran with task-local cache. No product changes or bad commits.",
-  "root_reserved_paths_release_for_w19": "Only financial_statements new package/tests and named storage/schema seams; ROOT narrative/document_understanding remain separate; original W16/W17/W18 dispatch unchanged."
+  "root_reserved_paths_release_for_w19": "Only financial_statements new package/tests and named storage/schema seams; ROOT narrative/document_understanding remain separate; original W16/W17/W18 dispatch unchanged.",
+  "document_role": "CREATION_OR_HANDOFF_SNAPSHOT_NOT_CURRENT_DISPATCH",
+  "current_status_registry": "../../PACKAGE_STATUS.json",
+  "snapshot_note": "Existing status/base/authors_started/remote fields retain original observation; do not infer present execution from them."
 }

@@ -1,0 +1,16 @@
+{
+  "id": 41243937903,
+  "head_sha": "2e56e14e1940025d60e258cdd8d53473f6ecb49f",
+  "status": "completed",
+  "conclusion": "failure",
+  "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41243937903",
+  "failed_cases": 3,
+  "node": "tests/unit/du11_tail_integration/test_tail_source_wiring.py::test_lookahead_exhaustion_never_releases_unproven_left_fragment",
+  "parameters": [
+    4,
+    5,
+    6
+  ],
+  "local_reproduction": "3 failed in1.72s",
+  "finding": "Fixed work limits now stop before lookahead; compact frontier0 covers all units. Existing assertion requires explicit deferred-ID examples. No windows/standalone released in observed cases; repair/verify representation and real-consumer contract before changing assertion."
+}

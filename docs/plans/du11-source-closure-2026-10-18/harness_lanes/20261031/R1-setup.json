@@ -21,5 +21,8 @@
     "conclusion": "success",
     "preserve_existing_lane_wip": true,
     "original_setup_head_is_historical": true
-  }
+  },
+  "document_role": "CREATION_OR_HANDOFF_SNAPSHOT_NOT_CURRENT_DISPATCH",
+  "current_status_registry": "../../PACKAGE_STATUS.json",
+  "snapshot_note": "Existing status/base/authors_started/remote fields retain original observation; do not infer present execution from them."
 }

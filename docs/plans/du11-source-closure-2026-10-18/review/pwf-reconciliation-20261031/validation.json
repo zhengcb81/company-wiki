@@ -1,0 +1,17 @@
+{
+  "scope": "Documentation consistency only, no product acceptance",
+  "result": "PASS",
+  "changed_docs_before_validation": 77,
+  "history_blobs_verified": 65,
+  "local_markdown_link_errors": [],
+  "single_current_next_action": true,
+  "single_current_next_step_heading": true,
+  "setup_original_fields_preserved": true,
+  "frozen_campaign_execution_review_cost_fields_preserved": true,
+  "product_source_test_implementation_diff": "none",
+  "actual_product_ci": "failure3cases",
+  "local_failed_case_reproduction": "3F1.72s; diagnostic only",
+  "independent_review": "DOC_CONSISTENCY_PASS",
+  "new_provider_posts": 0,
+  "new_downloads": 0
+}
