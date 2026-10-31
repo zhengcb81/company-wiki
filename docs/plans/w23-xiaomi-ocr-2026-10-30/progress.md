@@ -27,4 +27,4 @@
 - 修复后最终全量对照（四臂同run）：R0 14/14，eval macro strict 0.1599/micro 0.1737/narrow 0.1250，数字召回0.9219/精确0.9833；holdout macro 0.1694/micro 0.1732；区域诊断8丢弃/3恢复/0重复入档；X1预检字段(cap 1.24GB<最小峰值3.49GB)入每页记录；TDD 39项全绿。
 - 清理：render_probe/gold_candidates/r0_outputs已删；run临时目录已回收；ROOT无新增改动。frozen_pages保留至终审完成后删除。
 
-下一步：终审→READY_FOR_ROOT→handoff.md/json→push→STOP。
+2026-10-31 终审与交接：独审复审 READY_FOR_ROOT（0 OPEN，指标独立复算<1e-6一致，39/39测试）；frozen_pages已删；handoff.md/json交付（harness-handoff/1，PARTIAL如实限定）；分支push至origin/codex/w23-xiaomi-ocr-20261030（a430e984）。STOP。
