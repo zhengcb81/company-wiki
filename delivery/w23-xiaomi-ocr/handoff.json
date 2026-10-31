@@ -12,7 +12,7 @@
   "c62ba969 fix: address independent review findings - runner field passthrough, gold char-level corrections, fact accounting",
   "845972fc feat: execute Xiaomi X1 arm under card bounds via read-only mapped exact-fp32 variant"
  ],
- "final_tested_commit": "a2288b4c0fe2eaa57b521d8b18cab59a670bd757",
+ "final_tested_commit": "60d26fd861f10dde8e9d84846de0b7f01dfdd11b",
  "final_reviewed_commit": "a2288b4c0fe2eaa57b521d8b18cab59a670bd757 (delta re-review for the X1 execution, see review_independent.md)",
  "code_file_sha256": {
   "tools/ocr_comparison/__init__.py": {
@@ -32,8 +32,8 @@
    "lf_sha256": "83a76fdce7dcb1247546b6b5be948e8cf0a40f9e281e7040f0d0f93e2ccf7607"
   },
   "tools/ocr_comparison/backends/xiaomi_x1.py": {
-   "raw_sha256": "4cd389f8eda4a0c22f09fa61969b8f6cf6f759b11b9b0ed4abd4e305497edfb4",
-   "lf_sha256": "33049442a87259146973f7d1cfe06d84c27021e90f09f0f534d71c5749bfec0e"
+   "raw_sha256": "184f6779f83072bbfad73f51028984ce249f3c5a68b355efe7bb06d7d60ae79d",
+   "lf_sha256": "28c3ce1dddb0727a6a5f7ad4e1e6daea3402c55c7f39b1ee68f66e9a66c9bfde"
   },
   "tools/ocr_comparison/cache.py": {
    "raw_sha256": "6d2a4466e10f7f8ec4982fbf624f90fdd42c81e2e4b5c1a4f505746b19a5a036",

@@ -107,7 +107,7 @@ handoff = {
         "c62ba969 fix: address independent review findings - runner field passthrough, gold char-level corrections, fact accounting",
         "845972fc feat: execute Xiaomi X1 arm under card bounds via read-only mapped exact-fp32 variant",
     ],
-    "final_tested_commit": "FINAL_HASH",
+    "final_tested_commit": "60d26fd861f10dde8e9d84846de0b7f01dfdd11b",
     "final_reviewed_commit": "a2288b4c0fe2eaa57b521d8b18cab59a670bd757 (delta re-review for the X1 execution, see review_independent.md)",
     "code_file_sha256": code_shas,
     "requirements": requirements,
