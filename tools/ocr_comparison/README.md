@@ -77,3 +77,12 @@ The caller must account for cumulative time across separate invocations.
 Checkpoint conversion is explicit and streaming:
 `python -m tools.ocr_comparison.make_fp32_copy --source <bf16-file> --output <new-fp32-file>`.
 It never selects or overwrites a model snapshot implicitly.
+
+Pure metrics, manifest, cache and CLI imports are portable. Actual X1 inference
+currently requires Windows committed-memory enforcement; unsupported platforms
+raise `MemoryLimitUnavailable` before model inspection or child launch. The
+adapter reuses the shared process-tree `WindowsJob` with the original process
+handle and a cap over total owned-job commit (at least as strict as one model
+process). Linux memory observations come from `/proc/meminfo`; absent values
+stay null and observations do not imply supported enforcement. Fake-backend
+CI tests remain portable; the actual Job allocation test is Windows-only.

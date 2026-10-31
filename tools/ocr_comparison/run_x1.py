@@ -2,7 +2,7 @@
 
 Pages are rendered in this process with the same bytes every arm uses.  One
 child process then loads the checkpoint and runs the pages in order, under a
-Windows Job Object whose ProcessMemoryLimit is the card bound
+Windows Job Object whose total JobMemoryLimit is the card bound
 min(8 GiB, available RAM / 2), taken at run start.  The operating system
 enforces the limit on committed memory; the peak is read back from the job
 object after the run.  Nothing here predicts memory use.
@@ -25,7 +25,7 @@ from datetime import datetime, timezone
 
 from pathlib import Path
 
-from .job_limit import GIB, JobMemoryLimit, card_memory_cap_bytes, host_memory_snapshot
+from .job_limit import GIB, JobMemoryLimit, card_memory_cap_bytes, host_memory_snapshot, require_memory_limit
 
 UTC = timezone.utc
 
@@ -83,17 +83,19 @@ def run_x1_batch(
     from .backends.xiaomi_x1 import XiaomiX1
 
     validate_card_limits(deadline, total_budget)
-    model = _model_dir(model_dir)
-    identity = backend_identity or XiaomiX1(
-        model_dir=str(model), deadline_seconds=deadline,
-        max_new_tokens=max_new_tokens, dtype=dtype, weights_mode=weights_mode,
-    ).identity_manifest
-
+    require_memory_limit()
     host_before = host_memory_snapshot()
     card_cap = card_memory_cap_bytes(host_before["avail_phys_bytes"])
     cap = int(cap_bytes) if cap_bytes is not None else card_cap
     if cap <= 0 or cap > card_cap:
         raise ValueError("memory cap exceeds min(8 GiB, available physical RAM / 2)")
+    # Refuse unsupported enforcement before reading weights or starting a child.
+    job = JobMemoryLimit(cap)
+    model = _model_dir(model_dir)
+    identity = backend_identity or XiaomiX1(
+        model_dir=str(model), deadline_seconds=deadline,
+        max_new_tokens=max_new_tokens, dtype=dtype, weights_mode=weights_mode,
+    ).identity_manifest
 
     owned = None
     if workdir is None:
@@ -122,19 +124,28 @@ def run_x1_batch(
         "TRANSFORMERS_OFFLINE": "1",
     }
 
-    job = JobMemoryLimit(cap)
     try:
         with (work / "child_stdout.log").open("w", encoding="utf-8") as so, \
                 (work / "child_stderr.log").open("w", encoding="utf-8") as se:
             started = time.perf_counter()
             watchdog_started = time.monotonic()
+            from company_wiki._bounded_process import _WINDOWS_BOOTSTRAP
+
+            command = [sys.executable, "-B", "-X", "utf8", "-m",
+                       "tools.ocr_comparison.x1_child", str(cfg_path)]
             proc = subprocess.Popen(
-                [sys.executable, "-B", "-X", "utf8", "-m", "tools.ocr_comparison.x1_child", str(cfg_path)],
-                cwd=str(REPO), stdout=so, stderr=se, env=env,
+                [sys.executable, "-B", "-S", "-c", _WINDOWS_BOOTSTRAP, *command],
+                cwd=str(REPO), stdin=subprocess.PIPE, stdout=so, stderr=se, env=env,
+                bufsize=0,
             )
             try:
-                job.assign(proc.pid)
-            except OSError:
+                job.assign(proc)
+                assert proc.stdin is not None
+                proc.stdin.write(b"\0")  # shared bootstrap cannot start OCR before assignment
+                proc.stdin.close()
+            except BaseException:
+                if proc.stdin is not None:
+                    proc.stdin.close()
                 proc.kill()
                 proc.wait()
                 raise
@@ -206,7 +217,7 @@ def run_x1_batch(
         "method": (
             "pages rendered in the parent with the shared pypdfium2 renderer; one child process "
             "loads Xiaomi-OCR-0 on CPU and runs the pages in order under a Windows Job Object "
-            "ProcessMemoryLimit (committed bytes); the peak is read from the job object"
+            "total JobMemoryLimit (committed bytes); the peak is read from the job object"
         ),
         "config": {
             "deadline_seconds_per_request": deadline,
@@ -220,8 +231,9 @@ def run_x1_batch(
             "cap_bytes": cap,
             "cap_gib": round(cap / GIB, 3),
             "rule": "min(8 GiB, available physical RAM / 2) at run start" if not cap_bytes else "explicit --cap-gb",
-            "job_peak_process_bytes": peak_bytes,
-            "job_peak_process_gib": round(peak_bytes / GIB, 3),
+            "job_peak_commit_bytes": peak_bytes,
+            "job_peak_commit_gib": round(peak_bytes / GIB, 3),
+            "measurement_scope": "owned-job-total-commit",
         },
         "host_before": host_before,
         "host_after": host_after,
@@ -294,7 +306,7 @@ def main(argv: list[str] | None = None) -> int:
     summary = {r["page_id"]: r["status"] for r in result["records"]}
     mem = result["receipt"]["memory"]
     print(json.dumps({"summary": summary, "cap_gib": mem["cap_gib"],
-                      "job_peak_gib": mem["job_peak_process_gib"],
+                      "job_peak_gib": mem["job_peak_commit_gib"],
                       "child_return_code": result["receipt"]["child"]["return_code"]},
                      ensure_ascii=False, indent=1))
     print("WROTE", out_path)

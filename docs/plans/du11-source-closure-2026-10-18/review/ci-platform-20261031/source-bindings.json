@@ -1,0 +1,47 @@
+{
+  "base_head": "946537d0d75ac36b22ac0bb24e0f484a896b4c95",
+  "uncommitted_changed_files": {
+    "tools/ocr_comparison/job_limit.py": {
+      "raw_sha256": "ac8ae6bf24130c85110eeb4e7e48cb1ed8dfb61fc48953f069b2de7ab86b2515",
+      "lf_sha256": "ac8ae6bf24130c85110eeb4e7e48cb1ed8dfb61fc48953f069b2de7ab86b2515"
+    },
+    "tools/ocr_comparison/manifest.py": {
+      "raw_sha256": "74d4397aa98bf32476529bf640123c5cee4fb2ac18e51b273a5b2bbc7ed889f4",
+      "lf_sha256": "74d4397aa98bf32476529bf640123c5cee4fb2ac18e51b273a5b2bbc7ed889f4"
+    },
+    "tools/ocr_comparison/run_x1.py": {
+      "raw_sha256": "70e61afe542e8b4849777eeafd066fb88c19be79f4acba6f03a360a1cb87fadb",
+      "lf_sha256": "70e61afe542e8b4849777eeafd066fb88c19be79f4acba6f03a360a1cb87fadb"
+    },
+    "tools/ocr_comparison/run_comparison.py": {
+      "raw_sha256": "c86556b43f84d886440b74be379b2ecbfe519e25f4dd07a14ec44e13ea7ea290",
+      "lf_sha256": "c86556b43f84d886440b74be379b2ecbfe519e25f4dd07a14ec44e13ea7ea290"
+    },
+    "tools/ocr_comparison/README.md": {
+      "raw_sha256": "2bb28ac0a57874fcec9a66b8ed710d435936f95131a53d90a77ec66636efca67",
+      "lf_sha256": "2bb28ac0a57874fcec9a66b8ed710d435936f95131a53d90a77ec66636efca67"
+    },
+    "tests/unit/test_w23_ocr_comparison_metrics.py": {
+      "raw_sha256": "184417120cf750056ce80b8daaca9c2457f69add930ca6c79158f9eea139607d",
+      "lf_sha256": "184417120cf750056ce80b8daaca9c2457f69add930ca6c79158f9eea139607d"
+    },
+    "tests/unit/test_w23_ocr_comparison_reception.py": {
+      "raw_sha256": "facfafd5f8bd0822d05a363fc8194d35d6ecc377cb54f5939db7346fc2b2d97e",
+      "lf_sha256": "facfafd5f8bd0822d05a363fc8194d35d6ecc377cb54f5939db7346fc2b2d97e"
+    },
+    "tests/unit/test_w22_pdf_deployment_plan.py": {
+      "raw_sha256": "90181eae0ae461936011851ae90b18d2fe110afb39adf7f5305ce9c8c881bc5d",
+      "lf_sha256": "90181eae0ae461936011851ae90b18d2fe110afb39adf7f5305ce9c8c881bc5d"
+    }
+  },
+  "reused_unchanged_modules": {
+    "src/company_wiki/_process_tree.py": {
+      "raw_sha256": "9b7ccc64bcf551c4ecb41100ff775407cf72b918261ecf4c9fe7eec23f6e62db",
+      "lf_sha256": "d6c31e77dfa827b9068b5742f3456546976abe347341a60a7b9accb259c65145"
+    },
+    "src/company_wiki/_bounded_process.py": {
+      "raw_sha256": "e9c09b9a486ccadf948d437de619d585555b9f518e86d2396d60fdef14eab2be",
+      "lf_sha256": "11792ca4d1140724f70e28f0ec77a77131af7a1ad181d379095dd052a79a0e99"
+    }
+  }
+}

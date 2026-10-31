@@ -1,6 +1,7 @@
 """Deployment plan is explicit, ASCII-bound and diagnostic-honest (no SDK)."""
 import hashlib
 import json
+import os
 from pathlib import Path
 
 import pytest
@@ -123,10 +124,11 @@ def test_build_plan_records_declared_hash_mismatch_as_diagnostic_not_blocker(tmp
     assert plan["blocking_errors"] == []
 
 
+@pytest.mark.skipif(os.name != "nt", reason="Windows drive-letter volume boundary; POSIX has no D: drive")
 def test_build_plan_rejects_cross_volume_target(tmp_path):
     profile, probe = mini_source(tmp_path)
     with pytest.raises(deployment.DeploymentError, match="volume"):
-        deployment.build_plan(Path("D:/elsewhere/deploy"), profile, probe)
+        deployment.build_plan(Path("Z:/elsewhere/deploy" if tmp_path.drive.upper() != "Z:" else "Y:/elsewhere/deploy"), profile, probe)
 
 
 def test_build_plan_reports_missing_record_source_as_blocker(tmp_path):

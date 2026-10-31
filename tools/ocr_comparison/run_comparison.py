@@ -104,7 +104,8 @@ def main(argv: list[str] | None = None) -> int:
 
     if args.memory_cap_gb is None:
         snapshot = resource_snapshot()
-        args.memory_cap_gb = min(8.0, max(0.5, snapshot["avail_phys_gb"] / 2))
+        available = snapshot["avail_phys_gb"]
+        args.memory_cap_gb = min(8.0, available / 2) if available is not None else None
 
     pages = manifest["pages"]
     if args.pages == "all":
@@ -154,9 +155,10 @@ def main(argv: list[str] | None = None) -> int:
 
                 records = run_pages(selected, r0_page)
             elif arm == "X1":
-                from .run_x1 import run_x1_batch, _model_dir
+                from .run_x1 import run_x1_batch, _model_dir, require_memory_limit
                 from .backends.xiaomi_x1 import XiaomiX1
 
+                require_memory_limit()
                 model_dir = str(_model_dir(os.environ.get("W23_XIAOMI_MODEL_DIR")))
                 identity = XiaomiX1(model_dir=model_dir, deadline_seconds=args.deadline,
                                     max_new_tokens=args.max_new_tokens, dtype=args.x1_dtype,
@@ -173,7 +175,7 @@ def main(argv: list[str] | None = None) -> int:
                         deadline=args.deadline, total_budget=1800.0,
                         max_new_tokens=args.max_new_tokens,
                         dtype=args.x1_dtype, weights_mode=args.x1_weights_mode,
-                        cap_bytes=int(args.memory_cap_gb * (1024 ** 3)),
+                        cap_bytes=int(args.memory_cap_gb * (1024 ** 3)) if args.memory_cap_gb is not None else None,
                         model_dir=model_dir, workdir=run_dir / "x1-child",
                         backend_identity=identity,
                     )

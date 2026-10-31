@@ -347,6 +347,7 @@ def test_truncation_marker_repetition_guard_flags_loops():
     assert ok["suspicious"] is False
 
 
+@pytest.mark.skipif(sys.platform != "win32", reason="actual committed-memory enforcement requires Windows Job Objects")
 def test_job_memory_limit_is_enforced_on_child_commit():
     """Card memory bound is enforced by the OS, not predicted: a child that
     commits 300 MiB under a 120 MiB job limit must fail its allocation."""
@@ -356,29 +357,34 @@ def test_job_memory_limit_is_enforced_on_child_commit():
     if str(REPO) not in sys.path:
         sys.path.insert(0, str(REPO))
     from tools.ocr_comparison.job_limit import JobMemoryLimit
+    from company_wiki._bounded_process import _WINDOWS_BOOTSTRAP
 
     limit = 120 * 1024 * 1024
     job = JobMemoryLimit(limit)
     try:
         proc = subprocess.Popen(
-            [sys.executable, "-c",
+            [sys.executable, "-B", "-S", "-c", _WINDOWS_BOOTSTRAP, sys.executable, "-c",
              "import sys\n"
              "try:\n"
-             "    buf = bytearray(300 * 1024 * 1024)\n"
-             "    buf[-1] = 1\n"
+             "    chunks = []\n"
+             "    for _ in range(75):\n"
+             "        chunks.append(bytearray(4 * 1024 * 1024))\n"
+             "        chunks[-1][-1] = 1\n"
              "    print('alloc ok')\n"
              "except MemoryError:\n"
              "    print('alloc refused')\n"
              "    sys.exit(3)\n"],
-            stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True,
+            stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.PIPE, text=True,
         )
-        job.assign(proc.pid)
-        out, _ = proc.communicate(timeout=60)
+        job.assign(proc)
+        out, _ = proc.communicate(input="\0", timeout=60)
         peak = job.peak_process_bytes()
     finally:
         job.close()
     assert "alloc ok" not in out
     assert proc.returncode != 0
+    # Job peaks can include the allocation which was refused; small increments
+    # make this counter bound meaningful without weakening the memory cap.
     assert peak <= limit + 64 * 1024 * 1024
 
 
