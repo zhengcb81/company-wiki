@@ -1187,7 +1187,7 @@
     "max_new_tokens": 16384,
     "request_deadline_seconds": 600.0,
     "output_char_cap": 60000,
-    "weights_loading": "torch.from_file read-only file mapping of the exact fp32 upcast copy (bf16 widened losslessly, sha256 of that file recorded by the loader); loading strategy and compute dtype only, no quantization",
+    "weights_loading": "torch.from_file replaced by a true read-only mmap section of the exact fp32 upcast copy (bf16 widened losslessly); the fp32 file's sha256 is recorded in the run receipt and x1_feasibility_measured.json, not by the loader; loading strategy and compute dtype only, no quantization",
     "postprocess": "upstream postprocess.document: _clean_truncated_repeats + postprocess_e2e_markdown(convert_otsl=True); scoring strips declared markup (metrics.markup_strip: HTML tags, markdown heading and bold markers)"
    },
    "upstream_bf16_identity": {
@@ -1957,7 +1957,8 @@
     }
    },
    "raw_output_file": "raw_x1.json",
-   "feasibility_record": "x1_feasibility_measured.json"
+   "feasibility_record": "x1_feasibility_measured.json",
+   "identity_provenance_note": "identity regenerated 2026-10-31 with the corrected weights_loading wording (the loader records no sha; the fp32 file sha256 lives in x1_feasibility_measured.json and the handoff assets). The five x1 receipt JSONs keep their original recorded identity strings verbatim as run records; the difference is wording only - the executed behavior and model bytes are unchanged (delta review X8/X11)."
   },
   "X2": {
    "identity": {
