@@ -554,3 +554,89 @@ number is the parent-side pdfium render footprint; the engine ran in the
 isolated child and its peak was never measured). D1, D4, D5, D6 verified
 [OK]. Both fixes are artifact-integrity repairs; no metric result, engine
 quality conclusion, or X1/X2 unsupported verdict is affected by them.
+
+---
+
+# Delta Re-Review Round 2 (2026-10-31) — fix commits `c2e5dcf8` / `d8a7991f`
+
+Same independent delta reviewer. Scope: only the two OPEN items from the
+round-1 delta review. Everything below re-verified first-hand with
+`PYTHONUTF8=1 C:/Miniconda/python.exe`; no file under review was modified
+except this appended section.
+
+### D2 (re-check) — clobbered raw_r0.json restored + root cause fixed — [OK]
+
+- `delivery/w23-xiaomi-ocr/raw_r0.json` at HEAD: 14 records again;
+  `page_identity` present on 14/14 and **value-identical to
+  `sample_manifest.json`** (full sweep, 0 mismatches); engine fields
+  (text/lines/engine_seconds/width/height/dropped_regions/recovery_attempts/
+  text_sha256) **byte-identical to `c62ba969`** record-by-record
+  (identity excluded). `page_identity_provenance` documents the full file
+  history honestly: final four-arm run (c62ba969) → identity join →
+  accidental one-page overwrite (ca3bbbcb era) → restored from c62ba969 by
+  git show and re-joined (delta review OPEN D2).
+- `comparison.json` untouched by the fix commits; `arms.R0.raw_output_file`
+  = `raw_r0.json` again resolves to the full 14-page evidence file.
+- Root cause fixed: `run_comparison.py` now derives per-arm raw filenames via
+  `raw_output_path(out_dir, arm)` — UTC stamp + pid + a strictly monotonic
+  per-process counter — so two invocations sharing an out dir can no longer
+  clobber each other. Locked by new unit test
+  `test_raw_output_names_never_collide_across_invocations`.
+- Suite re-run: `pytest tests/unit/test_w23_ocr_comparison_metrics.py
+  tests/integration/test_w23_ocr_comparison_entry.py -q -p no:cacheprovider`
+  → **41 passed** (32 unit + 9 integration) in 45.6 s;
+  `test_receipt.txt` updated to 41 passed.
+
+### D3 (re-check) — genuine engine-peak measurement — [OK]
+
+- `memwatch_r0_receipt.json` is now schema `cwp-ocr-memwatch-receipt/2` with
+  staged numbers (baseline_import / after_import / after_engine_load / final),
+  an explicit `excludes` field (isolated-child boundary overhead; the render
+  happened in the parent) and a `supersedes` note naming the mislabeled /1
+  and this review's D3 finding. Arithmetic verified:
+  720,424,960 B = 0.671 GB WS, 1,060,950,016 B = 0.988 GB commit,
+  delta over import 0.95 GB.
+- Method is sound this time: the driver renders the page with pdfium in the
+  parent, then `memwatch_r0_engine_child.py` runs in a **fresh interpreter**
+  that imports only the engine path and runs `LocalOCRAdapter`
+  (`load_production_config(config/local_ocr.json)`) — exactly the engine the
+  isolated child executes. after_import commit is only ~40 MB, so no pdfium
+  pollution; the child's process-lifetime peaks are the engine's.
+- **Independent re-measurement by this reviewer** (same driver/child flow,
+  own run): final WS 720,433,152 B = **0.671 GB** (receipt: 720,424,960 =
+  0.671), commit 1,061,470,208 B = **0.989 GB** (receipt: 1,060,950,016 =
+  0.988), delta 0.951 GB, status ok, line_count 49 (= receipt). The number
+  reproduces to ~0.1% and is ~2x the previous render-only figure — the engine
+  is genuinely inside the measurement now.
+- handoff.md and handoff.json now cite 0.671/0.988 GB with the
+  fresh-interpreter label. Note (accuracy of the author's claim, not of the
+  artifact): **comparison.md §5 was not updated** — it still carries the
+  one-line artifact entry "`memwatch_r0_receipt.json` — R0 peak-memory
+  instrumented run" without the new values or caveat. That label is no longer
+  false (the receipt it names is the honest /2), so nothing dishonest remains
+  in comparison.md, but the claim "comparison.md §5 now cites these values"
+  did not hold. Non-blocking; the receipt of record and the handoff are
+  honest and mutually consistent.
+- Stale-wording nit: handoff.json `limitations` still says "R0 peak memory
+  measured once in-process … excluding the isolated-child boundary overhead"
+  (/1-era wording; omits the render exclusion and the fresh-interpreter
+  method). The authoritative receipt is honest; no action required.
+
+### Consistency — [OK]
+
+- `handoff.json` `final_tested_commit` = `c2e5dcf8` (d8a7991f backfilled the
+  PENDING_FINAL placeholder; d8a7991f is docs-only: handoff.json +
+  gen_handoff.py). `code_file_sha256` updated for both changed code files —
+  spot-check 3/3 (`run_comparison.py`, unit test file, `metrics.py`) match
+  raw and CRLF→LF hashes.
+- All changes in both fix commits are inside the allowed areas
+  (delivery/w23-xiaomi-ocr/, docs/plans/w23-xiaomi-ocr-2026-10-30/,
+  tools/ocr_comparison/, tests); comparison.json untouched; no production
+  file touched. `final_reviewed_commit` still names ca3bbbcb only (round 1);
+  this section documents the round-2 review of c2e5dcf8/d8a7991f.
+
+## Delta round-2 verdict: **READY_FOR_ROOT** — no remaining [OPEN] items.
+Both round-1 OPEN items are fixed and independently verified (D2 restored +
+clobber-proof; D3 genuinely measured and reproduced to ~0.1%); noted nits
+(comparison.md §5 one-liner not refreshed, stale limitations wording) are
+non-blocking documentation polish.

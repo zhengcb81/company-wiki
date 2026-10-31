@@ -71,10 +71,16 @@ population estimate. Per-page `wer`/`wer_ops` are in comparison.json.
 Number identity uses the declared narrow canon: OCR thousands-group spacing
 ("4, 281, 084") is one token; `392.0¹ → 392.01` stays a wrong number.
 
-Latency: per-page engine seconds in `raw_r0.json` (median 15.6 s, cold max 20.2 s in
+Latency and footprint: per-page engine seconds in `raw_r0.json` (median 15.6 s, cold max 20.2 s in
 the final run; the 62.7 s pilot cold-start included first-launch ONNX session
 setup); single concurrency, no deadline violations (limits untouched:
-production pixel/deadline bounds as configured). Region diagnostics:
+production pixel/deadline bounds as configured). Peak engine memory, measured
+once on a representative page in a fresh interpreter that loads only the R0
+engine (`memwatch_r0_receipt.json`, schema /2): peak working set 0.671 GB,
+peak commit 0.988 GB for the ONNX det/cls/rec sessions plus one transcribe —
+the production isolated child performs the same work with the same model
+bytes; the receipt excludes only the child-process boundary overhead and the
+page render. Region diagnostics:
 8 dropped low-score regions, 3 bounded recovery attempts across the sample,
 0 repetition flags — all recorded per page in the raw JSON.
 

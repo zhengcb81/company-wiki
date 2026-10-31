@@ -153,7 +153,7 @@ handoff = {
         "no two-column (双栏) page in the frozen catalog slice (Q&A and cross-paragraph qualifier groups covered); no seal/stamp page",
         "X1/X2 never executed: no accuracy/latency claims about Xiaomi-OCR-0",
         "English WER has a single-page denominator per split (one EN document)",
-        "R0 peak memory measured once in-process (memwatch_r0_receipt.json), excluding the isolated-child boundary overhead",
+        "R0 engine peak memory measured once in a fresh interpreter (memwatch_r0_receipt.json schema /2: 0.671 GB WS / 0.988 GB commit; excludes the isolated-child boundary overhead and the page render)",
         "US 10-K filings are text/html in this catalog; EN pages covered by an earnings-call PDF",
         "gold post-review char-level corrections documented in gold.json post_review_corrections",
     ],
