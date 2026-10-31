@@ -170,8 +170,9 @@ def test_cli_constructor_probe_enforces_deadline_budget(tmp_path, monkeypatch, c
                                   "artifacts": "C:/x/artifacts"}), encoding="utf-8")
     seen = {}
 
-    def fake_probe(python, artifacts, *, timeout):
+    def fake_probe(python, artifacts, *, timeout, production_launch=False, repo_src=None):
         seen["timeout"] = timeout
+        seen["production_launch"] = production_launch
         return dict(seen["result"])
 
     monkeypatch.setattr(deployment, "constructor_probe", fake_probe)
@@ -180,6 +181,7 @@ def test_cli_constructor_probe_enforces_deadline_budget(tmp_path, monkeypatch, c
     seen["result"] = {"status": "CONSTRUCTOR_OK", "seconds": 45.001}
     assert cli.main(argv) == 1
     assert seen["timeout"] == deployment.CONSTRUCTOR_DEADLINE_SECONDS == 30
+    assert seen["production_launch"] is False  # bare diagnostic by default
 
     seen["result"] = {"status": "CONSTRUCTOR_OK", "seconds": 22.748}
     assert cli.main(argv) == 0
@@ -187,7 +189,11 @@ def test_cli_constructor_probe_enforces_deadline_budget(tmp_path, monkeypatch, c
     seen["result"] = {"status": "SDK_CONSTRUCTOR_FAILED", "seconds": 3.2}
     assert cli.main(argv) == 1
 
-    def exploding_probe(python, artifacts, *, timeout):
+    seen["result"] = {"status": "CONSTRUCTOR_OK", "seconds": 13.7}
+    assert cli.main([*argv, "--production-launch"]) == 0
+    assert seen["production_launch"] is True  # production launch shape selectable
+
+    def exploding_probe(python, artifacts, *, timeout, production_launch=False, repo_src=None):
         raise subprocess.TimeoutExpired(cmd=[python], timeout=timeout)
 
     monkeypatch.setattr(deployment, "constructor_probe", exploding_probe)

@@ -75,9 +75,16 @@ def test_l1_production_config_load():
 
 def test_l2_no_document_constructor():
     config_path = deployment_config()
-    raw = json.loads(config_path.read_text(encoding="utf-8"))
-    observation = deployment.constructor_probe(raw["python"], raw["artifacts"])
+    raw = json.loads(config_path.read_text(encoding="utf-8-sig"))
+    # Production launch shape: the exact child command the worker uses
+    # (isolated flags + repo-local pycache prefix). The bare interpreter form
+    # cold-compiles the whole heavy tree into env bytecode and can exceed the
+    # 30s constructor cap on a freshly built env (observed honestly: 22.7s
+    # warm vs >30s cold); production never launches that way.
+    observation = deployment.constructor_probe(
+        raw["python"], raw["artifacts"], production_launch=True, repo_src=REPO_SRC)
     assert observation["status"] == "CONSTRUCTOR_OK"
+    assert observation["launch"] == "production_child_launch"
     assert observation["seconds"] <= 30
 
 

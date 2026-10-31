@@ -615,17 +615,41 @@ def verify_config_load(config_path: Path, *, repo_src: Path, python: str | None 
 
 
 def constructor_probe(python: str, artifacts: str, *,
-                      timeout: float = CONSTRUCTOR_DEADLINE_SECONDS) -> dict[str, Any]:
-    """No-document SDK constructor through the deployed interpreter, capped."""
-    completed = subprocess.run([python, "-I", "-X", "utf8",
-                                str(_HERE / "_constructor_probe.py"), artifacts],
-                               stdout=subprocess.PIPE, stderr=subprocess.PIPE,
+                      timeout: float = CONSTRUCTOR_DEADLINE_SECONDS,
+                      production_launch: bool = False,
+                      repo_src: Path | None = None) -> dict[str, Any]:
+    """No-document SDK constructor through the deployed interpreter, capped.
+
+    ``production_launch=False`` is the bare-import diagnostic: on a cold env
+    it compiles the whole heavy tree into env-local bytecode, which on this
+    host can exceed the 30s constructor cap (observed: 22.7s warm vs >30s
+    cold). ``production_launch=True`` runs the constructor through the exact
+    production ``child_launch_command`` (isolated flags plus the repo-local
+    pycache prefix the real worker always carries) — the launch shape the
+    production entry actually uses.
+    """
+    if production_launch:
+        if repo_src is None:
+            raise DeploymentError("production launch requires the first-party source root")
+        sys.path.insert(0, str(repo_src))
+        try:
+            from company_wiki.source_catalog.narrative_pdf_enhancement import child_launch_command
+        finally:
+            sys.path.remove(str(repo_src))
+        command = [*child_launch_command(python, _HERE / "_constructor_probe.py"),
+                   str(Path(artifacts))]
+    else:
+        command = [python, "-I", "-X", "utf8",
+                   str(_HERE / "_constructor_probe.py"), artifacts]
+    completed = subprocess.run(command, stdout=subprocess.PIPE, stderr=subprocess.PIPE,
                                env=_probe_env(HF_HUB_OFFLINE="1", TRANSFORMERS_OFFLINE="1"),
                                timeout=timeout)
     if completed.returncode != 0:
         raise DeploymentError("no-document constructor failed: "
                               + completed.stderr.decode("utf-8", "replace")[-4000:])
-    return json.loads(completed.stdout.decode("utf-8"))
+    observation = json.loads(completed.stdout.decode("utf-8"))
+    observation["launch"] = "production_child_launch" if production_launch else "bare_interpreter"
+    return observation
 
 
 def warm_child_bytecode_cache(config_path: Path, *, repo_src: Path,

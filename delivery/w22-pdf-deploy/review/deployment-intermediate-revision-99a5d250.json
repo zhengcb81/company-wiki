@@ -1,0 +1,28 @@
+{
+  "schema_version": "pdf-runtime-deployment/1",
+  "tool": {
+    "name": "pdf_runtime_deployment",
+    "implementation_sha256": "99a5d250287a3b1a1d44cfc92c7c948ba4f41c7007315b04324a998a97a32f7b"
+  },
+  "plan_sha256": "327891cff2924d6306f1b90a5e4672a052ad830a62adab38588ddf642aa8266c",
+  "status": "COMPLETE",
+  "target": "C:\\cwp-runtime\\w22-pdf-sdk",
+  "environment_sha256": "c84a984ccb3a56dffbfd0d4538f14ce4a27de44dec4981527a2b0c4a545cdf44",
+  "distribution_count": 104,
+  "source_config_sha256": "bcc427114955f6d045c5848b1885b24f1ec1666d1397bfb60ba4f404a225ff2a",
+  "created_links": 36127,
+  "reused_links": 0,
+  "venv_created": true,
+  "new_scaffold_file_bytes": 516976,
+  "logical_shared_bytes": 1405313714,
+  "sdk_bytes_copied": 0,
+  "model_bytes_copied": 0,
+  "output_config_sha256": "bd88ad431822b5af0361e9b8fed1e991947a79036b42207126fca61181d6bd22",
+  "diagnostic_counts": {
+    "record_deviations": 12,
+    "missing_unhashed_bytecode": 0,
+    "active_pth_hooks": 2,
+    "site_hooks": 0
+  },
+  "seconds": 417.079
+}

@@ -4,7 +4,7 @@
   "status": "enhanced",
   "warmup": {
     "status": "WARM_OK",
-    "seconds": 13.696,
+    "seconds": 12.816,
     "launch_shape": [
       "C:\\cwp-runtime\\w22-pdf-sdk\\env\\Scripts\\python.exe",
       "-I",
@@ -13,8 +13,8 @@
     ]
   },
   "error": null,
-  "seconds": 18.404,
-  "pdf_sha256": "aa9624bab0d862ad732c9836e60945e954a327e2838d731e417fdc0b5af517e4",
+  "seconds": 23.154,
+  "pdf_sha256": "9e834f7202e7fdaa0f2de3fd186c907242b12cbfa4277224a29622c2b6b331d3",
   "page_count": 2,
   "diagnostic": {
     "status": "enhanced",
@@ -27,15 +27,15 @@
         "page": 1,
         "reason": "unproven_wrapped_prose",
         "priority": 1,
-        "left": "urn:company-wiki:narrative-unit:sha256:89413d716862df9964acc7b8a9d7260f30f7535f620fd9176f0fa20631f74427",
-        "right": "urn:company-wiki:narrative-unit:sha256:34f4745046ec811bafdc9bc324b772257adaa8f77391abfad8fd4f43d1cde2eb"
+        "left": "urn:company-wiki:narrative-unit:sha256:9e16d8f24c762c232a63c6cb49bc830a14700be3359aa8ed9dd2ea6e27b4dd12",
+        "right": "urn:company-wiki:narrative-unit:sha256:08db797d94cac7f2d81ef59231f54aa43762d59d3bfe3e6ca09eafc050894bc8"
       },
       {
         "page": 2,
         "reason": "unproven_wrapped_prose",
         "priority": 1,
-        "left": "urn:company-wiki:narrative-unit:sha256:34a1b7e838d33a60faadaf53035f6d4b2fa806679cb5b8317432cb9b575894d1",
-        "right": "urn:company-wiki:narrative-unit:sha256:64ba35dd0cc88ab4cd2e8cf778f2d931e32ed63069019a76a4c78ee3219ce844"
+        "left": "urn:company-wiki:narrative-unit:sha256:b91c1a8254cfa525151babb6fa65c53c36bd88d7e5ba56092c7d3e309fde95ab",
+        "right": "urn:company-wiki:narrative-unit:sha256:d101c1b981b3ee975d9b7b1723fb903824824323131127b070260fab6d48d79b"
       }
     ],
     "accepted_groups": 2,
@@ -44,8 +44,8 @@
     "engine_version": "2.96.0",
     "model_sha256": "00333a43451945aaf89db8ca9c0a17e75d1537c17db60fdb91aa95f4c7929e0c",
     "converter_instances": 1,
-    "peak_job_commit_bytes": 3330412544,
-    "seconds": 17.0392,
+    "peak_job_commit_bytes": 3328434176,
+    "seconds": 21.3815,
     "reason": null,
     "last_stage": null,
     "worker_error": null,

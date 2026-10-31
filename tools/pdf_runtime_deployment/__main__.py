@@ -97,8 +97,10 @@ def cmd_status(arguments) -> int:
 def cmd_constructor_probe(arguments) -> int:
     config_path = Path(arguments.config)
     raw = json.loads(config_path.read_text(encoding="utf-8-sig"))
-    observation = deployment.constructor_probe(raw["python"], raw["artifacts"],
-                                               timeout=arguments.deadline)
+    observation = deployment.constructor_probe(
+        raw["python"], raw["artifacts"], timeout=arguments.deadline,
+        production_launch=arguments.production_launch,
+        repo_src=Path(arguments.repo_src) if arguments.production_launch else None)
     print(_compact(observation))
     if observation.get("status") != "CONSTRUCTOR_OK" or observation["seconds"] > arguments.deadline:
         return 1
@@ -141,6 +143,11 @@ def main(argv: list[str] | None = None) -> int:
     probe_parser = subparsers.add_parser("constructor-probe", help="no-document SDK constructor")
     probe_parser.add_argument("--config", required=True)
     probe_parser.add_argument("--deadline", type=float, default=deployment.CONSTRUCTOR_DEADLINE_SECONDS)
+    probe_parser.add_argument("--production-launch", action="store_true",
+                              help="run the constructor through the exact production child "
+                                   "launch command (repo-local pycache prefix); the default "
+                                   "bare interpreter can exceed the cap on a cold env")
+    probe_parser.add_argument("--repo-src", default=str(REPO_SRC))
     probe_parser.set_defaults(handler=cmd_constructor_probe)
 
     warm_parser = subparsers.add_parser("warm-cache",
