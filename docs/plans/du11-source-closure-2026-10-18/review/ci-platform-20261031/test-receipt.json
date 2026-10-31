@@ -1,0 +1,22 @@
+{
+  "host": "Windows Python 3.13.9",
+  "ci_run_to_fix": "41238915399",
+  "results": [
+    {
+      "command": "python -m pytest tests/unit/test_w23_ocr_comparison_reception.py tests/unit/test_w23_ocr_comparison_metrics.py::test_job_memory_limit_is_enforced_on_child_commit tests/unit/test_w23_ocr_comparison_metrics.py::test_x1_missing_model_is_an_explicit_refusal tests/unit/test_w22_pdf_deployment_plan.py::test_build_plan_rejects_cross_volume_target -q -p no:cacheprovider",
+      "passed": 22,
+      "seconds": 2.33
+    },
+    {
+      "command": "python -m pytest tests/unit/test_w23_ocr_comparison_reception.py::test_assignment_failure_does_not_release_bootstrap_and_reaps_child -q -p no:cacheprovider",
+      "passed": 1,
+      "seconds": 0.49
+    }
+  ],
+  "ruff": "PASS",
+  "git_diff_check": "PASS",
+  "actual_linux_runtime": "NOT_RUN; fresh-process Linux API simulation with ctypes.WinDLL removed passed; actual CI required",
+  "models_or_sdk_started": false,
+  "installs": false,
+  "notes": "One pre-existing SyntaxWarning for LaTeX escape remains; prior GBK capture-thread warning fixed with explicit UTF-8. Native initial peak mismatch fixed without changing cap/upper bound by 4MiB increments and assignment barrier."
+}

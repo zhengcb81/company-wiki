@@ -83,12 +83,14 @@ def test_parent_watchdog_interrupts_blocked_request_without_model(tmp_path, monk
         def __init__(self, **kwargs):
             self.identity_manifest = {"arm": "TEST"}
     monkeypatch.setattr(xiaomi_x1, "XiaomiX1", Backend)
+    monkeypatch.setattr(run_x1, "require_memory_limit", lambda: None)
     monkeypatch.setattr(run_x1, "_model_dir", lambda _: tmp_path)
     monkeypatch.setattr(run_x1, "host_memory_snapshot", lambda: {"avail_phys_bytes": 2 * run_x1.GIB})
     active = []
     class Job:
         def __init__(self, cap): pass
-        def assign(self, pid): pass
+        def assign(self, process):
+            assert process is active[0]  # own the Popen handle, not a reopened PID
         def peak_process_bytes(self): return 1
         def terminate(self): active[0].kill()
         def close(self): pass
@@ -126,6 +128,7 @@ def test_common_x1_entry_delegates_to_isolated_runner(tmp_path, monkeypatch):
         calls.append((pages, kwargs))
         return {"identity": {"arm": "X1"}, "records": [{"page_id": "p", "status": "ok"}]}
     monkeypatch.setattr(run_x1, "run_x1_batch", isolated)
+    monkeypatch.setattr(run_x1, "require_memory_limit", lambda: None)
     destination = tmp_path / "comparison.json"
     assert run_comparison.main(["--arms", "X1", "--memory-cap-gb", "1", "--max-new-tokens", "123", "--out", str(destination)]) == 0
     assert calls[0][1]["max_new_tokens"] == 123
@@ -170,11 +173,12 @@ def test_cli_two_process_resume_does_not_infer_twice(tmp_path):
         "    count=root/'inferences'; count.write_text(str(int(count.read_text())+1) if count.exists() else '1')",
         "    return {'identity':kwargs['backend_identity'],'records':[{'page_id':'p','status':'ok','text':'result','engine_seconds':12.5}]}",
         "run_x1.run_x1_batch=infer",
+        "run_x1.require_memory_limit=lambda:None",
         "cli.main(['--arms','X1','--memory-cap-gb','1','--cache-dir',str(root/'cache'),'--out',str(root/'result.json')])",
     ]))
     for _ in range(2):
         subprocess.run([sys.executable, "-B", "-X", "utf8", str(script), str(REPO), str(tmp_path)], cwd=REPO,
-                       check=True, capture_output=True, text=True, timeout=30)
+                       check=True, capture_output=True, text=True, encoding="utf-8", timeout=30)
     assert (tmp_path / "inferences").read_text() == "1"
     report = json.loads((tmp_path / "result.json").read_text(encoding="utf-8"))
     raw = json.loads((tmp_path / report["arms"]["X1"]["raw_output_file"]).read_text(encoding="utf-8"))
@@ -188,4 +192,116 @@ def test_cli_imports_on_datetime_without_python311_utc_alias():
     import subprocess
     code = "import datetime; hasattr(datetime, 'UTC') and delattr(datetime, 'UTC'); import tools.ocr_comparison.manifest; import tools.ocr_comparison.run_x1; import tools.ocr_comparison.run_comparison"
     subprocess.run([sys.executable, "-B", "-c", code], cwd=REPO, check=True,
-                   capture_output=True, text=True, timeout=30)
+                   capture_output=True, text=True, encoding="utf-8", timeout=30)
+
+
+def test_parameter_and_cli_imports_without_windows_dll_in_fresh_process():
+    import subprocess
+    code = "\n".join([
+        "import ctypes,sys",
+        "sys.platform='linux'",
+        "hasattr(ctypes,'WinDLL') and delattr(ctypes,'WinDLL')",
+        "from tools.ocr_comparison import job_limit,run_x1,run_comparison,manifest",
+        "run_x1.validate_card_limits(180,1800)",
+        "assert job_limit.memory_limit_capability()['supported'] is False",
+        "assert job_limit.self_peak_commit_bytes() is None",
+        "try: job_limit.JobMemoryLimit(1024)",
+        "except job_limit.MemoryLimitUnavailable: pass",
+        "else: raise AssertionError('unsupported limit must not run unbounded')",
+    ])
+    subprocess.run([sys.executable, "-B", "-c", code], cwd=REPO, check=True,
+                   capture_output=True, text=True, encoding="utf-8", timeout=30)
+
+
+def test_unavailable_real_enforcement_fails_before_model_or_child(tmp_path, monkeypatch):
+    from tools.ocr_comparison import run_x1, job_limit
+    monkeypatch.setattr(job_limit.sys, "platform", "linux")
+    monkeypatch.setattr(run_x1, "host_memory_snapshot", lambda: {"avail_phys_bytes": 1024 * 1024})
+    monkeypatch.setattr(run_x1, "_model_dir", lambda _: pytest.fail("must reject before model inspection"))
+    monkeypatch.setattr(run_x1.subprocess, "Popen", lambda *a, **kw: pytest.fail("must not launch"))
+    with pytest.raises(job_limit.MemoryLimitUnavailable, match="requires Windows Job"):
+        run_x1.run_x1_batch([], deadline=1, total_budget=1, model_dir=str(tmp_path))
+
+
+def test_linux_memory_observation_is_measured_and_missing_stays_unknown(tmp_path):
+    from tools.ocr_comparison import job_limit
+    path = tmp_path / "meminfo"
+    path.write_text("MemTotal: 100 kB\nMemAvailable: 40 kB\nCommitLimit: 80 kB\nCommitted_AS: 30 kB\n", encoding="ascii")
+    observed = job_limit._linux_memory_snapshot(path)
+    assert observed["total_phys_bytes"] == 102400
+    assert observed["avail_phys_bytes"] == 40960
+    assert observed["commit_free_bytes"] == 51200
+    assert observed["observation_source"] == "/proc/meminfo"
+    path.write_text("MemTotal: 100 kB\n", encoding="ascii")
+    assert job_limit._linux_memory_snapshot(path)["avail_phys_bytes"] is None
+    assert job_limit._linux_memory_snapshot(tmp_path / "missing")["avail_phys_bytes"] is None
+    with pytest.raises(job_limit.MemoryLimitUnavailable, match="unknown"):
+        job_limit.card_memory_cap_bytes(None)
+
+
+def test_windows_adapter_delegates_original_process_handle_to_shared_owner(monkeypatch):
+    from types import SimpleNamespace
+    from tools.ocr_comparison import job_limit
+    from company_wiki import _process_tree
+    monkeypatch.setattr(job_limit.sys, "platform", "win32")
+    seen = []
+    class Owner:
+        def __init__(self, handle, *, memory_limit_bytes):
+            seen.append((handle, memory_limit_bytes))
+        def peak_commit_bytes(self): return 123
+        def terminate(self): seen.append("terminate")
+        def close(self): seen.append("close")
+    monkeypatch.setattr(_process_tree, "WindowsJob", Owner)
+    limit = job_limit.JobMemoryLimit(456)
+    limit.assign(SimpleNamespace(_handle=789))
+    assert limit.peak_process_bytes() == 123
+    limit.terminate()
+    limit.close()
+    assert seen == [(789, 456), "terminate", "close"]
+
+
+def test_common_real_x1_refuses_unsupported_platform_before_model(tmp_path, monkeypatch):
+    from tools.ocr_comparison import run_comparison, run_x1, job_limit
+    monkeypatch.setattr(job_limit.sys, "platform", "linux")
+    plan = tmp_path / "plan"
+    plan.mkdir()
+    (plan / "sample_manifest.json").write_text(json.dumps({"pages": [{"page_id": "p"}]}))
+    (plan / "gold.json").write_text("{}")
+    monkeypatch.setattr(run_comparison, "_plan_dir", lambda _: plan)
+    monkeypatch.setattr(run_comparison, "render_pages", lambda *a: [{"page_id": "p", "png": "unused", "sha256": "sha"}])
+    monkeypatch.setattr(run_comparison, "resource_snapshot", lambda: {})
+    monkeypatch.setattr(run_x1, "_model_dir", lambda _: pytest.fail("unsupported real backend must not inspect model"))
+    monkeypatch.setenv("CWP_PROJECT_ROOT", str(REPO))
+    with pytest.raises(job_limit.MemoryLimitUnavailable, match="requires Windows Job"):
+        run_comparison.main(["--arms", "X1", "--memory-cap-gb", "1", "--out", str(tmp_path / "out.json")])
+
+
+def test_assignment_failure_does_not_release_bootstrap_and_reaps_child(tmp_path, monkeypatch):
+    from tools.ocr_comparison import run_x1
+    events = []
+    class Input:
+        def write(self, value): pytest.fail("must not release before successful job assignment")
+        def close(self): events.append("stdin-close")
+    class Process:
+        stdin = Input()
+        def kill(self): events.append("kill")
+        def wait(self):
+            events.append("wait")
+            return 1
+    process = Process()
+    class Job:
+        def __init__(self, cap): pass
+        def assign(self, actual):
+            assert actual is process
+            events.append("assign")
+            raise OSError("assignment refused")
+        def close(self): events.append("job-close")
+    monkeypatch.setattr(run_x1, "require_memory_limit", lambda: None)
+    monkeypatch.setattr(run_x1, "host_memory_snapshot", lambda: {"avail_phys_bytes": 1024 * 1024})
+    monkeypatch.setattr(run_x1, "_model_dir", lambda _: tmp_path)
+    monkeypatch.setattr(run_x1, "JobMemoryLimit", Job)
+    monkeypatch.setattr(run_x1.subprocess, "Popen", lambda *a, **kw: process)
+    with pytest.raises(OSError, match="assignment refused"):
+        run_x1.run_x1_batch([], deadline=1, total_budget=1, workdir=tmp_path,
+                            backend_identity={"arm": "TEST"})
+    assert events == ["assign", "stdin-close", "kill", "wait", "job-close"]

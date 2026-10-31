@@ -79,30 +79,19 @@ def runtime_identity() -> dict:
 
 
 def resource_snapshot() -> dict:
-    import ctypes
+    from .job_limit import GIB, host_memory_snapshot, memory_limit_capability
 
-    class MEMORYSTATUSEX(ctypes.Structure):
-        _fields_ = [
-            ("dwLength", ctypes.c_ulong), ("dwMemoryLoad", ctypes.c_ulong),
-            ("ullTotalPhys", ctypes.c_uint64), ("ullAvailPhys", ctypes.c_uint64),
-            ("ullTotalPageFile", ctypes.c_uint64), ("ullAvailPageFile", ctypes.c_uint64),
-            ("ullTotalVirtual", ctypes.c_uint64), ("ullAvailVirtual", ctypes.c_uint64),
-            ("ullAvailExtendedVirtual", ctypes.c_uint64),
-        ]
-
-    if sys.platform != "win32":
-        return {"note": "non-windows host"}
-    stat = MEMORYSTATUSEX()
-    stat.dwLength = ctypes.sizeof(MEMORYSTATUSEX)
-    ctypes.windll.kernel32.GlobalMemoryStatusEx(ctypes.byref(stat))
-    gb = 1024 ** 3
-    return {
-        "memory_load_pct": stat.dwMemoryLoad,
-        "avail_phys_gb": round(stat.ullAvailPhys / gb, 2),
-        "total_phys_gb": round(stat.ullTotalPhys / gb, 2),
-        "avail_commit_gb": round(stat.ullAvailPageFile / gb, 2),
-        "gpu_note": "no discrete GPU on this host; all arms CPU",
-    }
+    observed = host_memory_snapshot()
+    def gb(name):
+        value = observed[name]
+        return value / GIB if value is not None else None
+    return {"memory_load_pct": observed["memory_load_pct"],
+            "avail_phys_gb": gb("avail_phys_bytes"),
+            "total_phys_gb": gb("total_phys_bytes"),
+            "avail_commit_gb": gb("commit_free_bytes"),
+            "observation_source": observed["observation_source"],
+            "reason": observed["reason"],
+            "memory_enforcement": memory_limit_capability()}
 
 
 def build_run_manifest(
@@ -110,7 +99,7 @@ def build_run_manifest(
     *,
     arms: dict,
     deadline_seconds: float,
-    memory_cap_gb: float,
+    memory_cap_gb: float | None,
     cache_enabled: bool,
     sample_manifest_sha256: str,
     gold_sha256: str,
