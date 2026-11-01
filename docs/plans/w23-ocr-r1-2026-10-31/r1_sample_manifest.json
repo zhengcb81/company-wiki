@@ -171,14 +171,14 @@
    ],
    "native_text_layer_chars": 749,
    "document_id": "urn:company-wiki:document:sha256:f8f18fd12ef060fa0183be1a641232a857daa438518d19c911cdf602ac2fb07d",
-   "source_id": "urn:company-wiki:source:sha256:22e19778a2380dd3ae1044756e574b32f979bcbd75cb607867c2ed404e014319",
-   "content_sha256": "22e19778a2380dd3ae1044756e574b32f979bcbd75cb607867c2ed404e014319",
-   "mime_type": "application/json",
+   "source_id": "urn:company-wiki:source:sha256:f8f18fd12ef060fa0183be1a641232a857daa438518d19c911cdf602ac2fb07d",
+   "content_sha256": "f8f18fd12ef060fa0183be1a641232a857daa438518d19c911cdf602ac2fb07d",
+   "mime_type": "application/pdf",
    "added_in_revision": 2
   }
  ],
  "excluded_from_old_sample": "seven pages from five documents not used by the 2026-10-30 experiment (amec AR2025, wuxi AR2022, ksy FY2025 results, biren AR2025, berkshire2007)",
- "notes": "Seven real-document pages (CN 2, HK 3, US 2) from five documents outside the 2026-10-30 sample; source_id/document_id/content_sha256 are taken from the catalog location rows of each PDF (advisory sha prefixes removed).",
+ "notes": "Eight real-document pages (CN 3 incl. a business-Q&A page, HK 3 incl. a 9-column table, US 2) from six documents outside the 2026-10-30 sample; source_id/document_id/content_sha256 are taken from the catalog location rows of each PDF.",
  "revision": {
   "revision": 2,
   "date": "2026-11-01",

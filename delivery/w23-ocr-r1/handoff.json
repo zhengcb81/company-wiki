@@ -18,10 +18,12 @@
   "fc4228c1 docs: bind final tested commit in R1 handoff",
   "96cde9bd docs: close R3 review items - gold impact metadata, A4 disclosure, X2 denominators, task_plan",
   "4e8c49e2 docs: record final reviewed commit, doc suffix and pushed_to_remote",
-  "ff2bec4f docs: close R1 review nits and final state (READY_FOR_ROOT)"
+  "ff2bec4f docs: close R1 review nits and final state (READY_FOR_ROOT)",
+  "bf672e6c feat: close A3 Q&A coverage with an independent-gold page and add unsourced-line control",
+  "04aa7048 docs: bind 8-page final state in R1 handoff"
  ],
- "final_tested_commit": "bf672e6c (8-page delivery; tool bytes identical to the tested da9ca2c8, builder/data only changed)",
- "final_reviewed_commit": "fc4228c1 (full review READY_FOR_ROOT); sample-extension delta pending reviewer confirmation",
+ "final_tested_commit": "04aa7048f7b6952110a391bd3d559834a06cea09",
+ "final_reviewed_commit": "PENDING_REVIEW",
  "code_file_sha256": {
   "tools/ocr_comparison/campaign.py": {
    "raw_sha256": "d974cbaefe09cf2dca6060250095477db5b6fa933ae82b6f07b3ef5fc44e38e1",
@@ -79,7 +81,7 @@
  "frozen_inputs": {
   "sample_manifest": {
    "path": "docs/plans/w23-ocr-r1-2026-10-31/r1_sample_manifest.json",
-   "sha256": "dce2f6e558f001b068e10b2dadcab76bc7eb6451009a83f9c2c2ceea6fa32efc"
+   "sha256": "da1d938d3820778437de0e27b222395a7d0ff3dc07df8ff87c4b51393ade1fc5"
   },
   "gold": {
    "path": "docs/plans/w23-ocr-r1-2026-10-31/r1_gold.json",
@@ -278,8 +280,5 @@
   "ledger contains one under-count (7 zero rows first R0 pass) and one over-count (1080 s never-started pages), both disclosed"
  ],
  "recommendation": "现有不动 for production; table-structure linearization is R0's measured gap. Xiaomi needs a host with >=6.5 GB free RAM and a resolution of the Job Object bound mismatch before any card-compliant X1F result can exist.",
- "pushed_to_remote": "origin/codex/w23-ocr-r1-20261031",
- "campaign_extensions": [
-  "bf672e6c: added one CN business-Q&A page (independent gold rev4) and ran R0/N0 on it under the same ledger; aggregates recomputed over 8 pages"
- ]
+ "pushed_to_remote": null
 }

@@ -7,7 +7,7 @@ PLAN_ID=w23-ocr-r1-2026-10-31 · worktree `company-wiki-w23-xiaomi-ocr-r1` · br
 ## 1. One campaign, one ledger
 
 - Budget **1800 s**; consumed **1431.4 s**; per-request cap 180 s; single concurrency.
-- R0 8 pages, real timings (12.8–28.1 s/page); the corrected R0 charge is 144.15 s.
+- R0 8 pages, real timings total R0 request time 169.05 s.
 - The ledger is append-only. Two defects are disclosed rather than hidden: seven 0.0 s rows from the first R0 invocation (under-count of that first pass, re-measured at 144.15 s), and 1080 s charged to six pages that X1F attempt 2 never started because the child crashed (over-count; the code now charges 0 for never-started pages).
 - Ledger remaining after all runs: **368.6 s**.
 
@@ -24,7 +24,7 @@ PLAN_ID=w23-ocr-r1-2026-10-31 · worktree `company-wiki-w23-xiaomi-ocr-r1` · br
 | r1_brk2007_p005 | US/en/annual_report | eval | 3817 | 32 | 17 | 19 |
 | r1_wanhua_qa2021_p003 | CN/zh-CN/investor_relations_qa | eval | 718 | 18 | 19 | 15 |
 
-Gold was transcribed by an independent reviewer from the PNGs; the PDFs do have native text layers, which the reviewer reports not using as ground truth — on clean born-digital pages near-equality with the native layer is expected and disclosed as not evidence either way (revision 3; the revision block records the HK page swap and the correction of the Wuxi line 客户对公司的服务需求, which was found by the final review and corrected before this report; metrics were recomputed from the same captured outputs, no engine re-ran). **Disclosure:** the reviewer reports having used the PNGs only; on clean born-digital pages an accurate transcription is expected to closely match the native text layer, so near-equality is not evidence either way. The retired HK page's revision-1 transcription was never committed and cannot be recovered from git; `archived_pages` records that provenance limitation and the page's exclusion from every denominator.
+Gold was transcribed by an independent reviewer from the PNGs; the PDFs do have native text layers, which the reviewer reports not using as ground truth — on clean born-digital pages near-equality with the native layer is expected and disclosed as not evidence either way (revision 4; the revision block records the HK page swap and the correction of the Wuxi line 客户对公司的服务需求, which was found by the final review and corrected before this report; metrics were recomputed from the same captured outputs, no engine re-ran). **Disclosure:** the reviewer reports having used the PNGs only; on clean born-digital pages an accurate transcription is expected to closely match the native text layer, so near-equality is not evidence either way. The retired HK page's revision-1 transcription was never committed and cannot be recovered from git; `archived_pages` records that provenance limitation and the page's exclusion from every denominator.
 
 ## 3. Results — full denominators
 
@@ -85,7 +85,7 @@ Attempt 2 is the record: the model loaded (mapped fp32) in ~97 s, page 1 failed 
 
 - No CN table and no US table in the frozen set (HK table covered, 9 columns).
 - No genuine scanned/stamped/skewed/low-resolution page; no dual-column page.
-- No IR-Q&A or conditional-negation page in this round's sample (the HK results prose and the Wuxi/Berkshire text carry conditions, but no Q&A format).
+- Q&A coverage is CN-only (the Wanhua 业绩说明会 page); no EN or HK Q&A page. Conditional/negation language is covered in the Wuxi/Berkshire/KSY prose.
 - Formula coverage is synthetic only.
 
 ## 8. Recommendation

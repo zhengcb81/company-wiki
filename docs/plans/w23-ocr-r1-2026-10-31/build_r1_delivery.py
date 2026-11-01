@@ -161,6 +161,7 @@ def main() -> int:
                 "pdf_page_index": meta[pid]["pdf_page_index"],
                 "page_image_sha256": meta[pid]["png_sha256"],
                 "engine_seconds": record.get("request_seconds"),
+                "excluded_reason": record.get("error"),
                 "finish_reason": record.get("finish_reason"),
                 "cache_hit": record.get("cache_hit"),
             })
@@ -407,7 +408,7 @@ def main() -> int:
         f"- Budget **{comparison['campaign']['budget_seconds']:.0f} s**; consumed "
         f"**{comparison['campaign']['spent_seconds']:.1f} s**; per-request cap 180 s; single concurrency.",
         f"- R0 {sum(1 for e in comparison['arms']['R0']['per_page'])} pages, real timings "
-        "(12.8–28.1 s/page); the corrected R0 charge is 144.15 s.",
+        f"total R0 request time {sum(e['engine_seconds'] for e in comparison['arms']['R0']['per_page'] if e.get('engine_seconds') is not None):.2f} s.",
         "- The ledger is append-only. Two defects are disclosed rather than hidden: seven 0.0 s rows "
         "from the first R0 invocation (under-count of that first pass, re-measured at 144.15 s), and "
         "1080 s charged to six pages that X1F attempt 2 never started because the child crashed "
@@ -427,7 +428,7 @@ def main() -> int:
         "Gold was transcribed by an independent reviewer from the PNGs; the PDFs do have native text "
         "layers, which the reviewer reports not using as ground truth — on clean born-digital pages "
         "near-equality with the native layer is expected and disclosed as not evidence either way "
-        "(revision 3; the revision "
+        f"(revision {gold.get('revision', {}).get('revision')}; the revision "
         "block records the HK page swap and the correction of the Wuxi line 客户对公司的服务需求, "
         "which was found by the final review and corrected before this report; metrics were "
         "recomputed from the same captured outputs, no engine re-ran). **Disclosure:** the reviewer "
@@ -544,8 +545,8 @@ def main() -> int:
         "",
         "- No CN table and no US table in the frozen set (HK table covered, 9 columns).",
         "- No genuine scanned/stamped/skewed/low-resolution page; no dual-column page.",
-        "- No IR-Q&A or conditional-negation page in this round's sample (the HK results prose and "
-        "the Wuxi/Berkshire text carry conditions, but no Q&A format).",
+        "- Q&A coverage is CN-only (the Wanhua 业绩说明会 page); no EN or HK Q&A page. Conditional/"
+        "negation language is covered in the Wuxi/Berkshire/KSY prose.",
         "- Formula coverage is synthetic only.",
         "",
         "## 8. Recommendation",

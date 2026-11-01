@@ -1,7 +1,7 @@
 {
  "schema_version": "cwp-ocr-comparison/1",
  "plan_id": "w23-ocr-r1-2026-10-31",
- "created_at_utc": "2026-11-01T17:53:02.017340+00:00",
+ "created_at_utc": "2026-11-01T18:12:23.715270+00:00",
  "campaign": {
   "ledger_file": "campaign_ledger.json",
   "budget_seconds": 1800.0,
@@ -356,7 +356,7 @@
   "required_platform_fix": "20dd0143197462be31a467cdd53bcff1a31b4d94 (cherry-picked)"
  },
  "inputs": {
-  "sample_manifest_sha256": "dce2f6e558f001b068e10b2dadcab76bc7eb6451009a83f9c2c2ceea6fa32efc",
+  "sample_manifest_sha256": "da1d938d3820778437de0e27b222395a7d0ff3dc07df8ff87c4b51393ade1fc5",
   "gold_sha256": "cedcf16cc31b76ce458e0ffda83438e081e935086a2a61392637338863846d88",
   "control_manifest_sha256": "027662e6c91a04ebe3424297fa60f4fd284707f0df707937bd3db2f28a4eeee3",
   "page_count": 8,
@@ -477,9 +477,9 @@
    "role": "eval",
    "stratum": "CN/zh-CN/investor_relations_qa",
    "source_pdf": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\万华化学\\raw\\research\\万华化学：2021年度业绩说明会会议纪要.pdf",
-   "source_id": "urn:company-wiki:source:sha256:22e19778a2380dd3ae1044756e574b32f979bcbd75cb607867c2ed404e014319",
+   "source_id": "urn:company-wiki:source:sha256:f8f18fd12ef060fa0183be1a641232a857daa438518d19c911cdf602ac2fb07d",
    "document_id": "urn:company-wiki:document:sha256:f8f18fd12ef060fa0183be1a641232a857daa438518d19c911cdf602ac2fb07d",
-   "content_sha256": "22e19778a2380dd3ae1044756e574b32f979bcbd75cb607867c2ed404e014319",
+   "content_sha256": "f8f18fd12ef060fa0183be1a641232a857daa438518d19c911cdf602ac2fb07d",
    "pdf_page_index": 3,
    "page_image_sha256": "097eaf47d1da132c80a64dfdd42ca81c72d3b559969ca552b6bc7fb1d00478fc",
    "gold_chars": 718,
@@ -543,6 +543,7 @@
      "pdf_page_index": 29,
      "page_image_sha256": "13a01630a162d0c147d26349f0c76cfda6caa61b9ae16894fbe45f6b68ab445c",
      "engine_seconds": 18.136345799997798,
+     "excluded_reason": null,
      "finish_reason": null,
      "cache_hit": null
     },
@@ -593,6 +594,7 @@
      "pdf_page_index": 10,
      "page_image_sha256": "647c5e1783d03fab7f2a9bd9f9620406e338eeeb5c196279f45ff0a6113b5f09",
      "engine_seconds": 24.19738550001057,
+     "excluded_reason": null,
      "finish_reason": null,
      "cache_hit": null
     },
@@ -649,6 +651,7 @@
      "pdf_page_index": 3,
      "page_image_sha256": "6df6711d8390069bb82d8565674667cd75b140a61c4f5448cae31d22b9281fe2",
      "engine_seconds": 16.231224500006647,
+     "excluded_reason": null,
      "finish_reason": null,
      "cache_hit": null
     },
@@ -705,6 +708,7 @@
      "pdf_page_index": 12,
      "page_image_sha256": "b334a93fa7b417760518146efa1fe8361e8ef409d56f3765c152ab3373b2f630",
      "engine_seconds": 19.702864699997008,
+     "excluded_reason": null,
      "finish_reason": null,
      "cache_hit": null
     },
@@ -761,6 +765,7 @@
      "pdf_page_index": 30,
      "page_image_sha256": "2f179f02f83414b7025f8a48a359a06ccc9ff6040da034785aeb39b5fbed96a7",
      "engine_seconds": 12.803244100010488,
+     "excluded_reason": null,
      "finish_reason": null,
      "cache_hit": null
     },
@@ -819,6 +824,7 @@
      "pdf_page_index": 1,
      "page_image_sha256": "023b730c57d317801ebaa8384bbeab8cfc8ac3d9ade17ff7f1d2f411224c20d2",
      "engine_seconds": 28.13903059999575,
+     "excluded_reason": null,
      "finish_reason": null,
      "cache_hit": null
     },
@@ -877,6 +883,7 @@
      "pdf_page_index": 5,
      "page_image_sha256": "5335c3457d3b3c1481386c05aa968004264817a09c73b5b9294dc04a296f3d3e",
      "engine_seconds": 24.944128299990552,
+     "excluded_reason": null,
      "finish_reason": null,
      "cache_hit": null
     },
@@ -921,12 +928,13 @@
       "unsourced_rate": 0.0,
       "sample": []
      },
-     "source_id": "urn:company-wiki:source:sha256:22e19778a2380dd3ae1044756e574b32f979bcbd75cb607867c2ed404e014319",
+     "source_id": "urn:company-wiki:source:sha256:f8f18fd12ef060fa0183be1a641232a857daa438518d19c911cdf602ac2fb07d",
      "document_id": "urn:company-wiki:document:sha256:f8f18fd12ef060fa0183be1a641232a857daa438518d19c911cdf602ac2fb07d",
-     "content_sha256": "22e19778a2380dd3ae1044756e574b32f979bcbd75cb607867c2ed404e014319",
+     "content_sha256": "f8f18fd12ef060fa0183be1a641232a857daa438518d19c911cdf602ac2fb07d",
      "pdf_page_index": 3,
      "page_image_sha256": "097eaf47d1da132c80a64dfdd42ca81c72d3b559969ca552b6bc7fb1d00478fc",
      "engine_seconds": 24.89731319999555,
+     "excluded_reason": null,
      "finish_reason": null,
      "cache_hit": null
     }
@@ -1075,6 +1083,7 @@
      "pdf_page_index": 29,
      "page_image_sha256": "13a01630a162d0c147d26349f0c76cfda6caa61b9ae16894fbe45f6b68ab445c",
      "engine_seconds": 0.0,
+     "excluded_reason": null,
      "finish_reason": null,
      "cache_hit": null
     },
@@ -1125,6 +1134,7 @@
      "pdf_page_index": 10,
      "page_image_sha256": "647c5e1783d03fab7f2a9bd9f9620406e338eeeb5c196279f45ff0a6113b5f09",
      "engine_seconds": 0.0,
+     "excluded_reason": null,
      "finish_reason": null,
      "cache_hit": null
     },
@@ -1175,6 +1185,7 @@
      "pdf_page_index": 3,
      "page_image_sha256": "6df6711d8390069bb82d8565674667cd75b140a61c4f5448cae31d22b9281fe2",
      "engine_seconds": 0.0,
+     "excluded_reason": null,
      "finish_reason": null,
      "cache_hit": null
     },
@@ -1230,6 +1241,7 @@
      "pdf_page_index": 12,
      "page_image_sha256": "b334a93fa7b417760518146efa1fe8361e8ef409d56f3765c152ab3373b2f630",
      "engine_seconds": 0.0,
+     "excluded_reason": null,
      "finish_reason": null,
      "cache_hit": null
     },
@@ -1282,6 +1294,7 @@
      "pdf_page_index": 30,
      "page_image_sha256": "2f179f02f83414b7025f8a48a359a06ccc9ff6040da034785aeb39b5fbed96a7",
      "engine_seconds": 0.0,
+     "excluded_reason": null,
      "finish_reason": null,
      "cache_hit": null
     },
@@ -1338,6 +1351,7 @@
      "pdf_page_index": 1,
      "page_image_sha256": "023b730c57d317801ebaa8384bbeab8cfc8ac3d9ade17ff7f1d2f411224c20d2",
      "engine_seconds": 0.0,
+     "excluded_reason": null,
      "finish_reason": null,
      "cache_hit": null
     },
@@ -1394,6 +1408,7 @@
      "pdf_page_index": 5,
      "page_image_sha256": "5335c3457d3b3c1481386c05aa968004264817a09c73b5b9294dc04a296f3d3e",
      "engine_seconds": 0.0,
+     "excluded_reason": null,
      "finish_reason": null,
      "cache_hit": null
     },
@@ -1438,12 +1453,13 @@
       "unsourced_rate": 0.0,
       "sample": []
      },
-     "source_id": "urn:company-wiki:source:sha256:22e19778a2380dd3ae1044756e574b32f979bcbd75cb607867c2ed404e014319",
+     "source_id": "urn:company-wiki:source:sha256:f8f18fd12ef060fa0183be1a641232a857daa438518d19c911cdf602ac2fb07d",
      "document_id": "urn:company-wiki:document:sha256:f8f18fd12ef060fa0183be1a641232a857daa438518d19c911cdf602ac2fb07d",
-     "content_sha256": "22e19778a2380dd3ae1044756e574b32f979bcbd75cb607867c2ed404e014319",
+     "content_sha256": "f8f18fd12ef060fa0183be1a641232a857daa438518d19c911cdf602ac2fb07d",
      "pdf_page_index": 3,
      "page_image_sha256": "097eaf47d1da132c80a64dfdd42ca81c72d3b559969ca552b6bc7fb1d00478fc",
      "engine_seconds": 0.0,
+     "excluded_reason": null,
      "finish_reason": null,
      "cache_hit": null
     }
@@ -1562,6 +1578,7 @@
      "pdf_page_index": 29,
      "page_image_sha256": "13a01630a162d0c147d26349f0c76cfda6caa61b9ae16894fbe45f6b68ab445c",
      "engine_seconds": 57.0829276000004,
+     "excluded_reason": "MemoryError: ",
      "finish_reason": null,
      "cache_hit": null
     },
@@ -1583,6 +1600,7 @@
      "pdf_page_index": 10,
      "page_image_sha256": "647c5e1783d03fab7f2a9bd9f9620406e338eeeb5c196279f45ff0a6113b5f09",
      "engine_seconds": null,
+     "excluded_reason": "model_load_failed_on_earlier_page: MemoryError",
      "finish_reason": null,
      "cache_hit": null
     },
@@ -1604,6 +1622,7 @@
      "pdf_page_index": 3,
      "page_image_sha256": "6df6711d8390069bb82d8565674667cd75b140a61c4f5448cae31d22b9281fe2",
      "engine_seconds": null,
+     "excluded_reason": "model_load_failed_on_earlier_page: MemoryError",
      "finish_reason": null,
      "cache_hit": null
     },
@@ -1625,6 +1644,7 @@
      "pdf_page_index": 12,
      "page_image_sha256": "b334a93fa7b417760518146efa1fe8361e8ef409d56f3765c152ab3373b2f630",
      "engine_seconds": null,
+     "excluded_reason": "model_load_failed_on_earlier_page: MemoryError",
      "finish_reason": null,
      "cache_hit": null
     },
@@ -1646,6 +1666,7 @@
      "pdf_page_index": 30,
      "page_image_sha256": "2f179f02f83414b7025f8a48a359a06ccc9ff6040da034785aeb39b5fbed96a7",
      "engine_seconds": null,
+     "excluded_reason": "model_load_failed_on_earlier_page: MemoryError",
      "finish_reason": null,
      "cache_hit": null
     },
@@ -1667,6 +1688,7 @@
      "pdf_page_index": 1,
      "page_image_sha256": "023b730c57d317801ebaa8384bbeab8cfc8ac3d9ade17ff7f1d2f411224c20d2",
      "engine_seconds": null,
+     "excluded_reason": "model_load_failed_on_earlier_page: MemoryError",
      "finish_reason": null,
      "cache_hit": null
     },
@@ -1688,6 +1710,7 @@
      "pdf_page_index": 5,
      "page_image_sha256": "5335c3457d3b3c1481386c05aa968004264817a09c73b5b9294dc04a296f3d3e",
      "engine_seconds": null,
+     "excluded_reason": "model_load_failed_on_earlier_page: MemoryError",
      "finish_reason": null,
      "cache_hit": null
     },
@@ -1703,12 +1726,13 @@
       "unsourced_rate": null,
       "sample": []
      },
-     "source_id": "urn:company-wiki:source:sha256:22e19778a2380dd3ae1044756e574b32f979bcbd75cb607867c2ed404e014319",
+     "source_id": "urn:company-wiki:source:sha256:f8f18fd12ef060fa0183be1a641232a857daa438518d19c911cdf602ac2fb07d",
      "document_id": "urn:company-wiki:document:sha256:f8f18fd12ef060fa0183be1a641232a857daa438518d19c911cdf602ac2fb07d",
-     "content_sha256": "22e19778a2380dd3ae1044756e574b32f979bcbd75cb607867c2ed404e014319",
+     "content_sha256": "f8f18fd12ef060fa0183be1a641232a857daa438518d19c911cdf602ac2fb07d",
      "pdf_page_index": 3,
      "page_image_sha256": "097eaf47d1da132c80a64dfdd42ca81c72d3b559969ca552b6bc7fb1d00478fc",
      "engine_seconds": null,
+     "excluded_reason": "page added to the sample after this arm's runs (manifest revision 2)",
      "finish_reason": null,
      "cache_hit": null
     }
@@ -1828,6 +1852,7 @@
      "pdf_page_index": 29,
      "page_image_sha256": "13a01630a162d0c147d26349f0c76cfda6caa61b9ae16894fbe45f6b68ab445c",
      "engine_seconds": 93.76434969999536,
+     "excluded_reason": "RuntimeError: [enforce fail at alloc_cpu.cpp:117] data. DefaultCPUAllocator: not enough memory: you tried to allocate 141557760 bytes.",
      "finish_reason": null,
      "cache_hit": null
     },
@@ -1849,6 +1874,7 @@
      "pdf_page_index": 10,
      "page_image_sha256": "647c5e1783d03fab7f2a9bd9f9620406e338eeeb5c196279f45ff0a6113b5f09",
      "engine_seconds": null,
+     "excluded_reason": "child_exit_code=3221225477; backstop_hit=False",
      "finish_reason": null,
      "cache_hit": null
     },
@@ -1870,6 +1896,7 @@
      "pdf_page_index": 3,
      "page_image_sha256": "6df6711d8390069bb82d8565674667cd75b140a61c4f5448cae31d22b9281fe2",
      "engine_seconds": null,
+     "excluded_reason": "child_exit_code=3221225477; backstop_hit=False",
      "finish_reason": null,
      "cache_hit": null
     },
@@ -1891,6 +1918,7 @@
      "pdf_page_index": 12,
      "page_image_sha256": "b334a93fa7b417760518146efa1fe8361e8ef409d56f3765c152ab3373b2f630",
      "engine_seconds": null,
+     "excluded_reason": "child_exit_code=3221225477; backstop_hit=False",
      "finish_reason": null,
      "cache_hit": null
     },
@@ -1912,6 +1940,7 @@
      "pdf_page_index": 30,
      "page_image_sha256": "2f179f02f83414b7025f8a48a359a06ccc9ff6040da034785aeb39b5fbed96a7",
      "engine_seconds": null,
+     "excluded_reason": "child_exit_code=3221225477; backstop_hit=False",
      "finish_reason": null,
      "cache_hit": null
     },
@@ -1933,6 +1962,7 @@
      "pdf_page_index": 1,
      "page_image_sha256": "023b730c57d317801ebaa8384bbeab8cfc8ac3d9ade17ff7f1d2f411224c20d2",
      "engine_seconds": null,
+     "excluded_reason": "child_exit_code=3221225477; backstop_hit=False",
      "finish_reason": null,
      "cache_hit": null
     },
@@ -1954,6 +1984,7 @@
      "pdf_page_index": 5,
      "page_image_sha256": "5335c3457d3b3c1481386c05aa968004264817a09c73b5b9294dc04a296f3d3e",
      "engine_seconds": null,
+     "excluded_reason": "child_exit_code=3221225477; backstop_hit=False",
      "finish_reason": null,
      "cache_hit": null
     },
@@ -1969,12 +2000,13 @@
       "unsourced_rate": null,
       "sample": []
      },
-     "source_id": "urn:company-wiki:source:sha256:22e19778a2380dd3ae1044756e574b32f979bcbd75cb607867c2ed404e014319",
+     "source_id": "urn:company-wiki:source:sha256:f8f18fd12ef060fa0183be1a641232a857daa438518d19c911cdf602ac2fb07d",
      "document_id": "urn:company-wiki:document:sha256:f8f18fd12ef060fa0183be1a641232a857daa438518d19c911cdf602ac2fb07d",
-     "content_sha256": "22e19778a2380dd3ae1044756e574b32f979bcbd75cb607867c2ed404e014319",
+     "content_sha256": "f8f18fd12ef060fa0183be1a641232a857daa438518d19c911cdf602ac2fb07d",
      "pdf_page_index": 3,
      "page_image_sha256": "097eaf47d1da132c80a64dfdd42ca81c72d3b559969ca552b6bc7fb1d00478fc",
      "engine_seconds": null,
+     "excluded_reason": "page added to the sample after this arm's runs (manifest revision 2)",
      "finish_reason": null,
      "cache_hit": null
     }
