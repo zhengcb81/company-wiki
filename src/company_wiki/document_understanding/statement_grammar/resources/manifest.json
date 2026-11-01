@@ -1,0 +1,31 @@
+{
+  "schema": "statement-grammar-resources/1",
+  "packages": {
+    "nltk": "3.10.3",
+    "jieba": "0.42.1"
+  },
+  "assets": {
+    "averaged_perceptron_tagger_eng.classes.json": {
+      "bytes": 285,
+      "sha256": "d152ffa69d45b8357276341a3d592c6c025911d52ec0d9068d4f382560dd48b6"
+    },
+    "averaged_perceptron_tagger_eng.tagdict.json": {
+      "bytes": 25788,
+      "sha256": "4c713731cb06727736962bc8cd94ad919217a040e76691059af99bc0c2c9c246"
+    },
+    "averaged_perceptron_tagger_eng.weights.json": {
+      "bytes": 5677744,
+      "sha256": "789e8e35f6fac656d9b7eccea29ba4e8a137cbb5b525dd31f39e4291a9e80832"
+    },
+    "jieba.dict.txt": {
+      "bytes": 5071852,
+      "sha256": "7197c3211ddd98962b036cdf40324d1ea2bfaa12bd028e68faa70111a88e12a8"
+    }
+  },
+  "sources": {
+    "english_model": "https://raw.githubusercontent.com/nltk/nltk_data/gh-pages/packages/taggers/averaged_perceptron_tagger_eng.zip",
+    "english_model_license": "https://raw.githubusercontent.com/nltk/nltk_data/gh-pages/packages/taggers/averaged_perceptron_tagger_eng.xml",
+    "chinese_dictionary": "https://github.com/fxsjy/jieba/tree/v0.42.1/jieba"
+  },
+  "license": "MIT; respective copyright notices accompany resources"
+}

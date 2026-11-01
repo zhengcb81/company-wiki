@@ -114,10 +114,11 @@ def test_finite_scan_keeps_the_complete_source_metadata_group(tmp_path):
 
 def test_registration_service_uses_configured_reader_without_old_rollout_scan(tmp_path, monkeypatch):
     from company_wiki.source_catalog import service
+    from company_wiki.source_catalog import scanner
     config, first, _ = _lake(tmp_path)
     def obsolete_snapshot(_directory):
         raise AssertionError("registration cannot use an old discovery rollout switch")
-    monkeypatch.setattr(service, "v2_scan_shadow_from_snapshot", obsolete_snapshot)
+    monkeypatch.setattr(scanner, "v2_scan_shadow_from_snapshot", obsolete_snapshot)
     catalog = service.SourceCatalog(config)
     try:
         result = catalog.register_sources(root_id="company_raw", relative_paths={

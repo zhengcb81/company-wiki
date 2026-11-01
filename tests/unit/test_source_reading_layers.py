@@ -8,6 +8,8 @@ from pathlib import Path
 
 import pytest
 
+from company_wiki.source_catalog.architecture_gate import import_names
+
 
 SOURCE = Path(__file__).resolve().parents[2] / "src/company_wiki"
 PDF_CONSUMERS = (
@@ -17,36 +19,7 @@ PDF_CONSUMERS = (
 
 
 def _imports(tree):
-    """Include aliases, relative imports and constant dynamic imports."""
-    aliases = {}
-    for node in ast.walk(tree):
-        if isinstance(node, ast.Import):
-            for item in node.names:
-                aliases[item.asname or item.name.split(".")[0]] = item.name
-                yield item.name
-        elif isinstance(node, ast.ImportFrom):
-            for item in node.names:
-                name = "." * node.level + (node.module or "") + "." + item.name
-                aliases[item.asname or item.name] = name.lstrip(".")
-                yield name
-    for node in ast.walk(tree):
-        if not isinstance(node, ast.Call) or not node.args:
-            continue
-        target = _name(node.func)
-        first, *rest = target.split(".")
-        target = ".".join((aliases.get(first, first), *rest))
-        if target in {"__import__", "importlib.import_module"}:
-            argument = node.args[0]
-            if isinstance(argument, ast.Constant) and isinstance(argument.value, str):
-                yield argument.value
-
-
-def _name(node):
-    if isinstance(node, ast.Name):
-        return node.id
-    if isinstance(node, ast.Attribute):
-        return _name(node.value) + "." + node.attr
-    return ""
+    return (name for name, _line in import_names(tree))
 
 
 def violations(source, layer):

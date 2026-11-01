@@ -606,7 +606,7 @@ def current_reading_decision_matches(manifest: Mapping[str, Any]) -> bool:
         if exc.name != "company_wiki.document_understanding.decision_dependencies":
             raise
         return False
-    from company_wiki.document_understanding.decision_inventory import current_decision_trace
+    from company_wiki.source_catalog.narrative_decision_inventory import current_decision_trace
     current = current_decision_trace(dependencies)
     if not current["inventory_complete"]:
         return False

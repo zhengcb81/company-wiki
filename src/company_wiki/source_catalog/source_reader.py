@@ -45,12 +45,12 @@ from .source_location import (
 )
 
 
-SOURCE_REF_SCHEMA_VERSION = "2.0"
+from company_wiki.source_contract.source_version import (
+    SOURCE_REF_SCHEMA_VERSION, SourceReadError, SourceRef, ReviewSnapshot,
+    VerifiedContent, VerifiedVersionReceipt,
+)
 SOURCE_READ_RECEIPT_SCHEMA_VERSION = "2.1"
 _SHA256 = re.compile(r"[0-9a-f]{64}\Z")
-_ERROR_STATUSES = frozenset(
-    {"not_found", "not_indexed", "unavailable", "blocked", "ambiguous"}
-)
 _SUPPORTED_READ_PURPOSES = frozenset(
     {"preview", "filing_reuse", "source_export", "narrative_derivation"}
 )
@@ -62,66 +62,14 @@ _EXACT_SOURCE_FACT_FIELDS = (
 _SCOPE_UNOBSERVED = object()
 
 
-class SourceReadError(RuntimeError):
-    """A named refusal with no bytes or physical path in its public detail."""
-
-    def __init__(self, status: str, reason: str, detail: str = ""):
-        if status not in _ERROR_STATUSES:
-            raise ValueError(f"unknown read status: {status}")
-        self.status = status
-        self.reason = reason
-        self.detail = detail
-        super().__init__(f"{status}: {reason}" + (f" ({detail})" if detail else ""))
 
 
-@dataclass(frozen=True)
-class SourceRef:
-    document_id: str
-    source_id: str
-    content_sha256: str
-    byte_size: int
-    mime_type: str
-    schema_version: str = SOURCE_REF_SCHEMA_VERSION
 
 
-@dataclass(frozen=True)
-class ReviewSnapshot:
-    """Review state observed after the exact source bytes were verified."""
-
-    status: str
-    source_sha256: str | None
-    evidence_sha256: str | None
-    policy_hash: str | None
-    reviewed_at: str | None
 
 
-@dataclass(frozen=True)
-class VerifiedContent:
-    document_id: str
-    source_id: str
-    content_sha256: str
-    data: bytes
-    byte_size: int
-    read_at: str
-    policy_sha256: str
-    source_read_policy_sha256: str
-    review: ReviewSnapshot | None = None
-    schema_version: str = SOURCE_REF_SCHEMA_VERSION
 
 
-@dataclass(frozen=True)
-class VerifiedVersionReceipt:
-    """Verified source identity without source bytes or a physical location."""
-
-    document_id: str
-    source_id: str
-    content_sha256: str
-    byte_size: int
-    read_at: str
-    policy_sha256: str
-    source_read_policy_sha256: str
-    review: ReviewSnapshot | None = None
-    schema_version: str = SOURCE_REF_SCHEMA_VERSION
 
 
 @dataclass(frozen=True)
@@ -201,61 +149,38 @@ class SourceVersionReader:
         )
 
     def _candidate_pages(
-        self, request: SourceRequest, *, include_unknown_publication: bool = False
+        self, request: SourceRequest, *, include_unknown_publication: bool = False,
+        identity_tokens: tuple[str, ...] | None = None,
     ) -> Iterator[dict[str, Any]]:
-        page_size = 1000
-        max_candidates = 20_000
-        for offset in range(0, max_candidates, page_size):
+        from .security_identity import _normalize_text
+        tokens = identity_tokens if identity_tokens is not None else (_normalize_text(request.entity),)
+        page_size, max_candidates, yielded = 1000, 20_000, 0
+        cursor = None
+        while yielded < max_candidates:
+            count = min(page_size, max_candidates - yielded)
             try:
                 documents = self.catalog.query_filing_candidates(
                     document_kind=request.document_kind,
                     source_statuses=("active",),
-                    published_on_or_before=(
-                        None if include_unknown_publication else request.as_of_date
-                    ),
-                    limit=page_size,
-                    offset=offset,
+                    identity_tokens=tokens,
+                    after_document_id=cursor,
+                    published_on_or_before=(None if include_unknown_publication else request.as_of_date),
+                    # One lookahead distinguishes exact EOF from true truncation.
+                    limit=count + 1,
                 )
             except (CatalogReaderUnavailable, sqlite3.Error):
                 raise SourceReadError("unavailable", "catalog_unavailable") from None
-            yield from documents
-            if len(documents) < page_size:
+            page = documents[:count]
+            yield from page
+            yielded += len(page)
+            if len(documents) <= count:
                 return
+            cursor = page[-1]["document_id"]
         raise SourceReadError("unavailable", "candidate_budget_exceeded")
 
-    def query_ref(
-        self, document_id: str, source_id: str, expected_sha256: str
-    ) -> SourceRef:
-        """Pure catalog SELECT; availability and current action policy are open gates."""
-        if not isinstance(document_id, str) or not document_id.strip():
-            raise ValueError("document_id must be non-empty text")
-        if not isinstance(source_id, str) or not source_id.strip():
-            raise ValueError("source_id must be non-empty text")
-        if not isinstance(expected_sha256, str) or not _SHA256.fullmatch(
-            expected_sha256
-        ):
-            raise ValueError("expected_sha256 must be lowercase SHA-256")
-        try:
-            row = self.catalog.reader.exact_source_version(document_id)
-        except (CatalogReaderUnavailable, sqlite3.Error):
-            raise SourceReadError("unavailable", "catalog_unavailable") from None
-        if row is None:
-            raise SourceReadError("not_indexed", "document_not_indexed")
-        if row["source_status"] != "active":
-            raise SourceReadError("blocked", "source_not_active")
-        if row["source_id"] != source_id:
-            raise SourceReadError("not_found", "document_source_mismatch")
-        if not row["content_sha256"]:
-            raise SourceReadError("not_indexed", "source_version_not_indexed")
-        if row["content_sha256"] != expected_sha256:
-            raise SourceReadError("unavailable", "expected_version_mismatch")
-        return SourceRef(
-            document_id=document_id,
-            source_id=source_id,
-            content_sha256=expected_sha256,
-            byte_size=int(row["byte_size"]),
-            mime_type=str(row["mime_type"]),
-        )
+    def query_ref(self, document_id: str, source_id: str, expected_sha256: str) -> SourceRef:
+        from .source_references import query_source_reference
+        return query_source_reference(lambda: self.catalog.reader, document_id, source_id, expected_sha256)
 
     def query_local(self, request: SourceRequest) -> SourceQueryResult:
         """Find indexed versions by business identity without opening source bytes.
@@ -300,8 +225,10 @@ class SourceVersionReader:
             return SourceQueryResult(status, matches, reason,
                                      excluded_candidates=tuple(excluded))
 
+        from .identity_candidates import request_identity_tokens
+        candidate_tokens = request_identity_tokens(request.entity, resolver)
         for document in self._candidate_pages(
-            request, include_unknown_publication=True
+            request, include_unknown_publication=True, identity_tokens=candidate_tokens,
         ):
             document = observe_metadata(document.get("metadata")).project_document(document)
             metadata = _source_metadata(

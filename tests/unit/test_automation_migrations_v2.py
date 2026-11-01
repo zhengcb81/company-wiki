@@ -56,6 +56,7 @@ def test_v5_new_database_preserves_v2_gate_generation_and_claim_indexes(tmp_path
         assert connection.execute("PRAGMA user_version").fetchone()[0] == migrations.SCHEMA_VERSION
         assert _table_names(connection) == EXPECTED_V2_TABLES | {
             "narrative_runs", "narrative_run_jobs", "narrative_model_reservations",
+            "narrative_storage_allocations",
         }
         columns = {
             row[1]: (row[2], row[3], row[4])

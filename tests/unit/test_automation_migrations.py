@@ -18,6 +18,7 @@ EXPECTED_TABLES = frozenset({
     "events", "jobs", "job_dependencies", "attempts",
     "approvals", "effects", "outbox", "notifications", "runtime_gate",
     "narrative_runs", "narrative_run_jobs", "narrative_model_reservations",
+    "narrative_storage_allocations",
 })
 
 

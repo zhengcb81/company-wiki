@@ -1204,6 +1204,7 @@ class StorageSnapshot:
     persistent_added_bytes: int
     scratch_bytes: int
     scratch_peak_bytes: int
+    run_file_bytes: int = 0
 
 
 def _tree_bytes(path: Path) -> int:
@@ -1231,7 +1232,9 @@ class BatchStorageBudget:
 
     def __init__(self, *, files: tuple[Path, ...], persistent_dirs: tuple[Path, ...],
                  scratch_dirs: tuple[Path, ...], max_persistent_bytes: int, max_scratch_bytes: int,
-                 baseline: tuple[int, ...] | None = None):
+                 baseline: tuple[int, ...] | None = None,
+                 owned_accounting: tuple[Path, str] | None = None,
+                 shared_files: tuple[Path, ...] = ()):
         self.paths = files + persistent_dirs
         self.baseline = baseline if baseline is not None else tuple(_tree_bytes(path) for path in self.paths)
         if len(self.baseline) != len(self.paths) or any(type(size) is not int or size < 0 for size in self.baseline):
@@ -1240,15 +1243,66 @@ class BatchStorageBudget:
         self.max_persistent_bytes = max_persistent_bytes
         self.max_scratch_bytes = max_scratch_bytes
         self.peak = 0
+        self.owned_accounting = owned_accounting
+        self._last_sample_at = float('-inf')
+        self._local_added = 0
+        self._scratch = 0
+        self._accounting_store: NarrativeRunStore | None = None
+        self.shared_files = shared_files
+        self.shared_database_bytes = 0
 
-    def snapshot(self) -> StorageSnapshot:
-        added = sum(max(0, _tree_bytes(path) - size) for path, size in zip(self.paths, self.baseline))
-        scratch = sum(_tree_bytes(path) for path in self.scratch_dirs)
-        self.peak = max(self.peak, scratch)
-        return StorageSnapshot(added, scratch, self.peak)
+    def adopt_owned_accounting(self, db_path, run_id, work_dir, *, create_floor):
+        """Resume old work without rewriting its frozen physical baseline.
 
-    def check(self) -> StorageSnapshot:
-        result = self.snapshot()
+        The historical shared delta is conservative and frozen once. All later
+        writes use owner accounting, so another writer cannot grow this run.
+        """
+        if self.owned_accounting is not None:
+            return
+        accounting = NarrativeRunStore(db_path)
+        floor = accounting.legacy_storage_floor(run_id)
+        if floor is None and not create_floor:
+            return
+        index = self.paths.index(work_dir)
+        work_baseline = self.baseline[index]
+        if floor is None:
+            local = max(0, _tree_bytes(work_dir) - work_baseline)
+            floor = max(0, self.snapshot().persistent_added_bytes - local)
+            accounting.adopt_legacy_storage_floor(run_id, floor)
+        self.shared_files = self.paths[:6]
+        self.paths = (work_dir,)
+        self.baseline = (work_baseline,)
+        self.owned_accounting = (db_path, run_id)
+        self._accounting_store = accounting
+        self._last_sample_at = float('-inf')
+
+    def accounting_store(self):
+        if self.owned_accounting is None:
+            return None
+        db_path, _run_id = self.owned_accounting
+        if self._accounting_store is None and db_path.is_file():
+            self._accounting_store = NarrativeRunStore(db_path)
+        return self._accounting_store
+
+    def snapshot(self, *, force: bool = True) -> StorageSnapshot:
+        now = time.monotonic()
+        if force or now - self._last_sample_at >= 5:
+            self._local_added = sum(max(0, _tree_bytes(path) - size)
+                                    for path, size in zip(self.paths, self.baseline))
+            self._scratch = sum(_tree_bytes(path) for path in self.scratch_dirs)
+            self.shared_database_bytes = sum(_tree_bytes(path) for path in self.shared_files)
+            self._last_sample_at = now
+        self.peak = max(self.peak, self._scratch)
+        objects = 0
+        if self.owned_accounting is not None:
+            _, run_id = self.owned_accounting
+            accounting = self.accounting_store()
+            objects = accounting.storage_bytes(run_id) if accounting is not None else 0
+        return StorageSnapshot(self._local_added + objects, self._scratch, self.peak,
+                               run_file_bytes=self._local_added)
+
+    def check(self, *, force: bool = True) -> StorageSnapshot:
+        result = self.snapshot(force=force)
         if result.persistent_added_bytes > self.max_persistent_bytes:
             raise ValueError("PERSISTENT_BYTES_EXCEEDED")
         if result.scratch_bytes > self.max_scratch_bytes:
@@ -1266,6 +1320,7 @@ def _storage_guard(request, catalog, db_path, work_dir, input_hash, *, read_only
         database, Path(str(database) + "-wal"), Path(str(database) + "-shm")))
     baseline_path = work_dir / "storage-baseline.json"
     baseline = None
+    owned_accounting = None
     if read_only and not baseline_path.is_file():
         raise BatchResumeError("BATCH_WORK_BASELINE_MISSING")
     if baseline_path.exists():
@@ -1273,6 +1328,24 @@ def _storage_guard(request, catalog, db_path, work_dir, input_hash, *, read_only
         if saved.get("input_hash") != input_hash:
             raise ValueError("BATCH_WORK_DIRECTORY_CONFLICT")
         baseline = tuple(saved["sizes"])
+        if saved.get("schema_version") == "narrative-storage-baseline/2":
+            owned_accounting = (db_path, request.run_id)
+    elif not read_only:
+        owned_accounting = (db_path, request.run_id)
+    if owned_accounting is not None:
+        # Shared SQLite pages/WAL and the shared CAS tree have no meaningful
+        # per-run physical delta. CAS writes are attributed by their owner in
+        # the existing AUTO ledger; only this run's private work tree is sampled.
+        guard = BatchStorageBudget(files=(), persistent_dirs=(work_dir,), scratch_dirs=(),
+            max_persistent_bytes=request.max_persistent_bytes,
+            max_scratch_bytes=request.max_scratch_bytes, baseline=baseline,
+            owned_accounting=owned_accounting, shared_files=files)
+        if baseline is None:
+            baseline_path.write_text(canonical_json({
+                "schema_version": "narrative-storage-baseline/2", "input_hash": input_hash,
+                "sizes": list(guard.baseline),
+            }), encoding="utf-8")
+        return guard
     persistent_dirs: tuple[Path, ...] = (catalog.config.catalog_dir / "objects", work_dir)
     # Legacy baseline vectors keep their original interpretation and bytes.
     # New vectors also measure this application's small recovery locators.
@@ -1283,6 +1356,8 @@ def _storage_guard(request, catalog, db_path, work_dir, input_hash, *, read_only
         max_scratch_bytes=request.max_scratch_bytes, baseline=baseline)
     if baseline is None and not read_only:
         baseline_path.write_text(canonical_json({"input_hash": input_hash, "sizes": list(guard.baseline)}), encoding="utf-8")
+    if db_path.is_file():
+        guard.adopt_owned_accounting(db_path, request.run_id, work_dir, create_floor=False)
     return guard
 
 
@@ -1301,7 +1376,21 @@ class _BudgetedObjects(LocalNarrativeObjectStore):
         # The object writer creates one temporary file containing exactly these
         # bytes and removes it in finally. PDF/text parsing uses memory only.
         self.guard.peak = max(self.guard.peak, len(data))
-        return super().put(data)
+        if self.guard.owned_accounting is None:
+            return super().put(data)
+        _, run_id = self.guard.owned_accounting
+        accounting = self.guard.accounting_store()
+        if accounting is None:
+            raise ValueError("BATCH_STORAGE_ACCOUNTING_UNAVAILABLE")
+        store_id = str(self.root.resolve())
+        current = self.guard.snapshot()
+        put_object = super().put_with_usage
+        def write(admit):
+            result = put_object(data, before_create=admit)
+            return result.object_key, result.created_bytes
+        return accounting.account_storage_write(run_id=run_id, store_id=store_id,
+            max_bytes=max(0, self.guard.max_persistent_bytes - current.run_file_bytes),
+            write=write)
 
 
 def _preflight_storage(request, *, source_count=None):
@@ -1683,6 +1772,8 @@ def _run_prepared(
         _effective_execution_versions(request, versions, require_available=True)
     if previous is not None and store.has_running_jobs_outside_scope(previous.job_ids):
         raise ValueError("AUTOMATION_FOREIGN_WORKER_ACTIVE")
+    if guard.owned_accounting is None:
+        guard.adopt_owned_accounting(db_path, request.run_id, work_dir, create_floor=True)
     status = "partial"
     generation = None
     supervisor = None
@@ -1794,7 +1885,8 @@ def _run_prepared(
         for document, manifest in binding.generation_manifests.items():
             if document not in binding.reused_artifact_pins:
                 _write_generation_owner(
-                    _generation_pointer(catalog, manifest), db_path, run.run_id
+                    _generation_pointer(catalog, manifest), db_path, run.run_id,
+                    storage_guard=guard,
                 )
         dispatcher = NarrativeEffectDispatcher(
             store,
@@ -1827,6 +1919,11 @@ def _run_prepared(
                             "baseline": list(guard.baseline),
                             "max_persistent_bytes": guard.max_persistent_bytes,
                             "max_scratch_bytes": guard.max_scratch_bytes,
+                            "owned_accounting": (
+                                {"db_path": str(guard.owned_accounting[0]),
+                                 "run_id": guard.owned_accounting[1]}
+                                if guard.owned_accounting is not None else None),
+                            "shared_files": [str(path) for path in guard.shared_files],
                         },
                     }
                 ),
@@ -1872,7 +1969,7 @@ def _run_prepared(
             ):
                 status = "paused"
                 break
-            guard.check()
+            guard.check(force=False)
             if not run.blocked:
                 supervisor.maintain()
                 # Finished model attempts with no provider receipt may have
@@ -2032,18 +2129,35 @@ def _check_generation_owner(pointer, db_path, run_id):
     raise BatchResumeError("BATCH_GENERATION_RECOVERY_REQUIRED")
 
 
-def _write_generation_owner(pointer, db_path, run_id):
+def _write_generation_owner(pointer, db_path, run_id, *, storage_guard=None):
     import os
-    temporary = pointer.with_suffix(".partial")
-    try:
-        with temporary.open("w", encoding="utf-8") as stream:
-            stream.write(canonical_json({"schema_version": "narrative-generation-recovery/1",
-                "automation_db": str(db_path), "run_id": run_id}))
-            stream.flush()
-            os.fsync(stream.fileno())
-        os.replace(temporary, pointer)
-    finally:
-        temporary.unlink(missing_ok=True)
+    content = canonical_json({"schema_version": "narrative-generation-recovery/1",
+                              "automation_db": str(db_path), "run_id": run_id})
+    size = len(content.encode("utf-8"))
+    def write(admit):
+        created = not pointer.exists()
+        if created:
+            admit(pointer.name, size)
+        temporary = pointer.with_suffix(".partial")
+        try:
+            with temporary.open("w", encoding="utf-8") as stream:
+                stream.write(content)
+                stream.flush()
+                os.fsync(stream.fileno())
+            os.replace(temporary, pointer)
+            return pointer.name, size if created else 0
+        finally:
+            temporary.unlink(missing_ok=True)
+    if storage_guard is not None and storage_guard.owned_accounting is not None:
+        accounting = storage_guard.accounting_store()
+        if accounting is None:
+            raise ValueError("BATCH_STORAGE_ACCOUNTING_UNAVAILABLE")
+        current = storage_guard.snapshot()
+        store_id = "control:" + str(pointer.parent.resolve())
+        accounting.account_storage_write(run_id=run_id, store_id=store_id,
+            max_bytes=max(0, storage_guard.max_persistent_bytes - current.run_file_bytes), write=write)
+    else:
+        write(lambda _key, _size: None)
 
 
 def _blocked_status(run) -> str:
@@ -2123,6 +2237,10 @@ def _receipt(run_id, status, documents, runs, guard):
         "storage": {
             "persistent_added_bytes": storage.persistent_added_bytes,
             "scratch_peak_bytes": storage.scratch_peak_bytes,
+            **({"accounting_scope": "owned_objects_and_run_files",
+                "shared_database_bytes": guard.shared_database_bytes,
+                "shared_database_attributed_to_run": False}
+               if getattr(guard, "owned_accounting", None) is not None else {}),
             **({'scratch_peak_observation': 'committed_writer_lower_bound'}
                if paid_writer_seen else {}),
         },

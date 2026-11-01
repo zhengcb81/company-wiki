@@ -4,8 +4,7 @@
 operations:
   inventory       strictly read-only classification + manifest
   retire-derived  retire legacy artifact handles then unlink exactly those files
-  prune-spans     prune legacy full-volume evidence_spans for an explicit
-                  parser/source scope, protecting keep-refs
+  prune-spans     retired compatibility name; S5 production pruning completed
   vacuum          physical DB shrink with real-space accounting
 
 Mutating entries require an explicit --apply; without it every mutating
@@ -60,6 +59,9 @@ def main(argv: list[str] | None = None) -> int:
     vac.add_argument("--apply", action="store_true")
 
     args = parser.parse_args(argv)
+    if args.operation == "prune-spans":
+        sys.stderr.write(json.dumps(run_prune_spans(None, None, dry_run=not args.apply)) + "\n")
+        return 78
     config = _load_config(args.config)
     target = getattr(args, "output", None) or getattr(args, "receipt", None)
     if target is not None and (
@@ -84,20 +86,6 @@ def main(argv: list[str] | None = None) -> int:
     if args.operation == "retire-derived":
         manifest = _load_manifest(args.manifest)
         report = run_retire_derived(config, manifest, dry_run=not args.apply)
-        _receipt(args.receipt, report)
-        return 0 if report["status"] == "succeeded" else 2
-
-    if args.operation == "prune-spans":
-        selection = json.loads(args.selection.read_text(encoding="utf-8"))
-        keep_refs = []
-        if args.keep_refs is not None:
-            with Path(args.keep_refs).open(encoding="utf-8") as stream:
-                for line in stream:
-                    if line.strip():
-                        keep_refs.append(json.loads(line))
-        report = run_prune_spans(
-            config, selection, keep_refs=keep_refs, dry_run=not args.apply
-        )
         _receipt(args.receipt, report)
         return 0 if report["status"] == "succeeded" else 2
 

@@ -13,6 +13,7 @@ import sqlite3
 from typing import Callable, TypeVar, TYPE_CHECKING
 
 from company_wiki._id_scope import normalize_id_scope
+from company_wiki._file_mutex import os_file_mutex
 
 from . import migrations
 from .models import (Attempt, HandlerOutcome, HandlerResult, Job, RuntimeGate, RuntimeState, canonical_json, canonical_json_hash,
@@ -542,7 +543,7 @@ class NarrativeRunStore:
         migration owner before any job or accounting mutation.
         """
         report = migrations.inspect_schema(db_path)
-        if report.user_version not in {5, 6, migrations.SCHEMA_VERSION}:
+        if report.user_version not in {5, 6, 7, migrations.SCHEMA_VERSION}:
             raise NarrativeRunError("run history requires an explicitly migrated AUTO database")
         connection = migrations._open_readonly_connection(db_path)
         try:
@@ -577,6 +578,118 @@ class NarrativeRunStore:
 
     def get_run(self, run_id: str) -> RunRecord | None:
         return self._read(lambda connection: _run(connection, run_id))
+
+    def storage_bytes(self, run_id: str) -> int:
+        """Owned immutable bytes; unfinished puts retain their conservative bound."""
+        return self._read(lambda connection: int(connection.execute(
+            "SELECT COALESCE(SUM(COALESCE(created_bytes,byte_size)),0) "
+            "FROM narrative_storage_allocations WHERE run_id=?", (run_id,)
+        ).fetchone()[0]))
+
+    def legacy_storage_floor(self, run_id: str) -> int | None:
+        def operation(connection):
+            row = connection.execute(
+                "SELECT byte_size FROM narrative_storage_allocations "
+                "WHERE run_id=? AND store_id='legacy-baseline' AND object_key='shared-history'",
+                (run_id,),
+            ).fetchone()
+            return None if row is None else int(row[0])
+        return self._read(operation)
+
+    def adopt_legacy_storage_floor(self, run_id: str, byte_size: int) -> None:
+        """Freeze an old shared-baseline observation once; never reinterpret it."""
+        _integer(byte_size, "byte_size")
+        self._write(lambda connection: connection.execute(
+            "INSERT OR IGNORE INTO narrative_storage_allocations "
+            "(run_id,store_id,object_key,byte_size,created_bytes) "
+            "VALUES (?,'legacy-baseline','shared-history',?,?)",
+            (run_id, byte_size, byte_size),
+        ))
+
+    def account_storage_write(self, *, run_id: str, store_id: str, max_bytes: int,
+                              write: Callable[[Callable[[str, int], None]], tuple[str, int]]) -> str:
+        """Own admission, a bounded physical write, and settlement as one scope.
+
+        Only the short object/locator commit holds this existing OS primitive;
+        HTTP and parsing happen before this call. Process death releases the
+        mutex while the durable allocation remains conservatively charged.
+        """
+        with os_file_mutex(self.db_path.with_name(self.db_path.name + ".storage-writer.lock")):
+            allocation: tuple[str, int, bool] | None = None
+            def admit(key: str, size: int) -> None:
+                nonlocal allocation
+                if allocation is not None:
+                    raise RunConflictError("one storage writer must commit one object")
+                fresh = self._admit_storage_object(run_id=run_id, store_id=store_id,
+                    object_key=key, byte_size=size, max_bytes=max_bytes)
+                allocation = key, size, fresh
+            key, created = write(admit)
+            if allocation is not None:
+                allocated_key, size, fresh = allocation
+                if key != allocated_key or not 0 <= created <= size:
+                    raise RunConflictError("storage writer differs from its allocation")
+                self._settle_storage_object(run_id=run_id, store_id=store_id,
+                    object_key=key, created_bytes=created, new_allocation=fresh)
+            elif created != 0:
+                raise RunConflictError("storage writer omitted creation admission")
+            return key
+
+    def _admit_storage_object(self, *, run_id: str, store_id: str, object_key: str,
+                             byte_size: int, max_bytes: int) -> bool:
+        """Persist the bounded put before filesystem I/O, atomically per run.
+
+        Returns whether this is a new allocation. This is space accounting,
+        separate from model token/fee reservations and their unknown usage.
+        """
+        _integer(byte_size, "byte_size")
+        _integer(max_bytes, "max_bytes")
+        def operation(connection):
+            existing = connection.execute(
+                "SELECT byte_size,created_bytes FROM narrative_storage_allocations "
+                "WHERE run_id=? AND store_id=? AND object_key=?",
+                (run_id, store_id, object_key),
+            ).fetchone()
+            if existing is not None:
+                if existing[0] != byte_size:
+                    raise RunConflictError("storage object changed size")
+                if existing[1] is None or existing[1] > 0:
+                    return False
+            total = int(connection.execute(
+                "SELECT COALESCE(SUM(COALESCE(created_bytes,byte_size)),0) "
+                "FROM narrative_storage_allocations WHERE run_id=?", (run_id,)
+            ).fetchone()[0])
+            if total + byte_size > max_bytes:
+                raise ValueError("PERSISTENT_BYTES_EXCEEDED")
+            connection.execute(
+                "INSERT INTO narrative_storage_allocations "
+                "(run_id,store_id,object_key,byte_size,created_bytes) VALUES (?,?,?,?,NULL) "
+                "ON CONFLICT(run_id,store_id,object_key) DO UPDATE SET created_bytes=NULL",
+                (run_id, store_id, object_key, byte_size),
+            )
+            return True
+        return self._write(operation)
+
+    def _settle_storage_object(self, *, run_id: str, store_id: str, object_key: str,
+                              created_bytes: int, new_allocation: bool) -> None:
+        _integer(created_bytes, "created_bytes")
+        def operation(connection):
+            row = connection.execute(
+                "SELECT byte_size,created_bytes FROM narrative_storage_allocations "
+                "WHERE run_id=? AND store_id=? AND object_key=?",
+                (run_id, store_id, object_key),
+            ).fetchone()
+            if row is None or created_bytes > row[0]:
+                raise RunConflictError("storage allocation is missing or invalid")
+            # A previous writer may have created this object then crashed before
+            # settlement. Finding it now cannot prove that run spent zero bytes.
+            prior = (0 if new_allocation else row[0]) if row[1] is None else row[1]
+            settled = max(prior, created_bytes)
+            connection.execute(
+                "UPDATE narrative_storage_allocations SET created_bytes=? "
+                "WHERE run_id=? AND store_id=? AND object_key=?",
+                (settled, run_id, store_id, object_key),
+            )
+        self._write(operation)
 
     def generation_execution_finished(self, run_id: str) -> bool:
         """Read one AUTO snapshot; retained unknown billing is not active work.

@@ -1027,14 +1027,14 @@ def source_has_operating_object(text: str) -> bool:
 @dataclass(frozen=True)
 class ReadingBusinessAssessment:
     fact: OperatingFact
-    financial_only: bool
+    financial_only: bool | None
     source_roles: SourceAssertionRoles
     passage: SourcePassageCapability
 
 
 def prepare_reading_business_assessment(text: str, source_relations: dict, *, ref_text=None,
         source_roles: SourceAssertionRoles | None = None,
-        relation_bindings: tuple[bool, ...] = ()) -> ReadingBusinessAssessment:
+        relation_bindings: tuple[bool, ...] = (), grammar_work_budget=None) -> ReadingBusinessAssessment:
     """One charged exact-view assessment shared by every reading consumer."""
     legacy_facts: dict[str, OperatingFact] = {}
     operating_observed: list[bool] = []
@@ -1056,7 +1056,7 @@ def prepare_reading_business_assessment(text: str, source_relations: dict, *, re
         causal_relation=lambda value: _observed_causal_relation(
             value, causal_observations, metric_observations=metric_observations),
         measurement_relation=lambda value: _business_revenue_measure(
-            value, metric_observations=metric_observations))
+            value, metric_observations=metric_observations), grammar_work_budget=grammar_work_budget)
     text, source_roles = statement_scope.text, statement_scope.roles
     if statement_scope.suppressed:
         # Keep the source relations/refs verbatim. Only an assertion observed
@@ -1094,9 +1094,14 @@ def prepare_reading_business_assessment(text: str, source_relations: dict, *, re
     passage = prepare_source_passage(original_text, source_roles, purpose=fact.purpose, financial_only=financial,
         accounting_text=accounting_text,
         non_operating_purposes=NON_OPERATING_PURPOSES, existing_use=existing_use,
-        existing_relevant=existing_relevant, statement_scope=statement_scope)
-    financial = financial or passage.financial_only
-    return ReadingBusinessAssessment(fact, financial, source_roles, passage)
+        existing_relevant=existing_relevant, statement_scope=statement_scope,
+        grammar_work_budget=grammar_work_budget)
+    # A finance label in a mixed scope is not proof that an unprocessed
+    # independent passage contains no business. Reuse the existing unknown
+    # financial axis rather than manufacturing a finance-only result.
+    classified_financial = (None if not passage.assessment_complete else False if passage.relevant
+                            else financial or passage.financial_only)
+    return ReadingBusinessAssessment(fact, classified_financial, source_roles, passage)
 
 
 def assess_reading_business_fact(text: str, source_relations: dict, *, ref_text=None, source_roles=None,
