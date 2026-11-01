@@ -153,8 +153,37 @@
    "source_id": "urn:company-wiki:source:sha256:a914b0ad67df2d75da0ae2b246dba5500bb84e19391a62a930ff441213d3ca53",
    "content_sha256": "a914b0ad67df2d75da0ae2b246dba5500bb84e19391a62a930ff441213d3ca53",
    "mime_type": "application/pdf"
+  },
+  {
+   "page_id": "r1_wanhua_qa2021_p003",
+   "label": "万华化学 2021 年度业绩说明会会议纪要（问答页）",
+   "pdf": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\万华化学\\raw\\research\\万华化学：2021年度业绩说明会会议纪要.pdf",
+   "pdf_page_index": 3,
+   "market": "CN",
+   "language": "zh-CN",
+   "genre": "investor_relations_qa",
+   "why": "card A3 business Q&A coverage; numbered questions with answers and financial figures",
+   "png": "C:\\Users\\郑曾波\\Projects\\company-wiki-w23-xiaomi-ocr-r1\\.w23_cache\\r1_pages\\r1_wanhua_qa2021_p003.png",
+   "png_sha256": "097eaf47d1da132c80a64dfdd42ca81c72d3b559969ca552b6bc7fb1d00478fc",
+   "png_px": [
+    1655,
+    2340
+   ],
+   "native_text_layer_chars": 749,
+   "document_id": "urn:company-wiki:document:sha256:f8f18fd12ef060fa0183be1a641232a857daa438518d19c911cdf602ac2fb07d",
+   "source_id": "urn:company-wiki:source:sha256:22e19778a2380dd3ae1044756e574b32f979bcbd75cb607867c2ed404e014319",
+   "content_sha256": "22e19778a2380dd3ae1044756e574b32f979bcbd75cb607867c2ed404e014319",
+   "mime_type": "application/json",
+   "added_in_revision": 2
   }
  ],
  "excluded_from_old_sample": "seven pages from five documents not used by the 2026-10-30 experiment (amec AR2025, wuxi AR2022, ksy FY2025 results, biren AR2025, berkshire2007)",
- "notes": "Seven real-document pages (CN 2, HK 3, US 2) from five documents outside the 2026-10-30 sample; source_id/document_id/content_sha256 are taken from the catalog location rows of each PDF (advisory sha prefixes removed)."
+ "notes": "Seven real-document pages (CN 2, HK 3, US 2) from five documents outside the 2026-10-30 sample; source_id/document_id/content_sha256 are taken from the catalog location rows of each PDF (advisory sha prefixes removed).",
+ "revision": {
+  "revision": 2,
+  "date": "2026-11-01",
+  "change": "added one CN business-Q&A page (万华化学业绩说明会纪要 p3) to satisfy card A3 Q&A coverage",
+  "timing": "added after the main campaign, before any engine ran on this page; R0/N0/X1F aggregates recomputed over 8 pages",
+  "denominator_impact": "page denominator 7 -> 8 (CN 3, HK 3, US 2); eval 6, holdout 2"
+ }
 }

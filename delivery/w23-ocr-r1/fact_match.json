@@ -155,22 +155,40 @@
      ]
     },
     "page_id": "r1_brk2007_p005"
+   },
+   {
+    "produced": true,
+    "facts_hit": 15,
+    "conditions_hit": 18,
+    "numbers_hit": 15,
+    "facts_numeric_hit": 16,
+    "conditions_numeric_hit": 18,
+    "facts_total": 18,
+    "conditions_total": 19,
+    "numbers_total": 15,
+    "facts_raw_total": 18,
+    "conditions_raw_total": 19,
+    "numbers_raw_total": 15,
+    "unachievable_entries": {
+     "numbers": []
+    },
+    "page_id": "r1_wanhua_qa2021_p003"
    }
   ],
   "totals": {
-   "facts_hit": 149,
-   "facts_total": 171,
-   "conditions_hit": 89,
-   "conditions_total": 98,
-   "numbers_hit": 273,
-   "numbers_total": 276,
-   "facts_raw_total": 171,
-   "conditions_raw_total": 98,
-   "numbers_raw_total": 301,
-   "facts_numeric_hit": 161,
-   "conditions_numeric_hit": 93,
-   "pages_produced": 7,
-   "pages_total": 7,
+   "facts_hit": 164,
+   "facts_total": 189,
+   "conditions_hit": 107,
+   "conditions_total": 117,
+   "numbers_hit": 288,
+   "numbers_total": 291,
+   "facts_raw_total": 189,
+   "conditions_raw_total": 117,
+   "numbers_raw_total": 316,
+   "facts_numeric_hit": 177,
+   "conditions_numeric_hit": 111,
+   "pages_produced": 8,
+   "pages_total": 8,
    "unachievable_counts": {
     "numbers": 25
    }
@@ -332,22 +350,40 @@
      ]
     },
     "page_id": "r1_brk2007_p005"
+   },
+   {
+    "produced": true,
+    "facts_hit": 16,
+    "conditions_hit": 19,
+    "numbers_hit": 15,
+    "facts_numeric_hit": 17,
+    "conditions_numeric_hit": 19,
+    "facts_total": 18,
+    "conditions_total": 19,
+    "numbers_total": 15,
+    "facts_raw_total": 18,
+    "conditions_raw_total": 19,
+    "numbers_raw_total": 15,
+    "unachievable_entries": {
+     "numbers": []
+    },
+    "page_id": "r1_wanhua_qa2021_p003"
    }
   ],
   "totals": {
-   "facts_hit": 157,
-   "facts_total": 171,
-   "conditions_hit": 92,
-   "conditions_total": 98,
-   "numbers_hit": 275,
-   "numbers_total": 276,
-   "facts_raw_total": 171,
-   "conditions_raw_total": 98,
-   "numbers_raw_total": 301,
-   "facts_numeric_hit": 163,
-   "conditions_numeric_hit": 95,
-   "pages_produced": 7,
-   "pages_total": 7,
+   "facts_hit": 173,
+   "facts_total": 189,
+   "conditions_hit": 111,
+   "conditions_total": 117,
+   "numbers_hit": 290,
+   "numbers_total": 291,
+   "facts_raw_total": 189,
+   "conditions_raw_total": 117,
+   "numbers_raw_total": 316,
+   "facts_numeric_hit": 180,
+   "conditions_numeric_hit": 114,
+   "pages_produced": 8,
+   "pages_total": 8,
    "unachievable_counts": {
     "numbers": 25
    }
@@ -516,22 +552,41 @@
      ]
     },
     "page_id": "r1_brk2007_p005"
+   },
+   {
+    "produced": false,
+    "status": "no_output",
+    "facts_hit": 0,
+    "conditions_hit": 0,
+    "numbers_hit": 0,
+    "facts_numeric_hit": 0,
+    "conditions_numeric_hit": 0,
+    "facts_total": 18,
+    "conditions_total": 19,
+    "numbers_total": 15,
+    "facts_raw_total": 18,
+    "conditions_raw_total": 19,
+    "numbers_raw_total": 15,
+    "unachievable_entries": {
+     "numbers": []
+    },
+    "page_id": "r1_wanhua_qa2021_p003"
    }
   ],
   "totals": {
    "facts_hit": 0,
-   "facts_total": 171,
+   "facts_total": 189,
    "conditions_hit": 0,
-   "conditions_total": 98,
+   "conditions_total": 117,
    "numbers_hit": 0,
-   "numbers_total": 276,
-   "facts_raw_total": 171,
-   "conditions_raw_total": 98,
-   "numbers_raw_total": 301,
+   "numbers_total": 291,
+   "facts_raw_total": 189,
+   "conditions_raw_total": 117,
+   "numbers_raw_total": 316,
    "facts_numeric_hit": 0,
    "conditions_numeric_hit": 0,
    "pages_produced": 0,
-   "pages_total": 7,
+   "pages_total": 8,
    "unachievable_counts": {
     "numbers": 25
    }
@@ -700,22 +755,41 @@
      ]
     },
     "page_id": "r1_brk2007_p005"
+   },
+   {
+    "produced": false,
+    "status": "no_output",
+    "facts_hit": 0,
+    "conditions_hit": 0,
+    "numbers_hit": 0,
+    "facts_numeric_hit": 0,
+    "conditions_numeric_hit": 0,
+    "facts_total": 18,
+    "conditions_total": 19,
+    "numbers_total": 15,
+    "facts_raw_total": 18,
+    "conditions_raw_total": 19,
+    "numbers_raw_total": 15,
+    "unachievable_entries": {
+     "numbers": []
+    },
+    "page_id": "r1_wanhua_qa2021_p003"
    }
   ],
   "totals": {
    "facts_hit": 0,
-   "facts_total": 171,
+   "facts_total": 189,
    "conditions_hit": 0,
-   "conditions_total": 98,
+   "conditions_total": 117,
    "numbers_hit": 0,
-   "numbers_total": 276,
-   "facts_raw_total": 171,
-   "conditions_raw_total": 98,
-   "numbers_raw_total": 301,
+   "numbers_total": 291,
+   "facts_raw_total": 189,
+   "conditions_raw_total": 117,
+   "numbers_raw_total": 316,
    "facts_numeric_hit": 0,
    "conditions_numeric_hit": 0,
    "pages_produced": 0,
-   "pages_total": 7,
+   "pages_total": 8,
    "unachievable_counts": {
     "numbers": 25
    }

@@ -188,13 +188,22 @@ def main(argv: list[str] | None = None) -> int:
     manifest = json.loads((plan / "r1_sample_manifest.json").read_text(encoding="utf-8"))
     pages = [p["page_id"] for p in manifest["pages"]]
     out = {}
-    for arm, filename in (("R0", "run_r0.json"), ("N0", "run_n0.json"),
-                          ("X1F_attempt1", "run_x1_attempt1.json"),
-                          ("X1F_attempt2", "run_x1_attempt2.json")):
-        path = delivery / filename
-        if not path.is_file():
+    arm_files = {
+        "R0": ["run_r0.json", "run_r0_qa_extension.json"],
+        "N0": ["run_n0.json", "run_n0_qa_extension.json"],
+        "X1F_attempt1": ["run_x1_attempt1.json"],
+        "X1F_attempt2": ["run_x1_attempt2.json"],
+    }
+    for arm, filenames in arm_files.items():
+        records = {}
+        for filename in filenames:
+            path = delivery / filename
+            if not path.is_file():
+                continue
+            records.update({r["page_id"]: r for r in
+                            json.loads(path.read_text(encoding="utf-8"))["records"]})
+        if not records:
             continue
-        records = {r["page_id"]: r for r in json.loads(path.read_text(encoding="utf-8"))["records"]}
         per_page = []
         for pid in pages:
             record = records.get(pid, {})

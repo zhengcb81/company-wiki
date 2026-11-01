@@ -3,7 +3,7 @@
  "plan_id": "w23-ocr-r1-2026-10-31",
  "created_at_utc": "2026-11-01T14:01:09.178690+00:00",
  "budget_seconds": 1800.0,
- "spent_seconds": 1406.508157,
+ "spent_seconds": 1431.40547,
  "entries": [
   {
    "ts_utc": "2026-11-01T14:01:51.517460+00:00",
@@ -270,6 +270,20 @@
    "page_id": "r1_brk2007_p005",
    "seconds": 180.0,
    "status": "no_record"
+  },
+  {
+   "ts_utc": "2026-11-01T17:23:48.205663+00:00",
+   "arm": "R0",
+   "page_id": "r1_wanhua_qa2021_p003",
+   "seconds": 24.897313,
+   "status": "ok"
+  },
+  {
+   "ts_utc": "2026-11-01T17:23:49.800032+00:00",
+   "arm": "N0",
+   "page_id": "r1_wanhua_qa2021_p003",
+   "seconds": 0.0,
+   "status": "ok"
   }
  ]
 }

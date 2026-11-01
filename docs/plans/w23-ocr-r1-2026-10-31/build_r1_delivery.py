@@ -39,10 +39,10 @@ def mean(values):
 
 
 ARMS = [
-    ("R0", "run_r0.json"),
-    ("N0", "run_n0.json"),
-    ("X1F_attempt1", "run_x1_attempt1.json"),
-    ("X1F_attempt2", "run_x1_attempt2.json"),
+    ("R0", ["run_r0.json", "run_r0_qa_extension.json"]),
+    ("N0", ["run_n0.json", "run_n0_qa_extension.json"]),
+    ("X1F_attempt1", ["run_x1_attempt1.json"]),
+    ("X1F_attempt2", ["run_x1_attempt2.json"]),
 ]
 
 CODE_FILES = [
@@ -93,15 +93,23 @@ def main() -> int:
         return out
 
     arms_payload = {}
-    for arm, filename in ARMS:
-        path = DELIVERY / filename
-        if not path.is_file():
+    for arm, filenames in ARMS:
+        records = {}
+        run_files = []
+        for filename in filenames:
+            path = DELIVERY / filename
+            if not path.is_file():
+                continue
+            run_files.append(filename)
+            records.update({r["page_id"]: r for r in load(path)["records"]})
+        if not records:
             continue
-        payload = load(path)
-        records = {r["page_id"]: r for r in payload["records"]}
         per_page = []
         for pid in ids:
-            record = records.get(pid, {"status": "not_run", "error": "no_record"})
+            default_reason = ("page added to the sample after this arm's runs (manifest revision 2)"
+                              if meta[pid].get("added_in_revision")
+                              else "no_record")
+            record = records.get(pid, {"status": "not_run", "error": default_reason})
             text = record.get("text") or ""
             produced = record.get("status") in ("ok", "truncated", "timeout") and bool(text.strip())
             if produced:
@@ -111,8 +119,42 @@ def main() -> int:
             else:
                 entry = {"page_status": record.get("status", "not_run"),
                          "reason_excluded": record.get("status", "not_run")}
+            if produced:
+                # Card C3 negative control: output lines that do not occur in the
+                # (image-verified) gold text after the declared normalization are
+                # "unsourced" — invented or mis-ordered content, counted honestly.
+                # Bigram containment tolerates line-break differences; a genuinely
+                # invented line (few gold bigrams) is still flagged.  This is an
+                # upper bound on fabrication, not a fabrication count.
+                import re as _re
+                import unicodedata as _ud
+
+                def _grams(value: str) -> set[str]:
+                    flat = _ud.normalize("NFC", markup_strip(value)).replace(" ", "").replace("\n", "")
+                    cjk = [c for c in flat if "\u4e00" <= c <= "\u9fff"]
+                    bigrams = {a + b for a, b in zip(cjk, cjk[1:])}
+                    words = {w.lower() for w in _re.findall(r"[A-Za-z][A-Za-z\-]+", markup_strip(value))}
+                    return bigrams | words
+
+                gold_grams = _grams(gold["pages"][pid]["full_text"])
+                out_lines = [ln.strip() for ln in markup_strip(text).splitlines() if ln.strip()]
+                unsourced = []
+                for line in out_lines:
+                    line_grams = _grams(line)
+                    if not line_grams:
+                        continue  # pure digits/markup: no text to source
+                    if len(line_grams & gold_grams) / len(line_grams) < 0.85:
+                        unsourced.append(line)
+                entry_unsourced = {"lines_total": len(out_lines),
+                                   "unsourced_lines": len(unsourced),
+                                   "unsourced_rate": (len(unsourced) / len(out_lines)) if out_lines else None,
+                                   "sample": [ln[:60] for ln in unsourced[:5]]}
+            else:
+                entry_unsourced = {"lines_total": 0, "unsourced_lines": None,
+                                   "unsourced_rate": None, "sample": []}
             entry.update({
                 "page_id": pid, "role": role[pid], "stratum": stratum[pid],
+                "unsourced_text": entry_unsourced,
                 "source_id": meta[pid].get("source_id"),
                 "document_id": meta[pid].get("document_id"),
                 "content_sha256": meta[pid].get("content_sha256"),
@@ -138,7 +180,7 @@ def main() -> int:
         eval_pages = [e for e in per_page if e["role"] == "eval"]
         hold_pages = [e for e in per_page if e["role"] == "holdout"]
         arms_payload[arm] = {
-            "run_file": filename,
+            "run_files": run_files,
             "per_page": per_page,
             "aggregate": {
                 "pages_total": len(per_page),
@@ -158,6 +200,12 @@ def main() -> int:
                     e["numbers_digit_present"]["recall"] for e in scored
                     if e.get("numbers_digit_present", {}).get("recall") is not None]),
                 "repetition_flagged_pages": sum(1 for e in scored if e.get("repetition_flagged")),
+                "unsourced_lines": sum((e.get("unsourced_text") or {}).get("unsourced_lines") or 0 for e in scored),
+                "output_lines": sum((e.get("unsourced_text") or {}).get("lines_total") or 0 for e in scored),
+                "unsourced_rate": (
+                    (sum((e.get("unsourced_text") or {}).get("unsourced_lines") or 0 for e in scored)
+                     / max(1, sum((e.get("unsourced_text") or {}).get("lines_total") or 0 for e in scored)))
+                    if scored else None),
                 "per_stratum": per_stratum(per_page, "cer_strict"),
                 "eval_split": {
                     "pages": len(eval_pages),
@@ -350,7 +398,7 @@ def main() -> int:
         "PLAN_ID=w23-ocr-r1-2026-10-31 · worktree `company-wiki-w23-xiaomi-ocr-r1` · "
         "branch `codex/w23-ocr-r1-20261031` · base `946537d0` · platform fix `20dd0143`",
         "",
-        "**Status: PARTIAL.** R0 and N0 completed the 7-page frozen sample inside one cumulative "
+        f"**Status: PARTIAL.** R0 and N0 completed the {len(pages)}-page frozen sample inside one cumulative "
         "campaign. X1F ran twice under the card memory rule and both attempts failed; no Xiaomi "
         "quality claim is made. X2 is NOT_RUN. The 2026-10-30 exploratory result is not reused.",
         "",
@@ -358,7 +406,7 @@ def main() -> int:
         "",
         f"- Budget **{comparison['campaign']['budget_seconds']:.0f} s**; consumed "
         f"**{comparison['campaign']['spent_seconds']:.1f} s**; per-request cap 180 s; single concurrency.",
-        f"- R0 7 pages: {sum(1 for e in comparison['arms']['R0']['per_page'])} pages, real timings "
+        f"- R0 {sum(1 for e in comparison['arms']['R0']['per_page'])} pages, real timings "
         "(12.8–28.1 s/page); the corrected R0 charge is 144.15 s.",
         "- The ledger is append-only. Two defects are disclosed rather than hidden: seven 0.0 s rows "
         "from the first R0 invocation (under-count of that first pass, re-measured at 144.15 s), and "
@@ -456,6 +504,13 @@ def main() -> int:
         "BRK `Business Activities` → `BusinessActivities`. Surface counts cannot prove relations; "
         "these checks are reported on top of them.",
         "",
+        f"Unsourced-line negative control (card C3): each output line is checked against the "
+        f"image-verified gold by bigram containment (≥85% = sourced). R0: {r0['unsourced_lines']}/"
+        f"{r0['output_lines']} unsourced ({r0['unsourced_rate']:.1%}); N0: {n0['unsourced_lines']}/"
+        f"{n0['output_lines']} ({n0['unsourced_rate']:.1%}). This is an UPPER bound on fabrication: "
+        f"lines with recognition errors and justified line-wrap shifts count here even though no new "
+        f"claim was invented.",
+        "",
         "## 5. Controls (synthetic, excluded from all real denominators)",
         "",
     ]
@@ -495,7 +550,7 @@ def main() -> int:
         "",
         "## 8. Recommendation",
         "",
-        "- **现有不动** for production: R0 completed all 7 pages (macro strict CER "
+        f"- **现有不动** for production: R0 completed all {len(pages)} pages (macro strict CER "
         f"{r0['macro_cer_strict']:.4f}, number-token recall {r0['number_token_recall']:.4f}).",
         "- **困难页补救候选**: table-heavy pages (cell linearization, comma→decimal errors).",
         "- **小米**: cannot be judged here. A card-compliant X1F result needs a host where the card "
@@ -523,7 +578,7 @@ def main() -> int:
         {"req": "A2 one run-feasibility pilot on an old non-holdout page", "status": "done",
          "evidence": "R0 pilot on byd_ar_2024_p021 (old eval page, never a new-sample page): ok, 19.4 s, charged to the same ledger. The pilot ran AFTER the gold freeze (deviation from the card's A2 ordering, disclosed): no new page was OCRed before the freeze, so the blind property holds; X1F run-feasibility = attempts 1/2"},
         {"req": "A3 ~6 new pages CN/HK/US, outside old sample", "status": "done",
-         "evidence": "7 pages from 5 documents never used in the 2026-10-30 sample; catalog identity per page in r1_sample_manifest.json"},
+         "evidence": "8 pages from 6 documents never used in the 2026-10-30 sample (CN 3 incl. a business-Q&A page, HK 3 incl. a 9-column table, US 2); catalog identity per page; manifest revision 2 added the Q&A page before any engine ran on it"},
         {"req": "A4 independent gold from images before any engine run; ≥2 pages to the final run", "status": "done",
          "evidence": "independent agent transcribed from PNGs (no OCR), reports not using the PDF text layers as ground truth; on clean born-digital pages near-equality with the native layer is disclosed and is not evidence either way; gold committed 970532af before campaign commit; 2 holdout pages never ran before the campaign"},
         {"req": "A5 gold errors version-corrected with timing/impact; old gold untouched", "status": "done",
@@ -656,17 +711,17 @@ def main() -> int:
         "",
         f"- workdir `{REPO}` · branch `codex/w23-ocr-r1-20261031` · base `946537d0` · required platform fix `20dd0143` (cherry-picked)",
         f"- final tested commit: `{handoff['final_tested_commit']}` · reviewed commit: recorded after the final review",
-        "- **Status: PARTIAL** — R0/N0 completed the 7-page frozen sample in one campaign; X1F resource-blocked with 2 measured attempts; X2 NOT_RUN.",
+        f"- **Status: PARTIAL** — R0/N0 completed the {len(pages)}-page frozen sample in one campaign; X1F resource-blocked with 2 measured attempts; X2 NOT_RUN.",
         "",
         "## What ROOT receives",
         "",
         "- `tools/ocr_comparison/campaign.py` — one cumulative 1800 s campaign ledger (append-only, atomic; corrupt state refuses; cache resume with 0 re-inference/0 re-charge; conservative charging for unknown in-flight time).",
-        "- `docs/plans/w23-ocr-r1-2026-10-31/` — frozen sample manifest (7 pages, 5 new documents, exact catalog identity), independent gold (rev 3, image-transcribed), controls manifest, fact matching, single-source delivery builder.",
+        "- `docs/plans/w23-ocr-r1-2026-10-31/` — frozen sample manifest (8 pages, 6 new documents, exact catalog identity; revision blocks for the Q&A addition and gold corrections), independent gold, controls manifest, fact matching, single-source delivery builder.",
         "- `delivery/w23-ocr-r1/` — comparison.json/md, per-arm captures, ledger, receipts (cap/host/identity/stages), fact_match.json.",
         "",
         "## Result in one paragraph",
         "",
-        f"R0 (real engine + production recovery ladder) completed all 7 pages: macro strict CER "
+        f"R0 (real engine + production recovery ladder) completed all {len(pages)} pages: macro strict CER "
         f"{r0['macro_cer_strict']:.4f}, narrow {r0['macro_cer_narrow']:.4f}, number-token recall "
         f"{r0['number_token_recall']:.4f}, digit-present {r0['number_digit_present_recall']:.4f}; "
         f"facts {r0_fm.get('facts_hit')}/{r0_fm.get('facts_total')} surface / "
