@@ -21,3 +21,5 @@ fb2336c1已本地提交，原正常push实际跑651例/120.29s，642P/9F而拒�
 共用test-only夹具按真实UTF16、最长有效后缀和生产name reserve测算；每个parent先长度下界/单次真实mkdir排除拒写，再真实分配、实测，独占根退出清除。没有抬生产60、180秒、32文件或删选测文件。两个extended测试从mkdir起finally清理，deep cwd先恢复再删自己的parent。第一次复验18P/1旧temp优先假设；保持完整候选全集及独立UTF16/路径精确排序后，真实45-unit外层19P/13.28s，外层已清除。Ruff及追加独审0OPEN，原PASS不改；只改三份测试/helper，src/tools/CI相对fb无delta。
 
 这证明正常快速hook此次在推送前实际挡住了宿主差异。接下来仍走正常push/精确CI，不能凭追加独审先报远端通过。
+
+正式发布完成：master/远端f98dd54b；正常pre-push651P/133.64s，精确CI41264855167成功（2026-11-01T02:27:30Z）。此前失败hook自有cwpp-tv3d881j已定点extended清理21158851逻辑字节，收据保留；无原件/其他TEMP删除。W12原公司新attempt已解除CI依赖，正式执行继续，整家公司研究尚未签收。

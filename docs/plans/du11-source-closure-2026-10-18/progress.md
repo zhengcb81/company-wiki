@@ -58,3 +58,9 @@ RF正式v6绑定新a466 artifact、完整t3及理由，实际参数/公式/报�
 CI版本迁移及选测共因已集中独审PASS/0OPEN：54源协议例绿；选测6F1P→7P；相关域185P/旧策略1F，真实config-only未知范围便携单例1P/24.33s。旧fixture不改，独立14文件SHA及正反控制已封存。新known静态图probe10.64s（旧36.88s），32/352partial，旧原子协议未在32中，绝不宣称快速hook保证全量。免费重放真实请求/draft/execution不变，旧付费签名不覆盖。候选正常发布/精确CI待实查；W12免费复用/原页研究继续，隔离register丢旧元数据是内部接线缺口，不冒作正式RF已跑通。
 
 正常push fb2336c1在本机挡下9个Windows嵌套TEMP夹具失败，实际642P/9F120.29s，未推远端；共因是外层45虽合法而子candidate超过60，另extended测试缺自清理。三测试/helper统一真实测量、bounded写probe、cwd恢复及extended finally；初复18P/旧排序1F，最终同45-unit外层19P/13.28s、外层清除，Ruff和独审增补0OPEN。生产src/tools/CI/60/180/32不改，下一正常提交推送后再查精确CI。
+
+## 2026-11-01 — 当前节点最终发布收口，恢复W12正式执行
+
+CWP f98dd54b已master/远端同步，normal push651P/133.64s，精确CI41264855167于02:27:30Z成功；RF85054d7b精确CI41260918155成功。P0–P2有界工程闭合，旧失败/签名不覆盖。失败hook自有长路径root定点清21158851逻辑字节，原日志归档；早前7测试目录16045737B已清，P3当前数据待审不删。
+
+W12 r1-remediation-03保留10-21截止，独立executor经当前RF→FF→CWP复用/19页新读和3可视检查、11canonical源事实继承/annual实际native复用成功，Sina三表6HTTP1429736B/$0取得、PIT/单位未知保留。旧setup错误与IR/call实际限制均留证，不假产品失败或全资料齐全。02:27CI依赖已解除并通知executor继续正式新摘要/完整native链；全公司四审/质量检测及其他固定公司目标继续OPEN，不新发卡。

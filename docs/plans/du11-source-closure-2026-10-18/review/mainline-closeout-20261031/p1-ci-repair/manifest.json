@@ -1,8 +1,14 @@
 {
   "schema_version": "bounded-node-receipts/1",
   "hash_scope": "immutable raw gzip receipts only; excludes prose/manifest",
-  "total_receipt_bytes": 64624,
+  "total_receipt_bytes": 68162,
   "files": [
+    {
+      "path": "receipts/failed-hook-temp-cleanup.json.gz",
+      "bytes": 235,
+      "sha256": "e6b38eb1258015522f0082226b59a0a341e7bc9308794bedbd57a35772b84fcb",
+      "uncompressed_sha256": "a57da723bf285eb0fb7627cc9b9e50bf5584ecce3647c3d0d129073a58c42572"
+    },
     {
       "path": "receipts/independent/contracts-probe.json.gz",
       "bytes": 432,
@@ -164,6 +170,24 @@
       "bytes": 1516,
       "sha256": "442a0e083441dd484a56d786ab09031a7e729c9d1ad24eac8d6ef2d36039a498",
       "uncompressed_sha256": "21de8be1f1ae076ac7f44d3dcbed43bb6fa421982efe04586b43d5a019254f4a"
+    },
+    {
+      "path": "receipts/p1-scratch-delta-ci.json.gz",
+      "bytes": 264,
+      "sha256": "2db058e5eed8f5723195394399348b2c7e8e94082794b00a9efa8466c6519f70",
+      "uncompressed_sha256": "3a19f15141972d579b27fa92e0e8b244bf3e1608df2b87f71b1a4ee31933fd38"
+    },
+    {
+      "path": "receipts/p1-scratch-delta-publication.json.gz",
+      "bytes": 473,
+      "sha256": "85f776d59a3bc2475ed914e225cdcdce87726ccd9daa1b1cff5d845ea06422dd",
+      "uncompressed_sha256": "4471cc88079d5bc20ed5c0a837d40983f1de0d23fc1ca2fcdfadf22b9be52d94"
+    },
+    {
+      "path": "receipts/p1-scratch-delta-push.log.gz",
+      "bytes": 2566,
+      "sha256": "c57bd79ace2bf39925a318a59728f3033803851616c7f7f8098e944033674da3",
+      "uncompressed_sha256": "ec00bb56ade1f3935e2dde7995d3e6954db436d1893b0904b7366b2e0086965c"
     },
     {
       "path": "receipts/p1-scratch-fixture-ruff.log.gz",

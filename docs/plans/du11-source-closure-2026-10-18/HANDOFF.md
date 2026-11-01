@@ -1,18 +1,14 @@
 # 主线接手指南
 
-1. 先读CURRENT_STATUS.md/json，再读task_plan唯一Next Step。MAINLINE_LOOP_GOAL是总完成条件；PACKAGE_STATUS只管外包。原生goal active，不重建goal/逐材料许可，不扩包。
-2. P0已根修c92aa4f2/精确CI绿。当前P1内容有界独审通过，但93f561ef新精确CI41261403683失败3项版本合同；本机3F及候选54P留证，选测共因正在集中修。新精确CI绿前，W12仅免费preflight。
-3. 当前入口 `review/mainline-closeout-20261031/p1-current/README.md`：Berkshire真实88任务/73卡/15未处理、10所需业务原子；华利15卡/12原子。旧normalized77/64/13及首次live88/72/16、早期ec183产物是历史，不能当当前计数。新版华利body a466...，Berkshire66c...；/5仅完整原文卡＋advisory ranking，不是生成式概述/全文/盲测。
-4. 两次真实配置模型各1POST（DeepSeek10464tokens/$0.004611、MiMo3630/$0.000660），activation及同跨run恢复0重复，真实RF来源/叙述读取通过。旧华利精确artifact兼容0POST。必要locator回放实执行，不写零解析。
-5. 排名请求仅含正式准入卡，完整原文片段/提示去重；source-owned优先级后以同源支持坐标分配，未知槽位不挪，模型不能删卡。Berkshire15任务保持unprocessed/RANK_INCOMPLETE，t78/t80虽低分仍保留。无额度提高/公司特判/截断闭包。
-6. context_only/unresolved可读但不可作事实，compiler/execution统一generation reason；handler正例及伪造admitted负例验证。两处验证依赖增补由独立免费比较签收，付费HTTP/draft/execution逐字不变，原generation签名留原版本。新测试最后plain转换只是修mappingproxy夹具。
-7. RF v6实际采用**新a466**产物（非旧ec183），完整t3五support＋一context/理由随native参数、公式、报告、snapshot/registry持久；独立45断言，0新POST/下载。正式报告在RF `docs/plans/p2-summary-lineage-20261031/review/v6`，CWP只技术证据。v5原根修32断言/1%参数扰动6检查和精确CI保留，不代签整家公司。
-8. 两份当前源卡免费复现：宿主Python执行本仓p1-current/replay.py；RF免费生产重放：其review/replay.py --case v6。均禁网络/临时环境恢复。只归档约623KB原收据，不带PDF/整库。已删年报临时PDF/全规范化不恢复，62span＋小新浪缓存供冻结输入复验；完整源E2E需通过FF新建隔离湖。
-9. 当前工程验收后回P3：药明康德W12新attempt→药明合联/Snowflake泛化→固定八家/连续三家clean。华利条件算例未完成2026最新沟通/需求竞争/校准；2023内容不是2026新计划。W21 canonicalC2真实增强/严格对齐、新US监管/HK/US RPO、15长文余项仍属未完范围。
-10. 模型以config/models.yaml为准，预算config/resource_budget.yaml为准（累计10M/$20，公司软目标）；母账1,849,869/$0.739510估计含unknown。原生goal旧正文2M不代替配置。无额度/人工签收阻塞。宿主C:/Miniconda/python.exe正常权限，勿回Low venv/改ACL。
-11. 修改前解释status；CWP .githooks/pre-push mode与RF三份assurance定时产物为外来WIP，不能暂存/恢复。原件及生产config不改；Dayu/IQS/Dashboard不动。禁no-verify/全仓reset/clean/反复超时整批。正常大节点测试和独审，不加helper许可。
-12. 精确提交/CI分仓记录在CURRENT_STATUS；当前新代码发布未完就继续收尾，不新发卡。RF运行代码已535604fa/精确CI绿、三逻辑技能/2物理目标已部署，当前v6仅docs材料无需运行代码再同步。更新状态/进度/下一步，原始失败/费用/签名不覆盖。
-
-最终类型注解小delta亦有独审；较旧付费版本累计三个实现依赖SHA变化，但免费重放HTTP/完整卡/execution相同，旧签名保持。RF验收文档85054d7b精确CI41260918155绿，外来三份assurance原字节已恢复且未提交。
-
-W12新attempt=原audit run下execution_replays/r1-remediation-03；仍asof2026-10-21，checked日期是真实当前时间。capture/event使用这个attempt容器的小run.json（保持原run_id）隔离旧日志；不是新控制器/预算库。其executor已实际免费复用三份来源/阅读原页，缺call/年报历史publicationunknown保持gap，不当正式native采用。
+1. 唯一当前入口CURRENT_STATUS.md/json；task_plan只有一个Next Step。目标MAINLINE_LOOP_GOAL、外包PACKAGE_STATUS、旧历史HISTORY。goal active，不建新目标或新外包卡，不再问逐材料许可。
+2. CWP master/远端f98dd54b，精确CI41264855167成功，正常push651P/133.64s。P0旧3例和P1后续3例版本合同均闭合；旧失败/签名保持。32已知文件＋原smoke/180秒是部分保护，不代替完整CI；commit仍仅静态检查。Windows嵌套夹具/长树自清理已19P、追加独审0OPEN。
+3. P1当前两份真实材料：华利15卡/12业务原子、body a466...；Berkshire88任务/73卡/15未处理、body66c.../10业务原子。各1真实配置POST，激活和同跨run0重复；/5仅完整原文卡＋排名，不是生成式概述/全文/盲测。旧ec183精确产物兼容读通过。
+4. 当前P1/后续验证delta分别在review/mainline-closeout-20261031/p1-current及p1-ci-repair；旧付费HTTP、每卡、execution均免费重放一致，原generation不重签。旧normalized77/64/13和首次live88/72/16只作历史。Berkshire15余项不能写全消费，低分/unclear/redundant不能删原卡。
+5. P2新版华利v6同a466进入真实used参数、公式、报告、snapshot/registry，完整t3五support＋一context/理由持久，45独立检查PASS。RF main/远端85054d7b、精确CI41260918155成功；运行代码535604fa已同步3逻辑入口/2物理目标、重复零写、3新进程通过。正式投资产物只在RF docs/plans/p2-summary-lineage-20261031/review/v6。
+6. 下一实际执行：audit原run r1-20261021-cn-wuxi-apptec下execution_replays/r1-remediation-03。scope/deploy/versions、roles/executor、preflight、requests均属此attempt；capture/event用小run.json保持原run_id，旧日志/initial/final3不改。独立executor /root/w12_executor_current已解除CI依赖继续正式链；没有新正式/四审通过证据前别写完成。
+7. 保留asof2026-10-21、实际checked日期Nov1。11原件SourceRef/已验事实通过CWP既有owner导出/record_source_facts继承到隔离catalog，无raw/DB复制；旧扫描推断失败保留并指正确复用结果。上层不拼物理根。Sina当前snapshot不能冒历史asof可得，单位/PIT未知保留；IR新材料发现partial、exactQ2call请求unsupported_exchange继续gap，不能N/A或称无公开材料。
+8. 按当前audit/RF/FF技能实际16标签及12文种矩阵完成source→新summary→native claim→used参数→公式/报告/snapshot，冻结manifest后分批四路storage/fetch/process/analyst独立审查（总4槽含ROOT）；expert归并共因、实施TDD/再验收、质量改善和检测演进。原公司回归完成后药明合联/Snowflake泛化，再固定八家与连续三家clean责任。
+9. W21 canonicalC2真实增强/严格成员对齐、新US监管/HK/US RPO及长文前沿仍未代签；不因当前工程绿抹旧责任。华利2026情景是历史IR支持的条件算例，2023内容不是2026指引，全公司需求/竞争/校准仍OPEN。
+10. 配置models.yaml/resource_budget.yaml为准，累计10M/$20、公司150k/$1软目标；母账最近1,849,869/$0.739510估计含unknown6+prior7。P3预检0模型，后续实读原native账不重置/不另造账。用C:/Miniconda/python.exe宿主，避免Low venv；全局ACL/凭证不改。
+11. 原件与生产config保留，Dayu/IQS/Dashboard及外来WIP不动；禁止no-verify/全仓reset/clean。P3原件/当前test数据等四审完成再恢复，不能审查前删。此前新年报临时PDF/全规范化已清、62span保留；冻结RF输入可离线重放，完整源E2E需新建临时湖经FF取得，勿恢复整库。
+12. 收据manifest仅绑定gzip原字节，文档LF差异不另造审批。CODE/CI分仓实查；PWF-only新提交按paths-ignore无需另跑CI。更新当前三文档/状态并正常提交推送；旧证据/费用/错误更正作为历史，不重写。

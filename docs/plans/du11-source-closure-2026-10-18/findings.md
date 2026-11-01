@@ -47,3 +47,9 @@ source_narrative_context只将一个span变成native claim，完整summary-use/c
 source-card compiler已按语义用途生成，但execution又按物理可读重复判断，导致混合context_only/unresolved＋support真实handler失败；复用同一generation-reason owner同时修根因并拒伪造事实卡。该后续验证依赖delta不影响两份已付费请求/draft/execution，已独立免费重算，不重复付费或改旧签名。
 
 新版华利a466产物而非旧ec183已进入实际RF v6，45独立检查通过。2023IRcurrent-open只证明现可读，不变2026指引；2026情景仍条件算例，最新沟通、独立需求/竞争和校准缺口继续P3。W21真实增强、严格对齐和新US监管/HK/US RPO不能由当前源卡/股东信代签。
+
+## 本轮已闭合与当前新责任
+
+版本合同与known消费者选测已独审、f98dd54b并主线、正常651P/133.64s及精确CI41264855167成功；后续Windows9F也是被正常本机hook抓到的旧夹具路径假设，test-only测量和extended清理19P闭合，生产限制未抬。快速scope仍partial，不能保证远端所有错都由本地抓到。
+
+W12隔离metadata缺口根因是把旧原件重新扫描推断当canonical记录继承；现通过既有CWP已验source-facts owner接口保全11个exact Ref事实/原证据，annual native复用成功，不需新核心代码/上层路径适配。新Sina三表链成功；今日snapshot及IR发现/unsupported call的局限继续实际四审，预检不代签新summary/native研究。

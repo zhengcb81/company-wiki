@@ -4,7 +4,7 @@
 
 ## Next Step
 
-先修93f561ef精确CI暴露的三项版本/协议捕获合同，核实动态反射为何使pre-push漏掉已知消费者；独审及短域通过后正常推送新精确CI，再进入已冻结W12 attempt的正式执行。原3例延期合同已闭合，不再扩包。
+继续W12 r1-remediation-03独立executor：按当前配置完成新摘要及完整RF16标签实际链，封存后四路独审，再按共因实施/原公司复验和质量/检测收尾。精确CI41264855167已绿，P0–P2有界工程已收口；不扩包。
 
 ## P0：恢复准确、轻量的回归保护
 
@@ -26,13 +26,13 @@
 - 完成标准：同版本正式artifact及原始回复可复查，重要材料完成或明确未完成，恢复不重复付费，独审无主要问题。
 - 合并处理相关欠账：W21 canonicalC2真实增强及严格成员对齐、US监管PDF/HK新覆盖、长文前沿公平性。只在受影响路径有真实缺口时接线，不把旧环境包或nativefallback当内容验收。
 
-### P1当前有界节点（已独审，发布进行中）
+### P1当前有界节点（已独审、发布、精确CI成功）
 
 - A COMPLETE：正确RED5F证明发现顺序/正式卡与模型scope错位；来源优先级后用同源实际support坐标分配，未知槽位不挪、context不抢优先，完整卡不截。
 - B COMPLETE：内部版本化compact ranking仅发送canonical准入卡，原文fragment/提示各写一次，完整源策略仍绑定generation，observer独立验每个字段/成员。仅v5 sourcequote路径改变，其他生成式协议不动；模型不能删事实，未发任务仍unprocessed。
 - C BOUNDED_REVIEW_PASS：真实DeepSeek Berkshire39520B/47840预留，73完整卡保全10项所需业务；MiMo新版华利15卡/12原子。各1POST，activation/同跨run缓存及RF实际读取通过；旧精确artifact兼容0POST。Berkshire15余项明确未处理，全文partial，曝光样本非盲测，不据advisory低分删t78/t80。
 - 共享用途根修：execution复用source generation reason，context_only/unresolved可读但不可作事实。真正2F→2P及53短域绿；验证依赖两处delta独审免费重放，原请求/draft/execution完全相同，旧付费签名保留。最终23新例绿，夹具mappingproxy复制错误保留为测试错误而非产品RED。
-- 当前验收与可复现命令只看review/mainline-closeout-20261031/p1-current；RF新版v6独审45断言通过，旧v5不代签新产物。下一步正常发布/精确CI，随后继续P3，不为穷尽全文再加额度或新队列。
+- 当前验收与可复现命令只看review/mainline-closeout-20261031/p1-current；RF新版v6独审45断言通过，旧v5不代签新产物。已f98dd54b正常发布、651P和精确CI绿，继续P3，不为穷尽全文再加额度或新队列。
 
 ## P2：同一新artifact真正进入RF
 
