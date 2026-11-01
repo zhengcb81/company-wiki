@@ -1,0 +1,1059 @@
+{
+  "schema_version": "root-w23-intake/1",
+  "reviewer": "ROOT independent intake subagent /root/rectification_review_a",
+  "reviewed_at_utc": "2026-11-01T22:45:27.779025+00:00",
+  "overall": "PARTIAL_EVIDENCE_ACCEPTABLE_TOOLING_NEEDS_ROOT_FIXES",
+  "production_ocr_accepted": false,
+  "worktree": "C:\\Users\\郑曾波\\Projects\\company-wiki-w23-xiaomi-ocr-r1",
+  "head": "d2f6e6f015cb69b826b499ef56e1ab3d6053fced",
+  "remote_tracking_head": "d2f6e6f015cb69b826b499ef56e1ab3d6053fced",
+  "remote_network_queried": false,
+  "branch": "codex/w23-ocr-r1-20261031",
+  "tracked_dirty_paths": [],
+  "untracked_paths": [
+    ".w23_cache/"
+  ],
+  "base_commit": "946537d0d75ac36b22ac0bb24e0f484a896b4c95",
+  "tested_commit_claim": "3934e9fa8a5fe87a77c1cfdb5346ce6168f1d4d1",
+  "reviewed_commit_claim": "76292e3f (independent delta review READY_FOR_ROOT; documentation-only commits after it are bookkeeping)",
+  "changes_after_tested": [
+    "delivery/w23-ocr-r1/handoff.json",
+    "delivery/w23-ocr-r1/handoff.md",
+    "docs/plans/w23-ocr-r1-2026-10-31/progress.md"
+  ],
+  "source_manifest": {
+    "tools/ocr_comparison/campaign.py": {
+      "raw_sha256": "d974cbaefe09cf2dca6060250095477db5b6fa933ae82b6f07b3ef5fc44e38e1",
+      "lf_sha256": "cdd51d1445d6ffe86fae22c264dd4c95e4c26a33248af7a419eaec9764090ced",
+      "matches_handoff": true
+    },
+    "tools/ocr_comparison/render_pages.py": {
+      "raw_sha256": "b20c9e58a1c228823008c9b0631995489d819fd1428e6601661b1dcb73bb3b53",
+      "lf_sha256": "44ffacaedd984baebd036df81d5687eda2388772ac85e73d43d1e7de01a94228",
+      "matches_handoff": true
+    },
+    "tools/ocr_comparison/backends/native_n0.py": {
+      "raw_sha256": "dcb6ab0372341c169d49dd136e3aec304770984483cfc1bcec1999e20997f5c0",
+      "lf_sha256": "bb0269fa909413261320cce953b0da50d6197fb99e7cf58cd4fe7469213a747e",
+      "matches_handoff": true
+    },
+    "tools/ocr_comparison/backends/xiaomi_x1.py": {
+      "raw_sha256": "850b8fe21415a36b0d40837a581dcd11aff4003af379d66330cfb3dc82d81ac2",
+      "lf_sha256": "2b5a19b308c3667eea5bb76c27344a7b93e2d3dbf55a6ce846f91fab97dec927",
+      "matches_handoff": true
+    },
+    "tools/ocr_comparison/backends/rapidocr_r0.py": {
+      "raw_sha256": "43c2e72b15dc51bb404aded2c0a941b26f8f0ab0b87784b4a6cb7575c4b1f09a",
+      "lf_sha256": "83a76fdce7dcb1247546b6b5be948e8cf0a40f9e281e7040f0d0f93e2ccf7607",
+      "matches_handoff": true
+    },
+    "tools/ocr_comparison/compare.py": {
+      "raw_sha256": "6079f00e22370ea63a38d03e83d25e83a4ac04237dbf759a9d0f73beb62f7966",
+      "lf_sha256": "005ac9ba59233367fb6f70b864c63e1a9e0670b42abd2393ca01f8f45b9ffc15",
+      "matches_handoff": true
+    },
+    "tools/ocr_comparison/metrics.py": {
+      "raw_sha256": "3059dfadeaa33e282f1e591b7fe9b3995d5523e5122e2adb3dbb5b38e7918f20",
+      "lf_sha256": "b37300dc9ba31800a3bd98eb362ae2f23ad3fe188e0036e950adefaadbc62315",
+      "matches_handoff": true
+    },
+    "tools/ocr_comparison/job_limit.py": {
+      "raw_sha256": "7dd9ef3d98bfea4cb1a1a81232a79fa66e1a2170f4db590b9274534a3cb3e1bd",
+      "lf_sha256": "ac8ae6bf24130c85110eeb4e7e48cb1ed8dfb61fc48953f069b2de7ab86b2515",
+      "matches_handoff": true
+    },
+    "tools/ocr_comparison/run_x1.py": {
+      "raw_sha256": "b21cf4dc76b1305bc2b40236e0f65c53a1ee1901966c721e9c59b5e8bba52ac7",
+      "lf_sha256": "70e61afe542e8b4849777eeafd066fb88c19be79f4acba6f03a360a1cb87fadb",
+      "matches_handoff": true
+    },
+    "tools/ocr_comparison/x1_child.py": {
+      "raw_sha256": "f8a8e5131c7e28c74da2ea6771ef40b69233956b551f6b6d6da846ac93b0051b",
+      "lf_sha256": "4915177ee86f23ae3c3fbb37cbb8a28ab1943bb3c682bc18631142a5d7998182",
+      "matches_handoff": true
+    },
+    "tools/ocr_comparison/cache.py": {
+      "raw_sha256": "3a0645d483a2dbcdf25625462f9556f23b31834b8863d6eff8a4551cfae61815",
+      "lf_sha256": "8933dc779a4207fb3d855cda19c75f057c0c4130c8d858e791dc9f618809b669",
+      "matches_handoff": true
+    },
+    "tools/ocr_comparison/manifest.py": {
+      "raw_sha256": "8d1d24050fab37c82b8e95d055d045f6b89171ba62343430004521c0b4512e8e",
+      "lf_sha256": "74d4397aa98bf32476529bf640123c5cee4fb2ac18e51b273a5b2bbc7ed889f4",
+      "matches_handoff": true
+    },
+    "tools/ocr_comparison/run_comparison.py": {
+      "raw_sha256": "e62ffa3b93e1e54991e3b9a66a42af74455d2efb06538ac3e07ae7a02a77d7d4",
+      "lf_sha256": "c86556b43f84d886440b74be379b2ecbfe519e25f4dd07a14ec44e13ea7ea290",
+      "matches_handoff": true
+    }
+  },
+  "frozen_sha_checks": {
+    "sample_manifest": {
+      "expected": "da1d938d3820778437de0e27b222395a7d0ff3dc07df8ff87c4b51393ade1fc5",
+      "actual": "da1d938d3820778437de0e27b222395a7d0ff3dc07df8ff87c4b51393ade1fc5",
+      "matches": true
+    },
+    "gold": {
+      "expected": "cedcf16cc31b76ce458e0ffda83438e081e935086a2a61392637338863846d88",
+      "actual": "cedcf16cc31b76ce458e0ffda83438e081e935086a2a61392637338863846d88",
+      "matches": true
+    },
+    "control_manifest": {
+      "expected": "027662e6c91a04ebe3424297fa60f4fd284707f0df707937bd3db2f28a4eeee3",
+      "actual": "027662e6c91a04ebe3424297fa60f4fd284707f0df707937bd3db2f28a4eeee3",
+      "matches": true
+    }
+  },
+  "artifact_manifest": {
+    "delivery/w23-ocr-r1/handoff.json": {
+      "bytes": 15062,
+      "sha256": "c44543aece88536ea7a1794f3987b1522546f2d709161ecee84e2cdb75f79c0f"
+    },
+    "delivery/w23-ocr-r1/handoff.md": {
+      "bytes": 3109,
+      "sha256": "c8622b3a90e2a2c2a4f6d1d592d7f85805151933f5bbd69e283f1ffdd460942b"
+    },
+    "delivery/w23-ocr-r1/comparison.json": {
+      "bytes": 81296,
+      "sha256": "0438e57fdf7c5e1c56d517203582a3ea9a9c16f3f8fddd6bffeefad2ceffa10f"
+    },
+    "delivery/w23-ocr-r1/comparison.md": {
+      "bytes": 8101,
+      "sha256": "34fc6194c2297ae3e3f51148cad7e48773440211949387a92606c62a5b30b10e"
+    },
+    "delivery/w23-ocr-r1/review_independent.md": {
+      "bytes": 40531,
+      "sha256": "d084eafeb43cd82bb5d10ebf4c47318a3d5f3bf4a70f69c5589bf36d7538cb10"
+    },
+    "delivery/w23-ocr-r1/campaign_ledger.json": {
+      "bytes": 6617,
+      "sha256": "1e1b423deab85c0ec8ec2ab7939614a98cf2f2e55bee787273dc245b8d59222a"
+    },
+    "docs/plans/w23-ocr-r1-2026-10-31/TASK_CARD.md": {
+      "bytes": 8572,
+      "sha256": "5851115d755a33823161923acc61be1bcec7d6ffa448a7b4ad086c3ee86b19be"
+    },
+    "docs/plans/w23-ocr-r1-2026-10-31/task_plan.md": {
+      "bytes": 917,
+      "sha256": "11301085563bc03cb8c69e06e8ccee05a79cf8c4cba9f15f19bcdce156117eea"
+    },
+    "docs/plans/w23-ocr-r1-2026-10-31/progress.md": {
+      "bytes": 5476,
+      "sha256": "ffd62882e800d66e0566eff923f444927ece09acc608e79572cec06c39bd45fa"
+    },
+    "docs/plans/w23-ocr-r1-2026-10-31/findings.md": {
+      "bytes": 1203,
+      "sha256": "02e18291eaa2c25da8a07020195d61fb953967c6e8d3055201deabb77c9e91eb"
+    },
+    "docs/plans/w23-ocr-r1-2026-10-31/r1_gold.json": {
+      "bytes": 82336,
+      "sha256": "cedcf16cc31b76ce458e0ffda83438e081e935086a2a61392637338863846d88"
+    },
+    "docs/plans/w23-ocr-r1-2026-10-31/r1_sample_manifest.json": {
+      "bytes": 9958,
+      "sha256": "da1d938d3820778437de0e27b222395a7d0ff3dc07df8ff87c4b51393ade1fc5"
+    },
+    "docs/plans/w23-ocr-r1-2026-10-31/r1_control_manifest.json": {
+      "bytes": 2342,
+      "sha256": "027662e6c91a04ebe3424297fa60f4fd284707f0df707937bd3db2f28a4eeee3"
+    },
+    "docs/plans/w23-ocr-r1-2026-10-31/build_r1_delivery.py": {
+      "bytes": 49523,
+      "sha256": "bc4c18a25c306eb7ad8b89b0ea8280d9ffd76a19c96ba81a95eaba35c5f1d8fa"
+    },
+    "docs/plans/w23-ocr-r1-2026-10-31/fact_match.py": {
+      "bytes": 10092,
+      "sha256": "581cbb75ec33c6df76b7383e940a8c29e25d6d0d8867c80403a7bd5d140a12d7"
+    },
+    "delivery/w23-ocr-r1/receipts/x1_20261101T152545_receipt.json": {
+      "bytes": 8634,
+      "sha256": "4d8a0ffa595fca1858b1f771aa96bd7ebeb18695392722f4d279762d307ce395"
+    }
+  },
+  "original_byte_checks": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\中微公司\\raw\\financial_reports\\中微公司：2025年年度报告.pdf",
+      "bytes": 9165875,
+      "expected": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+      "observed": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\药明康德\\raw\\financial_reports\\药明康德：2022年年度报告.pdf",
+      "bytes": 4750120,
+      "expected": "f7d5c0e585cf913086cfba5cfa74ae1d46a3ef3c4170ea7a08a862e804933904",
+      "observed": "f7d5c0e585cf913086cfba5cfa74ae1d46a3ef3c4170ea7a08a862e804933904"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\金山雲\\raw\\financial_reports\\quarterly\\2026-03-25_hkexnews_12067362_內幕消息 截至二零二五年十二月三十一日止三個月及財年的未經審計財務業績.pdf",
+      "bytes": 322687,
+      "expected": "9f35944bcca595e7286c00a69b8a7bbb907e3bca890e5bc897b9e1c97cde3470",
+      "observed": "9f35944bcca595e7286c00a69b8a7bbb907e3bca890e5bc897b9e1c97cde3470"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\壁仞科技\\raw\\financial_reports\\annual\\2026-04-22_hkexnews_12114765_2025年度報告.pdf",
+      "bytes": 3749215,
+      "expected": "7de30b0fb2958e51799d8cc860a05231361690de3ba15990b9e1ac76954745b0",
+      "observed": "7de30b0fb2958e51799d8cc860a05231361690de3ba15990b9e1ac76954745b0"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Dropbox\\Stock\\berkshire2007.pdf",
+      "bytes": 934342,
+      "expected": "a914b0ad67df2d75da0ae2b246dba5500bb84e19391a62a930ff441213d3ca53",
+      "observed": "a914b0ad67df2d75da0ae2b246dba5500bb84e19391a62a930ff441213d3ca53"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\万华化学\\raw\\research\\万华化学：2021年度业绩说明会会议纪要.pdf",
+      "bytes": 201483,
+      "expected": "f8f18fd12ef060fa0183be1a641232a857daa438518d19c911cdf602ac2fb07d",
+      "observed": "f8f18fd12ef060fa0183be1a641232a857daa438518d19c911cdf602ac2fb07d"
+    }
+  ],
+  "gold": {
+    "pages": 8,
+    "facts": 189,
+    "conditions": 117,
+    "numbers_raw": 316,
+    "characters": 15600,
+    "initial_freeze_commit": "970532af4fe250966d37a4232cc97164b0e4a98e",
+    "initial_freeze_pages": 7,
+    "initial_freeze_time_utc": "2026-11-01T13:49:14Z",
+    "first_ledger_time_utc": "2026-11-01T14:01:51.517460+00:00",
+    "holdout_pages_unchanged_vs_initial_freeze": {
+      "r1_brk2007_p001": true,
+      "r1_ksy_fy2025_results_p003": true
+    },
+    "qa_extension_first_committed_after_capture": true,
+    "qa_gold_pre_capture_timing": "declared; current gold mtime precedes capture, no immutable pre-capture commit retained for extension",
+    "r0_n0_equal_full_sample_denominator": true
+  },
+  "aggregates": {
+    "R0": {
+      "pages_total": 8,
+      "pages_scored": 8,
+      "pages_excluded": 0,
+      "status_counts": {
+        "ok": 8
+      },
+      "macro_cer_strict": 0.10002816392585027,
+      "macro_cer_narrow": 0.07678173925776227,
+      "macro_wer": 0.03640102213958403,
+      "micro_cer_strict": 0.08294871794871794,
+      "micro_cer_narrow": 0.06413508225233712,
+      "number_token_recall": 0.9158249158249159,
+      "number_token_precision": 0.9158249158249159,
+      "number_digit_present_recall": 0.9916666666666667,
+      "repetition_flagged_pages": 0,
+      "unsourced_lines": 38,
+      "output_lines": 501,
+      "unsourced_rate": 0.07584830339321358,
+      "per_stratum": {
+        "CN/zh-CN/annual_report": {
+          "pages": 2,
+          "scored": 2,
+          "coverage": 1.0,
+          "macro_cer_strict": 0.029867225111956032,
+          "macro_cer_narrow": 0.0019383072043806732,
+          "macro_wer": null
+        },
+        "HK/zh/annual_results_announcement": {
+          "pages": 2,
+          "scored": 2,
+          "coverage": 1.0,
+          "macro_cer_strict": 0.24168829699727845,
+          "macro_cer_narrow": 0.20020197274283255,
+          "macro_wer": null
+        },
+        "HK/zh/annual_report": {
+          "pages": 1,
+          "scored": 1,
+          "coverage": 1.0,
+          "macro_cer_strict": 0.13550600343053174,
+          "macro_cer_narrow": 0.11891891891891893,
+          "macro_wer": null
+        },
+        "US/en/annual_report": {
+          "pages": 2,
+          "scored": 2,
+          "coverage": 1.0,
+          "macro_cer_strict": 0.018325023243803293,
+          "macro_cer_narrow": 0.01862138802796381,
+          "macro_wer": 0.03640102213958403
+        },
+        "CN/zh-CN/investor_relations_qa": {
+          "pages": 1,
+          "scored": 1,
+          "coverage": 1.0,
+          "macro_cer_strict": 0.08495821727019498,
+          "macro_cer_narrow": 0.053811659192825115,
+          "macro_wer": null
+        }
+      },
+      "eval_split": {
+        "pages": 6,
+        "scored": 6,
+        "macro_cer_strict": 0.11939134934555416
+      },
+      "holdout_split": {
+        "pages": 2,
+        "scored": 2,
+        "macro_cer_strict": 0.04193860766673865
+      },
+      "fact_match": {
+        "facts_hit": 164,
+        "facts_total": 189,
+        "conditions_hit": 107,
+        "conditions_total": 117,
+        "numbers_hit": 288,
+        "numbers_total": 291,
+        "facts_raw_total": 189,
+        "conditions_raw_total": 117,
+        "numbers_raw_total": 316,
+        "facts_numeric_hit": 177,
+        "conditions_numeric_hit": 111,
+        "pages_produced": 8,
+        "pages_total": 8,
+        "unachievable_counts": {
+          "numbers": 25
+        }
+      }
+    },
+    "N0": {
+      "pages_total": 8,
+      "pages_scored": 8,
+      "pages_excluded": 0,
+      "status_counts": {
+        "ok": 8
+      },
+      "macro_cer_strict": 0.10954591197532794,
+      "macro_cer_narrow": 0.0782336668526432,
+      "macro_wer": 0.0024232633279483036,
+      "micro_cer_strict": 0.0567948717948718,
+      "micro_cer_narrow": 0.03050945720704399,
+      "number_token_recall": 0.9966329966329966,
+      "number_token_precision": 0.9966329966329966,
+      "number_digit_present_recall": 1.0,
+      "repetition_flagged_pages": 0,
+      "unsourced_lines": 5,
+      "output_lines": 308,
+      "unsourced_rate": 0.016233766233766232,
+      "per_stratum": {
+        "CN/zh-CN/annual_report": {
+          "pages": 2,
+          "scored": 2,
+          "coverage": 1.0,
+          "macro_cer_strict": 0.041561802578059664,
+          "macro_cer_narrow": 0.009600583415630328,
+          "macro_wer": null
+        },
+        "HK/zh/annual_results_announcement": {
+          "pages": 2,
+          "scored": 2,
+          "coverage": 1.0,
+          "macro_cer_strict": 0.05353590003588135,
+          "macro_cer_narrow": 0.02030588802411469,
+          "macro_wer": null
+        },
+        "HK/zh/annual_report": {
+          "pages": 1,
+          "scored": 1,
+          "coverage": 1.0,
+          "macro_cer_strict": 0.5849056603773585,
+          "macro_cer_narrow": 0.5567567567567567,
+          "macro_wer": null
+        },
+        "US/en/annual_report": {
+          "pages": 2,
+          "scored": 2,
+          "coverage": 1.0,
+          "macro_cer_strict": 0.024867098385599598,
+          "macro_cer_narrow": 0.0016602809706257981,
+          "macro_wer": 0.0024232633279483036
+        },
+        "CN/zh-CN/investor_relations_qa": {
+          "pages": 1,
+          "scored": 1,
+          "coverage": 1.0,
+          "macro_cer_strict": 0.05153203342618384,
+          "macro_cer_narrow": 0.005979073243647235,
+          "macro_wer": null
+        }
+      },
+      "eval_split": {
+        "pages": 6,
+        "scored": 6,
+        "macro_cer_strict": 0.1360251497397981
+      },
+      "holdout_split": {
+        "pages": 2,
+        "scored": 2,
+        "macro_cer_strict": 0.030108198681917494
+      },
+      "fact_match": {
+        "facts_hit": 173,
+        "facts_total": 189,
+        "conditions_hit": 111,
+        "conditions_total": 117,
+        "numbers_hit": 290,
+        "numbers_total": 291,
+        "facts_raw_total": 189,
+        "conditions_raw_total": 117,
+        "numbers_raw_total": 316,
+        "facts_numeric_hit": 180,
+        "conditions_numeric_hit": 114,
+        "pages_produced": 8,
+        "pages_total": 8,
+        "unachievable_counts": {
+          "numbers": 25
+        }
+      }
+    },
+    "X1F_attempt1": {
+      "pages_total": 8,
+      "pages_scored": 0,
+      "pages_excluded": 8,
+      "status_counts": {
+        "error": 7,
+        "not_run": 1
+      },
+      "macro_cer_strict": null,
+      "macro_cer_narrow": null,
+      "macro_wer": null,
+      "micro_cer_strict": null,
+      "micro_cer_narrow": null,
+      "number_token_recall": null,
+      "number_token_precision": null,
+      "number_digit_present_recall": null,
+      "repetition_flagged_pages": 0,
+      "unsourced_lines": 0,
+      "output_lines": 0,
+      "unsourced_rate": null,
+      "per_stratum": {
+        "CN/zh-CN/annual_report": {
+          "pages": 2,
+          "scored": 0,
+          "coverage": 0.0,
+          "macro_cer_strict": null,
+          "macro_cer_narrow": null,
+          "macro_wer": null
+        },
+        "HK/zh/annual_results_announcement": {
+          "pages": 2,
+          "scored": 0,
+          "coverage": 0.0,
+          "macro_cer_strict": null,
+          "macro_cer_narrow": null,
+          "macro_wer": null
+        },
+        "HK/zh/annual_report": {
+          "pages": 1,
+          "scored": 0,
+          "coverage": 0.0,
+          "macro_cer_strict": null,
+          "macro_cer_narrow": null,
+          "macro_wer": null
+        },
+        "US/en/annual_report": {
+          "pages": 2,
+          "scored": 0,
+          "coverage": 0.0,
+          "macro_cer_strict": null,
+          "macro_cer_narrow": null,
+          "macro_wer": null
+        },
+        "CN/zh-CN/investor_relations_qa": {
+          "pages": 1,
+          "scored": 0,
+          "coverage": 0.0,
+          "macro_cer_strict": null,
+          "macro_cer_narrow": null,
+          "macro_wer": null
+        }
+      },
+      "eval_split": {
+        "pages": 6,
+        "scored": 0,
+        "macro_cer_strict": null
+      },
+      "holdout_split": {
+        "pages": 2,
+        "scored": 0,
+        "macro_cer_strict": null
+      },
+      "fact_match": {
+        "facts_hit": 0,
+        "facts_total": 189,
+        "conditions_hit": 0,
+        "conditions_total": 117,
+        "numbers_hit": 0,
+        "numbers_total": 291,
+        "facts_raw_total": 189,
+        "conditions_raw_total": 117,
+        "numbers_raw_total": 316,
+        "facts_numeric_hit": 0,
+        "conditions_numeric_hit": 0,
+        "pages_produced": 0,
+        "pages_total": 8,
+        "unachievable_counts": {
+          "numbers": 25
+        }
+      }
+    },
+    "X1F_attempt2": {
+      "pages_total": 8,
+      "pages_scored": 0,
+      "pages_excluded": 8,
+      "status_counts": {
+        "error": 1,
+        "no_record": 6,
+        "not_run": 1
+      },
+      "macro_cer_strict": null,
+      "macro_cer_narrow": null,
+      "macro_wer": null,
+      "micro_cer_strict": null,
+      "micro_cer_narrow": null,
+      "number_token_recall": null,
+      "number_token_precision": null,
+      "number_digit_present_recall": null,
+      "repetition_flagged_pages": 0,
+      "unsourced_lines": 0,
+      "output_lines": 0,
+      "unsourced_rate": null,
+      "per_stratum": {
+        "CN/zh-CN/annual_report": {
+          "pages": 2,
+          "scored": 0,
+          "coverage": 0.0,
+          "macro_cer_strict": null,
+          "macro_cer_narrow": null,
+          "macro_wer": null
+        },
+        "HK/zh/annual_results_announcement": {
+          "pages": 2,
+          "scored": 0,
+          "coverage": 0.0,
+          "macro_cer_strict": null,
+          "macro_cer_narrow": null,
+          "macro_wer": null
+        },
+        "HK/zh/annual_report": {
+          "pages": 1,
+          "scored": 0,
+          "coverage": 0.0,
+          "macro_cer_strict": null,
+          "macro_cer_narrow": null,
+          "macro_wer": null
+        },
+        "US/en/annual_report": {
+          "pages": 2,
+          "scored": 0,
+          "coverage": 0.0,
+          "macro_cer_strict": null,
+          "macro_cer_narrow": null,
+          "macro_wer": null
+        },
+        "CN/zh-CN/investor_relations_qa": {
+          "pages": 1,
+          "scored": 0,
+          "coverage": 0.0,
+          "macro_cer_strict": null,
+          "macro_cer_narrow": null,
+          "macro_wer": null
+        }
+      },
+      "eval_split": {
+        "pages": 6,
+        "scored": 0,
+        "macro_cer_strict": null
+      },
+      "holdout_split": {
+        "pages": 2,
+        "scored": 0,
+        "macro_cer_strict": null
+      },
+      "fact_match": {
+        "facts_hit": 0,
+        "facts_total": 189,
+        "conditions_hit": 0,
+        "conditions_total": 117,
+        "numbers_hit": 0,
+        "numbers_total": 291,
+        "facts_raw_total": 189,
+        "conditions_raw_total": 117,
+        "numbers_raw_total": 316,
+        "facts_numeric_hit": 0,
+        "conditions_numeric_hit": 0,
+        "pages_produced": 0,
+        "pages_total": 8,
+        "unachievable_counts": {
+          "numbers": 25
+        }
+      }
+    },
+    "X2": {
+      "pages_total": 8,
+      "pages_scored": 0,
+      "pages_excluded": 8,
+      "status_counts": {
+        "not_run": 8
+      },
+      "coverage_by_stratum": {
+        "CN/zh-CN/annual_report": {
+          "pages": 2,
+          "scored": 0,
+          "coverage": 0.0
+        },
+        "CN/zh-CN/investor_relations_qa": {
+          "pages": 1,
+          "scored": 0,
+          "coverage": 0.0
+        },
+        "HK/zh/annual_report": {
+          "pages": 1,
+          "scored": 0,
+          "coverage": 0.0
+        },
+        "HK/zh/annual_results_announcement": {
+          "pages": 2,
+          "scored": 0,
+          "coverage": 0.0
+        },
+        "US/en/annual_report": {
+          "pages": 2,
+          "scored": 0,
+          "coverage": 0.0
+        }
+      },
+      "per_stratum": {
+        "CN/zh-CN/annual_report": {
+          "pages": 2,
+          "scored": 0,
+          "coverage": 0.0,
+          "macro_cer_strict": null,
+          "macro_cer_narrow": null,
+          "macro_wer": null
+        },
+        "CN/zh-CN/investor_relations_qa": {
+          "pages": 1,
+          "scored": 0,
+          "coverage": 0.0,
+          "macro_cer_strict": null,
+          "macro_cer_narrow": null,
+          "macro_wer": null
+        },
+        "HK/zh/annual_report": {
+          "pages": 1,
+          "scored": 0,
+          "coverage": 0.0,
+          "macro_cer_strict": null,
+          "macro_cer_narrow": null,
+          "macro_wer": null
+        },
+        "HK/zh/annual_results_announcement": {
+          "pages": 2,
+          "scored": 0,
+          "coverage": 0.0,
+          "macro_cer_strict": null,
+          "macro_cer_narrow": null,
+          "macro_wer": null
+        },
+        "US/en/annual_report": {
+          "pages": 2,
+          "scored": 0,
+          "coverage": 0.0,
+          "macro_cer_strict": null,
+          "macro_cer_narrow": null,
+          "macro_wer": null
+        }
+      },
+      "eval_split": {
+        "pages": 6,
+        "scored": 0,
+        "macro_cer_strict": null
+      },
+      "holdout_split": {
+        "pages": 2,
+        "scored": 0,
+        "macro_cer_strict": null
+      },
+      "fact_match": {
+        "facts_hit": 0,
+        "facts_total": 189,
+        "facts_numeric_hit": 0,
+        "conditions_hit": 0,
+        "conditions_total": 117,
+        "numbers_hit": 0,
+        "numbers_total": 291,
+        "note": "NOT_RUN: zero hits over the full denominators, never zero-filled as produced text"
+      }
+    }
+  },
+  "campaign": {
+    "entries": 40,
+    "spent": 1431.40547,
+    "entry_sum": 1431.40547,
+    "budget": 1800.0,
+    "remaining": 368.5945300000001,
+    "first_r0_zero_seconds_rows": 7,
+    "first_r0_zero_row_timestamp_span_seconds": 170.989549,
+    "historical_seconds_separate": 2471.834832,
+    "unstarted_x1_overcharge_retained": 1080,
+    "complete_actual_cost_compliance_proven": false
+  },
+  "model_failure_receipt": {
+    "cap_bytes": 1719988224,
+    "peak_bytes": 1882599424,
+    "excess_bytes": 162611200,
+    "wall_seconds": 106.5,
+    "native_exit_code": 3221225477,
+    "quality_claim": null,
+    "production_deployment": "NOT_ACCEPTED"
+  },
+  "independent_author_review": {
+    "submitted_report_rounds": 3,
+    "latest_report_snapshot": "fc4228c15bd91f9ef74d206290ac4b68b26d8d97",
+    "latest_tested_source_in_report": "da9ca2c8",
+    "latest_report_verdict": "NEEDS_FIXES",
+    "claimed_final_delta_report_for_76292e3f_located": false,
+    "reviewer_independence": "self-declared in submitted report; cannot independently reconstruct agent identity from repository records",
+    "tests59": "author independent report claim, not rerun by ROOT intake"
+  },
+  "light_probes": {
+    "schema_version": "root-w23-light-probe/1",
+    "no_model_or_network": true,
+    "copy_only": [
+      "campaign.py",
+      "cache.py"
+    ],
+    "runner": "explicit stub reached through unchanged actual X1F dispatch, fake-CLI branch unused",
+    "cases": [
+      {
+        "id": "real-x1-cross-process-cache",
+        "expected": "fresh process resumes same cached page with zero backend calls and no re-charge",
+        "first": {
+          "returncode": 0,
+          "stderr_tail": ""
+        },
+        "second": {
+          "returncode": 0,
+          "stderr_tail": ""
+        },
+        "backend_calls": 2,
+        "spent_before": 1.0,
+        "spent_after": 2.0,
+        "second_cache_hit": null,
+        "verdict": "FAIL"
+      },
+      {
+        "id": "real-x1-unknown-inflight-recovery",
+        "expected": "started failed invocation conservatively reserved/charged before new process resumes",
+        "failed": {
+          "returncode": 1,
+          "stderr_tail": ",model_dir=str(ROOT/'dummy-model'))\n  File \"C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r6-w23-intake\\copied\\campaign.py\", line 250, in run_campaign_batch\n    result = run_x1_batch(\n        pages,\n    ...<5 lines>...\n        backend_identity=identity,\n    )\n  File \"C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r6-w23-intake\\probe.py\", line 17, in stub\n    raise RuntimeError('intentional failure after started work before batch return')\nRuntimeError: intentional failure after started work before batch return\n"
+        },
+        "after_failure": {
+          "schema_version": "cwp-ocr-campaign-ledger/1",
+          "plan_id": "probe",
+          "created_at_utc": "2026-11-01T22:44:03.614343+00:00",
+          "budget_seconds": 500.0,
+          "spent_seconds": 0.0,
+          "entries": []
+        },
+        "recovery": {
+          "returncode": 0,
+          "stderr_tail": ""
+        },
+        "backend_calls": 2,
+        "spent_after_resume": 1.0,
+        "verdict": "FAIL"
+      },
+      {
+        "id": "real-x1-zero-balance-denominator",
+        "expected": "return not_run full denominator before model identity/runner with zero backend calls",
+        "result": {
+          "returncode": 1,
+          "stderr_tail": " line 250, in run_campaign_batch\n    result = run_x1_batch(\n        pages,\n    ...<5 lines>...\n        backend_identity=identity,\n    )\n  File \"C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r6-w23-intake\\probe.py\", line 14, in stub\n    if kw['total_budget']<=0:raise ValueError('stub mirrors real validate_card_limits(total_budget=0)')\n                             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nValueError: stub mirrors real validate_card_limits(total_budget=0)\n"
+        },
+        "runner_calls": [
+          {
+            "total_budget": 0.0,
+            "deadline": 0.0
+          }
+        ],
+        "verdict": "FAIL"
+      },
+      {
+        "id": "nonfinite-ledger-corruption",
+        "expected": "LedgerCorrupt for NaN budget",
+        "observed": {
+          "accepted": true,
+          "remaining": "nan",
+          "request_budget": "180.0"
+        },
+        "verdict": "FAIL"
+      }
+    ]
+  },
+  "light_probe_reproducer_source": "from __future__ import annotations\nimport importlib.util,json,os,subprocess,sys,time,types\nfrom pathlib import Path\nROOT=Path(__file__).resolve().parent\n\ndef load():\n    pkg=types.ModuleType('r6_w23');pkg.__path__=[str(ROOT/'copied')];sys.modules[pkg.__name__]=pkg\n    name='r6_w23.campaign';spec=importlib.util.spec_from_file_location(name,ROOT/'copied/campaign.py');m=importlib.util.module_from_spec(spec);sys.modules[name]=m;spec.loader.exec_module(m)\n    mod=types.ModuleType('r6_w23.run_x1')\n    mod._model_dir=lambda path: Path(path)\n    def stub(pages,**kw):\n        counter=ROOT/(os.environ['CASE']+'-runner-calls.jsonl')\n        with counter.open('a',encoding='utf8') as f:f.write(json.dumps({'total_budget':kw['total_budget'],'deadline':kw['deadline']})+'\\n')\n        if kw['total_budget']<=0:raise ValueError('stub mirrors real validate_card_limits(total_budget=0)')\n        if os.environ.get('STUB_FAIL')=='1':\n            time.sleep(.025)\n            raise RuntimeError('intentional failure after started work before batch return')\n        return {'records':[{'page_id':p['page_id'],'status':'ok','text':'probe-only','request_seconds':1.0} for p in pages],\n                'identity':kw['backend_identity'], 'receipt':{'child':{'events':[{'event':'stage','stage':'page_start','page_id':p['page_id']} for p in pages]}}}\n    mod.run_x1_batch=stub;sys.modules[mod.__name__]=mod\n    b=types.ModuleType('r6_w23.backends');b.__path__=[];sys.modules[b.__name__]=b\n    x=types.ModuleType('r6_w23.backends.xiaomi_x1')\n    class IdentityOnly:\n        def __init__(self,**kw):self.identity_manifest={'arm':'X1','prompt_sha256':'probe-only','max_new_tokens':kw['max_new_tokens'],'weights_mode':kw['weights_mode']}\n    x.XiaomiX1=IdentityOnly;sys.modules[x.__name__]=x\n    return m\n\ndef worker():\n    m=load();case=os.environ['CASE'];path=ROOT/(case+'-ledger.json');ledger=m.load_ledger(path)\n    out=m.run_campaign_batch(ledger_path=path,ledger=ledger,arm='X1F',pages=[{'page_id':'p1','png_sha256':'a'*64}],cache_dir=ROOT/(case+'-cache'),model_dir=str(ROOT/'dummy-model'))\n    (ROOT/(case+'-batch.json')).write_text(json.dumps(out),encoding='utf8')\n\ndef run(case,fail=False):\n    env={**os.environ,'CASE':case,'STUB_FAIL':'1' if fail else '0'}\n    p=subprocess.run([sys.executable,'-B','-I','-X','utf8',str(__file__),'worker'],env=env,cwd=str(ROOT),capture_output=True,text=True,encoding='utf8',errors='replace',timeout=15)\n    return {'returncode':p.returncode,'stderr_tail':p.stderr[-500:]}\n\ndef calls(case):\n    path=ROOT/(case+'-runner-calls.jsonl');return [json.loads(x) for x in path.read_text('utf8').splitlines()] if path.exists() else []\n\ndef main():\n    m=load();cases=[]\n    path=ROOT/'resume-ledger.json';m.create_ledger(path,plan_id='probe',budget_seconds=500)\n    r1=run('resume');before=m.load_ledger(path);r2=run('resume');after=m.load_ledger(path);batch=json.loads((ROOT/'resume-batch.json').read_text('utf8'))\n    cases.append({'id':'real-x1-cross-process-cache','expected':'fresh process resumes same cached page with zero backend calls and no re-charge','first':r1,'second':r2,'backend_calls':len(calls('resume')),'spent_before':before['spent_seconds'],'spent_after':after['spent_seconds'],'second_cache_hit':batch['records'][0].get('cache_hit'), 'verdict':'FAIL' if len(calls('resume'))!=1 or before['spent_seconds']!=after['spent_seconds'] else 'PASS'})\n    path=ROOT/'inflight-ledger.json';m.create_ledger(path,plan_id='probe',budget_seconds=500);failed=run('inflight',True);afterfail=m.load_ledger(path);recovery=run('inflight');afterresume=m.load_ledger(path)\n    cases.append({'id':'real-x1-unknown-inflight-recovery','expected':'started failed invocation conservatively reserved/charged before new process resumes','failed':failed,'after_failure':afterfail,'recovery':recovery,'backend_calls':len(calls('inflight')),'spent_after_resume':afterresume['spent_seconds'],'verdict':'FAIL' if afterfail['spent_seconds']==0 and not any('pending' in str(k) or 'inflight' in str(k) for k in afterfail) else 'PASS'})\n    path=ROOT/'exhausted-ledger.json';m.create_ledger(path,plan_id='probe',budget_seconds=1);m.record(m.load_ledger(path),path,arm='X1F',page_id='old',seconds=1,status='ok');zero=run('exhausted')\n    cases.append({'id':'real-x1-zero-balance-denominator','expected':'return not_run full denominator before model identity/runner with zero backend calls','result':zero,'runner_calls':calls('exhausted'),'verdict':'FAIL' if calls('exhausted') or zero['returncode'] else 'PASS'})\n    path=ROOT/'nonfinite-ledger.json';d={'schema_version':m.LEDGER_SCHEMA,'budget_seconds':float('nan'),'spent_seconds':0,'entries':[]};path.write_text(json.dumps(d),encoding='utf8')\n    try:\n        bad=m.load_ledger(path);observed={'accepted':True,'remaining':str(m.remaining_seconds(bad)),'request_budget':str(m.request_budget(bad))}\n    except m.LedgerCorrupt as e:observed={'accepted':False,'error':str(e)}\n    cases.append({'id':'nonfinite-ledger-corruption','expected':'LedgerCorrupt for NaN budget','observed':observed,'verdict':'FAIL' if observed['accepted'] else 'PASS'})\n    result={'schema_version':'root-w23-light-probe/1','no_model_or_network':True,'copy_only':['campaign.py','cache.py'],'runner':'explicit stub reached through unchanged actual X1F dispatch, fake-CLI branch unused','cases':cases}\n    (ROOT/'probe-results.json').write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf8');print(json.dumps(result,ensure_ascii=False,indent=2))\nif __name__=='__main__':worker() if len(sys.argv)>1 and sys.argv[1]=='worker' else main()\n",
+  "light_probe_runtime": "C:/Miniconda/python.exe -B -I -X utf8 <self-owned-tmp>/probe.py",
+  "reviewer_own_error": "First probe harness child lacked explicit -X utf8 under -I; stderr decode failed. Only self-owned harness corrected and temp generated cases reset; not a product failure. Corrected probe completed 4 negative cases.",
+  "author_cache_before": [
+    {
+      "path": "r1_cache/1483d6ba6b8253b93d4cae25cfebb00ddf609a5d49be44c10df55bdd27215d04.json",
+      "bytes": 9995,
+      "sha256": "42a20e3ced7c8b3872b2c37f02531a50ba77d0f8fbf027b47c9200f76825c7da"
+    },
+    {
+      "path": "r1_cache/15eccaed0daed592d55f64b422f820dbd538f1bdc59050b3b09315a9296262f6.json",
+      "bytes": 14102,
+      "sha256": "7abfc1105c67bddc3ff5457206b8b2c0a1ef3823e1eed3cdcdad28d793fd8050"
+    },
+    {
+      "path": "r1_cache/19d503121c89ef8753284fd1ff2cc072b3d439533cc330e1bf1fff18de80be8d.json",
+      "bytes": 7555,
+      "sha256": "a7d4d592dcb68bc7a2cf133d9637e776bae722bb4a7bd1a8fa634291d936e68c"
+    },
+    {
+      "path": "r1_cache/1ed728607697b21d1f656161888dec48c74aa9bb96c129a4d79d408f826e7b52.json",
+      "bytes": 435,
+      "sha256": "c2a1dd89f32a08250f94ac1f6e7e55b394f33dd6601c868b6ed6d6cda98f021d"
+    },
+    {
+      "path": "r1_cache/28bf0b8702a4d4199409677b4bffaedb8172ae8090d400c5a3ea202b42962d0c.json",
+      "bytes": 868,
+      "sha256": "22c76e288b40a0e3ffe934993f4a74ebb16a926fb7b9905d7c8d2eef25534629"
+    },
+    {
+      "path": "r1_cache/4d8076c613c81039c7b0266a4f6933f4b3359003a570dd811274259a25c429ad.json",
+      "bytes": 11858,
+      "sha256": "6ba1b895b3325878dfc3d3510de8bd0fcedaff11b46a53350e63d74bc171e38b"
+    },
+    {
+      "path": "r1_cache/7fb5961f2496cbdf8e374408f2ff70ad54b5b7fd095610f5d80ad447c9c4f938.json",
+      "bytes": 313,
+      "sha256": "a8dff5595a097fcb83d2d2e698cd71f145695e17f15c0691cfb22f81c607b2e9"
+    },
+    {
+      "path": "r1_cache/8a2f7fc581df604e054b7588a0de7ca0df24364352dee8922b97b95aa1bbd51c.json",
+      "bytes": 14577,
+      "sha256": "1dfb1d72959a271e9a9120d500764ad56f7dc33ad78dccc3e4471f689c876db3"
+    },
+    {
+      "path": "r1_cache/8b3d030738339bd5978be67f5fa4ee78ca152c0f2e335a40401b83a50f7ecc40.json",
+      "bytes": 263,
+      "sha256": "90825f2423c9a15ba607cd9c0bab3eda996cf170458dc0a1e428d82916f2b619"
+    },
+    {
+      "path": "r1_cache/995d54f551e02a9d06ae41fcd03e546b0fce20144388b0b78b48d7ac7fa56a09.json",
+      "bytes": 30156,
+      "sha256": "689fa6e837b17a0d4077f3e45e8c5e84b51f54de570e5f2171beec09fba50683"
+    },
+    {
+      "path": "r1_cache/a8e67a6114167db295d30382d9e8df8a26d4f0adf9319a22fb9110fde4a958a2.json",
+      "bytes": 273,
+      "sha256": "5f530f9c186706c871405ee3b772164b56a940412f243f2847c5c1aeb18c6bda"
+    },
+    {
+      "path": "r1_cache/ad5dc4b955e34969b6dad1dbee1dc10e5dbb0b10d286d858f4029e746dc377f4.json",
+      "bytes": 274,
+      "sha256": "8694293ce7362ac3e6d6be40a07967ee7468e6c8e01fb69b95eee48756bf59a2"
+    },
+    {
+      "path": "r1_cache/ad9cb20eaaac19f7babf547fac517d56eda25916edc9f505fc28a4ff0d0ec902.json",
+      "bytes": 267,
+      "sha256": "112c05aedf7324e0f43cb73f589d9939bf72224c1632588ddf99bd50e8457d8e"
+    },
+    {
+      "path": "r1_cache/af8ab437ec24758bd888a45365cd3849fce5b6183d05decb22196f90aa1f30e1.json",
+      "bytes": 263,
+      "sha256": "444bb76c34d79f2ebbd447dbfab1f85f92f3f796e7e07fa66bc83d0e89bd616c"
+    },
+    {
+      "path": "r1_cache/c59285efce44654e87afac53f2519aa829faac37edba9ae87bf93f6a148e7724.json",
+      "bytes": 365,
+      "sha256": "375a515dc5c3b33fd7ad1bb18452cc2b9ad6c08a9870c30cb709dfcbf5f127fb"
+    },
+    {
+      "path": "r1_cache/cd8273c0583a71f5d44ffd30e3cbf40099f71319345916e98ca5c18c21ad39ff.json",
+      "bytes": 5795,
+      "sha256": "d6bf96fc8608948d4878b4a9369287cd1d50c18e3e7f49268f3b0d2454f751eb"
+    },
+    {
+      "path": "r1_cache/cdcdaf7d976a22e6c745e78800d79360e39064ffd0bcb98a709a041409417c80.json",
+      "bytes": 6167,
+      "sha256": "19593ccb427b2c73d62686a23a2c2065ee17c68ee60ab9c00897884c7f8ee235"
+    },
+    {
+      "path": "r1_cache/f39a901b54c2c52e51d7824e0ec312d9a10d006cdde0508776c950b28f834263.json",
+      "bytes": 12725,
+      "sha256": "a514b3dc11ddb20b81f52ffef56a4793629d0abc4a512aebe0d66e761e54b2cc"
+    },
+    {
+      "path": "r1_cache/fcd1263de103014c5265cad1a7c385703d18267eb0df0b7e29eb2b2ffa38bf12.json",
+      "bytes": 268,
+      "sha256": "7bae7671573bba5d00772abd06d0a4a9210936d9030d735b8a3ad0003de80266"
+    },
+    {
+      "path": "r1_pages/r1_wanhua_qa2021_p003.png",
+      "bytes": 579214,
+      "sha256": "097eaf47d1da132c80a64dfdd42ca81c72d3b559969ca552b6bc7fb1d00478fc"
+    }
+  ],
+  "cleanup": {
+    "own_tmp_initially_absent": true,
+    "own_tmp_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r6-w23-intake",
+    "own_tmp_finally_absent": true,
+    "author_worktree_modified": false,
+    "author_cache_modified": false,
+    "no_model_load": true,
+    "no_network": true,
+    "no_secret_access": true,
+    "no_production_mutation": true,
+    "author_cache_inventory_unchanged": true,
+    "all_bound_sources_and_artifacts_unchanged": true
+  },
+  "findings": [
+    {
+      "id": "W23-R6-01",
+      "priority": "P2",
+      "kind": "tool_root_fix",
+      "summary": "Actual X1F dispatch bypasses persistent cache and lacks durable in-flight accounting; zero balance dispatch errors rather than preserves full not_run denominator. NaN ledger accepted.",
+      "probes": [
+        "real-x1-cross-process-cache",
+        "real-x1-unknown-inflight-recovery",
+        "real-x1-zero-balance-denominator",
+        "nonfinite-ledger-corruption"
+      ],
+      "paths": [
+        "tools/ocr_comparison/campaign.py:68",
+        "tools/ocr_comparison/campaign.py:238",
+        "tools/ocr_comparison/campaign.py:250",
+        "tools/ocr_comparison/campaign.py:344"
+      ]
+    },
+    {
+      "id": "W23-R6-02",
+      "priority": "P2",
+      "kind": "review_provenance",
+      "summary": "Final delta review claimed for 76292e3f/8-page final state not found in submitted review_independent.md; actual last review is 7-page NEEDS_FIXES.",
+      "path": "delivery/w23-ocr-r1/review_independent.md:139"
+    },
+    {
+      "id": "W23-R6-03",
+      "priority": "P3",
+      "kind": "small_cleanup_or_truthful_disclosure",
+      "summary": "Manifest-declared generated Q&A PNG remains 579214 bytes despite all-rendered-PNG-deleted declaration; no author file deleted by this reviewer.",
+      "path": ".w23_cache/r1_pages/r1_wanhua_qa2021_p003.png"
+    },
+    {
+      "id": "W23-R6-04",
+      "priority": "P3",
+      "kind": "document_alignment",
+      "summary": "READY_TO_DISPATCH/start-A task_plan plus 7-page and no-IR-QA clauses conflict with final 8-page PARTIAL; N0 0.1178 stale vs final0.1095459; wording formula1/4 formulas not1/4 symbols; unavailable final QA freeze immutable evidence should not be backdated."
+    }
+  ],
+  "scope": "Evidence/code/JSON/Git read-only plus four bounded model-free ROOT tmp probes only. Not model rerun, visual re-transcription, full upstream independence verification, production OCR acceptance or M8/C summary/cache/RF economic acceptance.",
+  "author_cache_after": [
+    {
+      "path": "r1_cache/1483d6ba6b8253b93d4cae25cfebb00ddf609a5d49be44c10df55bdd27215d04.json",
+      "bytes": 9995,
+      "sha256": "42a20e3ced7c8b3872b2c37f02531a50ba77d0f8fbf027b47c9200f76825c7da"
+    },
+    {
+      "path": "r1_cache/15eccaed0daed592d55f64b422f820dbd538f1bdc59050b3b09315a9296262f6.json",
+      "bytes": 14102,
+      "sha256": "7abfc1105c67bddc3ff5457206b8b2c0a1ef3823e1eed3cdcdad28d793fd8050"
+    },
+    {
+      "path": "r1_cache/19d503121c89ef8753284fd1ff2cc072b3d439533cc330e1bf1fff18de80be8d.json",
+      "bytes": 7555,
+      "sha256": "a7d4d592dcb68bc7a2cf133d9637e776bae722bb4a7bd1a8fa634291d936e68c"
+    },
+    {
+      "path": "r1_cache/1ed728607697b21d1f656161888dec48c74aa9bb96c129a4d79d408f826e7b52.json",
+      "bytes": 435,
+      "sha256": "c2a1dd89f32a08250f94ac1f6e7e55b394f33dd6601c868b6ed6d6cda98f021d"
+    },
+    {
+      "path": "r1_cache/28bf0b8702a4d4199409677b4bffaedb8172ae8090d400c5a3ea202b42962d0c.json",
+      "bytes": 868,
+      "sha256": "22c76e288b40a0e3ffe934993f4a74ebb16a926fb7b9905d7c8d2eef25534629"
+    },
+    {
+      "path": "r1_cache/4d8076c613c81039c7b0266a4f6933f4b3359003a570dd811274259a25c429ad.json",
+      "bytes": 11858,
+      "sha256": "6ba1b895b3325878dfc3d3510de8bd0fcedaff11b46a53350e63d74bc171e38b"
+    },
+    {
+      "path": "r1_cache/7fb5961f2496cbdf8e374408f2ff70ad54b5b7fd095610f5d80ad447c9c4f938.json",
+      "bytes": 313,
+      "sha256": "a8dff5595a097fcb83d2d2e698cd71f145695e17f15c0691cfb22f81c607b2e9"
+    },
+    {
+      "path": "r1_cache/8a2f7fc581df604e054b7588a0de7ca0df24364352dee8922b97b95aa1bbd51c.json",
+      "bytes": 14577,
+      "sha256": "1dfb1d72959a271e9a9120d500764ad56f7dc33ad78dccc3e4471f689c876db3"
+    },
+    {
+      "path": "r1_cache/8b3d030738339bd5978be67f5fa4ee78ca152c0f2e335a40401b83a50f7ecc40.json",
+      "bytes": 263,
+      "sha256": "90825f2423c9a15ba607cd9c0bab3eda996cf170458dc0a1e428d82916f2b619"
+    },
+    {
+      "path": "r1_cache/995d54f551e02a9d06ae41fcd03e546b0fce20144388b0b78b48d7ac7fa56a09.json",
+      "bytes": 30156,
+      "sha256": "689fa6e837b17a0d4077f3e45e8c5e84b51f54de570e5f2171beec09fba50683"
+    },
+    {
+      "path": "r1_cache/a8e67a6114167db295d30382d9e8df8a26d4f0adf9319a22fb9110fde4a958a2.json",
+      "bytes": 273,
+      "sha256": "5f530f9c186706c871405ee3b772164b56a940412f243f2847c5c1aeb18c6bda"
+    },
+    {
+      "path": "r1_cache/ad5dc4b955e34969b6dad1dbee1dc10e5dbb0b10d286d858f4029e746dc377f4.json",
+      "bytes": 274,
+      "sha256": "8694293ce7362ac3e6d6be40a07967ee7468e6c8e01fb69b95eee48756bf59a2"
+    },
+    {
+      "path": "r1_cache/ad9cb20eaaac19f7babf547fac517d56eda25916edc9f505fc28a4ff0d0ec902.json",
+      "bytes": 267,
+      "sha256": "112c05aedf7324e0f43cb73f589d9939bf72224c1632588ddf99bd50e8457d8e"
+    },
+    {
+      "path": "r1_cache/af8ab437ec24758bd888a45365cd3849fce5b6183d05decb22196f90aa1f30e1.json",
+      "bytes": 263,
+      "sha256": "444bb76c34d79f2ebbd447dbfab1f85f92f3f796e7e07fa66bc83d0e89bd616c"
+    },
+    {
+      "path": "r1_cache/c59285efce44654e87afac53f2519aa829faac37edba9ae87bf93f6a148e7724.json",
+      "bytes": 365,
+      "sha256": "375a515dc5c3b33fd7ad1bb18452cc2b9ad6c08a9870c30cb709dfcbf5f127fb"
+    },
+    {
+      "path": "r1_cache/cd8273c0583a71f5d44ffd30e3cbf40099f71319345916e98ca5c18c21ad39ff.json",
+      "bytes": 5795,
+      "sha256": "d6bf96fc8608948d4878b4a9369287cd1d50c18e3e7f49268f3b0d2454f751eb"
+    },
+    {
+      "path": "r1_cache/cdcdaf7d976a22e6c745e78800d79360e39064ffd0bcb98a709a041409417c80.json",
+      "bytes": 6167,
+      "sha256": "19593ccb427b2c73d62686a23a2c2065ee17c68ee60ab9c00897884c7f8ee235"
+    },
+    {
+      "path": "r1_cache/f39a901b54c2c52e51d7824e0ec312d9a10d006cdde0508776c950b28f834263.json",
+      "bytes": 12725,
+      "sha256": "a514b3dc11ddb20b81f52ffef56a4793629d0abc4a512aebe0d66e761e54b2cc"
+    },
+    {
+      "path": "r1_cache/fcd1263de103014c5265cad1a7c385703d18267eb0df0b7e29eb2b2ffa38bf12.json",
+      "bytes": 268,
+      "sha256": "7bae7671573bba5d00772abd06d0a4a9210936d9030d735b8a3ad0003de80266"
+    },
+    {
+      "path": "r1_pages/r1_wanhua_qa2021_p003.png",
+      "bytes": 579214,
+      "sha256": "097eaf47d1da132c80a64dfdd42ca81c72d3b559969ca552b6bc7fb1d00478fc"
+    }
+  ]
+}

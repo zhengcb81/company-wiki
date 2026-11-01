@@ -1,0 +1,152 @@
+{
+  "schema_version": "cwp-r6-source-semantics/1",
+  "status": "FROZEN_READY_ROOT_INDEPENDENT_REVIEW",
+  "worktree": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2",
+  "created_at": "2026-11-01T23:06:20.269043+00:00",
+  "scope": "source semantic owner only; no Git, main PWF, production, original, model or paid API mutation",
+  "source_test_sha256": {
+    "src/company_wiki/document_understanding/statement_grammar/__init__.py": "a067fcd5ce43e73a3c58cae866d1f2c497d9af29aa1633632b56618dbfad974b",
+    "src/company_wiki/source_catalog/narrative_source_passage.py": "9a1e3f40c943e3c2155854ac85a9e71d44ebefa6211fa55e697b12ab70d50ca0",
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "9e44f1cf238db06ab84e24ac410cd49beb7620210ea4043bdb1c22786f7c8f77",
+    "src/company_wiki/source_catalog/narrative_source_context.py": "a3774789bd4c5064df90d050e4be8afc72cabb2de438def29f7ba1b8689420fd",
+    "tests/unit/du11_production/test_source_semantic_axes.py": "5469915187eedccc5747475fd5976639516417f0adc360511c66176a2735281f"
+  },
+  "runs": [
+    {
+      "run": "r6-semantics-red",
+      "tests": 583,
+      "failures": 16,
+      "errors": 60,
+      "seconds": 33.95,
+      "artifact": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-semantics-red.xml",
+      "sha256": "c8a36d5c3a0e11413bd1d7e67f20d5aa0282c24099071e92c2f0292bdca4e32b",
+      "failed_cases": [
+        "tests.unit.document_understanding_selection.test_source_support_use::test_section_intent_alone_cannot_create_an_independent_summary_anchor[11  \\u793a\\u4f8b\\u63a7\\u80a1\\u6709\\u9650\\u516c\\u53f8]",
+        "tests.unit.document_understanding_selection.test_source_support_use::test_section_intent_alone_cannot_create_an_independent_summary_anchor[We remain committed to sustainable high-quality development and creating value.]",
+        "tests.unit.document_understanding_selection.test_source_support_use::test_section_intent_alone_cannot_create_an_independent_summary_anchor[\\u6211\\u5011\\u7e7c\\u7e8c\\u5805\\u6301\\u9ad8\\u8cea\\u91cf\\u3001\\u53ef\\u6301\\u7e8c\\u767c\\u5c55\\u7684\\u539f\\u5247\\u3002]",
+        "tests.unit.document_understanding_selection.test_source_support_use::test_context_furniture_cannot_spend_the_one_available_business_slot",
+        "tests.unit.document_understanding_selection.test_source_support_use::test_nouns_or_stage_words_in_a_different_clause_are_not_source_proofs[\\u8bbe\\u5907\\u540d\\u79f0\\u5217\\u4e8e\\u7d22\\u5f15\\u3002\\u7528\\u4e8e\\u3002]",
+        "tests.unit.document_understanding_selection.test_source_support_use::test_reporting_rules_nominal_heads_and_disclaimers_are_not_operating_assertions[(iv)\\n\\u7ecf\\u8425\\u79df\\u8d41]",
+        "tests.unit.document_understanding_selection.test_source_support_use::test_nonoperating_membership_or_coverage_does_not_become_a_business_assertion[The art exhibit includes paintings and sculpture.]",
+        "tests.unit.document_understanding_selection.test_reading_mechanism_coverage::test_unrelated_keywords_and_definitions_do_not_exempt_routine_finance[Revenue was $ 900 million. The words paid seats appear in a list of terms.]",
+        "tests.unit.du11_production.test_business_causal_payload::test_finance_generic_goal_and_another_assertion_do_not_supply_a_cause[\\u516c\\u53f8\\u5c06\\u52aa\\u529b\\u6ee1\\u8db3\\u4e0d\\u65ad\\u53d8\\u5316\\u7684\\u5ba2\\u6237\\u9700\\u6c42\\uff0c\\u4e89\\u53d6\\u63a8\\u52a8\\u6536\\u5165\\u589e\\u957f\\u3002]",
+        "tests.unit.du11_production.test_qa_physical_container::test_qa_in_a_table_does_not_exempt_finance_or_boilerplate[\\u516c\\u53f8\\u611f\\u8c22\\u6295\\u8d44\\u8005\\u7684\\u5173\\u6ce8\\uff0c\\u672a\\u6765\\u5c06\\u7ee7\\u7eed\\u52aa\\u529b\\u63d0\\u5347\\u7efc\\u5408\\u5b9e\\u529b\\u3002]",
+        "tests.unit.du11_production.test_source_description_relations::test_explicit_future_subject_does_not_borrow_previous_business_support",
+        "tests.unit.du11_production.test_source_measurement_scope_and_enumeration::test_arithmetic_presentation_note_is_context_not_a_business_quote[\\u7531\\u4e8e\\u56db\\u820d\\u4e94\\u5165\\uff0c\\u672c\\u8868\\u5404\\u9879\\u52a0\\u603b\\u4e0e\\u603b\\u6570\\u53ef\\u80fd\\u5b58\\u5728\\u5dee\\u5f02\\u3002]",
+        "tests.unit.du11_production.test_source_measurement_scope_and_enumeration::test_arithmetic_presentation_note_is_context_not_a_business_quote[Due to rounding, the amounts shown may not add to the total.]",
+        "tests.unit.du11_production.test_source_passage_admission::test_unknown_entities_structures_plans_and_industry_scopes_are_readable[\\u516c\\u53f8\\u7684\\u4e3b\\u8981\\u54c1\\u724c\\u90fd\\u4f1a\\u6709\\u4e13\\u5c5e\\u7684\\u5de5\\u5382\\uff0c\\u5927\\u591a\\u6570\\u5de5\\u5382\\u53ea\\u4e3a\\u4e00\\u4e2a\\u54c1\\u724c\\u670d\\u52a1\\u3002]",
+        "tests.unit.du11_production.test_source_passage_prefix_and_cause::test_shared_causal_grammar_admits_business_explanation[\\u661f\\u6e0a\\u6bdb\\u5229\\u7387\\u8868\\u73b0\\u4e3b\\u8981\\u5f97\\u76ca\\u4e8e\\u5ba2\\u6237\\u7ed3\\u6784\\u548c\\u4ea7\\u54c1\\u7ed3\\u6784\\u7684\\u8c03\\u6574\\u4ee5\\u53ca\\u7cbe\\u76ca\\u751f\\u4ea7\\u63aa\\u65bd\\u7684\\u63a8\\u8fdb\\u3002]",
+        "tests.unit.du11_production.test_source_passage_prefix_and_cause::test_shared_causal_grammar_admits_business_explanation[\\u661f\\u6e0a\\u6bdb\\u5229\\u7387\\u4e3b\\u8981\\u539f\\u56e0\\u662f\\u5ba2\\u6237\\u7ed3\\u6784\\u7684\\u8c03\\u6574\\u3002]"
+      ]
+    },
+    {
+      "run": "r6-axes-red",
+      "tests": 26,
+      "failures": 14,
+      "errors": 0,
+      "seconds": 29.952,
+      "artifact": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-axes-red.xml",
+      "sha256": "751743d2dd9ee1f4ef8251ded3fe6d1f21f32abc079193c858473af063798fd1"
+    },
+    {
+      "run": "r6-semantics-green2",
+      "tests": 683,
+      "failures": 3,
+      "errors": 0,
+      "seconds": 26.571,
+      "artifact": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-semantics-green2.xml",
+      "sha256": "ebf75a1fb88b82e728b9d247650cc0f6f5c27a0d71e2e8863c44478d4b3b3858"
+    },
+    {
+      "run": "r6-semantics-green3",
+      "tests": 65,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 20.584,
+      "artifact": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-semantics-green3.xml",
+      "sha256": "34bee0450b282ebdd34451b1c58938a56d4617d880f8b945b723d63546b5984e"
+    },
+    {
+      "run": "r6-courtesy-red2",
+      "tests": 11,
+      "failures": 2,
+      "errors": 0,
+      "seconds": 8.527,
+      "artifact": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-courtesy-red2.xml",
+      "sha256": "66cb9d9e3b84ffeaca59191b91b1a89989a3c490c8d0a83c0b676bd678681598"
+    },
+    {
+      "run": "r6-final-boundary-red",
+      "tests": 5,
+      "failures": 4,
+      "errors": 0,
+      "seconds": 9.57,
+      "artifact": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-final-boundary-red.xml",
+      "sha256": "a5079e4e2a192159eff284845b56e0d3671c7b327dfc81511cc78844d2ff5a2b",
+      "failed_cases": [
+        "tests.unit.du11_production.test_source_semantic_axes::test_prepositional_nominal_argument_cannot_be_a_matrix_subject[\\u4e3a\\u54c1\\u724c\\u670d\\u52a1\\u3002]",
+        "tests.unit.du11_production.test_source_semantic_axes::test_prepositional_nominal_argument_cannot_be_a_matrix_subject[\\u4e3a\\u7530\\u95f4\\u4f5c\\u7269\\u670d\\u52a1\\u3002]",
+        "tests.unit.du11_production.test_source_semantic_axes::test_objective_operator_observation_is_reused_for_the_exact_source_clause[Our vessels transport liquefied gas between coastal terminals.]",
+        "tests.unit.du11_production.test_source_semantic_axes::test_objective_operator_observation_is_reused_for_the_exact_source_clause[We remain committed to sustainable development and creating value.]"
+      ]
+    },
+    {
+      "run": "r6-semantics-final",
+      "tests": 741,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 36.507,
+      "artifact": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-semantics-final.xml",
+      "sha256": "c29a6b555ee6c28cd7a76c6c5fc1cbe2a472f3669ae319383becd0b342a6f2c7"
+    },
+    {
+      "run": "r6-semantics-frozen",
+      "tests": 746,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 111.925,
+      "artifact": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-semantics-frozen.xml",
+      "sha256": "acb1a8d6dcfa9442186507ca3917ca290c955f11b8dba4c9a4edd9373e99b9aa"
+    }
+  ],
+  "grammar_version": "statement-grammar/3",
+  "passage_version": "source-passage/7",
+  "resource_identity": "15ecddf9259146c37fc879a30e431efff95b54261c76d109e4d0de0248dc7873",
+  "new_owner_in_actual_recipe": {
+    "company_wiki.source_catalog.narrative_source_context": "a3774789bd4c5064df90d050e4be8afc72cabb2de438def29f7ba1b8689420fd"
+  },
+  "context_cost": {
+    "additional_work_per_assessed_source_char": 12,
+    "source_passage_scan_passes": 36,
+    "old_source_passage_scan_passes": 24,
+    "global_document_work_limit": 16000000,
+    "production_slot_limit": 112,
+    "pos_work_per_char": 32,
+    "max_statement_chars": 4096,
+    "max_statement_tokens": 1024,
+    "measured_regex_input_visits": [
+      5.0,
+      7.0,
+      7.142857142857143
+    ],
+    "measurement_limits": "Synthetic observations, not a CPU-equivalence proof or H1 performance/recall acceptance."
+  },
+  "quality_checks": {
+    "ruff": "PASS 4 sources + new tests",
+    "mypy": "PASS 4 sources",
+    "git_diff_check": "PASS; other-owner CRLF conversion warnings only"
+  },
+  "pending": [
+    "ROOT independent semantic/CI review",
+    "full exact candidate CI",
+    "real H1 under unchanged 16M/112",
+    "real summary, cache recovery, RF adoption"
+  ],
+  "non_claims": [
+    "No complete PWF closure",
+    "No exact CI acceptance claimed",
+    "No real-company end-to-end or paid summary executed",
+    "No host contention cause confirmed",
+    "No source resource assets modified or downloaded"
+  ]
+}

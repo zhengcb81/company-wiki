@@ -1,0 +1,312 @@
+{
+  "schema_version": "r6-independent-consumers/1",
+  "reviewer": "/root/rectification_review_a",
+  "worktree": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2",
+  "head": "f298a383ff97b406fae27d49a3c50a16fb95dd3d",
+  "branch": "codex/architecture-rectification-r2-20261101",
+  "observed_at_utc": "2026-11-01T22:53:47.939667+00:00",
+  "frozen_test_and_ci_manifest": {
+    "tests/unit/test_narrative_source_usability_dependencies.py": {
+      "sha256": "63771e7ad879ee0826492f9e005450af89ae377e59666cdbd789bc614f50bd27",
+      "expected": "63771e7ad879ee0826492f9e005450af89ae377e59666cdbd789bc614f50bd27",
+      "matches": true,
+      "bytes": 12322
+    },
+    "tests/unit/test_cf3_algorithm_identity.py": {
+      "sha256": "921be0b126a2f934c47185070f6494dccff05bb0ea9121cda156215b0cbc2d35",
+      "expected": "921be0b126a2f934c47185070f6494dccff05bb0ea9121cda156215b0cbc2d35",
+      "matches": true,
+      "bytes": 2683
+    },
+    "tests/unit/test_canonical_import_reference.py": {
+      "sha256": "ba3317e02b87ee5f53b65c291db4f2a1b57b3018eeeac39e2c0e2785b97c9fad",
+      "expected": "ba3317e02b87ee5f53b65c291db4f2a1b57b3018eeeac39e2c0e2785b97c9fad",
+      "matches": true,
+      "bytes": 2187
+    },
+    "tests/unit/document_understanding_selection/test_reading_native_list_ancestry.py": {
+      "sha256": "04df25d64e42c8368f6038a172561263da6855316f654d72a461c2297ce4f6ca",
+      "expected": "04df25d64e42c8368f6038a172561263da6855316f654d72a461c2297ce4f6ca",
+      "matches": true,
+      "bytes": 22500
+    },
+    "tests/unit/document_understanding_selection/test_reading_value_coverage.py": {
+      "sha256": "b6193489014cce54851eb3c3df33c5a680dcef5b1b9790ac8f64e83d50df2aae",
+      "expected": "b6193489014cce54851eb3c3df33c5a680dcef5b1b9790ac8f64e83d50df2aae",
+      "matches": true,
+      "bytes": 20082
+    },
+    "tests/unit/du11_paid_response/test_paid_response.py": {
+      "sha256": "83005f385743656cf20c5539c4ca2517f0fb025d637aaed638a8492e10e00bd2",
+      "expected": "83005f385743656cf20c5539c4ca2517f0fb025d637aaed638a8492e10e00bd2",
+      "matches": true,
+      "bytes": 22207
+    },
+    "tests/unit/test_automation_store.py": {
+      "sha256": "f5095745d19130d0da2e39d00b2eb07224e0680d3b8411a8581824a139a31642",
+      "expected": "f5095745d19130d0da2e39d00b2eb07224e0680d3b8411a8581824a139a31642",
+      "matches": true,
+      "bytes": 25720
+    },
+    "tests/unit/test_narrative_run_ownership.py": {
+      "sha256": "a4fd3291233cdf68fe00904a921a728450292e83b05c216901fd966cce952db4",
+      "expected": "a4fd3291233cdf68fe00904a921a728450292e83b05c216901fd966cce952db4",
+      "matches": true,
+      "bytes": 20327
+    },
+    "tests/unit/du11_production/test_statement_grammar_runtime.py": {
+      "sha256": "0203fa1fb6068ce80a149ea829de7b9527b69fe6c7638b2f79dc3c464628f369",
+      "expected": "0203fa1fb6068ce80a149ea829de7b9527b69fe6c7638b2f79dc3c464628f369",
+      "matches": true,
+      "bytes": 7989
+    },
+    ".github/workflows/ci.yml": {
+      "sha256": "6ed2425fca1c0b9f869f1b9dcdf2d32dcda19ce8a17cb54fd019d968c53d8708",
+      "expected": "6ed2425fca1c0b9f869f1b9dcdf2d32dcda19ce8a17cb54fd019d968c53d8708",
+      "matches": true,
+      "bytes": 3979
+    }
+  },
+  "source_before": {
+    "src/company_wiki/source_catalog/source_references.py": "17c2c5596d52d12905d8bbd936817727645f6227fa9a44faaaca82e84c6ce6c7",
+    "src/company_wiki/source_catalog/canonical_writer.py": "301e1192416cb4623c9bef7001963176bd5c87f3bcc0df3678cbf18ec70ca4b5",
+    "src/company_wiki/source_catalog/narrative_decision_inventory.py": "25b5826cdc5f482aaa621c6c2d68b7c3a6fd2013a57eea667a1836c2a9511b28",
+    "src/company_wiki/document_understanding/decision_inventory.py": "6382f2c6e1d0ceb2a233c5faaa2df30b6bc5e62bb417a3e9f85976bcfbda7bc2",
+    "src/company_wiki/source_catalog/reading_recipe.py": "6f123d3b6479ea0ad07b5676f7c712dc71327a10bd9865e0dc405aa103f1e5eb",
+    "src/company_wiki/automation/narrative_generation.py": "f74c9af32c239bebbf867cc1e41618a11ca24092d3c80b7a761965bf519578d3",
+    "src/company_wiki/document_understanding/structure/relations.py": "df8334faeb9ae648f329db67ee06c53dcb2f779b01a9017a23a296f88ad7fcef",
+    "src/company_wiki/automation/migrations.py": "bd582c7e94ab85db7476a75ce278daae39116d66f566140e56b59f34d84aea2b",
+    "src/company_wiki/document_understanding/statement_grammar/__init__.py": "1876aa5dddcef638a573ccfa1c491b8d5133d2feb6f130bcf284ca244e14e3f4",
+    "src/company_wiki/source_catalog/narrative_source_passage.py": "d2960947e303e39b5ef26185053cdb990461381d302c735ee8219b7f25c0a2bd",
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "9e44f1cf238db06ab84e24ac410cd49beb7620210ea4043bdb1c22786f7c8f77"
+  },
+  "report_inputs": {
+    "R6-consumer-migration.md": "2b63ac0727872c4a24ec03f4bd66b2f1beefda74aa9000712b27de12f82f6308",
+    "R6-consumer-migration.json": "03a3357373cbf54306c17c953de1937ed6f9b0ed9e2957da905559e53dfd1d83",
+    "R6-ROOT.md": "3c9f1950b31e9a5b34f1cbae1d119fef462ea0e1c25b8d4f4a72c2739dfa8778",
+    "R6-ROOT-test-changes.json": "6bfdef7454b196fd9279fbdc0711e431af1e6d82e1677fe8aa6cf06a5344982b",
+    "CWP-failed-CI.md": "3d23316800c7cf147f330d9e3a31ea51d8030e01f9e7ab5930dbfff8dd7a8f92"
+  },
+  "own_tmp": {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r6-consumer-review",
+    "initially_absent": true,
+    "finally_absent": true,
+    "restored_initial_state": true
+  },
+  "not_run": [
+    "full unit",
+    "full contract",
+    "ROOT72 domain repeat",
+    "production data/model/paid runtime",
+    "semantics acceptance",
+    "W23 tooling"
+  ],
+  "frozen_files_unchanged_after": true,
+  "source_after": {
+    "src/company_wiki/source_catalog/source_references.py": "17c2c5596d52d12905d8bbd936817727645f6227fa9a44faaaca82e84c6ce6c7",
+    "src/company_wiki/source_catalog/canonical_writer.py": "301e1192416cb4623c9bef7001963176bd5c87f3bcc0df3678cbf18ec70ca4b5",
+    "src/company_wiki/source_catalog/narrative_decision_inventory.py": "25b5826cdc5f482aaa621c6c2d68b7c3a6fd2013a57eea667a1836c2a9511b28",
+    "src/company_wiki/document_understanding/decision_inventory.py": "6382f2c6e1d0ceb2a233c5faaa2df30b6bc5e62bb417a3e9f85976bcfbda7bc2",
+    "src/company_wiki/source_catalog/reading_recipe.py": "6f123d3b6479ea0ad07b5676f7c712dc71327a10bd9865e0dc405aa103f1e5eb",
+    "src/company_wiki/automation/narrative_generation.py": "f74c9af32c239bebbf867cc1e41618a11ca24092d3c80b7a761965bf519578d3",
+    "src/company_wiki/document_understanding/structure/relations.py": "df8334faeb9ae648f329db67ee06c53dcb2f779b01a9017a23a296f88ad7fcef",
+    "src/company_wiki/automation/migrations.py": "bd582c7e94ab85db7476a75ce278daae39116d66f566140e56b59f34d84aea2b",
+    "src/company_wiki/document_understanding/statement_grammar/__init__.py": "c236e2d67021e637235377f8b4b19964754d9db439ebabbcb3499e015d04a6ed",
+    "src/company_wiki/source_catalog/narrative_source_passage.py": "557cf1246a09f652cf0065c92100b5d6b3dd3c77641b947d7278a5feea11f18b",
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "9e44f1cf238db06ab84e24ac410cd49beb7620210ea4043bdb1c22786f7c8f77"
+  },
+  "source_changes_during_targeted_review": [
+    "src/company_wiki/document_understanding/statement_grammar/__init__.py",
+    "src/company_wiki/source_catalog/narrative_source_passage.py"
+  ],
+  "assertion_counts_context_only": {
+    "tests/unit/test_narrative_source_usability_dependencies.py": {
+      "before": 25,
+      "after": 25
+    },
+    "tests/unit/test_cf3_algorithm_identity.py": {
+      "before": 4,
+      "after": 7
+    },
+    "tests/unit/test_canonical_import_reference.py": {
+      "before": 2,
+      "after": 5
+    },
+    "tests/unit/document_understanding_selection/test_reading_native_list_ancestry.py": {
+      "before": 30,
+      "after": 30
+    },
+    "tests/unit/document_understanding_selection/test_reading_value_coverage.py": {
+      "before": 64,
+      "after": 64
+    },
+    "tests/unit/du11_paid_response/test_paid_response.py": {
+      "before": 47,
+      "after": 50
+    },
+    "tests/unit/test_automation_store.py": {
+      "before": 46,
+      "after": 47
+    },
+    "tests/unit/test_narrative_run_ownership.py": {
+      "before": 58,
+      "after": 60
+    },
+    "tests/unit/du11_production/test_statement_grammar_runtime.py": {
+      "before": 22,
+      "after": 22
+    }
+  },
+  "independent_run": {
+    "host": "normal approved host Python; not sandbox atomic writer",
+    "python": "C:/Miniconda/python.exe -B -X utf8",
+    "selected": 7,
+    "passed": 7,
+    "failed": 0,
+    "skipped": 0,
+    "pytest_seconds": 10.98,
+    "junit_attributes": {
+      "name": "pytest",
+      "errors": "0",
+      "failures": "0",
+      "skipped": "0",
+      "tests": "7",
+      "time": "10.923",
+      "timestamp": "2026-11-01T22:53:57.607609+00:00",
+      "hostname": "DESKTOP-156V213"
+    },
+    "cases": [
+      {
+        "class": "tests.unit.test_canonical_import_reference",
+        "name": "test_reference_selects_exact_sha_once_without_metadata_search",
+        "seconds": "0.004",
+        "failures": 0,
+        "errors": 0,
+        "skips": 0
+      },
+      {
+        "class": "tests.unit.test_canonical_import_reference",
+        "name": "test_missing_wrong_or_inactive_committed_version_still_fails[document_not_indexed]",
+        "seconds": "0.002",
+        "failures": 0,
+        "errors": 0,
+        "skips": 0
+      },
+      {
+        "class": "tests.unit.test_canonical_import_reference",
+        "name": "test_missing_wrong_or_inactive_committed_version_still_fails[expected_version_mismatch]",
+        "seconds": "0.001",
+        "failures": 0,
+        "errors": 0,
+        "skips": 0
+      },
+      {
+        "class": "tests.unit.test_canonical_import_reference",
+        "name": "test_missing_wrong_or_inactive_committed_version_still_fails[source_not_active]",
+        "seconds": "0.001",
+        "failures": 0,
+        "errors": 0,
+        "skips": 0
+      },
+      {
+        "class": "tests.unit.test_cf3_algorithm_identity",
+        "name": "test_relation_owner_change_invalidates_current_decision_identity",
+        "seconds": "1.595",
+        "failures": 0,
+        "errors": 0,
+        "skips": 0
+      },
+      {
+        "class": "tests.unit.test_cf3_algorithm_identity",
+        "name": "test_structure_owner_closure_tracks_new_modules_and_ignores_host_location",
+        "seconds": "0.043",
+        "failures": 0,
+        "errors": 0,
+        "skips": 0
+      },
+      {
+        "class": "tests.unit.du11_production.test_statement_grammar_runtime",
+        "name": "test_offline_inference_does_not_write_dictionary_cache",
+        "seconds": "7.466",
+        "failures": 0,
+        "errors": 0,
+        "skips": 0
+      }
+    ],
+    "junit_xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"0\" skipped=\"0\" tests=\"7\" time=\"10.923\" timestamp=\"2026-11-01T22:53:57.607609+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tests.unit.test_canonical_import_reference\" name=\"test_reference_selects_exact_sha_once_without_metadata_search\" time=\"0.004\" /><testcase classname=\"tests.unit.test_canonical_import_reference\" name=\"test_missing_wrong_or_inactive_committed_version_still_fails[document_not_indexed]\" time=\"0.002\" /><testcase classname=\"tests.unit.test_canonical_import_reference\" name=\"test_missing_wrong_or_inactive_committed_version_still_fails[expected_version_mismatch]\" time=\"0.001\" /><testcase classname=\"tests.unit.test_canonical_import_reference\" name=\"test_missing_wrong_or_inactive_committed_version_still_fails[source_not_active]\" time=\"0.001\" /><testcase classname=\"tests.unit.test_cf3_algorithm_identity\" name=\"test_relation_owner_change_invalidates_current_decision_identity\" time=\"1.595\" /><testcase classname=\"tests.unit.test_cf3_algorithm_identity\" name=\"test_structure_owner_closure_tracks_new_modules_and_ignores_host_location\" time=\"0.043\" /><testcase classname=\"tests.unit.du11_production.test_statement_grammar_runtime\" name=\"test_offline_inference_does_not_write_dictionary_cache\" time=\"7.466\" /></testsuite></testsuites>",
+    "targets": [
+      "tests/unit/test_canonical_import_reference.py",
+      "tests/unit/test_cf3_algorithm_identity.py",
+      "tests/unit/du11_production/test_statement_grammar_runtime.py::test_offline_inference_does_not_write_dictionary_cache"
+    ],
+    "env": {
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1",
+      "PYTHONPATH": "src;tests",
+      "TEMP_TMP_TMPDIR": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r6-consumer-review\\temp"
+    },
+    "pytest_options": "-p pytest_asyncio.plugin -q -p no:cacheprovider --tb=short --basetemp <own>/pytest --junitxml <own>/junit.xml",
+    "basetemp_relocation": "requested length64 triggered existing hook; relocated under own/temp/cw-pytest-basetemp; cleanup notice removed relocated directory"
+  },
+  "author_results": {
+    "consumer_RED": "41F/9P/69.75s",
+    "consumer_GREEN": "50P/40.62s",
+    "ROOT_focused_RED": "4F/41.93s",
+    "ROOT_focused_GREEN": "4P/22.67s",
+    "ROOT_normal_host_72": "72P/28.53s per ROOT task/live report; not independently rerun",
+    "metadata_followup": "R6-ROOT-test-changes.json host_72_domain still in progress and R6-ROOT.md ending still pending host retry; ROOT should align final documentation to actual host result, not rerun it"
+  },
+  "scope_verdict": "PASS_CONSUMER_AND_TEST_MIGRATION_ONLY",
+  "material_findings": [],
+  "document_followups": [
+    "Update ROOT host72 in-progress metadata using existing actual receipt, not another run."
+  ],
+  "reviews": {
+    "private_patch_owner": "Actual source inventory import_module patched; public legacy trace still used; no raising=False phantom patch or facade proxy restored",
+    "canonical": "Actual source_ref_for_import -> query_source_reference -> exact_source_version called once; row missing/wrong SHA/inactive produce original SourceReadError reasons and wrapped CanonicalImportError",
+    "CF3": "Real pipeline/build/freeze/current_reading_decision_matches starts true and becomes false under source-byte mutation; directory/new-module/unrelated-text controls preserved",
+    "migration": "Schema3 facts/value/nullable historical ownership preserved; exactly existing AUTO storage allocation table added empty; schema6 nullable receipt table-preservation assertions retained",
+    "SQL_injection": "Malicious JSON roundtrips; events present before; exact schema set equal before/after, no stale cross-schema table inventory",
+    "offline": "-I plus explicit actual parent grammar package src; poisoned PYTHONPATH ignored; temp/cache/network controls and bilingual inferences unchanged",
+    "CI": "Only existing workflow push branches expands master to master,codex/architecture-*; no new jobs/workflow or weakening of lint/mypy/full unit/contract checks"
+  },
+  "CF3_independent_single_recheck": {
+    "reason": "Previous overall review window saw two parallel semantic file updates; bind this one causal source mutation check within its own before/after window instead of treating concurrent bytes as proof.",
+    "returncode": 0,
+    "stdout": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\r6-consumer-review\\\\c\", \"requested_basetemp_len\": 59, \"cwd_len\": 54, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\nconfigfile: pytest.ini\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollected 1 item\n\ntests\\unit\\test_cf3_algorithm_identity.py .                              [100%]\n\n============================== 1 passed in 4.02s ==============================\n",
+    "stderr": "",
+    "source_before": {
+      "src/company_wiki/source_catalog/source_references.py": "17c2c5596d52d12905d8bbd936817727645f6227fa9a44faaaca82e84c6ce6c7",
+      "src/company_wiki/source_catalog/canonical_writer.py": "301e1192416cb4623c9bef7001963176bd5c87f3bcc0df3678cbf18ec70ca4b5",
+      "src/company_wiki/source_catalog/narrative_decision_inventory.py": "25b5826cdc5f482aaa621c6c2d68b7c3a6fd2013a57eea667a1836c2a9511b28",
+      "src/company_wiki/document_understanding/decision_inventory.py": "6382f2c6e1d0ceb2a233c5faaa2df30b6bc5e62bb417a3e9f85976bcfbda7bc2",
+      "src/company_wiki/source_catalog/reading_recipe.py": "6f123d3b6479ea0ad07b5676f7c712dc71327a10bd9865e0dc405aa103f1e5eb",
+      "src/company_wiki/automation/narrative_generation.py": "f74c9af32c239bebbf867cc1e41618a11ca24092d3c80b7a761965bf519578d3",
+      "src/company_wiki/document_understanding/structure/relations.py": "df8334faeb9ae648f329db67ee06c53dcb2f779b01a9017a23a296f88ad7fcef",
+      "src/company_wiki/automation/migrations.py": "bd582c7e94ab85db7476a75ce278daae39116d66f566140e56b59f34d84aea2b",
+      "src/company_wiki/document_understanding/statement_grammar/__init__.py": "c236e2d67021e637235377f8b4b19964754d9db439ebabbcb3499e015d04a6ed",
+      "src/company_wiki/source_catalog/narrative_source_passage.py": "557cf1246a09f652cf0065c92100b5d6b3dd3c77641b947d7278a5feea11f18b",
+      "src/company_wiki/source_catalog/narrative_business_policy.py": "9e44f1cf238db06ab84e24ac410cd49beb7620210ea4043bdb1c22786f7c8f77"
+    },
+    "source_after": {
+      "src/company_wiki/source_catalog/source_references.py": "17c2c5596d52d12905d8bbd936817727645f6227fa9a44faaaca82e84c6ce6c7",
+      "src/company_wiki/source_catalog/canonical_writer.py": "301e1192416cb4623c9bef7001963176bd5c87f3bcc0df3678cbf18ec70ca4b5",
+      "src/company_wiki/source_catalog/narrative_decision_inventory.py": "25b5826cdc5f482aaa621c6c2d68b7c3a6fd2013a57eea667a1836c2a9511b28",
+      "src/company_wiki/document_understanding/decision_inventory.py": "6382f2c6e1d0ceb2a233c5faaa2df30b6bc5e62bb417a3e9f85976bcfbda7bc2",
+      "src/company_wiki/source_catalog/reading_recipe.py": "6f123d3b6479ea0ad07b5676f7c712dc71327a10bd9865e0dc405aa103f1e5eb",
+      "src/company_wiki/automation/narrative_generation.py": "f74c9af32c239bebbf867cc1e41618a11ca24092d3c80b7a761965bf519578d3",
+      "src/company_wiki/document_understanding/structure/relations.py": "df8334faeb9ae648f329db67ee06c53dcb2f779b01a9017a23a296f88ad7fcef",
+      "src/company_wiki/automation/migrations.py": "bd582c7e94ab85db7476a75ce278daae39116d66f566140e56b59f34d84aea2b",
+      "src/company_wiki/document_understanding/statement_grammar/__init__.py": "c236e2d67021e637235377f8b4b19964754d9db439ebabbcb3499e015d04a6ed",
+      "src/company_wiki/source_catalog/narrative_source_passage.py": "557cf1246a09f652cf0065c92100b5d6b3dd3c77641b947d7278a5feea11f18b",
+      "src/company_wiki/source_catalog/narrative_business_policy.py": "9e44f1cf238db06ab84e24ac410cd49beb7620210ea4043bdb1c22786f7c8f77"
+    },
+    "drift": []
+  },
+  "frozen_files_unchanged_at_finish": true,
+  "reviewer_write_scope": [
+    "implementation-results/R6-independent-consumers.md",
+    "implementation-results/R6-independent-consumers.json",
+    "self-owned transient tmp/r6-consumer-review (removed)"
+  ]
+}

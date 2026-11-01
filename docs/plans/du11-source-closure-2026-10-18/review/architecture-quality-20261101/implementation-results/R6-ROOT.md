@@ -1,0 +1,59 @@
+# R6 全面整改续接（实施中）
+
+用户2026-11-01恢复全面整改并通知W23小米OCR返工完成。沿本PWF，不新发外包卡。稳定恢复dbfec3be精确CI41306232306已success；最新origin/master=bb645437，外来hook mode保留。候选6668bc97与63失败不改写为通过。
+
+## 当前实施顺序
+
+1. 从最新master建独占sparse工作树，先正常revert安全隔离提交重施候选；不让主物理工区暴露试验源，不复制原件或数据库。
+2. 用公开注释已见失败群建立定点重现与清单，按真正owner分解旧接口/recipe迁移、AUTO schema语义、经营相关性与句法/套话财务因果、Linux离线环境。未诊断项不猜。先RED后根修，保留旧断言真实意图，禁止公司特判/抬额度/恢复跨层耦合。
+3. 在同一大节点集中独审，完整unit/contract只在候选大节点跑一次以补齐63全清单/非已知域；修复后只复跑失败域，合并前PR精确CI验收。
+4. W23 R1独立只读接收作者HEAD/差分/交接/独审/真实矩阵/清理资产。它是实验工具，不切生产OCR，不跨层安装或调用；按真实PARTIAL/CPU限制接收，不冒称完整精度胜出。
+5. 本轮工程闭合后再继续note结构、H1 source/真实摘要/持久恢复/RF采用，不收费重跑旧封存。费用/模型沿配置，原件不动。
+
+## 调度与隔离
+
+ROOT负责PWF/集成/AUTO测试和最终发布；来源语义与旧消费/recipe分开文件所有权，W23只读作者工区。必要独立agent沿原大节点审查要求，不新增微签收或用户许可。暂不运行真实资料、模型或新公司循环。
+
+## 独占工区创建诊断
+
+--no-checkout后仅sparse-checkout set未初始化索引，revert先拒绝“local changes”。仅自有新空工区read-tree -mu HEAD补齐受限src/tests等；Windows hook mode100755→100644仍出现，因此“完全空status”探针过严失败（非真实源码变化）。后续正常git revert已完成f298a383，无原始companies目录复制、主工区未变。不会用reset/clean或创建完整checkout。标准git revert不执行pre-commit，与之后正常代码commit静态检查明确分开。
+
+ROOT开始的四例定点重现移除PYTHONPATH，包含3个真实migration/schema测试和offline子进程，避免本地hook环境掩盖CI导入问题；没有改断言或调用真实资料。
+
+## 首批定位（未签完成）
+
+消费线定点50例41F/9P，主要旧私有patch/import owner未迁移，拟迁移目标保留原语义而不补生产代理。ROOT3schema例确认为v8同一AUTO新增narrative_storage_allocations后旧固定表集合/“无新表”断言失配；按真实SQL写前后表集合与迁移旧facts不变/新账空验证，非删安全检查。offline去PYTHONPATH重现为子进程30s超时，尚未称与Linux同因；开始-I显式当前package入口，避免本机editable/global包伪绿。
+
+语义线8目标16F/507P/60E，60E为sparse未包括已跟踪golden路径，需按原字节补齐特定fixture，不计产品回归，也不能排除后签全绿。W23独审发现final review绑定不齐和真实X1预算/cache中断路径疑点，已授权4个无模型轻测，暂不签Ready。
+
+## ROOT四例根修结果
+
+4F/41.93s→4P/22.67s，Ruff四文件绿。SQL注入测试改成真实写入前后schema集合完全一致，而非固定旧schema名字；v3/v6迁移仍验证全部原表/原facts不丢，唯一新增既有AUTO allocation账为空、nullable paid response无历史造数。未改生产migration代码。
+
+fresh child未限定source的实际probe命中C:/Users/郑曾波/Projects/company-wiki/src/company_wiki（主工区editable），不是隔离candidate。这解释本机hook环境可能假绿；runtime测试改-I＋显式本次grammar.__file__的package父目录，故意污染PYTHONPATH并核owned temp，实现从当前真正测试代码推理。首30s timeout只记录观察，不直接等同Linux报错；后续候选Linux CI仍必验。
+
+消费者迁移50P、真实cache/identity反控保留，源码0代理；已补原追踪81992B gold到sparse并核SHA，60E夹具缺口闭合。为候选在master之外获得同一完整CI，只扩现有workflow push的总控codex/architecture-*分支模式（外包其他分支不扩），不复制测试、不创建人工许可或新CI流水线；PR到master仍原规则。
+
+W23四真实轻测全RED，ROOT在独立工具工区直接根修ledger/cache；旧CPU失败PARTIAL不伪造精度，模型0新增调用。该线不碰主线src/生产OCR。
+
+## ROOT关联域新观察
+
+3整文件72例57P/15F/15.96s；失败均在synthetic paid response写入，MODEL_PAID_RESPONSE_UNAVAILABLE并被frozen exception/contextlib traceback二次掩盖。原CI此域除schema断言外通过，先诊断Windows本机默认pytest长temp/原子写环境，不马上修改生产付费恢复或放宽断言。用一个相同fixture短owned basetemp区分路径环境与产品逻辑，再决定。此新观察不算63旧失败的重复项。
+
+ROOT paid15F路径假说已否定：短basetemp同例仍失败；直接synthetic paid artifact探针揭示真正cause为sandbox下os.link原子提交WinError5，非长路径。改正常宿主重复相同72域验证环境，不改原子写策略、不假称paid缓存产品失效；未读密钥/真实模型。Frozen exception遮原cause作为额外错误传播质量现象记录，不先盲修财政链。
+
+## ROOT关联域与诊断根修收口
+
+同72域在正常host **72P/28.53s**，确认sandbox15F的直接WinError5并非产品付费恢复缺陷；未修改production atomic/CAS或付费链。offline -I当前package4例绿如上。
+
+公开CI诊断4096截断并非“没有权限才没有错误清单”：原utility把最多12000字groups塞单条annotation，平台将后几组截断。先用63长组+模拟首10条/4096上限新RED，修为escaped UTF8计字节、分组提早发多条（每组<=2600B）、个体diagnostic<=800B，极长身份显式标truncated，Step Summary也保留完整有界groups。17例/0.69s与Ruff绿，原25个体/短firstgroup/隐私body和skipped语义保持。未增加CI测试步骤或读凭证，此为诊断完整性根修。
+
+W23资料独审判PARTIAL可接收/工具工程不通过，6原件与970冻结对象不变；ROOT已独立工具工区根修，不改作者历史FAIL/假造缺失final review。
+
+## R6 B独审
+
+独立7P/10.98s、源码稳定窗口补CF3 1P/4.02s，10测试/CI冻结SHA未变，原行为断言保留/增强；只签消费者迁移，未签仍在途语义/W23或完整CI。ROOT72P已更正JSON，原sandbox因果探针和反证保留。后续集中终审包含新CI摘要两文件，不重复此前大域。
+
+## A独审新P2（不得签整合通过）
+
+746定点绿后独立14未见样例发现具体动作被抽象尾语吞掉：We aim to reopen neonatal wards and create value.→context，但倒序support；commit to treating rare diseases and creating value也错误排除。根因grammar只取最后verb后的nominal补语，而非并列predicate各自scope。已交同grammar owner先新RED再根修，要求and/or/but、嵌套/中文并列与beneficiary-only抽象目标反控，不加行业词/and特判/抬额度，不重复746。当前本地冻结commit仅保存未验收进度，未push或并master。

@@ -1,11 +1,11 @@
 {
   "schema_version": "company-wiki-current-plan-status/2",
   "as_of_date": "2026-11-01",
-  "observed_at_utc": "2026-11-01T12:24:51.646890+00:00",
+  "observed_at_utc": "2026-11-01T23:10:23.839152+00:00",
   "canonical_entry": "CURRENT_STATUS.md",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
-  "project_status": "PAUSED_CANDIDATE_REJECTED_STABLE_MAIN_RESTORED",
+  "project_status": "R6_RECTIFICATION_ACTIVE_STABLE_MASTER_ISOLATED_CANDIDATE",
   "scope_this_update": "Preserve unaccepted candidate branch; normal revert returns stable master; keep green RF/Q09; finish records then pause",
   "last_code_commit": "dbfec3beb0948006475701e2131c4d95e0586556",
   "verified_publication_before_docs": {
@@ -15,13 +15,10 @@
   },
   "code_ci": {
     "id": 41306232306,
-    "name": "CI",
     "head_sha": "dbfec3beb0948006475701e2131c4d95e0586556",
-    "status": "in_progress",
-    "conclusion": null,
-    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41306232306",
-    "created_at": "2026-11-01T12:23:05Z",
-    "updated_at": "2026-11-01T12:23:09Z"
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41306232306"
   },
   "native_goal": {
     "observed_status": "paused",
@@ -94,7 +91,7 @@
       "task": "W12 original-company rerun, new-company generalization, fixed8company fullaudit/skillimprovement and finalclean streak"
     }
   ],
-  "next_action": "用户恢复后从最新master建立隔离修复branch，先正常revert安全隔离提交dbfec3beb0948006475701e2131c4d95e0586556以重施候选（不得在master直接重施），按CWP-failed-CI.md先修整合回归的共用根因。受影响快速测试/独立大节点审查和PR完整CI绿后并线，再修note结构并做最终H1/新摘要/恢复/RF验收。当前不执行。",
+  "next_action": "完成R6来源语义最终冻结与独立审查；对codex/architecture-rectification-r2-20261101执行现有完整CI，修复所有真实回归后并回master。W23在tmp/w23-r6独占工区修真实ledger/cache并独审，不切生产OCR。",
   "package_status_registry": "PACKAGE_STATUS.json",
   "handoff": "HANDOFF.md",
   "goal_definition": "MAINLINE_LOOP_GOAL.md",
@@ -112,7 +109,7 @@
     "Berkshire15unprocessed explicitly retained; full-source/long-frontier generalization remains partial,10required DEV business atoms now present",
     "P3 W12 company rerun, latest communications/demand/competition/scenario calibration, US regulatoryPDF/HK/US_RPO and genuinely unexposed holdouts"
   ],
-  "execution_mode": "paused_after_safe_isolation",
+  "execution_mode": "manual_user_authorized_resumption",
   "p0_repair": {
     "status": "PUBLISHED_EXACT_CI_PASS",
     "evidence": "review/mainline-closeout-20261031/p0/README.md",
@@ -1462,5 +1459,19 @@
     "reverted_on_master": "dbfec3beb0948006475701e2131c4d95e0586556",
     "stable_tree_equals": "1909286aa914eb734f28d3fb18acb4fd62ce9d49",
     "reapply_instruction": "On new branch from latest master, git revert the safe-isolation commit; fix there; PR full CI before merge. Do not merely merge old candidate."
+  },
+  "r6": {
+    "ledger": "review/architecture-quality-20261101/implementation-results/R6-ROOT.md",
+    "status": "B_PASS_A_NEW_COORDINATED_COMPLEMENT_P2_REWORK",
+    "W23": "independent4RED; real X1/R0 transaction/cache root repair active; no model calls",
+    "source_worktree": "tmp/architecture-r2",
+    "source_branch": "codex/architecture-rectification-r2-20261101",
+    "reapplied_commit": "f298a383",
+    "W23_worktree": "tmp/w23-r6",
+    "consumer": "50P independent7P+CF3stable1P",
+    "ROOT_associated": "72P/28.53s normal host",
+    "ci_diagnostics": "17P/0.69s pendingfinalreview",
+    "local_checkpoint": "718fced8",
+    "source_semantics": "746P then independent14 finds abstract-tail loss; scope root repair active"
   }
 }

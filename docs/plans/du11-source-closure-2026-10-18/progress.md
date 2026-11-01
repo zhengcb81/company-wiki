@@ -164,3 +164,13 @@ R5接口独审通过：CWP真实handler18P/8.59s，RF32P/1.22s及真实legacy1/2
 ## 2026-11-01T12:23:42.867758+00:00 — 完整CI否决候选，安全隔离后暂停
 
 此前小域GREEN/发布观察是时间快照，**不是最终整合验收**。CI41305132919完整unit63失败；公开注释4096字截断，log403不取缓存凭证。按用户暂停要求不展开新大返修，候选6668bc97正常推独立远端branch，master正常revertdbfec3be，src/tests/依赖/属性/旧工具与1909286a相同。RF957c6283精确CI绿及单runtime安装、StockWiki381811e5本地并线保留。恢复必须从最新master建branch并revert隔离commit重施候选，再按共因修整合回归/PR CI绿，不能简单merge旧已被revert的candidate。当前PWF/HANDOFF/台账已反映未验收与暂停，不再继续H1/摘要/模型/RF。
+
+
+## 2026-11-01 — 用户恢复R6全面整改与W23返工接收
+
+稳定恢复CI41306232306实际success，origin/master bb645437。先独占sparse重施候选并按失败共因修复，不在主物理工区改src。W23 R1分支d2f6e6f0已发现，待核作者交接与最终独审；原卡为对照实验不切生产。当前不付费/不重跑真实原件，不改Dayu/IQS/Dashboard/生产配置/旧封存。R6-ROOT.md记录本轮唯一实施流水。
+
+
+## 2026-11-01 — R6完成进度与独审新缺口
+
+消费者41RED已根因归属迁移5测试并50P/独审限定PASS；ROOT迁移/离线4RED后4P及关联normal72P，sandbox硬链接WinError5有直接cause、短路径假说否定。CI诊断17例修复public annotations4096截断，不再为缺错误清单取凭证。候选正常本地保存718fced8（Ruff/全src mypy绿），但不push/master：746项后独立未见样例又发现abstract目标尾语吞掉并列具体经营动作，已交同grammar predicate/complement scope先RED再根修，旧FAIL/报告SHA不覆盖。W23独立4RED与历史资料PARTIAL结论均保留，新独占工具工区修inflight/cache/finite累计，不跑模型。来源/PIT/原件/配置/旧封存不改，实际公司循环尚未恢复。
