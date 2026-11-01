@@ -20,8 +20,8 @@
   "4e8c49e2 docs: record final reviewed commit, doc suffix and pushed_to_remote",
   "ff2bec4f docs: close R1 review nits and final state (READY_FOR_ROOT)"
  ],
- "final_tested_commit": "ff2bec4ff6b07707c0003bd3fdc4022413f5632a",
- "final_reviewed_commit": "PENDING_REVIEW",
+ "final_tested_commit": "bf672e6c (8-page delivery; tool bytes identical to the tested da9ca2c8, builder/data only changed)",
+ "final_reviewed_commit": "fc4228c1 (full review READY_FOR_ROOT); sample-extension delta pending reviewer confirmation",
  "code_file_sha256": {
   "tools/ocr_comparison/campaign.py": {
    "raw_sha256": "d974cbaefe09cf2dca6060250095477db5b6fa933ae82b6f07b3ef5fc44e38e1",
@@ -278,5 +278,8 @@
   "ledger contains one under-count (7 zero rows first R0 pass) and one over-count (1080 s never-started pages), both disclosed"
  ],
  "recommendation": "现有不动 for production; table-structure linearization is R0's measured gap. Xiaomi needs a host with >=6.5 GB free RAM and a resolution of the Job Object bound mismatch before any card-compliant X1F result can exist.",
- "pushed_to_remote": null
+ "pushed_to_remote": "origin/codex/w23-ocr-r1-20261031",
+ "campaign_extensions": [
+  "bf672e6c: added one CN business-Q&A page (independent gold rev4) and ran R0/N0 on it under the same ledger; aggregates recomputed over 8 pages"
+ ]
 }
