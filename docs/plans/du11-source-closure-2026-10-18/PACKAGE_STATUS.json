@@ -1,6 +1,6 @@
 {
   "schema_version": "current-package-status/1",
-  "as_of_date": "2026-10-31",
+  "as_of_date": "2026-11-01",
   "canonical_entry": "CURRENT_STATUS.md",
   "scope": "Recent auditable cards, not a census of every historical package or all branches in all repos",
   "status_owner": "This registry only; original cards/setup/handoff/receipts are dated inputs/evidence",
@@ -83,10 +83,14 @@
     },
     {
       "id": "W20-RF-ADOPTION",
-      "engineering_status": "OBSERVER_TOOL_MERGED_PUSHED_REAL_ADOPTION_OPEN",
+      "engineering_status": "OBSERVER_TOOL_MERGED_PUSHED",
       "evidence": "review/w20-reception-r3-20261029/SUMMARY.json",
       "requires_author_delivery_before_mainline": false,
-      "whole_company_acceptance": false
+      "whole_company_acceptance": false,
+      "root_product_followup": {
+        "status": "HUALI_M8_BOUNDED_NATIVE_ADOPTION_PASS_FULL_COMPANY_OPEN",
+        "evidence": "review/mainline-closeout-20261031/p2/README.md"
+      }
     },
     {
       "id": "W20-FF-REPLAY",

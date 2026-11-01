@@ -1,0 +1,176 @@
+{
+  "schema_version": "p2-source-engineering-packet/1",
+  "created_at": "2026-11-01T00:04:49.343128+00:00",
+  "files": [
+    {
+      "path": "fixture-migration-addendum.md",
+      "bytes": 3035,
+      "sha256": "ce0ebcb6fb77f903c65edd41416485ce209cedc73156b200ea429322984726a8"
+    },
+    {
+      "path": "fixture-migration-probe.json",
+      "bytes": 2661,
+      "sha256": "02249c030febbbf99010633cf54250a08e9d23a3dd4dac5e07d6df35b75423e6"
+    },
+    {
+      "path": "native-artifact-shas.json",
+      "bytes": 661,
+      "sha256": "de6a24b88e9363e9e2252470b33594108a047ed78e8c72b1a35bbbcab238a0f6"
+    },
+    {
+      "path": "probe-v3.json",
+      "bytes": 6907,
+      "sha256": "4b79e1e6998cd2c8e341c74fcce4ac1333220bd58f18be2269c4bc29d0ebd995"
+    },
+    {
+      "path": "probe-v5.json",
+      "bytes": 5183,
+      "sha256": "534cce76beef5fe6a6ae713e195a306439c727f88c215430fcc8fb0cc98f58ac"
+    },
+    {
+      "path": "README.md",
+      "bytes": 3194,
+      "sha256": "183aa210d728bf0d3db379f516ed4f8bfe1476b4b69311dea1c95e08fd03e34e"
+    },
+    {
+      "path": "receipts/annual-cleanup.json.gz",
+      "bytes": 153,
+      "sha256": "72fb64262921ddfcfe066b6971f00a7173bd376345f616339b5a82c7c443cc64"
+    },
+    {
+      "path": "receipts/annual-fetch.stdout.json.gz",
+      "bytes": 579,
+      "sha256": "afbde97ea193cbb9748d1eb9f5c4cbcf1c2f574b161241317a3e60e02c46bf60"
+    },
+    {
+      "path": "receipts/annual-original-0.manifest.json.gz",
+      "bytes": 531,
+      "sha256": "ae217a431ca1fc9421e6761ea638a5036ceb57f6f55f22d994bf01b4f7f21a60"
+    },
+    {
+      "path": "receipts/annual-read-receipt.json.gz",
+      "bytes": 348,
+      "sha256": "066545433f623a54cab412c1af2cacabd96c2234f3b148464d844e009e22169f"
+    },
+    {
+      "path": "receipts/annual-reuse.stdout.json.gz",
+      "bytes": 445,
+      "sha256": "0475216c32816d06566cb6960f034d191f08bf6c0a1e406b0d24c4441e6e4d89"
+    },
+    {
+      "path": "receipts/annual-selected-native-basis-spans.json.gz",
+      "bytes": 14881,
+      "sha256": "7dd8bf52fae08a66c583067188c057ec716b475b82a914a4653cc75607d74d11"
+    },
+    {
+      "path": "receipts/financial-cleanup.json.gz",
+      "bytes": 156,
+      "sha256": "39007e3f8a99a5b87d39f07cc79949a0c6f4babe775345657b5e2f724431ad81"
+    },
+    {
+      "path": "receipts/financial-fetch.stdout.json.gz",
+      "bytes": 4859,
+      "sha256": "3cb43d63bfb9cf33d58946ed38561acde3c8e59d8af77406485a90dd2aa62980"
+    },
+    {
+      "path": "receipts/financial-receipt.json.gz",
+      "bytes": 454,
+      "sha256": "300810a5d7114e6a8cad1d6c40d2ce45b4695d89b46e203f927bc09f681c385d"
+    },
+    {
+      "path": "receipts/financial-reuse.stdout.json.gz",
+      "bytes": 4826,
+      "sha256": "e0cccbab29fad4e297cd3b5ddb9f79d82a2e07bd0e34cf4a95aa7344b597b30d"
+    },
+    {
+      "path": "receipts/native-basis-reconciliation.json.gz",
+      "bytes": 289,
+      "sha256": "d6ca3109f9a4c12607de6d20e8c107fbd6e5a8633df0cb3b0297fc8e4d64ad6c"
+    },
+    {
+      "path": "receipts/native-cleanup.json.gz",
+      "bytes": 131,
+      "sha256": "b9ff2ddf0e81cd1e98bd8b2993ddba48d2577cf18db4dac9c4adbfd075880c45"
+    },
+    {
+      "path": "receipts/native-receipt.json.gz",
+      "bytes": 435,
+      "sha256": "ae113122a72313fade5111493ed744fecf710c2a42120e4a7c516e5029418294"
+    },
+    {
+      "path": "receipts/p2-owned-test-cleanup.json.gz",
+      "bytes": 484,
+      "sha256": "f381266d54d5a6cb747c54159924181e4a777f788a94901ba22b41ff457ff7f7"
+    },
+    {
+      "path": "receipts/rf-ci-fixture-copy.json.gz",
+      "bytes": 583,
+      "sha256": "95f55306a888374bb5112a4150920ef3a5314d5b40290d08a2f1ae7e540a7499"
+    },
+    {
+      "path": "receipts/rf-ci-fixture-green.log.gz",
+      "bytes": 63,
+      "sha256": "1a2cc7b9400b3c60a58d3fa6064a2bca23353a2338edc72b7cb8e98ee0209b49"
+    },
+    {
+      "path": "receipts/rf-ci-fixture-red.log.gz",
+      "bytes": 1025,
+      "sha256": "546c0d83f319646f122a522dbeef35df5f60357536256337e3c789b2d2356fc2"
+    },
+    {
+      "path": "receipts/rf-final-ci.json.gz",
+      "bytes": 274,
+      "sha256": "538908da9a1312b82edbc354e63260657473ccddcd919bb49af7f90bd35ca6dd"
+    },
+    {
+      "path": "receipts/rf-fixture-push.log.gz",
+      "bytes": 310,
+      "sha256": "78a39a6e5a332fb8d9045815d376c328a2c8b2d79868440c73549e526223423e"
+    },
+    {
+      "path": "receipts/rf-install-apply.json.gz",
+      "bytes": 427,
+      "sha256": "ae9b469718dfbed183312760f562572607d5f6ebfc1e119d315a4f85fcea1dfb"
+    },
+    {
+      "path": "receipts/rf-install-fresh-process.json.gz",
+      "bytes": 503,
+      "sha256": "32649da09d236cbf153e8a5affd2caa6cddc61a881b848ac383d6b16c60a3b39"
+    },
+    {
+      "path": "receipts/rf-install-plan.json.gz",
+      "bytes": 1142,
+      "sha256": "54564510d2bc57f79f093cade4c83deb008f0e524767cf0acb89cf5248fc9691"
+    },
+    {
+      "path": "receipts/rf-install-repeat.json.gz",
+      "bytes": 428,
+      "sha256": "49e24c0e87012dec80a8b8eafd5b322cb11bd3fd8b07e57495342e4e54dc6e84"
+    },
+    {
+      "path": "receipts/rf-lineage-publication.json.gz",
+      "bytes": 523,
+      "sha256": "8481f86f380c3984b7824b12e29d50f9c4a4aecb100e8710a9171eb6a9a2c0db"
+    },
+    {
+      "path": "receipts/rf-lineage-push.log.gz",
+      "bytes": 310,
+      "sha256": "f14a632facbe0e21128fe5c7a585a088928c55449f34f0b6e5c6e7251d03dc62"
+    },
+    {
+      "path": "receipts/rf-main-before.json.gz",
+      "bytes": 300,
+      "sha256": "f0629507fb92968a83aae00784ffb29d03e5eb1b47682bdf1eafccef95bf13de"
+    },
+    {
+      "path": "review-v3.md",
+      "bytes": 13333,
+      "sha256": "4a6689bbfdd52c31adb717448de9c643896c02d43390b7a108ffb86b10e5a3c1"
+    },
+    {
+      "path": "review-v5-final.md",
+      "bytes": 13858,
+      "sha256": "347370118c87d8d8ba47a6d4b5d5f5763cf0e068e497d16910fbd5c2c0e50dd8"
+    }
+  ]
+}

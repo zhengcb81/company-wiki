@@ -1,30 +1,29 @@
 {
   "schema_version": "company-wiki-current-plan-status/2",
-  "as_of_date": "2026-10-31",
-  "observed_at_utc": "2026-10-31T22:49:14.367832+00:00",
+  "as_of_date": "2026-11-01",
+  "observed_at_utc": "2026-11-01T00:04:13.192829+00:00",
   "canonical_entry": "CURRENT_STATUS.md",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
-  "project_status": "P0_COMPLETE_P1_HUALI_COMPONENT_PASS_BERKSHIRE_OPEN_P2_IN_PROGRESS",
-  "scope_this_update": "User resumed P0-P2 mainline implementation; no new outsourcing packages",
+  "project_status": "P0_COMPLETE_P1_HUALI_AND_P2_ENGINEERING_PASS_BERKSHIRE_AND_COMPANY_RESEARCH_OPEN",
+  "scope_this_update": "Mainline only; exact CI root repairs, real summary/recovery/native adoption; no new packages",
   "last_code_commit": "daa9106fca2dfba17ea486d6e15fd3289a3d5a25",
   "verified_publication_before_docs": {
     "local_branch": "master",
-    "local_and_remote_head": "c92aa4f2a978c4068ebbcd3cc9da7488a00c361b"
+    "local_and_remote_head": "63f02b7a7b35917c5fa651fe256f1ed798c909d5"
   },
   "code_ci": {
-    "id": 41247282332,
-    "head_sha": "c92aa4f2a978c4068ebbcd3cc9da7488a00c361b",
+    "id": 41250663645,
+    "head_sha": "63f02b7a7b35917c5fa651fe256f1ed798c909d5",
     "status": "completed",
     "conclusion": "success",
-    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41247282332",
-    "completed_at_utc": "2026-10-31T22:20:41Z"
+    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41250663645"
   },
   "native_goal": {
-    "observed_status": "blocked",
+    "observed_status": "active",
+    "observed_via": "get_goal after user resumed",
     "objective_budget_text": "legacy2M tokens/$20; not runtime policy",
-    "resumed_by_this_update": false,
-    "note": "Manual project work and native goal scheduler state are distinct. No exposed tool can set active/change objective; do not claim autonomous loop running or create a second unfinished goal."
+    "note": "Existing goal active; no duplicate goal. Runtime remains config10M/$20."
   },
   "runtime_policy": {
     "budget_owner": "config/resource_budget.yaml",
@@ -46,7 +45,7 @@
     "source_tests": 634,
     "independent_tests": 12,
     "evidence": "review/m8-source-owner-20261031/README.md",
-    "real_summary_cache_rf": "NOT_ACCEPTED_FOR_M8",
+    "real_summary_cache_rf": "HUALI_REAL_COMPONENT_PASS; P1 Berkshire/P3 remain OPEN",
     "huali_compiled_tasks": 15,
     "berkshire_admitted": 77,
     "berkshire_compiled": 64,
@@ -76,7 +75,7 @@
     },
     {
       "id": "P2",
-      "status": "IN_PROGRESS_FINANCIAL_BASIS_VERIFICATION",
+      "status": "ENGINEERING_ADOPTION_REVIEW_PASS_COMPANY_RESEARCH_OPEN",
       "task": "Same new artifact actually consumed by RF native parameters/formula"
     },
     {
@@ -85,7 +84,7 @@
       "task": "W12 original-company rerun, new-company generalization, fixed8company fullaudit/skillimprovement and finalclean streak"
     }
   ],
-  "next_action": "继续P2同华利artifact实际参数/公式采用，先验证新浪收入单位/基线与原文2023内容时间；P1 Berkshire有界余项仍OPEN，不提高额度或代签。不扩包。",
+  "next_action": "P1 Berkshire长文有界余项：先冻结原生任务、全卡与请求字节的合同，TDD把准入/编译/模型实际处理范围分开，复用既有AUTO恢复/预算机制完成有限续批；不提高上限、不再扩包。",
   "package_status_registry": "PACKAGE_STATUS.json",
   "handoff": "HANDOFF.md",
   "goal_definition": "MAINLINE_LOOP_GOAL.md",
@@ -103,7 +102,7 @@
     "Long-source finite frontier fairness/resumption and BRK13deferred tasks",
     "US regulatoryPDF/HK newcoverage/US_RPO and truly unexposedholdout evidence as required in P1/P3"
   ],
-  "execution_mode": "manual_authorized_mainline_implementation",
+  "execution_mode": "active_goal_mainline_implementation",
   "p0_repair": {
     "status": "PUBLISHED_EXACT_CI_PASS",
     "evidence": "review/mainline-closeout-20261031/p0/README.md",
@@ -164,7 +163,7 @@
     "same_run_zero_POST": true,
     "cross_run_zero_POST": true,
     "actual_RF_read": "PASS",
-    "actual_RF_formula": "NOT_ACCEPTED",
+    "actual_RF_formula": "ENGINEERING_ADOPTION_PASS; full company research OPEN",
     "evidence": "review/mainline-closeout-20261031/p1/README.md"
   },
   "p1_berkshire": {
@@ -174,5 +173,65 @@
     "mother_budget_exhausted": false,
     "draft_deferred_cards": 13,
     "important_remainder_open": true
+  },
+  "p2_actual_v3": {
+    "native_formula": "PASS",
+    "formal_snapshot_registry": "STRUCTURAL_PASS",
+    "complete_summary_semantic_provenance": "OPEN_BLOCKING",
+    "findings": [
+      "P2-01 complete t3 provenance only in external consumption receipt",
+      "P2-02 future operand historical anchors not properly published",
+      "P2-03 small nonzero ASP rendered0.00"
+    ],
+    "evidence": ".planning/mainline-closeout-20261031/independent-p2/review-v3.md",
+    "full_company_research": "NOT_COMPLETE",
+    "status": "HISTORICAL_FAIL_SUPERSEDED_BY_V5_ENGINEERING_PASS"
+  },
+  "p2_actual_v5": {
+    "status": "BOUNDED_ENGINEERING_REVIEW_PASS",
+    "same_paid_artifact_sha256": "ec1831a2fdf2952a9a80aba0c9e5db65c8bc581ea5c0a10d53d01ef2faba52d8",
+    "native_formula": "PASS",
+    "formal_snapshot_registry": "PASS",
+    "complete_summary_semantic_provenance": "PASS",
+    "independent_checks": 32,
+    "independent_blockers_remaining": 0,
+    "actual_parameter_sensitivity_checks": 6,
+    "final_new_publication_cases_passed": 29,
+    "CI_sparse_fixture_cases_passed": 81,
+    "new_model_POST": 0,
+    "new_downloads": 0,
+    "locator_replay_performed": true,
+    "publication": {
+      "repo": "revenue-forecast",
+      "branch": "main",
+      "head": "535604fa468e8a69be44e073dc7e29eacde80cbc",
+      "ci_id": 41254752622,
+      "ci_conclusion": "success",
+      "normal_pre_push_passed": 679,
+      "normal_pre_push_skipped": 1,
+      "subtests_passed": 36
+    },
+    "installed_runtime": {
+      "logical_entries": 3,
+      "physical_targets": 2,
+      "file_scope": 8,
+      "written_locations": 16,
+      "repeat_writes": 0,
+      "fresh_process_checks": 3,
+      "claude_aliases_agents": true
+    },
+    "full_company_research": "OPEN; current communications, independent demand/competition and calibrated scenarios incomplete",
+    "evidence": "review/mainline-closeout-20261031/p2/README.md"
+  },
+  "protected_RF_WIP": [
+    "assurance/runs/daily_alert.jsonl",
+    "assurance/runs/weekly_alert.jsonl",
+    "assurance/runs/weekly_manifest.json"
+  ],
+  "owned_test_cleanup": {
+    "new_test_annual_and_full_normalization_removed_bytes": 4662644,
+    "selected_spans_retained": 62,
+    "user_original_hashes_unchanged": true,
+    "evidence": "review/mainline-closeout-20261031/p2/receipts/p2-owned-test-cleanup.json.gz"
   }
 }

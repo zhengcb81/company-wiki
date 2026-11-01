@@ -1,0 +1,88 @@
+{
+  "schema_version": "independent-p2-fixture-delta/1",
+  "pass": true,
+  "checks": {
+    "six_exact_files": true,
+    "only_fixture_constant_changed": true,
+    "docs_absent_in_sparse_workarea": true,
+    "old_archive_still_present": true,
+    "workflow_unchanged": true,
+    "tests_in_ci_sparse_checkout": true,
+    "docs_not_in_ci_sparse_checkout": true,
+    "bodies_match_existing_refs": true,
+    "reviewed_code_unchanged": true,
+    "v5_artifacts_unchanged": true
+  },
+  "total_bytes": 12018,
+  "helper_sha256": "9e82226d50aed9a042689831e385f0ae35f5a95809d732657fb97ffcf5cd7826",
+  "fixtures": [
+    {
+      "name": "actual-080-bundle.json.gz",
+      "bytes": 1435,
+      "sha256": "3113b0a33b25cdb241408a9929335dc2a6a2d8b21ea6822a17f016a88ac17f11",
+      "byte_identical": true
+    },
+    {
+      "name": "actual-080-receipt.jsonl",
+      "bytes": 1855,
+      "sha256": "b6966a1ac7e88fb3f12571a20f5dbe4bcbb75b963b0ee6ec5c10a42ca737be48",
+      "byte_identical": true
+    },
+    {
+      "name": "actual-080-request.json",
+      "bytes": 981,
+      "sha256": "112465239a3217575518a21e28db6f2bbd0c35407f2e554c1323a4a2cc7cef85",
+      "byte_identical": true
+    },
+    {
+      "name": "actual-090-bundle.json.gz",
+      "bytes": 4905,
+      "sha256": "941b3c562b6d2b5936ec10829f75e74b520b54f4df4976237cf6f88e4e53ef68",
+      "byte_identical": true
+    },
+    {
+      "name": "actual-090-receipt.jsonl",
+      "bytes": 1860,
+      "sha256": "e8bf242d6f1d3b508154ace393c4dafff2bf73b6b8f9a681e3c25dc985b15aaf",
+      "byte_identical": true
+    },
+    {
+      "name": "actual-090-request.json",
+      "bytes": 982,
+      "sha256": "25cfd6cf747d8085251ab0d7677241294c09ecf53a79bc0fea77cf61ee1b9ed4",
+      "byte_identical": true
+    }
+  ],
+  "wire_body_checks": [
+    {
+      "version": "080",
+      "body_sha256_matches_request": true,
+      "body_size_matches_request": true
+    },
+    {
+      "version": "090",
+      "body_sha256_matches_request": true,
+      "body_size_matches_request": true
+    }
+  ],
+  "code_unchanged": {
+    "scripts/narrative_summary_provenance.py": true,
+    "scripts/narrative_summary_usage.py": true,
+    "scripts/source_narrative_context.py": true,
+    "scripts/company_wiki_narrative_contracts.py": true,
+    "scripts/contracts/document.py": true,
+    "scripts/revenue_report.py": true,
+    "tests/test_summary_publication_lineage.py": true
+  },
+  "v5_artifacts_unchanged": {
+    "input.json": true,
+    "forecast.json": true,
+    "snapshot.json": true,
+    "report.md": true,
+    "consumption-receipt.json": true,
+    "publication-registry.jsonl": true
+  },
+  "network_calls": 0,
+  "model_calls": 0,
+  "author_runtime_calls": 0
+}

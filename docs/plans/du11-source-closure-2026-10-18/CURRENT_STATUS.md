@@ -1,43 +1,32 @@
-# 当前项目状态 — 2026-10-31
+# 当前项目状态 — 2026-11-01
 
-**项目未完成。基础设施和共享阅读来源工程已大幅完成；P0三个CI断言已根修、独审并发布，精确CI通过；当前进入P1；接着完成M8新版真实摘要→恢复→RF采用→公司审查循环。** 本页是唯一当前入口；机器视图是[CURRENT_STATUS.json](CURRENT_STATUS.json)，接手看[HANDOFF](HANDOFF.md)，执行看[task_plan](task_plan.md)。历史全文在[HISTORY](HISTORY.md)，不再把旧“当前/下一步/暂停”叠在本页。
+**P0三个CI失败已根修；华利新版真实摘要、缓存恢复及RF实际采用的有界工程验收已通过、并线推送。项目整体仍未完成：当前回到P1 Berkshire长文剩余材料，然后进入P3公司研究循环。** 本页是唯一当前入口，机器状态[CURRENT_STATUS.json](CURRENT_STATUS.json)，接手看[HANDOFF](HANDOFF.md)，执行看[task_plan](task_plan.md)，稳定目标看[MAINLINE_LOOP_GOAL](MAINLINE_LOOP_GOAL.md)。历史不另造当前队列。
 
-## 真实位置
-
-| 层/任务 | 已完成 | 仍未完成 |
+| 大节点 | 现在的真实状态 | 不能混作什么 |
 |---|---|---|
-| 原件与虚拟来源接口 | 保存、去重、SourceRef/版本化读取和跨目录抽象已有实现 | 不计划重建底层存储；实际链继续验收 |
-| 门禁与审查简化 | 主要工程完成，逐材料许可/签收已取消 | 没有新的人工许可待办；来源质量/限额测试仍需正确 |
-| 共享阅读＋文种策略 | 共享owner、策略配置、QA/主体/因果根修已并线；M8局部独审通过 | 新版精确CI已绿；真实内容与恢复验收未完成 |
-| 摘要与恢复 | 旧M6及新版华利15卡/真实排名、激活中断和同跨run恢复已通过组件独审 | Berkshire与整体P1尚未收口；/5不冒作生成式摘要 |
-| RF研究 | 局部真实摘要进入native参数/公式已验证 | M8新artifact的经济意义采用、整家公司四审未收口 |
-| 公司循环 | 原药明康德失败审查及整改已进行 | W12新attempt、新公司泛化、固定八家公司及技能改进未完成 |
+| P0 CI延期合同 | 完成，精确CI41247282332绿 | 不是删断言或提高额度 |
+| P1 华利真实源/摘要/恢复 | 组件通过，15原文卡、12业务原子、1次MiMo真实排名；中断及同跨run恢复0重复POST | /5是完整原文卡＋排名，不是生成式自然语言概述或全文完整 |
+| P1 Berkshire长文 | 当前剩余任务；77准入、64编译、13延期，含重要业务04/07；首次0POST被单请求保守上限拒绝 | 不把准入/发现当模型已消费或借提高限额签收 |
+| P2 华利同artifact native采用 | 有界工程独审通过：完整语义/采用理由/出处进入input、报告、snapshot，实际参数扰动证明进入公式 | 不是完整公司四审或买方预测质量通过 |
+| P3 研究循环 | 未完成：W12新attempt、新公司、固定八家公司及连续三家clean条件 | 不以工程包数量或条件算例替代真实完整研究 |
 
-## P0已完成，当前在P1
+## 本次实际解决
 
-[c92aa4f2](https://github.com/zhengcb81/company-wiki/commit/c92aa4f2a978c4068ebbcd3cc9da7488a00c361b) 已并主线推送，[精确CI41247282332](https://github.com/zhengcb81/company-wiki/actions/runs/41247282332) completed/success。39项模块、101相关、3项最终复验、独审0OPEN，正常pre-push206项通过；生产逻辑/额度未改。旧3F和根因证据保留。
+- P0旧3例在新增前缀观察阶段就耗尽预算，测试误要求lookahead的显式IDs。已覆盖紧凑frontier、真实lookahead和实际消费者；生产逻辑/限额不变。[P0证据](review/mainline-closeout-20261031/p0/README.md)。
+- 华利复合检查点误作单闭包事实、隔离显式intake缺current-open证明已修；真实产物/恢复/RF读取通过。[P1证据](review/mainline-closeout-20261031/p1/README.md)。原失败保留。
+- RF原先只把首段写进native claim，完整内容/理由落在旁收据。已由纯证据DTO持久化完整支持与context，复用既有闭包/投影契约；修好非零小单价显示和操作数原文锚。独审新增兼容/反向引用/投影缺口均修；计算层没有跨层读目录或调用解析器。[P2证据](review/mainline-closeout-20261031/p2/README.md)。
+- RF新增日常测试隐含读取docs夹具而CI不检出；在同样缺文件环境复现，将6个现有夹具按原字节归tests，81例及独审通过。不扩大CI或增加下载。
 
-首次P1华利正式入口在付费预留前被检查点拒绝，0POST/0费用。所有原quote都存在，但复合业务检查点跨数张同源卡，适配却错误要求全部背景和子命题同处一个闭包。已保全20检查点/101个独立锚点（104次支持引用），完成原子业务断言映射和独审；不放宽主体、时间、条件、支持闭包，不靠全篇拼接换绿。
+## 发布与资源
 
-## 最近完成与明确边界
+CWP已[63f02b7a](https://github.com/zhengcb81/company-wiki/commit/63f02b7a7b35917c5fa651fe256f1ed798c909d5)，[CI41250663645](https://github.com/zhengcb81/company-wiki/actions/runs/41250663645)绿；RF已[535604fa](https://github.com/zhengcb81/revenue-forecast/commit/535604fa468e8a69be44e073dc7e29eacde80cbc)，[精确CI41254752622](https://github.com/zhengcb81/revenue-forecast/actions/runs/41254752622)绿，正常pre-push679P＋36subtests（1skip）。本次PWF文档发布以Git历史为准，不把尚未生成的文档提交SHA写成已验真。
 
-- [M8来源工程](review/m8-source-owner-20261031/README.md)已独审/提交/并线/推送。两份冻结normalized源是免费回归，非新PDF、非blind、非真实模型验收。
-- 华利15个任务实际编译，业务02–10覆盖；Berkshire77准入、实际编译64、13延期含04/07。不能把“准入”写成“模型已消费”。
-- IR、QA-RAG、MeetingConverter均已各自主线提交推送；W09–W22主要组件接收状态见[外包总表](PACKAGE_STATUS.md)。不再等已交付作者或重派同卡。
-- [M6历史as-of局部链](review/source-information-20261030/description-final/m6-source-evidence-2/README.md)通过，不表示M8或整家公司研究通过。
+RF三逻辑技能入口已定点同步8运行文件；.claude指向.agents，只有2物理目标，实际16处写入，重复零写；3个新进程实际复验。原件不改；本轮新下载年报/全篇规范化临时副本已删除4662644B，保留62个实际原文span与收据；没有整库恢复演练。
+
+原生目标已由get_goal确认active。预算/模型沿用配置：累计10M tokens/$20，母账1,835,775tokens/$0.734239含unknown；本次唯一付费仍MiMo8217tokens/$0.001425，P2新增0。没有逐材料许可/签收待办。旧目标正文2M不替代实际配置。门禁精简和来源虚拟接口主要工程已完成，剩余问题是内容/采用/研究质量，不是目录权限。
 
 ## 唯一下一步
 
-华利[真实组件证据](review/mainline-closeout-20261031/p1/README.md)已独审：1次MiMo请求，15张原文卡/12业务原子，activation与同跨run恢复0重复POST，真实RF读取一致。它是/5来源卡+排名，全文仍partial，尚未进入实际RF公式。Berkshire在HTTP前被单次限额拒绝、0费用，13张延期重要卡仍OPEN。
+P1 Berkshire有界续批根修：冻结原任务及字节检查点，用TDD区分源准入、canonical卡编译、实际模型处理与未处理任务，沿用AUTO预算/缓存/恢复，不靠加额度或公司特判。独审与真实有限批次后，再继续P3。W21 canonicalC2真实增强/对齐、跨市场新样本和US RPO按相关节点承接，不冒作已通过。
 
-继续P2华利同artifact参数/公式采用，先核实新浪基线单位与2023原文内容时间；随后处理P1有界余项，不扩大额度或新增施工包。母账已验真1,835,775tokens/$0.734239。
-
-## 调度、预算和旁线
-
-原生长期目标实际为`blocked`，此前文档写active不准确；手动推进与目标调度不是一回事。本轮没有把目标标成完成或声称已重启。旧目标正文2M预算过期；实际配置是累计10M tokens/$20，公司软目标，最近已验真母账1,835,775tokens/$0.734239（含历史unknown，非账单）。**当前不缺项目授权，也没有耗尽这个累计预算。**
-
-W21 canonicalC2真实增强/对齐、长文有限前沿及剩余重要材料、跨市场新样本/US RPO需在相关产品节点处理。小米OCR实证R1属非阻塞实验，最后已知READY、当前是否施工未知；不能为等它而停止现有链。Dayu/IQS/Dashboard不动，原件和他人WIP保留。
-
-## 为什么很多外包完成，项目仍未完成
-
-包多是组件、工具、环境和观察能力完成，不等于同一版本的真实公司预测通过四路审查。IR/QA/MC还明确是非阻塞旁线。过程中真实内容验收暴露了共享根因（源遗漏、限定归属、弱规则误杀强因果），导致需要新版本重验。总控长期增加支线、集成收口落后，且重复状态文档制造了重复待办，这部分是执行组织问题。接下来以P0–P3四个大节点收口；不以包数报百分比，不再为了并行而扩张关键路径。
+不再扩施工包。Dayu/IQS/Dashboard及外来WIP不动；RF三份assurance定时产物、本仓hook mode差异均保留。外包当前状态只查[PACKAGE_STATUS](PACKAGE_STATUS.md)，旧当前/暂停描述只作历史。

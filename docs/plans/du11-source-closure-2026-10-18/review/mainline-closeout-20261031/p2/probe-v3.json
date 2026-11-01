@@ -1,0 +1,209 @@
+{
+  "schema_version": "independent-p2-probe/1",
+  "scope": "v3 mechanical math/hash probes; semantic closure OPEN separately",
+  "network_calls": 0,
+  "model_calls": 0,
+  "parser_calls": 0,
+  "runtime_forecast_calls": 0,
+  "checks_pass": true,
+  "checks": [
+    {
+      "name": "annual_original_sha_and_size",
+      "pass": true,
+      "sha256": "15eb6c7669af7d05b341ec0f42b47c1da469776e56d299addb18ca53511a4c74",
+      "bytes": 4079810
+    },
+    {
+      "name": "financial_original_sha_and_size",
+      "pass": true,
+      "sha256": "9c5d794314df3033fb72f5af374e6f817ebe0f8838f83c10aa14dbf2394ac9a5",
+      "bytes": 176598
+    },
+    {
+      "name": "provider_unknown_unit_preserved_2025-12-31",
+      "pass": true,
+      "raw_value": "24980125148.090000",
+      "currency": "CNY",
+      "period": "2025-12-31",
+      "knowledge_mode": "current_snapshot"
+    },
+    {
+      "name": "provider_unknown_unit_preserved_2024-12-31",
+      "pass": true,
+      "raw_value": "24006393622.270000",
+      "currency": "CNY",
+      "period": "2024-12-31",
+      "knowledge_mode": "current_snapshot"
+    },
+    {
+      "name": "financial_fetch_then_zero_http_reuse",
+      "pass": true,
+      "fetch_usage": {
+        "http_requests": 1,
+        "response_bytes": 176598,
+        "cost_usd": "0.00"
+      },
+      "reuse_usage": {
+        "http_requests": 0,
+        "response_bytes": 0,
+        "cost_usd": "0.00"
+      }
+    },
+    {
+      "name": "official_units_and_annual_columns",
+      "pass": true
+    },
+    {
+      "name": "api_official_input_reconciliation_2025",
+      "pass": true,
+      "official_yuan": "24980125148.090000",
+      "input_million": "24980.12514809"
+    },
+    {
+      "name": "api_official_input_reconciliation_2024",
+      "pass": true,
+      "official_yuan": "24006393622.270000",
+      "input_million": "24006.39362227"
+    },
+    {
+      "name": "segment_basis_and_separate_residual",
+      "pass": true,
+      "footwear_million": "24960.08102193",
+      "other_million": "20.04412616",
+      "asp_cny_per_pair": "109.96114816480902242389532578527688444424864531477"
+    },
+    {
+      "name": "operating_anchors_located",
+      "pass": true
+    },
+    {
+      "name": "independent_formula_low",
+      "pass": true
+    },
+    {
+      "name": "independent_formula_base",
+      "pass": true
+    },
+    {
+      "name": "independent_formula_high",
+      "pass": true
+    },
+    {
+      "name": "base_units_real_dependency",
+      "pass": true,
+      "analytic_partial_derivative_total_wrt_pairs": "0.00010996114816480902242389532578527688444424864531477"
+    },
+    {
+      "name": "exact_new_artifact_and_t3_hashes",
+      "pass": true,
+      "body_sha256": "ec1831a2fdf2952a9a80aba0c9e5db65c8bc581ea5c0a10d53d01ef2faba52d8",
+      "summary_claim_sha256": "29df07901b23643bfd748cd0daef1c3b082c8797699eedbfddb8a644b3faefd6"
+    },
+    {
+      "name": "t3_full_source_semantics_preserved_in_sidecar",
+      "pass": true,
+      "support_locators": [
+        "loc:v1/page:1/paragraph:28",
+        "loc:v1/page:1/paragraph:29",
+        "loc:v1/page:1/paragraph:30",
+        "loc:v1/page:1/paragraph:31",
+        "loc:v1/page:1/paragraph:32"
+      ],
+      "context_locators": [
+        "loc:v1/page:1/paragraph:27"
+      ]
+    },
+    {
+      "name": "native_claim_is_only_first_span_documented_open",
+      "pass": true,
+      "native_excerpt": "A：目前部分运动品牌的库存比较高，同时由于国际政治、经济形势复杂，很多品牌基",
+      "missing_support_locators": [
+        "loc:v1/page:1/paragraph:29",
+        "loc:v1/page:1/paragraph:30",
+        "loc:v1/page:1/paragraph:31",
+        "loc:v1/page:1/paragraph:32"
+      ],
+      "changed_top_keys": [
+        "parameters",
+        "evidence_claims"
+      ],
+      "parameter_rationale_unchanged": true,
+      "native_contains_artifact_sha": false
+    },
+    {
+      "name": "embedded_native_input_hashes",
+      "pass": true,
+      "input_sha256": "bb973e27c94a4f4052b887c06143e33d544bb2175c0ef287d6783e0528b1b7c0"
+    },
+    {
+      "name": "formal_result_and_publication_hashes",
+      "pass": true,
+      "result_sha256": "4c2eba36fcbe1149d442fb6980c93d05a29e75e6213c8baf333ee02c21c52fdc",
+      "attestation_status": "unattested"
+    },
+    {
+      "name": "snapshot_identity_and_result_hashes",
+      "pass": true,
+      "snapshot_id": "feed49d0f2aec9ed2ed9b5e80c96a4109b990fcd85642f842609e82373e25c7d",
+      "forecast_result_sha256": "7e6c3a70a697d37c4e3050852a78b9e407e3dd4bc0e3575a22f761bda75d0ae1"
+    },
+    {
+      "name": "independent_local_registry_chain",
+      "pass": true,
+      "rows": 3,
+      "types": [
+        "forecast",
+        "forecast",
+        "snapshot"
+      ]
+    },
+    {
+      "name": "temporary_cleanup_v3",
+      "pass": true
+    },
+    {
+      "name": "temporary_cleanup_p2-annual-preparation-v4",
+      "pass": true
+    },
+    {
+      "name": "temporary_cleanup_p2-financial-preparation-v1",
+      "pass": true
+    }
+  ],
+  "math": [
+    {
+      "case": "low",
+      "units": "204291000.0",
+      "asp_million_per_pair": "0.00010996114816480902242389532578527688444424864531477",
+      "expected_footwear_million": "22464.072919737000000000000000000000000000000000000",
+      "expected_total_million": "22484.117045897000000000000000000000000000000000000",
+      "observed_total_million": "22484.117045896997",
+      "growth": "-0.09991975970480062791183290766305871984938562867498",
+      "difference": "-3.000000000000000000000000000000000E-12"
+    },
+    {
+      "case": "base",
+      "units": "230599141.0000",
+      "asp_million_per_pair": "0.00010996114816480902242389532578527688444424864531477",
+      "expected_footwear_million": "25356.946310178687000000000000000000000000000000000",
+      "expected_total_million": "25376.990436338687000000000000000000000000000000000",
+      "observed_total_million": "25376.990436338685",
+      "growth": "0.0158872417930632998379814323184263364560523149593",
+      "difference": "-2.000000000000000000000000000000000E-12"
+    },
+    {
+      "case": "high",
+      "units": "247570000",
+      "asp_million_per_pair": "0.00010996114816480902242389532578527688444424864531477",
+      "expected_footwear_million": "27223.081451161769681483765804660998281862637120578",
+      "expected_total_million": "27243.125577321769681483765804660998281862637120578",
+      "observed_total_million": "27243.125577321767",
+      "growth": "0.0905920373022951197156492021545331712630669297384",
+      "difference": "-2.681483765804660998281862637120578E-12"
+    }
+  ],
+  "input_file_sha256": "758f248d4d85833277fa861b9b48edbb7cc778e854fe561807657611572c397e",
+  "forecast_file_sha256": "8561a519d3b8ecede9025f83014cc4c60063be263b01333bd42126496aada299",
+  "snapshot_file_sha256": "3ce912c6b680df49b5b8fe1f2f300168a76ef212c436028adcc9e8f4a7332b58",
+  "report_file_sha256": "8e9401046c6866c27343fc3db027950536fb56fe8eadcc70429d5e57793c5254"
+}
