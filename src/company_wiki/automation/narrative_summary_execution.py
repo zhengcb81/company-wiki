@@ -12,7 +12,9 @@ import re
 from typing import Any
 
 from company_wiki.document_understanding.summary_tasks import build_summary_task_plan
-from company_wiki.document_understanding.source_cards import source_cards
+from company_wiki.document_understanding.source_cards import (
+    SOURCE_CARD_UNAVAILABLE_REASONS, source_card_generation_reason, source_cards,
+)
 from company_wiki.source_catalog.narrative_evidence import summary_claim_type_for_roles
 from .models import canonical_json, canonical_json_hash, _to_plain
 from .narrative_contracts import (
@@ -47,7 +49,7 @@ _TASK_KEYS = {
 _REASONS = {
     "admitted": ("source_card",),
     "duplicate": ("duplicate_scope",),
-    "unsupported": ("source_not_parsed", "source_table_unresolved"),
+    "unsupported": SOURCE_CARD_UNAVAILABLE_REASONS,
     "deferred": ("draft_byte_budget",),
 }
 _MODELS = {"consider", "redundant", "unclear", "unprocessed", "invalid"}
@@ -225,13 +227,14 @@ def _bind_summary(
             row["task_binding_sha256"] == canonical_json_hash(task.to_binding()),
             "execution task differs from its selected source binding",
         )
+        unavailable_reason = source_card_generation_reason(cards[task.key])
         _require(
             (row["source_disposition"] == "unsupported")
-            == (not cards[task.key].available),
+            == (unavailable_reason is not None),
             "execution availability differs from source-owned whole-card availability",
         )
         if row["source_disposition"] == "unsupported":
-            _require(row["reason"] == cards[task.key].reason,
+            _require(row["reason"] == unavailable_reason,
                      "execution unsupported reason differs from its source observation")
         if row["source_disposition"] == "admitted":
             claim = claims[row["claim_id"]]

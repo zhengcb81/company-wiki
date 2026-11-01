@@ -1,23 +1,24 @@
 {
   "schema_version": "company-wiki-current-plan-status/2",
   "as_of_date": "2026-11-01",
-  "observed_at_utc": "2026-11-01T00:17:43.854219+00:00",
+  "observed_at_utc": "2026-11-01T01:25:05.836098+00:00",
   "canonical_entry": "CURRENT_STATUS.md",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
-  "project_status": "P0_COMPLETE_P1_HUALI_AND_P2_ENGINEERING_PASS_BERKSHIRE_AND_COMPANY_RESEARCH_OPEN",
+  "project_status": "P0_EXACT_CI_PASS_P1_CURRENT_BOUNDED_AND_P2_V6_REVIEW_PASS_PUBLICATION_PENDING_P3_OPEN",
   "scope_this_update": "Mainline only; exact CI root repairs, real summary/recovery/native adoption; no new packages",
-  "last_code_commit": "daa9106fca2dfba17ea486d6e15fd3289a3d5a25",
+  "last_code_commit": "63f02b7a7b35917c5fa651fe256f1ed798c909d5",
   "verified_publication_before_docs": {
     "local_branch": "master",
-    "local_and_remote_head": "acf11bb29570a5a306f1a45d63909d815f6714c0"
+    "local_and_remote_head": "2b5b89c68127cd0c51825788944dccb62c6b598d"
   },
   "code_ci": {
     "id": 41255499232,
     "head_sha": "acf11bb29570a5a306f1a45d63909d815f6714c0",
     "status": "completed",
     "conclusion": "success",
-    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41255499232"
+    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41255499232",
+    "meaning": "Last verified baseline CI. Current P1 root repair not yet committed; exact new CI required after publication."
   },
   "native_goal": {
     "observed_status": "active",
@@ -32,29 +33,31 @@
     "cumulative_micro_usd": 20000000,
     "company_allocation": "soft target150000tokens/$1",
     "latest_verified_usage": {
-      "tokens": 1835775,
-      "micro_usd": 734239,
+      "tokens": 1849869,
+      "micro_usd": 739510,
       "includes_historical_unknowns": true,
-      "evidence": "review/mainline-closeout-20261031/p1/README.md",
-      "note": "Actual one new MiMo request8217tokens/$0.001425; old unknown holds retained"
+      "evidence": "review/mainline-closeout-20261031/p1-current/receipts/huali/mother-after.json.gz",
+      "note": "New current two calls14094tokens/5271microUSD; earlier8217/1425 already included. Estimate not invoice;6new historical unknown plus7baseline retained."
     }
   },
   "m8_source_engineering": {
-    "status": "COMPONENT_REVIEW_AND_EXACT_CI_PASS_PRODUCT_ACCEPTANCE_PENDING",
+    "status": "CURRENT_BOUNDED_SOURCE_REVIEW_PASS_PUBLICATION_PENDING_FULL_COMPANY_OPEN",
     "independent_open_at_acceptance": 0,
     "source_tests": 634,
     "independent_tests": 12,
     "evidence": "review/m8-source-owner-20261031/README.md",
-    "real_summary_cache_rf": "HUALI_REAL_COMPONENT_PASS; P1 Berkshire/P3 remain OPEN",
+    "real_summary_cache_rf": "HUALI_CURRENT_AND_BERKSHIRE_BOUNDED_PASS; P2 v6 actual formula PASS; whole-company/P3 OPEN",
     "huali_compiled_tasks": 15,
-    "berkshire_admitted": 77,
-    "berkshire_compiled": 64,
-    "berkshire_deferred": 13,
-    "deferred_business_checkpoints": [
-      "BRK-04",
-      "BRK-07"
-    ],
-    "count_scope": "historical normalized DEV case, not the actual first live PDF request"
+    "historical_normalized_counts": {
+      "source_tasks": 77,
+      "compiled_cards": 64,
+      "deferred_cards": 13,
+      "important_deferred_then": [
+        "BRK-04",
+        "BRK-07"
+      ],
+      "scope": "old normalized DEV fixture only"
+    }
   },
   "existing_capabilities": {
     "storage_virtualization": "IMPLEMENTED; no new storage-layer rebuild planned",
@@ -71,12 +74,12 @@
     },
     {
       "id": "P1",
-      "status": "HUALI_COMPONENT_REVIEW_PASS_BERKSHIRE_BOUNDED_REMAINDER_OPEN",
-      "task": "M8 real source summary/rank plus activation/recovery and explicit remaining batch"
+      "status": "CURRENT_TWO_SOURCE_BOUNDED_REVIEW_PASS_PUBLICATION_PENDING",
+      "task": "Current Huali15/12atoms and Berkshire73/10atoms; actual activation/same/cross cache PASS;15Berkshire unprocessed and full-source partial remain explicit"
     },
     {
       "id": "P2",
-      "status": "ENGINEERING_ADOPTION_REVIEW_PASS_COMPANY_RESEARCH_OPEN",
+      "status": "CURRENT_V6_ENGINEERING_REVIEW_PASS_COMPANY_RESEARCH_OPEN",
       "task": "Same new artifact actually consumed by RF native parameters/formula"
     },
     {
@@ -85,12 +88,21 @@
       "task": "W12 original-company rerun, new-company generalization, fixed8company fullaudit/skillimprovement and finalclean streak"
     }
   ],
-  "next_action": "P1 Berkshire长文有界余项：先冻结原生任务、全卡与请求字节的合同，TDD把准入/编译/模型实际处理范围分开，复用既有AUTO恢复/预算机制完成有限续批；不提高上限、不再扩包。",
+  "next_action": "完成当前P1根修、两份真实运行与新版RF v6验收包的正常提交/推送和精确CI确认；然后恢复P3药明康德W12新attempt，不发新施工包。",
   "package_status_registry": "PACKAGE_STATUS.json",
   "handoff": "HANDOFF.md",
   "goal_definition": "MAINLINE_LOOP_GOAL.md",
   "history_index": "HISTORY.md",
-  "own_uncommitted_runtime": [],
+  "own_uncommitted_runtime": [
+    "src/company_wiki/automation/narrative_model_extractive.py",
+    "src/company_wiki/automation/narrative_rank_material.py",
+    "src/company_wiki/automation/narrative_summary_execution.py",
+    "src/company_wiki/document_understanding/source_card_allocation.py",
+    "src/company_wiki/document_understanding/source_cards.py",
+    "tools/document_understanding_benchmark/phase_c_observer.py",
+    "tools/document_understanding_benchmark/phase_c_runner.py",
+    "tools/document_understanding_benchmark/rank_material_observation.py"
+  ],
   "foreign_wip_preserved": [
     ".githooks/pre-push mode-only; not ours"
   ],
@@ -99,9 +111,9 @@
     "IR/QA/MC accepted and merged; no further wait on these packages"
   ],
   "current_limits_to_close": [
-    "W21 canonicalC2 actual enhanced read/alignment; do not count nativefallback as enhancement",
-    "Long-source finite frontier fairness/resumption and BRK13deferred tasks",
-    "US regulatoryPDF/HK newcoverage/US_RPO and truly unexposedholdout evidence as required in P1/P3"
+    "W21 canonicalC2 actual enhanced read/alignment; nativefallback does not sign enhancement",
+    "Berkshire15unprocessed explicitly retained; full-source/long-frontier generalization remains partial,10required DEV business atoms now present",
+    "P3 W12 company rerun, latest communications/demand/competition/scenario calibration, US regulatoryPDF/HK/US_RPO and genuinely unexposed holdouts"
   ],
   "execution_mode": "active_goal_mainline_implementation",
   "p0_repair": {
@@ -151,11 +163,13 @@
     "finding": "Multi-proposition checkpoint was incorrectly treated as a single-claim closed-group requirement; independently reviewed atomic adapter needed, no production oracle weakening."
   },
   "p1_huali": {
-    "status": "COMPONENT_REVIEW_PASS",
+    "status": "CURRENT_BOUNDED_REVIEW_PASS",
+    "run_id": "phaseC-090-670ced72c918",
+    "artifact_sha256": "a466262de5251f0b4e2619eb88f1ba90e8188f5070bb1ea9881a7d5be08b3a45",
     "model_posts": 1,
     "model": "mimo-v2.6-flash",
-    "tokens": 8217,
-    "micro_usd": 1425,
+    "tokens": 3630,
+    "micro_usd": 660,
     "cards": 15,
     "required_atoms": 12,
     "generated_prose": false,
@@ -164,35 +178,36 @@
     "same_run_zero_POST": true,
     "cross_run_zero_POST": true,
     "actual_RF_read": "PASS",
-    "actual_RF_formula": "ENGINEERING_ADOPTION_PASS; full company research OPEN",
-    "evidence": "review/mainline-closeout-20261031/p1/README.md"
+    "actual_RF_formula": "V6_BOUNDED_ENGINEERING_PASS_COMPANY_RESEARCH_OPEN",
+    "wire_bytes": 12849,
+    "request_reservation_bound_tokens": 21169,
+    "evidence": "review/mainline-closeout-20261031/p1-current/README.md"
   },
   "p1_berkshire": {
-    "status": "NOT_PROCESSED_PRE_HTTP_SINGLE_REQUEST_CAP",
-    "post": 0,
-    "tokens_bound_basis": "HTTP body74249B+output8192; bound exceeds50000",
-    "mother_budget_exhausted": false,
-    "draft_deferred_cards": 16,
-    "important_remainder_open": true,
-    "historical_normalized_counts": {
-      "admitted": 77,
-      "compiled": 64,
-      "deferred": 13,
-      "important_deferred": [
-        "BRK-04",
-        "BRK-07"
-      ]
-    },
-    "actual_live_counts": {
-      "source_task_rows": 88,
-      "compiled_cards": 72,
-      "deferred_cards": 16,
-      "model_request_tasks": 88,
-      "model_POST": 0,
-      "request_bytes": 74249,
-      "material_bytes": 61266
-    },
-    "count_note": "Old normalized development fixture77/64/13 was overgeneralized as current. Actual frozen live request/selection SHA now distinguishes88/72/16; no history is rewritten."
+    "status": "CURRENT_BOUNDED_REVIEW_PASS_FULL_SOURCE_PARTIAL",
+    "run_id": "phaseC-090-011ec22e479b",
+    "artifact_sha256": "66c264bacdc562038fdfe15f2c9a8076d84b71cd694e37b7413be1feb05f234c",
+    "source_task_rows": 88,
+    "compiled_cards": 73,
+    "deferred_unprocessed": 15,
+    "required_atoms_retained": 10,
+    "model_POST": 1,
+    "model": "deepseek-flash",
+    "tokens": 10464,
+    "micro_usd": 4611,
+    "request_bytes": 39520,
+    "request_reservation_bound_tokens": 47840,
+    "batch_limit_unchanged": 50000,
+    "model_diagnostic": "RANK_INCOMPLETE",
+    "generated_prose": false,
+    "source_file_coverage": "partial",
+    "activation_recovery": "PASS",
+    "same_run_zero_POST": true,
+    "cross_run_zero_POST": true,
+    "actual_RF_read": "PASS",
+    "advisory_ranking_limit": "t78/t80 low/unclear or redundant; original cards retained, never use ranking to delete source facts",
+    "scope": "exposed development gold,2008shareholderletter notSEC10K",
+    "evidence": "review/mainline-closeout-20261031/p1-current/README.md"
   },
   "p2_actual_v3": {
     "native_formula": "PASS",
@@ -254,5 +269,90 @@
     "user_original_hashes_unchanged": true,
     "evidence": "review/mainline-closeout-20261031/p2/receipts/p2-owned-test-cleanup.json.gz",
     "root_RF_worktree_removed": true
+  },
+  "p1_huali_v2_historical": {
+    "status": "COMPONENT_REVIEW_PASS",
+    "model_posts": 1,
+    "model": "mimo-v2.6-flash",
+    "tokens": 8217,
+    "micro_usd": 1425,
+    "cards": 15,
+    "required_atoms": 12,
+    "generated_prose": false,
+    "source_file_coverage": "partial",
+    "activation_recovery": "PASS",
+    "same_run_zero_POST": true,
+    "cross_run_zero_POST": true,
+    "actual_RF_read": "PASS",
+    "actual_RF_formula": "ENGINEERING_ADOPTION_PASS; full company research OPEN",
+    "evidence": "review/mainline-closeout-20261031/p1/README.md",
+    "scope": "Earlier artifact ec1831; historical review and exact-compat reuse retained"
+  },
+  "p1_berkshire_pre_fix_historical": {
+    "status": "NOT_PROCESSED_PRE_HTTP_SINGLE_REQUEST_CAP",
+    "post": 0,
+    "tokens_bound_basis": "HTTP body74249B+output8192; bound exceeds50000",
+    "mother_budget_exhausted": false,
+    "draft_deferred_cards": 16,
+    "important_remainder_open": true,
+    "historical_normalized_counts": {
+      "admitted": 77,
+      "compiled": 64,
+      "deferred": 13,
+      "important_deferred": [
+        "BRK-04",
+        "BRK-07"
+      ]
+    },
+    "actual_live_counts": {
+      "source_task_rows": 88,
+      "compiled_cards": 72,
+      "deferred_cards": 16,
+      "model_request_tasks": 88,
+      "model_POST": 0,
+      "request_bytes": 74249,
+      "material_bytes": 61266
+    },
+    "count_note": "Old normalized development fixture77/64/13 was overgeneralized as current. Actual frozen live request/selection SHA now distinguishes88/72/16; no history is rewritten."
+  },
+  "p1_verification_only_delta": {
+    "status": "INDEPENDENT_PASS",
+    "changed_generation_dependencies": [
+      "source_cards",
+      "execution_contract"
+    ],
+    "paid_run_signatures_preserved": true,
+    "actual_request_draft_execution_byte_equal": true,
+    "new_model_POST": 0,
+    "non_support_positive_and_forgery_checks": 4,
+    "evidence": "review/mainline-closeout-20261031/p1-current/receipts/independent/source-use-delta-addendum.json.gz"
+  },
+  "p2_actual_v6": {
+    "status": "CURRENT_ARTIFACT_BOUNDED_ENGINEERING_REVIEW_PASS",
+    "same_paid_artifact_sha256": "a466262de5251f0b4e2619eb88f1ba90e8188f5070bb1ea9881a7d5be08b3a45",
+    "input_sha256": "11becbb72eec6c8d2a64d985a44bc7486e558286b8da279a891aa31558b2f8e8",
+    "result_sha256": "d96a7c01add0b2a7d4b88607e7da103b9fee18e00861ed1dbc5524ffd0d7acdb",
+    "snapshot_id": "df5be201383c455e1343f18a6b6b5bb04adb67fd7c3c2ad997a2ac34913c6b46",
+    "independent_checks": 45,
+    "independent_blockers_remaining": 0,
+    "native_formula": "PASS",
+    "formal_snapshot_registry": "PASS",
+    "complete_summary_semantic_provenance": "PASS",
+    "new_model_POST": 0,
+    "new_downloads": 0,
+    "locator_replay_performed": true,
+    "RF_production_head_unchanged": "535604fa468e8a69be44e073dc7e29eacde80cbc",
+    "formal_artifact_repo_path": "revenue-forecast/docs/plans/p2-summary-lineage-20261031/review/v6",
+    "full_company_research": "OPEN; historical IR and conditional analyst scenarios, not accepted current-company research",
+    "evidence": "review/mainline-closeout-20261031/p1-current/receipts/independent/p2-v6-delta.json.gz"
+  },
+  "current_node_reproducibility": {
+    "source_runtime_free_replay": "review/mainline-closeout-20261031/p1-current/replay.py",
+    "RF_runtime_free_replay": "revenue-forecast/docs/plans/p2-summary-lineage-20261031/review/replay.py --case v6",
+    "receipt_bytes_CWP": 522272,
+    "receipt_bytes_RF": 100425,
+    "no_PDF_or_database_archive": true,
+    "full_provider_envelope_retained": false,
+    "retained": "original decoded final JSON/native usage/exact HTTP input/selection/generation/prepared artifact; envelope pin/hash and actual recovery evidence retained"
   }
 }

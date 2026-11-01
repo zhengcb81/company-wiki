@@ -12,8 +12,12 @@ from typing import Any
 
 from company_wiki.source_contract import EvidenceSpan
 from .summary_tasks import SourceSummaryTask, SummaryTaskPlan
+from .reading_context_contract import SUMMARY_SUPPORT_USES
 
 SourceCardScope = tuple[str, tuple[str, ...], tuple[str, ...], tuple[str, ...], str, str]
+SOURCE_CARD_UNAVAILABLE_REASONS = frozenset({"source_not_parsed", "source_table_unresolved"}) | {
+    "source_" + use for use in SUMMARY_SUPPORT_USES if use != "support"
+}
 
 
 @dataclass(frozen=True)

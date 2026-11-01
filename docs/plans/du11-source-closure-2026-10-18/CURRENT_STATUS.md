@@ -1,32 +1,33 @@
 # 当前项目状态 — 2026-11-01
 
-**P0三个CI失败已根修；华利新版真实摘要、缓存恢复及RF实际采用的有界工程验收已通过、并线推送。项目整体仍未完成：当前回到P1 Berkshire长文剩余材料，然后进入P3公司研究循环。** 本页是唯一当前入口，机器状态[CURRENT_STATUS.json](CURRENT_STATUS.json)，接手看[HANDOFF](HANDOFF.md)，执行看[task_plan](task_plan.md)，稳定目标看[MAINLINE_LOOP_GOAL](MAINLINE_LOOP_GOAL.md)。历史不另造当前队列。
+**P0三个CI失败已根修；P1新版华利及Berkshire的有界真实卡片/排名、缓存恢复和P2新版华利RF实际采用已独审通过，正在正常发布当前代码。整个公司研究循环尚未完成。** 唯一入口是本页及[机器状态](CURRENT_STATUS.json)；接手看[HANDOFF](HANDOFF.md)，实施看[task_plan](task_plan.md)，完成条件看[MAINLINE_LOOP_GOAL](MAINLINE_LOOP_GOAL.md)。
 
-| 大节点 | 现在的真实状态 | 不能混作什么 |
+| 节点 | 现在的真实状态 | 尚未签收的范围 |
 |---|---|---|
-| P0 CI延期合同 | 完成，精确CI41247282332绿 | 不是删断言或提高额度 |
-| P1 华利真实源/摘要/恢复 | 组件通过，15原文卡、12业务原子、1次MiMo真实排名；中断及同跨run恢复0重复POST | /5是完整原文卡＋排名，不是生成式自然语言概述或全文完整 |
-| P1 Berkshire长文 | 当前剩余任务；真实入口88任务、72完整卡、16延期、0POST；旧normalized夹具77/64/13另作历史，不相互代签 | 不把准入/发现当模型已消费或借提高限额签收 |
-| P2 华利同artifact native采用 | 有界工程独审通过：完整语义/采用理由/出处进入input、报告、snapshot，实际参数扰动证明进入公式 | 不是完整公司四审或买方预测质量通过 |
-| P3 研究循环 | 未完成：W12新attempt、新公司、固定八家公司及连续三家clean条件 | 不以工程包数量或条件算例替代真实完整研究 |
+| P0 CI延期合同 | 已发布，精确CI41247282332绿 | 不靠删断言/加额度 |
+| P1 新版华利 | 1次MiMo，15完整原文卡/12业务原子，activation及同跨run缓存0重复POST，独审PASS | /5为摘录卡＋排名，不是生成式概述/全文完整 |
+| P1 Berkshire | 1次DeepSeek，88任务/73卡/15延期，10所需业务原子保全；真实恢复/读取独审PASS | 15 unprocessed，全文partial；股东信不是10-K，曝光开发样本不是盲测 |
+| P2 新版华利v6 native采用 | **新a466 artifact**完整t3/出处/理由进入参数、公式、报告、snapshot/registry；45独立检查PASS | 条件算例，不是当前公司买方研究通过 |
+| P3 公司研究循环 | 未完成；本节点发布CI后恢复W12新attempt，再新公司/固定八家 | 不能用工程卡数量替代公司四审及真实研究 |
 
-## 本次实际解决
+## 本轮共因与验收
 
-- P0旧3例在新增前缀观察阶段就耗尽预算，测试误要求lookahead的显式IDs。已覆盖紧凑frontier、真实lookahead和实际消费者；生产逻辑/限额不变。[P0证据](review/mainline-closeout-20261031/p0/README.md)。
-- 华利复合检查点误作单闭包事实、隔离显式intake缺current-open证明已修；真实产物/恢复/RF读取通过。[P1证据](review/mainline-closeout-20261031/p1/README.md)。原失败保留。
-- RF原先只把首段写进native claim，完整内容/理由落在旁收据。已由纯证据DTO持久化完整支持与context，复用既有闭包/投影契约；修好非零小单价显示和操作数原文锚。独审新增兼容/反向引用/投影缺口均修；计算层没有跨层读目录或调用解析器。[P2证据](review/mainline-closeout-20261031/p2/README.md)。
-- RF新增日常测试隐含读取docs夹具而CI不检出；在同样缺文件环境复现，将6个现有夹具按原字节归tests，81例及独审通过。不扩大CI或增加下载。
+- P0旧三例在lookahead前已耗尽，完整延期由frontier0表达；已覆盖真实lookahead及实际消费者，生产限额不变。[证据](review/mainline-closeout-20261031/p0/README.md)。
+- P1旧模型收到88任务、canonical只准72卡，74249B不能在原预算下请求；group发现顺序还挤掉后附的重要业务段。现在同级按真实来源坐标分配，完整support/context只存一次且只发送准入卡；未发送项继续unprocessed。Berkshire实际39520B/预留47840小于既有50000，未加额度、未截原文、未写公司特判。[当前独审/真实运行](review/mainline-closeout-20261031/p1-current/README.md)。
+- 可读原文与可作事实支持被一个execution validator混淆，混合context_only/unresolved＋support会失败。已由来源generation-reason唯一判定，正例与伪造admitted负例通过。其后两个验证依赖变化由独立免费增补签收；两份已付费HTTP、draft及每项execution逐字相同，旧运行签名不重写。
+- RF先前完整摘要只在旁收据、正式claim仅首段，现已由纯证据DTO持久完整支持/context及采用理由，计算层无物理源IO。非零小单价显示、操作数锚、投影与反向引用也已根修。新版v6确切artifact再次进入实际公式；正式报告仅在RF仓，CWP不存投资结论。[先前P2根修](review/mainline-closeout-20261031/p2/README.md)。
+- RF日常测试曾隐含读CI不检出的docs夹具，6原字节夹具归tests后同环境81P，未加CI/下载。当前P1测试：受影响域90P/3旧presentation断言，保持拒绝要求适配后6目标绿；source-use域53P，最终新文件23P，Ruff绿。正常发布/精确CI尚待本次实查，不拿旧绿代签。
 
-## 发布与资源
+## 发布、资源与恢复
 
-CWP已[acf11bb2](https://github.com/zhengcb81/company-wiki/commit/acf11bb29570a5a306f1a45d63909d815f6714c0)，[CI41255499232](https://github.com/zhengcb81/company-wiki/actions/runs/41255499232)绿；RF已[535604fa](https://github.com/zhengcb81/revenue-forecast/commit/535604fa468e8a69be44e073dc7e29eacde80cbc)，[精确CI41254752622](https://github.com/zhengcb81/revenue-forecast/actions/runs/41254752622)绿，正常pre-push679P＋36subtests（1skip）。本次PWF文档发布以Git历史为准，不把尚未生成的文档提交SHA写成已验真。
+本轮前CWP master/远端为2b5b89c6；最新实际已完成基线[CI41255499232](https://github.com/zhengcb81/company-wiki/actions/runs/41255499232)绿（acf11bb2），2b5为文档提交未触发CI。当前代码发布后更新精确SHA/CI。RF生产main535604fa、[CI41254752622](https://github.com/zhengcb81/revenue-forecast/actions/runs/41254752622)绿；v6仅新增验收材料/离线重放。三逻辑技能入口/2物理目标定点运行代码已同步，重复零写、3新进程实际通过，无新RF运行代码需重部署。
 
-RF三逻辑技能入口已定点同步8运行文件；.claude指向.agents，只有2物理目标，实际16处写入，重复零写；3个新进程实际复验。原件不改；本轮ROOT RF临时工区已回收（无可靠体积前测，不估算释放量）；新下载年报/全篇规范化临时副本已删除4662644B，保留62个实际原文span与收据；没有整库恢复演练。
+配置累计10M tokens/$20；当前母账1,849,869tokens/$0.739510，历史unknown保留。最新两次总14094tokens/$0.005271，另早期华利8217/$0.001425已含其中；计量是费用估计而非发票。预算/逐材料许可没有阻塞，原生goal active。门禁简化及存储虚拟接口主要工程已完成，当前问题是内容/采用/研究质量。
 
-原生目标已由get_goal确认active。预算/模型沿用配置：累计10M tokens/$20，母账1,835,775tokens/$0.734239含unknown；本次唯一付费仍MiMo8217tokens/$0.001425，P2新增0。没有逐材料许可/签收待办。旧目标正文2M不替代实际配置。门禁精简和来源虚拟接口主要工程已完成，剩余问题是内容/采用/研究质量，不是目录权限。
+两份运行和RF v6均有禁止网络的离线重放；收据约623KB，没有PDF或整库归档。完整provider envelope临时清除后未留，仅保留decoded最终回复、native用量、pin/hash和当时实际恢复证据，不冒作可重建envelope。测试临时湖已清，用户原件/config不改；此前新下载年报及全规范化已清4662644B，仅保留62个实际原文span。本轮不恢复整库，不再扩包。
 
 ## 唯一下一步
 
-P1 Berkshire有界续批根修：冻结原任务及字节检查点，用TDD区分源准入、canonical卡编译、实际模型处理与未处理任务，沿用AUTO预算/缓存/恢复，不靠加额度或公司特判。独审与真实有限批次后，再继续P3。W21 canonicalC2真实增强/对齐、跨市场新样本和US RPO按相关节点承接，不冒作已通过。
+完成当前P1根修与P2新版验收材料的正常提交/推送、确认精确CI，再恢复P3药明康德W12新attempt。W21 canonicalC2增强/严格成员对齐、长文余项、跨市场新样本/US RPO在相关P3责任中承接，不能用nativefallback或此股东信代签。
 
-不再扩施工包。Dayu/IQS/Dashboard及外来WIP不动；RF三份assurance定时产物、本仓hook mode差异均保留。外包当前状态只查[PACKAGE_STATUS](PACKAGE_STATUS.md)，旧当前/暂停描述只作历史。
+Dayu/IQS/Dashboard不动。RF三份assurance定时产物和CWP hook mode差异为外来WIP；保留不暂存/恢复。外包只看[PACKAGE_STATUS](PACKAGE_STATUS.md)，不再把旧READY当新待交付。

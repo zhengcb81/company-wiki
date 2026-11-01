@@ -36,3 +36,17 @@ RF已0559d75c根修、535604fa测试材料归属修复并main/远端同步，正
 本地并线后发现Windows文本检出CRLF而已发布blob为正确LF，影响技术包物理SHA但无内容改变。仅P2包的md/json固定eol=lf；8文件实际autocrlf=true临时检出逐SHA通过，临时目录已恢复，不改全局Git配置/原始收据。
 
 收口检查点：CWP acf11bb2精确CI41255499232成功；RF535604fa CI成功，已完成代码主线与全局部署。ROOT临时RF工区Git已注销但删除返回255，核对仅自有残留后以固定绝对路径PowerShell清完；没有可靠前测体积，不声称额外释放数。下一节点只读诊断发现真实Berkshire88/72/16不同于旧normalized77/64/13，已分开计数并冻结请求范围/字节实验；尚未改该生产路径、0新增POST/解析/下载。
+
+P1余项候选已TDD实施：正确RED5F/4P（更早3个trim夹具错误不算业务RED），新排序/compact18例绿。93受影响短域90P/3F，3F仅旧测试读取dict型material/期望assert异常，按新表格式和具名ValueError保持拒绝要求，6目标绿；observer的Q/A夹具group ID先不符合独立oracle，改成真实成员hash后9例绿。Ruff绿。实际HTTP owner按当前DeepSeek配置序列化39520B、8192输出+128开销=47840，未提高本批50000；73完整卡10/10所需业务通过初次compiled-scope检查，未发15仍保留unprocessed，不冒全文完整。
+
+旧已付费华利精确artifact兼容读在当前代码通过，0POST/0新selection/0下载，必要定位回放，临时catalog清除且受保护文件未变。真实DeepSeek新Berkshire运行已启动，激活恢复已出现收据；最终结果/费用/同跨run/独审待完整实查，不提前写PASS。
+
+## 2026-11-01 — P1新版真实运行、恢复与RF v6独审通过
+
+DeepSeek真实Berkshire1POST，9342+1122=10464tokens/$0.004611，88源任务/73完整卡/15明确延期，10所需业务原子全保。MiMo新版华利1POST，3304+326=3630/$0.000660，15卡/12原子。两份activation中断后恢复、同/跨run均0重复POST，RF公共来源/叙述实际读取通过；旧精确华利artifact兼容仍0POST。实际请求39520/12849B，固定单次50000内，所有限额不变。独审已逐卡核实际支持/context和请求/响应/费用，完整长文仍partial。母账1,849,869/$0.739510，unknown原样保留。
+
+source-use后续共享validator缺陷正确TDD2F→2P，53受影响例绿；独立免费重算两份HTTP、draft、execution完全一致，仅两个验证依赖SHA变化，旧付费签名不覆盖。伪造负例新增时deepcopy(mappingproxy)造成2夹具错误，修为owner plain转换；最终两新文件23P/3.23s，Ruff绿。不是删断言/权限放宽。
+
+RF正式v6绑定新a466 artifact、完整t3及理由，实际参数/公式/报告/snapshot/registry，独立stdlib45检查PASS；与v5数值相同，无新POST/下载，必要定位回放实执行。正式产物只放RF所属PWF，CWP仅技术审计；生产六模块不变，不重复全局部署。旧已删PDF/全规范化未恢复，62用到span/小新浪缓存复用。
+
+归档CWP522272B＋RF100425B gzip原始收据，未复制PDF/整库。首次归档保留长run文件名触发Windows路径长度限制，改短别名而不改原字节；compat原收据名修正，portable replay先按原配置output budget绑定及实际execution路径修正，再两样本全部免费通过。RF v6离线生产重放也通过，临时registry清除。原provider完整envelope未保留，decoded回复/native用量及实际pin/恢复证据保留，不夸大可重建范围。现正常提交/推送/精确CI进行中，未提前写绿；公司研究/P3继续OPEN。

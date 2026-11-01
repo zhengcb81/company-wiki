@@ -1740,7 +1740,7 @@ def loopback_draft(material, *, invalid_summary=False):
     """Synthetic source copy; protocol/failed-output transport, never quality proof."""
     if material["schema_version"] == "narrative-model-request/6":
         # Ranking-only v5 never copies body, numbers, prose or source aliases.
-        return {"decisions": [{"task": task["key"],
+        return {"decisions": [{"task": task[0] if isinstance(task, list) else task["key"],
             "priority": "invalid" if invalid_summary else "normal",
             "disposition": "consider"} for task in material["material"]["tasks"]]}
     from company_wiki.automation.narrative_summary_protocols import scoped_protocol_for_request

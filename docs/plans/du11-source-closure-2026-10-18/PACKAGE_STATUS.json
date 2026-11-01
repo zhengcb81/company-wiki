@@ -88,8 +88,10 @@
       "requires_author_delivery_before_mainline": false,
       "whole_company_acceptance": false,
       "root_product_followup": {
-        "status": "HUALI_M8_BOUNDED_NATIVE_ADOPTION_PASS_FULL_COMPANY_OPEN",
-        "evidence": "review/mainline-closeout-20261031/p2/README.md"
+        "status": "CURRENT_HUALI_V6_BOUNDED_NATIVE_ADOPTION_PASS_FULL_COMPANY_OPEN",
+        "evidence": "review/mainline-closeout-20261031/p1-current/README.md",
+        "independent_checks": 45,
+        "previous_root_evidence": "review/mainline-closeout-20261031/p2/README.md"
       }
     },
     {

@@ -4,7 +4,7 @@
 
 ## Next Step
 
-P1 Berkshire长文有限续批：冻结原任务、canonical完整卡和请求字节合同，先写根因测试，再复用既有AUTO预算/缓存/恢复接线。P0及华利P1/P2工程链已独审、并线、精确CI绿；公司买方研究仍OPEN，不再扩施工包或提高限额。
+完成当前P1根修及两份真实运行/P2 v6验收包的正常提交、推送和精确CI确认，然后恢复P3药明康德W12新attempt；不再扩包。
 
 ## P0：恢复准确、轻量的回归保护
 
@@ -18,13 +18,21 @@ P1 Berkshire长文有限续批：冻结原任务、canonical完整卡和请求�
 ## P1：M8真实来源→正式摘要/排名→恢复
 
 - 固定当前版本与已有两份来源/检查点，按`config/models.yaml`及实际provider配置，不凭记忆换模型。
-- 从正式生产入口做有界/5运行，保存真实请求/回复/版本/累计使用。先华利15任务；Berkshire真实PDF首轮16延期（旧normalized夹具13）的材料用现有预算机制明确续批/未完成，不提高上限或称77全消费。
-- 实际首轮88任务仅72卡可入canonical，HTTP却仍带全部88任务、74249B；先TDD修准入/编译/实际模型可见范围的错位，再接有限续批。只剔除未编译任务的离线形状仍约61160B、保守69480tokens，不能当已解决；32完整卡形状约31835B/40155tokens，仅是设计可行性，不是已实施/付费通过。不得截断support/context、提高上限、用旧gold代签实际selection，或制造另一套任务库。
+- 从正式生产入口做有界/5运行，保存真实请求/回复/版本/累计使用。华利15任务及Berkshire实际88任务/73卡/15明确未处理已完成本节点有界验收；不提高上限或称全文完整。旧normalized77/64/13、首次live88/72/16只作历史。
+- 此前88源/72卡/实际模型88任务错位已经TDD根修；当前真实请求73卡/39520B/预留47840小于50000，10所需业务原子保全，15余项仍未处理。不得称全部模型消费、全文完整或靠截断support/context、加预算、新任务库解决余项。
 - 解决实际暴露的源遗漏/限定/归属根因；区分source quote能力、确定性编译和模型真正处理。/5排名不冒作生成式自然语言摘要。
 - 验activation、中断后恢复、同run及跨run复用；实际POST计数/费用不能重复。历史响应不覆盖。
 - 一个大节点独立审实际语义、支持/context/否定/主体/时期，以及缓存恢复。隔离测试前后恢复；不复制整库、不反复重读整批PDF。
 - 完成标准：同版本正式artifact及原始回复可复查，重要材料完成或明确未完成，恢复不重复付费，独审无主要问题。
 - 合并处理相关欠账：W21 canonicalC2真实增强及严格成员对齐、US监管PDF/HK新覆盖、长文前沿公平性。只在受影响路径有真实缺口时接线，不把旧环境包或nativefallback当内容验收。
+
+### P1当前有界节点（已独审，发布进行中）
+
+- A COMPLETE：正确RED5F证明发现顺序/正式卡与模型scope错位；来源优先级后用同源实际support坐标分配，未知槽位不挪、context不抢优先，完整卡不截。
+- B COMPLETE：内部版本化compact ranking仅发送canonical准入卡，原文fragment/提示各写一次，完整源策略仍绑定generation，observer独立验每个字段/成员。仅v5 sourcequote路径改变，其他生成式协议不动；模型不能删事实，未发任务仍unprocessed。
+- C BOUNDED_REVIEW_PASS：真实DeepSeek Berkshire39520B/47840预留，73完整卡保全10项所需业务；MiMo新版华利15卡/12原子。各1POST，activation/同跨run缓存及RF实际读取通过；旧精确artifact兼容0POST。Berkshire15余项明确未处理，全文partial，曝光样本非盲测，不据advisory低分删t78/t80。
+- 共享用途根修：execution复用source generation reason，context_only/unresolved可读但不可作事实。真正2F→2P及53短域绿；验证依赖两处delta独审免费重放，原请求/draft/execution完全相同，旧付费签名保留。最终23新例绿，夹具mappingproxy复制错误保留为测试错误而非产品RED。
+- 当前验收与可复现命令只看review/mainline-closeout-20261031/p1-current；RF新版v6独审45断言通过，旧v5不代签新产物。下一步正常发布/精确CI，随后继续P3，不为穷尽全文再加额度或新队列。
 
 ## P2：同一新artifact真正进入RF
 

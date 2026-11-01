@@ -276,6 +276,7 @@ def gold_observation(gold: dict, selected, envelope: dict) -> dict:
 
     view = None
     sent_keys = frozenset()
+    compiled_rank_scope = False
     from company_wiki.automation.narrative_summary_protocols import scoped_protocol_for_request
     protocol = scoped_protocol_for_request(envelope['schema_version'])
     if protocol is not None or envelope['schema_version'] == 'narrative-model-request/6':
@@ -287,8 +288,16 @@ def gold_observation(gold: dict, selected, envelope: dict) -> dict:
         max_claims = protocol.plan_max_claims if protocol is not None else max(1,len(selected.evidence_spans)*2)
         view = compile_scoped_model_view(selected, max_claims=max_claims)
         from company_wiki.automation.narrative_model_scoped import scoped_model_material
-        full_material = scoped_model_material(view,protocol) if protocol is not None else view.to_model_dict()
-        sent_keys = frozenset(row["key"] for row in envelope["material"]["tasks"])
+        compact_rank = (protocol is None and envelope['material'].get('schema_version')
+                        == 'source-extractive-ranking-view/1')
+        if compact_rank:
+            from .rank_material_observation import observed_rank_keys
+            sent_keys = observed_rank_keys(selected, envelope, view)
+            compiled_rank_scope = True
+            full_material = envelope['material']
+        else:
+            full_material = scoped_model_material(view,protocol) if protocol is not None else view.to_model_dict()
+            sent_keys = frozenset(row["key"] for row in envelope["material"]["tasks"])
         if envelope["material"] != full_material:
             # The fidelity protocol sends all admitted tasks and has no paid
             # subset-repair path. Do not bless a dropped task as a retry.
@@ -387,6 +396,9 @@ def gold_observation(gold: dict, selected, envelope: dict) -> dict:
         "scope", "facts", "required_count", "supported_count", "missing_ids")}
     if view is not None:
         observation["sent_tasks"] = _sent_task_gold(required, selected, view, sent_keys)
+        if compiled_rank_scope:
+            observation['sent_tasks'].update(request_scope='compiled_source_cards',
+                                              canonical_admission_verified=True)
     return observation
 
 

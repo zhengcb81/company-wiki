@@ -71,8 +71,12 @@ def test_gold_observer_validates_the_actual_scoped_request_and_rejects_changed_m
     assert report["evidence_characters"] == sum(len(span.raw_text) for span in source.evidence_spans)
     changed = deepcopy(envelope)
     changed["material"]["tasks"] = []
-    with pytest.raises(AssertionError):
-        gold_observation(gold, source, changed)
+    if version == VERSION:
+        with pytest.raises(ValueError, match="PHASE_C_COMPACT_RANK_SCOPE_INVALID"):
+            gold_observation(gold, source, changed)
+    else:
+        with pytest.raises(AssertionError):
+            gold_observation(gold, source, changed)
 
 
 @pytest.mark.parametrize('version', ['reading-model-input/6', 'reading-model-input/7'])
@@ -237,7 +241,8 @@ def test_v5_loopback_returns_only_finite_known_id_decisions_and_no_source_prose(
         set(row) == {"task", "priority", "disposition"} for row in value["decisions"]
     )
     assert {row["task"] for row in value["decisions"]} <= {
-        row["key"] for row in material["material"]["tasks"]
+        row[material["material"]["task_columns"].index("key")]
+        for row in material["material"]["tasks"]
     }
     assert not any(
         span.raw_text in canonical_json(value) for span in source.evidence_spans

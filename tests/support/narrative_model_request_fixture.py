@@ -9,7 +9,8 @@ from company_wiki.source_contract import EvidenceCoordinates, EvidenceSpan, sour
 def response_draft(data):
     """Fake provider output, built independently of any prompt example."""
     if data['schema_version'] == 'narrative-model-request/6':
-        return {'decisions': [{'task': task['key'], 'priority': 'normal', 'disposition': 'consider'}
+        return {'decisions': [{'task': task[0] if isinstance(task, list) else task['key'],
+                              'priority': 'normal', 'disposition': 'consider'}
                               for task in data['material']['tasks']]}
     if data['schema_version'] == 'narrative-model-request/5':
         from support.scoped_model_response import source_grounded_scoped_reply
