@@ -1,10 +1,18 @@
 """ROOT reception counterexamples for W22's declared path/error contract."""
 import os
+import shutil
 from pathlib import Path
 
 import pytest
 
 from company_wiki._atomic_file import atomic_output
+from support.gate_scratch_fixture import short_gate_root
+
+
+@pytest.fixture
+def gate_root(tmp_path_factory):
+    with short_gate_root(tmp_path_factory) as root:
+        yield root
 
 
 def _extended(path):
@@ -19,29 +27,41 @@ def _extended(path):
 @pytest.mark.skipif(os.name != "nt", reason="native Windows path boundary")
 def test_short_relative_target_in_deep_cwd(tmp_path, monkeypatch):
     parent = tmp_path / ("d" * (240 - len(str(tmp_path)) - 1))
-    os.makedirs(_extended(parent))
-    target = parent / ("r" * 30 + ".json")
-    Path(_extended(target)).write_bytes(b"original")
-    monkeypatch.chdir(parent)
-    with atomic_output(Path(target.name)) as stream:
-        stream.write(b"replacement")
-    assert Path(_extended(target)).read_bytes() == b"replacement"
-    assert sorted(os.listdir(_extended(parent))) == [target.name]
+    try:
+        os.makedirs(_extended(parent))
+        target = parent / ("r" * 30 + ".json")
+        Path(_extended(target)).write_bytes(b"original")
+        with monkeypatch.context() as patch:
+            patch.chdir(parent)
+            with atomic_output(Path(target.name)) as stream:
+                stream.write(b"replacement")
+            assert Path(_extended(target)).read_bytes() == b"replacement"
+            assert sorted(os.listdir(_extended(parent))) == [target.name]
+    finally:
+        # Restore cwd before removing the explicit long-path fixture.
+        if os.path.exists(_extended(parent)):
+            shutil.rmtree(_extended(parent))
+        assert not os.path.exists(_extended(parent))
 
 
 @pytest.mark.skipif(os.name != "nt", reason="Win32 lengths count UTF-16 units")
 def test_non_bmp_parent_uses_win32_length_budget(tmp_path):
     root_units = len(str(tmp_path).encode("utf-16-le")) // 2
     parent = tmp_path / ("\U0001f600" * ((240 - root_units - 1) // 2))
-    os.makedirs(_extended(parent))
-    target = parent / ("u" * 30 + ".json")
-    assert len(str(target)) < 259
-    assert len(str(target).encode("utf-16-le")) // 2 > 259
-    Path(_extended(target)).write_bytes(b"original")
-    with atomic_output(target) as stream:
-        stream.write(b"replacement")
-    assert Path(_extended(target)).read_bytes() == b"replacement"
-    assert sorted(os.listdir(_extended(parent))) == [target.name]
+    try:
+        os.makedirs(_extended(parent))
+        target = parent / ("u" * 30 + ".json")
+        assert len(str(target)) < 259
+        assert len(str(target).encode("utf-16-le")) // 2 > 259
+        Path(_extended(target)).write_bytes(b"original")
+        with atomic_output(target) as stream:
+            stream.write(b"replacement")
+        assert Path(_extended(target)).read_bytes() == b"replacement"
+        assert sorted(os.listdir(_extended(parent))) == [target.name]
+    finally:
+        if os.path.exists(_extended(parent)):
+            shutil.rmtree(_extended(parent))
+        assert not os.path.exists(_extended(parent))
 
 
 def test_cleanup_preserves_exception_without_add_note(tmp_path, monkeypatch):
@@ -118,9 +138,9 @@ def test_gate_rejects_over_budget_candidate_before_probe(monkeypatch):
 
 
 @pytest.mark.skipif(os.name != "nt", reason="existing Windows scratch budget")
-def test_gate_uses_short_candidate_after_over_budget(tmp_path_factory):
+def test_gate_uses_short_candidate_after_over_budget(gate_root):
     from tools import pre_push_gate as gate
-    short = tmp_path_factory.mktemp("s")
+    short = gate_root
     long = short / "long-but-still-an-existing-writable-directory"
     long.mkdir()
     scratch = gate._open_scratch([str(long), str(short)])
@@ -146,9 +166,9 @@ def test_gate_reports_no_short_candidate():
 
 
 @pytest.mark.skipif(os.name != "nt", reason="existing Windows scratch budget")
-def test_gate_accepts_exact_budget(tmp_path_factory):
+def test_gate_accepts_exact_budget(gate_root):
     from tools import pre_push_gate as gate
-    base = tmp_path_factory.getbasetemp()
+    base = gate_root
     padding = 60 - 14 - gate._scratch_path_units(str(base)) - 1
     assert padding > 0, "reception basetemp must leave room for the exact boundary"
     root = base / ("b" * padding)
@@ -163,9 +183,9 @@ def test_gate_accepts_exact_budget(tmp_path_factory):
 
 @pytest.mark.skipif(os.name != "nt", reason="existing Windows scratch budget")
 def test_gate_cleans_actual_scratch_if_name_reserve_changes(
-        tmp_path_factory, monkeypatch):
+        gate_root, monkeypatch):
     from tools import pre_push_gate as gate
-    root = tmp_path_factory.mktemp("s")
+    root = gate_root
     real_directory = gate.tempfile.TemporaryDirectory
 
     def longer_directory(*, prefix, dir):

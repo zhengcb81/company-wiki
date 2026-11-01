@@ -56,3 +56,5 @@ RF正式v6绑定新a466 artifact、完整t3及理由，实际参数/公式/报�
 93f561ef已正常推master，pre-push167P/38.45s，但精确CI41261403683失败新3例。公开annotations直接读取，不提取凭证；本机按原节点3F/6.66s，发现allocator版本断言和/5旧HTTP捕获未迁移。当前只修版本合同和实际静态影响漏检根因，不重跑付费/整篇PDF。W12 r1-remediation-03沿原2026-10-21截止日冻结，新executor仅免费preflight；CI绿前不进入付费/正式验收。初版归档补充因长短重复response别名StopIteration已定点去重，未改原回复；7个有日志绑定自有测试目录已清16045737逻辑字节，未绑定目录保留。
 
 CI版本迁移及选测共因已集中独审PASS/0OPEN：54源协议例绿；选测6F1P→7P；相关域185P/旧策略1F，真实config-only未知范围便携单例1P/24.33s。旧fixture不改，独立14文件SHA及正反控制已封存。新known静态图probe10.64s（旧36.88s），32/352partial，旧原子协议未在32中，绝不宣称快速hook保证全量。免费重放真实请求/draft/execution不变，旧付费签名不覆盖。候选正常发布/精确CI待实查；W12免费复用/原页研究继续，隔离register丢旧元数据是内部接线缺口，不冒作正式RF已跑通。
+
+正常push fb2336c1在本机挡下9个Windows嵌套TEMP夹具失败，实际642P/9F120.29s，未推远端；共因是外层45虽合法而子candidate超过60，另extended测试缺自清理。三测试/helper统一真实测量、bounded写probe、cwd恢复及extended finally；初复18P/旧排序1F，最终同45-unit外层19P/13.28s、外层清除，Ruff和独审增补0OPEN。生产src/tools/CI/60/180/32不改，下一正常提交推送后再查精确CI。

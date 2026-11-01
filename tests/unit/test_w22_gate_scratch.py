@@ -13,13 +13,13 @@ from pathlib import Path
 import pytest
 
 from tools import pre_push_gate as gate
+from support.gate_scratch_fixture import short_gate_root
 
 
 @pytest.fixture
 def tmp_path(tmp_path_factory):
-    # Keep the gate's own real-child fixtures inside its existing Windows
-    # 60-unit scratch budget; descriptive pytest node names are too long.
-    return tmp_path_factory.mktemp("g")
+    with short_gate_root(tmp_path_factory) as root:
+        yield root
 
 
 def test_candidate_roots_are_deduped_length_ordered_and_explainable(
@@ -42,8 +42,10 @@ def test_without_temp_env_the_standard_tempdir_is_a_candidate(
         monkeypatch.delenv(name, raising=False)
     monkeypatch.setattr(gate, "PROJECT_ROOT", tmp_path / "checkout")
     candidates = gate._scratch_candidate_roots()
-    assert candidates[0] == tempfile.gettempdir()
-    assert str(tmp_path / "checkout") in candidates
+    expected = {tempfile.gettempdir(), str(tmp_path / 'checkout')}
+    # The contract orders resolved lengths; the host temp need not be shortest.
+    assert candidates == sorted(expected, key=lambda path: (
+        len(path.encode('utf-16-le')) // 2 if os.name == 'nt' else len(path), path))
 
 
 def test_unwritable_candidate_falls_back_and_records_the_attempt(tmp_path):
@@ -93,6 +95,7 @@ def test_all_candidates_unwritable_reports_every_attempt(tmp_path):
         gate._open_scratch([str(broken_a), str(broken_b)])
     message = str(excinfo.value)
     assert "missing-a" in message and "missing-b" in message
+    assert 'candidate path too deep' not in message, 'Reach the intended writability probe'
 
 
 def test_pytest_gate_isolates_child_temp_env_inside_the_owned_scratch(

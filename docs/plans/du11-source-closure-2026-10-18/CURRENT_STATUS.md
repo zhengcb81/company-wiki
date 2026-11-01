@@ -35,3 +35,5 @@ Dayu/IQS/Dashboard不动。RF三份assurance定时产物和CWP hook mode差异�
 选测共因：不确定范围原来把已知消费者一并丢掉。候选保留32个changed/最近静态consumer，仍一进程180秒、固定smoke不扩、远端CI不改；本次旧push范围10.64秒选图（此前36.88秒），其余明确延期。它仅部分覆盖，不能保证旧3例都被快速hook抓到，原子协议旧范围仍在32外；当前已修改测试会优先进入。
 
 版本合同/选测候选已独审0OPEN，真本地Git正反E2E与Python3.10便携夹具单例通过，见[收口证据](review/mainline-closeout-20261031/p1-ci-repair/README.md)。新版发布精确CI仍待观察，不提前写绿。
+
+正常push已在本机实际拦住9个旧Windows测试夹具宿主假设（642P/9F120s），fb2336c1暂仅本地；测量式共用夹具及长路径自清理已19P/13.28s并独审通过。远端未前进，新正常push后才能更新CI结论。

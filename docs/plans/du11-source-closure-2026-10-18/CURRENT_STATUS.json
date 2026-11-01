@@ -10,7 +10,9 @@
   "last_code_commit": "93f561ef520e257bec11e3b7aa27ac16267c2203",
   "verified_publication_before_docs": {
     "local_branch": "master",
-    "local_and_remote_head": "2b5b89c68127cd0c51825788944dccb62c6b598d"
+    "local_head": "fb2336c1c9035bfde78a3aeae1c957bc7de00060",
+    "remote_head": "93f561ef520e257bec11e3b7aa27ac16267c2203",
+    "local_unpublished_commits": 1
   },
   "code_ci": {
     "id": 41261403683,
@@ -94,11 +96,7 @@
   "handoff": "HANDOFF.md",
   "goal_definition": "MAINLINE_LOOP_GOAL.md",
   "history_index": "HISTORY.md",
-  "own_uncommitted_runtime": [
-    "src/company_wiki/automation/narrative_model_extractive.py",
-    "tools/changed_unit_tests.py",
-    "tools/pre_push_gate.py"
-  ],
+  "own_uncommitted_runtime": [],
   "foreign_wip_preserved": [
     ".githooks/pre-push mode-only; not ours"
   ],
@@ -376,7 +374,7 @@
     "no_PDF_or_database_archive": true,
     "full_provider_envelope_retained": false,
     "retained": "original decoded final JSON/native usage/exact HTTP input/selection/generation/prepared artifact; envelope pin/hash and actual recovery evidence retained",
-    "CI_repair_receipt_bytes_CWP": 38842
+    "CI_repair_receipt_bytes_CWP": 64624
   },
   "last_successful_CWP_ci_baseline": {
     "id": 41255499232,
@@ -405,7 +403,15 @@
       "limitation": "Retains source_priority but atomic_summary_recipe is outside old-range first32. This is partial improvement, not guarantee all3old cases caught locally. Current changed test files get priority0."
     },
     "independent_open_findings": 0,
-    "evidence": "review/mainline-closeout-20261031/p1-ci-repair/README.md"
+    "evidence": "review/mainline-closeout-20261031/p1-ci-repair/README.md",
+    "nested_Windows_delta": {
+      "status": "INDEPENDENT_PASS_0_OPEN_NORMAL_PUSH_PENDING",
+      "first_push": "642P9F/120.29s; normal hook rejected, no remote advance",
+      "scope": "test-only measured roots + exact sorted candidate oracle + self-cleaning extended paths",
+      "final_nested": "19P13.28s at real45UTF16 outer root; wrapper17.91s; outer removed",
+      "production_limits_changed": false,
+      "production_src_tools_CI_delta_since_fb": false
+    }
   },
   "p3_current_attempt": {
     "run_id": "r1-20261021-cn-wuxi-apptec",
@@ -422,5 +428,11 @@
       "19selected originalpages/3imagepages read free viaSourceReader, no rawcopy; future/period/unit scopes remain research prep not modeluse",
       "New scratch native-register preserves H1 manifest, but annual2025 loses old verified identity/publication metadata and local_prepare blocks; internal source-reuse/setup seam, not provider entitlement, ROOT responsibility"
     ]
-  }
+  },
+  "local_unpublished_head": "fb2336c1c9035bfde78a3aeae1c957bc7de00060",
+  "own_uncommitted_tests": [
+    "tests/support/gate_scratch_fixture.py",
+    "tests/unit/test_w22_gate_scratch.py",
+    "tests/unit/test_w22_reception_regressions.py"
+  ]
 }
