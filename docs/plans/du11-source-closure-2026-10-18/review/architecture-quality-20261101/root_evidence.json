@@ -1,0 +1,153 @@
+{
+  "scope": "CWP current src AST inventory; synthetic checkers; two legacy --help probes",
+  "not_proven": [
+    "runtime throughput",
+    "actual production stale cache",
+    "all dynamic import edges",
+    "whole sibling repository quality"
+  ],
+  "inventory": {
+    "files": 408,
+    "groups": {
+      "package_root": {
+        "files": 27,
+        "lines": 5955
+      },
+      "automation": {
+        "files": 61,
+        "lines": 22744
+      },
+      "document_normalization": {
+        "files": 27,
+        "lines": 8980
+      },
+      "document_understanding": {
+        "files": 73,
+        "lines": 25041
+      },
+      "parser_adapters": {
+        "files": 4,
+        "lines": 1021
+      },
+      "source_catalog": {
+        "files": 204,
+        "lines": 68454
+      },
+      "source_contract": {
+        "files": 12,
+        "lines": 3209
+      }
+    },
+    "syntax_errors": [],
+    "largest_files": [
+      {
+        "path": "src/company_wiki/source_catalog/narrative_evidence.py",
+        "lines": 2886
+      },
+      {
+        "path": "src/company_wiki/automation/narrative_batch.py",
+        "lines": 2413
+      },
+      {
+        "path": "src/company_wiki/automation/narrative_contracts.py",
+        "lines": 2301
+      },
+      {
+        "path": "src/company_wiki/source_catalog/resolver.py",
+        "lines": 2212
+      },
+      {
+        "path": "src/company_wiki/source_catalog/scanner.py",
+        "lines": 2211
+      },
+      {
+        "path": "src/company_wiki/automation/store.py",
+        "lines": 2081
+      },
+      {
+        "path": "src/company_wiki/source_catalog/narrative_reading.py",
+        "lines": 1801
+      },
+      {
+        "path": "src/company_wiki/source_catalog/normalizer.py",
+        "lines": 1695
+      },
+      {
+        "path": "src/company_wiki/source_catalog/store.py",
+        "lines": 1660
+      },
+      {
+        "path": "src/company_wiki/source_catalog/cli.py",
+        "lines": 1410
+      },
+      {
+        "path": "src/company_wiki/document_understanding/profiles/signals.py",
+        "lines": 1393
+      },
+      {
+        "path": "src/company_wiki/document_normalization/office_table_structure.py",
+        "lines": 1376
+      }
+    ]
+  },
+  "checker_counterexamples": {
+    "uncovered_research_module_not_in_denylist": {
+      "ok": true,
+      "violations": []
+    },
+    "named_prohibited_qualified_import_false_negative": {
+      "ok": true,
+      "violations": []
+    },
+    "initializer_false_negative": {
+      "ok": true,
+      "violations": []
+    },
+    "comment_false_positive": {
+      "ok": false,
+      "violations": [
+        "adapter.py:1:auto_synthesis"
+      ]
+    },
+    "unused_content_checker_unconditional_success": {
+      "ok": true,
+      "violations": []
+    }
+  },
+  "legacy_cli_help": {
+    "copy_docs.py": {
+      "returncode": 0,
+      "help_visible": true,
+      "explicit_retirement_guard_present": false,
+      "existing_writer_inventory_regex_detects": false,
+      "executed_scope": "argparse help only; no copy or cleanup executed"
+    },
+    "clean_watermarks.py": {
+      "returncode": 0,
+      "help_visible": true,
+      "explicit_retirement_guard_present": false,
+      "existing_writer_inventory_regex_detects": false,
+      "executed_scope": "argparse help only; no copy or cleanup executed"
+    }
+  },
+  "cleanup": {
+    "synthetic_temp_tree_removed": true,
+    "production_writes": 0,
+    "models": 0,
+    "downloads": 0,
+    "originals_changed": 0
+  },
+  "legacy_explicit_v2_preview": {
+    "None": {
+      "blocked": true,
+      "reason": "production dry shadow with v2 refused: two consecutive shadow diff=0 rounds required (FC-305 gate)"
+    },
+    "1": {
+      "blocked": true,
+      "reason": "production dry shadow with v2 refused: two consecutive shadow diff=0 rounds required (FC-305 gate)"
+    },
+    "2": {
+      "preview_reached": true
+    }
+  }
+}

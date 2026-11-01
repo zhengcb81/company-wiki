@@ -10,6 +10,15 @@
 
 compact-frontier/lookahead、消费者和Windows嵌套夹具已根修、独审、正常发布及精确CI绿。保持轻量pre-commit/有界pre-push；仅新行为或失败需要新增回归，不重跑超时整仓或删重要断言换绿。
 
+## 全模块代码质量补充 — 审查完成，整改待恢复
+
+[2026-11-01审查](review/architecture-quality-20261101/README.md)和[实施细则](review/architecture-quality-20261101/implementation.md)是本计划质量责任的补充，不另立目标。408个源文件结构清单＋关键链详读＋三独立分工，14项归并（1P1/8P2/5P3）；不是逐行全仓功能验收。
+
+- 先在原P3来源修复中合并Q01陌生业务准入、Q02阅读recipe/缓存指纹，沿原R4 source owner根修，不加公司词库/额度。
+- 存储查询、预算归属、CAS/legacy工具、跨层合同和边界测试按细则B；StockWiki输出流限额归其transport，CWP不跨层接管实现。
+- 旧显式dry-shadow两轮/迁移CLI和无效helper清理，检查聚合到事实owner；必要身份/原文字节/as-of/预算/恢复仍保留。
+- 只设A/B/C集中工程审查，受影响快速测试和原主线真实E2E；P3维护债不变成新的逐项许可或公司循环前置关卡。当前均OPEN、未改产品/配置/原件。
+
 ## P1/P2 — 已完成的有界摘要与真实采用
 
 - 当前华利15完整卡/12业务原子、Berkshire73卡/10原子、各一次配置POST，activation/同跨run恢复已独审。Berkshire15余项与全文partial保持，不额外切碎support/context或提高额度。

@@ -2,6 +2,8 @@
 
 **暂停点：R4四路正式报告及共因PWF已交付，实际修复与公司质量未完成。不要从旧checkpoint或R3重新启动。**
 
+最新只读工作为[全模块质量审查](review/architecture-quality-20261101/README.md)：14项已调查未实施；三份分报告与ROOT探针同目录。[细则A/B/C](review/architecture-quality-20261101/implementation.md)并入本主计划，Q01/Q02优先与R4来源RED合并。当前公司循环仍paused；旧门禁主工程完成不表示旧显式scan/迁移控制面全部删除；新审查不改写R4六issue/封存结果。
+
 1. 先读[CURRENT_STATUS](CURRENT_STATUS.md)/json，再读下述AUDIT内部implementation。MAINLINE_LOOP_GOAL只定义稳定完成条件，PACKAGE_STATUS只定义外包接收，不维护第二目标。
 2. 当前CWP runtime7e10973e/精确CI41279280653绿；RF runtime8eb8fe08/精确CI41282340171绿、三逻辑技能副本已定点验证。此后文档提交不代表新代码行为。
 3. AUDIT绝对根为`C:/Users/郑曾波/Projects/revenue-forecast-audit`，当前RUN为`runs/r1-20261021-cn-wuxi-apptec`。当前attempt为`r1-remediation-04`。

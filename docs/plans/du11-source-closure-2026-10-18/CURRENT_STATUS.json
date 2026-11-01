@@ -1,12 +1,12 @@
 {
   "schema_version": "company-wiki-current-plan-status/2",
   "as_of_date": "2026-11-01",
-  "observed_at_utc": "2026-11-01T08:40:41.168409+00:00",
+  "observed_at_utc": "2026-11-01T09:32:13.514125+00:00",
   "canonical_entry": "CURRENT_STATUS.md",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
   "project_status": "PAUSED_AFTER_R4_FOUR_REVIEWS_AND_COMMON_ROOT_PWF",
-  "scope_this_update": "Mainline only; exact CI root repairs, real summary/recovery/native adoption; no new packages",
+  "scope_this_update": "Read-only architecture/code-quality audit and PWF alignment; implementation and company loop remain paused",
   "last_code_commit": "7e10973e65517ce5a1b6cccc1c427ff4f9a0ecde",
   "verified_publication_before_docs": {
     "local_branch": "master",
@@ -67,7 +67,7 @@
   "existing_capabilities": {
     "storage_virtualization": "IMPLEMENTED; no new storage-layer rebuild planned",
     "configured_worker_budget_recovery": "IMPLEMENTED; current W12 H1 real summary, exact same/cross-run recovery bounded PASS; full-company review OPEN",
-    "gate_simplification": "MAJOR_ENGINEERING_COMPLETE; no new per-material permission/manual receipt gate planned",
+    "gate_simplification": "MAJOR_ENGINEERING_COMPLETE; normal steady flow has no per-material approval; legacy explicit dry-shadow/activation CLI and repeated checks remain Q14/Q11 audit cleanup",
     "m6_real_summary_recovery_rf": "LOCAL_HISTORICAL_ASOF_NODE_PASS; not currentM8/fullcompany acceptance",
     "m6_evidence": "review/source-information-20261030/description-final/m6-source-evidence-2/README.md"
   },
@@ -93,7 +93,7 @@
       "task": "W12 original-company rerun, new-company generalization, fixed8company fullaudit/skillimprovement and finalclean streak"
     }
   ],
-  "next_action": "用户明确恢复后，先读AUDIT同run/remediation/r1-remediation-04/implementation.md与六issue完整映射；从来源遗漏/跨主体context的共因RED开始，在所属责任层修复，并合并原第7/8步ghost-formula、期间补集及记录质量责任。关键节点独审后才开原公司新attempt，复用合格原件/缓存、按实际改变决定是否需要一次新摘要；不写封存R4、不从零重复已通过计算、不扩施工包或新公司。",
+  "next_action": "用户明确恢复后，先读AUDIT同run/remediation/r1-remediation-04/implementation.md与六issue完整映射；从来源遗漏/跨主体context的共因RED开始，在所属责任层修复，并合并原第7/8步ghost-formula、期间补集及记录质量责任。关键节点独审后才开原公司新attempt，复用合格原件/缓存、按实际改变决定是否需要一次新摘要；不写封存R4、不从零重复已通过计算、不扩施工包或新公司。 同时读取review/architecture-quality-20261101/implementation.md，将Q01/Q02并入同一来源RED；其余owner整改不增加逐项前置许可或新外包。",
   "package_status_registry": "PACKAGE_STATUS.json",
   "handoff": "HANDOFF.md",
   "goal_definition": "MAINLINE_LOOP_GOAL.md",
@@ -1322,5 +1322,37 @@
     "originals_or_vendor_envelopes_committed": false,
     "source_runtime_unchanged": true,
     "source_runtime": "55c29fe5f3a9554f883156e3a4232eece04bf581"
+  },
+  "architecture_quality_audit": {
+    "status": "AUDIT_COMPLETE_REMEDIATION_NOT_STARTED",
+    "date": "2026-11-01",
+    "source_head": "d38613bc926e6c95c9009971576af81978a59234",
+    "evidence": "review/architecture-quality-20261101/README.md",
+    "implementation": "review/architecture-quality-20261101/implementation.md",
+    "coverage": "408 src Python AST inventory plus critical chains and 3 independent reviews; not every file functionally certified; sibling adapters only",
+    "findings": {
+      "P1": 1,
+      "P2": 8,
+      "P3": 5,
+      "total": 14,
+      "all_remediation_open": true
+    },
+    "priority": [
+      "Q01 source-readable generalization with existing R4 source issues",
+      "Q02 carrier recipe/cache identity with source change",
+      "Q03-Q14 original owners, P3 cleanup not a new prerequisite gate"
+    ],
+    "verified": "pure source admission/version probes; 20k query and prune AST probes; checker counterexamples; legacy --help; explicit dry-shadow gate",
+    "not_run": [
+      "company workflow",
+      "real summary",
+      "production database",
+      "full suite",
+      "performance benchmark"
+    ],
+    "new_model_posts": 0,
+    "downloads": 0,
+    "production_changes": false,
+    "native_goal_resumed": false
   }
 }
