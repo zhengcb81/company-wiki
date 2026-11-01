@@ -86,7 +86,7 @@ handle and a cap over total owned-job commit (at least as strict as one model
 process). Linux memory observations come from `/proc/meminfo`; absent values
 stay null and observations do not imply supported enforcement. Fake-backend
 CI tests remain portable; the actual Job allocation test is Windows-only.
-# R1 campaign recovery (ROOT R6 correction)
+## R1 campaign recovery (ROOT R6 correction)
 
 `campaign init` creates one finite ledger (0–1800 seconds). Reuse that ledger
 and the explicit `--cache-dir` for every resumed invocation; never change the
@@ -112,3 +112,4 @@ Historical R1 outputs/ledger/review remain unchanged. Their recorded charges
 contain both unknown original R0 work and over-counted never-started work;
 the new transaction code does not retroactively prove the old 1800-second
 bound or accept the experimental model for production.
+

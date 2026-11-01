@@ -1,0 +1,58 @@
+{
+  "schema_version": "q01-rework-r4-evidence/1",
+  "status": "READY_FOR_ROOT_INDEPENDENT_REVIEW",
+  "created_at_utc": "2026-11-01T11:28:46.901500+00:00",
+  "files": {
+    "src/company_wiki/source_catalog/narrative_source_passage.py": {
+      "sha256": "3e82595d29ceb4a476eaf283f83b56fff406158025cb6dd35c444cf2fba20f87",
+      "bytes": 20366
+    },
+    "src/company_wiki/source_catalog/narrative_business_policy.py": {
+      "sha256": "19effc176fb8c939dba477e7d8f0e0937d458ab4cc8d87396c4c2693c709fc67",
+      "bytes": 72799
+    },
+    "src/company_wiki/source_catalog/narrative_reading.py": {
+      "sha256": "7ac957f65aab4f3f0948a9d1782d99e664a717e5a53be9868725a46e31b422e9",
+      "bytes": 77866
+    },
+    "src/company_wiki/source_catalog/narrative_reading_admission.py": {
+      "sha256": "b52b3e146d266436a583cca3c802e539cdd2431b56a2ce29548409713a16817d",
+      "bytes": 7538
+    },
+    "tests/unit/du11_production/test_source_readability_deferred_selection.py": {
+      "sha256": "5347f747e12836165f89f366435a1eb133349dbfdba0226f5e9419b8f5c65aa6",
+      "bytes": 8992
+    }
+  },
+  "source_passage_version": "source-passage/6",
+  "resource_identity": "09a95a63477d8e642996b6980beb32cb20edd44d392f7fafebd6a5ca13e0f950",
+  "resource_bytes": 10775669,
+  "tests": {
+    "passed": 19,
+    "failed": 0,
+    "seconds": 33.34,
+    "new_public_cases": 13,
+    "existing_targeted_regressions": 6
+  },
+  "static": {
+    "ruff_four_sources_and_test": "PASS",
+    "mypy_four_sources": "PASS"
+  },
+  "semantics": {
+    "source_processing_partial_is_explicit": true,
+    "physical_coverage_preserved": true,
+    "unrelated_scopes_continue": true,
+    "decision_inventory_partial_not_reuse_evidence": true,
+    "language_ambiguity_remains_readable_unresolved": true
+  },
+  "scope": {
+    "production_modified": false,
+    "paid_model_posts": 0,
+    "runtime_downloads": 0,
+    "document_budget_raised": false,
+    "source_offer_limit_raised": false,
+    "real_company_selector_summary_rf_C_run": false,
+    "persistent_AUTO_cache_recovery_run": false,
+    "git_index_modified_by_this_lane": false
+  }
+}

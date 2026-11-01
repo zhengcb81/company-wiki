@@ -54,5 +54,8 @@
       "new_sdk_copies": 0,
       "author_started": false
     }
-  ]
+  ],
+  "document_role": "CREATION_OR_HANDOFF_SNAPSHOT_NOT_CURRENT_DISPATCH",
+  "current_status_registry": "../../PACKAGE_STATUS.json",
+  "snapshot_note": "Existing status/base/authors_started/remote fields retain original observation; do not infer present execution from them."
 }

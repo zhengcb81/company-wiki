@@ -1,4 +1,6 @@
-"""ACKed prepared output resumes publication before another run can reuse it."""
+"""Generation ownership follows execution, with billed-response reuse preserved."""
+
+from dataclasses import asdict
 
 from integration.test_narrative_generation_reuse import (
     setup_source,
@@ -13,6 +15,38 @@ from company_wiki.automation.narrative_run_store import NarrativeRunStore
 
 
 loopback_model_server = _loopback_fixture
+
+
+def test_terminal_http_rejection_allows_explicit_new_run_and_keeps_old_unknown_hold(
+    loopback_model_server, monkeypatch,
+):
+    monkeypatch.setenv("DEEPSEEK_API_KEY", official.batch_fixtures.KEY)
+    with setup_source(loopback_model_server.endpoint) as (
+        root, catalog, config, llm, imported, kind,
+    ):
+        loopback_model_server.response_status = 401
+        first_path = request_path(root, imported, loopback_model_server.endpoint, "rejected")
+        process, first = invoke(root, config, first_path, llm, "rejected")
+        assert process.returncode == 2 and first["status"] != "completed", first
+        assert len(loopback_model_server.requests) == 1, (first, process.stderr)
+        ledger = NarrativeRunStore(root / "AUTO.sqlite")
+        old = tuple(asdict(row) for row in ledger.reservations_for_run("rejected"))
+        assert len(old) == 1 and old[0]["usage_status"] == "unknown"
+        assert old[0]["paid_response_json"] is None and old[0]["output_bytes"] == 0
+        assert first["budget"]["unknown_reservations"] == 1
+        loopback_model_server.response_status = 200
+        next_path = request_path(root, imported, loopback_model_server.endpoint, "corrected")
+        process, completed = invoke(root, config, next_path, llm, "corrected")
+        assert process.returncode == 0 and completed["status"] == "completed", completed
+        assert len(loopback_model_server.requests) == 2
+        assert tuple(asdict(row) for row in ledger.reservations_for_run("rejected")) == old
+        assert ledger.budget_snapshot("rejected").charged_tokens == first["budget"]["tokens"]
+        assert ledger.budget_snapshot("rejected").charged_micro_usd == first["budget"]["estimated_micro_usd"]
+        _, _, receipt = public_read(root, config, imported, kind)
+        assert receipt["replay_status"] == "verified"
+        process, cached = invoke(root, config, next_path, llm, "corrected")
+        assert process.returncode == 0 and cached["status"] == "completed"
+        assert len(loopback_model_server.requests) == 2 and not loopback_model_server.errors
 
 
 def test_prepared_ack_refuses_new_generation_then_owner_publishes_without_second_post(
@@ -116,3 +150,32 @@ if __name__ == "__main__":
         record_proof(
             "prepared-outbox-other-db-reuse", loopback_model_server, reused, receipt
         )
+
+
+def test_published_unknown_usage_reuses_artifact_without_refund_or_another_post(
+    loopback_model_server, monkeypatch,
+):
+    from company_wiki.automation.narrative_batch import _generation_owner_finished
+
+    monkeypatch.setenv("DEEPSEEK_API_KEY", official.batch_fixtures.KEY)
+    loopback_model_server.response_usage = {}
+    with setup_source(loopback_model_server.endpoint) as (
+        root, catalog, config, llm, imported, kind,
+    ):
+        first_path = request_path(root, imported, loopback_model_server.endpoint, "unknown-published")
+        process, first = invoke(root, config, first_path, llm, "unknown-published")
+        assert process.returncode == 0 and first["status"] == "completed", first
+        ledger = NarrativeRunStore(root / "AUTO.sqlite")
+        old = tuple(asdict(row) for row in ledger.reservations_for_run("unknown-published"))
+        assert len(old) == 1 and old[0]["usage_status"] == "unknown"
+        # This legacy generative fixture has no paid-response pin; output and
+        # actual publication still prove successful reuse despite unknown usage.
+        assert old[0]["output_bytes"] > 0 and old[0]["output_sha256"] is not None
+        assert _generation_owner_finished(root / "AUTO.sqlite", "unknown-published")
+        next_path = request_path(root, imported, loopback_model_server.endpoint, "unknown-reuse")
+        process, reused = invoke(root, config, next_path, llm, "unknown-reuse")
+        assert process.returncode == 0 and reused["status"] == "completed", reused
+        assert reused["documents"][0]["artifact_ref"] == first["documents"][0]["artifact_ref"]
+        assert reused["budget"]["tokens"] == reused["budget"]["estimated_micro_usd"] == 0
+        assert tuple(asdict(row) for row in ledger.reservations_for_run("unknown-published")) == old
+        assert len(loopback_model_server.requests) == 1 and not loopback_model_server.errors

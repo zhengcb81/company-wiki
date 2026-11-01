@@ -1,0 +1,85 @@
+{
+  "status": "FAIL",
+  "error": "AssertionError: ",
+  "error_file": "phase_c_runner.py",
+  "error_line": 757,
+  "model_post_attempts": 1,
+  "protected_unchanged": true,
+  "sentinel_unchanged": true,
+  "temporary_lake_removed": true,
+  "attempt": "p1-huali-live-v2",
+  "states": [
+    {
+      "run_id": "phaseC-090-d37daaa8f4dd",
+      "exit": 0,
+      "activation_recovery": {
+        "status": "PASS",
+        "held_status": "activation_pending",
+        "same_run_id": "phaseC-090-d37daaa8f4dd",
+        "native_attempts_before": 1,
+        "native_attempts_after": 1,
+        "charged_tokens_before": 8217,
+        "charged_tokens_after": 8217,
+        "charged_micro_usd_before": 1425,
+        "charged_micro_usd_after": 1425,
+        "POSTs_before": 1,
+        "POSTs_after": 1,
+        "paid_generation_unchanged": true,
+        "response_identity_unchanged": true
+      },
+      "same_run_zero_POST": true,
+      "cross_run_zero_POST": true,
+      "model_observation": null,
+      "source_card_execution": {
+        "schema_version": "source-extractive-execution/1",
+        "plan_sha256": "8a2ab8da21fd4f22d4c4622f12333d87be75d13e68dce1051e796625551e0a27",
+        "report_sha256": "e78788628c92e2f9260cbdfd5ca49908a4d5f61fadbbb8119525d7e7133e167a",
+        "task_count": 15,
+        "source_dispositions": {
+          "admitted": 15
+        },
+        "model_dispositions": {
+          "consider": 14,
+          "redundant": 1
+        },
+        "source_coverage_complete": true,
+        "model_coverage_complete": true,
+        "model_diagnostic": null,
+        "admitted_claim_ids": [
+          "t1-source",
+          "t2-source",
+          "t3-source",
+          "t4-source",
+          "t5-source",
+          "t6-source",
+          "t7-source",
+          "t8-source",
+          "t9-source",
+          "t10-source",
+          "t11-source",
+          "t12-source",
+          "t13-source",
+          "t14-source",
+          "t15-source"
+        ],
+        "report_origin": "native_batch_receipt.model_diagnostics.execution",
+        "semantic_truth": "not_evaluated",
+        "human_permission": "not_required"
+      },
+      "artifact_ref": {
+        "artifact_sha256": "ec1831a2fdf2952a9a80aba0c9e5db65c8bc581ea5c0a10d53d01ef2faba52d8",
+        "artifact_version_id": "narrative-9cfbfeec791e4b6c9b39af6c7d6c6570",
+        "byte_size": 243043,
+        "schema_version": "narrative-ref/1",
+        "source_ref": {
+          "byte_size": 238982,
+          "content_sha256": "d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+          "document_id": "urn:company-wiki:document:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+          "mime_type": "application/pdf",
+          "schema_version": "2.0",
+          "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831"
+        }
+      }
+    }
+  ]
+}

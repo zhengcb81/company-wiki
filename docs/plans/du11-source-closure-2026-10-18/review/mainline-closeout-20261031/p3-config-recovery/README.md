@@ -1,0 +1,17 @@
+# W12配置路径与终态generation恢复共因
+
+本节点仍在独审/正常发布中；不是全公司研究或P3完成签收。此前f98dd54b/CI41264855167和RF85054d7b/CI41260918155已绿，未重新变红。
+
+真实问题：Config.load按参数是否省略决定加载受管dotenv，显式传同一canonical配置错用继承MiMo凭证、两次HTTP401。旧unknown累计计费继续保留；纠正默认loader的新显式run又被“每条usage必须known”的owner阻断，实际0新POST/预留。
+
+根修：配置层比较resolved canonical文件，默认/绝对/相对调用统一受管MiMo/MiniMax、DeepSeek环境优先；外部自定义配置及dotenv禁用仍隔离。AUTO的NarrativeRunStore统一查询同一readonly snapshot的run/job/attempt/reservation/effect/outbox，判断执行是否结束；batch只消费结果，不读取凭证或重新解释账本。unknown已经结算的终态失败可开显式新run，旧费用行逐字段不改。活跃/未结算/无原生完成结果的reaped任务、未交付输出和可恢复付费pin继续原路径；不删除pointer绕行、不换DB、不SQL复活、不自动重发旧attempt。局部最终正文诊断SHA不能冒作完整可恢复pin；不因此永久锁住新显式run。
+
+正确TDD：配置4F/7P→39P；native owner原4F里两例unknown新run和一例known paid pin是真正失败，另一例输出期望错误（native finish本已自动结算零输出），已另写正例验证原生责任。宿主loopback完整复现401后同AUTO新run被BATCH_GENERATION_RECOVERY_REQUIRED阻断。最终4短unit96P/20.46s；4个integration64.12s全部通过：401→显式新run→成功→同run缓存；prepared activation拒绝其他run后原run零重复恢复；成功unknown跨run复用不退款；付费响应持久后decoder中断、原pin恢复仅1POST。所有HTTP为本机合成夹具、零收费，隔离数据自动清理。
+
+失败保留：最先两次sandbox loopback根本无HTTP，不能当产品RED；实现中重复BEGIN与随后两个原生finish夹具期望误解均留原日志，不冒作通过或另算产品缺陷。legacy /4集成样本本来不使用paid pin，真实pin恢复由已有独立integration覆盖。
+
+真实母账1935796tokens/756563microUSD（估计非账单），含new_unknown8+prior_unknown7；本次401保留85927tokens/17053microUSD。原文/生产config不改，收据仅小型gzip，不归档PDF或整库。下一步集中独审、正常提交推送与精确CI，然后W12新摘要/缓存及完整RF实际链、四路复审。
+
+集中独审已完成PASS_CONFIG_IDENTITY_EXECUTION_RECOVERY/0OPEN，13源码/测试raw+LF SHA、独立8状态探针及原始日志绑定见receipts/final-seal.json.gz。测试自有目录已清18856387逻辑字节；真实W12输入/原件待审不清。正常发布进行中，不代签新CI。
+
+本节点正式发布完成：ce1a603a、正常prepush781P/108.09s，精确CI41267979696于2026-11-01T03:12:48Z成功。W12随后真实摘要成功，但跨run cache实际多POST，属于新的复验发现，不用本节点独审/CI代签其缓存成功；主线正在诊断。

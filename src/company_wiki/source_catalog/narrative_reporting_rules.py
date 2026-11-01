@@ -39,6 +39,20 @@ _RULES = tuple(re.compile(pattern, re.I) for pattern in (
     r"[^。；;!?]{0,80}(?:按照|依照)[^。；;!?]{0,30}标准[^。；;!?]{0,80}政府补助除外",
 ))
 
+# Presentation is a clause-local context observation, not a whole-quote purpose.
+_ARITHMETIC_PRESENTATION = re.compile(
+    r"^\s*(?:(?:注|备注)\s*\d*\s*[:：]\s*|notes?\s*\d*\s*[:：]\s*)?"
+    r"(?=[^。；;!?]{0,180}(?:四舍五入|取整|\brounding\b))"
+    r"(?=[^。；;!?]{0,180}(?:表中|上表|本表|单项|分项|各项|\b(?:figures?|amounts?|totals?|tables?)\b))"
+    r"(?=[^。；;!?]{0,180}(?:之和|加总|合计|不等|差异|\b(?:sum|add|equal|differ)\w*\b))"
+    r"(?:上表|本表|表中|(?:由于|因)?四舍五入|\b(?:due\s+to\s+rounding|"
+    r"(?:the\s+)?(?:figures?|amounts?|totals?|tables?))\b)[^。；;!?]{0,180}", re.I)
+
+
+def arithmetic_presentation(text: str) -> bool:
+    """Recognize a reporting arithmetic note; never erase a mixed statement."""
+    return _ARITHMETIC_PRESENTATION.search(text) is not None
+
 
 def reporting_rule_without_operating_event(text: str) -> bool:
     """A treatment or its generic risk-reduction purpose is not an operation.

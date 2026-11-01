@@ -70,6 +70,7 @@ def _admitted(unit: Any, reading: Mapping[str, Any], kind: str, *, fact: Any = N
               support_use: tuple[str, str] | None = None,
               offer_relevant: bool | None = None) -> tuple[bool, Any]:
     fact = fact if fact is not None else OperatingFact()
+    closed_assessment = support_use is not None and offer_relevant is not None
 
     def decision(admitted: bool, reason: str | None = None) -> tuple[bool, Any]:
         if trace is not None:
@@ -97,6 +98,7 @@ def _admitted(unit: Any, reading: Mapping[str, Any], kind: str, *, fact: Any = N
         return admitted, fact
 
     prepared_roles = None
+    prepared_passage = None
     if fact.purpose == "unassessed":
         return decision(False, "unassessed_purpose")
     # Glyphs/page counters are observed text, not operating descriptions. A
@@ -125,22 +127,26 @@ def _admitted(unit: Any, reading: Mapping[str, Any], kind: str, *, fact: Any = N
             from .narrative_business_policy import prepare_reading_business_assessment
             assessment = prepare_reading_business_assessment(unit.raw_text, {"relations": []})
             fact, prepared_roles = assessment.fact, assessment.source_roles
+            prepared_passage = assessment.passage
             if financial_only is None:
                 financial_only = assessment.financial_only
         else:
             source = SourceOperatingSession({unit.unit_id: unit}, work_budget=new_document_work_budget())
             fact = source.fact(unit.unit_id)
             prepared_roles = source.source_assertions(unit.unit_id)
+            prepared_passage = source.source_passage(unit.unit_id)
             if financial_only is None:
                 financial_only = source.financial_only(unit.unit_id)
-    if fact.purpose in NON_OPERATING_PURPOSES or fact.purpose == "unassessed":
+        if prepared_passage is not None:
+            financial_only = prepared_passage.financial_only
+    if (not closed_assessment and fact.purpose in NON_OPERATING_PURPOSES) or fact.purpose == "unassessed":
         return decision(False, "non_operating_purpose" if fact.purpose in NON_OPERATING_PURPOSES
                         else "unassessed_purpose")
     if kind == "operating_table" and not table_qualified:
         return decision(False, "table_not_qualified")
     if unit.source_role in _CONTEXT_ROLES:
         return decision(False, "source_context_role")
-    if not table_qualified and (
+    if not closed_assessment and not table_qualified and (
         financial_only if financial_only is not None else _financial_only(unit.raw_text, fact)
     ):
         return decision(False, "financial_only")
@@ -150,10 +156,10 @@ def _admitted(unit: Any, reading: Mapping[str, Any], kind: str, *, fact: Any = N
     # material can still qualify without a known stage, number or duration.
     use, reason = support_use or source_support_use(unit.raw_text, fact=fact,
         financial_only=financial_only if financial_only is not None else _financial_only(unit.raw_text, fact),
-        table_qualified=table_qualified,source_roles=prepared_roles)
+        table_qualified=table_qualified, source_roles=prepared_roles, passage=prepared_passage)
     if offer_relevant is None:
         offer_relevant=source_narrative_relevance(fact=fact,table_qualified=table_qualified,
-            source_roles=prepared_roles)
+            source_roles=prepared_roles, passage=prepared_passage)
     readable_business = offer_relevant and use in {"support", "unresolved"}
     if not offer_relevant and use == 'unresolved':
         return decision(False,'unresolved_without_business_relevance')
@@ -1095,16 +1101,19 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
                 scope_owners[members] = owner
             fact = session.fact(owner)
             text = session.source_text(owner)
-            work_budget.charge(SUPPORT_USE_SCAN_PASSES * len(text))
             source_roles=session.source_assertions(owner)
+            passage = session.source_passage(owner)
+            # The closed scope's capability was prepared once in the session.
+            # Do not charge a second full text scan for consuming that cache.
+            work_budget.charge(SUPPORT_USE_SCAN_PASSES * len(text) if passage is None else len(members) + 1)
             use = source_support_use(text, fact=fact, financial_only=session.financial_only(owner),
                 table_qualified=table_qualified,
                 context_role=all(units[uid].source_role in _CONTEXT_ROLES for uid in members),
                 source_relations=session.relations(owner), support_unit_ids=members,
-                source_roles=source_roles,
+                source_roles=source_roles, passage=passage,
                 numeric_ambiguous=any(uid in numeric_shape_uncertain for uid in members)
                     or bool(source_roles and source_roles.numeric_ambiguous))
-            relevance=source_narrative_relevance(fact=fact,source_roles=source_roles,
+            relevance=source_narrative_relevance(fact=fact,source_roles=source_roles, passage=passage,
                                                  table_qualified=table_qualified)
             value = ("meaningful_fact" if table_qualified else
                      reading_material_value(fact, source_roles=source_roles))

@@ -2,8 +2,9 @@
 
 Three bounded layers share one script. Commits keep static checks (pre-commit).
 Daily pushes run the affected unit files plus the shared fast contract set
-once, and defer everything else to CI; a wide, dynamic or unknown scope runs
-the fast contract set alone and says so. A proven non-runtime range starts no
+once, and defer everything else to CI. Changed tests and nearest known static
+consumers stay bounded even when other scope is uncertain; no known consumers
+means the fast contract set alone. A proven non-runtime range starts no
 test process and reports tests_not_run. The full local suite below stays an
 explicit decision and is never started implicitly by a push. A green fast pass
 only proves the scope that actually ran (`local_fast_pass`), never the whole
@@ -337,14 +338,15 @@ def _run_pytest_gate(cmd: list[str], label: str) -> int:
 
 
 def _push_targets(selected: list[str]) -> tuple[list[str], str]:
-    """Decide what a daily push runs; a full recommendation defers to CI.
+    """Keep bounded known consumers; full/unknown recommendations defer to CI.
 
     The selection layer may still recommend the whole unit suite for wide,
     dynamic, configuration or unknown scopes. That recommendation stays with
     CI: silently starting all unit tests on every push is the regression this
     policy exists to prevent. A trusted empty selection has no runtime targets;
     other pushes run the shared fast contract set once, deduplicated against
-    whole-file selections. A small explainable affected set keeps its full files.
+    whole-file selections. Changed/nearest known files come first; wide known
+    lists retain a bounded partial slice without claiming complete validation.
     """
     selected = list(dict.fromkeys(selected))
     if not selected:
@@ -362,8 +364,8 @@ def _push_targets(selected: list[str]) -> tuple[list[str], str]:
              and "\\" not in target.split("::", 1)[0]]
     nonunit_count = len(selected) - len(units)
     selected = units
-    if len(selected) > DAILY_PUSH_MAX_AFFECTED_TARGETS:
-        return list(FAST_CONTRACT_CASES), f"wide affected set ({len(selected)} targets) deferred to CI"
+    known_count = len(selected)
+    selected = selected[:DAILY_PUSH_MAX_AFFECTED_TARGETS]
     whole_files = {path for path in selected if "::" not in path}
     targets = list(selected)
     # A whole-file target covers every fast node in that file. A node-id
@@ -372,6 +374,9 @@ def _push_targets(selected: list[str]) -> tuple[list[str], str]:
     targets.extend(case for case in FAST_CONTRACT_CASES
                    if case.split("::")[0] not in whole_files and case not in targets)
     deferred = f"tests/unit outside the {len(targets)} ran targets deferred to CI"
+    if known_count > len(selected):
+        deferred += (f"; bounded partial selection of {len(selected)}/{known_count} known affected files; "
+                     f"{known_count - len(selected)} known files deferred to CI")
     if nonunit_count:
         deferred += (f"; {nonunit_count} non-unit recommendation(s) deferred to CI "
                      "or separate major-node integration acceptance")
@@ -443,7 +448,7 @@ def main(argv: list[str] | None = None) -> int:
     )
     if args.push_checks:
         selected, reason = select_unit_tests(
-            PROJECT_ROOT, changed_paths(PROJECT_ROOT, sys.stdin.read()))
+            PROJECT_ROOT, changed_paths(PROJECT_ROOT, sys.stdin.read()), known_only=True)
         targets, deferred = _push_targets(selected)
         if not targets:
             # pytest with an empty target list would collect the entire project.

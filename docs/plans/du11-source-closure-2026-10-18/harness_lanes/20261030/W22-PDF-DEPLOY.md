@@ -1,5 +1,7 @@
 # W22-PDF-DEPLOY：正式可复现的离线 PDF 增强部署
 
+> 2026-10-31 ROOT状态：ROOT工程验收/修复/并线发布946537d0；真实文档C2仍属主线，不替代该验收。下方READY是原始发卡快照。
+
 状态：READY_TO_DISPATCH。可与 W22-ATOMIC 和 ROOT M8 同时开始；本包独占真实增强 SDK 实测，ROOT 不同时启动 SDK。
 
 ## 立即启动的信息

@@ -1,0 +1,9 @@
+{
+  "status": "PASS",
+  "owned_path": "C:/Users/郑曾波/Projects/_r2",
+  "removed": true,
+  "tracked_code_all_in_remote_RF_main": "535604fa468e8a69be44e073dc7e29eacde80cbc",
+  "foreign_WIP_removed": false,
+  "released_bytes": null,
+  "note": "Git worktree remove returned255 after unregistering; remaining fixed owned path was checked then removed via native PowerShell. Pre-removal byte total was not retained, so not estimated."
+}

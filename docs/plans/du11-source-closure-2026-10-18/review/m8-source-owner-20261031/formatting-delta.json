@@ -1,0 +1,10 @@
+{
+  "path": "tests/unit/du11_production/test_source_passage_admission.py",
+  "reason": "git diff --check found one new blank at EOF; removed only trailing blank lines",
+  "independent_seal_raw_before": "047af2217e93e3eb86b773fe9b0983d057546ed213e4fa78475c185d2e03331b",
+  "raw_after": "f99f67b6cc6c0f8603e541114a593a320a4cb1bb91288ebcee2ded9c3a2c1f27",
+  "lf_after": "f99f67b6cc6c0f8603e541114a593a320a4cb1bb91288ebcee2ded9c3a2c1f27",
+  "ast_identical": true,
+  "runtime_source_changed": false,
+  "peer_review_scope_unchanged": true
+}

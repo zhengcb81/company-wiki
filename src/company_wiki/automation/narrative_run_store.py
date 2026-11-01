@@ -578,6 +578,49 @@ class NarrativeRunStore:
     def get_run(self, run_id: str) -> RunRecord | None:
         return self._read(lambda connection: _run(connection, run_id))
 
+    def generation_execution_finished(self, run_id: str) -> bool:
+        """Read one AUTO snapshot; retained unknown billing is not active work.
+
+        A new explicit run may follow a fully recorded failure. Unfinished
+        attempts, reaped work without completion, recoverable paid responses
+        and undelivered output retain the original execution owner.
+        """
+        def read(connection):
+            run = _run(connection, run_id)
+            if run is None:
+                return False
+            rows = connection.execute("""SELECT j.status FROM jobs j JOIN narrative_run_jobs r
+                ON r.job_id=j.job_id WHERE r.run_id=?""", (run_id,)).fetchall()
+            if len(rows) != len(run.job_ids) or any(
+                row[0] not in {"succeeded", "dead_letter", "blocked_human", "cancelled"}
+                for row in rows
+            ):
+                return False
+            unfinished = connection.execute("""SELECT 1 FROM attempts a JOIN narrative_run_jobs r
+                ON r.job_id=a.job_id WHERE r.run_id=? AND a.finished_at IS NULL LIMIT 1""",
+                (run_id,)).fetchone()
+            if unfinished is not None:
+                return False
+            incomplete = connection.execute("""SELECT 1 FROM narrative_model_reservations m
+                JOIN attempts a ON a.attempt_id=m.attempt_id WHERE m.run_id=? AND (
+                    m.usage_status='reserved' OR m.usage_settled_at IS NULL
+                    OR m.output_settled_at IS NULL
+                    OR (m.paid_response_json IS NOT NULL AND m.output_sha256 IS NULL)
+                    OR (m.output_bytes=0 AND a.result_json IS NULL)) LIMIT 1""",
+                (run_id,)).fetchone()
+            if incomplete is not None:
+                return False
+            pending = connection.execute("""SELECT 1 FROM effects e JOIN narrative_run_jobs r
+                ON r.job_id=e.job_id LEFT JOIN outbox o ON o.effect_id=e.effect_id
+                WHERE r.run_id=? AND (
+                    e.status NOT IN ('verified','failed','cancelled')
+                    OR (e.status='verified' AND o.outbox_id IS NULL)
+                    OR (o.outbox_id IS NOT NULL AND (
+                        o.status!='delivered' OR o.lease_token IS NOT NULL OR o.lease_until IS NOT NULL))) LIMIT 1""",
+                (run_id,)).fetchone()
+            return pending is None
+        return self._read(read)
+
     def job_bindings(self, run_id: str) -> dict[str, tuple[str, str]]:
         """Read the immutable execution membership captured on first creation."""
         def read(connection):

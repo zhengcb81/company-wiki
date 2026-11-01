@@ -19,7 +19,8 @@ from . import patterns as source_grammar
 
 # Composition/process indexes and the bounded comma-continuation preparation.
 # The caller reserves these passes on its existing document account.
-SOURCE_DESCRIPTION_SCAN_PASSES = 10
+# Closed member identity is observed for both typed and unfamiliar arguments.
+SOURCE_DESCRIPTION_SCAN_PASSES = 19
 
 # A new explicit actor starts an independent assertion even after a comma.
 # Subordinate audit test descriptions do not manufacture a company event.
@@ -107,11 +108,11 @@ _AGENT_DERIVATION = re.compile(
 
 _COMPOSITION_FRAME_CN = (
     r"(?P<head>主要产品|主营业务|产品|服务|解决方案|下游客户|客户|下游)"
-    r"(?:的(?:构成|组合|范围))?(?:主要|目前|通常)?(?:为|是|包括|包含|涵盖)")
+    r"(?:的(?:构成|组合|范围))?(?:主要|目前|通常)?\s*(?:[,，]\s*)?(?:为|是|包括|包含|涵盖|覆盖)")
 _COMPOSITION_FRAME_EN = (
-    r"\b(?P<head>products?|services?|solutions?|businesses|customers?|clients?)\s+"
+    r"\b(?P<head>products?|services?|solutions?|businesses|customers?|clients?)(?:\s+|,\s*)"
     r"(?:(?:mainly|primarily|principally|currently)\s+)?"
-    r"(?:are|is|include[sd]?|comprise[sd]?|consist(?:s)?\s+of)\s+")
+    r"(?:are|is|include[sd]?|comprise[sd]?|cover(?:s|ed)?|consist(?:s)?\s+of)\s+")
 _COMPOSITION_CN = re.compile(_COMPOSITION_FRAME_CN + r"(?P<target>[^。;!?]{1,160})")
 _COMPOSITION_EN = re.compile(_COMPOSITION_FRAME_EN + r"(?P<target>[^。;!?]{1,160})", re.I)
 # A fresh predicate after a comma ends a nominal list even without a new
@@ -254,6 +255,31 @@ def abstract_source_argument(value: str) -> bool:
         return True
     tokens = _ABSTRACT_EN_TOKEN.findall(value.casefold())
     return bool(tokens) and all(token in _ABSTRACT_EN_WORDS for token in tokens)
+
+
+def _nominal_member_identity(value: str) -> bool:
+    """A member is a named argument, not a dangling link or another assertion.
+
+    Reuse source subject/predicate grammar rather than guessing an issuer from
+    capitalization. Attributive qualifiers can precede a member; a separate
+    noun before a predicate cannot donate that clause as a catalogue identity.
+    This proves a boundary only, never the predicate's truth or stage.
+    """
+    if value.rstrip().endswith(('...', '…')):
+        return False
+    value = value.strip(' \t\r\n.。!?？！;；')
+    if (not any(character.isalpha() for character in value)
+            or abstract_source_argument(value)
+            or source_grammar.SUBJECT_TAIL.search(value)):
+        return False
+    for grammar in (source_grammar.EN_AUX_BOUNDARY, source_grammar.CN_TOPIC_BOUNDARY,
+                    source_grammar.MODIFIER_TOKENS):
+        for predicate in grammar.finditer(value):
+            subject = value[:predicate.start()].strip()
+            if (subject and value[predicate.end():].strip()
+                    and source_grammar.SUBJECT_TAIL.fullmatch(subject) is None):
+                return False
+    return True
 
 
 def _argument_payload(value: str, *, concrete_action: bool = False,
@@ -429,6 +455,10 @@ def _clause_description_proofs(value: str) -> Iterator[_DescriptionProof]:
     if not (source_grammar.INTERROGATIVE_OPERATOR.search(value)
             or source_grammar.INTERROGATIVE_MARKER.search(value)):
         yield from _source_process_proofs(value)
+        if _CUSTOMER_PRICING.search(value):
+            # A source's explicit customer-pricing restriction is descriptive
+            # commercial content, not proof of a completed production event.
+            yield _DescriptionProof(True, value, descriptive_only=True, material_scope=True)
         for developed in _DEVELOPED_SCOPE.finditer(value):
             target = developed['cn'] or developed['en']
             policy_object = _DEVELOPED_POLICY_OBJECT.search(target)
@@ -442,20 +472,24 @@ def _clause_description_proofs(value: str) -> Iterator[_DescriptionProof]:
                 continue
             closed = _argument_closed(value, relation.end('target'))
             payload = _argument_payload(target, complete=closed)
-            if payload is None and closed:
+            member_identity = False
+            if payload is not False and closed:
                 # The source explicitly declares a product/customer class.
                 # A closed enumeration supplies member identity, independently
                 # of capitalization or the argument's unknown entity type.
                 members = [part.strip() for part in _NOMINAL_MEMBER_SEPARATOR.split(target)]
-                if len(members) >= 2 and all(any(c.isalpha() for c in part)
-                        and not abstract_source_argument(part) for part in members):
-                    payload = True
+                if len(members) >= 2 and all(_nominal_member_identity(part) for part in members):
+                    member_identity = True
+                    if payload is None:
+                        payload = True
             prefix = value[max(0, relation.start('head')-45):relation.start('head')]
-            # A customer class or explicitly sold range is a current business
-            # scope, not a manufactured expansion/manufacturing event. Targets
-            # remain prospective descriptions. No issuer/product vocabulary.
+            # A customer class, sold range or explicit closed member list is a
+            # business scope, not an expansion/manufacturing event. Membership
+            # owns both "includes" and "covers" instead of letting the weaker
+            # function view discard unknown service members. Targets remain
+            # prospective descriptions. No issuer/product vocabulary.
             observed_scope = bool(closed and not _PROSPECTIVE_SCOPE.search(prefix)
-                and (_CUSTOMER_HEAD.fullmatch(relation['head']) or _SOLD_SCOPE.search(prefix)))
+                and (member_identity or _CUSTOMER_HEAD.fullmatch(relation['head']) or _SOLD_SCOPE.search(prefix)))
             if observed_scope and payload is None and not abstract_source_argument(target):
                 payload = True
             yield _DescriptionProof(payload, value, descriptive_only=True,
@@ -563,8 +597,33 @@ _REPORTING_HEAD = re.compile(r"财务报表|财务资料|财务信息|財務報�
     r"\b(?:financial statements?|financial information|financial reporting)\b",re.I)
 _REPORTING_ACTION = re.compile(r"编制|編製|编製|编报|假设|假設|持续经营基|持續經營基|"
     r"\b(?:prepar\w*|assum\w*|going.concern)\b",re.I)
-_STANDARD_HEAD = re.compile(r"会计准则|會計準則|财务报告准则|財務報告準則|\b(?:ASC\s*\d+|IFRS\s*\d+|accounting standards?)\b",re.I)
-_STANDARD_ACTION = re.compile(r"采用|採用|对账|對賬|調節|调节|\b(?:adopt\w*|reconcil\w*)\b",re.I)
+_STANDARD_HEAD = re.compile(r"会计准则|會計準則|会计规则|财务报告准则|財務報告準則|\b(?:ASC\s*\d+|IFRS\s*\d+|accounting (?:standards?|rules?))\b",re.I)
+_STANDARD_ACTION = re.compile(r"采用|採用|对账|對賬|調節|调节|要求|计量|重述|\b(?:adopt\w*|reconcil\w*|requir\w*|valu\w*|restate\w*)\b",re.I)
+_REPORT_FIGURE_BASIS = re.compile(
+    r"\b(?:per[- ]share figures?|figures?\s+for\s+(?:the\s+)?(?:Class|[A-Z]\s+shares))\b|"
+    r"每股(?:数据|数字|数值|指标)|股类.{0,12}(?:换算|口径)", re.I)
+_REPORT_FIGURE_RELATION = re.compile(r"\b(?:appl\w*|refer\w*|represent\w*|are|is|shown)\b|适用|指|换算|为",re.I)
+_TABLE_INTRODUCTION = re.compile(
+    r"^\s*(?:here\s+(?:are|is)|(?:the\s+)?following\s+table|below\s+(?:are|is))"
+    r"[^。.!?;]{0,100}\b(?:figures?|data|tables?|operations)\b[^。.!?;]{0,40}[:：]\s*$|"
+    r"^\s*(?:以下|下表|下列).{0,70}(?:数据|数字|指标|情况|经营).{0,20}[:：]\s*$",re.I)
+_CUSTOMER_PRICING = re.compile(
+    r"(?=[^。;!?]{0,120}(?:客户|订单|急单))[^。;!?]{1,100}"
+    r"(?:不会|不再|并未|从不)[^。;!?]{0,45}(?:提价|加价|提高[^。;!?]{0,12}价格)|"
+    r"\b(?:(?:does?|will|would|did)\s+not|never)\b[^。;!?]{0,30}"
+    r"\b(?:increase|raise)\s+(?:customer\s+)?prices?\b[^。;!?]{0,80}"
+    r"\b(?:customer\s+orders?|urgent\s+orders?)\b",re.I)
+
+
+def source_reporting_purpose(text: str) -> str:
+    """Shared reporting governor/basis role, not a financial-word blacklist."""
+    head = _STANDARD_HEAD.search(text)
+    if head and _STANDARD_ACTION.search(text, head.end()):
+        return 'accounting_policy'
+    if (_REPORT_FIGURE_BASIS.search(text) and _REPORT_FIGURE_RELATION.search(text)
+            or _TABLE_INTRODUCTION.fullmatch(text)):
+        return 'reporting_definition'
+    return ''
 _AWARD_HEAD = re.compile(r"奖励|獎勵|购股权|購股權|股权激励|股權激勵|股份支付|\b(?:share awards?|employee share options?|share.based compensation)\b",re.I)
 _AWARD_RULE = re.compile(r"授出|归属|歸屬|限额|限額|旨在|股东.{0,15}批准|股東.{0,15}批准|"
     r"\b(?:grant\w*|vest\w*|limits?|approval|conditions?|schemes?|aims?)\b",re.I)
@@ -659,10 +718,12 @@ def prepare_source_assertions(text: str) -> SourceAssertionRoles:
         # predicate instead: software identifying such statements is an offering.
         meta_rule=bool(meta_action and (not product_head or meta_action.start()<product_head.start()))
         purpose=""
-        if not operating and _AUDIT_HEAD.search(text_clause) and _AUDIT_ACTION.search(text_clause):
+        reporting_purpose=source_reporting_purpose(text_clause) if not operating else ''
+        if reporting_purpose:
+            purpose=reporting_purpose
+        elif not operating and _AUDIT_HEAD.search(text_clause) and _AUDIT_ACTION.search(text_clause):
             purpose="audit_procedure"
         elif not operating and (_REPORTING_HEAD.search(text_clause) and _REPORTING_ACTION.search(text_clause)
-              or _STANDARD_HEAD.search(text_clause) and _STANDARD_ACTION.search(text_clause)
               or _AWARD_HEAD.search(text_clause) and _AWARD_RULE.search(text_clause)):
             purpose="accounting_policy"
         elif meta_rule or (not operating and _RESULT_HEAD.search(text_clause) and _RESULT_DISCLAIMER.search(text_clause)):

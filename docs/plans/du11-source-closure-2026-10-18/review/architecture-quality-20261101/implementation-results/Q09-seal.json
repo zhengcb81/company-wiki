@@ -1,0 +1,30 @@
+{
+  "schema_version": "q09-stockwiki-transport/1",
+  "head": "1bde9e07a9ae33c5113017937b49f4836b25b575",
+  "owned_files": {
+    "stockwiki/_source_reader_v2_transport.py": "c58137785e1da63ea8da03c147a93bb41c2d1b51cf5c66348a6e3896e014dcce",
+    "tests/test_source_export_v2_bounded_transport.py": "7c10ded092fcaf772201b5eccbc302afcc1f3869cfead0ccad09c435461a378c",
+    "scripts/checks.py": "0335c9d3e694ffdcf8bd08b6da2e65f7616dd175cc085a3a641df13fdbe32c97"
+  },
+  "foreign_wip_sha_unchanged": 4,
+  "limits": {
+    "stdout": "configured max_stdout_bytes",
+    "stderr_receipt_bytes": 262144
+  },
+  "tests": {
+    "red": "2 read-time overflow cases returned reader_timeout before fix",
+    "transport_and_cli": "21 passed in20.81s",
+    "real_cwp_txt_and_check_contract": "18 passed in27.52s",
+    "final_overflow_only": "2 passed in5.17s; overlaps21"
+  },
+  "static": "StockWiki checks.py --static-only PASS; final targeted ruff PASS",
+  "cleanup": {
+    "q09_cross_repo_temp": "absent",
+    "q09_final_temp": "absent",
+    "owned_default_pytest_116_117": "absent"
+  },
+  "model_calls": 0,
+  "downloads": 0,
+  "production_originals_changed": 0,
+  "committed": false
+}

@@ -1,0 +1,28 @@
+{
+  "schema_version": "harness-lane-setup/1",
+  "status": "READY_TO_DISPATCH",
+  "workdir": "C:\\Users\\郑曾波\\Projects\\company-wiki-w23-xiaomi-ocr-r1",
+  "branch": "codex/w23-ocr-r1-20261031",
+  "base_commit": "946537d0d75ac36b22ac0bb24e0f484a896b4c95",
+  "plan_id": "w23-ocr-r1-2026-10-31",
+  "pwf_plan_root": "docs/plans",
+  "seed_files": [
+    "TASK_CARD.md",
+    "task_plan.md",
+    "findings.md",
+    "progress.md"
+  ],
+  "model_copies": 0,
+  "original_copies": 0,
+  "authors_started": false,
+  "required_runtime_fix_before_start": {
+    "commit": "20dd0143197462be31a467cdd53bcff1a31b4d94",
+    "exact_ci": 41241389817,
+    "conclusion": "success",
+    "preserve_existing_lane_wip": true,
+    "original_setup_head_is_historical": true
+  },
+  "document_role": "CREATION_OR_HANDOFF_SNAPSHOT_NOT_CURRENT_DISPATCH",
+  "current_status_registry": "../../PACKAGE_STATUS.json",
+  "snapshot_note": "Existing status/base/authors_started/remote fields retain original observation; do not infer present execution from them."
+}

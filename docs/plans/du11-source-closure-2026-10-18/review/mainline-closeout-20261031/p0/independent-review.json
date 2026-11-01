@@ -1,0 +1,90 @@
+{
+  "schema_version": "p0-continuity-independent-review/1",
+  "reviewer": "/root/p0_contract_review",
+  "completed_at_utc": "2026-10-31T22:10:07.354278+00:00",
+  "verdict": "PASS_P0_TEST_CONTRACT",
+  "open_findings": [],
+  "scope": "P0 fixed-budget phase and compact deferred disposition only; not real summary/cache/RF or product CI success",
+  "production_source_diff_exit_code": 0,
+  "root_evidence_observed_not_rerun": [
+    {
+      "passed": 39,
+      "seconds": 19.22,
+      "scope": "tail_source_wiring before diagnostic-only fixturecounter update"
+    },
+    {
+      "passed": 101,
+      "seconds": 16.09,
+      "scope": "native continuity and source-profile independence"
+    },
+    {
+      "passed": 3,
+      "seconds": 11.22,
+      "scope": "final compact consumer cases after counter hygiene"
+    }
+  ],
+  "independent_probes": [
+    {
+      "case": "frontier_suffix",
+      "original_units": 3,
+      "retained": 1,
+      "retained_expected": true,
+      "incomplete_honest": true
+    },
+    {
+      "case": "range_middle",
+      "original_units": 3,
+      "retained": 2,
+      "retained_expected": true,
+      "incomplete_honest": true
+    },
+    {
+      "case": "range_no_examples",
+      "original_units": 3,
+      "retained": 2,
+      "retained_expected": true,
+      "incomplete_honest": true
+    }
+  ],
+  "cause": "Old4/5/6 limits now stop in bounded source-prefix observation before lookahead. Empty ID examples plus frontier0 are complete compact unknown-source disposition, not leaked material. Original ID-only assertion no longer tested intended phase.",
+  "test_quality": [
+    "Positive real geometry proves pair can close before faults",
+    "Witness-native and tail-geometry faults hit real scoped work-account refusal; phase-entry once asserted",
+    "Earlystop test preserves work upperbound/no window/no standalone and exact all-input frontier",
+    "Three representations run actual source candidates, not only helper; sampleIDs never replace complete ranges/frontier",
+    "Independent partial probes retain safe known material outside deferred range/frontier, preventing whole-partial-drop vacuity",
+    "Original raw source fixture remains unchanged; no production limit or source classification modified"
+  ],
+  "resolved_minor_fixture_hygiene": "Injected range example states now declare populationcount=len(units),limited=True; final3consumer tests pass. Frontier count remains honest0 examples,unexamined0.",
+  "bindings": [
+    {
+      "path": "src/company_wiki/document_understanding/narrative_continuity.py",
+      "raw_sha256": "d8c8be3d1556fed569fb825db3d0541f806ebb39cfb72008ee952772712db32d",
+      "lf_sha256": "53a2bdf43f74e947e9d790688fc5a799e7d7619297b67e95a820af3dc96c7b6f",
+      "bytes": 49505
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_reading.py",
+      "raw_sha256": "eeff9113fbb9437993e03c562acadba33025d7e9e5acbf67bff77003d0bb6ba7",
+      "lf_sha256": "b21d0b7ad3943d5aea381cc477eaf711ce67acb4636b6d4a31342805c81cf42d",
+      "bytes": 105351
+    },
+    {
+      "path": "tests/unit/du11_tail_integration/test_tail_source_wiring.py",
+      "raw_sha256": "18bae30ecce241ac37c687b867c9b69dff9c2e6be15dfaa2ca24ce00a0f9ef55",
+      "lf_sha256": "18bae30ecce241ac37c687b867c9b69dff9c2e6be15dfaa2ca24ce00a0f9ef55",
+      "bytes": 14098
+    },
+    {
+      "path": "tests/unit/document_understanding_selection/test_reading_native_continuity.py",
+      "raw_sha256": "cfab6382e91222aa7d028ee59d74d0f76ce5031c34f4d7701a7fd3367e2c1cb2",
+      "lf_sha256": "08d2ef04ad5dd3c5352b608880d5926ce411c3a92721f08d7bc8a93f19e7bb5e",
+      "bytes": 44106
+    }
+  ],
+  "new_provider_calls": 0,
+  "new_downloads": 0,
+  "raw_original_access": false,
+  "no_whole_suite_rerun_by_reviewer": true,
+  "ci_boundary": "Normal publication and exact remote CI still ROOT responsibility; not claimed by this review."
+}

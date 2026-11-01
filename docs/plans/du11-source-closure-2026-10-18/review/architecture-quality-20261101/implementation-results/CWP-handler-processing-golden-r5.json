@@ -1,0 +1,1381 @@
+{
+  "schema_version": "cwp-source-processing-handler-golden/1",
+  "reading_context_contract_feature": "reading-context-wire/1.1",
+  "material": "isolated in-memory HTML source fixtures; no production originals",
+  "cases": {
+    "complete": {
+      "schema_version": "narrative-select-result/2.1",
+      "source_ref": {
+        "schema_version": "2.0",
+        "document_id": "doc-select",
+        "source_id": "urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f",
+        "content_sha256": "f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f",
+        "byte_size": 123,
+        "mime_type": "text/html"
+      },
+      "expected_read_policy_sha256": "742494e01e9c204048fb964282540eeaaf804a27418c0f214e2b2ccf152ba1a2",
+      "source_metadata": {
+        "source_class": "filing",
+        "title": "Annual business review",
+        "document_kind": "annual_report",
+        "language": "en"
+      },
+      "parser": {
+        "name": "cwp_document_normalization",
+        "version": "1.0.0"
+      },
+      "selector": {
+        "name": "select_narrative_evidence",
+        "version": "0.9.0"
+      },
+      "selection": {
+        "status": "selected",
+        "coverage_complete": true,
+        "source_units": 1,
+        "candidate_count": 1,
+        "selected_count": 1,
+        "omitted_candidate_count": 0,
+        "dropped_financial_count": 0,
+        "pages_total": 0,
+        "pages_read": 0,
+        "lines_total": 1,
+        "tables_total": 0,
+        "tables_scanned": 0
+      },
+      "evidence_spans": [
+        {
+          "schema_version": "1.0.0",
+          "span_id": "urn:company-wiki:evidence-span:sha256:18caa195bae04cc5c0b8cc026a9dfdb051c33af9d2e738735f60e830519eb5d3",
+          "source_id": "urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f",
+          "locator": "loc:v1/paragraph:0",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 0,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "raw_text": "Our vessels transport liquefied gas between coastal terminals. Net income was $20 million.",
+          "structured_value": {
+            "normalization_schema": "cwp-document-normalization/1",
+            "format": "html",
+            "source_sha256": "f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f",
+            "source_locator": "cwp-html-dom/1|n=0.0.0",
+            "transform": "html_visible_text_v1",
+            "dom_path": "0.0.0",
+            "backend": "html.parser",
+            "normalization_quality": {
+              "coverage_complete": true,
+              "opaque_pages": [],
+              "errors": []
+            },
+            "reading_priority": 2,
+            "reading_value_band": "description",
+            "reading_fact_purpose": "unknown",
+            "reading_score": 0,
+            "language": "en",
+            "selection_reasons": [
+              "reading_plan"
+            ],
+            "source_role": "company_filing",
+            "text_sha256": "c683668e995ff4e4e7b68ab283c30b38630153c2d50a41fd9dce34eb465ed57d",
+            "topics": [],
+            "unit_kind": "html_paragraph"
+          },
+          "parser_name": "cwp_document_normalization",
+          "parser_version": "1.0.0",
+          "output_sha256": "ef061f55def772115d4d050e058d4db14db0eae48b7bb16c70ee6f06cceba4d7",
+          "parse_status": "parsed",
+          "quality_flags": []
+        }
+      ],
+      "prompt_review": {
+        "status": "not_detected",
+        "source_sha256": "f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f",
+        "evidence_sha256": "800d2f575455d0e693631504e7aa67a4049960eac3857e6ace74458da5014278",
+        "policy_hash": "2aa796f182913612ef1669bd3560c61088603a0c42d7ae9e7f106b402218ae7b",
+        "reviewed_at": "2026-09-28T16:00:00Z"
+      },
+      "transcript_lineage": null,
+      "transcript_byte_bindings": [],
+      "summary_scope": "selected_evidence_only",
+      "reading_context": {
+        "schema_version": "du-production-reading/4",
+        "reading_policy_version": "du-sent-policy/1+6eecf28ff08b3900eca130db83eed1b56f82cc892d21d61e62c3f139ce1634b7",
+        "reading_policies": [
+          {
+            "profile_id": "generic",
+            "profile_version": "generic/v2+11967df8c0fa83d9",
+            "family": "unknown",
+            "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 类型未知时按通用来源策略保守阅读：保留第三方作者/事实/观点属性，只记录有原文支持的内容，不推断因果也不生成投资结论。",
+            "policy_components": [
+              {
+                "kind": "fallback",
+                "id": "generic_source_reading",
+                "version": "1.0.1",
+                "content_digest": "2fbaf1381351b0e1515d6ee5a7811d53e67780898dda450b968280dcbfc5179d"
+              }
+            ],
+            "reading_questions": [
+              "类型未知时按通用来源策略保守阅读：保留第三方作者/事实/观点属性，只记录有原文支持的内容，不推断因果也不生成投资结论。"
+            ],
+            "context_requirements": [],
+            "family_policy": {
+              "id": null,
+              "design_status": "proposed",
+              "spec_status": "proposed",
+              "evidence_status": "missing",
+              "integration_status": "not_integrated",
+              "gaps": [
+                "Current purpose not resolved by bounded original evidence."
+              ]
+            },
+            "negative_hints": [
+              "目录页与正文标题同名时以正文为准",
+              "重复页眉/页脚不构成新章节",
+              "签章、确认意见、封面落款不承载业务事实",
+              "三张主表与常规账龄表按财务口径处理",
+              "站点导航与页脚样板文字不是披露内容",
+              "交叉引用中提到的表单名称不构成本文档类型"
+            ],
+            "semantic_units": [
+              "paragraph_event",
+              "background"
+            ],
+            "section_priorities": [
+              {
+                "section_role": "unknown",
+                "priority": 2
+              }
+            ]
+          }
+        ],
+        "business_facets": [],
+        "constraints": [
+          "只使用下面给出的原文单元，不补充任何未出现的数字、主体或时间。",
+          "保留原语言，不翻译、不改写单位与币种。",
+          "每个事实必须能回指到给出的 locator；无法回指的内容不要输出。",
+          "区分已发生事实、公司计划与预测；保留否定与限定条件。",
+          "未读到的内容标注为未读到，不要写成“没有”。",
+          "不输出评级、目标价、仓位或估值结论。",
+          "业务关注项只是阅读提示，不代表原文已经证明对应事实；定性陈述不强制补出数字。"
+        ],
+        "groups": [
+          {
+            "kind": "background",
+            "section_role": "unknown",
+            "evidence_ids": [
+              "urn:company-wiki:evidence-span:sha256:18caa195bae04cc5c0b8cc026a9dfdb051c33af9d2e738735f60e830519eb5d3"
+            ],
+            "citation_views": [
+              {
+                "support_evidence_ids": [
+                  "urn:company-wiki:evidence-span:sha256:18caa195bae04cc5c0b8cc026a9dfdb051c33af9d2e738735f60e830519eb5d3"
+                ],
+                "context_evidence_ids": [],
+                "reading_support_use": "support",
+                "reading_support_reason": "source_readable_narrative"
+              }
+            ],
+            "group_id": "urn:company-wiki:reading-group:sha256:beac1062e47930b7dd187fc317a9278d3cf1234af22edbe4d72972bdc4a85eb6"
+          }
+        ],
+        "unread": {
+          "native_scan": "complete",
+          "opaque_pages": [],
+          "deferred_pages": [],
+          "deferred_unit_ids": [],
+          "unassigned_unit_ids": [],
+          "structure_complete": false,
+          "counts": {
+            "opaque_pages": 0,
+            "deferred_pages": 0,
+            "deferred_unit_ids": 0,
+            "unassigned_unit_ids": 0
+          },
+          "limited": false
+        },
+        "deferred": [],
+        "layout_coverage": {
+          "processed_unit_count": 1,
+          "deferred_unit_ids": [],
+          "opaque_pages": [],
+          "deferred_pages": [],
+          "complete": false
+        },
+        "source_processing_complete": true,
+        "deferred_count": 0,
+        "deferred_limited": false,
+        "selection_diagnostics": [],
+        "selection_trace": {
+          "schema_version": "selection-trace/1",
+          "source_unit_count": 1,
+          "admission": {
+            "count": 1,
+            "admitted_count": 1,
+            "rejected_count": 0,
+            "limited": false,
+            "rejection_counts": {},
+            "samples": [
+              {
+                "unit_id": "urn:company-wiki:narrative-unit:sha256:26c06602f3ddc2c1a48c1176163138671c59d720f1b4af28a594bfa0a4dc2092",
+                "package_ref": "urn:company-wiki:reading-package:sha256:90e5a0a43bac51121faa6af5b1166cd1fe86357837c2221305e676835e09eb85",
+                "status": "admitted",
+                "reason": null,
+                "fact_purpose": "unknown",
+                "fact_reasons": [],
+                "fact_reason_count": 0,
+                "fact_reasons_limited": false,
+                "required_unit_ids": [],
+                "required_unit_count": 0,
+                "required_unit_ids_limited": false,
+                "priority": 2,
+                "selected_span_id": "urn:company-wiki:evidence-span:sha256:18caa195bae04cc5c0b8cc026a9dfdb051c33af9d2e738735f60e830519eb5d3"
+              }
+            ]
+          },
+          "eligible_packages": {
+            "count": 1,
+            "limited": false,
+            "samples": [
+              {
+                "package_ref": "urn:company-wiki:reading-package:sha256:90e5a0a43bac51121faa6af5b1166cd1fe86357837c2221305e676835e09eb85",
+                "kind": "background",
+                "member_unit_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:26c06602f3ddc2c1a48c1176163138671c59d720f1b4af28a594bfa0a4dc2092"
+                ],
+                "member_count": 1,
+                "member_limited": false,
+                "anchor_unit_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:26c06602f3ddc2c1a48c1176163138671c59d720f1b4af28a594bfa0a4dc2092"
+                ],
+                "anchor_count": 1,
+                "anchor_limited": false,
+                "required_unit_ids": [],
+                "required_count": 0,
+                "required_limited": false
+              }
+            ]
+          },
+          "withheld": {
+            "count": 0,
+            "limited": false,
+            "samples": []
+          },
+          "selected": {
+            "count": 1,
+            "limited": false,
+            "samples": [
+              {
+                "unit_id": "urn:company-wiki:narrative-unit:sha256:26c06602f3ddc2c1a48c1176163138671c59d720f1b4af28a594bfa0a4dc2092",
+                "span_id": "urn:company-wiki:evidence-span:sha256:18caa195bae04cc5c0b8cc026a9dfdb051c33af9d2e738735f60e830519eb5d3"
+              }
+            ]
+          }
+        }
+      },
+      "reading_dependencies": {
+        "schema_version": "du-decision-dependencies/1",
+        "status": "complete",
+        "scopes": [
+          {
+            "scope_id": "urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root",
+            "regime": "unknown",
+            "family": "unknown",
+            "form_type": "unknown",
+            "purpose": "unknown"
+          }
+        ],
+        "components": [
+          {
+            "component_id": "binding|urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root|generic",
+            "version": "catalog-binding/1",
+            "content_digest": "97d13169eff5d417ac9633156a9f39fe784eda981d34f1b0cd8bb9f22d9231fa",
+            "matcher_digest": "97d13169eff5d417ac9633156a9f39fe784eda981d34f1b0cd8bb9f22d9231fa",
+            "scope_ids": [
+              "urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root"
+            ]
+          },
+          {
+            "component_id": "carrier|text/html",
+            "version": "source-carrier/1",
+            "content_digest": "ed9d1e1814a347e27cfb304c92527b3b1de3ad3a8dad17b8f207d569cf927ca4",
+            "matcher_digest": "ed9d1e1814a347e27cfb304c92527b3b1de3ad3a8dad17b8f207d569cf927ca4",
+            "scope_ids": [
+              "urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root"
+            ]
+          },
+          {
+            "component_id": "facet|facet_capacity_projects",
+            "version": "facet-decision/1",
+            "content_digest": "daa039b9fa9203341010226c286e9f1689c09f004a87e913f0f5384df54e4216",
+            "matcher_digest": "27eedb0cf174c44c3eabac6087ceb795a6f9e43c6900c422d4d9029f601e568a",
+            "scope_ids": [
+              "urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root"
+            ]
+          },
+          {
+            "component_id": "facet|facet_core_business",
+            "version": "facet-decision/1",
+            "content_digest": "94c6bc31a043c0bc883c0a0bbe570adc1c50ce5158f8f2f4581c8e4f0b61171c",
+            "matcher_digest": "4c646fc499e77e6db962b3e539d8c2dd6e0385f7a8a6b547849455cb2821d37b",
+            "scope_ids": [
+              "urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root"
+            ]
+          },
+          {
+            "component_id": "facet|facet_customer_orders",
+            "version": "facet-decision/1",
+            "content_digest": "9bb10d12aeab54732dce7472692ce646328c05069e604c197b772c0bd0c41879",
+            "matcher_digest": "622da5a82dbf1cc29d3b92587f067ed94e09b5cfaff42b2498e70339925eb240",
+            "scope_ids": [
+              "urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root"
+            ]
+          },
+          {
+            "component_id": "facet|facet_industry_competition",
+            "version": "facet-decision/1",
+            "content_digest": "5c3cb9cdd0a6649221e7d27117bd2c3a49362e68debb319f113bb8ac4fc5209a",
+            "matcher_digest": "d13b7c5f7a19358d3f0b1d64c01450199d9dcf6d30d18733e04befc3b9c416af",
+            "scope_ids": [
+              "urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root"
+            ]
+          },
+          {
+            "component_id": "facet|facet_new_business",
+            "version": "facet-decision/1",
+            "content_digest": "aea6170bd370f7b8baedcae971134c453a1ef9899ebd35b53d921aef5848c23a",
+            "matcher_digest": "076612a10ad359df9a76978463584a10ff84a0b061fd1331998e45d2e4d3992c",
+            "scope_ids": [
+              "urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root"
+            ]
+          },
+          {
+            "component_id": "facet|facet_operating_metrics",
+            "version": "facet-decision/1",
+            "content_digest": "0c5f635f15c47d8aa94d8df8358ca1b40be1d685db9cfd37d25f236071e094a9",
+            "matcher_digest": "12516ad9d586eef912442a7c15b1a53d767889732a4b363ef0afcf602802aef9",
+            "scope_ids": [
+              "urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root"
+            ]
+          },
+          {
+            "component_id": "facet|facet_overseas",
+            "version": "facet-decision/1",
+            "content_digest": "ecae563611546f54092d8db1bcf6570508aa963c9b8190f55e9cfa075fe3b07e",
+            "matcher_digest": "e7aa46e0677563334e1c11d23d4487116432b5831e945be28f0504a4e7ffe391",
+            "scope_ids": [
+              "urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root"
+            ]
+          },
+          {
+            "component_id": "facet|facet_risk_denial",
+            "version": "facet-decision/1",
+            "content_digest": "0e54c3a014380955a878f4a9cc04975986536a1e1d2b3b58a4de157009832006",
+            "matcher_digest": "f42efde28d658b7462420ab51eaf4858766953da230d4349b352adf6dfd6c6ab",
+            "scope_ids": [
+              "urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root"
+            ]
+          },
+          {
+            "component_id": "facet|mechanism_biopharma_cdmo",
+            "version": "facet-decision/1",
+            "content_digest": "43a0b31780da302f3358c988f5afd11c505cf2ba2fc38bddc13310063fb65661",
+            "matcher_digest": "339c1a9ccf07455a20807c4445796f6fc5d8e6a1741799f19e07629d962fda92",
+            "scope_ids": [
+              "urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root"
+            ]
+          },
+          {
+            "component_id": "facet|mechanism_manufacturing",
+            "version": "facet-decision/1",
+            "content_digest": "834cd3589be895b270740514f24abf3b14dd66850aca4a06d557072725fa5348",
+            "matcher_digest": "ae4a2ff576f04b1e6372b48ea64b265947a553d571967c3f609d24424f3380b5",
+            "scope_ids": [
+              "urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root"
+            ]
+          },
+          {
+            "component_id": "facet|mechanism_store_network",
+            "version": "facet-decision/1",
+            "content_digest": "4f853cdaa0f507c5847296026e615a512fcddf7a24f08dd9eb2cddc33cffd8d0",
+            "matcher_digest": "b5f05fdc2210bbd629cadcad7869b1b88032f41623db2432d6a68c564db1dfd9",
+            "scope_ids": [
+              "urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root"
+            ]
+          },
+          {
+            "component_id": "facet|mechanism_subscription_consumption",
+            "version": "facet-decision/1",
+            "content_digest": "dbee663c61a2117745cc389ba729d81bc5d8a4ecf315c2faff218f8fef40e35b",
+            "matcher_digest": "5209f05801495e04123f72045e4d8269b3fca4201073a25dfdf09f4290cec02d",
+            "scope_ids": [
+              "urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root"
+            ]
+          },
+          {
+            "component_id": "facet|semantic_capacity_project",
+            "version": "facet-decision/1",
+            "content_digest": "2a35749f9dead1ebc90b9f3efb7be946393d22e870bdf31db74b23846262a44c",
+            "matcher_digest": "94910de41eff8344affd83eabe4d73dea718c1abc3d21cea50df4dc9d5c220e3",
+            "scope_ids": [
+              "urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root"
+            ]
+          },
+          {
+            "component_id": "facet|semantic_stage_progression",
+            "version": "facet-decision/1",
+            "content_digest": "b5ddd73791d181ee892ab9d367c253a0668a3630623e7395953f54adefecedf9",
+            "matcher_digest": "090df710a280fa34d851f6727918259c88e7e57f02bae13b82310b3bb8dc1181",
+            "scope_ids": [
+              "urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root"
+            ]
+          },
+          {
+            "component_id": "fallback|urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root",
+            "version": "1.0.1",
+            "content_digest": "2fbaf1381351b0e1515d6ee5a7811d53e67780898dda450b968280dcbfc5179d",
+            "matcher_digest": "2fbaf1381351b0e1515d6ee5a7811d53e67780898dda450b968280dcbfc5179d",
+            "scope_ids": [
+              "urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root"
+            ]
+          },
+          {
+            "component_id": "family|urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root|container_attachment",
+            "version": "family-decision/1",
+            "content_digest": "1f7dd5901de3b49c5a64138e78dc3e5d08f9e6e00af4a8606a55770b5dbb24db",
+            "matcher_digest": "d44096922dfb139243c3311984234deae413c111052388fc817625c17cc213c8",
+            "scope_ids": [
+              "urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root"
+            ]
+          },
+          {
+            "component_id": "family|urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root|event_response",
+            "version": "family-decision/1",
+            "content_digest": "7519ace99f4cd89593ac86fa6861f1ab0b36d4e3ec94c40eb4cc64981d53b908",
+            "matcher_digest": "9f06c8c7574b77305da7f7cc4bafa22107184d824fe906241f4f882c6811b863",
+            "scope_ids": [
+              "urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root"
+            ]
+          },
+          {
+            "component_id": "family|urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root|lifecycle_revision_overlay",
+            "version": "family-decision/1",
+            "content_digest": "64bb0ee34046b9123c61b558fc6e3ceeb3751f8b8d35d3e806dd0c9be2913e9c",
+            "matcher_digest": "b604e271817be993464d962171eb5233a307ed0909ab7a252219373b556b5071",
+            "scope_ids": [
+              "urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root"
+            ]
+          },
+          {
+            "component_id": "family|urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root|secondary_research",
+            "version": "family-decision/1",
+            "content_digest": "b1033a527edabdc929514b119fc8fef0a98ae5dc02e617e055a06a1482f59226",
+            "matcher_digest": "3a7a112994b0e8aa702bf1f601237d842ee204a086ad9a9998b98e9ca5019dc0",
+            "scope_ids": [
+              "urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root"
+            ]
+          },
+          {
+            "component_id": "source-matcher-used|company_wiki.document_normalization.replay",
+            "version": "parsed-material-matcher/1",
+            "content_digest": "80667fe37d00c4f4311df3ed485f1338c897d39ca22849ab6e8475adf01d40b8",
+            "matcher_digest": "80667fe37d00c4f4311df3ed485f1338c897d39ca22849ab6e8475adf01d40b8",
+            "scope_ids": [
+              "urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root"
+            ]
+          }
+        ],
+        "candidates": [
+          {
+            "candidate_id": "facet|facet_capacity_projects",
+            "scope_id": "urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root",
+            "component_ids": [
+              "facet|facet_capacity_projects"
+            ],
+            "eligible": false
+          },
+          {
+            "candidate_id": "facet|facet_core_business",
+            "scope_id": "urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root",
+            "component_ids": [
+              "facet|facet_core_business"
+            ],
+            "eligible": false
+          },
+          {
+            "candidate_id": "facet|facet_customer_orders",
+            "scope_id": "urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root",
+            "component_ids": [
+              "facet|facet_customer_orders"
+            ],
+            "eligible": false
+          },
+          {
+            "candidate_id": "facet|facet_industry_competition",
+            "scope_id": "urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root",
+            "component_ids": [
+              "facet|facet_industry_competition"
+            ],
+            "eligible": false
+          },
+          {
+            "candidate_id": "facet|facet_new_business",
+            "scope_id": "urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root",
+            "component_ids": [
+              "facet|facet_new_business"
+            ],
+            "eligible": false
+          },
+          {
+            "candidate_id": "facet|facet_operating_metrics",
+            "scope_id": "urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root",
+            "component_ids": [
+              "facet|facet_operating_metrics"
+            ],
+            "eligible": false
+          },
+          {
+            "candidate_id": "facet|facet_overseas",
+            "scope_id": "urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root",
+            "component_ids": [
+              "facet|facet_overseas"
+            ],
+            "eligible": false
+          },
+          {
+            "candidate_id": "facet|facet_risk_denial",
+            "scope_id": "urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root",
+            "component_ids": [
+              "facet|facet_risk_denial"
+            ],
+            "eligible": false
+          },
+          {
+            "candidate_id": "facet|mechanism_biopharma_cdmo",
+            "scope_id": "urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root",
+            "component_ids": [
+              "facet|mechanism_biopharma_cdmo"
+            ],
+            "eligible": false
+          },
+          {
+            "candidate_id": "facet|mechanism_manufacturing",
+            "scope_id": "urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root",
+            "component_ids": [
+              "facet|mechanism_manufacturing"
+            ],
+            "eligible": false
+          },
+          {
+            "candidate_id": "facet|mechanism_store_network",
+            "scope_id": "urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root",
+            "component_ids": [
+              "facet|mechanism_store_network"
+            ],
+            "eligible": false
+          },
+          {
+            "candidate_id": "facet|mechanism_subscription_consumption",
+            "scope_id": "urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root",
+            "component_ids": [
+              "facet|mechanism_subscription_consumption"
+            ],
+            "eligible": false
+          },
+          {
+            "candidate_id": "facet|semantic_capacity_project",
+            "scope_id": "urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root",
+            "component_ids": [
+              "facet|semantic_capacity_project"
+            ],
+            "eligible": false
+          },
+          {
+            "candidate_id": "facet|semantic_stage_progression",
+            "scope_id": "urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root",
+            "component_ids": [
+              "facet|semantic_stage_progression"
+            ],
+            "eligible": false
+          },
+          {
+            "candidate_id": "family|urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root|container_attachment",
+            "scope_id": "urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root",
+            "component_ids": [
+              "family|urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root|container_attachment"
+            ],
+            "eligible": true
+          },
+          {
+            "candidate_id": "family|urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root|event_response",
+            "scope_id": "urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root",
+            "component_ids": [
+              "family|urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root|event_response"
+            ],
+            "eligible": true
+          },
+          {
+            "candidate_id": "family|urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root|lifecycle_revision_overlay",
+            "scope_id": "urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root",
+            "component_ids": [
+              "family|urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root|lifecycle_revision_overlay"
+            ],
+            "eligible": true
+          },
+          {
+            "candidate_id": "family|urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root|secondary_research",
+            "scope_id": "urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root",
+            "component_ids": [
+              "family|urn:company-wiki:source:sha256:f9e678de8faa0ac0236fd7e150127d93a23e1e28a6cc11075bfa84d6b316765f|root|secondary_research"
+            ],
+            "eligible": true
+          }
+        ],
+        "versions": {
+          "budget": "reading_plan/3",
+          "business_algorithms": "46b2feb61572709a07cf0cf3c742c1f90fab08145233d29736722854bbcb91d5",
+          "business_policy": "reading-business-policy/29",
+          "context_policy": "a57a8dd2da347e8dfd04ff7683e0401450cf20ba35e5b039fb48b1649547858e",
+          "continuity": "native-narrative-continuity/11",
+          "continuity_algorithms": "b9a842a87b846ac2970745d674286bff20a3fb10d5bcc610f8bd2e49662805f9",
+          "document_work_limit": "16000000",
+          "inventory": "1.12.0",
+          "inventory_algorithm": "b230a809628f19bb8fce870d97fb5cd0fc9bcbed4e0117581feb18e9e663f36f",
+          "layout": "1.3.0",
+          "native_table_bridge": "2.1.1",
+          "observation_adapter": "du-observation-adapter/9",
+          "pipeline": "1.15.0",
+          "reading_context_contract": "reading-context-wire/1.1",
+          "script_matching": "source-script-match/1",
+          "selector": "0.9.0",
+          "source_usability": "source-usability/3+0d4e43b9ae74291a09d91fd7c99ad158dc2350597e16d14cd47b2d8ea7c2226f",
+          "strategy_binding": "reading-strategy-binding/3",
+          "summary": "1.1.0",
+          "table_purpose": "operating-table-purpose/6"
+        },
+        "diagnostics": [],
+        "decision_digest": "ffdf3b576b7f57dba26361024ec6bc35f997465ce58f13d87490fb96c8e2cd7e"
+      }
+    },
+    "deferred": {
+      "schema_version": "narrative-select-result/2.1",
+      "source_ref": {
+        "schema_version": "2.0",
+        "document_id": "doc-select",
+        "source_id": "urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4",
+        "content_sha256": "e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4",
+        "byte_size": 169,
+        "mime_type": "text/html"
+      },
+      "expected_read_policy_sha256": "742494e01e9c204048fb964282540eeaaf804a27418c0f214e2b2ccf152ba1a2",
+      "source_metadata": {
+        "source_class": "filing",
+        "title": "Annual business review",
+        "document_kind": "annual_report",
+        "language": "en"
+      },
+      "parser": {
+        "name": "cwp_document_normalization",
+        "version": "1.0.0"
+      },
+      "selector": {
+        "name": "select_narrative_evidence",
+        "version": "0.9.0"
+      },
+      "selection": {
+        "status": "partial",
+        "coverage_complete": true,
+        "source_units": 2,
+        "candidate_count": 2,
+        "selected_count": 1,
+        "omitted_candidate_count": 1,
+        "dropped_financial_count": 0,
+        "pages_total": 0,
+        "pages_read": 0,
+        "lines_total": 2,
+        "tables_total": 0,
+        "tables_scanned": 0
+      },
+      "evidence_spans": [
+        {
+          "schema_version": "1.0.0",
+          "span_id": "urn:company-wiki:evidence-span:sha256:001983fa0d369ddb2e884af962897659b40170ca69bf98e4e76cdb6abaaa0fdb",
+          "source_id": "urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4",
+          "locator": "loc:v1/paragraph:1",
+          "coordinates": {
+            "page_number": null,
+            "paragraph_index": 1,
+            "table_index": null,
+            "row_index": null,
+            "column_index": null,
+            "char_start": null,
+            "char_end": null
+          },
+          "raw_text": "Our software processes customer orders.",
+          "structured_value": {
+            "normalization_schema": "cwp-document-normalization/1",
+            "format": "html",
+            "source_sha256": "e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4",
+            "source_locator": "cwp-html-dom/1|n=0.0.1",
+            "transform": "html_visible_text_v1",
+            "dom_path": "0.0.1",
+            "backend": "html.parser",
+            "normalization_quality": {
+              "coverage_complete": true,
+              "opaque_pages": [],
+              "errors": []
+            },
+            "reading_priority": 2,
+            "reading_value_band": "meaningful_fact",
+            "reading_fact_purpose": "operating",
+            "reading_score": 3,
+            "language": "en",
+            "selection_reasons": [
+              "reading_plan",
+              "operating_mechanism"
+            ],
+            "source_role": "company_filing",
+            "text_sha256": "4a7358ce05ba58ebe081223d6392154e83961ba9863d2e44504ebd8764f066bb",
+            "topics": [
+              "operating_mechanism"
+            ],
+            "unit_kind": "html_paragraph"
+          },
+          "parser_name": "cwp_document_normalization",
+          "parser_version": "1.0.0",
+          "output_sha256": "10976949fed1f2137804d36c770b290b6bb464a309e1c013b502a5ddc4583c0d",
+          "parse_status": "parsed",
+          "quality_flags": []
+        }
+      ],
+      "prompt_review": {
+        "status": "not_detected",
+        "source_sha256": "e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4",
+        "evidence_sha256": "800d2f575455d0e693631504e7aa67a4049960eac3857e6ace74458da5014278",
+        "policy_hash": "2aa796f182913612ef1669bd3560c61088603a0c42d7ae9e7f106b402218ae7b",
+        "reviewed_at": "2026-09-28T16:00:00Z"
+      },
+      "transcript_lineage": null,
+      "transcript_byte_bindings": [],
+      "summary_scope": "selected_evidence_only",
+      "reading_context": {
+        "schema_version": "du-production-reading/4",
+        "reading_policy_version": "du-sent-policy/1+6eecf28ff08b3900eca130db83eed1b56f82cc892d21d61e62c3f139ce1634b7",
+        "reading_policies": [
+          {
+            "profile_id": "generic",
+            "profile_version": "generic/v2+11967df8c0fa83d9",
+            "family": "unknown",
+            "summary_focus": "记录报告期已发生的经营事实、业务与产品变化、客户与订单、产能与项目进展、公司计划、以及有来源支持的具体风险与限制；数字保留单位、币种、期间与口径。总结相较可比期间的变化，区分已发生事实、计划与预测，未披露项标注未披露而不是零。保留原语言与来源主体，不生成投资结论。 类型未知时按通用来源策略保守阅读：保留第三方作者/事实/观点属性，只记录有原文支持的内容，不推断因果也不生成投资结论。",
+            "policy_components": [
+              {
+                "kind": "fallback",
+                "id": "generic_source_reading",
+                "version": "1.0.1",
+                "content_digest": "2fbaf1381351b0e1515d6ee5a7811d53e67780898dda450b968280dcbfc5179d"
+              }
+            ],
+            "reading_questions": [
+              "类型未知时按通用来源策略保守阅读：保留第三方作者/事实/观点属性，只记录有原文支持的内容，不推断因果也不生成投资结论。"
+            ],
+            "context_requirements": [],
+            "family_policy": {
+              "id": null,
+              "design_status": "proposed",
+              "spec_status": "proposed",
+              "evidence_status": "missing",
+              "integration_status": "not_integrated",
+              "gaps": [
+                "Current purpose not resolved by bounded original evidence."
+              ]
+            },
+            "negative_hints": [
+              "目录页与正文标题同名时以正文为准",
+              "重复页眉/页脚不构成新章节",
+              "签章、确认意见、封面落款不承载业务事实",
+              "三张主表与常规账龄表按财务口径处理",
+              "站点导航与页脚样板文字不是披露内容",
+              "交叉引用中提到的表单名称不构成本文档类型"
+            ],
+            "semantic_units": [
+              "paragraph_event",
+              "background"
+            ],
+            "section_priorities": [
+              {
+                "section_role": "unknown",
+                "priority": 2
+              }
+            ]
+          }
+        ],
+        "business_facets": [],
+        "constraints": [
+          "只使用下面给出的原文单元，不补充任何未出现的数字、主体或时间。",
+          "保留原语言，不翻译、不改写单位与币种。",
+          "每个事实必须能回指到给出的 locator；无法回指的内容不要输出。",
+          "区分已发生事实、公司计划与预测；保留否定与限定条件。",
+          "未读到的内容标注为未读到，不要写成“没有”。",
+          "不输出评级、目标价、仓位或估值结论。",
+          "业务关注项只是阅读提示，不代表原文已经证明对应事实；定性陈述不强制补出数字。"
+        ],
+        "groups": [
+          {
+            "kind": "background",
+            "section_role": "unknown",
+            "evidence_ids": [
+              "urn:company-wiki:evidence-span:sha256:001983fa0d369ddb2e884af962897659b40170ca69bf98e4e76cdb6abaaa0fdb"
+            ],
+            "citation_views": [
+              {
+                "support_evidence_ids": [
+                  "urn:company-wiki:evidence-span:sha256:001983fa0d369ddb2e884af962897659b40170ca69bf98e4e76cdb6abaaa0fdb"
+                ],
+                "context_evidence_ids": [],
+                "reading_support_use": "support",
+                "reading_support_reason": "source_business_relation"
+              }
+            ],
+            "group_id": "urn:company-wiki:reading-group:sha256:c6e514f37fac4053d3e936ad0c359b63678bef15a3fbd9aa5b009b16bbd6cd83"
+          }
+        ],
+        "unread": {
+          "native_scan": "complete",
+          "opaque_pages": [],
+          "deferred_pages": [],
+          "deferred_unit_ids": [],
+          "unassigned_unit_ids": [],
+          "structure_complete": false,
+          "counts": {
+            "opaque_pages": 0,
+            "deferred_pages": 0,
+            "deferred_unit_ids": 0,
+            "unassigned_unit_ids": 0
+          },
+          "limited": false
+        },
+        "deferred": [
+          {
+            "package_id": "m1:urn:company-wiki:narrative-unit:sha256:0a7fee229a4239a467e21e8b529980e14b44a3ef53d10dcf08edc6c3edcc4c01",
+            "reason": "source_grammar_unavailable"
+          }
+        ],
+        "layout_coverage": {
+          "processed_unit_count": 2,
+          "deferred_unit_ids": [],
+          "opaque_pages": [],
+          "deferred_pages": [],
+          "complete": false
+        },
+        "source_processing_complete": false,
+        "deferred_count": 1,
+        "deferred_limited": false,
+        "selection_diagnostics": [
+          {
+            "code": "source_grammar_unavailable",
+            "count": 1,
+            "phase": "source_readability",
+            "dimension": "source_readability",
+            "external_model_cost": false,
+            "known_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:0a7fee229a4239a467e21e8b529980e14b44a3ef53d10dcf08edc6c3edcc4c01"
+            ],
+            "known_unit_count": 1,
+            "known_unit_ids_limited": false
+          }
+        ],
+        "selection_trace": {
+          "schema_version": "selection-trace/1",
+          "source_unit_count": 2,
+          "admission": {
+            "count": 2,
+            "admitted_count": 1,
+            "rejected_count": 1,
+            "limited": false,
+            "rejection_counts": {
+              "source_grammar_unavailable": 1
+            },
+            "samples": [
+              {
+                "unit_id": "urn:company-wiki:narrative-unit:sha256:a224278a9bfa4068a750fe2d023afcb259eb1bc19f22c7859c62d1c10016067b",
+                "package_ref": "urn:company-wiki:reading-package:sha256:b52aebac9730b18f20e4c879532eaf1bf3fbacb57666f408eddb020d34b12ba2",
+                "status": "admitted",
+                "reason": null,
+                "fact_purpose": "operating",
+                "fact_reasons": [
+                  "operating_mechanism"
+                ],
+                "fact_reason_count": 1,
+                "fact_reasons_limited": false,
+                "required_unit_ids": [],
+                "required_unit_count": 0,
+                "required_unit_ids_limited": false,
+                "priority": 2,
+                "selected_span_id": "urn:company-wiki:evidence-span:sha256:001983fa0d369ddb2e884af962897659b40170ca69bf98e4e76cdb6abaaa0fdb"
+              },
+              {
+                "unit_id": "urn:company-wiki:narrative-unit:sha256:0a7fee229a4239a467e21e8b529980e14b44a3ef53d10dcf08edc6c3edcc4c01",
+                "package_ref": "urn:company-wiki:reading-package:sha256:5a1411bbf3b41c114e0154dc000580c86a2cfabe79d8bce62132f1b0af0ced20",
+                "status": "not_admitted",
+                "reason": "source_grammar_unavailable",
+                "fact_purpose": "unknown",
+                "fact_reasons": [],
+                "fact_reason_count": 0,
+                "fact_reasons_limited": false,
+                "required_unit_ids": [],
+                "required_unit_count": 0,
+                "required_unit_ids_limited": false,
+                "priority": 2,
+                "selected_span_id": null
+              }
+            ]
+          },
+          "eligible_packages": {
+            "count": 1,
+            "limited": false,
+            "samples": [
+              {
+                "package_ref": "urn:company-wiki:reading-package:sha256:b52aebac9730b18f20e4c879532eaf1bf3fbacb57666f408eddb020d34b12ba2",
+                "kind": "background",
+                "member_unit_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:a224278a9bfa4068a750fe2d023afcb259eb1bc19f22c7859c62d1c10016067b"
+                ],
+                "member_count": 1,
+                "member_limited": false,
+                "anchor_unit_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:a224278a9bfa4068a750fe2d023afcb259eb1bc19f22c7859c62d1c10016067b"
+                ],
+                "anchor_count": 1,
+                "anchor_limited": false,
+                "required_unit_ids": [],
+                "required_count": 0,
+                "required_limited": false
+              }
+            ]
+          },
+          "withheld": {
+            "count": 1,
+            "limited": false,
+            "samples": [
+              {
+                "package_ref": "urn:company-wiki:reading-package:sha256:5a1411bbf3b41c114e0154dc000580c86a2cfabe79d8bce62132f1b0af0ced20",
+                "reason": "source_grammar_unavailable",
+                "status": "deferred",
+                "known_unit_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:0a7fee229a4239a467e21e8b529980e14b44a3ef53d10dcf08edc6c3edcc4c01"
+                ],
+                "known_unit_count": 1,
+                "known_unit_ids_limited": false
+              }
+            ]
+          },
+          "selected": {
+            "count": 1,
+            "limited": false,
+            "samples": [
+              {
+                "unit_id": "urn:company-wiki:narrative-unit:sha256:a224278a9bfa4068a750fe2d023afcb259eb1bc19f22c7859c62d1c10016067b",
+                "span_id": "urn:company-wiki:evidence-span:sha256:001983fa0d369ddb2e884af962897659b40170ca69bf98e4e76cdb6abaaa0fdb"
+              }
+            ]
+          }
+        }
+      },
+      "reading_dependencies": {
+        "schema_version": "du-decision-dependencies/1",
+        "status": "partial",
+        "scopes": [
+          {
+            "scope_id": "urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root",
+            "regime": "unknown",
+            "family": "unknown",
+            "form_type": "unknown",
+            "purpose": "unknown"
+          }
+        ],
+        "components": [
+          {
+            "component_id": "binding|urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root|generic",
+            "version": "catalog-binding/1",
+            "content_digest": "97d13169eff5d417ac9633156a9f39fe784eda981d34f1b0cd8bb9f22d9231fa",
+            "matcher_digest": "97d13169eff5d417ac9633156a9f39fe784eda981d34f1b0cd8bb9f22d9231fa",
+            "scope_ids": [
+              "urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root"
+            ]
+          },
+          {
+            "component_id": "carrier|text/html",
+            "version": "source-carrier/1",
+            "content_digest": "ed9d1e1814a347e27cfb304c92527b3b1de3ad3a8dad17b8f207d569cf927ca4",
+            "matcher_digest": "ed9d1e1814a347e27cfb304c92527b3b1de3ad3a8dad17b8f207d569cf927ca4",
+            "scope_ids": [
+              "urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root"
+            ]
+          },
+          {
+            "component_id": "facet|facet_capacity_projects",
+            "version": "facet-decision/1",
+            "content_digest": "daa039b9fa9203341010226c286e9f1689c09f004a87e913f0f5384df54e4216",
+            "matcher_digest": "27eedb0cf174c44c3eabac6087ceb795a6f9e43c6900c422d4d9029f601e568a",
+            "scope_ids": [
+              "urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root"
+            ]
+          },
+          {
+            "component_id": "facet|facet_core_business",
+            "version": "facet-decision/1",
+            "content_digest": "94c6bc31a043c0bc883c0a0bbe570adc1c50ce5158f8f2f4581c8e4f0b61171c",
+            "matcher_digest": "4c646fc499e77e6db962b3e539d8c2dd6e0385f7a8a6b547849455cb2821d37b",
+            "scope_ids": [
+              "urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root"
+            ]
+          },
+          {
+            "component_id": "facet|facet_customer_orders",
+            "version": "facet-decision/1",
+            "content_digest": "9bb10d12aeab54732dce7472692ce646328c05069e604c197b772c0bd0c41879",
+            "matcher_digest": "622da5a82dbf1cc29d3b92587f067ed94e09b5cfaff42b2498e70339925eb240",
+            "scope_ids": [
+              "urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root"
+            ]
+          },
+          {
+            "component_id": "facet|facet_industry_competition",
+            "version": "facet-decision/1",
+            "content_digest": "5c3cb9cdd0a6649221e7d27117bd2c3a49362e68debb319f113bb8ac4fc5209a",
+            "matcher_digest": "d13b7c5f7a19358d3f0b1d64c01450199d9dcf6d30d18733e04befc3b9c416af",
+            "scope_ids": [
+              "urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root"
+            ]
+          },
+          {
+            "component_id": "facet|facet_new_business",
+            "version": "facet-decision/1",
+            "content_digest": "aea6170bd370f7b8baedcae971134c453a1ef9899ebd35b53d921aef5848c23a",
+            "matcher_digest": "076612a10ad359df9a76978463584a10ff84a0b061fd1331998e45d2e4d3992c",
+            "scope_ids": [
+              "urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root"
+            ]
+          },
+          {
+            "component_id": "facet|facet_operating_metrics",
+            "version": "facet-decision/1",
+            "content_digest": "0c5f635f15c47d8aa94d8df8358ca1b40be1d685db9cfd37d25f236071e094a9",
+            "matcher_digest": "12516ad9d586eef912442a7c15b1a53d767889732a4b363ef0afcf602802aef9",
+            "scope_ids": [
+              "urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root"
+            ]
+          },
+          {
+            "component_id": "facet|facet_overseas",
+            "version": "facet-decision/1",
+            "content_digest": "ecae563611546f54092d8db1bcf6570508aa963c9b8190f55e9cfa075fe3b07e",
+            "matcher_digest": "e7aa46e0677563334e1c11d23d4487116432b5831e945be28f0504a4e7ffe391",
+            "scope_ids": [
+              "urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root"
+            ]
+          },
+          {
+            "component_id": "facet|facet_risk_denial",
+            "version": "facet-decision/1",
+            "content_digest": "0e54c3a014380955a878f4a9cc04975986536a1e1d2b3b58a4de157009832006",
+            "matcher_digest": "f42efde28d658b7462420ab51eaf4858766953da230d4349b352adf6dfd6c6ab",
+            "scope_ids": [
+              "urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root"
+            ]
+          },
+          {
+            "component_id": "facet|mechanism_biopharma_cdmo",
+            "version": "facet-decision/1",
+            "content_digest": "43a0b31780da302f3358c988f5afd11c505cf2ba2fc38bddc13310063fb65661",
+            "matcher_digest": "339c1a9ccf07455a20807c4445796f6fc5d8e6a1741799f19e07629d962fda92",
+            "scope_ids": [
+              "urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root"
+            ]
+          },
+          {
+            "component_id": "facet|mechanism_manufacturing",
+            "version": "facet-decision/1",
+            "content_digest": "834cd3589be895b270740514f24abf3b14dd66850aca4a06d557072725fa5348",
+            "matcher_digest": "ae4a2ff576f04b1e6372b48ea64b265947a553d571967c3f609d24424f3380b5",
+            "scope_ids": [
+              "urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root"
+            ]
+          },
+          {
+            "component_id": "facet|mechanism_store_network",
+            "version": "facet-decision/1",
+            "content_digest": "4f853cdaa0f507c5847296026e615a512fcddf7a24f08dd9eb2cddc33cffd8d0",
+            "matcher_digest": "b5f05fdc2210bbd629cadcad7869b1b88032f41623db2432d6a68c564db1dfd9",
+            "scope_ids": [
+              "urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root"
+            ]
+          },
+          {
+            "component_id": "facet|mechanism_subscription_consumption",
+            "version": "facet-decision/1",
+            "content_digest": "dbee663c61a2117745cc389ba729d81bc5d8a4ecf315c2faff218f8fef40e35b",
+            "matcher_digest": "5209f05801495e04123f72045e4d8269b3fca4201073a25dfdf09f4290cec02d",
+            "scope_ids": [
+              "urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root"
+            ]
+          },
+          {
+            "component_id": "facet|semantic_capacity_project",
+            "version": "facet-decision/1",
+            "content_digest": "2a35749f9dead1ebc90b9f3efb7be946393d22e870bdf31db74b23846262a44c",
+            "matcher_digest": "94910de41eff8344affd83eabe4d73dea718c1abc3d21cea50df4dc9d5c220e3",
+            "scope_ids": [
+              "urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root"
+            ]
+          },
+          {
+            "component_id": "facet|semantic_stage_progression",
+            "version": "facet-decision/1",
+            "content_digest": "b5ddd73791d181ee892ab9d367c253a0668a3630623e7395953f54adefecedf9",
+            "matcher_digest": "090df710a280fa34d851f6727918259c88e7e57f02bae13b82310b3bb8dc1181",
+            "scope_ids": [
+              "urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root"
+            ]
+          },
+          {
+            "component_id": "fallback|urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root",
+            "version": "1.0.1",
+            "content_digest": "2fbaf1381351b0e1515d6ee5a7811d53e67780898dda450b968280dcbfc5179d",
+            "matcher_digest": "2fbaf1381351b0e1515d6ee5a7811d53e67780898dda450b968280dcbfc5179d",
+            "scope_ids": [
+              "urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root"
+            ]
+          },
+          {
+            "component_id": "family|urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root|container_attachment",
+            "version": "family-decision/1",
+            "content_digest": "1f7dd5901de3b49c5a64138e78dc3e5d08f9e6e00af4a8606a55770b5dbb24db",
+            "matcher_digest": "d44096922dfb139243c3311984234deae413c111052388fc817625c17cc213c8",
+            "scope_ids": [
+              "urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root"
+            ]
+          },
+          {
+            "component_id": "family|urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root|event_response",
+            "version": "family-decision/1",
+            "content_digest": "7519ace99f4cd89593ac86fa6861f1ab0b36d4e3ec94c40eb4cc64981d53b908",
+            "matcher_digest": "9f06c8c7574b77305da7f7cc4bafa22107184d824fe906241f4f882c6811b863",
+            "scope_ids": [
+              "urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root"
+            ]
+          },
+          {
+            "component_id": "family|urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root|lifecycle_revision_overlay",
+            "version": "family-decision/1",
+            "content_digest": "64bb0ee34046b9123c61b558fc6e3ceeb3751f8b8d35d3e806dd0c9be2913e9c",
+            "matcher_digest": "b604e271817be993464d962171eb5233a307ed0909ab7a252219373b556b5071",
+            "scope_ids": [
+              "urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root"
+            ]
+          },
+          {
+            "component_id": "family|urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root|secondary_research",
+            "version": "family-decision/1",
+            "content_digest": "b1033a527edabdc929514b119fc8fef0a98ae5dc02e617e055a06a1482f59226",
+            "matcher_digest": "3a7a112994b0e8aa702bf1f601237d842ee204a086ad9a9998b98e9ca5019dc0",
+            "scope_ids": [
+              "urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root"
+            ]
+          },
+          {
+            "component_id": "source-matcher-used|company_wiki.document_normalization.replay",
+            "version": "parsed-material-matcher/1",
+            "content_digest": "80667fe37d00c4f4311df3ed485f1338c897d39ca22849ab6e8475adf01d40b8",
+            "matcher_digest": "80667fe37d00c4f4311df3ed485f1338c897d39ca22849ab6e8475adf01d40b8",
+            "scope_ids": [
+              "urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root"
+            ]
+          }
+        ],
+        "candidates": [
+          {
+            "candidate_id": "facet|facet_capacity_projects",
+            "scope_id": "urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root",
+            "component_ids": [
+              "facet|facet_capacity_projects"
+            ],
+            "eligible": false
+          },
+          {
+            "candidate_id": "facet|facet_core_business",
+            "scope_id": "urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root",
+            "component_ids": [
+              "facet|facet_core_business"
+            ],
+            "eligible": false
+          },
+          {
+            "candidate_id": "facet|facet_customer_orders",
+            "scope_id": "urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root",
+            "component_ids": [
+              "facet|facet_customer_orders"
+            ],
+            "eligible": false
+          },
+          {
+            "candidate_id": "facet|facet_industry_competition",
+            "scope_id": "urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root",
+            "component_ids": [
+              "facet|facet_industry_competition"
+            ],
+            "eligible": false
+          },
+          {
+            "candidate_id": "facet|facet_new_business",
+            "scope_id": "urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root",
+            "component_ids": [
+              "facet|facet_new_business"
+            ],
+            "eligible": false
+          },
+          {
+            "candidate_id": "facet|facet_operating_metrics",
+            "scope_id": "urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root",
+            "component_ids": [
+              "facet|facet_operating_metrics"
+            ],
+            "eligible": false
+          },
+          {
+            "candidate_id": "facet|facet_overseas",
+            "scope_id": "urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root",
+            "component_ids": [
+              "facet|facet_overseas"
+            ],
+            "eligible": false
+          },
+          {
+            "candidate_id": "facet|facet_risk_denial",
+            "scope_id": "urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root",
+            "component_ids": [
+              "facet|facet_risk_denial"
+            ],
+            "eligible": false
+          },
+          {
+            "candidate_id": "facet|mechanism_biopharma_cdmo",
+            "scope_id": "urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root",
+            "component_ids": [
+              "facet|mechanism_biopharma_cdmo"
+            ],
+            "eligible": false
+          },
+          {
+            "candidate_id": "facet|mechanism_manufacturing",
+            "scope_id": "urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root",
+            "component_ids": [
+              "facet|mechanism_manufacturing"
+            ],
+            "eligible": false
+          },
+          {
+            "candidate_id": "facet|mechanism_store_network",
+            "scope_id": "urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root",
+            "component_ids": [
+              "facet|mechanism_store_network"
+            ],
+            "eligible": false
+          },
+          {
+            "candidate_id": "facet|mechanism_subscription_consumption",
+            "scope_id": "urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root",
+            "component_ids": [
+              "facet|mechanism_subscription_consumption"
+            ],
+            "eligible": false
+          },
+          {
+            "candidate_id": "facet|semantic_capacity_project",
+            "scope_id": "urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root",
+            "component_ids": [
+              "facet|semantic_capacity_project"
+            ],
+            "eligible": false
+          },
+          {
+            "candidate_id": "facet|semantic_stage_progression",
+            "scope_id": "urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root",
+            "component_ids": [
+              "facet|semantic_stage_progression"
+            ],
+            "eligible": false
+          },
+          {
+            "candidate_id": "family|urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root|container_attachment",
+            "scope_id": "urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root",
+            "component_ids": [
+              "family|urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root|container_attachment"
+            ],
+            "eligible": true
+          },
+          {
+            "candidate_id": "family|urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root|event_response",
+            "scope_id": "urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root",
+            "component_ids": [
+              "family|urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root|event_response"
+            ],
+            "eligible": true
+          },
+          {
+            "candidate_id": "family|urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root|lifecycle_revision_overlay",
+            "scope_id": "urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root",
+            "component_ids": [
+              "family|urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root|lifecycle_revision_overlay"
+            ],
+            "eligible": true
+          },
+          {
+            "candidate_id": "family|urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root|secondary_research",
+            "scope_id": "urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root",
+            "component_ids": [
+              "family|urn:company-wiki:source:sha256:e6ad665e13d1f41d690a317f2e79075e0bb699534d2433bbcbee8d35dba1caf4|root|secondary_research"
+            ],
+            "eligible": true
+          }
+        ],
+        "versions": {
+          "budget": "reading_plan/3",
+          "business_algorithms": "46b2feb61572709a07cf0cf3c742c1f90fab08145233d29736722854bbcb91d5",
+          "business_policy": "reading-business-policy/29",
+          "context_policy": "a57a8dd2da347e8dfd04ff7683e0401450cf20ba35e5b039fb48b1649547858e",
+          "continuity": "native-narrative-continuity/11",
+          "continuity_algorithms": "b9a842a87b846ac2970745d674286bff20a3fb10d5bcc610f8bd2e49662805f9",
+          "document_work_limit": "16000000",
+          "inventory": "1.12.0",
+          "inventory_algorithm": "b230a809628f19bb8fce870d97fb5cd0fc9bcbed4e0117581feb18e9e663f36f",
+          "layout": "1.3.0",
+          "native_table_bridge": "2.1.1",
+          "observation_adapter": "du-observation-adapter/9",
+          "pipeline": "1.15.0",
+          "reading_context_contract": "reading-context-wire/1.1",
+          "script_matching": "source-script-match/1",
+          "selector": "0.9.0",
+          "source_usability": "source-usability/3+0d4e43b9ae74291a09d91fd7c99ad158dc2350597e16d14cd47b2d8ea7c2226f",
+          "strategy_binding": "reading-strategy-binding/3",
+          "summary": "1.1.0",
+          "table_purpose": "operating-table-purpose/6"
+        },
+        "diagnostics": [
+          {
+            "code": "INVENTORY_INCOMPLETE",
+            "detail": "the caller declared the candidate inventory incomplete; a missing row must never read as an unchanged decision"
+          },
+          {
+            "code": "INVENTORY_NOT_COMPLETE",
+            "detail": "the caller did not assert a complete inventory; partial freezes carry identity for lineage but are not reuse evidence"
+          }
+        ],
+        "decision_digest": "3f4d04a093d6dc06ebff1ea282b88523796bff6729bdf2c42b46247bce2cf1cb"
+      }
+    }
+  }
+}

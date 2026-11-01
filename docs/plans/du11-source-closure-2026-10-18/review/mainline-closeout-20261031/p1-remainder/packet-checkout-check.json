@@ -1,0 +1,7 @@
+{
+  "status": "PASS",
+  "scope": "actual checkout with autocrlf=true into independent temporary prefix",
+  "text_files": 8,
+  "all_published_SHA_match": true,
+  "temporary_prefix_removed": true
+}

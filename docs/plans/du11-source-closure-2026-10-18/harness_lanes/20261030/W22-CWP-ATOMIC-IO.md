@@ -1,5 +1,7 @@
 # W22-CWP-ATOMIC-IO：共享原子写入与深目录可移植性
 
+> 2026-10-31 ROOT状态：ROOT工程验收/修复/并线发布946537d0；详../../review/w22-w23-reception-20261031/README.md。下方READY是原始发卡快照。
+
 状态：READY_TO_DISPATCH；独立施工，不等待 ROOT 的 M8。只在最终大节点独审，不增加每小步许可。
 
 ## 立即启动的信息

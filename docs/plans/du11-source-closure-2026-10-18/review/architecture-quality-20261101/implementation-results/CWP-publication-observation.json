@@ -1,0 +1,26 @@
+{
+  "runtime_commit": "c97d4fbd997c07176061f7edcc00c9993aac73c5",
+  "published_head": "6668bc978d3ea2217a9aff30be69bde456894c04",
+  "normal_push": "success",
+  "normal_pre_push_passed": 971,
+  "normal_pre_push_seconds": 105.19,
+  "exact_ci": {
+    "id": 41305132919,
+    "name": "CI",
+    "head_sha": "6668bc978d3ea2217a9aff30be69bde456894c04",
+    "status": "completed",
+    "conclusion": "failure",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41305132919",
+    "created_at": "2026-11-01T12:09:40Z",
+    "updated_at": "2026-11-01T12:15:30Z"
+  },
+  "old_failed_pre_push": {
+    "failed": 1,
+    "passed": 970,
+    "seconds": 135.4,
+    "root": "TMPDIR inherited by test; fixed test isolation; product unchanged"
+  },
+  "foreign_hook_preserved": true,
+  "role": "Historical candidate publication, full CI rejected, not stable master",
+  "safe_isolation": "CWP-safe-isolation.json"
+}

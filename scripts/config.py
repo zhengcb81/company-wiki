@@ -279,10 +279,11 @@ class Config:
             raise ValueError("unsupported configuration validation scope")
         llm_only = validation_scope == "llm"
 
-        # 确定配置文件路径
-        if config_path is None:
-            config_path = WIKI_ROOT / "config.yaml"
-            # 仅在使用默认路径时自动加载 .env（测试传入自定义路径时跳过）
+        # 同一项目配置无论省略、绝对或相对路径，均使用同一凭证策略。
+        # 真正的外部/自定义配置仍保持隔离，不自动加载项目 .env。
+        project_config = WIKI_ROOT / "config.yaml"
+        config_path = Path(config_path) if config_path is not None else project_config
+        if config_path.resolve() == project_config.resolve():
             _ensure_dotenv()
         
         # 加载 YAML 配置

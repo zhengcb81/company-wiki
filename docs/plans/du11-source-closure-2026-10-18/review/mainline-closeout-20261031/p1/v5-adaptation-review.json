@@ -1,0 +1,661 @@
+{
+  "schema_version": "independent-p1-frozen-adaptation-review/1",
+  "reviewed_at": "2026-10-31T22:32:15.220392+00:00",
+  "status": "PREPARATION_PASS_RUNTIME_PENDING",
+  "read_only_no_new_parse": true,
+  "post_count": 0,
+  "metadata_sha256": "1d2d0fc9719d5a6ca7366ee25592b7f633e465ea5d57ef63fa6172844378f9df",
+  "gold_bridge_sha256": "0b749021675152cdf7584b2465f1ec7c899827cc3689a5a5792016a63b9ef8e0",
+  "unique_original_support_units_total": 101,
+  "original_checkpoint_support_references_total": 104,
+  "bridge_checks": [
+    {
+      "sample_id": "c3-cn-huali-ir-202305",
+      "original_gold_sha256": "f00f127585d4015fbb8592a8254327f205386877cbc03481b39eeb294932f6f9",
+      "original_unique_support_units": 82,
+      "checkpoint_support_references": 82,
+      "checkpoint_count": 10,
+      "adapted_fact_count": 13,
+      "all_original_checkpoints_exactly_preserved": true,
+      "all_original_support_units_exactly_preserved": true,
+      "every_parent_aggregation": "ALL",
+      "all_atomic_anchors_original_page_bound_quotes": true,
+      "forbidden_assertions_unchanged": true,
+      "fact_ids_partitioned_by_parents": true
+    },
+    {
+      "sample_id": "c3-us-berkshire-letter-2008",
+      "original_gold_sha256": "a5db9f9f7eeb536c3cbab367aa7b172a8f39268bdbca6f9c0b0bdf7e55a2ee22",
+      "original_unique_support_units": 19,
+      "checkpoint_support_references": 22,
+      "checkpoint_count": 10,
+      "adapted_fact_count": 12,
+      "all_original_checkpoints_exactly_preserved": true,
+      "all_original_support_units_exactly_preserved": true,
+      "every_parent_aggregation": "ALL",
+      "all_atomic_anchors_original_page_bound_quotes": true,
+      "forbidden_assertions_unchanged": true,
+      "fact_ids_partitioned_by_parents": true
+    }
+  ],
+  "negative_context_probe": {
+    "case": "BRK09 motorcycle paragraph without GEICO owner/2009 temporal context",
+    "source_supported_without_owner_context": false,
+    "expected": false,
+    "pass": true
+  },
+  "canonical_observations": [
+    {
+      "sample_id": "c3-cn-huali-ir-202305",
+      "scope": "Actual official v1 captured selection/envelope. No fresh extraction or model call.",
+      "gold_sha256": "aba37ee02aea97bfb4f9ff135f0ae172dad6484fe2cf890d252e2a9fbc20d476",
+      "selection_input_sha256": "ce80ec966074e0863225de034e348f288ae85cf2b1a767938f55fcddd42658e4",
+      "model_input_file_sha256": "941706fbc1b293d9f409c0f30620eb7e98be424daff281eb71896d876711c7ce",
+      "observation": {
+        "scope": "full_selected_source_availability",
+        "facts": [
+          {
+            "id": "HUALI-02.A1",
+            "supported": true,
+            "all_anchors_individually_present": true,
+            "importance": "critical"
+          },
+          {
+            "id": "HUALI-03",
+            "supported": true,
+            "all_anchors_individually_present": true,
+            "importance": "critical"
+          },
+          {
+            "id": "HUALI-04.A1",
+            "supported": true,
+            "all_anchors_individually_present": true,
+            "importance": "critical"
+          },
+          {
+            "id": "HUALI-04.A2",
+            "supported": true,
+            "all_anchors_individually_present": true,
+            "importance": "critical"
+          },
+          {
+            "id": "HUALI-05",
+            "supported": true,
+            "all_anchors_individually_present": true,
+            "importance": "critical"
+          },
+          {
+            "id": "HUALI-06.A1",
+            "supported": true,
+            "all_anchors_individually_present": true,
+            "importance": "critical"
+          },
+          {
+            "id": "HUALI-06.A2",
+            "supported": true,
+            "all_anchors_individually_present": true,
+            "importance": "critical"
+          },
+          {
+            "id": "HUALI-07.A1",
+            "supported": true,
+            "all_anchors_individually_present": true,
+            "importance": "critical"
+          },
+          {
+            "id": "HUALI-08.A1",
+            "supported": true,
+            "all_anchors_individually_present": true,
+            "importance": "critical"
+          },
+          {
+            "id": "HUALI-08.A2",
+            "supported": true,
+            "all_anchors_individually_present": true,
+            "importance": "critical"
+          },
+          {
+            "id": "HUALI-09",
+            "supported": true,
+            "all_anchors_individually_present": true,
+            "importance": "critical"
+          },
+          {
+            "id": "HUALI-10",
+            "supported": true,
+            "all_anchors_individually_present": true,
+            "importance": "critical"
+          }
+        ],
+        "required_count": 12,
+        "supported_count": 12,
+        "missing_ids": [],
+        "evidence_count": 84,
+        "groups": 15,
+        "citation_units": 0,
+        "evidence_characters": 1883,
+        "unique_aliases": true,
+        "quality_oracle": "tools.document_understanding_benchmark.closed_group_support.score_facts",
+        "full_selection": {
+          "scope": "full_selected_source_availability",
+          "facts": [
+            {
+              "id": "HUALI-02.A1",
+              "supported": true,
+              "all_anchors_individually_present": true,
+              "importance": "critical"
+            },
+            {
+              "id": "HUALI-03",
+              "supported": true,
+              "all_anchors_individually_present": true,
+              "importance": "critical"
+            },
+            {
+              "id": "HUALI-04.A1",
+              "supported": true,
+              "all_anchors_individually_present": true,
+              "importance": "critical"
+            },
+            {
+              "id": "HUALI-04.A2",
+              "supported": true,
+              "all_anchors_individually_present": true,
+              "importance": "critical"
+            },
+            {
+              "id": "HUALI-05",
+              "supported": true,
+              "all_anchors_individually_present": true,
+              "importance": "critical"
+            },
+            {
+              "id": "HUALI-06.A1",
+              "supported": true,
+              "all_anchors_individually_present": true,
+              "importance": "critical"
+            },
+            {
+              "id": "HUALI-06.A2",
+              "supported": true,
+              "all_anchors_individually_present": true,
+              "importance": "critical"
+            },
+            {
+              "id": "HUALI-07.A1",
+              "supported": true,
+              "all_anchors_individually_present": true,
+              "importance": "critical"
+            },
+            {
+              "id": "HUALI-08.A1",
+              "supported": true,
+              "all_anchors_individually_present": true,
+              "importance": "critical"
+            },
+            {
+              "id": "HUALI-08.A2",
+              "supported": true,
+              "all_anchors_individually_present": true,
+              "importance": "critical"
+            },
+            {
+              "id": "HUALI-09",
+              "supported": true,
+              "all_anchors_individually_present": true,
+              "importance": "critical"
+            },
+            {
+              "id": "HUALI-10",
+              "supported": true,
+              "all_anchors_individually_present": true,
+              "importance": "critical"
+            }
+          ],
+          "required_count": 12,
+          "supported_count": 12,
+          "missing_ids": []
+        },
+        "sent_tasks": {
+          "scope": "source_support_in_current_request_tasks",
+          "request_scope": "full_request",
+          "sent_task_keys": [
+            "t1",
+            "t2",
+            "t3",
+            "t4",
+            "t5",
+            "t6",
+            "t7",
+            "t8",
+            "t9",
+            "t10",
+            "t11",
+            "t12",
+            "t13",
+            "t14",
+            "t15"
+          ],
+          "facts": [
+            {
+              "id": "HUALI-02.A1",
+              "supported": true,
+              "supported_task_keys": [
+                "t1"
+              ]
+            },
+            {
+              "id": "HUALI-03",
+              "supported": true,
+              "supported_task_keys": [
+                "t3"
+              ]
+            },
+            {
+              "id": "HUALI-04.A1",
+              "supported": true,
+              "supported_task_keys": [
+                "t4"
+              ]
+            },
+            {
+              "id": "HUALI-04.A2",
+              "supported": true,
+              "supported_task_keys": [
+                "t5"
+              ]
+            },
+            {
+              "id": "HUALI-05",
+              "supported": true,
+              "supported_task_keys": [
+                "t6"
+              ]
+            },
+            {
+              "id": "HUALI-06.A1",
+              "supported": true,
+              "supported_task_keys": [
+                "t7"
+              ]
+            },
+            {
+              "id": "HUALI-06.A2",
+              "supported": true,
+              "supported_task_keys": [
+                "t8"
+              ]
+            },
+            {
+              "id": "HUALI-07.A1",
+              "supported": true,
+              "supported_task_keys": [
+                "t10"
+              ]
+            },
+            {
+              "id": "HUALI-08.A1",
+              "supported": true,
+              "supported_task_keys": [
+                "t11"
+              ]
+            },
+            {
+              "id": "HUALI-08.A2",
+              "supported": true,
+              "supported_task_keys": [
+                "t12"
+              ]
+            },
+            {
+              "id": "HUALI-09",
+              "supported": true,
+              "supported_task_keys": [
+                "t13"
+              ]
+            },
+            {
+              "id": "HUALI-10",
+              "supported": true,
+              "supported_task_keys": [
+                "t14"
+              ]
+            }
+          ],
+          "required_count": 12,
+          "supported_count": 12,
+          "missing_ids": [],
+          "not_sent_ids": [],
+          "summary_claim_coverage": "not_evaluated"
+        }
+      },
+      "first_request_admission_missing": []
+    },
+    {
+      "sample_id": "c3-us-berkshire-letter-2008",
+      "scope": "Frozen r6 typed reconstruction with old classification; NOT v5 official current production run.",
+      "gold_sha256": "fc8133dc5ed0b81e47b8a04c9d56992c178eaeac8f755dc77cc3ab97ec024340",
+      "selection_input_sha256": "58a374f97c2c3ffc3576e3e45b91b6d5577825c70070f05c2d35449e2390dd85",
+      "model_input_file_sha256": "1686dbf2c3a67838725415fa4c8414ed7349be59948f084469ff1813bad0a5c4",
+      "observation": {
+        "scope": "full_selected_source_availability",
+        "facts": [
+          {
+            "id": "BRK-02",
+            "supported": true,
+            "all_anchors_individually_present": true,
+            "importance": "critical"
+          },
+          {
+            "id": "BRK-03",
+            "supported": true,
+            "all_anchors_individually_present": true,
+            "importance": "critical"
+          },
+          {
+            "id": "BRK-04",
+            "supported": true,
+            "all_anchors_individually_present": true,
+            "importance": "critical"
+          },
+          {
+            "id": "BRK-05.A1",
+            "supported": true,
+            "all_anchors_individually_present": true,
+            "importance": "critical"
+          },
+          {
+            "id": "BRK-05.A2",
+            "supported": true,
+            "all_anchors_individually_present": true,
+            "importance": "critical"
+          },
+          {
+            "id": "BRK-06",
+            "supported": true,
+            "all_anchors_individually_present": true,
+            "importance": "critical"
+          },
+          {
+            "id": "BRK-07",
+            "supported": true,
+            "all_anchors_individually_present": true,
+            "importance": "critical"
+          },
+          {
+            "id": "BRK-08.A1",
+            "supported": true,
+            "all_anchors_individually_present": true,
+            "importance": "critical"
+          },
+          {
+            "id": "BRK-08.A2",
+            "supported": true,
+            "all_anchors_individually_present": true,
+            "importance": "critical"
+          },
+          {
+            "id": "BRK-09.A1",
+            "supported": true,
+            "all_anchors_individually_present": true,
+            "importance": "critical"
+          }
+        ],
+        "required_count": 10,
+        "supported_count": 10,
+        "missing_ids": [],
+        "evidence_count": 96,
+        "groups": 77,
+        "citation_units": 0,
+        "evidence_characters": 32841,
+        "unique_aliases": true,
+        "quality_oracle": "tools.document_understanding_benchmark.closed_group_support.score_facts",
+        "full_selection": {
+          "scope": "full_selected_source_availability",
+          "facts": [
+            {
+              "id": "BRK-02",
+              "supported": true,
+              "all_anchors_individually_present": true,
+              "importance": "critical"
+            },
+            {
+              "id": "BRK-03",
+              "supported": true,
+              "all_anchors_individually_present": true,
+              "importance": "critical"
+            },
+            {
+              "id": "BRK-04",
+              "supported": true,
+              "all_anchors_individually_present": true,
+              "importance": "critical"
+            },
+            {
+              "id": "BRK-05.A1",
+              "supported": true,
+              "all_anchors_individually_present": true,
+              "importance": "critical"
+            },
+            {
+              "id": "BRK-05.A2",
+              "supported": true,
+              "all_anchors_individually_present": true,
+              "importance": "critical"
+            },
+            {
+              "id": "BRK-06",
+              "supported": true,
+              "all_anchors_individually_present": true,
+              "importance": "critical"
+            },
+            {
+              "id": "BRK-07",
+              "supported": true,
+              "all_anchors_individually_present": true,
+              "importance": "critical"
+            },
+            {
+              "id": "BRK-08.A1",
+              "supported": true,
+              "all_anchors_individually_present": true,
+              "importance": "critical"
+            },
+            {
+              "id": "BRK-08.A2",
+              "supported": true,
+              "all_anchors_individually_present": true,
+              "importance": "critical"
+            },
+            {
+              "id": "BRK-09.A1",
+              "supported": true,
+              "all_anchors_individually_present": true,
+              "importance": "critical"
+            }
+          ],
+          "required_count": 10,
+          "supported_count": 10,
+          "missing_ids": []
+        },
+        "sent_tasks": {
+          "scope": "source_support_in_current_request_tasks",
+          "request_scope": "full_request",
+          "sent_task_keys": [
+            "t1",
+            "t2",
+            "t3",
+            "t4",
+            "t5",
+            "t6",
+            "t7",
+            "t8",
+            "t9",
+            "t10",
+            "t11",
+            "t12",
+            "t13",
+            "t14",
+            "t15",
+            "t16",
+            "t17",
+            "t18",
+            "t19",
+            "t20",
+            "t21",
+            "t22",
+            "t23",
+            "t24",
+            "t25",
+            "t26",
+            "t27",
+            "t28",
+            "t29",
+            "t30",
+            "t31",
+            "t32",
+            "t33",
+            "t34",
+            "t35",
+            "t36",
+            "t37",
+            "t38",
+            "t39",
+            "t40",
+            "t41",
+            "t42",
+            "t43",
+            "t44",
+            "t45",
+            "t46",
+            "t47",
+            "t48",
+            "t49",
+            "t50",
+            "t51",
+            "t52",
+            "t53",
+            "t54",
+            "t55",
+            "t56",
+            "t57",
+            "t58",
+            "t59",
+            "t60",
+            "t61",
+            "t62",
+            "t63",
+            "t64",
+            "t65",
+            "t66",
+            "t67",
+            "t68",
+            "t69",
+            "t70",
+            "t71",
+            "t72",
+            "t73",
+            "t74",
+            "t75",
+            "t76",
+            "t77"
+          ],
+          "facts": [
+            {
+              "id": "BRK-02",
+              "supported": true,
+              "supported_task_keys": [
+                "t1"
+              ]
+            },
+            {
+              "id": "BRK-03",
+              "supported": true,
+              "supported_task_keys": [
+                "t2"
+              ]
+            },
+            {
+              "id": "BRK-04",
+              "supported": true,
+              "supported_task_keys": [
+                "t70"
+              ]
+            },
+            {
+              "id": "BRK-05.A1",
+              "supported": true,
+              "supported_task_keys": [
+                "t20"
+              ]
+            },
+            {
+              "id": "BRK-05.A2",
+              "supported": true,
+              "supported_task_keys": [
+                "t21"
+              ]
+            },
+            {
+              "id": "BRK-06",
+              "supported": true,
+              "supported_task_keys": [
+                "t21"
+              ]
+            },
+            {
+              "id": "BRK-07",
+              "supported": true,
+              "supported_task_keys": [
+                "t72"
+              ]
+            },
+            {
+              "id": "BRK-08.A1",
+              "supported": true,
+              "supported_task_keys": [
+                "t28"
+              ]
+            },
+            {
+              "id": "BRK-08.A2",
+              "supported": true,
+              "supported_task_keys": [
+                "t29"
+              ]
+            },
+            {
+              "id": "BRK-09.A1",
+              "supported": true,
+              "supported_task_keys": [
+                "t32"
+              ]
+            }
+          ],
+          "required_count": 10,
+          "supported_count": 10,
+          "missing_ids": [],
+          "not_sent_ids": [],
+          "summary_claim_coverage": "not_evaluated"
+        }
+      },
+      "first_request_admission_missing": []
+    }
+  ],
+  "runtime_pending": [
+    "Fresh Berkshire US/IR classified selection and actual model tasks; frozen r6 is diagnostic only.",
+    "Paid model response semantic/entity/time/condition checks and correct completion/deferred truth.",
+    "Activation interruption/recovery no duplicate paid POST and exact same canonical output.",
+    "Actual FF reuse/ensure and RF meaningful parameter/formula adoption."
+  ],
+  "resolved_findings": [
+    "P1-ORACLE-01: explicit atomic decomposition with unchanged original checkpoint appendix; each atomic obligation within real native closure, parent ALL.",
+    "P1-META-02: Berkshire display and registered security_id both null.",
+    "BRK09 owner/year context p7p8 now explicitly required with p7p9 in same closure."
+  ],
+  "clarifications": [
+    "101 original unique support units (82 Huali + 19 Berkshire); 104 checkpoint support references (82+22), not 104 distinct quotes.",
+    "HUALI02 original full parent meaning retains particularly Q4/significant Q1 impact; formal semantic review must use full parent expectation as well as short atomic label.",
+    "Berkshire source appendix original content_year 2008 is historical original evidence, not admission fiscal-year metadata."
+  ]
+}

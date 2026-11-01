@@ -1,0 +1,577 @@
+{
+  "schema_version": "du-gold/1",
+  "sample_id": "c3-cn-huali-ir-202305",
+  "source_sha256": "d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+  "language": "zh",
+  "scope": "development",
+  "support_set_frozen_before_output": true,
+  "facts": [
+    {
+      "id": "HUALI-01",
+      "importance": "critical",
+      "target_kind": "disposition_context",
+      "fact_scope": "document_meta",
+      "require_same_scope": false,
+      "any_support_sets": [
+        [
+          {
+            "page": 1,
+            "exact_quote": "证券代码：300979                                    证券简称：华利集团"
+          },
+          {
+            "page": 1,
+            "exact_quote": "中山华利实业集团股份有限公司投资者关系活动记录表"
+          },
+          {
+            "page": 1,
+            "exact_quote": "编号：2023-010"
+          },
+          {
+            "page": 1,
+            "exact_quote": "时间 \n2023年5月11日、2023年5月12日、2023年5月17日、2023年5月18日"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "Issuer is 中山华利实业集团股份有限公司, security 300979; IR record 2023-010 covers meetings on May 11, 12, 17 and 18, 2023. This is not a quarterly financial report."
+      ],
+      "must_not_assert": [
+        "Do not use filename date May 19 as the meeting date.",
+        "Do not equate event dates with a fiscal reporting period."
+      ],
+      "reason": "Original frozen source checkpoint; target role separates context from required business card, does not replace source truth."
+    },
+    {
+      "id": "HUALI-02.A1",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "fact_scope": "narrative",
+      "require_same_scope": false,
+      "any_support_sets": [
+        [
+          {
+            "page": 1,
+            "exact_quote": "Q：预计品牌去库存什么时候可以结束？"
+          },
+          {
+            "page": 1,
+            "exact_quote": "A：从2022 年中很多品牌出现高库存问题，不同品牌去库存的节奏、进度有差异，从去"
+          },
+          {
+            "page": 1,
+            "exact_quote": "年下半年特别是四季度开始，去库存对制造商的订单开始产生影响，在今年一季度对订"
+          },
+          {
+            "page": 1,
+            "exact_quote": "单的出货影响比较大。"
+          },
+          {
+            "page": 1,
+            "exact_quote": "同时由于国际政治、经济形势复杂，很多品牌基于对未来经济形"
+          },
+          {
+            "page": 1,
+            "exact_quote": "势的不确定性，订单预测相对保守。"
+          },
+          {
+            "page": 1,
+            "exact_quote": "从今年一季度的营业收入看，部分品牌订单调整幅"
+          },
+          {
+            "page": 1,
+            "exact_quote": "度较大，部分品牌订单有增长。"
+          },
+          {
+            "page": 1,
+            "exact_quote": "品牌去库存的时间周期，可能不同的品牌有差异。"
+          },
+          {
+            "page": 1,
+            "exact_quote": "从品"
+          },
+          {
+            "page": 1,
+            "exact_quote": "牌客户预告订单看，部分品牌二季度出货预计有好转。"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "Brand-specific destocking affected H2/Q4 2022 and Q1 2023 shipments; only some brands expected Q2 improvement."
+      ],
+      "must_not_assert": [
+        "Do not claim industry destocking had ended or all brands improved in Q2."
+      ],
+      "reason": "Atomic subproposition of original HUALI-02; parent requires ALL atoms, full original meaning/quotes preserved in bridge."
+    },
+    {
+      "id": "HUALI-03",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "fact_scope": "narrative",
+      "require_same_scope": false,
+      "any_support_sets": [
+        [
+          {
+            "page": 1,
+            "exact_quote": "Q：目前公司订单情况如何？"
+          },
+          {
+            "page": 1,
+            "exact_quote": "A：目前部分运动品牌的库存比较高，同时由于国际政治、经济形势复杂，很多品牌基"
+          },
+          {
+            "page": 1,
+            "exact_quote": "于对未来经济形势的不确定性，订单预测相对保守。"
+          },
+          {
+            "page": 1,
+            "exact_quote": "从目前的已经下达的订单及预告订"
+          },
+          {
+            "page": 1,
+            "exact_quote": "单情况看，部分品牌订单同比去年有下滑，部分品牌订单有增长，同时新客户的订单也"
+          },
+          {
+            "page": 1,
+            "exact_quote": "会弥补一些下滑客户的订单缺口。"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "Some brand orders were down year on year and others grew; new-customer orders were expected to partly fill declining customers’ order gaps."
+      ],
+      "must_not_assert": [
+        "Do not infer every customer declined or new orders fully offset the decline.",
+        "Do not convert the expected new-customer offset into a completed offset already realized."
+      ],
+      "reason": "Original frozen source checkpoint; target role separates context from required business card, does not replace source truth."
+    },
+    {
+      "id": "HUALI-04.A1",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "fact_scope": "narrative",
+      "require_same_scope": false,
+      "any_support_sets": [
+        [
+          {
+            "page": 1,
+            "exact_quote": "Q：追加订单对公司毛利率的影响如何？"
+          },
+          {
+            "page": 1,
+            "exact_quote": "A：客户在下达每个月的例行订单之后，也会根据销售情况、库存情况以及其他工厂的"
+          },
+          {
+            "page": 1,
+            "exact_quote": "出货情况等因素，追加紧急订单。"
+          },
+          {
+            "page": 1,
+            "exact_quote": "紧急订单通常要求的交货时间比较短，对制造商的产"
+          },
+          {
+            "page": 1,
+            "exact_quote": "能弹性和运营效率要求比较高。"
+          },
+          {
+            "page": 1,
+            "exact_quote": "对于客户的紧急补货订单，公司会用最快的速度响应客"
+          },
+          {
+            "page": 2,
+            "exact_quote": "户的需求，部分订单可以做到 2-3 周的时间交货。"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "Some urgent additional orders can be delivered in 2-3 weeks; this is not every order."
+      ],
+      "must_not_assert": [
+        "Do not claim an urgent-order price premium or that all orders are delivered in 2-3 weeks."
+      ],
+      "reason": "Atomic subproposition of original HUALI-04; parent requires ALL atoms, full original meaning/quotes preserved in bridge."
+    },
+    {
+      "id": "HUALI-04.A2",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "fact_scope": "narrative",
+      "require_same_scope": false,
+      "any_support_sets": [
+        [
+          {
+            "page": 1,
+            "exact_quote": "Q：追加订单对公司毛利率的影响如何？"
+          },
+          {
+            "page": 2,
+            "exact_quote": "公司不会对客户的紧急追加订单提"
+          },
+          {
+            "page": 2,
+            "exact_quote": "价，但是紧急订单会增加公司的营收规模，有利于提升规模效益。"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "No urgent-order price increase; urgent orders increase revenue scale and can benefit scale efficiency."
+      ],
+      "must_not_assert": [
+        "Do not claim an urgent-order price premium or that all orders are delivered in 2-3 weeks."
+      ],
+      "reason": "Atomic subproposition of original HUALI-04; parent requires ALL atoms, full original meaning/quotes preserved in bridge."
+    },
+    {
+      "id": "HUALI-05",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "fact_scope": "narrative",
+      "require_same_scope": false,
+      "any_support_sets": [
+        [
+          {
+            "page": 2,
+            "exact_quote": "Q：在同行中公司毛利率表现较好的原因？"
+          },
+          {
+            "page": 2,
+            "exact_quote": "A：公司毛利率表现主要得益于公司客户结构和产品结构的调整以及精益生产等措施的"
+          },
+          {
+            "page": 2,
+            "exact_quote": "推进、工厂运营效率的提高。"
+          },
+          {
+            "page": 2,
+            "exact_quote": "原材料价格的波动、人工成本的上涨、产能利用情况、员"
+          },
+          {
+            "page": 2,
+            "exact_quote": "工的熟练度等因素都会影响毛利率，公司未来将持续推进客户结构的优化和运营效率的"
+          },
+          {
+            "page": 2,
+            "exact_quote": "提高。"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "Gross-margin performance is attributed to customer/product mix adjustment, lean manufacturing and factory operating efficiency; materials, labor, utilization and employee skill also affect it."
+      ],
+      "must_not_assert": [
+        "Do not reduce the explanation to raw-material price declines or quote an undisclosed gross-margin rate."
+      ],
+      "reason": "Original frozen source checkpoint; target role separates context from required business card, does not replace source truth."
+    },
+    {
+      "id": "HUALI-06.A1",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "fact_scope": "narrative",
+      "require_same_scope": false,
+      "any_support_sets": [
+        [
+          {
+            "page": 2,
+            "exact_quote": "Q：公司扩产的提前量情况如何？"
+          },
+          {
+            "page": 2,
+            "exact_quote": "A：公司的产能规划主要根据新老客户的订单沟通情况进行安排，同时也会保持一定灵"
+          },
+          {
+            "page": 2,
+            "exact_quote": "活性。"
+          },
+          {
+            "page": 2,
+            "exact_quote": "考虑到客户订单的需求，未来几年公司仍会保持积极的产能扩张。"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "New/existing customer order discussions drive flexible capacity planning and planned active expansion."
+      ],
+      "must_not_assert": [
+        "Do not report 1-2 years as order lead time or as elapsed time for a completed plant."
+      ],
+      "reason": "Atomic subproposition of original HUALI-06; parent requires ALL atoms, full original meaning/quotes preserved in bridge."
+    },
+    {
+      "id": "HUALI-06.A2",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "fact_scope": "narrative",
+      "require_same_scope": false,
+      "any_support_sets": [
+        [
+          {
+            "page": 2,
+            "exact_quote": "Q：公司扩产的提前量情况如何？"
+          },
+          {
+            "page": 2,
+            "exact_quote": "公司会通过购"
+          },
+          {
+            "page": 2,
+            "exact_quote": "买土地新建厂房、租赁厂房、在原有厂房增加生产线、购买厂房等方式来提升产能。"
+          },
+          {
+            "page": 2,
+            "exact_quote": "购"
+          },
+          {
+            "page": 2,
+            "exact_quote": "买土地新建厂房的周期比较久，土地手续办妥后，工程施工到验收周期需要1-2 年时"
+          },
+          {
+            "page": 2,
+            "exact_quote": "间。"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "Buying land and building is one expansion method; only AFTER land formalities, construction to acceptance requires 1-2 years, not an order lead time or completed plant."
+      ],
+      "must_not_assert": [
+        "Do not report 1-2 years as order lead time or as elapsed time for a completed plant."
+      ],
+      "reason": "Atomic subproposition of original HUALI-06; parent requires ALL atoms, full original meaning/quotes preserved in bridge."
+    },
+    {
+      "id": "HUALI-07.A1",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "fact_scope": "narrative",
+      "require_same_scope": false,
+      "any_support_sets": [
+        [
+          {
+            "page": 2,
+            "exact_quote": "Q：印尼工厂的情况如何？"
+          },
+          {
+            "page": 2,
+            "exact_quote": "公司实控人之前在印尼"
+          },
+          {
+            "page": 2,
+            "exact_quote": "也开过制鞋工厂，公司也有在印尼工作过的工厂管理人员，所以印尼对公司不是陌生的"
+          },
+          {
+            "page": 2,
+            "exact_quote": "环境。"
+          },
+          {
+            "page": 2,
+            "exact_quote": "印尼两期工厂预计产能合计5000-6000 万双/年，印尼一期工厂今年将会开始投"
+          },
+          {
+            "page": 2,
+            "exact_quote": "产。"
+          },
+          {
+            "page": 2,
+            "exact_quote": "两期工厂的规模比较大，都会分期建设，逐步投产。"
+          },
+          {
+            "page": 2,
+            "exact_quote": "具体的投产安排，跟订单情"
+          },
+          {
+            "page": 2,
+            "exact_quote": "况、建设进度以及当地政府部门的审批进度有关。"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "Indonesia phases I and II total expected capacity 50-60 million pairs/year; phase I expected to begin in 2023; both phased, conditioned on orders, construction, local approval. Prior controller/staff experience is not company completed output."
+      ],
+      "must_not_assert": [
+        "Do not state 50-60 million pairs already produced or assign all capacity to phase I.",
+        "Do not omit conditions or convert expected production into completed production."
+      ],
+      "reason": "Atomic subproposition of original HUALI-07; parent requires ALL atoms, full original meaning/quotes preserved in bridge."
+    },
+    {
+      "id": "HUALI-08.A1",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "fact_scope": "narrative",
+      "require_same_scope": false,
+      "any_support_sets": [
+        [
+          {
+            "page": 2,
+            "exact_quote": "Q：汇兑损益对净利润的影响如何？"
+          },
+          {
+            "page": 2,
+            "exact_quote": "A：公司主要的贸易子公司在香港，销售收款和采购付款主要发生在香港贸易子公司，"
+          },
+          {
+            "page": 2,
+            "exact_quote": "销售收款是用美元结算，主要原材料采购、机器设备采购等是用美元结算，香港贸易子"
+          },
+          {
+            "page": 2,
+            "exact_quote": "公司的报表是美元报表；"
+          },
+          {
+            "page": 2,
+            "exact_quote": "中山华利和中山的贸易公司以及中山其他子公司的报表是人民"
+          },
+          {
+            "page": 2,
+            "exact_quote": "币报表，境内管理总部和开发中心的运营开支部分用人民币支付，会有外币资产和负"
+          },
+          {
+            "page": 2,
+            "exact_quote": "债，比如美元的应收款项和应付款项。"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "HK trade subsidiaries use USD financial statements and settlements; mainland company/entities use RMB with some foreign-currency assets/liabilities."
+      ],
+      "must_not_assert": [
+        "Do not reverse gain/loss, use USD for the disclosed FX results, or mix annual 2022 and Q1 2023."
+      ],
+      "reason": "Atomic subproposition of original HUALI-08; parent requires ALL atoms, full original meaning/quotes preserved in bridge."
+    },
+    {
+      "id": "HUALI-08.A2",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "fact_scope": "narrative",
+      "require_same_scope": false,
+      "any_support_sets": [
+        [
+          {
+            "page": 2,
+            "exact_quote": "Q：汇兑损益对净利润的影响如何？"
+          },
+          {
+            "page": 2,
+            "exact_quote": "同时公司在越南、印尼、缅甸、多米尼加等地的"
+          },
+          {
+            "page": 2,
+            "exact_quote": "子公司，报表本位币是当地货币，这些子公司会有外币资产和负债。"
+          },
+          {
+            "page": 2,
+            "exact_quote": "人民币兑美元的汇"
+          },
+          {
+            "page": 2,
+            "exact_quote": "率波动以及子公司所在地当地币种兑美元的汇率变动，外币资产和外币负债在报表列报"
+          },
+          {
+            "page": 2,
+            "exact_quote": "时会形成汇兑损益，计入财务费用。"
+          },
+          {
+            "page": 2,
+            "exact_quote": "2022 年度汇兑损益是收益8,200 万元，2023 年一季"
+          },
+          {
+            "page": 2,
+            "exact_quote": "度汇兑损益约损失3,500 万元，占当期净利润的比重较小。"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "Overseas subsidiaries use local currencies; FX changes affect foreign assets/liabilities. 2022 gain RMB82 million versus Q1 2023 approximate LOSS RMB35 million, small proportion of current profit."
+      ],
+      "must_not_assert": [
+        "Do not reverse gain/loss, use USD for the disclosed FX results, or mix annual 2022 and Q1 2023."
+      ],
+      "reason": "Atomic subproposition of original HUALI-08; parent requires ALL atoms, full original meaning/quotes preserved in bridge."
+    },
+    {
+      "id": "HUALI-09",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "fact_scope": "narrative",
+      "require_same_scope": false,
+      "any_support_sets": [
+        [
+          {
+            "page": 3,
+            "exact_quote": "Q：公司硫化鞋的占比？"
+          },
+          {
+            "page": 3,
+            "exact_quote": "A：各运动品牌中硫化鞋占比比较高的品牌主要是Converse 和Vans，这两个品牌也有一"
+          },
+          {
+            "page": 3,
+            "exact_quote": "部分冷粘鞋。"
+          },
+          {
+            "page": 3,
+            "exact_quote": "这两个品牌在2022 年的营收中占比都不到20%。"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "Converse and Vans each represented less than 20% of the company’s 2022 revenue; although they have high vulcanized-shoe exposure they also have some cold-cemented shoes."
+      ],
+      "must_not_assert": [
+        "Do not say vulcanized shoes account for less than 20% of total company revenue.",
+        "Do not combine the two brand shares into an asserted less-than-20% total."
+      ],
+      "reason": "Original frozen source checkpoint; target role separates context from required business card, does not replace source truth."
+    },
+    {
+      "id": "HUALI-10",
+      "importance": "critical",
+      "target_kind": "required_business",
+      "fact_scope": "narrative",
+      "require_same_scope": false,
+      "any_support_sets": [
+        [
+          {
+            "page": 3,
+            "exact_quote": "Q：制造工厂主要是拼厂还是包厂？"
+          },
+          {
+            "page": 3,
+            "exact_quote": "A：公司的主要品牌都会有专属的工厂，公司大多数工厂只为一个品牌服务。"
+          },
+          {
+            "page": 3,
+            "exact_quote": "各个客户"
+          },
+          {
+            "page": 3,
+            "exact_quote": "的服务团队要保持独立，包括开发团队、量产产线等。"
+          },
+          {
+            "page": 3,
+            "exact_quote": "但是接到新品牌的时候，新品牌"
+          },
+          {
+            "page": 3,
+            "exact_quote": "初期订单规模不能满足一个工厂的产能，会先暂时在其他品牌工厂设立独立的厂房和产"
+          },
+          {
+            "page": 3,
+            "exact_quote": "线，当新品牌达到一定量级后，也会有一个专属的新工厂。"
+          }
+        ]
+      ],
+      "must_preserve": [
+        "Most factories serve one brand with independent development/production teams; new brands may initially use separate premises/lines inside another brand factory and get a dedicated new factory once volume reaches sufficient scale."
+      ],
+      "must_not_assert": [
+        "Do not describe new-brand dedicated factories as already completed or treat client brands as company-owned brands."
+      ],
+      "reason": "Original frozen source checkpoint; target role separates context from required business card, does not replace source truth."
+    }
+  ],
+  "notes": "DEVELOPMENT, exposed source diagnostic. Atomic reviewed adapter; never blind. See gold-bridge.json for unchanged original checkpoints and anchors."
+}

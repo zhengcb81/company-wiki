@@ -11,11 +11,15 @@ from copy import deepcopy
 from dataclasses import dataclass
 import hashlib
 import json
+import sys
 from pathlib import Path
 from typing import Any
 
 from company_wiki.document_understanding.source_cards import source_cards, source_card_scope, source_card_generation_reason
-from company_wiki.document_understanding.summary_tasks import build_summary_task_plan
+from company_wiki.document_understanding.summary_tasks import SummaryTaskPlan, build_summary_task_plan
+from company_wiki.document_understanding.source_card_allocation import (
+    SOURCE_CARD_ALLOCATION_VERSION, source_allocation_order as _source_allocation_order,
+)
 from company_wiki.source_catalog.narrative_evidence import (
     summary_claim_type_for_roles, validate_summary_claim,
 )
@@ -26,7 +30,7 @@ from .narrative_contracts import (
     _claim_from_dict,
 )
 from . import narrative_model as legacy
-from .narrative_model_scoped import compile_scoped_model_view
+from .narrative_rank_material import ranking_material, ranking_strategy
 
 
 EXTRACTIVE_MODEL_PROJECTION_VERSION = 'reading-model-input/5'
@@ -34,7 +38,6 @@ EXTRACTIVE_PROMPT_VERSION = 'reading-source-extractive/5.0.0'
 EXTRACTIVE_REQUEST_SCHEMA = 'narrative-model-request/6'
 EXECUTION_SCHEMA = 'source-extractive-execution/1'
 EXECUTION_MAX_BYTES = 32 * 1024
-SOURCE_CARD_ALLOCATION_VERSION = 'source-card-allocation/1'
 # A separate conservative sub-budget, not an increase to the canonical64KiB.
 # Identity, prompt review and actual model metadata still face the final exact
 # canonical size check. No oversized card is shortened to enter this budget.
@@ -51,6 +54,9 @@ EXTRACTIVE_INSTRUCTION = (
     'them. Unknown source roles and mixed actual/planned states stay uncertain. '
     'If output budget is insufficient, emit a finite subset of decisions; omitted '
     'tasks are explicitly unprocessed, never business absence or completed review.'
+    ' Fragment and task rows follow their declared column arrays; support/context '
+    'lists contain fragment-table indices. reading_hint_index refers to reading_hints. '
+    'Return task keys, never fragment indices.'
 )
 
 
@@ -75,29 +81,7 @@ def extractive_response_schema() -> dict[str, Any]:
 class ExtractivePlan:
     draft: dict[str, Any]
     execution: dict[str, Any]
-
-
-def _source_allocation_order(cards):
-    """Reorder only source-policy slots; unknown metadata keeps native position.
-
-    Policy is an observation supplied by the shared reader, not a prose or
-    model classifier. Context cannot lend priority to factual support. Taking
-    the best *complete* support tuple keeps a multi-part task indivisible;
-    missing/invalid metadata never acquires a guessed default ranking.
-    The lightweight card descriptors contain existing spans, not joined text.
-    """
-    ranked = []
-    for index, card in enumerate(cards):
-        hint = card.reading_hint()
-        best = ((hint['priority'], 0 if hint['value_band'] == 'meaningful_fact' else 1,
-                 -hint['score']) if 'priority' in hint else None)
-        if best is not None:
-            ranked.append((index, best, card))
-    result = list(cards)
-    ordered = sorted(ranked, key=lambda entry: (entry[1], entry[0]))
-    for (slot, _, _), (_, _, card) in zip(ranked, ordered):
-        result[slot] = card
-    return result
+    source_plan: SummaryTaskPlan
 
 
 def compile_extractive_plan(
@@ -173,7 +157,7 @@ def compile_extractive_plan(
     worst_case = {**execution, 'tasks': [{**row, 'priority': 'normal'} for row in rows]}
     if len(canonical_json(worst_case).encode()) > EXECUTION_MAX_BYTES:
         raise NarrativeContractError('source execution report exceeds its byte budget')
-    return ExtractivePlan(draft, execution)
+    return ExtractivePlan(draft, execution, plan)
 
 
 @dataclass(frozen=True)
@@ -194,7 +178,6 @@ def build_extractive_request(selected: NarrativeSelectResult) -> ExtractiveModel
     plan = compile_extractive_plan(selected)
     if not plan.draft['claims'] or selected.source_metadata.language not in {'zh', 'en', 'mixed'}:
         raise legacy.ModelResponseError('SUMMARY_INPUT_UNAVAILABLE')
-    view = compile_scoped_model_view(selected, max_claims=max(1, len(selected.evidence_spans) * 2))
     reading_context = selected.reading_context
     if not isinstance(reading_context, Mapping):
         raise legacy.ModelResponseError('SUMMARY_INPUT_UNAVAILABLE')
@@ -206,8 +189,10 @@ def build_extractive_request(selected: NarrativeSelectResult) -> ExtractiveModel
         'subject' if selected.subject.kind == 'official_json' else 'source': {
             'language': selected.source_metadata.language, 'title': selected.source_metadata.title,
             'document_kind': selected.source_metadata.document_kind},
-        'material': view.to_model_dict(), 'reading_strategy': strategy,
-        'output_plan': {'available_task_count': len(plan.execution['tasks']),
+        'material': ranking_material(selected, plan.source_plan, plan.execution),
+        'reading_strategy': ranking_strategy(),
+        'output_plan': {'available_task_count': len(plan.draft['claims']),
+                        'source_task_count': len(plan.execution['tasks']),
                         'source_plan_sha256': plan.execution['plan_sha256'],
                         'admitted_task_keys': [row['task'] for row in plan.execution['tasks']
                                                if row['source_disposition'] == 'admitted'],
@@ -218,7 +203,8 @@ def build_extractive_request(selected: NarrativeSelectResult) -> ExtractiveModel
     return ExtractiveModelRequest(EXTRACTIVE_PROMPT_VERSION, EXTRACTIVE_INSTRUCTION, data_json,
         canonical_json_hash({'prompt_version': EXTRACTIVE_PROMPT_VERSION,
             'instruction': EXTRACTIVE_INSTRUCTION, 'data_json': data_json,
-            'task_binding': view.to_binding(), 'source_execution': plan.execution,
+            'task_binding': plan.source_plan.to_binding(), 'source_execution': plan.execution,
+            'reading_strategy_sha256': canonical_json_hash(strategy),
             'subject': selected.subject.to_dict(), 'selection': selected.selection.to_dict()}))
 
 
@@ -233,7 +219,7 @@ def decode_extractive_result(response, *, selected: NarrativeSelectResult) -> Ex
         raise legacy.ModelResponseError('model response prompt version differs from request')
     plan = compile_extractive_plan(selected)
     draft, report = deepcopy(plan.draft), deepcopy(plan.execution)
-    known = {row['task'] for row in report['tasks']}
+    known = {row['task'] for row in report['tasks'] if row['source_disposition'] == 'admitted'}
     decisions, invalid = {}, False
     try:
         payload = json.loads(response.response_bytes.decode('utf-8'),
@@ -260,7 +246,7 @@ def decode_extractive_result(response, *, selected: NarrativeSelectResult) -> Ex
         elif row['task'] in decisions:
             row['model_disposition'] = decisions[row['task']]['disposition']
             row['priority'] = decisions[row['task']]['priority']
-    complete = not invalid and len(decisions) == len(known)
+    complete = not invalid and len(decisions) == len(report['tasks'])
     report['model_coverage_complete'] = complete
     report['model_diagnostic'] = 'RANK_INVALID' if invalid else None if complete else 'RANK_INCOMPLETE'
     if len(canonical_json(report).encode()) > EXECUTION_MAX_BYTES:
@@ -276,17 +262,19 @@ def decode_extractive_result(response, *, selected: NarrativeSelectResult) -> Ex
 
 def extractive_boundary_identity(boundary) -> dict[str, Any]:
     from company_wiki import narrative_subject
-    from company_wiki.document_understanding import source_cards as cards, summary_tasks, reading_context_contract
+    from company_wiki.document_understanding import source_cards as cards, summary_tasks, reading_context_contract, source_card_allocation
     from company_wiki.source_catalog import narrative_evidence
-    from . import narrative_contracts, narrative_model_runtime, narrative_model_scoped, models
+    from . import narrative_contracts, narrative_model_runtime, models
     from . import narrative_summary_execution
-    modules = {'protocol': __import__(__name__, fromlist=['']), 'source_cards': cards,
+    from . import narrative_rank_material
+    modules = {'protocol': sys.modules[__name__], 'source_cards': cards,
                'source_task_plan': summary_tasks, 'role_quality_owner': narrative_evidence,
                'source_use_contract': reading_context_contract,
                'canonical_contracts': narrative_contracts, 'canonical_encoding': models,
-               'runtime': narrative_model_runtime, 'source_view': narrative_model_scoped,
+               'runtime': narrative_model_runtime,
                'legacy_utilities': legacy, 'subject_contracts': narrative_subject,
                'execution_contract': narrative_summary_execution}
+    modules.update(source_card_allocation=source_card_allocation, ranking_material=narrative_rank_material)
     def _module_path(module: Any) -> Path:
         path = getattr(module, "__file__", None)
         if not path:

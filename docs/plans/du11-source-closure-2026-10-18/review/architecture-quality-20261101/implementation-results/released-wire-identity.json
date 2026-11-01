@@ -1,0 +1,39 @@
+{
+  "schema": "released-wire-identity/1",
+  "head": "6668bc978d3ea2217a9aff30be69bde456894c04",
+  "files": {
+    "src/company_wiki/document_understanding/reading_context_contract.py": {
+      "working_sha256": "9e4200cd200fb468565f77d03a20d0bc8836b3ab387f46b67ef3d2d4faa0f5e9",
+      "git_sha256": "9e4200cd200fb468565f77d03a20d0bc8836b3ab387f46b67ef3d2d4faa0f5e9",
+      "normalized_lf_equal": true
+    },
+    "src/company_wiki/automation/narrative_contracts.py": {
+      "working_sha256": "eff83eca08475253051e5cf8973a0e75d6cba3a693e3479d12ba14c94127c0c8",
+      "git_sha256": "eff83eca08475253051e5cf8973a0e75d6cba3a693e3479d12ba14c94127c0c8",
+      "normalized_lf_equal": true
+    },
+    "src/company_wiki/source_catalog/narrative_reading.py": {
+      "working_sha256": "38d2259bedc53a7227cdbc4f8fd3fe380d15ce891175784037242994d00e8152",
+      "git_sha256": "38d2259bedc53a7227cdbc4f8fd3fe380d15ce891175784037242994d00e8152",
+      "normalized_lf_equal": true
+    },
+    "src/company_wiki/source_catalog/narrative_decision_inventory.py": {
+      "working_sha256": "25b5826cdc5f482aaa621c6c2d68b7c3a6fd2013a57eea667a1836c2a9511b28",
+      "git_sha256": "b230a809628f19bb8fce870d97fb5cd0fc9bcbed4e0117581feb18e9e663f36f",
+      "normalized_lf_equal": true
+    },
+    "tests/integration/test_source_processing_handler_wire.py": {
+      "working_sha256": "e43a4b30c0e91fa2fc129f02562ad115516ef893709507d6257f0851ffc680e5",
+      "git_sha256": "e43a4b30c0e91fa2fc129f02562ad115516ef893709507d6257f0851ffc680e5",
+      "normalized_lf_equal": true
+    },
+    "tests/unit/du11_production/test_statement_grammar_runtime.py": {
+      "working_sha256": "384d509175dca18b3f45a34c9ef6ed845fff3e5eba881f8ce41296fad998f0a4",
+      "git_sha256": "384d509175dca18b3f45a34c9ef6ed845fff3e5eba881f8ce41296fad998f0a4",
+      "normalized_lf_equal": true
+    }
+  },
+  "note": "Pre-release author seals retain their original bytes. Git EOL normalization is documented; latest test-only change fixes TMPDIR isolation and was validated by971 normal pre-push tests. No producer feature or golden mutation.",
+  "status": "UNACCEPTED_CANDIDATE_NOT_CURRENT_STABLE_MASTER",
+  "retained_branch": "codex/architecture-rectification-20261101"
+}

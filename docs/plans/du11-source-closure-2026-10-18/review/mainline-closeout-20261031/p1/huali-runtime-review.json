@@ -1,0 +1,293 @@
+{
+  "schema_version": "independent-p1-huali-runtime-review/1",
+  "reviewed_at": "2026-10-31T22:45:14.767237+00:00",
+  "component_status": "PASS_HUALI_SOURCE_EXTRACTIVE_RANKING_AND_EXACT_ARTIFACT_RECOVERY",
+  "overall_p1_status": "OPEN",
+  "p2_actual_formula_adoption": "NOT_EVALUATED",
+  "scope": "Read-only recorded evidence + artifact-only closed-group checks; no provider call, PDF extraction, original/config/shared-PWF write, or full test. Existing public RF source/narrative reads were inspected, not re-executed.",
+  "seals": {
+    ".planning/mainline-closeout-20261031/p1-huali-live-v2/receipt.json": "d7fe61f45c5c50b0d4b3f8702b03ea74faee733ec1eb873196ed23354b7cafd8",
+    ".planning/mainline-closeout-20261031/p1-huali-live-v2/events.jsonl": "03d08372a11451b6ccbffb5110bb131601e1bc5b87870ec6200a6a4eba0460f7",
+    ".planning/mainline-closeout-20261031/p1-huali-live-v2/phaseC-090-d37daaa8f4dd.bundle.json.gz": "526a4ad949dcc6dbcb4eab82e8b14b79b210a395c7dbe9b86d0127ff882be90d",
+    ".planning/mainline-closeout-20261031/p1-huali-live-v2/materials/phaseC-090-d37daaa8f4dd.selection.json.gz": "ce80ec966074e0863225de034e348f288ae85cf2b1a767938f55fcddd42658e4",
+    ".planning/mainline-closeout-20261031/p1-huali-live-v2/materials/phaseC-090-d37daaa8f4dd.input.json.gz": "5b64d7339416f0baa86daa4d81283789592be6423126dba70737ab961b9d7a16",
+    ".planning/mainline-closeout-20261031/p1-huali-live-v2/materials/phaseC-090-d37daaa8f4dd.92aae34d82a7473f9e4ab6694cb45ae2.response.json.gz": "b135462b654c60722df1f82558bf17c552b1987063ac05232ae32e1ee36e1866",
+    ".planning/mainline-closeout-20261031/p1-huali-consumer-recovery-v2/receipt.json": "1680a42e4d03aeccd76b6d94a7b603341ecfe9029c37e2889474fe4e16f2e0c9",
+    ".planning/mainline-closeout-20261031/p1-huali-consumer-recovery-v2/consumers.json": "8a299bc05766a40d4d142e7b07f51c08ada8934f8d7e65cd0e50f57bfae8c5be",
+    ".planning/mainline-closeout-20261031/p1-huali-consumer-recovery-v2/cleanup.json": "2fa797cde90c77f64f3ef3fb45922e4a90ca9f33c0a04829cab0dde09f64f022",
+    "tools/document_understanding_benchmark/phase_c_readonly_source.py": "a65dd61332be4e5edc3770db95e545e00508919829c6ae28ca267b78965bb56c",
+    "tests/test_phase_c_readonly_source.py": "5422a3478ae7305a08f0d3fc6149b00c3e4de7400e598e5d75a804d75edf92d8"
+  },
+  "artifact_body_sha256": "ec1831a2fdf2952a9a80aba0c9e5db65c8bc581ea5c0a10d53d01ef2faba52d8",
+  "claim_checks": [
+    {
+      "claim_id": "t1-source",
+      "source_exact_text": true,
+      "support_and_context_exact_native_task": true,
+      "single_source": true,
+      "gold_atomic_fact_ids": [
+        "HUALI-02.A1"
+      ],
+      "text_sha256": "d8e97deda7b2c262ae2724ec44a65c7488404663de3284ea858f65a02172c51b"
+    },
+    {
+      "claim_id": "t3-source",
+      "source_exact_text": true,
+      "support_and_context_exact_native_task": true,
+      "single_source": true,
+      "gold_atomic_fact_ids": [
+        "HUALI-03"
+      ],
+      "text_sha256": "5023a7c1892751f8135ac1c26a45d847e337eea3130daabcba66e0fa05340257"
+    },
+    {
+      "claim_id": "t7-source",
+      "source_exact_text": true,
+      "support_and_context_exact_native_task": true,
+      "single_source": true,
+      "gold_atomic_fact_ids": [
+        "HUALI-06.A1"
+      ],
+      "text_sha256": "550eb8961b847ac1da7fe169b1f5e4182f98a52e9a65790ac31ae327ec2719e7"
+    },
+    {
+      "claim_id": "t10-source",
+      "source_exact_text": true,
+      "support_and_context_exact_native_task": true,
+      "single_source": true,
+      "gold_atomic_fact_ids": [
+        "HUALI-07.A1"
+      ],
+      "text_sha256": "2476e0e137a42e27d9d8a22adaee5c16b42d18a94c291a029e8926ed13e01bf3"
+    },
+    {
+      "claim_id": "t12-source",
+      "source_exact_text": true,
+      "support_and_context_exact_native_task": true,
+      "single_source": true,
+      "gold_atomic_fact_ids": [
+        "HUALI-08.A2"
+      ],
+      "text_sha256": "b4824a3e421ff74791f4c9592f365d41f81c275a8d63a829a96dda57103d5ea8"
+    },
+    {
+      "claim_id": "t4-source",
+      "source_exact_text": true,
+      "support_and_context_exact_native_task": true,
+      "single_source": true,
+      "gold_atomic_fact_ids": [
+        "HUALI-04.A1"
+      ],
+      "text_sha256": "ef54e22c834e0e4a9104c82da3597da08cc6fe59e76affea0596618c7560f3bf"
+    },
+    {
+      "claim_id": "t5-source",
+      "source_exact_text": true,
+      "support_and_context_exact_native_task": true,
+      "single_source": true,
+      "gold_atomic_fact_ids": [
+        "HUALI-04.A2"
+      ],
+      "text_sha256": "02f9eaaff021449672c6548844d2603fdc2400810474d5ee87162ca9ba0c25b3"
+    },
+    {
+      "claim_id": "t6-source",
+      "source_exact_text": true,
+      "support_and_context_exact_native_task": true,
+      "single_source": true,
+      "gold_atomic_fact_ids": [
+        "HUALI-05"
+      ],
+      "text_sha256": "0cce0db1ac1c6dd0e75010ab3f51afc59d85e6fbc476fc2cc0dfb72a1f63e97a"
+    },
+    {
+      "claim_id": "t8-source",
+      "source_exact_text": true,
+      "support_and_context_exact_native_task": true,
+      "single_source": true,
+      "gold_atomic_fact_ids": [
+        "HUALI-06.A2"
+      ],
+      "text_sha256": "3f2cd93f61004dfc31647cee8c805b7fdb5372921d68b788b927857759432d3e"
+    },
+    {
+      "claim_id": "t11-source",
+      "source_exact_text": true,
+      "support_and_context_exact_native_task": true,
+      "single_source": true,
+      "gold_atomic_fact_ids": [
+        "HUALI-08.A1"
+      ],
+      "text_sha256": "04921df2a452af8a3bbc087f3517d246298b9a0d7109548ad9ee4eb1ea2028f9"
+    },
+    {
+      "claim_id": "t13-source",
+      "source_exact_text": true,
+      "support_and_context_exact_native_task": true,
+      "single_source": true,
+      "gold_atomic_fact_ids": [
+        "HUALI-09"
+      ],
+      "text_sha256": "dac0747130affb59e9f63dfab907d8cd0ee90e3bfa5d7cd6ccc163bee63ba7b1"
+    },
+    {
+      "claim_id": "t14-source",
+      "source_exact_text": true,
+      "support_and_context_exact_native_task": true,
+      "single_source": true,
+      "gold_atomic_fact_ids": [
+        "HUALI-10"
+      ],
+      "text_sha256": "703836a495799e203ccaacf4af4320dfc45cfd5dd975600d586c6e6d3549bb05"
+    },
+    {
+      "claim_id": "t15-source",
+      "source_exact_text": true,
+      "support_and_context_exact_native_task": true,
+      "single_source": true,
+      "gold_atomic_fact_ids": [],
+      "text_sha256": "aa3edf82a7eb9da78869276b11f4a38941819c79540a5f175beed2fb9c83fb96"
+    },
+    {
+      "claim_id": "t2-source",
+      "source_exact_text": true,
+      "support_and_context_exact_native_task": true,
+      "single_source": true,
+      "gold_atomic_fact_ids": [],
+      "text_sha256": "7986cc0f1bdb389c7da5c315910c7231d711f6d60cdc391c148ca704c92cd97c"
+    },
+    {
+      "claim_id": "t9-source",
+      "source_exact_text": true,
+      "support_and_context_exact_native_task": true,
+      "single_source": true,
+      "gold_atomic_fact_ids": [],
+      "text_sha256": "46e10b44a1368a562773f9e5faba87d21e6bb2dc58ba5407da871dc6d2af80db"
+    }
+  ],
+  "all_required_business_atomic_facts_have_emitted_closed_claims": {
+    "HUALI-02.A1": [
+      "t1-source"
+    ],
+    "HUALI-03": [
+      "t3-source"
+    ],
+    "HUALI-04.A1": [
+      "t4-source"
+    ],
+    "HUALI-04.A2": [
+      "t5-source"
+    ],
+    "HUALI-05": [
+      "t6-source"
+    ],
+    "HUALI-06.A1": [
+      "t7-source"
+    ],
+    "HUALI-06.A2": [
+      "t8-source"
+    ],
+    "HUALI-07.A1": [
+      "t10-source"
+    ],
+    "HUALI-08.A1": [
+      "t11-source"
+    ],
+    "HUALI-08.A2": [
+      "t12-source"
+    ],
+    "HUALI-09": [
+      "t13-source"
+    ],
+    "HUALI-10": [
+      "t14-source"
+    ]
+  },
+  "actual_reply": {
+    "schema_version": "narrative-model-request/6",
+    "operation": "advisory_ranking_only",
+    "tasks": 15,
+    "source_card_claims": 15,
+    "new_model_generated_summary_sentences": 0,
+    "model_dispositions": {
+      "consider": 14,
+      "redundant": 1
+    },
+    "input_tokens": 7889,
+    "output_tokens": 328,
+    "total_tokens": 8217,
+    "proxy_micro_usd": 1425,
+    "paid_response_sha256": "e4d25e644b4d91e7f3609a0afe17e5481bf5e27423e5067d10f833917397d7cb"
+  },
+  "recovery": {
+    "activation": {
+      "status": "PASS",
+      "held_status": "activation_pending",
+      "same_run_id": "phaseC-090-d37daaa8f4dd",
+      "native_attempts_before": 1,
+      "native_attempts_after": 1,
+      "charged_tokens_before": 8217,
+      "charged_tokens_after": 8217,
+      "charged_micro_usd_before": 1425,
+      "charged_micro_usd_after": 1425,
+      "POSTs_before": 1,
+      "POSTs_after": 1,
+      "paid_generation_unchanged": true,
+      "response_identity_unchanged": true
+    },
+    "same_run_zero_POST": true,
+    "cross_run_zero_POST": true,
+    "exact_body_preserved": true,
+    "consumer_ref_version_changed_but_same_bytes": true,
+    "RF_source_read_exit": 0,
+    "RF_narrative_read_exit": 0,
+    "filing_fetch_status": "NOT_REQUESTED_ALREADY_REGISTERED",
+    "cleanup": {
+      "temporary_root": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cwp-p1-source-resume-6eer19pq",
+      "removed": true,
+      "protected_unchanged": true
+    },
+    "RF_summary_evidence_context_exact_bundle_match": true
+  },
+  "code_review": {
+    "current_availability_registration": "Uses existing owner verified_open_observation + record_source_facts only after actual read and explicit source_facts, unknown publication; bounded isolated catalog has pre-existing source-root/config guards. No fabricated publication/historical availability and no new permission chain.",
+    "tests_reviewed": "Parameterised explicit intake/ordinary preview contrast verifies current provenance, null publication, exact source SHA, no production original/config/catalog mutation; earlier historical filing eligibility test still applies. Parent-reported targeted tests not re-run independently."
+  },
+  "findings": [
+    {
+      "id": "P1-RECEIPT-01",
+      "severity": "minor",
+      "status": "OPEN_AT_REVIEW",
+      "issue": "consumer-recovery-v2 hardcodes new_PDF_parse=0, but RF public narrative read performs bound-locator PDF replay which calls parse_pdf_bytes. Zero new source selection is proven; zero all PDF parsing is not.",
+      "evidence_chain": [
+        "NarrativeTransportReader._read -> replay_narrative_evidence",
+        "PdfReading.replay -> NativePdfBackend.replay",
+        "verify_pdf_evidence_spans_bytes -> parse_pdf_bytes"
+      ],
+      "action": "Preserve original receipt; correct terminology to new_selection_parse_runs=0 and locator_replay_performed=true; mark exact parser invocation count unmeasured/null unless separately instrumented. No new paid run or production proof removal needed."
+    }
+  ],
+  "remaining_acceptance": [
+    {
+      "id": "P1-SCOPE-01",
+      "item": "This real request is advisory ranking of deterministic source-extractive cards, not generated abstractive summarization. Do not report all formal natural-language summary acceptance complete."
+    },
+    {
+      "id": "P1-SCOPE-02",
+      "item": "source_coverage_complete/model_coverage_complete cover the 15 selected tasks only. Bundle selection remains partial, 84/100 candidates, native context incomplete/unassigned30. Do not call full-document coverage complete."
+    },
+    {
+      "id": "P1-TIME-01",
+      "item": "Huali selected bundle lacks original meeting-date header. Cards quote 今年/去年 faithfully, without falsely resolving year; before P2 numeric use, obtain auditable original 2023 meeting/content-time context, not filename, filing FY, publication or 2026 verified-open time."
+    },
+    {
+      "id": "P1-BRK-01",
+      "item": "Berkshire current fresh model run is zero-POST refusal; no semantic acceptance from older r6 availability. Important unprocessed/deferred material remains OPEN."
+    },
+    {
+      "id": "P2-ADOPTION-01",
+      "item": "FF was intentionally NOT_REQUESTED_ALREADY_REGISTERED for exact SourceRef, RF source/narrative transport reads now succeed. This does not prove normal FF ensure/latest discovery or economic RF parameter/formula/report adoption."
+    }
+  ],
+  "major_semantic_defects_in_emitted_huali_cards": []
+}

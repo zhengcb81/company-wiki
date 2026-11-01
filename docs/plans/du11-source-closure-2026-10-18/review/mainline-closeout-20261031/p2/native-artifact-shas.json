@@ -1,0 +1,13 @@
+{
+  "location_owner": "revenue-forecast",
+  "commit": "535604fa468e8a69be44e073dc7e29eacde80cbc",
+  "packet": "docs/plans/p2-summary-lineage-20261031/review",
+  "files": {
+    "input.json": "7f551827b675662e1aed34110e31e2299cc854acb2a2de5b3ab09d18322343d0",
+    "forecast.json": "3d7e15ad54d766e44106811efbd4730f77c74ae7a4468a97162980d3810c7e2b",
+    "snapshot.json": "c492f3ea9e1a30c763023aa8a1688d60e85905ece5947566dfa505678dfd9483",
+    "report.md": "77baa08c0d707ff24c80e2e83da22c2d000b64d715551fb0ccdb8e299b699188",
+    "consumption-receipt.json": "e4c966f82ff49e120958df3523952c8cb98a85f094b566b800f7d965bc651420"
+  },
+  "full_company_research": "OPEN"
+}

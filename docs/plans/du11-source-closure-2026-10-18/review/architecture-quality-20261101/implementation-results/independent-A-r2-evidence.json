@@ -1,0 +1,38 @@
+{
+  "observed_at_utc": "2026-11-01T10:38:18.354965+00:00",
+  "source_files": {
+    "src/company_wiki/document_understanding/statement_grammar/__init__.py": "a03e13f7ecc1abf88bc2b73f2c5b0104fa875ab9afb8f1fe67dd56084cd4ce4d",
+    "src/company_wiki/source_catalog/narrative_source_passage.py": "345cd48d88e771510103c05cceb394fa226fb555d1053dab5e0bb9030678f498",
+    "src/company_wiki/source_catalog/reading_recipe.py": "259e398f90d4d3b86b7e80d36ff20c4bbb7feb65875b414fbd35d7b032ffd313",
+    "src/company_wiki/source_catalog/narrative_decision_inventory.py": "c2f9322d6a8956bbde3cef1441931b3601bc86674fe108776fbd8506ad7a3c56",
+    "src/company_wiki/document_understanding/statement_grammar/resources/manifest.json": "94abfea16bf6feda88421d99c4622c64dfab0266fcdeda879b2061213af6226d"
+  },
+  "assets": {
+    "averaged_perceptron_tagger_eng.classes.json": {
+      "bytes": 285,
+      "sha_matches": true
+    },
+    "averaged_perceptron_tagger_eng.tagdict.json": {
+      "bytes": 25788,
+      "sha_matches": true
+    },
+    "averaged_perceptron_tagger_eng.weights.json": {
+      "bytes": 5677744,
+      "sha_matches": true
+    },
+    "jieba.dict.txt": {
+      "bytes": 5071852,
+      "sha_matches": true
+    }
+  },
+  "test_result": {
+    "passed": 58,
+    "seconds": 22.8,
+    "warnings": 2
+  },
+  "cleanup": {
+    "requested_absent": true,
+    "actual_relocated_absent": true
+  },
+  "result": "REWORK_REQUIRED_ONE_COMMON_ROOT_P2"
+}

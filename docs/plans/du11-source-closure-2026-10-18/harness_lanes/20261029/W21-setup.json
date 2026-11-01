@@ -24,5 +24,8 @@
     "progress.md"
   ],
   "setup_notes": "--no-checkout starts with empty index; initialized own sparse read-tree. Windows filemode mismatch fixed only in new worktree config, primary original mode WIP preserved. No deletion of project files.",
-  "card_lf_sha256": "31daf54c8c818569aac87f46c6f8541fe0ded3846ab24cdc6ebddee162c1cc48"
+  "card_lf_sha256": "31daf54c8c818569aac87f46c6f8541fe0ded3846ab24cdc6ebddee162c1cc48",
+  "document_role": "CREATION_OR_HANDOFF_SNAPSHOT_NOT_CURRENT_DISPATCH",
+  "current_status_registry": "../../PACKAGE_STATUS.json",
+  "snapshot_note": "Existing status/base/authors_started/remote fields retain original observation; do not infer present execution from them."
 }

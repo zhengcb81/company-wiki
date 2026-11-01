@@ -1,0 +1,68 @@
+{
+  "status": "PASS",
+  "capture": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\mainline-closeout-20261031\\p1-huali-live-v2",
+  "original_run_id": "phaseC-090-d37daaa8f4dd",
+  "original_artifact_ref": {
+    "artifact_sha256": "ec1831a2fdf2952a9a80aba0c9e5db65c8bc581ea5c0a10d53d01ef2faba52d8",
+    "artifact_version_id": "narrative-9cfbfeec791e4b6c9b39af6c7d6c6570",
+    "byte_size": 243043,
+    "schema_version": "narrative-ref/1",
+    "source_ref": {
+      "byte_size": 238982,
+      "content_sha256": "d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "document_id": "urn:company-wiki:document:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "mime_type": "application/pdf",
+      "schema_version": "2.0",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831"
+    }
+  },
+  "restored_ref": {
+    "artifact_sha256": "ec1831a2fdf2952a9a80aba0c9e5db65c8bc581ea5c0a10d53d01ef2faba52d8",
+    "artifact_version_id": "narrative-e0743d03acc349ecaf7ab852707ca7fa",
+    "byte_size": 243043,
+    "schema_version": "narrative-ref/1",
+    "source_ref": {
+      "byte_size": 238982,
+      "content_sha256": "d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "document_id": "urn:company-wiki:document:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831",
+      "mime_type": "application/pdf",
+      "schema_version": "2.0",
+      "source_id": "urn:company-wiki:source:sha256:d4cec6d382d1d26e441b240a914406ce66a8a304dc32ddbe0a283c540876c831"
+    }
+  },
+  "body_sha256": "ec1831a2fdf2952a9a80aba0c9e5db65c8bc581ea5c0a10d53d01ef2faba52d8",
+  "generation_unchanged": true,
+  "activation_same_cross_run": {
+    "status": "PASS",
+    "held_status": "activation_pending",
+    "same_run_id": "phaseC-090-d37daaa8f4dd",
+    "native_attempts_before": 1,
+    "native_attempts_after": 1,
+    "charged_tokens_before": 8217,
+    "charged_tokens_after": 8217,
+    "charged_micro_usd_before": 1425,
+    "charged_micro_usd_after": 1425,
+    "POSTs_before": 1,
+    "POSTs_after": 1,
+    "paid_generation_unchanged": true,
+    "response_identity_unchanged": true
+  },
+  "same_run_zero_POST": true,
+  "cross_run_zero_POST": true,
+  "new_POST": 0,
+  "new_tokens": 0,
+  "new_micro_usd": 0,
+  "downloads": 0,
+  "scope": "exact paid artifact consumer restoration; no old AUTO/usage/history restored; original full-run failure retained",
+  "receipt_revision": "correction-3",
+  "supersedes_claims_only": {
+    "original_receipt": ".planning\\mainline-closeout-20261031\\p1-huali-consumer-recovery-v2\\receipt.json",
+    "field": "new_PDF_parse",
+    "old": 0,
+    "reason": "RF public evidence-locator replay calls the PDF parser for cited ranges; original 0 was uninstrumented and false."
+  },
+  "new_selection_parse_runs": 0,
+  "locator_replay_performed": true,
+  "locator_replay_parse_call_count": null,
+  "parse_call_count_status": "not_instrumented; no zero claim"
+}

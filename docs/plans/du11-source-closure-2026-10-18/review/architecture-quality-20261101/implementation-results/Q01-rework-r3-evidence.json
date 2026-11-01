@@ -1,0 +1,72 @@
+{
+  "schema_version": "q01-rework-r3-evidence/1",
+  "status": "READY_FOR_ROOT_INDEPENDENT_REVIEW",
+  "created_at_utc": "2026-11-01T11:04:45.189222+00:00",
+  "files": {
+    "src/company_wiki/document_understanding/statement_grammar/__init__.py": {
+      "sha256": "8905681fe847fe9c393ec6425d62edbf0a482b1b470607b53849b9f8f4c5ada9",
+      "bytes": 11671
+    },
+    "src/company_wiki/source_catalog/narrative_source_passage.py": {
+      "sha256": "9d31c1a8ccbd2372936db8ff23395f129895191b20b870d7e6c64d4199ed9b3d",
+      "bytes": 19411
+    },
+    "src/company_wiki/source_catalog/narrative_business_policy.py": {
+      "sha256": "b13bda61708daf3f927b845c68273d94e6056793a8754c73653e0b15f3483e58",
+      "bytes": 72443
+    },
+    "tests/unit/du11_production/test_source_readability_generalization.py": {
+      "sha256": "830805b3018fa1c503c52d67aaf1129cd055d41d7dc7d50713c14f1a598ec2ed",
+      "bytes": 12304
+    },
+    "tests/unit/du11_production/test_statement_grammar_runtime.py": {
+      "sha256": "4ba7bbe8cc21dce9133eff4e44101b4af666572b8ffb8d8e098610f75f5b879d",
+      "bytes": 6993
+    }
+  },
+  "grammar_version": "statement-grammar/2",
+  "source_passage_version": "source-passage/5",
+  "resource_identity": "09a95a63477d8e642996b6980beb32cb20edd44d392f7fafebd6a5ca13e0f950",
+  "resource_bytes": 10775669,
+  "packages": {
+    "nltk": "3.10.3",
+    "jieba": "0.42.1"
+  },
+  "final_tests": [
+    {
+      "suite": "readability-generalization-and-runtime",
+      "passed": 88,
+      "failed": 0,
+      "seconds": 26.73
+    },
+    {
+      "suite": "narrow-existing-financial-cause-and-typed-support",
+      "passed": 17,
+      "failed": 0,
+      "deselected": 64,
+      "seconds": 11.21
+    }
+  ],
+  "static": {
+    "ruff": "PASS",
+    "mypy_three_source_modules": "PASS"
+  },
+  "constraints": {
+    "document_work_limit_raised": false,
+    "source_offer_limit_raised": false,
+    "grammar_work_per_char": 32,
+    "max_statement_chars": 4096,
+    "max_statement_tokens": 1024,
+    "same_scope_result_reused": true
+  },
+  "scope": {
+    "production_originals_modified": false,
+    "production_database_modified": false,
+    "production_config_modified": false,
+    "runtime_downloads": 0,
+    "paid_model_posts": 0,
+    "git_index_modified_by_this_lane": false,
+    "real_selector_or_summary_or_rf_run": false,
+    "wheel_rebuilt_for_r3": false
+  }
+}

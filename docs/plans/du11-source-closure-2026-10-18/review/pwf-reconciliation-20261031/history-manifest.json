@@ -1,0 +1,397 @@
+{
+  "schema_version": "pwf-history-manifest/1",
+  "baseline_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+  "note": "Exact prior contents preserved in existing Git, not deleted or rewritten evidence; git show COMMIT:original_path works offline. Markdown relative links in GitHub resolve at the original path.",
+  "files": {
+    "docs/plans/du11-source-closure-2026-10-18/CURRENT_STATUS.json": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "ecc260d769a25e2f1d1008b05a59923d1591cc8174df65ebe5b9b9a2b4c9a475",
+      "git_bytes": 202847,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/du11-source-closure-2026-10-18/CURRENT_STATUS.json"
+    },
+    "docs/plans/du11-source-closure-2026-10-18/CURRENT_STATUS.md": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "0217b8b2579a28d714662ad665b15610aef30d31a7757d236cb53318c1b74a01",
+      "git_bytes": 97648,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/du11-source-closure-2026-10-18/CURRENT_STATUS.md"
+    },
+    "docs/plans/du11-source-closure-2026-10-18/task_plan.md": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "3b410f343425b7b7fe1aef3763fdf18ca4fa13b469ec30a3fcc8c0659f4236a0",
+      "git_bytes": 118629,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/du11-source-closure-2026-10-18/task_plan.md"
+    },
+    "docs/plans/du11-source-closure-2026-10-18/MAINLINE_LOOP_GOAL.md": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "d5d7073801bdad274f957330493062261866419606b0ce0f302c980d69c3eb35",
+      "git_bytes": 50074,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/du11-source-closure-2026-10-18/MAINLINE_LOOP_GOAL.md"
+    },
+    "docs/plans/du11-source-closure-2026-10-18/findings.md": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "0441160dcbad81e6b2ba0a8c2cba57f2458beb512d8f06e79cad0567efceba75",
+      "git_bytes": 253064,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/du11-source-closure-2026-10-18/findings.md"
+    },
+    "docs/plans/du11-source-closure-2026-10-18/progress.md": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "96b0153aed33c8f245d4989756207adfe04adeaf600f2c8e54e98cdf9a2f9d63",
+      "git_bytes": 277315,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/du11-source-closure-2026-10-18/progress.md"
+    },
+    "docs/plans/du11-source-closure-2026-10-18/r1-holdout-20261021/stage-progress.json": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "9bbccef79066a69950c4c4fa0c371fb8cd09bb7d7436b8e36dbf9e2de2e3e097",
+      "git_bytes": 6162,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/du11-source-closure-2026-10-18/r1-holdout-20261021/stage-progress.json"
+    },
+    "docs/plans/du11-source-closure-2026-10-18/harness_lanes/20261023/README.md": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "e7c9989b423ee1767e6436da97d83149443d8b2f84bfda8cc64e40cba63150e8",
+      "git_bytes": 3156,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/du11-source-closure-2026-10-18/harness_lanes/20261023/README.md"
+    },
+    "docs/plans/du11-source-closure-2026-10-18/harness_lanes/20261023/dispatch.json": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "460f315e5c83284437a83546c9aac804c3c252340f8fc9d2da85f8f029002211",
+      "git_bytes": 6116,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/du11-source-closure-2026-10-18/harness_lanes/20261023/dispatch.json"
+    },
+    "docs/plans/du11-source-closure-2026-10-18/harness_lanes/20261024/README.md": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "16b3ac85ee38db45601590b8d4993824f262cb758c9a9fd1b778fbfa47f93120",
+      "git_bytes": 3711,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/du11-source-closure-2026-10-18/harness_lanes/20261024/README.md"
+    },
+    "docs/plans/du11-source-closure-2026-10-18/harness_lanes/20261024/dispatch.json": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "c5d8052bf6e2da22ed073ee0aed3e29bba22eea8c890ba5457a3e872d3d0afab",
+      "git_bytes": 4884,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/du11-source-closure-2026-10-18/harness_lanes/20261024/dispatch.json"
+    },
+    "docs/plans/du11-source-closure-2026-10-18/harness_lanes/20261024-independent/README.md": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "0f26fb6e90e42e1cb4f9540047e68f503a602924cd0fa262c8385a6884c14678",
+      "git_bytes": 4364,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/du11-source-closure-2026-10-18/harness_lanes/20261024-independent/README.md"
+    },
+    "docs/plans/du11-source-closure-2026-10-18/harness_lanes/20261024-independent/dispatch.json": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "d93d9eb7dc5db5725ba51f1208e7c67a5dc1802bd1f42001266881b7c79854d5",
+      "git_bytes": 6013,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/du11-source-closure-2026-10-18/harness_lanes/20261024-independent/dispatch.json"
+    },
+    "docs/plans/du11-source-closure-2026-10-18/harness_lanes/20261025/README.md": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "f2085349776625a542b8031a1713358c8551988d8fdfcf058a73bf5bfaa7bc7d",
+      "git_bytes": 4604,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/du11-source-closure-2026-10-18/harness_lanes/20261025/README.md"
+    },
+    "docs/plans/du11-source-closure-2026-10-18/harness_lanes/20261025/dispatch.json": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "b672f93c7bfac0df6c4256aa420cd886198ea32ce699f32f0fd27b96e4bfef37",
+      "git_bytes": 8219,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/du11-source-closure-2026-10-18/harness_lanes/20261025/dispatch.json"
+    },
+    "docs/plans/du11-source-closure-2026-10-18/harness_lanes/20261028/README.md": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "762939e4f6c5f111cb305aa7ca864eaa211498a469c2e4eff02fd757e40225c3",
+      "git_bytes": 4579,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/du11-source-closure-2026-10-18/harness_lanes/20261028/README.md"
+    },
+    "docs/plans/du11-source-closure-2026-10-18/harness_lanes/20261029/README.md": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "d9c12cfc0854ef45e4903f5f60b18bceb85fde006c4d327c68cffb4d9472ec7a",
+      "git_bytes": 412,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/du11-source-closure-2026-10-18/harness_lanes/20261029/README.md"
+    },
+    "docs/plans/du11-source-closure-2026-10-18/harness_lanes/20261030/README.md": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "8be7aa38912c9f58be8f2232a992c2228a7c86c819a76e77ecf3ccb84482ba21",
+      "git_bytes": 4637,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/du11-source-closure-2026-10-18/harness_lanes/20261030/README.md"
+    },
+    "docs/plans/du11-source-closure-2026-10-18/harness_lanes/20261025/W19-setup.json": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "9cbfaf25b97bcef54cc6d141502ac508f4b70c2af5d40be6b547c5d9ba3974f2",
+      "git_bytes": 7942,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/du11-source-closure-2026-10-18/harness_lanes/20261025/W19-setup.json"
+    },
+    "docs/plans/du11-source-closure-2026-10-18/harness_lanes/20261028/W20-setup.json": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "2dbb4c44edd2a53b78c7e864924e1909d9cc2e92890744f05725cd323b47a5e5",
+      "git_bytes": 2217,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/du11-source-closure-2026-10-18/harness_lanes/20261028/W20-setup.json"
+    },
+    "docs/plans/du11-source-closure-2026-10-18/harness_lanes/20261029/W21-setup.json": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "63e7a2b816e60f9a514afd90dfc3f7b8c37bdb89b643bc1ec2778bbe72387b96",
+      "git_bytes": 1029,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/du11-source-closure-2026-10-18/harness_lanes/20261029/W21-setup.json"
+    },
+    "docs/plans/du11-source-closure-2026-10-18/harness_lanes/20261030/setup.json": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "7938ae14ae1f8b1194bf53cddfa07c336562c49048a4bd080712976d7dc2eaf7",
+      "git_bytes": 1558,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/du11-source-closure-2026-10-18/harness_lanes/20261030/setup.json"
+    },
+    "docs/plans/du11-source-closure-2026-10-18/harness_lanes/20261030/W23-setup.json": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "c3587f818ff1919058de35cf4ce0728292223a3a4f8fa34e5b4f920e8a3ce61a",
+      "git_bytes": 1446,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/du11-source-closure-2026-10-18/harness_lanes/20261030/W23-setup.json"
+    },
+    "docs/plans/du11-source-closure-2026-10-18/harness_lanes/20261031/R1-setup.json": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "edf61818b5cf33d41f28d96a2800fe5e505cd3994b78483cf64660f07a9a8086",
+      "git_bytes": 753,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/du11-source-closure-2026-10-18/harness_lanes/20261031/R1-setup.json"
+    },
+    "docs/plans/du11-source-closure-2026-10-18/HANDOFF-2026-10-21.md": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "3bd279bca2a62f60fd270f32339524716780ee665851cca367b3ae61b80f2af0",
+      "git_bytes": 12967,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/du11-source-closure-2026-10-18/HANDOFF-2026-10-21.md"
+    },
+    "docs/plans/du11-source-closure-2026-10-18/HANDOFF-2026-10-22.md": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "b865f56eb5bea041b1efe4ea7685cb922847d55741dc56edea439703771397da",
+      "git_bytes": 21797,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/du11-source-closure-2026-10-18/HANDOFF-2026-10-22.md"
+    },
+    "docs/plans/du11-source-closure-2026-10-18/review/harness-handoff.md": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "641546ccf5e6bbea355b673a4c1522e7f70800b8d99a440d9069766b07f27ac3",
+      "git_bytes": 556,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/du11-source-closure-2026-10-18/review/harness-handoff.md"
+    },
+    "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/FORMAL_NEXT.md": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "b06d1c5db15ec61e2a82faad3f2445642ee6c3f752c2b970362594037e8ba5bc",
+      "git_bytes": 7091,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/FORMAL_NEXT.md"
+    },
+    "docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/PAUSE_HANDOFF_20261028.md": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "9b575deaf8229d77f6a76e15d1e094aa48bfb7d9a85b56bf5da9967bf4abde60",
+      "git_bytes": 6518,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/du11-source-closure-2026-10-18/review/pdf-c3-20261026/PAUSE_HANDOFF_20261028.md"
+    },
+    "docs/plans/du11-source-closure-2026-10-18/review/package-reception-w13-w15-20261024/README.md": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "c4e9ebca9dcffaf4ff373f2bb081a2a1d503927705daed255eba5df1f5cad393",
+      "git_bytes": 5024,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/du11-source-closure-2026-10-18/review/package-reception-w13-w15-20261024/README.md"
+    },
+    "docs/plans/du11-source-closure-2026-10-18/review/package-reception-w16-w17-20261025/README.md": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "ac18b0ff0f27041272bcf3cbf554ab7150f56f4d0bf19fa1361b8f24bd8b905a",
+      "git_bytes": 3838,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/du11-source-closure-2026-10-18/review/package-reception-w16-w17-20261025/README.md"
+    },
+    "docs/plans/du11-source-closure-2026-10-18/review/w19-reception-20261026/README.md": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "7a71174ceaea947b0d972dc2d3614f91942348e4994dbc91beb72e809a466668",
+      "git_bytes": 9572,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/du11-source-closure-2026-10-18/review/w19-reception-20261026/README.md"
+    },
+    "docs/plans/du11-source-closure-2026-10-18/review/w20-reception-r3-20261029/README.md": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "de2bf624c00dc912183672c1da2fcfb4c7f2c89873f737bf5db19ae60cf2be3c",
+      "git_bytes": 4527,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/du11-source-closure-2026-10-18/review/w20-reception-r3-20261029/README.md"
+    },
+    "docs/plans/du11-source-closure-2026-10-18/review/w21-root-reception-20261030/README.md": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "19cc1a90b8aba7c163dfdccdd8707aa222e214c8ee350efc405f33c16a4fec79",
+      "git_bytes": 1413,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/du11-source-closure-2026-10-18/review/w21-root-reception-20261030/README.md"
+    },
+    "docs/plans/du11-source-closure-2026-10-18/review/w22-w23-reception-20261031/README.md": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "7c8a364136be5b6d190ddd79ee7360d801ab81bfacee5e03d40b1bdf6d91711e",
+      "git_bytes": 5064,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/du11-source-closure-2026-10-18/review/w22-w23-reception-20261031/README.md"
+    },
+    "docs/plans/document-understanding-2026-10-13/README.md": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "cc769582b6c0ece76cca48fee420e54bad8ba7399d2ae0e364c46d38c2422548",
+      "git_bytes": 3014,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/document-understanding-2026-10-13/README.md"
+    },
+    "docs/plans/document-understanding-2026-10-13/task_plan.md": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "64e743152b6877d8ef22791e75818e5f478d1c78596bf754d9d7508821c0d01d",
+      "git_bytes": 110423,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/document-understanding-2026-10-13/task_plan.md"
+    },
+    "docs/plans/document-understanding-2026-10-13/findings.md": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "63f04b063c30a6344cd43ca398da8e3b58aba17f1e95bf71b58cde8675f284c2",
+      "git_bytes": 125901,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/document-understanding-2026-10-13/findings.md"
+    },
+    "docs/plans/document-understanding-2026-10-13/progress.md": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "b5fb57ba2bac25d1b6cefab25281ac585301a5bd650a99fc8a0a9ad144fcc593",
+      "git_bytes": 137329,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/document-understanding-2026-10-13/progress.md"
+    },
+    "docs/plans/narrative-evidence-pilot-2026-09-26/README.md": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "5f90d7ba0ed07f9462a17970cfca02504fac4bb919e7a4272c956a34ab4e926d",
+      "git_bytes": 2555,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/narrative-evidence-pilot-2026-09-26/README.md"
+    },
+    "docs/plans/narrative-evidence-pilot-2026-09-26/task_plan.md": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "75ea4fd54b208291184b0ede98e138dd22d71f50cd7a7da468e5841c202123f2",
+      "git_bytes": 19496,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/narrative-evidence-pilot-2026-09-26/task_plan.md"
+    },
+    "docs/plans/narrative-evidence-pilot-2026-09-26/findings.md": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "47b75d0d53fe731db576e0d67cba2ba59a00824933220619ce8a44b986efc0cc",
+      "git_bytes": 15596,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/narrative-evidence-pilot-2026-09-26/findings.md"
+    },
+    "docs/plans/narrative-evidence-pilot-2026-09-26/progress.md": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "0c045e4b71afe032e0d09752af6568cfe32252470640b6fee3e4a9d8b172d34f",
+      "git_bytes": 16497,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/narrative-evidence-pilot-2026-09-26/progress.md"
+    },
+    "docs/plans/document-understanding-2026-10-13/parallel/du3-2026-10-14/README.md": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "4871be9c88be1652a9e7838eb8e96fde4ef295b8d99e252d30970a6ffa2e4439",
+      "git_bytes": 2802,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/document-understanding-2026-10-13/parallel/du3-2026-10-14/README.md"
+    },
+    "docs/plans/document-understanding-2026-10-13/parallel/du4-2026-10-15/README.md": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "548da6a6c71f2b30ae4f95f73a5286cb57afb2ff31e8a76ff919f400fb2a5645",
+      "git_bytes": 4117,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/document-understanding-2026-10-13/parallel/du4-2026-10-15/README.md"
+    },
+    "docs/plans/document-understanding-2026-10-13/parallel/du5-2026-10-15/README.md": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "4bf763b506392b729956f42a095e8eba7865f396d1e372e3892846a0893ca801",
+      "git_bytes": 4552,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/document-understanding-2026-10-13/parallel/du5-2026-10-15/README.md"
+    },
+    "docs/plans/document-understanding-2026-10-13/parallel/du6-2026-10-16/README.md": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "34250e01374c024a28c4b42c7e3e2be17dde81aa1778ec3498e533f634e376e1",
+      "git_bytes": 2815,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/document-understanding-2026-10-13/parallel/du6-2026-10-16/README.md"
+    },
+    "docs/plans/document-understanding-2026-10-13/parallel/du7-2026-10-16/README.md": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "b4c399de5f61bc53d1ac4dea29dab9a276ea7e918765ea9cae8cc8c2ae581c62",
+      "git_bytes": 1810,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/document-understanding-2026-10-13/parallel/du7-2026-10-16/README.md"
+    },
+    "docs/plans/document-understanding-2026-10-13/parallel/du8-2026-10-16/README.md": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "f1f6df224e8a2de85ff8866dbbc87e26dd61b0de152263773a7b1730d6b85b6c",
+      "git_bytes": 1948,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/document-understanding-2026-10-13/parallel/du8-2026-10-16/README.md"
+    },
+    "docs/plans/document-understanding-2026-10-13/parallel/du9-2026-10-16/README.md": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "c7e5f40a0a9595909496c41cc7aaa151a7dc962db813f186bc08ac1243aa31da",
+      "git_bytes": 2570,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/document-understanding-2026-10-13/parallel/du9-2026-10-16/README.md"
+    },
+    "docs/plans/document-understanding-2026-10-13/review/remaining_packages_watch.md": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "30a9899e8514c8106f16cb954003756b8bb093a7d0b31c33b1198d9e3959a86c",
+      "git_bytes": 4693,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/document-understanding-2026-10-13/review/remaining_packages_watch.md"
+    },
+    "docs/plans/document-understanding-2026-10-13/review/remaining_packages_watch.json": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "b9117f6d8d123caaa9aad68c0c34d72357709b91e09c79f407809dff1e19e675",
+      "git_bytes": 3512,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/document-understanding-2026-10-13/review/remaining_packages_watch.json"
+    },
+    "docs/plans/cross-market-rf-e2e-2026-10-08/followup_eight_company_audit.md": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "a92ebb9f44da2a9907df111be3584f19fa7d6562168ae8b163d1e7596439c916",
+      "git_bytes": 4810,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/cross-market-rf-e2e-2026-10-08/followup_eight_company_audit.md"
+    },
+    "docs/plans/cross-market-rf-e2e-2026-10-08/task_plan.md": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "dc7c7d9e26263de4d66b742cc41460ed630aa166f22659965403f3afc5a1345c",
+      "git_bytes": 151559,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/cross-market-rf-e2e-2026-10-08/task_plan.md"
+    },
+    "docs/plans/cross-market-rf-e2e-2026-10-08/progress.md": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "05dd86e729c06d17e9e8406d3a0a56e6d0fc06eaf465b76fe3c647b0ac3ff3b9",
+      "git_bytes": 226124,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/cross-market-rf-e2e-2026-10-08/progress.md"
+    },
+    "docs/plans/cross-market-rf-e2e-2026-10-08/findings.md": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "f33260ef83c1dddd31aae77557929c0d428bfdc0fe8d455ce79f4ac08cec83c5",
+      "git_bytes": 191183,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/cross-market-rf-e2e-2026-10-08/findings.md"
+    },
+    "docs/plans/du11-source-closure-2026-10-18/review/source-information-20261030/SOURCE_DESCRIPTION_NEXT.md": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "f730711719ba24239f9ad6645e79d457d6333a73266612b877e4f2621b06e913",
+      "git_bytes": 5888,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/du11-source-closure-2026-10-18/review/source-information-20261030/SOURCE_DESCRIPTION_NEXT.md"
+    },
+    "docs/plans/du11-source-closure-2026-10-18/review/source-information-20261030/description-final/M7_C3_SOURCE_HOLDOUT_NEXT.md": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "bed4590ffe3fcaaa05c1d0bac2b24fb0a2d08f19a9392bc451222a3e85ebb220",
+      "git_bytes": 4259,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/du11-source-closure-2026-10-18/review/source-information-20261030/description-final/M7_C3_SOURCE_HOLDOUT_NEXT.md"
+    },
+    "docs/plans/du11-source-closure-2026-10-18/review/source-information-20261030/description-final/QA_LOCATOR_NEXT.md": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "6cdfb81232bf9fe8935d366a560c42afe2c5902d1739857a4ab28a1a69c83643",
+      "git_bytes": 3602,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/du11-source-closure-2026-10-18/review/source-information-20261030/description-final/QA_LOCATOR_NEXT.md"
+    },
+    "docs/plans/du11-source-closure-2026-10-18/review/source-information-20261030/description-final/SOURCE_PREPARATION_NEXT.md": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "e923cbd2bc3435c56320bcd59337c7dc39d5c22307758221c7dd970e7ac83cfb",
+      "git_bytes": 1906,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/du11-source-closure-2026-10-18/review/source-information-20261030/description-final/SOURCE_PREPARATION_NEXT.md"
+    },
+    "docs/plans/du11-source-closure-2026-10-18/review/source-information-20261030/description-final/SUMMARY_QUALITY_NEXT.md": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "89c4e74a63f19af047190b8a52f8a1fa574841c39c3a355e42b20116700ff61e",
+      "git_bytes": 6292,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/du11-source-closure-2026-10-18/review/source-information-20261030/description-final/SUMMARY_QUALITY_NEXT.md"
+    },
+    "docs/plans/du11-source-closure-2026-10-18/review/source-information-20261030/description-final/summary-preflight/RUN_NEXT.md": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "27104c6884dee76efd392d3478b2b68381001e00fcdca6b2a3666753838062b1",
+      "git_bytes": 4468,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/du11-source-closure-2026-10-18/review/source-information-20261030/description-final/summary-preflight/RUN_NEXT.md"
+    },
+    "docs/plans/du11-source-closure-2026-10-18/review/source-information-20261030/description-final/M8_SOURCE_ADMISSION_AND_CONTEXT.md": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "7264f2736a50bcd0d314fef61b96d3b1b9d921de05492b671cfca5bb47925222",
+      "git_bytes": 7579,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/du11-source-closure-2026-10-18/review/source-information-20261030/description-final/M8_SOURCE_ADMISSION_AND_CONTEXT.md"
+    },
+    "docs/plans/du11-source-closure-2026-10-18/review/m8-source-owner-20261031/README.md": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "583c6e083ec0650bbef1b3a42bbe024651621d747a4bd8b65177f41326a9498a",
+      "git_bytes": 2971,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/du11-source-closure-2026-10-18/review/m8-source-owner-20261031/README.md"
+    },
+    "docs/plans/du11-source-closure-2026-10-18/harness_lanes/20261031/W23-OCR-R1.md": {
+      "git_commit": "cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6",
+      "blob_sha256": "737e722acb237e12c93f5ed2ca41166d87b4a535c46cd34ca821444887d6770b",
+      "git_bytes": 8815,
+      "url": "https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/du11-source-closure-2026-10-18/harness_lanes/20261031/W23-OCR-R1.md"
+    }
+  }
+}

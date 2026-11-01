@@ -1,48 +1,5 @@
-## 最新：当前外包待交付=0 — 2026-10-17
+# 旧DU8/DU9跟进记录
 
-DU8/DU9六包已全部接收，作者交付历史包含于各自主线；最后[ET接收与离线联调](du9_et_reception.md)完成。CWP生产装配/真实PDF摘要与FF完整C仍是ROOT后续任务，不能据此称项目完成。下方等待/巡查记录为历史。
+这是旧调度记录，不是当前待交付清单；当前卡片看[PACKAGE_STATUS](../../du11-source-closure-2026-10-18/PACKAGE_STATUS.md)，实际主线看[CURRENT_STATUS](../../du11-source-closure-2026-10-18/CURRENT_STATUS.md)。本次未新建或重启定时器。
 
----
-
-## 最新外包接收状态 — 2026-10-17
-
-RF DU8对比已接收并发布main/origin c984a8fa，独立审查与精确CI均成功，三份技能同步完成；见[RF最终接收](du8_rf_reception.md)。两个CWP DU9组件也已接收。**待外包正式交付仅余DU9 ET兼容对比**，作者树只读；本次没有重新检查ET，因此旧ET状态只是最后已知基线。FF完整C/CWP真实PDF摘要是ROOT后续任务，不是等待作者交付。旧定时任务不存在、未重建。下方旧状态快照保留历史，不代表最新结论。
-
----
-
-## 当前状态 — 2026-10-17
-
-POLICY、PLANNER组件已由ROOT接收，完整历史保留；真实编译策略联调和两项共因修复独审通过。主线/origin c300e801已正常发布，精确CI39008113871成功；真实生产深页与正式摘要仍OPEN。详见 [ROOT接收报告](du9_planner_reception.md)。外包只剩RF/ET，保持作者工区只读。du8-du9自动任务实际不存在，未重建；下方旧巡查和等待A记录仅为历史。
-
----
-
-> ROOT后续完成POLICY组件，最终源码6e0edeef、集中626PASS/11SKIP、独立263PASS及PASS/0未解决；见[交接](../../du9-geometry-policy-2026-10-16/handoff.md)。生产合流等待PLANNER，三条外包监测继续，不对原POLICY A工区报缺实现。
-
-> 2026-10-17用户已明确所有权：POLICY的A交给ROOT在主仓实施B/C，原A工区只读；PLANNER仍在外包施工，ROOT等待。自动跟进du8-du9已相应改为RF/PLANNER/ET三条外包。下表保留初次盘点历史，后续看JSON/current PWF及本地status，勿把POLICY停A重复报缺交付。
-
-# 剩余外包施工包只读跟进 — 2026-10-17
-
-用户要求未完成时隔一段时间查看。已实际检查四工区Git、PWF、交接/收据；这是交付齐备初筛，不代替ROOT验收。检查时刻 UTC 2026-10-16T23:19:58Z。
-
-| 包 | 实际HEAD | 当前事实 | 下一步 |
-|---|---|---|---|
-| DU8-RF-COMPARISON | 6de6a0c4 | 有实现/测试/handoff；交接冻结声明落后于最新源码，另有未提交重检工具 | 作者对齐最终交接/独审与代码版本后ROOT验收 |
-| DU9-CWP-GEOMETRY-POLICY | f70318f1 | 仅A调查，缺编译模块/测试/交接/独审 | 原工区继续B/C，无需ROOT签A |
-| DU9-CWP-GEOMETRY-PLANNER | 8ff47e28 | A测试及未提交DTO，缺planner实现/交接/独审 | 原工区继续B/C |
-| DU9-ET-LEGACY-COMPARISON | 36c9b38 | 有实现/测试收据，尚缺最终交接/独审，PWF未更新 | 完成原卡收尾，ROOT随后验收 |
-
-## 实际证据与边界
-
-- RF handoff.json仍把03f35e91列为冻结源码，声称其后scripts逐字一致；实际diff至6de6a0c4包含scripts/revenue_report.py与两测试，532增/63删。不能用旧冻结声明代表最终通过；本次不删除作者重检工具、不替其写交接。
-- ET作者收据分别170 PASS、193 PASS、58 PASS及10 golden匹配，属于不同范围/版本记录，不求和，也不表述为ROOT本次实测；尚无handoff/独审。发现有代码不等于已正式交付。
-- 两CWP状态与此前实查一致；[CONTINUE_BC.md](../parallel/du9-2026-10-16/CONTINUE_BC.md)已明确无需新增A签收，不能因误读而等待批准。
-- FF DU8工程已并线，完整41例C/完整中断重启仍是ROOT具名OPEN责任；不列入待作者交付的四包。AUDIT DU8已接收。
-- 本次0供应商/0下载/0原件复制/0作者写入，仅只读Git/已知计划与交接文件；未重跑作者测试。
-
-## 自动跟进
-
-已通过Codex工具创建本线程heartbeat **du8-du9，ACTIVE，每30分钟**。既有IQS的06自动跟进属于另一线程，保持不动。
-
-每次仅检查实际HEAD、未提交路径、完整实现、最终交接、测试/清理与独审绑定版本。无变化不打扰；齐备新交付或新明确阻塞才通知。仅更新ROOT本地`.planning/shared-reading-production/package-watch/status.json`去重，不逐次改PWF/提交，不生成源码副本，不调用收费API、不运行作者代码、不发跨线程消息、不自动接管/并线。完整交付通知不等于验收通过；四包均正式交接且通知后暂停本项自动跟进。
-
-[机器可读基线](remaining_packages_watch.json)记录精确工区、计划路径、HEAD及状态。后续先看本地巡查状态，再比对当前文件；本文件是初次基线，不是假定作者永不变化。
+[原观察全文](https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/document-understanding-2026-10-13/review/remaining_packages_watch.md)与当时JSON记录保留时间含义，不把初筛视为验收。

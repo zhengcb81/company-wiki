@@ -1,0 +1,24 @@
+{
+  "scope": "P0 CI contract rootfix, no product source/limits changed",
+  "test_file": "tests/unit/du11_tail_integration/test_tail_source_wiring.py",
+  "historical_ci": 41243937903,
+  "historical_failed_cases": 3,
+  "final_module": {
+    "passed": 39,
+    "seconds": 19.22
+  },
+  "related_native_profile": {
+    "passed": 101,
+    "seconds": 16.09
+  },
+  "final_consumer_hygiene": {
+    "passed": 3,
+    "seconds": 11.22
+  },
+  "independent_partial_probes": 3,
+  "independent_verdict": "PASS_0_OPEN",
+  "ruff": "PASS",
+  "remote_ci": "PENDING_OBSERVATION",
+  "new_model_posts": 0,
+  "new_downloads": 0
+}

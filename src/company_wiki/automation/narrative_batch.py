@@ -1145,13 +1145,31 @@ def _read_projected_pin(artifacts, reader, payload, pin, manifest, *, catalog):
 
 
 def _find_item_reuse_pin(
-    artifacts, reader, payload, manifest, facts, *, catalog, normalization=None
+    artifacts, reader, payload, manifest, facts, *, catalog, normalization=None, deadline=None,
 ):
+    def reselect():
+        from .narrative_select import NarrativeSelectHandler
+
+        def checkpoint():
+            _check_preparation_deadline(deadline)
+        checkpoint()
+        try:
+            return NarrativeSelectHandler(
+                reader=reader, selector_version=manifest["execution_versions"]["selector"],
+                normalization=normalization, projection_catalog=catalog,
+            ).select_source(payload, checkpoint=checkpoint)
+        except TimeoutError:
+            raise
+        except Exception as exc:
+            raise BatchResumeError("BATCH_REUSE_RESELECT_FAILED") from exc
+
     if payload.subject.kind == "raw":
         return find_reuse_pin(
-            artifacts, reader, payload, manifest, facts, normalization=normalization
+            artifacts, reader, payload, manifest, facts, normalization=normalization, reselect=reselect,
         )
     reading = manifest.get("execution_versions", {}).get("selector") == "0.9.0"
+    from .narrative_generation import ReadingReuseVerifier
+    verification = ReadingReuseVerifier(reselect)
     versions = (artifacts.visible_base_generation_candidates(subject=payload.subject,
                 base_generation_sha256=generation_sha256(manifest)) if reading else
                 artifacts.visible_subject_generation_candidates(subject=payload.subject,
@@ -1160,9 +1178,9 @@ def _find_item_reuse_pin(
         metadata = json.loads(version.metadata_json)
         effective = manifest
         if reading:
-            from .narrative_generation import reading_candidate_manifest, current_reading_decision_matches
+            from .narrative_generation import reading_candidate_manifest
             effective = reading_candidate_manifest(version, manifest)
-            if not current_reading_decision_matches(effective):
+            if not verification.matches(effective):
                 continue
         elif metadata.get("generation_manifest") != manifest:
             raise ValueError("BATCH_REUSE_MANIFEST_INVALID")
@@ -1565,10 +1583,13 @@ def _run_prepared(
                             facts[document],
                             catalog=catalog,
                             normalization=normalization,
+                            deadline=deadline,
                         )
                         if not request.refresh or pointer.exists()
                         else None
                     )
+                except BatchResumeError:
+                    raise
                 except ValueError as exc:
                     raise BatchResumeError("BATCH_REUSE_ARTIFACT_INVALID") from exc
                 _check_preparation_deadline(deadline)
@@ -1987,28 +2008,10 @@ def _generation_pointer(catalog, manifest):
 
 
 def _generation_owner_finished(db_path, run_id):
-    """Read existing AUTO facts; only known settled terminal work can be released."""
-    from . import migrations
+    """Consume AUTO's execution state; never reinterpret unknown as active work."""
     if not db_path.is_file():
         return False
-    runs = NarrativeRunStore(db_path)
-    run = runs.get_run(run_id)
-    if run is None:
-        return False
-    if any(item.usage_status != "known" for item in runs.reservations_for_run(run_id)):
-        return False
-    connection = migrations._open_readonly_connection(db_path)
-    try:
-        rows = connection.execute("""SELECT j.status FROM jobs j JOIN narrative_run_jobs r
-            ON r.job_id=j.job_id WHERE r.run_id=?""", (run_id,)).fetchall()
-        if len(rows) != len(run.job_ids) or any(JobStatus(row[0]) not in _TERMINAL for row in rows):
-            return False
-        pending = connection.execute("""SELECT 1 FROM effects e JOIN narrative_run_jobs r
-            ON r.job_id=e.job_id WHERE r.run_id=? AND e.status IN ('planned','pending','verified') LIMIT 1""",
-            (run_id,)).fetchone()
-        return pending is None
-    finally:
-        connection.close()
+    return NarrativeRunStore(db_path).generation_execution_finished(run_id)
 
 
 def _check_generation_owner(pointer, db_path, run_id):

@@ -1,0 +1,182 @@
+{
+  "schema_version": "independent-p2-v5-probe/1",
+  "checks_pass": true,
+  "checks": [
+    {
+      "name": "exact_cwp_bundle",
+      "pass": true
+    },
+    {
+      "name": "summary_exact_cwp_claim",
+      "pass": true
+    },
+    {
+      "name": "proof_entry_exact_consumption_receipt",
+      "pass": true
+    },
+    {
+      "name": "artifact_ref_exact_reader_request_receipt",
+      "pass": true
+    },
+    {
+      "name": "all_original_support_and_context_spans_exact",
+      "pass": true,
+      "support": 5,
+      "context": 1
+    },
+    {
+      "name": "full_continuous_answer",
+      "pass": true
+    },
+    {
+      "name": "original_reading_group_exact",
+      "pass": true
+    },
+    {
+      "name": "support_context_partition_preserved",
+      "pass": true
+    },
+    {
+      "name": "actual_native_claim_reference",
+      "pass": true
+    },
+    {
+      "name": "real_formula_dependency",
+      "pass": true
+    },
+    {
+      "name": "unreviewed_uncertain_qualities_retained",
+      "pass": true
+    },
+    {
+      "name": "unknown_publication_and_fiscal_time_retained",
+      "pass": true
+    },
+    {
+      "name": "research_reason_and_source_time_reported",
+      "pass": true
+    },
+    {
+      "name": "all_support_context_text_and_locators_in_report",
+      "pass": true
+    },
+    {
+      "name": "summary_identity_in_report",
+      "pass": true
+    },
+    {
+      "name": "native_and_result_and_snapshot_freeze_identical_inputs",
+      "pass": true
+    },
+    {
+      "name": "input_hash_freezes_full_proof",
+      "pass": true,
+      "sha256": "c73dcad35d16053e3b94f8cd8ef08ee9e2a26cf5f9ccd3ee0aff4389db2d53ec"
+    },
+    {
+      "name": "reason_edit_changes_native_hash",
+      "pass": true
+    },
+    {
+      "name": "formal_publication_hashes",
+      "pass": true
+    },
+    {
+      "name": "snapshot_hashes",
+      "pass": true,
+      "snapshot_id": "85893de7654ab410bccc46e1506816ffd7266c6b8dfe4f5519030a0179f51c2c"
+    },
+    {
+      "name": "isolated_registry_chain",
+      "pass": true
+    },
+    {
+      "name": "sold_pair_history_anchor_in_formal_claim",
+      "pass": true
+    },
+    {
+      "name": "capacity_history_anchor_in_formal_claim",
+      "pass": true
+    },
+    {
+      "name": "footwear_only_price_anchor_in_formal_claim",
+      "pass": true
+    },
+    {
+      "name": "independent_formula_low",
+      "pass": true
+    },
+    {
+      "name": "independent_formula_base",
+      "pass": true
+    },
+    {
+      "name": "independent_formula_high",
+      "pass": true
+    },
+    {
+      "name": "unit_price_nonzero_and_unit_displayed",
+      "pass": true
+    },
+    {
+      "name": "all_future_values_explicit_assumptions",
+      "pass": true
+    },
+    {
+      "name": "company_research_gaps_preserved",
+      "pass": true
+    },
+    {
+      "name": "temp_cleanup",
+      "pass": true
+    },
+    {
+      "name": "zero_new_model_download_record",
+      "pass": true
+    }
+  ],
+  "math": [
+    {
+      "case": "low",
+      "units": "204291000",
+      "expected_million": "22484.117045897000000000000000000000000000000000000",
+      "observed_million": "22484.117045896997",
+      "difference": "-3.000000000000000000000000000000000E-12"
+    },
+    {
+      "case": "base",
+      "units": "230599141",
+      "expected_million": "25376.990436338687000000000000000000000000000000000",
+      "observed_million": "25376.990436338685",
+      "difference": "-2.000000000000000000000000000000000E-12"
+    },
+    {
+      "case": "high",
+      "units": "247570000",
+      "expected_million": "27243.125577321769681483765804660998281862637120578",
+      "observed_million": "27243.125577321767",
+      "difference": "-2.681483765804660998281862637120578E-12"
+    }
+  ],
+  "network_calls": 0,
+  "model_calls": 0,
+  "parser_calls": 0,
+  "author_runtime_calls": 0,
+  "code_sha256_at_probe": {
+    "scripts/narrative_summary_provenance.py": "14e7d4e90b61bdbde313fab0f2b8249287e6c6d08c198f6ab98fc5ee9719126c",
+    "scripts/narrative_summary_usage.py": "3c2d6838e3985f2a43e17e20aba85ddbd72fc144cc652e7db54e71ea64a587b4",
+    "scripts/source_narrative_context.py": "c71b53bf25ea67a1c1b5b83d5ecad6a63fe653786298f5b5ed3625e35a66a5fe",
+    "scripts/company_wiki_narrative_contracts.py": "14c3d5d6d3c88c4f8862b6cc464480555655cfa36492dad732151eb05fa7d02f",
+    "scripts/contracts/document.py": "b7fda4e863b12da50509e48f3801695741d39e6e0f9468a907b7aa30532423ef",
+    "scripts/revenue_report.py": "3f5c1324e2be453ffcb8c58945304fc4e5ca831a71266d5c6b80620874915b23",
+    "tests/test_summary_publication_lineage.py": "697ac76da7965c705851ef75f39c47fba04338712e578ef2f81cd9f6d34daeea"
+  },
+  "artifacts_file_sha256": {
+    "input.json": "7f551827b675662e1aed34110e31e2299cc854acb2a2de5b3ab09d18322343d0",
+    "forecast.json": "3d7e15ad54d766e44106811efbd4730f77c74ae7a4468a97162980d3810c7e2b",
+    "snapshot.json": "c492f3ea9e1a30c763023aa8a1688d60e85905ece5947566dfa505678dfd9483",
+    "report.md": "77baa08c0d707ff24c80e2e83da22c2d000b64d715551fb0ccdb8e299b699188",
+    "consumption-receipt.json": "e4c966f82ff49e120958df3523952c8cb98a85f094b566b800f7d965bc651420",
+    "publication-registry.jsonl": "9b1763d0d5b9cf8894e5021290ba62bad62fe5512c48d7f67b2cc74b1ce52dfa"
+  }
+}

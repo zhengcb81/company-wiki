@@ -1,0 +1,90 @@
+{
+  "external_package_reception_20261024": {
+    "status": "ROOT_ACCEPTED_ALL_THREE",
+    "receipt": "review/package-reception-w13-w15-20261024/receipt.json",
+    "report": "review/package-reception-w13-w15-20261024/README.md",
+    "W13": "ROOT_BOUNDED_ADAPTATION_PUBLISHED_EXACT_CI_SUCCESS_67439D0A",
+    "W14": "RF_MAIN_PUSHED_AA19B653; LATER_SHARED_READING_INTERFACE_FIX_C48F86BD_PUSHED",
+    "W15": "ROOT_LINE_ENDING_PORTABILITY_FIX_COMMITTED_LOCAL_NO_REMOTE_37E12E6F",
+    "formal_summary_cache_recovery_and_real_company_rf_acceptance_complete": false,
+    "downloads": 0,
+    "external_model_calls": 0,
+    "W13_exact_ci": {
+      "id": 40120507146,
+      "head_sha": "83e49a6b3a83a78726de9c7a40e4bdbc6baf52fc",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/40120507146"
+    },
+    "W14_followup_commit": "c48f86bd0d56f0a2be67a71348cf05d8544b6cdd",
+    "W14_followup_push_head": "c48f86bd0d56f0a2be67a71348cf05d8544b6cdd",
+    "cn_h1_rf_interface_e2e": "PASS_OFFLINE_V6",
+    "cn_h1_rf_interface_review": "PASS",
+    "cn_h1_business_content_review": "PENDING"
+  },
+  "w19_root_reception_20261026": {
+    "status": "COMPONENT_ACCEPTED_PUBLISHED_CI_GREEN_GLOBAL_SYNC_REPAIRED",
+    "entry": "review/w19-reception-20261026/README.md",
+    "cwp_main_head": "10def09e8fd1967e0b87434ae211d1fbaafbb090",
+    "ff_main_head": "5396bd688e5b775e746fe3290852f0532d4548f8",
+    "author_ancestors_preserved": true,
+    "reviewed_published_files_sha_matches": 36,
+    "independent_implementation_review": "PASS_ZERO_OPEN",
+    "independent_official_six_values": "PASS_ZERO_OPEN_SAMPLE_SCOPE",
+    "cwp_ci": 40300969747,
+    "ff_ci": 40301405046,
+    "focused_tests": 196,
+    "release_seam_tests": 51,
+    "ff_statement_tests": 35,
+    "test_counts_overlap": true,
+    "live_api": {
+      "requests": 4,
+      "response_bytes": 942986,
+      "cost_usd": "0.00",
+      "seconds": 23.682963800034486,
+      "temporary_root_restored_absent": true,
+      "production_config_catalog_unchanged": true
+    },
+    "new_model_calls": 0,
+    "per_row_unit_scale": "Unproven units remain None; six official nominal-yuan checks do not upgrade all provider rows.",
+    "next": "Execute existing PDF-C3: configured real summary semantics, cross-process cache/no duplicate spend recovery, actual RF adoption, held-out companies and eight-step audit loop. W19, Linux portability and global skill sync are complete/published or accepted; do not repeat them or wait for human resume.",
+    "ff_api_release_head": "72024a8597e27607badbbfdd06c39446269d7010",
+    "ff_installer_ci": 40304350720,
+    "root_worktrees_removed": true,
+    "installation": {
+      "status": "SYNCHRONIZED_AND_ISOLATED_ENTRYPOINTS_VERIFIED",
+      "historical_first_attempt": {
+        "status": "FAILED_OS_PERMISSION_NO_WRITES",
+        "seconds": 0.38098319998243824,
+        "target_bytes_unchanged": true,
+        "project_manual_gate": false,
+        "ACL_changes": 0,
+        "receipt": "review/w19-reception-20261026/install-actual-receipt.json"
+      },
+      "current_receipt": "review/skill-sync-root-cause-20261026/final-verification.json",
+      "runtime_matches_per_physical_target": 22,
+      "updated_files": 8,
+      "repeat_written": 0,
+      "ACL_changes": 0,
+      "label_changes": 0,
+      "independent_review": "PASS_ZERO_OPEN"
+    }
+  },
+  "older_packages_publication_20261031": {
+    "status": "ALL_THREE_MERGED_AND_PUSHED",
+    "entry": "review/older-packages-merge-20261031/README.md",
+    "receipt": "review/older-packages-merge-20261031/receipt.json",
+    "heads": {
+      "industry-research": "98640a9a1f52fc87ba9813676a3cc5ab9bf045c9",
+      "QAbyLLM": "1f5514744d7677ff4e59d992c7489bff754d2230",
+      "MeetingConverter": "6c857a8be148f187dfb0389e48265ebbe19713c1"
+    },
+    "tests": {
+      "IR": "67 unittest/2.701s",
+      "QA": "28 unit+temporary real-chroma/78.27s (only pre-existing PyPDF2 deprecation)",
+      "MC": "76 output+pipeline/1.30s"
+    },
+    "IR_private_repo_created": true
+  },
+  "_document_role": "EXTRACTED_HISTORICAL_EVIDENCE_FROM_CAC61FAA_NOT_CURRENT_QUEUE"
+}

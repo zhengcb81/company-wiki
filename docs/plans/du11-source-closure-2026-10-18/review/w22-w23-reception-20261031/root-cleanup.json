@@ -1,0 +1,14 @@
+{
+  "owned_roots": [
+    ".root-ocr-tmp",
+    ".root-final-tmp"
+  ],
+  "removed_this_attempt": [
+    ".root-final-tmp"
+  ],
+  "all_absent": true,
+  "initial_cleanup_error": "unprefixed Win32 non-BMP path lstat failed; repeated only cleanup with verified extended paths",
+  "author_cache_removed": false,
+  "model_inferences": 0,
+  "downloads": 0
+}

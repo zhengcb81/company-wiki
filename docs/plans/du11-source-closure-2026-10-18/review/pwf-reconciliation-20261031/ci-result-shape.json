@@ -1,0 +1,44 @@
+[
+  {
+    "work_limit": 4,
+    "complete": false,
+    "windows": [],
+    "deferred_unit_ids": [],
+    "unexamined_from_index": 0,
+    "standalone_unit_count": 0,
+    "diagnostics": [
+      {
+        "code": "CONTINUITY_WORK_LIMIT",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "work_limit": 5,
+    "complete": false,
+    "windows": [],
+    "deferred_unit_ids": [],
+    "unexamined_from_index": 0,
+    "standalone_unit_count": 0,
+    "diagnostics": [
+      {
+        "code": "CONTINUITY_WORK_LIMIT",
+        "count": 1
+      }
+    ]
+  },
+  {
+    "work_limit": 6,
+    "complete": false,
+    "windows": [],
+    "deferred_unit_ids": [],
+    "unexamined_from_index": 0,
+    "standalone_unit_count": 0,
+    "diagnostics": [
+      {
+        "code": "CONTINUITY_WORK_LIMIT",
+        "count": 1
+      }
+    ]
+  }
+]

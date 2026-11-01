@@ -44,6 +44,10 @@ _HEADING_NUMBER = re.compile(
     r"（[一二三四五六七八九十]+）|\([一二三四五六七八九十]+\)|"
     r"\d+(?:\.\d+){1,3}\s|\d+[、．.](?!\d)\s*\S|[IVXLC]+\.\s|Item\s+\d+[A-Z]?\.?\s)",
 )
+_APPENDIX_HEADING = re.compile(
+    r'^\s*(?:附[件录錄][一二三四五六七八九十百零0-9A-Z]+|'
+    r'(?:appendix|annex|attachment)\s+(?:[A-Z]|[IVXLC]+|\d+))'
+    r'(?:\s*[:：]\s*[^\n。.!?;；]{0,60}|\s+[A-Za-z][^\n。.!?;；]{0,60})?\s*$', re.I)
 _FOOTNOTE_MARK = re.compile(r"^\s*(?:注\s*[:：]|\*|\(\d+\)|（\d+）)")
 
 # Residual tolerance when two boxes are on different pages: only the *reading*
@@ -297,6 +301,8 @@ def is_heading(unit: ObservationUnit, *, toc_ids: frozenset[str] | None = None) 
         return False  # table values are not chapter numbering
     if has_inline_form_response(unit.text) or has_tabular_value_tail(unit.text):
         return False
+    if len(unit.text) <= 80 and _APPENDIX_HEADING.fullmatch(unit.text):
+        return True
     if _HEADING_NUMBER.match(unit.text) and len(unit.text) <= 80:
         return not unit.text.rstrip().endswith(("。", "；", ";", "."))
     return False
@@ -306,6 +312,8 @@ def heading_depth(unit: ObservationUnit) -> int | None:
     """Return the heading depth, or ``None`` when no level evidence exists."""
     if unit.heading_level is not None and unit.heading_level > 0:
         return unit.heading_level
+    if len(unit.text) <= 80 and _APPENDIX_HEADING.fullmatch(unit.text):
+        return 1
     if not _HEADING_NUMBER.match(unit.text):
         return None
     text = unit.text.lstrip()

@@ -1,0 +1,48 @@
+{
+  "schema_version": "rf-wire-r5-publication/1",
+  "commit": "957c6283d3381d23c39515afd3a09147d8201c7b",
+  "main_fast_forward": true,
+  "fresh_checks": [
+    {
+      "logical": ".agents",
+      "physical_scripts": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts",
+      "schema": "rf-installed-wire-check/1",
+      "complete_and_deferred": true,
+      "runtime_sha256": "6ee455d2a8a4b48654c146a8f611ff2e2d8492c07c33630f9703ccfd584bfba7"
+    },
+    {
+      "logical": ".claude",
+      "physical_scripts": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts",
+      "schema": "rf-installed-wire-check/1",
+      "complete_and_deferred": true,
+      "runtime_sha256": "6ee455d2a8a4b48654c146a8f611ff2e2d8492c07c33630f9703ccfd584bfba7"
+    },
+    {
+      "logical": ".codex",
+      "physical_scripts": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts",
+      "schema": "rf-installed-wire-check/1",
+      "complete_and_deferred": true,
+      "runtime_sha256": "6ee455d2a8a4b48654c146a8f611ff2e2d8492c07c33630f9703ccfd584bfba7"
+    }
+  ],
+  "protected_wip_sha256_before": {
+    "daily_alert.jsonl": "8eaad095f964b3553df3e842a16383a50c87f540eeb2f7165072552f35e6b570",
+    "monthly_manifest.json": "56d630107429cbcb646a951306dd1ea445dd5b3146236f34d0e8df953c103b9a",
+    "weekly_alert.jsonl": "fc9ec2335b48d42921ca9c14c63363efca3b3096f967733e366f4dd463e4b7ed",
+    "weekly_manifest.json": "e2e57f28fec7477af06029adcf187468701ab0305024993bfb2953bbd43cc5c0"
+  },
+  "protected_wip_sha256_after": {
+    "daily_alert.jsonl": "8eaad095f964b3553df3e842a16383a50c87f540eeb2f7165072552f35e6b570",
+    "monthly_manifest.json": "56d630107429cbcb646a951306dd1ea445dd5b3146236f34d0e8df953c103b9a",
+    "weekly_alert.jsonl": "fc9ec2335b48d42921ca9c14c63363efca3b3096f967733e366f4dd463e4b7ed",
+    "weekly_manifest.json": "e2e57f28fec7477af06029adcf187468701ab0305024993bfb2953bbd43cc5c0"
+  },
+  "four_wip_unchanged": true,
+  "selected_runtime_sha256": "6ee455d2a8a4b48654c146a8f611ff2e2d8492c07c33630f9703ccfd584bfba7",
+  "written_physical": 2,
+  "repeat_written": 0,
+  "scope": "one runtime file only; no company/model execution",
+  "remote_ci": "not observed by this subtask",
+  "worktree_removed": true,
+  "merged_temporary_branch_removed": true
+}

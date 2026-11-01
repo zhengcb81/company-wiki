@@ -1,0 +1,72 @@
+{
+  "schema_version": "accepted-external-packages-publication/1",
+  "date": "2026-10-31",
+  "repos": [
+    {
+      "repo": "industry-research",
+      "source_dir": "C:\\Users\\郑曾波\\Projects\\industry-research",
+      "branch": "main",
+      "before": "4a80f9988f9325fb0a348c8acd9e41d615005c5f",
+      "candidate": "1e84336eda1505748e5497b3910e29ba55cd43fe",
+      "review_worktree": "C:\\Users\\郑曾波\\Projects\\_merge_ir",
+      "review_branch": "codex/root-merge-ir-20261031",
+      "dirty_coverage_sha256": null,
+      "tracked_status": "",
+      "merged": true,
+      "main_after": "1e84336eda1505748e5497b3910e29ba55cd43fe",
+      "publication_commit": "98640a9a1f52fc87ba9813676a3cc5ab9bf045c9",
+      "identity_source": "existing ROOT Git identity supplied for this commit only; no global config edits",
+      "pushed": true,
+      "remote_head": "98640a9a1f52fc87ba9813676a3cc5ab9bf045c9",
+      "origin_url": "https://github.com/zhengcb81/industry-research.git"
+    },
+    {
+      "repo": "QAbyLLM",
+      "source_dir": "C:\\Users\\郑曾波\\Projects\\QAbyLLM",
+      "branch": "main",
+      "before": "ad389f84cd15e54207fc6fcfe4881f86edac63f1",
+      "candidate": "5e5f22b2d7d652738e54bbfaced1982117616c7a",
+      "review_worktree": "C:\\Users\\郑曾波\\Projects\\_merge_qa",
+      "review_branch": "codex/root-merge-qa-20261031",
+      "dirty_coverage_sha256": null,
+      "tracked_status": "",
+      "merged": true,
+      "main_after": "5e5f22b2d7d652738e54bbfaced1982117616c7a",
+      "publication_commit": "1f5514744d7677ff4e59d992c7489bff754d2230",
+      "identity_source": "existing ROOT Git identity supplied for this commit only; no global config edits",
+      "pushed": true,
+      "remote_head": "1f5514744d7677ff4e59d992c7489bff754d2230",
+      "origin_url": "https://github.com/zhengcb81/QAbyLLM.git"
+    },
+    {
+      "repo": "MeetingConverter",
+      "source_dir": "C:\\Users\\郑曾波\\Projects\\MeetingConverter",
+      "branch": "master",
+      "before": "8a33a7f96292af8e6574d98b959703c6d11919eb",
+      "candidate": "ecf9ae82e77d6b9629e0919dd28d581540c800b8",
+      "review_worktree": "C:\\Users\\郑曾波\\Projects\\_merge_mc",
+      "review_branch": "codex/root-merge-mc-20261031",
+      "dirty_coverage_sha256": "6670792e382d6b97dbb38bf06fdd719141692cfbe29f87bf703f1aa7cb3c5d9c",
+      "tracked_status": "",
+      "merged": true,
+      "main_after": "ecf9ae82e77d6b9629e0919dd28d581540c800b8",
+      "publication_commit": "6c857a8be148f187dfb0389e48265ebbe19713c1",
+      "identity_source": "existing ROOT Git identity supplied for this commit only; no global config edits",
+      "pushed": true,
+      "remote_head": "6c857a8be148f187dfb0389e48265ebbe19713c1",
+      "origin_url": "https://github.com/zhengcb81/MeetingConverter.git"
+    }
+  ],
+  "tests": {
+    "IR": "67 unittest/2.701s",
+    "QA": "28 unit+temporary real-chroma/78.27s (only pre-existing PyPDF2 deprecation)",
+    "MC": "76 output+pipeline/1.30s"
+  },
+  "author_worktrees_changed": false,
+  "IR_repository_created": "https://github.com/zhengcb81/industry-research (private, user explicitly requested creation)",
+  "credential_extraction": false,
+  "network_or_model_calls_in_tests": 0,
+  "production_data_test_writes": false,
+  "existing_MC_coverage_preserved": true,
+  "ci_claim": "No remote CI success inferred from local green; separate CWP known failure is under root-fix"
+}

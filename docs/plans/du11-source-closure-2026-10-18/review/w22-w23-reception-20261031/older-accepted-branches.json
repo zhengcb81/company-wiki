@@ -1,0 +1,29 @@
+[
+  {
+    "repo": "industry-research",
+    "author_head": "1e84336eda1505748e5497b3910e29ba55cd43fe",
+    "main_head": "4a80f9988f9325fb0a348c8acd9e41d615005c5f",
+    "author_ancestor_of_main": false,
+    "ancestor_exit": 1,
+    "main_status": "",
+    "author_status": ""
+  },
+  {
+    "repo": "QAbyLLM",
+    "author_head": "5e5f22b2d7d652738e54bbfaced1982117616c7a",
+    "main_head": "ad389f84cd15e54207fc6fcfe4881f86edac63f1",
+    "author_ancestor_of_main": false,
+    "ancestor_exit": 1,
+    "main_status": "",
+    "author_status": ""
+  },
+  {
+    "repo": "MeetingConverter",
+    "author_head": "ecf9ae82e77d6b9629e0919dd28d581540c800b8",
+    "main_head": "8a33a7f96292af8e6574d98b959703c6d11919eb",
+    "author_ancestor_of_main": false,
+    "ancestor_exit": 1,
+    "main_status": "M .coverage",
+    "author_status": ""
+  }
+]

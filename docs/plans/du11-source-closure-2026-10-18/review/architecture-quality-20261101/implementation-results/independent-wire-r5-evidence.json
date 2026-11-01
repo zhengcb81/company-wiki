@@ -1,0 +1,71 @@
+{
+  "schema": "independent-wire-r5/1",
+  "status": "PASS_FOR_ENGINEERING_PUBLICATION",
+  "observed_at_utc": "2026-11-01T11:56:57.259174+00:00",
+  "cwp_frozen_files": {
+    "src/company_wiki/document_understanding/reading_context_contract.py": {
+      "sha256": "9e4200cd200fb468565f77d03a20d0bc8836b3ab387f46b67ef3d2d4faa0f5e9",
+      "bytes": 2190
+    },
+    "src/company_wiki/automation/narrative_contracts.py": {
+      "sha256": "eff83eca08475253051e5cf8973a0e75d6cba3a693e3479d12ba14c94127c0c8",
+      "bytes": 104689
+    },
+    "src/company_wiki/source_catalog/narrative_reading.py": {
+      "sha256": "38d2259bedc53a7227cdbc4f8fd3fe380d15ce891175784037242994d00e8152",
+      "bytes": 78086
+    },
+    "src/company_wiki/source_catalog/narrative_decision_inventory.py": {
+      "sha256": "25b5826cdc5f482aaa621c6c2d68b7c3a6fd2013a57eea667a1836c2a9511b28",
+      "bytes": 26592
+    },
+    "tests/integration/test_source_processing_handler_wire.py": {
+      "sha256": "e43a4b30c0e91fa2fc129f02562ad115516ef893709507d6257f0851ffc680e5",
+      "bytes": 5077
+    }
+  },
+  "cwp_frozen_sha_matches": {
+    "src/company_wiki/document_understanding/reading_context_contract.py": true,
+    "src/company_wiki/automation/narrative_contracts.py": true,
+    "src/company_wiki/source_catalog/narrative_reading.py": true,
+    "src/company_wiki/source_catalog/narrative_decision_inventory.py": true,
+    "tests/integration/test_source_processing_handler_wire.py": true
+  },
+  "rf_worktree": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-r5-wire-sync",
+  "rf_files": {
+    "scripts/company_wiki_narrative_contracts.py": "ea05ba59fb06fcb64887591472041b76fa376396c52fee3f235296e591f0227e",
+    "tests/test_source_readability_wire.py": "6280ad2566ff95e82d3042a52e8baf370002e6d6991f6e06cd0bd85015f6da55",
+    "tests/fixtures/source_readability_wire/cwp-handler-r5.json": "d37d92fada4648d4636850c39267676548fd42b01aa39281c2dd55ba8466866c"
+  },
+  "tests": {
+    "CWP_handler_contract": {
+      "passed": 18,
+      "seconds": 8.59
+    },
+    "RF_wire": {
+      "passed": 32,
+      "seconds": 1.22
+    }
+  },
+  "cross_repository_probe": {
+    "checks": [
+      "schema1: baseline legacy accepted, absent field not defaulted; new field rejected",
+      "schema2: baseline legacy accepted, absent field not defaulted; new field rejected",
+      "schema3: baseline legacy accepted, absent field not defaulted; new field rejected",
+      "schema4 unknown field rejected",
+      "complete: actual CWP context/spans pass RF decoder unchanged with correct completion",
+      "deferred: actual CWP context/spans pass RF decoder unchanged with correct completion"
+    ],
+    "golden_sha256": "0bec092a852adacdbacf93806ff3ebf540925cd48c67e35d2acdefccdf9781ae",
+    "golden_bytes": 67411,
+    "RF_subset_sha256": "d37d92fada4648d4636850c39267676548fd42b01aa39281c2dd55ba8466866c",
+    "RF_subset_bytes": 15153,
+    "subset_provenance_verified": true
+  },
+  "open_material_defects_in_scope": [],
+  "real_C_acceptance": "OPEN; no H1 retry, paid summary, persistent recovery, RF economic rerun",
+  "cleanup": {
+    "wire-r5-cwp": true,
+    "wire-r5-rf": true
+  }
+}
