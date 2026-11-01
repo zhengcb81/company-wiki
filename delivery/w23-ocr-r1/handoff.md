@@ -1,7 +1,7 @@
 # W23-OCR-R1 Handoff (harness-handoff/1)
 
 - workdir `C:\Users\郑曾波\Projects\company-wiki-w23-xiaomi-ocr-r1` · branch `codex/w23-ocr-r1-20261031` · base `946537d0` · required platform fix `20dd0143` (cherry-picked)
-- final tested commit: `3042aa850721397ca097df428d569350f7f633c4` · reviewed commit: recorded after the final review
+- final tested commit: `5ca7a931e180a0b700d772a35c7b220b1123a5f5` · reviewed commit: recorded after the final review
 - **Status: PARTIAL** — R0/N0 completed the 7-page frozen sample in one campaign; X1F resource-blocked with 2 measured attempts; X2 NOT_RUN.
 
 ## What ROOT receives
@@ -13,6 +13,10 @@
 ## Result in one paragraph
 
 R0 (real engine + production recovery ladder) completed all 7 pages: macro strict CER 0.1022, narrow 0.0801, number-token recall 0.9117, digit-present 0.9905; facts 149/171 surface / 161 numeric-anchor, conditions 89/98. N0 control completed and slightly exceeds R0 on surface fact recall, as expected for a text-layer reader. X1F: attempt 2 under the fixed toolchain loaded the mapped model (~97 s), failed at generate with an allocator error, then crashed natively at 106.5 s; the recorded job peak (1.753 GiB) exceeded the recorded cap (1.602 GiB) — reported as measured and flagged. Blank negative control: 0 fabricated characters. Formula control: 1/4 symbols faithful.
+
+## R0 caveat
+
+R0 is the real RapidOCR engine plus the production recovery ladder, but it concatenates recognition lines in backend return order — it is not the full production reading result with geometry/`order_page_lines`. Read-order CER differences must not be read as production end-to-end quality.
 
 ## Campaign
 

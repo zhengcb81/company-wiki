@@ -1,7 +1,7 @@
 {
  "schema_version": "cwp-ocr-comparison/1",
  "plan_id": "w23-ocr-r1-2026-10-31",
- "created_at_utc": "2026-11-01T16:19:22.467483+00:00",
+ "created_at_utc": "2026-11-01T16:30:40.722338+00:00",
  "campaign": {
   "ledger_file": "campaign_ledger.json",
   "budget_seconds": 1800.0,
@@ -1715,6 +1715,60 @@
       "scored": 0,
       "coverage": 0.0
      }
+    },
+    "per_stratum": {
+     "CN/zh-CN/annual_report": {
+      "pages": 2,
+      "scored": 0,
+      "coverage": 0.0,
+      "macro_cer_strict": null,
+      "macro_cer_narrow": null,
+      "macro_wer": null
+     },
+     "HK/zh/annual_report": {
+      "pages": 1,
+      "scored": 0,
+      "coverage": 0.0,
+      "macro_cer_strict": null,
+      "macro_cer_narrow": null,
+      "macro_wer": null
+     },
+     "HK/zh/annual_results_announcement": {
+      "pages": 2,
+      "scored": 0,
+      "coverage": 0.0,
+      "macro_cer_strict": null,
+      "macro_cer_narrow": null,
+      "macro_wer": null
+     },
+     "US/en/annual_report": {
+      "pages": 2,
+      "scored": 0,
+      "coverage": 0.0,
+      "macro_cer_strict": null,
+      "macro_cer_narrow": null,
+      "macro_wer": null
+     }
+    },
+    "eval_split": {
+     "pages": 5,
+     "scored": 0,
+     "macro_cer_strict": null
+    },
+    "holdout_split": {
+     "pages": 2,
+     "scored": 0,
+     "macro_cer_strict": null
+    },
+    "fact_match": {
+     "facts_hit": 0,
+     "facts_total": 171,
+     "facts_numeric_hit": 0,
+     "conditions_hit": 0,
+     "conditions_total": 98,
+     "numbers_hit": 0,
+     "numbers_total": null,
+     "note": "NOT_RUN: zero hits over the full denominators, never zero-filled as produced text"
     }
    }
   }
@@ -1749,11 +1803,10 @@
      {
       "text": "ΔG = ΔH − TΔS",
       "anchor": "TΔS",
-      "matched_line": null,
+      "matched_line": "E = mc2",
       "faithful": false,
       "missing_symbols": [
        "Δ",
-       "=",
        "−",
        "TΔS"
       ]

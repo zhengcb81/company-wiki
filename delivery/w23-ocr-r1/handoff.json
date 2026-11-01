@@ -12,9 +12,10 @@
   "cedbde6e feat: run R1 campaign on frozen new sample with full denominators and measured X1F resource block",
   "6705c3ea fix: isolate OCR platform resources and retire blocking host syntax heuristics",
   "1eb8cbaa fix: close R1 final-review findings - platform fix, gold correction, currency-aware counts, honest ledger, full report",
-  "3042aa85 docs: record R1 second-round fixes and findings in PWF"
+  "3042aa85 docs: record R1 second-round fixes and findings in PWF",
+  "5ca7a931 docs: archive retired-page provenance and native-layer disclosure in R1 delivery"
  ],
- "final_tested_commit": "3042aa850721397ca097df428d569350f7f633c4",
+ "final_tested_commit": "5ca7a931e180a0b700d772a35c7b220b1123a5f5",
  "final_reviewed_commit": "PENDING_REVIEW",
  "code_file_sha256": {
   "tools/ocr_comparison/campaign.py": {
@@ -149,7 +150,7 @@
   {
    "req": "A2 one run-feasibility pilot on an old non-holdout page",
    "status": "done",
-   "evidence": "R0 pilot on byd_ar_2024_p021 (old eval page): ok, 19.4 s, charged to the same ledger; X1F run-feasibility = attempt 1/2"
+   "evidence": "R0 pilot on byd_ar_2024_p021 (old eval page, never a new-sample page): ok, 19.4 s, charged to the same ledger. The pilot ran AFTER the gold freeze (deviation from the card's A2 ordering, disclosed): no new page was OCRed before the freeze, so the blind property holds; X1F run-feasibility = attempts 1/2"
   },
   {
    "req": "A3 ~6 new pages CN/HK/US, outside old sample",
@@ -183,8 +184,8 @@
   },
   {
    "req": "B4 resources <= min(8GiB, avail/2), single concurrency",
-   "status": "done",
-   "evidence": "Job Object caps recorded per attempt (1.142 / 1.602 GiB); single child; job peaks recorded"
+   "status": "partial",
+   "evidence": "single concurrency; caps recorded per attempt (1.142 / 1.602 GiB). NOT fully met empirically: in X1 attempt 2 the recorded job peak (1.753 GiB) exceeded the recorded cap (1.602 GiB), i.e. the Job Object bound did not hold as expected — handed to ROOT as an OPEN platform question"
   },
   {
    "req": "B5 R0 isolation+recovery, N0 born-digital only",
@@ -253,7 +254,7 @@
  },
  "cleanup_and_assets": {
   "deleted": [
-   ".w23_cache/r1_pages/*.png (7 rendered pages + 2 controls; SHAs and render scripts retained)"
+   "all rendered/control PNGs under .w23_cache/r1_pages (deleted after the final run; SHAs and render scripts retained)"
   ],
   "retained_assets": [
    {

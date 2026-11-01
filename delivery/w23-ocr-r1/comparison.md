@@ -57,7 +57,7 @@ Rule in `fact_match.py` (declared): surface presence = all numerals matched (val
 | R0 | 149/171 | 161/171 | 89/98 | 273/276 |
 | N0 | 157/171 | 163/171 | 92/98 | 275/276 |
 | X1F_attempt2 | 0/171 | 0/171 | 0/98 | 0/276 |
-| X2 | 0/0 | — | — | — |
+| X2 | 0/171 | 0/171 | 0/98 | 0/None |
 
 Unachievable raw number entries (excluded from the number denominator, listed in comparison.json): 25.
 
@@ -73,7 +73,7 @@ P/E = 23.7 x`.
 
 ## 6. X1F — attempts, evidence, no quality claim
 
-- `receipts\x1_20261101T152545_receipt.json`: cap 1.602 GiB, recorded peak 1.753 GiB, rc 3221225477, wall 106.5 s; stages: page_start, processor_load_start, processor_loaded, model_load_start, model_loaded, preprocess_done
+- `receipts\x1_20261101T152545_receipt.json`: cap 1.602 GiB, recorded peak 1.753 GiB, rc 3221225477, wall 106.5 s; 10 stage events, last: generate_start
 
 Attempt 2 is the record: the model loaded (mapped fp32) in ~97 s, page 1 failed at generate with an allocator RuntimeError, page 2 crashed natively (0xC0000005) at 106.5 s wall. The recorded job peak exceeded the recorded cap, so the Job Object bound did not hold as expected — an OPEN platform question for ROOT, reported as measured, not hidden.
 
