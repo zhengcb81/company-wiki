@@ -4,7 +4,7 @@
 
 ## Next Step
 
-按已发布CWP7e10973e/RF8eb8fe08完成R4新图的同artifact重接、正式主模型及客户时点压力compute/report/snapshot并封存，随后四路独审与原第7/8步质量/检测收尾。期间补集已固化RED，归原质量收尾；不扩施工包，不重复模型。
+仅在用户明确恢复后：先读R4三个角色checkpoint，补齐storage/process/analyst和未启动的fetch四审；按实际问题归因修来源召回/作者记录及通用ghost-formula/期间预检，关键节点独审后再重放。R4已封存，不写旧树、不重复已有模型调用；不扩施工包。
 
 ## P0：恢复准确、轻量的回归保护
 

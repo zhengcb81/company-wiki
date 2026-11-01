@@ -1,6 +1,6 @@
 # 当前项目状态 — 2026-11-01
 
-**当前在P3药明康德W12的r1-remediation-04补偿复验：原3例CI及后续版本合同失败均已根修；前版真实摘要、缓存恢复和RF采用工程链已跑通；来源规则29已独审发布，新规则正式产物/恢复已原生完成，完整RF采用与公司质量仍在验收。完整公司研究尚未通过独审，继续修复共因，不扩发施工包。**
+**已按用户要求暂停。暂停点：R4完整执行包已封存，三路fresh独审保存部分进度，fetch尚未启动。代码/CI/部署已通过，完整公司质量与后续目标未完成。**
 
 唯一入口为本页及[机器状态](CURRENT_STATUS.json)；接手看[HANDOFF](HANDOFF.md)，实施看[task_plan](task_plan.md)，全部完成条件看[MAINLINE_LOOP_GOAL](MAINLINE_LOOP_GOAL.md)。
 
@@ -9,7 +9,7 @@
 | P0 CI | 原3例frontier/lookahead、后续3例版本合同和Windows嵌套夹具已根修并独审 | commit仅静态检查，pre-push32已知文件＋smoke/180秒为部分保护，不保证所有CI问题都提前捕获 |
 | P1来源/摘要 | 华利15完整卡/12原子；Berkshire73卡/10原子；各1配置POST，激活/同跨run恢复独审通过 | /5完整原文卡＋advisory排名，不是生成式全文概述；Berkshire15项未处理，全文partial，非盲测 |
 | P2真实采用 | 新a466 artifact完整t3进入华利RF参数/公式/报告/snapshot，v6独立45检查通过 | 历史IR与条件工程算例，不冒2026新指引或完整买方研究 |
-| P3 W12 | 新H1正式artifact；真实1token新run复用旧exact91d5/54ccb，0新POST/预留/费；5条完整出处进入RF已用参数、主计算/报告/snapshot和真实联合压力 | R3/v2已封存、四路fresh独审全部完成。源遗漏共因已发布，经营幅度/反证、旁表/背景事实正于R4复验，未签全公司质量通过 |
+| P3 W12 | 新规则229074dd正式产物、真实恢复、8卡采用、主模型/五压力/report/snapshot已执行；R4已585件封存 | 三审未完、fetch未启动；低置信度/未校准及局部遗漏待闭合，不能代签公司质量 |
 
 ## 当前代码与精确CI
 
@@ -32,11 +32,11 @@ W12执行根为audit原run的`execution_replays/r1-remediation-03`；734件/1150
 
 新来源修复已完成同预算真实选材与集中独审：[收据与复现](review/mainline-closeout-20261031/p3-source-scope/README.md)。37新例、698相关例/28.88s、mypy408源/ruff通过，独审268例与本域有重叠。D&M原文完整入选；p14两技术段在519字符native range中逐成员SHA/坐标精确保留，8/8连续、未来限定未丢。旧检查只认单独span造成ROOT误判，已按原生成员复核，不改预算。三rounding独立卡0；112/16M不变，全文仍partial。新代码7e10973e已正常发布并取得精确CI41279280653成功；不冒用c405的旧绿。
 
-四审六issue已由专家归并七根因，实施细则在AUDIT同run/remediation/r1-remediation-03/implementation.md。R4正在真实native研究接线；已原生取得法院原意见、官方会议信息和主办Q&A三源608016B/$0，Q&A公开日期未知、原生资格unknown如实保留，不能改名电话会。旁表/背景事实和实际季度交付桥推进中。已放行按当前配置做一次新版H1正式摘要，实耗以新attempt账本为准；尚无正式经济验收。RF新增monthly_manifest外来WIP保留；不扩包。
+四审六issue已由专家归并七根因，实施细则在AUDIT同run/remediation/r1-remediation-03/implementation.md。R4已完成native执行并封存，后续独审现暂停；已原生取得法院原意见、官方会议信息和主办Q&A三源608016B/$0，Q&A公开日期未知、原生资格unknown如实保留，不能改名电话会。旁表/背景事实和实际季度交付桥推进中。已放行按当前配置做一次新版H1正式摘要，实耗以新attempt账本为准；尚无正式经济验收。RF新增monthly_manifest外来WIP保留；不扩包。
 
 ## R4当前真实观察（独审尚待）
 
-新版H1仅1次配置MiMo POST：10236tokens/1885microUSD估计，正式artifact `narrative-229074ddf042496d92ebf0959ceb2bab`、SHA `9f014cff0e2ce19dcdb0c186ef4933e91a42e3465df15b99c288b6c63423b2bd`、485241B。实际paid-prepared失败边界随后同request恢复、完成后同run与独立cross-run/max1均native exit0，exact同artifact，0额外POST/跨run预留/token/费。两次测试launcher/observer作者错误原样保留，不冒生产根因；未额外注入activation锁。8卡已actual consume；519字原文触发普通短引用限制后，RF所属证据合同已TDD/独审并正常发布CI成功。当前在新客户时点图上重新consume同artifact以更新实际formula_refs，正式模型/报告/snapshot与新四审未签。
+新版H1仅1次配置MiMo POST：10236tokens/1885microUSD估计，正式artifact `narrative-229074ddf042496d92ebf0959ceb2bab`、SHA `9f014cff0e2ce19dcdb0c186ef4933e91a42e3465df15b99c288b6c63423b2bd`、485241B。实际paid-prepared失败边界随后同request恢复、完成后同run与独立cross-run/max1均native exit0，exact同artifact，0额外POST/跨run预留/token/费。两次测试launcher/observer作者错误原样保留，不冒生产根因；未额外注入activation锁。8卡已actual consume；519字原文触发普通短引用限制后，RF所属证据合同已TDD/独审并正常发布CI成功。已在新客户时点图上重新consume同artifact并完成主/五压力/报告/snapshot；公司四审暂停且未签。
 
 独立专家确认期间补集统一owner缺口，ROOT去公司化10向量先固化4F/6P；当前181参数主DAG不依赖13历史旁表，不在运行中途改RF版本，归原内部PWF第7步补齐。同比倒推须显式比较关系，不能靠放开日期或改annual。
 
@@ -46,9 +46,17 @@ RF误把完整519字原文卡当500字手工短引，旧说明还要求上层切
 
 法院取消/延期事实不证明净E或永久恢复率，100m只为归一化压力。5个条件支持角色并非新RF缺口；第6个公布日改history_base，不冒未来机制。采用更清楚的无数值source支持假设＋原driver/context反证，旧v1/v2/失败保留；专家只读诊断在AUDIT同run/diagnosis/r1-remediation-04/evidence-role-readonly。P3经济质量仍待四审。
 
+## 用户暂停与恢复点
+
+原生目标已由get_goal确认为paused，所有在途reviewer已要求保存checkpoint并停止新动作。R4 manifest `75f2871b27cb7afa64175a89137871eb7e6940445eaf9450b684d202bcb5c568`，585件/64240251逻辑B，ROOT一次逐件hash/size全一致；CAS在R4内，无原PDF/DB复制。当前authoring-v4/main-v4，15sources/174claims/186params/6streams/8完整SummaryUse；主与五压力、逐字report/snapshot均已实跑。execution_outcome=partial指外部/经济信息仍有限，artifact_completeness=complete只指记录。confidence0.0/low及54未校准cells不抬分。
+
+三个部分审查及恢复入口在AUDIT同run/reports/r1-remediation-04/roles/{storage,process,analyst}/checkpoint.md；fetch尚未启动，不能把这三份checkpoint算四审通过。storage已核3个H1p12具体业务unit不在112选材/送模或67输出卡，拟局部P2；D&M/p14/519字已修复仍保持，不能用RF另读raw冒摘要覆盖。process当前2349数学断言及原文/换算通过，但scope旧R3字段影响待核；analyst已核经营/时点桥，A13等经济校准仍在判断。各角色结论以其checkpoint为准，不强签PASS。
+
+通用剩余：非derived携有效formula/inputs的语义预检缺口（v4只修作者数据，运行时未修）；同口径期间补集（4F/6P，inverse另留边界）；源码召回新P2及scope记录影响按完整四审归因；测试启动器/observer配置在原质量收尾评估复用，不扩新框架或许可。ROOT7个已绑定pytest目录已清理34932逻辑B；R3/R4/原件继续留供恢复，不提前删。
+
 ## 唯一下一步
 
-按已发布CWP7e10973e/RF8eb8fe08完成R4新图的同artifact重接、正式主模型及客户时点压力compute/report/snapshot并封存，随后四路独审与原第7/8步质量/检测收尾。期间补集已固化RED，归原质量收尾；不扩施工包，不重复模型。
+仅在用户明确恢复后：先读R4三个角色checkpoint，补齐storage/process/analyst和未启动的fetch四审；按实际问题归因修来源召回/作者记录及通用ghost-formula/期间预检，关键节点独审后再重放。R4已封存，不写旧树、不重复已有模型调用；不扩施工包。
 
 后续才是药明合联/Snowflake泛化、固定八家公司及同一有效版本连续三家clean；W21 canonicalC2、新US监管/HK/US_RPO与长文余项仍按原责任，不用fallback或股东信代签。来源漏召回不能由RF另读raw改写成摘要完整；未来假设不足不能靠编数字、公司特判或抬额度解决。
 
@@ -60,4 +68,6 @@ asof保持2026-10-21，读取/采集为真实Nov1；Q3于Oct26发布故排除。
 
 本节点7个已绑定日志的pytest目录检查后删除剩余 **2003113逻辑字节**；原P3数据待四审后恢复，原件/生产配置不动。只读盘点封存执行包发现54.0%逻辑字节为相同内容重复，尚未清理/改存储；在已有质量收尾中处理，不能篡改已封存证据或宣称已释放物理空间。
 
-不动Dayu/IQS/Dashboard、RF四assurance外来WIP、CWP hook mode。不新增人工许可/小节点签收，不用no-verify/reset/clean。外包仅看[PACKAGE_STATUS](PACKAGE_STATUS.md)，目标active，主线继续。
+不动Dayu/IQS/Dashboard、RF四assurance外来WIP、CWP hook mode。不新增人工许可/小节点签收，不用no-verify/reset/clean。外包仅看[PACKAGE_STATUS](PACKAGE_STATUS.md)，目标paused，等待用户明确恢复。
+
+暂停收尾：三角色checkpoint.md/json均已保存，无在途进程；analyst自有临时PNG留待恢复后按checkpoint清理，不能视为已清理或误删他人数据。fetch未启动。

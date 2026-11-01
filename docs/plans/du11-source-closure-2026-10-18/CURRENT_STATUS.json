@@ -1,11 +1,11 @@
 {
   "schema_version": "company-wiki-current-plan-status/2",
   "as_of_date": "2026-11-01",
-  "observed_at_utc": "2026-11-01T06:55:32.312184+00:00",
+  "observed_at_utc": "2026-11-01T07:55:57.173481+00:00",
   "canonical_entry": "CURRENT_STATUS.md",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
-  "project_status": "P3_R4_SOURCE_AND_RF_CONTRACT_RELEASED_CURRENT_NATIVE_MODEL_AND_REVIEW_EXECUTING",
+  "project_status": "PAUSED_BY_USER_AFTER_R4_FROZEN_PARTIAL_FRESH_REVIEWS",
   "scope_this_update": "Mainline only; exact CI root repairs, real summary/recovery/native adoption; no new packages",
   "last_code_commit": "7e10973e65517ce5a1b6cccc1c427ff4f9a0ecde",
   "verified_publication_before_docs": {
@@ -23,10 +23,10 @@
     "normal_pre_push_seconds": 48.92
   },
   "native_goal": {
-    "observed_status": "active",
-    "observed_via": "get_goal after user resumed",
+    "observed_status": "paused",
+    "observed_via": "get_goal confirmed after user goal-status pause",
     "objective_budget_text": "legacy2M tokens/$20; not runtime policy",
-    "note": "Existing goal active; no duplicate goal. Runtime remains config10M/$20."
+    "note": "User explicitly paused; do not auto-resume or create a replacement goal. Runtime budget remains config10M/$20."
   },
   "runtime_policy": {
     "budget_owner": "config/resource_budget.yaml",
@@ -93,7 +93,7 @@
       "task": "W12 original-company rerun, new-company generalization, fixed8company fullaudit/skillimprovement and finalclean streak"
     }
   ],
-  "next_action": "按已发布CWP7e10973e/RF8eb8fe08完成R4新图的同artifact重接、正式主模型及客户时点压力compute/report/snapshot并封存，随后四路独审与原第7/8步质量/检测收尾。期间补集已固化RED，归原质量收尾；不扩施工包，不重复模型。",
+  "next_action": "仅在用户明确恢复后：先读R4三个角色checkpoint，补齐storage/process/analyst和未启动的fetch四审；按实际问题归因修来源召回/作者记录及通用ghost-formula/期间预检，关键节点独审后再重放。R4已封存，不写旧树、不重复已有模型调用；不扩施工包。",
   "package_status_registry": "PACKAGE_STATUS.json",
   "handoff": "HANDOFF.md",
   "goal_definition": "MAINLINE_LOOP_GOAL.md",
@@ -111,7 +111,7 @@
     "Berkshire15unprocessed explicitly retained; full-source/long-frontier generalization remains partial,10required DEV business atoms now present",
     "P3 W12 company rerun, latest communications/demand/competition/scenario calibration, US regulatoryPDF/HK/US_RPO and genuinely unexposed holdouts"
   ],
-  "execution_mode": "active_goal_mainline_implementation",
+  "execution_mode": "paused_at_user_request",
   "p0_repair": {
     "status": "PUBLISHED_EXACT_CI_PASS",
     "evidence": "review/mainline-closeout-20261031/p0/README.md",
@@ -429,6 +429,51 @@
         }
       ],
       "schema_version": "owned-source-scope-test-cleanup/1"
+    },
+    "RF_long_anchor_root_basetemps": {
+      "removed_logical_bytes": 34932.0,
+      "checked_at_utc": "2026-11-01T06:58:26.6794177Z",
+      "scope": "Seven exact ROOT pytest basetemps bound to command logs; no P3 input/original/config or foreign work",
+      "targets": [
+        {
+          "already_absent": true,
+          "logical_bytes": 0,
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.m9-period-owner-red",
+          "removed": false
+        },
+        {
+          "already_absent": true,
+          "logical_bytes": 0,
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.m9-rf-long-red",
+          "removed": false
+        },
+        {
+          "already_absent": true,
+          "logical_bytes": 0,
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.m9-rf-long-red2",
+          "removed": false
+        },
+        {
+          "logical_bytes": 11644.0,
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.m9-rf-long-domain",
+          "removed": true
+        },
+        {
+          "logical_bytes": 11644.0,
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.m9-rf-long-final",
+          "removed": true
+        },
+        {
+          "logical_bytes": 0,
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.m9-rf-long-gate",
+          "removed": true
+        },
+        {
+          "logical_bytes": 11644.0,
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.m9-rf-long-accepted",
+          "removed": true
+        }
+      ]
     }
   },
   "p1_huali_v2_historical": {
@@ -578,7 +623,7 @@
   "p3_current_attempt": {
     "attempt": "r1-remediation-04",
     "executor": "/root/w12_executor_remediation04",
-    "status": "RF_CURRENT_VERSION_FINAL_GRAPH_ADOPTION_PUBLICATION_AND_REVIEW_PREPARATION_EXECUTING",
+    "status": "FROZEN_R4_FRESH_REVIEWS_PAUSED",
     "as_of_date": "2026-10-21",
     "new_source_HTTP": 3,
     "new_source_bytes": 608016,
@@ -624,6 +669,39 @@
       "root_cause": "author relationship semantics, not newly confirmed RF headwind defect",
       "source_only_PASS_is_not_full_graph": true,
       "actual_net_E": null
+    },
+    "execution_manifest": {
+      "path": "execution_replays/r1-remediation-04/execution/manifest.json",
+      "sha256": "75f2871b27cb7afa64175a89137871eb7e6940445eaf9450b684d202bcb5c568",
+      "files": 585,
+      "logical_bytes": 64240251,
+      "ROOT_once_hash_size_match": true,
+      "execution_outcome": "partial",
+      "artifact_completeness": "complete",
+      "quality_not_accepted": true
+    },
+    "active_input": {
+      "path": "forecast/authoring-v4/input.json",
+      "raw_sha256": "faa6cff93c68028e1ee9403c4558dc7c5a00ff07a27806752dcff71ea31b5936",
+      "tool_request_sha256": "80b3f59d411833897f5f0c4d35d446177ddcd6e3d93d68afe21b80f5104409ae",
+      "native_normalized_sha256": "752bc19410e9e87279b68109c5ad3b7bb132e13290991d8f7f9cbfb540e0710f"
+    },
+    "active_forecast_raw_sha256": "05c4aa4c31f886d31eb285a60b0b382ba5f5ac8f81108df9bbe76eea0a7aa980",
+    "active_snapshot_raw_sha256": "e8cfae9abd8e84e11f6d4e48ab693781717355ec0444fef0b31e1b63cc00af02",
+    "counts": {
+      "sources": 15,
+      "claims": 174,
+      "parameters": 186,
+      "streams": 6,
+      "summary_uses": 8,
+      "workflow_labels": 16
+    },
+    "full_native_main_report_snapshot_and_five_stress_cases": "EXECUTED; independent company-quality review incomplete",
+    "confidence": {
+      "value": 0.0,
+      "label": "low",
+      "unsupported_magnitude_cells": 54,
+      "not_artificially_raised": true
     }
   },
   "own_uncommitted_tests": [],
@@ -1075,5 +1153,55 @@
       ],
       "input_unchanged": true
     }
-  }
+  },
+  "fresh_review_checkpoint": {
+    "directory": "revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec/reports/r1-remediation-04",
+    "review_input": "revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec/reports/r1-remediation-04/review_input.json",
+    "storage": "PARTIAL_PAUSED; local P2 source recall finding not final whole-company verdict",
+    "process": "PARTIAL_PAUSED; mathematics/source checks passed so far, stale scope impact still under review",
+    "analyst": "PARTIAL_PAUSED; operating/timing bridge checked, economic calibration judgment incomplete",
+    "fetch": "NOT_STARTED; must run after user resume",
+    "resume_files": {
+      "storage": "revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec/reports/r1-remediation-04/roles/storage/checkpoint.md",
+      "process": "revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec/reports/r1-remediation-04/roles/process/checkpoint.md",
+      "analyst": "revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec/reports/r1-remediation-04/roles/analyst/checkpoint.md"
+    },
+    "do_not_count_as_four_final_reports": true,
+    "all_three_checkpoint_files_saved": true,
+    "no_in_flight_review_processes": true,
+    "owned_cleanup_pending": "analyst temporary PNGs in own review scratch; see analyst/checkpoint, preserve until resume"
+  },
+  "pending_common_root_followups": [
+    {
+      "owner": "CWP source-reading",
+      "status": "REVIEWER_LOCAL_P2_NOT_IMPLEMENTED",
+      "issue": "H1p12 DMPK7x24 closed-loop and Biology automation/customer/animal-pharmacology3units absent from selection/carriers/sent112fragments/67cards",
+      "evidence": "revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec/reports/r1-remediation-04/roles/storage/native-crosscheck.json",
+      "boundary": "existing D&M/p14 fixes remain passed; source partial alone is not defect; no economic amount conclusion"
+    },
+    {
+      "owner": "RF parameter semantic preflight and lint",
+      "status": "CONFIRMED_NOT_IMPLEMENTED",
+      "issue": "non-derived active formula/input fields silently accepted; v3Other9author errors corrected only in v4 data",
+      "diagnosis": "diagnosis/r1-remediation-04/ghost-formula-readonly.md",
+      "tests": "expert20vectors:9red/11existing boundaries; shared pure helper, empty compatibility, no auto kind/value change"
+    },
+    {
+      "owner": "RF period_flow",
+      "status": "RED_REPRODUCED_NOT_IMPLEMENTED",
+      "issue": "same-measure temporal complements rejected; inverseYoY needs explicit comparison binding",
+      "diagnosis": "diagnosis/r1-remediation-04/period-owner-readonly.md",
+      "tests": "ROOT neutral4F/6P; historical sidecar not current main-DAG dependency"
+    },
+    {
+      "owner": "AUDIT attempt scope recording",
+      "status": "IMPACT_UNDER_REVIEW_NOT_CONFIRMED_EXECUTION_BUG",
+      "issue": "R4 scope nested execution_attempt/role-output roots still referenceR3; verify effective scope/actual argv before disposition"
+    },
+    {
+      "owner": "test-side launch/checkpoint configuration",
+      "status": "QUALITY_FOLLOWUP_ONLY",
+      "issue": "reuse tested Windows main guard and validate observer required fields before paid work; prefer existing entry, no new permission gate"
+    }
+  ]
 }
