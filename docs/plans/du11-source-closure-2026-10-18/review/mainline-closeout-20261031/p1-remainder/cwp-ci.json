@@ -1,0 +1,16 @@
+{
+  "repo": "company-wiki",
+  "head": "acf11bb29570a5a306f1a45d63909d815f6714c0",
+  "runs": [
+    {
+      "id": 41255499232,
+      "name": "CI",
+      "head_sha": "acf11bb29570a5a306f1a45d63909d815f6714c0",
+      "status": "completed",
+      "conclusion": "success",
+      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41255499232",
+      "created_at": "2026-11-01T00:09:35Z",
+      "updated_at": "2026-11-01T00:13:39Z"
+    }
+  ]
+}

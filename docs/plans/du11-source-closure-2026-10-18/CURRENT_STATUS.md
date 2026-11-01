@@ -6,7 +6,7 @@
 |---|---|---|
 | P0 CI延期合同 | 完成，精确CI41247282332绿 | 不是删断言或提高额度 |
 | P1 华利真实源/摘要/恢复 | 组件通过，15原文卡、12业务原子、1次MiMo真实排名；中断及同跨run恢复0重复POST | /5是完整原文卡＋排名，不是生成式自然语言概述或全文完整 |
-| P1 Berkshire长文 | 当前剩余任务；77准入、64编译、13延期，含重要业务04/07；首次0POST被单请求保守上限拒绝 | 不把准入/发现当模型已消费或借提高限额签收 |
+| P1 Berkshire长文 | 当前剩余任务；真实入口88任务、72完整卡、16延期、0POST；旧normalized夹具77/64/13另作历史，不相互代签 | 不把准入/发现当模型已消费或借提高限额签收 |
 | P2 华利同artifact native采用 | 有界工程独审通过：完整语义/采用理由/出处进入input、报告、snapshot，实际参数扰动证明进入公式 | 不是完整公司四审或买方预测质量通过 |
 | P3 研究循环 | 未完成：W12新attempt、新公司、固定八家公司及连续三家clean条件 | 不以工程包数量或条件算例替代真实完整研究 |
 
@@ -19,9 +19,9 @@
 
 ## 发布与资源
 
-CWP已[63f02b7a](https://github.com/zhengcb81/company-wiki/commit/63f02b7a7b35917c5fa651fe256f1ed798c909d5)，[CI41250663645](https://github.com/zhengcb81/company-wiki/actions/runs/41250663645)绿；RF已[535604fa](https://github.com/zhengcb81/revenue-forecast/commit/535604fa468e8a69be44e073dc7e29eacde80cbc)，[精确CI41254752622](https://github.com/zhengcb81/revenue-forecast/actions/runs/41254752622)绿，正常pre-push679P＋36subtests（1skip）。本次PWF文档发布以Git历史为准，不把尚未生成的文档提交SHA写成已验真。
+CWP已[acf11bb2](https://github.com/zhengcb81/company-wiki/commit/acf11bb29570a5a306f1a45d63909d815f6714c0)，[CI41255499232](https://github.com/zhengcb81/company-wiki/actions/runs/41255499232)绿；RF已[535604fa](https://github.com/zhengcb81/revenue-forecast/commit/535604fa468e8a69be44e073dc7e29eacde80cbc)，[精确CI41254752622](https://github.com/zhengcb81/revenue-forecast/actions/runs/41254752622)绿，正常pre-push679P＋36subtests（1skip）。本次PWF文档发布以Git历史为准，不把尚未生成的文档提交SHA写成已验真。
 
-RF三逻辑技能入口已定点同步8运行文件；.claude指向.agents，只有2物理目标，实际16处写入，重复零写；3个新进程实际复验。原件不改；本轮新下载年报/全篇规范化临时副本已删除4662644B，保留62个实际原文span与收据；没有整库恢复演练。
+RF三逻辑技能入口已定点同步8运行文件；.claude指向.agents，只有2物理目标，实际16处写入，重复零写；3个新进程实际复验。原件不改；本轮ROOT RF临时工区已回收（无可靠体积前测，不估算释放量）；新下载年报/全篇规范化临时副本已删除4662644B，保留62个实际原文span与收据；没有整库恢复演练。
 
 原生目标已由get_goal确认active。预算/模型沿用配置：累计10M tokens/$20，母账1,835,775tokens/$0.734239含unknown；本次唯一付费仍MiMo8217tokens/$0.001425，P2新增0。没有逐材料许可/签收待办。旧目标正文2M不替代实际配置。门禁精简和来源虚拟接口主要工程已完成，剩余问题是内容/采用/研究质量，不是目录权限。
 

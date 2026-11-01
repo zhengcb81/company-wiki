@@ -1,7 +1,7 @@
 {
   "schema_version": "company-wiki-current-plan-status/2",
   "as_of_date": "2026-11-01",
-  "observed_at_utc": "2026-11-01T00:04:13.192829+00:00",
+  "observed_at_utc": "2026-11-01T00:17:43.854219+00:00",
   "canonical_entry": "CURRENT_STATUS.md",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
@@ -10,14 +10,14 @@
   "last_code_commit": "daa9106fca2dfba17ea486d6e15fd3289a3d5a25",
   "verified_publication_before_docs": {
     "local_branch": "master",
-    "local_and_remote_head": "63f02b7a7b35917c5fa651fe256f1ed798c909d5"
+    "local_and_remote_head": "acf11bb29570a5a306f1a45d63909d815f6714c0"
   },
   "code_ci": {
-    "id": 41250663645,
-    "head_sha": "63f02b7a7b35917c5fa651fe256f1ed798c909d5",
+    "id": 41255499232,
+    "head_sha": "acf11bb29570a5a306f1a45d63909d815f6714c0",
     "status": "completed",
     "conclusion": "success",
-    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41250663645"
+    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41255499232"
   },
   "native_goal": {
     "observed_status": "active",
@@ -53,7 +53,8 @@
     "deferred_business_checkpoints": [
       "BRK-04",
       "BRK-07"
-    ]
+    ],
+    "count_scope": "historical normalized DEV case, not the actual first live PDF request"
   },
   "existing_capabilities": {
     "storage_virtualization": "IMPLEMENTED; no new storage-layer rebuild planned",
@@ -171,8 +172,27 @@
     "post": 0,
     "tokens_bound_basis": "HTTP body74249B+output8192; bound exceeds50000",
     "mother_budget_exhausted": false,
-    "draft_deferred_cards": 13,
-    "important_remainder_open": true
+    "draft_deferred_cards": 16,
+    "important_remainder_open": true,
+    "historical_normalized_counts": {
+      "admitted": 77,
+      "compiled": 64,
+      "deferred": 13,
+      "important_deferred": [
+        "BRK-04",
+        "BRK-07"
+      ]
+    },
+    "actual_live_counts": {
+      "source_task_rows": 88,
+      "compiled_cards": 72,
+      "deferred_cards": 16,
+      "model_request_tasks": 88,
+      "model_POST": 0,
+      "request_bytes": 74249,
+      "material_bytes": 61266
+    },
+    "count_note": "Old normalized development fixture77/64/13 was overgeneralized as current. Actual frozen live request/selection SHA now distinguishes88/72/16; no history is rewritten."
   },
   "p2_actual_v3": {
     "native_formula": "PASS",
@@ -232,6 +252,7 @@
     "new_test_annual_and_full_normalization_removed_bytes": 4662644,
     "selected_spans_retained": 62,
     "user_original_hashes_unchanged": true,
-    "evidence": "review/mainline-closeout-20261031/p2/receipts/p2-owned-test-cleanup.json.gz"
+    "evidence": "review/mainline-closeout-20261031/p2/receipts/p2-owned-test-cleanup.json.gz",
+    "root_RF_worktree_removed": true
   }
 }
