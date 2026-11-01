@@ -7,6 +7,7 @@ import pytest
 from company_wiki.automation.models import canonical_json
 from company_wiki.automation.narrative_contracts import NarrativeSelectResult
 from company_wiki.automation import narrative_model_extractive as owner
+from company_wiki.document_understanding import source_card_allocation as allocation
 from company_wiki.source_contract import EvidenceSpan
 from unit.test_narrative_extractive_runtime import selected
 
@@ -160,9 +161,11 @@ def test_oversized_high_priority_card_is_deferred_without_materializing_text(mon
 
 
 def test_allocator_identity_and_actual_module_path_are_bound_to_worktree():
-    expected = Path(__file__).resolve().parents[3] / 'src/company_wiki/automation/narrative_model_extractive.py'
+    root = Path(__file__).resolve().parents[3]
+    expected = root / 'src/company_wiki/automation/narrative_model_extractive.py'
     assert Path(owner.__file__).resolve() == expected
-    assert owner.SOURCE_CARD_ALLOCATION_VERSION == 'source-card-allocation/1'
+    assert Path(allocation.__file__).resolve() == root / 'src/company_wiki/document_understanding/source_card_allocation.py'
+    assert owner.SOURCE_CARD_ALLOCATION_VERSION == allocation.SOURCE_CARD_ALLOCATION_VERSION == 'source-card-allocation/2'
 
 
 def test_default_fifty_six_kib_capacity_keeps_late_operating_fact_and_all_task_rows():
@@ -186,6 +189,6 @@ def test_allocator_semantics_participate_in_actual_boundary_identity(monkeypatch
     before = owner.extractive_boundary_identity(boundary)
     monkeypatch.setattr(owner, 'SOURCE_CARD_ALLOCATION_VERSION', 'source-card-allocation/test-next')
     after = owner.extractive_boundary_identity(boundary)
-    assert before['source_card_allocation_version'] == 'source-card-allocation/1'
+    assert before['source_card_allocation_version'] == 'source-card-allocation/2'
     assert after['source_card_allocation_version'] == 'source-card-allocation/test-next'
     assert before != after

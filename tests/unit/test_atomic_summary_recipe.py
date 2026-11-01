@@ -1,10 +1,11 @@
-"""New atomic scope recipe; captured older requests are not silently changed."""
+"""Exact versioned requests; legacy captures survive explicit compact migration."""
 import json
 from pathlib import Path
 
 import pytest
 
 from company_wiki.automation import narrative_model_runtime as runtime
+from company_wiki.automation.models import canonical_json_hash
 from company_wiki.automation.narrative_contracts import NarrativeSelectResult
 from company_wiki.automation.narrative_model import NarrativeModelResponse, ModelResponseError
 from company_wiki.automation.narrative_summary_protocols import summary_bundle_format
@@ -14,12 +15,23 @@ VERSION = 'reading-model-input/7'
 
 
 @pytest.mark.parametrize('version', ['reading-model-input/4', 'reading-model-input/5', 'reading-model-input/6'])
-def test_old_selected_input_and_http_instruction_remain_exact(version):
+def test_versioned_selected_input_and_http_instruction_match_declared_capture(version):
     path = Path(__file__).resolve().parents[1] / 'fixtures/atomic_recipe_legacy_requests.json'
     frozen = json.loads(path.read_text('utf-8'))
-    request = runtime.build_model_request(NarrativeSelectResult.from_dict(frozen['selection']),
+    selection = frozen['selection']
+    expected = frozen['requests'][version]
+    if version == 'reading-model-input/5':
+        # /5 deliberately migrated its private ranking presentation; keep the
+        # earlier capture immutable, and pin the new exact wire separately.
+        current = json.loads(path.with_name('source_extractive_compact_request.json').read_text('utf-8'))
+        assert current['selected_input_sha256'] == canonical_json_hash(selection)
+        assert current['predecessor_input_sha256'] == expected['input_sha256']
+        assert current['request']['input_sha256'] != expected['input_sha256']
+        assert json.loads(current['request']['data_json'])['material']['schema_version'] == 'source-extractive-ranking-view/1'
+        expected = current['request']
+    request = runtime.build_model_request(NarrativeSelectResult.from_dict(selection),
                                           reading_projection_version=version)
-    assert {key: getattr(request, key) for key in frozen['requests'][version]} == frozen['requests'][version]
+    assert {key: getattr(request, key) for key in expected} == expected
 
 
 def test_explicit_atomic_recipe_identity_and_artifact_family():

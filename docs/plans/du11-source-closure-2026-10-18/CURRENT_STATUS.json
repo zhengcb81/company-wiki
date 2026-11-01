@@ -1,24 +1,25 @@
 {
   "schema_version": "company-wiki-current-plan-status/2",
   "as_of_date": "2026-11-01",
-  "observed_at_utc": "2026-11-01T01:25:05.836098+00:00",
+  "observed_at_utc": "2026-11-01T01:57:00.776508+00:00",
   "canonical_entry": "CURRENT_STATUS.md",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
-  "project_status": "P0_EXACT_CI_PASS_P1_CURRENT_BOUNDED_AND_P2_V6_REVIEW_PASS_PUBLICATION_PENDING_P3_OPEN",
+  "project_status": "P1_CURRENT_BOUNDED_REVIEW_PASS_NEW_CI_VERSION_AND_SELECTION_REPAIR_IN_PROGRESS_P2_V6_PASS_P3_FREE_PREFLIGHT",
   "scope_this_update": "Mainline only; exact CI root repairs, real summary/recovery/native adoption; no new packages",
-  "last_code_commit": "63f02b7a7b35917c5fa651fe256f1ed798c909d5",
+  "last_code_commit": "93f561ef520e257bec11e3b7aa27ac16267c2203",
   "verified_publication_before_docs": {
     "local_branch": "master",
     "local_and_remote_head": "2b5b89c68127cd0c51825788944dccb62c6b598d"
   },
   "code_ci": {
-    "id": 41255499232,
-    "head_sha": "acf11bb29570a5a306f1a45d63909d815f6714c0",
+    "id": 41261403683,
+    "head_sha": "93f561ef520e257bec11e3b7aa27ac16267c2203",
     "status": "completed",
-    "conclusion": "success",
-    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41255499232",
-    "meaning": "Last verified baseline CI. Current P1 root repair not yet committed; exact new CI required after publication."
+    "conclusion": "failure",
+    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41261403683",
+    "failed_cases": 3,
+    "classification": "Two stale allocator/1 pins after explicit/2; one legacy/5 HTTP capture versus new versioned compact view. Reproduced3F/6.66s; candidate54P. Not oldP0 frontier failure."
   },
   "native_goal": {
     "observed_status": "active",
@@ -74,7 +75,7 @@
     },
     {
       "id": "P1",
-      "status": "CURRENT_TWO_SOURCE_BOUNDED_REVIEW_PASS_PUBLICATION_PENDING",
+      "status": "CURRENT_BOUNDED_REVIEW_PASS_NEW_VERSION_CONTRACT_CI_REPAIR_IN_PROGRESS",
       "task": "Current Huali15/12atoms and Berkshire73/10atoms; actual activation/same/cross cache PASS;15Berkshire unprocessed and full-source partial remain explicit"
     },
     {
@@ -84,24 +85,19 @@
     },
     {
       "id": "P3",
-      "status": "NOT_COMPLETE",
+      "status": "W12_ATTEMPT_FROZEN_FREE_PREFLIGHT_ONLY",
       "task": "W12 original-company rerun, new-company generalization, fixed8company fullaudit/skillimprovement and finalclean streak"
     }
   ],
-  "next_action": "完成当前P1根修、两份真实运行与新版RF v6验收包的正常提交/推送和精确CI确认；然后恢复P3药明康德W12新attempt，不发新施工包。",
+  "next_action": "修完当前版本/精确请求捕获及已知consumer选测丢失共因，关键独审后正常提交推送新精确CI；W12仅免费preflight，待CI绿后正式执行。",
   "package_status_registry": "PACKAGE_STATUS.json",
   "handoff": "HANDOFF.md",
   "goal_definition": "MAINLINE_LOOP_GOAL.md",
   "history_index": "HISTORY.md",
   "own_uncommitted_runtime": [
     "src/company_wiki/automation/narrative_model_extractive.py",
-    "src/company_wiki/automation/narrative_rank_material.py",
-    "src/company_wiki/automation/narrative_summary_execution.py",
-    "src/company_wiki/document_understanding/source_card_allocation.py",
-    "src/company_wiki/document_understanding/source_cards.py",
-    "tools/document_understanding_benchmark/phase_c_observer.py",
-    "tools/document_understanding_benchmark/phase_c_runner.py",
-    "tools/document_understanding_benchmark/rank_material_observation.py"
+    "tools/changed_unit_tests.py",
+    "tools/pre_push_gate.py"
   ],
   "foreign_wip_preserved": [
     ".githooks/pre-push mode-only; not ours"
@@ -268,7 +264,13 @@
     "selected_spans_retained": 62,
     "user_original_hashes_unchanged": true,
     "evidence": "review/mainline-closeout-20261031/p2/receipts/p2-owned-test-cleanup.json.gz",
-    "root_RF_worktree_removed": true
+    "root_RF_worktree_removed": true,
+    "current_node_owned_basetemp_cleanup": {
+      "directories": 7,
+      "logical_file_bytes": 16045737,
+      "evidence_local": ".planning/mainline-closeout-20261031/owned-test-cleanup-final.json",
+      "unbound_temp_names_preserved": true
+    }
   },
   "p1_huali_v2_historical": {
     "status": "COMPONENT_REVIEW_PASS",
@@ -325,7 +327,15 @@
     "actual_request_draft_execution_byte_equal": true,
     "new_model_POST": 0,
     "non_support_positive_and_forgery_checks": 4,
-    "evidence": "review/mainline-closeout-20261031/p1-current/receipts/independent/source-use-delta-addendum.json.gz"
+    "evidence": "review/mainline-closeout-20261031/p1-current/receipts/independent/source-use-delta-addendum.json.gz",
+    "final_annotation_only_dependency": "source_card_allocation: ordered list type; independent PASS; requests/drafts/executions equal; old seals preserved",
+    "cumulative_changed_dependencies_since_paid_run": [
+      "source_cards",
+      "execution_contract",
+      "source_card_allocation",
+      "protocol"
+    ],
+    "final_protocol_reflection_delta": "Equivalent sys.modules self lookup; independently reviewed; actual paid request/draft/execution replay equal; original seals retained"
   },
   "p2_actual_v6": {
     "status": "CURRENT_ARTIFACT_BOUNDED_ENGINEERING_REVIEW_PASS",
@@ -344,15 +354,73 @@
     "RF_production_head_unchanged": "535604fa468e8a69be44e073dc7e29eacde80cbc",
     "formal_artifact_repo_path": "revenue-forecast/docs/plans/p2-summary-lineage-20261031/review/v6",
     "full_company_research": "OPEN; historical IR and conditional analyst scenarios, not accepted current-company research",
-    "evidence": "review/mainline-closeout-20261031/p1-current/receipts/independent/p2-v6-delta.json.gz"
+    "evidence": "review/mainline-closeout-20261031/p1-current/receipts/independent/p2-v6-delta.json.gz",
+    "publication": {
+      "repo": "revenue-forecast",
+      "branch": "main",
+      "head": "85054d7b260a3805b43ce6a4d49d44579745a015",
+      "ci_id": 41260918155,
+      "ci_conclusion": "success",
+      "new_runtime": false,
+      "normal_pre_push_passed": 679,
+      "normal_pre_push_skipped": 1,
+      "subtests_passed": 36,
+      "foreign_WIP_original_bytes_preserved": true
+    }
   },
   "current_node_reproducibility": {
     "source_runtime_free_replay": "review/mainline-closeout-20261031/p1-current/replay.py",
     "RF_runtime_free_replay": "revenue-forecast/docs/plans/p2-summary-lineage-20261031/review/replay.py --case v6",
-    "receipt_bytes_CWP": 522272,
+    "receipt_bytes_CWP": 525696,
     "receipt_bytes_RF": 100425,
     "no_PDF_or_database_archive": true,
     "full_provider_envelope_retained": false,
-    "retained": "original decoded final JSON/native usage/exact HTTP input/selection/generation/prepared artifact; envelope pin/hash and actual recovery evidence retained"
+    "retained": "original decoded final JSON/native usage/exact HTTP input/selection/generation/prepared artifact; envelope pin/hash and actual recovery evidence retained",
+    "CI_repair_receipt_bytes_CWP": 38842
+  },
+  "last_successful_CWP_ci_baseline": {
+    "id": 41255499232,
+    "head_sha": "acf11bb29570a5a306f1a45d63909d815f6714c0",
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41255499232",
+    "meaning": "Last verified baseline CI. Current P1 root repair not yet committed; exact new CI required after publication."
+  },
+  "p1_ci_contract_repair": {
+    "status": "INDEPENDENT_PASS_0_OPEN_NORMAL_PUBLICATION_PENDING",
+    "new_protocol_tests_passed": 54,
+    "known_scope_TDD": "6F1P ->7P; real Git hook positive and negative in domain",
+    "gate_domain": "185P/1old policy assertion -> final portable unknown-only E2E1P24.33s; no falsely claimed all186 rerun",
+    "production_semantics_changed": "Only sys.modules self-reflection replaces self-import; actual paid request/draft/execution replay equal",
+    "old_captured_fixture_unchanged": true,
+    "new_private_request_fixture": "tests/fixtures/source_extractive_compact_request.json",
+    "gate_scope": "Same reverse-import graph, known_only partial branch, changed units then shortest static distance; cap32files/180s, no new fixed regression list, CI unchanged",
+    "actual_old_push_range_probe": {
+      "known_units": 352,
+      "retained_units": 32,
+      "known_unit_deferred": 320,
+      "nonunit_deferred": 279,
+      "seconds": 10.6367721,
+      "prior_seconds": 36.88,
+      "limitation": "Retains source_priority but atomic_summary_recipe is outside old-range first32. This is partial improvement, not guarantee all3old cases caught locally. Current changed test files get priority0."
+    },
+    "independent_open_findings": 0,
+    "evidence": "review/mainline-closeout-20261031/p1-ci-repair/README.md"
+  },
+  "p3_current_attempt": {
+    "run_id": "r1-20261021-cn-wuxi-apptec",
+    "attempt": "r1-remediation-03",
+    "as_of_date": "2026-10-21",
+    "executor": "/root/w12_executor_current",
+    "status": "FREE_PREFLIGHT_ONLY_CI_DEPENDENCY",
+    "root": "revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec/execution_replays/r1-remediation-03",
+    "formal_execution_or_four_review_pass": false,
+    "new_model_POST_so_far": 0,
+    "known_observations": [
+      "annual2025/H1-2026/Q1-2026 RF->FF->CWP actualreuse0download",
+      "H1 transcript exactmissing stays gap; annual2024 publicationunknown blocked, no provider started, no retry/exception",
+      "19selected originalpages/3imagepages read free viaSourceReader, no rawcopy; future/period/unit scopes remain research prep not modeluse",
+      "New scratch native-register preserves H1 manifest, but annual2025 loses old verified identity/publication metadata and local_prepare blocks; internal source-reuse/setup seam, not provider entitlement, ROOT responsibility"
+    ]
   }
 }

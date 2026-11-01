@@ -32,3 +32,7 @@
 母账1,849,869tokens / $0.739510，历史unknown全部保留；这是估算计量而非供应商发票。隔离临时湖清除、受保护配置/原件SHA不变。未复制PDF、全库或完整解析数据库。原最终decoded模型文本、native用量、HTTP输入、generation、selection、prepared bundle/capsule归档；完整provider envelope仅有当时pin/hash与实际恢复证据，临时清除后未保留，不声称可重建该原始envelope。
 
 `manifest.json`只绑定 receipts 下不可变gzip原字节，避免平台换行影响prose。每份运行只留一套材料；旧失败/签名不覆盖。免费离线重放：`python -B -X utf8 replay.py`（仓库宿主配置Python）。它验证请求与已付费捕获、完整draft/execution相等，不访问原PDF、不下载、不调用模型、不覆盖原收据。
+
+最终正常pre-commit又在推送前发现ordered缺类型注解，改为list[SourceCard]，无算法变化；独审type-annotation-addendum绑定当前SHA及累计三个generation依赖变化。两样本免费重放再次通过，旧签名不改。manifest逐条保存短文件名对应的原始长文件名，capsule正文未改。RF验收文档已85054d7b/main远端一致，精确CI41260918155成功；旧assurance JSON被提交钩子改换行后，按精确SHA仅恢复原换行，三份原始WIP字节均保持。
+
+后续93f561ef CI版本合同/选测修复独审见同级p1-ci-repair；等价self-reflection使累计第四实现依赖SHA变化，免费重放实际HTTP data/draft/execution仍同，历史两/三依赖增补保留当时签名。真实内容/恢复签收不代签后续CI或公司研究。

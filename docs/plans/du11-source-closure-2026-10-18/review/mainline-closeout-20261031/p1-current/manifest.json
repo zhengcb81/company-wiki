@@ -1,6 +1,7 @@
 {
   "schema_version": "bounded-node-receipts/1",
   "hash_scope": "raw gzip receipts only; excludes prose, replay and manifest",
+  "filename_aliases": "materials use short names for Windows; original capsule paths remain unchanged, mapped per receipt",
   "files": [
     {
       "path": "receipts/berkshire/events.jsonl.gz",
@@ -18,43 +19,43 @@
       "path": "receipts/berkshire/materials/bundle.json.gz",
       "bytes": 82695,
       "sha256": "24159c20af8c8ca4b1c3a54b1476fea56d24cf4e154957d5d1e2a9701ff670ae",
-      "uncompressed_sha256": "66c264bacdc562038fdfe15f2c9a8076d84b71cd694e37b7413be1feb05f234c"
+      "uncompressed_sha256": "66c264bacdc562038fdfe15f2c9a8076d84b71cd694e37b7413be1feb05f234c",
+      "original_filename": "phaseC-090-011ec22e479b.a36e583848ae033f1831702420ddac88aff4939fcf1c3806e2d8039d8820bc86.prepared.bundle.json.gz"
     },
     {
       "path": "receipts/berkshire/materials/capsule.json.gz",
       "bytes": 6245,
       "sha256": "411ab6a56ec864bdd08389262552fa7d3b85fd15f775e7a0af8e85272fc8c4ef",
-      "uncompressed_sha256": "3da62bd08795036aaaa22f90c4c1d65d4e27b658328760e272c60e1a22895dba"
+      "uncompressed_sha256": "3da62bd08795036aaaa22f90c4c1d65d4e27b658328760e272c60e1a22895dba",
+      "original_filename": "phaseC-090-011ec22e479b.a36e583848ae033f1831702420ddac88aff4939fcf1c3806e2d8039d8820bc86.prepared.capsule.json.gz"
     },
     {
       "path": "receipts/berkshire/materials/generation.json.gz",
       "bytes": 5531,
       "sha256": "03b4977bceab6e91fc9565eadd8ec6eef214e1b291e0fec4e757543285e8e0a2",
-      "uncompressed_sha256": "9bc24d99a892420ec35f5a2ebc094f491518ef965ffe86ac3f738427d0dbd055"
+      "uncompressed_sha256": "9bc24d99a892420ec35f5a2ebc094f491518ef965ffe86ac3f738427d0dbd055",
+      "original_filename": "phaseC-090-011ec22e479b.generation.json.gz"
     },
     {
       "path": "receipts/berkshire/materials/input.json.gz",
       "bytes": 15663,
       "sha256": "ca5b12fffebe83b270e84eb62d83fc143355be2458d1b49daed42140c4f7df98",
-      "uncompressed_sha256": "8b5b7d97d175652e2760cd7be585324d8f1ba104e298af5b9858e262f4415eff"
-    },
-    {
-      "path": "receipts/berkshire/materials/phaseC-090-011ec22e479b.0d1b4267b4fe4e53b5a89da893c36060.response.json.gz",
-      "bytes": 410,
-      "sha256": "680a39b0e4c42ecd298f5842e789a2d42f74d3430b1f95dcaa949bef19cbbad8",
-      "uncompressed_sha256": "5d213771218679fc1cbf02c554d0822dae05219137fb374ee2eb0f26c9bca387"
+      "uncompressed_sha256": "8b5b7d97d175652e2760cd7be585324d8f1ba104e298af5b9858e262f4415eff",
+      "original_filename": "phaseC-090-011ec22e479b.input.json.gz"
     },
     {
       "path": "receipts/berkshire/materials/response.json.gz",
       "bytes": 410,
       "sha256": "680a39b0e4c42ecd298f5842e789a2d42f74d3430b1f95dcaa949bef19cbbad8",
-      "uncompressed_sha256": "5d213771218679fc1cbf02c554d0822dae05219137fb374ee2eb0f26c9bca387"
+      "uncompressed_sha256": "5d213771218679fc1cbf02c554d0822dae05219137fb374ee2eb0f26c9bca387",
+      "original_filename": "phaseC-090-011ec22e479b.0d1b4267b4fe4e53b5a89da893c36060.response.json.gz"
     },
     {
       "path": "receipts/berkshire/materials/selection.json.gz",
       "bytes": 68032,
       "sha256": "8fe6aa89c213bb992707b14dcd379f59f7f9708c190237ce1d694a9de410a47e",
-      "uncompressed_sha256": "cc5c9f38f313f4b81e931ee10dd3c0a38a138d466a02e6e692e830894be0095c"
+      "uncompressed_sha256": "cc5c9f38f313f4b81e931ee10dd3c0a38a138d466a02e6e692e830894be0095c",
+      "original_filename": "phaseC-090-011ec22e479b.selection.json.gz"
     },
     {
       "path": "receipts/berkshire/mother-after.json.gz",
@@ -96,37 +97,43 @@
       "path": "receipts/huali/materials/bundle.json.gz",
       "bytes": 50279,
       "sha256": "a4fbb0986056838f27a13bc43e9a77d200498bfa4626e6edef27c35cbd9bedd9",
-      "uncompressed_sha256": "a466262de5251f0b4e2619eb88f1ba90e8188f5070bb1ea9881a7d5be08b3a45"
+      "uncompressed_sha256": "a466262de5251f0b4e2619eb88f1ba90e8188f5070bb1ea9881a7d5be08b3a45",
+      "original_filename": "phaseC-090-670ced72c918.3cef622e4048aeec4867d6d1742f14ab49fda1f25fd8fba8832bae5162e265a8.prepared.bundle.json.gz"
     },
     {
       "path": "receipts/huali/materials/capsule.json.gz",
       "bytes": 7897,
       "sha256": "43ba44d7a5e8df2b935b3b841e40edd3c6b20ebd62fbf638ce8cdb9eefd19de3",
-      "uncompressed_sha256": "7f08899e4e638996c0e292b1147c0822532126d28fc87da562c6b22c246c9ab1"
+      "uncompressed_sha256": "7f08899e4e638996c0e292b1147c0822532126d28fc87da562c6b22c246c9ab1",
+      "original_filename": "phaseC-090-670ced72c918.3cef622e4048aeec4867d6d1742f14ab49fda1f25fd8fba8832bae5162e265a8.prepared.capsule.json.gz"
     },
     {
       "path": "receipts/huali/materials/generation.json.gz",
       "bytes": 7085,
       "sha256": "a1a2e8e613bd3dc32222f1b4ab27e26e0463a854a406f3d74162ef4238beec8e",
-      "uncompressed_sha256": "fc3d2e51e5c816ef27f9a30d781578186b656e4ed7559a3ac81b1faed6dfce30"
+      "uncompressed_sha256": "fc3d2e51e5c816ef27f9a30d781578186b656e4ed7559a3ac81b1faed6dfce30",
+      "original_filename": "phaseC-090-670ced72c918.generation.json.gz"
     },
     {
       "path": "receipts/huali/materials/input.json.gz",
       "bytes": 5009,
       "sha256": "2aa3a8cec42681aabf2a22f6cf9543a8718e578baa498b25ec7cae679e1d52b4",
-      "uncompressed_sha256": "c7f1cd6b7ca1c67756d8283571327c79c65e847f18aff373ac476004d4483714"
+      "uncompressed_sha256": "c7f1cd6b7ca1c67756d8283571327c79c65e847f18aff373ac476004d4483714",
+      "original_filename": "phaseC-090-670ced72c918.input.json.gz"
     },
     {
       "path": "receipts/huali/materials/response.json.gz",
       "bytes": 259,
       "sha256": "f3064874137b08c3d10f84532f8e70ee4d54b4599f51f7283cc66b986b63d6bb",
-      "uncompressed_sha256": "a0aa7fca91b6cb3e480c5926082658209ba5a29d57027d359018959c8c631a22"
+      "uncompressed_sha256": "a0aa7fca91b6cb3e480c5926082658209ba5a29d57027d359018959c8c631a22",
+      "original_filename": "phaseC-090-670ced72c918.b9bfde231d434be1bc771c56ad909415.response.json.gz"
     },
     {
       "path": "receipts/huali/materials/selection.json.gz",
       "bytes": 48879,
       "sha256": "ce80ec966074e0863225de034e348f288ae85cf2b1a767938f55fcddd42658e4",
-      "uncompressed_sha256": "92d8ccda2a669d376326b4c51ebbb9c10a9bfbfe5934f9302adda6ee3a48ffcb"
+      "uncompressed_sha256": "92d8ccda2a669d376326b4c51ebbb9c10a9bfbfe5934f9302adda6ee3a48ffcb",
+      "original_filename": "phaseC-090-670ced72c918.selection.json.gz"
     },
     {
       "path": "receipts/huali/mother-after.json.gz",
@@ -219,16 +226,52 @@
       "uncompressed_sha256": "f27497d5c3f5ec5651087ac1d3e3e80c5bcecc92b80a82d33fdcb7b7938ad349"
     },
     {
+      "path": "receipts/independent/type-annotation-addendum.json.gz",
+      "bytes": 1497,
+      "sha256": "56ae0626f0a68e6c0d72d0822050deadfd33a63c1a22d18efff87c086f3b1331",
+      "uncompressed_sha256": "c810ecf4727c19e5f9a62ff0349c87ec85a82352e6ef8b88e368d53bf92c1377"
+    },
+    {
+      "path": "receipts/independent/type-annotation-addendum.md.gz",
+      "bytes": 888,
+      "sha256": "3498d890acf51b273b00297006206eeb85dd7ccd2178a2f877db22762f8b883a",
+      "uncompressed_sha256": "b625dddead9f69370eadd1cfec65a889505538c776d270654e70ae9ada41e094"
+    },
+    {
       "path": "receipts/old-huali-exact-compat.json.gz",
       "bytes": 838,
       "sha256": "7d1eca9aa44c9be5f535cc47b1c375bb6193a1c88eb45eb910e4492279e32ce9",
       "uncompressed_sha256": "0a09e5bcfc85bc5f61b05970ce1c03acf811d597b59e72de1ea6f71a67faf9ce"
     },
     {
+      "path": "receipts/rf-v6-ci.json.gz",
+      "bytes": 267,
+      "sha256": "400d355c793b0dfb31685bcf656f4dc8c4b2144a6c786c3e7e33587ef23c044d",
+      "uncompressed_sha256": "b30a6dbba548422d6208619b731261a3e763f9b3d2ffb7f4d1935b144c744010"
+    },
+    {
+      "path": "receipts/rf-v6-publication.json.gz",
+      "bytes": 639,
+      "sha256": "21cfd0b108173a124d220a6a458c55232c6153c9db898ff3d25b13053dbc1b85",
+      "uncompressed_sha256": "3f3d2a3d87ff0495d2c2ca5bbb52a15bee68db478b7937878bb242737f33662b"
+    },
+    {
       "path": "receipts/tests/p1-final-ruff.log.gz",
       "bytes": 40,
       "sha256": "e5a5d6f446238476869cbddde112b57a51fbc36276fcaf426d9cfe1e8a711ffb",
       "uncompressed_sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0"
+    },
+    {
+      "path": "receipts/tests/p1-final-typed-replay.log.gz",
+      "bytes": 89,
+      "sha256": "1364635f607699e6474bcc8db759f30e5c8c716e500d3dcf8c470bfe874cdf92",
+      "uncompressed_sha256": "6d805e29a7396f954afa1a11fd3a66b5f4f822e71be38da8e2950bcc38ac53c0"
+    },
+    {
+      "path": "receipts/tests/p1-first-precommit-type-rejection.log.gz",
+      "bytes": 454,
+      "sha256": "72c5da163579e8570c8860c2480911c66377c57874773d961c12df41936e72db",
+      "uncompressed_sha256": "918e6993d801c744e212b1afe29001ba321439fe2dd78f68f36ceac3aa3e4010"
     },
     {
       "path": "receipts/tests/p1-hint-green.log.gz",
@@ -291,5 +334,5 @@
       "uncompressed_sha256": "929ce9091ce6966df20f5f2485ac08ce303622828206d65614118688994fe366"
     }
   ],
-  "total_receipt_bytes": 522272
+  "total_receipt_bytes": 525696
 }

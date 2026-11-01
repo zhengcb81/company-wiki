@@ -30,7 +30,7 @@ def _push_gate(monkeypatch, selected, reason, push_input="fixture push range"):
     monkeypatch.setattr(gate, "PROJECT_ROOT", Path.cwd())
     monkeypatch.setattr(gate.sys, "stdin", type("Input", (), {"read": lambda self: push_input})())
     monkeypatch.setattr(gate, "changed_paths", lambda root, data: {"fixture"})
-    monkeypatch.setattr(gate, "select_unit_tests", lambda root, files: (selected, reason))
+    monkeypatch.setattr(gate, "select_unit_tests", lambda root, files, **options: (selected, reason))
 
 
 def _capture_gates(monkeypatch):
@@ -145,16 +145,16 @@ def test_fast_contract_members_stay_shared_and_deduplicated(monkeypatch):
     assert len(targets) == len(set(targets))
 
 
-def test_wide_explainable_scope_is_deferred_without_truncating_to_a_false_complete_set():
+def test_wide_explainable_scope_keeps_bounded_known_subset_and_defers_remainder():
     selected = [f"tests/unit/test_changed_{index}.py" for index in range(
         gate.DAILY_PUSH_MAX_AFFECTED_TARGETS + 1
     )]
 
     targets, reason = gate._push_targets(selected)
 
-    assert targets == list(gate.FAST_CONTRACT_CASES)
-    assert "wide affected set" in reason
-    assert not any(target in selected for target in targets)
+    assert targets == [*selected[:32], *gate.FAST_CONTRACT_CASES]
+    assert 'bounded partial selection' in reason and '1 known files deferred' in reason
+    assert selected[-1] not in targets
 
 
 def test_node_id_selection_deduplicates_exact_smoke_member_and_keeps_siblings():
@@ -413,16 +413,29 @@ def test_real_push_with_missing_gate_runner_is_blocked(tmp_path):
     assert _remote_head(work) == ""
 
 
-def test_real_push_defers_wide_scope_and_full_run_still_finds_the_failure(tmp_path):
+def test_real_push_defers_unknown_config_scope_and_full_run_still_finds_the_failure(tmp_path):
     work, _remote, _probe = _fixture_repository(tmp_path)
     assert _push(work).returncode == 0
     hidden = work / "tests/unit/test_hidden_failure.py"
-    hidden.write_text("def test_hidden(): assert False, 'outside the fast set'\n",
+    hidden.write_text("from pathlib import Path\n"
+                      "def test_hidden():\n"
+                      "    config = Path(__file__).resolve().parents[2] / 'pyproject.toml'\n"
+                      "    assert 'ready = true' in config.read_text(), 'outside the fast set'\n",
                       encoding="utf-8", newline="\n")
-    (work / "pyproject.toml").write_text("[project]\nname = 'w13-fixture'\n",
+    config = work / 'pyproject.toml'
+    config.write_text("[project]\nname = 'w13-fixture'\n[tool.fixture]\nready = true\n",
                                          encoding="utf-8", newline="\n")
     _git(work, "add", "tests/unit/test_hidden_failure.py", "pyproject.toml")
-    _git(work, "commit", "-qm", "wide config change with a hidden failure")
+    _git(work, "commit", "-qm", "green baseline with a known unit consumer")
+    baseline = _push(work)
+    assert baseline.returncode == 0, baseline.stdout + baseline.stderr
+    # Only configuration changes now. No changed Python/import edge proves
+    # this dependency; unlike an explicitly changed failing unit, it belongs
+    # to the declared unknown remainder which CI/full validation still checks.
+    config.write_text("[project]\nname = 'w13-fixture'\n[tool.fixture]\nready = false\n",
+                      encoding="utf-8", newline="\n")
+    _git(work, 'add', 'pyproject.toml')
+    _git(work, 'commit', '-qm', 'config-only regression outside known static scope')
     deferred = _push(work)
     assert deferred.returncode == 0, deferred.stdout + deferred.stderr
     combined = deferred.stdout + deferred.stderr

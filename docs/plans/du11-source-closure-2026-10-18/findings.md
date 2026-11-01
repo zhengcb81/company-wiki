@@ -40,6 +40,8 @@ source_narrative_context只将一个span变成native claim，完整summary-use/c
 
 ## P1最新有效结论（旧失败与运行签名不重写）
 
+发布93f561ef精确CI41261403683又暴露3例：两项测试仍固定allocation/1，新实现明确/2；另一项将当前/5有意升级的compact presentation与旧HTTP捕获强比。已本机原样3F/6.66s，不是Linux独有或原3例延期复发。应保留旧捕获、为显式新wire建立单独精确fixture，/4、/6及旧产物继续不变，不能删断言。漏检根因在测试选择：extractive反射自身模块使用`__import__(__name__)`被视为动态执行，selector直接推荐全量，而日常gate把全量建议全部折为smoke；应先消除不必要自导入并实查实际静态影响范围，不把全面CI搬到每次commit。新的CI根修与独审进行中，当前不能写精确CI绿。
+
 源任务准入、canonical完整卡编译与实际LLM可见范围原来错位，同级group发现顺序还挤掉晚附的真实业务范围。根修用source-owned优先级＋同源support坐标分配及仅已编译卡的去重presentation，其他层不干预PDF阅读；完整支持/context不裁切，无公司/gold/任务ID特判。实际DeepSeek39520B/47840预留通过原50000限额，73卡/10所需业务；15仍unprocessed。排名t78/t80低分/unclear/redundant说明advisory不是事实淘汰器，源卡必须保留。当前两份/5只签摘录卡＋排名，不签生成式概述/全文/盲测。
 
 source-card compiler已按语义用途生成，但execution又按物理可读重复判断，导致混合context_only/unresolved＋support真实handler失败；复用同一generation-reason owner同时修根因并拒伪造事实卡。该后续验证依赖delta不影响两份已付费请求/draft/execution，已独立免费重算，不重复付费或改旧签名。

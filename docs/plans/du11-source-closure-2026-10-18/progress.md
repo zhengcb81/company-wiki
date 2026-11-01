@@ -50,3 +50,9 @@ source-use后续共享validator缺陷正确TDD2F→2P，53受影响例绿；独�
 RF正式v6绑定新a466 artifact、完整t3及理由，实际参数/公式/报告/snapshot/registry，独立stdlib45检查PASS；与v5数值相同，无新POST/下载，必要定位回放实执行。正式产物只放RF所属PWF，CWP仅技术审计；生产六模块不变，不重复全局部署。旧已删PDF/全规范化未恢复，62用到span/小新浪缓存复用。
 
 归档CWP522272B＋RF100425B gzip原始收据，未复制PDF/整库。首次归档保留长run文件名触发Windows路径长度限制，改短别名而不改原字节；compat原收据名修正，portable replay先按原配置output budget绑定及实际execution路径修正，再两样本全部免费通过。RF v6离线生产重放也通过，临时registry清除。原provider完整envelope未保留，decoded回复/native用量及实际pin/恢复证据保留，不夸大可重建范围。现正常提交/推送/精确CI进行中，未提前写绿；公司研究/P3继续OPEN。
+
+发布实查：RF85054d7b已main/远端同步，精确CI41260918155成功；正常679P/1skip/36subtests。提交钩子stash/apply让weekly_manifest仅CRLF→LF，raw-SHA包装断言虽拒绝，但Git发布本身成功；以旧保护SHA证明仅换行并定点恢复，三份外来WIP原字节一致。CWP正常pre-commit拦住allocation ordered缺注解，补list[SourceCard]、独立增补签当前SHA，原请求/draft/execution免费重算一致；不是通过删门禁换绿。
+
+93f561ef已正常推master，pre-push167P/38.45s，但精确CI41261403683失败新3例。公开annotations直接读取，不提取凭证；本机按原节点3F/6.66s，发现allocator版本断言和/5旧HTTP捕获未迁移。当前只修版本合同和实际静态影响漏检根因，不重跑付费/整篇PDF。W12 r1-remediation-03沿原2026-10-21截止日冻结，新executor仅免费preflight；CI绿前不进入付费/正式验收。初版归档补充因长短重复response别名StopIteration已定点去重，未改原回复；7个有日志绑定自有测试目录已清16045737逻辑字节，未绑定目录保留。
+
+CI版本迁移及选测共因已集中独审PASS/0OPEN：54源协议例绿；选测6F1P→7P；相关域185P/旧策略1F，真实config-only未知范围便携单例1P/24.33s。旧fixture不改，独立14文件SHA及正反控制已封存。新known静态图probe10.64s（旧36.88s），32/352partial，旧原子协议未在32中，绝不宣称快速hook保证全量。免费重放真实请求/draft/execution不变，旧付费签名不覆盖。候选正常发布/精确CI待实查；W12免费复用/原页研究继续，隔离register丢旧元数据是内部接线缺口，不冒作正式RF已跑通。

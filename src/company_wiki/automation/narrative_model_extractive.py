@@ -11,6 +11,7 @@ from copy import deepcopy
 from dataclasses import dataclass
 import hashlib
 import json
+import sys
 from pathlib import Path
 from typing import Any
 
@@ -266,7 +267,7 @@ def extractive_boundary_identity(boundary) -> dict[str, Any]:
     from . import narrative_contracts, narrative_model_runtime, models
     from . import narrative_summary_execution
     from . import narrative_rank_material
-    modules = {'protocol': __import__(__name__, fromlist=['']), 'source_cards': cards,
+    modules = {'protocol': sys.modules[__name__], 'source_cards': cards,
                'source_task_plan': summary_tasks, 'role_quality_owner': narrative_evidence,
                'source_use_contract': reading_context_contract,
                'canonical_contracts': narrative_contracts, 'canonical_encoding': models,

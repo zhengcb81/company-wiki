@@ -7,6 +7,7 @@ execution use it all. Test-only changes retain their known helper consumers.
 from __future__ import annotations
 
 import ast
+from collections import deque
 from pathlib import Path
 import re
 import subprocess
@@ -232,8 +233,31 @@ def _file_path_names(nodes: list[ast.AST]) -> set[str]:
     return result
 
 
-def select_unit_tests(root: Path, changes: set[str] | None) -> tuple[list[str], str]:
-    """Select whole test files, never individual asserts, and explain fallbacks."""
+def _known_static_tests(changes: set[str], reverse: dict[str, set[str]]) -> list[str]:
+    """Order proven consumers by changed file, then shortest static distance.
+
+    This never establishes completeness: computed imports, resources and
+    configuration remain CI's responsibility, even when some consumers are known.
+    """
+    distances = dict.fromkeys(changes, 0)
+    pending = deque(changes)
+    while pending:
+        name = pending.popleft()
+        for caller in reverse.get(name, ()):
+            if caller not in distances:
+                distances[caller] = distances[name] + 1
+                pending.append(caller)
+    return sorted((name for name in distances if _is_test_module_path(name)),
+                  key=lambda name: (name not in changes, distances[name], name))
+
+
+def select_unit_tests(root: Path, changes: set[str] | None, *, known_only: bool = False) -> tuple[list[str], str]:
+    """Select whole test files; optionally retain only proven partial impact.
+
+    Default conservative recommendations are unchanged. Daily feedback asks for
+    known_only so uncertainty cannot erase useful known consumers or seed every
+    unrelated dynamic test. It always reports incomplete coverage to CI.
+    """
     full = ["tests/unit"]
     if changes is None:
         return full, "unknown push range"
@@ -246,10 +270,10 @@ def select_unit_tests(root: Path, changes: set[str] | None) -> tuple[list[str], 
         "Pipfile", "Pipfile.lock", ".python-version", ".pre-commit-config.yaml",
     }
     global_prefixes = ("config/", ".github/", ".githooks/")
-    if any(name in global_names or name.startswith((*global_prefixes, "requirements"))
+    if not known_only and any(name in global_names or name.startswith((*global_prefixes, "requirements"))
            or name.endswith("/conftest.py") for name in changes):
         return full, "configuration or test entrypoint changed"
-    if any(name.startswith("tools/") and not _benchmark(name) for name in changes):
+    if not known_only and any(name.startswith("tools/") and not _benchmark(name) for name in changes):
         return full, "shared or unknown tooling changed"
     # Empty is now a test-free push, so it needs positive documentation scope.
     # Unknown suffixes/locations can be runtime config, prompts or shell entrypoints;
@@ -261,7 +285,7 @@ def select_unit_tests(root: Path, changes: set[str] | None) -> tuple[list[str], 
     if not relevant:
         return [], "no behavior changes"
     resources = {name for name in relevant if not name.endswith(".py")}
-    if resources:
+    if resources and not known_only:
         # A known literal reader cannot rule out a second dynamic-filename reader.
         # Do not claim a closed resource scope from textual names or comparisons.
         return full, "resource dependency scope unknown"
@@ -273,14 +297,20 @@ def select_unit_tests(root: Path, changes: set[str] | None) -> tuple[list[str], 
         for name in python_changes:
             if name.startswith(("src/", "scripts/")) and (root / name).is_file():
                 tree = ast.parse((root / name).read_text(encoding="utf-8-sig"))
-                if _dynamic_execution(tree):
+                if not known_only and _dynamic_execution(tree):
                     return full, "dynamic execution changed"
                 preparsed[name] = tree
     except (OSError, SyntaxError, UnicodeError):
         return full, "dependency graph unavailable"
     paths = {p.relative_to(root).as_posix(): p for directory in ("src", "scripts", "tools", "tests")
              for p in (root / directory).rglob("*.py")}
-    if not python_changes <= paths.keys() or any(not (root / name).is_file() for name in resources):
+    if known_only:
+        # Missing/resources/global changes are still uncertain, but do not
+        # cancel consumers of the present changed Python modules.
+        relevant = python_changes = python_changes & paths.keys()
+        if not relevant:
+            return full, "no known Python consumer; remaining scope deferred to CI"
+    if not python_changes <= paths.keys() or (not known_only and any(not (root / name).is_file() for name in resources)):
         return full, "deleted or unknown dependency"
     # An executable contract/integration/E2E module is itself a test consumer.
     # Test-only edits do not change runtime used by unrelated computed imports;
@@ -300,7 +330,7 @@ def select_unit_tests(root: Path, changes: set[str] | None) -> tuple[list[str], 
             if tree is None:
                 tree = ast.parse(path.read_text(encoding="utf-8-sig"))
             nodes = list(ast.walk(tree))
-            if _dynamic_execution(nodes):
+            if not known_only and _dynamic_execution(nodes):
                 dynamic.add(name)
             if _is_test_module_path(name) and any(
                 isinstance(node, (ast.FunctionDef, ast.AsyncFunctionDef)) and node.name.startswith("test_")
@@ -310,10 +340,11 @@ def select_unit_tests(root: Path, changes: set[str] | None) -> tuple[list[str], 
             imports = _imports(nodes, _aliases(name)[0], path.name == "__init__.py")
             for owner in _module_owners(imports, modules):
                 reverse.setdefault(owner, set()).add(name)
-            executing_calls = _test_calls(nodes) if _is_test_module_path(name) else None
-            calls = _called_imports(nodes, _aliases(name)[0], path.name == "__init__.py", executing_calls)
-            for owner in _module_owners(calls, modules):
-                executions.setdefault(owner, set()).add(name)
+            if not known_only:
+                executing_calls = _test_calls(nodes) if _is_test_module_path(name) else None
+                calls = _called_imports(nodes, _aliases(name)[0], path.name == "__init__.py", executing_calls)
+                for owner in _module_owners(calls, modules):
+                    executions.setdefault(owner, set()).add(name)
             literal_basenames = _literal_basenames(nodes)
             # Isolated benchmark subprocesses also execute owned .py files by
             # path (launcher/sitecustomize), not Python import. These are possible
@@ -324,6 +355,9 @@ def select_unit_tests(root: Path, changes: set[str] | None) -> tuple[list[str], 
                     reverse.setdefault(owner, set()).add(name)
     except (OSError, SyntaxError, UnicodeError):
         return full, "dependency graph unavailable"
+    if known_only:
+        tests = _known_static_tests(relevant, reverse)
+        return (tests or full), "known static affected tests only; dynamic/resource/config remainder deferred to CI"
     # Dynamic execution is exempt only for proven test-side benchmark tools.
     # A runtime caller, shared test entrypoint or import-only test cannot justify it.
     isolated_benchmarks = set()

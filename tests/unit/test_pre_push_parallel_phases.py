@@ -15,7 +15,7 @@ from unit.test_pre_push_temp_scope import gate
 def _push_dispatch(monkeypatch, selected, reason):
     monkeypatch.setattr(gate.sys, 'stdin', io.StringIO('fixture push range'))
     monkeypatch.setattr(gate, 'changed_paths', lambda *args: {'fixture'})
-    monkeypatch.setattr(gate, 'select_unit_tests', lambda *args: (selected, reason))
+    monkeypatch.setattr(gate, 'select_unit_tests', lambda *args, **options: (selected, reason))
 
 
 @pytest.mark.parametrize('result', [0, 7])

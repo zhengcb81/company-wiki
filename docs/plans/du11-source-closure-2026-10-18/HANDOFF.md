@@ -1,7 +1,7 @@
 # 主线接手指南
 
 1. 先读CURRENT_STATUS.md/json，再读task_plan唯一Next Step。MAINLINE_LOOP_GOAL是总完成条件；PACKAGE_STATUS只管外包。原生goal active，不重建goal/逐材料许可，不扩包。
-2. P0已根修c92aa4f2/精确CI绿。当前P1新版根修与有界真实运行独审已通过，处于正常发布/新精确CI确认；未确认前不能拿旧CI签新代码。
+2. P0已根修c92aa4f2/精确CI绿。当前P1内容有界独审通过，但93f561ef新精确CI41261403683失败3项版本合同；本机3F及候选54P留证，选测共因正在集中修。新精确CI绿前，W12仅免费preflight。
 3. 当前入口 `review/mainline-closeout-20261031/p1-current/README.md`：Berkshire真实88任务/73卡/15未处理、10所需业务原子；华利15卡/12原子。旧normalized77/64/13及首次live88/72/16、早期ec183产物是历史，不能当当前计数。新版华利body a466...，Berkshire66c...；/5仅完整原文卡＋advisory ranking，不是生成式概述/全文/盲测。
 4. 两次真实配置模型各1POST（DeepSeek10464tokens/$0.004611、MiMo3630/$0.000660），activation及同跨run恢复0重复，真实RF来源/叙述读取通过。旧华利精确artifact兼容0POST。必要locator回放实执行，不写零解析。
 5. 排名请求仅含正式准入卡，完整原文片段/提示去重；source-owned优先级后以同源支持坐标分配，未知槽位不挪，模型不能删卡。Berkshire15任务保持unprocessed/RANK_INCOMPLETE，t78/t80虽低分仍保留。无额度提高/公司特判/截断闭包。
@@ -12,3 +12,7 @@
 10. 模型以config/models.yaml为准，预算config/resource_budget.yaml为准（累计10M/$20，公司软目标）；母账1,849,869/$0.739510估计含unknown。原生goal旧正文2M不代替配置。无额度/人工签收阻塞。宿主C:/Miniconda/python.exe正常权限，勿回Low venv/改ACL。
 11. 修改前解释status；CWP .githooks/pre-push mode与RF三份assurance定时产物为外来WIP，不能暂存/恢复。原件及生产config不改；Dayu/IQS/Dashboard不动。禁no-verify/全仓reset/clean/反复超时整批。正常大节点测试和独审，不加helper许可。
 12. 精确提交/CI分仓记录在CURRENT_STATUS；当前新代码发布未完就继续收尾，不新发卡。RF运行代码已535604fa/精确CI绿、三逻辑技能/2物理目标已部署，当前v6仅docs材料无需运行代码再同步。更新状态/进度/下一步，原始失败/费用/签名不覆盖。
+
+最终类型注解小delta亦有独审；较旧付费版本累计三个实现依赖SHA变化，但免费重放HTTP/完整卡/execution相同，旧签名保持。RF验收文档85054d7b精确CI41260918155绿，外来三份assurance原字节已恢复且未提交。
+
+W12新attempt=原audit run下execution_replays/r1-remediation-03；仍asof2026-10-21，checked日期是真实当前时间。capture/event使用这个attempt容器的小run.json（保持原run_id）隔离旧日志；不是新控制器/预算库。其executor已实际免费复用三份来源/阅读原页，缺call/年报历史publicationunknown保持gap，不当正式native采用。

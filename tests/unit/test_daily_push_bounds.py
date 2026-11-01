@@ -5,11 +5,12 @@ from tools import pre_push_gate as gate
 
 
 @pytest.mark.parametrize('count', [33, 65, 333])
-def test_wide_closed_file_set_is_wholly_deferred_not_truncated(count):
+def test_wide_closed_file_set_retains_bounded_known_files_with_explicit_deferral(count):
     selected = [f'tests/unit/test_changed_{index}.py' for index in range(count)]
     actual, reason = gate._push_targets(selected)
-    assert actual == list(gate.FAST_CONTRACT_CASES)
-    assert 'deferred' in reason and str(count) in reason
+    assert actual == [*selected[:32], *gate.FAST_CONTRACT_CASES]
+    assert 'bounded partial selection' in reason and 'deferred' in reason and str(count) in reason
+    assert all(path not in actual for path in selected[32:])
 
 
 def test_small_boundary_runs_complete_files_and_deduplicates_repeated_paths():
@@ -29,7 +30,7 @@ def test_unbounded_directory_is_not_a_small_file(directory):
 @pytest.mark.parametrize('returncode', [0, 1])
 def test_pass_is_reported_only_after_runner_success(monkeypatch, capsys, returncode):
     monkeypatch.setattr(gate, 'changed_paths', lambda *_: {'source.py'})
-    monkeypatch.setattr(gate, 'select_unit_tests', lambda *_: (['tests/unit'], 'wide'))
+    monkeypatch.setattr(gate, 'select_unit_tests', lambda *_, **options: (['tests/unit'], 'wide'))
     monkeypatch.setattr(gate.sys, 'stdin', type('Input', (), {'read': lambda self: 'refs'})())
 
     def execute(*_):
