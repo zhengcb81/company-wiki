@@ -1,0 +1,1331 @@
+{
+ "schema_version": "cwp-ocr-comparison/1",
+ "plan_id": "w23-ocr-r1-2026-10-31",
+ "created_at_utc": "2026-11-01T14:21:52.910948+00:00",
+ "campaign": {
+  "ledger_file": "campaign_ledger.json",
+  "budget_seconds": 1800.0,
+  "spent_seconds": 226.094061,
+  "remaining_seconds": 1573.905939,
+  "entries": [
+   {
+    "ts_utc": "2026-11-01T14:01:51.517460+00:00",
+    "arm": "N0",
+    "page_id": "r1_amec_ar2025_p029",
+    "seconds": 0.0,
+    "status": "ok"
+   },
+   {
+    "ts_utc": "2026-11-01T14:01:51.557304+00:00",
+    "arm": "N0",
+    "page_id": "r1_wuxi_ar2022_p010",
+    "seconds": 0.0,
+    "status": "ok"
+   },
+   {
+    "ts_utc": "2026-11-01T14:01:51.572118+00:00",
+    "arm": "N0",
+    "page_id": "r1_ksy_fy2025_results_p003",
+    "seconds": 0.0,
+    "status": "ok"
+   },
+   {
+    "ts_utc": "2026-11-01T14:01:51.583974+00:00",
+    "arm": "N0",
+    "page_id": "r1_ksy_fy2025_income_p012",
+    "seconds": 0.0,
+    "status": "ok"
+   },
+   {
+    "ts_utc": "2026-11-01T14:01:51.607377+00:00",
+    "arm": "N0",
+    "page_id": "r1_biren_ar2025_p030",
+    "seconds": 0.0,
+    "status": "ok"
+   },
+   {
+    "ts_utc": "2026-11-01T14:01:51.622486+00:00",
+    "arm": "N0",
+    "page_id": "r1_brk2007_p001",
+    "seconds": 0.0,
+    "status": "ok"
+   },
+   {
+    "ts_utc": "2026-11-01T14:01:51.635295+00:00",
+    "arm": "N0",
+    "page_id": "r1_brk2007_p005",
+    "seconds": 0.0,
+    "status": "ok"
+   },
+   {
+    "ts_utc": "2026-11-01T14:03:02.435552+00:00",
+    "arm": "R0",
+    "page_id": "r1_amec_ar2025_p029",
+    "seconds": 0.0,
+    "status": "ok"
+   },
+   {
+    "ts_utc": "2026-11-01T14:03:57.121734+00:00",
+    "arm": "R0",
+    "page_id": "r1_wuxi_ar2022_p010",
+    "seconds": 0.0,
+    "status": "ok"
+   },
+   {
+    "ts_utc": "2026-11-01T14:04:28.020664+00:00",
+    "arm": "R0",
+    "page_id": "r1_ksy_fy2025_results_p003",
+    "seconds": 0.0,
+    "status": "ok"
+   },
+   {
+    "ts_utc": "2026-11-01T14:04:47.727164+00:00",
+    "arm": "R0",
+    "page_id": "r1_ksy_fy2025_income_p012",
+    "seconds": 0.0,
+    "status": "ok"
+   },
+   {
+    "ts_utc": "2026-11-01T14:05:02.656298+00:00",
+    "arm": "R0",
+    "page_id": "r1_biren_ar2025_p030",
+    "seconds": 0.0,
+    "status": "ok"
+   },
+   {
+    "ts_utc": "2026-11-01T14:05:29.110995+00:00",
+    "arm": "R0",
+    "page_id": "r1_brk2007_p001",
+    "seconds": 0.0,
+    "status": "ok"
+   },
+   {
+    "ts_utc": "2026-11-01T14:05:53.425101+00:00",
+    "arm": "R0",
+    "page_id": "r1_brk2007_p005",
+    "seconds": 0.0,
+    "status": "ok"
+   },
+   {
+    "ts_utc": "2026-11-01T14:06:47.477413+00:00",
+    "arm": "R0",
+    "page_id": "r1_amec_ar2025_p029",
+    "seconds": 18.136346,
+    "status": "ok"
+   },
+   {
+    "ts_utc": "2026-11-01T14:07:11.685342+00:00",
+    "arm": "R0",
+    "page_id": "r1_wuxi_ar2022_p010",
+    "seconds": 24.197386,
+    "status": "ok"
+   },
+   {
+    "ts_utc": "2026-11-01T14:07:27.923337+00:00",
+    "arm": "R0",
+    "page_id": "r1_ksy_fy2025_results_p003",
+    "seconds": 16.231225,
+    "status": "ok"
+   },
+   {
+    "ts_utc": "2026-11-01T14:07:47.636435+00:00",
+    "arm": "R0",
+    "page_id": "r1_ksy_fy2025_income_p012",
+    "seconds": 19.702865,
+    "status": "ok"
+   },
+   {
+    "ts_utc": "2026-11-01T14:08:00.450969+00:00",
+    "arm": "R0",
+    "page_id": "r1_biren_ar2025_p030",
+    "seconds": 12.803244,
+    "status": "ok"
+   },
+   {
+    "ts_utc": "2026-11-01T14:08:28.599232+00:00",
+    "arm": "R0",
+    "page_id": "r1_brk2007_p001",
+    "seconds": 28.139031,
+    "status": "ok"
+   },
+   {
+    "ts_utc": "2026-11-01T14:08:53.553402+00:00",
+    "arm": "R0",
+    "page_id": "r1_brk2007_p005",
+    "seconds": 24.944128,
+    "status": "ok"
+   },
+   {
+    "ts_utc": "2026-11-01T14:10:43.891458+00:00",
+    "arm": "X1F",
+    "page_id": "r1_amec_ar2025_p029",
+    "seconds": 57.082928,
+    "status": "error"
+   },
+   {
+    "ts_utc": "2026-11-01T14:10:43.895316+00:00",
+    "arm": "X1F",
+    "page_id": "r1_wuxi_ar2022_p010",
+    "seconds": 0.0,
+    "status": "error"
+   },
+   {
+    "ts_utc": "2026-11-01T14:10:43.899352+00:00",
+    "arm": "X1F",
+    "page_id": "r1_ksy_fy2025_results_p003",
+    "seconds": 0.0,
+    "status": "error"
+   },
+   {
+    "ts_utc": "2026-11-01T14:10:43.902658+00:00",
+    "arm": "X1F",
+    "page_id": "r1_ksy_fy2025_income_p012",
+    "seconds": 0.0,
+    "status": "error"
+   },
+   {
+    "ts_utc": "2026-11-01T14:10:43.905421+00:00",
+    "arm": "X1F",
+    "page_id": "r1_biren_ar2025_p030",
+    "seconds": 0.0,
+    "status": "error"
+   },
+   {
+    "ts_utc": "2026-11-01T14:10:43.907835+00:00",
+    "arm": "X1F",
+    "page_id": "r1_brk2007_p001",
+    "seconds": 0.0,
+    "status": "error"
+   },
+   {
+    "ts_utc": "2026-11-01T14:10:43.910314+00:00",
+    "arm": "X1F",
+    "page_id": "r1_brk2007_p005",
+    "seconds": 0.0,
+    "status": "error"
+   },
+   {
+    "ts_utc": "2026-11-01T14:15:25.881375+00:00",
+    "arm": "R0",
+    "page_id": "r1_formula_control",
+    "seconds": 5.421448,
+    "status": "ok"
+   },
+   {
+    "ts_utc": "2026-11-01T14:21:38.977559+00:00",
+    "arm": "R0",
+    "page_id": "byd_ar_2024_p021",
+    "seconds": 19.43546,
+    "status": "ok"
+   }
+  ],
+  "rule": "one unified cumulative 1800 s inference campaign including R0/X1F attempts; per-request <= 180 s"
+ },
+ "inputs": {
+  "sample_manifest_sha256": "1d455f91bb7859cf09e9456078e3beafc1d21b3573d2d15e0ebe14296fd778cf",
+  "gold_sha256": "71f9d1bd019414caa7847a1bc1af8da71830a2a3f23a074b3497428fa18ab4b6",
+  "page_count": 7,
+  "holdout_pages": [
+   "r1_ksy_fy2025_results_p003",
+   "r1_brk2007_p001"
+  ]
+ },
+ "pages": [
+  {
+   "page_id": "r1_amec_ar2025_p029",
+   "role": "eval",
+   "stratum": "CN/zh-CN/annual_report",
+   "source_pdf": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\中微公司\\raw\\financial_reports\\中微公司：2025年年度报告.pdf",
+   "pdf_page_index": 29,
+   "page_image_sha256": "13a01630a162d0c147d26349f0c76cfda6caa61b9ae16894fbe45f6b68ab445c",
+   "gold_chars": 1117,
+   "gold_facts": 20,
+   "gold_conditions": 12,
+   "gold_numbers": 4
+  },
+  {
+   "page_id": "r1_wuxi_ar2022_p010",
+   "role": "eval",
+   "stratum": "CN/zh-CN/annual_report",
+   "source_pdf": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\药明康德\\raw\\financial_reports\\药明康德：2022年年度报告.pdf",
+   "pdf_page_index": 10,
+   "page_image_sha256": "647c5e1783d03fab7f2a9bd9f9620406e338eeeb5c196279f45ff0a6113b5f09",
+   "gold_chars": 1822,
+   "gold_facts": 25,
+   "gold_conditions": 23,
+   "gold_numbers": 29
+  },
+  {
+   "page_id": "r1_ksy_fy2025_results_p003",
+   "role": "holdout",
+   "stratum": "HK/zh/annual_results_announcement",
+   "source_pdf": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\金山雲\\raw\\financial_reports\\quarterly\\2026-03-25_hkexnews_12067362_內幕消息 截至二零二五年十二月三十一日止三個月及財年的未經審計財務業績.pdf",
+   "pdf_page_index": 3,
+   "page_image_sha256": "6df6711d8390069bb82d8565674667cd75b140a61c4f5448cae31d22b9281fe2",
+   "gold_chars": 947,
+   "gold_facts": 24,
+   "gold_conditions": 11,
+   "gold_numbers": 40
+  },
+  {
+   "page_id": "r1_ksy_fy2025_income_p012",
+   "role": "eval",
+   "stratum": "HK/zh/annual_results_announcement",
+   "source_pdf": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\金山雲\\raw\\financial_reports\\quarterly\\2026-03-25_hkexnews_12067362_內幕消息 截至二零二五年十二月三十一日止三個月及財年的未經審計財務業績.pdf",
+   "pdf_page_index": 12,
+   "page_image_sha256": "b334a93fa7b417760518146efa1fe8361e8ef409d56f3765c152ab3373b2f630",
+   "gold_chars": 2063,
+   "gold_facts": 19,
+   "gold_conditions": 8,
+   "gold_numbers": 199
+  },
+  {
+   "page_id": "r1_biren_ar2025_p030",
+   "role": "eval",
+   "stratum": "HK/zh/annual_report",
+   "source_pdf": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\壁仞科技\\raw\\financial_reports\\annual\\2026-04-22_hkexnews_12114765_2025年度報告.pdf",
+   "pdf_page_index": 30,
+   "page_image_sha256": "2f179f02f83414b7025f8a48a359a06ccc9ff6040da034785aeb39b5fbed96a7",
+   "gold_chars": 583,
+   "gold_facts": 15,
+   "gold_conditions": 13,
+   "gold_numbers": 4
+  },
+  {
+   "page_id": "r1_brk2007_p001",
+   "role": "holdout",
+   "stratum": "US/en/annual_report",
+   "source_pdf": "C:\\Users\\郑曾波\\Dropbox\\Stock\\berkshire2007.pdf",
+   "pdf_page_index": 1,
+   "page_image_sha256": "023b730c57d317801ebaa8384bbeab8cfc8ac3d9ade17ff7f1d2f411224c20d2",
+   "gold_chars": 4533,
+   "gold_facts": 36,
+   "gold_conditions": 14,
+   "gold_numbers": 6
+  },
+  {
+   "page_id": "r1_brk2007_p005",
+   "role": "eval",
+   "stratum": "US/en/annual_report",
+   "source_pdf": "C:\\Users\\郑曾波\\Dropbox\\Stock\\berkshire2007.pdf",
+   "pdf_page_index": 5,
+   "page_image_sha256": "5335c3457d3b3c1481386c05aa968004264817a09c73b5b9294dc04a296f3d3e",
+   "gold_chars": 3817,
+   "gold_facts": 32,
+   "gold_conditions": 17,
+   "gold_numbers": 19
+  }
+ ],
+ "arms": {
+  "R0": {
+   "per_page": [
+    {
+     "page_status": "ok",
+     "hyp_sha256": "409b2829638f366eaba01c997ef08752be04948acd6d6dcfd4401842b4eca07f",
+     "cer_strict": 0.012533572068039392,
+     "cer_strict_ops": {
+      "insertions": 0,
+      "deletions": 13,
+      "substitutions": 1
+     },
+     "cer_narrow": 0.0009337068160597573,
+     "cer_narrow_ops": {
+      "insertions": 0,
+      "deletions": 0,
+      "substitutions": 1
+     },
+     "numbers": {
+      "gold_total": 9,
+      "hyp_total": 9,
+      "recall_hits": 9,
+      "precision_hits": 9,
+      "recall": 1.0,
+      "precision": 1.0
+     },
+     "numbers_digit_present": {
+      "gold_total": 9,
+      "hits": 9,
+      "recall": 1.0
+     },
+     "hyp_chars": 1104,
+     "gold_chars": 1117,
+     "gold_chars_narrow": 1071,
+     "repetition_flagged": false,
+     "page_id": "r1_amec_ar2025_p029",
+     "role": "eval",
+     "stratum": "CN/zh-CN/annual_report",
+     "engine_seconds": 18.136345799997798,
+     "finish_reason": null
+    },
+    {
+     "page_status": "ok",
+     "hyp_sha256": "f73d1ef0afe567784d04eb2781da1466ab13a0475a1cc0a5cac71bb5e75250c1",
+     "cer_strict": 0.04720087815587267,
+     "cer_strict_ops": {
+      "insertions": 1,
+      "deletions": 80,
+      "substitutions": 5
+     },
+     "cer_narrow": 0.0035335689045936395,
+     "cer_narrow_ops": {
+      "insertions": 1,
+      "deletions": 0,
+      "substitutions": 5
+     },
+     "numbers": {
+      "gold_total": 30,
+      "hyp_total": 30,
+      "recall_hits": 29,
+      "precision_hits": 29,
+      "recall": 0.9666666666666667,
+      "precision": 0.9666666666666667
+     },
+     "numbers_digit_present": {
+      "gold_total": 30,
+      "hits": 30,
+      "recall": 1.0
+     },
+     "hyp_chars": 1743,
+     "gold_chars": 1822,
+     "gold_chars_narrow": 1698,
+     "repetition_flagged": false,
+     "page_id": "r1_wuxi_ar2022_p010",
+     "role": "eval",
+     "stratum": "CN/zh-CN/annual_report",
+     "engine_seconds": 24.19738550001057,
+     "finish_reason": null
+    },
+    {
+     "page_status": "ok",
+     "hyp_sha256": "cc7157fe0c5b7c8945481abe41a54490cd8e867c8a05b512e46436e64dfc170b",
+     "cer_strict": 0.0781414994720169,
+     "cer_strict_ops": {
+      "insertions": 0,
+      "deletions": 45,
+      "substitutions": 29
+     },
+     "cer_narrow": 0.07338444687842278,
+     "cer_narrow_ops": {
+      "insertions": 0,
+      "deletions": 38,
+      "substitutions": 29
+     },
+     "numbers": {
+      "gold_total": 42,
+      "hyp_total": 41,
+      "recall_hits": 20,
+      "precision_hits": 20,
+      "recall": 0.47619047619047616,
+      "precision": 0.4878048780487805
+     },
+     "numbers_digit_present": {
+      "gold_total": 42,
+      "hits": 42,
+      "recall": 1.0
+     },
+     "hyp_chars": 902,
+     "gold_chars": 947,
+     "gold_chars_narrow": 913,
+     "repetition_flagged": false,
+     "page_id": "r1_ksy_fy2025_results_p003",
+     "role": "holdout",
+     "stratum": "HK/zh/annual_results_announcement",
+     "engine_seconds": 16.231224500006647,
+     "finish_reason": null
+    },
+    {
+     "page_status": "ok",
+     "hyp_sha256": "29d9a1b7760d486c3fe16cc918c2028189b40cc3291c9b2c90072b912d0440b1",
+     "cer_strict": 0.40523509452254,
+     "cer_strict_ops": {
+      "insertions": 179,
+      "deletions": 229,
+      "substitutions": 428
+     },
+     "cer_narrow": 0.32701949860724233,
+     "cer_narrow_ops": {
+      "insertions": 175,
+      "deletions": 209,
+      "substitutions": 203
+     },
+     "numbers": {
+      "gold_total": 183,
+      "hyp_total": 183,
+      "recall_hits": 182,
+      "precision_hits": 182,
+      "recall": 0.994535519125683,
+      "precision": 0.994535519125683
+     },
+     "numbers_digit_present": {
+      "gold_total": 183,
+      "hits": 183,
+      "recall": 1.0
+     },
+     "hyp_chars": 2013,
+     "gold_chars": 2063,
+     "gold_chars_narrow": 1795,
+     "repetition_flagged": false,
+     "page_id": "r1_ksy_fy2025_income_p012",
+     "role": "eval",
+     "stratum": "HK/zh/annual_results_announcement",
+     "engine_seconds": 19.702864699997008,
+     "finish_reason": null
+    },
+    {
+     "page_status": "ok",
+     "hyp_sha256": "842ce813ffb69527637819325d3429e0e9a47270f3e307f6ea0ba4b00272a370",
+     "cer_strict": 0.13550600343053174,
+     "cer_strict_ops": {
+      "insertions": 11,
+      "deletions": 37,
+      "substitutions": 31
+     },
+     "cer_narrow": 0.11891891891891893,
+     "cer_narrow_ops": {
+      "insertions": 8,
+      "deletions": 28,
+      "substitutions": 30
+     },
+     "numbers": {
+      "gold_total": 3,
+      "hyp_total": 3,
+      "recall_hits": 3,
+      "precision_hits": 3,
+      "recall": 1.0,
+      "precision": 1.0
+     },
+     "numbers_digit_present": {
+      "gold_total": 3,
+      "hits": 3,
+      "recall": 1.0
+     },
+     "hyp_chars": 557,
+     "gold_chars": 583,
+     "gold_chars_narrow": 555,
+     "repetition_flagged": false,
+     "page_id": "r1_biren_ar2025_p030",
+     "role": "eval",
+     "stratum": "HK/zh/annual_report",
+     "engine_seconds": 12.803244100010488,
+     "finish_reason": null
+    },
+    {
+     "page_status": "ok",
+     "hyp_sha256": "a6444c5f1348e2691c5a03977db798d32a3162d86560ee7e50db5f24b7b0747d",
+     "cer_strict": 0.005735715861460402,
+     "cer_strict_ops": {
+      "insertions": 2,
+      "deletions": 13,
+      "substitutions": 11
+     },
+     "cer_narrow": 0.006130268199233717,
+     "cer_narrow_ops": {
+      "insertions": 1,
+      "deletions": 12,
+      "substitutions": 11
+     },
+     "wer": 0.017770597738287562,
+     "wer_ops": {
+      "insertions": 0,
+      "deletions": 2,
+      "substitutions": 9
+     },
+     "numbers": {
+      "gold_total": 1,
+      "hyp_total": 1,
+      "recall_hits": 1,
+      "precision_hits": 1,
+      "recall": 1.0,
+      "precision": 1.0
+     },
+     "numbers_digit_present": {
+      "gold_total": 1,
+      "hits": 1,
+      "recall": 1.0
+     },
+     "hyp_chars": 4522,
+     "gold_chars": 4533,
+     "gold_chars_narrow": 3915,
+     "repetition_flagged": false,
+     "page_id": "r1_brk2007_p001",
+     "role": "holdout",
+     "stratum": "US/en/annual_report",
+     "engine_seconds": 28.13903059999575,
+     "finish_reason": null
+    },
+    {
+     "page_status": "ok",
+     "hyp_sha256": "5d535fc325fc5e865f4a771b462af7a068d9d76bdaaf0f36f451a90f92b32eb7",
+     "cer_strict": 0.030914330626146187,
+     "cer_strict_ops": {
+      "insertions": 0,
+      "deletions": 107,
+      "substitutions": 11
+     },
+     "cer_narrow": 0.031112507856693904,
+     "cer_narrow_ops": {
+      "insertions": 0,
+      "deletions": 88,
+      "substitutions": 11
+     },
+     "wer": 0.055031446540880505,
+     "wer_ops": {
+      "insertions": 0,
+      "deletions": 19,
+      "substitutions": 16
+     },
+     "numbers": {
+      "gold_total": 15,
+      "hyp_total": 16,
+      "recall_hits": 14,
+      "precision_hits": 14,
+      "recall": 0.9333333333333333,
+      "precision": 0.875
+     },
+     "numbers_digit_present": {
+      "gold_total": 15,
+      "hits": 14,
+      "recall": 0.9333333333333333
+     },
+     "hyp_chars": 3710,
+     "gold_chars": 3817,
+     "gold_chars_narrow": 3182,
+     "repetition_flagged": false,
+     "page_id": "r1_brk2007_p005",
+     "role": "eval",
+     "stratum": "US/en/annual_report",
+     "engine_seconds": 24.944128299990552,
+     "finish_reason": null
+    }
+   ],
+   "aggregate": {
+    "pages_total": 7,
+    "pages_scored": 7,
+    "pages_excluded": 0,
+    "coverage_by_stratum": {
+     "CN/zh-CN/annual_report": {
+      "pages": 2,
+      "scored": 2,
+      "coverage": 1.0
+     },
+     "HK/zh/annual_report": {
+      "pages": 1,
+      "scored": 1,
+      "coverage": 1.0
+     },
+     "HK/zh/annual_results_announcement": {
+      "pages": 2,
+      "scored": 2,
+      "coverage": 1.0
+     },
+     "US/en/annual_report": {
+      "pages": 2,
+      "scored": 2,
+      "coverage": 1.0
+     }
+    },
+    "macro_cer_strict": 0.10218101344808675,
+    "macro_cer_narrow": 0.08014755945445215,
+    "macro_wer": 0.03640102213958403,
+    "sum_gold_chars": 14882,
+    "micro_cer_strict": 0.08285176723558661,
+    "micro_cer_narrow": 0.06474217381369488,
+    "number_token_recall": 0.911660777385159,
+    "number_token_precision": 0.911660777385159,
+    "number_digit_present_recall": 0.9904761904761905,
+    "repetition_flagged_pages": 0,
+    "number_gold_total": 283,
+    "number_hyp_total": 283
+   }
+  },
+  "N0": {
+   "per_page": [
+    {
+     "page_status": "ok",
+     "hyp_sha256": "562b8f9a92cb1841062cc6332d80c929fbe53ab9b4d2ee1b4a5058e181046e44",
+     "cer_strict": 0.047448522829006266,
+     "cer_strict_ops": {
+      "insertions": 43,
+      "deletions": 9,
+      "substitutions": 1
+     },
+     "cer_narrow": 0.012138188608776844,
+     "cer_narrow_ops": {
+      "insertions": 6,
+      "deletions": 6,
+      "substitutions": 1
+     },
+     "numbers": {
+      "gold_total": 9,
+      "hyp_total": 9,
+      "recall_hits": 9,
+      "precision_hits": 9,
+      "recall": 1.0,
+      "precision": 1.0
+     },
+     "numbers_digit_present": {
+      "gold_total": 9,
+      "hits": 9,
+      "recall": 1.0
+     },
+     "hyp_chars": 1151,
+     "gold_chars": 1117,
+     "gold_chars_narrow": 1071,
+     "repetition_flagged": false,
+     "page_id": "r1_amec_ar2025_p029",
+     "role": "eval",
+     "stratum": "CN/zh-CN/annual_report",
+     "engine_seconds": 0.0,
+     "finish_reason": null
+    },
+    {
+     "page_status": "ok",
+     "hyp_sha256": "3086e6e93b1378a65861e8c083df74b0bbc75813ea6c1f682f6ffca9722a1da0",
+     "cer_strict": 0.03567508232711306,
+     "cer_strict_ops": {
+      "insertions": 55,
+      "deletions": 9,
+      "substitutions": 1
+     },
+     "cer_narrow": 0.0076560659599528855,
+     "cer_narrow_ops": {
+      "insertions": 7,
+      "deletions": 6,
+      "substitutions": 0
+     },
+     "numbers": {
+      "gold_total": 30,
+      "hyp_total": 30,
+      "recall_hits": 30,
+      "precision_hits": 30,
+      "recall": 1.0,
+      "precision": 1.0
+     },
+     "numbers_digit_present": {
+      "gold_total": 30,
+      "hits": 30,
+      "recall": 1.0
+     },
+     "hyp_chars": 1868,
+     "gold_chars": 1822,
+     "gold_chars_narrow": 1698,
+     "repetition_flagged": false,
+     "page_id": "r1_wuxi_ar2022_p010",
+     "role": "eval",
+     "stratum": "CN/zh-CN/annual_report",
+     "engine_seconds": 0.0,
+     "finish_reason": null
+    },
+    {
+     "page_status": "ok",
+     "hyp_sha256": "8c73a1b771e15c047af3d7b4daa6645968ab52002198b6378b648adca59df573",
+     "cer_strict": 0.03484688489968321,
+     "cer_strict_ops": {
+      "insertions": 24,
+      "deletions": 3,
+      "substitutions": 6
+     },
+     "cer_narrow": 0.0032858707557502738,
+     "cer_narrow_ops": {
+      "insertions": 1,
+      "deletions": 1,
+      "substitutions": 1
+     },
+     "numbers": {
+      "gold_total": 42,
+      "hyp_total": 42,
+      "recall_hits": 41,
+      "precision_hits": 41,
+      "recall": 0.9761904761904762,
+      "precision": 0.9761904761904762
+     },
+     "numbers_digit_present": {
+      "gold_total": 42,
+      "hits": 42,
+      "recall": 1.0
+     },
+     "hyp_chars": 968,
+     "gold_chars": 947,
+     "gold_chars_narrow": 913,
+     "repetition_flagged": false,
+     "page_id": "r1_ksy_fy2025_results_p003",
+     "role": "holdout",
+     "stratum": "HK/zh/annual_results_announcement",
+     "engine_seconds": 0.0,
+     "finish_reason": null
+    },
+    {
+     "page_status": "ok",
+     "hyp_sha256": "833c5f2266054456952cb982ff831900b19016b4f409724c8836e041ac7b1721",
+     "cer_strict": 0.07222491517207949,
+     "cer_strict_ops": {
+      "insertions": 64,
+      "deletions": 6,
+      "substitutions": 79
+     },
+     "cer_narrow": 0.03732590529247911,
+     "cer_narrow_ops": {
+      "insertions": 10,
+      "deletions": 13,
+      "substitutions": 44
+     },
+     "numbers": {
+      "gold_total": 183,
+      "hyp_total": 183,
+      "recall_hits": 183,
+      "precision_hits": 183,
+      "recall": 1.0,
+      "precision": 1.0
+     },
+     "numbers_digit_present": {
+      "gold_total": 183,
+      "hits": 183,
+      "recall": 1.0
+     },
+     "hyp_chars": 2121,
+     "gold_chars": 2063,
+     "gold_chars_narrow": 1795,
+     "repetition_flagged": false,
+     "page_id": "r1_ksy_fy2025_income_p012",
+     "role": "eval",
+     "stratum": "HK/zh/annual_results_announcement",
+     "engine_seconds": 0.0,
+     "finish_reason": null
+    },
+    {
+     "page_status": "ok",
+     "hyp_sha256": "7681aa87135d70bcdf3e1c0b507727a1a284641202ca8885823a419b12a5cc50",
+     "cer_strict": 0.5849056603773585,
+     "cer_strict_ops": {
+      "insertions": 109,
+      "deletions": 87,
+      "substitutions": 145
+     },
+     "cer_narrow": 0.5567567567567567,
+     "cer_narrow_ops": {
+      "insertions": 86,
+      "deletions": 86,
+      "substitutions": 137
+     },
+     "numbers": {
+      "gold_total": 3,
+      "hyp_total": 3,
+      "recall_hits": 3,
+      "precision_hits": 3,
+      "recall": 1.0,
+      "precision": 1.0
+     },
+     "numbers_digit_present": {
+      "gold_total": 3,
+      "hits": 3,
+      "recall": 1.0
+     },
+     "hyp_chars": 605,
+     "gold_chars": 583,
+     "gold_chars_narrow": 555,
+     "repetition_flagged": false,
+     "page_id": "r1_biren_ar2025_p030",
+     "role": "eval",
+     "stratum": "HK/zh/annual_report",
+     "engine_seconds": 0.0,
+     "finish_reason": null
+    },
+    {
+     "page_status": "ok",
+     "hyp_sha256": "029a3a224fd84a5701b331b18d836d6117b52b023ff8a0695b7ef7e3b4c1c4ef",
+     "cer_strict": 0.025369512464151776,
+     "cer_strict_ops": {
+      "insertions": 100,
+      "deletions": 11,
+      "substitutions": 4
+     },
+     "cer_narrow": 0.0033205619412515963,
+     "cer_narrow_ops": {
+      "insertions": 0,
+      "deletions": 12,
+      "substitutions": 1
+     },
+     "wer": 0.004846526655896607,
+     "wer_ops": {
+      "insertions": 0,
+      "deletions": 2,
+      "substitutions": 1
+     },
+     "numbers": {
+      "gold_total": 1,
+      "hyp_total": 1,
+      "recall_hits": 1,
+      "precision_hits": 1,
+      "recall": 1.0,
+      "precision": 1.0
+     },
+     "numbers_digit_present": {
+      "gold_total": 1,
+      "hits": 1,
+      "recall": 1.0
+     },
+     "hyp_chars": 4622,
+     "gold_chars": 4533,
+     "gold_chars_narrow": 3915,
+     "repetition_flagged": false,
+     "page_id": "r1_brk2007_p001",
+     "role": "holdout",
+     "stratum": "US/en/annual_report",
+     "engine_seconds": 0.0,
+     "finish_reason": null
+    },
+    {
+     "page_status": "ok",
+     "hyp_sha256": "9154831705eb62cd25e8f6523363ac6d737caf79d9a7b15787521824b2d541ba",
+     "cer_strict": 0.02436468430704742,
+     "cer_strict_ops": {
+      "insertions": 93,
+      "deletions": 0,
+      "substitutions": 0
+     },
+     "cer_narrow": 0.0,
+     "cer_narrow_ops": {
+      "insertions": 0,
+      "deletions": 0,
+      "substitutions": 0
+     },
+     "wer": 0.0,
+     "wer_ops": {
+      "insertions": 0,
+      "deletions": 0,
+      "substitutions": 0
+     },
+     "numbers": {
+      "gold_total": 15,
+      "hyp_total": 15,
+      "recall_hits": 15,
+      "precision_hits": 15,
+      "recall": 1.0,
+      "precision": 1.0
+     },
+     "numbers_digit_present": {
+      "gold_total": 15,
+      "hits": 15,
+      "recall": 1.0
+     },
+     "hyp_chars": 3910,
+     "gold_chars": 3817,
+     "gold_chars_narrow": 3182,
+     "repetition_flagged": false,
+     "page_id": "r1_brk2007_p005",
+     "role": "eval",
+     "stratum": "US/en/annual_report",
+     "engine_seconds": 0.0,
+     "finish_reason": null
+    }
+   ],
+   "aggregate": {
+    "pages_total": 7,
+    "pages_scored": 7,
+    "pages_excluded": 0,
+    "coverage_by_stratum": {
+     "CN/zh-CN/annual_report": {
+      "pages": 2,
+      "scored": 2,
+      "coverage": 1.0
+     },
+     "HK/zh/annual_report": {
+      "pages": 1,
+      "scored": 1,
+      "coverage": 1.0
+     },
+     "HK/zh/annual_results_announcement": {
+      "pages": 2,
+      "scored": 2,
+      "coverage": 1.0
+     },
+     "US/en/annual_report": {
+      "pages": 2,
+      "scored": 2,
+      "coverage": 1.0
+     }
+    },
+    "macro_cer_strict": 0.11783360891091996,
+    "macro_cer_narrow": 0.08864047847356678,
+    "macro_wer": 0.0024232633279483036,
+    "sum_gold_chars": 14882,
+    "micro_cer_strict": 0.0570487837656229,
+    "micro_cer_narrow": 0.03183791606367583,
+    "number_token_recall": 0.9964664310954063,
+    "number_token_precision": 0.9964664310954063,
+    "number_digit_present_recall": 1.0,
+    "repetition_flagged_pages": 0,
+    "number_gold_total": 283,
+    "number_hyp_total": 283
+   }
+  },
+  "X1F_attempt1": {
+   "per_page": [
+    {
+     "page_status": "error",
+     "reason_excluded": "error",
+     "page_id": "r1_amec_ar2025_p029",
+     "role": "eval",
+     "stratum": "CN/zh-CN/annual_report",
+     "engine_seconds": 57.0829276000004,
+     "finish_reason": null
+    },
+    {
+     "page_status": "error",
+     "reason_excluded": "error",
+     "page_id": "r1_wuxi_ar2022_p010",
+     "role": "eval",
+     "stratum": "CN/zh-CN/annual_report",
+     "engine_seconds": null,
+     "finish_reason": null
+    },
+    {
+     "page_status": "error",
+     "reason_excluded": "error",
+     "page_id": "r1_ksy_fy2025_results_p003",
+     "role": "holdout",
+     "stratum": "HK/zh/annual_results_announcement",
+     "engine_seconds": null,
+     "finish_reason": null
+    },
+    {
+     "page_status": "error",
+     "reason_excluded": "error",
+     "page_id": "r1_ksy_fy2025_income_p012",
+     "role": "eval",
+     "stratum": "HK/zh/annual_results_announcement",
+     "engine_seconds": null,
+     "finish_reason": null
+    },
+    {
+     "page_status": "error",
+     "reason_excluded": "error",
+     "page_id": "r1_biren_ar2025_p030",
+     "role": "eval",
+     "stratum": "HK/zh/annual_report",
+     "engine_seconds": null,
+     "finish_reason": null
+    },
+    {
+     "page_status": "error",
+     "reason_excluded": "error",
+     "page_id": "r1_brk2007_p001",
+     "role": "holdout",
+     "stratum": "US/en/annual_report",
+     "engine_seconds": null,
+     "finish_reason": null
+    },
+    {
+     "page_status": "error",
+     "reason_excluded": "error",
+     "page_id": "r1_brk2007_p005",
+     "role": "eval",
+     "stratum": "US/en/annual_report",
+     "engine_seconds": null,
+     "finish_reason": null
+    }
+   ],
+   "aggregate": {
+    "pages_total": 7,
+    "pages_scored": 0,
+    "pages_excluded": 7,
+    "coverage_by_stratum": {
+     "CN/zh-CN/annual_report": {
+      "pages": 2,
+      "scored": 0,
+      "coverage": 0.0
+     },
+     "HK/zh/annual_report": {
+      "pages": 1,
+      "scored": 0,
+      "coverage": 0.0
+     },
+     "HK/zh/annual_results_announcement": {
+      "pages": 2,
+      "scored": 0,
+      "coverage": 0.0
+     },
+     "US/en/annual_report": {
+      "pages": 2,
+      "scored": 0,
+      "coverage": 0.0
+     }
+    },
+    "macro_cer_strict": null,
+    "macro_cer_narrow": null,
+    "macro_wer": null,
+    "sum_gold_chars": 0,
+    "micro_cer_strict": null,
+    "micro_cer_narrow": null,
+    "number_token_recall": null,
+    "number_token_precision": null,
+    "number_digit_present_recall": null,
+    "repetition_flagged_pages": 0,
+    "status": "resource_blocked",
+    "reason": "single measured attempt inside this campaign: card cap 1.142 GiB at attempt start (avail 2.28 GiB / 2) < measured fixed load cost 1.33 GiB; child MemoryError at load. Later check: cap 0.838 GiB. No retry: the card forbids repeated timeouts, and the condition (available RAM) never improved during the campaign."
+   }
+  },
+  "X2": {
+   "aggregate": {
+    "pages_scored": 0,
+    "status": "not_run",
+    "reason": "PP-DocLayoutV3 requires the paddlex runtime; not installed under the frozen resource bounds; no two-stage leaderboard claim"
+   },
+   "per_page": []
+  }
+ },
+ "fact_match": {
+  "R0": {
+   "per_page": [
+    {
+     "produced": true,
+     "facts_hit": 20,
+     "facts_total": 20,
+     "conditions_hit": 12,
+     "conditions_total": 12,
+     "numbers_hit": 4,
+     "numbers_total": 4,
+     "page_id": "r1_amec_ar2025_p029"
+    },
+    {
+     "produced": true,
+     "facts_hit": 23,
+     "facts_total": 25,
+     "conditions_hit": 21,
+     "conditions_total": 23,
+     "numbers_hit": 27,
+     "numbers_total": 29,
+     "page_id": "r1_wuxi_ar2022_p010"
+    },
+    {
+     "produced": true,
+     "facts_hit": 19,
+     "facts_total": 24,
+     "conditions_hit": 9,
+     "conditions_total": 11,
+     "numbers_hit": 36,
+     "numbers_total": 40,
+     "page_id": "r1_ksy_fy2025_results_p003"
+    },
+    {
+     "produced": true,
+     "facts_hit": 5,
+     "facts_total": 19,
+     "conditions_hit": 3,
+     "conditions_total": 8,
+     "numbers_hit": 182,
+     "numbers_total": 199,
+     "page_id": "r1_ksy_fy2025_income_p012"
+    },
+    {
+     "produced": true,
+     "facts_hit": 15,
+     "facts_total": 15,
+     "conditions_hit": 13,
+     "conditions_total": 13,
+     "numbers_hit": 3,
+     "numbers_total": 4,
+     "page_id": "r1_biren_ar2025_p030"
+    },
+    {
+     "produced": true,
+     "facts_hit": 17,
+     "facts_total": 36,
+     "conditions_hit": 7,
+     "conditions_total": 14,
+     "numbers_hit": 1,
+     "numbers_total": 6,
+     "page_id": "r1_brk2007_p001"
+    },
+    {
+     "produced": true,
+     "facts_hit": 7,
+     "facts_total": 32,
+     "conditions_hit": 10,
+     "conditions_total": 17,
+     "numbers_hit": 15,
+     "numbers_total": 19,
+     "page_id": "r1_brk2007_p005"
+    }
+   ],
+   "totals": {
+    "facts_hit": 106,
+    "facts_total": 171,
+    "conditions_hit": 75,
+    "conditions_total": 98,
+    "numbers_hit": 268,
+    "numbers_total": 301,
+    "pages_produced": 7,
+    "pages_total": 7
+   }
+  },
+  "N0": {
+   "per_page": [
+    {
+     "produced": true,
+     "facts_hit": 20,
+     "facts_total": 20,
+     "conditions_hit": 12,
+     "conditions_total": 12,
+     "numbers_hit": 4,
+     "numbers_total": 4,
+     "page_id": "r1_amec_ar2025_p029"
+    },
+    {
+     "produced": true,
+     "facts_hit": 24,
+     "facts_total": 25,
+     "conditions_hit": 21,
+     "conditions_total": 23,
+     "numbers_hit": 28,
+     "numbers_total": 29,
+     "page_id": "r1_wuxi_ar2022_p010"
+    },
+    {
+     "produced": true,
+     "facts_hit": 20,
+     "facts_total": 24,
+     "conditions_hit": 11,
+     "conditions_total": 11,
+     "numbers_hit": 36,
+     "numbers_total": 40,
+     "page_id": "r1_ksy_fy2025_results_p003"
+    },
+    {
+     "produced": true,
+     "facts_hit": 10,
+     "facts_total": 19,
+     "conditions_hit": 4,
+     "conditions_total": 8,
+     "numbers_hit": 183,
+     "numbers_total": 199,
+     "page_id": "r1_ksy_fy2025_income_p012"
+    },
+    {
+     "produced": true,
+     "facts_hit": 15,
+     "facts_total": 15,
+     "conditions_hit": 13,
+     "conditions_total": 13,
+     "numbers_hit": 3,
+     "numbers_total": 4,
+     "page_id": "r1_biren_ar2025_p030"
+    },
+    {
+     "produced": true,
+     "facts_hit": 18,
+     "facts_total": 36,
+     "conditions_hit": 7,
+     "conditions_total": 14,
+     "numbers_hit": 1,
+     "numbers_total": 6,
+     "page_id": "r1_brk2007_p001"
+    },
+    {
+     "produced": true,
+     "facts_hit": 8,
+     "facts_total": 32,
+     "conditions_hit": 11,
+     "conditions_total": 17,
+     "numbers_hit": 16,
+     "numbers_total": 19,
+     "page_id": "r1_brk2007_p005"
+    }
+   ],
+   "totals": {
+    "facts_hit": 115,
+    "facts_total": 171,
+    "conditions_hit": 79,
+    "conditions_total": 98,
+    "numbers_hit": 271,
+    "numbers_total": 301,
+    "pages_produced": 7,
+    "pages_total": 7
+   }
+  },
+  "X1F_attempt1": {
+   "per_page": [
+    {
+     "produced": false,
+     "facts_hit": 0,
+     "facts_total": 20,
+     "conditions_hit": 0,
+     "conditions_total": 12,
+     "numbers_hit": 0,
+     "numbers_total": 4,
+     "page_id": "r1_amec_ar2025_p029"
+    },
+    {
+     "produced": false,
+     "facts_hit": 0,
+     "facts_total": 25,
+     "conditions_hit": 0,
+     "conditions_total": 23,
+     "numbers_hit": 0,
+     "numbers_total": 29,
+     "page_id": "r1_wuxi_ar2022_p010"
+    },
+    {
+     "produced": false,
+     "facts_hit": 0,
+     "facts_total": 24,
+     "conditions_hit": 0,
+     "conditions_total": 11,
+     "numbers_hit": 0,
+     "numbers_total": 40,
+     "page_id": "r1_ksy_fy2025_results_p003"
+    },
+    {
+     "produced": false,
+     "facts_hit": 0,
+     "facts_total": 19,
+     "conditions_hit": 0,
+     "conditions_total": 8,
+     "numbers_hit": 0,
+     "numbers_total": 199,
+     "page_id": "r1_ksy_fy2025_income_p012"
+    },
+    {
+     "produced": false,
+     "facts_hit": 0,
+     "facts_total": 15,
+     "conditions_hit": 0,
+     "conditions_total": 13,
+     "numbers_hit": 0,
+     "numbers_total": 4,
+     "page_id": "r1_biren_ar2025_p030"
+    },
+    {
+     "produced": false,
+     "facts_hit": 0,
+     "facts_total": 36,
+     "conditions_hit": 0,
+     "conditions_total": 14,
+     "numbers_hit": 0,
+     "numbers_total": 6,
+     "page_id": "r1_brk2007_p001"
+    },
+    {
+     "produced": false,
+     "facts_hit": 0,
+     "facts_total": 32,
+     "conditions_hit": 0,
+     "conditions_total": 17,
+     "numbers_hit": 0,
+     "numbers_total": 19,
+     "page_id": "r1_brk2007_p005"
+    }
+   ],
+   "totals": {
+    "facts_hit": 0,
+    "facts_total": 171,
+    "conditions_hit": 0,
+    "conditions_total": 98,
+    "numbers_hit": 0,
+    "numbers_total": 301,
+    "pages_produced": 0,
+    "pages_total": 7
+   }
+  }
+ }
+}

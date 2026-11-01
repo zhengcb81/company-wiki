@@ -295,9 +295,12 @@ def run_campaign_batch(
                 ledger = record(ledger, ledger_path, arm=arm, page_id=pid,
                                 seconds=0.0, status="not_run")
                 continue
+            started = time.perf_counter()
             rec = backend.run_page(page["png"])
+            elapsed = time.perf_counter() - started
             rec["page_id"] = pid
-            rec.setdefault("request_seconds", rec.get("engine_seconds", 0.0))
+            rec["request_seconds"] = float(rec.get("request_seconds") or elapsed)
+            rec["engine_seconds"] = float(rec.get("engine_seconds") or elapsed)
             cache.put(key, rec)
             charged.append(rec)
             ledger = record(ledger, ledger_path, arm=arm, page_id=pid,
@@ -307,7 +310,12 @@ def run_campaign_batch(
     elif arm == "N0":
         from .backends.native_n0 import NativeN0
 
-        backend = NativeN0(manifest_path)
+        gold_path_for_roles = None
+        if manifest_path is not None:
+            candidate = Path(manifest_path).parent / "r1_gold.json"
+            if candidate.is_file():
+                gold_path_for_roles = candidate
+        backend = NativeN0(manifest_path, gold_path=gold_path_for_roles)
         for page in pages:
             rec = backend.run_page(page["page_id"])
             rec["page_id"] = page["page_id"]

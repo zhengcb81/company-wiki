@@ -1,0 +1,254 @@
+{
+ "R0": {
+  "per_page": [
+   {
+    "produced": true,
+    "facts_hit": 20,
+    "facts_total": 20,
+    "conditions_hit": 12,
+    "conditions_total": 12,
+    "numbers_hit": 4,
+    "numbers_total": 4,
+    "page_id": "r1_amec_ar2025_p029"
+   },
+   {
+    "produced": true,
+    "facts_hit": 23,
+    "facts_total": 25,
+    "conditions_hit": 21,
+    "conditions_total": 23,
+    "numbers_hit": 27,
+    "numbers_total": 29,
+    "page_id": "r1_wuxi_ar2022_p010"
+   },
+   {
+    "produced": true,
+    "facts_hit": 19,
+    "facts_total": 24,
+    "conditions_hit": 9,
+    "conditions_total": 11,
+    "numbers_hit": 36,
+    "numbers_total": 40,
+    "page_id": "r1_ksy_fy2025_results_p003"
+   },
+   {
+    "produced": true,
+    "facts_hit": 5,
+    "facts_total": 19,
+    "conditions_hit": 3,
+    "conditions_total": 8,
+    "numbers_hit": 182,
+    "numbers_total": 199,
+    "page_id": "r1_ksy_fy2025_income_p012"
+   },
+   {
+    "produced": true,
+    "facts_hit": 15,
+    "facts_total": 15,
+    "conditions_hit": 13,
+    "conditions_total": 13,
+    "numbers_hit": 3,
+    "numbers_total": 4,
+    "page_id": "r1_biren_ar2025_p030"
+   },
+   {
+    "produced": true,
+    "facts_hit": 17,
+    "facts_total": 36,
+    "conditions_hit": 7,
+    "conditions_total": 14,
+    "numbers_hit": 1,
+    "numbers_total": 6,
+    "page_id": "r1_brk2007_p001"
+   },
+   {
+    "produced": true,
+    "facts_hit": 7,
+    "facts_total": 32,
+    "conditions_hit": 10,
+    "conditions_total": 17,
+    "numbers_hit": 15,
+    "numbers_total": 19,
+    "page_id": "r1_brk2007_p005"
+   }
+  ],
+  "totals": {
+   "facts_hit": 106,
+   "facts_total": 171,
+   "conditions_hit": 75,
+   "conditions_total": 98,
+   "numbers_hit": 268,
+   "numbers_total": 301,
+   "pages_produced": 7,
+   "pages_total": 7
+  }
+ },
+ "N0": {
+  "per_page": [
+   {
+    "produced": true,
+    "facts_hit": 20,
+    "facts_total": 20,
+    "conditions_hit": 12,
+    "conditions_total": 12,
+    "numbers_hit": 4,
+    "numbers_total": 4,
+    "page_id": "r1_amec_ar2025_p029"
+   },
+   {
+    "produced": true,
+    "facts_hit": 24,
+    "facts_total": 25,
+    "conditions_hit": 21,
+    "conditions_total": 23,
+    "numbers_hit": 28,
+    "numbers_total": 29,
+    "page_id": "r1_wuxi_ar2022_p010"
+   },
+   {
+    "produced": true,
+    "facts_hit": 20,
+    "facts_total": 24,
+    "conditions_hit": 11,
+    "conditions_total": 11,
+    "numbers_hit": 36,
+    "numbers_total": 40,
+    "page_id": "r1_ksy_fy2025_results_p003"
+   },
+   {
+    "produced": true,
+    "facts_hit": 10,
+    "facts_total": 19,
+    "conditions_hit": 4,
+    "conditions_total": 8,
+    "numbers_hit": 183,
+    "numbers_total": 199,
+    "page_id": "r1_ksy_fy2025_income_p012"
+   },
+   {
+    "produced": true,
+    "facts_hit": 15,
+    "facts_total": 15,
+    "conditions_hit": 13,
+    "conditions_total": 13,
+    "numbers_hit": 3,
+    "numbers_total": 4,
+    "page_id": "r1_biren_ar2025_p030"
+   },
+   {
+    "produced": true,
+    "facts_hit": 18,
+    "facts_total": 36,
+    "conditions_hit": 7,
+    "conditions_total": 14,
+    "numbers_hit": 1,
+    "numbers_total": 6,
+    "page_id": "r1_brk2007_p001"
+   },
+   {
+    "produced": true,
+    "facts_hit": 8,
+    "facts_total": 32,
+    "conditions_hit": 11,
+    "conditions_total": 17,
+    "numbers_hit": 16,
+    "numbers_total": 19,
+    "page_id": "r1_brk2007_p005"
+   }
+  ],
+  "totals": {
+   "facts_hit": 115,
+   "facts_total": 171,
+   "conditions_hit": 79,
+   "conditions_total": 98,
+   "numbers_hit": 271,
+   "numbers_total": 301,
+   "pages_produced": 7,
+   "pages_total": 7
+  }
+ },
+ "X1F_attempt1": {
+  "per_page": [
+   {
+    "produced": false,
+    "facts_hit": 0,
+    "facts_total": 20,
+    "conditions_hit": 0,
+    "conditions_total": 12,
+    "numbers_hit": 0,
+    "numbers_total": 4,
+    "page_id": "r1_amec_ar2025_p029"
+   },
+   {
+    "produced": false,
+    "facts_hit": 0,
+    "facts_total": 25,
+    "conditions_hit": 0,
+    "conditions_total": 23,
+    "numbers_hit": 0,
+    "numbers_total": 29,
+    "page_id": "r1_wuxi_ar2022_p010"
+   },
+   {
+    "produced": false,
+    "facts_hit": 0,
+    "facts_total": 24,
+    "conditions_hit": 0,
+    "conditions_total": 11,
+    "numbers_hit": 0,
+    "numbers_total": 40,
+    "page_id": "r1_ksy_fy2025_results_p003"
+   },
+   {
+    "produced": false,
+    "facts_hit": 0,
+    "facts_total": 19,
+    "conditions_hit": 0,
+    "conditions_total": 8,
+    "numbers_hit": 0,
+    "numbers_total": 199,
+    "page_id": "r1_ksy_fy2025_income_p012"
+   },
+   {
+    "produced": false,
+    "facts_hit": 0,
+    "facts_total": 15,
+    "conditions_hit": 0,
+    "conditions_total": 13,
+    "numbers_hit": 0,
+    "numbers_total": 4,
+    "page_id": "r1_biren_ar2025_p030"
+   },
+   {
+    "produced": false,
+    "facts_hit": 0,
+    "facts_total": 36,
+    "conditions_hit": 0,
+    "conditions_total": 14,
+    "numbers_hit": 0,
+    "numbers_total": 6,
+    "page_id": "r1_brk2007_p001"
+   },
+   {
+    "produced": false,
+    "facts_hit": 0,
+    "facts_total": 32,
+    "conditions_hit": 0,
+    "conditions_total": 17,
+    "numbers_hit": 0,
+    "numbers_total": 19,
+    "page_id": "r1_brk2007_p005"
+   }
+  ],
+  "totals": {
+   "facts_hit": 0,
+   "facts_total": 171,
+   "conditions_hit": 0,
+   "conditions_total": 98,
+   "numbers_hit": 0,
+   "numbers_total": 301,
+   "pages_produced": 0,
+   "pages_total": 7
+  }
+ }
+}

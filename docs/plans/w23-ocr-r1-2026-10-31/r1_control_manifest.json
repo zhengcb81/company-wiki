@@ -1,0 +1,42 @@
+{
+ "schema_version": "cwp-ocr-r1-control-manifest/1",
+ "plan_id": "w23-ocr-r1-2026-10-31",
+ "render": {
+  "renderer": "PIL",
+  "dpi": "n/a",
+  "color": "RGB"
+ },
+ "pages": [
+  {
+   "page_id": "r1_formula_control",
+   "label": "synthetic formula-symbol control (declared, not real-document coverage)",
+   "pdf": null,
+   "pdf_page_index": null,
+   "png": "C:\\Users\\郑曾波\\Projects\\company-wiki-w23-xiaomi-ocr-r1\\.w23_cache\\r1_pages\\r1_formula_control.png",
+   "png_sha256": "c1fdb64365c337e2b67d21076a0345c7a43262a7aee5010ea19111459882e532",
+   "png_px": [
+    1654,
+    2339
+   ],
+   "market": null,
+   "language": "symbols",
+   "genre": "synthetic_formula_control",
+   "native_text_layer_chars": 0,
+   "synthetic_degradation": true,
+   "why": "card C: at least one small formula-symbol control from a synthetic fixture, since the frozen real pages contain no formula",
+   "expected_symbols": [
+    "=",
+    "²",
+    "Δ",
+    "−",
+    "×",
+    "f(x)",
+    "E",
+    "mc",
+    "TΔS",
+    "23.7"
+   ]
+  }
+ ],
+ "note": "control page only; excluded from every real-document denominator"
+}
