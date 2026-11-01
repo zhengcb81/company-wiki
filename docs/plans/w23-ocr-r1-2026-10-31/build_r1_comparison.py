@@ -1,3 +1,4 @@
+"""OBSOLETE (kept for history): superseded by build_r1_delivery.py (single source); kept for history."""
 """R1 comparison builder: one capture -> comparison.json/md + per-page records.
 
 Reads only the campaign artifacts (ledger, per-arm run JSONs, frozen manifest

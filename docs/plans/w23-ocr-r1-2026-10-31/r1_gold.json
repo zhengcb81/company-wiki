@@ -1,7 +1,7 @@
 {
  "schema_version": "cwp-ocr-r1-gold/1",
  "plan_id": "w23-ocr-r1-2026-10-31",
- "method": "independent reviewer visual transcription from the frozen 200-DPI renders; no engine output existed for these pages at transcription time",
+ "method": "Independent reviewer transcription from the frozen 200-DPI PNGs. The PDFs have native text layers; the reviewer reports not having used them as ground truth. On clean born-digital pages an accurate transcription is expected to closely match the native layer, so near-equality is disclosed as such and is not evidence either way. A retired weak page is excluded from all denominators; its revision-1 transcription was not committed and cannot be recovered.",
  "reviewer": "independent agent (not the implementer)",
  "role_assignment": {
   "policy": "exactly 2 holdout pages, 1 EN + 1 HK, each holdout document contributing one eval page; chosen per instruction",
@@ -718,19 +718,22 @@
    "r1_ksy_fy2025_results_p003",
    "r1_ksy_fy2025_income_p012"
   ],
-  "changed_pages": [],
+  "changed_pages": [
+   "r1_wuxi_ar2022_p010"
+  ],
   "unchanged_pages": [
    "r1_amec_ar2025_p029",
-   "r1_wuxi_ar2022_p010",
    "r1_biren_ar2025_p030",
    "r1_brk2007_p001",
-   "r1_brk2007_p005"
+   "r1_brk2007_p005",
+   "r1_ksy_fy2025_income_p012",
+   "r1_ksy_fy2025_results_p003"
   ],
   "why": "r1_ksy_fy2025_results_p001 (board-list / signature page) was rejected as a holdout item on coverage grounds, not because the independent reviewer's transcription of it was wrong: it carries only 158 visible characters, contains no business numerals at all (only a caution clause, signature block, date and board list) and is roughly two-thirds blank, so it exercised almost none of the R1 card's fact/condition/number/reading-order requirements. It was replaced by two pages from the SAME source document (same PDF, sha 9f35944bcca5): r1_ksy_fy2025_results_p003 (Q4 FY2025 results prose, 41 numeric tokens) and r1_ksy_fy2025_income_p012 (未經審計簡明合併綜合虧損表, a real 9-column business table). The p012 page closes the previously recorded 'no table in the frozen set' gap for the HK market.",
   "decided_by": "coverage judgement by the requester/coordinator of the W23-OCR-R1 card; executed and re-signed by the same independent reviewer, with the original r1_ksy_fy2025_results_p001 transcription (which was accepted as correct) retired rather than rewritten",
   "timing": "the two new pages were transcribed by the independent reviewer from the frozen 200-DPI PNGs BEFORE any OCR engine was run on them; neither new page had been exposed to any engine, pilot or tuning pass at that time",
-  "integrity": "the five retained page entries (transcripts, facts, conditions, numbers, non_text_regions, notes) were carried over byte-for-byte from revision 1; no transcript was edited. schema_version, plan_id, method and reviewer are unchanged. The superseded p001 entry was removed, not merged.",
-  "impact_on_denominators": "visible-text characters transcribed across the frozen set rise from 11,842 to 12,001 for the retained five pages plus the two new pages (see per-page counts in the final reviewer report); the page denominator of the frozen set changes from 6 to 7 pages, of which 2 remain holdout and 5 are eval. No previously recorded fact, condition or number was invalidated by this revision.",
+  "integrity": "transcripts were edited exactly once after the freeze: the Wuxi correction above, found by the independent final review; metrics were recomputed from the same captured outputs; no engine re-ran",
+  "impact_on_denominators": "gold content: +2 CJK characters on r1_wuxi_ar2022_p010 (1820 -> 1822 total chars for that page); fact/condition denominators unchanged (25 facts, 23 conditions); number entries unchanged",
   "corrections": [
    {
     "page_id": "r1_wuxi_ar2022_p010",
@@ -753,7 +756,8 @@
  "archived_pages": {
   "r1_ksy_fy2025_results_p001": {
    "status": "retired in revision 2 (weak item: 158 visible chars, no business numerals)",
-   "note": "transcription retired, not rewritten; not part of any denominator"
+   "transcription_preserved": false,
+   "note": "the revision-1 transcription existed only in the reviewer working file before the freeze commit and was not committed; it cannot be recovered from git. The page was a board-list page with no business numerals and is outside every denominator. Recorded as a provenance limitation, not rewritten."
   }
  }
 }

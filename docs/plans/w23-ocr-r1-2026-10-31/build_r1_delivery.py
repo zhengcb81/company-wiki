@@ -198,6 +198,9 @@ def main() -> int:
                 anchors = [s for s in formula["symbols"] if any(c.isalnum() for c in s)]
                 anchor = max(anchors, key=len) if anchors else ""
                 line = next((ln for ln in lines_out if anchor and anchor in ln), None)
+                if line is None and lines_out:
+                    # Fallback: the output line covering the most declared symbols.
+                    line = max(lines_out, key=lambda ln: sum(1 for s in formula["symbols"] if s in ln))
                 missing = [sym for sym in formula["symbols"]
                            if line is None or sym not in line]
                 formulas.append({"text": formula["text"], "anchor": anchor,
@@ -300,6 +303,23 @@ def main() -> int:
                                             for name, n in
                                             ((s, sum(1 for pid in ids if stratum[pid] == s))
                                              for s in sorted(set(stratum.values())))},
+                    "per_stratum": {name: {"pages": n, "scored": 0, "coverage": 0.0,
+                                           "macro_cer_strict": None, "macro_cer_narrow": None,
+                                           "macro_wer": None}
+                                    for name, n in
+                                    ((s, sum(1 for pid in ids if stratum[pid] == s))
+                                     for s in sorted(set(stratum.values())))},
+                    "eval_split": {"pages": sum(1 for pid in ids if role[pid] == "eval"),
+                                   "scored": 0, "macro_cer_strict": None},
+                    "holdout_split": {"pages": sum(1 for pid in ids if role[pid] == "holdout"),
+                                      "scored": 0, "macro_cer_strict": None},
+                    "fact_match": {
+                        "facts_hit": 0, "facts_total": sum(len(gold["pages"][pid].get("facts", [])) for pid in ids),
+                        "facts_numeric_hit": 0,
+                        "conditions_hit": 0, "conditions_total": sum(len(gold["pages"][pid].get("conditions", [])) for pid in ids),
+                        "numbers_hit": 0, "numbers_total": None,
+                        "note": "NOT_RUN: zero hits over the full denominators, never zero-filled as produced text",
+                    },
                 },
             },
         },
@@ -358,7 +378,12 @@ def main() -> int:
         "Gold was transcribed by an independent reviewer from the PNGs (revision 3; the revision "
         "block records the HK page swap and the correction of the Wuxi line 客户对公司的服务需求, "
         "which was found by the final review and corrected before this report; metrics were "
-        "recomputed from the same captured outputs, no engine re-ran).",
+        "recomputed from the same captured outputs, no engine re-ran). **Disclosure:** the reviewer "
+        "reports having used the PNGs only; on clean born-digital pages an accurate transcription is "
+        "expected to closely match the native text layer, so near-equality is not evidence either way. "
+        "The retired HK page's revision-1 transcription was never committed and cannot be recovered "
+        "from git; `archived_pages` records that provenance limitation and the page's exclusion from "
+        "every denominator.",
         "",
         "## 3. Results — full denominators",
         "",
@@ -444,10 +469,11 @@ def main() -> int:
     ]
     for r in receipts:
         mem = r["memory"] or {}
+        stage_list = [s["stage"] for s in r["child"]["stages"]]
         lines.append(f"- `{r['file']}`: cap {mem.get('cap_gib')} GiB, recorded peak "
                      f"{mem.get('job_peak_commit_gib')} GiB, rc {r['child']['return_code']}, "
-                     f"wall {r['child']['wall_seconds']} s; stages: "
-                     f"{', '.join(s['stage'] for s in r['child']['stages'][:6])}")
+                     f"wall {r['child']['wall_seconds']} s; {len(stage_list)} stage events, "
+                     f"last: {stage_list[-1] if stage_list else 'none'}")
     lines += [
         "",
         "Attempt 2 is the record: the model loaded (mapped fp32) in ~97 s, page 1 failed at generate "
@@ -491,7 +517,7 @@ def main() -> int:
         {"req": "A1 HEAD/status/AGENTS + ROOT reception read; old run treated as exploratory", "status": "done",
          "evidence": "worktree at 946537d0 + cherry-picked required fix 20dd0143; ROOT reception README/ocr-review.md read"},
         {"req": "A2 one run-feasibility pilot on an old non-holdout page", "status": "done",
-         "evidence": "R0 pilot on byd_ar_2024_p021 (old eval page): ok, 19.4 s, charged to the same ledger; X1F run-feasibility = attempt 1/2"},
+         "evidence": "R0 pilot on byd_ar_2024_p021 (old eval page, never a new-sample page): ok, 19.4 s, charged to the same ledger. The pilot ran AFTER the gold freeze (deviation from the card's A2 ordering, disclosed): no new page was OCRed before the freeze, so the blind property holds; X1F run-feasibility = attempts 1/2"},
         {"req": "A3 ~6 new pages CN/HK/US, outside old sample", "status": "done",
          "evidence": "7 pages from 5 documents never used in the 2026-10-30 sample; catalog identity per page in r1_sample_manifest.json"},
         {"req": "A4 independent gold from images before any engine run; ≥2 pages to the final run", "status": "done",
@@ -504,8 +530,8 @@ def main() -> int:
          "evidence": f"ledger spent {spent:.1f}/{ledger['budget_seconds']:.0f} s; per-request cap 180 s; max_new_tokens explicit 4096"},
         {"req": "B3 cross-process budget closure, resume without renewal/re-inference", "status": "done",
          "evidence": "campaign ledger TDD (12 tests) + real cache resume run: cache_hit true, inference_runs 0, 0 re-charge (run_r0_cache_resume.json)"},
-        {"req": "B4 resources <= min(8GiB, avail/2), single concurrency", "status": "done",
-         "evidence": "Job Object caps recorded per attempt (1.142 / 1.602 GiB); single child; job peaks recorded"},
+        {"req": "B4 resources <= min(8GiB, avail/2), single concurrency", "status": "partial",
+         "evidence": "single concurrency; caps recorded per attempt (1.142 / 1.602 GiB). NOT fully met empirically: in X1 attempt 2 the recorded job peak (1.753 GiB) exceeded the recorded cap (1.602 GiB), i.e. the Job Object bound did not hold as expected — handed to ROOT as an OPEN platform question"},
         {"req": "B5 R0 isolation+recovery, N0 born-digital only", "status": "done",
          "evidence": "production config + IsolatedOCRAdapter + recover_regions; N0 = pypdfium2 text layer"},
         {"req": "B6 X2 NOT_RUN declared", "status": "done",
@@ -598,7 +624,7 @@ def main() -> int:
                        "X1F remains unrunnable at the host's measured available memory; needs ~6.5 GB free RAM or a larger host",
                    ]},
         "cleanup_and_assets": {
-            "deleted": [".w23_cache/r1_pages/*.png (7 rendered pages + 2 controls; SHAs and render scripts retained)"],
+            "deleted": ["all rendered/control PNGs under .w23_cache/r1_pages (deleted after the final run; SHAs and render scripts retained)"],
             "retained_assets": [{"path": "company-wiki-w23-xiaomi-ocr/.w23_cache/hub (read-only bf16 + declared fp32 derivative)",
                                  "bytes": 1773858913 + 3493815312,
                                  "note": "reused read-only; not copied; not committed"}],
@@ -646,6 +672,12 @@ def main() -> int:
         "allocator error, then crashed natively at 106.5 s; the recorded job peak (1.753 GiB) exceeded the recorded "
         "cap (1.602 GiB) — reported as measured and flagged. Blank negative control: 0 fabricated characters. "
         "Formula control: 1/4 symbols faithful.",
+        "",
+        "## R0 caveat",
+        "",
+        "R0 is the real RapidOCR engine plus the production recovery ladder, but it concatenates recognition "
+        "lines in backend return order — it is not the full production reading result with geometry/"
+        "`order_page_lines`. Read-order CER differences must not be read as production end-to-end quality.",
         "",
         "## Campaign",
         "",

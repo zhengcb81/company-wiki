@@ -1,7 +1,7 @@
 # W23-OCR-R1 Handoff (harness-handoff/1)
 
 - workdir `C:\Users\郑曾波\Projects\company-wiki-w23-xiaomi-ocr-r1` · branch `codex/w23-ocr-r1-20261031` · base `946537d0` · required platform fix `20dd0143` (cherry-picked)
-- final tested commit: `6705c3ea3a43323e0642a2ac3430b3fe98f1f8bd` · reviewed commit: recorded after the final review
+- final tested commit: `3042aa850721397ca097df428d569350f7f633c4` · reviewed commit: recorded after the final review
 - **Status: PARTIAL** — R0/N0 completed the 7-page frozen sample in one campaign; X1F resource-blocked with 2 measured attempts; X2 NOT_RUN.
 
 ## What ROOT receives

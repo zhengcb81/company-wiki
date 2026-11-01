@@ -10,9 +10,11 @@
   "0b0eb4bf feat: R1 campaign ledger with cross-process budget closure and TDD",
   "970532af feat: freeze R1 new sample and independently verified gold before any engine run",
   "cedbde6e feat: run R1 campaign on frozen new sample with full denominators and measured X1F resource block",
-  "6705c3ea fix: isolate OCR platform resources and retire blocking host syntax heuristics"
+  "6705c3ea fix: isolate OCR platform resources and retire blocking host syntax heuristics",
+  "1eb8cbaa fix: close R1 final-review findings - platform fix, gold correction, currency-aware counts, honest ledger, full report",
+  "3042aa85 docs: record R1 second-round fixes and findings in PWF"
  ],
- "final_tested_commit": "6705c3ea3a43323e0642a2ac3430b3fe98f1f8bd",
+ "final_tested_commit": "3042aa850721397ca097df428d569350f7f633c4",
  "final_reviewed_commit": "PENDING_REVIEW",
  "code_file_sha256": {
   "tools/ocr_comparison/campaign.py": {
@@ -71,11 +73,11 @@
  "frozen_inputs": {
   "sample_manifest": {
    "path": "docs/plans/w23-ocr-r1-2026-10-31/r1_sample_manifest.json",
-   "sha256": "6d84b65bb15c14b64e58d7f5d8a2e2f489818766aa124bcf01a26e7c375201d9"
+   "sha256": "e2cc20825e17f74c510dce7743d72071e941a5b8bb04afec425652cae668bbda"
   },
   "gold": {
    "path": "docs/plans/w23-ocr-r1-2026-10-31/r1_gold.json",
-   "sha256": "2823bd88b5fb8e81bbd58d5b7921261a71b47a0b37c138301e53b1d8b01d8a2d",
+   "sha256": "0fdce0e078430ba025a0f00d2f3543d4feee13486e6c3880d843cb2a92468fd3",
    "revision": 3
   },
   "control_manifest": {

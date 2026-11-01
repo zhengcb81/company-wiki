@@ -155,6 +155,6 @@
    "mime_type": "application/pdf"
   }
  ],
- "excluded_from_old_sample": "all six pages come from documents not used by the 2026-10-30 experiment (amec AR2025, wuxi AR2022, ksy FY2025 results, biren AR2025, berkshire2007)",
+ "excluded_from_old_sample": "seven pages from five documents not used by the 2026-10-30 experiment (amec AR2025, wuxi AR2022, ksy FY2025 results, biren AR2025, berkshire2007)",
  "notes": "Seven real-document pages (CN 2, HK 3, US 2) from five documents outside the 2026-10-30 sample; source_id/document_id/content_sha256 are taken from the catalog location rows of each PDF (advisory sha prefixes removed)."
 }

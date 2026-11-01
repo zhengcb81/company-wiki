@@ -1,4 +1,4 @@
-"""R1: render the new candidate pages for visual gold verification.
+"""R1 (HISTORICAL): initial candidate renderer. The frozen renders are what the gold review used; this script records how they were produced. Superseded by render_pages on r1_sample_manifest.json which enforces the recorded SHAs.
 
 Page selection is by measured content, not file name.  The rendered PNGs and
 their SHA-256 form the frozen input the independent gold reviewer checks.
@@ -32,7 +32,7 @@ CANDIDATES = [
         "phys": ROOT / "companies/药明康德/raw/financial_reports/药明康德：2022年年度报告.pdf",
         "page": 10,
         "market": "CN", "language": "zh-CN", "genre": "annual_report",
-        "sha_prefix": "b6375d90fe2b",
+        "sha_prefix": "f7d5c0e5",  # corrected: 2022 report, not the 2020 one
         "why": "管理层讨论与分析开头，客户数与外包比例数字",
     },
     {
@@ -110,7 +110,7 @@ manifest = {
     "plan_id": "w23-ocr-r1-2026-10-31",
     "render": {"renderer": "pypdfium2", "dpi": 200, "color": "RGB"},
     "pages": records,
-    "excluded_from_old_sample": "all six pages come from documents not used by the 2026-10-30 experiment (amec AR2025, wuxi AR2022, ksy FY2025 results, biren AR2025, berkshire2007)",
+    "excluded_from_old_sample": "seven pages come from five documents not used by the 2026-10-30 experiment (amec AR2025, wuxi AR2022, ksy FY2025 results, biren AR2025, berkshire2007)",
 }
 out = Path("docs/plans/w23-ocr-r1-2026-10-31/r1_sample_manifest.json")
 out.write_text(json.dumps(manifest, ensure_ascii=False, indent=1), encoding="utf-8")

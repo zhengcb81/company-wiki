@@ -1,3 +1,4 @@
+"""OBSOLETE (kept for history): superseded by build_r1_delivery.py (single source); kept for history."""
 """Generate delivery/w23-ocr-r1/handoff.json from the campaign artifacts.
 
 Every number in the handoff is read from comparison.json / fact_match.json, so
