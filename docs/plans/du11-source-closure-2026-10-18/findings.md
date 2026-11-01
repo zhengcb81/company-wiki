@@ -69,3 +69,9 @@ CI修复仍绿。两真实MiMo401来自Config.load显式canonical路径漏载受
 ## 2026-11-01 — 共享缓存根修真实GREEN/独审，进入正常发布
 
 Worker与cache共用canonical source-select，raw/projected同一材料证明，快速依赖不足不再盲付费。新run/max_tokens1/refreshfalse真实12.24s复用原exact91d5/54ccb，0新POST/reservation/费，旧账/usageSHA/两artifact字节不变，trace及source部分覆盖保留。137短域、最终7unit、宿主16通过（不相加冒独立数量）；独审两旧bundle重建actual e45模型尝试SHA、33858B wire，且已观察材料优先于后续fast声明。首GREEN后单行严格优先guard反向SHA/负例独审，原真实收据不重签。当前正常发布，不扩包。RF五quote used参数/实际compute/report/snapshot/stress已有；作者发现Testing同页错摘TIDES需新v2，旧v1保留；全部幅度支持仍unsupported及p11 D&M摘要遗漏不能由此签PASS，等待完整封存/四审/共因修复。
+
+## 2026-11-01 — 缓存根修精确CI成功、W12 v2冻结进入四审
+
+CWP c405848ad1ddba1ec0ded4ed75a7d2cdc5c8314e已正常commit/push，782P/114.44s，CI41272576090于04:24:32Z成功。缓存真实1token GREEN、旧收费/partial及独审证据不重签。W12当前authoring-v4/main-v2封存manifest6e8051f6…616d8共734件115059812逻辑B，ROOT逐件SHA/size一致；5项摘要实际采用、主native链和joint已有，经济质量仍OPEN。三条旧Testing同页错摘以新v2修正，保留v1。storage/analyst新独审已冻结，process/fetch独立收尾；不扩包、不互读初稿、不以算术/结构通过代签。
+
+当前storage报关键业务遗漏P2，analyst报幅度校准和客户/法律反证P1；待四份齐备再专家归并，按责任层从根因修复与新attempt。七个明确日志绑定pytest目录剩余2003113逻辑B已清，当前P3/封存证据不动。只读盘点734件有62182776B相同内容重复（54.0%逻辑量），顶组18文件不同FileID；不是已释放物理空间，在既有质量收尾考察同owner不可变input复用。母账1955397/760197估计、unknown8+prior7不变。

@@ -1,6 +1,6 @@
 # W12有界来源缓存共因：当前材料证明代替重复付费
 
-当前实现及真实有界验收已独审PASS，无主要OPEN；正常commit/push/新精确CI随后记录。不代签全文召回、生成式自然语言摘要或完整公司买方研究。
+当前实现及真实有界验收已独审PASS，无主要OPEN；c405848a已正常commit/push，782P/114.44s，精确CI41272576090成功。不代签全文召回、生成式自然语言摘要或完整公司买方研究。
 
 ## 实证与根修
 
@@ -20,4 +20,4 @@ Source-select现在提供同一只读服务端口，Worker与缓存重选共用�
 
 ## 后续主线
 
-W12已真实consume5个source_quote到used参数草稿/下游公式，并实际compute/report/snapshot及联动stress，仍待executor最终封存和四路独审。source112/2767/4224、66source_quotes及needs_review/partial保留；p11 D&M关键段缺失、预测幅度支持限制与作者旧版本引用错误均不能被本cache PASS覆盖。原文与真实P3数据保留待四审；不扩施工包。
+W12已真实consume5个source_quote到used参数草稿/下游公式，并实际compute/report/snapshot及联动stress，已以authoring-v4/main-v2及manifest6e8051f6…616d8封存，当前四路fresh公司独审收口。source112/2767/4224、66source_quotes及needs_review/partial保留；p11 D&M关键段缺失、预测幅度支持限制与作者旧版本引用错误均不能被本cache PASS覆盖。原文与真实P3数据保留待四审；不扩施工包。

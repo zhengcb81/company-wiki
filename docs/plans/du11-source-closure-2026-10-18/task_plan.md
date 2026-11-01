@@ -4,7 +4,7 @@
 
 ## Next Step
 
-正常发布当前缓存共因根修并核精确CI；与此并行完成W12作者v2正确引用版本的完整RF链/封存，再派四路fresh独审，按共因修复源D&M遗漏/研究幅度依据等实际问题，质量/检测收尾。不扩包。
+完成W12同一封存v2执行包的四路fresh独审并逐条归并根因；按已有P3责任先修来源选材遗漏、经营幅度/反证与旁表口径问题，再以新attempt复验实际摘要/缓存/RF采用及研究内容，完成质量和检测收尾。不扩施工包。
 
 ## P0：恢复准确、轻量的回归保护
 
@@ -44,14 +44,14 @@
 
 ## P3：公司研究循环、泛化与技能收口
 
-### 当前缓存共因：快速证明不足不等于再次付费
+### 已发布缓存共因与当前四审收口
 
 - 实证：W12 H1两run的base/final generation及真实model requestSHA相同、已有2可见产物；source工作预算停止使dependency trace partial，现bool将unavailable当miss。旧两次真实付费/partial/未读及费用保持，不重签为complete。
 - 同一source-select服务提供无任务/模型副作用的确定性选材端口，原Worker调用同一核心；raw/official projection共用，不复制PDF策略/管线，不构造假job/lease。
 - 先走已完整dependency的快速复用；快速证明不足时，每文档最多一次当前重选，比较既有完整material SHA/evidence SHA/sent-policy，复用还须真实原件/locator及旧artifact验真。材料不同才是实证miss；当前重选失败/超时不能被当成付费许可。
 - 原partial trace与paid generation保持原字节；不改compare(partial)=unavailable、不把未读变已读、不改跨run费用归属、不新增任务库或预算。
-- TDD：相同有界partial可复用；coverage/材料/策略变化不可误命中；多个候选只重选一次；快速命中不重选；raw/投影接线一致，失败/超时0模型。真实H1用独立新run/max_tokens=1请求先复现免费RED再验证缓存成功，模型配置不变，旧账/产物不改；集中独审后正常发布。
-- 随后继续真实RF已采用的5个summary source_quote参数/公式及完整16标签/四审。原件p11 D&M关键段落未入本次summary是独立选材缺口，不能以raw补证冒作summary覆盖完整，按实际共因修复/再验收。
+- TDD：相同有界partial可复用；coverage/材料/策略变化不可误命中；多个候选只重选一次；快速命中不重选；raw/投影接线一致，失败/超时0模型。真实H1独立新run/max_tokens=1已有免费RED与GREEN，模型配置/旧账/产物不改；集中独审后c405848a正常发布、精确CI成功。
+- 完整16标签/主报告/snapshot/joint均已执行并以v2封存；当前完成四路fresh实质审查并修复归并共因。5个summary source_quote已进入used参数/公式。原件p11 D&M关键段落未入本次summary是独立选材缺口，不能以raw补证冒作summary覆盖完整，按实际共因修复/再验收。
 
 - 先完成药明康德W12新attempt补偿责任，再药明合联、Snowflake新公司泛化。每轮执行完整八步审查技能。
 - 固定八家公司按目标清单逐个完成；同一家公司跨责任可复用合格run，须显式映射全部检查点，不能凭旧报告名字或重复收费充数。

@@ -1,26 +1,26 @@
 {
   "schema_version": "company-wiki-current-plan-status/2",
   "as_of_date": "2026-11-01",
-  "observed_at_utc": "2026-11-01T04:12:36.375140+00:00",
+  "observed_at_utc": "2026-11-01T04:47:10.567247+00:00",
   "canonical_entry": "CURRENT_STATUS.md",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
-  "project_status": "P3_CURRENT_SUMMARY_CACHE_REAL_GREEN_INDEPENDENT_REVIEW_PASS_RF_NATIVE_CHAIN_EXECUTED_AWAIT_FINAL_FREEZE_FOUR_REVIEWS",
+  "project_status": "P3_W12_V2_FROZEN_FRESH_REVIEWS_IN_PROGRESS_ENGINEERING_EXACT_CI_GREEN_RESEARCH_OPEN",
   "scope_this_update": "Mainline only; exact CI root repairs, real summary/recovery/native adoption; no new packages",
-  "last_code_commit": "ce1a603a88397e5a2e921177604cdff2dc08e0ab",
+  "last_code_commit": "c405848ad1ddba1ec0ded4ed75a7d2cdc5c8314e",
   "verified_publication_before_docs": {
     "local_branch": "master",
-    "local_and_remote_head": "ce1a603a88397e5a2e921177604cdff2dc08e0ab",
-    "note": "Runtime exact CI green; following PWF-only commit has no separate runtime CI."
+    "local_and_remote_head": "c405848ad1ddba1ec0ded4ed75a7d2cdc5c8314e",
+    "note": "Runtime exact CI green. Following PWF-only commits have no separate runtime CI."
   },
   "code_ci": {
-    "id": 41267979696,
-    "head_sha": "ce1a603a88397e5a2e921177604cdff2dc08e0ab",
+    "id": 41272576090,
+    "head_sha": "c405848ad1ddba1ec0ded4ed75a7d2cdc5c8314e",
     "status": "completed",
     "conclusion": "success",
-    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41267979696",
-    "normal_pre_push_passed": 781,
-    "normal_pre_push_seconds": 108.09
+    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41272576090",
+    "normal_pre_push_passed": 782,
+    "normal_pre_push_seconds": 114.44
   },
   "native_goal": {
     "observed_status": "active",
@@ -66,7 +66,7 @@
   },
   "existing_capabilities": {
     "storage_virtualization": "IMPLEMENTED; no new storage-layer rebuild planned",
-    "configured_worker_budget_recovery": "IMPLEMENTED; current-version actual batch acceptance remains",
+    "configured_worker_budget_recovery": "IMPLEMENTED; current W12 H1 real summary, exact same/cross-run recovery bounded PASS; full-company review OPEN",
     "gate_simplification": "MAJOR_ENGINEERING_COMPLETE; no new per-material permission/manual receipt gate planned",
     "m6_real_summary_recovery_rf": "LOCAL_HISTORICAL_ASOF_NODE_PASS; not currentM8/fullcompany acceptance",
     "m6_evidence": "review/source-information-20261030/description-final/m6-source-evidence-2/README.md"
@@ -89,11 +89,11 @@
     },
     {
       "id": "P3",
-      "status": "W12_SHARED_CONFIG_RECOVERY_REPAIR_IN_PROGRESS",
+      "status": "W12_V2_FROZEN_FRESH_REVIEWS_AND_COMMON_ROOT_REMEDIATION_OPEN",
       "task": "W12 original-company rerun, new-company generalization, fixed8company fullaudit/skillimprovement and finalclean streak"
     }
   ],
-  "next_action": "正常发布当前缓存共因根修并核精确CI；与此并行完成W12作者v2正确引用版本的完整RF链/封存，再派四路fresh独审，按共因修复源D&M遗漏/研究幅度依据等实际问题，质量/检测收尾。不扩包。",
+  "next_action": "完成W12同一封存v2执行包的四路fresh独审并逐条归并根因；按已有P3责任先修来源选材遗漏、经营幅度/反证与旁表口径问题，再以新attempt复验实际摘要/缓存/RF采用及研究内容，完成质量和检测收尾。不扩施工包。",
   "package_status_registry": "PACKAGE_STATUS.json",
   "handoff": "HANDOFF.md",
   "goal_definition": "MAINLINE_LOOP_GOAL.md",
@@ -275,6 +275,55 @@
       "logical_file_bytes": 21158851,
       "removed": true,
       "evidence": "review/mainline-closeout-20261031/p1-ci-repair/receipts/failed-hook-temp-cleanup.json.gz"
+    },
+    "current_cache_basetemps": {
+      "scope": "Seven exact root-owned pytest basetemps bound to preserved command logs; no original/current P3/executor data",
+      "removed_logical_bytes": 2003113.0,
+      "checked_at_utc": "2026-11-01T04:45:26.2049491Z",
+      "directories": [
+        {
+          "logical_bytes": 0,
+          "existed": false,
+          "name": ".m9-cache-red"
+        },
+        {
+          "logical_bytes": 0,
+          "existed": false,
+          "name": ".m9-cache-green"
+        },
+        {
+          "source_log": "cache-reselection-green2.log",
+          "logical_bytes": 2003071,
+          "removed": true,
+          "existed": true,
+          "name": ".m9-cache-green2"
+        },
+        {
+          "source_log": "cache-reselection-final.log",
+          "logical_bytes": 0,
+          "removed": true,
+          "existed": true,
+          "name": ".m9-cache-final"
+        },
+        {
+          "source_log": "cache-candidates-host.log",
+          "logical_bytes": 42,
+          "removed": true,
+          "existed": true,
+          "name": ".m9-cc"
+        },
+        {
+          "logical_bytes": 0,
+          "existed": false,
+          "name": ".m9-cache-precedence-red"
+        },
+        {
+          "logical_bytes": 0,
+          "existed": false,
+          "name": ".m9-cache-guard"
+        }
+      ],
+      "schema_version": "owned-cache-test-cleanup/1"
     }
   },
   "p1_huali_v2_historical": {
@@ -426,7 +475,7 @@
     "attempt": "r1-remediation-03",
     "as_of_date": "2026-10-21",
     "executor": "/root/w12_executor_current",
-    "status": "CACHE_REPAIR_REVIEW_PASS_NATIVE_RF_CHAIN_EXECUTED_AUTHOR_V2_CORRECTION_BEFORE_FREEZE",
+    "status": "V2_FROZEN_FRESH_REVIEWS_RUNNING_RESEARCH_OPEN",
     "root": "revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec/execution_replays/r1-remediation-03",
     "formal_execution_or_four_review_pass": false,
     "new_model_POST_so_far": 4,
@@ -446,7 +495,7 @@
       "Explicit canonical Config.load path skips managed dotenv; same model/endpoint but stale inherited MiMo credential.",
       "Native execution recovery owner requires known billing for terminal401 jobs; old unknown holds still counted, new explicit run rejected0POST."
     ],
-    "root_findings_resolution": "Config identity and AUTO single-snapshot execution owner fixed,96unit/4integration/8independent probes PASS,0OPEN; ce1a603a normal commit hooks passed; push/CI tracked in parallel.",
+    "root_findings_resolution": "Config/AUTO recovery ce1a603a and current-material cache c405848a normally published, independently reviewed, exact CI green; historical unknown and extra paid call retained.",
     "h1_new_summary": {
       "run_id": "r1-w12-h1-managed-r2-20261101",
       "model_posts": 1,
@@ -465,7 +514,7 @@
       "micro_usd": 1808,
       "capture_id": "4c179c36d823485fbf6422a7ee1946b7",
       "artifact_sha256": "54ccb82a5e14db1a427dc66e485d58298b55f0e186e44c5e7bcc050ea8a0e895",
-      "action": "Stop paid H1 regeneration; compare exact requests and native generation/reuse receipts before root repair; same-run/exactread diagnostics free only.",
+      "action": "Published canonical source-reselection equivalence; exact old artifact reused by the 1token request, no new HTTP or reservation. Historical extra POST is not refunded.",
       "historical_failed_status": "EXTRA_POST_PRESERVED_NOT_REFUNDED",
       "green_run_id": "r1-w12-h1-cache-green1-20261101",
       "green_capture": "bc3a09b0b45a4932a88864a4fe9db0d6",
@@ -482,8 +531,8 @@
       "visible_base_candidates": 2,
       "source_partial_budget": "16M work bound;112selected/2767candidates/4224units,66source_quotes",
       "cause": "Source work stop taints dependency inventory partial; unavailable fast decision proof is treated as miss, skips public candidates and pays again.",
-      "fix_in_progress": "Shared canonical source selection port and current material-equivalence fallback for raw/projected; retain partial/unread and immutable generations/charges.",
-      "evidence": "revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec/execution_replays/r1-remediation-03/preflight/h1-cache-miss-observation/comparison-v2.json"
+      "evidence": "revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec/execution_replays/r1-remediation-03/preflight/h1-cache-miss-observation/comparison-v2.json",
+      "fix_status": "PUBLISHED_AND_REAL_SAFE_GREEN_INDEPENDENT_PASS"
     },
     "rf_native_draft_consumption": {
       "status": "CONSUMED_FIVE_USED_PARAMETER_RATIONALES_NOT_FULL_COMPANY_ACCEPTANCE",
@@ -496,7 +545,63 @@
         "t37"
       ],
       "evidence": "revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec/execution_replays/r1-remediation-03/narrative/h1-native-consumption.json",
-      "quality": "needs_review/selectionpartial retained; full16labels/report/snapshot/four reviewers still open"
+      "quality": "Five actual used rationale chains and full native compute/report/snapshot/joint stress executed. Conditional magnitude diagnostics unsupported; no whole-company quality PASS."
+    },
+    "manifest_sha256": "6e8051f60a5218fe65ac3b52b1c34c9b84aaeebfee456674bcd503b7a8d616d8",
+    "frozen_artifacts": 734,
+    "frozen_logical_bytes": 115059812,
+    "current_input": "forecast/authoring-v4/input.json",
+    "current_forecast": "forecast/main-v2/forecast.json",
+    "current_forecast_sha256": "d78fcdc68b0e7e9dd15ada2cb3d6680997e4bee8dbe047d7e610f5aa794c21b1",
+    "current_snapshot_id": "ada03b4fa4d5cb969ab846c813ff57dfaa491d6a4eb3d9a200d9b9dc64d94740",
+    "execution_recording_complete": true,
+    "execution_outcome": "partial",
+    "company_quality_accepted": false,
+    "review_context": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\reports\\r1-remediation-03\\review_input.json",
+    "fresh_reviews": {
+      "storage": {
+        "status": "FROZEN_AWAIT_ROOT_RECONCILIATION",
+        "role": "storage",
+        "directory": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\reports\\r1-remediation-03",
+        "json_sha256": "4021be6c5d3001eb2b1db2b7f7025ea8b26edbb153b07f945bec1de534d38500",
+        "md_sha256": "5e38edbbdbb84d11c6c2e8bdf3aa8ddb55dfb890d3236e956156f3cb6e4ec869",
+        "findings": [
+          {
+            "issue_id": "STORAGE-001",
+            "severity": "P2",
+            "summary": "有限H1选择把名额分给脚注/泛宣传，遗漏关键D&M收入增速和具体技术能力原段；当前RF补读减轻结果影响但未修复上游召回。"
+          }
+        ]
+      },
+      "fetch": {
+        "status": "RUNNING",
+        "role": "fetch",
+        "directory": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\reports\\r1-remediation-03"
+      },
+      "process": {
+        "status": "RUNNING",
+        "role": "process",
+        "directory": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\reports\\r1-remediation-03"
+      },
+      "analyst": {
+        "status": "FROZEN_AWAIT_ROOT_RECONCILIATION",
+        "role": "analyst",
+        "directory": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\reports\\r1-remediation-03",
+        "json_sha256": "a955fbe930a5e9e0b66284f6170647ba181bb0a398622b85e573ce836ad558fa",
+        "md_sha256": "b9bd2cd55762c6960a9ac0d29a6c93b8579f28f9f43a1b2eb82b75c63c62089c",
+        "findings": [
+          {
+            "issue_id": "ANALYST-001",
+            "severity": "P1",
+            "summary": "决定大额增量的 H2 经营指数与共用尾部持续性仍缺足以支持其幅度的需求、供给和确认桥；完整披露 conditional 不等于完成买方模型校准。"
+          },
+          {
+            "issue_id": "ANALYST-002",
+            "severity": "P1",
+            "summary": "截至截止日前可得的客户流失/项目转移法律反证未进入需求持续性及确认时点的压力检验；发行人临时禁令公告加通用风险不足以覆盖该机制。"
+          }
+        ]
+      }
     }
   },
   "own_uncommitted_tests": [],
@@ -515,7 +620,7 @@
     "status": "completed",
     "conclusion": "success",
     "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41255499232",
-    "meaning": "Last verified baseline CI. Current P1 root repair not yet committed; exact new CI required after publication."
+    "meaning": "Historical successful baseline, superseded by the exact CI of current_code_publication."
   },
   "p3_config_generation_recovery": {
     "status": "PUBLISHED_NORMAL_PUSH_781P_EXACT_CI_SUCCESS",
@@ -530,8 +635,7 @@
     },
     "owned_test_bytes_removed": 18856387,
     "not_signed": [
-      "new exact CI",
-      "real W12 current summary/full RF/four reviewers",
+      "complete company research",
       "entire project"
     ],
     "commit": "ce1a603a88397e5a2e921177604cdff2dc08e0ab",
@@ -546,31 +650,31 @@
     }
   },
   "current_code_publication": {
-    "head_sha": "ce1a603a88397e5a2e921177604cdff2dc08e0ab",
+    "head_sha": "c405848ad1ddba1ec0ded4ed75a7d2cdc5c8314e",
     "commit_hooks": "passed",
     "normal_push": "success",
     "exact_CI": "success",
-    "last_verified_green_CI": {
-      "id": 41264855167,
-      "head_sha": "f98dd54b78184ea6534941e1ae8bb40bbe6971da",
+    "current_verified_green_CI": {
+      "id": 41272576090,
+      "head_sha": "c405848ad1ddba1ec0ded4ed75a7d2cdc5c8314e",
       "status": "completed",
       "conclusion": "success",
-      "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41264855167",
-      "normal_pre_push_passed": 651,
-      "normal_pre_push_seconds": 133.64
+      "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41272576090",
+      "normal_pre_push_passed": 782,
+      "normal_pre_push_seconds": 114.44
     }
   },
   "previous_verified_code_ci": {
-    "id": 41264855167,
-    "head_sha": "f98dd54b78184ea6534941e1ae8bb40bbe6971da",
+    "id": 41267979696,
+    "head_sha": "ce1a603a88397e5a2e921177604cdff2dc08e0ab",
     "status": "completed",
     "conclusion": "success",
-    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41264855167",
-    "normal_pre_push_passed": 651,
-    "normal_pre_push_seconds": 133.64
+    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41267979696",
+    "normal_pre_push_passed": 781,
+    "normal_pre_push_seconds": 108.09
   },
   "p3_cache_reselection": {
-    "status": "INDEPENDENT_REVIEW_PASS_PUBLICATION_IN_PROGRESS",
+    "status": "PUBLISHED_EXACT_CI_GREEN",
     "runtime_paths": [
       "src/company_wiki/automation/narrative_select.py",
       "src/company_wiki/automation/narrative_generation.py",
@@ -581,6 +685,24 @@
     "actual_SAFE_GREEN": true,
     "new_paid_calls": 0,
     "original_generation_resigned": false,
-    "evidence": "review/mainline-closeout-20261031/p3-cache-reuse/README.md"
+    "evidence": "review/mainline-closeout-20261031/p3-cache-reuse/README.md",
+    "commit": "c405848ad1ddba1ec0ded4ed75a7d2cdc5c8314e",
+    "publication": {
+      "id": 41272576090,
+      "head_sha": "c405848ad1ddba1ec0ded4ed75a7d2cdc5c8314e",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41272576090",
+      "normal_pre_push_passed": 782,
+      "normal_pre_push_seconds": 114.44
+    }
+  },
+  "quality_closeout_observation": {
+    "status": "OBSERVED_NOT_IMPLEMENTED",
+    "source": "ROOT read-only frozen734-file manifest, top18 identical files have distinct file IDs",
+    "logical_bytes": 115059812,
+    "unique_content_bytes": 52877036,
+    "identical_duplicate_logical_bytes": 62182776,
+    "scope": "54.0% duplicate logical bytes, not measured NTFS physical allocation or space already reclaimed. Preserve sealed attempt during reviews; assess reuse of existing immutable input owner in P3 quality closeout, not a new package."
   }
 }

@@ -51,6 +51,30 @@
       "uncompressed_sha256": "e80874164ccee40e48b593211fd21c05fcf77672b31d1e39248442e0f3f6f7fd"
     },
     {
+      "path": "receipts/cache-reuse-ci.json.gz",
+      "bytes": 263,
+      "sha256": "dcaa8abf73b5f2f85671ad48bb2e6facc4a55f915312931f7a6480762dee838f",
+      "uncompressed_sha256": "de0f6383f6e6dfd57f98f92cb981fa81beb8bf7d3368f3ad0f64f220dd50420b"
+    },
+    {
+      "path": "receipts/cache-reuse-commit.log.gz",
+      "bytes": 686,
+      "sha256": "accb87f01fd15f239731e79aa240e961477d095757c7d1f27b6670bf29baf188",
+      "uncompressed_sha256": "bd9788e2eb7b1fdc73c0374280a2fb5df0a471d1b3e44b9e5e2e34d6f373ea53"
+    },
+    {
+      "path": "receipts/cache-reuse-push.log.gz",
+      "bytes": 2585,
+      "sha256": "b8f0167f5df36baeaba9f2ac090436f58c52b17e23ccc165a6a9de88da1f74db",
+      "uncompressed_sha256": "352aad6fa43d0c1498dbd2f9654ab158a051b3fafe9f706d49770abc62c81aa2"
+    },
+    {
+      "path": "receipts/cache-test-cleanup.json.gz",
+      "bytes": 388,
+      "sha256": "1f49220561ca21d78f41bdac5b0bd73012a121a90dee095c8eec46b69b8c82e5",
+      "uncompressed_sha256": "d86f24a85f280970017d788e0568f2233697097f2369629e31d0dfe15ceffeaa"
+    },
+    {
       "path": "receipts/final-cache-reuse-review.json.gz",
       "bytes": 3979,
       "sha256": "34a23044cde45d18f478a5f3e31c0a60ca6f4ed332e55444013a04a53e971249",
