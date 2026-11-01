@@ -16,12 +16,13 @@ import re
 from typing import Any, TYPE_CHECKING
 
 from company_wiki.document_understanding.operating_states.patterns import COMPOUND_HEAD
+from .predicate_arguments import PredicateArgumentScope, predicate_argument_scopes
 
 if TYPE_CHECKING:
     from company_wiki.resource_budget import WorkBudget
 
 
-STATEMENT_GRAMMAR_VERSION = 'statement-grammar/3'
+STATEMENT_GRAMMAR_VERSION = 'statement-grammar/4'
 MAX_STATEMENT_CHARS = 4096
 MAX_STATEMENT_TOKENS = 1024
 STATEMENT_GRAMMAR_WORK_PER_CHAR = 32
@@ -51,6 +52,7 @@ class StatementObservation:
     reason: str
     argument_nominals: tuple[str, ...] = ()
     weak_relation: bool = False
+    argument_scopes: tuple[PredicateArgumentScope, ...] = ()
 
     @property
     def independent(self) -> bool:
@@ -147,7 +149,7 @@ def _chinese_tagger() -> Any:
     return tokenizer, tags
 
 
-def _english_statement(text: str) -> tuple[bool, tuple[str, ...], bool]:
+def _english_statement(text: str) -> tuple[bool, tuple[PredicateArgumentScope, ...], bool]:
     words = _EN_TOKEN.findall(text)
     if len(words) > MAX_STATEMENT_TOKENS:
         raise _GrammarScopeExceeded
@@ -181,33 +183,35 @@ def _english_statement(text: str) -> tuple[bool, tuple[str, ...], bool]:
             # A relative phrase does not supply the matrix predicate.
             if any(previous in {'WDT', 'WP', 'WP$'} for _, previous in tagged[:index]):
                 continue
-            verbs = [offset for offset in range(index, len(tagged))
-                     if tagged[offset][1].startswith('VB')]
-            lexical = verbs[-1] if verbs else index
-            nominals = tuple(token for token, flag in tagged[lexical + 1:]
-                             if flag in {'NN', 'NNS', 'NNP', 'NNPS'})
-            membership = _EN_MEMBERSHIP.fullmatch(tagged[lexical][0]) is not None
+            scopes = predicate_argument_scopes(tagged, index, language='en')
+            membership = bool(scopes) and all(_EN_MEMBERSHIP.fullmatch(scope.predicate)
+                                               for scope in scopes)
             # cover X with Y is a transitive application, not an enumeration.
             # Its unknown objects remain untouched; no crop/industry words
             # determine this grammatical distinction.
-            if tagged[lexical][0].casefold().startswith('cover'):
+            if any(scope.predicate.casefold().startswith('cover') for scope in scopes):
                 membership &= not any(token.casefold() == 'with' and flag == 'IN'
-                                      for token, flag in tagged[lexical + 1:])
-            return True, nominals, membership
+                                      for token, flag in tagged[index + 1:])
+            return True, scopes, membership
     return False, (), False
 
 
-def _chinese_statement(text: str) -> tuple[bool, tuple[str, ...], bool]:
-    text = _ENUMERATOR.sub('', text, count=1)
+def _chinese_statement(text: str, *, lexical_boundaries: tuple[int, ...] = ()) -> tuple[
+        bool, tuple[PredicateArgumentScope, ...], bool]:
+    enumeration = _ENUMERATOR.match(text)
+    removed = enumeration.end() if enumeration else 0
+    text = text[removed:]
+    boundaries = [0, *(point - removed for point in lexical_boundaries if removed < point < len(text) + removed), len(text)]
     tokenizer, tags = _chinese_tagger()
     tagged = []
-    for word in tokenizer.cut(text, HMM=False):
-        if word.strip():
-            tag = tags.get(word, 'eng' if word.isascii() and word.isalpha()
-                           else 'm' if word.isnumeric() else 'x')
-            tagged.append((word, tag))
-        if len(tagged) > MAX_STATEMENT_TOKENS:
-            raise _GrammarScopeExceeded
+    for left, right in zip(boundaries, boundaries[1:]):
+        for word in tokenizer.cut(text[left:right], HMM=False):
+            if word.strip():
+                tag = tags.get(word, 'eng' if word.isascii() and word.isalpha()
+                               else 'm' if word.isnumeric() else 'x')
+                tagged.append((word, tag))
+            if len(tagged) > MAX_STATEMENT_TOKENS:
+                raise _GrammarScopeExceeded
     nominal = False
     aspect = False
     ambiguous = False
@@ -272,26 +276,32 @@ def _chinese_statement(text: str) -> tuple[bool, tuple[str, ...], bool]:
                 continue
         if _NOMINAL_HEAD.match(rest):
             continue
-        verbs = [offset for offset in range(index, len(tagged))
-                 if tagged[offset][1] in {'v', 'vn'}]
-        lexical = verbs[-1] if verbs else index
-        nominals = tuple(token for token, flag in tagged[lexical + 1:]
-                         if flag.startswith('n'))
-        if not nominals:
-            nominals = tuple(token for token, flag in tagged[index + 1:]
-                             if flag.startswith('n'))
-        return True, nominals, word in {'包括', '包含', '涵盖', '覆盖'}
+        scopes = predicate_argument_scopes(tagged, index, language='zh')
+        return True, scopes, word in {'包括', '包含', '涵盖', '覆盖'}
     if ambiguous:
         raise _GrammarAmbiguous(ambiguous_nominals)
     return False, (), False
 
 
-def observe_statement(text: str, *, work_budget: WorkBudget | None = None) -> StatementObservation:
-    """Observe one bounded clause using general POS, with no runtime downloads."""
+def observe_statement(text: str, *, work_budget: WorkBudget | None = None,
+                      lexical_boundaries: tuple[int, ...] = ()) -> StatementObservation:
+    """Observe one bounded clause using general POS, with no runtime downloads.
+
+    Prepared grammatical operators may supply ordered lexical cut positions.
+    These are transient tokenizer boundaries, never source offsets/locators
+    or POS overrides. Disjoint pieces retain one linear input/work envelope.
+    """
     if not text.strip():
         return StatementObservation('fragment', 'empty_clause')
     if len(text) > MAX_STATEMENT_CHARS:
         return StatementObservation('unknown', 'statement_grammar_scope_limit')
+    previous = 0
+    if len(lexical_boundaries) > min(MAX_STATEMENT_TOKENS, len(text)):
+        return StatementObservation('unknown', 'statement_grammar_scope_limit')
+    for point in lexical_boundaries:
+        if type(point) is not int or not previous <= point <= len(text):
+            return StatementObservation('unknown', 'statement_grammar_scope_limit')
+        previous = point
     if ':' in text or '：' in text:
         return StatementObservation('fragment', 'enumeration_scope')
     if text.rstrip().endswith(('?', '？')) or english_question_start(text):
@@ -302,8 +312,8 @@ def observe_statement(text: str, *, work_budget: WorkBudget | None = None) -> St
     if work_budget is not None:
         work_budget.charge(STATEMENT_GRAMMAR_WORK_PER_CHAR * len(text) + 1)
     try:
-        independent, nominals, weak = (_chinese_statement(text) if _CN.search(text)
-                                       else _english_statement(text))
+        independent, scopes, weak = (_chinese_statement(text, lexical_boundaries=lexical_boundaries)
+                                     if _CN.search(text) else _english_statement(text))
     except _GrammarScopeExceeded:
         return StatementObservation('unknown', 'statement_grammar_scope_limit')
     except _GrammarAmbiguous as exc:
@@ -313,4 +323,4 @@ def observe_statement(text: str, *, work_budget: WorkBudget | None = None) -> St
         return StatementObservation('unknown', 'statement_grammar_unavailable')
     return StatementObservation('independent' if independent else 'fragment',
                                 'subject_predicate' if independent else 'no_matrix_predicate',
-                                nominals, weak)
+                                tuple(word for scope in scopes for word in scope.argument_nominals), weak, scopes)

@@ -92,7 +92,7 @@ class _SelectionReadContext:
     checkpoint: Callable[[], None]
 
 
-@dataclass(frozen=True)
+@dataclass
 class _SelectFailure(Exception):
     code: str
     outcome: HandlerOutcome

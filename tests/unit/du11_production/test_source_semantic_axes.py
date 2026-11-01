@@ -165,3 +165,225 @@ def test_objective_operator_observation_is_reused_for_the_exact_source_clause(mo
     monkeypatch.setattr(owner, '_OBJECTIVE', RegexMeter(owner._OBJECTIVE, totals, 'objective'))
     prepare_reading_business_assessment(text, {'relations': []})
     assert totals['objective'] == len(text)
+
+
+@pytest.mark.parametrize('joiner', ('and', 'or', 'but'))
+@pytest.mark.parametrize('specific_first', (False, True))
+def test_coordinated_goal_preserves_each_predicates_own_arguments(joiner, specific_first):
+    specific, abstract = 'reopen neonatal wards', 'create value'
+    left, right = (specific, abstract) if specific_first else (abstract, specific)
+    text = f'We aim to {left} {joiner} {right}.'
+    prepared = prepare_reading_business_assessment(text, {'relations': []})
+    assert prepared.passage.use == 'support' and prepared.passage.relevant
+    assert not prepared.fact.eligible and not prepared.fact.financial_exempt
+
+
+@pytest.mark.parametrize('text', (
+    'We are committed to treating rare diseases and creating value.',
+    'We are committed to creating value and treating rare diseases.',
+    'We aim to reopen neonatal wards, treat rare diseases and create value.',
+    'We aim to create value, treat rare diseases and reopen neonatal wards.',
+    'We aim to help clinicians to treat rare diseases and create value.',
+    'We aim to create value by treating rare diseases.',
+    'We aim to supply products that detect rare diseases and create value.',
+))
+def test_nested_and_multiple_goal_predicates_do_not_lose_concrete_arguments(text):
+    prepared = prepare_reading_business_assessment(text, {'relations': []})
+    assert prepared.passage.use == 'support' and prepared.passage.relevant
+    assert not {'operating_milestone', 'operating_current_state'} & set(prepared.fact.reasons)
+
+
+@pytest.mark.parametrize('text', (
+    'We aim to create value for customers.',
+    'We aim to create value for clinicians.',
+    'We aim to create value for customers who reopen neonatal wards.',
+    'We aim to create value for customers who treat rare diseases and reopen wards.',
+    'We aim to create value and improve customer satisfaction.',
+    'We aim to improve customer satisfaction or create value.',
+    'We are committed to creating value for clinicians and customers.',
+))
+def test_beneficiary_background_or_abstract_coordination_cannot_create_business_content(text):
+    prepared = prepare_reading_business_assessment(text, {'relations': []})
+    assert prepared.passage.use != 'support' and not prepared.passage.relevant
+    assert not prepared.fact.eligible and not prepared.fact.financial_exempt
+
+
+@pytest.mark.parametrize('joiner', ('并', '或者', '而且'))
+@pytest.mark.parametrize('specific_first', (False, True))
+def test_chinese_goal_coordination_has_the_same_order_invariance(joiner, specific_first):
+    specific, abstract = '重开新生儿病房', '创造价值'
+    left, right = (specific, abstract) if specific_first else (abstract, specific)
+    text = f'公司努力{left}{joiner}{right}。'
+    prepared = prepare_reading_business_assessment(text, {'relations': []})
+    assert prepared.passage.use == 'support' and prepared.passage.relevant
+    assert not prepared.fact.eligible and not prepared.fact.financial_exempt
+
+
+@pytest.mark.parametrize('text', (
+    '公司努力为客户创造价值。',
+    '公司努力创造价值并满足客户需求。',
+    '公司努力满足客户需求或者创造价值。',
+))
+def test_chinese_benefit_and_abstract_goal_coordination_stays_context(text):
+    prepared = prepare_reading_business_assessment(text, {'relations': []})
+    assert prepared.passage.use != 'support' and not prepared.passage.relevant
+    assert not prepared.fact.eligible and not prepared.fact.financial_exempt
+
+
+@pytest.mark.parametrize('operator', ('aim', 'strive', 'aspire'))
+def test_goal_governor_does_not_supply_a_whole_sentence_veto(operator):
+    text = f'We {operator} to reopen neonatal wards and create value.'
+    prepared = prepare_reading_business_assessment(text, {'relations': []})
+    assert prepared.passage.use == 'support' and prepared.passage.relevant
+    assert not prepared.fact.eligible
+
+
+@pytest.mark.parametrize('operator', ('努力', '争取', '坚持'))
+def test_prepared_operator_boundary_is_not_a_dictionary_or_predicate_override(operator):
+    statement = f'公司{operator}创造价值并重开新生儿病房。'
+    nominal = f'公司的{operator}创造计划。'
+    assert prepare_reading_business_assessment(statement, {'relations': []}).passage.use == 'support'
+    assert not prepare_reading_business_assessment(nominal, {'relations': []}).passage.relevant
+
+
+def test_goal_matrix_and_complements_are_prepared_once_before_fact_projection(monkeypatch):
+    from company_wiki.source_catalog import narrative_source_passage as owner
+    from unit.du11_production.test_source_information_binding import session_for, unit_id
+
+    original = owner.observe_statement
+    calls = []
+
+    def counted(text, **kwargs):
+        calls.append(text)
+        return original(text, **kwargs)
+
+    monkeypatch.setattr(owner, 'observe_statement', counted)
+    text = 'We aim to reopen neonatal wards and create value.'
+    session, budget = session_for([text])
+    uid = unit_id(0)
+    fact, passage = session.fact(uid), session.source_passage(uid)
+    assert passage.use == 'support' and not fact.eligible
+    assert calls == [text]
+    used = budget.used
+    assert session.fact(uid) is fact and session.source_passage(uid) is passage
+    assert calls == [text] and budget.used == used
+
+
+def test_predicate_scope_keeps_the_two_direct_objects_and_excludes_the_beneficiary():
+    from company_wiki.document_understanding.statement_grammar import observe_statement
+
+    text = 'We aim to reopen neonatal wards and create value for clinicians.'
+    observation = observe_statement(text)
+    assert observation.independent
+    assert [scope.argument_nominals for scope in observation.argument_scopes] == [('wards',), ('value',)]
+    assert 'clinicians' not in observation.argument_nominals
+
+
+def test_a_typed_function_inside_a_beneficiary_relative_cannot_supply_the_goal():
+    text = 'We aim to create value for customers whose products process orders.'
+    prepared = prepare_reading_business_assessment(text, {'relations': []})
+    assert prepared.passage.use != 'support' and not prepared.passage.relevant
+    assert not prepared.fact.eligible and not prepared.fact.financial_exempt
+
+
+def test_the_same_typed_function_as_a_direct_product_goal_is_preserved():
+    text = 'We aim to supply software that processes customer orders and create value.'
+    prepared = prepare_reading_business_assessment(text, {'relations': []})
+    assert prepared.passage.use == 'support' and prepared.passage.relevant
+
+
+def test_a_separate_typed_business_statement_survives_an_abstract_goal():
+    text = 'We aim to create value for customers. Our software processes customer orders.'
+    prepared = prepare_reading_business_assessment(text, {'relations': []})
+    assert prepared.passage.use == 'support' and prepared.passage.relevant
+    assert prepared.fact.eligible
+
+
+@pytest.mark.parametrize('text', (
+    'We aim to serve 1200 customers and create value.',
+    '公司努力新增300个客户并创造价值。',
+))
+def test_direct_quantified_operating_goals_remain_original_unresolved_without_fake_numbers(text):
+    prepared = prepare_reading_business_assessment(text, {'relations': []})
+    assert prepared.passage.use == 'unresolved' and prepared.passage.relevant
+    assert prepared.passage.reason == 'source_goal_quantity_unresolved'
+    assert not {'operating_quantity', 'operating_metric_change', 'operating_current_state'} & set(prepared.fact.reasons)
+
+
+@pytest.mark.parametrize('text', (
+    'We aim to create one vision for customers.',
+    'We aim to create value for 300 clinicians.',
+    'We aim to create value for 300 customers.',
+))
+def test_numbers_in_abstract_heads_or_beneficiary_pps_do_not_prove_operating_goals(text):
+    prepared = prepare_reading_business_assessment(text, {'relations': []})
+    assert prepared.passage.use != 'support' and not prepared.passage.relevant
+    assert not prepared.fact.eligible and not prepared.fact.financial_exempt
+
+
+def test_direct_operating_quantity_role_is_observed_once_in_prepared_scope(monkeypatch):
+    from company_wiki.source_catalog import narrative_business_policy as owner
+
+    real = owner.source_has_operating_measure
+    calls = []
+
+    def observed(value):
+        calls.append(value)
+        return real(value)
+
+    monkeypatch.setattr(owner, 'source_has_operating_measure', observed)
+    prepared = owner.prepare_reading_business_assessment(
+        'We aim to serve 1200 customers and serve 1400 customers.', {'relations': []})
+    assert prepared.passage.use == 'unresolved' and prepared.passage.relevant
+    assert calls == ['customers']
+
+
+def test_predicate_argument_scope_walk_is_linear_and_does_not_retag():
+    from company_wiki.document_understanding.statement_grammar.predicate_arguments import predicate_argument_scopes
+
+    for count in (32, 64, 128):
+        visits = []
+
+        class ObservedTags(list):
+            def __getitem__(self, value):
+                result = super().__getitem__(value)
+                if isinstance(value, slice):
+                    visits.append(len(result))
+                    return type(self)(result)
+                visits.append(1)
+                return result
+
+            def __iter__(self):
+                for value in super().__iter__():
+                    visits.append(1)
+                    yield value
+
+        tagged = ObservedTags([('act', 'VB'), ('object', 'NN'), ('or', 'CC')] * count)
+        scopes = predicate_argument_scopes(tagged, 0, language='en')
+        assert len(scopes) == count
+        assert sum(visits) == 2 * len(tagged)
+
+
+def test_a_concrete_noun_modifier_is_not_removed_with_rhetorical_adjectives():
+    text = 'We aim to supply surgical services and create value.'
+    prepared = prepare_reading_business_assessment(text, {'relations': []})
+    assert prepared.passage.use == 'support' and prepared.passage.relevant
+
+
+def test_unavailable_goal_binding_does_not_stop_an_independent_non_goal_typed_scope(monkeypatch):
+    from company_wiki.document_understanding import statement_grammar as grammar
+    from unit.document_understanding_selection.test_reading_production_selection import _document, _unit, _select
+
+    goal = 'We aim to create value for customers whose products process orders.'
+    healthy = 'Our software processes customer orders.'
+
+    def unavailable():
+        raise LookupError('isolated missing model')
+
+    monkeypatch.setattr(grammar, '_english_tagger', unavailable)
+    result = _select(_document(_unit(goal, paragraph=0, kind='html_paragraph'),
+                              _unit(healthy, paragraph=1, kind='html_paragraph')))
+    assert result.status == 'partial'
+    assert [span.raw_text for span in result.evidence_spans] == [healthy]
+    assert result.reading_context['source_processing_complete'] is False
+    assert any(diagnostic['code'] == 'source_grammar_unavailable' for diagnostic in result.selection_diagnostics)

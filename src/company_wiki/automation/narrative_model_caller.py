@@ -44,7 +44,7 @@ class NarrativeModelCaller(Protocol):
     ) -> tuple[NarrativeModelResponse, HandlerMetrics]: ...
 
 
-@dataclass(frozen=True)
+@dataclass
 class NarrativeBudgetCallError(Exception):
     code: str
     outcome: HandlerOutcome

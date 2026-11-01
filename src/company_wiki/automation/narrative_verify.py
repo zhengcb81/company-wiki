@@ -64,7 +64,7 @@ BUNDLE_PRODUCER_VERSION = "1.0.0"
 EFFECT_TYPE = "narrative_bundle.publish"
 
 
-@dataclass(frozen=True)
+@dataclass
 class _VerifyFailure(Exception):
     code: str
     outcome: HandlerOutcome

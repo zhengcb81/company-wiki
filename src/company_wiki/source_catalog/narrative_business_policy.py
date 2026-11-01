@@ -954,7 +954,8 @@ def detect_reading_business_fact(text: str, *, include_source_descriptions: bool
             causal_relation=lambda value: _observed_causal_relation(
                 value, causal_observations, metric_observations=metric_observations),
             measurement_relation=lambda value: _business_revenue_measure(
-                value, metric_observations=metric_observations))
+                value, metric_observations=metric_observations),
+            quantified_argument=source_has_operating_measure)
         text, roles = statement_scope.text, statement_scope.roles
     return _purpose_fact(_detect_reading_business_fact(text, detect_business_fact, source_roles=roles,
                          causal_observations=causal_observations,
@@ -1056,7 +1057,8 @@ def prepare_reading_business_assessment(text: str, source_relations: dict, *, re
         causal_relation=lambda value: _observed_causal_relation(
             value, causal_observations, metric_observations=metric_observations),
         measurement_relation=lambda value: _business_revenue_measure(
-            value, metric_observations=metric_observations), grammar_work_budget=grammar_work_budget)
+            value, metric_observations=metric_observations),
+        quantified_argument=source_has_operating_measure, grammar_work_budget=grammar_work_budget)
     text, source_roles = statement_scope.text, statement_scope.roles
     if statement_scope.suppressed:
         # Keep the source relations/refs verbatim. Only an assertion observed

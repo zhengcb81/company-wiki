@@ -31,7 +31,7 @@ from .narrative_source_context import (
 )
 
 
-SOURCE_PASSAGE_POLICY_VERSION = 'source-passage/7'
+SOURCE_PASSAGE_POLICY_VERSION = 'source-passage/8'
 # Preparation reuses normalized clauses from the already charged assessment.
 # Includes generic grammar, negative envelopes, account and cause scans, plus
 # the measurement callback's normalized clause view. Metric proofs themselves
@@ -74,13 +74,6 @@ _REFERENCE_METADATA = re.compile(r'\b(?:glossary|contents|index)\b|术语表|词
 _DEPENDENT_SUBJECT = re.compile(r'^\s*(?:the\s+other|other|this|that|such|these|those)\b', re.I)
 _COURTESY = re.compile(r'\s*(?:thank you|thanks|good morning|good afternoon|'
                          r'谢谢|謝謝|感谢|感謝|各位好)', re.I)
-_VAGUE_OBJECTIVE = re.compile(
-    r'\b(?:striv\w*|aspir\w*)\b[^。.!?]{0,90}\b(?:value|goals?|vision|success)\b|'
-    r'\b(?:outstanding|strategic|best-in-class)\s+(?:goals?|aspirations?|'
-    r'products?|services?|solutions?)\b|'
-    r'(?:努力|愿景|目标)[^。！？]{0,35}(?:价值|发展|未来)|'
-    r'(?:宏伟|远大|美好)(?:的)?(?:愿景|目标|未来)|'
-    r'为股东创造[^。！？]{0,15}价值', re.I)
 _SENTENCE_END = re.compile(r'[。！？;；]|[.!?](?=\s|$)')
 _QUESTION_END = re.compile(r'[?？]')
 _CONFIRMATION_QUESTION = re.compile(
@@ -112,6 +105,7 @@ def prepare_source_statement_scope(text: str, roles: SourceAssertionRoles, *,
         accounting_text: Callable[[str], bool] = accounting_field,
         causal_relation: Callable[[str], bool] | None = None,
         measurement_relation: Callable[[str], bool] | None = None,
+        quantified_argument: Callable[[str], bool] | None = None,
         grammar_work_budget=None) -> SourceStatementScope:
     """Observe every sentence once; suppress question/courtesy proof anywhere.
 
@@ -124,15 +118,37 @@ def prepare_source_statement_scope(text: str, roles: SourceAssertionRoles, *,
     segments: list[tuple[int, int, bool]] = []
     suppressed = False
     grammar_results = []
-    context_results = tuple((statement_assertion_key(clause.text), source_clause_context(clause.text, clause))
-                            for clause in roles.clauses)
+    context_results_list = []
+    prepared_grammar = {}
+    argument_roles: dict[str, bool] = {}
+
+    def quantified_role(value: str) -> bool:
+        if value not in argument_roles:
+            argument_roles[value] = bool(quantified_argument and quantified_argument(value))
+        return argument_roles[value]
+
+    for clause in roles.clauses:
+        key = statement_assertion_key(clause.text)
+        context = source_clause_context(clause.text, clause)
+        if context.status == 'candidate' and (context.objective_operator or
+                clause.operating and clause.independent_payload is not True):
+            observation = observe_statement(clause.text, work_budget=grammar_work_budget,
+                lexical_boundaries=(context.objective_end,) if context.objective_end is not None else ())
+            prepared_grammar[key] = observation
+            grammar_results.append((key, observation))
+            context = statement_complement_context(clause.text, clause, observation, prepared=context,
+                                                  quantified_argument=quantified_role)
+        context_results_list.append((key, context))
+    context_results = tuple(context_results_list)
     contexts = dict(context_results)
     while start < len(text):
         end = _SENTENCE_END.search(text, start)
         stop = end.end() if end else len(text)
-        boundary = observe_english_statement_boundary(text[start:stop], work_budget=grammar_work_budget)
-        if boundary is not None:
-            grammar_results.append((statement_assertion_key(text[start:stop]), boundary))
+        key = statement_assertion_key(text[start:stop])
+        boundary = (prepared_grammar[key] if key in prepared_grammar else
+                    observe_english_statement_boundary(text[start:stop], work_budget=grammar_work_budget))
+        if boundary is not None and key not in prepared_grammar:
+            grammar_results.append((key, boundary))
         question = (bool(end and end.group() in {'?', '？'})
                     or bool(boundary and boundary.reason == 'interrogative_scope')
                     or explicit_qa_marker(text[start:start + SOURCE_TURN_MARKER_PREFIX_CHARS]) == ROLE_INVESTOR
@@ -241,27 +257,31 @@ def _declarative(text: str, *, grammar_observations: list[StatementObservation] 
             or text.lstrip().startswith(('请问', '請問', '是否', '会不会'))
             or _NON_ASSERTION.search(text) or _COURTESY.match(text)
             or _DEPENDENT_SUBJECT.match(text)
-            or _VAGUE_OBJECTIVE.search(text) or abstract_source_argument(text)):
+            or abstract_source_argument(text)):
         return False
     # A lexical auxiliary or causal cue can occur inside a relative nominal.
     # Only the statement owner observes a matrix predicate here. Established
     # independent source proofs are consumed separately by the caller above.
     key = statement_assertion_key(text)
     observation = grammar_results.get(key) if grammar_results is not None else None
+    prepared = clause_contexts.get(key) if clause_contexts is not None else None
+    if prepared is None and source_role is not None:
+        prepared = source_clause_context(text, source_role)
+        if clause_contexts is not None:
+            clause_contexts[key] = prepared
+    if prepared is not None and prepared.status != 'candidate':
+        if semantic_contexts is not None:
+            semantic_contexts.append(prepared)
+        return False
     if observation is None:
-        observation = observe_statement(text, work_budget=grammar_work_budget)
+        observation = observe_statement(text, work_budget=grammar_work_budget,
+            lexical_boundaries=(prepared.objective_end,) if prepared and prepared.objective_end is not None else ())
         if grammar_results is not None:
             grammar_results[key] = observation
     if source_role is not None:
         context = semantic_results.get(key) if semantic_results is not None else None
         if context is None:
-            prepared = clause_contexts.get(key) if clause_contexts is not None else None
-            if prepared is None:
-                # A comma-delimited subclause is a distinct view, never a
-                # second observation of its original whole-clause operator.
-                prepared = source_clause_context(text, source_role)
-                if clause_contexts is not None:
-                    clause_contexts[key] = prepared
+            assert prepared is not None
             context = (statement_complement_context(text, source_role, observation, prepared=prepared)
                        if prepared.status == 'candidate' else prepared)
             if semantic_results is not None:
@@ -319,7 +339,10 @@ def prepare_source_passage(
     # A known accounting clause cannot erase already observed unavailable
     # work in another statement of the same original support scope.
     if statement_scope is not None:
-        scoped_uncertainty = _grammar_uncertainty([item for _, item in statement_scope.grammar_results])
+        resolved_context = {key for key, value in statement_scope.context_results
+                            if value.status != 'candidate'}
+        scoped_uncertainty = _grammar_uncertainty([item for key, item in statement_scope.grammar_results
+                                                 if key not in resolved_context])
         if scoped_uncertainty is not None and not scoped_uncertainty.assessment_complete:
             return scoped_uncertainty
     if purpose in non_operating_purposes:
@@ -330,8 +353,9 @@ def prepare_source_passage(
     statement_scope = (statement_scope if statement_scope is not None else
                        prepare_source_statement_scope(text, roles))
     clauses, has_prefix = statement_scope.roles.clauses, statement_scope.suppressed
-    grammar_results = dict(statement_scope.grammar_results)
     clause_contexts = dict(statement_scope.context_results)
+    grammar_results = {key: observation for key, observation in statement_scope.grammar_results
+                       if key not in clause_contexts or clause_contexts[key].status == 'candidate'}
     grammar_observations = list(grammar_results.values())
     if has_prefix and not clauses:
         uncertainty = _grammar_uncertainty(grammar_observations)
@@ -342,7 +366,7 @@ def prepare_source_passage(
         if semantic:
             unresolved = next((context for context in semantic if context.status == 'unresolved'), None)
             if unresolved is not None:
-                return SourcePassageCapability('unresolved', unresolved.reason, 'source_context', False)
+                return SourcePassageCapability('unresolved', unresolved.reason, 'source_context', unresolved.relevant)
             return context(semantic[0].reason)
         return context('source_non_assertion')
     if not has_prefix and roles.independent_payload is False:
@@ -354,8 +378,7 @@ def prepare_source_passage(
             and (any(clause.independent_payload is True for clause in clauses)
                  or existing_fact_proof)):
         return SourcePassageCapability('support', existing_use[1], 'source_narrative', True)
-    if clauses and all(_VAGUE_OBJECTIVE.search(clause.text)
-                             or abstract_source_argument(clause.text)
+    if clauses and all(abstract_source_argument(clause.text)
                              for clause in clauses):
         return context('source_generic_objective')
     if (prepared_use or not has_prefix) and existing_use[0] == 'unresolved' and existing_relevant:
@@ -368,7 +391,7 @@ def prepare_source_passage(
         text = clause.text
         if (clause.rule_purpose or clause.independent_payload is False
                 or _NON_ASSERTION.search(text)
-                or _VAGUE_OBJECTIVE.search(text) or _REFERENCE_METADATA.search(text)):
+                or _REFERENCE_METADATA.search(text)):
             continue
         # Presentation belongs to this clause. A different readable operation
         # in the unchanged quote still supplies its own support below.
@@ -420,7 +443,7 @@ def prepare_source_passage(
     if semantic_contexts:
         unresolved = next((item for item in semantic_contexts if item.status == 'unresolved'), None)
         if unresolved is not None:
-            return SourcePassageCapability('unresolved', unresolved.reason, 'source_context', False)
+            return SourcePassageCapability('unresolved', unresolved.reason, 'source_context', unresolved.relevant)
         return context(semantic_contexts[0].reason)
     if finance_seen:
         return context('financial_only', finance=True)

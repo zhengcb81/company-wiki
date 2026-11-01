@@ -222,7 +222,8 @@ _ABSTRACT_EN_WORDS = frozenset((
     "help helping enhance enhancing can could will would allow allows "
     "better evolving constantly is are be as capabilities ability "
     "software equipment workloads solutions solution provide provides provided "
-    "support supports supported form forms formed"
+    "support supports supported form forms formed goal goals vision aspiration aspirations "
+    "outstanding strategic best-in-class more most less least fewer fewest"
 ).split())
 _ABSTRACT_EN_TOKEN = re.compile(r"[a-z]+(?:-[a-z]+)*|[^\s.,:()]+", re.I)
 _ABSTRACT_CN = re.compile(
@@ -230,7 +231,8 @@ _ABSTRACT_CN = re.compile(
     r"所有|广大|丰富|广泛|优质|全面|多样|多类|配套|未来|将|更多|高质量|高質量|产品|服务|技术|平台|业务|行业|客户|需求|"
     r"发展|开发|创新|数字化|转型|升级|增长|基础|能力|价值|成功|利益|效益|繁荣|幸福|快乐|满意度|参与度|"
     r"不断|持续|变化|提升|提高|满足|支持|提供|作为|软件|设备|工作负载|解决方案|"
-    r"助力|推动|促进|使|能够|可以|旨在|目标|是|"
+    r"助力|推动|促进|使|能够|可以|旨在|目标|愿景|原则|理念|宏伟|远大|美好|是|"
+    r"(?:更|最)?(?:大|小|多|少|高|低)|"
     r"[\s.。:：,，、;；()（）])+")
 _OBJECTIVE_PREDICATE = re.compile(
     r"旨在|目标|使我们|\b(?:aims?|aiming|enabl\w*|help\w*)\b", re.I)

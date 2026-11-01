@@ -6,7 +6,8 @@ unresolved; it is not evidence of an operation or of a financial-only source.
 """
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
+from collections.abc import Callable
 import re
 
 from company_wiki.document_understanding.operating_states.assertion_roles import (
@@ -30,6 +31,9 @@ class SourceClauseContext:
     status: str = 'candidate'
     reason: str = ''
     objective_operator: bool = False
+    objective_end: int | None = None
+    complement_observed: bool = False
+    relevant: bool = False
 
 
 _PAGE_NAME = re.compile(r'^\s*\d{1,4}\s+[^。.!?;；\n]{1,80}'
@@ -52,7 +56,8 @@ def source_clause_context(value: str, role: AssertionRole) -> SourceClauseContex
     not negative by itself: only a closed principle/courtesy envelope can be
     settled without the matrix/complement observation.
     """
-    if role.independent_payload is True:
+    objective = _OBJECTIVE.search(value)
+    if role.independent_payload is True and not objective:
         return SourceClauseContext()
     if arithmetic_presentation(value):
         return SourceClauseContext('context', 'source_arithmetic_presentation')
@@ -67,7 +72,6 @@ def source_clause_context(value: str, role: AssertionRole) -> SourceClauseContex
         prefix = value[:courtesy.start()].strip()
         if (not prefix or ISSUER_WORD.fullmatch(prefix)) and not value[courtesy.end():].strip(' .。!?！?;；'):
             return SourceClauseContext('context', 'source_courtesy')
-    objective = _OBJECTIVE.search(value)
     if objective:
         target = value[objective.end():].strip(' .。!?！?;；')
         principle = _PRINCIPLE.fullmatch(target)
@@ -80,22 +84,37 @@ def source_clause_context(value: str, role: AssertionRole) -> SourceClauseContex
             # A concrete independently observed operation was handled above;
             # a courtesy followed only by an unproved effort is not its proof.
             return SourceClauseContext('unresolved', 'source_courtesy_objective_unproved')
-    return SourceClauseContext(objective_operator=objective is not None)
+    return SourceClauseContext(objective_operator=objective is not None,
+                               objective_end=objective.end() if objective else None)
 
 
 def statement_complement_context(value: str, role: AssertionRole,
                                  observation: StatementObservation, *,
-                                 prepared: SourceClauseContext) -> SourceClauseContext:
+                                 prepared: SourceClauseContext,
+                                 quantified_argument: Callable[[str], bool] | None = None) -> SourceClauseContext:
     """Consume one charged syntax observation; never run the tagger again."""
-    if role.independent_payload is True:
-        return SourceClauseContext()
-    if prepared.objective_operator and observation.argument_nominals:
-        if all(abstract_source_argument(part) for part in observation.argument_nominals):
-            return SourceClauseContext('context', 'source_abstract_objective')
+    if prepared.complement_observed:
+        return prepared
+    prepared = replace(prepared, complement_observed=True)
+    if role.independent_payload is True and not prepared.objective_operator:
+        return prepared
+    arguments = (tuple(scope.argument_nominals + scope.argument_modifiers for scope in observation.argument_scopes)
+                 or ((observation.argument_nominals,) if observation.argument_nominals else ()))
+    if (prepared.objective_operator or role.operating) and arguments:
+        if all(all(abstract_source_argument(part) for part in scope) for scope in arguments):
+            if quantified_argument is not None and any(scope.argument_quantifiers
+                    and quantified_argument(' '.join(scope.argument_nominals))
+                    for scope in observation.argument_scopes):
+                # This is a bound direct-argument role, not a number/unit
+                # interpretation or achieved/planned metric proof. Its source
+                # words remain unresolved until the original metric owner
+                # independently supplies that proof.
+                return replace(prepared, status='unresolved', reason='source_goal_quantity_unresolved', relevant=True)
+            return replace(prepared, status='context', reason='source_abstract_objective')
     # Membership alone describes a relationship, not its economic relevance.
     # A prepared business head/function is a relevance observation even when
     # its unfamiliar members are not independent typed event proof. Otherwise
     # preserve the unresolved original without claiming a summary anchor.
     if observation.weak_relation and not role.operating:
-        return SourceClauseContext('unresolved', 'source_membership_relevance_unproved')
-    return SourceClauseContext()
+        return replace(prepared, status='unresolved', reason='source_membership_relevance_unproved')
+    return prepared

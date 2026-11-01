@@ -90,7 +90,7 @@ def _observe_output_language(
     return result
 
 
-@dataclass(frozen=True)
+@dataclass
 class _SummaryFailure(Exception):
     code: str
     outcome: HandlerOutcome
