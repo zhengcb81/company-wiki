@@ -21,7 +21,7 @@ if TYPE_CHECKING:
     from company_wiki.resource_budget import WorkBudget
 
 
-STATEMENT_GRAMMAR_VERSION = 'statement-grammar/2'
+STATEMENT_GRAMMAR_VERSION = 'statement-grammar/3'
 MAX_STATEMENT_CHARS = 4096
 MAX_STATEMENT_TOKENS = 1024
 STATEMENT_GRAMMAR_WORK_PER_CHAR = 32
@@ -40,12 +40,17 @@ _EN_INTERROGATIVE = re.compile(r'\s*(?:' + _EN_AUXILIARY + r'\b|'
     r'(?:what|when|where|why|how|who|whom|which|whose)\b'
     r'(?:\s+(?:many|much|long|often|soon|far))?\s+' + _EN_AUXILIARY + r'\b)', re.I)
 _EN_WH_START = re.compile(r'\s*(?:what|when|where|why|how|who|whom|which|whose|whether)\b', re.I)
+_ENUMERATOR = re.compile(r'^\s*(?:\([ivxlcdm]+\)|（[ivxlcdm]+）)\s*', re.I)
+_EN_MEMBERSHIP = re.compile(r'(?:includ(?:e|es|ed|ing)|compris(?:e|es|ed|ing)|'
+                            r'cover(?:s|ed|ing)?|consist(?:s|ed|ing)?)$', re.I)
 
 
 @dataclass(frozen=True)
 class StatementObservation:
     status: str
     reason: str
+    argument_nominals: tuple[str, ...] = ()
+    weak_relation: bool = False
 
     @property
     def independent(self) -> bool:
@@ -142,7 +147,7 @@ def _chinese_tagger() -> Any:
     return tokenizer, tags
 
 
-def _english_statement(text: str) -> bool:
+def _english_statement(text: str) -> tuple[bool, tuple[str, ...], bool]:
     words = _EN_TOKEN.findall(text)
     if len(words) > MAX_STATEMENT_TOKENS:
         raise _GrammarScopeExceeded
@@ -176,11 +181,24 @@ def _english_statement(text: str) -> bool:
             # A relative phrase does not supply the matrix predicate.
             if any(previous in {'WDT', 'WP', 'WP$'} for _, previous in tagged[:index]):
                 continue
-            return True
-    return False
+            verbs = [offset for offset in range(index, len(tagged))
+                     if tagged[offset][1].startswith('VB')]
+            lexical = verbs[-1] if verbs else index
+            nominals = tuple(token for token, flag in tagged[lexical + 1:]
+                             if flag in {'NN', 'NNS', 'NNP', 'NNPS'})
+            membership = _EN_MEMBERSHIP.fullmatch(tagged[lexical][0]) is not None
+            # cover X with Y is a transitive application, not an enumeration.
+            # Its unknown objects remain untouched; no crop/industry words
+            # determine this grammatical distinction.
+            if tagged[lexical][0].casefold().startswith('cover'):
+                membership &= not any(token.casefold() == 'with' and flag == 'IN'
+                                      for token, flag in tagged[lexical + 1:])
+            return True, nominals, membership
+    return False, (), False
 
 
-def _chinese_statement(text: str) -> bool:
+def _chinese_statement(text: str) -> tuple[bool, tuple[str, ...], bool]:
+    text = _ENUMERATOR.sub('', text, count=1)
     tokenizer, tags = _chinese_tagger()
     tagged = []
     for word in tokenizer.cut(text, HMM=False):
@@ -193,6 +211,8 @@ def _chinese_statement(text: str) -> bool:
     nominal = False
     aspect = False
     ambiguous = False
+    ambiguous_nominals: tuple[str, ...] = ()
+    nominalized_tail = False
     for index, (word, tag) in enumerate(tagged):
         if tag in {'uj', 'c'} or word in {'与', '與', '及', '和'}:
             nominal = False
@@ -201,6 +221,7 @@ def _chinese_statement(text: str) -> bool:
         if tag == 'x' and word in '，,；;。.!?！？':
             nominal = False
             aspect = False
+            nominalized_tail = False
             continue
         if tag.startswith('n') or tag in {'r', 's', 'f', 'eng'}:
             nominal = True
@@ -220,25 +241,49 @@ def _chinese_statement(text: str) -> bool:
         # consume a complete matrix predicate across its own scope.
         nominalizers = [offset for offset, (_, flag) in enumerate(tail)
                         if flag == 'uj' and (offset == 0 or tail[offset - 1][1] not in {'a', 'ad', 'an', 'f', 's'})]
-        if nominalizers:
+        # A matrix copula/possession verb takes a nominal complement, whose
+        # internal 的 does not nominalize that already observed matrix. An
+        # immediate V+的 still lacks a matrix object (公司拥有的码头).
+        nominal_complement = ((word in {'是', '有'} or word.endswith('于')) and nominalizers
+                              and all(offset > 0 for offset in nominalizers)
+                              and any(flag.startswith('n') or flag in {'v', 'vn'}
+                                      for _, flag in tail[nominalizers[-1] + 1:]))
+        if nominalizers and not nominal_complement:
             # An immediate V+的 is a clear relative nominal. With an intervening
             # noun the fixed POS dictionary cannot always distinguish a VP's
             # relative boundary from an object-internal possessive/modifier.
             # Do not guess that lexical ambiguity into either support or a
             # supposedly proven fragment; a later matrix clause can resolve it.
             ambiguous |= 0 not in nominalizers
+            if 0 not in nominalizers:
+                ambiguous_nominals = tuple(token for token, flag in tail if flag.startswith('n'))
+            nominalized_tail = True
+            continue
+        if nominalized_tail and not nominal_complement:
             continue
         rest = ''.join(token for token, _ in tail).lstrip()
         if tail and (tail[0][1] == 'c' or tail[0][0] in {'与', '與', '及', '和'}):
             continue
         if tag == 'vn' and not rest:
-            continue
+            first_preposition = next((offset for offset, (_, flag) in enumerate(tagged[:index])
+                                      if flag == 'p'), None)
+            if (first_preposition is None or not any(flag.startswith('n') or flag in {'r', 'eng'}
+                    for _, flag in tagged[:first_preposition])):
+                continue
         if _NOMINAL_HEAD.match(rest):
             continue
-        return True
+        verbs = [offset for offset in range(index, len(tagged))
+                 if tagged[offset][1] in {'v', 'vn'}]
+        lexical = verbs[-1] if verbs else index
+        nominals = tuple(token for token, flag in tagged[lexical + 1:]
+                         if flag.startswith('n'))
+        if not nominals:
+            nominals = tuple(token for token, flag in tagged[index + 1:]
+                             if flag.startswith('n'))
+        return True, nominals, word in {'包括', '包含', '涵盖', '覆盖'}
     if ambiguous:
-        raise _GrammarAmbiguous
-    return False
+        raise _GrammarAmbiguous(ambiguous_nominals)
+    return False, (), False
 
 
 def observe_statement(text: str, *, work_budget: WorkBudget | None = None) -> StatementObservation:
@@ -257,12 +302,15 @@ def observe_statement(text: str, *, work_budget: WorkBudget | None = None) -> St
     if work_budget is not None:
         work_budget.charge(STATEMENT_GRAMMAR_WORK_PER_CHAR * len(text) + 1)
     try:
-        independent = _chinese_statement(text) if _CN.search(text) else _english_statement(text)
+        independent, nominals, weak = (_chinese_statement(text) if _CN.search(text)
+                                       else _english_statement(text))
     except _GrammarScopeExceeded:
         return StatementObservation('unknown', 'statement_grammar_scope_limit')
-    except _GrammarAmbiguous:
-        return StatementObservation('unknown', 'statement_grammar_ambiguous')
+    except _GrammarAmbiguous as exc:
+        return StatementObservation('unknown', 'statement_grammar_ambiguous',
+                                    exc.args[0] if exc.args else ())
     except (ImportError, OSError, LookupError, ValueError, KeyError, TypeError):
         return StatementObservation('unknown', 'statement_grammar_unavailable')
     return StatementObservation('independent' if independent else 'fragment',
-                                'subject_predicate' if independent else 'no_matrix_predicate')
+                                'subject_predicate' if independent else 'no_matrix_predicate',
+                                nominals, weak)

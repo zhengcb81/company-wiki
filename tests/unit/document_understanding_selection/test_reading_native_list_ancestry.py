@@ -12,6 +12,7 @@ from pathlib import Path
 import pytest
 
 from company_wiki.document_understanding.narrative_continuity import SourcePageFlow, build_native_continuity
+from company_wiki.document_understanding.operating_states.relations import independent_statement_start
 from company_wiki.resource_budget import new_document_work_budget
 from company_wiki.source_catalog import narrative_reading as reading
 from company_wiki.source_catalog.narrative_document import DocumentStructure
@@ -355,7 +356,7 @@ def test_existing_sentence_page_flow_is_not_replaced_by_list_continuation(mode):
     budget = new_document_work_budget()
     flow = build_native_continuity(observation, provenance=provenance,
         sections=pipeline["structure"]["sections"], unit_profiles=pipeline["reading_plan"]["unit_profiles"],
-        work_budget=budget, source_page_flow=SourcePageFlow(furniture, reading.independent_statement_start,
+        work_budget=budget, source_page_flow=SourcePageFlow(furniture, independent_statement_start,
                                                      coarse_complete=parsed.coverage_complete))
     pair_windows = [window for window in flow["windows"]
                     if {left.unit_id, right.unit_id} <= set(window["member_unit_ids"])]

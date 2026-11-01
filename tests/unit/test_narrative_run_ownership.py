@@ -324,7 +324,11 @@ def test_v3_upgrade_preserves_all_facts_and_leaves_old_owner_unbound(tmp_path):
     assert calls == [(3, migrations.SCHEMA_VERSION)]
     assert (tmp_path / "before-v3.db").read_bytes() == original_bytes
     after = _facts(database)
-    assert after.keys() == before.keys()
+    # v8 adds the existing AUTO run's space ledger; legacy facts must stay
+    # byte/value-identical and the new ledger must not fabricate allocations.
+    assert set(after) - set(before) == {"narrative_storage_allocations"}
+    assert not set(before) - set(after)
+    assert after["narrative_storage_allocations"] == []
     for table in before.keys() - {"narrative_runs", "narrative_run_jobs", "narrative_model_reservations"}:
         assert after[table] == before[table]
     with closing(sqlite3.connect(database)) as connection:

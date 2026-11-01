@@ -560,7 +560,7 @@ def test_space_preflight_happens_before_admission_and_post(owned):
     assert not owned.runs.reservations_for_run("run") and owned.http.calls == 0
 
 
-def test_schema6_upgrade_adds_nullable_receipt_without_new_tables(tmp_path):
+def test_schema6_upgrade_preserves_tables_and_adds_nullable_receipt(tmp_path):
     import sqlite3
     from company_wiki.automation import migrations
 
@@ -588,7 +588,11 @@ def test_schema6_upgrade_adds_nullable_receipt_without_new_tables(tmp_path):
                 "SELECT name FROM sqlite_master WHERE type='table' AND name NOT LIKE 'sqlite_%'"
             )
         )
-    assert "paid_response_json" in columns and before == after
+        allocations = conn.execute("SELECT * FROM narrative_storage_allocations").fetchall()
+    assert "paid_response_json" in columns
+    assert before <= after
+    assert after - before == {"narrative_storage_allocations"}
+    assert allocations == []  # Historical space usage is not invented.
     assert migrations.inspect_schema(db).user_version == migrations.SCHEMA_VERSION
 
 

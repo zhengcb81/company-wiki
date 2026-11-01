@@ -211,3 +211,37 @@ def test_actual_failure_without_junit_detail_still_emits_error(
     assert main(str(report)) == 0
     output = capsys.readouterr().out
     assert "::error::" in output and "not run" not in output
+
+
+def test_long_failure_inventory_survives_platform_message_and_annotation_limits(tmp_path, capsys):
+    report = tmp_path / "long-inventory.xml"
+    suite = ET.Element("testsuite")
+    names = [f"test_group_{index}_" + "specific_failure_" * 5 for index in range(63)]
+    for name in names:
+        case = ET.SubElement(suite, "testcase", {"classname": "tests.unit.long_module", "name": name})
+        ET.SubElement(case, "failure", {"type": "AssertionError", "message": "private body"})
+    ET.ElementTree(suite).write(report, encoding="utf-8")
+    assert main(str(report)) == 0
+    annotations = [line for line in capsys.readouterr().out.splitlines() if line.startswith("::error")]
+    messages = [line.split("::", 2)[2] for line in annotations]
+    assert all(len(message.encode("utf-8")) <= 4096 for message in messages)
+    # Actions can retain only the first ten annotations and truncate each body.
+    visible = "\n".join(messages[:10])
+    assert all(name in visible for name in names)
+    assert "private body" not in visible
+
+
+def test_annotation_bounds_cover_escaped_utf8_and_long_case_identity(tmp_path, capsys):
+    report = tmp_path / "unicode-identity.xml"
+    suite = ET.Element("testsuite")
+    case = ET.SubElement(suite, "testcase", {
+        "classname": "tests.unit.unicode", "name": "test_identity[" + "汉%\n" * 3000 + "]",
+    })
+    ET.SubElement(case, "failure", {"type": "AssertionError"})
+    ET.ElementTree(suite).write(report, encoding="utf-8")
+    assert main(str(report)) == 0
+    messages = [line.split("::", 2)[2] for line in capsys.readouterr().out.splitlines()
+                if line.startswith("::error")]
+    assert all(len(message.encode("utf-8")) <= 4096 for message in messages)
+    assert any("[truncated]" in message for message in messages)
+    assert "test_identity [AssertionError] x1" in "\n".join(messages)

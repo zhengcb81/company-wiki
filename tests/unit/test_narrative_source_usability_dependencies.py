@@ -5,6 +5,7 @@ from types import SimpleNamespace
 import pytest
 
 from company_wiki.document_understanding import decision_inventory as inventory
+from company_wiki.source_catalog import narrative_decision_inventory as inventory_owner
 from company_wiki.document_understanding.decision_dependencies import (
     compare_decision_dependencies, freeze_decision_dependencies,
 )
@@ -117,7 +118,9 @@ def observed_carrier(mime_type):
 
 def fake_sources(tmp_path, monkeypatch):
     files = {}
-    original = inventory.import_module
+    # Public legacy trace calls remain covered, while injected source IO belongs
+    # to the new composition owner rather than its historical import shim.
+    original = inventory_owner.import_module
     for index, module in enumerate(MODULES):
         path = tmp_path / f"owned-source-{index}.py"
         path.write_bytes(b"def verify_selected():\n    return True\n")
@@ -126,7 +129,7 @@ def fake_sources(tmp_path, monkeypatch):
     def load(name):
         return SimpleNamespace(__file__=str(files[name])) if name in files else original(name)
 
-    monkeypatch.setattr(inventory, "import_module", load)
+    monkeypatch.setattr(inventory_owner, "import_module", load)
     return files
 
 

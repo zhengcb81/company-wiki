@@ -12,7 +12,7 @@ from dataclasses import dataclass, replace
 import re
 
 from company_wiki.document_understanding.operating_states.assertion_roles import (
-    SourceAssertionRoles, abstract_source_argument, _STATE_HEAD,
+    AssertionRole, SourceAssertionRoles, abstract_source_argument, _STATE_HEAD,
 )
 from company_wiki.document_understanding.structure.table_purpose import accounting_field
 from company_wiki.document_understanding.source_turn_markers import (
@@ -26,14 +26,17 @@ from company_wiki.document_understanding.statement_grammar import (
 from .narrative_causal_links import CAUSAL_LINK
 from .narrative_business_meaning import _OBJECT
 from .narrative_reporting_rules import arithmetic_presentation
+from .narrative_source_context import (
+    SOURCE_CONTEXT_SCAN_PASSES, SourceClauseContext, source_clause_context, statement_complement_context,
+)
 
 
-SOURCE_PASSAGE_POLICY_VERSION = 'source-passage/6'
+SOURCE_PASSAGE_POLICY_VERSION = 'source-passage/7'
 # Preparation reuses normalized clauses from the already charged assessment.
 # Includes generic grammar, negative envelopes, account and cause scans, plus
 # the measurement callback's normalized clause view. Metric proofs themselves
 # share the assessment cache with causal and business consumers.
-SOURCE_PASSAGE_SCAN_PASSES = 24
+SOURCE_PASSAGE_SCAN_PASSES = 24 + SOURCE_CONTEXT_SCAN_PASSES
 
 
 @dataclass(frozen=True)
@@ -57,6 +60,7 @@ class SourceStatementScope:
     assertion_keys: frozenset[str] = frozenset()
     business_causal_keys: frozenset[str] = frozenset()
     grammar_results: tuple[tuple[str, StatementObservation], ...] = ()
+    context_results: tuple[tuple[str, SourceClauseContext], ...] = ()
 
 
 _CN_QUESTION = re.compile(r'\s*(?:请问|請問|是否|会不会|會不會)')
@@ -120,6 +124,9 @@ def prepare_source_statement_scope(text: str, roles: SourceAssertionRoles, *,
     segments: list[tuple[int, int, bool]] = []
     suppressed = False
     grammar_results = []
+    context_results = tuple((statement_assertion_key(clause.text), source_clause_context(clause.text, clause))
+                            for clause in roles.clauses)
+    contexts = dict(context_results)
     while start < len(text):
         end = _SENTENCE_END.search(text, start)
         stop = end.end() if end else len(text)
@@ -145,8 +152,10 @@ def prepare_source_statement_scope(text: str, roles: SourceAssertionRoles, *,
         segments.append((start, stop, allowed))
         suppressed |= not allowed
         start = stop
-    if not suppressed and CAUSAL_LINK.search(text) is None:
-        return SourceStatementScope(text, roles, grammar_results=tuple(grammar_results))
+    if (not suppressed and CAUSAL_LINK.search(text) is None
+            and all(context.status == 'candidate' for _, context in context_results)):
+        return SourceStatementScope(text, roles, grammar_results=tuple(grammar_results),
+                                    context_results=context_results)
     normalized = []
     segment_ranges = []
     offset = 0
@@ -166,7 +175,7 @@ def prepare_source_statement_scope(text: str, roles: SourceAssertionRoles, *,
             # The supplied prepared view cannot prove a safe suffix alignment.
             return SourceStatementScope(' ' * len(text), replace(roles, clauses=(),
                 bound_operating=False, bound_payload=False), True,
-                grammar_results=tuple(grammar_results))
+                grammar_results=tuple(grammar_results), context_results=context_results)
         cursor = position + len(clause.text)
         while (statement_index < len(segment_ranges)
                and segment_ranges[statement_index][1] <= position):
@@ -180,6 +189,10 @@ def prepare_source_statement_scope(text: str, roles: SourceAssertionRoles, *,
     assertion_keys = set()
     causal_keys: set[str] = set()
     for (start, stop, allowed), segment, members in zip(segments, normalized, memberships):
+        members = [clause for clause in members
+                   if contexts[statement_assertion_key(clause.text)].status == 'candidate']
+        if not members:
+            allowed = False
         cause = CAUSAL_LINK.search(segment)
         if allowed and cause and accounting_text(segment):
             tail = (cause.group('embedded_cause') or segment[cause.end():]).strip()
@@ -210,11 +223,15 @@ def prepare_source_statement_scope(text: str, roles: SourceAssertionRoles, *,
                              bound_payload=False) if suppressed else roles)
     return SourceStatementScope(''.join(masked), prepared_roles, suppressed,
                                 frozenset(assertion_keys), frozenset(causal_keys),
-                                tuple(grammar_results))
+                                tuple(grammar_results), context_results)
 
 
 def _declarative(text: str, *, grammar_observations: list[StatementObservation] | None = None,
                  grammar_results: dict[str, StatementObservation] | None = None,
+                 source_role: AssertionRole | None = None,
+                 semantic_contexts: list[SourceClauseContext] | None = None,
+                 semantic_results: dict[str, SourceClauseContext] | None = None,
+                 clause_contexts: dict[str, SourceClauseContext] | None = None,
                  grammar_work_budget=None) -> bool:
     """Observe a source statement, not its economic truth or event eligibility."""
     if not any(character.isalpha() for character in text):
@@ -235,8 +252,26 @@ def _declarative(text: str, *, grammar_observations: list[StatementObservation] 
         observation = observe_statement(text, work_budget=grammar_work_budget)
         if grammar_results is not None:
             grammar_results[key] = observation
-        if grammar_observations is not None:
-            grammar_observations.append(observation)
+    if source_role is not None:
+        context = semantic_results.get(key) if semantic_results is not None else None
+        if context is None:
+            prepared = clause_contexts.get(key) if clause_contexts is not None else None
+            if prepared is None:
+                # A comma-delimited subclause is a distinct view, never a
+                # second observation of its original whole-clause operator.
+                prepared = source_clause_context(text, source_role)
+                if clause_contexts is not None:
+                    clause_contexts[key] = prepared
+            context = (statement_complement_context(text, source_role, observation, prepared=prepared)
+                       if prepared.status == 'candidate' else prepared)
+            if semantic_results is not None:
+                semantic_results[key] = context
+        if context.status != 'candidate':
+            if semantic_contexts is not None:
+                semantic_contexts.append(context)
+            return False
+    if grammar_observations is not None:
+        grammar_observations.append(observation)
     return observation.independent
 
 
@@ -264,6 +299,7 @@ def prepare_source_passage(
     accounting_text: Callable[[str], bool], non_operating_purposes: frozenset[str],
     existing_use: tuple[str, str], existing_relevant: bool,
     statement_scope: SourceStatementScope | None = None,
+    existing_fact_proof: bool = False,
     grammar_work_budget=None,
 ) -> SourcePassageCapability:
     """Prepare once; two consumers share the same capability without rescanning.
@@ -295,18 +331,28 @@ def prepare_source_passage(
                        prepare_source_statement_scope(text, roles))
     clauses, has_prefix = statement_scope.roles.clauses, statement_scope.suppressed
     grammar_results = dict(statement_scope.grammar_results)
+    clause_contexts = dict(statement_scope.context_results)
     grammar_observations = list(grammar_results.values())
     if has_prefix and not clauses:
         uncertainty = _grammar_uncertainty(grammar_observations)
         if uncertainty is not None:
             return uncertainty
+        semantic = [context for _, context in statement_scope.context_results
+                    if context.status != 'candidate']
+        if semantic:
+            unresolved = next((context for context in semantic if context.status == 'unresolved'), None)
+            if unresolved is not None:
+                return SourcePassageCapability('unresolved', unresolved.reason, 'source_context', False)
+            return context(semantic[0].reason)
         return context('source_non_assertion')
     if not has_prefix and roles.independent_payload is False:
         return context('source_generic_objective')
     # Preserve the established prepared capability before considering a more
     # general source-quote fallback. It may be proved by a bound relation or a
     # resource/quantity owner rather than a single local clause witness.
-    if (prepared_use or not has_prefix) and existing_use[0] == 'support':
+    if ((prepared_use or not has_prefix) and existing_use[0] == 'support'
+            and (any(clause.independent_payload is True for clause in clauses)
+                 or existing_fact_proof)):
         return SourcePassageCapability('support', existing_use[1], 'source_narrative', True)
     if clauses and all(_VAGUE_OBJECTIVE.search(clause.text)
                              or abstract_source_argument(clause.text)
@@ -316,6 +362,8 @@ def prepare_source_passage(
         return SourcePassageCapability('unresolved', existing_use[1], 'source_narrative', True)
     readable = False
     finance_seen = financial_only
+    semantic_contexts: list[SourceClauseContext] = []
+    semantic_results: dict[str, SourceClauseContext] = {}
     for clause in clauses:
         text = clause.text
         if (clause.rule_purpose or clause.independent_payload is False
@@ -332,12 +380,18 @@ def prepare_source_passage(
             readable = True
         elif not account and _declarative(text, grammar_observations=grammar_observations,
                                          grammar_results=grammar_results,
+                                         source_role=clause, semantic_contexts=semantic_contexts,
+                                         semantic_results=semantic_results,
+                                         clause_contexts=clause_contexts,
                                          grammar_work_budget=grammar_work_budget):
             readable = True
         elif account:
             if text.strip(' \t\r\n.。!?？！;；') in statement_scope.business_causal_keys:
                 readable |= _declarative(text, grammar_observations=grammar_observations,
                                          grammar_results=grammar_results,
+                                         source_role=clause, semantic_contexts=semantic_contexts,
+                                         semantic_results=semantic_results,
+                                         clause_contexts=clause_contexts,
                                          grammar_work_budget=grammar_work_budget)
             # A comma can separate a complete operating description from its
             # financial consequence. Classify those local scopes separately,
@@ -346,6 +400,9 @@ def prepare_source_passage(
             readable |= any(not accounting_text(part) and _declarative(
                                 part.strip(), grammar_observations=grammar_observations,
                                 grammar_results=grammar_results,
+                                source_role=clause, semantic_contexts=semantic_contexts,
+                                semantic_results=semantic_results,
+                                clause_contexts=clause_contexts,
                                 grammar_work_budget=grammar_work_budget)
                             for part in re.split(r'[,，]', text)
                             if part.strip() and part != text)
@@ -360,6 +417,11 @@ def prepare_source_passage(
             'mixed_narrative_context' if finance_seen else 'source_narrative', True)
     if uncertainty is not None:
         return uncertainty
+    if semantic_contexts:
+        unresolved = next((item for item in semantic_contexts if item.status == 'unresolved'), None)
+        if unresolved is not None:
+            return SourcePassageCapability('unresolved', unresolved.reason, 'source_context', False)
+        return context(semantic_contexts[0].reason)
     if finance_seen:
         return context('financial_only', finance=True)
     return SourcePassageCapability('unresolved', 'source_passage_incomplete', 'unknown', False)

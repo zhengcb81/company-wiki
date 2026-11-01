@@ -10,7 +10,8 @@ import xml.etree.ElementTree as ET
 from pathlib import Path
 
 MAX_ANNOTATIONS = 25
-MAX_GROUP_SUMMARY_CHARS = 12000
+MAX_GROUP_SUMMARY_BYTES = 12000
+MAX_GROUP_ANNOTATION_BYTES = 2600
 
 
 def _escape_command_data(value: str) -> str:
@@ -82,22 +83,57 @@ def _append_step_summary(lines: list[str]) -> None:
 
 
 def _failure_groups(failures: list[tuple[str, str, str, str]]) -> str:
-    """Keep the complete bounded function inventory in the first annotation.
+    """Build a bounded inventory for early, size-limited group annotations.
 
-    Actions may expose only ten individual annotations. Parameter payloads
-    are unnecessary here: group by function and exception, with case counts.
+    Parameter payloads are unnecessary here: group by function and exception,
+    with case counts. The renderer splits the inventory before case details.
     """
     groups = Counter((node.split("[", 1)[0], kind) for _, _, node, kind in failures)
     lines = [f"Failure groups ({len(failures)} failed cases):"]
-    size = len(lines[0])
+    size = len(_escape_command_data(lines[0]).encode("utf-8"))
     for index, ((node, kind), count) in enumerate(groups.items()):
         line = f"{node} [{kind}] x{count}"
-        if size + len(line) + 1 > MAX_GROUP_SUMMARY_CHARS - 100:
+        line_size = len(_escape_command_data(line).encode("utf-8"))
+        if size + line_size + 3 > MAX_GROUP_SUMMARY_BYTES - 100:
             lines.append(f"Group inventory truncated: {len(groups) - index} groups not shown.")
             break
         lines.append(line)
-        size += len(line) + 1
+        size += line_size + 3
     return "\n".join(lines)
+
+
+def _bounded_annotation(value: str, max_bytes: int) -> str:
+    """Bound the actual escaped UTF-8 command body, retaining explicit loss."""
+    if len(_escape_command_data(value).encode("utf-8")) <= max_bytes:
+        return value
+    suffix = " [truncated]"
+    low, high = 0, len(value)
+    while low < high:
+        middle = (low + high + 1) // 2
+        candidate = _escape_command_data(value[:middle] + suffix).encode("utf-8")
+        if len(candidate) <= max_bytes:
+            low = middle
+        else:
+            high = middle - 1
+    return value[:low] + suffix
+
+
+def _group_annotation_chunks(inventory: str) -> list[str]:
+    # Actions truncates message bodies at 4096 and may retain only ten errors.
+    # Emit all bounded groups before the individual-case annotation tail.
+    chunks: list[str] = []
+    current = ""
+    for line in inventory.splitlines():
+        line = _bounded_annotation(line, MAX_GROUP_ANNOTATION_BYTES)
+        joined = current + "\n" + line if current else line
+        if len(_escape_command_data(joined).encode("utf-8")) > MAX_GROUP_ANNOTATION_BYTES:
+            chunks.append(current)
+            current = line
+        else:
+            current = joined
+    if current:
+        chunks.append(current)
+    return chunks
 
 
 def main(report_path: str) -> int:
@@ -123,24 +159,30 @@ def main(report_path: str) -> int:
             _append_step_summary([f"## {suite_name} failure details unavailable", "", message])
         return 0
 
+    inventory = _failure_groups(failures)
+    group_chunks = _group_annotation_chunks(inventory)
     summary_lines = [f"## Failed {suite_name}", ""]
     for index, (file_name, line, node_id, error_type) in enumerate(failures[:MAX_ANNOTATIONS]):
         properties = f" file={_escape_command_data(file_name)}" if file_name else ""
         if line.isdigit():
             properties += f",line={line}"
-        diagnostic = f"{node_id} [{error_type}]"
+        diagnostic = _bounded_annotation(f"{node_id} [{error_type}]", 800)
         if index == 0:
-            diagnostic += "\n" + _failure_groups(failures)
+            diagnostic += "\n" + group_chunks[0]
         print(
             f"::error{properties}::"
             f"{_escape_command_data(diagnostic)}"
         )
+        if index == 0:
+            for chunk in group_chunks[1:]:
+                print(f"::error title=Failure group inventory::{_escape_command_data(chunk)}")
         markdown_node_id = node_id.replace("`", "\\`")
         summary_lines.append(f"- `{markdown_node_id}` [{error_type}]")
     if len(failures) > MAX_ANNOTATIONS:
         remainder = len(failures) - MAX_ANNOTATIONS
         print(f"::error::and {remainder} more failing tests")
         summary_lines.extend(["", f"And {remainder} more failing tests."])
+    summary_lines.extend(["", inventory])
     _append_step_summary(summary_lines)
     return 0
 

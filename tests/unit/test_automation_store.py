@@ -531,19 +531,17 @@ def test_s24_sql_injection_payload_roundtrips(tmp_path):
     s = _store_mod()
     m = _models()
     store = s.AutomationStore(tmp_path / "automation.db")
+    tables_before = set(store.schema_report().tables)
+    assert "events" in tables_before
     malicious = m.canonical_json({"x": "'); DROP TABLE events;--"})
     evt = _make_event(m=m, payload_json=malicious)
     store.put_event(evt)
     got = store.get_event("evt-auto2-001")
     assert got is not None
     assert got.payload_json == malicious
-    # All schema v4 tables still exist; SQL data cannot drop old or new tables.
-    report = store.schema_report()
-    assert set(report.tables) == {
-        "events", "jobs", "job_dependencies", "attempts",
-        "approvals", "effects", "outbox", "notifications", "runtime_gate",
-        "narrative_runs", "narrative_run_jobs", "narrative_model_reservations",
-    }
+    # Compare the current schema across the malicious data write, rather than
+    # pinning an unrelated historical migration's table inventory.
+    assert set(store.schema_report().tables) == tables_before
 
 
 # --------------------------------------------------------------------------- #

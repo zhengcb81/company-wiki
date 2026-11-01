@@ -326,7 +326,7 @@ def test_missing_frozen_actual_frontend_proof_is_partial():
 @pytest.mark.parametrize("missing", ["module", "version"])
 def test_missing_pure_projection_component_cannot_claim_complete_pdf(monkeypatch, missing):
     from importlib import import_module
-    from company_wiki.document_understanding import decision_inventory
+    from company_wiki.source_catalog import narrative_decision_inventory as inventory_owner
 
     pdf = carrier_trace("application/pdf")
     html = carrier_trace("text/html")
@@ -338,9 +338,9 @@ def test_missing_pure_projection_component_cannot_claim_complete_pdf(monkeypatch
             return SimpleNamespace()
         return import_module(name)
 
-    monkeypatch.setattr(decision_inventory, "import_module", actual_import, raising=False)
-    assert decision_inventory.current_decision_trace(pdf)["inventory_complete"] is False
-    assert decision_inventory.current_decision_trace(html) == html
+    monkeypatch.setattr(inventory_owner, "import_module", actual_import)
+    assert inventory_owner.current_decision_trace(pdf)["inventory_complete"] is False
+    assert inventory_owner.current_decision_trace(html) == html
 
 
 def test_marker_filter_does_not_remove_words_with_digits_or_roman_prefixes():

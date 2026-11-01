@@ -21,7 +21,8 @@ def test_offline_inference_does_not_write_dictionary_cache(tmp_path, monkeypatch
     owned.mkdir()
     monkeypatch.setenv('TMPDIR', str(ambient))
     code = '''
-import os, pathlib, tempfile, urllib.request
+import os, pathlib, sys, tempfile, urllib.request
+sys.path.insert(0, sys.argv[1])
 assert pathlib.Path(tempfile.gettempdir()).resolve() == pathlib.Path(os.environ['NLTK_DATA']).resolve()
 import nltk, jieba
 from company_wiki.document_understanding.statement_grammar import observe_statement
@@ -36,7 +37,12 @@ assert not list(pathlib.Path(tempfile.gettempdir()).iterdir())
     environment = os.environ.copy()
     environment.update(TEMP=str(owned), TMP=str(owned), TMPDIR=str(owned),
                        NLTK_DATA=str(owned))
-    result = subprocess.run([sys.executable, '-B', '-X', 'utf8', '-c', code],
+    # pytest's sys.path (and a hook's PYTHONPATH) is not inherited reliably by
+    # subprocesses. Load this test's actual checkout explicitly, in isolation.
+    source_parent = str(Path(grammar.__file__).resolve().parents[3])
+    environment['PYTHONPATH'] = str(ambient / 'not-the-package')
+    result = subprocess.run([sys.executable, '-I', '-B', '-X', 'utf8', '-c', code,
+                             source_parent],
                             env=environment, capture_output=True, text=True,
                             encoding='utf-8', timeout=30)
     assert result.returncode == 0, result.stderr

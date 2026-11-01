@@ -1095,6 +1095,7 @@ def prepare_reading_business_assessment(text: str, source_relations: dict, *, re
         accounting_text=accounting_text,
         non_operating_purposes=NON_OPERATING_PURPOSES, existing_use=existing_use,
         existing_relevant=existing_relevant, statement_scope=statement_scope,
+        existing_fact_proof=bool(fact.eligible and set(fact.reasons) - UNRESOLVED_READING_REASONS),
         grammar_work_budget=grammar_work_budget)
     # A finance label in a mixed scope is not proof that an unprocessed
     # independent passage contains no business. Reuse the existing unknown
