@@ -1,11 +1,11 @@
 {
   "schema_version": "company-wiki-current-plan-status/2",
   "as_of_date": "2026-11-01",
-  "observed_at_utc": "2026-11-01T04:47:10.567247+00:00",
+  "observed_at_utc": "2026-11-01T06:00:49.960881+00:00",
   "canonical_entry": "CURRENT_STATUS.md",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
-  "project_status": "P3_W12_V2_FROZEN_FRESH_REVIEWS_IN_PROGRESS_ENGINEERING_EXACT_CI_GREEN_RESEARCH_OPEN",
+  "project_status": "P3_SOURCE_SCOPE_BOUNDED_INDEPENDENT_PASS_PUBLICATION_PENDING_R4_RESEARCH_EXECUTING",
   "scope_this_update": "Mainline only; exact CI root repairs, real summary/recovery/native adoption; no new packages",
   "last_code_commit": "c405848ad1ddba1ec0ded4ed75a7d2cdc5c8314e",
   "verified_publication_before_docs": {
@@ -93,12 +93,17 @@
       "task": "W12 original-company rerun, new-company generalization, fixed8company fullaudit/skillimprovement and finalclean streak"
     }
   ],
-  "next_action": "完成W12同一封存v2执行包的四路fresh独审并逐条归并根因；按已有P3责任先修来源选材遗漏、经营幅度/反证与旁表口径问题，再以新attempt复验实际摘要/缓存/RF采用及研究内容，完成质量和检测收尾。不扩施工包。",
+  "next_action": "正常发布来源共因修复并核精确CI；在r1-remediation-04按既有内部细则完成经营输入、一次新版正式摘要、缓存恢复及RF实际采用/报告/snapshot/客户时点压力，再做集中四审与质量/检测收尾。不扩施工包。",
   "package_status_registry": "PACKAGE_STATUS.json",
   "handoff": "HANDOFF.md",
   "goal_definition": "MAINLINE_LOOP_GOAL.md",
   "history_index": "HISTORY.md",
-  "own_uncommitted_runtime": [],
+  "own_uncommitted_runtime": [
+    "src/company_wiki/document_understanding/operating_states/assertion_roles.py",
+    "src/company_wiki/source_catalog/narrative_business_policy.py",
+    "src/company_wiki/source_catalog/narrative_reporting_rules.py",
+    "src/company_wiki/source_catalog/narrative_source_passage.py"
+  ],
   "foreign_wip_preserved": [
     ".githooks/pre-push mode-only; not ours"
   ],
@@ -257,7 +262,8 @@
   "protected_RF_WIP": [
     "assurance/runs/daily_alert.jsonl",
     "assurance/runs/weekly_alert.jsonl",
-    "assurance/runs/weekly_manifest.json"
+    "assurance/runs/weekly_manifest.json",
+    "assurance/runs/monthly_manifest.json"
   ],
   "owned_test_cleanup": {
     "new_test_annual_and_full_normalization_removed_bytes": 4662644,
@@ -324,6 +330,110 @@
         }
       ],
       "schema_version": "owned-cache-test-cleanup/1"
+    },
+    "source_scope_basetemps": {
+      "scope": "18 exact ROOT-owned pytest basetemps bound to preserved logs; no source data, executor or independent reviewer files",
+      "removed_logical_bytes": 1644.0,
+      "checked_at_utc": "2026-11-01T05:57:13.5660269Z",
+      "directories": [
+        {
+          "name": ".m9-ms-red",
+          "existed": false,
+          "logical_bytes": 0
+        },
+        {
+          "name": ".m9-ms-green",
+          "existed": false,
+          "logical_bytes": 0
+        },
+        {
+          "name": ".m9-ms-core",
+          "existed": false,
+          "logical_bytes": 0
+        },
+        {
+          "name": ".m9-ms-core2",
+          "existed": false,
+          "logical_bytes": 0
+        },
+        {
+          "name": ".m9-ms-domain",
+          "existed": true,
+          "removed": true,
+          "logical_bytes": 548,
+          "source_log": "source-measurement-enumeration-domain.log"
+        },
+        {
+          "name": ".m9-ms-domain-final",
+          "existed": true,
+          "removed": true,
+          "logical_bytes": 548,
+          "source_log": "source-scope-final-domain.log"
+        },
+        {
+          "name": ".m9-ms-rv-red",
+          "existed": false,
+          "logical_bytes": 0
+        },
+        {
+          "name": ".m9-ms-rv-green",
+          "existed": false,
+          "logical_bytes": 0
+        },
+        {
+          "name": ".m9-ms-rv-final",
+          "existed": false,
+          "logical_bytes": 0
+        },
+        {
+          "name": ".m9-ms-comma-red",
+          "existed": false,
+          "logical_bytes": 0
+        },
+        {
+          "name": ".m9-ms-notes-red",
+          "existed": false,
+          "logical_bytes": 0
+        },
+        {
+          "name": ".m9-ms-notes-green",
+          "existed": false,
+          "logical_bytes": 0
+        },
+        {
+          "name": ".m9-ms-notes-final",
+          "existed": false,
+          "logical_bytes": 0
+        },
+        {
+          "name": ".m9-ms-mixed-red",
+          "existed": false,
+          "logical_bytes": 0
+        },
+        {
+          "name": ".m9-ms-mixed-green",
+          "existed": false,
+          "logical_bytes": 0
+        },
+        {
+          "name": ".m9-ms-mixed-green2",
+          "existed": false,
+          "logical_bytes": 0
+        },
+        {
+          "name": ".m9-ms-mixed-final",
+          "existed": false,
+          "logical_bytes": 0
+        },
+        {
+          "name": ".m9-ms-accepted",
+          "existed": true,
+          "removed": true,
+          "logical_bytes": 548,
+          "source_log": "source-scope-accepted-domain.log"
+        }
+      ],
+      "schema_version": "owned-source-scope-test-cleanup/1"
     }
   },
   "p1_huali_v2_historical": {
@@ -475,7 +585,7 @@
     "attempt": "r1-remediation-03",
     "as_of_date": "2026-10-21",
     "executor": "/root/w12_executor_current",
-    "status": "V2_FROZEN_FRESH_REVIEWS_RUNNING_RESEARCH_OPEN",
+    "status": "R3_FROZEN_FOUR_REVIEWS_REMEDIATION_CONTINUES_IN_R4",
     "root": "revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec/execution_replays/r1-remediation-03",
     "formal_execution_or_four_review_pass": false,
     "new_model_POST_so_far": 4,
@@ -560,51 +670,84 @@
     "review_context": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\reports\\r1-remediation-03\\review_input.json",
     "fresh_reviews": {
       "storage": {
-        "status": "FROZEN_AWAIT_ROOT_RECONCILIATION",
-        "role": "storage",
-        "directory": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\reports\\r1-remediation-03",
+        "status": "FROZEN_AWAIT_REMEDIATION",
         "json_sha256": "4021be6c5d3001eb2b1db2b7f7025ea8b26edbb153b07f945bec1de534d38500",
         "md_sha256": "5e38edbbdbb84d11c6c2e8bdf3aa8ddb55dfb890d3236e956156f3cb6e4ec869",
         "findings": [
           {
             "issue_id": "STORAGE-001",
             "severity": "P2",
-            "summary": "有限H1选择把名额分给脚注/泛宣传，遗漏关键D&M收入增速和具体技术能力原段；当前RF补读减轻结果影响但未修复上游召回。"
+            "category": "code"
           }
         ]
       },
       "fetch": {
-        "status": "RUNNING",
-        "role": "fetch",
-        "directory": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\reports\\r1-remediation-03"
+        "status": "FROZEN_AWAIT_REMEDIATION",
+        "json_sha256": "b27c4b1b7924794eaf66505169d7c38a1be76280fd284dfaea0e5e5b721b36e4",
+        "md_sha256": "05cf391c7b3fb4d155b8cf694c47bd12e4a7515ce872ee3e897c44f6e5706a81",
+        "findings": [
+          {
+            "issue_id": "FETCH-001",
+            "severity": "P2",
+            "category": "provider"
+          }
+        ]
       },
       "process": {
-        "status": "RUNNING",
-        "role": "process",
-        "directory": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\reports\\r1-remediation-03"
+        "status": "FROZEN_AWAIT_REMEDIATION",
+        "json_sha256": "0229c0c023be2058c1b0765b400481be05a08b4e14d3a438d207754a9cefbca8",
+        "md_sha256": "05c26b5230ac8301b842975590c47a848129a372c016db0b226fcdc12752f8f2",
+        "findings": [
+          {
+            "issue_id": "PROCESS-001",
+            "severity": "P2",
+            "category": "data"
+          },
+          {
+            "issue_id": "PROCESS-002",
+            "severity": "P2",
+            "category": "observability"
+          }
+        ]
       },
       "analyst": {
-        "status": "FROZEN_AWAIT_ROOT_RECONCILIATION",
-        "role": "analyst",
-        "directory": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\reports\\r1-remediation-03",
+        "status": "FROZEN_AWAIT_REMEDIATION",
         "json_sha256": "a955fbe930a5e9e0b66284f6170647ba181bb0a398622b85e573ce836ad558fa",
         "md_sha256": "b9bd2cd55762c6960a9ac0d29a6c93b8579f28f9f43a1b2eb82b75c63c62089c",
         "findings": [
           {
             "issue_id": "ANALYST-001",
             "severity": "P1",
-            "summary": "决定大额增量的 H2 经营指数与共用尾部持续性仍缺足以支持其幅度的需求、供给和确认桥；完整披露 conditional 不等于完成买方模型校准。"
+            "category": "research"
           },
           {
             "issue_id": "ANALYST-002",
             "severity": "P1",
-            "summary": "截至截止日前可得的客户流失/项目转移法律反证未进入需求持续性及确认时点的压力检验；发行人临时禁令公告加通用风险不足以覆盖该机制。"
+            "category": "research"
           }
         ]
       }
+    },
+    "expert": "/root/w12_common_root_expert_r3",
+    "review_reconciliation": {
+      "expected_checkpoints": 73,
+      "current_issue_count": 6,
+      "declared_gaps": 0,
+      "quality_status": "not_evaluated",
+      "root_view_parameters_corrected": true,
+      "mixed_locator_diagnostics_remain": true,
+      "current_report": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\coordinator\\review_coverage\\r1-remediation-03\\native-v3\\20261101T045940Z-13098580\\coverage.json"
+    },
+    "diagnosis": {
+      "roots": 7,
+      "original_issues": 6,
+      "directory": "revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec/diagnosis/r1-remediation-03"
     }
   },
-  "own_uncommitted_tests": [],
+  "own_uncommitted_tests": [
+    "tests/unit/du11_production/test_source_measurement_scope_and_enumeration.py",
+    "tests/unit/du11_production/test_source_passage_prefix_and_cause.py"
+  ],
   "last_version_contract_failed_ci": {
     "id": 41261403683,
     "head_sha": "93f561ef520e257bec11e3b7aa27ac16267c2203",
@@ -704,5 +847,58 @@
     "unique_content_bytes": 52877036,
     "identical_duplicate_logical_bytes": 62182776,
     "scope": "54.0% duplicate logical bytes, not measured NTFS physical allocation or space already reclaimed. Preserve sealed attempt during reviews; assess reuse of existing immutable input owner in P3 quality closeout, not a new package."
+  },
+  "p3_source_scope_repair": {
+    "status": "BOUNDED_INDEPENDENT_PASS_AWAIT_PUBLICATION",
+    "evidence": "review/mainline-closeout-20261031/p3-source-scope/README.md",
+    "business_policy": "reading-business-policy/29",
+    "source_passage": "source-passage/2",
+    "new_cases": 37,
+    "domain_passed": 698,
+    "domain_seconds": 28.88,
+    "mypy_source_files": 408,
+    "independent_domain_passed": 268,
+    "scopes_overlap": true,
+    "actual_selection_seconds": 7.018823699996574,
+    "selected": 112,
+    "document_work_used": 15991162,
+    "document_work_limit": 16000000,
+    "original_targets_covered": 3,
+    "native_range_members_verified": 8,
+    "rounding_independent_cards": 0,
+    "source_coverage_complete": false,
+    "new_model_POST": 0,
+    "new_downloads": 0,
+    "independent_target_coverage": {
+      "covered": 9,
+      "partial": 3,
+      "full_recall_claim": false
+    },
+    "current_original_bytes_unchanged": true,
+    "exact_CI": "pending",
+    "not_signed": [
+      "new formal model artifact",
+      "new cache recovery",
+      "RF research acceptance",
+      "entire project"
+    ]
+  },
+  "p3_next_attempt": {
+    "attempt": "r1-remediation-04",
+    "executor": "/root/w12_executor_remediation04",
+    "status": "FREE_SOURCES_AND_NATIVE_RESEARCH_INPUT_EXECUTING",
+    "as_of_date": "2026-10-21",
+    "new_source_HTTP": 3,
+    "new_source_bytes": 608016,
+    "new_source_cost": 0,
+    "new_source_types": [
+      "court original opinion",
+      "official dated meeting notice",
+      "organizer original Q&A HTML"
+    ],
+    "Q_and_A_qualification": "published_date unknown; current source owner returns source_availability_unknown, not an RF-qualified transcript",
+    "new_H1_model_POST": 0,
+    "formal_result_accepted": false,
+    "internal_PWF": "revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec/remediation/r1-remediation-03/implementation.md"
   }
 }

@@ -1,6 +1,6 @@
 # 当前项目状态 — 2026-11-01
 
-**当前在P3药明康德W12完整公司复验：原3例CI及后续版本合同失败均已根修；新版真实摘要、缓存恢复和RF采用工程链已跑通。完整公司研究尚未通过独审，继续修复共因，不扩发施工包。**
+**当前在P3药明康德W12的r1-remediation-04补偿复验：原3例CI及后续版本合同失败均已根修；新版真实摘要、缓存恢复和RF采用工程链已跑通。完整公司研究尚未通过独审，继续修复共因，不扩发施工包。**
 
 唯一入口为本页及[机器状态](CURRENT_STATUS.json)；接手看[HANDOFF](HANDOFF.md)，实施看[task_plan](task_plan.md)，全部完成条件看[MAINLINE_LOOP_GOAL](MAINLINE_LOOP_GOAL.md)。
 
@@ -26,11 +26,17 @@ RF main/远端85054d7b，[CI41260918155](https://github.com/zhengcb81/revenue-fo
 
 W12执行根为audit原run的`execution_replays/r1-remediation-03`；734件/115059812逻辑字节，manifest SHA **6e8051f6…616d8**已逐件核对。active input为authoring-v4，主forecast/main-v2 SHA **d78fcdc6…21b1**，snapshot **ada03b4f…740**。作者v1三条Testing误摘同页TIDES的引用已用新v2纠正，旧字节保留。实际195claim、232参数、主/联合压力链已执行；54个幅度诊断unsupported，不能由计算正确升级为经济合理。
 
-四路fresh审查输入及报告在`revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec/reports/r1-remediation-03`。storage、analyst已封存：前者报告关键业务段遗漏P2，后者报告幅度校准及法律/客户反证P1。process、fetch各自独立收尾。ROOT须汇齐四份、实读证据并归并共因，不能把任一角色结论扩写成整体通过。
+四路fresh审查输入及报告在`revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec/reports/r1-remediation-03`，现已全部封存：storage一项P2选材遗漏；process两项P2旁表期间/背景事实血缘；analyst两项P1经营校准/反证；fetch一项P2外部电话会能力缺口，未发现FF路由错误。ROOT已归集73项检查和全部六个原issue，专家正在定位共用根因与实施顺序。记录型coverage声明gap0不代表质量通过；混合说明的locator等机械定位缺口另行分诊，原报告不覆盖。
+
+## 最新来源共因节点与R4
+
+新来源修复已完成同预算真实选材与集中独审：[收据与复现](review/mainline-closeout-20261031/p3-source-scope/README.md)。37新例、698相关例/28.88s、mypy408源/ruff通过，独审268例与本域有重叠。D&M原文完整入选；p14两技术段在519字符native range中逐成员SHA/坐标精确保留，8/8连续、未来限定未丢。旧检查只认单独span造成ROOT误判，已按原生成员复核，不改预算。三rounding独立卡0；112/16M不变，全文仍partial。新代码正常发布/精确CI尚待，不冒用c405的旧绿。
+
+四审六issue已由专家归并七根因，实施细则在AUDIT同run/remediation/r1-remediation-03/implementation.md。R4正在真实native研究接线；已原生取得法院原意见、官方会议信息和主办Q&A三源608016B/$0，Q&A公开日期未知、原生资格unknown如实保留，不能改名电话会。旁表/背景事实和实际季度交付桥推进中，无新H1模型POST/正式经济验收。RF新增monthly_manifest外来WIP保留；不扩包。
 
 ## 唯一下一步
 
-完成W12同一封存v2执行包的四路fresh独审并逐条归并根因；按已有P3责任先修来源选材遗漏、经营幅度/反证与旁表口径问题，再以新attempt复验实际摘要/缓存/RF采用及研究内容，完成质量和检测收尾。不扩施工包。
+正常发布来源共因修复并核精确CI；在r1-remediation-04按既有内部细则完成经营输入、一次新版正式摘要、缓存恢复及RF实际采用/报告/snapshot/客户时点压力，再做集中四审与质量/检测收尾。不扩施工包。
 
 后续才是药明合联/Snowflake泛化、固定八家公司及同一有效版本连续三家clean；W21 canonicalC2、新US监管/HK/US_RPO与长文余项仍按原责任，不用fallback或股东信代签。来源漏召回不能由RF另读raw改写成摘要完整；未来假设不足不能靠编数字、公司特判或抬额度解决。
 
@@ -42,4 +48,4 @@ asof保持2026-10-21，读取/采集为真实Nov1；Q3于Oct26发布故排除。
 
 本节点7个已绑定日志的pytest目录检查后删除剩余 **2003113逻辑字节**；原P3数据待四审后恢复，原件/生产配置不动。只读盘点封存执行包发现54.0%逻辑字节为相同内容重复，尚未清理/改存储；在已有质量收尾中处理，不能篡改已封存证据或宣称已释放物理空间。
 
-不动Dayu/IQS/Dashboard、RF三assurance外来WIP、CWP hook mode。不新增人工许可/小节点签收，不用no-verify/reset/clean。外包仅看[PACKAGE_STATUS](PACKAGE_STATUS.md)，目标active，主线继续。
+不动Dayu/IQS/Dashboard、RF四assurance外来WIP、CWP hook mode。不新增人工许可/小节点签收，不用no-verify/reset/clean。外包仅看[PACKAGE_STATUS](PACKAGE_STATUS.md)，目标active，主线继续。

@@ -22,12 +22,15 @@ from company_wiki.document_normalization.text_matching import matching_reading_t
 
 from .narrative_causal_links import CAUSAL_LINK
 from .narrative_business_meaning import _OBJECT
+from .narrative_reporting_rules import arithmetic_presentation
 
 
-SOURCE_PASSAGE_POLICY_VERSION = 'source-passage/1'
+SOURCE_PASSAGE_POLICY_VERSION = 'source-passage/2'
 # Preparation reuses normalized clauses from the already charged assessment.
-# Includes generic grammar, negative envelopes, account and cause scans.
-SOURCE_PASSAGE_SCAN_PASSES = 18
+# Includes generic grammar, negative envelopes, account and cause scans, plus
+# the measurement callback's normalized clause view. Metric proofs themselves
+# share the assessment cache with causal and business consumers.
+SOURCE_PASSAGE_SCAN_PASSES = 24
 
 
 @dataclass(frozen=True)
@@ -108,7 +111,8 @@ def statement_assertion_key(text: str) -> str:
 
 def prepare_source_statement_scope(text: str, roles: SourceAssertionRoles, *,
         accounting_text: Callable[[str], bool] = accounting_field,
-        causal_relation: Callable[[str], bool] | None = None) -> SourceStatementScope:
+        causal_relation: Callable[[str], bool] | None = None,
+        measurement_relation: Callable[[str], bool] | None = None) -> SourceStatementScope:
     """Observe every sentence once; suppress question/courtesy proof anywhere.
 
     The masked classification string has exactly the original length. One
@@ -185,7 +189,11 @@ def prepare_source_statement_scope(text: str, roles: SourceAssertionRoles, *,
                 and (_OBJECT.search(tail) or _STATE_HEAD.search(tail))
                 and _CAUSAL_PROCESS.search(tail))
             independent = any(clause.independent_payload is True for clause in members)
-            allowed = independent or business_cause
+            # A separately observed business measurement remains readable even
+            # when its causal prelude is unproved. Keep this proof independent:
+            # an amount is not evidence that the stated cause is true.
+            allowed = independent or business_cause or bool(
+                measurement_relation and measurement_relation(segment))
             if business_cause:
                 causal_keys.update(clause.text.strip(' \t\r\n.。!?？！;；') for clause in members)
         suppressed |= not allowed
@@ -264,7 +272,9 @@ def prepare_source_passage(
                 or _NON_ASSERTION.search(text)
                 or _VAGUE_OBJECTIVE.search(text) or _REFERENCE_METADATA.search(text)):
             continue
-        account = accounting_text(text)
+        # Presentation belongs to this clause. A different readable operation
+        # in the unchanged quote still supplies its own support below.
+        account = accounting_text(text) or arithmetic_presentation(text)
         finance_seen |= account
         # Positive role evidence already prepared by the source owner remains
         # valid. Generic readable narration below confers no such proof.

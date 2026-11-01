@@ -4,7 +4,7 @@
 
 ## Next Step
 
-完成W12同一封存v2执行包的四路fresh独审并逐条归并根因；按已有P3责任先修来源选材遗漏、经营幅度/反证与旁表口径问题，再以新attempt复验实际摘要/缓存/RF采用及研究内容，完成质量和检测收尾。不扩施工包。
+正常发布来源共因修复并核精确CI；在r1-remediation-04按既有内部细则完成经营输入、一次新版正式摘要、缓存恢复及RF实际采用/报告/snapshot/客户时点压力，再做集中四审与质量/检测收尾。不扩施工包。
 
 ## P0：恢复准确、轻量的回归保护
 
@@ -43,6 +43,14 @@
 - 完成标准：新正式artifact可追到used参数/公式及输出；数值和买方收入假设有依据，重大问题闭合。
 
 ## P3：公司研究循环、泛化与技能收口
+
+### 四审后来源根因修复（当前施工，不新发卡）
+
+- 已确证：`prepare_source_statement_scope`的弱causal/accounting判断遮掉已可识别的子业务收入事实；不是D&M词汇、数字小数/换行、财务过滤或112名额。另`assertion_roles`的function范围没有复用COMPOSITION已有闭合成员证明，具体服务被降为description。canonical本地重选8.061s与封存112片段逐字段相同，0模型/下载，catalog stat不变。
+- RED：`test_source_measurement_scope_and_enumeration.py`当前8F/11P，覆盖去公司化CN经营收入、跨行/原因前缀、测量不制造因果、中英闭合服务枚举，以及纯财务/套话/问题/模板/未闭合反例。
+- 实现只在既有source owner：statement scope分开measurement与causal证明，policy复用同assessment的metric观察，保留原引用/角色/限定；COMPOSITION与head-function共用闭合枚举逻辑，不加行业/公司词典。新增扫描若存在须计量，16M/112上限不变。
+- GREEN：上述单元＋受影响source/role/预算/上下文合同；原H1同预算本地召回12独立来源目标、原字节/定位与对照；随后正式新artifact、真实缓存及RF实际采用。大节点独审后正常发布/精确CI，旧付费/封存不覆盖。
+- 研究幅度、反证、旁表口径和背景claim由RF/AUDIT既有责任层修复；不让CWP生成投资状态，不用raw补读冒作summary召回完整。电话会unsupported按外部限制保留，不盲试provider。
 
 ### 已发布缓存共因与当前四审收口
 

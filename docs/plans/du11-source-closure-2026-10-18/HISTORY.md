@@ -69,3 +69,5 @@
 - [docs/plans/du11-source-closure-2026-10-18/harness_lanes/20261031/W23-OCR-R1.md](https://github.com/zhengcb81/company-wiki/blob/cac61faaf8cbf488dfcdc1ce2bf2d15d9ccd0fe6/docs/plans/du11-source-closure-2026-10-18/harness_lanes/20261031/W23-OCR-R1.md)
 
 原始失败、handoff、独审及SHA/发布按发生时含义保留；本次收敛的是当前管理视图，不把旧FAIL改成PASS。
+
+- 2026-11-01：四审6issue→7根因；来源measurement/范围/mixed呈现共因同预算真实选材及独审通过，698相关例；原成员等价oracle误判保留纠正；当前R4正式摘要/缓存/RF继续，详CURRENT_STATUS与p3-source-scope。

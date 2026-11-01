@@ -67,7 +67,7 @@ _ACTIVITY = re.compile(
 
 # Only the opt-in ReadingPlan detector consumes these relations. Explicit
 # legacy selectors keep detect_business_fact and its historical predicates.
-READING_BUSINESS_POLICY_VERSION = "reading-business-policy/28"
+READING_BUSINESS_POLICY_VERSION = "reading-business-policy/29"
 READING_BUSINESS_SCAN_PASSES = (
     16 + SOURCE_PURPOSE_EXTENSION_SCAN_PASSES + READING_DISCLOSURE_SCAN_PASSES + READING_RECOGNITION_SCOPE_SCAN_PASSES
     + RESOURCE_READING_SCAN_PASSES
@@ -283,13 +283,17 @@ def _ownership_scope(clause: str) -> bool:
     return False
 
 
-def _operating_causal_relation(clause: str) -> bool:
+_MetricObservations = dict[str, tuple[tuple[str, int, int], ...]]
+
+
+def _operating_causal_relation(clause: str, *,
+                              metric_observations: _MetricObservations | None = None) -> bool:
     link = _DRIVER_LINK.search(clause)
     if link is None:
         return False
     # The earliest link suffices for the existing "any relation after a link"
     # contract; repeated links must not rescan all metric relations.
-    if _measured_driver(clause, after=link.end()):
+    if _measured_driver(clause, after=link.end(), metric_observations=metric_observations):
         return True
     # A source may explain a cost/result with a concrete operating action
     # rather than a quantity (e.g. infrastructure for business expansion).
@@ -310,26 +314,29 @@ def _operating_causal_relation(clause: str) -> bool:
     return False
 
 
-def _measured_driver(clause: str, *, after: int = 0) -> bool:
+def _measured_driver(clause: str, *, after: int = 0,
+                     metric_observations: _MetricObservations | None = None) -> bool:
     """Consume source relations without discarding their modality/scope.
 
     The causal link restricts where the evidence must occur. It does not
     create a fresh source sentence from a substring after that link.
     """
     return any(kind in {"quantity", "direction"} and start >= after
-               for kind, start, _end in _source_measure_relations(clause))
+               for kind, start, _end in _source_measure_relations(
+                   clause, metric_observations=metric_observations))
 
 
-def _observed_causal_relation(clause: str, prepared: dict[str, bool] | None = None) -> bool:
+def _observed_causal_relation(clause: str, prepared: dict[str, bool] | None = None, *,
+                              metric_observations: _MetricObservations | None = None) -> bool:
     """One source-owned observation per normalized clause in an assessment."""
     if prepared is None:
-        return _operating_causal_relation(clause)
+        return _operating_causal_relation(clause, metric_observations=metric_observations)
     key = clause.strip(' \t\r\n.。!?？！;；')
     if key not in prepared:
         # The owner historically observes reading clauses after punctuation
         # splitting. Compute in that same view, not whichever envelope first
         # populated the cache (whose terminal period can change scope closure).
-        prepared[key] = _operating_causal_relation(key)
+        prepared[key] = _operating_causal_relation(key, metric_observations=metric_observations)
     return prepared[key]
 
 
@@ -467,9 +474,20 @@ def _source_metric_relations(
     return tuple(relations)
 
 
-def _source_measure_relations(clause: str) -> tuple[tuple[str, int, int], ...]:
+def _observed_metric_relations(clause: str, observations: _MetricObservations | None = None
+                               ) -> tuple[tuple[str, int, int], ...]:
+    """Reuse exact clause-local offsets; never trim text to obtain a cache hit."""
+    if observations is None:
+        return _source_metric_relations(clause)
+    if clause not in observations:
+        observations[clause] = _source_metric_relations(clause)
+    return observations[clause]
+
+
+def _source_measure_relations(clause: str, *,
+                              metric_observations: _MetricObservations | None = None) -> tuple[tuple[str, int, int], ...]:
     """Compatibility observed-only view of the same source metric relations."""
-    return tuple(relation for relation in _source_metric_relations(clause)
+    return tuple(relation for relation in _observed_metric_relations(clause, metric_observations)
                  if not relation[0].startswith("planned_"))
 
 
@@ -644,9 +662,12 @@ def _revenue_measure_relations(
     return tuple(relations)
 
 
-def _business_revenue_measure(clause: str) -> bool:
+def _business_revenue_measure(clause: str, *,
+                               metric_observations: _MetricObservations | None = None) -> bool:
     """Revenue projection of the shared source-owned measurement relation."""
-    return any(kind == "revenue" for kind, _start, _end in _source_measure_relations(clause))
+    return any(kind == "revenue" for part in _reading_clauses(_reading_text(clause))
+               for kind, _start, _end in _source_measure_relations(
+                   part, metric_observations=metric_observations))
 
 
 def source_result_subject(text: str, start: int, end: int) -> bool:
@@ -792,7 +813,8 @@ def _business_coverage_relation(clause: str) -> bool:
 
 
 def _reading_relations(clauses: tuple[str, ...], *,
-                       causal_observations: dict[str, bool] | None = None) -> tuple[str, ...]:
+                       causal_observations: dict[str, bool] | None = None,
+                       metric_observations: _MetricObservations | None = None) -> tuple[str, ...]:
     """Specific source relationships, not a bag of nouns across sentences."""
     reasons: list[str] = []
     for clause in clauses:
@@ -803,7 +825,7 @@ def _reading_relations(clauses: tuple[str, ...], *,
             reasons.append("brand_portfolio_structure")
         if _ownership_scope(clause):
             reasons.append("business_ownership_scope")
-        if _observed_causal_relation(clause, causal_observations):
+        if _observed_causal_relation(clause, causal_observations, metric_observations=metric_observations):
             reasons.append("operating_causal_driver")
         if (_READING_OBJECT.search(clause) and _BILLING_BASIS.search(clause)
                 and _BILLING_RELATION.search(clause)):
@@ -819,7 +841,7 @@ def _reading_relations(clauses: tuple[str, ...], *,
         # The metric relation detector itself requires a source-bound predicate.
         # A definition elsewhere in the same flattened paragraph cannot cancel a
         # separate observed predicate later in that paragraph.
-        measures = _source_metric_relations(clause)
+        measures = _observed_metric_relations(clause, metric_observations)
         if any(kind == "quantity" for kind, _start, _end in measures):
             reasons.append("operating_quantity")
         if any(kind == "direction" for kind, _start, _end in measures):
@@ -835,7 +857,8 @@ def _reading_relations(clauses: tuple[str, ...], *,
             # as the generic causal consumer; unrelated product/revenue nouns
             # cannot create a nested-growth fallback.
             subject = clause[:growth.start()]
-            if _PRODUCT_SUBJECT.search(subject) and _measured_driver(clause, after=link.end()):
+            if _PRODUCT_SUBJECT.search(subject) and _measured_driver(
+                    clause, after=link.end(), metric_observations=metric_observations):
                 reasons.append("product_operating_driver")
         if _STORE_OBJECT.search(clause):
             if any(not _STORE_FINANCIAL_GAP.search(match.group()) for match in _STORE_STOCK.finditer(clause)):
@@ -851,6 +874,7 @@ def _reading_relations(clauses: tuple[str, ...], *,
 def _detect_reading_business_fact(text: str, recognize, *, source_roles=None,
                                   payload_observations: list[bool] | None = None,
                                   causal_observations: dict[str, bool] | None = None,
+                                  metric_observations: _MetricObservations | None = None,
                                   include_source_descriptions: bool = True) -> OperatingFact:
     """Operating activity and bounded business relationships, independent of issuer.
 
@@ -877,7 +901,8 @@ def _detect_reading_business_fact(text: str, recognize, *, source_roles=None,
         max((item.score for item in observed), default=0), any(item.financial_exempt for item in observed))
     activity = any(concrete_operating_event(clause) or
                    (_OBJECT.search(clause) and _ACTIVITY.search(clause)) for clause in clauses)
-    relations = _reading_relations(clauses, causal_observations=causal_observations)
+    relations = _reading_relations(clauses, causal_observations=causal_observations,
+                                   metric_observations=metric_observations)
     if payload_observations is not None:
         # These owners just observed actual disclosure/measurement arguments.
         # Keep the proof here, before public descriptive reason projection.
@@ -922,13 +947,18 @@ def detect_reading_business_fact(text: str, *, include_source_descriptions: bool
     from company_wiki.document_understanding.operating_states.assertion_roles import prepare_source_assertions
     roles = prepare_source_assertions(text)
     causal_observations: dict[str, bool] = {}
+    metric_observations: _MetricObservations = {}
     if include_source_descriptions:
         statement_scope = prepare_source_statement_scope(text, roles,
             accounting_text=lambda value: bool(_SOURCE_ACCOUNTING.search(value)),
-            causal_relation=lambda value: _observed_causal_relation(value, causal_observations))
+            causal_relation=lambda value: _observed_causal_relation(
+                value, causal_observations, metric_observations=metric_observations),
+            measurement_relation=lambda value: _business_revenue_measure(
+                value, metric_observations=metric_observations))
         text, roles = statement_scope.text, statement_scope.roles
     return _purpose_fact(_detect_reading_business_fact(text, detect_business_fact, source_roles=roles,
                          causal_observations=causal_observations,
+                         metric_observations=metric_observations,
                          include_source_descriptions=include_source_descriptions),
                          source_purpose(text, prepared=roles))
 
@@ -1021,8 +1051,12 @@ def prepare_reading_business_assessment(text: str, source_relations: dict, *, re
     def accounting_text(clause):
         return bool(_SOURCE_ACCOUNTING.search(clause) or accounting_field(clause))
     causal_observations: dict[str, bool] = {}
+    metric_observations: _MetricObservations = {}
     statement_scope = prepare_source_statement_scope(text, source_roles, accounting_text=accounting_text,
-        causal_relation=lambda value: _observed_causal_relation(value, causal_observations))
+        causal_relation=lambda value: _observed_causal_relation(
+            value, causal_observations, metric_observations=metric_observations),
+        measurement_relation=lambda value: _business_revenue_measure(
+            value, metric_observations=metric_observations))
     text, source_roles = statement_scope.text, statement_scope.roles
     if statement_scope.suppressed:
         # Keep the source relations/refs verbatim. Only an assertion observed
@@ -1037,6 +1071,7 @@ def prepare_reading_business_assessment(text: str, source_relations: dict, *, re
     observed: list[bool] = []
     description = _purpose_fact(_detect_reading_business_fact(text, recognize, source_roles=source_roles,
                                                             causal_observations=causal_observations,
+                                                            metric_observations=metric_observations,
                                                             payload_observations=observed),
                                 source_purpose(text, prepared=source_roles))
     from .narrative_operating_resources import operating_resource_relations
@@ -1060,6 +1095,7 @@ def prepare_reading_business_assessment(text: str, source_relations: dict, *, re
         accounting_text=accounting_text,
         non_operating_purposes=NON_OPERATING_PURPOSES, existing_use=existing_use,
         existing_relevant=existing_relevant, statement_scope=statement_scope)
+    financial = financial or passage.financial_only
     return ReadingBusinessAssessment(fact, financial, source_roles, passage)
 
 

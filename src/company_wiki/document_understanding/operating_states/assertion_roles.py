@@ -19,7 +19,8 @@ from . import patterns as source_grammar
 
 # Composition/process indexes and the bounded comma-continuation preparation.
 # The caller reserves these passes on its existing document account.
-SOURCE_DESCRIPTION_SCAN_PASSES = 14
+# Closed member identity is observed for both typed and unfamiliar arguments.
+SOURCE_DESCRIPTION_SCAN_PASSES = 19
 
 # A new explicit actor starts an independent assertion even after a comma.
 # Subordinate audit test descriptions do not manufacture a company event.
@@ -107,11 +108,11 @@ _AGENT_DERIVATION = re.compile(
 
 _COMPOSITION_FRAME_CN = (
     r"(?P<head>主要产品|主营业务|产品|服务|解决方案|下游客户|客户|下游)"
-    r"(?:的(?:构成|组合|范围))?(?:主要|目前|通常)?(?:为|是|包括|包含|涵盖)")
+    r"(?:的(?:构成|组合|范围))?(?:主要|目前|通常)?\s*(?:[,，]\s*)?(?:为|是|包括|包含|涵盖|覆盖)")
 _COMPOSITION_FRAME_EN = (
-    r"\b(?P<head>products?|services?|solutions?|businesses|customers?|clients?)\s+"
+    r"\b(?P<head>products?|services?|solutions?|businesses|customers?|clients?)(?:\s+|,\s*)"
     r"(?:(?:mainly|primarily|principally|currently)\s+)?"
-    r"(?:are|is|include[sd]?|comprise[sd]?|consist(?:s)?\s+of)\s+")
+    r"(?:are|is|include[sd]?|comprise[sd]?|cover(?:s|ed)?|consist(?:s)?\s+of)\s+")
 _COMPOSITION_CN = re.compile(_COMPOSITION_FRAME_CN + r"(?P<target>[^。;!?]{1,160})")
 _COMPOSITION_EN = re.compile(_COMPOSITION_FRAME_EN + r"(?P<target>[^。;!?]{1,160})", re.I)
 # A fresh predicate after a comma ends a nominal list even without a new
@@ -254,6 +255,31 @@ def abstract_source_argument(value: str) -> bool:
         return True
     tokens = _ABSTRACT_EN_TOKEN.findall(value.casefold())
     return bool(tokens) and all(token in _ABSTRACT_EN_WORDS for token in tokens)
+
+
+def _nominal_member_identity(value: str) -> bool:
+    """A member is a named argument, not a dangling link or another assertion.
+
+    Reuse source subject/predicate grammar rather than guessing an issuer from
+    capitalization. Attributive qualifiers can precede a member; a separate
+    noun before a predicate cannot donate that clause as a catalogue identity.
+    This proves a boundary only, never the predicate's truth or stage.
+    """
+    if value.rstrip().endswith(('...', '…')):
+        return False
+    value = value.strip(' \t\r\n.。!?？！;；')
+    if (not any(character.isalpha() for character in value)
+            or abstract_source_argument(value)
+            or source_grammar.SUBJECT_TAIL.search(value)):
+        return False
+    for grammar in (source_grammar.EN_AUX_BOUNDARY, source_grammar.CN_TOPIC_BOUNDARY,
+                    source_grammar.MODIFIER_TOKENS):
+        for predicate in grammar.finditer(value):
+            subject = value[:predicate.start()].strip()
+            if (subject and value[predicate.end():].strip()
+                    and source_grammar.SUBJECT_TAIL.fullmatch(subject) is None):
+                return False
+    return True
 
 
 def _argument_payload(value: str, *, concrete_action: bool = False,
@@ -446,20 +472,24 @@ def _clause_description_proofs(value: str) -> Iterator[_DescriptionProof]:
                 continue
             closed = _argument_closed(value, relation.end('target'))
             payload = _argument_payload(target, complete=closed)
-            if payload is None and closed:
+            member_identity = False
+            if payload is not False and closed:
                 # The source explicitly declares a product/customer class.
                 # A closed enumeration supplies member identity, independently
                 # of capitalization or the argument's unknown entity type.
                 members = [part.strip() for part in _NOMINAL_MEMBER_SEPARATOR.split(target)]
-                if len(members) >= 2 and all(any(c.isalpha() for c in part)
-                        and not abstract_source_argument(part) for part in members):
-                    payload = True
+                if len(members) >= 2 and all(_nominal_member_identity(part) for part in members):
+                    member_identity = True
+                    if payload is None:
+                        payload = True
             prefix = value[max(0, relation.start('head')-45):relation.start('head')]
-            # A customer class or explicitly sold range is a current business
-            # scope, not a manufactured expansion/manufacturing event. Targets
-            # remain prospective descriptions. No issuer/product vocabulary.
+            # A customer class, sold range or explicit closed member list is a
+            # business scope, not an expansion/manufacturing event. Membership
+            # owns both "includes" and "covers" instead of letting the weaker
+            # function view discard unknown service members. Targets remain
+            # prospective descriptions. No issuer/product vocabulary.
             observed_scope = bool(closed and not _PROSPECTIVE_SCOPE.search(prefix)
-                and (_CUSTOMER_HEAD.fullmatch(relation['head']) or _SOLD_SCOPE.search(prefix)))
+                and (member_identity or _CUSTOMER_HEAD.fullmatch(relation['head']) or _SOLD_SCOPE.search(prefix)))
             if observed_scope and payload is None and not abstract_source_argument(target):
                 payload = True
             yield _DescriptionProof(payload, value, descriptive_only=True,

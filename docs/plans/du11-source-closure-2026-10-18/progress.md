@@ -90,3 +90,17 @@ Worker与cache共用canonical source-select，raw/projected同一材料证明，
 CWP c405848ad1ddba1ec0ded4ed75a7d2cdc5c8314e已正常commit/push，782P/114.44s，CI41272576090于04:24:32Z成功。缓存真实1token GREEN、旧收费/partial及独审证据不重签。W12当前authoring-v4/main-v2封存manifest6e8051f6…616d8共734件115059812逻辑B，ROOT逐件SHA/size一致；5项摘要实际采用、主native链和joint已有，经济质量仍OPEN。三条旧Testing同页错摘以新v2修正，保留v1。storage/analyst新独审已冻结，process/fetch独立收尾；不扩包、不互读初稿、不以算术/结构通过代签。
 
 当前storage报关键业务遗漏P2，analyst报幅度校准和客户/法律反证P1；待四份齐备再专家归并，按责任层从根因修复与新attempt。七个明确日志绑定pytest目录剩余2003113逻辑B已清，当前P3/封存证据不动。只读盘点734件有62182776B相同内容重复（54.0%逻辑量），顶组18文件不同FileID；不是已释放物理空间，在既有质量收尾考察同owner不可变input复用。母账1955397/760197估计、unknown8+prior7不变。
+
+## 2026-11-01 — 四路六问题归集，来源两机制已证实并TDD RED
+
+storage/fetch/process/analyst新四审全部封存，73卡检查、6原issue未丢。ROOT coverage声明gap0不作质量PASS；精确指针/说明混写等机械诊断及ROOT参数引用形状错误保留，v2输入修正7参数，工具3MiB请求被既有1MiB上限拒绝后按默认跑新native-v3，没有抬限额。空locator并非空stderr，ROOT断言先挡下后实读490B403 JSON，补正确指针视图；原报告/旧诊断不改。
+
+专家canonical重选8.061s得到原112spans完全一致，D&M在准入前被弱causal scope抹去；具体技术范围被未知成员词典降description。排除原件缺失/模型删字/财务过滤/仅名额不足是D&M根因。新去公司化19例8F/11P，先保留正确失败再在同source owner修，不新增预算/门禁/行业词典。完整专家内部PWF及实际复验接续，原研究P1仍OPEN。
+
+## 2026-11-01 — 来源共因最终有界验收通过，进入正常发布及R4
+
+measurement/cause证明分离、同assessment metric cache、COMPOSITION静态具体范围及逗号延续、已存在主谓/尾部语法防虚假枚举均实施；pure算术footnote在passage逐clause作financial context，不全quote贴accounting purpose。独审指出的悬空/new actor和mixed业务误伤均有正确RED后修；一度尝试全局bound/源purpose早返已完全撤回，未放宽身份/事实或制造factory state。源purpose无行为diff，description19/passsage24/purpose12按原账预扣，16M/112不变。
+
+最终37新case；698相关例28.88s、ruff/mypy408源绿；独审268P/3.92s、57控制/30真实局部输入（范围重叠不累计）确认relations/bindings无新增。canonical7.019s，112/2765known候选/4224源units、67闭包、work15991162/16M、原件locator真实replay和readonlyDB不变；D&M直接保留、p14两段于519char原生范围8成员连续精确，rounding独立卡0，全文仍partial。ROOT selected_exact oracle只认独立段落，误报成员遗漏；保存旧false字段/诊断，以成员unitID/SHA/相对区间逐字addendum纠正，未因此改planner/预算。独审v1FAIL保留，v2仅此来源节点通过。
+
+18 ROOT temp目录清1644逻辑B；原件/R3/R4数据不提前清。三原生新source608016B/3HTTP/$0及旁表/背景/经营桥推进，Q&A时间资格unknown留限。scope v1双company_raw夹具等executor错误和native失败保留，不伪称产品RED。CAS用既有owner，旧115MB不迁移。当前正常发布/精确CI待查，新正式H1摘要/缓存/RF及公司经济验收继续，不扩包。

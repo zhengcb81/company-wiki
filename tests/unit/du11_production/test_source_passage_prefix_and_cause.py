@@ -202,9 +202,9 @@ def test_authoritative_cause_is_observed_once_in_its_canonical_clause_view(monke
     real = policy._operating_causal_relation
     calls = []
 
-    def observe(clause):
+    def observe(clause, **kwargs):
         calls.append(clause)
-        return real(clause)
+        return real(clause, **kwargs)
 
     monkeypatch.setattr(policy, '_operating_causal_relation', observe)
     text = 'Our services revenue increased due to higher active customer count.'
