@@ -12,4 +12,6 @@ Finite/nonnegative read and write contracts reject NaN/Infinity/bool. Empty or f
 
 Historical ledger charges 1431.40547 include a 1080-second over-count and seven real R0 rows with missing first-pass duration. Remeasurement is additional work. Actual total elapsed is null and the old <=1800-second claim is unproven. No old ledger/outputs/gold/review is modified; no model is rerun to manufacture missing evidence.
 
+The remaining generated QA PNG was retained read-only during review, not accepted as a permanent cleanup exception. ROOT then performed exact SHA/size/PNG/non-reparse checks and removed only that page. `R6-W23-derived-cleanup.json` proves exists_after=false; handoff.json binds the receipt. Original documents, model assets and other cache remain untouched. The frozen source manifest and existing renderer can regenerate this derivative if later needed; no render was performed now.
+
 All repair inference is a tiny stub at the real X1F/R0 campaign routing seam, including independent processes, actual OS mutexes, abrupt os._exit, captured-before-settle recovery and concurrent stale snapshots. Model calls/downloads are zero. Production OCR/src/config/dependencies are unchanged. Fresh independent review binds this new source only; no historical READY is inferred. Handoff.json binds that review separately from the original empirical run commits.

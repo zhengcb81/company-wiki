@@ -36,3 +36,8 @@ ROOT于2026-10-31从946537d0d75ac36b22ac0bb24e0f484a896b4c95建独立稀疏工�
 ## ROOT R6新工具独审PASS，交接后STOP
 
 ae438a32由未参与修复的review_a真正独审：原4RED重放GREEN、新增cache输出已落/marker前死亡GREEN（占用不退款、partial、runner1）、选10case 10P/4.02s，runtime3文件SHA未变，无实质P1/P2。原ledger/comparison/旧review和作者PNG保持；模型0调用/下载，实验仍PARTIAL。当前handoff已分历史requirements/limitations，绑定新报告raw/LF SHA、scope、ae438提交，不补造76292 READY；formula当前用词为1/4 formulas、6/10 symbols。分支按ROOT改名codex/architecture-w23-repair-20261101以复用既有候选CI。正常本地提交docs后STOP，ROOT后续整合稳定master/候选CI，作者不推送/并线或复跑模型。
+
+
+## ROOT后处理：精确生成PNG清理完成
+
+独审时只读保留是当时事实。ROOT之后按R1原卡，对唯一已确认生成QA PNG核绝对parent/非reparse/PNG魔数/579214B/SHA097eaf47…后精确删除，R6-W23-derived-cleanup.json记录exists_after=false；原PDF/模型/其他cache未动。当前handoff绑定真实新收据，原作者旧all-deleted claim仍历史，不回写旧review/ledger/comparison。可按保留的source manifest与renderer重渲染，当前不执行。此文档收尾不变更ae438 runtime或另开源审查。

@@ -187,13 +187,31 @@
     "author_deleted_claim_unverified": [
       "all rendered/control PNGs under .w23_cache/r1_pages (deleted after the final run; SHAs and render scripts retained)"
     ],
-    "root_deleted_author_assets": [],
-    "retained_observation": {
+    "root_deleted_author_assets": [
+      "C:\\Users\\郑曾波\\Projects\\company-wiki-w23-xiaomi-ocr-r1\\.w23_cache\\r1_pages\\r1_wanhua_qa2021_p003.png"
+    ],
+    "historical_review_time_retained_observation": {
       "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-w23-xiaomi-ocr-r1\\.w23_cache\\r1_pages\\r1_wanhua_qa2021_p003.png",
       "exists": true,
       "bytes": 579214,
       "sha256": "097eaf47d1da132c80a64dfdd42ca81c72d3b559969ca552b6bc7fb1d00478fc",
-      "action": "read-only experiment asset retained; no blind deletion from author worktree"
+      "action": "read-only experiment asset retained; no blind deletion from author worktree",
+      "scope": "true at review time, before ROOT precise post-review cleanup"
+    },
+    "root_current_cleanup": {
+      "status": "KNOWN_REMAINING_R1_GENERATED_PNG_REMOVED_BY_ROOT",
+      "receipt": "docs/plans/du11-source-closure-2026-10-18/review/architecture-quality-20261101/implementation-results/R6-W23-derived-cleanup.json",
+      "receipt_raw_sha256": "e7765a6711c70aa3791ec5164a268df46f3617a1d4300be4578a888945ead703",
+      "receipt_lf_sha256": "e404cadc2dea236e9dcf9284418412881a6fdf5be4b84fc3c214c3f2c6fb95a8",
+      "schema": "w23-root-derived-cleanup/1",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-w23-xiaomi-ocr-r1\\.w23_cache\\r1_pages\\r1_wanhua_qa2021_p003.png",
+      "bytes": 579214,
+      "sha256": "097eaf47d1da132c80a64dfdd42ca81c72d3b559969ca552b6bc7fb1d00478fc",
+      "exists_after": false,
+      "reason": "generated QA page PNG; original R1 task requires removal after tests",
+      "original_documents_touched": false,
+      "models_and_other_caches_touched": false,
+      "regeneration": "retained frozen sample/source identity and tools/ocr_comparison/render_pages.py permit re-rendering; no new render performed"
     }
   },
   "recommendation": "现有不动 for production; table-structure linearization is R0's measured gap. Xiaomi needs a host with >=6.5 GB free RAM and a resolution of the Job Object bound mismatch before any card-compliant X1F result can exist.",

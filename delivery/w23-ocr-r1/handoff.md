@@ -32,5 +32,5 @@ R0 is the real RapidOCR engine plus the production recovery ladder, but it conca
 
 ## Cleanup & assets
 
-- The author claimed all rendered PNGs deleted, but ROOT observed the 579,214-byte `r1_wanhua_qa2021_p003.png` still present. It is an experiment asset in the read-only author worktree and is retained; no blind deletion or false cleanup receipt. Model assets were not copied, loaded or modified in this repair.
+- At review time the 579,214-byte `r1_wanhua_qa2021_p003.png` still existed, refuting the old all-deleted claim. ROOT subsequently checked its exact parent/non-reparse status, PNG magic, size and SHA, then deleted only this generated page per the original card. `R6-W23-derived-cleanup.json` records exists_after=false; handoff.json binds that real receipt. Originals, models and other cache are untouched. Source manifest/renderer permit re-rendering; none was rerun for this cleanup.
 - Production isolation: additions-only in the allowed paths; the platform fix is ROOT's commit.
