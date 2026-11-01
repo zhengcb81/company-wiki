@@ -26,3 +26,13 @@ ROOT于2026-10-31从946537d0d75ac36b22ac0bb24e0f484a896b4c95建独立稀疏工�
 - 资产核验：bf16 model.safetensors SHA d4551e9f 不变、fp32 衍生 mtime 早于R1、7份原件 mtime 均早于会话（零写入）。
 
 2026-11-01 R1 终态：独立终审五轮（15+8+4+5 delta 项）全部闭合，76292e3f 确认 READY_FOR_ROOT。最终样本 8 页（CN 3 含问答、HK 3 含 9 列表格、US 2；eval 6 / holdout 2）；账本 1431.4/1800s；R0 8/8（macro strict 0.1000、数字 token 召回 0.9158、数字在场 0.9917、事实 164/189、条件 107/117、数字 288/291、无来源行上界 7.6%）；N0 8/8（0.1178/173/189）；X1F 两次失败（第二次平台修复后仍分配失败+原生崩溃，job peak 1.753GiB>cap 1.602GiB，OPEN 交 ROOT）；X2 NOT_RUN；空白负对照 0 字符；公式 1/4 保真。剩余预算 368.6s。STOP。
+
+
+## ROOT R6预算/cache工具修复（非模型复测）
+
+从d2f6e6f0新建--no-checkout sparse+read-tree独占工区；8F/6P真实X1F stub新进程RED后，最终新31P/23.02s和Ruff通过，之前108相关例P/2warnings/93.51s；二者重叠不累计。初次广域8error因未取旧两JSON，已仅补小fixture；合成4字节converter hardlink在Low沙箱拒写，宿主同域通过，未改converter；一次git sparse add不支持--no-cone参数已去重复flag，无源码副作用。ae438a32正常本地提交3文件，现待review_a新版本独审；主线未合并/推送，原件/模型/src/config零改动，所有旧run/ledger/comparison/review保留。最终新测试用TemporaryDirectory逐例恢复自有scratch和子进程，未全局清TMP或删作者PNG。
+
+
+## ROOT R6新工具独审PASS，交接后STOP
+
+ae438a32由未参与修复的review_a真正独审：原4RED重放GREEN、新增cache输出已落/marker前死亡GREEN（占用不退款、partial、runner1）、选10case 10P/4.02s，runtime3文件SHA未变，无实质P1/P2。原ledger/comparison/旧review和作者PNG保持；模型0调用/下载，实验仍PARTIAL。当前handoff已分历史requirements/limitations，绑定新报告raw/LF SHA、scope、ae438提交，不补造76292 READY；formula当前用词为1/4 formulas、6/10 symbols。分支按ROOT改名codex/architecture-w23-repair-20261101以复用既有候选CI。正常本地提交docs后STOP，ROOT后续整合稳定master/候选CI，作者不推送/并线或复跑模型。
