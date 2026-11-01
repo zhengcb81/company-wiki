@@ -24,7 +24,7 @@
   "3934e9fa fix: correct Q&A page source identity and delta review wording"
  ],
  "final_tested_commit": "3934e9fa8a5fe87a77c1cfdb5346ce6168f1d4d1",
- "final_reviewed_commit": "fc4228c1 (full review READY_FOR_ROOT); sample-extension delta review in progress at 3934e9fa8a5fe87a77c1cfdb5346ce6168f1d4d1",
+ "final_reviewed_commit": "76292e3f (independent delta review READY_FOR_ROOT; documentation-only commits after it are bookkeeping)",
  "code_file_sha256": {
   "tools/ocr_comparison/campaign.py": {
    "raw_sha256": "d974cbaefe09cf2dca6060250095477db5b6fa933ae82b6f07b3ef5fc44e38e1",
