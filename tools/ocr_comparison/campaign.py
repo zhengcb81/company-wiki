@@ -237,10 +237,16 @@ def run_campaign_batch(
                             status=record_dict.get("status", "unknown"))
     elif arm == "X1F":
         from .run_x1 import run_x1_batch, _model_dir
+        from .backends.xiaomi_x1 import XiaomiX1
 
         model = _model_dir(model_dir)
         remaining = remaining_seconds(ledger)
-        identity = None
+        identity = XiaomiX1(
+            model_dir=str(model),
+            deadline_seconds=min(REQUEST_DEADLINE_CAP_SECONDS, remaining),
+            max_new_tokens=max_new_tokens,
+            weights_mode=weights_mode,
+        ).identity_manifest
         result = run_x1_batch(
             pages,
             deadline=min(REQUEST_DEADLINE_CAP_SECONDS, remaining),
@@ -252,9 +258,9 @@ def run_campaign_batch(
         )
         by_id = {r["page_id"]: r for r in result["records"]}
         cache_keys = {
-            pid: cache_key(result["identity"], page.get("png_sha256", pid),
-                           identity_sha(result["identity"]),
-                           {"deadline": min(REQUEST_DEADLINE_CAP_SECONDS, remaining),
+            pid: cache_key(result["identity"], page.get("png_sha256") or pid,
+                           result["identity"].get("prompt_sha256", ""),
+                           {"request_deadline_cap": REQUEST_DEADLINE_CAP_SECONDS,
                             "max_new_tokens": max_new_tokens})
             for pid, page in ((p["page_id"], p) for p in pages)
         }
@@ -307,6 +313,8 @@ def run_campaign_batch(
             rec["page_id"] = page["page_id"]
             rec.setdefault("request_seconds", 0.0)
             charged.append(rec)
+            ledger = record(ledger, ledger_path, arm=arm, page_id=page["page_id"],
+                            seconds=0.0, status=rec.get("status", "unknown"))
     else:
         raise ValueError(f"unknown campaign arm: {arm}")
 

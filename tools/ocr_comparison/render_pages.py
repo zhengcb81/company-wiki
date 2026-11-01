@@ -21,7 +21,32 @@ def render_pages(manifest_path: str | Path, out_dir: str | Path) -> list[dict]:
     out_dir.mkdir(parents=True, exist_ok=True)
     docs: dict[str, object] = {}
     records = []
-    scale = manifest["render"]["draw_scale"]
+    render = manifest["render"]
+    scale = render.get("draw_scale") or (render.get("dpi", 200) / 72)
+    if "documents" not in manifest:
+        # R1 manifest layout: every page carries its own absolute source path and
+        # PDF page index.  Same renderer, same DPI, same PNG bytes rule.
+        for page in manifest["pages"]:
+            pdf = docs.get(page["pdf"])
+            if pdf is None:
+                import pypdfium2 as pdfium
+
+                pdf = pdfium.PdfDocument(page["pdf"])
+                docs[page["pdf"]] = pdf
+            image = pdf[page["pdf_page_index"]].render(scale=scale).to_pil().convert("RGB")
+            target = out_dir / f"{page['page_id']}.png"
+            image.save(target)
+            digest = hashlib.sha256(target.read_bytes()).hexdigest()
+            if page.get("png_sha256") and digest != page["png_sha256"]:
+                raise RuntimeError(
+                    f"render mismatch for {page['page_id']}: {digest} != {page['png_sha256']}")
+            records.append({
+                "page_id": page["page_id"], "png": str(target), "sha256": digest,
+                "px": list(image.size),
+            })
+        for pdf in docs.values():
+            pdf.close()
+        return records
     for page in manifest["pages"]:
         doc = manifest["documents"][page["doc"]]
         key = page["doc"]
