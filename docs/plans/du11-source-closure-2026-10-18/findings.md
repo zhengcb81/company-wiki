@@ -65,3 +65,7 @@ CI修复仍绿。两真实MiMo401来自Config.load显式canonical路径漏载受
 ## 2026-11-01 — ce1a603a正常发布/CI成功；真实缓存验收发现额外POST
 
 正常commit静态hooks全绿、正常prepush781P/108.09s，master远端ce1a603a，精确CI41267979696于03:12:48Z成功。W12新单H1正确配置1POST9828tokens/1826microUSD、正式artifact4dec5c.../473666B完成；旧401两行unknown保留。随后的新run refresh=false缓存检查实际多1POST9773/1808，不冒作0重复PASS。停止付费H1再生成，先比较真实generation/candidate/current-decision合同，根因未查明前不拍脑袋，不以新摘要成功代签缓存/RF/四审。母账1955397tokens/760197microUSD（估计），unknown8+prior7。
+
+## 2026-11-01 — 共享缓存根修真实GREEN/独审，进入正常发布
+
+Worker与cache共用canonical source-select，raw/projected同一材料证明，快速依赖不足不再盲付费。新run/max_tokens1/refreshfalse真实12.24s复用原exact91d5/54ccb，0新POST/reservation/费，旧账/usageSHA/两artifact字节不变，trace及source部分覆盖保留。137短域、最终7unit、宿主16通过（不相加冒独立数量）；独审两旧bundle重建actual e45模型尝试SHA、33858B wire，且已观察材料优先于后续fast声明。首GREEN后单行严格优先guard反向SHA/负例独审，原真实收据不重签。当前正常发布，不扩包。RF五quote used参数/实际compute/report/snapshot/stress已有；作者发现Testing同页错摘TIDES需新v2，旧v1保留；全部幅度支持仍unsupported及p11 D&M摘要遗漏不能由此签PASS，等待完整封存/四审/共因修复。

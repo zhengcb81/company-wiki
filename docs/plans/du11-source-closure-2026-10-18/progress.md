@@ -80,3 +80,7 @@ CI修复仍绿。两真实MiMo401来自Config.load显式canonical路径漏载受
 ### 缓存根因已由真实manifest/独立纯数据探针确认，按共享回退实施
 
 两run exactmodel requestSHA/base/full generation相同，2可见候选因预算停止→partial trace→bool false全跳过，未尝试public读。source已读工作范围partial保留；不把partial改complete、不重签旧generation。新增source-select只读共享端口及当前材料重选等价回退计划，raw/投影复用同核心，真实1token测试请求确保错误miss也不再花钱。API合同新测试4F属于缺端口的RED，实际重复POST仍是产品行为失败证据。RF同时免费完成5条source_quote真实used参数草稿采用，完整公司链未签收；D&M关键段落未召回也如实保留，不以raw补证改写summary覆盖。
+
+## 2026-11-01 — 共享缓存根修真实GREEN/独审，进入正常发布
+
+Worker与cache共用canonical source-select，raw/projected同一材料证明，快速依赖不足不再盲付费。新run/max_tokens1/refreshfalse真实12.24s复用原exact91d5/54ccb，0新POST/reservation/费，旧账/usageSHA/两artifact字节不变，trace及source部分覆盖保留。137短域、最终7unit、宿主16通过（不相加冒独立数量）；独审两旧bundle重建actual e45模型尝试SHA、33858B wire，且已观察材料优先于后续fast声明。首GREEN后单行严格优先guard反向SHA/负例独审，原真实收据不重签。当前正常发布，不扩包。RF五quote used参数/实际compute/report/snapshot/stress已有；作者发现Testing同页错摘TIDES需新v2，旧v1保留；全部幅度支持仍unsupported及p11 D&M摘要遗漏不能由此签PASS，等待完整封存/四审/共因修复。

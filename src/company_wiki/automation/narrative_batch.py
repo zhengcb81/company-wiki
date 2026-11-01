@@ -1145,13 +1145,31 @@ def _read_projected_pin(artifacts, reader, payload, pin, manifest, *, catalog):
 
 
 def _find_item_reuse_pin(
-    artifacts, reader, payload, manifest, facts, *, catalog, normalization=None
+    artifacts, reader, payload, manifest, facts, *, catalog, normalization=None, deadline=None,
 ):
+    def reselect():
+        from .narrative_select import NarrativeSelectHandler
+
+        def checkpoint():
+            _check_preparation_deadline(deadline)
+        checkpoint()
+        try:
+            return NarrativeSelectHandler(
+                reader=reader, selector_version=manifest["execution_versions"]["selector"],
+                normalization=normalization, projection_catalog=catalog,
+            ).select_source(payload, checkpoint=checkpoint)
+        except TimeoutError:
+            raise
+        except Exception as exc:
+            raise BatchResumeError("BATCH_REUSE_RESELECT_FAILED") from exc
+
     if payload.subject.kind == "raw":
         return find_reuse_pin(
-            artifacts, reader, payload, manifest, facts, normalization=normalization
+            artifacts, reader, payload, manifest, facts, normalization=normalization, reselect=reselect,
         )
     reading = manifest.get("execution_versions", {}).get("selector") == "0.9.0"
+    from .narrative_generation import ReadingReuseVerifier
+    verification = ReadingReuseVerifier(reselect)
     versions = (artifacts.visible_base_generation_candidates(subject=payload.subject,
                 base_generation_sha256=generation_sha256(manifest)) if reading else
                 artifacts.visible_subject_generation_candidates(subject=payload.subject,
@@ -1160,9 +1178,9 @@ def _find_item_reuse_pin(
         metadata = json.loads(version.metadata_json)
         effective = manifest
         if reading:
-            from .narrative_generation import reading_candidate_manifest, current_reading_decision_matches
+            from .narrative_generation import reading_candidate_manifest
             effective = reading_candidate_manifest(version, manifest)
-            if not current_reading_decision_matches(effective):
+            if not verification.matches(effective):
                 continue
         elif metadata.get("generation_manifest") != manifest:
             raise ValueError("BATCH_REUSE_MANIFEST_INVALID")
@@ -1565,10 +1583,13 @@ def _run_prepared(
                             facts[document],
                             catalog=catalog,
                             normalization=normalization,
+                            deadline=deadline,
                         )
                         if not request.refresh or pointer.exists()
                         else None
                     )
+                except BatchResumeError:
+                    raise
                 except ValueError as exc:
                     raise BatchResumeError("BATCH_REUSE_ARTIFACT_INVALID") from exc
                 _check_preparation_deadline(deadline)

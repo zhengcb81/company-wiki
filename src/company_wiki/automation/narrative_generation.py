@@ -4,7 +4,7 @@ from __future__ import annotations
 import json
 import math
 from importlib import import_module
-from collections.abc import Mapping, Sequence
+from collections.abc import Callable, Mapping, Sequence
 from typing import Any
 from urllib.parse import urlsplit
 
@@ -12,6 +12,7 @@ from company_wiki.narrative_subject import NarrativeSubject
 from .models import canonical_json_hash
 from .narrative_contracts import (
     NarrativeBundle,
+    NarrativeSelectResult,
     BUNDLE_SCHEMA,
     PROJECTED_SELECT_RESULT_SCHEMA,
     SELECT_RESULT_SCHEMA,
@@ -507,12 +508,37 @@ def read_reuse_pin(artifacts, reader, payload, pin, facts, manifest=None, *, nor
 
 
 
-def find_reuse_pin(artifacts, reader, payload, manifest, facts, *, normalization=None):
+class ReadingReuseVerifier:
+    """Fast dependency proof, or one current source-owned material comparison.
+
+    A partial trace remains partial. It cannot prove a fast hit, but neither
+    does it prove changed model input or authorize buying identical work again.
+    """
+    def __init__(self, reselect: Callable[[], NarrativeSelectResult] | None = None):
+        self._reselect = reselect
+        self._selected: NarrativeSelectResult | None = None
+
+    def matches(self, manifest: Mapping[str, Any]) -> bool:
+        if self._selected is None and current_reading_decision_matches(manifest):
+            return True
+        if self._reselect is None:
+            return False
+        if self._selected is None:
+            self._selected = self._reselect()
+        try:
+            verify_reading_bundle_generation(self._selected, manifest)
+        except ValueError:
+            return False  # Current source material really differs; not unknown.
+        return True
+
+
+def find_reuse_pin(artifacts, reader, payload, manifest, facts, *, normalization=None, reselect=None):
     if manifest.get("execution_versions", {}).get("selector") == "0.9.0":
+        verification = ReadingReuseVerifier(reselect)
         for version in artifacts.visible_base_generation_candidates(
                 subject=payload.subject, base_generation_sha256=generation_sha256(manifest)):
             stored = reading_candidate_manifest(version, manifest)
-            if not current_reading_decision_matches(stored):
+            if not verification.matches(stored):
                 continue
             pin = artifact_pin(version)
             if read_reuse_pin(artifacts, reader, payload, pin, facts, stored, normalization=normalization):
@@ -587,7 +613,10 @@ def current_reading_decision_matches(manifest: Mapping[str, Any]) -> bool:
     return port.compare_decision_dependencies(dependencies, current)["status"] == "same"
 
 
-def verify_reading_bundle_generation(bundle: NarrativeBundle, manifest: Mapping[str, Any]) -> None:
+def verify_reading_bundle_generation(
+    bundle: NarrativeBundle | NarrativeSelectResult, manifest: Mapping[str, Any],
+) -> None:
+    """Verify shared complete model material from a bundle or fresh source select."""
     validate_selection_generation(manifest)
     frozen = manifest["selection_generation"]
     if (bundle.reading_context is None

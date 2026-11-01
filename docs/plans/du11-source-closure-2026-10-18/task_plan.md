@@ -4,7 +4,7 @@
 
 ## Next Step
 
-按task_plan缓存共因小节TDD实现共享source-select与当前material等价复用回退，保留partial/旧收费；真实H1 max_tokens=1新run免费RED/复验，集中独审再正常发布。随后完整RF/四审，不扩包。
+正常发布当前缓存共因根修并核精确CI；与此并行完成W12作者v2正确引用版本的完整RF链/封存，再派四路fresh独审，按共因修复源D&M遗漏/研究幅度依据等实际问题，质量/检测收尾。不扩包。
 
 ## P0：恢复准确、轻量的回归保护
 

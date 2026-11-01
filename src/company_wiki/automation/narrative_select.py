@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from collections.abc import Sequence
+from collections.abc import Callable, Sequence
 from dataclasses import dataclass, replace
 from typing import Any, Protocol
 from company_wiki.resource_budget import WorkBudget, WorkBudgetExceeded
@@ -81,6 +81,15 @@ class NarrativeSelector(Protocol):
         title: str,
         existing_kind: str = "unknown",
     ) -> NarrativeEvidencePackage: ...
+
+
+class SelectionCheckpoint(Protocol):
+    def checkpoint(self) -> None: ...
+
+
+@dataclass(frozen=True)
+class _SelectionReadContext:
+    checkpoint: Callable[[], None]
 
 
 @dataclass(frozen=True)
@@ -265,8 +274,27 @@ class NarrativeSelectHandler:
             )
 
     def _execute(self, context: JobExecutionContext) -> HandlerResult:
+        result = self.select_source(self._payload(context), checkpoint=context.checkpoint)
+        return HandlerResult(
+            outcome=HandlerOutcome.SUCCEEDED, result=result.to_dict(), artifacts=(), effects=(),
+            metrics=HandlerMetrics(tokens=0, cost_usd=0.0, duration_ms=0), error=None,
+        )
+
+    def select_source(
+        self, payload: SourceRevisionEventPayload, *, checkpoint: Callable[[], None],
+    ) -> NarrativeSelectResult:
+        """Select through the source owner, without creating AUTO jobs or model calls.
+
+        Worker execution and current-material cache verification use this same
+        parsing, source validation and selection path. The caller supplies its
+        existing lease or preparation-deadline checkpoint.
+        """
+        return self._select_source(payload, _SelectionReadContext(checkpoint))
+
+    def _select_source(
+        self, payload: SourceRevisionEventPayload, context: SelectionCheckpoint,
+    ) -> NarrativeSelectResult:
         context.checkpoint()
-        payload = self._payload(context)
         if payload.subject.kind == "official_json":
             return self._execute_projection(payload, context)
         ref = source_ref(payload)
@@ -285,18 +313,11 @@ class NarrativeSelectHandler:
         self._verify_selected_material(work.parsed, work.package,
             mime_type=payload.source_ref.mime_type, pdf_reading=self._pdf_reading)
         context.checkpoint()
-        return HandlerResult(
-            outcome=HandlerOutcome.SUCCEEDED,
-            result=result.to_dict(),
-            artifacts=(),
-            effects=(),
-            metrics=HandlerMetrics(tokens=0, cost_usd=0.0, duration_ms=0),
-            error=None,
-        )
+        return result
 
     def _execute_projection(
-        self, payload: SourceRevisionEventPayload, context: JobExecutionContext
-    ) -> HandlerResult:
+        self, payload: SourceRevisionEventPayload, context: SelectionCheckpoint
+    ) -> NarrativeSelectResult:
         if self._projection_catalog is None:
             raise _SelectFailure(
                 "SOURCE_UNAVAILABLE", HandlerOutcome.TERMINAL_FAILURE,
@@ -365,10 +386,7 @@ class NarrativeSelectHandler:
             raw["reading_dependencies"] = package.reading_dependencies
         result = NarrativeSelectResult.from_dict(raw)
         context.checkpoint()
-        return HandlerResult(
-            outcome=HandlerOutcome.SUCCEEDED, result=result.to_dict(), artifacts=(), effects=(),
-            metrics=HandlerMetrics(tokens=0, cost_usd=0.0, duration_ms=0), error=None,
-        )
+        return result
 
     @staticmethod
     def _projection_parser_identity(view: VerifiedProjectionView) -> tuple[str, str]:
@@ -403,7 +421,7 @@ class NarrativeSelectHandler:
         self,
         payload: SourceRevisionEventPayload,
         data: bytes,
-        context: JobExecutionContext,
+        context: SelectionCheckpoint,
     ) -> _SelectionWork:
         if payload.source_metadata.source_class == "filing":
             if payload.source_ref.mime_type in NORMALIZED_MIME_TYPES:
@@ -413,7 +431,7 @@ class NarrativeSelectHandler:
 
     def _select_normalized(
         self, payload: SourceRevisionEventPayload, data: bytes,
-        context: JobExecutionContext,
+        context: SelectionCheckpoint,
     ) -> _SelectionWork:
         try:
             document = self._normalization.normalize(
@@ -438,7 +456,7 @@ class NarrativeSelectHandler:
         self,
         payload: SourceRevisionEventPayload,
         data: bytes,
-        context: JobExecutionContext,
+        context: SelectionCheckpoint,
     ) -> _SelectionWork:
         if payload.source_ref.mime_type != "application/pdf":
             raise _SelectFailure(
@@ -485,7 +503,7 @@ class NarrativeSelectHandler:
         self,
         payload: SourceRevisionEventPayload,
         data: bytes,
-        context: JobExecutionContext,
+        context: SelectionCheckpoint,
     ) -> _SelectionWork:
         if payload.source_ref.mime_type not in TRANSCRIPT_MIME_TYPES:
             raise _SelectFailure(

@@ -1,11 +1,11 @@
 {
   "schema_version": "company-wiki-current-plan-status/2",
   "as_of_date": "2026-11-01",
-  "observed_at_utc": "2026-11-01T03:37:07.418505+00:00",
+  "observed_at_utc": "2026-11-01T04:12:36.375140+00:00",
   "canonical_entry": "CURRENT_STATUS.md",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
-  "project_status": "P3_CONFIG_RECOVERY_PUBLISHED_EXACT_CI_GREEN_REAL_SUMMARY_PASS_CROSS_RUN_CACHE_DUPLICATE_POST_ROOT_DIAGNOSIS",
+  "project_status": "P3_CURRENT_SUMMARY_CACHE_REAL_GREEN_INDEPENDENT_REVIEW_PASS_RF_NATIVE_CHAIN_EXECUTED_AWAIT_FINAL_FREEZE_FOUR_REVIEWS",
   "scope_this_update": "Mainline only; exact CI root repairs, real summary/recovery/native adoption; no new packages",
   "last_code_commit": "ce1a603a88397e5a2e921177604cdff2dc08e0ab",
   "verified_publication_before_docs": {
@@ -93,7 +93,7 @@
       "task": "W12 original-company rerun, new-company generalization, fixed8company fullaudit/skillimprovement and finalclean streak"
     }
   ],
-  "next_action": "按task_plan缓存共因小节TDD实现共享source-select与当前material等价复用回退，保留partial/旧收费；真实H1 max_tokens=1新run免费RED/复验，集中独审再正常发布。随后完整RF/四审，不扩包。",
+  "next_action": "正常发布当前缓存共因根修并核精确CI；与此并行完成W12作者v2正确引用版本的完整RF链/封存，再派四路fresh独审，按共因修复源D&M遗漏/研究幅度依据等实际问题，质量/检测收尾。不扩包。",
   "package_status_registry": "PACKAGE_STATUS.json",
   "handoff": "HANDOFF.md",
   "goal_definition": "MAINLINE_LOOP_GOAL.md",
@@ -426,7 +426,7 @@
     "attempt": "r1-remediation-03",
     "as_of_date": "2026-10-21",
     "executor": "/root/w12_executor_current",
-    "status": "H1_REAL_SUMMARY_PASS_CACHE_VALIDATION_FAILED_DUPLICATE_POST_PAID_GENERATION_STOPPED",
+    "status": "CACHE_REPAIR_REVIEW_PASS_NATIVE_RF_CHAIN_EXECUTED_AUTHOR_V2_CORRECTION_BEFORE_FREEZE",
     "root": "revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec/execution_replays/r1-remediation-03",
     "formal_execution_or_four_review_pass": false,
     "new_model_POST_so_far": 4,
@@ -458,14 +458,24 @@
     },
     "cross_run_cache": {
       "run_id": "r1-w12-h1-cache-20261101",
-      "status": "FAILED_EXTRA_POST_NOT_PASS",
+      "status": "SHARED_ROOT_REPAIR_REAL_SAFE_GREEN_INDEPENDENT_REVIEW_PASS",
       "requested_refresh": false,
       "extra_posts": 1,
       "tokens": 9773,
       "micro_usd": 1808,
       "capture_id": "4c179c36d823485fbf6422a7ee1946b7",
       "artifact_sha256": "54ccb82a5e14db1a427dc66e485d58298b55f0e186e44c5e7bcc050ea8a0e895",
-      "action": "Stop paid H1 regeneration; compare exact requests and native generation/reuse receipts before root repair; same-run/exactread diagnostics free only."
+      "action": "Stop paid H1 regeneration; compare exact requests and native generation/reuse receipts before root repair; same-run/exactread diagnostics free only.",
+      "historical_failed_status": "EXTRA_POST_PRESERVED_NOT_REFUNDED",
+      "green_run_id": "r1-w12-h1-cache-green1-20261101",
+      "green_capture": "bc3a09b0b45a4932a88864a4fe9db0d6",
+      "new_model_posts": 0,
+      "new_reservations": 0,
+      "reused_exact_artifact_sha256": "54ccb82a5e14db1a427dc66e485d58298b55f0e186e44c5e7bcc050ea8a0e895",
+      "capture_seconds": 12.243610599995009,
+      "old_rows_and_usage_unchanged": true,
+      "scope": "Source selection remainspartial; no claim0parse/full-company PASS",
+      "evidence": "review/mainline-closeout-20261031/p3-cache-reuse/README.md"
     },
     "cache_root_cause": {
       "base_and_final_and_request_identical": true,
@@ -558,5 +568,19 @@
     "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41264855167",
     "normal_pre_push_passed": 651,
     "normal_pre_push_seconds": 133.64
+  },
+  "p3_cache_reselection": {
+    "status": "INDEPENDENT_REVIEW_PASS_PUBLICATION_IN_PROGRESS",
+    "runtime_paths": [
+      "src/company_wiki/automation/narrative_select.py",
+      "src/company_wiki/automation/narrative_generation.py",
+      "src/company_wiki/automation/narrative_batch.py",
+      "tests/unit/test_reading_cache_reselection.py"
+    ],
+    "current_tests": "137domain,7finalcache,16host; overlapping scopes",
+    "actual_SAFE_GREEN": true,
+    "new_paid_calls": 0,
+    "original_generation_resigned": false,
+    "evidence": "review/mainline-closeout-20261031/p3-cache-reuse/README.md"
   }
 }
