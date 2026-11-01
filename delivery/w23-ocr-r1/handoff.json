@@ -1,0 +1,473 @@
+{
+  "schema_version": "harness-handoff/1",
+  "card_id": "W23-OCR-R1",
+  "plan_id": "w23-ocr-r1-2026-10-31",
+  "workdir": "C:/Users/郑曾波/Projects/company-wiki/tmp/w23-r6",
+  "branch": "codex/architecture-w23-repair-20261101",
+  "base_commit": "d2f6e6f015cb69b826b499ef56e1ab3d6053fced",
+  "required_platform_fix": "20dd0143197462be31a467cdd53bcff1a31b4d94",
+  "implementation_commits": [
+    "0b0eb4bf feat: R1 campaign ledger with cross-process budget closure and TDD",
+    "970532af feat: freeze R1 new sample and independently verified gold before any engine run",
+    "cedbde6e feat: run R1 campaign on frozen new sample with full denominators and measured X1F resource block",
+    "6705c3ea fix: isolate OCR platform resources and retire blocking host syntax heuristics",
+    "1eb8cbaa fix: close R1 final-review findings - platform fix, gold correction, currency-aware counts, honest ledger, full report",
+    "3042aa85 docs: record R1 second-round fixes and findings in PWF",
+    "5ca7a931 docs: archive retired-page provenance and native-layer disclosure in R1 delivery",
+    "da9ca2c8 fix: close R1 second-round review findings - honest gold metadata, X2 splits, B4 partial, cleanup",
+    "fc4228c1 docs: bind final tested commit in R1 handoff",
+    "96cde9bd docs: close R3 review items - gold impact metadata, A4 disclosure, X2 denominators, task_plan",
+    "4e8c49e2 docs: record final reviewed commit, doc suffix and pushed_to_remote",
+    "ff2bec4f docs: close R1 review nits and final state (READY_FOR_ROOT)",
+    "bf672e6c feat: close A3 Q&A coverage with an independent-gold page and add unsourced-line control",
+    "04aa7048 docs: bind 8-page final state in R1 handoff",
+    "3934e9fa fix: correct Q&A page source identity and delta review wording"
+  ],
+  "final_tested_commit": "ae438a32c942ccc50e9f0fa4d8e9825bd11ca210",
+  "final_reviewed_commit": "ae438a32c942ccc50e9f0fa4d8e9825bd11ca210",
+  "code_file_sha256": {
+    "tools/ocr_comparison/campaign.py": {
+      "raw_sha256": "c96ce351a2b77e86a5a168fbb003b6b3238739a9e962bb071d0e423337371912",
+      "lf_sha256": "135b7d5144fd1de72249659f1d3fba01b8d6ee360f7bf426ae9269e01d63b177"
+    },
+    "tools/ocr_comparison/render_pages.py": {
+      "raw_sha256": "b20c9e58a1c228823008c9b0631995489d819fd1428e6601661b1dcb73bb3b53",
+      "lf_sha256": "44ffacaedd984baebd036df81d5687eda2388772ac85e73d43d1e7de01a94228"
+    },
+    "tools/ocr_comparison/backends/native_n0.py": {
+      "raw_sha256": "dcb6ab0372341c169d49dd136e3aec304770984483cfc1bcec1999e20997f5c0",
+      "lf_sha256": "bb0269fa909413261320cce953b0da50d6197fb99e7cf58cd4fe7469213a747e"
+    },
+    "tools/ocr_comparison/backends/xiaomi_x1.py": {
+      "raw_sha256": "850b8fe21415a36b0d40837a581dcd11aff4003af379d66330cfb3dc82d81ac2",
+      "lf_sha256": "2b5a19b308c3667eea5bb76c27344a7b93e2d3dbf55a6ce846f91fab97dec927"
+    },
+    "tools/ocr_comparison/backends/rapidocr_r0.py": {
+      "raw_sha256": "43c2e72b15dc51bb404aded2c0a941b26f8f0ab0b87784b4a6cb7575c4b1f09a",
+      "lf_sha256": "83a76fdce7dcb1247546b6b5be948e8cf0a40f9e281e7040f0d0f93e2ccf7607"
+    },
+    "tools/ocr_comparison/compare.py": {
+      "raw_sha256": "6079f00e22370ea63a38d03e83d25e83a4ac04237dbf759a9d0f73beb62f7966",
+      "lf_sha256": "005ac9ba59233367fb6f70b864c63e1a9e0670b42abd2393ca01f8f45b9ffc15"
+    },
+    "tools/ocr_comparison/metrics.py": {
+      "raw_sha256": "3059dfadeaa33e282f1e591b7fe9b3995d5523e5122e2adb3dbb5b38e7918f20",
+      "lf_sha256": "b37300dc9ba31800a3bd98eb362ae2f23ad3fe188e0036e950adefaadbc62315"
+    },
+    "tools/ocr_comparison/job_limit.py": {
+      "raw_sha256": "7dd9ef3d98bfea4cb1a1a81232a79fa66e1a2170f4db590b9274534a3cb3e1bd",
+      "lf_sha256": "ac8ae6bf24130c85110eeb4e7e48cb1ed8dfb61fc48953f069b2de7ab86b2515"
+    },
+    "tools/ocr_comparison/run_x1.py": {
+      "raw_sha256": "b21cf4dc76b1305bc2b40236e0f65c53a1ee1901966c721e9c59b5e8bba52ac7",
+      "lf_sha256": "70e61afe542e8b4849777eeafd066fb88c19be79f4acba6f03a360a1cb87fadb"
+    },
+    "tools/ocr_comparison/x1_child.py": {
+      "raw_sha256": "f8a8e5131c7e28c74da2ea6771ef40b69233956b551f6b6d6da846ac93b0051b",
+      "lf_sha256": "4915177ee86f23ae3c3fbb37cbb8a28ab1943bb3c682bc18631142a5d7998182"
+    },
+    "tools/ocr_comparison/cache.py": {
+      "raw_sha256": "bde43e2a13f987f92079a10a55a2d3939873dc959529ed737ceb98f109cfe776",
+      "lf_sha256": "d5379e40fad95cc729d8193ae60d404887341cb1d9c8c716199b3fa915044168"
+    },
+    "tools/ocr_comparison/manifest.py": {
+      "raw_sha256": "8d1d24050fab37c82b8e95d055d045f6b89171ba62343430004521c0b4512e8e",
+      "lf_sha256": "74d4397aa98bf32476529bf640123c5cee4fb2ac18e51b273a5b2bbc7ed889f4"
+    },
+    "tools/ocr_comparison/run_comparison.py": {
+      "raw_sha256": "e62ffa3b93e1e54991e3b9a66a42af74455d2efb06538ac3e07ae7a02a77d7d4",
+      "lf_sha256": "c86556b43f84d886440b74be379b2ecbfe519e25f4dd07a14ec44e13ea7ea290"
+    }
+  },
+  "frozen_inputs": {
+    "sample_manifest": {
+      "path": "docs/plans/w23-ocr-r1-2026-10-31/r1_sample_manifest.json",
+      "sha256": "da1d938d3820778437de0e27b222395a7d0ff3dc07df8ff87c4b51393ade1fc5"
+    },
+    "gold": {
+      "path": "docs/plans/w23-ocr-r1-2026-10-31/r1_gold.json",
+      "sha256": "cedcf16cc31b76ce458e0ffda83438e081e935086a2a61392637338863846d88",
+      "revision": 4
+    },
+    "control_manifest": {
+      "path": "docs/plans/w23-ocr-r1-2026-10-31/r1_control_manifest.json",
+      "sha256": "027662e6c91a04ebe3424297fa60f4fd284707f0df707937bd3db2f28a4eeee3"
+    },
+    "timeline": "gold committed 970532af before the campaign commit; rev3 correction documented"
+  },
+  "campaign": {
+    "ledger": "delivery/w23-ocr-r1/campaign_ledger.json",
+    "budget_seconds": 1800.0,
+    "spent_seconds": 1431.40547,
+    "remaining_seconds": 368.5945300000001,
+    "historical_prior_experiment_seconds_listed_separately": 2471.834832,
+    "history_note": "the 2026-10-30 exploratory experiment's 2471.83 s is prior history and is not netted against this campaign",
+    "commands": [
+      "python -m tools.ocr_comparison.campaign init --ledger delivery/w23-ocr-r1/campaign_ledger.json --budget 1800",
+      "python -m tools.ocr_comparison.campaign run --arm N0 --manifest docs/plans/w23-ocr-r1-2026-10-31/r1_sample_manifest.json --pages all",
+      "python -m tools.ocr_comparison.campaign run --arm R0 --manifest ... --cache-dir .w23_cache/r1_cache --pages all",
+      "python -m tools.ocr_comparison.campaign run --arm R0 --manifest docs/plans/w23-xiaomi-ocr-2026-10-30/sample_manifest.json --pages byd_ar_2024_p021",
+      "python -m tools.ocr_comparison.campaign run --arm X1F --manifest ... --weights-mode mapped-f32 --max-new-tokens 4096 --model-dir <read-only snapshot>",
+      "python docs/plans/w23-ocr-r1-2026-10-31/fact_match.py",
+      "python docs/plans/w23-ocr-r1-2026-10-31/build_r1_delivery.py"
+    ],
+    "runs": [
+      {
+        "arm": "N0",
+        "file": "run_n0.json",
+        "result": "7/7 ok"
+      },
+      {
+        "arm": "R0",
+        "file": "run_r0.json",
+        "result": "7/7 ok; 144.15 s"
+      },
+      {
+        "arm": "R0 pilot (old page)",
+        "file": "run_pilot_old_page_r0.json",
+        "result": "ok 19.4 s"
+      },
+      {
+        "arm": "X1F attempt 1 (pre-fix toolchain)",
+        "file": "run_x1_attempt1.json",
+        "result": "0/7; MemoryError at load; cap 1.142 GiB"
+      },
+      {
+        "arm": "X1F attempt 2 (fixed toolchain)",
+        "file": "run_x1_attempt2.json",
+        "result": "page1 allocator error, page2 native AV crash at 106.5 s; cap 1.602 GiB; job peak 1.753 GiB exceeded cap"
+      },
+      {
+        "arm": "R0 controls",
+        "file": "run_control_r0.json",
+        "result": "formula 1/4 faithful; blank control 0 characters"
+      },
+      {
+        "arm": "R0 cache resume",
+        "file": "run_r0_cache_resume.json",
+        "result": "cache_hit true, inference_runs 0, 0 re-charge"
+      }
+    ],
+    "accounting_scope": "historical recorded charges, not verified total elapsed or an authorized fresh balance",
+    "actual_total_elapsed_seconds": null,
+    "within_1800_seconds_proven": false,
+    "unknown_work": "Original seven zero-second R0 rows represent executed work of unknown duration. The 144.15-second rerun is additional measured work, not the original missing elapsed.",
+    "overcount_preserved": "1080 seconds for six never-started pages remains in the unchanged historical ledger; do not silently offset it against unknown work."
+  },
+  "overall_status": "PARTIAL",
+  "status_reason": "PARTIAL empirical comparison retained at 8 selected pages; new transaction/cache code has only stub-based engineering validation. Historical 1431.40547 ledger charges include never-started over-count and unmeasured work, so actual total elapsed and <=1800 compliance are unproven. No production OCR replacement or measured Xiaomi superiority is accepted.",
+  "review": {
+    "status": "PASS_TOOL_ENGINEERING_SCOPE_ONLY",
+    "reviewer": "/root/rectification_review_a",
+    "runtime_commit": "ae438a32c942ccc50e9f0fa4d8e9825bd11ca210",
+    "scope": "tool engineering PASS only; original empirical OCR comparison remains PARTIAL",
+    "report_md": "docs/plans/du11-source-closure-2026-10-18/review/architecture-quality-20261101/implementation-results/R6-W23-independent-final.md",
+    "report_json": "docs/plans/du11-source-closure-2026-10-18/review/architecture-quality-20261101/implementation-results/R6-W23-independent-final.json",
+    "report_json_raw_sha256": "8cd2429319c9a37c2df1a489dfe455c2dcce7dd5605adb10973b26ff4d0ce132",
+    "report_json_lf_sha256": "16ca7b9fe041384407678f274443c87d199e30b1fa89f2dd0e5983c9ef593587",
+    "original_red_and_countercontrol": "5/5 GREEN",
+    "selected_tests": "10P/4.02s",
+    "production_ocr_accepted": false,
+    "historical_claim_unverified": "76292 final READY report was not supplied; new review does not fabricate it",
+    "open_items_for_root": [
+      "historical total elapsed/<=1800 remains unproven",
+      "historical Job Object peak/cap discrepancy and true Xiaomi quality remain empirical limits",
+      "ROOT stable-master integration and candidate full CI not performed by author"
+    ]
+  },
+  "cleanup_and_assets": {
+    "retained_assets": [
+      {
+        "path": "company-wiki-w23-xiaomi-ocr/.w23_cache/hub (read-only bf16 + declared fp32 derivative)",
+        "bytes": 5267674225,
+        "note": "reused read-only; not copied; not committed"
+      }
+    ],
+    "production_isolation": "diff 946537d0..HEAD: additions-only in tools/ocr_comparison/, tests/**/test_w23_ocr_r1_*, docs/plans/w23-ocr-r1-2026-10-31/, delivery/w23-ocr-r1/; the cherry-picked platform fix is ROOT's 20dd0143; no production src/config/deps changes",
+    "author_deleted_claim_unverified": [
+      "all rendered/control PNGs under .w23_cache/r1_pages (deleted after the final run; SHAs and render scripts retained)"
+    ],
+    "root_deleted_author_assets": [
+      "C:\\Users\\郑曾波\\Projects\\company-wiki-w23-xiaomi-ocr-r1\\.w23_cache\\r1_pages\\r1_wanhua_qa2021_p003.png"
+    ],
+    "historical_review_time_retained_observation": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-w23-xiaomi-ocr-r1\\.w23_cache\\r1_pages\\r1_wanhua_qa2021_p003.png",
+      "exists": true,
+      "bytes": 579214,
+      "sha256": "097eaf47d1da132c80a64dfdd42ca81c72d3b559969ca552b6bc7fb1d00478fc",
+      "action": "read-only experiment asset retained; no blind deletion from author worktree",
+      "scope": "true at review time, before ROOT precise post-review cleanup"
+    },
+    "root_current_cleanup": {
+      "status": "KNOWN_REMAINING_R1_GENERATED_PNG_REMOVED_BY_ROOT",
+      "receipt": "docs/plans/du11-source-closure-2026-10-18/review/architecture-quality-20261101/implementation-results/R6-W23-derived-cleanup.json",
+      "receipt_raw_sha256": "e7765a6711c70aa3791ec5164a268df46f3617a1d4300be4578a888945ead703",
+      "receipt_lf_sha256": "e404cadc2dea236e9dcf9284418412881a6fdf5be4b84fc3c214c3f2c6fb95a8",
+      "schema": "w23-root-derived-cleanup/1",
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-w23-xiaomi-ocr-r1\\.w23_cache\\r1_pages\\r1_wanhua_qa2021_p003.png",
+      "bytes": 579214,
+      "sha256": "097eaf47d1da132c80a64dfdd42ca81c72d3b559969ca552b6bc7fb1d00478fc",
+      "exists_after": false,
+      "reason": "generated QA page PNG; original R1 task requires removal after tests",
+      "original_documents_touched": false,
+      "models_and_other_caches_touched": false,
+      "regeneration": "retained frozen sample/source identity and tools/ocr_comparison/render_pages.py permit re-rendering; no new render performed"
+    }
+  },
+  "recommendation": "现有不动 for production; table-structure linearization is R0's measured gap. Xiaomi needs a host with >=6.5 GB free RAM and a resolution of the Job Object bound mismatch before any card-compliant X1F result can exist.",
+  "pushed_to_remote": false,
+  "author_delivery_claims_before_root_repair": {
+    "workdir": "C:\\Users\\郑曾波\\Projects\\company-wiki-w23-xiaomi-ocr-r1",
+    "branch": "codex/w23-ocr-r1-20261031",
+    "base_commit": "946537d0d75ac36b22ac0bb24e0f484a896b4c95",
+    "final_tested_commit": "3934e9fa8a5fe87a77c1cfdb5346ce6168f1d4d1",
+    "final_reviewed_commit": "76292e3f (independent delta review READY_FOR_ROOT; documentation-only commits after it are bookkeeping)",
+    "review": {
+      "status": "final review recorded in review_independent.md",
+      "open_items_for_root": [
+        "Job Object bound did not hold: recorded peak 1.753 GiB > cap 1.602 GiB in x1 attempt 2 receipt",
+        "X1F remains unrunnable at the host's measured available memory; needs ~6.5 GB free RAM or a larger host"
+      ]
+    },
+    "code_file_sha256": {
+      "tools/ocr_comparison/campaign.py": {
+        "raw_sha256": "d974cbaefe09cf2dca6060250095477db5b6fa933ae82b6f07b3ef5fc44e38e1",
+        "lf_sha256": "cdd51d1445d6ffe86fae22c264dd4c95e4c26a33248af7a419eaec9764090ced"
+      },
+      "tools/ocr_comparison/render_pages.py": {
+        "raw_sha256": "b20c9e58a1c228823008c9b0631995489d819fd1428e6601661b1dcb73bb3b53",
+        "lf_sha256": "44ffacaedd984baebd036df81d5687eda2388772ac85e73d43d1e7de01a94228"
+      },
+      "tools/ocr_comparison/backends/native_n0.py": {
+        "raw_sha256": "dcb6ab0372341c169d49dd136e3aec304770984483cfc1bcec1999e20997f5c0",
+        "lf_sha256": "bb0269fa909413261320cce953b0da50d6197fb99e7cf58cd4fe7469213a747e"
+      },
+      "tools/ocr_comparison/backends/xiaomi_x1.py": {
+        "raw_sha256": "850b8fe21415a36b0d40837a581dcd11aff4003af379d66330cfb3dc82d81ac2",
+        "lf_sha256": "2b5a19b308c3667eea5bb76c27344a7b93e2d3dbf55a6ce846f91fab97dec927"
+      },
+      "tools/ocr_comparison/backends/rapidocr_r0.py": {
+        "raw_sha256": "43c2e72b15dc51bb404aded2c0a941b26f8f0ab0b87784b4a6cb7575c4b1f09a",
+        "lf_sha256": "83a76fdce7dcb1247546b6b5be948e8cf0a40f9e281e7040f0d0f93e2ccf7607"
+      },
+      "tools/ocr_comparison/compare.py": {
+        "raw_sha256": "6079f00e22370ea63a38d03e83d25e83a4ac04237dbf759a9d0f73beb62f7966",
+        "lf_sha256": "005ac9ba59233367fb6f70b864c63e1a9e0670b42abd2393ca01f8f45b9ffc15"
+      },
+      "tools/ocr_comparison/metrics.py": {
+        "raw_sha256": "3059dfadeaa33e282f1e591b7fe9b3995d5523e5122e2adb3dbb5b38e7918f20",
+        "lf_sha256": "b37300dc9ba31800a3bd98eb362ae2f23ad3fe188e0036e950adefaadbc62315"
+      },
+      "tools/ocr_comparison/job_limit.py": {
+        "raw_sha256": "7dd9ef3d98bfea4cb1a1a81232a79fa66e1a2170f4db590b9274534a3cb3e1bd",
+        "lf_sha256": "ac8ae6bf24130c85110eeb4e7e48cb1ed8dfb61fc48953f069b2de7ab86b2515"
+      },
+      "tools/ocr_comparison/run_x1.py": {
+        "raw_sha256": "b21cf4dc76b1305bc2b40236e0f65c53a1ee1901966c721e9c59b5e8bba52ac7",
+        "lf_sha256": "70e61afe542e8b4849777eeafd066fb88c19be79f4acba6f03a360a1cb87fadb"
+      },
+      "tools/ocr_comparison/x1_child.py": {
+        "raw_sha256": "f8a8e5131c7e28c74da2ea6771ef40b69233956b551f6b6d6da846ac93b0051b",
+        "lf_sha256": "4915177ee86f23ae3c3fbb37cbb8a28ab1943bb3c682bc18631142a5d7998182"
+      },
+      "tools/ocr_comparison/cache.py": {
+        "raw_sha256": "3a0645d483a2dbcdf25625462f9556f23b31834b8863d6eff8a4551cfae61815",
+        "lf_sha256": "8933dc779a4207fb3d855cda19c75f057c0c4130c8d858e791dc9f618809b669"
+      },
+      "tools/ocr_comparison/manifest.py": {
+        "raw_sha256": "8d1d24050fab37c82b8e95d055d045f6b89171ba62343430004521c0b4512e8e",
+        "lf_sha256": "74d4397aa98bf32476529bf640123c5cee4fb2ac18e51b273a5b2bbc7ed889f4"
+      },
+      "tools/ocr_comparison/run_comparison.py": {
+        "raw_sha256": "e62ffa3b93e1e54991e3b9a66a42af74455d2efb06538ac3e07ae7a02a77d7d4",
+        "lf_sha256": "c86556b43f84d886440b74be379b2ecbfe519e25f4dd07a14ec44e13ea7ea290"
+      }
+    },
+    "cleanup_and_assets": {
+      "deleted": [
+        "all rendered/control PNGs under .w23_cache/r1_pages (deleted after the final run; SHAs and render scripts retained)"
+      ],
+      "retained_assets": [
+        {
+          "path": "company-wiki-w23-xiaomi-ocr/.w23_cache/hub (read-only bf16 + declared fp32 derivative)",
+          "bytes": 5267674225,
+          "note": "reused read-only; not copied; not committed"
+        }
+      ],
+      "production_isolation": "diff 946537d0..HEAD: additions-only in tools/ocr_comparison/, tests/**/test_w23_ocr_r1_*, docs/plans/w23-ocr-r1-2026-10-31/, delivery/w23-ocr-r1/; the cherry-picked platform fix is ROOT's 20dd0143; no production src/config/deps changes"
+    },
+    "pushed_to_remote": "origin/codex/w23-ocr-r1-20261031"
+  },
+  "root_runtime_repair": {
+    "status": "INDEPENDENT_TOOL_ENGINEERING_PASS_PENDING_ROOT_INTEGRATION",
+    "ledger": "same JSON ledger, short OS allocation mutex and durable inflight reservations",
+    "cache": "same ResultCache, nominal-cap identity plus actual effective deadline in captures; completion marker before settlement",
+    "legacy": "safe empty/known-cost ledger migration; observed zero-cost real inference remains unknown; no model retry or budget renewal",
+    "real_model_calls": 0,
+    "downloads": 0,
+    "report": "ROOT_REPAIR.md",
+    "runtime_commit": "ae438a32c942ccc50e9f0fa4d8e9825bd11ca210",
+    "tested_scope": "31 final transactional/stub tests PASS 23.02s; previous 108-case OCR affected domain PASS 93.51s with 2 warnings; these overlap, current unique package110 not rerun together",
+    "production_ocr_accepted": false,
+    "new_independent_review": {
+      "reviewer": "/root/rectification_review_a",
+      "runtime_commit": "ae438a32c942ccc50e9f0fa4d8e9825bd11ca210",
+      "scope": "tool engineering PASS only; original empirical OCR comparison remains PARTIAL",
+      "report_md": "docs/plans/du11-source-closure-2026-10-18/review/architecture-quality-20261101/implementation-results/R6-W23-independent-final.md",
+      "report_json": "docs/plans/du11-source-closure-2026-10-18/review/architecture-quality-20261101/implementation-results/R6-W23-independent-final.json",
+      "report_json_raw_sha256": "8cd2429319c9a37c2df1a489dfe455c2dcce7dd5605adb10973b26ff4d0ce132",
+      "report_json_lf_sha256": "16ca7b9fe041384407678f274443c87d199e30b1fa89f2dd0e5983c9ef593587",
+      "original_red_and_countercontrol": "5/5 GREEN",
+      "selected_tests": "10P/4.02s",
+      "production_ocr_accepted": false
+    },
+    "test_file_sha256": "0ba3d46d7a34a1ea1113ea01ce50ca387a527a3369acd7174a0f0066ef726d54",
+    "frozen_three_file_sha256": {
+      "tools/ocr_comparison/campaign.py": "c96ce351a2b77e86a5a168fbb003b6b3238739a9e962bb071d0e423337371912",
+      "tools/ocr_comparison/cache.py": "bde43e2a13f987f92079a10a55a2d3939873dc959529ed737ceb98f109cfe776",
+      "tests/integration/test_w23_ocr_r1_transactional_runner.py": "0ba3d46d7a34a1ea1113ea01ce50ca387a527a3369acd7174a0f0066ef726d54"
+    }
+  },
+  "historical_author_requirements": [
+    {
+      "req": "A1 HEAD/status/AGENTS + ROOT reception read; old run treated as exploratory",
+      "status": "done",
+      "evidence": "worktree at 946537d0 + cherry-picked required fix 20dd0143; ROOT reception README/ocr-review.md read"
+    },
+    {
+      "req": "A2 one run-feasibility pilot on an old non-holdout page",
+      "status": "done",
+      "evidence": "R0 pilot on byd_ar_2024_p021 (old eval page, never a new-sample page): ok, 19.4 s, charged to the same ledger. The pilot ran AFTER the gold freeze (deviation from the card's A2 ordering, disclosed): no new page was OCRed before the freeze, so the blind property holds; X1F run-feasibility = attempts 1/2"
+    },
+    {
+      "req": "A3 ~6 new pages CN/HK/US, outside old sample",
+      "status": "done",
+      "evidence": "8 pages from 6 documents never used in the 2026-10-30 sample (CN 3 incl. a business-Q&A page, HK 3 incl. a 9-column table, US 2); catalog identity per page; manifest revision 2 added the Q&A page before any engine ran on it"
+    },
+    {
+      "req": "A4 independent gold from images before any engine run; ≥2 pages to the final run",
+      "status": "done",
+      "evidence": "independent agent transcribed from PNGs (no OCR), reports not using the PDF text layers as ground truth; on clean born-digital pages near-equality with the native layer is disclosed and is not evidence either way; gold committed 970532af before campaign commit; 2 holdout pages never ran before the campaign"
+    },
+    {
+      "req": "A5 gold errors version-corrected with timing/impact; old gold untouched",
+      "status": "done",
+      "evidence": "revision 3: HK page swap (rev2) + Wuxi 客户对公司的服务需求 (rev3, found by final review, metrics recomputed from the same outputs); old 2026-10-30 gold untouched"
+    },
+    {
+      "req": "B1 arm identities; bf16 not retried",
+      "status": "done",
+      "evidence": "identity + asset SHA + prompt + max_new_tokens 4096 in receipts; bf16 not attempted"
+    },
+    {
+      "req": "B2 one cumulative 1800 s campaign, per-request <=180 s",
+      "status": "done",
+      "evidence": "ledger spent 1431.4/1800 s; per-request cap 180 s; max_new_tokens explicit 4096"
+    },
+    {
+      "req": "B3 cross-process budget closure, resume without renewal/re-inference",
+      "status": "done",
+      "evidence": "campaign ledger TDD (12 tests) + real cache resume run: cache_hit true, inference_runs 0, 0 re-charge (run_r0_cache_resume.json)"
+    },
+    {
+      "req": "B4 resources <= min(8GiB, avail/2), single concurrency",
+      "status": "partial",
+      "evidence": "single concurrency; caps recorded per attempt (1.142 / 1.602 GiB). NOT fully met empirically: in X1 attempt 2 the recorded job peak (1.753 GiB) exceeded the recorded cap (1.602 GiB), i.e. the Job Object bound did not hold as expected — handed to ROOT as an OPEN platform question"
+    },
+    {
+      "req": "B5 R0 isolation+recovery, N0 born-digital only",
+      "status": "done",
+      "evidence": "production config + IsolatedOCRAdapter + recover_regions; N0 = pypdfium2 text layer"
+    },
+    {
+      "req": "B6 X2 NOT_RUN declared",
+      "status": "done",
+      "evidence": "arms.X2 pages_total 7, coverage 0.0, reason recorded"
+    },
+    {
+      "req": "B7 same-capture reporting, no patched totals",
+      "status": "done",
+      "evidence": "build_r1_delivery.py computes every number from run files + gold + ledger; handoff reads comparison.json"
+    },
+    {
+      "req": "C1 per market/genre/arm CER/WER with full denominators",
+      "status": "done",
+      "evidence": "R0/N0 7/7; per-stratum table; eval/holdout splits; X1F 0/7 with full denominators"
+    },
+    {
+      "req": "C2 fact/condition/currency/magnitude counts summed from records",
+      "status": "done",
+      "evidence": "R0 facts 164/189 (numeric-anchor 177), conditions 107/117, numbers 288/291; currency window enforced (人民币 vs 美元 trap test False)"
+    },
+    {
+      "req": "C3 original-image fact checks, hallucination/truncation listed, blank negative control",
+      "status": "done",
+      "evidence": "gold image-verified; sampled relation checks; blank control produced 0 characters (no fabrication)"
+    },
+    {
+      "req": "C4 one small formula-symbol control (synthetic)",
+      "status": "done",
+      "evidence": "r1_formula_control: R0 kept 1/4 formulas symbol-faithful; excluded from real denominators"
+    },
+    {
+      "req": "C5 TIMEOUT/NOT_RUN/PARTIAL with specific reasons",
+      "status": "done",
+      "evidence": "PARTIAL: X1F resource-blocked (2 attempts, evidence + receipts); X2 not_run"
+    },
+    {
+      "req": "C6 dedicated short-domain tests, no model in CI, cleanup",
+      "status": "partial",
+      "evidence": "12 R1 tests (fake backend) + comparator tests pass; page PNGs deleted; unrelated sparse modules prevent a whole-repo run"
+    },
+    {
+      "req": "C7 independent final review, fixes closed",
+      "status": "done",
+      "evidence": "independent review found 15 OPEN items; fixes applied; re-review verdict in review_independent.md"
+    },
+    {
+      "req": "handoff harness-handoff/1 completeness",
+      "status": "done",
+      "evidence": "this file + handoff.md; commits, code SHA, ledger, receipts, cleanup, remote"
+    }
+  ],
+  "requirements": [
+    {
+      "id": "ROOT-TRANSACTION",
+      "status": "passed_new_tool_scope",
+      "scope": "new runtime only, real arm routing with stubs; no model/cost benchmark",
+      "evidence": "runtime ae438a32; 31 final tests + previous affected-domain results"
+    },
+    {
+      "id": "B2-CUMULATIVE-REAL-EXPERIMENT",
+      "status": "partial_unproven",
+      "scope": "historical total elapsed is null; 1431.40547 is recorded charge with both unknown original R0 work and never-started overcount",
+      "evidence": "unchanged campaign_ledger.json and run receipts"
+    },
+    {
+      "id": "B3-CACHE-RECOVERY",
+      "status": "passed_new_tool_scope",
+      "scope": "new X1/R0 real routing seam and cross-process crash recovery with stubs; old X1 cache closure claim refuted by intake",
+      "evidence": "test_w23_ocr_r1_transactional_runner.py"
+    },
+    {
+      "id": "C7-INDEPENDENT-FINAL-REVIEW",
+      "status": "passed_new_tool_scope",
+      "scope": "new independent review binds ae438 tool engineering only; missing old READY not fabricated",
+      "evidence": "docs/plans/du11-source-closure-2026-10-18/review/architecture-quality-20261101/implementation-results/R6-W23-independent-final.json"
+    }
+  ],
+  "historical_author_limitations": [
+    "X1F never produced a card-compliant result (2 attempts; evidence in receipts/comparison.json)",
+    "Job Object bound verified-vs-recorded mismatch (peak > cap) is OPEN for ROOT",
+    "no CN/US table, no scan, no dual-column, no IR-Q&A page in this round",
+    "formula control is synthetic only",
+    "ledger contains one under-count (7 zero rows first R0 pass) and one over-count (1080 s never-started pages), both disclosed"
+  ],
+  "limitations": [
+    "All empirical OCR quality metrics and 8-page records are from the earlier author toolchain, not a new model run on this repaired runtime.",
+    "X1F failed in the two historical host attempts; that is bounded host evidence, not a global capability conclusion. Job peak/cap discrepancy remains unresolved.",
+    "Recorded eight-page sample includes a later IR-QA extension; historical seven-page and no-IR-QA statements are kept only in historical_author fields, not current coverage facts.",
+    "The synthetic formula control had 1/4 fully faithful formulas (6/10 symbols recalled) in the recorded R0 run; this is neither new-code validation nor a broad model-capability score.",
+    "Actual historical cumulative elapsed and <=1800 compliance are unproven because original R0 cost is unknown and never-started X1 work was over-counted; no retrospective budget reset or rerun."
+  ]
+}

@@ -1,0 +1,289 @@
+{
+ "schema_version": "cwp-ocr-campaign-ledger/1",
+ "plan_id": "w23-ocr-r1-2026-10-31",
+ "created_at_utc": "2026-11-01T14:01:09.178690+00:00",
+ "budget_seconds": 1800.0,
+ "spent_seconds": 1431.40547,
+ "entries": [
+  {
+   "ts_utc": "2026-11-01T14:01:51.517460+00:00",
+   "arm": "N0",
+   "page_id": "r1_amec_ar2025_p029",
+   "seconds": 0.0,
+   "status": "ok"
+  },
+  {
+   "ts_utc": "2026-11-01T14:01:51.557304+00:00",
+   "arm": "N0",
+   "page_id": "r1_wuxi_ar2022_p010",
+   "seconds": 0.0,
+   "status": "ok"
+  },
+  {
+   "ts_utc": "2026-11-01T14:01:51.572118+00:00",
+   "arm": "N0",
+   "page_id": "r1_ksy_fy2025_results_p003",
+   "seconds": 0.0,
+   "status": "ok"
+  },
+  {
+   "ts_utc": "2026-11-01T14:01:51.583974+00:00",
+   "arm": "N0",
+   "page_id": "r1_ksy_fy2025_income_p012",
+   "seconds": 0.0,
+   "status": "ok"
+  },
+  {
+   "ts_utc": "2026-11-01T14:01:51.607377+00:00",
+   "arm": "N0",
+   "page_id": "r1_biren_ar2025_p030",
+   "seconds": 0.0,
+   "status": "ok"
+  },
+  {
+   "ts_utc": "2026-11-01T14:01:51.622486+00:00",
+   "arm": "N0",
+   "page_id": "r1_brk2007_p001",
+   "seconds": 0.0,
+   "status": "ok"
+  },
+  {
+   "ts_utc": "2026-11-01T14:01:51.635295+00:00",
+   "arm": "N0",
+   "page_id": "r1_brk2007_p005",
+   "seconds": 0.0,
+   "status": "ok"
+  },
+  {
+   "ts_utc": "2026-11-01T14:03:02.435552+00:00",
+   "arm": "R0",
+   "page_id": "r1_amec_ar2025_p029",
+   "seconds": 0.0,
+   "status": "ok"
+  },
+  {
+   "ts_utc": "2026-11-01T14:03:57.121734+00:00",
+   "arm": "R0",
+   "page_id": "r1_wuxi_ar2022_p010",
+   "seconds": 0.0,
+   "status": "ok"
+  },
+  {
+   "ts_utc": "2026-11-01T14:04:28.020664+00:00",
+   "arm": "R0",
+   "page_id": "r1_ksy_fy2025_results_p003",
+   "seconds": 0.0,
+   "status": "ok"
+  },
+  {
+   "ts_utc": "2026-11-01T14:04:47.727164+00:00",
+   "arm": "R0",
+   "page_id": "r1_ksy_fy2025_income_p012",
+   "seconds": 0.0,
+   "status": "ok"
+  },
+  {
+   "ts_utc": "2026-11-01T14:05:02.656298+00:00",
+   "arm": "R0",
+   "page_id": "r1_biren_ar2025_p030",
+   "seconds": 0.0,
+   "status": "ok"
+  },
+  {
+   "ts_utc": "2026-11-01T14:05:29.110995+00:00",
+   "arm": "R0",
+   "page_id": "r1_brk2007_p001",
+   "seconds": 0.0,
+   "status": "ok"
+  },
+  {
+   "ts_utc": "2026-11-01T14:05:53.425101+00:00",
+   "arm": "R0",
+   "page_id": "r1_brk2007_p005",
+   "seconds": 0.0,
+   "status": "ok"
+  },
+  {
+   "ts_utc": "2026-11-01T14:06:47.477413+00:00",
+   "arm": "R0",
+   "page_id": "r1_amec_ar2025_p029",
+   "seconds": 18.136346,
+   "status": "ok"
+  },
+  {
+   "ts_utc": "2026-11-01T14:07:11.685342+00:00",
+   "arm": "R0",
+   "page_id": "r1_wuxi_ar2022_p010",
+   "seconds": 24.197386,
+   "status": "ok"
+  },
+  {
+   "ts_utc": "2026-11-01T14:07:27.923337+00:00",
+   "arm": "R0",
+   "page_id": "r1_ksy_fy2025_results_p003",
+   "seconds": 16.231225,
+   "status": "ok"
+  },
+  {
+   "ts_utc": "2026-11-01T14:07:47.636435+00:00",
+   "arm": "R0",
+   "page_id": "r1_ksy_fy2025_income_p012",
+   "seconds": 19.702865,
+   "status": "ok"
+  },
+  {
+   "ts_utc": "2026-11-01T14:08:00.450969+00:00",
+   "arm": "R0",
+   "page_id": "r1_biren_ar2025_p030",
+   "seconds": 12.803244,
+   "status": "ok"
+  },
+  {
+   "ts_utc": "2026-11-01T14:08:28.599232+00:00",
+   "arm": "R0",
+   "page_id": "r1_brk2007_p001",
+   "seconds": 28.139031,
+   "status": "ok"
+  },
+  {
+   "ts_utc": "2026-11-01T14:08:53.553402+00:00",
+   "arm": "R0",
+   "page_id": "r1_brk2007_p005",
+   "seconds": 24.944128,
+   "status": "ok"
+  },
+  {
+   "ts_utc": "2026-11-01T14:10:43.891458+00:00",
+   "arm": "X1F",
+   "page_id": "r1_amec_ar2025_p029",
+   "seconds": 57.082928,
+   "status": "error"
+  },
+  {
+   "ts_utc": "2026-11-01T14:10:43.895316+00:00",
+   "arm": "X1F",
+   "page_id": "r1_wuxi_ar2022_p010",
+   "seconds": 0.0,
+   "status": "error"
+  },
+  {
+   "ts_utc": "2026-11-01T14:10:43.899352+00:00",
+   "arm": "X1F",
+   "page_id": "r1_ksy_fy2025_results_p003",
+   "seconds": 0.0,
+   "status": "error"
+  },
+  {
+   "ts_utc": "2026-11-01T14:10:43.902658+00:00",
+   "arm": "X1F",
+   "page_id": "r1_ksy_fy2025_income_p012",
+   "seconds": 0.0,
+   "status": "error"
+  },
+  {
+   "ts_utc": "2026-11-01T14:10:43.905421+00:00",
+   "arm": "X1F",
+   "page_id": "r1_biren_ar2025_p030",
+   "seconds": 0.0,
+   "status": "error"
+  },
+  {
+   "ts_utc": "2026-11-01T14:10:43.907835+00:00",
+   "arm": "X1F",
+   "page_id": "r1_brk2007_p001",
+   "seconds": 0.0,
+   "status": "error"
+  },
+  {
+   "ts_utc": "2026-11-01T14:10:43.910314+00:00",
+   "arm": "X1F",
+   "page_id": "r1_brk2007_p005",
+   "seconds": 0.0,
+   "status": "error"
+  },
+  {
+   "ts_utc": "2026-11-01T14:15:25.881375+00:00",
+   "arm": "R0",
+   "page_id": "r1_formula_control",
+   "seconds": 5.421448,
+   "status": "ok"
+  },
+  {
+   "ts_utc": "2026-11-01T14:21:38.977559+00:00",
+   "arm": "R0",
+   "page_id": "byd_ar_2024_p021",
+   "seconds": 19.43546,
+   "status": "ok"
+  },
+  {
+   "ts_utc": "2026-11-01T15:23:42.392912+00:00",
+   "arm": "R0",
+   "page_id": "r1_blank_control",
+   "seconds": 6.649746,
+   "status": "ok"
+  },
+  {
+   "ts_utc": "2026-11-01T15:25:45.862207+00:00",
+   "arm": "X1F",
+   "page_id": "r1_amec_ar2025_p029",
+   "seconds": 93.76435,
+   "status": "error"
+  },
+  {
+   "ts_utc": "2026-11-01T15:25:45.868909+00:00",
+   "arm": "X1F",
+   "page_id": "r1_wuxi_ar2022_p010",
+   "seconds": 180.0,
+   "status": "no_record"
+  },
+  {
+   "ts_utc": "2026-11-01T15:25:45.875226+00:00",
+   "arm": "X1F",
+   "page_id": "r1_ksy_fy2025_results_p003",
+   "seconds": 180.0,
+   "status": "no_record"
+  },
+  {
+   "ts_utc": "2026-11-01T15:25:45.881396+00:00",
+   "arm": "X1F",
+   "page_id": "r1_ksy_fy2025_income_p012",
+   "seconds": 180.0,
+   "status": "no_record"
+  },
+  {
+   "ts_utc": "2026-11-01T15:25:45.887686+00:00",
+   "arm": "X1F",
+   "page_id": "r1_biren_ar2025_p030",
+   "seconds": 180.0,
+   "status": "no_record"
+  },
+  {
+   "ts_utc": "2026-11-01T15:25:45.894363+00:00",
+   "arm": "X1F",
+   "page_id": "r1_brk2007_p001",
+   "seconds": 180.0,
+   "status": "no_record"
+  },
+  {
+   "ts_utc": "2026-11-01T15:25:45.900626+00:00",
+   "arm": "X1F",
+   "page_id": "r1_brk2007_p005",
+   "seconds": 180.0,
+   "status": "no_record"
+  },
+  {
+   "ts_utc": "2026-11-01T17:23:48.205663+00:00",
+   "arm": "R0",
+   "page_id": "r1_wanhua_qa2021_p003",
+   "seconds": 24.897313,
+   "status": "ok"
+  },
+  {
+   "ts_utc": "2026-11-01T17:23:49.800032+00:00",
+   "arm": "N0",
+   "page_id": "r1_wanhua_qa2021_p003",
+   "seconds": 0.0,
+   "status": "ok"
+  }
+ ]
+}

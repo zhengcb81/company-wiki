@@ -1,0 +1,798 @@
+{
+ "R0": {
+  "per_page": [
+   {
+    "produced": true,
+    "facts_hit": 20,
+    "conditions_hit": 12,
+    "numbers_hit": 4,
+    "facts_numeric_hit": 20,
+    "conditions_numeric_hit": 12,
+    "facts_total": 20,
+    "conditions_total": 12,
+    "numbers_total": 4,
+    "facts_raw_total": 20,
+    "conditions_raw_total": 12,
+    "numbers_raw_total": 4,
+    "unachievable_entries": {
+     "numbers": []
+    },
+    "page_id": "r1_amec_ar2025_p029"
+   },
+   {
+    "produced": true,
+    "facts_hit": 23,
+    "conditions_hit": 21,
+    "numbers_hit": 29,
+    "facts_numeric_hit": 23,
+    "conditions_numeric_hit": 21,
+    "facts_total": 25,
+    "conditions_total": 23,
+    "numbers_total": 29,
+    "facts_raw_total": 25,
+    "conditions_raw_total": 23,
+    "numbers_raw_total": 29,
+    "unachievable_entries": {
+     "numbers": []
+    },
+    "page_id": "r1_wuxi_ar2022_p010"
+   },
+   {
+    "produced": true,
+    "facts_hit": 21,
+    "conditions_hit": 9,
+    "numbers_hit": 39,
+    "facts_numeric_hit": 22,
+    "conditions_numeric_hit": 10,
+    "facts_total": 24,
+    "conditions_total": 11,
+    "numbers_total": 40,
+    "facts_raw_total": 24,
+    "conditions_raw_total": 11,
+    "numbers_raw_total": 40,
+    "unachievable_entries": {
+     "numbers": []
+    },
+    "page_id": "r1_ksy_fy2025_results_p003"
+   },
+   {
+    "produced": true,
+    "facts_hit": 5,
+    "conditions_hit": 3,
+    "numbers_hit": 182,
+    "facts_numeric_hit": 16,
+    "conditions_numeric_hit": 6,
+    "facts_total": 19,
+    "conditions_total": 8,
+    "numbers_total": 183,
+    "facts_raw_total": 19,
+    "conditions_raw_total": 8,
+    "numbers_raw_total": 199,
+    "unachievable_entries": {
+     "numbers": [
+      "–",
+      "–",
+      "–",
+      "–",
+      "–",
+      "–",
+      "–",
+      "–",
+      "–",
+      "–",
+      "–",
+      "–",
+      "–",
+      "–",
+      "–",
+      "–"
+     ]
+    },
+    "page_id": "r1_ksy_fy2025_income_p012"
+   },
+   {
+    "produced": true,
+    "facts_hit": 15,
+    "conditions_hit": 13,
+    "numbers_hit": 3,
+    "facts_numeric_hit": 15,
+    "conditions_numeric_hit": 13,
+    "facts_total": 15,
+    "conditions_total": 13,
+    "numbers_total": 3,
+    "facts_raw_total": 15,
+    "conditions_raw_total": 13,
+    "numbers_raw_total": 4,
+    "unachievable_entries": {
+     "numbers": [
+      "三分之一"
+     ]
+    },
+    "page_id": "r1_biren_ar2025_p030"
+   },
+   {
+    "produced": true,
+    "facts_hit": 36,
+    "conditions_hit": 14,
+    "numbers_hit": 1,
+    "facts_numeric_hit": 36,
+    "conditions_numeric_hit": 14,
+    "facts_total": 36,
+    "conditions_total": 14,
+    "numbers_total": 1,
+    "facts_raw_total": 36,
+    "conditions_raw_total": 14,
+    "numbers_raw_total": 6,
+    "unachievable_entries": {
+     "numbers": [
+      "four largest auto insurers",
+      "two of the largest reinsurers",
+      "H.H.",
+      "R.C.",
+      "U.S."
+     ]
+    },
+    "page_id": "r1_brk2007_p001"
+   },
+   {
+    "produced": true,
+    "facts_hit": 29,
+    "conditions_hit": 17,
+    "numbers_hit": 15,
+    "facts_numeric_hit": 29,
+    "conditions_numeric_hit": 17,
+    "facts_total": 32,
+    "conditions_total": 17,
+    "numbers_total": 16,
+    "facts_raw_total": 32,
+    "conditions_raw_total": 17,
+    "numbers_raw_total": 19,
+    "unachievable_entries": {
+     "numbers": [
+      "five years",
+      "nine sectors",
+      "six years"
+     ]
+    },
+    "page_id": "r1_brk2007_p005"
+   },
+   {
+    "produced": true,
+    "facts_hit": 15,
+    "conditions_hit": 18,
+    "numbers_hit": 15,
+    "facts_numeric_hit": 16,
+    "conditions_numeric_hit": 18,
+    "facts_total": 18,
+    "conditions_total": 19,
+    "numbers_total": 15,
+    "facts_raw_total": 18,
+    "conditions_raw_total": 19,
+    "numbers_raw_total": 15,
+    "unachievable_entries": {
+     "numbers": []
+    },
+    "page_id": "r1_wanhua_qa2021_p003"
+   }
+  ],
+  "totals": {
+   "facts_hit": 164,
+   "facts_total": 189,
+   "conditions_hit": 107,
+   "conditions_total": 117,
+   "numbers_hit": 288,
+   "numbers_total": 291,
+   "facts_raw_total": 189,
+   "conditions_raw_total": 117,
+   "numbers_raw_total": 316,
+   "facts_numeric_hit": 177,
+   "conditions_numeric_hit": 111,
+   "pages_produced": 8,
+   "pages_total": 8,
+   "unachievable_counts": {
+    "numbers": 25
+   }
+  }
+ },
+ "N0": {
+  "per_page": [
+   {
+    "produced": true,
+    "facts_hit": 20,
+    "conditions_hit": 12,
+    "numbers_hit": 4,
+    "facts_numeric_hit": 20,
+    "conditions_numeric_hit": 12,
+    "facts_total": 20,
+    "conditions_total": 12,
+    "numbers_total": 4,
+    "facts_raw_total": 20,
+    "conditions_raw_total": 12,
+    "numbers_raw_total": 4,
+    "unachievable_entries": {
+     "numbers": []
+    },
+    "page_id": "r1_amec_ar2025_p029"
+   },
+   {
+    "produced": true,
+    "facts_hit": 23,
+    "conditions_hit": 21,
+    "numbers_hit": 29,
+    "facts_numeric_hit": 23,
+    "conditions_numeric_hit": 21,
+    "facts_total": 25,
+    "conditions_total": 23,
+    "numbers_total": 29,
+    "facts_raw_total": 25,
+    "conditions_raw_total": 23,
+    "numbers_raw_total": 29,
+    "unachievable_entries": {
+     "numbers": []
+    },
+    "page_id": "r1_wuxi_ar2022_p010"
+   },
+   {
+    "produced": true,
+    "facts_hit": 22,
+    "conditions_hit": 11,
+    "numbers_hit": 39,
+    "facts_numeric_hit": 22,
+    "conditions_numeric_hit": 11,
+    "facts_total": 24,
+    "conditions_total": 11,
+    "numbers_total": 40,
+    "facts_raw_total": 24,
+    "conditions_raw_total": 11,
+    "numbers_raw_total": 40,
+    "unachievable_entries": {
+     "numbers": []
+    },
+    "page_id": "r1_ksy_fy2025_results_p003"
+   },
+   {
+    "produced": true,
+    "facts_hit": 10,
+    "conditions_hit": 4,
+    "numbers_hit": 183,
+    "facts_numeric_hit": 16,
+    "conditions_numeric_hit": 7,
+    "facts_total": 19,
+    "conditions_total": 8,
+    "numbers_total": 183,
+    "facts_raw_total": 19,
+    "conditions_raw_total": 8,
+    "numbers_raw_total": 199,
+    "unachievable_entries": {
+     "numbers": [
+      "–",
+      "–",
+      "–",
+      "–",
+      "–",
+      "–",
+      "–",
+      "–",
+      "–",
+      "–",
+      "–",
+      "–",
+      "–",
+      "–",
+      "–",
+      "–"
+     ]
+    },
+    "page_id": "r1_ksy_fy2025_income_p012"
+   },
+   {
+    "produced": true,
+    "facts_hit": 15,
+    "conditions_hit": 13,
+    "numbers_hit": 3,
+    "facts_numeric_hit": 15,
+    "conditions_numeric_hit": 13,
+    "facts_total": 15,
+    "conditions_total": 13,
+    "numbers_total": 3,
+    "facts_raw_total": 15,
+    "conditions_raw_total": 13,
+    "numbers_raw_total": 4,
+    "unachievable_entries": {
+     "numbers": [
+      "三分之一"
+     ]
+    },
+    "page_id": "r1_biren_ar2025_p030"
+   },
+   {
+    "produced": true,
+    "facts_hit": 36,
+    "conditions_hit": 14,
+    "numbers_hit": 1,
+    "facts_numeric_hit": 36,
+    "conditions_numeric_hit": 14,
+    "facts_total": 36,
+    "conditions_total": 14,
+    "numbers_total": 1,
+    "facts_raw_total": 36,
+    "conditions_raw_total": 14,
+    "numbers_raw_total": 6,
+    "unachievable_entries": {
+     "numbers": [
+      "four largest auto insurers",
+      "two of the largest reinsurers",
+      "H.H.",
+      "R.C.",
+      "U.S."
+     ]
+    },
+    "page_id": "r1_brk2007_p001"
+   },
+   {
+    "produced": true,
+    "facts_hit": 31,
+    "conditions_hit": 17,
+    "numbers_hit": 16,
+    "facts_numeric_hit": 31,
+    "conditions_numeric_hit": 17,
+    "facts_total": 32,
+    "conditions_total": 17,
+    "numbers_total": 16,
+    "facts_raw_total": 32,
+    "conditions_raw_total": 17,
+    "numbers_raw_total": 19,
+    "unachievable_entries": {
+     "numbers": [
+      "five years",
+      "nine sectors",
+      "six years"
+     ]
+    },
+    "page_id": "r1_brk2007_p005"
+   },
+   {
+    "produced": true,
+    "facts_hit": 16,
+    "conditions_hit": 19,
+    "numbers_hit": 15,
+    "facts_numeric_hit": 17,
+    "conditions_numeric_hit": 19,
+    "facts_total": 18,
+    "conditions_total": 19,
+    "numbers_total": 15,
+    "facts_raw_total": 18,
+    "conditions_raw_total": 19,
+    "numbers_raw_total": 15,
+    "unachievable_entries": {
+     "numbers": []
+    },
+    "page_id": "r1_wanhua_qa2021_p003"
+   }
+  ],
+  "totals": {
+   "facts_hit": 173,
+   "facts_total": 189,
+   "conditions_hit": 111,
+   "conditions_total": 117,
+   "numbers_hit": 290,
+   "numbers_total": 291,
+   "facts_raw_total": 189,
+   "conditions_raw_total": 117,
+   "numbers_raw_total": 316,
+   "facts_numeric_hit": 180,
+   "conditions_numeric_hit": 114,
+   "pages_produced": 8,
+   "pages_total": 8,
+   "unachievable_counts": {
+    "numbers": 25
+   }
+  }
+ },
+ "X1F_attempt1": {
+  "per_page": [
+   {
+    "produced": false,
+    "status": "no_output",
+    "facts_hit": 0,
+    "conditions_hit": 0,
+    "numbers_hit": 0,
+    "facts_numeric_hit": 0,
+    "conditions_numeric_hit": 0,
+    "facts_total": 20,
+    "conditions_total": 12,
+    "numbers_total": 4,
+    "facts_raw_total": 20,
+    "conditions_raw_total": 12,
+    "numbers_raw_total": 4,
+    "unachievable_entries": {
+     "numbers": []
+    },
+    "page_id": "r1_amec_ar2025_p029"
+   },
+   {
+    "produced": false,
+    "status": "no_output",
+    "facts_hit": 0,
+    "conditions_hit": 0,
+    "numbers_hit": 0,
+    "facts_numeric_hit": 0,
+    "conditions_numeric_hit": 0,
+    "facts_total": 25,
+    "conditions_total": 23,
+    "numbers_total": 29,
+    "facts_raw_total": 25,
+    "conditions_raw_total": 23,
+    "numbers_raw_total": 29,
+    "unachievable_entries": {
+     "numbers": []
+    },
+    "page_id": "r1_wuxi_ar2022_p010"
+   },
+   {
+    "produced": false,
+    "status": "no_output",
+    "facts_hit": 0,
+    "conditions_hit": 0,
+    "numbers_hit": 0,
+    "facts_numeric_hit": 0,
+    "conditions_numeric_hit": 0,
+    "facts_total": 24,
+    "conditions_total": 11,
+    "numbers_total": 40,
+    "facts_raw_total": 24,
+    "conditions_raw_total": 11,
+    "numbers_raw_total": 40,
+    "unachievable_entries": {
+     "numbers": []
+    },
+    "page_id": "r1_ksy_fy2025_results_p003"
+   },
+   {
+    "produced": false,
+    "status": "no_output",
+    "facts_hit": 0,
+    "conditions_hit": 0,
+    "numbers_hit": 0,
+    "facts_numeric_hit": 0,
+    "conditions_numeric_hit": 0,
+    "facts_total": 19,
+    "conditions_total": 8,
+    "numbers_total": 183,
+    "facts_raw_total": 19,
+    "conditions_raw_total": 8,
+    "numbers_raw_total": 199,
+    "unachievable_entries": {
+     "numbers": [
+      "–",
+      "–",
+      "–",
+      "–",
+      "–",
+      "–",
+      "–",
+      "–",
+      "–",
+      "–",
+      "–",
+      "–",
+      "–",
+      "–",
+      "–",
+      "–"
+     ]
+    },
+    "page_id": "r1_ksy_fy2025_income_p012"
+   },
+   {
+    "produced": false,
+    "status": "no_output",
+    "facts_hit": 0,
+    "conditions_hit": 0,
+    "numbers_hit": 0,
+    "facts_numeric_hit": 0,
+    "conditions_numeric_hit": 0,
+    "facts_total": 15,
+    "conditions_total": 13,
+    "numbers_total": 3,
+    "facts_raw_total": 15,
+    "conditions_raw_total": 13,
+    "numbers_raw_total": 4,
+    "unachievable_entries": {
+     "numbers": [
+      "三分之一"
+     ]
+    },
+    "page_id": "r1_biren_ar2025_p030"
+   },
+   {
+    "produced": false,
+    "status": "no_output",
+    "facts_hit": 0,
+    "conditions_hit": 0,
+    "numbers_hit": 0,
+    "facts_numeric_hit": 0,
+    "conditions_numeric_hit": 0,
+    "facts_total": 36,
+    "conditions_total": 14,
+    "numbers_total": 1,
+    "facts_raw_total": 36,
+    "conditions_raw_total": 14,
+    "numbers_raw_total": 6,
+    "unachievable_entries": {
+     "numbers": [
+      "four largest auto insurers",
+      "two of the largest reinsurers",
+      "H.H.",
+      "R.C.",
+      "U.S."
+     ]
+    },
+    "page_id": "r1_brk2007_p001"
+   },
+   {
+    "produced": false,
+    "status": "no_output",
+    "facts_hit": 0,
+    "conditions_hit": 0,
+    "numbers_hit": 0,
+    "facts_numeric_hit": 0,
+    "conditions_numeric_hit": 0,
+    "facts_total": 32,
+    "conditions_total": 17,
+    "numbers_total": 16,
+    "facts_raw_total": 32,
+    "conditions_raw_total": 17,
+    "numbers_raw_total": 19,
+    "unachievable_entries": {
+     "numbers": [
+      "five years",
+      "nine sectors",
+      "six years"
+     ]
+    },
+    "page_id": "r1_brk2007_p005"
+   },
+   {
+    "produced": false,
+    "status": "no_output",
+    "facts_hit": 0,
+    "conditions_hit": 0,
+    "numbers_hit": 0,
+    "facts_numeric_hit": 0,
+    "conditions_numeric_hit": 0,
+    "facts_total": 18,
+    "conditions_total": 19,
+    "numbers_total": 15,
+    "facts_raw_total": 18,
+    "conditions_raw_total": 19,
+    "numbers_raw_total": 15,
+    "unachievable_entries": {
+     "numbers": []
+    },
+    "page_id": "r1_wanhua_qa2021_p003"
+   }
+  ],
+  "totals": {
+   "facts_hit": 0,
+   "facts_total": 189,
+   "conditions_hit": 0,
+   "conditions_total": 117,
+   "numbers_hit": 0,
+   "numbers_total": 291,
+   "facts_raw_total": 189,
+   "conditions_raw_total": 117,
+   "numbers_raw_total": 316,
+   "facts_numeric_hit": 0,
+   "conditions_numeric_hit": 0,
+   "pages_produced": 0,
+   "pages_total": 8,
+   "unachievable_counts": {
+    "numbers": 25
+   }
+  }
+ },
+ "X1F_attempt2": {
+  "per_page": [
+   {
+    "produced": false,
+    "status": "no_output",
+    "facts_hit": 0,
+    "conditions_hit": 0,
+    "numbers_hit": 0,
+    "facts_numeric_hit": 0,
+    "conditions_numeric_hit": 0,
+    "facts_total": 20,
+    "conditions_total": 12,
+    "numbers_total": 4,
+    "facts_raw_total": 20,
+    "conditions_raw_total": 12,
+    "numbers_raw_total": 4,
+    "unachievable_entries": {
+     "numbers": []
+    },
+    "page_id": "r1_amec_ar2025_p029"
+   },
+   {
+    "produced": false,
+    "status": "no_output",
+    "facts_hit": 0,
+    "conditions_hit": 0,
+    "numbers_hit": 0,
+    "facts_numeric_hit": 0,
+    "conditions_numeric_hit": 0,
+    "facts_total": 25,
+    "conditions_total": 23,
+    "numbers_total": 29,
+    "facts_raw_total": 25,
+    "conditions_raw_total": 23,
+    "numbers_raw_total": 29,
+    "unachievable_entries": {
+     "numbers": []
+    },
+    "page_id": "r1_wuxi_ar2022_p010"
+   },
+   {
+    "produced": false,
+    "status": "no_output",
+    "facts_hit": 0,
+    "conditions_hit": 0,
+    "numbers_hit": 0,
+    "facts_numeric_hit": 0,
+    "conditions_numeric_hit": 0,
+    "facts_total": 24,
+    "conditions_total": 11,
+    "numbers_total": 40,
+    "facts_raw_total": 24,
+    "conditions_raw_total": 11,
+    "numbers_raw_total": 40,
+    "unachievable_entries": {
+     "numbers": []
+    },
+    "page_id": "r1_ksy_fy2025_results_p003"
+   },
+   {
+    "produced": false,
+    "status": "no_output",
+    "facts_hit": 0,
+    "conditions_hit": 0,
+    "numbers_hit": 0,
+    "facts_numeric_hit": 0,
+    "conditions_numeric_hit": 0,
+    "facts_total": 19,
+    "conditions_total": 8,
+    "numbers_total": 183,
+    "facts_raw_total": 19,
+    "conditions_raw_total": 8,
+    "numbers_raw_total": 199,
+    "unachievable_entries": {
+     "numbers": [
+      "–",
+      "–",
+      "–",
+      "–",
+      "–",
+      "–",
+      "–",
+      "–",
+      "–",
+      "–",
+      "–",
+      "–",
+      "–",
+      "–",
+      "–",
+      "–"
+     ]
+    },
+    "page_id": "r1_ksy_fy2025_income_p012"
+   },
+   {
+    "produced": false,
+    "status": "no_output",
+    "facts_hit": 0,
+    "conditions_hit": 0,
+    "numbers_hit": 0,
+    "facts_numeric_hit": 0,
+    "conditions_numeric_hit": 0,
+    "facts_total": 15,
+    "conditions_total": 13,
+    "numbers_total": 3,
+    "facts_raw_total": 15,
+    "conditions_raw_total": 13,
+    "numbers_raw_total": 4,
+    "unachievable_entries": {
+     "numbers": [
+      "三分之一"
+     ]
+    },
+    "page_id": "r1_biren_ar2025_p030"
+   },
+   {
+    "produced": false,
+    "status": "no_output",
+    "facts_hit": 0,
+    "conditions_hit": 0,
+    "numbers_hit": 0,
+    "facts_numeric_hit": 0,
+    "conditions_numeric_hit": 0,
+    "facts_total": 36,
+    "conditions_total": 14,
+    "numbers_total": 1,
+    "facts_raw_total": 36,
+    "conditions_raw_total": 14,
+    "numbers_raw_total": 6,
+    "unachievable_entries": {
+     "numbers": [
+      "four largest auto insurers",
+      "two of the largest reinsurers",
+      "H.H.",
+      "R.C.",
+      "U.S."
+     ]
+    },
+    "page_id": "r1_brk2007_p001"
+   },
+   {
+    "produced": false,
+    "status": "no_output",
+    "facts_hit": 0,
+    "conditions_hit": 0,
+    "numbers_hit": 0,
+    "facts_numeric_hit": 0,
+    "conditions_numeric_hit": 0,
+    "facts_total": 32,
+    "conditions_total": 17,
+    "numbers_total": 16,
+    "facts_raw_total": 32,
+    "conditions_raw_total": 17,
+    "numbers_raw_total": 19,
+    "unachievable_entries": {
+     "numbers": [
+      "five years",
+      "nine sectors",
+      "six years"
+     ]
+    },
+    "page_id": "r1_brk2007_p005"
+   },
+   {
+    "produced": false,
+    "status": "no_output",
+    "facts_hit": 0,
+    "conditions_hit": 0,
+    "numbers_hit": 0,
+    "facts_numeric_hit": 0,
+    "conditions_numeric_hit": 0,
+    "facts_total": 18,
+    "conditions_total": 19,
+    "numbers_total": 15,
+    "facts_raw_total": 18,
+    "conditions_raw_total": 19,
+    "numbers_raw_total": 15,
+    "unachievable_entries": {
+     "numbers": []
+    },
+    "page_id": "r1_wanhua_qa2021_p003"
+   }
+  ],
+  "totals": {
+   "facts_hit": 0,
+   "facts_total": 189,
+   "conditions_hit": 0,
+   "conditions_total": 117,
+   "numbers_hit": 0,
+   "numbers_total": 291,
+   "facts_raw_total": 189,
+   "conditions_raw_total": 117,
+   "numbers_raw_total": 316,
+   "facts_numeric_hit": 0,
+   "conditions_numeric_hit": 0,
+   "pages_produced": 0,
+   "pages_total": 8,
+   "unachievable_counts": {
+    "numbers": 25
+   }
+  }
+ }
+}

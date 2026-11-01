@@ -1,0 +1,83 @@
+{
+ "schema_version": "cwp-ocr-campaign-batch/1",
+ "arm": "R0",
+ "pages_selected": [
+  "r1_formula_control",
+  "r1_blank_control"
+ ],
+ "records": [
+  {
+   "dropped_regions": 0,
+   "engine_seconds": 5.421448399996734,
+   "height": 2339,
+   "lines": [
+    {
+     "bbox": [
+      174.0,
+      309.0,
+      407.0,
+      390.0
+     ],
+     "confidence": 0.92783,
+     "locator_quality": "word_box",
+     "text": "E = mc2"
+    },
+    {
+     "bbox": [
+      182.0,
+      521.0,
+      619.0,
+      576.0
+     ],
+     "confidence": 0.94225,
+     "locator_quality": "word_box",
+     "text": "△G = △H - T△S"
+    },
+    {
+     "bbox": [
+      177.0,
+      715.0,
+      696.0,
+      785.0
+     ],
+     "confidence": 0.97254,
+     "locator_quality": "word_box",
+     "text": "f(x) = ax² + bx + c"
+    },
+    {
+     "bbox": [
+      182.0,
+      922.0,
+      532.0,
+      979.0
+     ],
+     "confidence": 0.98397,
+     "locator_quality": "word_box",
+     "text": "P/E = 23.7 x"
+    }
+   ],
+   "page_id": "r1_formula_control",
+   "recovery_attempts": 0,
+   "request_seconds": 5.421448399996734,
+   "status": "ok",
+   "text": "E = mc2\n△G = △H - T△S\nf(x) = ax² + bx + c\nP/E = 23.7 x",
+   "width": 1654,
+   "cache_hit": true,
+   "inference_runs": 0
+  },
+  {
+   "status": "ok",
+   "text": "",
+   "lines": [],
+   "width": 1654,
+   "height": 2339,
+   "dropped_regions": 0,
+   "recovery_attempts": 0,
+   "page_id": "r1_blank_control",
+   "request_seconds": 6.649746299997787,
+   "engine_seconds": 6.649746299997787
+  }
+ ],
+ "remaining_seconds": 1567.256193,
+ "request_deadline": 180.0
+}

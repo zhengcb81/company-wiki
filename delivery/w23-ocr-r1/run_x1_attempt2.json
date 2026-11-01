@@ -1,0 +1,54 @@
+{
+ "schema_version": "cwp-ocr-campaign-batch/1",
+ "arm": "X1F",
+ "pages_selected": [
+  "r1_amec_ar2025_p029",
+  "r1_wuxi_ar2022_p010",
+  "r1_ksy_fy2025_results_p003",
+  "r1_ksy_fy2025_income_p012",
+  "r1_biren_ar2025_p030",
+  "r1_brk2007_p001",
+  "r1_brk2007_p005"
+ ],
+ "records": [
+  {
+   "status": "error",
+   "error": "RuntimeError: [enforce fail at alloc_cpu.cpp:117] data. DefaultCPUAllocator: not enough memory: you tried to allocate 141557760 bytes.",
+   "process_peak_commit_bytes_self": 1817313280,
+   "request_seconds": 93.76434969999536,
+   "page_id": "r1_amec_ar2025_p029"
+  },
+  {
+   "page_id": "r1_wuxi_ar2022_p010",
+   "status": "no_record",
+   "error": "child_exit_code=3221225477; backstop_hit=False"
+  },
+  {
+   "page_id": "r1_ksy_fy2025_results_p003",
+   "status": "no_record",
+   "error": "child_exit_code=3221225477; backstop_hit=False"
+  },
+  {
+   "page_id": "r1_ksy_fy2025_income_p012",
+   "status": "no_record",
+   "error": "child_exit_code=3221225477; backstop_hit=False"
+  },
+  {
+   "page_id": "r1_biren_ar2025_p030",
+   "status": "no_record",
+   "error": "child_exit_code=3221225477; backstop_hit=False"
+  },
+  {
+   "page_id": "r1_brk2007_p001",
+   "status": "no_record",
+   "error": "child_exit_code=3221225477; backstop_hit=False"
+  },
+  {
+   "page_id": "r1_brk2007_p005",
+   "status": "no_record",
+   "error": "child_exit_code=3221225477; backstop_hit=False"
+  }
+ ],
+ "remaining_seconds": 393.491843,
+ "request_deadline": 180.0
+}

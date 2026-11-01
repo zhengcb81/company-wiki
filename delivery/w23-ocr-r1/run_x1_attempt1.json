@@ -1,0 +1,54 @@
+{
+ "schema_version": "cwp-ocr-campaign-batch/1",
+ "arm": "X1F",
+ "pages_selected": [
+  "r1_amec_ar2025_p029",
+  "r1_wuxi_ar2022_p010",
+  "r1_ksy_fy2025_results_p003",
+  "r1_ksy_fy2025_income_p012",
+  "r1_biren_ar2025_p030",
+  "r1_brk2007_p001",
+  "r1_brk2007_p005"
+ ],
+ "records": [
+  {
+   "status": "error",
+   "error": "MemoryError: ",
+   "process_peak_commit_bytes_self": 1301938176,
+   "request_seconds": 57.0829276000004,
+   "page_id": "r1_amec_ar2025_p029"
+  },
+  {
+   "status": "error",
+   "error": "model_load_failed_on_earlier_page: MemoryError",
+   "page_id": "r1_wuxi_ar2022_p010"
+  },
+  {
+   "status": "error",
+   "error": "model_load_failed_on_earlier_page: MemoryError",
+   "page_id": "r1_ksy_fy2025_results_p003"
+  },
+  {
+   "status": "error",
+   "error": "model_load_failed_on_earlier_page: MemoryError",
+   "page_id": "r1_ksy_fy2025_income_p012"
+  },
+  {
+   "status": "error",
+   "error": "model_load_failed_on_earlier_page: MemoryError",
+   "page_id": "r1_biren_ar2025_p030"
+  },
+  {
+   "status": "error",
+   "error": "model_load_failed_on_earlier_page: MemoryError",
+   "page_id": "r1_brk2007_p001"
+  },
+  {
+   "status": "error",
+   "error": "model_load_failed_on_earlier_page: MemoryError",
+   "page_id": "r1_brk2007_p005"
+  }
+ ],
+ "remaining_seconds": 1598.762847,
+ "request_deadline": 180.0
+}

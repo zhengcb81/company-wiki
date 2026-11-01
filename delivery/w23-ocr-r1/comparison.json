@@ -1,0 +1,2422 @@
+{
+ "schema_version": "cwp-ocr-comparison/1",
+ "plan_id": "w23-ocr-r1-2026-10-31",
+ "created_at_utc": "2026-11-01T18:12:23.715270+00:00",
+ "campaign": {
+  "ledger_file": "campaign_ledger.json",
+  "budget_seconds": 1800.0,
+  "spent_seconds": 1431.40547,
+  "remaining_seconds": 368.5945300000001,
+  "entries": [
+   {
+    "ts_utc": "2026-11-01T14:01:51.517460+00:00",
+    "arm": "N0",
+    "page_id": "r1_amec_ar2025_p029",
+    "seconds": 0.0,
+    "status": "ok"
+   },
+   {
+    "ts_utc": "2026-11-01T14:01:51.557304+00:00",
+    "arm": "N0",
+    "page_id": "r1_wuxi_ar2022_p010",
+    "seconds": 0.0,
+    "status": "ok"
+   },
+   {
+    "ts_utc": "2026-11-01T14:01:51.572118+00:00",
+    "arm": "N0",
+    "page_id": "r1_ksy_fy2025_results_p003",
+    "seconds": 0.0,
+    "status": "ok"
+   },
+   {
+    "ts_utc": "2026-11-01T14:01:51.583974+00:00",
+    "arm": "N0",
+    "page_id": "r1_ksy_fy2025_income_p012",
+    "seconds": 0.0,
+    "status": "ok"
+   },
+   {
+    "ts_utc": "2026-11-01T14:01:51.607377+00:00",
+    "arm": "N0",
+    "page_id": "r1_biren_ar2025_p030",
+    "seconds": 0.0,
+    "status": "ok"
+   },
+   {
+    "ts_utc": "2026-11-01T14:01:51.622486+00:00",
+    "arm": "N0",
+    "page_id": "r1_brk2007_p001",
+    "seconds": 0.0,
+    "status": "ok"
+   },
+   {
+    "ts_utc": "2026-11-01T14:01:51.635295+00:00",
+    "arm": "N0",
+    "page_id": "r1_brk2007_p005",
+    "seconds": 0.0,
+    "status": "ok"
+   },
+   {
+    "ts_utc": "2026-11-01T14:03:02.435552+00:00",
+    "arm": "R0",
+    "page_id": "r1_amec_ar2025_p029",
+    "seconds": 0.0,
+    "status": "ok"
+   },
+   {
+    "ts_utc": "2026-11-01T14:03:57.121734+00:00",
+    "arm": "R0",
+    "page_id": "r1_wuxi_ar2022_p010",
+    "seconds": 0.0,
+    "status": "ok"
+   },
+   {
+    "ts_utc": "2026-11-01T14:04:28.020664+00:00",
+    "arm": "R0",
+    "page_id": "r1_ksy_fy2025_results_p003",
+    "seconds": 0.0,
+    "status": "ok"
+   },
+   {
+    "ts_utc": "2026-11-01T14:04:47.727164+00:00",
+    "arm": "R0",
+    "page_id": "r1_ksy_fy2025_income_p012",
+    "seconds": 0.0,
+    "status": "ok"
+   },
+   {
+    "ts_utc": "2026-11-01T14:05:02.656298+00:00",
+    "arm": "R0",
+    "page_id": "r1_biren_ar2025_p030",
+    "seconds": 0.0,
+    "status": "ok"
+   },
+   {
+    "ts_utc": "2026-11-01T14:05:29.110995+00:00",
+    "arm": "R0",
+    "page_id": "r1_brk2007_p001",
+    "seconds": 0.0,
+    "status": "ok"
+   },
+   {
+    "ts_utc": "2026-11-01T14:05:53.425101+00:00",
+    "arm": "R0",
+    "page_id": "r1_brk2007_p005",
+    "seconds": 0.0,
+    "status": "ok"
+   },
+   {
+    "ts_utc": "2026-11-01T14:06:47.477413+00:00",
+    "arm": "R0",
+    "page_id": "r1_amec_ar2025_p029",
+    "seconds": 18.136346,
+    "status": "ok"
+   },
+   {
+    "ts_utc": "2026-11-01T14:07:11.685342+00:00",
+    "arm": "R0",
+    "page_id": "r1_wuxi_ar2022_p010",
+    "seconds": 24.197386,
+    "status": "ok"
+   },
+   {
+    "ts_utc": "2026-11-01T14:07:27.923337+00:00",
+    "arm": "R0",
+    "page_id": "r1_ksy_fy2025_results_p003",
+    "seconds": 16.231225,
+    "status": "ok"
+   },
+   {
+    "ts_utc": "2026-11-01T14:07:47.636435+00:00",
+    "arm": "R0",
+    "page_id": "r1_ksy_fy2025_income_p012",
+    "seconds": 19.702865,
+    "status": "ok"
+   },
+   {
+    "ts_utc": "2026-11-01T14:08:00.450969+00:00",
+    "arm": "R0",
+    "page_id": "r1_biren_ar2025_p030",
+    "seconds": 12.803244,
+    "status": "ok"
+   },
+   {
+    "ts_utc": "2026-11-01T14:08:28.599232+00:00",
+    "arm": "R0",
+    "page_id": "r1_brk2007_p001",
+    "seconds": 28.139031,
+    "status": "ok"
+   },
+   {
+    "ts_utc": "2026-11-01T14:08:53.553402+00:00",
+    "arm": "R0",
+    "page_id": "r1_brk2007_p005",
+    "seconds": 24.944128,
+    "status": "ok"
+   },
+   {
+    "ts_utc": "2026-11-01T14:10:43.891458+00:00",
+    "arm": "X1F",
+    "page_id": "r1_amec_ar2025_p029",
+    "seconds": 57.082928,
+    "status": "error"
+   },
+   {
+    "ts_utc": "2026-11-01T14:10:43.895316+00:00",
+    "arm": "X1F",
+    "page_id": "r1_wuxi_ar2022_p010",
+    "seconds": 0.0,
+    "status": "error"
+   },
+   {
+    "ts_utc": "2026-11-01T14:10:43.899352+00:00",
+    "arm": "X1F",
+    "page_id": "r1_ksy_fy2025_results_p003",
+    "seconds": 0.0,
+    "status": "error"
+   },
+   {
+    "ts_utc": "2026-11-01T14:10:43.902658+00:00",
+    "arm": "X1F",
+    "page_id": "r1_ksy_fy2025_income_p012",
+    "seconds": 0.0,
+    "status": "error"
+   },
+   {
+    "ts_utc": "2026-11-01T14:10:43.905421+00:00",
+    "arm": "X1F",
+    "page_id": "r1_biren_ar2025_p030",
+    "seconds": 0.0,
+    "status": "error"
+   },
+   {
+    "ts_utc": "2026-11-01T14:10:43.907835+00:00",
+    "arm": "X1F",
+    "page_id": "r1_brk2007_p001",
+    "seconds": 0.0,
+    "status": "error"
+   },
+   {
+    "ts_utc": "2026-11-01T14:10:43.910314+00:00",
+    "arm": "X1F",
+    "page_id": "r1_brk2007_p005",
+    "seconds": 0.0,
+    "status": "error"
+   },
+   {
+    "ts_utc": "2026-11-01T14:15:25.881375+00:00",
+    "arm": "R0",
+    "page_id": "r1_formula_control",
+    "seconds": 5.421448,
+    "status": "ok"
+   },
+   {
+    "ts_utc": "2026-11-01T14:21:38.977559+00:00",
+    "arm": "R0",
+    "page_id": "byd_ar_2024_p021",
+    "seconds": 19.43546,
+    "status": "ok"
+   },
+   {
+    "ts_utc": "2026-11-01T15:23:42.392912+00:00",
+    "arm": "R0",
+    "page_id": "r1_blank_control",
+    "seconds": 6.649746,
+    "status": "ok"
+   },
+   {
+    "ts_utc": "2026-11-01T15:25:45.862207+00:00",
+    "arm": "X1F",
+    "page_id": "r1_amec_ar2025_p029",
+    "seconds": 93.76435,
+    "status": "error"
+   },
+   {
+    "ts_utc": "2026-11-01T15:25:45.868909+00:00",
+    "arm": "X1F",
+    "page_id": "r1_wuxi_ar2022_p010",
+    "seconds": 180.0,
+    "status": "no_record"
+   },
+   {
+    "ts_utc": "2026-11-01T15:25:45.875226+00:00",
+    "arm": "X1F",
+    "page_id": "r1_ksy_fy2025_results_p003",
+    "seconds": 180.0,
+    "status": "no_record"
+   },
+   {
+    "ts_utc": "2026-11-01T15:25:45.881396+00:00",
+    "arm": "X1F",
+    "page_id": "r1_ksy_fy2025_income_p012",
+    "seconds": 180.0,
+    "status": "no_record"
+   },
+   {
+    "ts_utc": "2026-11-01T15:25:45.887686+00:00",
+    "arm": "X1F",
+    "page_id": "r1_biren_ar2025_p030",
+    "seconds": 180.0,
+    "status": "no_record"
+   },
+   {
+    "ts_utc": "2026-11-01T15:25:45.894363+00:00",
+    "arm": "X1F",
+    "page_id": "r1_brk2007_p001",
+    "seconds": 180.0,
+    "status": "no_record"
+   },
+   {
+    "ts_utc": "2026-11-01T15:25:45.900626+00:00",
+    "arm": "X1F",
+    "page_id": "r1_brk2007_p005",
+    "seconds": 180.0,
+    "status": "no_record"
+   },
+   {
+    "ts_utc": "2026-11-01T17:23:48.205663+00:00",
+    "arm": "R0",
+    "page_id": "r1_wanhua_qa2021_p003",
+    "seconds": 24.897313,
+    "status": "ok"
+   },
+   {
+    "ts_utc": "2026-11-01T17:23:49.800032+00:00",
+    "arm": "N0",
+    "page_id": "r1_wanhua_qa2021_p003",
+    "seconds": 0.0,
+    "status": "ok"
+   }
+  ],
+  "per_request_cap_seconds": 180,
+  "notes": [
+   "first R0 invocation recorded seven 0.0 s rows (backend returned no timing); the same pages were re-measured at 144.15 s and both sets are kept — the defect under-counts the first pass, it is not an over-count",
+   "X1F attempt 2 crashed after 106.5 s wall; the pre-fix batch logic charged the 180 s request deadline to the six pages the dead child never started (1080 s). The ledger is append-only, so the charge stands: it is an over-count, disclosed here; the logic now charges 0 for never-started pages",
+   "attempt 1 was launched before the required platform fix 20dd0143 was merged; attempt 2 ran under the fixed toolchain and is the record"
+  ]
+ },
+ "run_manifest": {
+  "code_files": {
+   "tools/ocr_comparison/campaign.py": {
+    "raw_sha256": "d974cbaefe09cf2dca6060250095477db5b6fa933ae82b6f07b3ef5fc44e38e1",
+    "lf_sha256": "cdd51d1445d6ffe86fae22c264dd4c95e4c26a33248af7a419eaec9764090ced"
+   },
+   "tools/ocr_comparison/render_pages.py": {
+    "raw_sha256": "b20c9e58a1c228823008c9b0631995489d819fd1428e6601661b1dcb73bb3b53",
+    "lf_sha256": "44ffacaedd984baebd036df81d5687eda2388772ac85e73d43d1e7de01a94228"
+   },
+   "tools/ocr_comparison/backends/native_n0.py": {
+    "raw_sha256": "dcb6ab0372341c169d49dd136e3aec304770984483cfc1bcec1999e20997f5c0",
+    "lf_sha256": "bb0269fa909413261320cce953b0da50d6197fb99e7cf58cd4fe7469213a747e"
+   },
+   "tools/ocr_comparison/backends/xiaomi_x1.py": {
+    "raw_sha256": "850b8fe21415a36b0d40837a581dcd11aff4003af379d66330cfb3dc82d81ac2",
+    "lf_sha256": "2b5a19b308c3667eea5bb76c27344a7b93e2d3dbf55a6ce846f91fab97dec927"
+   },
+   "tools/ocr_comparison/backends/rapidocr_r0.py": {
+    "raw_sha256": "43c2e72b15dc51bb404aded2c0a941b26f8f0ab0b87784b4a6cb7575c4b1f09a",
+    "lf_sha256": "83a76fdce7dcb1247546b6b5be948e8cf0a40f9e281e7040f0d0f93e2ccf7607"
+   },
+   "tools/ocr_comparison/compare.py": {
+    "raw_sha256": "6079f00e22370ea63a38d03e83d25e83a4ac04237dbf759a9d0f73beb62f7966",
+    "lf_sha256": "005ac9ba59233367fb6f70b864c63e1a9e0670b42abd2393ca01f8f45b9ffc15"
+   },
+   "tools/ocr_comparison/metrics.py": {
+    "raw_sha256": "3059dfadeaa33e282f1e591b7fe9b3995d5523e5122e2adb3dbb5b38e7918f20",
+    "lf_sha256": "b37300dc9ba31800a3bd98eb362ae2f23ad3fe188e0036e950adefaadbc62315"
+   },
+   "tools/ocr_comparison/job_limit.py": {
+    "raw_sha256": "7dd9ef3d98bfea4cb1a1a81232a79fa66e1a2170f4db590b9274534a3cb3e1bd",
+    "lf_sha256": "ac8ae6bf24130c85110eeb4e7e48cb1ed8dfb61fc48953f069b2de7ab86b2515"
+   },
+   "tools/ocr_comparison/run_x1.py": {
+    "raw_sha256": "b21cf4dc76b1305bc2b40236e0f65c53a1ee1901966c721e9c59b5e8bba52ac7",
+    "lf_sha256": "70e61afe542e8b4849777eeafd066fb88c19be79f4acba6f03a360a1cb87fadb"
+   },
+   "tools/ocr_comparison/x1_child.py": {
+    "raw_sha256": "f8a8e5131c7e28c74da2ea6771ef40b69233956b551f6b6d6da846ac93b0051b",
+    "lf_sha256": "4915177ee86f23ae3c3fbb37cbb8a28ab1943bb3c682bc18631142a5d7998182"
+   },
+   "tools/ocr_comparison/cache.py": {
+    "raw_sha256": "3a0645d483a2dbcdf25625462f9556f23b31834b8863d6eff8a4551cfae61815",
+    "lf_sha256": "8933dc779a4207fb3d855cda19c75f057c0c4130c8d858e791dc9f618809b669"
+   },
+   "tools/ocr_comparison/manifest.py": {
+    "raw_sha256": "8d1d24050fab37c82b8e95d055d045f6b89171ba62343430004521c0b4512e8e",
+    "lf_sha256": "74d4397aa98bf32476529bf640123c5cee4fb2ac18e51b273a5b2bbc7ed889f4"
+   },
+   "tools/ocr_comparison/run_comparison.py": {
+    "raw_sha256": "e62ffa3b93e1e54991e3b9a66a42af74455d2efb06538ac3e07ae7a02a77d7d4",
+    "lf_sha256": "c86556b43f84d886440b74be379b2ecbfe519e25f4dd07a14ec44e13ea7ea290"
+   }
+  },
+  "python": "3.13.9",
+  "base_commit": "946537d0d75ac36b22ac0bb24e0f484a896b4c95",
+  "required_platform_fix": "20dd0143197462be31a467cdd53bcff1a31b4d94 (cherry-picked)"
+ },
+ "inputs": {
+  "sample_manifest_sha256": "da1d938d3820778437de0e27b222395a7d0ff3dc07df8ff87c4b51393ade1fc5",
+  "gold_sha256": "cedcf16cc31b76ce458e0ffda83438e081e935086a2a61392637338863846d88",
+  "control_manifest_sha256": "027662e6c91a04ebe3424297fa60f4fd284707f0df707937bd3db2f28a4eeee3",
+  "page_count": 8,
+  "holdout_pages": [
+   "r1_ksy_fy2025_results_p003",
+   "r1_brk2007_p001"
+  ],
+  "gold_revision": 4
+ },
+ "pages": [
+  {
+   "page_id": "r1_amec_ar2025_p029",
+   "role": "eval",
+   "stratum": "CN/zh-CN/annual_report",
+   "source_pdf": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\中微公司\\raw\\financial_reports\\中微公司：2025年年度报告.pdf",
+   "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+   "document_id": "urn:company-wiki:document:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+   "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+   "pdf_page_index": 29,
+   "page_image_sha256": "13a01630a162d0c147d26349f0c76cfda6caa61b9ae16894fbe45f6b68ab445c",
+   "gold_chars": 1117,
+   "gold_facts": 20,
+   "gold_conditions": 12,
+   "gold_numbers_raw": 4
+  },
+  {
+   "page_id": "r1_wuxi_ar2022_p010",
+   "role": "eval",
+   "stratum": "CN/zh-CN/annual_report",
+   "source_pdf": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\药明康德\\raw\\financial_reports\\药明康德：2022年年度报告.pdf",
+   "source_id": "urn:company-wiki:source:sha256:f7d5c0e585cf913086cfba5cfa74ae1d46a3ef3c4170ea7a08a862e804933904",
+   "document_id": "urn:company-wiki:document:sha256:f7d5c0e585cf913086cfba5cfa74ae1d46a3ef3c4170ea7a08a862e804933904",
+   "content_sha256": "f7d5c0e585cf913086cfba5cfa74ae1d46a3ef3c4170ea7a08a862e804933904",
+   "pdf_page_index": 10,
+   "page_image_sha256": "647c5e1783d03fab7f2a9bd9f9620406e338eeeb5c196279f45ff0a6113b5f09",
+   "gold_chars": 1822,
+   "gold_facts": 25,
+   "gold_conditions": 23,
+   "gold_numbers_raw": 29
+  },
+  {
+   "page_id": "r1_ksy_fy2025_results_p003",
+   "role": "holdout",
+   "stratum": "HK/zh/annual_results_announcement",
+   "source_pdf": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\金山雲\\raw\\financial_reports\\quarterly\\2026-03-25_hkexnews_12067362_內幕消息 截至二零二五年十二月三十一日止三個月及財年的未經審計財務業績.pdf",
+   "source_id": "urn:company-wiki:source:sha256:9f35944bcca595e7286c00a69b8a7bbb907e3bca890e5bc897b9e1c97cde3470",
+   "document_id": "urn:company-wiki:document:sha256:9f35944bcca595e7286c00a69b8a7bbb907e3bca890e5bc897b9e1c97cde3470",
+   "content_sha256": "9f35944bcca595e7286c00a69b8a7bbb907e3bca890e5bc897b9e1c97cde3470",
+   "pdf_page_index": 3,
+   "page_image_sha256": "6df6711d8390069bb82d8565674667cd75b140a61c4f5448cae31d22b9281fe2",
+   "gold_chars": 947,
+   "gold_facts": 24,
+   "gold_conditions": 11,
+   "gold_numbers_raw": 40
+  },
+  {
+   "page_id": "r1_ksy_fy2025_income_p012",
+   "role": "eval",
+   "stratum": "HK/zh/annual_results_announcement",
+   "source_pdf": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\金山雲\\raw\\financial_reports\\quarterly\\2026-03-25_hkexnews_12067362_內幕消息 截至二零二五年十二月三十一日止三個月及財年的未經審計財務業績.pdf",
+   "source_id": "urn:company-wiki:source:sha256:9f35944bcca595e7286c00a69b8a7bbb907e3bca890e5bc897b9e1c97cde3470",
+   "document_id": "urn:company-wiki:document:sha256:9f35944bcca595e7286c00a69b8a7bbb907e3bca890e5bc897b9e1c97cde3470",
+   "content_sha256": "9f35944bcca595e7286c00a69b8a7bbb907e3bca890e5bc897b9e1c97cde3470",
+   "pdf_page_index": 12,
+   "page_image_sha256": "b334a93fa7b417760518146efa1fe8361e8ef409d56f3765c152ab3373b2f630",
+   "gold_chars": 2063,
+   "gold_facts": 19,
+   "gold_conditions": 8,
+   "gold_numbers_raw": 199
+  },
+  {
+   "page_id": "r1_biren_ar2025_p030",
+   "role": "eval",
+   "stratum": "HK/zh/annual_report",
+   "source_pdf": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\壁仞科技\\raw\\financial_reports\\annual\\2026-04-22_hkexnews_12114765_2025年度報告.pdf",
+   "source_id": "urn:company-wiki:source:sha256:7de30b0fb2958e51799d8cc860a05231361690de3ba15990b9e1ac76954745b0",
+   "document_id": "urn:company-wiki:document:sha256:7de30b0fb2958e51799d8cc860a05231361690de3ba15990b9e1ac76954745b0",
+   "content_sha256": "7de30b0fb2958e51799d8cc860a05231361690de3ba15990b9e1ac76954745b0",
+   "pdf_page_index": 30,
+   "page_image_sha256": "2f179f02f83414b7025f8a48a359a06ccc9ff6040da034785aeb39b5fbed96a7",
+   "gold_chars": 583,
+   "gold_facts": 15,
+   "gold_conditions": 13,
+   "gold_numbers_raw": 4
+  },
+  {
+   "page_id": "r1_brk2007_p001",
+   "role": "holdout",
+   "stratum": "US/en/annual_report",
+   "source_pdf": "C:\\Users\\郑曾波\\Dropbox\\Stock\\berkshire2007.pdf",
+   "source_id": "urn:company-wiki:source:sha256:a914b0ad67df2d75da0ae2b246dba5500bb84e19391a62a930ff441213d3ca53",
+   "document_id": "urn:company-wiki:document:sha256:a914b0ad67df2d75da0ae2b246dba5500bb84e19391a62a930ff441213d3ca53",
+   "content_sha256": "a914b0ad67df2d75da0ae2b246dba5500bb84e19391a62a930ff441213d3ca53",
+   "pdf_page_index": 1,
+   "page_image_sha256": "023b730c57d317801ebaa8384bbeab8cfc8ac3d9ade17ff7f1d2f411224c20d2",
+   "gold_chars": 4533,
+   "gold_facts": 36,
+   "gold_conditions": 14,
+   "gold_numbers_raw": 6
+  },
+  {
+   "page_id": "r1_brk2007_p005",
+   "role": "eval",
+   "stratum": "US/en/annual_report",
+   "source_pdf": "C:\\Users\\郑曾波\\Dropbox\\Stock\\berkshire2007.pdf",
+   "source_id": "urn:company-wiki:source:sha256:a914b0ad67df2d75da0ae2b246dba5500bb84e19391a62a930ff441213d3ca53",
+   "document_id": "urn:company-wiki:document:sha256:a914b0ad67df2d75da0ae2b246dba5500bb84e19391a62a930ff441213d3ca53",
+   "content_sha256": "a914b0ad67df2d75da0ae2b246dba5500bb84e19391a62a930ff441213d3ca53",
+   "pdf_page_index": 5,
+   "page_image_sha256": "5335c3457d3b3c1481386c05aa968004264817a09c73b5b9294dc04a296f3d3e",
+   "gold_chars": 3817,
+   "gold_facts": 32,
+   "gold_conditions": 17,
+   "gold_numbers_raw": 19
+  },
+  {
+   "page_id": "r1_wanhua_qa2021_p003",
+   "role": "eval",
+   "stratum": "CN/zh-CN/investor_relations_qa",
+   "source_pdf": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\万华化学\\raw\\research\\万华化学：2021年度业绩说明会会议纪要.pdf",
+   "source_id": "urn:company-wiki:source:sha256:f8f18fd12ef060fa0183be1a641232a857daa438518d19c911cdf602ac2fb07d",
+   "document_id": "urn:company-wiki:document:sha256:f8f18fd12ef060fa0183be1a641232a857daa438518d19c911cdf602ac2fb07d",
+   "content_sha256": "f8f18fd12ef060fa0183be1a641232a857daa438518d19c911cdf602ac2fb07d",
+   "pdf_page_index": 3,
+   "page_image_sha256": "097eaf47d1da132c80a64dfdd42ca81c72d3b559969ca552b6bc7fb1d00478fc",
+   "gold_chars": 718,
+   "gold_facts": 18,
+   "gold_conditions": 19,
+   "gold_numbers_raw": 15
+  }
+ ],
+ "page_identity_provenance": "source_id/document_id/content_sha256 come from the catalog location rows of each PDF (r1_sample_manifest.json); page images are the frozen 200-DPI renders with recorded SHA-256",
+ "arms": {
+  "R0": {
+   "run_files": [
+    "run_r0.json",
+    "run_r0_qa_extension.json"
+   ],
+   "per_page": [
+    {
+     "page_status": "ok",
+     "hyp_sha256": "409b2829638f366eaba01c997ef08752be04948acd6d6dcfd4401842b4eca07f",
+     "cer_strict": 0.012533572068039392,
+     "cer_strict_ops": {
+      "insertions": 0,
+      "deletions": 13,
+      "substitutions": 1
+     },
+     "cer_narrow": 0.0009337068160597573,
+     "cer_narrow_ops": {
+      "insertions": 0,
+      "deletions": 0,
+      "substitutions": 1
+     },
+     "numbers": {
+      "gold_total": 9,
+      "hyp_total": 9,
+      "recall_hits": 9,
+      "precision_hits": 9,
+      "recall": 1.0,
+      "precision": 1.0
+     },
+     "numbers_digit_present": {
+      "gold_total": 9,
+      "hits": 9,
+      "recall": 1.0
+     },
+     "hyp_chars": 1104,
+     "gold_chars": 1117,
+     "gold_chars_narrow": 1071,
+     "repetition_flagged": false,
+     "page_id": "r1_amec_ar2025_p029",
+     "role": "eval",
+     "stratum": "CN/zh-CN/annual_report",
+     "unsourced_text": {
+      "lines_total": 34,
+      "unsourced_lines": 0,
+      "unsourced_rate": 0.0,
+      "sample": []
+     },
+     "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+     "document_id": "urn:company-wiki:document:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+     "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+     "pdf_page_index": 29,
+     "page_image_sha256": "13a01630a162d0c147d26349f0c76cfda6caa61b9ae16894fbe45f6b68ab445c",
+     "engine_seconds": 18.136345799997798,
+     "excluded_reason": null,
+     "finish_reason": null,
+     "cache_hit": null
+    },
+    {
+     "page_status": "ok",
+     "hyp_sha256": "f73d1ef0afe567784d04eb2781da1466ab13a0475a1cc0a5cac71bb5e75250c1",
+     "cer_strict": 0.04720087815587267,
+     "cer_strict_ops": {
+      "insertions": 1,
+      "deletions": 80,
+      "substitutions": 5
+     },
+     "cer_narrow": 0.002942907592701589,
+     "cer_narrow_ops": {
+      "insertions": 0,
+      "deletions": 0,
+      "substitutions": 5
+     },
+     "numbers": {
+      "gold_total": 30,
+      "hyp_total": 30,
+      "recall_hits": 29,
+      "precision_hits": 29,
+      "recall": 0.9666666666666667,
+      "precision": 0.9666666666666667
+     },
+     "numbers_digit_present": {
+      "gold_total": 30,
+      "hits": 30,
+      "recall": 1.0
+     },
+     "hyp_chars": 1743,
+     "gold_chars": 1822,
+     "gold_chars_narrow": 1699,
+     "repetition_flagged": false,
+     "page_id": "r1_wuxi_ar2022_p010",
+     "role": "eval",
+     "stratum": "CN/zh-CN/annual_report",
+     "unsourced_text": {
+      "lines_total": 45,
+      "unsourced_lines": 0,
+      "unsourced_rate": 0.0,
+      "sample": []
+     },
+     "source_id": "urn:company-wiki:source:sha256:f7d5c0e585cf913086cfba5cfa74ae1d46a3ef3c4170ea7a08a862e804933904",
+     "document_id": "urn:company-wiki:document:sha256:f7d5c0e585cf913086cfba5cfa74ae1d46a3ef3c4170ea7a08a862e804933904",
+     "content_sha256": "f7d5c0e585cf913086cfba5cfa74ae1d46a3ef3c4170ea7a08a862e804933904",
+     "pdf_page_index": 10,
+     "page_image_sha256": "647c5e1783d03fab7f2a9bd9f9620406e338eeeb5c196279f45ff0a6113b5f09",
+     "engine_seconds": 24.19738550001057,
+     "excluded_reason": null,
+     "finish_reason": null,
+     "cache_hit": null
+    },
+    {
+     "page_status": "ok",
+     "hyp_sha256": "cc7157fe0c5b7c8945481abe41a54490cd8e867c8a05b512e46436e64dfc170b",
+     "cer_strict": 0.0781414994720169,
+     "cer_strict_ops": {
+      "insertions": 0,
+      "deletions": 45,
+      "substitutions": 29
+     },
+     "cer_narrow": 0.07338444687842278,
+     "cer_narrow_ops": {
+      "insertions": 0,
+      "deletions": 38,
+      "substitutions": 29
+     },
+     "numbers": {
+      "gold_total": 42,
+      "hyp_total": 41,
+      "recall_hits": 20,
+      "precision_hits": 20,
+      "recall": 0.47619047619047616,
+      "precision": 0.4878048780487805
+     },
+     "numbers_digit_present": {
+      "gold_total": 42,
+      "hits": 42,
+      "recall": 1.0
+     },
+     "hyp_chars": 902,
+     "gold_chars": 947,
+     "gold_chars_narrow": 913,
+     "repetition_flagged": false,
+     "page_id": "r1_ksy_fy2025_results_p003",
+     "role": "holdout",
+     "stratum": "HK/zh/annual_results_announcement",
+     "unsourced_text": {
+      "lines_total": 28,
+      "unsourced_lines": 9,
+      "unsourced_rate": 0.32142857142857145,
+      "sample": [
+       "總收入逹人民2,761.4百萬元（394.91百萬美元），较二零二四年同季的人民",
+       "公有雲服務收入為人民1,902.4百萬元（272.0百萬美元），较二零",
+       "二四年同季的人民1,409.8百萬元大幅增加34.9%，亚较上一季度",
+       "雲業務單收入逹至人民926百萬元，人工智能需求得以增長。",
+       "行業雲服務收入為人民859.0百萬元（122.8百萬美元），较二零二"
+      ]
+     },
+     "source_id": "urn:company-wiki:source:sha256:9f35944bcca595e7286c00a69b8a7bbb907e3bca890e5bc897b9e1c97cde3470",
+     "document_id": "urn:company-wiki:document:sha256:9f35944bcca595e7286c00a69b8a7bbb907e3bca890e5bc897b9e1c97cde3470",
+     "content_sha256": "9f35944bcca595e7286c00a69b8a7bbb907e3bca890e5bc897b9e1c97cde3470",
+     "pdf_page_index": 3,
+     "page_image_sha256": "6df6711d8390069bb82d8565674667cd75b140a61c4f5448cae31d22b9281fe2",
+     "engine_seconds": 16.231224500006647,
+     "excluded_reason": null,
+     "finish_reason": null,
+     "cache_hit": null
+    },
+    {
+     "page_status": "ok",
+     "hyp_sha256": "29d9a1b7760d486c3fe16cc918c2028189b40cc3291c9b2c90072b912d0440b1",
+     "cer_strict": 0.40523509452254,
+     "cer_strict_ops": {
+      "insertions": 179,
+      "deletions": 229,
+      "substitutions": 428
+     },
+     "cer_narrow": 0.32701949860724233,
+     "cer_narrow_ops": {
+      "insertions": 175,
+      "deletions": 209,
+      "substitutions": 203
+     },
+     "numbers": {
+      "gold_total": 183,
+      "hyp_total": 183,
+      "recall_hits": 182,
+      "precision_hits": 182,
+      "recall": 0.994535519125683,
+      "precision": 0.994535519125683
+     },
+     "numbers_digit_present": {
+      "gold_total": 183,
+      "hits": 183,
+      "recall": 1.0
+     },
+     "hyp_chars": 2013,
+     "gold_chars": 2063,
+     "gold_chars_narrow": 1795,
+     "repetition_flagged": false,
+     "page_id": "r1_ksy_fy2025_income_p012",
+     "role": "eval",
+     "stratum": "HK/zh/annual_results_announcement",
+     "unsourced_text": {
+      "lines_total": 253,
+      "unsourced_lines": 20,
+      "unsourced_rate": 0.07905138339920949,
+      "sample": [
+       "未經計簡明合供综合損表",
+       "三月",
+       "六月",
+       "九月",
+       "人民币"
+      ]
+     },
+     "source_id": "urn:company-wiki:source:sha256:9f35944bcca595e7286c00a69b8a7bbb907e3bca890e5bc897b9e1c97cde3470",
+     "document_id": "urn:company-wiki:document:sha256:9f35944bcca595e7286c00a69b8a7bbb907e3bca890e5bc897b9e1c97cde3470",
+     "content_sha256": "9f35944bcca595e7286c00a69b8a7bbb907e3bca890e5bc897b9e1c97cde3470",
+     "pdf_page_index": 12,
+     "page_image_sha256": "b334a93fa7b417760518146efa1fe8361e8ef409d56f3765c152ab3373b2f630",
+     "engine_seconds": 19.702864699997008,
+     "excluded_reason": null,
+     "finish_reason": null,
+     "cache_hit": null
+    },
+    {
+     "page_status": "ok",
+     "hyp_sha256": "842ce813ffb69527637819325d3429e0e9a47270f3e307f6ea0ba4b00272a370",
+     "cer_strict": 0.13550600343053174,
+     "cer_strict_ops": {
+      "insertions": 11,
+      "deletions": 37,
+      "substitutions": 31
+     },
+     "cer_narrow": 0.11891891891891893,
+     "cer_narrow_ops": {
+      "insertions": 8,
+      "deletions": 28,
+      "substitutions": 30
+     },
+     "numbers": {
+      "gold_total": 3,
+      "hyp_total": 3,
+      "recall_hits": 3,
+      "precision_hits": 3,
+      "recall": 1.0,
+      "precision": 1.0
+     },
+     "numbers_digit_present": {
+      "gold_total": 3,
+      "hits": 3,
+      "recall": 1.0
+     },
+     "hyp_chars": 557,
+     "gold_chars": 583,
+     "gold_chars_narrow": 555,
+     "repetition_flagged": false,
+     "page_id": "r1_biren_ar2025_p030",
+     "role": "eval",
+     "stratum": "HK/zh/annual_report",
+     "unsourced_text": {
+      "lines_total": 23,
+      "unsourced_lines": 7,
+      "unsourced_rate": 0.30434782608695654,
+      "sample": [
+       "本公司已制定了《董事提名政策》，载列本公司有關提名及委任董事的则及程序以及董事任計劃的考虑因素，確保董事",
+       "在估及挑選候選人任董事時，應考虑下列则：",
+       "誠信及聲響；",
+       "教育背景丶專業資格及工作經（包括兼職工作）；",
+       "彼等會否在所有方面促進董事會多元化，包括但不限於性别丶年懿丶文化及教育背景丶種族丶專業經丶技能丶知"
+      ]
+     },
+     "source_id": "urn:company-wiki:source:sha256:7de30b0fb2958e51799d8cc860a05231361690de3ba15990b9e1ac76954745b0",
+     "document_id": "urn:company-wiki:document:sha256:7de30b0fb2958e51799d8cc860a05231361690de3ba15990b9e1ac76954745b0",
+     "content_sha256": "7de30b0fb2958e51799d8cc860a05231361690de3ba15990b9e1ac76954745b0",
+     "pdf_page_index": 30,
+     "page_image_sha256": "2f179f02f83414b7025f8a48a359a06ccc9ff6040da034785aeb39b5fbed96a7",
+     "engine_seconds": 12.803244100010488,
+     "excluded_reason": null,
+     "finish_reason": null,
+     "cache_hit": null
+    },
+    {
+     "page_status": "ok",
+     "hyp_sha256": "a6444c5f1348e2691c5a03977db798d32a3162d86560ee7e50db5f24b7b0747d",
+     "cer_strict": 0.005735715861460402,
+     "cer_strict_ops": {
+      "insertions": 2,
+      "deletions": 13,
+      "substitutions": 11
+     },
+     "cer_narrow": 0.006130268199233717,
+     "cer_narrow_ops": {
+      "insertions": 1,
+      "deletions": 12,
+      "substitutions": 11
+     },
+     "wer": 0.017770597738287562,
+     "wer_ops": {
+      "insertions": 0,
+      "deletions": 2,
+      "substitutions": 9
+     },
+     "numbers": {
+      "gold_total": 1,
+      "hyp_total": 1,
+      "recall_hits": 1,
+      "precision_hits": 1,
+      "recall": 1.0,
+      "precision": 1.0
+     },
+     "numbers_digit_present": {
+      "gold_total": 1,
+      "hits": 1,
+      "recall": 1.0
+     },
+     "hyp_chars": 4522,
+     "gold_chars": 4533,
+     "gold_chars_narrow": 3915,
+     "repetition_flagged": false,
+     "page_id": "r1_brk2007_p001",
+     "role": "holdout",
+     "stratum": "US/en/annual_report",
+     "unsourced_text": {
+      "lines_total": 52,
+      "unsourced_lines": 1,
+      "unsourced_rate": 0.019230769230769232,
+      "sample": [
+       "BusinessActivities"
+      ]
+     },
+     "source_id": "urn:company-wiki:source:sha256:a914b0ad67df2d75da0ae2b246dba5500bb84e19391a62a930ff441213d3ca53",
+     "document_id": "urn:company-wiki:document:sha256:a914b0ad67df2d75da0ae2b246dba5500bb84e19391a62a930ff441213d3ca53",
+     "content_sha256": "a914b0ad67df2d75da0ae2b246dba5500bb84e19391a62a930ff441213d3ca53",
+     "pdf_page_index": 1,
+     "page_image_sha256": "023b730c57d317801ebaa8384bbeab8cfc8ac3d9ade17ff7f1d2f411224c20d2",
+     "engine_seconds": 28.13903059999575,
+     "excluded_reason": null,
+     "finish_reason": null,
+     "cache_hit": null
+    },
+    {
+     "page_status": "ok",
+     "hyp_sha256": "5d535fc325fc5e865f4a771b462af7a068d9d76bdaaf0f36f451a90f92b32eb7",
+     "cer_strict": 0.030914330626146187,
+     "cer_strict_ops": {
+      "insertions": 0,
+      "deletions": 107,
+      "substitutions": 11
+     },
+     "cer_narrow": 0.031112507856693904,
+     "cer_narrow_ops": {
+      "insertions": 0,
+      "deletions": 88,
+      "substitutions": 11
+     },
+     "wer": 0.055031446540880505,
+     "wer_ops": {
+      "insertions": 0,
+      "deletions": 19,
+      "substitutions": 16
+     },
+     "numbers": {
+      "gold_total": 15,
+      "hyp_total": 16,
+      "recall_hits": 14,
+      "precision_hits": 14,
+      "recall": 0.9333333333333333,
+      "precision": 0.875
+     },
+     "numbers_digit_present": {
+      "gold_total": 15,
+      "hits": 14,
+      "recall": 0.9333333333333333
+     },
+     "hyp_chars": 3710,
+     "gold_chars": 3817,
+     "gold_chars_narrow": 3182,
+     "repetition_flagged": false,
+     "page_id": "r1_brk2007_p005",
+     "role": "eval",
+     "stratum": "US/en/annual_report",
+     "unsourced_text": {
+      "lines_total": 42,
+      "unsourced_lines": 1,
+      "unsourced_rate": 0.023809523809523808,
+      "sample": [
+       "Pritzkerbusinesses."
+      ]
+     },
+     "source_id": "urn:company-wiki:source:sha256:a914b0ad67df2d75da0ae2b246dba5500bb84e19391a62a930ff441213d3ca53",
+     "document_id": "urn:company-wiki:document:sha256:a914b0ad67df2d75da0ae2b246dba5500bb84e19391a62a930ff441213d3ca53",
+     "content_sha256": "a914b0ad67df2d75da0ae2b246dba5500bb84e19391a62a930ff441213d3ca53",
+     "pdf_page_index": 5,
+     "page_image_sha256": "5335c3457d3b3c1481386c05aa968004264817a09c73b5b9294dc04a296f3d3e",
+     "engine_seconds": 24.944128299990552,
+     "excluded_reason": null,
+     "finish_reason": null,
+     "cache_hit": null
+    },
+    {
+     "page_status": "ok",
+     "hyp_sha256": "604aaf5901032d5b8e90cf5d728f94007673f87bf2123194eaa39532b198ba2d",
+     "cer_strict": 0.08495821727019498,
+     "cer_strict_ops": {
+      "insertions": 0,
+      "deletions": 60,
+      "substitutions": 1
+     },
+     "cer_narrow": 0.053811659192825115,
+     "cer_narrow_ops": {
+      "insertions": 0,
+      "deletions": 35,
+      "substitutions": 1
+     },
+     "numbers": {
+      "gold_total": 14,
+      "hyp_total": 14,
+      "recall_hits": 14,
+      "precision_hits": 14,
+      "recall": 1.0,
+      "precision": 1.0
+     },
+     "numbers_digit_present": {
+      "gold_total": 14,
+      "hits": 14,
+      "recall": 1.0
+     },
+     "hyp_chars": 658,
+     "gold_chars": 718,
+     "gold_chars_narrow": 669,
+     "repetition_flagged": false,
+     "page_id": "r1_wanhua_qa2021_p003",
+     "role": "eval",
+     "stratum": "CN/zh-CN/investor_relations_qa",
+     "unsourced_text": {
+      "lines_total": 24,
+      "unsourced_lines": 0,
+      "unsourced_rate": 0.0,
+      "sample": []
+     },
+     "source_id": "urn:company-wiki:source:sha256:f8f18fd12ef060fa0183be1a641232a857daa438518d19c911cdf602ac2fb07d",
+     "document_id": "urn:company-wiki:document:sha256:f8f18fd12ef060fa0183be1a641232a857daa438518d19c911cdf602ac2fb07d",
+     "content_sha256": "f8f18fd12ef060fa0183be1a641232a857daa438518d19c911cdf602ac2fb07d",
+     "pdf_page_index": 3,
+     "page_image_sha256": "097eaf47d1da132c80a64dfdd42ca81c72d3b559969ca552b6bc7fb1d00478fc",
+     "engine_seconds": 24.89731319999555,
+     "excluded_reason": null,
+     "finish_reason": null,
+     "cache_hit": null
+    }
+   ],
+   "aggregate": {
+    "pages_total": 8,
+    "pages_scored": 8,
+    "pages_excluded": 0,
+    "status_counts": {
+     "ok": 8
+    },
+    "macro_cer_strict": 0.10002816392585027,
+    "macro_cer_narrow": 0.07678173925776227,
+    "macro_wer": 0.03640102213958403,
+    "micro_cer_strict": 0.08294871794871794,
+    "micro_cer_narrow": 0.06413508225233712,
+    "number_token_recall": 0.9158249158249159,
+    "number_token_precision": 0.9158249158249159,
+    "number_digit_present_recall": 0.9916666666666667,
+    "repetition_flagged_pages": 0,
+    "unsourced_lines": 38,
+    "output_lines": 501,
+    "unsourced_rate": 0.07584830339321358,
+    "per_stratum": {
+     "CN/zh-CN/annual_report": {
+      "pages": 2,
+      "scored": 2,
+      "coverage": 1.0,
+      "macro_cer_strict": 0.029867225111956032,
+      "macro_cer_narrow": 0.0019383072043806732,
+      "macro_wer": null
+     },
+     "HK/zh/annual_results_announcement": {
+      "pages": 2,
+      "scored": 2,
+      "coverage": 1.0,
+      "macro_cer_strict": 0.24168829699727845,
+      "macro_cer_narrow": 0.20020197274283255,
+      "macro_wer": null
+     },
+     "HK/zh/annual_report": {
+      "pages": 1,
+      "scored": 1,
+      "coverage": 1.0,
+      "macro_cer_strict": 0.13550600343053174,
+      "macro_cer_narrow": 0.11891891891891893,
+      "macro_wer": null
+     },
+     "US/en/annual_report": {
+      "pages": 2,
+      "scored": 2,
+      "coverage": 1.0,
+      "macro_cer_strict": 0.018325023243803293,
+      "macro_cer_narrow": 0.01862138802796381,
+      "macro_wer": 0.03640102213958403
+     },
+     "CN/zh-CN/investor_relations_qa": {
+      "pages": 1,
+      "scored": 1,
+      "coverage": 1.0,
+      "macro_cer_strict": 0.08495821727019498,
+      "macro_cer_narrow": 0.053811659192825115,
+      "macro_wer": null
+     }
+    },
+    "eval_split": {
+     "pages": 6,
+     "scored": 6,
+     "macro_cer_strict": 0.11939134934555416
+    },
+    "holdout_split": {
+     "pages": 2,
+     "scored": 2,
+     "macro_cer_strict": 0.04193860766673865
+    },
+    "fact_match": {
+     "facts_hit": 164,
+     "facts_total": 189,
+     "conditions_hit": 107,
+     "conditions_total": 117,
+     "numbers_hit": 288,
+     "numbers_total": 291,
+     "facts_raw_total": 189,
+     "conditions_raw_total": 117,
+     "numbers_raw_total": 316,
+     "facts_numeric_hit": 177,
+     "conditions_numeric_hit": 111,
+     "pages_produced": 8,
+     "pages_total": 8,
+     "unachievable_counts": {
+      "numbers": 25
+     }
+    }
+   }
+  },
+  "N0": {
+   "run_files": [
+    "run_n0.json",
+    "run_n0_qa_extension.json"
+   ],
+   "per_page": [
+    {
+     "page_status": "ok",
+     "hyp_sha256": "562b8f9a92cb1841062cc6332d80c929fbe53ab9b4d2ee1b4a5058e181046e44",
+     "cer_strict": 0.047448522829006266,
+     "cer_strict_ops": {
+      "insertions": 43,
+      "deletions": 9,
+      "substitutions": 1
+     },
+     "cer_narrow": 0.012138188608776844,
+     "cer_narrow_ops": {
+      "insertions": 6,
+      "deletions": 6,
+      "substitutions": 1
+     },
+     "numbers": {
+      "gold_total": 9,
+      "hyp_total": 9,
+      "recall_hits": 9,
+      "precision_hits": 9,
+      "recall": 1.0,
+      "precision": 1.0
+     },
+     "numbers_digit_present": {
+      "gold_total": 9,
+      "hits": 9,
+      "recall": 1.0
+     },
+     "hyp_chars": 1151,
+     "gold_chars": 1117,
+     "gold_chars_narrow": 1071,
+     "repetition_flagged": false,
+     "page_id": "r1_amec_ar2025_p029",
+     "role": "eval",
+     "stratum": "CN/zh-CN/annual_report",
+     "unsourced_text": {
+      "lines_total": 34,
+      "unsourced_lines": 0,
+      "unsourced_rate": 0.0,
+      "sample": []
+     },
+     "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+     "document_id": "urn:company-wiki:document:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+     "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+     "pdf_page_index": 29,
+     "page_image_sha256": "13a01630a162d0c147d26349f0c76cfda6caa61b9ae16894fbe45f6b68ab445c",
+     "engine_seconds": 0.0,
+     "excluded_reason": null,
+     "finish_reason": null,
+     "cache_hit": null
+    },
+    {
+     "page_status": "ok",
+     "hyp_sha256": "3086e6e93b1378a65861e8c083df74b0bbc75813ea6c1f682f6ffca9722a1da0",
+     "cer_strict": 0.03567508232711306,
+     "cer_strict_ops": {
+      "insertions": 55,
+      "deletions": 9,
+      "substitutions": 1
+     },
+     "cer_narrow": 0.007062978222483814,
+     "cer_narrow_ops": {
+      "insertions": 6,
+      "deletions": 6,
+      "substitutions": 0
+     },
+     "numbers": {
+      "gold_total": 30,
+      "hyp_total": 30,
+      "recall_hits": 30,
+      "precision_hits": 30,
+      "recall": 1.0,
+      "precision": 1.0
+     },
+     "numbers_digit_present": {
+      "gold_total": 30,
+      "hits": 30,
+      "recall": 1.0
+     },
+     "hyp_chars": 1868,
+     "gold_chars": 1822,
+     "gold_chars_narrow": 1699,
+     "repetition_flagged": false,
+     "page_id": "r1_wuxi_ar2022_p010",
+     "role": "eval",
+     "stratum": "CN/zh-CN/annual_report",
+     "unsourced_text": {
+      "lines_total": 45,
+      "unsourced_lines": 0,
+      "unsourced_rate": 0.0,
+      "sample": []
+     },
+     "source_id": "urn:company-wiki:source:sha256:f7d5c0e585cf913086cfba5cfa74ae1d46a3ef3c4170ea7a08a862e804933904",
+     "document_id": "urn:company-wiki:document:sha256:f7d5c0e585cf913086cfba5cfa74ae1d46a3ef3c4170ea7a08a862e804933904",
+     "content_sha256": "f7d5c0e585cf913086cfba5cfa74ae1d46a3ef3c4170ea7a08a862e804933904",
+     "pdf_page_index": 10,
+     "page_image_sha256": "647c5e1783d03fab7f2a9bd9f9620406e338eeeb5c196279f45ff0a6113b5f09",
+     "engine_seconds": 0.0,
+     "excluded_reason": null,
+     "finish_reason": null,
+     "cache_hit": null
+    },
+    {
+     "page_status": "ok",
+     "hyp_sha256": "8c73a1b771e15c047af3d7b4daa6645968ab52002198b6378b648adca59df573",
+     "cer_strict": 0.03484688489968321,
+     "cer_strict_ops": {
+      "insertions": 24,
+      "deletions": 3,
+      "substitutions": 6
+     },
+     "cer_narrow": 0.0032858707557502738,
+     "cer_narrow_ops": {
+      "insertions": 1,
+      "deletions": 1,
+      "substitutions": 1
+     },
+     "numbers": {
+      "gold_total": 42,
+      "hyp_total": 42,
+      "recall_hits": 41,
+      "precision_hits": 41,
+      "recall": 0.9761904761904762,
+      "precision": 0.9761904761904762
+     },
+     "numbers_digit_present": {
+      "gold_total": 42,
+      "hits": 42,
+      "recall": 1.0
+     },
+     "hyp_chars": 968,
+     "gold_chars": 947,
+     "gold_chars_narrow": 913,
+     "repetition_flagged": false,
+     "page_id": "r1_ksy_fy2025_results_p003",
+     "role": "holdout",
+     "stratum": "HK/zh/annual_results_announcement",
+     "unsourced_text": {
+      "lines_total": 28,
+      "unsourced_lines": 0,
+      "unsourced_rate": 0.0,
+      "sample": []
+     },
+     "source_id": "urn:company-wiki:source:sha256:9f35944bcca595e7286c00a69b8a7bbb907e3bca890e5bc897b9e1c97cde3470",
+     "document_id": "urn:company-wiki:document:sha256:9f35944bcca595e7286c00a69b8a7bbb907e3bca890e5bc897b9e1c97cde3470",
+     "content_sha256": "9f35944bcca595e7286c00a69b8a7bbb907e3bca890e5bc897b9e1c97cde3470",
+     "pdf_page_index": 3,
+     "page_image_sha256": "6df6711d8390069bb82d8565674667cd75b140a61c4f5448cae31d22b9281fe2",
+     "engine_seconds": 0.0,
+     "excluded_reason": null,
+     "finish_reason": null,
+     "cache_hit": null
+    },
+    {
+     "page_status": "ok",
+     "hyp_sha256": "833c5f2266054456952cb982ff831900b19016b4f409724c8836e041ac7b1721",
+     "cer_strict": 0.07222491517207949,
+     "cer_strict_ops": {
+      "insertions": 64,
+      "deletions": 6,
+      "substitutions": 79
+     },
+     "cer_narrow": 0.03732590529247911,
+     "cer_narrow_ops": {
+      "insertions": 10,
+      "deletions": 13,
+      "substitutions": 44
+     },
+     "numbers": {
+      "gold_total": 183,
+      "hyp_total": 183,
+      "recall_hits": 183,
+      "precision_hits": 183,
+      "recall": 1.0,
+      "precision": 1.0
+     },
+     "numbers_digit_present": {
+      "gold_total": 183,
+      "hits": 183,
+      "recall": 1.0
+     },
+     "hyp_chars": 2121,
+     "gold_chars": 2063,
+     "gold_chars_narrow": 1795,
+     "repetition_flagged": false,
+     "page_id": "r1_ksy_fy2025_income_p012",
+     "role": "eval",
+     "stratum": "HK/zh/annual_results_announcement",
+     "unsourced_text": {
+      "lines_total": 62,
+      "unsourced_lines": 4,
+      "unsourced_rate": 0.06451612903225806,
+      "sample": [
+       "三月",
+       "六月",
+       "九月",
+       "利潤 (3,683) (2,184) 602 (3,227) (2,632) (376) (12,362) (7,441"
+      ]
+     },
+     "source_id": "urn:company-wiki:source:sha256:9f35944bcca595e7286c00a69b8a7bbb907e3bca890e5bc897b9e1c97cde3470",
+     "document_id": "urn:company-wiki:document:sha256:9f35944bcca595e7286c00a69b8a7bbb907e3bca890e5bc897b9e1c97cde3470",
+     "content_sha256": "9f35944bcca595e7286c00a69b8a7bbb907e3bca890e5bc897b9e1c97cde3470",
+     "pdf_page_index": 12,
+     "page_image_sha256": "b334a93fa7b417760518146efa1fe8361e8ef409d56f3765c152ab3373b2f630",
+     "engine_seconds": 0.0,
+     "excluded_reason": null,
+     "finish_reason": null,
+     "cache_hit": null
+    },
+    {
+     "page_status": "ok",
+     "hyp_sha256": "7681aa87135d70bcdf3e1c0b507727a1a284641202ca8885823a419b12a5cc50",
+     "cer_strict": 0.5849056603773585,
+     "cer_strict_ops": {
+      "insertions": 109,
+      "deletions": 87,
+      "substitutions": 145
+     },
+     "cer_narrow": 0.5567567567567567,
+     "cer_narrow_ops": {
+      "insertions": 86,
+      "deletions": 86,
+      "substitutions": 137
+     },
+     "numbers": {
+      "gold_total": 3,
+      "hyp_total": 3,
+      "recall_hits": 3,
+      "precision_hits": 3,
+      "recall": 1.0,
+      "precision": 1.0
+     },
+     "numbers_digit_present": {
+      "gold_total": 3,
+      "hits": 3,
+      "recall": 1.0
+     },
+     "hyp_chars": 605,
+     "gold_chars": 583,
+     "gold_chars_narrow": 555,
+     "repetition_flagged": false,
+     "page_id": "r1_biren_ar2025_p030",
+     "role": "eval",
+     "stratum": "HK/zh/annual_report",
+     "unsourced_text": {
+      "lines_total": 21,
+      "unsourced_lines": 1,
+      "unsourced_rate": 0.047619047619047616,
+      "sample": [
+       "知、技能、專業經驗、種族、文化及教育背景、年齡、包括但不限於性別，彼等會否在所有方面促進董事會多元化•"
+      ]
+     },
+     "source_id": "urn:company-wiki:source:sha256:7de30b0fb2958e51799d8cc860a05231361690de3ba15990b9e1ac76954745b0",
+     "document_id": "urn:company-wiki:document:sha256:7de30b0fb2958e51799d8cc860a05231361690de3ba15990b9e1ac76954745b0",
+     "content_sha256": "7de30b0fb2958e51799d8cc860a05231361690de3ba15990b9e1ac76954745b0",
+     "pdf_page_index": 30,
+     "page_image_sha256": "2f179f02f83414b7025f8a48a359a06ccc9ff6040da034785aeb39b5fbed96a7",
+     "engine_seconds": 0.0,
+     "excluded_reason": null,
+     "finish_reason": null,
+     "cache_hit": null
+    },
+    {
+     "page_status": "ok",
+     "hyp_sha256": "029a3a224fd84a5701b331b18d836d6117b52b023ff8a0695b7ef7e3b4c1c4ef",
+     "cer_strict": 0.025369512464151776,
+     "cer_strict_ops": {
+      "insertions": 100,
+      "deletions": 11,
+      "substitutions": 4
+     },
+     "cer_narrow": 0.0033205619412515963,
+     "cer_narrow_ops": {
+      "insertions": 0,
+      "deletions": 12,
+      "substitutions": 1
+     },
+     "wer": 0.004846526655896607,
+     "wer_ops": {
+      "insertions": 0,
+      "deletions": 2,
+      "substitutions": 1
+     },
+     "numbers": {
+      "gold_total": 1,
+      "hyp_total": 1,
+      "recall_hits": 1,
+      "precision_hits": 1,
+      "recall": 1.0,
+      "precision": 1.0
+     },
+     "numbers_digit_present": {
+      "gold_total": 1,
+      "hits": 1,
+      "recall": 1.0
+     },
+     "hyp_chars": 4622,
+     "gold_chars": 4533,
+     "gold_chars_narrow": 3915,
+     "repetition_flagged": false,
+     "page_id": "r1_brk2007_p001",
+     "role": "holdout",
+     "stratum": "US/en/annual_report",
+     "unsourced_text": {
+      "lines_total": 50,
+      "unsourced_lines": 0,
+      "unsourced_rate": 0.0,
+      "sample": []
+     },
+     "source_id": "urn:company-wiki:source:sha256:a914b0ad67df2d75da0ae2b246dba5500bb84e19391a62a930ff441213d3ca53",
+     "document_id": "urn:company-wiki:document:sha256:a914b0ad67df2d75da0ae2b246dba5500bb84e19391a62a930ff441213d3ca53",
+     "content_sha256": "a914b0ad67df2d75da0ae2b246dba5500bb84e19391a62a930ff441213d3ca53",
+     "pdf_page_index": 1,
+     "page_image_sha256": "023b730c57d317801ebaa8384bbeab8cfc8ac3d9ade17ff7f1d2f411224c20d2",
+     "engine_seconds": 0.0,
+     "excluded_reason": null,
+     "finish_reason": null,
+     "cache_hit": null
+    },
+    {
+     "page_status": "ok",
+     "hyp_sha256": "9154831705eb62cd25e8f6523363ac6d737caf79d9a7b15787521824b2d541ba",
+     "cer_strict": 0.02436468430704742,
+     "cer_strict_ops": {
+      "insertions": 93,
+      "deletions": 0,
+      "substitutions": 0
+     },
+     "cer_narrow": 0.0,
+     "cer_narrow_ops": {
+      "insertions": 0,
+      "deletions": 0,
+      "substitutions": 0
+     },
+     "wer": 0.0,
+     "wer_ops": {
+      "insertions": 0,
+      "deletions": 0,
+      "substitutions": 0
+     },
+     "numbers": {
+      "gold_total": 15,
+      "hyp_total": 15,
+      "recall_hits": 15,
+      "precision_hits": 15,
+      "recall": 1.0,
+      "precision": 1.0
+     },
+     "numbers_digit_present": {
+      "gold_total": 15,
+      "hits": 15,
+      "recall": 1.0
+     },
+     "hyp_chars": 3910,
+     "gold_chars": 3817,
+     "gold_chars_narrow": 3182,
+     "repetition_flagged": false,
+     "page_id": "r1_brk2007_p005",
+     "role": "eval",
+     "stratum": "US/en/annual_report",
+     "unsourced_text": {
+      "lines_total": 43,
+      "unsourced_lines": 0,
+      "unsourced_rate": 0.0,
+      "sample": []
+     },
+     "source_id": "urn:company-wiki:source:sha256:a914b0ad67df2d75da0ae2b246dba5500bb84e19391a62a930ff441213d3ca53",
+     "document_id": "urn:company-wiki:document:sha256:a914b0ad67df2d75da0ae2b246dba5500bb84e19391a62a930ff441213d3ca53",
+     "content_sha256": "a914b0ad67df2d75da0ae2b246dba5500bb84e19391a62a930ff441213d3ca53",
+     "pdf_page_index": 5,
+     "page_image_sha256": "5335c3457d3b3c1481386c05aa968004264817a09c73b5b9294dc04a296f3d3e",
+     "engine_seconds": 0.0,
+     "excluded_reason": null,
+     "finish_reason": null,
+     "cache_hit": null
+    },
+    {
+     "page_status": "ok",
+     "hyp_sha256": "aea4f5edd32299abe3d56e93a4365d4b6872f561dd8cb4976409c474f412f0a3",
+     "cer_strict": 0.05153203342618384,
+     "cer_strict_ops": {
+      "insertions": 33,
+      "deletions": 2,
+      "substitutions": 2
+     },
+     "cer_narrow": 0.005979073243647235,
+     "cer_narrow_ops": {
+      "insertions": 1,
+      "deletions": 1,
+      "substitutions": 2
+     },
+     "numbers": {
+      "gold_total": 14,
+      "hyp_total": 14,
+      "recall_hits": 14,
+      "precision_hits": 14,
+      "recall": 1.0,
+      "precision": 1.0
+     },
+     "numbers_digit_present": {
+      "gold_total": 14,
+      "hits": 14,
+      "recall": 1.0
+     },
+     "hyp_chars": 749,
+     "gold_chars": 718,
+     "gold_chars_narrow": 669,
+     "repetition_flagged": false,
+     "page_id": "r1_wanhua_qa2021_p003",
+     "role": "eval",
+     "stratum": "CN/zh-CN/investor_relations_qa",
+     "unsourced_text": {
+      "lines_total": 25,
+      "unsourced_lines": 0,
+      "unsourced_rate": 0.0,
+      "sample": []
+     },
+     "source_id": "urn:company-wiki:source:sha256:f8f18fd12ef060fa0183be1a641232a857daa438518d19c911cdf602ac2fb07d",
+     "document_id": "urn:company-wiki:document:sha256:f8f18fd12ef060fa0183be1a641232a857daa438518d19c911cdf602ac2fb07d",
+     "content_sha256": "f8f18fd12ef060fa0183be1a641232a857daa438518d19c911cdf602ac2fb07d",
+     "pdf_page_index": 3,
+     "page_image_sha256": "097eaf47d1da132c80a64dfdd42ca81c72d3b559969ca552b6bc7fb1d00478fc",
+     "engine_seconds": 0.0,
+     "excluded_reason": null,
+     "finish_reason": null,
+     "cache_hit": null
+    }
+   ],
+   "aggregate": {
+    "pages_total": 8,
+    "pages_scored": 8,
+    "pages_excluded": 0,
+    "status_counts": {
+     "ok": 8
+    },
+    "macro_cer_strict": 0.10954591197532794,
+    "macro_cer_narrow": 0.0782336668526432,
+    "macro_wer": 0.0024232633279483036,
+    "micro_cer_strict": 0.0567948717948718,
+    "micro_cer_narrow": 0.03050945720704399,
+    "number_token_recall": 0.9966329966329966,
+    "number_token_precision": 0.9966329966329966,
+    "number_digit_present_recall": 1.0,
+    "repetition_flagged_pages": 0,
+    "unsourced_lines": 5,
+    "output_lines": 308,
+    "unsourced_rate": 0.016233766233766232,
+    "per_stratum": {
+     "CN/zh-CN/annual_report": {
+      "pages": 2,
+      "scored": 2,
+      "coverage": 1.0,
+      "macro_cer_strict": 0.041561802578059664,
+      "macro_cer_narrow": 0.009600583415630328,
+      "macro_wer": null
+     },
+     "HK/zh/annual_results_announcement": {
+      "pages": 2,
+      "scored": 2,
+      "coverage": 1.0,
+      "macro_cer_strict": 0.05353590003588135,
+      "macro_cer_narrow": 0.02030588802411469,
+      "macro_wer": null
+     },
+     "HK/zh/annual_report": {
+      "pages": 1,
+      "scored": 1,
+      "coverage": 1.0,
+      "macro_cer_strict": 0.5849056603773585,
+      "macro_cer_narrow": 0.5567567567567567,
+      "macro_wer": null
+     },
+     "US/en/annual_report": {
+      "pages": 2,
+      "scored": 2,
+      "coverage": 1.0,
+      "macro_cer_strict": 0.024867098385599598,
+      "macro_cer_narrow": 0.0016602809706257981,
+      "macro_wer": 0.0024232633279483036
+     },
+     "CN/zh-CN/investor_relations_qa": {
+      "pages": 1,
+      "scored": 1,
+      "coverage": 1.0,
+      "macro_cer_strict": 0.05153203342618384,
+      "macro_cer_narrow": 0.005979073243647235,
+      "macro_wer": null
+     }
+    },
+    "eval_split": {
+     "pages": 6,
+     "scored": 6,
+     "macro_cer_strict": 0.1360251497397981
+    },
+    "holdout_split": {
+     "pages": 2,
+     "scored": 2,
+     "macro_cer_strict": 0.030108198681917494
+    },
+    "fact_match": {
+     "facts_hit": 173,
+     "facts_total": 189,
+     "conditions_hit": 111,
+     "conditions_total": 117,
+     "numbers_hit": 290,
+     "numbers_total": 291,
+     "facts_raw_total": 189,
+     "conditions_raw_total": 117,
+     "numbers_raw_total": 316,
+     "facts_numeric_hit": 180,
+     "conditions_numeric_hit": 114,
+     "pages_produced": 8,
+     "pages_total": 8,
+     "unachievable_counts": {
+      "numbers": 25
+     }
+    }
+   }
+  },
+  "X1F_attempt1": {
+   "run_files": [
+    "run_x1_attempt1.json"
+   ],
+   "per_page": [
+    {
+     "page_status": "error",
+     "reason_excluded": "error",
+     "page_id": "r1_amec_ar2025_p029",
+     "role": "eval",
+     "stratum": "CN/zh-CN/annual_report",
+     "unsourced_text": {
+      "lines_total": 0,
+      "unsourced_lines": null,
+      "unsourced_rate": null,
+      "sample": []
+     },
+     "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+     "document_id": "urn:company-wiki:document:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+     "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+     "pdf_page_index": 29,
+     "page_image_sha256": "13a01630a162d0c147d26349f0c76cfda6caa61b9ae16894fbe45f6b68ab445c",
+     "engine_seconds": 57.0829276000004,
+     "excluded_reason": "MemoryError: ",
+     "finish_reason": null,
+     "cache_hit": null
+    },
+    {
+     "page_status": "error",
+     "reason_excluded": "error",
+     "page_id": "r1_wuxi_ar2022_p010",
+     "role": "eval",
+     "stratum": "CN/zh-CN/annual_report",
+     "unsourced_text": {
+      "lines_total": 0,
+      "unsourced_lines": null,
+      "unsourced_rate": null,
+      "sample": []
+     },
+     "source_id": "urn:company-wiki:source:sha256:f7d5c0e585cf913086cfba5cfa74ae1d46a3ef3c4170ea7a08a862e804933904",
+     "document_id": "urn:company-wiki:document:sha256:f7d5c0e585cf913086cfba5cfa74ae1d46a3ef3c4170ea7a08a862e804933904",
+     "content_sha256": "f7d5c0e585cf913086cfba5cfa74ae1d46a3ef3c4170ea7a08a862e804933904",
+     "pdf_page_index": 10,
+     "page_image_sha256": "647c5e1783d03fab7f2a9bd9f9620406e338eeeb5c196279f45ff0a6113b5f09",
+     "engine_seconds": null,
+     "excluded_reason": "model_load_failed_on_earlier_page: MemoryError",
+     "finish_reason": null,
+     "cache_hit": null
+    },
+    {
+     "page_status": "error",
+     "reason_excluded": "error",
+     "page_id": "r1_ksy_fy2025_results_p003",
+     "role": "holdout",
+     "stratum": "HK/zh/annual_results_announcement",
+     "unsourced_text": {
+      "lines_total": 0,
+      "unsourced_lines": null,
+      "unsourced_rate": null,
+      "sample": []
+     },
+     "source_id": "urn:company-wiki:source:sha256:9f35944bcca595e7286c00a69b8a7bbb907e3bca890e5bc897b9e1c97cde3470",
+     "document_id": "urn:company-wiki:document:sha256:9f35944bcca595e7286c00a69b8a7bbb907e3bca890e5bc897b9e1c97cde3470",
+     "content_sha256": "9f35944bcca595e7286c00a69b8a7bbb907e3bca890e5bc897b9e1c97cde3470",
+     "pdf_page_index": 3,
+     "page_image_sha256": "6df6711d8390069bb82d8565674667cd75b140a61c4f5448cae31d22b9281fe2",
+     "engine_seconds": null,
+     "excluded_reason": "model_load_failed_on_earlier_page: MemoryError",
+     "finish_reason": null,
+     "cache_hit": null
+    },
+    {
+     "page_status": "error",
+     "reason_excluded": "error",
+     "page_id": "r1_ksy_fy2025_income_p012",
+     "role": "eval",
+     "stratum": "HK/zh/annual_results_announcement",
+     "unsourced_text": {
+      "lines_total": 0,
+      "unsourced_lines": null,
+      "unsourced_rate": null,
+      "sample": []
+     },
+     "source_id": "urn:company-wiki:source:sha256:9f35944bcca595e7286c00a69b8a7bbb907e3bca890e5bc897b9e1c97cde3470",
+     "document_id": "urn:company-wiki:document:sha256:9f35944bcca595e7286c00a69b8a7bbb907e3bca890e5bc897b9e1c97cde3470",
+     "content_sha256": "9f35944bcca595e7286c00a69b8a7bbb907e3bca890e5bc897b9e1c97cde3470",
+     "pdf_page_index": 12,
+     "page_image_sha256": "b334a93fa7b417760518146efa1fe8361e8ef409d56f3765c152ab3373b2f630",
+     "engine_seconds": null,
+     "excluded_reason": "model_load_failed_on_earlier_page: MemoryError",
+     "finish_reason": null,
+     "cache_hit": null
+    },
+    {
+     "page_status": "error",
+     "reason_excluded": "error",
+     "page_id": "r1_biren_ar2025_p030",
+     "role": "eval",
+     "stratum": "HK/zh/annual_report",
+     "unsourced_text": {
+      "lines_total": 0,
+      "unsourced_lines": null,
+      "unsourced_rate": null,
+      "sample": []
+     },
+     "source_id": "urn:company-wiki:source:sha256:7de30b0fb2958e51799d8cc860a05231361690de3ba15990b9e1ac76954745b0",
+     "document_id": "urn:company-wiki:document:sha256:7de30b0fb2958e51799d8cc860a05231361690de3ba15990b9e1ac76954745b0",
+     "content_sha256": "7de30b0fb2958e51799d8cc860a05231361690de3ba15990b9e1ac76954745b0",
+     "pdf_page_index": 30,
+     "page_image_sha256": "2f179f02f83414b7025f8a48a359a06ccc9ff6040da034785aeb39b5fbed96a7",
+     "engine_seconds": null,
+     "excluded_reason": "model_load_failed_on_earlier_page: MemoryError",
+     "finish_reason": null,
+     "cache_hit": null
+    },
+    {
+     "page_status": "error",
+     "reason_excluded": "error",
+     "page_id": "r1_brk2007_p001",
+     "role": "holdout",
+     "stratum": "US/en/annual_report",
+     "unsourced_text": {
+      "lines_total": 0,
+      "unsourced_lines": null,
+      "unsourced_rate": null,
+      "sample": []
+     },
+     "source_id": "urn:company-wiki:source:sha256:a914b0ad67df2d75da0ae2b246dba5500bb84e19391a62a930ff441213d3ca53",
+     "document_id": "urn:company-wiki:document:sha256:a914b0ad67df2d75da0ae2b246dba5500bb84e19391a62a930ff441213d3ca53",
+     "content_sha256": "a914b0ad67df2d75da0ae2b246dba5500bb84e19391a62a930ff441213d3ca53",
+     "pdf_page_index": 1,
+     "page_image_sha256": "023b730c57d317801ebaa8384bbeab8cfc8ac3d9ade17ff7f1d2f411224c20d2",
+     "engine_seconds": null,
+     "excluded_reason": "model_load_failed_on_earlier_page: MemoryError",
+     "finish_reason": null,
+     "cache_hit": null
+    },
+    {
+     "page_status": "error",
+     "reason_excluded": "error",
+     "page_id": "r1_brk2007_p005",
+     "role": "eval",
+     "stratum": "US/en/annual_report",
+     "unsourced_text": {
+      "lines_total": 0,
+      "unsourced_lines": null,
+      "unsourced_rate": null,
+      "sample": []
+     },
+     "source_id": "urn:company-wiki:source:sha256:a914b0ad67df2d75da0ae2b246dba5500bb84e19391a62a930ff441213d3ca53",
+     "document_id": "urn:company-wiki:document:sha256:a914b0ad67df2d75da0ae2b246dba5500bb84e19391a62a930ff441213d3ca53",
+     "content_sha256": "a914b0ad67df2d75da0ae2b246dba5500bb84e19391a62a930ff441213d3ca53",
+     "pdf_page_index": 5,
+     "page_image_sha256": "5335c3457d3b3c1481386c05aa968004264817a09c73b5b9294dc04a296f3d3e",
+     "engine_seconds": null,
+     "excluded_reason": "model_load_failed_on_earlier_page: MemoryError",
+     "finish_reason": null,
+     "cache_hit": null
+    },
+    {
+     "page_status": "not_run",
+     "reason_excluded": "not_run",
+     "page_id": "r1_wanhua_qa2021_p003",
+     "role": "eval",
+     "stratum": "CN/zh-CN/investor_relations_qa",
+     "unsourced_text": {
+      "lines_total": 0,
+      "unsourced_lines": null,
+      "unsourced_rate": null,
+      "sample": []
+     },
+     "source_id": "urn:company-wiki:source:sha256:f8f18fd12ef060fa0183be1a641232a857daa438518d19c911cdf602ac2fb07d",
+     "document_id": "urn:company-wiki:document:sha256:f8f18fd12ef060fa0183be1a641232a857daa438518d19c911cdf602ac2fb07d",
+     "content_sha256": "f8f18fd12ef060fa0183be1a641232a857daa438518d19c911cdf602ac2fb07d",
+     "pdf_page_index": 3,
+     "page_image_sha256": "097eaf47d1da132c80a64dfdd42ca81c72d3b559969ca552b6bc7fb1d00478fc",
+     "engine_seconds": null,
+     "excluded_reason": "page added to the sample after this arm's runs (manifest revision 2)",
+     "finish_reason": null,
+     "cache_hit": null
+    }
+   ],
+   "aggregate": {
+    "pages_total": 8,
+    "pages_scored": 0,
+    "pages_excluded": 8,
+    "status_counts": {
+     "error": 7,
+     "not_run": 1
+    },
+    "macro_cer_strict": null,
+    "macro_cer_narrow": null,
+    "macro_wer": null,
+    "micro_cer_strict": null,
+    "micro_cer_narrow": null,
+    "number_token_recall": null,
+    "number_token_precision": null,
+    "number_digit_present_recall": null,
+    "repetition_flagged_pages": 0,
+    "unsourced_lines": 0,
+    "output_lines": 0,
+    "unsourced_rate": null,
+    "per_stratum": {
+     "CN/zh-CN/annual_report": {
+      "pages": 2,
+      "scored": 0,
+      "coverage": 0.0,
+      "macro_cer_strict": null,
+      "macro_cer_narrow": null,
+      "macro_wer": null
+     },
+     "HK/zh/annual_results_announcement": {
+      "pages": 2,
+      "scored": 0,
+      "coverage": 0.0,
+      "macro_cer_strict": null,
+      "macro_cer_narrow": null,
+      "macro_wer": null
+     },
+     "HK/zh/annual_report": {
+      "pages": 1,
+      "scored": 0,
+      "coverage": 0.0,
+      "macro_cer_strict": null,
+      "macro_cer_narrow": null,
+      "macro_wer": null
+     },
+     "US/en/annual_report": {
+      "pages": 2,
+      "scored": 0,
+      "coverage": 0.0,
+      "macro_cer_strict": null,
+      "macro_cer_narrow": null,
+      "macro_wer": null
+     },
+     "CN/zh-CN/investor_relations_qa": {
+      "pages": 1,
+      "scored": 0,
+      "coverage": 0.0,
+      "macro_cer_strict": null,
+      "macro_cer_narrow": null,
+      "macro_wer": null
+     }
+    },
+    "eval_split": {
+     "pages": 6,
+     "scored": 0,
+     "macro_cer_strict": null
+    },
+    "holdout_split": {
+     "pages": 2,
+     "scored": 0,
+     "macro_cer_strict": null
+    },
+    "fact_match": {
+     "facts_hit": 0,
+     "facts_total": 189,
+     "conditions_hit": 0,
+     "conditions_total": 117,
+     "numbers_hit": 0,
+     "numbers_total": 291,
+     "facts_raw_total": 189,
+     "conditions_raw_total": 117,
+     "numbers_raw_total": 316,
+     "facts_numeric_hit": 0,
+     "conditions_numeric_hit": 0,
+     "pages_produced": 0,
+     "pages_total": 8,
+     "unachievable_counts": {
+      "numbers": 25
+     }
+    }
+   }
+  },
+  "X1F_attempt2": {
+   "run_files": [
+    "run_x1_attempt2.json"
+   ],
+   "per_page": [
+    {
+     "page_status": "error",
+     "reason_excluded": "error",
+     "page_id": "r1_amec_ar2025_p029",
+     "role": "eval",
+     "stratum": "CN/zh-CN/annual_report",
+     "unsourced_text": {
+      "lines_total": 0,
+      "unsourced_lines": null,
+      "unsourced_rate": null,
+      "sample": []
+     },
+     "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+     "document_id": "urn:company-wiki:document:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+     "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+     "pdf_page_index": 29,
+     "page_image_sha256": "13a01630a162d0c147d26349f0c76cfda6caa61b9ae16894fbe45f6b68ab445c",
+     "engine_seconds": 93.76434969999536,
+     "excluded_reason": "RuntimeError: [enforce fail at alloc_cpu.cpp:117] data. DefaultCPUAllocator: not enough memory: you tried to allocate 141557760 bytes.",
+     "finish_reason": null,
+     "cache_hit": null
+    },
+    {
+     "page_status": "no_record",
+     "reason_excluded": "no_record",
+     "page_id": "r1_wuxi_ar2022_p010",
+     "role": "eval",
+     "stratum": "CN/zh-CN/annual_report",
+     "unsourced_text": {
+      "lines_total": 0,
+      "unsourced_lines": null,
+      "unsourced_rate": null,
+      "sample": []
+     },
+     "source_id": "urn:company-wiki:source:sha256:f7d5c0e585cf913086cfba5cfa74ae1d46a3ef3c4170ea7a08a862e804933904",
+     "document_id": "urn:company-wiki:document:sha256:f7d5c0e585cf913086cfba5cfa74ae1d46a3ef3c4170ea7a08a862e804933904",
+     "content_sha256": "f7d5c0e585cf913086cfba5cfa74ae1d46a3ef3c4170ea7a08a862e804933904",
+     "pdf_page_index": 10,
+     "page_image_sha256": "647c5e1783d03fab7f2a9bd9f9620406e338eeeb5c196279f45ff0a6113b5f09",
+     "engine_seconds": null,
+     "excluded_reason": "child_exit_code=3221225477; backstop_hit=False",
+     "finish_reason": null,
+     "cache_hit": null
+    },
+    {
+     "page_status": "no_record",
+     "reason_excluded": "no_record",
+     "page_id": "r1_ksy_fy2025_results_p003",
+     "role": "holdout",
+     "stratum": "HK/zh/annual_results_announcement",
+     "unsourced_text": {
+      "lines_total": 0,
+      "unsourced_lines": null,
+      "unsourced_rate": null,
+      "sample": []
+     },
+     "source_id": "urn:company-wiki:source:sha256:9f35944bcca595e7286c00a69b8a7bbb907e3bca890e5bc897b9e1c97cde3470",
+     "document_id": "urn:company-wiki:document:sha256:9f35944bcca595e7286c00a69b8a7bbb907e3bca890e5bc897b9e1c97cde3470",
+     "content_sha256": "9f35944bcca595e7286c00a69b8a7bbb907e3bca890e5bc897b9e1c97cde3470",
+     "pdf_page_index": 3,
+     "page_image_sha256": "6df6711d8390069bb82d8565674667cd75b140a61c4f5448cae31d22b9281fe2",
+     "engine_seconds": null,
+     "excluded_reason": "child_exit_code=3221225477; backstop_hit=False",
+     "finish_reason": null,
+     "cache_hit": null
+    },
+    {
+     "page_status": "no_record",
+     "reason_excluded": "no_record",
+     "page_id": "r1_ksy_fy2025_income_p012",
+     "role": "eval",
+     "stratum": "HK/zh/annual_results_announcement",
+     "unsourced_text": {
+      "lines_total": 0,
+      "unsourced_lines": null,
+      "unsourced_rate": null,
+      "sample": []
+     },
+     "source_id": "urn:company-wiki:source:sha256:9f35944bcca595e7286c00a69b8a7bbb907e3bca890e5bc897b9e1c97cde3470",
+     "document_id": "urn:company-wiki:document:sha256:9f35944bcca595e7286c00a69b8a7bbb907e3bca890e5bc897b9e1c97cde3470",
+     "content_sha256": "9f35944bcca595e7286c00a69b8a7bbb907e3bca890e5bc897b9e1c97cde3470",
+     "pdf_page_index": 12,
+     "page_image_sha256": "b334a93fa7b417760518146efa1fe8361e8ef409d56f3765c152ab3373b2f630",
+     "engine_seconds": null,
+     "excluded_reason": "child_exit_code=3221225477; backstop_hit=False",
+     "finish_reason": null,
+     "cache_hit": null
+    },
+    {
+     "page_status": "no_record",
+     "reason_excluded": "no_record",
+     "page_id": "r1_biren_ar2025_p030",
+     "role": "eval",
+     "stratum": "HK/zh/annual_report",
+     "unsourced_text": {
+      "lines_total": 0,
+      "unsourced_lines": null,
+      "unsourced_rate": null,
+      "sample": []
+     },
+     "source_id": "urn:company-wiki:source:sha256:7de30b0fb2958e51799d8cc860a05231361690de3ba15990b9e1ac76954745b0",
+     "document_id": "urn:company-wiki:document:sha256:7de30b0fb2958e51799d8cc860a05231361690de3ba15990b9e1ac76954745b0",
+     "content_sha256": "7de30b0fb2958e51799d8cc860a05231361690de3ba15990b9e1ac76954745b0",
+     "pdf_page_index": 30,
+     "page_image_sha256": "2f179f02f83414b7025f8a48a359a06ccc9ff6040da034785aeb39b5fbed96a7",
+     "engine_seconds": null,
+     "excluded_reason": "child_exit_code=3221225477; backstop_hit=False",
+     "finish_reason": null,
+     "cache_hit": null
+    },
+    {
+     "page_status": "no_record",
+     "reason_excluded": "no_record",
+     "page_id": "r1_brk2007_p001",
+     "role": "holdout",
+     "stratum": "US/en/annual_report",
+     "unsourced_text": {
+      "lines_total": 0,
+      "unsourced_lines": null,
+      "unsourced_rate": null,
+      "sample": []
+     },
+     "source_id": "urn:company-wiki:source:sha256:a914b0ad67df2d75da0ae2b246dba5500bb84e19391a62a930ff441213d3ca53",
+     "document_id": "urn:company-wiki:document:sha256:a914b0ad67df2d75da0ae2b246dba5500bb84e19391a62a930ff441213d3ca53",
+     "content_sha256": "a914b0ad67df2d75da0ae2b246dba5500bb84e19391a62a930ff441213d3ca53",
+     "pdf_page_index": 1,
+     "page_image_sha256": "023b730c57d317801ebaa8384bbeab8cfc8ac3d9ade17ff7f1d2f411224c20d2",
+     "engine_seconds": null,
+     "excluded_reason": "child_exit_code=3221225477; backstop_hit=False",
+     "finish_reason": null,
+     "cache_hit": null
+    },
+    {
+     "page_status": "no_record",
+     "reason_excluded": "no_record",
+     "page_id": "r1_brk2007_p005",
+     "role": "eval",
+     "stratum": "US/en/annual_report",
+     "unsourced_text": {
+      "lines_total": 0,
+      "unsourced_lines": null,
+      "unsourced_rate": null,
+      "sample": []
+     },
+     "source_id": "urn:company-wiki:source:sha256:a914b0ad67df2d75da0ae2b246dba5500bb84e19391a62a930ff441213d3ca53",
+     "document_id": "urn:company-wiki:document:sha256:a914b0ad67df2d75da0ae2b246dba5500bb84e19391a62a930ff441213d3ca53",
+     "content_sha256": "a914b0ad67df2d75da0ae2b246dba5500bb84e19391a62a930ff441213d3ca53",
+     "pdf_page_index": 5,
+     "page_image_sha256": "5335c3457d3b3c1481386c05aa968004264817a09c73b5b9294dc04a296f3d3e",
+     "engine_seconds": null,
+     "excluded_reason": "child_exit_code=3221225477; backstop_hit=False",
+     "finish_reason": null,
+     "cache_hit": null
+    },
+    {
+     "page_status": "not_run",
+     "reason_excluded": "not_run",
+     "page_id": "r1_wanhua_qa2021_p003",
+     "role": "eval",
+     "stratum": "CN/zh-CN/investor_relations_qa",
+     "unsourced_text": {
+      "lines_total": 0,
+      "unsourced_lines": null,
+      "unsourced_rate": null,
+      "sample": []
+     },
+     "source_id": "urn:company-wiki:source:sha256:f8f18fd12ef060fa0183be1a641232a857daa438518d19c911cdf602ac2fb07d",
+     "document_id": "urn:company-wiki:document:sha256:f8f18fd12ef060fa0183be1a641232a857daa438518d19c911cdf602ac2fb07d",
+     "content_sha256": "f8f18fd12ef060fa0183be1a641232a857daa438518d19c911cdf602ac2fb07d",
+     "pdf_page_index": 3,
+     "page_image_sha256": "097eaf47d1da132c80a64dfdd42ca81c72d3b559969ca552b6bc7fb1d00478fc",
+     "engine_seconds": null,
+     "excluded_reason": "page added to the sample after this arm's runs (manifest revision 2)",
+     "finish_reason": null,
+     "cache_hit": null
+    }
+   ],
+   "aggregate": {
+    "pages_total": 8,
+    "pages_scored": 0,
+    "pages_excluded": 8,
+    "status_counts": {
+     "error": 1,
+     "no_record": 6,
+     "not_run": 1
+    },
+    "macro_cer_strict": null,
+    "macro_cer_narrow": null,
+    "macro_wer": null,
+    "micro_cer_strict": null,
+    "micro_cer_narrow": null,
+    "number_token_recall": null,
+    "number_token_precision": null,
+    "number_digit_present_recall": null,
+    "repetition_flagged_pages": 0,
+    "unsourced_lines": 0,
+    "output_lines": 0,
+    "unsourced_rate": null,
+    "per_stratum": {
+     "CN/zh-CN/annual_report": {
+      "pages": 2,
+      "scored": 0,
+      "coverage": 0.0,
+      "macro_cer_strict": null,
+      "macro_cer_narrow": null,
+      "macro_wer": null
+     },
+     "HK/zh/annual_results_announcement": {
+      "pages": 2,
+      "scored": 0,
+      "coverage": 0.0,
+      "macro_cer_strict": null,
+      "macro_cer_narrow": null,
+      "macro_wer": null
+     },
+     "HK/zh/annual_report": {
+      "pages": 1,
+      "scored": 0,
+      "coverage": 0.0,
+      "macro_cer_strict": null,
+      "macro_cer_narrow": null,
+      "macro_wer": null
+     },
+     "US/en/annual_report": {
+      "pages": 2,
+      "scored": 0,
+      "coverage": 0.0,
+      "macro_cer_strict": null,
+      "macro_cer_narrow": null,
+      "macro_wer": null
+     },
+     "CN/zh-CN/investor_relations_qa": {
+      "pages": 1,
+      "scored": 0,
+      "coverage": 0.0,
+      "macro_cer_strict": null,
+      "macro_cer_narrow": null,
+      "macro_wer": null
+     }
+    },
+    "eval_split": {
+     "pages": 6,
+     "scored": 0,
+     "macro_cer_strict": null
+    },
+    "holdout_split": {
+     "pages": 2,
+     "scored": 0,
+     "macro_cer_strict": null
+    },
+    "fact_match": {
+     "facts_hit": 0,
+     "facts_total": 189,
+     "conditions_hit": 0,
+     "conditions_total": 117,
+     "numbers_hit": 0,
+     "numbers_total": 291,
+     "facts_raw_total": 189,
+     "conditions_raw_total": 117,
+     "numbers_raw_total": 316,
+     "facts_numeric_hit": 0,
+     "conditions_numeric_hit": 0,
+     "pages_produced": 0,
+     "pages_total": 8,
+     "unachievable_counts": {
+      "numbers": 25
+     }
+    }
+   }
+  },
+  "X2": {
+   "run_file": null,
+   "per_page": [
+    {
+     "page_id": "r1_amec_ar2025_p029",
+     "status": "not_run",
+     "reason": "PP-DocLayoutV3 requires the paddlex runtime, not installed under the frozen resource bounds"
+    },
+    {
+     "page_id": "r1_wuxi_ar2022_p010",
+     "status": "not_run",
+     "reason": "PP-DocLayoutV3 requires the paddlex runtime, not installed under the frozen resource bounds"
+    },
+    {
+     "page_id": "r1_ksy_fy2025_results_p003",
+     "status": "not_run",
+     "reason": "PP-DocLayoutV3 requires the paddlex runtime, not installed under the frozen resource bounds"
+    },
+    {
+     "page_id": "r1_ksy_fy2025_income_p012",
+     "status": "not_run",
+     "reason": "PP-DocLayoutV3 requires the paddlex runtime, not installed under the frozen resource bounds"
+    },
+    {
+     "page_id": "r1_biren_ar2025_p030",
+     "status": "not_run",
+     "reason": "PP-DocLayoutV3 requires the paddlex runtime, not installed under the frozen resource bounds"
+    },
+    {
+     "page_id": "r1_brk2007_p001",
+     "status": "not_run",
+     "reason": "PP-DocLayoutV3 requires the paddlex runtime, not installed under the frozen resource bounds"
+    },
+    {
+     "page_id": "r1_brk2007_p005",
+     "status": "not_run",
+     "reason": "PP-DocLayoutV3 requires the paddlex runtime, not installed under the frozen resource bounds"
+    },
+    {
+     "page_id": "r1_wanhua_qa2021_p003",
+     "status": "not_run",
+     "reason": "PP-DocLayoutV3 requires the paddlex runtime, not installed under the frozen resource bounds"
+    }
+   ],
+   "aggregate": {
+    "pages_total": 8,
+    "pages_scored": 0,
+    "pages_excluded": 8,
+    "status_counts": {
+     "not_run": 8
+    },
+    "coverage_by_stratum": {
+     "CN/zh-CN/annual_report": {
+      "pages": 2,
+      "scored": 0,
+      "coverage": 0.0
+     },
+     "CN/zh-CN/investor_relations_qa": {
+      "pages": 1,
+      "scored": 0,
+      "coverage": 0.0
+     },
+     "HK/zh/annual_report": {
+      "pages": 1,
+      "scored": 0,
+      "coverage": 0.0
+     },
+     "HK/zh/annual_results_announcement": {
+      "pages": 2,
+      "scored": 0,
+      "coverage": 0.0
+     },
+     "US/en/annual_report": {
+      "pages": 2,
+      "scored": 0,
+      "coverage": 0.0
+     }
+    },
+    "per_stratum": {
+     "CN/zh-CN/annual_report": {
+      "pages": 2,
+      "scored": 0,
+      "coverage": 0.0,
+      "macro_cer_strict": null,
+      "macro_cer_narrow": null,
+      "macro_wer": null
+     },
+     "CN/zh-CN/investor_relations_qa": {
+      "pages": 1,
+      "scored": 0,
+      "coverage": 0.0,
+      "macro_cer_strict": null,
+      "macro_cer_narrow": null,
+      "macro_wer": null
+     },
+     "HK/zh/annual_report": {
+      "pages": 1,
+      "scored": 0,
+      "coverage": 0.0,
+      "macro_cer_strict": null,
+      "macro_cer_narrow": null,
+      "macro_wer": null
+     },
+     "HK/zh/annual_results_announcement": {
+      "pages": 2,
+      "scored": 0,
+      "coverage": 0.0,
+      "macro_cer_strict": null,
+      "macro_cer_narrow": null,
+      "macro_wer": null
+     },
+     "US/en/annual_report": {
+      "pages": 2,
+      "scored": 0,
+      "coverage": 0.0,
+      "macro_cer_strict": null,
+      "macro_cer_narrow": null,
+      "macro_wer": null
+     }
+    },
+    "eval_split": {
+     "pages": 6,
+     "scored": 0,
+     "macro_cer_strict": null
+    },
+    "holdout_split": {
+     "pages": 2,
+     "scored": 0,
+     "macro_cer_strict": null
+    },
+    "fact_match": {
+     "facts_hit": 0,
+     "facts_total": 189,
+     "facts_numeric_hit": 0,
+     "conditions_hit": 0,
+     "conditions_total": 117,
+     "numbers_hit": 0,
+     "numbers_total": 291,
+     "note": "NOT_RUN: zero hits over the full denominators, never zero-filled as produced text"
+    }
+   }
+  }
+ },
+ "controls": {
+  "results": [
+   {
+    "page_id": "r1_formula_control",
+    "kind": "formula_symbol_control",
+    "status": "ok",
+    "output": "E = mc2\n△G = △H - T△S\nf(x) = ax² + bx + c\nP/E = 23.7 x",
+    "symbols_kept": [
+     "23.7",
+     "=",
+     "E",
+     "f(x)",
+     "mc",
+     "²"
+    ],
+    "symbols_total": 10,
+    "symbols_kept_count": 6,
+    "formulas": [
+     {
+      "text": "E = mc²",
+      "anchor": "mc",
+      "matched_line": "E = mc2",
+      "faithful": false,
+      "missing_symbols": [
+       "²"
+      ]
+     },
+     {
+      "text": "ΔG = ΔH − TΔS",
+      "anchor": "TΔS",
+      "matched_line": "E = mc2",
+      "faithful": false,
+      "missing_symbols": [
+       "Δ",
+       "−",
+       "TΔS"
+      ]
+     },
+     {
+      "text": "f(x) = ax² + bx + c",
+      "anchor": "f(x)",
+      "matched_line": "f(x) = ax² + bx + c",
+      "faithful": true,
+      "missing_symbols": []
+     },
+     {
+      "text": "P/E = 23.7 ×",
+      "anchor": "23.7",
+      "matched_line": "P/E = 23.7 x",
+      "faithful": false,
+      "missing_symbols": [
+       "×"
+      ]
+     }
+    ],
+    "formulas_faithful": 1,
+    "formulas_total": 4
+   },
+   {
+    "page_id": "r1_blank_control",
+    "kind": "blank_negative_control",
+    "status": "ok",
+    "fabricated_chars": 0,
+    "fabricated": false
+   }
+  ],
+  "note": "synthetic fixtures only; excluded from every real-document denominator"
+ },
+ "x1_receipts": [
+  {
+   "file": "receipts\\x1_20261101T152545_receipt.json",
+   "created_at_utc": "2026-11-01T15:25:45.835039+00:00",
+   "config": {
+    "deadline_seconds_per_request": 180.0,
+    "total_inference_budget_seconds": 1567.256193,
+    "max_new_tokens": 4096,
+    "dtype": "bfloat16",
+    "weights_mode": "mapped-f32",
+    "threads": "torch default (reported by the child)"
+   },
+   "memory": {
+    "cap_bytes": 1719988224,
+    "cap_gib": 1.602,
+    "rule": "min(8 GiB, available physical RAM / 2) at run start",
+    "job_peak_commit_bytes": 1882599424,
+    "job_peak_commit_gib": 1.753,
+    "measurement_scope": "owned-job-total-commit"
+   },
+   "host_before": {
+    "memory_load_pct": 79,
+    "total_phys_bytes": 16931512320,
+    "avail_phys_bytes": 3439976448,
+    "commit_free_bytes": 11032522752,
+    "observation_source": "GlobalMemoryStatusEx",
+    "reason": null
+   },
+   "child": {
+    "return_code": 3221225477,
+    "wall_seconds": 106.5,
+    "stages": [
+     {
+      "stage": "page_start",
+      "page_id": "r1_amec_ar2025_p029",
+      "t_seconds": 6.142
+     },
+     {
+      "stage": "processor_load_start",
+      "page_id": "r1_amec_ar2025_p029",
+      "t_seconds": 94.462
+     },
+     {
+      "stage": "processor_loaded",
+      "page_id": "r1_amec_ar2025_p029",
+      "t_seconds": 96.825
+     },
+     {
+      "stage": "model_load_start",
+      "page_id": "r1_amec_ar2025_p029",
+      "t_seconds": 96.825
+     },
+     {
+      "stage": "model_loaded",
+      "page_id": "r1_amec_ar2025_p029",
+      "t_seconds": 97.285
+     },
+     {
+      "stage": "preprocess_done",
+      "page_id": "r1_amec_ar2025_p029",
+      "t_seconds": 97.779
+     },
+     {
+      "stage": "generate_start",
+      "page_id": "r1_amec_ar2025_p029",
+      "t_seconds": 97.779
+     },
+     {
+      "stage": "page_start",
+      "page_id": "r1_wuxi_ar2022_p010",
+      "t_seconds": 99.783
+     },
+     {
+      "stage": "preprocess_done",
+      "page_id": "r1_wuxi_ar2022_p010",
+      "t_seconds": 100.052
+     },
+     {
+      "stage": "generate_start",
+      "page_id": "r1_wuxi_ar2022_p010",
+      "t_seconds": 100.053
+     }
+    ]
+   },
+   "identity": {
+    "arm": "X1",
+    "backend": "xiaomi-ocr-0-transformers-cpu",
+    "model_revision": "bbd8cf8d21f256b3644b44cb860f3a7cecb93c30",
+    "precision": "float32-cpu",
+    "prompt_sha256": "fd7abd1ca91c0133edb93a6da0d52d6d57a51a9076867fd467ab1ddd7e50fb20",
+    "weights_loading": "torch.from_file replaced by a true read-only mmap section of the exact fp32 upcast copy (bf16 widened losslessly); the fp32 file's sha256 is recorded in the run receipt and x1_feasibility_measured.json, not by the loader; loading strategy and compute dtype only, no quantization",
+    "max_new_tokens": 4096,
+    "request_deadline_seconds": 180.0,
+    "postprocess": "upstream postprocess.document: _clean_truncated_repeats + postprocess_e2e_markdown(convert_otsl=True); scoring strips declared markup (metrics.markup_strip: HTML tags, markdown heading and bold markers)"
+   },
+   "sha256": "4d8a0ffa595fca1858b1f771aa96bd7ebeb18695392722f4d279762d307ce395"
+  }
+ ],
+ "x1_status": {
+  "status": "resource_blocked",
+  "attempt1": "run under the pre-fix toolchain; cap 1.142 GiB vs measured fixed cost 1.33 GiB; MemoryError at load (kept, disclosed)",
+  "attempt2": "fixed toolchain; cap 1.602 GiB; model loaded (mapped) in 97.3 s; page 1 generate failed with an allocator RuntimeError; page 2 crashed with a native access violation at 106.5 s wall. The recorded job peak (1.753 GiB) exceeded the recorded cap, so the Job Object bound did not hold as expected; flagged for ROOT.",
+  "quality_claim": null
+ }
+}

@@ -86,3 +86,30 @@ handle and a cap over total owned-job commit (at least as strict as one model
 process). Linux memory observations come from `/proc/meminfo`; absent values
 stay null and observations do not imply supported enforcement. Fake-backend
 CI tests remain portable; the actual Job allocation test is Windows-only.
+## R1 campaign recovery (ROOT R6 correction)
+
+`campaign init` creates one finite ledger (0–1800 seconds). Reuse that ledger
+and the explicit `--cache-dir` for every resumed invocation; never change the
+campaign ID or delete accounting to escape prior work. In a source checkout,
+put `src` on `PYTHONPATH` so the shared OS mutex infrastructure is available.
+
+Inference starts only after a short transaction reloads the current balance
+and durably reserves work. It runs outside the mutex. A failed/crashed request
+keeps its hold. The real X1/R0 routes read captured cache outputs first, even
+with zero balance; missing pages remain explicit `not_run` rows. X1 batches
+only uncached pages with one model load. Captures retain original measured
+time and actual effective deadline; cache reuse is not a zero-time benchmark.
+
+The same cache stores a small completion marker before ledger settlement, so
+death after capture can recover accounting without another model call. A
+missing marker/output stays unknown instead of causing silent re-inference.
+Actual measured overruns are recorded rather than clipped and make the batch
+`partial`. Empty/fully recorded old ledgers can migrate in place. Observed
+zero-second real-inference rows with unknown cost block new allocation, while
+cache remains readable; this is a resource fact, not a manual approval.
+
+Historical R1 outputs/ledger/review remain unchanged. Their recorded charges
+contain both unknown original R0 work and over-counted never-started work;
+the new transaction code does not retroactively prove the old 1800-second
+bound or accept the experimental model for production.
+

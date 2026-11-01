@@ -21,7 +21,47 @@ def render_pages(manifest_path: str | Path, out_dir: str | Path) -> list[dict]:
     out_dir.mkdir(parents=True, exist_ok=True)
     docs: dict[str, object] = {}
     records = []
-    scale = manifest["render"]["draw_scale"]
+    render = manifest["render"]
+    dpi = render.get("dpi", 200)
+    scale = render.get("draw_scale") or ((dpi / 72) if isinstance(dpi, (int, float)) else 0.0)
+    if "documents" not in manifest:
+        # R1 manifest layout: every page carries its own absolute source path and
+        # PDF page index.  Same renderer, same DPI, same PNG bytes rule.
+        for page in manifest["pages"]:
+            if not page.get("pdf"):
+                # Declared synthetic fixture: its own PNG bytes are the artifact;
+                # verify the recorded SHA instead of re-rendering anything.
+                existing = Path(page["png"])
+                digest = hashlib.sha256(existing.read_bytes()).hexdigest()
+                if digest != page["png_sha256"]:
+                    raise RuntimeError(
+                        f"fixture sha mismatch for {page['page_id']}: "
+                        f"{digest} != {page['png_sha256']}")
+                records.append({
+                    "page_id": page["page_id"], "png": str(existing),
+                    "sha256": digest, "px": page.get("png_px"),
+                })
+                continue
+            pdf = docs.get(page["pdf"])
+            if pdf is None:
+                import pypdfium2 as pdfium
+
+                pdf = pdfium.PdfDocument(page["pdf"])
+                docs[page["pdf"]] = pdf
+            image = pdf[page["pdf_page_index"]].render(scale=scale).to_pil().convert("RGB")
+            target = out_dir / f"{page['page_id']}.png"
+            image.save(target)
+            digest = hashlib.sha256(target.read_bytes()).hexdigest()
+            if page.get("png_sha256") and digest != page["png_sha256"]:
+                raise RuntimeError(
+                    f"render mismatch for {page['page_id']}: {digest} != {page['png_sha256']}")
+            records.append({
+                "page_id": page["page_id"], "png": str(target), "sha256": digest,
+                "px": list(image.size),
+            })
+        for pdf in docs.values():
+            pdf.close()
+        return records
     for page in manifest["pages"]:
         doc = manifest["documents"][page["doc"]]
         key = page["doc"]
