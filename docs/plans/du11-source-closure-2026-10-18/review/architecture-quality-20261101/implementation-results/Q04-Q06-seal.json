@@ -1,0 +1,67 @@
+{
+  "schema_version": "implementation-author-seal/1",
+  "scope": [
+    "Q04",
+    "Q06"
+  ],
+  "files": [
+    {
+      "path": "src/company_wiki/automation/migrations.py",
+      "sha256": "bd582c7e94ab85db7476a75ce278daae39116d66f566140e56b59f34d84aea2b",
+      "bytes": 36494
+    },
+    {
+      "path": "src/company_wiki/automation/narrative_run_store.py",
+      "sha256": "113dd88839c1531fc15f39d962c7089b20ed4890622609649eefccc9cee9224a",
+      "bytes": 69842
+    },
+    {
+      "path": "src/company_wiki/automation/narrative_batch.py",
+      "sha256": "2cf58135475c815e47b6072591df5b546e35f098a0229e175bc26c274b742630",
+      "bytes": 110892
+    },
+    {
+      "path": "src/company_wiki/automation/narrative_worker_factory.py",
+      "sha256": "52365927ef03ea107426fd5bcfe5738c0812139a2132a661a3147a20c6a4cec6",
+      "bytes": 21642
+    },
+    {
+      "path": "src/company_wiki/source_catalog/narrative_artifact_store.py",
+      "sha256": "84baf345ccba31e34857c0be31a4354f8eab714a1e0f987e9663ef9353b8f03d",
+      "bytes": 42028
+    },
+    {
+      "path": "tests/unit/test_narrative_storage_ownership.py",
+      "sha256": "6a4e750749c3db454a924337e08d4b08c7a6aa7615f894d4cd5e602b6fe2f17a",
+      "bytes": 17424
+    },
+    {
+      "path": "tests/unit/test_narrative_generation.py",
+      "sha256": "9eeff81ab607ff42dc1a47f62111c39929b68aaedffb3532b763a5deec6fe556",
+      "bytes": 9986
+    },
+    {
+      "path": "tests/unit/test_automation_migrations.py",
+      "sha256": "1c6a9e21cccbdd310ce2b14ea93e9dd01d1ac44f6e9fab5db08ef48f2c56555b",
+      "bytes": 35266
+    },
+    {
+      "path": "tests/unit/test_automation_migrations_v2.py",
+      "sha256": "9e92a58704c7e1a906cb8ab4ea1c719e84e33c49ca9b258abbdbc284d0a5b557",
+      "bytes": 8981
+    },
+    {
+      "path": "tests/unit/test_automation_migrations_v3.py",
+      "sha256": "78a646dc75ef5f2edfb804e3eed2d1fd5ece66bb4827c82ad467aa5c5103c2ff",
+      "bytes": 4210
+    },
+    {
+      "path": "tests/support/official_json_batch_fixture.py",
+      "sha256": "c85839c3ddfeb4edb620bcee581623e3b676e6fb1df8a8b121025ccf2ca7e8d9",
+      "bytes": 19504
+    }
+  ],
+  "status": "AUTHOR_REVERIFIED_READY_FOR_B_REVIEW",
+  "revision": "R2_after_independent_concurrency_findings",
+  "preserved_previous_seal": "Q04-Q06-seal-r1.json"
+}

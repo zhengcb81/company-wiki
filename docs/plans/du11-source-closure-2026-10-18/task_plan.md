@@ -1,23 +1,23 @@
 # 主线剩余实施计划
 
-当前状态只看[CURRENT_STATUS](CURRENT_STATUS.md)/json；全目标与固定清单看[MAINLINE_LOOP_GOAL](MAINLINE_LOOP_GOAL.md)，历史看[HISTORY](HISTORY.md)。当前按用户要求暂停，不用下方计划推定已恢复。
+**当前暂停：本轮候选小域独审通过，但完整CI63失败，未验收；已保留独立远端分支，稳定master正常revert。** 唯一状态看[CURRENT_STATUS](CURRENT_STATUS.md)/json，恢复看[HANDOFF](HANDOFF.md)。
 
 ## Next Step
 
-用户明确恢复后，先读AUDIT同run/remediation/r1-remediation-04/implementation.md与六issue完整映射；从来源遗漏/跨主体context的共因RED开始，在所属责任层修复，并合并原第7/8步ghost-formula、期间补集及记录质量责任。关键节点独审后才开原公司新attempt，复用合格原件/缓存、按实际改变决定是否需要一次新摘要；不写封存R4、不从零重复已通过计算、不扩施工包或新公司。
+用户恢复后从最新master建立隔离修复branch，先正常revert安全隔离提交dbfec3beb0948006475701e2131c4d95e0586556以重施候选（不得在master直接重施），按CWP-failed-CI.md先修整合回归的共用根因。受影响快速测试/独立大节点审查和PR完整CI绿后并线，再修note结构并做最终H1/新摘要/恢复/RF验收。当前不执行。
 
 ## P0 — 已完成的CI根修
 
 compact-frontier/lookahead、消费者和Windows嵌套夹具已根修、独审、正常发布及精确CI绿。保持轻量pre-commit/有界pre-push；仅新行为或失败需要新增回归，不重跑超时整仓或删重要断言换绿。
 
-## 全模块代码质量补充 — 审查完成，整改待恢复
+## 全模块代码质量整改 — 候选全域CI失败，隔离返修待恢复
 
 [2026-11-01审查](review/architecture-quality-20261101/README.md)和[实施细则](review/architecture-quality-20261101/implementation.md)是本计划质量责任的补充，不另立目标。408个源文件结构清单＋关键链详读＋三独立分工，14项归并（1P1/8P2/5P3）；不是逐行全仓功能验收。
 
 - 先在原P3来源修复中合并Q01陌生业务准入、Q02阅读recipe/缓存指纹，沿原R4 source owner根修，不加公司词库/额度。
 - 存储查询、预算归属、CAS/legacy工具、跨层合同和边界测试按细则B；StockWiki输出流限额归其transport，CWP不跨层接管实现。
 - 旧显式dry-shadow两轮/迁移CLI和无效helper清理，检查聚合到事实owner；必要身份/原文字节/as-of/预算/恢复仍保留。
-- 只设A/B/C集中工程审查，受影响快速测试和原主线真实E2E；P3维护债不变成新的逐项许可或公司循环前置关卡。当前均OPEN、未改产品/配置/原件。
+- 只设A/B/C集中工程审查，受影响快速测试和原主线真实E2E；P3维护债不变成新的逐项许可或公司循环前置关卡。本轮Q01–Q14候选已实施/处置，小域集中独审通过，但完整CI63失败，整体验收重开；当前master未采用该候选。恢复先按CWP-failed-CI.md在隔离重施分支修共因并通过PR全域CI，再做结构与C真实验收。原件/生产配置未改。
 
 ## P1/P2 — 已完成的有界摘要与真实采用
 
@@ -26,7 +26,7 @@ compact-frontier/lookahead、消费者和Windows嵌套夹具已根修、独审�
 - 配置/终态和partial-cache根修已发布：同canonical source-select端口、每文档一次确定性重选证明等价；失败/unavailable不成为付费许可，旧partial/账/paid pin归属不改。
 - 来源measurement、COMPOSITION范围与算术footnote共因、RF长卡证据合同已发布有界通过。当前局部新缺口另行修，不重复施工已关闭成果。
 
-## P3 — R4四审完成，内部修复尚未实施
+## P3 — R4四审完成，候选源层工程隔离，真实复验与其他共因OPEN
 
 R4主/五压力/报告/snapshot和四审已封存。73检查、6P2，无新增已证实P0/P1；每项具体证据、根因确认程度、TDD命令/接口/失败清理/兼容与恢复在AUDIT同run/remediation/r1-remediation-04/implementation.md。它续接W08–W12，不是新外包卡。
 

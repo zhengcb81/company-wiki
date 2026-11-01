@@ -1,0 +1,67 @@
+{
+  "schema_version": "q01-rework-r5-evidence/1",
+  "status": "CWP_READY_ROOT_REVIEW_AND_RF_SYNC_PENDING",
+  "created_at_utc": "2026-11-01T11:48:40.165157+00:00",
+  "previous_A_status": "R4_BOUNDED_PASS_INTEGRATION_REOPENED_AT_PUBLIC_HANDLER",
+  "files": {
+    "src/company_wiki/document_understanding/reading_context_contract.py": {
+      "sha256": "9e4200cd200fb468565f77d03a20d0bc8836b3ab387f46b67ef3d2d4faa0f5e9",
+      "bytes": 2190
+    },
+    "src/company_wiki/automation/narrative_contracts.py": {
+      "sha256": "eff83eca08475253051e5cf8973a0e75d6cba3a693e3479d12ba14c94127c0c8",
+      "bytes": 104689
+    },
+    "src/company_wiki/source_catalog/narrative_reading.py": {
+      "sha256": "38d2259bedc53a7227cdbc4f8fd3fe380d15ce891175784037242994d00e8152",
+      "bytes": 78086
+    },
+    "src/company_wiki/source_catalog/narrative_decision_inventory.py": {
+      "sha256": "25b5826cdc5f482aaa621c6c2d68b7c3a6fd2013a57eea667a1836c2a9511b28",
+      "bytes": 26592
+    },
+    "tests/integration/test_source_processing_handler_wire.py": {
+      "sha256": "e43a4b30c0e91fa2fc129f02562ad115516ef893709507d6257f0851ffc680e5",
+      "bytes": 5077
+    }
+  },
+  "feature": "reading-context-wire/1.1",
+  "context_schema": "du-production-reading/4",
+  "legacy_optional_absence_preserved": true,
+  "golden": {
+    "path": "docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\CWP-handler-processing-golden-r5.json",
+    "sha256": "0bec092a852adacdbacf93806ff3ebf540925cd48c67e35d2acdefccdf9781ae",
+    "bytes": 67411,
+    "cases": [
+      "complete",
+      "deferred"
+    ],
+    "is_model_summary_bundle": false
+  },
+  "tests": {
+    "red_failed": 2,
+    "red_seconds": 14.26,
+    "final_passed": 18,
+    "final_failed": 0,
+    "final_seconds": 24.95
+  },
+  "static": {
+    "ruff_four_sources_and_test": "PASS",
+    "mypy_four_sources": "PASS",
+    "diff_check": "PASS"
+  },
+  "external": {
+    "RF_strict_contract_sync": "ROOT_ASSIGNED_RECTIFY_RECIPE",
+    "CWP_source_export_v2_changes_required": false,
+    "CWP_narrative_bundle_uses_same_validator": true
+  },
+  "scope": {
+    "production_modified": false,
+    "paid_model_posts": 0,
+    "supplier_requests": 0,
+    "real_H1_rerun": false,
+    "full_88_or_100_suite_rerun": false,
+    "RF_files_modified_by_this_lane": false,
+    "git_index_modified_by_this_lane": false
+  }
+}

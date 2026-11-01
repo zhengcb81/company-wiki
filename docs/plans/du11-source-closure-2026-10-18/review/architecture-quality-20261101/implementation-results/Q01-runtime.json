@@ -1,0 +1,19 @@
+{
+  "cold_two_languages_seconds": 7.131536700006109,
+  "rss_before_bytes": 61534208,
+  "rss_after_bytes": 334413824,
+  "rss_delta_bytes": 272879616,
+  "warm_two_clauses_median_seconds": 0.0005578000054811127,
+  "warm_two_clauses_max_seconds": 0.0016139999934239313,
+  "resource_bytes": 10775669,
+  "scope_limits": {
+    "chars": 4096,
+    "tokens": 1024,
+    "work_per_char": 32
+  },
+  "status": [
+    "independent",
+    "independent"
+  ],
+  "benchmark_is_diagnostic_not_timing_gate": true
+}

@@ -1,0 +1,15 @@
+{
+  "checks": [
+    "schema1: baseline legacy accepted, absent field not defaulted; new field rejected",
+    "schema2: baseline legacy accepted, absent field not defaulted; new field rejected",
+    "schema3: baseline legacy accepted, absent field not defaulted; new field rejected",
+    "schema4 unknown field rejected",
+    "complete: actual CWP context/spans pass RF decoder unchanged with correct completion",
+    "deferred: actual CWP context/spans pass RF decoder unchanged with correct completion"
+  ],
+  "golden_sha256": "0bec092a852adacdbacf93806ff3ebf540925cd48c67e35d2acdefccdf9781ae",
+  "golden_bytes": 67411,
+  "RF_subset_sha256": "d37d92fada4648d4636850c39267676548fd42b01aa39281c2dd55ba8466866c",
+  "RF_subset_bytes": 15153,
+  "subset_provenance_verified": true
+}

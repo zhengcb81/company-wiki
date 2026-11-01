@@ -1,0 +1,29 @@
+{
+  "stockwiki/_source_reader_v2_transport.py": {
+    "current_sha256": "a3888360bc064ca2b1312a652e4084ed5c1f421948603117c990d4880263514c",
+    "sealed_sha256": "c58137785e1da63ea8da03c147a93bb41c2d1b51cf5c66348a6e3896e014dcce",
+    "committed_sha256": "c58137785e1da63ea8da03c147a93bb41c2d1b51cf5c66348a6e3896e014dcce",
+    "equal_raw": false,
+    "equal_lf_normalized": true,
+    "current_crlf": 212,
+    "committed_crlf": 0
+  },
+  "tests/test_source_export_v2_bounded_transport.py": {
+    "current_sha256": "7c10ded092fcaf772201b5eccbc302afcc1f3869cfead0ccad09c435461a378c",
+    "sealed_sha256": "7c10ded092fcaf772201b5eccbc302afcc1f3869cfead0ccad09c435461a378c",
+    "committed_sha256": "7c10ded092fcaf772201b5eccbc302afcc1f3869cfead0ccad09c435461a378c",
+    "equal_raw": true,
+    "equal_lf_normalized": true,
+    "current_crlf": 0,
+    "committed_crlf": 0
+  },
+  "scripts/checks.py": {
+    "current_sha256": "513f75352843af788c0f4163ed7112023f4ff91d0b02ca6fc7061444011da526",
+    "sealed_sha256": "0335c9d3e694ffdcf8bd08b6da2e65f7616dd175cc085a3a641df13fdbe32c97",
+    "committed_sha256": "0335c9d3e694ffdcf8bd08b6da2e65f7616dd175cc085a3a641df13fdbe32c97",
+    "equal_raw": false,
+    "equal_lf_normalized": true,
+    "current_crlf": 264,
+    "committed_crlf": 0
+  }
+}

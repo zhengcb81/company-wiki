@@ -1,32 +1,33 @@
 {
   "schema_version": "company-wiki-current-plan-status/2",
   "as_of_date": "2026-11-01",
-  "observed_at_utc": "2026-11-01T09:32:13.514125+00:00",
+  "observed_at_utc": "2026-11-01T12:24:51.646890+00:00",
   "canonical_entry": "CURRENT_STATUS.md",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
-  "project_status": "PAUSED_AFTER_R4_FOUR_REVIEWS_AND_COMMON_ROOT_PWF",
-  "scope_this_update": "Read-only architecture/code-quality audit and PWF alignment; implementation and company loop remain paused",
-  "last_code_commit": "7e10973e65517ce5a1b6cccc1c427ff4f9a0ecde",
+  "project_status": "PAUSED_CANDIDATE_REJECTED_STABLE_MAIN_RESTORED",
+  "scope_this_update": "Preserve unaccepted candidate branch; normal revert returns stable master; keep green RF/Q09; finish records then pause",
+  "last_code_commit": "dbfec3beb0948006475701e2131c4d95e0586556",
   "verified_publication_before_docs": {
     "local_branch": "master",
-    "local_and_remote_head": "7e10973e65517ce5a1b6cccc1c427ff4f9a0ecde",
-    "note": "Source runtime exact CI green; following PWF-only commits do not imply another runtime CI."
+    "local_and_remote_head": "dbfec3beb0948006475701e2131c4d95e0586556",
+    "note": "Stable revert normally pushed; final documentation commits do not change source behavior."
   },
   "code_ci": {
-    "id": 41279280653,
-    "head_sha": "7e10973e65517ce5a1b6cccc1c427ff4f9a0ecde",
-    "status": "completed",
-    "conclusion": "success",
-    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41279280653",
-    "normal_pre_push_passed": 1867,
-    "normal_pre_push_seconds": 48.92
+    "id": 41306232306,
+    "name": "CI",
+    "head_sha": "dbfec3beb0948006475701e2131c4d95e0586556",
+    "status": "in_progress",
+    "conclusion": null,
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41306232306",
+    "created_at": "2026-11-01T12:23:05Z",
+    "updated_at": "2026-11-01T12:23:09Z"
   },
   "native_goal": {
     "observed_status": "paused",
-    "observed_via": "get_goal confirmed after user goal-status pause",
+    "observed_via": "get_goal on current closeout; explicit user pause",
     "objective_budget_text": "legacy2M tokens/$20; not runtime policy",
-    "note": "User authorized only finishing the current review/diagnosis node then pausing. No replacement goal or new company. Runtime budget config10M/$20."
+    "note": "User requests pause after finishing current engineering/wire closeout; whole goal incomplete; runtime config10M/$20 unchanged."
   },
   "runtime_policy": {
     "budget_owner": "config/resource_budget.yaml",
@@ -45,7 +46,7 @@
     }
   },
   "m8_source_engineering": {
-    "status": "CURRENT_BOUNDED_SOURCE_REVIEW_EXACT_CI_PASS_FULL_COMPANY_OPEN",
+    "status": "HISTORICAL_BOUNDED_PASS_NEW_RUNTIME_C_ACCEPTANCE_OPEN",
     "independent_open_at_acceptance": 0,
     "source_tests": 634,
     "independent_tests": 12,
@@ -67,7 +68,7 @@
   "existing_capabilities": {
     "storage_virtualization": "IMPLEMENTED; no new storage-layer rebuild planned",
     "configured_worker_budget_recovery": "IMPLEMENTED; current W12 H1 real summary, exact same/cross-run recovery bounded PASS; full-company review OPEN",
-    "gate_simplification": "MAJOR_ENGINEERING_COMPLETE; normal steady flow has no per-material approval; legacy explicit dry-shadow/activation CLI and repeated checks remain Q14/Q11 audit cleanup",
+    "gate_simplification": "Prior major simplification remains in stable master; Q05/Q07/Q08/Q13/Q14 extra cleanup is in unaccepted isolated candidate, not current stable code. No per-material manual approval reintroduced.",
     "m6_real_summary_recovery_rf": "LOCAL_HISTORICAL_ASOF_NODE_PASS; not currentM8/fullcompany acceptance",
     "m6_evidence": "review/source-information-20261030/description-final/m6-source-evidence-2/README.md"
   },
@@ -79,21 +80,21 @@
     },
     {
       "id": "P1",
-      "status": "CURRENT_TWO_SOURCE_BOUNDED_REVIEW_AND_EXACT_CI_PASS_FULL_SOURCE_PARTIAL",
+      "status": "HISTORICAL_BOUNDED_PASS_NEW_RUNTIME_C_ACCEPTANCE_OPEN",
       "task": "Current Huali15/12atoms and Berkshire73/10atoms; actual activation/same/cross cache PASS;15Berkshire unprocessed and full-source partial remain explicit"
     },
     {
       "id": "P2",
-      "status": "CURRENT_V6_BOUNDED_ENGINEERING_REVIEW_AND_RF_EXACT_CI_PASS_COMPANY_RESEARCH_OPEN",
+      "status": "HISTORICAL_BOUNDED_PASS_NEW_RUNTIME_C_ACCEPTANCE_OPEN",
       "task": "Same new artifact actually consumed by RF native parameters/formula"
     },
     {
       "id": "P3",
-      "status": "R4_FOUR_REVIEWS_AND_INTERNAL_PWF_COMPLETE_REMEDIATION_AND_COMPANY_QUALITY_OPEN_PAUSED",
+      "status": "R4_FOUR_REVIEWS_ENGINEERING_PARTLY_REPAIRED_FULL_COMPANY_OPEN_PAUSED",
       "task": "W12 original-company rerun, new-company generalization, fixed8company fullaudit/skillimprovement and finalclean streak"
     }
   ],
-  "next_action": "用户明确恢复后，先读AUDIT同run/remediation/r1-remediation-04/implementation.md与六issue完整映射；从来源遗漏/跨主体context的共因RED开始，在所属责任层修复，并合并原第7/8步ghost-formula、期间补集及记录质量责任。关键节点独审后才开原公司新attempt，复用合格原件/缓存、按实际改变决定是否需要一次新摘要；不写封存R4、不从零重复已通过计算、不扩施工包或新公司。 同时读取review/architecture-quality-20261101/implementation.md，将Q01/Q02并入同一来源RED；其余owner整改不增加逐项前置许可或新外包。",
+  "next_action": "用户恢复后从最新master建立隔离修复branch，先正常revert安全隔离提交dbfec3beb0948006475701e2131c4d95e0586556以重施候选（不得在master直接重施），按CWP-failed-CI.md先修整合回归的共用根因。受影响快速测试/独立大节点审查和PR完整CI绿后并线，再修note结构并做最终H1/新摘要/恢复/RF验收。当前不执行。",
   "package_status_registry": "PACKAGE_STATUS.json",
   "handoff": "HANDOFF.md",
   "goal_definition": "MAINLINE_LOOP_GOAL.md",
@@ -111,7 +112,7 @@
     "Berkshire15unprocessed explicitly retained; full-source/long-frontier generalization remains partial,10required DEV business atoms now present",
     "P3 W12 company rerun, latest communications/demand/competition/scenario calibration, US regulatoryPDF/HK/US_RPO and genuinely unexposed holdouts"
   ],
-  "execution_mode": "paused_after_bounded_review_node",
+  "execution_mode": "paused_after_safe_isolation",
   "p0_repair": {
     "status": "PUBLISHED_EXACT_CI_PASS",
     "evidence": "review/mainline-closeout-20261031/p0/README.md",
@@ -137,7 +138,7 @@
     "local_reproduction": "3 failed in1.72s",
     "finding": "Fixed work limits now stop before lookahead; compact frontier0 covers all units. Existing assertion requires explicit deferred-ID examples. No windows/standalone released in observed cases; repair/verify representation and real-consumer contract before changing assertion."
   },
-  "last_test_commit": "c92aa4f2a978c4068ebbcd3cc9da7488a00c361b",
+  "last_test_commit": "6668bc978d3ea2217a9aff30be69bde456894c04",
   "p1_first_attempt": {
     "run_id": "phaseC-090-90105df58fd7",
     "status": "PRE_RESERVATION_BLOCKED",
@@ -753,28 +754,35 @@
     }
   },
   "current_code_publication": {
-    "head_sha": "7e10973e65517ce5a1b6cccc1c427ff4f9a0ecde",
-    "commit_hooks": "passed",
+    "head_sha": "dbfec3beb0948006475701e2131c4d95e0586556",
+    "normal_commit": true,
     "normal_push": "success",
-    "exact_CI": "success",
-    "current_verified_green_CI": {
-      "id": 41279280653,
-      "head_sha": "7e10973e65517ce5a1b6cccc1c427ff4f9a0ecde",
-      "status": "completed",
-      "conclusion": "success",
-      "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41279280653",
-      "normal_pre_push_passed": 1867,
-      "normal_pre_push_seconds": 48.92
+    "restores_source_tree": "1909286a",
+    "candidate_isolated": true,
+    "exact_CI": {
+      "id": 41306232306,
+      "name": "CI",
+      "head_sha": "dbfec3beb0948006475701e2131c4d95e0586556",
+      "status": "in_progress",
+      "conclusion": null,
+      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41306232306",
+      "created_at": "2026-11-01T12:23:05Z",
+      "updated_at": "2026-11-01T12:23:09Z"
+    },
+    "normal_pre_push": {
+      "passed": 1091,
+      "seconds": 84.93,
+      "total_push_seconds": 108.015
     }
   },
   "previous_verified_code_ci": {
-    "id": 41272576090,
-    "head_sha": "c405848ad1ddba1ec0ded4ed75a7d2cdc5c8314e",
+    "id": 41279280653,
+    "head_sha": "7e10973e65517ce5a1b6cccc1c427ff4f9a0ecde",
     "status": "completed",
     "conclusion": "success",
-    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41272576090",
-    "normal_pre_push_passed": 782,
-    "normal_pre_push_seconds": 114.44
+    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41279280653",
+    "normal_pre_push_passed": 1867,
+    "normal_pre_push_seconds": 48.92
   },
   "p3_cache_reselection": {
     "status": "PUBLISHED_EXACT_CI_GREEN",
@@ -1103,70 +1111,84 @@
     }
   },
   "RF_current_code_publication": {
-    "head_sha": "8eb8fe0817e3c619faae2253c69b30e707d38f7e",
+    "head_sha": "957c6283d3381d23c39515afd3a09147d8201c7b",
     "branch": "main",
     "normal_commit": true,
     "normal_push": true,
     "exact_CI": {
-      "head_sha": "8eb8fe0817e3c619faae2253c69b30e707d38f7e",
-      "id": 41282340171,
+      "id": 41304681319,
+      "name": "quality",
+      "head_sha": "957c6283d3381d23c39515afd3a09147d8201c7b",
       "status": "completed",
       "conclusion": "success",
-      "url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/41282340171",
-      "normal_pre_push_passed": 690,
-      "normal_pre_push_skipped": 1,
-      "normal_pre_push_subtests": 36,
-      "normal_pre_push_seconds": 44.89
+      "html_url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/41304681319",
+      "created_at": "2026-11-01T12:03:58Z",
+      "updated_at": "2026-11-01T12:04:54Z"
+    },
+    "normal_pre_push": {
+      "passed": 690,
+      "skipped": 1,
+      "subtests": 36,
+      "seconds": 101.79
     },
     "selected_deployment": {
-      "schema": "rf-selected-installation-native-proof/1",
-      "logical_entries": 3,
-      "physical_targets": 2,
-      "selected_files": [
-        "scripts/contracts/document.py",
-        "scripts/narrative_summary_provenance.py",
-        "references/input-construction.md"
-      ],
-      "written_physical_files": 6,
-      "second_apply_writes": 0,
-      "fresh_processes": [
+      "schema_version": "rf-wire-r5-publication/1",
+      "commit": "957c6283d3381d23c39515afd3a09147d8201c7b",
+      "main_fast_forward": true,
+      "fresh_checks": [
         {
-          "entry": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
-          "native_validation": "PASS",
-          "adopted": 8,
-          "complete_519_retained": true,
-          "input_sha256": "22e23a23b0827b969ec30a23c8910608127e06f86de1fde9554996d5ff34d1cc",
-          "new_model_calls": 0
+          "logical": ".agents",
+          "physical_scripts": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts",
+          "schema": "rf-installed-wire-check/1",
+          "complete_and_deferred": true,
+          "runtime_sha256": "6ee455d2a8a4b48654c146a8f611ff2e2d8492c07c33630f9703ccfd584bfba7"
         },
         {
-          "entry": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast",
-          "native_validation": "PASS",
-          "adopted": 8,
-          "complete_519_retained": true,
-          "input_sha256": "22e23a23b0827b969ec30a23c8910608127e06f86de1fde9554996d5ff34d1cc",
-          "new_model_calls": 0
+          "logical": ".claude",
+          "physical_scripts": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts",
+          "schema": "rf-installed-wire-check/1",
+          "complete_and_deferred": true,
+          "runtime_sha256": "6ee455d2a8a4b48654c146a8f611ff2e2d8492c07c33630f9703ccfd584bfba7"
         },
         {
-          "entry": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast",
-          "native_validation": "PASS",
-          "adopted": 8,
-          "complete_519_retained": true,
-          "input_sha256": "22e23a23b0827b969ec30a23c8910608127e06f86de1fde9554996d5ff34d1cc",
-          "new_model_calls": 0
+          "logical": ".codex",
+          "physical_scripts": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts",
+          "schema": "rf-installed-wire-check/1",
+          "complete_and_deferred": true,
+          "runtime_sha256": "6ee455d2a8a4b48654c146a8f611ff2e2d8492c07c33630f9703ccfd584bfba7"
         }
       ],
-      "input_unchanged": true
+      "protected_wip_sha256_before": {
+        "daily_alert.jsonl": "8eaad095f964b3553df3e842a16383a50c87f540eeb2f7165072552f35e6b570",
+        "monthly_manifest.json": "56d630107429cbcb646a951306dd1ea445dd5b3146236f34d0e8df953c103b9a",
+        "weekly_alert.jsonl": "fc9ec2335b48d42921ca9c14c63363efca3b3096f967733e366f4dd463e4b7ed",
+        "weekly_manifest.json": "e2e57f28fec7477af06029adcf187468701ab0305024993bfb2953bbd43cc5c0"
+      },
+      "protected_wip_sha256_after": {
+        "daily_alert.jsonl": "8eaad095f964b3553df3e842a16383a50c87f540eeb2f7165072552f35e6b570",
+        "monthly_manifest.json": "56d630107429cbcb646a951306dd1ea445dd5b3146236f34d0e8df953c103b9a",
+        "weekly_alert.jsonl": "fc9ec2335b48d42921ca9c14c63363efca3b3096f967733e366f4dd463e4b7ed",
+        "weekly_manifest.json": "e2e57f28fec7477af06029adcf187468701ab0305024993bfb2953bbd43cc5c0"
+      },
+      "four_wip_unchanged": true,
+      "selected_runtime_sha256": "6ee455d2a8a4b48654c146a8f611ff2e2d8492c07c33630f9703ccfd584bfba7",
+      "written_physical": 2,
+      "repeat_written": 0,
+      "scope": "one runtime file only; no company/model execution",
+      "remote_ci": "not observed by this subtask",
+      "worktree_removed": true,
+      "merged_temporary_branch_removed": true
     }
   },
   "pending_common_root_followups": [
     {
       "owner": "CWP source-reading",
-      "status": "CONFIRMED_LOCAL_CONTENT_GAPS_NOT_IMPLEMENTED",
+      "status": "CANDIDATE_REPAIR_NOT_ACCEPTED_STABLE_MASTER_PRIOR_BEHAVIOR",
       "issue_refs": [
         "r1-remediation-04/storage/STORAGE-001",
         "r1-remediation-04/storage/STORAGE-002"
       ],
-      "issue": "Three operating capability units omitted before model; commitment contexts cross actor/note boundary. Exact code cause and TDD follow expert implementation.",
+      "issue": "p12 seen in pre-final candidate v1 only; candidate reverted on master after63 CI failures. Full integration repair first; note/context root confirmed not implemented; no new summary adoption acceptance.",
       "boundary": "Existing D&M/p14/519 fixes and eight actually adopted cards remain passed; no measured forecast loss claimed."
     },
     {
@@ -1324,9 +1346,8 @@
     "source_runtime": "55c29fe5f3a9554f883156e3a4232eece04bf581"
   },
   "architecture_quality_audit": {
-    "status": "AUDIT_COMPLETE_REMEDIATION_NOT_STARTED",
+    "status": "CANDIDATE_FULL_CI_FAILED_NOT_ACCEPTED_STABLE_MAIN_RESTORED_PAUSED",
     "date": "2026-11-01",
-    "source_head": "d38613bc926e6c95c9009971576af81978a59234",
     "evidence": "review/architecture-quality-20261101/README.md",
     "implementation": "review/architecture-quality-20261101/implementation.md",
     "coverage": "408 src Python AST inventory plus critical chains and 3 independent reviews; not every file functionally certified; sibling adapters only",
@@ -1335,7 +1356,7 @@
       "P2": 8,
       "P3": 5,
       "total": 14,
-      "all_remediation_open": true
+      "all_remediation_open": false
     },
     "priority": [
       "Q01 source-readable generalization with existing R4 source issues",
@@ -1344,15 +1365,102 @@
     ],
     "verified": "pure source admission/version probes; 20k query and prune AST probes; checker counterexamples; legacy --help; explicit dry-shadow gate",
     "not_run": [
-      "company workflow",
-      "real summary",
-      "production database",
-      "full suite",
-      "performance benchmark"
+      "final-R5 real H1 replay",
+      "new real summary/persistent cache recovery/RF adoption",
+      "new company loop",
+      "full suite"
     ],
     "new_model_posts": 0,
-    "downloads": 0,
+    "downloads": {
+      "original_documents": 0,
+      "public_language_resources_and_dependencies": "downloaded as reported"
+    },
     "production_changes": false,
-    "native_goal_resumed": false
+    "native_goal_resumed": false,
+    "all_changes_authorized": true,
+    "implementation_registry": "review/architecture-quality-20261101/implementation-results/STATUS.json",
+    "stockwiki_q09_master": "381811e53875a589618e726122267c3812983607",
+    "stockwiki_remote": "NOT_CONFIGURED_HISTORICAL",
+    "independent_wire": "review/architecture-quality-20261101/implementation-results/independent-wire-r5.md",
+    "real_source_result": "v1 pre-final12/12+111/111; v2 FAIL public contract; v3 NOT_RUN_USER_PAUSE",
+    "original_audit_source_head": "d38613bc926e6c95c9009971576af81978a59234",
+    "full_CI_failures": 63,
+    "full_CI_evidence": "review/architecture-quality-20261101/implementation-results/CWP-failed-CI.md",
+    "candidate_code_sha": "6668bc978d3ea2217a9aff30be69bde456894c04"
+  },
+  "RF_previous_code_publication": {
+    "head_sha": "8eb8fe0817e3c619faae2253c69b30e707d38f7e",
+    "branch": "main",
+    "normal_commit": true,
+    "normal_push": true,
+    "exact_CI": {
+      "head_sha": "8eb8fe0817e3c619faae2253c69b30e707d38f7e",
+      "id": 41282340171,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/41282340171",
+      "normal_pre_push_passed": 690,
+      "normal_pre_push_skipped": 1,
+      "normal_pre_push_subtests": 36,
+      "normal_pre_push_seconds": 44.89
+    },
+    "selected_deployment": {
+      "schema": "rf-selected-installation-native-proof/1",
+      "logical_entries": 3,
+      "physical_targets": 2,
+      "selected_files": [
+        "scripts/contracts/document.py",
+        "scripts/narrative_summary_provenance.py",
+        "references/input-construction.md"
+      ],
+      "written_physical_files": 6,
+      "second_apply_writes": 0,
+      "fresh_processes": [
+        {
+          "entry": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+          "native_validation": "PASS",
+          "adopted": 8,
+          "complete_519_retained": true,
+          "input_sha256": "22e23a23b0827b969ec30a23c8910608127e06f86de1fde9554996d5ff34d1cc",
+          "new_model_calls": 0
+        },
+        {
+          "entry": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast",
+          "native_validation": "PASS",
+          "adopted": 8,
+          "complete_519_retained": true,
+          "input_sha256": "22e23a23b0827b969ec30a23c8910608127e06f86de1fde9554996d5ff34d1cc",
+          "new_model_calls": 0
+        },
+        {
+          "entry": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast",
+          "native_validation": "PASS",
+          "adopted": 8,
+          "complete_519_retained": true,
+          "input_sha256": "22e23a23b0827b969ec30a23c8910608127e06f86de1fde9554996d5ff34d1cc",
+          "new_model_calls": 0
+        }
+      ],
+      "input_unchanged": true
+    }
+  },
+  "architecture_candidate": {
+    "branch": "codex/architecture-rectification-20261101",
+    "head_sha": "6668bc978d3ea2217a9aff30be69bde456894c04",
+    "normal_push": true,
+    "status": "FULL_CI_63_FAIL_NOT_ACCEPTED",
+    "failed_CI": {
+      "id": 41305132919,
+      "name": "CI",
+      "head_sha": "6668bc978d3ea2217a9aff30be69bde456894c04",
+      "status": "completed",
+      "conclusion": "failure",
+      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41305132919",
+      "created_at": "2026-11-01T12:09:40Z",
+      "updated_at": "2026-11-01T12:15:30Z"
+    },
+    "reverted_on_master": "dbfec3beb0948006475701e2131c4d95e0586556",
+    "stable_tree_equals": "1909286aa914eb734f28d3fb18acb4fd62ce9d49",
+    "reapply_instruction": "On new branch from latest master, git revert the safe-isolation commit; fix there; PR full CI before merge. Do not merely merge old candidate."
   }
 }

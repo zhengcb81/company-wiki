@@ -1,53 +1,41 @@
-# 当前项目状态 — 2026-11-01
+# 当前项目状态 — 2026-11-01，暂停
 
-**已完成手头的R4四路审查与共因实施计划节点，按用户要求暂停。整家公司质量和完整主线目标尚未完成。**
+**当前暂停。CWP本轮整改候选在完整CI出现63失败，尚未验收，不是已完成主线。候选已完整保存远端分支；master已正常revert回此前稳定实现。** 不继续展开返修、真实摘要或公司循环。
 
-2026-11-01 补充：按新请求完成[全模块代码质量审查](review/architecture-quality-20261101/README.md)，三路独审＋ROOT核对，归并14项（1P1/8P2/5P3），**均未实施**。当前共享引擎未查到真实公司/ticker/页码特判，但陌生业务准入、阅读指纹闭包、全库查询/预算、旧维护入口及边界测试仍需根修。门禁精简主工程已完成，旧显式dry-shadow/迁移控制面及重复校验仍有清理余项；正常steady复用不等人工签收。公司循环继续暂停，恢复按原R4来源修复合并[质量细则A](review/architecture-quality-20261101/implementation.md)，不另起循环/外包。
+唯一入口为本页及[机器状态](CURRENT_STATUS.json)；恢复看[HANDOFF](HANDOFF.md)，步骤看[task_plan](task_plan.md)，稳定目标看[MAINLINE_LOOP_GOAL](MAINLINE_LOOP_GOAL.md)。本轮最终边界见[收尾](review/architecture-quality-20261101/implementation-results/pause-closeout.md)，失败分组见[CI记录](review/architecture-quality-20261101/implementation-results/CWP-failed-CI.md)。原R4报告/封存不改。
 
-唯一入口为本页及[机器状态](CURRENT_STATUS.json)；接手看[HANDOFF](HANDOFF.md)，实施看[task_plan](task_plan.md)，全目标看[MAINLINE_LOOP_GOAL](MAINLINE_LOOP_GOAL.md)。[本节点收据](review/mainline-closeout-20261031/r4-review-closeout/README.md)提供四报告、封存及内部PWF入口。
+## 当前各仓真实状态
 
-| 节点 | 已完成 | 仍有边界 |
+| 仓库 | 当前结果 | 保留边界 |
 |---|---|---|
-| P0 CI | 原frontier/lookahead、版本合同及Windows夹具根修，代码精确CI成功 | pre-commit静态；pre-push为有界部分保护，不能保证全部CI问题提前捕获 |
-| P1 来源/摘要 | 华利15卡/12原子、Berkshire73卡/10原子；真实摘要、激活、同跨run恢复已独审 | /5是原文卡与advisory排名；Berkshire15项未处理，全文partial |
-| P2 实际采用 | 华利v6新artifact进入used参数/公式、报告和snapshot，45独立检查通过 | 有界历史IR工程算例，不代完整公司研究 |
-| P3 药明康德R4 | 新H1正式产物、恢复、8卡实际采用、主预测/五压力、报告快照及四审已完成；六issue已归因并有内部细则 | 来源局部问题与通用预检待修；经济区间/持续性、电话会和Q&A时点限制未闭合；不计clean |
+| CWP master | 安全隔离提交`dbfec3be`恢复与1909286a相同的源码/测试/依赖树；已master/origin同步，normal1091P/84.93s，精确CI41306232306当前运行中 | 当前整合CI不借旧绿代签；本轮整改不算已进入稳定主线 |
+| CWP整改候选 | `codex/architecture-rectification-20261101` / `6668bc97`已远端保存（runtime c97d4fbd） | 集中小域独审及正常pre-push971P，但完整CI41305132919 **63失败**；必须共因返修 |
+| RF main | `957c6283`已main/origin，精确[CI41304681319](https://github.com/zhengcb81/revenue-forecast/actions/runs/41304681319)成功 | 向后兼容的reading wire扩展；一个runtime同步2物理/3逻辑入口、repeat0/fresh进程通过，不代完整RF研究 |
+| StockWiki | Q09 transport流式限额/进程回收已并本地master381811e5 | 历史无remote，不冒称推送 |
 
-## 当前有效代码与精确CI
+所有本线agent均STOP，原生目标get_goal确认paused。CWP源码/测试无本线未提交改动；外来hook mode、RF四assurance WIP精确SHA和历史未跟踪产物保留。原件/生产配置/旧R3/R4不动。
 
-CWP运行 **7e10973e** 已master/origin发布，正常pre-push1867P/48.92s，[CI41279280653](https://github.com/zhengcb81/company-wiki/actions/runs/41279280653)成功。RF运行 **8eb8fe08** 已main/origin发布，normal690P/1skip/36subtests/44.89s，[CI41282340171](https://github.com/zhengcb81/revenue-forecast/actions/runs/41282340171)成功。RF两runtime＋说明已定点同步3逻辑/2物理入口、repeat0和3fresh真实8卡验证通过。本节点仅审查、归因和文档，不冒用旧绿替未实施修复签字。
+## 本轮做了什么、为何没有计完成
 
-来源measurement/cause分离、具体范围和逐clause财务footnote处理，见[p3-source-scope](review/mainline-closeout-20261031/p3-source-scope/README.md)。37新例、698相关例/28.88s；独审268例有重叠。D&M完整保留、p14两原段在519字native range内8成员精确对齐，112/16M不加额。旧ROOT只认独立span的误判保留；当前确认的p12遗漏是另一个实际缺口。
+14项审查已逐项形成候选修复/处置：通用EN/CN句法owner、语法与业务可读性分离、缺能力partial传播、阅读recipe实际依赖闭包、材料/准入阶段拆分、索引候选超集、每run空间增量与并发短锁、有界CAS、纯source Protocol、退役旧维护/迁移签收入口及AST边界检查。Q11实读接收SHA经独审确认保留，避免造可伪造trusted门。
 
-RF519字完整原文卡误走manual500限制已在证据owner根修，普通500保持，adopted完整proof复用既有128KiB字节界。配置/终态恢复与partial-cache共因也已独审发布；未知费用不消除、paid pin仍归原run。详细历史收据见[历史入口](HISTORY.md)及机器状态。
+这些代码集中域曾通过独审，R5实际CWP handler18P/RF32P和实际golden也通过。但完整unit发现旧消费者符号/版本断言及套话、财务/因果等负例回归，还有Linuxoffline运行失败；不能说“只是测试旧了”，原因需逐组确认。公开annotation只保留4096字的截断汇总，**不是63项完整诊断**。本地pre-push本就明确只覆盖选中范围，388已知文件deferred给CI，因此不是全域保证；集中审查覆盖不足的事实保留。
 
-## 本节点四路审查结论
+按用户收尾后暂停要求，本轮未展开大返修。两个候选commit完整保留，master用正常revert隔离，不丢代码成果、不留坏实现当稳定主线。恢复时需在隔离branch重施后修根因，用大节点PR CI验收，不给日常每commit增加全量测试或人工许可。
 
-| 角色 | 检查结果 | 保留问题 |
-|---|---|---|
-| storage | 18项：12PASS/4FAIL/2N/A；67卡语义已读 | 两项P2：p12三经营能力unit未选/送模/产卡；部分股东承诺context跨主体/备注串组。实际RF采用8卡通过，未测经济影响不猜金额 |
-| fetch | 17项：12PASS/2BLOCKED/2N/A/1NOT_RUN | 两项P2：ET不支持交易所；主办Q&A公布日/as-of可得性未知。原件保留待复验，F12没有伪签已恢复 |
-| process | 20项：16PASS/1FAIL/3N/A | 一项P2：scope描述残留R3；72实际argv/output均R4、金额影响0。2349＋131数学核对零差异，报告/snapshot一致 |
-| analyst | 18项：14PASS/3BLOCKED/1N/A | 一项P2：独立未来经营区间及延续性未验证。经营/时点桥及压力机制已改善，无新增已证实P0/P1；不能升级为经济验收 |
+候选离线语法资源10,775,669B，包内SHA/许可/固定版本，cold EN+CN7.13s、RSS增量约272.9MB，warm中位0.558ms；这些是候选实测成本，**当前稳定master不加载这套新增引擎**。候选本轮0新模型POST/0新原件下载，公共语言资源/依赖下载如实保留，生产16M work/112 spans未提高。
 
-共73检查、6个P2。原报告保留FAIL/BLOCKED；“审查节点完成”不表示“缺陷已修复”。记录工具一次540引用：517观察、23受单文件字节界限制、0mismatch；唯一scope gap就是PROCESS-001。角色已独立打开大文件并复算，不为消除诊断重复跑或抬上限。
+## 真实来源与原主线还剩什么
 
-四报告和专家内部PWF位于AUDIT同run的`reports/r1-remediation-04`、`diagnosis/r1-remediation-04`、`remediation/r1-remediation-04`。完整映射使用run/attempt/role/issue，不把R3同名问题或旧checkpoint当本轮结论。代码质量巡检与检测演进本次仅形成只读方案，尚未实施/部署/新attempt采用。
+- H1 current-v1较早候选37.394s观察12/12业务unit、111/111原生成员，仍预算partial，9context配对索引不足，不能签归属正确。
+- H1 current-v2在23.170s因公开合同unknown source_processing_complete失败，12/111/9均未观察。R5小域wire修复保存在candidate，**尚无最终版本H1-v3**，不能用旧数量签当前。
+- 跨备注根因已调查：收尾引号编号句误当标题、真正备注标题未识别造成上下文继承。尚未实施，详见[R4-context-investigation](review/architecture-quality-20261101/implementation-results/R4-context-investigation.md)。
+- 新版真实摘要、实际中断恢复、same/cross-run零追加、RF新产物采用及经济验收继续OPEN。其余五SourceRef更深检查点未因合成wire通过而关闭。
 
-## 封存、费用与恢复
+原P0旧CI根修、P1华利15卡/12原子与Berkshire73卡/10原子、P2华利v6参数/公式/报告/snapshot仍是有界历史成果，Berkshire15未处理和全文partial保留。药明康德R4四审73项=54PASS/5FAIL/5BLOCKED/8N/A/1NOT_RUN，六P2与ghost-formula、signed期间补集、记录/检测演进和独立经济范围仍按原映射整改。八家公司、药明合联/Snowflake泛化、连续三家clean及W21/US监管/HK/US_RPO/长文余项均未完成。
 
-R4 manifest **75f2871b27cb7afa64175a89137871eb7e6940445eaf9450b684d202bcb5c568**，585件/64240251逻辑B，ROOT一次全hash/size一致。active为authoring-v4/main-v4，15sources/174claims/186parameters/6streams/8SummaryUse；input rawSHA faa6cff9…5936、forecast05c4aa4c…a980、snapshote8cfae9a…af02。CAS在R4内，无原PDF/DB复制。execution_outcome=partial和artifact_completeness=complete分别指实际边界与记录，confidence0/low及54未校准cells不抬分。
+R4封存585件/64240251逻辑B、manifest75f2871b…c568、原报告不变；不写旧树。母账1965633tokens/762082microUSD估计、unknown8+prior7不变；本轮0新模型POST。预算以config/resource_budget.yaml实际10M/$20为准，公司150k/$1软目标。Dayu/IQS/Dashboard不动，不扩施工包。
 
-新H1 artifact229074dd/9f014cff…b2bd/485241B仅1MiMoPOST10236tokens/1885microUSD估计。真实prepared中断后恢复、same/cross-run max1均exact同artifact、0额外POST/费；原launcher/observer错误保留。本次四审/专家0新模型POST、0下载；母账1965633tokens/762082microUSD为估计非账单，unknown8＋prior7继续保留。配置累计10M/$20，公司150k/$1为软目标，不创建新账或许可。
+## 唯一下一步（当前不执行）
 
-as-of保持2026-10-21，原件实际读于Nov1，Oct26 Q3排除。新浪三表当前snapshot单位/PIT未知不回填；法院只证行为/时间，未知净暴露不编数。3新增官方源608016B/3HTTP/$0与既有原件均通过原owner，电话会unsupported不推成全球不存在，Q&A不改名电话会。
-
-审查员自有临时PNG已清，当前隔离原件、R3/R4封存及必要小证据为后续修复/复验保留，最终测试恢复未完成。历史ROOT清理量分别见机器状态收据，不重复累计；旧R3 54%相同内容只是逻辑重复观察，不冒已释放物理空间。本次不删原件或改生产配置。
-
-## 唯一下一步（须用户恢复）
-
-用户明确恢复后，先读AUDIT同run/remediation/r1-remediation-04/implementation.md与六issue完整映射；从来源遗漏/跨主体context的共因RED开始，在所属责任层修复，并合并原第7/8步ghost-formula、期间补集及记录质量责任。关键节点独审后才开原公司新attempt，复用合格原件/缓存、按实际改变决定是否需要一次新摘要；不写封存R4、不从零重复已通过计算、不扩施工包或新公司。
-
-本轮闭合后才继续药明合联/Snowflake泛化、固定八家及同有效版本连续三家clean；W21 canonicalC2、US监管/HK/US_RPO和长文余项仍按原责任。Dayu/IQS/Dashboard、RF四assurance外来WIP和CWP hook mode不动。不加人工许可/小节点门禁、不no-verify/reset/clean；不扩外包。原生目标paused，等待用户恢复。
-
-本次质量审查补充Q01/Q02与上述源层RED一起实施；其余按质量细则B/C在原owner收束，不以14项全部完成作为新许可门，不让纯P3清理阻塞有效复验。审查/诊断已完成不冒称修复或测试通过。
+用户恢复后从最新master建立隔离修复branch，先正常revert安全隔离提交dbfec3beb0948006475701e2131c4d95e0586556以重施候选（不得在master直接重施），按CWP-failed-CI.md先修整合回归的共用根因。受影响快速测试/独立大节点审查和PR完整CI绿后并线，再修note结构并做最终H1/新摘要/恢复/RF验收。当前不执行。

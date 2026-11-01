@@ -119,3 +119,15 @@ get_goal确认paused。R4 manifest75f2871b27cb7afa64175a89137871eb7e6940445eaf94
 ROOT一次记录诊断540refs：517observed/23单文件byte上限unverifiable/0mismatch，唯一scope差即PROCESS-001，非新数值故障，不抬限额重跑。原四报告/封存/费用保持；reviewer临时PNG已清，当前隔离原件与必要证据为复验保留，F12 deferred。母账1965633tokens/762082microUSD估计与unknown8+prior7不变。CURRENT_STATUS/HANDOFF/task_plan已消除“三审部分/fetch未启动/R4运行中”的过期当前状态；稳定目标/外包表未变化。用户恢复前不实施，原生目标paused。
 
 Audit本地归档提交8e8281c0e4a6d361485bad183c124e12e6459797：26个作者小报告/计划共593829逻辑B，原字节压缩100830B（不含PDF/数据库/供应商大响应）。Git文本换行会改变封存报告字节，已仅撤销本次暂存、保留原文件，以docs/reviews/r4-review-closeout-20261101下的原字节tar.gz及FILES清单正常提交；逐member只读SHA/size核对，无解压、覆盖或完整恢复演练。该仓无remote，不冒称已推送。
+
+
+## 2026-11-01T12:05:33.416094+00:00 — 本轮整改工程与真实验收分开收口
+
+Q01旧EN/CN词法旁路统一进离线通用grammar；R3独审仍发现缺资源的mixed段被financial-only吞掉，R4完成位沿prepared→admission→withheld/diagnostic/inventory明确partial。H1 current-v2又真正暴露公开合同unknown field，R5增加schema4可选strict bool与bounded source诊断，CWP真实handler18P、RF32P和legacy/actual golden独审通过；这揭示仅测私有selector不足，已在真正wire边界固化。Q02实际依赖闭包包含PDF观测与资源身份；Q03候选索引、Q04短锁原run增量账、Q06有界CAS及Q05/7/8/13/14旧门禁精简均已有集中独审；Q11接收字节SHA按公开不可信port边界保留。Q09 StockWiki381811e5本地主线，无remote不冒推送。
+
+H1 v1旧源码12/12、111/111并不代最终R5；v2公开handler失败23.170s保留。跨备注根因在structure标题/引号与note scope，尚未实施；当前暂停，不跑v3/真实摘要/缓存/RF。公共语法资源新增10,775,669B及实际cold/RSS成本已报告，本轮0新模型POST/0新原件下载，公共语言资源下载不抹去。暂存检查只规范四新Python EOF与非模型观察JSON CRLF，四模型资产原字节不变；该纯换行收尾与原独审SHA历史明确区分。
+
+
+## 2026-11-01T12:23:42.853327+00:00 — 完整CI否决候选，安全隔离后暂停
+
+此前小域GREEN/发布观察是时间快照，**不是最终整合验收**。CI41305132919完整unit63失败；公开注释4096字截断，log403不取缓存凭证。按用户暂停要求不展开新大返修，候选6668bc97正常推独立远端branch，master正常revertdbfec3be，src/tests/依赖/属性/旧工具与1909286a相同。RF957c6283精确CI绿及单runtime安装、StockWiki381811e5本地并线保留。恢复必须从最新master建branch并revert隔离commit重施候选，再按共因修整合回归/PR CI绿，不能简单merge旧已被revert的candidate。当前PWF/HANDOFF/台账已反映未验收与暂停，不再继续H1/摘要/模型/RF。

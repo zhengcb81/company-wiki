@@ -1,0 +1,78 @@
+{
+  "schema": "real-source-retained-receipts/1",
+  "files": [
+    {
+      "source_name": "h1-current-v1.json",
+      "stored_name": "h1-current-v1.json.gz",
+      "source_bytes": 36358,
+      "source_sha256": "245da7a23cd60873c78a8255d59812f476d29c12581b442a6d36bbe9ca3bf82e",
+      "stored_bytes": 6716,
+      "stored_sha256": "fb76b8c66a74c9d622035ddef3b1ea07f2127de0aa053e78b975cae8b822bc37"
+    },
+    {
+      "source_name": "h1-current-v1-observation-addendum.json",
+      "stored_name": "h1-current-v1-observation-addendum.json.gz",
+      "source_bytes": 11205,
+      "source_sha256": "4857f279ce2ebe1cc74de55355623d3c8bf774a9f36a2628fa7a1f0a77178c3e",
+      "stored_bytes": 2732,
+      "stored_sha256": "615540b05a3bd431e37fff58a5a401c10a48025247676c523d8969878f789989"
+    },
+    {
+      "source_name": "h1-current-v1-runtime-components.json",
+      "stored_name": "h1-current-v1-runtime-components.json.gz",
+      "source_bytes": 2157,
+      "source_sha256": "cad7b3ba8dcc87c3108a638f3bef59ecac6f479d4d6487cfc387e20141b017f3",
+      "stored_bytes": 891,
+      "stored_sha256": "00adaa19eaf98b21c1a3cdb73990391ef57d389db3af3d0fc8423dd9a0a5c161"
+    },
+    {
+      "source_name": "h1-current-v2.json",
+      "stored_name": "h1-current-v2.json.gz",
+      "source_bytes": 5668,
+      "source_sha256": "adc9bc37ac33a9d40175a4442d6661d3134699715d857127eee4ce5d1002fc89",
+      "stored_bytes": 1221,
+      "stored_sha256": "c1b3d27dbb9868cf93edf12927f3a2ac5cd8b541bface728b00e5d30e1a6ddae"
+    },
+    {
+      "source_name": "h1-current-v2-summary.json",
+      "stored_name": "h1-current-v2-summary.json.gz",
+      "source_bytes": 616,
+      "source_sha256": "de71406547c5be27340261f5933dfc056283f364b86f9ead85dc2039d2aa816f",
+      "stored_bytes": 425,
+      "stored_sha256": "601fa0a345a952fb979f6b881af9a1332dcc49c5c89623aa22922ab295edeabf"
+    },
+    {
+      "source_name": "h1-current-v2-inputs.json",
+      "stored_name": "h1-current-v2-inputs.json.gz",
+      "source_bytes": 1043,
+      "source_sha256": "a078d9daf4ea4f41efff6dabf1fc1155473835abbea1bd698ff6ab15dfb86ab3",
+      "stored_bytes": 521,
+      "stored_sha256": "de1eb1bfd66cdefe8392eeffc73c5a9b81e734589be0a4bda0a016c2ae999fb7"
+    },
+    {
+      "source_name": "h1-current-v2-cases-json.gz",
+      "stored_name": "h1-current-v2-cases-json.gz",
+      "source_bytes": 8451,
+      "source_sha256": "17bb71ca2963091798640d2436dec52c1bfc83efc036bb158d7bc6438b6d2349",
+      "stored_bytes": 8451,
+      "stored_sha256": "17bb71ca2963091798640d2436dec52c1bfc83efc036bb158d7bc6438b6d2349"
+    },
+    {
+      "source_name": "h1-current-v2-observation_checks-py.gz",
+      "stored_name": "h1-current-v2-observation_checks-py.gz",
+      "source_bytes": 1763,
+      "source_sha256": "4d250c0e5552bbafa3f2300ed15a5efa13dec3b466e6d5692af53d5a358e2f31",
+      "stored_bytes": 1763,
+      "stored_sha256": "4d250c0e5552bbafa3f2300ed15a5efa13dec3b466e6d5692af53d5a358e2f31"
+    },
+    {
+      "source_name": "h1-current-v2-run_source_case-py.gz",
+      "stored_name": "h1-current-v2-run_source_case-py.gz",
+      "source_bytes": 5575,
+      "source_sha256": "5a5e302ca8362475bbac494f01628a795fdef3d6decde137889a9babb3968a1b",
+      "stored_bytes": 5575,
+      "stored_sha256": "5a5e302ca8362475bbac494f01628a795fdef3d6decde137889a9babb3968a1b"
+    }
+  ],
+  "original_documents_or_databases_included": false
+}

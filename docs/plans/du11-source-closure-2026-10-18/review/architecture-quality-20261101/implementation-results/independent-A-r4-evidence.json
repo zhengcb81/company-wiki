@@ -1,0 +1,64 @@
+{
+  "schema": "independent-A-r4/1",
+  "status": "PASS_BOUNDED_ENGINEERING_NODE",
+  "observed_at_utc": "2026-11-01T11:34:14.490073+00:00",
+  "reviewed_files": {
+    "src/company_wiki/source_catalog/narrative_source_passage.py": {
+      "sha256": "3e82595d29ceb4a476eaf283f83b56fff406158025cb6dd35c444cf2fba20f87",
+      "bytes": 20366
+    },
+    "src/company_wiki/source_catalog/narrative_business_policy.py": {
+      "sha256": "19effc176fb8c939dba477e7d8f0e0937d458ab4cc8d87396c4c2693c709fc67",
+      "bytes": 72799
+    },
+    "src/company_wiki/source_catalog/narrative_reading.py": {
+      "sha256": "7ac957f65aab4f3f0948a9d1782d99e664a717e5a53be9868725a46e31b422e9",
+      "bytes": 77866
+    },
+    "src/company_wiki/source_catalog/narrative_reading_admission.py": {
+      "sha256": "b52b3e146d266436a583cca3c802e539cdd2431b56a2ce29548409713a16817d",
+      "bytes": 7538
+    },
+    "tests/unit/du11_production/test_source_readability_deferred_selection.py": {
+      "sha256": "5347f747e12836165f89f366435a1eb133349dbfdba0226f5e9419b8f5c65aa6",
+      "bytes": 8992
+    }
+  },
+  "sha_before_and_after": "5/5 match",
+  "resource_identity": "09a95a63477d8e642996b6980beb32cb20edd44d392f7fafebd6a5ca13e0f950",
+  "resource_bytes": 10775669,
+  "tests": {
+    "public_selector_passed": 13,
+    "seconds": 20.4,
+    "warnings": 2
+  },
+  "independent_probe": {
+    "mixed_missing_status": "needs_review",
+    "source_processing_complete": false,
+    "physical_coverage_complete": true,
+    "reading_dependencies_status": "partial",
+    "actual_current_reading_decision_matches": false,
+    "after_resource_recovery": "selected",
+    "raw_unchanged": true
+  },
+  "issues": {
+    "A-01": "CLOSED_IN_R2_AND_R3",
+    "A-02": "CLOSED_IN_R2",
+    "A-r2-01": "CLOSED_IN_R3",
+    "A-r3-01": "CLOSED_IN_R4"
+  },
+  "remaining_material_issues": [],
+  "cleanup": {
+    "owned_root": "tmp/a4r-20261101",
+    "initially_absent": true,
+    "finally_absent": true
+  },
+  "not_executed": [
+    "production documents/databases",
+    "real summary/model POST",
+    "persistent AUTO recovery",
+    "RF new attempt",
+    "old 88/100/118 suites",
+    "R4 wheel rebuild"
+  ]
+}

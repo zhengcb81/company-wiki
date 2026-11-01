@@ -1,0 +1,14 @@
+{
+  "commit": "381811e53875a589618e726122267c3812983607",
+  "feature_commit": "9dc530ea9e8edd086ece75aa27ba2c8674c9e29d",
+  "included_other_owner_master": "719520bd68463bb2e31b2586f5503999a0eb2f84",
+  "remote": "NOT_CONFIGURED",
+  "foreign_paths_preserved": 5,
+  "foreign_sha_before_after_identical": true,
+  "normal_pre_commit": "checks-static PASS in isolated worktree",
+  "isolated_tests": "38 PASS23.12s; latest-master merge then38PASS22.56s",
+  "source_owned_wip_restored_only_after_sealed_commit_verified": true,
+  "short_lived_worktree_removed": true,
+  "short_lived_branch_removed": true,
+  "integration_test_roots_removed": true
+}
