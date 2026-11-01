@@ -17,3 +17,5 @@ ROOT于2026-10-31从946537d0d75ac36b22ac0bb24e0f484a896b4c95建独立稀疏工�
 - 控制：新增空白负对照（R0 输出 0 字符=无编造）；公式夹具逐行判定 1/4 保真、缺符号单列；缓存命中实证（cache_hit=true/inference_runs=0/0 计费）。
 - 报告：build_r1_delivery.py 单一来源生成 comparison.json/md + handoff.json/md（含 run_manifest、page_identity_provenance、per-stratum、eval/holdout split、X2 分母、R0 生产读序 caveat、receipts 目录）。
 - 其他：P4 receipt 侧写已恢复；页 PNG 已删（SHA/渲染脚本保留）；分支已推送；独审 15 项正在复核。
+
+2026-11-01 R1 收尾：独立终审三轮（15项+8项+R3文档项）全部闭合；终审结论 READY_FOR_ROOT。唯一经验性 OPEN 为 X1F attempt2 job peak(1.753GiB) > cap(1.602GiB)（Job Object 约束未生效），已作为平台问题交 ROOT。最终交付：R0/N0 7/7、X1F 两次失败证据、空白与公式控制、单源 comparison/handoff（含 ledger 1406.5/1800s、逐层/分拆分母、货币感知事实计数、缓存命中实证）。分支 codex/w23-ocr-r1-20261031 已推送。

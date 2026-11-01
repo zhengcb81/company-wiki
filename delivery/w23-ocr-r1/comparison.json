@@ -1,7 +1,7 @@
 {
  "schema_version": "cwp-ocr-comparison/1",
  "plan_id": "w23-ocr-r1-2026-10-31",
- "created_at_utc": "2026-11-01T16:45:19.481070+00:00",
+ "created_at_utc": "2026-11-01T16:52:15.368639+00:00",
  "campaign": {
   "ledger_file": "campaign_ledger.json",
   "budget_seconds": 1800.0,
@@ -343,7 +343,7 @@
  },
  "inputs": {
   "sample_manifest_sha256": "e2cc20825e17f74c510dce7743d72071e941a5b8bb04afec425652cae668bbda",
-  "gold_sha256": "49c96b27a3114ce537fd7526cd7ff20e81f8d4bf48fa04c1f1ae6d4eadc33ab0",
+  "gold_sha256": "95ed4e484480199b4f2e88d75b799f369c191eed24ff565c60d4c65bb33deee1",
   "control_manifest_sha256": "027662e6c91a04ebe3424297fa60f4fd284707f0df707937bd3db2f28a4eeee3",
   "page_count": 7,
   "holdout_pages": [

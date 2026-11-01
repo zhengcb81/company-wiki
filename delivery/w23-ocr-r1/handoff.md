@@ -1,7 +1,7 @@
 # W23-OCR-R1 Handoff (harness-handoff/1)
 
 - workdir `C:\Users\郑曾波\Projects\company-wiki-w23-xiaomi-ocr-r1` · branch `codex/w23-ocr-r1-20261031` · base `946537d0` · required platform fix `20dd0143` (cherry-picked)
-- final tested commit: `fc4228c15bd91f9ef74d206290ac4b68b26d8d97` · reviewed commit: recorded after the final review
+- final tested commit: `4e8c49e272d5de64fa960e1f61ebe6c3ae439036` · reviewed commit: recorded after the final review
 - **Status: PARTIAL** — R0/N0 completed the 7-page frozen sample in one campaign; X1F resource-blocked with 2 measured attempts; X2 NOT_RUN.
 
 ## What ROOT receives
@@ -12,7 +12,7 @@
 
 ## Result in one paragraph
 
-R0 (real engine + production recovery ladder) completed all 7 pages: macro strict CER 0.1022, narrow 0.0801, number-token recall 0.9117, digit-present 0.9905; facts 149/171 surface / 161 numeric-anchor, conditions 89/98. N0 control completed and slightly exceeds R0 on surface fact recall, as expected for a text-layer reader. X1F: attempt 2 under the fixed toolchain loaded the mapped model (~97 s), failed at generate with an allocator error, then crashed natively at 106.5 s; the recorded job peak (1.753 GiB) exceeded the recorded cap (1.602 GiB) — reported as measured and flagged. Blank negative control: 0 fabricated characters. Formula control: 1/4 symbols faithful.
+R0 (real engine + production recovery ladder) completed all 7 pages: macro strict CER 0.1022, narrow 0.0801, number-token recall 0.9117, digit-present 0.9905; facts 149/171 surface / 161 numeric-anchor, conditions 89/98. N0 control completed and slightly exceeds R0 on surface fact recall, as expected for a text-layer reader. Gold: the PDFs do have native text layers; the reviewer reports not using them as ground truth, and near-equality with the native layer on clean born-digital pages is disclosed as not evidence either way. X1F: attempt 2 under the fixed toolchain loaded the mapped model (~97 s), failed at generate with an allocator error, then crashed natively at 106.5 s; the recorded job peak (1.753 GiB) exceeded the recorded cap (1.602 GiB) — reported as measured and flagged. Blank negative control: 0 fabricated characters. Formula control: 1/4 symbols faithful.
 
 ## R0 caveat
 
