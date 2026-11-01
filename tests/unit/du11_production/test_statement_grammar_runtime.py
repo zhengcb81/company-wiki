@@ -10,9 +10,19 @@ from company_wiki.document_understanding import statement_grammar as grammar
 from company_wiki.resource_budget import WorkBudget, WorkBudgetExceeded
 
 
-def test_offline_inference_does_not_write_dictionary_cache(tmp_path):
+def test_offline_inference_does_not_write_dictionary_cache(tmp_path, monkeypatch):
+    # Hooks/CI can supply TMPDIR independently of Windows TEMP/TMP. A populated
+    # ambient root must never be mistaken for this subprocess's owned scratch.
+    ambient = tmp_path / 'ambient'
+    ambient.mkdir()
+    marker = ambient / 'another-test.txt'
+    marker.write_text('preserve', encoding='utf-8')
+    owned = tmp_path / 'runtime'
+    owned.mkdir()
+    monkeypatch.setenv('TMPDIR', str(ambient))
     code = '''
-import pathlib, tempfile, urllib.request
+import os, pathlib, tempfile, urllib.request
+assert pathlib.Path(tempfile.gettempdir()).resolve() == pathlib.Path(os.environ['NLTK_DATA']).resolve()
 import nltk, jieba
 from company_wiki.document_understanding.statement_grammar import observe_statement
 def forbidden(*args, **kwargs): raise AssertionError('runtime download or dictionary cache')
@@ -24,12 +34,14 @@ assert observe_statement('北岭公司经营铁路运输业务。').independent
 assert not list(pathlib.Path(tempfile.gettempdir()).iterdir())
 '''
     environment = os.environ.copy()
-    environment.update(TEMP=str(tmp_path), TMP=str(tmp_path), NLTK_DATA=str(tmp_path))
+    environment.update(TEMP=str(owned), TMP=str(owned), TMPDIR=str(owned),
+                       NLTK_DATA=str(owned))
     result = subprocess.run([sys.executable, '-B', '-X', 'utf8', '-c', code],
                             env=environment, capture_output=True, text=True,
                             encoding='utf-8', timeout=30)
     assert result.returncode == 0, result.stderr
-    assert list(tmp_path.iterdir()) == []
+    assert list(owned.iterdir()) == []
+    assert marker.read_text(encoding='utf-8') == 'preserve'
 
 
 @pytest.mark.parametrize('text', (
