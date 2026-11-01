@@ -1,0 +1,78 @@
+{
+  "schema_version": "r6-consumer-migration-result/1",
+  "observed_at_utc": "2026-11-01T22:44:18.593482+00:00",
+  "worktree": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2",
+  "branch": "codex/architecture-rectification-r2-20261101",
+  "baseline_head": "f298a383",
+  "status": "AUTHOR_SHORT_DOMAIN_PASS_PENDING_ROOT_INTEGRATION_REVIEW",
+  "production_source_changes": [],
+  "new_compatibility_proxies": 0,
+  "frozen_files": {
+    "tests/unit/test_narrative_source_usability_dependencies.py": "63771e7ad879ee0826492f9e005450af89ae377e59666cdbd789bc614f50bd27",
+    "tests/unit/test_cf3_algorithm_identity.py": "921be0b126a2f934c47185070f6494dccff05bb0ea9121cda156215b0cbc2d35",
+    "tests/unit/test_canonical_import_reference.py": "ba3317e02b87ee5f53b65c291db4f2a1b57b3018eeeac39e2c0e2785b97c9fad",
+    "tests/unit/document_understanding_selection/test_reading_native_list_ancestry.py": "04df25d64e42c8368f6038a172561263da6855316f654d72a461c2297ce4f6ca",
+    "tests/unit/document_understanding_selection/test_reading_value_coverage.py": "b6193489014cce54851eb3c3df33c5a680dcef5b1b9790ac8f64e83d50df2aae"
+  },
+  "red": {
+    "failed": 41,
+    "passed": 9,
+    "warnings": 2,
+    "seconds": 69.75
+  },
+  "green": {
+    "failed": 0,
+    "passed": 50,
+    "warnings": 2,
+    "seconds": 40.62
+  },
+  "groups": [
+    {
+      "owner": "source inventory import adapter",
+      "failures": 30,
+      "resolution": "retain public legacy calls; monkeypatch source composition owner import resolver"
+    },
+    {
+      "owner": "structure algorithm identity",
+      "failures": 1,
+      "resolution": "test private helper in source owner; strengthen actual generation cache rejection"
+    },
+    {
+      "owner": "canonical registration identity projection",
+      "failures": 4,
+      "resolution": "exact_source_version port fake with real source reference validation and exact query count"
+    },
+    {
+      "owner": "grammar predicate",
+      "failures": 4,
+      "resolution": "independent_statement_start imported from grammar owner, no reading facade proxy"
+    },
+    {
+      "owner": "PDF projection component availability",
+      "failures": 2,
+      "resolution": "inject failure into live inventory owner, eliminate raising=False phantom patch"
+    }
+  ],
+  "additional_assertions": [
+    "CF3 real frozen manifest matches before algorithm mutation and actual generation cache refuses after mutation",
+    "canonical exact-source lookup runs once for success and failures; real wrong SHA/inactive/missing rows fail with expected SourceReadError reason"
+  ],
+  "test_targets": [
+    "tests/unit/test_narrative_source_usability_dependencies.py",
+    "tests/unit/test_cf3_algorithm_identity.py",
+    "tests/unit/test_canonical_import_reference.py",
+    "tests/unit/document_understanding_selection/test_reading_native_list_ancestry.py::test_existing_sentence_page_flow_is_not_replaced_by_list_continuation",
+    "tests/unit/document_understanding_selection/test_reading_value_coverage.py::test_missing_pure_projection_component_cannot_claim_complete_pdf"
+  ],
+  "ruff": "PASS; five changed tests",
+  "not_run": [
+    "full unit suite",
+    "real PDF/OCR/models/company workflow",
+    "paid API",
+    "production source/config/db operations"
+  ],
+  "remaining": [
+    "other R6 semantics/migration/offline owners and ROOT independent review/PR exact CI are not certified here"
+  ],
+  "scope_control": "No Git/index/commit or main PWF modifications; only five tests in R6 worktree plus this report/evidence"
+}

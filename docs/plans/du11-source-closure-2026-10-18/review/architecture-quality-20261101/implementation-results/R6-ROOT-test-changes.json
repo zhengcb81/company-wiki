@@ -1,0 +1,31 @@
+{
+  "schema": "r6-root-targeted-repairs/1",
+  "files": {
+    "tests/unit/du11_paid_response/test_paid_response.py": {
+      "sha256": "83005f385743656cf20c5539c4ca2517f0fb025d637aaed638a8492e10e00bd2",
+      "bytes": 22207
+    },
+    "tests/unit/test_automation_store.py": {
+      "sha256": "f5095745d19130d0da2e39d00b2eb07224e0680d3b8411a8581824a139a31642",
+      "bytes": 25720
+    },
+    "tests/unit/test_narrative_run_ownership.py": {
+      "sha256": "a4fd3291233cdf68fe00904a921a728450292e83b05c216901fd966cce952db4",
+      "bytes": 20327
+    },
+    "tests/unit/du11_production/test_statement_grammar_runtime.py": {
+      "sha256": "0203fa1fb6068ce80a149ea829de7b9527b69fe6c7638b2f79dc3c464628f369",
+      "bytes": 7989
+    },
+    ".github/workflows/ci.yml": {
+      "sha256": "6ed2425fca1c0b9f869f1b9dcdf2d32dcda19ce8a17cb54fd019d968c53d8708",
+      "bytes": 3979
+    }
+  },
+  "focused_first_red": "4F/41.93s incl offline30s timeout",
+  "focused_green": "4P/22.67s",
+  "ruff": "4testfilesPASS",
+  "environment_origin_observed": "Unqualified child resolves main editable stable package, not candidate; -I explicit actual test package fixes ownership",
+  "host_72_domain": "72P/28.53s; normal host; initial sandbox15F actual os.link WinError5, short-path negative hypothesis disproved",
+  "CI_diagnostics": "new63groupRED ->17P/0.69s escaped UTF8 chunks, independent final review pending"
+}

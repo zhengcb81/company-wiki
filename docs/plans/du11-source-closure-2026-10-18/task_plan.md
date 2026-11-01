@@ -1,10 +1,12 @@
+**2026-11-01已按用户最新指令恢复R6全面整改。下方暂停内容为上一节点历史；当前执行唯一入口为[R6流水](review/architecture-quality-20261101/implementation-results/R6-ROOT.md)。稳定master保持，候选在独占sparse工区返修；W23 R1开始接收。**
+
 # 主线剩余实施计划
 
 **当前暂停：本轮候选小域独审通过，但完整CI63失败，未验收；已保留独立远端分支，稳定master正常revert。** 唯一状态看[CURRENT_STATUS](CURRENT_STATUS.md)/json，恢复看[HANDOFF](HANDOFF.md)。
 
 ## Next Step
 
-用户恢复后从最新master建立隔离修复branch，先正常revert安全隔离提交dbfec3beb0948006475701e2131c4d95e0586556以重施候选（不得在master直接重施），按CWP-failed-CI.md先修整合回归的共用根因。受影响快速测试/独立大节点审查和PR完整CI绿后并线，再修note结构并做最终H1/新摘要/恢复/RF验收。当前不执行。
+R6恢复：在tmp/architecture-r2独占sparse工区重施候选，先按CI63失败群定点重现与共因修复，同时只读验收W23 OCR返工；集中独审及候选完整CI绿后并线，再继续结构/C真实验收。
 
 ## P0 — 已完成的CI根修
 
