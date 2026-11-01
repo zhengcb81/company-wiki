@@ -15,8 +15,8 @@
   "3042aa85 docs: record R1 second-round fixes and findings in PWF",
   "5ca7a931 docs: archive retired-page provenance and native-layer disclosure in R1 delivery"
  ],
- "final_tested_commit": "5ca7a931e180a0b700d772a35c7b220b1123a5f5",
- "final_reviewed_commit": "PENDING_REVIEW",
+ "final_tested_commit": "da9ca2c8c4e831f6f8ca8512a68f954e9e86910c",
+ "final_reviewed_commit": "pending final reviewer confirmation",
  "code_file_sha256": {
   "tools/ocr_comparison/campaign.py": {
    "raw_sha256": "d974cbaefe09cf2dca6060250095477db5b6fa933ae82b6f07b3ef5fc44e38e1",
