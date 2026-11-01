@@ -210,7 +210,7 @@ def test_one_hundred_source_reuse_binding_remains_inside_existing_persistence_ca
     assert len(frozen.encode("utf-8")) <= 262144
 
 
-def test_new_control_locators_are_measured_and_legacy_storage_baseline_is_not_resigned(
+def test_unrelated_control_locators_are_not_run_usage_and_legacy_baseline_is_preserved(
     tmp_path,
 ):
     from types import SimpleNamespace
@@ -233,10 +233,8 @@ def test_new_control_locators_are_measured_and_legacy_storage_baseline_is_not_re
     control = catalog_dir / "narrative-generations"
     control.mkdir()
     (control / "pointer.json").write_bytes(b"actual owned locator")
-    assert guard.snapshot().persistent_added_bytes == before + len(
-        b"actual owned locator"
-    )
-    assert len(guard.paths) == 9
+    assert guard.snapshot().persistent_added_bytes == before
+    assert guard.paths == (work,)
     legacy = work / "storage-baseline.json"
     legacy.write_text(
         canonical_json({"input_hash": digest, "sizes": [0] * 8}), encoding="utf-8"

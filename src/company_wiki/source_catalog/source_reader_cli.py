@@ -10,6 +10,7 @@ from __future__ import annotations
 import argparse
 from dataclasses import asdict
 import json
+import re
 import sqlite3
 import sys
 from pathlib import Path
@@ -35,6 +36,13 @@ class _JsonArgumentParser(argparse.ArgumentParser):
         raise ValueError(message)
 
 
+def _digest_argument(value: str) -> str:
+    """Validate wire syntax before initializing a catalog or reader."""
+    if re.fullmatch(r"[0-9a-f]{64}", value) is None:
+        raise argparse.ArgumentTypeError("digest must be lowercase SHA-256")
+    return value
+
+
 def _emit_receipt(payload: dict[str, object]) -> None:
     line = json.dumps(payload, ensure_ascii=True, sort_keys=True, separators=(",", ":"))
     sys.stderr.write(line + "\n")
@@ -46,9 +54,9 @@ def main(argv: Sequence[str] | None = None) -> int:
     parser.add_argument("--config", type=Path, required=True)
     parser.add_argument("--document-id", required=True)
     parser.add_argument("--source-id", required=True)
-    parser.add_argument("--content-sha256", required=True)
+    parser.add_argument("--content-sha256", required=True, type=_digest_argument)
     parser.add_argument("--purpose", default="filing_reuse")
-    parser.add_argument("--expected-read-policy-sha256")
+    parser.add_argument("--expected-read-policy-sha256", type=_digest_argument)
     parser.add_argument("--include-availability-evidence", action="store_true",
                         help="Return receipt 2.2 with existing historical capture evidence, or null.")
     parser.add_argument("--include-canonical-identity", action="store_true",
@@ -104,7 +112,7 @@ def main(argv: Sequence[str] | None = None) -> int:
             }
         )
         return 2
-    except (CatalogConfigError, CatalogReaderUnavailable, OSError, sqlite3.Error, ValueError):
+    except (CatalogConfigError, CatalogReaderUnavailable, OSError, sqlite3.Error):
         _emit_receipt(
             {
                 "schema_version": SOURCE_READ_RECEIPT_SCHEMA_VERSION,
@@ -112,6 +120,10 @@ def main(argv: Sequence[str] | None = None) -> int:
                 "reason": "reader_unavailable",
             }
         )
+        return 2
+    except (TypeError, UnicodeError, ValueError):
+        _emit_receipt({"schema_version": SOURCE_READ_RECEIPT_SCHEMA_VERSION,
+                       "status": "blocked", "reason": "invalid_request"})
         return 2
     finally:
         if catalog is not None:

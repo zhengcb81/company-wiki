@@ -432,9 +432,9 @@ def test_raw_read_replay_and_receipts_across_full_chain(mixed_fixture, record_pr
         env=_env(),
         timeout=900,
     )
-    assert prune.returncode == 0, prune.stderr.decode("utf-8")
-    prune_report = json.loads((out / "prune.json").read_text(encoding="utf-8"))
-    assert prune_report["deleted"] == mixed_fixture["pdf_spans"]
+    assert prune.returncode == 78
+    assert json.loads(prune.stderr)["status"] == "retired"
+    assert not (out / "prune.json").exists()
 
     vacuum = subprocess.run(
         [
@@ -454,11 +454,11 @@ def test_raw_read_replay_and_receipts_across_full_chain(mixed_fixture, record_pr
     assert vacuum.returncode == 0, vacuum.stderr.decode("utf-8")
     vacuum_report = json.loads((out / "vacuum.json").read_text(encoding="utf-8"))
     assert vacuum_report["freelist_after"] == 0
-    assert vacuum_report["database_file_bytes_released"] > 0
+    assert vacuum_report["database_file_bytes_released"] >= 0
     assert vacuum_report["source_facts_before"] == vacuum_report["source_facts_after"]
     assert vacuum_report["legacy_record_facts_before"] == vacuum_report["legacy_record_facts_after"]
     assert vacuum_report["protected_objects_before"] == vacuum_report["protected_objects_after"]
-    assert retire_report["source_facts_before"] == prune_report["source_facts_after"]
+    assert retire_report["source_facts_before"] == vacuum_report["source_facts_after"]
     assert retire_report["protected_objects_before"]["new_final_count"] == 1
     assert retire_report["protected_objects_before"]["object_bytes"] > 0
 
@@ -491,7 +491,7 @@ def test_raw_read_replay_and_receipts_across_full_chain(mixed_fixture, record_pr
         ).fetchone()[0]
     assert kept == 1
     assert txt_left == mixed_fixture["txt_spans"]
-    assert pdf_left == 0
+    assert pdf_left == mixed_fixture["pdf_spans"]
     assert visible == 1
     assert sources >= 2
     assert legacy_completed == 0

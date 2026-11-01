@@ -17,7 +17,7 @@ def _v2(path):
         connection.execute("PRAGMA user_version=2")
 
 
-def test_v3_new_database_has_exact_three_additive_budget_tables(tmp_path):
+def test_current_database_has_budget_and_owned_storage_tables(tmp_path):
     database = tmp_path / "auto.db"
     report = migrations.migrate_database(database)
     assert report.to_version == migrations.SCHEMA_VERSION and report.applied_versions == tuple(range(1, migrations.SCHEMA_VERSION + 1))
@@ -28,6 +28,7 @@ def test_v3_new_database_has_exact_three_additive_budget_tables(tmp_path):
         "narrative_runs",
         "narrative_run_jobs",
         "narrative_model_reservations",
+        "narrative_storage_allocations",
     }
 
 

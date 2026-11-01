@@ -257,33 +257,12 @@ def _project(tmp_path: Path):
     return project, config_path
 
 
-def test_cli_runtime_policy_show_fails_closed_when_absent(tmp_path, capsys):
+@pytest.mark.parametrize("action", ["show", "apply"])
+def test_old_runtime_policy_cli_is_retired_before_config_io(tmp_path, capsys, action):
     from company_wiki.source_catalog.cli import main
-
-    project, config_path = _project(tmp_path)
-    rc = main(["--config", str(config_path), "runtime-policy", "show"])
-    assert rc == 1  # fail closed, not a silent default
-
-
-def test_cli_runtime_policy_apply_then_show(tmp_path, capsys):
-    from company_wiki.source_catalog.cli import main
-
-    project, config_path = _project(tmp_path)
-    payload = _snapshot()
-    payload_file = tmp_path / "snapshot.json"
-    payload_file.write_text(json.dumps(payload), encoding="utf-8")
-    rc = main(
-        ["--config", str(config_path), "runtime-policy", "apply",
-         "--file", str(payload_file)]
-    )
-    assert rc == 0
-    out = json.loads(capsys.readouterr().out)
-    assert out["applied"] is True
-    assert len(out["snapshot_sha256"]) == 64
-
-    rc = main(["--config", str(config_path), "runtime-policy", "show"])
-    assert rc == 0
-    shown = json.loads(capsys.readouterr().out)
-    assert shown["schema_version"] == "1.0"
-    assert shown["snapshot_sha256"] == out["snapshot_sha256"]
-    assert shown["flags"]["v2_resolve_active"] is False
+    rc = main(["--config", str(tmp_path / "missing.yaml"), "runtime-policy", action])
+    assert rc == 1
+    result = capsys.readouterr()
+    assert not result.out
+    assert json.loads(result.err)["error_code"] == "MAINTENANCE_OPERATION_RETIRED"
+    assert not list(tmp_path.iterdir())

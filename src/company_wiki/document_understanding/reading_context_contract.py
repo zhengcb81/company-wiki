@@ -5,6 +5,7 @@ from __future__ import annotations
 import re
 
 CURRENT_READING_CONTEXT_SCHEMA = "du-production-reading/4"
+READING_CONTEXT_CONTRACT_FEATURE_VERSION = "reading-context-wire/1.1"
 READING_CONTEXT_SCHEMAS = frozenset(
     f"du-production-reading/{version}" for version in (1, 2, 3, 4)
 )
@@ -16,6 +17,25 @@ TRACED_READING_CONTEXT_SCHEMAS = frozenset(
 )
 SUMMARY_USE_CONTEXT_SCHEMAS = frozenset({CURRENT_READING_CONTEXT_SCHEMA})
 SUMMARY_SUPPORT_USES = frozenset({"support", "context_only", "unresolved"})
+SOURCE_PROCESSING_CONTEXT_SCHEMAS = frozenset({CURRENT_READING_CONTEXT_SCHEMA})
+SOURCE_PROCESSING_DIMENSION = "source_readability"
+SOURCE_PROCESSING_DIAGNOSTIC_CODES = frozenset({
+    "source_grammar_unavailable", "source_grammar_scope_limit", "source_assessment_incomplete",
+})
+SOURCE_PROCESSING_ID_SAMPLE_LIMIT = 16
+
+
+def validate_source_processing_complete(schema: str, value: object) -> bool:
+    """Validate an optional current-context field, never infer an absent value.
+
+    Historical contexts remain byte-compatible without this field. Absence
+    says it was not recorded; it must not manufacture a True completeness.
+    """
+    if schema not in SOURCE_PROCESSING_CONTEXT_SCHEMAS:
+        raise ValueError("source_processing_complete is unsupported by reading_context schema")
+    if type(value) is not bool:
+        raise ValueError("source_processing_complete must be boolean")
+    return value
 
 
 def validate_summary_support_use(value: object, reason: object) -> tuple[str, str]:

@@ -50,7 +50,8 @@ def sha(data):
 
 def model_draft(data):
     if data['schema_version'] == 'narrative-model-request/6':
-        return {'decisions': [{'task': task['key'], 'priority': 'normal', 'disposition': 'consider'}
+        key_index = data['material']['task_columns'].index('key')
+        return {'decisions': [{'task': task[key_index], 'priority': 'normal', 'disposition': 'consider'}
                               for task in data['material']['tasks']]}
     if data['schema_version'] == 'narrative-model-request/5':
         from support.scoped_model_response import source_grounded_scoped_reply
