@@ -1,6 +1,6 @@
 {
   "schema_version": "bounded-node-receipts/1",
-  "hash_scope": "Immutable gzip receipts only; prose and manifest excluded",
+  "hash_scope": "immutable gzip receipts only; prose/manifest excluded",
   "files": [
     {
       "path": "receipts/config-loader-green.log.gz",
@@ -13,6 +13,24 @@
       "bytes": 992,
       "sha256": "12ea34392d921c38ddb1ee813f3053753258ec6544011b76c48ab955b2e88c94",
       "uncompressed_sha256": "714346df4020e699569c357f7a4063fcfd5d656282be7200a6e0c56a44f637c8"
+    },
+    {
+      "path": "receipts/config-recovery-ci-jobs.json.gz",
+      "bytes": 828,
+      "sha256": "c20ff9f8b4a2db18a445cc5c9dea3301ec253948ecbe301f3e5e6022915e09c1",
+      "uncompressed_sha256": "ee4c991d906fde1e6c0b3068979677c0cbd2c71acd1fd98f35b98d1fcfb6c07e"
+    },
+    {
+      "path": "receipts/config-recovery-ci.json.gz",
+      "bytes": 264,
+      "sha256": "c9ff72c73f089e9a9c569eb9efba26af068b0714c4834acb4b3071284d3dbd39",
+      "uncompressed_sha256": "992dfc7bcc283e4e860191fef6366145a230fdd178006c04c7848574c3f6d78e"
+    },
+    {
+      "path": "receipts/config-recovery-commit.log.gz",
+      "bytes": 685,
+      "sha256": "cf6b7815c198e8c8c582d543891201f5ecaf3fd3d651d04d5b609a02e562fe53",
+      "uncompressed_sha256": "766d41153787895c203e4f090be87b928306b1cef512828026abd94136dde4c9"
     },
     {
       "path": "receipts/config-recovery-green.log.gz",
@@ -31,6 +49,12 @@
       "bytes": 764,
       "sha256": "522dc725d1efdc73c536f614a392d067914a71a4ef968edf823d165defad8815",
       "uncompressed_sha256": "78c816516f0554b53cdf1df80fed0ef65dcd1f8df0e8789a7e999a09b1807a4c"
+    },
+    {
+      "path": "receipts/config-recovery-push.log.gz",
+      "bytes": 2492,
+      "sha256": "d78b48dd455f2f7d31fea02c763abd76e420fbdd86cd90a1553da5cff33f073a",
+      "uncompressed_sha256": "2689607b245e86aea7868e02d85e80b5a9ba95183eb9975f0ed26fd61490db8c"
     },
     {
       "path": "receipts/config-recovery-test-cleanup.json.gz",
@@ -141,5 +165,5 @@
       "uncompressed_sha256": "1581182d544f629697fb313e30021adbb6b0cb373d4b90514707b18f5791c5a4"
     }
   ],
-  "total_receipt_bytes": 31599
+  "total_receipt_bytes": 35868
 }

@@ -1,26 +1,26 @@
 {
   "schema_version": "company-wiki-current-plan-status/2",
   "as_of_date": "2026-11-01",
-  "observed_at_utc": "2026-11-01T03:05:23.375267+00:00",
+  "observed_at_utc": "2026-11-01T03:37:07.418505+00:00",
   "canonical_entry": "CURRENT_STATUS.md",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
-  "project_status": "P3_W12_CONFIG_AND_TERMINAL_RECOVERY_REVIEW_PASS_PUBLICATION_IN_PROGRESS",
+  "project_status": "P3_CONFIG_RECOVERY_PUBLISHED_EXACT_CI_GREEN_REAL_SUMMARY_PASS_CROSS_RUN_CACHE_DUPLICATE_POST_ROOT_DIAGNOSIS",
   "scope_this_update": "Mainline only; exact CI root repairs, real summary/recovery/native adoption; no new packages",
-  "last_code_commit": "f98dd54b78184ea6534941e1ae8bb40bbe6971da",
+  "last_code_commit": "ce1a603a88397e5a2e921177604cdff2dc08e0ab",
   "verified_publication_before_docs": {
     "local_branch": "master",
-    "local_and_remote_head": "f98dd54b78184ea6534941e1ae8bb40bbe6971da",
-    "note": "Exact runtime/test CI verified; following PWF-only commit has no separate runtime CI by workflow paths-ignore."
+    "local_and_remote_head": "ce1a603a88397e5a2e921177604cdff2dc08e0ab",
+    "note": "Runtime exact CI green; following PWF-only commit has no separate runtime CI."
   },
   "code_ci": {
-    "id": 41264855167,
-    "head_sha": "f98dd54b78184ea6534941e1ae8bb40bbe6971da",
+    "id": 41267979696,
+    "head_sha": "ce1a603a88397e5a2e921177604cdff2dc08e0ab",
     "status": "completed",
     "conclusion": "success",
-    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41264855167",
-    "normal_pre_push_passed": 651,
-    "normal_pre_push_seconds": 133.64
+    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41267979696",
+    "normal_pre_push_passed": 781,
+    "normal_pre_push_seconds": 108.09
   },
   "native_goal": {
     "observed_status": "active",
@@ -35,11 +35,13 @@
     "cumulative_micro_usd": 20000000,
     "company_allocation": "soft target150000tokens/$1",
     "latest_verified_usage": {
-      "tokens": 1935796,
-      "micro_usd": 756563,
+      "tokens": 1955397,
+      "micro_usd": 760197,
       "includes_historical_unknowns": true,
-      "evidence": "revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec/execution_replays/r1-remediation-03/usage_reconcile/after-single-h1-managed-recovery/mother-after.json",
-      "note": "Two new HTTP401 attempts retain unknown conservative holds85927tokens/17053microUSD; new_unknown8 plus prior_unknown7. Corrected-loader single H1 run blocked before admission,0 newPOST/reservations. Estimate not invoice; no refund/reset."
+      "new_unknown_count": 8,
+      "prior_unknown_count": 7,
+      "evidence": "Current independent executor native mother observation; exact checkpoint path in attempt usage_reconcile",
+      "note": "Two initial401 unknown85927tokens/17053microUSD retained; two new known H1 calls9828/1826 and9773/1808. Extra cache POST is a failure and still counted; proxy not invoice."
     }
   },
   "m8_source_engineering": {
@@ -91,7 +93,7 @@
       "task": "W12 original-company rerun, new-company generalization, fixed8company fullaudit/skillimprovement and finalclean streak"
     }
   ],
-  "next_action": "正常提交推送当前配置/AUTO恢复共因根修，核精确CI；与此并行继续W12单H1正确配置真实摘要，保留旧unknown费用，再缓存恢复/完整RF实际链和四路复审。不扩包。",
+  "next_action": "按task_plan缓存共因小节TDD实现共享source-select与当前material等价复用回退，保留partial/旧收费；真实H1 max_tokens=1新run免费RED/复验，集中独审再正常发布。随后完整RF/四审，不扩包。",
   "package_status_registry": "PACKAGE_STATUS.json",
   "handoff": "HANDOFF.md",
   "goal_definition": "MAINLINE_LOOP_GOAL.md",
@@ -424,24 +426,68 @@
     "attempt": "r1-remediation-03",
     "as_of_date": "2026-10-21",
     "executor": "/root/w12_executor_current",
-    "status": "CONFIG_CANONICAL_PATH_AND_TERMINAL_GENERATION_RECOVERY_ROOT_REPAIR",
+    "status": "H1_REAL_SUMMARY_PASS_CACHE_VALIDATION_FAILED_DUPLICATE_POST_PAID_GENERATION_STOPPED",
     "root": "revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec/execution_replays/r1-remediation-03",
     "formal_execution_or_four_review_pass": false,
-    "new_model_POST_so_far": "0 at latest preflight; read current native mother ledger before any paid call",
+    "new_model_POST_so_far": 4,
     "known_observations": [
-      "Current installed RF->FF->CWP annual2025/H1-2026/Q1-2026 reuse successful; no document download",
+      "Initial installed RF->FF->CWP annual2025/H1-2026/Q1-2026 reuse succeeded with0downloads; later two newly discovered publicIR decks were captured in the owned test lake.",
       "CWP-owned setup inherits11 exact-ref verified source-fact assertions with original field SHA/observed_at through existing owner services; manifests exact; raw/DB copies0; annual actual native reuse then successful",
       "Sina3statements complete each7 periods2023H1..2026H1,6HTTP/1429736bytes/$0; unit/scale/PIT remainunknown and current snapshot not a historical availability claim",
       "16current RF labels execution plan/12document categories;19selected PDF pages+3visual checks and officialHTML source reads are preparation, not new formal adoption",
-      "Latest IR/JPM presentation leads exist but native discovery partial;1MiB free discovery trial stopped on totalbytes, no raised cap or absence claim; Q3published10-26 excluded",
-      "ExactFY2026Q2 companion actualprepare returns unsupported_exchange/provider_startedfalse; missing transcript remains sourcegap, not claimed no publiccall"
+      "Native IR discovery remains historicallypartial; actual officialUI publicpdf-preview exposed H1/JPM originals, now CWP captured+RF registered+21/19pages genuinely read. H1coverAug4/indexAug3/finalizedAug3 retained; Q3publishedOct26 excluded.",
+      "ExactFY2026Q2 companion actualprepare returns unsupported_exchange/provider_startedfalse; missing transcript remains sourcegap, not claimed no publiccall",
+      "H1presentationd995ae9b471ff993260c08380a5beda5c880873eb2c79f6bd98935f79fc5aedc1186515B/21pages; JPM82fcda669fe1bc99c57afe13798f30142612bd555024e0ecacf7fe1686da7ce22362312B/19pages. No study result accepted yet.",
+      "JPM GLP1 project share is not sales share; third-party market estimate is not company revenue target/independent counterevidence; TIDES/subscopes not additive; Aug3 legal status superseded by Aug9source."
     ],
     "ci_dependency_cleared_at": "2026-11-01T02:27:30Z",
     "new_formal_summary_or_full_RF_accepted": false,
     "root_findings": [
       "Explicit canonical Config.load path skips managed dotenv; same model/endpoint but stale inherited MiMo credential.",
       "Native execution recovery owner requires known billing for terminal401 jobs; old unknown holds still counted, new explicit run rejected0POST."
-    ]
+    ],
+    "root_findings_resolution": "Config identity and AUTO single-snapshot execution owner fixed,96unit/4integration/8independent probes PASS,0OPEN; ce1a603a normal commit hooks passed; push/CI tracked in parallel.",
+    "h1_new_summary": {
+      "run_id": "r1-w12-h1-managed-r2-20261101",
+      "model_posts": 1,
+      "tokens": 9828,
+      "micro_usd": 1826,
+      "artifact_version_id": "narrative-030e5a1342754332829cb193b7382d37",
+      "artifact_sha256": "4dec5c184ce7ef94aafaf35d46b892ffe9bd92cf216c64758063dff300a3f38f",
+      "byte_size": 473666
+    },
+    "cross_run_cache": {
+      "run_id": "r1-w12-h1-cache-20261101",
+      "status": "FAILED_EXTRA_POST_NOT_PASS",
+      "requested_refresh": false,
+      "extra_posts": 1,
+      "tokens": 9773,
+      "micro_usd": 1808,
+      "capture_id": "4c179c36d823485fbf6422a7ee1946b7",
+      "artifact_sha256": "54ccb82a5e14db1a427dc66e485d58298b55f0e186e44c5e7bcc050ea8a0e895",
+      "action": "Stop paid H1 regeneration; compare exact requests and native generation/reuse receipts before root repair; same-run/exactread diagnostics free only."
+    },
+    "cache_root_cause": {
+      "base_and_final_and_request_identical": true,
+      "visible_base_candidates": 2,
+      "source_partial_budget": "16M work bound;112selected/2767candidates/4224units,66source_quotes",
+      "cause": "Source work stop taints dependency inventory partial; unavailable fast decision proof is treated as miss, skips public candidates and pays again.",
+      "fix_in_progress": "Shared canonical source selection port and current material-equivalence fallback for raw/projected; retain partial/unread and immutable generations/charges.",
+      "evidence": "revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec/execution_replays/r1-remediation-03/preflight/h1-cache-miss-observation/comparison-v2.json"
+    },
+    "rf_native_draft_consumption": {
+      "status": "CONSUMED_FIVE_USED_PARAMETER_RATIONALES_NOT_FULL_COMPANY_ACCEPTANCE",
+      "capture_id": "695ef43f563c4457bcfac6233786d2d9",
+      "source_quote_tasks": [
+        "t12",
+        "t32",
+        "t34",
+        "t35",
+        "t37"
+      ],
+      "evidence": "revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec/execution_replays/r1-remediation-03/narrative/h1-native-consumption.json",
+      "quality": "needs_review/selectionpartial retained; full16labels/report/snapshot/four reviewers still open"
+    }
   },
   "own_uncommitted_tests": [],
   "last_version_contract_failed_ci": {
@@ -462,7 +508,7 @@
     "meaning": "Last verified baseline CI. Current P1 root repair not yet committed; exact new CI required after publication."
   },
   "p3_config_generation_recovery": {
-    "status": "INDEPENDENT_REVIEW_PASS_NORMAL_PUBLICATION_IN_PROGRESS",
+    "status": "PUBLISHED_NORMAL_PUSH_781P_EXACT_CI_SUCCESS",
     "evidence": "review/mainline-closeout-20261031/p3-config-recovery/README.md",
     "tests": {
       "unit_passed": 96,
@@ -477,6 +523,40 @@
       "new exact CI",
       "real W12 current summary/full RF/four reviewers",
       "entire project"
-    ]
+    ],
+    "commit": "ce1a603a88397e5a2e921177604cdff2dc08e0ab",
+    "publication": {
+      "id": 41267979696,
+      "head_sha": "ce1a603a88397e5a2e921177604cdff2dc08e0ab",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41267979696",
+      "normal_pre_push_passed": 781,
+      "normal_pre_push_seconds": 108.09
+    }
+  },
+  "current_code_publication": {
+    "head_sha": "ce1a603a88397e5a2e921177604cdff2dc08e0ab",
+    "commit_hooks": "passed",
+    "normal_push": "success",
+    "exact_CI": "success",
+    "last_verified_green_CI": {
+      "id": 41264855167,
+      "head_sha": "f98dd54b78184ea6534941e1ae8bb40bbe6971da",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41264855167",
+      "normal_pre_push_passed": 651,
+      "normal_pre_push_seconds": 133.64
+    }
+  },
+  "previous_verified_code_ci": {
+    "id": 41264855167,
+    "head_sha": "f98dd54b78184ea6534941e1ae8bb40bbe6971da",
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41264855167",
+    "normal_pre_push_passed": 651,
+    "normal_pre_push_seconds": 133.64
   }
 }

@@ -13,3 +13,5 @@
 真实母账1935796tokens/756563microUSD（估计非账单），含new_unknown8+prior_unknown7；本次401保留85927tokens/17053microUSD。原文/生产config不改，收据仅小型gzip，不归档PDF或整库。下一步集中独审、正常提交推送与精确CI，然后W12新摘要/缓存及完整RF实际链、四路复审。
 
 集中独审已完成PASS_CONFIG_IDENTITY_EXECUTION_RECOVERY/0OPEN，13源码/测试raw+LF SHA、独立8状态探针及原始日志绑定见receipts/final-seal.json.gz。测试自有目录已清18856387逻辑字节；真实W12输入/原件待审不清。正常发布进行中，不代签新CI。
+
+本节点正式发布完成：ce1a603a、正常prepush781P/108.09s，精确CI41267979696于2026-11-01T03:12:48Z成功。W12随后真实摘要成功，但跨run cache实际多POST，属于新的复验发现，不用本节点独审/CI代签其缓存成功；主线正在诊断。

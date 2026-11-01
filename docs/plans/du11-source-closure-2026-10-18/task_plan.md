@@ -4,7 +4,7 @@
 
 ## Next Step
 
-正常提交推送当前配置/AUTO恢复共因根修，核精确CI；与此并行继续W12单H1正确配置真实摘要，保留旧unknown费用，再缓存恢复/完整RF实际链和四路复审。不扩包。
+按task_plan缓存共因小节TDD实现共享source-select与当前material等价复用回退，保留partial/旧收费；真实H1 max_tokens=1新run免费RED/复验，集中独审再正常发布。随后完整RF/四审，不扩包。
 
 ## P0：恢复准确、轻量的回归保护
 
@@ -43,6 +43,15 @@
 - 完成标准：新正式artifact可追到used参数/公式及输出；数值和买方收入假设有依据，重大问题闭合。
 
 ## P3：公司研究循环、泛化与技能收口
+
+### 当前缓存共因：快速证明不足不等于再次付费
+
+- 实证：W12 H1两run的base/final generation及真实model requestSHA相同、已有2可见产物；source工作预算停止使dependency trace partial，现bool将unavailable当miss。旧两次真实付费/partial/未读及费用保持，不重签为complete。
+- 同一source-select服务提供无任务/模型副作用的确定性选材端口，原Worker调用同一核心；raw/official projection共用，不复制PDF策略/管线，不构造假job/lease。
+- 先走已完整dependency的快速复用；快速证明不足时，每文档最多一次当前重选，比较既有完整material SHA/evidence SHA/sent-policy，复用还须真实原件/locator及旧artifact验真。材料不同才是实证miss；当前重选失败/超时不能被当成付费许可。
+- 原partial trace与paid generation保持原字节；不改compare(partial)=unavailable、不把未读变已读、不改跨run费用归属、不新增任务库或预算。
+- TDD：相同有界partial可复用；coverage/材料/策略变化不可误命中；多个候选只重选一次；快速命中不重选；raw/投影接线一致，失败/超时0模型。真实H1用独立新run/max_tokens=1请求先复现免费RED再验证缓存成功，模型配置不变，旧账/产物不改；集中独审后正常发布。
+- 随后继续真实RF已采用的5个summary source_quote参数/公式及完整16标签/四审。原件p11 D&M关键段落未入本次summary是独立选材缺口，不能以raw补证冒作summary覆盖完整，按实际共因修复/再验收。
 
 - 先完成药明康德W12新attempt补偿责任，再药明合联、Snowflake新公司泛化。每轮执行完整八步审查技能。
 - 固定八家公司按目标清单逐个完成；同一家公司跨责任可复用合格run，须显式映射全部检查点，不能凭旧报告名字或重复收费充数。

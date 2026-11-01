@@ -72,3 +72,11 @@ CI修复仍绿。两真实MiMo401来自Config.load显式canonical路径漏载受
 ### W12配置/恢复集中验收通过，进入正常发布
 
 不是401/公司特判：canonical配置身份与参数写法解耦；AUTO owner区分计费unknown与执行未结束，完整paid pin继续原run恢复。仅诊断SHA不冒作可恢复完整响应、不重造死锁。96P/20.46s、4原生集成64.12s与8独立native状态探针通过，独审0OPEN、费用行不变。原生finish本来自动结零输出，初始错误fixture期望与重复BEGIN实现错误均保留不冒真实RED。11本轮测试目录清18856387逻辑字节、真实P3原件保留。正常提交推送/核CI与真实W12新摘要并行，不以PWF-only新HEAD再加签收，不扩包。
+
+## 2026-11-01 — ce1a603a正常发布/CI成功；真实缓存验收发现额外POST
+
+正常commit静态hooks全绿、正常prepush781P/108.09s，master远端ce1a603a，精确CI41267979696于03:12:48Z成功。W12新单H1正确配置1POST9828tokens/1826microUSD、正式artifact4dec5c.../473666B完成；旧401两行unknown保留。随后的新run refresh=false缓存检查实际多1POST9773/1808，不冒作0重复PASS。停止付费H1再生成，先比较真实generation/candidate/current-decision合同，根因未查明前不拍脑袋，不以新摘要成功代签缓存/RF/四审。母账1955397tokens/760197microUSD（估计），unknown8+prior7。
+
+### 缓存根因已由真实manifest/独立纯数据探针确认，按共享回退实施
+
+两run exactmodel requestSHA/base/full generation相同，2可见候选因预算停止→partial trace→bool false全跳过，未尝试public读。source已读工作范围partial保留；不把partial改complete、不重签旧generation。新增source-select只读共享端口及当前材料重选等价回退计划，raw/投影复用同核心，真实1token测试请求确保错误miss也不再花钱。API合同新测试4F属于缺端口的RED，实际重复POST仍是产品行为失败证据。RF同时免费完成5条source_quote真实used参数草稿采用，完整公司链未签收；D&M关键段落未召回也如实保留，不以raw补证改写summary覆盖。
