@@ -1,26 +1,26 @@
 {
   "schema_version": "company-wiki-current-plan-status/2",
   "as_of_date": "2026-11-01",
-  "observed_at_utc": "2026-11-01T06:00:49.960881+00:00",
+  "observed_at_utc": "2026-11-01T06:11:41.365137+00:00",
   "canonical_entry": "CURRENT_STATUS.md",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
-  "project_status": "P3_SOURCE_SCOPE_BOUNDED_INDEPENDENT_PASS_PUBLICATION_PENDING_R4_RESEARCH_EXECUTING",
+  "project_status": "P3_SOURCE_SCOPE_PUBLISHED_EXACT_CI_PASS_R4_FORMAL_SUMMARY_RESEARCH_EXECUTING",
   "scope_this_update": "Mainline only; exact CI root repairs, real summary/recovery/native adoption; no new packages",
-  "last_code_commit": "c405848ad1ddba1ec0ded4ed75a7d2cdc5c8314e",
+  "last_code_commit": "7e10973e65517ce5a1b6cccc1c427ff4f9a0ecde",
   "verified_publication_before_docs": {
     "local_branch": "master",
-    "local_and_remote_head": "c405848ad1ddba1ec0ded4ed75a7d2cdc5c8314e",
-    "note": "Runtime exact CI green. Following PWF-only commits have no separate runtime CI."
+    "local_and_remote_head": "7e10973e65517ce5a1b6cccc1c427ff4f9a0ecde",
+    "note": "Source runtime exact CI green; following PWF-only commits do not imply another runtime CI."
   },
   "code_ci": {
-    "id": 41272576090,
-    "head_sha": "c405848ad1ddba1ec0ded4ed75a7d2cdc5c8314e",
+    "id": 41279280653,
+    "head_sha": "7e10973e65517ce5a1b6cccc1c427ff4f9a0ecde",
     "status": "completed",
     "conclusion": "success",
-    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41272576090",
-    "normal_pre_push_passed": 782,
-    "normal_pre_push_seconds": 114.44
+    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41279280653",
+    "normal_pre_push_passed": 1867,
+    "normal_pre_push_seconds": 48.92
   },
   "native_goal": {
     "observed_status": "active",
@@ -93,17 +93,12 @@
       "task": "W12 original-company rerun, new-company generalization, fixed8company fullaudit/skillimprovement and finalclean streak"
     }
   ],
-  "next_action": "正常发布来源共因修复并核精确CI；在r1-remediation-04按既有内部细则完成经营输入、一次新版正式摘要、缓存恢复及RF实际采用/报告/snapshot/客户时点压力，再做集中四审与质量/检测收尾。不扩施工包。",
+  "next_action": "在r1-remediation-04按已发布来源规则完成一次新版正式摘要、真实同/跨run缓存恢复、经营桥及客户时点压力、RF实际采用/报告/snapshot，再做集中四审与质量/检测收尾。历史期间差分校验按所属RF owner核根因，不以伪日期或改口径绕过；不扩施工包。",
   "package_status_registry": "PACKAGE_STATUS.json",
   "handoff": "HANDOFF.md",
   "goal_definition": "MAINLINE_LOOP_GOAL.md",
   "history_index": "HISTORY.md",
-  "own_uncommitted_runtime": [
-    "src/company_wiki/document_understanding/operating_states/assertion_roles.py",
-    "src/company_wiki/source_catalog/narrative_business_policy.py",
-    "src/company_wiki/source_catalog/narrative_reporting_rules.py",
-    "src/company_wiki/source_catalog/narrative_source_passage.py"
-  ],
+  "own_uncommitted_runtime": [],
   "foreign_wip_preserved": [
     ".githooks/pre-push mode-only; not ours"
   ],
@@ -744,10 +739,7 @@
       "directory": "revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec/diagnosis/r1-remediation-03"
     }
   },
-  "own_uncommitted_tests": [
-    "tests/unit/du11_production/test_source_measurement_scope_and_enumeration.py",
-    "tests/unit/du11_production/test_source_passage_prefix_and_cause.py"
-  ],
+  "own_uncommitted_tests": [],
   "last_version_contract_failed_ci": {
     "id": 41261403683,
     "head_sha": "93f561ef520e257bec11e3b7aa27ac16267c2203",
@@ -793,28 +785,28 @@
     }
   },
   "current_code_publication": {
-    "head_sha": "c405848ad1ddba1ec0ded4ed75a7d2cdc5c8314e",
+    "head_sha": "7e10973e65517ce5a1b6cccc1c427ff4f9a0ecde",
     "commit_hooks": "passed",
     "normal_push": "success",
     "exact_CI": "success",
     "current_verified_green_CI": {
-      "id": 41272576090,
-      "head_sha": "c405848ad1ddba1ec0ded4ed75a7d2cdc5c8314e",
+      "id": 41279280653,
+      "head_sha": "7e10973e65517ce5a1b6cccc1c427ff4f9a0ecde",
       "status": "completed",
       "conclusion": "success",
-      "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41272576090",
-      "normal_pre_push_passed": 782,
-      "normal_pre_push_seconds": 114.44
+      "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41279280653",
+      "normal_pre_push_passed": 1867,
+      "normal_pre_push_seconds": 48.92
     }
   },
   "previous_verified_code_ci": {
-    "id": 41267979696,
-    "head_sha": "ce1a603a88397e5a2e921177604cdff2dc08e0ab",
+    "id": 41272576090,
+    "head_sha": "c405848ad1ddba1ec0ded4ed75a7d2cdc5c8314e",
     "status": "completed",
     "conclusion": "success",
-    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41267979696",
-    "normal_pre_push_passed": 781,
-    "normal_pre_push_seconds": 108.09
+    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41272576090",
+    "normal_pre_push_passed": 782,
+    "normal_pre_push_seconds": 114.44
   },
   "p3_cache_reselection": {
     "status": "PUBLISHED_EXACT_CI_GREEN",
@@ -849,7 +841,7 @@
     "scope": "54.0% duplicate logical bytes, not measured NTFS physical allocation or space already reclaimed. Preserve sealed attempt during reviews; assess reuse of existing immutable input owner in P3 quality closeout, not a new package."
   },
   "p3_source_scope_repair": {
-    "status": "BOUNDED_INDEPENDENT_PASS_AWAIT_PUBLICATION",
+    "status": "PUBLISHED_NORMAL_PUSH_EXACT_CI_PASS",
     "evidence": "review/mainline-closeout-20261031/p3-source-scope/README.md",
     "business_policy": "reading-business-policy/29",
     "source_passage": "source-passage/2",
@@ -875,18 +867,28 @@
       "full_recall_claim": false
     },
     "current_original_bytes_unchanged": true,
-    "exact_CI": "pending",
+    "exact_CI": "success",
     "not_signed": [
       "new formal model artifact",
       "new cache recovery",
       "RF research acceptance",
       "entire project"
-    ]
+    ],
+    "commit": "7e10973e65517ce5a1b6cccc1c427ff4f9a0ecde",
+    "publication": {
+      "id": 41279280653,
+      "head_sha": "7e10973e65517ce5a1b6cccc1c427ff4f9a0ecde",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41279280653",
+      "normal_pre_push_passed": 1867,
+      "normal_pre_push_seconds": 48.92
+    }
   },
   "p3_next_attempt": {
     "attempt": "r1-remediation-04",
     "executor": "/root/w12_executor_remediation04",
-    "status": "FREE_SOURCES_AND_NATIVE_RESEARCH_INPUT_EXECUTING",
+    "status": "CURRENT_RULE_FORMAL_SUMMARY_CACHE_AND_NATIVE_RF_EXECUTING",
     "as_of_date": "2026-10-21",
     "new_source_HTTP": 3,
     "new_source_bytes": 608016,

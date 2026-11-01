@@ -104,3 +104,7 @@ measurement/cause证明分离、同assessment metric cache、COMPOSITION静态�
 最终37新case；698相关例28.88s、ruff/mypy408源绿；独审268P/3.92s、57控制/30真实局部输入（范围重叠不累计）确认relations/bindings无新增。canonical7.019s，112/2765known候选/4224源units、67闭包、work15991162/16M、原件locator真实replay和readonlyDB不变；D&M直接保留、p14两段于519char原生范围8成员连续精确，rounding独立卡0，全文仍partial。ROOT selected_exact oracle只认独立段落，误报成员遗漏；保存旧false字段/诊断，以成员unitID/SHA/相对区间逐字addendum纠正，未因此改planner/预算。独审v1FAIL保留，v2仅此来源节点通过。
 
 18 ROOT temp目录清1644逻辑B；原件/R3/R4数据不提前清。三原生新source608016B/3HTTP/$0及旁表/背景/经营桥推进，Q&A时间资格unknown留限。scope v1双company_raw夹具等executor错误和native失败保留，不伪称产品RED。CAS用既有owner，旧115MB不迁移。当前正常发布/精确CI待查，新正式H1摘要/缓存/RF及公司经济验收继续，不扩包。
+
+## 2026-11-01 — 来源节点正常发布及精确CI成功
+
+7e10973e已master/origin同步，正常commit/push，1867P/48.92s；CI41279280653成功，unit/合同/类型检查全部成功，未跳hook或改生产限额。当前ROOT runtime/tests无未提交，foreign hook mode保持。publication原pending收据与后来成功CI分别保留在p3-source-scope，不覆盖旧观察。已通知同一R4 executor按真实配置做一次新H1正式摘要、实际缓存恢复与RF采用；经营历史旁表和客户时点共因继续，未给公司研究经济PASS，未新发施工卡。全项目固定八家/泛化/clean责任仍未结束。

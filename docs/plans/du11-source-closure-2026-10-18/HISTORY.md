@@ -71,3 +71,5 @@
 原始失败、handoff、独审及SHA/发布按发生时含义保留；本次收敛的是当前管理视图，不把旧FAIL改成PASS。
 
 - 2026-11-01：四审6issue→7根因；来源measurement/范围/mixed呈现共因同预算真实选材及独审通过，698相关例；原成员等价oracle误判保留纠正；当前R4正式摘要/缓存/RF继续，详CURRENT_STATUS与p3-source-scope。
+
+- 2026-11-01 来源共因7e10973e正常发布、精确CI41279280653成功；收据见review/mainline-closeout-20261031/p3-source-scope，当前R4正式产物验收只看CURRENT_STATUS。

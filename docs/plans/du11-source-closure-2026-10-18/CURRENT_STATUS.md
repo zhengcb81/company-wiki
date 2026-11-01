@@ -1,6 +1,6 @@
 # 当前项目状态 — 2026-11-01
 
-**当前在P3药明康德W12的r1-remediation-04补偿复验：原3例CI及后续版本合同失败均已根修；新版真实摘要、缓存恢复和RF采用工程链已跑通。完整公司研究尚未通过独审，继续修复共因，不扩发施工包。**
+**当前在P3药明康德W12的r1-remediation-04补偿复验：原3例CI及后续版本合同失败均已根修；前版真实摘要、缓存恢复和RF采用工程链已跑通；来源规则29已独审发布，新规则的正式产物/恢复/采用正在验收。完整公司研究尚未通过独审，继续修复共因，不扩发施工包。**
 
 唯一入口为本页及[机器状态](CURRENT_STATUS.json)；接手看[HANDOFF](HANDOFF.md)，实施看[task_plan](task_plan.md)，全部完成条件看[MAINLINE_LOOP_GOAL](MAINLINE_LOOP_GOAL.md)。
 
@@ -9,12 +9,12 @@
 | P0 CI | 原3例frontier/lookahead、后续3例版本合同和Windows嵌套夹具已根修并独审 | commit仅静态检查，pre-push32已知文件＋smoke/180秒为部分保护，不保证所有CI问题都提前捕获 |
 | P1来源/摘要 | 华利15完整卡/12原子；Berkshire73卡/10原子；各1配置POST，激活/同跨run恢复独审通过 | /5完整原文卡＋advisory排名，不是生成式全文概述；Berkshire15项未处理，全文partial，非盲测 |
 | P2真实采用 | 新a466 artifact完整t3进入华利RF参数/公式/报告/snapshot，v6独立45检查通过 | 历史IR与条件工程算例，不冒2026新指引或完整买方研究 |
-| P3 W12 | 新H1正式artifact；真实1token新run复用旧exact91d5/54ccb，0新POST/预留/费；5条完整出处进入RF已用参数、主计算/报告/snapshot和真实联合压力 | 新v2执行包已封存，四路fresh独审正在收口。已报选材遗漏及经营幅度/反证问题，未签全公司质量通过 |
+| P3 W12 | 新H1正式artifact；真实1token新run复用旧exact91d5/54ccb，0新POST/预留/费；5条完整出处进入RF已用参数、主计算/报告/snapshot和真实联合压力 | R3/v2已封存、四路fresh独审全部完成。源遗漏共因已发布，经营幅度/反证、旁表/背景事实正于R4复验，未签全公司质量通过 |
 
 ## 当前代码与精确CI
 
-CWP master/远端运行版本 **c405848a**：正常pre-push **782P/114.44s**，
-[精确CI41272576090](https://github.com/zhengcb81/company-wiki/actions/runs/41272576090)成功。
+CWP master/远端运行版本 **7e10973e**：正常pre-push **1867P/48.92s**，
+[精确CI41279280653](https://github.com/zhengcb81/company-wiki/actions/runs/41279280653)成功。
 前一配置/终态恢复ce1a603a正常781P/108.09s、CI41267979696成功；原CI根修f98dd54b的CI41264855167成功。历史失败、费用、原付费签名保留；后续PWF-only提交不另造运行CI。
 
 RF main/远端85054d7b，[CI41260918155](https://github.com/zhengcb81/revenue-forecast/actions/runs/41260918155)成功；运行根修535604fa已同步3逻辑技能入口/2物理目标，重复零写、3新进程入口通过。
@@ -26,17 +26,17 @@ RF main/远端85054d7b，[CI41260918155](https://github.com/zhengcb81/revenue-fo
 
 W12执行根为audit原run的`execution_replays/r1-remediation-03`；734件/115059812逻辑字节，manifest SHA **6e8051f6…616d8**已逐件核对。active input为authoring-v4，主forecast/main-v2 SHA **d78fcdc6…21b1**，snapshot **ada03b4f…740**。作者v1三条Testing误摘同页TIDES的引用已用新v2纠正，旧字节保留。实际195claim、232参数、主/联合压力链已执行；54个幅度诊断unsupported，不能由计算正确升级为经济合理。
 
-四路fresh审查输入及报告在`revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec/reports/r1-remediation-03`，现已全部封存：storage一项P2选材遗漏；process两项P2旁表期间/背景事实血缘；analyst两项P1经营校准/反证；fetch一项P2外部电话会能力缺口，未发现FF路由错误。ROOT已归集73项检查和全部六个原issue，专家正在定位共用根因与实施顺序。记录型coverage声明gap0不代表质量通过；混合说明的locator等机械定位缺口另行分诊，原报告不覆盖。
+四路fresh审查输入及报告在`revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec/reports/r1-remediation-03`，现已全部封存：storage一项P2选材遗漏；process两项P2旁表期间/背景事实血缘；analyst两项P1经营校准/反证；fetch一项P2外部电话会能力缺口，未发现FF路由错误。ROOT已归集73项检查和全部六个原issue，专家已将六原issue归并七根因并交内部实施细则，R4正在执行。记录型coverage声明gap0不代表质量通过；混合说明的locator等机械定位缺口另行分诊，原报告不覆盖。
 
 ## 最新来源共因节点与R4
 
-新来源修复已完成同预算真实选材与集中独审：[收据与复现](review/mainline-closeout-20261031/p3-source-scope/README.md)。37新例、698相关例/28.88s、mypy408源/ruff通过，独审268例与本域有重叠。D&M原文完整入选；p14两技术段在519字符native range中逐成员SHA/坐标精确保留，8/8连续、未来限定未丢。旧检查只认单独span造成ROOT误判，已按原生成员复核，不改预算。三rounding独立卡0；112/16M不变，全文仍partial。新代码正常发布/精确CI尚待，不冒用c405的旧绿。
+新来源修复已完成同预算真实选材与集中独审：[收据与复现](review/mainline-closeout-20261031/p3-source-scope/README.md)。37新例、698相关例/28.88s、mypy408源/ruff通过，独审268例与本域有重叠。D&M原文完整入选；p14两技术段在519字符native range中逐成员SHA/坐标精确保留，8/8连续、未来限定未丢。旧检查只认单独span造成ROOT误判，已按原生成员复核，不改预算。三rounding独立卡0；112/16M不变，全文仍partial。新代码7e10973e已正常发布并取得精确CI41279280653成功；不冒用c405的旧绿。
 
-四审六issue已由专家归并七根因，实施细则在AUDIT同run/remediation/r1-remediation-03/implementation.md。R4正在真实native研究接线；已原生取得法院原意见、官方会议信息和主办Q&A三源608016B/$0，Q&A公开日期未知、原生资格unknown如实保留，不能改名电话会。旁表/背景事实和实际季度交付桥推进中，无新H1模型POST/正式经济验收。RF新增monthly_manifest外来WIP保留；不扩包。
+四审六issue已由专家归并七根因，实施细则在AUDIT同run/remediation/r1-remediation-03/implementation.md。R4正在真实native研究接线；已原生取得法院原意见、官方会议信息和主办Q&A三源608016B/$0，Q&A公开日期未知、原生资格unknown如实保留，不能改名电话会。旁表/背景事实和实际季度交付桥推进中。已放行按当前配置做一次新版H1正式摘要，实耗以新attempt账本为准；尚无正式经济验收。RF新增monthly_manifest外来WIP保留；不扩包。
 
 ## 唯一下一步
 
-正常发布来源共因修复并核精确CI；在r1-remediation-04按既有内部细则完成经营输入、一次新版正式摘要、缓存恢复及RF实际采用/报告/snapshot/客户时点压力，再做集中四审与质量/检测收尾。不扩施工包。
+在r1-remediation-04按已发布来源规则完成一次新版正式摘要、真实同/跨run缓存恢复、经营桥及客户时点压力、RF实际采用/报告/snapshot，再做集中四审与质量/检测收尾。历史期间差分校验按所属RF owner核根因，不以伪日期或改口径绕过；不扩施工包。
 
 后续才是药明合联/Snowflake泛化、固定八家公司及同一有效版本连续三家clean；W21 canonicalC2、新US监管/HK/US_RPO与长文余项仍按原责任，不用fallback或股东信代签。来源漏召回不能由RF另读raw改写成摘要完整；未来假设不足不能靠编数字、公司特判或抬额度解决。
 

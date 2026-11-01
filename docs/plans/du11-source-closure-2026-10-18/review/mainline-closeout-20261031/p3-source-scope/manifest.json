@@ -139,6 +139,36 @@
       "bytes": 1785,
       "sha256": "3493c0455c868ae033da2258062bb4e5227aaa3dea5423456f31606745016222",
       "uncompressed_sha256": "db20e43c6a82cb1c9d1bb4722e8c7a5d9dc7fc7b3e453847b354cc09df75b70f"
+    },
+    {
+      "path": "receipts/source-scope-publication.json.gz",
+      "bytes": 178,
+      "sha256": "4b5532518eb558f9840e61a26c944a66680e23f40bd9aa82f212fa4401760c56",
+      "uncompressed_sha256": "8b04a25c9743b87f87f42e8f9a9debf336cb7abd045480df58e8fe2e22570a94"
+    },
+    {
+      "path": "receipts/source-scope-ci.json.gz",
+      "bytes": 263,
+      "sha256": "7da4ec38994ac4bd72512a1754fc0d11a772241734432aeabc3342f636b72bd9",
+      "uncompressed_sha256": "1c4b7bf47546bd74b014859d689befcef72189c23c296620b37c008f6dc57392"
+    },
+    {
+      "path": "receipts/source-scope-ci-jobs.json.gz",
+      "bytes": 471,
+      "sha256": "f82e58f38d1cc54bad653327c402f0cdceaa0ddb616c921d4c7e359a3e20c93e",
+      "uncompressed_sha256": "ef8e893397dd03d34b2cbee2dd7464af333b9031501c3de2c37af11e044a00fe"
+    },
+    {
+      "path": "receipts/source-scope-commit.log.gz",
+      "bytes": 771,
+      "sha256": "3b4a2f0b394ec4c56994e8ddecd93a7cdfece9633e57f1f2f7286f180dcad480",
+      "uncompressed_sha256": "92af92bc3252e06cea29ca97f6297a8109ccdbf7a133232efc54bd0bd55dcb04"
+    },
+    {
+      "path": "receipts/source-scope-push.log.gz",
+      "bytes": 2436,
+      "sha256": "a5c0d8ac769b7dcfda579aeaa9a0584fa3146e38a40bfd50a3a0ac2b8bcec2d2",
+      "uncompressed_sha256": "b98f3943647b7867930a968c167c947848fb743f1b5b3bd7c3d0b87c36c99485"
     }
   ]
 }

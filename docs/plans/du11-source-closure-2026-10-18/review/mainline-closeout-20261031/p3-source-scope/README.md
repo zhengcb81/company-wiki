@@ -24,3 +24,7 @@
 ## 清理与未签范围
 
 18个ROOT basetemp按保留日志定位清理1644逻辑B；不是回收MB/NTFS实占承诺。真实R3/R4数据继续供当前审查，不提前删。旧额外POST/unknown全计，当前节点0模型/下载。P3研究两P1、旁表/背景事实、电话会能力外限、正式新summary/cache/RF、泛化及质量/检测收尾仍按原PWF推进，不扩施工包。
+
+## 正常发布
+
+CWP master与origin/master运行提交`7e10973e65517ce5a1b6cccc1c427ff4f9a0ecde`，normal commit/push通过，pre-push1867P/48.92s；[精确CI41279280653](https://github.com/zhengcb81/company-wiki/actions/runs/41279280653)成功。仅关闭本来源节点，正式新generation、恢复、RF采用及经济审查仍由P3当前attempt验收。publication原收据保留当时pending观察，后续CI收据明确终态；不篡改旧观察。
