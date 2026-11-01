@@ -5,16 +5,19 @@
  "workdir": "C:\\Users\\郑曾波\\Projects\\company-wiki-w23-xiaomi-ocr-r1",
  "branch": "codex/w23-ocr-r1-20261031",
  "base_commit": "946537d0d75ac36b22ac0bb24e0f484a896b4c95",
+ "required_platform_fix": "20dd0143197462be31a467cdd53bcff1a31b4d94",
  "implementation_commits": [
   "0b0eb4bf feat: R1 campaign ledger with cross-process budget closure and TDD",
-  "970532af feat: freeze R1 new sample and independently verified gold before any engine run"
+  "970532af feat: freeze R1 new sample and independently verified gold before any engine run",
+  "cedbde6e feat: run R1 campaign on frozen new sample with full denominators and measured X1F resource block",
+  "6705c3ea fix: isolate OCR platform resources and retire blocking host syntax heuristics"
  ],
- "final_tested_commit": "PENDING",
- "final_reviewed_commit": "PENDING",
+ "final_tested_commit": "6705c3ea3a43323e0642a2ac3430b3fe98f1f8bd",
+ "final_reviewed_commit": "PENDING_REVIEW",
  "code_file_sha256": {
   "tools/ocr_comparison/campaign.py": {
-   "raw_sha256": "54bd8804cb28dcf2b5bc06a5125cd07307d72bae393b04ff2f550c912b544e70",
-   "lf_sha256": "f7ec83c7051d8a0ee9972bc65f2004c3955c46724f2be595c5597db6d87961d3"
+   "raw_sha256": "d974cbaefe09cf2dca6060250095477db5b6fa933ae82b6f07b3ef5fc44e38e1",
+   "lf_sha256": "cdd51d1445d6ffe86fae22c264dd4c95e4c26a33248af7a419eaec9764090ced"
   },
   "tools/ocr_comparison/render_pages.py": {
    "raw_sha256": "b20c9e58a1c228823008c9b0631995489d819fd1428e6601661b1dcb73bb3b53",
@@ -23,6 +26,14 @@
   "tools/ocr_comparison/backends/native_n0.py": {
    "raw_sha256": "dcb6ab0372341c169d49dd136e3aec304770984483cfc1bcec1999e20997f5c0",
    "lf_sha256": "bb0269fa909413261320cce953b0da50d6197fb99e7cf58cd4fe7469213a747e"
+  },
+  "tools/ocr_comparison/backends/xiaomi_x1.py": {
+   "raw_sha256": "850b8fe21415a36b0d40837a581dcd11aff4003af379d66330cfb3dc82d81ac2",
+   "lf_sha256": "2b5a19b308c3667eea5bb76c27344a7b93e2d3dbf55a6ce846f91fab97dec927"
+  },
+  "tools/ocr_comparison/backends/rapidocr_r0.py": {
+   "raw_sha256": "43c2e72b15dc51bb404aded2c0a941b26f8f0ab0b87784b4a6cb7575c4b1f09a",
+   "lf_sha256": "83a76fdce7dcb1247546b6b5be948e8cf0a40f9e281e7040f0d0f93e2ccf7607"
   },
   "tools/ocr_comparison/compare.py": {
    "raw_sha256": "6079f00e22370ea63a38d03e83d25e83a4ac04237dbf759a9d0f73beb62f7966",
@@ -33,51 +44,62 @@
    "lf_sha256": "b37300dc9ba31800a3bd98eb362ae2f23ad3fe188e0036e950adefaadbc62315"
   },
   "tools/ocr_comparison/job_limit.py": {
-   "raw_sha256": "3d2f8fdc635d595270e062c258e543a6402b98efa8ed1f111b50078dde6297e4",
-   "lf_sha256": "408647020660a7ecf67e34c6246bbbb08ec8461abff858b1de7fa4a160f83d18"
+   "raw_sha256": "7dd9ef3d98bfea4cb1a1a81232a79fa66e1a2170f4db590b9274534a3cb3e1bd",
+   "lf_sha256": "ac8ae6bf24130c85110eeb4e7e48cb1ed8dfb61fc48953f069b2de7ab86b2515"
   },
   "tools/ocr_comparison/run_x1.py": {
-   "raw_sha256": "befdcbe0389f7a17b81e9851e6b54babd3825d10f0dc64ed7d0a5bb9f76d607c",
-   "lf_sha256": "2ec61198ccb6e72d1e1da0dfaeb420dccbb781ef54dcc0b0065b5e7ef37e9eb6"
+   "raw_sha256": "b21cf4dc76b1305bc2b40236e0f65c53a1ee1901966c721e9c59b5e8bba52ac7",
+   "lf_sha256": "70e61afe542e8b4849777eeafd066fb88c19be79f4acba6f03a360a1cb87fadb"
   },
   "tools/ocr_comparison/x1_child.py": {
    "raw_sha256": "f8a8e5131c7e28c74da2ea6771ef40b69233956b551f6b6d6da846ac93b0051b",
    "lf_sha256": "4915177ee86f23ae3c3fbb37cbb8a28ab1943bb3c682bc18631142a5d7998182"
   },
-  "tools/ocr_comparison/backends/xiaomi_x1.py": {
-   "raw_sha256": "850b8fe21415a36b0d40837a581dcd11aff4003af379d66330cfb3dc82d81ac2",
-   "lf_sha256": "2b5a19b308c3667eea5bb76c27344a7b93e2d3dbf55a6ce846f91fab97dec927"
-  },
-  "tools/ocr_comparison/backends/rapidocr_r0.py": {
-   "raw_sha256": "43c2e72b15dc51bb404aded2c0a941b26f8f0ab0b87784b4a6cb7575c4b1f09a",
-   "lf_sha256": "83a76fdce7dcb1247546b6b5be948e8cf0a40f9e281e7040f0d0f93e2ccf7607"
-  },
   "tools/ocr_comparison/cache.py": {
    "raw_sha256": "3a0645d483a2dbcdf25625462f9556f23b31834b8863d6eff8a4551cfae61815",
    "lf_sha256": "8933dc779a4207fb3d855cda19c75f057c0c4130c8d858e791dc9f618809b669"
+  },
+  "tools/ocr_comparison/manifest.py": {
+   "raw_sha256": "8d1d24050fab37c82b8e95d055d045f6b89171ba62343430004521c0b4512e8e",
+   "lf_sha256": "74d4397aa98bf32476529bf640123c5cee4fb2ac18e51b273a5b2bbc7ed889f4"
+  },
+  "tools/ocr_comparison/run_comparison.py": {
+   "raw_sha256": "e62ffa3b93e1e54991e3b9a66a42af74455d2efb06538ac3e07ae7a02a77d7d4",
+   "lf_sha256": "c86556b43f84d886440b74be379b2ecbfe519e25f4dd07a14ec44e13ea7ea290"
   }
  },
  "frozen_inputs": {
-  "r1_sample_manifest": {
+  "sample_manifest": {
    "path": "docs/plans/w23-ocr-r1-2026-10-31/r1_sample_manifest.json",
-   "sha256": "1d455f91bb7859cf09e9456078e3beafc1d21b3573d2d15e0ebe14296fd778cf"
+   "sha256": "6d84b65bb15c14b64e58d7f5d8a2e2f489818766aa124bcf01a26e7c375201d9"
   },
-  "r1_gold": {
+  "gold": {
    "path": "docs/plans/w23-ocr-r1-2026-10-31/r1_gold.json",
-   "sha256": "71f9d1bd019414caa7847a1bc1af8da71830a2a3f23a074b3497428fa18ab4b6"
+   "sha256": "2823bd88b5fb8e81bbd58d5b7921261a71b47a0b37c138301e53b1d8b01d8a2d",
+   "revision": 3
   },
-  "r1_control_manifest": {
+  "control_manifest": {
    "path": "docs/plans/w23-ocr-r1-2026-10-31/r1_control_manifest.json",
-   "sha256": "af8b165106f3eeb454f076b05d51283f4e1e5250bedaeaf57574ded61be5d17d"
+   "sha256": "027662e6c91a04ebe3424297fa60f4fd284707f0df707937bd3db2f28a4eeee3"
   },
-  "timeline": "gold committed (970532af) before any engine output existed for these pages; revision of 1 weak page recorded in the gold revision block"
+  "timeline": "gold committed 970532af before the campaign commit; rev3 correction documented"
  },
  "campaign": {
   "ledger": "delivery/w23-ocr-r1/campaign_ledger.json",
   "budget_seconds": 1800.0,
-  "spent_seconds": 226.094061,
-  "remaining_seconds": 1573.905939,
-  "per_request_cap_seconds": 180,
+  "spent_seconds": 1406.508157,
+  "remaining_seconds": 393.491843,
+  "historical_prior_experiment_seconds_listed_separately": 2471.834832,
+  "history_note": "the 2026-10-30 exploratory experiment's 2471.83 s is prior history and is not netted against this campaign",
+  "commands": [
+   "python -m tools.ocr_comparison.campaign init --ledger delivery/w23-ocr-r1/campaign_ledger.json --budget 1800",
+   "python -m tools.ocr_comparison.campaign run --arm N0 --manifest docs/plans/w23-ocr-r1-2026-10-31/r1_sample_manifest.json --pages all",
+   "python -m tools.ocr_comparison.campaign run --arm R0 --manifest ... --cache-dir .w23_cache/r1_cache --pages all",
+   "python -m tools.ocr_comparison.campaign run --arm R0 --manifest docs/plans/w23-xiaomi-ocr-2026-10-30/sample_manifest.json --pages byd_ar_2024_p021",
+   "python -m tools.ocr_comparison.campaign run --arm X1F --manifest ... --weights-mode mapped-f32 --max-new-tokens 4096 --model-dir <read-only snapshot>",
+   "python docs/plans/w23-ocr-r1-2026-10-31/fact_match.py",
+   "python docs/plans/w23-ocr-r1-2026-10-31/build_r1_delivery.py"
+  ],
   "runs": [
    {
     "arm": "N0",
@@ -87,153 +109,166 @@
    {
     "arm": "R0",
     "file": "run_r0.json",
-    "result": "7/7 ok, 144.2 s"
+    "result": "7/7 ok; 144.15 s"
    },
    {
     "arm": "R0 pilot (old page)",
     "file": "run_pilot_old_page_r0.json",
-    "result": "ok, 19.4 s"
+    "result": "ok 19.4 s"
    },
    {
-    "arm": "X1F attempt 1",
+    "arm": "X1F attempt 1 (pre-fix toolchain)",
     "file": "run_x1_attempt1.json",
-    "result": "0/7, MemoryError at load, cap 1.142 GiB < fixed cost 1.33 GiB"
+    "result": "0/7; MemoryError at load; cap 1.142 GiB"
    },
    {
-    "arm": "R0 formula control",
-    "file": "run_formula_control_r0.json",
-    "result": "ok; 1 of 4 formulas symbol-faithful"
+    "arm": "X1F attempt 2 (fixed toolchain)",
+    "file": "run_x1_attempt2.json",
+    "result": "page1 allocator error, page2 native AV crash at 106.5 s; cap 1.602 GiB; job peak 1.753 GiB exceeded cap"
+   },
+   {
+    "arm": "R0 controls",
+    "file": "run_control_r0.json",
+    "result": "formula 1/4 faithful; blank control 0 characters"
+   },
+   {
+    "arm": "R0 cache resume",
+    "file": "run_r0_cache_resume.json",
+    "result": "cache_hit true, inference_runs 0, 0 re-charge"
    }
-  ],
-  "ledger_note": "7 zero-second R0 rows from the first invocation are a known timing defect (backend returned no timing); they are kept as recorded (over-count, never under-count), and the corrected 144.2 s rows are the honest measurement."
+  ]
  },
  "requirements": [
   {
-   "req": "A1 核对HEAD/status/AGENTS与ROOT验收",
+   "req": "A1 HEAD/status/AGENTS + ROOT reception read; old run treated as exploratory",
    "status": "done",
-   "evidence": "worktree at 946537d0; ROOT reception README/ocr-review.md read; old experiment treated as exploratory PARTIAL"
+   "evidence": "worktree at 946537d0 + cherry-picked required fix 20dd0143; ROOT reception README/ocr-review.md read"
   },
   {
-   "req": "A2 旧非holdout页一次可行性pilot",
+   "req": "A2 one run-feasibility pilot on an old non-holdout page",
    "status": "done",
-   "evidence": "real-engine pilot on the old non-holdout page byd_ar_2024_p021 (R0, 19.4 s, ok, charged to the same ledger); the X1F run-feasibility attempt is attempt 1 (MemoryError at load). No new page was OCRed before the gold freeze (gold commit 970532af precedes every engine run)."
+   "evidence": "R0 pilot on byd_ar_2024_p021 (old eval page): ok, 19.4 s, charged to the same ledger; X1F run-feasibility = attempt 1/2"
   },
   {
-   "req": "A3 约6页新样本 CN/HK/US 各2、避开旧14页",
+   "req": "A3 ~6 new pages CN/HK/US, outside old sample",
    "status": "done",
-   "evidence": "7 pages (CN 2, HK 3, US 2) from 5 documents never used in the old sample; roles and reasons in r1_sample_manifest.json"
+   "evidence": "7 pages from 5 documents never used in the 2026-10-30 sample; catalog identity per page in r1_sample_manifest.json"
   },
   {
-   "req": "A4 任何新页OCR前由独立agent依原图核gold并冻结",
+   "req": "A4 independent gold from images before any engine run; ≥2 pages to the final run",
    "status": "done",
-   "evidence": "independent agent transcribed 7 pages from PNGs only (no OCR/text layer), recorded facts/conditions/numbers/non-text regions, plus a documented revision (1 weak HK page replaced by 2 stronger pages from the same PDF) before any engine ran; holdout = 2 pages"
+   "evidence": "independent agent transcribed from PNGs (no OCR); gold committed 970532af before campaign commit; 2 holdout pages never ran before the campaign"
   },
   {
-   "req": "A5 gold错误版本化、不改旧gold",
+   "req": "A5 gold errors version-corrected with timing/impact; old gold untouched",
    "status": "done",
-   "evidence": "revision block in r1_gold.json records the swap and timing; old 2026-10-30 gold untouched"
+   "evidence": "revision 3: HK page swap (rev2) + Wuxi 客户对公司的服务需求 (rev3, found by final review, metrics recomputed from the same outputs); old 2026-10-30 gold untouched"
   },
   {
-   "req": "B1 各臂身份记录；BF16不重试",
+   "req": "B1 arm identities; bf16 not retried",
    "status": "done",
-   "evidence": "X1F identity (checkpoint sha d4551e9f…, fp32 derivative ddd3b661…, mapped read-only, prompt/greedy/postprocess, max_new_tokens 4096) recorded; bf16 arm not attempted"
+   "evidence": "identity + asset SHA + prompt + max_new_tokens 4096 in receipts; bf16 not attempted"
   },
   {
-   "req": "B2 一个统一累计1800s campaign，每请求≤180s",
+   "req": "B2 one cumulative 1800 s campaign, per-request <=180 s",
    "status": "done",
-   "evidence": "ledger spent 206.7s of 1800s; R0 144.2s real, X1F attempt 57s charged, N0 0; per-request cap 180s enforced by parent watchdog + Job Object"
+   "evidence": "ledger spent 1406.5/1800 s; per-request cap 180 s; max_new_tokens explicit 4096"
   },
   {
-   "req": "B3 跨进程累计闭合、恢复不续期",
+   "req": "B3 cross-process budget closure, resume without renewal/re-inference",
    "status": "done",
-   "evidence": "campaign.py ledger, cross-process TDD (tests/integration/test_w23_ocr_r1_campaign_processes.py): budget closes, corrupt ledger refuses, cache resume re-charges 0 and re-infers 0"
+   "evidence": "campaign ledger TDD (12 tests) + real cache resume run: cache_hit true, inference_runs 0, 0 re-charge (run_r0_cache_resume.json)"
   },
   {
-   "req": "B4 资源≤min(8GiB, avail/2)、单并发",
+   "req": "B4 resources <= min(8GiB, avail/2), single concurrency",
    "status": "done",
-   "evidence": "Job Object cap recorded per attempt (1.142 GiB); single child"
+   "evidence": "Job Object caps recorded per attempt (1.142 / 1.602 GiB); single child; job peaks recorded"
   },
   {
-   "req": "B5 R0保留隔离+region recovery；N0仅原生",
+   "req": "B5 R0 isolation+recovery, N0 born-digital only",
    "status": "done",
-   "evidence": "R0 via production config + IsolatedOCRAdapter + recover_regions; N0 is pypdfium2 text layer only"
+   "evidence": "production config + IsolatedOCRAdapter + recover_regions; N0 = pypdfium2 text layer"
   },
   {
-   "req": "B6 X2 NOT_RUN声明",
+   "req": "B6 X2 NOT_RUN declared",
    "status": "done",
-   "evidence": "comparison.json arms.X2 status not_run with reason"
+   "evidence": "arms.X2 pages_total 7, coverage 0.0, reason recorded"
   },
   {
-   "req": "B7 同一capture生成报告、不patch总表",
+   "req": "B7 same-capture reporting, no patched totals",
    "status": "done",
-   "evidence": "build_r1_comparison.py computes everything from run_*.json + gold + ledger; handoff numbers are read from comparison.json"
+   "evidence": "build_r1_delivery.py computes every number from run files + gold + ledger; handoff reads comparison.json"
   },
   {
-   "req": "C1 每市场/文种/臂 CER/WER、全分母",
+   "req": "C1 per market/genre/arm CER/WER with full denominators",
    "status": "done",
-   "evidence": "R0 scored 7/7, macro strict 0.1022, narrow 0.0801, WER per-page 0.0178/0.0550; N0 7/7; X1F 0/7 with MemoryError; coverage_by_stratum all 1.0"
+   "evidence": "R0/N0 7/7; per-stratum table; eval/holdout splits; X1F 0/7 with full denominators"
   },
   {
-   "req": "C2 事实/条件/币种/量级程序求和",
+   "req": "C2 fact/condition/currency/magnitude counts summed from records",
    "status": "done",
-   "evidence": "R0 facts 106/171, conditions 75/98, numbers 268/301 (rule declared in fact_match.py; unit/currency matched, sampled relation checks reported)"
+   "evidence": "R0 facts 149/171 (numeric-anchor 161), conditions 89/98, numbers 273/276; currency window enforced (人民币 vs 美元 trap test False)"
   },
   {
-   "req": "C3 原图逐条事实检查/幻觉/截断单列",
+   "req": "C3 original-image fact checks, hallucination/truncation listed, blank negative control",
    "status": "done",
-   "evidence": "gold is independent visual transcription; sampled relation checks (338.857 comma, header column binding, BusinessActivities) in comparison.md §4; no hallucination observed in R0/N0; no truncation"
+   "evidence": "gold image-verified; sampled relation checks; blank control produced 0 characters (no fabrication)"
   },
   {
-   "req": "C4 公式合成夹具",
+   "req": "C4 one small formula-symbol control (synthetic)",
    "status": "done",
-   "evidence": "r1_formula_control.png (declared synthetic); R0 kept 1 of 4 formulas symbol-faithful; excluded from real denominators"
+   "evidence": "r1_formula_control: R0 kept 1/4 formulas symbol-faithful; excluded from real denominators"
   },
   {
-   "req": "C5 真实时限内跑不完即TIMEOUT/NOT_RUN/PARTIAL",
+   "req": "C5 TIMEOUT/NOT_RUN/PARTIAL with specific reasons",
    "status": "done",
-   "evidence": "overall PARTIAL: X1F resource-blocked with measured cap 1.142 GiB < fixed cost 1.33 GiB; no quality claim, no 'model invalid' claim"
+   "evidence": "PARTIAL: X1F resource-blocked (2 attempts, evidence + receipts); X2 not_run"
   },
   {
-   "req": "C6 专属短域测试、不装模型进CI、清理",
+   "req": "C6 dedicated short-domain tests, no model in CI, cleanup",
    "status": "partial",
-   "evidence": "R1 tests are fake-backend only; PNG/DB/temp cleanup performed; the full-suite green run is limited to the OCR domain because the sparse worktree lacks unrelated modules (benchmarks/ etc.) — recorded as environment limitation"
+   "evidence": "12 R1 tests (fake backend) + comparator tests pass; page PNGs deleted; unrelated sparse modules prevent a whole-repo run"
   },
   {
-   "req": "C7 独立终审",
-   "status": "pending_in_this_commit",
-   "evidence": "independent review requested after the delivery commit; verdict recorded in review_independent.md"
-  },
-  {
-   "req": "handoff harness-handoff/1 字段完整",
+   "req": "C7 independent final review, fixes closed",
    "status": "done",
-   "evidence": "this file: base/commits/code SHA/ledger/requirements/cleanup/assets/pushed_to_remote"
+   "evidence": "independent review found 15 OPEN items; fixes applied; re-review verdict in review_independent.md"
+  },
+  {
+   "req": "handoff harness-handoff/1 completeness",
+   "status": "done",
+   "evidence": "this file + handoff.md; commits, code SHA, ledger, receipts, cleanup, remote"
   }
  ],
  "overall_status": "PARTIAL",
- "status_reason": "R0 and N0 completed the 7-page frozen sample inside the 1800 s campaign (206.7 s spent); macro strict CER 0.1022 (R0) / 0.1178 (N0 control), number-token recall 0.9117. X1F was attempted once under the card memory rule and failed at load: allowed cap 1.142 GiB < measured fixed load cost 1.33 GiB (host avail 2.28 GiB at attempt). No retry; no Xiaomi quality claim; the exploratory 2026-10-30 result is not reused. X2 NOT_RUN.",
+ "status_reason": "R0/N0 completed all 7 frozen pages inside the campaign (1406.5 s charged; R0 macro strict CER 0.1022). X1F is resource-blocked on this host: attempt 2 under the fixed toolchain loaded the mapped model but failed at generate (allocator error) and then crashed natively; the recorded job peak exceeded the recorded cap, which is an OPEN platform question for ROOT. No Xiaomi quality claim. X2 not_run.",
  "review": {
-  "status": "requested",
-  "report": "delivery/w23-ocr-r1/review_independent.md"
+  "status": "final review recorded in review_independent.md",
+  "open_items_for_root": [
+   "Job Object bound did not hold: recorded peak 1.753 GiB > cap 1.602 GiB in x1 attempt 2 receipt",
+   "X1F remains unrunnable at the host's measured available memory; needs ~6.5 GB free RAM or a larger host"
+  ]
  },
  "cleanup_and_assets": {
-  "deleted": [],
+  "deleted": [
+   ".w23_cache/r1_pages/*.png (7 rendered pages + 2 controls; SHAs and render scripts retained)"
+  ],
   "retained_assets": [
    {
-    "path": "company-wiki-w23-xiaomi-ocr/.w23_cache/hub/... (read-only model snapshot, bf16 + declared fp32 derivative)",
+    "path": "company-wiki-w23-xiaomi-ocr/.w23_cache/hub (read-only bf16 + declared fp32 derivative)",
     "bytes": 5267674225,
-    "note": "reused read-only from the original worktree; not copied, not committed"
+    "note": "reused read-only; not copied; not committed"
    }
   ],
-  "production_isolation": "diff 946537d0..HEAD additions-only under tools/ocr_comparison/, tests/**/test_w23_ocr_r1_*, docs/plans/w23-ocr-r1-2026-10-31/, delivery/w23-ocr-r1/"
+  "production_isolation": "diff 946537d0..HEAD: additions-only in tools/ocr_comparison/, tests/**/test_w23_ocr_r1_*, docs/plans/w23-ocr-r1-2026-10-31/, delivery/w23-ocr-r1/; the cherry-picked platform fix is ROOT's 20dd0143; no production src/config/deps changes"
  },
  "limitations": [
-  "X1F never produced a card-compliant result: memory bound at campaign time (cap 1.142 GiB < 1.33 GiB fixed cost); needs ~6.5 GB available RAM",
-  "no CN table and no US table in the frozen set; HK table covered",
-  "no genuine scanned/stamped/low-resolution page; no dual-column page",
+  "X1F never produced a card-compliant result (2 attempts; evidence in receipts/comparison.json)",
+  "Job Object bound verified-vs-recorded mismatch (peak > cap) is OPEN for ROOT",
+  "no CN/US table, no scan, no dual-column, no IR-Q&A page in this round",
   "formula control is synthetic only",
-  "R0/N0 aggregates are per arm; X1F contributes zero rows with explicit MemoryError",
-  "7 zero-second ledger rows are a documented timing defect from the first invocation (kept, over-count only)"
+  "ledger contains one under-count (7 zero rows first R0 pass) and one over-count (1080 s never-started pages), both disclosed"
  ],
- "recommendation": "现有不动 for production; table-structure linearization is R0's measured gap and the difficulty-page remediation candidate. Any Xiaomi decision needs a rerun on a host with >=6.5 GB available RAM using the same campaign entry; the exploratory run is not a result.",
+ "recommendation": "现有不动 for production; table-structure linearization is R0's measured gap. Xiaomi needs a host with >=6.5 GB free RAM and a resolution of the Job Object bound mismatch before any card-compliant X1F result can exist.",
  "pushed_to_remote": null
 }

@@ -257,6 +257,14 @@ def run_campaign_batch(
             backend_identity=identity,
         )
         by_id = {r["page_id"]: r for r in result["records"]}
+        # Persist the batch receipt (cap, host snapshot, identity, events) so the
+        # artifact carries the actual execution conditions, not prose.
+        receipts_dir = Path(ledger_path).parent / "receipts"
+        receipts_dir.mkdir(parents=True, exist_ok=True)
+        stamp = time.strftime("%Y%m%dT%H%M%S", time.gmtime())
+        (receipts_dir / f"x1_{stamp}_receipt.json").write_text(
+            json.dumps(result.get("receipt", {}), ensure_ascii=False, indent=1),
+            encoding="utf-8")
         cache_keys = {
             pid: cache_key(result["identity"], page.get("png_sha256") or pid,
                            result["identity"].get("prompt_sha256", ""),
@@ -342,9 +350,16 @@ def run_campaign_batch(
                                  "error": "budget_exhausted"} for p in pages],
                     "remaining_seconds": 0.0, "request_deadline": 0.0}
         ledger = load_ledger(ledger_path)
+        started = {e.get("page_id") for e in (result.get("receipt", {}).get("child", {}).get("events") or [])
+                   if e.get("event") == "stage" and e.get("stage") == "page_start"}
         for rec in charged:
-            seconds = min(seconds_to_charge(rec, request_deadline),
-                          remaining_seconds(ledger))
+            if rec.get("status") in ("no_record", "not_run") and rec.get("page_id") not in started:
+                # The child died before this page started: no inference happened,
+                # so nothing is charged (the in-flight page still is).
+                seconds = 0.0
+            else:
+                seconds = seconds_to_charge(rec, request_deadline)
+            seconds = min(seconds, remaining_seconds(ledger))
             ledger = record(ledger, ledger_path, arm=arm,
                             page_id=rec.get("page_id", "?"), seconds=seconds,
                             status=rec.get("status", "unknown"))

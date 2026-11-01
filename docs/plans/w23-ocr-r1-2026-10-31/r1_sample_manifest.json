@@ -11,7 +11,6 @@
    "page_id": "r1_amec_ar2025_p029",
    "label": "中微公司 2025 年年度报告",
    "pdf": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\中微公司\\raw\\financial_reports\\中微公司：2025年年度报告.pdf",
-   "pdf_sha_prefix": "d64c410832f2",
    "pdf_page_index": 29,
    "why": "行业情况+产能+客户句群，简中业务描述与数字",
    "market": "CN",
@@ -23,13 +22,16 @@
     1654,
     2339
    ],
-   "native_text_layer_chars": 1151
+   "native_text_layer_chars": 1151,
+   "document_id": "urn:company-wiki:document:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+   "source_id": "urn:company-wiki:source:sha256:d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+   "content_sha256": "d64c410832f22f5127277bad6dc357c664aede523561af99150c494857fd3aa5",
+   "mime_type": "application/pdf"
   },
   {
    "page_id": "r1_wuxi_ar2022_p010",
    "label": "药明康德 2022 年年度报告",
    "pdf": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\药明康德\\raw\\financial_reports\\药明康德：2022年年度报告.pdf",
-   "pdf_sha_prefix": "b6375d90fe2b",
    "pdf_page_index": 10,
    "why": "管理层讨论与分析开头，客户数与外包比例数字",
    "market": "CN",
@@ -41,13 +43,16 @@
     1654,
     2339
    ],
-   "native_text_layer_chars": 1868
+   "native_text_layer_chars": 1868,
+   "document_id": "urn:company-wiki:document:sha256:f7d5c0e585cf913086cfba5cfa74ae1d46a3ef3c4170ea7a08a862e804933904",
+   "source_id": "urn:company-wiki:source:sha256:f7d5c0e585cf913086cfba5cfa74ae1d46a3ef3c4170ea7a08a862e804933904",
+   "content_sha256": "f7d5c0e585cf913086cfba5cfa74ae1d46a3ef3c4170ea7a08a862e804933904",
+   "mime_type": "application/pdf"
   },
   {
    "page_id": "r1_ksy_fy2025_results_p003",
    "label": "金山雲 截至二零二五年十二月三十一日止財年未經審計財務業績",
    "pdf": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\金山雲\\raw\\financial_reports\\quarterly\\2026-03-25_hkexnews_12067362_內幕消息 截至二零二五年十二月三十一日止三個月及財年的未經審計財務業績.pdf",
-   "pdf_sha_prefix": "9f35944bcca5",
    "pdf_page_index": 3,
    "why": "繁中年度业绩正文，第四季度收入与同比数字密集",
    "market": "HK",
@@ -59,13 +64,16 @@
     1654,
     2205
    ],
-   "native_text_layer_chars": 968
+   "native_text_layer_chars": 968,
+   "document_id": "urn:company-wiki:document:sha256:9f35944bcca595e7286c00a69b8a7bbb907e3bca890e5bc897b9e1c97cde3470",
+   "source_id": "urn:company-wiki:source:sha256:9f35944bcca595e7286c00a69b8a7bbb907e3bca890e5bc897b9e1c97cde3470",
+   "content_sha256": "9f35944bcca595e7286c00a69b8a7bbb907e3bca890e5bc897b9e1c97cde3470",
+   "mime_type": "application/pdf"
   },
   {
    "page_id": "r1_ksy_fy2025_income_p012",
    "label": "金山雲 截至二零二五年十二月三十一日止財年未經審計財務業績(綜合虧損表)",
    "pdf": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\金山雲\\raw\\financial_reports\\quarterly\\2026-03-25_hkexnews_12067362_內幕消息 截至二零二五年十二月三十一日止三個月及財年的未經審計財務業績.pdf",
-   "pdf_sha_prefix": "9f35944bcca5",
    "pdf_page_index": 12,
    "why": "真实业务表格(未經審計簡明合併綜合虧損表)，多栏多行读序与千分位数字",
    "market": "HK",
@@ -77,13 +85,16 @@
     1654,
     2205
    ],
-   "native_text_layer_chars": 2121
+   "native_text_layer_chars": 2121,
+   "document_id": "urn:company-wiki:document:sha256:9f35944bcca595e7286c00a69b8a7bbb907e3bca890e5bc897b9e1c97cde3470",
+   "source_id": "urn:company-wiki:source:sha256:9f35944bcca595e7286c00a69b8a7bbb907e3bca890e5bc897b9e1c97cde3470",
+   "content_sha256": "9f35944bcca595e7286c00a69b8a7bbb907e3bca890e5bc897b9e1c97cde3470",
+   "mime_type": "application/pdf"
   },
   {
    "page_id": "r1_biren_ar2025_p030",
    "label": "壁仞科技 2025 年度報告",
    "pdf": "C:\\Users\\郑曾波\\Projects\\company-wiki\\companies\\壁仞科技\\raw\\financial_reports\\annual\\2026-04-22_hkexnews_12114765_2025年度報告.pdf",
-   "pdf_sha_prefix": "7de30b0fb295",
    "pdf_page_index": 30,
    "why": "不同原件的繁中年报业务页",
    "market": "HK",
@@ -95,13 +106,16 @@
     1654,
     2245
    ],
-   "native_text_layer_chars": 605
+   "native_text_layer_chars": 605,
+   "document_id": "urn:company-wiki:document:sha256:7de30b0fb2958e51799d8cc860a05231361690de3ba15990b9e1ac76954745b0",
+   "source_id": "urn:company-wiki:source:sha256:7de30b0fb2958e51799d8cc860a05231361690de3ba15990b9e1ac76954745b0",
+   "content_sha256": "7de30b0fb2958e51799d8cc860a05231361690de3ba15990b9e1ac76954745b0",
+   "mime_type": "application/pdf"
   },
   {
    "page_id": "r1_brk2007_p001",
    "label": "Berkshire Hathaway 2007 Annual Report",
    "pdf": "C:\\Users\\郑曾波\\Dropbox\\Stock\\berkshire2007.pdf",
-   "pdf_sha_prefix": "a914b0ad67df",
    "pdf_page_index": 1,
    "why": "英文年报 Business Activities 段，多分部业务描述",
    "market": "US",
@@ -113,13 +127,16 @@
     1700,
     2200
    ],
-   "native_text_layer_chars": 4634
+   "native_text_layer_chars": 4634,
+   "document_id": "urn:company-wiki:document:sha256:a914b0ad67df2d75da0ae2b246dba5500bb84e19391a62a930ff441213d3ca53",
+   "source_id": "urn:company-wiki:source:sha256:a914b0ad67df2d75da0ae2b246dba5500bb84e19391a62a930ff441213d3ca53",
+   "content_sha256": "a914b0ad67df2d75da0ae2b246dba5500bb84e19391a62a930ff441213d3ca53",
+   "mime_type": "application/pdf"
   },
   {
    "page_id": "r1_brk2007_p005",
    "label": "Berkshire Hathaway 2007 Annual Report",
    "pdf": "C:\\Users\\郑曾波\\Dropbox\\Stock\\berkshire2007.pdf",
-   "pdf_sha_prefix": "a914b0ad67df",
    "pdf_page_index": 5,
    "why": "英文致股东信，管理层与员工数字叙述",
    "market": "US",
@@ -131,8 +148,13 @@
     1700,
     2200
    ],
-   "native_text_layer_chars": 3910
+   "native_text_layer_chars": 3910,
+   "document_id": "urn:company-wiki:document:sha256:a914b0ad67df2d75da0ae2b246dba5500bb84e19391a62a930ff441213d3ca53",
+   "source_id": "urn:company-wiki:source:sha256:a914b0ad67df2d75da0ae2b246dba5500bb84e19391a62a930ff441213d3ca53",
+   "content_sha256": "a914b0ad67df2d75da0ae2b246dba5500bb84e19391a62a930ff441213d3ca53",
+   "mime_type": "application/pdf"
   }
  ],
- "excluded_from_old_sample": "all six pages come from documents not used by the 2026-10-30 experiment (amec AR2025, wuxi AR2022, ksy FY2025 results, biren AR2025, berkshire2007)"
+ "excluded_from_old_sample": "all six pages come from documents not used by the 2026-10-30 experiment (amec AR2025, wuxi AR2022, ksy FY2025 results, biren AR2025, berkshire2007)",
+ "notes": "Seven real-document pages (CN 2, HK 3, US 2) from five documents outside the 2026-10-30 sample; source_id/document_id/content_sha256 are taken from the catalog location rows of each PDF (advisory sha prefixes removed)."
 }

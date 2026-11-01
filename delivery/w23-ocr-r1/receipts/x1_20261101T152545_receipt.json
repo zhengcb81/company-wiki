@@ -1,0 +1,191 @@
+{
+ "schema_version": "cwp-ocr-x1-run-receipt/1",
+ "created_at_utc": "2026-11-01T15:25:45.835039+00:00",
+ "method": "pages rendered in the parent with the shared pypdfium2 renderer; one child process loads Xiaomi-OCR-0 on CPU and runs the pages in order under a Windows Job Object total JobMemoryLimit (committed bytes); the peak is read from the job object",
+ "config": {
+  "deadline_seconds_per_request": 180.0,
+  "total_inference_budget_seconds": 1567.256193,
+  "max_new_tokens": 4096,
+  "dtype": "bfloat16",
+  "weights_mode": "mapped-f32",
+  "threads": "torch default (reported by the child)"
+ },
+ "memory": {
+  "cap_bytes": 1719988224,
+  "cap_gib": 1.602,
+  "rule": "min(8 GiB, available physical RAM / 2) at run start",
+  "job_peak_commit_bytes": 1882599424,
+  "job_peak_commit_gib": 1.753,
+  "measurement_scope": "owned-job-total-commit"
+ },
+ "host_before": {
+  "memory_load_pct": 79,
+  "total_phys_bytes": 16931512320,
+  "avail_phys_bytes": 3439976448,
+  "commit_free_bytes": 11032522752,
+  "observation_source": "GlobalMemoryStatusEx",
+  "reason": null
+ },
+ "host_after": {
+  "memory_load_pct": 79,
+  "total_phys_bytes": 16931512320,
+  "avail_phys_bytes": 3550769152,
+  "commit_free_bytes": 11288727552,
+  "observation_source": "GlobalMemoryStatusEx",
+  "reason": null
+ },
+ "child": {
+  "return_code": 3221225477,
+  "backstop_hit": false,
+  "wall_seconds": 106.5,
+  "events": [
+   {
+    "event": "child_ready",
+    "import_seconds": 4.96446270000888,
+    "torch_threads": 10,
+    "process_peak_commit_bytes_self": 555294720
+   },
+   {
+    "event": "stage",
+    "stage": "page_start",
+    "page_id": "r1_amec_ar2025_p029",
+    "t_seconds": 6.142,
+    "monotonic_seconds": 105983.128306,
+    "peak_commit_self": 557473792
+   },
+   {
+    "event": "stage",
+    "stage": "processor_load_start",
+    "page_id": "r1_amec_ar2025_p029",
+    "t_seconds": 94.462,
+    "monotonic_seconds": 106071.4484106,
+    "peak_commit_self": 1148784640
+   },
+   {
+    "event": "stage",
+    "stage": "processor_loaded",
+    "page_id": "r1_amec_ar2025_p029",
+    "t_seconds": 96.825,
+    "monotonic_seconds": 106073.8108136,
+    "peak_commit_self": 1429204992
+   },
+   {
+    "event": "stage",
+    "stage": "model_load_start",
+    "page_id": "r1_amec_ar2025_p029",
+    "t_seconds": 96.825,
+    "monotonic_seconds": 106073.8116125,
+    "peak_commit_self": 1429204992
+   },
+   {
+    "event": "stage",
+    "stage": "model_loaded",
+    "page_id": "r1_amec_ar2025_p029",
+    "t_seconds": 97.285,
+    "monotonic_seconds": 106074.2712714,
+    "peak_commit_self": 1429204992
+   },
+   {
+    "event": "stage",
+    "stage": "preprocess_done",
+    "page_id": "r1_amec_ar2025_p029",
+    "t_seconds": 97.779,
+    "monotonic_seconds": 106074.7652784,
+    "peak_commit_self": 1550675968
+   },
+   {
+    "event": "stage",
+    "stage": "generate_start",
+    "page_id": "r1_amec_ar2025_p029",
+    "t_seconds": 97.779,
+    "monotonic_seconds": 106074.7657687,
+    "peak_commit_self": 1550675968
+   },
+   {
+    "event": "stage",
+    "stage": "page_start",
+    "page_id": "r1_wuxi_ar2022_p010",
+    "t_seconds": 99.783,
+    "monotonic_seconds": 106076.7688881,
+    "peak_commit_self": 1817313280
+   },
+   {
+    "event": "stage",
+    "stage": "preprocess_done",
+    "page_id": "r1_wuxi_ar2022_p010",
+    "t_seconds": 100.052,
+    "monotonic_seconds": 106077.0387764,
+    "peak_commit_self": 1817313280
+   },
+   {
+    "event": "stage",
+    "stage": "generate_start",
+    "page_id": "r1_wuxi_ar2022_p010",
+    "t_seconds": 100.053,
+    "monotonic_seconds": 106077.0392504,
+    "peak_commit_self": 1817313280
+   }
+  ],
+  "stderr_tail": "C:\\Users\\郑曾波\\Projects\\company-wiki-w23-xiaomi-ocr-r1\\tools\\ocr_comparison\\mmap_loader.py:46: UserWarning: The given buffer is not writable, and PyTorch does not support non-writable tensors. This means you can write to the underlying (supposedly non-writable) buffer using the tensor. You may want to copy the buffer to protect its data or make it writable before converting it to a tensor. This type of warning will be suppressed for the rest of this program. (Triggered internally at C:\\actions-runner\\_work\\pytorch\\pytorch\\torch\\csrc\\utils\\tensor_new.cpp:1582.)\n  return torch.frombuffer(view, dtype=torch.uint8, count=view.size())\n"
+ },
+ "identity": {
+  "arm": "X1",
+  "backend": "xiaomi-ocr-0-transformers-cpu",
+  "upstream_commit": "b1a9bb4c07060c453785e9151715ccda6b96f0b1",
+  "model_revision": "bbd8cf8d21f256b3644b44cb860f3a7cecb93c30",
+  "precision": "float32-cpu",
+  "checkpoint_precision": "bfloat16",
+  "weights_mode": "mapped-f32",
+  "artifact_sha256": {
+   "chat_template.jinja": "273d8e0e683b885071fb17e08d71e5f2a5ddfb5309756181681de4f5a1822d80",
+   "config.json": "2eb95982069a24336fe66b3a0869ea5a711aba7566787d4a599654907ecc070c",
+   "model.fp32.safetensors": "ddd3b66173fe4dad520a10d23b3ce287bac84691b28e7cd6c261d15c09dcc71f",
+   "processor_config.json": "d89ef49ce9cd37fbf510158e13c1ef063d9286411c1ec9049932dbe0487143b1",
+   "tokenizer.json": "06b9509352d2af50381ab2247e083b80d32d5c0aba91c272ca9ff729b6a0e523",
+   "tokenizer_config.json": "792fa3f0cb88b111e54ef3134c873531008c4df471d108da17903426e308aa7b"
+  },
+  "runtime": {
+   "package_versions": {
+    "transformers": "5.18.0",
+    "torch": "2.12.0",
+    "pypdfium2": "4.30.0",
+    "rapidocr": "3.8.1",
+    "onnxruntime": "1.26.0"
+   }
+  },
+  "implementation_sha256": {
+   "__init__.py": "bef06fdf4dd4462b3f07c698dea7c24075c904116eec5935a153d372a54168d4",
+   "_upstream/postprocess/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+   "_upstream/postprocess/document.py": "41a8d15085a9ee11481caafd77cd9495d66974cf95d8032a16968fad49c85bb6",
+   "_upstream/postprocess/otsl.py": "1dbbfd1f1acc0b1113dfcb891205b8ca9bb54fddf8514b428b86626cbd18698e",
+   "_upstream/postprocess/repetition_guard.py": "6a4c3dc3174f25f9aceeabe8604ede662986168d489f44fe2f85c9766f254262",
+   "backends/__init__.py": "77f63516c9809ae98d420d39f0f410d9f9ded61c2131ef1662d8f1b3a5c9df61",
+   "backends/base.py": "25631fc2285cc59e1d65eb0882c0deeb137b498afb55ab00a0728dd286b1d2e9",
+   "backends/native_n0.py": "dcb6ab0372341c169d49dd136e3aec304770984483cfc1bcec1999e20997f5c0",
+   "backends/rapidocr_r0.py": "43c2e72b15dc51bb404aded2c0a941b26f8f0ab0b87784b4a6cb7575c4b1f09a",
+   "backends/xiaomi_x1.py": "850b8fe21415a36b0d40837a581dcd11aff4003af379d66330cfb3dc82d81ac2",
+   "cache.py": "3a0645d483a2dbcdf25625462f9556f23b31834b8863d6eff8a4551cfae61815",
+   "campaign.py": "db00bf5b831bfc0132bf2013c8ca1a4b097e50bb43f9084cfd2e5ebd7f3d9568",
+   "compare.py": "6079f00e22370ea63a38d03e83d25e83a4ac04237dbf759a9d0f73beb62f7966",
+   "job_limit.py": "7dd9ef3d98bfea4cb1a1a81232a79fa66e1a2170f4db590b9274534a3cb3e1bd",
+   "make_fp32_copy.py": "41b041847b1174e7aa0f7bf36170527c7e0c74ada197a8ac1e433099bed59659",
+   "manifest.py": "8d1d24050fab37c82b8e95d055d045f6b89171ba62343430004521c0b4512e8e",
+   "metrics.py": "3059dfadeaa33e282f1e591b7fe9b3995d5523e5122e2adb3dbb5b38e7918f20",
+   "mmap_loader.py": "c8e1b421433470efd73031b8a42d153118c6a12eccc4c094ae3dbb96f6893596",
+   "pair_facts.py": "0ccfdfd4fb52ffcd458719f0116c4654bdc4c6060efbbf34d84af02ff271b56f",
+   "render_pages.py": "b20c9e58a1c228823008c9b0631995489d819fd1428e6601661b1dcb73bb3b53",
+   "run_comparison.py": "e62ffa3b93e1e54991e3b9a66a42af74455d2efb06538ac3e07ae7a02a77d7d4",
+   "run_x1.py": "b21cf4dc76b1305bc2b40236e0f65c53a1ee1901966c721e9c59b5e8bba52ac7",
+   "runner.py": "f9d92d3e50cac2306b3b4805deadc76f9f6e2c6234991525e8a1ae53c6e4e6f4",
+   "x1_child.py": "f8a8e5131c7e28c74da2ea6771ef40b69233956b551f6b6d6da846ac93b0051b"
+  },
+  "prompt_sha256": "fd7abd1ca91c0133edb93a6da0d52d6d57a51a9076867fd467ab1ddd7e50fb20",
+  "preprocess": "upstream fit_image thumbnail to 2048px longest edge, then processor smart_resize",
+  "decoding": "greedy; chat template enable_thinking=False",
+  "max_new_tokens": 4096,
+  "request_deadline_seconds": 180.0,
+  "output_char_cap": 60000,
+  "weights_loading": "torch.from_file replaced by a true read-only mmap section of the exact fp32 upcast copy (bf16 widened losslessly); the fp32 file's sha256 is recorded in the run receipt and x1_feasibility_measured.json, not by the loader; loading strategy and compute dtype only, no quantization",
+  "postprocess": "upstream postprocess.document: _clean_truncated_repeats + postprocess_e2e_markdown(convert_otsl=True); scoring strips declared markup (metrics.markup_strip: HTML tags, markdown heading and bold markers)"
+ }
+}

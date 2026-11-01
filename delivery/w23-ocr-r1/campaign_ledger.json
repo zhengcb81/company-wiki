@@ -3,7 +3,7 @@
  "plan_id": "w23-ocr-r1-2026-10-31",
  "created_at_utc": "2026-11-01T14:01:09.178690+00:00",
  "budget_seconds": 1800.0,
- "spent_seconds": 226.094061,
+ "spent_seconds": 1406.508157,
  "entries": [
   {
    "ts_utc": "2026-11-01T14:01:51.517460+00:00",
@@ -214,6 +214,62 @@
    "page_id": "byd_ar_2024_p021",
    "seconds": 19.43546,
    "status": "ok"
+  },
+  {
+   "ts_utc": "2026-11-01T15:23:42.392912+00:00",
+   "arm": "R0",
+   "page_id": "r1_blank_control",
+   "seconds": 6.649746,
+   "status": "ok"
+  },
+  {
+   "ts_utc": "2026-11-01T15:25:45.862207+00:00",
+   "arm": "X1F",
+   "page_id": "r1_amec_ar2025_p029",
+   "seconds": 93.76435,
+   "status": "error"
+  },
+  {
+   "ts_utc": "2026-11-01T15:25:45.868909+00:00",
+   "arm": "X1F",
+   "page_id": "r1_wuxi_ar2022_p010",
+   "seconds": 180.0,
+   "status": "no_record"
+  },
+  {
+   "ts_utc": "2026-11-01T15:25:45.875226+00:00",
+   "arm": "X1F",
+   "page_id": "r1_ksy_fy2025_results_p003",
+   "seconds": 180.0,
+   "status": "no_record"
+  },
+  {
+   "ts_utc": "2026-11-01T15:25:45.881396+00:00",
+   "arm": "X1F",
+   "page_id": "r1_ksy_fy2025_income_p012",
+   "seconds": 180.0,
+   "status": "no_record"
+  },
+  {
+   "ts_utc": "2026-11-01T15:25:45.887686+00:00",
+   "arm": "X1F",
+   "page_id": "r1_biren_ar2025_p030",
+   "seconds": 180.0,
+   "status": "no_record"
+  },
+  {
+   "ts_utc": "2026-11-01T15:25:45.894363+00:00",
+   "arm": "X1F",
+   "page_id": "r1_brk2007_p001",
+   "seconds": 180.0,
+   "status": "no_record"
+  },
+  {
+   "ts_utc": "2026-11-01T15:25:45.900626+00:00",
+   "arm": "X1F",
+   "page_id": "r1_brk2007_p005",
+   "seconds": 180.0,
+   "status": "no_record"
   }
  ]
 }
