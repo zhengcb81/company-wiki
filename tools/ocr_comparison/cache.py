@@ -32,6 +32,7 @@ def cache_key(
         sort_keys=True,
         separators=(",", ":"),
         ensure_ascii=False,
+        allow_nan=False,
     )
     return hashlib.sha256(payload.encode("utf-8")).hexdigest()
 

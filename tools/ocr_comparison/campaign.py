@@ -1,153 +1,290 @@
-"""R1 campaign: one cumulative inference budget closed across invocations.
+"""One experiment ledger: atomic reservations, conservative unknowns and recovery.
 
-The W23 original delivery charged each invocation separately and lost the
-cumulative accounting (ROOT reception, finding P1).  This module closes that
-loop with a minimal persistent ledger:
-
-- ``create_ledger`` writes the budget once; ``load_ledger`` refuses corrupt
-  files (bad JSON, schema drift, spent != sum of entries) instead of renewing.
-- ``request_budget`` returns min(180, remaining) per the R1 card; a campaign
-  must refuse to start when nothing remains.
-- ``record`` appends one entry and atomically persists; recovery/restart never
-  renews the budget and never re-charges cache hits.
-
-No production task library, approval chain or hash-permission list is
-introduced: the ledger is a single JSON file owned by this experiment.
+Legacy entries remain historical facts. Short OS transactions serialize budget
+allocation; inference runs outside the mutex. The existing ResultCache captures
+outputs and a small completion marker before a reservation can be settled.
 """
-
 from __future__ import annotations
 
+from contextlib import contextmanager
+from datetime import datetime, timezone
 import json
+import math
 import os
+from pathlib import Path
 import tempfile
 import time
-from datetime import UTC, datetime
-from pathlib import Path
+from uuid import uuid4
 
+UTC = timezone.utc
 LEDGER_SCHEMA = "cwp-ocr-campaign-ledger/1"
 REQUEST_DEADLINE_CAP_SECONDS = 180.0
 
 
 class LedgerCorrupt(RuntimeError):
-    """The ledger exists but cannot be trusted; conservatively refuse to run."""
+    """Unknown/corrupt accounting never renews an experiment budget."""
 
 
-def create_ledger(path: str | Path, *, plan_id: str, budget_seconds: float) -> dict:
-    path = Path(path)
-    if path.exists():
-        raise FileExistsError(f"ledger already exists: {path}")
-    ledger = {
-        "schema_version": LEDGER_SCHEMA,
-        "plan_id": plan_id,
-        "created_at_utc": datetime.now(UTC).isoformat(),
-        "budget_seconds": float(budget_seconds),
-        "spent_seconds": 0.0,
-        "entries": [],
-    }
-    _atomic_write_json(path, ledger)
-    return ledger
+def _finite(value, *, minimum=0.0):
+    try:
+        return (not isinstance(value, bool) and isinstance(value, (int, float))
+                and math.isfinite(value) and value >= minimum)
+    except OverflowError:
+        return False
 
 
 def _atomic_write_json(path: Path, payload: dict) -> None:
     path.parent.mkdir(parents=True, exist_ok=True)
-    handle_fd, tmp_name = tempfile.mkstemp(dir=str(path.parent), suffix=".tmp")
+    fd, name = tempfile.mkstemp(dir=path.parent, suffix=".tmp")
     try:
-        with os.fdopen(handle_fd, "w", encoding="utf-8") as handle:
-            json.dump(payload, handle, ensure_ascii=False, indent=1)
+        with os.fdopen(fd, "w", encoding="utf-8") as handle:
+            json.dump(payload, handle, ensure_ascii=False, indent=1, allow_nan=False)
             handle.flush()
             os.fsync(handle.fileno())
-        os.replace(tmp_name, path)
-    except BaseException:
-        try:
-            os.unlink(tmp_name)
-        except OSError:
-            pass
-        raise
+        os.replace(name, path)
+    finally:
+        Path(name).unlink(missing_ok=True)
+
+
+@contextmanager
+def _lock(path: Path):
+    from company_wiki._file_mutex import os_file_mutex
+    path.parent.mkdir(parents=True, exist_ok=True)
+    with os_file_mutex(path.with_name(path.name + ".lock"), timeout_seconds=10):
+        yield
+
+
+def create_ledger(path: str | Path, *, plan_id: str, budget_seconds: float) -> dict:
+    path = Path(path)
+    if not _finite(budget_seconds) or budget_seconds > 1800:
+        raise ValueError("campaign budget must be finite and in [0, 1800]")
+    if not isinstance(plan_id, str) or not plan_id.strip():
+        raise ValueError("campaign plan_id must be nonempty")
+    with _lock(path):
+        if path.exists():
+            raise FileExistsError(f"ledger already exists: {path}")
+        ledger = {"schema_version": LEDGER_SCHEMA, "plan_id": plan_id,
+                  "created_at_utc": datetime.now(UTC).isoformat(),
+                  "budget_seconds": float(budget_seconds), "spent_seconds": 0.0,
+                  "entries": [], "inflight": []}
+        _atomic_write_json(path, ledger)
+        return ledger
 
 
 def load_ledger(path: str | Path) -> dict:
-    path = Path(path)
-    if not path.is_file():
-        raise FileNotFoundError(f"ledger missing: {path}")
     try:
-        ledger = json.loads(path.read_text(encoding="utf-8"))
-    except (json.JSONDecodeError, UnicodeDecodeError) as exc:
-        raise LedgerCorrupt(f"ledger is not valid JSON: {exc}") from None
+        ledger = json.loads(Path(path).read_text(encoding="utf-8"))
+    except (ValueError, UnicodeError) as exc:
+        raise LedgerCorrupt("ledger is not valid JSON") from exc
     if not isinstance(ledger, dict) or ledger.get("schema_version") != LEDGER_SCHEMA:
         raise LedgerCorrupt("ledger schema mismatch")
-    budget = ledger.get("budget_seconds")
-    entries = ledger.get("entries")
-    spent = ledger.get("spent_seconds")
-    if not isinstance(budget, (int, float)) or isinstance(budget, bool) or budget <= 0:
-        raise LedgerCorrupt("ledger budget invalid")
-    if not isinstance(entries, list) or not all(isinstance(e, dict) for e in entries):
+    budget, spent, entries = (ledger.get(key) for key in ("budget_seconds", "spent_seconds", "entries"))
+    if not _finite(budget) or budget > 1800 or not _finite(spent):
+        raise LedgerCorrupt("ledger resource values invalid")
+    if not isinstance(entries, list) or not all(isinstance(row, dict) for row in entries):
         raise LedgerCorrupt("ledger entries invalid")
-    expected = 0.0
-    for entry in entries:
-        seconds = entry.get("seconds")
-        if not isinstance(seconds, (int, float)) or isinstance(seconds, bool) or seconds < 0:
-            raise LedgerCorrupt("ledger entry seconds invalid")
-        expected += float(seconds)
-    if not isinstance(spent, (int, float)) or isinstance(spent, bool):
-        raise LedgerCorrupt("ledger spent invalid")
-    if abs(float(spent) - expected) > 1e-6:
-        raise LedgerCorrupt(
-            f"ledger spent {spent} does not equal entry sum {expected}")
+    if any(not _finite(row.get("seconds")) for row in entries):
+        raise LedgerCorrupt("ledger entry seconds invalid")
+    total = sum(float(row["seconds"]) for row in entries)
+    if not math.isfinite(total) or abs(spent - total) > 1e-6:
+        raise LedgerCorrupt("ledger spent does not equal entry sum")
+    inflight = ledger.get("inflight", [])  # Existing historical ledgers are readable unchanged.
+    if not isinstance(inflight, list):
+        raise LedgerCorrupt("ledger inflight invalid")
+    seen = set()
+    for row in inflight:
+        if (not isinstance(row, dict) or not isinstance(row.get("reservation_id"), str)
+                or row["reservation_id"] in seen or not _finite(row.get("seconds")) or row["seconds"] <= 0
+                or not isinstance(row.get("pages"), list) or not row["pages"]):
+            raise LedgerCorrupt("ledger reservation invalid")
+        seen.add(row["reservation_id"])
+        for page in row["pages"]:
+            if (not isinstance(page, dict) or not isinstance(page.get("key"), str)
+                    or len(page["key"]) != 64 or any(c not in "0123456789abcdef" for c in page["key"])
+                    or not isinstance(page.get("page_id"), str) or not page["page_id"]):
+                raise LedgerCorrupt("ledger reservation page invalid")
+    if sum(row["seconds"] for row in inflight) > max(0, budget - spent) + 1e-6:
+        raise LedgerCorrupt("ledger reservations exceed available budget")
     return ledger
 
 
 def remaining_seconds(ledger: dict) -> float:
-    return float(ledger["budget_seconds"]) - float(ledger["spent_seconds"])
+    return max(0.0, float(ledger["budget_seconds"]) - float(ledger["spent_seconds"])
+               - sum(float(row["seconds"]) for row in ledger.get("inflight", ())))
 
 
 def request_budget(ledger: dict) -> float:
-    """Per-request deadline for the next request: min(180, remaining)."""
     return min(REQUEST_DEADLINE_CAP_SECONDS, remaining_seconds(ledger))
 
 
-def record(ledger: dict, path: str | Path, *, arm: str, page_id: str,
-           seconds: float, status: str) -> dict:
-    if seconds < 0:
-        raise ValueError("seconds must be >= 0")
-    if remaining_seconds(ledger) + 1e-9 < seconds:
-        # Never silently exceed the budget: refuse the write so the caller
-        # records an honest refusal instead of washing the cost.
-        raise ValueError(
-            f"entry would exceed budget: remaining {remaining_seconds(ledger):.3f} < {seconds:.3f}")
-    entry = {
-        "ts_utc": datetime.now(UTC).isoformat(),
-        "arm": arm,
-        "page_id": page_id,
-        "seconds": round(float(seconds), 6),
-        "status": status,
-    }
-    ledger["entries"].append(entry)
-    ledger["spent_seconds"] = round(
-        float(ledger["spent_seconds"]) + float(entry["seconds"]), 6)
-    _atomic_write_json(Path(path), ledger)
+def _resource_cost_unknown(ledger):
+    # Absence of a new field is not a permission gate. Only observed real
+    # inference rows with zero cost and no transactional charge provenance are
+    # unknown; N0/not-started/cache observations and complete old costs are safe.
+    return any(row.get("arm") in {"R0", "X1F", "X1"}
+               and row.get("status") not in {"not_run", "cache_hit"}
+               and row["seconds"] == 0 and not row.get("reservation_id")
+               and not row.get("cache_hit") for row in ledger["entries"])
+
+
+def _entry(ledger, *, arm, page_id, seconds, status, **extra):
+    ledger["entries"].append({"ts_utc": datetime.now(UTC).isoformat(), "arm": arm,
+                              "page_id": page_id, "seconds": float(seconds), "status": status, **extra})
+    ledger["spent_seconds"] = sum(row["seconds"] for row in ledger["entries"])
+
+
+def record(ledger: dict, path: str | Path, *, arm: str, page_id: str, seconds: float, status: str) -> dict:
+    if not _finite(seconds):
+        raise ValueError("seconds must be finite and nonnegative")
+    path = Path(path)
+    with _lock(path):
+        current = load_ledger(path)  # Never allocate against a caller's stale snapshot.
+        if seconds > remaining_seconds(current) + 1e-9:
+            raise ValueError("entry would exceed budget")
+        _entry(current, arm=arm, page_id=page_id, seconds=seconds, status=status)
+        _atomic_write_json(path, current)
+    ledger.clear()
+    ledger.update(current)
     return ledger
 
 
-# ---------------------------------------------------------------------------
-# Batch orchestration: per-page accounting into the persistent ledger.
-# ---------------------------------------------------------------------------
-
-
 def seconds_to_charge(record: dict, deadline_seconds: float) -> float:
-    """Conservative charge for one page record.
-
-    Completed/failed records carry the child-measured elapsed time.  A page the
-    watchdog killed has no measured time, so the full request deadline is
-    charged (unknown in-flight cost counts conservatively and is never washed
-    out).  A page that never started charges nothing.
-    """
-    status = record.get("status")
     elapsed = record.get("request_seconds")
-    if isinstance(elapsed, (int, float)) and not isinstance(elapsed, bool) and elapsed >= 0:
+    if elapsed is not None:
+        if not _finite(elapsed):
+            raise ValueError("runner elapsed must be finite and nonnegative")
         return float(elapsed)
-    if status in ("timeout", "no_record"):
-        return float(deadline_seconds)
-    return 0.0
+    return float(deadline_seconds) if record.get("status") in {"timeout", "no_record", "error"} else 0.0
+
+
+def _reservation(ledger, arm, pages, seconds):
+    row = {"reservation_id": uuid4().hex, "arm": arm, "seconds": seconds,
+           "created_at_utc": datetime.now(UTC).isoformat(), "pages": pages}
+    ledger.setdefault("inflight", []).append(row)
+    return row
+
+
+def _finalize_reservation(ledger, reservation, completion):
+    """Only durable cache completion proof can release an in-flight hold."""
+    rows = completion["settlements"]
+    expected = {(p["key"], p["page_id"]) for p in reservation["pages"]}
+    if (completion.get("reservation_id") != reservation["reservation_id"]
+            or len(rows) != len(expected)
+            or {(r.get("key"), r.get("page_id")) for r in rows} != expected
+            or any(not _finite(r.get("seconds")) for r in rows)):
+        raise LedgerCorrupt("captured completion does not bind its reservation")
+    ledger["inflight"].remove(reservation)
+    for row in rows:
+        _entry(ledger, arm=reservation["arm"], page_id=row["page_id"], seconds=row["seconds"],
+               status=row["status"], cache_key=row["key"], reservation_id=reservation["reservation_id"],
+               charge_basis=row["basis"])
+
+
+def _recover(ledger, cache):
+    changed = False
+    for reservation in list(ledger.get("inflight", ())):
+        completion = cache.get("reservation_" + reservation["reservation_id"])
+        if completion is None:
+            continue
+        rows = completion.get("settlements", ())
+        # A marker without its captured output is not evidence of a completed run.
+        if any(row.get("status") != "not_run" and (
+                (cached := cache.get(row.get("key", ""))) is None
+                or cached.get("campaign_reservation_id") != reservation["reservation_id"])
+               for row in rows):
+            continue
+        _finalize_reservation(ledger, reservation, completion)
+        changed = True
+    return changed
+
+
+def _prepare(path, cache, arm, keyed, *, batch):
+    with _lock(path):
+        ledger = load_ledger(path)
+        if _recover(ledger, cache):
+            _atomic_write_json(path, ledger)
+        available, missing = {}, []
+        completed = {row.get("cache_key") for row in ledger["entries"] if row["status"] != "not_run"}
+        pending = {page["key"] for row in ledger.get("inflight", ()) for page in row["pages"]}
+        for page, key in keyed:
+            hit = cache.get(key)
+            if hit is not None:
+                available[key] = {**hit, "page_id": page["page_id"]}
+                continue
+            reason = ("inference_outcome_unknown" if key in pending else
+                      "captured_result_unavailable" if key in completed else
+                      "prior_inference_cost_unknown" if _resource_cost_unknown(ledger) else
+                      "budget_exhausted" if remaining_seconds(ledger) <= 0 else
+                      "campaign_inflight" if ledger.get("inflight") else None)
+            if reason is None:
+                if key not in {row[1] for row in missing}:
+                    missing.append((page, key))
+                continue
+            available[key] = {"page_id": page["page_id"], "status": "not_run", "error": reason,
+                              "request_seconds": 0.0, "inference_runs": 0}
+            if reason == "budget_exhausted" and not any(row.get("cache_key") == key for row in ledger["entries"]):
+                _entry(ledger, arm=arm, page_id=page["page_id"], seconds=0, status="not_run", cache_key=key)
+                _atomic_write_json(path, ledger)
+        reservation = None
+        if missing:
+            seconds = remaining_seconds(ledger) if batch else request_budget(ledger)
+            reservation = _reservation(ledger, arm, [{"page_id": p["page_id"], "key": k} for p, k in missing], seconds)
+            _atomic_write_json(path, ledger)  # Durable before any model/runner invocation.
+        return available, missing, reservation
+
+
+def _capture(path, cache, reservation, records, *, wall_seconds=0.0):
+    indexed = {row["page_id"]: row for row in records}
+    if len(indexed) != len(records):
+        raise ValueError("runner returned duplicate page records")
+    settlements = []
+    unknown = None
+    for page in reservation["pages"]:
+        row = indexed.get(page["page_id"], {"page_id": page["page_id"], "status": "no_record"})
+        if row.get("status") == "not_run":
+            seconds = 0.0
+        elif row.get("request_seconds") is None:
+            seconds = 0.0
+            unknown = page["key"]
+        else:
+            seconds = seconds_to_charge(row, 0.0)
+        settlements.append({"key": page["key"], "page_id": page["page_id"], "seconds": seconds,
+                            "status": row.get("status", "no_record"), "basis": "observed_request"})
+        indexed[page["page_id"]] = row
+    total = sum(row["seconds"] for row in settlements)
+    required = max(total, wall_seconds, reservation["seconds"] if unknown else 0.0)
+    if not _finite(required):
+        raise ValueError("runner wall duration must be finite")
+    recipient = next((row for row in settlements if row["key"] == unknown), settlements[0])
+    recipient["seconds"] += required - total
+    if required > total:
+        recipient["basis"] = "unknown_reservation" if unknown else "observed_batch_wall"
+    completion = {"reservation_id": reservation["reservation_id"], "settlements": settlements}
+    with _lock(path):
+        ledger = load_ledger(path)
+        current = next(row for row in ledger["inflight"] if row["reservation_id"] == reservation["reservation_id"])
+        for page in reservation["pages"]:
+            row = indexed[page["page_id"]]
+            if row["status"] != "not_run":
+                cache.put(page["key"], {**row, "campaign_reservation_id": reservation["reservation_id"]})
+        cache.put("reservation_" + reservation["reservation_id"], completion)
+        _finalize_reservation(ledger, current, completion)
+        _atomic_write_json(path, ledger)
+    return indexed
+
+
+def _batch_result(path, records, deadline):
+    from .runner import batch_summary
+    current = load_ledger(path)
+    accounting_complete = not current.get("inflight") and not _resource_cost_unknown(current)
+    resource_exceeded = current["spent_seconds"] > current["budget_seconds"]
+    return {"records": records, "remaining_seconds": remaining_seconds(current),
+            "request_deadline": deadline,
+            "unresolved_reservations": len(current.get("inflight", ())),
+            "known_spent_seconds": current["spent_seconds"],
+            "accounting_complete": accounting_complete,
+            "resource_limit_exceeded": resource_exceeded,
+            "execution_status": batch_summary(records)["batch_status"] if accounting_complete and not resource_exceeded else "partial"}
 
 
 class FakePageBackend:
@@ -173,198 +310,115 @@ class FakePageBackend:
         }
 
 
-def run_campaign_batch(
-    *,
-    ledger_path: Path,
-    ledger: dict,
-    arm: str,
-    pages: list[dict],
-    cache_dir: str | Path | None = None,
-    max_new_tokens: int = 4096,
-    weights_mode: str = "mapped-f32",
-    model_dir: str | None = None,
-    manifest_path: str | Path | None = None,
-    fake_sleep_seconds: float | None = None,
-) -> dict:
-    """Run one arm over ``pages`` charging every request to the ledger.
+def run_campaign_batch(*, ledger_path: Path, ledger: dict, arm: str, pages: list[dict],
+                       cache_dir: str | Path | None = None, max_new_tokens: int = 4096,
+                       weights_mode: str = "mapped-f32", model_dir: str | None = None,
+                       manifest_path: str | Path | None = None,
+                       fake_sleep_seconds: float | None = None) -> dict:
+    """The ledger argument is a compatibility snapshot, never an allocation.
 
-    Per-request deadline is min(180, remaining); the batch budget handed to the
-    X1 child is the whole remaining balance, so the parent watchdog stops the
-    batch exactly where the card budget ends.  Cache hits keep their original
-    measured time and are not re-charged.
+    Every allocation rereads the single durable owner under its short mutex;
+    inference executes outside that mutex. Cache uses the nominal request cap,
+    while captured records/receipts retain the smaller effective deadline.
     """
     from .cache import ResultCache, cache_key
-
-    ledger_path = Path(ledger_path)
-    # A zero balance does not refuse the batch: cache hits still serve (no
-    # inference, no charge) and missed pages are recorded honestly as
-    # not_run budget_exhausted with the full denominator preserved.
-    initial_remaining = remaining_seconds(ledger)
-    request_deadline = min(REQUEST_DEADLINE_CAP_SECONDS, initial_remaining)
+    path = Path(ledger_path)
+    if (not isinstance(max_new_tokens, int) or isinstance(max_new_tokens, bool) or max_new_tokens < 1
+            or (fake_sleep_seconds is not None and not _finite(fake_sleep_seconds))):
+        raise ValueError("runner limits must be finite and nonnegative")
+    ids = [p["page_id"] for p in pages]
+    if len(ids) != len(set(ids)) or not all(isinstance(pid, str) and pid for pid in ids):
+        raise ValueError("campaign pages require unique nonempty IDs")
     cache = ResultCache(cache_dir)
-    charged: list[dict] = []
-
-    if arm == "X1F-fake":
-        backend = FakePageBackend(fake_sleep_seconds if fake_sleep_seconds else 0.3)
+    starting = load_ledger(path)
+    request_deadline = request_budget(starting)
+    if arm == "N0":
+        from .backends.native_n0 import NativeN0
+        candidate = Path(manifest_path).parent / "r1_gold.json" if manifest_path else None
+        backend = NativeN0(manifest_path, gold_path=candidate if candidate and candidate.is_file() else None)
+        records = []
         for page in pages:
-            pid = page["page_id"]
-            page_deadline = request_budget(ledger)
-            key = cache_key({"arm": "X1F-fake", "sleep": fake_sleep_seconds},
-                            page.get("png_sha256") or pid, "fake",
-                            {"request_deadline_cap": REQUEST_DEADLINE_CAP_SECONDS})
-            hit = cache.get(key)
-            if hit is not None:
-                hit = dict(hit)
-                hit["page_id"] = pid
-                hit.setdefault("request_seconds", 0.0)
-                charged.append({**hit, "cache_hit": True})
-                continue
-            if page_deadline <= 0:
-                charged.append({"page_id": pid, "status": "not_run",
-                                "error": "budget_exhausted", "request_seconds": 0.0})
-                ledger = record(ledger, ledger_path, arm=arm, page_id=pid,
-                                seconds=0.0, status="not_run")
-                continue
-            record_dict = backend.run_page(pid, page.get("png"), deadline_seconds=page_deadline)
-            record_dict["page_id"] = pid
-            cache.put(key, record_dict)
-            charged.append(record_dict)
-            # Interleaved accounting: the next page's request budget must see
-            # the balance after this page, so the ledger is persisted here.
-            ledger = record(ledger, ledger_path, arm=arm, page_id=pid,
-                            seconds=min(seconds_to_charge(record_dict, page_deadline),
-                                        remaining_seconds(ledger)),
-                            status=record_dict.get("status", "unknown"))
+            rec = {**backend.run_page(page["page_id"]), "page_id": page["page_id"]}
+            rec.setdefault("request_seconds", 0.0)
+            records.append(rec)
+            record(starting, path, arm=arm, page_id=page["page_id"], seconds=0, status=rec.get("status", "unknown"))
+        return _batch_result(path, records, request_deadline)
+    if arm == "X1F-fake":
+        backend = FakePageBackend(0.3 if fake_sleep_seconds is None else fake_sleep_seconds)
+        identity = {"arm": arm, "sleep": fake_sleep_seconds}
+    elif arm == "R0":
+        from .backends.rapidocr_r0 import RapidOCRR0, load_production_config
+        config = load_production_config(REPO_ROOT / "config" / "local_ocr.json")
+        backend = RapidOCRR0(config, deadline_seconds=REQUEST_DEADLINE_CAP_SECONDS)
+        identity = backend.identity_manifest
     elif arm == "X1F":
         from .run_x1 import run_x1_batch, _model_dir
         from .backends.xiaomi_x1 import XiaomiX1
-
         model = _model_dir(model_dir)
-        remaining = remaining_seconds(ledger)
-        identity = XiaomiX1(
-            model_dir=str(model),
-            deadline_seconds=min(REQUEST_DEADLINE_CAP_SECONDS, remaining),
-            max_new_tokens=max_new_tokens,
-            weights_mode=weights_mode,
-        ).identity_manifest
-        result = run_x1_batch(
-            pages,
-            deadline=min(REQUEST_DEADLINE_CAP_SECONDS, remaining),
-            total_budget=remaining,
-            max_new_tokens=max_new_tokens,
-            weights_mode=weights_mode,
-            model_dir=str(model),
-            backend_identity=identity,
-        )
-        by_id = {r["page_id"]: r for r in result["records"]}
-        # Persist the batch receipt (cap, host snapshot, identity, events) so the
-        # artifact carries the actual execution conditions, not prose.
-        receipts_dir = Path(ledger_path).parent / "receipts"
-        receipts_dir.mkdir(parents=True, exist_ok=True)
-        stamp = time.strftime("%Y%m%dT%H%M%S", time.gmtime())
-        (receipts_dir / f"x1_{stamp}_receipt.json").write_text(
-            json.dumps(result.get("receipt", {}), ensure_ascii=False, indent=1),
-            encoding="utf-8")
-        cache_keys = {
-            pid: cache_key(result["identity"], page.get("png_sha256") or pid,
-                           result["identity"].get("prompt_sha256", ""),
-                           {"request_deadline_cap": REQUEST_DEADLINE_CAP_SECONDS,
-                            "max_new_tokens": max_new_tokens})
-            for pid, page in ((p["page_id"], p) for p in pages)
-        }
-        for page in pages:
-            pid = page["page_id"]
-            rec = by_id[pid]
-            if rec.get("status") in ("not_run", "no_record"):
-                charged.append(rec)
-                continue
-            cache.put(cache_keys[pid], rec)
-            charged.append(rec)
-    elif arm == "R0":
-        from .backends.rapidocr_r0 import RapidOCRR0, load_production_config
-
-        config = load_production_config(REPO_ROOT / "config" / "local_ocr.json")
-        for page in pages:
-            pid = page["page_id"]
-            page_deadline = request_budget(ledger)
-            backend = RapidOCRR0(config, deadline_seconds=page_deadline)
-            key = cache_key(backend.identity_manifest, page.get("png_sha256") or pid,
-                            "n/a", {"request_deadline_cap": REQUEST_DEADLINE_CAP_SECONDS})
-            hit = cache.get(key)
-            if hit is not None:
-                hit = dict(hit)
-                hit["page_id"] = pid
-                hit.setdefault("request_seconds", hit.get("engine_seconds", 0.0))
-                charged.append({**hit, "cache_hit": True})
-                continue
-            if page_deadline <= 0:
-                charged.append({"page_id": pid, "status": "not_run",
-                                "error": "budget_exhausted", "request_seconds": 0.0})
-                ledger = record(ledger, ledger_path, arm=arm, page_id=pid,
-                                seconds=0.0, status="not_run")
-                continue
-            started = time.perf_counter()
-            rec = backend.run_page(page["png"])
-            elapsed = time.perf_counter() - started
-            rec["page_id"] = pid
-            rec["request_seconds"] = float(rec.get("request_seconds") or elapsed)
-            rec["engine_seconds"] = float(rec.get("engine_seconds") or elapsed)
-            cache.put(key, rec)
-            charged.append(rec)
-            ledger = record(ledger, ledger_path, arm=arm, page_id=pid,
-                            seconds=min(seconds_to_charge(rec, page_deadline),
-                                        remaining_seconds(ledger)),
-                            status=rec.get("status", "unknown"))
-    elif arm == "N0":
-        from .backends.native_n0 import NativeN0
-
-        gold_path_for_roles = None
-        if manifest_path is not None:
-            candidate = Path(manifest_path).parent / "r1_gold.json"
-            if candidate.is_file():
-                gold_path_for_roles = candidate
-        backend = NativeN0(manifest_path, gold_path=gold_path_for_roles)
-        for page in pages:
-            rec = backend.run_page(page["page_id"])
-            rec["page_id"] = page["page_id"]
-            rec.setdefault("request_seconds", 0.0)
-            charged.append(rec)
-            ledger = record(ledger, ledger_path, arm=arm, page_id=page["page_id"],
-                            seconds=0.0, status=rec.get("status", "unknown"))
+        identity = XiaomiX1(model_dir=str(model), deadline_seconds=REQUEST_DEADLINE_CAP_SECONDS,
+                            max_new_tokens=max_new_tokens, weights_mode=weights_mode).identity_manifest
     else:
         raise ValueError(f"unknown campaign arm: {arm}")
 
-    # Charge the ledger per page, persisting after each entry so a crash leaves
-    # an honest partial ledger.  Requests never exceed the per-request budget,
-    # so the charge cannot overrun the remaining balance.
-    # X1F real: the child enforces the per-page/batch budget internally and
-    # returns elapsed per record; charge after the batch, capping at the
-    # balance so watchdog-killed pages cannot push the ledger past the budget.
-    if arm == "X1F":
-        if initial_remaining <= 0:
-            for page in pages:
-                ledger = record(ledger, ledger_path, arm=arm,
-                                page_id=page["page_id"], seconds=0.0,
-                                status="not_run")
-            return {"records": [{"page_id": p["page_id"], "status": "not_run",
-                                 "error": "budget_exhausted"} for p in pages],
-                    "remaining_seconds": 0.0, "request_deadline": 0.0}
-        ledger = load_ledger(ledger_path)
-        started = {e.get("page_id") for e in (result.get("receipt", {}).get("child", {}).get("events") or [])
-                   if e.get("event") == "stage" and e.get("stage") == "page_start"}
-        for rec in charged:
-            if rec.get("status") in ("no_record", "not_run") and rec.get("page_id") not in started:
-                # The child died before this page started: no inference happened,
-                # so nothing is charged (the in-flight page still is).
-                seconds = 0.0
+    def keyed(page):
+        image = page.get("png_sha256") or page.get("sha256")
+        if image is None:
+            if arm == "X1F-fake":
+                image = page["page_id"]
             else:
-                seconds = seconds_to_charge(rec, request_deadline)
-            seconds = min(seconds, remaining_seconds(ledger))
-            ledger = record(ledger, ledger_path, arm=arm,
-                            page_id=rec.get("page_id", "?"), seconds=seconds,
-                            status=rec.get("status", "unknown"))
-    return {"records": charged, "remaining_seconds": remaining_seconds(ledger),
-            "request_deadline": request_deadline}
+                from .manifest import sha256_file
+                image = sha256_file(Path(page["png"]))
+        return page, cache_key(identity, image, identity.get("prompt_sha256", "n/a"),
+                               {"request_deadline_cap": REQUEST_DEADLINE_CAP_SECONDS,
+                                "max_new_tokens": max_new_tokens, "campaign_contract": "reservation/1"})
+
+    pairs = [keyed(page) for page in pages]
+    outputs = {}
+    batches = [pairs] if arm == "X1F" else [[pair] for pair in pairs]
+    for group in batches:
+        available, missing, reservation = _prepare(path, cache, arm, group, batch=arm == "X1F")
+        outputs.update(available)
+        if reservation is None:
+            continue
+        elapsed_start = time.perf_counter()
+        if arm == "X1F":
+            deadline = min(REQUEST_DEADLINE_CAP_SECONDS, reservation["seconds"])
+            result = run_x1_batch([p for p, _ in missing], deadline=deadline,
+                                  total_budget=reservation["seconds"], max_new_tokens=max_new_tokens,
+                                  weights_mode=weights_mode, model_dir=str(model), backend_identity=identity)
+            if result.get("identity") != identity:
+                raise ValueError("runner identity differs from its cache recipe")
+            child_wall = result.get("receipt", {}).get("child", {}).get("wall_seconds", 0.0)
+            if not _finite(child_wall):
+                raise ValueError("runner wall duration must be finite and nonnegative")
+            wall = max(time.perf_counter() - elapsed_start, child_wall)
+            for row in result["records"]:
+                row["effective_deadline_seconds"] = deadline
+                row["requested_deadline_cap_seconds"] = REQUEST_DEADLINE_CAP_SECONDS
+            receipt_dir = path.parent / "receipts"
+            receipt_dir.mkdir(exist_ok=True)
+            _atomic_write_json(receipt_dir / (reservation["reservation_id"] + ".json"), result.get("receipt", {}))
+            captured = _capture(path, cache, reservation, result["records"], wall_seconds=wall)
+        else:
+            page = missing[0][0]
+            deadline = reservation["seconds"]
+            if arm == "X1F-fake":
+                rec = backend.run_page(page["page_id"], page.get("png"), deadline_seconds=deadline)
+                # The explicit fake models requested sleep as simulated cost;
+                # retain the actual wall separately, not as real model timing.
+                rec["wall_seconds"] = rec["request_seconds"]
+                rec["request_seconds"] = min(backend.sleep_seconds, deadline)
+                rec["measurement_scope"] = "simulated-inference-time"
+            else:
+                backend.deadline_seconds = deadline
+                rec = backend.run_page(page["png"])
+                rec.setdefault("request_seconds", time.perf_counter() - elapsed_start)
+            rec["page_id"] = page["page_id"]
+            captured = _capture(path, cache, reservation, [rec],
+                                wall_seconds=0.0 if arm == "X1F-fake" else time.perf_counter() - elapsed_start)
+        for page, key in missing:
+            outputs[key] = captured[page["page_id"]]
+    return _batch_result(path, [{**outputs[key], "page_id": page["page_id"]} for page, key in pairs], request_deadline)
 
 
 def identity_sha(identity: dict) -> str:
@@ -435,6 +489,11 @@ def _cli_run(args) -> int:
         "records": result["records"],
         "remaining_seconds": result["remaining_seconds"],
         "request_deadline": result["request_deadline"],
+        "unresolved_reservations": result["unresolved_reservations"],
+        "known_spent_seconds": result["known_spent_seconds"],
+        "accounting_complete": result["accounting_complete"],
+        "resource_limit_exceeded": result["resource_limit_exceeded"],
+        "execution_status": result["execution_status"],
     }
     text = json.dumps(payload, ensure_ascii=False, indent=1)
     if out is not None:
