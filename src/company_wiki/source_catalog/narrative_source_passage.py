@@ -19,16 +19,13 @@ from company_wiki.document_understanding.source_turn_markers import (
     explicit_qa_marker, ROLE_INVESTOR, SOURCE_TURN_MARKER_PREFIX_CHARS,
 )
 from company_wiki.document_normalization.text_matching import matching_reading_text
-from company_wiki.document_understanding.statement_grammar import (
-    StatementObservation, observe_english_statement_boundary, observe_statement,
-)
 
 from .narrative_causal_links import CAUSAL_LINK
 from .narrative_business_meaning import _OBJECT
 from .narrative_reporting_rules import arithmetic_presentation
 
 
-SOURCE_PASSAGE_POLICY_VERSION = 'source-passage/6'
+SOURCE_PASSAGE_POLICY_VERSION = 'source-passage/2'
 # Preparation reuses normalized clauses from the already charged assessment.
 # Includes generic grammar, negative envelopes, account and cause scans, plus
 # the measurement callback's normalized clause view. Metric proofs themselves
@@ -43,9 +40,6 @@ class SourcePassageCapability:
     role: str
     relevant: bool
     financial_only: bool = False
-    # Language ambiguity is a completed unresolved observation. Missing
-    # capability/scope work is deferred and cannot prove narrative absence.
-    assessment_complete: bool = True
 
 
 @dataclass(frozen=True)
@@ -56,9 +50,20 @@ class SourceStatementScope:
     suppressed: bool = False
     assertion_keys: frozenset[str] = frozenset()
     business_causal_keys: frozenset[str] = frozenset()
-    grammar_results: tuple[tuple[str, StatementObservation], ...] = ()
 
 
+# Finite grammatical witnesses, not products, industries or named entities.
+_EN_DECLARATION = re.compile(
+    r'\b(?:is|are|was|were|has|have|had|will|would|can|could|may|might)\s+\S|'
+    r'\bowns\s+\S|\bfrom\s+\d[^!?;]{0,60}\bto\s+\d', re.I)
+_CN_DECLARATION = re.compile(
+    r'拥有|设有|包括|包含|取决于|由于|因为|'
+    r'从[^。！？;；]{1,80}(?:到|至)|'
+    r'(?:正在|已经|尚未|预计|计划|将会|能够|可以)[^。！？;；]{3,}|'
+    r'[^。！？;；]{2,}(?:是|为)[^。！？;；]{3,}|'
+    r'对[^。！？;；]{2,}(?:影响|依赖)')
+_EN_QUESTION = re.compile(r'\s*(?:(?:what|when|where|why|how|whether)\b|'
+                          r'(?:is|are|was|were|do|does|did|can|could|will|would)\b)', re.I)
 _CN_QUESTION = re.compile(r'\s*(?:请问|請問|是否|会不会|會不會)')
 _NON_ASSERTION = re.compile(
     r'^\s*(?:the\s+)?(?:模板|示例|填报|流程|程序|规则|指南|template|example|procedure|manual|'
@@ -107,8 +112,7 @@ def statement_assertion_key(text: str) -> str:
 def prepare_source_statement_scope(text: str, roles: SourceAssertionRoles, *,
         accounting_text: Callable[[str], bool] = accounting_field,
         causal_relation: Callable[[str], bool] | None = None,
-        measurement_relation: Callable[[str], bool] | None = None,
-        grammar_work_budget=None) -> SourceStatementScope:
+        measurement_relation: Callable[[str], bool] | None = None) -> SourceStatementScope:
     """Observe every sentence once; suppress question/courtesy proof anywhere.
 
     The masked classification string has exactly the original length. One
@@ -119,15 +123,10 @@ def prepare_source_statement_scope(text: str, roles: SourceAssertionRoles, *,
     start = 0
     segments: list[tuple[int, int, bool]] = []
     suppressed = False
-    grammar_results = []
     while start < len(text):
         end = _SENTENCE_END.search(text, start)
-        stop = end.end() if end else len(text)
-        boundary = observe_english_statement_boundary(text[start:stop], work_budget=grammar_work_budget)
-        if boundary is not None:
-            grammar_results.append((statement_assertion_key(text[start:stop]), boundary))
         question = (bool(end and end.group() in {'?', '？'})
-                    or bool(boundary and boundary.reason == 'interrogative_scope')
+                    or bool(_EN_QUESTION.match(text, start))
                     or explicit_qa_marker(text[start:start + SOURCE_TURN_MARKER_PREFIX_CHARS]) == ROLE_INVESTOR
                     or bool(_CN_QUESTION.match(text, start)))
         if question:
@@ -138,15 +137,13 @@ def prepare_source_statement_scope(text: str, roles: SourceAssertionRoles, *,
             # Explicit backward verification governs only its immediately
             # preceding proposition, not every earlier independent statement.
             segments[-1] = (previous_start, previous_stop, False)
-        grammar_unknown = bool(boundary and boundary.status == 'unknown')
-        allowed = not (question or grammar_unknown or bool(boundary and boundary.status == 'fragment')
-                       or _COURTESY.match(text, start)
+        allowed = not (question or _COURTESY.match(text, start)
                        or _METADATA_STATEMENT.search(text, start, stop))
         segments.append((start, stop, allowed))
         suppressed |= not allowed
         start = stop
     if not suppressed and CAUSAL_LINK.search(text) is None:
-        return SourceStatementScope(text, roles, grammar_results=tuple(grammar_results))
+        return SourceStatementScope(text, roles)
     normalized = []
     segment_ranges = []
     offset = 0
@@ -165,8 +162,7 @@ def prepare_source_statement_scope(text: str, roles: SourceAssertionRoles, *,
         if position < 0:
             # The supplied prepared view cannot prove a safe suffix alignment.
             return SourceStatementScope(' ' * len(text), replace(roles, clauses=(),
-                bound_operating=False, bound_payload=False), True,
-                grammar_results=tuple(grammar_results))
+                bound_operating=False, bound_payload=False), True)
         cursor = position + len(clause.text)
         while (statement_index < len(segment_ranges)
                and segment_ranges[statement_index][1] <= position):
@@ -209,54 +205,21 @@ def prepare_source_statement_scope(text: str, roles: SourceAssertionRoles, *,
     prepared_roles = (replace(roles, clauses=tuple(clauses), bound_operating=False,
                              bound_payload=False) if suppressed else roles)
     return SourceStatementScope(''.join(masked), prepared_roles, suppressed,
-                                frozenset(assertion_keys), frozenset(causal_keys),
-                                tuple(grammar_results))
+                                frozenset(assertion_keys), frozenset(causal_keys))
 
 
-def _declarative(text: str, *, grammar_observations: list[StatementObservation] | None = None,
-                 grammar_results: dict[str, StatementObservation] | None = None,
-                 grammar_work_budget=None) -> bool:
+def _declarative(text: str, *, causal: bool = False) -> bool:
     """Observe a source statement, not its economic truth or event eligibility."""
     if not any(character.isalpha() for character in text):
         return False
-    if (text.rstrip().endswith(('?', '？'))
+    if (text.rstrip().endswith(('?', '？')) or _EN_QUESTION.match(text)
             or explicit_qa_marker(text) == ROLE_INVESTOR
             or text.lstrip().startswith(('请问', '請問', '是否', '会不会'))
             or _NON_ASSERTION.search(text) or _COURTESY.match(text)
             or _DEPENDENT_SUBJECT.match(text)
             or _VAGUE_OBJECTIVE.search(text) or abstract_source_argument(text)):
         return False
-    # A lexical auxiliary or causal cue can occur inside a relative nominal.
-    # Only the statement owner observes a matrix predicate here. Established
-    # independent source proofs are consumed separately by the caller above.
-    key = statement_assertion_key(text)
-    observation = grammar_results.get(key) if grammar_results is not None else None
-    if observation is None:
-        observation = observe_statement(text, work_budget=grammar_work_budget)
-        if grammar_results is not None:
-            grammar_results[key] = observation
-        if grammar_observations is not None:
-            grammar_observations.append(observation)
-    return observation.independent
-
-
-def _grammar_uncertainty(observations: list[StatementObservation]) -> SourcePassageCapability | None:
-    reasons = {item.reason for item in observations if item.status == 'unknown'}
-    if not reasons:
-        return None
-    if 'statement_grammar_scope_limit' in reasons:
-        return SourcePassageCapability('unresolved', 'source_grammar_scope_limit', 'unknown', False,
-                                       assessment_complete=False)
-    if 'statement_grammar_unavailable' in reasons:
-        return SourcePassageCapability('unresolved', 'source_grammar_unavailable', 'unknown', False,
-                                       assessment_complete=False)
-    # Language ambiguity keeps concrete original words readable as unresolved;
-    # it is never independent event, measurement or issuer proof. Capability
-    # failure above cannot donate this relevance to unprocessed source text.
-    if reasons == {'statement_grammar_ambiguous'}:
-        return SourcePassageCapability('unresolved', 'source_grammar_ambiguous', 'source_narrative', True)
-    return SourcePassageCapability('unresolved', 'source_grammar_unavailable', 'unknown', False,
-                                   assessment_complete=False)
+    return bool(causal or _CN_DECLARATION.search(text) or _EN_DECLARATION.search(text))
 
 
 def prepare_source_passage(
@@ -264,7 +227,6 @@ def prepare_source_passage(
     accounting_text: Callable[[str], bool], non_operating_purposes: frozenset[str],
     existing_use: tuple[str, str], existing_relevant: bool,
     statement_scope: SourceStatementScope | None = None,
-    grammar_work_budget=None,
 ) -> SourcePassageCapability:
     """Prepare once; two consumers share the same capability without rescanning.
 
@@ -278,14 +240,7 @@ def prepare_source_passage(
             'financial_context' if finance else 'source_context', False, finance)
 
     if purpose == 'unassessed':
-        return SourcePassageCapability('unresolved', 'source_assessment_incomplete', 'unknown', False,
-                                       assessment_complete=False)
-    # A known accounting clause cannot erase already observed unavailable
-    # work in another statement of the same original support scope.
-    if statement_scope is not None:
-        scoped_uncertainty = _grammar_uncertainty([item for _, item in statement_scope.grammar_results])
-        if scoped_uncertainty is not None and not scoped_uncertainty.assessment_complete:
-            return scoped_uncertainty
+        return SourcePassageCapability('unresolved', 'source_assessment_incomplete', 'unknown', False)
     if purpose in non_operating_purposes:
         return context('non_operating_purpose')
     if _NON_ASSERTION.search(text):
@@ -294,12 +249,7 @@ def prepare_source_passage(
     statement_scope = (statement_scope if statement_scope is not None else
                        prepare_source_statement_scope(text, roles))
     clauses, has_prefix = statement_scope.roles.clauses, statement_scope.suppressed
-    grammar_results = dict(statement_scope.grammar_results)
-    grammar_observations = list(grammar_results.values())
     if has_prefix and not clauses:
-        uncertainty = _grammar_uncertainty(grammar_observations)
-        if uncertainty is not None:
-            return uncertainty
         return context('source_non_assertion')
     if not has_prefix and roles.independent_payload is False:
         return context('source_generic_objective')
@@ -330,36 +280,17 @@ def prepare_source_passage(
         # valid. Generic readable narration below confers no such proof.
         if clause.independent_payload is True:
             readable = True
-        elif not account and _declarative(text, grammar_observations=grammar_observations,
-                                         grammar_results=grammar_results,
-                                         grammar_work_budget=grammar_work_budget):
+        elif not account and _declarative(text):
             readable = True
         elif account:
             if text.strip(' \t\r\n.。!?？！;；') in statement_scope.business_causal_keys:
-                readable |= _declarative(text, grammar_observations=grammar_observations,
-                                         grammar_results=grammar_results,
-                                         grammar_work_budget=grammar_work_budget)
-            # A comma can separate a complete operating description from its
-            # financial consequence. Classify those local scopes separately,
-            # while preserving the verbatim quote and all its qualifications.
-            # This does not prove the claimed cause or the revenue amount.
-            readable |= any(not accounting_text(part) and _declarative(
-                                part.strip(), grammar_observations=grammar_observations,
-                                grammar_results=grammar_results,
-                                grammar_work_budget=grammar_work_budget)
-                            for part in re.split(r'[,，]', text)
-                            if part.strip() and part != text)
-    uncertainty = _grammar_uncertainty(grammar_observations)
-    if uncertainty is not None and not uncertainty.assessment_complete:
-        return uncertainty
+                readable |= _declarative(text, causal=True)
     if readable:
         if roles.numeric_ambiguous and not roles.operating:
             return SourcePassageCapability('unresolved', 'source_numeric_scope_unresolved',
                                            'source_narrative', True)
         return SourcePassageCapability('support', 'source_readable_narrative',
             'mixed_narrative_context' if finance_seen else 'source_narrative', True)
-    if uncertainty is not None:
-        return uncertainty
     if finance_seen:
         return context('financial_only', finance=True)
     return SourcePassageCapability('unresolved', 'source_passage_incomplete', 'unknown', False)

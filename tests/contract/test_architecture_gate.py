@@ -13,6 +13,17 @@ def test_source_catalog_does_not_import_prohibited_modules():
 # --- FC-205: control-plane adversarial gate --------------------------------
 
 
+def test_fc205_production_resolver_reads_runtime_policy_snapshot():
+    """The production resolver must consume the RuntimePolicySnapshot —
+    no hardcoded flag dicts in the resolver path."""
+    from company_wiki.source_catalog.architecture_gate import (
+        control_plane_reads_runtime_policy,
+    )
+
+    ok, violations = control_plane_reads_runtime_policy()
+    assert ok, f"production path missing snapshot reads: {violations}"
+
+
 def test_fc205_no_hardcoded_flag_dicts_in_production():
     """Flag state must live only in flags.py / runtime_policy.py — no
     production module may hand-roll the six-flag dict."""

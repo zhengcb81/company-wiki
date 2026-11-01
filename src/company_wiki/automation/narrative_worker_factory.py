@@ -357,24 +357,15 @@ def create_runtime(spec: WorkerProcessSpec) -> WorkerRuntime:
             from .narrative_batch import BatchStorageBudget, _BudgetedObjects
             from .narrative_paid_response import PaidResponseArtifacts
             storage = options.get('response_storage')
-            storage_fields = {'paths', 'baseline', 'max_persistent_bytes', 'max_scratch_bytes'}
-            if (not isinstance(storage, dict) or not storage_fields <= set(storage)
-                    or set(storage) - storage_fields - {'owned_accounting', 'shared_files'}):
+            if not isinstance(storage, dict) or set(storage) != {
+                    'paths', 'baseline', 'max_persistent_bytes', 'max_scratch_bytes'}:
                 raise ValueError('NARRATIVE_RESPONSE_STORAGE_UNAVAILABLE')
             # This is the coordinator's same finite budget view and original
             # baseline, never a child-local fresh budget or a raw-root scan.
-            owned = storage.get('owned_accounting')
-            if owned is not None and (not isinstance(owned, dict)
-                    or set(owned) != {'db_path', 'run_id'}
-                    or Path(owned['db_path']).resolve() != Path(spec.db_path).resolve()
-                    or owned['run_id'] != options['run_id']):
-                raise ValueError('NARRATIVE_RESPONSE_STORAGE_UNAVAILABLE')
             guard = BatchStorageBudget(files=tuple(Path(path) for path in storage['paths']),
                 persistent_dirs=(), scratch_dirs=(), baseline=tuple(storage['baseline']),
                 max_persistent_bytes=storage['max_persistent_bytes'],
-                max_scratch_bytes=storage['max_scratch_bytes'],
-                owned_accounting=(Path(spec.db_path), options['run_id']) if owned is not None else None,
-                shared_files=tuple(Path(path) for path in storage.get('shared_files', ())))
+                max_scratch_bytes=storage['max_scratch_bytes'])
             def admit_response(max_body):
                 current = guard.check()
                 # Body's temporary writer plus bounded receipt/SQLite overhead.

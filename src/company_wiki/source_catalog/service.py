@@ -13,7 +13,7 @@ from .models import CatalogConfig, ProcessingReport, ScanReport
 from .acquisition_journal import AcquisitionJournal
 from .lock import CatalogOperationLock
 from .normalizer import backfill_text_fingerprints
-from .scanner import R4_PROVENANCE_KEY, scan_catalog
+from .scanner import R4_PROVENANCE_KEY, scan_catalog, v2_scan_shadow_from_snapshot
 from .store import CatalogStore, metadata_object, metadata_state
 from .reader import ReadOnlyCatalogReader
 
@@ -158,10 +158,16 @@ class SourceCatalog:
         v2_scan_shadow: bool | None = None,
     ) -> ScanReport:
         if v2_scan_shadow is None:
-            # Root.adapter_id selects its configured adapter in the scanner.
-            # Do not force the historical 2.x-only mode onto compatible roots
-            # without an adapter, or let rollout snapshots change the choice.
-            v2_scan_shadow = False
+            # Follow the activation snapshot (GP-002) on REAL scans: v2 when
+            # the runtime policy's v2_scan_shadow is on, v1 when no snapshot
+            # exists.  A plain dry-run stays v1 unless the caller explicitly
+            # requests v2 — a v2 DRY shadow is a gated FC-305 operation that
+            # records zero-diff rounds, not an ordinary CLI diagnostic.
+            v2_scan_shadow = (
+                False
+                if dry_run
+                else v2_scan_shadow_from_snapshot(self.config.catalog_dir)
+            )
         if dry_run:
             return scan_catalog(
                 self.config,
@@ -240,8 +246,6 @@ class SourceCatalog:
         published_on_or_before: str | None = None,
         limit: int = 100,
         offset: int = 0,
-        identity_tokens: tuple[str, ...] | None = None,
-        after_document_id: str | None = None,
     ) -> list[dict[str, Any]]:
         """WU-3.2: SQL-pushdown filing-candidate lookup (F-021/F-026).
 
@@ -317,13 +321,6 @@ class SourceCatalog:
         published_params = (
             (published_on_or_before,) if published_on_or_before is not None else ()
         )
-        identity_clause, identity_params = "", ()
-        if identity_tokens is not None:
-            from .identity_candidates import identity_candidate_clause
-            identity_clause, identity_params = identity_candidate_clause(self.reader, identity_tokens)
-        cursor_clause = "AND d.document_id > ?" if after_document_id is not None else ""
-        cursor_params = (after_document_id,) if after_document_id is not None else ()
-        order = "d.document_id" if identity_tokens is not None else "d.published_date DESC, d.title, d.document_id"
         entity_rows = self.reader.fetchall(
             f"""SELECT d.document_id, d.primary_source_id, d.title, d.source_type,
                        d.document_kind, d.published_date, d.source_status,
@@ -337,9 +334,7 @@ class SourceCatalog:
                   {root_clause}
                   {fiscal_clause}
                   {published_clause}
-                  {identity_clause}
-                  {cursor_clause}
-                ORDER BY {order}
+                ORDER BY d.published_date DESC, d.title, d.document_id
                 LIMIT ? OFFSET ?
                 """,
             (
@@ -349,8 +344,6 @@ class SourceCatalog:
                 *root_params,
                 *fiscal_params,
                 *published_params,
-                *identity_params,
-                *cursor_params,
                 limit,
                 offset,
             ),

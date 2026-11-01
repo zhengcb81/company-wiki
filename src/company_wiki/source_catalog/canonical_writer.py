@@ -614,13 +614,12 @@ class CanonicalSourceWriter:
         was checked at the write boundary; neither capture metadata nor a
         historical cutoff is required to identify committed bytes.
         """
-        from .source_references import query_source_reference
-        from company_wiki.source_contract.source_version import SourceReadError
+        from .source_reader import SourceReadError, SourceVersionReader
 
         source_id = source_id_for_sha256(sha256)
         document_id = source_id.replace("urn:company-wiki:source:", "urn:company-wiki:document:")
         try:
-            return query_source_reference(lambda: self.catalog.reader, document_id, source_id, sha256)
+            return SourceVersionReader(self.catalog).query_ref(document_id, source_id, sha256)
         except SourceReadError as exc:
             raise CanonicalImportError("committed source was not indexed to its bytes") from exc
 

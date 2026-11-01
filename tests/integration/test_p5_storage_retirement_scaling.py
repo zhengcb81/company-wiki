@@ -3,15 +3,23 @@ from __future__ import annotations
 
 from contextlib import closing
 import hashlib
+import json
 from pathlib import Path
 import shutil
 import sqlite3
 
+import pytest
 
 from support import p5_storage_catalog_fixture as fixture
 from legacy_storage.core import protected_objects, read_connection, source_facts
 from legacy_storage.inventory import run_inventory
 from legacy_storage.shrink import run_vacuum
+from legacy_storage.spans import run_prune_spans
+
+
+def selection() -> dict:
+    return {"schema_version": "cwp-span-selection/1", "parser_name": "plain_text",
+            "parser_version": "1.0.0", "source_ids": [], "document_ids": []}
 
 
 def snapshot(root: Path) -> dict:
@@ -44,9 +52,49 @@ def test_all_previews_work_with_write_connections_disabled(tmp_path, monkeypatch
     from legacy_storage.retirement import run_retire_derived
     reports = [run_inventory(config).report,
                run_retire_derived(config, manifest, dry_run=True),
+               run_prune_spans(config, selection(), dry_run=True),
                run_vacuum(config, dry_run=True)]
     assert all(report["status"] == "succeeded" for report in reports)
     assert snapshot(tmp_path) == before
+
+
+def test_large_span_preview_has_bounded_report(tmp_path, monkeypatch):
+    monkeypatch.setattr(fixture, "ANNUAL_BODY", "\n\n".join(
+        f"第{i}项业务进展：公司研发新产品并拓展海外市场，客户验证取得进展。"
+        for i in range(1200)))
+    config, store, _ = fixture.build_catalog(tmp_path)
+    count = store.fetchone("SELECT COUNT(*) AS n FROM evidence_spans")["n"]
+    assert count > 1000
+    report = run_prune_spans(config, selection(), dry_run=True)
+    assert report["status"] == "succeeded"
+    assert report["selection"]["candidate_pairs"] == count
+    assert len(json.dumps(report, ensure_ascii=False).encode("utf-8")) < 32_768
+    assert report["candidates"] == []
+    assert store.fetchone("SELECT COUNT(*) AS n FROM evidence_spans")["n"] == count
+
+
+def test_kept_rows_are_not_reported_as_absent(tmp_path):
+    config, store, _ = fixture.build_catalog(tmp_path)
+    keep = store.fetchone("SELECT source_id, locator FROM evidence_spans LIMIT 1")
+    count = store.fetchone("SELECT COUNT(*) AS n FROM evidence_spans")["n"]
+    report = run_prune_spans(config, selection(), keep_refs=[dict(keep)], dry_run=False)
+    assert report["status"] == "succeeded"
+    assert report["deleted"] == count - 1
+    assert report["already_absent"] == 0
+    assert report["selection"]["kept_pairs"] == 1
+    assert report["selection"]["keep_verified"] is True
+
+
+@pytest.mark.parametrize("invalid", [
+    {"source_ids": None}, {"document_ids": [None]},
+    {"parser_version": ""}, {"schema_version": "unknown/99"},
+])
+def test_invalid_scope_never_broadens_to_all_spans(tmp_path, invalid):
+    config, store, _ = fixture.build_catalog(tmp_path)
+    count = store.fetchone("SELECT COUNT(*) AS n FROM evidence_spans")["n"]
+    report = run_prune_spans(config, {**selection(), **invalid}, dry_run=False)
+    assert report["status"] == "refused"
+    assert store.fetchone("SELECT COUNT(*) AS n FROM evidence_spans")["n"] == count
 
 
 def test_vacuum_compares_actual_pre_operation_facts(tmp_path, monkeypatch):

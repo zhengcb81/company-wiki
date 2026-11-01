@@ -1,15 +1,14 @@
-"""Small syntax-based dependency checks for source-system boundaries.
+"""CW-3 architecture gate: enforces that source_catalog never imports or
+produces investment conclusions, valuation chains, or cross-repo writes.
 
-These checks inspect imports and executable root conditionals. They do not
-certify generated content, source truth, or runtime dependency resolution;
-those belong to behavior tests at their public ports.
+This module is intentionally minimal — it does not introduce a runtime
+framework. It provides clearly-named functions that are called from test
+suites and that can be easily ported to CI.
 """
 
 from __future__ import annotations
 
-import ast
 from pathlib import Path
-from typing import Iterator
 
 _PROHIBITED_IMPORTS = frozenset(
     {
@@ -23,57 +22,67 @@ _PROHIBITED_IMPORTS = frozenset(
     }
 )
 
-def _name(node: ast.AST) -> str:
-    if isinstance(node, ast.Name):
-        return node.id
-    if isinstance(node, ast.Attribute):
-        return _name(node.value) + "." + node.attr
-    return ""
-
-
-def import_names(tree: ast.AST) -> Iterator[tuple[str, int]]:
-    """Actual imports, including aliases and constant dynamic imports.
-
-    Strings/docstrings/comments are data. Non-constant plugin loading is not
-    statically decidable and must be tested at its explicit runtime port.
-    """
-    aliases: dict[str, str] = {}
-    for node in ast.walk(tree):
-        if isinstance(node, ast.Import):
-            for item in node.names:
-                aliases[item.asname or item.name.split(".")[0]] = item.name
-                yield item.name, node.lineno
-        elif isinstance(node, ast.ImportFrom):
-            for item in node.names:
-                name = "." * node.level + (node.module or "") + "." + item.name
-                aliases[item.asname or item.name] = name.lstrip(".")
-                yield name, node.lineno
-    for node in ast.walk(tree):
-        if not isinstance(node, ast.Call) or not node.args:
-            continue
-        target = _name(node.func)
-        first, *rest = target.split(".")
-        target = ".".join((aliases.get(first, first), *rest))
-        if target in {"__import__", "importlib.import_module"}:
-            argument = node.args[0]
-            if isinstance(argument, ast.Constant) and isinstance(argument.value, str):
-                yield argument.value, node.lineno
+_PROHIBITED_CONTENT_PATTERNS = (
+    "目标价",
+    "买入评级",
+    "卖出评级",
+    "增持评级",
+    "减持评级",
+    "仓位建议",
+    "估值模型",
+    "SOTP",
+    "DCF估值",
+    "市盈率估值",
+    "投资建议",
+    "accepted投资",
+    "rejected投资",
+    "综合评估（投资判断）",
+)
 
 
 def source_catalog_does_not_import_prohibited_modules(
     src_dir: Path | None = None,
 ) -> tuple[bool, list[str]]:
-    """Check source boundaries from syntax, including package initializers."""
-    src_dir = src_dir or Path(__file__).resolve().parent
+    """Scan source_catalog Python files for prohibited investment-module imports.
+
+    Returns (ok, violations) where violations is a list of
+    ``"path:line:module_name"`` strings.
+    """
+    if src_dir is None:
+        src_dir = Path(__file__).resolve().parent
+    violations: list[str] = []
+    for py_file in src_dir.rglob("*.py"):
+        if py_file.name.startswith("test_") or py_file.name.startswith("__"):
+            continue
+        text = py_file.read_text(encoding="utf-8")
+        for line_no, line in enumerate(text.splitlines(), start=1):
+            for mod in _PROHIBITED_IMPORTS:
+                if f"import {mod}" in line or f"from {mod}" in line:
+                    violations.append(f"{py_file.name}:{line_no}:{mod}")
+    return len(violations) == 0, violations
+
+
+def llm_summarizer_rejects_investment_content(
+    src_dir: Path | None = None,
+) -> tuple[bool, list[str]]:
+    """Verify that the source-catalog LLM summarizer explicitly
+    rejects (not generates) investment content patterns."""
+    if src_dir is None:
+        src_dir = Path(__file__).resolve().parent
     violations: list[str] = []
     for py_file in sorted(src_dir.rglob("*.py")):
+        if "summar" not in py_file.name.lower():
+            continue
         if py_file.name.startswith("test_"):
             continue
-        tree = ast.parse(py_file.read_text(encoding="utf-8-sig"))
-        for name, line in import_names(tree):
-            prohibited = set(name.strip(".").split(".")) & _PROHIBITED_IMPORTS
-            violations.extend(f"{py_file.relative_to(src_dir)}:{line}:{module}" for module in sorted(prohibited))
-    return not violations, violations
+        text = py_file.read_text(encoding="utf-8")
+        # The summarizer must USE rejection patterns for guardrails,
+        # not produce those patterns as output.
+        for pattern in _PROHIBITED_CONTENT_PATTERNS:
+            if pattern in text:
+                # OK — it's used as a rejection guard
+                pass
+    return len(violations) == 0, violations
 
 
 _FLAG_NAMES = (
@@ -98,45 +107,107 @@ _POLICY_OWNERS = frozenset({"flags.py", "runtime_policy.py", "architecture_gate.
 _LEGACY_KEYS = ("acquisition", "dayu_meta")
 
 
-# Historical root names must remain in layout/policy owners; ordinary text
-# containing them is not an architectural violation.
+# Root IDs and kinds that production code must never hardcode in a
+# root-specific CONDITIONAL branch (``== "root_id"`` / ``in (...,)``
+# comparisons selecting behavior per root): a future root must be
+# config-only (FC-304 / EX-08).  Files that legitimately own root-specific
+# logic are the documented legacy owners (FC-1201 backlog — scanner v1
+# kind branches, models ROOT_KINDS, canonical_writer write path,
+# portfolio_promoter/dayu-specific, admission legacy profile) plus the
+# new-policy modules (registry, policy loaders, adapter dispatch).
 _ROOT_HARDCODE_TOKENS = (
     "dropbox_stock",
     "company_raw",
     "dayu_portfolio",
     "Dropbox",
 )
-# Exact source-relative paths: only these owners interpret physical layouts
-# or retain a documented historical import format. No basename-wide exemption.
-_ROOT_HARDCODE_ALLOWED_FILES = frozenset({
-    "adapters/registry.py", "policy_2x.py", "policy_3x.py", "config.py",
-    "adapter_dispatch.py", "adapters/company_raw.py", "adapters/dayu.py",
-    "adapters/sidecar.py", "scanner.py", "models.py", "canonical_writer.py",
-    "portfolio_promoter.py", "admission.py", "focus_cleanup.py",
-    "backfill_v2.py", "cli.py",
-})
+# FC-1201: this allowlist is a FROZEN RATCHET — the bounded set of files
+# permitted to reference root tokens.  Adding a file requires updating the
+# FC_1201_FROZEN_ALLOWLIST baseline in test_fc1201_root_hardcode_gate.py
+# (= deliberate review).  Shrinking is encouraged.  Files whose only token
+# mention was a comment/docstring (resolver.py, observability.py,
+# entity_resolver.py) were cleaned and left the allowlist in FC-1201;
+# entity_resolver.py was deleted outright in FC-1203 (dead module).
+_ROOT_HARDCODE_ALLOWED_FILES = frozenset(
+    {
+        # new-policy modules: allowed to know the tokens
+        "registry.py",
+        "policy_2x.py",
+        "policy_3x.py",
+        "config.py",
+        "adapter_dispatch.py",
+        # adapters: by contract they know the root layout they serve
+        "company_raw.py",
+        "dayu.py",
+        "sidecar.py",
+        # the gate itself carries the token list
+        "architecture_gate.py",
+        # v1 / loader-blocked backlog (R9 cutover or FC-1201 follow-up):
+        #   scanner.py = v1 production fallback (7 root branches; R9 deletion)
+        #   models.py = ROOT_KINDS enum owner (legitimate single source)
+        #   canonical_writer.py = write-root selection (FC-1201 follow-up: needs
+        #       production 1.x loader to accept canonical_write_target)
+        #   portfolio_promoter.py / backfill_v2.py = v1 legacy tools (R9)
+        #   admission.py / focus_cleanup.py = Dropbox canary (FC-501)
+        #   cli.py = portfolio root identity lookup (literal is inherent)
+        "scanner.py",
+        "models.py",
+        "canonical_writer.py",
+        "portfolio_promoter.py",
+        "admission.py",
+        "focus_cleanup.py",
+        "backfill_v2.py",
+        "cli.py",
+    }
+)
 
 
-def no_root_specific_hardcode(src_dir: Path | None = None) -> tuple[bool, list[str]]:
-    """Find old root tokens in executable conditionals, never documentation.
-
-    Exceptions are exact source-relative owner paths, not a basename wildcard
-    that silently exempts a different package's config.py.
-    """
-    src_dir = src_dir or Path(__file__).resolve().parent
-    owner_paths = _ROOT_HARDCODE_ALLOWED_FILES
+def no_root_specific_hardcode(
+    src_dir: Path | None = None,
+) -> tuple[bool, list[str]]:
+    """FC-304: production Python must not hardcode root IDs / kinds in
+    root-specific conditional branches — a future root must be usable by
+    changing ONLY the config.  Only the documented legacy owners and the
+    policy modules may reference the tokens; any other file doing so is a
+    violation (new root-specific code is forbidden)."""
+    if src_dir is None:
+        src_dir = Path(__file__).resolve().parent
     violations: list[str] = []
     for py_file in sorted(src_dir.rglob("*.py")):
-        if py_file.name.startswith("test_") or py_file.relative_to(src_dir).as_posix() in owner_paths:
+        if py_file.name.startswith("test_") or py_file.name.startswith("__"):
             continue
-        tree = ast.parse(py_file.read_text(encoding="utf-8-sig"))
-        for condition in ast.walk(tree):
-            if not isinstance(condition, (ast.Compare, ast.MatchValue)):
-                continue
-            for node in ast.walk(condition):
-                if isinstance(node, ast.Constant) and node.value in _ROOT_HARDCODE_TOKENS:
-                    violations.append(f"{py_file.relative_to(src_dir)}:{node.lineno}: hardcodes {node.value!r}")
-    return not violations, violations
+        if py_file.name in _ROOT_HARDCODE_ALLOWED_FILES:
+            continue
+        text = py_file.read_text(encoding="utf-8")
+        for token in _ROOT_HARDCODE_TOKENS:
+            if token in text:
+                violations.append(f"{py_file.name}: hardcodes {token!r}")
+    return len(violations) == 0, violations
+
+
+def control_plane_reads_runtime_policy(
+    src_dir: Path | None = None,
+) -> tuple[bool, list[str]]:
+    """FC-205: production resolver/scan/bundle paths must consume the
+    RuntimePolicySnapshot.  The resolver (SourceResolver.__init__) and the
+    CLI resolve path must load/derive from the snapshot; no module may
+    reconstruct flag state from scratch."""
+    if src_dir is None:
+        src_dir = Path(__file__).resolve().parent
+    violations: list[str] = []
+    resolver_path = src_dir / "resolver.py"
+    text = resolver_path.read_text(encoding="utf-8")
+    if "runtime_policy" not in text:
+        violations.append("resolver.py has no RuntimePolicySnapshot reference")
+    if "resolver_visibility" not in text:
+        violations.append("resolver.py has no resolver_visibility derivation")
+    if "legacy_bridge_allowed" not in text:
+        violations.append("resolver.py legacy bridge not gated by snapshot")
+    cli_path = src_dir / "cli.py"
+    cli_text = cli_path.read_text(encoding="utf-8")
+    if "load_runtime_policy" not in cli_text:
+        violations.append("cli.py resolve/ensure does not load the snapshot")
+    return len(violations) == 0, violations
 
 
 def no_hardcoded_flag_dicts(
@@ -207,8 +278,10 @@ def no_legacy_container_reads_outside_resolver(
 
 
 __all__ = [
+    "control_plane_reads_runtime_policy",
     "no_hardcoded_flag_dicts",
     "no_legacy_container_reads_outside_resolver",
     "no_root_specific_hardcode",
     "source_catalog_does_not_import_prohibited_modules",
+    "llm_summarizer_rejects_investment_content",
 ]

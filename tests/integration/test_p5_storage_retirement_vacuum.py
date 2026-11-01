@@ -85,11 +85,30 @@ def test_vacuum_refuses_missing_db(tmp_path: Path) -> None:
     assert report["error_code"] == "database_missing"
 
 
-def test_vacuum_preserves_every_current_span(tmp_path: Path) -> None:
-    """Current maintenance may compact but never runs the retired span DELETE."""
+def test_vacuum_after_prune_keeps_keep_and_facts(tmp_path: Path) -> None:
+    """End-to-end small chain: retire, prune, vacuum; facts & spans-kept survive."""
+    from legacy_storage.spans import run_prune_spans
+
     config, store, _ = build_catalog(tmp_path)
-    before = store.fetchone("SELECT COUNT(*) AS n FROM evidence_spans")["n"]
+    manifest = run_inventory(config, now=_now()).manifest
+    run_retire_derived(config, manifest, now=_now())
+    selection = {
+        "schema_version": "cwp-span-selection/1",
+        "parser_name": "plain_text",
+        "parser_version": "1.0.0",
+        "source_ids": [],
+        "document_ids": [],
+    }
+    with store.transaction() as connection:
+        keep = connection.execute(
+            "SELECT source_id, locator FROM evidence_spans LIMIT 1"
+        ).fetchone()
+    keep_refs = [{"source_id": keep[0], "locator": keep[1]}]
+    run_prune_spans(config, selection, keep_refs=keep_refs, now=_now(), dry_run=False)
     report = run_vacuum(config, now=_now())
     assert report["status"] == "succeeded"
-    assert store.fetchone("SELECT COUNT(*) AS n FROM evidence_spans")["n"] == before
-    assert report["source_facts_before"] == report["source_facts_after"]
+    with store.transaction() as connection:
+        assert (
+            connection.execute("SELECT COUNT(*) FROM evidence_spans").fetchone()[0] == 1
+        )
+        assert connection.execute("SELECT COUNT(*) FROM sources").fetchone()[0] == 2

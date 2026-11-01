@@ -10,12 +10,16 @@ import hashlib
 import json
 from collections.abc import Mapping, Sequence
 from dataclasses import dataclass
-from typing import Any
+from typing import TYPE_CHECKING, Any
 
 from .evidence_span import EVIDENCE_SPAN_SCHEMA_VERSION, EvidenceSpan
 from .source_export import SOURCE_EXPORT_ID_PREFIX, SourceExportError
 
-from .source_version import SourceRef, SourceVersionPort
+if TYPE_CHECKING:
+    from company_wiki.source_catalog.source_reader import (
+        SourceRef,
+        SourceVersionReader,
+    )
 
 
 SOURCE_EXPORT_V2_SCHEMA_VERSION = "2.0.0"
@@ -101,12 +105,19 @@ class SourceExportBundleV2:
     def build(
         cls,
         *,
-        source_reader: SourceVersionPort,
+        source_reader: SourceVersionReader,
         refs: Sequence[SourceRef],
         evidence_spans: Sequence[EvidenceSpan],
     ) -> SourceExportBundleV2:
-        if not isinstance(source_reader, SourceVersionPort):
-            raise TypeError("source_reader must implement the verified source port")
+        # source_contract is imported by source_catalog during startup.
+        # Importing the reader only when building avoids that package cycle.
+        from company_wiki.source_catalog.source_reader import (
+            SourceRef,
+            SourceVersionReader,
+        )
+
+        if not isinstance(source_reader, SourceVersionReader):
+            raise TypeError("source_reader must be SourceVersionReader")
         if isinstance(refs, (str, bytes)) or not isinstance(refs, Sequence):
             raise TypeError("refs must be a sequence")
         if isinstance(evidence_spans, (str, bytes)) or not isinstance(

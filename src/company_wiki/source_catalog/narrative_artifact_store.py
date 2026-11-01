@@ -144,12 +144,6 @@ class NarrativeArtifactVersion:
         return cls(**{key: row[key] for key in cls.__dataclass_fields__})
 
 
-@dataclass(frozen=True)
-class NarrativeObjectPut:
-    object_key: str
-    created_bytes: int
-
-
 class LocalNarrativeObjectStore:
     """Persist immutable bytes under a hash-derived logical key."""
 
@@ -159,11 +153,6 @@ class LocalNarrativeObjectStore:
         self.root = root
 
     def put(self, data: bytes) -> str:
-        return self.put_with_usage(data).object_key
-
-    def put_with_usage(self, data: bytes, *,
-                       before_create: Callable[[str, int], None] | None = None) -> NarrativeObjectPut:
-        """Return bytes actually created by this immutable-object writer."""
         if not isinstance(data, bytes):
             raise TypeError("narrative object data must be bytes")
         digest = hashlib.sha256(data).hexdigest()
@@ -172,11 +161,8 @@ class LocalNarrativeObjectStore:
         target.parent.mkdir(parents=True, exist_ok=True)
 
         if target.exists():
-            self.read(key, expected_sha256=digest, expected_size=len(data))
-            return NarrativeObjectPut(key, 0)
-
-        if before_create is not None:
-            before_create(key, len(data))
+            self._verify(target.read_bytes(), digest, len(data))
+            return key
 
         temporary_name: str | None = None
         try:
@@ -188,15 +174,13 @@ class LocalNarrativeObjectStore:
                 temporary.write(data)
                 temporary.flush()
                 os.fsync(temporary.fileno())
-            created = True
             try:
                 # A hard link is an atomic create-if-absent operation. It avoids
                 # replacing a concurrent or tampered object at the same key.
                 os.link(temporary_name, target)
             except FileExistsError:
-                created = False
-                self.read(key, expected_sha256=digest, expected_size=len(data))
-            return NarrativeObjectPut(key, len(data) if created else 0)
+                self._verify(target.read_bytes(), digest, len(data))
+            return key
         finally:
             if temporary_name is not None:
                 Path(temporary_name).unlink(missing_ok=True)
@@ -884,6 +868,5 @@ __all__ = [
     "NarrativeArtifactReader",
     "NarrativeArtifactVersion",
     "NarrativeObjectIntegrityError",
-    "NarrativeObjectPut",
     "NarrativeSourceNotCurrentError",
 ]

@@ -144,7 +144,7 @@ def _read_recent_worker_events(catalog_dir: Path) -> dict[str, Any]:
     return out
 
 
-RETIRED_MAINTENANCE_COMMANDS = ('activation', 'runtime-policy', 'focus-cleanup', 'archive-retired-evidence', 'prune-retired-evidence', 'duplicate-preview', 'duplicate-recycle')
+RETIRED_MAINTENANCE_COMMANDS = ('focus-cleanup', 'archive-retired-evidence', 'prune-retired-evidence', 'duplicate-preview', 'duplicate-recycle')
 
 
 def _parser() -> argparse.ArgumentParser:
@@ -510,6 +510,55 @@ def _parser() -> argparse.ArgumentParser:
     )
     startup.add_argument("--task-name", default=DEFAULT_TASK_NAME)
 
+    activation = subparsers.add_parser(
+        "activation",
+        help="preview/apply/rollback cohort-epoch activation (FC-203)",
+    )
+    activation_sub = activation.add_subparsers(dest="activation_action", required=True)
+    act_preview = activation_sub.add_parser(
+        "preview", help="read-only: which assertions would flip"
+    )
+    act_preview.add_argument(
+        "--assertion-ids", required=True, help="comma-separated assertion ids"
+    )
+    act_apply = activation_sub.add_parser(
+        "apply", help="flip a batch to active inside one catalog transaction"
+    )
+    act_apply.add_argument("--epoch", required=True)
+    act_apply.add_argument("--cohort", required=True)
+    act_apply.add_argument(
+        "--assertion-ids", required=True, help="comma-separated assertion ids"
+    )
+    act_apply.add_argument("--policy-hash", required=True)
+    act_apply.add_argument("--reviewer", help="optional actor label; defaults to the process user")
+    act_apply.add_argument("--reason", required=True)
+    act_rollback = activation_sub.add_parser(
+        "rollback", help="revert a prior apply inside one catalog transaction"
+    )
+    act_rollback.add_argument("--receipt-id", required=True)
+    act_rollback.add_argument("--cohort", help="must match the apply receipt")
+    act_rollback.add_argument("--reviewer", help="optional actor label; defaults to the process user")
+    act_rollback.add_argument("--reason", required=True)
+
+    runtime_policy = subparsers.add_parser(
+        "runtime-policy",
+        help="show or apply the persistent RuntimePolicySnapshot (FC-201)",
+    )
+    runtime_policy_sub = runtime_policy.add_subparsers(
+        dest="policy_action", required=True
+    )
+    runtime_policy_sub.add_parser(
+        "show", help="load and print the current snapshot (fails closed when absent)"
+    )
+    policy_apply = runtime_policy_sub.add_parser(
+        "apply", help="compare-and-swap apply a new snapshot payload"
+    )
+    policy_apply.add_argument(
+        "--file",
+        type=Path,
+        required=True,
+        help="path to policy JSON (steady schema 2.0 or historical 1.0; snapshot_sha256 optional)",
+    )
     # Compatibility names return a named retirement; they are absent from help.
     for command in RETIRED_MAINTENANCE_COMMANDS:
         subparsers.add_parser(command, help=argparse.SUPPRESS, add_help=False)
@@ -1085,6 +1134,79 @@ def main(argv: Sequence[str] | None = None) -> int:
                 if identity
                 else closed.to_dict()
             )
+        elif args.command == "activation":
+            from .activation import (
+                apply_activation,
+                preview_activation,
+                rollback_activation,
+            )
+
+            store = get_catalog().store
+            if args.activation_action == "preview":
+                result = preview_activation(
+                    store,
+                    assertion_ids=tuple(
+                        item.strip()
+                        for item in args.assertion_ids.split(",")
+                        if item.strip()
+                    ),
+                )
+            elif args.activation_action == "apply":
+                from .policy import export_policy
+
+                policy_hash, _ = export_policy(config)
+                result = apply_activation(
+                    store,
+                    epoch=args.epoch,
+                    cohort=args.cohort,
+                    assertion_ids=tuple(
+                        item.strip()
+                        for item in args.assertion_ids.split(",")
+                        if item.strip()
+                    ),
+                    policy_hash=args.policy_hash,
+                    reviewer=args.reviewer,
+                    reason=args.reason,
+                    current_policy_hash=policy_hash,
+                )
+            else:  # rollback
+                result = rollback_activation(
+                    store,
+                    receipt_id=args.receipt_id,
+                    cohort=args.cohort,
+                    reviewer=args.reviewer,
+                    reason=args.reason,
+                )
+        elif args.command == "runtime-policy":
+            from .runtime_policy import (
+                RuntimePolicyError,
+                build_snapshot,
+                load_runtime_policy,
+                save_runtime_policy_cas,
+            )
+
+            policy_path = config.catalog_dir / "runtime_policy.json"
+            if args.policy_action == "show":
+                result = load_runtime_policy(policy_path)
+            else:  # apply
+                payload_path = args.file
+                if not payload_path.is_absolute():
+                    payload_path = project_root / payload_path
+                payload = json.loads(payload_path.read_text(encoding="utf-8"))
+                built = build_snapshot(payload)
+                try:
+                    current = load_runtime_policy(policy_path)
+                    expected = current["snapshot_sha256"]
+                except RuntimePolicyError:
+                    expected = None  # first write
+                new_hash = save_runtime_policy_cas(
+                    policy_path, built, expected_hash=expected
+                )
+                result = {
+                    "applied": True,
+                    "snapshot_sha256": new_hash,
+                    "path": str(policy_path),
+                }
         elif args.command == "import-portfolio":
             optional_identity = identify_company() if args.company_query else None
             resolved = optional_identity.resolved if optional_identity else None

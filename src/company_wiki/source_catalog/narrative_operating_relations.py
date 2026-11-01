@@ -788,8 +788,7 @@ class SourceOperatingSession:
                 bound_operating=(self.engine.complete_assertion(owner,self.context_for(owner))
                     or self.engine.unknown_argument(owner,self.context_for(owner))))
             assessment = prepare_reading_business_assessment(text, result, ref_text=ref_text,
-                source_roles=self.assertions[owner], relation_bindings=self.bindings.get(owner, ()),
-                grammar_work_budget=self.work_budget)
+                source_roles=self.assertions[owner], relation_bindings=self.bindings.get(owner, ()))
             fact, financial = assessment.fact, assessment.financial_only
             self.assertions[owner] = assessment.source_roles
             self.passages[owner] = assessment.passage

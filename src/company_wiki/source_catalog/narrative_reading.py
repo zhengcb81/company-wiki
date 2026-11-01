@@ -5,6 +5,7 @@ selection, not IO, research conclusions, model calls or another task store.
 """
 from __future__ import annotations
 
+from bisect import bisect_right
 from collections.abc import Iterable, Mapping, Sequence
 from dataclasses import replace
 from hashlib import sha256
@@ -16,11 +17,12 @@ from typing import Any
 from company_wiki.document_normalization.table_shapes import has_unbound_numeric_cells
 from company_wiki.document_understanding.pipeline import understand_units
 from company_wiki.document_understanding.narrative_continuity import (
-    NativeSourceContext, build_native_continuity,
+    NativeSourceContext, SourcePageFlow, build_native_continuity, native_section_key,
 )
-from company_wiki.document_understanding.reading_context_contract import (
-    CURRENT_READING_CONTEXT_SCHEMA, SOURCE_PROCESSING_DIMENSION, SOURCE_PROCESSING_ID_SAMPLE_LIMIT,
+from company_wiki.document_understanding.operating_states.relations import (
+    independent_statement_start, DEPENDENT_STATEMENT,
 )
+from company_wiki.document_understanding.reading_context_contract import CURRENT_READING_CONTEXT_SCHEMA
 from company_wiki.document_understanding.selection_bridge import build_context_graph
 from company_wiki.document_understanding.summary_input import _sent_policies, _unread, _SHARED_CONSTRAINTS
 from company_wiki.document_understanding.layout_hints.contract import WorkBudget, WorkBudgetExceeded, DEFAULT_LIMITS
@@ -28,23 +30,21 @@ from company_wiki.document_understanding.layout_hints.contract import WorkBudget
 from .narrative_antecedent import build_antecedent_windows, within_reference_envelope
 from .narrative_budget import READING_BUDGET_POLICY
 from .narrative_business_policy import (
-    reading_material_value,
+    detect_reading_business_fact, reading_financial_only, reading_material_value,
 )
+from .narrative_source_purpose import NON_OPERATING_PURPOSES
 from .narrative_candidates import EvidenceCandidate
+from .n6_candidate_operating_facts import OperatingFact
 from .narrative_document import DocumentStructure, NarrativeEvidencePackage
 from .narrative_finalize import finalize_selection
 from .narrative_routing import DocumentRoute, route_document
 from .narrative_support_use import SUPPORT_USE_SCAN_PASSES, source_support_use, source_narrative_relevance
 
-from .narrative_reading_admission import (
-    CONTEXT_ROLES as _CONTEXT_ROLES, _admitted as _admitted, _financial_only as _financial_only,
-)
-from .narrative_business_policy import detect_reading_business_fact as detect_reading_business_fact
-
 READING_SELECTOR_VERSION = "0.9.0"
 MAX_READING_CHARS = 48000
 _BUSINESS_ROLES = frozenset({"business", "management_discussion", "operating_metrics",
                              "fundraising", "industry", "outlook"})
+_CONTEXT_ROLES = frozenset({"operator", "analyst", "investor_question", "qa_text_shadow"})
 _NEVER_HEADING = re.compile(r"(?!x)x")
 _READING_DIAGNOSTIC_SAMPLE_LIMIT = 32
 # Kinds whose anchors are prose statements that may carry a product deictic.
@@ -54,8 +54,116 @@ _REFERENCE_KINDS = frozenset({"background", "paragraph_event", "risk", "project"
 _REFERENCE_DEFERRAL_REASONS = frozenset({"REFERENCE_UNRESOLVED", "REFERENCE_ENVELOPE"})
 
 
+def _financial_only(text: str, fact: Any = None) -> bool:
+    fact = fact or detect_reading_business_fact(text)
+    # A source-bound billing/scope/operating-driver/contract-conversion relation
+    # can contain revenue words. It is not a routine accounting total; the
+    # legacy rejector knows none of these opt-in relations.
+    return reading_financial_only(text, fact)
 
 
+def _admitted(unit: Any, reading: Mapping[str, Any], kind: str, *, fact: Any = None,
+              is_heading: bool = False, table_qualified: bool = False,
+              financial_only: bool | None = None,
+              trace: dict[str, Any] | None = None, package_id: str | None = None,
+              required_unit_ids: Sequence[str] = (),
+              support_use: tuple[str, str] | None = None,
+              offer_relevant: bool | None = None) -> tuple[bool, Any]:
+    fact = fact if fact is not None else OperatingFact()
+    closed_assessment = support_use is not None and offer_relevant is not None
+
+    def decision(admitted: bool, reason: str | None = None) -> tuple[bool, Any]:
+        if trace is not None:
+            status = "admitted" if admitted else "not_admitted"
+            counts = trace.setdefault("counts", {})
+            counts[status] = counts.get(status, 0) + 1
+            if reason is not None:
+                reasons = trace.setdefault("rejection_counts", {})
+                reasons[reason] = reasons.get(reason, 0) + 1
+            samples = trace.setdefault("samples", {})
+            rows = samples.setdefault(reason or status, [])
+            if len(rows) < 4:
+                rows.append({
+                    "target_id": unit.unit_id,
+                    "package_id": package_id,
+                    "status": status,
+                    "reason": reason,
+                    "fact_purpose": fact.purpose,
+                    "fact_reasons": list(fact.reasons[:4]),
+                    "fact_reason_count": len(fact.reasons),
+                    "required_unit_ids": list(required_unit_ids[:16]),
+                    "required_unit_count": len(required_unit_ids),
+                    "priority": max(1, int(reading.get("priority", 2))),
+                })
+        return admitted, fact
+
+    prepared_roles = None
+    prepared_passage = None
+    if fact.purpose == "unassessed":
+        return decision(False, "unassessed_purpose")
+    # Glyphs/page counters are observed text, not operating descriptions. A
+    # numeric cell of an already qualified operating table is different: its
+    # original headers, units and period travel in the complete dependency graph.
+    if not fact.eligible:
+        alphanumeric = "".join(character for character in unit.raw_text if character.isalnum())
+        numeric_marker = bool(alphanumeric) and all(character.isnumeric() for character in alphanumeric)
+        roman_marker = bool(re.fullmatch(r"[IVXLCDM]+", alphanumeric, re.IGNORECASE))
+        letter_marker = bool(re.fullmatch(r"\s*[(\[（【]\s*[A-Za-z]\s*[)\]）】]\s*[.、:]?\s*", unit.raw_text))
+        if not any(character.isalpha() for character in unit.raw_text) or numeric_marker:
+            if not table_qualified or not any(character.isdigit() for character in unit.raw_text):
+                return decision(False, "non_narrative_unit" if not any(character.isalpha() for character in unit.raw_text)
+                                else "bare_numeric_marker")
+        if roman_marker or letter_marker:
+            return decision(False, "outline_marker")
+    if support_use is None or offer_relevant is None:
+        # Standalone compatibility calls use the identical source owner, not
+        # an old fact union plus a separate new role preparation. Production
+        # always supplies both cached axes and never enters this branch.
+        from company_wiki.resource_budget import new_document_work_budget
+        from .narrative_operating_relations import SourceOperatingSession
+        if getattr(unit, "unit_id", None) is None:
+            # Text-only compatibility has no canonical source references. Use
+            # the same prepared reading owner without inventing identifiers.
+            from .narrative_business_policy import prepare_reading_business_assessment
+            assessment = prepare_reading_business_assessment(unit.raw_text, {"relations": []})
+            fact, prepared_roles = assessment.fact, assessment.source_roles
+            prepared_passage = assessment.passage
+            if financial_only is None:
+                financial_only = assessment.financial_only
+        else:
+            source = SourceOperatingSession({unit.unit_id: unit}, work_budget=new_document_work_budget())
+            fact = source.fact(unit.unit_id)
+            prepared_roles = source.source_assertions(unit.unit_id)
+            prepared_passage = source.source_passage(unit.unit_id)
+            if financial_only is None:
+                financial_only = source.financial_only(unit.unit_id)
+        if prepared_passage is not None:
+            financial_only = prepared_passage.financial_only
+    if (not closed_assessment and fact.purpose in NON_OPERATING_PURPOSES) or fact.purpose == "unassessed":
+        return decision(False, "non_operating_purpose" if fact.purpose in NON_OPERATING_PURPOSES
+                        else "unassessed_purpose")
+    if kind == "operating_table" and not table_qualified:
+        return decision(False, "table_not_qualified")
+    if unit.source_role in _CONTEXT_ROLES:
+        return decision(False, "source_context_role")
+    if not closed_assessment and not table_qualified and (
+        financial_only if financial_only is not None else _financial_only(unit.raw_text, fact)
+    ):
+        return decision(False, "financial_only")
+    if (is_heading or unit.unit_kind.endswith("_heading")) and not fact.eligible:
+        return decision(False, "heading_without_business_fact")
+    # Reading intent is not proof of independent support. Descriptive business
+    # material can still qualify without a known stage, number or duration.
+    use, reason = support_use or source_support_use(unit.raw_text, fact=fact,
+        financial_only=financial_only if financial_only is not None else _financial_only(unit.raw_text, fact),
+        table_qualified=table_qualified, source_roles=prepared_roles, passage=prepared_passage)
+    if offer_relevant is None:
+        offer_relevant=source_narrative_relevance(fact=fact,table_qualified=table_qualified,
+            source_roles=prepared_roles, passage=prepared_passage)
+    readable_business = offer_relevant and use in {"support", "unresolved"}
+    if not offer_relevant and use == 'unresolved':
+        return decision(False,'unresolved_without_business_relevance')
+    return decision(readable_business, None if readable_business else reason)
 
 
 def _citation_support_views(entry, originals):
@@ -92,10 +200,405 @@ def _qualified_table(package: Mapping[str, Any], units: Mapping[str, Any]):
 def _prose_reading_packages(parsed: DocumentStructure, pipeline: Mapping[str, Any], classify=None, *,
                            work_budget: WorkBudget | None = None,
                            _native_contexts: Mapping[str, NativeSourceContext] | None = None):
-    """Compatibility facade over the source-material preparation phase."""
-    from .narrative_native_materials import prepare_native_materials
-    return prepare_native_materials(parsed, pipeline, classify, work_budget=work_budget,
-        _native_contexts=_native_contexts, continuity_builder=build_native_continuity)
+    """Container membership is not a claim that all prose is one atomic fact.
+
+    Audit every source-owned prose member. Only the shared native continuity
+    engine can group independent members into a bounded original-ID window.
+    The final material owner is established before source-state recognition;
+    the optional text callback is retained only for private diagnostic replay.
+    """
+    work_budget = work_budget if work_budget is not None else WorkBudget(DEFAULT_LIMITS["max_work_units"])
+    observation = pipeline.get("observation", {}).get("units", ())
+    work_budget.charge(2 * len(parsed.units) + len(observation)
+                       + len(pipeline.get("non_selectable_unit_ids", ())) + 1)
+    units = {unit.unit_id: unit for unit in parsed.units}
+    profiles = pipeline["reading_plan"]["unit_profiles"]
+    packages = pipeline["packages"]["packages"]
+    from .narrative_native_dependencies import collect_native_dependencies
+    structure = pipeline.get("structure", {})
+    furniture_ids = frozenset(uid for diagnostic in structure.get("diagnostics", ())
+        if diagnostic.get("code") == "REPEATED_RUNNING_HEADER"
+        for uid in diagnostic.get("unit_ids", ()))
+    native_dependencies = collect_native_dependencies(structure.get("semantic_units", ()),
+        originals=units, furniture_ids=furniture_ids, work_budget=work_budget)
+    # Package semantics cannot exempt original prose from physical continuity.
+    # Tables and attributed Q&A retain their separate structural owners.
+    prose_kinds = {"background", "paragraph_event", "risk", "project"}
+    audited_kinds = prose_kinds
+    owners: dict[str, list[Mapping[str, Any]]] = {}
+    owner_external_context = {}
+    table_owners: set[int] = set()
+    atomic_projects: set[int] = set()
+    context_blocked: set[str] = set(native_dependencies.blocked)
+    other_members: set[str] = set()
+    table_furniture = {unit["unit_id"] for unit in observation
+                       if unit.get("kind") in {"table_row", "table_header", "table_caption"}}
+    for package in packages:
+        members = package.get("member_unit_ids", ())
+        required = package.get("required_context_unit_ids", ())
+        work_budget.charge(3 * len(members) + 2 * len(required)
+                           + len(package.get("anchor_unit_ids", ())) + 1)
+        external = set(required) - set(members)
+        # Each source member can consume this external dependency only once.
+        # Reserve actual edges before expanding, not only container count.
+        work_budget.charge(len(members) * len(external))
+        # A prose label does not erase a source-declared typed table. Preserve
+        # its original header/note edges and anchors as one package. Local table
+        # indices on another page/parent cannot certify the same table.
+        table_members = [units[uid] for uid in members if uid in units
+                         and units[uid].coordinates.table_index is not None]
+        work_budget.charge(len(table_members))
+        if package["kind"] in audited_kinds and table_members:
+            table_keys = {(unit.source_id, unit.coordinates.page_number,
+                           unit.coordinates.table_index) for unit in table_members}
+            if len(table_keys) == 1:
+                table_owners.add(id(package))
+            else:
+                context_blocked.update(members)
+        # Project row/header/note dependencies are affirmative structural
+        # proof. A plain project heading with prose has no such required IDs;
+        # it must not become the sole eligibility gate for all its body.
+        if package["kind"] == "project" and (required or any(uid in table_furniture for uid in members)):
+            atomic_projects.add(id(package))
+        owner_external_context[id(package)] = external
+        if (package["kind"] in audited_kinds and id(package) not in table_owners
+                and not package.get("truncated")):
+            for uid in members:
+                owners.setdefault(uid, []).append(package)
+        else:
+            other_members.update(members)
+    excluded = set(pipeline.get("non_selectable_unit_ids", ()))
+    headings: dict[str, set[str]] = {}
+    section_for_unit = {}
+    sections = pipeline.get("structure", {}).get("sections", ())
+    section_index = {}
+    duplicate_sections = set()
+    for section in sections:
+        sid = section.get("section_id")
+        work_budget.charge(1 + len(section.get("heading_unit_ids", ())))
+        # Older callers may declare one local section without an ID. Its
+        # explicit headings are usable locally; it cannot become a named
+        # ancestor or collide with a different anonymous section.
+        if sid is not None:
+            if sid in section_index:
+                duplicate_sections.add(sid)
+            section_index[sid] = section
+    inherited: dict[str, tuple[frozenset[str], bool]] = {}
+    for section in sections:
+        sid = section.get("section_id")
+        path, visiting = [], set()
+        cursor = sid if sid is not None else section.get("parent_id")
+        while cursor is not None and cursor not in inherited:
+            work_budget.charge()
+            if cursor in visiting or cursor not in section_index or cursor in duplicate_sections:
+                inherited[cursor] = (frozenset(), False)
+                break
+            visiting.add(cursor)
+            path.append(cursor)
+            cursor = section_index[cursor].get("parent_id")
+        actual_heads, valid = inherited.get(cursor, (frozenset(), True))
+        for parent in reversed(path):
+            own_heads = section_index[parent].get("heading_unit_ids", ())
+            # Debit each real inherited edge before materialising its closure;
+            # missing/cyclic parents cannot become a smaller complete context.
+            work_budget.charge(len(actual_heads) + len(own_heads) + 1)
+            actual_heads = actual_heads.union(own_heads)
+            inherited[parent] = (actual_heads, valid)
+        if sid is not None:
+            actual_heads, valid = inherited[sid]
+        else:
+            own_heads = section.get("heading_unit_ids", ())
+            work_budget.charge(len(actual_heads) + len(own_heads) + 1)
+            actual_heads = actual_heads.union(own_heads)
+        heads, body = section.get("heading_unit_ids", ()), section.get("body_unit_ids", ())
+        work_budget.charge(1 + len(heads) + len(body) * (len(actual_heads) + 1))
+        for uid in (*heads, *body):
+            section_for_unit[uid] = sid
+        for uid in body:
+            if (not valid or uid not in units or any(
+                    head not in units or units[head].source_id != units[uid].source_id
+                    for head in actual_heads)):
+                context_blocked.add(uid)
+                continue
+            headings.setdefault(uid, set()).update(actual_heads)
+
+    # Retain the entire source hierarchy, but distinguish generic navigation
+    # from mandatory semantic prose. Source-native list heads (business/period/
+    # service) positively establish their own ancestry; only policy-exact outer
+    # navigation titles can be omitted. Specific regions/units/qualifiers and
+    # independent table/deictic/qualification edges are never removed here.
+    from company_wiki.document_understanding.profiles.registry import is_generic_navigation_heading
+    work_budget.charge(1 + len(sections))
+    native_heads, navigation_heads = set(), set()
+    for section in sections:
+        ids = section.get("heading_unit_ids", ())
+        work_budget.charge(1 + len(ids))
+        if "native_numbered_list" in section.get("basis", ()):
+            from .narrative_business_policy import detect_reading_business_fact, READING_BUSINESS_SCAN_PASSES
+            # Structural numbering alone does not supply a subject. Observe
+            # each native head once, never once per descendant or candidate.
+            for uid in ids:
+                if uid in units:
+                    work_budget.charge(1 + READING_BUSINESS_SCAN_PASSES * len(units[uid].raw_text))
+                    if detect_reading_business_fact(units[uid].raw_text).eligible:
+                        native_heads.add(uid)
+        else:
+            for uid in ids:
+                if uid in units:
+                    work_budget.charge(8 * len(units[uid].raw_text) + 64)
+                    if is_generic_navigation_heading(units[uid].raw_text):
+                        navigation_heads.add(uid)
+
+    def context(member_ids):
+        result: set[str] = set()
+        for uid in member_ids:
+            own_heads = headings.get(uid, set())
+            native_context_ids = native_dependencies.context_for(uid)
+            work_budget.charge(1 + len(own_heads) + len(native_context_ids))
+            if own_heads.intersection(native_heads):
+                own_heads = own_heads - navigation_heads
+            own = set(own_heads) | set(native_context_ids)
+            for owner in owners.get(uid, ()):
+                # ParagraphDraft's first anchor is container bookkeeping,
+                # not a dependency on every later fact.
+                own.update(owner_external_context[id(owner)])
+            result.update(own)
+        work_budget.charge(len(result) * max(1, len(result).bit_length()))
+        return sorted(result - set(member_ids))
+
+    def native_fields(member_ids):
+        work_budget.charge(1 + len(member_ids))
+        physical: set[str] = set()
+        affected = []
+        proof_rows = {}
+        proof_targets: set[str] = set()
+        for uid in member_ids:
+            references = native_dependencies.source_for(uid)
+            work_budget.charge(1 + len(references))
+            physical.update(references)
+            proofs = native_dependencies.proofs_for(uid)
+            work_budget.charge(len(proofs))
+            proof_rows.update({(row["left"], row["right"]): row for row in proofs})
+            nested_proof_targets = native_dependencies.proof_targets_for(uid)
+            work_budget.charge(len(nested_proof_targets))
+            proof_targets.update(nested_proof_targets)
+            if references or native_dependencies.context_for(uid):
+                affected.append(uid)
+        return {"_native_source_original_ids": sorted(physical),
+                "_native_dependency_targets": affected,
+                "_native_source_proof_targets": sorted(proof_targets),
+                "_native_source_proofs": tuple(proof_rows.values())} if affected else {}
+
+    exclusions = other_members | excluded | context_blocked
+    work_budget.charge(len(observation))
+    observed_kinds = {}
+    views = []
+    for unit in observation:
+        uid = unit["unit_id"]
+        observed_kinds[uid] = unit.get("kind")
+        if uid not in owners or uid in exclusions:
+            views.append({**unit, "kind": "continuity_boundary"})
+            continue
+        projects = tuple(sorted(str(owner["package_id"]) for owner in owners[uid]
+                                if owner["kind"] == "project"))
+        if projects:
+            # A physical line cannot silently bridge two independently named
+            # projects just because they share a source section and font.
+            hints = unit.get("hints", {})
+            unit = {**unit, "hints": {**hints,
+                "section_key": (native_section_key(hints, section_for_unit.get(uid)), projects)}}
+        views.append(unit)
+    provenance = {unit.unit_id: {"source_id": unit.source_id,
+        "paragraph_index": unit.coordinates.paragraph_index,
+        "observed_kind": observed_kinds.get(unit.unit_id),
+        **{key: unit.metadata.get(key) for key in (
+            "pdf_block", "block_sha256", "block_char_start", "block_char_end")}}
+        for unit in parsed.units if unit.unit_kind == "pdf_text_block"}
+    page_flow = None
+    if parsed.mime_type == "application/pdf":
+        diagnostics = pipeline.get("structure", {}).get("diagnostics", ())
+        work_budget.charge(sum(1 + len(entry.get("unit_ids", ())) for entry in diagnostics)
+                           + len(parsed.opaque_pages) + len(parsed.deferred_table_pages))
+        furniture = frozenset(uid for entry in diagnostics if entry.get("code") == "REPEATED_RUNNING_HEADER"
+                              for uid in entry.get("unit_ids", ()) if uid in units)
+        page_flow = SourcePageFlow(furniture, independent_statement_start,
+            coarse_complete=bool(parsed.page_count and parsed.pages_read == parsed.page_count and not parsed.errors),
+            unproven_pages=frozenset((*parsed.opaque_pages, *parsed.deferred_table_pages)))
+    continuity = build_native_continuity(views, provenance=provenance,
+        sections=sections, unit_profiles=profiles, work_budget=work_budget, source_page_flow=page_flow,
+        source_contexts=_native_contexts)
+    if native_dependencies.diagnostics:
+        continuity["native_dependency_diagnostics"] = native_dependencies.diagnostics
+    ranges: dict[tuple[str, int], list[tuple[int, int]]] = {}
+    for entry in continuity["deferred_unit_ranges"]:
+        ranges.setdefault((entry["source_id"], entry["page"]), []).append(
+            (entry["first_ordinal"], entry["last_ordinal"]))
+    ranges = {key: sorted(values) for key, values in ranges.items()}
+    starts = {key: [a for a, _b in values] for key, values in ranges.items()}
+    blocked: set[str] = set(context_blocked)
+    if context_blocked:
+        continuity = {**continuity, "complete": False}
+    for index, wire in enumerate(observation):
+        key = (wire.get("hints", {}).get("source_id"), wire.get("page"))
+        intervals = ranges.get(key, ())
+        point = bisect_right(starts.get(key, ()), wire.get("ordinal", -1)) - 1
+        unexamined = continuity["unexamined_from_index"]
+        if ((point >= 0 and wire["ordinal"] <= intervals[point][1])
+                or (unexamined is not None and index >= unexamined)):
+            if wire["unit_id"] in owners:
+                blocked.add(wire["unit_id"])
+    grouped: set[str] = set()
+    generated = []
+    joint_facts: dict[Any, Any] = {}
+    dependent_statement = DEPENDENT_STATEMENT
+    cjk_character = re.compile(r"[\u3400-\u9fff]")
+    cjk_punctuation = frozenset("。！？；，、：）》】”’（《【“‘")
+
+    def linguistic_text(member_ids) -> str:
+        # Declared language is a source category, not native token alignment.
+        # Remove only our temporary separator at an actual CJK boundary. Latin
+        # words, decimal quantities and unit tokens keep a whitespace boundary,
+        # even if an English fragment was categorised as zh. Raw is untouched.
+        result = ""
+        for uid in member_ids:
+            text = units[uid].raw_text
+            if not result:
+                result = text
+                continue
+            left, right = result.rstrip()[-1:], text.lstrip()[:1]
+            cjk_boundary = bool(
+                cjk_character.fullmatch(left) and (cjk_character.fullmatch(right) or right in cjk_punctuation)
+                or cjk_character.fullmatch(right) and left in cjk_punctuation)
+            result = result.rstrip() + ("" if cjk_boundary else " ") + text.lstrip()
+        return result
+
+    def source_statement_closed(uid: str) -> bool:
+        text = units[uid].raw_text.rstrip().rstrip("\"'”’）)]》")
+        return text.endswith(("。", "！", "？", ".", "!", "?", ";", "；"))
+
+    def statement_members(member_ids):
+        # The continuity owner has already proven the native frame/scope and
+        # closed the window. A terminator alone cannot detach a forward or
+        # negative qualifier. Split only before an independently asserted,
+        # complete issuer statement; keep all original units and their costs.
+        statements = []
+        pending = []
+        for uid in member_ids:
+            pending.append(uid)
+            text = units[uid].raw_text.rstrip().rstrip("\"'”’）)]》")
+            if text.endswith(("。", "！", "？", ".", "!", "?", ";", "；")):
+                statements.append(pending)
+                pending = []
+        if pending:
+            # The native owner cannot currently emit an open window, but keep
+            # any future additive shape whole rather than guessing completion.
+            return [member_ids]
+        result = []
+        current: list[str] = []
+        for statement in statements:
+            text = linguistic_text(statement)
+            preceding = linguistic_text(current)
+            work_budget.charge(8 * len(text))
+            separate = (current and independent_statement_start(text)
+                        and not dependent_statement.search(text)
+                        and not dependent_statement.search(preceding))
+            if separate:
+                result.append(current)
+                current = []
+            current.extend(statement)
+        if current:
+            result.append(current)
+        return result
+
+    for window in continuity["windows"]:
+        members = list(window["member_unit_ids"])
+        if not set(members) <= units.keys():
+            continue
+        withheld_members = [index for index, uid in enumerate(members) if uid in blocked]
+        if withheld_members:
+            prefix_end = next((index for index, uid in enumerate(members) if uid not in blocked),
+                              len(members))
+            # A deferred prefix remains withheld. A later source-complete
+            # statement may still stand on its own when an observed terminal
+            # boundary separates it from that prefix and native continuity
+            # proves the suffix members. Structural/context failures are not
+            # recoverable through this path.
+            if (prefix_end == 0
+                    or withheld_members != list(range(prefix_end))
+                    or not source_statement_closed(members[prefix_end - 1])):
+                continue
+            suffix = members[prefix_end:]
+            if (not suffix or any(uid in context_blocked for uid in suffix)
+                    or not source_statement_closed(suffix[-1])
+                    or dependent_statement.search(linguistic_text([suffix[0]]))):
+                continue
+            members = suffix
+        # Actual row/header/note projects retain their existing atomic
+        # source semantics; plain project prose uses independent statements.
+        if any(id(owner) in atomic_projects for uid in members for owner in owners.get(uid, ())):
+            continue
+        pieces = statement_members(members)
+        for piece in pieces:
+            # Structural closure establishes the material owner before meaning.
+            # A linguistic join has no original coordinate system and cannot
+            # supply operating states or refs on behalf of its first fragment.
+            # Retain the old private diagnostic callback for replay tests. The
+            # production owner never supplies it; its join never supplies refs
+            # or source-state facts to the selection session.
+            if classify is not None:
+                diagnostic_fact = classify(linguistic_text(piece))
+                if not diagnostic_fact.eligible:
+                    continue
+            pid = window["window_id"]
+            if len(pieces) > 1:
+                pid += ":statement:" + sha256("\0".join(piece).encode()).hexdigest()
+            generated.append({"package_id": pid, "kind": "native_continuity",
+                "member_unit_ids": piece, "anchor_unit_ids": list(piece),
+                "_paragraph_membership_only": any(edge.get("basis") == "source_exact_paragraph_membership"
+                    for edge in window.get("proof", ())),
+                "required_context_unit_ids": context(piece), **native_fields(piece)})
+            grouped.update(piece)
+    expanded = []
+    seen: set[str] = set()
+    window_for_member = {uid: window for window in continuity["windows"]
+                         for uid in window["member_unit_ids"]}
+    for package in packages:
+        if id(package) in atomic_projects:
+            members = set(package.get("member_unit_ids", ()))
+            anchors = package.get("anchor_unit_ids", ())
+            window_ids = set()
+            windows = []
+            for uid in package.get("anchor_unit_ids", ()):
+                window = window_for_member.get(uid)
+                if (window is not None and window["window_id"] not in window_ids
+                        and set(window["member_unit_ids"]) <= members):
+                    window_ids.add(window["window_id"])
+                    windows.append(window["member_unit_ids"])
+            support = set(anchors)
+            for anchor in anchors:
+                window = window_for_member.get(anchor)
+                if window is not None and window["window_id"] in window_ids:
+                    support.update(window["member_unit_ids"])
+            # The existing public task contract has finite citation views. A
+            # physical window expands original anchors inside the same project,
+            # not into one new task/view for every anchor.
+            ordered_support = list(dict.fromkeys(uid for uid in package.get("member_unit_ids", ())
+                                                if uid in support))
+            expanded.append({**package, **({"citation_support_views": [ordered_support],
+                "native_analysis_views": windows} if windows and support <= members else {})})
+            continue
+        if (package["kind"] not in prose_kinds or package.get("truncated")
+                or id(package) in table_owners):
+            expanded.append(package)
+            continue
+        for uid in package.get("member_unit_ids", ()):
+            if uid in seen or uid in grouped or uid in blocked:
+                continue
+            seen.add(uid)
+            expanded.append({**package, "package_id": str(package["package_id"]) + ":" + uid,
+                "member_unit_ids": [uid], "anchor_unit_ids": [uid],
+                "required_context_unit_ids": context([uid]), **native_fields([uid])})
+    return [*expanded, *generated], joint_facts, continuity, blocked | set(native_dependencies.blocked)
 
 
 def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
@@ -568,13 +1071,13 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
         support_groups = dict(session.groups)
         session.groups = support_groups
     scope_owners = {tuple(members): owner for owner, members in support_groups.items()}
-    scope_uses: dict[tuple[Any, ...], tuple[str, str, bool, str, bool]] = {}
+    scope_uses: dict[tuple[Any, ...], tuple[str, str, bool, str]] = {}
 
     def scope_use(native_support, *, table_qualified=False, prepared_owner=None):
         # A carrier stands for all original characters in its native range.
         # This key is exactly the scope later projected to canonical spans.
         if not scope_ready:
-            return "unresolved", "source_assessment_incomplete", False, "description", False
+            return "unresolved", "source_assessment_incomplete", False, "description"
         members = tuple(dict.fromkeys(origins.get(uid, uid) for uid in native_support))
         key = (members, table_qualified, prepared_owner)
         if key in scope_uses:
@@ -603,10 +1106,9 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
             # The closed scope's capability was prepared once in the session.
             # Do not charge a second full text scan for consuming that cache.
             work_budget.charge(SUPPORT_USE_SCAN_PASSES * len(text) if passage is None else len(members) + 1)
-            context_role = all(units[uid].source_role in _CONTEXT_ROLES for uid in members)
             use = source_support_use(text, fact=fact, financial_only=session.financial_only(owner),
                 table_qualified=table_qualified,
-                context_role=context_role,
+                context_role=all(units[uid].source_role in _CONTEXT_ROLES for uid in members),
                 source_relations=session.relations(owner), support_unit_ids=members,
                 source_roles=source_roles, passage=passage,
                 numeric_ambiguous=any(uid in numeric_shape_uncertain for uid in members)
@@ -615,12 +1117,10 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
                                                  table_qualified=table_qualified)
             value = ("meaningful_fact" if table_qualified else
                      reading_material_value(fact, source_roles=source_roles))
-            source_deferred = bool(passage is not None and not passage.assessment_complete
-                                   and not context_role and not table_qualified)
-            assessed=(*use,relevance,value,source_deferred)
+            assessed=(*use,relevance,value)
         except (WorkBudgetExceeded, ValueError):
             session.complete = False
-            assessed = ("unresolved", "source_assessment_incomplete", False, "description", False)
+            assessed = ("unresolved", "source_assessment_incomplete", False, "description")
         scope_uses[key] = assessed
         return assessed
 
@@ -660,16 +1160,11 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
         anchor_uses: dict[str, tuple[str, str]] = {}
         anchor_relevance: dict[str, bool] = {}
         anchor_values: dict[str, str] = {}
-        anchor_complete: dict[str, bool] = {}
         for native_support in _citation_support_views(original_package, original_units):
             if not native_support:
                 continue
-            use, reason, relevant, value, source_deferred = scope_use(native_support, table_qualified=table_qualified,
+            use, reason, relevant, value = scope_use(native_support, table_qualified=table_qualified,
                 prepared_owner=original_package.get('_source_scope_owner'))
-            if source_deferred:
-                withheld.append({"package_id": str(package["package_id"]), "reason": reason,
-                    "status": "deferred", "phase": "source_readability",
-                    "known_unit_ids": list(dict.fromkeys(native_support))})
             if original_package.get('_qa_scope_complete') is False and use == 'support':
                 use, reason = 'unresolved', 'source_scope_partial'
             use_views.append({"support_unit_ids": list(native_support),
@@ -683,7 +1178,6 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
                     anchor_uses[material_uid] = (use, reason)
                     anchor_relevance[material_uid] = relevant
                     anchor_values[material_uid] = value
-                    anchor_complete[material_uid] = not source_deferred
         packages[index] = {**original_package, "_reading_support_use_views": use_views}
         declared_anchors = list(package.get("anchor_unit_ids", ()))
         if package["kind"] == "qa_exchange":
@@ -723,8 +1217,7 @@ def _candidates(parsed: DocumentStructure, pipeline: Mapping[str, Any], *,
                                        trace=admission_trace, package_id=str(package["package_id"]),
                                        required_unit_ids=tuple(sorted(required - {uid})),
                                        support_use=anchor_uses.get(uid, ("unresolved", "source_use_unassessed")),
-                                       offer_relevant=anchor_relevance.get(uid,False),
-                                       assessment_complete=anchor_complete.get(uid,True))
+                                       offer_relevant=anchor_relevance.get(uid,False))
             if not admitted:
                 continue
             anchors.append(uid)
@@ -1176,8 +1669,6 @@ def select_reading_evidence(parsed: DocumentStructure, *, title: str,
     dropped = 0
     proved_without_offer = 0
     unexplained_numeric = False
-    deferred_source_ids = {uid for row in withheld if row.get("phase") == "source_readability"
-                           for uid in row["known_unit_ids"]}
     for unit in parsed.units:
         uid = session.owner_for(origins.get(unit.unit_id, unit.unit_id))
         if budget.exhausted and uid not in session.facts:
@@ -1185,16 +1676,6 @@ def select_reading_evidence(parsed: DocumentStructure, *, title: str,
             break
         financial = session.financial_only(uid)
         if financial is None:
-            passage = session.source_passage(uid)
-            if passage is not None and not passage.assessment_complete:
-                if unit.unit_id not in deferred_source_ids:
-                    withheld.append({"package_id": uid, "reason": passage.reason,
-                        "status": "deferred", "phase": "source_readability",
-                        "known_unit_ids": [unit.unit_id]})
-                    deferred_source_ids.add(unit.unit_id)
-                # One unavailable/long scope is not a global work stop. Other
-                # independent scopes still receive their own prepared use.
-                continue
             session.complete = False
             break
         dropped += financial
@@ -1212,10 +1693,9 @@ def select_reading_evidence(parsed: DocumentStructure, *, title: str,
     # document: it is reported separately and does not downgrade coverage.
     blocking_withheld = [entry for entry in withheld
                          if entry.get("reason") not in _REFERENCE_DEFERRAL_REASONS]
-    processing_base_complete = graph_complete and session.complete and not budget.exhausted and not any(
+    processing_complete = graph_complete and session.complete and not budget.exhausted and not blocking_withheld and not any(
         "BUDGET" in str(entry.get("code", "")) or "LIMIT_REACHED" in str(entry.get("code", ""))
         for entry in pipeline.get("diagnostics", ()))
-    processing_complete = processing_base_complete and not blocking_withheld
     empty_may_skip = (not candidates and parsed.coverage_complete and processing_complete
                       and not unexplained_numeric
                       and (proved_without_offer == len(parsed.units)
@@ -1231,11 +1711,7 @@ def select_reading_evidence(parsed: DocumentStructure, *, title: str,
         known_candidates = {item.unit.unit_id for item in candidates} | {
             uid for item in withheld for uid in item["known_unit_ids"]}
         count = len(known_candidates)
-        # Readability capability failure is semantic processing deferral, not
-        # evidence that already read source pages/geometry became unread.
-        coverage_complete = result.coverage_complete if processing_base_complete and not any(
-            row.get("phase") != "source_readability" for row in blocking_withheld) else False
-        result = replace(result, coverage_complete=coverage_complete,
+        result = replace(result, coverage_complete=False,
                          status="partial" if result.evidence_spans else "needs_review",
                          candidate_count=count, omitted_candidate_count=count - len(result.evidence_spans))
     if any(diagnostic["code"] == "work_budget_exhausted" for diagnostic in result.selection_diagnostics):
@@ -1244,9 +1720,6 @@ def select_reading_evidence(parsed: DocumentStructure, *, title: str,
     if budget.exhausted:
         result = replace(result, selection_diagnostics=(
             *result.selection_diagnostics, _document_work_diagnostic(budget)))
-    source_diagnostics = _source_processing_diagnostics(withheld)
-    if source_diagnostics:
-        result = replace(result, selection_diagnostics=(*result.selection_diagnostics, *source_diagnostics))
     pipeline["selected_span_ids"] = _selected_unit_spans(parsed, result, pipeline)
     # Preserve source bytes and IDs. The existing quality vocabulary carries
     # unresolved table attribution into every model view, without an IO gate.
@@ -1268,7 +1741,6 @@ def select_reading_evidence(parsed: DocumentStructure, *, title: str,
             replace(span, quality_flags=tuple(dict.fromkeys((*span.quality_flags, "table_structure_ambiguous"))))
             if span.span_id in uncertain else span for span in result.evidence_spans))
     context = _context(pipeline, result, eligible)
-    context["source_processing_complete"] = processing_complete
     # Reference deferrals are the newest and the ones a reader must be able to
     # audit; put them at the front of the bounded list so a document dominated
     # by budget deferrals cannot hide them.
@@ -1294,34 +1766,16 @@ def select_reading_evidence(parsed: DocumentStructure, *, title: str,
             raise
         context["selection_diagnostics"].append({"code": "DECISION_DEPENDENCIES_UNAVAILABLE", "count": 1})
     else:
-        from .narrative_decision_inventory import build_decision_trace
+        from company_wiki.document_understanding.decision_inventory import build_decision_trace
         trace = build_decision_trace(
             pipeline, used_facet_ids=[facet["id"] for facet in context["business_facets"]],
             source_parser_names=tuple({unit.parser_name for unit in parsed.units}),
             document_work_limit=budget.max_work_units)
-        if not processing_complete or budget.exhausted or any(row["code"] == "work_budget_exhausted"
+        if budget.exhausted or any(row["code"] == "work_budget_exhausted"
                                    for row in result.selection_diagnostics):
             trace["inventory_complete"] = False
         dependencies = dependency_port.freeze_decision_dependencies(trace)
     return replace(result, reading_context=context, reading_dependencies=dependencies)
-
-
-def _source_processing_diagnostics(withheld: Sequence[Mapping[str, Any]]) -> tuple[dict[str, Any], ...]:
-    """Bounded public reasons/IDs from prepared deferrals; never rescan text."""
-    counts: dict[str, int] = {}
-    members: dict[str, set[str]] = {}
-    for row in withheld:
-        if row.get("phase") != "source_readability":
-            continue
-        reason = str(row["reason"])
-        counts[reason] = counts.get(reason, 0) + 1
-        members.setdefault(reason, set()).update(row["known_unit_ids"])
-    return tuple({"code": reason, "count": counts[reason], "phase": SOURCE_PROCESSING_DIMENSION,
-                  "dimension": SOURCE_PROCESSING_DIMENSION, "external_model_cost": False,
-                  "known_unit_ids": sorted(members[reason])[:SOURCE_PROCESSING_ID_SAMPLE_LIMIT],
-                  "known_unit_count": len(members[reason]),
-                  "known_unit_ids_limited": len(members[reason]) > SOURCE_PROCESSING_ID_SAMPLE_LIMIT}
-                 for reason in sorted(counts))
 
 
 def _document_work_diagnostic(budget: WorkBudget,

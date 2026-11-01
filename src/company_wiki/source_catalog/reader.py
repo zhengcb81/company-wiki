@@ -193,8 +193,6 @@ class ReadOnlyCatalogReader:
         from .store import _tolerate_undecodable_text  # local import: avoids a cycle
 
         _tolerate_undecodable_text(self._connection)
-        from .identity_candidates import register_identity_read_functions
-        register_identity_read_functions(self._connection)
         # The connection can only ever read; a write attempt raises
         # sqlite3.OperationalError('attempt to write a readonly database').
         self._connection.execute("PRAGMA query_only=ON")

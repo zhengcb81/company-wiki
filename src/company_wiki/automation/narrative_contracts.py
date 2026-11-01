@@ -823,16 +823,11 @@ def _selection_diagnostic_target(value: object, *, code: str) -> Mapping[str, An
 
 
 def _selection_diagnostic(value: object) -> Mapping[str, Any]:
-    from company_wiki.document_understanding.reading_context_contract import (
-        SOURCE_PROCESSING_DIAGNOSTIC_CODES, SOURCE_PROCESSING_DIMENSION,
-        SOURCE_PROCESSING_ID_SAMPLE_LIMIT,
-    )
     item = _object(value, "selection_diagnostic")
     required = {"code", "count"}
     allowed = required | {
         "phase", "external_model_cost", "dimension", "used", "requested", "limit", "detail",
         "targets", "targets_limited", "max_closure_size",
-        "known_unit_ids", "known_unit_count", "known_unit_ids_limited",
     }
     unknown = set(item) - allowed
     missing = required - set(item)
@@ -864,7 +859,6 @@ def _selection_diagnostic(value: object) -> Mapping[str, Any]:
         "character_budget": "selection_characters",
         "work_budget_exhausted": {"selection_work", "document_work"},
         "missing_required_context": "selection_policy",
-        **{code: SOURCE_PROCESSING_DIMENSION for code in SOURCE_PROCESSING_DIAGNOSTIC_CODES},
     }
     expected_dimension = combinations.get(code)
     if expected_dimension is None or dimension not in (
@@ -873,17 +867,7 @@ def _selection_diagnostic(value: object) -> Mapping[str, Any]:
         raise NarrativeContractError("selection_diagnostic code and dimension do not match")
 
     metric_keys = {"used", "requested", "limit", "detail"}
-    if dimension == SOURCE_PROCESSING_DIMENSION:
-        expected = required | {"phase", "external_model_cost", "dimension",
-                               "known_unit_ids", "known_unit_count", "known_unit_ids_limited"}
-        if set(item) != expected or item["phase"] != SOURCE_PROCESSING_DIMENSION:
-            raise NarrativeContractError("selection_diagnostic source processing shape is invalid")
-        _trace_unit_ids({"ids": item["known_unit_ids"], "count": item["known_unit_count"],
-                         "limited": item["known_unit_ids_limited"]},
-                        "selection_diagnostic.known_unit_ids", cap=SOURCE_PROCESSING_ID_SAMPLE_LIMIT)
-        if item["known_unit_count"] < 1:
-            raise NarrativeContractError("selection_diagnostic source processing requires known source IDs")
-    elif code in {"budget_full", "character_budget"}:
+    if code in {"budget_full", "character_budget"}:
         base = required | {"phase", "external_model_cost", "dimension", "used", "limit"}
         enriched = base | {"targets", "targets_limited"}
         if frozenset(item) not in {frozenset(base), frozenset(enriched)}:
@@ -1141,7 +1125,6 @@ def _reading_context(
     from company_wiki.document_understanding.reading_context_contract import (
         ATTRIBUTED_READING_CONTEXT_SCHEMAS, READING_CONTEXT_SCHEMAS,
         TRACED_READING_CONTEXT_SCHEMAS, SUMMARY_USE_CONTEXT_SCHEMAS,
-        SOURCE_PROCESSING_CONTEXT_SCHEMAS, validate_source_processing_complete,
         validate_summary_support_use,
     )
     plain = _bounded_reading_json(value)
@@ -1150,20 +1133,12 @@ def _reading_context(
         extra |= {"deferred_count", "deferred_limited", "selection_diagnostics"}
     if isinstance(plain, Mapping) and plain.get("schema_version") in TRACED_READING_CONTEXT_SCHEMAS:
         extra |= {"deferred_count", "deferred_limited", "selection_diagnostics", "selection_trace"}
-    if (isinstance(plain, Mapping) and plain.get("schema_version") in SOURCE_PROCESSING_CONTEXT_SCHEMAS
-            and "source_processing_complete" in plain):
-        extra.add("source_processing_complete")
     item = _exact(plain, {
         "schema_version", "reading_policy_version", "reading_policies", "business_facets",
         "constraints", "groups", "unread", "deferred", "layout_coverage",
     } | extra, "reading_context")
     if item["schema_version"] not in READING_CONTEXT_SCHEMAS:
         raise NarrativeContractError("unsupported reading_context schema")
-    if "source_processing_complete" in item:
-        try:
-            validate_source_processing_complete(item["schema_version"], item["source_processing_complete"])
-        except ValueError as exc:
-            raise NarrativeContractError(str(exc)) from exc
     attributed = item["schema_version"] in ATTRIBUTED_READING_CONTEXT_SCHEMAS
     assessed = item['schema_version'] in SUMMARY_USE_CONTEXT_SCHEMAS
     version = _text(item["reading_policy_version"], "reading_policy_version")

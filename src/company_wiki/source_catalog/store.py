@@ -1127,10 +1127,8 @@ class CatalogStore:
 
     @contextmanager
     def transaction(self) -> Iterator[sqlite3.Connection]:
-        from .identity_candidates import ensure_identity_projection, refresh_identity_projection
         if self._coalesced_connection is not None:
             connection = self._coalesced_connection
-            ensure_identity_projection(connection)
             try:
                 yield connection
             except Exception:
@@ -1141,7 +1139,6 @@ class CatalogStore:
             else:
                 self._coalesced_operations += 1
                 if self._coalesced_operations >= self._coalesced_max_operations:
-                    refresh_identity_projection(connection)
                     connection.commit()
                     connection.execute("BEGIN IMMEDIATE")
                     self._coalesced_operations = 0
@@ -1149,9 +1146,7 @@ class CatalogStore:
         connection = self._connect()
         try:
             connection.execute("BEGIN IMMEDIATE")
-            ensure_identity_projection(connection)
             yield connection
-            refresh_identity_projection(connection)
             connection.commit()
         except Exception:
             connection.rollback()
@@ -1172,10 +1167,7 @@ class CatalogStore:
         self._coalesced_max_operations = max_operations
         connection.execute("BEGIN IMMEDIATE")
         try:
-            from .identity_candidates import ensure_identity_projection, refresh_identity_projection
-            ensure_identity_projection(connection)
             yield
-            refresh_identity_projection(connection)
             connection.commit()
         except Exception:
             connection.rollback()

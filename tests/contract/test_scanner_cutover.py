@@ -10,6 +10,8 @@ from pathlib import Path
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[2] / "src"))
 
+import pytest  # noqa: E402
+
 from company_wiki.source_catalog.models import RootSpec  # noqa: E402
 
 
@@ -91,10 +93,13 @@ def test_two_zero_diff_rounds_required(tmp_path):
     assert gate_production_dry_shadow([[], []], rounds_required=1) is False
 
 
-def test_production_preview_does_not_require_historical_gate(tmp_path):
+def test_production_dry_shadow_refused_without_gate(tmp_path):
     """scan_catalog with v2 enabled must refuse to run a production dry
     shadow when the two-round zero-diff gate has not passed."""
-    from company_wiki.source_catalog.scanner import scan_catalog
+    from company_wiki.source_catalog.scanner import (
+        CutoverGateError,
+        scan_catalog,
+    )
     from company_wiki.source_catalog.config import load_catalog_config
 
     project = tmp_path / "project"
@@ -110,7 +115,6 @@ def test_production_preview_does_not_require_historical_gate(tmp_path):
                 "roots:",
                 "  - root_id: company_raw",
                 "    kind: company_raw",
-                "    adapter_id: company_raw_v1",
                 "    path: '" + str(project / "companies").replace("\\", "/") + "'",
                 "    priority: 10",
                 "",
@@ -119,10 +123,15 @@ def test_production_preview_does_not_require_historical_gate(tmp_path):
         encoding="utf-8",
     )
     config = load_catalog_config(config_path, project_root=project)
-    # Preview has the same read-only contract even with a historical count.
-    report = scan_catalog(config, None, dry_run=True, v2_scan_shadow=True, zero_diff_rounds=1)
-    assert report.files_seen > 0
-    assert not config.database_path.exists()
+    # v2 enabled with only ONE recorded zero-diff round -> gate refused
+    with pytest.raises(CutoverGateError):
+        scan_catalog(
+            config,
+            None,
+            dry_run=True,
+            v2_scan_shadow=True,
+            zero_diff_rounds=1,
+        )
 
 
 # --- real root before/after fingerprint invariant ---------------------------

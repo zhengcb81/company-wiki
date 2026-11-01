@@ -78,6 +78,3 @@
 /docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-root-20261024/** -text -eol whitespace=cr-at-eol,-blank-at-eof,-blank-at-eol
 /docs/plans/r1-final3-source-semantics-20261022/resume/budget-baseline-join-20261023/** -text -eol whitespace=cr-at-eol,-blank-at-eof,-blank-at-eol
 /docs/plans/r1-final3-source-semantics-20261022/resume/predicate-state-publication-20261024/** -text -eol whitespace=cr-at-eol,-blank-at-eof,-blank-at-eol
-
-# Packaged statement grammar data is immutable; preserve manifest byte hashes.
-src/company_wiki/document_understanding/statement_grammar/resources/* -text
