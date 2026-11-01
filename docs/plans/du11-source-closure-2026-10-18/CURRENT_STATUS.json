@@ -1,11 +1,11 @@
 {
   "schema_version": "company-wiki-current-plan-status/2",
   "as_of_date": "2026-11-01",
-  "observed_at_utc": "2026-11-01T07:55:57.173481+00:00",
+  "observed_at_utc": "2026-11-01T08:40:41.168409+00:00",
   "canonical_entry": "CURRENT_STATUS.md",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
-  "project_status": "PAUSED_BY_USER_AFTER_R4_FROZEN_PARTIAL_FRESH_REVIEWS",
+  "project_status": "PAUSED_AFTER_R4_FOUR_REVIEWS_AND_COMMON_ROOT_PWF",
   "scope_this_update": "Mainline only; exact CI root repairs, real summary/recovery/native adoption; no new packages",
   "last_code_commit": "7e10973e65517ce5a1b6cccc1c427ff4f9a0ecde",
   "verified_publication_before_docs": {
@@ -26,7 +26,7 @@
     "observed_status": "paused",
     "observed_via": "get_goal confirmed after user goal-status pause",
     "objective_budget_text": "legacy2M tokens/$20; not runtime policy",
-    "note": "User explicitly paused; do not auto-resume or create a replacement goal. Runtime budget remains config10M/$20."
+    "note": "User authorized only finishing the current review/diagnosis node then pausing. No replacement goal or new company. Runtime budget config10M/$20."
   },
   "runtime_policy": {
     "budget_owner": "config/resource_budget.yaml",
@@ -89,11 +89,11 @@
     },
     {
       "id": "P3",
-      "status": "W12_V2_FROZEN_FRESH_REVIEWS_AND_COMMON_ROOT_REMEDIATION_OPEN",
+      "status": "R4_FOUR_REVIEWS_AND_INTERNAL_PWF_COMPLETE_REMEDIATION_AND_COMPANY_QUALITY_OPEN_PAUSED",
       "task": "W12 original-company rerun, new-company generalization, fixed8company fullaudit/skillimprovement and finalclean streak"
     }
   ],
-  "next_action": "仅在用户明确恢复后：先读R4三个角色checkpoint，补齐storage/process/analyst和未启动的fetch四审；按实际问题归因修来源召回/作者记录及通用ghost-formula/期间预检，关键节点独审后再重放。R4已封存，不写旧树、不重复已有模型调用；不扩施工包。",
+  "next_action": "用户明确恢复后，先读AUDIT同run/remediation/r1-remediation-04/implementation.md与六issue完整映射；从来源遗漏/跨主体context的共因RED开始，在所属责任层修复，并合并原第7/8步ghost-formula、期间补集及记录质量责任。关键节点独审后才开原公司新attempt，复用合格原件/缓存、按实际改变决定是否需要一次新摘要；不写封存R4、不从零重复已通过计算、不扩施工包或新公司。",
   "package_status_registry": "PACKAGE_STATUS.json",
   "handoff": "HANDOFF.md",
   "goal_definition": "MAINLINE_LOOP_GOAL.md",
@@ -111,7 +111,7 @@
     "Berkshire15unprocessed explicitly retained; full-source/long-frontier generalization remains partial,10required DEV business atoms now present",
     "P3 W12 company rerun, latest communications/demand/competition/scenario calibration, US regulatoryPDF/HK/US_RPO and genuinely unexposed holdouts"
   ],
-  "execution_mode": "paused_at_user_request",
+  "execution_mode": "paused_after_bounded_review_node",
   "p0_repair": {
     "status": "PUBLISHED_EXACT_CI_PASS",
     "evidence": "review/mainline-closeout-20261031/p0/README.md",
@@ -623,7 +623,7 @@
   "p3_current_attempt": {
     "attempt": "r1-remediation-04",
     "executor": "/root/w12_executor_remediation04",
-    "status": "FROZEN_R4_FRESH_REVIEWS_PAUSED",
+    "status": "FROZEN_R4_FOUR_REVIEWS_COMPLETE_REMEDIATION_OPEN_PAUSED",
     "as_of_date": "2026-10-21",
     "new_source_HTTP": 3,
     "new_source_bytes": 608016,
@@ -636,7 +636,7 @@
     "Q_and_A_qualification": "published_date unknown; current source owner returns source_availability_unknown, not an RF-qualified transcript",
     "new_H1_model_POST": 1,
     "formal_result_accepted": false,
-    "internal_PWF": "revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec/remediation/r1-remediation-03/implementation.md",
+    "internal_PWF": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\remediation\\r1-remediation-04\\implementation.md",
     "model": "mimo-v2.6-flash",
     "charged_tokens": 10236,
     "estimated_micro_usd": 1885,
@@ -649,14 +649,16 @@
       "source_sha256": "d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f"
     },
     "new_rule_recovery": {
-      "paid_prepared_capture": "0a0e7924293b46f18d4910fe5faa7e72",
+      "paid_prepared_capture": "56698004e8964ef087ea57ba14866620",
       "same_run_capture": "8ee643c41c0c4b8794ce4f6db6777a3a",
       "cross_run_max1_capture": "6f0a4b32140b4e329e28c736f232c89f",
-      "all_native_exit0_complete": true,
       "extra_POSTs": 0,
       "cross_run_added_tokens": 0,
       "cross_run_added_micro_usd": 0,
-      "scope": "ROOT observed native captures; independent large-node review still pending"
+      "scope": "Native prepared/same-request/same-run/cross-run reuse independently reviewed; no extra POST. Full company quality not accepted.",
+      "paid_prepared_recovery_capture": "0a0e7924293b46f18d4910fe5faa7e72",
+      "paid_prepared_capture_outcome": "Wrapper failed after durable paid prepare; not an exit0 claim.",
+      "all_recovery_and_reuse_native_exit0_complete": true
     },
     "author_launcher_failures_preserved": [
       "Windows multiprocessing missing main guard before POST",
@@ -668,7 +670,8 @@
       "author_role_semantics": "new candidate will leave unobserved E/c/d/r as explicit assumptions; keep original driver counterevidence and history clock",
       "root_cause": "author relationship semantics, not newly confirmed RF headwind defect",
       "source_only_PASS_is_not_full_graph": true,
-      "actual_net_E": null
+      "actual_net_E": null,
+      "status": "Historical precursor only; active authoring-v4/current complete graph is frozen and reviewed."
     },
     "execution_manifest": {
       "path": "execution_replays/r1-remediation-04/execution/manifest.json",
@@ -696,7 +699,7 @@
       "summary_uses": 8,
       "workflow_labels": 16
     },
-    "full_native_main_report_snapshot_and_five_stress_cases": "EXECUTED; independent company-quality review incomplete",
+    "full_native_main_report_snapshot_and_five_stress_cases": "EXECUTED and independently checked; company economic range and content defects remain open",
     "confidence": {
       "value": 0.0,
       "label": "low",
@@ -803,7 +806,8 @@
     "logical_bytes": 115059812,
     "unique_content_bytes": 52877036,
     "identical_duplicate_logical_bytes": 62182776,
-    "scope": "54.0% duplicate logical bytes, not measured NTFS physical allocation or space already reclaimed. Preserve sealed attempt during reviews; assess reuse of existing immutable input owner in P3 quality closeout, not a new package."
+    "scope": "54.0% duplicate logical bytes, not measured NTFS physical allocation or space already reclaimed. Preserve sealed attempt during reviews; assess reuse of existing immutable input owner in P3 quality closeout, not a new package.",
+    "R4_followup": "Read-only quality/evolution plans under AUDIT roles/expert; implementation, independent validation and next-attempt adoption remain open."
   },
   "p3_source_scope_repair": {
     "status": "PUBLISHED_NORMAL_PUSH_EXACT_CI_PASS",
@@ -1154,54 +1158,169 @@
       "input_unchanged": true
     }
   },
-  "fresh_review_checkpoint": {
-    "directory": "revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec/reports/r1-remediation-04",
-    "review_input": "revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec/reports/r1-remediation-04/review_input.json",
-    "storage": "PARTIAL_PAUSED; local P2 source recall finding not final whole-company verdict",
-    "process": "PARTIAL_PAUSED; mathematics/source checks passed so far, stale scope impact still under review",
-    "analyst": "PARTIAL_PAUSED; operating/timing bridge checked, economic calibration judgment incomplete",
-    "fetch": "NOT_STARTED; must run after user resume",
-    "resume_files": {
-      "storage": "revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec/reports/r1-remediation-04/roles/storage/checkpoint.md",
-      "process": "revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec/reports/r1-remediation-04/roles/process/checkpoint.md",
-      "analyst": "revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec/reports/r1-remediation-04/roles/analyst/checkpoint.md"
-    },
-    "do_not_count_as_four_final_reports": true,
-    "all_three_checkpoint_files_saved": true,
-    "no_in_flight_review_processes": true,
-    "owned_cleanup_pending": "analyst temporary PNGs in own review scratch; see analyst/checkpoint, preserve until resume"
-  },
   "pending_common_root_followups": [
     {
       "owner": "CWP source-reading",
-      "status": "REVIEWER_LOCAL_P2_NOT_IMPLEMENTED",
-      "issue": "H1p12 DMPK7x24 closed-loop and Biology automation/customer/animal-pharmacology3units absent from selection/carriers/sent112fragments/67cards",
-      "evidence": "revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec/reports/r1-remediation-04/roles/storage/native-crosscheck.json",
-      "boundary": "existing D&M/p14 fixes remain passed; source partial alone is not defect; no economic amount conclusion"
+      "status": "CONFIRMED_LOCAL_CONTENT_GAPS_NOT_IMPLEMENTED",
+      "issue_refs": [
+        "r1-remediation-04/storage/STORAGE-001",
+        "r1-remediation-04/storage/STORAGE-002"
+      ],
+      "issue": "Three operating capability units omitted before model; commitment contexts cross actor/note boundary. Exact code cause and TDD follow expert implementation.",
+      "boundary": "Existing D&M/p14/519 fixes and eight actually adopted cards remain passed; no measured forecast loss claimed."
     },
     {
-      "owner": "RF parameter semantic preflight and lint",
-      "status": "CONFIRMED_NOT_IMPLEMENTED",
-      "issue": "non-derived active formula/input fields silently accepted; v3Other9author errors corrected only in v4 data",
-      "diagnosis": "diagnosis/r1-remediation-04/ghost-formula-readonly.md",
-      "tests": "expert20vectors:9red/11existing boundaries; shared pure helper, empty compatibility, no auto kind/value change"
+      "owner": "AUDIT recording",
+      "status": "DESCRIPTIVE_SCOPE_ONLY_FIX_NEXT_ATTEMPT",
+      "issue_ref": "r1-remediation-04/process/PROCESS-001",
+      "issue": "R3 descriptive scope fields stale; all72 real argv/output are R4 and effective caps current. No sealed-scope edit or R4 rerun needed."
+    },
+    {
+      "owner": "RF research",
+      "status": "ECONOMIC_RANGE_EXTERNAL_EVIDENCE_LIMIT",
+      "issue_ref": "r1-remediation-04/analyst/ANALYST-001",
+      "issue": "Conditional operating/time bridge is usable; independent future magnitude and persistence not verified. Do not invent data or sign whole-company economic quality."
+    },
+    {
+      "owner": "FF/ET external capability and source qualification",
+      "status": "EXTERNAL_LIMITS_RETAINED",
+      "issue_refs": [
+        "r1-remediation-04/fetch/FETCH-001",
+        "r1-remediation-04/fetch/FETCH-002"
+      ],
+      "issue": "ET exact request unsupported_exchange/0HTTP; organizer Q&A publication/as-of availability unknown. No fake dates/transcript labels or new paid provider."
+    },
+    {
+      "owner": "RF parameter semantic owner and lint",
+      "status": "CARRY_FORWARD_NOT_IMPLEMENTED",
+      "issue": "Active formula/inputs on non-derived parameter silently accepted; current v4 author data corrected, shared preflight not yet fixed.",
+      "diagnosis": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\diagnosis\\r1-remediation-04\\ghost-formula-readonly.md",
+      "tests": "Existing20vectors:9RED/11boundaries; reuse, no second calculator."
     },
     {
       "owner": "RF period_flow",
-      "status": "RED_REPRODUCED_NOT_IMPLEMENTED",
-      "issue": "same-measure temporal complements rejected; inverseYoY needs explicit comparison binding",
-      "diagnosis": "diagnosis/r1-remediation-04/period-owner-readonly.md",
-      "tests": "ROOT neutral4F/6P; historical sidecar not current main-DAG dependency"
+      "status": "CARRY_FORWARD_RED_NOT_IMPLEMENTED",
+      "issue": "Same-measure signed temporal complements rejected; inverseYoY separate explicit comparison binding.",
+      "diagnosis": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\diagnosis\\r1-remediation-04\\period-owner-readonly.md",
+      "tests": "Existing neutral4F/6P; not current main-DAG dependency."
     },
     {
-      "owner": "AUDIT attempt scope recording",
-      "status": "IMPACT_UNDER_REVIEW_NOT_CONFIRMED_EXECUTION_BUG",
-      "issue": "R4 scope nested execution_attempt/role-output roots still referenceR3; verify effective scope/actual argv before disposition"
-    },
-    {
-      "owner": "test-side launch/checkpoint configuration",
-      "status": "QUALITY_FOLLOWUP_ONLY",
-      "issue": "reuse tested Windows main guard and validate observer required fields before paid work; prefer existing entry, no new permission gate"
+      "owner": "AUDIT test-side launch/observer and quality evolution",
+      "status": "CARRY_FORWARD_PLAN_ONLY",
+      "issue": "Reuse tested Windows launch/main guard and preflight required technical observer config; assess existing immutable CAS and detection false positives. No new permission/framework."
     }
-  ]
+  ],
+  "fresh_review_final": {
+    "status": "FOUR_FINAL_REPORTS_COLLECTED_AND_EXPERT_DISPOSITION_COMPLETE",
+    "review_directory": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\reports\\r1-remediation-04",
+    "freeze_index": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\roles\\coordinator\\review_coverage\\r1-remediation-04\\four-reports-frozen.json",
+    "reports": {
+      "storage": {
+        "json": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\reports\\r1-remediation-04\\storage.json",
+        "json_sha256": "31a95ec7b33d3e8609bd12a705005c6d67ec0d3fc637004be62f07e75b40d863",
+        "json_bytes": 44127,
+        "markdown": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\reports\\r1-remediation-04\\storage.md",
+        "markdown_sha256": "9fa3db6a3dbe9b9ae2c2e2c6d0ffbbc8ba04ef45684655334ea82257197f9ccb",
+        "checks": {
+          "PASS": 12,
+          "FAIL": 4,
+          "N/A": 2
+        },
+        "issue_ids": [
+          "STORAGE-001",
+          "STORAGE-002"
+        ]
+      },
+      "fetch": {
+        "json": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\reports\\r1-remediation-04\\fetch.json",
+        "json_sha256": "1f6fb90cea4071a775a362f3ad2b62a0706797cc90b0b6a4403b002085314430",
+        "json_bytes": 27996,
+        "markdown": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\reports\\r1-remediation-04\\fetch.md",
+        "markdown_sha256": "3e464d27a895437b462e2b3904210efd747543084b9112e88cafedd3a6d40e66",
+        "checks": {
+          "PASS": 12,
+          "N/A": 2,
+          "BLOCKED": 2,
+          "NOT_RUN": 1
+        },
+        "issue_ids": [
+          "FETCH-001",
+          "FETCH-002"
+        ]
+      },
+      "process": {
+        "json": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\reports\\r1-remediation-04\\process.json",
+        "json_sha256": "a369ff37175200ed8a21b37c32535e2e993246a5aec996c034a92a52c54c7b94",
+        "json_bytes": 275897,
+        "markdown": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\reports\\r1-remediation-04\\process.md",
+        "markdown_sha256": "a8322994c25d313f392fbaff49c428d6a023cf29b3f24e239705bf8e6a968d5b",
+        "checks": {
+          "PASS": 16,
+          "FAIL": 1,
+          "N/A": 3
+        },
+        "issue_ids": [
+          "PROCESS-001"
+        ]
+      },
+      "analyst": {
+        "json": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\reports\\r1-remediation-04\\analyst.json",
+        "json_sha256": "90af7e5570e1313ed44b52e5eedf9a30853814b4129b91d42a5fef0e1b508cbd",
+        "json_bytes": 63238,
+        "markdown": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\reports\\r1-remediation-04\\analyst.md",
+        "markdown_sha256": "088d03916a6792893055b5075dd198d77a1a9493decb2bfc945af1f0cbcc0704",
+        "checks": {
+          "PASS": 14,
+          "BLOCKED": 3,
+          "N/A": 1
+        },
+        "issue_ids": [
+          "ANALYST-001"
+        ]
+      }
+    },
+    "check_count": 73,
+    "status_counts": {
+      "PASS": 54,
+      "FAIL": 5,
+      "BLOCKED": 5,
+      "N/A": 8,
+      "NOT_RUN": 1
+    },
+    "finding_count": 6,
+    "all_findings_severity": "P2",
+    "new_P0_P1": 0,
+    "root_causes": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\diagnosis\\r1-remediation-04\\root_causes.json",
+    "coverage": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\diagnosis\\r1-remediation-04\\coverage.json",
+    "implementation": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\remediation\\r1-remediation-04\\implementation.md",
+    "company_quality_accepted": false,
+    "cleanup": "Own reviewer temporary PNGs removed; no new paid calls/downloads. Current isolated originals and frozen execution retained for required remediation/retest; F12 deferred, not falsely complete.",
+    "prior_checkpoints": "Historical only; superseded by final reports, not resume inputs."
+  },
+  "review_record_diagnostic": {
+    "attempt": "20261101T082212Z-fcbe9895",
+    "record_scope_gap": "1 descriptive execution_attempt drift, same PROCESS-001, not actual R3 execution",
+    "reference_rows": 540,
+    "observed": 517,
+    "unverifiable_single_file_byte_cap": 23,
+    "mismatch": 0,
+    "quality_status": "not_evaluated",
+    "note": "Do not raise caps/repeat merely for green. Independent roles opened and recomputed actual large native files."
+  },
+  "audit_review_archive": {
+    "head": "8e8281c0e4a6d361485bad183c124e12e6459797",
+    "normal_commit": true,
+    "remote": null,
+    "pushed": false,
+    "reason": "Existing AUDIT repository has no remote",
+    "authored_report_files": 26,
+    "logical_bytes": 593829,
+    "archive_path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\docs\\reviews\\r4-review-closeout-20261101\\authored-records.tar.gz",
+    "compressed_bytes": 100830,
+    "original_authored_bytes_preserved": true,
+    "restoration_or_extraction_performed": false,
+    "originals_or_vendor_envelopes_committed": false,
+    "source_runtime_unchanged": true,
+    "source_runtime": "55c29fe5f3a9554f883156e3a4232eece04bf581"
+  }
 }

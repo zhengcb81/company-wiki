@@ -77,3 +77,5 @@
 - 2026-11-01 RF长卡证据8eb8fe08/CI41282340171/3入口定点部署闭合；R3移历史、R4唯一current。原执行/费用不覆盖，新正式研究验收只看CURRENT_STATUS。
 
 - 2026-11-01 用户paused：R4已封存，三独审部分完成/fetch未启动；恢复只看CURRENT_STATUS/各角色checkpoint，不从零重跑。
+
+- 2026-11-01 当前大节点收口：R4四正式报告/6P2完整映射与内部PWF已交付，暂停；de6ab696的部分checkpoint状态仅为历史。当前入口只看CURRENT_STATUS，不把审查完成写成缺陷已修/完整公司通过。
