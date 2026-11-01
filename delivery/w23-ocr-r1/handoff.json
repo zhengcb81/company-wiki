@@ -18,7 +18,7 @@
   "fc4228c1 docs: bind final tested commit in R1 handoff"
  ],
  "final_tested_commit": "fc4228c15bd91f9ef74d206290ac4b68b26d8d97",
- "final_reviewed_commit": "PENDING_REVIEW",
+ "final_reviewed_commit": "fc4228c1 (independent review; the documentation-only commits after it are listed below)",
  "code_file_sha256": {
   "tools/ocr_comparison/campaign.py": {
    "raw_sha256": "d974cbaefe09cf2dca6060250095477db5b6fa933ae82b6f07b3ef5fc44e38e1",
@@ -275,5 +275,9 @@
   "ledger contains one under-count (7 zero rows first R0 pass) and one over-count (1080 s never-started pages), both disclosed"
  ],
  "recommendation": "现有不动 for production; table-structure linearization is R0's measured gap. Xiaomi needs a host with >=6.5 GB free RAM and a resolution of the Job Object bound mismatch before any card-compliant X1F result can exist.",
- "pushed_to_remote": null
+ "pushed_to_remote": "origin/codex/w23-ocr-r1-20261031",
+ "doc_suffix_commits": [
+  "96cde9bdc679d415abf0827bbeb06c5740befb93",
+  "this record commit: gold impact metadata, A4/caveat disclosure, X2 denominators, task_plan, pushed_to_remote"
+ ]
 }
