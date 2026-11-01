@@ -1,11 +1,11 @@
 {
   "schema_version": "company-wiki-current-plan-status/2",
   "as_of_date": "2026-11-01",
-  "observed_at_utc": "2026-11-01T02:30:18.866767+00:00",
+  "observed_at_utc": "2026-11-01T03:05:23.375267+00:00",
   "canonical_entry": "CURRENT_STATUS.md",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
-  "project_status": "P0_P1_P2_BOUNDED_ENGINEERING_CLOSED_EXACT_CI_GREEN_P3_W12_EXECUTION_ACTIVE_FULL_PROJECT_OPEN",
+  "project_status": "P3_W12_CONFIG_AND_TERMINAL_RECOVERY_REVIEW_PASS_PUBLICATION_IN_PROGRESS",
   "scope_this_update": "Mainline only; exact CI root repairs, real summary/recovery/native adoption; no new packages",
   "last_code_commit": "f98dd54b78184ea6534941e1ae8bb40bbe6971da",
   "verified_publication_before_docs": {
@@ -35,11 +35,11 @@
     "cumulative_micro_usd": 20000000,
     "company_allocation": "soft target150000tokens/$1",
     "latest_verified_usage": {
-      "tokens": 1849869,
-      "micro_usd": 739510,
+      "tokens": 1935796,
+      "micro_usd": 756563,
       "includes_historical_unknowns": true,
-      "evidence": "review/mainline-closeout-20261031/p1-current/receipts/huali/mother-after.json.gz",
-      "note": "New current two calls14094tokens/5271microUSD; earlier8217/1425 already included. Estimate not invoice;6new historical unknown plus7baseline retained."
+      "evidence": "revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec/execution_replays/r1-remediation-03/usage_reconcile/after-single-h1-managed-recovery/mother-after.json",
+      "note": "Two new HTTP401 attempts retain unknown conservative holds85927tokens/17053microUSD; new_unknown8 plus prior_unknown7. Corrected-loader single H1 run blocked before admission,0 newPOST/reservations. Estimate not invoice; no refund/reset."
     }
   },
   "m8_source_engineering": {
@@ -87,11 +87,11 @@
     },
     {
       "id": "P3",
-      "status": "W12_EXECUTOR_CONTINUING_AFTER_CI_DEPENDENCY_CLEARED",
+      "status": "W12_SHARED_CONFIG_RECOVERY_REPAIR_IN_PROGRESS",
       "task": "W12 original-company rerun, new-company generalization, fixed8company fullaudit/skillimprovement and finalclean streak"
     }
   ],
-  "next_action": "继续W12 r1-remediation-03独立executor的新版来源摘要与RF完整16标签实际链，封存后四路独审，再按共因修复/原公司复验与质量检测收尾；不扩包。",
+  "next_action": "正常提交推送当前配置/AUTO恢复共因根修，核精确CI；与此并行继续W12单H1正确配置真实摘要，保留旧unknown费用，再缓存恢复/完整RF实际链和四路复审。不扩包。",
   "package_status_registry": "PACKAGE_STATUS.json",
   "handoff": "HANDOFF.md",
   "goal_definition": "MAINLINE_LOOP_GOAL.md",
@@ -424,7 +424,7 @@
     "attempt": "r1-remediation-03",
     "as_of_date": "2026-10-21",
     "executor": "/root/w12_executor_current",
-    "status": "EXECUTOR_CONTINUING_AFTER_EXACT_CI_GREEN",
+    "status": "CONFIG_CANONICAL_PATH_AND_TERMINAL_GENERATION_RECOVERY_ROOT_REPAIR",
     "root": "revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec/execution_replays/r1-remediation-03",
     "formal_execution_or_four_review_pass": false,
     "new_model_POST_so_far": "0 at latest preflight; read current native mother ledger before any paid call",
@@ -436,7 +436,12 @@
       "Latest IR/JPM presentation leads exist but native discovery partial;1MiB free discovery trial stopped on totalbytes, no raised cap or absence claim; Q3published10-26 excluded",
       "ExactFY2026Q2 companion actualprepare returns unsupported_exchange/provider_startedfalse; missing transcript remains sourcegap, not claimed no publiccall"
     ],
-    "ci_dependency_cleared_at": "2026-11-01T02:27:30Z"
+    "ci_dependency_cleared_at": "2026-11-01T02:27:30Z",
+    "new_formal_summary_or_full_RF_accepted": false,
+    "root_findings": [
+      "Explicit canonical Config.load path skips managed dotenv; same model/endpoint but stale inherited MiMo credential.",
+      "Native execution recovery owner requires known billing for terminal401 jobs; old unknown holds still counted, new explicit run rejected0POST."
+    ]
   },
   "own_uncommitted_tests": [],
   "last_version_contract_failed_ci": {
@@ -455,5 +460,23 @@
     "conclusion": "success",
     "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41255499232",
     "meaning": "Last verified baseline CI. Current P1 root repair not yet committed; exact new CI required after publication."
+  },
+  "p3_config_generation_recovery": {
+    "status": "INDEPENDENT_REVIEW_PASS_NORMAL_PUBLICATION_IN_PROGRESS",
+    "evidence": "review/mainline-closeout-20261031/p3-config-recovery/README.md",
+    "tests": {
+      "unit_passed": 96,
+      "unit_seconds": 20.46,
+      "integration_passed": 4,
+      "integration_seconds": 64.12,
+      "independent_native_cases": 8,
+      "independent_open": 0
+    },
+    "owned_test_bytes_removed": 18856387,
+    "not_signed": [
+      "new exact CI",
+      "real W12 current summary/full RF/four reviewers",
+      "entire project"
+    ]
   }
 }

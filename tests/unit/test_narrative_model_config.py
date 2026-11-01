@@ -1,6 +1,8 @@
 """Configured provider settings must reach the bounded model unchanged."""
 
 import json
+import os
+from pathlib import Path
 
 import pytest
 
@@ -74,6 +76,55 @@ def test_default_loader_keeps_project_dotenv_authoritative(tmp_path, monkeypatch
     assert options["endpoint"] == config.llm.base_url.rstrip("/") + "/chat/completions"
     assert options["max_output_tokens"] == config.llm.max_tokens == 8192
     assert "project-fixture-key" not in json.dumps(options)
+
+
+@pytest.mark.parametrize("path_mode", ["default", "absolute", "relative"])
+@pytest.mark.parametrize("provider", ["minimax", "mimo", "deepseek"])
+def test_same_project_config_path_keeps_one_credential_policy(
+    tmp_path, monkeypatch, path_mode, provider,
+):
+    import config as config_module
+
+    monkeypatch.setattr(config_module, "WIKI_ROOT", tmp_path)
+    monkeypatch.setattr(config_module, "_dotenv_loaded", False)
+    monkeypatch.delenv("PYTEST_CURRENT_TEST")
+    monkeypatch.delenv("PYTHON_DOTENV_DISABLED", raising=False)
+    monkeypatch.chdir(tmp_path)
+    for name in ("MINIMAX", "MIMO", "DEEPSEEK"):
+        monkeypatch.setenv(name + "_API_KEY", "inherited-fixture")
+    (tmp_path / ".env").write_text(
+        "MINIMAX_API_KEY=managed-fixture\nMIMO_API_KEY=managed-fixture\n"
+        "DEEPSEEK_API_KEY=dotenv-fallback-fixture\n", encoding="utf-8",
+    )
+    path = tmp_path / "config.yaml"
+    path.write_text("llm:\n  provider: " + provider + "\n", encoding="utf-8")
+    selected = {
+        "default": None, "absolute": path, "relative": Path("config.yaml"),
+    }[path_mode]
+    loaded = Config.load(selected, validation_scope="llm")
+    expected = "inherited-fixture" if provider == "deepseek" else "managed-fixture"
+    assert loaded.llm.api_key == expected
+    assert os.environ[loaded.llm.api_key_env] == expected
+
+
+@pytest.mark.parametrize("disabled", [False, True])
+def test_custom_config_and_explicit_dotenv_disable_preserve_inherited_keys(
+    tmp_path, monkeypatch, disabled,
+):
+    import config as config_module
+
+    monkeypatch.setattr(config_module, "WIKI_ROOT", tmp_path)
+    monkeypatch.setattr(config_module, "_dotenv_loaded", False)
+    monkeypatch.delenv("PYTEST_CURRENT_TEST")
+    monkeypatch.delenv("PYTHON_DOTENV_DISABLED", raising=False)
+    monkeypatch.setenv("MIMO_API_KEY", "inherited-fixture")
+    (tmp_path / ".env").write_text("MIMO_API_KEY=managed-fixture\n", encoding="utf-8")
+    if disabled:
+        monkeypatch.setenv("PYTHON_DOTENV_DISABLED", "true")
+    path = tmp_path / ("config.yaml" if disabled else "custom.yaml")
+    path.write_text("llm:\n  provider: mimo\n", encoding="utf-8")
+    loaded = Config.load(path, validation_scope="llm")
+    assert loaded.llm.api_key == "inherited-fixture"
 
 
 def test_repository_minimax_narrative_config_uses_supported_reasoning_effort(monkeypatch):

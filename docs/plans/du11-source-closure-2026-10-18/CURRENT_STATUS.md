@@ -7,7 +7,7 @@
 | P0旧3例CI | 延期frontier/真实lookahead及消费者合同根修，精确CI绿 | 保留原失败，生产预算不变 |
 | P1新版两来源 | 华利15完整卡/12业务原子，Berkshire73卡/10业务原子；各1真实配置模型POST，activation/同跨run0重复，独审PASS | /5是完整原文摘录＋advisory排名；Berkshire15条未处理、全文partial，曝光样本不是盲测 |
 | P2新版华利v6 | 新a466 artifact完整t3/出处/理由进入实际参数、公式、报告、snapshot/registry，45独立检查PASS | 条件工程算例；2023IR不是2026新计划，不代签全公司买方研究 |
-| P3原公司完整复验 | r1-remediation-03已冻结、独立executor继续正式执行，CI依赖已清 | 新正式summary/完整RF/四路复审及质量收尾尚未签收 |
+| P3原公司完整复验 | r1-remediation-03已冻结、CI依赖已清；真实401暴露共享配置/终态恢复问题，ROOT修复中 | 新正式summary/完整RF/四路复审及质量收尾尚未签收 |
 
 ## 此次修好的共因
 
@@ -31,4 +31,8 @@ RF main/远端已[85054d7b](https://github.com/zhengcb81/revenue-forecast/commit
 
 W21 canonicalC2真实增强/严格对齐、长文余项及新US监管/HK/US RPO按相关P3责任承接，nativefallback/股东信不代签。当前不扩施工包、不动Dayu/IQS/Dashboard、原件和生产配置。RF三份assurance WIP及CWP hook mode差异保留。外包只查[PACKAGE_STATUS](PACKAGE_STATUS.md)。
 
-配置累计10M tokens/$20，最新已核母账1,849,869tokens/$0.739510含全部unknown；P3最新预检0模型，后续以实际native母账为准。原生goal active。原件不丢；工程只留小型gzip收据/免费重放，不归档PDF或整库。本轮已清7个自有测试目录16,045,737逻辑字节及失败hook自有temp21,158,851字节；P3当前数据保留待独审，不能提前清理。此前新下载测试年报/全规范化清4,662,644B且62实际span保留。没有新增逐材料人工许可。
+配置累计10M tokens/$20，最新已核母账1,935,796tokens/$0.756563（估计非账单），保留new_unknown8＋prior_unknown7。P3两次真实401新增保留85,927tokens/$0.017053；正确默认loader单H1新run被generation恢复指针拒绝，0新POST/预留，不退旧账。原生goal active。原件不丢；工程只留小型gzip收据/免费重放，不归档PDF或整库。本轮已清7个自有测试目录16,045,737逻辑字节及失败hook自有temp21,158,851字节；P3当前数据保留待独审，不能提前清理。此前新下载测试年报/全规范化清4,662,644B且62实际span保留。没有新增逐材料人工许可。
+
+当前真实阻碍（非CI重新失败）：显式传同一canonical配置绕过受管.env，误用继承凭证而401；终态费用unknown又被当成执行未结束，阻止修正后新run。已假凭证TDD复现4F/7P，正在共因修复及原生恢复正反例，独审后继续W12，不重置账、不删pointer、不换DB绕行。
+
+W12共享配置/恢复根修已集中独审PASS/0OPEN：96短unit/20.46s、4隔离integration/64.12s及8独立native状态探针；AUTO单snapshot拥有执行状态，batch薄适配，未知账不退，已有付费pin只走原恢复。已清本轮11自有测试目录18856387逻辑字节，真实P3/原件未动。现正常发布，后续精确CI与W12正式采用仍分别验收。详见review/mainline-closeout-20261031/p3-config-recovery。

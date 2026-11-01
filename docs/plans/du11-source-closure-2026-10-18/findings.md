@@ -53,3 +53,11 @@ source-card compiler已按语义用途生成，但execution又按物理可读重
 版本合同与known消费者选测已独审、f98dd54b并主线、正常651P/133.64s及精确CI41264855167成功；后续Windows9F也是被正常本机hook抓到的旧夹具路径假设，test-only测量和extended清理19P闭合，生产限制未抬。快速scope仍partial，不能保证远端所有错都由本地抓到。
 
 W12隔离metadata缺口根因是把旧原件重新扫描推断当canonical记录继承；现通过既有CWP已验source-facts owner接口保全11个exact Ref事实/原证据，annual native复用成功，不需新核心代码/上层路径适配。新Sina三表链成功；今日snapshot及IR发现/unsupported call的局限继续实际四审，预检不代签新summary/native研究。
+
+## 2026-11-01 — W12真实运行暴露共享配置/终态恢复共因
+
+CI修复仍绿。两真实MiMo401来自Config.load显式canonical路径漏载受管.env，非缺权限/换模型；假凭证TDD4F/7P。旧两unknown85927tokens/17053microUSD保留，native母账1935796/756563、new_unknown8+prior7。正确默认loader单H1新attempt实际0POST/0reservation，被generation owner把账单unknown等同未结束所阻止。ROOT修共享责任层，executor继续无收费研究准备；恢复正反例/集中独审后续正式链，不删pointer/换DB/SQL复活，不以预检代签。
+
+### W12配置/恢复集中验收通过，进入正常发布
+
+不是401/公司特判：canonical配置身份与参数写法解耦；AUTO owner区分计费unknown与执行未结束，完整paid pin继续原run恢复。仅诊断SHA不冒作可恢复完整响应、不重造死锁。96P/20.46s、4原生集成64.12s与8独立native状态探针通过，独审0OPEN、费用行不变。原生finish本来自动结零输出，初始错误fixture期望与重复BEGIN实现错误均保留不冒真实RED。11本轮测试目录清18856387逻辑字节、真实P3原件保留。正常提交推送/核CI与真实W12新摘要并行，不以PWF-only新HEAD再加签收，不扩包。

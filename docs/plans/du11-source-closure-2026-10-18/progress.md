@@ -64,3 +64,11 @@ CI版本迁移及选测共因已集中独审PASS/0OPEN：54源协议例绿；选
 CWP f98dd54b已master/远端同步，normal push651P/133.64s，精确CI41264855167于02:27:30Z成功；RF85054d7b精确CI41260918155成功。P0–P2有界工程闭合，旧失败/签名不覆盖。失败hook自有长路径root定点清21158851逻辑字节，原日志归档；早前7测试目录16045737B已清，P3当前数据待审不删。
 
 W12 r1-remediation-03保留10-21截止，独立executor经当前RF→FF→CWP复用/19页新读和3可视检查、11canonical源事实继承/annual实际native复用成功，Sina三表6HTTP1429736B/$0取得、PIT/单位未知保留。旧setup错误与IR/call实际限制均留证，不假产品失败或全资料齐全。02:27CI依赖已解除并通知executor继续正式新摘要/完整native链；全公司四审/质量检测及其他固定公司目标继续OPEN，不新发卡。
+
+## 2026-11-01 — W12真实运行暴露共享配置/终态恢复共因
+
+CI修复仍绿。两真实MiMo401来自Config.load显式canonical路径漏载受管.env，非缺权限/换模型；假凭证TDD4F/7P。旧两unknown85927tokens/17053microUSD保留，native母账1935796/756563、new_unknown8+prior7。正确默认loader单H1新attempt实际0POST/0reservation，被generation owner把账单unknown等同未结束所阻止。ROOT修共享责任层，executor继续无收费研究准备；恢复正反例/集中独审后续正式链，不删pointer/换DB/SQL复活，不以预检代签。
+
+### W12配置/恢复集中验收通过，进入正常发布
+
+不是401/公司特判：canonical配置身份与参数写法解耦；AUTO owner区分计费unknown与执行未结束，完整paid pin继续原run恢复。仅诊断SHA不冒作可恢复完整响应、不重造死锁。96P/20.46s、4原生集成64.12s与8独立native状态探针通过，独审0OPEN、费用行不变。原生finish本来自动结零输出，初始错误fixture期望与重复BEGIN实现错误均保留不冒真实RED。11本轮测试目录清18856387逻辑字节、真实P3原件保留。正常提交推送/核CI与真实W12新摘要并行，不以PWF-only新HEAD再加签收，不扩包。

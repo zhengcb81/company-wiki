@@ -1987,28 +1987,10 @@ def _generation_pointer(catalog, manifest):
 
 
 def _generation_owner_finished(db_path, run_id):
-    """Read existing AUTO facts; only known settled terminal work can be released."""
-    from . import migrations
+    """Consume AUTO's execution state; never reinterpret unknown as active work."""
     if not db_path.is_file():
         return False
-    runs = NarrativeRunStore(db_path)
-    run = runs.get_run(run_id)
-    if run is None:
-        return False
-    if any(item.usage_status != "known" for item in runs.reservations_for_run(run_id)):
-        return False
-    connection = migrations._open_readonly_connection(db_path)
-    try:
-        rows = connection.execute("""SELECT j.status FROM jobs j JOIN narrative_run_jobs r
-            ON r.job_id=j.job_id WHERE r.run_id=?""", (run_id,)).fetchall()
-        if len(rows) != len(run.job_ids) or any(JobStatus(row[0]) not in _TERMINAL for row in rows):
-            return False
-        pending = connection.execute("""SELECT 1 FROM effects e JOIN narrative_run_jobs r
-            ON r.job_id=e.job_id WHERE r.run_id=? AND e.status IN ('planned','pending','verified') LIMIT 1""",
-            (run_id,)).fetchone()
-        return pending is None
-    finally:
-        connection.close()
+    return NarrativeRunStore(db_path).generation_execution_finished(run_id)
 
 
 def _check_generation_owner(pointer, db_path, run_id):

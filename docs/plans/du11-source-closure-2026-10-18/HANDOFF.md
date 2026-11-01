@@ -9,6 +9,10 @@
 7. 保留asof2026-10-21、实际checked日期Nov1。11原件SourceRef/已验事实通过CWP既有owner导出/record_source_facts继承到隔离catalog，无raw/DB复制；旧扫描推断失败保留并指正确复用结果。上层不拼物理根。Sina当前snapshot不能冒历史asof可得，单位/PIT未知保留；IR新材料发现partial、exactQ2call请求unsupported_exchange继续gap，不能N/A或称无公开材料。
 8. 按当前audit/RF/FF技能实际16标签及12文种矩阵完成source→新summary→native claim→used参数→公式/报告/snapshot，冻结manifest后分批四路storage/fetch/process/analyst独立审查（总4槽含ROOT）；expert归并共因、实施TDD/再验收、质量改善和检测演进。原公司回归完成后药明合联/Snowflake泛化，再固定八家与连续三家clean责任。
 9. W21 canonicalC2真实增强/严格成员对齐、新US监管/HK/US RPO及长文前沿仍未代签；不因当前工程绿抹旧责任。华利2026情景是历史IR支持的条件算例，2023内容不是2026指引，全公司需求/竞争/校准仍OPEN。
-10. 配置models.yaml/resource_budget.yaml为准，累计10M/$20、公司150k/$1软目标；母账最近1,849,869/$0.739510估计含unknown6+prior7。P3预检0模型，后续实读原native账不重置/不另造账。用C:/Miniconda/python.exe宿主，避免Low venv；全局ACL/凭证不改。
+10. 配置models.yaml/resource_budget.yaml为准，累计10M/$20、公司150k/$1软目标；母账最近1,935,796/$0.756563估计含new_unknown8+prior7。P3已两次401，旧unknown85927tokens/$0.017053保留；修正默认loader新run0POST被原生恢复拒绝，后续实读原native账不重置/不另造账。用C:/Miniconda/python.exe宿主，避免Low venv；全局ACL/凭证不改。
 11. 原件与生产config保留，Dayu/IQS/Dashboard及外来WIP不动；禁止no-verify/全仓reset/clean。P3原件/当前test数据等四审完成再恢复，不能审查前删。此前新年报临时PDF/全规范化已清、62span保留；冻结RF输入可离线重放，完整源E2E需新建临时湖经FF取得，勿恢复整库。
 12. 收据manifest仅绑定gzip原字节，文档LF差异不另造审批。CODE/CI分仓实查；PWF-only新提交按paths-ignore无需另跑CI。更新当前三文档/状态并正常提交推送；旧证据/费用/错误更正作为历史，不重写。
+
+当前先修共享配置路径和执行/费用状态耦合：见CURRENT_STATUS及Next Step。executor暂停付费调用、继续研究准备；ROOT已用假凭证复现显式同canonical绝对/相对路径4F/7P。修复经原生正反例及集中独审后恢复，不换DB/删pointer/退unknown账。此前CI绿保持有效，不为PWF-only变更新增HEAD签收。
+
+W12共享配置/恢复根修已集中独审PASS/0OPEN：96短unit/20.46s、4隔离integration/64.12s及8独立native状态探针；AUTO单snapshot拥有执行状态，batch薄适配，未知账不退，已有付费pin只走原恢复。已清本轮11自有测试目录18856387逻辑字节，真实P3/原件未动。现正常发布，后续精确CI与W12正式采用仍分别验收。详见review/mainline-closeout-20261031/p3-config-recovery。
