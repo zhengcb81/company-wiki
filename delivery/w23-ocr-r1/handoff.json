@@ -13,10 +13,12 @@
   "6705c3ea fix: isolate OCR platform resources and retire blocking host syntax heuristics",
   "1eb8cbaa fix: close R1 final-review findings - platform fix, gold correction, currency-aware counts, honest ledger, full report",
   "3042aa85 docs: record R1 second-round fixes and findings in PWF",
-  "5ca7a931 docs: archive retired-page provenance and native-layer disclosure in R1 delivery"
+  "5ca7a931 docs: archive retired-page provenance and native-layer disclosure in R1 delivery",
+  "da9ca2c8 fix: close R1 second-round review findings - honest gold metadata, X2 splits, B4 partial, cleanup",
+  "fc4228c1 docs: bind final tested commit in R1 handoff"
  ],
- "final_tested_commit": "da9ca2c8c4e831f6f8ca8512a68f954e9e86910c",
- "final_reviewed_commit": "pending final reviewer confirmation",
+ "final_tested_commit": "fc4228c15bd91f9ef74d206290ac4b68b26d8d97",
+ "final_reviewed_commit": "PENDING_REVIEW",
  "code_file_sha256": {
   "tools/ocr_comparison/campaign.py": {
    "raw_sha256": "d974cbaefe09cf2dca6060250095477db5b6fa933ae82b6f07b3ef5fc44e38e1",
@@ -78,7 +80,7 @@
   },
   "gold": {
    "path": "docs/plans/w23-ocr-r1-2026-10-31/r1_gold.json",
-   "sha256": "0fdce0e078430ba025a0f00d2f3543d4feee13486e6c3880d843cb2a92468fd3",
+   "sha256": "49c96b27a3114ce537fd7526cd7ff20e81f8d4bf48fa04c1f1ae6d4eadc33ab0",
    "revision": 3
   },
   "control_manifest": {
@@ -160,7 +162,7 @@
   {
    "req": "A4 independent gold from images before any engine run; ≥2 pages to the final run",
    "status": "done",
-   "evidence": "independent agent transcribed from PNGs (no OCR); gold committed 970532af before campaign commit; 2 holdout pages never ran before the campaign"
+   "evidence": "independent agent transcribed from PNGs (no OCR), reports not using the PDF text layers as ground truth; on clean born-digital pages near-equality with the native layer is disclosed and is not evidence either way; gold committed 970532af before campaign commit; 2 holdout pages never ran before the campaign"
   },
   {
    "req": "A5 gold errors version-corrected with timing/impact; old gold untouched",

@@ -7,8 +7,8 @@ PLAN_ID=w23-ocr-r1-2026-10-31; PWF_PLAN_ROOT=docs/plans。唯一入口TASK_CARD.
 ## 阶段
 
 - A 全局累计合同/新gold与未曝光样本冻结：done（r1_gold.json 7页，独立agent凭原图核；旧页pilot R0 19.4s）
-- B 单campaign真实对照与恢复：done（账本226.1/1800s；R0/N0 7/7；X1F尝试1因卡上限<实测固定开销MemoryError；缓存跨进程恢复已TDD）
-- C 独立全面审查/修复/交接：in_progress（15项OPEN已修并推送；复审中）
+- B 单campaign真实对照与恢复：done（账本1406.5/1800s；R0/N0 7/7；X1F两次尝试均失败：尝试1加载MemoryError、尝试2平台修复后generate分配失败+原生崩溃且job peak>cap(OPEN交ROOT)；缓存跨进程恢复已TDD并实证）
+- C 独立全面审查/修复/交接：done（独立终审三轮：15项+8项+R3文档项全部闭合；应验结论READY_FOR_ROOT，唯一经验性OPEN为Job Object peak>cap，已交ROOT）
 
 ## Next Step
 

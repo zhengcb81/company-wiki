@@ -23,7 +23,7 @@ PLAN_ID=w23-ocr-r1-2026-10-31 · worktree `company-wiki-w23-xiaomi-ocr-r1` · br
 | r1_brk2007_p001 | US/en/annual_report | holdout | 4533 | 36 | 14 | 6 |
 | r1_brk2007_p005 | US/en/annual_report | eval | 3817 | 32 | 17 | 19 |
 
-Gold was transcribed by an independent reviewer from the PNGs (revision 3; the revision block records the HK page swap and the correction of the Wuxi line 客户对公司的服务需求, which was found by the final review and corrected before this report; metrics were recomputed from the same captured outputs, no engine re-ran). **Disclosure:** the reviewer reports having used the PNGs only; on clean born-digital pages an accurate transcription is expected to closely match the native text layer, so near-equality is not evidence either way. The retired HK page's revision-1 transcription was never committed and cannot be recovered from git; `archived_pages` records that provenance limitation and the page's exclusion from every denominator.
+Gold was transcribed by an independent reviewer from the PNGs; the PDFs do have native text layers, which the reviewer reports not using as ground truth — on clean born-digital pages near-equality with the native layer is expected and disclosed as not evidence either way (revision 3; the revision block records the HK page swap and the correction of the Wuxi line 客户对公司的服务需求, which was found by the final review and corrected before this report; metrics were recomputed from the same captured outputs, no engine re-ran). **Disclosure:** the reviewer reports having used the PNGs only; on clean born-digital pages an accurate transcription is expected to closely match the native text layer, so near-equality is not evidence either way. The retired HK page's revision-1 transcription was never committed and cannot be recovered from git; `archived_pages` records that provenance limitation and the page's exclusion from every denominator.
 
 ## 3. Results — full denominators
 
@@ -57,7 +57,7 @@ Rule in `fact_match.py` (declared): surface presence = all numerals matched (val
 | R0 | 149/171 | 161/171 | 89/98 | 273/276 |
 | N0 | 157/171 | 163/171 | 92/98 | 275/276 |
 | X1F_attempt2 | 0/171 | 0/171 | 0/98 | 0/276 |
-| X2 | 0/171 | 0/171 | 0/98 | 0/None |
+| X2 | 0/171 | 0/171 | 0/98 | 0/276 |
 
 Unachievable raw number entries (excluded from the number denominator, listed in comparison.json): 25.
 

@@ -733,21 +733,13 @@
   "decided_by": "coverage judgement by the requester/coordinator of the W23-OCR-R1 card; executed and re-signed by the same independent reviewer, with the original r1_ksy_fy2025_results_p001 transcription (which was accepted as correct) retired rather than rewritten",
   "timing": "the two new pages were transcribed by the independent reviewer from the frozen 200-DPI PNGs BEFORE any OCR engine was run on them; neither new page had been exposed to any engine, pilot or tuning pass at that time",
   "integrity": "transcripts were edited exactly once after the freeze: the Wuxi correction above, found by the independent final review; metrics were recomputed from the same captured outputs; no engine re-ran",
-  "impact_on_denominators": "gold content: +2 CJK characters on r1_wuxi_ar2022_p010 (1820 -> 1822 total chars for that page); fact/condition denominators unchanged (25 facts, 23 conditions); number entries unchanged",
+  "impact_on_denominators": "gold content: on r1_wuxi_ar2022_p010 one visible CJK character was added (客户对公 -> 客户对公司的, a line break removed); total characters unchanged (1822), non-space +1 (1698 -> 1699); fact/condition/number denominators unchanged",
   "corrections": [
    {
     "page_id": "r1_wuxi_ar2022_p010",
     "date": "2026-11-01",
     "change": "客户对公的服务需求 -> 客户对公司的服务需求",
     "why": "independent final review found the printed page reads 客户对公司的服务需求; the transcription had dropped 公司",
-    "timing": "found AFTER R0/N0 ran against revision 2; corrected before final report; metrics recomputed against revision 3 from the same captured outputs (no engine re-run)",
-    "denominator_impact": "gold chars +2; fact/condition/number denominators unchanged"
-   },
-   {
-    "page_id": "r1_wuxi_ar2022_p010",
-    "date": "2026-11-01",
-    "change": "客户对公(换行)的服务需求 -> 客户对公司的服务需求",
-    "why": "independent final review found the printed page reads 客户对公司的服务需求; the transcription dropped 公司 across a line break",
     "timing": "found AFTER R0/N0 ran against revision 2; corrected before final report; metrics recomputed against revision 3 from the same captured outputs (no engine re-run)",
     "denominator_impact": "gold chars +2; fact/condition/number denominators unchanged"
    }

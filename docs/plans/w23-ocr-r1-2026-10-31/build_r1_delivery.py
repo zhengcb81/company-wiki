@@ -317,7 +317,8 @@ def main() -> int:
                         "facts_hit": 0, "facts_total": sum(len(gold["pages"][pid].get("facts", [])) for pid in ids),
                         "facts_numeric_hit": 0,
                         "conditions_hit": 0, "conditions_total": sum(len(gold["pages"][pid].get("conditions", [])) for pid in ids),
-                        "numbers_hit": 0, "numbers_total": None,
+                        "numbers_hit": 0,
+                        "numbers_total": (fact.get("R0", {}).get("totals", {}) or {}).get("numbers_total"),
                         "note": "NOT_RUN: zero hits over the full denominators, never zero-filled as produced text",
                     },
                 },
@@ -375,7 +376,10 @@ def main() -> int:
                      f"{p['gold_facts']} | {p['gold_conditions']} | {p['gold_numbers_raw']} |")
     lines += [
         "",
-        "Gold was transcribed by an independent reviewer from the PNGs (revision 3; the revision "
+        "Gold was transcribed by an independent reviewer from the PNGs; the PDFs do have native text "
+        "layers, which the reviewer reports not using as ground truth — on clean born-digital pages "
+        "near-equality with the native layer is expected and disclosed as not evidence either way "
+        "(revision 3; the revision "
         "block records the HK page swap and the correction of the Wuxi line 客户对公司的服务需求, "
         "which was found by the final review and corrected before this report; metrics were "
         "recomputed from the same captured outputs, no engine re-ran). **Disclosure:** the reviewer "
@@ -521,7 +525,7 @@ def main() -> int:
         {"req": "A3 ~6 new pages CN/HK/US, outside old sample", "status": "done",
          "evidence": "7 pages from 5 documents never used in the 2026-10-30 sample; catalog identity per page in r1_sample_manifest.json"},
         {"req": "A4 independent gold from images before any engine run; ≥2 pages to the final run", "status": "done",
-         "evidence": "independent agent transcribed from PNGs (no OCR); gold committed 970532af before campaign commit; 2 holdout pages never ran before the campaign"},
+         "evidence": "independent agent transcribed from PNGs (no OCR), reports not using the PDF text layers as ground truth; on clean born-digital pages near-equality with the native layer is disclosed and is not evidence either way; gold committed 970532af before campaign commit; 2 holdout pages never ran before the campaign"},
         {"req": "A5 gold errors version-corrected with timing/impact; old gold untouched", "status": "done",
          "evidence": "revision 3: HK page swap (rev2) + Wuxi 客户对公司的服务需求 (rev3, found by final review, metrics recomputed from the same outputs); old 2026-10-30 gold untouched"},
         {"req": "B1 arm identities; bf16 not retried", "status": "done",
