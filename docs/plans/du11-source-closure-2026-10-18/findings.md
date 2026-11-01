@@ -93,3 +93,11 @@ measurement/cause证明分离、同assessment metric cache、COMPOSITION静态�
 ## 2026-11-01 — 来源节点正常发布及精确CI成功
 
 7e10973e已master/origin同步，正常commit/push，1867P/48.92s；CI41279280653成功，unit/合同/类型检查全部成功，未跳hook或改生产限额。当前ROOT runtime/tests无未提交，foreign hook mode保持。publication原pending收据与后来成功CI分别保留在p3-source-scope，不覆盖旧观察。已通知同一R4 executor按真实配置做一次新H1正式摘要、实际缓存恢复与RF采用；经营历史旁表和客户时点共因继续，未给公司研究经济PASS，未新发施工卡。全项目固定八家/泛化/clean责任仍未结束。
+
+## 2026-11-01 — R4正式产物及实际恢复有界观察
+
+按新source29已真实1MiMoPOST10236tokens/1885microUSD，artifact229074dd/9f014cff/485241B。测试入口main guard在POST前错误、观察器activation_run_id在prepare持久化后错误均保留。同request native恢复0a0e7924、same8ee643c4、cross/max1 6f0a4b32均exit0/输入输出完整，同exact产物/0额外POST；不是静态返回旧R3artifact。mother1965633/762082含unknown8+prior7。当前RF采用及公司独审未签；期间补集纯owner先固化4F/6P/1.03s，原第7步收口，不阻塞无该依赖的R4主DAG。
+
+## 2026-11-01 — RF长卡根因发布、精确CI和定点部署收口
+
+8eb8fe08 main/origin，normal690P/1skip/36subtests/44.89s，CI41282340171成功；独审110项/6文件seal、ROOT91域，范围重叠。3文件/2物理6写，repeat0、3fresh installed native真实8卡519字PASS，input不改；四外来WIP SHA相同（Git两manifest仅换行副作用精确复原）。CURRENT_STATUS将R3历史移到p3_previous_frozen_attempt，R4成为唯一p3_current_attempt，消除current/next歧义。5压力角色属作者关系语义无新引擎缺口，时间claim归history；未知净E/归一化100m不冒实际损失。R4正做新图免费consume/正式主与客户时点/报告快照，仍未全封存/四审/经济PASS；期间补集4F/6P归原质量收尾，不扩包。

@@ -73,3 +73,5 @@
 - 2026-11-01：四审6issue→7根因；来源measurement/范围/mixed呈现共因同预算真实选材及独审通过，698相关例；原成员等价oracle误判保留纠正；当前R4正式摘要/缓存/RF继续，详CURRENT_STATUS与p3-source-scope。
 
 - 2026-11-01 来源共因7e10973e正常发布、精确CI41279280653成功；收据见review/mainline-closeout-20261031/p3-source-scope，当前R4正式产物验收只看CURRENT_STATUS。
+
+- 2026-11-01 RF长卡证据8eb8fe08/CI41282340171/3入口定点部署闭合；R3移历史、R4唯一current。原执行/费用不覆盖，新正式研究验收只看CURRENT_STATUS。

@@ -1,11 +1,11 @@
 {
   "schema_version": "company-wiki-current-plan-status/2",
   "as_of_date": "2026-11-01",
-  "observed_at_utc": "2026-11-01T06:11:41.365137+00:00",
+  "observed_at_utc": "2026-11-01T06:55:32.312184+00:00",
   "canonical_entry": "CURRENT_STATUS.md",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
-  "project_status": "P3_SOURCE_SCOPE_PUBLISHED_EXACT_CI_PASS_R4_FORMAL_SUMMARY_RESEARCH_EXECUTING",
+  "project_status": "P3_R4_SOURCE_AND_RF_CONTRACT_RELEASED_CURRENT_NATIVE_MODEL_AND_REVIEW_EXECUTING",
   "scope_this_update": "Mainline only; exact CI root repairs, real summary/recovery/native adoption; no new packages",
   "last_code_commit": "7e10973e65517ce5a1b6cccc1c427ff4f9a0ecde",
   "verified_publication_before_docs": {
@@ -35,12 +35,12 @@
     "cumulative_micro_usd": 20000000,
     "company_allocation": "soft target150000tokens/$1",
     "latest_verified_usage": {
-      "tokens": 1955397,
-      "micro_usd": 760197,
+      "tokens": 1965633,
+      "micro_usd": 762082,
       "includes_historical_unknowns": true,
       "new_unknown_count": 8,
       "prior_unknown_count": 7,
-      "evidence": "Current independent executor native mother observation; exact checkpoint path in attempt usage_reconcile",
+      "evidence": "C:\\Users\\郑曾波\\Projects\\revenue-forecast-audit\\runs\\r1-20261021-cn-wuxi-apptec\\execution_replays\\r1-remediation-04\\usage_reconcile\\after-native-paid-recovery\\observation.json",
       "note": "Two initial401 unknown85927tokens/17053microUSD retained; two new known H1 calls9828/1826 and9773/1808. Extra cache POST is a failure and still counted; proxy not invoice."
     }
   },
@@ -93,7 +93,7 @@
       "task": "W12 original-company rerun, new-company generalization, fixed8company fullaudit/skillimprovement and finalclean streak"
     }
   ],
-  "next_action": "在r1-remediation-04按已发布来源规则完成一次新版正式摘要、真实同/跨run缓存恢复、经营桥及客户时点压力、RF实际采用/报告/snapshot，再做集中四审与质量/检测收尾。历史期间差分校验按所属RF owner核根因，不以伪日期或改口径绕过；不扩施工包。",
+  "next_action": "按已发布CWP7e10973e/RF8eb8fe08完成R4新图的同artifact重接、正式主模型及客户时点压力compute/report/snapshot并封存，随后四路独审与原第7/8步质量/检测收尾。期间补集已固化RED，归原质量收尾；不扩施工包，不重复模型。",
   "package_status_registry": "PACKAGE_STATUS.json",
   "handoff": "HANDOFF.md",
   "goal_definition": "MAINLINE_LOOP_GOAL.md",
@@ -576,6 +576,287 @@
     }
   },
   "p3_current_attempt": {
+    "attempt": "r1-remediation-04",
+    "executor": "/root/w12_executor_remediation04",
+    "status": "RF_CURRENT_VERSION_FINAL_GRAPH_ADOPTION_PUBLICATION_AND_REVIEW_PREPARATION_EXECUTING",
+    "as_of_date": "2026-10-21",
+    "new_source_HTTP": 3,
+    "new_source_bytes": 608016,
+    "new_source_cost": 0,
+    "new_source_types": [
+      "court original opinion",
+      "official dated meeting notice",
+      "organizer original Q&A HTML"
+    ],
+    "Q_and_A_qualification": "published_date unknown; current source owner returns source_availability_unknown, not an RF-qualified transcript",
+    "new_H1_model_POST": 1,
+    "formal_result_accepted": false,
+    "internal_PWF": "revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec/remediation/r1-remediation-03/implementation.md",
+    "model": "mimo-v2.6-flash",
+    "charged_tokens": 10236,
+    "estimated_micro_usd": 1885,
+    "artifact": {
+      "artifact_version_id": "narrative-229074ddf042496d92ebf0959ceb2bab",
+      "byte_size": 485241,
+      "content_sha256": "9f014cff0e2ce19dcdb0c186ef4933e91a42e3465df15b99c288b6c63423b2bd",
+      "document_id": "urn:company-wiki:document:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+      "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+      "source_sha256": "d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f"
+    },
+    "new_rule_recovery": {
+      "paid_prepared_capture": "0a0e7924293b46f18d4910fe5faa7e72",
+      "same_run_capture": "8ee643c41c0c4b8794ce4f6db6777a3a",
+      "cross_run_max1_capture": "6f0a4b32140b4e329e28c736f232c89f",
+      "all_native_exit0_complete": true,
+      "extra_POSTs": 0,
+      "cross_run_added_tokens": 0,
+      "cross_run_added_micro_usd": 0,
+      "scope": "ROOT observed native captures; independent large-node review still pending"
+    },
+    "author_launcher_failures_preserved": [
+      "Windows multiprocessing missing main guard before POST",
+      "checkpoint observer missing activation_run_id after durable native prepare"
+    ],
+    "source_only_customer_timing": {
+      "native_candidate_v2": "research/customer-timing-native-draft-v2/input.json",
+      "native_capture": "7594529a23604979aceeb3b8a20d7d78",
+      "author_role_semantics": "new candidate will leave unobserved E/c/d/r as explicit assumptions; keep original driver counterevidence and history clock",
+      "root_cause": "author relationship semantics, not newly confirmed RF headwind defect",
+      "source_only_PASS_is_not_full_graph": true,
+      "actual_net_E": null
+    }
+  },
+  "own_uncommitted_tests": [],
+  "last_version_contract_failed_ci": {
+    "id": 41261403683,
+    "head_sha": "93f561ef520e257bec11e3b7aa27ac16267c2203",
+    "status": "completed",
+    "conclusion": "failure",
+    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41261403683",
+    "failed_cases": 3,
+    "classification": "Two stale allocator/1 pins after explicit/2; one legacy/5 HTTP capture versus new versioned compact view. Reproduced3F/6.66s; candidate54P. Not oldP0 frontier failure."
+  },
+  "pre_repair_successful_CWP_ci": {
+    "id": 41255499232,
+    "head_sha": "acf11bb29570a5a306f1a45d63909d815f6714c0",
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41255499232",
+    "meaning": "Historical successful baseline, superseded by the exact CI of current_code_publication."
+  },
+  "p3_config_generation_recovery": {
+    "status": "PUBLISHED_NORMAL_PUSH_781P_EXACT_CI_SUCCESS",
+    "evidence": "review/mainline-closeout-20261031/p3-config-recovery/README.md",
+    "tests": {
+      "unit_passed": 96,
+      "unit_seconds": 20.46,
+      "integration_passed": 4,
+      "integration_seconds": 64.12,
+      "independent_native_cases": 8,
+      "independent_open": 0
+    },
+    "owned_test_bytes_removed": 18856387,
+    "not_signed": [
+      "complete company research",
+      "entire project"
+    ],
+    "commit": "ce1a603a88397e5a2e921177604cdff2dc08e0ab",
+    "publication": {
+      "id": 41267979696,
+      "head_sha": "ce1a603a88397e5a2e921177604cdff2dc08e0ab",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41267979696",
+      "normal_pre_push_passed": 781,
+      "normal_pre_push_seconds": 108.09
+    }
+  },
+  "current_code_publication": {
+    "head_sha": "7e10973e65517ce5a1b6cccc1c427ff4f9a0ecde",
+    "commit_hooks": "passed",
+    "normal_push": "success",
+    "exact_CI": "success",
+    "current_verified_green_CI": {
+      "id": 41279280653,
+      "head_sha": "7e10973e65517ce5a1b6cccc1c427ff4f9a0ecde",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41279280653",
+      "normal_pre_push_passed": 1867,
+      "normal_pre_push_seconds": 48.92
+    }
+  },
+  "previous_verified_code_ci": {
+    "id": 41272576090,
+    "head_sha": "c405848ad1ddba1ec0ded4ed75a7d2cdc5c8314e",
+    "status": "completed",
+    "conclusion": "success",
+    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41272576090",
+    "normal_pre_push_passed": 782,
+    "normal_pre_push_seconds": 114.44
+  },
+  "p3_cache_reselection": {
+    "status": "PUBLISHED_EXACT_CI_GREEN",
+    "runtime_paths": [
+      "src/company_wiki/automation/narrative_select.py",
+      "src/company_wiki/automation/narrative_generation.py",
+      "src/company_wiki/automation/narrative_batch.py",
+      "tests/unit/test_reading_cache_reselection.py"
+    ],
+    "current_tests": "137domain,7finalcache,16host; overlapping scopes",
+    "actual_SAFE_GREEN": true,
+    "new_paid_calls": 0,
+    "original_generation_resigned": false,
+    "evidence": "review/mainline-closeout-20261031/p3-cache-reuse/README.md",
+    "commit": "c405848ad1ddba1ec0ded4ed75a7d2cdc5c8314e",
+    "publication": {
+      "id": 41272576090,
+      "head_sha": "c405848ad1ddba1ec0ded4ed75a7d2cdc5c8314e",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41272576090",
+      "normal_pre_push_passed": 782,
+      "normal_pre_push_seconds": 114.44
+    }
+  },
+  "quality_closeout_observation": {
+    "status": "OBSERVED_NOT_IMPLEMENTED",
+    "source": "ROOT read-only frozen734-file manifest, top18 identical files have distinct file IDs",
+    "logical_bytes": 115059812,
+    "unique_content_bytes": 52877036,
+    "identical_duplicate_logical_bytes": 62182776,
+    "scope": "54.0% duplicate logical bytes, not measured NTFS physical allocation or space already reclaimed. Preserve sealed attempt during reviews; assess reuse of existing immutable input owner in P3 quality closeout, not a new package."
+  },
+  "p3_source_scope_repair": {
+    "status": "PUBLISHED_NORMAL_PUSH_EXACT_CI_PASS",
+    "evidence": "review/mainline-closeout-20261031/p3-source-scope/README.md",
+    "business_policy": "reading-business-policy/29",
+    "source_passage": "source-passage/2",
+    "new_cases": 37,
+    "domain_passed": 698,
+    "domain_seconds": 28.88,
+    "mypy_source_files": 408,
+    "independent_domain_passed": 268,
+    "scopes_overlap": true,
+    "actual_selection_seconds": 7.018823699996574,
+    "selected": 112,
+    "document_work_used": 15991162,
+    "document_work_limit": 16000000,
+    "original_targets_covered": 3,
+    "native_range_members_verified": 8,
+    "rounding_independent_cards": 0,
+    "source_coverage_complete": false,
+    "new_model_POST": 0,
+    "new_downloads": 0,
+    "independent_target_coverage": {
+      "covered": 9,
+      "partial": 3,
+      "full_recall_claim": false
+    },
+    "current_original_bytes_unchanged": true,
+    "exact_CI": "success",
+    "not_signed": [
+      "new formal model artifact",
+      "new cache recovery",
+      "RF research acceptance",
+      "entire project"
+    ],
+    "commit": "7e10973e65517ce5a1b6cccc1c427ff4f9a0ecde",
+    "publication": {
+      "id": 41279280653,
+      "head_sha": "7e10973e65517ce5a1b6cccc1c427ff4f9a0ecde",
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41279280653",
+      "normal_pre_push_passed": 1867,
+      "normal_pre_push_seconds": 48.92
+    }
+  },
+  "p3_period_owner_gap": {
+    "status": "RED_REPRODUCED_IMPLEMENTATION_PENDING",
+    "owner": "RF scripts/contracts/period_flow.py",
+    "neutral_contract_red": "4F/6P,1.03s",
+    "scope": "exact same-measure period complements; inverse YoY needs explicit comparison relation",
+    "blocks_current_R4_main_DAG": false,
+    "scheduled": "existing internal PWF step7 quality closeout after R4 frozen",
+    "diagnosis": "revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec/diagnosis/r1-remediation-04/period-owner-readonly.md"
+  },
+  "p3_rf_long_anchor_repair": {
+    "status": "PUBLISHED_EXACT_CI_AND_SELECTED_DEPLOYMENT_PASS",
+    "runtime_files": 2,
+    "sealed_files": 6,
+    "new_tests": 11,
+    "domain_passed": 91,
+    "domain_seconds": 1.77,
+    "independent_passed": 110,
+    "scopes_overlap": true,
+    "actual_fixed_input_unchanged": true,
+    "actual_summary_claims": 8,
+    "complete_anchor_chars": 519,
+    "fullproof_existing_byte_bound_unchanged": 131072,
+    "manual_excerpt_char_bound_unchanged": 500,
+    "new_model_calls_for_fix": 0,
+    "normal_CI": "success",
+    "RF_evidence": "docs/plans/p2-summary-lineage-20261031/review/v7-long-anchor",
+    "not_signed": [
+      "new real RF publication/snapshot",
+      "company economic quality",
+      "whole P3/project"
+    ],
+    "commit": "8eb8fe0817e3c619faae2253c69b30e707d38f7e",
+    "publication": {
+      "head_sha": "8eb8fe0817e3c619faae2253c69b30e707d38f7e",
+      "id": 41282340171,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/41282340171",
+      "normal_pre_push_passed": 690,
+      "normal_pre_push_skipped": 1,
+      "normal_pre_push_subtests": 36,
+      "normal_pre_push_seconds": 44.89
+    },
+    "deployment": {
+      "schema": "rf-selected-installation-native-proof/1",
+      "logical_entries": 3,
+      "physical_targets": 2,
+      "selected_files": [
+        "scripts/contracts/document.py",
+        "scripts/narrative_summary_provenance.py",
+        "references/input-construction.md"
+      ],
+      "written_physical_files": 6,
+      "second_apply_writes": 0,
+      "fresh_processes": [
+        {
+          "entry": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+          "native_validation": "PASS",
+          "adopted": 8,
+          "complete_519_retained": true,
+          "input_sha256": "22e23a23b0827b969ec30a23c8910608127e06f86de1fde9554996d5ff34d1cc",
+          "new_model_calls": 0
+        },
+        {
+          "entry": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast",
+          "native_validation": "PASS",
+          "adopted": 8,
+          "complete_519_retained": true,
+          "input_sha256": "22e23a23b0827b969ec30a23c8910608127e06f86de1fde9554996d5ff34d1cc",
+          "new_model_calls": 0
+        },
+        {
+          "entry": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast",
+          "native_validation": "PASS",
+          "adopted": 8,
+          "complete_519_retained": true,
+          "input_sha256": "22e23a23b0827b969ec30a23c8910608127e06f86de1fde9554996d5ff34d1cc",
+          "new_model_calls": 0
+        }
+      ],
+      "input_unchanged": true
+    }
+  },
+  "own_RF_pending_publication": [],
+  "p3_previous_frozen_attempt": {
     "run_id": "r1-20261021-cn-wuxi-apptec",
     "attempt": "r1-remediation-03",
     "as_of_date": "2026-10-21",
@@ -739,168 +1020,60 @@
       "directory": "revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec/diagnosis/r1-remediation-03"
     }
   },
-  "own_uncommitted_tests": [],
-  "last_version_contract_failed_ci": {
-    "id": 41261403683,
-    "head_sha": "93f561ef520e257bec11e3b7aa27ac16267c2203",
-    "status": "completed",
-    "conclusion": "failure",
-    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41261403683",
-    "failed_cases": 3,
-    "classification": "Two stale allocator/1 pins after explicit/2; one legacy/5 HTTP capture versus new versioned compact view. Reproduced3F/6.66s; candidate54P. Not oldP0 frontier failure."
-  },
-  "pre_repair_successful_CWP_ci": {
-    "id": 41255499232,
-    "head_sha": "acf11bb29570a5a306f1a45d63909d815f6714c0",
-    "status": "completed",
-    "conclusion": "success",
-    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41255499232",
-    "meaning": "Historical successful baseline, superseded by the exact CI of current_code_publication."
-  },
-  "p3_config_generation_recovery": {
-    "status": "PUBLISHED_NORMAL_PUSH_781P_EXACT_CI_SUCCESS",
-    "evidence": "review/mainline-closeout-20261031/p3-config-recovery/README.md",
-    "tests": {
-      "unit_passed": 96,
-      "unit_seconds": 20.46,
-      "integration_passed": 4,
-      "integration_seconds": 64.12,
-      "independent_native_cases": 8,
-      "independent_open": 0
+  "RF_current_code_publication": {
+    "head_sha": "8eb8fe0817e3c619faae2253c69b30e707d38f7e",
+    "branch": "main",
+    "normal_commit": true,
+    "normal_push": true,
+    "exact_CI": {
+      "head_sha": "8eb8fe0817e3c619faae2253c69b30e707d38f7e",
+      "id": 41282340171,
+      "status": "completed",
+      "conclusion": "success",
+      "url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/41282340171",
+      "normal_pre_push_passed": 690,
+      "normal_pre_push_skipped": 1,
+      "normal_pre_push_subtests": 36,
+      "normal_pre_push_seconds": 44.89
     },
-    "owned_test_bytes_removed": 18856387,
-    "not_signed": [
-      "complete company research",
-      "entire project"
-    ],
-    "commit": "ce1a603a88397e5a2e921177604cdff2dc08e0ab",
-    "publication": {
-      "id": 41267979696,
-      "head_sha": "ce1a603a88397e5a2e921177604cdff2dc08e0ab",
-      "status": "completed",
-      "conclusion": "success",
-      "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41267979696",
-      "normal_pre_push_passed": 781,
-      "normal_pre_push_seconds": 108.09
+    "selected_deployment": {
+      "schema": "rf-selected-installation-native-proof/1",
+      "logical_entries": 3,
+      "physical_targets": 2,
+      "selected_files": [
+        "scripts/contracts/document.py",
+        "scripts/narrative_summary_provenance.py",
+        "references/input-construction.md"
+      ],
+      "written_physical_files": 6,
+      "second_apply_writes": 0,
+      "fresh_processes": [
+        {
+          "entry": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+          "native_validation": "PASS",
+          "adopted": 8,
+          "complete_519_retained": true,
+          "input_sha256": "22e23a23b0827b969ec30a23c8910608127e06f86de1fde9554996d5ff34d1cc",
+          "new_model_calls": 0
+        },
+        {
+          "entry": "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast",
+          "native_validation": "PASS",
+          "adopted": 8,
+          "complete_519_retained": true,
+          "input_sha256": "22e23a23b0827b969ec30a23c8910608127e06f86de1fde9554996d5ff34d1cc",
+          "new_model_calls": 0
+        },
+        {
+          "entry": "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast",
+          "native_validation": "PASS",
+          "adopted": 8,
+          "complete_519_retained": true,
+          "input_sha256": "22e23a23b0827b969ec30a23c8910608127e06f86de1fde9554996d5ff34d1cc",
+          "new_model_calls": 0
+        }
+      ],
+      "input_unchanged": true
     }
-  },
-  "current_code_publication": {
-    "head_sha": "7e10973e65517ce5a1b6cccc1c427ff4f9a0ecde",
-    "commit_hooks": "passed",
-    "normal_push": "success",
-    "exact_CI": "success",
-    "current_verified_green_CI": {
-      "id": 41279280653,
-      "head_sha": "7e10973e65517ce5a1b6cccc1c427ff4f9a0ecde",
-      "status": "completed",
-      "conclusion": "success",
-      "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41279280653",
-      "normal_pre_push_passed": 1867,
-      "normal_pre_push_seconds": 48.92
-    }
-  },
-  "previous_verified_code_ci": {
-    "id": 41272576090,
-    "head_sha": "c405848ad1ddba1ec0ded4ed75a7d2cdc5c8314e",
-    "status": "completed",
-    "conclusion": "success",
-    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41272576090",
-    "normal_pre_push_passed": 782,
-    "normal_pre_push_seconds": 114.44
-  },
-  "p3_cache_reselection": {
-    "status": "PUBLISHED_EXACT_CI_GREEN",
-    "runtime_paths": [
-      "src/company_wiki/automation/narrative_select.py",
-      "src/company_wiki/automation/narrative_generation.py",
-      "src/company_wiki/automation/narrative_batch.py",
-      "tests/unit/test_reading_cache_reselection.py"
-    ],
-    "current_tests": "137domain,7finalcache,16host; overlapping scopes",
-    "actual_SAFE_GREEN": true,
-    "new_paid_calls": 0,
-    "original_generation_resigned": false,
-    "evidence": "review/mainline-closeout-20261031/p3-cache-reuse/README.md",
-    "commit": "c405848ad1ddba1ec0ded4ed75a7d2cdc5c8314e",
-    "publication": {
-      "id": 41272576090,
-      "head_sha": "c405848ad1ddba1ec0ded4ed75a7d2cdc5c8314e",
-      "status": "completed",
-      "conclusion": "success",
-      "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41272576090",
-      "normal_pre_push_passed": 782,
-      "normal_pre_push_seconds": 114.44
-    }
-  },
-  "quality_closeout_observation": {
-    "status": "OBSERVED_NOT_IMPLEMENTED",
-    "source": "ROOT read-only frozen734-file manifest, top18 identical files have distinct file IDs",
-    "logical_bytes": 115059812,
-    "unique_content_bytes": 52877036,
-    "identical_duplicate_logical_bytes": 62182776,
-    "scope": "54.0% duplicate logical bytes, not measured NTFS physical allocation or space already reclaimed. Preserve sealed attempt during reviews; assess reuse of existing immutable input owner in P3 quality closeout, not a new package."
-  },
-  "p3_source_scope_repair": {
-    "status": "PUBLISHED_NORMAL_PUSH_EXACT_CI_PASS",
-    "evidence": "review/mainline-closeout-20261031/p3-source-scope/README.md",
-    "business_policy": "reading-business-policy/29",
-    "source_passage": "source-passage/2",
-    "new_cases": 37,
-    "domain_passed": 698,
-    "domain_seconds": 28.88,
-    "mypy_source_files": 408,
-    "independent_domain_passed": 268,
-    "scopes_overlap": true,
-    "actual_selection_seconds": 7.018823699996574,
-    "selected": 112,
-    "document_work_used": 15991162,
-    "document_work_limit": 16000000,
-    "original_targets_covered": 3,
-    "native_range_members_verified": 8,
-    "rounding_independent_cards": 0,
-    "source_coverage_complete": false,
-    "new_model_POST": 0,
-    "new_downloads": 0,
-    "independent_target_coverage": {
-      "covered": 9,
-      "partial": 3,
-      "full_recall_claim": false
-    },
-    "current_original_bytes_unchanged": true,
-    "exact_CI": "success",
-    "not_signed": [
-      "new formal model artifact",
-      "new cache recovery",
-      "RF research acceptance",
-      "entire project"
-    ],
-    "commit": "7e10973e65517ce5a1b6cccc1c427ff4f9a0ecde",
-    "publication": {
-      "id": 41279280653,
-      "head_sha": "7e10973e65517ce5a1b6cccc1c427ff4f9a0ecde",
-      "status": "completed",
-      "conclusion": "success",
-      "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41279280653",
-      "normal_pre_push_passed": 1867,
-      "normal_pre_push_seconds": 48.92
-    }
-  },
-  "p3_next_attempt": {
-    "attempt": "r1-remediation-04",
-    "executor": "/root/w12_executor_remediation04",
-    "status": "CURRENT_RULE_FORMAL_SUMMARY_CACHE_AND_NATIVE_RF_EXECUTING",
-    "as_of_date": "2026-10-21",
-    "new_source_HTTP": 3,
-    "new_source_bytes": 608016,
-    "new_source_cost": 0,
-    "new_source_types": [
-      "court original opinion",
-      "official dated meeting notice",
-      "organizer original Q&A HTML"
-    ],
-    "Q_and_A_qualification": "published_date unknown; current source owner returns source_availability_unknown, not an RF-qualified transcript",
-    "new_H1_model_POST": 0,
-    "formal_result_accepted": false,
-    "internal_PWF": "revenue-forecast-audit/runs/r1-20261021-cn-wuxi-apptec/remediation/r1-remediation-03/implementation.md"
   }
 }
