@@ -378,7 +378,8 @@ def build_sections(
     native_list_scopes = (_native_list_scopes(ordering, native_context) if native_context is not None
                           else _native_list_scopes(ordering, work_budget=work_budget))
     note_scopes, note_diagnostics = build_source_marked_scopes(ordering,
-        native_context=native_context, limits=limits, work_budget=work_budget)
+        native_context=native_context, limits=limits, work_budget=work_budget,
+        source_units=units)
     diagnostics.extend(note_diagnostics)
     unresolved_scope_ids = frozenset(uid for scope in note_scopes.values()
                                     for uid in scope.unresolved_unit_ids)

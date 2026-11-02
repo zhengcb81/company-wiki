@@ -104,7 +104,10 @@ def source_member_neighbour(left: Mapping[str, Any], right: Mapping[str, Any], *
     next_start, next_end = (_integer(right_provenance.get(key))
                             for key in ("block_char_start", "block_char_end"))
     digest = left_provenance.get("block_sha256")
-    if (not isinstance(digest, str) or len(digest) != 64
+    # This is the existing source owner's opaque block identity. Canonical raw
+    # SHA validation belongs to the parser/source contract, not the continuity
+    # observer (whose public callers may use local block identity tokens).
+    if (not digest
             or right_provenance.get("block_sha256") != digest
             or start is None or end is None or next_start is None or next_end is None
             or not 0 <= start < end <= next_start < next_end
