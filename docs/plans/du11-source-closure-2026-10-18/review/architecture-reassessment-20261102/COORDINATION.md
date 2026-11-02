@@ -1,13 +1,13 @@
-# 仓内PWF与ROOT协调（解耦前暂不派发）
+# 仓内PWF与ROOT协调（D3通过，未派发）
 
-最新用户决定覆盖原先并行建议：先按[DECOUPLING_FIRST](DECOUPLING_FIRST.md)集中完成解耦与D3验收，RF/AUDIT业务卡暂不派发。当前ROOT可实施必要跨仓边界改造；下列每仓writer安排只在D3通过并重新校准卡片后生效。跨仓部署、真实paid和组合验收归ROOT。
+ROOT按[DECOUPLING_FIRST](DECOUPLING_FIRST.md)集中完成解耦，[D3独审](../decoupling-20261102/independent/review.md)已通过。RF/AUDIT业务计划按当前公开端口更新，均未派发或开工。下列写域在总控启动各线时生效，跨仓部署、真实付费和组合验收归ROOT。
 
 | 线 | 工作仓 | 唯一计划入口 | 启动条件 |
 |---|---|---|---|
 | ROOT-CWP | C:/Users/郑曾波/Projects/company-wiki | docs/plans/du11-source-closure-2026-10-18/task_plan.md | 总控主线 |
 | ROOT-FF | C:/Users/郑曾波/Projects/filing-fetch | docs/plans/import-budget-closure-20261102/task_plan.md | 与CWP同一入库链，ROOT处理 |
-| RF | C:/Users/郑曾波/Projects/revenue-forecast | docs/plans/r4-owner-closure-20261102/task_plan.md | DEFERRED_UNTIL_DECOUPLING |
-| AUDIT | C:/Users/郑曾波/Projects/revenue-forecast-audit | docs/plans/r4-owner-closure-20261102/task_plan.md | DEFERRED_UNTIL_DECOUPLING |
+| RF | C:/Users/郑曾波/Projects/revenue-forecast | docs/plans/r4-owner-closure-20261102/task_plan.md | READY_NOT_DISPATCHED |
+| AUDIT | C:/Users/郑曾波/Projects/revenue-forecast-audit | docs/plans/r4-owner-closure-20261102/task_plan.md | READY_NOT_DISPATCHED |
 
 RF已有4个assurance/runs外来tracked改动，必须保留；建议从包含计划的main建立codex/独立worktree。AUDIT无remote，不虚构推送。新worktree选同PLAN_ID/PWF_PLAN_ROOT，不新建竞争根计划。无工作冲突才能在原目录做，禁止reset/clean或覆盖旧runs。
 

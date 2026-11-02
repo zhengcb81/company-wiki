@@ -17,6 +17,7 @@ from .resolver import SourceRequest
 from .service import SourceCatalog
 from .transcript_import import (
     MAX_TOOL_RESULT_BYTES,
+    MAX_PROVIDER_PAYLOAD_BYTES,
     TranscriptImportError,
     import_transcript_tool_result,
 )
@@ -47,9 +48,11 @@ def _reject_constant(value: str) -> None:
     raise TranscriptImportCliError(f"invalid JSON constant: {value}")
 
 
-def _read_envelope(stream: BinaryIO) -> dict[str, Any]:
-    raw = stream.read(MAX_ENVELOPE_BYTES + 1)
-    if not raw or len(raw) > MAX_ENVELOPE_BYTES:
+def _read_envelope(stream: BinaryIO, *, max_bytes: int | None = None) -> dict[str, Any]:
+    if max_bytes is not None and (type(max_bytes) is not int or max_bytes <= 0):
+        raise TranscriptImportCliError("invalid envelope allocation")
+    raw = stream.read() if max_bytes is None else stream.read(max_bytes + 1)
+    if not raw or (max_bytes is not None and len(raw) > max_bytes):
         raise TranscriptImportCliError("stdin envelope is empty or oversized")
     try:
         value = json.loads(
@@ -76,8 +79,11 @@ def _dataclass_from_object(cls: Any, value: Any, name: str) -> Any:
         raise TranscriptImportCliError(f"{name} is invalid") from exc
 
 
-def run_import(wiki_root: Path, stream: BinaryIO) -> dict[str, Any]:
-    envelope = _read_envelope(stream)
+def run_import(wiki_root: Path, stream: BinaryIO, *,
+    max_original_bytes: int = MAX_PROVIDER_PAYLOAD_BYTES,
+    max_envelope_bytes: int | None = None,
+) -> dict[str, Any]:
+    envelope = _read_envelope(stream, max_bytes=max_envelope_bytes)
     request = _dataclass_from_object(
         SourceRequest, envelope["source_request"], "source_request"
     )
@@ -92,8 +98,6 @@ def run_import(wiki_root: Path, stream: BinaryIO) -> dict[str, Any]:
         separators=(",", ":"),
         allow_nan=False,
     ).encode("utf-8")
-    if len(result_bytes) > MAX_TOOL_RESULT_BYTES:
-        raise TranscriptImportCliError("transcript result exceeds byte limit")
 
     root = wiki_root.resolve(strict=True)
     if not root.is_dir():
@@ -109,6 +113,7 @@ def run_import(wiki_root: Path, stream: BinaryIO) -> dict[str, Any]:
             candidate=candidate,
             writer=writer,
             now=now,
+            max_original_bytes=max_original_bytes,
         )
         source_ref = writer.source_ref_for_import(
             request, candidate, imported.provider_payload_sha256
@@ -137,9 +142,12 @@ def main(argv: list[str] | None = None) -> int:
         required=True,
         help="company-wiki root containing config/source_catalog.yaml",
     )
+    parser.add_argument("--max-original-bytes", type=int, default=MAX_PROVIDER_PAYLOAD_BYTES)
+    parser.add_argument("--max-envelope-bytes", type=int, default=None)
     args = parser.parse_args(argv)
     try:
-        response = run_import(args.wiki_root, sys.stdin.buffer)
+        response = run_import(args.wiki_root, sys.stdin.buffer,
+            max_original_bytes=args.max_original_bytes, max_envelope_bytes=args.max_envelope_bytes)
     except (
         OSError,
         TypeError,

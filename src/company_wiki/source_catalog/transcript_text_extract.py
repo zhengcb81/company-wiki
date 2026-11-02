@@ -100,7 +100,7 @@ def _verify_identity(material: TranscriptMaterial) -> None:
 def _verified_original(material: TranscriptMaterial, original: object) -> bytes:
     if not isinstance(original, bytes):
         raise TranscriptMaterialError("original bytes changed")
-    if not 0 < len(original) <= MAX_TRANSCRIPT_ORIGINAL_BYTES:
+    if not original:
         raise TranscriptMaterialError("original bytes changed")
     if material.original_byte_size != len(original) or (
         material.original_sha256 != _sha(original)
@@ -207,9 +207,9 @@ def _text_lines(
 
 
 def _material(
-    original: bytes, mime_type: str, rows: list[tuple[str, int, int]]
+    original: bytes, mime_type: str, rows: list[tuple[str, int, int]], *, max_lines: int
 ) -> TranscriptMaterial:
-    if not rows or len(rows) > MAX_TRANSCRIPT_LINES:
+    if not rows or len(rows) > max_lines:
         raise TranscriptMaterialError("transcript has no text or exceeds line limit")
     text_utf8 = "\n".join(text for text, _, _ in rows) + "\n"
     original_sha = _sha(original)
@@ -232,9 +232,10 @@ def _material(
 
 
 class _HTMLTextLines(HTMLParser):
-    def __init__(self, source: str):
+    def __init__(self, source: str, *, max_lines: int):
         super().__init__(convert_charrefs=True)
         self.source = source
+        self.max_lines = max_lines
         self.line_starts = [0]
         for match in re.finditer("\n", source):
             self.line_starts.append(match.end())
@@ -284,7 +285,7 @@ class _HTMLTextLines(HTMLParser):
         self.rows.append(
             (cleaned, self._byte_offset(start), self._byte_offset(end))
         )
-        if len(self.rows) > MAX_TRANSCRIPT_LINES:
+        if len(self.rows) > self.max_lines:
             raise TranscriptMaterialError("transcript exceeds line limit")
 
 
@@ -301,11 +302,17 @@ def _plain_rows(original: bytes) -> list[tuple[str, int, int]]:
 
 
 def extract_transcript_material(
-    original: bytes, *, mime_type: str
+    original: bytes, *, mime_type: str, max_original_bytes: int | None = None,
+    max_lines: int | None = None,
 ) -> TranscriptMaterial:
     """Derive untranslated UTF-8 lines with exact original byte locators."""
+    if max_original_bytes is not None and (type(max_original_bytes) is not int or max_original_bytes <= 0):
+        raise TranscriptMaterialError("invalid original byte allocation")
+    limit = MAX_TRANSCRIPT_LINES if max_lines is None else max_lines
+    if type(limit) is not int or limit <= 0:
+        raise TranscriptMaterialError("invalid transcript line allocation")
     if not isinstance(original, bytes) or not original or (
-        len(original) > MAX_TRANSCRIPT_ORIGINAL_BYTES
+        max_original_bytes is not None and len(original) > max_original_bytes
     ):
         raise TranscriptMaterialError("original must be non-empty bounded bytes")
     try:
@@ -313,16 +320,16 @@ def extract_transcript_material(
     except UnicodeDecodeError as exc:
         raise TranscriptMaterialError("original is not strict UTF-8") from exc
     if mime_type == "text/plain":
-        return _material(original, mime_type, _plain_rows(original))
+        return _material(original, mime_type, _plain_rows(original), max_lines=limit)
     if mime_type == "application/json":
         try:
-            rows = json_transcript_rows(source, max_lines=MAX_TRANSCRIPT_LINES)
-            return _material(original, mime_type, rows)
+            rows = json_transcript_rows(source, max_lines=limit)
+            return _material(original, mime_type, rows, max_lines=limit)
         except JsonTranscriptError as exc:
             raise TranscriptMaterialError(str(exc)) from exc
     if mime_type in {"text/html", "application/xhtml+xml"}:
-        parser = _HTMLTextLines(source)
+        parser = _HTMLTextLines(source, max_lines=limit)
         parser.feed(source)
         parser.close()
-        return _material(original, mime_type, parser.rows)
+        return _material(original, mime_type, parser.rows, max_lines=limit)
     raise TranscriptMaterialError("unsupported original MIME type")

@@ -63,6 +63,30 @@ def test_fmp_golden_preserves_call_date_and_unknown_publication():
     assert accepted.content_bytes == payload["content_bytes"]
 
 
+@pytest.mark.parametrize("variant", ["quarter", "numeric_strings", "timestamp", "conflicting_quarters"])
+def test_fmp_provider_record_variants_share_one_semantic_identity(variant):
+    payload, _, _ = _inputs()
+    records = json.loads(base64.b64decode(payload["provider_payload_base64"]))
+    record = records[0]
+    if variant in {"quarter", "numeric_strings"}:
+        record.pop("period")
+        record["quarter"] = 3 if variant == "quarter" else "3"
+    if variant == "numeric_strings":
+        record["year"] = "2026"
+    if variant == "timestamp":
+        record["date"] += " 16:30:00"
+    if variant == "conflicting_quarters":
+        record["quarter"] = 4
+    original = json.dumps(records).encode()
+    payload["provider_payload_base64"] = base64.b64encode(original).decode()
+    payload["provider_payload_sha256"] = hashlib.sha256(original).hexdigest()
+    if variant == "conflicting_quarters":
+        with pytest.raises(TranscriptToolContractError):
+            _parse(payload)
+    else:
+        assert _parse(payload).original == original
+
+
 @pytest.mark.parametrize("field,value", [
     ("provider_payload_sha256", "0" * 64),
     ("canonical_content_sha256", "0" * 64),

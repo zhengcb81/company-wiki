@@ -43,9 +43,7 @@ def _unique_pairs(pairs: list[tuple[str, Any]]) -> dict[str, Any]:
 
 
 def _read_request() -> tuple[tuple[SourceRef, ...], tuple[EvidenceSpan, ...]]:
-    raw = sys.stdin.buffer.read(_MAX_REQUEST_BYTES + 1)
-    if len(raw) > _MAX_REQUEST_BYTES:
-        raise ValueError("request exceeds limit")
+    raw = sys.stdin.buffer.read()
     request = json.loads(raw.decode("utf-8"), object_pairs_hook=_unique_pairs)
     if not isinstance(request, dict) or set(request) != _REQUEST_FIELDS:
         raise ValueError("request fields are not exact")

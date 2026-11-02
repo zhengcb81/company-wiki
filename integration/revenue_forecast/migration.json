@@ -1,0 +1,158 @@
+{
+  "owner": "company-wiki ROOT integration",
+  "scope": "RF consumer tests retain portable fixtures; producer/private DB assertions execute here",
+  "files": [
+    {
+      "original": "tests/test_ca202_daily_t2_runner.py",
+      "destination": "integration/revenue_forecast/test_ca202_daily_t2_runner.py",
+      "original_sha256": "ac168f5a2f0a016d34c184ad5054b5a925eb98e3b4e59cd7fa1281b8d0ff7e3e",
+      "assertions": "retained; only owner bootstrap/fixture import changed"
+    },
+    {
+      "original": "tests/test_ca203_weekly_t3.py",
+      "destination": "integration/revenue_forecast/test_ca203_weekly_t3.py",
+      "original_sha256": "da6e52f8e05913b0c8abe403b3657c2981a7cb71746ceede7e473cd327e8c003",
+      "assertions": "retained; only owner bootstrap/fixture import changed"
+    },
+    {
+      "original": "tests/test_ca302_three_journeys.py",
+      "destination": "integration/revenue_forecast/test_ca302_three_journeys.py",
+      "original_sha256": "fa4d47f9c58a4725506d218ab1b851312bff289b6ac740e0e24a910fe83e74e0",
+      "assertions": "retained; only owner bootstrap/fixture import changed"
+    },
+    {
+      "original": "tests/test_ca304_r9_removal.py",
+      "destination": "integration/revenue_forecast/test_ca304_r9_removal.py",
+      "original_sha256": "d7fc10345a62a15b4ba7de9b559b0383776829f057df737a23186386c3fda05a",
+      "assertions": "retained; only owner bootstrap/fixture import changed"
+    },
+    {
+      "original": "tests/test_dropbox_full_chain_fc505.py",
+      "destination": "integration/revenue_forecast/test_dropbox_full_chain_fc505.py",
+      "original_sha256": "7846b4e82387a30bbf05a2831cd3984fe751de9d9680ffe39c29b6e347562b1c",
+      "assertions": "retained; only owner bootstrap/fixture import changed"
+    },
+    {
+      "original": "tests/test_fc1001_isolated_lake.py",
+      "destination": "integration/revenue_forecast/test_fc1001_isolated_lake.py",
+      "original_sha256": "3c72dc11a9418af5dfa9c10c7a01fade8f1ebc2a6269d7a0d46d0bb85452829f",
+      "assertions": "retained; only owner bootstrap/fixture import changed"
+    },
+    {
+      "original": "tests/test_fc1002_three_process_e2e.py",
+      "destination": "integration/revenue_forecast/test_fc1002_three_process_e2e.py",
+      "original_sha256": "22ebfdb610f8d74ded0a18c8496ceb70e0e899ef4bf006985b0a9e9b02eb8e17",
+      "assertions": "retained; only owner bootstrap/fixture import changed"
+    },
+    {
+      "original": "tests/test_fc1003_uj.py",
+      "destination": "integration/revenue_forecast/test_fc1003_uj.py",
+      "original_sha256": "c70dde4a7bf08beb8fdacbe257ec0b4e284c21dd774b42810ae3ff4aa4c73acc",
+      "assertions": "retained; only owner bootstrap/fixture import changed"
+    },
+    {
+      "original": "tests/test_fc1004_platform.py",
+      "destination": "integration/revenue_forecast/test_fc1004_platform.py",
+      "original_sha256": "73c98cc0ce4bb38d497e1586161bff00d232d4d13e87a89584bb9805ec9b5a48",
+      "assertions": "retained; only owner bootstrap/fixture import changed"
+    },
+    {
+      "original": "tests/test_fc1102_t2_runner.py",
+      "destination": "integration/revenue_forecast/test_fc1102_t2_runner.py",
+      "original_sha256": "98ba2c458798d591bc91610a9321a0c9f0bd7d82078152c634a772de644bd28c",
+      "assertions": "retained; only owner bootstrap/fixture import changed"
+    },
+    {
+      "original": "tests/test_fc1105_fault_injection.py",
+      "destination": "integration/revenue_forecast/test_fc1105_fault_injection.py",
+      "original_sha256": "98ddcdc70b208a35b87b89d83870fe8985156e94ea6596dd6c2b02e6335f8e62",
+      "assertions": "retained; only owner bootstrap/fixture import changed"
+    },
+    {
+      "original": "tests/test_fc1302_scan_health.py",
+      "destination": "integration/revenue_forecast/test_fc1302_scan_health.py",
+      "original_sha256": "251521a27137fcb0874d4d88ebcf9fff969043270e5f66d03e53877399f4a5f0",
+      "assertions": "retained; only owner bootstrap/fixture import changed"
+    },
+    {
+      "original": "tests/test_m3_acquisition_usage_e2e.py",
+      "destination": "integration/revenue_forecast/test_m3_acquisition_usage_e2e.py",
+      "original_sha256": "c1c45d30c1d2db69ffc69b44399bf98f49cd27e19a38adf127ddfc7ce3c0515c",
+      "assertions": "retained; only owner bootstrap/fixture import changed"
+    },
+    {
+      "original": "tests/test_p5_source_default_cli_e2e.py",
+      "destination": "integration/revenue_forecast/test_p5_source_default_cli_e2e.py",
+      "original_sha256": "66374e38642184fa7e0c76ea1293c341d164d73252b1e797b418587867099621",
+      "assertions": "retained; only owner bootstrap/fixture import changed"
+    },
+    {
+      "original": "tests/test_preparation_e2e_success.py",
+      "destination": "integration/revenue_forecast/test_preparation_e2e_success.py",
+      "original_sha256": "544d0c68404ba05f533d14f758df2963cea14295ddaf67755cb7897aa01fc2a4",
+      "assertions": "retained; only owner bootstrap/fixture import changed"
+    },
+    {
+      "original": "tests/test_source_ref_v2_three_repo_e2e.py",
+      "destination": "integration/revenue_forecast/test_source_ref_v2_three_repo_e2e.py",
+      "original_sha256": "eb88539ba0c8adea740c050ebb6f7700dad228513ad2dac127b698b4eef4ee0f",
+      "assertions": "retained; only owner bootstrap/fixture import changed"
+    },
+    {
+      "original": "tests/test_zr1004_small_cohort.py",
+      "destination": "integration/revenue_forecast/test_zr1004_small_cohort.py",
+      "original_sha256": "4c90ded0e68d6176d5683dc433aac0259809cc20870f61f28946f7348e8cd2f4",
+      "assertions": "retained; only owner bootstrap/fixture import changed"
+    },
+    {
+      "original": "tests/test_zr1103_journey_reverify.py",
+      "destination": "integration/revenue_forecast/test_zr1103_journey_reverify.py",
+      "original_sha256": "62838540fc05fe4ddff849703db889c27e3c80a5ef873d01fc377ab8d4950b3b",
+      "assertions": "retained; only owner bootstrap/fixture import changed"
+    },
+    {
+      "original": "tests/test_zr1104_observation_drill.py",
+      "destination": "integration/revenue_forecast/test_zr1104_observation_drill.py",
+      "original_sha256": "218020139d0c793230a9a609dc65afb03e7ada2082262545ff5b262a6eff9ac9",
+      "assertions": "retained; only owner bootstrap/fixture import changed"
+    },
+    {
+      "original": "tests/test_zr709_zijin_journey.py",
+      "destination": "integration/revenue_forecast/test_zr709_zijin_journey.py",
+      "original_sha256": "4de4c351d41a548669fcb930aa88e367badf74e35a10880db5c74bcd4cd18713",
+      "assertions": "retained; only owner bootstrap/fixture import changed"
+    },
+    {
+      "original": "tests/test_zr802_combined_journeys.py",
+      "destination": "integration/revenue_forecast/test_zr802_combined_journeys.py",
+      "original_sha256": "6a6699a5a701ec0a80a198f0aa4a9323c89bb1e51aeea70d911b855797041f76",
+      "assertions": "retained; only owner bootstrap/fixture import changed"
+    },
+    {
+      "original": "tests/test_zr803_chaos_recovery.py",
+      "destination": "integration/revenue_forecast/test_zr803_chaos_recovery.py",
+      "original_sha256": "f324e53042d77b2601b4fba3200cd1e9a2341c57d7af8f2521cd55e223161ff7",
+      "assertions": "retained; only owner bootstrap/fixture import changed"
+    },
+    {
+      "original": "tests/test_zr804_platform_shape.py",
+      "destination": "integration/revenue_forecast/test_zr804_platform_shape.py",
+      "original_sha256": "1a10a1c4b211f5dcaf433ab19fd1310e36c797f667de40e998521e767ff6b0c0",
+      "assertions": "retained; only owner bootstrap/fixture import changed"
+    },
+    {
+      "original": "tests/test_zr805_t3_authorization.py",
+      "destination": "integration/revenue_forecast/test_zr805_t3_authorization.py",
+      "original_sha256": "4bc962bf142d28debd4cae070383b183554578d9c4286eb8d94da57b7ef26cf8",
+      "assertions": "retained; only owner bootstrap/fixture import changed"
+    },
+    {
+      "original": "tests/test_zr806_real_t2_samples.py",
+      "destination": "integration/revenue_forecast/test_zr806_real_t2_samples.py",
+      "original_sha256": "54d1cc34fe36525806978f9a2b013c829de80423669a3beba38b6545cd5b4988",
+      "assertions": "retained; only owner bootstrap/fixture import changed"
+    }
+  ],
+  "old_fixture": "revenue-forecast/tests/e2e_support/isolated_lake.py",
+  "new_fixture": "integration/revenue_forecast/e2e_support/isolated_lake.py"
+}

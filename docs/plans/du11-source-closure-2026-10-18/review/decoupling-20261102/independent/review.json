@@ -1,0 +1,155 @@
+{
+  "schema_version": "decoupling-independent-review/1",
+  "reviewed_at_utc": "2026-11-02T21:24:59.772173+00:00",
+  "reviewer": "independent implementation reviewer",
+  "engineering": "PASS",
+  "publication": "PENDING_ROOT_COMMIT_PUSH_AND_REMOTE_CI",
+  "scope": "D0-D3 current public source/forecast boundaries; not business or legacy monitor closure",
+  "unresolved_production_p1_p2": [],
+  "evidence_dir": ".planning/decoupling-implementation-20261102",
+  "evidence_sha256": {
+    "system-final/report.json": "efbe58c94f4f180f01e46f3cc9cf658296047b1008abf33116d154bf86736013",
+    "system-final/junit.xml": "fc40d080a8e467ea5e3fb76ce05eec7a5b1dbfcedd589dfcf43527fe2471bce5",
+    "system-final/pytest.log": "91fa68d4f7158fead73f10e772d6b3472719321365d7e908765686eefc37b61f",
+    "version-supplement.json": "8802f8c7c0bc742282a5cc0a744c9a1896988dc347553d8b8909a9ed9d449868",
+    "rf-isolated.log": "e3129174df6ad45bc0e91d80a45cb9c710d9b0d625bfa0399bfb68e37d2ed4c4",
+    "ff-isolated.log": "ba421f775ceb11d89dd8f5127d1c962dbb01d4eed55baca48412eb0c0ebb403c",
+    "stock-isolated.log": "e4acb94fc47c3662b7605bb9dd9fbe73621bb4cd11d2d71530c2c2a4a178da43",
+    "stock-isolated.json": "7b292821c20565c882e5b9d01b6484c97937d67f8b91f33b27e690025a69d301",
+    "audit-isolated.log": "e32cc536b25c7869fb63964d24c64576b46750b00f3338a8353beccbd8186a68",
+    "audit-isolated.json": "17cb597c8a0aba7d501240cef8e0f82b78ebdce3dbdb3637cd92bbaeed810cd8",
+    "et-isolated.log": "8bd2d1d8306fd13079119ced22f507932b5f99baec2ef5a29486967cbf05efd0",
+    "et-isolated.json": "1184b76719e34e94e389d0a793868b795bab4c35370e5b8c3818a015dbfa3c08",
+    "real-read-only.json": "60574e133ddcc26235af5ea147fc6d1a06fe83c665d22761b0832cd4f64888b3",
+    "deployment.json": "2d42ff935de063565cb98b9d94c5dcee5fee81334a3ba2c0cbb1c333e7d2e757",
+    "installed-execution.json": "1bc184e0c76a59fc6cc1a123c3c0a8a154959838589a2397159da36065c09b81"
+  },
+  "verified_versions": {
+    "company-wiki": {
+      "head": "ad7db626c708e3a720d4ea6a7f6d9bfddb404c52",
+      "tracked_diff_sha256": "1cfb627424b847f18bf7f127803fcf0b88dfbbbf748928753a38c888a31add0f"
+    },
+    "revenue-forecast": {
+      "head": "50fc0e925778867009a381b26a7915fcb05cd726",
+      "tracked_diff_sha256": "3fe2ef5dc5b3fda1a4713f2b986c4158cfdea5b6749c7150fa0df336df43dcc5"
+    },
+    "filing-fetch": {
+      "head": "556b6bd3a053b530e345c197d86de55e293afe37",
+      "tracked_diff_sha256": "47a7b72b1d5d50bc5cfc0fe090ce8f1ab329d54e4bc20102441ad968da1165af"
+    },
+    "StockWiki": {
+      "head": "f52f257d4343f9a785e5a338088a789393db7357",
+      "tracked_diff_sha256": "14d30b8400005ea6a578cc110ccae8361d978ac41f6d726023aeb631e6f87f1f"
+    },
+    "revenue-forecast-audit": {
+      "head": "a84455ef864d6f9e5596a894c2b1801d8ea32cfb",
+      "tracked_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    "earnings-transcripts/earnings-transcripts": {
+      "head": "003c1c065109d0b02c7bd4de09ad3e8461a99c0e",
+      "tracked_diff_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    }
+  },
+  "verified_stockwiki_changed_source_sha256": {
+    "stockwiki/_narrative_wire.py": "495deda836eb6be1001c086f1b6c7fd6abd5236e5076d8ff94ed963a5b8d8ca8",
+    "stockwiki/_narrative_bundle.py": "705e03b691d70f49cc889ae80713c274f77d2fcd67acf662008ceb6fe97e6630",
+    "stockwiki/_source_reader_v2_transport.py": "7731769284b78f7ae67c998fbe7213470c4f0d2983e99e94870b25cdecd22971"
+  },
+  "combination": {
+    "passed": 39,
+    "failed": 0,
+    "skipped": 0,
+    "pytest_seconds": 124.35,
+    "scratch_restored": true
+  },
+  "independent_consumer_checks": {
+    "RF": {
+      "passed": 712,
+      "skipped": 0
+    },
+    "FF": {
+      "passed": 946,
+      "skipped": 3,
+      "subtests": 76,
+      "skip_reason": "2 archived production security masters and 1 unsupported Windows symlink"
+    },
+    "StockWiki": {
+      "passed": 110,
+      "skipped": 1,
+      "skip_reason": "POSIX detached-session test is inapplicable on Windows"
+    },
+    "AUDIT": {
+      "passed": 43,
+      "subtests": 56
+    },
+    "ET": {
+      "passed": 95
+    }
+  },
+  "moved_rf_assertions": {
+    "files": 25,
+    "asserts": 487,
+    "same_content_and_order": true
+  },
+  "verified_wip_preservation": [
+    {
+      "repository": "company-wiki",
+      "path": ".githooks/pre-push",
+      "initial_bytes_retained": true,
+      "unchanged": true,
+      "baseline_bytes": 964,
+      "added_bytes": 0,
+      "staged_by_this_task": false
+    },
+    {
+      "repository": "revenue-forecast",
+      "path": "assurance/runs/daily_alert.jsonl",
+      "initial_bytes_retained": true,
+      "unchanged": false,
+      "baseline_bytes": 8007,
+      "added_bytes": 264,
+      "staged_by_this_task": false
+    },
+    {
+      "repository": "revenue-forecast",
+      "path": "assurance/runs/monthly_manifest.json",
+      "initial_bytes_retained": true,
+      "unchanged": true,
+      "baseline_bytes": 360,
+      "added_bytes": 0,
+      "staged_by_this_task": false
+    },
+    {
+      "repository": "revenue-forecast",
+      "path": "assurance/runs/weekly_alert.jsonl",
+      "initial_bytes_retained": true,
+      "unchanged": true,
+      "baseline_bytes": 1325,
+      "added_bytes": 0,
+      "staged_by_this_task": false
+    },
+    {
+      "repository": "revenue-forecast",
+      "path": "assurance/runs/weekly_manifest.json",
+      "initial_bytes_retained": true,
+      "unchanged": true,
+      "baseline_bytes": 364,
+      "added_bytes": 0,
+      "staged_by_this_task": false
+    }
+  ],
+  "legacy_daily": {
+    "blocks_current_forecast_or_git_publication": false,
+    "still_scheduled_observed": true,
+    "remaining_effect": "legacy daily observer writes its historical periods ledger and appends diagnostic alerts"
+  },
+  "paid_provider_calls": 0,
+  "remaining_outside_decoupling": [
+    "T4/SEM",
+    "RF ghost and period inventory",
+    "AUDIT attempt and checks",
+    "real summary/cache/RF business acceptance",
+    "company loop",
+    "legacy scheduled diagnostics retirement"
+  ]
+}

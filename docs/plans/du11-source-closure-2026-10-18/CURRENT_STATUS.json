@@ -79,10 +79,10 @@
     "event_number_issuer": "each remains original separate binding owner; no promotion from scope alone",
     "consumer": "source cards uncertain/needs_review; RF rationale_support does not modify parameter values"
   },
-  "project_status": "DECOUPLING_FIRST_MODULE_WORK_DEFERRED",
+  "project_status": "DECOUPLING_D3_ENGINEERING_PASS_PUBLICATION_IN_PROGRESS",
   "as_of_date": "2026-11-02",
-  "observed_at_utc": "2026-11-02T19:36:37.312770+00:00",
-  "next_action": "先由ROOT集中完成DECOUPLING_FIRST的D1接口/隔离测试、D2跨仓适配与测试归位、D3完整组合和独审；通过后再校准并派发RF/AUDIT等仓内业务PWF。当前不在半解耦状态下启动模块施工。",
+  "observed_at_utc": "2026-11-02T21:27:47.494421+00:00",
+  "next_action": "D3工程及独审已通过，按实际发布记录完成主线推送和精确CI确认；随后ROOT恢复T4父链、SEM-QUAL-01、新版真实摘要、缓存恢复和RF采用。RF/AUDIT仓内PWF已按实际接口校准，尚未派发。",
   "publication": {
     "repositories": {
       "revenue-forecast": {
@@ -162,26 +162,28 @@
   "architecture_rectification": {
     "issues": 14,
     "status": "ENGINEERING_ACCEPTED_REAL_COMPANY_OPEN",
-    "current_work": "先由ROOT集中完成DECOUPLING_FIRST的D1接口/隔离测试、D2跨仓适配与测试归位、D3完整组合和独审；通过后再校准并派发RF/AUDIT等仓内业务PWF。当前不在半解耦状态下启动模块施工。",
+    "current_work": "D3工程及独审已通过，按实际发布记录完成主线推送和精确CI确认；随后ROOT恢复T4父链、SEM-QUAL-01、新版真实摘要、缓存恢复和RF采用。RF/AUDIT仓内PWF已按实际接口校准，尚未派发。",
     "registry": "review/architecture-quality-20261101/implementation-results/STATUS.json",
     "current_evidence": "review/architecture-quality-20261101/implementation-results/checklist-verification-20261102/checklist.md"
   },
   "existing_capabilities": {
     "storage_virtualization": "Implemented; no new storage/database rewrite or cross-layer file access.",
-    "gate_simplification": "Prior bounded fixes accepted; latest audit confirms remaining local-input representation caps and final-import budget caps. Not globally gate-free.",
+    "gate_simplification": "D3 removed duplicate representation/import caps and canonical-JSON veto; actual bytes/identity/time/budget remain. Legacy scheduled diagnostics are outside current production, not claimed retired.",
     "historical_summary_recovery_rf": "Old Huali15/12atoms and Berkshire73/10atoms recovery/adoption are bounded historical evidence; current runtime real C OPEN."
   },
   "next_stages": [
     {
       "id": "decoupling-first",
-      "status": "P0_IMPLEMENTATION_PENDING",
-      "plan": "review/architecture-reassessment-20261102/DECOUPLING_FIRST.md"
+      "status": "ENGINEERING_PASS_INDEPENDENT_REVIEWED",
+      "plan": "review/architecture-reassessment-20261102/DECOUPLING_FIRST.md",
+      "evidence": "review/decoupling-20261102/independent/review.md"
     },
     {
       "id": "residual-gate-families",
-      "status": "CONFIRMED_OPEN",
+      "status": "CLOSED_IN_D3",
       "plan": "review/architecture-reassessment-20261102/README.md",
-      "sequencing": "Included in decoupling resource/codec ownership, not a separate parallel lane."
+      "sequencing": "Included in decoupling resource/codec ownership, not a separate parallel lane.",
+      "evidence": "review/decoupling-20261102/independent/review.md"
     },
     {
       "id": "T4-source-parent",
@@ -369,7 +371,7 @@
     "closure": "review/architecture-quality-20261101/implementation-results/gate-rejection-followup-20261102/closure.md"
   },
   "architecture_reassessment": {
-    "status": "REVIEW_AND_PLANS_COMPLETE_PRODUCT_FIXES_NOT_STARTED",
+    "status": "DECOUPLING_IMPLEMENTED_AND_INDEPENDENTLY_ACCEPTED",
     "evidence": "review/architecture-reassessment-20261102/README.md",
     "coordination": "review/architecture-reassessment-20261102/COORDINATION.md",
     "new_confirmed_families": [
@@ -377,30 +379,33 @@
       "final_import_budget"
     ],
     "active_writers": {
-      "ROOT": "necessary cross-repository decoupling only; no module business harness active"
+      "ROOT": "publication and integrated source mainline; no active module writer"
     },
     "prepared_not_dispatched": [
       "revenue-forecast",
       "revenue-forecast-audit"
     ],
-    "code_changes": false,
+    "code_changes": true,
     "real_provider_calls": 0,
-    "decoupling": "storage virtualization implemented; protocol/test/deployment coupling remains; bounded repository parallel work feasible",
-    "dispatch_status": "DEFERRED_UNTIL_DECOUPLING"
+    "decoupling": "replaceable public ports, standalone consumer CI and ROOT actual system combination accepted",
+    "dispatch_status": "READY_NOT_DISPATCHED"
   },
   "decoupling_first": {
-    "status": "PLAN_READY_IMPLEMENTATION_NOT_COMPLETE",
+    "status": "D3_ENGINEERING_PASS_PUBLICATION_IN_PROGRESS",
     "plan": "review/architecture-reassessment-20261102/DECOUPLING_FIRST.md",
     "completed": [
-      "D0 current dependency investigation"
+      "D0 dependency ownership",
+      "D1 RED interface/isolation controls",
+      "D2 public ports, budget and CI ownership",
+      "D3 39 current integration tests, installed runtime, real readonly and independent review"
     ],
     "open": [
-      "D1 public-port and isolation tests",
-      "D2 implementation/contract/CI migration",
-      "D3 combined acceptance and independent review"
+      "mainline publication and exact CI observation"
     ],
-    "module_dispatch": "DEFERRED_UNTIL_DECOUPLING",
+    "module_dispatch": "READY_NOT_DISPATCHED",
     "requires_user_reapproval": false,
-    "business_tasks_retained": true
+    "business_tasks_retained": true,
+    "independent_review": "review/decoupling-20261102/independent/review.md",
+    "release": "review/decoupling-20261102/release.md"
   }
 }

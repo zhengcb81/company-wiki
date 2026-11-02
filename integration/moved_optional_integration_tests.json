@@ -1,0 +1,26 @@
+[
+  {
+    "original": "revenue-forecast/tests/test_r1_source_boundary.py::test_real_cwp_ff_rf_cold_catalog_offline_contract",
+    "destination": "integration/revenue_forecast/test_registered_source_boundary.py",
+    "body_sha256": "1be9b2cfda1098a01ebeda642115162a7a1e608f912dd0b816b2819a6caab2f2",
+    "assertions": "retained"
+  },
+  {
+    "original": "filing-fetch/tests/test_source_ref_v2_db_query.py::test_real_db_only_reuse_accepts_configured_root_with_legacy_labels_false",
+    "destination": "integration/filing_fetch/test_real_source_query.py",
+    "body_sha256": "0e6a25d2db4f958defb56869605c0bb8baab53e4dad8d7acd5f8544e17aee5d4",
+    "assertions": "retained"
+  },
+  {
+    "original": "filing-fetch/tests/test_transcript_launch_contract.py::test_ff_real_et_cli_preserves_filing_and_measured_pre_http_zero",
+    "destination": "integration/filing_fetch/test_real_et_preflight.py",
+    "body_sha256": "7c1f02c1d67c1ada2eff4d3f9714b0318d5c034eea77ae45f5cf2685f9abddca",
+    "assertions": "retained"
+  },
+  {
+    "original": "filing-fetch/tests/test_transcript_companion_transport.py::test_real_cwp_cli_import_and_unknown_publication_replay",
+    "destination": "integration/filing_fetch/test_transcript_original_roundtrip.py",
+    "body_sha256": "db47f2a70c9471ec765ba34da89e6bca39c87094666ce557ee61788c78da5c96",
+    "assertions": "retained; explicit producer and fixture roots"
+  }
+]

@@ -5,7 +5,6 @@ from __future__ import annotations
 from typing import Any, Mapping
 
 from .transcript_text_extract import (
-    MAX_TRANSCRIPT_LINES,
     TRANSCRIPT_MIME_TYPES,
     TranscriptMaterial,
     TranscriptMaterialError,
@@ -64,7 +63,7 @@ def _validate_replay_inputs(
         raise TranscriptMaterialError(
             "lineage MIME differs from trusted source receipt"
         )
-    if not 0 < lineage["line_count"] <= MAX_TRANSCRIPT_LINES:
+    if not 0 < lineage["line_count"]:
         raise TranscriptMaterialError("lineage line count is out of bounds")
 
 
@@ -79,7 +78,7 @@ def load_transcript_material(
     _validate_lineage_shape(lineage)
     _validate_replay_inputs(lineage, original, text_utf8, expected_mime_type)
     extracted = extract_transcript_material(
-        original, mime_type=expected_mime_type
+        original, mime_type=expected_mime_type, max_lines=lineage["line_count"],
     )
     if extracted.lineage_dict() != dict(lineage):
         raise TranscriptMaterialError(

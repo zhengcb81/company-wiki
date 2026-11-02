@@ -6,11 +6,11 @@
 
 ## Next Step
 
-先由ROOT集中完成DECOUPLING_FIRST的D1接口/隔离测试、D2跨仓适配与测试归位、D3完整组合和独审；通过后再校准并派发RF/AUDIT等仓内业务PWF。当前不在半解耦状态下启动模块施工。
+D3工程和独审已通过，按CURRENT_STATUS与本轮release记录完成主线发布。随后ROOT按T4、SEM-QUAL-01、新版真实摘要、缓存恢复、实际RF采用继续，RF/AUDIT仓内业务未派发。
 
 ## P0-D — 解耦优先
 
-实施与完成标准见[review/architecture-reassessment-20261102/DECOUPLING_FIRST.md](review/architecture-reassessment-20261102/DECOUPLING_FIRST.md)。D0已调查，D1–D3尚未完成。当前根任务只推进公共端口/DTO/资源/测试与CI边界；下面P1–P3业务任务保留，D3后才按各仓正式派发。不能用独立测试skip或旧CI替新架构验收。
+实施与完成标准见[DECOUPLING_FIRST](review/architecture-reassessment-20261102/DECOUPLING_FIRST.md)。D0–D3工程完成并[独审通过](review/decoupling-20261102/independent/review.md)：公开端口/DTO、实际资源预算、隔离测试与ROOT组合39项零跳过；正常部署与真实原文只读验证完成。[发布记录](review/decoupling-20261102/release.md)列远端证据。P1–P3业务目标保留，不用架构通过替代新真实验收。
 
 ## P0 — 已完成的CI根修
 

@@ -34,9 +34,7 @@ def _nonfinite(_):
 
 def _read_json(path):
     with path.open("rb") as handle:
-        raw = handle.read(_MAX_REQUEST_BYTES + 1)
-    if len(raw) > _MAX_REQUEST_BYTES:
-        raise ValueError("request_byte_limit")
+        raw = handle.read()
     return json.loads(
         raw.decode("utf-8-sig"), object_pairs_hook=_pairs, parse_constant=_nonfinite
     )

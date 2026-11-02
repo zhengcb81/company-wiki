@@ -8,6 +8,7 @@ from __future__ import annotations
 from dataclasses import asdict
 from datetime import date, datetime, timezone
 import hashlib
+import math
 import json
 import re
 import os
@@ -214,7 +215,7 @@ def _validate_presentation(data):
         parsed = normalize_document(
             data, source_id=source_id_for_sha256(sha), source_sha256=sha,
             mime_type=_PPTX_MIME,
-            limits=NormalizationLimits(max_source_bytes=_MAX_BYTES, deadline=time.monotonic() + 15),
+            limits=NormalizationLimits(max_source_bytes=len(data), deadline=time.monotonic() + 15),
         )
         if parsed.structure.page_count < 1:
             raise ValueError("empty or invalid presentation package")
@@ -231,7 +232,7 @@ def _validate_docx(data):
     try:
         parsed = normalize_document(data, source_id=source_id_for_sha256(sha),
             source_sha256=sha, mime_type=_DOCX_MIME,
-            limits=NormalizationLimits(max_source_bytes=_MAX_BYTES, deadline=time.monotonic()+15))
+            limits=NormalizationLimits(max_source_bytes=len(data), deadline=time.monotonic()+15))
         if not parsed.units:
             raise ValueError("DOCX has no current visible body")
     except ValueError:
@@ -239,7 +240,7 @@ def _validate_docx(data):
 
 
 def _byte_cap(value):
-    if type(value) is not int or not 0 < value <= _MAX_BYTES:
+    if type(value) is not int or not 0 < value:
         raise OfficialSourceError("invalid_byte_cap")
     return value
 
@@ -248,7 +249,7 @@ def _validate_capture_receipt(capture, *, sha, byte_size=None):
     """Validate persisted observation shapes before reporting real capture/usage."""
     if (not isinstance(capture, dict) or capture.get("content_sha256") != sha
             or type(capture.get("response_bytes")) is not int
-            or not 0 <= capture["response_bytes"] <= _MAX_BYTES
+            or not 0 <= capture["response_bytes"]
             or (byte_size is not None and capture["response_bytes"] != byte_size)):
         raise OfficialSourceError("capture_byte_identity_mismatch")
     try:
@@ -621,7 +622,7 @@ def _replay_completed(catalog, capture_id, *, max_bytes=None):
                 or value["schema_version"] != "2.0"
                 or value["source_id"] != source_id_for_sha256(sha)
                 or value["document_id"] != value["source_id"].replace("urn:company-wiki:source:", "urn:company-wiki:document:")
-                or type(value["byte_size"]) is not int or not 0 < value["byte_size"] <= _MAX_BYTES
+                or type(value["byte_size"]) is not int or not 0 < value["byte_size"]
                 or not isinstance(value["mime_type"], str) or value["mime_type"] not in _SUPPORTED_MIMES):
             raise OfficialSourceError("invalid_completed_capture")
         cap = _byte_cap(record.get("max_bytes"))
@@ -775,8 +776,8 @@ def capture_official_source(catalog, *, request, budget=None, transport=None):
     source = _metadata(request.get("source"))
     _text(request.get("request_id"), "request_id")
     cap, seconds = request.get("max_bytes"), request.get("max_seconds")
-    if (type(cap) is not int or not 0 < cap <= _MAX_BYTES or isinstance(seconds, bool)
-            or not isinstance(seconds, (int, float)) or not 0 < seconds <= 300):
+    if (type(cap) is not int or not 0 < cap or isinstance(seconds, bool)
+            or not isinstance(seconds, (int, float)) or (not math.isfinite(seconds) or seconds <= 0)):
         raise OfficialSourceError("invalid_capture_limits")
     mime = request.get("mime_type")
     if not isinstance(mime, str) or mime not in _SUPPORTED_MIMES:

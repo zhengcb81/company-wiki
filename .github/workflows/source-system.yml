@@ -1,0 +1,65 @@
+name: Source system integration
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [master]
+    paths:
+      - "integration/**"
+      - "tools/run_source_system_tests.py"
+      - ".github/workflows/source-system.yml"
+  pull_request:
+    paths:
+      - "integration/**"
+      - "tools/run_source_system_tests.py"
+      - ".github/workflows/source-system.yml"
+
+concurrency:
+  group: source-system-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  current-public-chain:
+    runs-on: ubuntu-latest
+    timeout-minutes: 8
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+        with:
+          repository: zhengcb81/revenue-forecast
+          ref: main
+          path: modules/revenue-forecast
+      - uses: actions/checkout@v4
+        with:
+          repository: zhengcb81/filing-fetch
+          ref: main
+          path: modules/filing-fetch
+      - uses: actions/checkout@v4
+        with:
+          repository: zhengcb81/earnings-transcripts
+          ref: main
+          path: modules/earnings-transcripts
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: |
+            requirements.txt
+            requirements-test.txt
+      - name: Install ordinary test dependencies
+        run: python -m pip install -r requirements.txt -r requirements-test.txt
+      - name: Current public chain once
+        run: >-
+          python tools/run_source_system_tests.py
+          --rf-root modules/revenue-forecast
+          --ff-root modules/filing-fetch
+          --et-root modules/earnings-transcripts
+          --output-dir "${{ runner.temp }}/source-system-ci"
+          --timeout-seconds 240
+      - name: Keep compact test result
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: source-system-result
+          path: ${{ runner.temp }}/source-system-ci
+          retention-days: 7

@@ -40,9 +40,7 @@ def main(argv: Sequence[str] | None = None) -> int:
     catalog: SourceCatalog | None = None
     try:
         args = parser.parse_args(argv)
-        raw = sys.stdin.buffer.read(_MAX_REQUEST_BYTES + 1)
-        if len(raw) > _MAX_REQUEST_BYTES:
-            raise ValueError("request too large")
+        raw = sys.stdin.buffer.read()
         request_data = json.loads(raw.decode("utf-8"))
         if not isinstance(request_data, dict):
             raise ValueError("request must be an object")

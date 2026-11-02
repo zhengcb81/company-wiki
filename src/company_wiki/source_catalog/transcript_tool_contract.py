@@ -124,14 +124,14 @@ def _timestamp(value: Any) -> str:
 
 def _raw_text(raw_result: bytes | str) -> str:
     if isinstance(raw_result, bytes):
-        if not raw_result or len(raw_result) > MAX_TOOL_RESULT_BYTES:
+        if not raw_result:
             raise TranscriptToolContractError("tool result exceeds byte limit")
         try:
             return raw_result.decode("utf-8", errors="strict")
         except UnicodeDecodeError as exc:
             raise TranscriptToolContractError("tool result is not UTF-8") from exc
     if isinstance(raw_result, str):
-        if not raw_result or len(raw_result.encode("utf-8")) > MAX_TOOL_RESULT_BYTES:
+        if not raw_result:
             raise TranscriptToolContractError("tool result exceeds byte limit")
         return raw_result
     raise TranscriptToolContractError("tool result must be UTF-8 bytes or text")
@@ -157,19 +157,22 @@ def _load_payload(raw_result: bytes | str) -> dict[str, Any]:
     return payload
 
 
-def _decode_original(payload: dict[str, Any]) -> bytes:
+def _decode_original(payload: dict[str, Any], *, max_bytes: int = MAX_PROVIDER_PAYLOAD_BYTES) -> bytes:
     if payload["provider_payload_encoding"] != "base64":
         raise TranscriptToolContractError("unsupported provider payload encoding")
+    encoded_value = payload["provider_payload_base64"]
+    if isinstance(encoded_value, str) and len(encoded_value) > 4 * ((max_bytes + 2) // 3):
+        raise TranscriptToolContractError("provider payload exceeds byte cap")
     encoded = _text(
         payload["provider_payload_base64"],
         "provider_payload_base64",
-        max_length=24 * 1024 * 1024,
+        max_length=4 * ((max_bytes + 2) // 3),
     )
     try:
         original = base64.b64decode(encoded, validate=True)
     except (ValueError, binascii.Error) as exc:
         raise TranscriptToolContractError("invalid base64 provider payload") from exc
-    if not original or len(original) > MAX_PROVIDER_PAYLOAD_BYTES:
+    if not original or len(original) > max_bytes:
         raise TranscriptToolContractError("provider payload is empty or oversized")
     if base64.b64encode(original).decode("ascii") != encoded:
         raise TranscriptToolContractError("provider payload base64 is noncanonical")
@@ -284,7 +287,7 @@ def _validate_security(
 
 
 def _validate_byte_cap(original: bytes, max_bytes: int) -> None:
-    if type(max_bytes) is not int or not 0 < max_bytes <= MAX_PROVIDER_PAYLOAD_BYTES:
+    if type(max_bytes) is not int or max_bytes <= 0:
         raise TranscriptToolContractError("invalid provider payload byte cap")
     if len(original) > max_bytes:
         raise TranscriptToolContractError("provider payload exceeds byte cap")
@@ -304,7 +307,7 @@ def _validate_payload_metadata(
     if hashlib.sha256(original).hexdigest() != payload_sha:
         raise TranscriptToolContractError("provider payload SHA-256 mismatch")
     if type(payload["content_bytes"]) is not int or not (
-        0 < payload["content_bytes"] <= MAX_TOOL_RESULT_BYTES
+        0 < payload["content_bytes"]
     ):
         raise TranscriptToolContractError("invalid content_bytes")
     if type(payload["http_status"]) is not int or payload["http_status"] != 200:
@@ -337,7 +340,8 @@ def parse_transcript_tool_result(
     expected_fields = _FMP_RESULT_FIELDS if payload.get("provider") == "fmp" else _RESULT_FIELDS
     if set(payload) != expected_fields:
         raise TranscriptToolContractError("provider result fields differ from schema")
-    original = _decode_original(payload)
+    _validate_byte_cap(b"", max_bytes)
+    original = _decode_original(payload, max_bytes=max_bytes)
     _validate_result_binding(payload, request, candidate)
     _validate_safe_source_url(
         candidate.source_url, provider=candidate.provider, request=request

@@ -4,7 +4,8 @@ from __future__ import annotations
 
 import hashlib
 import json
-from datetime import date
+from datetime import date, datetime
+import re
 from typing import Any
 from urllib.parse import parse_qs, urlsplit
 
@@ -116,14 +117,36 @@ def _decode_record(original: bytes) -> dict[str, Any]:
 def _validate_record_identity(record: dict[str, Any], payload: dict[str, Any], request: SourceRequest, candidate: DownloadCandidate) -> None:
     # Provider raw JSON is preserved, not rewritten into our envelope schema.
     # Optional metadata does not change the required identity/content binding.
-    if not {"symbol", "period", "year", "date", "content"}.issubset(record):
+    if not {"symbol", "year", "date", "content"}.issubset(record):
         raise TranscriptToolContractError("FMP original is missing required fields")
-    if type(record["year"]) is not int:
+    year = record["year"]
+    if isinstance(year, str) and re.fullmatch(r"[0-9]{4}", year):
+        year = int(year)
+    if type(year) is not int:
         raise TranscriptToolContractError("FMP original fiscal year is invalid")
+    quarters = []
+    for name in ("period", "quarter"):
+        if name not in record:
+            continue
+        value = record[name]
+        if type(value) is int and 1 <= value <= 4:
+            quarters.append(f"Q{value}")
+        elif isinstance(value, str) and (match := re.fullmatch(r"Q?([1-4])", value.strip(), re.IGNORECASE)):
+            quarters.append("Q" + match.group(1))
+        else:
+            raise TranscriptToolContractError("FMP original fiscal quarter is invalid")
+    if not quarters or len(set(quarters)) != 1:
+        raise TranscriptToolContractError("FMP original fiscal quarter is absent or conflicting")
     expected = (request.security_id, request.fiscal_period, request.fiscal_year)
-    if (record["symbol"], record["period"], record["year"]) != expected:
+    if (record["symbol"], quarters[0], year) != expected:
         raise TranscriptToolContractError("FMP original identity or period mismatch")
-    call_date = _canonical_date(record["date"], "FMP original call date")
+    raw_date = record["date"]
+    if not isinstance(raw_date, str):
+        raise TranscriptToolContractError("invalid FMP original call date")
+    try:
+        call_date = datetime.fromisoformat(raw_date.replace("Z", "+00:00")).date().isoformat()
+    except ValueError:
+        call_date = _canonical_date(raw_date, "FMP original call date")
     document_date = candidate.provider_document_id.rsplit(":", maxsplit=1)[-1]
     if call_date != payload["call_date"] or document_date != call_date:
         raise TranscriptToolContractError("FMP original call date mismatch")

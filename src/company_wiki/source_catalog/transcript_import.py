@@ -102,6 +102,7 @@ def import_transcript_tool_result(
     candidate: DownloadCandidate,
     writer: CanonicalSourceWriter,
     now: str,
+    max_original_bytes: int = MAX_PROVIDER_PAYLOAD_BYTES,
 ) -> TranscriptImportResult:
     """Check source, period and bytes, then save the unchanged original once.
 
@@ -116,14 +117,15 @@ def import_transcript_tool_result(
             raw_result,
             request=request,
             candidate=candidate,
-            max_bytes=MAX_PROVIDER_PAYLOAD_BYTES,
+            max_bytes=max_original_bytes,
         )
     except TranscriptToolContractError as exc:
         raise TranscriptImportError(str(exc)) from exc
     _check_time(payload.retrieved_at, now)
     try:
         material = extract_transcript_material(
-            payload.original, mime_type=payload.mime_type
+            payload.original, mime_type=payload.mime_type,
+            max_original_bytes=max_original_bytes, max_lines=len(payload.original),
         )
     except TranscriptMaterialError as exc:
         raise TranscriptImportError(str(exc)) from exc

@@ -1,0 +1,6 @@
+{
+  "original": "filing-fetch/e2e/test_source_ref_v2_cli.py",
+  "original_sha256": "db80b113ca55b398b7d6da48dbed62c9d074248df999428d9f6503873658b45e",
+  "new_owner": "company-wiki ROOT integration",
+  "assertions": "unchanged; deployment root explicit"
+}

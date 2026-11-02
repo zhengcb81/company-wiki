@@ -62,9 +62,7 @@ class NarrativeNormalization:
         if not enabled or not path.exists():
             return cls(**kwargs)
         with path.open("rb") as stream:
-            raw = stream.read(65537)
-        if len(raw) > 65536:
-            raise ValueError("OCR_CONFIG_TOO_LARGE")
+            raw = stream.read()
         return cls.from_snapshot(json.loads(raw.decode("utf-8")), **kwargs)
 
     @classmethod
