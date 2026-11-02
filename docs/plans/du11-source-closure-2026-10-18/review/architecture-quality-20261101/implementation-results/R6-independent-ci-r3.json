@@ -1,0 +1,1723 @@
+{
+  "schema_version": "r6-independent-ci-r3/1",
+  "reviewer": "/root/rectification_review_a",
+  "candidate": "a6841e9420dbe3eb6dac6e30563c29e4293a31e7",
+  "worktree": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2",
+  "at_utc": "2026-11-02T00:40:16.303224+00:00",
+  "status": "NEEDS_ROOT_FIX_SOURCE_RELEVANCE_DEFAULT_SPECIFIC",
+  "frozen_files": {
+    "src/company_wiki/document_understanding/statement_grammar/__init__.py": {
+      "expected": "cf66d1b19a82e20691ea00a75b6403e5c958c4eb1f699a191048ea2a181348ee",
+      "actual": "cf66d1b19a82e20691ea00a75b6403e5c958c4eb1f699a191048ea2a181348ee",
+      "matches": true
+    },
+    "src/company_wiki/document_understanding/statement_grammar/predicate_arguments.py": {
+      "expected": "207e0250cbe2aa7269dc2f021444577e38264791008b2ae8a15d0f76fcea2251",
+      "actual": "207e0250cbe2aa7269dc2f021444577e38264791008b2ae8a15d0f76fcea2251",
+      "matches": true
+    },
+    "src/company_wiki/document_understanding/operating_states/assertion_roles.py": {
+      "expected": "9195e38d5c54f125bf8e0f0af2e8b455c123b47a4d490d3944347e429fa43737",
+      "actual": "9195e38d5c54f125bf8e0f0af2e8b455c123b47a4d490d3944347e429fa43737",
+      "matches": true
+    },
+    "src/company_wiki/source_catalog/narrative_source_passage.py": {
+      "expected": "74f96c7b0fd612b8771ee9ee090148842720e94c55cb74f06eb09022b17db7c6",
+      "actual": "74f96c7b0fd612b8771ee9ee090148842720e94c55cb74f06eb09022b17db7c6",
+      "matches": true
+    },
+    "src/company_wiki/source_catalog/narrative_source_context.py": {
+      "expected": "fcdc4a9223895a59e1da2ab8d2d71599c5ec74d19547cf2cfa53524ce9b7eb31",
+      "actual": "fcdc4a9223895a59e1da2ab8d2d71599c5ec74d19547cf2cfa53524ce9b7eb31",
+      "matches": true
+    },
+    "src/company_wiki/source_catalog/narrative_business_policy.py": {
+      "expected": "1e6c181ca389e95380e001d2c34e029024eb4f0238d5e7e7d375dffebe700f50",
+      "actual": "1e6c181ca389e95380e001d2c34e029024eb4f0238d5e7e7d375dffebe700f50",
+      "matches": true
+    },
+    "tests/unit/du11_production/test_source_semantic_axes.py": {
+      "expected": "340ce52f3b82e47e39b604ce88fe6edf2ae16684fdffc89ee89bcb1dae7fd363",
+      "actual": "340ce52f3b82e47e39b604ce88fe6edf2ae16684fdffc89ee89bcb1dae7fd363",
+      "matches": true
+    },
+    "tests/unit/du11_production/test_source_preparation_axes.py": {
+      "expected": "a60694672b40b034b76c9313d066931d7e182229e35de0d6f8dcb2f0dc89fde9",
+      "actual": "a60694672b40b034b76c9313d066931d7e182229e35de0d6f8dcb2f0dc89fde9",
+      "matches": true
+    },
+    "tests/unit/test_source_contract_reader_port.py": {
+      "expected": "90586fdb5451e094efa6e52d72f9fe1187d4aac84151acd20f0639f66b567278",
+      "actual": "90586fdb5451e094efa6e52d72f9fe1187d4aac84151acd20f0639f66b567278",
+      "matches": true
+    },
+    "tests/unit/test_shared_reading_cache_precheck.py": {
+      "expected": "3f593fae9ef2a9f291d7e02c80370a50462eac341a08978d31297a161ee52309",
+      "actual": "3f593fae9ef2a9f291d7e02c80370a50462eac341a08978d31297a161ee52309",
+      "matches": true
+    }
+  },
+  "author_receipt": {
+    "schema": "R6-source-ci-r3/1",
+    "status": "FROZEN_READY_ROOT_INDEPENDENT_REVIEW",
+    "generated_utc": "2026-11-02T00:36:37.485281+00:00",
+    "baseline": "9f575810ca92620a6fb6ff63cfd326a5b9f076fa",
+    "worktree": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2",
+    "ci_failure_run": "41364303788",
+    "semantic_failures_owned": 20,
+    "full_ci_failures": 22,
+    "source_and_test_sha256": {
+      "src/company_wiki/document_understanding/statement_grammar/__init__.py": "cf66d1b19a82e20691ea00a75b6403e5c958c4eb1f699a191048ea2a181348ee",
+      "src/company_wiki/document_understanding/statement_grammar/predicate_arguments.py": "207e0250cbe2aa7269dc2f021444577e38264791008b2ae8a15d0f76fcea2251",
+      "src/company_wiki/document_understanding/operating_states/assertion_roles.py": "9195e38d5c54f125bf8e0f0af2e8b455c123b47a4d490d3944347e429fa43737",
+      "src/company_wiki/source_catalog/narrative_source_passage.py": "74f96c7b0fd612b8771ee9ee090148842720e94c55cb74f06eb09022b17db7c6",
+      "src/company_wiki/source_catalog/narrative_source_context.py": "fcdc4a9223895a59e1da2ab8d2d71599c5ec74d19547cf2cfa53524ce9b7eb31",
+      "src/company_wiki/source_catalog/narrative_business_policy.py": "1e6c181ca389e95380e001d2c34e029024eb4f0238d5e7e7d375dffebe700f50",
+      "tests/unit/du11_production/test_source_semantic_axes.py": "340ce52f3b82e47e39b604ce88fe6edf2ae16684fdffc89ee89bcb1dae7fd363",
+      "tests/unit/du11_production/test_source_preparation_axes.py": "a60694672b40b034b76c9313d066931d7e182229e35de0d6f8dcb2f0dc89fde9"
+    },
+    "runs": [
+      {
+        "name": "r6-r3-ci-red",
+        "tests": 415,
+        "failures": 20,
+        "errors": 0,
+        "skipped": 0,
+        "seconds": 22.949,
+        "junit": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r3-ci-red.xml",
+        "sha256": "638fab76707ccf1245419177e3db7637dca5e04668cb2024b89589ab82f22e4e",
+        "failed_ids": [
+          "tests.unit.du11_production.test_business_coverage_relations::test_specific_scoped_coverage_survives_without_inventing_completed_state[\\u661f\\u6cb3\\u4eea\\u5668\\u768442\\u7c7b\\u8bbe\\u5907\\u4ea7\\u54c1\\u5df2\\u8986\\u76d627%\\u7684\\u6676\\u5706\\u5de5\\u827a\\u529f\\u80fd\\uff0c\\u672a\\u6765\\u4e09\\u5e74\\u8ba1\\u5212\\u8986\\u76d645%\\u7684\\u5148\\u8fdb\\u5c01\\u88c5\\u8bbe\\u5907\\u5e02\\u573a\\u3002]",
+          "tests.unit.du11_production.test_business_coverage_relations::test_specific_scoped_coverage_survives_without_inventing_completed_state[\\u66d9\\u5149\\u8edf\\u4ef6\\u768418\\u985e\\u7522\\u54c1\\u5df2\\u8986\\u84cb32%\\u7684\\u76ee\\u6a19\\u5de5\\u85dd\\uff0c\\u672a\\u4f86\\u56db\\u5e74\\u64ec\\u8986\\u84cb55%\\u7684\\u8a2d\\u5099\\u5e02\\u5834\\u3002]",
+          "tests.unit.du11_production.test_business_coverage_relations::test_specific_scoped_coverage_survives_without_inventing_completed_state[\\u672c\\u4f01\\u4e1a\\u7684\\u670d\\u52a1\\u5df2\\u7ecf\\u8986\\u76d617\\u4e2a\\u6d77\\u5916\\u5730\\u533a\\u3002]",
+          "tests.unit.du11_production.test_business_coverage_relations::test_specific_scoped_coverage_survives_without_inventing_completed_state[\\u672c\\u4f01\\u4e1a\\u7684\\u8f6f\\u4ef6\\u4ea7\\u54c1\\u8986\\u76d6\\u76ee\\u6807\\u529f\\u80fd\\u768445%\\u3002]",
+          "tests.unit.du11_production.test_business_coverage_relations::test_specific_scoped_coverage_survives_without_inventing_completed_state[Our sales services cover 17 regional markets.]",
+          "tests.unit.du11_production.test_business_coverage_relations::test_legacy_detector_is_not_upgraded_by_reading_coverage",
+          "tests.unit.du11_production.test_source_information_payload::test_complete_abstract_objective_is_observed_as_no_independent_payload[Our software supports customer engagement.]",
+          "tests.unit.du11_production.test_source_information_payload::test_complete_abstract_objective_is_observed_as_no_independent_payload[Our platform supports business development and innovation.]",
+          "tests.unit.du11_production.test_source_information_payload::test_complete_abstract_objective_is_observed_as_no_independent_payload[\\u6211\\u4eec\\u6301\\u7eed\\u4ee5\\u4e30\\u5bcc\\u7684\\u4ea7\\u54c1\\u53ca\\u4f18\\u8d28\\u7684\\u670d\\u52a1\\u652f\\u6301\\u884c\\u4e1a\\u7684\\u6570\\u5b57\\u5316\\u8f6c\\u578b\\u5347\\u7ea7\\u3002]",
+          "tests.unit.du11_production.test_source_information_payload::test_complete_abstract_objective_is_observed_as_no_independent_payload[\\u6211\\u4eec\\u7684\\u6280\\u672f\\u5e73\\u53f0\\u4f5c\\u4e3a\\u4ea7\\u54c1\\u5f00\\u53d1\\u548c\\u521b\\u65b0\\u7684\\u57fa\\u7840\\u3002]",
+          "tests.unit.du11_production.test_source_information_payload::test_real_function_after_generic_clause_is_not_lost_or_donated",
+          "tests.unit.du11_production.test_source_information_payload::test_only_proved_generic_full_document_may_skip[Our software supports customer engagement.-True]",
+          "tests.unit.du11_production.test_source_information_payload::test_unrecognised_function_target_does_not_become_positive_by_exclusion[Our software supports strategic aspirations.]",
+          "tests.unit.du11_production.test_source_information_payload::test_unrecognised_function_target_does_not_become_positive_by_exclusion[Our platform supports outstanding goals.]",
+          "tests.unit.du11_production.test_source_information_payload::test_unrecognised_function_target_does_not_become_positive_by_exclusion[\\u6211\\u4eec\\u7684\\u5e73\\u53f0\\u652f\\u6301\\u5b8f\\u4f1f\\u613f\\u666f\\u3002]",
+          "tests.unit.du11_production.test_source_information_payload::test_unrecognised_function_target_does_not_become_positive_by_exclusion[We provide best-in-class products.]",
+          "tests.unit.du11_production.test_source_information_payload::test_unrecognised_function_target_does_not_become_positive_by_exclusion[Our platform supports outstanding services.]",
+          "tests.unit.document_understanding_selection.test_source_support_use::test_closed_operating_membership_and_coverage_are_qualitative_support[\\u4e00\\u4f53\\u5316\\u751f\\u4ea7\\u670d\\u52a1\\u8986\\u76d6\\u591a\\u4e2a\\u4e0b\\u6e38\\u5ba2\\u6237\\u5de5\\u5e8f\\u3002]",
+          "tests.unit.document_understanding_selection.test_reading_native_continuity::test_finance_only_and_separate_financial_sentence_stay_rejected",
+          "tests.unit.document_understanding_selection.test_reading_value_coverage::test_marker_filter_does_not_remove_words_with_digits_or_roman_prefixes"
+        ]
+      },
+      {
+        "name": "r6-r3-axes-red",
+        "tests": 9,
+        "failures": 7,
+        "errors": 0,
+        "skipped": 0,
+        "seconds": 28.92,
+        "junit": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r3-axes-red.xml",
+        "sha256": "3b8c8969cb2e3e5e26751c0f69959eaaf0d71f73346a146cdb48aae5ff3aaacf",
+        "failed_ids": [
+          "tests.unit.du11_production.test_source_preparation_axes::test_source_roles_survive_context_fact_filter_without_a_proof_upgrade[Our software supports customer engagement.-False-context_only]",
+          "tests.unit.du11_production.test_source_preparation_axes::test_source_roles_survive_context_fact_filter_without_a_proof_upgrade[Our platform supports outstanding goals.-None-unresolved]",
+          "tests.unit.du11_production.test_source_preparation_axes::test_source_roles_survive_context_fact_filter_without_a_proof_upgrade[\\u6211\\u4eec\\u7684\\u5e73\\u53f0\\u652f\\u6301\\u5b8f\\u4f1f\\u613f\\u666f\\u3002-None-unresolved]",
+          "tests.unit.du11_production.test_source_preparation_axes::test_prepared_scope_has_separate_valid_source_and_fact_role_views",
+          "tests.unit.du11_production.test_source_preparation_axes::test_existing_coverage_proof_is_prepared_before_generic_quote_fallback[Our sales services cover 17 regional markets.]",
+          "tests.unit.du11_production.test_source_preparation_axes::test_existing_coverage_proof_is_prepared_before_generic_quote_fallback[\\u672c\\u4f01\\u4e1a\\u7684\\u8f6f\\u4ef6\\u4ea7\\u54c1\\u8986\\u76d6\\u76ee\\u6807\\u529f\\u80fd\\u768445%\\u3002]",
+          "tests.unit.du11_production.test_source_preparation_axes::test_each_original_marker_counterexample_is_independently_admitted[\\u4e00\\u4f53\\u5316\\u751f\\u4ea7\\u670d\\u52a1\\u8986\\u76d6\\u591a\\u4e2a\\u4e0b\\u6e38\\u5ba2\\u6237\\u5de5\\u5e8f\\u3002]"
+        ]
+      },
+      {
+        "name": "r6-r3-ci-green1",
+        "tests": 424,
+        "failures": 1,
+        "errors": 0,
+        "skipped": 0,
+        "seconds": 78.93,
+        "junit": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r3-ci-green1.xml",
+        "sha256": "183f68b7c49787c4b2183228a6541fbab647f062ec21e357fe48bfabd9f38aa6",
+        "failed_ids": [
+          "tests.unit.du11_production.test_source_preparation_axes::test_source_roles_survive_context_fact_filter_without_a_proof_upgrade[\\u6211\\u4eec\\u7684\\u5e73\\u53f0\\u652f\\u6301\\u5b8f\\u4f1f\\u613f\\u666f\\u3002-None-unresolved]"
+        ]
+      },
+      {
+        "name": "r6-r3-r2-regression",
+        "tests": 367,
+        "failures": 6,
+        "errors": 0,
+        "skipped": 0,
+        "seconds": 64.446,
+        "junit": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r3-r2-regression.xml",
+        "sha256": "63943d986e2ce97df8106c035a224eead255719932ae82fe6c51bc3eb88acfa8",
+        "failed_ids": [
+          "tests.unit.du11_production.test_source_preparation_axes::test_source_roles_survive_context_fact_filter_without_a_proof_upgrade[\\u6211\\u4eec\\u7684\\u5e73\\u53f0\\u652f\\u6301\\u5b8f\\u4f1f\\u613f\\u666f\\u3002-None-unresolved]",
+          "tests.unit.du11_production.test_source_readability_generalization::test_interrogative_inversion_stays_non_assertion_with_or_without_question_mark[Which software processes customer billing records]",
+          "tests.unit.du11_production.test_source_readability_generalization::test_interrogative_inversion_stays_non_assertion_with_or_without_question_mark[What equipment manufactures medical tools]",
+          "tests.unit.du11_production.test_source_readability_generalization::test_interrogative_inversion_stays_non_assertion_with_or_without_question_mark[Which products are available to customers]",
+          "tests.unit.du11_production.test_source_readability_generalization::test_interrogative_inversion_stays_non_assertion_with_or_without_question_mark[Who provides software to banks]",
+          "tests.unit.du11_production.test_source_passage_admission::test_pure_financial_rules_templates_questions_and_objectives_are_not_support[\\u6211\\u4eec\\u7684\\u5e73\\u53f0\\u652f\\u6301\\u5b8f\\u4f1f\\u613f\\u666f\\u3002]"
+        ]
+      },
+      {
+        "name": "r6-r3-head-red",
+        "tests": 16,
+        "failures": 4,
+        "errors": 0,
+        "skipped": 0,
+        "seconds": 24.264,
+        "junit": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r3-head-red.xml",
+        "sha256": "b3eaae601c83c32247bd87963b4a2c9de5e8b71d72db2b0acab9bb72d5b44824",
+        "failed_ids": [
+          "tests.unit.du11_production.test_source_preparation_axes::test_source_roles_survive_context_fact_filter_without_a_proof_upgrade[\\u6211\\u4eec\\u7684\\u5e73\\u53f0\\u652f\\u6301\\u5b8f\\u4f1f\\u613f\\u666f\\u3002-None-unresolved]",
+          "tests.unit.du11_production.test_source_preparation_axes::test_unseen_adjective_cannot_prove_a_tentative_nominal_head[Our platform supports portable goals.]",
+          "tests.unit.du11_production.test_source_preparation_axes::test_unseen_adjective_cannot_prove_a_tentative_nominal_head[Our platform supports portable customer aspirations.]",
+          "tests.unit.du11_production.test_source_preparation_axes::test_unseen_adjective_cannot_prove_a_tentative_nominal_head[We aim to achieve portable goals.]"
+        ]
+      },
+      {
+        "name": "r6-r3-head-green",
+        "tests": 24,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "seconds": 15.857,
+        "junit": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r3-head-green.xml",
+        "sha256": "afce392c2a6f409c5b00cb93d576666791c1c24ecb65046b2bcc77f6deb96b67",
+        "failed_ids": []
+      },
+      {
+        "name": "r6-r3-ci-final",
+        "tests": 431,
+        "failures": 1,
+        "errors": 0,
+        "skipped": 0,
+        "seconds": 36.008,
+        "junit": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r3-ci-final.xml",
+        "sha256": "5ec3f16e034cd14ce5aa4c6b1cfa7632aa29a2ff2dba0edf15cfcdb7f2a77557",
+        "failed_ids": [
+          "tests.unit.document_understanding_selection.test_source_support_use::test_financial_terms_can_modify_a_real_supplied_or_functional_product[We provide option-pricing software to banks.]"
+        ]
+      },
+      {
+        "name": "r6-r3-r2-final",
+        "tests": 355,
+        "failures": 2,
+        "errors": 0,
+        "skipped": 0,
+        "seconds": 55.836,
+        "junit": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r3-r2-final.xml",
+        "sha256": "fc2510997ed41e02558ad6e20f765d943bcd4c1b1a20c96d9cb4184dca8df6c8",
+        "failed_ids": [
+          "tests.unit.du11_production.test_source_semantic_axes::test_a_concrete_noun_modifier_is_not_removed_with_rhetorical_adjectives",
+          "tests.unit.du11_production.test_source_passage_admission::test_established_support_or_relevant_uncertainty_is_monotonic[We provide option-pricing software to banks.]"
+        ]
+      },
+      {
+        "name": "r6-r3-np-green",
+        "tests": 27,
+        "failures": 1,
+        "errors": 0,
+        "skipped": 0,
+        "seconds": 19.142,
+        "junit": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r3-np-green.xml",
+        "sha256": "9433f19ae14dec40d60bac5cfb62a476d0c6b5af72a75b2e65ed6fe9d44b5015",
+        "failed_ids": [
+          "tests.unit.du11_production.test_source_semantic_axes::test_a_concrete_noun_modifier_is_not_removed_with_rhetorical_adjectives"
+        ]
+      },
+      {
+        "name": "r6-r3-nominal-red",
+        "tests": 1,
+        "failures": 1,
+        "errors": 0,
+        "skipped": 0,
+        "seconds": 4.662,
+        "junit": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r3-nominal-red.xml",
+        "sha256": "ade21aa04edd6ef32fa849f56f5a856493430500fc29188722c05ac8c53eb630",
+        "failed_ids": [
+          "tests.unit.du11_production.test_source_preparation_axes::test_coordinated_nominal_arguments_keep_their_own_modifiers"
+        ]
+      },
+      {
+        "name": "r6-r3-np-final",
+        "tests": 121,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "seconds": 21.801,
+        "junit": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r3-np-final.xml",
+        "sha256": "7f6ce7f29586d2fafcc4def852d87fd24e70b1f7eb1defd16f6c2102977aad88",
+        "failed_ids": []
+      },
+      {
+        "name": "r6-r3-ci-frozen",
+        "tests": 433,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "seconds": 32.929,
+        "junit": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r3-ci-frozen.xml",
+        "sha256": "fd45e23b571a1fa8860bde7a9339fea2bd999f88d540c4164bd90f4dfdbb6d49",
+        "failed_ids": []
+      },
+      {
+        "name": "r6-r3-r2-frozen",
+        "tests": 262,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0,
+        "seconds": 46.836,
+        "junit": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r3-r2-frozen.xml",
+        "sha256": "b8764608009771e0b09d118bed7ee9463ce65ac165db083a9199be839bf2b946",
+        "failed_ids": []
+      }
+    ],
+    "recipe_closure": {
+      "False": {
+        "company_wiki.document_understanding.statement_grammar": "8f8a180faf9b5d0a4a3c1ea195c28c13c8f8a7c19079d677065fc79bc1eacb5a",
+        "company_wiki.document_understanding.statement_grammar.predicate_arguments": "207e0250cbe2aa7269dc2f021444577e38264791008b2ae8a15d0f76fcea2251",
+        "company_wiki.document_understanding.operating_states.assertion_roles": "ec4bee00c4dfb352e2da96f59bc17b0b74cea2d7d3306cb7e7b34ce903062e3d",
+        "company_wiki.source_catalog.narrative_source_passage": "145092251453a8422615a53ec75851ad9052248a512b889607a4cc86ad77b53b",
+        "company_wiki.source_catalog.narrative_source_context": "fcdc4a9223895a59e1da2ab8d2d71599c5ec74d19547cf2cfa53524ce9b7eb31",
+        "company_wiki.source_catalog.narrative_business_policy": "261ac6e0cd34c4c16b4f8e3129ac3cc102b30e3b01db42585e5a8902391b4225"
+      },
+      "True": {
+        "company_wiki.document_understanding.statement_grammar": "8f8a180faf9b5d0a4a3c1ea195c28c13c8f8a7c19079d677065fc79bc1eacb5a",
+        "company_wiki.document_understanding.statement_grammar.predicate_arguments": "207e0250cbe2aa7269dc2f021444577e38264791008b2ae8a15d0f76fcea2251",
+        "company_wiki.document_understanding.operating_states.assertion_roles": "ec4bee00c4dfb352e2da96f59bc17b0b74cea2d7d3306cb7e7b34ce903062e3d",
+        "company_wiki.source_catalog.narrative_source_passage": "145092251453a8422615a53ec75851ad9052248a512b889607a4cc86ad77b53b",
+        "company_wiki.source_catalog.narrative_source_context": "fcdc4a9223895a59e1da2ab8d2d71599c5ec74d19547cf2cfa53524ce9b7eb31",
+        "company_wiki.source_catalog.narrative_business_policy": "261ac6e0cd34c4c16b4f8e3129ac3cc102b30e3b01db42585e5a8902391b4225"
+      }
+    },
+    "grammar_resource_identity": "123fbe7c75f816991ad5112a748e59e7339a054cd40483a905ddf4c30e8c93f7",
+    "marker_baseline": [
+      {
+        "text": "IV therapy services are provided to hospitals.",
+        "admitted": true
+      },
+      {
+        "text": "Our 2026 product portfolio includes recycling systems.",
+        "admitted": true
+      },
+      {
+        "text": "一体化生产服务覆盖多个下游客户工序。",
+        "admitted": false
+      }
+    ],
+    "marker_frozen": [
+      {
+        "text": "IV therapy services are provided to hospitals.",
+        "admitted": true
+      },
+      {
+        "text": "Our 2026 product portfolio includes recycling systems.",
+        "admitted": true
+      },
+      {
+        "text": "一体化生产服务覆盖多个下游客户工序。",
+        "admitted": true
+      }
+    ],
+    "limits_unchanged": {
+      "document_work": 16000000,
+      "slots": 112,
+      "statement_chars": 4096,
+      "statement_tokens": 1024
+    },
+    "work_accounting": {
+      "business_relation": "existing phase pre-reservation; canonical true/false reading relation memo shared before grammar and later fact projection",
+      "prepared_targets": "8 * actual summed argument_target lengths, precharged on same WorkBudget; overlapping strings counted, reused source scope zero rescan",
+      "fallback_pos": "32 * chars + 1; original grammar limits and shared budget; no per-request increased cap"
+    },
+    "unmodified": [
+      "Git/index",
+      "main worktree src",
+      "production documents/database/config",
+      "model assets",
+      "paid APIs",
+      "main PWF"
+    ],
+    "remaining": [
+      "ROOT independent review",
+      "complete candidate CI after publication",
+      "H1 real source work/quality at existing16M/112",
+      "later T3 structure design paused, no implementation"
+    ],
+    "test_runtime": {
+      "python": "C:/Miniconda/python.exe -B -X utf8",
+      "environment": {
+        "PYTHONPATH": "src;tests",
+        "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1"
+      },
+      "common_args": "-m pytest -p pytest_asyncio.plugin -q -p no:cacheprovider --tb=short",
+      "working_directory": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2"
+    },
+    "frozen_test_commands": [
+      {
+        "junit": "tmp/r6-r3-ci-frozen.xml",
+        "targets": [
+          "tests/unit/du11_production/test_business_coverage_relations.py",
+          "tests/unit/du11_production/test_source_information_payload.py",
+          "tests/unit/document_understanding_selection/test_source_support_use.py",
+          "tests/unit/document_understanding_selection/test_reading_native_continuity.py",
+          "tests/unit/document_understanding_selection/test_reading_value_coverage.py::test_marker_filter_does_not_remove_words_with_digits_or_roman_prefixes",
+          "tests/unit/du11_production/test_source_preparation_axes.py"
+        ]
+      },
+      {
+        "junit": "tmp/r6-r3-r2-frozen.xml",
+        "targets": [
+          "tests/unit/du11_production/test_source_readability_generalization.py",
+          "tests/unit/du11_production/test_source_passage_admission.py",
+          "tests/unit/du11_production/test_source_passage_prefix_and_cause.py",
+          "tests/unit/du11_production/test_statement_grammar_runtime.py",
+          "tests/unit/du11_production/test_source_readability_deferred_selection.py",
+          "tests/integration/test_source_processing_handler_wire.py"
+        ]
+      },
+      {
+        "junit": "tmp/r6-r3-np-final.xml",
+        "targets": [
+          "tests/unit/du11_production/test_source_preparation_axes.py",
+          "tests/unit/du11_production/test_source_semantic_axes.py",
+          "tests/unit/du11_production/test_source_passage_admission.py::test_established_support_or_relevant_uncertainty_is_monotonic",
+          "tests/unit/document_understanding_selection/test_source_support_use.py::test_financial_terms_can_modify_a_real_supplied_or_functional_product"
+        ]
+      }
+    ]
+  },
+  "owner_intermediate": "C:/Users/郑曾波/Projects/company-wiki/.planning/architecture-quality-20261101/r3-independent/intermediate_owner_review.json",
+  "own_tmp": {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\z3",
+    "initially_absent": true,
+    "finally_absent": true,
+    "restored_initial_state": true
+  },
+  "frozen_after": {
+    "src/company_wiki/document_understanding/statement_grammar/__init__.py": "cf66d1b19a82e20691ea00a75b6403e5c958c4eb1f699a191048ea2a181348ee",
+    "src/company_wiki/document_understanding/statement_grammar/predicate_arguments.py": "207e0250cbe2aa7269dc2f021444577e38264791008b2ae8a15d0f76fcea2251",
+    "src/company_wiki/document_understanding/operating_states/assertion_roles.py": "9195e38d5c54f125bf8e0f0af2e8b455c123b47a4d490d3944347e429fa43737",
+    "src/company_wiki/source_catalog/narrative_source_passage.py": "74f96c7b0fd612b8771ee9ee090148842720e94c55cb74f06eb09022b17db7c6",
+    "src/company_wiki/source_catalog/narrative_source_context.py": "fcdc4a9223895a59e1da2ab8d2d71599c5ec74d19547cf2cfa53524ce9b7eb31",
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "1e6c181ca389e95380e001d2c34e029024eb4f0238d5e7e7d375dffebe700f50",
+    "tests/unit/du11_production/test_source_semantic_axes.py": "340ce52f3b82e47e39b604ce88fe6edf2ae16684fdffc89ee89bcb1dae7fd363",
+    "tests/unit/du11_production/test_source_preparation_axes.py": "a60694672b40b034b76c9313d066931d7e182229e35de0d6f8dcb2f0dc89fde9",
+    "tests/unit/test_source_contract_reader_port.py": "90586fdb5451e094efa6e52d72f9fe1187d4aac84151acd20f0639f66b567278",
+    "tests/unit/test_shared_reading_cache_precheck.py": "3f593fae9ef2a9f291d7e02c80370a50462eac341a08978d31297a161ee52309"
+  },
+  "all10_seals_unchanged": true,
+  "git_commit_checks": {
+    "src/company_wiki/document_understanding/statement_grammar/__init__.py": true,
+    "src/company_wiki/document_understanding/statement_grammar/predicate_arguments.py": true,
+    "src/company_wiki/document_understanding/operating_states/assertion_roles.py": true,
+    "src/company_wiki/source_catalog/narrative_source_passage.py": true,
+    "src/company_wiki/source_catalog/narrative_source_context.py": true,
+    "src/company_wiki/source_catalog/narrative_business_policy.py": true,
+    "tests/unit/du11_production/test_source_semantic_axes.py": true,
+    "tests/unit/du11_production/test_source_preparation_axes.py": true,
+    "tests/unit/test_source_contract_reader_port.py": true,
+    "tests/unit/test_shared_reading_cache_precheck.py": true
+  },
+  "independent_run": {
+    "passed": 18,
+    "failed": 5,
+    "seconds": 16.92,
+    "normal_host": true,
+    "python": "C:/Miniconda/python.exe -B -X utf8",
+    "junit_xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"5\" skipped=\"0\" tests=\"23\" time=\"16.918\" timestamp=\"2026-11-02T00:44:32.994858+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tmp.z3.test_review\" name=\"test_unseen_unproved_goal_never_gains_business_relevance_or_fact[Our platform supports remarkable ambitions.]\" time=\"7.746\"><failure message=\"AssertionError: ReadingBusinessAssessment(fact=OperatingFact(eligible=True, topics=('operating_mechanism',), reasons=('operating_mecha...n='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True))&#10;assert ('unresolved' != 'support' and not True)&#10; +  where 'unresolved' = SourcePassageCapability(use='unresolved', reason='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True).use&#10; +    where SourcePassageCapability(use='unresolved', reason='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True) = ReadingBusinessAssessment(fact=OperatingFact(eligible=True, topics=('operating_mechanism',), reasons=('operating_mecha...n='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True)).passage&#10; +  and   True = SourcePassageCapability(use='unresolved', reason='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True).relevant&#10; +    where SourcePassageCapability(use='unresolved', reason='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True) = ReadingBusinessAssessment(fact=OperatingFact(eligible=True, topics=('operating_mechanism',), reasons=('operating_mecha...n='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True)).passage\">..\\z3\\test_review.py:18: in test_unseen_unproved_goal_never_gains_business_relevance_or_fact\n    assert result.passage.use!='support' and not result.passage.relevant, result\nE   AssertionError: ReadingBusinessAssessment(fact=OperatingFact(eligible=True, topics=('operating_mechanism',), reasons=('operating_mecha...n='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True))\nE   assert ('unresolved' != 'support' and not True)\nE    +  where 'unresolved' = SourcePassageCapability(use='unresolved', reason='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True).use\nE    +    where SourcePassageCapability(use='unresolved', reason='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True) = ReadingBusinessAssessment(fact=OperatingFact(eligible=True, topics=('operating_mechanism',), reasons=('operating_mecha...n='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True)).passage\nE    +  and   True = SourcePassageCapability(use='unresolved', reason='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True).relevant\nE    +    where SourcePassageCapability(use='unresolved', reason='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True) = ReadingBusinessAssessment(fact=OperatingFact(eligible=True, topics=('operating_mechanism',), reasons=('operating_mecha...n='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True)).passage</failure></testcase><testcase classname=\"tmp.z3.test_review\" name=\"test_unseen_unproved_goal_never_gains_business_relevance_or_fact[Our platform supports promising possibilities.]\" time=\"0.011\"><failure message=\"AssertionError: ReadingBusinessAssessment(fact=OperatingFact(eligible=True, topics=('operating_mechanism',), reasons=('operating_mecha...n='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True))&#10;assert ('unresolved' != 'support' and not True)&#10; +  where 'unresolved' = SourcePassageCapability(use='unresolved', reason='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True).use&#10; +    where SourcePassageCapability(use='unresolved', reason='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True) = ReadingBusinessAssessment(fact=OperatingFact(eligible=True, topics=('operating_mechanism',), reasons=('operating_mecha...n='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True)).passage&#10; +  and   True = SourcePassageCapability(use='unresolved', reason='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True).relevant&#10; +    where SourcePassageCapability(use='unresolved', reason='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True) = ReadingBusinessAssessment(fact=OperatingFact(eligible=True, topics=('operating_mechanism',), reasons=('operating_mecha...n='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True)).passage\">..\\z3\\test_review.py:18: in test_unseen_unproved_goal_never_gains_business_relevance_or_fact\n    assert result.passage.use!='support' and not result.passage.relevant, result\nE   AssertionError: ReadingBusinessAssessment(fact=OperatingFact(eligible=True, topics=('operating_mechanism',), reasons=('operating_mecha...n='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True))\nE   assert ('unresolved' != 'support' and not True)\nE    +  where 'unresolved' = SourcePassageCapability(use='unresolved', reason='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True).use\nE    +    where SourcePassageCapability(use='unresolved', reason='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True) = ReadingBusinessAssessment(fact=OperatingFact(eligible=True, topics=('operating_mechanism',), reasons=('operating_mecha...n='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True)).passage\nE    +  and   True = SourcePassageCapability(use='unresolved', reason='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True).relevant\nE    +    where SourcePassageCapability(use='unresolved', reason='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True) = ReadingBusinessAssessment(fact=OperatingFact(eligible=True, topics=('operating_mechanism',), reasons=('operating_mecha...n='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True)).passage</failure></testcase><testcase classname=\"tmp.z3.test_review\" name=\"test_unseen_unproved_goal_never_gains_business_relevance_or_fact[Our platform supports unfamiliar technical endeavours.]\" time=\"0.009\"><failure message=\"AssertionError: ReadingBusinessAssessment(fact=OperatingFact(eligible=True, topics=('operating_mechanism',), reasons=('operating_mecha...n='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True))&#10;assert ('unresolved' != 'support' and not True)&#10; +  where 'unresolved' = SourcePassageCapability(use='unresolved', reason='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True).use&#10; +    where SourcePassageCapability(use='unresolved', reason='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True) = ReadingBusinessAssessment(fact=OperatingFact(eligible=True, topics=('operating_mechanism',), reasons=('operating_mecha...n='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True)).passage&#10; +  and   True = SourcePassageCapability(use='unresolved', reason='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True).relevant&#10; +    where SourcePassageCapability(use='unresolved', reason='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True) = ReadingBusinessAssessment(fact=OperatingFact(eligible=True, topics=('operating_mechanism',), reasons=('operating_mecha...n='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True)).passage\">..\\z3\\test_review.py:18: in test_unseen_unproved_goal_never_gains_business_relevance_or_fact\n    assert result.passage.use!='support' and not result.passage.relevant, result\nE   AssertionError: ReadingBusinessAssessment(fact=OperatingFact(eligible=True, topics=('operating_mechanism',), reasons=('operating_mecha...n='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True))\nE   assert ('unresolved' != 'support' and not True)\nE    +  where 'unresolved' = SourcePassageCapability(use='unresolved', reason='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True).use\nE    +    where SourcePassageCapability(use='unresolved', reason='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True) = ReadingBusinessAssessment(fact=OperatingFact(eligible=True, topics=('operating_mechanism',), reasons=('operating_mecha...n='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True)).passage\nE    +  and   True = SourcePassageCapability(use='unresolved', reason='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True).relevant\nE    +    where SourcePassageCapability(use='unresolved', reason='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True) = ReadingBusinessAssessment(fact=OperatingFact(eligible=True, topics=('operating_mechanism',), reasons=('operating_mecha...n='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True)).passage</failure></testcase><testcase classname=\"tmp.z3.test_review\" name=\"test_unseen_unproved_goal_never_gains_business_relevance_or_fact[We aim to pursue luminous horizons.]\" time=\"0.009\"><failure message=\"AssertionError: ReadingBusinessAssessment(fact=OperatingFact(eligible=False, topics=(), reasons=(), score=0, financial_exempt=False, p...n='source_readable_narrative', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True))&#10;assert ('support' != 'support')&#10; +  where 'support' = SourcePassageCapability(use='support', reason='source_readable_narrative', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True).use&#10; +    where SourcePassageCapability(use='support', reason='source_readable_narrative', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True) = ReadingBusinessAssessment(fact=OperatingFact(eligible=False, topics=(), reasons=(), score=0, financial_exempt=False, p...n='source_readable_narrative', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True)).passage\">..\\z3\\test_review.py:18: in test_unseen_unproved_goal_never_gains_business_relevance_or_fact\n    assert result.passage.use!='support' and not result.passage.relevant, result\nE   AssertionError: ReadingBusinessAssessment(fact=OperatingFact(eligible=False, topics=(), reasons=(), score=0, financial_exempt=False, p...n='source_readable_narrative', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True))\nE   assert ('support' != 'support')\nE    +  where 'support' = SourcePassageCapability(use='support', reason='source_readable_narrative', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True).use\nE    +    where SourcePassageCapability(use='support', reason='source_readable_narrative', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True) = ReadingBusinessAssessment(fact=OperatingFact(eligible=False, topics=(), reasons=(), score=0, financial_exempt=False, p...n='source_readable_narrative', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True)).passage</failure></testcase><testcase classname=\"tmp.z3.test_review\" name=\"test_unseen_unproved_goal_never_gains_business_relevance_or_fact[Our platform plans to support remarkable ambitions.]\" time=\"0.010\"><failure message=\"AssertionError: ReadingBusinessAssessment(fact=OperatingFact(eligible=False, topics=(), reasons=(), score=0, financial_exempt=False, p...n='source_readable_narrative', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True))&#10;assert ('support' != 'support')&#10; +  where 'support' = SourcePassageCapability(use='support', reason='source_readable_narrative', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True).use&#10; +    where SourcePassageCapability(use='support', reason='source_readable_narrative', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True) = ReadingBusinessAssessment(fact=OperatingFact(eligible=False, topics=(), reasons=(), score=0, financial_exempt=False, p...n='source_readable_narrative', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True)).passage\">..\\z3\\test_review.py:18: in test_unseen_unproved_goal_never_gains_business_relevance_or_fact\n    assert result.passage.use!='support' and not result.passage.relevant, result\nE   AssertionError: ReadingBusinessAssessment(fact=OperatingFact(eligible=False, topics=(), reasons=(), score=0, financial_exempt=False, p...n='source_readable_narrative', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True))\nE   assert ('support' != 'support')\nE    +  where 'support' = SourcePassageCapability(use='support', reason='source_readable_narrative', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True).use\nE    +    where SourcePassageCapability(use='support', reason='source_readable_narrative', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True) = ReadingBusinessAssessment(fact=OperatingFact(eligible=False, topics=(), reasons=(), score=0, financial_exempt=False, p...n='source_readable_narrative', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True)).passage</failure></testcase><testcase classname=\"tmp.z3.test_review\" name=\"test_unseen_unproved_goal_never_gains_business_relevance_or_fact[\\u6211\\u4eec\\u7684\\u5e73\\u53f0\\u8ba1\\u5212\\u652f\\u6301\\u5b8f\\u4f1f\\u613f\\u666f\\u3002]\" time=\"0.034\" /><testcase classname=\"tmp.z3.test_review\" name=\"test_unfamiliar_concrete_business_stays_readable[Our platform supports modular compressors.]\" time=\"0.008\" /><testcase classname=\"tmp.z3.test_review\" name=\"test_unfamiliar_concrete_business_stays_readable[Our platform supports cryogenic separators.]\" time=\"0.007\" /><testcase classname=\"tmp.z3.test_review\" name=\"test_unfamiliar_concrete_business_stays_readable[Our teams recover helium from exhausted gas streams.]\" time=\"0.008\" /><testcase classname=\"tmp.z3.test_review\" name=\"test_original_role_tristate_not_erased_by_fact_mask[Our software supports customer engagement.-False-context_only]\" time=\"0.004\" /><testcase classname=\"tmp.z3.test_review\" name=\"test_original_role_tristate_not_erased_by_fact_mask[Our platform supports outstanding goals.-None-unresolved]\" time=\"0.005\" /><testcase classname=\"tmp.z3.test_review\" name=\"test_coverage_qualifiers_preserved_without_current_event_upgrade[Our sales services cover 19 regional markets.]\" time=\"0.008\" /><testcase classname=\"tmp.z3.test_review\" name=\"test_coverage_qualifiers_preserved_without_current_event_upgrade[\\u672c\\u4f01\\u4e1a\\u7684\\u8f6f\\u4ef6\\u4ea7\\u54c1\\u8986\\u76d6\\u76ee\\u6807\\u529f\\u80fd\\u768438%\\u3002]\" time=\"0.007\" /><testcase classname=\"tmp.z3.test_review\" name=\"test_coverage_qualifiers_preserved_without_current_event_upgrade[Our software products are planned to cover 38 percent of target applications within four years.]\" time=\"0.011\" /><testcase classname=\"tmp.z3.test_review\" name=\"test_coverage_qualifiers_preserved_without_current_event_upgrade[According to a supplier, its equipment products cover 31% of the target process functions.]\" time=\"0.012\" /><testcase classname=\"tmp.z3.test_review\" name=\"test_wh_fragment_does_not_reenter_either_role_view\" time=\"0.008\" /><testcase classname=\"tmp.z3.test_review\" name=\"test_independent_finance_units_cannot_borrow_business_sentence\" time=\"2.460\" /><testcase classname=\"tmp.z3.test_review\" name=\"test_actual_recipe_binds_common_typing_and_context_helpers\" time=\"1.225\" /><testcase classname=\"tmp.architecture-r2.tests.unit.du11_production.test_source_preparation_axes\" name=\"test_bound_relation_owner_is_observed_once_for_true_and_false_results[Our sales services cover 17 regional markets.]\" time=\"0.041\" /><testcase classname=\"tmp.architecture-r2.tests.unit.du11_production.test_source_preparation_axes\" name=\"test_bound_relation_owner_is_observed_once_for_true_and_false_results[Our products cover 45% of revenue from equipment markets.]\" time=\"0.011\" /><testcase classname=\"tmp.architecture-r2.tests.unit.du11_production.test_source_preparation_axes\" name=\"test_no_typed_pre_scan_runs_before_shared_phase_budget_reservation\" time=\"0.011\" /><testcase classname=\"tmp.architecture-r2.tests.unit.du11_production.test_source_preparation_axes\" name=\"test_target_scans_are_precharged_and_memoized_with_the_shared_source_scope\" time=\"0.010\" /><testcase classname=\"tmp.architecture-r2.tests.unit.du11_production.test_source_semantic_axes\" name=\"test_unavailable_goal_binding_does_not_stop_an_independent_non_goal_typed_scope\" time=\"0.260\" /></testsuite></testsuites>",
+    "cases": [
+      {
+        "class": "tmp.z3.test_review",
+        "name": "test_unseen_unproved_goal_never_gains_business_relevance_or_fact[Our platform supports remarkable ambitions.]",
+        "seconds": "7.746",
+        "failure": [
+          {
+            "message": "AssertionError: ReadingBusinessAssessment(fact=OperatingFact(eligible=True, topics=('operating_mechanism',), reasons=('operating_mecha...n='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True))\nassert ('unresolved' != 'support' and not True)\n +  where 'unresolved' = SourcePassageCapability(use='unresolved', reason='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True).use\n +    where SourcePassageCapability(use='unresolved', reason='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True) = ReadingBusinessAssessment(fact=OperatingFact(eligible=True, topics=('operating_mechanism',), reasons=('operating_mecha...n='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True)).passage\n +  and   True = SourcePassageCapability(use='unresolved', reason='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True).relevant\n +    where SourcePassageCapability(use='unresolved', reason='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True) = ReadingBusinessAssessment(fact=OperatingFact(eligible=True, topics=('operating_mechanism',), reasons=('operating_mecha...n='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True)).passage"
+          }
+        ],
+        "error": []
+      },
+      {
+        "class": "tmp.z3.test_review",
+        "name": "test_unseen_unproved_goal_never_gains_business_relevance_or_fact[Our platform supports promising possibilities.]",
+        "seconds": "0.011",
+        "failure": [
+          {
+            "message": "AssertionError: ReadingBusinessAssessment(fact=OperatingFact(eligible=True, topics=('operating_mechanism',), reasons=('operating_mecha...n='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True))\nassert ('unresolved' != 'support' and not True)\n +  where 'unresolved' = SourcePassageCapability(use='unresolved', reason='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True).use\n +    where SourcePassageCapability(use='unresolved', reason='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True) = ReadingBusinessAssessment(fact=OperatingFact(eligible=True, topics=('operating_mechanism',), reasons=('operating_mecha...n='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True)).passage\n +  and   True = SourcePassageCapability(use='unresolved', reason='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True).relevant\n +    where SourcePassageCapability(use='unresolved', reason='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True) = ReadingBusinessAssessment(fact=OperatingFact(eligible=True, topics=('operating_mechanism',), reasons=('operating_mecha...n='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True)).passage"
+          }
+        ],
+        "error": []
+      },
+      {
+        "class": "tmp.z3.test_review",
+        "name": "test_unseen_unproved_goal_never_gains_business_relevance_or_fact[Our platform supports unfamiliar technical endeavours.]",
+        "seconds": "0.009",
+        "failure": [
+          {
+            "message": "AssertionError: ReadingBusinessAssessment(fact=OperatingFact(eligible=True, topics=('operating_mechanism',), reasons=('operating_mecha...n='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True))\nassert ('unresolved' != 'support' and not True)\n +  where 'unresolved' = SourcePassageCapability(use='unresolved', reason='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True).use\n +    where SourcePassageCapability(use='unresolved', reason='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True) = ReadingBusinessAssessment(fact=OperatingFact(eligible=True, topics=('operating_mechanism',), reasons=('operating_mecha...n='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True)).passage\n +  and   True = SourcePassageCapability(use='unresolved', reason='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True).relevant\n +    where SourcePassageCapability(use='unresolved', reason='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True) = ReadingBusinessAssessment(fact=OperatingFact(eligible=True, topics=('operating_mechanism',), reasons=('operating_mecha...n='source_payload_unresolved', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True)).passage"
+          }
+        ],
+        "error": []
+      },
+      {
+        "class": "tmp.z3.test_review",
+        "name": "test_unseen_unproved_goal_never_gains_business_relevance_or_fact[We aim to pursue luminous horizons.]",
+        "seconds": "0.009",
+        "failure": [
+          {
+            "message": "AssertionError: ReadingBusinessAssessment(fact=OperatingFact(eligible=False, topics=(), reasons=(), score=0, financial_exempt=False, p...n='source_readable_narrative', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True))\nassert ('support' != 'support')\n +  where 'support' = SourcePassageCapability(use='support', reason='source_readable_narrative', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True).use\n +    where SourcePassageCapability(use='support', reason='source_readable_narrative', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True) = ReadingBusinessAssessment(fact=OperatingFact(eligible=False, topics=(), reasons=(), score=0, financial_exempt=False, p...n='source_readable_narrative', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True)).passage"
+          }
+        ],
+        "error": []
+      },
+      {
+        "class": "tmp.z3.test_review",
+        "name": "test_unseen_unproved_goal_never_gains_business_relevance_or_fact[Our platform plans to support remarkable ambitions.]",
+        "seconds": "0.010",
+        "failure": [
+          {
+            "message": "AssertionError: ReadingBusinessAssessment(fact=OperatingFact(eligible=False, topics=(), reasons=(), score=0, financial_exempt=False, p...n='source_readable_narrative', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True))\nassert ('support' != 'support')\n +  where 'support' = SourcePassageCapability(use='support', reason='source_readable_narrative', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True).use\n +    where SourcePassageCapability(use='support', reason='source_readable_narrative', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True) = ReadingBusinessAssessment(fact=OperatingFact(eligible=False, topics=(), reasons=(), score=0, financial_exempt=False, p...n='source_readable_narrative', role='source_narrative', relevant=True, financial_only=False, assessment_complete=True)).passage"
+          }
+        ],
+        "error": []
+      },
+      {
+        "class": "tmp.z3.test_review",
+        "name": "test_unseen_unproved_goal_never_gains_business_relevance_or_fact[\\u6211\\u4eec\\u7684\\u5e73\\u53f0\\u8ba1\\u5212\\u652f\\u6301\\u5b8f\\u4f1f\\u613f\\u666f\\u3002]",
+        "seconds": "0.034",
+        "failure": [],
+        "error": []
+      },
+      {
+        "class": "tmp.z3.test_review",
+        "name": "test_unfamiliar_concrete_business_stays_readable[Our platform supports modular compressors.]",
+        "seconds": "0.008",
+        "failure": [],
+        "error": []
+      },
+      {
+        "class": "tmp.z3.test_review",
+        "name": "test_unfamiliar_concrete_business_stays_readable[Our platform supports cryogenic separators.]",
+        "seconds": "0.007",
+        "failure": [],
+        "error": []
+      },
+      {
+        "class": "tmp.z3.test_review",
+        "name": "test_unfamiliar_concrete_business_stays_readable[Our teams recover helium from exhausted gas streams.]",
+        "seconds": "0.008",
+        "failure": [],
+        "error": []
+      },
+      {
+        "class": "tmp.z3.test_review",
+        "name": "test_original_role_tristate_not_erased_by_fact_mask[Our software supports customer engagement.-False-context_only]",
+        "seconds": "0.004",
+        "failure": [],
+        "error": []
+      },
+      {
+        "class": "tmp.z3.test_review",
+        "name": "test_original_role_tristate_not_erased_by_fact_mask[Our platform supports outstanding goals.-None-unresolved]",
+        "seconds": "0.005",
+        "failure": [],
+        "error": []
+      },
+      {
+        "class": "tmp.z3.test_review",
+        "name": "test_coverage_qualifiers_preserved_without_current_event_upgrade[Our sales services cover 19 regional markets.]",
+        "seconds": "0.008",
+        "failure": [],
+        "error": []
+      },
+      {
+        "class": "tmp.z3.test_review",
+        "name": "test_coverage_qualifiers_preserved_without_current_event_upgrade[\\u672c\\u4f01\\u4e1a\\u7684\\u8f6f\\u4ef6\\u4ea7\\u54c1\\u8986\\u76d6\\u76ee\\u6807\\u529f\\u80fd\\u768438%\\u3002]",
+        "seconds": "0.007",
+        "failure": [],
+        "error": []
+      },
+      {
+        "class": "tmp.z3.test_review",
+        "name": "test_coverage_qualifiers_preserved_without_current_event_upgrade[Our software products are planned to cover 38 percent of target applications within four years.]",
+        "seconds": "0.011",
+        "failure": [],
+        "error": []
+      },
+      {
+        "class": "tmp.z3.test_review",
+        "name": "test_coverage_qualifiers_preserved_without_current_event_upgrade[According to a supplier, its equipment products cover 31% of the target process functions.]",
+        "seconds": "0.012",
+        "failure": [],
+        "error": []
+      },
+      {
+        "class": "tmp.z3.test_review",
+        "name": "test_wh_fragment_does_not_reenter_either_role_view",
+        "seconds": "0.008",
+        "failure": [],
+        "error": []
+      },
+      {
+        "class": "tmp.z3.test_review",
+        "name": "test_independent_finance_units_cannot_borrow_business_sentence",
+        "seconds": "2.460",
+        "failure": [],
+        "error": []
+      },
+      {
+        "class": "tmp.z3.test_review",
+        "name": "test_actual_recipe_binds_common_typing_and_context_helpers",
+        "seconds": "1.225",
+        "failure": [],
+        "error": []
+      },
+      {
+        "class": "tmp.architecture-r2.tests.unit.du11_production.test_source_preparation_axes",
+        "name": "test_bound_relation_owner_is_observed_once_for_true_and_false_results[Our sales services cover 17 regional markets.]",
+        "seconds": "0.041",
+        "failure": [],
+        "error": []
+      },
+      {
+        "class": "tmp.architecture-r2.tests.unit.du11_production.test_source_preparation_axes",
+        "name": "test_bound_relation_owner_is_observed_once_for_true_and_false_results[Our products cover 45% of revenue from equipment markets.]",
+        "seconds": "0.011",
+        "failure": [],
+        "error": []
+      },
+      {
+        "class": "tmp.architecture-r2.tests.unit.du11_production.test_source_preparation_axes",
+        "name": "test_no_typed_pre_scan_runs_before_shared_phase_budget_reservation",
+        "seconds": "0.011",
+        "failure": [],
+        "error": []
+      },
+      {
+        "class": "tmp.architecture-r2.tests.unit.du11_production.test_source_preparation_axes",
+        "name": "test_target_scans_are_precharged_and_memoized_with_the_shared_source_scope",
+        "seconds": "0.010",
+        "failure": [],
+        "error": []
+      },
+      {
+        "class": "tmp.architecture-r2.tests.unit.du11_production.test_source_semantic_axes",
+        "name": "test_unavailable_goal_binding_does_not_stop_an_independent_non_goal_typed_scope",
+        "seconds": "0.260",
+        "failure": [],
+        "error": []
+      }
+    ],
+    "reproducer_source": "from pathlib import Path\nimport hashlib\nimport pytest\nfrom company_wiki.source_catalog.narrative_business_policy import prepare_reading_business_assessment as prep, detect_business_fact\nfrom company_wiki.document_understanding.operating_states.assertion_roles import prepare_source_assertions\nfrom company_wiki.source_catalog.reading_recipe import business_algorithm_hashes\n\n@pytest.mark.parametrize('text',(\n 'Our platform supports remarkable ambitions.',\n 'Our platform supports promising possibilities.',\n 'Our platform supports unfamiliar technical endeavours.',\n 'We aim to pursue luminous horizons.',\n 'Our platform plans to support remarkable ambitions.',\n '我们的平台计划支持宏伟愿景。',\n))\ndef test_unseen_unproved_goal_never_gains_business_relevance_or_fact(text):\n    result=prep(text,{'relations':[]})\n    assert result.passage.use!='support' and not result.passage.relevant, result\n    assert not result.fact.eligible, result.fact\n\n@pytest.mark.parametrize('text',(\n 'Our platform supports modular compressors.',\n 'Our platform supports cryogenic separators.',\n 'Our teams recover helium from exhausted gas streams.',\n))\ndef test_unfamiliar_concrete_business_stays_readable(text):\n    observed=prep(text,{'relations':[]})\n    assert observed.passage.relevant\n    assert not {'operating_current_state','operating_milestone'}&set(observed.fact.reasons)\n\n@pytest.mark.parametrize(('text','state','use'),(\n ('Our software supports customer engagement.',False,'context_only'),\n ('Our platform supports outstanding goals.',None,'unresolved'),\n))\ndef test_original_role_tristate_not_erased_by_fact_mask(text,state,use):\n    before=prepare_source_assertions(text);after=prep(text,{'relations':[]})\n    assert before.operating and after.source_roles.operating\n    assert before.independent_payload is state and after.source_roles.independent_payload is state\n    assert after.passage.use==use and not after.passage.relevant and not after.fact.eligible\n\n@pytest.mark.parametrize('text',(\n 'Our sales services cover 19 regional markets.',\n '本企业的软件产品覆盖目标功能的38%。',\n 'Our software products are planned to cover 38 percent of target applications within four years.',\n 'According to a supplier, its equipment products cover 31% of the target process functions.',\n))\ndef test_coverage_qualifiers_preserved_without_current_event_upgrade(text):\n    observed=prep(text,{'relations':[]})\n    assert observed.fact.eligible and 'business_coverage_relation' in observed.fact.reasons\n    assert not {'operating_current_state','operating_milestone'}&set(observed.fact.reasons)\n    assert 'business_coverage_relation' not in detect_business_fact(text).reasons\n\n\ndef test_wh_fragment_does_not_reenter_either_role_view():\n    from company_wiki.source_catalog.narrative_source_passage import prepare_source_statement_scope\n    text='Which software processes customer billing records'\n    raw=prepare_source_assertions(text);scope=prepare_source_statement_scope(text,raw)\n    assert not scope.roles.clauses and scope.fact_roles is not None and not scope.fact_roles.clauses\n    observed=prep(text,{'relations':[]});assert not observed.fact.eligible and not observed.passage.relevant\n\n\ndef test_independent_finance_units_cannot_borrow_business_sentence():\n    from unit.document_understanding_selection.test_reading_production_selection import _document,_unit,_select\n    finance=['Revenue was $20 million.','Net income was $3 million.']\n    result=_select(_document(*[_unit(s,paragraph=i,kind='html_paragraph') for i,s in enumerate(finance)]))\n    assert not result.evidence_spans\n    business='Our product portfolio includes recycling systems.'\n    for texts in ((business,finance[1]),(finance[1],business)):\n        result=_select(_document(*[_unit(s,paragraph=i,kind='html_paragraph') for i,s in enumerate(texts)]))\n        assert {s.raw_text for s in result.evidence_spans}=={business}\n\n\ndef test_actual_recipe_binds_common_typing_and_context_helpers(monkeypatch):\n    from company_wiki.source_catalog import narrative_business_policy as owner\n    target=Path(owner.__file__).resolve();original=Path.read_bytes\n    name='company_wiki.source_catalog.narrative_business_policy'\n    before={pdf:business_algorithm_hashes(pdf_frontend=pdf) for pdf in (False,True)}\n    assert all(mapping[name]==hashlib.sha256(original(target).replace(b'\\r\\n',b'\\n')).hexdigest() for mapping in before.values())\n    def changed(path):\n        raw=original(path)\n        return raw+b'\\n# independent common typed-relation owner mutation\\n' if path.resolve()==target else raw\n    monkeypatch.setattr(Path,'read_bytes',changed)\n    assert all(business_algorithm_hashes(pdf_frontend=pdf)[name]!=before[pdf][name] for pdf in (False,True))\n",
+    "basetemp_length": 43,
+    "relocated": false
+  },
+  "independent_observations": [
+    {
+      "text": "Our platform supports remarkable ambitions.",
+      "raw_payload": null,
+      "source_roles": {
+        "clauses": [
+          {
+            "text": "Our platform supports remarkable ambitions.",
+            "operating": true,
+            "rule_purpose": "",
+            "independent_payload": null,
+            "payload_witnesses": [],
+            "material_payload": false,
+            "function_or_event": true,
+            "argument_targets": [
+              "remarkable ambitions."
+            ]
+          }
+        ],
+        "numeric_ambiguous": false,
+        "numeric_role": "unknown",
+        "bound_operating": false,
+        "raw_structure_complete": false,
+        "numeric_cells_observed": false,
+        "bound_payload": false
+      },
+      "passage": {
+        "use": "unresolved",
+        "reason": "source_payload_unresolved",
+        "role": "source_narrative",
+        "relevant": true,
+        "financial_only": false,
+        "assessment_complete": true
+      },
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "operating_mechanism"
+        ],
+        "reasons": [
+          "operating_mechanism"
+        ],
+        "score": 3,
+        "financial_exempt": false,
+        "purpose": "operating"
+      },
+      "syntax": {
+        "status": "independent",
+        "reason": "subject_predicate",
+        "argument_nominals": [
+          "ambitions"
+        ],
+        "weak_relation": false,
+        "argument_scopes": [
+          {
+            "predicate": "supports",
+            "argument_nominals": [
+              "ambitions"
+            ],
+            "attachment": "complement",
+            "argument_quantifiers": [],
+            "argument_modifiers": [
+              "remarkable"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "text": "Our platform supports promising possibilities.",
+      "raw_payload": null,
+      "source_roles": {
+        "clauses": [
+          {
+            "text": "Our platform supports promising possibilities.",
+            "operating": true,
+            "rule_purpose": "",
+            "independent_payload": null,
+            "payload_witnesses": [],
+            "material_payload": false,
+            "function_or_event": true,
+            "argument_targets": [
+              "promising possibilities."
+            ]
+          }
+        ],
+        "numeric_ambiguous": false,
+        "numeric_role": "unknown",
+        "bound_operating": false,
+        "raw_structure_complete": false,
+        "numeric_cells_observed": false,
+        "bound_payload": false
+      },
+      "passage": {
+        "use": "unresolved",
+        "reason": "source_payload_unresolved",
+        "role": "source_narrative",
+        "relevant": true,
+        "financial_only": false,
+        "assessment_complete": true
+      },
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "operating_mechanism"
+        ],
+        "reasons": [
+          "operating_mechanism"
+        ],
+        "score": 3,
+        "financial_exempt": false,
+        "purpose": "operating"
+      },
+      "syntax": {
+        "status": "independent",
+        "reason": "subject_predicate",
+        "argument_nominals": [
+          "possibilities"
+        ],
+        "weak_relation": false,
+        "argument_scopes": [
+          {
+            "predicate": "promising",
+            "argument_nominals": [
+              "possibilities"
+            ],
+            "attachment": "complement",
+            "argument_quantifiers": [],
+            "argument_modifiers": []
+          }
+        ]
+      }
+    },
+    {
+      "text": "Our platform supports unfamiliar technical endeavours.",
+      "raw_payload": null,
+      "source_roles": {
+        "clauses": [
+          {
+            "text": "Our platform supports unfamiliar technical endeavours.",
+            "operating": true,
+            "rule_purpose": "",
+            "independent_payload": null,
+            "payload_witnesses": [],
+            "material_payload": false,
+            "function_or_event": true,
+            "argument_targets": [
+              "unfamiliar technical endeavours."
+            ]
+          }
+        ],
+        "numeric_ambiguous": false,
+        "numeric_role": "unknown",
+        "bound_operating": false,
+        "raw_structure_complete": false,
+        "numeric_cells_observed": false,
+        "bound_payload": false
+      },
+      "passage": {
+        "use": "unresolved",
+        "reason": "source_payload_unresolved",
+        "role": "source_narrative",
+        "relevant": true,
+        "financial_only": false,
+        "assessment_complete": true
+      },
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "operating_mechanism"
+        ],
+        "reasons": [
+          "operating_mechanism"
+        ],
+        "score": 3,
+        "financial_exempt": false,
+        "purpose": "operating"
+      },
+      "syntax": {
+        "status": "independent",
+        "reason": "subject_predicate",
+        "argument_nominals": [
+          "endeavours"
+        ],
+        "weak_relation": false,
+        "argument_scopes": [
+          {
+            "predicate": "supports",
+            "argument_nominals": [
+              "endeavours"
+            ],
+            "attachment": "complement",
+            "argument_quantifiers": [],
+            "argument_modifiers": [
+              "unfamiliar",
+              "technical"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "text": "We aim to pursue luminous horizons.",
+      "raw_payload": null,
+      "source_roles": {
+        "clauses": [
+          {
+            "text": "We aim to pursue luminous horizons.",
+            "operating": false,
+            "rule_purpose": "",
+            "independent_payload": null,
+            "payload_witnesses": [],
+            "material_payload": false,
+            "function_or_event": false,
+            "argument_targets": []
+          }
+        ],
+        "numeric_ambiguous": false,
+        "numeric_role": "unknown",
+        "bound_operating": false,
+        "raw_structure_complete": false,
+        "numeric_cells_observed": false,
+        "bound_payload": false
+      },
+      "passage": {
+        "use": "support",
+        "reason": "source_readable_narrative",
+        "role": "source_narrative",
+        "relevant": true,
+        "financial_only": false,
+        "assessment_complete": true
+      },
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "syntax": {
+        "status": "independent",
+        "reason": "subject_predicate",
+        "argument_nominals": [
+          "horizons"
+        ],
+        "weak_relation": false,
+        "argument_scopes": [
+          {
+            "predicate": "pursue",
+            "argument_nominals": [
+              "horizons"
+            ],
+            "attachment": "complement",
+            "argument_quantifiers": [],
+            "argument_modifiers": [
+              "luminous"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "text": "Our software supports ambitious priorities.",
+      "raw_payload": null,
+      "source_roles": {
+        "clauses": [
+          {
+            "text": "Our software supports ambitious priorities.",
+            "operating": true,
+            "rule_purpose": "",
+            "independent_payload": null,
+            "payload_witnesses": [],
+            "material_payload": false,
+            "function_or_event": true,
+            "argument_targets": [
+              "ambitious priorities."
+            ]
+          }
+        ],
+        "numeric_ambiguous": false,
+        "numeric_role": "unknown",
+        "bound_operating": false,
+        "raw_structure_complete": false,
+        "numeric_cells_observed": false,
+        "bound_payload": false
+      },
+      "passage": {
+        "use": "unresolved",
+        "reason": "source_payload_unresolved",
+        "role": "source_narrative",
+        "relevant": true,
+        "financial_only": false,
+        "assessment_complete": true
+      },
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "operating_mechanism"
+        ],
+        "reasons": [
+          "operating_mechanism"
+        ],
+        "score": 3,
+        "financial_exempt": false,
+        "purpose": "operating"
+      },
+      "syntax": {
+        "status": "independent",
+        "reason": "subject_predicate",
+        "argument_nominals": [
+          "priorities"
+        ],
+        "weak_relation": false,
+        "argument_scopes": [
+          {
+            "predicate": "supports",
+            "argument_nominals": [
+              "priorities"
+            ],
+            "attachment": "complement",
+            "argument_quantifiers": [],
+            "argument_modifiers": [
+              "ambitious"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "text": "Our platform supports modular compressors.",
+      "raw_payload": null,
+      "source_roles": {
+        "clauses": [
+          {
+            "text": "Our platform supports modular compressors.",
+            "operating": true,
+            "rule_purpose": "",
+            "independent_payload": null,
+            "payload_witnesses": [],
+            "material_payload": false,
+            "function_or_event": true,
+            "argument_targets": [
+              "modular compressors."
+            ]
+          }
+        ],
+        "numeric_ambiguous": false,
+        "numeric_role": "unknown",
+        "bound_operating": false,
+        "raw_structure_complete": false,
+        "numeric_cells_observed": false,
+        "bound_payload": false
+      },
+      "passage": {
+        "use": "unresolved",
+        "reason": "source_payload_unresolved",
+        "role": "source_narrative",
+        "relevant": true,
+        "financial_only": false,
+        "assessment_complete": true
+      },
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "operating_mechanism"
+        ],
+        "reasons": [
+          "operating_mechanism"
+        ],
+        "score": 3,
+        "financial_exempt": false,
+        "purpose": "operating"
+      },
+      "syntax": {
+        "status": "independent",
+        "reason": "subject_predicate",
+        "argument_nominals": [
+          "compressors"
+        ],
+        "weak_relation": false,
+        "argument_scopes": [
+          {
+            "predicate": "supports",
+            "argument_nominals": [
+              "compressors"
+            ],
+            "attachment": "complement",
+            "argument_quantifiers": [],
+            "argument_modifiers": [
+              "modular"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "text": "Our platform supports cryogenic separators.",
+      "raw_payload": null,
+      "source_roles": {
+        "clauses": [
+          {
+            "text": "Our platform supports cryogenic separators.",
+            "operating": true,
+            "rule_purpose": "",
+            "independent_payload": null,
+            "payload_witnesses": [],
+            "material_payload": false,
+            "function_or_event": true,
+            "argument_targets": [
+              "cryogenic separators."
+            ]
+          }
+        ],
+        "numeric_ambiguous": false,
+        "numeric_role": "unknown",
+        "bound_operating": false,
+        "raw_structure_complete": false,
+        "numeric_cells_observed": false,
+        "bound_payload": false
+      },
+      "passage": {
+        "use": "unresolved",
+        "reason": "source_payload_unresolved",
+        "role": "source_narrative",
+        "relevant": true,
+        "financial_only": false,
+        "assessment_complete": true
+      },
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "operating_mechanism"
+        ],
+        "reasons": [
+          "operating_mechanism"
+        ],
+        "score": 3,
+        "financial_exempt": false,
+        "purpose": "operating"
+      },
+      "syntax": {
+        "status": "independent",
+        "reason": "subject_predicate",
+        "argument_nominals": [
+          "separators"
+        ],
+        "weak_relation": false,
+        "argument_scopes": [
+          {
+            "predicate": "supports",
+            "argument_nominals": [
+              "separators"
+            ],
+            "attachment": "complement",
+            "argument_quantifiers": [],
+            "argument_modifiers": [
+              "cryogenic"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "text": "Our teams recover helium from exhausted gas streams.",
+      "raw_payload": null,
+      "source_roles": {
+        "clauses": [
+          {
+            "text": "Our teams recover helium from exhausted gas streams.",
+            "operating": false,
+            "rule_purpose": "",
+            "independent_payload": null,
+            "payload_witnesses": [],
+            "material_payload": false,
+            "function_or_event": false,
+            "argument_targets": []
+          }
+        ],
+        "numeric_ambiguous": false,
+        "numeric_role": "unknown",
+        "bound_operating": false,
+        "raw_structure_complete": false,
+        "numeric_cells_observed": false,
+        "bound_payload": false
+      },
+      "passage": {
+        "use": "support",
+        "reason": "source_readable_narrative",
+        "role": "source_narrative",
+        "relevant": true,
+        "financial_only": false,
+        "assessment_complete": true
+      },
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "syntax": {
+        "status": "independent",
+        "reason": "subject_predicate",
+        "argument_nominals": [
+          "helium",
+          "gas",
+          "streams"
+        ],
+        "weak_relation": false,
+        "argument_scopes": [
+          {
+            "predicate": "recover",
+            "argument_nominals": [
+              "helium"
+            ],
+            "attachment": "complement",
+            "argument_quantifiers": [],
+            "argument_modifiers": []
+          },
+          {
+            "predicate": "exhausted",
+            "argument_nominals": [
+              "gas",
+              "streams"
+            ],
+            "attachment": "complement",
+            "argument_quantifiers": [],
+            "argument_modifiers": []
+          }
+        ]
+      }
+    },
+    {
+      "text": "Our software supports customer engagement.",
+      "raw_payload": false,
+      "source_roles": {
+        "clauses": [
+          {
+            "text": "Our software supports customer engagement.",
+            "operating": true,
+            "rule_purpose": "",
+            "independent_payload": false,
+            "payload_witnesses": [],
+            "material_payload": false,
+            "function_or_event": true,
+            "argument_targets": [
+              "customer engagement."
+            ]
+          }
+        ],
+        "numeric_ambiguous": false,
+        "numeric_role": "unknown",
+        "bound_operating": false,
+        "raw_structure_complete": false,
+        "numeric_cells_observed": false,
+        "bound_payload": false
+      },
+      "passage": {
+        "use": "context_only",
+        "reason": "source_generic_objective",
+        "role": "source_context",
+        "relevant": false,
+        "financial_only": false,
+        "assessment_complete": true
+      },
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "syntax": {
+        "status": "independent",
+        "reason": "subject_predicate",
+        "argument_nominals": [
+          "customer",
+          "engagement"
+        ],
+        "weak_relation": false,
+        "argument_scopes": [
+          {
+            "predicate": "supports",
+            "argument_nominals": [
+              "customer",
+              "engagement"
+            ],
+            "attachment": "complement",
+            "argument_quantifiers": [],
+            "argument_modifiers": []
+          }
+        ]
+      }
+    },
+    {
+      "text": "Our platform supports outstanding goals.",
+      "raw_payload": null,
+      "source_roles": {
+        "clauses": [
+          {
+            "text": "Our platform supports outstanding goals.",
+            "operating": true,
+            "rule_purpose": "",
+            "independent_payload": null,
+            "payload_witnesses": [],
+            "material_payload": false,
+            "function_or_event": true,
+            "argument_targets": [
+              "outstanding goals."
+            ]
+          }
+        ],
+        "numeric_ambiguous": false,
+        "numeric_role": "unknown",
+        "bound_operating": false,
+        "raw_structure_complete": false,
+        "numeric_cells_observed": false,
+        "bound_payload": false
+      },
+      "passage": {
+        "use": "unresolved",
+        "reason": "source_payload_unresolved",
+        "role": "source_context",
+        "relevant": false,
+        "financial_only": false,
+        "assessment_complete": true
+      },
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "syntax": {
+        "status": "independent",
+        "reason": "subject_predicate",
+        "argument_nominals": [
+          "goals"
+        ],
+        "weak_relation": false,
+        "argument_scopes": [
+          {
+            "predicate": "supports",
+            "argument_nominals": [
+              "goals"
+            ],
+            "attachment": "complement",
+            "argument_quantifiers": [],
+            "argument_modifiers": [
+              "outstanding"
+            ]
+          }
+        ]
+      }
+    },
+    {
+      "text": "我们的平台支持宏伟愿景。",
+      "raw_payload": null,
+      "source_roles": {
+        "clauses": [
+          {
+            "text": "我们的平台支持宏伟愿景",
+            "operating": true,
+            "rule_purpose": "",
+            "independent_payload": null,
+            "payload_witnesses": [],
+            "material_payload": false,
+            "function_or_event": true,
+            "argument_targets": [
+              "宏伟愿景"
+            ]
+          }
+        ],
+        "numeric_ambiguous": false,
+        "numeric_role": "unknown",
+        "bound_operating": false,
+        "raw_structure_complete": false,
+        "numeric_cells_observed": false,
+        "bound_payload": false
+      },
+      "passage": {
+        "use": "unresolved",
+        "reason": "source_payload_unresolved",
+        "role": "source_context",
+        "relevant": false,
+        "financial_only": false,
+        "assessment_complete": true
+      },
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "syntax": {
+        "status": "independent",
+        "reason": "subject_predicate",
+        "argument_nominals": [
+          "景"
+        ],
+        "weak_relation": false,
+        "argument_scopes": [
+          {
+            "predicate": "愿",
+            "argument_nominals": [
+              "景"
+            ],
+            "attachment": "complement",
+            "argument_quantifiers": [],
+            "argument_modifiers": []
+          }
+        ]
+      }
+    },
+    {
+      "text": "Our sales services cover 19 regional markets.",
+      "raw_payload": null,
+      "source_roles": {
+        "clauses": [
+          {
+            "text": "Our sales services cover 19 regional markets.",
+            "operating": true,
+            "rule_purpose": "",
+            "independent_payload": null,
+            "payload_witnesses": [],
+            "material_payload": false,
+            "function_or_event": true,
+            "argument_targets": [
+              "19 regional markets."
+            ]
+          }
+        ],
+        "numeric_ambiguous": false,
+        "numeric_role": "unknown",
+        "bound_operating": false,
+        "raw_structure_complete": false,
+        "numeric_cells_observed": false,
+        "bound_payload": true
+      },
+      "passage": {
+        "use": "support",
+        "reason": "source_business_relation",
+        "role": "source_narrative",
+        "relevant": true,
+        "financial_only": false,
+        "assessment_complete": true
+      },
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "business_coverage_relation",
+          "operating_mechanism"
+        ],
+        "reasons": [
+          "business_coverage_relation",
+          "operating_mechanism"
+        ],
+        "score": 3,
+        "financial_exempt": true,
+        "purpose": "operating"
+      },
+      "syntax": {
+        "status": "fragment",
+        "reason": "no_matrix_predicate",
+        "argument_nominals": [],
+        "weak_relation": false,
+        "argument_scopes": []
+      }
+    }
+  ],
+  "observation_source": "from pathlib import Path\nimport json,sys\nfrom dataclasses import asdict\nw=Path('C:/Users/郑曾波/Projects/company-wiki/tmp/architecture-r2');sys.path[:0]=[str(w/'src'),str(w/'tests')]\nfrom company_wiki.source_catalog.narrative_business_policy import prepare_reading_business_assessment as prep\nfrom company_wiki.document_understanding.operating_states.assertion_roles import prepare_source_assertions\nfrom company_wiki.document_understanding.statement_grammar import observe_statement\nrows=[]\nfor text in [\n 'Our platform supports remarkable ambitions.',\n 'Our platform supports promising possibilities.',\n 'Our platform supports unfamiliar technical endeavours.',\n 'We aim to pursue luminous horizons.',\n 'Our software supports ambitious priorities.',\n 'Our platform supports modular compressors.',\n 'Our platform supports cryogenic separators.',\n 'Our teams recover helium from exhausted gas streams.',\n 'Our software supports customer engagement.',\n 'Our platform supports outstanding goals.',\n '我们的平台支持宏伟愿景。',\n 'Our sales services cover 19 regional markets.',\n]:\n a=prep(text,{'relations':[]});rows.append({'text':text,'raw_payload':prepare_source_assertions(text).independent_payload,'prepared_payload':a.source_roles.independent_payload,'source_roles':asdict(a.source_roles),'passage':asdict(a.passage),'fact':asdict(a.fact),'syntax':asdict(observe_statement(text))})\nPath(sys.argv[1]).write_text(json.dumps(rows,ensure_ascii=False,indent=2),encoding='utf8');print(json.dumps([{'text':x['text'],'raw_payload':x['raw_payload'],'prepared_payload':x['prepared_payload'],'passage':x['passage'],'fact':x['fact']} for x in rows],ensure_ascii=False,indent=2))\n",
+  "observation_probe_own_error": "Public computed SourceAssertionRoles.independent_payload is not included by dataclasses.asdict. Console formatting tried that key and errored after all12 observations had already been saved; read saved JSON directly and corrected self-owned formatter, no product rerun or source change.",
+  "author_junit_checks": [
+    {
+      "name": "r6-r3-ci-red",
+      "exists": true,
+      "sha_matches": true,
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "20",
+          "skipped": "0",
+          "tests": "415",
+          "time": "22.949",
+          "timestamp": "2026-11-02T00:03:05.224111+00:00",
+          "hostname": "DESKTOP-156V213"
+        }
+      ]
+    },
+    {
+      "name": "r6-r3-axes-red",
+      "exists": true,
+      "sha_matches": true,
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "7",
+          "skipped": "0",
+          "tests": "9",
+          "time": "28.920",
+          "timestamp": "2026-11-02T00:12:31.705711+00:00",
+          "hostname": "DESKTOP-156V213"
+        }
+      ]
+    },
+    {
+      "name": "r6-r3-ci-green1",
+      "exists": true,
+      "sha_matches": true,
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "1",
+          "skipped": "0",
+          "tests": "424",
+          "time": "78.930",
+          "timestamp": "2026-11-02T00:19:28.108932+00:00",
+          "hostname": "DESKTOP-156V213"
+        }
+      ]
+    },
+    {
+      "name": "r6-r3-r2-regression",
+      "exists": true,
+      "sha_matches": true,
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "6",
+          "skipped": "0",
+          "tests": "367",
+          "time": "64.446",
+          "timestamp": "2026-11-02T00:24:16.002145+00:00",
+          "hostname": "DESKTOP-156V213"
+        }
+      ]
+    },
+    {
+      "name": "r6-r3-head-red",
+      "exists": true,
+      "sha_matches": true,
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "4",
+          "skipped": "0",
+          "tests": "16",
+          "time": "24.264",
+          "timestamp": "2026-11-02T00:27:42.337205+00:00",
+          "hostname": "DESKTOP-156V213"
+        }
+      ]
+    },
+    {
+      "name": "r6-r3-head-green",
+      "exists": true,
+      "sha_matches": true,
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0",
+          "tests": "24",
+          "time": "15.857",
+          "timestamp": "2026-11-02T00:28:35.635891+00:00",
+          "hostname": "DESKTOP-156V213"
+        }
+      ]
+    },
+    {
+      "name": "r6-r3-ci-final",
+      "exists": true,
+      "sha_matches": true,
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "1",
+          "skipped": "0",
+          "tests": "431",
+          "time": "36.008",
+          "timestamp": "2026-11-02T00:29:13.440906+00:00",
+          "hostname": "DESKTOP-156V213"
+        }
+      ]
+    },
+    {
+      "name": "r6-r3-r2-final",
+      "exists": true,
+      "sha_matches": true,
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "2",
+          "skipped": "0",
+          "tests": "355",
+          "time": "55.836",
+          "timestamp": "2026-11-02T00:29:13.439805+00:00",
+          "hostname": "DESKTOP-156V213"
+        }
+      ]
+    },
+    {
+      "name": "r6-r3-np-green",
+      "exists": true,
+      "sha_matches": true,
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "1",
+          "skipped": "0",
+          "tests": "27",
+          "time": "19.142",
+          "timestamp": "2026-11-02T00:31:26.548554+00:00",
+          "hostname": "DESKTOP-156V213"
+        }
+      ]
+    },
+    {
+      "name": "r6-r3-nominal-red",
+      "exists": true,
+      "sha_matches": true,
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "1",
+          "skipped": "0",
+          "tests": "1",
+          "time": "4.662",
+          "timestamp": "2026-11-02T00:32:50.663365+00:00",
+          "hostname": "DESKTOP-156V213"
+        }
+      ]
+    },
+    {
+      "name": "r6-r3-np-final",
+      "exists": true,
+      "sha_matches": true,
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0",
+          "tests": "121",
+          "time": "21.801",
+          "timestamp": "2026-11-02T00:33:05.768832+00:00",
+          "hostname": "DESKTOP-156V213"
+        }
+      ]
+    },
+    {
+      "name": "r6-r3-ci-frozen",
+      "exists": true,
+      "sha_matches": true,
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0",
+          "tests": "433",
+          "time": "32.929",
+          "timestamp": "2026-11-02T00:34:09.604712+00:00",
+          "hostname": "DESKTOP-156V213"
+        }
+      ]
+    },
+    {
+      "name": "r6-r3-r2-frozen",
+      "exists": true,
+      "sha_matches": true,
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0",
+          "tests": "262",
+          "time": "46.836",
+          "timestamp": "2026-11-02T00:34:09.599540+00:00",
+          "hostname": "DESKTOP-156V213"
+        }
+      ]
+    }
+  ],
+  "original_oracle_changes": {
+    "tests/unit/document_understanding_selection/test_reading_native_continuity.py": {
+      "baseline_blob_sha256": "08d2ef04ad5dd3c5352b608880d5926ce411c3a92721f08d7bc8a93f19e7bb5e",
+      "candidate_blob_sha256": "08d2ef04ad5dd3c5352b608880d5926ce411c3a92721f08d7bc8a93f19e7bb5e",
+      "unchanged": true
+    },
+    "tests/unit/document_understanding_selection/test_reading_value_coverage.py": {
+      "baseline_blob_sha256": "5b4ae4b2215ef9893e1cdcedb8f857bedd95c78621d3fb8790900c27a76e9f9a",
+      "candidate_blob_sha256": "5b4ae4b2215ef9893e1cdcedb8f857bedd95c78621d3fb8790900c27a76e9f9a",
+      "unchanged": true
+    },
+    "tests/unit/document_understanding_selection/test_source_support_use.py": {
+      "baseline_blob_sha256": "9391c3b2df4738c2feafabac328ef3ff9c6457955d9cb937842389bd658e0335",
+      "candidate_blob_sha256": "9391c3b2df4738c2feafabac328ef3ff9c6457955d9cb937842389bd658e0335",
+      "unchanged": true
+    },
+    "tests/unit/du11_production/test_business_coverage_relations.py": {
+      "baseline_blob_sha256": "65925870e6cb25d2eb7324058a66672fba13e1b433847b146b9c980586019a15",
+      "candidate_blob_sha256": "65925870e6cb25d2eb7324058a66672fba13e1b433847b146b9c980586019a15",
+      "unchanged": true
+    },
+    "tests/unit/du11_production/test_source_information_payload.py": {
+      "baseline_blob_sha256": "25fef15ddb53cb0f7fc942d2a7cee9243a6d8f2ab933e561c3419dbf39a07f5a",
+      "candidate_blob_sha256": "25fef15ddb53cb0f7fc942d2a7cee9243a6d8f2ab933e561c3419dbf39a07f5a",
+      "unchanged": true
+    },
+    "tests/unit/test_shared_reading_cache_precheck.py": {
+      "baseline_blob_sha256": "0517a05bf03935e520cef380b4e81c94b883654915d9ec86b9497e2ce570802d",
+      "candidate_blob_sha256": "016bdaca04c30db3d76cac1ced04aa3e8c281f91f0954f641ab70d955e7e6b13",
+      "unchanged": false
+    },
+    "tests/unit/test_source_contract_reader_port.py": {
+      "baseline_blob_sha256": "867d613e7e0398c7102d0e9a9ae145b214092aaa191c2e15ca0a6d714e63f2f3",
+      "candidate_blob_sha256": "11ff8f9dd07b7588b79469341a2b07b47bee6c3c99f6996ba266c5e8fe02d5d6",
+      "unchanged": false
+    }
+  },
+  "findings": [
+    {
+      "id": "R6-R3-A01",
+      "priority": "P2",
+      "common_owner": "source_catalog.narrative_source_context argument relevance + fact role admission",
+      "summary": "Unseen promotional/goal heads classified specific by exclusion, preserving fact_roles and upgrading unknown weak targets into eligible operating_mechanism/relevance or goals into support.",
+      "source_locations": [
+        "src/company_wiki/source_catalog/narrative_source_context.py:_argument_relevance",
+        "src/company_wiki/source_catalog/narrative_source_context.py:_nominal_relevance",
+        "src/company_wiki/source_catalog/narrative_source_context.py:source_clause_context",
+        "src/company_wiki/source_catalog/narrative_business_policy.py:_detect_reading_business_fact"
+      ],
+      "minimal_examples": [
+        "Our platform supports remarkable ambitions.",
+        "Our platform supports promising possibilities.",
+        "Our platform supports unfamiliar technical endeavours.",
+        "We aim to pursue luminous horizons.",
+        "Our platform plans to support remarkable ambitions."
+      ],
+      "negative_controls_that_pass": [
+        "Our platform supports outstanding goals.",
+        "我们的平台计划支持宏伟愿景。"
+      ],
+      "positive_controls_that_pass": [
+        "Our platform supports modular compressors.",
+        "Our platform supports cryogenic separators.",
+        "Our teams recover helium from exhausted gas streams."
+      ],
+      "expected": "Unknown/unproved goal kept unresolved without positive business proof, not an expanding list of words; preserve useful unfamiliar concrete source text via its existing role mechanisms.",
+      "root_notified": true,
+      "author_notified": true
+    }
+  ],
+  "additional_static_risk": {
+    "scope": "not separately asserted as a new empirical failure",
+    "detail": "_independent_reading_relation correctly intersects original independent kinds, but _detect_reading_business_fact payload_observations still usesbool(relations). Align strong-proof use in callback and projection; not every qualitative label is bound proof."
+  },
+  "owner_boundary_carry": {
+    "report": "C:/Users/郑曾波/Projects/company-wiki/.planning/architecture-quality-20261101/r3-independent/intermediate_owner_review.json",
+    "passed": 7,
+    "seconds": 8.06,
+    "same_two_test_seals": true,
+    "not_rerun": true
+  },
+  "not_accepted_or_not_run": [
+    "Source semantic engineering release dueP2",
+    "full exact candidate CI",
+    "realH1",
+    "paid summary/persistent recovery/RF adoption",
+    "whole project completion",
+    "W23 re-review",
+    "433/262/121/full35 repetition"
+  ],
+  "root_after_review_release": {
+    "source_R4_editing_authorized": true,
+    "current_worktree_may_change": true,
+    "new_tests_after_release": false,
+    "no_end_of_review_reseal_required": true,
+    "scope": "All10seal and Git commit checks record the actual a684 test window before ROOT releasedR4; no currentR4 acceptance implied.",
+    "R4_direction_from_root": "Unify prepared relation reasons+independent_payload, remove operating=True to mechanism shortcut, unknown weak goals stay unproved; any prior newly invented POS→support assumption needs explicit erratum, old originaloracles/history stay intact."
+  },
+  "author_artifact_all_found_and_matched": true,
+  "reviewer_write_scope": [
+    "implementation-results/R6-independent-ci-r3.md/json",
+    ".planning/architecture-quality-20261101/r3-independent design/intermediate records",
+    "self-owned tmp/z3 temporary probes (removed)"
+  ]
+}

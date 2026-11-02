@@ -1,0 +1,10 @@
+{
+  "schema": "w23-root-derived-cleanup/1",
+  "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-w23-xiaomi-ocr-r1\\.w23_cache\\r1_pages\\r1_wanhua_qa2021_p003.png",
+  "bytes": 579214,
+  "sha256": "097eaf47d1da132c80a64dfdd42ca81c72d3b559969ca552b6bc7fb1d00478fc",
+  "exists_after": false,
+  "reason": "generated QA page PNG; original R1 task requires removal after tests",
+  "original_documents_touched": false,
+  "models_and_other_caches_touched": false
+}

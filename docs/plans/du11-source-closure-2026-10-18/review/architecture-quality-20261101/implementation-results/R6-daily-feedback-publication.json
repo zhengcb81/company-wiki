@@ -1,0 +1,32 @@
+{
+  "schema": "daily-feedback-publication/1",
+  "code_head": "819cef31a4f2db7fa05bfe50901725f7a0dad016",
+  "engineering": "INDEPENDENT_PASS_CANDIDATE_FULL_CI_PASS_MASTER_FF",
+  "independent_report": "R6-daily-feedback-independent.json",
+  "independent_tests": "10P/16.55s",
+  "author_tests": "173P/121.78s including hermetic real hook pushes",
+  "candidate_push": {
+    "head": "819cef31a4f2db7fa05bfe50901725f7a0dad016",
+    "returncode": 0,
+    "elapsed_s": 56.584
+  },
+  "candidate_pre_push": "167P/45.52s",
+  "candidate_exact_ci": {
+    "id": 41370513762,
+    "head_sha": "819cef31a4f2db7fa05bfe50901725f7a0dad016",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41370513762",
+    "created_at": "2026-11-02T01:04:30Z",
+    "updated_at": "2026-11-02T01:09:23Z"
+  },
+  "main_merge": {
+    "head": "819cef31a4f2db7fa05bfe50901725f7a0dad016",
+    "merge": "ff-only",
+    "all_existing_tracked_wip_bytes_preserved": true,
+    "protected_paths": 12
+  },
+  "main_push": "pending PWF commit",
+  "change": "fixed existing smoke once; no AST graph or impacted-file expansion; nonruntime0pytest; timeout/caps/error propagation/full CI retained",
+  "source_semantic_candidate_included": false
+}

@@ -1,0 +1,18 @@
+{
+  "entries": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r6paid",
+      "files": 1,
+      "logical_bytes": 172032.0,
+      "exists_after": false
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r6paid-host",
+      "files": 125,
+      "logical_bytes": 12215971.0,
+      "exists_after": false
+    }
+  ],
+  "schema": "r6-owned-unit-temp-cleanup/1",
+  "no_original_or_model_files": true
+}

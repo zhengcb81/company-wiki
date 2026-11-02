@@ -1,0 +1,62 @@
+{
+  "schema_version": "architecture-owner-boundary-repair/1",
+  "status": "AUTHOR_GREEN_AWAITING_ROOT_REVIEW",
+  "worktree": "C:/Users/郑曾波/Projects/company-wiki/tmp/architecture-r2",
+  "baseline_head": "9f575810ca92620a6fb6ff63cfd326a5b9f076fa",
+  "baseline_ci_run": "41364303788",
+  "production_source_changes": [],
+  "changed_files": {
+    "tests/unit/test_source_contract_reader_port.py": "90586fdb5451e094efa6e52d72f9fe1187d4aac84151acd20f0639f66b567278",
+    "tests/unit/test_shared_reading_cache_precheck.py": "3f593fae9ef2a9f291d7e02c80370a50462eac341a08978d31297a161ee52309"
+  },
+  "red": [
+    {
+      "scope": "original two targeted tests, explicit PYTHONPATH=src;tests",
+      "failed": 1,
+      "passed": 1,
+      "seconds": 4.53,
+      "failure": "partial inventory injection patches old DU compatibility owner, not live source composition owner"
+    },
+    {
+      "scope": "original pure identity subprocess test, PYTHONPATH removed",
+      "failed": 1,
+      "passed": 0,
+      "seconds": 4.65,
+      "failure": "ModuleNotFoundError: No module named company_wiki.source_contract.source_version",
+      "root_cause": "pytest conftest sys.path is not inherited by child python; candidate source was never explicitly bound"
+    }
+  ],
+  "green": {
+    "command": "C:/Miniconda/python.exe -B -X utf8 -m pytest tests/unit/test_source_contract_reader_port.py tests/unit/test_shared_reading_cache_precheck.py -q --disable-warnings --tb=short",
+    "environment": "PYTHONPATH removed; normal host; Python 3.13.9",
+    "passed": 35,
+    "failed": 0,
+    "seconds": 27.16,
+    "exit_code": 0,
+    "ruff": "PASS",
+    "diff_check": "PASS"
+  },
+  "countercontrols": [
+    "candidate pure contract imports with PYTHONPATH absent",
+    "candidate pure contract imports with PYTHONPATH targeting unrelated deliberately broken package",
+    "candidate module.__file__ equals explicit source root",
+    "pure contract catalog dependency is blocked and deliberately injected catalog import fails",
+    "partial live owner trace never reaches broken same comparator",
+    "complete live owner trace reaches comparator once with exact arguments"
+  ],
+  "bound_readonly_owner_sha256": {
+    "src/company_wiki/source_contract/source_version.py": "2bbdb09579cb68bae4e4a7de94998e6317137f463e9e4f6868b66d247fbf488c",
+    "src/company_wiki/automation/narrative_generation.py": "f74c9af32c239bebbf867cc1e41618a11ca24092d3c80b7a761965bf519578d3"
+  },
+  "operations_not_performed": ["git write", "commit", "merge", "push", "full suite", "real document access", "model call", "download", "credential read", "production config/database change"],
+  "temporary_directory_cleanup": {
+    "status": "NOT_VERIFIED",
+    "owned_basetemp": null,
+    "initial_absence_verified": false,
+    "reason": "Run logs did not bind an owned basetemp; pytest tmp_path does not prove automatic directory removal and default basetemp may be retained.",
+    "action": "Unattributable temporary files retained; no guessed-path deletion performed.",
+    "next_run": "Use an explicit owned basetemp, record initial state and validate containment before narrowly restoring it."
+  },
+  "remaining": ["ROOT independent review", "ROOT coordinated commit and candidate CI"],
+  "agent_state": "STOP"
+}

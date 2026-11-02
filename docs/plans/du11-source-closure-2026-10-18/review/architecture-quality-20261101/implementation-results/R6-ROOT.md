@@ -57,3 +57,47 @@ W23资料独审判PARTIAL可接收/工具工程不通过，6原件与970冻结�
 ## A独审新P2（不得签整合通过）
 
 746定点绿后独立14未见样例发现具体动作被抽象尾语吞掉：We aim to reopen neonatal wards and create value.→context，但倒序support；commit to treating rare diseases and creating value也错误排除。根因grammar只取最后verb后的nominal补语，而非并列predicate各自scope。已交同grammar owner先新RED再根修，要求and/or/but、嵌套/中文并列与beneficiary-only抽象目标反控，不加行业词/and特判/抬额度，不重复746。当前本地冻结commit仅保存未验收进度，未push或并master。
+
+## 同根错误传播质量修复（不混入63旧失败计数）
+
+sandbox paid故障暴露另一个真实框架质量问题：frozen dataclass Exception阻止contextlib写__traceback__，清理阶段将原有code/cause掩为FrozenInstanceError。只读AST检查runtime发现同模式4类（model caller、select、summary、verify）；新标准context cleanup测试先3真RED+1测试构造失误（HandlerMetrics必填字段），纠正构造后4/4真RED/3.03s。仅移除这4个异常类的frozen（普通source值/limits/receipt仍不可变、所有原字段校验保持），4新+21caller既有回归25P/2.52s，Ruff绿。跨类一次根修，没有为特定异常写wrapper或改预算、CAS、模型逻辑。待最终集中独审，不开新微门禁。
+
+## W23独立接收与候选集成
+
+新工具ae438a32通过真正独审，原4RED与marker前死亡/10case均绿，历史实验total_elapsed=null/1800合规未证、峰值限制与小米精度仍PARTIAL。原R1卡要求新增PNG清理，ROOT非盲删：精确路径/非reparse/PNG魔数/579214B/SHA均匹配后仅删最后生成QA页，收据R6-W23-derived-cleanup.json；原PDF/模型/其余cache未动。自身两付费测试短目录126文件12388003逻辑B清理，非实际磁盘节省测量。
+
+W23自有branch已统一codex/architecture-w23-repair-20261101，以复用同一现有CI触发；合最新稳定master3349时仅README冲突，保留新R1恢复段并解决，runtime3blob与ae438完全一致、src/config/依赖与master相同。候选6b70394b先独立CI，不等待源语义R2，也不切生产OCR。首push仅因sparse未取原hook35入口而0例未跑被拒，已补测试/脚本/config工程目录（无companies）后正常重推；不改测试/跳hook。
+
+主线语义R2收敛在通用goal/predicate直接补语作用域：不将beneficiary relative/数字借为独立proof，未知量化目标保原文unresolved而不新造metric owner；未改原模型/全局额度。
+
+W23首轮稀疏修补仍缺tests/fixtures导致normal165P/2missingF。已按Git metadata系统核全tests1177文件仅10,717,405逻辑B、最大文件123069B（没有公司原件/模型），改为统一完整工程cone-sparse：src/tests/scripts/tools/config/.githooks/.github＋本卡docs/delivery，不再逐test加例外。只有本卡工程小夹具、无companies目录；后续总控工区照同模板，避免harness交付能跑专属测试却不能运行原hook的共同问题。
+
+W23候选6b70394b精确CI41363162079 success，normal167P/57.59s。已FF主线并逐SHA保护在途ROOT文档/hook，生产src/config/依赖与稳定master相同；42工具/测试/交接文件接受，原实验数据PARTIAL，未切OCR/未跑模型。R6源745a72d3已本地正常Ruff/mypy全src保存，r2独立22项绿/16.84s，待正式报告与完整候选CI，不冒全域已过。
+
+R6-r2最终独审正式PASS：22P/16.84s、12文件前后SHA同；原并列P2范围闭合，4Exception根修也过独立测试；不冒322/746重跑或真实H1/fullCI。后续候选745a72d3已合W23稳定master，正常push/完整CI进行中。原63失败和A1 NEEDS_FIXES收据保留，注册表更新为R6 bounded-independent pass/fullCI pending。
+
+
+## R6精确候选CI22F（2026-11-02）
+
+CI41364303788已失败，unit324s非超时。新摘要成功保全12失败群/22case，原63F及A1失败仍保留；R3按source语义、纯合同导入/partial-cache原owner根修，不并红候选、不跑新真实资料或模型。ROOT marker单项1F/16.24s已归source同根coverage问题，不重复另修。W23候选全CI绿，只先发布该独立工具及本PWF。
+
+
+W23工具与已完成PWF已848b4ee0正常推送master，normal prepush234P/95.44s。Git push实返回0；随后ROOT只读显示混编码Git日志时UnicodeDecodeError属于显示包装错误，原log/JSON均保留，不把成功推送称平台阻塞。当前源候选仍9f的22F隔离返修，T3未冒开工。
+
+
+W23主线848b4ee0精确CI41365435657于00:13:29Z成功；工程并线推送闭合，经验比较仍PARTIAL。静态选测只读profile发现known-only对1741文件遍历259万AST节点，cProfile下47.804s；前configuration fallback0.0015s，5个known targets。不能将204.073s总push减95.44s测试的所有剩余都归给此profile；原profile留本地，不假称已优化。后续既有工程质量收尾应将依赖事实收集和查询解耦，优化known-only遍历/复用而不增加持久许可缓存、删已知消费者或把full CI搬回每commit；当前优先闭合真实22F。
+
+
+R3源作者已冻结8文件，433P/32.93s、R2剩余262P/46.85s；121P子域有重叠不累计冒唯一数量。加两consumer文件，ROOT逐10SHA核对正常commit a6841e94，Ruff/全src mypy通过且所有字节seal不变。最终独审与正常候选push并行，主线848仍稳定，T3只计划完成。CURRENT_STATUS.json70,374B收为当前10,477B（后来当前字段有少量增加），旧全对象Git848同路径保留；findings去过期“最新”堆叠，历史收据不改。
+
+
+## R3独审5F与ROOT能力边界决策（2026-11-02）
+
+R3 a684的23独立例5F/18P，未知generic function/goal参数仍靠default-specific升级，generic mechanism只看roles.operating又进fact。正式报告R6-independent-ci-r3保留。ROOT决定统一原relation owner的positive payload；金融豁免不是proof集合，POS不提供业务语义。R2本轮自增的若干unknown→support期待本身过强，允许逐项公开erratum为unknown/原话完整/无事实/顺序不影响未知态，原20期待及真实R4十二unit不改。定性生产/服务覆盖通过通用composition/operating-scope正向关系实现，不按工序一句或公司词补丁。
+
+a684正常push1787例到98%因180s deadline失败，总234.764s（无已见assertion失败），新候选未推；不提高timeout/绕hook。daily --push-checks统一固定原smoke一次，文档0pytest，不再构造AST影响图或按文件前缀重复千例。precommit/作者变更相关TDD与大节点全CI仍保留，此改动纳入本次同大节点独审。
+
+
+## Daily精简独立收口（2026-11-02）
+
+819cef31独立10P/16.55s，候选完整CI41370513762成功；正常候选push固定167P/45.52s，总56.584s成功。旧a684的1787项180s失败234.764s不改写。已FF主线，逐12个在途PWF/hookSHA一致；源码R4未并。PWF提交后正常主线推送/核精确CI。工具7文件1旧策略test退役，独立selector/原CI/执行限额与错误传播不改。

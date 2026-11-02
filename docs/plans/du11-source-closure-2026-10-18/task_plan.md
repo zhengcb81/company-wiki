@@ -1,25 +1,25 @@
-**2026-11-01已按用户最新指令恢复R6全面整改。下方暂停内容为上一节点历史；当前执行唯一入口为[R6流水](review/architecture-quality-20261101/implementation-results/R6-ROOT.md)。稳定master保持，候选在独占sparse工区返修；W23 R1开始接收。**
+**2026-11-02：R6 R3独审5F，R4源proof实施中；daily精简已独审/候选全CI通过并本地FF；W23工具已并主线/推送/精确CI绿。用户已恢复实施，旧暂停只作历史。当前唯一入口为CURRENT_STATUS。**
 
 # 主线剩余实施计划
 
-**当前暂停：本轮候选小域独审通过，但完整CI63失败，未验收；已保留独立远端分支，稳定master正常revert。** 唯一状态看[CURRENT_STATUS](CURRENT_STATUS.md)/json，恢复看[HANDOFF](HANDOFF.md)。
+**当前已恢复：原63失败候选隔离后已完成R6共因修复及定点独审，9f575810完整CI22F，已启动同owner R3根修；W23工具已独审/候选全CI通过并本地并线。** 唯一状态看[CURRENT_STATUS](CURRENT_STATUS.md)/json，恢复看[HANDOFF](HANDOFF.md)。
 
 ## Next Step
 
-R6恢复：在tmp/architecture-r2独占sparse工区重施候选，先按CI63失败群定点重现与共因修复，同时只读验收W23 OCR返工；集中独审及候选完整CI绿后并线，再继续结构/C真实验收。
+完成R4 source proof/unknown边界与泛化定性覆盖、daily固定smoke精简；独审/受影响测试后正常推候选完整CI，再主线合并推送。接着T3结构及最终真实H1、新摘要/恢复/RF。
 
 ## P0 — 已完成的CI根修
 
 compact-frontier/lookahead、消费者和Windows嵌套夹具已根修、独审、正常发布及精确CI绿。保持轻量pre-commit/有界pre-push；仅新行为或失败需要新增回归，不重跑超时整仓或删重要断言换绿。
 
-## 全模块代码质量整改 — 候选全域CI失败，隔离返修待恢复
+## 全模块代码质量整改 — 候选完整CI22F，R3根修中
 
 [2026-11-01审查](review/architecture-quality-20261101/README.md)和[实施细则](review/architecture-quality-20261101/implementation.md)是本计划质量责任的补充，不另立目标。408个源文件结构清单＋关键链详读＋三独立分工，14项归并（1P1/8P2/5P3）；不是逐行全仓功能验收。
 
 - 先在原P3来源修复中合并Q01陌生业务准入、Q02阅读recipe/缓存指纹，沿原R4 source owner根修，不加公司词库/额度。
 - 存储查询、预算归属、CAS/legacy工具、跨层合同和边界测试按细则B；StockWiki输出流限额归其transport，CWP不跨层接管实现。
 - 旧显式dry-shadow两轮/迁移CLI和无效helper清理，检查聚合到事实owner；必要身份/原文字节/as-of/预算/恢复仍保留。
-- 只设A/B/C集中工程审查，受影响快速测试和原主线真实E2E；P3维护债不变成新的逐项许可或公司循环前置关卡。本轮Q01–Q14候选已实施/处置，小域集中独审通过，但完整CI63失败，整体验收重开；当前master未采用该候选。恢复先按CWP-failed-CI.md在隔离重施分支修共因并通过PR全域CI，再做结构与C真实验收。原件/生产配置未改。
+- 只设A/B/C集中工程审查，受影响快速测试和原主线真实E2E；P3维护债不变成新的逐项许可或公司循环前置关卡。本轮Q01–Q14候选已实施/处置，小域集中独审通过，但完整CI63失败，整体验收重开；当前master未采用该候选。R6已在隔离重施分支修共因并完成定点独审；现有同workflow候选全域CI22F，分组同owner修复并重新独审/CI后再做结构与C真实验收。原件/生产配置未改。
 
 ## P1/P2 — 已完成的有界摘要与真实采用
 
@@ -32,7 +32,7 @@ compact-frontier/lookahead、消费者和Windows嵌套夹具已根修、独审�
 
 R4主/五压力/报告/snapshot和四审已封存。73检查、6P2，无新增已证实P0/P1；每项具体证据、根因确认程度、TDD命令/接口/失败清理/兼容与恢复在AUDIT同run/remediation/r1-remediation-04/implementation.md。它续接W08–W12，不是新外包卡。
 
-1. **来源层优先**：定位并以去公司化正反例冻结三经营unit遗漏与跨备注/主体context污染。保留已验证D&M/p14/519字成员；不以增加名额、公司词库或改原文解决。
+1. **来源层优先**：定位并以去公司化正反例冻结三经营unit遗漏与跨备注/主体context污染。保留已验证D&M/p14/519字成员；不以增加名额、公司词库或改原文解决。T3具体实施按[结构细则](review/architecture-quality-20261101/implementation-results/R6-T3-implementation-plan.md)，先TERM/NOTE/PHYS RED，仅两个大节点独审/真实复验，不新增小签收或普遍bbox要求。
 2. **共享语义合同**：完成ghost-formula kind与formula/input互斥预检，validate/lint薄复用；完成同口径signed temporal complement，保留alias/origin/provenance、重叠/空隙/跨期/口径反控；inverseYoY使用显式比较关系，禁止放宽日期冒通过。
 3. **记录与技术质量**：新attempt从当前scope构建真实路径，冻结R4不改。复用测试入口、在付费前验证observer必需技术字段；审计报告已完成不重跑全部。已有CAS/日志重复观察只在原质量责任内处理，不迁移旧封存、建新任务库或造物理节省数字。
 4. **有界真实复验**：在隔离新attempt仅复验受影响链；原件经CWP只读复用，缺资料才用FF正确provider；源材料改变才按配置预算准备新摘要，真实paid中断/same/cross恢复及8卡actual RF采用/主/压力/报告/snapshot要有新证据。失败保留、未知账不退。测试新增文件以初始清单/原件SHA恢复，不能删初始已有或他人文件。
@@ -46,7 +46,7 @@ R4主/五压力/报告/snapshot和四审已封存。73检查、6P2，无新增�
 - 本公司受影响责任闭合后，按既有顺序药明合联、Snowflake做新公司泛化；样本/检查点先冻结，不因结果换公司。
 - 完成固定八家与旧NVDA/三市场责任；每家真实executor、四审、共因修复/复验、方法质量和检测演进实际落实。
 - 固定责任完成后，同一有效版本连续三家不同公司无主要问题才满足抽样停止；关键外限不计clean，不能以三家跳过固定清单。
-- W21 canonicalC2真实增强/严格成员对齐、新US监管/HK/US_RPO和长文公平性仍按原责任；Xiaomi OCR R1的未知进度不阻塞现有生产，也不能冒实验通过。
+- W21 canonicalC2真实增强/严格成员对齐、新US监管/HK/US_RPO和长文公平性仍按原责任；W23 OCR R1工具根修已独审/候选完整CI通过并FF主线；实验仍PARTIAL、实际总耗时/1800合规未证，不替代生产OCR。
 
 ## 边界与发布
 

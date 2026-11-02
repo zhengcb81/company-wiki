@@ -1,0 +1,54 @@
+{
+  "schema_version": "daily-feedback-simplification/1",
+  "status": "AUTHOR_GREEN_AWAITING_ROOT_REVIEW",
+  "baseline_head": "a6841e9420dbe3eb6dac6e30563c29e4293a31e7",
+  "worktree": "C:/Users/郑曾波/Projects/company-wiki/tmp/architecture-r2",
+  "old_actual_push": {
+    "receipt": ".planning/architecture-quality-20261101/r6-publication/r3-candidate-push.json",
+    "elapsed_s": 234.764,
+    "exit_code": 1,
+    "planned_targets": 65,
+    "known_files_selected": 32,
+    "known_files_total": 379,
+    "collected_cases": 1787,
+    "failure": "child total deadline 180s at 98%; no observed assertion failure"
+  },
+  "policy": {
+    "proven_nonruntime": "zero pytest, tests_not_run",
+    "all_other_ranges": "original FAST_CONTRACT_CASES exactly once",
+    "ast_selection_in_daily_path": false,
+    "affected_unit_append": false,
+    "changed_unit_tool_preserved": true,
+    "daily_deadline_seconds": 180,
+    "stdout_cap_bytes": 4194304,
+    "stderr_cap_bytes": 524288,
+    "author_change_specific_tests_required_by_responsibility": true,
+    "local_fast_pass_scope": "fixed smoke only",
+    "ci_complete_suites_unchanged": true
+  },
+  "red": {"failed": 6, "passed": 9, "seconds": 6.19, "cause": "daily main enters old whole-tree AST graph on runtime/config/explicit/wide/mixed/unknown changes"},
+  "green": {"passed": 173, "failed": 0, "seconds": 121.78, "exit_code": 0, "scope": "tool unit and isolated Git hook fixtures plus preserved independent selector and actual child failure/output-cap controls", "ruff": "PASS", "diff_check": "PASS"},
+  "retained_execution_ast_equal_to_head": ["FAST_CONTRACT_CASES", "CURRENT_CI_REGRESSION_CASES", "DAILY_PUSH_TIMEOUT_SECONDS", "STDOUT_CAP_BYTES", "STDERR_CAP_BYTES", "_run", "_run_pytest_gate", "_dispatch_gate", "_open_scratch"],
+  "candidate_remote_push_measured_after_change": false,
+  "changed_files_sha256": {
+    "tools/pre_push_gate.py": "2604bae33ae3b79d523fadb11a11d555fc6c78d78ea98750db1293ecf0614f45",
+    "tests/unit/test_daily_push_bounds.py": "c044e231ef13a7c8f5994618659402aacc1bdc273c49bdf897ee685b3dc36301",
+    "tests/unit/test_daily_push_policy.py": "44b20bd704689d673c572a7593740afa1421d6c977c8714e51e2e785760ff6cc",
+    "tests/unit/test_pre_push_gate.py": "656c93f4845a8998b23f89c3dae0df557db08956b5a7c10bc512e74a400dccbd",
+    "tests/unit/test_pre_push_parallel_phases.py": "a2923c0c6c518fbf0187d464bfdc1c2cbf27425f7e28669baacad2ffdf00f9aa",
+    "tests/unit/test_ci_push_selection.py": "2aa294da3e441012c0236aece8cd859cbe08dcdf90cb48091d92c66d4249fcee",
+    "docs/OPERATIONS.md": "ad4cbf7902e163ed09071cdfd46cb5ea2768d209902954942c567816f2bc8792"
+  },
+  "deleted_old_policy_tests": ["tests/unit/test_known_push_scope.py"],
+  "unchanged_selector_sha256": "2715957cc38cd953908aba5fb7d15f7961aaa8ec5f24eca3204d0ce831563f30",
+  "owned_cleanup": [
+    {"root": "C:/Users/郑曾波/Projects/company-wiki/tmp/dg-red-fbefbd03", "initial_absent": true, "containment_checked": true, "non_reparse_checked": true, "exists_after": false},
+    {"root": "C:/Users/郑曾波/Projects/company-wiki/tmp/dg-green-d9b04ca5", "initial_absent": true, "containment_checked": true, "non_reparse_checked": true, "exists_after": false}
+  ],
+  "setup_attempt_not_product_red": {"path": "C:/Windows/Temp/cwdg-red-3b92d500", "created": false, "exists_after": false, "result": "8 passed / 7 setup errors, 1.95s; directory create denied; corrected to workspace owned root without ACL changes"},
+  "outer_pytest_cache_restored": "NOT_CLAIMED_NO_INITIAL_BASELINE",
+  "real_repository_git_index_or_branch_modified": false,
+  "foreign_hook_mode_wip": "preserved untouched (100755 -> 100644 already present)",
+  "remaining": ["ROOT independent review", "ROOT normal commit/push and precise candidate CI"],
+  "agent_state": "STOP"
+}

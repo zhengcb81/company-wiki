@@ -1,0 +1,133 @@
+{
+  "schema_version": "root-w23-repair/1",
+  "observed_at_utc": "2026-11-01T23:15:54.244648+00:00",
+  "worktree": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\w23-r6",
+  "branch": "codex/architecture-w23-repair-20261101",
+  "base_commit": "d2f6e6f015cb69b826b499ef56e1ab3d6053fced",
+  "runtime_commit": "ae438a32c942ccc50e9f0fa4d8e9825bd11ca210",
+  "status": "INDEPENDENT_TOOL_PASS_AUTHOR_LOCAL_DONE_ROOT_CANDIDATE_CI_PENDING",
+  "production_ocr_accepted": false,
+  "real_model_calls": 0,
+  "model_downloads": 0,
+  "production_source_config_dependency_changes": 0,
+  "source_manifest": {
+    "tools/ocr_comparison/campaign.py": {
+      "raw_sha256": "c96ce351a2b77e86a5a168fbb003b6b3238739a9e962bb071d0e423337371912",
+      "lf_sha256": "135b7d5144fd1de72249659f1d3fba01b8d6ee360f7bf426ae9269e01d63b177"
+    },
+    "tools/ocr_comparison/cache.py": {
+      "raw_sha256": "bde43e2a13f987f92079a10a55a2d3939873dc959529ed737ceb98f109cfe776",
+      "lf_sha256": "d5379e40fad95cc729d8193ae60d404887341cb1d9c8c716199b3fa915044168"
+    },
+    "tests/integration/test_w23_ocr_r1_transactional_runner.py": {
+      "raw_sha256": "0ba3d46d7a34a1ea1113ea01ce50ca387a527a3369acd7174a0f0066ef726d54",
+      "lf_sha256": "0ba3d46d7a34a1ea1113ea01ce50ca387a527a3369acd7174a0f0066ef726d54"
+    }
+  },
+  "red": {
+    "new_real_route_stub_cases_failed": 8,
+    "passed": 6,
+    "seconds": 3.54
+  },
+  "prior_affected_domain": {
+    "passed": 108,
+    "warnings": 2,
+    "seconds": 93.51,
+    "overlaps_final": true
+  },
+  "final_transactional_domain": {
+    "passed": 31,
+    "seconds": 23.02,
+    "restores_owned_scratch": true
+  },
+  "current_unique_test_package": 110,
+  "unique_package_rerun_together": false,
+  "ruff": "PASS changed source/cache/test",
+  "normal_runtime_commit_hooks": "normal commit executed; configured source hooks skipped tools-only scope; manual targeted Ruff/tests passed",
+  "independent_review": {
+    "status": "PASS",
+    "reviewer": "/root/rectification_review_a",
+    "runtime_commit": "ae438a32c942ccc50e9f0fa4d8e9825bd11ca210",
+    "scope": "tool engineering PASS only; original empirical OCR comparison remains PARTIAL",
+    "report_md": "docs/plans/du11-source-closure-2026-10-18/review/architecture-quality-20261101/implementation-results/R6-W23-independent-final.md",
+    "report_json": "docs/plans/du11-source-closure-2026-10-18/review/architecture-quality-20261101/implementation-results/R6-W23-independent-final.json",
+    "report_json_raw_sha256": "8cd2429319c9a37c2df1a489dfe455c2dcce7dd5605adb10973b26ff4d0ce132",
+    "report_json_lf_sha256": "16ca7b9fe041384407678f274443c87d199e30b1fa89f2dd0e5983c9ef593587",
+    "original_red_and_countercontrol": "5/5 GREEN",
+    "selected_tests": "10P/4.02s",
+    "production_ocr_accepted": false,
+    "historical_76292_claim_proven": false
+  },
+  "mechanism": [
+    "same ledger short kernel mutex and durable pre-inference reservation",
+    "inference outside mutex; single campaign inference reservation",
+    "real X1/R0 routes read stable nominal-cap cache before allocation",
+    "captured outputs+same cache completion marker precede settlement; crash recovery no second inference",
+    "failed/crashed holds remain; known overruns recorded uncensored and marked partial",
+    "finite write/read checks; actual unknown old zero real-work cost blocks new allocation, not old schema; empty/known old ledgers migrate safely"
+  ],
+  "historical_experiment": {
+    "recorded_charges_seconds": 1431.40547,
+    "actual_total_elapsed_seconds": null,
+    "within_1800_proven": false,
+    "unknown": "seven zero-second R0 first-pass records; rerun is extra work",
+    "overcount_preserved_seconds": 1080,
+    "new_code_does_not_retroactively_certify": true
+  },
+  "author_artifacts_read_only_sha256": {
+    "campaign_ledger.json": "1e1b423deab85c0ec8ec2ab7939614a98cf2f2e55bee787273dc245b8d59222a",
+    "comparison.json": "0438e57fdf7c5e1c56d517203582a3ea9a9c16f3f8fddd6bffeefad2ceffa10f",
+    "comparison.md": "34fc6194c2297ae3e3f51148cad7e48773440211949387a92606c62a5b30b10e",
+    "review_independent.md": "d084eafeb43cd82bb5d10ebf4c47318a3d5f3bf4a70f69c5589bf36d7538cb10"
+  },
+  "author_png": {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-w23-xiaomi-ocr-r1\\.w23_cache\\r1_pages\\r1_wanhua_qa2021_p003.png",
+    "bytes": 579214,
+    "sha256": "097eaf47d1da132c80a64dfdd42ca81c72d3b559969ca552b6bc7fb1d00478fc",
+    "action": "removed by ROOT post-review; original observation preserved",
+    "scope": "present at independent review; ROOT later removed this known generated page using separate SHA/PNG-guarded cleanup"
+  },
+  "git_publication": "normal local commits only; no author push, no main merge; ROOT controls stable-master integration and candidate CI",
+  "scope_errors_retained": [
+    "initial legacy regression missing two sparse JSON fixtures; materialized only those JSON",
+    "Low sandbox synthetic four-byte hardlink test refused; same host domain passed without converter edits",
+    "git sparse-checkout add --no-cone unsupported; reused existing non-cone config without that flag"
+  ],
+  "not_run": [
+    "model inference or download",
+    "full110 final rerun",
+    "main merge or push",
+    "candidate full CI",
+    "new empirical OCR comparison"
+  ],
+  "head": "7462a472ef421812228c2271df1e79dd4418c190",
+  "documentation_commit": "0af261ce2b84f064ec1e7d082b0402005ba79451",
+  "local_commits": [
+    "ae438a32c942ccc50e9f0fa4d8e9825bd11ca210",
+    "0af261ce2b84f064ec1e7d082b0402005ba79451",
+    "7462a472ef421812228c2271df1e79dd4418c190"
+  ],
+  "own_worktree_status": {
+    "retained_for_root_integration": true,
+    "uncommitted_tracked": [
+      ".githooks/pre-push mode-only on Windows; excluded from commits"
+    ],
+    "uncommitted_source_test_handoff": false,
+    "new_model_copies": 0,
+    "sparse_logical_bytes": 12715298,
+    "test_data_cleanup": "final new tests restore their owned TemporaryDirectory; reviewer tmp/w6 restored absent; routine ignored pytest/Ruff caches may remain; no global TMP cleanup or author asset deletion"
+  },
+  "derived_cleanup": {
+    "status": "COMPLETE_FOR_KNOWN_GENERATED_R1_PAGE",
+    "schema": "w23-root-derived-cleanup/1",
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-w23-xiaomi-ocr-r1\\.w23_cache\\r1_pages\\r1_wanhua_qa2021_p003.png",
+    "bytes": 579214,
+    "sha256": "097eaf47d1da132c80a64dfdd42ca81c72d3b559969ca552b6bc7fb1d00478fc",
+    "exists_after": false,
+    "reason": "generated QA page PNG; original R1 task requires removal after tests",
+    "original_documents_touched": false,
+    "models_and_other_caches_touched": false,
+    "receipt": "R6-W23-derived-cleanup.json"
+  },
+  "cleanup_documentation_commit": "7462a472ef421812228c2271df1e79dd4418c190"
+}
