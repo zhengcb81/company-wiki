@@ -1,6 +1,6 @@
 {
   "schema_version": "current-package-status/1",
-  "as_of_date": "2026-11-01",
+  "as_of_date": "2026-11-02",
   "canonical_entry": "CURRENT_STATUS.md",
   "scope": "Recent auditable cards, not a census of every historical package or all branches in all repos",
   "status_owner": "This registry only; original cards/setup/handoff/receipts are dated inputs/evidence",
@@ -152,11 +152,13 @@
     },
     {
       "id": "W23-OCR-R1",
-      "engineering_status": "ROOT_REPAIRED_INDEPENDENT_AND_FULL_CI_PASS_MASTER_MERGED",
+      "engineering_status": "ROOT_REPAIRED_MERGED_PUSHED_EXACT_MAIN_CI_PASS",
       "evidence": "review/architecture-quality-20261101/implementation-results/R6-W23-publication.json",
       "requires_author_delivery_before_mainline": false,
       "whole_company_acceptance": false,
-      "note": "Experimental tooling only; old actual elapsed null and1800 compliance/peak/accuracy/production suitability unproven. No production OCR switch. Runtimeae438, integrated6b70394b; narrow generated PNG cleanup verified."
+      "note": "Experimental tooling only; old actual elapsed null and1800 compliance/peak/accuracy/production suitability unproven. No production OCR switch. Runtimeae438, integrated6b70394b; narrow generated PNG cleanup verified.",
+      "published_head": "848b4ee0b31f438a45bb50691654a077c5ed9bee",
+      "main_ci": 41365435657
     }
   ],
   "older_parent_groups": {

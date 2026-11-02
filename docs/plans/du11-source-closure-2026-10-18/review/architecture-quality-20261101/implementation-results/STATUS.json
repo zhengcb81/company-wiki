@@ -4,32 +4,32 @@
   "implementation_active": true,
   "items": {
     "Q01": {
-      "status": "R6_REPAIR_BOUNDED_INDEPENDENT_PASS_FULL_CI_PENDING",
+      "status": "R4_POSITIVE_PROOF_BOUNDARY_REPAIR_ACTIVE_R3_INDEPENDENT5F",
       "reason": "R3 lexical/WH boundary and R4 incomplete capability propagation repaired; R5 true handler+RF wire independently PASS; final H1/context/new summary still OPEN"
     },
     "Q02": {
-      "status": "R6_REPAIR_BOUNDED_INDEPENDENT_PASS_FULL_CI_PENDING",
+      "status": "R6_BOUNDED_INDEPENDENT_PASS_INTEGRATED_CANDIDATE_CI_RED",
       "reason": "PDF table observation package now included; actual cache RED->2 focused GREEN"
     },
     "Q03": {
-      "status": "R6_REPAIR_BOUNDED_INDEPENDENT_PASS_FULL_CI_PENDING",
+      "status": "R6_BOUNDED_INDEPENDENT_PASS_INTEGRATED_CANDIDATE_CI_RED",
       "reason": "derived indexed candidate superset with dirty fallback and exact EOF"
     },
     "Q04": {
-      "status": "R6_REPAIR_BOUNDED_INDEPENDENT_PASS_FULL_CI_PENDING",
+      "status": "R6_BOUNDED_INDEPENDENT_PASS_INTEGRATED_CANDIDATE_CI_RED",
       "reason": "R1 two independent race failures retained; R2 short shared storage mutex and single atomic cap snapshot; no inflight table"
     },
     "Q05": {
-      "status": "R6_REPAIR_BOUNDED_INDEPENDENT_PASS_FULL_CI_PENDING"
+      "status": "R6_BOUNDED_INDEPENDENT_PASS_INTEGRATED_CANDIDATE_CI_RED"
     },
     "Q06": {
-      "status": "R6_REPAIR_BOUNDED_INDEPENDENT_PASS_FULL_CI_PENDING"
+      "status": "R6_BOUNDED_INDEPENDENT_PASS_INTEGRATED_CANDIDATE_CI_RED"
     },
     "Q07": {
-      "status": "R6_REPAIR_BOUNDED_INDEPENDENT_PASS_FULL_CI_PENDING"
+      "status": "R6_BOUNDED_INDEPENDENT_PASS_INTEGRATED_CANDIDATE_CI_RED"
     },
     "Q08": {
-      "status": "R6_REPAIR_BOUNDED_INDEPENDENT_PASS_FULL_CI_PENDING"
+      "status": "R6_BOUNDED_INDEPENDENT_PASS_INTEGRATED_CANDIDATE_CI_RED"
     },
     "Q09": {
       "status": "INDEPENDENT_PASS_STOCKWIKI_MASTER_MERGED",
@@ -37,23 +37,23 @@
       "remote": "NOT_CONFIGURED_HISTORICAL"
     },
     "Q10": {
-      "status": "R6_REPAIR_BOUNDED_INDEPENDENT_PASS_FULL_CI_PENDING"
+      "status": "R6_BOUNDED_INDEPENDENT_PASS_INTEGRATED_CANDIDATE_CI_RED"
     },
     "Q11": {
       "status": "RESOLVED_BY_BOUNDARY_JUSTIFICATION",
       "reason": "B independent reviewer agrees received-byte SHA required for public Protocol; no forgeable trusted flag"
     },
     "Q12": {
-      "status": "R6_REPAIR_BOUNDED_INDEPENDENT_PASS_FULL_CI_PENDING"
+      "status": "R6_BOUNDED_INDEPENDENT_PASS_INTEGRATED_CANDIDATE_CI_RED"
     },
     "Q13": {
-      "status": "R6_REPAIR_BOUNDED_INDEPENDENT_PASS_FULL_CI_PENDING"
+      "status": "R6_BOUNDED_INDEPENDENT_PASS_INTEGRATED_CANDIDATE_CI_RED"
     },
     "Q14": {
-      "status": "R6_REPAIR_BOUNDED_INDEPENDENT_PASS_FULL_CI_PENDING"
+      "status": "R6_BOUNDED_INDEPENDENT_PASS_INTEGRATED_CANDIDATE_CI_RED"
     }
   },
-  "next": "Normal source architecture candidate CI, repair actual remaining failures, then main merge; no whole-project/real-C signoff yet",
+  "next": "完成R4 source proof/unknown边界与泛化定性覆盖、daily固定smoke精简；独审/受影响测试后正常推候选完整CI，再主线合并推送。接着T3结构及最终真实H1、新摘要/恢复/RF。",
   "real_source_observation": {
     "case": "H1 current-v1",
     "elapsed_s": 37.394,
@@ -68,10 +68,10 @@
     "boundary": "partial; 9 old actor/context pairs not yet judged; DB/WAL/SHM content same, SHM mtime-only checker false failure preserved",
     "source_version": "e4c08e42...689b before/after stable; not final R4 revision"
   },
-  "project_state": "R6_R2_BOUNDED_INDEPENDENT_PASS_FULL_CI_PENDING",
+  "project_state": "R6_R4_SOURCE_SEMANTIC_ROOT_REPAIR_AND_DAILY_GATE_SIMPLIFICATION",
   "independent_final": "independent-wire-r5.md",
   "engineering_commit": "c97d4fbd",
-  "normal_publication": "W23_TOOL_MASTER_FF_CANDIDATE_CI_GREEN; source_candidate_pending",
+  "normal_publication": "W23_TOOL_MASTER_MERGED_PUSHED_848b4ee0; source_candidate22F_isolated",
   "real_source_observation_v2": {
     "elapsed_s": 23.170454,
     "result": "FAILED unknown source_processing_complete at public handler",
@@ -115,5 +115,18 @@
     "source_r2": "R6-independent-final-r2.md",
     "old_source_failure_retained": "R6-independent-final.md",
     "W23": "R6-W23-independent-final.md"
+  },
+  "r6_current_ci": {
+    "id": 41364303788,
+    "head": "9f575810ca92620a6fb6ff63cfd326a5b9f076fa",
+    "conclusion": "failure",
+    "failed_cases": 22,
+    "evidence": "R6-CI-r2.json"
+  },
+  "r3_independent": {
+    "status": "NEEDS_ROOT_FIX",
+    "passed": 18,
+    "failed": 5,
+    "evidence": "R6-independent-ci-r3.json"
   }
 }

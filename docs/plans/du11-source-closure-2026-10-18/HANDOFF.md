@@ -4,16 +4,16 @@
 
 ## 当前代码与所有权
 
-- ROOT master：已FF到6b70394b，W23工具候选完整CI41363162079成功，尚待本次主线统一推送。生产src/config/依赖未因W23改变。
-- ROOT自有 `tmp/architecture-r2`：`codex/architecture-rectification-r2-20261101`，修复745a72d3合最新master成为9f575810，正常push167P/47.74s；完整CI41364303788为22F，已开同owner R3返修，不并线。
-- ROOT自有 `tmp/w23-r6`：`codex/architecture-w23-repair-20261101`，工具runtime ae438a32、独审和候选完整CI均过，6b70394b已本地并主线。旧作者工区不改源码；仅有精确PNG清理收据。
+- ROOT master：daily精简已FF到819cef31，10项独审通过，候选完整CI41370513762成功；当前PWF提交后正常推主线。此前W23工具/PWF已848b4ee0推远端且主线CI41365435657成功。生产src/config/依赖未因W23改变。
+- ROOT自有 `tmp/architecture-r2`：`codex/architecture-rectification-r2-20261101`，旧9f完整CI22F保留；R3 a6841e94已正常commit和全src静态检查，433/262绿但独审23例5F。R4根修中；正常push1787例180s超时，远端仍9f，daily固定smoke精简在途。
+- ROOT自有 `tmp/w23-r6`：已复用为`codex/architecture-fast-feedback-20261102`（当前819cef31），工具runtime ae438a32、独审和候选完整CI均过，6b70394b已本地并主线。旧作者工区不改源码；仅有精确PNG清理收据。
 - ROOT唯一维护本PWF与集成；来源/消费者/W23作者均已STOP、独审已交报告。外来hook mode和历史未跟踪文件不stage、不清理。RF四WIP、Dayu/IQS/Dashboard不动。
 
 ## 下一步按此顺序
 
-1. 先读R6-CI-r2.md/json的实际22F；以新的有界annotation完整分组定位，定点重现和共因修复；不能删除原断言、抬额度、加公司特判或退回跨层reader代理。
+1. 先读R6-source-ci-r3.md/json、R6-owner-boundaries-ci及当前final独审状态。R3独审5F已交R4根修，读R6-source-ci-r4-erratum.md；不要再重施旧候选。daily固定smoke和R4来源修复分文件进行，合并冻版集中独审后再正常推候选CI，不删断言/抬额度/特判。
 2. 当前只先正常发布完整CI已绿的W23工具和PWF；R3源码候选CI绿后再正常FF/merge到ROOT master，保护已有PWF/hook字节，正常commit/push当前进展并核新主线CI；不绕hooks、不取Git缓存凭证。不要再跑一遍本地全仓超时检查。
-3. 实施既有T3：structure责任层统一编号完整句/闭引号判断，识别显式编号备注的长/换行局部scope，保留新备注主体引介。先去公司化RED，不能只删错边。具体9对原始unit及根因见R4-context-investigation.md。
+3. 实施既有T3：structure责任层统一编号完整句/闭引号判断，识别显式编号备注的长/换行局部scope，保留新备注主体引介。先去公司化RED，不能只删错边。具体9对原始unit及根因见R4-context-investigation.md，可执行接口/TDD/真实检查矩阵见R6-T3-implementation-plan.md。
 4. 单次最终H1 source replay：沿本地schema2 runner/已冻结cases，原90s/16M/112不变，核12unit/111成员、9对真实view/member及正向scope引介。v1旧数量和v2公开合同失败不能代签最终。
 5. 来源过后以独立catalog/AUTO引用既有原件做新版正式摘要、prepared中断/same/cross恢复和RF参数/公式/报告/snapshot实际采用，集中独审。两旧P1配置已absent，依C-preparation重建测试配置，不复制原PDF/旧DB、不改R3/R4封存。
 

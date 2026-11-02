@@ -79,3 +79,10 @@
 - 2026-11-01 用户paused：R4已封存，三独审部分完成/fetch未启动；恢复只看CURRENT_STATUS/各角色checkpoint，不从零重跑。
 
 - 2026-11-01 当前大节点收口：R4四正式报告/6P2完整映射与内部PWF已交付，暂停；de6ab696的部分checkpoint状态仅为历史。当前入口只看CURRENT_STATUS，不把审查完成写成缺陷已修/完整公司通过。
+
+
+## 2026-11-02 当前机器状态去历史堆叠
+
+CURRENT_STATUS.json只保留当前执行/发布/预算/责任，旧P0–R6详细观察已在Git `848b4ee0b31f438a45bb50691654a077c5ed9bee` 的同一路径保留，不复制历史对象成新文件。原63F、R6-R2的22F及独审失败原报告不改。旧对象不能当今天的下一步；当前读取CURRENT_STATUS→HANDOFF/task_plan。
+
+findings.md同期也收敛为当前有效共因/边界；848b4ee0同路径保留全部旧详细记录。progress是日期顺序日志，不能从旧日志恢复旧的下一步。

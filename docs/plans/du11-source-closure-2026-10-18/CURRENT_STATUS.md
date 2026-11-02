@@ -6,13 +6,13 @@
 
 | 责任 | 实际进度 | 余项 |
 |---|---|---|
-| 稳定master | W23已FF至6b70394b（生产src仍同稳定版）；候选完整CI41363162079成功，主线推送收尾中 | 在候选真正通过前保持稳定 |
-| R6候选 | tmp/architecture-r2，branch codex/architecture-rectification-r2-20261101，修复745a72d3并合W23至9f575810，已正常推送，167快速例通过 | 精确CI41364303788有22F，源码不并线，R3根修中 |
+| 稳定master | W23工具已推且CI绿；daily精简819cef31已独审/候选完整CI绿并本地FF | 当前PWF提交后正常推送；源R4不含在主线 |
+| R6候选 | a6841e94已本地commit；433/262相关域绿，但独审23例5F，R4根修中 | 旧9f CI22F＋a684本地push1787例180s超时均留证，未推新候选 |
 | 旧接口/recipe消费 | 原41F/9P→50P；5测试改绑实际owner，无产品代理；独审7P＋稳定窗口CF3 1P | 最终整合CI，不借小域签全域 |
 | AUTO迁移/离线测试 | 原4RED→4P；关联72P/28.53s（normal host）；SQL前后schema/旧facts/newallocation空验证保持，offline-I显式当前工区 | 最终Linux CI；sandbox原子硬链接WinError5不当产品失败 |
-| 来源语义 | 泛化matrix与业务相关性拆分，纯source_context owner，未知原话/proof/元文本分轴；原新P2已按predicate直接补语scope根修：322定点绿、独立22绿，准备完整CI | 独审22项已通过；当前完整CI22F待根修；真实H1召回/费用影响待验 |
+| 来源语义 | R3分开原文角色/事实视图，绑定关系memo优先，NP head/modifier和WH边界根修；433P/262P（另121有重叠） | R4修正POS不能证明业务、统一事实proof；新独审/完整CI/H1待验 |
 | CI诊断 | 修复12000字groups单annotation被平台4096截断；首10内分组、escaped UTF8限长；17例绿 | 独审已通过；本次完整分组可读，源回归22F；不新增CI测试步骤 |
-| W23 R1 | 原HEAD d2f6e6f0的8页R0/N0与X1两失败可作PARTIAL资料；独立审计4真实路径RED | 根修已独审PASS＋完整候选CI绿，已FF主线；旧实验仍PARTIAL，不跑模型/不部署 |
+| W23 R1 | 原HEAD d2f6e6f0的8页R0/N0与X1两失败可作PARTIAL资料；独立审计4真实路径RED | 根修已独审PASS＋完整候选CI绿，已并主线并推送；旧实验仍PARTIAL，不跑模型/不部署 |
 | RF/StockWiki | RF957c6283 main/origin、CI41304681319成功且定点安装；StockWiki Q09本地master381811e5已并 | StockWiki历史无remote不冒推送，RF无新修改需求 |
 
 ## 原失败如何处理
@@ -23,7 +23,7 @@ W23原交付曾不能凭作者READY接收：真实X1漏读cache，推理前未�
 
 ## 下一大节点
 
-先按R6-CI-r2的22失败分组根修来源语义/纯合同导入/partial-cache边界，集中独审后重推同候选CI；仅已独审和完整CI绿的W23工具与PWF先正常发布，不把红源候选并线。再T3结构及最终H1/C。
+完成R4 source proof/unknown边界与泛化定性覆盖、daily固定smoke精简；独审/受影响测试后正常推候选完整CI，再主线合并推送。接着T3结构及最终真实H1、新摘要/恢复/RF。
 
 CWP同一现有workflow补总控codex/architecture-*候选分支触发，在并线前获得完整CI，不依赖取Git缓存凭证或新增许可；不扩其他外包分支、不复制测试流水线、不把每commit变全量。只在大节点集中独审。
 

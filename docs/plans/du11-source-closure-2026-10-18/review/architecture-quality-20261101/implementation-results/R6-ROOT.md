@@ -80,3 +80,24 @@ R6-r2最终独审正式PASS：22P/16.84s、12文件前后SHA同；原并列P2范
 ## R6精确候选CI22F（2026-11-02）
 
 CI41364303788已失败，unit324s非超时。新摘要成功保全12失败群/22case，原63F及A1失败仍保留；R3按source语义、纯合同导入/partial-cache原owner根修，不并红候选、不跑新真实资料或模型。ROOT marker单项1F/16.24s已归source同根coverage问题，不重复另修。W23候选全CI绿，只先发布该独立工具及本PWF。
+
+
+W23工具与已完成PWF已848b4ee0正常推送master，normal prepush234P/95.44s。Git push实返回0；随后ROOT只读显示混编码Git日志时UnicodeDecodeError属于显示包装错误，原log/JSON均保留，不把成功推送称平台阻塞。当前源候选仍9f的22F隔离返修，T3未冒开工。
+
+
+W23主线848b4ee0精确CI41365435657于00:13:29Z成功；工程并线推送闭合，经验比较仍PARTIAL。静态选测只读profile发现known-only对1741文件遍历259万AST节点，cProfile下47.804s；前configuration fallback0.0015s，5个known targets。不能将204.073s总push减95.44s测试的所有剩余都归给此profile；原profile留本地，不假称已优化。后续既有工程质量收尾应将依赖事实收集和查询解耦，优化known-only遍历/复用而不增加持久许可缓存、删已知消费者或把full CI搬回每commit；当前优先闭合真实22F。
+
+
+R3源作者已冻结8文件，433P/32.93s、R2剩余262P/46.85s；121P子域有重叠不累计冒唯一数量。加两consumer文件，ROOT逐10SHA核对正常commit a6841e94，Ruff/全src mypy通过且所有字节seal不变。最终独审与正常候选push并行，主线848仍稳定，T3只计划完成。CURRENT_STATUS.json70,374B收为当前10,477B（后来当前字段有少量增加），旧全对象Git848同路径保留；findings去过期“最新”堆叠，历史收据不改。
+
+
+## R3独审5F与ROOT能力边界决策（2026-11-02）
+
+R3 a684的23独立例5F/18P，未知generic function/goal参数仍靠default-specific升级，generic mechanism只看roles.operating又进fact。正式报告R6-independent-ci-r3保留。ROOT决定统一原relation owner的positive payload；金融豁免不是proof集合，POS不提供业务语义。R2本轮自增的若干unknown→support期待本身过强，允许逐项公开erratum为unknown/原话完整/无事实/顺序不影响未知态，原20期待及真实R4十二unit不改。定性生产/服务覆盖通过通用composition/operating-scope正向关系实现，不按工序一句或公司词补丁。
+
+a684正常push1787例到98%因180s deadline失败，总234.764s（无已见assertion失败），新候选未推；不提高timeout/绕hook。daily --push-checks统一固定原smoke一次，文档0pytest，不再构造AST影响图或按文件前缀重复千例。precommit/作者变更相关TDD与大节点全CI仍保留，此改动纳入本次同大节点独审。
+
+
+## Daily精简独立收口（2026-11-02）
+
+819cef31独立10P/16.55s，候选完整CI41370513762成功；正常候选push固定167P/45.52s，总56.584s成功。旧a684的1787项180s失败234.764s不改写。已FF主线，逐12个在途PWF/hookSHA一致；源码R4未并。PWF提交后正常主线推送/核精确CI。工具7文件1旧策略test退役，独立selector/原CI/执行限额与错误传播不改。

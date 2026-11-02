@@ -191,3 +191,15 @@ W23工具ae438独审/6b70394b精确CI41363162079成功，已本地FF；原8页�
 ## R6精确候选CI22F（2026-11-02）
 
 CI41364303788已失败，unit324s非超时。新摘要成功保全12失败群/22case，原63F及A1失败仍保留；R3按source语义、纯合同导入/partial-cache原owner根修，不并红候选、不跑新真实资料或模型。ROOT marker单项1F/16.24s已归source同根coverage问题，不重复另修。W23候选全CI绿，只先发布该独立工具及本PWF。
+
+
+## R3独审5F与ROOT能力边界决策（2026-11-02）
+
+R3 a684的23独立例5F/18P，未知generic function/goal参数仍靠default-specific升级，generic mechanism只看roles.operating又进fact。正式报告R6-independent-ci-r3保留。ROOT决定统一原relation owner的positive payload；金融豁免不是proof集合，POS不提供业务语义。R2本轮自增的若干unknown→support期待本身过强，允许逐项公开erratum为unknown/原话完整/无事实/顺序不影响未知态，原20期待及真实R4十二unit不改。定性生产/服务覆盖通过通用composition/operating-scope正向关系实现，不按工序一句或公司词补丁。
+
+a684正常push1787例到98%因180s deadline失败，总234.764s（无已见assertion失败），新候选未推；不提高timeout/绕hook。daily --push-checks统一固定原smoke一次，文档0pytest，不再构造AST影响图或按文件前缀重复千例。precommit/作者变更相关TDD与大节点全CI仍保留，此改动纳入本次同大节点独审。
+
+
+## Daily精简独立收口（2026-11-02）
+
+819cef31独立10P/16.55s，候选完整CI41370513762成功；正常候选push固定167P/45.52s，总56.584s成功。旧a684的1787项180s失败234.764s不改写。已FF主线，逐12个在途PWF/hookSHA一致；源码R4未并。PWF提交后正常主线推送/核精确CI。工具7文件1旧策略test退役，独立selector/原CI/执行限额与错误传播不改。

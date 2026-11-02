@@ -1,4 +1,4 @@
-**2026-11-01已按用户最新指令恢复R6全面整改。下方暂停内容为上一节点历史；当前执行唯一入口为[R6流水](review/architecture-quality-20261101/implementation-results/R6-ROOT.md)。稳定master保持，候选在独占sparse工区返修；W23 R1开始接收。**
+**2026-11-02：R6 R3独审5F，R4源proof实施中；daily精简已独审/候选全CI通过并本地FF；W23工具已并主线/推送/精确CI绿。用户已恢复实施，旧暂停只作历史。当前唯一入口为CURRENT_STATUS。**
 
 # 主线剩余实施计划
 
@@ -6,7 +6,7 @@
 
 ## Next Step
 
-先按R6-CI-r2的22失败分组根修来源语义/纯合同导入/partial-cache边界，集中独审后重推同候选CI；仅已独审和完整CI绿的W23工具与PWF先正常发布，不把红源候选并线。再T3结构及最终H1/C。
+完成R4 source proof/unknown边界与泛化定性覆盖、daily固定smoke精简；独审/受影响测试后正常推候选完整CI，再主线合并推送。接着T3结构及最终真实H1、新摘要/恢复/RF。
 
 ## P0 — 已完成的CI根修
 
@@ -32,7 +32,7 @@ compact-frontier/lookahead、消费者和Windows嵌套夹具已根修、独审�
 
 R4主/五压力/报告/snapshot和四审已封存。73检查、6P2，无新增已证实P0/P1；每项具体证据、根因确认程度、TDD命令/接口/失败清理/兼容与恢复在AUDIT同run/remediation/r1-remediation-04/implementation.md。它续接W08–W12，不是新外包卡。
 
-1. **来源层优先**：定位并以去公司化正反例冻结三经营unit遗漏与跨备注/主体context污染。保留已验证D&M/p14/519字成员；不以增加名额、公司词库或改原文解决。
+1. **来源层优先**：定位并以去公司化正反例冻结三经营unit遗漏与跨备注/主体context污染。保留已验证D&M/p14/519字成员；不以增加名额、公司词库或改原文解决。T3具体实施按[结构细则](review/architecture-quality-20261101/implementation-results/R6-T3-implementation-plan.md)，先TERM/NOTE/PHYS RED，仅两个大节点独审/真实复验，不新增小签收或普遍bbox要求。
 2. **共享语义合同**：完成ghost-formula kind与formula/input互斥预检，validate/lint薄复用；完成同口径signed temporal complement，保留alias/origin/provenance、重叠/空隙/跨期/口径反控；inverseYoY使用显式比较关系，禁止放宽日期冒通过。
 3. **记录与技术质量**：新attempt从当前scope构建真实路径，冻结R4不改。复用测试入口、在付费前验证observer必需技术字段；审计报告已完成不重跑全部。已有CAS/日志重复观察只在原质量责任内处理，不迁移旧封存、建新任务库或造物理节省数字。
 4. **有界真实复验**：在隔离新attempt仅复验受影响链；原件经CWP只读复用，缺资料才用FF正确provider；源材料改变才按配置预算准备新摘要，真实paid中断/same/cross恢复及8卡actual RF采用/主/压力/报告/snapshot要有新证据。失败保留、未知账不退。测试新增文件以初始清单/原件SHA恢复，不能删初始已有或他人文件。

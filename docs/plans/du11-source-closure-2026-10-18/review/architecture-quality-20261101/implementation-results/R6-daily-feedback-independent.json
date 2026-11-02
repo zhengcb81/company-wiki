@@ -1,0 +1,244 @@
+{
+  "schema_version": "independent-daily-feedback-review/1",
+  "status": "PASS_DAILY_TOOL_ENGINEERING_ONLY",
+  "reviewer": "/root/rectification_review_a",
+  "reviewed_at": "2026-11-02",
+  "scope": "daily --push-checks tool policy, original execution bounds and real local bare Git hook fixtures only",
+  "candidate": {
+    "head": "819cef31a4f2db7fa05bfe50901725f7a0dad016",
+    "branch": "codex/architecture-fast-feedback-20261102",
+    "base": "848b4ee0b31f438a45bb50691654a077c5ed9bee",
+    "manifest": {
+      "tools/pre_push_gate.py": {
+        "raw_sha256": "2604bae33ae3b79d523fadb11a11d555fc6c78d78ea98750db1293ecf0614f45",
+        "author_sha256": "2604bae33ae3b79d523fadb11a11d555fc6c78d78ea98750db1293ecf0614f45",
+        "author_raw_match": true,
+        "git_blob_lf_sha256": "b5e07ca43fa2c0b1da67ae8c0e9e8b9cb7effa073bda60a23d5209dd480d73b1",
+        "git_blob_lf_match": true
+      },
+      "tests/unit/test_daily_push_bounds.py": {
+        "raw_sha256": "c044e231ef13a7c8f5994618659402aacc1bdc273c49bdf897ee685b3dc36301",
+        "author_sha256": "c044e231ef13a7c8f5994618659402aacc1bdc273c49bdf897ee685b3dc36301",
+        "author_raw_match": true,
+        "git_blob_lf_sha256": "21076f02fffa9853a4c367245bb526ec43f99797fb34610656d232b286c17e19",
+        "git_blob_lf_match": true
+      },
+      "tests/unit/test_daily_push_policy.py": {
+        "raw_sha256": "44b20bd704689d673c572a7593740afa1421d6c977c8714e51e2e785760ff6cc",
+        "author_sha256": "44b20bd704689d673c572a7593740afa1421d6c977c8714e51e2e785760ff6cc",
+        "author_raw_match": true,
+        "git_blob_lf_sha256": "44b20bd704689d673c572a7593740afa1421d6c977c8714e51e2e785760ff6cc",
+        "git_blob_lf_match": true
+      },
+      "tests/unit/test_pre_push_gate.py": {
+        "raw_sha256": "656c93f4845a8998b23f89c3dae0df557db08956b5a7c10bc512e74a400dccbd",
+        "author_sha256": "656c93f4845a8998b23f89c3dae0df557db08956b5a7c10bc512e74a400dccbd",
+        "author_raw_match": true,
+        "git_blob_lf_sha256": "d66d5f44bd8c8f1991711e86287dd673f57acfa5a6e320d4e363946ec9baecf2",
+        "git_blob_lf_match": true
+      },
+      "tests/unit/test_pre_push_parallel_phases.py": {
+        "raw_sha256": "a2923c0c6c518fbf0187d464bfdc1c2cbf27425f7e28669baacad2ffdf00f9aa",
+        "author_sha256": "a2923c0c6c518fbf0187d464bfdc1c2cbf27425f7e28669baacad2ffdf00f9aa",
+        "author_raw_match": true,
+        "git_blob_lf_sha256": "b13babeae78d263af1a82ffa4d8b6b987ca92b3570d661cbf7e2b037f4e1c053",
+        "git_blob_lf_match": true
+      },
+      "tests/unit/test_ci_push_selection.py": {
+        "raw_sha256": "2aa294da3e441012c0236aece8cd859cbe08dcdf90cb48091d92c66d4249fcee",
+        "author_sha256": "2aa294da3e441012c0236aece8cd859cbe08dcdf90cb48091d92c66d4249fcee",
+        "author_raw_match": true,
+        "git_blob_lf_sha256": "d44855e8ccd3be5f445e86b0d3f5f1ac72141276144c324d527e174f460bd628",
+        "git_blob_lf_match": true
+      },
+      "docs/OPERATIONS.md": {
+        "raw_sha256": "ad4cbf7902e163ed09071cdfd46cb5ea2768d209902954942c567816f2bc8792",
+        "author_sha256": "ad4cbf7902e163ed09071cdfd46cb5ea2768d209902954942c567816f2bc8792",
+        "author_raw_match": true,
+        "git_blob_lf_sha256": "4c59185c10089a4e373b678e2e9983e442cb64cde03ee01489e7a6e71ac29d56",
+        "git_blob_lf_match": true
+      }
+    },
+    "retained_ast_equal": {
+      "FAST_CONTRACT_CASES": true,
+      "CURRENT_CI_REGRESSION_CASES": true,
+      "DAILY_PUSH_TIMEOUT_SECONDS": true,
+      "STDOUT_CAP_BYTES": true,
+      "STDERR_CAP_BYTES": true,
+      "_run": true,
+      "_run_pytest_gate": true,
+      "_dispatch_gate": true,
+      "_open_scratch": true
+    },
+    "full_modes_execution_ast_equal": true,
+    "fixed_smoke_target_count": 35,
+    "unchanged": {
+      ".github/workflows/ci.yml": {
+        "baseline_equals_candidate": true,
+        "candidate_blob_sha256": "6ed2425fca1c0b9f869f1b9dcdf2d32dcda19ce8a17cb54fd019d968c53d8708",
+        "working_lf_equals_candidate": true
+      },
+      ".pre-commit-config.yaml": {
+        "baseline_equals_candidate": true,
+        "candidate_blob_sha256": "54b10823d81603ae92fb6a96bb8142d78f38a4e6b4018ffe67cbc62bc6125caa",
+        "working_lf_equals_candidate": true
+      },
+      "tools/changed_unit_tests.py": {
+        "baseline_equals_candidate": true,
+        "candidate_blob_sha256": "f2681d80e8df81260dc90da5e756fb647cbc315b50ca41b6eefbc740a1578138",
+        "working_lf_equals_candidate": true
+      },
+      "src/company_wiki/_bounded_process.py": {
+        "baseline_equals_candidate": true,
+        "candidate_blob_sha256": "11792ca4d1140724f70e28f0ec77a77131af7a1ad181d379095dd052a79a0e99",
+        "working_lf_equals_candidate": true
+      },
+      "src/company_wiki/_process_tree.py": {
+        "baseline_equals_candidate": true,
+        "candidate_blob_sha256": "d6c31e77dfa827b9068b5742f3456546976abe347341a60a7b9accb259c65145",
+        "working_lf_equals_candidate": true
+      }
+    },
+    "deleted_obsolete_test_absent": true,
+    "working_status": "M .githooks/pre-push",
+    "foreign_hook_mode_only_diff": "diff --git a/.githooks/pre-push b/.githooks/pre-push\nold mode 100755\nnew mode 100644\n",
+    "old_timeout_receipts": {
+      ".planning/architecture-quality-20261101/r6-publication/r3-candidate-push.json": {
+        "exists": true,
+        "sha256": "ce6351c3090afface92536d8960e8e5f295872e8c661b5ccbb87dc11dbc5b117"
+      },
+      ".planning/architecture-quality-20261101/r6-publication/r3-candidate-push.log": {
+        "exists": true,
+        "sha256": "75fda7b3859447ec915101c80d5633e4a6c703d9e336d6b5247541ca7bf4bf6e"
+      }
+    }
+  },
+  "tests": {
+    "passed": 10,
+    "failed": 0,
+    "seconds": 16.55,
+    "exit_code": 0,
+    "python": "C:/Miniconda/python.exe 3.13.9 normal host",
+    "pytest": "9.1.1",
+    "independent_new_cases": 3,
+    "selected_existing_cases": 7,
+    "cases": [
+      {
+        "name": "test_actual_multi_ref_paths_never_hide_source",
+        "classname": "",
+        "time_s": "1.066"
+      },
+      {
+        "name": "test_unknown_and_executable_docs_are_not_skipped",
+        "classname": "",
+        "time_s": "0.003"
+      },
+      {
+        "name": "test_daily_actual_child_bound_and_cleanup",
+        "classname": "",
+        "time_s": "0.021"
+      },
+      {
+        "name": "test_real_push_green_fast_pass_then_blocked_by_a_ran_failure",
+        "classname": "tests.unit.test_daily_push_policy",
+        "time_s": "5.939"
+      },
+      {
+        "name": "test_real_docs_push_runs_no_tests_but_does_not_hide_earlier_code",
+        "classname": "tests.unit.test_daily_push_policy",
+        "time_s": "8.052"
+      },
+      {
+        "name": "test_full_local_mode_runs_every_existing_stage_in_order",
+        "classname": "tests.unit.test_daily_push_policy",
+        "time_s": "0.006"
+      },
+      {
+        "name": "test_child_failure_keeps_actual_exit_code_and_diagnostic",
+        "classname": "tests.unit.test_pre_push_process_cleanup",
+        "time_s": "0.370"
+      },
+      {
+        "name": "test_output_overflow_is_bounded_red_with_retained_progress[stdout]",
+        "classname": "tests.unit.test_pre_push_process_cleanup",
+        "time_s": "0.284"
+      },
+      {
+        "name": "test_output_overflow_is_bounded_red_with_retained_progress[stderr]",
+        "classname": "tests.unit.test_pre_push_process_cleanup",
+        "time_s": "0.305"
+      },
+      {
+        "name": "test_owned_temp_is_removed_on_transport_exception",
+        "classname": "tests.unit.test_pre_push_temp_scope",
+        "time_s": "0.012"
+      }
+    ],
+    "rootdir": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\w23-r6",
+    "explicit_candidate_config_and_confcutdir": true,
+    "gate_module_identity_assertion": "assert Path(gate.__file__).resolve() == tmp/w23-r6/tools/pre_push_gate.py",
+    "inherited_child_plugins": "PYTEST_DISABLE_PLUGIN_AUTOLOAD=1; PYTEST_PLUGINS=pytest_timeout; parent -p pytest_asyncio.plugin",
+    "junit_xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"0\" skipped=\"0\" tests=\"10\" time=\"16.454\" timestamp=\"2026-11-02T01:07:39.344264+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"\" name=\"test_actual_multi_ref_paths_never_hide_source\" time=\"1.066\" /><testcase classname=\"\" name=\"test_unknown_and_executable_docs_are_not_skipped\" time=\"0.003\" /><testcase classname=\"\" name=\"test_daily_actual_child_bound_and_cleanup\" time=\"0.021\" /><testcase classname=\"tests.unit.test_daily_push_policy\" name=\"test_real_push_green_fast_pass_then_blocked_by_a_ran_failure\" time=\"5.939\" /><testcase classname=\"tests.unit.test_daily_push_policy\" name=\"test_real_docs_push_runs_no_tests_but_does_not_hide_earlier_code\" time=\"8.052\" /><testcase classname=\"tests.unit.test_daily_push_policy\" name=\"test_full_local_mode_runs_every_existing_stage_in_order\" time=\"0.006\" /><testcase classname=\"tests.unit.test_pre_push_process_cleanup\" name=\"test_child_failure_keeps_actual_exit_code_and_diagnostic\" time=\"0.370\" /><testcase classname=\"tests.unit.test_pre_push_process_cleanup\" name=\"test_output_overflow_is_bounded_red_with_retained_progress[stdout]\" time=\"0.284\" /><testcase classname=\"tests.unit.test_pre_push_process_cleanup\" name=\"test_output_overflow_is_bounded_red_with_retained_progress[stderr]\" time=\"0.305\" /><testcase classname=\"tests.unit.test_pre_push_temp_scope\" name=\"test_owned_temp_is_removed_on_transport_exception\" time=\"0.012\" /></testsuite></testsuites>",
+    "console": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\g6\\\\c\", \"requested_basetemp_len\": 43, \"cwd_len\": 45, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\w23-r6\nconfigfile: pytest.ini\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollected 10 items\n\n. ...                                                                    [ 30%]\ntests\\unit\\test_daily_push_policy.py ...                                 [ 60%]\ntests\\unit\\test_pre_push_process_cleanup.py ...                          [ 90%]\ntests\\unit\\test_pre_push_temp_scope.py .                                 [100%]\n\n- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\g6\\junit-final.xml -\n============================= 10 passed in 16.55s =============================\n"
+  },
+  "verified": [
+    "Unknown/config/runtime/executable docs all dispatch the exact fixed inventory once; explicit unknowns fail red when child returns 7.",
+    "Actual multi-ref Git diff union retains source changes and runs smoke even when the other update is only documentation; ast.parse is forbidden in independent main probe.",
+    "Real copied hook and tool in owned Git repository push initial fixed smoke to owned bare remote; a failure inside that smoke rejects next push and does not advance remote to local HEAD.",
+    "Actual docs-only push starts zero pytest and emits tests_not_run without local_fast_pass; unpublished prior code plus last docs remains rejected.",
+    "daily wrapper retains 180-second total child timeout, 4MiB stdout/512KiB stderr caps, isolated TEMP/TMP/SQLITE_TMPDIR, no pytest cache, removes scratch after child exit7.",
+    "Actual child exit7 and diagnostic survive; stdout and stderr overflow each return125, preserve last progress, bound output; transport exception cleanup verified.",
+    "Complete CI/unit inventory, fixed FAST and CURRENT_REGRESSION inventories, bounded runner, independent selector and explicit manual full-mode AST unchanged from 848b4ee0."
+  ],
+  "findings": [],
+  "nonblocking_documentation": [
+    {
+      "paths": [
+        ".githooks/pre-push",
+        ".pre-commit-config.yaml"
+      ],
+      "detail": "Existing header comments still describe affected-file automatic selection. Actual hook delegates --push-checks and OPERATIONS now describes fixed smoke. Header-only correction can follow; existing hook mode WIP preserved."
+    }
+  ],
+  "retired_tests_assessment": "test_known_push_scope.py asserts obsolete daily 32 affected-file expansion, including a failure outside fixed smoke. Retiring that policy test is justified by explicit fast-smoke-only policy; selector implementation and selector tests remain. Existing true in-smoke rejection, scope honesty, child bounds and cleanup tests preserved.",
+  "setup_attempt": {
+    "failed": 3,
+    "passed": 7,
+    "seconds": 7.07,
+    "classification": "Reviewer-owned setup error, not product RED",
+    "causes": [
+      "Self probe chose deep per-test tmp_path above preserved60-unit scratch bound.",
+      "Reviewer disabled plugin autoload without exporting timeout plugin to child hook pytest; child correctly returned red on unrecognised --timeout."
+    ],
+    "correction": "Only owned probe moved to explicit short g6/s; child timeout plugin inherited and candidate rootdir/config/confcutdir explicit; product/test files untouched.",
+    "console": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\g6\\\\b\", \"requested_basetemp_len\": 43, \"cwd_len\": 45, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\nCW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\g6\\\\b\", \"requested_basetemp_len\": 43, \"cwd_len\": 45, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\nconfigfile: pytest.ini\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollected 10 items\n\n..\\g6\\test_gate_independent.py ..F                                       [ 30%]\ntests\\unit\\test_daily_push_policy.py FF.                                 [ 60%]\ntests\\unit\\test_pre_push_process_cleanup.py ...                          [ 90%]\ntests\\unit\\test_pre_push_temp_scope.py .                                 [100%]\n\n================================== FAILURES ===================================\n__________________ test_daily_actual_child_bound_and_cleanup __________________\n..\\g6\\test_gate_independent.py:82: in test_daily_actual_child_bound_and_cleanup\n    assert gate._run_pytest_gate([\"fixture\"], gate.DAILY_PUSH_LABEL_PREFIX + \" probe\") == 7\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntools\\pre_push_gate.py:315: in _run_pytest_gate\n    scratch = _open_scratch(_scratch_candidate_roots())\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntools\\pre_push_gate.py:288: in _open_scratch\n    raise RuntimeError(\nE   RuntimeError: no writable scratch root within the pytest path budget; tried:\nE     C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\g6\\b\\test_daily_actual_child_bound_0: candidate path too deep (root plus scratch reserve 14 requires 89 UTF-16 units; budget 60)\n________ test_real_push_green_fast_pass_then_blocked_by_a_ran_failure _________\ntests\\unit\\test_daily_push_policy.py:261: in test_real_push_green_fast_pass_then_blocked_by_a_ran_failure\n    assert green.returncode == 0, green.stdout + green.stderr\nE   AssertionError: Push scope: unknown push range; planned 35 target(s); full_validation_pending: change-specific tests are the author's responsibility; full suites remain in CI.\nE     Planned test targets:\nE       tests/unit/test_local_budget_observation.py::test_read_charge_reports_a_rejected_tail_separately_from_accepted_bytes\nE       tests/contract/test_local_prepare_failure_boundaries.py::test_real_discovery_completed_write_survives_later_unknown_failure\nE       tests/document_normalization/test_ocr_region_recovery.py::test_roi_budget_preflight_never_calls_rejected_renderer\nE       tests/document_normalization/test_ocr_region_recovery.py::test_rejected_render_attempt_keeps_reserved_budget\nE       tests/document_normalization/test_ocr_region_recovery.py::test_upscale_preflight_accounts_for_64m_canvas_without_allocating_it\nE       tests/document_normalization/test_isolated_ocr.py::test_noncooperative_native_stops_at_product_deadline[gil-block-inference-infer]\nE       tests/document_normalization/test_isolated_ocr.py::test_native_stdin_probe_does_not_deadlock_liveness_monitor[preflight]\nE       tests/document_normalization/test_isolated_ocr.py::test_narrative_default_proxy_carries_deadline_without_starting_native\nE       tests/integration/test_m3_official_json_acceptance.py\nE       tests/unit/test_runtime_dependencies.py::test_ci_requirements_include_declared_runtime_dependencies\nE       tests/unit/test_narrative_english_business_recall.py::test_recall_semantics_are_versioned_and_legacy_txt_locators_stay_unchanged\nE       tests/unit/test_narrative_verify_handler.py::test_verify_handler_transcript_replays_bytes_without_provider_policy\nE       tests/unit/test_official_json_projection_generation.py::test_old_raw_manifest_retains_exact_canonical_contract\nE       tests/unit/test_narrative_protocol_identity_shapes.py::test_protocol_lookup_does_not_hash_non_string_json\nE       tests/unit/test_automation_migrations.py::test_m14_classification_uses_one_snapshot_during_concurrent_init\nE       tests/contract/test_zr203_reader_rewire.py::test_read_entrypoints_never_construct_catalog_store\nE       tests/contract/test_zr1003_shadow_assertions.py::test_c2_recorded_review_is_diagnostic_metadata\nE       tests/contract/test_zr1006_broker_cohort.py::test_c2_ramp_1_to_3_to_7\nE       tests/contract/test_source_catalog_temp_worker_governance.py::test_owned_temp_worker_helper_detects_test_pid\nE       tests/contract/test_source_catalog_temp_worker_governance.py::test_stop_does_not_touch_unowned_live_workers_or_temporary_files\nE       tests/contract/test_narrative_output_plan.py\nE       tests/contract/test_summary_group_coverage.py\nE       tests/contract/test_official_transcript_layouts.py\nE       tests/contract/test_transcript_speaker_affiliation.py\nE       tests/contract/test_source_scope_qualification.py\nE       tests/contract/test_narrative_availability.py::test_one_verified_original_buffer_one_owner_lookup_no_new_fact_writer\nE       tests/contract/test_narrative_availability.py::test_projected_two_parents_cannot_borrow_one_raw_proof\nE       tests/unit/test_narrative_evidence.py::test_financial_table_rows_are_dropped_but_business_rows_are_selected\nE       tests/unit/test_narrative_evidence.py::test_numbered_project_rationale_heading_survives_a_tight_budget\nE       tests/unit/test_narrative_transport_contracts.py::test_frozen_producer_golden_contract_and_hash_bindings\nE       tests/contract/test_fc905_receipt_envelope.py::test_pi03_no_review_is_explicit_not_reviewed\nE       tests/unit/test_narrative_retrieval.py::test_resolver_fails_closed_when_raw_source_hash_changes\nE       tests/contract/test_b10_read_chain.py::test_b10_scan_is_not_vacuous\nE       tests/unit/test_shared_reading_cache_precheck.py::test_reuse_final_receipt_has_one_owner_read_per_operation\nE       tests/unit/test_shared_reading_cache_precheck.py::test_new_operation_rejects_changed_reused_original_before_new_fee\nE     \nE     === daily push fast feedback: fixed CI contract smoke ===\nE     \nE     ERROR: usage: python -m pytest [options] [file_or_dir] [file_or_dir] [...]\nE     \nE     python -m pytest: error: unrecognized arguments: --timeout=180\nE     \nE       inifile: C:\\Users\\֣����\\Projects\\company-wiki\\pytest.ini\nE     \nE       rootdir: C:\\Users\\֣����\\Projects\\company-wiki\nE     \nE     \nE     \nE     \nE     FAILED: daily push fast feedback: fixed CI contract smoke\nE     \nE     PUSH CHECKS RED �� fix the failing phase; do not bypass.\nE     \nE     PUSH BLOCKED by pre-push gate (CI root-fix protocol). Fix the root cause; do not bypass.\nE     error: failed to push some refs to 'C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\g6\\b\\test_real_push_green_fast_pass0\\remote.git'\nE     \nE   assert 1 == 0\nE    +  where 1 = CompletedProcess(args=['git', 'push', 'origin', 'master'], returncode=1, stdout=\"Push scope: unknown push range; plann...push some refs to 'C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\tmp\\\\g6\\\\b\\\\test_real_push_green_fast_pass0\\\\remote.git'\\n\").returncode\n______ test_real_docs_push_runs_no_tests_but_does_not_hide_earlier_code _______\ntests\\unit\\test_daily_push_policy.py:281: in test_real_docs_push_runs_no_tests_but_does_not_hide_earlier_code\n    assert initial.returncode == 0, initial.stdout + initial.stderr\nE   AssertionError: Push scope: unknown push range; planned 35 target(s); full_validation_pending: change-specific tests are the author's responsibility; full suites remain in CI.\nE     Planned test targets:\nE       tests/unit/test_local_budget_observation.py::test_read_charge_reports_a_rejected_tail_separately_from_accepted_bytes\nE       tests/contract/test_local_prepare_failure_boundaries.py::test_real_discovery_completed_write_survives_later_unknown_failure\nE       tests/document_normalization/test_ocr_region_recovery.py::test_roi_budget_preflight_never_calls_rejected_renderer\nE       tests/document_normalization/test_ocr_region_recovery.py::test_rejected_render_attempt_keeps_reserved_budget\nE       tests/document_normalization/test_ocr_region_recovery.py::test_upscale_preflight_accounts_for_64m_canvas_without_allocating_it\nE       tests/document_normalization/test_isolated_ocr.py::test_noncooperative_native_stops_at_product_deadline[gil-block-inference-infer]\nE       tests/document_normalization/test_isolated_ocr.py::test_native_stdin_probe_does_not_deadlock_liveness_monitor[preflight]\nE       tests/document_normalization/test_isolated_ocr.py::test_narrative_default_proxy_carries_deadline_without_starting_native\nE       tests/integration/test_m3_official_json_acceptance.py\nE       tests/unit/test_runtime_dependencies.py::test_ci_requirements_include_declared_runtime_dependencies\nE       tests/unit/test_narrative_english_business_recall.py::test_recall_semantics_are_versioned_and_legacy_txt_locators_stay_unchanged\nE       tests/unit/test_narrative_verify_handler.py::test_verify_handler_transcript_replays_bytes_without_provider_policy\nE       tests/unit/test_official_json_projection_generation.py::test_old_raw_manifest_retains_exact_canonical_contract\nE       tests/unit/test_narrative_protocol_identity_shapes.py::test_protocol_lookup_does_not_hash_non_string_json\nE       tests/unit/test_automation_migrations.py::test_m14_classification_uses_one_snapshot_during_concurrent_init\nE       tests/contract/test_zr203_reader_rewire.py::test_read_entrypoints_never_construct_catalog_store\nE       tests/contract/test_zr1003_shadow_assertions.py::test_c2_recorded_review_is_diagnostic_metadata\nE       tests/contract/test_zr1006_broker_cohort.py::test_c2_ramp_1_to_3_to_7\nE       tests/contract/test_source_catalog_temp_worker_governance.py::test_owned_temp_worker_helper_detects_test_pid\nE       tests/contract/test_source_catalog_temp_worker_governance.py::test_stop_does_not_touch_unowned_live_workers_or_temporary_files\nE       tests/contract/test_narrative_output_plan.py\nE       tests/contract/test_summary_group_coverage.py\nE       tests/contract/test_official_transcript_layouts.py\nE       tests/contract/test_transcript_speaker_affiliation.py\nE       tests/contract/test_source_scope_qualification.py\nE       tests/contract/test_narrative_availability.py::test_one_verified_original_buffer_one_owner_lookup_no_new_fact_writer\nE       tests/contract/test_narrative_availability.py::test_projected_two_parents_cannot_borrow_one_raw_proof\nE       tests/unit/test_narrative_evidence.py::test_financial_table_rows_are_dropped_but_business_rows_are_selected\nE       tests/unit/test_narrative_evidence.py::test_numbered_project_rationale_heading_survives_a_tight_budget\nE       tests/unit/test_narrative_transport_contracts.py::test_frozen_producer_golden_contract_and_hash_bindings\nE       tests/contract/test_fc905_receipt_envelope.py::test_pi03_no_review_is_explicit_not_reviewed\nE       tests/unit/test_narrative_retrieval.py::test_resolver_fails_closed_when_raw_source_hash_changes\nE       tests/contract/test_b10_read_chain.py::test_b10_scan_is_not_vacuous\nE       tests/unit/test_shared_reading_cache_precheck.py::test_reuse_final_receipt_has_one_owner_read_per_operation\nE       tests/unit/test_shared_reading_cache_precheck.py::test_new_operation_rejects_changed_reused_original_before_new_fee\nE     \nE     === daily push fast feedback: fixed CI contract smoke ===\nE     \nE     ERROR: usage: python -m pytest [options] [file_or_dir] [file_or_dir] [...]\nE     \nE     python -m pytest: error: unrecognized arguments: --timeout=180\nE     \nE       inifile: C:\\Users\\֣����\\Projects\\company-wiki\\pytest.ini\nE     \nE       rootdir: C:\\Users\\֣����\\Projects\\company-wiki\nE     \nE     \nE     \nE     \nE     FAILED: daily push fast feedback: fixed CI contract smoke\nE     \nE     PUSH CHECKS RED �� fix the failing phase; do not bypass.\nE     \nE     PUSH BLOCKED by pre-push gate (CI root-fix protocol). Fix the root cause; do not bypass.\nE     error: failed to push some refs to 'C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\g6\\b\\test_real_docs_push_runs_no_te0\\remote.git'\nE     \nE   assert 1 == 0\nE    +  where 1 = CompletedProcess(args=['git', 'push', 'origin', 'master'], returncode=1, stdout=\"Push scope: unknown push range; plann...push some refs to 'C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\tmp\\\\g6\\\\b\\\\test_real_docs_push_runs_no_te0\\\\remote.git'\\n\").returncode\n--- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\g6\\junit.xml ---\n=========================== short test summary info ===========================\nFAILED ..\\g6\\test_gate_independent.py::test_daily_actual_child_bound_and_cleanup\nFAILED tests\\unit\\test_daily_push_policy.py::test_real_push_green_fast_pass_then_blocked_by_a_ran_failure\nFAILED tests\\unit\\test_daily_push_policy.py::test_real_docs_push_runs_no_tests_but_does_not_hide_earlier_code\n========================= 3 failed, 7 passed in 7.07s =========================\n"
+  },
+  "reproducers": {
+    "test_gate_independent.py": {
+      "sha256": "4160a9318df013190c1e298cbcb31d1d90793a7aefc8e165da44fb8b36f9a7f7",
+      "source": "\"\"\"Owned independent gate probes; no product/model/source-catalog work.\"\"\"\nimport ast\nimport io\nimport subprocess\nfrom pathlib import Path\n\nfrom tools import pre_push_gate as gate\n\nEXPECTED_GATE = Path(\"C:/Users/郑曾波/Projects/company-wiki/tmp/w23-r6/tools/pre_push_gate.py\")\nassert Path(gate.__file__).resolve() == EXPECTED_GATE.resolve(), gate.__file__\n\n\ndef git(root, *args):\n    p = subprocess.run([\"git\", *args], cwd=root, capture_output=True,\n                       text=True, encoding=\"utf-8\", timeout=20)\n    assert p.returncode == 0, p.stderr\n    return p.stdout.strip()\n\n\ndef test_actual_multi_ref_paths_never_hide_source(monkeypatch, tmp_path, capsys):\n    git(tmp_path, \"init\", \"-q\", \"-b\", \"master\")\n    git(tmp_path, \"config\", \"user.name\", \"Independent reviewer\")\n    git(tmp_path, \"config\", \"user.email\", \"review@example.invalid\")\n    (tmp_path / \"README.md\").write_text(\"base\", encoding=\"utf-8\")\n    git(tmp_path, \"add\", \".\")\n    git(tmp_path, \"commit\", \"-qm\", \"base\")\n    baseline = git(tmp_path, \"rev-parse\", \"HEAD\")\n    (tmp_path / \"engine.py\").write_text(\"pass\\n\", encoding=\"utf-8\")\n    git(tmp_path, \"add\", \".\")\n    git(tmp_path, \"commit\", \"-qm\", \"source\")\n    code = git(tmp_path, \"rev-parse\", \"HEAD\")\n    (tmp_path / \"README.md\").write_text(\"after code\", encoding=\"utf-8\")\n    git(tmp_path, \"add\", \".\")\n    git(tmp_path, \"commit\", \"-qm\", \"docs\")\n    docs = git(tmp_path, \"rev-parse\", \"HEAD\")\n    update = (f\"refs/heads/a {code} refs/heads/a {baseline}\\n\"\n              f\"refs/heads/b {docs} refs/heads/b {code}\\n\")\n    assert gate.changed_paths(tmp_path, update) == {\"engine.py\", \"README.md\"}\n    monkeypatch.setattr(gate, \"PROJECT_ROOT\", tmp_path)\n    monkeypatch.setattr(gate.sys, \"stdin\", io.StringIO(update))\n    calls = []\n    monkeypatch.setattr(gate, \"_run_pytest_gate\", lambda cmd, label: calls.append(cmd) or 0)\n    monkeypatch.setattr(ast, \"parse\", lambda *a, **k: (_ for _ in ()).throw(AssertionError(\"AST used\")))\n    assert gate.main([\"--push-checks\"]) == 0\n    assert len(calls) == 1\n    assert calls[0][calls[0].index(\"--timeout=180\") + 1:] == list(gate.FAST_CONTRACT_CASES)\n    out = capsys.readouterr().out\n    assert \"fixed smoke only\" in out and \"full_validation_pending\" in out\n\n\ndef test_unknown_and_executable_docs_are_not_skipped(monkeypatch, capsys):\n    for paths in ({\"docs/runtime.py\"}, {\"docs/README.json\"},\n                  {\".github/workflows/ci.yml\"}, {\"unseen.bundle\"}, None):\n        monkeypatch.setattr(gate, \"changed_paths\", lambda *a, p=paths: p)\n        monkeypatch.setattr(gate.sys, \"stdin\", io.StringIO(\"independent\"))\n        calls = []\n        monkeypatch.setattr(gate, \"_run_pytest_gate\", lambda cmd, label: calls.append(cmd) or 7)\n        assert gate.main([\"--push-checks\"]) == 7\n        assert len(calls) == 1\n        out = capsys.readouterr().out\n        assert \"PUSH CHECKS RED\" in out and \"local_fast_pass\" not in out\n\n\ndef test_daily_actual_child_bound_and_cleanup(monkeypatch, tmp_path):\n    short_root = Path(__file__).parent / \"s\"\n    assert not short_root.exists()\n    short_root.mkdir()\n    monkeypatch.setattr(gate, \"PROJECT_ROOT\", tmp_path)\n    monkeypatch.setattr(gate, \"_scratch_candidate_roots\", lambda: [str(short_root)])\n    seen = []\n\n    def run(cmd, label, timeout, env_extra):\n        scratch = Path(cmd[cmd.index(\"--basetemp\") + 1])\n        assert scratch.exists()\n        seen.append(scratch)\n        assert timeout == 180\n        assert gate.STDOUT_CAP_BYTES == 4 * 1024 * 1024\n        assert gate.STDERR_CAP_BYTES == 512 * 1024\n        assert env_extra[\"TEMP\"] == str(scratch.resolve())\n        assert env_extra[\"TMP\"] == str(scratch.resolve())\n        assert env_extra[\"SQLITE_TMPDIR\"] == str(scratch.resolve())\n        assert cmd.count(\"-vv\") == 1\n        assert \"no:cacheprovider\" in cmd\n        (scratch / \"partial\").write_text(\"owned\", encoding=\"utf-8\")\n        return 7\n\n    monkeypatch.setattr(gate, \"_run\", run)\n    assert gate._run_pytest_gate([\"fixture\"], gate.DAILY_PUSH_LABEL_PREFIX + \" probe\") == 7\n    assert len(seen) == 1 and not seen[0].exists()\n    assert not list(tmp_path.iterdir())\n    assert not list(short_root.iterdir())\n    short_root.rmdir()\n"
+    },
+    "seal.py": {
+      "sha256": "057be5ce6d9dbb93a0f5e892d5f82736745966573de91ad6f9954c4108fb46c3",
+      "source": "import ast\nimport hashlib\nimport json\nimport subprocess\nfrom pathlib import Path\n\nROOT = Path('C:/Users/郑曾波/Projects/company-wiki')\nWT = ROOT / 'tmp/w23-r6'\nOUT = ROOT / 'tmp/g6'\nRESULTS = ROOT / 'docs/plans/du11-source-closure-2026-10-18/review/architecture-quality-20261101/implementation-results'\nauthor = json.loads((RESULTS / 'R6-daily-feedback-simplification.json').read_text(encoding='utf-8'))\n\ndef git(*args):\n    return subprocess.check_output(['git', *args], cwd=WT)\n\ndef sha(data):\n    return hashlib.sha256(data).hexdigest()\n\nmanifest = {}\nfor file, expected in author['changed_files_sha256'].items():\n    data = (WT / file).read_bytes()\n    blob = git('show', f'819cef31:{file}')\n    manifest[file] = {'raw_sha256': sha(data), 'author_sha256': expected,\n                      'author_raw_match': sha(data) == expected,\n                      'git_blob_lf_sha256': sha(blob),\n                      'git_blob_lf_match': data.replace(b'\\r\\n', b'\\n') == blob}\nassert all(row['author_raw_match'] and row['git_blob_lf_match'] for row in manifest.values())\nold = ast.parse(git('show', '848b4ee0:tools/pre_push_gate.py').decode())\nnew = ast.parse((WT / 'tools/pre_push_gate.py').read_text(encoding='utf-8'))\n\ndef nodes(tree):\n    out = {}\n    for n in tree.body:\n        if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef)):\n            out[n.name] = n\n        elif isinstance(n, ast.Assign):\n            for target in n.targets:\n                if isinstance(target, ast.Name):\n                    out[target.id] = n\n    return out\n\na, b = nodes(old), nodes(new)\nkept = ['FAST_CONTRACT_CASES', 'CURRENT_CI_REGRESSION_CASES',\n        'DAILY_PUSH_TIMEOUT_SECONDS', 'STDOUT_CAP_BYTES', 'STDERR_CAP_BYTES',\n        '_run', '_run_pytest_gate', '_dispatch_gate', '_open_scratch']\nast_equal = {name: ast.dump(a[name], include_attributes=False) == ast.dump(b[name], include_attributes=False)\n             for name in kept}\nassert all(ast_equal.values())\n\ndef full_modes(tree):\n    main = nodes(tree)['main']\n    chosen = []\n    for n in main.body:\n        if isinstance(n, (ast.Assign, ast.AnnAssign)):\n            targets = [getattr(n, 'target', None), *getattr(n, 'targets', [])]\n            if any(isinstance(t, ast.Name) and t.id in {'gates', 'focused_contract_gate', 'fast_contract_gate'} for t in targets):\n                chosen.append(n)\n        if isinstance(n, ast.If) and isinstance(n.test, ast.Attribute) and n.test.attr == 'fast_contracts_only':\n            chosen.append(n)\n        if isinstance(n, ast.For):\n            chosen.append(n)\n    return [ast.dump(n, include_attributes=False) for n in chosen]\n\nfull_equal = full_modes(old) == full_modes(new)\nassert full_equal\nfixed_smoke_nodes = len(b['FAST_CONTRACT_CASES'].value.elts) - 1 + len(b['CURRENT_CI_REGRESSION_CASES'].value.elts)\nunchanged = {}\nfor file in ['.github/workflows/ci.yml', '.pre-commit-config.yaml', 'tools/changed_unit_tests.py',\n             'src/company_wiki/_bounded_process.py', 'src/company_wiki/_process_tree.py']:\n    baseline, candidate = git('show', f'848b4ee0:{file}'), git('show', f'819cef31:{file}')\n    unchanged[file] = {'baseline_equals_candidate': baseline == candidate,\n                       'candidate_blob_sha256': sha(candidate),\n                       'working_lf_equals_candidate': (WT / file).read_bytes().replace(b'\\r\\n', b'\\n') == candidate}\nassert all(v['baseline_equals_candidate'] and v['working_lf_equals_candidate'] for v in unchanged.values())\nhook_diff = git('diff', '--', '.githooks/pre-push').decode()\nassert hook_diff.strip().endswith('old mode 100755\\nnew mode 100644')\nhead = git('rev-parse', 'HEAD').decode().strip()\nassert head == '819cef31a4f2db7fa05bfe50901725f7a0dad016'\nout = {'head': head, 'branch': git('branch', '--show-current').decode().strip(),\n       'base': git('rev-parse', '848b4ee0').decode().strip(), 'manifest': manifest,\n       'retained_ast_equal': ast_equal, 'full_modes_execution_ast_equal': full_equal,\n       'fixed_smoke_target_count': fixed_smoke_nodes, 'unchanged': unchanged,\n       'deleted_obsolete_test_absent': not (WT / 'tests/unit/test_known_push_scope.py').exists(),\n       'working_status': git('status', '--short').decode().strip(),\n       'foreign_hook_mode_only_diff': hook_diff,\n       'old_timeout_receipts': {name: {'exists': (ROOT / name).exists(), 'sha256': sha((ROOT / name).read_bytes()) if (ROOT / name).exists() else None}\n         for name in ['.planning/architecture-quality-20261101/r6-publication/r3-candidate-push.json', '.planning/architecture-quality-20261101/r6-publication/r3-candidate-push.log']}}\n(OUT / 'seal.json').write_text(json.dumps(out, ensure_ascii=False, indent=2) + '\\n', encoding='utf-8')\nprint(json.dumps({'head': head, 'seven_sha_pass': len(manifest), 'ast_pass': len(ast_equal),\n                  'full_modes_equal': full_equal, 'fixed_targets': fixed_smoke_nodes,\n                  'unchanged_files': len(unchanged), 'status': out['working_status']}, ensure_ascii=False))\n"
+    }
+  },
+  "cleanup": {
+    "root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\g6",
+    "initial_absent": true,
+    "containment_checked": true,
+    "reparse_checked": true,
+    "exists_after": false
+  },
+  "not_claimed": [
+    "173-case author full rerun",
+    "fixed actual product smoke duration or all real smoke assertions",
+    "new real remote push performance",
+    "full candidate CI success",
+    "in-flight source R4 semantics",
+    "H1 or production original parsing",
+    "real LLM summary/cache/RF adoption",
+    "whole project completion"
+  ],
+  "decision": "Engineering change is fit for ROOT normal candidate publication and precise CI; no substantive P1/P2 found in bounded tool scope. Actual remote push/CI remains ROOT responsibility."
+}
