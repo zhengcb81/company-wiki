@@ -1,0 +1,167 @@
+{
+  "schema_version": "r6-candidate-ci-observation/1",
+  "observed_at_utc": "2026-11-02T03:02:17.311291+00:00",
+  "candidate": {
+    "id": 41380285347,
+    "head_sha": "10767b86318e63094c2bb49451447c9aedffc32c",
+    "head_branch": "codex/architecture-rectification-r2-20261101",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41380285347",
+    "created_at": "2026-11-02T02:55:39Z",
+    "updated_at": "2026-11-02T02:59:56Z"
+  },
+  "jobs": [
+    {
+      "id": 125069378451,
+      "name": "Fast checks (Python 3.12)",
+      "status": "completed",
+      "conclusion": "success",
+      "started_at": "2026-11-02T02:55:43Z",
+      "completed_at": "2026-11-02T02:59:55Z",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-11-02T02:55:43Z",
+          "completed_at": "2026-11-02T02:55:44Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-11-02T02:55:44Z",
+          "completed_at": "2026-11-02T02:55:48Z"
+        },
+        {
+          "name": "Set up Python 3.12",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-11-02T02:55:48Z",
+          "completed_at": "2026-11-02T02:55:51Z"
+        },
+        {
+          "name": "Install dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-11-02T02:55:51Z",
+          "completed_at": "2026-11-02T02:56:16Z"
+        },
+        {
+          "name": "Ruff lint",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-11-02T02:56:16Z",
+          "completed_at": "2026-11-02T02:56:16Z"
+        },
+        {
+          "name": "Strict type check on src",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-11-02T02:56:16Z",
+          "completed_at": "2026-11-02T02:56:22Z"
+        },
+        {
+          "name": "Compileall and config doctor",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-11-02T02:56:22Z",
+          "completed_at": "2026-11-02T02:56:25Z"
+        },
+        {
+          "name": "Unit tests",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8,
+          "started_at": "2026-11-02T02:56:25Z",
+          "completed_at": "2026-11-02T02:59:44Z"
+        },
+        {
+          "name": "Unit test failure summary",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9,
+          "started_at": "2026-11-02T02:59:44Z",
+          "completed_at": "2026-11-02T02:59:44Z"
+        },
+        {
+          "name": "Focused contract tests",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 10,
+          "started_at": "2026-11-02T02:59:44Z",
+          "completed_at": "2026-11-02T02:59:51Z"
+        },
+        {
+          "name": "Focused contract failure summary",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11,
+          "started_at": "2026-11-02T02:59:51Z",
+          "completed_at": "2026-11-02T02:59:51Z"
+        },
+        {
+          "name": "CLI smoke test",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 12,
+          "started_at": "2026-11-02T02:59:51Z",
+          "completed_at": "2026-11-02T02:59:51Z"
+        },
+        {
+          "name": "Scan for hardcoded secrets",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 13,
+          "started_at": "2026-11-02T02:59:51Z",
+          "completed_at": "2026-11-02T02:59:51Z"
+        },
+        {
+          "name": "Post Set up Python 3.12",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 25,
+          "started_at": "2026-11-02T02:59:51Z",
+          "completed_at": "2026-11-02T02:59:54Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 26,
+          "started_at": "2026-11-02T02:59:54Z",
+          "completed_at": "2026-11-02T02:59:54Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 27,
+          "started_at": "2026-11-02T02:59:54Z",
+          "completed_at": "2026-11-02T02:59:54Z"
+        }
+      ]
+    }
+  ],
+  "interpretation": "Original complete workflow green for exact source candidate, not only bounded author tests. No T3 RED source tests included; real H1/summary/cache/RF acceptance still OPEN.",
+  "test_contract_note": "Original70 contract expectations retained; ROOT2budget spies forwarded sharedWorkBudget. R4 self-added sourceScope/worldtruth oracles corrected explicitly in R6-source-contract-r5; old failed receipts retained.",
+  "source_manifest": "R6-r5-freeze-manifest.json",
+  "independent_final": "PENDING",
+  "master_adoption": false,
+  "new_paid_calls": 0,
+  "later_disposition": {
+    "observed_at_utc": "2026-11-02T03:09:57.946734+00:00",
+    "final_independent": "R6-independent-ci-r5.json",
+    "status": "PASS_R5_SOURCE_ENGINEERING_ONLY",
+    "normal_local_ff": "10767b86",
+    "main_push": "PENDING_DOCUMENT_BUNDLE"
+  }
+}

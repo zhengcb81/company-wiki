@@ -1,14 +1,12 @@
-# Local pre-commit gate mirroring the CI quality workflow's fast checks.
+# Local static pre-commit checks mirror the CI quality workflow.
 # Pins match CI exactly (ruff 0.15.18, mypy 1.19.0 via the local system).
-# Commits run static checks only. Pushes run affected Unit files plus the CI
-# smoke set once. Bounded known consumers remain when other scope is uncertain;
-# unknown scopes without known consumers run smoke only, with the rest in CI
-# (local_fast_pass, full_validation_pending). Commits do not run pytest.
-# CI runs all Unit tests. Major implementation nodes run their relevant
-# integration and end-to-end tests.
+# Commits do not run pytest. Daily pushes run the fixed contract smoke once;
+# proven documentation ranges start no tests. Authors run change-specific
+# tests during implementation; CI runs all Unit tests and major nodes cover
+# relevant integration/end-to-end behavior. local_fast_pass proves smoke only.
 #
-#   pre-commit install   # once per clone (installs .git/hooks/pre-commit)
-#   pre-commit run --all-files   # full gate on demand
+#   pre-commit install
+#   pre-commit run --all-files   # full static checks on demand
 repos:
   - repo: local
     hooks:

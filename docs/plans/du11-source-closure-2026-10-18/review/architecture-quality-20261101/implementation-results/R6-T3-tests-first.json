@@ -1,0 +1,482 @@
+{
+  "schema_version": "t3-tests-first/1",
+  "status": "TESTS_FIRST_RED_FROZEN_SOURCE_FIXES_NOT_IMPLEMENTED",
+  "worktree": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2",
+  "command": [
+    "C:\\Miniconda\\python.exe",
+    "-B",
+    "-X",
+    "utf8",
+    "-m",
+    "pytest",
+    "tests/unit/document_understanding_note_scope",
+    "-q",
+    "--tb=short",
+    "-p",
+    "no:cacheprovider",
+    "--basetemp",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\t3a-913d0e50\\r",
+    "--junitxml",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\t3a-913d0e50\\results.xml"
+  ],
+  "synthetic_only": true,
+  "model_calls": 0,
+  "downloads": 0,
+  "original_document_access": false,
+  "production_files_changed_by_author": [],
+  "new_directory_initially_absent": true,
+  "runtime_owner_before_sha256": {
+    "src/company_wiki/document_understanding/observation_adapter.py": "f16251e6fb716961fab08b6581cc2138534fd2a0298610eefcfc2b9927d391f0",
+    "src/company_wiki/document_understanding/structure/layout.py": "d25defcb1e38947b7d73389ca86a89a1d7cbac65e4903895bec80a3e2ff6419b",
+    "src/company_wiki/document_understanding/structure/sections.py": "8ff70fc94b5af97d856a651235577d85087fbdd2c0b42863f6701b3517dc6b4d",
+    "src/company_wiki/document_understanding/narrative_continuity.py": "d8c8be3d1556fed569fb825db3d0541f806ebb39cfb72008ee952772712db32d",
+    "src/company_wiki/document_understanding/pipeline.py": "198385623657a1704091d38435b1bc696794dd7afb768eac493b718d705c3056"
+  },
+  "cleanup": {
+    "owned_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\t3a-913d0e50",
+    "initial_absent": true,
+    "containment_checked": true,
+    "non_reparse_checked": true,
+    "exists_after": false,
+    "logical_bytes_before_delete": 52909
+  },
+  "pytest_exit_code": 1,
+  "wall_seconds": 7.831,
+  "junit_sha256": "b090963ad425925e1a32aef3fadb16480f8306eb1f846572b200d243dcaf3afc",
+  "cases": [
+    {
+      "class": "tests.unit.document_understanding_note_scope.test_local_scopes",
+      "name": "test_each_new_note_owns_its_positive_introduction_even_for_same_actor[actors0-numbers0]",
+      "status": "FAILED",
+      "seconds": "0.510",
+      "message": "AssertionError: {'target': 1, 'wrong_ancestors': {'urn:company-wiki:narrative-unit:sha256:2dd1877ce267ee3de6cecb8a7bc1139270a5abd107148d05746906dde7a14ffc'}}\nassert not {'urn:company-wiki:narrative-unit:sha256:2dd1877ce267ee3de6cecb8a7bc1139270a5abd107148d05746906dde7a14ffc'}\n +  where {'urn:company-wiki:narrative-unit:sha256:2dd1877ce267ee3de6cecb8a7bc1139270a5abd107148d05746906dde7a14ffc'} = <built-in method intersection of set object at 0x000002BA8BC3BD80>({'urn:company-wiki:narrative-unit:sha256:2dd1877ce267ee3de6cecb8a7bc1139270a5abd107148d05746906dde7a14ffc'})\n +    where <built-in method intersection of set object at 0x000002BA8BC3BD80> = {'urn:company-wiki:narrative-unit:sha256:2dd1877ce267ee3de6cecb8a7bc1139270a5abd107148d05746906dde7a14ffc', 'urn:compa...d7b13c895b', 'urn:company-wiki:narrative-unit:sha256:fe70ecf9c1e4ea56b88b1741ff14f27054ed30002f14d7ba633d5c7cee6ff352'}.intersection",
+      "detail": "tests\\unit\\document_understanding_note_scope\\test_local_scopes.py:30: in test_each_new_note_owns_its_positive_introduction_even_for_same_actor\n    assert not forbidden.intersection(context), {\"target\": index, \"wrong_ancestors\": context}\nE   AssertionError: {'target': 1, 'wrong_ancestors': {'urn:company-wiki:narrative-unit:sha256:2dd1877ce267ee3de6cecb8a7bc1139270a5abd107148d05746906dde7a14ffc'}}\nE   assert not {'urn:company-wiki:narrative-unit:sha256:2dd1877ce267ee3de6cecb8a7bc1139270a5abd107148d05746906dde7a14ffc'}\nE    +  where {'urn:company-wiki:narrative-unit:sha256:2dd1877ce267ee3de6cecb8a7bc1139270a5abd107148d05746906dde7a14ffc'} = <built-in method intersection of set object at 0x000002BA8BC3BD80>({'urn:company-wiki:narrative-unit:sha256:2dd1877ce267ee3de6cecb8a7bc1139270a5abd107148d05746906dde7a14ffc'})\nE    +    where <built-in method intersection of set object at 0x000002BA8BC3BD80> = {'urn:company-wiki:narrative-unit:sha256:2dd1877ce267ee3de6cecb8a7bc1139270a5abd107148d05746906dde7a14ffc', 'urn:compa...d7b13c895b', 'urn:company-wiki:narrative-unit:sha256:fe70ecf9c1e4ea56b88b1741ff14f27054ed30002f14d7ba633d5c7cee6ff352'}.intersection"
+    },
+    {
+      "class": "tests.unit.document_understanding_note_scope.test_local_scopes",
+      "name": "test_each_new_note_owns_its_positive_introduction_even_for_same_actor[actors1-numbers1]",
+      "status": "FAILED",
+      "seconds": "0.029",
+      "message": "AssertionError: {'target': 1, 'wrong_ancestors': {'urn:company-wiki:narrative-unit:sha256:17f0d161af9c89d4eef83af8ba9eb3fdc0a64a2a3ce616ce31b35237a54dbd7d'}}\nassert not {'urn:company-wiki:narrative-unit:sha256:17f0d161af9c89d4eef83af8ba9eb3fdc0a64a2a3ce616ce31b35237a54dbd7d'}\n +  where {'urn:company-wiki:narrative-unit:sha256:17f0d161af9c89d4eef83af8ba9eb3fdc0a64a2a3ce616ce31b35237a54dbd7d'} = <built-in method intersection of set object at 0x000002BA8BC9B060>({'urn:company-wiki:narrative-unit:sha256:17f0d161af9c89d4eef83af8ba9eb3fdc0a64a2a3ce616ce31b35237a54dbd7d'})\n +    where <built-in method intersection of set object at 0x000002BA8BC9B060> = {'urn:company-wiki:narrative-unit:sha256:17f0d161af9c89d4eef83af8ba9eb3fdc0a64a2a3ce616ce31b35237a54dbd7d', 'urn:compa...60a980a3db', 'urn:company-wiki:narrative-unit:sha256:f74a84dbc37aac15764641a9424bf8c69b9b7ca86c614260e701d4b1ebe1a53e'}.intersection",
+      "detail": "tests\\unit\\document_understanding_note_scope\\test_local_scopes.py:30: in test_each_new_note_owns_its_positive_introduction_even_for_same_actor\n    assert not forbidden.intersection(context), {\"target\": index, \"wrong_ancestors\": context}\nE   AssertionError: {'target': 1, 'wrong_ancestors': {'urn:company-wiki:narrative-unit:sha256:17f0d161af9c89d4eef83af8ba9eb3fdc0a64a2a3ce616ce31b35237a54dbd7d'}}\nE   assert not {'urn:company-wiki:narrative-unit:sha256:17f0d161af9c89d4eef83af8ba9eb3fdc0a64a2a3ce616ce31b35237a54dbd7d'}\nE    +  where {'urn:company-wiki:narrative-unit:sha256:17f0d161af9c89d4eef83af8ba9eb3fdc0a64a2a3ce616ce31b35237a54dbd7d'} = <built-in method intersection of set object at 0x000002BA8BC9B060>({'urn:company-wiki:narrative-unit:sha256:17f0d161af9c89d4eef83af8ba9eb3fdc0a64a2a3ce616ce31b35237a54dbd7d'})\nE    +    where <built-in method intersection of set object at 0x000002BA8BC9B060> = {'urn:company-wiki:narrative-unit:sha256:17f0d161af9c89d4eef83af8ba9eb3fdc0a64a2a3ce616ce31b35237a54dbd7d', 'urn:compa...60a980a3db', 'urn:company-wiki:narrative-unit:sha256:f74a84dbc37aac15764641a9424bf8c69b9b7ca86c614260e701d4b1ebe1a53e'}.intersection"
+    },
+    {
+      "class": "tests.unit.document_understanding_note_scope.test_local_scopes",
+      "name": "test_each_new_note_owns_its_positive_introduction_even_for_same_actor[actors2-numbers2]",
+      "status": "FAILED",
+      "seconds": "0.030",
+      "message": "AssertionError: {'target': 1, 'wrong_ancestors': {'urn:company-wiki:narrative-unit:sha256:def0381d859c2570085b0e5d37316bdc08866deb05cf2d02d99dc905e1f38b26'}}\nassert not {'urn:company-wiki:narrative-unit:sha256:def0381d859c2570085b0e5d37316bdc08866deb05cf2d02d99dc905e1f38b26'}\n +  where {'urn:company-wiki:narrative-unit:sha256:def0381d859c2570085b0e5d37316bdc08866deb05cf2d02d99dc905e1f38b26'} = <built-in method intersection of set object at 0x000002BA8BD54740>({'urn:company-wiki:narrative-unit:sha256:def0381d859c2570085b0e5d37316bdc08866deb05cf2d02d99dc905e1f38b26'})\n +    where <built-in method intersection of set object at 0x000002BA8BD54740> = {'urn:company-wiki:narrative-unit:sha256:319773fad7ebd79da844398654937c02a4c7250dd5874737849cef00f0f92dfa', 'urn:compa...b85ccf458b', 'urn:company-wiki:narrative-unit:sha256:def0381d859c2570085b0e5d37316bdc08866deb05cf2d02d99dc905e1f38b26'}.intersection",
+      "detail": "tests\\unit\\document_understanding_note_scope\\test_local_scopes.py:30: in test_each_new_note_owns_its_positive_introduction_even_for_same_actor\n    assert not forbidden.intersection(context), {\"target\": index, \"wrong_ancestors\": context}\nE   AssertionError: {'target': 1, 'wrong_ancestors': {'urn:company-wiki:narrative-unit:sha256:def0381d859c2570085b0e5d37316bdc08866deb05cf2d02d99dc905e1f38b26'}}\nE   assert not {'urn:company-wiki:narrative-unit:sha256:def0381d859c2570085b0e5d37316bdc08866deb05cf2d02d99dc905e1f38b26'}\nE    +  where {'urn:company-wiki:narrative-unit:sha256:def0381d859c2570085b0e5d37316bdc08866deb05cf2d02d99dc905e1f38b26'} = <built-in method intersection of set object at 0x000002BA8BD54740>({'urn:company-wiki:narrative-unit:sha256:def0381d859c2570085b0e5d37316bdc08866deb05cf2d02d99dc905e1f38b26'})\nE    +    where <built-in method intersection of set object at 0x000002BA8BD54740> = {'urn:company-wiki:narrative-unit:sha256:319773fad7ebd79da844398654937c02a4c7250dd5874737849cef00f0f92dfa', 'urn:compa...b85ccf458b', 'urn:company-wiki:narrative-unit:sha256:def0381d859c2570085b0e5d37316bdc08866deb05cf2d02d99dc905e1f38b26'}.intersection"
+    },
+    {
+      "class": "tests.unit.document_understanding_note_scope.test_local_scopes",
+      "name": "test_long_source_marked_intro_is_complete_context_without_a_heading_length_bypass[False]",
+      "status": "FAILED",
+      "seconds": "0.025",
+      "message": "AssertionError: assert 'urn:company-wiki:narrative-unit:sha256:703a66a86cb0bf8d681322d32d37b5cf73b2ea5654f19d33ab7b3181dae1045e' in set()\n +  where 'urn:company-wiki:narrative-unit:sha256:703a66a86cb0bf8d681322d32d37b5cf73b2ea5654f19d33ab7b3181dae1045e' = NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:703a66a86cb0bf8d681322d32d37b5cf73b2ea5654f19d33ab7b3181...eight': 'regular', 'coordinate_frame': 'dict', 'source': 'pdf_native_single_textpage', 'char_alignment': 'exact'}]}}})).unit_id\n +  and   set() = inherited_heading_ids({'schema_version': 'du-pipeline/1', 'feature_version': '1.15.0', 'analysis_status': 'complete', 'work': {'used': 1160, 'limit': 16000000, 'exhausted': False, 'source_unit_count': 2, ...}, ...}, NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:182d0ab8005d0569d2e44587d4bd3989dd685ce435390e5309afba93...eight': 'regular', 'coordinate_frame': 'dict', 'source': 'pdf_native_single_textpage', 'char_alignment': 'exact'}]}}})))",
+      "detail": "tests\\unit\\document_understanding_note_scope\\test_local_scopes.py:42: in test_long_source_marked_intro_is_complete_context_without_a_heading_length_bypass\n    assert owned[\"intro\"].unit_id in inherited_heading_ids(result, owned[\"body\"])\nE   AssertionError: assert 'urn:company-wiki:narrative-unit:sha256:703a66a86cb0bf8d681322d32d37b5cf73b2ea5654f19d33ab7b3181dae1045e' in set()\nE    +  where 'urn:company-wiki:narrative-unit:sha256:703a66a86cb0bf8d681322d32d37b5cf73b2ea5654f19d33ab7b3181dae1045e' = NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:703a66a86cb0bf8d681322d32d37b5cf73b2ea5654f19d33ab7b3181...eight': 'regular', 'coordinate_frame': 'dict', 'source': 'pdf_native_single_textpage', 'char_alignment': 'exact'}]}}})).unit_id\nE    +  and   set() = inherited_heading_ids({'schema_version': 'du-pipeline/1', 'feature_version': '1.15.0', 'analysis_status': 'complete', 'work': {'used': 1160, 'limit': 16000000, 'exhausted': False, 'source_unit_count': 2, ...}, ...}, NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:182d0ab8005d0569d2e44587d4bd3989dd685ce435390e5309afba93...eight': 'regular', 'coordinate_frame': 'dict', 'source': 'pdf_native_single_textpage', 'char_alignment': 'exact'}]}}})))"
+    },
+    {
+      "class": "tests.unit.document_understanding_note_scope.test_local_scopes",
+      "name": "test_long_source_marked_intro_is_complete_context_without_a_heading_length_bypass[True]",
+      "status": "FAILED",
+      "seconds": "0.020",
+      "message": "AssertionError: assert 'urn:company-wiki:narrative-unit:sha256:9ad31af744fb1969e796202384194c31a655a5350cf94e9081e485787c17d59f' in set()\n +  where 'urn:company-wiki:narrative-unit:sha256:9ad31af744fb1969e796202384194c31a655a5350cf94e9081e485787c17d59f' = NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:9ad31af744fb1969e796202384194c31a655a5350cf94e9081e48578...eight': 'regular', 'coordinate_frame': 'dict', 'source': 'pdf_native_single_textpage', 'char_alignment': 'exact'}]}}})).unit_id\n +  and   set() = inherited_heading_ids({'schema_version': 'du-pipeline/1', 'feature_version': '1.15.0', 'analysis_status': 'complete', 'work': {'used': 1162, 'limit': 16000000, 'exhausted': False, 'source_unit_count': 2, ...}, ...}, NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:18b2a6a48ab543323e16c2987d0b24d9bfd985b7c0a46595ceaeec6d...eight': 'regular', 'coordinate_frame': 'dict', 'source': 'pdf_native_single_textpage', 'char_alignment': 'exact'}]}}})))",
+      "detail": "tests\\unit\\document_understanding_note_scope\\test_local_scopes.py:42: in test_long_source_marked_intro_is_complete_context_without_a_heading_length_bypass\n    assert owned[\"intro\"].unit_id in inherited_heading_ids(result, owned[\"body\"])\nE   AssertionError: assert 'urn:company-wiki:narrative-unit:sha256:9ad31af744fb1969e796202384194c31a655a5350cf94e9081e485787c17d59f' in set()\nE    +  where 'urn:company-wiki:narrative-unit:sha256:9ad31af744fb1969e796202384194c31a655a5350cf94e9081e485787c17d59f' = NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:9ad31af744fb1969e796202384194c31a655a5350cf94e9081e48578...eight': 'regular', 'coordinate_frame': 'dict', 'source': 'pdf_native_single_textpage', 'char_alignment': 'exact'}]}}})).unit_id\nE    +  and   set() = inherited_heading_ids({'schema_version': 'du-pipeline/1', 'feature_version': '1.15.0', 'analysis_status': 'complete', 'work': {'used': 1162, 'limit': 16000000, 'exhausted': False, 'source_unit_count': 2, ...}, ...}, NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:18b2a6a48ab543323e16c2987d0b24d9bfd985b7c0a46595ceaeec6d...eight': 'regular', 'coordinate_frame': 'dict', 'source': 'pdf_native_single_textpage', 'char_alignment': 'exact'}]}}})))"
+    },
+    {
+      "class": "tests.unit.document_understanding_note_scope.test_local_scopes",
+      "name": "test_valid_source_membership_does_not_require_optional_geometry",
+      "status": "FAILED",
+      "seconds": "0.023",
+      "message": "AssertionError: assert 'urn:company-wiki:narrative-unit:sha256:196ebcd5b5ad6c3267fcb2a23bfa330bc7e46f10bf818d8d32c37d72587cd19d' in set()\n +  where 'urn:company-wiki:narrative-unit:sha256:196ebcd5b5ad6c3267fcb2a23bfa330bc7e46f10bf818d8d32c37d72587cd19d' = NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:196ebcd5b5ad6c3267fcb2a23bfa330bc7e46f10bf818d8d32c37d72... 'next': 'urn:company-wiki:narrative-unit:sha256:9b0416cdcc4eb5b04066fc2ded7b4f2eab6eb04095e8bb4c441594c576c36183'}}})).unit_id\n +  and   set() = inherited_heading_ids({'schema_version': 'du-pipeline/1', 'feature_version': '1.15.0', 'analysis_status': 'complete', 'work': {'used': 755, 'limit': 16000000, 'exhausted': False, 'source_unit_count': 2, ...}, ...}, NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:9b0416cdcc4eb5b04066fc2ded7b4f2eab6eb04095e8bb4c441594c5...company-wiki:narrative-unit:sha256:196ebcd5b5ad6c3267fcb2a23bfa330bc7e46f10bf818d8d32c37d72587cd19d', 'next': None}}})))",
+      "detail": "tests\\unit\\document_understanding_note_scope\\test_local_scopes.py:55: in test_valid_source_membership_does_not_require_optional_geometry\n    assert owned[\"intro\"].unit_id in inherited_heading_ids(result, owned[\"body\"])\nE   AssertionError: assert 'urn:company-wiki:narrative-unit:sha256:196ebcd5b5ad6c3267fcb2a23bfa330bc7e46f10bf818d8d32c37d72587cd19d' in set()\nE    +  where 'urn:company-wiki:narrative-unit:sha256:196ebcd5b5ad6c3267fcb2a23bfa330bc7e46f10bf818d8d32c37d72587cd19d' = NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:196ebcd5b5ad6c3267fcb2a23bfa330bc7e46f10bf818d8d32c37d72... 'next': 'urn:company-wiki:narrative-unit:sha256:9b0416cdcc4eb5b04066fc2ded7b4f2eab6eb04095e8bb4c441594c576c36183'}}})).unit_id\nE    +  and   set() = inherited_heading_ids({'schema_version': 'du-pipeline/1', 'feature_version': '1.15.0', 'analysis_status': 'complete', 'work': {'used': 755, 'limit': 16000000, 'exhausted': False, 'source_unit_count': 2, ...}, ...}, NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:9b0416cdcc4eb5b04066fc2ded7b4f2eab6eb04095e8bb4c441594c5...company-wiki:narrative-unit:sha256:196ebcd5b5ad6c3267fcb2a23bfa330bc7e46f10bf818d8d32c37d72587cd19d', 'next': None}}})))"
+    },
+    {
+      "class": "tests.unit.document_understanding_note_scope.test_local_scopes",
+      "name": "test_guide_table_note_and_furniture_are_not_new_local_note_parents[guide]",
+      "status": "PASSED",
+      "seconds": "0.020"
+    },
+    {
+      "class": "tests.unit.document_understanding_note_scope.test_local_scopes",
+      "name": "test_guide_table_note_and_furniture_are_not_new_local_note_parents[table_footnote]",
+      "status": "FAILED",
+      "seconds": "0.003",
+      "message": "company_wiki.source_contract.evidence_span.EvidenceSpanError: paragraph and table coordinates are mutually exclusive",
+      "detail": "tests\\unit\\document_understanding_note_scope\\test_local_scopes.py:73: in test_guide_table_note_and_furniture_are_not_new_local_note_parents\n    parsed, owned = source(rows)\n                    ^^^^^^^^^^^^\ntests\\unit\\document_understanding_note_scope\\fixtures.py:80: in source\n    coordinates=EvidenceCoordinates(page_number=row.page, paragraph_index=position,\n<string>:10: in __init__\n    ???\nsrc\\company_wiki\\source_contract\\evidence_span.py:243: in __post_init__\n    raise EvidenceSpanError(\"paragraph and table coordinates are mutually exclusive\")\nE   company_wiki.source_contract.evidence_span.EvidenceSpanError: paragraph and table coordinates are mutually exclusive"
+    },
+    {
+      "class": "tests.unit.document_understanding_note_scope.test_local_scopes",
+      "name": "test_guide_table_note_and_furniture_are_not_new_local_note_parents[running_furniture]",
+      "status": "PASSED",
+      "seconds": "0.021"
+    },
+    {
+      "class": "tests.unit.document_understanding_note_scope.test_physical_scope",
+      "name": "test_complete_clause_page_neighbour_is_not_an_unfinished_sentence_requirement",
+      "status": "PASSED",
+      "seconds": "0.020"
+    },
+    {
+      "class": "tests.unit.document_understanding_note_scope.test_physical_scope",
+      "name": "test_proven_cross_page_clause_keeps_its_own_note_intro_and_dependency_proof",
+      "status": "FAILED",
+      "seconds": "0.019",
+      "message": "AssertionError: 本公司 keeps its original source introduction\nassert 'urn:company-wiki:narrative-unit:sha256:5dab1abe9b63af433258947b9610508c793b78c4d5f1f9880112c32d8be88ed1' in set()\n +  where 'urn:company-wiki:narrative-unit:sha256:5dab1abe9b63af433258947b9610508c793b78c4d5f1f9880112c32d8be88ed1' = NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:5dab1abe9b63af433258947b9610508c793b78c4d5f1f9880112c32d...eight': 'regular', 'coordinate_frame': 'dict', 'source': 'pdf_native_single_textpage', 'char_alignment': 'exact'}]}}})).unit_id",
+      "detail": "tests\\unit\\document_understanding_note_scope\\test_physical_scope.py:51: in test_proven_cross_page_clause_keeps_its_own_note_intro_and_dependency_proof\n    assert owned[\"intro\"].unit_id in context, \"本公司 keeps its original source introduction\"\nE   AssertionError: 本公司 keeps its original source introduction\nE   assert 'urn:company-wiki:narrative-unit:sha256:5dab1abe9b63af433258947b9610508c793b78c4d5f1f9880112c32d8be88ed1' in set()\nE    +  where 'urn:company-wiki:narrative-unit:sha256:5dab1abe9b63af433258947b9610508c793b78c4d5f1f9880112c32d8be88ed1' = NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:5dab1abe9b63af433258947b9610508c793b78c4d5f1f9880112c32d...eight': 'regular', 'coordinate_frame': 'dict', 'source': 'pdf_native_single_textpage', 'char_alignment': 'exact'}]}}})).unit_id"
+    },
+    {
+      "class": "tests.unit.document_understanding_note_scope.test_physical_scope",
+      "name": "test_unproven_cross_page_scope_cannot_silently_be_a_complete_smaller_context[deferred]",
+      "status": "PASSED",
+      "seconds": "0.020"
+    },
+    {
+      "class": "tests.unit.document_understanding_note_scope.test_physical_scope",
+      "name": "test_unproven_cross_page_scope_cannot_silently_be_a_complete_smaller_context[page_gap]",
+      "status": "FAILED",
+      "seconds": "0.020",
+      "message": "AssertionError: unproved note relation must remain partial\nassert True is False",
+      "detail": "tests\\unit\\document_understanding_note_scope\\test_physical_scope.py:69: in test_unproven_cross_page_scope_cannot_silently_be_a_complete_smaller_context\n    assert result[\"structure\"][\"coverage\"][\"complete\"] is False, \"unproved note relation must remain partial\"\nE   AssertionError: unproved note relation must remain partial\nE   assert True is False"
+    },
+    {
+      "class": "tests.unit.document_understanding_note_scope.test_physical_scope",
+      "name": "test_unproven_cross_page_scope_cannot_silently_be_a_complete_smaller_context[column_conflict]",
+      "status": "FAILED",
+      "seconds": "0.019",
+      "message": "AssertionError: unproved note relation must remain partial\nassert True is False",
+      "detail": "tests\\unit\\document_understanding_note_scope\\test_physical_scope.py:69: in test_unproven_cross_page_scope_cannot_silently_be_a_complete_smaller_context\n    assert result[\"structure\"][\"coverage\"][\"complete\"] is False, \"unproved note relation must remain partial\"\nE   AssertionError: unproved note relation must remain partial\nE   assert True is False"
+    },
+    {
+      "class": "tests.unit.document_understanding_note_scope.test_physical_scope",
+      "name": "test_zero_work_budget_stops_before_scope_indexing_without_mutating_source",
+      "status": "PASSED",
+      "seconds": "0.004"
+    },
+    {
+      "class": "tests.unit.document_understanding_note_scope.test_terminals",
+      "name": "test_numbered_complete_prose_is_not_heading_after_closing_wrappers[-3\\u3001-adapter]",
+      "status": "PASSED",
+      "seconds": "0.004"
+    },
+    {
+      "class": "tests.unit.document_understanding_note_scope.test_terminals",
+      "name": "test_numbered_complete_prose_is_not_heading_after_closing_wrappers[-3\\u3001-layout]",
+      "status": "PASSED",
+      "seconds": "0.003"
+    },
+    {
+      "class": "tests.unit.document_understanding_note_scope.test_terminals",
+      "name": "test_numbered_complete_prose_is_not_heading_after_closing_wrappers[-\\u4e00\\u3001-adapter]",
+      "status": "PASSED",
+      "seconds": "0.003"
+    },
+    {
+      "class": "tests.unit.document_understanding_note_scope.test_terminals",
+      "name": "test_numbered_complete_prose_is_not_heading_after_closing_wrappers[-\\u4e00\\u3001-layout]",
+      "status": "PASSED",
+      "seconds": "0.004"
+    },
+    {
+      "class": "tests.unit.document_understanding_note_scope.test_terminals",
+      "name": "test_numbered_complete_prose_is_not_heading_after_closing_wrappers[\\u201d-3\\u3001-adapter]",
+      "status": "PASSED",
+      "seconds": "0.003"
+    },
+    {
+      "class": "tests.unit.document_understanding_note_scope.test_terminals",
+      "name": "test_numbered_complete_prose_is_not_heading_after_closing_wrappers[\\u201d-3\\u3001-layout]",
+      "status": "FAILED",
+      "seconds": "0.004",
+      "message": "AssertionError: assert True is False\n +  where True = is_heading(<company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x000002BA8BD606D0>)\n +    where <company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x000002BA8BD606D0> = ObservationUnit({'unit_id': 'urn:company-wiki:narrative-unit:sha256:725da9c7883318def4fd3e210bc8526426bbbb50b3c8eba863a39d27308bc18d', 'ordinal': 0, 'locator': 'loc:v1/page:1/paragraph:0', 'page': 1, ...}, 0)",
+      "detail": "tests\\unit\\document_understanding_note_scope\\test_terminals.py:25: in test_numbered_complete_prose_is_not_heading_after_closing_wrappers\n    assert is_heading(ObservationUnit(wire, 0)) is False\nE   AssertionError: assert True is False\nE    +  where True = is_heading(<company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x000002BA8BD606D0>)\nE    +    where <company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x000002BA8BD606D0> = ObservationUnit({'unit_id': 'urn:company-wiki:narrative-unit:sha256:725da9c7883318def4fd3e210bc8526426bbbb50b3c8eba863a39d27308bc18d', 'ordinal': 0, 'locator': 'loc:v1/page:1/paragraph:0', 'page': 1, ...}, 0)"
+    },
+    {
+      "class": "tests.unit.document_understanding_note_scope.test_terminals",
+      "name": "test_numbered_complete_prose_is_not_heading_after_closing_wrappers[\\u201d-\\u4e00\\u3001-adapter]",
+      "status": "FAILED",
+      "seconds": "0.006",
+      "message": "AssertionError: assert 2 is None\n +  where 2 = _heading_level('一、甲方承担上述承诺的一切损失。”', mappingproxy({'pdf_block': 0, 'block_sha256': '471e4dfc21d7f92d2dc3f838e41afb80fc9985e1d775b4e0d161e2a51869b576', 'blo...weight': 'regular', 'coordinate_frame': 'dict', 'source': 'pdf_native_single_textpage', 'char_alignment': 'exact'}]}}}))\n +    where mappingproxy({'pdf_block': 0, 'block_sha256': '471e4dfc21d7f92d2dc3f838e41afb80fc9985e1d775b4e0d161e2a51869b576', 'blo...weight': 'regular', 'coordinate_frame': 'dict', 'source': 'pdf_native_single_textpage', 'char_alignment': 'exact'}]}}}) = NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:758be0d0389bc46a1684ad0b60246c6700ffa651b3afb100ac092c9c...eight': 'regular', 'coordinate_frame': 'dict', 'source': 'pdf_native_single_textpage', 'char_alignment': 'exact'}]}}})).metadata",
+      "detail": "tests\\unit\\document_understanding_note_scope\\test_terminals.py:22: in test_numbered_complete_prose_is_not_heading_after_closing_wrappers\n    assert _heading_level(text, parsed.units[0].metadata) is None\nE   AssertionError: assert 2 is None\nE    +  where 2 = _heading_level('一、甲方承担上述承诺的一切损失。”', mappingproxy({'pdf_block': 0, 'block_sha256': '471e4dfc21d7f92d2dc3f838e41afb80fc9985e1d775b4e0d161e2a51869b576', 'blo...weight': 'regular', 'coordinate_frame': 'dict', 'source': 'pdf_native_single_textpage', 'char_alignment': 'exact'}]}}}))\nE    +    where mappingproxy({'pdf_block': 0, 'block_sha256': '471e4dfc21d7f92d2dc3f838e41afb80fc9985e1d775b4e0d161e2a51869b576', 'blo...weight': 'regular', 'coordinate_frame': 'dict', 'source': 'pdf_native_single_textpage', 'char_alignment': 'exact'}]}}}) = NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:758be0d0389bc46a1684ad0b60246c6700ffa651b3afb100ac092c9c...eight': 'regular', 'coordinate_frame': 'dict', 'source': 'pdf_native_single_textpage', 'char_alignment': 'exact'}]}}})).metadata"
+    },
+    {
+      "class": "tests.unit.document_understanding_note_scope.test_terminals",
+      "name": "test_numbered_complete_prose_is_not_heading_after_closing_wrappers[\\u201d-\\u4e00\\u3001-layout]",
+      "status": "FAILED",
+      "seconds": "0.006",
+      "message": "AssertionError: assert True is False\n +  where True = is_heading(<company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x000002BA8BD61120>)\n +    where <company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x000002BA8BD61120> = ObservationUnit({'unit_id': 'urn:company-wiki:narrative-unit:sha256:758be0d0389bc46a1684ad0b60246c6700ffa651b3afb100ac092c9c287d3aeb', 'ordinal': 0, 'locator': 'loc:v1/page:1/paragraph:0', 'page': 1, ...}, 0)",
+      "detail": "tests\\unit\\document_understanding_note_scope\\test_terminals.py:25: in test_numbered_complete_prose_is_not_heading_after_closing_wrappers\n    assert is_heading(ObservationUnit(wire, 0)) is False\nE   AssertionError: assert True is False\nE    +  where True = is_heading(<company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x000002BA8BD61120>)\nE    +    where <company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x000002BA8BD61120> = ObservationUnit({'unit_id': 'urn:company-wiki:narrative-unit:sha256:758be0d0389bc46a1684ad0b60246c6700ffa651b3afb100ac092c9c287d3aeb', 'ordinal': 0, 'locator': 'loc:v1/page:1/paragraph:0', 'page': 1, ...}, 0)"
+    },
+    {
+      "class": "tests.unit.document_understanding_note_scope.test_terminals",
+      "name": "test_numbered_complete_prose_is_not_heading_after_closing_wrappers[\")-3\\u3001-adapter]",
+      "status": "PASSED",
+      "seconds": "0.012"
+    },
+    {
+      "class": "tests.unit.document_understanding_note_scope.test_terminals",
+      "name": "test_numbered_complete_prose_is_not_heading_after_closing_wrappers[\")-3\\u3001-layout]",
+      "status": "FAILED",
+      "seconds": "0.004",
+      "message": "AssertionError: assert True is False\n +  where True = is_heading(<company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x000002BA8BD618A0>)\n +    where <company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x000002BA8BD618A0> = ObservationUnit({'unit_id': 'urn:company-wiki:narrative-unit:sha256:e38a38c7ae520d29c381e89fc55786d63661ec6e376f1ecfb51d52981a42d9bd', 'ordinal': 0, 'locator': 'loc:v1/page:1/paragraph:0', 'page': 1, ...}, 0)",
+      "detail": "tests\\unit\\document_understanding_note_scope\\test_terminals.py:25: in test_numbered_complete_prose_is_not_heading_after_closing_wrappers\n    assert is_heading(ObservationUnit(wire, 0)) is False\nE   AssertionError: assert True is False\nE    +  where True = is_heading(<company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x000002BA8BD618A0>)\nE    +    where <company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x000002BA8BD618A0> = ObservationUnit({'unit_id': 'urn:company-wiki:narrative-unit:sha256:e38a38c7ae520d29c381e89fc55786d63661ec6e376f1ecfb51d52981a42d9bd', 'ordinal': 0, 'locator': 'loc:v1/page:1/paragraph:0', 'page': 1, ...}, 0)"
+    },
+    {
+      "class": "tests.unit.document_understanding_note_scope.test_terminals",
+      "name": "test_numbered_complete_prose_is_not_heading_after_closing_wrappers[\")-\\u4e00\\u3001-adapter]",
+      "status": "FAILED",
+      "seconds": "0.004",
+      "message": "assert 2 is None\n +  where 2 = _heading_level('一、甲方承担上述承诺的一切损失。\")', mappingproxy({'pdf_block': 0, 'block_sha256': 'b994fa16341207c9b4a48b9efe0d667c2a79a7f325fea0c94ab5bb43636949af', 'blo...weight': 'regular', 'coordinate_frame': 'dict', 'source': 'pdf_native_single_textpage', 'char_alignment': 'exact'}]}}}))\n +    where mappingproxy({'pdf_block': 0, 'block_sha256': 'b994fa16341207c9b4a48b9efe0d667c2a79a7f325fea0c94ab5bb43636949af', 'blo...weight': 'regular', 'coordinate_frame': 'dict', 'source': 'pdf_native_single_textpage', 'char_alignment': 'exact'}]}}}) = NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:7085db8bfe66e512698b63fab224652bccb1c89c7a933a182f0967e5...eight': 'regular', 'coordinate_frame': 'dict', 'source': 'pdf_native_single_textpage', 'char_alignment': 'exact'}]}}})).metadata",
+      "detail": "tests\\unit\\document_understanding_note_scope\\test_terminals.py:22: in test_numbered_complete_prose_is_not_heading_after_closing_wrappers\n    assert _heading_level(text, parsed.units[0].metadata) is None\nE   assert 2 is None\nE    +  where 2 = _heading_level('一、甲方承担上述承诺的一切损失。\")', mappingproxy({'pdf_block': 0, 'block_sha256': 'b994fa16341207c9b4a48b9efe0d667c2a79a7f325fea0c94ab5bb43636949af', 'blo...weight': 'regular', 'coordinate_frame': 'dict', 'source': 'pdf_native_single_textpage', 'char_alignment': 'exact'}]}}}))\nE    +    where mappingproxy({'pdf_block': 0, 'block_sha256': 'b994fa16341207c9b4a48b9efe0d667c2a79a7f325fea0c94ab5bb43636949af', 'blo...weight': 'regular', 'coordinate_frame': 'dict', 'source': 'pdf_native_single_textpage', 'char_alignment': 'exact'}]}}}) = NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:7085db8bfe66e512698b63fab224652bccb1c89c7a933a182f0967e5...eight': 'regular', 'coordinate_frame': 'dict', 'source': 'pdf_native_single_textpage', 'char_alignment': 'exact'}]}}})).metadata"
+    },
+    {
+      "class": "tests.unit.document_understanding_note_scope.test_terminals",
+      "name": "test_numbered_complete_prose_is_not_heading_after_closing_wrappers[\")-\\u4e00\\u3001-layout]",
+      "status": "FAILED",
+      "seconds": "0.004",
+      "message": "AssertionError: assert True is False\n +  where True = is_heading(<company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x000002BA8BD61C60>)\n +    where <company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x000002BA8BD61C60> = ObservationUnit({'unit_id': 'urn:company-wiki:narrative-unit:sha256:7085db8bfe66e512698b63fab224652bccb1c89c7a933a182f0967e53dc3d855', 'ordinal': 0, 'locator': 'loc:v1/page:1/paragraph:0', 'page': 1, ...}, 0)",
+      "detail": "tests\\unit\\document_understanding_note_scope\\test_terminals.py:25: in test_numbered_complete_prose_is_not_heading_after_closing_wrappers\n    assert is_heading(ObservationUnit(wire, 0)) is False\nE   AssertionError: assert True is False\nE    +  where True = is_heading(<company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x000002BA8BD61C60>)\nE    +    where <company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x000002BA8BD61C60> = ObservationUnit({'unit_id': 'urn:company-wiki:narrative-unit:sha256:7085db8bfe66e512698b63fab224652bccb1c89c7a933a182f0967e53dc3d855', 'ordinal': 0, 'locator': 'loc:v1/page:1/paragraph:0', 'page': 1, ...}, 0)"
+    },
+    {
+      "class": "tests.unit.document_understanding_note_scope.test_terminals",
+      "name": "test_numbered_complete_prose_is_not_heading_after_closing_wrappers[\\uff09-3\\u3001-adapter]",
+      "status": "PASSED",
+      "seconds": "0.004"
+    },
+    {
+      "class": "tests.unit.document_understanding_note_scope.test_terminals",
+      "name": "test_numbered_complete_prose_is_not_heading_after_closing_wrappers[\\uff09-3\\u3001-layout]",
+      "status": "FAILED",
+      "seconds": "0.005",
+      "message": "AssertionError: assert True is False\n +  where True = is_heading(<company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x000002BA8BD61030>)\n +    where <company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x000002BA8BD61030> = ObservationUnit({'unit_id': 'urn:company-wiki:narrative-unit:sha256:ecd28dfd7077b42a0184e0689d4ae00222c69844c60bb81bd756773c99139fc9', 'ordinal': 0, 'locator': 'loc:v1/page:1/paragraph:0', 'page': 1, ...}, 0)",
+      "detail": "tests\\unit\\document_understanding_note_scope\\test_terminals.py:25: in test_numbered_complete_prose_is_not_heading_after_closing_wrappers\n    assert is_heading(ObservationUnit(wire, 0)) is False\nE   AssertionError: assert True is False\nE    +  where True = is_heading(<company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x000002BA8BD61030>)\nE    +    where <company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x000002BA8BD61030> = ObservationUnit({'unit_id': 'urn:company-wiki:narrative-unit:sha256:ecd28dfd7077b42a0184e0689d4ae00222c69844c60bb81bd756773c99139fc9', 'ordinal': 0, 'locator': 'loc:v1/page:1/paragraph:0', 'page': 1, ...}, 0)"
+    },
+    {
+      "class": "tests.unit.document_understanding_note_scope.test_terminals",
+      "name": "test_numbered_complete_prose_is_not_heading_after_closing_wrappers[\\uff09-\\u4e00\\u3001-adapter]",
+      "status": "FAILED",
+      "seconds": "0.004",
+      "message": "AssertionError: assert 2 is None\n +  where 2 = _heading_level('一、甲方承担上述承诺的一切损失。）', mappingproxy({'pdf_block': 0, 'block_sha256': '15821710ccbfbbad478e389a84faf3a9a97c2573baee58fd862a4824eb806cb5', 'blo...weight': 'regular', 'coordinate_frame': 'dict', 'source': 'pdf_native_single_textpage', 'char_alignment': 'exact'}]}}}))\n +    where mappingproxy({'pdf_block': 0, 'block_sha256': '15821710ccbfbbad478e389a84faf3a9a97c2573baee58fd862a4824eb806cb5', 'blo...weight': 'regular', 'coordinate_frame': 'dict', 'source': 'pdf_native_single_textpage', 'char_alignment': 'exact'}]}}}) = NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:a85630d7db870fc0556b0ba58336eb1048745222e552e21ffb5a9f03...eight': 'regular', 'coordinate_frame': 'dict', 'source': 'pdf_native_single_textpage', 'char_alignment': 'exact'}]}}})).metadata",
+      "detail": "tests\\unit\\document_understanding_note_scope\\test_terminals.py:22: in test_numbered_complete_prose_is_not_heading_after_closing_wrappers\n    assert _heading_level(text, parsed.units[0].metadata) is None\nE   AssertionError: assert 2 is None\nE    +  where 2 = _heading_level('一、甲方承担上述承诺的一切损失。）', mappingproxy({'pdf_block': 0, 'block_sha256': '15821710ccbfbbad478e389a84faf3a9a97c2573baee58fd862a4824eb806cb5', 'blo...weight': 'regular', 'coordinate_frame': 'dict', 'source': 'pdf_native_single_textpage', 'char_alignment': 'exact'}]}}}))\nE    +    where mappingproxy({'pdf_block': 0, 'block_sha256': '15821710ccbfbbad478e389a84faf3a9a97c2573baee58fd862a4824eb806cb5', 'blo...weight': 'regular', 'coordinate_frame': 'dict', 'source': 'pdf_native_single_textpage', 'char_alignment': 'exact'}]}}}) = NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:a85630d7db870fc0556b0ba58336eb1048745222e552e21ffb5a9f03...eight': 'regular', 'coordinate_frame': 'dict', 'source': 'pdf_native_single_textpage', 'char_alignment': 'exact'}]}}})).metadata"
+    },
+    {
+      "class": "tests.unit.document_understanding_note_scope.test_terminals",
+      "name": "test_numbered_complete_prose_is_not_heading_after_closing_wrappers[\\uff09-\\u4e00\\u3001-layout]",
+      "status": "FAILED",
+      "seconds": "0.003",
+      "message": "AssertionError: assert True is False\n +  where True = is_heading(<company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x000002BA8BD60400>)\n +    where <company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x000002BA8BD60400> = ObservationUnit({'unit_id': 'urn:company-wiki:narrative-unit:sha256:a85630d7db870fc0556b0ba58336eb1048745222e552e21ffb5a9f038d5aec32', 'ordinal': 0, 'locator': 'loc:v1/page:1/paragraph:0', 'page': 1, ...}, 0)",
+      "detail": "tests\\unit\\document_understanding_note_scope\\test_terminals.py:25: in test_numbered_complete_prose_is_not_heading_after_closing_wrappers\n    assert is_heading(ObservationUnit(wire, 0)) is False\nE   AssertionError: assert True is False\nE    +  where True = is_heading(<company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x000002BA8BD60400>)\nE    +    where <company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x000002BA8BD60400> = ObservationUnit({'unit_id': 'urn:company-wiki:narrative-unit:sha256:a85630d7db870fc0556b0ba58336eb1048745222e552e21ffb5a9f038d5aec32', 'ordinal': 0, 'locator': 'loc:v1/page:1/paragraph:0', 'page': 1, ...}, 0)"
+    },
+    {
+      "class": "tests.unit.document_understanding_note_scope.test_terminals",
+      "name": "test_numbered_complete_prose_is_not_heading_after_closing_wrappers[\\u3011-3\\u3001-adapter]",
+      "status": "PASSED",
+      "seconds": "0.005"
+    },
+    {
+      "class": "tests.unit.document_understanding_note_scope.test_terminals",
+      "name": "test_numbered_complete_prose_is_not_heading_after_closing_wrappers[\\u3011-3\\u3001-layout]",
+      "status": "FAILED",
+      "seconds": "0.004",
+      "message": "AssertionError: assert True is False\n +  where True = is_heading(<company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x000002BA8BD62200>)\n +    where <company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x000002BA8BD62200> = ObservationUnit({'unit_id': 'urn:company-wiki:narrative-unit:sha256:0ca7cf1794dd9ec4925a02d96ebce586e13dd9e3356afe8fe6d94e7b70a6d052', 'ordinal': 0, 'locator': 'loc:v1/page:1/paragraph:0', 'page': 1, ...}, 0)",
+      "detail": "tests\\unit\\document_understanding_note_scope\\test_terminals.py:25: in test_numbered_complete_prose_is_not_heading_after_closing_wrappers\n    assert is_heading(ObservationUnit(wire, 0)) is False\nE   AssertionError: assert True is False\nE    +  where True = is_heading(<company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x000002BA8BD62200>)\nE    +    where <company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x000002BA8BD62200> = ObservationUnit({'unit_id': 'urn:company-wiki:narrative-unit:sha256:0ca7cf1794dd9ec4925a02d96ebce586e13dd9e3356afe8fe6d94e7b70a6d052', 'ordinal': 0, 'locator': 'loc:v1/page:1/paragraph:0', 'page': 1, ...}, 0)"
+    },
+    {
+      "class": "tests.unit.document_understanding_note_scope.test_terminals",
+      "name": "test_numbered_complete_prose_is_not_heading_after_closing_wrappers[\\u3011-\\u4e00\\u3001-adapter]",
+      "status": "FAILED",
+      "seconds": "0.004",
+      "message": "AssertionError: assert 2 is None\n +  where 2 = _heading_level('一、甲方承担上述承诺的一切损失。】', mappingproxy({'pdf_block': 0, 'block_sha256': '3f3bd36e82b445d1bafce5a3d6e754dc36a286af2a15e9901d427c56e4cbb322', 'blo...weight': 'regular', 'coordinate_frame': 'dict', 'source': 'pdf_native_single_textpage', 'char_alignment': 'exact'}]}}}))\n +    where mappingproxy({'pdf_block': 0, 'block_sha256': '3f3bd36e82b445d1bafce5a3d6e754dc36a286af2a15e9901d427c56e4cbb322', 'blo...weight': 'regular', 'coordinate_frame': 'dict', 'source': 'pdf_native_single_textpage', 'char_alignment': 'exact'}]}}}) = NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:20331b862e6c4b851dfd1af6689c388b522062e3dc9e54e57373fcef...eight': 'regular', 'coordinate_frame': 'dict', 'source': 'pdf_native_single_textpage', 'char_alignment': 'exact'}]}}})).metadata",
+      "detail": "tests\\unit\\document_understanding_note_scope\\test_terminals.py:22: in test_numbered_complete_prose_is_not_heading_after_closing_wrappers\n    assert _heading_level(text, parsed.units[0].metadata) is None\nE   AssertionError: assert 2 is None\nE    +  where 2 = _heading_level('一、甲方承担上述承诺的一切损失。】', mappingproxy({'pdf_block': 0, 'block_sha256': '3f3bd36e82b445d1bafce5a3d6e754dc36a286af2a15e9901d427c56e4cbb322', 'blo...weight': 'regular', 'coordinate_frame': 'dict', 'source': 'pdf_native_single_textpage', 'char_alignment': 'exact'}]}}}))\nE    +    where mappingproxy({'pdf_block': 0, 'block_sha256': '3f3bd36e82b445d1bafce5a3d6e754dc36a286af2a15e9901d427c56e4cbb322', 'blo...weight': 'regular', 'coordinate_frame': 'dict', 'source': 'pdf_native_single_textpage', 'char_alignment': 'exact'}]}}}) = NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:20331b862e6c4b851dfd1af6689c388b522062e3dc9e54e57373fcef...eight': 'regular', 'coordinate_frame': 'dict', 'source': 'pdf_native_single_textpage', 'char_alignment': 'exact'}]}}})).metadata"
+    },
+    {
+      "class": "tests.unit.document_understanding_note_scope.test_terminals",
+      "name": "test_numbered_complete_prose_is_not_heading_after_closing_wrappers[\\u3011-\\u4e00\\u3001-layout]",
+      "status": "FAILED",
+      "seconds": "0.004",
+      "message": "AssertionError: assert True is False\n +  where True = is_heading(<company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x000002BA8BD62C50>)\n +    where <company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x000002BA8BD62C50> = ObservationUnit({'unit_id': 'urn:company-wiki:narrative-unit:sha256:20331b862e6c4b851dfd1af6689c388b522062e3dc9e54e57373fcef37abcab1', 'ordinal': 0, 'locator': 'loc:v1/page:1/paragraph:0', 'page': 1, ...}, 0)",
+      "detail": "tests\\unit\\document_understanding_note_scope\\test_terminals.py:25: in test_numbered_complete_prose_is_not_heading_after_closing_wrappers\n    assert is_heading(ObservationUnit(wire, 0)) is False\nE   AssertionError: assert True is False\nE    +  where True = is_heading(<company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x000002BA8BD62C50>)\nE    +    where <company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x000002BA8BD62C50> = ObservationUnit({'unit_id': 'urn:company-wiki:narrative-unit:sha256:20331b862e6c4b851dfd1af6689c388b522062e3dc9e54e57373fcef37abcab1', 'ordinal': 0, 'locator': 'loc:v1/page:1/paragraph:0', 'page': 1, ...}, 0)"
+    },
+    {
+      "class": "tests.unit.document_understanding_note_scope.test_terminals",
+      "name": "test_numbered_complete_prose_is_not_heading_after_closing_wrappers[\\u300f-3\\u3001-adapter]",
+      "status": "PASSED",
+      "seconds": "0.003"
+    },
+    {
+      "class": "tests.unit.document_understanding_note_scope.test_terminals",
+      "name": "test_numbered_complete_prose_is_not_heading_after_closing_wrappers[\\u300f-3\\u3001-layout]",
+      "status": "FAILED",
+      "seconds": "0.004",
+      "message": "AssertionError: assert True is False\n +  where True = is_heading(<company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x000002BA8BBD14E0>)\n +    where <company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x000002BA8BBD14E0> = ObservationUnit({'unit_id': 'urn:company-wiki:narrative-unit:sha256:84c643a4112481c407699396bfc8b74ec9dd3ce70fca74ba8e3b092a6a42dd66', 'ordinal': 0, 'locator': 'loc:v1/page:1/paragraph:0', 'page': 1, ...}, 0)",
+      "detail": "tests\\unit\\document_understanding_note_scope\\test_terminals.py:25: in test_numbered_complete_prose_is_not_heading_after_closing_wrappers\n    assert is_heading(ObservationUnit(wire, 0)) is False\nE   AssertionError: assert True is False\nE    +  where True = is_heading(<company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x000002BA8BBD14E0>)\nE    +    where <company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x000002BA8BBD14E0> = ObservationUnit({'unit_id': 'urn:company-wiki:narrative-unit:sha256:84c643a4112481c407699396bfc8b74ec9dd3ce70fca74ba8e3b092a6a42dd66', 'ordinal': 0, 'locator': 'loc:v1/page:1/paragraph:0', 'page': 1, ...}, 0)"
+    },
+    {
+      "class": "tests.unit.document_understanding_note_scope.test_terminals",
+      "name": "test_numbered_complete_prose_is_not_heading_after_closing_wrappers[\\u300f-\\u4e00\\u3001-adapter]",
+      "status": "FAILED",
+      "seconds": "0.004",
+      "message": "AssertionError: assert 2 is None\n +  where 2 = _heading_level('一、甲方承担上述承诺的一切损失。』', mappingproxy({'pdf_block': 0, 'block_sha256': 'd1b54f9303ca9644a0570b02b03b1ae75c5c6ac243df27b0ed74d16159447840', 'blo...weight': 'regular', 'coordinate_frame': 'dict', 'source': 'pdf_native_single_textpage', 'char_alignment': 'exact'}]}}}))\n +    where mappingproxy({'pdf_block': 0, 'block_sha256': 'd1b54f9303ca9644a0570b02b03b1ae75c5c6ac243df27b0ed74d16159447840', 'blo...weight': 'regular', 'coordinate_frame': 'dict', 'source': 'pdf_native_single_textpage', 'char_alignment': 'exact'}]}}}) = NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:97d0e8fb80c03ba6f8125ca69e9c2f0d2f3dde340286ef805ee08d6d...eight': 'regular', 'coordinate_frame': 'dict', 'source': 'pdf_native_single_textpage', 'char_alignment': 'exact'}]}}})).metadata",
+      "detail": "tests\\unit\\document_understanding_note_scope\\test_terminals.py:22: in test_numbered_complete_prose_is_not_heading_after_closing_wrappers\n    assert _heading_level(text, parsed.units[0].metadata) is None\nE   AssertionError: assert 2 is None\nE    +  where 2 = _heading_level('一、甲方承担上述承诺的一切损失。』', mappingproxy({'pdf_block': 0, 'block_sha256': 'd1b54f9303ca9644a0570b02b03b1ae75c5c6ac243df27b0ed74d16159447840', 'blo...weight': 'regular', 'coordinate_frame': 'dict', 'source': 'pdf_native_single_textpage', 'char_alignment': 'exact'}]}}}))\nE    +    where mappingproxy({'pdf_block': 0, 'block_sha256': 'd1b54f9303ca9644a0570b02b03b1ae75c5c6ac243df27b0ed74d16159447840', 'blo...weight': 'regular', 'coordinate_frame': 'dict', 'source': 'pdf_native_single_textpage', 'char_alignment': 'exact'}]}}}) = NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:97d0e8fb80c03ba6f8125ca69e9c2f0d2f3dde340286ef805ee08d6d...eight': 'regular', 'coordinate_frame': 'dict', 'source': 'pdf_native_single_textpage', 'char_alignment': 'exact'}]}}})).metadata"
+    },
+    {
+      "class": "tests.unit.document_understanding_note_scope.test_terminals",
+      "name": "test_numbered_complete_prose_is_not_heading_after_closing_wrappers[\\u300f-\\u4e00\\u3001-layout]",
+      "status": "FAILED",
+      "seconds": "0.005",
+      "message": "AssertionError: assert True is False\n +  where True = is_heading(<company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x000002BA8BD624D0>)\n +    where <company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x000002BA8BD624D0> = ObservationUnit({'unit_id': 'urn:company-wiki:narrative-unit:sha256:97d0e8fb80c03ba6f8125ca69e9c2f0d2f3dde340286ef805ee08d6da2ceda5f', 'ordinal': 0, 'locator': 'loc:v1/page:1/paragraph:0', 'page': 1, ...}, 0)",
+      "detail": "tests\\unit\\document_understanding_note_scope\\test_terminals.py:25: in test_numbered_complete_prose_is_not_heading_after_closing_wrappers\n    assert is_heading(ObservationUnit(wire, 0)) is False\nE   AssertionError: assert True is False\nE    +  where True = is_heading(<company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x000002BA8BD624D0>)\nE    +    where <company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x000002BA8BD624D0> = ObservationUnit({'unit_id': 'urn:company-wiki:narrative-unit:sha256:97d0e8fb80c03ba6f8125ca69e9c2f0d2f3dde340286ef805ee08d6da2ceda5f', 'ordinal': 0, 'locator': 'loc:v1/page:1/paragraph:0', 'page': 1, ...}, 0)"
+    },
+    {
+      "class": "tests.unit.document_understanding_note_scope.test_terminals",
+      "name": "test_numbered_complete_prose_is_not_heading_after_closing_wrappers[\\u300b-3\\u3001-adapter]",
+      "status": "PASSED",
+      "seconds": "0.004"
+    },
+    {
+      "class": "tests.unit.document_understanding_note_scope.test_terminals",
+      "name": "test_numbered_complete_prose_is_not_heading_after_closing_wrappers[\\u300b-3\\u3001-layout]",
+      "status": "FAILED",
+      "seconds": "0.004",
+      "message": "AssertionError: assert True is False\n +  where True = is_heading(<company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x000002BA8BD606D0>)\n +    where <company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x000002BA8BD606D0> = ObservationUnit({'unit_id': 'urn:company-wiki:narrative-unit:sha256:eacae66431ede552551c03dfa16847795e07471aef9bebc14f05299b2be73865', 'ordinal': 0, 'locator': 'loc:v1/page:1/paragraph:0', 'page': 1, ...}, 0)",
+      "detail": "tests\\unit\\document_understanding_note_scope\\test_terminals.py:25: in test_numbered_complete_prose_is_not_heading_after_closing_wrappers\n    assert is_heading(ObservationUnit(wire, 0)) is False\nE   AssertionError: assert True is False\nE    +  where True = is_heading(<company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x000002BA8BD606D0>)\nE    +    where <company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x000002BA8BD606D0> = ObservationUnit({'unit_id': 'urn:company-wiki:narrative-unit:sha256:eacae66431ede552551c03dfa16847795e07471aef9bebc14f05299b2be73865', 'ordinal': 0, 'locator': 'loc:v1/page:1/paragraph:0', 'page': 1, ...}, 0)"
+    },
+    {
+      "class": "tests.unit.document_understanding_note_scope.test_terminals",
+      "name": "test_numbered_complete_prose_is_not_heading_after_closing_wrappers[\\u300b-\\u4e00\\u3001-adapter]",
+      "status": "FAILED",
+      "seconds": "0.003",
+      "message": "AssertionError: assert 2 is None\n +  where 2 = _heading_level('一、甲方承担上述承诺的一切损失。》', mappingproxy({'pdf_block': 0, 'block_sha256': '99df51bd220aaaf5192142aaf0c7c2a7bb6f78b64e1992bdd838de2b7dbabe64', 'blo...weight': 'regular', 'coordinate_frame': 'dict', 'source': 'pdf_native_single_textpage', 'char_alignment': 'exact'}]}}}))\n +    where mappingproxy({'pdf_block': 0, 'block_sha256': '99df51bd220aaaf5192142aaf0c7c2a7bb6f78b64e1992bdd838de2b7dbabe64', 'blo...weight': 'regular', 'coordinate_frame': 'dict', 'source': 'pdf_native_single_textpage', 'char_alignment': 'exact'}]}}}) = NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:f2a68a280cdc1f15bd502b16c6a06d292c768feea52cea4e6019a7d8...eight': 'regular', 'coordinate_frame': 'dict', 'source': 'pdf_native_single_textpage', 'char_alignment': 'exact'}]}}})).metadata",
+      "detail": "tests\\unit\\document_understanding_note_scope\\test_terminals.py:22: in test_numbered_complete_prose_is_not_heading_after_closing_wrappers\n    assert _heading_level(text, parsed.units[0].metadata) is None\nE   AssertionError: assert 2 is None\nE    +  where 2 = _heading_level('一、甲方承担上述承诺的一切损失。》', mappingproxy({'pdf_block': 0, 'block_sha256': '99df51bd220aaaf5192142aaf0c7c2a7bb6f78b64e1992bdd838de2b7dbabe64', 'blo...weight': 'regular', 'coordinate_frame': 'dict', 'source': 'pdf_native_single_textpage', 'char_alignment': 'exact'}]}}}))\nE    +    where mappingproxy({'pdf_block': 0, 'block_sha256': '99df51bd220aaaf5192142aaf0c7c2a7bb6f78b64e1992bdd838de2b7dbabe64', 'blo...weight': 'regular', 'coordinate_frame': 'dict', 'source': 'pdf_native_single_textpage', 'char_alignment': 'exact'}]}}}) = NarrativeUnit(unit_id='urn:company-wiki:narrative-unit:sha256:f2a68a280cdc1f15bd502b16c6a06d292c768feea52cea4e6019a7d8...eight': 'regular', 'coordinate_frame': 'dict', 'source': 'pdf_native_single_textpage', 'char_alignment': 'exact'}]}}})).metadata"
+    },
+    {
+      "class": "tests.unit.document_understanding_note_scope.test_terminals",
+      "name": "test_numbered_complete_prose_is_not_heading_after_closing_wrappers[\\u300b-\\u4e00\\u3001-layout]",
+      "status": "FAILED",
+      "seconds": "0.005",
+      "message": "AssertionError: assert True is False\n +  where True = is_heading(<company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x000002BA8BD60F40>)\n +    where <company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x000002BA8BD60F40> = ObservationUnit({'unit_id': 'urn:company-wiki:narrative-unit:sha256:f2a68a280cdc1f15bd502b16c6a06d292c768feea52cea4e6019a7d8f061ef78', 'ordinal': 0, 'locator': 'loc:v1/page:1/paragraph:0', 'page': 1, ...}, 0)",
+      "detail": "tests\\unit\\document_understanding_note_scope\\test_terminals.py:25: in test_numbered_complete_prose_is_not_heading_after_closing_wrappers\n    assert is_heading(ObservationUnit(wire, 0)) is False\nE   AssertionError: assert True is False\nE    +  where True = is_heading(<company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x000002BA8BD60F40>)\nE    +    where <company_wiki.document_understanding.structure.contract.ObservationUnit object at 0x000002BA8BD60F40> = ObservationUnit({'unit_id': 'urn:company-wiki:narrative-unit:sha256:f2a68a280cdc1f15bd502b16c6a06d292c768feea52cea4e6019a7d8f061ef78', 'ordinal': 0, 'locator': 'loc:v1/page:1/paragraph:0', 'page': 1, ...}, 0)"
+    },
+    {
+      "class": "tests.unit.document_understanding_note_scope.test_terminals",
+      "name": "test_real_numbered_business_heading_retains_original_identity[3\\u3001\\u7ecf\\u8425\\u8fdb\\u5c55]",
+      "status": "PASSED",
+      "seconds": "0.018"
+    },
+    {
+      "class": "tests.unit.document_understanding_note_scope.test_terminals",
+      "name": "test_real_numbered_business_heading_retains_original_identity[\\u4e00\\u3001\\u6d77\\u5916\\u4e1a\\u52a1]",
+      "status": "PASSED",
+      "seconds": "0.019"
+    },
+    {
+      "class": "tests.unit.document_understanding_note_scope.test_terminals",
+      "name": "test_real_numbered_business_heading_retains_original_identity[1.2 \\u4e3b\\u8425\\u4e1a\\u52a1\\uff082026\\uff09]",
+      "status": "PASSED",
+      "seconds": "0.016"
+    },
+    {
+      "class": "tests.unit.document_understanding_note_scope.test_terminals",
+      "name": "test_actual_html_heading_hint_has_priority_over_sentence_punctuation",
+      "status": "PASSED",
+      "seconds": "0.016"
+    }
+  ],
+  "counts": {
+    "passed": 19,
+    "failed": 28,
+    "error": 0,
+    "skipped": 0
+  },
+  "total_cases": 47,
+  "runtime_owner_after_sha256": {
+    "src/company_wiki/document_understanding/observation_adapter.py": "f16251e6fb716961fab08b6581cc2138534fd2a0298610eefcfc2b9927d391f0",
+    "src/company_wiki/document_understanding/structure/layout.py": "d25defcb1e38947b7d73389ca86a89a1d7cbac65e4903895bec80a3e2ff6419b",
+    "src/company_wiki/document_understanding/structure/sections.py": "8ff70fc94b5af97d856a651235577d85087fbdd2c0b42863f6701b3517dc6b4d",
+    "src/company_wiki/document_understanding/narrative_continuity.py": "d8c8be3d1556fed569fb825db3d0541f806ebb39cfb72008ee952772712db32d",
+    "src/company_wiki/document_understanding/pipeline.py": "198385623657a1704091d38435b1bc696794dd7afb768eac493b718d705c3056"
+  },
+  "runtime_owners_unchanged": true,
+  "git_head": "a6841e9420dbe3eb6dac6e30563c29e4293a31e7",
+  "staging_instruction": "New directory is not part of R4 author source commits; ROOT stage this exact path explicitly with the subsequent production repair. No Git/index write by this author.",
+  "remaining_open": [
+    "source implementation",
+    "source_scope partial propagation",
+    "public citation/model/cache contracts",
+    "real H1 provenance and positive intro coverage"
+  ],
+  "fixture_correction_check": {
+    "command": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-X",
+      "utf8",
+      "-m",
+      "pytest",
+      "tests/unit/document_understanding_note_scope/test_local_scopes.py::test_guide_table_note_and_furniture_are_not_new_local_note_parents[table_footnote]",
+      "-q",
+      "--tb=short",
+      "-p",
+      "no:cacheprovider",
+      "--basetemp",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\t3f-a47043e1\\r",
+      "--junitxml",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\t3f-a47043e1\\result.xml"
+    ],
+    "exit_code": 0,
+    "wall_seconds": 7.239,
+    "junit_sha256": "9e460fa4acec39cafe7b1da560b2549166b7a8853e10a88270f00f54d1362f79",
+    "cases": [
+      {
+        "name": "test_guide_table_note_and_furniture_are_not_new_local_note_parents[table_footnote]",
+        "status": "PASSED",
+        "seconds": "0.512"
+      }
+    ],
+    "cleanup": {
+      "owned_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\t3f-a47043e1",
+      "initial_absent": true,
+      "containment_checked": true,
+      "non_reparse_checked": true,
+      "exists_after": false
+    }
+  },
+  "first_run_files_sha256": {
+    "tests/unit/document_understanding_note_scope/__init__.py": "56027e62eb0cfed0fefdb75fdb2aa0936300c09ca4521e76a12dbec25a86598e",
+    "tests/unit/document_understanding_note_scope/fixtures.py": "0ab586af8434d80820bfcf4620f3935c826c4a4598dc5e5abad9130050083749",
+    "tests/unit/document_understanding_note_scope/README.md": "6329dd8089c8e85edb200e694e7a91868ebb0321851259308f031d3439f5effd",
+    "tests/unit/document_understanding_note_scope/test_local_scopes.py": "4ec8718a11e7bf87adadc26341abf3fab3eee7744c9884729c70bcafe83331ae",
+    "tests/unit/document_understanding_note_scope/test_physical_scope.py": "e6dae64bf6830a0cfbdc2ce7440cc04d6f2b2a19392c6bbfae946841b4d6cf45",
+    "tests/unit/document_understanding_note_scope/test_terminals.py": "277982d57448a7b2998b216da7784aa55eb273252693477f49e64ded82bd829d"
+  },
+  "delivery_files_sha256": {
+    "tests/unit/document_understanding_note_scope/__init__.py": "56027e62eb0cfed0fefdb75fdb2aa0936300c09ca4521e76a12dbec25a86598e",
+    "tests/unit/document_understanding_note_scope/fixtures.py": "6762dac9eba99a34d384844d865f5ef5f6bd2d76889e6d6f12567dbc4e5ec2bf",
+    "tests/unit/document_understanding_note_scope/README.md": "6329dd8089c8e85edb200e694e7a91868ebb0321851259308f031d3439f5effd",
+    "tests/unit/document_understanding_note_scope/test_local_scopes.py": "4ec8718a11e7bf87adadc26341abf3fab3eee7744c9884729c70bcafe83331ae",
+    "tests/unit/document_understanding_note_scope/test_physical_scope.py": "e6dae64bf6830a0cfbdc2ce7440cc04d6f2b2a19392c6bbfae946841b4d6cf45",
+    "tests/unit/document_understanding_note_scope/test_terminals.py": "277982d57448a7b2998b216da7784aa55eb273252693477f49e64ded82bd829d"
+  },
+  "fixture_correction": "HTML table association remains producer metadata with a paragraph locator; do not combine mutually exclusive paragraph/table coordinates. First-run failure retained, not a production RED.",
+  "behavior_red_count_first_run": 27,
+  "fixture_failure_count_first_run": 1,
+  "full_directory_run_count": 1,
+  "focused_fixture_recheck_count": 1,
+  "behavior_red_groups_first_run": {
+    "TERM": 18,
+    "NOTE": 6,
+    "PHYS": 3
+  },
+  "fixture_failure_name_first_run": "test_guide_table_note_and_furniture_are_not_new_local_note_parents[table_footnote]",
+  "ruff": "PASS",
+  "full_directory_after_fixture_correction_rerun": false,
+  "not_claimed": [
+    "green product release",
+    "downstream citation/model fragments verified",
+    "real H1 proven",
+    "RF adoption",
+    "entire source runtime frozen beyond five recorded structural owners"
+  ],
+  "agent_state": "STOP"
+}

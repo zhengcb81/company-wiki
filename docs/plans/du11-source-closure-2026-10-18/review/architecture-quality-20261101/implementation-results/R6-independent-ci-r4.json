@@ -1,0 +1,1972 @@
+{
+  "schema_version": "independent-source-ci-r4/1",
+  "status": "PASS_ENGINEERING_SOURCE_AXES_CURRENT_CANDIDATE_PENDING_CI",
+  "reviewer": "/root/rectification_review_a",
+  "at_date": "2026-11-02",
+  "candidate": {
+    "head": "2b0787dc1c5352cd8566fc71fc585afe735ec75c",
+    "branch": "codex/architecture-rectification-r2-20261101",
+    "seal": {
+      "src/company_wiki/document_understanding/statement_grammar/__init__.py": {
+        "raw_sha256": "23369e92e6f1f9d330a09fcdb3ff7d470ce4c1176c4cc7e7a984022141dfb9e8",
+        "expected": "23369e92e6f1f9d330a09fcdb3ff7d470ce4c1176c4cc7e7a984022141dfb9e8",
+        "raw_match": true,
+        "git_lf_sha256": "e94ad1f40167ca49d36b59bd78a9fc2cecd3a1be203d98e828cc53b9d7a8b17c",
+        "git_lf_match": true
+      },
+      "src/company_wiki/document_understanding/statement_grammar/predicate_arguments.py": {
+        "raw_sha256": "207e0250cbe2aa7269dc2f021444577e38264791008b2ae8a15d0f76fcea2251",
+        "expected": "207e0250cbe2aa7269dc2f021444577e38264791008b2ae8a15d0f76fcea2251",
+        "raw_match": true,
+        "git_lf_sha256": "207e0250cbe2aa7269dc2f021444577e38264791008b2ae8a15d0f76fcea2251",
+        "git_lf_match": true
+      },
+      "src/company_wiki/document_understanding/operating_states/assertion_roles.py": {
+        "raw_sha256": "bf0bec525b83ff70444b0126ba3807b7d7f1781145d712309f5caab78b589fda",
+        "expected": "bf0bec525b83ff70444b0126ba3807b7d7f1781145d712309f5caab78b589fda",
+        "raw_match": true,
+        "git_lf_sha256": "6b1ced21eeab23bae38dba76f38068362c2c78e893acd11b911cfb0bcb33f681",
+        "git_lf_match": true
+      },
+      "src/company_wiki/source_catalog/narrative_source_context.py": {
+        "raw_sha256": "2b223273b56e1e6e55ff7e96bd8f6d57f4bc064c205d6e231606df9c83068038",
+        "expected": "2b223273b56e1e6e55ff7e96bd8f6d57f4bc064c205d6e231606df9c83068038",
+        "raw_match": true,
+        "git_lf_sha256": "2b223273b56e1e6e55ff7e96bd8f6d57f4bc064c205d6e231606df9c83068038",
+        "git_lf_match": true
+      },
+      "src/company_wiki/source_catalog/narrative_source_passage.py": {
+        "raw_sha256": "83c86a62e721e9ddc53b66cf16cbb9b3677fc35dc7e9df7b6b8f07d2a2e7ab4c",
+        "expected": "83c86a62e721e9ddc53b66cf16cbb9b3677fc35dc7e9df7b6b8f07d2a2e7ab4c",
+        "raw_match": true,
+        "git_lf_sha256": "e616a223f8845abfe82a9354bb5c06243ce3f22255e93dd01773cb8854e87b67",
+        "git_lf_match": true
+      },
+      "src/company_wiki/source_catalog/narrative_business_policy.py": {
+        "raw_sha256": "a63e1a1ad5902e0c5e2ebef23898c88d3c332ced37f28ad05b3416d8560df808",
+        "expected": "a63e1a1ad5902e0c5e2ebef23898c88d3c332ced37f28ad05b3416d8560df808",
+        "raw_match": true,
+        "git_lf_sha256": "a6111eff52e16a80a603928fae98272b2c718d0c9b4fc516137bb96a59fe9a69",
+        "git_lf_match": true
+      },
+      "src/company_wiki/source_catalog/narrative_support_use.py": {
+        "raw_sha256": "d9632c14e7dda839ddbad0c98997ca4014b031aa4c25c17f78a191f2b11a3b35",
+        "expected": "d9632c14e7dda839ddbad0c98997ca4014b031aa4c25c17f78a191f2b11a3b35",
+        "raw_match": true,
+        "git_lf_sha256": "81322c4e473dd57e5f58bd9c00cb23f71488942a17925835cf3935e92ee8ab57",
+        "git_lf_match": true
+      },
+      "src/company_wiki/source_catalog/narrative_operating_relations.py": {
+        "raw_sha256": "865a6eaa12a880c54b85b134de5e92f1b0ab9e9c2215381e4f67bcdd1c33e230",
+        "expected": "865a6eaa12a880c54b85b134de5e92f1b0ab9e9c2215381e4f67bcdd1c33e230",
+        "raw_match": true,
+        "git_lf_sha256": "9d4dce40ecbe3e0369ae2f85a712760c94f18d422a47a8fec8a2248c50196324",
+        "git_lf_match": true
+      },
+      "tests/unit/du11_production/test_source_preparation_axes.py": {
+        "raw_sha256": "71a5a16dc77f165bf655eaf6bdcc696d965edd62eadd9d6ae7b26b02784a07bc",
+        "expected": "71a5a16dc77f165bf655eaf6bdcc696d965edd62eadd9d6ae7b26b02784a07bc",
+        "raw_match": true,
+        "git_lf_sha256": "71a5a16dc77f165bf655eaf6bdcc696d965edd62eadd9d6ae7b26b02784a07bc",
+        "git_lf_match": true
+      },
+      "tests/unit/du11_production/test_source_semantic_axes.py": {
+        "raw_sha256": "594cc8347e090ab888980ebd87fd1d87b6b6dd971672d5ef9b3f24ad1d27c1be",
+        "expected": "594cc8347e090ab888980ebd87fd1d87b6b6dd971672d5ef9b3f24ad1d27c1be",
+        "raw_match": true,
+        "git_lf_sha256": "5f2348f7802b9d39565c4c0f4ba22e8a934fe3ffb9aa323b86ba067141294f09",
+        "git_lf_match": true
+      },
+      "tests/unit/du11_production/test_source_argument_semantics.py": {
+        "raw_sha256": "e09a3f0189790bb3b54af2e84c722a489e4c928dc14c43a9c098fb22bd6d541e",
+        "expected": "e09a3f0189790bb3b54af2e84c722a489e4c928dc14c43a9c098fb22bd6d541e",
+        "raw_match": true,
+        "git_lf_sha256": "e09a3f0189790bb3b54af2e84c722a489e4c928dc14c43a9c098fb22bd6d541e",
+        "git_lf_match": true
+      },
+      "tools/pre_push_gate.py": {
+        "raw_sha256": "2604bae33ae3b79d523fadb11a11d555fc6c78d78ea98750db1293ecf0614f45",
+        "expected": "2604bae33ae3b79d523fadb11a11d555fc6c78d78ea98750db1293ecf0614f45",
+        "raw_match": true,
+        "git_lf_sha256": "b5e07ca43fa2c0b1da67ae8c0e9e8b9cb7effa073bda60a23d5209dd480d73b1",
+        "git_lf_match": true
+      },
+      "tests/unit/test_daily_push_bounds.py": {
+        "raw_sha256": "c044e231ef13a7c8f5994618659402aacc1bdc273c49bdf897ee685b3dc36301",
+        "expected": "c044e231ef13a7c8f5994618659402aacc1bdc273c49bdf897ee685b3dc36301",
+        "raw_match": true,
+        "git_lf_sha256": "21076f02fffa9853a4c367245bb526ec43f99797fb34610656d232b286c17e19",
+        "git_lf_match": true
+      },
+      "tests/unit/test_daily_push_policy.py": {
+        "raw_sha256": "44b20bd704689d673c572a7593740afa1421d6c977c8714e51e2e785760ff6cc",
+        "expected": "44b20bd704689d673c572a7593740afa1421d6c977c8714e51e2e785760ff6cc",
+        "raw_match": true,
+        "git_lf_sha256": "44b20bd704689d673c572a7593740afa1421d6c977c8714e51e2e785760ff6cc",
+        "git_lf_match": true
+      },
+      "tests/unit/test_pre_push_gate.py": {
+        "raw_sha256": "656c93f4845a8998b23f89c3dae0df557db08956b5a7c10bc512e74a400dccbd",
+        "expected": "656c93f4845a8998b23f89c3dae0df557db08956b5a7c10bc512e74a400dccbd",
+        "raw_match": true,
+        "git_lf_sha256": "d66d5f44bd8c8f1991711e86287dd673f57acfa5a6e320d4e363946ec9baecf2",
+        "git_lf_match": true
+      },
+      "tests/unit/test_pre_push_parallel_phases.py": {
+        "raw_sha256": "a2923c0c6c518fbf0187d464bfdc1c2cbf27425f7e28669baacad2ffdf00f9aa",
+        "expected": "a2923c0c6c518fbf0187d464bfdc1c2cbf27425f7e28669baacad2ffdf00f9aa",
+        "raw_match": true,
+        "git_lf_sha256": "b13babeae78d263af1a82ffa4d8b6b987ca92b3570d661cbf7e2b037f4e1c053",
+        "git_lf_match": true
+      },
+      "tests/unit/test_ci_push_selection.py": {
+        "raw_sha256": "2aa294da3e441012c0236aece8cd859cbe08dcdf90cb48091d92c66d4249fcee",
+        "expected": "2aa294da3e441012c0236aece8cd859cbe08dcdf90cb48091d92c66d4249fcee",
+        "raw_match": true,
+        "git_lf_sha256": "d44855e8ccd3be5f445e86b0d3f5f1ac72141276144c324d527e174f460bd628",
+        "git_lf_match": true
+      },
+      "docs/OPERATIONS.md": {
+        "raw_sha256": "ad4cbf7902e163ed09071cdfd46cb5ea2768d209902954942c567816f2bc8792",
+        "expected": "ad4cbf7902e163ed09071cdfd46cb5ea2768d209902954942c567816f2bc8792",
+        "raw_match": true,
+        "git_lf_sha256": "4c59185c10089a4e373b678e2e9983e442cb64cde03ee01489e7a6e71ac29d56",
+        "git_lf_match": true
+      }
+    },
+    "unchanged_original_oracles": {
+      "tests/unit/document_understanding_selection/test_reading_native_continuity.py": {
+        "same": true,
+        "git_blob_sha256": "08d2ef04ad5dd3c5352b608880d5926ce411c3a92721f08d7bc8a93f19e7bb5e"
+      },
+      "tests/unit/document_understanding_selection/test_reading_value_coverage.py": {
+        "same": true,
+        "git_blob_sha256": "5b4ae4b2215ef9893e1cdcedb8f857bedd95c78621d3fb8790900c27a76e9f9a"
+      },
+      "tests/unit/document_understanding_selection/test_source_support_use.py": {
+        "same": true,
+        "git_blob_sha256": "9391c3b2df4738c2feafabac328ef3ff9c6457955d9cb937842389bd658e0335"
+      },
+      "tests/unit/du11_production/test_business_coverage_relations.py": {
+        "same": true,
+        "git_blob_sha256": "65925870e6cb25d2eb7324058a66672fba13e1b433847b146b9c980586019a15"
+      },
+      "tests/unit/du11_production/test_source_information_payload.py": {
+        "same": true,
+        "git_blob_sha256": "25fef15ddb53cb0f7fc942d2a7cee9243a6d8f2ab933e561c3419dbf39a07f5a"
+      },
+      "tests/unit/du11_production/test_source_readability_deferred_selection.py": {
+        "same": true,
+        "git_blob_sha256": "5347f747e12836165f89f366435a1eb133349dbfdba0226f5e9419b8f5c65aa6"
+      },
+      "tests/integration/test_source_processing_handler_wire.py": {
+        "same": true,
+        "git_blob_sha256": "e43a4b30c0e91fa2fc129f02562ad115516ef893709507d6257f0851ffc680e5"
+      }
+    },
+    "author_runs_sha_verified": 30,
+    "case_identity_diff": {
+      "r3_final_semantic_count": 93,
+      "r4_final_semantic_count": 93,
+      "removed_case_ids": [
+        "test_business_content_does_not_need_a_company_or_industry_allowlist[Our services include orchard planting and coastal transport.]",
+        "test_business_content_does_not_need_a_company_or_industry_allowlist[We are committed to treating rare diseases at regional clinics.]",
+        "test_business_content_does_not_need_a_company_or_industry_allowlist[\\u516c\\u53f8\\u5c06\\u52aa\\u529b\\u8fd0\\u8f93\\u6db2\\u5316\\u5929\\u7136\\u6c14\\u3002]"
+      ],
+      "added_case_ids": [
+        "test_unknown_catalogue_members_do_not_prove_each_others_semantics",
+        "test_unknown_goals_remain_source_words_without_unproved_relevance[We are committed to treating rare diseases at regional clinics.]",
+        "test_unknown_goals_remain_source_words_without_unproved_relevance[\\u516c\\u53f8\\u5c06\\u52aa\\u529b\\u8fd0\\u8f93\\u6db2\\u5316\\u5929\\u7136\\u6c14\\u3002]"
+      ],
+      "all_historical_run_counts": [
+        {
+          "name": "r6-r3-ci-red",
+          "sha256": "638fab76707ccf1245419177e3db7637dca5e04668cb2024b89589ab82f22e4e",
+          "cases": 415,
+          "semantic_cases": 0
+        },
+        {
+          "name": "r6-r3-axes-red",
+          "sha256": "3b8c8969cb2e3e5e26751c0f69959eaaf0d71f73346a146cdb48aae5ff3aaacf",
+          "cases": 9,
+          "semantic_cases": 0
+        },
+        {
+          "name": "r6-r3-ci-green1",
+          "sha256": "183f68b7c49787c4b2183228a6541fbab647f062ec21e357fe48bfabd9f38aa6",
+          "cases": 424,
+          "semantic_cases": 0
+        },
+        {
+          "name": "r6-r3-r2-regression",
+          "sha256": "63943d986e2ce97df8106c035a224eead255719932ae82fe6c51bc3eb88acfa8",
+          "cases": 367,
+          "semantic_cases": 93
+        },
+        {
+          "name": "r6-r3-head-red",
+          "sha256": "b3eaae601c83c32247bd87963b4a2c9de5e8b71d72db2b0acab9bb72d5b44824",
+          "cases": 16,
+          "semantic_cases": 0
+        },
+        {
+          "name": "r6-r3-head-green",
+          "sha256": "afce392c2a6f409c5b00cb93d576666791c1c24ecb65046b2bcc77f6deb96b67",
+          "cases": 24,
+          "semantic_cases": 0
+        },
+        {
+          "name": "r6-r3-ci-final",
+          "sha256": "5ec3f16e034cd14ce5aa4c6b1cfa7632aa29a2ff2dba0edf15cfcdb7f2a77557",
+          "cases": 431,
+          "semantic_cases": 0
+        },
+        {
+          "name": "r6-r3-r2-final",
+          "sha256": "fc2510997ed41e02558ad6e20f765d943bcd4c1b1a20c96d9cb4184dca8df6c8",
+          "cases": 355,
+          "semantic_cases": 93
+        },
+        {
+          "name": "r6-r3-np-green",
+          "sha256": "9433f19ae14dec40d60bac5cfb62a476d0c6b5af72a75b2e65ed6fe9d44b5015",
+          "cases": 27,
+          "semantic_cases": 1
+        },
+        {
+          "name": "r6-r3-nominal-red",
+          "sha256": "ade21aa04edd6ef32fa849f56f5a856493430500fc29188722c05ac8c53eb630",
+          "cases": 1,
+          "semantic_cases": 0
+        },
+        {
+          "name": "r6-r3-np-final",
+          "sha256": "7f6ce7f29586d2fafcc4def852d87fd24e70b1f7eb1defd16f6c2102977aad88",
+          "cases": 121,
+          "semantic_cases": 93
+        },
+        {
+          "name": "r6-r3-ci-frozen",
+          "sha256": "fd45e23b571a1fa8860bde7a9339fea2bd999f88d540c4164bd90f4dfdbb6d49",
+          "cases": 433,
+          "semantic_cases": 0
+        },
+        {
+          "name": "r6-r3-r2-frozen",
+          "sha256": "b8764608009771e0b09d118bed7ee9463ce65ac165db083a9199be839bf2b946",
+          "cases": 262,
+          "semantic_cases": 0
+        },
+        {
+          "name": "r6-r4-minimal-red",
+          "sha256": "236d63debcb83ba54913cd571ec8b9a797ca90732b12f5a378c83dc689253e15",
+          "cases": 8,
+          "semantic_cases": 0
+        },
+        {
+          "name": "r6-r4-semantic-red",
+          "sha256": "ee603c5f5f57710b2adebc18c99dbed17d663d8fde5f9deaa53de7d1364c9bc2",
+          "cases": 21,
+          "semantic_cases": 0
+        },
+        {
+          "name": "r6-r4-core-first",
+          "sha256": "626273ec2e603f1b178e566944a3c91239876695627c85947736bc3dc9e73856",
+          "cases": 101,
+          "semantic_cases": 0
+        },
+        {
+          "name": "r6-r4-core-second",
+          "sha256": "76ea7c034b3b06e0605421338eb9bd38c4cb546569c9ccfac7d88ff03195597b",
+          "cases": 101,
+          "semantic_cases": 0
+        },
+        {
+          "name": "r6-r4-core-third",
+          "sha256": "f6aa43355e43cd84c6914190a904a5a112c308356fd2617e150e6ba7167f832e",
+          "cases": 101,
+          "semantic_cases": 0
+        },
+        {
+          "name": "r6-r4-affected-first",
+          "sha256": "fdf6fff6a22e921a0a0840137a13b7966ea788272c91dd76f26f683bef1d0c1e",
+          "cases": 245,
+          "semantic_cases": 93
+        },
+        {
+          "name": "r6-r4-semantic-second",
+          "sha256": "e958efc9f8e19626b32cae8712d148991bb8ae97ca066c23ecfeccb965187472",
+          "cases": 140,
+          "semantic_cases": 93
+        },
+        {
+          "name": "r6-r4-semantic-third",
+          "sha256": "344c2547ebb4912f8de72db50f07b21febe2bb6267848ef2a946723715e6659c",
+          "cases": 140,
+          "semantic_cases": 93
+        },
+        {
+          "name": "r6-r4-legacy-final",
+          "sha256": "24ac6f51aec077d30bacb001a5e7665cab6ae537fa71157050aeafb6115ac288",
+          "cases": 350,
+          "semantic_cases": 0
+        },
+        {
+          "name": "r6-r4-semantic-public-final",
+          "sha256": "f0962dc0285e263af929d0674e9fd35efb6f1c227551c70145f60188148b204d",
+          "cases": 185,
+          "semantic_cases": 93
+        },
+        {
+          "name": "r6-r4-list-red",
+          "sha256": "2915b83d3d3b1c4964b0ba0f52b327d3c1a4bda9d8464e3015c2b023ee7a570a",
+          "cases": 3,
+          "semantic_cases": 0
+        },
+        {
+          "name": "r6-r4-legacy-recovery",
+          "sha256": "910d690c3f0322e620c03a3731c1a87725d90c43ea2f5670ee7b4d193a848f36",
+          "cases": 113,
+          "semantic_cases": 0
+        },
+        {
+          "name": "r6-r4-scope-recovery",
+          "sha256": "89deceb16fd3c2aed809b3c580b78925037531813129e0b48e061fae8944de15",
+          "cases": 135,
+          "semantic_cases": 93
+        },
+        {
+          "name": "r6-r4-domain-frozen",
+          "sha256": "618d77ef9be4024793e35dd36da9d6136e903a97af079b55479e227b47b9893f",
+          "cases": 290,
+          "semantic_cases": 93
+        },
+        {
+          "name": "r6-r4-recovery-public-frozen",
+          "sha256": "144b8bafc7a5b055f8087c2b10a21cd96c588d08e23ea3e33da21c161bad8e73",
+          "cases": 280,
+          "semantic_cases": 0
+        },
+        {
+          "name": "r6-r4-compat-account-red",
+          "sha256": "75a8d63634848bcef3e1b7dff7a7fd675e75c21bd8502b1e7694db8424d10fa3",
+          "cases": 1,
+          "semantic_cases": 0
+        },
+        {
+          "name": "r6-r4-argument-frozen",
+          "sha256": "b828a2f37921619557541051c7212717a2255bbd1d40ca4df4dcf9dd34d18a21",
+          "cases": 37,
+          "semantic_cases": 0
+        }
+      ]
+    },
+    "authorized_errata": [
+      {
+        "test": "test_an_existing_incomplete_role_proof_stays_readable_without_becoming_complete",
+        "before": "def test_an_existing_incomplete_role_proof_stays_readable_without_becoming_complete():\n    text = 'Our equipment is used in rural clinics and urban markets.'\n    prepared = prepare_reading_business_assessment(text, {'relations': []})\n    assert prepared.passage.use == 'unresolved' and prepared.passage.relevant\n    assert prepared.passage.reason == 'source_payload_unresolved'\n    assert prepared.source_roles.independent_payload is None",
+        "after": "def test_an_existing_incomplete_role_proof_stays_readable_without_becoming_complete():\n    text = 'Our equipment is used in rural clinics and urban markets.'\n    prepared = prepare_reading_business_assessment(text, {'relations': []})\n    # R4: the original None remains None; a bound use-location source scope\n    # is now explicitly observed, without a factual/financial upgrade.\n    assert prepared.passage.use == 'support' and prepared.passage.relevant\n    assert prepared.source_roles.source_scope and not prepared.fact.eligible\n    assert prepared.source_roles.independent_payload is None"
+      },
+      {
+        "test": "test_coordinated_goal_preserves_each_predicates_own_arguments",
+        "before": "def test_coordinated_goal_preserves_each_predicates_own_arguments(joiner, specific_first):\n    specific, abstract = 'reopen neonatal wards', 'create value'\n    left, right = (specific, abstract) if specific_first else (abstract, specific)\n    text = f'We aim to {left} {joiner} {right}.'\n    prepared = prepare_reading_business_assessment(text, {'relations': []})\n    assert prepared.passage.use == 'support' and prepared.passage.relevant\n    assert not prepared.fact.eligible and not prepared.fact.financial_exempt",
+        "after": "def test_coordinated_goal_preserves_each_predicates_own_arguments(joiner, specific_first):\n    specific, abstract = 'reopen neonatal wards', 'create value'\n    left, right = (specific, abstract) if specific_first else (abstract, specific)\n    text = f'We aim to {left} {joiner} {right}.'\n    prepared = prepare_reading_business_assessment(text, {'relations': []})\n    _assert_unknown_goal(text, prepared)\n    assert not prepared.fact.eligible and not prepared.fact.financial_exempt"
+      },
+      {
+        "test": "test_nested_and_multiple_goal_predicates_do_not_lose_concrete_arguments",
+        "before": "def test_nested_and_multiple_goal_predicates_do_not_lose_concrete_arguments(text):\n    prepared = prepare_reading_business_assessment(text, {'relations': []})\n    assert prepared.passage.use == 'support' and prepared.passage.relevant\n    assert not {'operating_milestone', 'operating_current_state'} & set(prepared.fact.reasons)",
+        "after": "def test_nested_and_multiple_goal_predicates_do_not_lose_concrete_arguments(text):\n    prepared = prepare_reading_business_assessment(text, {'relations': []})\n    _assert_unknown_goal(text, prepared)\n    assert not {'operating_milestone', 'operating_current_state'} & set(prepared.fact.reasons)"
+      },
+      {
+        "test": "test_chinese_goal_coordination_has_the_same_order_invariance",
+        "before": "def test_chinese_goal_coordination_has_the_same_order_invariance(joiner, specific_first):\n    specific, abstract = '重开新生儿病房', '创造价值'\n    left, right = (specific, abstract) if specific_first else (abstract, specific)\n    text = f'公司努力{left}{joiner}{right}。'\n    prepared = prepare_reading_business_assessment(text, {'relations': []})\n    assert prepared.passage.use == 'support' and prepared.passage.relevant\n    assert not prepared.fact.eligible and not prepared.fact.financial_exempt",
+        "after": "def test_chinese_goal_coordination_has_the_same_order_invariance(joiner, specific_first):\n    specific, abstract = '重开新生儿病房', '创造价值'\n    left, right = (specific, abstract) if specific_first else (abstract, specific)\n    text = f'公司努力{left}{joiner}{right}。'\n    prepared = prepare_reading_business_assessment(text, {'relations': []})\n    _assert_unknown_goal(text, prepared)\n    assert not prepared.fact.eligible and not prepared.fact.financial_exempt"
+      },
+      {
+        "test": "test_goal_governor_does_not_supply_a_whole_sentence_veto",
+        "before": "def test_goal_governor_does_not_supply_a_whole_sentence_veto(operator):\n    text = f'We {operator} to reopen neonatal wards and create value.'\n    prepared = prepare_reading_business_assessment(text, {'relations': []})\n    assert prepared.passage.use == 'support' and prepared.passage.relevant\n    assert not prepared.fact.eligible",
+        "after": "def test_goal_governor_does_not_supply_a_whole_sentence_veto(operator):\n    text = f'We {operator} to reopen neonatal wards and create value.'\n    prepared = prepare_reading_business_assessment(text, {'relations': []})\n    _assert_unknown_goal(text, prepared)\n    assert not prepared.fact.eligible"
+      },
+      {
+        "test": "test_prepared_operator_boundary_is_not_a_dictionary_or_predicate_override",
+        "before": "def test_prepared_operator_boundary_is_not_a_dictionary_or_predicate_override(operator):\n    statement = f'公司{operator}创造价值并重开新生儿病房。'\n    nominal = f'公司的{operator}创造计划。'\n    assert prepare_reading_business_assessment(statement, {'relations': []}).passage.use == 'support'\n    assert not prepare_reading_business_assessment(nominal, {'relations': []}).passage.relevant",
+        "after": "def test_prepared_operator_boundary_is_not_a_dictionary_or_predicate_override(operator):\n    statement = f'公司{operator}创造价值并重开新生儿病房。'\n    nominal = f'公司的{operator}创造计划。'\n    _assert_unknown_goal(statement, prepare_reading_business_assessment(statement, {'relations': []}))\n    assert not prepare_reading_business_assessment(nominal, {'relations': []}).passage.relevant"
+      },
+      {
+        "test": "test_goal_matrix_and_complements_are_prepared_once_before_fact_projection",
+        "before": "def test_goal_matrix_and_complements_are_prepared_once_before_fact_projection(monkeypatch):\n    from company_wiki.source_catalog import narrative_source_passage as owner\n    from unit.du11_production.test_source_information_binding import session_for, unit_id\n\n    original = owner.observe_statement\n    calls = []\n\n    def counted(text, **kwargs):\n        calls.append(text)\n        return original(text, **kwargs)\n\n    monkeypatch.setattr(owner, 'observe_statement', counted)\n    text = 'We aim to reopen neonatal wards and create value.'\n    session, budget = session_for([text])\n    uid = unit_id(0)\n    fact, passage = session.fact(uid), session.source_passage(uid)\n    assert passage.use == 'support' and not fact.eligible\n    assert calls == [text]\n    used = budget.used\n    assert session.fact(uid) is fact and session.source_passage(uid) is passage\n    assert calls == [text] and budget.used == used",
+        "after": "def test_goal_matrix_and_complements_are_prepared_once_before_fact_projection(monkeypatch):\n    from company_wiki.source_catalog import narrative_source_passage as owner\n    from unit.du11_production.test_source_information_binding import session_for, unit_id\n\n    original = owner.observe_statement\n    calls = []\n\n    def counted(text, **kwargs):\n        calls.append(text)\n        return original(text, **kwargs)\n\n    monkeypatch.setattr(owner, 'observe_statement', counted)\n    text = 'We aim to reopen neonatal wards and create value.'\n    session, budget = session_for([text])\n    uid = unit_id(0)\n    fact, passage = session.fact(uid), session.source_passage(uid)\n    assert passage.use == 'unresolved' and not passage.relevant and not fact.eligible\n    assert calls == [text]\n    used = budget.used\n    assert session.fact(uid) is fact and session.source_passage(uid) is passage\n    assert calls == [text] and budget.used == used"
+      },
+      {
+        "test": "test_the_same_typed_function_as_a_direct_product_goal_is_preserved",
+        "before": "def test_the_same_typed_function_as_a_direct_product_goal_is_preserved():\n    text = 'We aim to supply software that processes customer orders and create value.'\n    prepared = prepare_reading_business_assessment(text, {'relations': []})\n    assert prepared.passage.use == 'support' and prepared.passage.relevant",
+        "after": "def test_the_same_typed_function_as_a_direct_product_goal_is_preserved():\n    text = 'We aim to supply software that processes customer orders and create value.'\n    prepared = prepare_reading_business_assessment(text, {'relations': []})\n    _assert_unknown_goal(text, prepared)"
+      },
+      {
+        "test": "test_a_concrete_noun_modifier_is_not_removed_with_rhetorical_adjectives",
+        "before": "def test_a_concrete_noun_modifier_is_not_removed_with_rhetorical_adjectives():\n    text = 'We aim to supply surgical services and create value.'\n    prepared = prepare_reading_business_assessment(text, {'relations': []})\n    assert prepared.passage.use == 'support' and prepared.passage.relevant",
+        "after": "def test_a_concrete_noun_modifier_is_not_removed_with_rhetorical_adjectives():\n    text = 'We aim to supply surgical services and create value.'\n    prepared = prepare_reading_business_assessment(text, {'relations': []})\n    _assert_unknown_goal(text, prepared)"
+      },
+      {
+        "test": "_assert_unknown_goal",
+        "before": null,
+        "after": "def _assert_unknown_goal(text, prepared):\n    # R4 erratum: POS binds these words but supplies no positive operating\n    # argument. Keep the original claim, not an invented economic proof.\n    from company_wiki.document_normalization.text_matching import matching_reading_text\n    assert prepared.passage.use == 'unresolved' and not prepared.passage.relevant\n    assert not prepared.fact.eligible\n    assert prepared.source_roles.independent_payload is None\n    assert not prepared.source_roles.bound_payload\n    expected = matching_reading_text(text).strip(' .。!?;；')\n    assert ''.join(c.text for c in prepared.source_roles.clauses).strip(' .。!?;；') == expected"
+      },
+      {
+        "test": "test_unknown_goals_remain_source_words_without_unproved_relevance",
+        "before": null,
+        "after": "def test_unknown_goals_remain_source_words_without_unproved_relevance(text):\n    _assert_unknown_goal(text, prepare_reading_business_assessment(text, {'relations': []}))"
+      },
+      {
+        "test": "test_unknown_catalogue_members_do_not_prove_each_others_semantics",
+        "before": null,
+        "after": "def test_unknown_catalogue_members_do_not_prove_each_others_semantics():\n    text = 'Our services include orchard planting and coastal transport.'\n    _assert_unknown_goal(text, prepare_reading_business_assessment(text, {'relations': []}))"
+      }
+    ],
+    "status_before": "M .githooks/pre-push\n?? tests/unit/document_understanding_note_scope/",
+    "excluded_untracked": "tests/unit/document_understanding_note_scope/ (T3; not collected/not reviewed)",
+    "original_argument_payload_ast_unchanged": true
+  },
+  "source_code_commit": "39f3a6049d5bf3b473d37f7c1ae33d27a04b5b03",
+  "merge_candidate": "2b0787dc1c5352cd8566fc71fc585afe735ec75c",
+  "scope": "R4 source readability/operating relevance/typed proof axes and bounded public selector/handler/work/cache regressions",
+  "findings": [],
+  "independent_execution": {
+    "normal_host_python": "C:/Miniconda/python.exe 3.13.9",
+    "pytest": "9.1.1",
+    "candidate_rootdir_config_confcutdir_explicit": true,
+    "first": {
+      "tests": 31,
+      "failures": 1,
+      "errors": 0,
+      "cases": [
+        {
+          "name": "test_prior_five_and_unseen_unknowns_cannot_supply_proof[Our platform supports remarkable ambitions.]",
+          "classname": "",
+          "seconds": "0.009"
+        },
+        {
+          "name": "test_prior_five_and_unseen_unknowns_cannot_supply_proof[Our platform supports promising possibilities.]",
+          "classname": "",
+          "seconds": "0.003"
+        },
+        {
+          "name": "test_prior_five_and_unseen_unknowns_cannot_supply_proof[Our platform supports unfamiliar technical endeavours.]",
+          "classname": "",
+          "seconds": "0.003"
+        },
+        {
+          "name": "test_prior_five_and_unseen_unknowns_cannot_supply_proof[We aim to pursue luminous horizons.]",
+          "classname": "",
+          "seconds": "3.123"
+        },
+        {
+          "name": "test_prior_five_and_unseen_unknowns_cannot_supply_proof[Our platform plans to support remarkable ambitions.]",
+          "classname": "",
+          "seconds": "0.006"
+        },
+        {
+          "name": "test_prior_five_and_unseen_unknowns_cannot_supply_proof[Our platform supports courageous intentions.]",
+          "classname": "",
+          "seconds": "0.004"
+        },
+        {
+          "name": "test_prior_five_and_unseen_unknowns_cannot_supply_proof[Our software supports wondrous tomorrows.]",
+          "classname": "",
+          "seconds": "0.004"
+        },
+        {
+          "name": "test_prior_five_and_unseen_unknowns_cannot_supply_proof[We aim to pursue plausible trajectories.]",
+          "classname": "",
+          "seconds": "0.004"
+        },
+        {
+          "name": "test_prior_five_and_unseen_unknowns_cannot_supply_proof[Our services include uncharted tending and celestial nurturing.]",
+          "classname": "",
+          "seconds": "0.006"
+        },
+        {
+          "name": "test_prior_five_and_unseen_unknowns_cannot_supply_proof[Our services include celestial nurturing and uncharted tending.]",
+          "classname": "",
+          "seconds": "0.007"
+        },
+        {
+          "name": "test_declared_scope_is_description_without_event_or_financial_exemption[Our product portfolio includes recycling systems.]",
+          "classname": "",
+          "seconds": "0.004"
+        },
+        {
+          "name": "test_declared_scope_is_description_without_event_or_financial_exemption[Our production services cover downstream assembly workflows.]",
+          "classname": "",
+          "seconds": "0.006"
+        },
+        {
+          "name": "test_declared_scope_is_description_without_event_or_financial_exemption[\\u6211\\u4eec\\u7684\\u8bbe\\u5907\\u670d\\u52a1\\u8986\\u76d6\\u5ba2\\u6237\\u7684\\u704c\\u6e89\\u4f5c\\u4e1a\\u3002]",
+          "classname": "",
+          "seconds": "0.019"
+        },
+        {
+          "name": "test_unfamiliar_actual_action_keeps_readable_source_words[Our teams recover helium from exhausted gas streams.]",
+          "classname": "",
+          "seconds": "0.007"
+        },
+        {
+          "name": "test_unfamiliar_actual_action_keeps_readable_source_words[Our vessels transport liquefied gas between inland terminals.]",
+          "classname": "",
+          "seconds": "0.007"
+        },
+        {
+          "name": "test_financial_nonassertion_and_beneficiary_do_not_borrow_scope[Our software supports customer engagement.]",
+          "classname": "",
+          "seconds": "0.004"
+        },
+        {
+          "name": "test_financial_nonassertion_and_beneficiary_do_not_borrow_scope[Net income was $20 million. Our platform supports remarkable ambitions.]",
+          "classname": "",
+          "seconds": "0.005"
+        },
+        {
+          "name": "test_financial_nonassertion_and_beneficiary_do_not_borrow_scope[Revenue rose because our platform supports remarkable ambitions.]",
+          "classname": "",
+          "seconds": "0.006"
+        },
+        {
+          "name": "test_financial_nonassertion_and_beneficiary_do_not_borrow_scope[Which equipment is used in rural clinics]",
+          "classname": "",
+          "seconds": "0.006"
+        },
+        {
+          "name": "test_financial_nonassertion_and_beneficiary_do_not_borrow_scope[Our equipment that is used in rural clinics.]",
+          "classname": "",
+          "seconds": "0.006"
+        },
+        {
+          "name": "test_financial_nonassertion_and_beneficiary_do_not_borrow_scope[We aim to create value for hospitals whose systems process orders.]",
+          "classname": "",
+          "seconds": "0.005"
+        },
+        {
+          "name": "test_typed_numeric_coverage_keeps_real_proof_without_current_state",
+          "classname": "",
+          "seconds": "0.005"
+        },
+        {
+          "name": "test_scope_recipe_changes_actual_generation_cache_for_text_and_pdf",
+          "classname": "",
+          "seconds": "1.576"
+        },
+        {
+          "name": "test_scope_observer_precharges_and_memoizes_a_false_result",
+          "classname": "tests.unit.du11_production.test_source_argument_semantics",
+          "seconds": "0.003"
+        },
+        {
+          "name": "test_scope_budget_failure_never_caches_partial_assertions_as_complete",
+          "classname": "tests.unit.du11_production.test_source_argument_semantics",
+          "seconds": "0.039"
+        },
+        {
+          "name": "test_explicit_passage_compat_account_reaches_its_prepared_scope",
+          "classname": "tests.unit.du11_production.test_source_argument_semantics",
+          "seconds": "0.002"
+        },
+        {
+          "name": "test_target_scans_are_precharged_and_memoized_with_the_shared_source_scope",
+          "classname": "tests.unit.du11_production.test_source_preparation_axes",
+          "seconds": "0.006"
+        },
+        {
+          "name": "test_capability_failure_is_explicit_public_source_processing_deferral[mixed-missing-resource]",
+          "classname": "tests.unit.du11_production.test_source_readability_deferred_selection",
+          "seconds": "0.138"
+        },
+        {
+          "name": "test_one_deferred_scope_does_not_stop_an_independent_healthy_scope[long-scope-does-not-stop-another-scope]",
+          "classname": "tests.unit.du11_production.test_source_readability_deferred_selection",
+          "seconds": "0.482"
+        },
+        {
+          "name": "test_real_handler_serializes_source_processing_state[False]",
+          "classname": "tests.integration.test_source_processing_handler_wire",
+          "seconds": "0.126"
+        },
+        {
+          "name": "test_real_handler_serializes_source_processing_state[True]",
+          "classname": "tests.integration.test_source_processing_handler_wire",
+          "seconds": "0.106"
+        }
+      ],
+      "junit_xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"1\" skipped=\"0\" tests=\"31\" time=\"8.392\" timestamp=\"2026-11-02T01:45:09.442223+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"\" name=\"test_prior_five_and_unseen_unknowns_cannot_supply_proof[Our platform supports remarkable ambitions.]\" time=\"0.009\" /><testcase classname=\"\" name=\"test_prior_five_and_unseen_unknowns_cannot_supply_proof[Our platform supports promising possibilities.]\" time=\"0.003\" /><testcase classname=\"\" name=\"test_prior_five_and_unseen_unknowns_cannot_supply_proof[Our platform supports unfamiliar technical endeavours.]\" time=\"0.003\" /><testcase classname=\"\" name=\"test_prior_five_and_unseen_unknowns_cannot_supply_proof[We aim to pursue luminous horizons.]\" time=\"3.123\" /><testcase classname=\"\" name=\"test_prior_five_and_unseen_unknowns_cannot_supply_proof[Our platform plans to support remarkable ambitions.]\" time=\"0.006\" /><testcase classname=\"\" name=\"test_prior_five_and_unseen_unknowns_cannot_supply_proof[Our platform supports courageous intentions.]\" time=\"0.004\" /><testcase classname=\"\" name=\"test_prior_five_and_unseen_unknowns_cannot_supply_proof[Our software supports wondrous tomorrows.]\" time=\"0.004\" /><testcase classname=\"\" name=\"test_prior_five_and_unseen_unknowns_cannot_supply_proof[We aim to pursue plausible trajectories.]\" time=\"0.004\" /><testcase classname=\"\" name=\"test_prior_five_and_unseen_unknowns_cannot_supply_proof[Our services include uncharted tending and celestial nurturing.]\" time=\"0.006\" /><testcase classname=\"\" name=\"test_prior_five_and_unseen_unknowns_cannot_supply_proof[Our services include celestial nurturing and uncharted tending.]\" time=\"0.007\" /><testcase classname=\"\" name=\"test_declared_scope_is_description_without_event_or_financial_exemption[Our product portfolio includes recycling systems.]\" time=\"0.004\" /><testcase classname=\"\" name=\"test_declared_scope_is_description_without_event_or_financial_exemption[Our production services cover downstream assembly workflows.]\" time=\"0.006\"><failure message=\"AssertionError: assert (True is None)&#10; +  where True = SourceAssertionRoles(clauses=(AssertionRole(text='Our production services cover downstream assembly workflows.', opera...role='unknown', bound_operating=False, raw_structure_complete=False, numeric_cells_observed=False, bound_payload=False).independent_payload\">..\\j4\\test_review.py:57: in test_declared_scope_is_description_without_event_or_financial_exemption\n    assert raw.independent_payload is None and result.source_roles.independent_payload is None\nE   AssertionError: assert (True is None)\nE    +  where True = SourceAssertionRoles(clauses=(AssertionRole(text='Our production services cover downstream assembly workflows.', opera...role='unknown', bound_operating=False, raw_structure_complete=False, numeric_cells_observed=False, bound_payload=False).independent_payload</failure></testcase><testcase classname=\"\" name=\"test_declared_scope_is_description_without_event_or_financial_exemption[\\u6211\\u4eec\\u7684\\u8bbe\\u5907\\u670d\\u52a1\\u8986\\u76d6\\u5ba2\\u6237\\u7684\\u704c\\u6e89\\u4f5c\\u4e1a\\u3002]\" time=\"0.019\" /><testcase classname=\"\" name=\"test_unfamiliar_actual_action_keeps_readable_source_words[Our teams recover helium from exhausted gas streams.]\" time=\"0.007\" /><testcase classname=\"\" name=\"test_unfamiliar_actual_action_keeps_readable_source_words[Our vessels transport liquefied gas between inland terminals.]\" time=\"0.007\" /><testcase classname=\"\" name=\"test_financial_nonassertion_and_beneficiary_do_not_borrow_scope[Our software supports customer engagement.]\" time=\"0.004\" /><testcase classname=\"\" name=\"test_financial_nonassertion_and_beneficiary_do_not_borrow_scope[Net income was $20 million. Our platform supports remarkable ambitions.]\" time=\"0.005\" /><testcase classname=\"\" name=\"test_financial_nonassertion_and_beneficiary_do_not_borrow_scope[Revenue rose because our platform supports remarkable ambitions.]\" time=\"0.006\" /><testcase classname=\"\" name=\"test_financial_nonassertion_and_beneficiary_do_not_borrow_scope[Which equipment is used in rural clinics]\" time=\"0.006\" /><testcase classname=\"\" name=\"test_financial_nonassertion_and_beneficiary_do_not_borrow_scope[Our equipment that is used in rural clinics.]\" time=\"0.006\" /><testcase classname=\"\" name=\"test_financial_nonassertion_and_beneficiary_do_not_borrow_scope[We aim to create value for hospitals whose systems process orders.]\" time=\"0.005\" /><testcase classname=\"\" name=\"test_typed_numeric_coverage_keeps_real_proof_without_current_state\" time=\"0.005\" /><testcase classname=\"\" name=\"test_scope_recipe_changes_actual_generation_cache_for_text_and_pdf\" time=\"1.576\" /><testcase classname=\"tests.unit.du11_production.test_source_argument_semantics\" name=\"test_scope_observer_precharges_and_memoizes_a_false_result\" time=\"0.003\" /><testcase classname=\"tests.unit.du11_production.test_source_argument_semantics\" name=\"test_scope_budget_failure_never_caches_partial_assertions_as_complete\" time=\"0.039\" /><testcase classname=\"tests.unit.du11_production.test_source_argument_semantics\" name=\"test_explicit_passage_compat_account_reaches_its_prepared_scope\" time=\"0.002\" /><testcase classname=\"tests.unit.du11_production.test_source_preparation_axes\" name=\"test_target_scans_are_precharged_and_memoized_with_the_shared_source_scope\" time=\"0.006\" /><testcase classname=\"tests.unit.du11_production.test_source_readability_deferred_selection\" name=\"test_capability_failure_is_explicit_public_source_processing_deferral[mixed-missing-resource]\" time=\"0.138\" /><testcase classname=\"tests.unit.du11_production.test_source_readability_deferred_selection\" name=\"test_one_deferred_scope_does_not_stop_an_independent_healthy_scope[long-scope-does-not-stop-another-scope]\" time=\"0.482\" /><testcase classname=\"tests.integration.test_source_processing_handler_wire\" name=\"test_real_handler_serializes_source_processing_state[False]\" time=\"0.126\" /><testcase classname=\"tests.integration.test_source_processing_handler_wire\" name=\"test_real_handler_serializes_source_processing_state[True]\" time=\"0.106\" /></testsuite></testsuites>",
+      "log": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\j4\\\\b\", \"requested_basetemp_len\": 43, \"cwd_len\": 54, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\nconfigfile: pytest.ini\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollected 31 items\n\n. ...........F...........                                                [ 74%]\ntests\\unit\\du11_production\\test_source_argument_semantics.py ...         [ 83%]\ntests\\unit\\du11_production\\test_source_preparation_axes.py .             [ 87%]\ntests\\unit\\du11_production\\test_source_readability_deferred_selection.py . [ 90%]\n.                                                                        [ 93%]\ntests\\integration\\test_source_processing_handler_wire.py ..              [100%]\n\n================================== FAILURES ===================================\n_ test_declared_scope_is_description_without_event_or_financial_exemption[Our production services cover downstream assembly workflows.] _\n..\\j4\\test_review.py:57: in test_declared_scope_is_description_without_event_or_financial_exemption\n    assert raw.independent_payload is None and result.source_roles.independent_payload is None\nE   AssertionError: assert (True is None)\nE    +  where True = SourceAssertionRoles(clauses=(AssertionRole(text='Our production services cover downstream assembly workflows.', opera...role='unknown', bound_operating=False, raw_structure_complete=False, numeric_cells_observed=False, bound_payload=False).independent_payload\n--- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\j4\\junit.xml ---\n=========================== short test summary info ===========================\nFAILED ::test_declared_scope_is_description_without_event_or_financial_exemption[Our production services cover downstream assembly workflows.]\n======================== 1 failed, 30 passed in 8.39s =========================\n"
+    },
+    "first_seconds": 8.39,
+    "follow_up_only_corrected_probe_and_new_quantity_control": {
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "cases": [
+        {
+          "name": "test_declared_scope_preserves_the_original_payload_axis[Our production services cover downstream assembly workflows.]",
+          "classname": "",
+          "seconds": "0.012"
+        },
+        {
+          "name": "test_direct_quantity_goal_is_not_a_current_number_or_a_beneficiary_quantity",
+          "classname": "",
+          "seconds": "2.598"
+        }
+      ],
+      "junit_xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"0\" skipped=\"0\" tests=\"2\" time=\"3.833\" timestamp=\"2026-11-02T01:47:04.071028+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"\" name=\"test_declared_scope_preserves_the_original_payload_axis[Our production services cover downstream assembly workflows.]\" time=\"0.012\" /><testcase classname=\"\" name=\"test_direct_quantity_goal_is_not_a_current_number_or_a_beneficiary_quantity\" time=\"2.598\" /></testsuite></testsuites>",
+      "log": "============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\nconfigfile: pytest.ini\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollected 2 items\n\n. ..                                                                     [100%]\n\n- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\j4\\junit-final.xml -\n============================== 2 passed in 3.83s ==============================\n"
+    },
+    "follow_up_seconds": 3.83,
+    "conclusion": "30 unchanged passing cases +1 reviewer-oracle-corrected pass +1 new direct/beneficiary quantity case;32 unique test scenarios, not a newly rerun32-case suite.",
+    "reran_290_280_37_or_full_unit": false
+  },
+  "reviewer_oracle_erratum": {
+    "text": "Our production services cover downstream assembly workflows.",
+    "incorrect_assertion": "raw.independent_payload must be None, hence fact must be ineligible and not finance_exempt",
+    "observed": "The unchanged original argument semantic owner already returns True for assembly workflows, before R4 scope projection. Actual raw/prepared True and operating_mechanism preserve that existing proof.",
+    "evidence": "Original _argument_payload AST identical between a6841e94 and2b0787dc; positive owner is separate from source_scope. Initial raw observations and full failed assertion retained.",
+    "correction": "Only the self-owned probe preserves raw/prepared identity; rawNone remains description/no fact/no finance exemption, existingTrue is preserved, neither creates current-state/milestone.",
+    "product_or_author_oracle_modified": false,
+    "replay": "Exactly that failed case rerun passed; initial other30 cases not rerun."
+  },
+  "observations_first": [
+    {
+      "text": "Our platform supports remarkable ambitions.",
+      "raw_payload": null,
+      "raw_scope": false,
+      "prepared_payload": null,
+      "prepared_scope": false,
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "passage": {
+        "use": "unresolved",
+        "reason": "source_payload_unresolved",
+        "role": "source_context",
+        "relevant": false,
+        "financial_only": false,
+        "assessment_complete": true
+      },
+      "source_roles": {
+        "clauses": [
+          {
+            "text": "Our platform supports remarkable ambitions.",
+            "operating": true,
+            "rule_purpose": "",
+            "independent_payload": null,
+            "payload_witnesses": [],
+            "material_payload": false,
+            "function_or_event": true,
+            "source_scope": false
+          }
+        ],
+        "numeric_ambiguous": false,
+        "numeric_role": "unknown",
+        "bound_operating": false,
+        "raw_structure_complete": false,
+        "numeric_cells_observed": false,
+        "bound_payload": false
+      }
+    },
+    {
+      "text": "Our platform supports promising possibilities.",
+      "raw_payload": null,
+      "raw_scope": false,
+      "prepared_payload": null,
+      "prepared_scope": false,
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "passage": {
+        "use": "unresolved",
+        "reason": "source_payload_unresolved",
+        "role": "source_context",
+        "relevant": false,
+        "financial_only": false,
+        "assessment_complete": true
+      },
+      "source_roles": {
+        "clauses": [
+          {
+            "text": "Our platform supports promising possibilities.",
+            "operating": true,
+            "rule_purpose": "",
+            "independent_payload": null,
+            "payload_witnesses": [],
+            "material_payload": false,
+            "function_or_event": true,
+            "source_scope": false
+          }
+        ],
+        "numeric_ambiguous": false,
+        "numeric_role": "unknown",
+        "bound_operating": false,
+        "raw_structure_complete": false,
+        "numeric_cells_observed": false,
+        "bound_payload": false
+      }
+    },
+    {
+      "text": "Our platform supports unfamiliar technical endeavours.",
+      "raw_payload": null,
+      "raw_scope": false,
+      "prepared_payload": null,
+      "prepared_scope": false,
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "passage": {
+        "use": "unresolved",
+        "reason": "source_payload_unresolved",
+        "role": "source_context",
+        "relevant": false,
+        "financial_only": false,
+        "assessment_complete": true
+      },
+      "source_roles": {
+        "clauses": [
+          {
+            "text": "Our platform supports unfamiliar technical endeavours.",
+            "operating": true,
+            "rule_purpose": "",
+            "independent_payload": null,
+            "payload_witnesses": [],
+            "material_payload": false,
+            "function_or_event": true,
+            "source_scope": false
+          }
+        ],
+        "numeric_ambiguous": false,
+        "numeric_role": "unknown",
+        "bound_operating": false,
+        "raw_structure_complete": false,
+        "numeric_cells_observed": false,
+        "bound_payload": false
+      }
+    },
+    {
+      "text": "We aim to pursue luminous horizons.",
+      "raw_payload": null,
+      "raw_scope": false,
+      "prepared_payload": null,
+      "prepared_scope": false,
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "passage": {
+        "use": "unresolved",
+        "reason": "source_payload_unresolved",
+        "role": "source_context",
+        "relevant": false,
+        "financial_only": false,
+        "assessment_complete": true
+      },
+      "source_roles": {
+        "clauses": [
+          {
+            "text": "We aim to pursue luminous horizons.",
+            "operating": false,
+            "rule_purpose": "",
+            "independent_payload": null,
+            "payload_witnesses": [],
+            "material_payload": false,
+            "function_or_event": false,
+            "source_scope": false
+          }
+        ],
+        "numeric_ambiguous": false,
+        "numeric_role": "unknown",
+        "bound_operating": false,
+        "raw_structure_complete": false,
+        "numeric_cells_observed": false,
+        "bound_payload": false
+      }
+    },
+    {
+      "text": "Our platform plans to support remarkable ambitions.",
+      "raw_payload": null,
+      "raw_scope": false,
+      "prepared_payload": null,
+      "prepared_scope": false,
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "passage": {
+        "use": "unresolved",
+        "reason": "source_payload_unresolved",
+        "role": "source_context",
+        "relevant": false,
+        "financial_only": false,
+        "assessment_complete": true
+      },
+      "source_roles": {
+        "clauses": [
+          {
+            "text": "Our platform plans to support remarkable ambitions.",
+            "operating": false,
+            "rule_purpose": "",
+            "independent_payload": null,
+            "payload_witnesses": [],
+            "material_payload": false,
+            "function_or_event": false,
+            "source_scope": false
+          }
+        ],
+        "numeric_ambiguous": false,
+        "numeric_role": "unknown",
+        "bound_operating": false,
+        "raw_structure_complete": false,
+        "numeric_cells_observed": false,
+        "bound_payload": false
+      }
+    },
+    {
+      "text": "Our platform supports courageous intentions.",
+      "raw_payload": null,
+      "raw_scope": false,
+      "prepared_payload": null,
+      "prepared_scope": false,
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "passage": {
+        "use": "unresolved",
+        "reason": "source_payload_unresolved",
+        "role": "source_context",
+        "relevant": false,
+        "financial_only": false,
+        "assessment_complete": true
+      },
+      "source_roles": {
+        "clauses": [
+          {
+            "text": "Our platform supports courageous intentions.",
+            "operating": true,
+            "rule_purpose": "",
+            "independent_payload": null,
+            "payload_witnesses": [],
+            "material_payload": false,
+            "function_or_event": true,
+            "source_scope": false
+          }
+        ],
+        "numeric_ambiguous": false,
+        "numeric_role": "unknown",
+        "bound_operating": false,
+        "raw_structure_complete": false,
+        "numeric_cells_observed": false,
+        "bound_payload": false
+      }
+    },
+    {
+      "text": "Our software supports wondrous tomorrows.",
+      "raw_payload": null,
+      "raw_scope": false,
+      "prepared_payload": null,
+      "prepared_scope": false,
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "passage": {
+        "use": "unresolved",
+        "reason": "source_payload_unresolved",
+        "role": "source_context",
+        "relevant": false,
+        "financial_only": false,
+        "assessment_complete": true
+      },
+      "source_roles": {
+        "clauses": [
+          {
+            "text": "Our software supports wondrous tomorrows.",
+            "operating": true,
+            "rule_purpose": "",
+            "independent_payload": null,
+            "payload_witnesses": [],
+            "material_payload": false,
+            "function_or_event": true,
+            "source_scope": false
+          }
+        ],
+        "numeric_ambiguous": false,
+        "numeric_role": "unknown",
+        "bound_operating": false,
+        "raw_structure_complete": false,
+        "numeric_cells_observed": false,
+        "bound_payload": false
+      }
+    },
+    {
+      "text": "We aim to pursue plausible trajectories.",
+      "raw_payload": null,
+      "raw_scope": false,
+      "prepared_payload": null,
+      "prepared_scope": false,
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "passage": {
+        "use": "unresolved",
+        "reason": "source_payload_unresolved",
+        "role": "source_context",
+        "relevant": false,
+        "financial_only": false,
+        "assessment_complete": true
+      },
+      "source_roles": {
+        "clauses": [
+          {
+            "text": "We aim to pursue plausible trajectories.",
+            "operating": false,
+            "rule_purpose": "",
+            "independent_payload": null,
+            "payload_witnesses": [],
+            "material_payload": false,
+            "function_or_event": false,
+            "source_scope": false
+          }
+        ],
+        "numeric_ambiguous": false,
+        "numeric_role": "unknown",
+        "bound_operating": false,
+        "raw_structure_complete": false,
+        "numeric_cells_observed": false,
+        "bound_payload": false
+      }
+    },
+    {
+      "text": "Our services include uncharted tending and celestial nurturing.",
+      "raw_payload": null,
+      "raw_scope": false,
+      "prepared_payload": null,
+      "prepared_scope": false,
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "passage": {
+        "use": "unresolved",
+        "reason": "source_payload_unresolved",
+        "role": "source_context",
+        "relevant": false,
+        "financial_only": false,
+        "assessment_complete": true
+      },
+      "source_roles": {
+        "clauses": [
+          {
+            "text": "Our services include uncharted tending and celestial nurturing.",
+            "operating": true,
+            "rule_purpose": "",
+            "independent_payload": null,
+            "payload_witnesses": [],
+            "material_payload": false,
+            "function_or_event": true,
+            "source_scope": false
+          }
+        ],
+        "numeric_ambiguous": false,
+        "numeric_role": "unknown",
+        "bound_operating": false,
+        "raw_structure_complete": false,
+        "numeric_cells_observed": false,
+        "bound_payload": false
+      }
+    },
+    {
+      "text": "Our services include celestial nurturing and uncharted tending.",
+      "raw_payload": null,
+      "raw_scope": false,
+      "prepared_payload": null,
+      "prepared_scope": false,
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "passage": {
+        "use": "unresolved",
+        "reason": "source_payload_unresolved",
+        "role": "source_context",
+        "relevant": false,
+        "financial_only": false,
+        "assessment_complete": true
+      },
+      "source_roles": {
+        "clauses": [
+          {
+            "text": "Our services include celestial nurturing and uncharted tending.",
+            "operating": true,
+            "rule_purpose": "",
+            "independent_payload": null,
+            "payload_witnesses": [],
+            "material_payload": false,
+            "function_or_event": true,
+            "source_scope": false
+          }
+        ],
+        "numeric_ambiguous": false,
+        "numeric_role": "unknown",
+        "bound_operating": false,
+        "raw_structure_complete": false,
+        "numeric_cells_observed": false,
+        "bound_payload": false
+      }
+    },
+    {
+      "text": "Our product portfolio includes recycling systems.",
+      "raw_payload": null,
+      "raw_scope": true,
+      "prepared_payload": null,
+      "prepared_scope": true,
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "passage": {
+        "use": "support",
+        "reason": "source_declared_scope",
+        "role": "source_narrative",
+        "relevant": true,
+        "financial_only": false,
+        "assessment_complete": true
+      },
+      "source_roles": {
+        "clauses": [
+          {
+            "text": "Our product portfolio includes recycling systems.",
+            "operating": true,
+            "rule_purpose": "",
+            "independent_payload": null,
+            "payload_witnesses": [],
+            "material_payload": false,
+            "function_or_event": true,
+            "source_scope": true
+          }
+        ],
+        "numeric_ambiguous": false,
+        "numeric_role": "unknown",
+        "bound_operating": false,
+        "raw_structure_complete": false,
+        "numeric_cells_observed": false,
+        "bound_payload": false
+      }
+    },
+    {
+      "text": "Our production services cover downstream assembly workflows.",
+      "raw_payload": true,
+      "raw_scope": true,
+      "prepared_payload": true,
+      "prepared_scope": true,
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "operating_mechanism"
+        ],
+        "reasons": [
+          "operating_mechanism"
+        ],
+        "score": 3,
+        "financial_exempt": true,
+        "purpose": "operating"
+      },
+      "passage": {
+        "use": "support",
+        "reason": "source_business_relation",
+        "role": "source_narrative",
+        "relevant": true,
+        "financial_only": false,
+        "assessment_complete": true
+      },
+      "source_roles": {
+        "clauses": [
+          {
+            "text": "Our production services cover downstream assembly workflows.",
+            "operating": true,
+            "rule_purpose": "",
+            "independent_payload": true,
+            "payload_witnesses": [
+              "Our production services cover downstream assembly workflows."
+            ],
+            "material_payload": true,
+            "function_or_event": true,
+            "source_scope": true
+          }
+        ],
+        "numeric_ambiguous": false,
+        "numeric_role": "unknown",
+        "bound_operating": false,
+        "raw_structure_complete": false,
+        "numeric_cells_observed": false,
+        "bound_payload": false
+      }
+    },
+    {
+      "text": "我们的设备服务覆盖客户的灌溉作业。",
+      "raw_payload": null,
+      "raw_scope": true,
+      "prepared_payload": null,
+      "prepared_scope": true,
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "passage": {
+        "use": "support",
+        "reason": "source_declared_scope",
+        "role": "source_narrative",
+        "relevant": true,
+        "financial_only": false,
+        "assessment_complete": true
+      },
+      "source_roles": {
+        "clauses": [
+          {
+            "text": "我们的设备服务覆盖客户的灌溉作业",
+            "operating": true,
+            "rule_purpose": "",
+            "independent_payload": null,
+            "payload_witnesses": [],
+            "material_payload": false,
+            "function_or_event": true,
+            "source_scope": true
+          }
+        ],
+        "numeric_ambiguous": false,
+        "numeric_role": "unknown",
+        "bound_operating": false,
+        "raw_structure_complete": false,
+        "numeric_cells_observed": false,
+        "bound_payload": false
+      }
+    },
+    {
+      "text": "Our teams recover helium from exhausted gas streams.",
+      "raw_payload": null,
+      "raw_scope": false,
+      "prepared_payload": null,
+      "prepared_scope": false,
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "passage": {
+        "use": "support",
+        "reason": "source_readable_narrative",
+        "role": "source_narrative",
+        "relevant": true,
+        "financial_only": false,
+        "assessment_complete": true
+      },
+      "source_roles": {
+        "clauses": [
+          {
+            "text": "Our teams recover helium from exhausted gas streams.",
+            "operating": false,
+            "rule_purpose": "",
+            "independent_payload": null,
+            "payload_witnesses": [],
+            "material_payload": false,
+            "function_or_event": false,
+            "source_scope": false
+          }
+        ],
+        "numeric_ambiguous": false,
+        "numeric_role": "unknown",
+        "bound_operating": false,
+        "raw_structure_complete": false,
+        "numeric_cells_observed": false,
+        "bound_payload": false
+      }
+    },
+    {
+      "text": "Our vessels transport liquefied gas between inland terminals.",
+      "raw_payload": null,
+      "raw_scope": false,
+      "prepared_payload": null,
+      "prepared_scope": false,
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "passage": {
+        "use": "support",
+        "reason": "source_readable_narrative",
+        "role": "source_narrative",
+        "relevant": true,
+        "financial_only": false,
+        "assessment_complete": true
+      },
+      "source_roles": {
+        "clauses": [
+          {
+            "text": "Our vessels transport liquefied gas between inland terminals.",
+            "operating": false,
+            "rule_purpose": "",
+            "independent_payload": null,
+            "payload_witnesses": [],
+            "material_payload": false,
+            "function_or_event": false,
+            "source_scope": false
+          }
+        ],
+        "numeric_ambiguous": false,
+        "numeric_role": "unknown",
+        "bound_operating": false,
+        "raw_structure_complete": false,
+        "numeric_cells_observed": false,
+        "bound_payload": false
+      }
+    },
+    {
+      "text": "Our software supports customer engagement.",
+      "raw_payload": false,
+      "raw_scope": false,
+      "prepared_payload": false,
+      "prepared_scope": false,
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "passage": {
+        "use": "context_only",
+        "reason": "source_generic_objective",
+        "role": "source_context",
+        "relevant": false,
+        "financial_only": false,
+        "assessment_complete": true
+      },
+      "source_roles": {
+        "clauses": [
+          {
+            "text": "Our software supports customer engagement.",
+            "operating": true,
+            "rule_purpose": "",
+            "independent_payload": false,
+            "payload_witnesses": [],
+            "material_payload": false,
+            "function_or_event": true,
+            "source_scope": false
+          }
+        ],
+        "numeric_ambiguous": false,
+        "numeric_role": "unknown",
+        "bound_operating": false,
+        "raw_structure_complete": false,
+        "numeric_cells_observed": false,
+        "bound_payload": false
+      }
+    },
+    {
+      "text": "Net income was $20 million. Our platform supports remarkable ambitions.",
+      "raw_payload": null,
+      "raw_scope": false,
+      "prepared_payload": null,
+      "prepared_scope": false,
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "passage": {
+        "use": "unresolved",
+        "reason": "source_payload_unresolved",
+        "role": "source_context",
+        "relevant": false,
+        "financial_only": false,
+        "assessment_complete": true
+      },
+      "source_roles": {
+        "clauses": [
+          {
+            "text": "Net income was $20 million.",
+            "operating": false,
+            "rule_purpose": "",
+            "independent_payload": null,
+            "payload_witnesses": [],
+            "material_payload": false,
+            "function_or_event": false,
+            "source_scope": false
+          },
+          {
+            "text": "Our platform supports remarkable ambitions.",
+            "operating": true,
+            "rule_purpose": "",
+            "independent_payload": null,
+            "payload_witnesses": [],
+            "material_payload": false,
+            "function_or_event": true,
+            "source_scope": false
+          }
+        ],
+        "numeric_ambiguous": false,
+        "numeric_role": "unknown",
+        "bound_operating": false,
+        "raw_structure_complete": false,
+        "numeric_cells_observed": false,
+        "bound_payload": false
+      }
+    },
+    {
+      "text": "Revenue rose because our platform supports remarkable ambitions.",
+      "raw_payload": null,
+      "raw_scope": false,
+      "prepared_payload": null,
+      "prepared_scope": false,
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "passage": {
+        "use": "unresolved",
+        "reason": "source_payload_unresolved",
+        "role": "source_context",
+        "relevant": false,
+        "financial_only": false,
+        "assessment_complete": true
+      },
+      "source_roles": {
+        "clauses": [
+          {
+            "text": "Revenue rose because our platform supports remarkable ambitions.",
+            "operating": true,
+            "rule_purpose": "",
+            "independent_payload": null,
+            "payload_witnesses": [],
+            "material_payload": false,
+            "function_or_event": true,
+            "source_scope": false
+          }
+        ],
+        "numeric_ambiguous": false,
+        "numeric_role": "unknown",
+        "bound_operating": false,
+        "raw_structure_complete": false,
+        "numeric_cells_observed": false,
+        "bound_payload": false
+      }
+    },
+    {
+      "text": "Which equipment is used in rural clinics",
+      "raw_payload": null,
+      "raw_scope": true,
+      "prepared_payload": null,
+      "prepared_scope": false,
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "passage": {
+        "use": "context_only",
+        "reason": "source_non_assertion",
+        "role": "source_context",
+        "relevant": false,
+        "financial_only": false,
+        "assessment_complete": true
+      },
+      "source_roles": {
+        "clauses": [],
+        "numeric_ambiguous": false,
+        "numeric_role": "unknown",
+        "bound_operating": false,
+        "raw_structure_complete": false,
+        "numeric_cells_observed": false,
+        "bound_payload": false
+      }
+    },
+    {
+      "text": "Our equipment that is used in rural clinics.",
+      "raw_payload": null,
+      "raw_scope": false,
+      "prepared_payload": null,
+      "prepared_scope": false,
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "passage": {
+        "use": "unresolved",
+        "reason": "source_passage_incomplete",
+        "role": "unknown",
+        "relevant": false,
+        "financial_only": false,
+        "assessment_complete": true
+      },
+      "source_roles": {
+        "clauses": [
+          {
+            "text": "Our equipment that is used in rural clinics.",
+            "operating": false,
+            "rule_purpose": "",
+            "independent_payload": null,
+            "payload_witnesses": [],
+            "material_payload": false,
+            "function_or_event": false,
+            "source_scope": false
+          }
+        ],
+        "numeric_ambiguous": false,
+        "numeric_role": "unknown",
+        "bound_operating": false,
+        "raw_structure_complete": false,
+        "numeric_cells_observed": false,
+        "bound_payload": false
+      }
+    },
+    {
+      "text": "We aim to create value for hospitals whose systems process orders.",
+      "raw_payload": true,
+      "raw_scope": false,
+      "prepared_payload": true,
+      "prepared_scope": false,
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "passage": {
+        "use": "context_only",
+        "reason": "source_abstract_objective",
+        "role": "source_context",
+        "relevant": false,
+        "financial_only": false,
+        "assessment_complete": true
+      },
+      "source_roles": {
+        "clauses": [
+          {
+            "text": "We aim to create value for hospitals whose systems process orders.",
+            "operating": true,
+            "rule_purpose": "",
+            "independent_payload": true,
+            "payload_witnesses": [
+              "We aim to create value for hospitals whose systems process orders."
+            ],
+            "material_payload": true,
+            "function_or_event": true,
+            "source_scope": false
+          }
+        ],
+        "numeric_ambiguous": false,
+        "numeric_role": "unknown",
+        "bound_operating": false,
+        "raw_structure_complete": false,
+        "numeric_cells_observed": false,
+        "bound_payload": false
+      }
+    },
+    {
+      "text": "Our sales services cover 23 regional markets.",
+      "raw_payload": null,
+      "raw_scope": true,
+      "prepared_payload": true,
+      "prepared_scope": true,
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "business_coverage_relation"
+        ],
+        "reasons": [
+          "business_coverage_relation"
+        ],
+        "score": 3,
+        "financial_exempt": true,
+        "purpose": "operating"
+      },
+      "passage": {
+        "use": "support",
+        "reason": "source_business_relation",
+        "role": "source_narrative",
+        "relevant": true,
+        "financial_only": false,
+        "assessment_complete": true
+      },
+      "source_roles": {
+        "clauses": [
+          {
+            "text": "Our sales services cover 23 regional markets.",
+            "operating": true,
+            "rule_purpose": "",
+            "independent_payload": null,
+            "payload_witnesses": [],
+            "material_payload": false,
+            "function_or_event": true,
+            "source_scope": true
+          }
+        ],
+        "numeric_ambiguous": false,
+        "numeric_role": "unknown",
+        "bound_operating": false,
+        "raw_structure_complete": false,
+        "numeric_cells_observed": false,
+        "bound_payload": true
+      }
+    }
+  ],
+  "observations_follow_up": [
+    {
+      "text": "Our production services cover downstream assembly workflows.",
+      "raw_payload": true,
+      "raw_scope": true,
+      "prepared_payload": true,
+      "prepared_scope": true,
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "operating_mechanism"
+        ],
+        "reasons": [
+          "operating_mechanism"
+        ],
+        "score": 3,
+        "financial_exempt": true,
+        "purpose": "operating"
+      },
+      "passage": {
+        "use": "support",
+        "reason": "source_business_relation",
+        "role": "source_narrative",
+        "relevant": true,
+        "financial_only": false,
+        "assessment_complete": true
+      },
+      "source_roles": {
+        "clauses": [
+          {
+            "text": "Our production services cover downstream assembly workflows.",
+            "operating": true,
+            "rule_purpose": "",
+            "independent_payload": true,
+            "payload_witnesses": [
+              "Our production services cover downstream assembly workflows."
+            ],
+            "material_payload": true,
+            "function_or_event": true,
+            "source_scope": true
+          }
+        ],
+        "numeric_ambiguous": false,
+        "numeric_role": "unknown",
+        "bound_operating": false,
+        "raw_structure_complete": false,
+        "numeric_cells_observed": false,
+        "bound_payload": false
+      }
+    },
+    {
+      "text": "We aim to serve 1700 customers and create value.",
+      "raw_payload": null,
+      "raw_scope": false,
+      "prepared_payload": null,
+      "prepared_scope": false,
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "passage": {
+        "use": "unresolved",
+        "reason": "source_goal_quantity_unresolved",
+        "role": "source_context",
+        "relevant": true,
+        "financial_only": false,
+        "assessment_complete": true
+      },
+      "source_roles": {
+        "clauses": [
+          {
+            "text": "We aim to serve 1700 customers and create value.",
+            "operating": false,
+            "rule_purpose": "",
+            "independent_payload": null,
+            "payload_witnesses": [],
+            "material_payload": false,
+            "function_or_event": false,
+            "source_scope": false
+          }
+        ],
+        "numeric_ambiguous": false,
+        "numeric_role": "unknown",
+        "bound_operating": false,
+        "raw_structure_complete": false,
+        "numeric_cells_observed": false,
+        "bound_payload": false
+      }
+    },
+    {
+      "text": "We aim to create value for 1700 customers.",
+      "raw_payload": null,
+      "raw_scope": false,
+      "prepared_payload": null,
+      "prepared_scope": false,
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "passage": {
+        "use": "context_only",
+        "reason": "source_abstract_objective",
+        "role": "source_context",
+        "relevant": false,
+        "financial_only": false,
+        "assessment_complete": true
+      },
+      "source_roles": {
+        "clauses": [
+          {
+            "text": "We aim to create value for 1700 customers.",
+            "operating": false,
+            "rule_purpose": "",
+            "independent_payload": null,
+            "payload_witnesses": [],
+            "material_payload": false,
+            "function_or_event": false,
+            "source_scope": false
+          }
+        ],
+        "numeric_ambiguous": false,
+        "numeric_role": "unknown",
+        "bound_operating": false,
+        "raw_structure_complete": false,
+        "numeric_cells_observed": false,
+        "bound_payload": false
+      }
+    }
+  ],
+  "confirmed": [
+    "All five previous independent counterexamples close: rawNone remainsNone, unresolved/irrelevant/no eligiblefact/no finance exemption; three unseen positive-sounding NPs and reversed unknown two-member lists do not gain proof.",
+    "Typed catalog/scope description stays distinct from independently proved argument payload. Pure scopes keep source quote/support/description without factual/current-state/financial upgrade; originalFalse andNone retained.",
+    "Two unfamiliar real actions remain readable; actual23-market numeric coverage remains bound proof without fabricated current-state/milestone.",
+    "Known financial sentences, generic causal financial text, no-question-mark WH, relative fragment and beneficiary relative do not borrow business proof.",
+    "1700 direct operating target remains original unresolved quantity language without current-number fact;1700 beneficiary PP does not become target proof.",
+    "Actual public mixed missing-resource selection remains needs_review/partial dependency inventory; actual long scope preserves independent healthy scope without global budget failure. Actual NativeSelectHandler normal/deferred wire remains strict and serializes honest complete/partial states.",
+    "Bounded work is precharged before source-scope observer; false results and goals memoized; budget stop cannot cache partial source_assertions complete; explicit compatibility account reaches scope owner.",
+    "Independent in-memory source_context algorithm-byte mutation invalidates actual generation cache for bothPDF/text, with a complete current dependency inventory positivecontrol before mutation."
+  ],
+  "static_assessment": {
+    "common_owner": "Prepared _ReadingRelationObservation separates payload_reasons/scope_reasons/unknown_reasons and is reused by independent callback and payload projection; bool(any relations) bypass removed.",
+    "generic_syntax": "Default-specific and promotional exception patterns removed; matrix/NP/relative binding is syntax, source_argument_payload supplies positive semantic proof; unknown target cannot infer positive by exclusion.",
+    "generic_classes": "New scope heads describe generic operation/workflow/market/region/customer classes with bounded argument attachment, not company names, industry lists or samples.",
+    "relevance_compat": "Given roles, legacy eligible label cannot override sourceNone/sourceFalse; source_scope and numeric proof retain their own responsibility.",
+    "budget": "Same production WorkBudget goes through Session/directassessment/compat. Existing16M/112 and4096chars/1024tokens retain; target scans actual8n, scope8n+1, directed2n+1 memo and no partial roles cache.",
+    "limits_not_performance_claim": "Logical scan coefficients are not instruction-level accounting; no H1 latency/recall assertion from these unit timings."
+  },
+  "authorized_errata_assessment": {
+    "junit_identity_evidence": {
+      "r3_final_semantic_count": 93,
+      "r4_final_semantic_count": 93,
+      "removed_case_ids": [
+        "test_business_content_does_not_need_a_company_or_industry_allowlist[Our services include orchard planting and coastal transport.]",
+        "test_business_content_does_not_need_a_company_or_industry_allowlist[We are committed to treating rare diseases at regional clinics.]",
+        "test_business_content_does_not_need_a_company_or_industry_allowlist[\\u516c\\u53f8\\u5c06\\u52aa\\u529b\\u8fd0\\u8f93\\u6db2\\u5316\\u5929\\u7136\\u6c14\\u3002]"
+      ],
+      "added_case_ids": [
+        "test_unknown_catalogue_members_do_not_prove_each_others_semantics",
+        "test_unknown_goals_remain_source_words_without_unproved_relevance[We are committed to treating rare diseases at regional clinics.]",
+        "test_unknown_goals_remain_source_words_without_unproved_relevance[\\u516c\\u53f8\\u5c06\\u52aa\\u529b\\u8fd0\\u8f93\\u6db2\\u5316\\u5929\\u7136\\u6c14\\u3002]"
+      ],
+      "all_historical_run_counts": [
+        {
+          "name": "r6-r3-ci-red",
+          "sha256": "638fab76707ccf1245419177e3db7637dca5e04668cb2024b89589ab82f22e4e",
+          "cases": 415,
+          "semantic_cases": 0
+        },
+        {
+          "name": "r6-r3-axes-red",
+          "sha256": "3b8c8969cb2e3e5e26751c0f69959eaaf0d71f73346a146cdb48aae5ff3aaacf",
+          "cases": 9,
+          "semantic_cases": 0
+        },
+        {
+          "name": "r6-r3-ci-green1",
+          "sha256": "183f68b7c49787c4b2183228a6541fbab647f062ec21e357fe48bfabd9f38aa6",
+          "cases": 424,
+          "semantic_cases": 0
+        },
+        {
+          "name": "r6-r3-r2-regression",
+          "sha256": "63943d986e2ce97df8106c035a224eead255719932ae82fe6c51bc3eb88acfa8",
+          "cases": 367,
+          "semantic_cases": 93
+        },
+        {
+          "name": "r6-r3-head-red",
+          "sha256": "b3eaae601c83c32247bd87963b4a2c9de5e8b71d72db2b0acab9bb72d5b44824",
+          "cases": 16,
+          "semantic_cases": 0
+        },
+        {
+          "name": "r6-r3-head-green",
+          "sha256": "afce392c2a6f409c5b00cb93d576666791c1c24ecb65046b2bcc77f6deb96b67",
+          "cases": 24,
+          "semantic_cases": 0
+        },
+        {
+          "name": "r6-r3-ci-final",
+          "sha256": "5ec3f16e034cd14ce5aa4c6b1cfa7632aa29a2ff2dba0edf15cfcdb7f2a77557",
+          "cases": 431,
+          "semantic_cases": 0
+        },
+        {
+          "name": "r6-r3-r2-final",
+          "sha256": "fc2510997ed41e02558ad6e20f765d943bcd4c1b1a20c96d9cb4184dca8df6c8",
+          "cases": 355,
+          "semantic_cases": 93
+        },
+        {
+          "name": "r6-r3-np-green",
+          "sha256": "9433f19ae14dec40d60bac5cfb62a476d0c6b5af72a75b2e65ed6fe9d44b5015",
+          "cases": 27,
+          "semantic_cases": 1
+        },
+        {
+          "name": "r6-r3-nominal-red",
+          "sha256": "ade21aa04edd6ef32fa849f56f5a856493430500fc29188722c05ac8c53eb630",
+          "cases": 1,
+          "semantic_cases": 0
+        },
+        {
+          "name": "r6-r3-np-final",
+          "sha256": "7f6ce7f29586d2fafcc4def852d87fd24e70b1f7eb1defd16f6c2102977aad88",
+          "cases": 121,
+          "semantic_cases": 93
+        },
+        {
+          "name": "r6-r3-ci-frozen",
+          "sha256": "fd45e23b571a1fa8860bde7a9339fea2bd999f88d540c4164bd90f4dfdbb6d49",
+          "cases": 433,
+          "semantic_cases": 0
+        },
+        {
+          "name": "r6-r3-r2-frozen",
+          "sha256": "b8764608009771e0b09d118bed7ee9463ce65ac165db083a9199be839bf2b946",
+          "cases": 262,
+          "semantic_cases": 0
+        },
+        {
+          "name": "r6-r4-minimal-red",
+          "sha256": "236d63debcb83ba54913cd571ec8b9a797ca90732b12f5a378c83dc689253e15",
+          "cases": 8,
+          "semantic_cases": 0
+        },
+        {
+          "name": "r6-r4-semantic-red",
+          "sha256": "ee603c5f5f57710b2adebc18c99dbed17d663d8fde5f9deaa53de7d1364c9bc2",
+          "cases": 21,
+          "semantic_cases": 0
+        },
+        {
+          "name": "r6-r4-core-first",
+          "sha256": "626273ec2e603f1b178e566944a3c91239876695627c85947736bc3dc9e73856",
+          "cases": 101,
+          "semantic_cases": 0
+        },
+        {
+          "name": "r6-r4-core-second",
+          "sha256": "76ea7c034b3b06e0605421338eb9bd38c4cb546569c9ccfac7d88ff03195597b",
+          "cases": 101,
+          "semantic_cases": 0
+        },
+        {
+          "name": "r6-r4-core-third",
+          "sha256": "f6aa43355e43cd84c6914190a904a5a112c308356fd2617e150e6ba7167f832e",
+          "cases": 101,
+          "semantic_cases": 0
+        },
+        {
+          "name": "r6-r4-affected-first",
+          "sha256": "fdf6fff6a22e921a0a0840137a13b7966ea788272c91dd76f26f683bef1d0c1e",
+          "cases": 245,
+          "semantic_cases": 93
+        },
+        {
+          "name": "r6-r4-semantic-second",
+          "sha256": "e958efc9f8e19626b32cae8712d148991bb8ae97ca066c23ecfeccb965187472",
+          "cases": 140,
+          "semantic_cases": 93
+        },
+        {
+          "name": "r6-r4-semantic-third",
+          "sha256": "344c2547ebb4912f8de72db50f07b21febe2bb6267848ef2a946723715e6659c",
+          "cases": 140,
+          "semantic_cases": 93
+        },
+        {
+          "name": "r6-r4-legacy-final",
+          "sha256": "24ac6f51aec077d30bacb001a5e7665cab6ae537fa71157050aeafb6115ac288",
+          "cases": 350,
+          "semantic_cases": 0
+        },
+        {
+          "name": "r6-r4-semantic-public-final",
+          "sha256": "f0962dc0285e263af929d0674e9fd35efb6f1c227551c70145f60188148b204d",
+          "cases": 185,
+          "semantic_cases": 93
+        },
+        {
+          "name": "r6-r4-list-red",
+          "sha256": "2915b83d3d3b1c4964b0ba0f52b327d3c1a4bda9d8464e3015c2b023ee7a570a",
+          "cases": 3,
+          "semantic_cases": 0
+        },
+        {
+          "name": "r6-r4-legacy-recovery",
+          "sha256": "910d690c3f0322e620c03a3731c1a87725d90c43ea2f5670ee7b4d193a848f36",
+          "cases": 113,
+          "semantic_cases": 0
+        },
+        {
+          "name": "r6-r4-scope-recovery",
+          "sha256": "89deceb16fd3c2aed809b3c580b78925037531813129e0b48e061fae8944de15",
+          "cases": 135,
+          "semantic_cases": 93
+        },
+        {
+          "name": "r6-r4-domain-frozen",
+          "sha256": "618d77ef9be4024793e35dd36da9d6136e903a97af079b55479e227b47b9893f",
+          "cases": 290,
+          "semantic_cases": 93
+        },
+        {
+          "name": "r6-r4-recovery-public-frozen",
+          "sha256": "144b8bafc7a5b055f8087c2b10a21cd96c588d08e23ea3e33da21c161bad8e73",
+          "cases": 280,
+          "semantic_cases": 0
+        },
+        {
+          "name": "r6-r4-compat-account-red",
+          "sha256": "75a8d63634848bcef3e1b7dff7a7fd675e75c21bd8502b1e7694db8424d10fa3",
+          "cases": 1,
+          "semantic_cases": 0
+        },
+        {
+          "name": "r6-r4-argument-frozen",
+          "sha256": "b828a2f37921619557541051c7212717a2255bbd1d40ca4df4dcf9dd34d18a21",
+          "cases": 37,
+          "semantic_cases": 0
+        }
+      ]
+    },
+    "conclusion": "Actual R3 final semantic_axes93 vs R4 final93;95 was informal mistaken count.3 moved old positive parameter identities correspond exactly to2 unknown-goal parameters+1 unknown-catalog test; text retained, no disappearance. Other changed expectations explicitly documented as authorized POS-only oracle correction. Original old20 and native60/public/R5 file oracles byte-unchanged."
+  },
+  "reproducers": {
+    "test_review.py": {
+      "sha256": "c7161c1535900c32e1a1b70d66014443c844020ab3e1116e0840826d7961e513",
+      "source": "\"\"\"Independent finite R4 probes; no original documents/models/catalog IO.\"\"\"\nimport json\nfrom dataclasses import asdict\nfrom pathlib import Path\n\nimport pytest\n\nfrom company_wiki.source_catalog import narrative_business_policy as owner\nfrom company_wiki.document_understanding.operating_states.assertion_roles import prepare_source_assertions\nfrom company_wiki.document_normalization.text_matching import matching_reading_text\n\nWT = Path('C:/Users/郑曾波/Projects/company-wiki/tmp/architecture-r2')\nassert Path(owner.__file__).resolve() == (WT / 'src/company_wiki/source_catalog/narrative_business_policy.py').resolve()\nOBSERVED = []\n\n\ndef assessment(text):\n    raw = prepare_source_assertions(text)\n    result = owner.prepare_reading_business_assessment(text, {'relations': []})\n    OBSERVED.append({'text': text, 'raw_payload': raw.independent_payload,\n                     'raw_scope': raw.source_scope, 'prepared_payload': result.source_roles.independent_payload,\n                     'prepared_scope': result.source_roles.source_scope, 'fact': asdict(result.fact),\n                     'passage': asdict(result.passage), 'source_roles': asdict(result.source_roles)})\n    (Path(__file__).parent / 'observations.json').write_text(json.dumps(OBSERVED, ensure_ascii=False, indent=2), encoding='utf-8')\n    return raw, result\n\n\n@pytest.mark.parametrize('text', [\n    'Our platform supports remarkable ambitions.',\n    'Our platform supports promising possibilities.',\n    'Our platform supports unfamiliar technical endeavours.',\n    'We aim to pursue luminous horizons.',\n    'Our platform plans to support remarkable ambitions.',\n    'Our platform supports courageous intentions.',\n    'Our software supports wondrous tomorrows.',\n    'We aim to pursue plausible trajectories.',\n    'Our services include uncharted tending and celestial nurturing.',\n    'Our services include celestial nurturing and uncharted tending.',\n])\ndef test_prior_five_and_unseen_unknowns_cannot_supply_proof(text):\n    raw, result = assessment(text)\n    assert raw.independent_payload is None and result.source_roles.independent_payload is None\n    assert not result.source_roles.bound_payload and not result.source_roles.source_scope\n    assert result.passage.use == 'unresolved' and not result.passage.relevant\n    assert not result.fact.eligible and not result.fact.financial_exempt\n    assert ''.join(r.text for r in result.source_roles.clauses).strip(' .。') == matching_reading_text(text).strip(' .。')\n\n\n@pytest.mark.parametrize('text', [\n    'Our product portfolio includes recycling systems.',\n    'Our production services cover downstream assembly workflows.',\n    '我们的设备服务覆盖客户的灌溉作业。',\n])\ndef test_declared_scope_preserves_the_original_payload_axis(text):\n    from company_wiki.source_catalog.narrative_business_disclosures import reading_material_value\n    raw, result = assessment(text)\n    assert result.source_roles.independent_payload is raw.independent_payload\n    assert result.source_roles.source_scope and result.passage.relevant\n    assert result.passage.use == 'support'\n    assert not {'operating_milestone', 'operating_current_state'} & set(result.fact.reasons)\n    if raw.independent_payload is None:\n        assert reading_material_value(result.fact, source_roles=result.source_roles) == 'description'\n        assert not result.fact.eligible and not result.fact.financial_exempt\n    else:\n        # Review-probe erratum: assembly already has the unchanged argument\n        # owner's positive semantic proof; scope must not erase that proof.\n        assert text == 'Our production services cover downstream assembly workflows.'\n        assert raw.independent_payload is True and result.fact.eligible\n\n\n@pytest.mark.parametrize('text', [\n    'Our teams recover helium from exhausted gas streams.',\n    'Our vessels transport liquefied gas between inland terminals.',\n])\ndef test_unfamiliar_actual_action_keeps_readable_source_words(text):\n    _raw, result = assessment(text)\n    assert result.passage.use == 'support' and result.passage.relevant\n\n\n@pytest.mark.parametrize('text', [\n    'Our software supports customer engagement.',\n    'Net income was $20 million. Our platform supports remarkable ambitions.',\n    'Revenue rose because our platform supports remarkable ambitions.',\n    'Which equipment is used in rural clinics',\n    'Our equipment that is used in rural clinics.',\n    'We aim to create value for hospitals whose systems process orders.',\n])\ndef test_financial_nonassertion_and_beneficiary_do_not_borrow_scope(text):\n    _raw, result = assessment(text)\n    assert result.passage.use != 'support' and not result.passage.relevant\n    assert not result.fact.eligible and not result.fact.financial_exempt\n\n\ndef test_typed_numeric_coverage_keeps_real_proof_without_current_state():\n    _raw, result = assessment('Our sales services cover 23 regional markets.')\n    assert result.fact.eligible and 'business_coverage_relation' in result.fact.reasons\n    assert result.passage.use == 'support' and result.passage.relevant\n    assert not {'operating_milestone', 'operating_current_state'} & set(result.fact.reasons)\n\n\ndef test_direct_quantity_goal_is_not_a_current_number_or_a_beneficiary_quantity():\n    _raw, direct = assessment('We aim to serve 1700 customers and create value.')\n    assert direct.passage.use == 'unresolved' and direct.passage.relevant\n    assert not {'operating_quantity', 'operating_metric_change', 'operating_current_state'} & set(direct.fact.reasons)\n    _raw, indirect = assessment('We aim to create value for 1700 customers.')\n    assert indirect.passage.use != 'support' and not indirect.passage.relevant\n    assert not indirect.fact.eligible\n\n\ndef test_scope_recipe_changes_actual_generation_cache_for_text_and_pdf(monkeypatch):\n    from company_wiki.automation.narrative_generation import current_reading_decision_matches\n    from company_wiki.document_understanding.decision_dependencies import freeze_decision_dependencies\n    from company_wiki.source_catalog import narrative_decision_inventory as inventory\n    from company_wiki.source_catalog import narrative_source_context as scope_owner\n    from company_wiki.source_catalog.narrative_pdf_layout import PDF_READING_LAYOUT_FEATURE_VERSION\n    from unit.document_understanding_selection.test_reading_decision_inventory import _real_interim_pipeline\n    manifests = []\n    for mime in ['text/plain', 'application/pdf']:\n        pipeline = _real_interim_pipeline()\n        pipeline['observation']['metadata']['mime_type'] = mime\n        if mime == 'application/pdf':\n            pipeline['observation']['metadata']['native_layout_frontend_version'] = PDF_READING_LAYOUT_FEATURE_VERSION\n        frozen = freeze_decision_dependencies(inventory.build_decision_trace(pipeline))\n        assert frozen['status'] == 'complete'\n        manifest = {'reading_dependencies': frozen, 'selection_generation': {'decision_digest': frozen['decision_digest']}}\n        assert current_reading_decision_matches(manifest)\n        manifests.append(manifest)\n    target = Path(scope_owner.__file__).resolve()\n    original = Path.read_bytes\n    monkeypatch.setattr(Path, 'read_bytes', lambda path: original(path) + b'\\n# independent scope algorithm mutation\\n'\n                        if path.resolve() == target else original(path))\n    assert all(not current_reading_decision_matches(manifest) for manifest in manifests)\n"
+    },
+    "seal.py": {
+      "sha256": "2146d08640167fc5ea1866d2fc1662462d0ea166991834903fbe0c865f262afe",
+      "source": "import ast\nimport hashlib\nimport json\nimport subprocess\nfrom pathlib import Path\nimport xml.etree.ElementTree as ET\n\nROOT = Path('C:/Users/郑曾波/Projects/company-wiki')\nWT = ROOT / 'tmp/architecture-r2'\nOUT = ROOT / 'tmp/j4'\nREPORTS = ROOT / 'docs/plans/du11-source-closure-2026-10-18/review/architecture-quality-20261101/implementation-results'\nbefore = json.loads((REPORTS / 'R6-source-ci-r3.json').read_text(encoding='utf-8'))\nauthor = json.loads((REPORTS / 'R6-source-ci-r4.json').read_text(encoding='utf-8'))\ngate = json.loads((REPORTS / 'R6-daily-feedback-simplification.json').read_text(encoding='utf-8'))\n\ndef sha(x): return hashlib.sha256(x).hexdigest()\ndef git(*args): return subprocess.check_output(['git', *args], cwd=WT)\n\nhead = git('rev-parse', 'HEAD').decode().strip()\nassert head == '2b0787dc1c5352cd8566fc71fc585afe735ec75c'\nseal = {}\nfor name, expected in {**author['source_and_test_sha256'], **gate['changed_files_sha256']}.items():\n    data = (WT / name).read_bytes()\n    blob = git('show', f'{head}:{name}')\n    seal[name] = {'raw_sha256': sha(data), 'expected': expected, 'raw_match': sha(data) == expected,\n                  'git_lf_sha256': sha(blob), 'git_lf_match': data.replace(b'\\r\\n', b'\\n') == blob}\nassert all(x['raw_match'] and x['git_lf_match'] for x in seal.values())\noracles = ['tests/unit/document_understanding_selection/test_reading_native_continuity.py',\n 'tests/unit/document_understanding_selection/test_reading_value_coverage.py',\n 'tests/unit/document_understanding_selection/test_source_support_use.py',\n 'tests/unit/du11_production/test_business_coverage_relations.py',\n 'tests/unit/du11_production/test_source_information_payload.py',\n 'tests/unit/du11_production/test_source_readability_deferred_selection.py',\n 'tests/integration/test_source_processing_handler_wire.py']\nunchanged = {}\nfor name in oracles:\n    old, current = git('show', f'a6841e94:{name}'), git('show', f'{head}:{name}')\n    unchanged[name] = {'same': old == current, 'git_blob_sha256': sha(current)}\nassert all(x['same'] for x in unchanged.values())\nall_runs = []\nfor report in [before, author]:\n    for run in report['runs']:\n        path = Path(run['junit'])\n        data = path.read_bytes()\n        assert sha(data) == run['sha256'], run['name']\n        cases = [(n.get('classname'), n.get('name')) for n in ET.fromstring(data).iter('testcase')]\n        semantic = [name for cls, name in cases if cls.endswith('test_source_semantic_axes')]\n        all_runs.append({'name': run['name'], 'sha256': sha(data), 'cases': len(cases),\n                         'semantic_cases': len(semantic), 'semantic_names': semantic})\nold_run = next(x for x in all_runs if x['name'] == 'r6-r3-np-final')\nnew_run = next(x for x in all_runs if x['name'] == 'r6-r4-domain-frozen')\nold_set, new_set = set(old_run['semantic_names']), set(new_run['semantic_names'])\nidentity_diff = {'r3_final_semantic_count': len(old_set), 'r4_final_semantic_count': len(new_set),\n                 'removed_case_ids': sorted(old_set - new_set), 'added_case_ids': sorted(new_set - old_set),\n                 'all_historical_run_counts': [{k:v for k,v in r.items() if k != 'semantic_names'} for r in all_runs]}\ndata = {'head': head, 'branch': git('branch', '--show-current').decode().strip(),\n        'seal': seal, 'unchanged_original_oracles': unchanged,\n        'author_runs_sha_verified': len(all_runs), 'case_identity_diff': identity_diff,\n        'authorized_errata': author['authorized_test_errata'],\n        'status_before': git('status', '--short').decode().strip(),\n        'excluded_untracked': 'tests/unit/document_understanding_note_scope/ (T3; not collected/not reviewed)'}\nrole_path = 'src/company_wiki/document_understanding/operating_states/assertion_roles.py'\ndef function_ast(source, name):\n    return ast.dump(next(n for n in ast.parse(source).body if isinstance(n, ast.FunctionDef) and n.name == name), include_attributes=False)\ndata['original_argument_payload_ast_unchanged'] = (function_ast(git('show', f'a6841e94:{role_path}').decode(), '_argument_payload')\n    == function_ast((WT / role_path).read_text(encoding='utf-8'), '_argument_payload'))\nassert data['original_argument_payload_ast_unchanged']\n(OUT / 'seal.json').write_text(json.dumps(data, ensure_ascii=False, indent=2) + '\\n', encoding='utf-8')\nprint(json.dumps({'head': head, 'seal_count': len(seal), 'oracles_unchanged': len(unchanged),\n                  'junit_sha_verified': len(all_runs), 'identity_diff': {k:v for k,v in identity_diff.items()\n                    if k != 'all_historical_run_counts'}}, ensure_ascii=False, indent=2))\n"
+    }
+  },
+  "cleanup": {
+    "root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\j4",
+    "initial_absent": true,
+    "containment_checked": true,
+    "reparse_checked": true,
+    "exists_after": false
+  },
+  "limitations": [
+    "Some unfamiliar real goals cannot be semantically proved by current owner; preserve raw searchable original and unknown instead of default-specific/industry patches.",
+    "Author290/280 precede final one-line compatibility account forwarding; author final37 and current independent compatibility/public controls cover final version. Do not retroactively count broad groups rerun.",
+    "T3 six files remain untracked/RED; directory was not collected or reviewed.",
+    "No full candidate CI acceptance, actualH1/production document parse, real summary/cache restoration, paid model/API, RF adoption or whole PWF completion."
+  ],
+  "decision": "PASS bounded engineering scope at2b0787dc. ROOT may merge only with its exact full candidate CI green. No further product repair requested by this review."
+}

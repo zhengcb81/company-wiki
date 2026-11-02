@@ -1,0 +1,14 @@
+{
+  "src/company_wiki/document_understanding/operating_states/assertion_roles.py": "3245235144713b25ac42afa42a8035813be30b85edb9381afcdee78df78946f4",
+  "src/company_wiki/source_catalog/narrative_business_disclosures.py": "0f7ca5f04f1a5dfddc288e9ff8e388f8e1f0736205c940ed86788fa695a818d1",
+  "src/company_wiki/source_catalog/narrative_business_policy.py": "78897fff05fa6d2e0195a0adafdbd9f1b5d48c8499dd605dd3cd84a75e8df593",
+  "src/company_wiki/source_catalog/narrative_source_context.py": "2b25f122a64332b95da639dcdd8d745f0546a3900c3c8a0972d9c7321a4ac083",
+  "src/company_wiki/source_catalog/narrative_source_passage.py": "2645bf29985f10080653b9a6ff63074fe5a9f78e01002e187430050c14c2d7aa",
+  "src/company_wiki/source_catalog/narrative_support_use.py": "72c061fb1514ff15a66aa6d0ccba08d314ef3d6349fe50cb90d267e0deb33703",
+  "src/company_wiki/source_catalog/narrative_operating_resources.py": "098f08b20420eaf67443abff83a69d6984d20bd03eabd5ddf0af1f2704569d85",
+  "src/company_wiki/source_catalog/narrative_source_purpose.py": "182ccd89e369b518d3e24477b08f6072796d96fb7220beeaf991b10da5e0f749",
+  "src/company_wiki/source_catalog/n6_candidate_operating_facts.py": "c35ae774e33f43f7d533222a4ed9caba329bf706ad5ca14017dc047395181d9d",
+  "tests/unit/du11_production/test_source_argument_semantics.py": "31f6fb4c7f5351908c09d5279be60c5f0f925305d566c86a9749ffe254fe163e",
+  "tests/unit/du11_production/test_source_preparation_axes.py": "0387f29d65538fa3f1c0125abefca9940042fa1adaa3628c597509ac9934a24e",
+  "tests/unit/du11_production/test_source_semantic_axes.py": "0d2a534a25fd5abb9a8dae493dcbf7da14f5f445e45c3d8783184ed96955cbd9"
+}

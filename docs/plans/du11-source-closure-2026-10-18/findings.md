@@ -2,17 +2,19 @@
 
 当前执行状态仅看[CURRENT_STATUS](CURRENT_STATUS.md)/json，实施顺序看task_plan/HANDOFF。本文保留有效共因与未完责任；此前详细观察在Git848b4ee0的同一路径保留，历史失败和原审查收据不改写。
 
-## R6：来源观察与事实证明混用，已定位并返修
+## R6：来源材料属性与世界事实混用，R5整合CI已通过
 
-原整合候选6668bc97完整CI63F，曾正常回退到稳定主线；重施后的9f575810完整CI22F。新的CI摘要已完整保全所有失败群，不再被平台4096字节截断。不是测试超时：后一次unit324秒，稳定W23版本280秒；单次差异不足以签性能根因。
+原整合候选6668bc97完整CI63F、9f575810完整22F、2b0787dc完整70F均保留。最初存在测试私有patch/import owner迁移、AUTO v8旧表断言和真实来源语义缺陷，不能统一称测试错误。R3/R4局部审查又共同误把材料eligible/自足信息当世界事实证明，scope统一mask/downgrade造成计划、口径、具名业务范围丢失。此为实现和审查合同解释错误，不用公司词库或删旧测试掩盖。
 
-22项中20项来自共同的source准备流程：事实过滤用的mask删除了仍有效的语法角色，导致已证抽象False丢成未知None；弱POS/关系回退抢在已有可绑定业务覆盖前否决；描述/营销未知目标又被不当升级为“已证明全抽象”或具体业务。R3用独立source roles/fact_roles视图、原关系owner的memo化绑定证明和NP head/modifier范围重构。已知目标head不能因未知形容词变成具体事实；具体陌生业务原话仍保留。当前R3完整相关433项绿，最终R2回归/独审/完整CI仍待收口，不表示稳定主线已采用。
+R5先以旧OperatingFact的no semantic truth claims及真实消费链冻结原合同。共用来源prepared观察与闭合成员关系；source_scope是披露类型，材料自足性与事件/主体/数值绑定分轴。weak未知goal/function不凭POS/default-specific升级；完整金融句的子句不能被孤立重判而重新占业务材料。resource purpose复用同roles/WorkBudget；同prepared的text_fact与生产fact能力投影保旧入口不扩资源。
 
-其余2项是测试迁移/隔离缺陷：partial-cache测试仍替换DU旧薄shim而非source composition owner；纯DTO子进程依赖pytest内sys.path/本机旧安装，CI根本未导入待测树。两测试改绑真实owner、新进程-I/-S显式当前src并拒catalog反向导入；35项短域与独立7项通过，生产代码未加兼容代理，partial严格拒绝/完整正控均保留。
+原70期待全部恢复；最后1048为1044P4F，四处定点17P修复；resource兼容98P1F后16P修复，未重复整组。13文件正常commit10767b86，Ruff/全src mypy和固定167smoke通过，精确现有完整CI41380285347成功。最终28场景独立代码审查PASS，正常FF本地master10767b86；正常发布中，未签真实H1/摘要/RF。仅本轮自增错误oracle公开纠正；原70断言保持。原三路合同/consumer调查、freeze清单及日志见R6-source-contract-r5与R6-CI-r5。
+
+剩余两consumer迁移只改测试绑真实owner和-I/-S子进程显式当前src，不加生产代理；partial严格反控/完整正控均保留。R6还修四种frozen Exception遮蔽原code/cause/traceback；CI分组注释修复平台4096字节截断，完整失败可见，不再为缺清单提取凭证。
 
 ## 已有架构与权限处置
 
-存储虚拟化、source refs/export、immutable raw与来源定位职责已实现，不重建底层数据湖。Q01–Q14全部处置详见implementation-results/STATUS；除StockWiki Q09本地已并/Q11接收字节SHA经边界论证保留外，其他新增整改仍在隔离候选等整合CI。实读字节/身份期间/as-of、资源与恢复是责任层质量校验；private/public、逐材料许可、人工签收、旧双轮dry-shadow日常门禁不应复活。
+存储虚拟化、source refs/export、immutable raw与来源定位职责已实现，不重建底层数据湖。Q01–Q14全部处置详见implementation-results/STATUS；Q09在StockWiki本地主线，Q11接收字节SHA经边界论证保留；其他整改10767b86经最终独审/完整CI绿已并CWP本地主线、正在正常发布。实读字节/身份期间/as-of、资源与恢复是责任层质量校验；private/public、逐材料许可、人工签收、旧双轮dry-shadow日常门禁不应复活。
 
 R6还修了四种frozen Exception遮蔽原code/cause/traceback的问题。sandbox原子os.link WinError5曾造成15个假产品失败，同72域正常host全绿证实；没有为sandbox改CAS。旧消费者5测试只迁移到真正owner并增强真实cache/exact查询，未删原断言或恢复跨层reader耦合。
 
@@ -40,4 +42,9 @@ R4四审73检查/6P2、ghost-formula与signed期间补集、独立需求/竞争/
 
 全局技能部署使用正常完整性宿主Python，Low标签根因已解决，不改ACL。R6 source测试用正常host避免原子链接权限假故障。作者两consumer域采用默认pytest临时目录，cleanup未证，不猜删；独审自有tmp/p3已恢复。ROOT仅清精确归属目录，收据不把逻辑字节冒作实际磁盘释放。
 
-本次正常主线push234项95.44s，总204.073s；独立静态选测cProfile中known-only1741文件/259万AST节点47.804s，配置fallback0.0015s。不能把剩余总耗时全归此profile。既有工程质量后续应解耦依赖事实收集/查询、消除重复全AST遍历，保留已知消费者与动态不确定性，不增加持久许可缓存、重复全量或每commit重门禁。当前优先关闭真实语义回归。
+旧正常push234项95.44s/总204.073s，以及a684按32/379文件选到1787case、180s超时/总234.764s是历史效率失败；known-only1741文件/259万AST节点profile47.804s说明文件数不是真工作量上界，不能把所有额外耗时归给profile。daily精简已819cef31并主线且完整CI绿：固定原167smoke一次、文档0pytest，不再构建AST影响图/扩选；独立selector保留为显式工具。最新R5正常push167P28.67s/总34.86s成功；完整CI的Unit199s/contract7s留在重大节点，不搬回每commit。
+
+
+## R5合同修复当前边界（2026-11-02T02:50:00.244132+00:00）
+
+原70例期待均恢复；一次最终1048例为1044P/4F/31.23s。余四处按原owner定点修：resource无条件重复purpose扫描/漏同WorkBudget、两条自身过严背景oracle、金融整句legacy broad description回退。不会删除原70期待或反复跑1048。独立32场景旧PASS和CI70F历史保持，R5冻版独审/完整CI仍OPEN。ROOT对齐task_plan/HANDOFF/机器registry残留R3/22F状态，W23与daily主线1bf完整CI41371690732成功，原件/生产配置/收费0不变。

@@ -4,32 +4,32 @@
   "implementation_active": true,
   "items": {
     "Q01": {
-      "status": "R4_POSITIVE_PROOF_BOUNDARY_REPAIR_ACTIVE_R3_INDEPENDENT5F",
-      "reason": "R3 lexical/WH boundary and R4 incomplete capability propagation repaired; R5 true handler+RF wire independently PASS; final H1/context/new summary still OPEN"
+      "status": "ENGINEERING_MASTER_MERGED_REAL_C_ACCEPTANCE_OPEN",
+      "reason": "R5 source material contract fullCI41380285347 green, final independent28bounded cases PASS; original70 restored; T3 structure and actual new summary/RF still OPEN."
     },
     "Q02": {
-      "status": "R6_BOUNDED_INDEPENDENT_PASS_INTEGRATED_CANDIDATE_CI_RED",
+      "status": "ENGINEERING_MASTER_MERGED_REAL_C_ACCEPTANCE_OPEN",
       "reason": "PDF table observation package now included; actual cache RED->2 focused GREEN"
     },
     "Q03": {
-      "status": "R6_BOUNDED_INDEPENDENT_PASS_INTEGRATED_CANDIDATE_CI_RED",
+      "status": "ENGINEERING_MASTER_MERGED_REAL_C_ACCEPTANCE_OPEN",
       "reason": "derived indexed candidate superset with dirty fallback and exact EOF"
     },
     "Q04": {
-      "status": "R6_BOUNDED_INDEPENDENT_PASS_INTEGRATED_CANDIDATE_CI_RED",
+      "status": "ENGINEERING_MASTER_MERGED_REAL_C_ACCEPTANCE_OPEN",
       "reason": "R1 two independent race failures retained; R2 short shared storage mutex and single atomic cap snapshot; no inflight table"
     },
     "Q05": {
-      "status": "R6_BOUNDED_INDEPENDENT_PASS_INTEGRATED_CANDIDATE_CI_RED"
+      "status": "ENGINEERING_MASTER_MERGED_REAL_C_ACCEPTANCE_OPEN"
     },
     "Q06": {
-      "status": "R6_BOUNDED_INDEPENDENT_PASS_INTEGRATED_CANDIDATE_CI_RED"
+      "status": "ENGINEERING_MASTER_MERGED_REAL_C_ACCEPTANCE_OPEN"
     },
     "Q07": {
-      "status": "R6_BOUNDED_INDEPENDENT_PASS_INTEGRATED_CANDIDATE_CI_RED"
+      "status": "ENGINEERING_MASTER_MERGED_REAL_C_ACCEPTANCE_OPEN"
     },
     "Q08": {
-      "status": "R6_BOUNDED_INDEPENDENT_PASS_INTEGRATED_CANDIDATE_CI_RED"
+      "status": "ENGINEERING_MASTER_MERGED_REAL_C_ACCEPTANCE_OPEN"
     },
     "Q09": {
       "status": "INDEPENDENT_PASS_STOCKWIKI_MASTER_MERGED",
@@ -37,23 +37,23 @@
       "remote": "NOT_CONFIGURED_HISTORICAL"
     },
     "Q10": {
-      "status": "R6_BOUNDED_INDEPENDENT_PASS_INTEGRATED_CANDIDATE_CI_RED"
+      "status": "ENGINEERING_MASTER_MERGED_REAL_C_ACCEPTANCE_OPEN"
     },
     "Q11": {
       "status": "RESOLVED_BY_BOUNDARY_JUSTIFICATION",
       "reason": "B independent reviewer agrees received-byte SHA required for public Protocol; no forgeable trusted flag"
     },
     "Q12": {
-      "status": "R6_BOUNDED_INDEPENDENT_PASS_INTEGRATED_CANDIDATE_CI_RED"
+      "status": "ENGINEERING_MASTER_MERGED_REAL_C_ACCEPTANCE_OPEN"
     },
     "Q13": {
-      "status": "R6_BOUNDED_INDEPENDENT_PASS_INTEGRATED_CANDIDATE_CI_RED"
+      "status": "ENGINEERING_MASTER_MERGED_REAL_C_ACCEPTANCE_OPEN"
     },
     "Q14": {
-      "status": "R6_BOUNDED_INDEPENDENT_PASS_INTEGRATED_CANDIDATE_CI_RED"
+      "status": "ENGINEERING_MASTER_MERGED_REAL_C_ACCEPTANCE_OPEN"
     }
   },
-  "next": "完成R4 source proof/unknown边界与泛化定性覆盖、daily固定smoke精简；独审/受影响测试后正常推候选完整CI，再主线合并推送。接着T3结构及最终真实H1、新摘要/恢复/RF。",
+  "next": "正常提交推送本次来源整改与PWF，核精确主线CI；随后T3按已冻结47case RED实施统一终结符/局部备注scope，不扩外包；最终H1、新摘要/cache/RF仍OPEN。",
   "real_source_observation": {
     "case": "H1 current-v1",
     "elapsed_s": 37.394,
@@ -68,10 +68,8 @@
     "boundary": "partial; 9 old actor/context pairs not yet judged; DB/WAL/SHM content same, SHM mtime-only checker false failure preserved",
     "source_version": "e4c08e42...689b before/after stable; not final R4 revision"
   },
-  "project_state": "R6_R4_SOURCE_SEMANTIC_ROOT_REPAIR_AND_DAILY_GATE_SIMPLIFICATION",
   "independent_final": "independent-wire-r5.md",
   "engineering_commit": "c97d4fbd",
-  "normal_publication": "W23_TOOL_MASTER_MERGED_PUSHED_848b4ee0; source_candidate22F_isolated",
   "real_source_observation_v2": {
     "elapsed_s": 23.170454,
     "result": "FAILED unknown source_processing_complete at public handler",
@@ -79,32 +77,11 @@
     "context_pairs": "9 OPEN",
     "subsequent": "R5 wire fixed with actual handler/golden tests; no v3 due user pause"
   },
-  "publication_head": "6668bc978d3ea2217a9aff30be69bde456894c04",
   "rf_publication_head": "957c6283d3381d23c39515afd3a09147d8201c7b",
-  "cwp_exact_ci": {
-    "id": 41305132919,
-    "name": "CI",
-    "head_sha": "6668bc978d3ea2217a9aff30be69bde456894c04",
-    "status": "completed",
-    "conclusion": "failure",
-    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41305132919",
-    "created_at": "2026-11-01T12:09:40Z",
-    "updated_at": "2026-11-01T12:15:30Z"
-  },
   "rf_exact_ci": "41304681319 success",
   "selected_RF_installation": "2 physical writes; repeat0;3 logical fresh PASS",
   "full_CI_failed": 63,
   "safe_isolation_commit": "dbfec3beb0948006475701e2131c4d95e0586556",
-  "stable_exact_CI": {
-    "id": 41306232306,
-    "name": "CI",
-    "head_sha": "dbfec3beb0948006475701e2131c4d95e0586556",
-    "status": "in_progress",
-    "conclusion": null,
-    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41306232306",
-    "created_at": "2026-11-01T12:23:05Z",
-    "updated_at": "2026-11-01T12:23:09Z"
-  },
   "normal_push": "success",
   "stable_pre_push": {
     "passed": 1091,
@@ -116,17 +93,61 @@
     "old_source_failure_retained": "R6-independent-final.md",
     "W23": "R6-W23-independent-final.md"
   },
-  "r6_current_ci": {
-    "id": 41364303788,
-    "head": "9f575810ca92620a6fb6ff63cfd326a5b9f076fa",
-    "conclusion": "failure",
-    "failed_cases": 22,
-    "evidence": "R6-CI-r2.json"
-  },
   "r3_independent": {
     "status": "NEEDS_ROOT_FIX",
     "passed": 18,
     "failed": 5,
     "evidence": "R6-independent-ci-r3.json"
-  }
+  },
+  "historical_publication_snapshots": {
+    "publication_head": "6668bc978d3ea2217a9aff30be69bde456894c04",
+    "cwp_exact_ci": {
+      "id": 41305132919,
+      "name": "CI",
+      "head_sha": "6668bc978d3ea2217a9aff30be69bde456894c04",
+      "status": "completed",
+      "conclusion": "failure",
+      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41305132919",
+      "created_at": "2026-11-01T12:09:40Z",
+      "updated_at": "2026-11-01T12:15:30Z"
+    },
+    "stable_exact_CI": {
+      "id": 41306232306,
+      "name": "CI",
+      "head_sha": "dbfec3beb0948006475701e2131c4d95e0586556",
+      "status": "in_progress",
+      "conclusion": null,
+      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41306232306",
+      "created_at": "2026-11-01T12:23:05Z",
+      "updated_at": "2026-11-01T12:23:09Z"
+    },
+    "r6_current_ci": {
+      "id": 41364303788,
+      "head": "9f575810ca92620a6fb6ff63cfd326a5b9f076fa",
+      "conclusion": "failure",
+      "failed_cases": 22,
+      "evidence": "R6-CI-r2.json"
+    },
+    "normal_publication": "W23_TOOL_MASTER_MERGED_PUSHED_848b4ee0; source_candidate22F_isolated",
+    "project_state": "R6_R4_SOURCE_SEMANTIC_ROOT_REPAIR_AND_DAILY_GATE_SIMPLIFICATION"
+  },
+  "canonical_entry": "../../../CURRENT_STATUS.md",
+  "project_state": "R6_ENGINEERING_MAINLINE_MERGED_PUBLICATION_IN_PROGRESS_T3_NEXT",
+  "publication": {
+    "master_and_origin": "NO_LONGER_EQUAL_UNTIL_NORMAL_PUBLICATION",
+    "main_ci": 41371690732,
+    "main_ci_conclusion": "success",
+    "source_candidate": "10767b86318e63094c2bb49451447c9aedffc32c",
+    "candidate_ci": 41380285347,
+    "candidate_ci_conclusion": "success",
+    "new_R5_source_uncommitted": false,
+    "prior_r4_candidate_failed_cases": 70,
+    "master_local": "10767b86318e63094c2bb49451447c9aedffc32c",
+    "source_rectification_merged": true,
+    "normal_main_push": "PENDING_DOCUMENT_BUNDLE",
+    "final_independent": "R6-independent-ci-r5.json"
+  },
+  "W23": "Tooling merged/pushed/exact CI pass; empirical partial, not production OCR switch.",
+  "daily_feedback": "Fixed original167case smoke, no impact-AST expansion; main push45.097s and complete CI pass.",
+  "observed_at_utc": "2026-11-02T03:09:57.946734+00:00"
 }

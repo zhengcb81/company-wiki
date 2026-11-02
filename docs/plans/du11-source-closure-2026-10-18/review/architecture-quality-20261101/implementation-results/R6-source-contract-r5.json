@@ -1,0 +1,355 @@
+{
+  "status": "IMPLEMENTATION_FROZEN_FOR_ROOT_REVIEW",
+  "baseline": "2b0787dc1c5352cd8566fc71fc585afe735ec75c",
+  "original_ci": 41373840648,
+  "classification_counts": {
+    "A observed / named / material scope": 30,
+    "B bounded intent / reporting basis": 26,
+    "D background / nonbusiness / rounding boundary": 4,
+    "E spy instrumentation": 2,
+    "C typed operation / unknown argument": 8
+  },
+  "groups": [
+    {
+      "file": "tests/unit/document_understanding_root/test_operating_relation_production.py",
+      "test": "test_independent_description_survives_empty_relation_result",
+      "cases": 1,
+      "category": "A observed / named / material scope"
+    },
+    {
+      "file": "tests/unit/document_understanding_root/test_operating_relation_production.py",
+      "test": "test_non_event_description_needs_no_offset_names_or_context_view",
+      "cases": 1,
+      "category": "A observed / named / material scope"
+    },
+    {
+      "file": "tests/unit/document_understanding_root/test_qualitative_operating_intent.py",
+      "test": "test_specific_qualitative_operating_intent_is_useful_source_material",
+      "cases": 11,
+      "category": "B bounded intent / reporting basis"
+    },
+    {
+      "file": "tests/unit/document_understanding_root/test_turn_plan_qualification.py",
+      "test": "test_chinese_plan_retains_uncertainty_without_promoting_unknown_speaker",
+      "cases": 2,
+      "category": "B bounded intent / reporting basis"
+    },
+    {
+      "file": "tests/unit/document_understanding_root/test_turn_plan_qualification.py",
+      "test": "test_same_turn_plan_limitation_is_model_material_and_card_support",
+      "cases": 2,
+      "category": "B bounded intent / reporting basis"
+    },
+    {
+      "file": "tests/unit/document_understanding_selection/test_reading_material_value.py",
+      "test": "test_readable_generic_benefits_are_background_not_scarce_fact_material",
+      "cases": 2,
+      "category": "D background / nonbusiness / rounding boundary"
+    },
+    {
+      "file": "tests/unit/document_understanding_selection/test_reading_material_value.py",
+      "test": "test_real_source_selection_retains_distinct_business_information_in_twelve_spans",
+      "cases": 1,
+      "category": "A observed / named / material scope"
+    },
+    {
+      "file": "tests/unit/document_understanding_selection/test_reading_named_portfolio_drivers.py",
+      "test": "test_actual_named_shareholder_relationship_is_source_scope_not_consolidation",
+      "cases": 1,
+      "category": "A observed / named / material scope"
+    },
+    {
+      "file": "tests/unit/document_understanding_selection/test_reading_named_portfolio_drivers.py",
+      "test": "test_issuer_owned_named_portfolio_is_concrete_business_structure",
+      "cases": 4,
+      "category": "A observed / named / material scope"
+    },
+    {
+      "file": "tests/unit/document_understanding_selection/test_reading_named_portfolio_drivers.py",
+      "test": "test_legacy_detector_remains_unextended_for_named_relationships",
+      "cases": 1,
+      "category": "A observed / named / material scope"
+    },
+    {
+      "file": "tests/unit/document_understanding_selection/test_reading_portfolio_disclosure.py",
+      "test": "test_observed_concrete_portfolio_does_not_need_repeated_issuer_pronoun",
+      "cases": 9,
+      "category": "A observed / named / material scope"
+    },
+    {
+      "file": "tests/unit/document_understanding_selection/test_reading_portfolio_disclosure.py",
+      "test": "test_source_disclosed_foreign_actor_is_preserved_without_issuer_or_consolidation_inference",
+      "cases": 1,
+      "category": "A observed / named / material scope"
+    },
+    {
+      "file": "tests/unit/document_understanding_selection/test_reading_reporting_basis.py",
+      "test": "test_company_metric_definitions_are_readable_without_becoming_actual_metrics",
+      "cases": 2,
+      "category": "B bounded intent / reporting basis"
+    },
+    {
+      "file": "tests/unit/document_understanding_selection/test_reading_reporting_basis.py",
+      "test": "test_growth_in_a_metric_definition_label_is_not_an_observed_change",
+      "cases": 2,
+      "category": "B bounded intent / reporting basis"
+    },
+    {
+      "file": "tests/unit/document_understanding_selection/test_reading_reporting_basis.py",
+      "test": "test_mechanical_outlook_recast_is_retained_without_inventing_growth",
+      "cases": 1,
+      "category": "B bounded intent / reporting basis"
+    },
+    {
+      "file": "tests/unit/document_understanding_selection/test_reading_reporting_basis.py",
+      "test": "test_metric_formula_with_coordinated_metric_noun_is_not_a_new_observed_fact",
+      "cases": 2,
+      "category": "B bounded intent / reporting basis"
+    },
+    {
+      "file": "tests/unit/document_understanding_selection/test_reading_reporting_basis.py",
+      "test": "test_multi_metric_definition_is_not_misclassified_as_reported_growth",
+      "cases": 1,
+      "category": "B bounded intent / reporting basis"
+    },
+    {
+      "file": "tests/unit/document_understanding_selection/test_reading_reporting_basis.py",
+      "test": "test_reporting_scope_and_future_investment_limits_are_preserved",
+      "cases": 1,
+      "category": "B bounded intent / reporting basis"
+    },
+    {
+      "file": "tests/unit/document_understanding_selection/test_reading_reporting_basis.py",
+      "test": "test_updated_reporting_definition_survives_a_long_flat_native_paragraph",
+      "cases": 1,
+      "category": "B bounded intent / reporting basis"
+    },
+    {
+      "file": "tests/unit/document_understanding_selection/test_reading_reporting_rule_boundaries.py",
+      "test": "test_actual_customer_business_and_currency_exposure_are_preserved",
+      "cases": 1,
+      "category": "B bounded intent / reporting basis"
+    },
+    {
+      "file": "tests/unit/document_understanding_selection/test_source_support_use.py",
+      "test": "test_direct_admission_projects_use_and_relevance_from_one_preparation",
+      "cases": 1,
+      "category": "E spy instrumentation"
+    },
+    {
+      "file": "tests/unit/document_understanding_selection/test_source_support_use.py",
+      "test": "test_source_session_shares_one_role_assessment_without_repeated_scans",
+      "cases": 1,
+      "category": "E spy instrumentation"
+    },
+    {
+      "file": "tests/unit/du11_production/test_operating_argument_axes.py",
+      "test": "test_explicit_manufacturing_argument_does_not_need_a_known_product_suffix",
+      "cases": 8,
+      "category": "C typed operation / unknown argument"
+    },
+    {
+      "file": "tests/unit/du11_production/test_source_description_relations.py",
+      "test": "test_closed_source_enumeration_and_impact_are_language_independent",
+      "cases": 2,
+      "category": "A observed / named / material scope"
+    },
+    {
+      "file": "tests/unit/du11_production/test_source_description_relations.py",
+      "test": "test_compatibility_event_policy_does_not_implicitly_opt_in_source_rosters",
+      "cases": 2,
+      "category": "A observed / named / material scope"
+    },
+    {
+      "file": "tests/unit/du11_production/test_source_measurement_scope_and_enumeration.py",
+      "test": "test_closed_named_service_scope_has_material_payload_without_a_type_dictionary",
+      "cases": 5,
+      "category": "A observed / named / material scope"
+    },
+    {
+      "file": "tests/unit/du11_production/test_source_measurement_scope_and_enumeration.py",
+      "test": "test_nonbusiness_results_and_nonassertions_do_not_gain_fact_support",
+      "cases": 1,
+      "category": "D background / nonbusiness / rounding boundary"
+    },
+    {
+      "file": "tests/unit/du11_production/test_source_measurement_scope_and_enumeration.py",
+      "test": "test_real_business_proof_is_not_erased_by_rounding_vocabulary",
+      "cases": 1,
+      "category": "D background / nonbusiness / rounding boundary"
+    },
+    {
+      "file": "tests/unit/du11_production/test_source_observed_business_scope.py",
+      "test": "test_closed_observed_scope_is_material_without_requiring_growth",
+      "cases": 2,
+      "category": "A observed / named / material scope"
+    }
+  ],
+  "failed_files": [
+    "tests/unit/document_understanding_root/test_operating_relation_production.py",
+    "tests/unit/document_understanding_root/test_qualitative_operating_intent.py",
+    "tests/unit/document_understanding_root/test_turn_plan_qualification.py",
+    "tests/unit/document_understanding_selection/test_reading_material_value.py",
+    "tests/unit/document_understanding_selection/test_reading_named_portfolio_drivers.py",
+    "tests/unit/document_understanding_selection/test_reading_portfolio_disclosure.py",
+    "tests/unit/document_understanding_selection/test_reading_reporting_basis.py",
+    "tests/unit/document_understanding_selection/test_reading_reporting_rule_boundaries.py",
+    "tests/unit/document_understanding_selection/test_source_support_use.py",
+    "tests/unit/du11_production/test_operating_argument_axes.py",
+    "tests/unit/du11_production/test_source_description_relations.py",
+    "tests/unit/du11_production/test_source_measurement_scope_and_enumeration.py",
+    "tests/unit/du11_production/test_source_observed_business_scope.py"
+  ],
+  "control_files": [
+    "test_source_information_payload.py",
+    "test_business_coverage_relations.py",
+    "test_source_argument_semantics.py",
+    "test_source_preparation_axes.py",
+    "test_source_semantic_axes.py",
+    "test_source_passage_admission.py",
+    "test_source_passage_prefix_and_cause.py"
+  ],
+  "runs": [
+    {
+      "junit": "tmp\\r6-r5-contract-red.xml",
+      "sha256": "e3b81ca528c3e255b1e6c4fc5f2ddb68b242a860deeaf2ef6760b574f311585d",
+      "tests": 1,
+      "failures": 0,
+      "errors": 1,
+      "seconds": 3.957,
+      "log_sha256": "0c1d0a3106dd64a46cfc34c681617ba0c3402762985f9fc9e3ab4e5f232223b4"
+    },
+    {
+      "junit": "tmp\\r6-r5-contract-observed.xml",
+      "sha256": "3079cc1b4d9c70319636a8baf4f96d824300b60ea98c32930fdcb4b27965575a",
+      "tests": 1048,
+      "failures": 70,
+      "errors": 0,
+      "seconds": 20.951,
+      "log_sha256": "14eeebf89429f3fba4048652c04b988f3cde86b24c1ad0977aeb534faa7198ab"
+    },
+    {
+      "junit": "tmp\\r6-r5-groups-first.xml",
+      "sha256": "c74ebe6681408112dc6e6a9a4992d78c472814ae7afa7209145cd6616e3a5917",
+      "tests": 110,
+      "failures": 5,
+      "errors": 0,
+      "seconds": 14.285,
+      "log_sha256": "4ce485d6a2b3ddccc02b603d4c1acf641afcd838816f94eb00659488f920352a"
+    },
+    {
+      "junit": "tmp\\r6-r5-five-recovery.xml",
+      "sha256": "cb32414b8f03d13f7eff7d7ba6832370e35eab85e5d48185e58baedda9c48479",
+      "tests": 27,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 6.701,
+      "log_sha256": "d2e68b4aca660260ae744f8facfa62349ef2e1ec07060f747090634dc3fd23d8"
+    },
+    {
+      "junit": "tmp\\r6-r5-contract-final.xml",
+      "sha256": "6cf44a63779693d3233a345533f6c57ee7e14802149b16d89d936a07c38e144d",
+      "tests": 1048,
+      "failures": 4,
+      "errors": 0,
+      "seconds": 31.224,
+      "log_sha256": "323e255993ccb0ced6241ee3b6a38f8a16c0bd848064f682003789721b2eb18e"
+    },
+    {
+      "junit": "tmp\\r6-r5-four-recovery.xml",
+      "sha256": "fd17e2a798f75edf711947f74598b53b072a7bb3c69a5a29f585e7800cf70cbe",
+      "tests": 17,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 5.192,
+      "log_sha256": "cacc84b97dc8eb8e3f28e6e406ecd41363ea4515c815b4b2bf9c40cddc63459f"
+    },
+    {
+      "junit": "tmp\\r6-r5-resource-final.xml",
+      "sha256": "12118ab6d78c4425d3806c1ee6eb082da4b154e3de87637f1287b2876b622ab2",
+      "tests": 99,
+      "failures": 1,
+      "errors": 0,
+      "seconds": 8.177,
+      "log_sha256": "02b6488d1106c9644bdc6654a3eb69e7eaea047c054cc9905ade9068ccad68a4"
+    },
+    {
+      "junit": "tmp\\r6-r5-compat-final.xml",
+      "sha256": "ec810e48bb483a284138eeacde8766f27ac2918afa5bb287549b68b8a3fc97bc",
+      "tests": 16,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 5.533,
+      "log_sha256": "f094cdbe49865135a7e3e961ee981ae5cd1448b7f605fd41b4a38e6eea5d1a6e"
+    }
+  ],
+  "source_changes_at_design": false,
+  "old_test_expectations_changed": false,
+  "root_spy_owner": "ROOT R6-R5-budget-spies: two wrappers only; no source/test expectation changes by this lane",
+  "original_seventy_old_expectations_changed": false,
+  "own_r4_oracle_erratum": [
+    "source availability is not world verification",
+    "scope kind does not globally determine material band",
+    "closed named source rosters need no industry type dictionary",
+    "generic benefit can be background eligible without support or relevance"
+  ],
+  "source_and_test_manifest": {
+    "src/company_wiki/document_understanding/operating_states/assertion_roles.py": "3245235144713b25ac42afa42a8035813be30b85edb9381afcdee78df78946f4",
+    "src/company_wiki/source_catalog/narrative_business_disclosures.py": "0f7ca5f04f1a5dfddc288e9ff8e388f8e1f0736205c940ed86788fa695a818d1",
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "78897fff05fa6d2e0195a0adafdbd9f1b5d48c8499dd605dd3cd84a75e8df593",
+    "src/company_wiki/source_catalog/narrative_source_context.py": "2b25f122a64332b95da639dcdd8d745f0546a3900c3c8a0972d9c7321a4ac083",
+    "src/company_wiki/source_catalog/narrative_source_passage.py": "2645bf29985f10080653b9a6ff63074fe5a9f78e01002e187430050c14c2d7aa",
+    "src/company_wiki/source_catalog/narrative_support_use.py": "72c061fb1514ff15a66aa6d0ccba08d314ef3d6349fe50cb90d267e0deb33703",
+    "src/company_wiki/source_catalog/narrative_operating_resources.py": "098f08b20420eaf67443abff83a69d6984d20bd03eabd5ddf0af1f2704569d85",
+    "src/company_wiki/source_catalog/narrative_source_purpose.py": "182ccd89e369b518d3e24477b08f6072796d96fb7220beeaf991b10da5e0f749",
+    "src/company_wiki/source_catalog/n6_candidate_operating_facts.py": "c35ae774e33f43f7d533222a4ed9caba329bf706ad5ca14017dc047395181d9d",
+    "tests/unit/du11_production/test_source_argument_semantics.py": "31f6fb4c7f5351908c09d5279be60c5f0f925305d566c86a9749ffe254fe163e",
+    "tests/unit/du11_production/test_source_preparation_axes.py": "0387f29d65538fa3f1c0125abefca9940042fa1adaa3628c597509ac9934a24e",
+    "tests/unit/du11_production/test_source_semantic_axes.py": "0d2a534a25fd5abb9a8dae493dcbf7da14f5f445e45c3d8783184ed96955cbd9"
+  },
+  "manifest_sha256": "d45fc6875e411b2e2911e78e838b84a47af98fdf27c35c50438e5bc03b863650",
+  "final_full_1048_rerun_after_targeted_fixes": false,
+  "final_lint": {
+    "ruff": "PASS all9 source+3 owned tests; final policy rechecked",
+    "mypy": "PASS9 source; final policy rechecked"
+  },
+  "recipe_presence": [
+    {
+      "pdf_frontend": false,
+      "modules": 96,
+      "owned_dependency_present": {
+        "company_wiki.document_understanding.operating_states.assertion_roles": true,
+        "company_wiki.source_catalog.narrative_business_disclosures": true,
+        "company_wiki.source_catalog.narrative_business_policy": true,
+        "company_wiki.source_catalog.narrative_source_context": true,
+        "company_wiki.source_catalog.narrative_source_passage": true,
+        "company_wiki.source_catalog.narrative_support_use": true,
+        "company_wiki.source_catalog.narrative_operating_resources": true,
+        "company_wiki.source_catalog.narrative_source_purpose": true,
+        "company_wiki.source_catalog.n6_candidate_operating_facts": true
+      }
+    },
+    {
+      "pdf_frontend": true,
+      "modules": 123,
+      "owned_dependency_present": {
+        "company_wiki.document_understanding.operating_states.assertion_roles": true,
+        "company_wiki.source_catalog.narrative_business_disclosures": true,
+        "company_wiki.source_catalog.narrative_business_policy": true,
+        "company_wiki.source_catalog.narrative_source_context": true,
+        "company_wiki.source_catalog.narrative_source_passage": true,
+        "company_wiki.source_catalog.narrative_support_use": true,
+        "company_wiki.source_catalog.narrative_operating_resources": true,
+        "company_wiki.source_catalog.narrative_source_purpose": true,
+        "company_wiki.source_catalog.n6_candidate_operating_facts": true
+      }
+    }
+  ],
+  "remaining": [
+    "ROOT independent review",
+    "normal commit checks and current full CI",
+    "H1 at unchanged16M/112",
+    "real summary/cache recovery/RF adoption"
+  ],
+  "production_or_paid_or_raw_operations": false
+}

@@ -1,0 +1,26 @@
+{
+  "schema": "r5-root-budget-spy-migration/1",
+  "baseline_head": "2b0787dc1c5352cd8566fc71fc585afe735ec75c",
+  "path": "tests/unit/document_understanding_selection/test_source_support_use.py",
+  "sha256": "ea70297f225a2129584b2429546fa531a35784f8ed425cebcee1de91bfb75b7e",
+  "root_cause": "two test spies did not forward new optional work_budget; no production defect inferred",
+  "red": {
+    "failed": 2,
+    "passed": 0,
+    "seconds": 2.09,
+    "error": "TypeError observed() got unexpected keyword argument work_budget"
+  },
+  "green": {
+    "passed": 2,
+    "failed": 0,
+    "seconds": 1.71
+  },
+  "retained": [
+    "original support/admission assertions",
+    "one role assessment only",
+    "same budget object retained; direct admission forwards WorkBudget"
+  ],
+  "production_source_changed": false,
+  "files_or_models_used": "in-memory source fixtures only; no tmp_path, originals, source DB, download or model call",
+  "remaining": "R5 semantic contracts70 original full failure other68 still pending"
+}

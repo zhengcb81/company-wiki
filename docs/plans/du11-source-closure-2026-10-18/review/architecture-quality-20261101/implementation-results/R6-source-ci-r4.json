@@ -1,0 +1,507 @@
+{
+  "schema": "R6-source-ci-r4/1",
+  "status": "FROZEN_READY_ROOT_INDEPENDENT_REVIEW",
+  "generated_utc": "2026-11-02T01:36:18.294627+00:00",
+  "baseline": "a6841e9420dbe3eb6dac6e30563c29e4293a31e7",
+  "worktree": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2",
+  "source_and_test_sha256": {
+    "src/company_wiki/document_understanding/statement_grammar/__init__.py": "23369e92e6f1f9d330a09fcdb3ff7d470ce4c1176c4cc7e7a984022141dfb9e8",
+    "src/company_wiki/document_understanding/statement_grammar/predicate_arguments.py": "207e0250cbe2aa7269dc2f021444577e38264791008b2ae8a15d0f76fcea2251",
+    "src/company_wiki/document_understanding/operating_states/assertion_roles.py": "bf0bec525b83ff70444b0126ba3807b7d7f1781145d712309f5caab78b589fda",
+    "src/company_wiki/source_catalog/narrative_source_context.py": "2b223273b56e1e6e55ff7e96bd8f6d57f4bc064c205d6e231606df9c83068038",
+    "src/company_wiki/source_catalog/narrative_source_passage.py": "83c86a62e721e9ddc53b66cf16cbb9b3677fc35dc7e9df7b6b8f07d2a2e7ab4c",
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "a63e1a1ad5902e0c5e2ebef23898c88d3c332ced37f28ad05b3416d8560df808",
+    "src/company_wiki/source_catalog/narrative_support_use.py": "d9632c14e7dda839ddbad0c98997ca4014b031aa4c25c17f78a191f2b11a3b35",
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": "865a6eaa12a880c54b85b134de5e92f1b0ab9e9c2215381e4f67bcdd1c33e230",
+    "tests/unit/du11_production/test_source_preparation_axes.py": "71a5a16dc77f165bf655eaf6bdcc696d965edd62eadd9d6ae7b26b02784a07bc",
+    "tests/unit/du11_production/test_source_semantic_axes.py": "594cc8347e090ab888980ebd87fd1d87b6b6dd971672d5ef9b3f24ad1d27c1be",
+    "tests/unit/du11_production/test_source_argument_semantics.py": "e09a3f0189790bb3b54af2e84c722a489e4c928dc14c43a9c098fb22bd6d541e"
+  },
+  "runs": [
+    {
+      "name": "r6-r4-minimal-red",
+      "tests": 8,
+      "failures": 4,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 23.356,
+      "junit": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r4-minimal-red.xml",
+      "sha256": "236d63debcb83ba54913cd571ec8b9a797ca90732b12f5a378c83dc689253e15",
+      "failed_ids": [
+        ".planning.architecture-quality-20261101.r6-r4-design.test_unproved_source_arguments::test_unknown_function_or_goal_arguments_do_not_supply_positive_relevance[Our platform supports remarkable ambitions.]",
+        ".planning.architecture-quality-20261101.r6-r4-design.test_unproved_source_arguments::test_unknown_function_or_goal_arguments_do_not_supply_positive_relevance[Our platform supports promising possibilities.]",
+        ".planning.architecture-quality-20261101.r6-r4-design.test_unproved_source_arguments::test_unknown_function_or_goal_arguments_do_not_supply_positive_relevance[Our software supports ambitious priorities.]",
+        ".planning.architecture-quality-20261101.r6-r4-design.test_unproved_source_arguments::test_unknown_function_or_goal_arguments_do_not_supply_positive_relevance[We aim to pursue luminous horizons.]"
+      ],
+      "note": "",
+      "log": {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r4-minimal-red.log",
+        "sha256": "f50224feaa75a21499ac9718ea5392e5948ab9a687dfebd9fd26ebe6195d6464"
+      }
+    },
+    {
+      "name": "r6-r4-semantic-red",
+      "tests": 21,
+      "failures": 12,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 12.483,
+      "junit": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r4-semantic-red.xml",
+      "sha256": "ee603c5f5f57710b2adebc18c99dbed17d663d8fde5f9deaa53de7d1364c9bc2",
+      "failed_ids": [
+        "tests.unit.du11_production.test_source_argument_semantics::test_unknown_function_or_goal_arguments_cannot_donate_positive_relevance[Our platform supports remarkable ambitions.]",
+        "tests.unit.du11_production.test_source_argument_semantics::test_unknown_function_or_goal_arguments_cannot_donate_positive_relevance[Our platform supports promising possibilities.]",
+        "tests.unit.du11_production.test_source_argument_semantics::test_unknown_function_or_goal_arguments_cannot_donate_positive_relevance[Our software supports ambitious priorities.]",
+        "tests.unit.du11_production.test_source_argument_semantics::test_unknown_function_or_goal_arguments_cannot_donate_positive_relevance[Our platform plans to support unfamiliar technical endeavours.]",
+        "tests.unit.du11_production.test_source_argument_semantics::test_unknown_function_or_goal_arguments_cannot_donate_positive_relevance[We aim to pursue luminous horizons.]",
+        "tests.unit.du11_production.test_source_argument_semantics::test_explicit_qualitative_operating_scope_has_a_positive_source_argument[Our software platform covers hospital workflows.]",
+        "tests.unit.du11_production.test_source_argument_semantics::test_explicit_qualitative_operating_scope_has_a_positive_source_argument[\\u4e00\\u4f53\\u5316\\u751f\\u4ea7\\u670d\\u52a1\\u8986\\u76d6\\u591a\\u4e2a\\u4e0b\\u6e38\\u5ba2\\u6237\\u5de5\\u5e8f\\u3002]",
+        "tests.unit.du11_production.test_source_argument_semantics::test_explicit_qualitative_operating_scope_has_a_positive_source_argument[\\u6211\\u4eec\\u7684\\u8bbe\\u5907\\u670d\\u52a1\\u6db5\\u76d6\\u7530\\u95f4\\u704c\\u6e89\\u4f5c\\u4e1a\\u3002]",
+        "tests.unit.du11_production.test_source_argument_semantics::test_explicit_qualitative_operating_scope_has_a_positive_source_argument[\\u672c\\u516c\\u53f8\\u7684\\u4ea7\\u54c1\\u8986\\u76d6\\u591a\\u4e2a\\u5730\\u533a\\u7684\\u68c0\\u9a8c\\u6d41\\u7a0b\\u3002]",
+        "tests.unit.du11_production.test_source_argument_semantics::test_unproved_financial_cross_sentence_and_template_scopes_cannot_borrow_operating_head[Our production services cover remarkable ambitions.]",
+        "tests.unit.du11_production.test_source_argument_semantics::test_unproved_financial_cross_sentence_and_template_scopes_cannot_borrow_operating_head[Our software platform supports promises for regional operations.]",
+        "tests.unit.du11_production.test_source_argument_semantics::test_unproved_financial_cross_sentence_and_template_scopes_cannot_borrow_operating_head[Our services have outstanding goals. Regional operations are mentioned elsewhere.]"
+      ],
+      "note": "",
+      "log": {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r4-semantic-red.log",
+        "sha256": "22190b98a100ce4b33ea3da2e85c59b8e3470017946a3eb364c09e8283721f87"
+      }
+    },
+    {
+      "name": "r6-r4-core-first",
+      "tests": 101,
+      "failures": 3,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 22.251,
+      "junit": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r4-core-first.xml",
+      "sha256": "626273ec2e603f1b178e566944a3c91239876695627c85947736bc3dc9e73856",
+      "failed_ids": [
+        "tests.unit.document_understanding_selection.test_source_support_use::test_closed_operating_membership_and_coverage_are_qualitative_support[Our product portfolio includes recycling systems.]",
+        "tests.unit.document_understanding_selection.test_source_support_use::test_closed_operating_membership_and_coverage_are_qualitative_support[Our equipment lineup comprises control systems.]",
+        "tests.unit.document_understanding_selection.test_reading_value_coverage::test_marker_filter_does_not_remove_words_with_digits_or_roman_prefixes"
+      ],
+      "note": "",
+      "log": {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r4-core-first.log",
+        "sha256": "745ec6f29c6af4d90bec868e7bcce42f7e9ba7a983d7894196dfa90e96109aeb"
+      }
+    },
+    {
+      "name": "r6-r4-core-second",
+      "tests": 101,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 26.694,
+      "junit": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r4-core-second.xml",
+      "sha256": "76ea7c034b3b06e0605421338eb9bd38c4cb546569c9ccfac7d88ff03195597b",
+      "failed_ids": [
+        "tests.unit.document_understanding_selection.test_reading_value_coverage::test_marker_filter_does_not_remove_words_with_digits_or_roman_prefixes"
+      ],
+      "note": "",
+      "log": {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r4-core-second.log",
+        "sha256": "8d059225d586073c89a86a7d3501eed182d368345cb6eb4d2a9b73d0b0d2df8b"
+      }
+    },
+    {
+      "name": "r6-r4-core-third",
+      "tests": 101,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 11.215,
+      "junit": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r4-core-third.xml",
+      "sha256": "f6aa43355e43cd84c6914190a904a5a112c308356fd2617e150e6ba7167f832e",
+      "failed_ids": [],
+      "note": "",
+      "log": {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r4-core-third.log",
+        "sha256": "26a8320707c0710c0563d7c35a1a33322b6a9e8ba16c0dff584872cd65dcbd93"
+      }
+    },
+    {
+      "name": "r6-r4-affected-first",
+      "tests": 245,
+      "failures": 5,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 26.142,
+      "junit": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r4-affected-first.xml",
+      "sha256": "fdf6fff6a22e921a0a0840137a13b7966ea788272c91dd76f26f683bef1d0c1e",
+      "failed_ids": [
+        "tests.unit.du11_production.test_source_semantic_axes::test_source_context_cannot_be_repromoted_by_complete_sentence_syntax[\\u516c\\u53f8\\u5c06\\u52aa\\u529b\\u6ee1\\u8db3\\u4e0d\\u65ad\\u53d8\\u5316\\u7684\\u5ba2\\u6237\\u9700\\u6c42\\uff0c\\u4e89\\u53d6\\u63a8\\u52a8\\u6536\\u5165\\u589e\\u957f\\u3002]",
+        "tests.unit.du11_production.test_source_semantic_axes::test_business_content_does_not_need_a_company_or_industry_allowlist[\\u516c\\u53f8\\u4e3b\\u8981\\u54c1\\u724c\\u90fd\\u6709\\u4e13\\u5c5e\\u7684\\u5de5\\u5382\\uff0c\\u5927\\u591a\\u6570\\u5de5\\u5382\\u53ea\\u4e3a\\u4e00\\u4e2a\\u54c1\\u724c\\u670d\\u52a1\\u3002]",
+        "tests.unit.du11_production.test_source_semantic_axes::test_business_content_does_not_need_a_company_or_industry_allowlist[Our teams cover crops with shade nets.]",
+        "tests.unit.du11_production.test_source_semantic_axes::test_an_existing_incomplete_role_proof_stays_readable_without_becoming_complete",
+        "tests.unit.du11_production.test_source_semantic_axes::test_source_business_cause_uses_its_nominal_complement_without_a_false_event[\\u672c\\u671f\\u6bdb\\u5229\\u7387\\u4e3b\\u8981\\u539f\\u56e0\\u662f\\u5ba2\\u6237\\u7ed3\\u6784\\u7684\\u8c03\\u6574\\u3002]"
+      ],
+      "note": "",
+      "log": {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r4-affected-first.log",
+        "sha256": "8fee5a8a176a257096175b5cf8a5d23036b5c35d7959633e5ca323c6d2bbff64"
+      }
+    },
+    {
+      "name": "r6-r4-semantic-second",
+      "tests": 140,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 14.77,
+      "junit": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r4-semantic-second.xml",
+      "sha256": "e958efc9f8e19626b32cae8712d148991bb8ae97ca066c23ecfeccb965187472",
+      "failed_ids": [
+        "tests.unit.du11_production.test_source_semantic_axes::test_an_existing_incomplete_role_proof_stays_readable_without_becoming_complete"
+      ],
+      "note": "",
+      "log": {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r4-semantic-second.log",
+        "sha256": "3fa292be939c1dda1c2740cfb0dcca0670b2c6cb69a50253d6cd229bd75f5392"
+      }
+    },
+    {
+      "name": "r6-r4-semantic-third",
+      "tests": 140,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 16.621,
+      "junit": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r4-semantic-third.xml",
+      "sha256": "344c2547ebb4912f8de72db50f07b21febe2bb6267848ef2a946723715e6659c",
+      "failed_ids": [],
+      "note": "",
+      "log": {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r4-semantic-third.log",
+        "sha256": "68073199785b434e0be49310256c2115457be489e465c0dae4c32397febfe25f"
+      }
+    },
+    {
+      "name": "r6-r4-legacy-final",
+      "tests": 350,
+      "failures": 10,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 27.283,
+      "junit": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r4-legacy-final.xml",
+      "sha256": "24ac6f51aec077d30bacb001a5e7665cab6ae537fa71157050aeafb6115ac288",
+      "failed_ids": [
+        "tests.unit.document_understanding_selection.test_source_support_use::test_same_clause_use_function_and_membership_are_source_proofs[Our filtration systems are used by food producers to remove particles.]",
+        "tests.unit.document_understanding_selection.test_source_support_use::test_same_clause_use_function_and_membership_are_source_proofs[The equipment deployment is scheduled for the next reporting period, not completed.]",
+        "tests.unit.document_understanding_selection.test_source_support_use::test_financial_terms_can_modify_a_real_supplied_or_functional_product[We provide option-pricing software to banks.]",
+        "tests.unit.document_understanding_selection.test_source_support_use::test_financial_terms_can_modify_a_real_supplied_or_functional_product[\\u516c\\u53f8\\u5411\\u94f6\\u884c\\u63d0\\u4f9b\\u671f\\u6743\\u5b9a\\u4ef7\\u8f6f\\u4ef6\\u3002]",
+        "tests.unit.document_understanding_selection.test_source_support_use::test_complete_operating_proofs_do_not_depend_on_recognised_stage_or_numeric_presence[\\u516c\\u53f8\\u5411\\u94f6\\u884c\\u63d0\\u4f9b\\u516c\\u5141\\u4ef7\\u503c\\u8ba1\\u91cf\\u8f6f\\u4ef6\\u3002]",
+        "tests.unit.document_understanding_selection.test_source_support_use::test_saved_native_source_scope_replays_real_business_not_prior_metadata[31-ids30-True]",
+        "tests.unit.document_understanding_selection.test_source_support_use::test_saved_native_source_scope_replays_real_business_not_prior_metadata[34-ids33-True]",
+        "tests.unit.document_understanding_selection.test_source_support_use::test_saved_native_source_scope_replays_real_business_not_prior_metadata[43-ids42-True]",
+        "tests.unit.document_understanding_selection.test_source_support_use::test_financial_and_agent_word_parts_do_not_override_actual_product_functions[Our software supports granting share awards to employees.]",
+        "tests.unit.document_understanding_selection.test_reading_native_continuity::test_finance_only_and_separate_financial_sentence_stay_rejected"
+      ],
+      "note": "",
+      "log": {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r4-legacy-final.log",
+        "sha256": "f75531b84d87455e7756443903643c6e7a79d512766416d269525b304055a515"
+      }
+    },
+    {
+      "name": "r6-r4-semantic-public-final",
+      "tests": 185,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 38.195,
+      "junit": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r4-semantic-public-final.xml",
+      "sha256": "f0962dc0285e263af929d0674e9fd35efb6f1c227551c70145f60188148b204d",
+      "failed_ids": [],
+      "note": "",
+      "log": {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r4-semantic-public-final.log",
+        "sha256": "b22749ac8dd6d8acffd46a7c2be81ef6685c913b031bed75f388a19d19a9f4ef"
+      }
+    },
+    {
+      "name": "r6-r4-list-red",
+      "tests": 3,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 1.645,
+      "junit": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r4-list-red.xml",
+      "sha256": "2915b83d3d3b1c4964b0ba0f52b327d3c1a4bda9d8464e3015c2b023ee7a570a",
+      "failed_ids": [],
+      "note": "3P regression; filename says red but assertions were added after pre-fix behavioral probe",
+      "log": {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r4-list-red.log",
+        "sha256": "8b687b11a7fc8538eb6b2a06abbe31e2a73e0cbaa86c2a68c757baabbf9aad6c"
+      }
+    },
+    {
+      "name": "r6-r4-legacy-recovery",
+      "tests": 113,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 13.083,
+      "junit": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r4-legacy-recovery.xml",
+      "sha256": "910d690c3f0322e620c03a3731c1a87725d90c43ea2f5670ee7b4d193a848f36",
+      "failed_ids": [
+        "tests.unit.document_understanding_selection.test_source_support_use::test_same_clause_use_function_and_membership_are_source_proofs[The equipment deployment is scheduled for the next reporting period, not completed.]"
+      ],
+      "note": "",
+      "log": {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r4-legacy-recovery.log",
+        "sha256": "48bf4deb1353486007b437121d6a05c0a9006f11695b1fcda83f47624b1d9dfe"
+      }
+    },
+    {
+      "name": "r6-r4-scope-recovery",
+      "tests": 135,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 8.577,
+      "junit": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r4-scope-recovery.xml",
+      "sha256": "89deceb16fd3c2aed809b3c580b78925037531813129e0b48e061fae8944de15",
+      "failed_ids": [],
+      "note": "",
+      "log": {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r4-scope-recovery.log",
+        "sha256": "8355811a62b2566f25a60c0197db29498991e1aa25f5737a3be90941f59f848f"
+      }
+    },
+    {
+      "name": "r6-r4-domain-frozen",
+      "tests": 290,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 8.645,
+      "junit": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r4-domain-frozen.xml",
+      "sha256": "618d77ef9be4024793e35dd36da9d6136e903a97af079b55479e227b47b9893f",
+      "failed_ids": [],
+      "note": "",
+      "log": {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r4-domain-frozen.log",
+        "sha256": "07aa2acd96fb9e2ff77d5e12dd18b093bfd409e8cc228fa972d2af5c1778fa1b"
+      }
+    },
+    {
+      "name": "r6-r4-recovery-public-frozen",
+      "tests": 280,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 26.243,
+      "junit": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r4-recovery-public-frozen.xml",
+      "sha256": "144b8bafc7a5b055f8087c2b10a21cd96c588d08e23ea3e33da21c161bad8e73",
+      "failed_ids": [],
+      "note": "",
+      "log": {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r4-recovery-public-frozen.log",
+        "sha256": "f106617e7f7b2605266d4efa5cb3f2f8e40c36a8f504c9dfb16e4a1da83ff134"
+      }
+    },
+    {
+      "name": "r6-r4-compat-account-red",
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 7.485,
+      "junit": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r4-compat-account-red.xml",
+      "sha256": "75a8d63634848bcef3e1b7dff7a7fd675e75c21bd8502b1e7694db8424d10fa3",
+      "failed_ids": [
+        "tests.unit.du11_production.test_source_argument_semantics::test_explicit_passage_compat_account_reaches_its_prepared_scope"
+      ],
+      "note": "",
+      "log": {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r4-compat-account-red.log",
+        "sha256": "9a72932a890676688bdee540ab5ae1edcf1d0a0bc1aeefa18579415e5bf9a615"
+      }
+    },
+    {
+      "name": "r6-r4-argument-frozen",
+      "tests": 37,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "seconds": 7.006,
+      "junit": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r4-argument-frozen.xml",
+      "sha256": "b828a2f37921619557541051c7212717a2255bbd1d40ca4df4dcf9dd34d18a21",
+      "failed_ids": [],
+      "note": "",
+      "log": {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r4-argument-frozen.log",
+        "sha256": "2b6730390686feca8510038424e4a748d0dffca5eb25f73a5b5fe40935d77f69"
+      }
+    }
+  ],
+  "behavioral_evidence": [
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r4-composition-probe.log",
+      "sha256": "62a52cd20a401818568ce2c07c77cfb828da39c80f2b8711583cf88672da1602"
+    },
+    {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\architecture-quality-20261101\\r6-r4-design\\expectation-before.json",
+      "sha256": "f24e55e378911fb71b0a61cb757ccec90c3f208acccd7b7440563a308efe8d12"
+    }
+  ],
+  "authorized_test_errata": [
+    {
+      "test": "test_an_existing_incomplete_role_proof_stays_readable_without_becoming_complete",
+      "before": "def test_an_existing_incomplete_role_proof_stays_readable_without_becoming_complete():\n    text = 'Our equipment is used in rural clinics and urban markets.'\n    prepared = prepare_reading_business_assessment(text, {'relations': []})\n    assert prepared.passage.use == 'unresolved' and prepared.passage.relevant\n    assert prepared.passage.reason == 'source_payload_unresolved'\n    assert prepared.source_roles.independent_payload is None",
+      "after": "def test_an_existing_incomplete_role_proof_stays_readable_without_becoming_complete():\n    text = 'Our equipment is used in rural clinics and urban markets.'\n    prepared = prepare_reading_business_assessment(text, {'relations': []})\n    # R4: the original None remains None; a bound use-location source scope\n    # is now explicitly observed, without a factual/financial upgrade.\n    assert prepared.passage.use == 'support' and prepared.passage.relevant\n    assert prepared.source_roles.source_scope and not prepared.fact.eligible\n    assert prepared.source_roles.independent_payload is None"
+    },
+    {
+      "test": "test_coordinated_goal_preserves_each_predicates_own_arguments",
+      "before": "def test_coordinated_goal_preserves_each_predicates_own_arguments(joiner, specific_first):\n    specific, abstract = 'reopen neonatal wards', 'create value'\n    left, right = (specific, abstract) if specific_first else (abstract, specific)\n    text = f'We aim to {left} {joiner} {right}.'\n    prepared = prepare_reading_business_assessment(text, {'relations': []})\n    assert prepared.passage.use == 'support' and prepared.passage.relevant\n    assert not prepared.fact.eligible and not prepared.fact.financial_exempt",
+      "after": "def test_coordinated_goal_preserves_each_predicates_own_arguments(joiner, specific_first):\n    specific, abstract = 'reopen neonatal wards', 'create value'\n    left, right = (specific, abstract) if specific_first else (abstract, specific)\n    text = f'We aim to {left} {joiner} {right}.'\n    prepared = prepare_reading_business_assessment(text, {'relations': []})\n    _assert_unknown_goal(text, prepared)\n    assert not prepared.fact.eligible and not prepared.fact.financial_exempt"
+    },
+    {
+      "test": "test_nested_and_multiple_goal_predicates_do_not_lose_concrete_arguments",
+      "before": "def test_nested_and_multiple_goal_predicates_do_not_lose_concrete_arguments(text):\n    prepared = prepare_reading_business_assessment(text, {'relations': []})\n    assert prepared.passage.use == 'support' and prepared.passage.relevant\n    assert not {'operating_milestone', 'operating_current_state'} & set(prepared.fact.reasons)",
+      "after": "def test_nested_and_multiple_goal_predicates_do_not_lose_concrete_arguments(text):\n    prepared = prepare_reading_business_assessment(text, {'relations': []})\n    _assert_unknown_goal(text, prepared)\n    assert not {'operating_milestone', 'operating_current_state'} & set(prepared.fact.reasons)"
+    },
+    {
+      "test": "test_chinese_goal_coordination_has_the_same_order_invariance",
+      "before": "def test_chinese_goal_coordination_has_the_same_order_invariance(joiner, specific_first):\n    specific, abstract = '重开新生儿病房', '创造价值'\n    left, right = (specific, abstract) if specific_first else (abstract, specific)\n    text = f'公司努力{left}{joiner}{right}。'\n    prepared = prepare_reading_business_assessment(text, {'relations': []})\n    assert prepared.passage.use == 'support' and prepared.passage.relevant\n    assert not prepared.fact.eligible and not prepared.fact.financial_exempt",
+      "after": "def test_chinese_goal_coordination_has_the_same_order_invariance(joiner, specific_first):\n    specific, abstract = '重开新生儿病房', '创造价值'\n    left, right = (specific, abstract) if specific_first else (abstract, specific)\n    text = f'公司努力{left}{joiner}{right}。'\n    prepared = prepare_reading_business_assessment(text, {'relations': []})\n    _assert_unknown_goal(text, prepared)\n    assert not prepared.fact.eligible and not prepared.fact.financial_exempt"
+    },
+    {
+      "test": "test_goal_governor_does_not_supply_a_whole_sentence_veto",
+      "before": "def test_goal_governor_does_not_supply_a_whole_sentence_veto(operator):\n    text = f'We {operator} to reopen neonatal wards and create value.'\n    prepared = prepare_reading_business_assessment(text, {'relations': []})\n    assert prepared.passage.use == 'support' and prepared.passage.relevant\n    assert not prepared.fact.eligible",
+      "after": "def test_goal_governor_does_not_supply_a_whole_sentence_veto(operator):\n    text = f'We {operator} to reopen neonatal wards and create value.'\n    prepared = prepare_reading_business_assessment(text, {'relations': []})\n    _assert_unknown_goal(text, prepared)\n    assert not prepared.fact.eligible"
+    },
+    {
+      "test": "test_prepared_operator_boundary_is_not_a_dictionary_or_predicate_override",
+      "before": "def test_prepared_operator_boundary_is_not_a_dictionary_or_predicate_override(operator):\n    statement = f'公司{operator}创造价值并重开新生儿病房。'\n    nominal = f'公司的{operator}创造计划。'\n    assert prepare_reading_business_assessment(statement, {'relations': []}).passage.use == 'support'\n    assert not prepare_reading_business_assessment(nominal, {'relations': []}).passage.relevant",
+      "after": "def test_prepared_operator_boundary_is_not_a_dictionary_or_predicate_override(operator):\n    statement = f'公司{operator}创造价值并重开新生儿病房。'\n    nominal = f'公司的{operator}创造计划。'\n    _assert_unknown_goal(statement, prepare_reading_business_assessment(statement, {'relations': []}))\n    assert not prepare_reading_business_assessment(nominal, {'relations': []}).passage.relevant"
+    },
+    {
+      "test": "test_goal_matrix_and_complements_are_prepared_once_before_fact_projection",
+      "before": "def test_goal_matrix_and_complements_are_prepared_once_before_fact_projection(monkeypatch):\n    from company_wiki.source_catalog import narrative_source_passage as owner\n    from unit.du11_production.test_source_information_binding import session_for, unit_id\n\n    original = owner.observe_statement\n    calls = []\n\n    def counted(text, **kwargs):\n        calls.append(text)\n        return original(text, **kwargs)\n\n    monkeypatch.setattr(owner, 'observe_statement', counted)\n    text = 'We aim to reopen neonatal wards and create value.'\n    session, budget = session_for([text])\n    uid = unit_id(0)\n    fact, passage = session.fact(uid), session.source_passage(uid)\n    assert passage.use == 'support' and not fact.eligible\n    assert calls == [text]\n    used = budget.used\n    assert session.fact(uid) is fact and session.source_passage(uid) is passage\n    assert calls == [text] and budget.used == used",
+      "after": "def test_goal_matrix_and_complements_are_prepared_once_before_fact_projection(monkeypatch):\n    from company_wiki.source_catalog import narrative_source_passage as owner\n    from unit.du11_production.test_source_information_binding import session_for, unit_id\n\n    original = owner.observe_statement\n    calls = []\n\n    def counted(text, **kwargs):\n        calls.append(text)\n        return original(text, **kwargs)\n\n    monkeypatch.setattr(owner, 'observe_statement', counted)\n    text = 'We aim to reopen neonatal wards and create value.'\n    session, budget = session_for([text])\n    uid = unit_id(0)\n    fact, passage = session.fact(uid), session.source_passage(uid)\n    assert passage.use == 'unresolved' and not passage.relevant and not fact.eligible\n    assert calls == [text]\n    used = budget.used\n    assert session.fact(uid) is fact and session.source_passage(uid) is passage\n    assert calls == [text] and budget.used == used"
+    },
+    {
+      "test": "test_the_same_typed_function_as_a_direct_product_goal_is_preserved",
+      "before": "def test_the_same_typed_function_as_a_direct_product_goal_is_preserved():\n    text = 'We aim to supply software that processes customer orders and create value.'\n    prepared = prepare_reading_business_assessment(text, {'relations': []})\n    assert prepared.passage.use == 'support' and prepared.passage.relevant",
+      "after": "def test_the_same_typed_function_as_a_direct_product_goal_is_preserved():\n    text = 'We aim to supply software that processes customer orders and create value.'\n    prepared = prepare_reading_business_assessment(text, {'relations': []})\n    _assert_unknown_goal(text, prepared)"
+    },
+    {
+      "test": "test_a_concrete_noun_modifier_is_not_removed_with_rhetorical_adjectives",
+      "before": "def test_a_concrete_noun_modifier_is_not_removed_with_rhetorical_adjectives():\n    text = 'We aim to supply surgical services and create value.'\n    prepared = prepare_reading_business_assessment(text, {'relations': []})\n    assert prepared.passage.use == 'support' and prepared.passage.relevant",
+      "after": "def test_a_concrete_noun_modifier_is_not_removed_with_rhetorical_adjectives():\n    text = 'We aim to supply surgical services and create value.'\n    prepared = prepare_reading_business_assessment(text, {'relations': []})\n    _assert_unknown_goal(text, prepared)"
+    },
+    {
+      "test": "_assert_unknown_goal",
+      "before": null,
+      "after": "def _assert_unknown_goal(text, prepared):\n    # R4 erratum: POS binds these words but supplies no positive operating\n    # argument. Keep the original claim, not an invented economic proof.\n    from company_wiki.document_normalization.text_matching import matching_reading_text\n    assert prepared.passage.use == 'unresolved' and not prepared.passage.relevant\n    assert not prepared.fact.eligible\n    assert prepared.source_roles.independent_payload is None\n    assert not prepared.source_roles.bound_payload\n    expected = matching_reading_text(text).strip(' .。!?;；')\n    assert ''.join(c.text for c in prepared.source_roles.clauses).strip(' .。!?;；') == expected"
+    },
+    {
+      "test": "test_unknown_goals_remain_source_words_without_unproved_relevance",
+      "before": null,
+      "after": "def test_unknown_goals_remain_source_words_without_unproved_relevance(text):\n    _assert_unknown_goal(text, prepare_reading_business_assessment(text, {'relations': []}))"
+    },
+    {
+      "test": "test_unknown_catalogue_members_do_not_prove_each_others_semantics",
+      "before": null,
+      "after": "def test_unknown_catalogue_members_do_not_prove_each_others_semantics():\n    text = 'Our services include orchard planting and coastal transport.'\n    _assert_unknown_goal(text, prepare_reading_business_assessment(text, {'relations': []}))"
+    }
+  ],
+  "recipe_closure": {
+    "False": {
+      "company_wiki.document_understanding.statement_grammar": "e94ad1f40167ca49d36b59bd78a9fc2cecd3a1be203d98e828cc53b9d7a8b17c",
+      "company_wiki.document_understanding.statement_grammar.predicate_arguments": "207e0250cbe2aa7269dc2f021444577e38264791008b2ae8a15d0f76fcea2251",
+      "company_wiki.document_understanding.operating_states.assertion_roles": "6b1ced21eeab23bae38dba76f38068362c2c78e893acd11b911cfb0bcb33f681",
+      "company_wiki.source_catalog.narrative_source_context": "2b223273b56e1e6e55ff7e96bd8f6d57f4bc064c205d6e231606df9c83068038",
+      "company_wiki.source_catalog.narrative_source_passage": "e616a223f8845abfe82a9354bb5c06243ce3f22255e93dd01773cb8854e87b67",
+      "company_wiki.source_catalog.narrative_business_policy": "a6111eff52e16a80a603928fae98272b2c718d0c9b4fc516137bb96a59fe9a69",
+      "company_wiki.source_catalog.narrative_support_use": "81322c4e473dd57e5f58bd9c00cb23f71488942a17925835cf3935e92ee8ab57",
+      "company_wiki.source_catalog.narrative_operating_relations": "9d4dce40ecbe3e0369ae2f85a712760c94f18d422a47a8fec8a2248c50196324"
+    },
+    "True": {
+      "company_wiki.document_understanding.statement_grammar": "e94ad1f40167ca49d36b59bd78a9fc2cecd3a1be203d98e828cc53b9d7a8b17c",
+      "company_wiki.document_understanding.statement_grammar.predicate_arguments": "207e0250cbe2aa7269dc2f021444577e38264791008b2ae8a15d0f76fcea2251",
+      "company_wiki.document_understanding.operating_states.assertion_roles": "6b1ced21eeab23bae38dba76f38068362c2c78e893acd11b911cfb0bcb33f681",
+      "company_wiki.source_catalog.narrative_source_context": "2b223273b56e1e6e55ff7e96bd8f6d57f4bc064c205d6e231606df9c83068038",
+      "company_wiki.source_catalog.narrative_source_passage": "e616a223f8845abfe82a9354bb5c06243ce3f22255e93dd01773cb8854e87b67",
+      "company_wiki.source_catalog.narrative_business_policy": "a6111eff52e16a80a603928fae98272b2c718d0c9b4fc516137bb96a59fe9a69",
+      "company_wiki.source_catalog.narrative_support_use": "81322c4e473dd57e5f58bd9c00cb23f71488942a17925835cf3935e92ee8ab57",
+      "company_wiki.source_catalog.narrative_operating_relations": "9d4dce40ecbe3e0369ae2f85a712760c94f18d422a47a8fec8a2248c50196324"
+    }
+  },
+  "resource_identity": "123fbe7c75f816991ad5112a748e59e7339a054cd40483a905ddf4c30e8c93f7",
+  "limits_unchanged": {
+    "document_work": 16000000,
+    "slots": 112,
+    "statement_chars": 4096,
+    "statement_tokens": 1024,
+    "base_source_description_scan_passes": 19
+  },
+  "work_accounting": {
+    "business_phase_scan_passes": 119,
+    "scope_arguments": "8 * actual target length + 1 before first observation; True/False and full-scope duplicate targets memoized",
+    "directed_provision": "2 * (subject length + target length) + 1 before searches; clause-local tuple memo",
+    "goal_arguments": "8 * normalized direct NP length, before original owner callback; exact argument memo per prepared clause",
+    "pos": "32 * chars + 1, shared WorkBudget, existing caps",
+    "production_entries": [
+      "SourceOperatingSession.fact -> prepare_source_assertions(work_budget=self.work_budget)",
+      "prepare_reading_business_assessment(source_roles=None) -> prepare_source_assertions(work_budget=grammar_work_budget)",
+      "prepare_source_passage compat -> prepare_source_statement_scope(grammar_work_budget=grammar_work_budget)"
+    ],
+    "compat_pure_calls": "default budget=None retained; normal production supplies prepared roles to downstream purpose/support helpers"
+  },
+  "public_scope_contract": "Transient SourceAssertionRoles.source_scope and SourceClauseContext.source_scope/fact_candidate; no persistent/wire schema or permission change",
+  "remaining": [
+    "ROOT independent review and full candidate CI",
+    "real H1 content/latency/recall under original16M/112",
+    "full summary/cache/RF adoption C node",
+    "T3 remains paused; no source implementation for that task"
+  ],
+  "not_claimed": [
+    "POS semantic disambiguation of arbitrary unfamiliar targets",
+    "all real business goals become positive automatically",
+    "source scope equals event/issuer/numeric/finance proof",
+    "entire PWF complete"
+  ],
+  "runtime": {
+    "working_directory": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2",
+    "python": "C:/Miniconda/python.exe -B -X utf8",
+    "environment": {
+      "PYTHONPATH": "src;tests",
+      "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1"
+    },
+    "pytest_args": "-m pytest -p pytest_asyncio.plugin -q -p no:cacheprovider --tb=short"
+  },
+  "final_target_sets": {
+    "r6-r4-domain-frozen": [
+      "tests/unit/du11_production/test_source_argument_semantics.py",
+      "tests/unit/du11_production/test_source_preparation_axes.py",
+      "tests/unit/du11_production/test_source_semantic_axes.py",
+      "tests/unit/du11_production/test_source_passage_prefix_and_cause.py",
+      "tests/unit/du11_production/test_source_passage_admission.py"
+    ],
+    "r6-r4-recovery-public-frozen": [
+      "tests/unit/document_understanding_selection/test_source_support_use.py::test_same_clause_use_function_and_membership_are_source_proofs",
+      "tests/unit/document_understanding_selection/test_source_support_use.py::test_financial_terms_can_modify_a_real_supplied_or_functional_product",
+      "tests/unit/document_understanding_selection/test_source_support_use.py::test_complete_operating_proofs_do_not_depend_on_recognised_stage_or_numeric_presence",
+      "tests/unit/document_understanding_selection/test_source_support_use.py::test_saved_native_source_scope_replays_real_business_not_prior_metadata",
+      "tests/unit/document_understanding_selection/test_source_support_use.py::test_financial_and_agent_word_parts_do_not_override_actual_product_functions",
+      "tests/unit/document_understanding_selection/test_source_support_use.py::test_closed_operating_membership_and_coverage_are_qualitative_support",
+      "tests/unit/document_understanding_selection/test_reading_native_continuity.py::test_finance_only_and_separate_financial_sentence_stay_rejected",
+      "tests/unit/document_understanding_selection/test_reading_value_coverage.py::test_marker_filter_does_not_remove_words_with_digits_or_roman_prefixes",
+      "tests/unit/du11_production/test_source_information_payload.py",
+      "tests/unit/du11_production/test_business_coverage_relations.py",
+      "tests/unit/du11_production/test_source_readability_generalization.py",
+      "tests/unit/du11_production/test_source_readability_deferred_selection.py",
+      "tests/integration/test_source_processing_handler_wire.py",
+      "tests/unit/du11_production/test_statement_grammar_runtime.py"
+    ],
+    "r6-r4-argument-frozen": [
+      "tests/unit/du11_production/test_source_argument_semantics.py"
+    ]
+  },
+  "run_version_note": "290P and280P precede only the final one-line compat account forwarding and new dedicated test; current final37P covers that change. No claim that broader groups were rerun after that one-line forwarding."
+}

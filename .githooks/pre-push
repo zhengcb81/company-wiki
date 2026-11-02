@@ -1,16 +1,13 @@
 #!/bin/sh
-# Check affected Unit files across ALL commits/ref updates being pushed, plus
-# the CI contract smoke set once. Wide, dynamic or unknown scopes run the
-# smoke set only and defer the full unit suite to CI; a green push proves the
-# ran scope (local_fast_pass), never the whole project.
+# Daily code pushes run the fixed CI contract smoke once. Proven documentation
+# changes start no pytest process. Change-specific tests are run by the author;
+# full Unit/Contract and end-to-end acceptance belong to CI and major nodes.
+# A green push is local_fast_pass for the fixed smoke, not the whole project.
 #
 # Installed as .githooks/pre-push (git config core.hooksPath .githooks).
-# Keep push latency short; the full seven-stage local gate remains available
-# explicitly via `python tools/pre_push_gate.py` when a broad local run is needed.
+# Full local validation remains explicit: python tools/pre_push_gate.py
 #
-# NOTE: shebang MUST be #!/bin/sh (git-for-windows spawns /bin/sh hooks
-# natively; /usr/bin/env bash failed with "cannot spawn").  Use
-# `python`, not python3, on Windows.
+# git-for-windows requires this /bin/sh shebang; use python, not python3.
 
 ROOT=$(CDPATH= cd -- "$(dirname -- "$0")/.." && pwd)
 

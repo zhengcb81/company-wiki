@@ -1,7 +1,7 @@
 {
   "schema": "daily-feedback-publication/1",
   "code_head": "819cef31a4f2db7fa05bfe50901725f7a0dad016",
-  "engineering": "INDEPENDENT_PASS_CANDIDATE_FULL_CI_PASS_MASTER_FF",
+  "engineering": "MERGED_PUSHED_EXACT_MASTER_CI_SUCCESS",
   "independent_report": "R6-daily-feedback-independent.json",
   "independent_tests": "10P/16.55s",
   "author_tests": "173P/121.78s including hermetic real hook pushes",
@@ -26,7 +26,21 @@
     "all_existing_tracked_wip_bytes_preserved": true,
     "protected_paths": 12
   },
-  "main_push": "pending PWF commit",
+  "main_push": {
+    "head": "1bf3d388e31c0d40f0de2165acd8401bf8ecb85e",
+    "returncode": 0,
+    "elapsed_s": 45.097
+  },
   "change": "fixed existing smoke once; no AST graph or impacted-file expansion; nonruntime0pytest; timeout/caps/error propagation/full CI retained",
-  "source_semantic_candidate_included": false
+  "source_semantic_candidate_included": false,
+  "main_pre_push": "167P/38.31s",
+  "main_exact_ci": {
+    "id": 41371690732,
+    "head_sha": "1bf3d388e31c0d40f0de2165acd8401bf8ecb85e",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41371690732",
+    "created_at": "2026-11-02T01:17:16Z",
+    "updated_at": "2026-11-02T01:23:40Z"
+  }
 }

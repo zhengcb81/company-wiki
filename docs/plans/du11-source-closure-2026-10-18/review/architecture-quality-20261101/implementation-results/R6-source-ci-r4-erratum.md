@@ -1,6 +1,6 @@
 # R6 R4 root erratum — 先冻结语义假设，再修实现
 
-状态：DESIGN_AND_RED；ROOT已明确允许纠正本线R2/R3自增测试中仅由POS产生的positive期待。旧R3报告仍保留，不回写PASS。基线a6841e9独审有P2，未验收主线。
+状态：FROZEN，详见 `R6-source-ci-r4.md/json`；ROOT已明确允许纠正本线R2/R3自增测试中仅由POS产生的positive期待。旧R3报告仍保留，不回写PASS。基线a6841e9独审有P2，未验收主线。
 
 ## 共同根因与最小RED
 
@@ -8,7 +8,7 @@ POS只证明句法matrix和NP/VP绑定，不能证明一个未知argument具有�
 
 当前最小8例：4F/4P，23.36秒。四个RED为remarkable ambitions、promising possibilities、ambitious priorities、pursue luminous horizons；已存在function正控、普通未知action原文、abstract+beneficiary负控4例PASS。草案`.planning/architecture-quality-20261101/r6-r4-design/test_unproved_source_arguments.py`，JUnit在隔离工区`tmp/r6-r4-minimal-red.xml`。没有为这些词扩展词表。现有真实/原CI20正控不改。
 
-## 原期待纠正表（ROOT已确认，尚未修改测试）
+## 原期待纠正表（ROOT已确认，已按ROOT决定实施，精确diff见最终JSON）
 
 | 本线自增类 | before | after及原因 |
 |---|---|---|
@@ -31,3 +31,8 @@ POS只证明句法matrix和NP/VP绑定，不能证明一个未知argument具有�
 5. 原WorkBudget、16M/112、resource/配置不变；prepared callback真/假结果和scope观察复用，不新增任务/身份/人工许可。只跑新RED与受影响有界组，原20期待/真实12unit检查点保持。
 
 本稿不是验收或已实施声明，最终结果/版本/成本以R4完成报告为准。
+
+
+## 最终补充
+
+closed unknown multi-member不再因数目相互证明；orchard planting/coastal transport一项迁入unknown断言，未删除原文或成员。use-location范围因新显式source_scope可展示为description仍None/no fact。完成状态和全部SHA/测试以R4最终报告为唯一入口，本稿仅保留当时设计/假设纠正的过程证据。

@@ -1,0 +1,305 @@
+{
+  "id": 41373840648,
+  "head_sha": "2b0787dc1c5352cd8566fc71fc585afe735ec75c",
+  "head_branch": "codex/architecture-rectification-r2-20261101",
+  "status": "completed",
+  "conclusion": "failure",
+  "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41373840648",
+  "created_at": "2026-11-02T01:42:02Z",
+  "updated_at": "2026-11-02T01:47:47Z",
+  "jobs": [
+    {
+      "id": 125049744834,
+      "status": "completed",
+      "conclusion": "failure",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-11-02T01:42:06Z",
+          "completed_at": "2026-11-02T01:42:07Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-11-02T01:42:07Z",
+          "completed_at": "2026-11-02T01:42:12Z"
+        },
+        {
+          "name": "Set up Python 3.12",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-11-02T01:42:12Z",
+          "completed_at": "2026-11-02T01:42:15Z"
+        },
+        {
+          "name": "Install dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-11-02T01:42:15Z",
+          "completed_at": "2026-11-02T01:42:44Z"
+        },
+        {
+          "name": "Ruff lint",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-11-02T01:42:44Z",
+          "completed_at": "2026-11-02T01:42:44Z"
+        },
+        {
+          "name": "Strict type check on src",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-11-02T01:42:44Z",
+          "completed_at": "2026-11-02T01:42:56Z"
+        },
+        {
+          "name": "Compileall and config doctor",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-11-02T01:42:56Z",
+          "completed_at": "2026-11-02T01:42:59Z"
+        },
+        {
+          "name": "Unit tests",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 8,
+          "started_at": "2026-11-02T01:42:59Z",
+          "completed_at": "2026-11-02T01:47:42Z"
+        },
+        {
+          "name": "Unit test failure summary",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9,
+          "started_at": "2026-11-02T01:47:42Z",
+          "completed_at": "2026-11-02T01:47:42Z"
+        },
+        {
+          "name": "Focused contract tests",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 10,
+          "started_at": "2026-11-02T01:47:42Z",
+          "completed_at": "2026-11-02T01:47:42Z"
+        },
+        {
+          "name": "Focused contract failure summary",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11,
+          "started_at": "2026-11-02T01:47:42Z",
+          "completed_at": "2026-11-02T01:47:42Z"
+        },
+        {
+          "name": "CLI smoke test",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 12,
+          "started_at": "2026-11-02T01:47:42Z",
+          "completed_at": "2026-11-02T01:47:42Z"
+        },
+        {
+          "name": "Scan for hardcoded secrets",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 13,
+          "started_at": "2026-11-02T01:47:42Z",
+          "completed_at": "2026-11-02T01:47:42Z"
+        },
+        {
+          "name": "Post Set up Python 3.12",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 25,
+          "started_at": "2026-11-02T01:47:42Z",
+          "completed_at": "2026-11-02T01:47:42Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 26,
+          "started_at": "2026-11-02T01:47:42Z",
+          "completed_at": "2026-11-02T01:47:43Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 27,
+          "started_at": "2026-11-02T01:47:43Z",
+          "completed_at": "2026-11-02T01:47:43Z"
+        }
+      ],
+      "annotations": [
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/zhengcb81/company-wiki/blob/2b0787dc1c5352cd8566fc71fc585afe735ec75c/.github",
+          "start_line": 2,
+          "start_column": null,
+          "end_line": 2,
+          "end_column": null,
+          "annotation_level": "warning",
+          "title": "",
+          "message": "Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-python@v5. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/",
+          "raw_details": ""
+        },
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/zhengcb81/company-wiki/blob/2b0787dc1c5352cd8566fc71fc585afe735ec75c/.github",
+          "start_line": 53,
+          "start_column": null,
+          "end_line": 53,
+          "end_column": null,
+          "annotation_level": "failure",
+          "title": "",
+          "message": "tests.unit.document_understanding_root.test_qualitative_operating_intent::test_specific_qualitative_operating_intent_is_useful_source_material[The group intends to reduce reliance on paid customer acquisition.] [AssertionError]",
+          "raw_details": ""
+        },
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/zhengcb81/company-wiki/blob/2b0787dc1c5352cd8566fc71fc585afe735ec75c/.github",
+          "start_line": 52,
+          "start_column": null,
+          "end_line": 52,
+          "end_column": null,
+          "annotation_level": "failure",
+          "title": "",
+          "message": "tests.unit.document_understanding_root.test_qualitative_operating_intent::test_specific_qualitative_operating_intent_is_useful_source_material[We hope to stabilize customer retention, but no schedule has been set.] [AssertionError]",
+          "raw_details": ""
+        },
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/zhengcb81/company-wiki/blob/2b0787dc1c5352cd8566fc71fc585afe735ec75c/.github",
+          "start_line": 51,
+          "start_column": null,
+          "end_line": 51,
+          "end_column": null,
+          "annotation_level": "failure",
+          "title": "",
+          "message": "tests.unit.document_understanding_root.test_qualitative_operating_intent::test_specific_qualitative_operating_intent_is_useful_source_material[Our company plans to update the product, but the timing remains uncertain.] [AssertionError]",
+          "raw_details": ""
+        },
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/zhengcb81/company-wiki/blob/2b0787dc1c5352cd8566fc71fc585afe735ec75c/.github",
+          "start_line": 50,
+          "start_column": null,
+          "end_line": 50,
+          "end_column": null,
+          "annotation_level": "failure",
+          "title": "",
+          "message": "tests.unit.document_understanding_root.test_qualitative_operating_intent::test_specific_qualitative_operating_intent_is_useful_source_material[\\u516c\\u53f8\\u8ba1\\u5212\\u51cf\\u5c11\\u5bf9\\u5e7f\\u544a\\u6295\\u653e\\u7684\\u4f9d\\u8d56\\uff0c\\u66f4\\u591a\\u91c7\\u7528\\u7528\\u6237\\u7559\\u5b58\\u8fd0\\u8425\\u3002] [AssertionError]",
+          "raw_details": ""
+        },
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/zhengcb81/company-wiki/blob/2b0787dc1c5352cd8566fc71fc585afe735ec75c/.github",
+          "start_line": 49,
+          "start_column": null,
+          "end_line": 49,
+          "end_column": null,
+          "annotation_level": "failure",
+          "title": "",
+          "message": "tests.unit.document_understanding_root.test_qualitative_operating_intent::test_specific_qualitative_operating_intent_is_useful_source_material[\\u6211\\u4eec\\u4f1a\\u8ddf\\u968f\\u8fd9\\u4e9b\\u8282\\u70b9\\u96c6\\u4e2d\\u63a8\\u51fa\\u66f4\\u65b0\\u8fed\\u4ee3\\u7684\\u7248\\u672c\\uff0c\\u4f46\\u5177\\u4f53\\u8ba1\\u5212\\u5c1a\\u672a\\u786e\\u5b9a\\u3002] [AssertionError]",
+          "raw_details": ""
+        },
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/zhengcb81/company-wiki/blob/2b0787dc1c5352cd8566fc71fc585afe735ec75c/.github",
+          "start_line": 48,
+          "start_column": null,
+          "end_line": 48,
+          "end_column": null,
+          "annotation_level": "failure",
+          "title": "",
+          "message": "tests.unit.document_understanding_root.test_qualitative_operating_intent::test_specific_qualitative_operating_intent_is_useful_source_material[\\u540e\\u671f\\u6211\\u4eec\\u5e0c\\u671b\\u80fd\\u591f\\u5728\\u65b0\\u7684\\u6c34\\u5e73\\u53bb\\u7a33\\u4f4f\\u8fd9\\u6b3e\\u4ea7\\u54c1\\uff0c\\u4f46\\u76ee\\u524d\\u4e0d\\u597d\\u5224\\u65ad\\u3002] [AssertionError]",
+          "raw_details": ""
+        },
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/zhengcb81/company-wiki/blob/2b0787dc1c5352cd8566fc71fc585afe735ec75c/.github",
+          "start_line": 47,
+          "start_column": null,
+          "end_line": 47,
+          "end_column": null,
+          "annotation_level": "failure",
+          "title": "",
+          "message": "tests.unit.document_understanding_root.test_qualitative_operating_intent::test_specific_qualitative_operating_intent_is_useful_source_material[\\u5f80\\u540e\\u6574\\u4e2a\\u4ea7\\u54c1\\u7684\\u601d\\u8def\\u8fd8\\u662f\\u4f1a\\u5ef6\\u7eed\\uff0c\\u66f4\\u591a\\u5730\\u91c7\\u7528\\u5b58\\u91cf\\u8fd0\\u8425\\u7684\\u65b9\\u5f0f\\u3002] [AssertionError]",
+          "raw_details": ""
+        },
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/zhengcb81/company-wiki/blob/2b0787dc1c5352cd8566fc71fc585afe735ec75c/.github",
+          "start_line": 46,
+          "start_column": null,
+          "end_line": 46,
+          "end_column": null,
+          "annotation_level": "failure",
+          "title": "",
+          "message": "tests.unit.document_understanding_root.test_operating_relation_production::test_non_event_description_needs_no_offset_names_or_context_view[\\u516c\\u53f8\\u4ea7\\u54c1\\u5305\\u62ec\\u7cbe\\u5bc6\\u4f20\\u611f\\u5668\\u4e0e\\u63a7\\u5236\\u5668\\u3002] [AssertionError]",
+          "raw_details": ""
+        },
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/zhengcb81/company-wiki/blob/2b0787dc1c5352cd8566fc71fc585afe735ec75c/.github",
+          "start_line": 32,
+          "start_column": null,
+          "end_line": 32,
+          "end_column": null,
+          "annotation_level": "failure",
+          "title": "Failure group inventory",
+          "message": "tests.unit.document_understanding_selection.test_reading_reporting_basis::test_reporting_scope_and_future_investment_limits_are_preserved [AssertionError] x1\ntests.unit.document_understanding_selection.test_reading_reporting_basis::test_multi_metric_definition_is_not_misclassified_as_reported_growth [AssertionError] x1\ntests.unit.document_understanding_selection.test_reading_reporting_basis::test_metric_formula_with_coordinated_metric_noun_is_not_a_new_observed_fact [AssertionError] x2\ntests.unit.document_understanding_selection.test_reading_reporting_basis::test_growth_in_a_metric_definition_label_is_not_an_observed_change [AssertionError] x2\ntests.unit.document_understanding_selection.test_reading_reporting_rule_boundaries::test_actual_customer_business_and_currency_exposure_are_preserved [unknown_error] x1\ntests.unit.document_understanding_selection.test_source_support_use::test_source_session_shares_one_role_assessment_without_repeated_scans [TypeError] x1\ntests.unit.document_understanding_selection.test_source_support_use::test_direct_admission_projects_use_and_relevance_from_one_preparation [TypeError] x1\ntests.unit.du11_production.test_operating_argument_axes::test_explicit_manufacturing_argument_does_not_need_a_known_product_suffix [AssertionError] x8\ntests.unit.du11_production.test_source_description_relations::test_closed_source_enumeration_and_impact_are_language_independent [AssertionError] x2\ntests.unit.du11_production.test_source_description_relations::test_compatibility_event_policy_does_not_implicitly_opt_in_source_rosters [AssertionError] x2\ntests.unit.du11_production.test_source_measurement_scope_and_enumeration::test_nonbusiness_results_and_nonassertions_do_not_gain_fact_support [AssertionError] x1\ntests.unit.du11_production.test_source_measurement_scope_and_enumeration::test_closed_named_service_scope_has_material_payload_without_a_type_dictionary [AssertionError] x5\ntests.unit.du11_production.test_source_measurement_scope_and_enumeration::test_real_business_proof_is_not_erased_by_rounding_vocabulary [AssertionError] x1\ntests.unit.du11_production.test_source_observed_business_scope::test_closed_observed_scope_is_material_without_requiring_growth [AssertionError] x2",
+          "raw_details": ""
+        },
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/zhengcb81/company-wiki/blob/2b0787dc1c5352cd8566fc71fc585afe735ec75c/.github",
+          "start_line": 15,
+          "start_column": null,
+          "end_line": 15,
+          "end_column": null,
+          "annotation_level": "failure",
+          "title": "",
+          "message": "tests.unit.document_understanding_root.test_operating_relation_production::test_independent_description_survives_empty_relation_result[\\u516c\\u53f8\\u4ea7\\u54c1\\u5305\\u62ec\\u7cbe\\u5bc6\\u4f20\\u611f\\u5668\\u4e0e\\u63a7\\u5236\\u5668\\u3002-core_business] [unknown_error]\nFailure groups (70 failed cases):\ntests.unit.document_understanding_root.test_operating_relation_production::test_independent_description_survives_empty_relation_result [unknown_error] x1\ntests.unit.document_understanding_root.test_operating_relation_production::test_non_event_description_needs_no_offset_names_or_context_view [AssertionError] x1\ntests.unit.document_understanding_root.test_qualitative_operating_intent::test_specific_qualitative_operating_intent_is_useful_source_material [AssertionError] x11\ntests.unit.document_understanding_root.test_turn_plan_qualification::test_same_turn_plan_limitation_is_model_material_and_card_support [unknown_error] x2\ntests.unit.document_understanding_root.test_turn_plan_qualification::test_chinese_plan_retains_uncertainty_without_promoting_unknown_speaker [unknown_error] x2\ntests.unit.document_understanding_selection.test_reading_material_value::test_readable_generic_benefits_are_background_not_scarce_fact_material [AssertionError] x2\ntests.unit.document_understanding_selection.test_reading_material_value::test_real_source_selection_retains_distinct_business_information_in_twelve_spans [AssertionError] x1\ntests.unit.document_understanding_selection.test_reading_named_portfolio_drivers::test_issuer_owned_named_portfolio_is_concrete_business_structure [AssertionError] x4\ntests.unit.document_understanding_selection.test_reading_named_portfolio_drivers::test_actual_named_shareholder_relationship_is_source_scope_not_consolidation [AssertionError] x1\ntests.unit.document_understanding_selection.test_reading_named_portfolio_drivers::test_legacy_detector_remains_unextended_for_named_relationships [AssertionError] x1\ntests.unit.document_understanding_selection.test_reading_portfolio_disclosure::test_observed_concrete_portfolio_does_not_need_repeated_issuer_pronoun [AssertionError] x9\ntests.unit.document_understanding_selection.test_reading_portfolio_disclosure::test_source_disclosed_foreign_actor_is_preserved_without_issuer_or_consolidation_inference [AssertionError] x1\ntests.unit.document_understanding_selection.test_reading_reporting_basis::test_company_metric_definitions_are_readable_without_becoming_actual_metrics [AssertionError] x2\ntests.unit.document_understanding_selection.test_reading_reporting_basis::test_updated_reporting_definition_survives_a_long_flat_native_paragraph [AssertionError] x1\ntests.unit.document_understanding_selection.test_reading_reporting_basis::test_mechanical_outlook_recast_is_retained_without_inventing_growth [AssertionError] x1",
+          "raw_details": ""
+        },
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/zhengcb81/company-wiki/blob/2b0787dc1c5352cd8566fc71fc585afe735ec75c/.github",
+          "start_line": 1421,
+          "start_column": null,
+          "end_line": 1421,
+          "end_column": null,
+          "annotation_level": "failure",
+          "title": "",
+          "message": "Process completed with exit code 1.",
+          "raw_details": ""
+        },
+        {
+          "path": ".github",
+          "blob_href": "https://github.com/zhengcb81/company-wiki/blob/2b0787dc1c5352cd8566fc71fc585afe735ec75c/.github",
+          "start_line": 1,
+          "start_column": null,
+          "end_line": 1,
+          "end_column": null,
+          "annotation_level": "notice",
+          "title": "",
+          "message": "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\"",
+          "raw_details": ""
+        }
+      ]
+    }
+  ]
+}

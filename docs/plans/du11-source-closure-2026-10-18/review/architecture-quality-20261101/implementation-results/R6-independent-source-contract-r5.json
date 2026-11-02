@@ -1,0 +1,493 @@
+{
+  "schema_version": "independent-source-contract-r5/1",
+  "status": "CONTRACT_MISMATCH_CONFIRMED_REDESIGN_REQUIRED",
+  "reviewer": "/root/rectification_review_a",
+  "date": "2026-11-02",
+  "reference": "2b0787dc1c5352cd8566fc71fc585afe735ec75c",
+  "review_mode": "read-only requirements/contracts/consumers; no product execution",
+  "ci": {
+    "run": 41373840648,
+    "head_sha": "2b0787dc1c5352cd8566fc71fc585afe735ec75c",
+    "conclusion": "failure",
+    "receipt_sha256": "9c39b5e3f54698ae086ba0e27befcf21e520fd2282fb9ae0fe7d2847f73ab36c",
+    "group_count": 29,
+    "case_count": 70,
+    "by_file": {
+      "tests/unit/document_understanding_selection/test_reading_reporting_basis.py": 10,
+      "tests/unit/document_understanding_selection/test_reading_reporting_rule_boundaries.py": 1,
+      "tests/unit/document_understanding_selection/test_source_support_use.py": 2,
+      "tests/unit/du11_production/test_operating_argument_axes.py": 8,
+      "tests/unit/du11_production/test_source_description_relations.py": 4,
+      "tests/unit/du11_production/test_source_measurement_scope_and_enumeration.py": 7,
+      "tests/unit/du11_production/test_source_observed_business_scope.py": 2,
+      "tests/unit/document_understanding_root/test_operating_relation_production.py": 2,
+      "tests/unit/document_understanding_root/test_qualitative_operating_intent.py": 11,
+      "tests/unit/document_understanding_root/test_turn_plan_qualification.py": 4,
+      "tests/unit/document_understanding_selection/test_reading_material_value.py": 3,
+      "tests/unit/document_understanding_selection/test_reading_named_portfolio_drivers.py": 6,
+      "tests/unit/document_understanding_selection/test_reading_portfolio_disclosure.py": 10
+    },
+    "groups": {
+      "tests.unit.document_understanding_selection.test_reading_reporting_basis::test_reporting_scope_and_future_investment_limits_are_preserved": {
+        "error_type": "AssertionError",
+        "failed_cases": 1,
+        "path": "tests/unit/document_understanding_selection/test_reading_reporting_basis.py",
+        "first_line": 85,
+        "function_source": "def test_reporting_scope_and_future_investment_limits_are_preserved(text, reason):\n    fact = detect_reading_business_fact(text)\n\n    assert fact.eligible\n    assert reason in fact.reasons\n    assert source_purpose(text) not in NON_OPERATING_PURPOSES\n    assert _admitted(unit(text), {\"section_role\": \"business\"}, \"background\", fact=fact)[0]"
+      },
+      "tests.unit.document_understanding_selection.test_reading_reporting_basis::test_multi_metric_definition_is_not_misclassified_as_reported_growth": {
+        "error_type": "AssertionError",
+        "failed_cases": 1,
+        "path": "tests/unit/document_understanding_selection/test_reading_reporting_basis.py",
+        "first_line": 200,
+        "function_source": "def test_multi_metric_definition_is_not_misclassified_as_reported_growth():\n    text = (\n        \"Commercial bookings growth: sum of revenue growth for commercial cloud \"\n        \"services plus changes in deferred revenue and contracted amounts not yet \"\n        \"billed. Commercial remaining performance obligation: revenue allocated \"\n        \"to remaining customer services, including amounts expected to be recognized \"\n        \"in future periods.\"\n    )\n    fact = detect_reading_business_fact(text)\n\n    assert fact.eligible\n    assert \"reporting_metric_definition\" in fact.reasons\n    assert \"operating_metric_change\" not in fact.reasons\n    assert \"business_revenue_measure\" not in fact.reasons"
+      },
+      "tests.unit.document_understanding_selection.test_reading_reporting_basis::test_metric_formula_with_coordinated_metric_noun_is_not_a_new_observed_fact": {
+        "error_type": "AssertionError",
+        "failed_cases": 2,
+        "path": "tests/unit/document_understanding_selection/test_reading_reporting_basis.py",
+        "first_line": 216,
+        "function_source": "def test_metric_formula_with_coordinated_metric_noun_is_not_a_new_observed_fact(text):\n    fact = detect_reading_business_fact(text)\n\n    assert fact.eligible\n    assert \"reporting_metric_definition\" in fact.reasons\n    assert \"operating_metric_change\" not in fact.reasons"
+      },
+      "tests.unit.document_understanding_selection.test_reading_reporting_basis::test_growth_in_a_metric_definition_label_is_not_an_observed_change": {
+        "error_type": "AssertionError",
+        "failed_cases": 2,
+        "path": "tests/unit/document_understanding_selection/test_reading_reporting_basis.py",
+        "first_line": 244,
+        "function_source": "def test_growth_in_a_metric_definition_label_is_not_an_observed_change(text):\n    fact = detect_reading_business_fact(text)\n\n    assert fact.eligible\n    assert \"reporting_metric_definition\" in fact.reasons\n    assert \"operating_metric_change\" not in fact.reasons"
+      },
+      "tests.unit.document_understanding_selection.test_reading_reporting_rule_boundaries::test_actual_customer_business_and_currency_exposure_are_preserved": {
+        "error_type": "unknown_error",
+        "failed_cases": 1,
+        "path": "tests/unit/document_understanding_selection/test_reading_reporting_rule_boundaries.py",
+        "first_line": 49,
+        "function_source": "def test_actual_customer_business_and_currency_exposure_are_preserved(text):\n    assert source_purpose(text) not in NON_OPERATING_PURPOSES\n    assert _admitted(unit(text), {\"section_role\": \"business\"}, \"background\")[0]"
+      },
+      "tests.unit.document_understanding_selection.test_source_support_use::test_source_session_shares_one_role_assessment_without_repeated_scans": {
+        "error_type": "TypeError",
+        "failed_cases": 1,
+        "path": "tests/unit/document_understanding_selection/test_source_support_use.py",
+        "first_line": 442,
+        "function_source": "def test_source_session_shares_one_role_assessment_without_repeated_scans(monkeypatch):\n    from company_wiki.document_understanding.operating_states import assertion_roles\n    from company_wiki.source_catalog.narrative_operating_relations import SourceOperatingSession\n    from company_wiki.source_catalog.narrative_support_use import source_support_use\n    from company_wiki.resource_budget import WorkBudget\n    text=\"Our equipment is used by hospitals to sterilise surgical tools.\"\n    parsed,_=source_fixture([(text,)])\n    uid=parsed.units[0].unit_id\n    session=SourceOperatingSession({uid:parsed.units[0]},work_budget=WorkBudget(100000))\n    actual=assertion_roles.prepare_source_assertions\n    calls=[]\n    def observed(value):\n        calls.append(value)\n        return actual(value)\n    monkeypatch.setattr(assertion_roles,\"prepare_source_assertions\",observed)\n    for _ in range(4):\n        fact=session.fact(uid)\n        assert source_support_use(text,fact=fact,financial_only=session.financial_only(uid),\n            source_relations=session.relations(uid),support_unit_ids=(uid,),\n            source_roles=session.source_assertions(uid))[0]==\"support\"\n    assert calls==[text] and session.complete"
+      },
+      "tests.unit.document_understanding_selection.test_source_support_use::test_direct_admission_projects_use_and_relevance_from_one_preparation": {
+        "error_type": "TypeError",
+        "failed_cases": 1,
+        "path": "tests/unit/document_understanding_selection/test_source_support_use.py",
+        "first_line": 682,
+        "function_source": "def test_direct_admission_projects_use_and_relevance_from_one_preparation(monkeypatch):\n    from company_wiki.document_understanding.operating_states import assertion_roles\n    from company_wiki.source_catalog import narrative_support_use\n    from company_wiki.source_catalog.n6_candidate_operating_facts import OperatingFact\n    text='Our platform routes customer workloads through partner infrastructure.'\n    parsed,_=_selection_support_case([text])\n    actual=assertion_roles.prepare_source_assertions\n    calls=[]\n    def observed(value):\n        calls.append(value)\n        return actual(value)\n    monkeypatch.setattr(assertion_roles,'prepare_source_assertions',observed)\n    monkeypatch.setattr(narrative_support_use,'prepare_source_assertions',observed)\n    assert reading._admitted(parsed.units[0],{},'background',fact=OperatingFact(),financial_only=False)[0]\n    assert calls==[text]"
+      },
+      "tests.unit.du11_production.test_operating_argument_axes::test_explicit_manufacturing_argument_does_not_need_a_known_product_suffix": {
+        "error_type": "AssertionError",
+        "failed_cases": 8,
+        "path": "tests/unit/du11_production/test_operating_argument_axes.py",
+        "first_line": 8,
+        "function_source": "def test_explicit_manufacturing_argument_does_not_need_a_known_product_suffix(text):\n    session, _ = session_for([text])\n    uid = unit_id(0)\n    assert observed_use(session, uid)[0] == 'unresolved'\n    assert source_narrative_relevance(fact=session.fact(uid), source_roles=session.source_assertions(uid))\n    result = session.relations(uid)\n    bound = session.engine.relation_bindings(uid)\n    assert not any(bound)\n    assert session.engine.unknown_argument(uid)\n    relations = result['relations']\n    if 'currently manufacture qx' not in text:\n        assert all(r['polarity'] == 'negative' for r in relations)\n    assert all(r['object_refs'] for r in relations)\n    for relation in relations:\n        for ref in relation['object_refs']:\n            assert text[ref['char_start']:ref['char_end']]\n        if text.startswith('The supplier'):\n            assert relation['attribution'] != 'issuer'"
+      },
+      "tests.unit.du11_production.test_source_description_relations::test_closed_source_enumeration_and_impact_are_language_independent": {
+        "error_type": "AssertionError",
+        "failed_cases": 2,
+        "path": "tests/unit/du11_production/test_source_description_relations.py",
+        "first_line": 95,
+        "function_source": "def test_closed_source_enumeration_and_impact_are_language_independent(text):\n    session,_=session_for([text])\n    assert observed_use(session,unit_id(0))[0]=='support'"
+      },
+      "tests.unit.du11_production.test_source_description_relations::test_compatibility_event_policy_does_not_implicitly_opt_in_source_rosters": {
+        "error_type": "AssertionError",
+        "failed_cases": 2,
+        "path": "tests/unit/du11_production/test_source_description_relations.py",
+        "first_line": 160,
+        "function_source": "def test_compatibility_event_policy_does_not_implicitly_opt_in_source_rosters(text):\n    from company_wiki.source_catalog.narrative_business_groups import _operating_fact\n    session,_=session_for([text])\n    assert observed_use(session,unit_id(0))[0]=='support'\n    assert not _operating_fact(text).eligible"
+      },
+      "tests.unit.du11_production.test_source_measurement_scope_and_enumeration::test_nonbusiness_results_and_nonassertions_do_not_gain_fact_support": {
+        "error_type": "AssertionError",
+        "failed_cases": 1,
+        "path": "tests/unit/du11_production/test_source_measurement_scope_and_enumeration.py",
+        "first_line": 79,
+        "function_source": "def test_nonbusiness_results_and_nonassertions_do_not_gain_fact_support(text):\n    result = prepare_reading_business_assessment(text, {\"relations\": []})\n    assert result.passage.use != \"support\" and not result.passage.relevant"
+      },
+      "tests.unit.du11_production.test_source_measurement_scope_and_enumeration::test_closed_named_service_scope_has_material_payload_without_a_type_dictionary": {
+        "error_type": "AssertionError",
+        "failed_cases": 5,
+        "path": "tests/unit/du11_production/test_source_measurement_scope_and_enumeration.py",
+        "first_line": 91,
+        "function_source": "def test_closed_named_service_scope_has_material_payload_without_a_type_dictionary(text):\n    roles = prepare_source_assertions(text)\n    assert roles.independent_payload is True\n    assert any(clause.material_payload for clause in roles.clauses)\n    session, _ = session_for([text])\n    uid = unit_id(0)\n    assert session.source_passage(uid).use == \"support\"\n    assert reading_material_value(session.fact(uid), source_roles=session.source_assertions(uid)) == \"meaningful_fact\"\n    assert session.source_text(uid) == text"
+      },
+      "tests.unit.du11_production.test_source_measurement_scope_and_enumeration::test_real_business_proof_is_not_erased_by_rounding_vocabulary": {
+        "error_type": "AssertionError",
+        "failed_cases": 1,
+        "path": "tests/unit/du11_production/test_source_measurement_scope_and_enumeration.py",
+        "first_line": 149,
+        "function_source": "def test_real_business_proof_is_not_erased_by_rounding_vocabulary(text):\n    session, _ = session_for([text])\n    passage = session.source_passage(unit_id(0))\n    assert passage.use == \"support\" and passage.relevant"
+      },
+      "tests.unit.du11_production.test_source_observed_business_scope::test_closed_observed_scope_is_material_without_requiring_growth": {
+        "error_type": "AssertionError",
+        "failed_cases": 2,
+        "path": "tests/unit/du11_production/test_source_observed_business_scope.py",
+        "first_line": 9,
+        "function_source": "def test_closed_observed_scope_is_material_without_requiring_growth(text):\n    session, _ = session_for([text])\n    roles = session.source_assertions(unit_id(0))\n    assert roles.independent_payload is True\n    assert not roles.descriptive_only\n    assert reading_material_value(session.fact(unit_id(0)), source_roles=roles) == \"meaningful_fact\""
+      },
+      "tests.unit.document_understanding_root.test_operating_relation_production::test_independent_description_survives_empty_relation_result": {
+        "error_type": "unknown_error",
+        "failed_cases": 1,
+        "path": "tests/unit/document_understanding_root/test_operating_relation_production.py",
+        "first_line": 112,
+        "function_source": "def test_independent_description_survives_empty_relation_result(text, topic):\n    parsed, pipeline = native([(text,)])\n    candidates, *_rest = reading._candidates(parsed, pipeline)\n    assert candidates and topic in candidates[0].topics"
+      },
+      "tests.unit.document_understanding_root.test_operating_relation_production::test_non_event_description_needs_no_offset_names_or_context_view": {
+        "error_type": "AssertionError",
+        "failed_cases": 1,
+        "path": "tests/unit/document_understanding_root/test_operating_relation_production.py",
+        "first_line": 256,
+        "function_source": "def test_non_event_description_needs_no_offset_names_or_context_view(text, monkeypatch):\n    from company_wiki.source_catalog.narrative_operating_relations import SourceOperatingSession\n    parsed, _ = native([(text,), (\"控股股东海岸公司已量产产品，是否已经商业化？\",)])\n    def forbidden(*_args, **_kwargs):\n        pytest.fail(\"no-event description prepared heavy operating state machinery\")\n    monkeypatch.setattr(relations, \"build_matching_view\", forbidden)\n    monkeypatch.setattr(relations, \"build_prepared_matching_view\", forbidden)\n    monkeypatch.setattr(relations, \"_scan_name_classes\", forbidden)\n    monkeypatch.setattr(relations, \"_clause_events\", forbidden)\n    session = SourceOperatingSession({u.unit_id: u for u in parsed.units}, work_budget=WorkBudget(100000),\n        contexts={parsed.units[0].unit_id: (parsed.units[1].unit_id,)})\n    assert session.fact(parsed.units[0].unit_id).eligible\n    assert session.relations(parsed.units[0].unit_id)[\"relations\"] == []\n    assert not session.engine._views"
+      },
+      "tests.unit.document_understanding_root.test_qualitative_operating_intent::test_specific_qualitative_operating_intent_is_useful_source_material": {
+        "error_type": "AssertionError",
+        "failed_cases": 11,
+        "path": "tests/unit/document_understanding_root/test_qualitative_operating_intent.py",
+        "first_line": 12,
+        "function_source": "def test_specific_qualitative_operating_intent_is_useful_source_material(text):\n    fact = detect_reading_business_fact(text)\n    assert fact.eligible\n    assert \"operating_plan\" in fact.reasons\n    assert fact.purpose == \"operating\"\n    assert \"applied_operating_milestone\" not in fact.reasons"
+      },
+      "tests.unit.document_understanding_root.test_turn_plan_qualification::test_same_turn_plan_limitation_is_model_material_and_card_support": {
+        "error_type": "unknown_error",
+        "failed_cases": 2,
+        "path": "tests/unit/document_understanding_root/test_turn_plan_qualification.py",
+        "first_line": 40,
+        "function_source": "def test_same_turn_plan_limitation_is_model_material_and_card_support(mime):\n    selected = select(['Speaker 1 00:00 When will production begin?', PLAN, LIMIT,\n                       'Speaker 1 01:00 Is this final?'], mime)\n    request = build_model_request(selected, reading_projection_version='reading-model-input/5')\n    assert PLAN in request.data_json\n    assert LIMIT in request.data_json\n    assert any(PLAN in text and LIMIT in text for text in card_texts(selected))\n    assert all(claim['modality'] != 'actual'\n               for claim in compile_extractive_plan(selected).draft['claims'])"
+      },
+      "tests.unit.document_understanding_root.test_turn_plan_qualification::test_chinese_plan_retains_uncertainty_without_promoting_unknown_speaker": {
+        "error_type": "unknown_error",
+        "failed_cases": 2,
+        "path": "tests/unit/document_understanding_root/test_turn_plan_qualification.py",
+        "first_line": 59,
+        "function_source": "def test_chinese_plan_retains_uncertainty_without_promoting_unknown_speaker(mime):\n    plan = '说话人2 00:20 公司计划更新产品。'\n    limitation = '但具体计划尚未确定，可能会发生变化。'\n    selected = select(['说话人1 00:00 请问产品何时发布？', plan, limitation], mime)\n    assert any(plan in text and limitation in text for text in card_texts(selected))\n    assert all(span.structured_value['source_role'] == 'unknown'\n               for span in selected.evidence_spans)"
+      },
+      "tests.unit.document_understanding_selection.test_reading_material_value::test_readable_generic_benefits_are_background_not_scarce_fact_material": {
+        "error_type": "AssertionError",
+        "failed_cases": 2,
+        "path": "tests/unit/document_understanding_selection/test_reading_material_value.py",
+        "first_line": 109,
+        "function_source": "def test_readable_generic_benefits_are_background_not_scarce_fact_material(text):\n    fact = policy.detect_reading_business_fact(text)\n    assert fact.eligible, \"Keep source recall; lower material value rather than blacklisting its words\"\n    assert value(fact) == \"description\""
+      },
+      "tests.unit.document_understanding_selection.test_reading_material_value::test_real_source_selection_retains_distinct_business_information_in_twelve_spans": {
+        "error_type": "AssertionError",
+        "failed_cases": 1,
+        "path": "tests/unit/document_understanding_selection/test_reading_material_value.py",
+        "first_line": 141,
+        "function_source": "def test_real_source_selection_retains_distinct_business_information_in_twelve_spans(language):\n    if language == \"zh\":\n        noise = [f\"本公司坚持以客户为中心，通过高质量服务提升客户研发效率，服务宗旨第{i}项。\" for i in range(24)]\n        facts = (SCOPES[0], GEOGRAPHIES[0], CONTRACTS[0],\n                 \"本公司新设备已交付海外客户，产线产能利用率达到85%。\")\n    else:\n        noise = [f\"Our service platform aims to improve customer efficiency and reduce customer costs, principle {i}.\"\n                 for i in range(24)]\n        facts = (SCOPES[2], GEOGRAPHIES[2], CONTRACTS[1],\n                 \"Our managed data platform charges customers based on storage consumed and computation used.\")\n    result = select_narrative_evidence(document((*noise, *facts), language), title=\"Annual report\",\n        existing_kind=\"annual_report\", selector_version=\"0.9.0\", max_selected=12)\n    selected = {span.raw_text for span in result.evidence_spans}\n    assert set(facts) <= selected\n    assert len(result.evidence_spans) <= 12\n    assert sum(len(span.raw_text or \"\") for span in result.evidence_spans) <= 48000"
+      },
+      "tests.unit.document_understanding_selection.test_reading_named_portfolio_drivers::test_issuer_owned_named_portfolio_is_concrete_business_structure": {
+        "error_type": "AssertionError",
+        "failed_cases": 4,
+        "path": "tests/unit/document_understanding_selection/test_reading_named_portfolio_drivers.py",
+        "first_line": 10,
+        "function_source": "def test_issuer_owned_named_portfolio_is_concrete_business_structure(text):\n    fact = detect_reading_business_fact(text)\n    assert fact.eligible and 'brand_portfolio_structure' in fact.reasons"
+      },
+      "tests.unit.document_understanding_selection.test_reading_named_portfolio_drivers::test_actual_named_shareholder_relationship_is_source_scope_not_consolidation": {
+        "error_type": "AssertionError",
+        "failed_cases": 1,
+        "path": "tests/unit/document_understanding_selection/test_reading_named_portfolio_drivers.py",
+        "first_line": 21,
+        "function_source": "def test_actual_named_shareholder_relationship_is_source_scope_not_consolidation(text):\n    fact = detect_reading_business_fact(text)\n    assert fact.eligible and 'business_ownership_scope' in fact.reasons\n    assert 'consolidated' not in fact.reasons"
+      },
+      "tests.unit.document_understanding_selection.test_reading_named_portfolio_drivers::test_legacy_detector_remains_unextended_for_named_relationships": {
+        "error_type": "AssertionError",
+        "failed_cases": 1,
+        "path": "tests/unit/document_understanding_selection/test_reading_named_portfolio_drivers.py",
+        "first_line": 72,
+        "function_source": "def test_legacy_detector_remains_unextended_for_named_relationships():\n    text = 'Our brand portfolio comprises Alpha, Beta and Gamma.'\n    assert not detect_business_fact(text).eligible\n    assert detect_reading_business_fact(text).eligible"
+      },
+      "tests.unit.document_understanding_selection.test_reading_portfolio_disclosure::test_observed_concrete_portfolio_does_not_need_repeated_issuer_pronoun": {
+        "error_type": "AssertionError",
+        "failed_cases": 9,
+        "path": "tests/unit/document_understanding_selection/test_reading_portfolio_disclosure.py",
+        "first_line": 10,
+        "function_source": "def test_observed_concrete_portfolio_does_not_need_repeated_issuer_pronoun(text):\n    fact = detect_reading_business_fact(text)\n    assert fact.eligible and \"brand_portfolio_structure\" in fact.reasons"
+      },
+      "tests.unit.document_understanding_selection.test_reading_portfolio_disclosure::test_source_disclosed_foreign_actor_is_preserved_without_issuer_or_consolidation_inference": {
+        "error_type": "AssertionError",
+        "failed_cases": 1,
+        "path": "tests/unit/document_understanding_selection/test_reading_portfolio_disclosure.py",
+        "first_line": 47,
+        "function_source": "def test_source_disclosed_foreign_actor_is_preserved_without_issuer_or_consolidation_inference():\n    text = \"Independent Delta集團的品牌組合，包括NorthPeak、HarborSport及CedarActive，該集團為獨立上市公司，並非本公司合併分部。\"\n    source = source_id_for_sha256(\"c\" * 64)\n    unit = _make_unit(source_id=source, parser_version=\"0.1.1\", coordinates=EvidenceCoordinates(paragraph_index=0),\n        raw_text=text, unit_kind=\"html_paragraph\", source_role=\"company_filing\", language=\"mixed\", metadata={})\n    parsed = DocumentStructure(source, \"c\" * 64, \"mixed\", (unit,), mime_type=\"text/html\", line_count=1)\n    selected = select_narrative_evidence(parsed, title=\"Company update\", selector_version=\"0.9.0\", max_selected=8)\n    assert [span.raw_text for span in selected.evidence_spans] == [text]\n    assert selected.evidence_spans[0].coordinates == unit.coordinates\n    assert \"brand_portfolio_structure\" in detect_reading_business_fact(text).reasons\n    assert \"consolidated\" not in detect_reading_business_fact(text).reasons"
+      },
+      "tests.unit.document_understanding_selection.test_reading_reporting_basis::test_company_metric_definitions_are_readable_without_becoming_actual_metrics": {
+        "error_type": "AssertionError",
+        "failed_cases": 2,
+        "path": "tests/unit/document_understanding_selection/test_reading_reporting_basis.py",
+        "first_line": 35,
+        "function_source": "def test_company_metric_definitions_are_readable_without_becoming_actual_metrics(text):\n    fact = detect_reading_business_fact(text)\n\n    assert fact.eligible\n    assert fact.purpose == \"operating_metric_basis\"\n    assert any(reason.startswith(\"reporting_metric_definition\") for reason in fact.reasons)\n    assert not {\"operating_quantity\", \"operating_metric_change\", \"business_revenue_measure\"} & set(fact.reasons)\n    assert source_purpose(text) not in NON_OPERATING_PURPOSES"
+      },
+      "tests.unit.document_understanding_selection.test_reading_reporting_basis::test_updated_reporting_definition_survives_a_long_flat_native_paragraph": {
+        "error_type": "AssertionError",
+        "failed_cases": 1,
+        "path": "tests/unit/document_understanding_selection/test_reading_reporting_basis.py",
+        "first_line": 52,
+        "function_source": "def test_updated_reporting_definition_survives_a_long_flat_native_paragraph():\n    text = (\n        \"Azure revenue growth metric definition has been updated to reflect a move \"\n        \"of services to a different reported business. \"\n        + \"Prior metric descriptions and scope notes remain source context. \" * 45\n    )\n    assert len(text) > 1200\n\n    clauses = _reading_clauses(text)\n    fact = detect_reading_business_fact(text)\n\n    assert clauses and \"Azure revenue growth metric definition\" in clauses[0]\n    assert fact.eligible\n    assert \"reporting_definition_change\" in fact.reasons\n    assert \"reporting_metric_definition\" in fact.reasons\n    assert \"operating_metric_change\" not in fact.reasons\n    assert _admitted(unit(text), {\"section_role\": \"business\"}, \"background\", fact=fact)[0]"
+      },
+      "tests.unit.document_understanding_selection.test_reading_reporting_basis::test_mechanical_outlook_recast_is_retained_without_inventing_growth": {
+        "error_type": "AssertionError",
+        "failed_cases": 1,
+        "path": "tests/unit/document_understanding_selection/test_reading_reporting_basis.py",
+        "first_line": 71,
+        "function_source": "def test_mechanical_outlook_recast_is_retained_without_inventing_growth():\n    text = (\n        \"Our FY28 Q1 revenue outlook has only mechanical adjustments for the reporting \"\n        \"changes; our total company revenue outlook is unchanged.\"\n    )\n    fact = detect_reading_business_fact(text)\n\n    assert fact.eligible\n    assert \"reporting_outlook_recast\" in fact.reasons\n    assert \"source_revenue_guidance\" not in fact.reasons\n    assert \"operating_metric_change\" not in fact.reasons\n    assert _admitted(unit(text), {\"section_role\": \"business\"}, \"background\", fact=fact)[0]"
+      }
+    },
+    "bounded_public_annotations_only": true,
+    "limit": "Group unknown_error lacks full authenticated stack. Do not fabricate exact failing parameter or assume all68 nonspy failures share one mechanism."
+  },
+  "canonical_scope": "company-wiki source discovery, immutable raw, extraction quality/evidence, retrieval/export. No world-truth adjudication/investment acceptance.",
+  "primary_module_contracts": {
+    "src/company_wiki/source_catalog/n6_candidate_operating_facts.py": "Generic operating-fact recall rules for narrative candidates (N6-CANDIDATE).\n\nPlain-language patterns only: operating object plus action/status, quantified\nstructure, industry demand/supply change, corporate development, fundraising\nproject use, and demand exceeding capacity. No company-name allowlists, no\nsemantic truth claims: forecasts, plans and negations keep their source wording.",
+    "src/company_wiki/source_catalog/narrative_business_disclosures.py": "Bounded source disclosure relations and material value, never issuer facts.\n\nCalled on the existing normalized clause view. These observations label the\nuses of the unchanged source, not its truth, issuer attribution or completion.\nThe budget planner consumes the existing value/topic fields and reads no text."
+  },
+  "field_matrix": [
+    {
+      "field": "OperatingFact.eligible",
+      "responsibility": "source reading candidate has operating information; broad source recall",
+      "not": "verified real-world event, completed milestone, issuer/consolidation or investment truth"
+    },
+    {
+      "field": "SourceAssertionRoles.independent_payload",
+      "responsibility": "self-contained specific source information vs demonstrated genericFalse vs unresolvedNone",
+      "not": "truth/completion/polarity certification; True can be source roster/qualitative plan"
+    },
+    {
+      "field": "source_scope",
+      "responsibility": "kind of source-declared relationship/scope",
+      "not": "automaticfactFalse/description/no material"
+    },
+    {
+      "field": "reading_material_value",
+      "responsibility": "source information specificity/usefulness for finite selection",
+      "not": "world truth, numeric/event proof or mandatory downgrade of all scopes"
+    },
+    {
+      "field": "source_support_use/relevance",
+      "responsibility": "exact closed support/unfinished source words/context, no donation",
+      "not": "externalverification; unresolved may remain relevant for unknown bound arguments"
+    },
+    {
+      "field": "relation bindings/modality/polarity/attribution",
+      "responsibility": "source-text actor/predicate/object/state/negation/conditions binding",
+      "not": "world verification or a prerequisite for all source material"
+    },
+    {
+      "field": "metric/unit/period owner",
+      "responsibility": "observed source number vs definition and attached units/period",
+      "not": "inferred from eligible/source_scope/value"
+    },
+    {
+      "field": "financial_exempt",
+      "responsibility": "bound source operating-use exception to routine accounting filter",
+      "not": "financial accuracy/whole-document/general permission"
+    },
+    {
+      "field": "assessment_complete",
+      "responsibility": "actual capability/work completion or partial/deferred",
+      "not": "absence of business or research completion"
+    }
+  ],
+  "diagnosis": [
+    "R4 universal scope fact-candidate veto conflates source material with event proof, strips old plans/metric definitions/rosters from compatibility and prepared fact projection.",
+    "R4 weakening named composition payload to dictionary-known member classes contradicts original explicit closed named roster contract without type dictionary.",
+    "Budget priority and source-card generation amplify the error: low value loses finite slots; unresolved unavailable generation can prevent complete plan/limitation from reaching actual model request.",
+    "Do not solve by positive blanket scope flag. Existing generic-benefit eligibleTrue/description, financial/template/WH/abstract negative and explicit unknown-argument relevant unresolved are distinct."
+  ],
+  "minimum_design": [
+    "Document original source semantics in same prepared-assessment owner; retain compatibility wire/field names initially, no new permission/receipt system.",
+    "Canonical bound source observation distinguishes claimkind/content specificity/modality/qualifier scope; original discourse/relation owners supply informative_scope vs genericdescription explicitly, not consumer reason-list inference.",
+    "Do not make source_scope implyfactFalse. Derive legacy eligible and material axes from informative source claims; event/current/numeric/issuer projection remains separate original binding owner.",
+    "Keep one prepared shared cache used by callbacks, projections, support/relevance/value and compat; no second scan/classifier.",
+    "Five weakfunction/goal counterexamples stayunknown because generic syntax supplies no independent material. Explicit membership/plan/metric-definition have their own bound source-content predicates and cannot require closed product/industry dictionary.",
+    "Retain shared WorkBudget actual precharge/memo and capability partial; ROOT spy migration preserves account assertion rather than removing cost checks."
+  ],
+  "old_contract_examples": [
+    {
+      "domain": "named_service_roster",
+      "positive": "Our services cover miralon, tressiq and zovren.",
+      "expect": "source materialTrue/meaningful/support without type dictionary, no event inference",
+      "negative": "unclosed list, value/success list, template/question"
+    },
+    {
+      "domain": "qualitative_intent",
+      "positive": "We hope to stabilize customer retention, but no schedule has been set.",
+      "expect": "eligible operating_plan, full qualifier, no actual/completed milestone",
+      "negative": "employee training, expense records, unrelated customer words, question"
+    },
+    {
+      "domain": "reporting_basis",
+      "positive": "company metric definition or mechanical outlook recast",
+      "expect": "eligible and useful definition/basis, no observed growth/number",
+      "negative": "textbook/audit/generic accounting definition"
+    },
+    {
+      "domain": "observed_scope",
+      "positive": "actual source customer composition/brand membership/sold range",
+      "expect": "material withoutgrowth; preserve foreign actor and no consolidation",
+      "negative": "bare names, target/future scope, hypothetical/example"
+    },
+    {
+      "domain": "unknown_manufacturing_argument",
+      "positive": "We do not manufacture KZ-4.",
+      "expect": "relevant unresolved source words while enginebindingFalse and negative attribution preserved",
+      "negative": "manufacture EBITDA/growth or whether proposition"
+    },
+    {
+      "domain": "generic_benefit",
+      "positive": "Our service platform aims to improve customer efficiency and reduce customer costs.",
+      "expect": "legacy source recall eligibleTrue, materialdescription, cannot occupy scarce fact slots",
+      "negative": "default-specific for unproved unknown weakfunction/goal"
+    }
+  ],
+  "previous_review_scope": {
+    "report": "R6-independent-ci-r4.md/json",
+    "action": "preserved unchanged as historical actual bounded result",
+    "correction": "Prior new scope-only nofact/description and blanket unknown-list expectations were overstrong product-contract interpretations. They must not override original source oracle. This is a review-design gap, not simply70 missing samples."
+  },
+  "known_root_owned_spies": [
+    "tests.unit.document_understanding_selection.test_source_support_use::test_source_session_shares_one_role_assessment_without_repeated_scans",
+    "tests.unit.document_understanding_selection.test_source_support_use::test_direct_admission_projects_use_and_relevance_from_one_preparation"
+  ],
+  "acceptance_next_major_node": [
+    "Original70 positive+adjacent negative and originalfive weak unknown controls, new arbitrary member names/object codes and incomplete/misbound variants.",
+    "One integrated synthetic whole source through shared assessment/finite selection/cards/model request/extractive modality: roster, qualitative plan+same-turn limitation, metric definition+separate observed number, weakaspiration and routinefinance.",
+    "Preserve original source test oracles; explicitly log only genuinely wrong newly introduced expectations as erratum. Exact full candidate CI green before merge, then actualH1/summary/cache/RF C."
+  ],
+  "evidence": {
+    "tests/unit/document_understanding_selection/test_reading_reporting_basis.py": {
+      "git_blob_sha256": "9a3cedbdc631ccabd7bab0079ea1876217fdf424c8bd4e47a2e5818e489e8287",
+      "reference": "2b0787dc1c5352cd8566fc71fc585afe735ec75c"
+    },
+    "tests/unit/document_understanding_selection/test_reading_reporting_rule_boundaries.py": {
+      "git_blob_sha256": "9f1bd5e872d1a5fa87b408d35ca23be14f1aba23b41c48385f9a22be2923b547",
+      "reference": "2b0787dc1c5352cd8566fc71fc585afe735ec75c"
+    },
+    "tests/unit/document_understanding_selection/test_source_support_use.py": {
+      "git_blob_sha256": "9391c3b2df4738c2feafabac328ef3ff9c6457955d9cb937842389bd658e0335",
+      "reference": "2b0787dc1c5352cd8566fc71fc585afe735ec75c"
+    },
+    "tests/unit/du11_production/test_operating_argument_axes.py": {
+      "git_blob_sha256": "873936ed0bf245d474d99c3551e2bdce90901eb832496dc74dde5406b6d281db",
+      "reference": "2b0787dc1c5352cd8566fc71fc585afe735ec75c"
+    },
+    "tests/unit/du11_production/test_source_description_relations.py": {
+      "git_blob_sha256": "04cfd80b25e6bc4393787656edb1a36bd0bf67b70338bfcab9bfefa008ec80b7",
+      "reference": "2b0787dc1c5352cd8566fc71fc585afe735ec75c"
+    },
+    "tests/unit/du11_production/test_source_measurement_scope_and_enumeration.py": {
+      "git_blob_sha256": "69a87d3eba80445f7726adad7c8240a9ba48acaccf5a7ba1ea53e7e8cca93ca5",
+      "reference": "2b0787dc1c5352cd8566fc71fc585afe735ec75c"
+    },
+    "tests/unit/du11_production/test_source_observed_business_scope.py": {
+      "git_blob_sha256": "b7622d6d7e987e55e31f0fd6437dcf73dfbe4b2dd2613de13970f235e0521908",
+      "reference": "2b0787dc1c5352cd8566fc71fc585afe735ec75c"
+    },
+    "tests/unit/document_understanding_root/test_operating_relation_production.py": {
+      "git_blob_sha256": "4ab5b55b1ac754b5c9d1570b63ed23175af2007a3aa679fb6af3d633a20b4523",
+      "reference": "2b0787dc1c5352cd8566fc71fc585afe735ec75c"
+    },
+    "tests/unit/document_understanding_root/test_qualitative_operating_intent.py": {
+      "git_blob_sha256": "b1632883049acee556100c90a770451f2ec8db34572a5a468002c1b2ce12b182",
+      "reference": "2b0787dc1c5352cd8566fc71fc585afe735ec75c"
+    },
+    "tests/unit/document_understanding_root/test_turn_plan_qualification.py": {
+      "git_blob_sha256": "05569e12b1cb98b5ae4224907a298b1e286b3d9c39ea47b021c97e66ac7efc5a",
+      "reference": "2b0787dc1c5352cd8566fc71fc585afe735ec75c"
+    },
+    "tests/unit/document_understanding_selection/test_reading_material_value.py": {
+      "git_blob_sha256": "5d3a16142ac0e21e4db836b65bc7809dd3b09d83fa1ebab9ad5699c450689407",
+      "reference": "2b0787dc1c5352cd8566fc71fc585afe735ec75c"
+    },
+    "tests/unit/document_understanding_selection/test_reading_named_portfolio_drivers.py": {
+      "git_blob_sha256": "043724f7e344e5a3a6afe7384c1828bcbe6319e922fad4a3df9274c6e77dc1e8",
+      "reference": "2b0787dc1c5352cd8566fc71fc585afe735ec75c"
+    },
+    "tests/unit/document_understanding_selection/test_reading_portfolio_disclosure.py": {
+      "git_blob_sha256": "8530159463f3c89d0bc2787b873a028e0c41af5a86d7f4f9ffbabc7ee309b255",
+      "reference": "2b0787dc1c5352cd8566fc71fc585afe735ec75c"
+    },
+    "src/company_wiki/source_catalog/n6_candidate_operating_facts.py": {
+      "git_blob_sha256": "4aeda5b2db84b9ca3fda60f8ec4e02f16ca1162bafb055eecbefc65aa69ec3b2",
+      "reference": "2b0787dc1c5352cd8566fc71fc585afe735ec75c"
+    },
+    "src/company_wiki/document_understanding/operating_states/assertion_roles.py": {
+      "git_blob_sha256": "6b1ced21eeab23bae38dba76f38068362c2c78e893acd11b911cfb0bcb33f681",
+      "reference": "2b0787dc1c5352cd8566fc71fc585afe735ec75c"
+    },
+    "src/company_wiki/source_catalog/narrative_business_disclosures.py": {
+      "git_blob_sha256": "b7727e1a5220ebd9638ea9fe5c62f999f12916b3247689adfb37f8e6523873f4",
+      "reference": "2b0787dc1c5352cd8566fc71fc585afe735ec75c"
+    },
+    "src/company_wiki/source_catalog/narrative_business_policy.py": {
+      "git_blob_sha256": "a6111eff52e16a80a603928fae98272b2c718d0c9b4fc516137bb96a59fe9a69",
+      "reference": "2b0787dc1c5352cd8566fc71fc585afe735ec75c"
+    },
+    "src/company_wiki/source_catalog/narrative_source_passage.py": {
+      "git_blob_sha256": "e616a223f8845abfe82a9354bb5c06243ce3f22255e93dd01773cb8854e87b67",
+      "reference": "2b0787dc1c5352cd8566fc71fc585afe735ec75c"
+    },
+    "src/company_wiki/source_catalog/narrative_source_context.py": {
+      "git_blob_sha256": "2b223273b56e1e6e55ff7e96bd8f6d57f4bc064c205d6e231606df9c83068038",
+      "reference": "2b0787dc1c5352cd8566fc71fc585afe735ec75c"
+    },
+    "src/company_wiki/source_catalog/narrative_support_use.py": {
+      "git_blob_sha256": "81322c4e473dd57e5f58bd9c00cb23f71488942a17925835cf3935e92ee8ab57",
+      "reference": "2b0787dc1c5352cd8566fc71fc585afe735ec75c"
+    },
+    "src/company_wiki/source_catalog/narrative_reading.py": {
+      "git_blob_sha256": "38d2259bedc53a7227cdbc4f8fd3fe380d15ce891175784037242994d00e8152",
+      "reference": "2b0787dc1c5352cd8566fc71fc585afe735ec75c"
+    },
+    "src/company_wiki/source_catalog/narrative_reading_admission.py": {
+      "git_blob_sha256": "3d36d288ee09610bd0d38b19e2c933f3008ea75aa842dfa02a60025401db4a26",
+      "reference": "2b0787dc1c5352cd8566fc71fc585afe735ec75c"
+    },
+    "src/company_wiki/source_catalog/narrative_budget.py": {
+      "git_blob_sha256": "113645934c00dd82491413b5f4165a4e632e0a4f959b18dc4d71c88fa6e14a66",
+      "reference": "2b0787dc1c5352cd8566fc71fc585afe735ec75c"
+    },
+    "src/company_wiki/document_understanding/source_cards.py": {
+      "git_blob_sha256": "db20b657f78bc99b5793331b9b5fff2f5990ff433b909dd1c68d408475fb1351",
+      "reference": "2b0787dc1c5352cd8566fc71fc585afe735ec75c"
+    },
+    "src/company_wiki/automation/narrative_model_extractive.py": {
+      "git_blob_sha256": "88621e757d35a2867ac7e0a5e3c4f58657d160f4984262e3439003d092f210a0",
+      "reference": "2b0787dc1c5352cd8566fc71fc585afe735ec75c"
+    }
+  },
+  "original_old_tests_unchanged_from_a684": {
+    "tests/unit/document_understanding_selection/test_reading_reporting_basis.py": true,
+    "tests/unit/document_understanding_selection/test_reading_reporting_rule_boundaries.py": true,
+    "tests/unit/document_understanding_selection/test_source_support_use.py": true,
+    "tests/unit/du11_production/test_operating_argument_axes.py": true,
+    "tests/unit/du11_production/test_source_description_relations.py": true,
+    "tests/unit/du11_production/test_source_measurement_scope_and_enumeration.py": true,
+    "tests/unit/du11_production/test_source_observed_business_scope.py": true,
+    "tests/unit/document_understanding_root/test_operating_relation_production.py": true,
+    "tests/unit/document_understanding_root/test_qualitative_operating_intent.py": true,
+    "tests/unit/document_understanding_root/test_turn_plan_qualification.py": true,
+    "tests/unit/document_understanding_selection/test_reading_material_value.py": true,
+    "tests/unit/document_understanding_selection/test_reading_named_portfolio_drivers.py": true,
+    "tests/unit/document_understanding_selection/test_reading_portfolio_disclosure.py": true
+  },
+  "codegraph": "Read-only main structural context consulted, index reflects main. Candidate-specific source responsibility bound to2b Git blobs; no index built.",
+  "tests_executed": 0,
+  "models_called": 0,
+  "originals_read": 0,
+  "temporary_artifacts_created": 0,
+  "writes": [
+    "implementation-results/R6-independent-source-contract-r5.md",
+    "implementation-results/R6-independent-source-contract-r5.json"
+  ],
+  "not_signed": [
+    "R5implementation",
+    "candidate completeCI",
+    "H1",
+    "paid summary",
+    "cache restoration",
+    "RFadoption",
+    "T3",
+    "whole goal"
+  ],
+  "agent_state": "STOP"
+}

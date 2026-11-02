@@ -1,32 +1,48 @@
-# R6当前交接 — 全面整改已恢复
+# 当前交接 — R6工程已并本地主线，正常发布与T3下一步
 
-唯一入口：[CURRENT_STATUS](CURRENT_STATUS.md)/json；选 `PLAN_ID=du11-source-closure-2026-10-18`、`PWF_PLAN_ROOT=docs/plans`。用户已恢复实施，不再执行历史暂停或再次 revert。细节和真实失败见 [R6-ROOT](review/architecture-quality-20261101/implementation-results/R6-ROOT.md)。
+唯一入口：[CURRENT_STATUS](CURRENT_STATUS.md)/[json](CURRENT_STATUS.json)。`PLAN_ID=du11-source-closure-2026-10-18`，`PWF_PLAN_ROOT=docs/plans`。用户已恢复实施，不执行历史暂停或再revert候选；ROOT唯一维护主PWF和集成。
 
-## 当前代码与所有权
+## 1. 当前代码和结果
 
-- ROOT master：daily精简已FF到819cef31，10项独审通过，候选完整CI41370513762成功；当前PWF提交后正常推主线。此前W23工具/PWF已848b4ee0推远端且主线CI41365435657成功。生产src/config/依赖未因W23改变。
-- ROOT自有 `tmp/architecture-r2`：`codex/architecture-rectification-r2-20261101`，旧9f完整CI22F保留；R3 a6841e94已正常commit和全src静态检查，433/262绿但独审23例5F。R4根修中；正常push1787例180s超时，远端仍9f，daily固定smoke精简在途。
-- ROOT自有 `tmp/w23-r6`：已复用为`codex/architecture-fast-feedback-20261102`（当前819cef31），工具runtime ae438a32、独审和候选完整CI均过，6b70394b已本地并主线。旧作者工区不改源码；仅有精确PNG清理收据。
-- ROOT唯一维护本PWF与集成；来源/消费者/W23作者均已STOP、独审已交报告。外来hook mode和历史未跟踪文件不stage、不清理。RF四WIP、Dayu/IQS/Dashboard不动。
+| 位置 | 版本 / 实际状态 |
+|---|---|
+| ROOT `master` / `origin/master` | 本地`10767b86`已FF来源整改；远端暂`1bf3d388`、正在正常提交推送本PWF；候选完整CI41380285347绿及最终独审PASS。 |
+| ROOT独占 `tmp/architecture-r2` | `codex/architecture-rectification-r2-20261101`，`10767b86`已正常commit/push；精确完整CI41380285347成功，最终28场景独审PASS；已正常并本地master。 |
+| W23/daily自有 `tmp/w23-r6` | 当前daily分支`codex/architecture-fast-feedback-20261102`、819cef31，已并主线。没有待部署的生产OCR。 |
+| RF | main/origin957c6283，精确CI41304681319成功，选定runtime已定点安装；本轮无新RF改动。 |
+| StockWiki | Q09本地master381811e5已并；历史无remote，未声称推送。 |
 
-## 下一步按此顺序
+R4候选2b0787dc完整CI70F保留。R5已按原合同修复：材料eligible/自足信息不表示世界事实核实；业务范围、计划和定义不应一律降格。原70期待全恢复。唯一20file最后1044P/4F31.23s，四处17P5.19s恢复；后续资源兼容98P/1F8.18s，同prepared文本/生产两投影修复后16P5.54s。**没有把这些数相加或称最后1048全绿。** 正常commit的Ruff/全src mypy绿；正常push固定167P28.67s，总34.86s成功。
 
-1. 先读R6-source-ci-r3.md/json、R6-owner-boundaries-ci及当前final独审状态。R3独审5F已交R4根修，读R6-source-ci-r4-erratum.md；不要再重施旧候选。daily固定smoke和R4来源修复分文件进行，合并冻版集中独审后再正常推候选CI，不删断言/抬额度/特判。
-2. 当前只先正常发布完整CI已绿的W23工具和PWF；R3源码候选CI绿后再正常FF/merge到ROOT master，保护已有PWF/hook字节，正常commit/push当前进展并核新主线CI；不绕hooks、不取Git缓存凭证。不要再跑一遍本地全仓超时检查。
-3. 实施既有T3：structure责任层统一编号完整句/闭引号判断，识别显式编号备注的长/换行局部scope，保留新备注主体引介。先去公司化RED，不能只删错边。具体9对原始unit及根因见R4-context-investigation.md，可执行接口/TDD/真实检查矩阵见R6-T3-implementation-plan.md。
-4. 单次最终H1 source replay：沿本地schema2 runner/已冻结cases，原90s/16M/112不变，核12unit/111成员、9对真实view/member及正向scope引介。v1旧数量和v2公开合同失败不能代签最终。
-5. 来源过后以独立catalog/AUTO引用既有原件做新版正式摘要、prepared中断/same/cross恢复和RF参数/公式/报告/snapshot实际采用，集中独审。两旧P1配置已absent，依C-preparation重建测试配置，不复制原PDF/旧DB、不改R3/R4封存。
+- 冻版：[R6-source-contract-r5](review/architecture-quality-20261101/implementation-results/R6-source-contract-r5.md)，9源码/3自增测试manifest为`R6-r5-freeze-manifest.json`、SHA `d45fc6875e411b2e2911e78e838b84a47af98fdf27c35c50438e5bc03b863650`；另ROOT预算spy同次提交。
+- 合同独审调查：`R6-independent-source-contract-r5.md`，消费链调查：`R6-source-material-consumers-r5.md`；它们是合同调查；最终代码独审`R6-independent-ci-r5.md/json`已PASS，28场景及13SHA绑定10767b86，自有tmp/k5恢复absent。
+- T3六个新测试在候选工区`tests/unit/document_understanding_note_scope/`，**untracked且行为RED，必须排除R5暂存**；只随T3产品实现提交。源码作者已STOP，最终独审已通过；后续改动必须有新节点证据，不能挪用本次冻版签收。
 
-## 已验收和不应重做的范围
+## 2. 单一下一步与后续顺序
 
-消费者50P，独立7P+CF3稳定窗口1P；ROOT schema/offline关联72P/28.53s正常宿主；R2来源322P/15.65s、独立22P/16.84s；CI诊断17P及独审过；四种frozen Exception已根修。746P属于A1历史，随后发现新P2，R2不冒称重跑746。W23工具独审PASS，旧8页实验依然PARTIAL：真实总耗时null，1800秒合规、峰值/精度/生产适用性未证，X1历史失败保留，未切生产OCR/未重新推理。
+1. `10767b86`最终独审和完整CI已通过，已正常FF本地主线；不要重复旧整改/1048/整仓。正在正常发布当前文档bundle。
+2. FF已逐13SHA/物理mode证明ROOT在途内容不变；正常提交推送并核精确主线CI。保持Git hook索引100755，不把外来Windows物理644变化提交。原件/生产配置不变，不取Git缓存凭证、不绕hooks。
+3. T3按[R6-T3-implementation-plan](review/architecture-quality-20261101/implementation-results/R6-T3-implementation-plan.md)实施。已冻47例首跑28F19P，其中27真行为RED＋1夹具错误；夹具单修1P、未再跑47。统一编号完整句/闭引号原语，source-marked长/换行备注局部frame，保留本scope主体引介；仅缺推断证据时局部partial，不把bbox变普遍许可。只设工程冻版独审与真实大节点，不新增小签收。
+4. 单次最终H1使用`.planning/architecture-quality-20261101/real-acceptance/README.md`的runner/cases/oracle：90s/16M/112不变，核12业务unit/111原生成员、9对context/member和正向主体引介。runner硬绑定ROOT/src，不能只改PYTHONPATH假称跑候选。旧v1数量通过与v2公开合同失败不代最终。
+5. 来源通过后，在新隔离catalog/AUTO仅引用既有原件，按`C-preparation.md`做配置真实摘要、paid prepared中断/same/cross-run零重复、**同一新artifact**实际RF参数/公式/报告/snapshot采用，再集中独审。两旧P1配置已absent；不得复制原PDF/旧DB，不改R3/R4封存。
 
-## 环境、数据与余项
+## 3. 已完成与不得重做/夸大的范围
 
-宿主Python `C:/Miniconda/python.exe -B -X utf8`。原子写测试/Git用获准正常host；Low sandbox下os.link WinError5会造paid响应不可用，已由同72域host全绿证实，不为此改CAS。独占sparse要完整工程src/tests/scripts/tools/config/.githooks/.github和确切gold夹具；--no-checkout后read-tree初始化索引，不能逐缺夹具打补丁或复制companies。
+- W23工具runtime ae438a32、候选6b70394b和主线848b4ee0完整CI绿。真实X1漏cache/无inflight/零余额/NaN已根修并独审；旧8页实验仍PARTIAL，实际总elapsed=null、1800合规/峰值/小米精度/生产适用性未证，两次真实失败保留。没切生产OCR、没新模型推理/下载。见`R6-W23-publication.json`与独审/精确PNG清理收据。
+- daily快检819cef31已独审、候选和主线完整CI绿。代码范围只跑固定原167smoke，已确认文档范围0pytest；不再AST影响图扩选千例。precommit仍静态，完整CI/作者定点测试/重大E2E保留；超时/输出/子进程错误仍真实失败。不是削弱用例来掩盖产品回归。
+- 消费者50P、独立7P＋稳定窗口CF3 1P；AUTO/离线关联72P正常host；四种frozen Exception传播根修、CI4096 annotation分组修复已随10767b86完整整合CI绿并本地主线，正常发布中。
+- 早期华利15卡/12原子、Berkshire73卡/10原子、恢复/RF v6 45项是历史有界成果；15个BRK未处理与全文partial保持，不能代当前runtime正式验收。
 
-原件、生产配置、DB/WAL bytes+mtime保留；SHM仅same existence/size/SHA允许mtime同步。不可构造生产AutomationStore作只读观察。冻结R4：AUDIT runs/r1-20261021-cn-wuxi-apptec，attempt r1-remediation-04，585件64240251B，manifest75f2871b…c568不改。
+## 4. 数据、环境与所有权
 
-预算按config10M/$20、公司150k/$1软目标；最近母账1965633tokens/762082microUSD估计，unknown8+prior7，本轮0收费调用。授权沿用，不新增人工签收/材料许可。RF957c6283 main已绿并定点部署；StockWiki381811e5本地master无历史remote，不冒推送。
+使用宿主`C:/Miniconda/python.exe -B -X utf8`。正常host执行已授权Git/原子写测试；sandbox os.link WinError5曾造成假产品失败，同72域host全绿已证，不为此削弱CAS。pytest禁自动插件时要显式启pytest_timeout/asyncio；cache关闭，独立短tmp先证明初始absent、测试后恢复。无法证明归属的历史临时文件不猜删。
 
-ghost-formula/期间补集、W21真实增强、长文/US监管PDF/HK/RPO、固定八家和新泛化/连续三家clean仍OPEN。原生goal工具目前paused且无active resume接口；当前是最新用户授权的手动续接，不新建竞争目标或声称整体完成。
+ROOT主工区在途自有PWF/AGENTS语义注释及两份hook/config过期header注释；header执行body保持。外来hook物理mode、旧未跟踪产物/原始gold和RF四assurance WIP保留。Dayu/IQS/Dashboard及其他owner工区不改。source DB/WAL bytes＋mtime保持，SHM允许仅mtime不同但存在性/大小/SHA相同；不可构造生产AutomationStore作只读观察。
+
+冻结AUDIT `runs/r1-20261021-cn-wuxi-apptec/execution_replays/r1-remediation-04`：585件/64,240,251B、manifest75f2871b…c568保持。模型/预算只按`config/models.yaml`与`config/resource_budget.yaml`：10Mtokens/$20，公司150k/$1软目标；最近母账1,965,633tokens/762,082microUSD估计，unknown8＋prior7保持，**本轮0收费调用**。沿用用户授权，不新造逐材料许可或签收链。
+
+## 5. 整体目标未完
+
+ghost-formula/期间补集、原R4六issue与买方反证/经营幅度校准、代码方法/检测演进、W21真实增强/严格成员对齐、长文/US监管PDF/HK/RPO、固定八家/药明合联和Snowflake泛化/连续三家clean均仍OPEN。旧native goal为paused且工具无active-resume操作；本次按用户恢复指令手动续接，不新建竞争目标或声称整体完成。
+
+历次返修/真实失败详见[R6-ROOT](review/architecture-quality-20261101/implementation-results/R6-ROOT.md)和各带版本收据。更早交接快照在Git `1bf3d388` 的本路径保留；历史结论不作为当前施工指令。

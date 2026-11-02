@@ -203,3 +203,18 @@ a684正常push1787例到98%因180s deadline失败，总234.764s（无已见asser
 ## Daily精简独立收口（2026-11-02）
 
 819cef31独立10P/16.55s，候选完整CI41370513762成功；正常候选push固定167P/45.52s，总56.584s成功。旧a684的1787项180s失败234.764s不改写。已FF主线，逐12个在途PWF/hookSHA一致；源码R4未并。PWF提交后正常主线推送/核精确CI。工具7文件1旧策略test退役，独立selector/原CI/执行限额与错误传播不改。
+
+
+## R5合同修复当前边界（2026-11-02T02:50:00.244132+00:00）
+
+原70例期待均恢复；一次最终1048例为1044P/4F/31.23s。余四处按原owner定点修：resource无条件重复purpose扫描/漏同WorkBudget、两条自身过严背景oracle、金融整句legacy broad description回退。不会删除原70期待或反复跑1048。独立32场景旧PASS和CI70F历史保持，R5冻版独审/完整CI仍OPEN。ROOT对齐task_plan/HANDOFF/机器registry残留R3/22F状态，W23与daily主线1bf完整CI41371690732成功，原件/生产配置/收费0不变。
+
+
+## R5冻版提交与并行验收（2026-11-02T02:57:03.038696+00:00）
+
+同prepared保留text_fact/production fact能力投影，legacy资源1F以16P定点恢复；四处17P恢复，原1048最后1044P4F未重复。13文件正常commit10767b86，Ruff/全src mypy过、逐字节seal保持。正常push固定167P28.67s，总34.86s成功；现有CI41380285347与冻版独审并行，均过才并主线。T3六个RED文件排除，无原件/生产配置/模型操作。
+
+
+## R6工程独审/完整CI通过并线（2026-11-02T03:09:57.946734+00:00）
+
+10767b86现有完整CI41380285347 completed success（Unit199s/contract7s），最终28场景独审PASS/13SHA稳定/tmp/k5恢复absent。ROOT正常ff-only并本地主线，逐13项WIP字节/物理mode不变；原63/22/70F历史保留，本次未缩CI范围。PWF当前入口/交接/子registry统一为工程已并线、正常发布中，T3结构与真实H1/新摘要/cache/RF/公司循环未签。W23两个别名归单一registry条目，不重复施工。

@@ -1,25 +1,25 @@
-**2026-11-02：R6 R3独审5F，R4源proof实施中；daily精简已独审/候选全CI通过并本地FF；W23工具已并主线/推送/精确CI绿。用户已恢复实施，旧暂停只作历史。当前唯一入口为CURRENT_STATUS。**
+**2026-11-02：R6工程10767b86最终独审/完整CI绿，已正常并本地master，正在正常发布PWF；W23和daily已此前独立发布。T3结构及真实C仍OPEN。**
 
 # 主线剩余实施计划
 
-**当前已恢复：原63失败候选隔离后已完成R6共因修复及定点独审，9f575810完整CI22F，已启动同owner R3根修；W23工具已独审/候选全CI通过并本地并线。** 唯一状态看[CURRENT_STATUS](CURRENT_STATUS.md)/json，恢复看[HANDOFF](HANDOFF.md)。
+**当前：来源整改10767b86已获最终独审与完整CI41380285347通过，正常FF本地master，正在提交推送PWF；W23和daily已独立发布。结构T3/真实C/公司循环继续，不签总目标完成。** 唯一状态看[CURRENT_STATUS](CURRENT_STATUS.md)/json，恢复看[HANDOFF](HANDOFF.md)。
 
 ## Next Step
 
-完成R4 source proof/unknown边界与泛化定性覆盖、daily固定smoke精简；独审/受影响测试后正常推候选完整CI，再主线合并推送。接着T3结构及最终真实H1、新摘要/恢复/RF。
+正常提交推送本次来源整改与PWF，核精确主线CI；随后T3按已冻结47case RED实施统一终结符/局部备注scope，不扩外包；最终H1、新摘要/cache/RF仍OPEN。
 
 ## P0 — 已完成的CI根修
 
 compact-frontier/lookahead、消费者和Windows嵌套夹具已根修、独审、正常发布及精确CI绿。保持轻量pre-commit/有界pre-push；仅新行为或失败需要新增回归，不重跑超时整仓或删重要断言换绿。
 
-## 全模块代码质量整改 — 候选完整CI22F，R3根修中
+## 全模块代码质量整改 — 工程已独审/完整CI通过并线，真实C待验收
 
 [2026-11-01审查](review/architecture-quality-20261101/README.md)和[实施细则](review/architecture-quality-20261101/implementation.md)是本计划质量责任的补充，不另立目标。408个源文件结构清单＋关键链详读＋三独立分工，14项归并（1P1/8P2/5P3）；不是逐行全仓功能验收。
 
 - 先在原P3来源修复中合并Q01陌生业务准入、Q02阅读recipe/缓存指纹，沿原R4 source owner根修，不加公司词库/额度。
 - 存储查询、预算归属、CAS/legacy工具、跨层合同和边界测试按细则B；StockWiki输出流限额归其transport，CWP不跨层接管实现。
 - 旧显式dry-shadow两轮/迁移CLI和无效helper清理，检查聚合到事实owner；必要身份/原文字节/as-of/预算/恢复仍保留。
-- 只设A/B/C集中工程审查，受影响快速测试和原主线真实E2E；P3维护债不变成新的逐项许可或公司循环前置关卡。本轮Q01–Q14候选已实施/处置，小域集中独审通过，但完整CI63失败，整体验收重开；当前master未采用该候选。R6已在隔离重施分支修共因并完成定点独审；现有同workflow候选全域CI22F，分组同owner修复并重新独审/CI后再做结构与C真实验收。原件/生产配置未改。
+- 仅大节点集中工程独审、受影响测试及真实E2E；不新增逐项许可。Q01–Q14工程10767b86已独审/完整CI通过并本地主线，Q09在StockWiki本地主线、Q11接收实读SHA经边界论证保留；完整CI63F/22F/70F历史不改。原70期待保留，R5纠正资料可用与现实核实混用；下一步结构T3和真实C验收，不重跑本地整仓。原件/生产配置未改。
 
 ## P1/P2 — 已完成的有界摘要与真实采用
 

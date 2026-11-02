@@ -1,0 +1,357 @@
+{
+  "schema_version": "source-material-consumer-audit/1",
+  "status": "READ_ONLY_AUDIT_COMPLETE_STOP",
+  "cwp_worktree": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2",
+  "cwp_head": "2b0787dc1c5352cd8566fc71fc585afe735ec75c",
+  "rf_worktree": "C:\\Users\\郑曾波\\Projects\\revenue-forecast",
+  "rf_head": "957c6283d3381d23c39515afd3a09147d8201c7b",
+  "source_hashes_at_audit_binding": {
+    "src/company_wiki/source_catalog/n6_candidate_operating_facts.py": "206752f12bfaa463384e308383bcbf49f846b34969aa911d4a39214a8b7d5832",
+    "src/company_wiki/document_understanding/operating_states/assertion_roles.py": "bf0bec525b83ff70444b0126ba3807b7d7f1781145d712309f5caab78b589fda",
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "a63e1a1ad5902e0c5e2ebef23898c88d3c332ced37f28ad05b3416d8560df808",
+    "src/company_wiki/source_catalog/narrative_source_passage.py": "83c86a62e721e9ddc53b66cf16cbb9b3677fc35dc7e9df7b6b8f07d2a2e7ab4c",
+    "src/company_wiki/source_catalog/narrative_source_context.py": "2b223273b56e1e6e55ff7e96bd8f6d57f4bc064c205d6e231606df9c83068038",
+    "src/company_wiki/source_catalog/narrative_support_use.py": "d9632c14e7dda839ddbad0c98997ca4014b031aa4c25c17f78a191f2b11a3b35",
+    "src/company_wiki/source_catalog/narrative_reading_admission.py": "4856e677a49180f2dfc8d9dd7bf6f82bbba6344de8b312ec5ecee28a6af1821e",
+    "src/company_wiki/source_catalog/narrative_operating_relations.py": "865a6eaa12a880c54b85b134de5e92f1b0ab9e9c2215381e4f67bcdd1c33e230",
+    "src/company_wiki/source_catalog/narrative_reading.py": "a7a426af6a1982640bb0ca142506bd282edff0c0192949e8407c2f87e857a8d2",
+    "src/company_wiki/source_catalog/narrative_business_disclosures.py": "f065a4c500656e916cb062d58a5503b1820e099fbb4d75d49453854a8185dc97",
+    "src/company_wiki/source_catalog/narrative_source_purpose.py": "720cc603803d7519314e9af8dbdc46251923b843d3a30a7832fd31687a292b7e",
+    "src/company_wiki/source_catalog/narrative_budget.py": "b805b334233d2214d004774bbef8add00d99881346c5f48b4781a4f36c810be3",
+    "src/company_wiki/source_catalog/narrative_native_materials.py": "c764cb7340d8b893e9e11c5414cfd3e616d8e5f901410550e8ab684385beba55",
+    "src/company_wiki/document_understanding/summary_tasks.py": "a349c43238a1a0f628ac085c268452fe97600e3940979fdf0295cd278b6ea5e9",
+    "src/company_wiki/document_understanding/source_cards.py": "15d49cab8c88379233b74b0538f057ee54da5828d0d33d9e896d459aaf9a08fb",
+    "src/company_wiki/document_understanding/source_card_allocation.py": "5023fa0e4e928d959bbb6ce6341c37ffb82b4f5389b09abb954a4152f2df0944",
+    "src/company_wiki/automation/narrative_model_extractive.py": "62793c8e04c13b61a32503523bdee69a1a02c139ccbac80ac6fcd1f88d328eed",
+    "src/company_wiki/automation/narrative_model_scoped.py": "962edd1842f0eee2906f5997cab8c6bb867000cb90c33968645c746c3624c4d9",
+    "src/company_wiki/automation/narrative_rank_material.py": "2221e82507cfbb57a0a6e1e610a15fdff0afa316ba201420c16e14c8239ffdf8",
+    "src/company_wiki/automation/narrative_summary_assessment.py": "511f224ec238a4c7f1f6785f709c35a5d0e92da96a770c62fecfa8ebeabc6656"
+  },
+  "rf_hashes_at_audit_binding": {
+    "scripts/source_narrative_context.py": "c71b53bf25ea67a1c1b5b83d5ecad6a63fe653786298f5b5ed3625e35a66a5fe",
+    "scripts/narrative_summary_usage.py": "3c2d6838e3985f2a43e17e20aba85ddbd72fc144cc652e7db54e71ea64a587b4",
+    "scripts/narrative_summary_provenance.py": "478b02d128bd1dfb3cfed491562b8b6c3bcf82e2b5e4d4f400993cbd6b9f5633",
+    "scripts/narrative_citation_context.py": "cd8d01533f539a9a65beb0500300a76915156dda9b39a497c14f0d53add01ed0",
+    "scripts/narrative_summary_observations.py": "2b5ae57c923f14f6db6f64adbc47bd57a7c883fca9b20847aa01d1881c9ac94a",
+    "scripts/company_wiki_narrative_contracts.py": "6ee455d2a8a4b48654c146a8f611ff2e2d8492c07c33630f9703ccfd584bfba7"
+  },
+  "scope": "static caller and responsibility audit; not functional acceptance or proof of economic truth",
+  "original_access": false,
+  "model_calls": 0,
+  "tests_run": 0,
+  "source_or_tests_modified": false,
+  "findings": [
+    {
+      "id": "M1",
+      "kind": "contract_meaning",
+      "conclusion": "OperatingFact.eligible and role payloads classify useful source material, not external truth, completed events or numeric model inputs. Source-local scope can remain useful without function_or_event."
+    },
+    {
+      "id": "M2",
+      "kind": "caller_evidence",
+      "conclusion": "Examined native, source-card and RF consumers do not turn eligible/payload into actual revenue, event completion or investment acceptance. RF explicit bindings add rationale support to already-used parameters without mutating values."
+    },
+    {
+      "id": "M3",
+      "kind": "producer_regression_path",
+      "conclusion": "R4 scope relation exclusions and fact_candidate masking remove useful source clauses before reading labels/purpose. Some quotes survive source_declared_scope support but lose material value because roles-present value ignores fact reasons."
+    },
+    {
+      "id": "M4",
+      "kind": "source_role_projection",
+      "conclusion": "Closed member_identity/material_scope can be established while narrower argument payload remains None; requiring independent=True for material then loses informative static source descriptions. This does not justify declaring them operating mechanisms."
+    },
+    {
+      "id": "M5",
+      "kind": "residual_risk",
+      "conclusion": "Legacy /4 LLM prose can still be semantically wrong; citations and source checks are not semantic truth verification. /5 extractive cards preserve quotes with uncertain/needs_review. No comprehensive forecast or economic correctness conclusion."
+    }
+  ],
+  "caller_evidence": [
+    {
+      "owner": "SourceOperatingSession.fact",
+      "file": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+      "lines": "771-821",
+      "responsibility": "One prepared assessment per actual source owner with cached fact/financial/assertions/passage."
+    },
+    {
+      "owner": "prepare_reading_business_assessment",
+      "file": "src/company_wiki/source_catalog/narrative_business_policy.py",
+      "lines": "1129-1210",
+      "responsibility": "Single existing repair owner; masking at 1163 precedes detector/purpose at 1175-1180."
+    },
+    {
+      "owner": "prepare_source_statement_scope",
+      "file": "src/company_wiki/source_catalog/narrative_source_passage.py",
+      "lines": "136-156,235-277",
+      "responsibility": "fact_candidate filtering and masked fact_roles can erase useful source description before observation."
+    },
+    {
+      "owner": "reading_material_value",
+      "file": "src/company_wiki/source_catalog/narrative_business_disclosures.py",
+      "lines": "546-552",
+      "responsibility": "With source_roles, meaningful value requires independent payload and non-descriptive role; fact reasons are not read."
+    },
+    {
+      "owner": "scope_use/admission/value",
+      "file": "src/company_wiki/source_catalog/narrative_reading.py",
+      "lines": "580-625,719-758",
+      "responsibility": "Consumes prepared source use/relevance/value/completeness, then finite allocation uses value bands."
+    },
+    {
+      "owner": "native material compiler",
+      "file": "src/company_wiki/source_catalog/narrative_native_materials.py",
+      "lines": "24-25,359-385",
+      "responsibility": "Default classify=None; diagnostic eligible filtering is not the normal production path."
+    },
+    {
+      "owner": "source card admission",
+      "file": "src/company_wiki/document_understanding/source_cards.py",
+      "lines": "66-106",
+      "responsibility": "Only support generates cards; context/unresolved do not become independent summary support."
+    },
+    {
+      "owner": "compile_extractive_plan",
+      "file": "src/company_wiki/automation/narrative_model_extractive.py",
+      "lines": "92-159",
+      "responsibility": "Whole original quotes, modality uncertain, needs_review true; advisory ranking cannot rewrite admitted cards."
+    },
+    {
+      "owner": "scoped model decoder",
+      "file": "src/company_wiki/automation/narrative_model_scoped.py",
+      "lines": "327-379",
+      "responsibility": "Checks local basis/citations/quality; model modality is not external truth."
+    },
+    {
+      "owner": "RF consume_narrative_input",
+      "repository": "revenue-forecast",
+      "file": "scripts/source_narrative_context.py",
+      "lines": "109-135,154-239",
+      "responsibility": "Caller explicit existing parameter/formula binding, rationale_support only, no parameter value mutation."
+    },
+    {
+      "owner": "RF summary_use_entry",
+      "repository": "revenue-forecast",
+      "file": "scripts/narrative_summary_usage.py",
+      "lines": "145-265",
+      "responsibility": "Explicit summary claim/research reason, original support/context and modality preserved."
+    },
+    {
+      "owner": "RF summary provenance",
+      "repository": "revenue-forecast",
+      "file": "scripts/narrative_summary_provenance.py",
+      "lines": "61-98,184-218",
+      "responsibility": "Source-anchor provenance; semantic/subfact assessment remains not_evaluated."
+    },
+    {
+      "owner": "RF resolve_span",
+      "repository": "revenue-forecast",
+      "file": "scripts/narrative_citation_context.py",
+      "lines": "366-416",
+      "responsibility": "Rejects context_only/unresolved as independent support; keep this boundary."
+    }
+  ],
+  "minimal_repair": {
+    "owner": "Existing prepare_reading_business_assessment and its source-owned original clause observations; no second classifier/task/permission system.",
+    "actions": [
+      "Restore useful-source meaning of eligible/independent_payload/material_payload while retaining function_or_event distinction.",
+      "Keep an event-specific projection from suppressing every reading label/purpose/value; reuse the same original relation observations and cache.",
+      "Use explicit local roster/plan/metric-basis proofs rather than company or product dictionaries; generic roles alone never prove mechanisms.",
+      "Prefer fixing producer role material semantics; if explicit value projection is essential put it on the existing prepared result and consume once.",
+      "Preserve source refs/polarity/stage/attribution/modality and separate measured numeric/actor/completion owners.",
+      "Keep consumers thin, current support/context wire partition, legacy 0.8 replay boundary, and failure/unknown diagnostics."
+    ],
+    "do_not": [
+      "No world-truth claim from a source claim",
+      "No per-consumer or source_scope bool bypass",
+      "No company wordlists",
+      "No new manual permission/receipt",
+      "No RF gate relaxation",
+      "No retrospective success or semantic acceptance"
+    ]
+  },
+  "verification_recommendation": [
+    "Existing old contracts: qualitative intent without milestone; static material scope with function_or_event false; definitions without quantity/metric growth; closed unknown service list plus generic/template/question/open-list negatives.",
+    "One prepared-result matrix for source labels/use/relevance/value/financial/completeness across scope, plan, definition, currency exposure and accounting-only controls.",
+    "Small actual pipeline/compiler check preserves source scope, attribution, units and modality in selected cards; /5 stays uncertain/needs_review.",
+    "One RF offline explicit binding proves rationale usage while value/unit/currency/period/formula inputs do not mutate; context-only cannot impersonate support."
+  ],
+  "open_items": [
+    "No functional reproduction run in this read-only assignment; do not attribute all 70 failures to a single cause.",
+    "Currency exposure CI row is unknown_error; exact first failing clause remains unobserved.",
+    "Potential rule-only independent_payload False via filtered-empty all() is a semantic boundary to validate, not separately confirmed defect.",
+    "Legacy /4 model semantic correctness, external economic truth and full RF forecasts were not audited.",
+    "Source implementation belongs to source author/ROOT; T3 tests-first remains STOP."
+  ],
+  "close_hash_check": {
+    "scope": "Read hashes after static investigation; not a claim files were frozen throughout the investigation.",
+    "file_count": 26,
+    "all_unchanged": true,
+    "files": [
+      {
+        "repository": "cwp_worktree",
+        "path": "src/company_wiki/source_catalog/n6_candidate_operating_facts.py",
+        "sha256_at_close": "206752f12bfaa463384e308383bcbf49f846b34969aa911d4a39214a8b7d5832",
+        "unchanged_since_binding": true
+      },
+      {
+        "repository": "cwp_worktree",
+        "path": "src/company_wiki/document_understanding/operating_states/assertion_roles.py",
+        "sha256_at_close": "bf0bec525b83ff70444b0126ba3807b7d7f1781145d712309f5caab78b589fda",
+        "unchanged_since_binding": true
+      },
+      {
+        "repository": "cwp_worktree",
+        "path": "src/company_wiki/source_catalog/narrative_business_policy.py",
+        "sha256_at_close": "a63e1a1ad5902e0c5e2ebef23898c88d3c332ced37f28ad05b3416d8560df808",
+        "unchanged_since_binding": true
+      },
+      {
+        "repository": "cwp_worktree",
+        "path": "src/company_wiki/source_catalog/narrative_source_passage.py",
+        "sha256_at_close": "83c86a62e721e9ddc53b66cf16cbb9b3677fc35dc7e9df7b6b8f07d2a2e7ab4c",
+        "unchanged_since_binding": true
+      },
+      {
+        "repository": "cwp_worktree",
+        "path": "src/company_wiki/source_catalog/narrative_source_context.py",
+        "sha256_at_close": "2b223273b56e1e6e55ff7e96bd8f6d57f4bc064c205d6e231606df9c83068038",
+        "unchanged_since_binding": true
+      },
+      {
+        "repository": "cwp_worktree",
+        "path": "src/company_wiki/source_catalog/narrative_support_use.py",
+        "sha256_at_close": "d9632c14e7dda839ddbad0c98997ca4014b031aa4c25c17f78a191f2b11a3b35",
+        "unchanged_since_binding": true
+      },
+      {
+        "repository": "cwp_worktree",
+        "path": "src/company_wiki/source_catalog/narrative_reading_admission.py",
+        "sha256_at_close": "4856e677a49180f2dfc8d9dd7bf6f82bbba6344de8b312ec5ecee28a6af1821e",
+        "unchanged_since_binding": true
+      },
+      {
+        "repository": "cwp_worktree",
+        "path": "src/company_wiki/source_catalog/narrative_operating_relations.py",
+        "sha256_at_close": "865a6eaa12a880c54b85b134de5e92f1b0ab9e9c2215381e4f67bcdd1c33e230",
+        "unchanged_since_binding": true
+      },
+      {
+        "repository": "cwp_worktree",
+        "path": "src/company_wiki/source_catalog/narrative_reading.py",
+        "sha256_at_close": "a7a426af6a1982640bb0ca142506bd282edff0c0192949e8407c2f87e857a8d2",
+        "unchanged_since_binding": true
+      },
+      {
+        "repository": "cwp_worktree",
+        "path": "src/company_wiki/source_catalog/narrative_business_disclosures.py",
+        "sha256_at_close": "f065a4c500656e916cb062d58a5503b1820e099fbb4d75d49453854a8185dc97",
+        "unchanged_since_binding": true
+      },
+      {
+        "repository": "cwp_worktree",
+        "path": "src/company_wiki/source_catalog/narrative_source_purpose.py",
+        "sha256_at_close": "720cc603803d7519314e9af8dbdc46251923b843d3a30a7832fd31687a292b7e",
+        "unchanged_since_binding": true
+      },
+      {
+        "repository": "cwp_worktree",
+        "path": "src/company_wiki/source_catalog/narrative_budget.py",
+        "sha256_at_close": "b805b334233d2214d004774bbef8add00d99881346c5f48b4781a4f36c810be3",
+        "unchanged_since_binding": true
+      },
+      {
+        "repository": "cwp_worktree",
+        "path": "src/company_wiki/source_catalog/narrative_native_materials.py",
+        "sha256_at_close": "c764cb7340d8b893e9e11c5414cfd3e616d8e5f901410550e8ab684385beba55",
+        "unchanged_since_binding": true
+      },
+      {
+        "repository": "cwp_worktree",
+        "path": "src/company_wiki/document_understanding/summary_tasks.py",
+        "sha256_at_close": "a349c43238a1a0f628ac085c268452fe97600e3940979fdf0295cd278b6ea5e9",
+        "unchanged_since_binding": true
+      },
+      {
+        "repository": "cwp_worktree",
+        "path": "src/company_wiki/document_understanding/source_cards.py",
+        "sha256_at_close": "15d49cab8c88379233b74b0538f057ee54da5828d0d33d9e896d459aaf9a08fb",
+        "unchanged_since_binding": true
+      },
+      {
+        "repository": "cwp_worktree",
+        "path": "src/company_wiki/document_understanding/source_card_allocation.py",
+        "sha256_at_close": "5023fa0e4e928d959bbb6ce6341c37ffb82b4f5389b09abb954a4152f2df0944",
+        "unchanged_since_binding": true
+      },
+      {
+        "repository": "cwp_worktree",
+        "path": "src/company_wiki/automation/narrative_model_extractive.py",
+        "sha256_at_close": "62793c8e04c13b61a32503523bdee69a1a02c139ccbac80ac6fcd1f88d328eed",
+        "unchanged_since_binding": true
+      },
+      {
+        "repository": "cwp_worktree",
+        "path": "src/company_wiki/automation/narrative_model_scoped.py",
+        "sha256_at_close": "962edd1842f0eee2906f5997cab8c6bb867000cb90c33968645c746c3624c4d9",
+        "unchanged_since_binding": true
+      },
+      {
+        "repository": "cwp_worktree",
+        "path": "src/company_wiki/automation/narrative_rank_material.py",
+        "sha256_at_close": "2221e82507cfbb57a0a6e1e610a15fdff0afa316ba201420c16e14c8239ffdf8",
+        "unchanged_since_binding": true
+      },
+      {
+        "repository": "cwp_worktree",
+        "path": "src/company_wiki/automation/narrative_summary_assessment.py",
+        "sha256_at_close": "511f224ec238a4c7f1f6785f709c35a5d0e92da96a770c62fecfa8ebeabc6656",
+        "unchanged_since_binding": true
+      },
+      {
+        "repository": "rf_worktree",
+        "path": "scripts/source_narrative_context.py",
+        "sha256_at_close": "c71b53bf25ea67a1c1b5b83d5ecad6a63fe653786298f5b5ed3625e35a66a5fe",
+        "unchanged_since_binding": true
+      },
+      {
+        "repository": "rf_worktree",
+        "path": "scripts/narrative_summary_usage.py",
+        "sha256_at_close": "3c2d6838e3985f2a43e17e20aba85ddbd72fc144cc652e7db54e71ea64a587b4",
+        "unchanged_since_binding": true
+      },
+      {
+        "repository": "rf_worktree",
+        "path": "scripts/narrative_summary_provenance.py",
+        "sha256_at_close": "478b02d128bd1dfb3cfed491562b8b6c3bcf82e2b5e4d4f400993cbd6b9f5633",
+        "unchanged_since_binding": true
+      },
+      {
+        "repository": "rf_worktree",
+        "path": "scripts/narrative_citation_context.py",
+        "sha256_at_close": "cd8d01533f539a9a65beb0500300a76915156dda9b39a497c14f0d53add01ed0",
+        "unchanged_since_binding": true
+      },
+      {
+        "repository": "rf_worktree",
+        "path": "scripts/narrative_summary_observations.py",
+        "sha256_at_close": "2b5ae57c923f14f6db6f64adbc47bd57a7c883fca9b20847aa01d1881c9ac94a",
+        "unchanged_since_binding": true
+      },
+      {
+        "repository": "rf_worktree",
+        "path": "scripts/company_wiki_narrative_contracts.py",
+        "sha256_at_close": "6ee455d2a8a4b48654c146a8f611ff2e2d8492c07c33630f9703ccfd584bfba7",
+        "unchanged_since_binding": true
+      }
+    ]
+  },
+  "persistent_writes": [
+    "R6-source-material-consumers-r5.md",
+    "R6-source-material-consumers-r5.json"
+  ],
+  "git_or_index_modified": false,
+  "production_configuration_or_database_accessed": false,
+  "cleanup_scope": "No tests or owned temporary directories created in this assignment; reports are intentional deliverables.",
+  "handoff": "STOP; ROOT/source author owns consolidated source design, implementation and independent review."
+}

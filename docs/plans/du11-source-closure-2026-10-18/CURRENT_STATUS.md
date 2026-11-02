@@ -1,36 +1,32 @@
-# 当前项目状态 — 2026-11-02，R6全面整改返修实施中
+# 当前项目状态 — 2026-11-02，R6工程已并线，T3结构根修下一步
 
-**用户已恢复实施。稳定master不改在途源码，整改在独占sparse工区进行；尚未签全部整改或真实C验收。** 唯一入口为本页/[机器状态](CURRENT_STATUS.json)，交接看[HANDOFF](HANDOFF.md)，本轮流水见[R6-ROOT](review/architecture-quality-20261101/implementation-results/R6-ROOT.md)。旧暂停/失败均为历史，不再是执行指令。
+**用户已恢复实施。R5来源工程已获最终独审及完整CI通过，本地正常FF到master10767b86，正在正常提交推送PWF。真实H1/新版摘要/缓存恢复/RF采用和全公司循环仍OPEN。** 唯一入口为本页/[机器状态](CURRENT_STATUS.json)，具体接手看[HANDOFF](HANDOFF.md)。历次暂停/失败是历史，不作为当前施工指令。
 
-## 当前做到哪里
+## 当前在哪里
 
-| 责任 | 实际进度 | 余项 |
+| 责任 | 实际完成 | 剩余 |
 |---|---|---|
-| 稳定master | W23工具已推且CI绿；daily精简819cef31已独审/候选完整CI绿并本地FF | 当前PWF提交后正常推送；源R4不含在主线 |
-| R6候选 | a6841e94已本地commit；433/262相关域绿，但独审23例5F，R4根修中 | 旧9f CI22F＋a684本地push1787例180s超时均留证，未推新候选 |
-| 旧接口/recipe消费 | 原41F/9P→50P；5测试改绑实际owner，无产品代理；独审7P＋稳定窗口CF3 1P | 最终整合CI，不借小域签全域 |
-| AUTO迁移/离线测试 | 原4RED→4P；关联72P/28.53s（normal host）；SQL前后schema/旧facts/newallocation空验证保持，offline-I显式当前工区 | 最终Linux CI；sandbox原子硬链接WinError5不当产品失败 |
-| 来源语义 | R3分开原文角色/事实视图，绑定关系memo优先，NP head/modifier和WH边界根修；433P/262P（另121有重叠） | R4修正POS不能证明业务、统一事实proof；新独审/完整CI/H1待验 |
-| CI诊断 | 修复12000字groups单annotation被平台4096截断；首10内分组、escaped UTF8限长；17例绿 | 独审已通过；本次完整分组可读，源回归22F；不新增CI测试步骤 |
-| W23 R1 | 原HEAD d2f6e6f0的8页R0/N0与X1两失败可作PARTIAL资料；独立审计4真实路径RED | 根修已独审PASS＋完整候选CI绿，已并主线并推送；旧实验仍PARTIAL，不跑模型/不部署 |
-| RF/StockWiki | RF957c6283 main/origin、CI41304681319成功且定点安装；StockWiki Q09本地master381811e5已并 | StockWiki历史无remote不冒推送，RF无新修改需求 |
+| 全模块工程整改Q01–Q14 | 来源合同/recipe/cache、索引查询、单AUTO存储预算、CAS、跨层DTO、旧工具/门禁退役等已处置；候选10767b86精确完整CI41380285347成功，最终28场景独审PASS；正常并本地master | 正常推送及精确主线CI；相关真实C验收未签 |
+| 来源语义 | 单prepared保留来源范围/计划/定义资料价值；事件/数值/主体资格独立。原70期待恢复，同预算与text/production投影根修 | T3 context结构和真实新来源验收 |
+| daily快检简化 | 819cef31已推主线、完整CI绿；代码只原167smoke，文档0pytest；不构建AST图扩选千例 | 本地快检从不代完整CI/作者定点/关键E2E |
+| W23小米OCR返工 | cache/inflight/零余额/NaN工具根修已独审、并线推送和精确CI绿 | 原8页实验仍PARTIAL，实际elapsed/1800合规/峰值/精度/生产适用性未证；未切生产OCR |
+| T3局部结构 | 实施细则与6个tests-first文件已冻，27真实行为RED；编号完整句误标题、长备注未成scope均已定位 | 按既有计划根修，保留新scope正向主体引介；不能只删错边 |
+| RF/StockWiki | RF957c6283 main/origin绿且定点部署；StockWiki Q09本地master381811e5已并 | StockWiki历史无remote不冒推；RF公司真实采用/研究责任仍OPEN |
 
-## 原失败如何处理
+## 本次修复为何不是改测试换绿
 
-原CWP候选6668bc97完整CI41305132919的63失败保留。主要已确认为旧私有patch/import owner迁移、AUTO v8新空间账导致旧表断言失配，以及真实语义负例/离线环境；不能统一说测试错了。全部处置映射与独审会按本轮实际结果归总，不删除断言/提高额度/加公司词表或恢复跨层reader耦合来换绿。当前不在稳定master直接重施；新工区已f298a383完成，不要再revert一次。
+原6668bc97的63F、9f575810的22F、2b0787dc的70F均保留。R4错误将“来源材料可用”当“现实事实核实”，导致范围、计划、口径被过度排除；实现与局部审查解释均应纠正。R5按旧合同保留原70期待，仅ROOT两spy透传同WorkBudget；本轮自增的过严oracle另有公开erratum。
 
-W23原交付曾不能凭作者READY接收：真实X1漏读cache，推理前未记inflight，中断重启/零余额和NaN都有独立RED；最后独审绑定与部分PWF/页数/PNG声明也有缺口。ROOT已在工具独占工区根修、真正独审和完整CI通过，保留旧模型失败/耗时unknown和peak边界，不能把stub绿当精度比较或CPU可部署。公开小米模型/原资料本轮不再下载/推理。
+最后1048为1044P4F，四处17P定点恢复；资源兼容98P1F后16P修复，未重复整组或冒合计全绿。随后正常commit的Ruff/全src mypy过，固定167smoke28.67s、推送总34.86s；原有远端全Unit/契约/CLI等均成功（Unit199s）。最终独审28场景、13SHA稳定，无新产品P1/P2，临时目录恢复初始absent。见[R5实现](review/architecture-quality-20261101/implementation-results/R6-source-contract-r5.md)、[完整CI](review/architecture-quality-20261101/implementation-results/R6-CI-r5.md)、[最终独审](review/architecture-quality-20261101/implementation-results/R6-independent-ci-r5.md)。
 
-## 下一大节点
+## 下一步
 
-完成R4 source proof/unknown边界与泛化定性覆盖、daily固定smoke精简；独审/受影响测试后正常推候选完整CI，再主线合并推送。接着T3结构及最终真实H1、新摘要/恢复/RF。
+正常发布当前工程/PWF并核主线CI，然后按[R6-T3-implementation-plan](review/architecture-quality-20261101/implementation-results/R6-T3-implementation-plan.md)修统一末尾标点与来源备注scope。T3六个RED测试只随T3实现提交；无需新外包、逐小节点签收或普遍bbox要求。
 
-CWP同一现有workflow补总控codex/architecture-*候选分支触发，在并线前获得完整CI，不依赖取Git缓存凭证或新增许可；不扩其他外包分支、不复制测试流水线、不把每commit变全量。只在大节点集中独审。
+结构通过后，单次最终H1仍用90s/16M/112：12业务unit/111原生成员、9对context及正向主体引介；旧v1数量与v2失败不能代签。再做隔离新catalog/AUTO引用既有原件、新配置真实摘要、paid prepared中断/same/cross零重复及同artifact实际RF参数/公式/报告/snapshot采用，集中独审。
 
-## 原主线仍未完成的责任
+## 整体未完成与边界
 
-Q01–Q14候选在返修，Q11实读接收SHA有边界依据保留，Q09已本地主线交付，其余不能暂记稳定采用。跨备注context的结构根因已调查未实施：带收尾引号的编号句误作标题，真正备注边界未识别。R6整合过后在structure owner修复，保留原文/locator/主体范围，不按公司/页码补丁。
+旧华利15卡/12原子、Berkshire73卡/10原子/15余项partial和RF v6 45工程检查是历史有界成果。药明康德R4四审73检查/6P2、ghost-formula/期间补集、买方反证/经营幅度校准/方法与检测演进、W21真实增强/成员对齐、US监管PDF/HK/RPO/长文公平性、固定八家及连续三家clean均仍OPEN，不标总目标complete。
 
-H1-v1仅较早候选12/12业务unit、111/111原生成员，预算partial且9context对未齐索引；v2公开合同失败23.170s，R5小域修复不能代最终v3。新版真实摘要、中断恢复、same/cross-run零追加、RF新产物实际采用/经济验收仍OPEN。原P0/P1/P2有界历史成果保留，Berkshire15未处理保留；药明康德R4四审73项/6P2和ghost-formula/期间补集/检测演进仍按原映射推进。
-
-R4封存585件64240251B/manifest75f2871b…c568不改，母账1965633tokens/762082microUSD估计、unknown8+prior7，本轮0新收费调用。实际预算config10M/$20，公司150k/$1软目标。原件/生产配置/Dayu/IQS/Dashboard不动，RF四WIP和CWP外来hook mode/未审定历史产物保留。固定八家、药明合联/Snowflake泛化、连续三家clean及W21等余项均未完成，不标全目标complete。
+原件、生产配置、旧封存585件/64,240,251B不改；本轮0新收费调用，预算/模型沿配置10M/$20、公司150k/$1软目标。来源字节/身份期间/as-of/资源和恢复由各owner负责；private/public、逐材料许可、人工签收和重复激活门禁不复活。Dayu/IQS/Dashboard、RF四WIP和外来hook物理模式/未确认历史产物保留。
