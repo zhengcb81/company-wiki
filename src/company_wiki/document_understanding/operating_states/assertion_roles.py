@@ -9,6 +9,7 @@ from __future__ import annotations
 from dataclasses import dataclass
 from bisect import bisect_left
 from collections.abc import Iterator
+from typing import TYPE_CHECKING
 import re
 
 from company_wiki.document_normalization.text_matching import matching_reading_text
@@ -17,10 +18,14 @@ from company_wiki.document_understanding.structure.table_purpose import accounti
 from .product_reference import product_head_spans
 from . import patterns as source_grammar
 
+if TYPE_CHECKING:
+    from company_wiki.resource_budget import WorkBudget
+
 # Composition/process indexes and the bounded comma-continuation preparation.
 # The caller reserves these passes on its existing document account.
 # Closed member identity is observed for both typed and unfamiliar arguments.
 SOURCE_DESCRIPTION_SCAN_PASSES = 19
+SOURCE_SCOPE_ARGUMENT_WORK_PER_CHAR = 8
 
 # A new explicit actor starts an independent assertion even after a comma.
 # Subordinate audit test descriptions do not manufacture a company event.
@@ -110,7 +115,7 @@ _COMPOSITION_FRAME_CN = (
     r"(?P<head>主要产品|主营业务|产品|服务|解决方案|下游客户|客户|下游)"
     r"(?:的(?:构成|组合|范围))?(?:主要|目前|通常)?\s*(?:[,，]\s*)?(?:为|是|包括|包含|涵盖|覆盖)")
 _COMPOSITION_FRAME_EN = (
-    r"\b(?P<head>products?|services?|solutions?|businesses|customers?|clients?)(?:\s+|,\s*)"
+    r"\b(?P<head>products?|services?|solutions?|businesses|equipment|customers?|clients?)" + _EN_HEAD_TAIL +
     r"(?:(?:mainly|primarily|principally|currently)\s+)?"
     r"(?:are|is|include[sd]?|comprise[sd]?|cover(?:s|ed)?|consist(?:s)?\s+of)\s+")
 _COMPOSITION_CN = re.compile(_COMPOSITION_FRAME_CN + r"(?P<target>[^。;!?]{1,160})")
@@ -123,6 +128,8 @@ _COMPOSITION_BOUNDARIES = (
     re.compile(r"[,，]\s*(?=(?:现|目前)?已(?:经)?开发(?:了)?(?:超(?:过)?|逾|近|约)?\s*\d)"),
 )
 _CUSTOMER_HEAD = re.compile(r"^(?:下游客户|客户|下游|customers?|clients?)$", re.I)
+_CUSTOMER_SCOPE_HEAD = re.compile(
+    r"(?<![A-Za-z])" + _CUSTOMER_HEAD.pattern.removeprefix('^').removesuffix('$') + r"\s*$", re.I)
 _PROSPECTIVE_SCOPE = re.compile(
     r"(?:目标|潜在|拟定|未来)(?:主要|重点|核心|重要|的){0,4}$|"
     r"\b(?:target|potential|prospective|future)\s+(?:[A-Za-z-]+\s+){0,3}$", re.I)
@@ -247,6 +254,15 @@ _FUNCTIONAL_OFFERING = re.compile(
 _WEAK_FUNCTION = re.compile(r"^(?:support\w*|provid\w*|offer\w*|includ\w*|compris\w*|forms?|"
                             r"suppl\w*|cover\w*|serves?|uses?|used|utili[sz]ed|deployed|for|subject to|dependent on|exposed to|"
                             r"作为|支持|提供|覆盖|涵盖|包括|包含|面向|用于|用作|应用于)$", re.I)
+_GENERIC_STATE_PREDICATE = re.compile(
+    r"^(?:am|is|are|was|were|be|been|being|has|have|had|是|有|具有)$", re.I)
+# Generic operating scope classes, not industry/product identities. The head
+# must govern the bounded argument; a PP about operations cannot turn a wish,
+# financial balance or procedure into an operating scope.
+_OPERATING_SCOPE_HEAD = re.compile(
+    r"(?:工序|流程|作业|作業|工艺|工藝|功能|应用|應用|市场|市場|地区|地區|国家|國家)\s*$|"
+    r"\b(?:operations?|workflows?|process(?:es)?|functions?|applications?|markets?|regions?|countries)\s*$", re.I)
+_ARGUMENT_ADJUNCT = re.compile(r"\b(?:for|of|in|at|with|to|whose|which|that)\b", re.I)
 
 
 def abstract_source_argument(value: str) -> bool:
@@ -257,9 +273,20 @@ def abstract_source_argument(value: str) -> bool:
     return bool(tokens) and all(token in _ABSTRACT_EN_WORDS for token in tokens)
 
 
-def source_offering_head(value: str) -> bool:
-    """Reuse existing source offering grammar; this alone proves no payload."""
-    return _DESCRIPTION_OBJECT.fullmatch(value) is not None
+def generic_source_predicate(value: str) -> bool:
+    """A generic function/state needs an argument proof, not merely syntax."""
+    return bool(_WEAK_FUNCTION.fullmatch(value) or _GENERIC_STATE_PREDICATE.fullmatch(value))
+
+
+def _operating_scope_argument(value: str) -> bool:
+    head = _ARGUMENT_ADJUNCT.split(value, maxsplit=1)[0].strip(' \t\r\n.。!?;；')
+    return bool(_OPERATING_SCOPE_HEAD.search(head) and not _MEMBERSHIP_FINANCIAL_HEAD.search(head))
+
+
+def _customer_scope_argument(value: str) -> bool:
+    head = _ARGUMENT_ADJUNCT.split(value, maxsplit=1)[0].strip(' \t\r\n.。!?;；')
+    # Reuse the customer noun class, not an industry/recipient-name list.
+    return _CUSTOMER_SCOPE_HEAD.search(head) is not None
 
 
 def _nominal_member_identity(value: str) -> bool:
@@ -307,6 +334,28 @@ def _argument_payload(value: str, *, concrete_action: bool = False,
             or _SPECIFIC_APPLICATION.search(value)):
         return True
     return None
+
+
+def source_argument_payload(value: str) -> bool | None:
+    """Positive argument semantics shared by source roles and scoped goals."""
+    observed = _argument_payload(value)
+    if observed is None:
+        value = value.strip(' \t\r\n.。!?;；')
+        if any(match.end() == len(value) for match in _STATE_HEAD.finditer(value)):
+            return True
+    return observed
+
+
+def _declared_member_class(value: str) -> bool:
+    """A closed catalogue may name an existing concrete offering class.
+
+    This is classification of a supplied product range, not a functional
+    benefit or event. Broad product/service/platform/solution placeholders do
+    not identify a member class merely through an unfamiliar adjective.
+    """
+    value = value.rstrip(' \t\r\n.。!?;；')
+    return any(end == len(value) and kind not in {'product', 'platform', 'solution', 'service'}
+               for _start, end, kind in product_head_spans(value))
 
 
 def _argument_closed(value: str, end: int) -> bool:
@@ -394,7 +443,25 @@ class _DescriptionProof:
     witness: str
     descriptive_only: bool = False
     material_scope: bool = False
-    argument_target: str = ''
+    source_scope: bool = False
+
+
+@dataclass(frozen=True)
+class _ScopeArgumentObservation:
+    operating: bool
+    customer: bool
+    member_class: bool
+    incentive: bool
+
+
+def _scope_argument_observation(value: str, cache: dict[str, _ScopeArgumentObservation], *,
+                                work_budget: WorkBudget | None) -> _ScopeArgumentObservation:
+    if value not in cache:
+        if work_budget is not None:
+            work_budget.charge(SOURCE_SCOPE_ARGUMENT_WORK_PER_CHAR * len(value) + 1)
+        cache[value] = _ScopeArgumentObservation(_operating_scope_argument(value),
+            _customer_scope_argument(value), _declared_member_class(value), bool(_AWARD_HEAD.search(value)))
+    return cache[value]
 
 
 def _source_process_proofs(value: str) -> Iterator[_DescriptionProof]:
@@ -452,7 +519,30 @@ def _rule_is_function_argument(value: str, rule_start: int) -> bool:
     return False
 
 
-def _clause_description_proofs(value: str) -> Iterator[_DescriptionProof]:
+def _clause_description_proofs(value: str, *, work_budget: WorkBudget | None = None,
+        scope_cache: dict[str, _ScopeArgumentObservation] | None = None) -> Iterator[_DescriptionProof]:
+    en_matches: dict[tuple[int, re.Pattern[str]], re.Match[str] | None] = {}
+    scope_cache = scope_cache if scope_cache is not None else {}
+    provision_cache: dict[tuple[str, str], bool] = {}
+
+    def scope_roles(target: str) -> _ScopeArgumentObservation:
+        return _scope_argument_observation(target, scope_cache, work_budget=work_budget)
+
+    def directed_provision(subject: str, target: str) -> bool:
+        key = subject, target
+        if key not in provision_cache:
+            if work_budget is not None:
+                work_budget.charge(2 * (len(subject) + len(target)) + 1)
+            provision_cache[key] = bool(re.search(r'向|为', subject)
+                                        or re.search(r'\b(?:to|for)\b', target, re.I))
+        return provision_cache[key]
+
+    def en_match(grammar: re.Pattern[str], head_end: int) -> re.Match[str] | None:
+        key = head_end, grammar
+        if key not in en_matches:
+            en_matches[key] = grammar.match(value[head_end:head_end + 160])
+        return en_matches[key]
+
     rule = _PROCESS_RULE_SUBJECT.search(value)
     if rule and not _rule_is_function_argument(value,rule.start()):
         # A governing template/procedure owns all its quoted examples. A real
@@ -473,11 +563,22 @@ def _clause_description_proofs(value: str) -> Iterator[_DescriptionProof]:
                     and _argument_closed(value, developed.end())):
                 yield _DescriptionProof(True, value)
         for relation in (*_COMPOSITION_CN.finditer(value), *_COMPOSITION_EN.finditer(value)):
+            if relation.re is _COMPOSITION_EN:
+                # A copula followed by an already recognized passive/state
+                # predicate is not a nominal catalogue. Reuse those exact
+                # matches later instead of rescanning the head's bounded tail.
+                end = relation.end('head')
+                function = en_match(_EN_FUNCTION, end)
+                if ((function and _EN_COPULA.search(function['aux'])) or any(
+                        en_match(grammar, end) for grammar in (
+                            _EN_PASSIVE_USE, _EN_CONSTRAINT, _EN_STATE, _EN_PLAN, _EN_DESCRIPTION))):
+                    continue
             target = relation['target'].strip()
             if not _description_payload(target):
                 continue
             closed = _argument_closed(value, relation.end('target'))
             payload = _argument_payload(target, complete=closed)
+            source_scope = bool(closed and (scope_roles(target).member_class or scope_roles(target).operating))
             member_identity = False
             if payload is not False and closed:
                 # The source explicitly declares a product/customer class.
@@ -486,8 +587,6 @@ def _clause_description_proofs(value: str) -> Iterator[_DescriptionProof]:
                 members = [part.strip() for part in _NOMINAL_MEMBER_SEPARATOR.split(target)]
                 if len(members) >= 2 and all(_nominal_member_identity(part) for part in members):
                     member_identity = True
-                    if payload is None:
-                        payload = True
             prefix = value[max(0, relation.start('head')-45):relation.start('head')]
             # A customer class, sold range or explicit closed member list is a
             # business scope, not an expansion/manufacturing event. Membership
@@ -496,10 +595,9 @@ def _clause_description_proofs(value: str) -> Iterator[_DescriptionProof]:
             # prospective descriptions. No issuer/product vocabulary.
             observed_scope = bool(closed and not _PROSPECTIVE_SCOPE.search(prefix)
                 and (member_identity or _CUSTOMER_HEAD.fullmatch(relation['head']) or _SOLD_SCOPE.search(prefix)))
-            if observed_scope and payload is None and not abstract_source_argument(target):
-                payload = True
+            source_scope |= bool(observed_scope and _CUSTOMER_HEAD.fullmatch(relation['head']))
             yield _DescriptionProof(payload, value, descriptive_only=True,
-                                    material_scope=observed_scope, argument_target=target)
+                                    material_scope=observed_scope, source_scope=source_scope)
     # One clause-local index supplies both head-first descriptions and
     # actor/action-first objects. Resource heads remain object-only here.
     heads = {(match.start(), match.end()): True for match in _DESCRIPTION_OBJECT.finditer(value)}
@@ -514,7 +612,7 @@ def _clause_description_proofs(value: str) -> Iterator[_DescriptionProof]:
         # Only a bounded tail attached to this head is inspected. An earlier
         # noun cannot donate itself to a later clause's stage or predicate.
         tail = value[end:end + 160]
-        description = _EN_DESCRIPTION.match(tail)
+        description = en_match(_EN_DESCRIPTION, end)
         if description is not None:
             # 'product for ...' and 'product offered in ...' are NP modifiers.
             # Copular predicates or finite 'comes in' form an assertion; a
@@ -525,11 +623,10 @@ def _clause_description_proofs(value: str) -> Iterator[_DescriptionProof]:
                 yield _DescriptionProof(_argument_payload(description['target'],
                     concrete_action=description['verb'].casefold() != 'for',
                     complete=_argument_closed(value, end+description.end('target'))), value,
-                    bool(_UNSPECIFIED_VARIANTS.fullmatch(description['target'].strip())),
-                    argument_target=description['target'])
+                    bool(_UNSPECIFIED_VARIANTS.fullmatch(description['target'].strip())))
             continue
         for grammar in (_EN_FUNCTION, _EN_PASSIVE_USE, _EN_CONSTRAINT, _EN_STATE, _EN_PLAN):
-            match = grammar.match(tail)
+            match = en_match(grammar, end)
             if match is None or not _description_payload(match['target']):
                 continue
             if grammar is _EN_STATE and not _STATE_TARGET.search(match['target']):
@@ -547,14 +644,25 @@ def _clause_description_proofs(value: str) -> Iterator[_DescriptionProof]:
             yield _DescriptionProof(_argument_payload(match['target'],
                 concrete_action=not _WEAK_FUNCTION.fullmatch(match.groupdict().get('verb', 'for')),
                 complete=_argument_closed(value, end+match.end('target'))), value,
-                argument_target=match['target'])
+                source_scope=bool(grammar is _EN_PLAN or (
+                    _argument_closed(value, end+match.end('target')) and (
+                        scope_roles(match['target']).operating or scope_roles(match['target']).customer
+                        or scope_roles(match['target']).incentive
+                        or grammar is _EN_PASSIVE_USE and _EN_COPULA.search(match['aux']) or (
+                            grammar is _EN_FUNCTION and _EN_COPULA.search(match['aux'])
+                            and match['verb'].casefold().startswith(('provid', 'offer', 'suppl'))
+                            and (recipient := re.match(r'\s*to\s+(.+)', match['target'], re.I))
+                            and _nominal_member_identity(recipient[1]))))))
         match = _CN_FUNCTION.match(tail)
         if (match is not None and not _AGENT_DERIVATION.match(match['target'])
                 and _description_payload(match['target'])):
             yield _DescriptionProof(_argument_payload(match['target'],
                 concrete_action=not _WEAK_FUNCTION.fullmatch(match['verb']),
                 complete=_argument_closed(value, end+match.end('target'))), value,
-                argument_target=match['target'])
+                source_scope=bool(
+                    _argument_closed(value, end+match.end('target')) and (
+                        scope_roles(match['target']).operating or scope_roles(match['target']).customer
+                        or scope_roles(match['target']).incentive)))
         match = _CN_STATE.match(tail)
         if match is not None and (match['aux'] or match['verb']):
             yield _DescriptionProof(True, value)
@@ -581,7 +689,9 @@ def _clause_description_proofs(value: str) -> Iterator[_DescriptionProof]:
                 and index<len(ordered_heads) and ordered_heads[index][1]<=target_end):
             yield _DescriptionProof(_argument_payload(target,
                 concrete_action=not _WEAK_FUNCTION.fullmatch(predicate.group()),
-                complete=_argument_closed(value, target_end)), value)
+                complete=_argument_closed(value, target_end)), value, source_scope=bool(
+                    _argument_closed(value, target_end) and (
+                        directed_provision(subject, target))))
 
 
 def _clause_description(value: str) -> bool:
@@ -672,9 +782,7 @@ class AssertionRole:
     # adapter keeps its event/function scope without erasing independently
     # proved quantity/billing disclosures or changing the 0.9 reading policy.
     function_or_event: bool = True
-    # Already matched local function/composition arguments. These normalized
-    # words provide relevance scopes, never source offsets or positive proof.
-    argument_targets: tuple[str, ...] = ()
+    source_scope: bool = False
 
 
 @dataclass(frozen=True)
@@ -690,6 +798,10 @@ class SourceAssertionRoles:
     @property
     def operating(self) -> bool:
         return self.bound_operating or any(clause.operating and not clause.rule_purpose for clause in self.clauses)
+
+    @property
+    def source_scope(self) -> bool:
+        return any(clause.source_scope for clause in self.clauses)
 
     @property
     def independent_payload(self) -> bool | None:
@@ -708,12 +820,13 @@ class SourceAssertionRoles:
                 and not any(clause.material_payload for clause in self.clauses if not clause.rule_purpose))
 
 
-def prepare_source_assertions(text: str) -> SourceAssertionRoles:
+def prepare_source_assertions(text: str, *, work_budget: WorkBudget | None = None) -> SourceAssertionRoles:
     """Prepare one scope's local role evidence; no stage or attribution guess."""
     value=matching_reading_text(text)
     clauses=[]
+    scope_cache: dict[str, _ScopeArgumentObservation] = {}
     for text_clause in _source_clauses(value,descriptions=False):
-        parts = [(part, tuple(_clause_description_proofs(part)))
+        parts = [(part, tuple(_clause_description_proofs(part, work_budget=work_budget, scope_cache=scope_cache)))
                  for part in _source_clauses(text_clause)]
         operating = any(proofs for _, proofs in parts)
         payloads = [True if any(proof.independent is True for proof in proofs) else False if
@@ -745,10 +858,9 @@ def prepare_source_assertions(text: str) -> SourceAssertionRoles:
         material = any(proof.independent is True and (not proof.descriptive_only or proof.material_scope)
                        for _, proofs in parts for proof in proofs)
         function_or_event = any(not proof.descriptive_only for _, proofs in parts for proof in proofs)
-        targets = tuple(dict.fromkeys(proof.argument_target for _, proofs in parts
-                                      for proof in proofs if proof.argument_target))
+        source_scope = any(proof.source_scope for _, proofs in parts for proof in proofs)
         clauses.append(AssertionRole(text_clause,operating,purpose,independent,witnesses,material,
-                                     function_or_event, targets))
+                                     function_or_event, source_scope))
     shape=observe_value_cells(text)
     numeric=shape.unbound_numeric_cells
     return SourceAssertionRoles(tuple(clauses),numeric,

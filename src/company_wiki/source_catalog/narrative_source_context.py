@@ -11,7 +11,7 @@ from collections.abc import Callable
 import re
 
 from company_wiki.document_understanding.operating_states.assertion_roles import (
-    AssertionRole, abstract_source_argument, source_offering_head,
+    AssertionRole, abstract_source_argument, generic_source_predicate, source_argument_payload,
 )
 from company_wiki.resource_budget import WorkBudget
 from company_wiki.document_understanding.operating_states.patterns import COURTESY, ISSUER_WORD
@@ -38,6 +38,8 @@ class SourceClauseContext:
     objective_end: int | None = None
     complement_observed: bool = False
     relevant: bool = False
+    source_scope: bool = False
+    fact_candidate: bool = True
 
 
 _PAGE_NAME = re.compile(r'^\s*\d{1,4}\s+[^。.!?;；\n]{1,80}'
@@ -51,53 +53,7 @@ _METATEXT_OBJECT = re.compile(r'\b(?:glossar\w*|index|lists?|terms?)\b|索引|�
 _OBJECTIVE = re.compile(r'\b(?:striv\w*|aspir\w*|aim(?:s|ed|ing)?|committed\s+to|'
                          r'efforts?\s+to)\b|努力|争取|坚持', re.I)
 _PRINCIPLE = re.compile(r'^(?P<content>.+?)的(?:原则|理念|愿景)$')
-# These are the pre-existing promotional/goal roles, scoped to an NP. Their
-# presence is an unresolved relevance observation, never a new negative
-# independent-payload proof in the source assertion owner.
-_TENTATIVE_HEAD = re.compile(r'^(?:goals?|visions?|aspirations?|愿景|原则|理念)$', re.I)
-_PROMOTIONAL = re.compile(r'^(?:(?:outstanding|strategic|best-in-class)\s*|(?:宏伟|远大|美好)(?:的)?)'
-                          r'(?:(?:goals?|aspirations?|products?|services?|solutions?|visions?)|愿景|目标|未来)?$', re.I)
-_DEGREE = re.compile(r'^(?:more|most|less|least|fewer|fewest|(?:更|最)?(?:大|小|多|少|高|低))$', re.I)
-
-
-def _argument_relevance(value: str) -> str:
-    value = value.strip(' \t\r\n.。!?？！;；')
-    if abstract_source_argument(value) or _DEGREE.fullmatch(value):
-        return 'abstract'
-    if _TENTATIVE_HEAD.fullmatch(value) or _PROMOTIONAL.fullmatch(value):
-        return 'unresolved'
-    return 'specific'
-
-
-def _nominal_relevance(nominals: tuple[str, ...], modifiers: tuple[str, ...]) -> str:
-    """A modifier cannot turn a generic NP head into a specific argument.
-
-    Unknown nominal compounds can carry real operating content. A tentative
-    governing head (a goal/vision) remains tentative regardless of adjective;
-    promotional modifiers of otherwise abstract heads supply uncertainty,
-    never independent descriptive proof.
-    """
-    if not nominals:
-        return 'unresolved'
-    head = _argument_relevance(nominals[-1])
-    if head == 'unresolved':
-        return head
-    values = tuple(_argument_relevance(value) for value in nominals)
-    if 'specific' in values:
-        return 'specific'
-    modifier_values = tuple(_argument_relevance(value) for value in modifiers)
-    if 'unresolved' in values or 'unresolved' in modifier_values:
-        return 'unresolved'
-    if 'specific' in modifier_values:
-        # A modified source offering (e.g. unfamiliar technical software) can
-        # remain readable without creating a payload proof. A generic benefit
-        # or tentative goal cannot borrow that offering-head responsibility.
-        return 'specific' if source_offering_head(nominals[-1]) else 'unresolved'
-    return 'abstract'
-
-
-def source_clause_context(value: str, role: AssertionRole, *,
-                          work_budget: WorkBudget | None = None) -> SourceClauseContext:
+def source_clause_context(value: str, role: AssertionRole) -> SourceClauseContext:
     """Observe a prepared clause's discourse purpose once, before fallbacks.
 
     Typed independent content retains its own authority. A generic effort is
@@ -109,18 +65,6 @@ def source_clause_context(value: str, role: AssertionRole, *,
         return SourceClauseContext('context', 'source_generic_objective')
     if role.independent_payload is True and not objective:
         return SourceClauseContext()
-    if role.argument_targets and not objective:
-        # Reuse exact arguments already matched by the function-role owner.
-        # In particular a generic POS dictionary may split a compound noun
-        # into a verb and noun. That retokenization cannot override a fully
-        # observed tentative/promotional argument. Unknown targets continue
-        # to the shared matrix/complement observer below.
-        if work_budget is not None:
-            work_budget.charge(SOURCE_TARGET_SCAN_PASSES * sum(map(len, role.argument_targets)))
-        targets = tuple(_argument_relevance(target) for target in role.argument_targets)
-        if all(value != 'specific' for value in targets):
-            return SourceClauseContext('unresolved', 'source_payload_unresolved') if 'unresolved' in targets else (
-                SourceClauseContext('context', 'source_abstract_objective'))
     if arithmetic_presentation(value):
         return SourceClauseContext('context', 'source_arithmetic_presentation')
     if _PAGE_NAME.fullmatch(value):
@@ -153,34 +97,42 @@ def source_clause_context(value: str, role: AssertionRole, *,
 def statement_complement_context(value: str, role: AssertionRole,
                                  observation: StatementObservation, *,
                                  prepared: SourceClauseContext,
-                                 quantified_argument: Callable[[str], bool] | None = None) -> SourceClauseContext:
+                                 quantified_argument: Callable[[str], bool] | None = None,
+                                 work_budget: WorkBudget | None = None) -> SourceClauseContext:
     """Consume one charged syntax observation; never run the tagger again."""
     if prepared.complement_observed:
         return prepared
     prepared = replace(prepared, complement_observed=True)
     if role.independent_payload is True and not prepared.objective_operator:
         return prepared
-    arguments = observation.argument_scopes
-    relevance = (tuple(_nominal_relevance(scope.argument_nominals, scope.argument_modifiers) for scope in arguments)
-                 if arguments else ((_nominal_relevance(observation.argument_nominals, ()),)
-                                    if observation.argument_nominals else ()))
-    if (prepared.objective_operator or role.operating) and relevance:
-        if all(value != 'specific' for value in relevance):
-            if quantified_argument is not None and any(scope.argument_quantifiers
-                    and quantified_argument(' '.join(scope.argument_nominals))
-                    for scope in observation.argument_scopes):
-                # This is a bound direct-argument role, not a number/unit
-                # interpretation or achieved/planned metric proof. Its source
-                # words remain unresolved until the original metric owner
-                # independently supplies that proof.
-                return replace(prepared, status='unresolved', reason='source_goal_quantity_unresolved', relevant=True)
-            if 'unresolved' in relevance:
-                return replace(prepared, status='unresolved', reason='source_payload_unresolved')
-            return replace(prepared, status='context', reason='source_abstract_objective')
+    if (observation.reason == 'statement_grammar_ambiguous'
+            and (prepared.objective_operator or role.operating)):
+        return replace(prepared, status='unresolved', reason='source_payload_unresolved')
+    if not observation.independent:
+        return prepared
     # Membership alone describes a relationship, not its economic relevance.
     # A prepared business head/function is a relevance observation even when
     # its unfamiliar members are not independent typed event proof. Otherwise
     # preserve the unresolved original without claiming a summary anchor.
     if observation.weak_relation and not role.operating:
         return replace(prepared, status='unresolved', reason='source_membership_relevance_unproved')
+    arguments = observation.argument_scopes
+    generic_function = any(scope.attachment != 'application' and generic_source_predicate(scope.predicate)
+                           for scope in arguments)
+    if prepared.objective_operator or role.operating or generic_function:
+        payloads: dict[str, bool | None] = {}
+        for scope in arguments:
+            argument = ' '.join((*scope.argument_modifiers, *scope.argument_nominals))
+            if argument and argument not in payloads:
+                if work_budget is not None:
+                    work_budget.charge(SOURCE_TARGET_SCAN_PASSES * len(argument))
+                payloads[argument] = source_argument_payload(argument)
+        if any(payload is True for payload in payloads.values()):
+            return prepared
+        if quantified_argument is not None and any(scope.argument_quantifiers
+                and quantified_argument(' '.join(scope.argument_nominals)) for scope in arguments):
+            return replace(prepared, status='unresolved', reason='source_goal_quantity_unresolved', relevant=True)
+        if payloads and all(payload is False for payload in payloads.values()):
+            return replace(prepared, status='context', reason='source_abstract_objective')
+        return replace(prepared, status='unresolved', reason='source_payload_unresolved')
     return prepared

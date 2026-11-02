@@ -1,10 +1,10 @@
 """Local validation helpers for the GitHub CI fast gate.
 
 Three bounded layers share one script. Commits keep static checks (pre-commit).
-Daily pushes run the affected unit files plus the shared fast contract set
-once, and defer everything else to CI. Changed tests and nearest known static
-consumers stay bounded even when other scope is uncertain; no known consumers
-means the fast contract set alone. A proven non-runtime range starts no
+Daily pushes run the fixed shared fast contract set once and defer everything
+else to CI. They classify only the changed paths, never build an AST impact
+graph or append affected test files. Authors run change-specific tests during
+implementation. A proven non-runtime range starts no
 test process and reports tests_not_run. The full local suite below stays an
 explicit decision and is never started implicitly by a push. A green fast pass
 only proves the scope that actually ran (`local_fast_pass`), never the whole
@@ -49,14 +49,11 @@ sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 from company_wiki._bounded_process import (  # noqa: E402
     ChildFailed, ChildTimeout, OutputLimitExceeded, TransportError, run_bounded,
 )
-from tools.changed_unit_tests import changed_paths, select_unit_tests  # noqa: E402
+from tools.changed_unit_tests import changed_paths  # noqa: E402
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-# Count a closed list as well as the literal full-suite recommendation. A
-# hundreds-file list is still a broad validation run, not daily feedback.
-DAILY_PUSH_MAX_AFFECTED_TARGETS = 32
-# The normal curated smoke took ~52s for 154 cases. Three minutes allows
-# affected unit work while keeping daily feedback bounded; full mode keeps 600s.
+# Daily feedback has one fixed inventory, independent of changed-file count.
+# Retain the existing total child deadline; full mode keeps 600s.
 DAILY_PUSH_TIMEOUT_SECONDS = 180
 DAILY_PUSH_LABEL_PREFIX = "daily push fast feedback:"
 STDOUT_CAP_BYTES = 4 * 1024 * 1024
@@ -308,9 +305,8 @@ def _run_pytest_gate(cmd: list[str], label: str) -> int:
         # xdist is already a declared test dependency. Each worker has its own
         # interpreter and pytest temp tree; file scheduling keeps module-level
         # fixtures together. Retain the full collection and the same timeout.
-        # An explicitly requested wide file set gets the same two workers as
-        # the full unit suite. Daily policy defers wide recommendations to CI.
-        # Narrow changed-file and contract gates avoid this startup overhead.
+        # Explicit manual wide file sets get the same two workers as full units.
+        # The fixed daily contract set avoids this startup overhead.
         cmd = [*cmd, "-n", "2", "--dist=loadfile", "-vv", "--durations=15"]
     # Windows SQLite and tempfile consult TEMP/TMP independently of pytest's
     # --basetemp. Keep all three roots inside this invocation's owned scratch:
@@ -337,50 +333,20 @@ def _run_pytest_gate(cmd: list[str], label: str) -> int:
         scratch.cleanup()
 
 
-def _push_targets(selected: list[str]) -> tuple[list[str], str]:
-    """Keep bounded known consumers; full/unknown recommendations defer to CI.
+def _non_runtime_range(changes: set[str] | None) -> bool:
+    """Only positively classified documentation can avoid the fixed smoke.
 
-    The selection layer may still recommend the whole unit suite for wide,
-    dynamic, configuration or unknown scopes. That recommendation stays with
-    CI: silently starting all unit tests on every push is the regression this
-    policy exists to prevent. A trusted empty selection has no runtime targets;
-    other pushes run the shared fast contract set once, deduplicated against
-    whole-file selections. Changed/nearest known files come first; wide known
-    lists retain a bounded partial slice without claiming complete validation.
+    This is a path-only classification, not a dependency analysis. An unknown
+    range or non-document path always runs smoke, even when no Python import
+    consumer is known. Planning archives keep their existing non-runtime role.
     """
-    selected = list(dict.fromkeys(selected))
-    if not selected:
-        return [], "no runtime test targets in the classified push range"
-    if "tests/unit" in selected:
-        return list(FAST_CONTRACT_CASES), "full unit suite recommendation deferred to CI"
-    if any(not target.split("::", 1)[0].endswith(".py") for target in selected):
-        return list(FAST_CONTRACT_CASES), "unbounded test directory recommendation deferred to CI"
-    # The selector also describes changed integration/root test modules. Those
-    # recommendations belong to CI or a separate major-node integration run;
-    # only affected units may expand the fixed daily contract inventory.
-    units = [target for target in selected
-             if target.startswith("tests/unit/")
-             and ".." not in target.split("::", 1)[0].split("/")
-             and "\\" not in target.split("::", 1)[0]]
-    nonunit_count = len(selected) - len(units)
-    selected = units
-    known_count = len(selected)
-    selected = selected[:DAILY_PUSH_MAX_AFFECTED_TARGETS]
-    whole_files = {path for path in selected if "::" not in path}
-    targets = list(selected)
-    # A whole-file target covers every fast node in that file. A node-id
-    # target covers only itself, so keep sibling fast nodes and remove only
-    # exact duplicate node IDs.
-    targets.extend(case for case in FAST_CONTRACT_CASES
-                   if case.split("::")[0] not in whole_files and case not in targets)
-    deferred = f"tests/unit outside the {len(targets)} ran targets deferred to CI"
-    if known_count > len(selected):
-        deferred += (f"; bounded partial selection of {len(selected)}/{known_count} known affected files; "
-                     f"{known_count - len(selected)} known files deferred to CI")
-    if nonunit_count:
-        deferred += (f"; {nonunit_count} non-unit recommendation(s) deferred to CI "
-                     "or separate major-node integration acceptance")
-    return targets, deferred
+    documents = {"README.md", "CONTRIBUTING.md", "CHANGELOG.md", "AGENTS.md"}
+    return changes is not None and all(
+        name.startswith(("docs/plans/", ".planning/"))
+        or name in documents
+        or name.startswith("docs/") and Path(name).suffix in {".md", ".rst", ".adoc"}
+        for name in changes
+    )
 
 
 def _dispatch_gate(cmd: list[str], label: str, env_extra: dict | None = None) -> int:
@@ -400,7 +366,7 @@ def main(argv: list[str] | None = None) -> int:
                         help="skip the contract-test step (fast lint-only)")
     parser.add_argument(
         "--push-checks", action="store_true",
-        help="read Git push ref updates from stdin; run affected units and contract smoke once",
+        help="read Git push ref updates; run fixed contract smoke once unless documentation-only",
     )
     parser.add_argument(
         "--fast-contracts-only",
@@ -447,31 +413,26 @@ def main(argv: list[str] | None = None) -> int:
         None,
     )
     if args.push_checks:
-        selected, reason = select_unit_tests(
-            PROJECT_ROOT, changed_paths(PROJECT_ROOT, sys.stdin.read()), known_only=True)
-        targets, deferred = _push_targets(selected)
-        if not targets:
-            # pytest with an empty target list would collect the entire project.
-            # Only the existing range classifier can produce this empty scope;
-            # unknown/configuration ranges still select the contract smoke set.
-            print(f"Push scope: {reason}; planned 0 runtime targets. "
-                  f"tests_not_run: {deferred}; CI policy unchanged.")
+        changes = changed_paths(PROJECT_ROOT, sys.stdin.read())
+        if _non_runtime_range(changes):
+            # Never invoke pytest with no targets: that would collect everything.
+            print("Push scope: no behavior changes; planned 0 runtime targets. "
+                  "tests_not_run: non-runtime range; CI policy unchanged.")
             return 0
+        reason = "unknown push range" if changes is None else "runtime or configuration changes"
+        targets = list(FAST_CONTRACT_CASES)
+        deferred = "change-specific tests are the author's responsibility; full suites remain in CI"
         print(f"Push scope: {reason}; planned {len(targets)} target(s); "
               f"full_validation_pending: {deferred}.")
         print("Planned test targets:", *targets, sep="\n  ")
-        label = (
-            f"{DAILY_PUSH_LABEL_PREFIX} affected unit tests and CI contract smoke"
-            if any(target not in FAST_CONTRACT_CASES for target in targets)
-            else f"{DAILY_PUSH_LABEL_PREFIX} CI contract smoke (no affected unit files)"
-        )
+        label = f"{DAILY_PUSH_LABEL_PREFIX} fixed CI contract smoke"
         code = _dispatch_gate(
             [sys.executable, "-m", "pytest", "-q", "--tb=short", "--timeout=180", *targets],
             label)
         if code:
             print("\nPUSH CHECKS RED — fix the failing phase; do not bypass.")
         else:
-            print("\nPush fast gate GREEN (local_fast_pass for the ran scope only); "
+            print("\nPush fast gate GREEN (local_fast_pass for fixed smoke only); "
                   "full_validation_pending — CI still runs the full suites.")
         return code
     if args.fast_contracts_only:

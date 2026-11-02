@@ -784,7 +784,7 @@ class SourceOperatingSession:
                 raise WorkBudgetExceeded("operating relation work exhausted")
             self.work_budget.charge(READING_BUSINESS_SCAN_PASSES * len(text))
             from company_wiki.document_understanding.operating_states.assertion_roles import prepare_source_assertions
-            self.assertions[owner] = replace(prepare_source_assertions(text),
+            self.assertions[owner] = replace(prepare_source_assertions(text, work_budget=self.work_budget),
                 bound_operating=(self.engine.complete_assertion(owner,self.context_for(owner))
                     or self.engine.unknown_argument(owner,self.context_for(owner))))
             assessment = prepare_reading_business_assessment(text, result, ref_text=ref_text,

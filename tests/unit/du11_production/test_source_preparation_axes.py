@@ -116,10 +116,13 @@ def test_unseen_adjective_cannot_prove_a_tentative_nominal_head(text):
     assert not prepared.fact.eligible
 
 
-def test_unseen_specific_nominal_keeps_its_original_relevance():
+def test_unseen_nominal_keeps_its_original_words_without_inventing_relevance():
     text = 'Our platform supports portable compressors.'
     prepared = prepare_reading_business_assessment(text, {'relations': []})
-    assert prepared.passage.relevant
+    # R4 erratum: portable compressors has no positive argument proof in the
+    # current owner. POS/unknown words cannot distinguish it from marketing.
+    assert prepared.passage.use == 'unresolved' and not prepared.passage.relevant
+    assert not prepared.fact.eligible and prepared.source_roles.independent_payload is None
     assert prepared.source_roles.clauses[0].text.rstrip('.') == text.rstrip('.')
 
 
@@ -138,24 +141,30 @@ def test_target_scans_are_precharged_and_memoized_with_the_shared_source_scope(m
     from company_wiki.resource_budget import WorkBudget, WorkBudgetExceeded
     from unit.du11_production.test_source_information_binding import session_for, unit_id
 
-    text = '我们的平台支持宏伟愿景。'
+    from company_wiki.document_understanding.statement_grammar import observe_statement
+
+    text = 'We aim to pursue luminous horizons.'
     role = prepare_source_assertions(text).clauses[0]
-    amount = owner.SOURCE_TARGET_SCAN_PASSES * sum(map(len, role.argument_targets))
+    observation = observe_statement(text)
+    arguments = [' '.join((*scope.argument_modifiers, *scope.argument_nominals))
+                 for scope in observation.argument_scopes]
+    amount = owner.SOURCE_TARGET_SCAN_PASSES * sum(map(len, dict.fromkeys(arguments)))
     assert amount > 0
-    original = owner._argument_relevance
+    original = owner.source_argument_payload
     calls = []
 
     def counted(value):
         calls.append(value)
         return original(value)
 
-    monkeypatch.setattr(owner, '_argument_relevance', counted)
+    monkeypatch.setattr(owner, 'source_argument_payload', counted)
     with pytest.raises(WorkBudgetExceeded):
-        owner.source_clause_context(text, role, work_budget=WorkBudget(amount - 1))
+        owner.statement_complement_context(text, role, observation,
+            prepared=owner.source_clause_context(text, role), work_budget=WorkBudget(amount - 1))
     assert not calls
     session, budget = session_for([text])
     passage = session.source_passage(unit_id(0))
     used = budget.used
-    assert calls == list(role.argument_targets)
+    assert calls == list(dict.fromkeys(arguments))
     assert session.source_passage(unit_id(0)) is passage and budget.used == used
-    assert calls == list(role.argument_targets)
+    assert calls == list(dict.fromkeys(arguments))

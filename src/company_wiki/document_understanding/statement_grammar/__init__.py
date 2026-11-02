@@ -6,7 +6,7 @@ Missing resources remain unknown; they cannot turn a fragment into support.
 """
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, replace
 from functools import lru_cache
 from hashlib import sha256
 from importlib import metadata
@@ -191,8 +191,12 @@ def _english_statement(text: str) -> tuple[bool, tuple[PredicateArgumentScope, .
             # Its unknown objects remain untouched; no crop/industry words
             # determine this grammatical distinction.
             if any(scope.predicate.casefold().startswith('cover') for scope in scopes):
-                membership &= not any(token.casefold() == 'with' and flag == 'IN'
-                                      for token, flag in tagged[index + 1:])
+                application = any(token.casefold() == 'with' and flag == 'IN'
+                                  for token, flag in tagged[index + 1:])
+                membership &= not application
+                if application:
+                    scopes = tuple(replace(scope, attachment='application')
+                                   if scope.predicate.casefold().startswith('cover') else scope for scope in scopes)
             return True, scopes, membership
     return False, (), False
 

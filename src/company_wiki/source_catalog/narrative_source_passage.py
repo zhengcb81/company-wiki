@@ -31,7 +31,7 @@ from .narrative_source_context import (
 )
 
 
-SOURCE_PASSAGE_POLICY_VERSION = 'source-passage/9'
+SOURCE_PASSAGE_POLICY_VERSION = 'source-passage/10'
 # Preparation reuses normalized clauses from the already charged assessment.
 # Includes generic grammar, negative envelopes, account and cause scans, plus
 # the measurement callback's normalized clause view. Metric proofs themselves
@@ -110,6 +110,7 @@ def prepare_source_statement_scope(text: str, roles: SourceAssertionRoles, *,
         measurement_relation: Callable[[str], bool] | None = None,
         quantified_argument: Callable[[str], bool] | None = None,
         business_relation: Callable[[str], bool] | None = None,
+        scope_relation: Callable[[str], bool] | None = None,
         grammar_work_budget=None) -> SourceStatementScope:
     """Observe every sentence once; suppress question/courtesy proof anywhere.
 
@@ -134,17 +135,25 @@ def prepare_source_statement_scope(text: str, roles: SourceAssertionRoles, *,
 
     for clause in roles.clauses:
         key = statement_assertion_key(clause.text)
-        context = source_clause_context(clause.text, clause, work_budget=grammar_work_budget)
+        context = source_clause_context(clause.text, clause)
         typed_business = bool(context.status == 'candidate' and not context.objective_operator
                               and business_relation and business_relation(clause.text))
+        scope_description = bool(context.status == 'candidate' and not context.objective_operator
+                                 and (clause.source_scope or scope_relation and scope_relation(clause.text)))
+        if scope_description and not typed_business and clause.independent_payload is not True:
+            context = replace(context, source_scope=True, fact_candidate=False)
+        if (context.status == 'candidate' and not context.objective_operator and clause.operating
+                and clause.independent_payload is None and not typed_business and not scope_description):
+            context = replace(context, status='unresolved', reason='source_payload_unresolved')
         if context.status == 'candidate' and (context.objective_operator or
-                clause.operating and clause.independent_payload is not True and not typed_business):
+                clause.operating and clause.independent_payload is not True and not typed_business and not scope_description):
             observation = observe_statement(clause.text, work_budget=grammar_work_budget,
                 lexical_boundaries=(context.objective_end,) if context.objective_end is not None else ())
             prepared_grammar[key] = observation
             grammar_results.append((key, observation))
             context = statement_complement_context(clause.text, clause, observation, prepared=context,
-                                                  quantified_argument=quantified_role)
+                                                  quantified_argument=quantified_role,
+                                                  work_budget=grammar_work_budget)
         context_results_list.append((key, context))
     context_results = tuple(context_results_list)
     contexts = dict(context_results)
@@ -183,6 +192,7 @@ def prepare_source_statement_scope(text: str, roles: SourceAssertionRoles, *,
         start = stop
     if (not suppressed and CAUSAL_LINK.search(text) is None
             and all(context.status == 'candidate' for _, context in context_results)
+            and all(context.fact_candidate for _, context in context_results)
             and all(observation.status != 'unknown' for observation in prepared_grammar.values())):
         return SourceStatementScope(text, roles, grammar_results=tuple(grammar_results),
                                     context_results=context_results, fact_roles=roles)
@@ -224,6 +234,7 @@ def prepare_source_statement_scope(text: str, roles: SourceAssertionRoles, *,
             source_clauses.extend(members)
         members = [clause for clause in members
                    if contexts[statement_assertion_key(clause.text)].status == 'candidate'
+                   and contexts[statement_assertion_key(clause.text)].fact_candidate
                    and (statement_assertion_key(clause.text) not in prepared_grammar
                         or prepared_grammar[statement_assertion_key(clause.text)].status != 'unknown')]
         if not members:
@@ -256,8 +267,11 @@ def prepare_source_statement_scope(text: str, roles: SourceAssertionRoles, *,
             assertion_keys.update(clause.text.strip(' \t\r\n.。!?？！;；') for clause in members)
     fact_roles = (replace(roles, clauses=tuple(clauses), bound_operating=False,
                           bound_payload=False) if suppressed else roles)
-    source_roles = (roles if len(source_clauses) == len(roles.clauses) else
-                    replace(roles, clauses=tuple(source_clauses), bound_operating=False, bound_payload=False))
+    source_view = tuple(replace(clause, source_scope=True)
+                        if contexts[statement_assertion_key(clause.text)].source_scope else clause
+                        for clause in source_clauses)
+    source_roles = (roles if source_view == roles.clauses else
+                    replace(roles, clauses=source_view, bound_operating=False, bound_payload=False))
     return SourceStatementScope(''.join(masked), source_roles, suppressed,
                                 frozenset(assertion_keys), frozenset(causal_keys),
                                 tuple(grammar_results), context_results, fact_roles)
@@ -269,6 +283,7 @@ def _declarative(text: str, *, grammar_observations: list[StatementObservation] 
                  semantic_contexts: list[SourceClauseContext] | None = None,
                  semantic_results: dict[str, SourceClauseContext] | None = None,
                  clause_contexts: dict[str, SourceClauseContext] | None = None,
+                 bound_causal_description: bool = False,
                  grammar_work_budget=None) -> bool:
     """Observe a source statement, not its economic truth or event eligibility."""
     if not any(character.isalpha() for character in text):
@@ -287,7 +302,7 @@ def _declarative(text: str, *, grammar_observations: list[StatementObservation] 
     observation = grammar_results.get(key) if grammar_results is not None else None
     prepared = clause_contexts.get(key) if clause_contexts is not None else None
     if prepared is None and source_role is not None:
-        prepared = source_clause_context(text, source_role, work_budget=grammar_work_budget)
+        prepared = source_clause_context(text, source_role)
         if clause_contexts is not None:
             clause_contexts[key] = prepared
     if prepared is not None and prepared.status != 'candidate':
@@ -299,11 +314,12 @@ def _declarative(text: str, *, grammar_observations: list[StatementObservation] 
             lexical_boundaries=(prepared.objective_end,) if prepared and prepared.objective_end is not None else ())
         if grammar_results is not None:
             grammar_results[key] = observation
-    if source_role is not None:
+    if source_role is not None and not bound_causal_description:
         context = semantic_results.get(key) if semantic_results is not None else None
         if context is None:
             assert prepared is not None
-            context = (statement_complement_context(text, source_role, observation, prepared=prepared)
+            context = (statement_complement_context(text, source_role, observation, prepared=prepared,
+                                                    work_budget=grammar_work_budget)
                        if prepared.status == 'candidate' else prepared)
             if semantic_results is not None:
                 semantic_results[key] = context
@@ -372,7 +388,7 @@ def prepare_source_passage(
         return context('source_non_assertion')
     prepared_use = statement_scope is not None
     statement_scope = (statement_scope if statement_scope is not None else
-                       prepare_source_statement_scope(text, roles))
+                       prepare_source_statement_scope(text, roles, grammar_work_budget=grammar_work_budget))
     clauses, has_prefix = statement_scope.roles.clauses, statement_scope.suppressed
     clause_contexts = dict(statement_scope.context_results)
     grammar_results = {key: observation for key, observation in statement_scope.grammar_results
@@ -401,6 +417,9 @@ def prepare_source_passage(
         return context('source_non_assertion')
     if not has_prefix and roles.independent_payload is False:
         return context('source_generic_objective')
+    if any(clause_contexts.get(statement_assertion_key(clause.text), SourceClauseContext()).source_scope
+           for clause in active_clauses):
+        return SourcePassageCapability('support', 'source_declared_scope', 'source_narrative', True)
     # Preserve the established prepared capability before considering a more
     # general source-quote fallback. It may be proved by a bound relation or a
     # resource/quantity owner rather than a single local clause witness.
@@ -445,6 +464,7 @@ def prepare_source_passage(
                                          source_role=clause, semantic_contexts=semantic_contexts,
                                          semantic_results=semantic_results,
                                          clause_contexts=clause_contexts,
+                                         bound_causal_description=True,
                                          grammar_work_budget=grammar_work_budget)
             # A comma can separate a complete operating description from its
             # financial consequence. Classify those local scopes separately,

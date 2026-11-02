@@ -32,9 +32,10 @@ def source_narrative_relevance(*, fact: OperatingFact,
         return False
     if source_roles is not None and source_roles.independent_payload is False:
         return table_qualified
-    return (table_qualified or bool(source_roles and (
-        source_roles.operating or source_roles.numeric_role == 'operating'))
-        or bool(fact.eligible and set(fact.reasons) - UNRESOLVED_READING_REASONS))
+    if source_roles is not None:
+        return (table_qualified or source_roles.independent_payload is True or source_roles.source_scope
+                or source_roles.numeric_role == 'operating')
+    return table_qualified or bool(fact.eligible and set(fact.reasons) - UNRESOLVED_READING_REASONS)
 
 
 def source_support_use(text: str, *, fact: OperatingFact, financial_only: bool | None,
@@ -77,6 +78,8 @@ def source_support_use(text: str, *, fact: OperatingFact, financial_only: bool |
     if source_roles.independent_payload is True:
         return ("support", "source_business_relation" if fact.eligible
                 and set(fact.reasons) - UNRESOLVED_READING_REASONS else "source_operating_description")
+    if source_roles.source_scope:
+        return 'support', 'source_declared_scope'
     # Refs only locate characters. Completeness is the source owner's prepared
     # role proof, not a second vote from an unknown stage or arbitrary NP refs.
     # Optional relation/ref arguments remain read-compatible with earlier

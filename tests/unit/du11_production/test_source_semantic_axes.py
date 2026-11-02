@@ -25,7 +25,6 @@ def test_source_context_cannot_be_repromoted_by_complete_sentence_syntax(text):
 
 @pytest.mark.parametrize('text', (
     'Our service coverage includes remote factory maintenance.',
-    'Our services include orchard planting and coastal transport.',
     'Our vessels transport liquefied gas between coastal terminals.',
     'The clinicians treat rare diseases at regional clinics.',
     'Northvale owns an insurer and two electricity utilities.',
@@ -34,8 +33,6 @@ def test_source_context_cannot_be_repromoted_by_complete_sentence_syntax(text):
     '公司主要品牌都有专属的工厂，大多数工厂只为一个品牌服务。',
     '公司向山区医院提供维护服务。',
     'Our teams cover crops with shade nets.',
-    'We are committed to treating rare diseases at regional clinics.',
-    '公司将努力运输液化天然气。',
 ))
 def test_business_content_does_not_need_a_company_or_industry_allowlist(text):
     prepared = prepare_reading_business_assessment(text, {'relations': []})
@@ -54,8 +51,10 @@ def test_courtesy_inside_a_mixed_statement_cannot_erase_an_unfamiliar_operation(
 def test_an_existing_incomplete_role_proof_stays_readable_without_becoming_complete():
     text = 'Our equipment is used in rural clinics and urban markets.'
     prepared = prepare_reading_business_assessment(text, {'relations': []})
-    assert prepared.passage.use == 'unresolved' and prepared.passage.relevant
-    assert prepared.passage.reason == 'source_payload_unresolved'
+    # R4: the original None remains None; a bound use-location source scope
+    # is now explicitly observed, without a factual/financial upgrade.
+    assert prepared.passage.use == 'support' and prepared.passage.relevant
+    assert prepared.source_roles.source_scope and not prepared.fact.eligible
     assert prepared.source_roles.independent_payload is None
 
 
@@ -174,7 +173,7 @@ def test_coordinated_goal_preserves_each_predicates_own_arguments(joiner, specif
     left, right = (specific, abstract) if specific_first else (abstract, specific)
     text = f'We aim to {left} {joiner} {right}.'
     prepared = prepare_reading_business_assessment(text, {'relations': []})
-    assert prepared.passage.use == 'support' and prepared.passage.relevant
+    _assert_unknown_goal(text, prepared)
     assert not prepared.fact.eligible and not prepared.fact.financial_exempt
 
 
@@ -189,7 +188,7 @@ def test_coordinated_goal_preserves_each_predicates_own_arguments(joiner, specif
 ))
 def test_nested_and_multiple_goal_predicates_do_not_lose_concrete_arguments(text):
     prepared = prepare_reading_business_assessment(text, {'relations': []})
-    assert prepared.passage.use == 'support' and prepared.passage.relevant
+    _assert_unknown_goal(text, prepared)
     assert not {'operating_milestone', 'operating_current_state'} & set(prepared.fact.reasons)
 
 
@@ -215,7 +214,7 @@ def test_chinese_goal_coordination_has_the_same_order_invariance(joiner, specifi
     left, right = (specific, abstract) if specific_first else (abstract, specific)
     text = f'公司努力{left}{joiner}{right}。'
     prepared = prepare_reading_business_assessment(text, {'relations': []})
-    assert prepared.passage.use == 'support' and prepared.passage.relevant
+    _assert_unknown_goal(text, prepared)
     assert not prepared.fact.eligible and not prepared.fact.financial_exempt
 
 
@@ -234,7 +233,7 @@ def test_chinese_benefit_and_abstract_goal_coordination_stays_context(text):
 def test_goal_governor_does_not_supply_a_whole_sentence_veto(operator):
     text = f'We {operator} to reopen neonatal wards and create value.'
     prepared = prepare_reading_business_assessment(text, {'relations': []})
-    assert prepared.passage.use == 'support' and prepared.passage.relevant
+    _assert_unknown_goal(text, prepared)
     assert not prepared.fact.eligible
 
 
@@ -242,7 +241,7 @@ def test_goal_governor_does_not_supply_a_whole_sentence_veto(operator):
 def test_prepared_operator_boundary_is_not_a_dictionary_or_predicate_override(operator):
     statement = f'公司{operator}创造价值并重开新生儿病房。'
     nominal = f'公司的{operator}创造计划。'
-    assert prepare_reading_business_assessment(statement, {'relations': []}).passage.use == 'support'
+    _assert_unknown_goal(statement, prepare_reading_business_assessment(statement, {'relations': []}))
     assert not prepare_reading_business_assessment(nominal, {'relations': []}).passage.relevant
 
 
@@ -262,7 +261,7 @@ def test_goal_matrix_and_complements_are_prepared_once_before_fact_projection(mo
     session, budget = session_for([text])
     uid = unit_id(0)
     fact, passage = session.fact(uid), session.source_passage(uid)
-    assert passage.use == 'support' and not fact.eligible
+    assert passage.use == 'unresolved' and not passage.relevant and not fact.eligible
     assert calls == [text]
     used = budget.used
     assert session.fact(uid) is fact and session.source_passage(uid) is passage
@@ -289,7 +288,7 @@ def test_a_typed_function_inside_a_beneficiary_relative_cannot_supply_the_goal()
 def test_the_same_typed_function_as_a_direct_product_goal_is_preserved():
     text = 'We aim to supply software that processes customer orders and create value.'
     prepared = prepare_reading_business_assessment(text, {'relations': []})
-    assert prepared.passage.use == 'support' and prepared.passage.relevant
+    _assert_unknown_goal(text, prepared)
 
 
 def test_a_separate_typed_business_statement_survives_an_abstract_goal():
@@ -367,7 +366,7 @@ def test_predicate_argument_scope_walk_is_linear_and_does_not_retag():
 def test_a_concrete_noun_modifier_is_not_removed_with_rhetorical_adjectives():
     text = 'We aim to supply surgical services and create value.'
     prepared = prepare_reading_business_assessment(text, {'relations': []})
-    assert prepared.passage.use == 'support' and prepared.passage.relevant
+    _assert_unknown_goal(text, prepared)
 
 
 def test_unavailable_goal_binding_does_not_stop_an_independent_non_goal_typed_scope(monkeypatch):
@@ -387,3 +386,29 @@ def test_unavailable_goal_binding_does_not_stop_an_independent_non_goal_typed_sc
     assert [span.raw_text for span in result.evidence_spans] == [healthy]
     assert result.reading_context['source_processing_complete'] is False
     assert any(diagnostic['code'] == 'source_grammar_unavailable' for diagnostic in result.selection_diagnostics)
+
+
+def _assert_unknown_goal(text, prepared):
+    # R4 erratum: POS binds these words but supplies no positive operating
+    # argument. Keep the original claim, not an invented economic proof.
+    from company_wiki.document_normalization.text_matching import matching_reading_text
+    assert prepared.passage.use == 'unresolved' and not prepared.passage.relevant
+    assert not prepared.fact.eligible
+    assert prepared.source_roles.independent_payload is None
+    assert not prepared.source_roles.bound_payload
+    expected = matching_reading_text(text).strip(' .。!?;；')
+    assert ''.join(c.text for c in prepared.source_roles.clauses).strip(' .。!?;；') == expected
+
+
+@pytest.mark.parametrize('text', (
+    'We are committed to treating rare diseases at regional clinics.',
+    '公司将努力运输液化天然气。',
+))
+def test_unknown_goals_remain_source_words_without_unproved_relevance(text):
+    _assert_unknown_goal(text, prepare_reading_business_assessment(text, {'relations': []}))
+
+
+
+def test_unknown_catalogue_members_do_not_prove_each_others_semantics():
+    text = 'Our services include orchard planting and coastal transport.'
+    _assert_unknown_goal(text, prepare_reading_business_assessment(text, {'relations': []}))
