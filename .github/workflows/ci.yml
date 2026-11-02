@@ -44,7 +44,7 @@ jobs:
           python -m pip install -r requirements.txt -r requirements-test.txt "ruff==0.15.18"
 
       - name: Ruff lint
-        run: ruff check src tests/unit tests/contract tests/e2e scripts tests/integration/test_narrative_runtime_e2e.py tests/support/narrative_model_fixture.py tools/check_dependencies.py tools/changed_unit_tests.py tools/pre_push_gate.py tools/summarize_junit_failures.py
+        run: ruff check src tests/unit tests/contract tests/e2e scripts tests/integration/test_narrative_runtime_e2e.py tests/support/narrative_model_fixture.py tools/check_dependencies.py tools/changed_unit_tests.py tools/pre_push_gate.py tools/summarize_junit_failures.py tools/source_case_receipt.py tools/source_case_checks.py tools/source_case_runner.py
 
       - name: Strict type check on src
         run: python -m mypy src

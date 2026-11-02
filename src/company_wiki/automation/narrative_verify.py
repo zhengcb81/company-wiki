@@ -54,9 +54,7 @@ from .narrative_replay import (
 from .narrative_source_guard import (
     NarrativeSourceGuardError,
     NarrativeSourceReader,
-    source_ref,
-    validate_opened_identity,
-    validate_source_metadata,
+    open_verified_source,
 )
 
 
@@ -245,14 +243,7 @@ class NarrativeVerifyHandler:
         if payload.subject.kind == "official_json":
             return self._execute_projection(context, payload, selected, summary,
                                              reading_projection_version=reading_projection_version)
-        ref = source_ref(payload)
-        opened = self._reader.open_version(
-            ref,
-            purpose="narrative_derivation",
-            expected_read_policy_sha256=payload.expected_read_policy_sha256,
-        )
-        validate_opened_identity(payload, opened)
-        validate_source_metadata(payload, self._reader.describe_version(ref))
+        opened = open_verified_source(self._reader, payload)
         review = self._current_review(selected, summary)
         context.checkpoint()
         self._replay(opened.data, selected)

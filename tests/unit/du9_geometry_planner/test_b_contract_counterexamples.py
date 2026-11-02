@@ -467,7 +467,7 @@ def test_mixed_demand_window_admits_candidates_without_being_dropped():
 
 # --- huge inputs and bounded diagnostics ------------------------------------
 
-def test_megabyte_scope_string_stays_bounded():
+def test_large_scope_is_processed_under_actual_work_budget_not_an_id_length_permission():
     fixture = helpers.load_fixture()
     windows = [
         helpers.tiny_window("w-a", "rk_mda", 1, 5),
@@ -478,14 +478,13 @@ def test_megabyte_scope_string_stays_bounded():
         fixture["policy"], windows, page_count=fixture["page_count"],
         limits=helpers.tiny_limits(64), work_budget=_big_budget(),
     )
-    codes = [row["code"] for row in plan["diagnostics"]]
-    assert "WINDOW_INVALID_FIELD" in codes
-    serialized = json.dumps(plan, ensure_ascii=False)
-    assert "s" * 4097 not in serialized, "megabyte scope must not be copied into the plan"
-    assert len(serialized) < 50_000
-    for row in plan["diagnostics"]:
-        assert len(row["detail"]) <= 160
-    assert plan["summary"]["windows_built"] == 2
+    assert plan["summary"]["windows_built"] == 3
+    assert any(row['scope_id'] == 's' * 1_000_000 for row in plan['allocations'])
+    short = WorkBudget(10_000)
+    partial = plan_geometry_requests(fixture['policy'], windows, page_count=fixture['page_count'],
+                                    limits=helpers.tiny_limits(64), work_budget=short)
+    assert short.exhausted and partial['summary']['partial']
+    assert partial['allocations'] == []
 
 
 def test_huge_window_list_completes_with_bounded_diagnostics():
@@ -714,7 +713,7 @@ def test_f1_tampered_plan_after_state_creation_is_refused():
         )
 
 
-def test_f2_decision_envelope_is_bounded_against_huge_caller_objects():
+def test_invalid_caller_objects_remain_rejected_without_a_receipt_size_permission():
     plan = _tiny_plan()
     state = new_admission_state(plan)
 
@@ -724,18 +723,14 @@ def test_f2_decision_envelope_is_bounded_against_huge_caller_objects():
     )
     assert decision["decision"] == "rejected"
     assert decision["page"] == "<str>"
-    envelope = json.dumps(decision, ensure_ascii=False)
-    assert len(envelope) < 16_384, f"decision envelope must stay bounded, got {len(envelope)}"
-    assert all(len(key) <= 4096 for key in decision["window_keys"])
+    assert decision["window_keys"] == ["w" + "x" * 1_000_000]
 
     decision, state = admit_geometry_request(
         plan, state, page=1, window_keys=["k" + "y"] * 100_000,
         tabular_evidence="observed_candidate", remaining=2,
     )
-    assert decision["decision"] == "rejected" and decision["reason"] == "bad_window_keys"
-    assert len(json.dumps(decision, ensure_ascii=False)) < 300_000, (
-        "a huge key list must not be materialized into the echo"
-    )
+    assert decision["decision"] == "rejected" and decision["reason"] == "window_not_in_plan"
+    assert decision['window_keys'] == ['ky'] * 100_000
 
     decision, state = admit_geometry_request(
         plan, state, page=10**18, window_keys=["w1"],

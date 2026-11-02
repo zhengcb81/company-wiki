@@ -28,7 +28,6 @@ INTERNAL_SCHEMA = "narrative-summary-execution/1"
 ASSESSED_INTERNAL_SCHEMA = "narrative-summary-execution/2"
 SUMMARY_EXECUTION_MARKERS = tuple(json.dumps(schema) for schema in (INTERNAL_SCHEMA,ASSESSED_INTERNAL_SCHEMA))
 EXECUTION_SCHEMA = "source-extractive-execution/1"
-EXECUTION_MAX_BYTES = 32 * 1024
 _REPORT_KEYS = {
     "schema_version",
     "plan_sha256",
@@ -73,7 +72,6 @@ def _report(value: object) -> dict[str, Any]:
         encoded = canonical_json(_to_plain(value)).encode("utf-8")
     except (TypeError, ValueError, UnicodeError, RecursionError) as exc:
         raise NarrativeContractError("execution report encoding is invalid") from exc
-    _require(len(encoded) <= EXECUTION_MAX_BYTES, "execution report exceeds 32 KiB")
     # Return an owned plain value; diagnostic callers must not mutate job state.
     item = json.loads(encoded)
     _require(
@@ -289,7 +287,7 @@ def wrap_summary(summary: NarrativeSummaryResult, execution: Mapping) -> dict[st
         isinstance(summary, NarrativeSummaryResult),
         "wrapper requires a canonical typed summary",
     )
-    # Recheck its canonical wire cap, independently of the report's byte cap.
+    # Recheck the canonical summary shape independently of execution diagnostics.
     typed = NarrativeSummaryResult.from_dict(summary.to_dict())
     report = _report(execution)
     _bind_summary(typed, report, None)

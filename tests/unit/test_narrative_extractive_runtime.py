@@ -227,7 +227,7 @@ def test_duplicate_native_scope_is_accounted_without_repeating_the_card():
     assert decoded.execution['tasks'][1]['claim_id'] == decoded.draft['claims'][0]['claim_id']
 
 
-def test_execution_capacity_includes_all_future_rank_fields_before_any_paid_request():
+def test_execution_report_preserves_all_scopes_without_an_arbitrary_byte_gate():
     from company_wiki.automation.narrative_model_extractive import compile_extractive_plan
     source = selected(1)
     wire = source.to_dict()
@@ -236,8 +236,9 @@ def test_execution_capacity_includes_all_future_rank_fields_before_any_paid_requ
         {'group_id': 'native-' + str(index), 'kind': 'business_progress',
          'section_role': 'business', 'evidence_ids': ids} for index in range(137)]
     source = NarrativeSelectResult.from_dict(wire)
-    with pytest.raises(ValueError, match='execution report exceeds'):
-        compile_extractive_plan(source)
+    compiled = compile_extractive_plan(source)
+    assert len(compiled.execution['tasks']) == 137
+    assert compiled.draft['claims']
 
 
 def test_oversized_repeated_scopes_are_lazy_and_never_render_rejected_text(monkeypatch):
@@ -255,8 +256,10 @@ def test_oversized_repeated_scopes_are_lazy_and_never_render_rejected_text(monke
     def forbidden_render(_self):
         raise AssertionError('oversized deferred source text must never be joined')
     monkeypatch.setattr(SourceCard, 'text', property(forbidden_render))
-    with pytest.raises(ValueError, match='execution report exceeds'):
-        compile_extractive_plan(source)
+    compiled = compile_extractive_plan(source, max_draft_bytes=56_000)
+    assert len(compiled.execution['tasks']) == 400
+    assert compiled.draft['claims'] == []
+    assert all(row['source_disposition'] == 'deferred' for row in compiled.execution['tasks'])
 
 
 def test_actual_summary_handler_records_bounded_execution_and_keeps_public_summary_exact():
@@ -283,7 +286,7 @@ def test_actual_summary_handler_records_bounded_execution_and_keeps_public_summa
     assert inner.encoded_size <= 64 * 1024
 
 
-def test_actual_handler_returns_typed_preflight_failure_for_oversized_plan_without_calling_model():
+def test_actual_handler_accepts_large_execution_under_the_configured_model_flow():
     from company_wiki.automation.narrative_summarize import NarrativeSummarizeHandler
     from company_wiki.automation.models import HandlerOutcome
     from unit.test_narrative_summarize_handler import _context
@@ -294,11 +297,14 @@ def test_actual_handler_returns_typed_preflight_failure_for_oversized_plan_witho
          'section_role': 'business', 'evidence_ids': [source.evidence_spans[0].span_id]}
         for index in range(137)]
     source = NarrativeSelectResult.from_dict(wire)
-    class ForbiddenModel:
-        def generate(self, _request):
-            pytest.fail('no model request is allowed for an unrepresentable source plan')
-    result = NarrativeSummarizeHandler(model=ForbiddenModel(),
+    calls = []
+    class RankModel:
+        def generate(self, request):
+            calls.append(request)
+            return NarrativeModelResponse('offline', 'configured', request.prompt_version, b'{"decisions":[]}')
+    result = NarrativeSummarizeHandler(model=RankModel(),
         reading_model_projection=lambda _subject: VERSION)(_context(source))
-    assert result.outcome is HandlerOutcome.TERMINAL_FAILURE
-    assert result.error.code == 'SUMMARY_PLAN_INVALID'
-    assert result.metrics.tokens == 0 and result.artifacts == result.effects == ()
+    assert result.outcome is HandlerOutcome.SUCCEEDED
+    assert result.error is None and len(calls) == 1
+    assert len(result.result['execution']['tasks']) == 137
+    assert result.artifacts == result.effects == ()

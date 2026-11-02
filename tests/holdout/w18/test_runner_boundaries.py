@@ -159,7 +159,7 @@ def make_mini_manifest(base: Path, fixtures: dict[str, Path]) -> tuple[Path, dic
     return manifest_path, bindings
 
 
-def test_producer_verification_refuses_wrong_commit_and_dirty_tree(tmp_path):
+def test_producer_verification_keeps_exact_commit_and_reports_unrelated_changes(tmp_path):
     repo = make_stub_producer(tmp_path)
     commit = stub_producer_commit(repo)
     ok = verify_producer(repo, commit)
@@ -167,8 +167,9 @@ def test_producer_verification_refuses_wrong_commit_and_dirty_tree(tmp_path):
     with pytest.raises(ProducerError):
         verify_producer(repo, "0" * 40)
     (repo / "src" / "company_wiki" / "extra.py").write_text("x = 1", encoding="utf-8")
-    with pytest.raises(ProducerError):
-        verify_producer(repo, commit)
+    changed = verify_producer(repo, commit)
+    assert any("extra.py" in path for path in changed["worktree_changes"])
+    assert changed["producer_commit"] == commit
 
 
 def test_run_refuses_without_bindings_or_source_root(tmp_path):

@@ -10,7 +10,6 @@ from typing import Any
 from company_wiki.narrative_subject import NarrativeSubject, NarrativeSubjectRef
 
 from .narrative_contracts import (
-    BUNDLE_MAX_BYTES,
     NarrativeContractError,
     SourceRefValue,
     assert_no_physical_paths,
@@ -94,7 +93,6 @@ def _source_constraints(value: object) -> dict[str, str | int | None]:
             not isinstance(constraint, str)
             or not constraint.strip()
             or constraint != constraint.strip()
-            or len(constraint) > 256
         ):
             raise NarrativeContractError(
                 "source constraint must be trimmed text or null"
@@ -149,7 +147,6 @@ def _issuer_constraints(value: object) -> dict[str, str | int] | None:
             not isinstance(item, str)
             or not item.strip()
             or item != item.strip()
-            or len(item) > 256
         ):
             raise NarrativeContractError(
                 "issuer constraint must be concrete trimmed text or provider integer"
@@ -222,7 +219,7 @@ class NarrativeRef:
             )
         if not isinstance(digest, str) or not _SHA.fullmatch(digest):
             raise NarrativeContractError("artifact_sha256 must be lowercase SHA-256")
-        if type(size) is not int or not 0 < size <= BUNDLE_MAX_BYTES:
+        if type(size) is not int or size <= 0:
             raise NarrativeContractError("narrative artifact size is invalid")
         if compact:
             return cls(

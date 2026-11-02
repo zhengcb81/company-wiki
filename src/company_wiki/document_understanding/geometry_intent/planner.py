@@ -24,7 +24,6 @@ from __future__ import annotations
 
 from collections.abc import Mapping, Sequence
 from copy import deepcopy
-from itertools import islice
 from typing import Any
 
 from company_wiki.document_understanding.layout_hints.contract import (
@@ -38,8 +37,6 @@ from .contracts import (
     DISCOVER_VALUES,
     EVIDENCE_VALUES,
     FINE_VALUES,
-    MAX_STRING,
-    MAX_WINDOW_KEYS_PER_ADMISSION,
     NAVIGATION_VALUES,
     RUN_REASONS,
     SCHEMA_ADMISSION,
@@ -50,6 +47,7 @@ from .contracts import (
     DiagnosticSink,
     bounded_text,
     canonical_digest,
+    charge_material,
     insert_interval,
     is_int,
     interval_length,
@@ -517,6 +515,7 @@ def plan_geometry_requests(
     try:
         # Prepay the bounded assembly (summary + digest) before any traversal.
         work_budget.charge(1 + 2 * (total_windows + rule_count))
+        charge_material((policy, windows), work_budget)
         rules, profile_id, profile_version = _parse_rules(policy, sink, work_budget)
         valid = _validate_windows(windows, rules, page_count, sink, work_budget)
         survivors = _canonicalize(valid, sink, work_budget)
@@ -760,9 +759,9 @@ def _echo_keys(window_keys: Any) -> list[str]:
     if isinstance(window_keys, (str, bytes)) or not isinstance(window_keys, Sequence):
         return []
     echoed: list[str] = []
-    for key in islice(window_keys, MAX_WINDOW_KEYS_PER_ADMISSION):
+    for key in window_keys:
         if isinstance(key, str):
-            echoed.append(key[:MAX_STRING])
+            echoed.append(key)
         else:
             echoed.append(f"<{type(key).__name__}>")
     return echoed
@@ -814,6 +813,7 @@ def admit_geometry_request(
     window_keys: Any,
     tabular_evidence: Any,
     remaining: Any,
+    work_budget: WorkBudget | None = None,
 ) -> tuple[dict[str, Any], dict[str, Any]]:
     """Admit one observed page event; returns ``(decision, next_state)``.
 
@@ -822,6 +822,8 @@ def admit_geometry_request(
     changing the outcome. The caller's ``remaining`` only gates this call; it
     can never re-open pages already spent in ``state``.
     """
+    if work_budget is not None:
+        charge_material((plan, state, window_keys), work_budget)
     plan = _require_plan(plan)
     state = _require_state(state, plan)
     sink = DiagnosticSink()
@@ -873,10 +875,10 @@ def admit_geometry_request(
     if isinstance(window_keys, (str, bytes)) or not isinstance(window_keys, Sequence):
         sink.add("ADMISSION_BAD_WINDOW_KEYS", "window_keys must be a sequence of strings")
         return settle("rejected", "bad_window_keys")
-    if len(window_keys) == 0 or len(window_keys) > MAX_WINDOW_KEYS_PER_ADMISSION:
+    if len(window_keys) == 0:
         sink.add(
             "ADMISSION_BAD_WINDOW_KEYS",
-            f"window_keys must be 1..{MAX_WINDOW_KEYS_PER_ADMISSION} strings",
+            "window_keys must contain nonempty strings",
         )
         return settle("rejected", "bad_window_keys")
     keys = list(window_keys)

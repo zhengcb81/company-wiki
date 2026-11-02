@@ -37,7 +37,7 @@ from .models import (
     require_canonical_json,
     require_utc_timestamp,
 )
-from .narrative_contracts import BUNDLE_MAX_BYTES, NarrativeBundle, NarrativeContractError
+from .narrative_contracts import NarrativeBundle, NarrativeContractError
 from .narrative_summary_protocols import LEGACY_BUNDLE, ASSESSED_BUNDLE
 from .narrative_verify import EFFECT_TYPE
 from .narrative_official_json import VerifiedProjectionView
@@ -96,7 +96,7 @@ def _replay_projected_bundle(bundle: NarrativeBundle,
 
 
 def _stored_bundle(payload: bytes) -> NarrativeBundle:
-    if not payload or len(payload) > BUNDLE_MAX_BYTES:
+    if not payload:
         raise NarrativeProjectionError("stored narrative bundle exceeds its byte limit")
     try:
         text = payload.decode("utf-8", errors="strict")
@@ -126,7 +126,7 @@ class NarrativeBundleReader:
             source_id=source_id,
             source_sha256=source_sha256,
         )
-        if type(artifact.byte_size) is not int or not 0 < artifact.byte_size <= BUNDLE_MAX_BYTES:
+        if type(artifact.byte_size) is not int or artifact.byte_size <= 0:
             raise NarrativeProjectionError("stored narrative bundle exceeds its byte limit")
         artifact, payload = self._artifacts.read_exact(
             artifact_version_id=artifact.artifact_version_id,

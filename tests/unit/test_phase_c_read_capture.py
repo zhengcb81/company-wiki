@@ -140,7 +140,7 @@ def test_failed_formal_prepare_does_not_create_a_prepared_checkpoint(tmp_path):
     assert not list(tmp_path.iterdir())
 
 
-def test_capture_rejects_changed_history_wrong_source_and_oversize_without_overwrite(tmp_path):
+def test_capture_rejects_changed_history_wrong_source_but_not_presentation_size(tmp_path):
     catalog, store, draft, config = prepared_materials(tmp_path)
     payload = b'{"actual":"owner bytes"}'
     version = store.prepare(draft, payload)
@@ -152,13 +152,13 @@ def test_capture_rejects_changed_history_wrong_source_and_oversize_without_overw
     changed_version = replace(version, content_sha256=hashlib.sha256(changed).hexdigest(), byte_size=len(changed))
     with pytest.raises(ValueError, match='CHANGED'):
         observer.capture_prepared_checkpoint(draft, changed, changed_version, config)
-    with pytest.raises(ValueError, match='BOUND'):
-        observer.capture_prepared_checkpoint(draft, payload, version, {**config, 'prepared_payload_max_bytes': 1})
+    assert observer.capture_prepared_checkpoint(draft, payload, version,
+        {**config, 'prepared_payload_max_bytes': 1}) == first
     assert {path.name: path.read_bytes() for path in (tmp_path / 'materials').iterdir()} == files
     assert first['payload']['bytes'] == len(payload)
 
 
-def test_actual_generation_checkpoint_is_bounded_and_does_not_overwrite_a_changed_run(tmp_path):
+def test_actual_generation_checkpoint_is_complete_and_does_not_overwrite_a_changed_run(tmp_path):
     generation = {'reading_model_projection': 'reading-model-input/7', 'selection_generation': {'material_sha256': 'a' * 64}}
     first = observer.capture_generation_checkpoint(generation, tmp_path, 'owned-run')
     assert json.loads(gzip.decompress((tmp_path / first['file']).read_bytes())) == generation
@@ -191,17 +191,17 @@ def test_prepared_capsule_binds_actual_generation_and_survives_owner_activation(
     assert capsule['checkpoint_stage'] == 'prepared_not_activation_proof'
 
 
-def test_generation_or_capsule_bound_refusal_writes_no_payload(tmp_path):
+def test_large_generation_and_capsule_keep_all_required_metadata(tmp_path):
     _, store, draft, config = prepared_materials(tmp_path)
-    oversized = {'padding': 'x' * (observer.CHECKPOINT_METADATA_MAX_BYTES + 1)}
-    with pytest.raises(ValueError, match='BOUND'):
-        observer.capture_generation_checkpoint(oversized, tmp_path / 'materials', 'owned-run')
-    draft = replace(draft, metadata_json=json.dumps(oversized))
+    generation = {'padding': 'x' * (512 * 1024 + 1)}
+    pin = observer.capture_generation_checkpoint(generation, tmp_path / 'materials', 'owned-run')
+    assert json.loads(gzip.decompress((tmp_path / 'materials' / pin['file']).read_bytes())) == generation
+    draft = replace(draft, metadata_json=json.dumps(generation))
     payload = b'{"actual":"prepared bytes"}'
     version = store.prepare(draft, payload)
-    with pytest.raises(ValueError, match='BOUND'):
-        observer.capture_prepared_checkpoint(draft, payload, version, config)
-    assert not list((tmp_path / 'materials').iterdir())
+    captured = observer.capture_prepared_checkpoint(draft, payload, version, config)
+    capsule = json.loads(gzip.decompress((tmp_path / 'materials' / captured['capsule']['file']).read_bytes()))
+    assert json.loads(capsule['prepared_draft']['metadata_json']) == generation
 
 
 def test_prepared_capsule_cannot_borrow_another_generations_checkpoint(tmp_path):

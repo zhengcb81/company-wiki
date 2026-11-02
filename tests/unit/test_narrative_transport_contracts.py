@@ -51,7 +51,7 @@ def test_wire_reference_and_read_request_roundtrip_without_path() -> None:
 @pytest.mark.parametrize("field,value", [
     ("schema_version", "narrative-ref/2"), ("artifact_version_id", ""),
     ("artifact_sha256", "ABC"), ("byte_size", True), ("byte_size", 0),
-    ("byte_size", 1280 * 1024 + 1), ("path", "forbidden-storage-field"),
+    ("path", "forbidden-storage-field"),
 ])
 def test_reference_rejects_bad_version_type_hash_budget_and_extra_fields(field, value) -> None:
     payload = _reference()

@@ -85,12 +85,12 @@ class ExtractivePlan:
 
 
 def compile_extractive_plan(
-    selected: NarrativeSelectResult, *, max_draft_bytes: int = EXTRACTIVE_DRAFT_MAX_BYTES,
+    selected: NarrativeSelectResult, *, max_draft_bytes: int | None = None,
 ) -> ExtractivePlan:
     """Admit whole cards under actual UTF-8 canonical draft bytes, before POST."""
     if selected.reading_context is None:
         raise legacy.ModelResponseError('READING_MODEL_CONTEXT_UNAVAILABLE')
-    if type(max_draft_bytes) is not int or not 0 < max_draft_bytes <= EXTRACTIVE_DRAFT_MAX_BYTES:
+    if max_draft_bytes is not None and (type(max_draft_bytes) is not int or max_draft_bytes <= 0):
         raise ValueError('invalid source card byte budget')
     plan = build_summary_task_plan(selected.evidence_spans, reading_context=selected.reading_context,
                                    max_claims=max(1, len(selected.evidence_spans) * 2))
@@ -101,7 +101,7 @@ def compile_extractive_plan(
                  'source_sha256': selected.source_ref.content_sha256})
     draft: dict[str, Any] = {**identity, 'language': selected.source_metadata.language,
                             'claims': [], 'status': 'needs_review'}
-    if len(canonical_json(draft).encode()) > max_draft_bytes:
+    if max_draft_bytes is not None and len(canonical_json(draft).encode()) > max_draft_bytes:
         raise NarrativeContractError('source card identity exceeds draft byte budget')
     rows: list[dict[str, Any]] = []
     seen: dict[Any, str] = {}
@@ -132,7 +132,7 @@ def compile_extractive_plan(
                     claim['context_evidence_ids'] = list(task.context_ids)
                 quote_bytes = sum(text_bytes[sid] for sid in task.support_ids) + 2 * (len(task.support_ids) - 1)
                 added_bytes = len(canonical_json(claim).encode()) + quote_bytes + bool(draft['claims'])
-                if used_bytes + added_bytes <= max_draft_bytes:
+                if max_draft_bytes is None or used_bytes + added_bytes <= max_draft_bytes:
                     claim['text'] = card.text
                     validate_summary_claim(_claim_from_dict(claim), known, 'needs_review')
                     draft['claims'].append(claim)
@@ -151,12 +151,6 @@ def compile_extractive_plan(
                  'tasks': rows, 'source_coverage_complete': all(
                      row['source_disposition'] in {'admitted', 'duplicate'} for row in rows),
                  'model_coverage_complete': False, 'model_diagnostic': 'RANK_INCOMPLETE'}
-    # Ranking adds priority strings after the paid call. Reserve the longest
-    # finite fields now, including unprocessed rows, so a complete response
-    # cannot exceed the audit budget after admission.
-    worst_case = {**execution, 'tasks': [{**row, 'priority': 'normal'} for row in rows]}
-    if len(canonical_json(worst_case).encode()) > EXECUTION_MAX_BYTES:
-        raise NarrativeContractError('source execution report exceeds its byte budget')
     return ExtractivePlan(draft, execution, plan)
 
 
@@ -249,8 +243,6 @@ def decode_extractive_result(response, *, selected: NarrativeSelectResult) -> Ex
     complete = not invalid and len(decisions) == len(report['tasks'])
     report['model_coverage_complete'] = complete
     report['model_diagnostic'] = 'RANK_INVALID' if invalid else None if complete else 'RANK_INCOMPLETE'
-    if len(canonical_json(report).encode()) > EXECUTION_MAX_BYTES:
-        raise NarrativeContractError('source execution report exceeds its byte budget')
     ranks = {'high': 0, 'normal': 1, 'low': 2, None: 1}
     priorities = {row['claim_id']: row['priority'] for row in report['tasks']
                   if row['source_disposition'] == 'admitted'}

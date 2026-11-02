@@ -17,8 +17,6 @@ from urllib.parse import urlsplit
 INSTALLED = False
 _pending: dict | None = None
 
-PREPARED_PAYLOAD_MAX_BYTES = 2 * 1024 * 1024
-CHECKPOINT_METADATA_MAX_BYTES = 512 * 1024
 
 
 def _checkpoint_name(run_id: str, suffix: str) -> str:
@@ -27,29 +25,25 @@ def _checkpoint_name(run_id: str, suffix: str) -> str:
     return run_id + suffix
 
 
-def _checkpoint_read(path: Path, limit: int) -> bytes:
+def _checkpoint_read(path: Path) -> bytes:
     if path.is_symlink():
         raise ValueError('OBSERVED_CHECKPOINT_PATH_INVALID')
     try:
         with gzip.open(path, 'rb') as stream:
-            body = stream.read(limit + 1)
+            body = stream.read()
     except (OSError, EOFError) as exc:
         raise ValueError('OBSERVED_CHECKPOINT_CORRUPT') from exc
-    if len(body) > limit:
-        raise ValueError('OBSERVED_CHECKPOINT_BOUND_EXCEEDED')
     return body
 
 
-def _capture_checkpoint(body: bytes, directory: Path, name: str, limit: int) -> dict:
-    if type(limit) is not int or limit < 1 or len(body) > limit:
-        raise ValueError('OBSERVED_CHECKPOINT_BOUND_EXCEEDED')
+def _capture_checkpoint(body: bytes, directory: Path, name: str) -> dict:
     directory = directory.resolve(strict=True)
     path = directory / name
     if path.parent.resolve() != directory or path.is_symlink():
         raise ValueError('OBSERVED_CHECKPOINT_PATH_INVALID')
 
     def compare():
-        if _checkpoint_read(path, limit) != body:
+        if _checkpoint_read(path) != body:
             raise ValueError('OBSERVED_CHECKPOINT_CHANGED')
 
     if path.exists():
@@ -78,7 +72,7 @@ def capture_generation_checkpoint(generation, directory: Path, run_id: str) -> d
     from company_wiki.automation.models import canonical_json
 
     return _capture_checkpoint(canonical_json(generation).encode(), directory,
-        _checkpoint_name(run_id, '.generation.json.gz'), CHECKPOINT_METADATA_MAX_BYTES)
+        _checkpoint_name(run_id, '.generation.json.gz'))
 
 
 def capture_prepared_checkpoint(draft, payload: bytes, version, config: dict) -> dict:
@@ -86,9 +80,6 @@ def capture_prepared_checkpoint(draft, payload: bytes, version, config: dict) ->
     from dataclasses import asdict
     from company_wiki.automation.models import canonical_json
 
-    limit = config.get('prepared_payload_max_bytes', PREPARED_PAYLOAD_MAX_BYTES)
-    if type(limit) is not int or not 0 < limit <= PREPARED_PAYLOAD_MAX_BYTES or len(payload) > limit:
-        raise ValueError('OBSERVED_PREPARED_PAYLOAD_BOUND_EXCEEDED')
     if (draft.source_sha256 != config['source_sha256']
             or hashlib.sha256(payload).hexdigest() != version.content_sha256
             or len(payload) != version.byte_size):
@@ -108,7 +99,7 @@ def capture_prepared_checkpoint(draft, payload: bytes, version, config: dict) ->
     generation_path = directory / _checkpoint_name(run_id, '.generation.json.gz')
     generation_pin = None
     if generation_path.exists():
-        generation = _checkpoint_read(generation_path, CHECKPOINT_METADATA_MAX_BYTES)
+        generation = _checkpoint_read(generation_path)
         generation_pin = {'file': generation_path.name, 'sha256': hashlib.sha256(generation).hexdigest(),
                           'bytes': len(generation)}
         declared = json.loads(draft.metadata_json).get('generation_sha256')
@@ -124,27 +115,45 @@ def capture_prepared_checkpoint(draft, payload: bytes, version, config: dict) ->
         'generation_status': 'captured' if generation_pin else 'not_observed',
     }
     capsule_body = canonical_json(capsule).encode()
-    if len(capsule_body) > CHECKPOINT_METADATA_MAX_BYTES:
-        raise ValueError('OBSERVED_PREPARED_CAPSULE_BOUND_EXCEEDED')
     # Check existing history before creating either new file.
-    for name, body, bound in ((payload_name, payload, limit),
-                              (capsule_name, capsule_body, CHECKPOINT_METADATA_MAX_BYTES)):
+    for name, body in ((payload_name, payload), (capsule_name, capsule_body)):
         path = directory / name
-        if path.exists() and _checkpoint_read(path, bound) != body:
+        if path.exists() and _checkpoint_read(path) != body:
             raise ValueError('OBSERVED_PREPARED_CHECKPOINT_CHANGED')
-    payload_pin = _capture_checkpoint(payload, directory, payload_name, limit)
-    capsule_pin = _capture_checkpoint(capsule_body, directory, capsule_name, CHECKPOINT_METADATA_MAX_BYTES)
+    payload_pin = _capture_checkpoint(payload, directory, payload_name)
+    capsule_pin = _capture_checkpoint(capsule_body, directory, capsule_name)
     return {'payload': payload_pin, 'capsule': capsule_pin, 'stage': 'prepared_not_activation_proof'}
 
 
 def prepared_artifact_observer(original_prepare, config: dict):
     def prepare(store, draft, payload):
         version = original_prepare(store, draft, payload)
-        pin = capture_prepared_checkpoint(draft, payload, version, config)
-        if config.get('events'):
-            _append(config['events'], {'event': 'artifact_prepared_checkpoint',
-                'run_id': config['activation_run_id'], 'checkpoint': pin,
-                'owner_return_status': version.status, 'activation_proven': False})
+        pin = None
+        try:
+            pin = capture_prepared_checkpoint(draft, payload, version, config)
+            if config.get('events'):
+                _append(config['events'], {'event': 'artifact_prepared_checkpoint',
+                    'run_id': config['activation_run_id'], 'checkpoint': pin,
+                    'owner_return_status': version.status, 'activation_proven': False})
+        except Exception as exc:  # Observation cannot fail or retry a successful owner.
+            failure = {'event': 'artifact_prepared_observation_incomplete',
+                'run_id': config.get('activation_run_id'), 'observation_status': 'incomplete',
+                'owner_returned': True, 'owner_return_status': getattr(version, 'status', None),
+                'owner_artifact_version_id': getattr(version, 'artifact_version_id', None),
+                'checkpoint_stage': 'owner_prepare_returned', 'checkpoint': pin,
+                'activation_proven': False, 'error_type': type(exc).__name__, 'event_saved': False}
+            config.setdefault('observer_errors', []).append(failure)
+            try:
+                if config.get('events'):
+                    _append(config['events'], {**failure, 'event_saved': True})
+                    failure['event_saved'] = True
+            except Exception as record_error:
+                failure['event_error_type'] = type(record_error).__name__
+            if not failure['event_saved']:
+                try:
+                    print(json.dumps(failure, allow_nan=False), file=sys.stderr, flush=True)
+                except Exception:
+                    pass  # The in-memory failure remains; never claim it was saved.
         return version
 
     return prepare

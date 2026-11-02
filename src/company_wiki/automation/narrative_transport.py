@@ -52,7 +52,6 @@ from .narrative_replay import (
     replay_verified_projection,
 )
 from .narrative_transport_contracts import (
-    MAX_RECEIPT_BYTES,
     NARRATIVE_COMPACT_REF_SCHEMA,
     NARRATIVE_COMPACT_READ_RECEIPT_SCHEMA,
     parse_compact_reference_request,
@@ -383,8 +382,6 @@ class NarrativeTransportReader:
         if availability is not None:
             receipt["availability_evidence"] = availability
         assert_no_physical_paths(receipt)
-        if len(canonical_json(receipt).encode("utf-8")) > MAX_RECEIPT_BYTES:
-            raise NarrativeTransportError("blocked", "narrative_receipt_too_large")
         return NarrativeTransportRead(data=data, receipt=receipt)
 
     def _read_projected(self, request: NarrativeReadRequest) -> NarrativeTransportRead:
@@ -444,8 +441,6 @@ class NarrativeTransportReader:
                 "replay_status": "verified",
             }
             assert_no_physical_paths(receipt)
-            if len(canonical_json(receipt).encode("utf-8")) + 1 > MAX_RECEIPT_BYTES:
-                raise NarrativeTransportError("blocked", "narrative_receipt_too_large")
             return NarrativeTransportRead(data=data, receipt=receipt)
         receipt = {
             "schema_version": NARRATIVE_PROJECTED_READ_RECEIPT_SCHEMA,
@@ -463,6 +458,4 @@ class NarrativeTransportReader:
             "replay_status": "verified",
         }
         assert_no_physical_paths(receipt)
-        if len(canonical_json(receipt).encode("utf-8")) > MAX_RECEIPT_BYTES:
-            raise NarrativeTransportError("blocked", "narrative_receipt_too_large")
         return NarrativeTransportRead(data=data, receipt=receipt)

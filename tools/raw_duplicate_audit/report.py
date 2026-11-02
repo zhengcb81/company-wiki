@@ -1,4 +1,4 @@
-"""Report assembly, truncation and non-binding recommendations."""
+"""Complete report assembly and non-binding recommendations."""
 
 from __future__ import annotations
 
@@ -6,11 +6,7 @@ import json
 
 from .classify import Group
 from .core import (
-    LIMIT_HIT_DETAIL_ROWS,
-    LIMIT_HIT_REPORT_BYTES,
     LOCAL_PATHS_SCHEMA,
-    MAX_DETAIL_ROWS_DEFAULT,
-    MAX_REPORT_BYTES,
     RECOMMENDATION_MIN_BENEFIT_BYTES,
     utc_now_text,
 )
@@ -46,27 +42,16 @@ def sort_groups(groups: list[Group]) -> list[Group]:
 
 
 def apply_detail_row_cap(
-    entries: list[dict], *, max_rows: int, limits_hit: list[str]
+    entries: list[dict], *, max_rows: int | None = None, limits_hit: list[str]
 ) -> tuple[list[dict], int, int]:
-    kept: list[dict] = []
-    rows = 0
-    for entry in entries:
-        width = len(entry.get("locators", [])) + len(
-            entry.get("verification", {}).get("files", [])
-        )
-        if rows + width > max_rows:
-            if LIMIT_HIT_DETAIL_ROWS not in limits_hit:
-                limits_hit.append(LIMIT_HIT_DETAIL_ROWS)
-            break
-        kept.append(entry)
-        rows += width
-    return kept, rows, len(entries) - len(kept)
+    """Compatibility entry: all observed groups remain in the full report."""
+    return entries, _detail_rows(entries), 0
 
 
 def _serialized_size(report: dict) -> int:
     """Measure with the exact serializer used by ``core.write_json``."""
     return len(
-        json.dumps(report, ensure_ascii=False, indent=1, sort_keys=True).encode("utf-8")
+        json.dumps(report, ensure_ascii=False, indent=1, sort_keys=True, allow_nan=False).encode("utf-8")
     )
 
 
@@ -78,108 +63,23 @@ def _detail_rows(entries: list[dict]) -> int:
     )
 
 
-_REPORT_BYTES_PLACEHOLDER = 9999999999999
-
-
 def apply_size_cap(
-    report: dict, *, max_bytes: int = MAX_REPORT_BYTES, limits_hit: list[str]
+    report: dict, *, max_bytes: int | None = None, limits_hit: list[str]
 ) -> dict:
-    """Trim the Git report to ``max_bytes`` and refresh the truncation counters.
-
-    Runs as the final mutation before serialisation, so every derived field is
-    part of the measured size.  ``report_bytes`` is probed with a
-    13-digit placeholder so writing the real value can only shrink the report.
-    """
+    """Compatibility name: refresh accounting without dropping any evidence."""
+    groups = report.get("duplicate_groups", [])
+    rows = _detail_rows(groups)
     truncated = report.setdefault("truncated", {})
-    reasons = truncated.setdefault("reasons", [])
-    for key, value in (
-        ("detail_rows", 0),
-        ("max_detail_rows", truncated.get("max_detail_rows", MAX_DETAIL_ROWS_DEFAULT)),
-        ("dropped_groups_by_row_cap", truncated.get("dropped_groups_by_row_cap", 0)),
-        ("dropped_groups_by_size_cap", 0),
-        ("dropped_groups_total", 0),
-        ("listed_groups", 0),
-        ("report_bytes", _REPORT_BYTES_PLACEHOLDER),
-        ("max_report_bytes", max_bytes),
-    ):
-        truncated.setdefault(key, value)
-    truncated["report_bytes"] = _REPORT_BYTES_PLACEHOLDER
-    counts = report.setdefault("counts", {})
-
-    groups = list(report.get("duplicate_groups", []))
-    listed_before = len(groups)
-
-    def build(keep: int) -> None:
-        report["duplicate_groups"] = groups[:keep]
-        rows = _detail_rows(report["duplicate_groups"])
-        truncated["detail_rows"] = rows
-        truncated["dropped_groups_by_size_cap"] = listed_before - keep
-        truncated["dropped_groups_total"] = int(
-            truncated.get("dropped_groups_by_row_cap", 0)
-        ) + (listed_before - keep)
-        truncated["listed_groups"] = keep
-        counts["duplicate_groups_listed"] = keep
-        counts["detail_rows"] = rows
-
-    build(listed_before)
-    keep = listed_before
-    if _serialized_size(report) > max_bytes:
-        if LIMIT_HIT_REPORT_BYTES not in limits_hit:
-            limits_hit.append(LIMIT_HIT_REPORT_BYTES)
-        if (
-            "report_bytes_cap" not in reasons
-            and "report_bytes_floor_reached" not in reasons
-        ):
-            reasons.append("report_bytes_cap")
-        low, high, best = 0, listed_before, 0
-        while low <= high:
-            mid = (low + high) // 2
-            build(mid)
-            if _serialized_size(report) <= max_bytes:
-                best = mid
-                low = mid + 1
-            else:
-                high = mid - 1
-        keep = best
-        build(keep)
-        if keep == 0 and listed_before:
-            reasons.append("report_bytes_floor_reached")
-
-    # Group truncation alone cannot bound diagnostics or similar-file rows.
-    # Keep summary totals, and truncate optional lists with explicit counters.
-    for field in ("diagnostics", "similar_groups", "notes"):
-        values = report.get(field, [])
-        if not isinstance(values, list) or _serialized_size(report) <= max_bytes:
-            continue
-        dropped_key = f"dropped_{field}"
-        truncated[dropped_key] = 0
-        low, high, best = 0, len(values), 0
-        while low <= high:
-            mid = (low + high) // 2
-            report[field] = values[:mid]
-            truncated[dropped_key] = len(values) - mid
-            if _serialized_size(report) <= max_bytes:
-                best = mid
-                low = mid + 1
-            else:
-                high = mid - 1
-        report[field] = values[:best]
-        truncated[dropped_key] = len(values) - best
-    if _serialized_size(report) > max_bytes:
-        # Invalid/unbounded header data must not force a giant report onto disk.
-        report.clear()
-        report.update({"schema_version": "raw-duplicate-assessment/1",
-                       "status": "refused", "error_code": "report_header_too_large",
-                       "deleted_bytes": 0, "written": True,
-                       "truncated": {"max_report_bytes": max_bytes, "report_bytes": 0}})
-        truncated = report["truncated"]
-    for _ in range(5):
+    truncated.update(detail_rows=rows, max_detail_rows=None, listed_groups=len(groups),
+                     max_report_bytes=None, report_bytes=0)
+    for field in ("dropped_groups_by_row_cap", "dropped_groups_by_size_cap", "dropped_groups_total"):
+        truncated.setdefault(field, 0)
+    report.setdefault("counts", {}).update(duplicate_groups_listed=len(groups), detail_rows=rows)
+    while True:
         actual = _serialized_size(report)
-        if truncated.get("report_bytes") == actual:
-            break
+        if truncated["report_bytes"] == actual:
+            return report
         truncated["report_bytes"] = actual
-    truncated["max_report_bytes"] = max_bytes
-    return report
 
 
 def build_local_paths(inputs, groups: list[Group]) -> dict:

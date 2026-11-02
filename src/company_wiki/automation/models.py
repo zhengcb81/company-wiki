@@ -12,7 +12,6 @@ import hashlib
 import json
 import math
 import re
-from types import MappingProxyType
 from typing import Any, ClassVar, Mapping
 
 
@@ -86,23 +85,10 @@ JOB_STATUS_TRANSITIONS: dict[JobStatus, set[JobStatus]] = {
 
 
 def _validate_json_value(value: Any, path: str = "$") -> None:
-    if value is None or isinstance(value, (str, bool, int)):
-        return
-    if isinstance(value, float):
-        if not math.isfinite(value):
-            raise ValueError(f"{path} contains a non-finite number")
-        return
-    if isinstance(value, list):
-        for index, item in enumerate(value):
-            _validate_json_value(item, f"{path}[{index}]")
-        return
-    if isinstance(value, dict):
-        for key, item in value.items():
-            if not isinstance(key, str):
-                raise TypeError(f"{path} contains a non-string object key")
-            _validate_json_value(item, f"{path}.{key}")
-        return
-    raise TypeError(f"{path} contains unsupported JSON type {type(value).__name__}")
+    from .json_tree import walk_json
+    for item in walk_json(value):
+        if isinstance(item, tuple) or (isinstance(item, Mapping) and not isinstance(item, dict)):
+            raise TypeError(f"{path} contains a non-JSON container")
 
 
 def canonical_json(value: Any) -> str:
@@ -242,26 +228,20 @@ def validate_job_transition(current: JobStatus, target: JobStatus) -> None:
 
 
 def _to_plain(value: Any) -> Any:
-    if isinstance(value, Enum):
-        return value.value
-    if isinstance(value, StrictModel):
-        return value.to_dict()
-    if isinstance(value, tuple):
-        return [_to_plain(item) for item in value]
-    if isinstance(value, list):
-        return [_to_plain(item) for item in value]
-    if isinstance(value, Mapping):
-        return {key: _to_plain(item) for key, item in value.items()}
-    return value
+    from .json_tree import copy_json
+    def transform(item):
+        if isinstance(item, Enum):
+            return item.value
+        if isinstance(item, StrictModel):
+            return item.to_dict()
+        return item
+    return copy_json(value, transform=transform)
 
 
 def _freeze_json(value: Any) -> Any:
-    """Recursively freeze a value already proven to be valid JSON."""
-    if isinstance(value, dict):
-        return MappingProxyType({key: _freeze_json(item) for key, item in value.items()})
-    if isinstance(value, list):
-        return tuple(_freeze_json(item) for item in value)
-    return value
+    """Freeze an already valid JSON tree without an arbitrary recursion cap."""
+    from .json_tree import copy_json
+    return copy_json(value, freeze=True)
 
 
 @dataclass(frozen=True)

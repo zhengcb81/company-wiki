@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import math
+from collections import deque
 import os
 import subprocess
 import sys
@@ -113,11 +114,13 @@ def _spawn(command, input_bytes, cwd, env):
 class _IOState:
     """Only reader threads own their streams; controller owns the lifecycle."""
 
-    def __init__(self) -> None:
+    def __init__(self, *, log_tail: bool = False) -> None:
         self.wake = threading.Event()
         self.lock = threading.Lock()
-        self.chunks: dict[str, list[bytes]] = {"stdout": [], "stderr": []}
+        self.chunks: dict[str, deque[bytes]] = {"stdout": deque(), "stderr": deque()}
         self.counts = {"stdout": 0, "stderr": 0}
+        self.retained = {"stdout": 0, "stderr": 0}
+        self.log_tail = log_tail
         self.finished: set[str] = set()
         self.error: TransportError | None = None
         self.write_error = False
@@ -135,12 +138,21 @@ class _IOState:
         try:
             while True:
                 # At cap still read ONE probe byte: EOF is valid; cap+1 is not.
-                piece = stream.read(min(65536, cap - self.counts[kind] + 1))
+                piece = stream.read(65536 if self.log_tail else min(65536, cap - self.counts[kind] + 1))
                 if not piece:
                     break
                 self.chunks[kind].append(piece)
                 self.counts[kind] += len(piece)
-                if self.counts[kind] > cap:
+                if self.log_tail:
+                    self.retained[kind] += len(piece)
+                    while self.retained[kind] > cap:
+                        first = self.chunks[kind].popleft()
+                        excess = self.retained[kind] - cap
+                        removed = min(len(first), excess)
+                        if removed < len(first):
+                            self.chunks[kind].appendleft(first[removed:])
+                        self.retained[kind] -= removed
+                elif self.counts[kind] > cap:
                     error = OutputLimitExceeded(f"{kind} exceeded its byte cap")
                     break
         except (OSError, ValueError):
@@ -278,16 +290,22 @@ def run_bounded(
     env: dict[str, str] | None = None,
     stdout_cap_bytes: int = _DEFAULT_STDOUT_CAP,
     stderr_cap_bytes: int = _DEFAULT_STDERR_CAP,
+    log_tail: bool = False,
 ) -> dict[str, object]:
     """Bound stdin, both output pipes and process exit by one absolute deadline.
 
     Success returns bytes/counts/returncode; nonzero exit raises ChildFailed with
     captured bytes. Cleanup has one separate 2.5s maximum, never a renewed request.
+    ``log_tail`` is for diagnostic logs only: drain all bytes and retain the last
+    cap bytes without changing the child's outcome. JSON/payload callers retain
+    the default exact-cap failure behavior and must not use this mode.
     """
     _validate(timeout_seconds, stdout_cap_bytes, stderr_cap_bytes, command, input_bytes)
+    if type(log_tail) is not bool:
+        raise ValueError("log_tail must be a boolean")
     deadline = time.monotonic() + timeout_seconds
     proc, job = _spawn(command, input_bytes, cwd, env)
-    state = _IOState()
+    state = _IOState(log_tail=log_tail)
     failure = None
     try:
         if time.monotonic() >= deadline:

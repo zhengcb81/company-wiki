@@ -4,7 +4,6 @@ from __future__ import annotations
 
 from collections.abc import Mapping
 from dataclasses import dataclass
-import hashlib
 from typing import Protocol
 
 from company_wiki.source_catalog.source_reader import (
@@ -63,6 +62,28 @@ def validate_opened_identity(
     )
 
 
+def open_verified_source(reader: NarrativeSourceReader,
+                         payload: SourceRevisionEventPayload) -> VerifiedContent:
+    """Use one source-owned buffer/description operation when the port has it.
+
+    Older in-process readers retain their two-method interface. Both variants
+    bind the same requested identity; neither repeats the byte owner's digest.
+    No verified observation is persisted as a cross-request trust exemption.
+    """
+    ref = source_ref(payload)
+    combined = getattr(reader, "open_described_version", None)
+    if callable(combined):
+        opened, metadata = combined(ref, purpose="narrative_derivation",
+                                    expected_read_policy_sha256=payload.expected_read_policy_sha256)
+    else:
+        opened = reader.open_version(ref, purpose="narrative_derivation",
+                                     expected_read_policy_sha256=payload.expected_read_policy_sha256)
+        metadata = reader.describe_version(ref)
+    validate_opened_identity(payload, opened)
+    validate_source_metadata(payload, metadata)
+    return opened
+
+
 def validate_opened_source(
     source: SourceRef,
     opened: VerifiedContent,
@@ -75,7 +96,6 @@ def validate_opened_source(
         or opened.content_sha256 != source.content_sha256
         or opened.byte_size != source.byte_size
         or len(opened.data) != source.byte_size
-        or hashlib.sha256(opened.data).hexdigest() != source.content_sha256
     ):
         raise NarrativeSourceGuardError(
             "SOURCE_HASH_MISMATCH",
@@ -134,5 +154,6 @@ __all__ = [
     "source_ref",
     "validate_opened_identity",
     "validate_opened_source",
+    "open_verified_source",
     "validate_source_metadata",
 ]

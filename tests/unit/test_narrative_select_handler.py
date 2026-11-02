@@ -574,9 +574,9 @@ def _oversized_package(parsed, *, path_leak: bool) -> NarrativeEvidencePackage:
 
 @pytest.mark.parametrize(
     ("path_leak", "error_code"),
-    [(False, "RESULT_TOO_LARGE"), (True, "INPUT_SCHEMA_INVALID")],
+    [(False, "PARSER_INCOMPLETE"), (True, "INPUT_SCHEMA_INVALID")],
 )
-def test_select_handler_cap_and_path_leak_fail_with_zero_effect(
+def test_select_handler_rejects_fabricated_material_and_path_leak_with_zero_effect(
     path_leak: bool, error_code: str
 ) -> None:
     data = _pdf_bytes("Company launched a new product.")

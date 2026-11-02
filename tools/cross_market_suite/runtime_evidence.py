@@ -11,8 +11,6 @@ from pathlib import Path
 import sqlite3
 
 SCHEMA = "cmrf-runtime-evidence/1"
-MAX_BYTES = 32768
-MAX_ROWS = 9
 SELECTION = ("status", "coverage_complete", "source_units", "candidate_count", "selected_count",
              "omitted_candidate_count", "dropped_financial_count", "pages_total", "pages_read",
              "lines_total", "tables_total", "tables_scanned")
@@ -23,7 +21,7 @@ PIN = ("artifact_version_id", "content_sha256", "byte_size", "effect_id", "docum
 def _fields(value, keys):
     if not isinstance(value, dict):
         return None
-    return {key: (item[:256] if isinstance(item, str) else item)
+    return {key: item
             for key in keys if key in value
             for item in [value[key]] if item is None or isinstance(item, (str, int, float, bool))}
 
@@ -35,9 +33,9 @@ def _receipt(value):
             "document_count": len(docs) if isinstance(docs, list) else None,
             "documents": [{**(_fields(doc, ("document_id", "status", "generation_status")) or {}),
                            "artifact_ref": _fields(doc.get("artifact_ref"), PIN),
-                           "errors": [code[:256] for code in doc.get("errors", [])[:MAX_ROWS]
+                           "errors": [code for code in doc.get("errors", [])
                                       if isinstance(code, str)] if isinstance(doc.get("errors"), list) else None}
-                          for doc in docs[:MAX_ROWS] if isinstance(doc, dict)] if isinstance(docs, list) else None}
+                          for doc in docs if isinstance(doc, dict)] if isinstance(docs, list) else None}
 
 
 def public_quality(view, *, replay_status=None):
@@ -72,12 +70,12 @@ def _snapshot(connection, run_id, evidence):
                 "SELECT key AS document_id,COALESCE(json_extract(value,'$.source_inputs.parser_component.name'),json_extract(value,'$.parser_component.name')) AS parser_name,"
                 "COALESCE(json_extract(value,'$.source_inputs.parser_component.version'),json_extract(value,'$.parser_component.version')) AS parser_version "
                 "FROM narrative_runs,json_each(binding_json,'$.generation_manifests') "
-                "WHERE run_id=? ORDER BY key LIMIT ?", (run_id, MAX_ROWS))],
+                "WHERE run_id=? ORDER BY key", (run_id,))],
         }
     evidence["job_count"] = connection.execute("SELECT COUNT(*) FROM narrative_run_jobs WHERE run_id=?", (run_id,)).fetchone()[0]
     rows = connection.execute("SELECT j.job_id,j.job_type,j.status,j.handler_version,j.last_error_code "
                               "FROM jobs j JOIN narrative_run_jobs r ON r.job_id=j.job_id "
-                              "WHERE r.run_id=? ORDER BY j.job_type,j.job_id LIMIT ?", (run_id, MAX_ROWS))
+                              "WHERE r.run_id=? ORDER BY j.job_type,j.job_id", (run_id,))
     jobs = []
     for row in rows:
         job = dict(row)
@@ -107,7 +105,7 @@ def _snapshot(connection, run_id, evidence):
         "input_tokens,output_tokens,estimated_micro_usd,error_code,reserved_at,usage_settled_at,output_settled_at,"
         "CASE WHEN usage_status='known' THEN input_tokens+output_tokens ELSE input_tokens_bound+max_output_tokens END AS charged_tokens,"
         "COALESCE(estimated_micro_usd,reserved_micro_usd) AS charged_micro_usd "
-        "FROM narrative_model_reservations WHERE run_id=? ORDER BY attempt_id LIMIT ?", (run_id, MAX_ROWS))]
+        "FROM narrative_model_reservations WHERE run_id=? ORDER BY attempt_id", (run_id,))]
     evidence["database_evidence"] = "available"
 
 
@@ -129,10 +127,6 @@ def capture_runtime_evidence(db_path, receipt, *, run_id, returncode=None):
         finally:
             if connection is not None:
                 connection.close()
-    if len(json.dumps(evidence, ensure_ascii=False).encode("utf-8")) > MAX_BYTES:
-        evidence.update(jobs=None, reservations=None, details_omitted="evidence_size_cap")
-    if len(json.dumps(evidence, ensure_ascii=False).encode("utf-8")) > MAX_BYTES:
-        raise ValueError("runtime evidence exceeds bounded metadata cap")
     return evidence
 
 
@@ -141,8 +135,6 @@ def runtime_properties(properties):
     for prop, key in (("cmrf_runtime_evidence", "runtime_evidence"), ("cmrf_public_quality", "public_quality")):
         raw = properties.get(prop)
         if raw is not None:
-            if len(raw.encode("utf-8")) > MAX_BYTES:
-                raise ValueError("runtime evidence property too large")
             value = json.loads(raw)
             if not isinstance(value, dict):
                 raise ValueError("runtime evidence must be an object")

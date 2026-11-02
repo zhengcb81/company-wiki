@@ -90,7 +90,7 @@ class SourceGeometrySession:
                 self.reasons['candidate_observation_partial'] += 1
             if keys:
                 decision, self.state = admit_geometry_request(self.plan, self.state,
-                    page=page, window_keys=keys[:64],
+                    page=page, window_keys=keys, work_budget=self.budget,
                     tabular_evidence='observed_candidate' if candidate else
                                      'unknown' if observation['partial'] else 'absent',
                     remaining=max(0, self.maximum - len(self.explored) - self.state['spent']['pages']))

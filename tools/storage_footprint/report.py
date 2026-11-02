@@ -1,17 +1,10 @@
-"""Report assembly (``cwp-storage-footprint/1``), validation and size budget."""
+"""Complete report assembly and accounting validation (cwp-storage-footprint/1)."""
 
 from __future__ import annotations
 
 from .core import (
-    MAX_ERROR_ITEMS,
-    MAX_REASON_CHARS,
-    MAX_REPORT_BYTES,
-    MAX_SKIPPED_SAMPLES,
-    MAX_TOP_DIRECTORIES,
     REPORT_SCHEMA,
-    ReportTooLarge,
     serialize,
-    truncate_path,
 )
 from .classify import (
     BUCKETS,
@@ -38,12 +31,6 @@ COST_OR_CONDITION = {
     ),
     "undetermined": "需可只读证实的状态证据后重评；绝不凭 mtime 判断",
 }
-
-
-def _truncate_text(text: str, limit: int) -> str:
-    if len(text) <= limit:
-        return text
-    return text[: limit - 16] + "...[truncated]"
 
 
 def _duplicate_summary(result: ScanResult) -> dict:
@@ -81,7 +68,7 @@ def _top_directories(result: ScanResult) -> list[dict]:
         if path != ""
     ]
     rows.sort(key=lambda row: (-row["logical_path_bytes"], row["path"]))
-    return rows[:MAX_TOP_DIRECTORIES]
+    return rows
 
 
 def _retention_notes(result: ScanResult) -> list[dict]:
@@ -330,114 +317,16 @@ def validate_report(payload: dict) -> list[str]:
 
     if not isinstance(payload.get("limitations"), list):
         problems.append("limitations is not a list")
-    if len(serialize(payload)) > MAX_REPORT_BYTES:
-        problems.append("report exceeds 256 KiB")
     return problems
-
-
-def _bounded_copy(payload: dict) -> dict:
-    work = dict(payload)
-    bounded_errors = []
-    for item in (payload.get("errors") or [])[:MAX_ERROR_ITEMS]:
-        bounded_errors.append(
-            {
-                "path": truncate_path(str(item.get("path", ""))),
-                "error": truncate_path(str(item.get("error", ""))),
-            }
-        )
-    work["errors"] = bounded_errors
-    work["limitations"] = [
-        _truncate_text(str(item), MAX_REASON_CHARS)
-        for item in (payload.get("limitations") or [])
-    ]
-    work["retention_notes"] = []
-    for note in payload.get("retention_notes") or []:
-        copy = dict(note)
-        for key in ("reason", "gain_basis", "cost_or_condition"):
-            if key in copy:
-                copy[key] = _truncate_text(str(copy[key]), MAX_REASON_CHARS)
-        work["retention_notes"].append(copy)
-    work["top_directories"] = [
-        {**row, "path": truncate_path(str(row.get("path", "")))}
-        for row in (payload.get("top_directories") or [])[:MAX_TOP_DIRECTORIES]
-    ]
-    work["skipped_samples"] = [
-        {"path": truncate_path(str(sample.get("path", ""))), "kind": sample.get("kind")}
-        for sample in (payload.get("skipped_samples") or [])[:MAX_SKIPPED_SAMPLES]
-    ]
-    work["duplicate_path_links"] = dict(payload.get("duplicate_path_links") or {})
-    return work
-
-
-def _truncation_candidates(payload: dict):
-    base = _bounded_copy(payload)
-    yield ("errors_and_paths_capped",), base
-    for keep in (50, 10):
-        variant = dict(base)
-        variant["errors"] = base["errors"][:keep]
-        yield (f"errors_capped_to_{keep}",), variant
-    no_errors = dict(base)
-    no_errors["errors"] = []
-    yield ("errors_dropped",), no_errors
-    fewer_dirs = dict(no_errors)
-    fewer_dirs["top_directories"] = no_errors["top_directories"][:5]
-    yield ("errors_dropped", "top_directories_to_5"), fewer_dirs
-    no_dirs = dict(no_errors)
-    no_dirs["top_directories"] = []
-    yield ("errors_dropped", "top_directories_dropped"), no_dirs
-    short_reasons = dict(no_dirs)
-    short_reasons["retention_notes"] = [
-        {**note, "reason": _truncate_text(str(note.get("reason", "")), 80)}
-        for note in no_dirs.get("retention_notes") or []
-    ]
-    yield (
-        ("errors_dropped", "top_directories_dropped", "reasons_shortened"),
-        short_reasons,
-    )
-    lean = dict(short_reasons)
-    lean["limitations"] = (short_reasons.get("limitations") or [])[:3]
-    lean["duplicate_path_links"] = {
-        "method": "st_dev+st_ino metadata identity only",
-        "identity_available": False,
-        "identity_known_files": 0,
-        "groups": 0,
-        "paths": 0,
-        "extra_logical_bytes": 0,
-        "unknown_identity_files": 0,
-        "note": "truncated report",
-    }
-    yield ("errors_dropped", "top_directories_dropped", "lean_payload"), lean
-    minimal = {
-        "schema_version": short_reasons.get("schema_version", REPORT_SCHEMA),
-        "scope": short_reasons.get("scope", {}),
-        "limits": short_reasons.get("limits", {}),
-        "totals": short_reasons.get("totals", {}),
-        "categories": short_reasons.get("categories", []),
-        "top_directories": [],
-        "retention_notes": [],
-        "errors": [],
-        "skipped_samples": [],
-        "calls": {"original_body_reads": 0, "llm": 0, "network": 0, "deleted": 0},
-        "limitations": lean.get("limitations", []),
-        "duplicate_path_links": lean["duplicate_path_links"],
-    }
-    yield ("minimal_payload",), minimal
 
 
 def enforce_report_budget(
     payload: dict, max_bytes: int | None = None
 ) -> tuple[dict, list[str]]:
-    """Truncate a report until it fits the byte budget, or raise."""
-    limit = MAX_REPORT_BYTES if max_bytes is None else int(max_bytes)
-    try:
-        if len(serialize(payload)) <= limit:
-            return payload, []
-    except (TypeError, ValueError) as error:
-        raise ReportTooLarge(f"report is not serializable: {error}") from error
-    for labels, candidate in _truncation_candidates(payload):
-        note = "report truncated to fit byte budget: " + "; ".join(labels)
-        annotated = dict(candidate)
-        annotated["limitations"] = list(candidate.get("limitations") or []) + [note]
-        if len(serialize(annotated)) <= limit:
-            return annotated, [note]
-    raise ReportTooLarge(f"report exceeds {limit} bytes even after truncation")
+    """Compatibility entry: validate JSON and retain the complete report.
+
+    Presentation size is not a scan result or execution budget. max_bytes is
+    accepted for old callers but cannot trim evidence or veto serialization.
+    """
+    serialize(payload)  # Invalid JSON values still fail before publication.
+    return payload, []

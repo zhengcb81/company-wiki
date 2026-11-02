@@ -59,7 +59,8 @@ def build_parser() -> argparse.ArgumentParser:
     parser.add_argument(
         "--deadline-seconds", type=float, default=DEADLINE_SECONDS_DEFAULT
     )
-    parser.add_argument("--max-detail-rows", type=int, default=MAX_DETAIL_ROWS_DEFAULT)
+    parser.add_argument("--max-detail-rows", type=int, default=MAX_DETAIL_ROWS_DEFAULT,
+                        help="deprecated compatibility option; complete report details are retained")
     parser.add_argument("--max-similar-groups", type=int, default=100)
     parser.add_argument(
         "--location-status",

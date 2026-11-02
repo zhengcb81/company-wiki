@@ -67,9 +67,7 @@ from .narrative_source_guard import (
     NarrativeSourceGuardError,
     NarrativeSourceReader,
     prompt_review_value,
-    source_ref,
-    validate_opened_identity,
-    validate_source_metadata,
+    open_verified_source,
 )
 
 
@@ -297,14 +295,7 @@ class NarrativeSelectHandler:
         context.checkpoint()
         if payload.subject.kind == "official_json":
             return self._execute_projection(payload, context)
-        ref = source_ref(payload)
-        opened = self._reader.open_version(
-            ref,
-            purpose="narrative_derivation",
-            expected_read_policy_sha256=payload.expected_read_policy_sha256,
-        )
-        validate_opened_identity(payload, opened)
-        validate_source_metadata(payload, self._reader.describe_version(ref))
+        opened = open_verified_source(self._reader, payload)
         review = prompt_review_value(opened)
         context.checkpoint()
         work = self._select(payload, opened.data, context)

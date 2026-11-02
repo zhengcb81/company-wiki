@@ -129,8 +129,6 @@ class NarrativeEvidenceViewReader:
             "items": items[query.page_offset : query.page_offset + query.page_limit],
         }
         data = canonical_json(view).encode("utf-8")
-        if len(data) > MAX_EVIDENCE_VIEW_BYTES:
-            raise NarrativeTransportError("blocked", "evidence_view_too_large")
         receipt = {
             "schema_version": "narrative-evidence-read-receipt/3" if compact else "narrative-evidence-read-receipt/2"
             if projected
@@ -155,8 +153,6 @@ class NarrativeEvidenceViewReader:
         if compact:
             receipt.update(parent_count=verified.receipt["parent_count"],
                            lineage_sha256=verified.receipt["lineage_sha256"])
-            if len(canonical_json(receipt).encode("utf-8")) + 1 > MAX_RECEIPT_BYTES:
-                raise NarrativeTransportError("blocked", "narrative_receipt_too_large")
         return NarrativeTransportRead(data=data, receipt=receipt)
 
     @staticmethod

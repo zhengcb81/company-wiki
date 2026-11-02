@@ -5,10 +5,8 @@ from __future__ import annotations
 from pathlib import Path
 import math
 
-from . import report as report_module
 from .core import (
     REPORT_SCHEMA,
-    ReportTooLarge,
     error_label,
     entry_state,
     paths_overlap,
@@ -77,12 +75,11 @@ def run_scan(
         project_root_text=root_text,
         limits={"max_files": files_limit, "max_seconds": seconds_limit},
     )
-    limit = report_module.MAX_REPORT_BYTES
     try:
-        payload, _notes = enforce_report_budget(payload, max_bytes=limit)
-        written = write_report(output_path, payload, max_bytes=limit)
-    except ReportTooLarge:
-        return FAILED, _base_payload("error", "report_too_large")
+        payload, _notes = enforce_report_budget(payload)
+        written = write_report(output_path, payload)
+    except (ValueError, TypeError):
+        return FAILED, _base_payload("error", "report_not_serializable")
     except FileExistsError:
         return REFUSED, _base_payload("refused", "output_exists_unknown")
     except OSError as error:

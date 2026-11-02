@@ -173,7 +173,8 @@ def test_actual_cli_readonly_and_budget_contract(tmp_path, cap, expected):
                              "--project-root", str(fixture["project"]),
                              "--output", str(output), "--local-output", str(local),
                              "--max-read-bytes", str(cap)],
-                            capture_output=True, text=True, timeout=30)
+                            capture_output=True, text=True, encoding="utf-8", timeout=30,
+                            env={**os.environ, "PYTHONUTF8": "1", "PYTHONIOENCODING": "utf-8"})
     assert result.returncode == 0, result.stderr
     report = json.loads(output.read_text(encoding="utf-8"))
     assert report["status"] == expected
@@ -205,12 +206,12 @@ def test_io_diagnostic_does_not_put_machine_path_in_git_report(tmp_path, monkeyp
     assert group.verification["files"][0]["detail"] == "PermissionError(errno=13)"
 
 
-def test_report_byte_cap_also_trims_non_group_diagnostics():
+def test_full_report_preserves_non_group_diagnostics():
     report = {"duplicate_groups": [], "counts": {},
               "diagnostics": [{"message": "a" * 512}] * 5000,
               "similar_groups": []}
     apply_size_cap(report, limits_hit=[])
     data = json.dumps(report, ensure_ascii=False, indent=1, sort_keys=True).encode("utf-8")
-    assert len(data) <= core.MAX_REPORT_BYTES
+    assert len(report["diagnostics"]) == 5000
     assert report["truncated"]["report_bytes"] == len(data)
-    assert report["truncated"]["dropped_diagnostics"] > 0
+    assert report["truncated"].get("dropped_diagnostics", 0) == 0

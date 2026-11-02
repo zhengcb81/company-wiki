@@ -154,7 +154,7 @@ def test_conflicting_bare_item_does_not_inherit_business(routed):
     ([[3, "Business", 1]], "NAVIGATION_LEVEL_JUMP"),
     ([[1, "Business", 20], [1, "Projects", 10]], "NAVIGATION_OUT_OF_ORDER"),
     ([[1, "Business", 1, {"uri": "https://external"}]], "NAVIGATION_ENTRY_INVALID"),
-    ([[1, "Business", 1], [34, "Projects", 5]], "NAVIGATION_LEVEL_INVALID"),
+    ([[1, "Business", 1], [34, "Projects", 5]], "NAVIGATION_LEVEL_JUMP"),
 ])
 def test_invalid_navigation_reports_and_never_guesses(routed, outline, code):
     r = prepare(outline)
@@ -189,15 +189,17 @@ def test_digest_changes_with_source_policy_navigation_and_limits(routed):
     assert prepare([[1, "Business", 10]])["request_digest"] != base["request_digest"]
 
 
-def test_limits_cannot_raise_native_hard_ceiling(routed):
+def test_explicit_native_limits_are_not_silently_tightened(routed):
     r = prepare([[1, "Business", 1]], limits={"max_pages": 1000, "max_requests": 1000})
-    assert r["plan"]["limits"] == {"max_pages": 64, "max_requests": 64}
+    assert r["plan"]["limits"] == {"max_pages": 1000, "max_requests": 1000}
 
 
-def test_large_outline_bounded_before_iteration(routed):
-    r = prepare([[1, "Business", 1]] * 4100)
-    assert "NAVIGATION_ENTRY_LIMIT" in codes(r)
-    assert len(r["windows"]) <= 4096
+def test_large_outline_is_bounded_by_the_existing_work_account(routed):
+    budget = WorkBudget(1000)
+    r = prepare([[1, "Business", 1]] * 4100, budget=budget)
+    assert "READING_WORK_BUDGET_EXCEEDED" in codes(r)
+    assert budget.exhausted and r['partial']
+    assert budget.used <= budget.max_work_units
 
 
 def test_shared_page_conflict_excludes_ambiguous_physical_page(routed):

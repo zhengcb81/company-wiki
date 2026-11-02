@@ -9,6 +9,7 @@ fixture byte- and mtime-identical and produce only the report file.
 from __future__ import annotations
 
 import json
+import shutil
 from pathlib import Path
 
 import pytest
@@ -76,6 +77,16 @@ def _expected(spec_categories: dict[str, str], root: Path) -> dict[str, dict[str
 
 
 def test_static_fixture_scan_is_complete_exact_and_non_mutating(static_root, tmp_path):
+    # Compileall and editors may create ignored caches beside the committed
+    # fixture. Measure its seven declared inputs in an isolated tree rather
+    # than deleting foreign caches or teaching the product to hide them.
+    original = static_root
+    original_before = snapshot_tree(original)
+    static_root = tmp_path / "static"
+    for relative in STATIC_CATEGORIES:
+        target = static_root / relative
+        target.parent.mkdir(parents=True, exist_ok=True)
+        shutil.copy2(original / relative, target)
     before = snapshot_tree(static_root)
     output = tmp_path / "out" / "report.json"
     code, stdout = run_scan(
@@ -111,6 +122,7 @@ def test_static_fixture_scan_is_complete_exact_and_non_mutating(static_root, tmp
     }
 
     assert snapshot_tree(static_root) == before
+    assert snapshot_tree(original) == original_before
     assert [path.name for path in output.parent.iterdir()] == ["report.json"]
 
 

@@ -467,11 +467,11 @@ def test_originals_catalog_and_config_are_unchanged(tmp_path):
     assert report["deleted_bytes"] == 0
 
 
-def test_report_stays_inside_the_git_size_and_row_caps(tmp_path):
+def test_report_retains_complete_group_accounting(tmp_path):
     fixture = build_fixture(tmp_path)
     report = _run(fixture, "verify")
 
     payload = json.dumps(report, ensure_ascii=False).encode("utf-8")
-    assert len(payload) <= 1024 * 1024
-    assert report["truncated"]["detail_rows"] <= 5000
-    assert report["counts"]["detail_rows"] <= 5000
+    assert len(payload) > 0
+    assert report["truncated"]["dropped_groups_total"] == 0
+    assert report["counts"]["duplicate_groups_listed"] == len(report["duplicate_groups"])

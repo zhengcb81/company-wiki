@@ -10,8 +10,6 @@ from pathlib import Path
 from typing import Any
 
 SCHEMA_VERSION = "narrative-g2-replay/1"
-MAX_REPORT_BYTES = 8 * 1024 * 1024
-MAX_BUNDLE_BYTES = 8 * 1024 * 1024
 
 # Modules whose actual bytes decide the summary -> read -> RF behaviour.
 # Recorded every run so a record can be tied to exact code, never to "latest".
@@ -146,13 +144,8 @@ def create_attempt(out_root: Path) -> AttemptDir:
 
 
 def write_report(attempt: AttemptDir, report: dict[str, Any]) -> Path:
-    payload = json.dumps(report, ensure_ascii=False, indent=2, sort_keys=False)
+    payload = json.dumps(report, ensure_ascii=False, indent=2, sort_keys=False, allow_nan=False)
     path = attempt.path / "report.json"
     data = payload.encode("utf-8")
-    if len(data) > MAX_REPORT_BYTES:
-        raise RuntimeError(
-            f"report exceeds {MAX_REPORT_BYTES} bytes ({len(data)}); "
-            "the persistent report must stay small"
-        )
     path.write_bytes(data)
     return path

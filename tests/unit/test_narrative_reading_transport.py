@@ -392,8 +392,12 @@ def test_malformed_or_unbounded_strategy_refuses_before_model(change, tmp_path):
     else:
         context["layout_coverage"]["ratio"] = float("nan")
     wire["reading_context"] = context
-    with pytest.raises(NarrativeContractError):
-        NarrativeSelectResult.from_dict(wire)
+    if change in {"oversized", "nested_too_deep"}:
+        restored = NarrativeSelectResult.from_dict(wire)
+        assert restored.to_dict() == wire
+    else:
+        with pytest.raises(NarrativeContractError):
+            NarrativeSelectResult.from_dict(wire)
 
 
 def test_shared_groups_send_original_text_once_and_restore_each_exact_group():
@@ -915,7 +919,8 @@ def test_select_result_reader_keeps_previous_minor_schema_compatible():
     assert restored.to_dict()["schema_version"] == "narrative-select-result/2.0"
 
 
-def test_context_depth_cap_applies_before_any_unbounded_path_walk():
+def test_actual_stdlib_json_recursion_failure_is_encoding_not_material_quota(monkeypatch):
+    from company_wiki.automation import narrative_contracts as contracts
     selected = selection(3)
     wire = selected.to_dict()
     wire["reading_context"] = reading_context(selected)
@@ -923,7 +928,10 @@ def test_context_depth_cap_applies_before_any_unbounded_path_walk():
     for _ in range(1500):
         nested = {"child": nested}
     wire["reading_context"]["layout_coverage"] = nested
-    with pytest.raises(NarrativeContractError, match="structural bound"):
+    def unavailable_encoder(*args, **kwargs):
+        raise RecursionError('underlying JSON runtime unavailable')
+    monkeypatch.setattr(contracts, 'canonical_json', unavailable_encoder)
+    with pytest.raises(NarrativeContractError, match="JSON encoding"):
         NarrativeSelectResult.from_dict(wire)
 
 

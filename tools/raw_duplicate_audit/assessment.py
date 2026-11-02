@@ -97,8 +97,12 @@ def _write_report(report: dict, target: Path, *, overwrite: bool) -> bool:
         report["write_refusal"] = ERROR_OUTPUT_EXISTS
         return False
     report["written"] = True
-    apply_size_cap(report, limits_hit=report.setdefault("limits_hit", []))
-    write_json(target, report, overwrite=True)
+    try:
+        apply_size_cap(report, limits_hit=report.setdefault("limits_hit", []))
+        write_json(target, report, overwrite=True)
+    except (OSError, ValueError, TypeError):
+        report["written"] = False
+        raise
     return True
 
 
@@ -121,7 +125,7 @@ def run_assessment(
     max_groups: int = MAX_GROUPS_DEFAULT,
     max_read_bytes: int = MAX_READ_BYTES_DEFAULT,
     deadline_seconds: float = DEADLINE_SECONDS_DEFAULT,
-    max_detail_rows: int = MAX_DETAIL_ROWS_DEFAULT,
+    max_detail_rows: int | None = MAX_DETAIL_ROWS_DEFAULT,
     max_similar_groups: int = 100,
     location_status: str = "all",
     hash_catalog: bool = False,
@@ -137,7 +141,7 @@ def run_assessment(
         "max_groups": int(max_groups),
         "max_read_bytes": int(max_read_bytes),
         "deadline_seconds": float(deadline_seconds),
-        "max_detail_rows": int(max_detail_rows),
+        "max_detail_rows": None,
         "max_similar_groups": int(max_similar_groups),
     }
 
@@ -253,7 +257,7 @@ def run_assessment(
     sorted_groups = sort_groups(groups)
     entries = [group_entry(group) for group in sorted_groups]
     kept, detail_rows, dropped_rows = apply_detail_row_cap(
-        entries, max_rows=int(max_detail_rows), limits_hit=limits_hit
+        entries, limits_hit=limits_hit
     )
 
     upper_bound = upper_bound_bytes(accounts)
@@ -351,7 +355,7 @@ def run_assessment(
     }
     report["truncated"] = {
         "detail_rows": detail_rows,
-        "max_detail_rows": int(max_detail_rows),
+        "max_detail_rows": None,
         "dropped_groups_by_row_cap": dropped_rows,
         "reasons": [],
     }

@@ -17,9 +17,9 @@ from pathlib import Path
 
 import pytest
 
-from storage_footprint import classify, core, report as report_module, scan
+from storage_footprint import classify, core, scan
 from storage_footprint.classify import classify_file, retention_bucket
-from storage_footprint.core import MAX_PATH_CHARS, REPORT_SCHEMA, truncate_path
+from storage_footprint.core import REPORT_SCHEMA, truncate_path
 from storage_footprint.report import (
     build_report,
     enforce_report_budget,
@@ -342,37 +342,17 @@ def test_own_report_can_be_rewritten(tmp_path):
     assert stdout["status"] == "written"
 
 
-def test_report_size_budget_truncates():
+def test_full_report_is_not_truncated_by_legacy_size_option():
     errors = [{"path": "dir/" + "p" * 9000, "error": "E" * 9000} for _ in range(400)]
-    payload = {
-        "schema_version": REPORT_SCHEMA,
-        "scope": {},
-        "limits": {},
-        "totals": {},
-        "categories": [],
-        "top_directories": [],
-        "retention_notes": [],
-        "errors": errors,
-        "calls": {},
-        "limitations": [],
-    }
-    raw = json.dumps(payload, ensure_ascii=False).encode("utf-8")
-    assert len(raw) > core.MAX_REPORT_BYTES
-    smaller, notes = enforce_report_budget(payload, max_bytes=core.MAX_REPORT_BYTES)
-    assert (
-        len(json.dumps(smaller, ensure_ascii=False).encode("utf-8"))
-        <= core.MAX_REPORT_BYTES
-    )
-    assert any("truncated" in note for note in notes)
-    assert smaller["limitations"]
+    payload = {"schema_version": REPORT_SCHEMA, "errors": errors, "limitations": []}
+    complete, notes = enforce_report_budget(payload, max_bytes=1)
+    assert complete == payload and complete["errors"] == errors and not notes
 
 
-def test_error_paths_hard_truncated():
+def test_error_paths_remain_complete_in_persisted_reports():
     long_path = "a/" * 400 + "z.txt"
-    truncated = truncate_path(long_path)
-    assert len(truncated) <= MAX_PATH_CHARS
-    assert truncated.endswith("...[truncated]")
-    assert len(truncate_path("short.txt")) == len("short.txt")
+    assert truncate_path(long_path) == long_path
+    assert truncate_path("short.txt") == "short.txt"
 
 
 def test_failed_report_write_leaves_no_temp_output(tmp_path, monkeypatch):
@@ -391,17 +371,12 @@ def test_failed_report_write_leaves_no_temp_output(tmp_path, monkeypatch):
     assert list(output.parent.iterdir()) == []
 
 
-def test_runner_cleans_up_when_report_exceeds_budget(tmp_path, monkeypatch):
+def test_runner_publishes_complete_report_without_size_policy(tmp_path):
     root = write_tree(tmp_path / "root", {"companies/a/x.txt": "0123456789"})
     output = tmp_path / "out" / "report.json"
-    monkeypatch.setattr(report_module, "MAX_REPORT_BYTES", 32)
-    code, stdout = run_scan(
-        project_root=root, max_files=100, max_seconds=30.0, output=output
-    )
-    assert code == 1
-    assert stdout["status"] == "error"
-    assert not output.exists()
-    assert not output.parent.exists()
+    code, stdout = run_scan(project_root=root, max_files=100, max_seconds=30.0, output=output)
+    assert code == 0 and stdout["status"] == "written"
+    assert json.loads(output.read_text(encoding="utf-8"))["totals"]["files_measured"] == 1
 
 
 def test_scan_never_opens_original_bodies(tmp_path, monkeypatch):

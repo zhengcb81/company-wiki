@@ -80,18 +80,12 @@ MAIN 验收修正后的优先级：已知 `companies/sectors/themes/future_lake/
 
 本工具不实现 purge/hardlink/delete，不建状态库、不做审批签收。
 
-## 报告 `cwp-storage-footprint/1`（≤256 KiB）
+## 报告 `cwp-storage-footprint/1`
 
-顶层键：`schema_version`、`scope`(project_root/started_at/finished_at/complete/stop_reason)、
-`limits`、`totals`、`categories`(8 类固定)、`top_directories`(≤25，按子树逻辑字节降序)、
-`retention_notes`(按 类别×分桶 聚合，含 reason/gain_basis/cost_or_condition)、
-`errors`(≤200 条，路径硬截断 300 字符，诊断只含类型+errno，无机器绝对路径)、
-`skipped_samples`(≤20 条，kind=reparse|cloud)、`calls`(恒为 0：original_body_reads/llm/network/deleted)、
-`limitations`、`duplicate_path_links`。
-
-超过 256 KiB 时按固定阶梯截断（错误列表 → top_directories → 理由文本 → 精简载荷）并在
-`limitations` 追加 `report truncated ...`；仍超限则失败退出并清理临时文件。
-写入是“临时文件 + 原子 replace”，且**绝不覆盖**非本工具 schema 的既有文件。
+完整 JSON 报告不设表示字节/条数上限，错误、跳过路径和原始 locator 不截断；终端只打印摘要。
+扫描的实际 `--max-files` 和 `--max-seconds` 预算仍有效，触及预算必须保留 partial/stop_reason，
+不能把访问失败或未扫描区域当完整。真实 JSON 编码、写入/原子替换失败仍返回错误，不声称报告已保存。
+R7 起旧 `max_bytes` Python 参数仅为兼容，不得裁证据或改变扫描状态。
 
 ## 只读与副作用边界
 
@@ -110,7 +104,7 @@ PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 CW_BASETEMP_FALLBACK_ROOT=$PWD/tmp \
 python -m ruff check tools/storage_footprint
 ```
 
-- `tests/test_storage_footprint_unit.py` — 口径/分类/预算/拒绝/截断/零正文读反例
+- `tests/test_storage_footprint_unit.py` — 口径/分类/预算/拒绝/完整报告/零正文读反例
 - `tests/test_storage_footprint_fixture_integration.py` — 静态与运行时 fixture 精确合计
 - `tests/test_storage_footprint_cli_e2e.py` — 真实子进程 CLI、audit-hook 零正文读、原状恢复
 

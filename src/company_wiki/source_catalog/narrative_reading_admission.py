@@ -114,7 +114,7 @@ def _admitted(unit: Any, reading: Mapping[str, Any], kind: str, *, fact: Any = N
     use, reason = support_use or source_support_use(unit.raw_text, fact=fact,
         financial_only=financial_only if financial_only is not None else _financial_only(unit.raw_text, fact),
         table_qualified=table_qualified, source_roles=prepared_roles, passage=prepared_passage)
-    if assessment_complete is False:
+    if assessment_complete is False and use != 'support':
         return decision(False, reason)
     if offer_relevant is None:
         offer_relevant=source_narrative_relevance(fact=fact,table_qualified=table_qualified,

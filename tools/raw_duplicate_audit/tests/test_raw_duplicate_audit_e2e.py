@@ -157,10 +157,9 @@ def test_production_catalog_duplicate_assessment_is_read_only_and_bounded(tmp_pa
 
     for report_path in (SCAN_REPORT_PATH, VERIFY_REPORT_PATH):
         assert report_path.is_file()
-        assert report_path.stat().st_size <= 1024 * 1024
         payload = json.loads(report_path.read_text(encoding="utf-8"))
         assert payload["schema_version"] == "raw-duplicate-assessment/1"
-        assert payload["truncated"]["detail_rows"] <= 5000
+        assert payload["truncated"]["dropped_groups_total"] == 0
 
     assert local_output.is_file()
     local = json.loads(local_output.read_text(encoding="utf-8"))

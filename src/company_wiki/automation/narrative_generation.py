@@ -3,6 +3,7 @@
 from __future__ import annotations
 import json
 import math
+import logging
 from importlib import import_module
 from collections.abc import Callable, Mapping, Sequence
 from typing import Any
@@ -12,6 +13,7 @@ from company_wiki.narrative_subject import NarrativeSubject
 from .models import canonical_json_hash
 from .narrative_contracts import (
     NarrativeBundle,
+    NarrativeContractError,
     NarrativeSelectResult,
     BUNDLE_SCHEMA,
     PROJECTED_SELECT_RESULT_SCHEMA,
@@ -24,7 +26,7 @@ from company_wiki.source_catalog.transcript_text_extract import (
     TRANSCRIPT_JSON_EXTRACTOR,
 )
 from .narrative_transport import NarrativeTransportReader
-from .narrative_transport_contracts import NarrativeReadRequest, EXPECTED_SOURCE_FIELDS
+from .narrative_transport_contracts import NarrativeReadRequest, EXPECTED_SOURCE_FIELDS, NarrativeTransportError
 from .narrative_verify import BUNDLE_PRODUCER_VERSION
 from .narrative_selection_generation import reading_material_sha256, validate_selection_generation
 
@@ -519,8 +521,12 @@ class ReadingReuseVerifier:
         self._selected: NarrativeSelectResult | None = None
 
     def matches(self, manifest: Mapping[str, Any]) -> bool:
-        if self._selected is None and current_reading_decision_matches(manifest):
-            return True
+        if self._selected is None:
+            try:
+                if current_reading_decision_matches(manifest):
+                    return True
+            except ValueError as error:
+                invalid_cache_candidate(error)
         if self._reselect is None:
             return False
         if self._selected is None:
@@ -532,16 +538,49 @@ class ReadingReuseVerifier:
         return True
 
 
+def invalid_cache_candidate(error: Exception) -> None:
+    """Derived cache observations are diagnostics, never source permissions."""
+    logging.getLogger(__name__).warning("CACHE_CANDIDATE_INVALID type=%s", type(error).__name__)
+
+
+def discovered_cache_read(read: Callable[[], bool]) -> bool:
+    """A disposable candidate may fail; current-source errors still propagate.
+
+    Explicit pin readers never call this discovery-only adapter. Accounting and
+    frozen-run checks are outside it and retain their existing strict owner.
+    """
+    try:
+        return read()
+    except NarrativeTransportError as error:
+        if error.reason not in {"artifact_reference_mismatch", "narrative_artifact_not_visible",
+                                "narrative_artifact_corrupt", "narrative_artifact_unavailable",
+                                "narrative_request_invalid"}:
+            raise
+        invalid_cache_candidate(error)
+    except (ValueError, KeyError, TypeError) as error:
+        if (isinstance(error, ValueError)
+                and not isinstance(error, (NarrativeContractError, json.JSONDecodeError))
+                and not str(error).startswith("BATCH_REUSE_")):
+            raise
+        invalid_cache_candidate(error)
+    return False
+
+
 def find_reuse_pin(artifacts, reader, payload, manifest, facts, *, normalization=None, reselect=None):
     if manifest.get("execution_versions", {}).get("selector") == "0.9.0":
         verification = ReadingReuseVerifier(reselect)
         for version in artifacts.visible_base_generation_candidates(
                 subject=payload.subject, base_generation_sha256=generation_sha256(manifest)):
-            stored = reading_candidate_manifest(version, manifest)
+            try:
+                stored = reading_candidate_manifest(version, manifest)
+            except (ValueError, KeyError, TypeError) as error:
+                invalid_cache_candidate(error)
+                continue
             if not verification.matches(stored):
                 continue
             pin = artifact_pin(version)
-            if read_reuse_pin(artifacts, reader, payload, pin, facts, stored, normalization=normalization):
+            if discovered_cache_read(lambda: read_reuse_pin(
+                    artifacts, reader, payload, pin, facts, stored, normalization=normalization)):
                 return pin
         return None
     digest = generation_sha256(manifest)
@@ -552,15 +591,16 @@ def find_reuse_pin(artifacts, reader, payload, manifest, facts, *, normalization
         generation_sha256=digest,
     )
     for version in versions:
-        metadata = json.loads(version.metadata_json)
-        if metadata.get("generation_manifest") != manifest:
-            raise ValueError("BATCH_REUSE_MANIFEST_INVALID")
-        pin = artifact_pin(version)
         try:
-            complete = read_reuse_pin(artifacts, reader, payload, pin, facts, manifest, normalization=normalization)
-        except (KeyError, ValueError) as exc:
-            # Never treat a corrupt matching artifact as permission to spend again.
-            raise ValueError("BATCH_REUSE_ARTIFACT_INVALID") from exc
+            metadata = json.loads(version.metadata_json)
+            if not isinstance(metadata, dict) or metadata.get("generation_manifest") != manifest:
+                raise ValueError("BATCH_REUSE_MANIFEST_INVALID")
+        except (ValueError, KeyError, TypeError) as error:
+            invalid_cache_candidate(error)
+            continue
+        pin = artifact_pin(version)
+        complete = discovered_cache_read(lambda: read_reuse_pin(
+            artifacts, reader, payload, pin, facts, manifest, normalization=normalization))
         if complete:
             return pin
     return None

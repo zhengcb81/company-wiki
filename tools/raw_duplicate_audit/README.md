@@ -1,6 +1,6 @@
 # raw_duplicate_audit — 原件重复空间只读盘点（N5-RAW-DUP）
 
-> MAIN 2026-10-06集成修正：51项/9.09秒含两CLI绿；Windows分配量未知/null，历史报告该字段不能用作磁盘收益。硬cap逐块约束、partial字节计账、双输出与未知旧文件保护、独占.tmp、诊断无机器路径、非组列表也受1MiB上限。ACL反例采用PermissionError注入，不更改真实权限。生产历史3组实读证据保持，未新跑全量；原件删除0。deadline在操作边界协作检查，不能瞬间中断阻塞文件系统I/O。
+> MAIN 2026-10-06集成修正：51项/9.09秒含两CLI绿；Windows分配量未知/null，历史报告该字段不能用作磁盘收益。硬cap逐块约束、partial字节计账、双输出与未知旧文件保护、独占.tmp、诊断无机器路径、R7起完整报告不设表示体积/明细行数门槛。ACL反例采用PermissionError注入，不更改真实权限。生产历史3组实读证据保持，未新跑全量；原件删除0。deadline在操作边界协作检查，不能瞬间中断阻塞文件系统I/O。
 
 回答一个问题：**catalog 已登记的原件里，还有多少完全相同的字节被重复存放，值不值得下一阶段去重。**
 只读、只估算、只出建议；不删除、不移动、不硬链接、不复制原件，不实施对象存储迁移。
@@ -33,7 +33,7 @@ PYTHONPATH=src python tools/raw_duplicate_audit/cli.py verify `
 | `catalog.py` | `load_catalog_config` 载入配置、`ReadOnlyReader`（`?mode=ro` + `immutable=1` 时更严的副作用策略）、locations/sources 读取、similar 组、protected 快照 |
 | `classify.py` | `observe`（仅 stat，不追随未知外部目录）、`build_groups`、`enforce_containment`（只对候选组做 realpath 越界判定）、`account_group` 记账、`fill_allocations` |
 | `verify.py` | 有界流式实读：变更检测、已登记 digest 比对、云占位跳过、预算中断 |
-| `report.py` | 小组项组装、明细行上限、1MiB 报告上限、三方案建议、禁用措辞守卫 |
+| `report.py` | 完整小组项与诊断组装、三方案建议、禁用措辞守卫 |
 | `assessment.py` | 端到端编排、拒绝码、protected before/after |
 | `cli.py` | `scan` / `verify` 两个子命令 |
 
@@ -81,9 +81,9 @@ PYTHONPATH=src python tools/raw_duplicate_audit/cli.py verify `
 可恢复性的影响；`binding=false`）、`notes`。
 
 - 本机绝对路径只进 `--local-output`（schema `raw-duplicate-assessment-local-paths/1`），不进 Git 报告。
-- 明细行 ≤ 5000、报告 ≤ 1MiB，超出显式 `truncated`。
+- 完整报告保留全部已观察组、locator 和诊断，不因体积或明细条数截断。`truncated` 保留兼容计数，当前不因输出添加丢失。
 - `status=partial` 只在 `deadline` 或 `read_bytes` 被截断时出现；
-  `max_groups/detail_rows/report_bytes` 属于 scope 上限，只进 `limits_hit`。
+  `max_groups` 属于实际复核 scope 上限；旧 `detail_rows/report_bytes` 不再限制报告。
 
 ## 限制与可调参数
 
@@ -92,7 +92,7 @@ PYTHONPATH=src python tools/raw_duplicate_audit/cli.py verify `
 | `--max-groups` | 100 | 实际打开复核的组数上限 |
 | `--max-read-bytes` | 536870912 (512MiB) | 流式实读字节上限 |
 | `--deadline-seconds` | 300 | 整次运行墙钟上限 |
-| `--max-detail-rows` | 5000 | 报告明细行上限 |
+| `--max-detail-rows` | 无 | 旧参数兼容接受，完整报告明细不裁剪 |
 | `--max-similar-groups` | 100 | `similar_groups` 条数上限 |
 | `--location-status` | `all` | `all` / `active` |
 | `--hash-catalog` | 关 | 额外记录 catalog 数据库文件完整 SHA-256 |

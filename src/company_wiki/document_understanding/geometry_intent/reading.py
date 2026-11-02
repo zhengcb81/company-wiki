@@ -14,13 +14,10 @@ from ..observation_adapter import build_observation
 from ..profiles import get_profile, resolve_reading_profile, route_document
 from ..profiles.geometry_policy import compile_geometry_policy
 from ..strategy_binding import SectionPolicyMatcher
-from .contracts import DiagnosticSink, canonical_digest
+from .contracts import DiagnosticSink, canonical_digest, charge_material as _charge_material
 from .planner import plan_geometry_requests
 
 BRIDGE_VERSION = "pdf-geometry-reading/1"
-MAX_OUTLINE = 4096
-MAX_DEPTH = 32
-MAX_TITLE = 4096
 
 
 @dataclass(frozen=True)
@@ -28,21 +25,6 @@ class PdfReadingContext:
     title: str = ""
     declared_kind: str = "unknown"
     language: str = "zh"
-
-
-def _charge_material(value, budget):
-    """Prepay bounded policy/probe material before visiting its children."""
-    budget.charge()
-    if isinstance(value, Mapping):
-        budget.charge(len(value))
-        for child in value.values():
-            _charge_material(child, budget)
-    elif isinstance(value, (list, tuple)):
-        budget.charge(len(value))
-        for child in value:
-            _charge_material(child, budget)
-    elif isinstance(value, str):
-        budget.charge(1 + len(value) // 64)
 
 
 def _limits(limits):
@@ -53,7 +35,7 @@ def _limits(limits):
         value = limits.get(key, 64)
         if type(value) is not int or value < 0:
             raise ValueError(f"{key} must be a nonnegative integer")
-        result[key] = min(value, 64)
+        result[key] = value
     return result
 
 
@@ -71,9 +53,6 @@ def _native_rows(outline, page_count, budget, diagnostics):
     if not outline:
         diagnostics.add("NAVIGATION_MISSING", "no native outline; no synthetic windows")
         return [], True
-    if len(outline) > MAX_OUTLINE:
-        diagnostics.add("NAVIGATION_ENTRY_LIMIT", "native navigation exceeds 4096 entries")
-        return [], False
     rows: list[dict[str, Any]] = []
     stack: list[int] = []
     previous_level, previous_page = 0, 0
@@ -84,14 +63,14 @@ def _native_rows(outline, page_count, budget, diagnostics):
             diagnostics.add("NAVIGATION_ENTRY_INVALID", f"outline {index}: expected three fields; external links not inferred")
             return [], False
         level, title, page = value
-        if type(level) is not int or not 1 <= level <= MAX_DEPTH:
-            diagnostics.add("NAVIGATION_LEVEL_INVALID", f"outline {index}: level outside 1..32")
+        if type(level) is not int or level < 1:
+            diagnostics.add("NAVIGATION_LEVEL_INVALID", f"outline {index}: expected a positive integer level")
             return [], False
         if level > previous_level + 1:
             diagnostics.add("NAVIGATION_LEVEL_JUMP", f"outline {index}: missing ancestor")
             return [], False
-        if not isinstance(title, str) or not title or len(title) > MAX_TITLE:
-            diagnostics.add("NAVIGATION_ENTRY_INVALID", f"outline {index}: missing or overlong title")
+        if not isinstance(title, str) or not title:
+            diagnostics.add("NAVIGATION_ENTRY_INVALID", f"outline {index}: missing title")
             return [], False
         budget.charge(1 + len(title) // 64)
         if type(page) is not int or not 1 <= page <= page_count:
@@ -110,7 +89,8 @@ def _native_rows(outline, page_count, budget, diagnostics):
     return rows, True
 
 
-def _windows(rows, profile, policy, source_id, source_sha256, budget, diagnostics, unresolved, blocked):
+def _windows(rows, profile, policy, source_id, source_sha256, budget, diagnostics, unresolved, blocked,
+             *, prepared_windows=None):
     matcher = SectionPolicyMatcher(profile, budget)
     rules = profile.get("section_rules", ())
     budget.charge(1 + len(rules))
@@ -120,7 +100,7 @@ def _windows(rows, profile, policy, source_id, source_sha256, budget, diagnostic
     stack: list[dict[str, Any]] = []
     resolved: list[dict[str, Any]] = []
     for row in rows:
-        budget.charge(1 + MAX_DEPTH)
+        budget.charge(1 + len(stack))
         while stack and stack[-1]["level"] >= row["level"]:
             stack.pop()
         inherited = stack[-1]["effective"] if stack else None
@@ -139,7 +119,7 @@ def _windows(rows, profile, policy, source_id, source_sha256, budget, diagnostic
                        contrary=bool(matcher.diagnostics))
         resolved.append(current)
         stack.append(current)
-    windows = []
+    windows = prepared_windows if prepared_windows is not None else []
     for index, row in enumerate(resolved):
         budget.charge()
         # Last heading at one physical destination determines continuation.
@@ -186,6 +166,9 @@ def _windows(rows, profile, policy, source_id, source_sha256, budget, diagnostic
     merged: list[dict[str, Any]] = []
     for window in windows:
         budget.charge()
+        # Preserve already completed canonical windows if the shared account
+        # stops during merge; a partial mutable merge is not a verified prefix.
+        window = {**window, 'basis': dict(window['basis'])}
         segment_digest = canonical_digest(window)
         if (merged and merged[-1]['scope_id'] == window['scope_id']
                 and merged[-1]['rule_key'] == window['rule_key']
@@ -257,7 +240,9 @@ def prepare_geometry_reading(units, *, context: PdfReadingContext, source_id: st
     profile = {"profile_id": "unknown", "profile_version": "unknown", "section_rules": []}
     policy = compile_geometry_policy(profile)
     route = {"profile_id": "unknown", "family": "unknown", "confidence": "unknown"}
-    windows, native_rows, navigation_complete = [], [], False
+    windows: list[dict[str, Any]] = []
+    native_rows: list[dict[str, Any]] = []
+    navigation_complete = False
     unresolved = []
     blocked: list[dict[str, Any]] = []
     partial = False
@@ -286,13 +271,14 @@ def prepare_geometry_reading(units, *, context: PdfReadingContext, source_id: st
         partial = not navigation_complete
         if native_rows and native_rows[0]['start'] > 1:
             unresolved.append({'physical_start': 1, 'physical_end': native_rows[0]['start'] - 1})
-        windows = _windows(native_rows, profile, policy, source_id, source_sha256, budget, diagnostics, unresolved, blocked)
+        windows = _windows(native_rows, profile, policy, source_id, source_sha256, budget, diagnostics,
+                           unresolved, blocked, prepared_windows=windows)
         # Reserve digest serialization before assembling the external plan.
         _charge_material(windows, budget)
         _charge_material(unresolved, budget)
     except WorkBudgetExceeded:
         diagnostics.add("READING_WORK_BUDGET_EXCEEDED", "preparation incomplete; no renewed budget or guessed windows")
-        partial, windows, unresolved, blocked = True, [], [], []
+        partial = True
     plan = plan_geometry_requests(policy, windows, page_count=page_count,
                                   limits=actual_limits, work_budget=budget)
     if partial:

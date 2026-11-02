@@ -16,8 +16,6 @@ from pathlib import Path
 from . import classify as classify_module
 from .core import (
     BudgetExceeded,
-    MAX_ERROR_ITEMS,
-    MAX_SKIPPED_SAMPLES,
     ScanBudget,
     entry_state,
     error_label,
@@ -68,10 +66,7 @@ def _scandir(path: Path):
 
 def _record_error(result: ScanResult, rel_path: str, error: BaseException) -> None:
     result.errors_total += 1
-    if len(result.errors) < MAX_ERROR_ITEMS:
-        result.errors.append(
-            {"path": truncate_path(rel_path), "error": error_label(error)}
-        )
+    result.errors.append({"path": truncate_path(rel_path), "error": error_label(error)})
 
 
 def _open_dir(
@@ -111,8 +106,7 @@ def _record_skip(result: ScanResult, rel: str, kind: str) -> None:
         result.skipped_cloud += 1
     else:
         result.skipped_links += 1
-    if len(result.skipped_samples) < MAX_SKIPPED_SAMPLES:
-        result.skipped_samples.append({"path": truncate_path(rel), "kind": kind})
+    result.skipped_samples.append({"path": truncate_path(rel), "kind": kind})
 
 
 def _finish(result: ScanResult, *, budget_stop: bool) -> ScanResult:

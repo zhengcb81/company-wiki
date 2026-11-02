@@ -1168,22 +1168,26 @@ def _find_item_reuse_pin(
             artifacts, reader, payload, manifest, facts, normalization=normalization, reselect=reselect,
         )
     reading = manifest.get("execution_versions", {}).get("selector") == "0.9.0"
-    from .narrative_generation import ReadingReuseVerifier
+    from .narrative_generation import ReadingReuseVerifier, invalid_cache_candidate, discovered_cache_read
     verification = ReadingReuseVerifier(reselect)
     versions = (artifacts.visible_base_generation_candidates(subject=payload.subject,
                 base_generation_sha256=generation_sha256(manifest)) if reading else
                 artifacts.visible_subject_generation_candidates(subject=payload.subject,
                     generation_sha256=generation_sha256(manifest)))
     for version in versions:
-        metadata = json.loads(version.metadata_json)
         effective = manifest
-        if reading:
-            from .narrative_generation import reading_candidate_manifest
-            effective = reading_candidate_manifest(version, manifest)
-            if not verification.matches(effective):
-                continue
-        elif metadata.get("generation_manifest") != manifest:
-            raise ValueError("BATCH_REUSE_MANIFEST_INVALID")
+        try:
+            metadata = json.loads(version.metadata_json)
+            if reading:
+                from .narrative_generation import reading_candidate_manifest
+                effective = reading_candidate_manifest(version, manifest)
+            elif not isinstance(metadata, dict) or metadata.get("generation_manifest") != manifest:
+                raise ValueError("BATCH_REUSE_MANIFEST_INVALID")
+        except (ValueError, KeyError, TypeError) as error:
+            invalid_cache_candidate(error)
+            continue
+        if reading and not verification.matches(effective):
+            continue
         pin = {
             "schema_version": "narrative-ref/2",
             "artifact_version_id": version.artifact_version_id,
@@ -1192,9 +1196,9 @@ def _find_item_reuse_pin(
             "subject_binding": payload.subject.to_dict(),
             "generation_sha256": generation_sha256(effective),
         }
-        if _read_projected_pin(
+        if discovered_cache_read(lambda: _read_projected_pin(
             artifacts, reader, payload, pin, effective, catalog=catalog
-        ):
+        )):
             return pin
     return None
 

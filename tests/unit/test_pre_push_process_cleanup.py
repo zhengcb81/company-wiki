@@ -62,15 +62,13 @@ def test_child_failure_keeps_actual_exit_code_and_diagnostic(capsys):
 
 
 @pytest.mark.parametrize("pipe", ["stdout", "stderr"])
-def test_output_overflow_is_bounded_red_with_retained_progress(monkeypatch, capsys, pipe):
-    monkeypatch.setattr(gate, "STDOUT_CAP_BYTES", 4096)
-    monkeypatch.setattr(gate, "STDERR_CAP_BYTES", 4096)
-    code = (f"import sys,time;stream=sys.{pipe};stream.write('last progress\\n');"
-            "stream.flush();stream.write('x'*8192);stream.flush();time.sleep(12)")
-    assert gate._run([sys.executable, "-c", code], "output flood", timeout=4) == 125
-    output = capsys.readouterr().out
-    assert "last progress" in output and "output truncated" in output
-    assert "stdout cap=4096" in output and len(output) < 4600
+def test_noisy_success_retains_tail_without_changing_actual_exit(monkeypatch, capsys, pipe):
+    monkeypatch.setattr(gate, "STDOUT_LOG_TAIL_BYTES", 4096)
+    monkeypatch.setattr(gate, "STDERR_LOG_TAIL_BYTES", 4096)
+    code = (f"import sys;stream=sys.{pipe};stream.write('x'*8192);"
+            "stream.write('final progress\\n');stream.flush()")
+    assert gate._run([sys.executable, "-c", code], "noisy success", timeout=4) == 0
+    assert "FAILED" not in capsys.readouterr().out
 
 
 @pytest.mark.skipif(os.name != "nt", reason="Windows launcher and open-file deletion regression")

@@ -7,10 +7,11 @@ printed-page-offset logic exists in this package by design.
 from __future__ import annotations
 
 from bisect import bisect_left
-from collections.abc import Sequence
+from collections.abc import Mapping, Sequence
 from hashlib import sha256
 import json
 from typing import Any, TypeGuard
+from company_wiki.document_understanding.layout_hints.contract import WorkBudget
 
 SCHEMA_POLICY = "du-geometry-policy/1"
 SCHEMA_PLAN = "du-geometry-plan/1"
@@ -46,10 +47,8 @@ RUN_REASONS = (
     "rejected",
 )
 
-MAX_STRING = 4096
 MAX_DIAGNOSTICS = 256
 MAX_DIAGNOSTIC_DETAIL = 160
-MAX_WINDOW_KEYS_PER_ADMISSION = 64
 
 
 def canonical_digest(payload: Any) -> str:
@@ -95,18 +94,28 @@ def require_nonnegative_int(value: Any, name: str) -> int:
 
 
 def bounded_text(value: Any) -> str | None:
-    """A usable string field, or None when it is missing/overlong (excluded).
-
-    Length is checked before any strip copy so adversarial megabyte strings
-    never allocate proportional work inside the planner.
-    """
+    """A usable source string; the caller's work account owns processing cost."""
     if not isinstance(value, str) or not value:
-        return None
-    if len(value) > MAX_STRING:
         return None
     if value != value.strip():
         return None
     return value
+
+
+def charge_material(value: Any, budget: WorkBudget) -> None:
+    """Reserve actual traversal on the existing account, without a size gate."""
+    pending = [value]
+    while pending:
+        current = pending.pop()
+        budget.charge()
+        if isinstance(current, Mapping):
+            budget.charge(len(current))
+            pending.extend(reversed(tuple(current.values())))
+        elif isinstance(current, (list, tuple)):
+            budget.charge(len(current))
+            pending.extend(reversed(current))
+        elif isinstance(current, str):
+            budget.charge(1 + len(current) // 64)
 
 
 # --- interval helpers (spans only; never invents offsets) -------------------

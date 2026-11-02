@@ -22,8 +22,6 @@ from company_wiki.automation.narrative_evidence_view import (
 )
 from company_wiki.automation.narrative_transport import NarrativeTransportReader
 from company_wiki.automation.narrative_transport_contracts import (
-    MAX_RECEIPT_BYTES,
-    MAX_REQUEST_BYTES,
     NARRATIVE_COMPACT_REFERENCE_REQUEST_SCHEMA,
     NARRATIVE_COMPACT_READ_RECEIPT_SCHEMA,
     parse_compact_reference_request,
@@ -63,9 +61,7 @@ def _invalid_constant(value: str) -> None:
 
 
 def _read_request() -> object:
-    raw = sys.stdin.buffer.read(MAX_REQUEST_BYTES + 1)
-    if len(raw) > MAX_REQUEST_BYTES:
-        raise ValueError("request exceeds limit")
+    raw = sys.stdin.buffer.read()
     return json.loads(
         raw.decode("utf-8", errors="strict"), object_pairs_hook=_unique_pairs,
         parse_constant=_invalid_constant,
@@ -74,8 +70,6 @@ def _read_request() -> object:
 
 def _emit_receipt(receipt: dict[str, Any]) -> None:
     raw = canonical_json(receipt).encode("utf-8") + b"\n"
-    if len(raw) > MAX_RECEIPT_BYTES:
-        raise NarrativeTransportError("blocked", "receipt_too_large")
     binary = getattr(sys.stderr, "buffer", None)
     if binary is None:
         sys.stderr.write(raw.decode("utf-8"))
@@ -195,9 +189,6 @@ def main(argv: Sequence[str] | None = None) -> int:
                 data, receipt = _dispatch(
                     args.operation, request, reader, view_query=view_query
                 )
-        # Validate the receipt's budget before any successful stdout is exposed.
-        if len(canonical_json(receipt).encode("utf-8")) + 1 > MAX_RECEIPT_BYTES:
-            raise NarrativeTransportError("blocked", "receipt_too_large")
         sys.stdout.buffer.write(data)
         sys.stdout.buffer.flush()
         _emit_receipt(receipt)

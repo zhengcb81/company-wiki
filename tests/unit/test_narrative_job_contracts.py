@@ -10,7 +10,6 @@ from company_wiki.automation.narrative_contracts import (
     SELECT_RESULT_MAX_BYTES,
     SKIP_BUNDLE_MAX_BYTES,
     SUMMARY_RESULT_MAX_BYTES,
-    ContractSizeError,
     NarrativeBundle,
     NarrativeContractError,
     NarrativeSelectResult,
@@ -291,10 +290,11 @@ def test_select_result_rejects_incomplete_skip_and_unknown_transcript_binding() 
         NarrativeSelectResult.from_dict(transcript)
 
 
-def test_select_result_enforces_encoded_byte_cap() -> None:
+def test_select_result_preserves_valid_material_above_historical_size_estimate() -> None:
     oversized = _span(text="海" * (SELECT_RESULT_MAX_BYTES // 2)).to_dict()
-    with pytest.raises(ContractSizeError, match="select"):
-        NarrativeSelectResult.from_dict(_selection(evidence=[oversized]))
+    result = NarrativeSelectResult.from_dict(_selection(evidence=[oversized]))
+    assert result.evidence_spans[0].raw_text == oversized["raw_text"]
+    assert result.encoded_size > SELECT_RESULT_MAX_BYTES
 
 
 def test_summary_result_validates_language_citations_and_translate_flag() -> None:
@@ -349,10 +349,11 @@ def test_summary_not_needed_requires_skip_and_no_model_payload() -> None:
         summary.validate_against(NarrativeSelectResult.from_dict(_selection()))
 
 
-def test_summary_result_enforces_encoded_byte_cap() -> None:
+def test_summary_result_encoding_does_not_discard_valid_claim_text() -> None:
     oversized = _summary(draft=_draft(text="A" * SUMMARY_RESULT_MAX_BYTES))
-    with pytest.raises(ContractSizeError, match="summary"):
-        NarrativeSummaryResult.from_dict(oversized)
+    result = NarrativeSummaryResult.from_dict(oversized)
+    assert result.to_dict()["draft"]["claims"][0]["text"] == "A" * SUMMARY_RESULT_MAX_BYTES
+    assert result.encoded_size > SUMMARY_RESULT_MAX_BYTES
 
 
 def test_bundle_roundtrip_matches_dependencies_and_has_no_paths() -> None:
@@ -370,7 +371,7 @@ def test_bundle_roundtrip_matches_dependencies_and_has_no_paths() -> None:
         NarrativeBundle.from_dict(_bundle(evidence=[leaked_span]))
 
 
-def test_skip_bundle_has_stricter_cap_and_no_evidence_or_model() -> None:
+def test_skip_bundle_has_no_evidence_or_model() -> None:
     selected = NarrativeSelectResult.from_dict(_selection(status="skipped_no_narrative", evidence=[]))
     summary = NarrativeSummaryResult.from_dict(_summary(status="summary_not_needed"))
     bundle = NarrativeBundle.from_dict(_bundle(quality_status="skipped_no_narrative", evidence=[]))
@@ -381,10 +382,11 @@ def test_skip_bundle_has_stricter_cap_and_no_evidence_or_model() -> None:
     assert bundle.to_dict()["summary"]["model"] is None
 
 
-def test_bundle_enforces_full_byte_cap() -> None:
+def test_bundle_encoding_preserves_complete_large_material() -> None:
     oversized = _span(text="A" * BUNDLE_MAX_BYTES).to_dict()
     payload = _bundle(evidence=[oversized])
     # Keep citations valid so this test reaches the byte-budget boundary.
     payload["summary"]["draft"]["claims"][0]["evidence_ids"] = [oversized["span_id"]]
-    with pytest.raises(ContractSizeError, match="bundle"):
-        NarrativeBundle.from_dict(payload)
+    result = NarrativeBundle.from_dict(payload)
+    assert result.evidence_spans[0].raw_text == oversized["raw_text"]
+    assert result.encoded_size > BUNDLE_MAX_BYTES

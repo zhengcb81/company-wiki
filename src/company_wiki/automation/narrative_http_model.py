@@ -13,7 +13,6 @@ from typing import Any, Protocol
 from urllib.parse import urlsplit
 
 from .narrative_model import (
-    MODEL_RESPONSE_MAX_BYTES,
     FailedFinalDiagnostic,
     ModelRateLimitError,
     ModelResponseError,
@@ -74,7 +73,7 @@ class ModelOutputTruncatedError(ModelResponseError):
         usage_diagnostic: str | None = None,
         failed_final: FailedFinalDiagnostic | None = None,
     ) -> None:
-        if content_bytes is not None and (type(content_bytes) is not int or not 0 <= content_bytes <= MODEL_RESPONSE_MAX_BYTES):
+        if content_bytes is not None and (type(content_bytes) is not int or content_bytes < 0):
             raise ValueError("invalid truncated content byte count")
         validate_reasoning_observation(reasoning_tokens, output_tokens, usage_diagnostic)
         self.reasoning_tokens, self.usage_diagnostic = reasoning_tokens, usage_diagnostic
@@ -461,8 +460,6 @@ class NarrativeHTTPModel:
                 input_tokens=input_tokens, output_tokens=output_tokens,
                 reasoning_tokens=reasoning_tokens, usage_diagnostic=usage_diagnostic,
                 duration_ms=elapsed()) from None
-        if len(encoded) > MODEL_RESPONSE_MAX_BYTES:
-            raise ModelResponseTooLargeError("MODEL_RESPONSE_TOO_LARGE")
         duration_ms = elapsed()
         if truncated:
             raise ModelOutputTruncatedError(

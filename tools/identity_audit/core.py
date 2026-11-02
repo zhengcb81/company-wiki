@@ -35,7 +35,6 @@ from .receipt import (
     LIMIT_EXCEEDED,
     LIMITATIONS,
     MAX_EVIDENCE_SPANS,
-    MAX_RECEIPT_BYTES,
     MAX_SOURCE_REFS,
     P3_BYTES_MISMATCH,
     P3_IDENTITY_CONFLICT,
@@ -45,13 +44,11 @@ from .receipt import (
     P3_REQUEST_SCHEMA,
     P3_SPAN_UNGROUNDED,
     P3_UNIT_MISMATCH,
-    RECEIPT_TOO_LARGE,
     TOP_BLOCKED,
     TOP_FAIL,
     TOP_OK,
     TOP_PARTIAL,
     TOP_UNAVAILABLE,
-    canonical_json,
     is_sha256,
     sha256_hex,
     utc_now,
@@ -59,7 +56,6 @@ from .receipt import (
 
 __all__ = [
     "MAX_EVIDENCE_SPANS",
-    "MAX_RECEIPT_BYTES",
     "MAX_SOURCE_REFS",
     "audit",
 ]
@@ -734,6 +730,4 @@ def audit(*, config_path: Any, request: Any) -> dict[str, Any]:
     receipt = _shell(status, generated_at, inputs)
     receipt["sources"] = sources
     receipt["counts"] = counts
-    if len(canonical_json(receipt).encode("utf-8")) > MAX_RECEIPT_BYTES:
-        return _shell(TOP_BLOCKED, generated_at, inputs, RECEIPT_TOO_LARGE)
     return receipt

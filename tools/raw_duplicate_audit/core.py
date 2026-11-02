@@ -22,8 +22,7 @@ LOCAL_PATHS_SCHEMA = "raw-duplicate-assessment-local-paths/1"
 MAX_GROUPS_DEFAULT = 100
 MAX_READ_BYTES_DEFAULT = 512 * 1024 * 1024
 DEADLINE_SECONDS_DEFAULT = 300.0
-MAX_DETAIL_ROWS_DEFAULT = 5000
-MAX_REPORT_BYTES = 1024 * 1024
+MAX_DETAIL_ROWS_DEFAULT = None  # Compatibility option; full report detail is retained.
 HASH_CHUNK_BYTES = 1 << 20
 RECOMMENDATION_MIN_BENEFIT_BYTES = 256 * 1024 * 1024
 
@@ -239,7 +238,7 @@ def write_json(path: Path, payload: dict, *, overwrite: bool = False) -> Path:
                                          suffix=".tmp", delete=False) as handle:
             tmp = Path(handle.name)
             handle.write(json.dumps(payload, ensure_ascii=False, indent=1,
-                                    sort_keys=True).encode("utf-8"))
+                                    sort_keys=True, allow_nan=False).encode("utf-8"))
         os.replace(tmp, target)
     finally:
         if tmp is not None and tmp.exists():

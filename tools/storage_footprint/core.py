@@ -17,15 +17,6 @@ from datetime import UTC, datetime
 from pathlib import Path
 
 REPORT_SCHEMA = "cwp-storage-footprint/1"
-MAX_REPORT_BYTES = 256 * 1024
-MAX_ERROR_ITEMS = 200
-MAX_SKIPPED_SAMPLES = 20
-MAX_PATH_CHARS = 300
-MAX_TOP_DIRECTORIES = 25
-MAX_REASON_CHARS = 500
-
-PATH_TRUNCATION_MARKER = "...[truncated]"
-
 FILE_ATTRIBUTE_REPARSE_POINT = 0x400
 FILE_ATTRIBUTE_OFFLINE = 0x1000
 FILE_ATTRIBUTE_RECALL_ON_OPEN = 0x40000
@@ -46,9 +37,6 @@ class BudgetExceeded(RuntimeError):
         super().__init__(message or reason)
         self.reason = reason
 
-
-class ReportTooLarge(RuntimeError):
-    """Raised when a report still exceeds the byte budget after truncation."""
 
 
 def error_label(error: BaseException) -> str:
@@ -136,15 +124,13 @@ def utc_now_text(moment: datetime | None = None) -> str:
     return stamp.strftime("%Y-%m-%dT%H:%M:%SZ")
 
 
-def truncate_path(text: str) -> str:
-    if len(text) <= MAX_PATH_CHARS:
-        return text
-    keep = MAX_PATH_CHARS - len(PATH_TRUNCATION_MARKER)
-    return text[:keep] + PATH_TRUNCATION_MARKER
+def truncate_path(text: str, limit: int | None = None) -> str:
+    """Compatibility name: complete persisted locators are no longer truncated."""
+    return text
 
 
 def serialize(payload: dict) -> bytes:
-    return json.dumps(payload, ensure_ascii=False, indent=1).encode("utf-8")
+    return json.dumps(payload, ensure_ascii=False, indent=1, allow_nan=False).encode("utf-8")
 
 
 def report_is_ours(path: Path, schema: str = REPORT_SCHEMA) -> bool:
@@ -163,13 +149,10 @@ def report_is_ours(path: Path, schema: str = REPORT_SCHEMA) -> bool:
 
 def write_report(path: Path, payload: dict, *, max_bytes: int | None = None) -> Path:
     """Atomic write that never clobbers an unknown pre-existing file."""
-    limit = MAX_REPORT_BYTES if max_bytes is None else int(max_bytes)
     target = Path(path)
     if target.exists() and not report_is_ours(target):
         raise FileExistsError(str(target))
     data = serialize(payload)
-    if len(data) > limit:
-        raise ReportTooLarge(f"report is {len(data)} bytes, budget is {limit}")
     target.parent.mkdir(parents=True, exist_ok=True)
     tmp: Path | None = None
     try:

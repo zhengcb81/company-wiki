@@ -218,9 +218,6 @@ def assess_summary_material(
             'diagnostics':diagnostics,'diagnostic_count':diagnostic_count,
             'diagnostics_limited':diagnostic_count>len(diagnostics),
             'diagnostic_claim_ids':[claim['claim_id'] for claim in claims if claim['claim_id'] in diagnostic_claim_ids]}
-    from .models import canonical_json
-    if len(canonical_json(result).encode('utf-8'))>ASSESSMENT_MAX_BYTES:
-        raise ValueError('summary assessment exceeds its finite byte bound')
     return result
 
 
@@ -237,8 +234,6 @@ def validate_assessment_wire(value: Any, claims: Sequence[Mapping[str,Any]] | No
     if not isinstance(value,Mapping) or set(value)!=fields:
         raise ValueError('invalid summary assessment fields')
     encoded=canonical_json(_to_plain(value)).encode('utf-8')
-    if len(encoded)>ASSESSMENT_MAX_BYTES:
-        raise ValueError('summary assessment exceeds its finite byte bound')
     report=json.loads(encoded)
 
     def require(condition: bool) -> None:

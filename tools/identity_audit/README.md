@@ -40,8 +40,7 @@ python -m tools.identity_audit --config <catalog.yaml> --request <request.json> 
 - Unknown request/ref fields, a wrong schema version, an empty `source_refs`
   array, or malformed values ⇒ `blocked` receipt with `invalid_argument`.
 - Limits (frozen): `source_refs ≤ 500`, `evidence_spans ≤ 5000`, request
-  bytes ≤ 16 MiB (`limit_exceeded`), receipt bytes ≤ 16 MiB
-  (`receipt_too_large`).
+  bytes ≤ 16 MiB (`limit_exceeded`). Receipt output has no fixed byte ceiling (R7).
 - Duplicate JSON keys, `NaN`/`Infinity`, or non-UTF-8 request bytes ⇒
   `blocked` / `invalid_json`.
 
@@ -107,3 +106,7 @@ Decision rules worth restating (card §5.4):
 Do **not** wire this tool into the production worker or any CI gate unless
 ROOT explicitly decides to. It is an audit lane deliverable, not a pipeline
 dependency.
+
+## R7 output policy
+
+Audit receipts retain every evaluated source/check without a fixed receipt byte ceiling. The request/work bounds remain distinct. JSON or real I/O errors are not successful publication; receipt size alone cannot turn an audit result into `blocked`.

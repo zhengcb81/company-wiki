@@ -3,7 +3,6 @@
 from __future__ import annotations
 
 import re
-import math
 from dataclasses import dataclass
 from typing import Any, Literal, Mapping, Sequence, cast, overload
 
@@ -45,6 +44,7 @@ BUNDLE_SCHEMA = "narrative-bundle/2.0"
 PROJECTED_BUNDLE_SCHEMA = "narrative-bundle/3.0"
 ASSESSED_BUNDLE_SCHEMA = "narrative-bundle/2.1"
 ASSESSED_PROJECTED_BUNDLE_SCHEMA = "narrative-bundle/3.1"
+# Legacy storage-planning estimates; canonical results are not denied by them.
 SELECT_RESULT_MAX_BYTES = 1024 * 1024
 SUMMARY_RESULT_MAX_BYTES = 64 * 1024
 BUNDLE_MAX_BYTES = 1280 * 1024
@@ -62,7 +62,7 @@ _LOCATOR = re.compile(
     r"(?:/chars:[0-9]+-[0-9]+)?\Z"
 )
 _DOCUMENT_WORK_DETAIL = "unexamined source content remains unknown; original is unchanged"
-_TRACE_CODE = re.compile(r"[A-Za-z][A-Za-z0-9_-]{0,79}\Z")
+_TRACE_CODE = re.compile(r"[A-Za-z][A-Za-z0-9_-]*\Z")
 _PATH_KEYS = frozenset(
     {
         "path",
@@ -167,33 +167,25 @@ def _looks_like_path(value: str) -> bool:
 
 
 def assert_no_physical_paths(value: object) -> None:
-    """Reject filesystem locations recursively while allowing source locators."""
-    if isinstance(value, Mapping):
-        for key, child in value.items():
-            if not isinstance(key, str):
-                raise NarrativeContractError("JSON object keys must be strings")
-            if key.lower() in _PATH_KEYS:
-                raise PhysicalPathLeakError(f"physical path field is forbidden: {key}")
-            assert_no_physical_paths(child)
-        return
-    if isinstance(value, Sequence) and not isinstance(value, (str, bytes)):
-        for child in value:
-            assert_no_physical_paths(child)
-        return
-    if isinstance(value, str) and _looks_like_path(value):
-        raise PhysicalPathLeakError("physical path value is forbidden")
+    """Reject physical locations; representation depth is not a permission."""
+    from .json_tree import walk_json
+    for item in walk_json(value):
+        if isinstance(item, Mapping):
+            for key in item:
+                if key.lower() in _PATH_KEYS:
+                    raise PhysicalPathLeakError(f"physical path field is forbidden: {key}")
+        elif isinstance(item, str) and _looks_like_path(item):
+            raise PhysicalPathLeakError("physical path value is forbidden")
 
 
 def _encoded_size(value: Mapping[str, Any]) -> int:
     assert_no_physical_paths(value)
-    return len(canonical_json(value).encode("utf-8"))
+    try:
+        return len(canonical_json(value).encode("utf-8"))
+    except RecursionError as error:
+        raise NarrativeContractError("JSON encoding exceeded the standard runtime recursion capacity") from error
 
 
-def _enforce_cap(value: Mapping[str, Any], cap: int, name: str) -> int:
-    size = _encoded_size(value)
-    if size > cap:
-        raise ContractSizeError(f"{name} result exceeds {cap} bytes")
-    return size
 
 
 @dataclass(frozen=True)
@@ -728,52 +720,21 @@ def _assert_pathless_reading_wire(value: object) -> None:
 
 
 def _bounded_reading_json(value: object) -> Any:
-    """Detach finite policy data before recursion, storage and model projection.
-
-    This checks the transport shape, never selects policies or reads sources.
-    The shared reading engine owns their content and causal decision identity.
-    """
-    remaining = 30_000
-
-    def visit(item: object, depth: int) -> Any:
-        nonlocal remaining
-        remaining -= 1
-        if remaining < 0 or depth > 12:
-            raise NarrativeContractError("reading_context structural bound exceeded")
-        if item is None or type(item) is bool or type(item) is int:
-            return item
-        if type(item) is float:
-            if not math.isfinite(item):
-                raise NarrativeContractError("reading_context numbers must be finite")
-            return item
-        if isinstance(item, str):
-            if len(item) > 16_384:
-                raise NarrativeContractError("reading_context text bound exceeded")
-            return item
-        if isinstance(item, Mapping):
-            if len(item) > 256:
-                raise NarrativeContractError("reading_context object bound exceeded")
-            result = {}
-            for key, child in item.items():
-                if not isinstance(key, str) or len(key) > 128:
-                    raise NarrativeContractError("reading_context key is invalid")
-                if key in _READING_FORBIDDEN_KEYS:
-                    raise NarrativeContractError(f"reading_context forbidden field: {key}")
-                result[key] = visit(child, depth + 1)
-            return result
-        if isinstance(item, Sequence) and not isinstance(item, (str, bytes)):
-            if len(item) > 4096:
-                raise NarrativeContractError("reading_context array bound exceeded")
-            return [visit(child, depth + 1) for child in item]
-        raise NarrativeContractError("reading_context must contain JSON data only")
-
-    return visit(value, 0)
+    """Detach valid reading JSON; size/depth/count do not deny source material."""
+    from .json_tree import copy_json, walk_json
+    try:
+        for item in walk_json(value):
+            if isinstance(item, Mapping):
+                for key in item:
+                    if key in _READING_FORBIDDEN_KEYS:
+                        raise NarrativeContractError(f"reading_context forbidden field: {key}")
+        return copy_json(value)
+    except (TypeError, ValueError) as exc:
+        raise NarrativeContractError(str(exc)) from exc
 
 
 def _reading_texts(value: object, name: str, *, limit: int = 4096) -> Sequence[Any]:
     rows = _array(value, name)
-    if len(rows) > limit:
-        raise NarrativeContractError(f"{name} array bound exceeded")
     for row in rows:
         _text(row, name)
     return rows
@@ -788,8 +749,6 @@ def _selection_diagnostic_target(value: object, *, code: str) -> Mapping[str, An
     if not _NARRATIVE_UNIT_ID.fullmatch(item_id):
         raise NarrativeContractError("selection_diagnostic target ID is invalid")
     item_ids = _array(item["item_ids"], "selection_diagnostic.target.item_ids")
-    if len(item_ids) > 16:
-        raise NarrativeContractError("selection_diagnostic target ID sample exceeds its bound")
     for item_id in item_ids:
         checked_id = _text(item_id, "selection_diagnostic.target.item_id")
         if not _NARRATIVE_UNIT_ID.fullmatch(checked_id):
@@ -806,7 +765,7 @@ def _selection_diagnostic_target(value: object, *, code: str) -> Mapping[str, An
         raise NarrativeContractError("selection_diagnostic target group ID is invalid")
     locator = item["locator"]
     if (not isinstance(locator, str) or not _LOCATOR.fullmatch(locator)
-            or locator != locator.strip() or len(locator) > 512):
+            or locator != locator.strip()):
         raise NarrativeContractError("selection_diagnostic target locator is invalid")
     used = _integer(item["used"], "selection_diagnostic.target.used")
     requested = _integer(item["requested"], "selection_diagnostic.target.requested", positive=True)
@@ -841,8 +800,6 @@ def _selection_diagnostic(value: object) -> Mapping[str, Any]:
     if missing:
         raise NarrativeContractError(f"selection_diagnostic missing fields: {sorted(missing)}")
     code = _text(item["code"], "selection_diagnostic.code")
-    if len(code) > 80:
-        raise NarrativeContractError("selection_diagnostic.code is too long")
     _integer(item["count"], "selection_diagnostic.count", positive=True)
 
     if set(item) == required:
@@ -851,13 +808,9 @@ def _selection_diagnostic(value: object) -> Mapping[str, Any]:
         return item
 
     _text(item.get("phase"), "selection_diagnostic.phase")
-    if len(item["phase"]) > 80:
-        raise NarrativeContractError("selection_diagnostic.phase is too long")
     if item.get("external_model_cost") is not False:
         raise NarrativeContractError("selection_diagnostic.external_model_cost must be false")
     dimension = _text(item.get("dimension"), "selection_diagnostic.dimension")
-    if len(dimension) > 80:
-        raise NarrativeContractError("selection_diagnostic.dimension is too long")
     combinations = {
         "budget_full": "selection_spans",
         "group_exceeds_limit": "selection_spans",
@@ -895,7 +848,7 @@ def _selection_diagnostic(value: object) -> Mapping[str, Any]:
             raise NarrativeContractError("selection_diagnostic used exceeds limit")
         if set(item) == enriched:
             targets = _array(item["targets"], "selection_diagnostic.targets")
-            if len(targets) > 32 or type(item["targets_limited"]) is not bool:
+            if type(item["targets_limited"]) is not bool:
                 raise NarrativeContractError("selection_diagnostic target sample is invalid")
             if len(targets) > item["count"]:
                 raise NarrativeContractError("selection_diagnostic target sample exceeds its count")
@@ -929,7 +882,7 @@ def _selection_diagnostic(value: object) -> Mapping[str, Any]:
             if closure_size <= limit:
                 raise NarrativeContractError("selection_diagnostic maximum closure does not exceed its limit")
             targets = _array(item["targets"], "selection_diagnostic.targets")
-            if len(targets) > 32 or type(item["targets_limited"]) is not bool:
+            if type(item["targets_limited"]) is not bool:
                 raise NarrativeContractError("selection_diagnostic target sample is invalid")
             if len(targets) > item["count"]:
                 raise NarrativeContractError("selection_diagnostic target sample exceeds its count")
@@ -952,8 +905,6 @@ def _selection_diagnostic(value: object) -> Mapping[str, Any]:
 def _selection_diagnostics(value: object, *, name: str,
                            legacy_aggregate: bool = False) -> tuple[Mapping[str, Any], ...]:
     diagnostics = _array(value, name)
-    if len(diagnostics) > 128:
-        raise NarrativeContractError(f"{name} array bound exceeded")
     checked = []
     for row in diagnostics:
         if legacy_aggregate and isinstance(row, Mapping) and set(row) == {"code", "count"}:
@@ -971,7 +922,7 @@ def _trace_counted_samples(value: object, name: str, *, limit: int = 32) -> tupl
     item = _exact(value, {"count", "limited", "samples"}, name)
     count = _integer(item["count"], name + ".count")
     samples = _array(item["samples"], name + ".samples")
-    if len(samples) > limit or type(item["limited"]) is not bool:
+    if type(item["limited"]) is not bool:
         raise NarrativeContractError(f"{name} sample bound or flag is invalid")
     if count < len(samples) or item["limited"] != (count > len(samples)):
         raise NarrativeContractError(f"{name} sample count is inconsistent")
@@ -1017,7 +968,7 @@ def _selection_trace(value: object, spans: Sequence[EvidenceSpan]) -> Mapping[st
     if admitted + rejected != count:
         raise NarrativeContractError("selection_trace admission counts are inconsistent")
     rejection_counts = _object(admission["rejection_counts"], "selection_trace.admission.rejection_counts")
-    if len(rejection_counts) > 32 or sum(
+    if sum(
         _integer(number, "selection_trace.rejection_count", positive=True)
         for number in rejection_counts.values()
     ) != rejected:
@@ -1173,8 +1124,6 @@ def _reading_context(
     _sha(version.removeprefix(prefix), "reading_policy_version digest")
     policies = _array(item["reading_policies"], "reading_policies")
     facets = _array(item["business_facets"], "business_facets")
-    if len(policies) > 128 or len(facets) > 16:
-        raise NarrativeContractError("reading_context policy bound exceeded")
     for row in policies:
         policy = _exact(row, _READING_POLICY_KEYS, "reading_policy")
         for component in _array(policy["policy_components"] or [], "policy_components"):
@@ -1191,8 +1140,6 @@ def _reading_context(
     sources = {span.span_id: span.source_id for span in spans}
     group_ids: set[str] = set()
     groups = _array(item["groups"], "reading_context.groups")
-    if len(groups) > 512:
-        raise NarrativeContractError("reading_context group bound exceeded")
     for row in groups:
         proof_fields = {"source_proof_unit_ids", "source_proof_target_unit_ids", "source_proofs"}
         supplied_proof_fields = set(row) & proof_fields if isinstance(row, Mapping) else set()
@@ -1214,7 +1161,7 @@ def _reading_context(
             raise NarrativeContractError("reading_group cannot cross original source parents")
         if attributed:
             views = _array(group["citation_views"], "reading_group.citation_views")
-            if not 1 <= len(views) <= 2:
+            if not views:
                 raise NarrativeContractError("reading_group requires one or two citation views")
             seen_support: set[frozenset[str]] = set()
             for value in views:
@@ -1251,7 +1198,7 @@ def _reading_context(
             # refs, so validate closure over both explicitly separated sets.
             proof_id_set = set(proof_ids) | set(target_ids)
             proof_rows = _array(group["source_proofs"], "reading_group.source_proofs")
-            if not proof_rows or len(proof_rows) > 128:
+            if not proof_rows:
                 raise NarrativeContractError("reading_group native source proofs are outside their bound")
             seen_edges: set[tuple[str, str]] = set()
             for raw_proof in proof_rows:
@@ -1283,11 +1230,7 @@ def _reading_context(
                     raise NarrativeContractError("reading_group source proof column is invalid")
                 if isinstance(column, str):
                     _text(column, "source_proof.column")
-                    if len(column) > 256:
-                        raise NarrativeContractError("reading_group source proof column is too long")
-                frame = _text(proof["coordinate_frame"], "source_proof.coordinate_frame")
-                if len(frame) > 256:
-                    raise NarrativeContractError("reading_group source proof coordinate frame is too long")
+                _text(proof["coordinate_frame"], "source_proof.coordinate_frame")
                 furniture = _reading_texts(
                     proof["furniture_unit_ids"], "source_proof.furniture_unit_ids", limit=24,
                 )
@@ -1335,7 +1278,7 @@ def _reading_context(
         )
         if "selection_trace" in extra:
             _selection_trace(item["selection_trace"], spans)
-    _enforce_cap(item, READING_CONTEXT_MAX_BYTES, "reading_context")
+    assert_no_physical_paths(item)
     return cast(Mapping[str, Any], _freeze_json(plain))
 
 
@@ -1350,11 +1293,9 @@ def _reading_dependencies(value: object) -> Mapping[str, Any] | None:
         raise NarrativeContractError("invalid reading dependency schema/status")
     _sha(item["decision_digest"], "decision_digest", optional=item["status"] == "partial")
     for key, bound in (("scopes", 64), ("components", 512), ("candidates", 4096)):
-        if len(_array(item[key], "reading_dependencies." + key)) > bound:
-            raise NarrativeContractError("reading dependency inventory exceeds its bound")
+        _array(item[key], "reading_dependencies." + key)
     _object(item["versions"], "reading dependency versions")
     assert_no_physical_paths(item)
-    _enforce_cap(item, READING_CONTEXT_MAX_BYTES, "reading_dependencies")
     return cast(Mapping[str, Any], _freeze_json(item))
 
 
@@ -1469,7 +1410,7 @@ class NarrativeSelectResult:
             _selection_diagnostics(item.get("selection_diagnostics", []), name="selection_diagnostics"),
         )
         result._validate()
-        size = _enforce_cap(result.to_dict(), SELECT_RESULT_MAX_BYTES, "select")
+        size = _encoded_size(result.to_dict())
         object.__setattr__(result, "encoded_size", size)
         return result
 
@@ -1856,7 +1797,7 @@ class NarrativeSummaryResult:
             subject,
         )
         result._validate_identity()
-        size = _enforce_cap(result.to_dict(), SUMMARY_RESULT_MAX_BYTES, "summary")
+        size = _encoded_size(result.to_dict())
         object.__setattr__(result, "encoded_size", size)
         return result
 
@@ -2142,12 +2083,7 @@ class NarrativeBundle:
         if assessed:
             object.__setattr__(result,'summary_assessment',_freeze_json(item['summary_assessment']))
         result._validate()
-        cap = (
-            SKIP_BUNDLE_MAX_BYTES
-            if quality == "skipped_no_narrative"
-            else BUNDLE_MAX_BYTES
-        )
-        size = _enforce_cap(result.to_dict(), cap, "bundle")
+        size = _encoded_size(result.to_dict())
         object.__setattr__(result, "encoded_size", size)
         return result
 

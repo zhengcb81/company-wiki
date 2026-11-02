@@ -23,7 +23,7 @@ repos:
         language: system
         types: [python]
         # CI scope plus the narrative runtime integration fixture and its model port.
-        files: ^(src/|tests/unit/|tests/contract/|tests/e2e/|scripts/).*\.py$|^tests/integration/test_narrative_runtime_e2e\.py$|^tests/support/narrative_model_fixture\.py$|^tools/(check_dependencies|changed_unit_tests|pre_push_gate|summarize_junit_failures)\.py$
+        files: ^(src/|tests/unit/|tests/contract/|tests/e2e/|scripts/).*\.py$|^tests/integration/test_narrative_runtime_e2e\.py$|^tests/support/narrative_model_fixture\.py$|^tools/(check_dependencies|changed_unit_tests|pre_push_gate|summarize_junit_failures|source_case_receipt|source_case_checks|source_case_runner)\.py$
 
       - id: mypy-contract
         name: mypy runtime source (same command as CI)

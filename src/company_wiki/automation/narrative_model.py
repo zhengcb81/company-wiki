@@ -84,8 +84,6 @@ class FailedFinalDiagnostic:
                 require_sha256(digest, field_name=sha_name)
             if size is not None and (type(size) is not int or size < 0):
                 raise ValueError("failed-final byte length must be a nonnegative integer")
-        if self.final_content_bytes is not None and self.final_content_bytes > MODEL_RESPONSE_MAX_BYTES:
-            raise ValueError("failed final exceeds the model content bound")
         if type(self.prefix_bytes) is not int or self.prefix_bytes < 0 or type(self.clipped) is not bool:
             raise ValueError("invalid failed-final prefix observation")
         if self.final_content_bytes is None:
@@ -723,8 +721,6 @@ class NarrativeModelResponse:
             raise ModelResponseError("model response identity is incomplete")
         if not isinstance(self.response_bytes, bytes) or not self.response_bytes:
             raise ModelResponseError("model response bytes are empty")
-        if len(self.response_bytes) > MODEL_RESPONSE_MAX_BYTES:
-            raise ModelResponseError("model response exceeds its transport cap")
         counts = (self.input_tokens, self.output_tokens)
         if counts != (None, None) and not all(
             type(value) is int and value >= 0 for value in counts

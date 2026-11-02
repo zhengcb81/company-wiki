@@ -1,16 +1,18 @@
-"""Frozen producer deployment verification (H07).
+"""Producer commit and actual loaded-code observations for holdout replay.
 
 The replay must import production code from an explicit producer repo at an
-explicit commit. A dirty tree, a different HEAD, or an import that resolves
-anywhere else refuses the run instead of silently measuring something else.
+explicit base commit. Worktree edits are recorded, not used as a global clean
+permission. Wrong HEAD and imports from a different runtime remain errors.
 """
 from __future__ import annotations
 
 import subprocess
+import hashlib
+import sys
 from pathlib import Path
 from typing import Any
 
-# Trees whose tracked state must be clean for the deploy to count as frozen.
+# Diagnostics only; the worker records the code files that actually loaded.
 _PRODUCER_TREES = ("src", "scripts", "tools", "config")
 
 
@@ -29,7 +31,7 @@ def _git(producer_root: Path, *args: str) -> str:
 
 
 def verify_producer(producer_root: Path, producer_commit: str) -> dict[str, Any]:
-    """Verify HEAD == producer_commit and that production trees are clean."""
+    """Verify the explicit base commit; report unrelated worktree edits."""
     root = Path(producer_root)
     if not (root / ".git").exists() and not root.joinpath(".git").is_file():
         raise ProducerError(f"{root} is not a git repository")
@@ -38,23 +40,21 @@ def verify_producer(producer_root: Path, producer_commit: str) -> dict[str, Any]
         raise ProducerError(
             f"producer HEAD {head[:12]} != requested commit {producer_commit[:12]}"
         )
-    dirty = []
-    for tree in _PRODUCER_TREES:
-        if not root.joinpath(tree).exists():
-            continue
-        status = _git(root, "status", "--porcelain", "--", tree)
-        if status:
-            dirty.extend(line for line in status.splitlines() if line.strip())
-    if dirty:
-        raise ProducerError(
-            "producer tree has uncommitted changes in production paths: "
-            + "; ".join(dirty[:5])
-        )
+    try:
+        status = _git(root, "status", "--porcelain", "--", *_PRODUCER_TREES)
+        dirty = [line for line in status.splitlines() if line.strip()]
+    except ProducerError:
+        dirty = None  # Optional Git diagnostics cannot refuse a valid runtime.
+    try:
+        branch = _git(root, "rev-parse", "--abbrev-ref", "HEAD")
+    except ProducerError:
+        branch = None
     return {
         "producer_root": str(root.resolve()),
         "producer_commit": head,
-        "branch": _git(root, "rev-parse", "--abbrev-ref", "HEAD"),
-        "verified_clean_trees": [t for t in _PRODUCER_TREES if root.joinpath(t).exists()],
+        "branch": branch,
+        "worktree_changes": dirty,
+        "runtime_identity": "worker_records_loaded_files_after_execution",
     }
 
 
@@ -89,3 +89,31 @@ def assert_imports_from_producer(roots: dict[str, str], producer_root: Path) -> 
             raise ProducerError(
                 f"{module} imported from {path or 'nowhere'}, expected under {root}"
             )
+
+
+def record_runtime_files(producer_root: Path) -> dict[str, dict[str, Any]]:
+    """Observe actual loaded source files, without claiming worktree cleanliness.
+
+    These are post-execution file identities, not a claim that HEAD alone
+    represents WIP bytes. Sample/oracle freezing is independent of engine edits.
+    """
+    root = Path(producer_root).resolve()
+    files = {}
+    for name, module in tuple(sys.modules.items()):
+        if not (name == "company_wiki" or name.startswith("company_wiki.")
+                or name == "tools.document_understanding_benchmark"
+                or name.startswith("tools.document_understanding_benchmark.")):
+            continue
+        filename = getattr(module, "__file__", None)
+        if filename is None:
+            continue  # Namespace packages do not contain a loaded code file.
+        path = Path(filename).resolve()
+        if not path.is_relative_to(root):
+            raise ProducerError(f"{name} loaded outside the requested producer")
+        try:
+            data = path.read_bytes()
+        except OSError as exc:
+            raise ProducerError(f"cannot observe loaded code for {name}") from exc
+        files[name] = {"relative_path": path.relative_to(root).as_posix(),
+                       "sha256": hashlib.sha256(data).hexdigest(), "bytes": len(data)}
+    return files

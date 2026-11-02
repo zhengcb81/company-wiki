@@ -83,7 +83,6 @@ def _text(value, field):
         not isinstance(value, str)
         or not value.strip()
         or value.strip() != value
-        or len(value) > 2048
     ):
         raise OfficialSourceError("invalid_" + field)
     return value
@@ -253,11 +252,9 @@ def _validate_capture_receipt(capture, *, sha, byte_size=None):
             or (byte_size is not None and capture["response_bytes"] != byte_size)):
         raise OfficialSourceError("capture_byte_identity_mismatch")
     try:
-        encoded = json.dumps(capture, ensure_ascii=False, allow_nan=False).encode()
+        json.dumps(capture, ensure_ascii=False, allow_nan=False).encode()
     except (TypeError, ValueError, RecursionError):
         raise OfficialSourceError("invalid_capture_receipt") from None
-    if len(encoded) > 16384:
-        raise OfficialSourceError("capture_receipt_limit")
     for field in ["capture_method", "tool_name", "tool_call_id", "captured_at"]:
         _text(capture.get(field), field)
     try:
@@ -507,9 +504,7 @@ def _read_capture_record(path, *, error_code):
     if path.is_symlink():
         raise OfficialSourceError("unsafe_retained_capture")
     with path.open("rb") as stream:
-        raw = stream.read(65537)
-    if len(raw) > 65536:
-        raise OfficialSourceError("capture_receipt_limit")
+        raw = stream.read()
     def unique_pairs(items):
         value = {}
         for key, item in items:
@@ -582,8 +577,6 @@ def _persist_completed(catalog, state, out, *, journal_attempt_id):
         record["source_subject"] = out.get("source_subject")
         record["layout"] = out.get("layout")
     encoded = canonical_json(record).encode("utf-8")
-    if len(encoded) > 65536:
-        raise OfficialSourceError("capture_receipt_limit")
     temporary = root / (uuid.uuid4().hex + ".result.tmp")
     completed = root / (state["capture_id"] + ".result.json")
     created = False

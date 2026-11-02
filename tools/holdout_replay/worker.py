@@ -237,6 +237,8 @@ def run_job(job: dict[str, Any]) -> dict[str, Any]:
     result["original_unchanged"] = (
         result["original_after_sha256"] == result["original_before_sha256"]
     )
+    result["runtime_files"] = producer_mod.record_runtime_files(producer_root)
+    result["runtime_identity_scope"] = "loaded_file_bytes_observed_after_execution"
     return result
 
 

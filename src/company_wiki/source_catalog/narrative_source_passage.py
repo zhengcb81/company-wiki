@@ -383,6 +383,14 @@ def prepare_source_passage(
         scoped_uncertainty = _grammar_uncertainty([item for key, item in statement_scope.grammar_results
                                                  if key not in resolved_context])
         if scoped_uncertainty is not None and not scoped_uncertainty.assessment_complete:
+            # Unexamined clauses remain deferred. A different independently
+            # prepared source assertion in this unchanged quote remains usable;
+            # the partial flag never becomes issuer/event/numeric proof.
+            if (statement_scope.assertion_keys and existing_use[0] == 'support'
+                    and existing_relevant and existing_fact_proof
+                    and purpose not in non_operating_purposes):
+                return replace(scoped_uncertainty, use='support', relevant=True,
+                               role='mixed_narrative_context')
             return scoped_uncertainty
     if purpose in non_operating_purposes:
         return context('non_operating_purpose')

@@ -47,7 +47,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "src"))
 from company_wiki._bounded_process import (  # noqa: E402
-    ChildFailed, ChildTimeout, OutputLimitExceeded, TransportError, run_bounded,
+    ChildFailed, ChildTimeout, TransportError, run_bounded,
 )
 from tools.changed_unit_tests import changed_paths  # noqa: E402
 
@@ -56,8 +56,9 @@ PROJECT_ROOT = Path(__file__).resolve().parents[1]
 # Retain the existing total child deadline; full mode keeps 600s.
 DAILY_PUSH_TIMEOUT_SECONDS = 180
 DAILY_PUSH_LABEL_PREFIX = "daily push fast feedback:"
-STDOUT_CAP_BYTES = 4 * 1024 * 1024
-STDERR_CAP_BYTES = 512 * 1024
+# Retained diagnostic tail sizes, never child-output rejection thresholds.
+STDOUT_LOG_TAIL_BYTES = 4 * 1024 * 1024
+STDERR_LOG_TAIL_BYTES = 512 * 1024
 # Same existing Windows basetemp boundary as root conftest.py: 60 units.
 # This affects scratch placement only, not test selection or gate timeouts.
 PYTEST_SCRATCH_MAX_UNITS = 60
@@ -146,7 +147,8 @@ def _run(
     try:
         result = run_bounded(
             cmd, cwd=str(PROJECT_ROOT), timeout_seconds=timeout, env=env,
-            stdout_cap_bytes=STDOUT_CAP_BYTES, stderr_cap_bytes=STDERR_CAP_BYTES,
+            stdout_cap_bytes=STDOUT_LOG_TAIL_BYTES, stderr_cap_bytes=STDERR_LOG_TAIL_BYTES,
+            log_tail=True,
         )
         stdout, stderr, returncode = result["stdout"], result["stderr"], 0
     except ChildFailed as exc:
@@ -163,10 +165,6 @@ def _run(
         if isinstance(exc, ChildTimeout):
             _print_output(f"FAILED: {label} (timeout after {timeout}s)")
             return 124
-        if isinstance(exc, OutputLimitExceeded):
-            _print_output(f"FAILED: {label} (output truncated: {exc}; "
-                          f"stdout cap={STDOUT_CAP_BYTES}, stderr cap={STDERR_CAP_BYTES} bytes)")
-            return 125
         _print_output(f"FAILED: {label} ({type(exc).__name__}: {exc})")
         return 1
     output = "\n".join(stream.decode("utf-8", errors="replace")

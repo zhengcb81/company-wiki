@@ -18,7 +18,6 @@ P3_RECEIPT_SCHEMA = "identity-audit-receipt/1"
 # Card section 5.2/5.4: the frozen per-run ceilings.
 MAX_SOURCE_REFS = 500
 MAX_EVIDENCE_SPANS = 5000
-MAX_RECEIPT_BYTES = 16 * 1024 * 1024
 MAX_REQUEST_BYTES = 16 * 1024 * 1024
 
 # Top-level statuses (INTERFACES section 2: only the first five are allowed).
@@ -122,7 +121,6 @@ __all__ = [
     "LIMIT_EXCEEDED",
     "LIMITATIONS",
     "MAX_EVIDENCE_SPANS",
-    "MAX_RECEIPT_BYTES",
     "MAX_REQUEST_BYTES",
     "MAX_SOURCE_REFS",
     "NOT_CONFIGURED",
