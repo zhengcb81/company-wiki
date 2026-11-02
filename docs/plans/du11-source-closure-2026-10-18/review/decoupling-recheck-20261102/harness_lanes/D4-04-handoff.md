@@ -7,7 +7,7 @@
 | 项 | 值 |
 |---|---|
 | 基线 HEAD | `503f6510`（母仓 master 同点） |
-| 交付 commit | `5daf7e1e7` 实现、`84764733c` 本文档、`90e9c7e26` 审查加固（分支 HEAD，接收以 HEAD 为准） |
+| 交付 commit | `5daf7e1e7` 实现、`84764733c` 本文档、`90e9c7e26` 审查加固；**接收以分支 `codex/d4-04-transcript-wire` 的 HEAD 为准**（后续可能还有只动本文档的小提交） |
 | 施工位置 | 独立 worktree `C:/Users/郑曾波/Projects/company-wiki-d4-04-wire` |
 | 改动路径 | `src/company_wiki/source_catalog/transcript_import_cli.py`、`tests/contract/test_transcript_import_cli_e2e.py`、新增 `tests/fixtures/transcript_import/{ff_import_request_v2.json,generic_html_import_request_v2.json,README.md}` |
 | 写域外改动 | 无。`.githooks/pre-push` 仅文件模式差异，属母仓既有状态，未 stage |
