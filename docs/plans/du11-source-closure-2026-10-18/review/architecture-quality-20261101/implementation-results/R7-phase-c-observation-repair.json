@@ -1,0 +1,371 @@
+{
+  "schema_version": "tooling-repair/1",
+  "status": "FROZEN_AWAITING_ROOT_INDEPENDENT_REVIEW",
+  "timestamp_utc": "2026-11-02T11:27:50.532543+00:00",
+  "finding": "R7-SWEEP-T01",
+  "baseline_source_sha256": "162b0f9c83cd3be8fcb8764908ae4acd4da7d87a06040ad28e23a175daede4b0",
+  "delivery_files_sha256": {
+    "tools/document_understanding_benchmark/phase_c_runner.py": "3ff59fa819996698041f68e340bf1a7a73961fddba76af026c234ccf5862e589",
+    "tests/unit/test_phase_c_success_observation_boundaries.py": "04ca6971cdd6ff7a24016fba31b5c2096f4ea4b4205d5670453dd6beba5633a0"
+  },
+  "source_file_count": 1,
+  "new_test_file_count": 1,
+  "implementation": {
+    "capture": "64KiB bounded read buffer only; complete gzip SHA256/count and strict incremental UTF8; no fixed total bytes cap",
+    "preserved_checks": "exact path, true gzip/I/O failure, actual native responseSHA and every matching event SHA/bytecount; existing report/protocol validators unchanged",
+    "paid_success_boundary": "record_successful_model_observation wraps read_rows and callback after native code0; safe error type/reason only, native exit and actual receipt status retained; no owner/POST/recovery call in wrapper",
+    "result": "remaining public/cache/consumer checks proceed; otherwise successful pair is OBSERVATION_INCOMPLETE if observer missing, not false FAIL or acceptancePASS",
+    "configured_limits": "no source/model actual runtime/transport budgets or prices changed; no output cap raised; genuine downstream/cleanup/accounting failures stillFAIL"
+  },
+  "test_runs": [
+    {
+      "evidence": "red.xml",
+      "tests": 8,
+      "failures": 3,
+      "errors": 0,
+      "xml_seconds": 37.323,
+      "cases": [
+        {
+          "classname": "tests.unit.test_phase_c_success_observation_boundaries",
+          "name": "test_complete_capture_over_old_cap_is_streamed_and_hash_bound",
+          "time": "3.777"
+        },
+        {
+          "classname": "tests.unit.test_phase_c_success_observation_boundaries",
+          "name": "test_real_capture_errors_remain_explicit_without_size_permission[missing-PHASE_C_CAPTURE_UNAVAILABLE]",
+          "time": "0.019"
+        },
+        {
+          "classname": "tests.unit.test_phase_c_success_observation_boundaries",
+          "name": "test_real_capture_errors_remain_explicit_without_size_permission[broken_gzip-PHASE_C_CAPTURE_UNAVAILABLE]",
+          "time": "0.045"
+        },
+        {
+          "classname": "tests.unit.test_phase_c_success_observation_boundaries",
+          "name": "test_real_capture_errors_remain_explicit_without_size_permission[native_hash-PHASE_C_CAPTURE_IDENTITY_DIFFERS]",
+          "time": "0.036"
+        },
+        {
+          "classname": "tests.unit.test_phase_c_success_observation_boundaries",
+          "name": "test_real_capture_errors_remain_explicit_without_size_permission[event_bytes-PHASE_C_CAPTURE_IDENTITY_DIFFERS]",
+          "time": "0.014"
+        },
+        {
+          "classname": "tests.unit.test_phase_c_success_observation_boundaries",
+          "name": "test_real_capture_errors_remain_explicit_without_size_permission[event_hash-PHASE_C_CAPTURE_IDENTITY_DIFFERS]",
+          "time": "0.013"
+        },
+        {
+          "classname": "tests.unit.test_phase_c_success_observation_boundaries",
+          "name": "test_real_capture_errors_remain_explicit_without_size_permission[utf8-PHASE_C_CAPTURE_UTF8_INVALID]",
+          "time": "0.021"
+        },
+        {
+          "classname": "tests.unit.test_phase_c_success_observation_boundaries",
+          "name": "test_real_owned_run_keeps_native_success_and_cache_after_observer_failure",
+          "time": "32.141"
+        }
+      ]
+    },
+    {
+      "evidence": "pure-green.xml",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "xml_seconds": 3.232,
+      "cases": [
+        {
+          "classname": "tests.unit.test_phase_c_success_observation_boundaries",
+          "name": "test_complete_capture_over_old_cap_is_streamed_and_hash_bound",
+          "time": "2.633"
+        },
+        {
+          "classname": "tests.unit.test_phase_c_success_observation_boundaries",
+          "name": "test_real_capture_errors_remain_explicit_without_size_permission[missing-PHASE_C_CAPTURE_UNAVAILABLE]",
+          "time": "0.011"
+        },
+        {
+          "classname": "tests.unit.test_phase_c_success_observation_boundaries",
+          "name": "test_real_capture_errors_remain_explicit_without_size_permission[broken_gzip-PHASE_C_CAPTURE_UNAVAILABLE]",
+          "time": "0.011"
+        },
+        {
+          "classname": "tests.unit.test_phase_c_success_observation_boundaries",
+          "name": "test_real_capture_errors_remain_explicit_without_size_permission[native_hash-PHASE_C_CAPTURE_IDENTITY_DIFFERS]",
+          "time": "0.016"
+        },
+        {
+          "classname": "tests.unit.test_phase_c_success_observation_boundaries",
+          "name": "test_real_capture_errors_remain_explicit_without_size_permission[event_bytes-PHASE_C_CAPTURE_IDENTITY_DIFFERS]",
+          "time": "0.018"
+        },
+        {
+          "classname": "tests.unit.test_phase_c_success_observation_boundaries",
+          "name": "test_real_capture_errors_remain_explicit_without_size_permission[event_hash-PHASE_C_CAPTURE_IDENTITY_DIFFERS]",
+          "time": "0.014"
+        },
+        {
+          "classname": "tests.unit.test_phase_c_success_observation_boundaries",
+          "name": "test_real_capture_errors_remain_explicit_without_size_permission[utf8-PHASE_C_CAPTURE_UTF8_INVALID]",
+          "time": "0.023"
+        },
+        {
+          "classname": "tests.unit.test_phase_c_success_observation_boundaries",
+          "name": "test_observation_io_or_event_failure_preserves_native_receipt_and_usage[missing_capture]",
+          "time": "0.026"
+        },
+        {
+          "classname": "tests.unit.test_phase_c_success_observation_boundaries",
+          "name": "test_observation_io_or_event_failure_preserves_native_receipt_and_usage[malformed_events]",
+          "time": "0.022"
+        }
+      ]
+    },
+    {
+      "evidence": "integration-green.xml",
+      "tests": 11,
+      "failures": 0,
+      "errors": 0,
+      "xml_seconds": 48.261,
+      "cases": [
+        {
+          "classname": "tests.unit.test_phase_c_success_observation_boundaries",
+          "name": "test_real_owned_run_keeps_native_success_and_cache_after_observer_failure",
+          "time": "42.646"
+        },
+        {
+          "classname": "tests.test_phase_c_extractive",
+          "name": "test_success_observation_retains_real_execution_and_capture_hashes_only",
+          "time": "0.078"
+        },
+        {
+          "classname": "tests.test_phase_c_extractive",
+          "name": "test_success_observation_cannot_fake_capture_or_execution[tampered]",
+          "time": "0.053"
+        },
+        {
+          "classname": "tests.test_phase_c_extractive",
+          "name": "test_success_observation_cannot_fake_capture_or_execution[missing]",
+          "time": "0.033"
+        },
+        {
+          "classname": "tests.test_phase_c_extractive",
+          "name": "test_success_observation_cannot_fake_capture_or_execution[event_hash]",
+          "time": "0.031"
+        },
+        {
+          "classname": "tests.test_phase_c_extractive",
+          "name": "test_success_observation_cannot_fake_capture_or_execution[native_hash]",
+          "time": "0.030"
+        },
+        {
+          "classname": "tests.test_phase_c_extractive",
+          "name": "test_success_observation_cannot_fake_capture_or_execution[missing_report]",
+          "time": "0.028"
+        },
+        {
+          "classname": "tests.test_phase_c_extractive",
+          "name": "test_v4_success_does_not_invent_an_extractive_report",
+          "time": "0.027"
+        },
+        {
+          "classname": "tests.unit.test_phase_c_registered_consumer",
+          "name": "test_fidelity_success_observes_assessment_without_inventing_extractive_report",
+          "time": "1.271"
+        },
+        {
+          "classname": "tests.unit.test_phase_c_registered_consumer",
+          "name": "test_fidelity_success_requires_its_actual_assessment[missing]",
+          "time": "0.008"
+        },
+        {
+          "classname": "tests.unit.test_phase_c_registered_consumer",
+          "name": "test_fidelity_success_requires_its_actual_assessment[extractive]",
+          "time": "0.036"
+        }
+      ]
+    }
+  ],
+  "effective_result": "8tests-first3RED5P37.45s; pure9P3.33s; actualfailedseam+10existingcapture/v4/fidelity11P48.36s. These are separate runs, not a fabricated combined20P run.",
+  "red_witnesses": [
+    "valid result >128KiB falselyPHASE_C_CAPTURE_IDENTITY_DIFFERS",
+    "invalid UTF8 with matching digest incorrectly accepted",
+    "real native completed loopback madeFAIL solely by observation OSError beforecache"
+  ],
+  "new_test_source": "\"\"\"A paid native success is not permissioned by observer representation size.\"\"\"\nfrom copy import deepcopy\nimport gzip\nimport hashlib\nimport json\n\nimport pytest\n\nfrom tools.document_understanding_benchmark import phase_c_runner as runner\n\n\ndef captured(tmp_path, raw):\n    path = tmp_path / 'run.attempt.response.json.gz'\n    path.write_bytes(gzip.compress(raw))\n    digest = hashlib.sha256(raw).hexdigest()\n    receipt = {'status': 'completed', 'documents': []}\n    native = [{'attempt_id': 'attempt', 'response_sha256': digest,\n               'usage_status': 'known', 'charged_tokens': 321, 'charged_micro_usd': 2000}]\n    events = [{'event': 'model_final_observed', 'run_id': 'run', 'attempt_id': 'attempt',\n               'final_sha256': digest, 'final_bytes': len(raw)}]\n    return path, receipt, native, events\n\n\ndef test_complete_capture_over_old_cap_is_streamed_and_hash_bound(tmp_path, monkeypatch):\n    raw = json.dumps({'draft': '完整原语言🙂' * 18000}, ensure_ascii=False).encode()\n    assert len(raw) > 128 * 1024\n    _, receipt, native, events = captured(tmp_path, raw)\n    before = deepcopy((receipt, native, events))\n    reads = []\n    read = gzip.GzipFile.read\n\n    def record_read(stream, size=-1):\n        reads.append(size)\n        return read(stream, size)\n\n    monkeypatch.setattr(gzip.GzipFile, 'read', record_read)\n    observed = runner.successful_model_observation(receipt, native, events, tmp_path, 'run',\n        reading_model_projection='reading-model-input/4')\n    assert observed['paid_response_capture'] == [{'attempt_id': 'attempt',\n        'status': 'CAPTURED_AND_NATIVE_HASH_MATCHED', 'sha256': hashlib.sha256(raw).hexdigest(),\n        'bytes': len(raw), 'usage_status': 'known'}]\n    assert len(reads) > 2 and all(0 < size <= 65536 for size in reads)\n    assert '完整原语言' not in json.dumps(observed, ensure_ascii=False)\n    assert (receipt, native, events) == before\n\n\n@pytest.mark.parametrize('fault,reason', [\n    ('missing', 'PHASE_C_CAPTURE_UNAVAILABLE'),\n    ('broken_gzip', 'PHASE_C_CAPTURE_UNAVAILABLE'),\n    ('native_hash', 'PHASE_C_CAPTURE_IDENTITY_DIFFERS'),\n    ('event_bytes', 'PHASE_C_CAPTURE_IDENTITY_DIFFERS'),\n    ('event_hash', 'PHASE_C_CAPTURE_IDENTITY_DIFFERS'),\n    ('utf8', 'PHASE_C_CAPTURE_UTF8_INVALID'),\n])\ndef test_real_capture_errors_remain_explicit_without_size_permission(tmp_path, fault, reason):\n    raw = b'\\xff\\xfe' if fault == 'utf8' else b'{\"final\":\"valid\"}'\n    path, receipt, native, events = captured(tmp_path, raw)\n    if fault == 'missing':\n        path.unlink()\n    elif fault == 'broken_gzip':\n        path.write_bytes(b'not a gzip stream')\n    elif fault == 'native_hash':\n        native[0]['response_sha256'] = 'e' * 64\n    elif fault == 'event_bytes':\n        events[0]['final_bytes'] += 1\n    elif fault == 'event_hash':\n        events[0]['final_sha256'] = 'e' * 64\n    with pytest.raises(ValueError, match=reason):\n        runner.successful_model_observation(receipt, native, events, tmp_path, 'run',\n            reading_model_projection='reading-model-input/4')\n\n\n@pytest.mark.parametrize('fault', ['missing_capture', 'malformed_events'])\ndef test_observation_io_or_event_failure_preserves_native_receipt_and_usage(tmp_path, fault):\n    path, receipt, native, events = captured(tmp_path, b'{\"final\":\"complete\"}')\n    event_path = tmp_path / 'events.jsonl'\n    if fault == 'missing_capture':\n        path.unlink()\n        event_path.write_text(json.dumps(events[0]) + '\\n', encoding='utf-8')\n    else:\n        event_path.write_text('{invalid observation detail', encoding='utf-8')\n    state = {'exit': 0, 'receipt': receipt, 'native_usage': native}\n    before = deepcopy(state)\n    runner.record_successful_model_observation(state, receipt, native, event_path, tmp_path, 'run',\n        reading_model_projection='reading-model-input/4')\n    assert {k: state[k] for k in before} == before\n    assert state['model_observation']['status'] == 'INCOMPLETE'\n    assert state['model_observation']['native_exit'] == 0\n    assert state['model_observation']['native_batch_status'] == 'completed'\n    assert state['model_observation']['reason'] == (\n        'PHASE_C_CAPTURE_UNAVAILABLE' if fault == 'missing_capture' else 'PHASE_C_OBSERVATION_FAILED')\n    assert 'paid_response_capture' not in state\n    assert 'invalid observation detail' not in json.dumps(state)\n\n\n@pytest.mark.timeout(120)\ndef test_real_owned_run_keeps_native_success_and_cache_after_observer_failure(tmp_path, monkeypatch):\n    monkeypatch.setattr(runner.tempfile, 'gettempdir', lambda: str(tmp_path))\n    monkeypatch.setattr(runner, 'seed_identity', lambda *args, **kwargs: {})\n    observed = []\n\n    def observer_fails(receipt, native, events, *_args, **_kwargs):\n        assert receipt['status'] == 'completed' and native\n        observed.append(deepcopy(native))\n        raise OSError('untrusted observation detail must not enter the report')\n\n    monkeypatch.setattr(runner, 'successful_model_observation', observer_fails)\n    metadata = runner.loopback_preparation()\n    provider = next(row for row in metadata['providers'] if row['provider'] == 'deepseek')\n    output = tmp_path / 'receipts'\n    output.mkdir()\n    with runner.Loopback() as server:\n        result = runner.run_pair({'sample_id': 'loopback-fixture'}, provider, metadata,\n            mode='loopback', output=output, fixture_endpoint=server.endpoint,\n            selected_versions='0.9.0', reading_model_projection='reading-model-input/5')\n        assert len(server.requests) == 1\n    assert len(observed) == 1\n    assert result['status'] == 'OBSERVATION_INCOMPLETE', result\n    state = result['states'][0]\n    assert state['exit'] == 0 and state['receipt']['status'] == 'completed'\n    assert state['native_usage'] == observed[0]\n    assert state['model_observation'] == {'status': 'INCOMPLETE', 'error_type': 'OSError',\n        'reason': 'PHASE_C_OBSERVATION_FAILED', 'native_exit': 0, 'native_batch_status': 'completed'}\n    assert state['same_run_zero_POST'] and state['cross_run_zero_POST']\n    assert state['public_replay']\n    assert result['model_post_attempts'] == 1 and result['temporary_lake_removed']\n    assert 'untrusted observation detail' not in json.dumps(result)\n    assert not list(tmp_path.glob('cwplC-*'))\n    assert json.loads((output / 'receipt.json').read_text(encoding='utf-8')) == result\n",
+  "test_source_sha256": "04ca6971cdd6ff7a24016fba31b5c2096f4ea4b4205d5670453dd6beba5633a0",
+  "actual_owned_run_receipts": [
+    {
+      "path": "b3\\test_real_owned_run_keeps_nati0\\receipts\\receipt.json",
+      "sha256": "c92bbefb8e05319848623d3eb139c73d6639bfb62e1be1f1b11a9a454a17bc16",
+      "status": "OBSERVATION_INCOMPLETE",
+      "model_post_attempts": 1,
+      "temporary_lake_removed": true,
+      "sentinel_unchanged": true,
+      "protected_unchanged": true,
+      "states": [
+        {
+          "version": "0.9.0",
+          "exit": 0,
+          "native_usage": [
+            {
+              "kind": "native_model_charge",
+              "mode": "loopback",
+              "database": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\pc7-a4825e\\b3\\test_real_owned_run_keeps_nati0\\cwplC-5mtw1j_4\\AUTO.sqlite",
+              "attempt_id": "67b062fa63ac44ab813ead2f5ce2b833",
+              "run_id": "phaseC-090-11855786e726",
+              "job_id": "bba834c4e87cdea3",
+              "request_sha256": "28125f677f828457debe1040f74fc0cdbe108765c2c0718cbff297634cfc341d",
+              "input_tokens_bound": 3248,
+              "max_output_tokens": 8192,
+              "output_bytes_bound": 2097152,
+              "reserved_micro_usd": 19632,
+              "usage_status": "known",
+              "input_tokens": 50,
+              "output_tokens": 30,
+              "estimated_micro_usd": 110,
+              "response_sha256": "d59126e10245f668e3e578f89e3082ad32e260a29e525bc7f15bc4ec1979e8b7",
+              "error_code": null,
+              "output_bytes": 14606,
+              "output_sha256": "40a19699400276b92df3f4079c33c5d05f07ca3dd91a409b20cb5ea3988240be",
+              "reserved_at": "2026-11-02T11:25:42Z",
+              "usage_settled_at": "2026-11-02T11:25:42Z",
+              "output_settled_at": "2026-11-02T11:25:44Z",
+              "paid_response_json": "{\"adapter_id\":\"openai-compatible-http/1\",\"body_sha256\":\"ee98c02cd994fe7d4cfeaf2b3b68caa74e555fac65c075f98542f634cf81fb73\",\"byte_size\":242,\"duration_ms\":7,\"http_status\":200,\"model_id\":\"stub-model\",\"object_key\":\"objects/sha256/ee/ee98c02cd994fe7d4cfeaf2b3b68caa74e555fac65c075f98542f634cf81fb73.json\",\"prompt_version\":\"reading-source-extractive/5.0.0\",\"request_sha256\":\"28125f677f828457debe1040f74fc0cdbe108765c2c0718cbff297634cfc341d\",\"schema_version\":\"narrative-paid-response/1\"}",
+              "charged_tokens": 80,
+              "charged_micro_usd": 110,
+              "cost_kind": "budget_proxy_or_unknown_hold_not_invoice"
+            }
+          ],
+          "model_observation": {
+            "status": "INCOMPLETE",
+            "native_exit": 0,
+            "native_batch_status": "completed",
+            "error_type": "OSError",
+            "reason": "PHASE_C_OBSERVATION_FAILED"
+          },
+          "same_run_zero_POST": true,
+          "cross_run_zero_POST": true,
+          "artifact_ref": {
+            "artifact_sha256": "40a19699400276b92df3f4079c33c5d05f07ca3dd91a409b20cb5ea3988240be",
+            "artifact_version_id": "narrative-b61cf2094077452789c9fcc490cabc3e",
+            "byte_size": 14606,
+            "schema_version": "narrative-ref/1",
+            "source_ref": {
+              "byte_size": 126,
+              "content_sha256": "6c12e090262e9f4049889628121f30c591938438435cf5c9328c1b81a1b17f4b",
+              "document_id": "urn:company-wiki:document:sha256:6c12e090262e9f4049889628121f30c591938438435cf5c9328c1b81a1b17f4b",
+              "mime_type": "text/html",
+              "schema_version": "2.0",
+              "source_id": "urn:company-wiki:source:sha256:6c12e090262e9f4049889628121f30c591938438435cf5c9328c1b81a1b17f4b"
+            }
+          }
+        }
+      ]
+    },
+    {
+      "path": "b\\test_real_owned_run_keeps_nati0\\receipts\\receipt.json",
+      "sha256": "11dca94ffdd49e3eecc24ca6a79771a7c656c7bea6a414ed21aba8a12c145b8f",
+      "status": "FAIL",
+      "model_post_attempts": 1,
+      "temporary_lake_removed": true,
+      "sentinel_unchanged": true,
+      "protected_unchanged": true,
+      "states": [
+        {
+          "version": "0.9.0",
+          "exit": 0,
+          "native_usage": [
+            {
+              "kind": "native_model_charge",
+              "mode": "loopback",
+              "database": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\pc7-a4825e\\b\\test_real_owned_run_keeps_nati0\\cwplC-p8wi1dix\\AUTO.sqlite",
+              "attempt_id": "d21c8d95fcfb46ae89f5f2f5e21b32db",
+              "run_id": "phaseC-090-3516d1d62c84",
+              "job_id": "eabd524d29a72208",
+              "request_sha256": "28125f677f828457debe1040f74fc0cdbe108765c2c0718cbff297634cfc341d",
+              "input_tokens_bound": 3248,
+              "max_output_tokens": 8192,
+              "output_bytes_bound": 2097152,
+              "reserved_micro_usd": 19632,
+              "usage_status": "known",
+              "input_tokens": 50,
+              "output_tokens": 30,
+              "estimated_micro_usd": 110,
+              "response_sha256": "d59126e10245f668e3e578f89e3082ad32e260a29e525bc7f15bc4ec1979e8b7",
+              "error_code": null,
+              "output_bytes": 14606,
+              "output_sha256": "40a19699400276b92df3f4079c33c5d05f07ca3dd91a409b20cb5ea3988240be",
+              "reserved_at": "2026-11-02T11:21:51Z",
+              "usage_settled_at": "2026-11-02T11:21:51Z",
+              "output_settled_at": "2026-11-02T11:21:54Z",
+              "paid_response_json": "{\"adapter_id\":\"openai-compatible-http/1\",\"body_sha256\":\"ee98c02cd994fe7d4cfeaf2b3b68caa74e555fac65c075f98542f634cf81fb73\",\"byte_size\":242,\"duration_ms\":5,\"http_status\":200,\"model_id\":\"stub-model\",\"object_key\":\"objects/sha256/ee/ee98c02cd994fe7d4cfeaf2b3b68caa74e555fac65c075f98542f634cf81fb73.json\",\"prompt_version\":\"reading-source-extractive/5.0.0\",\"request_sha256\":\"28125f677f828457debe1040f74fc0cdbe108765c2c0718cbff297634cfc341d\",\"schema_version\":\"narrative-paid-response/1\"}",
+              "charged_tokens": 80,
+              "charged_micro_usd": 110,
+              "cost_kind": "budget_proxy_or_unknown_hold_not_invoice"
+            }
+          ],
+          "model_observation": null,
+          "same_run_zero_POST": null,
+          "cross_run_zero_POST": null,
+          "artifact_ref": null
+        }
+      ]
+    }
+  ],
+  "ruff": {
+    "files": [
+      "tools/document_understanding_benchmark/phase_c_runner.py",
+      "tests/unit/test_phase_c_success_observation_boundaries.py"
+    ],
+    "result": "All checks passed",
+    "executed_after_source_and_test_frozen": true
+  },
+  "evidence": {
+    "red.xml": {
+      "bytes": 3382,
+      "sha256": "5227ffb80ecf3cbb8499d640611d621aa3fed1ca34e8c4364de48293d960dafa",
+      "text": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"3\" skipped=\"0\" tests=\"8\" time=\"37.323\" timestamp=\"2026-11-02T11:21:17.964068+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tests.unit.test_phase_c_success_observation_boundaries\" name=\"test_complete_capture_over_old_cap_is_streamed_and_hash_bound\" time=\"3.777\"><failure message=\"ValueError: PHASE_C_CAPTURE_IDENTITY_DIFFERS\">tests\\unit\\test_phase_c_success_observation_boundaries.py:37: in test_complete_capture_over_old_cap_is_streamed_and_hash_bound\r\n    observed = runner.successful_model_observation(receipt, native, events, tmp_path, 'run',\r\ntools\\document_understanding_benchmark\\phase_c_runner.py:969: in successful_model_observation\r\n    raise ValueError(\"PHASE_C_CAPTURE_IDENTITY_DIFFERS\")\r\nE   ValueError: PHASE_C_CAPTURE_IDENTITY_DIFFERS</failure></testcase><testcase classname=\"tests.unit.test_phase_c_success_observation_boundaries\" name=\"test_real_capture_errors_remain_explicit_without_size_permission[missing-PHASE_C_CAPTURE_UNAVAILABLE]\" time=\"0.019\" /><testcase classname=\"tests.unit.test_phase_c_success_observation_boundaries\" name=\"test_real_capture_errors_remain_explicit_without_size_permission[broken_gzip-PHASE_C_CAPTURE_UNAVAILABLE]\" time=\"0.045\" /><testcase classname=\"tests.unit.test_phase_c_success_observation_boundaries\" name=\"test_real_capture_errors_remain_explicit_without_size_permission[native_hash-PHASE_C_CAPTURE_IDENTITY_DIFFERS]\" time=\"0.036\" /><testcase classname=\"tests.unit.test_phase_c_success_observation_boundaries\" name=\"test_real_capture_errors_remain_explicit_without_size_permission[event_bytes-PHASE_C_CAPTURE_IDENTITY_DIFFERS]\" time=\"0.014\" /><testcase classname=\"tests.unit.test_phase_c_success_observation_boundaries\" name=\"test_real_capture_errors_remain_explicit_without_size_permission[event_hash-PHASE_C_CAPTURE_IDENTITY_DIFFERS]\" time=\"0.013\" /><testcase classname=\"tests.unit.test_phase_c_success_observation_boundaries\" name=\"test_real_capture_errors_remain_explicit_without_size_permission[utf8-PHASE_C_CAPTURE_UTF8_INVALID]\" time=\"0.021\"><failure message=\"Failed: DID NOT RAISE ValueError\">tests\\unit\\test_phase_c_success_observation_boundaries.py:68: in test_real_capture_errors_remain_explicit_without_size_permission\r\n    with pytest.raises(ValueError, match=reason):\r\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\nE   Failed: DID NOT RAISE ValueError</failure></testcase><testcase classname=\"tests.unit.test_phase_c_success_observation_boundaries\" name=\"test_real_owned_run_keeps_native_success_and_cache_after_observer_failure\" time=\"32.141\"><failure message=\"AssertionError: {'mode': 'loopback', 'sample': 'loopback-fixture', 'source_mode': 'isolated-copy', 'selector_versions': ['0.9.0'], ...}&#10;assert 'FAIL' == 'OBSERVATION_INCOMPLETE'&#10;  &#10;  - OBSERVATION_INCOMPLETE&#10;  + FAIL\">tests\\unit\\test_phase_c_success_observation_boundaries.py:94: in test_real_owned_run_keeps_native_success_and_cache_after_observer_failure\r\n    assert result['status'] == 'OBSERVATION_INCOMPLETE', result\r\nE   AssertionError: {'mode': 'loopback', 'sample': 'loopback-fixture', 'source_mode': 'isolated-copy', 'selector_versions': ['0.9.0'], ...}\r\nE   assert 'FAIL' == 'OBSERVATION_INCOMPLETE'\r\nE     \r\nE     - OBSERVATION_INCOMPLETE\r\nE     + FAIL</failure></testcase></testsuite></testsuites>"
+    },
+    "red.log": {
+      "bytes": 2924,
+      "sha256": "bca6d66b065092f2c5ef46e83948c1c44fd8f98173ff5210880b8c13dbc2ff31",
+      "text": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\pc7-a4825e\\\\b\", \"requested_basetemp_len\": 51, \"cwd_len\": 34, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\r\n============================= test session starts =============================\r\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\r\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\r\nconfigfile: pytest.ini\r\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\r\ncollected 8 items\r\n\r\ntests\\unit\\test_phase_c_success_observation_boundaries.py F.....FF       [100%]\r\n\r\n================================== FAILURES ===================================\r\n________ test_complete_capture_over_old_cap_is_streamed_and_hash_bound ________\r\ntests\\unit\\test_phase_c_success_observation_boundaries.py:37: in test_complete_capture_over_old_cap_is_streamed_and_hash_bound\r\n    observed = runner.successful_model_observation(receipt, native, events, tmp_path, 'run',\r\ntools\\document_understanding_benchmark\\phase_c_runner.py:969: in successful_model_observation\r\n    raise ValueError(\"PHASE_C_CAPTURE_IDENTITY_DIFFERS\")\r\nE   ValueError: PHASE_C_CAPTURE_IDENTITY_DIFFERS\r\n_ test_real_capture_errors_remain_explicit_without_size_permission[utf8-PHASE_C_CAPTURE_UTF8_INVALID] _\r\ntests\\unit\\test_phase_c_success_observation_boundaries.py:68: in test_real_capture_errors_remain_explicit_without_size_permission\r\n    with pytest.raises(ValueError, match=reason):\r\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\nE   Failed: DID NOT RAISE ValueError\r\n__ test_real_owned_run_keeps_native_success_and_cache_after_observer_failure __\r\ntests\\unit\\test_phase_c_success_observation_boundaries.py:94: in test_real_owned_run_keeps_native_success_and_cache_after_observer_failure\r\n    assert result['status'] == 'OBSERVATION_INCOMPLETE', result\r\nE   AssertionError: {'mode': 'loopback', 'sample': 'loopback-fixture', 'source_mode': 'isolated-copy', 'selector_versions': ['0.9.0'], ...}\r\nE   assert 'FAIL' == 'OBSERVATION_INCOMPLETE'\r\nE     \r\nE     - OBSERVATION_INCOMPLETE\r\nE     + FAIL\r\n- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\pc7-a4825e\\red.xml -\r\n=========================== short test summary info ===========================\r\nFAILED tests/unit/test_phase_c_success_observation_boundaries.py::test_complete_capture_over_old_cap_is_streamed_and_hash_bound\r\nFAILED tests/unit/test_phase_c_success_observation_boundaries.py::test_real_capture_errors_remain_explicit_without_size_permission[utf8-PHASE_C_CAPTURE_UTF8_INVALID]\r\nFAILED tests/unit/test_phase_c_success_observation_boundaries.py::test_real_owned_run_keeps_native_success_and_cache_after_observer_failure\r\n======================== 3 failed, 5 passed in 37.45s =========================\r\n"
+    },
+    "pure-green.xml": {
+      "bytes": 2023,
+      "sha256": "7bb7aff1733e602d87600a2fe1545e0411113ae12b34f6be501f417af35e63fd",
+      "text": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"0\" skipped=\"0\" tests=\"9\" time=\"3.232\" timestamp=\"2026-11-02T11:24:35.881216+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tests.unit.test_phase_c_success_observation_boundaries\" name=\"test_complete_capture_over_old_cap_is_streamed_and_hash_bound\" time=\"2.633\" /><testcase classname=\"tests.unit.test_phase_c_success_observation_boundaries\" name=\"test_real_capture_errors_remain_explicit_without_size_permission[missing-PHASE_C_CAPTURE_UNAVAILABLE]\" time=\"0.011\" /><testcase classname=\"tests.unit.test_phase_c_success_observation_boundaries\" name=\"test_real_capture_errors_remain_explicit_without_size_permission[broken_gzip-PHASE_C_CAPTURE_UNAVAILABLE]\" time=\"0.011\" /><testcase classname=\"tests.unit.test_phase_c_success_observation_boundaries\" name=\"test_real_capture_errors_remain_explicit_without_size_permission[native_hash-PHASE_C_CAPTURE_IDENTITY_DIFFERS]\" time=\"0.016\" /><testcase classname=\"tests.unit.test_phase_c_success_observation_boundaries\" name=\"test_real_capture_errors_remain_explicit_without_size_permission[event_bytes-PHASE_C_CAPTURE_IDENTITY_DIFFERS]\" time=\"0.018\" /><testcase classname=\"tests.unit.test_phase_c_success_observation_boundaries\" name=\"test_real_capture_errors_remain_explicit_without_size_permission[event_hash-PHASE_C_CAPTURE_IDENTITY_DIFFERS]\" time=\"0.014\" /><testcase classname=\"tests.unit.test_phase_c_success_observation_boundaries\" name=\"test_real_capture_errors_remain_explicit_without_size_permission[utf8-PHASE_C_CAPTURE_UTF8_INVALID]\" time=\"0.023\" /><testcase classname=\"tests.unit.test_phase_c_success_observation_boundaries\" name=\"test_observation_io_or_event_failure_preserves_native_receipt_and_usage[missing_capture]\" time=\"0.026\" /><testcase classname=\"tests.unit.test_phase_c_success_observation_boundaries\" name=\"test_observation_io_or_event_failure_preserves_native_receipt_and_usage[malformed_events]\" time=\"0.022\" /></testsuite></testsuites>"
+    },
+    "pure-green.log": {
+      "bytes": 953,
+      "sha256": "811f9b98ad67925220effe667557d9876fe99f55dfc8205440601e1f12ffbdec",
+      "text": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\pc7-a4825e\\\\b2\", \"requested_basetemp_len\": 52, \"cwd_len\": 34, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\r\n============================= test session starts =============================\r\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\r\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\r\nconfigfile: pytest.ini\r\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\r\ncollected 10 items / 1 deselected / 9 selected\r\n\r\ntests\\unit\\test_phase_c_success_observation_boundaries.py .........      [100%]\r\n\r\n- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\pc7-a4825e\\pure-green.xml -\r\n======================= 9 passed, 1 deselected in 3.33s =======================\r\n"
+    },
+    "integration-green.xml": {
+      "bytes": 1889,
+      "sha256": "ca80725e40c1988bbb5194a51438033f6dbd25ab3561965f639eed44085653a0",
+      "text": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"0\" skipped=\"0\" tests=\"11\" time=\"48.261\" timestamp=\"2026-11-02T11:25:15.504369+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tests.unit.test_phase_c_success_observation_boundaries\" name=\"test_real_owned_run_keeps_native_success_and_cache_after_observer_failure\" time=\"42.646\" /><testcase classname=\"tests.test_phase_c_extractive\" name=\"test_success_observation_retains_real_execution_and_capture_hashes_only\" time=\"0.078\" /><testcase classname=\"tests.test_phase_c_extractive\" name=\"test_success_observation_cannot_fake_capture_or_execution[tampered]\" time=\"0.053\" /><testcase classname=\"tests.test_phase_c_extractive\" name=\"test_success_observation_cannot_fake_capture_or_execution[missing]\" time=\"0.033\" /><testcase classname=\"tests.test_phase_c_extractive\" name=\"test_success_observation_cannot_fake_capture_or_execution[event_hash]\" time=\"0.031\" /><testcase classname=\"tests.test_phase_c_extractive\" name=\"test_success_observation_cannot_fake_capture_or_execution[native_hash]\" time=\"0.030\" /><testcase classname=\"tests.test_phase_c_extractive\" name=\"test_success_observation_cannot_fake_capture_or_execution[missing_report]\" time=\"0.028\" /><testcase classname=\"tests.test_phase_c_extractive\" name=\"test_v4_success_does_not_invent_an_extractive_report\" time=\"0.027\" /><testcase classname=\"tests.unit.test_phase_c_registered_consumer\" name=\"test_fidelity_success_observes_assessment_without_inventing_extractive_report\" time=\"1.271\" /><testcase classname=\"tests.unit.test_phase_c_registered_consumer\" name=\"test_fidelity_success_requires_its_actual_assessment[missing]\" time=\"0.008\" /><testcase classname=\"tests.unit.test_phase_c_registered_consumer\" name=\"test_fidelity_success_requires_its_actual_assessment[extractive]\" time=\"0.036\" /></testsuite></testsuites>"
+    },
+    "integration-green.log": {
+      "bytes": 1094,
+      "sha256": "c094704b3a0f2dac75349f8f26d4d8f0c7876789e46a66e3a55d5e4193f3c91b",
+      "text": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\pc7-a4825e\\\\b3\", \"requested_basetemp_len\": 52, \"cwd_len\": 34, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\r\n============================= test session starts =============================\r\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\r\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\r\nconfigfile: pytest.ini\r\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\r\ncollected 11 items\r\n\r\ntests\\unit\\test_phase_c_success_observation_boundaries.py .              [  9%]\r\ntests\\test_phase_c_extractive.py .......                                 [ 72%]\r\ntests\\unit\\test_phase_c_registered_consumer.py ...                       [100%]\r\n\r\n- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\pc7-a4825e\\integration-green.xml -\r\n============================= 11 passed in 48.36s =============================\r\n"
+    }
+  },
+  "scope_limits": [
+    "Synthetic captured finals and synthetic HTML/owned lake only",
+    "Loopback fake HTTP not a supplier model; native tokens/cost in fixture are synthetic accounting values, external fee0",
+    "No H1/source originals/model download/real model/global skill deploy/full unit/113/167",
+    "No product src/config/hook/CI changes;ROOT owns Git/PWF and independent acceptance"
+  ],
+  "cleanup": {
+    "owned_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\pc7-a4825e",
+    "initial": "absent",
+    "final": "absent",
+    "ephemeral_native_lakes": "actual tests assert cwplC-* removed and tmp sentinel/originals/protected observations unchanged",
+    "reparse_points": 0,
+    "file_count": 81,
+    "bytes": 154943
+  }
+}

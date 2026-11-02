@@ -1,0 +1,42 @@
+{
+  "status": "FROZEN_AWAITING_INDEPENDENT_REVIEW",
+  "returncode": 0,
+  "elapsed_s": 18.444,
+  "delivery_files_sha256": {
+    "tools/pre_push_gate.py": "e8801268ee4939f4dd987fa758c73aadec8d50e0b0a3e11ccc299051ab63d2cb",
+    "tests/unit/test_pre_push_gate.py": "11db539b6098fe3e9bccdccbc75856403075269c3b7a1aa411e5e8e8b186cec6"
+  },
+  "actual_console": "Push scope: unknown push range; planned 9 target(s); full_validation_pending: change-specific tests are the author's responsibility; full suites remain in CI.\nPlanned test targets:\n  tests/unit/test_local_budget_observation.py::test_read_charge_reports_a_rejected_tail_separately_from_accepted_bytes\n  tests/unit/test_runtime_dependencies.py::test_ci_requirements_include_declared_runtime_dependencies\n  tests/unit/test_narrative_protocol_identity_shapes.py::test_protocol_lookup_does_not_hash_non_string_json\n  tests/unit/test_narrative_transport_contracts.py::test_frozen_producer_golden_contract_and_hash_bindings\n  tests/unit/test_narrative_retrieval.py::test_resolver_fails_closed_when_raw_source_hash_changes\n  tests/unit/test_shared_reading_cache_precheck.py::test_reuse_final_receipt_has_one_owner_read_per_operation\n  tests/unit/test_shared_reading_cache_precheck.py::test_new_operation_rejects_changed_reused_original_before_new_fee\n  tests/contract/test_fc905_receipt_envelope.py::test_pi03_no_review_is_explicit_not_reviewed\n  tests/contract/test_zr203_reader_rewire.py::test_read_entrypoints_never_construct_catalog_store\n\n=== daily push fast feedback: fixed CI contract smoke ===\n============================= 17 passed in 10.94s =============================\n============================ slowest 15 durations =============================\n2.43s setup    tests/unit/test_shared_reading_cache_precheck.py::test_reuse_final_receipt_has_one_owner_read_per_operation[True-False-0]\n0.41s setup    tests/unit/test_shared_reading_cache_precheck.py::test_reuse_final_receipt_has_one_owner_read_per_operation[False-False-1]\n0.39s setup    tests/unit/test_shared_reading_cache_precheck.py::test_reuse_final_receipt_has_one_owner_read_per_operation[False-True-1]\n0.37s call     tests/contract/test_fc905_receipt_envelope.py::test_pi03_no_review_is_explicit_not_reviewed\n0.37s setup    tests/unit/test_shared_reading_cache_precheck.py::test_new_operation_rejects_changed_reused_original_before_new_fee\n0.33s setup    tests/unit/test_local_budget_observation.py::test_read_charge_reports_a_rejected_tail_separately_from_accepted_bytes\n0.14s call     tests/contract/test_zr203_reader_rewire.py::test_read_entrypoints_never_construct_catalog_store\n0.08s call     tests/unit/test_narrative_transport_contracts.py::test_frozen_producer_golden_contract_and_hash_bindings[current-v2]\n0.07s call     tests/unit/test_narrative_retrieval.py::test_resolver_fails_closed_when_raw_source_hash_changes\n0.07s call     tests/unit/test_narrative_transport_contracts.py::test_frozen_producer_golden_contract_and_hash_bindings[]\n0.03s call     tests/unit/test_shared_reading_cache_precheck.py::test_reuse_final_receipt_has_one_owner_read_per_operation[True-False-0]\n0.02s call     tests/unit/test_shared_reading_cache_precheck.py::test_reuse_final_receipt_has_one_owner_read_per_operation[False-True-1]\n0.01s call     tests/unit/test_runtime_dependencies.py::test_ci_requirements_include_declared_runtime_dependencies\n0.01s call     tests/unit/test_shared_reading_cache_precheck.py::test_reuse_final_receipt_has_one_owner_read_per_operation[False-False-1]\n0.01s call     tests/unit/test_shared_reading_cache_precheck.py::test_new_operation_rejects_changed_reused_original_before_new_fee\n============================= 17 passed in 10.94s =============================\n\n\nPush fast gate GREEN (local_fast_pass for fixed smoke only); full_validation_pending — CI still runs the full suites.\n",
+  "policy": "Daily9existing owner nodes. Old35inventory retains all CI Unit+22remaining Contract/Integration. No forced whole files/OCR/HTTP subprocess tests each push. Explicit full and actual timeout/failure remain.",
+  "tests": [
+    {
+      "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "phase": "daily-small-red",
+      "targets": [
+        "tests/unit/test_pre_push_gate.py::test_daily_push_runs_only_fixed_owner_nodes_without_ci_integration_files"
+      ],
+      "owned": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r7rt-3f2ab1",
+      "initially_absent": true,
+      "returncode": 1,
+      "elapsed_s": 2.066,
+      "rf_four_wip_unchanged": true,
+      "restored_absent": true,
+      "junit": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"1\" skipped=\"0\" tests=\"1\" time=\"0.677\" timestamp=\"2026-11-02T12:15:57.972741+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tests.unit.test_pre_push_gate\" name=\"test_daily_push_runs_only_fixed_owner_nodes_without_ci_integration_files\" time=\"0.015\"><failure message=\"AssertionError: assert 35 == 9&#10; +  where 35 = len(['tests/unit/test_local_budget_observation.py::test_read_charge_reports_a_rejected_tail_separately_from_accepted_bytes...malization/test_isolated_ocr.py::test_noncooperative_native_stops_at_product_deadline[gil-block-inference-infer]', ...])\">tests\\unit\\test_pre_push_gate.py:84: in test_daily_push_runs_only_fixed_owner_nodes_without_ci_integration_files\n    assert len(targets) == 9\nE   AssertionError: assert 35 == 9\nE    +  where 35 = len(['tests/unit/test_local_budget_observation.py::test_read_charge_reports_a_rejected_tail_separately_from_accepted_bytes...malization/test_isolated_ocr.py::test_noncooperative_native_stops_at_product_deadline[gil-block-inference-infer]', ...])</failure></testcase></testsuite></testsuites>"
+    },
+    {
+      "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "phase": "daily-small-green",
+      "targets": [
+        "tests/unit/test_pre_push_gate.py"
+      ],
+      "owned": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r7rt-e102e8",
+      "initially_absent": true,
+      "returncode": 0,
+      "elapsed_s": 1.875,
+      "rf_four_wip_unchanged": true,
+      "restored_absent": true,
+      "junit": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"0\" skipped=\"0\" tests=\"6\" time=\"0.625\" timestamp=\"2026-11-02T12:16:45.762991+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tests.unit.test_pre_push_gate\" name=\"test_fast_inventory_keeps_the_four_reuse_receipt_regressions_without_a_whole_file\" time=\"0.010\" /><testcase classname=\"tests.unit.test_pre_push_gate\" name=\"test_daily_gate_has_one_total_deadline_and_last_node_diagnostics\" time=\"0.012\" /><testcase classname=\"tests.unit.test_pre_push_gate\" name=\"test_manual_full_gate_retains_its_original_deadline\" time=\"0.008\" /><testcase classname=\"tests.unit.test_pre_push_gate\" name=\"test_ci_contract_step_does_not_repeat_unit_cases\" time=\"0.003\" /><testcase classname=\"tests.unit.test_pre_push_gate\" name=\"test_explicit_full_mode_runs_unit_once_then_only_remaining_contracts\" time=\"0.002\" /><testcase classname=\"tests.unit.test_pre_push_gate\" name=\"test_daily_push_runs_only_fixed_owner_nodes_without_ci_integration_files\" time=\"0.003\" /></testsuite></testsuites>"
+    }
+  ],
+  "not_claimed": "Actual daily scope only, not full CI or company acceptance."
+}

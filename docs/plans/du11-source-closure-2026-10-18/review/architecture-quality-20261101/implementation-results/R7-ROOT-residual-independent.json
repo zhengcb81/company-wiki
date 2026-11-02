@@ -1,0 +1,287 @@
+{
+  "schema_version": "independent-review/1",
+  "status": "PASS_ENGINEERING_SELECTED_SCOPE",
+  "timestamp_utc": "2026-11-02T11:48:41.562092+00:00",
+  "scope": "ROOT final RF7+FF7+CWP2 plus explicit material2; not author PhaseC files",
+  "author_final_report_sha256": "ff49fb55ab25602a0a9389fdd4ec5d87ea395ce0574c63cec879e762f9968aab",
+  "material_report_sha256": "872e8705bacc9279cfc71b5354b0ffa64ccbe2a94d2a426d818dc0fa06e8975c",
+  "initial16_manifest": {
+    "revenue-forecast": {
+      "scripts/research/input_targets.py": "d580465c042d4c00ea102d00bf92eca6a357371dcb11c433d5808eeb80be0247",
+      "scripts/research/drivers.py": "2a05dc3489fe46a2455cc28b23fbc5f4787bbf4c8e43d170d98d9222f96a126e",
+      "scripts/revenue_backtest.py": "56e443eabc225de55ac2b80f23fcab94a18c44220848ad04887e17395f8f7d73",
+      "scripts/filing_upstream_cause.py": "3cede5008d138f8343ab79e36e2d4e478c987a9db58e2cf2e94df9779fd847fb",
+      "scripts/contracts/source_clock.py": "201807b094016dd38b0e9f24098b22ee1484f4a78af9951cee637ca226a4661b",
+      "tests/test_residual_representation_limits.py": "c6a595ab9e7cc9f0dba431746be8dbe849f914fd160b3a120a6d864b3f87ad38",
+      "tests/test_r1_local_preparation_observation.py": "6649a0c51444427c44e5e205d1abd5d903fd6503f8c8a0c9ab912e58dff42bf2"
+    },
+    "filing-fetch": {
+      "scripts/ff_configuration.py": "869b3fbf5c9d519b05fde4835f85edfd6ed85cb8c3b1a490e31c80856763c715",
+      "scripts/ff_local_preparation_observation.py": "2338c544bb86542bc3c36148e205ba53454406109e206e4a29311ff0f35198dd",
+      "scripts/fetch_filing.py": "93f00ad38777c41b6cec24f9d98b640a1d907c1fa2cc51d0ab1379ea502688e8",
+      "scripts/transcript_tool_transport.py": "6eec5596d3e67f138f3518709823256fb0f44094425cbc1b6b1c2f3e88c161e9",
+      "tests/test_residual_representation_limits.py": "897b4ce18ccc2bd0b86db97d2505145c65c305782028b304f431a331799ce94c",
+      "tests/test_local_preparation_observation.py": "160f01e234d93734df272141013195f57569fbf6ba4cf68f52d96cb057872298",
+      "tests/test_r1_source_business_failure.py": "b6f07149116eae4f192dd754fdbb6aeed59e072d0875d841d8bf4795939c82eb"
+    },
+    "company-wiki": {
+      "tools/pre_push_gate.py": "551d12772373a09ecb734085e1d75c9576c5ea5c0a2cfb7e3f3564d6dd54745c",
+      "tests/unit/test_pre_push_gate.py": "2923738f96520c0338daa8bd7a7748e3488721f3d7252748f1f9273dc12ea7ee"
+    }
+  },
+  "final16_manifest": {
+    "revenue-forecast": {
+      "scripts/research/input_targets.py": "d580465c042d4c00ea102d00bf92eca6a357371dcb11c433d5808eeb80be0247",
+      "scripts/research/drivers.py": "2a05dc3489fe46a2455cc28b23fbc5f4787bbf4c8e43d170d98d9222f96a126e",
+      "scripts/revenue_backtest.py": "56e443eabc225de55ac2b80f23fcab94a18c44220848ad04887e17395f8f7d73",
+      "scripts/filing_upstream_cause.py": "3cede5008d138f8343ab79e36e2d4e478c987a9db58e2cf2e94df9779fd847fb",
+      "scripts/contracts/source_clock.py": "201807b094016dd38b0e9f24098b22ee1484f4a78af9951cee637ca226a4661b",
+      "tests/test_residual_representation_limits.py": "c6a595ab9e7cc9f0dba431746be8dbe849f914fd160b3a120a6d864b3f87ad38",
+      "tests/test_r1_local_preparation_observation.py": "6649a0c51444427c44e5e205d1abd5d903fd6503f8c8a0c9ab912e58dff42bf2"
+    },
+    "filing-fetch": {
+      "scripts/ff_configuration.py": "869b3fbf5c9d519b05fde4835f85edfd6ed85cb8c3b1a490e31c80856763c715",
+      "scripts/ff_local_preparation_observation.py": "2338c544bb86542bc3c36148e205ba53454406109e206e4a29311ff0f35198dd",
+      "scripts/fetch_filing.py": "93f00ad38777c41b6cec24f9d98b640a1d907c1fa2cc51d0ab1379ea502688e8",
+      "scripts/transcript_tool_transport.py": "8fd24051d403665599a3fa2f3be3f16cb997e504d84e23ae40409b8fb96c9855",
+      "tests/test_residual_representation_limits.py": "1ede4367cdccf978bc974a9ec9032d44ae706a0a50145a75c15f72dc4590f5d6",
+      "tests/test_local_preparation_observation.py": "160f01e234d93734df272141013195f57569fbf6ba4cf68f52d96cb057872298",
+      "tests/test_r1_source_business_failure.py": "b6f07149116eae4f192dd754fdbb6aeed59e072d0875d841d8bf4795939c82eb"
+    },
+    "company-wiki": {
+      "tools/pre_push_gate.py": "551d12772373a09ecb734085e1d75c9576c5ea5c0a2cfb7e3f3564d6dd54745c",
+      "tests/unit/test_pre_push_gate.py": "2923738f96520c0338daa8bd7a7748e3488721f3d7252748f1f9273dc12ea7ee"
+    }
+  },
+  "extra_material2_manifest": {
+    "tools/document_understanding_benchmark/final_material.py": "200627006abd999a0bca57222f39844f31c9e0527e3129b158c6a8ff75273972",
+    "tools/document_understanding_benchmark/tests/test_final_material.py": "4da77df542f69cc91c31cbe99e20629cc1d55e37a7ed7fae1d7db9bef125021b"
+  },
+  "final18_before": {
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\research\\input_targets.py": "d580465c042d4c00ea102d00bf92eca6a357371dcb11c433d5808eeb80be0247",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\research\\drivers.py": "2a05dc3489fe46a2455cc28b23fbc5f4787bbf4c8e43d170d98d9222f96a126e",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\revenue_backtest.py": "56e443eabc225de55ac2b80f23fcab94a18c44220848ad04887e17395f8f7d73",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\filing_upstream_cause.py": "3cede5008d138f8343ab79e36e2d4e478c987a9db58e2cf2e94df9779fd847fb",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\contracts\\source_clock.py": "201807b094016dd38b0e9f24098b22ee1484f4a78af9951cee637ca226a4661b",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\tests\\test_residual_representation_limits.py": "c6a595ab9e7cc9f0dba431746be8dbe849f914fd160b3a120a6d864b3f87ad38",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\tests\\test_r1_local_preparation_observation.py": "6649a0c51444427c44e5e205d1abd5d903fd6503f8c8a0c9ab912e58dff42bf2",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_configuration.py": "869b3fbf5c9d519b05fde4835f85edfd6ed85cb8c3b1a490e31c80856763c715",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_local_preparation_observation.py": "2338c544bb86542bc3c36148e205ba53454406109e206e4a29311ff0f35198dd",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\fetch_filing.py": "93f00ad38777c41b6cec24f9d98b640a1d907c1fa2cc51d0ab1379ea502688e8",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\transcript_tool_transport.py": "8fd24051d403665599a3fa2f3be3f16cb997e504d84e23ae40409b8fb96c9855",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\tests\\test_residual_representation_limits.py": "1ede4367cdccf978bc974a9ec9032d44ae706a0a50145a75c15f72dc4590f5d6",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\tests\\test_local_preparation_observation.py": "160f01e234d93734df272141013195f57569fbf6ba4cf68f52d96cb057872298",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\tests\\test_r1_source_business_failure.py": "b6f07149116eae4f192dd754fdbb6aeed59e072d0875d841d8bf4795939c82eb",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tools\\pre_push_gate.py": "551d12772373a09ecb734085e1d75c9576c5ea5c0a2cfb7e3f3564d6dd54745c",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\test_pre_push_gate.py": "2923738f96520c0338daa8bd7a7748e3488721f3d7252748f1f9273dc12ea7ee",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tools\\document_understanding_benchmark\\final_material.py": "200627006abd999a0bca57222f39844f31c9e0527e3129b158c6a8ff75273972",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tools\\document_understanding_benchmark\\tests\\test_final_material.py": "4da77df542f69cc91c31cbe99e20629cc1d55e37a7ed7fae1d7db9bef125021b"
+  },
+  "final18_after": {
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\research\\input_targets.py": "d580465c042d4c00ea102d00bf92eca6a357371dcb11c433d5808eeb80be0247",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\research\\drivers.py": "2a05dc3489fe46a2455cc28b23fbc5f4787bbf4c8e43d170d98d9222f96a126e",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\revenue_backtest.py": "56e443eabc225de55ac2b80f23fcab94a18c44220848ad04887e17395f8f7d73",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\filing_upstream_cause.py": "3cede5008d138f8343ab79e36e2d4e478c987a9db58e2cf2e94df9779fd847fb",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\contracts\\source_clock.py": "201807b094016dd38b0e9f24098b22ee1484f4a78af9951cee637ca226a4661b",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\tests\\test_residual_representation_limits.py": "c6a595ab9e7cc9f0dba431746be8dbe849f914fd160b3a120a6d864b3f87ad38",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\tests\\test_r1_local_preparation_observation.py": "6649a0c51444427c44e5e205d1abd5d903fd6503f8c8a0c9ab912e58dff42bf2",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_configuration.py": "869b3fbf5c9d519b05fde4835f85edfd6ed85cb8c3b1a490e31c80856763c715",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_local_preparation_observation.py": "2338c544bb86542bc3c36148e205ba53454406109e206e4a29311ff0f35198dd",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\fetch_filing.py": "93f00ad38777c41b6cec24f9d98b640a1d907c1fa2cc51d0ab1379ea502688e8",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\transcript_tool_transport.py": "8fd24051d403665599a3fa2f3be3f16cb997e504d84e23ae40409b8fb96c9855",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\tests\\test_residual_representation_limits.py": "1ede4367cdccf978bc974a9ec9032d44ae706a0a50145a75c15f72dc4590f5d6",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\tests\\test_local_preparation_observation.py": "160f01e234d93734df272141013195f57569fbf6ba4cf68f52d96cb057872298",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\tests\\test_r1_source_business_failure.py": "b6f07149116eae4f192dd754fdbb6aeed59e072d0875d841d8bf4795939c82eb",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tools\\pre_push_gate.py": "551d12772373a09ecb734085e1d75c9576c5ea5c0a2cfb7e3f3564d6dd54745c",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\test_pre_push_gate.py": "2923738f96520c0338daa8bd7a7748e3488721f3d7252748f1f9273dc12ea7ee",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tools\\document_understanding_benchmark\\final_material.py": "200627006abd999a0bca57222f39844f31c9e0527e3129b158c6a8ff75273972",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tools\\document_understanding_benchmark\\tests\\test_final_material.py": "4da77df542f69cc91c31cbe99e20629cc1d55e37a7ed7fae1d7db9bef125021b"
+  },
+  "all18_stable": true,
+  "rf_four_wip_before_sha256": {
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\daily_alert.jsonl": "712f9e957990ca0c261cbb91c1d10b0a12606da9d7293e6f2a1581309ce295e9",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_alert.jsonl": "fc9ec2335b48d42921ca9c14c63363efca3b3096f967733e366f4dd463e4b7ed",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_manifest.json": "e2e57f28fec7477af06029adcf187468701ab0305024993bfb2953bbd43cc5c0",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\monthly_manifest.json": "56d630107429cbcb646a951306dd1ea445dd5b3146236f34d0e8df953c103b9a"
+  },
+  "rf_four_wip_after_sha256": {
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\daily_alert.jsonl": "712f9e957990ca0c261cbb91c1d10b0a12606da9d7293e6f2a1581309ce295e9",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_alert.jsonl": "fc9ec2335b48d42921ca9c14c63363efca3b3096f967733e366f4dd463e4b7ed",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_manifest.json": "e2e57f28fec7477af06029adcf187468701ab0305024993bfb2953bbd43cc5c0",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\monthly_manifest.json": "56d630107429cbcb646a951306dd1ea445dd5b3146236f34d0e8df953c103b9a"
+  },
+  "rf_four_wip_unchanged": true,
+  "findings": [],
+  "closed_finding": {
+    "id": "R7-ROOT-RESIDUAL-01",
+    "priority": "P2",
+    "initial_state": "NEEDS_ROOT_FIX",
+    "initial_minimal_actual_counterexample": {
+      "source_sha256": "6eec5596d3e67f138f3518709823256fb0f44094425cbc1b6b1c2f3e88c161e9",
+      "input_bytes": 18100,
+      "padded_bytes": 12000,
+      "nested_array_depth": 3000,
+      "observed_error_type": "RecursionError",
+      "expected_usage": "None,None,False",
+      "later_ROOT_fix": "catch UnicodeError/ValueError/RecursionError without size/depth cap"
+    },
+    "actual_production_caller": "EarningsTranscriptsTransport tool call returns stdout/stderr, then _provider_usage at prior759 outside transport exception guard; unparseable optional usage could throw after primary response",
+    "ROOT_fix": "provider_usage catchesUnicodeError/ValueError/RecursionError; no volume/depth cap. Standard Python invalid integer conversion and too-deep bad diagnostic becomeNone/None/False.",
+    "final_independent_controls": "same3000-layer paddedbadusage and6000digit bad integer receipt nowunknown; legal paddedcomplete stays2requests/300bytes; wrongrequest/schema/Falseusage/boolean counter allunknown",
+    "status": "CLOSED",
+    "fix_is_not_historical_pass": true
+  },
+  "review_matrix": [
+    {
+      "area": "FF local config and sidecar",
+      "conclusion": "Explicit complete local config read preserves JSON/I/O errors; optional unavailable diagnostics can grow but do not carry physical bodies/secrets or override primaryblocked result. Actual local/transport acquisition budgets remain in owner, metadata observer does not execute resource claim.",
+      "verification": "diffreview; actual formal FF DTO serializer plus RFpublic CLI3variants; cyclic/alias/copy tests"
+    },
+    {
+      "area": "RF local observation parser",
+      "conclusion": "Full diagnostic content, None/False and unknown nested owner schema retained; unknown outer optional schema dropped without losing validated primarycause/status/calls/downloads. Iterative active-path cycle check permits repeated aliases but rejectscycles; JSONroundtrip isolatesinput.",
+      "verification": "public FF→RF route with >128KiBtruefailure; unknownouteroptional/vagueowner grammar/cyclicrefs"
+    },
+    {
+      "area": "RF source/research contracts",
+      "conclusion": "Nonempty full excerpt and source-clockproof lengths no arbitrary cap; raw hashes and source/currency/period checks unchanged. Driver/evidencelist no10entrycap; segment attribution/math stillstrong.",
+      "verification": "actual native longUnicode builderclaims→run_forecast;17drivers13evidence; malformedexcerptdigest and .017 attribution tampering rejected; longactualsexcerpt backtest works/wrongcurrency rejected; static source-clock versions/pathlessconstraints unchanged"
+    },
+    {
+      "area": "ET supervisor usage",
+      "conclusion": "No8KB representation veto; known counters require exact schema/request/Truecomplete/strictnonnegativeints, elseunknown not0. Malformed optional parser boundary restored byROOT fix. Actual childtransport limits unchanged.",
+      "verification": "largepadded known receipt plus6negativevariants, including original3000depth andlargeinteger counterexample"
+    },
+    {
+      "area": "CI orchestration",
+      "conclusion": "Daily35explicit targets unchanged; CI22remainingnonUnitpreservedset equalsoriginalfastminusonlyUnit. NoContract/Integrationremoved. ExplicitfullUnitonce followedexistingcontractset; noCIjob/hook/install introduced.",
+      "verification": "independent actualmain schedule dispatch spies forCI/push + static fullmode diff; not actual35pytestexecution"
+    },
+    {
+      "area": "public material observer",
+      "conclusion": "No default512row/group4MiB/4096unit representation caps; explicit allocation retained and can exceedoldlimits. Default actualwork200k preserved, wrongoriginal doesnot pass. No internalproductioncaller claimed.",
+      "verification": "actualpublicobserve619rows explicit700 passescompleteSHA/no quote truncation; work1 and materialfabrication refused"
+    }
+  ],
+  "actual_public_interop": {
+    "producer": "filing-fetch/scripts/ff_v2_envelope.error_envelope with formal local_preparation_observation",
+    "consumer": "revenue-forecast/scripts/filing_fetch_client.py --result-envelope (real subprocess)",
+    "source_transport": "owned replaystub streams producer-createdDTO; no fake RF decode/validator, no upstreamsource/providercalls",
+    "cases": [
+      "validfull>128KiBoptionalobs retained;unknownlocalIO remainsNone",
+      "badproduceroptional stripped without mainstatus/cause/countloss",
+      "unknownconsumerouteroptional stripped without mainstatus/cause/countloss"
+    ],
+    "not_claimed": "FF full acquisition pipeline or real provider/network acceptance"
+  },
+  "tests": [
+    {
+      "evidence": "results.xml",
+      "tests": 8,
+      "failures": 0,
+      "errors": 0,
+      "xml_seconds": 1.894,
+      "cases": [
+        {
+          "classname": "tmp.rr7-415b6d.test_review",
+          "name": "test_actual_ff_public_dto_to_rf_public_cli_preserves_primary[complete]",
+          "time": "0.529"
+        },
+        {
+          "classname": "tmp.rr7-415b6d.test_review",
+          "name": "test_actual_ff_public_dto_to_rf_public_cli_preserves_primary[bad_producer_optional]",
+          "time": "0.405"
+        },
+        {
+          "classname": "tmp.rr7-415b6d.test_review",
+          "name": "test_actual_ff_public_dto_to_rf_public_cli_preserves_primary[unknown_consumer_optional]",
+          "time": "0.484"
+        },
+        {
+          "classname": "tmp.rr7-415b6d.test_review",
+          "name": "test_optional_json_aliases_are_not_cycles_and_cycles_are_not_complete",
+          "time": "0.185"
+        },
+        {
+          "classname": "tmp.rr7-415b6d.test_review",
+          "name": "test_large_usage_receipt_keeps_known_and_unknown_states",
+          "time": "0.169"
+        },
+        {
+          "classname": "tmp.rr7-415b6d.test_review",
+          "name": "test_material_explicit_allocation_above_old_limit_keeps_every_original",
+          "time": "0.026"
+        },
+        {
+          "classname": "tmp.rr7-415b6d.test_review",
+          "name": "test_material_actual_work_allocation_and_original_text_still_enforced",
+          "time": "0.001"
+        },
+        {
+          "classname": "tmp.rr7-415b6d.test_review",
+          "name": "test_daily_smoke_and_ci_contract_inventory_are_different_without_contract_loss",
+          "time": "0.017"
+        }
+      ]
+    },
+    {
+      "evidence": "native.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "xml_seconds": 0.787,
+      "cases": [
+        {
+          "classname": "tmp.rr7-415b6d.test_review",
+          "name": "test_rf_native_model_keeps_long_excerpt_sha_and_wide_attribution",
+          "time": "0.717"
+        }
+      ]
+    }
+  ],
+  "effective_result": "8independentcases2.04s plus1newnativecase0.85s; separate runs, no111/65/77/fullUnit/wholeCI repeat",
+  "evidence": {
+    "test_review.py": {
+      "sha256": "c22632d4ff36a8aca94940a3a8551d6f178fa0d3eafd58b53b6140d303205e06",
+      "bytes": 11887,
+      "text": "\"\"\"Independent selected public-boundary controls, no providers/originals.\"\"\"\nfrom copy import deepcopy\nimport hashlib\nimport json\nimport os\nfrom pathlib import Path\nimport subprocess\nimport sys\n\nimport pytest\n\nROOT = Path(__file__).resolve().parents[2]\nFF = ROOT.parent / 'filing-fetch'\nRF = ROOT.parent / 'revenue-forecast'\n\n\ndef child(code, *args):\n    result = subprocess.run([sys.executable, '-B', '-X', 'utf8', '-c', code, *map(str, args)],\n        cwd=ROOT, env={**os.environ, 'PYTHONDONTWRITEBYTECODE': '1'}, capture_output=True,\n        timeout=20, check=False)\n    assert result.returncode == 0, result.stderr.decode('utf-8')\n    return json.loads(result.stdout)\n\n\n@pytest.mark.parametrize('case', ['complete', 'bad_producer_optional', 'unknown_consumer_optional'])\ndef test_actual_ff_public_dto_to_rf_public_cli_preserves_primary(tmp_path, case):\n    producer = r'''\nimport json,sys\nsys.path.insert(0,sys.argv[1])\nfrom ff_local_preparation_observation import local_preparation_observation\nfrom ff_v2_envelope import error_envelope\nrow={'status':'unavailable','reason':'budget_exceeded','blocks_download':True,\n 'operations':[{'schema_version':'urn:unseen-owner:ledger/97','local_count':7}],\n 'diagnostics':[{'reason':'unseen_owner_reason','status':'unavailable','counter':i} for i in range(1800)]}\nobservation=local_preparation_observation(row,{'max_candidates':1024,'max_bytes':7*1024**3,'timeout_seconds':900})\nassert observation is not None\nif sys.argv[2]=='bad_producer_optional': observation['diagnostics']=[{'path':'unwanted_location'}]\npayload=error_envelope('source_blocked','budget_exceeded',retryable=False,\n stats={'calls':7,'downloads':0},request={'mode':'exact','fiscal_year':2026,'fiscal_period':'H1','as_of_date':'2026-11-02'},\n upstream_cause={'schema_version':'filing-upstream-cause/1','operation':'local_prepare','code':'budget_exceeded',\n 'provider_started':False,'usage_complete':True,'retry_scope':'caller_decision'},producer_exit_code=2,\n local_preparation_observation=observation)\nprint(json.dumps(payload,ensure_ascii=False))\n'''\n    dto = child(producer, FF / 'scripts', case)\n    assert dto['status'] == dto['filing']['status'] == 'source_blocked'\n    if case == 'unknown_consumer_optional':\n        dto['local_preparation_observation']['schema_version'] = 'filing-local-preparation-observation/999'\n    incoming = deepcopy(dto)\n    fake = tmp_path / 'replay-ff'\n    (fake / 'scripts').mkdir(parents=True)\n    (fake / 'wire.json').write_text(json.dumps(dto, ensure_ascii=False), encoding='utf-8')\n    (fake / 'scripts/fetch_filing.py').write_text(\n        \"import pathlib,sys\\nsys.stdin.read()\\nsys.stdout.write((pathlib.Path(__file__).parents[1]/'wire.json').read_text(encoding='utf-8'))\\nraise SystemExit(2)\\n\", encoding='utf-8')\n    proc = subprocess.run([sys.executable, '-B', '-X', 'utf8', str(RF / 'scripts/filing_fetch_client.py'),\n        '--result-envelope', '--filing-fetch-root', str(fake), '--timeout-seconds', '10'],\n        input=b'{\"document_kind\":\"semi_annual_report\"}', cwd=tmp_path,\n        env={**os.environ, 'PYTHONUTF8':'1', 'PYTHONDONTWRITEBYTECODE':'1'}, capture_output=True,\n        timeout=20, check=False)\n    assert proc.returncode == 2 and not proc.stdout\n    observed = json.loads(proc.stderr)\n    result = observed['filing_fetch_result']\n    assert result['filing'] == incoming['filing']\n    assert observed['upstream_cause'] == incoming['filing']['upstream_cause']\n    assert result['status'] == 'source_blocked' and result['calls'] == 7 and result['downloads'] == 0\n    if case == 'complete':\n        assert len(proc.stderr) > 128 * 1024\n        assert result == incoming\n        assert result['local_preparation_observation']['local_io_usage'] is None\n        assert result['local_preparation_observation']['operations'][0]['schema_version'] == 'urn:unseen-owner:ledger/97'\n    else:\n        assert 'local_preparation_observation' not in result\n\n\ndef test_optional_json_aliases_are_not_cycles_and_cycles_are_not_complete():\n    code = r'''\nimport json,sys\nsys.path[:0]=[sys.argv[1],sys.argv[2]]\nimport ff_local_preparation_observation as ff\nfrom filing_upstream_cause import validated_local_preparation_observation as rf\nshared={'schema_version':'urn:unseen:metrics/87','counter':False,'unknown':None}\nvalue={'schema_version':ff.SCHEMA,'usage_scope':'local_original_verification','status':'unavailable',\n 'reason':'owner_deferred','blocks_download':True,'local_read_limits':{'max_candidates':1,'max_bytes':2,'timeout_seconds':1},\n 'operations':[shared,shared],'diagnostics':[],'local_io_usage':None}\nfor check in (ff.validated_local_preparation_observation,rf):\n result=check(value);assert result is not None and result['operations']==[shared,shared]\n assert result['operations'][0] is not shared\n result['operations'][0]['counter']=9;assert shared['counter'] is False\n cycle=[];cycle.append(cycle);value['diagnostics']=[{'loop':cycle}]\n assert check(value) is None\n value['diagnostics']=[]\nprint(json.dumps({'aliases':'preserved','cycles':'rejected','unknown':None}))\n'''\n    assert child(code, FF / 'scripts', RF / 'scripts')['cycles'] == 'rejected'\n\n\ndef test_large_usage_receipt_keeps_known_and_unknown_states():\n    code = r'''\nimport json,sys\nsys.path.insert(0,sys.argv[1])\nfrom transcript_tool_transport import _provider_usage\nusage={'schema_version':'earnings-retrieval-usage/1','request_id':'independent-r7','usage_complete':True,\n       'usage':{'requests_used':2,'response_bytes_used':300}}\npadding=b' '*12000\nknown=_provider_usage(padding+json.dumps(usage).encode(),'independent-r7')\nassert known=={'provider_requests':2,'provider_response_bytes':300,'provider_usage_complete':True}\nunknown={'provider_requests':None,'provider_response_bytes':None,'provider_usage_complete':False}\nvariants=[]\nfor update in [{'usage_complete':False},{'schema_version':'unseen/9'},{'request_id':'wrong'},\n               {'usage':{'requests_used':True,'response_bytes_used':300}}]:\n row={**usage,**update};variants.append(_provider_usage(padding+json.dumps(row).encode(),'independent-r7'))\nraw=padding+b'{\"schema_version\":\"earnings-retrieval-usage/1\",\"request_id\":\"independent-r7\",\"usage_complete\":true,\"usage\":'+b'['*3000+b'0'+b']'*3000+b'}'\nvariants.append(_provider_usage(raw,'independent-r7'))\nraw=padding+b'{\"schema_version\":\"earnings-retrieval-usage/1\",\"request_id\":\"independent-r7\",\"usage_complete\":true,\"usage\":{\"requests_used\":'+b'9'*6000+b',\"response_bytes_used\":3}}'\nvariants.append(_provider_usage(raw,'independent-r7'))\nassert all(v==unknown for v in variants)\nprint(json.dumps({'known':known,'unknown_controls':len(variants)}))\n'''\n    assert child(code, FF / 'scripts')['unknown_controls'] == 6\n\n\ndef test_rf_native_model_keeps_long_excerpt_sha_and_wide_attribution():\n    code = r'''\nimport sys,json\nfrom copy import deepcopy\nsys.path[:0]=[sys.argv[1],sys.argv[2]]\nfrom revenue_core import run_forecast,ForecastInputError,text_sha256\nfrom test_du67_typed_builder_composition import money_target_document,rebuild_target\nfrom test_recognition_bridge import forecast_document\nfrom test_residual_representation_limits import widen_drivers\nfrom revenue_backtest import create_snapshot,evaluate_snapshot\nfrom test_backtest import actuals_document\ndoc=money_target_document(raw_value=1000,raw_currency='USD',raw_scale='million',comparison_value=1000)\nold=doc['management_targets'][0]\nclaim=next(c for c in doc['evidence_claims'] if c['claim_id'] in old['claim_ids'])\ntext=claim['excerpt']+'\\n原语言限定与上下文🙂。'*700\nclaim.update(excerpt=text,excerpt_sha256=text_sha256(text))\nnative=deepcopy(doc);built=rebuild_target(doc,treatment=old['treatment'])\nassert any(c['excerpt']==text for c in built['claims'])\nnative['management_targets'][0]['claim_ids']=built['target']['claim_ids']\nnative['evidence_claims']=[c for c in native['evidence_claims'] if c['claim_id'] not in old['claim_ids']]+built['claims']\nrun_forecast(native)\nbad=deepcopy(native);next(c for c in bad['evidence_claims'] if c['excerpt']==text)['excerpt_sha256']='e'*64\ntry:run_forecast(bad)\nexcept ForecastInputError as e:assert 'excerpt' in str(e)\nelse:raise AssertionError('tampered excerpt digest accepted')\nwide=widen_drivers(forecast_document(),17,13);result=run_forecast(wide)\nassert len(result['growth_driver_analysis']['drivers'])==len(wide['growth_driver_tree']['drivers'])\nassert abs(result['growth_driver_analysis']['reconciliation']['difference'])<1e-8\nwide['growth_driver_tree']['drivers'][0]['segment_attribution'][0]['weight']+=.017\ntry:run_forecast(wide)\nexcept ForecastInputError as e:assert 'weight' in str(e)\nelse:raise AssertionError('broken attribution accepted')\nactuals=actuals_document();snapshot=create_snapshot(forecast_document(),'independent-residual')\nfor c in actuals['evidence_claims']:\n c['excerpt']+=' Additional original context.'*61;c['excerpt_sha256']=text_sha256(c['excerpt'])\nevaluate_snapshot(snapshot,actuals)\nactuals['currency']='CNY'\ntry:evaluate_snapshot(snapshot,actuals)\nexcept ForecastInputError as e:assert 'currency/unit' in str(e)\nelse:raise AssertionError('wrong actual currency accepted')\nprint(json.dumps({'long_excerpt_chars':len(text),'wide_driver_count':len(result['growth_driver_analysis']['drivers']),\n 'wrong_sha':'rejected','wrong_attribution':'rejected','wrong_currency':'rejected'}))\n'''\n    result = child(code, RF / 'scripts', RF / 'tests')\n    assert result['long_excerpt_chars'] > 500\n    assert result['wide_driver_count'] > 10\n\n\ndef test_material_explicit_allocation_above_old_limit_keeps_every_original():\n    from tools.document_understanding_benchmark import observe_final_material\n    from tools.document_understanding_benchmark.tests.final_material import originals, material, execution\n    count = 619\n    source = originals({f'x{i}':'u-stores' for i in range(count)})\n    for i,u in enumerate(source['units'].values()):\n        u.update(locator=f'loc:v1/page:{i+1}/paragraph:1',page=i+1,unit_id=f'unit-{i}')\n    source['groups'] = {}\n    rows = [[alias,u['text']] for alias,u in source['units'].items()]\n    result = observe_final_material(material(evidence=rows,groups=[]),source,\n        sample_id='independent-wide', execution=execution(), limits={'max_evidence_rows':700,'max_units':700})\n    assert len(result['selected_evidence']) == count\n    expected = '\\n'.join(r[1] for r in rows)\n    assert hashlib.sha256(result['selected_text'].encode()).hexdigest() == hashlib.sha256(expected.encode()).hexdigest()\n\n\ndef test_material_actual_work_allocation_and_original_text_still_enforced():\n    from tools.document_understanding_benchmark import observe_final_material\n    from tools.document_understanding_benchmark.tests.final_material import originals, material, execution\n    for fault in ('work','text'):\n        env = material()\n        if fault == 'text': env['evidence'][0][1] += ' fabricated'\n        kwargs = {'limits':{'max_work_units':1}} if fault == 'work' else {}\n        with pytest.raises(ValueError):\n            observe_final_material(env,originals(),sample_id='independent-negative',execution=execution(),**kwargs)\n\n\ndef test_daily_smoke_and_ci_contract_inventory_are_different_without_contract_loss(monkeypatch):\n    from tools import pre_push_gate as gate\n    seen = []\n    monkeypatch.setattr(gate,'_dispatch_gate',lambda cmd,*args:seen.append(cmd) or 0)\n    assert gate.main(['--fast-contracts-only']) == 0\n    ci = {x for x in seen[0] if x.startswith('tests/')}\n    required = {x for x in gate.FAST_CONTRACT_CASES if not x.startswith('tests/unit/')}\n    assert ci == required and len(ci) == 22\n    seen.clear()\n    monkeypatch.setattr(gate,'changed_paths',lambda *args:None)\n    monkeypatch.setattr(sys,'stdin',__import__('io').StringIO(''))\n    assert gate.main(['--push-checks']) == 0\n    daily = {x for x in seen[0] if x.startswith('tests/')}\n    assert daily == set(gate.FAST_CONTRACT_CASES) and len(daily) == 35\n    assert ci <= daily\n"
+    },
+    "results.xml": {
+      "sha256": "95d8015e4b87075e9736420173c66fe0f989f83570a110951dbaab289a23ea85",
+      "bytes": 1408,
+      "text": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"0\" skipped=\"0\" tests=\"8\" time=\"1.894\" timestamp=\"2026-11-02T11:44:59.993327+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tmp.rr7-415b6d.test_review\" name=\"test_actual_ff_public_dto_to_rf_public_cli_preserves_primary[complete]\" time=\"0.529\" /><testcase classname=\"tmp.rr7-415b6d.test_review\" name=\"test_actual_ff_public_dto_to_rf_public_cli_preserves_primary[bad_producer_optional]\" time=\"0.405\" /><testcase classname=\"tmp.rr7-415b6d.test_review\" name=\"test_actual_ff_public_dto_to_rf_public_cli_preserves_primary[unknown_consumer_optional]\" time=\"0.484\" /><testcase classname=\"tmp.rr7-415b6d.test_review\" name=\"test_optional_json_aliases_are_not_cycles_and_cycles_are_not_complete\" time=\"0.185\" /><testcase classname=\"tmp.rr7-415b6d.test_review\" name=\"test_large_usage_receipt_keeps_known_and_unknown_states\" time=\"0.169\" /><testcase classname=\"tmp.rr7-415b6d.test_review\" name=\"test_material_explicit_allocation_above_old_limit_keeps_every_original\" time=\"0.026\" /><testcase classname=\"tmp.rr7-415b6d.test_review\" name=\"test_material_actual_work_allocation_and_original_text_still_enforced\" time=\"0.001\" /><testcase classname=\"tmp.rr7-415b6d.test_review\" name=\"test_daily_smoke_and_ci_contract_inventory_are_different_without_contract_loss\" time=\"0.017\" /></testsuite></testsuites>"
+    },
+    "results.log": {
+      "sha256": "1658a2fd8c059af3e78630330f3ac31f636c760b16bfe3ee9090075d7c897299",
+      "bytes": 920,
+      "text": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\rr7-415b6d\\\\b\", \"requested_basetemp_len\": 51, \"cwd_len\": 34, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\r\n============================= test session starts =============================\r\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\r\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\r\nconfigfile: pytest.ini\r\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\r\ncollected 8 items\r\n\r\ntmp\\rr7-415b6d\\test_review.py ........                                   [100%]\r\n\r\n- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\rr7-415b6d\\results.xml -\r\n============================== 8 passed in 2.04s ==============================\r\n"
+    },
+    "native.xml": {
+      "sha256": "ecd97594375342870d3556b436928c1e9de9f46ab54fb6307c8f8d2cd4e0de1d",
+      "bytes": 387,
+      "text": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"0\" skipped=\"0\" tests=\"1\" time=\"0.787\" timestamp=\"2026-11-02T11:46:40.124115+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tmp.rr7-415b6d.test_review\" name=\"test_rf_native_model_keeps_long_excerpt_sha_and_wide_attribution\" time=\"0.717\" /></testsuite></testsuites>"
+    },
+    "native.log": {
+      "sha256": "22c07e9c39b8d80016257edcbf1a4d6e158b8ba1615b6f2ee213ea71db4745eb",
+      "bytes": 919,
+      "text": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\rr7-415b6d\\\\b2\", \"requested_basetemp_len\": 52, \"cwd_len\": 34, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\r\n============================= test session starts =============================\r\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\r\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\r\nconfigfile: pytest.ini\r\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\r\ncollected 1 item\r\n\r\ntmp\\rr7-415b6d\\test_review.py .                                          [100%]\r\n\r\n- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\rr7-415b6d\\native.xml -\r\n============================== 1 passed in 0.85s ==============================\r\n"
+    }
+  },
+  "cleanup": {
+    "owned_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\rr7-415b6d",
+    "initial": "absent",
+    "final": "absent",
+    "originals_models_network_external_fees": 0,
+    "repo_files_changed": "reports plus owned temporary probe only",
+    "git_index_or_main_pwf_written": false,
+    "reparse_points": 0,
+    "file_count": 12,
+    "bytes": 300506
+  },
+  "limitations": [
+    "No self-review of ownPhaseC2files",
+    "No trueH1/sharedengine/newsummary/cache/RFcompanyeconomic acceptance",
+    "No new budget approvals, humanreceipts or gates introduced",
+    "Source hashes bind only18explicitdelivery files; FF/RF side scripts reviewed as current caller context, not independently rebuilt entire repos"
+  ]
+}

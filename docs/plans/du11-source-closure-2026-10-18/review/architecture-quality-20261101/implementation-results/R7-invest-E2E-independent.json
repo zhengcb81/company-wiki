@@ -1,0 +1,217 @@
+{
+  "reviewer": "/root/rectify_readability",
+  "status": "PASS_WITH_ENVIRONMENT_OBSERVATION",
+  "scope": "Independent incremental review of the 11-file Invest E2E delivery; no runtime edits by reviewer.",
+  "author_report_sha256": "7adc7c897b211b2131e6e95b8cb4d9f8822302aed06b8766079e34d61abe9e1e",
+  "delivery_files_sha256": {
+    "invest-core/scripts/invest_contracts.py": "e5025385fe9894e8488cd59fcfd90bbbce69679291c7a05d5622771d7a06494b",
+    "invest-framework/scripts/company_orchestrator.py": "133fc297751d60c2959b6aad4d9017f355ef72890df7304ed5c9d38498ba61a7",
+    "invest-framework/scripts/bundle_validator.py": "40e4bf8c78fb533aa3bffb2dd246adb85360b2885d6c615c1cdaa89ed3fc03ce",
+    "e2e/run_biren_invest_e2e.py": "eda2578c7d4eb2ec54c1af765b608af7cd029092b664307ea78105cd33fa2a7d",
+    "e2e/offline_cli.py": "339fb49d42e7196faa96cdcb52bd3e637a4f17a3f9baa15351d90e675230e4c4",
+    "e2e/generate_biren_fixture.py": "8ed303a9312c2df3ee5168789f9dc2f1cc1ee12c285a202064d3ffd27446b15c",
+    "e2e/fixtures/biren_forecast.json": "b12fdfc5bcfd4bcbc876326c71eb238340aa5d8230ce672f5aa28f1761bf27bb",
+    "e2e/expected/expected-0e1cc8d4c73d.json": "da56d85b24699dbf0fe422428ba35c70c8b3e1451858639916b5cbb18d19a7ba",
+    "e2e/E2E_DESIGN.md": "d106bc67317fe40db02cd3f4607f7e1233c2cfc40893265b849f506a61a70352",
+    "invest-core/tests/test_claim_excerpt_integrity.py": "f4eac1eb6e9825d38e56b6e8ea3da25d04c27ed228af1af1f856411943ffe5a1",
+    "invest-framework/tests/test_e2e_contract_boundaries.py": "6c6525a2aaa3f839f2fd8a9665943f3e9f6ed15316007f603922a5c41ed0263c"
+  },
+  "delivery_before_after": "11/11 matched before execution and after execution; exact manifest is unchanged.",
+  "independent_run": {
+    "initial": {
+      "passed": 6,
+      "failed": 1,
+      "seconds": 10.112,
+      "log": ".planning/architecture-quality-20261101/r7-invest-e2e-independent.log"
+    },
+    "only_failed_node_rerun": {
+      "passed": 1,
+      "failed": 0,
+      "seconds": 5.221,
+      "log": ".planning/architecture-quality-20261101/r7-invest-e2e-independent-cli-rerun.log"
+    },
+    "logs": {
+      ".planning/architecture-quality-20261101/r7-invest-e2e-independent.log": {
+        "sha256": "b89bc761c20d3d34b09c9926155ec94d956c552f61c7fb522f0289be95803e6e",
+        "text": "test_01_frozen_economics_and_canonical_pair (__main__.Review.test_01_frozen_economics_and_canonical_pair) ... ok\ntest_02_quote_lengths_do_not_waive_integrity (__main__.Review.test_02_quote_lengths_do_not_waive_integrity) ... ok\ntest_03_index_is_not_permission_strong_owner_still_rejects (__main__.Review.test_03_index_is_not_permission_strong_owner_still_rejects) ... ok\ntest_04_generator_really_reemits_from_input (__main__.Review.test_04_generator_really_reemits_from_input) ... ok\ntest_05_actual_cli_double_run_and_cleanup (__main__.Review.test_05_actual_cli_double_run_and_cleanup) ... FAIL\ntest_06_update_golden_does_not_absorb_economics (__main__.Review.test_06_update_golden_does_not_absorb_economics) ... ok\n[e2e]   ok   3\n[e2e]   ok   4a\n[e2e]   ok   4b-low\n[e2e]   ok   4b-base\n[e2e]   ok   4b-high\n[e2e]   ok   4c\n[e2e]   ok   5a\n[e2e]   ok   5b-low\n[e2e]   ok   5b-base\n[e2e]   ok   5b-high\n[e2e]   ok   6a\n[e2e]   ok   6b-low\n[e2e]   ok   6b-base\n[e2e]   ok   6b-high\n[e2e]   ok   7a\n[e2e]   ok   7b\n[e2e]   ok   8a\n[e2e]   ok   8b\n[e2e]   ok   8c\n[e2e]   ok   8d\n[e2e]   ok   8e\n[e2e]   ok   8f\n[e2e]   ok   STEPS 4-8: financials / valuation / SOTP / bundle / receipt / report all green\ntest_07_actual_intermediate_valuation_mutation (__main__.Review.test_07_actual_intermediate_valuation_mutation) ... ok\n\n======================================================================\nFAIL: test_05_actual_cli_double_run_and_cleanup (__main__.Review.test_05_actual_cli_double_run_and_cleanup)\n----------------------------------------------------------------------\nTraceback (most recent call last):\n  File \"C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r7-invest-e2e-independent\\test_review.py\", line 133, in test_05_actual_cli_double_run_and_cleanup\n    self.assertEqual(result.returncode, 0, result.stdout + result.stderr)\n    ~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError: 1 != 0 : [e2e]   ok   STEP 1: input forecast is a strong-validated formal artifact (index independent)\n[e2e]   ok   STEP 2: manifest contract valid\n[e2e] owned runs: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r7-invest-e2e-independent\\clean-runs\\invest-e2e-i1pn_m7b\n[e2e-diag] REVENUE_FORECAST_DIR=C:\\Users\\郑曾波\\Projects\\revenue-forecast\n[e2e-diag] REVENUE_FORECAST=C:\\Users\\郑曾波\\Projects\\revenue-forecast exists=True\n[e2e-diag] INVEST_FRAMEWORK=C:\\Users\\郑曾波\\Projects\\invest-skills\\invest-framework exists=True\n[e2e-diag] cwd will be=C:\\Users\\郑曾波\\Projects\\invest-skills\\invest-framework\n[e2e] owned runs removed: True\nERROR: STEP 3 FAILED: orchestrator exited 1: ERROR: [WinError 5] 拒绝访问。: 'C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\tmp\\\\r7-invest-e2e-independent\\\\clean-runs\\\\invest-e2e-i1pn_m7b\\\\.run-1.262e313cf7764a4fa07b7ebe41fb8fff.tmp' -> 'C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\tmp\\\\r7-invest-e2e-independent\\\\clean-runs\\\\invest-e2e-i1pn_m7b\\\\run-1'\n\n\n\n----------------------------------------------------------------------\nRan 7 tests in 10.112s\n\nFAILED (failures=1)\n"
+      },
+      ".planning/architecture-quality-20261101/r7-invest-e2e-independent-cli-rerun.log": {
+        "sha256": "1c0e2e29b571e85886e79528c1d26c11baea1eb5d838628b204ec7ee8cab9a7e",
+        "text": "test_05_actual_cli_double_run_and_cleanup (test_review.Review.test_05_actual_cli_double_run_and_cleanup) ... ok\n\n----------------------------------------------------------------------\nRan 1 test in 5.221s\n\nOK\n"
+      }
+    },
+    "observations": {
+      "economics": {
+        "shared_numeric_leaves": 355,
+        "changed": [],
+        "economic_goldens_equal": 12,
+        "embedded_input_equal": true
+      },
+      "generator": {
+        "exit": 0,
+        "result_equals_frozen": true,
+        "stdout": "{\"schema_version\": \"3.7\", \"engine_version\": \"4.3.0\", \"input_sha256\": \"0e1cc8d4c73de8587a1caf5240a7945451a94fcba3e9ad88b61148b461bbee4d\", \"result_sha256\": \"cb0d03fd47d0bd21fddc7c798f9292a954437f253943bdb7f937f382fde35ede\", \"attestation_status\": \"unattested\", \"output\": \"C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\tmp\\\\r7-invest-e2e-independent\\\\regenerated.json\"}\n",
+        "stderr": ""
+      },
+      "economic_mutation": {
+        "exit": 1,
+        "stdout": "[e2e]   ok   STEP 1: input forecast is a strong-validated formal artifact (index independent)\n[e2e]   ok   STEP 2: manifest contract valid\n[e2e] owned runs: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r7-invest-e2e-independent\\rejected-runs\\invest-e2e-afi1fxaa\n[e2e-diag] REVENUE_FORECAST_DIR=C:\\Users\\郑曾波\\Projects\\revenue-forecast\n[e2e-diag] REVENUE_FORECAST=C:\\Users\\郑曾波\\Projects\\revenue-forecast exists=True\n[e2e-diag] INVEST_FRAMEWORK=C:\\Users\\郑曾波\\Projects\\invest-skills\\invest-framework exists=True\n[e2e-diag] cwd will be=C:\\Users\\郑曾波\\Projects\\invest-skills\\invest-framework\n[e2e]   run 1 ok: bundle=6a377a45228d report=19a02d6d6de0\n[e2e-diag] REVENUE_FORECAST_DIR=C:\\Users\\郑曾波\\Projects\\revenue-forecast\n[e2e-diag] REVENUE_FORECAST=C:\\Users\\郑曾波\\Projects\\revenue-forecast exists=True\n[e2e-diag] INVEST_FRAMEWORK=C:\\Users\\郑曾波\\Projects\\invest-skills\\invest-framework exists=True\n[e2e-diag] cwd will be=C:\\Users\\郑曾波\\Projects\\invest-skills\\invest-framework\n[e2e]   run 2 ok: bundle=6a377a45228d report=19a02d6d6de0\n[e2e]   ok   STEP 9: outputs byte-identical across two runs\n[e2e] owned runs removed: True\n",
+        "stderr": "ERROR: STEP 10 FAILED: economic drift (also blocks --update-golden): sotp_equity[high]: expected 133303088.2722701 got 131983255.71511891\n",
+        "golden_unchanged": true,
+        "cleanup": true
+      },
+      "intermediate_mutation": {
+        "public_validation_rejects": true,
+        "multiplier": 1000
+      }
+    },
+    "cli_rerun_observations": {
+      "cli": {
+        "exit": 0,
+        "stdout": "[e2e]   ok   STEP 1: input forecast is a strong-validated formal artifact (index independent)\n[e2e]   ok   STEP 2: manifest contract valid\n[e2e] owned runs: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r7-invest-e2e-independent\\single-cli-rerun\\clean-runs\\invest-e2e-lcuqmjtc\n[e2e-diag] REVENUE_FORECAST_DIR=C:\\Users\\郑曾波\\Projects\\revenue-forecast\n[e2e-diag] REVENUE_FORECAST=C:\\Users\\郑曾波\\Projects\\revenue-forecast exists=True\n[e2e-diag] INVEST_FRAMEWORK=C:\\Users\\郑曾波\\Projects\\invest-skills\\invest-framework exists=True\n[e2e-diag] cwd will be=C:\\Users\\郑曾波\\Projects\\invest-skills\\invest-framework\n[e2e]   run 1 ok: bundle=6a377a45228d report=19a02d6d6de0\n[e2e-diag] REVENUE_FORECAST_DIR=C:\\Users\\郑曾波\\Projects\\revenue-forecast\n[e2e-diag] REVENUE_FORECAST=C:\\Users\\郑曾波\\Projects\\revenue-forecast exists=True\n[e2e-diag] INVEST_FRAMEWORK=C:\\Users\\郑曾波\\Projects\\invest-skills\\invest-framework exists=True\n[e2e-diag] cwd will be=C:\\Users\\郑曾波\\Projects\\invest-skills\\invest-framework\n[e2e]   run 2 ok: bundle=6a377a45228d report=19a02d6d6de0\n[e2e]   ok   STEP 9: outputs byte-identical across two runs\n[e2e]   ok   3\n[e2e]   ok   4a\n[e2e]   ok   4b-low\n[e2e]   ok   4b-base\n[e2e]   ok   4b-high\n[e2e]   ok   4c\n[e2e]   ok   5a\n[e2e]   ok   5b-low\n[e2e]   ok   5b-base\n[e2e]   ok   5b-high\n[e2e]   ok   6a\n[e2e]   ok   6b-low\n[e2e]   ok   6b-base\n[e2e]   ok   6b-high\n[e2e]   ok   7a\n[e2e]   ok   7b\n[e2e]   ok   8a\n[e2e]   ok   8b\n[e2e]   ok   8c\n[e2e]   ok   8d\n[e2e]   ok   8e\n[e2e]   ok   8f\n[e2e]   ok   STEPS 4-8: financials / valuation / SOTP / bundle / receipt / report all green\n[e2e]   ok   3\n[e2e]   ok   4a\n[e2e]   ok   4b-low\n[e2e]   ok   4b-base\n[e2e]   ok   4b-high\n[e2e]   ok   4c\n[e2e]   ok   5a\n[e2e]   ok   5b-low\n[e2e]   ok   5b-base\n[e2e]   ok   5b-high\n[e2e]   ok   6a\n[e2e]   ok   6b-low\n[e2e]   ok   6b-base\n[e2e]   ok   6b-high\n[e2e]   ok   7a\n[e2e]   ok   7b\n[e2e]   ok   8a\n[e2e]   ok   8b\n[e2e]   ok   8c\n[e2e]   ok   8d\n[e2e]   ok   8e\n[e2e]   ok   8f\n[e2e]   ok   STEPS 4-8: financials / valuation / SOTP / bundle / receipt / report all green\n[e2e]   ok   STEP 10: golden comparison identical\n[e2e] E2E PASS: forecast=0e1cc8d4c73d invest_head=a789cd07bc0126cdb8d401fa2dadfcf4caa8b121\n[e2e] owned runs removed: True\n",
+        "stderr": "",
+        "phases_3_to_8_runs": 2,
+        "owned_children_removed": true,
+        "unrelated_preserved": true
+      }
+    },
+    "test_sources": {
+      "test_review.py": {
+        "sha256": "7d1d2a1f4e5c3679c97b770c3544015afb04a5d20c3106a3600c6f46bb40a9ff",
+        "source": "from __future__ import annotations\n\nimport copy\nimport hashlib\nimport importlib.util\nimport json\nimport os\nfrom pathlib import Path\nimport subprocess\nimport sys\nimport unittest\nfrom unittest.mock import patch\n\nOWN = Path(__file__).resolve().parent\nINV = Path('C:/Users/郑曾波/Projects/invest-skills')\nRF = INV.parent / 'revenue-forecast'\nBASE = 'a789cd07bc0126cdb8d401fa2dadfcf4caa8b121'\nos.environ['PYTHON_DOTENV_DISABLED'] = '1'\nos.environ['REVENUE_FORECAST_DIR'] = str(RF)\nos.environ.pop('REVENUE_ATTESTATION_PROVIDER', None)\nos.environ['REVENUE_PUBLICATION_REGISTRY'] = str(OWN / 'registry')\nfor p in (INV / 'invest-core/scripts', INV / 'invest-framework/scripts', INV / 'e2e', RF / 'scripts'):\n    sys.path.insert(0, str(p))\nimport invest_contracts as contracts\nimport company_orchestrator as company\nimport run_biren_invest_e2e as harness\nfrom offline_cli import install_offline_guard\ninstall_offline_guard()\n\ndef load(name, path):\n    spec = importlib.util.spec_from_file_location(name, path)\n    module = importlib.util.module_from_spec(spec)\n    spec.loader.exec_module(module)\n    return module\n\nquotes = load('_review_claims', INV / 'invest-core/tests/test_claim_excerpt_integrity.py')\nFROZEN = json.loads(harness.DEFAULT_FORECAST.read_text(encoding='utf-8'))\nMANIFEST = json.loads(harness.DEFAULT_MANIFEST.read_text(encoding='utf-8'))\nGOLDEN_PATH = harness.EXPECTED_DIR / 'expected-0e1cc8d4c73d.json'\nGOLDEN = json.loads(GOLDEN_PATH.read_text(encoding='utf-8'))\nOBS = {}\n\ndef git_json(path):\n    result = subprocess.run(['git', '-C', str(INV), 'show', BASE + ':' + path],\n                            capture_output=True, timeout=10, check=True)\n    return json.loads(result.stdout.decode('utf-8'))\n\ndef numbers(value, prefix=()):\n    if type(value) in (int, float):\n        return {prefix: value}\n    if isinstance(value, dict):\n        return {k: v for name, child in value.items() for k, v in numbers(child, prefix + (name,)).items()}\n    if isinstance(value, list):\n        return {k: v for idx, child in enumerate(value) for k, v in numbers(child, prefix + (idx,)).items()}\n    return {}\n\ndef cli(*extra):\n    result = subprocess.run([sys.executable, '-B', '-X', 'utf8',\n                             str(INV / 'e2e/run_biren_invest_e2e.py'), *map(str, extra)],\n                            cwd=OWN, env=dict(os.environ, TEMP=str(OWN), TMP=str(OWN)),\n                            capture_output=True, encoding='utf-8', timeout=40)\n    return result\n\nclass Review(unittest.TestCase):\n    def test_01_frozen_economics_and_canonical_pair(self):\n        old = git_json('e2e/fixtures/biren_forecast.json')\n        before, after = numbers(old), numbers(FROZEN)\n        common = before.keys() & after.keys()\n        changed = [list(k) for k in common if before[k] != after[k]]\n        self.assertEqual(len(common), 355)\n        self.assertEqual(changed, [])\n        self.assertEqual(old['input_document'], FROZEN['input_document'])\n        previous = git_json('e2e/expected/expected-0e1cc8d4c73d.json')\n        for key in harness.ECONOMIC_KEYS:\n            self.assertEqual(previous[key], GOLDEN[key])\n        self.assertEqual(previous['module_counts'], GOLDEN['module_counts'])\n        contracts.validate_revenue_forecast(FROZEN)\n        self.assertEqual(FROZEN['publication_receipt']['attestation_status'], 'unattested')\n        OBS['economics'] = {'shared_numeric_leaves': len(common), 'changed': changed,\n                            'economic_goldens_equal': 12, 'embedded_input_equal': True}\n\n    def test_02_quote_lengths_do_not_waive_integrity(self):\n        for text in ('净', '净收入按原币列示。' * 200):\n            with self.subTest(chars=len(text)):\n                artifact = quotes.make_artifact(text)\n                contracts.validate_artifact(artifact)\n                self.assertEqual(artifact['evidence_claims'][0]['excerpt'], text)\n        for change in ('excerpt_sha256', 'unit', 'source_id'):\n            with self.subTest(damage=change):\n                artifact = quotes.make_artifact('净收入按原币列示。' * 200)\n                claim = artifact['evidence_claims'][0]\n                claim[change] = {'excerpt_sha256': '0'*64, 'unit': 'USD billion', 'source_id': 'absent-source'}[change]\n                with self.assertRaises(contracts.InvestmentArtifactError):\n                    contracts.validate_artifact(artifact)\n\n    def test_03_index_is_not_permission_strong_owner_still_rejects(self):\n        import publication_registry\n        with patch.object(publication_registry, 'register_publication', side_effect=OSError('index unavailable')) as register:\n            reference = contracts.revenue_reference(FROZEN)\n        self.assertEqual(reference['result_sha256'], FROZEN['result_sha256'])\n        register.assert_not_called()\n        for field, value in (('currency', 'JPY'), ('unit', 'billion')):\n            damaged = copy.deepcopy(FROZEN)\n            damaged[field] = value\n            with self.subTest(field=field), self.assertRaises(contracts.InvestmentArtifactError):\n                contracts.revenue_reference(damaged)\n\n    def test_04_generator_really_reemits_from_input(self):\n        target = OWN / 'regenerated.json'\n        result = subprocess.run([sys.executable, '-B', '-X', 'utf8',\n                                 str(INV / 'e2e/generate_biren_fixture.py'), '--output', str(target)],\n                                cwd=OWN, env=dict(os.environ, TEMP=str(OWN), TMP=str(OWN)),\n                                capture_output=True, encoding='utf-8', timeout=30)\n        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)\n        fresh = json.loads(target.read_text(encoding='utf-8'))\n        self.assertEqual(fresh, FROZEN)\n        OBS['generator'] = {'exit': result.returncode, 'result_equals_frozen': True,\n                            'stdout': result.stdout, 'stderr': result.stderr}\n\n    def test_05_actual_cli_double_run_and_cleanup(self):\n        parent = OWN / 'clean-runs'\n        parent.mkdir()\n        sentinel = parent / 'unrelated-owner.txt'\n        sentinel.write_text('leave me', encoding='utf-8')\n        previous = os.environ['REVENUE_PUBLICATION_REGISTRY']\n        unavailable_index = OWN / 'not-a-registry'\n        unavailable_index.write_text('not a directory', encoding='utf-8')\n        os.environ['REVENUE_PUBLICATION_REGISTRY'] = str(unavailable_index)\n        try:\n            result = cli('--runs-dir', parent)\n        finally:\n            os.environ['REVENUE_PUBLICATION_REGISTRY'] = previous\n        self.assertEqual(result.returncode, 0, result.stdout + result.stderr)\n        self.assertEqual(result.stdout.count('STEPS 4-8:'), 2)\n        self.assertIn('STEP 9: outputs byte-identical', result.stdout)\n        self.assertIn('STEP 10: golden comparison identical', result.stdout)\n        self.assertEqual(list(parent.iterdir()), [sentinel])\n        self.assertEqual(sentinel.read_text(encoding='utf-8'), 'leave me')\n        self.assertEqual(unavailable_index.read_text(encoding='utf-8'), 'not a directory')\n        OBS['cli'] = {'exit': result.returncode, 'stdout': result.stdout, 'stderr': result.stderr,\n                      'phases_3_to_8_runs': 2, 'owned_children_removed': True, 'unrelated_preserved': True}\n\n    def test_06_update_golden_does_not_absorb_economics(self):\n        expected = OWN / 'changed-expected'\n        expected.mkdir()\n        changed = copy.deepcopy(GOLDEN)\n        changed['sotp_equity']['high'] *= 1.01\n        target = expected / GOLDEN_PATH.name\n        target.write_text(json.dumps(changed), encoding='utf-8')\n        before = target.read_bytes()\n        parent = OWN / 'rejected-runs'\n        parent.mkdir()\n        result = cli('--runs-dir', parent, '--expected-dir', expected, '--update-golden')\n        self.assertEqual(result.returncode, 1, result.stdout + result.stderr)\n        self.assertIn('economic drift', result.stderr)\n        self.assertEqual(target.read_bytes(), before)\n        self.assertEqual(list(parent.iterdir()), [])\n        OBS['economic_mutation'] = {'exit': result.returncode, 'stdout': result.stdout,\n                                    'stderr': result.stderr, 'golden_unchanged': True, 'cleanup': True}\n\n    def test_07_actual_intermediate_valuation_mutation(self):\n        result = company.run_company(MANIFEST, FROZEN)\n        output = OWN / 'valuation-mutation'\n        company.write_execution(output, result)\n        harness.collect_steps_3_to_8(output, GOLDEN)\n        path = output / 'segment_001_valuation.json'\n        artifact = json.loads(path.read_text(encoding='utf-8'))\n        artifact['data']['scenario_valuations']['high']['methods']['ps']['value_before_adjustments_current'] *= 1000\n        path.write_text(json.dumps(artifact), encoding='utf-8')\n        with self.assertRaisesRegex(AssertionError, 'STEP 3.*public validation'):\n            harness.collect_steps_3_to_8(output, GOLDEN)\n        OBS['intermediate_mutation'] = {'public_validation_rejects': True, 'multiplier': 1000}\n\nif __name__ == '__main__':\n    result = unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromTestCase(Review))\n    (OWN / 'observations.json').write_text(json.dumps(OBS, ensure_ascii=False, indent=2), encoding='utf-8')\n    sys.exit(not result.wasSuccessful())\n"
+      },
+      "rerun_cli.py": {
+        "sha256": "57a2676ce29ca35d69104b743f2eb97d21b697728061e3caf45b5be40f75baf7",
+        "source": "import json\nimport unittest\nimport test_review\n\ntest_review.OWN = test_review.OWN / 'single-cli-rerun'\ntest_review.OWN.mkdir()\nresult = unittest.TextTestRunner(verbosity=2).run(unittest.TestSuite([\n    test_review.Review('test_05_actual_cli_double_run_and_cleanup')\n]))\n(test_review.OWN / 'observations-rerun.json').write_text(\n    json.dumps(test_review.OBS, ensure_ascii=False, indent=2), encoding='utf-8')\nraise SystemExit(not result.wasSuccessful())\n"
+      }
+    }
+  },
+  "verified": [
+    "All 355 common numeric leaves and embedded input_document match the actual pre-change Git blob a789cd07; all 12 economic golden values and module_counts are exactly unchanged.",
+    "The explicit generator invoked canonical run_forecast and strong validation, producing an object exactly equal to the delivered frozen fixture (3.7/4.3.0/unattested). No version relabeling.",
+    "Actual one-character and long UTF-8 quotes pass; excerpt SHA, source reference and unit mutations fail public validation.",
+    "revenue_reference invokes validate_revenue_forecast, which recomputes against embedded input. An unavailable registration function does not deny a valid result; currency/unit corruption still fails.",
+    "The three runtime changes remove only adjacent same-object validation where revenue_reference immediately owns it. The legacy no-reference branch and independent public validate_execution read retain validation.",
+    "Real CLI double-run succeeded in an independently new tree: both executions run checks3-8, step9 proves deterministic output hashes, step10 matches fixed golden.",
+    "The pre-existing registry environment pointed to a non-directory file during the successful CLI; it remained unchanged. Only the invocation-owned temporary child was removed and unrelated sentinel was preserved.",
+    "Actual --update-golden with a changed high SOTP value exits1 with economic drift, leaves the supplied golden byte-identical and removes its own child tree.",
+    "An actual generated intermediate valuation multiplied by1000 fails collect_steps_3_to_8 at canonical public execution validation, while the unmodified execution passes.",
+    "Parent/child offline guards and disabled dotenv/signer paths inspected; no model, provider, download, credentials, original documents, installed skill synchronization, or repository writes."
+  ],
+  "findings": [],
+  "environment_observation": {
+    "status": "UNEXPLAINED_FIRST_ATTEMPT_IO_FAILURE_NOT_A_REPAIRED_DEFECT",
+    "first_result": "Actual CLI attempt1 exited1 because existing unchanged write_execution temporary.rename(output) raised WinError5. Harness emitted a failure and reported its owned tree removed; it did not claim success.",
+    "evidence": ".planning/architecture-quality-20261101/r7-invest-e2e-independent.log",
+    "rerun": "Only that single CLI node was re-executed in a fresh child tree:1P/5.221s. The other actual CLI mutation case already performed two successful same-type writes in the initial run.",
+    "limits": "A rerun does not prove the cause was antivirus or another transient actor and is not a robustness fix. No product change was made to suppress or retry this error. ROOT should retain it as an operational observation; recurrence warrants a separately reproduced IO diagnosis."
+  },
+  "protected": {
+    "rf_four_wip_final_sha256": {
+      "daily_alert.jsonl": "712f9e957990ca0c261cbb91c1d10b0a12606da9d7293e6f2a1581309ce295e9",
+      "monthly_manifest.json": "56d630107429cbcb646a951306dd1ea445dd5b3146236f34d0e8df953c103b9a",
+      "weekly_alert.jsonl": "fc9ec2335b48d42921ca9c14c63363efca3b3096f967733e366f4dd463e4b7ed",
+      "weekly_manifest.json": "e2e57f28fec7477af06029adcf187468701ab0305024993bfb2953bbd43cc5c0"
+    },
+    "matches_author_before_after": true,
+    "biren_manifest_sha256": "a08f694c0280e73d5386e114e2dbc6e37b6126b548f84b8b18bb3bbd994c916f",
+    "rf_hash_capture_note": "Reviewer verified final hashes against the author before/after record; no separate reviewer pre-run capture is claimed.",
+    "historical_e2e_runs": "Not read, enumerated or modified."
+  },
+  "not_performed": [
+    "No repeated author38/19 groups, full145/690 suite, provider or real-company E2E.",
+    "No Linux execution: pathlib/stdlib subprocess branch reviewed; host is Windows.",
+    "No review claim that all investment economics are sensible; this is frozen deterministic regression/integrity coverage."
+  ],
+  "cleanup": {
+    "root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r7-invest-e2e-independent",
+    "initially_absent": true,
+    "status": "REMOVED",
+    "file_count": 20,
+    "bytes": 1121134,
+    "file_manifest": {
+      "cleanup.py": {
+        "bytes": 1853,
+        "sha256": "194767dc6c0346dcaf063009626c9b93fa98afba53cdc0ac03932c75587b86a9"
+      },
+      "not-a-registry": {
+        "bytes": 15,
+        "sha256": "3b2a43e3a5b13459006960eac2534b6a71bf7170ea998dc49b1990f23508a6d6"
+      },
+      "observations.json": {
+        "bytes": 2259,
+        "sha256": "7e65b47ef9669f6d16de89122c1ee4734c4883d6a20003b5ca8c3f6c4a15121d"
+      },
+      "regenerated.json": {
+        "bytes": 174223,
+        "sha256": "b12fdfc5bcfd4bcbc876326c71eb238340aa5d8230ce672f5aa28f1761bf27bb"
+      },
+      "rerun_cli.py": {
+        "bytes": 454,
+        "sha256": "57a2676ce29ca35d69104b743f2eb97d21b697728061e3caf45b5be40f75baf7"
+      },
+      "test_review.py": {
+        "bytes": 9270,
+        "sha256": "7d1d2a1f4e5c3679c97b770c3544015afb04a5d20c3106a3600c6f46bb40a9ff"
+      },
+      "write_report.py": {
+        "bytes": 8943,
+        "sha256": "b3e812e9b11b5bba736c39492c80fb5682a211a220282b53e9cd3ef6a0c13b03"
+      },
+      "changed-expected/expected-0e1cc8d4c73d.json": {
+        "bytes": 1397,
+        "sha256": "b29910f75270380b1926596e083d7596167af1eb99dbfc7d8d86a452620d48a7"
+      },
+      "clean-runs/unrelated-owner.txt": {
+        "bytes": 8,
+        "sha256": "bb8326f33278419d9614a206f42ea39602a3484e7f98427181021a7135257a3f"
+      },
+      "single-cli-rerun/not-a-registry": {
+        "bytes": 15,
+        "sha256": "3b2a43e3a5b13459006960eac2534b6a71bf7170ea998dc49b1990f23508a6d6"
+      },
+      "single-cli-rerun/observations-rerun.json": {
+        "bytes": 2563,
+        "sha256": "047cb93c8ba49fcb31f089356eb3b78c79481e728050b3e7770c562b128bd7b4"
+      },
+      "valuation-mutation/bundle.json": {
+        "bytes": 506017,
+        "sha256": "3cd10be573ddc0c8de0bbc792b88de3994adac0ceb883e29d594bb4ca2de7eff"
+      },
+      "valuation-mutation/manifest.snapshot.json": {
+        "bytes": 23428,
+        "sha256": "430fc9f71503ff65b34811d6cf9a607ea3ac5d839479f351087f22fb9d23e488"
+      },
+      "valuation-mutation/receipt.json": {
+        "bytes": 15782,
+        "sha256": "c01281051e49f28c908f7b0347783fe3cb63e4ccfe11fb8d2d2fa7d8501af199"
+      },
+      "valuation-mutation/report.md": {
+        "bytes": 4317,
+        "sha256": "161ce1890e0dc78610b2bb6905350c2c4b63063c8153eff5c4602943c4cefdf8"
+      },
+      "valuation-mutation/revenue_forecast.snapshot.json": {
+        "bytes": 174223,
+        "sha256": "b12fdfc5bcfd4bcbc876326c71eb238340aa5d8230ce672f5aa28f1761bf27bb"
+      },
+      "valuation-mutation/segment_001_financials.json": {
+        "bytes": 47304,
+        "sha256": "760e1313dc160ecddb7089cc3eb5a280a9a3180919864bd4f206151835e500a8"
+      },
+      "valuation-mutation/segment_001_valuation.json": {
+        "bytes": 49631,
+        "sha256": "b5eb41487199d4ffb9b6762aab538ff1f87c3831dff76fc70a90523dab8aea0c"
+      },
+      "valuation-mutation/sotp.json": {
+        "bytes": 99424,
+        "sha256": "835bd904a8b58f56ab969004926a0283854754306df5bba540e0e20910f5423f"
+      },
+      "single-cli-rerun/clean-runs/unrelated-owner.txt": {
+        "bytes": 8,
+        "sha256": "bb8326f33278419d9614a206f42ea39602a3484e7f98427181021a7135257a3f"
+      }
+    },
+    "method": "Exact resolved owned root, fresh stat no symlinks; shutil.rmtree only this root.",
+    "absent_after": true
+  }
+}

@@ -1,0 +1,300 @@
+{
+  "schema_version": "cwp-r7-ci-followup/1",
+  "status": "FROZEN_AWAITING_ROOT_INDEPENDENT_DELTA_REVIEW",
+  "timestamp_utc": "2026-11-02T10:43:45.397519+00:00",
+  "baseline_commit": "bd911a2bd1125fe46d7c5a0f605fe3b0104f17be",
+  "remote_ci_run": "41428479689",
+  "original_ci_failure_count": 8,
+  "owned_original_failure_count": 7,
+  "excluded_failure": "tests.unit.test_w08_narrative_g2_replay::test_report_may_not_exceed_eight_mib (other owner)",
+  "annotations_sha256": "1fc5c0589bc1b05c5feefd379fa4ac7b4136770f24e5d4131cda548d16480f2c",
+  "original_annotations": [
+    {
+      "path": ".github",
+      "blob_href": "https://github.com/zhengcb81/company-wiki/blob/bd911a2bd1125fe46d7c5a0f605fe3b0104f17be/.github",
+      "start_line": 2,
+      "start_column": null,
+      "end_line": 2,
+      "end_column": null,
+      "annotation_level": "warning",
+      "title": "",
+      "message": "Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-python@v5. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/",
+      "raw_details": ""
+    },
+    {
+      "path": ".github",
+      "blob_href": "https://github.com/zhengcb81/company-wiki/blob/bd911a2bd1125fe46d7c5a0f605fe3b0104f17be/.github",
+      "start_line": 31,
+      "start_column": null,
+      "end_line": 31,
+      "end_column": null,
+      "annotation_level": "failure",
+      "title": "",
+      "message": "tests.unit.test_w08_narrative_g2_replay::test_report_may_not_exceed_eight_mib [AttributeError]",
+      "raw_details": ""
+    },
+    {
+      "path": ".github",
+      "blob_href": "https://github.com/zhengcb81/company-wiki/blob/bd911a2bd1125fe46d7c5a0f605fe3b0104f17be/.github",
+      "start_line": 30,
+      "start_column": null,
+      "end_line": 30,
+      "end_column": null,
+      "annotation_level": "failure",
+      "title": "",
+      "message": "tests.unit.test_narrative_source_guard::test_generation_read_fingerprint_is_not_a_worker_permission [Failed]",
+      "raw_details": ""
+    },
+    {
+      "path": ".github",
+      "blob_href": "https://github.com/zhengcb81/company-wiki/blob/bd911a2bd1125fe46d7c5a0f605fe3b0104f17be/.github",
+      "start_line": 29,
+      "start_column": null,
+      "end_line": 29,
+      "end_column": null,
+      "annotation_level": "failure",
+      "title": "",
+      "message": "tests.unit.test_narrative_post_model_failure_diagnostics::test_each_real_post_model_validation_failure_has_final_hash_rule_and_native_usage[size-RESULT_TOO_LARGE-RESULT_SIZE] [AssertionError]",
+      "raw_details": ""
+    },
+    {
+      "path": ".github",
+      "blob_href": "https://github.com/zhengcb81/company-wiki/blob/bd911a2bd1125fe46d7c5a0f605fe3b0104f17be/.github",
+      "start_line": 28,
+      "start_column": null,
+      "end_line": 28,
+      "end_column": null,
+      "annotation_level": "failure",
+      "title": "",
+      "message": "tests.unit.test_extractive_rank_material::test_all_transmitted_ranks_do_not_hide_the_unprocessed_source_remainder [AssertionError]",
+      "raw_details": ""
+    },
+    {
+      "path": ".github",
+      "blob_href": "https://github.com/zhengcb81/company-wiki/blob/bd911a2bd1125fe46d7c5a0f605fe3b0104f17be/.github",
+      "start_line": 27,
+      "start_column": null,
+      "end_line": 27,
+      "end_column": null,
+      "annotation_level": "failure",
+      "title": "",
+      "message": "tests.unit.test_extractive_rank_material::test_rank_for_an_untransmitted_deferred_task_is_not_an_actual_model_read [unknown_error]",
+      "raw_details": ""
+    },
+    {
+      "path": ".github",
+      "blob_href": "https://github.com/zhengcb81/company-wiki/blob/bd911a2bd1125fe46d7c5a0f605fe3b0104f17be/.github",
+      "start_line": 26,
+      "start_column": null,
+      "end_line": 26,
+      "end_column": null,
+      "annotation_level": "failure",
+      "title": "",
+      "message": "tests.unit.test_extractive_rank_material::test_model_only_receives_cards_that_can_reach_the_canonical_draft [AssertionError]",
+      "raw_details": ""
+    },
+    {
+      "path": ".github",
+      "blob_href": "https://github.com/zhengcb81/company-wiki/blob/bd911a2bd1125fe46d7c5a0f605fe3b0104f17be/.github",
+      "start_line": 25,
+      "start_column": null,
+      "end_line": 25,
+      "end_column": null,
+      "annotation_level": "failure",
+      "title": "",
+      "message": "tests.unit.du11_summary_execution.test_contract::test_report_byte_cap_is_measured_without_dropping_rows [Failed]",
+      "raw_details": ""
+    },
+    {
+      "path": ".github",
+      "blob_href": "https://github.com/zhengcb81/company-wiki/blob/bd911a2bd1125fe46d7c5a0f605fe3b0104f17be/.github",
+      "start_line": 15,
+      "start_column": null,
+      "end_line": 15,
+      "end_column": null,
+      "annotation_level": "failure",
+      "title": "",
+      "message": "tests.unit.du11_source_priority.test_source_priority::test_default_fifty_six_kib_capacity_keeps_late_operating_fact_and_all_task_rows [unknown_error]\nFailure groups (8 failed cases):\ntests.unit.du11_source_priority.test_source_priority::test_default_fifty_six_kib_capacity_keeps_late_operating_fact_and_all_task_rows [unknown_error] x1\ntests.unit.du11_summary_execution.test_contract::test_report_byte_cap_is_measured_without_dropping_rows [Failed] x1\ntests.unit.test_extractive_rank_material::test_model_only_receives_cards_that_can_reach_the_canonical_draft [AssertionError] x1\ntests.unit.test_extractive_rank_material::test_rank_for_an_untransmitted_deferred_task_is_not_an_actual_model_read [unknown_error] x1\ntests.unit.test_extractive_rank_material::test_all_transmitted_ranks_do_not_hide_the_unprocessed_source_remainder [AssertionError] x1\ntests.unit.test_narrative_post_model_failure_diagnostics::test_each_real_post_model_validation_failure_has_final_hash_rule_and_native_usage [AssertionError] x1\ntests.unit.test_narrative_source_guard::test_generation_read_fingerprint_is_not_a_worker_permission [Failed] x1\ntests.unit.test_w08_narrative_g2_replay::test_report_may_not_exceed_eight_mib [AttributeError] x1",
+      "raw_details": ""
+    },
+    {
+      "path": ".github",
+      "blob_href": "https://github.com/zhengcb81/company-wiki/blob/bd911a2bd1125fe46d7c5a0f605fe3b0104f17be/.github",
+      "start_line": 907,
+      "start_column": null,
+      "end_line": 907,
+      "end_column": null,
+      "annotation_level": "failure",
+      "title": "",
+      "message": "Process completed with exit code 1.",
+      "raw_details": ""
+    },
+    {
+      "path": ".github",
+      "blob_href": "https://github.com/zhengcb81/company-wiki/blob/bd911a2bd1125fe46d7c5a0f605fe3b0104f17be/.github",
+      "start_line": 1,
+      "start_column": null,
+      "end_line": 1,
+      "end_column": null,
+      "annotation_level": "notice",
+      "title": "",
+      "message": "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\"",
+      "raw_details": ""
+    }
+  ],
+  "delivery_files_sha256": {
+    "tests/unit/du11_source_priority/test_source_priority.py": "bb982edb3995a99867a2cdc7817b75745a6f78b27da7c0295507e7fe3ca50f45",
+    "tests/unit/du11_summary_execution/test_contract.py": "3bc12750f1a9c038f06898a96564d9064f36a2d096b275f15341f11e84334aee",
+    "tests/unit/test_extractive_rank_material.py": "914470d478b8d6765d3eb245154ebc6b04ae8a9f59f4cc4a701241b1e804be67",
+    "tests/unit/test_narrative_post_model_failure_diagnostics.py": "6c8dd0d686df40e5cf12d6ed033750649a1d4d32ea5cb81cfd7d7f85e1d18bcd",
+    "tests/unit/test_narrative_source_guard.py": "c005eba45e7e6e1b0618e0b9317d000dfc713e4abf7f07288ecca521d299123b"
+  },
+  "production_source_changes": 0,
+  "published_core_source_sha256": {
+    "src/company_wiki/automation/json_tree.py": "38e0b02e1c766841f477bb4028ec921b2bef1bf77cd89a08b296334086a87479",
+    "src/company_wiki/automation/models.py": "3b00ea1a2c4d4ba4e7777fd3cc4e4d6af0f33337a32be7630bc94812ec690d0d",
+    "src/company_wiki/automation/narrative_contracts.py": "d58561ae09f126da24f35e8916a1d1e6dcf5c0ed5b3daebc83745b7c414c0f36",
+    "src/company_wiki/automation/narrative_transport_contracts.py": "2bc39a06fd46b378731434230fefcca40a1b94f2a186c4073f3736e6f2e6f76b",
+    "src/company_wiki/automation/narrative_projection.py": "5df3112779d4fadd7065e15e326bee0dbfda3e63a3112a1f5b9379e695966b0d",
+    "src/company_wiki/automation/narrative_transport.py": "f6eab9d5166f6accebb3b7ca5d593d45a7fbc4612a4bf4302fa76ac7eadb198b",
+    "src/company_wiki/automation/narrative_evidence_view.py": "8650825c5c1b9152ac787663af449db12cfcd1a68174d9195f2490d489090a4e",
+    "src/company_wiki/source_catalog/narrative_transport_cli.py": "f19e92b911a4e44113dd33fa583d3ca5da2a30e14ec992e317cafdfefb22ac23",
+    "src/company_wiki/source_catalog/official_source_flow.py": "05fd9c9c87a887e0de9e9c3b14381c83c26f55bd709c64268cf79450017e56c5",
+    "src/company_wiki/automation/narrative_model_extractive.py": "162a2435468b048dcdb51474da99a9f1199a7282154245ed4e88c43208ecf9f7",
+    "src/company_wiki/automation/narrative_summary_assessment.py": "f1a86e4ff560d7a6029ff7338542b1407e392b745da7f1a4488a95155812dc16",
+    "src/company_wiki/automation/narrative_generation.py": "bc59407fca6d5cc18aabe79225d42e13014994789fc0aa05f5beae1129ee22d8",
+    "src/company_wiki/automation/narrative_batch.py": "68fa49e9a2506de6614e070509b1540f74708d5bbaefa64093a8963cfa5ff9f6",
+    "src/company_wiki/automation/narrative_http_model.py": "79b1f3a7323fe0bbc628ff9726fb006f597c9888bfcb5c4bcd369d216266c7e9",
+    "src/company_wiki/automation/narrative_model.py": "e5def4ded96a55dc5342d670105c32f80ad3e61b54ddc36c19db4ee3322c6369",
+    "src/company_wiki/automation/narrative_source_guard.py": "e76ff4affde5877006b44074c2e55f4f3b3dfe8690777983cc7ec76affa66d7d",
+    "src/company_wiki/automation/narrative_select.py": "989b517f35be715b4d863c33315a707d7484293b2e8c78e3413abd7467c513a6",
+    "src/company_wiki/automation/narrative_verify.py": "e0500a149798b880bcdc883df70fba784da8b64172a39eca9404bcc2e44d6329",
+    "src/company_wiki/automation/narrative_summary_execution.py": "221917810327c20779de9e3120c2f75a28cf189d9f265c2dd3fcfb0fe0c9c0c6",
+    "src/company_wiki/source_catalog/narrative_source_passage.py": "f5e92150ebd43821bde3166ed633f0a73a5a630fd78aaee0e7b5494d178b9041",
+    "src/company_wiki/source_catalog/narrative_reading_admission.py": "382c90f3b63845efe08910e9864b3e06dd3508f7d3de050da431ce1e1f4445ad",
+    "src/company_wiki/source_catalog/narrative_pdf_intent.py": "81efe5a04da865a8fa67cc9b9786e5446fb5317c7973db74da9cf30cdf9c0754",
+    "src/company_wiki/document_understanding/geometry_intent/contracts.py": "277335f890a5a2a8384c7b79324a684da9b44da7da6dc24c0a95d4482c1ee245",
+    "src/company_wiki/document_understanding/geometry_intent/planner.py": "97d52c3e22bbec6b0878525f06a3e5a10ea171033ac79aab5f23c425b6361734",
+    "src/company_wiki/document_understanding/geometry_intent/reading.py": "bd2afb3cd54cbf91378b136b27ff81e9e421b3f4ec2e0f1ecb634544a5fcabc3"
+  },
+  "current_core_source_sha256": {
+    "src/company_wiki/automation/json_tree.py": "38e0b02e1c766841f477bb4028ec921b2bef1bf77cd89a08b296334086a87479",
+    "src/company_wiki/automation/models.py": "3b00ea1a2c4d4ba4e7777fd3cc4e4d6af0f33337a32be7630bc94812ec690d0d",
+    "src/company_wiki/automation/narrative_contracts.py": "d58561ae09f126da24f35e8916a1d1e6dcf5c0ed5b3daebc83745b7c414c0f36",
+    "src/company_wiki/automation/narrative_transport_contracts.py": "2bc39a06fd46b378731434230fefcca40a1b94f2a186c4073f3736e6f2e6f76b",
+    "src/company_wiki/automation/narrative_projection.py": "5df3112779d4fadd7065e15e326bee0dbfda3e63a3112a1f5b9379e695966b0d",
+    "src/company_wiki/automation/narrative_transport.py": "f6eab9d5166f6accebb3b7ca5d593d45a7fbc4612a4bf4302fa76ac7eadb198b",
+    "src/company_wiki/automation/narrative_evidence_view.py": "8650825c5c1b9152ac787663af449db12cfcd1a68174d9195f2490d489090a4e",
+    "src/company_wiki/source_catalog/narrative_transport_cli.py": "f19e92b911a4e44113dd33fa583d3ca5da2a30e14ec992e317cafdfefb22ac23",
+    "src/company_wiki/source_catalog/official_source_flow.py": "05fd9c9c87a887e0de9e9c3b14381c83c26f55bd709c64268cf79450017e56c5",
+    "src/company_wiki/automation/narrative_model_extractive.py": "162a2435468b048dcdb51474da99a9f1199a7282154245ed4e88c43208ecf9f7",
+    "src/company_wiki/automation/narrative_summary_assessment.py": "f1a86e4ff560d7a6029ff7338542b1407e392b745da7f1a4488a95155812dc16",
+    "src/company_wiki/automation/narrative_generation.py": "bc59407fca6d5cc18aabe79225d42e13014994789fc0aa05f5beae1129ee22d8",
+    "src/company_wiki/automation/narrative_batch.py": "68fa49e9a2506de6614e070509b1540f74708d5bbaefa64093a8963cfa5ff9f6",
+    "src/company_wiki/automation/narrative_http_model.py": "79b1f3a7323fe0bbc628ff9726fb006f597c9888bfcb5c4bcd369d216266c7e9",
+    "src/company_wiki/automation/narrative_model.py": "e5def4ded96a55dc5342d670105c32f80ad3e61b54ddc36c19db4ee3322c6369",
+    "src/company_wiki/automation/narrative_source_guard.py": "e76ff4affde5877006b44074c2e55f4f3b3dfe8690777983cc7ec76affa66d7d",
+    "src/company_wiki/automation/narrative_select.py": "989b517f35be715b4d863c33315a707d7484293b2e8c78e3413abd7467c513a6",
+    "src/company_wiki/automation/narrative_verify.py": "e0500a149798b880bcdc883df70fba784da8b64172a39eca9404bcc2e44d6329",
+    "src/company_wiki/automation/narrative_summary_execution.py": "221917810327c20779de9e3120c2f75a28cf189d9f265c2dd3fcfb0fe0c9c0c6",
+    "src/company_wiki/source_catalog/narrative_source_passage.py": "f5e92150ebd43821bde3166ed633f0a73a5a630fd78aaee0e7b5494d178b9041",
+    "src/company_wiki/source_catalog/narrative_reading_admission.py": "382c90f3b63845efe08910e9864b3e06dd3508f7d3de050da431ce1e1f4445ad",
+    "src/company_wiki/source_catalog/narrative_pdf_intent.py": "81efe5a04da865a8fa67cc9b9786e5446fb5317c7973db74da9cf30cdf9c0754",
+    "src/company_wiki/document_understanding/geometry_intent/contracts.py": "277335f890a5a2a8384c7b79324a684da9b44da7da6dc24c0a95d4482c1ee245",
+    "src/company_wiki/document_understanding/geometry_intent/planner.py": "97d52c3e22bbec6b0878525f06a3e5a10ea171033ac79aab5f23c425b6361734",
+    "src/company_wiki/document_understanding/geometry_intent/reading.py": "bd2afb3cd54cbf91378b136b27ff81e9e421b3f4ec2e0f1ecb634544a5fcabc3"
+  },
+  "all25_production_sources_unchanged": true,
+  "test_runs": [
+    {
+      "xml": ".planning/architecture-quality-20261101/r7-cwp-ci-followup-red.xml",
+      "xml_sha256": "0edc7b0d601e40884359334c9a1e791ee44f97977c527f42e179b331d991e9e0",
+      "log": ".planning/architecture-quality-20261101/r7-cwp-ci-followup-red.log",
+      "log_sha256": "22b040bed9db2c21dcf9d6ea3f65289ee98c025641d675475c677569d6c22148",
+      "log_text": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"relocated\": false, \"reason\": \"no-explicit-basetemp\", \"detail\": \"pytest derives its default basetemp from %TEMP%; short by construction\"}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\nconfigfile: pytest.ini\ncollected 7 items\n\ntests\\unit\\du11_source_priority\\test_source_priority.py F                [ 14%]\ntests\\unit\\du11_summary_execution\\test_contract.py F                     [ 28%]\ntests\\unit\\test_extractive_rank_material.py FFF                          [ 71%]\ntests\\unit\\test_narrative_post_model_failure_diagnostics.py F            [ 85%]\ntests\\unit\\test_narrative_source_guard.py F                              [100%]\n\n================================== FAILURES ===================================\n_ test_default_fifty_six_kib_capacity_keeps_late_operating_fact_and_all_task_rows _\ntests\\unit\\du11_source_priority\\test_source_priority.py:176: in test_default_fifty_six_kib_capacity_keeps_late_operating_fact_and_all_task_rows\n    assert len(canonical_json(plan.draft).encode()) <= 56 * 1024\nE   assert 77912 <= (56 * 1024)\nE    +  where 77912 = len(b'{\"claims\":[{\"claim_id\":\"t1-source\",\"claim_type\":\"company_statement\",\"evidence_ids\":[\"urn:company-wiki:evidence-span:...e4944d569\",\"source_sha256\":\"4d8193c55d4e7a77d9342b52362c5ef02c45d6e308fe4426d8beacae4944d569\",\"status\":\"needs_review\"}')\nE    +    where b'{\"claims\":[{\"claim_id\":\"t1-source\",\"claim_type\":\"company_statement\",\"evidence_ids\":[\"urn:company-wiki:evidence-span:...e4944d569\",\"source_sha256\":\"4d8193c55d4e7a77d9342b52362c5ef02c45d6e308fe4426d8beacae4944d569\",\"status\":\"needs_review\"}' = <built-in method encode of str object at 0x0000024C6CA86020>()\nE    +      where <built-in method encode of str object at 0x0000024C6CA86020> = '{\"claims\":[{\"claim_id\":\"t1-source\",\"claim_type\":\"company_statement\",\"evidence_ids\":[\"urn:company-wiki:evidence-span:s...e4944d569\",\"source_sha256\":\"4d8193c55d4e7a77d9342b52362c5ef02c45d6e308fe4426d8beacae4944d569\",\"status\":\"needs_review\"}'.encode\nE    +        where '{\"claims\":[{\"claim_id\":\"t1-source\",\"claim_type\":\"company_statement\",\"evidence_ids\":[\"urn:company-wiki:evidence-span:s...e4944d569\",\"source_sha256\":\"4d8193c55d4e7a77d9342b52362c5ef02c45d6e308fe4426d8beacae4944d569\",\"status\":\"needs_review\"}' = canonical_json({'source_id': 'urn:company-wiki:source:sha256:4d8193c55d4e7a77d9342b52362c5ef02c45d6e308fe4426d8beacae4944d569', 'sour...887ccf348bdb481ac5586f198a4b98991b03ea3d8887eee96b1a5d476a5c1a42'], 'claim_type': 'company_statement', ...}, ...], ...})\nE    +          where {'source_id': 'urn:company-wiki:source:sha256:4d8193c55d4e7a77d9342b52362c5ef02c45d6e308fe4426d8beacae4944d569', 'sour...887ccf348bdb481ac5586f198a4b98991b03ea3d8887eee96b1a5d476a5c1a42'], 'claim_type': 'company_statement', ...}, ...], ...} = ExtractivePlan(draft={'source_id': 'urn:company-wiki:source:sha256:4d8193c55d4e7a77d9342b52362c5ef02c45d6e308fe4426d8b...n:company-wiki:evidence-span:sha256:e3ffe7345fd7fe7ca740fe54de87d9c1c604d1f449d47fcd4fc2f7539f30c4f1'), max_claims=26)).draft\n___________ test_report_byte_cap_is_measured_without_dropping_rows ____________\ntests\\unit\\du11_summary_execution\\test_contract.py:130: in test_report_byte_cap_is_measured_without_dropping_rows\n    with pytest.raises(NarrativeContractError):\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   Failed: DID NOT RAISE NarrativeContractError\n______ test_model_only_receives_cards_that_can_reach_the_canonical_draft ______\ntests\\unit\\test_extractive_rank_material.py:99: in test_model_only_receives_cards_that_can_reach_the_canonical_draft\n    assert 0 < len(admitted) < 96\nE   AssertionError: assert 96 < 96\nE    +  where 96 = len({'t1', 't10', 't11', 't12', 't13', 't14', ...})\n__ test_rank_for_an_untransmitted_deferred_task_is_not_an_actual_model_read ___\ntests\\unit\\test_extractive_rank_material.py:112: in test_rank_for_an_untransmitted_deferred_task_is_not_an_actual_model_read\n    deferred = next(row[\"task\"] for row in plan.execution[\"tasks\"]\nE   StopIteration\n\nThe above exception was the direct cause of the following exception:\nC:\\Miniconda\\Lib\\site-packages\\_pytest\\runner.py:361: in from_call\n    result: TResult | None = func()\n                             ^^^^^^\nC:\\Miniconda\\Lib\\site-packages\\_pytest\\runner.py:250: in <lambda>\n    lambda: runtest_hook(item=item, **kwds),\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nC:\\Miniconda\\Lib\\site-packages\\pluggy\\_hooks.py:513: in __call__\n    return self._hookexec(self.name, self._hookimpls.copy(), kwargs, firstresult)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nC:\\Miniconda\\Lib\\site-packages\\pluggy\\_manager.py:120: in _hookexec\n    return self._inner_hookexec(hook_name, methods, kwargs, firstresult)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nC:\\Miniconda\\Lib\\site-packages\\_pytest\\logging.py:865: in pytest_runtest_call\n    yield\nC:\\Miniconda\\Lib\\site-packages\\_pytest\\capture.py:900: in pytest_runtest_call\n    return (yield)\n            ^^^^^\nE   RuntimeError: generator raised StopIteration\n___ test_all_transmitted_ranks_do_not_hide_the_unprocessed_source_remainder ___\ntests\\unit\\test_extractive_rank_material.py:132: in test_all_transmitted_ranks_do_not_hide_the_unprocessed_source_remainder\n    assert decoded.execution[\"model_diagnostic\"] == \"RANK_INCOMPLETE\"\nE   AssertionError: assert None == 'RANK_INCOMPLETE'\n_ test_each_real_post_model_validation_failure_has_final_hash_rule_and_native_usage[size-RESULT_TOO_LARGE-RESULT_SIZE] _\ntests\\unit\\test_narrative_post_model_failure_diagnostics.py:162: in test_each_real_post_model_validation_failure_has_final_hash_rule_and_native_usage\n    assert_failure(result, body=body, code=code, rule=rule)\ntests\\unit\\test_narrative_post_model_failure_diagnostics.py:115: in assert_failure\n    assert result.outcome is HandlerOutcome.TERMINAL_FAILURE\nE   AssertionError: assert <HandlerOutcome.SUCCEEDED: 'succeeded'> is <HandlerOutcome.TERMINAL_FAILURE: 'terminal_failure'>\nE    +  where <HandlerOutcome.SUCCEEDED: 'succeeded'> = HandlerResult(outcome=<HandlerOutcome.SUCCEEDED: 'succeeded'>, result=mappingproxy({'schema_version': 'narrative-summa...rics=HandlerMetrics(tokens=321, cost_usd=0.002, duration_ms=17, reasoning_tokens=0, usage_diagnostic=None), error=None).outcome\nE    +  and   <HandlerOutcome.TERMINAL_FAILURE: 'terminal_failure'> = HandlerOutcome.TERMINAL_FAILURE\n_________ test_generation_read_fingerprint_is_not_a_worker_permission _________\ntests\\unit\\test_narrative_source_guard.py:84: in test_generation_read_fingerprint_is_not_a_worker_permission\n    with pytest.raises(NarrativeSourceGuardError, match=\"SOURCE_HASH_MISMATCH\"):\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   Failed: DID NOT RAISE NarrativeSourceGuardError\n============================== warnings summary ===============================\n..\\..\\..\\..\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464\n  C:\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode\n  \n    self._warn_or_fail_if_strict(f\"Unknown config option: {key}\\n\")\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\architecture-quality-20261101\\r7-cwp-ci-followup-red.xml -\n=========================== short test summary info ===========================\nFAILED tests/unit/du11_source_priority/test_source_priority.py::test_default_fifty_six_kib_capacity_keeps_late_operating_fact_and_all_task_rows\nFAILED tests/unit/du11_summary_execution/test_contract.py::test_report_byte_cap_is_measured_without_dropping_rows\nFAILED tests/unit/test_extractive_rank_material.py::test_model_only_receives_cards_that_can_reach_the_canonical_draft\nFAILED tests/unit/test_extractive_rank_material.py::test_rank_for_an_untransmitted_deferred_task_is_not_an_actual_model_read\nFAILED tests/unit/test_extractive_rank_material.py::test_all_transmitted_ranks_do_not_hide_the_unprocessed_source_remainder\nFAILED tests/unit/test_narrative_post_model_failure_diagnostics.py::test_each_real_post_model_validation_failure_has_final_hash_rule_and_native_usage[size-RESULT_TOO_LARGE-RESULT_SIZE]\nFAILED tests/unit/test_narrative_source_guard.py::test_generation_read_fingerprint_is_not_a_worker_permission\n======================== 7 failed, 1 warning in 3.05s =========================\n",
+      "tests": 7,
+      "failures": 7,
+      "errors": 0,
+      "seconds": "2.934",
+      "argv": "seven exact original CI failed nodes (see pytest node IDs in log); -q -p no:cacheprovider --junitxml .planning/architecture-quality-20261101/r7-cwp-ci-followup-red.xml",
+      "environment": {
+        "PYTHONPATH": "src;tests",
+        "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1"
+      }
+    },
+    {
+      "xml": ".planning/architecture-quality-20261101/r7-cwp-ci-followup-green.xml",
+      "xml_sha256": "04a711e79a3e23f60c5ce880a33d6261f5fa4b123593f38e2d3032ba57f81f89",
+      "log": ".planning/architecture-quality-20261101/r7-cwp-ci-followup-green.log",
+      "log_sha256": "117bb9238d3eacddb9d271cd1b6637329b2cf69dd30e97006be429af444311de",
+      "log_text": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"relocated\": false, \"reason\": \"no-explicit-basetemp\", \"detail\": \"pytest derives its default basetemp from %TEMP%; short by construction\"}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\nconfigfile: pytest.ini\ncollected 113 items\n\ntests\\unit\\du11_source_priority\\test_source_priority.py ................ [ 14%]\n.......                                                                  [ 20%]\ntests\\unit\\du11_summary_execution\\test_contract.py ..................... [ 38%]\n..................                                                       [ 54%]\ntests\\unit\\test_extractive_rank_material.py ...........                  [ 64%]\ntests\\unit\\test_narrative_post_model_failure_diagnostics.py ............ [ 75%]\n.F..........                                                             [ 85%]\ntests\\unit\\test_narrative_source_guard.py ..........                     [ 94%]\ntests\\unit\\test_verified_source_operation.py ......                      [100%]\n\n================================== FAILURES ===================================\n_ test_large_legal_post_model_result_keeps_complete_claims_identity_and_native_usage _\ntests\\unit\\test_narrative_post_model_failure_diagnostics.py:175: in test_large_legal_post_model_result_keeps_complete_claims_identity_and_native_usage\n    assert summary_result.to_dict()['draft'] == json.loads(body)['draft']\nE   AssertionError: assert {'source_id':...', ...}], ...} == {'claims': [{...944d569', ...}\nE     \nE     Omitting 3 identical items, use -vv to show\nE     Differing items:\nE     {'claims': [{'claim_id': 'claim-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa...an:sha256:bb06fea5780bf35339815b57a1148042f02e3f1dd2081092cb9dc84e3b85d5f8'], 'claim_type': 'company_statement', ...}]} != {'claims': [{'claim_id': 'claim-aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa...aaaaaaaaaaaaaaaaaaaaaaaaaaaaa', 'claim_type': 'company_statement', 'evidence_ids': ['e1'], 'modality': 'actual', ...}]}\nE     {'status': 'needs_review'} != {'status': 'draft'}\nE     Use -v to get more diff\n============================== warnings summary ===============================\n..\\..\\..\\..\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464\n  C:\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode\n  \n    self._warn_or_fail_if_strict(f\"Unknown config option: {key}\\n\")\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\architecture-quality-20261101\\r7-cwp-ci-followup-green.xml -\n=========================== short test summary info ===========================\nFAILED tests/unit/test_narrative_post_model_failure_diagnostics.py::test_large_legal_post_model_result_keeps_complete_claims_identity_and_native_usage\n================== 1 failed, 112 passed, 1 warning in 11.42s ==================\n",
+      "tests": 113,
+      "failures": 1,
+      "errors": 0,
+      "seconds": "11.314",
+      "argv": "C:/Miniconda/python.exe -B -X utf8 -m pytest tests/unit/du11_source_priority/test_source_priority.py tests/unit/du11_summary_execution/test_contract.py tests/unit/test_extractive_rank_material.py tests/unit/test_narrative_post_model_failure_diagnostics.py tests/unit/test_narrative_source_guard.py tests/unit/test_verified_source_operation.py -q -p no:cacheprovider --junitxml .planning/architecture-quality-20261101/r7-cwp-ci-followup-green.xml",
+      "environment": {
+        "PYTHONPATH": "src;tests",
+        "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1"
+      }
+    },
+    {
+      "xml": ".planning/architecture-quality-20261101/r7-cwp-ci-followup-recovery.xml",
+      "xml_sha256": "c93e1fe033963149a5fb1698c4d0404ba5aa32c850de0e31e1f2e7929568150e",
+      "log": ".planning/architecture-quality-20261101/r7-cwp-ci-followup-recovery.log",
+      "log_sha256": "6c81af4ef971f3c94f9fb54e7b4d08cd8039bf6023ea47bd472bef3d8aa8d416",
+      "log_text": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\r7-cwp-followup-source-check\", \"requested_basetemp_len\": 67, \"cwd_len\": 34, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": true, \"reason\": \"resolved-basetemp-exceeds-budget\", \"effective_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\AppData\\\\Local\\\\Temp\\\\cw-pytest-basetemp\\\\20261102-104057-914dc743\", \"effective_basetemp_len\": 75}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\nconfigfile: pytest.ini\ncollected 5 items\n\ntests\\unit\\test_narrative_post_model_failure_diagnostics.py .            [ 20%]\ntests\\contract\\test_source_version_reader.py ....                        [100%]\n\n============================== warnings summary ===============================\n..\\..\\..\\..\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464\n  C:\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode\n  \n    self._warn_or_fail_if_strict(f\"Unknown config option: {key}\\n\")\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\architecture-quality-20261101\\r7-cwp-ci-followup-recovery.xml -\n======================== 5 passed, 1 warning in 5.74s =========================\nCW-BASETEMP-CLEANUP {\"event\": \"cleanup\", \"dir\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\AppData\\\\Local\\\\Temp\\\\cw-pytest-basetemp\\\\20261102-104057-914dc743\", \"existed\": true, \"removed\": false}\n",
+      "tests": 5,
+      "failures": 0,
+      "errors": 0,
+      "seconds": "5.647",
+      "argv": "C:/Miniconda/python.exe -B -X utf8 -m pytest tests/unit/test_narrative_post_model_failure_diagnostics.py::test_large_legal_post_model_result_keeps_complete_claims_identity_and_native_usage tests/contract/test_source_version_reader.py::test_exact_ref_contains_no_location_and_delivers_verified_bytes tests/contract/test_source_version_reader.py::test_filing_reuse_verifies_raw_despite_sparse_capture_metadata -q -p no:cacheprovider --basetemp tmp/r7-cwp-followup-source-check --junitxml .planning/architecture-quality-20261101/r7-cwp-ci-followup-recovery.xml",
+      "environment": {
+        "PYTHONPATH": "src;tests",
+        "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1"
+      }
+    }
+  ],
+  "effective_result": "original7F; affected once112P1new-fixtureF; only corrected new fixture plus real reader neighbor5P; no full113/325/Unit rerun",
+  "new_fixture_erratum": "Large legal response must be compared after existing alias/source-quality normalization. Replaced provider e1/raw draft equality with independent normal baseline canonical draft plus only the long claim_id. No product changes.",
+  "retired_oracles": [
+    "default <=56KiB and mandatory partial allocation",
+    "legal >32KiB execution rejected",
+    "three rank tests obtaining unavailable task solely from implicit default draft quota",
+    "size-only RESULT_SIZE terminal failure",
+    "upper consumer re-hashing manually forged VerifiedContent"
+  ],
+  "preserved_controls": [
+    "explicit56KiB whole-card budget + all task rows + high-priority late card",
+    "unknown scope remains original/untransmitted/unprocessed; cannot rank it",
+    "selected-source-task completion never upgrades source.selection partial or omitted20",
+    "13 genuine post-model JSON/UTF8/number/language/source/citation/closure/path negative controls retain native usage",
+    "five wrong returned source identity/length controls",
+    "actual byte owner rejects corrupted same-length originals",
+    "existing finite source references, complete context/quote/claim binding/strong schema tests unchanged"
+  ],
+  "ruff": {
+    "passed": true,
+    "file_count": 5
+  },
+  "cleanup": {
+    "receipt": {
+      "owned_basetemp": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\cw-pytest-basetemp\\20261102-104057-914dc743",
+      "file_count": 12,
+      "bytes": 1511480.0,
+      "exists_after": false,
+      "reason": "pytest hook cleanup reported false; process exited; exact owned path recovered"
+    },
+    "receipt_sha256": "f4cdcf21efc489e45eccc6fc2d1f5d71504997d5575e72d5b1308883306b7b8a",
+    "reason": "hook reported removed=false, exact owned actual basetemp verified then deleted after child process exited",
+    "source_test_basetemp_absent": true,
+    "postmodel_temp_fixture": "existing autouse asserts original/sentinel unchanged + production config SHA,size,mtime and own TemporaryDirectory removal",
+    "no_unrelated_delete": true
+  },
+  "scope_limits": [
+    "No product runtime source changes",
+    "No real source/company/paid supplier/global install/config/key/Git/index writes",
+    "No complete Unit/325/full CI repeated",
+    "ROOT owns final independent delta review and publication"
+  ]
+}

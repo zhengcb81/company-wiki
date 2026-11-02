@@ -1,0 +1,341 @@
+{
+  "status": "FROZEN_AWAITING_ROOT_INDEPENDENT_REVIEW",
+  "timestamp_utc": "2026-11-02T12:15:53.110953+00:00",
+  "delivery_files_sha256": {
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\.githooks\\pre-push": "3469df137008b98b2f1f07ad2538c07e34d78ddee872da14daa1ce5b4dff2b30",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\tools\\pre_push_gate.py": "a5dfaafd6b87e03e22be6eb4efcc7edd3efeda2f16952c63a49859a109f88604",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\tools\\ci_tests.py": "ffce41518a98332b9299adbd4e7eee2cc017b11de165491e1756e6d3cbb0cc89",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\tests\\test_ci_tests.py": "5e1ef5697c51e5d10f78210f266f1f13c67c161bc62b888217cc0c04d5b38c0b",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\tests\\test_architecture_quality.py": "669764b98e8c6c371fc71832be2957aaa8194f4e4a4edd0a65a43cb8fdb23f43"
+  },
+  "baseline_files_sha256": {
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\.githooks\\pre-push": "d5623a4574f72e3de27c11fd23f17e89f3cc729af643e56b00a4912b5d2e2e41",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\tools\\pre_push_gate.py": "ee2b2e163b725109d2ee406ea8cd287c223e7793f86ed90490715e5f0a9282c9",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\tools\\ci_tests.py": "33b98e113d17243597d3d9b1375963104c0fa499ccfd3c239db2f2887a2b1e66",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\tests\\test_ci_tests.py": "ba8d6cad6a53e5ed6731b7d35027bd267ae893033f3a166c1c046788b9d4fcfa",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\tests\\test_architecture_quality.py": "08fdae282faa47f8147dd9ad3204c2afc0dfc4b895100d82f7c17910aefe8586"
+  },
+  "production_runtime18_before_sha256": {
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\et_v2_contract.py": "50bc9db60ac0ab16dcc0cb63f67f557857bf04c47dc19c5777e22028eb4f1d00",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\fetch_filing.py": "93f00ad38777c41b6cec24f9d98b640a1d907c1fa2cc51d0ab1379ea502688e8",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\fetch_statements.py": "4cd7a2409959a762588de262a9979a6c8c2a64db45ff128468f778f6fa947128",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_configuration.py": "869b3fbf5c9d519b05fde4835f85edfd6ed85cb8c3b1a490e31c80856763c715",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_financial_statements.py": "3334cac4b6bf3f49d3979f5e1834d8c4ff35f522938dd0f91ef13c1c6508fed4",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_local_preparation_observation.py": "2338c544bb86542bc3c36148e205ba53454406109e206e4a29311ff0f35198dd",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_local_source_prepare.py": "34193905be4503303a636e2c025075da8b4a29cb8cffcb759aaec5c87163daee",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_process_transport.py": "a95321ded274556981dc18f494513e344cd3679d7ae75e9bb5eab754c440c43a",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_process_tree.py": "4ff6acbb5d838e593e90d62c1d35d7c9ecdae35b3916d1d041bd7ed077bc504f",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_provider_cause.py": "84e2de504b1c2c03774beb3cc4e548d4b8a26b8532a6464dd38f50f3569fbeeb",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_source_candidate.py": "2f9293f1243ecc55bd88ec18a3c6499a58913041444f6ca3d256980d847a93b0",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_source_failure.py": "25b2efa46932ba887aa0ebbfd6e5b994bb3307a90962888343473c16996e4de5",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_source_ref.py": "d82e2bd49b022ac5ac7acf16604470ad7fede82b58937e7c621dc630380cf3ea",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_v2_envelope.py": "a4a5e3e5946d23e7c0fa3e22158d29a9b0b5ae41d539cf60ba06ff393469e67f",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\filing_contracts.py": "033248d7f6bb72801428fc886aa5a32b2357de88e1179c892b237ac2eee65659",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\transcript_companion.py": "7e3f28a5928270850af308b9d20f4187cbaa985f1e0a5b4dffb83c3a1c0084be",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\transcript_reuse_selection.py": "66600ac99f48f43fc4ca332a71edd5ce6a2671173f4a4da97f99f3f724b41269",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\transcript_tool_transport.py": "8fd24051d403665599a3fa2f3be3f16cb997e504d84e23ae40409b8fb96c9855"
+  },
+  "production_runtime18_unchanged": true,
+  "rf_four_wip_before_sha256": {
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\daily_alert.jsonl": "712f9e957990ca0c261cbb91c1d10b0a12606da9d7293e6f2a1581309ce295e9",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_alert.jsonl": "fc9ec2335b48d42921ca9c14c63363efca3b3096f967733e366f4dd463e4b7ed",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_manifest.json": "e2e57f28fec7477af06029adcf187468701ab0305024993bfb2953bbd43cc5c0",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\monthly_manifest.json": "56d630107429cbcb646a951306dd1ea445dd5b3146236f34d0e8df953c103b9a"
+  },
+  "rf_four_wip_unchanged": true,
+  "unchanged_ci_inventory": {
+    "count": 40,
+    "items": [
+      "tests/test_architecture_quality.py",
+      "tests/test_m3_acquisition_usage_ff.py",
+      "tests/test_m3_acquisition_usage_acceptance.py",
+      "tests/test_failure_usage_continuity.py",
+      "tests/test_s3_single_request_limits.py",
+      "tests/test_single_intent_acquisition.py",
+      "tests/test_s3_install_surface.py",
+      "tests/test_selective_installation.py",
+      "tests/test_install_runtime_diagnostics.py",
+      "e2e/test_source_ref_v2_cli.py",
+      "tests/test_ff_v2_contract.py",
+      "tests/test_provider_cause_contract.py",
+      "tests/test_r1_source_business_failure.py",
+      "tests/test_acquisition_failure_consumer.py",
+      "tests/test_ff_golden.py",
+      "tests/test_source_ref_v2.py",
+      "tests/test_source_ref_v2_db_query.py",
+      "tests/test_local_source_prepare.py",
+      "tests/test_local_preparation_observation.py",
+      "tests/test_transcript_companion.py",
+      "tests/test_transcript_companion_transport.py",
+      "tests/test_transcript_launch_contract.py",
+      "tests/test_transcript_response_budget.py",
+      "tests/test_du11_transcript_reuse_selection.py",
+      "tests/test_du11_transcript_reuse_contract.py",
+      "tests/test_du11_verified_reader_revalidation.py",
+      "tests/test_fetch_filing.py",
+      "tests/test_fc802_gap_orchestration.py",
+      "tests/test_fc1204_coverage_gap.py",
+      "tests/test_p5_process_lifecycle.py",
+      "tests/test_p5_legacy_request_limits.py",
+      "tests/test_complexity_diagnostics.py",
+      "tests/test_verify_plan_claims.py",
+      "tests/test_latest_mode.py",
+      "tests/test_dropbox_config_invariants.py",
+      "tests/test_bundle_compat.py",
+      "tests/e2e_support/test_spy_log.py",
+      "tests/test_ci_tests.py",
+      "tests/test_w07_matrix_efficiency.py",
+      "tests/test_root_w07_matrix_boundaries.py"
+    ],
+    "identical_to_HEAD": true,
+    "tuple_sha256": "3d0975db30fa2a8703f1e25a976045832cc9a72ab3bf33c6001bcb2e3573a8af"
+  },
+  "design": {
+    "daily_hook": "--push-checks -> onceRuff -> once11fixedexistingpureunitnodes",
+    "not_repeated": [
+      "commitmypy",
+      "compileall",
+      "hostassumption scan",
+      "three-repodoctor",
+      "planverifier",
+      "BOM",
+      "install drift/sync",
+      "full40CI"
+    ],
+    "shared_owner": "ci_tests.py isolateschildGit+UTF8+ownedtemp and actualsubprocess exit/timeout forbothfullCI/local modes",
+    "full_ci": "same40table/siblingconfiguredruntimecheck/900s; explicitprepush --ci-tests and --run-tests retainalloriginalchecks",
+    "local": "11explicitnodes in existing40files,180sactualdeadline, no sibling/config resolution; local_fast_pass only",
+    "source_policy": "no authority JSON/newpermissionflags/materialapprovals; --push-checks is executionmode only",
+    "config_oracle_migration": "two former64KiB refusal/readargtests -> full largeconfig usable andunchanged; illegalUTF8beyondoldboundarystillfails; JSONvalueafter70kpaddingmustfullyread; actualroot/UTF8 errorspreserved"
+  },
+  "test_runs": [
+    {
+      "evidence": "red.xml",
+      "tests": 8,
+      "failures": 8,
+      "errors": 0,
+      "xml_seconds": 0.786,
+      "cases": [
+        {
+          "classname": "tests.test_ci_tests",
+          "name": "test_daily_gate_only_runs_ruff_and_fixed_smoke",
+          "time": "0.004"
+        },
+        {
+          "classname": "tests.test_ci_tests",
+          "name": "test_daily_gate_propagates_real_failed_phase_once[7-0-7]",
+          "time": "0.003"
+        },
+        {
+          "classname": "tests.test_ci_tests",
+          "name": "test_daily_gate_propagates_real_failed_phase_once[0-9-9]",
+          "time": "0.003"
+        },
+        {
+          "classname": "tests.test_ci_tests",
+          "name": "test_local_smoke_has_fixed_nodes_no_runtime_config_or_parent_git",
+          "time": "0.007"
+        },
+        {
+          "classname": "tests.test_ci_tests",
+          "name": "test_real_local_smoke_failure_keeps_node_exit_and_cleans_scratch",
+          "time": "0.008"
+        },
+        {
+          "classname": "tests.test_ci_tests",
+          "name": "test_local_smoke_timeout_cleans_scratch_without_hiding_failure",
+          "time": "0.003"
+        },
+        {
+          "classname": "tests.test_architecture_quality",
+          "name": "test_oversized_valid_config_is_rejected_before_root_use",
+          "time": "0.035"
+        },
+        {
+          "classname": "tests.test_architecture_quality",
+          "name": "test_config_is_bounded_while_reading_not_after_full_read",
+          "time": "0.005"
+        }
+      ]
+    },
+    {
+      "evidence": "green.xml",
+      "tests": 22,
+      "failures": 0,
+      "errors": 0,
+      "xml_seconds": 2.047,
+      "cases": [
+        {
+          "classname": "tests.test_ci_tests",
+          "name": "test_hook_uses_fixed_local_smoke_and_ci_retains_complete_inventory",
+          "time": "0.023"
+        },
+        {
+          "classname": "tests.test_ci_tests",
+          "name": "test_shared_ci_table_covers_pure_local_reuse_and_current_reader_regressions",
+          "time": "0.003"
+        },
+        {
+          "classname": "tests.test_ci_tests",
+          "name": "test_failure_keeps_full_node_output_exit_code_and_cleans_scratch",
+          "time": "0.013"
+        },
+        {
+          "classname": "tests.test_ci_tests",
+          "name": "test_real_pytest_failure_reports_node_and_restores_owned_temp",
+          "time": "0.743"
+        },
+        {
+          "classname": "tests.test_ci_tests",
+          "name": "test_timeout_also_cleans_owned_scratch",
+          "time": "0.013"
+        },
+        {
+          "classname": "tests.test_ci_tests",
+          "name": "test_local_gate_runs_shared_ci_tests_once_and_propagates_failure",
+          "time": "0.006"
+        },
+        {
+          "classname": "tests.test_ci_tests",
+          "name": "test_runner_resolves_absent_ci_override_with_public_config_loader",
+          "time": "0.024"
+        },
+        {
+          "classname": "tests.test_ci_tests",
+          "name": "test_explicit_ci_runtime_keeps_priority_over_owner_config",
+          "time": "0.010"
+        },
+        {
+          "classname": "tests.test_ci_tests",
+          "name": "test_missing_configured_runtime_is_failure_before_pytest",
+          "time": "0.021"
+        },
+        {
+          "classname": "tests.test_ci_tests",
+          "name": "test_v2_e2e_uses_public_loader_without_an_opt_in_environment",
+          "time": "0.013"
+        },
+        {
+          "classname": "tests.test_ci_tests",
+          "name": "test_daily_gate_only_runs_ruff_and_fixed_smoke",
+          "time": "0.006"
+        },
+        {
+          "classname": "tests.test_ci_tests",
+          "name": "test_daily_gate_propagates_real_failed_phase_once[7-0-7]",
+          "time": "0.006"
+        },
+        {
+          "classname": "tests.test_ci_tests",
+          "name": "test_daily_gate_propagates_real_failed_phase_once[0-9-9]",
+          "time": "0.006"
+        },
+        {
+          "classname": "tests.test_ci_tests",
+          "name": "test_local_smoke_has_fixed_nodes_no_runtime_config_or_parent_git",
+          "time": "0.009"
+        },
+        {
+          "classname": "tests.test_ci_tests",
+          "name": "test_real_local_smoke_failure_keeps_node_exit_and_cleans_scratch",
+          "time": "0.717"
+        },
+        {
+          "classname": "tests.test_ci_tests",
+          "name": "test_local_smoke_timeout_cleans_scratch_without_hiding_failure",
+          "time": "0.006"
+        },
+        {
+          "classname": "tests.test_architecture_quality",
+          "name": "test_large_valid_config_is_read_completely_before_root_use",
+          "time": "0.088"
+        },
+        {
+          "classname": "tests.test_architecture_quality",
+          "name": "test_complete_config_tail_is_not_rejected_by_an_implicit_read_limit",
+          "time": "0.006"
+        },
+        {
+          "classname": "tests.test_architecture_quality",
+          "name": "test_invalid_utf8_config_is_a_named_error",
+          "time": "0.005"
+        },
+        {
+          "classname": "tests.test_architecture_quality",
+          "name": "test_invalid_physical_root_is_a_named_config_error",
+          "time": "0.014"
+        },
+        {
+          "classname": "tests.test_architecture_quality",
+          "name": "test_root_resolution_failure_is_consistently_a_config_error[OSError]",
+          "time": "0.003"
+        },
+        {
+          "classname": "tests.test_architecture_quality",
+          "name": "test_root_resolution_failure_is_consistently_a_config_error[ValueError]",
+          "time": "0.003"
+        }
+      ]
+    }
+  ],
+  "actual_daily_cli": {
+    "returncode": 0,
+    "elapsed_seconds": 1.0187098,
+    "cli": "tools/pre_push_gate.py --push-checks",
+    "external_model_calls": 0
+  },
+  "actual_daily_result": "11P0.29s,exit0,onceRuff+onesmoke",
+  "comparison": "Old actualpush116.55s including933tests; new measuredCLI elapsed in actual_daily_cli; no fabricated guarantee allfuturemachines same duration",
+  "ruff": {
+    "initial": "2 E701/E702 formatting issues only in new tests, corrected",
+    "final": "fourchangedPythonfiles All checks passed",
+    "fullscope_actual_daily": "PASS"
+  },
+  "evidence": {
+    "red.xml": {
+      "sha256": "ebb2a2f8644d8f13d6e9be924b8bb88e77cc4fc8f887d07f1d763bfe6c116a1d",
+      "bytes": 5897,
+      "text": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"8\" skipped=\"0\" tests=\"8\" time=\"0.786\" timestamp=\"2026-11-02T12:09:15.949763+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tests.test_ci_tests\" name=\"test_daily_gate_only_runs_ruff_and_fixed_smoke\" time=\"0.004\"><failure message=\"SystemExit: 2\">tests\\test_ci_tests.py:250: in test_daily_gate_only_runs_ruff_and_fixed_smoke\r\n    assert gate.main([\"--push-checks\"]) == 0\r\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\ntools\\pre_push_gate.py:187: in main\r\n    args = parser.parse_args(argv)\r\n           ^^^^^^^^^^^^^^^^^^^^^^^\r\nC:\\Miniconda\\Lib\\argparse.py:1902: in parse_args\r\n    self.error(msg)\r\nC:\\Miniconda\\Lib\\argparse.py:2658: in error\r\n    self.exit(2, _('%(prog)s: error: %(message)s\\n') % args)\r\nC:\\Miniconda\\Lib\\argparse.py:2645: in exit\r\n    _sys.exit(status)\r\nE   SystemExit: 2</failure></testcase><testcase classname=\"tests.test_ci_tests\" name=\"test_daily_gate_propagates_real_failed_phase_once[7-0-7]\" time=\"0.003\"><failure message=\"SystemExit: 2\">tests\\test_ci_tests.py:263: in test_daily_gate_propagates_real_failed_phase_once\r\n    assert gate.main([\"--push-checks\"]) == expected\r\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\ntools\\pre_push_gate.py:187: in main\r\n    args = parser.parse_args(argv)\r\n           ^^^^^^^^^^^^^^^^^^^^^^^\r\nC:\\Miniconda\\Lib\\argparse.py:1902: in parse_args\r\n    self.error(msg)\r\nC:\\Miniconda\\Lib\\argparse.py:2658: in error\r\n    self.exit(2, _('%(prog)s: error: %(message)s\\n') % args)\r\nC:\\Miniconda\\Lib\\argparse.py:2645: in exit\r\n    _sys.exit(status)\r\nE   SystemExit: 2</failure></testcase><testcase classname=\"tests.test_ci_tests\" name=\"test_daily_gate_propagates_real_failed_phase_once[0-9-9]\" time=\"0.003\"><failure message=\"SystemExit: 2\">tests\\test_ci_tests.py:263: in test_daily_gate_propagates_real_failed_phase_once\r\n    assert gate.main([\"--push-checks\"]) == expected\r\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\ntools\\pre_push_gate.py:187: in main\r\n    args = parser.parse_args(argv)\r\n           ^^^^^^^^^^^^^^^^^^^^^^^\r\nC:\\Miniconda\\Lib\\argparse.py:1902: in parse_args\r\n    self.error(msg)\r\nC:\\Miniconda\\Lib\\argparse.py:2658: in error\r\n    self.exit(2, _('%(prog)s: error: %(message)s\\n') % args)\r\nC:\\Miniconda\\Lib\\argparse.py:2645: in exit\r\n    _sys.exit(status)\r\nE   SystemExit: 2</failure></testcase><testcase classname=\"tests.test_ci_tests\" name=\"test_local_smoke_has_fixed_nodes_no_runtime_config_or_parent_git\" time=\"0.007\"><failure message=\"AttributeError: module 'ff_local_smoke_schedule' has no attribute 'LOCAL_SMOKE_TESTS'\">tests\\test_ci_tests.py:269: in test_local_smoke_has_fixed_nodes_no_runtime_config_or_parent_git\r\n    assert 0 &lt; len(runner.LOCAL_SMOKE_TESTS) &lt;= 12\r\n                   ^^^^^^^^^^^^^^^^^^^^^^^^\r\nE   AttributeError: module 'ff_local_smoke_schedule' has no attribute 'LOCAL_SMOKE_TESTS'</failure></testcase><testcase classname=\"tests.test_ci_tests\" name=\"test_real_local_smoke_failure_keeps_node_exit_and_cleans_scratch\" time=\"0.008\"><failure message=\"AttributeError: &lt;module 'ff_local_smoke_failure' from 'C:\\\\Users\\\\郑曾波\\\\Projects\\\\filing-fetch\\\\tools\\\\ci_tests.py'&gt; has no attribute 'LOCAL_SMOKE_TESTS'\">tests\\test_ci_tests.py:296: in test_real_local_smoke_failure_keeps_node_exit_and_cleans_scratch\r\n    monkeypatch.setattr(runner,\"LOCAL_SMOKE_TESTS\",(\"test_local_red.py::test_actual_local_failure\",))\r\nE   AttributeError: &lt;module 'ff_local_smoke_failure' from 'C:\\\\Users\\\\郑曾波\\\\Projects\\\\filing-fetch\\\\tools\\\\ci_tests.py'&gt; has no attribute 'LOCAL_SMOKE_TESTS'</failure></testcase><testcase classname=\"tests.test_ci_tests\" name=\"test_local_smoke_timeout_cleans_scratch_without_hiding_failure\" time=\"0.003\"><failure message=\"AttributeError: module 'ff_local_smoke_timeout' has no attribute 'run_local_smoke'\">tests\\test_ci_tests.py:313: in test_local_smoke_timeout_cleans_scratch_without_hiding_failure\r\n    with pytest.raises(subprocess.TimeoutExpired):runner.run_local_smoke()\r\n                                                  ^^^^^^^^^^^^^^^^^^^^^^\r\nE   AttributeError: module 'ff_local_smoke_timeout' has no attribute 'run_local_smoke'</failure></testcase><testcase classname=\"tests.test_architecture_quality\" name=\"test_oversized_valid_config_is_rejected_before_root_use\" time=\"0.035\"><failure message=\"Failed: DID NOT RAISE FilingFetchError\">tests\\test_architecture_quality.py:150: in test_oversized_valid_config_is_rejected_before_root_use\r\n    with pytest.raises(FilingFetchError) as caught:\r\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\nE   Failed: DID NOT RAISE FilingFetchError</failure></testcase><testcase classname=\"tests.test_architecture_quality\" name=\"test_config_is_bounded_while_reading_not_after_full_read\" time=\"0.005\"><failure message=\"AssertionError: configuration read must have an actual byte bound&#10;assert 0 &lt; -1\">tests\\test_architecture_quality.py:179: in test_config_is_bounded_while_reading_not_after_full_read\r\n    assert fetch_filing.load_company_wiki_root(config_path=config) == root\r\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\nscripts\\fetch_filing.py:118: in load_company_wiki_root\r\n    return load_connection_root(config_path or DEFAULT_COMPANY_WIKI_CONFIG, skill_root=SKILL_ROOT)\r\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\nscripts\\ff_configuration.py:100: in load_connection_root\r\n    payload = read_json_object(config_path)\r\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\nscripts\\ff_configuration.py:28: in read_json_object\r\n    raw = stream.read()\r\n          ^^^^^^^^^^^^^\r\ntests\\test_architecture_quality.py:170: in read\r\n    assert 0 &lt; size &lt;= 65537, \"configuration read must have an actual byte bound\"\r\nE   AssertionError: configuration read must have an actual byte bound\r\nE   assert 0 &lt; -1</failure></testcase></testsuite></testsuites>"
+    },
+    "red.log": {
+      "sha256": "58b141b8d5ecbeecaf2c11416b736822140cab9de27ad21b3894a722088a61bb",
+      "bytes": 6233,
+      "text": "FFFFFFFF                                                                 [100%]\r\n================================== FAILURES ===================================\r\n_______________ test_daily_gate_only_runs_ruff_and_fixed_smoke ________________\r\ntests\\test_ci_tests.py:250: in test_daily_gate_only_runs_ruff_and_fixed_smoke\r\n    assert gate.main([\"--push-checks\"]) == 0\r\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\ntools\\pre_push_gate.py:187: in main\r\n    args = parser.parse_args(argv)\r\n           ^^^^^^^^^^^^^^^^^^^^^^^\r\nC:\\Miniconda\\Lib\\argparse.py:1902: in parse_args\r\n    self.error(msg)\r\nC:\\Miniconda\\Lib\\argparse.py:2658: in error\r\n    self.exit(2, _('%(prog)s: error: %(message)s\\n') % args)\r\nC:\\Miniconda\\Lib\\argparse.py:2645: in exit\r\n    _sys.exit(status)\r\nE   SystemExit: 2\r\n---------------------------- Captured stderr call -----------------------------\r\nusage: __main__.py [-h] [--run-tests | --ci-tests] [--skip-mypy]\r\n                   [--skip-install-sync]\r\n__main__.py: error: unrecognized arguments: --push-checks\r\n__________ test_daily_gate_propagates_real_failed_phase_once[7-0-7] ___________\r\ntests\\test_ci_tests.py:263: in test_daily_gate_propagates_real_failed_phase_once\r\n    assert gate.main([\"--push-checks\"]) == expected\r\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\ntools\\pre_push_gate.py:187: in main\r\n    args = parser.parse_args(argv)\r\n           ^^^^^^^^^^^^^^^^^^^^^^^\r\nC:\\Miniconda\\Lib\\argparse.py:1902: in parse_args\r\n    self.error(msg)\r\nC:\\Miniconda\\Lib\\argparse.py:2658: in error\r\n    self.exit(2, _('%(prog)s: error: %(message)s\\n') % args)\r\nC:\\Miniconda\\Lib\\argparse.py:2645: in exit\r\n    _sys.exit(status)\r\nE   SystemExit: 2\r\n---------------------------- Captured stderr call -----------------------------\r\nusage: __main__.py [-h] [--run-tests | --ci-tests] [--skip-mypy]\r\n                   [--skip-install-sync]\r\n__main__.py: error: unrecognized arguments: --push-checks\r\n__________ test_daily_gate_propagates_real_failed_phase_once[0-9-9] ___________\r\ntests\\test_ci_tests.py:263: in test_daily_gate_propagates_real_failed_phase_once\r\n    assert gate.main([\"--push-checks\"]) == expected\r\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\ntools\\pre_push_gate.py:187: in main\r\n    args = parser.parse_args(argv)\r\n           ^^^^^^^^^^^^^^^^^^^^^^^\r\nC:\\Miniconda\\Lib\\argparse.py:1902: in parse_args\r\n    self.error(msg)\r\nC:\\Miniconda\\Lib\\argparse.py:2658: in error\r\n    self.exit(2, _('%(prog)s: error: %(message)s\\n') % args)\r\nC:\\Miniconda\\Lib\\argparse.py:2645: in exit\r\n    _sys.exit(status)\r\nE   SystemExit: 2\r\n---------------------------- Captured stderr call -----------------------------\r\nusage: __main__.py [-h] [--run-tests | --ci-tests] [--skip-mypy]\r\n                   [--skip-install-sync]\r\n__main__.py: error: unrecognized arguments: --push-checks\r\n______ test_local_smoke_has_fixed_nodes_no_runtime_config_or_parent_git _______\r\ntests\\test_ci_tests.py:269: in test_local_smoke_has_fixed_nodes_no_runtime_config_or_parent_git\r\n    assert 0 < len(runner.LOCAL_SMOKE_TESTS) <= 12\r\n                   ^^^^^^^^^^^^^^^^^^^^^^^^\r\nE   AttributeError: module 'ff_local_smoke_schedule' has no attribute 'LOCAL_SMOKE_TESTS'\r\n______ test_real_local_smoke_failure_keeps_node_exit_and_cleans_scratch _______\r\ntests\\test_ci_tests.py:296: in test_real_local_smoke_failure_keeps_node_exit_and_cleans_scratch\r\n    monkeypatch.setattr(runner,\"LOCAL_SMOKE_TESTS\",(\"test_local_red.py::test_actual_local_failure\",))\r\nE   AttributeError: <module 'ff_local_smoke_failure' from 'C:\\\\Users\\\\郑曾波\\\\Projects\\\\filing-fetch\\\\tools\\\\ci_tests.py'> has no attribute 'LOCAL_SMOKE_TESTS'\r\n_______ test_local_smoke_timeout_cleans_scratch_without_hiding_failure ________\r\ntests\\test_ci_tests.py:313: in test_local_smoke_timeout_cleans_scratch_without_hiding_failure\r\n    with pytest.raises(subprocess.TimeoutExpired):runner.run_local_smoke()\r\n                                                  ^^^^^^^^^^^^^^^^^^^^^^\r\nE   AttributeError: module 'ff_local_smoke_timeout' has no attribute 'run_local_smoke'\r\n___________ test_oversized_valid_config_is_rejected_before_root_use ___________\r\ntests\\test_architecture_quality.py:150: in test_oversized_valid_config_is_rejected_before_root_use\r\n    with pytest.raises(FilingFetchError) as caught:\r\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\nE   Failed: DID NOT RAISE FilingFetchError\r\n__________ test_config_is_bounded_while_reading_not_after_full_read ___________\r\ntests\\test_architecture_quality.py:179: in test_config_is_bounded_while_reading_not_after_full_read\r\n    assert fetch_filing.load_company_wiki_root(config_path=config) == root\r\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\nscripts\\fetch_filing.py:118: in load_company_wiki_root\r\n    return load_connection_root(config_path or DEFAULT_COMPANY_WIKI_CONFIG, skill_root=SKILL_ROOT)\r\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\nscripts\\ff_configuration.py:100: in load_connection_root\r\n    payload = read_json_object(config_path)\r\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\nscripts\\ff_configuration.py:28: in read_json_object\r\n    raw = stream.read()\r\n          ^^^^^^^^^^^^^\r\ntests\\test_architecture_quality.py:170: in read\r\n    assert 0 < size <= 65537, \"configuration read must have an actual byte bound\"\r\nE   AssertionError: configuration read must have an actual byte bound\r\nE   assert 0 < -1\r\n=========================== short test summary info ===========================\r\nFAILED tests/test_ci_tests.py::test_daily_gate_only_runs_ruff_and_fixed_smoke\r\nFAILED tests/test_ci_tests.py::test_daily_gate_propagates_real_failed_phase_once[7-0-7]\r\nFAILED tests/test_ci_tests.py::test_daily_gate_propagates_real_failed_phase_once[0-9-9]\r\nFAILED tests/test_ci_tests.py::test_local_smoke_has_fixed_nodes_no_runtime_config_or_parent_git\r\nFAILED tests/test_ci_tests.py::test_real_local_smoke_failure_keeps_node_exit_and_cleans_scratch\r\nFAILED tests/test_ci_tests.py::test_local_smoke_timeout_cleans_scratch_without_hiding_failure\r\nFAILED tests/test_architecture_quality.py::test_oversized_valid_config_is_rejected_before_root_use\r\nFAILED tests/test_architecture_quality.py::test_config_is_bounded_while_reading_not_after_full_read\r\n8 failed in 0.86s\r\n"
+    },
+    "green.xml": {
+      "sha256": "96385494104ff36e4255e5c7f245bf4a635bc999b84673d4ac325c238bb436b6",
+      "bytes": 3063,
+      "text": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"0\" skipped=\"0\" tests=\"22\" time=\"2.047\" timestamp=\"2026-11-02T12:12:13.886000+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tests.test_ci_tests\" name=\"test_hook_uses_fixed_local_smoke_and_ci_retains_complete_inventory\" time=\"0.023\" /><testcase classname=\"tests.test_ci_tests\" name=\"test_shared_ci_table_covers_pure_local_reuse_and_current_reader_regressions\" time=\"0.003\" /><testcase classname=\"tests.test_ci_tests\" name=\"test_failure_keeps_full_node_output_exit_code_and_cleans_scratch\" time=\"0.013\" /><testcase classname=\"tests.test_ci_tests\" name=\"test_real_pytest_failure_reports_node_and_restores_owned_temp\" time=\"0.743\" /><testcase classname=\"tests.test_ci_tests\" name=\"test_timeout_also_cleans_owned_scratch\" time=\"0.013\" /><testcase classname=\"tests.test_ci_tests\" name=\"test_local_gate_runs_shared_ci_tests_once_and_propagates_failure\" time=\"0.006\" /><testcase classname=\"tests.test_ci_tests\" name=\"test_runner_resolves_absent_ci_override_with_public_config_loader\" time=\"0.024\" /><testcase classname=\"tests.test_ci_tests\" name=\"test_explicit_ci_runtime_keeps_priority_over_owner_config\" time=\"0.010\" /><testcase classname=\"tests.test_ci_tests\" name=\"test_missing_configured_runtime_is_failure_before_pytest\" time=\"0.021\" /><testcase classname=\"tests.test_ci_tests\" name=\"test_v2_e2e_uses_public_loader_without_an_opt_in_environment\" time=\"0.013\" /><testcase classname=\"tests.test_ci_tests\" name=\"test_daily_gate_only_runs_ruff_and_fixed_smoke\" time=\"0.006\" /><testcase classname=\"tests.test_ci_tests\" name=\"test_daily_gate_propagates_real_failed_phase_once[7-0-7]\" time=\"0.006\" /><testcase classname=\"tests.test_ci_tests\" name=\"test_daily_gate_propagates_real_failed_phase_once[0-9-9]\" time=\"0.006\" /><testcase classname=\"tests.test_ci_tests\" name=\"test_local_smoke_has_fixed_nodes_no_runtime_config_or_parent_git\" time=\"0.009\" /><testcase classname=\"tests.test_ci_tests\" name=\"test_real_local_smoke_failure_keeps_node_exit_and_cleans_scratch\" time=\"0.717\" /><testcase classname=\"tests.test_ci_tests\" name=\"test_local_smoke_timeout_cleans_scratch_without_hiding_failure\" time=\"0.006\" /><testcase classname=\"tests.test_architecture_quality\" name=\"test_large_valid_config_is_read_completely_before_root_use\" time=\"0.088\" /><testcase classname=\"tests.test_architecture_quality\" name=\"test_complete_config_tail_is_not_rejected_by_an_implicit_read_limit\" time=\"0.006\" /><testcase classname=\"tests.test_architecture_quality\" name=\"test_invalid_utf8_config_is_a_named_error\" time=\"0.005\" /><testcase classname=\"tests.test_architecture_quality\" name=\"test_invalid_physical_root_is_a_named_config_error\" time=\"0.014\" /><testcase classname=\"tests.test_architecture_quality\" name=\"test_root_resolution_failure_is_consistently_a_config_error[OSError]\" time=\"0.003\" /><testcase classname=\"tests.test_architecture_quality\" name=\"test_root_resolution_failure_is_consistently_a_config_error[ValueError]\" time=\"0.003\" /></testsuite></testsuites>"
+    },
+    "green.log": {
+      "sha256": "34c7e7e84eec002459fc6c22789d9ef48297a5f39be82e5fceaa5478fa2d6a3a",
+      "bytes": 101,
+      "text": "......................                                                   [100%]\r\n22 passed in 2.11s\r\n"
+    },
+    "actual-daily.log": {
+      "sha256": "d81b5c7dba2c581163b8e903cb947a978f963645579aa797cf6094b86cafd98e",
+      "bytes": 204,
+      "text": "\r\n=== daily Ruff ===\r\nok\r\n...........                                                              [100%]\r\n11 passed in 0.29s\r\nlocal_fast_pass: fixed smoke GREEN; complete CI validation remains pending.\r\n"
+    },
+    "actual-daily.json": {
+      "sha256": "6483a8fd16b3f31adcb6ff142b33cc904cfaeff6f9eda6848c1c0ef05cc7f072",
+      "bytes": 116,
+      "text": "{\"returncode\":0,\"elapsed_seconds\":1.0187098,\"cli\":\"tools/pre_push_gate.py --push-checks\",\"external_model_calls\":0}\r\n"
+    }
+  },
+  "cleanup": {
+    "owned_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\ffg-8a971c",
+    "initial": "absent",
+    "final": "absent",
+    "no_production_config_or_originals_or_installed_skills_written": true,
+    "reparse_points": 0,
+    "file_count": 42,
+    "bytes": 238335
+  },
+  "scope_limits": [
+    "No gitcommit/push/mainPWFbythisagent",
+    "No40file/fullCI re-run;ROOTpublishesnormalandexactCI",
+    "No source/data/LLMproviders downloads orfees; actualsmoke usespureexistingnodes",
+    "Authorfreeze is not independentPASS;ROOT will arrangeotherreviewer"
+  ]
+}

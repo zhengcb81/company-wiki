@@ -1,0 +1,145 @@
+{
+  "status": "PASS",
+  "reviewer": "/root/rectify_readability",
+  "scope": "Independent review of FF5 daily-feedback engineering delta; no file edits in filing-fetch, no Git writes, no runtime/material/config/credential/API operation.",
+  "author_report_sha256": "9902691a4af8f673e940abfa7609ec883e2212a2d25be171435e472da966aa3d",
+  "delivery_files_sha256": {
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\.githooks\\pre-push": "3469df137008b98b2f1f07ad2538c07e34d78ddee872da14daa1ce5b4dff2b30",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\tools\\pre_push_gate.py": "a5dfaafd6b87e03e22be6eb4efcc7edd3efeda2f16952c63a49859a109f88604",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\tools\\ci_tests.py": "ffce41518a98332b9299adbd4e7eee2cc017b11de165491e1756e6d3cbb0cc89",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\tests\\test_ci_tests.py": "5e1ef5697c51e5d10f78210f266f1f13c67c161bc62b888217cc0c04d5b38c0b",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\tests\\test_architecture_quality.py": "669764b98e8c6c371fc71832be2957aaa8194f4e4a4edd0a65a43cb8fdb23f43"
+  },
+  "before_after": "Five delivered files matched author SHA before and after probes.",
+  "independent_tests": {
+    "passed": 8,
+    "failed": 0,
+    "seconds": 0.977,
+    "command": "C:/Miniconda/python.exe -B -X utf8 tmp/r7-ff-daily-independent/test_review.py",
+    "log": ".planning/architecture-quality-20261101/r7-ff-daily-independent.log",
+    "log_sha256": "aba7666a19a646da0d6ed28c8d03f1c9bb63fdfaf1773448747532403fdceb72",
+    "log_text": "test_01_full_inventory_matches_real_committed_baseline (__main__.Review.test_01_full_inventory_matches_real_committed_baseline) ... ok\ntest_02_daily_is_once_even_with_legacy_skip_flags (__main__.Review.test_02_daily_is_once_even_with_legacy_skip_flags) ... ok\nlocal_fast_pass: fixed smoke GREEN; complete CI validation remains pending.\ntest_03_daily_errors_and_timeout_are_not_success (__main__.Review.test_03_daily_errors_and_timeout_are_not_success) ... ok\ntest_04_shared_execution_isolates_git_and_preserves_complete_failure (__main__.Review.test_04_shared_execution_isolates_git_and_preserves_complete_failure) ... ok\ntest_05_actual_collection_error_returns_nonzero_and_cleans (__main__.Review.test_05_actual_collection_error_returns_nonzero_and_cleans) ... ERROR: found no collectors for C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r7-ff-daily-independent\\collection\\test_broken.py::test_absent\n\nok\ntest_06_timeout_cleans_before_propagation (__main__.Review.test_06_timeout_cleans_before_propagation) ... ok\ntest_07_full_ci_dispatch_keeps_inventory_and_runtime_resolution (__main__.Review.test_07_full_ci_dispatch_keeps_inventory_and_runtime_resolution) ... ok\ntest_08_real_configured_hook_executes_daily_once_and_propagates (__main__.Review.test_08_real_configured_hook_executes_daily_once_and_propagates) ... ok\n\n----------------------------------------------------------------------\nRan 8 tests in 0.977s\n\nOK\n",
+    "test_source": "from __future__ import annotations\n\nimport ast\nimport contextlib\nimport importlib.util\nimport io\nimport json\nimport os\nfrom pathlib import Path\nimport shutil\nimport subprocess\nimport sys\nimport unittest\nfrom unittest.mock import patch\n\nOWN = Path(__file__).resolve().parent\nFF = Path('C:/Users/郑曾波/Projects/filing-fetch')\nos.environ['PYTEST_DISABLE_PLUGIN_AUTOLOAD'] = '1'\nos.environ['PYTHON_DOTENV_DISABLED'] = '1'\nsys.path.insert(0, str(FF / 'tools'))\nimport ci_tests as runner\nimport pre_push_gate as gate\n\nOBS = {}\n\ndef tuple_in(source, name):\n    for node in ast.parse(source).body:\n        if isinstance(node, ast.Assign) and any(isinstance(t, ast.Name) and t.id == name for t in node.targets):\n            return ast.literal_eval(node.value)\n    raise AssertionError('missing inventory')\n\nclass Review(unittest.TestCase):\n    def test_01_full_inventory_matches_real_committed_baseline(self):\n        process = subprocess.run(['git', '-C', str(FF), 'show', '622a6a48:tools/ci_tests.py'],\n                                 capture_output=True, check=True, timeout=10)\n        baseline = tuple_in(process.stdout.decode('utf-8'), 'CI_TESTS')\n        self.assertEqual(runner.CI_TESTS, baseline)\n        self.assertEqual(len(baseline), 40)\n        self.assertEqual(len(runner.LOCAL_SMOKE_TESTS), 11)\n        for node in runner.LOCAL_SMOKE_TESTS:\n            path, function = node.split('::')\n            self.assertIn(path, baseline)\n            tree = ast.parse((FF / path).read_text(encoding='utf-8'))\n            names = [n.name for n in ast.walk(tree) if isinstance(n, (ast.FunctionDef, ast.AsyncFunctionDef))]\n            self.assertEqual(names.count(function), 1)\n        OBS['inventory'] = {'ci_count': 40, 'matches_actual_commit': '622a6a48', 'fixed_existing_unique_nodes': 11}\n\n    def test_02_daily_is_once_even_with_legacy_skip_flags(self):\n        with patch.object(gate, '_run', return_value=0) as phase, \\\n             patch.object(runner, 'run_local_smoke', return_value=0) as smoke, \\\n             patch.object(runner, 'run_tests', side_effect=AssertionError('full CI on daily')), \\\n             patch.object(gate, '_config_doctor_gate', side_effect=AssertionError('doctor on daily')), \\\n             patch.object(gate, '_install_check', side_effect=AssertionError('install on daily')):\n            self.assertEqual(gate.main(['--push-checks', '--skip-mypy', '--skip-install-sync']), 0)\n        phase.assert_called_once()\n        self.assertEqual(phase.call_args.args[0][1:], ['-m', 'ruff', 'check', 'scripts', 'tests', 'tools', 'e2e'])\n        smoke.assert_called_once_with()\n\n    def test_03_daily_errors_and_timeout_are_not_success(self):\n        for error, expected in ((OSError('synthetic'), 1), (subprocess.TimeoutExpired('smoke', 180), 124)):\n            with self.subTest(type=type(error).__name__), \\\n                 patch.object(gate, '_run', return_value=0) as phase, \\\n                 patch.object(runner, 'run_local_smoke', side_effect=error) as smoke, \\\n                 contextlib.redirect_stdout(io.StringIO()) as output:\n                self.assertEqual(gate.main(['--push-checks']), expected)\n                self.assertNotIn('local_fast_pass', output.getvalue())\n                self.assertIn('FAILED:', output.getvalue())\n                phase.assert_called_once()\n                smoke.assert_called_once()\n        with patch.object(gate, '_run', return_value=37), patch.object(runner, 'run_local_smoke') as smoke:\n            self.assertEqual(gate.main(['--push-checks']), 37)\n            smoke.assert_not_called()\n\n    def test_04_shared_execution_isolates_git_and_preserves_complete_failure(self):\n        paths = []\n        def fail(command, **kwargs):\n            path = Path(command[command.index('--basetemp') + 1])\n            self.assertTrue(path.is_dir())\n            paths.append(path)\n            (path / 'own.txt').write_text('partial', encoding='utf-8')\n            self.assertEqual(kwargs['timeout'], 180)\n            self.assertEqual(command[4:15], list(runner.LOCAL_SMOKE_TESTS))\n            self.assertFalse(any(k in kwargs['env'] for k in runner.GIT_REPOSITORY_CONTEXT))\n            self.assertEqual(kwargs['env']['GIT_CONFIG_PARAMETERS'], 'kept-non-repository-setting')\n            return subprocess.CompletedProcess(command, 29, 'FIRST-NODE\\n' + '正文' * 4000 + '\\nLAST-NODE\\n', 'ERR-TAIL\\n')\n        environment = {k: 'wrong-parent-repo' for k in runner.GIT_REPOSITORY_CONTEXT}\n        environment['GIT_CONFIG_PARAMETERS'] = 'kept-non-repository-setting'\n        with patch.dict(os.environ, environment), patch.object(runner.subprocess, 'run', side_effect=fail) as child, \\\n             patch.object(runner, '_wiki_source_directory', side_effect=AssertionError('daily loads wiki')), \\\n             patch.object(runner.tempfile, 'tempdir', str(OWN)), \\\n             contextlib.redirect_stdout(io.StringIO()) as out, contextlib.redirect_stderr(io.StringIO()) as err:\n            self.assertEqual(runner.run_local_smoke(), 29)\n        child.assert_called_once()\n        self.assertIn('FIRST-NODE', out.getvalue())\n        self.assertIn('LAST-NODE', out.getvalue())\n        self.assertIn('ERR-TAIL', err.getvalue())\n        self.assertTrue(paths and all(not p.exists() for p in paths))\n\n    def test_05_actual_collection_error_returns_nonzero_and_cleans(self):\n        fixture = OWN / 'collection'\n        fixture.mkdir()\n        (fixture / 'test_broken.py').write_text(\"raise RuntimeError('independent-collection-error')\\n\", encoding='utf-8')\n        before = sorted(p.name for p in OWN.iterdir())\n        with patch.object(runner, 'PROJECT_ROOT', fixture), \\\n             patch.object(runner, 'LOCAL_SMOKE_TESTS', ('test_broken.py::test_absent',)), \\\n             patch.object(runner.tempfile, 'tempdir', str(OWN)), \\\n             contextlib.redirect_stdout(io.StringIO()) as out:\n            code = runner.run_local_smoke()\n        self.assertEqual(code, 4)\n        self.assertIn('independent-collection-error', out.getvalue())\n        self.assertEqual(sorted(p.name for p in OWN.iterdir()), before)\n        OBS['actual_pytest_error'] = {'exit': code, 'full_output': out.getvalue(), 'owned_temp_removed': True}\n\n    def test_06_timeout_cleans_before_propagation(self):\n        paths = []\n        def timeout(command, **kwargs):\n            p = Path(command[command.index('--basetemp') + 1])\n            paths.append(p)\n            (p / 'pending.txt').write_text('not complete', encoding='utf-8')\n            raise subprocess.TimeoutExpired(command, kwargs['timeout'])\n        with patch.object(runner.subprocess, 'run', side_effect=timeout), patch.object(runner.tempfile, 'tempdir', str(OWN)):\n            with self.assertRaises(subprocess.TimeoutExpired):\n                runner.run_local_smoke()\n        self.assertTrue(paths and all(not p.exists() for p in paths))\n\n    def test_07_full_ci_dispatch_keeps_inventory_and_runtime_resolution(self):\n        with patch.object(runner, '_run_tests', return_value=23) as execute:\n            self.assertEqual(runner.run_tests(), 23)\n        execute.assert_called_once_with(runner.CI_TESTS, scratch_prefix='ff-ci-', timeout_seconds=900, resolve_wiki=True)\n        source = (FF / '.github/workflows/quality.yml').read_text(encoding='utf-8')\n        self.assertIn('python tools/ci_tests.py', source)\n        self.assertNotIn('run_local_smoke', source)\n\n    def test_08_real_configured_hook_executes_daily_once_and_propagates(self):\n        config = subprocess.run(['git', '-C', str(FF), 'config', '--get', 'core.hooksPath'],\n                                capture_output=True, text=True, timeout=10, check=True)\n        self.assertEqual(config.stdout.strip(), '.githooks')\n        shell = Path('C:/Program Files/Git/bin/sh.exe')\n        self.assertTrue(shell.is_file())\n        shim = OWN / 'hook-bin'\n        shim.mkdir()\n        (shim / 'python').write_text('#!/bin/sh\\nprintf \"%s\\\\n\" \"$@\" > \"$FF_REVIEW_ARGS\"\\nexit 23\\n', encoding='utf-8')\n        argfile = OWN / 'hook-args.txt'\n        environment = dict(os.environ, PATH=str(shim) + os.pathsep + os.environ['PATH'], FF_REVIEW_ARGS=str(argfile))\n        process = subprocess.run([str(shell), str(FF / '.githooks/pre-push')], cwd=FF,\n                                 env=environment, capture_output=True, encoding='utf-8', timeout=10)\n        self.assertEqual(process.returncode, 23, process.stdout + process.stderr)\n        arguments = argfile.read_text(encoding='utf-8').splitlines()\n        self.assertEqual(len(arguments), 2)\n        self.assertTrue(arguments[0].replace('\\\\', '/').endswith('/tools/pre_push_gate.py'))\n        self.assertEqual(arguments[1], '--push-checks')\n        self.assertIn('PUSH BLOCKED', process.stderr)\n        OBS['actual_hook'] = {'core.hooksPath': '.githooks', 'exit': process.returncode,\n                              'arguments': arguments, 'stdout': process.stdout, 'stderr': process.stderr}\n\nif __name__ == '__main__':\n    result = unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromTestCase(Review))\n    (OWN / 'observations.json').write_text(json.dumps(OBS, ensure_ascii=False, indent=2), encoding='utf-8')\n    raise SystemExit(not result.wasSuccessful())\n",
+    "test_source_sha256": "1cef98e7c7a849a83eeb045d04535e220ab8318fc52d9b5955b760c791c77436",
+    "observations": {
+      "inventory": {
+        "ci_count": 40,
+        "matches_actual_commit": "622a6a48",
+        "fixed_existing_unique_nodes": 11
+      },
+      "actual_pytest_error": {
+        "exit": 4,
+        "full_output": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\r7-ff-daily-independent\\\\ff-local-ag33v386\", \"requested_basetemp_len\": 80, \"cwd_len\": 73, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": true, \"reason\": \"resolved-basetemp-exceeds-budget\", \"effective_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\AppData\\\\Local\\\\Temp\\\\cw-pytest-basetemp\\\\20261102-121954-b9c76649\", \"effective_basetemp_len\": 75}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\nconfigfile: pytest.ini\ncollected 0 items / 1 error\n\n=================================== ERRORS ====================================\n___ ERROR collecting tmp/r7-ff-daily-independent/collection/test_broken.py ____\ntest_broken.py:1: in <module>\n    raise RuntimeError('independent-collection-error')\nE   RuntimeError: independent-collection-error\n============================== warnings summary ===============================\n..\\..\\..\\..\\..\\..\\..\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464\n  C:\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode\n  \n    self._warn_or_fail_if_strict(f\"Unknown config option: {key}\\n\")\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n========================= 1 warning, 1 error in 0.13s =========================\nCW-BASETEMP-CLEANUP {\"event\": \"cleanup\", \"dir\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\AppData\\\\Local\\\\Temp\\\\cw-pytest-basetemp\\\\20261102-121954-b9c76649\", \"existed\": true, \"removed\": true}\n",
+        "owned_temp_removed": true
+      },
+      "actual_hook": {
+        "core.hooksPath": ".githooks",
+        "exit": 23,
+        "arguments": [
+          "/c/Users/郑曾波/Projects/filing-fetch/tools/pre_push_gate.py",
+          "--push-checks"
+        ],
+        "stdout": "",
+        "stderr": "\nPUSH BLOCKED by pre-push gate (CI root-fix protocol). Fix the root cause; do not bypass.\n"
+      }
+    }
+  },
+  "verified": [
+    {
+      "area": "unchanged CI",
+      "result": "AST tuple matches actual committed622a6a48:tools/ci_tests.py exactly, same ordered40 files; workflow still calls python tools/ci_tests.py; full run_tests resolves runtime,900s and all40 unchanged."
+    },
+    {
+      "area": "daily bounded dispatch",
+      "result": "All11 fixed node IDs resolve to exactly one existing function in a CI file. Daily invokes one Ruff and one smoke only, including with legacy skip flags. No doctor, installed sync or full-CI call can run in that path."
+    },
+    {
+      "area": "failures",
+      "result": "Ruff37 propagates without running smoke. Smoke OSError=>1 and TimeoutExpired=>124, once only, no local_fast_pass. Real synthetic pytest collection failure returns4 with underlying RuntimeError in full output; it is not changed to pass."
+    },
+    {
+      "area": "isolation and complete output",
+      "result": "All declared repository Git variables removed, unrelated GIT_CONFIG_PARAMETERS retained, UTF8 configured. Full first/last failed-node output beyond old console-tail length retained by pytest owner. Owned scratch removed for failure/timeout."
+    },
+    {
+      "area": "actual Git hook",
+      "result": "Normal-host git config core.hooksPath reports.githooks. Actual hook file executed through Git-for-Windows sh with a fresh recording python shim: exactly two args (canonical pre_push_gate.py and --push-checks), return23 preserved and PUSH BLOCKED printed. No git push/network happened."
+    },
+    {
+      "area": "config oracle migration",
+      "result": "Only retired64KiB permit/read-size mirroring expectations replaced: valid complete config parsed beyond old boundary and bytes unchanged; invalidUTF8 after that boundary still rejects; real root/encoding negative controls retained. No production config reader change in this delivery."
+    },
+    {
+      "area": "public runtime",
+      "result": "All18 production script byte hashes match author protected baseline; four RF assurance WIP final hashes also match author record. This review only captured those protected hashes at final verification, not a separate pre-run snapshot."
+    }
+  ],
+  "findings": [],
+  "limits": [
+    "No author22 or old933/full40 suite repeated.",
+    "No real push or remote CI run by reviewer; ROOT owns publication and exact CI follow-up.",
+    "Hook executed on Windows sh; POSIX execution was not independently run.",
+    "Daily local_fast_pass is intentionally not complete CI acceptance; output says complete CI pending."
+  ],
+  "protected_runtime18_final_sha256": {
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\et_v2_contract.py": "50bc9db60ac0ab16dcc0cb63f67f557857bf04c47dc19c5777e22028eb4f1d00",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\fetch_filing.py": "93f00ad38777c41b6cec24f9d98b640a1d907c1fa2cc51d0ab1379ea502688e8",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\fetch_statements.py": "4cd7a2409959a762588de262a9979a6c8c2a64db45ff128468f778f6fa947128",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_configuration.py": "869b3fbf5c9d519b05fde4835f85edfd6ed85cb8c3b1a490e31c80856763c715",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_financial_statements.py": "3334cac4b6bf3f49d3979f5e1834d8c4ff35f522938dd0f91ef13c1c6508fed4",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_local_preparation_observation.py": "2338c544bb86542bc3c36148e205ba53454406109e206e4a29311ff0f35198dd",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_local_source_prepare.py": "34193905be4503303a636e2c025075da8b4a29cb8cffcb759aaec5c87163daee",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_process_transport.py": "a95321ded274556981dc18f494513e344cd3679d7ae75e9bb5eab754c440c43a",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_process_tree.py": "4ff6acbb5d838e593e90d62c1d35d7c9ecdae35b3916d1d041bd7ed077bc504f",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_provider_cause.py": "84e2de504b1c2c03774beb3cc4e548d4b8a26b8532a6464dd38f50f3569fbeeb",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_source_candidate.py": "2f9293f1243ecc55bd88ec18a3c6499a58913041444f6ca3d256980d847a93b0",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_source_failure.py": "25b2efa46932ba887aa0ebbfd6e5b994bb3307a90962888343473c16996e4de5",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_source_ref.py": "d82e2bd49b022ac5ac7acf16604470ad7fede82b58937e7c621dc630380cf3ea",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_v2_envelope.py": "a4a5e3e5946d23e7c0fa3e22158d29a9b0b5ae41d539cf60ba06ff393469e67f",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\filing_contracts.py": "033248d7f6bb72801428fc886aa5a32b2357de88e1179c892b237ac2eee65659",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\transcript_companion.py": "7e3f28a5928270850af308b9d20f4187cbaa985f1e0a5b4dffb83c3a1c0084be",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\transcript_reuse_selection.py": "66600ac99f48f43fc4ca332a71edd5ce6a2671173f4a4da97f99f3f724b41269",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\transcript_tool_transport.py": "8fd24051d403665599a3fa2f3be3f16cb997e504d84e23ae40409b8fb96c9855"
+  },
+  "protected_rf_four_wip_final_sha256": {
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\daily_alert.jsonl": "712f9e957990ca0c261cbb91c1d10b0a12606da9d7293e6f2a1581309ce295e9",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_alert.jsonl": "fc9ec2335b48d42921ca9c14c63363efca3b3096f967733e366f4dd463e4b7ed",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_manifest.json": "e2e57f28fec7477af06029adcf187468701ab0305024993bfb2953bbd43cc5c0",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\monthly_manifest.json": "56d630107429cbcb646a951306dd1ea445dd5b3146236f34d0e8df953c103b9a"
+  },
+  "cleanup": {
+    "root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r7-ff-daily-independent",
+    "initially_absent": true,
+    "status": "REMOVED",
+    "file_count": 6,
+    "bytes": 19752,
+    "file_manifest": {
+      "finalize.py": {
+        "bytes": 7937,
+        "sha256": "306947ab432b09fa3afdd2a3a840bbbfb5239c2110f2317a7ee8c5a82bbad14d"
+      },
+      "hook-args.txt": {
+        "bytes": 78,
+        "sha256": "fa3aae78c810acf5f0d168bb7e45c76c78afa9cfd9fb5c76933bf8eb47261697"
+      },
+      "observations.json": {
+        "bytes": 2435,
+        "sha256": "ebbdd945ae8082821e90955a01efceeb0ec482ec733ac211b2ee7d49595684c1"
+      },
+      "test_review.py": {
+        "bytes": 9190,
+        "sha256": "1cef98e7c7a849a83eeb045d04535e220ab8318fc52d9b5955b760c791c77436"
+      },
+      "collection/test_broken.py": {
+        "bytes": 52,
+        "sha256": "f54deb697dc0dd1ced3df4040b7998615b62e0adbc785b9f542ac7f59ebe7f43"
+      },
+      "hook-bin/python": {
+        "bytes": 60,
+        "sha256": "7f43d67b063250a27068d6af2740d248509e573183fa2d23ff6ae8c75ddc3e81"
+      }
+    },
+    "method": "Fresh stat, no symlinks, exact resolved own root only.",
+    "absent_after": true
+  }
+}

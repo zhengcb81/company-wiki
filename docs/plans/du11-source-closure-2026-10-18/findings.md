@@ -63,3 +63,15 @@ R4四审73检查/6P2、ghost-formula与signed期间补集、独立需求/竞争/
 ## R7核心/工具阶段与下游联调（2026-11-02）
 
 G1/G2取消多层表示硬门、坏自动cache降诊断；额外HTTP后置128KB和extractive缺省56KB也确认非实际配置预算并去掉。核心14新P/HTTP2P、55控制54P1F后owned encoder1P修复，不拼325全绿；325受影响组sandbox停85%后290s主动停止、5fixture E后host精确3P，历史保留。工具新16F→16P，一次211域208P3F/144.67s，3个明确fixture/转义问题定点7P，不重复整组；真实payload预算仍保。ROOT下游24P1原skip/6.49s，fixture共享cache污染根修，RF四WIP和runtime SHA稳定、隔离目录恢复absent。均待最终大节点独审，G3/G4/G5尚在实施，真实C未重跑。
+
+
+## R7最后扫查与真实来源独审新增
+
+退休门禁除了src还可能藏在观察器和CI样例：PhaseC保存成功capture后仍按128KiB读取，超出会翻转FAIL；invest旧E2E要求registry且自带不合法schema3.7/engine4.0.0配对。核心已改不代表实际端到端已贯通，按真实caller根修、完整capture不裁切、旧fixture不能乱贴新版engine，不新增许可。
+
+H1 v4正向intro/12重点已过，实际树父链仍继承前一备注的(4)标题并进入3selected views。独审读原页证实，不能把原件可回放/有局部正确context当整体上下文正确。generic独立source-note边界要同时保有效上级与真正嵌套；付费摘要前先修来源。具体见C-source-v4-independent.md/json。
+
+
+## 2026-11-02 — R7最终集中收口
+
+共用根因：实际资源预算与表示格式/可选诊断混用，且测试多次把旧实现清单视为同一许可。现由数据/预算owner负责正确性与资源、可选附注不反向否决、daily/CI分工、唯一policy测试owner；删除重复而保真正反控。H1正向intro/12重点不代表祖先链正确，T4仍OPEN。

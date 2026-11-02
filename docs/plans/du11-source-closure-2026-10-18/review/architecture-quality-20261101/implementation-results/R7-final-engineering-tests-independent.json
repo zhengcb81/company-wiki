@@ -1,0 +1,297 @@
+{
+  "status": "PASS",
+  "reviewer": "/root/rectify_readability",
+  "scope": "Two independent engineering scopes only, not self-review of the3handler/source-facts oracle changes. No product/tools/tests/Git/PWF/config/original writes by reviewer.",
+  "policy_test_scope": {
+    "status": "PASS",
+    "author_report_sha256": "a8669992138c4fbe523972ba03e9e29f6f406642b78cf69adb4adf78e7a805ef",
+    "delivery_files_sha256": {
+      "tests/unit/test_ci_push_selection.py": "73f38f6c9640e6240a1aaea2bdfb142888f0bad31856a0ac164b964ea601cc21",
+      "tests/unit/test_daily_push_bounds.py": null,
+      "tests/unit/test_daily_push_policy.py": "5f6d1b3281a464c4da2de1449446d75f3a654bc7f9cdca02891f540ab16f97de",
+      "tests/unit/test_pre_push_parallel_phases.py": null,
+      "tests/unit/test_pre_push_gate.py": "d44eb29350e57348eb4a3d96b5e28bcae3c80f18893f59a49382c553330e9ecd"
+    },
+    "protected_tool_CI_hooks_sha256": {
+      "tools/pre_push_gate.py": "e8801268ee4939f4dd987fa758c73aadec8d50e0b0a3e11ccc299051ab63d2cb",
+      "tools/changed_unit_tests.py": "2715957cc38cd953908aba5fb7d15f7961aaa8ec5f24eca3204d0ce831563f30",
+      ".github/workflows/ci.yml": "352a64e4ee78d89a1ebaefee80ed9a9df00bdba34284e4177f7a1245787a5453",
+      ".githooks/pre-push": "f2067d1a0a5b1be7de8690e06fe77aa9c523c19d6f6ff2eb625e9cd6de1fc7a7"
+    },
+    "verified": [
+      "Author base0ae8ada actual Git blobs for all5old files: every top-level test definition is represented in the capability migration table, and named destination functions exist. No new skip/xfail decoration.",
+      "Actual collect-only on the3surviving files returns106cases, with0case execution. Deleted bounds/parallel-phase files are absent. The134previous and28removed counts are author history, not a fresh execution of old134.",
+      "Independent docs/runtime/config/unknown/None ranges prove docs0 and all runtime cases call the same DAILY9 once; nonzero31 preserved, no dependency graph invoked, no fake local_fast_pass.",
+      "CI22nonunit targets and all6OCRresource nodes remain; DAILY9 remains distinct. Real scratch lifecycle preserved when mocked child returns17; daily180s and explicit-unit600s remain, two workers only for full Unit.",
+      "Optional AST transitive relative imports and multi-ref40/64-digit Git SHA union still work through actual owners, separately from daily policy.",
+      "Actual copied hook with its runner missing executes in sh and fails visibly; the4real local Git E2Es were statically inspected, not repeated. Their synthetic repos isolate Git context/pytest config/plugins and do not mutate the foreign index.",
+      "Tool/pre_push_gate, changed_unit_tests, CI and hook hashes all equal author protected values. No source, CI policy or hook change is hidden in this tests-only consolidation."
+    ]
+  },
+  "cold_repeatability_scope": {
+    "status": "PASS",
+    "author_report_sha256": "749fce4e600cad0922c27243c5ef35de78778f89b2ab1e54d9a71e4ff804dd5e",
+    "delivery_files_sha256": {
+      "tools/pdf_runtime_probe/run_cold_probe.py": "815b9fd1ca97e60e2618c62a897c63f3532a336247530352bbcb4d63f69e2a48",
+      "tests/unit/test_cold_probe_repeatability.py": "cfbe6150e529e474357f8ce964282328941efe084cbdfb301289d853da2751d2"
+    },
+    "verified": [
+      "Read the real diff: removing revision-already-attempted refusal, fresh tempfile receipt directory and actual selected-profile label are the behavior changes; no SDK/CPU/memory/stream/document/lifetime budget increase.",
+      "Independent fakechild first raises actual ChildTimeout and second explicit main request succeeds, same revision. Exactly2fresh attempt receipts retain separate status and only success has DONE_NO_DOCUMENT.",
+      "Archived root marker, root receipt and pre-existing prior-attempt receipt remain byte-identical after both requests.",
+      "Each receipt binds actual profile SHA and the selected independent profile name; CPU4, document_timeout120, configured memory123456789, stdout2MiB, stderr65536, requested deadline.02 retained. Both actual scratch directories removed.",
+      "No real SDK, model, deployed profile or downloaded artifact invoked. The run_bounded port alone was replaced for this negative-control probe."
+    ]
+  },
+  "independent_run": {
+    "tests": 7,
+    "passed": 7,
+    "failed": 0,
+    "seconds": 1.385,
+    "command": "C:/Miniconda/python.exe -B -X utf8 tmp/r7-final-engineering-independent/test_review.py",
+    "test_source_sha256": "46a13305836eaeac6d7615566a49ab64a57eb1805fda47a1c0f777a332a3e837",
+    "test_source": "from __future__ import annotations\n\nimport ast\nimport contextlib\nimport hashlib\nimport io\nimport json\nimport os\nfrom pathlib import Path\nimport re\nimport shutil\nimport subprocess\nimport sys\nimport tempfile\nimport unittest\nfrom unittest.mock import patch\n\nOWN = Path(__file__).resolve().parent\nROOT = OWN.parents[1]\nsys.path.insert(0, str(ROOT))\nsys.path.insert(0, str(ROOT / 'src'))\nfrom tools import changed_unit_tests as graph\nfrom tools import pre_push_gate as gate\nfrom tools.pdf_runtime_probe import run_cold_probe as probe\nfrom company_wiki._bounded_process import ChildTimeout\nREPORTS = ROOT / 'docs/plans/du11-source-closure-2026-10-18/review/architecture-quality-20261101/implementation-results'\nPOLICY = json.loads((REPORTS / 'R7-CWP-CI-policy-test-consolidation.json').read_text(encoding='utf-8'))\nOBS = {}\n\ndef definitions(text):\n    return {n.name: n for n in ast.parse(text).body if isinstance(n, ast.FunctionDef) and n.name.startswith('test_')}\n\nclass Review(unittest.TestCase):\n    def test_01_capability_map_covers_actual_old_definitions_and_destination_exists(self):\n        old = set()\n        current = {}\n        for path in POLICY['delivery_files_sha256']:\n            process = subprocess.run(['git', '-C', str(ROOT), 'show', POLICY['base_head'] + ':' + path],\n                                     capture_output=True, check=True, timeout=10)\n            old.update(path + '::' + name for name in definitions(process.stdout.decode('utf-8-sig')))\n            if (ROOT / path).is_file():\n                current.update(definitions((ROOT / path).read_text(encoding='utf-8')))\n        table = POLICY['old_capability_destination']\n        self.assertEqual(old, {row['old'] for row in table})\n        for row in table:\n            for name in re.findall(r'test_\\w+', row['retained_at'].split('::')[-1]):\n                self.assertIn(name, current)\n        for name, node in current.items():\n            self.assertFalse(any('skip' in ast.unparse(d) or 'xfail' in ast.unparse(d) for d in node.decorator_list), name)\n        OBS['capability_map'] = {'old_top_level_test_definitions': len(old), 'rows': len(table), 'destinations_exist': True, 'no_skip_xfail': True}\n\n    def test_02_real_collection_only_preserves106_unique_cases(self):\n        targets = [p for p, digest in POLICY['delivery_files_sha256'].items() if digest is not None]\n        environment = dict(os.environ, PYTEST_DISABLE_PLUGIN_AUTOLOAD='1', PYTHONDONTWRITEBYTECODE='1',\n                           PYTHONPATH=str(ROOT / 'src'), TEMP=str(OWN), TMP=str(OWN))\n        process = subprocess.run([sys.executable, '-B', '-X', 'utf8', '-m', 'pytest', '--collect-only',\n                                 '-q', '-p', 'no:cacheprovider', '--basetemp', str(OWN / 'collect'), *targets],\n                                cwd=ROOT, env=environment, capture_output=True, encoding='utf-8', timeout=20)\n        self.assertEqual(process.returncode, 0, process.stdout + process.stderr)\n        self.assertIn('106 tests collected', process.stdout)\n        self.assertNotIn('test_daily_push_bounds.py::', process.stdout)\n        self.assertNotIn('test_pre_push_parallel_phases.py::', process.stdout)\n        OBS['collection_only'] = {'exit': 0, 'stdout': process.stdout, 'stderr': process.stderr,\n                                  'note': 'Collection only; none of106 cases or4Git E2Es executed.'}\n\n    def test_03_daily_varied_ranges_only_one_child_no_dependency_graph(self):\n        for changes, expected in (({'docs/guide.md'}, 0), ({'src/pkg/new.py'}, 1),\n                                  ({'config/new.json'}, 1), ({'unexpected/startup.bin'}, 1), (None, 1)):\n            with self.subTest(changes=changes), patch.object(gate.sys, 'stdin', io.StringIO('range')), \\\n                 patch.object(gate, 'changed_paths', return_value=changes), \\\n                 patch.object(graph, 'select_unit_tests', side_effect=AssertionError('AST on daily')), \\\n                 patch.object(gate, '_run_pytest_gate', return_value=31) as child, \\\n                 contextlib.redirect_stdout(io.StringIO()) as out:\n                self.assertEqual(gate.main(['--push-checks']), 31 if expected else 0)\n                self.assertEqual(child.call_count, expected)\n                self.assertNotIn('local_fast_pass', out.getvalue())\n                if expected:\n                    actual = [p for p in child.call_args.args[0] if p.startswith('tests/')]\n                    self.assertEqual(actual, list(gate.DAILY_PUSH_CASES))\n                else:\n                    self.assertIn('tests_not_run', out.getvalue())\n\n    def test_04_real_budgets_and_ci_ocr_inventory_remain(self):\n        self.assertEqual(len(gate.DAILY_PUSH_CASES), 9)\n        self.assertEqual(len(gate.CI_CONTRACT_CASES), 22)\n        self.assertFalse(any(t.startswith('tests/unit/') for t in gate.CI_CONTRACT_CASES))\n        ocr = [t for t in gate.CI_CONTRACT_CASES if t.startswith('tests/document_normalization/')]\n        self.assertEqual(len(ocr), 6)\n        for daily in (True, False):\n            created = []\n            def scratch(_roots):\n                result = tempfile.TemporaryDirectory(prefix='review-scratch-', dir=OWN)\n                created.append(Path(result.name))\n                return result\n            with patch.object(gate, '_open_scratch', side_effect=scratch), \\\n                 patch.object(gate, '_run', return_value=17) as run:\n                targets = list(gate.DAILY_PUSH_CASES) if daily else ['tests/unit']\n                label = gate.DAILY_PUSH_LABEL_PREFIX + ' independent' if daily else 'unit tests'\n                self.assertEqual(gate._run_pytest_gate([sys.executable, '-m', 'pytest', *targets], label), 17)\n            run.assert_called_once()\n            self.assertEqual(run.call_args.kwargs['timeout'], 180 if daily else 600)\n            self.assertEqual('-n' in run.call_args.args[0], not daily)\n            self.assertTrue(all(not p.exists() for p in created))\n        OBS['inventory'] = {'daily': 9, 'ci_nonunit': 22, 'ocr_resource_cases': 6, 'timeouts': [180, 600]}\n\n    def test_05_optional_analysis_and_git_union_are_independent(self):\n        root = OWN / 'graph'\n        for path, text in {'src/example/__init__.py': '', 'src/example/engine.py': 'value=1\\n',\n                           'src/example/view.py': 'from . import engine\\n',\n                           'tests/support/help.py': 'from example import view\\n',\n                           'tests/unit/test_view.py': 'from support import help\\n',\n                           'tests/unit/test_other.py': 'def test_other(): pass\\n'}.items():\n            target = root / path\n            target.parent.mkdir(parents=True, exist_ok=True)\n            target.write_text(text, encoding='utf-8')\n        selected, _reason = graph.select_unit_tests(root, {'src/example/engine.py'})\n        self.assertEqual(selected, ['tests/unit/test_view.py'])\n        self.assertEqual(graph.select_unit_tests(root, {'config/new.json'})[0], ['tests/unit'])\n        first = subprocess.CompletedProcess([], 0, 'src/before.py\\nsrc/after.py\\n', '')\n        second = subprocess.CompletedProcess([], 0, 'tests/unit/test_view.py\\n', '')\n        rows = 'a ' + 'a'*64 + ' b ' + 'b'*64 + '\\nc ' + 'c'*40 + ' d ' + 'd'*40\n        with patch.object(graph.subprocess, 'run', side_effect=[first, second]) as git:\n            self.assertEqual(graph.changed_paths(root, rows), {'src/before.py', 'src/after.py', 'tests/unit/test_view.py'})\n        self.assertEqual(git.call_count, 2)\n\n    def test_06_actual_missing_runner_hook_is_red(self):\n        hooks = OWN / 'missing/.githooks'\n        hooks.mkdir(parents=True)\n        target = hooks / 'pre-push'\n        shutil.copyfile(ROOT / '.githooks/pre-push', target)\n        process = subprocess.run(['C:/Program Files/Git/bin/sh.exe', str(target)],\n                                 capture_output=True, encoding='utf-8', timeout=10)\n        self.assertNotEqual(process.returncode, 0)\n        self.assertIn('missing', (process.stdout + process.stderr).lower())\n        OBS['missing_hook'] = {'exit': process.returncode, 'stdout': process.stdout, 'stderr': process.stderr}\n\n    def test_07_cold_timeout_then_new_explicit_request_keeps_every_old_file(self):\n        root = OWN / 'cold'\n        receipts = root / 'receipts'\n        receipts.mkdir(parents=True)\n        archived = {'cold-rev5.marker.json': b'old-root-marker', 'cold-rev5.json': b'old-root-receipt',\n                    'cold-rev5-prior/cold-rev5.json': b'old-attempt-receipt'}\n        for name, value in archived.items():\n            target = receipts / name\n            target.parent.mkdir(exist_ok=True)\n            target.write_bytes(value)\n        profile = root / 'independent-profile.json'\n        config = {'python': sys.executable, 'artifacts': [], 'max_memory_bytes': 123456789,\n                  'environment_sha256': 'b'*64, 'docling_version': 'synthetic-no-sdk'}\n        profile.write_text(json.dumps(config), encoding='utf-8')\n        calls = []\n        def child(_command, **kwargs):\n            request = json.loads(kwargs['input_bytes'])\n            calls.append({'timeout': kwargs['timeout_seconds'], 'stdout_cap': kwargs['stdout_cap_bytes'],\n                          'stderr_cap': kwargs['stderr_cap_bytes'], 'request': request})\n            Path(request['temp'], 'own.txt').write_text('child scratch', encoding='utf-8')\n            if len(calls) == 1:\n                failure = ChildTimeout('synthetic deadline')\n                failure.stdout = b'{\"stage\":\"START\"}\\n'\n                failure.stderr = b'bounded failure'\n                raise failure\n            return {'stdout': b'{\"stage\":\"DONE\",\"active\":\"DONE_NO_DOCUMENT\"}\\n', 'stderr': b''}\n        original = probe.tempfile.mkdtemp\n        def own_temp(*args, **kwargs):\n            if kwargs.get('dir') is None:\n                kwargs['dir'] = root\n            return original(*args, **kwargs)\n        argv = [str(probe.__file__), '--profile', str(profile), '--receipts-dir', str(receipts), '--deadline', '.02']\n        with patch.object(sys, 'argv', argv), patch.object(probe, 'run_bounded', side_effect=child), \\\n             patch.object(probe, 'child_launch_command', return_value=[sys.executable, str(probe.__file__)]), \\\n             patch.object(probe, 'child_environment', return_value={}), \\\n             patch.object(probe.tempfile, 'mkdtemp', side_effect=own_temp), contextlib.redirect_stdout(io.StringIO()):\n            probe.main()\n            probe.main()\n        observed = [json.loads(p.read_text(encoding='utf-8')) for p in receipts.glob('cold-rev5-*/cold-rev5.json')\n                    if p.parent.name != 'cold-rev5-prior']\n        self.assertEqual(len(observed), 2)\n        self.assertEqual({o['status'] for o in observed}, {'ChildTimeout', 'completed'})\n        self.assertEqual(sum(o['done_no_document'] for o in observed), 1)\n        self.assertTrue(all(o['scratch_restored_absent'] for o in observed))\n        self.assertTrue(all(o['profile_sha256'] == hashlib.sha256(profile.read_bytes()).hexdigest() for o in observed))\n        self.assertTrue(all(o['profile_relative'].endswith('independent-profile.json') for o in observed))\n        for call in calls:\n            self.assertEqual((call['timeout'], call['stdout_cap'], call['stderr_cap']), (.02, 2*1024*1024, 65536))\n            self.assertEqual(call['request']['cpu_threads'], 4)\n            self.assertEqual(call['request']['document_timeout'], 120)\n            self.assertEqual(call['request']['max_memory_bytes'], config['max_memory_bytes'])\n            self.assertFalse(Path(call['request']['temp']).exists())\n        for name, value in archived.items():\n            self.assertEqual((receipts / name).read_bytes(), value)\n        OBS['cold'] = {'calls': calls, 'receipts': observed, 'old_files_preserved': list(archived),\n                       'fresh_attempts': 2, 'sdk_calls': 0}\n\nif __name__ == '__main__':\n    result = unittest.TextTestRunner(verbosity=2).run(unittest.defaultTestLoader.loadTestsFromTestCase(Review))\n    (OWN / 'observations.json').write_text(json.dumps(OBS, ensure_ascii=False, indent=2), encoding='utf-8')\n    raise SystemExit(not result.wasSuccessful())\n",
+    "log": ".planning/architecture-quality-20261101/r7-final-engineering-independent.log",
+    "log_sha256": "03f97c97a82207117248c71d36e4aca88133f6294c973bc90091fc021df8cacb",
+    "log_text": "test_01_capability_map_covers_actual_old_definitions_and_destination_exists (__main__.Review.test_01_capability_map_covers_actual_old_definitions_and_destination_exists) ... ok\r\ntest_02_real_collection_only_preserves106_unique_cases (__main__.Review.test_02_real_collection_only_preserves106_unique_cases) ... ok\r\ntest_03_daily_varied_ranges_only_one_child_no_dependency_graph (__main__.Review.test_03_daily_varied_ranges_only_one_child_no_dependency_graph) ... ok\r\ntest_04_real_budgets_and_ci_ocr_inventory_remain (__main__.Review.test_04_real_budgets_and_ci_ocr_inventory_remain) ... ok\r\ntest_05_optional_analysis_and_git_union_are_independent (__main__.Review.test_05_optional_analysis_and_git_union_are_independent) ... ok\r\ntest_06_actual_missing_runner_hook_is_red (__main__.Review.test_06_actual_missing_runner_hook_is_red) ... ok\r\ntest_07_cold_timeout_then_new_explicit_request_keeps_every_old_file (__main__.Review.test_07_cold_timeout_then_new_explicit_request_keeps_every_old_file) ... ok\r\n\r\n----------------------------------------------------------------------\r\nRan 7 tests in 1.385s\r\n\r\nOK\r\n",
+    "observations": {
+      "capability_map": {
+        "old_top_level_test_definitions": 58,
+        "rows": 58,
+        "destinations_exist": true,
+        "no_skip_xfail": true
+      },
+      "collection_only": {
+        "exit": 0,
+        "stdout": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\r7-final-engineering-independent\\\\collect\", \"requested_basetemp_len\": 79, \"cwd_len\": 34, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": true, \"reason\": \"resolved-basetemp-exceeds-budget\", \"effective_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\r7-final-engineering-independent\\\\cw-pytest-basetemp\\\\20261102-130153-34f14577\", \"effective_basetemp_len\": 115}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\nconfigfile: pytest.ini\ncollected 106 items\n\n<Dir company-wiki>\n  <Dir tests>\n    <Package unit>\n      <Module test_ci_push_selection.py>\n        <Function test_transitive_relative_import_includes_fixture_consumers>\n        <Function test_changed_test_or_fixture_is_not_omitted[tests/support/fixture.py]>\n        <Function test_changed_test_or_fixture_is_not_omitted[tests/unit/test_reader.py]>\n        <Function test_nested_test_only_change_keeps_its_consumers_without_unrelated_cli>\n        <Function test_nested_test_is_a_known_consumer_of_changed_source>\n        <Function test_directory_named_test_helpers_does_not_turn_helper_into_a_unit>\n        <Function test_environment_entrypoint_deleted_module_or_unknown_fixture_falls_back[config/local_ocr.json]>\n        <Function test_environment_entrypoint_deleted_module_or_unknown_fixture_falls_back[requirements.txt]>\n        <Function test_environment_entrypoint_deleted_module_or_unknown_fixture_falls_back[pyproject.toml]>\n        <Function test_environment_entrypoint_deleted_module_or_unknown_fixture_falls_back[conftest.py]>\n        <Function test_environment_entrypoint_deleted_module_or_unknown_fixture_falls_back[tests/conftest.py]>\n        <Function test_environment_entrypoint_deleted_module_or_unknown_fixture_falls_back[tools/pre_push_gate.py]>\n        <Function test_environment_entrypoint_deleted_module_or_unknown_fixture_falls_back[.github/workflows/ci.yml]>\n        <Function test_environment_entrypoint_deleted_module_or_unknown_fixture_falls_back[src/pkg/deleted.py]>\n        <Function test_environment_entrypoint_deleted_module_or_unknown_fixture_falls_back[tests/fixtures/input.json]>\n        <Function test_environment_entrypoint_deleted_module_or_unknown_fixture_falls_back[tests/unit/du/conftest.py]>\n        <Function test_changed_dynamic_execution_falls_back[import importlib\\nmodule = importlib.import_module(name)\\n]>\n        <Function test_changed_dynamic_execution_falls_back[import subprocess\\nsubprocess.run(['python', '-m', name])\\n]>\n        <Function test_changed_dynamic_execution_falls_back[import runpy\\nrunpy.run_module(name)\\n]>\n        <Function test_changed_dynamic_execution_falls_back[exec(name)\\n]>\n        <Function test_changed_dynamic_execution_falls_back[from subprocess import run as execute\\nexecute(argv)\\n]>\n        <Function test_changed_dynamic_execution_falls_back[import subprocess as sp\\nsp.run(argv)\\n]>\n        <Function test_changed_dynamic_execution_falls_back[from importlib import import_module as load\\nload(name)\\n]>\n        <Function test_changed_dynamic_execution_falls_back[from runpy import run_path as execute\\nexecute('scripts/child.py')\\n]>\n        <Function test_literal_dynamic_import_is_detected>\n        <Function test_unchanged_computed_import_consumer_is_kept_alongside_static_consumer>\n        <Function test_literal_relative_import_bare_module_or_file_consumer_is_not_lost[import importlib\\nimportlib.import_module('.core', 'pkg')\\n]>\n        <Function test_literal_relative_import_bare_module_or_file_consumer_is_not_lost[from runpy import run_path as run\\nrun('src/pkg/core.py')\\n]>\n        <Function test_literal_relative_import_bare_module_or_file_consumer_is_not_lost[from importlib import import_module\\nimport_module('core')\\n]>\n        <Function test_unknown_source_dependency_falls_back_instead_of_silent_skip>\n        <Function test_document_only_push_does_not_run_full_units>\n        <Function test_unknown_or_runtime_nonpython_paths_keep_the_optional_full_unit_fallback[False-config.yaml]>\n        <Function test_unknown_or_runtime_nonpython_paths_keep_the_optional_full_unit_fallback[False-startup.ps1]>\n        <Function test_unknown_or_runtime_nonpython_paths_keep_the_optional_full_unit_fallback[False-misc/runtime.json]>\n        <Function test_unknown_or_runtime_nonpython_paths_keep_the_optional_full_unit_fallback[False-docs/receipt.json]>\n        <Function test_unknown_or_runtime_nonpython_paths_keep_the_optional_full_unit_fallback[False-runtime.toml]>\n        <Function test_unknown_or_runtime_nonpython_paths_keep_the_optional_full_unit_fallback[False-prompts/default.txt]>\n        <Function test_unknown_or_runtime_nonpython_paths_keep_the_optional_full_unit_fallback[False-README.js]>\n        <Function test_unknown_or_runtime_nonpython_paths_keep_the_optional_full_unit_fallback[False-src/pkg/prompt.md]>\n        <Function test_unknown_or_runtime_nonpython_paths_keep_the_optional_full_unit_fallback[False-tests/fixture.md]>\n        <Function test_unknown_or_runtime_nonpython_paths_keep_the_optional_full_unit_fallback[True-config.yaml]>\n        <Function test_unknown_or_runtime_nonpython_paths_keep_the_optional_full_unit_fallback[True-startup.ps1]>\n        <Function test_unknown_or_runtime_nonpython_paths_keep_the_optional_full_unit_fallback[True-misc/runtime.json]>\n        <Function test_unknown_or_runtime_nonpython_paths_keep_the_optional_full_unit_fallback[True-docs/receipt.json]>\n        <Function test_unknown_or_runtime_nonpython_paths_keep_the_optional_full_unit_fallback[True-runtime.toml]>\n        <Function test_unknown_or_runtime_nonpython_paths_keep_the_optional_full_unit_fallback[True-prompts/default.txt]>\n        <Function test_unknown_or_runtime_nonpython_paths_keep_the_optional_full_unit_fallback[True-README.js]>\n        <Function test_unknown_or_runtime_nonpython_paths_keep_the_optional_full_unit_fallback[True-src/pkg/prompt.md]>\n        <Function test_unknown_or_runtime_nonpython_paths_keep_the_optional_full_unit_fallback[True-tests/fixture.md]>\n        <Function test_explicit_documentation_has_no_runtime_targets[README.md]>\n        <Function test_explicit_documentation_has_no_runtime_targets[CONTRIBUTING.md]>\n        <Function test_explicit_documentation_has_no_runtime_targets[CHANGELOG.md]>\n        <Function test_explicit_documentation_has_no_runtime_targets[AGENTS.md]>\n        <Function test_explicit_documentation_has_no_runtime_targets[docs/usage.md]>\n        <Function test_explicit_documentation_has_no_runtime_targets[docs/design.rst]>\n        <Function test_explicit_documentation_has_no_runtime_targets[docs/usage.adoc]>\n        <Function test_git_range_covers_earlier_code_and_final_document_commit>\n        <Function test_multiple_refs_union_and_branch_deletion>\n        <Function test_no_comparable_push_range_falls_back[]>\n        <Function test_no_comparable_push_range_falls_back[bad line]>\n        <Function test_no_comparable_push_range_falls_back[a aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa b 0000000000000000000000000000000000000000]>\n        <Function test_git_failure_falls_back>\n        <Function test_planning_archive_is_not_live_behavior_even_with_code_suffix[docs/plans/run/evidence/probe.py]>\n        <Function test_planning_archive_is_not_live_behavior_even_with_code_suffix[docs/plans/run/conftest.py]>\n        <Function test_planning_archive_is_not_live_behavior_even_with_code_suffix[docs/plans/run/requirements.txt]>\n        <Function test_planning_archive_is_not_live_behavior_even_with_code_suffix[docs/plans/run/evidence/result.json]>\n        <Function test_planning_archive_is_not_live_behavior_even_with_code_suffix[docs/plans/run/evidence/original.docx]>\n        <Function test_planning_archive_is_not_live_behavior_even_with_code_suffix[.planning/run/evidence/probe.py]>\n        <Function test_planning_archive_is_not_live_behavior_even_with_code_suffix[.planning/run/conftest.py]>\n        <Function test_planning_archive_is_not_live_behavior_even_with_code_suffix[.planning/run/requirements.txt]>\n        <Function test_planning_archive_is_not_live_behavior_even_with_code_suffix[.planning/run/evidence/result.json]>\n        <Function test_mixed_live_source_and_planning_archive_keeps_actual_consumers>\n        <Function test_live_unit_change_with_archived_probe_does_not_seed_unrelated_cli_tests>\n        <Function test_only_owned_planning_roots_are_non_runtime[.planning-live/probe.py]>\n        <Function test_only_owned_planning_roots_are_non_runtime[misc/probe.py]>\n        <Function test_unit_only_change_keeps_known_transitive_test_helper_consumers>\n      <Module test_daily_push_policy.py>\n        <Function test_hook_blocks_and_reports_a_missing_gate_runner>\n        <Function test_pre_push_hook_is_tracked_as_executable_for_linux_worktrees>\n        <Function test_real_push_green_fast_pass_then_blocked_by_a_ran_failure>\n        <Function test_real_docs_push_runs_no_tests_but_does_not_hide_earlier_code>\n        <Function test_real_push_with_missing_gate_runner_is_blocked>\n        <Function test_real_push_defers_unknown_config_scope_and_full_run_still_finds_the_failure>\n      <Module test_pre_push_gate.py>\n        <Function test_daily_and_ci_inventories_have_distinct_responsibilities>\n        <Function test_daily_runtime_config_or_unknown_runs_only_fixed_scope_once[changes0]>\n        <Function test_daily_runtime_config_or_unknown_runs_only_fixed_scope_once[changes1]>\n        <Function test_daily_runtime_config_or_unknown_runs_only_fixed_scope_once[changes2]>\n        <Function test_daily_runtime_config_or_unknown_runs_only_fixed_scope_once[changes3]>\n        <Function test_daily_runtime_config_or_unknown_runs_only_fixed_scope_once[changes4]>\n        <Function test_daily_runtime_config_or_unknown_runs_only_fixed_scope_once[changes5]>\n        <Function test_daily_runtime_config_or_unknown_runs_only_fixed_scope_once[changes6]>\n        <Function test_daily_runtime_config_or_unknown_runs_only_fixed_scope_once[None]>\n        <Function test_proven_documentation_range_starts_zero_tests[changes0]>\n        <Function test_proven_documentation_range_starts_zero_tests[changes1]>\n        <Function test_proven_documentation_range_starts_zero_tests[changes2]>\n        <Function test_daily_reports_pass_only_after_its_single_child_succeeds[0]>\n        <Function test_daily_reports_pass_only_after_its_single_child_succeeds[1]>\n        <Function test_daily_reports_pass_only_after_its_single_child_succeeds[7]>\n        <Function test_daily_reports_pass_only_after_its_single_child_succeeds[124]>\n        <Function test_daily_reports_pass_only_after_its_single_child_succeeds[125]>\n        <Function test_failed_child_launch_is_not_a_green_push>\n        <Function test_ci_contract_phase_runs_only_the_nonunit_remainder_once[None]>\n        <Function test_ci_contract_phase_runs_only_the_nonunit_remainder_once[fixture-results.xml]>\n        <Function test_explicit_full_mode_runs_all_stages_and_only_one_unit_collection>\n        <Function test_total_deadline_worker_scope_and_owned_scratch_remain_real[True]>\n        <Function test_total_deadline_worker_scope_and_owned_scratch_remain_real[False]>\n        <Function test_real_ci_and_hook_wiring_keeps_full_unit_and_separate_contracts>\n\n============================== warnings summary ===============================\n..\\..\\..\\..\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464\n  C:\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode\n  \n    self._warn_or_fail_if_strict(f\"Unknown config option: {key}\\n\")\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n======================== 106 tests collected in 0.45s =========================\nCW-BASETEMP-CLEANUP {\"event\": \"cleanup\", \"dir\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\r7-final-engineering-independent\\\\cw-pytest-basetemp\\\\20261102-130153-34f14577\", \"existed\": true, \"removed\": true}\n",
+        "stderr": "",
+        "note": "Collection only; none of106 cases or4Git E2Es executed."
+      },
+      "inventory": {
+        "daily": 9,
+        "ci_nonunit": 22,
+        "ocr_resource_cases": 6,
+        "timeouts": [
+          180,
+          600
+        ]
+      },
+      "missing_hook": {
+        "exit": 1,
+        "stdout": "",
+        "stderr": "pre-push gate: tools/pre_push_gate.py missing - cannot validate this push\n"
+      },
+      "cold": {
+        "calls": [
+          {
+            "timeout": 0.02,
+            "stdout_cap": 2097152,
+            "stderr_cap": 65536,
+            "request": {
+              "artifacts": [],
+              "max_memory_bytes": 123456789,
+              "temp": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r7-final-engineering-independent\\cold\\cw-w21-cold-bhhxii08",
+              "document_timeout": 120,
+              "cpu_threads": 4,
+              "bytecode_prefix": null
+            }
+          },
+          {
+            "timeout": 0.02,
+            "stdout_cap": 2097152,
+            "stderr_cap": 65536,
+            "request": {
+              "artifacts": [],
+              "max_memory_bytes": 123456789,
+              "temp": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r7-final-engineering-independent\\cold\\cw-w21-cold-ica7c1cn",
+              "document_timeout": 120,
+              "cpu_threads": 4,
+              "bytecode_prefix": null
+            }
+          }
+        ],
+        "receipts": [
+          {
+            "revision": "rev5",
+            "attempts": 1,
+            "deadline_seconds": 0.02,
+            "profile_relative": "ROOT/tmp/r7-final-engineering-independent/cold/independent-profile.json",
+            "profile_sha256": "33c936c5e6b8be09f36df9ae64bf73dc7721fcd002aebe055c7ed5a70ec26d22",
+            "probe_sha256": "f0f1e43609f2f754fcea4f50eae336d405671ac7be169b33aa22b4ea94b9d8e6",
+            "controller_sha256": "815b9fd1ca97e60e2618c62a897c63f3532a336247530352bbcb4d63f69e2a48",
+            "pdf_bytes": 0,
+            "sdk_model_copies": 0,
+            "cpu_threads": 4,
+            "memory_bytes": 123456789,
+            "environment_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "docling_version": "synthetic-no-sdk",
+            "launch_command": [
+              "python.exe",
+              "run_cold_probe.py"
+            ],
+            "audit_scope": "python_audit_events_only",
+            "status": "ChildTimeout",
+            "returncode": null,
+            "seconds": 0.001147,
+            "events": [
+              {
+                "stage": "START"
+              }
+            ],
+            "stdout_sha256": "1c7716e71450815bb72dcfeea1d5abf550657ca99bd940080f691eadaf85c913",
+            "stderr_sha256": "00521aba91c9394c87e09fdf578a9f5ce7874ee9f6226595d7278019ec42c2e6",
+            "done_no_document": false,
+            "guard_rejections": 0,
+            "scratch_restored_absent": true
+          },
+          {
+            "revision": "rev5",
+            "attempts": 1,
+            "deadline_seconds": 0.02,
+            "profile_relative": "ROOT/tmp/r7-final-engineering-independent/cold/independent-profile.json",
+            "profile_sha256": "33c936c5e6b8be09f36df9ae64bf73dc7721fcd002aebe055c7ed5a70ec26d22",
+            "probe_sha256": "f0f1e43609f2f754fcea4f50eae336d405671ac7be169b33aa22b4ea94b9d8e6",
+            "controller_sha256": "815b9fd1ca97e60e2618c62a897c63f3532a336247530352bbcb4d63f69e2a48",
+            "pdf_bytes": 0,
+            "sdk_model_copies": 0,
+            "cpu_threads": 4,
+            "memory_bytes": 123456789,
+            "environment_sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb",
+            "docling_version": "synthetic-no-sdk",
+            "launch_command": [
+              "python.exe",
+              "run_cold_probe.py"
+            ],
+            "audit_scope": "python_audit_events_only",
+            "status": "completed",
+            "returncode": 0,
+            "seconds": 0.001653,
+            "events": [
+              {
+                "stage": "DONE",
+                "active": "DONE_NO_DOCUMENT"
+              }
+            ],
+            "stdout_sha256": "04947de8d05e380a87545a70d636c38f1b718d2137561cc87f4fbbdb19438d19",
+            "stderr_sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+            "done_no_document": true,
+            "guard_rejections": 0,
+            "scratch_restored_absent": true
+          }
+        ],
+        "old_files_preserved": [
+          "cold-rev5.marker.json",
+          "cold-rev5.json",
+          "cold-rev5-prior/cold-rev5.json"
+        ],
+        "fresh_attempts": 2,
+        "sdk_calls": 0
+      }
+    }
+  },
+  "findings": [],
+  "limits": [
+    "Did not execute106consolidated tests or4real Git E2Es; author bounded evidence remains separate.",
+    "No fullUnit/fullCI/H1/SDK/cold-performance claim. Cold case proves request isolation/receipt fidelity, not actual deployed runtime performance.",
+    "Protected hashes verified against author freeze at finalization, not an independently captured pre-run baseline.",
+    "Windows sh hook execution; no independent Linux execution."
+  ],
+  "cleanup": {
+    "root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r7-final-engineering-independent",
+    "initially_absent": true,
+    "status": "REMOVED",
+    "file_count": 22,
+    "bytes": 42618,
+    "file_manifest": {
+      "finalize.py": {
+        "bytes": 8743,
+        "sha256": "7905998cc6fb628757de6ec929f61f45951147931b6ed2571ac5d8a9beb138d6"
+      },
+      "observations.json": {
+        "bytes": 17028,
+        "sha256": "20eff81e34eec1cc50267f5f5b526420627568d7c8c817f6816073438f49507f"
+      },
+      "test_review.py": {
+        "bytes": 12141,
+        "sha256": "46a13305836eaeac6d7615566a49ab64a57eb1805fda47a1c0f777a332a3e837"
+      },
+      "cold/independent-profile.json": {
+        "bytes": 216,
+        "sha256": "33c936c5e6b8be09f36df9ae64bf73dc7721fcd002aebe055c7ed5a70ec26d22"
+      },
+      "missing/.githooks/pre-push": {
+        "bytes": 964,
+        "sha256": "f2067d1a0a5b1be7de8690e06fe77aa9c523c19d6f6ff2eb625e9cd6de1fc7a7"
+      },
+      "graph/tests/support/help.py": {
+        "bytes": 26,
+        "sha256": "a27abeecc7a0b2f381a2bd0b2b9aef21249a14a16ba3c02a029f9af3ed7876e4"
+      },
+      "graph/tests/unit/test_other.py": {
+        "bytes": 24,
+        "sha256": "3f69608b17d354ac275137769018ad153a46650fedc5131f4367fb0e3e3f2462"
+      },
+      "graph/tests/unit/test_view.py": {
+        "bytes": 26,
+        "sha256": "86e220a0596a0d8aeb4d108ffc7468c06a2f0f1cd1f0b680635fa0b457de3584"
+      },
+      "graph/src/example/engine.py": {
+        "bytes": 9,
+        "sha256": "5ca6a3684e50643f61385cf4a375ab17b3d548708838dd4b22ee797791602516"
+      },
+      "graph/src/example/view.py": {
+        "bytes": 22,
+        "sha256": "95a5e6803791efe89d19740fcc96f28dc081db2faad4046a23463cec48376491"
+      },
+      "graph/src/example/__init__.py": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "cold/receipts/cold-rev5.json": {
+        "bytes": 16,
+        "sha256": "a1587043038f756db1afcfcf0a6b6c73643b3681e6172d45d11a5bd000f15c29"
+      },
+      "cold/receipts/cold-rev5.marker.json": {
+        "bytes": 15,
+        "sha256": "7e859b658d73931937aa4fe941b030bc22cebfaa0024a2975cf4ce0cfd7834af"
+      },
+      "cold/receipts/cold-rev5-o6si0v5u/cold-rev5.json": {
+        "bytes": 1192,
+        "sha256": "67312e71a0ee8cf33b21febae88bc6bd4119656e6459910c26ee539b24814f34"
+      },
+      "cold/receipts/cold-rev5-o6si0v5u/cold-rev5.marker.json": {
+        "bytes": 439,
+        "sha256": "787c55f7295a017c656e836f86efdf38a0bb22ccee720cf46604a19a1f961eb4"
+      },
+      "cold/receipts/cold-rev5-o6si0v5u/cold-rev5.stderr.log": {
+        "bytes": 15,
+        "sha256": "00521aba91c9394c87e09fdf578a9f5ce7874ee9f6226595d7278019ec42c2e6"
+      },
+      "cold/receipts/cold-rev5-o6si0v5u/cold-rev5.stdout.jsonl": {
+        "bytes": 18,
+        "sha256": "1c7716e71450815bb72dcfeea1d5abf550657ca99bd940080f691eadaf85c913"
+      },
+      "cold/receipts/cold-rev5-prior/cold-rev5.json": {
+        "bytes": 19,
+        "sha256": "d4be69166839d67fd7f1a481d641591efad76040f8ab4580cc4c0f29a57503ef"
+      },
+      "cold/receipts/cold-rev5-tfwzheiq/cold-rev5.json": {
+        "bytes": 1221,
+        "sha256": "ce68a6af1241c8f8fa5fbf2108ab0b627a153c7448b60ccb930e77032f06d063"
+      },
+      "cold/receipts/cold-rev5-tfwzheiq/cold-rev5.marker.json": {
+        "bytes": 439,
+        "sha256": "787c55f7295a017c656e836f86efdf38a0bb22ccee720cf46604a19a1f961eb4"
+      },
+      "cold/receipts/cold-rev5-tfwzheiq/cold-rev5.stderr.log": {
+        "bytes": 0,
+        "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+      },
+      "cold/receipts/cold-rev5-tfwzheiq/cold-rev5.stdout.jsonl": {
+        "bytes": 45,
+        "sha256": "04947de8d05e380a87545a70d636c38f1b718d2137561cc87f4fbbdb19438d19"
+      }
+    },
+    "absent_after": true
+  }
+}

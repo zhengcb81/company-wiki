@@ -1,0 +1,102 @@
+{
+  "schema_version": "r7-tooling-ci-followup-independent/1",
+  "status": "PASS_BOUNDED_DELTA_REVIEW",
+  "reviewer": "rectify_readability (independent of tooling author)",
+  "timestamp_utc": "2026-11-02T10:49:07.518585+00:00",
+  "author_report_sha256": "7a13b9615937b332c13ea2c642d26717edb993d650749825ce7e65acd4e45078",
+  "delivery_files_sha256": {
+    "tests/unit/test_w08_narrative_g2_replay.py": "446c23dc5e7126e1f9485291c523385b31cb7f0ae18b477f44a01ff9a8003834"
+  },
+  "unchanged_writer_sha256": {
+    "tools/narrative_g2_replay/report.py": "048c386c2965cf8a43dc76a3f5c2aaa9844e4b7bfc6cfaa6e72be910ebbd4911"
+  },
+  "before_after_match": true,
+  "baseline_head": "bd911a2bd1125fe46d7c5a0f605fe3b0104f17be",
+  "old_blob_sha256": "be7c99c4de15208c197c5df8253cd4a44db9b618e0b572b4867e439052b7a0e9",
+  "old_crlf_sha256": "20cff93c74c5df807bbac8c4976dca78e04f7f716bd52debe0701a9be1a99700",
+  "unchanged_common_functions": [
+    "_case",
+    "_record",
+    "_root_observed_parts",
+    "_sha",
+    "test_a_well_formed_record_passes_the_oracle",
+    "test_attempt_directories_are_never_overwritten",
+    "test_bad_raw_sha_is_refused",
+    "test_both_container_formats_must_be_exercised",
+    "test_case_spec_matrix_covers_every_card_required_type",
+    "test_coverage_report_flags_missing_and_unknown",
+    "test_deleting_a_required_group_is_refused",
+    "test_document_kind_must_be_preserved",
+    "test_empty_case_set_is_refused",
+    "test_fixture_scope_cannot_claim_semantic_quality_or_paid_calls",
+    "test_narrative_case_must_reach_a_summary",
+    "test_not_run_and_unknown_are_never_pass",
+    "test_oracle_never_raises_on_malformed_input",
+    "test_required_case_ids_must_all_be_reported",
+    "test_rewritten_fixed_expectation_is_refused",
+    "test_root_boilerplate_must_not_be_the_published_claim",
+    "test_root_changed_generation_needs_a_real_invalidation_result",
+    "test_root_claim_citation_has_to_exist_in_actual_spans",
+    "test_root_expired_deadline_never_becomes_an_extra_one_second",
+    "test_root_model_posts_are_observed_per_source_not_inferred_from_a_bundle",
+    "test_root_nonempty_fiscal_period_survives_the_read",
+    "test_root_nonempty_locators_do_not_prove_actual_replay",
+    "test_root_report_model_accounting_cannot_guess_post_count",
+    "test_root_required_operating_fact_must_reach_selected_evidence",
+    "test_schema_version_must_be_narrative_g2_replay_1",
+    "test_second_run_with_new_model_post_is_refused",
+    "test_self_reported_pass_without_raw_receipt_is_refused",
+    "test_skip_case_must_not_publish_a_summary",
+    "test_transcript_language_must_not_change",
+    "test_transcript_must_not_be_converted_to_pdf",
+    "test_unknown_case_id_is_refused",
+    "test_unreplayable_locator_is_refused",
+    "test_unrestored_scratch_is_reported_as_partial_not_pass",
+    "test_zero_paid_calls_is_required_but_model_posts_may_be_nonzero"
+  ],
+  "changed_common_functions": [],
+  "retired_oracle": [
+    "test_report_may_not_exceed_eight_mib"
+  ],
+  "new_tests": [
+    "test_report_encoding_failure_preserves_the_previous_report",
+    "test_report_larger_than_eight_mib_is_written_completely",
+    "test_report_real_write_failure_is_not_reported_as_saved"
+  ],
+  "test_source": "\"\"\"Independent variants for the single R7 tooling oracle migration.\"\"\"\nfrom copy import deepcopy\nimport json\n\nimport pytest\n\nfrom tools.narrative_g2_replay import report\n\n\ndef test_multibyte_failed_record_preserves_complete_source_observations(tmp_path):\n    record = {'status': 'FAILED', 'source_status': 'PARTIAL',\n        'required_units': [{'unit_id': 'U1', 'span_id': 'S1', 'locator': 'loc:v1/page:3',\n                            'source_sha256': 'a' * 64}],\n        'trace': {'raw': '原始业务🙂' * 700000, 'complete': False, 'unobserved': None}}\n    before = deepcopy(record)\n    attempt = report.create_attempt(tmp_path / 'reports')\n    path = report.write_report(attempt, record)\n    assert path.stat().st_size > 8 * 1024 * 1024\n    assert json.loads(path.read_bytes()) == before == record\n    second = report.create_attempt(tmp_path / 'reports')\n    assert attempt.path != second.path\n    assert json.loads(path.read_bytes())['status'] == 'FAILED'\n\n\n@pytest.mark.parametrize('condition', ['infinite', 'cycle'])\ndef test_genuine_encoding_fault_does_not_open_previous_file(tmp_path, condition):\n    attempt = report.create_attempt(tmp_path / 'reports')\n    path = report.write_report(attempt, {'status': 'FAILED', 'complete': False, 'missing': None})\n    old = path.read_bytes()\n    if condition == 'infinite':\n        value = {'trace': {'nonfinite': float('inf')}}\n    else:\n        value = {'trace': []}\n        value['trace'].append(value)\n    with pytest.raises(ValueError):\n        report.write_report(attempt, value)\n    assert path.read_bytes() == old\n",
+  "test_source_sha256": "9cc8a65603a8499da6540099c382904f6ff4768ccd577f531056962568dfa493",
+  "tests": {
+    "count": 3,
+    "passed": 3,
+    "failed": 0,
+    "seconds": "0.187",
+    "xml_sha256": "333184354c315046bf6e975acdb630833cbca404f88ddf9a76bd8751da0e7a5b",
+    "xml": ".planning/architecture-quality-20261101/r7-tool-ci-independent.xml",
+    "log_sha256": "42f2bc3a3fc196bb2a81949824fae71828ac45ae45d73dc2559b7e8e12a0e35c",
+    "log": ".planning/architecture-quality-20261101/r7-tool-ci-independent.log",
+    "console": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\r7tool-independent\\\\runtime\", \"requested_basetemp_len\": 65, \"cwd_len\": 34, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": true, \"reason\": \"resolved-basetemp-exceeds-budget\", \"effective_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\AppData\\\\Local\\\\Temp\\\\cw-pytest-basetemp\\\\20261102-104807-3c402e23\", \"effective_basetemp_len\": 75}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\nconfigfile: pytest.ini\ncollected 3 items\n\ntmp\\r7tool-independent\\test_review.py ...                                [100%]\n\n============================== warnings summary ===============================\n..\\..\\..\\..\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464\n  C:\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode\n  \n    self._warn_or_fail_if_strict(f\"Unknown config option: {key}\\n\")\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\architecture-quality-20261101\\r7-tool-ci-independent.xml -\n======================== 3 passed, 1 warning in 0.28s =========================\nCW-BASETEMP-CLEANUP {\"event\": \"cleanup\", \"dir\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\AppData\\\\Local\\\\Temp\\\\cw-pytest-basetemp\\\\20261102-104807-3c402e23\", \"existed\": true, \"removed\": true}\n",
+    "argv": "C:/Miniconda/python.exe -B -X utf8 -m pytest tmp/r7tool-independent/test_review.py -q -p no:cacheprovider --basetemp tmp/r7tool-independent/runtime --junitxml .planning/architecture-quality-20261101/r7-tool-ci-independent.xml"
+  },
+  "findings": [],
+  "limits": [
+    "No entire test module/211/Unit rerun",
+    "No product or existing test modifications",
+    "No RF/invest/config/install/source/model/Git writes",
+    "No generic atomic midwrite I/O guarantee claimed"
+  ],
+  "cleanup": {
+    "owned_scratch": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r7tool-independent",
+    "initially_absent": true,
+    "files_before_delete": {
+      "test_review.py": {
+        "sha256": "9cc8a65603a8499da6540099c382904f6ff4768ccd577f531056962568dfa493",
+        "bytes": 1572
+      }
+    },
+    "file_count": 1,
+    "bytes": 1572,
+    "pytest_relocated_basetemp_removed": true,
+    "removed": true,
+    "status": "RESTORED_INITIAL_ABSENT"
+  }
+}

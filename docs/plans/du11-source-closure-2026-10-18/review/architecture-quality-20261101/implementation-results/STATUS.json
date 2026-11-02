@@ -1,11 +1,11 @@
 {
   "schema_version": "architecture-rectification-status/1",
   "baseline": "1909286a",
-  "implementation_active": true,
+  "implementation_active": false,
   "items": {
     "Q01": {
       "status": "ENGINEERING_MERGED_PUSHED_MAIN_CI_GREEN_REAL_C_OPEN",
-      "reason": "R5 source material contract fullCI41380285347 green, final independent28bounded cases PASS; original70 restored; T3 structure and actual new summary/RF still OPEN."
+      "reason": "R5 engineering accepted at its dated CI/review; T3 and R7 now merged. Actual H1v4 parent-chain P2 and new summary/cache/RF acceptance remain OPEN under T4."
     },
     "Q02": {
       "status": "ENGINEERING_MERGED_PUSHED_MAIN_CI_GREEN_REAL_C_OPEN",
@@ -53,43 +53,7 @@
       "status": "ENGINEERING_MERGED_PUSHED_MAIN_CI_GREEN_REAL_C_OPEN"
     }
   },
-  "next": "完成T3 NOTE/PHYS来源备注局部scope和原生成员/邻接proof及局部partial传播，与已修TERM合并跑冻结47+新增16一次并集中独审，再按计划做最终真实H1、新摘要/cache/RF。不扩外包、不重复整仓。",
-  "real_source_observation": {
-    "case": "H1 current-v1",
-    "elapsed_s": 37.394,
-    "parser_pages": 199,
-    "source_units": 4224,
-    "work_units": 15998066,
-    "work_cap": 16000000,
-    "selected_spans": 112,
-    "groups": 70,
-    "required_units_preserved": "12/12",
-    "native_member_slices": "111/111",
-    "boundary": "partial; 9 old actor/context pairs not yet judged; DB/WAL/SHM content same, SHM mtime-only checker false failure preserved",
-    "source_version": "e4c08e42...689b before/after stable; not final R4 revision"
-  },
-  "real_source_observation_v2": {
-    "elapsed_s": 23.170454,
-    "result": "FAILED unknown source_processing_complete at public handler",
-    "required_units": "NOT_OBSERVED",
-    "context_pairs": "9 OPEN",
-    "subsequent": "R5 wire fixed with actual handler/golden tests; no v3 due user pause"
-  },
-  "rf_publication_head": "957c6283d3381d23c39515afd3a09147d8201c7b",
-  "rf_exact_ci": "41304681319 success",
-  "selected_RF_installation": "2 physical writes; repeat0;3 logical fresh PASS",
-  "r6_independent": {
-    "consumer": "R6-independent-consumers.md",
-    "source_r2": "R6-independent-final-r2.md",
-    "old_source_failure_retained": "R6-independent-final.md",
-    "W23": "R6-W23-independent-final.md"
-  },
-  "r3_independent": {
-    "status": "NEEDS_ROOT_FIX",
-    "passed": 18,
-    "failed": 5,
-    "evidence": "R6-independent-ci-r3.json"
-  },
+  "next": "按T4-source-note-parent-plan.md先冻结去公司化父链正反例并根修来源树，再单H1原90s/16M/112真实复验；通过后配置新摘要、paid中断/同跨run零重复和同artifact实际RF采用。",
   "historical_publication_snapshots": {
     "publication_head": "6668bc978d3ea2217a9aff30be69bde456894c04",
     "cwp_exact_ci": {
@@ -123,18 +87,72 @@
     "project_state": "R6_R4_SOURCE_SEMANTIC_ROOT_REPAIR_AND_DAILY_GATE_SIMPLIFICATION"
   },
   "canonical_entry": "../../../CURRENT_STATUS.md",
-  "project_state": "R6_ENGINEERING_PUBLISHED_MAIN_CI_GREEN_T3_IMPLEMENTATION_ACTIVE",
+  "project_state": "R7_ENGINEERING_PUBLISHED_ALL_EXACT_CI_GREEN_REAL_C_OPEN",
   "publication": {
-    "published_main_bundle": "c6bb801b4e87bbffbab0feefbdbe663b693ab12c",
-    "source_runtime_commit": "10767b86318e63094c2bb49451447c9aedffc32c",
-    "main_ci": 41381788839,
-    "main_ci_conclusion": "success",
-    "independent": "R6-independent-ci-r5.json",
-    "receipt": "R6-publication.json"
+    "company-wiki": {
+      "source_head": "389a10fb9a3321072ed863e5e55d761043218921",
+      "exact_ci": [
+        {
+          "id": 41450377163,
+          "name": "CI",
+          "head_sha": "389a10fb9a3321072ed863e5e55d761043218921",
+          "head_branch": "master",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41450377163",
+          "updated_at": "2026-11-02T13:15:36Z"
+        }
+      ]
+    },
+    "filing-fetch": {
+      "source_head": "350cb39dad8a1116d76fd44824fe353ae210d384",
+      "exact_ci": [
+        {
+          "id": 41450346468,
+          "name": "quality",
+          "head_sha": "350cb39dad8a1116d76fd44824fe353ae210d384",
+          "head_branch": "main",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/zhengcb81/filing-fetch/actions/runs/41450346468",
+          "updated_at": "2026-11-02T13:10:05Z"
+        }
+      ]
+    },
+    "revenue-forecast": {
+      "source_head": "e44c7e9717c05346086e5ec07bc1f30373f8279f",
+      "exact_ci": [
+        {
+          "id": 41444705227,
+          "name": "quality",
+          "head_sha": "e44c7e9717c05346086e5ec07bc1f30373f8279f",
+          "head_branch": "main",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/41444705227",
+          "updated_at": "2026-11-02T12:27:34Z"
+        }
+      ]
+    },
+    "invest-skills": {
+      "source_head": "9b68cc9b9bac194ede4881453f7706528bc18add",
+      "exact_ci": [
+        {
+          "id": 41442479736,
+          "name": "quality",
+          "head_sha": "9b68cc9b9bac194ede4881453f7706528bc18add",
+          "head_branch": "main",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/zhengcb81/invest-skills/actions/runs/41442479736",
+          "updated_at": "2026-11-02T12:10:54Z"
+        }
+      ]
+    }
   },
   "W23": "Tooling merged/pushed/exact CI pass; empirical partial, not production OCR switch.",
   "daily_feedback": "Fixed original167case smoke, no impact-AST expansion; main push45.097s and complete CI pass.",
-  "observed_at_utc": "2026-11-02T03:21:02.100896+00:00",
+  "observed_at_utc": "2026-11-02T13:20:05.862425+00:00",
   "historical_pre_r6_metadata": {
     "independent_final": "independent-wire-r5.md",
     "engineering_commit": "c97d4fbd",
@@ -146,5 +164,64 @@
     "full_CI_failed": 63,
     "safe_isolation_commit": "dbfec3beb0948006475701e2131c4d95e0586556"
   },
-  "engineering_commit": "10767b86318e63094c2bb49451447c9aedffc32c"
+  "engineering_commit": "ef3d92a26fce661ab6d6c047f7a01c223d426344",
+  "historical_r6_publication": {
+    "published_main_bundle": "c6bb801b4e87bbffbab0feefbdbe663b693ab12c",
+    "source_runtime_commit": "10767b86318e63094c2bb49451447c9aedffc32c",
+    "main_ci": 41381788839,
+    "main_ci_conclusion": "success",
+    "independent": "R6-independent-ci-r5.json",
+    "receipt": "R6-publication.json"
+  },
+  "historical_observations": {
+    "real_source_observation": {
+      "case": "H1 current-v1",
+      "elapsed_s": 37.394,
+      "parser_pages": 199,
+      "source_units": 4224,
+      "work_units": 15998066,
+      "work_cap": 16000000,
+      "selected_spans": 112,
+      "groups": 70,
+      "required_units_preserved": "12/12",
+      "native_member_slices": "111/111",
+      "boundary": "partial; 9 old actor/context pairs not yet judged; DB/WAL/SHM content same, SHM mtime-only checker false failure preserved",
+      "source_version": "e4c08e42...689b before/after stable; not final R4 revision"
+    },
+    "real_source_observation_v2": {
+      "elapsed_s": 23.170454,
+      "result": "FAILED unknown source_processing_complete at public handler",
+      "required_units": "NOT_OBSERVED",
+      "context_pairs": "9 OPEN",
+      "subsequent": "R5 wire fixed with actual handler/golden tests; no v3 due user pause"
+    },
+    "rf_publication_head": "957c6283d3381d23c39515afd3a09147d8201c7b",
+    "rf_exact_ci": "41304681319 success",
+    "selected_RF_installation": "2 physical writes; repeat0;3 logical fresh PASS",
+    "r6_independent": {
+      "consumer": "R6-independent-consumers.md",
+      "source_r2": "R6-independent-final-r2.md",
+      "old_source_failure_retained": "R6-independent-final.md",
+      "W23": "R6-W23-independent-final.md"
+    },
+    "r3_independent": {
+      "status": "NEEDS_ROOT_FIX",
+      "passed": 18,
+      "failed": 5,
+      "evidence": "R6-independent-ci-r3.json"
+    }
+  },
+  "current_source_observation": {
+    "case": "H1v4",
+    "receipt_bytes": 388583,
+    "required_units": "12/12",
+    "independent_result": "NEEDS_ROOT_FIX_SOURCE_CONTEXT",
+    "affected_selected_views": [
+      25,
+      28,
+      65
+    ],
+    "evidence": "C-source-v4-independent.json",
+    "next": "T4-source-note-parent-plan.md"
+  }
 }

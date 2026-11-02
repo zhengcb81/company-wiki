@@ -1,0 +1,66 @@
+{
+  "status": "PASS",
+  "review_round": 3,
+  "supersedes_for_current_acceptance": [
+    "R7-final-sweep-core-independent.md/json",
+    "R7-final-sweep-core-independent-r2.md/json"
+  ],
+  "historical_fail_reports": "preserved unchanged",
+  "delivery_files_sha256": {
+    "src/company_wiki/automation/json_tree.py": "9c7b42973df798db7592f3ac7732cc99dd71e630bb1f3fbbf012c945329534b6",
+    "src/company_wiki/automation/narrative_contracts.py": "a70704e4450118f1e4afbc1a63b2bf8dac3e3a8de071164f07b09061f39a0044",
+    "src/company_wiki/automation/narrative_model.py": "0078293176c67b6ac63245c5ecff7bf6d1c197d33f2cba63cbb38c1c5f7bcc49",
+    "src/company_wiki/automation/narrative_model_scoped.py": "b2f174f0c5c108e79120be6e56d566eefa144079263d063e9a679b2ca4134f7b",
+    "src/company_wiki/automation/narrative_batch_request.py": "6f0a50bf78395cbe203895ae819cae7842d4600c65cd13804d116dec864e24a8",
+    "src/company_wiki/source_catalog/canonical_writer.py": "621738f1c06ab3d6a898cdf69b5058f4fa0f72125ec674ca4654e0eda4145931",
+    "src/company_wiki/source_catalog/source_availability.py": "56789a1b2b2f61e28c13880a28f77abb91609cea5dbf93f417c10f94c69e6a42",
+    "src/company_wiki/source_catalog/local_inventory.py": "4310beb14a41f6fc8de3165e3e550e25550a2c8502a31475773072edc74fb60c",
+    "src/company_wiki/source_catalog/assertion_service.py": "d795953855d0197f40b4f288bbb5c7460407042289e86e6884e26ad4f43b3480",
+    "src/company_wiki/source_catalog/local_reconcile.py": "deef283e06665be6925d9be94e0c3e90c49fce35ff7df9ddfff0e63fb874f222",
+    "src/company_wiki/source_catalog/resolver.py": "0195f1524516640c10ebb99727f5f9281cb075a42a011537cb24631eca4d6502",
+    "tests/unit/test_r7_final_core_simplification.py": "c661511cb0de287b4cf32d6c29371f18154bdd1a0431d05bd3bbe141c655d91f",
+    "tests/unit/test_r7_availability_budget_owner.py": "51d88a0441222d3bcdaff54e03f6c35f3c51dca937792ddea818583984eb1441",
+    "tests/unit/test_narrative_post_model_failure_diagnostics.py": "4c038ddeb1405c9296cf2705932213f174c35074b16006a56559700321dae54e",
+    "tests/unit/test_narrative_citation_unit_model_boundary.py": "647a1f332d737aa6d3813ce1f7bac99f68ef99ed0326804717183b31fa8dd995",
+    "tests/contract/test_source_availability.py": "a423213580a1ba877e2f2e2ed6967b7771e0fb73fc4dad490a83c83b52a68e19"
+  },
+  "all16_stable": true,
+  "runtime_anchors": {
+    "source_availability.py": "56789a1b2b2f61e28c13880a28f77abb91609cea5dbf93f417c10f94c69e6a42",
+    "resolver.py": "0195f1524516640c10ebb99727f5f9281cb075a42a011537cb24631eca4d6502"
+  },
+  "new_dynamic_delta_run": {
+    "total": 4,
+    "passed": 4,
+    "failed": 0,
+    "pytest_seconds": 0.71,
+    "host_command_seconds": 1.5897521,
+    "same_reproducer_sha256_as_r2": "98d9ecb07cb60312acc01abda81580c873d71845490c6e125b7363399e01c252",
+    "warning": "asyncio_mode unknown with optional plugin autoload disabled"
+  },
+  "conclusions": [
+    "Original only/final-location cancellation and deadline controls now pass without changing test assertions.",
+    "Default resolver._ReadBudget on public stored_availability_evidence is compatible again and preserves30already-consumed bytes; no missingcheck AttributeError.",
+    "Root fix gives the existing base owner a cancellation check; LocalReadBudget override retains actual deadline/cancel behavior. No alternate account/fallback/reset or skip permit introduced.",
+    "Known byte-bound proof still survives actual discovery-work exhaustion while same budget retains triggered_bound/counters. Explicit cancellation/deadline are not treated as this partial-evidence case.",
+    "Other14files remain the same reviewed version; original10positive core cases not rerun. Their frozen-code review and prior evidence remain applicable, while currentpublicstop/resource contracts were independently rerun."
+  ],
+  "findings": [],
+  "evidence": {
+    "test_source": "from pathlib import Path\nfrom types import SimpleNamespace\nimport sys\nimport pytest\nROOT = Path(__file__).resolve().parents[2]\nsys.path[:0] = [str(ROOT), str(ROOT / \"src\"), str(ROOT / \"tests\")]\nfrom company_wiki.source_catalog import source_availability as availability\nfrom company_wiki.source_catalog.local_inventory import LocalReadBudget, LocalPrepareLimits\nfrom company_wiki.source_catalog.source_reader import SourceReadError\nfrom company_wiki.source_catalog.resolver import _ReadBudget\nfrom contract.test_source_availability import REF, capture_payload, fixture_catalog\n\n@pytest.mark.parametrize(\"stop\", [\"cancelled\", \"deadline\"])\ndef test_final_single_location_cannot_hide_cancellation_or_deadline(tmp_path, monkeypatch, stop):\n    catalog = fixture_catalog(tmp_path, capture_payload(), cap=1)\n    budget = LocalReadBudget(LocalPrepareLimits())\n    original = budget.read_metadata_observation\n    def consumed(*args, **kwargs):\n        result = original(*args, **kwargs)\n        if stop == \"cancelled\": budget.cancel()\n        else: budget.deadline = 0\n        return result\n    monkeypatch.setattr(budget, \"read_metadata_observation\", consumed)\n    with pytest.raises(SourceReadError) as raised:\n        availability.verified_availability_evidence(catalog, REF, budget=budget)\n    assert raised.value.reason == (\"cancelled\" if stop == \"cancelled\" else \"local_prepare_deadline\")\n\n\ndef test_default_resolver_budget_stays_compatible_with_stored_availability(monkeypatch):\n    import company_wiki.source_catalog.assertion_service as assertions\n    monkeypatch.setattr(assertions, \"get_verified_assertion\", lambda *_args, **_kwargs: None)\n    # SourceResolver.resolve creates exactly this existing budget by default.\n    parent = _ReadBudget(max_bytes=1000)\n    parent.bytes_read = 30\n    assert availability.stored_availability_evidence(SimpleNamespace(reader=object()), REF, budget=parent) is None\n    assert parent.bytes_read == 30\n\n\ndef test_known_partial_proof_still_survives_real_discovery_resource_stop(tmp_path):\n    catalog = fixture_catalog(tmp_path, capture_payload(), cap=3)\n    parent = LocalReadBudget(LocalPrepareLimits(max_discovery_entries=1))\n    result = availability.verified_availability_evidence(catalog, REF, budget=parent)\n    assert result[\"source_sha256\"] == REF.content_sha256\n    assert result[\"basis\"] == \"prior_verified_capture\"\n    assert parent.triggered_bound == \"max_discovery_entries\"\n    assert parent.discovery_entries == 2 and parent.bytes_read > 0\n",
+    "run_log": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\r7c3\\\\p\", \"requested_basetemp_len\": 45, \"cwd_len\": 34, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\nconfigfile: pytest.ini\ncollected 4 items\n\ntmp\\r7c3\\test_independent.py ....                                        [100%]\n\n============================== warnings summary ===============================\n..\\..\\..\\..\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464\n  C:\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode\n  \n    self._warn_or_fail_if_strict(f\"Unknown config option: {key}\\n\")\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n-- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r7c3\\junit.xml --\n======================== 4 passed, 1 warning in 0.71s =========================\n",
+    "junit_xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"0\" skipped=\"0\" tests=\"4\" time=\"0.636\" timestamp=\"2026-11-02T12:09:33.823140+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tmp.r7c3.test_independent\" name=\"test_final_single_location_cannot_hide_cancellation_or_deadline[cancelled]\" time=\"0.016\" /><testcase classname=\"tmp.r7c3.test_independent\" name=\"test_final_single_location_cannot_hide_cancellation_or_deadline[deadline]\" time=\"0.009\" /><testcase classname=\"tmp.r7c3.test_independent\" name=\"test_default_resolver_budget_stays_compatible_with_stored_availability\" time=\"0.001\" /><testcase classname=\"tmp.r7c3.test_independent\" name=\"test_known_partial_proof_still_survives_real_discovery_resource_stop\" time=\"0.007\" /></testsuite></testsuites>"
+  },
+  "scope_limit": "Independent final core16file acceptance only. No fullCI/H1/source/model/paid or ownINV selfreview; no144/34/9/12repetition; no src/tests/Git/index/mainPWF changes.",
+  "cleanup": {
+    "owned_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r7c3",
+    "initial_absent": true,
+    "parent_verified_before_delete": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp",
+    "reparse_points": 0,
+    "removed_files": 7,
+    "removed_bytes": 9763.0,
+    "exists_after": false,
+    "status": "restored_to_initial_absent"
+  },
+  "next": "ROOT may accept the final16file core manifest; ROOT owns normal release/CI/PWF."
+}

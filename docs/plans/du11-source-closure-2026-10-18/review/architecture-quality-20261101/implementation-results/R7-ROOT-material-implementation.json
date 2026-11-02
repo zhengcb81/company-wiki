@@ -1,0 +1,72 @@
+{
+  "status": "FROZEN_AWAITING_INDEPENDENT_REVIEW",
+  "delivery_files_sha256": {
+    "tools/document_understanding_benchmark/final_material.py": "200627006abd999a0bca57222f39844f31c9e0527e3129b158c6a8ff75273972",
+    "tools/document_understanding_benchmark/tests/test_final_material.py": "4da77df542f69cc91c31cbe99e20629cc1d55e37a7ed7fae1d7db9bef125021b"
+  },
+  "scope": "Supported standalone final-material observer, no active production caller claimed; remove default512/4MiB and hard-only-lower clamp; caller explicit allocation and actual work limit remain. max_units allocation now honestly enforced when explicitly supplied.",
+  "tests": {
+    "red": "3 actual representation refusals",
+    "green": "26P1newfixtureF locator; corrected one node then wrong newline fixture failed34.75s due expensive diff; fixed expected aggregate separator, fullSHA comparison avoids huge diff; target1P0.31s",
+    "source_correctness": "No weakening of duplicate locator/source text, explicit requested limit or work checks",
+    "rerun_whole_suite": false
+  },
+  "runs": [
+    {
+      "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "phase": "material-cap-red",
+      "targets": [
+        "tools/document_understanding_benchmark/tests/test_final_material.py::test_complete_material_has_no_implicit_representation_cap"
+      ],
+      "owned": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r7rt-cb6136",
+      "initially_absent": true,
+      "returncode": 1,
+      "elapsed_s": 2.855,
+      "rf_four_wip_unchanged": true,
+      "restored_absent": true,
+      "junit": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"3\" skipped=\"0\" tests=\"3\" time=\"0.856\" timestamp=\"2026-11-02T11:38:16.008282+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tools.document_understanding_benchmark.tests.test_final_material\" name=\"test_complete_material_has_no_implicit_representation_cap[rows]\" time=\"0.009\"><failure message=\"tools.document_understanding_benchmark.final_material.FinalMaterialError: material carries 513 evidence rows, over the limit of 512\">tools\\document_understanding_benchmark\\tests\\test_final_material.py:304: in test_complete_material_has_no_implicit_representation_cap\n    observed = _observe(material=envelope, originals=source)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntools\\document_understanding_benchmark\\tests\\test_final_material.py:37: in _observe\n    return observe_final_material(**kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntools\\document_understanding_benchmark\\final_material.py:342: in observe_final_material\n    raise FinalMaterialError(\nE   tools.document_understanding_benchmark.final_material.FinalMaterialError: material carries 513 evidence rows, over the limit of 512</failure></testcase><testcase classname=\"tools.document_understanding_benchmark.tests.test_final_material\" name=\"test_complete_material_has_no_implicit_representation_cap[groups]\" time=\"0.008\"><failure message=\"tools.document_understanding_benchmark.final_material.FinalMaterialError: material carries 513 groups, over the limit of 512\">tools\\document_understanding_benchmark\\tests\\test_final_material.py:304: in test_complete_material_has_no_implicit_representation_cap\n    observed = _observe(material=envelope, originals=source)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntools\\document_understanding_benchmark\\tests\\test_final_material.py:37: in _observe\n    return observe_final_material(**kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntools\\document_understanding_benchmark\\final_material.py:401: in observe_final_material\n    raise FinalMaterialError(\nE   tools.document_understanding_benchmark.final_material.FinalMaterialError: material carries 513 groups, over the limit of 512</failure></testcase><testcase classname=\"tools.document_understanding_benchmark.tests.test_final_material\" name=\"test_complete_material_has_no_implicit_representation_cap[text]\" time=\"0.006\"><failure message=\"tools.document_understanding_benchmark.final_material.FinalMaterialError: observation text exceeds the limit of 4194304 bytes\">tools\\document_understanding_benchmark\\tests\\test_final_material.py:304: in test_complete_material_has_no_implicit_representation_cap\n    observed = _observe(material=envelope, originals=source)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntools\\document_understanding_benchmark\\tests\\test_final_material.py:37: in _observe\n    return observe_final_material(**kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntools\\document_understanding_benchmark\\final_material.py:370: in observe_final_material\n    raise FinalMaterialError(\nE   tools.document_understanding_benchmark.final_material.FinalMaterialError: observation text exceeds the limit of 4194304 bytes</failure></testcase></testsuite></testsuites>"
+    },
+    {
+      "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "phase": "material-cap-green",
+      "targets": [
+        "tools/document_understanding_benchmark/tests/test_final_material.py"
+      ],
+      "owned": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r7rt-5a6fa9",
+      "initially_absent": true,
+      "returncode": 1,
+      "elapsed_s": 2.336,
+      "rf_four_wip_unchanged": true,
+      "restored_absent": true,
+      "junit": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"1\" skipped=\"0\" tests=\"27\" time=\"0.580\" timestamp=\"2026-11-02T11:38:45.142116+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tools.document_understanding_benchmark.tests.test_final_material\" name=\"test_final_material_is_observed_from_real_rows_and_originals\" time=\"0.003\" /><testcase classname=\"tools.document_understanding_benchmark.tests.test_final_material\" name=\"test_group_alias_becomes_a_semantic_unit_with_real_members\" time=\"0.001\" /><testcase classname=\"tools.document_understanding_benchmark.tests.test_final_material\" name=\"test_every_selected_locator_resolves_to_a_real_original_unit\" time=\"0.001\" /><testcase classname=\"tools.document_understanding_benchmark.tests.test_final_material\" name=\"test_material_text_cannot_substitute_for_the_original\" time=\"0.001\" /><testcase classname=\"tools.document_understanding_benchmark.tests.test_final_material\" name=\"test_gold_is_not_an_input_and_cannot_supply_missing_text\" time=\"0.002\" /><testcase classname=\"tools.document_understanding_benchmark.tests.test_final_material\" name=\"test_unknown_alias_is_reported_not_silently_dropped\" time=\"0.002\" /><testcase classname=\"tools.document_understanding_benchmark.tests.test_final_material\" name=\"test_group_alias_not_present_in_the_material_is_refused\" time=\"0.001\" /><testcase classname=\"tools.document_understanding_benchmark.tests.test_final_material\" name=\"test_columns_must_be_declared_and_consistent\" time=\"0.001\" /><testcase classname=\"tools.document_understanding_benchmark.tests.test_final_material\" name=\"test_dropped_negation_in_the_material_is_detected\" time=\"0.001\" /><testcase classname=\"tools.document_understanding_benchmark.tests.test_final_material\" name=\"test_material_that_swaps_the_unit_binding_is_refused\" time=\"0.001\" /><testcase classname=\"tools.document_understanding_benchmark.tests.test_final_material\" name=\"test_original_without_a_locator_is_refused\" time=\"0.001\" /><testcase classname=\"tools.document_understanding_benchmark.tests.test_final_material\" name=\"test_original_without_source_identity_is_refused\" time=\"0.001\" /><testcase classname=\"tools.document_understanding_benchmark.tests.test_final_material\" name=\"test_original_from_a_different_source_is_refused\" time=\"0.001\" /><testcase classname=\"tools.document_understanding_benchmark.tests.test_final_material\" name=\"test_two_units_sharing_one_locator_is_ambiguous_and_refused\" time=\"0.001\" /><testcase classname=\"tools.document_understanding_benchmark.tests.test_final_material\" name=\"test_one_alias_used_by_two_groups_cannot_mint_two_scopes\" time=\"0.001\" /><testcase classname=\"tools.document_understanding_benchmark.tests.test_final_material\" name=\"test_group_members_across_subjects_are_refused\" time=\"0.001\" /><testcase classname=\"tools.document_understanding_benchmark.tests.test_final_material\" name=\"test_identical_body_in_two_aliases_is_reported_as_duplication\" time=\"0.001\" /><testcase classname=\"tools.document_understanding_benchmark.tests.test_final_material\" name=\"test_unread_pages_are_carried_into_coverage_not_reported_as_empty\" time=\"0.001\" /><testcase classname=\"tools.document_understanding_benchmark.tests.test_final_material\" name=\"test_coverage_complete_matches_the_actual_unread_facts\" time=\"0.001\" /><testcase classname=\"tools.document_understanding_benchmark.tests.test_final_material\" name=\"test_material_with_zero_evidence_is_observed_as_empty_not_unread\" time=\"0.001\" /><testcase classname=\"tools.document_understanding_benchmark.tests.test_final_material\" name=\"test_configured_assembly_budget_is_recorded_not_inferred\" time=\"0.002\" /><testcase classname=\"tools.document_understanding_benchmark.tests.test_final_material\" name=\"test_limits_must_be_a_mapping_and_zero_budget_stops\" time=\"0.002\" /><testcase classname=\"tools.document_understanding_benchmark.tests.test_final_material\" name=\"test_limits_that_are_exceeded_refuse_rather_than_truncate\" time=\"0.001\" /><testcase classname=\"tools.document_understanding_benchmark.tests.test_final_material\" name=\"test_complete_material_has_no_implicit_representation_cap[rows]\" time=\"0.007\"><failure message=\"tools.document_understanding_benchmark.schema.BenchmarkSchemaError: observed.selected_evidence has duplicate locator loc:v1/page:12/table:1/row:3\">tools\\document_understanding_benchmark\\tests\\test_final_material.py:304: in test_complete_material_has_no_implicit_representation_cap\n    observed = _observe(material=envelope, originals=source)\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntools\\document_understanding_benchmark\\tests\\test_final_material.py:37: in _observe\n    return observe_final_material(**kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntools\\document_understanding_benchmark\\final_material.py:493: in observe_final_material\n    observed = validate_observed(\ntools\\document_understanding_benchmark\\records.py:354: in validate_observed\n    \"selected_evidence\": _source_rows(record.get(\"selected_evidence\"), \"observed.selected_evidence\"),\n                         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntools\\document_understanding_benchmark\\records.py:204: in _source_rows\n    raise BenchmarkSchemaError(f\"{where} has duplicate locator {locator}\")\nE   tools.document_understanding_benchmark.schema.BenchmarkSchemaError: observed.selected_evidence has duplicate locator loc:v1/page:12/table:1/row:3</failure></testcase><testcase classname=\"tools.document_understanding_benchmark.tests.test_final_material\" name=\"test_complete_material_has_no_implicit_representation_cap[groups]\" time=\"0.014\" /><testcase classname=\"tools.document_understanding_benchmark.tests.test_final_material\" name=\"test_complete_material_has_no_implicit_representation_cap[text]\" time=\"0.006\" /><testcase classname=\"tools.document_understanding_benchmark.tests.test_final_material\" name=\"test_observed_output_is_accepted_by_the_existing_oracle\" time=\"0.003\" /></testsuite></testsuites>"
+    },
+    {
+      "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "phase": "material-rows-final",
+      "targets": [
+        "tools/document_understanding_benchmark/tests/test_final_material.py::test_complete_material_has_no_implicit_representation_cap[rows]"
+      ],
+      "owned": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r7rt-01fa16",
+      "initially_absent": true,
+      "returncode": 1,
+      "elapsed_s": 35.456,
+      "rf_four_wip_unchanged": true,
+      "restored_absent": true,
+      "junit": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"1\" skipped=\"0\" tests=\"1\" time=\"34.654\" timestamp=\"2026-11-02T11:39:00.772473+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tools.document_understanding_benchmark.tests.test_final_material\" name=\"test_complete_material_has_no_implicit_representation_cap[rows]\" time=\"34.331\"><failure message=\"AssertionError: assert '门店总数7,504家（截...2024年12月31日）。' == '门店总数7,504家（截...2024年12月31日）。'&#10;  &#10;  (pytest_assertion plugin: representation of details failed: C:\\Miniconda\\Lib\\difflib.py:193: RecursionError: maximum recursion depth exceeded.&#10;   Probably an object has a faulty __repr__.)\">tools\\document_understanding_benchmark\\tests\\test_final_material.py:309: in test_complete_material_has_no_implicit_representation_cap\n    assert observed[\"selected_text\"] == \"\\n\\n\".join(row[1] for row in envelope[\"evidence\"])\nE   AssertionError: assert '门店总数7,504家（截...2024年12月31日）。' == '门店总数7,504家（截...2024年12月31日）。'\nE     \nE     (pytest_assertion plugin: representation of details failed: C:\\Miniconda\\Lib\\difflib.py:193: RecursionError: maximum recursion depth exceeded.\nE      Probably an object has a faulty __repr__.)</failure></testcase></testsuite></testsuites>"
+    },
+    {
+      "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "phase": "material-rows-encoding-final",
+      "targets": [
+        "tools/document_understanding_benchmark/tests/test_final_material.py::test_complete_material_has_no_implicit_representation_cap[rows]"
+      ],
+      "owned": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r7rt-709017",
+      "initially_absent": true,
+      "returncode": 0,
+      "elapsed_s": 0.975,
+      "rf_four_wip_unchanged": true,
+      "restored_absent": true,
+      "junit": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"0\" skipped=\"0\" tests=\"1\" time=\"0.145\" timestamp=\"2026-11-02T11:40:43.607606+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tools.document_understanding_benchmark.tests.test_final_material\" name=\"test_complete_material_has_no_implicit_representation_cap[rows]\" time=\"0.008\" /></testsuite></testsuites>"
+    }
+  ]
+}

@@ -1,0 +1,475 @@
+{
+  "status": "R7_ENGINEERING_PUBLISHED_ALL_EXACT_CI_GREEN_REAL_C_OPEN",
+  "observed_at_utc": "2026-11-02T13:20:05.862425+00:00",
+  "publication": {
+    "company-wiki": {
+      "source_head": "389a10fb9a3321072ed863e5e55d761043218921",
+      "exact_ci": [
+        {
+          "id": 41450377163,
+          "name": "CI",
+          "head_sha": "389a10fb9a3321072ed863e5e55d761043218921",
+          "head_branch": "master",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41450377163",
+          "updated_at": "2026-11-02T13:15:36Z"
+        }
+      ]
+    },
+    "filing-fetch": {
+      "source_head": "350cb39dad8a1116d76fd44824fe353ae210d384",
+      "exact_ci": [
+        {
+          "id": 41450346468,
+          "name": "quality",
+          "head_sha": "350cb39dad8a1116d76fd44824fe353ae210d384",
+          "head_branch": "main",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/zhengcb81/filing-fetch/actions/runs/41450346468",
+          "updated_at": "2026-11-02T13:10:05Z"
+        }
+      ]
+    },
+    "revenue-forecast": {
+      "source_head": "e44c7e9717c05346086e5ec07bc1f30373f8279f",
+      "exact_ci": [
+        {
+          "id": 41444705227,
+          "name": "quality",
+          "head_sha": "e44c7e9717c05346086e5ec07bc1f30373f8279f",
+          "head_branch": "main",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/41444705227",
+          "updated_at": "2026-11-02T12:27:34Z"
+        }
+      ]
+    },
+    "invest-skills": {
+      "source_head": "9b68cc9b9bac194ede4881453f7706528bc18add",
+      "exact_ci": [
+        {
+          "id": 41442479736,
+          "name": "quality",
+          "head_sha": "9b68cc9b9bac194ede4881453f7706528bc18add",
+          "head_branch": "main",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/zhengcb81/invest-skills/actions/runs/41442479736",
+          "updated_at": "2026-11-02T12:10:54Z"
+        }
+      ]
+    }
+  },
+  "deployment": {
+    "status": "TARGETED_DEPLOYED_REPEAT_ZERO_WRITE",
+    "selected_files": {
+      "revenue-forecast": [
+        "scripts/research/input_targets.py",
+        "scripts/research/drivers.py",
+        "scripts/revenue_backtest.py",
+        "scripts/filing_upstream_cause.py",
+        "scripts/contracts/source_clock.py",
+        "references/input-construction.md",
+        "references/summary-adoption.md"
+      ],
+      "filing-fetch": [
+        "scripts/ff_configuration.py",
+        "scripts/ff_local_preparation_observation.py",
+        "scripts/fetch_filing.py",
+        "scripts/transcript_tool_transport.py"
+      ],
+      "invest-skills": [
+        "invest-core/scripts/invest_contracts.py",
+        "invest-framework/scripts/company_orchestrator.py",
+        "invest-framework/scripts/bundle_validator.py"
+      ]
+    },
+    "configs_before": {
+      "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\config\\company_wiki.json": "7a65a00ecc526d5503359feed6a80a7578d3dbf4c8ef133ccf899aecf9383fb9",
+      "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\config\\filing_fetch.json": "1f5eb57d3e0697ae35fbc9f5d4b6e837459b56ea791508cc6ec5275b349b59b7",
+      "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\config\\company_wiki.json": "00911cfb2b191bc4bb856b6309c4da31a7b309850cbcd8c998a7eb4e003525cb",
+      "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast\\config\\company_wiki.json": "7a65a00ecc526d5503359feed6a80a7578d3dbf4c8ef133ccf899aecf9383fb9",
+      "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast\\config\\filing_fetch.json": "1f5eb57d3e0697ae35fbc9f5d4b6e837459b56ea791508cc6ec5275b349b59b7",
+      "C:\\Users\\郑曾波\\.claude\\skills\\filing-fetch\\config\\company_wiki.json": "00911cfb2b191bc4bb856b6309c4da31a7b309850cbcd8c998a7eb4e003525cb",
+      "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\config\\company_wiki.json": "7a65a00ecc526d5503359feed6a80a7578d3dbf4c8ef133ccf899aecf9383fb9",
+      "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\config\\filing_fetch.json": "1f5eb57d3e0697ae35fbc9f5d4b6e837459b56ea791508cc6ec5275b349b59b7",
+      "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch\\config\\company_wiki.json": "00911cfb2b191bc4bb856b6309c4da31a7b309850cbcd8c998a7eb4e003525cb"
+    },
+    "steps": [
+      {
+        "label": "residual-install-revenue-forecast",
+        "returncode": 0,
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\tools\\sync_installations.py",
+          "--canonical",
+          "C:\\Users\\郑曾波\\Projects\\revenue-forecast",
+          "--apply",
+          "--json",
+          "--file",
+          "scripts/research/input_targets.py",
+          "--file",
+          "scripts/research/drivers.py",
+          "--file",
+          "scripts/revenue_backtest.py",
+          "--file",
+          "scripts/filing_upstream_cause.py",
+          "--file",
+          "scripts/contracts/source_clock.py",
+          "--file",
+          "references/input-construction.md",
+          "--file",
+          "references/summary-adoption.md"
+        ]
+      },
+      {
+        "label": "residual-install-filing-fetch",
+        "returncode": 0,
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "C:\\Users\\郑曾波\\Projects\\filing-fetch\\tools\\sync_installs_b3.py",
+          "--install",
+          "--json",
+          "--file",
+          "scripts/ff_configuration.py",
+          "--file",
+          "scripts/ff_local_preparation_observation.py",
+          "--file",
+          "scripts/fetch_filing.py",
+          "--file",
+          "scripts/transcript_tool_transport.py"
+        ]
+      },
+      {
+        "label": "residual-install-invest-skills",
+        "returncode": 0,
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "C:\\Users\\郑曾波\\Projects\\invest-skills\\tools\\sync_installations.py",
+          "--canonical",
+          "C:\\Users\\郑曾波\\Projects\\invest-skills",
+          "--apply",
+          "--file",
+          "invest-core/scripts/invest_contracts.py",
+          "--file",
+          "invest-framework/scripts/company_orchestrator.py",
+          "--file",
+          "invest-framework/scripts/bundle_validator.py"
+        ]
+      },
+      {
+        "label": "residual-install-revenue-forecast-repeat",
+        "returncode": 0,
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\tools\\sync_installations.py",
+          "--canonical",
+          "C:\\Users\\郑曾波\\Projects\\revenue-forecast",
+          "--apply",
+          "--json",
+          "--file",
+          "scripts/research/input_targets.py",
+          "--file",
+          "scripts/research/drivers.py",
+          "--file",
+          "scripts/revenue_backtest.py",
+          "--file",
+          "scripts/filing_upstream_cause.py",
+          "--file",
+          "scripts/contracts/source_clock.py",
+          "--file",
+          "references/input-construction.md",
+          "--file",
+          "references/summary-adoption.md"
+        ]
+      },
+      {
+        "label": "residual-install-filing-fetch-repeat",
+        "returncode": 0,
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "C:\\Users\\郑曾波\\Projects\\filing-fetch\\tools\\sync_installs_b3.py",
+          "--install",
+          "--json",
+          "--file",
+          "scripts/ff_configuration.py",
+          "--file",
+          "scripts/ff_local_preparation_observation.py",
+          "--file",
+          "scripts/fetch_filing.py",
+          "--file",
+          "scripts/transcript_tool_transport.py"
+        ]
+      },
+      {
+        "label": "residual-install-invest-skills-repeat",
+        "returncode": 0,
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "-B",
+          "-X",
+          "utf8",
+          "C:\\Users\\郑曾波\\Projects\\invest-skills\\tools\\sync_installations.py",
+          "--canonical",
+          "C:\\Users\\郑曾波\\Projects\\invest-skills",
+          "--apply",
+          "--file",
+          "invest-core/scripts/invest_contracts.py",
+          "--file",
+          "invest-framework/scripts/company_orchestrator.py",
+          "--file",
+          "invest-framework/scripts/bundle_validator.py"
+        ]
+      }
+    ],
+    "installed": {
+      "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\input_targets.py": {
+        "sha256": "d580465c042d4c00ea102d00bf92eca6a357371dcb11c433d5808eeb80be0247",
+        "mtime_ns": 1793618730699139700
+      },
+      "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast\\scripts\\research\\input_targets.py": {
+        "sha256": "d580465c042d4c00ea102d00bf92eca6a357371dcb11c433d5808eeb80be0247",
+        "mtime_ns": 1793618730699139700
+      },
+      "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\research\\input_targets.py": {
+        "sha256": "d580465c042d4c00ea102d00bf92eca6a357371dcb11c433d5808eeb80be0247",
+        "mtime_ns": 1793618730699139700
+      },
+      "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\research\\drivers.py": {
+        "sha256": "2a05dc3489fe46a2455cc28b23fbc5f4787bbf4c8e43d170d98d9222f96a126e",
+        "mtime_ns": 1793618730718184300
+      },
+      "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast\\scripts\\research\\drivers.py": {
+        "sha256": "2a05dc3489fe46a2455cc28b23fbc5f4787bbf4c8e43d170d98d9222f96a126e",
+        "mtime_ns": 1793618730718184300
+      },
+      "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\research\\drivers.py": {
+        "sha256": "2a05dc3489fe46a2455cc28b23fbc5f4787bbf4c8e43d170d98d9222f96a126e",
+        "mtime_ns": 1793618730718184300
+      },
+      "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\revenue_backtest.py": {
+        "sha256": "56e443eabc225de55ac2b80f23fcab94a18c44220848ad04887e17395f8f7d73",
+        "mtime_ns": 1793618730700140400
+      },
+      "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast\\scripts\\revenue_backtest.py": {
+        "sha256": "56e443eabc225de55ac2b80f23fcab94a18c44220848ad04887e17395f8f7d73",
+        "mtime_ns": 1793618730700140400
+      },
+      "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\revenue_backtest.py": {
+        "sha256": "56e443eabc225de55ac2b80f23fcab94a18c44220848ad04887e17395f8f7d73",
+        "mtime_ns": 1793618730700140400
+      },
+      "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\filing_upstream_cause.py": {
+        "sha256": "3cede5008d138f8343ab79e36e2d4e478c987a9db58e2cf2e94df9779fd847fb",
+        "mtime_ns": 1793618730763283200
+      },
+      "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast\\scripts\\filing_upstream_cause.py": {
+        "sha256": "3cede5008d138f8343ab79e36e2d4e478c987a9db58e2cf2e94df9779fd847fb",
+        "mtime_ns": 1793618730763283200
+      },
+      "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\filing_upstream_cause.py": {
+        "sha256": "3cede5008d138f8343ab79e36e2d4e478c987a9db58e2cf2e94df9779fd847fb",
+        "mtime_ns": 1793618730763283200
+      },
+      "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\contracts\\source_clock.py": {
+        "sha256": "201807b094016dd38b0e9f24098b22ee1484f4a78af9951cee637ca226a4661b",
+        "mtime_ns": 1793619104237418100
+      },
+      "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast\\scripts\\contracts\\source_clock.py": {
+        "sha256": "201807b094016dd38b0e9f24098b22ee1484f4a78af9951cee637ca226a4661b",
+        "mtime_ns": 1793619104237418100
+      },
+      "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\contracts\\source_clock.py": {
+        "sha256": "201807b094016dd38b0e9f24098b22ee1484f4a78af9951cee637ca226a4661b",
+        "mtime_ns": 1793619104237418100
+      },
+      "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\input-construction.md": {
+        "sha256": "986dce5871a413dc84964d7226474df7385e9393ee326eb93b69598d18de5127",
+        "mtime_ns": 1793622214074913400
+      },
+      "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast\\references\\input-construction.md": {
+        "sha256": "986dce5871a413dc84964d7226474df7385e9393ee326eb93b69598d18de5127",
+        "mtime_ns": 1793622214074913400
+      },
+      "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\references\\input-construction.md": {
+        "sha256": "986dce5871a413dc84964d7226474df7385e9393ee326eb93b69598d18de5127",
+        "mtime_ns": 1793622214074913400
+      },
+      "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\references\\summary-adoption.md": {
+        "sha256": "bc8501fea06cad56e3b0c6ef96f711921fb60724644539b0d98ff9226434bec8",
+        "mtime_ns": 1793622214077435600
+      },
+      "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast\\references\\summary-adoption.md": {
+        "sha256": "bc8501fea06cad56e3b0c6ef96f711921fb60724644539b0d98ff9226434bec8",
+        "mtime_ns": 1793622214077435600
+      },
+      "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\references\\summary-adoption.md": {
+        "sha256": "bc8501fea06cad56e3b0c6ef96f711921fb60724644539b0d98ff9226434bec8",
+        "mtime_ns": 1793622214077435600
+      },
+      "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\ff_configuration.py": {
+        "sha256": "869b3fbf5c9d519b05fde4835f85edfd6ed85cb8c3b1a490e31c80856763c715",
+        "mtime_ns": 1793618730759189100
+      },
+      "C:\\Users\\郑曾波\\.claude\\skills\\filing-fetch\\scripts\\ff_configuration.py": {
+        "sha256": "869b3fbf5c9d519b05fde4835f85edfd6ed85cb8c3b1a490e31c80856763c715",
+        "mtime_ns": 1793618730759189100
+      },
+      "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch\\scripts\\ff_configuration.py": {
+        "sha256": "869b3fbf5c9d519b05fde4835f85edfd6ed85cb8c3b1a490e31c80856763c715",
+        "mtime_ns": 1793618730759189100
+      },
+      "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\ff_local_preparation_observation.py": {
+        "sha256": "2338c544bb86542bc3c36148e205ba53454406109e206e4a29311ff0f35198dd",
+        "mtime_ns": 1793618730761282900
+      },
+      "C:\\Users\\郑曾波\\.claude\\skills\\filing-fetch\\scripts\\ff_local_preparation_observation.py": {
+        "sha256": "2338c544bb86542bc3c36148e205ba53454406109e206e4a29311ff0f35198dd",
+        "mtime_ns": 1793618730761282900
+      },
+      "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch\\scripts\\ff_local_preparation_observation.py": {
+        "sha256": "2338c544bb86542bc3c36148e205ba53454406109e206e4a29311ff0f35198dd",
+        "mtime_ns": 1793618730761282900
+      },
+      "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\fetch_filing.py": {
+        "sha256": "93f00ad38777c41b6cec24f9d98b640a1d907c1fa2cc51d0ab1379ea502688e8",
+        "mtime_ns": 1793618730783283800
+      },
+      "C:\\Users\\郑曾波\\.claude\\skills\\filing-fetch\\scripts\\fetch_filing.py": {
+        "sha256": "93f00ad38777c41b6cec24f9d98b640a1d907c1fa2cc51d0ab1379ea502688e8",
+        "mtime_ns": 1793618730783283800
+      },
+      "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch\\scripts\\fetch_filing.py": {
+        "sha256": "93f00ad38777c41b6cec24f9d98b640a1d907c1fa2cc51d0ab1379ea502688e8",
+        "mtime_ns": 1793618730783283800
+      },
+      "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\transcript_tool_transport.py": {
+        "sha256": "8fd24051d403665599a3fa2f3be3f16cb997e504d84e23ae40409b8fb96c9855",
+        "mtime_ns": 1793619748195229600
+      },
+      "C:\\Users\\郑曾波\\.claude\\skills\\filing-fetch\\scripts\\transcript_tool_transport.py": {
+        "sha256": "8fd24051d403665599a3fa2f3be3f16cb997e504d84e23ae40409b8fb96c9855",
+        "mtime_ns": 1793619748195229600
+      },
+      "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch\\scripts\\transcript_tool_transport.py": {
+        "sha256": "8fd24051d403665599a3fa2f3be3f16cb997e504d84e23ae40409b8fb96c9855",
+        "mtime_ns": 1793619748195229600
+      },
+      "C:\\Users\\郑曾波\\.agents\\skills\\invest-core\\scripts\\invest_contracts.py": {
+        "sha256": "e5025385fe9894e8488cd59fcfd90bbbce69679291c7a05d5622771d7a06494b",
+        "mtime_ns": 1793622650215169100
+      },
+      "C:\\Users\\郑曾波\\.claude\\skills\\invest-core\\scripts\\invest_contracts.py": {
+        "sha256": "e5025385fe9894e8488cd59fcfd90bbbce69679291c7a05d5622771d7a06494b",
+        "mtime_ns": 1793622650363569700
+      },
+      "C:\\Users\\郑曾波\\.codex\\skills\\invest-core\\scripts\\invest_contracts.py": {
+        "sha256": "e5025385fe9894e8488cd59fcfd90bbbce69679291c7a05d5622771d7a06494b",
+        "mtime_ns": 1793622650426839400
+      },
+      "C:\\Users\\郑曾波\\.agents\\skills\\invest-framework\\scripts\\company_orchestrator.py": {
+        "sha256": "133fc297751d60c2959b6aad4d9017f355ef72890df7304ed5c9d38498ba61a7",
+        "mtime_ns": 1793622650261753500
+      },
+      "C:\\Users\\郑曾波\\.claude\\skills\\invest-framework\\scripts\\company_orchestrator.py": {
+        "sha256": "133fc297751d60c2959b6aad4d9017f355ef72890df7304ed5c9d38498ba61a7",
+        "mtime_ns": 1793622650261753500
+      },
+      "C:\\Users\\郑曾波\\.codex\\skills\\invest-framework\\scripts\\company_orchestrator.py": {
+        "sha256": "133fc297751d60c2959b6aad4d9017f355ef72890df7304ed5c9d38498ba61a7",
+        "mtime_ns": 1793622650482846000
+      },
+      "C:\\Users\\郑曾波\\.agents\\skills\\invest-framework\\scripts\\bundle_validator.py": {
+        "sha256": "40e4bf8c78fb533aa3bffb2dd246adb85360b2885d6c615c1cdaa89ed3fc03ce",
+        "mtime_ns": 1793622650304062500
+      },
+      "C:\\Users\\郑曾波\\.claude\\skills\\invest-framework\\scripts\\bundle_validator.py": {
+        "sha256": "40e4bf8c78fb533aa3bffb2dd246adb85360b2885d6c615c1cdaa89ed3fc03ce",
+        "mtime_ns": 1793622650304062500
+      },
+      "C:\\Users\\郑曾波\\.codex\\skills\\invest-framework\\scripts\\bundle_validator.py": {
+        "sha256": "40e4bf8c78fb533aa3bffb2dd246adb85360b2885d6c615c1cdaa89ed3fc03ce",
+        "mtime_ns": 1793622650524511600
+      }
+    },
+    "repeat_zero_write": true,
+    "configs_after": {
+      "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\config\\company_wiki.json": "7a65a00ecc526d5503359feed6a80a7578d3dbf4c8ef133ccf899aecf9383fb9",
+      "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\config\\filing_fetch.json": "1f5eb57d3e0697ae35fbc9f5d4b6e837459b56ea791508cc6ec5275b349b59b7",
+      "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\config\\company_wiki.json": "00911cfb2b191bc4bb856b6309c4da31a7b309850cbcd8c998a7eb4e003525cb",
+      "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast\\config\\company_wiki.json": "7a65a00ecc526d5503359feed6a80a7578d3dbf4c8ef133ccf899aecf9383fb9",
+      "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast\\config\\filing_fetch.json": "1f5eb57d3e0697ae35fbc9f5d4b6e837459b56ea791508cc6ec5275b349b59b7",
+      "C:\\Users\\郑曾波\\.claude\\skills\\filing-fetch\\config\\company_wiki.json": "00911cfb2b191bc4bb856b6309c4da31a7b309850cbcd8c998a7eb4e003525cb",
+      "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\config\\company_wiki.json": "7a65a00ecc526d5503359feed6a80a7578d3dbf4c8ef133ccf899aecf9383fb9",
+      "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\config\\filing_fetch.json": "1f5eb57d3e0697ae35fbc9f5d4b6e837459b56ea791508cc6ec5275b349b59b7",
+      "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch\\config\\company_wiki.json": "00911cfb2b191bc4bb856b6309c4da31a7b309850cbcd8c998a7eb4e003525cb"
+    },
+    "logical_targets": 42,
+    "external_calls": 0,
+    "originals_read": 0,
+    "unknown_config_output_not_replaced": true,
+    "elapsed_s": 11.365
+  },
+  "fresh_process": {
+    "status": "PASS_SYNTHETIC_DEPLOYMENT",
+    "runs": [
+      {
+        "root": ".agents",
+        "exit": 0,
+        "stdout": "{\"status\": \"PASS_SYNTHETIC_DEPLOYMENT\", \"rf_file\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\.agents\\\\skills\\\\revenue-forecast\\\\scripts\\\\revenue_core.py\", \"invest_file\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\.agents\\\\skills\\\\invest-core\\\\scripts\\\\invest_contracts.py\", \"unsigned_observed\": true, \"economic_tamper_rejected\": true, \"network_calls\": 0}\r\n"
+      },
+      {
+        "root": ".claude",
+        "exit": 0,
+        "stdout": "{\"status\": \"PASS_SYNTHETIC_DEPLOYMENT\", \"rf_file\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\.agents\\\\skills\\\\revenue-forecast\\\\scripts\\\\revenue_core.py\", \"invest_file\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\.claude\\\\skills\\\\invest-core\\\\scripts\\\\invest_contracts.py\", \"unsigned_observed\": true, \"economic_tamper_rejected\": true, \"network_calls\": 0}\r\n"
+      },
+      {
+        "root": ".codex",
+        "exit": 0,
+        "stdout": "{\"status\": \"PASS_SYNTHETIC_DEPLOYMENT\", \"rf_file\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\.codex\\\\skills\\\\revenue-forecast\\\\scripts\\\\revenue_core.py\", \"invest_file\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\.codex\\\\skills\\\\invest-core\\\\scripts\\\\invest_contracts.py\", \"unsigned_observed\": true, \"economic_tamper_rejected\": true, \"network_calls\": 0}\r\n"
+      }
+    ],
+    "seconds": 2.626,
+    "test_dir_initial": "absent",
+    "test_dir_final": "absent",
+    "originals": 0,
+    "model_posts": 0,
+    "probe_source": "fresh_global.py",
+    "real_company_C": "OPEN"
+  },
+  "installed_e2e": {
+    "status": "PASS_INSTALLED_OFFLINE_E2E",
+    "owned": "C:\\Users\\郑曾波\\AppData\\Local\\Temp\\i7-1b7150b",
+    "initially_absent": true,
+    "framework_runtime": "C:\\Users\\郑曾波\\.agents\\skills\\invest-framework",
+    "RF_runtime": "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast",
+    "fixture_harness": "C:\\Users\\郑曾波\\Projects\\invest-skills\\e2e\\run_biren_invest_e2e.py",
+    "scope": "Installed runtime; canonical frozen synthetic fixtures/harness. No company factual acceptance.",
+    "returncode": 0,
+    "elapsed_s": 7.62,
+    "sentinel_preserved": true,
+    "restored_absent": true
+  },
+  "external_model_calls": 0,
+  "downloads": 0,
+  "originals_modified": 0,
+  "remaining": "T4 parent-chain P2, new runtime realC, R4 six issues and full company loop remain OPEN."
+}

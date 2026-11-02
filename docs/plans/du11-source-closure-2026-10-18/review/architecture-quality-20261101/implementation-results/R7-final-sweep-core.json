@@ -1,0 +1,133 @@
+{
+  "schema_version": "r7-final-sweep-core/1",
+  "status": "READ_ONLY_COMPLETE_3_CONFIRMED_CLASSES_ROOT_TDD_ASSIGNED",
+  "timestamp_utc": "2026-11-02T11:23:02.726309+00:00",
+  "baseline": "bd911a2bd1125fe46d7c5a0f605fe3b0104f17be",
+  "method": "CodeGraph structural context + exact current source reads + global literal scan + pure public-contract/config probes; no full line-by-line claim",
+  "inspected_source_sha256": {
+    "src/company_wiki/automation/json_tree.py": "38e0b02e1c766841f477bb4028ec921b2bef1bf77cd89a08b296334086a87479",
+    "src/company_wiki/automation/narrative_contracts.py": "d58561ae09f126da24f35e8916a1d1e6dcf5c0ed5b3daebc83745b7c414c0f36",
+    "src/company_wiki/automation/narrative_batch_request.py": "fc019a855607680f439a6449df77efd2c4505f43e29f496ce500a162f04358f2",
+    "src/company_wiki/automation/narrative_batch_cli.py": "268c047d8c5d6b72716ecf6e77a74165c38afc268cd72b8b94590b3ea85b3d0d",
+    "src/company_wiki/automation/narrative_source_guard.py": "e76ff4affde5877006b44074c2e55f4f3b3dfe8690777983cc7ec76affa66d7d",
+    "src/company_wiki/automation/narrative_select.py": "989b517f35be715b4d863c33315a707d7484293b2e8c78e3413abd7467c513a6",
+    "src/company_wiki/automation/narrative_model.py": "e5def4ded96a55dc5342d670105c32f80ad3e61b54ddc36c19db4ee3322c6369",
+    "src/company_wiki/automation/narrative_model_runtime.py": "89c71ca89939322271fc0e7e4bb3e02c3a8e3b70d7de950ab35c0dc62abdff5b",
+    "src/company_wiki/automation/narrative_model_scoped.py": "962edd1842f0eee2906f5997cab8c6bb867000cb90c33968645c746c3624c4d9",
+    "src/company_wiki/automation/narrative_summary_protocols.py": "ff88f8db4d5935f70462ec4268d15ba9495e77df57138714cbc62e54f1689a45",
+    "src/company_wiki/automation/narrative_evidence_view.py": "8650825c5c1b9152ac787663af449db12cfcd1a68174d9195f2490d489090a4e",
+    "src/company_wiki/source_catalog/canonical_writer.py": "301e1192416cb4623c9bef7001963176bd5c87f3bcc0df3678cbf18ec70ca4b5",
+    "src/company_wiki/source_catalog/transcript_import.py": "a954fc19037f35814950faf21624a4634745cf75675fee519937025a3b384b98",
+    "src/company_wiki/source_catalog/transcript_import_cli.py": "f0ecee57e98508fc31b2fdb90a3a6251c71f5147de34e6f58bb859fed939cbc0",
+    "src/company_wiki/source_catalog/transcript_tool_contract.py": "cfc6d17ad4789e1f39587053d593ab9787e4b176fbf86e81149e9d08aa97dffe",
+    "src/company_wiki/source_catalog/acquisition.py": "d4ff52aec2d007610936a5bdb10a545e3d55c8c5fba216d946acab9aeef6192b",
+    "src/company_wiki/source_catalog/cli.py": "db547958b8d1f60f95eef7f40ee2be5aa187ac4ac7e4a185ab5738732e038650",
+    "src/company_wiki/source_catalog/acquisition_observation.py": "3076bf0586a2004b5d46ff31200781d79729ef840852b616f0cc5c120a2020b1",
+    "src/company_wiki/source_catalog/evidence_query.py": "99450d60b93cd3e6824b39d93cc3c78425aa51e716cf4d254eeb574528f9fe5a",
+    "src/company_wiki/document_understanding/statement_grammar/__init__.py": "23369e92e6f1f9d330a09fcdb3ff7d470ce4c1176c4cc7e7a984022141dfb9e8"
+  },
+  "core_tree_python_counts": {
+    "automation": 62,
+    "source_catalog": 212,
+    "document_understanding": 77
+  },
+  "findings": [
+    {
+      "id": "F1",
+      "severity": "P2",
+      "owner": "automation/narrative_batch_request.py",
+      "conditions": [
+        "membership>100",
+        "explicit max_final_bytes>2097152"
+      ],
+      "real_caller": "narrative_batch_cli.py calls NarrativeBatchRequest.from_dict",
+      "effect": "valid explicit batch/resource request rejected before actual shared budgets/work",
+      "fix": "remove hidden ceilings, preserve finite nonempty consistent members and all explicit resource budget values"
+    },
+    {
+      "id": "F2",
+      "severity": "P2",
+      "owner": "source_catalog/canonical_writer.py:import_staged",
+      "condition": "optional canonical JSON provenance_extensions>16384 bytes",
+      "real_caller": "transcript_import.py calls public import_staged; official/shared methods use same commit directly",
+      "effect": "whole raw import rejected before byte-owner port; other source routes differ",
+      "probe_boundary": "public method; storage ports stubbed, not a DB/original integration claim",
+      "fix": "remove size-only permit, retain JSON/identity validation and actual resource budgets"
+    },
+    {
+      "id": "F3",
+      "severity": "P2",
+      "owner": "automation/narrative_contracts.py:assert_no_physical_paths",
+      "condition": "EvidenceSpan.raw_text begins Windows drive/UNC/file URI",
+      "real_caller": "NarrativeSelectResult.from_dict after NarrativeSelectHandler._result_dict; exception mapped INPUT_SCHEMA_INVALID terminal",
+      "effect": "source content text mistaken for physical storage metadata",
+      "probe_boundary": "public DTO with valid newly-created EvidenceSpan hashes/locator; no PDF/model work",
+      "fix": "single owner semantic source-text slots, keep metadata path prohibition and exact typed structure"
+    }
+  ],
+  "probes": [
+    {
+      "case": "batch100",
+      "result": "accepted",
+      "source_count": 100,
+      "max_final_bytes": 2097152
+    },
+    {
+      "case": "batch101",
+      "result": "ValueError",
+      "reason": "batch must contain 1 to 100 explicit work items"
+    },
+    {
+      "case": "final_explicit2m_plus1",
+      "result": "ValueError",
+      "reason": "one final artifact cannot exceed the 2 MiB emergency cap"
+    },
+    {
+      "case": "source_quote",
+      "raw_text": "Software subscription contracts generate revenue.",
+      "result": "accepted"
+    },
+    {
+      "case": "source_quote",
+      "raw_text": "C:\\subscription\\contract — Software subscription contracts generate revenue.",
+      "result": "PhysicalPathLeakError",
+      "reason": "physical path value is forbidden"
+    },
+    {
+      "case": "provenance",
+      "chars": 10,
+      "result": "public-method-completed",
+      "calls": [
+        "actual-byte-owner-port",
+        "commit-port"
+      ],
+      "boundary": "public import_staged, storage ports stubbed; no file/catalog/bytes claim"
+    },
+    {
+      "case": "provenance",
+      "chars": 17000,
+      "result": "CanonicalImportError",
+      "reason": "provenance extensions exceed byte limit",
+      "calls": [],
+      "boundary": "public import_staged, storage ports stubbed"
+    }
+  ],
+  "probe_file_sha256": "7754a485f0521f7568b8a3b3749f5945ddadfe57e14c8e7c88f28cf7f70f0b3f",
+  "test_harness_correction": "initial DownloadReceipt adapter_version=1 incorrectly not semver, corrected to1.0.0; no source changed",
+  "retained": [
+    "actual configured time/token/fee/scratch/persistent/final resource budgets",
+    "source original SHA+identity/period/asof and actual locator replay single owners",
+    "explicit pinned/same-run cache and unknown fee ownership",
+    "material unknown/semantic context/numeric correctness",
+    "actual parser/OCR/input memory budgets and scoped protocol constraints; no evidence-only threshold accusations",
+    "pagination/sampled diagnostic completeness counts; no manual approval authority"
+  ],
+  "excluded_known_issue": "H1 source-tree parent P2 is structural content understanding, not a new gate, no duplicate work",
+  "scope": {
+    "src_tests_git_pwf_changes": 0,
+    "source_original_or_keys_read": false,
+    "model_network_download": false,
+    "whole_suite_run": false
+  },
+  "next": "ROOT authorized same-owner TDD implementation after this immutable read-only report; separate R7-final-sweep-core-implementation"
+}

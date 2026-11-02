@@ -1,30 +1,22 @@
-# 当前交接 — R7工程已通过，继续正常发布/精确CI，再真实C
+# 当前交接 — R7已发布，下一步T4来源父链
 
-唯一入口：[CURRENT_STATUS](CURRENT_STATUS.md)/json；PLAN_ID=du11-source-closure-2026-10-18，PWF_PLAN_ROOT=docs/plans。用户已恢复，沿用授权，不执行历史暂停。ROOT唯一管主PWF/集成，不新增外包包。
+PLAN_ID=du11-source-closure-2026-10-18，PWF_PLAN_ROOT=docs/plans。唯一状态[CURRENT_STATUS](CURRENT_STATUS.md)/json，目标[MAINLINE_LOOP_GOAL](MAINLINE_LOOP_GOAL.md)。ROOT管集成/PWF；不新增外包或逐小节点许可。
 
-## 已完成并冻结
+## 已完成，禁止重复施工
 
-- CWP源码fee04ba4（正常commit75自有代码/规范文件），核心37＋工具30最终交叉独审PASS，ROOT观察器5与invest消费接口17范围另独审PASS；[汇总细则](review/architecture-quality-20261101/implementation-results/R7-simplification-plan.md)。所有作者STOP，无在途源写入。
-- RF a922305a runtime29文件＋499d5ca3发布小补6文件均独审通过。v2索引不以全局链许可挡预测，显式旧v1/行hash反控仍拒；普通push固定12个既有节点，--ci保原41文件完整行为和mypy。首689P1F1skip/84.924s是旧oracle历史，未删用例绕过。
-- invest-skills a7812888已正常提交14文件：自含强验证结果无需registry/sign许可，Git检查不自动部署/重复全套。precommit读取真实index bytes，并由自有临时staged树一次Ruff，不改worktree；同owner重复binding已删。
-- 全局已用各自canonical安装器--file定点同步RF21/invest2；三根69逻辑目标SHA与源码相同、6配置hash保持、重复0写。三独立进程纯合成RF→invest及收入篡改反控PASS/1.387s，禁止网络，临时目录恢复absent。非真实C。
+- R7源码、消费者、工具/诊断及测试过期oracle已集中独审正常推主线。当前源码/CI在CURRENT_STATUS.json；四仓最终精确CI全部成功。CWP source核心ef3d92a2、daily0ae8ada0、最终测试/旧cold控制389a10fb；RF e44c7e97、FF350cb39d、invest9b68cc9b。
+- 原CWP43CI失败=40层级/清单耦合meta期望＋3已取消的表示许可。工程测试能力集中到单一mode owner，2纯重复文件删除，134→106，optional AST/Git范围76能力/4真实Git/CI22及6OCR资源保持。三source oracle保真实fidelity、metadata path、来源/值/JSON/locator反控。不要恢复旧35=daily=CI恒等断言。
+- FF旧push933P2F/109.30s保留；daily改一次Ruff+11纯节点，完整CI40保留。最后旧--skip-install-sync hook期待已迁移。RF只有旧2048locator oracle，已迁移；invest旧非法版本/伪signed fixture由真引擎生成冻结替换，355numeric与12经济golden原值不变，3–8从未调用的检查已接回。
+- 42逻辑目标canonical定点部署，9config SHA不动、重复0写；三新进程通过；安装版RF→framework真实离线CLI双跑/数学golden通过7.62s。测试/工具不全套铺到技能根。source/业务变更才需下一次部署，纯oracle收口不重部署。
 
-## 当前要完成的发布动作
+## 当前唯一待推进
 
-1. RF499d5ca3与invest a7812888正常push已成功，勿重复推测或重跑同组。CWP source fee04ba4已commit，更新主PWF与本轮全部报告形成docs bundle后推master。不得no-verify、force、整目录全局同步或stage他人文件。
-2. 核精确GitHub CI head；旧fa8/c6绿色仅历史。若失败取实际job/annotation与对应本地最小反例，从根因修；不反复全仓/本地690。
-3. Git precommit可能经stash恢复把RF两JSON WIP CRLF变LF；仅在全文件转换候选SHA精确等于初始hash时恢复，不能猜删原内容。四WIP见.planning/architecture-quality-20261101/r7-publication/rf-commit.json；CWP外来hook bytes/mode需保持。
+按T4-source-note-parent-plan.md先冻结去公司化父链正反例并根修来源树，再单H1原90s/16M/112真实复验；通过后配置新摘要、paid中断/同跨run零重复和同artifact实际RF采用。
 
-## 真实C及主线后续
+T4详见review/architecture-quality-20261101/implementation-results/T4-source-note-parent-plan.md。真实H1v4已12/12和完整记录，但group25/28/65继承旧p34(4)标题，三个selected view都有污染。先冻结不同note/真正金融嵌套/普通正文/partial反控，来源树owner根修，不让selector/RF加公司词库或普遍bbox门。新版代码冻后单H1原90s/16M/112复验；再沿C-preparation新隔离catalog/AUTO引用原件、配置真摘要、prepared中断/同跨run0重复与同artifact实际RF采用。原v3观察丢记录仍UNKNOWN，旧artifact/旧成功不能代新版本。
 
-发布/CI后仅单H1：canonical python -m tools.source_case_runner --manifest .planning/architecture-quality-20261101/real-acceptance/cases.json --case r4-cn-h1-real --output <fresh-owned-output>。原90s/16M/112，12 required units、9 semantic context pairs与当前intro，原文/DB/runtime/observer before-after完整；无300KB/16KB/32祖先门。v3无收据结果未知，不冒PASS/产品FAIL。
+## 必守操作边界
 
-来源通过后按原C-preparation.md，在新隔离catalog/AUTO只引用既有原件，不复制PDF/旧DB；按config新真实摘要、paid prepared中断/同跨run零重复、同artifact真实RF参数/公式/报告/snapshot，再大节点独审。真实摘要/恢复/RF公司采用与全部公司循环仍OPEN；工程绿不代投资事实/质量。
+用正常宿主C:/Miniconda/python.exe -B -X utf8，Git/原子link需获准host；不改ACL/完整性，不提取Git凭证。结果先保存再清自有UUID目录，初始absent→最终absent。真实原子目录CLI测试优先用独立本机Temp，减少工程索引干扰；不能声称这证明了旧WinError5根因。删除前核绝对parent/containment和非reparse，清只读自有文件时fresh Path.stat核单链接，不信DirEntry st_nlink=0。
 
-## 环境与数据底线
-
-宿主C:/Miniconda/python.exe -B -X utf8；Git/原子hardlink测试用已授权正常host，Low venv不能写全局的根因已解决，不改ACL。PYTHONDONTWRITEBYTECODE=1，pytest显式需要的asyncio/timeout插件，禁cache；UUID短tmp初始absent→最终absent。Git索引锁首source commit曾瞬时竞争，读确认消失/无Git进程后正常retry成功，没有删锁。当前source commit已完成，勿再次套初始HEAD断言重commit。
-
-原件/生产config及R4封存585件/64,240,251B不改。RF四WIP、外来hook物理mode、Dayu纯外部、IQS/Dashboard/StockWiki其他owner不动；未知历史产物如tmp/osred不猜删。本轮R7无收费/真实原件读取；预算模型仍config，母账unknown保持。密钥不能进报告/提示/提交。
-
-R4六共因、买方反证/幅度校准、方法与检测演进、W21/US监管/HK/RPO/长文公平性、固定八家/连续三家clean责任留在主计划，不以此工程节点关闭总目标。
+RF precommit会stash4既有assurance WIP，可能两JSON仅CRLF变LF；只有整个候选SHA精确等于最初字节才恢复，绝不猜内容或commit他人文件。CWP外来hook仅physical mode差不stage。未知历史临时产物不猜删；原件/生产config/旧R4/Dayu/IQS/Dashboard其他工区保持。模型/额度只按配置，授权沿用；unknown付费不能退款或猜0/重复POST。主目标及真实公司验收仍未完成。

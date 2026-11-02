@@ -161,6 +161,6 @@
     "entry": "../document-understanding-2026-10-13/README.md",
     "meaning": "Earlier DU/P1-P4 inputs closed/handed into current stream; read original reception receipts for exact card scope, do not re-dispatch from oldREADY text"
   },
-  "critical_path": "task_plan.md Next Step / R7 engineering accepted, remote CI and real C, then P3 full company loop",
+  "critical_path": "按T4-source-note-parent-plan.md先冻结去公司化父链正反例并根修来源树，再单H1原90s/16M/112真实复验；通过后配置新摘要、paid中断/同跨run零重复和同artifact实际RF采用。",
   "warning": "Merged tooling and historical CI success do not imply current product CI or real company workflow passed."
 }

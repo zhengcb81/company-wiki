@@ -1,28 +1,20 @@
-# 当前状态 — R7工程整改已独审、提交、定点部署，正在发布及核CI
+# 当前状态 — R7工程精简已发布，真实公司主线继续
 
-唯一入口为本页/[机器状态](CURRENT_STATUS.json)，接手看[HANDOFF](HANDOFF.md)，实施看[task_plan](task_plan.md)。用户已恢复实施；旧暂停/旧失败/旧300KB方案都是历史。
+唯一入口为本页/[机器状态](CURRENT_STATUS.json)；接手看[HANDOFF](HANDOFF.md)，下一步看[task_plan](task_plan.md)。四仓最终精确CI全部成功。旧作者“待ROOT/待许可”仅为历史阶段记录，不能再当当前门禁。
 
-| 事项 | 当前实际结果 | 尚未签收 |
+|责任|当前结果|剩余边界|
 |---|---|---|
-| R6/T3 | 已独审、并主线、推送；T3 fa8ef38e精确主线CI41408572602成功 | 历史工程绿不能代新版真实C |
-| R7 CWP核心＋工具 | 37＋30文件最终交叉独审通过；观察器另5文件与下游消费接口独审通过；源码正常commit fee04ba4，Ruff/全src mypy通过，外来hook字节/mode保持 | 当前远端发布/精确CI待观察 |
-| R7 RF | 29文件独审通过并commit a922305a；发布跟进6文件独审通过并commit499d5ca3 | 首正常push旧v1测试期待误套新v2索引，689P1F1skip保留；已修并正常push成功（12P1.16s/总10.532s），精确CI待观察 |
-| R7 invest | 14自有文件正常commit a7812888；取消registry/host_signed额外许可，保持完整强重算/引用/数字反控 | 正常push成功（总6.362s），精确CI待观察 |
-| 全局技能 | canonical定点部署RF21＋invest-core2文件到三根共69逻辑目标；6份公开config SHA保持，重复0写；三独立新进程均过，网络/模型/原件操作0 | 这是合成部署验收，不代真实公司 |
-| 真实H1/摘要/恢复/RF采用 | v3旧观察器末端丢记录，结果未知；新观察器完整保留JSON、context/proof分角色已独审 | 单例H1新复验12成员/9语义context及当前主体，再新摘要/cache/RF采用 |
+|R7 CWP/RF/FF/invest|最后遗漏全部根修、集中独审、正常提交推送；[完整清单](review/architecture-quality-20261101/implementation-results/R7-final-closure.md)|精确CI见机器状态；历史失败不抹|
+|日常反馈|CWP9节点、FF11、RF12；invest短域。完整CI/大节点验收保持；合并工程重复测试134→106|local_fast_pass只代表实际短域|
+|技能副本|42逻辑文件定点同步，9份公开config保留、重复0写；三新进程和安装版真实离线CLI双跑通过|合成工程验收，不代真实公司|
+|真实H1来源|v4完整388583B、12重点精确召回；独审仍有3selected views继承旧(4)标题|先T4根修父链，不能以12/12代上下文正确|
+|新摘要/恢复/RF采用|旧华利/Berkshire和RF v6有界结果保留|当前runtime真实C仍OPEN|
+|整体目标|R4六共因、研究反证/幅度、方法与检测进化、跨市场文种、固定八家/三家clean继续|本工程节点不关闭总目标|
 
-## 本次真正删除了什么
+已去任意收据/上下文/证明/摘录大小、计数/深度许可、100文档/2MiB隐藏顶帽、可选review/recipe/diagnostic连坐、坏cache连坐、global registry/host_signed消费许可、同buffer重复验真与旧revision重跑许可。真实费用/读取与工作预算、原文字节/身份/期次/as-of、引用/数值/真实写入、已声明签名真实性、明确pin/CAS/未知付费恢复仍归唯一owner，不新增人工许可。
 
-- 任意receipt/report、wire/context/摘录/采用理由、32/64/128KB等大小/条数/深度否决，后置HTTP正文二次拒绝、extractive缺省56KB附加门；完整证据不裁切。
-- review/recipe/trace可选诊断反向许可、坏自动cache连坐、全树clean要求、global registry/host_signed消费许可、同buffer重复SHA/metadata、同unit未知分句对已证独立材料的连坐、任意几何64/32/4096天花板。
-- invest每commit/push重复全suite/E2E和隐式全局技能覆盖；RF默认push已从690例拆成固定12例，完整原41文件CI行为集及mypy保留。原首次84.924s失败历史不抹，作者实测新默认8.931s；invest独审实测2.716s。
+## 唯一下一步
 
-实际字节/身份/期间/as-of、引用/限定/数值正确性、已声明签名真实性、明确pin、未知付费恢复、CAS，以及配置的实际下载/响应读取/token/$/工作/时空预算仍各归唯一owner。没有新增人工许可、canary、授权JSON、另一个任务库或逐小节点签收。
+按T4-source-note-parent-plan.md先冻结去公司化父链正反例并根修来源树，再单H1原90s/16M/112真实复验；通过后配置新摘要、paid中断/同跨run零重复和同artifact实际RF采用。
 
-## 下一步与目标边界
-
-先完成当前三仓正常发布与精确CI，不重本地690/325/211整组。随后只单例H1（原90s/16M/112），12业务成员/9语义context与正向当前主体，原文/DB/runtime前后证据齐全；再隔离catalog/AUTO、配置真实摘要、paid中断/same/cross恢复零重复、同artifact实际RF参数/公式/报告/snapshot采用。
-
-P3六共因/买方反证与经营幅度/方法和检测演进、W21真实增强/严格成员对齐、US监管PDF/HK/RPO/长文公平性、固定八家及连续三家clean仍OPEN。历史华利15卡/12原子、Berkshire73卡/10原子与RF v6 45检查不能代新runtime或整家公司验收。
-
-原件/生产配置、R4封存585件/64,240,251B、RF四assurance WIP、Dayu/IQS/Dashboard/StockWiki其他owner保持。预算/模型按config：10Mtokens/$20，公司150k/$1软目标，母账unknown8+prior7保留；本轮0供应商调用。RF precommit恢复patch的两JSON换行变化已用整文件SHA证明并恢复精确初始CRLF，未猜内容或提交它们。无法确认归属的旧临时目录不删。
+原件、生产配置、R4封存、RF4WIP及外来hook保持；Dayu/IQS/Dashboard等其他owner不动。本轮0收费/下载。预算/模型严格按配置，历史unknown照计。一次未确认原因的Windows临时rename观察留证，独立新目录和安装版复验均通过，不据此加新门或宣称已修根因。

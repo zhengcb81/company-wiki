@@ -1,0 +1,40 @@
+{
+  "status": "FROZEN_AWAITING_INDEPENDENT_REVIEW",
+  "delivery_files_sha256": {
+    "tools/pdf_runtime_probe/run_cold_probe.py": "815b9fd1ca97e60e2618c62a897c63f3532a336247530352bbcb4d63f69e2a48",
+    "tests/unit/test_cold_probe_repeatability.py": "cfbe6150e529e474357f8ce964282328941efe084cbdfb301289d853da2751d2"
+  },
+  "scope": "Last low-priority supported diagnostic control T04. No production caller claimed. Drop revision/rerun permission, use fresh tempfile attempt per explicit CLI request, preserve old markers/receipts and actual deadline/memory/CPU/stream budgets. Profile provenance names actual selected file rather than stale hardcoded root.",
+  "tests": [
+    {
+      "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "phase": "cold-rerun-red",
+      "targets": [
+        "tests/unit/test_cold_probe_repeatability.py"
+      ],
+      "owned": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r7rt-e1bdda",
+      "initially_absent": true,
+      "returncode": 1,
+      "elapsed_s": 1.894,
+      "rf_four_wip_unchanged": true,
+      "restored_absent": true,
+      "junit": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"2\" skipped=\"0\" tests=\"2\" time=\"1.032\" timestamp=\"2026-11-02T12:55:46.495499+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tests.unit.test_cold_probe_repeatability\" name=\"test_explicit_probe_rerun_preserves_prior_receipts_without_revision_bump[False]\" time=\"0.054\"><failure message=\"SystemExit: revision rev5 already attempted; a rerun needs a diagnosed new revision\">tests\\unit\\test_cold_probe_repeatability.py:39: in test_explicit_probe_rerun_preserves_prior_receipts_without_revision_bump\n    probe.main()\ntools\\pdf_runtime_probe\\run_cold_probe.py:56: in main\n    raise SystemExit(f\"revision {REVISION} already attempted; a rerun needs a diagnosed new revision\")\nE   SystemExit: revision rev5 already attempted; a rerun needs a diagnosed new revision</failure></testcase><testcase classname=\"tests.unit.test_cold_probe_repeatability\" name=\"test_explicit_probe_rerun_preserves_prior_receipts_without_revision_bump[True]\" time=\"0.009\"><failure message=\"SystemExit: revision rev5 already attempted; a rerun needs a diagnosed new revision\">tests\\unit\\test_cold_probe_repeatability.py:38: in test_explicit_probe_rerun_preserves_prior_receipts_without_revision_bump\n    probe.main()\ntools\\pdf_runtime_probe\\run_cold_probe.py:56: in main\n    raise SystemExit(f\"revision {REVISION} already attempted; a rerun needs a diagnosed new revision\")\nE   SystemExit: revision rev5 already attempted; a rerun needs a diagnosed new revision</failure></testcase></testsuite></testsuites>"
+    },
+    {
+      "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "phase": "cold-rerun-green",
+      "targets": [
+        "tests/unit/test_cold_probe_repeatability.py"
+      ],
+      "owned": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r7rt-b9a287",
+      "initially_absent": true,
+      "returncode": 0,
+      "elapsed_s": 2.189,
+      "rf_four_wip_unchanged": true,
+      "restored_absent": true,
+      "junit": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"0\" skipped=\"0\" tests=\"2\" time=\"1.022\" timestamp=\"2026-11-02T12:56:40.959352+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tests.unit.test_cold_probe_repeatability\" name=\"test_explicit_probe_rerun_preserves_prior_receipts_without_revision_bump[False]\" time=\"0.040\" /><testcase classname=\"tests.unit.test_cold_probe_repeatability\" name=\"test_explicit_probe_rerun_preserves_prior_receipts_without_revision_bump[True]\" time=\"0.082\" /></testsuite></testsuites>"
+    }
+  ],
+  "result": "2actualRED ->2P1.09s; two files Ruff passed, no realSDK or inference",
+  "cleanup": "Both ROOT owned test dirs initially absent ->absent; per-child scratch proven removed; archived fake marker unchanged"
+}

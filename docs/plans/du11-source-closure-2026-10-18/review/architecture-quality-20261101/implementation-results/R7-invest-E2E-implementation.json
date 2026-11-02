@@ -1,0 +1,298 @@
+{
+  "scope": "R7 invest E2E / generic source quote integrity / immediate reference-owner deduplication",
+  "status": "IMPLEMENTED_FROZEN_AWAITING_INDEPENDENT_REVIEW",
+  "canonical_repository": "C:/Users/郑曾波/Projects/invest-skills",
+  "baseline_head": "a789cd07bc0126cdb8d401fa2dadfcf4caa8b121",
+  "delivery_files_sha256": {
+    "invest-core/scripts/invest_contracts.py": "e5025385fe9894e8488cd59fcfd90bbbce69679291c7a05d5622771d7a06494b",
+    "invest-framework/scripts/company_orchestrator.py": "133fc297751d60c2959b6aad4d9017f355ef72890df7304ed5c9d38498ba61a7",
+    "invest-framework/scripts/bundle_validator.py": "40e4bf8c78fb533aa3bffb2dd246adb85360b2885d6c615c1cdaa89ed3fc03ce",
+    "e2e/run_biren_invest_e2e.py": "eda2578c7d4eb2ec54c1af765b608af7cd029092b664307ea78105cd33fa2a7d",
+    "e2e/offline_cli.py": "339fb49d42e7196faa96cdcb52bd3e637a4f17a3f9baa15351d90e675230e4c4",
+    "e2e/generate_biren_fixture.py": "8ed303a9312c2df3ee5168789f9dc2f1cc1ee12c285a202064d3ffd27446b15c",
+    "e2e/fixtures/biren_forecast.json": "b12fdfc5bcfd4bcbc876326c71eb238340aa5d8230ce672f5aa28f1761bf27bb",
+    "e2e/expected/expected-0e1cc8d4c73d.json": "da56d85b24699dbf0fe422428ba35c70c8b3e1451858639916b5cbb18d19a7ba",
+    "e2e/E2E_DESIGN.md": "d106bc67317fe40db02cd3f4607f7e1233c2cfc40893265b849f506a61a70352",
+    "invest-core/tests/test_claim_excerpt_integrity.py": "f4eac1eb6e9825d38e56b6e8ea3da25d04c27ed228af1af1f856411943ffe5a1",
+    "invest-framework/tests/test_e2e_contract_boundaries.py": "6c6525a2aaa3f839f2fd8a9665943f3e9f6ed15316007f603922a5c41ed0263c"
+  },
+  "baseline": {
+    "inv_head": "a789cd07bc0126cdb8d401fa2dadfcf4caa8b121",
+    "files": {
+      "e2e/run_biren_invest_e2e.py": "79c0c00b96dce69c5be92d80a82f4a4dee87187205e5c0e42599bde4d9eca1a2",
+      "e2e/fixtures/biren_forecast.json": "0c7b5dfeda6131c117ec9e541aa6a100c6da08a2d7bb7bfd9deb3d5d47218b88",
+      "e2e/biren_manifest.json": "a08f694c0280e73d5386e114e2dbc6e37b6126b548f84b8b18bb3bbd994c916f",
+      "e2e/expected/expected-0e1cc8d4c73d.json": "42f4d1c1f093fcd7b13733b6a1e2849936a8793eec63b08915f2f9a5da2f9882",
+      "invest-core/scripts/invest_contracts.py": "50d4126b441dc4fe0734b92382d9155f6cd876ead5d71acbcdee28ac3b57802a",
+      "invest-framework/scripts/company_orchestrator.py": "576e1dab4a92c5262660fdbec49b21d7de3e9e99276dfac4e344dc6fc14b0fa1",
+      "invest-framework/scripts/bundle_validator.py": "8cd9400845d09d2f847dbd70e2511e96b50d04b444258c8788280eaaf4d6a08e"
+    },
+    "rf_wip": {
+      "daily_alert.jsonl": "712f9e957990ca0c261cbb91c1d10b0a12606da9d7293e6f2a1581309ce295e9",
+      "monthly_manifest.json": "56d630107429cbcb646a951306dd1ea445dd5b3146236f34d0e8df953c103b9a",
+      "weekly_alert.jsonl": "fc9ec2335b48d42921ca9c14c63363efca3b3096f967733e366f4dd463e4b7ed",
+      "weekly_manifest.json": "e2e57f28fec7477af06029adcf187468701ab0305024993bfb2953bbd43cc5c0"
+    },
+    "initial_scratch_absent": true
+  },
+  "root_causes": [
+    {
+      "id": "INV-E2E-FIXTURE",
+      "problem": "Tracked fixture schema3.7/engine4.0.0 is not a documented compatibility pair and falsely claims host_signed without an attestation.",
+      "repair": "Explicit standalone generator runs canonical current RF once from identical frozen embedded input and freezes genuine3.7/4.3.0/unattested result; no validator or compatibility changes."
+    },
+    {
+      "id": "INV-E2E-INDEX",
+      "problem": "Harness required register_publication after the real strong validation despite index being diagnostic.",
+      "repair": "Remove mandatory registration; real source/output owner stays strong. All test runs use an isolated owned registry."
+    },
+    {
+      "id": "INV-E2E-DEAD-PHASES",
+      "problem": "collect_steps_3_to_8 existed but main never called it. Two latent checks also referenced old receipt shape and compared file-byte SHA against the public trimmed-text hash contract.",
+      "repair": "Actually execute all phase checks for both runs, re-read emitted execution using canonical public validate_execution, use current receipt object and public text_sha256. A live phase sentinel and intermediate financial mutation are persisted regressions."
+    },
+    {
+      "id": "INV-E2E-LIFECYCLE",
+      "problem": "Harness shared/enumerated/retained history under e2e/.runs and could silently update economic golden.",
+      "repair": "Unique owned temporary tree per invocation, optional explicit parent; only newly owned tree retained with --keep-runs or removed in finally. Historical.runs never read. Existing economic/module golden must match before any metadata refresh."
+    },
+    {
+      "id": "INV-QUOTE",
+      "problem": "An arbitrary10..500-character quote length served as a permission proxy after nonempty/source/capture/content SHA checks.",
+      "repair": "Remove just the length predicate; preserve nonempty evidence, actual hash/capture/source/parameter currency/unit/period contracts."
+    },
+    {
+      "id": "INV-REPEAT",
+      "problem": "Three immediate validations were followed by revenue_reference on the same unchanged dictionary; revenue_reference itself invokes the strong owner.",
+      "repair": "At run_company, run_bundle, and current-schema validate_bundle_artifact use the reference owner once. Legacy bundle branch without reference construction still validates; other independent public read/publish boundaries unchanged. No skip flag, nonce or new permission."
+    }
+  ],
+  "fixture_migration": {
+    "forecast_changes": [
+      {
+        "path": "/confidence/calculation_version",
+        "old": null,
+        "new": "source-evidence/2"
+      },
+      {
+        "path": "/confidence/limitations/3",
+        "old": "Growth driver br20x_ramp is not triangulated across two evidence types and sources",
+        "new": "Confidence is an evidence/workflow score, not a calibrated forecast probability"
+      },
+      {
+        "path": "/confidence/limitations/4",
+        "old": "Growth driver import_substitution_tam is not triangulated across two evidence types and sources",
+        "new": "Growth driver br20x_ramp is not triangulated across two evidence types and sources"
+      },
+      {
+        "path": "/confidence/limitations/5",
+        "old": "Growth driver customer_expansion is not triangulated across two evidence types and sources",
+        "new": "Growth driver import_substitution_tam is not triangulated across two evidence types and sources"
+      },
+      {
+        "path": "/confidence/limitations/6",
+        "old": "Growth driver orderbook_conversion is not triangulated across two evidence types and sources",
+        "new": "Growth driver customer_expansion is not triangulated across two evidence types and sources"
+      },
+      {
+        "path": "/confidence/limitations/7",
+        "old": "Growth driver foundry_export_headwind is not triangulated across two evidence types and sources",
+        "new": "Growth driver orderbook_conversion is not triangulated across two evidence types and sources"
+      },
+      {
+        "path": "/confidence/limitations/length",
+        "old": 8,
+        "new": 9
+      },
+      {
+        "path": "/engine_version",
+        "old": "4.0.0",
+        "new": "4.3.0"
+      },
+      {
+        "path": "/publication_receipt/attestation_status",
+        "old": "host_signed",
+        "new": "unattested"
+      },
+      {
+        "path": "/publication_receipt/engine_version",
+        "old": "4.0.0",
+        "new": "4.3.0"
+      },
+      {
+        "path": "/publication_receipt/receipt_sha256",
+        "old": "a09a0c74cd459b88e3382ba90621337b2cb35e0fc82c25462cac6a8ee738d134",
+        "new": "73ba33d23cc21326f3425d01b85f85071e1e21204fa8a6665a09f894168fc276"
+      },
+      {
+        "path": "/publication_receipt/validated_payload_sha256",
+        "old": "9db14abc31dcd940ce678131b0200dcbdc1e96472cd9fd8db90ba2fa018c5746",
+        "new": "04afb0d9c31ccd81f2fba5494496de292ff8a0cef12293bb2f03bc343a8531fd"
+      },
+      {
+        "path": "/publication_receipt/validator_version",
+        "old": "4.0.0",
+        "new": "4.3.0"
+      },
+      {
+        "path": "/publication_receipt/verification_context_sha256",
+        "old": "1001572a8858a0a6ad3de94a0b43be52927949c2f06a681ca233b478449cf8aa",
+        "new": "6ec3334a3fafa8e42fa32b45a5d3ab63928e04374ed9699eeeb3a7a2817f46bc"
+      },
+      {
+        "path": "/result_sha256",
+        "old": "0c8c3f6f9dbcae8b238c0360aee7ff512a8e8d668c2bd6447052704204a9fdeb",
+        "new": "cb0d03fd47d0bd21fddc7c798f9292a954437f253943bdb7f937f382fde35ede"
+      }
+    ],
+    "golden_changes": {
+      "bundle_sha256": {
+        "old": "2f165b572f9b56753b0f94d5bc856b622ace7b933d747f76c835660d1a8e0c51",
+        "new": "6a377a45228d14f6f17dd66528f0a3dc38a55c128bf9032dc77c98acbedc2fc7"
+      },
+      "receipt_sha256": {
+        "old": "6634726b3774a8a532abf4305991c4caf0c346a7f15b8fb6340afeb2f539eb40",
+        "new": "78170767eb6e54ff44453f1ac71200c6895700c595f1da7cb7486705c41191b3"
+      },
+      "input_forecast_result_sha256": {
+        "old": "0c8c3f6f9dbcae8b238c0360aee7ff512a8e8d668c2bd6447052704204a9fdeb",
+        "new": "cb0d03fd47d0bd21fddc7c798f9292a954437f253943bdb7f937f382fde35ede"
+      },
+      "receipt_formal_report_sha256": {
+        "old": "440dcd4d9c19db5507a3556504be0a87ee404c9e3d4792fef9954aaf84a8c057",
+        "new": "fa51931165ae63695967131c142bca8eca35840eb3e984534c9dc9f56a772310"
+      },
+      "revenue_forecast_head": {
+        "old": "0e114337d30cebd53d21779adcf22c89da1c4624",
+        "new": "499d5ca38433983e8679c03d13a75dd2d3aab8c6"
+      },
+      "report_sha256": {
+        "old": "c7e1c66c8a4b438cdd1a3e4554d31263ece2690751e71ae6be5da08378a51354",
+        "new": "19a02d6d6de0182c712b601327dd7a4fd56a44b564579a3b7637f270a21922f2"
+      },
+      "invest_skills_head": {
+        "old": "22fb59378b290ae86c80de4e08c207d3e26b7d13",
+        "new": "a789cd07bc0126cdb8d401fa2dadfcf4caa8b121"
+      }
+    },
+    "all_12_economic_values_and_module_counts_exact": true
+  },
+  "forecast_numeric_comparison": {
+    "counts": {
+      "numeric_pairs": 355,
+      "numeric_differences": 0,
+      "new_numeric": 0
+    },
+    "differences": []
+  },
+  "evidence_runs": [
+    {
+      "stage": "TDD_RED",
+      "result": "6F4P /1.77s",
+      "cases": "valid short/long quote2F; optional index1F; three immediate owner duplicates3F; integrity negatives4P",
+      "log": "red.log"
+    },
+    {
+      "stage": "TDD_GREEN",
+      "result": "10P /1.26s",
+      "log": "green.log"
+    },
+    {
+      "stage": "REAL_OFFLINE_GENERATION",
+      "result": "exit0;355 common numeric leaves unchanged",
+      "log": "generator.log"
+    },
+    {
+      "stage": "REAL_CLI_TECHNICAL_MIGRATION",
+      "result": "exit0 /5.517684s wall; two real orchestrator CLI executions, complete3-8 both runs,9determinism, existing12economic values/modulecounts exact; metadata copy only",
+      "log": "e2e.log"
+    },
+    {
+      "stage": "EXPANDED_CONTROLS",
+      "result": "19P1fixtureF /10.65s;1 failure was child stderr Windows ANSI decoded as UTF8; no runtime pass fabricated",
+      "log": "final-tests.log"
+    },
+    {
+      "stage": "ENCODING_FIX_ONLY",
+      "result": "1P /0.47s; subprocess explicitly -Xutf8",
+      "log": "socket-fix.log"
+    },
+    {
+      "stage": "EXISTING_ADJACENT",
+      "result": "38P3subtests /15.54s",
+      "files": [
+        "invest-core/tests/test_contracts.py",
+        "invest-framework/tests/test_company_orchestrator.py",
+        "invest-framework/tests/test_bundle_validator.py"
+      ],
+      "log": "adjacent.log"
+    },
+    {
+      "stage": "STATIC",
+      "result": "8Python files Ruff PASS",
+      "log": "ruff-final.log"
+    },
+    {
+      "stage": "FINAL_NORMAL_CLI",
+      "result": "exit0 /5.7076087s wall; canonical default fixture/golden, two actual CLI runs, all phases, exactgoldencomparison, ownedrunsremovedTrue",
+      "log": "e2e-default.log"
+    }
+  ],
+  "persisted_controls": [
+    "short8char and >1000char legitimate quote preserved untruncated",
+    "wrong excerptSHA/unit/empty/content mutation rejected",
+    "valid strongly verified result survives unavailable registry without calling registration",
+    "three unchanged-value reference constructions each strongvalidate once",
+    "realCLI rejects invalid versionpair, falsehostsigned, wrongcurrency,wrongunit,revenue mutation",
+    "public emitted financial-file mutation rejected",
+    "live main check_runs must call phase collector",
+    "economic drift identified rather than refresh-swallowed",
+    "frozen fixture documentedpair+truthfullyunattested",
+    "actual socket attempt blocked by offline child"
+  ],
+  "logs": {
+    "red.log": "FF....FFFF                                                               [100%]\n================================== FAILURES ===================================\n_____ test_supported_quote_has_no_arbitrary_minimum_or_maximum[USD 20m.] ______\n\nexcerpt = 'USD 20m.'\n\n    @pytest.mark.parametrize(\"excerpt\", [\"USD 20m.\", \"Reported net income was USD 20 million. \" + \"This amount is annual, with no acquisition contribution. \" * 18])\n    def test_supported_quote_has_no_arbitrary_minimum_or_maximum(excerpt):\n>       artifact = make_artifact(excerpt)\n                   ^^^^^^^^^^^^^^^^^^^^^^\n\ninvest-core\\tests\\test_claim_excerpt_integrity.py:33: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\ninvest-core\\tests\\test_claim_excerpt_integrity.py:24: in make_artifact\n    return create_artifact(\ninvest-core\\scripts\\invest_contracts.py:2303: in create_artifact\n    validate_artifact(artifact)\ninvest-core\\scripts\\invest_contracts.py:2522: in validate_artifact\n    claim_index = _validate_claims(\ninvest-core\\scripts\\invest_contracts.py:1644: in _validate_claims\n    _fail(10 <= len(excerpt) <= 500, f\"invalid claim excerpt length: {claim_id}\")\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\n\ncondition = False, message = 'invalid claim excerpt length: claim_net_income'\n\n    def _fail(condition: object, message: str) -> None:\n        if not condition:\n>           raise InvestmentArtifactError(message)\nE           invest_contracts.InvestmentArtifactError: invalid claim excerpt length: claim_net_income\n\ninvest-core\\scripts\\invest_contracts.py:115: InvestmentArtifactError\n_ test_supported_quote_has_no_arbitrary_minimum_or_maximum[Reported net income was USD 20 million. This amount is annual, with no acquisition contribution. This amount is annual, with no acquisition contribution. This amount is annual, with no acquisition contribution. This amount is annual, with no acquisition contribution. This amount is annual, with no acquisition contribution. This amount is annual, with no acquisition contribution. This amount is annual, with no acquisition contribution. This amount is annual, with no acquisition contribution. This amount is annual, with no acquisition contribution. This amount is annual, with no acquisition contribution. This amount is annual, with no acquisition contribution. This amount is annual, with no acquisition contribution. This amount is annual, with no acquisition contribution. This amount is annual, with no acquisition contribution. This amount is annual, with no acquisition contribution. This amount is annual, with no acquisition contribution. This amount is annual, with no acquisition contribution. This amount is annual, with no acquisition contribution. ] _\n\nexcerpt = 'Reported net income was USD 20 million. This amount is annual, with no acquisition contribution. This amount is annua...on. This amount is annual, with no acquisition contribution. This amount is annual, with no acquisition contribution. '\n\n    @pytest.mark.parametrize(\"excerpt\", [\"USD 20m.\", \"Reported net income was USD 20 million. \" + \"This amount is annual, with no acquisition contribution. \" * 18])\n    def test_supported_quote_has_no_arbitrary_minimum_or_maximum(excerpt):\n>       artifact = make_artifact(excerpt)\n                   ^^^^^^^^^^^^^^^^^^^^^^\n\ninvest-core\\tests\\test_claim_excerpt_integrity.py:33: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\ninvest-core\\tests\\test_claim_excerpt_integrity.py:24: in make_artifact\n    return create_artifact(\ninvest-core\\scripts\\invest_contracts.py:2303: in create_artifact\n    validate_artifact(artifact)\ninvest-core\\scripts\\invest_contracts.py:2522: in validate_artifact\n    claim_index = _validate_claims(\ninvest-core\\scripts\\invest_contracts.py:1644: in _validate_claims\n    _fail(10 <= len(excerpt) <= 500, f\"invalid claim excerpt length: {claim_id}\")\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\n\ncondition = False, message = 'invalid claim excerpt length: claim_net_income'\n\n    def _fail(condition: object, message: str) -> None:\n        if not condition:\n>           raise InvestmentArtifactError(message)\nE           invest_contracts.InvestmentArtifactError: invalid claim excerpt length: claim_net_income\n\ninvest-core\\scripts\\invest_contracts.py:115: InvestmentArtifactError\n________________ test_step_one_does_not_require_a_global_index ________________\n\nforecast = {'company_name': 'Test Co', 'as_of_date': '2026-07-12', 'currency': 'USD', 'unit': 'million', ...}\nforecast_path = WindowsPath('not-used.json')\n\n    def collect_step_1_forecast_valid(forecast: dict, forecast_path: Path) -> None:\n        \"\"\"Step 1: the input is a valid formal forecast (publication receipt recomputes).\"\"\"\n        if forecast.get(\"publication_receipt\", {}).get(\"formal_output_mode\") != \"formal\":\n            raise AssertionError(\"STEP 1 FAILED: forecast is not a formal artifact\")\n        if not isinstance(forecast.get(\"result_sha256\"), str) or len(forecast[\"result_sha256\"]) != 64:\n            raise AssertionError(\"STEP 1 FAILED: result_sha256 missing/invalid\")\n        if not isinstance(forecast.get(\"input_sha256\"), str) or len(forecast[\"input_sha256\"]) != 64:\n            raise AssertionError(\"STEP 1 FAILED: input_sha256 missing/invalid\")\n        if not isinstance(forecast.get(\"input_document\"), dict):\n            raise AssertionError(\"STEP 1 FAILED: input_document not embedded (strong validation impossible)\")\n        # Strong validation: recompute the publication receipt from the embedded input.\n        sys.path.insert(0, str(REVENUE_FORECAST / \"scripts\"))\n        try:\n            from revenue_report import validate_published_forecast  # noqa: E402\n        except Exception as exc:\n            raise AssertionError(f\"STEP 1 FAILED: cannot import revenue-forecast strong validator: {exc}\")\n        try:\n            validate_published_forecast(forecast, forecast[\"input_document\"])\n        except Exception as exc:\n            raise AssertionError(f\"STEP 1 FAILED: strong forecast validation rejected the artifact: {exc}\")\n        # R1.2: register the fixture's anchor so require_registered_input consumers\n        # pass in CI (the registry is a runtime artifact, not part of the repo).\n        try:\n            import publication_registry\n    \n>           publication_registry.register_publication(forecast, note=\"biren invest e2e fixture\")\n\ne2e\\run_biren_invest_e2e.py:94: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\nC:\\Miniconda\\Lib\\unittest\\mock.py:1169: in __call__\n    return self._mock_call(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nC:\\Miniconda\\Lib\\unittest\\mock.py:1173: in _mock_call\n    return self._execute_mock_call(*args, **kwargs)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\n\nself = <MagicMock name='register_publication' id='2071321907888'>\nargs = ({'company_name': 'Test Co', 'as_of_date': '2026-07-12', 'currency': 'USD', 'unit': 'million', ...},)\nkwargs = {'note': 'biren invest e2e fixture'}\n\n    def _execute_mock_call(self, /, *args, **kwargs):\n        # separate from _increment_mock_call so that awaited functions are\n        # executed separately from their call, also AsyncMock overrides this method\n    \n        effect = self.side_effect\n        if effect is not None:\n            if _is_exception(effect):\n>               raise effect\nE               OSError: index offline\n\nC:\\Miniconda\\Lib\\unittest\\mock.py:1228: OSError\n\nDuring handling of the above exception, another exception occurred:\n\nforecast = {'company_name': 'Test Co', 'as_of_date': '2026-07-12', 'currency': 'USD', 'unit': 'million', ...}\n\n    def test_step_one_does_not_require_a_global_index(forecast):\n        with patch(\"publication_registry.register_publication\", side_effect=OSError(\"index offline\")) as register:\n>           harness.collect_step_1_forecast_valid(forecast, Path(\"not-used.json\"))\n\ne2e\\tests\\test_e2e_contract_boundaries.py:33: \n_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _\n\nforecast = {'company_name': 'Test Co', 'as_of_date': '2026-07-12', 'currency': 'USD', 'unit': 'million', ...}\nforecast_path = WindowsPath('not-used.json')\n\n    def collect_step_1_forecast_valid(forecast: dict, forecast_path: Path) -> None:\n        \"\"\"Step 1: the input is a valid formal forecast (publication receipt recomputes).\"\"\"\n        if forecast.get(\"publication_receipt\", {}).get(\"formal_output_mode\") != \"formal\":\n            raise AssertionError(\"STEP 1 FAILED: forecast is not a formal artifact\")\n        if not isinstance(forecast.get(\"result_sha256\"), str) or len(forecast[\"result_sha256\"]) != 64:\n            raise AssertionError(\"STEP 1 FAILED: result_sha256 missing/invalid\")\n        if not isinstance(forecast.get(\"input_sha256\"), str) or len(forecast[\"input_sha256\"]) != 64:\n            raise AssertionError(\"STEP 1 FAILED: input_sha256 missing/invalid\")\n        if not isinstance(forecast.get(\"input_document\"), dict):\n            raise AssertionError(\"STEP 1 FAILED: input_document not embedded (strong validation impossible)\")\n        # Strong validation: recompute the publication receipt from the embedded input.\n        sys.path.insert(0, str(REVENUE_FORECAST / \"scripts\"))\n        try:\n            from revenue_report import validate_published_forecast  # noqa: E402\n        except Exception as exc:\n            raise AssertionError(f\"STEP 1 FAILED: cannot import revenue-forecast strong validator: {exc}\")\n        try:\n            validate_published_forecast(forecast, forecast[\"input_document\"])\n        except Exception as exc:\n            raise AssertionError(f\"STEP 1 FAILED: strong forecast validation rejected the artifact: {exc}\")\n        # R1.2: register the fixture's anchor so require_registered_input consumers\n        # pass in CI (the registry is a runtime artifact, not part of the repo).\n        try:\n            import publication_registry\n    \n            publication_registry.register_publication(forecast, note=\"biren invest e2e fixture\")\n        except Exception as exc:\n>           raise AssertionError(f\"STEP 1 FAILED: publication registry unavailable: {exc}\")\nE           AssertionError: STEP 1 FAILED: publication registry unavailable: index offline\n\ne2e\\run_biren_invest_e2e.py:96: AssertionError\n_________ test_company_reference_owns_the_single_immediate_validation _________\n\nforecast = {'company_name': 'Test Co', 'as_of_date': '2026-07-12', 'currency': 'USD', 'unit': 'million', ...}\n\n    def test_company_reference_owns_the_single_immediate_validation(forecast):\n        calls = []\n        original = invest_contracts.validate_revenue_forecast\n        def checked(value):\n            calls.append(value)\n            return original(value)\n        with patch.object(invest_contracts, \"validate_revenue_forecast\", checked), patch.object(company, \"validate_revenue_forecast\", checked, create=True), patch.object(company, \"validate_manifest\", side_effect=BoundaryReached):\n            with pytest.raises(BoundaryReached):\n                company.run_company({}, forecast)\n>       assert len(calls) == 1\nE       AssertionError: assert 2 == 1\nE        +  where 2 = len([{'company_name': 'Test Co', 'as_of_date': '2026-07-12', 'currency': 'USD', 'unit': 'million', ...}, {'company_name': 'Test Co', 'as_of_date': '2026-07-12', 'currency': 'USD', 'unit': 'million', ...}])\n\ne2e\\tests\\test_e2e_contract_boundaries.py:50: AssertionError\n_________ test_bundle_reference_owns_the_single_immediate_validation __________\n\nforecast = {'company_name': 'Test Co', 'as_of_date': '2026-07-12', 'currency': 'USD', 'unit': 'million', ...}\n\n    def test_bundle_reference_owns_the_single_immediate_validation(forecast):\n        reference = invest_contracts.revenue_reference(forecast)\n        calls = []\n        original = invest_contracts.validate_revenue_forecast\n        def checked(value):\n            calls.append(value)\n            return original(value)\n        plan = {\"bundle_plan_schema_version\": \"2.0\", \"required_modules\": [], \"optional_modules\": []}\n        with patch.object(invest_contracts, \"validate_revenue_forecast\", checked), patch.object(bundle, \"validate_revenue_forecast\", checked), patch.object(bundle, \"_validate_bundle_inputs\", return_value=({}, [reference], [])), patch.object(bundle, \"_summary\", side_effect=BoundaryReached):\n            with pytest.raises(BoundaryReached):\n                bundle.run_bundle([], plan, frozen_revenue_forecast=forecast)\n>       assert calls == [forecast]\nE       AssertionError: assert [{'company_na...illion', ...}] == [{'company_na...illion', ...}]\nE         \nE         Left contains one more item: {'company_name': 'Test Co', 'as_of_date': '2026-07-12', 'currency': 'USD', 'unit': 'million', ...}\nE         Use -v to get more diff\n\ne2e\\tests\\test_e2e_contract_boundaries.py:64: AssertionError\n_____ test_current_bundle_public_read_validates_its_frozen_forecast_once ______\n\nforecast = {'company_name': 'Test Co', 'as_of_date': '2026-07-12', 'currency': 'USD', 'unit': 'million', ...}\n\n    def test_current_bundle_public_read_validates_its_frozen_forecast_once(forecast):\n        execution = company.run_company(_fixture.manifest_for(forecast), forecast)\n        artifact = execution[\"bundle\"]\n        frozen = artifact[\"data\"][\"frozen_revenue_forecast\"]\n        calls = []\n        original = invest_contracts.validate_revenue_forecast\n        def checked(value):\n            if value is frozen:\n                calls.append(value)\n            return original(value)\n        with patch.object(invest_contracts, \"validate_revenue_forecast\", checked), patch.object(bundle, \"validate_revenue_forecast\", checked):\n            bundle.validate_bundle_artifact(artifact)\n>       assert len(calls) == 1\nE       AssertionError: assert 2 == 1\nE        +  where 2 = len([{'company_name': 'Test Co', 'as_of_date': '2026-07-12', 'currency': 'USD', 'unit': 'million', ...}, {'company_name': 'Test Co', 'as_of_date': '2026-07-12', 'currency': 'USD', 'unit': 'million', ...}])\n\ne2e\\tests\\test_e2e_contract_boundaries.py:79: AssertionError\n=========================== short test summary info ===========================\nFAILED invest-core/tests/test_claim_excerpt_integrity.py::test_supported_quote_has_no_arbitrary_minimum_or_maximum[USD 20m.]\nFAILED invest-core/tests/test_claim_excerpt_integrity.py::test_supported_quote_has_no_arbitrary_minimum_or_maximum[Reported net income was USD 20 million. This amount is annual, with no acquisition contribution. This amount is annual, with no acquisition contribution. This amount is annual, with no acquisition contribution. This amount is annual, with no acquisition contribution. This amount is annual, with no acquisition contribution. This amount is annual, with no acquisition contribution. This amount is annual, with no acquisition contribution. This amount is annual, with no acquisition contribution. This amount is annual, with no acquisition contribution. This amount is annual, with no acquisition contribution. This amount is annual, with no acquisition contribution. This amount is annual, with no acquisition contribution. This amount is annual, with no acquisition contribution. This amount is annual, with no acquisition contribution. This amount is annual, with no acquisition contribution. This amount is annual, with no acquisition contribution. This amount is annual, with no acquisition contribution. This amount is annual, with no acquisition contribution. ]\nFAILED e2e/tests/test_e2e_contract_boundaries.py::test_step_one_does_not_require_a_global_index\nFAILED e2e/tests/test_e2e_contract_boundaries.py::test_company_reference_owns_the_single_immediate_validation\nFAILED e2e/tests/test_e2e_contract_boundaries.py::test_bundle_reference_owns_the_single_immediate_validation\nFAILED e2e/tests/test_e2e_contract_boundaries.py::test_current_bundle_public_read_validates_its_frozen_forecast_once\n6 failed, 4 passed in 1.77s\n",
+    "generator.log": "{\"schema_version\": \"3.7\", \"engine_version\": \"4.3.0\", \"input_sha256\": \"0e1cc8d4c73de8587a1caf5240a7945451a94fcba3e9ad88b61148b461bbee4d\", \"result_sha256\": \"cb0d03fd47d0bd21fddc7c798f9292a954437f253943bdb7f937f382fde35ede\", \"attestation_status\": \"unattested\", \"output\": \"C:\\\\Users\\\\郑曾波\\\\Projects\\\\company-wiki\\\\tmp\\\\r7ie\\\\generated.json\"}\n",
+    "green.log": "..........                                                               [100%]\n10 passed in 1.26s\n",
+    "e2e.log": "[e2e]   ok   STEP 1: input forecast is a strong-validated formal artifact (index independent)\n[e2e]   ok   STEP 2: manifest contract valid\n[e2e] owned runs: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r7ie\\invest-e2e-tn4ib5jv\n[e2e-diag] REVENUE_FORECAST_DIR=C:\\Users\\郑曾波\\Projects\\revenue-forecast\n[e2e-diag] REVENUE_FORECAST=C:\\Users\\郑曾波\\Projects\\revenue-forecast exists=True\n[e2e-diag] INVEST_FRAMEWORK=C:\\Users\\郑曾波\\Projects\\invest-skills\\invest-framework exists=True\n[e2e-diag] cwd will be=C:\\Users\\郑曾波\\Projects\\invest-skills\\invest-framework\n[e2e]   run 1 ok: bundle=6a377a45228d report=19a02d6d6de0\n[e2e-diag] REVENUE_FORECAST_DIR=C:\\Users\\郑曾波\\Projects\\revenue-forecast\n[e2e-diag] REVENUE_FORECAST=C:\\Users\\郑曾波\\Projects\\revenue-forecast exists=True\n[e2e-diag] INVEST_FRAMEWORK=C:\\Users\\郑曾波\\Projects\\invest-skills\\invest-framework exists=True\n[e2e-diag] cwd will be=C:\\Users\\郑曾波\\Projects\\invest-skills\\invest-framework\n[e2e]   run 2 ok: bundle=6a377a45228d report=19a02d6d6de0\n[e2e]   ok   STEP 9: outputs byte-identical across two runs\n[e2e]   ok   3\n[e2e]   ok   4a\n[e2e]   ok   4b-low\n[e2e]   ok   4b-base\n[e2e]   ok   4b-high\n[e2e]   ok   4c\n[e2e]   ok   5a\n[e2e]   ok   5b-low\n[e2e]   ok   5b-base\n[e2e]   ok   5b-high\n[e2e]   ok   6a\n[e2e]   ok   6b-low\n[e2e]   ok   6b-base\n[e2e]   ok   6b-high\n[e2e]   ok   7a\n[e2e]   ok   7b\n[e2e]   ok   8a\n[e2e]   ok   8b\n[e2e]   ok   8c\n[e2e]   ok   8d\n[e2e]   ok   8e\n[e2e]   ok   8f\n[e2e]   ok   STEPS 4-8: financials / valuation / SOTP / bundle / receipt / report all green\n[e2e]   ok   3\n[e2e]   ok   4a\n[e2e]   ok   4b-low\n[e2e]   ok   4b-base\n[e2e]   ok   4b-high\n[e2e]   ok   4c\n[e2e]   ok   5a\n[e2e]   ok   5b-low\n[e2e]   ok   5b-base\n[e2e]   ok   5b-high\n[e2e]   ok   6a\n[e2e]   ok   6b-low\n[e2e]   ok   6b-base\n[e2e]   ok   6b-high\n[e2e]   ok   7a\n[e2e]   ok   7b\n[e2e]   ok   8a\n[e2e]   ok   8b\n[e2e]   ok   8c\n[e2e]   ok   8d\n[e2e]   ok   8e\n[e2e]   ok   8f\n[e2e]   ok   STEPS 4-8: financials / valuation / SOTP / bundle / receipt / report all green\n[e2e] golden metadata updated with unchanged economic values: expected-0e1cc8d4c73d.json\n[e2e] E2E PASS: forecast=0e1cc8d4c73d invest_head=a789cd07bc0126cdb8d401fa2dadfcf4caa8b121\n[e2e] kept owned runs: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r7ie\\invest-e2e-tn4ib5jv\n",
+    "final-tests.log": "...................F                                                     [100%]\n================================== FAILURES ===================================\n_____________ test_offline_bootstrap_blocks_actual_socket_attempt _____________\n\ntmp_path = WindowsPath('C:/Users/郑曾波/Projects/company-wiki/tmp/r7ie/final-tmp/test_offline_bootstrap_blocks_0')\n\n    def test_offline_bootstrap_blocks_actual_socket_attempt(tmp_path):\n        script = tmp_path / \"socket_attempt.py\"\n        script.write_text(\"import socket; socket.create_connection(('127.0.0.1', 9))\", encoding=\"utf-8\")\n        result = subprocess.run([sys.executable, \"-B\", str(ROOT / \"e2e/offline_cli.py\"), str(script)],\n                                capture_output=True, text=True, timeout=10)\n        assert result.returncode != 0\n>       assert \"Network is disabled in the offline E2E process\" in result.stderr\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE       TypeError: argument of type 'NoneType' is not iterable\n\ninvest-framework\\tests\\test_e2e_contract_boundaries.py:175: TypeError\n============================== warnings summary ===============================\ninvest-framework/tests/test_e2e_contract_boundaries.py::test_offline_bootstrap_blocks_actual_socket_attempt\n  C:\\Miniconda\\Lib\\site-packages\\_pytest\\threadexception.py:58: PytestUnhandledThreadExceptionWarning: Exception in thread Thread-16 (_readerthread)\n  \n  Traceback (most recent call last):\n    File \"C:\\Miniconda\\Lib\\threading.py\", line 1043, in _bootstrap_inner\n      self.run()\n      ~~~~~~~~^^\n    File \"C:\\Miniconda\\Lib\\threading.py\", line 994, in run\n      self._target(*self._args, **self._kwargs)\n      ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    File \"C:\\Miniconda\\Lib\\subprocess.py\", line 1615, in _readerthread\n      buffer.append(fh.read())\n                    ~~~~~~~^^\n    File \"<frozen codecs>\", line 325, in decode\n  UnicodeDecodeError: 'utf-8' codec can't decode byte 0xd4 in position 55: invalid continuation byte\n  \n  Enable tracemalloc to get traceback where the object was allocated.\n  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.\n    warnings.warn(pytest.PytestUnhandledThreadExceptionWarning(msg))\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n=========================== short test summary info ===========================\nFAILED invest-framework/tests/test_e2e_contract_boundaries.py::test_offline_bootstrap_blocks_actual_socket_attempt\n1 failed, 19 passed, 1 warning in 10.65s\n",
+    "socket-fix.log": ".                                                                        [100%]\n1 passed in 0.47s\n",
+    "adjacent.log": "......................................                                [100%]\n38 passed, 3 subtests passed in 15.54s\n",
+    "ruff-final.log": "All checks passed!\n",
+    "e2e-default.log": "[e2e]   ok   STEP 1: input forecast is a strong-validated formal artifact (index independent)\n[e2e]   ok   STEP 2: manifest contract valid\n[e2e] owned runs: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r7ie\\invest-e2e-50m8ou_m\n[e2e-diag] REVENUE_FORECAST_DIR=C:\\Users\\郑曾波\\Projects\\revenue-forecast\n[e2e-diag] REVENUE_FORECAST=C:\\Users\\郑曾波\\Projects\\revenue-forecast exists=True\n[e2e-diag] INVEST_FRAMEWORK=C:\\Users\\郑曾波\\Projects\\invest-skills\\invest-framework exists=True\n[e2e-diag] cwd will be=C:\\Users\\郑曾波\\Projects\\invest-skills\\invest-framework\n[e2e]   run 1 ok: bundle=6a377a45228d report=19a02d6d6de0\n[e2e-diag] REVENUE_FORECAST_DIR=C:\\Users\\郑曾波\\Projects\\revenue-forecast\n[e2e-diag] REVENUE_FORECAST=C:\\Users\\郑曾波\\Projects\\revenue-forecast exists=True\n[e2e-diag] INVEST_FRAMEWORK=C:\\Users\\郑曾波\\Projects\\invest-skills\\invest-framework exists=True\n[e2e-diag] cwd will be=C:\\Users\\郑曾波\\Projects\\invest-skills\\invest-framework\n[e2e]   run 2 ok: bundle=6a377a45228d report=19a02d6d6de0\n[e2e]   ok   STEP 9: outputs byte-identical across two runs\n[e2e]   ok   3\n[e2e]   ok   4a\n[e2e]   ok   4b-low\n[e2e]   ok   4b-base\n[e2e]   ok   4b-high\n[e2e]   ok   4c\n[e2e]   ok   5a\n[e2e]   ok   5b-low\n[e2e]   ok   5b-base\n[e2e]   ok   5b-high\n[e2e]   ok   6a\n[e2e]   ok   6b-low\n[e2e]   ok   6b-base\n[e2e]   ok   6b-high\n[e2e]   ok   7a\n[e2e]   ok   7b\n[e2e]   ok   8a\n[e2e]   ok   8b\n[e2e]   ok   8c\n[e2e]   ok   8d\n[e2e]   ok   8e\n[e2e]   ok   8f\n[e2e]   ok   STEPS 4-8: financials / valuation / SOTP / bundle / receipt / report all green\n[e2e]   ok   3\n[e2e]   ok   4a\n[e2e]   ok   4b-low\n[e2e]   ok   4b-base\n[e2e]   ok   4b-high\n[e2e]   ok   4c\n[e2e]   ok   5a\n[e2e]   ok   5b-low\n[e2e]   ok   5b-base\n[e2e]   ok   5b-high\n[e2e]   ok   6a\n[e2e]   ok   6b-low\n[e2e]   ok   6b-base\n[e2e]   ok   6b-high\n[e2e]   ok   7a\n[e2e]   ok   7b\n[e2e]   ok   8a\n[e2e]   ok   8b\n[e2e]   ok   8c\n[e2e]   ok   8d\n[e2e]   ok   8e\n[e2e]   ok   8f\n[e2e]   ok   STEPS 4-8: financials / valuation / SOTP / bundle / receipt / report all green\n[e2e]   ok   STEP 10: golden comparison identical\n[e2e] E2E PASS: forecast=0e1cc8d4c73d invest_head=a789cd07bc0126cdb8d401fa2dadfcf4caa8b121\n[e2e] owned runs removed: True\n"
+  },
+  "protected": {
+    "rf_four_assurance_wip_before_and_after": {
+      "daily_alert.jsonl": "712f9e957990ca0c261cbb91c1d10b0a12606da9d7293e6f2a1581309ce295e9",
+      "monthly_manifest.json": "56d630107429cbcb646a951306dd1ea445dd5b3146236f34d0e8df953c103b9a",
+      "weekly_alert.jsonl": "fc9ec2335b48d42921ca9c14c63363efca3b3096f967733e366f4dd463e4b7ed",
+      "weekly_manifest.json": "e2e57f28fec7477af06029adcf187468701ab0305024993bfb2953bbd43cc5c0"
+    },
+    "four_wip_unchanged": true,
+    "biren_manifest_unchanged": true,
+    "historical_e2e_runs": "never read/enumerated/modified",
+    "rf_ff_cwp_runtime": "not written by this task"
+  },
+  "not_performed": [
+    "no RF compatibility/validation/runtime changes",
+    "no real company analysis, model, paidcall, download or sourceoriginal",
+    "no full invest suite or repeat145 tests",
+    "no source/tag-only fixture relabel",
+    "no Git/index/commit/push/globaldeploy",
+    "no retrospective claim that old false-signed fixture was valid"
+  ],
+  "cleanup": {
+    "owned_scratch": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r7ie",
+    "initial_absent": true,
+    "containment_parent": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp",
+    "reparse_points": 0,
+    "removed_files": 69,
+    "removed_bytes": 5846675.0,
+    "exists_after": false,
+    "status": "restored_to_initial_absent",
+    "generator_registry": "stdlib TemporaryDirectory managed; separate byte-count not measured",
+    "cleanup_command_note": "The optional Split-Path -LiteralPath/-Parent parent guard emitted a nonterminating parameter-set error. The resolved target was nevertheless the explicitly named literal owned directory, not a computed target; root and descendants were checked nonreparse before deletion. A subsequent ErrorActionPreference=Stop command used IO.Path.GetDirectoryName(GetFullPath(literal)) to verify the exact parent and confirmed target absent. This is disclosed, not reported as a fully successful pre-delete guard.",
+    "post_delete_canonical_parent_verified": true
+  },
+  "next": "ROOT arranges independent11file delta review, then normal commit/push/CI. Runtime/tests frozen; no additional implementation begun."
+}

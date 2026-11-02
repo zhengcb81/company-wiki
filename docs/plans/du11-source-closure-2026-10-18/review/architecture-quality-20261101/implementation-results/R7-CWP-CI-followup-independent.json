@@ -1,0 +1,311 @@
+{
+  "schema_version": "independent-review/1",
+  "status": "PASS_ENGINEERING_SELECTED_SCOPE",
+  "timestamp_utc": "2026-11-02T10:53:01.071692+00:00",
+  "reviewer": "rectification_review_a",
+  "author_report_sha256": "668d2c36f758d32de59e3bc2ad442f6a723ee20c351d0919ab104e69a121e442",
+  "tested_head": "bd911a2bd1125fe46d7c5a0f605fe3b0104f17be",
+  "head_after": "bd911a2bd1125fe46d7c5a0f605fe3b0104f17be",
+  "delivery_files_sha256": {
+    "tests/unit/du11_source_priority/test_source_priority.py": "bb982edb3995a99867a2cdc7817b75745a6f78b27da7c0295507e7fe3ca50f45",
+    "tests/unit/du11_summary_execution/test_contract.py": "3bc12750f1a9c038f06898a96564d9064f36a2d096b275f15341f11e84334aee",
+    "tests/unit/test_extractive_rank_material.py": "914470d478b8d6765d3eb245154ebc6b04ae8a9f59f4cc4a701241b1e804be67",
+    "tests/unit/test_narrative_post_model_failure_diagnostics.py": "6c8dd0d686df40e5cf12d6ed033750649a1d4d32ea5cb81cfd7d7f85e1d18bcd",
+    "tests/unit/test_narrative_source_guard.py": "c005eba45e7e6e1b0618e0b9317d000dfc713e4abf7f07288ecca521d299123b"
+  },
+  "published_core_source_sha256": {
+    "src/company_wiki/automation/json_tree.py": "38e0b02e1c766841f477bb4028ec921b2bef1bf77cd89a08b296334086a87479",
+    "src/company_wiki/automation/models.py": "3b00ea1a2c4d4ba4e7777fd3cc4e4d6af0f33337a32be7630bc94812ec690d0d",
+    "src/company_wiki/automation/narrative_contracts.py": "d58561ae09f126da24f35e8916a1d1e6dcf5c0ed5b3daebc83745b7c414c0f36",
+    "src/company_wiki/automation/narrative_transport_contracts.py": "2bc39a06fd46b378731434230fefcca40a1b94f2a186c4073f3736e6f2e6f76b",
+    "src/company_wiki/automation/narrative_projection.py": "5df3112779d4fadd7065e15e326bee0dbfda3e63a3112a1f5b9379e695966b0d",
+    "src/company_wiki/automation/narrative_transport.py": "f6eab9d5166f6accebb3b7ca5d593d45a7fbc4612a4bf4302fa76ac7eadb198b",
+    "src/company_wiki/automation/narrative_evidence_view.py": "8650825c5c1b9152ac787663af449db12cfcd1a68174d9195f2490d489090a4e",
+    "src/company_wiki/source_catalog/narrative_transport_cli.py": "f19e92b911a4e44113dd33fa583d3ca5da2a30e14ec992e317cafdfefb22ac23",
+    "src/company_wiki/source_catalog/official_source_flow.py": "05fd9c9c87a887e0de9e9c3b14381c83c26f55bd709c64268cf79450017e56c5",
+    "src/company_wiki/automation/narrative_model_extractive.py": "162a2435468b048dcdb51474da99a9f1199a7282154245ed4e88c43208ecf9f7",
+    "src/company_wiki/automation/narrative_summary_assessment.py": "f1a86e4ff560d7a6029ff7338542b1407e392b745da7f1a4488a95155812dc16",
+    "src/company_wiki/automation/narrative_generation.py": "bc59407fca6d5cc18aabe79225d42e13014994789fc0aa05f5beae1129ee22d8",
+    "src/company_wiki/automation/narrative_batch.py": "68fa49e9a2506de6614e070509b1540f74708d5bbaefa64093a8963cfa5ff9f6",
+    "src/company_wiki/automation/narrative_http_model.py": "79b1f3a7323fe0bbc628ff9726fb006f597c9888bfcb5c4bcd369d216266c7e9",
+    "src/company_wiki/automation/narrative_model.py": "e5def4ded96a55dc5342d670105c32f80ad3e61b54ddc36c19db4ee3322c6369",
+    "src/company_wiki/automation/narrative_source_guard.py": "e76ff4affde5877006b44074c2e55f4f3b3dfe8690777983cc7ec76affa66d7d",
+    "src/company_wiki/automation/narrative_select.py": "989b517f35be715b4d863c33315a707d7484293b2e8c78e3413abd7467c513a6",
+    "src/company_wiki/automation/narrative_verify.py": "e0500a149798b880bcdc883df70fba784da8b64172a39eca9404bcc2e44d6329",
+    "src/company_wiki/automation/narrative_summary_execution.py": "221917810327c20779de9e3120c2f75a28cf189d9f265c2dd3fcfb0fe0c9c0c6",
+    "src/company_wiki/source_catalog/narrative_source_passage.py": "f5e92150ebd43821bde3166ed633f0a73a5a630fd78aaee0e7b5494d178b9041",
+    "src/company_wiki/source_catalog/narrative_reading_admission.py": "382c90f3b63845efe08910e9864b3e06dd3508f7d3de050da431ce1e1f4445ad",
+    "src/company_wiki/source_catalog/narrative_pdf_intent.py": "81efe5a04da865a8fa67cc9b9786e5446fb5317c7973db74da9cf30cdf9c0754",
+    "src/company_wiki/document_understanding/geometry_intent/contracts.py": "277335f890a5a2a8384c7b79324a684da9b44da7da6dc24c0a95d4482c1ee245",
+    "src/company_wiki/document_understanding/geometry_intent/planner.py": "97d52c3e22bbec6b0878525f06a3e5a10ea171033ac79aab5f23c425b6361734",
+    "src/company_wiki/document_understanding/geometry_intent/reading.py": "bd2afb3cd54cbf91378b136b27ff81e9e421b3f4ec2e0f1ecb634544a5fcabc3"
+  },
+  "tested_core_source_sha256": {
+    "src/company_wiki/automation/json_tree.py": "38e0b02e1c766841f477bb4028ec921b2bef1bf77cd89a08b296334086a87479",
+    "src/company_wiki/automation/models.py": "3b00ea1a2c4d4ba4e7777fd3cc4e4d6af0f33337a32be7630bc94812ec690d0d",
+    "src/company_wiki/automation/narrative_contracts.py": "d58561ae09f126da24f35e8916a1d1e6dcf5c0ed5b3daebc83745b7c414c0f36",
+    "src/company_wiki/automation/narrative_transport_contracts.py": "2bc39a06fd46b378731434230fefcca40a1b94f2a186c4073f3736e6f2e6f76b",
+    "src/company_wiki/automation/narrative_projection.py": "5df3112779d4fadd7065e15e326bee0dbfda3e63a3112a1f5b9379e695966b0d",
+    "src/company_wiki/automation/narrative_transport.py": "f6eab9d5166f6accebb3b7ca5d593d45a7fbc4612a4bf4302fa76ac7eadb198b",
+    "src/company_wiki/automation/narrative_evidence_view.py": "8650825c5c1b9152ac787663af449db12cfcd1a68174d9195f2490d489090a4e",
+    "src/company_wiki/source_catalog/narrative_transport_cli.py": "f19e92b911a4e44113dd33fa583d3ca5da2a30e14ec992e317cafdfefb22ac23",
+    "src/company_wiki/source_catalog/official_source_flow.py": "05fd9c9c87a887e0de9e9c3b14381c83c26f55bd709c64268cf79450017e56c5",
+    "src/company_wiki/automation/narrative_model_extractive.py": "162a2435468b048dcdb51474da99a9f1199a7282154245ed4e88c43208ecf9f7",
+    "src/company_wiki/automation/narrative_summary_assessment.py": "f1a86e4ff560d7a6029ff7338542b1407e392b745da7f1a4488a95155812dc16",
+    "src/company_wiki/automation/narrative_generation.py": "bc59407fca6d5cc18aabe79225d42e13014994789fc0aa05f5beae1129ee22d8",
+    "src/company_wiki/automation/narrative_batch.py": "68fa49e9a2506de6614e070509b1540f74708d5bbaefa64093a8963cfa5ff9f6",
+    "src/company_wiki/automation/narrative_http_model.py": "79b1f3a7323fe0bbc628ff9726fb006f597c9888bfcb5c4bcd369d216266c7e9",
+    "src/company_wiki/automation/narrative_model.py": "e5def4ded96a55dc5342d670105c32f80ad3e61b54ddc36c19db4ee3322c6369",
+    "src/company_wiki/automation/narrative_source_guard.py": "e76ff4affde5877006b44074c2e55f4f3b3dfe8690777983cc7ec76affa66d7d",
+    "src/company_wiki/automation/narrative_select.py": "989b517f35be715b4d863c33315a707d7484293b2e8c78e3413abd7467c513a6",
+    "src/company_wiki/automation/narrative_verify.py": "e0500a149798b880bcdc883df70fba784da8b64172a39eca9404bcc2e44d6329",
+    "src/company_wiki/automation/narrative_summary_execution.py": "221917810327c20779de9e3120c2f75a28cf189d9f265c2dd3fcfb0fe0c9c0c6",
+    "src/company_wiki/source_catalog/narrative_source_passage.py": "f5e92150ebd43821bde3166ed633f0a73a5a630fd78aaee0e7b5494d178b9041",
+    "src/company_wiki/source_catalog/narrative_reading_admission.py": "382c90f3b63845efe08910e9864b3e06dd3508f7d3de050da431ce1e1f4445ad",
+    "src/company_wiki/source_catalog/narrative_pdf_intent.py": "81efe5a04da865a8fa67cc9b9786e5446fb5317c7973db74da9cf30cdf9c0754",
+    "src/company_wiki/document_understanding/geometry_intent/contracts.py": "277335f890a5a2a8384c7b79324a684da9b44da7da6dc24c0a95d4482c1ee245",
+    "src/company_wiki/document_understanding/geometry_intent/planner.py": "97d52c3e22bbec6b0878525f06a3e5a10ea171033ac79aab5f23c425b6361734",
+    "src/company_wiki/document_understanding/geometry_intent/reading.py": "bd2afb3cd54cbf91378b136b27ff81e9e421b3f4ec2e0f1ecb634544a5fcabc3"
+  },
+  "all30_sha_before": {
+    "tests/unit/du11_source_priority/test_source_priority.py": "bb982edb3995a99867a2cdc7817b75745a6f78b27da7c0295507e7fe3ca50f45",
+    "tests/unit/du11_summary_execution/test_contract.py": "3bc12750f1a9c038f06898a96564d9064f36a2d096b275f15341f11e84334aee",
+    "tests/unit/test_extractive_rank_material.py": "914470d478b8d6765d3eb245154ebc6b04ae8a9f59f4cc4a701241b1e804be67",
+    "tests/unit/test_narrative_post_model_failure_diagnostics.py": "6c8dd0d686df40e5cf12d6ed033750649a1d4d32ea5cb81cfd7d7f85e1d18bcd",
+    "tests/unit/test_narrative_source_guard.py": "c005eba45e7e6e1b0618e0b9317d000dfc713e4abf7f07288ecca521d299123b",
+    "src/company_wiki/automation/json_tree.py": "38e0b02e1c766841f477bb4028ec921b2bef1bf77cd89a08b296334086a87479",
+    "src/company_wiki/automation/models.py": "3b00ea1a2c4d4ba4e7777fd3cc4e4d6af0f33337a32be7630bc94812ec690d0d",
+    "src/company_wiki/automation/narrative_contracts.py": "d58561ae09f126da24f35e8916a1d1e6dcf5c0ed5b3daebc83745b7c414c0f36",
+    "src/company_wiki/automation/narrative_transport_contracts.py": "2bc39a06fd46b378731434230fefcca40a1b94f2a186c4073f3736e6f2e6f76b",
+    "src/company_wiki/automation/narrative_projection.py": "5df3112779d4fadd7065e15e326bee0dbfda3e63a3112a1f5b9379e695966b0d",
+    "src/company_wiki/automation/narrative_transport.py": "f6eab9d5166f6accebb3b7ca5d593d45a7fbc4612a4bf4302fa76ac7eadb198b",
+    "src/company_wiki/automation/narrative_evidence_view.py": "8650825c5c1b9152ac787663af449db12cfcd1a68174d9195f2490d489090a4e",
+    "src/company_wiki/source_catalog/narrative_transport_cli.py": "f19e92b911a4e44113dd33fa583d3ca5da2a30e14ec992e317cafdfefb22ac23",
+    "src/company_wiki/source_catalog/official_source_flow.py": "05fd9c9c87a887e0de9e9c3b14381c83c26f55bd709c64268cf79450017e56c5",
+    "src/company_wiki/automation/narrative_model_extractive.py": "162a2435468b048dcdb51474da99a9f1199a7282154245ed4e88c43208ecf9f7",
+    "src/company_wiki/automation/narrative_summary_assessment.py": "f1a86e4ff560d7a6029ff7338542b1407e392b745da7f1a4488a95155812dc16",
+    "src/company_wiki/automation/narrative_generation.py": "bc59407fca6d5cc18aabe79225d42e13014994789fc0aa05f5beae1129ee22d8",
+    "src/company_wiki/automation/narrative_batch.py": "68fa49e9a2506de6614e070509b1540f74708d5bbaefa64093a8963cfa5ff9f6",
+    "src/company_wiki/automation/narrative_http_model.py": "79b1f3a7323fe0bbc628ff9726fb006f597c9888bfcb5c4bcd369d216266c7e9",
+    "src/company_wiki/automation/narrative_model.py": "e5def4ded96a55dc5342d670105c32f80ad3e61b54ddc36c19db4ee3322c6369",
+    "src/company_wiki/automation/narrative_source_guard.py": "e76ff4affde5877006b44074c2e55f4f3b3dfe8690777983cc7ec76affa66d7d",
+    "src/company_wiki/automation/narrative_select.py": "989b517f35be715b4d863c33315a707d7484293b2e8c78e3413abd7467c513a6",
+    "src/company_wiki/automation/narrative_verify.py": "e0500a149798b880bcdc883df70fba784da8b64172a39eca9404bcc2e44d6329",
+    "src/company_wiki/automation/narrative_summary_execution.py": "221917810327c20779de9e3120c2f75a28cf189d9f265c2dd3fcfb0fe0c9c0c6",
+    "src/company_wiki/source_catalog/narrative_source_passage.py": "f5e92150ebd43821bde3166ed633f0a73a5a630fd78aaee0e7b5494d178b9041",
+    "src/company_wiki/source_catalog/narrative_reading_admission.py": "382c90f3b63845efe08910e9864b3e06dd3508f7d3de050da431ce1e1f4445ad",
+    "src/company_wiki/source_catalog/narrative_pdf_intent.py": "81efe5a04da865a8fa67cc9b9786e5446fb5317c7973db74da9cf30cdf9c0754",
+    "src/company_wiki/document_understanding/geometry_intent/contracts.py": "277335f890a5a2a8384c7b79324a684da9b44da7da6dc24c0a95d4482c1ee245",
+    "src/company_wiki/document_understanding/geometry_intent/planner.py": "97d52c3e22bbec6b0878525f06a3e5a10ea171033ac79aab5f23c425b6361734",
+    "src/company_wiki/document_understanding/geometry_intent/reading.py": "bd2afb3cd54cbf91378b136b27ff81e9e421b3f4ec2e0f1ecb634544a5fcabc3"
+  },
+  "all30_sha_after": {
+    "tests/unit/du11_source_priority/test_source_priority.py": "bb982edb3995a99867a2cdc7817b75745a6f78b27da7c0295507e7fe3ca50f45",
+    "tests/unit/du11_summary_execution/test_contract.py": "3bc12750f1a9c038f06898a96564d9064f36a2d096b275f15341f11e84334aee",
+    "tests/unit/test_extractive_rank_material.py": "914470d478b8d6765d3eb245154ebc6b04ae8a9f59f4cc4a701241b1e804be67",
+    "tests/unit/test_narrative_post_model_failure_diagnostics.py": "6c8dd0d686df40e5cf12d6ed033750649a1d4d32ea5cb81cfd7d7f85e1d18bcd",
+    "tests/unit/test_narrative_source_guard.py": "c005eba45e7e6e1b0618e0b9317d000dfc713e4abf7f07288ecca521d299123b",
+    "src/company_wiki/automation/json_tree.py": "38e0b02e1c766841f477bb4028ec921b2bef1bf77cd89a08b296334086a87479",
+    "src/company_wiki/automation/models.py": "3b00ea1a2c4d4ba4e7777fd3cc4e4d6af0f33337a32be7630bc94812ec690d0d",
+    "src/company_wiki/automation/narrative_contracts.py": "d58561ae09f126da24f35e8916a1d1e6dcf5c0ed5b3daebc83745b7c414c0f36",
+    "src/company_wiki/automation/narrative_transport_contracts.py": "2bc39a06fd46b378731434230fefcca40a1b94f2a186c4073f3736e6f2e6f76b",
+    "src/company_wiki/automation/narrative_projection.py": "5df3112779d4fadd7065e15e326bee0dbfda3e63a3112a1f5b9379e695966b0d",
+    "src/company_wiki/automation/narrative_transport.py": "f6eab9d5166f6accebb3b7ca5d593d45a7fbc4612a4bf4302fa76ac7eadb198b",
+    "src/company_wiki/automation/narrative_evidence_view.py": "8650825c5c1b9152ac787663af449db12cfcd1a68174d9195f2490d489090a4e",
+    "src/company_wiki/source_catalog/narrative_transport_cli.py": "f19e92b911a4e44113dd33fa583d3ca5da2a30e14ec992e317cafdfefb22ac23",
+    "src/company_wiki/source_catalog/official_source_flow.py": "05fd9c9c87a887e0de9e9c3b14381c83c26f55bd709c64268cf79450017e56c5",
+    "src/company_wiki/automation/narrative_model_extractive.py": "162a2435468b048dcdb51474da99a9f1199a7282154245ed4e88c43208ecf9f7",
+    "src/company_wiki/automation/narrative_summary_assessment.py": "f1a86e4ff560d7a6029ff7338542b1407e392b745da7f1a4488a95155812dc16",
+    "src/company_wiki/automation/narrative_generation.py": "bc59407fca6d5cc18aabe79225d42e13014994789fc0aa05f5beae1129ee22d8",
+    "src/company_wiki/automation/narrative_batch.py": "68fa49e9a2506de6614e070509b1540f74708d5bbaefa64093a8963cfa5ff9f6",
+    "src/company_wiki/automation/narrative_http_model.py": "79b1f3a7323fe0bbc628ff9726fb006f597c9888bfcb5c4bcd369d216266c7e9",
+    "src/company_wiki/automation/narrative_model.py": "e5def4ded96a55dc5342d670105c32f80ad3e61b54ddc36c19db4ee3322c6369",
+    "src/company_wiki/automation/narrative_source_guard.py": "e76ff4affde5877006b44074c2e55f4f3b3dfe8690777983cc7ec76affa66d7d",
+    "src/company_wiki/automation/narrative_select.py": "989b517f35be715b4d863c33315a707d7484293b2e8c78e3413abd7467c513a6",
+    "src/company_wiki/automation/narrative_verify.py": "e0500a149798b880bcdc883df70fba784da8b64172a39eca9404bcc2e44d6329",
+    "src/company_wiki/automation/narrative_summary_execution.py": "221917810327c20779de9e3120c2f75a28cf189d9f265c2dd3fcfb0fe0c9c0c6",
+    "src/company_wiki/source_catalog/narrative_source_passage.py": "f5e92150ebd43821bde3166ed633f0a73a5a630fd78aaee0e7b5494d178b9041",
+    "src/company_wiki/source_catalog/narrative_reading_admission.py": "382c90f3b63845efe08910e9864b3e06dd3508f7d3de050da431ce1e1f4445ad",
+    "src/company_wiki/source_catalog/narrative_pdf_intent.py": "81efe5a04da865a8fa67cc9b9786e5446fb5317c7973db74da9cf30cdf9c0754",
+    "src/company_wiki/document_understanding/geometry_intent/contracts.py": "277335f890a5a2a8384c7b79324a684da9b44da7da6dc24c0a95d4482c1ee245",
+    "src/company_wiki/document_understanding/geometry_intent/planner.py": "97d52c3e22bbec6b0878525f06a3e5a10ea171033ac79aab5f23c425b6361734",
+    "src/company_wiki/document_understanding/geometry_intent/reading.py": "bd2afb3cd54cbf91378b136b27ff81e9e421b3f4ec2e0f1ecb634544a5fcabc3"
+  },
+  "all5_test_files_and25_core_sources_stable": true,
+  "production_changes_by_review": 0,
+  "author_scope": "five test files; zero production source changes; own W08 report test excluded",
+  "static_old_to_new_matrix": [
+    {
+      "area": "default versus explicit draft byte allocation",
+      "old_oracle": "default must <=56KiB and defer at least one card",
+      "new_oracle": "None admits every available whole card; explicit56KiB still exact UTF8 whole-card bound, full task rows and late high-value card",
+      "judgment": "authorized default representation-policy removal; explicit resource semantics preserved",
+      "independent": "selected migrated2 + new multilingual/escaping/exact-byte control"
+    },
+    {
+      "area": "execution receipt representation",
+      "old_oracle": "399 well-formed rows rejected solely for >32KiB",
+      "new_oracle": "all399 exact rows/type/coverage retained; no size permission",
+      "judgment": "legitimate removal of representation veto; unbound wrap is not represented as selected-binding validation",
+      "independent": "new public handler176rows/175claims + selected-bound parse; altered task hash and bool0 rejected; selected original binding test retained"
+    },
+    {
+      "area": "ranking availability",
+      "old_oracle": "get untransmitted task from default byte quota",
+      "new_oracle": "use genuine unresolved source-owned task;95 transmitted/1 unsupported; cannot rank unavailable scope or claim model/fullsource coverage",
+      "judgment": "true unavailable-source negative remains, without reintroducing implicit quota",
+      "independent": "migrated invalid rank + large public handler unknown remainder; no source input mutation"
+    },
+    {
+      "area": "post-model result",
+      "old_oracle": "legal70k claim ID causes RESULT_TOO_LARGE",
+      "new_oracle": "successful handler preserves full claimID, normalized semantics, actual native usage and response SHA",
+      "judgment": "size-only failure retired; all13 genuine JSON/identity/citation/language/group/path failures statically unchanged",
+      "independent": "migrated large result actual handler test executed; original response SHA/native321tokens/$0.002 asserted"
+    },
+    {
+      "area": "verified reader owner",
+      "old_oracle": "upper narrative consumer recomputes raw SHA on forged VerifiedContent",
+      "new_oracle": "upper binds returned source/document/hash/length; generation policy hash is lineage not permit; lower byte owner hashes actual originals",
+      "judgment": "single-owner responsibility, no persisted cross-request trust exemption; adapter must satisfy verified-port contract",
+      "independent": "new lower actual reader same-length one-byte corruption rejects; five upper identity/length controls statically retained"
+    }
+  ],
+  "independent_test_runs": [
+    {
+      "evidence": "initial.xml",
+      "tests": 10,
+      "failures": 1,
+      "errors": 0,
+      "time_seconds": 4.622,
+      "cases": [
+        {
+          "classname": "tmp.r7i-b842d1.test_review",
+          "name": "test_multibyte_default_and_explicit_bytes_keep_complete_sources",
+          "time": "0.028"
+        },
+        {
+          "classname": "tmp.r7i-b842d1.test_review",
+          "name": "test_admitted_emission_is_not_full_source_or_semantic_completeness",
+          "time": "0.082"
+        },
+        {
+          "classname": "tmp.r7i-b842d1.test_review",
+          "name": "test_large_real_handler_receipt_is_bound_not_merely_untyped_wrapper",
+          "time": "1.423"
+        },
+        {
+          "classname": "tmp.r7i-b842d1.test_review",
+          "name": "test_lower_actual_reader_rejects_equal_length_corruption",
+          "time": "0.604"
+        },
+        {
+          "classname": "tests.unit.du11_source_priority.test_source_priority",
+          "name": "test_default_preserves_all_cards_and_explicit_capacity_keeps_late_operating_fact[None]",
+          "time": "0.072"
+        },
+        {
+          "classname": "tests.unit.du11_source_priority.test_source_priority",
+          "name": "test_default_preserves_all_cards_and_explicit_capacity_keeps_late_operating_fact[57344]",
+          "time": "0.073"
+        },
+        {
+          "classname": "tests.unit.du11_summary_execution.test_contract",
+          "name": "test_large_report_keeps_every_row_without_a_representation_permission",
+          "time": "0.097"
+        },
+        {
+          "classname": "tests.unit.test_extractive_rank_material",
+          "name": "test_rank_for_an_untransmitted_unresolved_task_is_not_an_actual_model_read",
+          "time": "0.517"
+        },
+        {
+          "classname": "tests.unit.test_narrative_post_model_failure_diagnostics",
+          "name": "test_large_legal_post_model_result_keeps_complete_claims_identity_and_native_usage",
+          "time": "0.103"
+        },
+        {
+          "classname": "tests.unit.du11_summary_execution.test_contract",
+          "name": "test_selected_binding_cannot_be_counterfeited[plan_sha256]",
+          "time": "0.016"
+        }
+      ]
+    },
+    {
+      "evidence": "recovery.xml",
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "time_seconds": 2.882,
+      "cases": [
+        {
+          "classname": "tmp.r7i-b842d1.test_review",
+          "name": "test_large_real_handler_receipt_is_bound_not_merely_untyped_wrapper",
+          "time": "0.903"
+        }
+      ]
+    }
+  ],
+  "effective_result": "10 selected cases initially9P/1 review-fixture F4.73s; only corrected fixture rerun1P2.98s. All10 unique selected checks passed at final expectations; not a single aggregate10P rerun.",
+  "review_fixture_erratum": {
+    "failure": "canonical_json(result.result) rejected immutable MappingProxyType; product handler and initial typed selected-bound parse had already succeeded",
+    "fix": "use public HandlerResult.to_dict()[result], retaining all assertions and both binding/type tampering controls",
+    "production_change": false,
+    "retained_initial_evidence": true
+  },
+  "findings": [],
+  "author_history_retained": {
+    "original_ci_failures": 8,
+    "owned_original_failing_nodes": 7,
+    "author_once113_result": "112P1new-fixtureF",
+    "author_recovery": "5P; no rewritten prior red receipts"
+  },
+  "evidence": {
+    "test_review.initial.txt": {
+      "sha256": "d6e8520589d5b7f91f1f10b0b1ead40d2ffe6a80a4cfb0f04af1d5b31e86e716",
+      "bytes": 5258,
+      "text": "\"\"\"Independent synthetic R7 CI-oracle migration counter-controls.\"\"\"\nfrom copy import deepcopy\nimport json\n\nimport pytest\n\nfrom company_wiki.automation.models import HandlerOutcome, canonical_json\nfrom company_wiki.automation.narrative_contracts import NarrativeSelectResult\nfrom company_wiki.automation.narrative_model import NarrativeModelResponse\nfrom company_wiki.automation.narrative_model_extractive import compile_extractive_plan\nfrom company_wiki.automation.narrative_summarize import NarrativeSummarizeHandler\nfrom company_wiki.automation.narrative_summary_assessment import assess_summary\nfrom company_wiki.automation.narrative_summary_execution import parse_summary_job_result\nfrom unit.du11_source_priority.test_source_priority import source, policy\nfrom unit.test_narrative_summarize_handler import _context\nfrom unit.test_source_summary_capability import current_wire\n\n\ndef test_multibyte_default_and_explicit_bytes_keep_complete_sources():\n    texts = ['产品验证声明，含引号\"与换行\\n🙂。' * 100, '未来项目保留条件与否定，尚未投产。' * 110]\n    original = source(texts, [policy(1), policy(2)])\n    before = deepcopy(original.to_dict())\n    full = compile_extractive_plan(original)\n    assert [c['text'] for c in full.draft['claims']] == texts\n    cap = len(canonical_json({**full.draft, 'claims': full.draft['claims'][:1]}).encode('utf-8'))\n    limited = compile_extractive_plan(original, max_draft_bytes=cap)\n    assert len(canonical_json(limited.draft).encode('utf-8')) == cap\n    assert [c['text'] for c in limited.draft['claims']] == texts[:1]\n    assert [t['source_disposition'] for t in limited.execution['tasks']] == ['admitted', 'deferred']\n    assert original.to_dict() == before\n\n\ndef test_admitted_emission_is_not_full_source_or_semantic_completeness():\n    wire = current_wire(('support', 'support'))\n    wire['reading_context']['source_processing_complete'] = False\n    selected = NarrativeSelectResult.from_dict(wire)\n    before = deepcopy(selected.to_dict())\n    plan = compile_extractive_plan(selected)\n    report = assess_summary(selected, plan.draft['claims'], requested_task_keys=['t1', 't2'], plan_max_claims=20)\n    assert report['admitted_emission_complete'] is True\n    assert report['scope'] == 'selected_source_tasks_only'\n    assert report['semantic_status'] == report['subfact_coverage_status'] == 'not_evaluated'\n    assert 'source_coverage_complete' not in report\n    assert selected.reading_context['source_processing_complete'] is False\n    assert selected.selection.status == 'partial'\n    assert selected.to_dict() == before\n\n\ndef test_large_real_handler_receipt_is_bound_not_merely_untyped_wrapper():\n    selected = NarrativeSelectResult.from_dict(current_wire(('support',) * 175 + ('unresolved',)))\n    before = deepcopy(selected.to_dict())\n    class Model:\n        def generate(self, request):\n            rows = json.loads(request.data_json)['material']['tasks']\n            assert len(rows) == 175\n            return NarrativeModelResponse('offline', 'independent-fixture', request.prompt_version,\n                canonical_json({'decisions': [{'task': r[0], 'priority': 'normal', 'disposition': 'consider'} for r in rows]}).encode())\n    result = NarrativeSummarizeHandler(model=Model(), reading_model_projection=lambda _: 'reading-model-input/5')(_context(selected))\n    assert result.outcome is HandlerOutcome.SUCCEEDED, result.error\n    summary = parse_summary_job_result(result.result, selected=selected)\n    assert len(summary.draft.claims) == 175\n    wire = json.loads(canonical_json(result.result))\n    execution = wire['execution']\n    assert len(canonical_json(execution).encode('utf-8')) > 32 * 1024\n    assert len(execution['tasks']) == 176\n    assert execution['source_coverage_complete'] is execution['model_coverage_complete'] is False\n    assert execution['tasks'][-1]['source_disposition'] == 'unsupported'\n    for mutation in ('binding', 'bool'):\n        bad = deepcopy(wire)\n        if mutation == 'binding':\n            bad['execution']['tasks'][0]['task_binding_sha256'] = 'e' * 64\n        else:\n            bad['execution']['source_coverage_complete'] = 0\n        with pytest.raises(ValueError):\n            parse_summary_job_result(bad, selected=selected)\n    assert selected.to_dict() == before\n\n\ndef test_lower_actual_reader_rejects_equal_length_corruption(tmp_path):\n    from contract.test_source_version_reader import _fixture, BODY, SHA\n    from company_wiki.source_catalog.source_reader import SourceVersionReader, SourceReadError\n    catalog, paths, _, ids = _fixture(tmp_path)\n    try:\n        reader = SourceVersionReader(catalog)\n        ref = reader.query_ref(ids['document_id'], ids['source_id'], SHA)\n        assert reader.open_version(ref, purpose='narrative_derivation').data == BODY\n        corrupt = BODY[:-1] + bytes([BODY[-1] ^ 1])\n        assert len(corrupt) == len(BODY) and corrupt != BODY\n        paths[0].write_bytes(corrupt)\n        with pytest.raises(SourceReadError) as error:\n            reader.open_version(ref, purpose='narrative_derivation')\n        assert error.value.reason == 'no_verified_location'\n    finally:\n        close = getattr(catalog.store, 'close', None)\n        if close is not None:\n            close()\n"
+    },
+    "test_review.py": {
+      "sha256": "a89876a0411cbfee0c8357623bd6aa1e06c3b4983a7276305582afd3712eec2a",
+      "bytes": 5243,
+      "text": "\"\"\"Independent synthetic R7 CI-oracle migration counter-controls.\"\"\"\nfrom copy import deepcopy\nimport json\n\nimport pytest\n\nfrom company_wiki.automation.models import HandlerOutcome, canonical_json\nfrom company_wiki.automation.narrative_contracts import NarrativeSelectResult\nfrom company_wiki.automation.narrative_model import NarrativeModelResponse\nfrom company_wiki.automation.narrative_model_extractive import compile_extractive_plan\nfrom company_wiki.automation.narrative_summarize import NarrativeSummarizeHandler\nfrom company_wiki.automation.narrative_summary_assessment import assess_summary\nfrom company_wiki.automation.narrative_summary_execution import parse_summary_job_result\nfrom unit.du11_source_priority.test_source_priority import source, policy\nfrom unit.test_narrative_summarize_handler import _context\nfrom unit.test_source_summary_capability import current_wire\n\n\ndef test_multibyte_default_and_explicit_bytes_keep_complete_sources():\n    texts = ['产品验证声明，含引号\"与换行\\n🙂。' * 100, '未来项目保留条件与否定，尚未投产。' * 110]\n    original = source(texts, [policy(1), policy(2)])\n    before = deepcopy(original.to_dict())\n    full = compile_extractive_plan(original)\n    assert [c['text'] for c in full.draft['claims']] == texts\n    cap = len(canonical_json({**full.draft, 'claims': full.draft['claims'][:1]}).encode('utf-8'))\n    limited = compile_extractive_plan(original, max_draft_bytes=cap)\n    assert len(canonical_json(limited.draft).encode('utf-8')) == cap\n    assert [c['text'] for c in limited.draft['claims']] == texts[:1]\n    assert [t['source_disposition'] for t in limited.execution['tasks']] == ['admitted', 'deferred']\n    assert original.to_dict() == before\n\n\ndef test_admitted_emission_is_not_full_source_or_semantic_completeness():\n    wire = current_wire(('support', 'support'))\n    wire['reading_context']['source_processing_complete'] = False\n    selected = NarrativeSelectResult.from_dict(wire)\n    before = deepcopy(selected.to_dict())\n    plan = compile_extractive_plan(selected)\n    report = assess_summary(selected, plan.draft['claims'], requested_task_keys=['t1', 't2'], plan_max_claims=20)\n    assert report['admitted_emission_complete'] is True\n    assert report['scope'] == 'selected_source_tasks_only'\n    assert report['semantic_status'] == report['subfact_coverage_status'] == 'not_evaluated'\n    assert 'source_coverage_complete' not in report\n    assert selected.reading_context['source_processing_complete'] is False\n    assert selected.selection.status == 'partial'\n    assert selected.to_dict() == before\n\n\ndef test_large_real_handler_receipt_is_bound_not_merely_untyped_wrapper():\n    selected = NarrativeSelectResult.from_dict(current_wire(('support',) * 175 + ('unresolved',)))\n    before = deepcopy(selected.to_dict())\n    class Model:\n        def generate(self, request):\n            rows = json.loads(request.data_json)['material']['tasks']\n            assert len(rows) == 175\n            return NarrativeModelResponse('offline', 'independent-fixture', request.prompt_version,\n                canonical_json({'decisions': [{'task': r[0], 'priority': 'normal', 'disposition': 'consider'} for r in rows]}).encode())\n    result = NarrativeSummarizeHandler(model=Model(), reading_model_projection=lambda _: 'reading-model-input/5')(_context(selected))\n    assert result.outcome is HandlerOutcome.SUCCEEDED, result.error\n    summary = parse_summary_job_result(result.result, selected=selected)\n    assert len(summary.draft.claims) == 175\n    wire = result.to_dict()['result']\n    execution = wire['execution']\n    assert len(canonical_json(execution).encode('utf-8')) > 32 * 1024\n    assert len(execution['tasks']) == 176\n    assert execution['source_coverage_complete'] is execution['model_coverage_complete'] is False\n    assert execution['tasks'][-1]['source_disposition'] == 'unsupported'\n    for mutation in ('binding', 'bool'):\n        bad = deepcopy(wire)\n        if mutation == 'binding':\n            bad['execution']['tasks'][0]['task_binding_sha256'] = 'e' * 64\n        else:\n            bad['execution']['source_coverage_complete'] = 0\n        with pytest.raises(ValueError):\n            parse_summary_job_result(bad, selected=selected)\n    assert selected.to_dict() == before\n\n\ndef test_lower_actual_reader_rejects_equal_length_corruption(tmp_path):\n    from contract.test_source_version_reader import _fixture, BODY, SHA\n    from company_wiki.source_catalog.source_reader import SourceVersionReader, SourceReadError\n    catalog, paths, _, ids = _fixture(tmp_path)\n    try:\n        reader = SourceVersionReader(catalog)\n        ref = reader.query_ref(ids['document_id'], ids['source_id'], SHA)\n        assert reader.open_version(ref, purpose='narrative_derivation').data == BODY\n        corrupt = BODY[:-1] + bytes([BODY[-1] ^ 1])\n        assert len(corrupt) == len(BODY) and corrupt != BODY\n        paths[0].write_bytes(corrupt)\n        with pytest.raises(SourceReadError) as error:\n            reader.open_version(ref, purpose='narrative_derivation')\n        assert error.value.reason == 'no_verified_location'\n    finally:\n        close = getattr(catalog.store, 'close', None)\n        if close is not None:\n            close()\n"
+    },
+    "initial.xml": {
+      "sha256": "1c6606886283fca861a6c8a2ef406dfb14214f8a1d30a81be2b70765ab9b63ca",
+      "bytes": 2381,
+      "text": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"1\" skipped=\"0\" tests=\"10\" time=\"4.622\" timestamp=\"2026-11-02T10:51:30.734657+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tmp.r7i-b842d1.test_review\" name=\"test_multibyte_default_and_explicit_bytes_keep_complete_sources\" time=\"0.028\" /><testcase classname=\"tmp.r7i-b842d1.test_review\" name=\"test_admitted_emission_is_not_full_source_or_semantic_completeness\" time=\"0.082\" /><testcase classname=\"tmp.r7i-b842d1.test_review\" name=\"test_large_real_handler_receipt_is_bound_not_merely_untyped_wrapper\" time=\"1.423\"><failure message=\"TypeError: $ contains a non-JSON container\">tmp\\r7i-b842d1\\test_review.py:62: in test_large_real_handler_receipt_is_bound_not_merely_untyped_wrapper\r\n    wire = json.loads(canonical_json(result.result))\r\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\nsrc\\company_wiki\\automation\\models.py:96: in canonical_json\r\n    _validate_json_value(value)\r\nsrc\\company_wiki\\automation\\models.py:91: in _validate_json_value\r\n    raise TypeError(f\"{path} contains a non-JSON container\")\r\nE   TypeError: $ contains a non-JSON container</failure></testcase><testcase classname=\"tmp.r7i-b842d1.test_review\" name=\"test_lower_actual_reader_rejects_equal_length_corruption\" time=\"0.604\" /><testcase classname=\"tests.unit.du11_source_priority.test_source_priority\" name=\"test_default_preserves_all_cards_and_explicit_capacity_keeps_late_operating_fact[None]\" time=\"0.072\" /><testcase classname=\"tests.unit.du11_source_priority.test_source_priority\" name=\"test_default_preserves_all_cards_and_explicit_capacity_keeps_late_operating_fact[57344]\" time=\"0.073\" /><testcase classname=\"tests.unit.du11_summary_execution.test_contract\" name=\"test_large_report_keeps_every_row_without_a_representation_permission\" time=\"0.097\" /><testcase classname=\"tests.unit.test_extractive_rank_material\" name=\"test_rank_for_an_untransmitted_unresolved_task_is_not_an_actual_model_read\" time=\"0.517\" /><testcase classname=\"tests.unit.test_narrative_post_model_failure_diagnostics\" name=\"test_large_legal_post_model_result_keeps_complete_claims_identity_and_native_usage\" time=\"0.103\" /><testcase classname=\"tests.unit.du11_summary_execution.test_contract\" name=\"test_selected_binding_cannot_be_counterfeited[plan_sha256]\" time=\"0.016\" /></testsuite></testsuites>"
+    },
+    "initial.log": {
+      "sha256": "d3372d15dccd6621ca78ce005f9c4f216458de003e6e38fba7e2ad5cccb5a16b",
+      "bytes": 2349,
+      "text": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\r7i-b842d1\\\\b\", \"requested_basetemp_len\": 51, \"cwd_len\": 34, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\r\n============================= test session starts =============================\r\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\r\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\r\nconfigfile: pytest.ini\r\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\r\ncollected 10 items\r\n\r\ntmp\\r7i-b842d1\\test_review.py ..F.                                       [ 40%]\r\ntests\\unit\\du11_source_priority\\test_source_priority.py ..               [ 60%]\r\ntests\\unit\\du11_summary_execution\\test_contract.py .                     [ 70%]\r\ntests\\unit\\test_extractive_rank_material.py .                            [ 80%]\r\ntests\\unit\\test_narrative_post_model_failure_diagnostics.py .            [ 90%]\r\ntests\\unit\\du11_summary_execution\\test_contract.py .                     [100%]\r\n\r\n================================== FAILURES ===================================\r\n_____ test_large_real_handler_receipt_is_bound_not_merely_untyped_wrapper _____\r\ntmp\\r7i-b842d1\\test_review.py:62: in test_large_real_handler_receipt_is_bound_not_merely_untyped_wrapper\r\n    wire = json.loads(canonical_json(result.result))\r\n                      ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\r\nsrc\\company_wiki\\automation\\models.py:96: in canonical_json\r\n    _validate_json_value(value)\r\nsrc\\company_wiki\\automation\\models.py:91: in _validate_json_value\r\n    raise TypeError(f\"{path} contains a non-JSON container\")\r\nE   TypeError: $ contains a non-JSON container\r\n------------------------------ Captured log call ------------------------------\r\nWARNING  company_wiki.automation.narrative_summarize:narrative_summarize.py:81 SUMMARY_LANGUAGE_UNAVAILABLE\r\n- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r7i-b842d1\\result.xml -\r\n=========================== short test summary info ===========================\r\nFAILED tmp/r7i-b842d1/test_review.py::test_large_real_handler_receipt_is_bound_not_merely_untyped_wrapper\r\n========================= 1 failed, 9 passed in 4.73s =========================\r\n"
+    },
+    "recovery.xml": {
+      "sha256": "9bca8dc6b1273dc0f9b0a1a3f72a99452e6c04c2be5e056d9f512622fa886aae",
+      "bytes": 390,
+      "text": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"0\" skipped=\"0\" tests=\"1\" time=\"2.882\" timestamp=\"2026-11-02T10:51:51.983353+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tmp.r7i-b842d1.test_review\" name=\"test_large_real_handler_receipt_is_bound_not_merely_untyped_wrapper\" time=\"0.903\" /></testsuite></testsuites>"
+    },
+    "recovery.log": {
+      "sha256": "d119056779e5f5c2da9f9b52efe0c5ef9bc419772f7c1f4c365aed78b9f6d5db",
+      "bytes": 921,
+      "text": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\r7i-b842d1\\\\b2\", \"requested_basetemp_len\": 52, \"cwd_len\": 34, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\r\n============================= test session starts =============================\r\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\r\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\r\nconfigfile: pytest.ini\r\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\r\ncollected 1 item\r\n\r\ntmp\\r7i-b842d1\\test_review.py .                                          [100%]\r\n\r\n- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r7i-b842d1\\recovery.xml -\r\n============================== 1 passed in 2.98s ==============================\r\n"
+    }
+  },
+  "cleanup": {
+    "owned_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r7i-b842d1",
+    "initial_state": "absent",
+    "final_state": "absent",
+    "no_originals_models_network_fees_keys": true,
+    "file_count": 15,
+    "verification": "exact workspace-owned path contained; no reparse points; probe sources/raw logs/XML fully preserved inline before removal; second all30 SHA check passed",
+    "bytes": 402756,
+    "reparse_points": 0
+  },
+  "scope_limits": [
+    "Not a new full Unit/fullCI/113/167 run",
+    "No real company originals/model/cache-recovery/RF-economic acceptance",
+    "No self-review of W08 tooling CI report test",
+    "Static existing13 genuine failure controls were not all re-executed in this delta review"
+  ]
+}

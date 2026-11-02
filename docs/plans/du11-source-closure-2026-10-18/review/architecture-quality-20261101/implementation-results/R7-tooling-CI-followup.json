@@ -1,0 +1,68 @@
+{
+  "schema_version": "r7-tooling-ci-followup/1",
+  "status": "FIXED_TARGETED_PASS_PENDING_ROOT_PUBLICATION",
+  "baseline_head": "bd911a2bd1125fe46d7c5a0f605fe3b0104f17be",
+  "owner": "/root/rectification_review_a",
+  "issue": "CI old oracle tests/unit/test_w08_narrative_g2_replay.py::test_report_may_not_exceed_eight_mib raises AttributeError after intentional R7 removal of MAX_REPORT_BYTES.",
+  "root_cause": "The old test asserted an internal constant and wrote only a small record. It neither exercised an oversized report nor established lossless evidence; the stale implementation assertion vetoed the policy migration before the public writer behavior was tested.",
+  "change": "Migrate the same conceptual test to test_report_larger_than_eight_mib_is_written_completely: write an actual >8MiB UTF8 diagnostic trace and assert full decoded report equality, all existing mandatory records plus False/None unchanged. Add nonfinite/non-JSON encoding failure preservation and a real directory-conflict write failure; preserve the existing unique-attempt test.",
+  "source_code_changed": false,
+  "source_hash_unchanged": true,
+  "hashes_before": {
+    "tests/unit/test_w08_narrative_g2_replay.py": "20cff93c74c5df807bbac8c4976dca78e04f7f716bd52debe0701a9be1a99700",
+    "tools/narrative_g2_replay/report.py": "048c386c2965cf8a43dc76a3f5c2aaa9844e4b7bfc6cfaa6e72be910ebbd4911"
+  },
+  "hashes_after": {
+    "tests/unit/test_w08_narrative_g2_replay.py": "446c23dc5e7126e1f9485291c523385b31cb7f0ae18b477f44a01ff9a8003834",
+    "tools/narrative_g2_replay/report.py": "048c386c2965cf8a43dc76a3f5c2aaa9844e4b7bfc6cfaa6e72be910ebbd4911"
+  },
+  "tests": {
+    "red": {
+      "counts": {
+        "tests": 1,
+        "failures": 1,
+        "errors": 0,
+        "skipped": 0
+      },
+      "junit_seconds": 0.273,
+      "junit_sha256": "fc652833d840d88115031dc73c895bc43c6a3f2f5b396585f54adb186571b40b",
+      "junit_xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"1\" skipped=\"0\" tests=\"1\" time=\"0.273\" timestamp=\"2026-11-02T10:38:53.448354+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tests.unit.test_w08_narrative_g2_replay\" name=\"test_report_may_not_exceed_eight_mib\" time=\"0.014\"><failure message=\"AttributeError: module 'tools.narrative_g2_replay.report' has no attribute 'MAX_REPORT_BYTES'\">tests\\unit\\test_w08_narrative_g2_replay.py:370: in test_report_may_not_exceed_eight_mib\n    assert report_mod.MAX_REPORT_BYTES == 8 * 1024 * 1024\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   AttributeError: module 'tools.narrative_g2_replay.report' has no attribute 'MAX_REPORT_BYTES'</failure></testcase></testsuite></testsuites>",
+      "console": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\r7t-7aa56b\\\\red\", \"requested_basetemp_len\": 53, \"cwd_len\": 34, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\nconfigfile: pytest.ini\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollected 1 item\n\ntests\\unit\\test_w08_narrative_g2_replay.py F                             [100%]\n\n================================== FAILURES ===================================\n____________________ test_report_may_not_exceed_eight_mib _____________________\ntests\\unit\\test_w08_narrative_g2_replay.py:370: in test_report_may_not_exceed_eight_mib\n    assert report_mod.MAX_REPORT_BYTES == 8 * 1024 * 1024\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   AttributeError: module 'tools.narrative_g2_replay.report' has no attribute 'MAX_REPORT_BYTES'\n- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r7t-7aa56b\\red.xml -\n=========================== short test summary info ===========================\nFAILED tests/unit/test_w08_narrative_g2_replay.py::test_report_may_not_exceed_eight_mib\n============================== 1 failed in 0.34s ==============================\n"
+    },
+    "green": {
+      "counts": {
+        "tests": 5,
+        "failures": 0,
+        "errors": 0,
+        "skipped": 0
+      },
+      "junit_seconds": 0.573,
+      "junit_sha256": "3fbb320d4fdcc3ada6093aede4da18c0f274f8e5c09a6903a8c9d44431faa4ed",
+      "junit_xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"0\" skipped=\"0\" tests=\"5\" time=\"0.573\" timestamp=\"2026-11-02T10:39:33.215649+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tests.unit.test_w08_narrative_g2_replay\" name=\"test_report_larger_than_eight_mib_is_written_completely\" time=\"0.129\" /><testcase classname=\"tests.unit.test_w08_narrative_g2_replay\" name=\"test_report_encoding_failure_preserves_the_previous_report[nonfinite]\" time=\"0.022\" /><testcase classname=\"tests.unit.test_w08_narrative_g2_replay\" name=\"test_report_encoding_failure_preserves_the_previous_report[non_json]\" time=\"0.022\" /><testcase classname=\"tests.unit.test_w08_narrative_g2_replay\" name=\"test_report_real_write_failure_is_not_reported_as_saved\" time=\"0.015\" /><testcase classname=\"tests.unit.test_w08_narrative_g2_replay\" name=\"test_attempt_directories_are_never_overwritten\" time=\"0.005\" /></testsuite></testsuites>",
+      "console": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\r7t-7aa56b\\\\green\", \"requested_basetemp_len\": 55, \"cwd_len\": 34, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\nconfigfile: pytest.ini\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollected 5 items\n\ntests\\unit\\test_w08_narrative_g2_replay.py .....                         [100%]\n\n- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r7t-7aa56b\\green.xml -\n============================== 5 passed in 0.64s ==============================\n"
+    }
+  },
+  "static_check": "Ruff on the one changed unit-test file passed.",
+  "scope": {
+    "changed_test_only": "tests/unit/test_w08_narrative_g2_replay.py",
+    "test_deleted_or_skipped": false,
+    "constant_restored": false,
+    "report_fields_removed": false,
+    "originals_models_paid_calls": 0,
+    "rf_invest_edits": false,
+    "all_211_or_unit_tests_repeated": false,
+    "git_ci_main_pwf_not_changed": true
+  },
+  "remaining": "ROOT owns the seven core failures, Git/PWF and remote CI recheck; this receipt signs only this tooling oracle followup.",
+  "cleanup": {
+    "owned_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r7t-7aa56b",
+    "initially_absent": true,
+    "status": "RESTORED_INITIAL_ABSENT",
+    "receipts_preserved": true,
+    "restored_absent": true,
+    "files": 9,
+    "logical_bytes": 8455202,
+    "containment_checked": true,
+    "non_reparse_checked": true
+  }
+}

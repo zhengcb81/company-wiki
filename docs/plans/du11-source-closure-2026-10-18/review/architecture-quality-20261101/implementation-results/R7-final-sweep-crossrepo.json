@@ -1,0 +1,351 @@
+{
+  "schema_version": "r7-final-crossrepo-gate-sweep/1",
+  "status": "READ_ONLY_COMPLETE_NEW_REMAINDERS_REQUIRE_IMPLEMENTATION",
+  "generated_at_utc": "2026-11-02T11:29:11.426702+00:00",
+  "states_at_report": {
+    "revenue-forecast": {
+      "head": "499d5ca38433983e8679c03d13a75dd2d3aab8c6",
+      "branch": "main",
+      "status": " M assurance/runs/daily_alert.jsonl\n M assurance/runs/monthly_manifest.json\n M assurance/runs/weekly_alert.jsonl\n M assurance/runs/weekly_manifest.json\n M scripts/filing_upstream_cause.py\n M scripts/research/drivers.py\n M scripts/research/input_targets.py\n M scripts/revenue_backtest.py\n?? .planning/m8-native-adoption-20261031/\n?? .planning/source-quote-adoption-20261030/\n?? delivery/dashboard-b34-wuxi-20261101/\n?? delivery/dashboard-b37-wuxi-20261102/\n?? output/\n?? tests/test_residual_representation_limits.py\n"
+    },
+    "filing-fetch": {
+      "head": "5ec54e02b8db69d0f38adfd0d7cee58f04f3a2b8",
+      "branch": "main",
+      "status": " M scripts/fetch_filing.py\n M scripts/ff_configuration.py\n M scripts/ff_local_preparation_observation.py\n?? .planning/du11-empty-placeholder-original.py\n?? config/FMP_API_KEY.txt\n?? pytest-of-ff-root-failures-fixed/\n?? pytest-of-ff-root-failures/\n?? pytest-of-ff-s3-p5-full/\n?? tests/test_residual_representation_limits.py\n"
+    },
+    "invest-skills": {
+      "head": "a789cd07bc0126cdb8d401fa2dadfcf4caa8b121",
+      "branch": "main",
+      "status": ""
+    }
+  },
+  "scope_counts": {
+    "revenue_forecast": {
+      "runtime_py": 80,
+      "public_docs": 27
+    },
+    "filing_fetch": {
+      "runtime_py": 18,
+      "public_docs": 3
+    },
+    "invest_skills": {
+      "runtime_py": 10,
+      "public_docs": 24
+    },
+    "extra_explicitly_requested": "tracked invest E2E harness/fixture metadata only"
+  },
+  "evidence_files_sha256": {
+    "revenue-forecast": {
+      "scripts/research/input_targets.py": "d580465c042d4c00ea102d00bf92eca6a357371dcb11c433d5808eeb80be0247",
+      "scripts/revenue_backtest.py": "56e443eabc225de55ac2b80f23fcab94a18c44220848ad04887e17395f8f7d73",
+      "scripts/research/drivers.py": "2a05dc3489fe46a2455cc28b23fbc5f4787bbf4c8e43d170d98d9222f96a126e",
+      "scripts/contracts/source_clock.py": "417e10d7e8d8aefa1090435e64d4314b00f174344e3e1afa482b5521a80a193a",
+      "scripts/filing_upstream_cause.py": "3cede5008d138f8343ab79e36e2d4e478c987a9db58e2cf2e94df9779fd847fb",
+      "scripts/contracts/document.py": "1804bba0294a38d6bc55034cdfaac42b6e1e3f87807a6242e9038ce65d7e7f54",
+      "scripts/revenue_report.py": "3f5c1324e2be453ffcb8c58945304fc4e5ca831a71266d5c6b80620874915b23",
+      "scripts/revenue_core.py": "28614d4e670c204d24cd8f65f872a56a29694692dc6a2f180af2f2f779fb8109",
+      "scripts/publication_registry.py": "30a3541cd3c3d79778c5b473b1b3b755d41ccf5208dafe8cd7996e651352b6a1",
+      "scripts/revenue_publication.py": "bc2bb4a33e36ed9ad82bc4ffe33e57de8999002c2c7910b9c8b9d1565678fcd0",
+      "scripts/forecast/calc.py": "c5a86d843b0679a5292fa1e3ea27ebd2e628d9d19067047a228117e0e7b954a3",
+      "scripts/company_wiki_narrative_reader.py": "3893be41d94713a966cb81f7a2a9edb15dafb7759780b5c64763d1d285863c34",
+      "scripts/company_wiki_narrative_contracts.py": "194649f53fb0d288420f3d2d574fbd8b4ca74986a505f338f02336ebcacf3a53",
+      "references/schema-migration-3.6-to-3.7.md": "a292acf48db79f96071a81f286fb56d0abad35752c222499d649a0baabd1ad1d",
+      "SKILL.md": "42937b6db815d53482b2bd2dca26e5f3d2efde10e3c8855699b2522c8bc2e588"
+    },
+    "filing-fetch": {
+      "scripts/ff_configuration.py": "869b3fbf5c9d519b05fde4835f85edfd6ed85cb8c3b1a490e31c80856763c715",
+      "scripts/ff_local_preparation_observation.py": "2338c544bb86542bc3c36148e205ba53454406109e206e4a29311ff0f35198dd",
+      "scripts/fetch_filing.py": "93f00ad38777c41b6cec24f9d98b640a1d907c1fa2cc51d0ab1379ea502688e8",
+      "scripts/ff_local_source_prepare.py": "34193905be4503303a636e2c025075da8b4a29cb8cffcb759aaec5c87163daee",
+      "scripts/ff_v2_envelope.py": "a4a5e3e5946d23e7c0fa3e22158d29a9b0b5ae41d539cf60ba06ff393469e67f",
+      "scripts/filing_contracts.py": "033248d7f6bb72801428fc886aa5a32b2357de88e1179c892b237ac2eee65659",
+      "scripts/ff_process_transport.py": "a95321ded274556981dc18f494513e344cd3679d7ae75e9bb5eab754c440c43a",
+      "scripts/transcript_tool_transport.py": "4bb18006bb608c3dc706a6ca3f70e77fe03513798ff815b464aad208a8f33026",
+      "scripts/ff_financial_statements.py": "3334cac4b6bf3f49d3979f5e1834d8c4ff35f522938dd0f91ef13c1c6508fed4",
+      "SKILL.md": "590d27e461e5852c8513f016a1ab8c8ca10d561b20c3ff93976f31c17ef851e4"
+    },
+    "invest-skills": {
+      "invest-core/scripts/invest_contracts.py": "50d4126b441dc4fe0734b92382d9155f6cd876ead5d71acbcdee28ac3b57802a",
+      "invest-framework/scripts/company_orchestrator.py": "576e1dab4a92c5262660fdbec49b21d7de3e9e99276dfac4e344dc6fc14b0fa1",
+      "invest-framework/scripts/bundle_validator.py": "8cd9400845d09d2f847dbd70e2511e96b50d04b444258c8788280eaaf4d6a08e",
+      "invest-financials/scripts/financial_model.py": "2a0bfecd5809917f0b7c5f684d1a229aa5afd98c0ff294499d9d511b24289fa2",
+      "e2e/run_biren_invest_e2e.py": "79c0c00b96dce69c5be92d80a82f4a4dee87187205e5c0e42599bde4d9eca1a2",
+      "e2e/fixtures/biren_forecast.json": "0c7b5dfeda6131c117ec9e541aa6a100c6da08a2d7bb7bfd9deb3d5d47218b88",
+      "invest-core/SKILL.md": "edd3f4c535d822c71f5057a101612ae7b21971a80de9fadb49377935fd65e31b",
+      "invest-core/references/compliance-contract.md": "adc3564574c3bed6eff5464e70e9c51293977ba38107038774fd2c83ed8a0fa3"
+    }
+  },
+  "findings": [
+    {
+      "id": "SW-INV-QUOTE",
+      "priority": "P2",
+      "classification": "active hard representation gate",
+      "implementation_owner": "ROOT delegated invest owner",
+      "actual_entry_chain": "leaf CLI/create_artifact/finalize_draft -> validate_artifact -> _validate_claims",
+      "source_locations": [
+        "invest-skills/invest-core/scripts/invest_contracts.py:1644",
+        "invest-skills/invest-core/scripts/invest_contracts.py:2522"
+      ],
+      "effect": "Every leaf artifact claim still requires10–500 excerpt characters, independently of checked exact locator/SHA/source binding. Valid short unit/value text or full qualified long sentence is refused solely by count.",
+      "minimal_convergence": "Require nonempty original quote, preserve text SHA/capture/source/date/target/unit rules. No clipping or higher quota. Test through actual leaf/finalize API, not only a private helper.",
+      "necessary_focused_controls": [
+        "short legitimate quote",
+        "complete >500 quote preserving actor/qualification",
+        "empty remains invalid",
+        "real excerpt SHA/monetary unit/source mutation still invalid"
+      ],
+      "implemented_by_this_sweep": false
+    },
+    {
+      "id": "SW-RF-QUOTES",
+      "priority": "P2",
+      "classification": "active helper and backtest hard representation gates",
+      "implementation_owner": "ROOT RF",
+      "actual_entry_chain": "documented build_management_target Python helper -> its excerpt check; backtest main -> evaluate_snapshot -> validate_actuals -> _validate_actual_claims",
+      "source_locations": [
+        "revenue-forecast/scripts/research/input_targets.py:105",
+        "revenue-forecast/references/management-targets.md:98",
+        "revenue-forecast/scripts/revenue_backtest.py:328",
+        "revenue-forecast/scripts/revenue_backtest.py:205",
+        "revenue-forecast/scripts/revenue_backtest.py:569"
+      ],
+      "effect": "Target construction and actual-revenue backtest retain10–500 excerpt rules after the shared evidence route was fixed. This is not a claim that every normal forecast calls the optional target builder.",
+      "minimal_convergence": "Same nonempty/complete quote contract at these consumers; keep units/currency/measurement/control periods/value/identity/hash validation.",
+      "necessary_focused_controls": [
+        "target short/long complete original",
+        "actual/backtest short/long original",
+        "wrong currency/scale/year/actual value/source SHA still refused"
+      ],
+      "implemented_by_this_sweep": false
+    },
+    {
+      "id": "SW-RF-DRIVERS",
+      "priority": "P2",
+      "classification": "active input ceiling, not top-N presentation",
+      "implementation_owner": "ROOT RF",
+      "actual_entry_chain": "run_forecast -> contracts.document.validate_document -> validate_growth_driver_tree -> _validate_growth_driver_record -> _validate_growth_driver_evidence; output validator repeats the same owner",
+      "source_locations": [
+        "revenue-forecast/scripts/contracts/document.py:1155",
+        "revenue-forecast/scripts/research/drivers.py:170",
+        "revenue-forecast/scripts/research/drivers.py:478",
+        "revenue-forecast/scripts/revenue_report.py:1410"
+      ],
+      "effect": "Modeled input hard-requires1–10 drivers and each driver <=10 evidence nodes before calculation. These are unconditional input checks, not a rendering slice or a configured model-work allowance.",
+      "minimal_convergence": "Remove upper item ceilings; retain nonempty lists, unique IDs, causal parameter DAG, complete rank/attribution/reconciliation and actual external/work resources. Presentation may independently show top-N with full source data retained.",
+      "necessary_focused_controls": [
+        "11 distinct supported drivers",
+        "11 evidence nodes incl counterevidence",
+        "unknown/duplicate IDs still reject",
+        "no changed forecast/scenario/math merely because length changes"
+      ],
+      "implemented_by_this_sweep": false
+    },
+    {
+      "id": "SW-FF-CONFIG",
+      "priority": "P2",
+      "classification": "active local configuration representation gate",
+      "implementation_owner": "ROOT FF",
+      "actual_entry_chain": "resolve_filing -> load_company_wiki_root -> load_connection_root -> read_json_object; statements and selected ET launch config also use this owner",
+      "source_locations": [
+        "filing-fetch/scripts/fetch_filing.py:1210",
+        "filing-fetch/scripts/ff_configuration.py:18",
+        "filing-fetch/scripts/ff_configuration.py:29",
+        "filing-fetch/scripts/ff_configuration.py:34",
+        "filing-fetch/scripts/ff_configuration.py:105",
+        "filing-fetch/scripts/ff_financial_statements.py:164",
+        "filing-fetch/scripts/transcript_tool_transport.py:240"
+      ],
+      "effect": "A trusted local valid JSON configuration with padding >64KiB is rejected before schema/path interpretation. This is not the provider response/download byte budget.",
+      "minimal_convergence": "Remove the arbitrary64KiB denial in the single config reader; keep decoding/object/schema/path/root/real I/O checks. Do not read credential contents to audit config.",
+      "necessary_focused_controls": [
+        "same valid config with >64KiB whitespace",
+        "unreadable/malformed/unknown core field still rejects",
+        "root/path remains explicit",
+        "no network needed"
+      ],
+      "implemented_by_this_sweep": false
+    },
+    {
+      "id": "SW-LOCAL-DIAGNOSTICS",
+      "priority": "P2/P3",
+      "classification": "one hard blocked-operation wrapper plus optional diagnostic loss",
+      "implementation_owner": "ROOT FF and RF",
+      "actual_entry_chain": "FF _validated_operation -> _local_preparation_observation_from_operation -> ff_local_preparation_observation; ordinary local_prepare failure/error envelope -> optional observation -> RF validated_filing_fetch_failure; ET supervisor usage -> _provider_usage",
+      "source_locations": [
+        "filing-fetch/scripts/fetch_filing.py:778",
+        "filing-fetch/scripts/fetch_filing.py:784",
+        "filing-fetch/scripts/ff_local_preparation_observation.py:16",
+        "filing-fetch/scripts/ff_local_preparation_observation.py:29",
+        "filing-fetch/scripts/ff_local_preparation_observation.py:40",
+        "filing-fetch/scripts/ff_local_preparation_observation.py:69",
+        "revenue-forecast/scripts/filing_upstream_cause.py:364",
+        "revenue-forecast/scripts/filing_upstream_cause.py:400",
+        "revenue-forecast/scripts/filing_upstream_cause.py:485",
+        "filing-fetch/scripts/transcript_tool_transport.py:111"
+      ],
+      "effect": "Local-IO metadata still has128KiB/8depth/32keys/1024items caps at both consumers. FF already-blocked operation with local_read_budget is reclassified invalid_result when its optional projection fails. In other error paths and RF, it is mostly diagnostic loss (None), not denial of an already-ready source; do not overstate it. ET8192-byte usage receipt can turn otherwise finite valid accounting JSON into unknown only by representation length.",
+      "minimal_convergence": "Single finite pathless JSON observation policy without arbitrary representation caps; damaged/missing annotation becomes unavailable/incomplete and preserves authoritative primary status. Never turn unknown paid cost into zero or authorize a second paid call. Keep actual local-read request and provider bytes/time/cost limits at their owners.",
+      "necessary_focused_controls": [
+        "large/deep valid owner observation retained",
+        "blocked status/reason remains original when annotation malformed",
+        "ready source not made blocked by observer",
+        "invalid nonfinite counters unavailable",
+        "valid padded supervisor usage retained; truly missing/unknown cost stays unknown"
+      ],
+      "implemented_by_this_sweep": false
+    },
+    {
+      "id": "SW-RF-AVAILABILITY-TEXT",
+      "priority": "P2 review",
+      "classification": "active provenance locator representation limit",
+      "implementation_owner": "ROOT RF (check producer alignment)",
+      "actual_entry_chain": "source_information_eligibility/qualify_source_information or original receipt validator -> validate_availability_evidence",
+      "source_locations": [
+        "revenue-forecast/scripts/contracts/source_clock.py:80",
+        "revenue-forecast/scripts/contracts/source_clock.py:103",
+        "revenue-forecast/scripts/contracts/company_wiki_original.py:187",
+        "revenue-forecast/scripts/company_wiki_narrative_contracts.py:268"
+      ],
+      "effect": "evidence_ref/locator are denied over2048 chars even after exact sourceSHA/date/basis qualification. The format is pathless provenance text, not a network download resource. No real corpus counterexample was executed in this read-only pass.",
+      "minimal_convergence": "Consider remove only arbitrary character ceiling with producer wire alignment; preserve nonempty/control-character/pathless/sourceSHA/date/basis and future-information semantics.",
+      "necessary_focused_controls": [
+        "long legitimate pathless locator/proof reference",
+        "wrong proof/source hash/date still rejects",
+        "known publication cannot be backdated by proof"
+      ],
+      "implemented_by_this_sweep": false
+    },
+    {
+      "id": "SW-E2E-FIXTURE-PERMIT",
+      "priority": "P1 engineering CI blocker",
+      "classification": "invalid frozen test pair/false signed label and active registry side-effect gate",
+      "implementation_owner": "delegated invest E2E owner after ROOT design read",
+      "actual_entry_chain": "e2e main -> collect_step_1_forecast_valid -> canonical validate_published_forecast -> forced register_publication before orchestrator CLI",
+      "source_locations": [
+        "invest-skills/e2e/run_biren_invest_e2e.py:69",
+        "invest-skills/e2e/run_biren_invest_e2e.py:94",
+        "invest-skills/e2e/run_biren_invest_e2e.py:226",
+        "invest-skills/e2e/fixtures/biren_forecast.json"
+      ],
+      "effect": "Frozen output claims schema3.7/engine4.0.0 (not documented pair), host_signed without publication_attestation. Root real isolated E2E exits2 atSTEP1. Harness additionally forces registry pre-registration/exception gate, though normal validated consumers no longer need it. Merely retagging/rehashing or --update-golden would conceal fixture provenance or math drift.",
+      "minimal_convergence": "Explicit offline fixture-generation command from frozen embedded input through canonical current run_forecast, then freeze actual generated output; do not dynamically regenerate on every test. Do not claim signed if no verified provider. Remove required pre-registration. CLI must accept isolated runs/registry roots and leave preexisting e2e/.runs untouched. Compare old economic values/module coverage before any intentional technical golden metadata migration.",
+      "necessary_focused_controls": [
+        "actual valid frozen output via canonical validator",
+        "real CLI double run deterministic",
+        "no external provider/network",
+        "missing/corrupt/index unavailable cannot veto correctsource",
+        "forged output/currency/unit/hash still reject",
+        "economic numbers or module drift is reported before any golden update"
+      ],
+      "implemented_by_this_sweep": false
+    },
+    {
+      "id": "SW-INV-REPEAT",
+      "priority": "P3 efficiency",
+      "classification": "proven immediate duplicate validation, not missing facts",
+      "implementation_owner": "ROOT later composition cleanup",
+      "actual_entry_chain": "company_orchestrator.run_company: validate_revenue_forecast then revenue_reference (which validates again); bundle run/validator repeat same sequence",
+      "source_locations": [
+        "invest-skills/invest-framework/scripts/company_orchestrator.py:161",
+        "invest-skills/invest-framework/scripts/company_orchestrator.py:162",
+        "invest-skills/invest-core/scripts/invest_contracts.py:473",
+        "invest-skills/invest-framework/scripts/bundle_validator.py:265",
+        "invest-skills/invest-framework/scripts/bundle_validator.py:267",
+        "invest-skills/invest-framework/scripts/bundle_validator.py:289",
+        "invest-skills/invest-framework/scripts/bundle_validator.py:290"
+      ],
+      "effect": "The same local dict receives the same RF strong recomputation twice consecutively before intervening mutation/callback. Across separate public leaf boundaries, revalidation may still be required; do not equate all repeated validation with a bug.",
+      "minimal_convergence": "At immediate composition pairs, let existing revenue_reference remain the sole verifier/normalizer and drop the preceding duplicate call. For broader reuse require actual immutable verified artifact value, not a skip flag/nonce/receipt license.",
+      "necessary_focused_controls": [
+        "spy strong validator once per immediate pair",
+        "raw input mutation still revalidates and rejects",
+        "leaf public deserialization still validates",
+        "same numerical output/reference SHA"
+      ],
+      "implemented_by_this_sweep": false
+    }
+  ],
+  "retained_with_reason": [
+    {
+      "item": "Actual provider/download/HTTP/child-resource budgets",
+      "why": "Measured bytes during read, whole-process timeout, cumulative fee/token and storage/read work are real configured resources, not metadata character proxies. Source original protection and cleanup remain."
+    },
+    {
+      "item": "Actual source/ref/SHA/period/as-of/currency/unit/formula/numeric recomputation",
+      "why": "Defines which bytes and economic facts an artifact refers to. Scalar SHA formats/uniqueID/required source/control windows are not manual permits."
+    },
+    {
+      "item": "Genuine signed claims",
+      "why": "Unattested may be used; claiminghost_signed still requires a real verifying signature. No current automatic signer/registry permission found in normal RF/invest runtime after R7."
+    },
+    {
+      "item": "Formula500-char bound (RF and invest)",
+      "why": "Unlike quote bodies, this bounds restricted recursive arithmetic parsing/evaluation work; exponent and finite/division checks are real computational guards. Leave for separate explicit AST-work-budget design if longer formulas needed, rather than deleting without replacement."
+    },
+    {
+      "item": "Domain minimum cardinality",
+      "why": "Comparison needs2artifacts; sensitivity needs2different values; sums/caps mustbindthe required operands. These are semantic dimensions, not arbitrary report maximums."
+    },
+    {
+      "item": "FF credential scalar read4096",
+      "why": "Credential scalar validation is not document/analysis metadata. Audited implementation only, no credentialfile or environment secret values read."
+    }
+  ],
+  "not_current_gates": [
+    {
+      "item": "R7 existing fixes",
+      "why": "No repeat finding for removed narrative byte/size/depth caps, optional prompt review, defaultregistry/hostsigned permission, immutable raw/context reuse or already-reduced local Git checks."
+    },
+    {
+      "item": "RF processed_artifact_canary.py",
+      "why": "Opt-in standalone read-only diagnostic CLI; no normalrun_forecast caller found. Namecanary alone is not permission."
+    },
+    {
+      "item": "FFlegacy authorization/expires_at",
+      "why": "Actual code retains optional target/provider/accession/resource scope; expiry not a grant. Current skill says task intent persists. Not a new manual approval."
+    },
+    {
+      "item": "DatedRF schema-migration3.6-to3.7 document",
+      "why": "It still describes historical defaultunattested refusal andregistry labels. Dated migration history is not proof of a currentruntime gate; add a historical/current pointer for weakeragents if useful. CurrentSKILL explicitly says unattested valid/indexdiagnostic."
+    }
+  ],
+  "method": {
+    "codegraph": "Called first but serverreturnedCWP symbols and historicalRFmirror despite requestedcrossrepo. Not used as currentcrossrepo evidence; noindexbuilt.",
+    "fallback": "Strict top-level scripts and top-level invest-*/scripts plus their publicSKILL/references; literal scan and currentAST caller links. No imported runtime/model execution.",
+    "scope_error_disclosed": "First filename filter used /scripts/ and accidentally read tracked.planning source mirrors. Result discarded and not cited as current evidence; corrected exacttop-level allowlist immediately. No original/credentialfile opened or historicalscript executed. This is a disclosed readscope mistake, not hidden as a clean pass."
+  },
+  "tests_run": [],
+  "not_performed": [
+    "No source/test/config/Git/index/deploy writes",
+    "No fullsuite/new E2E/model/paid/network/download call inthissweep",
+    "No raw original or credentialfile read; FFstatus onlyrevealeduntrackedcredentialfilename",
+    "No historicalruntime output/original corpus used as finding evidence"
+  ],
+  "ownership_next": {
+    "ROOT_RF_FF": [
+      "SW-RF-QUOTES",
+      "SW-RF-DRIVERS",
+      "SW-FF-CONFIG",
+      "SW-LOCAL-DIAGNOSTICS",
+      "SW-RF-AVAILABILITY-TEXT"
+    ],
+    "delegated_invest_after_ROOT_reads_design": [
+      "SW-INV-QUOTE",
+      "SW-E2E-FIXTURE-PERMIT"
+    ],
+    "later_composition_efficiency": "SW-INV-REPEAT"
+  },
+  "invest_next_design": {
+    "scope": [
+      "e2e explicit generator/harness/frozen fixture/technical expectation migration+focused tests",
+      "invest-core _validate_claims only remove quote length permission; strong SHA/units untouched"
+    ],
+    "generation": "Use existing frozen embedded input asimmutable input, current canonical RFrun_forecast in an explicitlyoffline processwithisolatedtemporaryregistry and nohostsigner/dotenv/network; saveoutputonce. Recordcurrentactualpair/sha/unsigned status; do not stampnewversiononto oldresult.",
+    "economic_comparison": "Read oldgolden semantic expectations (revenue,profit,valuation,SOTP,modulecounts). Compare old/current forecastfinancialpaths beforeupdatingtechnical input/result/bundle/report/receipt hashes. Any materialnumber/modulechange musthave rootexplanation, not swallowedbyupdate-golden.",
+    "entry": "Remove mandatory register_publication step after strong validation. Add explicit isolated runs-dir (and ifneededexpected-dir) options so testneverenumerates/deletes existinge2e/.runs. Real subprocessorchestratorCLI, not mockedleaf outputs.",
+    "tests": "First RED for validstrongartifactwithunavailableindex, badsigned/invalidpairimmutablefixture, excerptshort/long vswrongsha/unit. Then focusedtests plus onefullofflineharness invocationcontainingreal double-run. Negatives use realCLI. Noauto-fetch/LLM.",
+    "cleanup": "Owned initiallyabsent temp tree containsregistry/runs/newnegativeinputs; preservebaselinefixture/golden/.runs. Verifycontainment/noreparse, retainreceipts, deleteonlyownedtree toinitialstate.",
+    "review": "Freeze allnewsource/assets/testSHA and get independentdelta review. NoRFcompatibility/strongvalidator or fourassuranceWIP changes. ROOT normalGit/CI/PWF owner."
+  },
+  "cleanup": "No persisted scratch directory createdbythis read-onlysweep; onlytheassignedreport files written."
+}

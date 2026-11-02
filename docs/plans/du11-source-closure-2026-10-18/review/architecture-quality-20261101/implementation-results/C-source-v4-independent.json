@@ -1,0 +1,2762 @@
+{
+  "schema_version": "source-independent-review/1",
+  "status": "NEEDS_ROOT_FIX_SOURCE_CONTEXT",
+  "timestamp_utc": "2026-11-02T11:01:19.367601+00:00",
+  "source_run_status": "VALID_OBSERVED_PARTIAL_SOURCE_RUN",
+  "source_commit": "fee04ba4d8b8c66b3e651eacbf6168c5811fc521",
+  "case_id": "r4-cn-h1-real",
+  "receipt_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\architecture-quality-20261101\\real-acceptance\\h1-r7-v4.json",
+  "receipt_bytes": 388583,
+  "receipt_sha256": "e0847972f0dca968a85772e7932daa62bd4085bbaa69edbff8b89d67eaaa5feb",
+  "run_cleanup_receipt_sha256": "839915a834a912b4e3ec1f1e426ec06a6d4d78f71fff171d44c9ddc2354cf9a5",
+  "runtime_at_source_run": {
+    "files": 430,
+    "source_and_linguistic_assets_sha256": "6d7357b00c0319b6bd9156a197d2aa0149ded1d5cffbd3eb53c508e2280338d7"
+  },
+  "runtime_after_source_run": {
+    "files": 430,
+    "source_and_linguistic_assets_sha256": "6d7357b00c0319b6bd9156a197d2aa0149ded1d5cffbd3eb53c508e2280338d7"
+  },
+  "runtime_independently_recomputed_same_hash": true,
+  "observer_sha256": {
+    "source_case_checks.py": "b326f4f37d96e3917346c4dfae41afb119b2c6bd7779967dd98d967161b427f0",
+    "source_case_receipt.py": "041ee9e20c5c9c5926fe2a8e21f125d9b185244f7390472251bbcd3cd0bb6133",
+    "source_case_runner.py": "5f8e5f09d38bbb3d4565a1b9e60ca8bdee99b7ce1ec0bb16210968b8879c41c4"
+  },
+  "runtime_and_observer_unchanged_during_source_run": true,
+  "original_source_ref": {
+    "byte_size": 1216470,
+    "content_sha256": "d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+    "document_id": "urn:company-wiki:document:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+    "mime_type": "application/pdf",
+    "schema_version": "2.0",
+    "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f"
+  },
+  "original_source_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\companies\\药明康德\\raw\\financial_reports\\semi_annual\\d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f.pdf",
+  "original_stat_sha_before_review": {
+    "pdf": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\companies\\药明康德\\raw\\financial_reports\\semi_annual\\d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f.pdf",
+    "pdf_sha256": "d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+    "pdf_size": 1216470,
+    "pdf_mtime_ns": 1792698031359958500,
+    "receipt_sha256": "e0847972f0dca968a85772e7932daa62bd4085bbaa69edbff8b89d67eaaa5feb",
+    "observer": {
+      "source_case_checks.py": "b326f4f37d96e3917346c4dfae41afb119b2c6bd7779967dd98d967161b427f0",
+      "source_case_receipt.py": "041ee9e20c5c9c5926fe2a8e21f125d9b185244f7390472251bbcd3cd0bb6133",
+      "source_case_runner.py": "5f8e5f09d38bbb3d4565a1b9e60ca8bdee99b7ce1ec0bb16210968b8879c41c4"
+    }
+  },
+  "original_stat_sha_after_review": {
+    "sha256": "d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+    "size": 1216470,
+    "mtime_ns": 1792698031359958500
+  },
+  "run_source_integrity": {
+    "database_comparison": {
+      "all_file_stats_unchanged": false,
+      "all_supplied_files_content_unchanged": true,
+      "files": [
+        {
+          "all_metadata_unchanged": true,
+          "content_unchanged": true,
+          "observed_both": true,
+          "passed": true,
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\p3w12-20261101\\wiki\\.source_catalog\\catalog.sqlite3",
+          "role": "strict_file",
+          "shm_mtime_only": false
+        },
+        {
+          "all_metadata_unchanged": false,
+          "content_unchanged": true,
+          "observed_both": true,
+          "passed": true,
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\p3w12-20261101\\wiki\\.source_catalog\\catalog.sqlite3-shm",
+          "role": "sqlite_shm",
+          "shm_mtime_only": true
+        },
+        {
+          "all_metadata_unchanged": true,
+          "content_unchanged": true,
+          "observed_both": true,
+          "passed": true,
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\p3w12-20261101\\wiki\\.source_catalog\\catalog.sqlite3-wal",
+          "role": "strict_file",
+          "shm_mtime_only": false
+        }
+      ],
+      "scope": "Only supplied observations; this does not manufacture original-file mtime proof.",
+      "strict_files_and_shm_bytes_pass": true
+    },
+    "original_files_comparison": {
+      "all_file_stats_unchanged": true,
+      "all_supplied_files_content_unchanged": true,
+      "files": [
+        {
+          "all_metadata_unchanged": true,
+          "content_unchanged": true,
+          "observed_both": true,
+          "passed": true,
+          "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\companies\\药明康德\\raw\\financial_reports\\semi_annual\\d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f.pdf",
+          "role": "strict_file",
+          "shm_mtime_only": false
+        }
+      ],
+      "scope": "Only supplied observations; this does not manufacture original-file mtime proof.",
+      "strict_files_and_shm_bytes_pass": true
+    },
+    "database_unchanged": true,
+    "original_files_unchanged": true,
+    "shm_mtime_only_change_not_data_loss": true
+  },
+  "source_execution": {
+    "product_seconds": 39.90210189999925,
+    "total_seconds": 45.14,
+    "work": {
+      "complete": false,
+      "exhausted": true,
+      "limit": 16000000,
+      "used": 15989716
+    },
+    "selection": {
+      "candidate_count": 2881,
+      "coverage_complete": false,
+      "dropped_financial_count": 361,
+      "lines_total": 0,
+      "omitted_candidate_count": 2769,
+      "pages_read": 199,
+      "pages_total": 199,
+      "selected_count": 112,
+      "source_units": 4228,
+      "status": "partial",
+      "tables_scanned": 0,
+      "tables_total": 131
+    },
+    "selection_diagnostics": [
+      {
+        "code": "budget_full",
+        "count": 132,
+        "dimension": "selection_spans",
+        "external_model_cost": false,
+        "limit": 112,
+        "phase": "selection",
+        "targets_limited": true,
+        "used": 112
+      },
+      {
+        "code": "work_budget_exhausted",
+        "count": 1,
+        "detail": "unexamined source content remains unknown; original is unchanged",
+        "dimension": "document_work",
+        "external_model_cost": false,
+        "limit": 16000000,
+        "phase": "document",
+        "requested": null,
+        "used": 15989716
+      }
+    ],
+    "source_processing_complete": false,
+    "layout_complete": false,
+    "deferred_count": 168,
+    "deferred_limited": true,
+    "parsed_units": 4473,
+    "source_select_calls": 1,
+    "model_posts": 0,
+    "downloads": 0,
+    "raw_copies": 0
+  },
+  "required_original_recall": {
+    "count": 12,
+    "represented": 12,
+    "parsed_exact_original": 12,
+    "meaning": "representation in112 selected spans, including valid native members; not12 downstream summaries or verified world facts",
+    "units": [
+      {
+        "current_original_unit_id": "urn:company-wiki:narrative-unit:sha256:c544bc121bc2e4de36c86c0f459943c49fa3faf3a3ff112ede94c47cd590ca40",
+        "direct_span_ids": [
+          "urn:company-wiki:evidence-span:sha256:20530f7c9b3da851a8e7c0a5e9c90de44542d340cf993d1aa2a461c90a3697e7"
+        ],
+        "locator": "loc:v1/page:12/paragraph:8",
+        "meaning": "-\n药物代谢与动力学业务持续精进科研与服务能力，实现7×24 小时自动化、智能\n化运营的生物分析流程闭环，进一步巩固在该领域的行业领先地位。",
+        "native_carrier_ids": [],
+        "oracle_group": "R4-unrepresented-specific-business",
+        "parsed_exact_original": true,
+        "represented": true,
+        "text_sha256": "f97812897828e365537ec693845ba9c184b87e96e682a4b7344ff751ae211577",
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:c544bc121bc2e4de36c86c0f459943c49fa3faf3a3ff112ede94c47cd590ca40"
+      },
+      {
+        "current_original_unit_id": "urn:company-wiki:narrative-unit:sha256:3eb2cb46e23a6845f0c75c349b8fc96e03a33c476b4b4088cc5d7af7cee6d0f0",
+        "direct_span_ids": [],
+        "locator": "loc:v1/page:12/paragraph:14",
+        "meaning": "-\n体外综合筛选平台技术加速突破，同步迭代自动化能力、提升运营效率，持续赢\n得新客户；",
+        "native_carrier_ids": [
+          "urn:company-wiki:evidence-span:sha256:da5ec7ff9084c20eb399c7ee46bda0d9db83edf4026d535678ce7c875eb8a435"
+        ],
+        "oracle_group": "R4-unrepresented-specific-business",
+        "parsed_exact_original": true,
+        "represented": true,
+        "text_sha256": "cd40e11273f5ad4590b6b9a1d849962d873adea54339d912c9654059c404c5aa",
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:3eb2cb46e23a6845f0c75c349b8fc96e03a33c476b4b4088cc5d7af7cee6d0f0"
+      },
+      {
+        "current_original_unit_id": "urn:company-wiki:narrative-unit:sha256:7b796f7cbba8c4ca2b8025471ef940675b1d5708eeb5ef94f7dd4613e498566e",
+        "direct_span_ids": [],
+        "locator": "loc:v1/page:12/paragraph:15",
+        "meaning": "体内药理学能力持续提升，驱动收入快速增长。",
+        "native_carrier_ids": [
+          "urn:company-wiki:evidence-span:sha256:da5ec7ff9084c20eb399c7ee46bda0d9db83edf4026d535678ce7c875eb8a435"
+        ],
+        "oracle_group": "R4-unrepresented-specific-business",
+        "parsed_exact_original": true,
+        "represented": true,
+        "text_sha256": "3854f3551b2166d10b3ddbe82f89ae52e7dfeacfaa0fe49e3d55c22629307381",
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:7b796f7cbba8c4ca2b8025471ef940675b1d5708eeb5ef94f7dd4613e498566e"
+      },
+      {
+        "current_original_unit_id": "urn:company-wiki:narrative-unit:sha256:a625526a89dd0944360420f585020e0f5f4b6c508fa2e81cca55aef017636ffc",
+        "direct_span_ids": [],
+        "locator": "loc:v1/page:14/paragraph:3",
+        "native_carrier_ids": [
+          "urn:company-wiki:evidence-span:sha256:1f5e297ea40f0e2485b5a3a52a5d8810da0f2d90efdd626bef972b024455b813"
+        ],
+        "oracle_group": "previously-preserved-native-members",
+        "parsed_exact_original": true,
+        "represented": true,
+        "text_sha256": "ba0f0f32d736ac88c7707c97cd40d2913f002d3e07f5558269c2000a882e537a",
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:a625526a89dd0944360420f585020e0f5f4b6c508fa2e81cca55aef017636ffc"
+      },
+      {
+        "current_original_unit_id": "urn:company-wiki:narrative-unit:sha256:c8cddd9c2be2290f8e01719b5bf1bc8fc97943c20a5d3188ef5164af72ea6618",
+        "direct_span_ids": [],
+        "locator": "loc:v1/page:14/paragraph:4",
+        "native_carrier_ids": [
+          "urn:company-wiki:evidence-span:sha256:1f5e297ea40f0e2485b5a3a52a5d8810da0f2d90efdd626bef972b024455b813"
+        ],
+        "oracle_group": "previously-preserved-native-members",
+        "parsed_exact_original": true,
+        "represented": true,
+        "text_sha256": "2dc2d22a2333517a3fc41cef86bec4d502cb7fae691b53acd80b4cc698365535",
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:c8cddd9c2be2290f8e01719b5bf1bc8fc97943c20a5d3188ef5164af72ea6618"
+      },
+      {
+        "current_original_unit_id": "urn:company-wiki:narrative-unit:sha256:7f43320387a2018ae7984d35b8856ea2c00260713399d9d71257984acd7a178a",
+        "direct_span_ids": [],
+        "locator": "loc:v1/page:14/paragraph:5",
+        "native_carrier_ids": [
+          "urn:company-wiki:evidence-span:sha256:1f5e297ea40f0e2485b5a3a52a5d8810da0f2d90efdd626bef972b024455b813"
+        ],
+        "oracle_group": "previously-preserved-native-members",
+        "parsed_exact_original": true,
+        "represented": true,
+        "text_sha256": "63e6d8b063cee7f0b76610806dc9fd412d672886135404daf1a48fa510c30959",
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:7f43320387a2018ae7984d35b8856ea2c00260713399d9d71257984acd7a178a"
+      },
+      {
+        "current_original_unit_id": "urn:company-wiki:narrative-unit:sha256:8135fc4b5212278082327e3bf425191d9c62c0b3a06d6db717304b154a00e4ce",
+        "direct_span_ids": [],
+        "locator": "loc:v1/page:14/paragraph:6",
+        "native_carrier_ids": [
+          "urn:company-wiki:evidence-span:sha256:1f5e297ea40f0e2485b5a3a52a5d8810da0f2d90efdd626bef972b024455b813"
+        ],
+        "oracle_group": "previously-preserved-native-members",
+        "parsed_exact_original": true,
+        "represented": true,
+        "text_sha256": "c58511a9fcc6014985883232f79fd332a7a8f17fb5d3fcf726b66543bc77148a",
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:8135fc4b5212278082327e3bf425191d9c62c0b3a06d6db717304b154a00e4ce"
+      },
+      {
+        "current_original_unit_id": "urn:company-wiki:narrative-unit:sha256:5a41c58bef771ef333c37589ccc919a1222764fc66dd54f5fb871c042009e7cf",
+        "direct_span_ids": [],
+        "locator": "loc:v1/page:14/paragraph:7",
+        "native_carrier_ids": [
+          "urn:company-wiki:evidence-span:sha256:1f5e297ea40f0e2485b5a3a52a5d8810da0f2d90efdd626bef972b024455b813"
+        ],
+        "oracle_group": "previously-preserved-native-members",
+        "parsed_exact_original": true,
+        "represented": true,
+        "text_sha256": "d0888c83c3efb80c95aefc22f0caebd00fee9aaf9ae5200f44785ecf086c2b6e",
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:5a41c58bef771ef333c37589ccc919a1222764fc66dd54f5fb871c042009e7cf"
+      },
+      {
+        "current_original_unit_id": "urn:company-wiki:narrative-unit:sha256:faf4a85b4830c0741819c7c2a9498b5aa9c3ab7022f07ad37f487489c1171374",
+        "direct_span_ids": [],
+        "locator": "loc:v1/page:14/paragraph:8",
+        "native_carrier_ids": [
+          "urn:company-wiki:evidence-span:sha256:1f5e297ea40f0e2485b5a3a52a5d8810da0f2d90efdd626bef972b024455b813"
+        ],
+        "oracle_group": "previously-preserved-native-members",
+        "parsed_exact_original": true,
+        "represented": true,
+        "text_sha256": "ae3b2e3bf45ba48e68a692cfe7d67c33b6c36b883abf4ec8141efa9d42c580b7",
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:faf4a85b4830c0741819c7c2a9498b5aa9c3ab7022f07ad37f487489c1171374"
+      },
+      {
+        "current_original_unit_id": "urn:company-wiki:narrative-unit:sha256:4414c4d82490bd9ccfb40228e75cfedc2f714ca1b0fdaf55188da3607332b1e5",
+        "direct_span_ids": [],
+        "locator": "loc:v1/page:14/paragraph:9",
+        "native_carrier_ids": [
+          "urn:company-wiki:evidence-span:sha256:1f5e297ea40f0e2485b5a3a52a5d8810da0f2d90efdd626bef972b024455b813"
+        ],
+        "oracle_group": "previously-preserved-native-members",
+        "parsed_exact_original": true,
+        "represented": true,
+        "text_sha256": "b0d5e4885f2ee85b8058b3bbaf6d77dfa4d52690fba816ba1f7eb5234d003199",
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:4414c4d82490bd9ccfb40228e75cfedc2f714ca1b0fdaf55188da3607332b1e5"
+      },
+      {
+        "current_original_unit_id": "urn:company-wiki:narrative-unit:sha256:15459eaaaf0b0afb34205b9b4b7436f0d5d609f8bb0c17305de70cad8952330a",
+        "direct_span_ids": [],
+        "locator": "loc:v1/page:14/paragraph:10",
+        "native_carrier_ids": [
+          "urn:company-wiki:evidence-span:sha256:1f5e297ea40f0e2485b5a3a52a5d8810da0f2d90efdd626bef972b024455b813"
+        ],
+        "oracle_group": "previously-preserved-native-members",
+        "parsed_exact_original": true,
+        "represented": true,
+        "text_sha256": "23e8ed2620594c38f93a6bf9cd3df2459adc02fdab0ec869f0d5a2d4ce69073d",
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:15459eaaaf0b0afb34205b9b4b7436f0d5d609f8bb0c17305de70cad8952330a"
+      },
+      {
+        "current_original_unit_id": "urn:company-wiki:narrative-unit:sha256:8c02d7750d9f2be1975e79bb186d7b3b7f3acb2a805800dd98958ee79ad1fb07",
+        "direct_span_ids": [
+          "urn:company-wiki:evidence-span:sha256:ce9c62942207915be9418bb15286efac6eb41ad4b407106754d330c17a595ece"
+        ],
+        "meaning": "ii.\n得益于业务模式不断引流高质量分子，管线向后期稳步推进，匹配前瞻性产\n能布局及团队高效执行，2026 年上半年小分子D&M 业务收入人民币149.9\n亿元，同比增长72.7%。",
+        "native_carrier_ids": [],
+        "oracle_group": "previously-preserved-business-measurement",
+        "parsed_exact_original": true,
+        "represented": true,
+        "text_sha256": "f0dc67fee8dc643f1b0318bf1efaaf3a8232c27a29ceb605f38523b803f994b6",
+        "unit_id": "urn:company-wiki:narrative-unit:sha256:8c02d7750d9f2be1975e79bb186d7b3b7f3acb2a805800dd98958ee79ad1fb07"
+      }
+    ]
+  },
+  "proof_validation": {
+    "all37_excerpt_text_sha_verified": true,
+    "all112_selected_span_text_sha_verified": true,
+    "native_members": 101,
+    "native_unique_originals": 101,
+    "native_valid_slices": 101,
+    "context_original_targets_unique": 17,
+    "context_targets_represented_including_native": 7
+  },
+  "source_excerpt_coverage": {
+    "requested_original_ids": 37,
+    "retained_original_ids": 37,
+    "scope": "Fixed source checkpoints and their current selected contexts, not the full document.",
+    "unavailable_original_ids": [],
+    "untraceable_current_context_span_ids": []
+  },
+  "pair_reviews": [
+    {
+      "oracle_id": "R4-CONTEXT-PAIR-1",
+      "declared_expected_actor_and_scope_not_evidence": "实际控制人：备注8规范关联交易",
+      "independently_read_actor_and_qualifiers": "实际控制人关于规范并减少关联交易；本人及关联企业，保留不损害公司/其他股东利益的前提。",
+      "positive_evidence_judgment": "Raw note8 heading+intro correctly attached to its first undertaking. Original note7 liability is not its actor evidence.",
+      "status": "OPEN_NOT_SELECTED",
+      "original_support_units": [
+        {
+          "locator": "loc:v1/page:34/paragraph:20",
+          "raw_text": "备注8：实际控制人关于规范并减少关联交易的承诺",
+          "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+          "source_role": "company_filing",
+          "text_sha256": "20de742f542b1ac346c91eaad17b2a158d9a66c107d1eba01c297b74c41892df",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:919dc9d462d22a0d2d85052804aa328bbe61ffc491760ba5688caafa0a4f37b9"
+        },
+        {
+          "locator": "loc:v1/page:34/paragraph:21",
+          "raw_text": "为规范本人、本人及本人关系密切的近亲属控制的或施加重大影响的企业（以下简称“本人\n及关联企业”）与公司的关联交易，作出以下承诺：",
+          "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+          "source_role": "company_filing",
+          "text_sha256": "06bdf784496371355f664e6d7cf2243aa18ae4be1a0549d55d3a7f0fd773b788",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:4f6a20ab95ab0ee08e73137f40707d1afbbd67265aca926b2463696ee37dab33"
+        },
+        {
+          "locator": "loc:v1/page:34/paragraph:22",
+          "raw_text": "“1、在不对公司及其他股东的利益构成不利影响的前提下，本人及关联企业将采取措施规范\n并尽量减少与公司发生关联交易。",
+          "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+          "source_role": "company_filing",
+          "text_sha256": "7cc9ae6812ff8f886839247895de56eca9a9fe1b66ad168a9bfd07349bed154e",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:1c3a1095c7612c0acf02b586ecd85b3de68388dd470a41357aa50f2e42ee006f"
+        }
+      ],
+      "forbidden_old_context_units": [
+        {
+          "locator": "loc:v1/page:34/paragraph:19",
+          "raw_text": "3、本人同意承担因违反上述承诺而产生的法律责任，并赔偿公司及其下属企业的一切损失、\n损害和开支。”",
+          "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+          "source_role": "company_filing",
+          "text_sha256": "e3092b31c6b73aa2d4fa9bf97fc745f52961c22e88a36a22b31aa33b3f2ef26d",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:6ffd18ae45975ed750ba9ab70a5856dbe673def787834ebf6792fba7cd8a6750"
+        }
+      ],
+      "previous_bad_context_observed": false,
+      "selected_originals_including_native_members": 0,
+      "original_target_count": 3,
+      "selected_support_carriers": {
+        "urn:company-wiki:narrative-unit:sha256:919dc9d462d22a0d2d85052804aa328bbe61ffc491760ba5688caafa0a4f37b9": [],
+        "urn:company-wiki:narrative-unit:sha256:4f6a20ab95ab0ee08e73137f40707d1afbbd67265aca926b2463696ee37dab33": [],
+        "urn:company-wiki:narrative-unit:sha256:1c3a1095c7612c0acf02b586ecd85b3de68388dd470a41357aa50f2e42ee006f": []
+      },
+      "actual_selected_views": [],
+      "source_structure_roles": {
+        "oracle_id": "R4-CONTEXT-PAIR-1",
+        "status": "STRUCTURE_OBSERVED_NO_ACTOR_INFERENCE",
+        "support_units": [
+          {
+            "ancestor_heading_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc",
+              "urn:company-wiki:narrative-unit:sha256:4f6a20ab95ab0ee08e73137f40707d1afbbd67265aca926b2463696ee37dab33",
+              "urn:company-wiki:narrative-unit:sha256:919dc9d462d22a0d2d85052804aa328bbe61ffc491760ba5688caafa0a4f37b9",
+              "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+            ],
+            "declared_context_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc",
+              "urn:company-wiki:narrative-unit:sha256:4f6a20ab95ab0ee08e73137f40707d1afbbd67265aca926b2463696ee37dab33",
+              "urn:company-wiki:narrative-unit:sha256:919dc9d462d22a0d2d85052804aa328bbe61ffc491760ba5688caafa0a4f37b9",
+              "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+            ],
+            "forbidden_context_ids_observed": [],
+            "original_present": true,
+            "physical_source_proof_unit_ids": [],
+            "section_occurrences": 1,
+            "section_paths": [
+              {
+                "ancestry_path_complete": true,
+                "sections": [
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_numbering",
+                      "single_row_display_heading",
+                      "source_note_scope",
+                      "spans_pages"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:919dc9d462d22a0d2d85052804aa328bbe61ffc491760ba5688caafa0a4f37b9",
+                      "urn:company-wiki:narrative-unit:sha256:4f6a20ab95ab0ee08e73137f40707d1afbbd67265aca926b2463696ee37dab33"
+                    ],
+                    "parent_id": "s115",
+                    "section_id": "s118"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_level"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc"
+                    ],
+                    "parent_id": "s102",
+                    "section_id": "s115"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_level"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+                    ],
+                    "parent_id": "s1",
+                    "section_id": "s102"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "no_preceding_heading"
+                    ],
+                    "heading_unit_ids": [],
+                    "parent_id": null,
+                    "section_id": "s1"
+                  }
+                ]
+              }
+            ],
+            "semantic_context_unit_ids": [],
+            "source_diagnostics": [
+              {
+                "code": "NEEDS_UPSTREAM_GRANULARITY",
+                "unit_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:919dc9d462d22a0d2d85052804aa328bbe61ffc491760ba5688caafa0a4f37b9"
+                ]
+              }
+            ],
+            "unavailable_context_unit_ids": [],
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:919dc9d462d22a0d2d85052804aa328bbe61ffc491760ba5688caafa0a4f37b9"
+          },
+          {
+            "ancestor_heading_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc",
+              "urn:company-wiki:narrative-unit:sha256:4f6a20ab95ab0ee08e73137f40707d1afbbd67265aca926b2463696ee37dab33",
+              "urn:company-wiki:narrative-unit:sha256:919dc9d462d22a0d2d85052804aa328bbe61ffc491760ba5688caafa0a4f37b9",
+              "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+            ],
+            "declared_context_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc",
+              "urn:company-wiki:narrative-unit:sha256:4f6a20ab95ab0ee08e73137f40707d1afbbd67265aca926b2463696ee37dab33",
+              "urn:company-wiki:narrative-unit:sha256:919dc9d462d22a0d2d85052804aa328bbe61ffc491760ba5688caafa0a4f37b9",
+              "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+            ],
+            "forbidden_context_ids_observed": [],
+            "original_present": true,
+            "physical_source_proof_unit_ids": [],
+            "section_occurrences": 1,
+            "section_paths": [
+              {
+                "ancestry_path_complete": true,
+                "sections": [
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_numbering",
+                      "single_row_display_heading",
+                      "source_note_scope",
+                      "spans_pages"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:919dc9d462d22a0d2d85052804aa328bbe61ffc491760ba5688caafa0a4f37b9",
+                      "urn:company-wiki:narrative-unit:sha256:4f6a20ab95ab0ee08e73137f40707d1afbbd67265aca926b2463696ee37dab33"
+                    ],
+                    "parent_id": "s115",
+                    "section_id": "s118"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_level"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc"
+                    ],
+                    "parent_id": "s102",
+                    "section_id": "s115"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_level"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+                    ],
+                    "parent_id": "s1",
+                    "section_id": "s102"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "no_preceding_heading"
+                    ],
+                    "heading_unit_ids": [],
+                    "parent_id": null,
+                    "section_id": "s1"
+                  }
+                ]
+              }
+            ],
+            "semantic_context_unit_ids": [],
+            "source_diagnostics": [
+              {
+                "code": "NEEDS_UPSTREAM_GRANULARITY",
+                "unit_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:4f6a20ab95ab0ee08e73137f40707d1afbbd67265aca926b2463696ee37dab33"
+                ]
+              }
+            ],
+            "unavailable_context_unit_ids": [],
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:4f6a20ab95ab0ee08e73137f40707d1afbbd67265aca926b2463696ee37dab33"
+          },
+          {
+            "ancestor_heading_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc",
+              "urn:company-wiki:narrative-unit:sha256:4f6a20ab95ab0ee08e73137f40707d1afbbd67265aca926b2463696ee37dab33",
+              "urn:company-wiki:narrative-unit:sha256:919dc9d462d22a0d2d85052804aa328bbe61ffc491760ba5688caafa0a4f37b9",
+              "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+            ],
+            "declared_context_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc",
+              "urn:company-wiki:narrative-unit:sha256:4f6a20ab95ab0ee08e73137f40707d1afbbd67265aca926b2463696ee37dab33",
+              "urn:company-wiki:narrative-unit:sha256:919dc9d462d22a0d2d85052804aa328bbe61ffc491760ba5688caafa0a4f37b9",
+              "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+            ],
+            "forbidden_context_ids_observed": [],
+            "original_present": true,
+            "physical_source_proof_unit_ids": [],
+            "section_occurrences": 1,
+            "section_paths": [
+              {
+                "ancestry_path_complete": true,
+                "sections": [
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_numbering",
+                      "single_row_display_heading",
+                      "source_note_scope",
+                      "spans_pages"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:919dc9d462d22a0d2d85052804aa328bbe61ffc491760ba5688caafa0a4f37b9",
+                      "urn:company-wiki:narrative-unit:sha256:4f6a20ab95ab0ee08e73137f40707d1afbbd67265aca926b2463696ee37dab33"
+                    ],
+                    "parent_id": "s115",
+                    "section_id": "s118"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_level"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc"
+                    ],
+                    "parent_id": "s102",
+                    "section_id": "s115"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_level"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+                    ],
+                    "parent_id": "s1",
+                    "section_id": "s102"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "no_preceding_heading"
+                    ],
+                    "heading_unit_ids": [],
+                    "parent_id": null,
+                    "section_id": "s1"
+                  }
+                ]
+              }
+            ],
+            "semantic_context_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:4f6a20ab95ab0ee08e73137f40707d1afbbd67265aca926b2463696ee37dab33",
+              "urn:company-wiki:narrative-unit:sha256:919dc9d462d22a0d2d85052804aa328bbe61ffc491760ba5688caafa0a4f37b9"
+            ],
+            "source_diagnostics": [
+              {
+                "code": "NEEDS_UPSTREAM_GRANULARITY",
+                "unit_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:1c3a1095c7612c0acf02b586ecd85b3de68388dd470a41357aa50f2e42ee006f"
+                ]
+              }
+            ],
+            "unavailable_context_unit_ids": [],
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:1c3a1095c7612c0acf02b586ecd85b3de68388dd470a41357aa50f2e42ee006f"
+          }
+        ]
+      },
+      "old_heading_contamination": false,
+      "coverage_caveat": "Raw structure observation is not selected/emitted/model/RF coverage; source scope/actor labels are not world-fact verification."
+    },
+    {
+      "oracle_id": "R4-CONTEXT-PAIR-2",
+      "declared_expected_actor_and_scope_not_evidence": "Summer Bloom：备注9规范关联交易",
+      "independently_read_actor_and_qualifiers": "Summer Bloom Investments (I) Pte.Ltd. 的关联交易承诺；本企业；保留不利影响前提。",
+      "positive_evidence_judgment": "Correct note9 actor is explicit in current selected context. Old prior-party liability absent; wrong old (4) heading is still present.",
+      "status": "NEEDS_ROOT_FIX_SELECTED_CONTEXT",
+      "original_support_units": [
+        {
+          "locator": "loc:v1/page:35/paragraph:5",
+          "raw_text": "备注9：其他作为公司首次公开发行A 股股票时持有公司5%以上股份的股东Summer Bloom\nInvestments （I）Pte. Ltd.关于规范并减少关联交易的承诺",
+          "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+          "source_role": "company_filing",
+          "text_sha256": "428b3e18a819c3101dcc17edc7f016b81070feba2ef31b41fc0ba00fd7f90d0c",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:fc150a13e6786af4734cf7690aab6a47b959a2528df517c59e97e5929ea1d76e"
+        },
+        {
+          "locator": "loc:v1/page:35/paragraph:6",
+          "raw_text": "“1、在不对公司及其他股东的利益构成不利影响的前提下，本企业将采取措施规范并尽量减\n少与公司发生关联交易。",
+          "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+          "source_role": "company_filing",
+          "text_sha256": "166e484100ba37756f6e5f938c0429c89c67f564476f741432a41764552ae3b8",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:4fc4ce665976ad02b0c4ad268c32373e8d110da4e126e200120cae1fbc1ea531"
+        }
+      ],
+      "forbidden_old_context_units": [
+        {
+          "locator": "loc:v1/page:35/paragraph:4",
+          "raw_text": "7、本人愿意承担由于违反上述承诺给公司造成的直接、间接的经济损失及产生的法律责任。”",
+          "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+          "source_role": "company_filing",
+          "text_sha256": "dd3c2b500fed53437704e37a8aec7e382eddeb366ffc0c6cef2def402bf22e10",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:e5f3c65f09a46521c2bf87d3f45f23b25c7a7b706809f9b0b31f669a5ec6377e"
+        }
+      ],
+      "previous_bad_context_observed": false,
+      "selected_originals_including_native_members": 2,
+      "original_target_count": 2,
+      "selected_support_carriers": {
+        "urn:company-wiki:narrative-unit:sha256:fc150a13e6786af4734cf7690aab6a47b959a2528df517c59e97e5929ea1d76e": [
+          "urn:company-wiki:evidence-span:sha256:25460bb02fc3f58cb2b19d0a1b0ea25b0cf1337cfcde0f0dc600a1b3c98664fb"
+        ],
+        "urn:company-wiki:narrative-unit:sha256:4fc4ce665976ad02b0c4ad268c32373e8d110da4e126e200120cae1fbc1ea531": [
+          "urn:company-wiki:evidence-span:sha256:d5337ca1d96571f3e2729d5ee8c21fa62f09a1956044b0670a092ce2647bf0ee"
+        ]
+      },
+      "actual_selected_views": [
+        {
+          "context_evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:e4feed5eedab9c1ce0e55f1e0b72b49d29d216e4f0c26755ce7f5149adf596aa",
+            "urn:company-wiki:evidence-span:sha256:5c9eca078287e9d60d43988fecc63f132e24c0b6f2b52363519485640bf035bf",
+            "urn:company-wiki:evidence-span:sha256:25460bb02fc3f58cb2b19d0a1b0ea25b0cf1337cfcde0f0dc600a1b3c98664fb"
+          ],
+          "group_anchor_unit_ids": null,
+          "group_anchors_exposed": false,
+          "group_id": "urn:company-wiki:reading-group:sha256:875274399c0e0c5e570cad9db3f653c06fec2eda465bbe932a4369e59c0755c9",
+          "reading_support_reason": "source_readable_narrative",
+          "reading_support_use": "support",
+          "support_evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:d5337ca1d96571f3e2729d5ee8c21fa62f09a1956044b0670a092ce2647bf0ee"
+          ],
+          "view_id": "group-25/view-0"
+        }
+      ],
+      "source_structure_roles": {
+        "oracle_id": "R4-CONTEXT-PAIR-2",
+        "status": "STRUCTURE_OBSERVED_NO_ACTOR_INFERENCE",
+        "support_units": [
+          {
+            "ancestor_heading_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc",
+              "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056",
+              "urn:company-wiki:narrative-unit:sha256:fc150a13e6786af4734cf7690aab6a47b959a2528df517c59e97e5929ea1d76e"
+            ],
+            "declared_context_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc",
+              "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056",
+              "urn:company-wiki:narrative-unit:sha256:fc150a13e6786af4734cf7690aab6a47b959a2528df517c59e97e5929ea1d76e"
+            ],
+            "forbidden_context_ids_observed": [],
+            "original_present": true,
+            "physical_source_proof_unit_ids": [],
+            "section_occurrences": 1,
+            "section_paths": [
+              {
+                "ancestry_path_complete": true,
+                "sections": [
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_numbering",
+                      "source_note_scope"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:fc150a13e6786af4734cf7690aab6a47b959a2528df517c59e97e5929ea1d76e"
+                    ],
+                    "parent_id": "s115",
+                    "section_id": "s119"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_level"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc"
+                    ],
+                    "parent_id": "s102",
+                    "section_id": "s115"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_level"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+                    ],
+                    "parent_id": "s1",
+                    "section_id": "s102"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "no_preceding_heading"
+                    ],
+                    "heading_unit_ids": [],
+                    "parent_id": null,
+                    "section_id": "s1"
+                  }
+                ]
+              }
+            ],
+            "semantic_context_unit_ids": [],
+            "source_diagnostics": [
+              {
+                "code": "NEEDS_UPSTREAM_GRANULARITY",
+                "unit_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:fc150a13e6786af4734cf7690aab6a47b959a2528df517c59e97e5929ea1d76e"
+                ]
+              }
+            ],
+            "unavailable_context_unit_ids": [],
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:fc150a13e6786af4734cf7690aab6a47b959a2528df517c59e97e5929ea1d76e"
+          },
+          {
+            "ancestor_heading_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc",
+              "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056",
+              "urn:company-wiki:narrative-unit:sha256:fc150a13e6786af4734cf7690aab6a47b959a2528df517c59e97e5929ea1d76e"
+            ],
+            "declared_context_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc",
+              "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056",
+              "urn:company-wiki:narrative-unit:sha256:fc150a13e6786af4734cf7690aab6a47b959a2528df517c59e97e5929ea1d76e"
+            ],
+            "forbidden_context_ids_observed": [],
+            "original_present": true,
+            "physical_source_proof_unit_ids": [],
+            "section_occurrences": 1,
+            "section_paths": [
+              {
+                "ancestry_path_complete": true,
+                "sections": [
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_numbering",
+                      "source_note_scope"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:fc150a13e6786af4734cf7690aab6a47b959a2528df517c59e97e5929ea1d76e"
+                    ],
+                    "parent_id": "s115",
+                    "section_id": "s119"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_level"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc"
+                    ],
+                    "parent_id": "s102",
+                    "section_id": "s115"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_level"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+                    ],
+                    "parent_id": "s1",
+                    "section_id": "s102"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "no_preceding_heading"
+                    ],
+                    "heading_unit_ids": [],
+                    "parent_id": null,
+                    "section_id": "s1"
+                  }
+                ]
+              }
+            ],
+            "semantic_context_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:fc150a13e6786af4734cf7690aab6a47b959a2528df517c59e97e5929ea1d76e"
+            ],
+            "source_diagnostics": [
+              {
+                "code": "NEEDS_UPSTREAM_GRANULARITY",
+                "unit_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:4fc4ce665976ad02b0c4ad268c32373e8d110da4e126e200120cae1fbc1ea531"
+                ]
+              }
+            ],
+            "unavailable_context_unit_ids": [],
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:4fc4ce665976ad02b0c4ad268c32373e8d110da4e126e200120cae1fbc1ea531"
+          }
+        ]
+      },
+      "old_heading_contamination": true,
+      "coverage_caveat": "Raw structure observation is not selected/emitted/model/RF coverage; source scope/actor labels are not world-fact verification."
+    },
+    {
+      "oracle_id": "R4-CONTEXT-PAIR-3",
+      "declared_expected_actor_and_scope_not_evidence": "实际控制人：备注10避免同业竞争",
+      "independently_read_actor_and_qualifiers": "实际控制人关于避免同业竞争；截至承诺出具日，包含近亲属/下属企业、境内外、未从事的否定限定。",
+      "positive_evidence_judgment": "Current selected note10 intro supports actual-controller attribution; the issuer is the referenced company, not the undertaking speaker. Old (4) still contaminates ancestry.",
+      "status": "NEEDS_ROOT_FIX_SELECTED_CONTEXT",
+      "original_support_units": [
+        {
+          "locator": "loc:v1/page:35/paragraph:11",
+          "raw_text": "备注10：实际控制人关于避免同业竞争的承诺",
+          "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+          "source_role": "company_filing",
+          "text_sha256": "4b07c2f8f8003265afe0e5f5aa584f8b8c956e114e1412c6d21d1d622576ffd6",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:4a5a3f1d046fd9b898783713c9888aefffc5edf5ffdf270cc45062834403e013"
+        },
+        {
+          "locator": "loc:v1/page:35/paragraph:12",
+          "raw_text": "“1、截至本承诺函出具之日，本人、本人/本企业及本人关系密切的近亲属/本企业直接或间\n接控制的下属企业并未在中国境内或境外以任何方式直接或间接从事与公司及其下属企业相竞争\n存在同业竞争或潜在同业竞争的业务，包括但不限于未单独或连同、代表任何人士、商号或公司\n（企业、单位），发展、经营或协助经营、参与、从事相关业务。",
+          "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+          "source_role": "company_filing",
+          "text_sha256": "1fd96630f3644e97b589bb6b4d829847db1e7836d244117cfd30092aaa96ef0d",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:8f6835356515bf339d5596dac0630d26e518aab9f7804925463dacb85db0d75f"
+        }
+      ],
+      "forbidden_old_context_units": [
+        {
+          "locator": "loc:v1/page:35/paragraph:10",
+          "raw_text": "5、本企业愿意承担由于违反上述承诺给公司造成的直接、间接的经济损失及产生的法律责\n任。”",
+          "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+          "source_role": "company_filing",
+          "text_sha256": "63be3368fae42ca37405ffcc9ffbce07f6388cb635dc7b38761864f93bf480a3",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:5b0131a1b4d3b0e43f26730b200a482f0e49fffb46712a9d68b0c36108b7f668"
+        }
+      ],
+      "previous_bad_context_observed": false,
+      "selected_originals_including_native_members": 2,
+      "original_target_count": 2,
+      "selected_support_carriers": {
+        "urn:company-wiki:narrative-unit:sha256:4a5a3f1d046fd9b898783713c9888aefffc5edf5ffdf270cc45062834403e013": [
+          "urn:company-wiki:evidence-span:sha256:724ab4f0a718b47020eb713658339e1e35f5aa550b9a60efb296f9086dbbfd26"
+        ],
+        "urn:company-wiki:narrative-unit:sha256:8f6835356515bf339d5596dac0630d26e518aab9f7804925463dacb85db0d75f": [
+          "urn:company-wiki:evidence-span:sha256:8d72318f2cf7fc7faffdb7b574cda57c3e9993ffb10b6e0583fb672535ad4c39"
+        ]
+      },
+      "actual_selected_views": [
+        {
+          "context_evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:e4feed5eedab9c1ce0e55f1e0b72b49d29d216e4f0c26755ce7f5149adf596aa",
+            "urn:company-wiki:evidence-span:sha256:5c9eca078287e9d60d43988fecc63f132e24c0b6f2b52363519485640bf035bf",
+            "urn:company-wiki:evidence-span:sha256:724ab4f0a718b47020eb713658339e1e35f5aa550b9a60efb296f9086dbbfd26"
+          ],
+          "group_anchor_unit_ids": null,
+          "group_anchors_exposed": false,
+          "group_id": "urn:company-wiki:reading-group:sha256:0c9de3930f8b6efdd7d5e9c6b7ea4a0e65193682ec20958e819bf94bad89ff73",
+          "reading_support_reason": "source_readable_narrative",
+          "reading_support_use": "support",
+          "support_evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:8d72318f2cf7fc7faffdb7b574cda57c3e9993ffb10b6e0583fb672535ad4c39"
+          ],
+          "view_id": "group-28/view-0"
+        }
+      ],
+      "source_structure_roles": {
+        "oracle_id": "R4-CONTEXT-PAIR-3",
+        "status": "STRUCTURE_OBSERVED_NO_ACTOR_INFERENCE",
+        "support_units": [
+          {
+            "ancestor_heading_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc",
+              "urn:company-wiki:narrative-unit:sha256:4a5a3f1d046fd9b898783713c9888aefffc5edf5ffdf270cc45062834403e013",
+              "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+            ],
+            "declared_context_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc",
+              "urn:company-wiki:narrative-unit:sha256:4a5a3f1d046fd9b898783713c9888aefffc5edf5ffdf270cc45062834403e013",
+              "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+            ],
+            "forbidden_context_ids_observed": [],
+            "original_present": true,
+            "physical_source_proof_unit_ids": [],
+            "section_occurrences": 1,
+            "section_paths": [
+              {
+                "ancestry_path_complete": true,
+                "sections": [
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_numbering",
+                      "source_note_scope"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:4a5a3f1d046fd9b898783713c9888aefffc5edf5ffdf270cc45062834403e013"
+                    ],
+                    "parent_id": "s115",
+                    "section_id": "s120"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_level"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc"
+                    ],
+                    "parent_id": "s102",
+                    "section_id": "s115"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_level"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+                    ],
+                    "parent_id": "s1",
+                    "section_id": "s102"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "no_preceding_heading"
+                    ],
+                    "heading_unit_ids": [],
+                    "parent_id": null,
+                    "section_id": "s1"
+                  }
+                ]
+              }
+            ],
+            "semantic_context_unit_ids": [],
+            "source_diagnostics": [
+              {
+                "code": "NEEDS_UPSTREAM_GRANULARITY",
+                "unit_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:4a5a3f1d046fd9b898783713c9888aefffc5edf5ffdf270cc45062834403e013"
+                ]
+              }
+            ],
+            "unavailable_context_unit_ids": [],
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:4a5a3f1d046fd9b898783713c9888aefffc5edf5ffdf270cc45062834403e013"
+          },
+          {
+            "ancestor_heading_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc",
+              "urn:company-wiki:narrative-unit:sha256:4a5a3f1d046fd9b898783713c9888aefffc5edf5ffdf270cc45062834403e013",
+              "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+            ],
+            "declared_context_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc",
+              "urn:company-wiki:narrative-unit:sha256:4a5a3f1d046fd9b898783713c9888aefffc5edf5ffdf270cc45062834403e013",
+              "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+            ],
+            "forbidden_context_ids_observed": [],
+            "original_present": true,
+            "physical_source_proof_unit_ids": [],
+            "section_occurrences": 1,
+            "section_paths": [
+              {
+                "ancestry_path_complete": true,
+                "sections": [
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_numbering",
+                      "source_note_scope"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:4a5a3f1d046fd9b898783713c9888aefffc5edf5ffdf270cc45062834403e013"
+                    ],
+                    "parent_id": "s115",
+                    "section_id": "s120"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_level"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc"
+                    ],
+                    "parent_id": "s102",
+                    "section_id": "s115"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_level"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+                    ],
+                    "parent_id": "s1",
+                    "section_id": "s102"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "no_preceding_heading"
+                    ],
+                    "heading_unit_ids": [],
+                    "parent_id": null,
+                    "section_id": "s1"
+                  }
+                ]
+              }
+            ],
+            "semantic_context_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:4a5a3f1d046fd9b898783713c9888aefffc5edf5ffdf270cc45062834403e013"
+            ],
+            "source_diagnostics": [
+              {
+                "code": "NEEDS_UPSTREAM_GRANULARITY",
+                "unit_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:8f6835356515bf339d5596dac0630d26e518aab9f7804925463dacb85db0d75f"
+                ]
+              }
+            ],
+            "unavailable_context_unit_ids": [],
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:8f6835356515bf339d5596dac0630d26e518aab9f7804925463dacb85db0d75f"
+          }
+        ]
+      },
+      "old_heading_contamination": true,
+      "coverage_caveat": "Raw structure observation is not selected/emitted/model/RF coverage; source scope/actor labels are not world-fact verification."
+    },
+    {
+      "oracle_id": "R4-CONTEXT-PAIR-4",
+      "declared_expected_actor_and_scope_not_evidence": "实际控制人：备注10避免同业竞争",
+      "independently_read_actor_and_qualifiers": "同一实际控制人承诺将不会从事竞争、控股/收购竞争企业、提供业务或财务帮助，保留未来/否定。",
+      "positive_evidence_judgment": "Raw scope points to note10 rather than Summer Bloom liability. Items2/3 retain TABLE_BODY_NOT_READ and granularity diagnostics.",
+      "status": "OPEN_NOT_SELECTED",
+      "original_support_units": [
+        {
+          "locator": "loc:v1/page:35/paragraph:13",
+          "raw_text": "2、本人、本人及本人关系密切的近亲属直接或间接控制的下属企业承诺将不会：（1）单独\n或与第三方，以任何形式直接或间接从事与公司及其下属企业目前及今后进行的主营业务构成同\n业竞争或潜在同业竞争的业务或活动；",
+          "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+          "source_role": "company_filing",
+          "text_sha256": "1a5b6a47e6e18710f0736cb24c4d304bc1293ee0e035671a386bf998deea33c3",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:12dd74fd9c69251983297ca5bfc6630d217149f5196d83fa31a5fb98d96ff620"
+        },
+        {
+          "locator": "loc:v1/page:35/paragraph:14",
+          "raw_text": "（2）不会直接或间接控股、收购与公司主营业务构成竞争\n或可能构成竞争的企业（以下简称“竞争企业”），或以其他方式拥有竞争企业的控制性股份、\n股权；",
+          "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+          "source_role": "company_filing",
+          "text_sha256": "126f917b1e02b8bd39517cca1c8b010d51bdebeda274e282ce77da484ed27b61",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:8b882aca0d37c2ef8e56a392815f88e982efa41d66ecd48c97c9aa0d95995612"
+        },
+        {
+          "locator": "loc:v1/page:35/paragraph:15",
+          "raw_text": "（3）不会以任何方式为竞争企业提供业务上、财务上等其他方面的帮助。",
+          "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+          "source_role": "company_filing",
+          "text_sha256": "968fb74b3f9c6654d91fa4eb53123d8b20126de2b2e8704d4b8874b940a452bb",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:ce087431d3d5aded00710d977db40edb6eedab5a05f02366afe8c28cd3845d02"
+        }
+      ],
+      "forbidden_old_context_units": [
+        {
+          "locator": "loc:v1/page:35/paragraph:10",
+          "raw_text": "5、本企业愿意承担由于违反上述承诺给公司造成的直接、间接的经济损失及产生的法律责\n任。”",
+          "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+          "source_role": "company_filing",
+          "text_sha256": "63be3368fae42ca37405ffcc9ffbce07f6388cb635dc7b38761864f93bf480a3",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:5b0131a1b4d3b0e43f26730b200a482f0e49fffb46712a9d68b0c36108b7f668"
+        }
+      ],
+      "previous_bad_context_observed": false,
+      "selected_originals_including_native_members": 0,
+      "original_target_count": 3,
+      "selected_support_carriers": {
+        "urn:company-wiki:narrative-unit:sha256:12dd74fd9c69251983297ca5bfc6630d217149f5196d83fa31a5fb98d96ff620": [],
+        "urn:company-wiki:narrative-unit:sha256:8b882aca0d37c2ef8e56a392815f88e982efa41d66ecd48c97c9aa0d95995612": [],
+        "urn:company-wiki:narrative-unit:sha256:ce087431d3d5aded00710d977db40edb6eedab5a05f02366afe8c28cd3845d02": []
+      },
+      "actual_selected_views": [],
+      "source_structure_roles": {
+        "oracle_id": "R4-CONTEXT-PAIR-4",
+        "status": "STRUCTURE_OBSERVED_NO_ACTOR_INFERENCE",
+        "support_units": [
+          {
+            "ancestor_heading_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc",
+              "urn:company-wiki:narrative-unit:sha256:4a5a3f1d046fd9b898783713c9888aefffc5edf5ffdf270cc45062834403e013",
+              "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+            ],
+            "declared_context_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc",
+              "urn:company-wiki:narrative-unit:sha256:4a5a3f1d046fd9b898783713c9888aefffc5edf5ffdf270cc45062834403e013",
+              "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+            ],
+            "forbidden_context_ids_observed": [],
+            "original_present": true,
+            "physical_source_proof_unit_ids": [],
+            "section_occurrences": 1,
+            "section_paths": [
+              {
+                "ancestry_path_complete": true,
+                "sections": [
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_numbering",
+                      "source_note_scope"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:4a5a3f1d046fd9b898783713c9888aefffc5edf5ffdf270cc45062834403e013"
+                    ],
+                    "parent_id": "s115",
+                    "section_id": "s120"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_level"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc"
+                    ],
+                    "parent_id": "s102",
+                    "section_id": "s115"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_level"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+                    ],
+                    "parent_id": "s1",
+                    "section_id": "s102"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "no_preceding_heading"
+                    ],
+                    "heading_unit_ids": [],
+                    "parent_id": null,
+                    "section_id": "s1"
+                  }
+                ]
+              }
+            ],
+            "semantic_context_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:4a5a3f1d046fd9b898783713c9888aefffc5edf5ffdf270cc45062834403e013"
+            ],
+            "source_diagnostics": [
+              {
+                "code": "NEEDS_UPSTREAM_GRANULARITY",
+                "unit_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:12dd74fd9c69251983297ca5bfc6630d217149f5196d83fa31a5fb98d96ff620"
+                ]
+              }
+            ],
+            "unavailable_context_unit_ids": [],
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:12dd74fd9c69251983297ca5bfc6630d217149f5196d83fa31a5fb98d96ff620"
+          },
+          {
+            "ancestor_heading_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc",
+              "urn:company-wiki:narrative-unit:sha256:4a5a3f1d046fd9b898783713c9888aefffc5edf5ffdf270cc45062834403e013",
+              "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+            ],
+            "declared_context_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc",
+              "urn:company-wiki:narrative-unit:sha256:4a5a3f1d046fd9b898783713c9888aefffc5edf5ffdf270cc45062834403e013",
+              "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+            ],
+            "forbidden_context_ids_observed": [],
+            "original_present": true,
+            "physical_source_proof_unit_ids": [],
+            "section_occurrences": 1,
+            "section_paths": [
+              {
+                "ancestry_path_complete": true,
+                "sections": [
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_numbering",
+                      "source_note_scope"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:4a5a3f1d046fd9b898783713c9888aefffc5edf5ffdf270cc45062834403e013"
+                    ],
+                    "parent_id": "s115",
+                    "section_id": "s120"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_level"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc"
+                    ],
+                    "parent_id": "s102",
+                    "section_id": "s115"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_level"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+                    ],
+                    "parent_id": "s1",
+                    "section_id": "s102"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "no_preceding_heading"
+                    ],
+                    "heading_unit_ids": [],
+                    "parent_id": null,
+                    "section_id": "s1"
+                  }
+                ]
+              }
+            ],
+            "semantic_context_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:4a5a3f1d046fd9b898783713c9888aefffc5edf5ffdf270cc45062834403e013"
+            ],
+            "source_diagnostics": [
+              {
+                "code": "TABLE_BODY_NOT_READ",
+                "unit_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:8b882aca0d37c2ef8e56a392815f88e982efa41d66ecd48c97c9aa0d95995612"
+                ]
+              },
+              {
+                "code": "NEEDS_UPSTREAM_GRANULARITY",
+                "unit_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:8b882aca0d37c2ef8e56a392815f88e982efa41d66ecd48c97c9aa0d95995612"
+                ]
+              }
+            ],
+            "unavailable_context_unit_ids": [],
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:8b882aca0d37c2ef8e56a392815f88e982efa41d66ecd48c97c9aa0d95995612"
+          },
+          {
+            "ancestor_heading_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc",
+              "urn:company-wiki:narrative-unit:sha256:4a5a3f1d046fd9b898783713c9888aefffc5edf5ffdf270cc45062834403e013",
+              "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+            ],
+            "declared_context_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc",
+              "urn:company-wiki:narrative-unit:sha256:4a5a3f1d046fd9b898783713c9888aefffc5edf5ffdf270cc45062834403e013",
+              "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+            ],
+            "forbidden_context_ids_observed": [],
+            "original_present": true,
+            "physical_source_proof_unit_ids": [],
+            "section_occurrences": 1,
+            "section_paths": [
+              {
+                "ancestry_path_complete": true,
+                "sections": [
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_numbering",
+                      "source_note_scope"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:4a5a3f1d046fd9b898783713c9888aefffc5edf5ffdf270cc45062834403e013"
+                    ],
+                    "parent_id": "s115",
+                    "section_id": "s120"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_level"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc"
+                    ],
+                    "parent_id": "s102",
+                    "section_id": "s115"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_level"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+                    ],
+                    "parent_id": "s1",
+                    "section_id": "s102"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "no_preceding_heading"
+                    ],
+                    "heading_unit_ids": [],
+                    "parent_id": null,
+                    "section_id": "s1"
+                  }
+                ]
+              }
+            ],
+            "semantic_context_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:4a5a3f1d046fd9b898783713c9888aefffc5edf5ffdf270cc45062834403e013"
+            ],
+            "source_diagnostics": [
+              {
+                "code": "TABLE_BODY_NOT_READ",
+                "unit_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:ce087431d3d5aded00710d977db40edb6eedab5a05f02366afe8c28cd3845d02"
+                ]
+              },
+              {
+                "code": "NEEDS_UPSTREAM_GRANULARITY",
+                "unit_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:ce087431d3d5aded00710d977db40edb6eedab5a05f02366afe8c28cd3845d02"
+                ]
+              }
+            ],
+            "unavailable_context_unit_ids": [],
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:ce087431d3d5aded00710d977db40edb6eedab5a05f02366afe8c28cd3845d02"
+          }
+        ]
+      },
+      "old_heading_contamination": false,
+      "coverage_caveat": "Raw structure observation is not selected/emitted/model/RF coverage; source scope/actor labels are not world-fact verification."
+    },
+    {
+      "oracle_id": "R4-CONTEXT-PAIR-5",
+      "declared_expected_actor_and_scope_not_evidence": "实际控制人：备注10避免同业竞争",
+      "independently_read_actor_and_qualifiers": "备注10承诺自出具日起有效，至任一条件终止；保留本人不再实控、终止上市但暂停买卖除外、国家不再要求相应内容。",
+      "positive_evidence_judgment": "All three original units are present in one exact native carrier and selected view65; direct-only mapped count1 must not be mistaken for missing2. Actor is correctly note10; old (4) remains.",
+      "status": "NEEDS_ROOT_FIX_SELECTED_CONTEXT",
+      "original_support_units": [
+        {
+          "locator": "loc:v1/page:35/paragraph:16",
+          "raw_text": "3、本承诺函自出具之日起生效，直至发生下列情形之一时终止：（1）本人不再是公司的实\n际控制人；",
+          "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+          "source_role": "company_filing",
+          "text_sha256": "cc8d3b6bd1373a5cd3730196ef1e10b3952a2de7c0b2bbecd8b09beb3b9eb6d2",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:2991c17e9f5360258c29abc1247741597d28d4a6dbcce5211861a6187c58dbf6"
+        },
+        {
+          "locator": "loc:v1/page:35/paragraph:17",
+          "raw_text": "（2）公司的股票终止在任何证券交易所上市（但公司的股票因任何原因暂停买卖除外）；",
+          "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+          "source_role": "company_filing",
+          "text_sha256": "34016a3cfaa71e02eda19a60936b1a7f8c1bdac569dbfb4d19cf944cfaf6fe02",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:1a4d82022b819f18b5ddb9151154015b9bc000cd8c431843d2c8335935bfba72"
+        },
+        {
+          "locator": "loc:v1/page:35/paragraph:18",
+          "raw_text": "（3）国家规定对某项承诺的内容无要求时，相应部分自行终止。",
+          "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+          "source_role": "company_filing",
+          "text_sha256": "e399d3e43c53627deb2e6efe3eb5e0ad2eb144defb25ae91857a187bee6fac52",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:87b52b727d398e964b024e122bc2702eca4448a1f455834caf6c4a69c1baa742"
+        }
+      ],
+      "forbidden_old_context_units": [
+        {
+          "locator": "loc:v1/page:35/paragraph:10",
+          "raw_text": "5、本企业愿意承担由于违反上述承诺给公司造成的直接、间接的经济损失及产生的法律责\n任。”",
+          "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+          "source_role": "company_filing",
+          "text_sha256": "63be3368fae42ca37405ffcc9ffbce07f6388cb635dc7b38761864f93bf480a3",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:5b0131a1b4d3b0e43f26730b200a482f0e49fffb46712a9d68b0c36108b7f668"
+        }
+      ],
+      "previous_bad_context_observed": false,
+      "selected_originals_including_native_members": 3,
+      "original_target_count": 3,
+      "selected_support_carriers": {
+        "urn:company-wiki:narrative-unit:sha256:2991c17e9f5360258c29abc1247741597d28d4a6dbcce5211861a6187c58dbf6": [
+          "urn:company-wiki:evidence-span:sha256:ed8a65533462407f6f71827001033f35eb8404b253e427815df619747f50470e"
+        ],
+        "urn:company-wiki:narrative-unit:sha256:1a4d82022b819f18b5ddb9151154015b9bc000cd8c431843d2c8335935bfba72": [
+          "urn:company-wiki:evidence-span:sha256:ed8a65533462407f6f71827001033f35eb8404b253e427815df619747f50470e"
+        ],
+        "urn:company-wiki:narrative-unit:sha256:87b52b727d398e964b024e122bc2702eca4448a1f455834caf6c4a69c1baa742": [
+          "urn:company-wiki:evidence-span:sha256:ed8a65533462407f6f71827001033f35eb8404b253e427815df619747f50470e"
+        ]
+      },
+      "actual_selected_views": [
+        {
+          "context_evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:e4feed5eedab9c1ce0e55f1e0b72b49d29d216e4f0c26755ce7f5149adf596aa",
+            "urn:company-wiki:evidence-span:sha256:5c9eca078287e9d60d43988fecc63f132e24c0b6f2b52363519485640bf035bf",
+            "urn:company-wiki:evidence-span:sha256:724ab4f0a718b47020eb713658339e1e35f5aa550b9a60efb296f9086dbbfd26"
+          ],
+          "group_anchor_unit_ids": null,
+          "group_anchors_exposed": false,
+          "group_id": "urn:company-wiki:reading-group:sha256:8c9ef4c3f52af5dacac3b120ca900de1f4a780a2602e918b80d1b65eaf70c5ed",
+          "reading_support_reason": "source_readable_narrative",
+          "reading_support_use": "support",
+          "support_evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:ed8a65533462407f6f71827001033f35eb8404b253e427815df619747f50470e"
+          ],
+          "view_id": "group-65/view-0"
+        }
+      ],
+      "source_structure_roles": {
+        "oracle_id": "R4-CONTEXT-PAIR-5",
+        "status": "STRUCTURE_OBSERVED_NO_ACTOR_INFERENCE",
+        "support_units": [
+          {
+            "ancestor_heading_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc",
+              "urn:company-wiki:narrative-unit:sha256:4a5a3f1d046fd9b898783713c9888aefffc5edf5ffdf270cc45062834403e013",
+              "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+            ],
+            "declared_context_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc",
+              "urn:company-wiki:narrative-unit:sha256:4a5a3f1d046fd9b898783713c9888aefffc5edf5ffdf270cc45062834403e013",
+              "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+            ],
+            "forbidden_context_ids_observed": [],
+            "original_present": true,
+            "physical_source_proof_unit_ids": [],
+            "section_occurrences": 1,
+            "section_paths": [
+              {
+                "ancestry_path_complete": true,
+                "sections": [
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_numbering",
+                      "source_note_scope"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:4a5a3f1d046fd9b898783713c9888aefffc5edf5ffdf270cc45062834403e013"
+                    ],
+                    "parent_id": "s115",
+                    "section_id": "s120"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_level"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc"
+                    ],
+                    "parent_id": "s102",
+                    "section_id": "s115"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_level"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+                    ],
+                    "parent_id": "s1",
+                    "section_id": "s102"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "no_preceding_heading"
+                    ],
+                    "heading_unit_ids": [],
+                    "parent_id": null,
+                    "section_id": "s1"
+                  }
+                ]
+              }
+            ],
+            "semantic_context_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:4a5a3f1d046fd9b898783713c9888aefffc5edf5ffdf270cc45062834403e013"
+            ],
+            "source_diagnostics": [
+              {
+                "code": "NEEDS_UPSTREAM_GRANULARITY",
+                "unit_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:2991c17e9f5360258c29abc1247741597d28d4a6dbcce5211861a6187c58dbf6"
+                ]
+              }
+            ],
+            "unavailable_context_unit_ids": [],
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:2991c17e9f5360258c29abc1247741597d28d4a6dbcce5211861a6187c58dbf6"
+          },
+          {
+            "ancestor_heading_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc",
+              "urn:company-wiki:narrative-unit:sha256:4a5a3f1d046fd9b898783713c9888aefffc5edf5ffdf270cc45062834403e013",
+              "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+            ],
+            "declared_context_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc",
+              "urn:company-wiki:narrative-unit:sha256:4a5a3f1d046fd9b898783713c9888aefffc5edf5ffdf270cc45062834403e013",
+              "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+            ],
+            "forbidden_context_ids_observed": [],
+            "original_present": true,
+            "physical_source_proof_unit_ids": [],
+            "section_occurrences": 1,
+            "section_paths": [
+              {
+                "ancestry_path_complete": true,
+                "sections": [
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_numbering",
+                      "source_note_scope"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:4a5a3f1d046fd9b898783713c9888aefffc5edf5ffdf270cc45062834403e013"
+                    ],
+                    "parent_id": "s115",
+                    "section_id": "s120"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_level"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc"
+                    ],
+                    "parent_id": "s102",
+                    "section_id": "s115"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_level"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+                    ],
+                    "parent_id": "s1",
+                    "section_id": "s102"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "no_preceding_heading"
+                    ],
+                    "heading_unit_ids": [],
+                    "parent_id": null,
+                    "section_id": "s1"
+                  }
+                ]
+              }
+            ],
+            "semantic_context_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:4a5a3f1d046fd9b898783713c9888aefffc5edf5ffdf270cc45062834403e013"
+            ],
+            "source_diagnostics": [
+              {
+                "code": "TABLE_BODY_NOT_READ",
+                "unit_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:1a4d82022b819f18b5ddb9151154015b9bc000cd8c431843d2c8335935bfba72"
+                ]
+              },
+              {
+                "code": "NEEDS_UPSTREAM_GRANULARITY",
+                "unit_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:1a4d82022b819f18b5ddb9151154015b9bc000cd8c431843d2c8335935bfba72"
+                ]
+              }
+            ],
+            "unavailable_context_unit_ids": [],
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:1a4d82022b819f18b5ddb9151154015b9bc000cd8c431843d2c8335935bfba72"
+          },
+          {
+            "ancestor_heading_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc",
+              "urn:company-wiki:narrative-unit:sha256:4a5a3f1d046fd9b898783713c9888aefffc5edf5ffdf270cc45062834403e013",
+              "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+            ],
+            "declared_context_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc",
+              "urn:company-wiki:narrative-unit:sha256:4a5a3f1d046fd9b898783713c9888aefffc5edf5ffdf270cc45062834403e013",
+              "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+            ],
+            "forbidden_context_ids_observed": [],
+            "original_present": true,
+            "physical_source_proof_unit_ids": [],
+            "section_occurrences": 1,
+            "section_paths": [
+              {
+                "ancestry_path_complete": true,
+                "sections": [
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_numbering",
+                      "source_note_scope"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:4a5a3f1d046fd9b898783713c9888aefffc5edf5ffdf270cc45062834403e013"
+                    ],
+                    "parent_id": "s115",
+                    "section_id": "s120"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_level"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc"
+                    ],
+                    "parent_id": "s102",
+                    "section_id": "s115"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_level"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+                    ],
+                    "parent_id": "s1",
+                    "section_id": "s102"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "no_preceding_heading"
+                    ],
+                    "heading_unit_ids": [],
+                    "parent_id": null,
+                    "section_id": "s1"
+                  }
+                ]
+              }
+            ],
+            "semantic_context_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:4a5a3f1d046fd9b898783713c9888aefffc5edf5ffdf270cc45062834403e013"
+            ],
+            "source_diagnostics": [
+              {
+                "code": "TABLE_BODY_NOT_READ",
+                "unit_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:87b52b727d398e964b024e122bc2702eca4448a1f455834caf6c4a69c1baa742"
+                ]
+              },
+              {
+                "code": "NEEDS_UPSTREAM_GRANULARITY",
+                "unit_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:87b52b727d398e964b024e122bc2702eca4448a1f455834caf6c4a69c1baa742"
+                ]
+              }
+            ],
+            "unavailable_context_unit_ids": [],
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:87b52b727d398e964b024e122bc2702eca4448a1f455834caf6c4a69c1baa742"
+          }
+        ]
+      },
+      "old_heading_contamination": true,
+      "coverage_caveat": "Raw structure observation is not selected/emitted/model/RF coverage; source scope/actor labels are not world-fact verification."
+    },
+    {
+      "oracle_id": "R4-CONTEXT-PAIR-6",
+      "declared_expected_actor_and_scope_not_evidence": "Fertile Harvest / Eastern Star / L&C：备注11股份处置",
+      "independently_read_actor_and_qualifiers": "Fertile Harvest、Eastern Star、L&C 三位原一致行动人的股份处置承诺，主体本公司是股东而非药明康德；公告起未来6个月锁定期不减持/赠与/处置/担保。",
+      "positive_evidence_judgment": "Raw note11 heading and own first undertaking make positive attribution possible. No selected view currently exercises it.",
+      "status": "OPEN_NOT_SELECTED",
+      "original_support_units": [
+        {
+          "locator": "loc:v1/page:35/paragraph:21",
+          "raw_text": "备注11：实际控制人的原一致行动人Fertile Harvest（沃茂投资有限公司）、Eastern Star\n（东星亚洲投资有限公司）和L&C 投资有限关于解除一致行动关系后的股份处置承诺",
+          "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+          "source_role": "company_filing",
+          "text_sha256": "92ba871dcfb91e98adf1fae7bac5e3ec608e2d85ef18676e91f5c74e1c080b51",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:8686dd8c32d8ce5377380aa47e4eb88e26044659b2912c7c8d4e8a4e0410f51b"
+        },
+        {
+          "locator": "loc:v1/page:35/paragraph:22",
+          "raw_text": "“1. 本公司承诺，自药明康德就本次解除事项公告的披露日起，未来6 个月内（以下简称‘锁\n定期’）本公司不以任何方式减持、变相减持、赠与或处置所持有的药明康德的股票或采取任何\n以实现股份处置收益效果为目的的行动（以下合称‘减持行为’），亦不会以任何方式对所持有\n的药明康德的股票设置质押担保或其他任何方式的担保措施或其他权利负担。",
+          "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+          "source_role": "company_filing",
+          "text_sha256": "52f2df8d576c9c6383db5cbaacb76c7b1fb58d6223e809ac6f18cb674b8179a8",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:e27bfb6cb8205196ce15c27b94f657a99b96f308cd7263ccda76abbbe366eb25"
+        }
+      ],
+      "forbidden_old_context_units": [
+        {
+          "locator": "loc:v1/page:35/paragraph:10",
+          "raw_text": "5、本企业愿意承担由于违反上述承诺给公司造成的直接、间接的经济损失及产生的法律责\n任。”",
+          "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+          "source_role": "company_filing",
+          "text_sha256": "63be3368fae42ca37405ffcc9ffbce07f6388cb635dc7b38761864f93bf480a3",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:5b0131a1b4d3b0e43f26730b200a482f0e49fffb46712a9d68b0c36108b7f668"
+        }
+      ],
+      "previous_bad_context_observed": false,
+      "selected_originals_including_native_members": 0,
+      "original_target_count": 2,
+      "selected_support_carriers": {
+        "urn:company-wiki:narrative-unit:sha256:8686dd8c32d8ce5377380aa47e4eb88e26044659b2912c7c8d4e8a4e0410f51b": [],
+        "urn:company-wiki:narrative-unit:sha256:e27bfb6cb8205196ce15c27b94f657a99b96f308cd7263ccda76abbbe366eb25": []
+      },
+      "actual_selected_views": [],
+      "source_structure_roles": {
+        "oracle_id": "R4-CONTEXT-PAIR-6",
+        "status": "STRUCTURE_OBSERVED_NO_ACTOR_INFERENCE",
+        "support_units": [
+          {
+            "ancestor_heading_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc",
+              "urn:company-wiki:narrative-unit:sha256:8686dd8c32d8ce5377380aa47e4eb88e26044659b2912c7c8d4e8a4e0410f51b",
+              "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+            ],
+            "declared_context_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc",
+              "urn:company-wiki:narrative-unit:sha256:8686dd8c32d8ce5377380aa47e4eb88e26044659b2912c7c8d4e8a4e0410f51b",
+              "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+            ],
+            "forbidden_context_ids_observed": [],
+            "original_present": true,
+            "physical_source_proof_unit_ids": [],
+            "section_occurrences": 1,
+            "section_paths": [
+              {
+                "ancestry_path_complete": true,
+                "sections": [
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_numbering",
+                      "source_note_scope",
+                      "spans_pages"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:8686dd8c32d8ce5377380aa47e4eb88e26044659b2912c7c8d4e8a4e0410f51b"
+                    ],
+                    "parent_id": "s115",
+                    "section_id": "s121"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_level"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc"
+                    ],
+                    "parent_id": "s102",
+                    "section_id": "s115"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_level"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+                    ],
+                    "parent_id": "s1",
+                    "section_id": "s102"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "no_preceding_heading"
+                    ],
+                    "heading_unit_ids": [],
+                    "parent_id": null,
+                    "section_id": "s1"
+                  }
+                ]
+              }
+            ],
+            "semantic_context_unit_ids": [],
+            "source_diagnostics": [
+              {
+                "code": "NEEDS_UPSTREAM_GRANULARITY",
+                "unit_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:8686dd8c32d8ce5377380aa47e4eb88e26044659b2912c7c8d4e8a4e0410f51b"
+                ]
+              }
+            ],
+            "unavailable_context_unit_ids": [],
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:8686dd8c32d8ce5377380aa47e4eb88e26044659b2912c7c8d4e8a4e0410f51b"
+          },
+          {
+            "ancestor_heading_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc",
+              "urn:company-wiki:narrative-unit:sha256:8686dd8c32d8ce5377380aa47e4eb88e26044659b2912c7c8d4e8a4e0410f51b",
+              "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+            ],
+            "declared_context_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc",
+              "urn:company-wiki:narrative-unit:sha256:8686dd8c32d8ce5377380aa47e4eb88e26044659b2912c7c8d4e8a4e0410f51b",
+              "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+            ],
+            "forbidden_context_ids_observed": [],
+            "original_present": true,
+            "physical_source_proof_unit_ids": [],
+            "section_occurrences": 1,
+            "section_paths": [
+              {
+                "ancestry_path_complete": true,
+                "sections": [
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_numbering",
+                      "source_note_scope",
+                      "spans_pages"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:8686dd8c32d8ce5377380aa47e4eb88e26044659b2912c7c8d4e8a4e0410f51b"
+                    ],
+                    "parent_id": "s115",
+                    "section_id": "s121"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_level"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc"
+                    ],
+                    "parent_id": "s102",
+                    "section_id": "s115"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_level"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+                    ],
+                    "parent_id": "s1",
+                    "section_id": "s102"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "no_preceding_heading"
+                    ],
+                    "heading_unit_ids": [],
+                    "parent_id": null,
+                    "section_id": "s1"
+                  }
+                ]
+              }
+            ],
+            "semantic_context_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:8686dd8c32d8ce5377380aa47e4eb88e26044659b2912c7c8d4e8a4e0410f51b"
+            ],
+            "source_diagnostics": [
+              {
+                "code": "NEEDS_UPSTREAM_GRANULARITY",
+                "unit_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:e27bfb6cb8205196ce15c27b94f657a99b96f308cd7263ccda76abbbe366eb25"
+                ]
+              }
+            ],
+            "unavailable_context_unit_ids": [],
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:e27bfb6cb8205196ce15c27b94f657a99b96f308cd7263ccda76abbbe366eb25"
+          }
+        ]
+      },
+      "old_heading_contamination": false,
+      "coverage_caveat": "Raw structure observation is not selected/emitted/model/RF coverage; source scope/actor labels are not world-fact verification."
+    },
+    {
+      "oracle_id": "R4-CONTEXT-PAIR-7",
+      "declared_expected_actor_and_scope_not_evidence": "Fertile Harvest / Eastern Star / L&C：备注11股份处置",
+      "independently_read_actor_and_qualifiers": "同第6组；不能借前一实际控制人赔偿条款将“本公司”替换成实际控制人或上市主体。",
+      "positive_evidence_judgment": "Same support set as pair6, different old forbidden context; it is not a second independent positive sample.",
+      "status": "OPEN_NOT_SELECTED",
+      "original_support_units": [
+        {
+          "locator": "loc:v1/page:35/paragraph:21",
+          "raw_text": "备注11：实际控制人的原一致行动人Fertile Harvest（沃茂投资有限公司）、Eastern Star\n（东星亚洲投资有限公司）和L&C 投资有限关于解除一致行动关系后的股份处置承诺",
+          "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+          "source_role": "company_filing",
+          "text_sha256": "92ba871dcfb91e98adf1fae7bac5e3ec608e2d85ef18676e91f5c74e1c080b51",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:8686dd8c32d8ce5377380aa47e4eb88e26044659b2912c7c8d4e8a4e0410f51b"
+        },
+        {
+          "locator": "loc:v1/page:35/paragraph:22",
+          "raw_text": "“1. 本公司承诺，自药明康德就本次解除事项公告的披露日起，未来6 个月内（以下简称‘锁\n定期’）本公司不以任何方式减持、变相减持、赠与或处置所持有的药明康德的股票或采取任何\n以实现股份处置收益效果为目的的行动（以下合称‘减持行为’），亦不会以任何方式对所持有\n的药明康德的股票设置质押担保或其他任何方式的担保措施或其他权利负担。",
+          "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+          "source_role": "company_filing",
+          "text_sha256": "52f2df8d576c9c6383db5cbaacb76c7b1fb58d6223e809ac6f18cb674b8179a8",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:e27bfb6cb8205196ce15c27b94f657a99b96f308cd7263ccda76abbbe366eb25"
+        }
+      ],
+      "forbidden_old_context_units": [
+        {
+          "locator": "loc:v1/page:35/paragraph:20",
+          "raw_text": "5、如违反上述承诺，本人愿意依法承担因违反上述承诺而给公司造成的全部经济损失。”",
+          "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+          "source_role": "company_filing",
+          "text_sha256": "dee22682b08ee1afb18ab21a8a41f95f3f16163660e6b009e7d3598107072d58",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:63e1f4d398bbb2fd0f5ed13a6deb0856918d15cff91feb65d42db74a87f90266"
+        }
+      ],
+      "previous_bad_context_observed": false,
+      "selected_originals_including_native_members": 0,
+      "original_target_count": 2,
+      "selected_support_carriers": {
+        "urn:company-wiki:narrative-unit:sha256:8686dd8c32d8ce5377380aa47e4eb88e26044659b2912c7c8d4e8a4e0410f51b": [],
+        "urn:company-wiki:narrative-unit:sha256:e27bfb6cb8205196ce15c27b94f657a99b96f308cd7263ccda76abbbe366eb25": []
+      },
+      "actual_selected_views": [],
+      "source_structure_roles": {
+        "oracle_id": "R4-CONTEXT-PAIR-7",
+        "status": "STRUCTURE_OBSERVED_NO_ACTOR_INFERENCE",
+        "support_units": [
+          {
+            "ancestor_heading_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc",
+              "urn:company-wiki:narrative-unit:sha256:8686dd8c32d8ce5377380aa47e4eb88e26044659b2912c7c8d4e8a4e0410f51b",
+              "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+            ],
+            "declared_context_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc",
+              "urn:company-wiki:narrative-unit:sha256:8686dd8c32d8ce5377380aa47e4eb88e26044659b2912c7c8d4e8a4e0410f51b",
+              "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+            ],
+            "forbidden_context_ids_observed": [],
+            "original_present": true,
+            "physical_source_proof_unit_ids": [],
+            "section_occurrences": 1,
+            "section_paths": [
+              {
+                "ancestry_path_complete": true,
+                "sections": [
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_numbering",
+                      "source_note_scope",
+                      "spans_pages"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:8686dd8c32d8ce5377380aa47e4eb88e26044659b2912c7c8d4e8a4e0410f51b"
+                    ],
+                    "parent_id": "s115",
+                    "section_id": "s121"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_level"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc"
+                    ],
+                    "parent_id": "s102",
+                    "section_id": "s115"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_level"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+                    ],
+                    "parent_id": "s1",
+                    "section_id": "s102"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "no_preceding_heading"
+                    ],
+                    "heading_unit_ids": [],
+                    "parent_id": null,
+                    "section_id": "s1"
+                  }
+                ]
+              }
+            ],
+            "semantic_context_unit_ids": [],
+            "source_diagnostics": [
+              {
+                "code": "NEEDS_UPSTREAM_GRANULARITY",
+                "unit_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:8686dd8c32d8ce5377380aa47e4eb88e26044659b2912c7c8d4e8a4e0410f51b"
+                ]
+              }
+            ],
+            "unavailable_context_unit_ids": [],
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:8686dd8c32d8ce5377380aa47e4eb88e26044659b2912c7c8d4e8a4e0410f51b"
+          },
+          {
+            "ancestor_heading_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc",
+              "urn:company-wiki:narrative-unit:sha256:8686dd8c32d8ce5377380aa47e4eb88e26044659b2912c7c8d4e8a4e0410f51b",
+              "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+            ],
+            "declared_context_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc",
+              "urn:company-wiki:narrative-unit:sha256:8686dd8c32d8ce5377380aa47e4eb88e26044659b2912c7c8d4e8a4e0410f51b",
+              "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+            ],
+            "forbidden_context_ids_observed": [],
+            "original_present": true,
+            "physical_source_proof_unit_ids": [],
+            "section_occurrences": 1,
+            "section_paths": [
+              {
+                "ancestry_path_complete": true,
+                "sections": [
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_numbering",
+                      "source_note_scope",
+                      "spans_pages"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:8686dd8c32d8ce5377380aa47e4eb88e26044659b2912c7c8d4e8a4e0410f51b"
+                    ],
+                    "parent_id": "s115",
+                    "section_id": "s121"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_level"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc"
+                    ],
+                    "parent_id": "s102",
+                    "section_id": "s115"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_level"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+                    ],
+                    "parent_id": "s1",
+                    "section_id": "s102"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "no_preceding_heading"
+                    ],
+                    "heading_unit_ids": [],
+                    "parent_id": null,
+                    "section_id": "s1"
+                  }
+                ]
+              }
+            ],
+            "semantic_context_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:8686dd8c32d8ce5377380aa47e4eb88e26044659b2912c7c8d4e8a4e0410f51b"
+            ],
+            "source_diagnostics": [
+              {
+                "code": "NEEDS_UPSTREAM_GRANULARITY",
+                "unit_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:e27bfb6cb8205196ce15c27b94f657a99b96f308cd7263ccda76abbbe366eb25"
+                ]
+              }
+            ],
+            "unavailable_context_unit_ids": [],
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:e27bfb6cb8205196ce15c27b94f657a99b96f308cd7263ccda76abbbe366eb25"
+          }
+        ]
+      },
+      "old_heading_contamination": false,
+      "coverage_caveat": "Raw structure observation is not selected/emitted/model/RF coverage; source scope/actor labels are not world-fact verification."
+    },
+    {
+      "oracle_id": "R4-CONTEXT-PAIR-8",
+      "declared_expected_actor_and_scope_not_evidence": "Fertile Harvest / Eastern Star / L&C：备注11股份处置",
+      "independently_read_actor_and_qualifiers": "备注11三位原一致行动人，自解除协议生效起独立行权；锁定期届满后作为特定股东依法交易。",
+      "positive_evidence_judgment": "Cross-page semantic intro is note11. Physical continuity separately retains prior first undertaking plus page furniture; those physical items are not automatically actor/meaning context. Six-month definition is in prior undertaking, only physical source proof for these raw supports, so full downstream temporal-scope adoption is not demonstrated.",
+      "status": "OPEN_NOT_SELECTED",
+      "original_support_units": [
+        {
+          "locator": "loc:v1/page:36/paragraph:2",
+          "raw_text": "2. 本公司承诺，自《一致行动关系解除协议》生效之日起，本公司与实控人及其支配表决权\n的股东各自完全独立分开，为完全独立并无关联的各方，将分别独立行使作为药明康德股东的股\n东权利并履行相关股东义务。",
+          "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+          "source_role": "company_filing",
+          "text_sha256": "9d6ef1ec13b1604ac43e9ec912af72f5e5d92fe34a7d6d4b5509af42bc105342",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:999e2f10d1fc01aed6c7f63acd37995d70e0cafa288d0339beb814d6eac43a73"
+        },
+        {
+          "locator": "loc:v1/page:36/paragraph:3",
+          "raw_text": "锁定期届满后，本公司将作为特定股东，按照并遵守《中华人民共\n和国证券法》《上市公司股东减持股份管理暂行办法》《上海证券交易所上市公司自律监管指引\n第15 号——股东及董事、高级管理人员减持股份》等有关适用的法律、法规和规范性文件的规定\n实施有关药明康德股份的交易行为。",
+          "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+          "source_role": "company_filing",
+          "text_sha256": "5265ad1c8317f820216067f60cf524bc14ea6613714aa1a1a9d0250c393ec9d2",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:1769621d4476e8da84d9c798ca5321c03fa63e3758c5eb09ca7416acf68bc602"
+        }
+      ],
+      "forbidden_old_context_units": [
+        {
+          "locator": "loc:v1/page:35/paragraph:10",
+          "raw_text": "5、本企业愿意承担由于违反上述承诺给公司造成的直接、间接的经济损失及产生的法律责\n任。”",
+          "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+          "source_role": "company_filing",
+          "text_sha256": "63be3368fae42ca37405ffcc9ffbce07f6388cb635dc7b38761864f93bf480a3",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:5b0131a1b4d3b0e43f26730b200a482f0e49fffb46712a9d68b0c36108b7f668"
+        }
+      ],
+      "previous_bad_context_observed": false,
+      "selected_originals_including_native_members": 0,
+      "original_target_count": 2,
+      "selected_support_carriers": {
+        "urn:company-wiki:narrative-unit:sha256:999e2f10d1fc01aed6c7f63acd37995d70e0cafa288d0339beb814d6eac43a73": [],
+        "urn:company-wiki:narrative-unit:sha256:1769621d4476e8da84d9c798ca5321c03fa63e3758c5eb09ca7416acf68bc602": []
+      },
+      "actual_selected_views": [],
+      "source_structure_roles": {
+        "oracle_id": "R4-CONTEXT-PAIR-8",
+        "status": "STRUCTURE_OBSERVED_NO_ACTOR_INFERENCE",
+        "support_units": [
+          {
+            "ancestor_heading_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc",
+              "urn:company-wiki:narrative-unit:sha256:8686dd8c32d8ce5377380aa47e4eb88e26044659b2912c7c8d4e8a4e0410f51b",
+              "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+            ],
+            "declared_context_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc",
+              "urn:company-wiki:narrative-unit:sha256:8686dd8c32d8ce5377380aa47e4eb88e26044659b2912c7c8d4e8a4e0410f51b",
+              "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+            ],
+            "forbidden_context_ids_observed": [],
+            "original_present": true,
+            "physical_source_proof_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:a76c10bdc117e7e2e7856c7aafd20a1c71f1f323315e450d454c3bd0e2327cfa",
+              "urn:company-wiki:narrative-unit:sha256:cfb0fc4c2c63d6249e02c20eb27314230ef447f802b44d91a54aacf7ec665d1f",
+              "urn:company-wiki:narrative-unit:sha256:e27bfb6cb8205196ce15c27b94f657a99b96f308cd7263ccda76abbbe366eb25"
+            ],
+            "section_occurrences": 1,
+            "section_paths": [
+              {
+                "ancestry_path_complete": true,
+                "sections": [
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_numbering",
+                      "source_note_scope",
+                      "spans_pages"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:8686dd8c32d8ce5377380aa47e4eb88e26044659b2912c7c8d4e8a4e0410f51b"
+                    ],
+                    "parent_id": "s115",
+                    "section_id": "s121"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_level"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc"
+                    ],
+                    "parent_id": "s102",
+                    "section_id": "s115"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_level"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+                    ],
+                    "parent_id": "s1",
+                    "section_id": "s102"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "no_preceding_heading"
+                    ],
+                    "heading_unit_ids": [],
+                    "parent_id": null,
+                    "section_id": "s1"
+                  }
+                ]
+              }
+            ],
+            "semantic_context_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:8686dd8c32d8ce5377380aa47e4eb88e26044659b2912c7c8d4e8a4e0410f51b"
+            ],
+            "source_diagnostics": [
+              {
+                "code": "NEEDS_UPSTREAM_GRANULARITY",
+                "unit_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:999e2f10d1fc01aed6c7f63acd37995d70e0cafa288d0339beb814d6eac43a73"
+                ]
+              }
+            ],
+            "unavailable_context_unit_ids": [],
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:999e2f10d1fc01aed6c7f63acd37995d70e0cafa288d0339beb814d6eac43a73"
+          },
+          {
+            "ancestor_heading_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc",
+              "urn:company-wiki:narrative-unit:sha256:8686dd8c32d8ce5377380aa47e4eb88e26044659b2912c7c8d4e8a4e0410f51b",
+              "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+            ],
+            "declared_context_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc",
+              "urn:company-wiki:narrative-unit:sha256:8686dd8c32d8ce5377380aa47e4eb88e26044659b2912c7c8d4e8a4e0410f51b",
+              "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+            ],
+            "forbidden_context_ids_observed": [],
+            "original_present": true,
+            "physical_source_proof_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:999e2f10d1fc01aed6c7f63acd37995d70e0cafa288d0339beb814d6eac43a73",
+              "urn:company-wiki:narrative-unit:sha256:a76c10bdc117e7e2e7856c7aafd20a1c71f1f323315e450d454c3bd0e2327cfa",
+              "urn:company-wiki:narrative-unit:sha256:cfb0fc4c2c63d6249e02c20eb27314230ef447f802b44d91a54aacf7ec665d1f",
+              "urn:company-wiki:narrative-unit:sha256:e27bfb6cb8205196ce15c27b94f657a99b96f308cd7263ccda76abbbe366eb25"
+            ],
+            "section_occurrences": 1,
+            "section_paths": [
+              {
+                "ancestry_path_complete": true,
+                "sections": [
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_numbering",
+                      "source_note_scope",
+                      "spans_pages"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:8686dd8c32d8ce5377380aa47e4eb88e26044659b2912c7c8d4e8a4e0410f51b"
+                    ],
+                    "parent_id": "s115",
+                    "section_id": "s121"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_level"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc"
+                    ],
+                    "parent_id": "s102",
+                    "section_id": "s115"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_level"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+                    ],
+                    "parent_id": "s1",
+                    "section_id": "s102"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "no_preceding_heading"
+                    ],
+                    "heading_unit_ids": [],
+                    "parent_id": null,
+                    "section_id": "s1"
+                  }
+                ]
+              }
+            ],
+            "semantic_context_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:8686dd8c32d8ce5377380aa47e4eb88e26044659b2912c7c8d4e8a4e0410f51b"
+            ],
+            "source_diagnostics": [
+              {
+                "code": "NEEDS_UPSTREAM_GRANULARITY",
+                "unit_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:1769621d4476e8da84d9c798ca5321c03fa63e3758c5eb09ca7416acf68bc602"
+                ]
+              }
+            ],
+            "unavailable_context_unit_ids": [],
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:1769621d4476e8da84d9c798ca5321c03fa63e3758c5eb09ca7416acf68bc602"
+          }
+        ]
+      },
+      "old_heading_contamination": false,
+      "coverage_caveat": "Raw structure observation is not selected/emitted/model/RF coverage; source scope/actor labels are not world-fact verification."
+    },
+    {
+      "oracle_id": "R4-CONTEXT-PAIR-9",
+      "declared_expected_actor_and_scope_not_evidence": "Fertile Harvest / Eastern Star / L&C：备注11股份处置",
+      "independently_read_actor_and_qualifiers": "同第8组；不能借前一实际控制人违约赔偿条款归属。",
+      "positive_evidence_judgment": "Same support set as pair8, different old forbidden context. No selected view; actor/temporal downstream adoption untested.",
+      "status": "OPEN_NOT_SELECTED",
+      "original_support_units": [
+        {
+          "locator": "loc:v1/page:36/paragraph:2",
+          "raw_text": "2. 本公司承诺，自《一致行动关系解除协议》生效之日起，本公司与实控人及其支配表决权\n的股东各自完全独立分开，为完全独立并无关联的各方，将分别独立行使作为药明康德股东的股\n东权利并履行相关股东义务。",
+          "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+          "source_role": "company_filing",
+          "text_sha256": "9d6ef1ec13b1604ac43e9ec912af72f5e5d92fe34a7d6d4b5509af42bc105342",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:999e2f10d1fc01aed6c7f63acd37995d70e0cafa288d0339beb814d6eac43a73"
+        },
+        {
+          "locator": "loc:v1/page:36/paragraph:3",
+          "raw_text": "锁定期届满后，本公司将作为特定股东，按照并遵守《中华人民共\n和国证券法》《上市公司股东减持股份管理暂行办法》《上海证券交易所上市公司自律监管指引\n第15 号——股东及董事、高级管理人员减持股份》等有关适用的法律、法规和规范性文件的规定\n实施有关药明康德股份的交易行为。",
+          "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+          "source_role": "company_filing",
+          "text_sha256": "5265ad1c8317f820216067f60cf524bc14ea6613714aa1a1a9d0250c393ec9d2",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:1769621d4476e8da84d9c798ca5321c03fa63e3758c5eb09ca7416acf68bc602"
+        }
+      ],
+      "forbidden_old_context_units": [
+        {
+          "locator": "loc:v1/page:35/paragraph:20",
+          "raw_text": "5、如违反上述承诺，本人愿意依法承担因违反上述承诺而给公司造成的全部经济损失。”",
+          "source_id": "urn:company-wiki:source:sha256:d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f",
+          "source_role": "company_filing",
+          "text_sha256": "dee22682b08ee1afb18ab21a8a41f95f3f16163660e6b009e7d3598107072d58",
+          "unit_id": "urn:company-wiki:narrative-unit:sha256:63e1f4d398bbb2fd0f5ed13a6deb0856918d15cff91feb65d42db74a87f90266"
+        }
+      ],
+      "previous_bad_context_observed": false,
+      "selected_originals_including_native_members": 0,
+      "original_target_count": 2,
+      "selected_support_carriers": {
+        "urn:company-wiki:narrative-unit:sha256:999e2f10d1fc01aed6c7f63acd37995d70e0cafa288d0339beb814d6eac43a73": [],
+        "urn:company-wiki:narrative-unit:sha256:1769621d4476e8da84d9c798ca5321c03fa63e3758c5eb09ca7416acf68bc602": []
+      },
+      "actual_selected_views": [],
+      "source_structure_roles": {
+        "oracle_id": "R4-CONTEXT-PAIR-9",
+        "status": "STRUCTURE_OBSERVED_NO_ACTOR_INFERENCE",
+        "support_units": [
+          {
+            "ancestor_heading_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc",
+              "urn:company-wiki:narrative-unit:sha256:8686dd8c32d8ce5377380aa47e4eb88e26044659b2912c7c8d4e8a4e0410f51b",
+              "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+            ],
+            "declared_context_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc",
+              "urn:company-wiki:narrative-unit:sha256:8686dd8c32d8ce5377380aa47e4eb88e26044659b2912c7c8d4e8a4e0410f51b",
+              "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+            ],
+            "forbidden_context_ids_observed": [],
+            "original_present": true,
+            "physical_source_proof_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:a76c10bdc117e7e2e7856c7aafd20a1c71f1f323315e450d454c3bd0e2327cfa",
+              "urn:company-wiki:narrative-unit:sha256:cfb0fc4c2c63d6249e02c20eb27314230ef447f802b44d91a54aacf7ec665d1f",
+              "urn:company-wiki:narrative-unit:sha256:e27bfb6cb8205196ce15c27b94f657a99b96f308cd7263ccda76abbbe366eb25"
+            ],
+            "section_occurrences": 1,
+            "section_paths": [
+              {
+                "ancestry_path_complete": true,
+                "sections": [
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_numbering",
+                      "source_note_scope",
+                      "spans_pages"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:8686dd8c32d8ce5377380aa47e4eb88e26044659b2912c7c8d4e8a4e0410f51b"
+                    ],
+                    "parent_id": "s115",
+                    "section_id": "s121"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_level"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc"
+                    ],
+                    "parent_id": "s102",
+                    "section_id": "s115"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_level"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+                    ],
+                    "parent_id": "s1",
+                    "section_id": "s102"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "no_preceding_heading"
+                    ],
+                    "heading_unit_ids": [],
+                    "parent_id": null,
+                    "section_id": "s1"
+                  }
+                ]
+              }
+            ],
+            "semantic_context_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:8686dd8c32d8ce5377380aa47e4eb88e26044659b2912c7c8d4e8a4e0410f51b"
+            ],
+            "source_diagnostics": [
+              {
+                "code": "NEEDS_UPSTREAM_GRANULARITY",
+                "unit_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:999e2f10d1fc01aed6c7f63acd37995d70e0cafa288d0339beb814d6eac43a73"
+                ]
+              }
+            ],
+            "unavailable_context_unit_ids": [],
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:999e2f10d1fc01aed6c7f63acd37995d70e0cafa288d0339beb814d6eac43a73"
+          },
+          {
+            "ancestor_heading_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc",
+              "urn:company-wiki:narrative-unit:sha256:8686dd8c32d8ce5377380aa47e4eb88e26044659b2912c7c8d4e8a4e0410f51b",
+              "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+            ],
+            "declared_context_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc",
+              "urn:company-wiki:narrative-unit:sha256:8686dd8c32d8ce5377380aa47e4eb88e26044659b2912c7c8d4e8a4e0410f51b",
+              "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+            ],
+            "forbidden_context_ids_observed": [],
+            "original_present": true,
+            "physical_source_proof_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:999e2f10d1fc01aed6c7f63acd37995d70e0cafa288d0339beb814d6eac43a73",
+              "urn:company-wiki:narrative-unit:sha256:a76c10bdc117e7e2e7856c7aafd20a1c71f1f323315e450d454c3bd0e2327cfa",
+              "urn:company-wiki:narrative-unit:sha256:cfb0fc4c2c63d6249e02c20eb27314230ef447f802b44d91a54aacf7ec665d1f",
+              "urn:company-wiki:narrative-unit:sha256:e27bfb6cb8205196ce15c27b94f657a99b96f308cd7263ccda76abbbe366eb25"
+            ],
+            "section_occurrences": 1,
+            "section_paths": [
+              {
+                "ancestry_path_complete": true,
+                "sections": [
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_numbering",
+                      "source_note_scope",
+                      "spans_pages"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:8686dd8c32d8ce5377380aa47e4eb88e26044659b2912c7c8d4e8a4e0410f51b"
+                    ],
+                    "parent_id": "s115",
+                    "section_id": "s121"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_level"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:10ed4b8e4ad7dd7a62eb4adc3a950ae21a0b133a9cd6406211f73be4db9470fc"
+                    ],
+                    "parent_id": "s102",
+                    "section_id": "s115"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "heading_level"
+                    ],
+                    "heading_unit_ids": [
+                      "urn:company-wiki:narrative-unit:sha256:f0e3587ae9e12919117209a1a25162bb9cc74c0ba24f963ec7837183b19d1056"
+                    ],
+                    "parent_id": "s1",
+                    "section_id": "s102"
+                  },
+                  {
+                    "basis": [
+                      "reading_order",
+                      "no_preceding_heading"
+                    ],
+                    "heading_unit_ids": [],
+                    "parent_id": null,
+                    "section_id": "s1"
+                  }
+                ]
+              }
+            ],
+            "semantic_context_unit_ids": [
+              "urn:company-wiki:narrative-unit:sha256:8686dd8c32d8ce5377380aa47e4eb88e26044659b2912c7c8d4e8a4e0410f51b"
+            ],
+            "source_diagnostics": [
+              {
+                "code": "NEEDS_UPSTREAM_GRANULARITY",
+                "unit_ids": [
+                  "urn:company-wiki:narrative-unit:sha256:1769621d4476e8da84d9c798ca5321c03fa63e3758c5eb09ca7416acf68bc602"
+                ]
+              }
+            ],
+            "unavailable_context_unit_ids": [],
+            "unit_id": "urn:company-wiki:narrative-unit:sha256:1769621d4476e8da84d9c798ca5321c03fa63e3758c5eb09ca7416acf68bc602"
+          }
+        ]
+      },
+      "old_heading_contamination": false,
+      "coverage_caveat": "Raw structure observation is not selected/emitted/model/RF coverage; source scope/actor labels are not world-fact verification."
+    }
+  ],
+  "pair_summary": {
+    "pair_count": 9,
+    "unique_support_sets": 7,
+    "selected_full_pair_ids": [
+      2,
+      3,
+      5
+    ],
+    "not_selected_pair_ids": [
+      1,
+      4,
+      6,
+      7,
+      8,
+      9
+    ],
+    "previous_bad_context_false_count": 9,
+    "new_wrong_heading_selected_views": 3,
+    "positive_local_note_intro_roles_observed": 9,
+    "no_all9_context_acceptance": true
+  },
+  "findings": [
+    {
+      "id": "C-SOURCE-V4-01",
+      "priority": "P2",
+      "status": "NEEDS_ROOT_FIX",
+      "title": "Closed older nested heading remains an ancestor/context of later independent note scopes",
+      "actual_source_locator": "loc:v1/page:34/paragraph:3",
+      "wrong_heading_text": "（4）减持股份的信息披露",
+      "wrong_heading_span_id": "urn:company-wiki:evidence-span:sha256:5c9eca078287e9d60d43988fecc63f132e24c0b6f2b52363519485640bf035bf",
+      "affected_selected_views": [
+        {
+          "context_evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:e4feed5eedab9c1ce0e55f1e0b72b49d29d216e4f0c26755ce7f5149adf596aa",
+            "urn:company-wiki:evidence-span:sha256:5c9eca078287e9d60d43988fecc63f132e24c0b6f2b52363519485640bf035bf",
+            "urn:company-wiki:evidence-span:sha256:25460bb02fc3f58cb2b19d0a1b0ea25b0cf1337cfcde0f0dc600a1b3c98664fb"
+          ],
+          "group_anchor_unit_ids": null,
+          "group_anchors_exposed": false,
+          "group_id": "urn:company-wiki:reading-group:sha256:875274399c0e0c5e570cad9db3f653c06fec2eda465bbe932a4369e59c0755c9",
+          "reading_support_reason": "source_readable_narrative",
+          "reading_support_use": "support",
+          "support_evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:d5337ca1d96571f3e2729d5ee8c21fa62f09a1956044b0670a092ce2647bf0ee"
+          ],
+          "view_id": "group-25/view-0"
+        },
+        {
+          "context_evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:e4feed5eedab9c1ce0e55f1e0b72b49d29d216e4f0c26755ce7f5149adf596aa",
+            "urn:company-wiki:evidence-span:sha256:5c9eca078287e9d60d43988fecc63f132e24c0b6f2b52363519485640bf035bf",
+            "urn:company-wiki:evidence-span:sha256:724ab4f0a718b47020eb713658339e1e35f5aa550b9a60efb296f9086dbbfd26"
+          ],
+          "group_anchor_unit_ids": null,
+          "group_anchors_exposed": false,
+          "group_id": "urn:company-wiki:reading-group:sha256:0c9de3930f8b6efdd7d5e9c6b7ea4a0e65193682ec20958e819bf94bad89ff73",
+          "reading_support_reason": "source_readable_narrative",
+          "reading_support_use": "support",
+          "support_evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:8d72318f2cf7fc7faffdb7b574cda57c3e9993ffb10b6e0583fb672535ad4c39"
+          ],
+          "view_id": "group-28/view-0"
+        },
+        {
+          "context_evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:e4feed5eedab9c1ce0e55f1e0b72b49d29d216e4f0c26755ce7f5149adf596aa",
+            "urn:company-wiki:evidence-span:sha256:5c9eca078287e9d60d43988fecc63f132e24c0b6f2b52363519485640bf035bf",
+            "urn:company-wiki:evidence-span:sha256:724ab4f0a718b47020eb713658339e1e35f5aa550b9a60efb296f9086dbbfd26"
+          ],
+          "group_anchor_unit_ids": null,
+          "group_anchors_exposed": false,
+          "group_id": "urn:company-wiki:reading-group:sha256:8c9ef4c3f52af5dacac3b120ca900de1f4a780a2602e918b80d1b65eaf70c5ed",
+          "reading_support_reason": "source_readable_narrative",
+          "reading_support_use": "support",
+          "support_evidence_ids": [
+            "urn:company-wiki:evidence-span:sha256:ed8a65533462407f6f71827001033f35eb8404b253e427815df619747f50470e"
+          ],
+          "view_id": "group-65/view-0"
+        }
+      ],
+      "affected_pair_ids": [
+        "R4-CONTEXT-PAIR-2",
+        "R4-CONTEXT-PAIR-3",
+        "R4-CONTEXT-PAIR-5"
+      ],
+      "root_cause_evidence": {
+        "file": "src/company_wiki/document_understanding/structure/sections.py",
+        "line_range": "467-485",
+        "behavior": "New source_note_scope restores previously captured stack, then snapshots the remaining stack and opens the new note below its old top. The older nested (4) section persists even though subsequent note markers start independent sibling commitment scopes."
+      },
+      "pdf_visual_evidence": "Original PDF34 has (4), followed by bold same-level 备注6,7,8;35 has bold same-level 备注9,10,11. Therefore the older (4) is not their legitimate parent.",
+      "repair_direction": "Fix source note boundaries and parent-stack/section ownership once; trim expired nested outline ancestors when a new independent note begins, keeping real chapter ancestry. Do not filter strings or specific issuer/note numbers in model/observer."
+    }
+  ],
+  "visual_evidence": {
+    "argv": [
+      "C:/Users/郑曾波/.cache/codex-runtimes/codex-primary-runtime/dependencies/native/poppler/Library/bin/pdftoppm.exe",
+      "-f",
+      "34",
+      "-l",
+      "36",
+      "-r",
+      "100",
+      "-png",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\shared-reading-production\\r1-holdout-20261021\\CN-603259\\wiki\\companies\\药明康德\\raw\\financial_reports\\semi_annual\\d0dba19ede6e35ae3e127a1da91a42f04262e90d14efeb847bdfbff9b6354a5f.pdf",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\h1v-83c60a\\page"
+    ],
+    "returncode": 0,
+    "stdout": "",
+    "stderr": "I/O Error: Couldn't open 'nameToUnicode' file 'C:\\Users\\<d6><a3><d4><f8><b2><a8>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\poppler\\share\\poppler/nameToUnicode\\Bulgarian'\nI/O Error: Couldn't open 'nameToUnicode' file 'C:\\Users\\<d6><a3><d4><f8><b2><a8>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\poppler\\share\\poppler/nameToUnicode\\Greek'\nI/O Error: Couldn't open 'nameToUnicode' file 'C:\\Users\\<d6><a3><d4><f8><b2><a8>\\.cache\\codex-runtimes\\codex-primary-runtime\\dependencies\\native\\poppler\\share\\poppler/nameToUnicode\\Thai'\n",
+    "pages_visually_inspected": [
+      34,
+      35,
+      36
+    ],
+    "rendered_image_sha256": {
+      "page-034.png": "b1a2da6520127f1bc8717e79d257c597b418c15c23a1aff42b7d5f649c70d61e",
+      "page-035.png": "27168ccbbbde43cb4a4aab72e71b192ce93ef393aae1457b2c59fa29dec672a7",
+      "page-036.png": "6f88bb6b450d46db18d571599c35dde5d4cec3750111bd7efd347f7be923b805"
+    },
+    "method": "Poppler pdftoppm only selected existing PDF pages; no source pipeline re-run, no original copy, no PDF edits."
+  },
+  "minimal_reproducer": "Read h1-r7-v4.json. Find span_original_member_index locator loc:v1/page:34/paragraph:3. Its span_id5c9eca...035bf is in context_evidence_ids of group-25/view-0,group-28/view-0,group-65/view-0. Map these support/context spans to raw_text and original PDF34–36: later same-level note9/note10 cannot inherit older(4). No parse/model needed.",
+  "closure": {
+    "all_source_ids_match": true,
+    "groups": 69,
+    "missing_selected_ids": [],
+    "selected_material_replayed_by_handler": true,
+    "views": 69
+  },
+  "acceptance_limits": [
+    "No new source pipeline/model/download/original-copy runs",
+    "Positive raw scope repair is not proof of selected downstream use for6unselected pairs",
+    "No full-source complete:work exhausted, selection partial,source_processing_complete false,layout partial",
+    "Do not compare101native members as if old111 were current; current101 are independently counted",
+    "Do not sign new real summary/cache recovery/RF economic/company adoption"
+  ],
+  "cleanup": {
+    "owned_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\h1v-83c60a",
+    "initial": "absent",
+    "final": "absent",
+    "raw_originals_retained": true,
+    "generated_artifacts": "3selected-page renders and2small review receipts only",
+    "file_count": 5,
+    "reparse_points": 0,
+    "bytes": 1032718
+  }
+}

@@ -263,3 +263,17 @@ CWP67、RF29、ROOT17最终独审PASS；canonical alias安装小缝1RED→3P闭�
 ## R7工程收口与定点部署（2026-11-02）
 
 CWP fee04ba4正常commit75自有文件，source SHA/外来hook保持；首次瞬时index.lock竞争读确认消失后正常retry，未删锁。RF a922305a+499d5ca3与invest a7812888已正常推远端；RF新local12P1.16s/push10.532s，invest push6.362s，完整CI行为41表保留。原84.924s失败/v2旧oracle与独审修复保留。全局canonical定点RF21+invest2、三根69逻辑target SHA相同、6公开config保持、重复0写；三独立进程合成RF→invest/数字篡改反控PASS1.387s，网络/模型/原件0，UUID目录恢复absent。真实H1/摘要/恢复/RF实际采用仍OPEN，接下来核精确CI与单份H1，不把工程签成公司分析完成。
+
+
+## 2026-11-02 — R7正常发布、旧测试迁移与最后扫查
+
+CWP fee04/bd911已推；原精确CI8旧oracle失败保留。6测试迁移独审后正常commit/push be273dba，本地167P54.84s/总62.308s，精确41435269181待结束。RF499d5ca3精确41426044021 success；invest四测试机制修复a789cd07正常push，总4.514s/21P1skip0.98s，远端suite/Lint成功，E2E旧schema3.7/engine4.0.0配对错，ROOT隔离一次0.628s退出2留证/清理absent。不是放宽强验换绿。
+
+最终三分工只读扫查新增PhaseC成功native capture128KiB观察器门禁，已安排所属owner根修，取消固定阈值且不把观察失败翻转付费状态。H1 v4实际0POST/下载/复制、388583B完整保存，12/12重点召回；独审仍发现3已选组父链污染P2，后续源修不得被旧9个负检查/12召回掩盖。全公司/新真实摘要/cache/RF采用仍OPEN。
+
+
+## 2026-11-02 — R7最终集中收口
+
+R7最终遗漏、测试分层/重复清理和定点部署已集中独审并正常发布。四仓最终精确CI全部成功。42逻辑目标/9config/重复0写、3新进程与安装版离线真CLI双跑通过。原43CI失效期望和933P2F历史保留；全Unit不在本地反复跑。下一步按T4-source-note-parent-plan.md先冻结去公司化父链正反例并根修来源树，再单H1原90s/16M/112真实复验；通过后配置新摘要、paid中断/同跨run零重复和同artifact实际RF采用。
+
+文档发布助手首轮把 Git 的 CRLF 警告与路径输出混读，在暂存前停止；已分开 stdout/stderr 后继续正常提交，不改换行策略或绕过 hook。

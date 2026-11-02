@@ -1,0 +1,117 @@
+{
+  "status": "PASS_ENGINEERING_TEST_MIGRATION_SCOPE",
+  "scope": "Independent cross-review of three frozen CWP test migrations only; zero product-source/test edits by reviewer.",
+  "author_report_sha256": "e60bde452ca495447bd015607b44f6a4779a0fd1dd47b656ca890375eb2dc886",
+  "delivery_files_sha256": {
+    "tests/unit/test_narrative_select_handler.py": "d3fd1f77068b921a70aaf85ec764b9e530f5aec7d087e961f305529245af7810",
+    "tests/unit/test_narrative_summarize_handler.py": "b15ba5751fb0976818b498a9e1ea2f381d733b73dfae6b3664eb57a58e65882a",
+    "tests/unit/test_source_facts.py": "8271c70460ef9d7d48bf4eb31ccf5c32c0193f4ec7714d18fc6383c613be6eec"
+  },
+  "product_dependencies_unchanged_sha256": {
+    "src/company_wiki/automation/narrative_contracts.py": "a70704e4450118f1e4afbc1a63b2bf8dac3e3a8de071164f07b09061f39a0044",
+    "src/company_wiki/automation/narrative_select.py": "989b517f35be715b4d863c33315a707d7484293b2e8c78e3413abd7467c513a6",
+    "src/company_wiki/automation/narrative_summarize.py": "cb68422bb0804836b4abc49971559071f82559ea07a27e1726cbd916dd03410b",
+    "src/company_wiki/source_catalog/assertion_service.py": "d795953855d0197f40b4f288bbb5c7460407042289e86e6884e26ad4f43b3480"
+  },
+  "all_frozen_files_unchanged_after": true,
+  "findings": [],
+  "matrix": [
+    {
+      "area": "select",
+      "retired_oracle": "Source body merely looking like a filesystem path is a physical-metadata leak.",
+      "contract": "Source body is immutable quoted data; storage metadata remains pathless. Actual parser/version/coordinates/source membership must replay exactly.",
+      "new_tests": "Two real PDFs preserve C-drive and file:// source text with actual unit.to_evidence_span; three retained negatives distinguish fabricated large/body paths (PARSER_INCOMPLETE) from metadata source_path (INPUT_SCHEMA_INVALID), always zero effects.",
+      "independent": "Unseen file://operator-docs/reference-guide.txt traversed actual parse/select and replay summary; same real parser/coordinates with one changed body suffix was rejected. A genuine span with injected source_path was independently rejected."
+    },
+    {
+      "area": "summarize",
+      "retired_oracle": "A quoted path in source claim text is automatically forbidden.",
+      "contract": "A claim may quote selected source text; claim_id is identity metadata and may not expose a physical path. Source/evidence binding and role checks remain.",
+      "new_tests": "Migration moves the path to claim_id and retains one-call failure/no response_bytes/no effects. Two positive source-path bodies survive selected result and final claim and validate_against(selected).",
+      "independent": "Actual parsed selected material fed the public summary handler with ReplayModel; exact text survived and public validate_against passed. Existing claim_id path negative was executed separately and passed."
+    },
+    {
+      "area": "source_facts",
+      "retired_oracle": "Cumulative valid provenance crossing 64KiB must be refused.",
+      "contract": "Complete JSON field evidence may grow; source-version/locator/value/JSON validity, atomic projection, idempotence and immutable raw remain authoritative.",
+      "new_tests": "Both 40k details and merged patches are compared completely, projected fields checked, repeat unchanged with same assertions, raw unchanged, non-JSON evidence rejected.",
+      "independent": "A different Unicode/English cumulative proof exceeding the old size bound was preserved exactly; repeat added no assertions. Empty locator, mismatched value, non-JSON detail and valid-shaped wrong source reference were refused without changing rows/raw."
+    }
+  ],
+  "tests": {
+    "review": {
+      "junit": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\architecture-quality-20261101\\r7-cwp-ci3-independent\\review.xml",
+      "stats": {
+        "tests": 4.0,
+        "failures": 0.0,
+        "errors": 0.0,
+        "skipped": 0.0,
+        "time": 2.077
+      },
+      "cases": [
+        {
+          "name": "test_real_path_source_is_selected_and_replay_summary_preserves_it",
+          "classname": "tmp.ci3-d12c73.test_review"
+        },
+        {
+          "name": "test_same_real_parser_and_coordinates_do_not_make_forged_body_valid",
+          "classname": "tmp.ci3-d12c73.test_review"
+        },
+        {
+          "name": "test_real_evidence_metadata_path_is_rejected_with_no_effect",
+          "classname": "tmp.ci3-d12c73.test_review"
+        },
+        {
+          "name": "test_unicode_cumulative_provenance_is_exact_idempotent_and_bad_binding_refused",
+          "classname": "tmp.ci3-d12c73.test_review"
+        }
+      ]
+    },
+    "claim": {
+      "junit": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\architecture-quality-20261101\\r7-cwp-ci3-independent\\claim.xml",
+      "stats": {
+        "tests": 1.0,
+        "failures": 0.0,
+        "errors": 0.0,
+        "skipped": 0.0,
+        "time": 1.712
+      },
+      "cases": [
+        {
+          "name": "test_summarize_handler_rejects_model_path_leak_and_keeps_only_hash",
+          "classname": "tests.unit.test_narrative_summarize_handler"
+        }
+      ]
+    }
+  },
+  "runtime_observations": {
+    "pytest_display": "4P/2.13s independent probes; 1P/1.77s original claim-id negative",
+    "nonblocking_warning": "Plugin autoload is disabled; existing pytest.ini asyncio_mode emits a configuration warning, with all selected assertions executed.",
+    "real_model_download_originals": 0,
+    "full_suite_repeated": false
+  },
+  "evidence_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\architecture-quality-20261101\\r7-cwp-ci3-independent",
+  "evidence_sha256": {
+    "before.json": "5e09b031f371f81e771c78fe6e52534bd9a26da742a42f268f128125d30283bb",
+    "claim.log": "10f4c3718ca458f14338028aca32972e67cd45b08a2860739e447f1675c13b66",
+    "claim.xml": "3f01efd65b9b3ff78f52a9a9ab28e04388256b219a505eb9c0361b03c09d77f7",
+    "finalize.py": "8a674e3a790a137fbcb6c31aacae3ea42c269a391fa23f3b4ec4e462606289e1",
+    "review.log": "59d1d089dc9517843e91925378b327c6491f4ba37c4d567f162ec4e9bc462d37",
+    "review.xml": "5314803aec7673f9f85aa4042ffe0bfe7846591b7a3de1226fe68d907e89f667",
+    "test_review.py": "fbf010b2691797c3c360bb6ea4511a32c40f5e05381a01c571a573be3652e8cc",
+    "cleanup.json": "6e6eaea4d2631488b4e7228a699efe13218769d3e3260ed21b193552791f3267"
+  },
+  "cleanup": {
+    "protected_data_touched": false,
+    "owned_tmp": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\ci3-d12c73",
+    "files": 14,
+    "initial_state": "absent before creation",
+    "logical_bytes": 741446.0,
+    "final_state": "absent"
+  },
+  "limits": [
+    "Does not claim full Unit/CI, source H1 context closure, real summary/cache/RF adoption or whole PWF completion.",
+    "Reviewer does not self-review the separate FF hook-oracle delta; ROOT owns its independent acceptance/publication."
+  ],
+  "recommendation": "Accept the three test-only migrations, preserve original RED/intermediate fixture-failure evidence, then publish via normal ROOT commit/push and inspect exact CI."
+}

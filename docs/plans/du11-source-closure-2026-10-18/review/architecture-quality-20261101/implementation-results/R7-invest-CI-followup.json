@@ -1,0 +1,237 @@
+{
+  "schema_version": "r7-invest-ci-followup/1",
+  "status": "AUTHOR_FROZEN_AWAITING_INDEPENDENT_DELTA_REVIEW",
+  "generated_at_utc": "2026-11-02T10:52:29.447046+00:00",
+  "repo": "C:/Users/郑曾波/Projects/invest-skills",
+  "base_head": "a781288893adcd5ef6cc86c739a985b4950e098d",
+  "delivery_files_sha256": {
+    "conftest.py": "ce07bec88d83d8f9171fae8d1be3b765dba7f72a9ce52695955961ccd9eb2e65",
+    "tests_support/revenue_fixtures.py": "dee092715772f3f5515e7aa8c48db7edf44ceb82c2d6024f89b80e1cb6aba766",
+    "invest-core/tests_support/revenue_fixtures.py": "dee092715772f3f5515e7aa8c48db7edf44ceb82c2d6024f89b80e1cb6aba766",
+    "invest-core/tests/test_revenue_fixture_compatibility.py": "63e99a9a0c873545b1dbdcbbaae17e3ebf863469082b1d74e79c71d6d7efb789"
+  },
+  "original_failure": {
+    "remote_ci_run": 41427481853,
+    "local_reproduction": "1F144P1skip12subtests/23.95s",
+    "case": "invest-framework/tests/test_company_orchestrator.py::CompanyOrchestratorTests::test_legacy_revenue_is_explicitly_labeled_not_current_compliant",
+    "root_error": "output (schema3.4,engine4.3.0) is not a documented compatibility pair",
+    "source_log": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\architecture-quality-20261101\\r7-publication\\invest-ci-reproduce.log",
+    "source_log_sha256": "3ae64bf18433c33c2adef0c959011eb495a2294c1872ae0ebcaa24b0b124d972",
+    "source_log_content": ".........................................s....................... [ 44%]\n................F.................................................. [ 90%]\n..............                                                           [100%]\n================================== FAILURES ===================================\n_ CompanyOrchestratorTests.test_legacy_revenue_is_explicitly_labeled_not_current_compliant _\ninvest-core\\scripts\\invest_contracts.py:375: in validate_revenue_forecast\n    report.validate_published_forecast(result, embedded)\n..\\revenue-forecast\\scripts\\revenue_report.py:1464: in validate_published_forecast\n    _validate_forecast_output(result, data)\n..\\revenue-forecast\\scripts\\revenue_report.py:508: in _validate_forecast_output\n    require_validating_engine(\n..\\revenue-forecast\\scripts\\schema_compatibility.py:110: in require_validating_engine\n    require(\n..\\revenue-forecast\\scripts\\contracts\\evidence.py:98: in require\n    raise ForecastInputError(message)\nE   contracts.evidence.ForecastInputError: output (schema 3.4, engine 4.3.0) is not a documented compatibility pair\n\nThe above exception was the direct cause of the following exception:\ninvest-framework\\tests\\test_company_orchestrator.py:385: in test_legacy_revenue_is_explicitly_labeled_not_current_compliant\n    execution = run_company(manifest_for(forecast), forecast)\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ninvest-framework\\scripts\\company_orchestrator.py:161: in run_company\n    validate_revenue_forecast(frozen_forecast)\ninvest-core\\scripts\\invest_contracts.py:379: in validate_revenue_forecast\n    raise InvestmentArtifactError(f\"invalid revenue forecast: {exc}\") from exc\nE   invest_contracts.InvestmentArtifactError: invalid revenue forecast: output (schema 3.4, engine 4.3.0) is not a documented compatibility pair\n=========================== short test summary info ===========================\nFAILED invest-framework/tests/test_company_orchestrator.py::CompanyOrchestratorTests::test_legacy_revenue_is_explicitly_labeled_not_current_compliant\n1 failed, 144 passed, 1 skipped, 12 subtests passed in 23.95s\n"
+  },
+  "version_contract": {
+    "owner": "RF scripts/schema_compatibility.py public SCHEMA_EMIT_ENGINES, backed by CHANGELOG and RF schema compatibility tests",
+    "actual": {
+      "invest_contracts": {
+        "file": "C:\\Users\\郑曾波\\Projects\\invest-skills\\invest-core\\scripts\\invest_contracts.py",
+        "sha256": "50d4126b441dc4fe0734b92382d9155f6cd876ead5d71acbcdee28ac3b57802a"
+      },
+      "revenue_core_file": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\revenue_core.py",
+      "schema_compatibility": {
+        "file": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\schema_compatibility.py",
+        "sha256": "7aa6803b4567fb28d9797a406256a07834d6fe7ddddeaaae9b9f4f3f087ff9e5"
+      },
+      "legacy_schema": "3.4",
+      "documented_emitters": [
+        "3.10.0",
+        "3.5.0",
+        "3.6.0",
+        "3.7.0",
+        "3.8.0",
+        "3.9.0",
+        "4.0.0"
+      ],
+      "selected_legacy_engine": "3.5.0",
+      "default_signer_configured": false,
+      "dotenv_disabled": true
+    },
+    "policy": "Fixed explicit schema3.4 projection selects the earliest numeric documented emitter (3.5.0 now), not current ENGINE_VERSION or untrusted provider version tags. Receipt schema/engine/context/hash are rebuilt to match. It is synthetic read-only compatibility data, never claimed to have executed a historical binary."
+  },
+  "changes": [
+    {
+      "id": "fixture-version-owner",
+      "files": [
+        "tests_support/revenue_fixtures.py",
+        "invest-core/tests_support/revenue_fixtures.py"
+      ],
+      "behavior": "Both builders use RF public documented emit matrix. Deepcopy provider result before retagging and rebuild synthetic matching receipt engine/hash/result hash. The public compatibility/receipt/crypto validators are unchanged."
+    },
+    {
+      "id": "fixture-cache-ownership",
+      "behavior": "Tests prove a shared provider dict is not mutated; later provider tags cannot choose legacy emitter; public cached fixture loads return independent copies and do not recall a changed provider."
+    },
+    {
+      "id": "test-environment",
+      "file": "conftest.py",
+      "behavior": "Before collection, dotenv disabled and default external/host signer removed. Session registry remains owned temporary. Explicit signature tests configure their own verified signer; unsigned data never relabeled host_signed."
+    },
+    {
+      "id": "canonical-under-test",
+      "file": "conftest.py",
+      "behavior": "Preload canonical invest-core/scripts/invest_contracts.py before framework tests append optional installed skill paths; default testing cannot silently select HOME contract code. Test deployment in an explicit fresh child. No runtime permissions, root cleanliness check or installed files changed."
+    }
+  ],
+  "actual_runs": [
+    {
+      "phase": "RED",
+      "log": "red.log",
+      "passed": 4,
+      "failed": 6,
+      "seconds": 2.32,
+      "causes": "Two invalid documented pairs, two provider shared-dict mutations, stale default signer, original framework failure. First framework stack came from installed core via test sys.path priority; canonical and installed were same deployed version but not relied on for final GREEN."
+    },
+    {
+      "phase": "canonical RED",
+      "log": "canonical-red.log",
+      "passed": 0,
+      "failed": 1,
+      "seconds": 0.1,
+      "cause": "Default test environment could not import canonical contract unless an unrelated test had modified sys.path; actual ModuleNotFoundError during test execution."
+    },
+    {
+      "phase": "first implementation",
+      "log": "green.log",
+      "passed": 7,
+      "failed": 3,
+      "seconds": 2.76,
+      "causes": "Two reviewer test-shape mistakes: real receipt has flat attestation_status; one incomplete fixture receipt projection: current formatter writes current engine. Corrected test field and rebuilt only synthetic fixture receipt, not runtime."
+    },
+    {
+      "phase": "final focused GREEN",
+      "log": "green-final.log",
+      "passed": 11,
+      "failed": 0,
+      "seconds": 1.43,
+      "scope": "Both fixture copies, exact old framework failure, real default conftest canonical binding; no special preload launcher now required."
+    },
+    {
+      "phase": "necessary adjacent GREEN",
+      "log": "adjacent.log",
+      "passed": 21,
+      "failed": 0,
+      "skipped": 1,
+      "seconds": 0.76,
+      "scope": "core adapter, R7 adapter controls, three-hop integrity; no144/full module rerun."
+    },
+    {
+      "phase": "static",
+      "log": "ruff.log",
+      "ruff_files": 4,
+      "status": "passed"
+    }
+  ],
+  "commands": {
+    "red": "C:/Miniconda/python.exe -B -X utf8 -m pytest -q invest-core/tests/test_revenue_fixture_compatibility.py invest-framework/tests/test_company_orchestrator.py::CompanyOrchestratorTests::test_legacy_revenue_is_explicitly_labeled_not_current_compliant --tb=short --basetemp <owned>/r",
+    "final_green": "Same direct normal pytest command with --basetemp <owned>/f; canonical binding comes from actual root conftest, not launcher injection.",
+    "adjacent": "C:/Miniconda/python.exe -B -X utf8 -m pytest -q invest-core/tests/test_revenue_adapter.py invest-core/tests/test_revenue_adapter_gate_simplification.py invest-framework/tests/test_forged_cross_repo_chain.py --tb=short --basetemp <owned>/a",
+    "ruff": "C:/Miniconda/python.exe -B -X utf8 -m ruff check conftest.py tests_support/revenue_fixtures.py invest-core/tests_support/revenue_fixtures.py invest-core/tests/test_revenue_fixture_compatibility.py",
+    "launch_env": {
+      "PYTHON_DOTENV_DISABLED": "1",
+      "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1"
+    }
+  },
+  "protected": {
+    "other_previous_published_paths_before": {
+      "invest-core/scripts/invest_contracts.py": "50d4126b441dc4fe0734b92382d9155f6cd876ead5d71acbcdee28ac3b57802a",
+      "invest-core/tests/test_revenue_adapter.py": "95776ff7b4d10f377040507bb0b561872b4df36927fe70bee55aea6ef8b9c6d5",
+      "invest-core/tests/test_revenue_adapter_gate_simplification.py": "793fdc13f68ae15f877c55471ce5b6f0fe2607122ebbb8b2da19a438febba79d",
+      "invest-core/tests/test_fast_git_checks.py": "d467e80a09afd08cd57b023398d78b88dad906d920072cb772a3a73ddce8196b",
+      "invest-framework/tests/test_forged_cross_repo_chain.py": "5ba87f38381eae9fe724f9e5c5ce85b488b4ff7167f8a4be7902678bc6787c6d",
+      "invest-core/references/compliance-contract.md": "adc3564574c3bed6eff5464e70e9c51293977ba38107038774fd2c83ed8a0fa3",
+      "tools/pre_push_gate.py": "082296ddb682c7a09bd7823d8c2365697a8069d4c65c8abf27fe44615659644d",
+      ".githooks/pre-commit": "c155d2d7a6c9dc587640ea9d2974f30fceb77e842bb102410210335cddb91472",
+      ".githooks/pre-push": "6a9d8027bdc72ecebcba9f919dc151ac0d79f2a6db07736c70f3c133e79b0320",
+      "README.md": "c7d1bb902bb3e61b2112ff0a22962d8102257d6585d956b449f1e04f0a4e09ba",
+      "tools/sync_installations.py": "605beabfef388aba0336384c67e394eaa6a18ea83ecf7ddb97f0eb2adf949e2e",
+      "invest-core/tests/test_targeted_install_sync.py": "77281bd82eb2c5642132d204bfe7fe1ac1f8b7932b6dcdf4a85005b66d07413a"
+    },
+    "other_previous_published_paths_after": {
+      "invest-core/scripts/invest_contracts.py": "50d4126b441dc4fe0734b92382d9155f6cd876ead5d71acbcdee28ac3b57802a",
+      "invest-core/tests/test_revenue_adapter.py": "95776ff7b4d10f377040507bb0b561872b4df36927fe70bee55aea6ef8b9c6d5",
+      "invest-core/tests/test_revenue_adapter_gate_simplification.py": "793fdc13f68ae15f877c55471ce5b6f0fe2607122ebbb8b2da19a438febba79d",
+      "invest-core/tests/test_fast_git_checks.py": "d467e80a09afd08cd57b023398d78b88dad906d920072cb772a3a73ddce8196b",
+      "invest-framework/tests/test_forged_cross_repo_chain.py": "5ba87f38381eae9fe724f9e5c5ce85b488b4ff7167f8a4be7902678bc6787c6d",
+      "invest-core/references/compliance-contract.md": "adc3564574c3bed6eff5464e70e9c51293977ba38107038774fd2c83ed8a0fa3",
+      "tools/pre_push_gate.py": "082296ddb682c7a09bd7823d8c2365697a8069d4c65c8abf27fe44615659644d",
+      ".githooks/pre-commit": "c155d2d7a6c9dc587640ea9d2974f30fceb77e842bb102410210335cddb91472",
+      ".githooks/pre-push": "6a9d8027bdc72ecebcba9f919dc151ac0d79f2a6db07736c70f3c133e79b0320",
+      "README.md": "c7d1bb902bb3e61b2112ff0a22962d8102257d6585d956b449f1e04f0a4e09ba",
+      "tools/sync_installations.py": "605beabfef388aba0336384c67e394eaa6a18ea83ecf7ddb97f0eb2adf949e2e",
+      "invest-core/tests/test_targeted_install_sync.py": "77281bd82eb2c5642132d204bfe7fe1ac1f8b7932b6dcdf4a85005b66d07413a"
+    },
+    "other12_unchanged": true,
+    "rf_four_wip_before": {
+      "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\daily_alert.jsonl": "712f9e957990ca0c261cbb91c1d10b0a12606da9d7293e6f2a1581309ce295e9",
+      "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_alert.jsonl": "fc9ec2335b48d42921ca9c14c63363efca3b3096f967733e366f4dd463e4b7ed",
+      "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_manifest.json": "e2e57f28fec7477af06029adcf187468701ab0305024993bfb2953bbd43cc5c0",
+      "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\monthly_manifest.json": "56d630107429cbcb646a951306dd1ea445dd5b3146236f34d0e8df953c103b9a"
+    },
+    "rf_four_wip_after": {
+      "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\daily_alert.jsonl": "712f9e957990ca0c261cbb91c1d10b0a12606da9d7293e6f2a1581309ce295e9",
+      "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_alert.jsonl": "fc9ec2335b48d42921ca9c14c63363efca3b3096f967733e366f4dd463e4b7ed",
+      "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_manifest.json": "e2e57f28fec7477af06029adcf187468701ab0305024993bfb2953bbd43cc5c0",
+      "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\monthly_manifest.json": "56d630107429cbcb646a951306dd1ea445dd5b3146236f34d0e8df953c103b9a"
+    },
+    "rf_four_wip_unchanged": true
+  },
+  "default_expectation_change": "Removed only stale shared test-session claim registered+host_signed and meaningless sys.executable provider calls. Actual publication signatures still require real valid signatures when claimed. Existing core-adapter/three-hop tests needed no changed oracle;21P1skip retained digital/economic tamper refusal.",
+  "raw_evidence": {
+    "red.log": {
+      "sha256": "31b7afeaad4aba288e203fc05bd41ad82f763f95b8d471fec2c551103ecd2f37",
+      "bytes": 7171,
+      "content": "FFFFF....F                                                               [100%]\n================================== FAILURES ===================================\n_________ test_default_fixture_session_does_not_invoke_a_host_signer __________\ninvest-core\\tests\\test_revenue_fixture_compatibility.py:22: in test_default_fixture_session_does_not_invoke_a_host_signer\n    assert not bool(os.environ.get(\"REVENUE_ATTESTATION_PROVIDER\")), \"default test fixtures must be unsigned\"\nE   AssertionError: default test fixtures must be unsigned\nE   assert not True\nE    +  where True = bool('C:\\\\Miniconda\\\\python.exe')\nE    +    where 'C:\\\\Miniconda\\\\python.exe' = get('REVENUE_ATTESTATION_PROVIDER')\nE    +      where get = environ({'ALLUSERSPROFILE': 'C:\\\\ProgramData', 'ANTHROPIC_AUTH_TOKEN': 'c83e931d921b41efb016c95849b65bcb.Ci8njePwM67Fq...ects\\\\company-wiki\\\\tmp\\\\r7iv\\\\r\\\\publication-registry0', 'REVENUE_ATTESTATION_PROVIDER': 'C:\\\\Miniconda\\\\python.exe'}).get\nE    +        where environ({'ALLUSERSPROFILE': 'C:\\\\ProgramData', 'ANTHROPIC_AUTH_TOKEN': 'c83e931d921b41efb016c95849b65bcb.Ci8njePwM67Fq...ects\\\\company-wiki\\\\tmp\\\\r7iv\\\\r\\\\publication-registry0', 'REVENUE_ATTESTATION_PROVIDER': 'C:\\\\Miniconda\\\\python.exe'}) = os.environ\n_ test_legacy_fixture_uses_a_documented_output_pair[tests_support/revenue_fixtures.py] _\ninvest-core\\tests\\test_revenue_fixture_compatibility.py:30: in test_legacy_fixture_uses_a_documented_output_pair\n    assert validating_engine_allowed(result[\"schema_version\"], result[\"engine_version\"], \"output\")\nE   AssertionError: assert False\nE    +  where False = <function validating_engine_allowed at 0x000001730BD51120>('3.4', '4.3.0', 'output')\n_ test_legacy_fixture_uses_a_documented_output_pair[invest-core/tests_support/revenue_fixtures.py] _\ninvest-core\\tests\\test_revenue_fixture_compatibility.py:30: in test_legacy_fixture_uses_a_documented_output_pair\n    assert validating_engine_allowed(result[\"schema_version\"], result[\"engine_version\"], \"output\")\nE   AssertionError: assert False\nE    +  where False = <function validating_engine_allowed at 0x000001730BD51120>('3.4', '4.3.0', 'output')\n_ test_new_provider_tags_cannot_retag_or_mutate_the_legacy_fixture[tests_support/revenue_fixtures.py] _\ninvest-core\\tests\\test_revenue_fixture_compatibility.py:44: in test_new_provider_tags_cannot_retag_or_mutate_the_legacy_fixture\n    assert provider == before, \"legacy projection must own its data, not mutate a provider cache\"\nE   AssertionError: legacy projection must own its data, not mutate a provider cache\nE   assert {'company_nam...million', ...} == {'company_nam...million', ...}\nE     \nE     Omitting 31 identical items, use -vv to show\nE     Differing items:\nE     {'result_sha256': '0f4c05c4c2daa0891ea508b06d02cae7e7eb3b1eeb3b1f6a1795a36cf37a4889'} != {'result_sha256': '1c0c0dcb6c5602fa7f76b1ca2a1739c3e0b8d1e0dc1c9691f32a9c0e733b0e19'}\nE     {'schema_version': '3.4'} != {'schema_version': 'future-provider-schema'}\nE     {'publication_receipt': {'receipt_schema_version': '1.0', 'schema_version': '3.4', 'engine_version': '4.3.0', 'validated_input_sha256': 'f5a8413ec0238fef016fba5ae9d88a58fcba3504bf6ab6d99da7cdbdae0f0b9d', ...}} != {'publication_receipt': {'receipt_schema_version': '1.0'...\nE     \nE     ...Full output truncated (3 lines hidden), use '-vv' to show\n_ test_new_provider_tags_cannot_retag_or_mutate_the_legacy_fixture[invest-core/tests_support/revenue_fixtures.py] _\ninvest-core\\tests\\test_revenue_fixture_compatibility.py:44: in test_new_provider_tags_cannot_retag_or_mutate_the_legacy_fixture\n    assert provider == before, \"legacy projection must own its data, not mutate a provider cache\"\nE   AssertionError: legacy projection must own its data, not mutate a provider cache\nE   assert {'company_nam...million', ...} == {'company_nam...million', ...}\nE     \nE     Omitting 31 identical items, use -vv to show\nE     Differing items:\nE     {'result_sha256': '0f4c05c4c2daa0891ea508b06d02cae7e7eb3b1eeb3b1f6a1795a36cf37a4889'} != {'result_sha256': '1c0c0dcb6c5602fa7f76b1ca2a1739c3e0b8d1e0dc1c9691f32a9c0e733b0e19'}\nE     {'schema_version': '3.4'} != {'schema_version': 'future-provider-schema'}\nE     {'publication_receipt': {'receipt_schema_version': '1.0', 'schema_version': '3.4', 'engine_version': '4.3.0', 'validated_input_sha256': 'f5a8413ec0238fef016fba5ae9d88a58fcba3504bf6ab6d99da7cdbdae0f0b9d', ...}} != {'publication_receipt': {'receipt_schema_version': '1.0'...\nE     \nE     ...Full output truncated (3 lines hidden), use '-vv' to show\n_ CompanyOrchestratorTests.test_legacy_revenue_is_explicitly_labeled_not_current_compliant _\n..\\..\\.agents\\skills\\invest-core\\scripts\\invest_contracts.py:375: in validate_revenue_forecast\n    report.validate_published_forecast(result, embedded)\n..\\revenue-forecast\\scripts\\revenue_report.py:1464: in validate_published_forecast\n    _validate_forecast_output(result, data)\n..\\revenue-forecast\\scripts\\revenue_report.py:508: in _validate_forecast_output\n    require_validating_engine(\n..\\revenue-forecast\\scripts\\schema_compatibility.py:110: in require_validating_engine\n    require(\n..\\revenue-forecast\\scripts\\contracts\\evidence.py:98: in require\n    raise ForecastInputError(message)\nE   contracts.evidence.ForecastInputError: output (schema 3.4, engine 4.3.0) is not a documented compatibility pair\n\nThe above exception was the direct cause of the following exception:\ninvest-framework\\tests\\test_company_orchestrator.py:385: in test_legacy_revenue_is_explicitly_labeled_not_current_compliant\n    execution = run_company(manifest_for(forecast), forecast)\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ninvest-framework\\scripts\\company_orchestrator.py:161: in run_company\n    validate_revenue_forecast(frozen_forecast)\n..\\..\\.agents\\skills\\invest-core\\scripts\\invest_contracts.py:379: in validate_revenue_forecast\n    raise InvestmentArtifactError(f\"invalid revenue forecast: {exc}\") from exc\nE   invest_contracts.InvestmentArtifactError: invalid revenue forecast: output (schema 3.4, engine 4.3.0) is not a documented compatibility pair\n=========================== short test summary info ===========================\nFAILED invest-core/tests/test_revenue_fixture_compatibility.py::test_default_fixture_session_does_not_invoke_a_host_signer\nFAILED invest-core/tests/test_revenue_fixture_compatibility.py::test_legacy_fixture_uses_a_documented_output_pair[tests_support/revenue_fixtures.py]\nFAILED invest-core/tests/test_revenue_fixture_compatibility.py::test_legacy_fixture_uses_a_documented_output_pair[invest-core/tests_support/revenue_fixtures.py]\nFAILED invest-core/tests/test_revenue_fixture_compatibility.py::test_new_provider_tags_cannot_retag_or_mutate_the_legacy_fixture[tests_support/revenue_fixtures.py]\nFAILED invest-core/tests/test_revenue_fixture_compatibility.py::test_new_provider_tags_cannot_retag_or_mutate_the_legacy_fixture[invest-core/tests_support/revenue_fixtures.py]\nFAILED invest-framework/tests/test_company_orchestrator.py::CompanyOrchestratorTests::test_legacy_revenue_is_explicitly_labeled_not_current_compliant\n6 failed, 4 passed in 2.32s\n"
+    },
+    "canonical-red.log": {
+      "sha256": "11d503a19a22fec33664d5fa85e689b03401c67e3370fd4e97b9dcf88b76a9f4",
+      "bytes": 672,
+      "content": "F                                                                        [100%]\n================================== FAILURES ===================================\n___________ test_fixture_suite_loads_the_canonical_contract_module ____________\ninvest-core\\tests\\test_revenue_fixture_compatibility.py:22: in test_fixture_suite_loads_the_canonical_contract_module\n    import invest_contracts\nE   ModuleNotFoundError: No module named 'invest_contracts'\n=========================== short test summary info ===========================\nFAILED invest-core/tests/test_revenue_fixture_compatibility.py::test_fixture_suite_loads_the_canonical_contract_module\n1 failed in 0.10s\n"
+    },
+    "green.log": {
+      "sha256": "16be0b824b2befd6922de54b14feac19215ff1806b11b31f40bf73b25a358ff8",
+      "bytes": 2637,
+      "content": ".FF......F                                                               [100%]\n================================== FAILURES ===================================\n_ test_legacy_fixture_uses_a_documented_output_pair[tests_support/revenue_fixtures.py] _\ninvest-core\\tests\\test_revenue_fixture_compatibility.py:33: in test_legacy_fixture_uses_a_documented_output_pair\n    assert result[\"publication_receipt\"][\"attestation\"][\"status\"] == \"unattested\"\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   KeyError: 'attestation'\n_ test_legacy_fixture_uses_a_documented_output_pair[invest-core/tests_support/revenue_fixtures.py] _\ninvest-core\\tests\\test_revenue_fixture_compatibility.py:33: in test_legacy_fixture_uses_a_documented_output_pair\n    assert result[\"publication_receipt\"][\"attestation\"][\"status\"] == \"unattested\"\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   KeyError: 'attestation'\n_ CompanyOrchestratorTests.test_legacy_revenue_is_explicitly_labeled_not_current_compliant _\ninvest-framework\\tests\\test_company_orchestrator.py:385: in test_legacy_revenue_is_explicitly_labeled_not_current_compliant\n    execution = run_company(manifest_for(forecast), forecast)\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ninvest-framework\\scripts\\company_orchestrator.py:178: in run_company\n    financial = run_financial_model(frozen_forecast, financial_model)\n                ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n..\\..\\.agents\\skills\\invest-financials\\scripts\\financial_model.py:328: in run_financial_model\n    adapter = adapt_revenue(forecast, scope[\"type\"], scope.get(\"name\") if scope[\"type\"] == \"segment\" else None)\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ninvest-core\\scripts\\invest_contracts.py:1064: in adapt_revenue\n    _fail(\ninvest-core\\scripts\\invest_contracts.py:115: in _fail\n    raise InvestmentArtifactError(message)\nE   invest_contracts.InvestmentArtifactError: publication_receipt engine_version mismatch\n=========================== short test summary info ===========================\nFAILED invest-core/tests/test_revenue_fixture_compatibility.py::test_legacy_fixture_uses_a_documented_output_pair[tests_support/revenue_fixtures.py]\nFAILED invest-core/tests/test_revenue_fixture_compatibility.py::test_legacy_fixture_uses_a_documented_output_pair[invest-core/tests_support/revenue_fixtures.py]\nFAILED invest-framework/tests/test_company_orchestrator.py::CompanyOrchestratorTests::test_legacy_revenue_is_explicitly_labeled_not_current_compliant\n3 failed, 7 passed in 2.76s\n"
+    },
+    "green-final.log": {
+      "sha256": "3104e29809a939ee5d68f4a2a3405244074828a1513ceeae50404dd240716646",
+      "bytes": 101,
+      "content": "...........                                                              [100%]\n11 passed in 1.43s\n"
+    },
+    "adjacent.log": {
+      "sha256": "c7c910f8d18b624d2f73d2c1298d7494e5e60a0c8b4403fe06f5e54ca0699103",
+      "bytes": 112,
+      "content": "........s.............                                                   [100%]\n21 passed, 1 skipped in 0.76s\n"
+    },
+    "ruff.log": {
+      "sha256": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+      "bytes": 20,
+      "content": "All checks passed!\n"
+    },
+    "runtime-probe.json": {
+      "sha256": "258b09280fee3bfea8c729c0a6482185f48173610b6b971bda4cb9cd48757341",
+      "bytes": 805,
+      "content": "{\n  \"invest_contracts\": {\n    \"file\": \"C:\\\\Users\\\\郑曾波\\\\Projects\\\\invest-skills\\\\invest-core\\\\scripts\\\\invest_contracts.py\",\n    \"sha256\": \"50d4126b441dc4fe0734b92382d9155f6cd876ead5d71acbcdee28ac3b57802a\"\n  },\n  \"revenue_core_file\": \"C:\\\\Users\\\\郑曾波\\\\Projects\\\\revenue-forecast\\\\scripts\\\\revenue_core.py\",\n  \"schema_compatibility\": {\n    \"file\": \"C:\\\\Users\\\\郑曾波\\\\Projects\\\\revenue-forecast\\\\scripts\\\\schema_compatibility.py\",\n    \"sha256\": \"7aa6803b4567fb28d9797a406256a07834d6fe7ddddeaaae9b9f4f3f087ff9e5\"\n  },\n  \"legacy_schema\": \"3.4\",\n  \"documented_emitters\": [\n    \"3.10.0\",\n    \"3.5.0\",\n    \"3.6.0\",\n    \"3.7.0\",\n    \"3.8.0\",\n    \"3.9.0\",\n    \"4.0.0\"\n  ],\n  \"selected_legacy_engine\": \"3.5.0\",\n  \"default_signer_configured\": false,\n  \"dotenv_disabled\": true\n}\n"
+    }
+  },
+  "git_status": " M conftest.py\n M invest-core/tests_support/revenue_fixtures.py\n M tests_support/revenue_fixtures.py\n?? invest-core/tests/test_revenue_fixture_compatibility.py\n",
+  "limits": [
+    "No change to canonical invest_contracts/runtime14/production config/crypto rules/RF compatibility matrix",
+    "No model, acquisition, real source or provider credential read",
+    "No global skill copy or targeted install (fixtures/test environment only)",
+    "No commit/push/merge/index writes by author; ROOT owns publication",
+    "No complete144 or all ten module rerun/remote CI passed claim",
+    "Canonical core contract preload is test environment selection, not a new production permission. Other independent deployed-skill scenarios require explicit fresh child context."
+  ],
+  "cleanup": {
+    "root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r7iv",
+    "initially_absent": true,
+    "containment_parent": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp",
+    "containment_verified": true,
+    "reparse_points": 0,
+    "files_before": 13,
+    "bytes_before": 67769.0,
+    "logs_preserved_in_report": true,
+    "deletion": "Remove-Item -LiteralPath exact_owned_root -Recurse -Force",
+    "status": "restored_absent",
+    "exists_after": false
+  }
+}

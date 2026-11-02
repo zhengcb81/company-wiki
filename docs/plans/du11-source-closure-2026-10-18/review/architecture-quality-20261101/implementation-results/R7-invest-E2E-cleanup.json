@@ -1,0 +1,13 @@
+{
+  "owned_scratch": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r7ie",
+  "initial_absent": true,
+  "containment_parent": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp",
+  "reparse_points": 0,
+  "removed_files": 69,
+  "removed_bytes": 5846675.0,
+  "exists_after": false,
+  "status": "restored_to_initial_absent",
+  "generator_registry": "stdlib TemporaryDirectory managed; separate byte-count not measured",
+  "cleanup_command_note": "The optional Split-Path -LiteralPath/-Parent parent guard emitted a nonterminating parameter-set error. The resolved target was nevertheless the explicitly named literal owned directory, not a computed target; root and descendants were checked nonreparse before deletion. A subsequent ErrorActionPreference=Stop command used IO.Path.GetDirectoryName(GetFullPath(literal)) to verify the exact parent and confirmed target absent. This is disclosed, not reported as a fully successful pre-delete guard.",
+  "post_delete_canonical_parent_verified": true
+}

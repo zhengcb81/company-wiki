@@ -1,0 +1,81 @@
+{
+  "schema_version": "independent-review/1",
+  "status": "PASS_ENGINEERING_SELECTED_SCOPE",
+  "timestamp_utc": "2026-11-02T12:23:21.269407+00:00",
+  "author_report_sha256": "e0d6df1c0ff9fd78472ec0852738636e631059dd0d3ea117a5fac412787d498f",
+  "delivery_files_sha256": {
+    "tools/pre_push_gate.py": "e8801268ee4939f4dd987fa758c73aadec8d50e0b0a3e11ccc299051ab63d2cb",
+    "tests/unit/test_pre_push_gate.py": "11db539b6098fe3e9bccdccbc75856403075269c3b7a1aa411e5e8e8b186cec6"
+  },
+  "files_after_sha256": {
+    "tools/pre_push_gate.py": "e8801268ee4939f4dd987fa758c73aadec8d50e0b0a3e11ccc299051ab63d2cb",
+    "tests/unit/test_pre_push_gate.py": "11db539b6098fe3e9bccdccbc75856403075269c3b7a1aa411e5e8e8b186cec6"
+  },
+  "both_frozen_bytes_unchanged": true,
+  "head_at_review": "ef3d92a26fce661ab6d6c047f7a01c223d426344",
+  "src_core_diff_from_ef3d92a2": [],
+  "foreign_hook_before": {
+    "sha256": "f2067d1a0a5b1be7de8690e06fe77aa9c523c19d6f6ff2eb625e9cd6de1fc7a7",
+    "mode": 438
+  },
+  "foreign_hook_after": {
+    "sha256": "f2067d1a0a5b1be7de8690e06fe77aa9c523c19d6f6ff2eb625e9cd6de1fc7a7",
+    "mode": 438
+  },
+  "findings": [],
+  "scope": "CWP daily2files only; no self-review of FF5 or PhaseC author work",
+  "static_conclusion": [
+    "OnlynewDAILY_PUSH_CASES9existingnode tuple anddailyselectName change inproductiontool;FAST35/CI22/fullmanualpoliciesunchanged",
+    "Each9nodebelongsprior35andisexplicitnode, notfile/ASTimpactexpansion;sourceSHA/stale reuse-beforefee/single owner buffer/typed receipt retained",
+    "Actual execution leaves _run,_run_pytest_gate,_dispatch_gate ASTidentical toHEAD; sameexits/timeouts/cleanup/logtail behavior",
+    "Sourcecoreef3d92a2 hasno srcdiff; nonownedhookbytes/modeunchanged; no install/deployment/manualreceipt introduced"
+  ],
+  "tests": {
+    "independent_cases": 6,
+    "result": "6P0.21s",
+    "actual_checks": [
+      "unknown/config/code ranges eachdispatch9sameexactnodes once",
+      "exit41still41/noGREEN/singlechild",
+      "provendocs0 startsnotests",
+      "HEAD exactCURRENT/FASTinventory unchanged;CI22includesallpreviousnonUnit; leafrunnerASTunchanged"
+    ]
+  },
+  "author_actual_cli_evidence": {
+    "not_reexecuted": true,
+    "result": "17P10.94s;total18.444s asauthorreceipt",
+    "meaning": "dailyselectedscope only, notfullCI",
+    "original_red_history": "35targets unexpectedlyselected -> new9oracle1RED retained"
+  },
+  "evidence": {
+    "test_review.py": {
+      "sha256": "20a08dd58c86de3d95959374f0431161be09a88a7d86d1e1a873dd6ae0781a88",
+      "bytes": 3476,
+      "text": "\"\"\"Independent scheduling-only review of the CWP daily feedback delta.\"\"\"\nimport ast\nfrom io import StringIO\nfrom pathlib import Path\nimport subprocess\n\nimport pytest\n\nfrom tools import pre_push_gate as gate\n\n\n@pytest.mark.parametrize('changes', [None, ['config/another-owner.yaml'], ['src/company_wiki/unseen.py']])\ndef test_unknown_config_and_code_ranges_run_same_fixed_nodes_once(monkeypatch, changes):\n    calls = []\n    monkeypatch.setattr(gate, 'changed_paths', lambda *args: changes)\n    monkeypatch.setattr(gate.sys, 'stdin', StringIO(''))\n    monkeypatch.setattr(gate, '_dispatch_gate', lambda cmd, *args: calls.append(cmd) or 0)\n    assert gate.main(['--push-checks']) == 0\n    assert len(calls) == 1\n    targets = [x for x in calls[0] if x.startswith('tests/')]\n    assert targets == list(gate.DAILY_PUSH_CASES)\n    assert len(targets) == len(set(targets)) == 9\n    assert set(targets) <= set(gate.FAST_CONTRACT_CASES)\n    assert all('::' in x for x in targets)\n\n\ndef test_daily_failure_preserves_exact_nonzero_and_single_dispatch(monkeypatch, capsys):\n    calls = []\n    monkeypatch.setattr(gate, 'changed_paths', lambda *args: None)\n    monkeypatch.setattr(gate.sys, 'stdin', StringIO(''))\n    monkeypatch.setattr(gate, '_dispatch_gate', lambda cmd, *args: calls.append(cmd) or 41)\n    assert gate.main(['--push-checks']) == 41\n    assert len(calls) == 1\n    assert 'fast gate GREEN' not in capsys.readouterr().out\n\n\ndef test_proven_docs_range_runs_no_test_process(monkeypatch):\n    monkeypatch.setattr(gate, 'changed_paths', lambda *args: ['docs/plans/independent-status.md'])\n    monkeypatch.setattr(gate.sys, 'stdin', StringIO(''))\n    monkeypatch.setattr(gate, '_dispatch_gate', lambda *args: pytest.fail('docs launched runtime'))\n    assert gate.main(['--push-checks']) == 0\n\n\ndef test_ci_inventory_and_leaf_timeout_execution_are_identical_to_head(monkeypatch):\n    root = Path(gate.__file__).resolve().parents[1]\n    prior = subprocess.check_output(['git', 'show', 'HEAD:tools/pre_push_gate.py'], cwd=root, text=True)\n    previous_tree = ast.parse(prior)\n    current_tree = ast.parse(Path(gate.__file__).read_text(encoding='utf-8'))\n    def inventory(tree):\n        env = {}\n        for node in tree.body:\n            if (isinstance(node, ast.Assign) and len(node.targets) == 1\n                    and isinstance(node.targets[0], ast.Name)\n                    and node.targets[0].id in {'CURRENT_CI_REGRESSION_CASES', 'FAST_CONTRACT_CASES'}):\n                values = []\n                for item in node.value.elts:\n                    values.extend(env[item.value.id] if isinstance(item, ast.Starred) else [item.value])\n                env[node.targets[0].id] = values\n        return env\n    assert inventory(previous_tree) == inventory(current_tree)\n    assert len(gate.FAST_CONTRACT_CASES) == 35\n    for name in ('_run', '_run_pytest_gate', '_dispatch_gate'):\n        old = next(n for n in previous_tree.body if isinstance(n, ast.FunctionDef) and n.name == name)\n        new = next(n for n in current_tree.body if isinstance(n, ast.FunctionDef) and n.name == name)\n        assert ast.dump(old) == ast.dump(new)\n    calls = []\n    monkeypatch.setattr(gate, '_dispatch_gate', lambda cmd, *args: calls.append(cmd) or 0)\n    assert gate.main(['--fast-contracts-only']) == 0\n    actual = {x for x in calls[0] if x.startswith('tests/')}\n    assert actual == {x for x in gate.FAST_CONTRACT_CASES if not x.startswith('tests/unit/')}\n    assert len(actual) == 22\n"
+    },
+    "results.xml": {
+      "sha256": "e29eee8fc88797bd1333329152eaca610f99814f11427b9ac4f5095407be884d",
+      "bytes": 1063,
+      "text": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"0\" skipped=\"0\" tests=\"6\" time=\"0.154\" timestamp=\"2026-11-02T12:22:11.044149+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tmp.cd7-b968c2.test_review\" name=\"test_unknown_config_and_code_ranges_run_same_fixed_nodes_once[None]\" time=\"0.005\" /><testcase classname=\"tmp.cd7-b968c2.test_review\" name=\"test_unknown_config_and_code_ranges_run_same_fixed_nodes_once[changes1]\" time=\"0.002\" /><testcase classname=\"tmp.cd7-b968c2.test_review\" name=\"test_unknown_config_and_code_ranges_run_same_fixed_nodes_once[changes2]\" time=\"0.001\" /><testcase classname=\"tmp.cd7-b968c2.test_review\" name=\"test_daily_failure_preserves_exact_nonzero_and_single_dispatch\" time=\"0.002\" /><testcase classname=\"tmp.cd7-b968c2.test_review\" name=\"test_proven_docs_range_runs_no_test_process\" time=\"0.001\" /><testcase classname=\"tmp.cd7-b968c2.test_review\" name=\"test_ci_inventory_and_leaf_timeout_execution_are_identical_to_head\" time=\"0.063\" /></testsuite></testsuites>"
+    },
+    "results.log": {
+      "sha256": "a5af5c2f583fb1dbb25a14bb8074800a58cf2bbdecfc6271a2ac1a0fa3ca067f",
+      "bytes": 920,
+      "text": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\cd7-b968c2\\\\b\", \"requested_basetemp_len\": 51, \"cwd_len\": 34, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\r\n============================= test session starts =============================\r\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\r\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\r\nconfigfile: pytest.ini\r\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\r\ncollected 6 items\r\n\r\ntmp\\cd7-b968c2\\test_review.py ......                                     [100%]\r\n\r\n- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\cd7-b968c2\\results.xml -\r\n============================== 6 passed in 0.21s ==============================\r\n"
+    }
+  },
+  "cleanup": {
+    "owned_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\cd7-b968c2",
+    "initial": "absent",
+    "final": "absent",
+    "originals_model_fees_downloads": 0,
+    "src_tests_git_mainpwf_written": false,
+    "file_count": 4,
+    "bytes": 6016,
+    "reparse_points": 0
+  },
+  "limits": [
+    "No17/167/fullCI repeat",
+    "Onlyschedule/execution-policyengineeringPASS",
+    "No H1/summary/cache/RFcompanyeconomic acceptance"
+  ]
+}

@@ -1,12 +1,12 @@
-**2026-11-02：R6/T3工程已独审、完整候选CI通过并正常推master fa8ef38e；R7工程已独审/提交/定点部署，当前收远端CI与新版真实C；全公司循环OPEN。**
+**2026-11-02：R7全部已知过度门禁与重复工程测试整改已独审/提交推送；精确CI见CURRENT_STATUS。下一步T4来源父链，新真实C/公司循环仍OPEN。**
 
 # 主线剩余实施计划
 
-**当前：R6与T3工程均已独审/完整CI通过，fa8ef38e已正常推master且精确主线CI41408572602成功。R7已确认的过度门禁正在优先根修，真实C和全公司循环继续，不签总目标完成。** 唯一状态看[CURRENT_STATUS](CURRENT_STATUS.md)/json，恢复看[HANDOFF](HANDOFF.md)。
+**当前：R7工程集中收口已正常发布；不恢复旧表示许可或单一daily/CI inventory。当前唯一入口CURRENT_STATUS，下一步T4及新真实C，不签总目标完成。**
 
 ## Next Step
 
-RF499d5ca3与invest a7812888已正常push成功；CWP fee04ba4源码已正常commit，完成当前PWF/docs bundle并正常push，核三仓精确CI。R7核心/工具/ROOT/RF及6文件发布跟进均独审通过，全局定点部署/重复0写/三新进程已过。CI后单例H1（90s/16M/112）再真实摘要/cache/RF采用，不扩包、不在本地重690/325/211整组，原件/配置/四WIP保持。
+按T4-source-note-parent-plan.md先冻结去公司化父链正反例并根修来源树，再单H1原90s/16M/112真实复验；通过后配置新摘要、paid中断/同跨run零重复和同artifact实际RF采用。
 
 ## P0 — 已完成的CI根修
 
@@ -19,9 +19,9 @@ compact-frontier/lookahead、消费者和Windows嵌套夹具已根修、独审�
 - 先在原P3来源修复中合并Q01陌生业务准入、Q02阅读recipe/缓存指纹，沿原R4 source owner根修，不加公司词库/额度。
 - 存储查询、预算归属、CAS/legacy工具、跨层合同和边界测试按细则B；StockWiki输出流限额归其transport，CWP不跨层接管实现。
 - 旧显式dry-shadow两轮/迁移CLI和无效helper清理，检查聚合到事实owner；必要身份/原文字节/as-of/预算/恢复仍保留。
-- 仅大节点集中工程独审、受影响测试及真实E2E；不新增逐项许可。Q01–Q14工程10767b86已独审/完整CI通过并本地主线，Q09在StockWiki本地主线、Q11接收实读SHA经边界论证保留；完整CI63F/22F/70F历史不改。原70期待保留，R5纠正资料可用与现实核实混用；下一步结构T3和真实C验收，不重跑本地整仓。原件/生产配置未改。
+- 仅大节点集中工程独审、受影响测试及真实E2E；不新增逐项许可。Q01–Q14工程10767b86已独审/完整CI通过并本地主线，Q09在StockWiki本地主线、Q11接收实读SHA经边界论证保留；完整CI63F/22F/70F历史不改。原70期待保留，R5纠正资料可用与现实核实混用；旧结构T3已并线；当前按T4修复真实来源父链，再做新版真实C验收，不重跑本地整仓。原件/生产配置未改。
 
-## P1/P2 — 已完成的有界摘要与真实采用
+## P1/P2 — 历史有界摘要与采用已过，新runtime真实C仍OPEN
 
 - 当前华利15完整卡/12业务原子、Berkshire73卡/10原子、各一次配置POST，activation/同跨run恢复已独审。Berkshire15余项与全文partial保持，不额外切碎support/context或提高额度。
 - 华利新artifact真正进入used参数/公式及native报告/snapshot，v6独立45项验收；不是完整公司买方研究。原source-only/advisory排名能力边界不改写成生成式全文概述。
@@ -32,7 +32,7 @@ compact-frontier/lookahead、消费者和Windows嵌套夹具已根修、独审�
 
 R4主/五压力/报告/snapshot和四审已封存。73检查、6P2，无新增已证实P0/P1；每项具体证据、根因确认程度、TDD命令/接口/失败清理/兼容与恢复在AUDIT同run/remediation/r1-remediation-04/implementation.md。它续接W08–W12，不是新外包卡。
 
-1. **来源层优先**：定位并以去公司化正反例冻结三经营unit遗漏与跨备注/主体context污染。保留已验证D&M/p14/519字成员；不以增加名额、公司词库或改原文解决。T3具体实施按[结构细则](review/architecture-quality-20261101/implementation-results/R6-T3-implementation-plan.md)，先TERM/NOTE/PHYS RED，仅两个大节点独审/真实复验，不新增小签收或普遍bbox要求。
+1. **来源层优先**：旧T3与R7工程均已并线；实际H1独审仍发现peer note继承旧局部子标题。按[T4细则](review/architecture-quality-20261101/implementation-results/T4-source-note-parent-plan.md)冻结泛化正反例、同层根修和单例真实复验；保十二重点/原生成员，不加公司词库、额度或普遍bbox要求。
 2. **共享语义合同**：完成ghost-formula kind与formula/input互斥预检，validate/lint薄复用；完成同口径signed temporal complement，保留alias/origin/provenance、重叠/空隙/跨期/口径反控；inverseYoY使用显式比较关系，禁止放宽日期冒通过。
 3. **记录与技术质量**：新attempt从当前scope构建真实路径，冻结R4不改。复用测试入口、在付费前验证observer必需技术字段；审计报告已完成不重跑全部。已有CAS/日志重复观察只在原质量责任内处理，不迁移旧封存、建新任务库或造物理节省数字。
 4. **有界真实复验**：在隔离新attempt仅复验受影响链；原件经CWP只读复用，缺资料才用FF正确provider；源材料改变才按配置预算准备新摘要，真实paid中断/same/cross恢复及8卡actual RF采用/主/压力/报告/snapshot要有新证据。失败保留、未知账不退。测试新增文件以初始清单/原件SHA恢复，不能删初始已有或他人文件。

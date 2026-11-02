@@ -1,0 +1,144 @@
+{
+  "schema_version": "r7-invest-ci-followup-independent/1",
+  "status": "PASS_BOUNDED_DELTA_REVIEW",
+  "reviewer": "rectify_readability (independent of author)",
+  "timestamp_utc": "2026-11-02T11:00:26.334407+00:00",
+  "author_report_sha256": "bd9346d8cf8ba3bbabb271df1cd7d2f9aea0be0f3a6b3b9653bc48161ab4e483",
+  "delivery_files_sha256": {
+    "conftest.py": "ce07bec88d83d8f9171fae8d1be3b765dba7f72a9ce52695955961ccd9eb2e65",
+    "tests_support/revenue_fixtures.py": "dee092715772f3f5515e7aa8c48db7edf44ceb82c2d6024f89b80e1cb6aba766",
+    "invest-core/tests_support/revenue_fixtures.py": "dee092715772f3f5515e7aa8c48db7edf44ceb82c2d6024f89b80e1cb6aba766",
+    "invest-core/tests/test_revenue_fixture_compatibility.py": "63e99a9a0c873545b1dbdcbbaae17e3ebf863469082b1d74e79c71d6d7efb789"
+  },
+  "before_all4_match": true,
+  "after_delivery_files_sha256": {
+    "conftest.py": "ce07bec88d83d8f9171fae8d1be3b765dba7f72a9ce52695955961ccd9eb2e65",
+    "tests_support/revenue_fixtures.py": "dee092715772f3f5515e7aa8c48db7edf44ceb82c2d6024f89b80e1cb6aba766",
+    "invest-core/tests_support/revenue_fixtures.py": "dee092715772f3f5515e7aa8c48db7edf44ceb82c2d6024f89b80e1cb6aba766",
+    "invest-core/tests/test_revenue_fixture_compatibility.py": "63e99a9a0c873545b1dbdcbbaae17e3ebf863469082b1d74e79c71d6d7efb789"
+  },
+  "protected12_expected": {
+    "invest-core/scripts/invest_contracts.py": "50d4126b441dc4fe0734b92382d9155f6cd876ead5d71acbcdee28ac3b57802a",
+    "invest-core/tests/test_revenue_adapter.py": "95776ff7b4d10f377040507bb0b561872b4df36927fe70bee55aea6ef8b9c6d5",
+    "invest-core/tests/test_revenue_adapter_gate_simplification.py": "793fdc13f68ae15f877c55471ce5b6f0fe2607122ebbb8b2da19a438febba79d",
+    "invest-core/tests/test_fast_git_checks.py": "d467e80a09afd08cd57b023398d78b88dad906d920072cb772a3a73ddce8196b",
+    "invest-framework/tests/test_forged_cross_repo_chain.py": "5ba87f38381eae9fe724f9e5c5ce85b488b4ff7167f8a4be7902678bc6787c6d",
+    "invest-core/references/compliance-contract.md": "adc3564574c3bed6eff5464e70e9c51293977ba38107038774fd2c83ed8a0fa3",
+    "tools/pre_push_gate.py": "082296ddb682c7a09bd7823d8c2365697a8069d4c65c8abf27fe44615659644d",
+    ".githooks/pre-commit": "c155d2d7a6c9dc587640ea9d2974f30fceb77e842bb102410210335cddb91472",
+    ".githooks/pre-push": "6a9d8027bdc72ecebcba9f919dc151ac0d79f2a6db07736c70f3c133e79b0320",
+    "README.md": "c7d1bb902bb3e61b2112ff0a22962d8102257d6585d956b449f1e04f0a4e09ba",
+    "tools/sync_installations.py": "605beabfef388aba0336384c67e394eaa6a18ea83ecf7ddb97f0eb2adf949e2e",
+    "invest-core/tests/test_targeted_install_sync.py": "77281bd82eb2c5642132d204bfe7fe1ac1f8b7932b6dcdf4a85005b66d07413a"
+  },
+  "protected12_after": {
+    "invest-core/scripts/invest_contracts.py": "50d4126b441dc4fe0734b92382d9155f6cd876ead5d71acbcdee28ac3b57802a",
+    "invest-core/tests/test_revenue_adapter.py": "95776ff7b4d10f377040507bb0b561872b4df36927fe70bee55aea6ef8b9c6d5",
+    "invest-core/tests/test_revenue_adapter_gate_simplification.py": "793fdc13f68ae15f877c55471ce5b6f0fe2607122ebbb8b2da19a438febba79d",
+    "invest-core/tests/test_fast_git_checks.py": "d467e80a09afd08cd57b023398d78b88dad906d920072cb772a3a73ddce8196b",
+    "invest-framework/tests/test_forged_cross_repo_chain.py": "5ba87f38381eae9fe724f9e5c5ce85b488b4ff7167f8a4be7902678bc6787c6d",
+    "invest-core/references/compliance-contract.md": "adc3564574c3bed6eff5464e70e9c51293977ba38107038774fd2c83ed8a0fa3",
+    "tools/pre_push_gate.py": "082296ddb682c7a09bd7823d8c2365697a8069d4c65c8abf27fe44615659644d",
+    ".githooks/pre-commit": "c155d2d7a6c9dc587640ea9d2974f30fceb77e842bb102410210335cddb91472",
+    ".githooks/pre-push": "6a9d8027bdc72ecebcba9f919dc151ac0d79f2a6db07736c70f3c133e79b0320",
+    "README.md": "c7d1bb902bb3e61b2112ff0a22962d8102257d6585d956b449f1e04f0a4e09ba",
+    "tools/sync_installations.py": "605beabfef388aba0336384c67e394eaa6a18ea83ecf7ddb97f0eb2adf949e2e",
+    "invest-core/tests/test_targeted_install_sync.py": "77281bd82eb2c5642132d204bfe7fe1ac1f8b7932b6dcdf4a85005b66d07413a"
+  },
+  "protected12_unchanged": true,
+  "rf_four_wip_before": {
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\daily_alert.jsonl": "712f9e957990ca0c261cbb91c1d10b0a12606da9d7293e6f2a1581309ce295e9",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_alert.jsonl": "fc9ec2335b48d42921ca9c14c63363efca3b3096f967733e366f4dd463e4b7ed",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_manifest.json": "e2e57f28fec7477af06029adcf187468701ab0305024993bfb2953bbd43cc5c0",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\monthly_manifest.json": "56d630107429cbcb646a951306dd1ea445dd5b3146236f34d0e8df953c103b9a"
+  },
+  "rf_four_wip_after": {
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\daily_alert.jsonl": "712f9e957990ca0c261cbb91c1d10b0a12606da9d7293e6f2a1581309ce295e9",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_alert.jsonl": "fc9ec2335b48d42921ca9c14c63363efca3b3096f967733e366f4dd463e4b7ed",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_manifest.json": "e2e57f28fec7477af06029adcf187468701ab0305024993bfb2953bbd43cc5c0",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\monthly_manifest.json": "56d630107429cbcb646a951306dd1ea445dd5b3146236f34d0e8df953c103b9a"
+  },
+  "rf_wip_unchanged": true,
+  "canonical_invest_contracts_sha256": "50d4126b441dc4fe0734b92382d9155f6cd876ead5d71acbcdee28ac3b57802a",
+  "schema_compatibility_sha256": "7aa6803b4567fb28d9797a406256a07834d6fe7ddddeaaae9b9f4f3f087ff9e5",
+  "explicit_installed_import_path": "C:\\Users\\郑曾波\\.agents\\skills\\invest-core\\scripts\\invest_contracts.py",
+  "explicit_installed_file_sha256": "50d4126b441dc4fe0734b92382d9155f6cd876ead5d71acbcdee28ac3b57802a",
+  "independent_test_source": "\"\"\"Independent synthetic legacy-fixture and canonical-binding controls.\"\"\"\nfrom copy import deepcopy\nimport importlib.util\nimport json\nimport os\nfrom pathlib import Path\nimport subprocess\nimport sys\n\nimport pytest\n\nINV = Path('C:/Users/郑曾波/Projects/invest-skills')\n\n\ndef load(name, path):\n    spec = importlib.util.spec_from_file_location(name, path)\n    m = importlib.util.module_from_spec(spec)\n    spec.loader.exec_module(m)\n    return m\n\n\nload('independent_invest_conftest', INV / 'conftest.py')\nimport invest_contracts\n\n\n@pytest.fixture(autouse=True)\ndef own_environment(monkeypatch, tmp_path):\n    monkeypatch.setenv('REVENUE_PUBLICATION_REGISTRY', str(tmp_path / 'registry'))\n    monkeypatch.delenv('REVENUE_ATTESTATION_PROVIDER', raising=False)\n    monkeypatch.setenv('PYTHON_DOTENV_DISABLED', '1')\n\n\n@pytest.mark.parametrize('relative', ['tests_support/revenue_fixtures.py',\n                                     'invest-core/tests_support/revenue_fixtures.py'])\ndef test_provider_and_formatter_future_tags_do_not_change_documented_legacy_projection(monkeypatch, relative):\n    factory = load('independent_fixture_' + relative.replace('/', '_'), INV / relative)\n    from schema_compatibility import SCHEMA_EMIT_ENGINES\n    from revenue_report import validate_forecast_output\n    provider = factory.run_forecast(factory.forecast_document())\n    provider.update(schema_version='provider-future-schema', engine_version='2099.1.0')\n    before = deepcopy(provider)\n    monkeypatch.setattr(factory, 'run_forecast', lambda _data: provider)\n    monkeypatch.setattr('revenue_publication.ENGINE_VERSION', '2099.2.0')\n    legacy = factory._build_legacy_fixture()\n    expected = min(SCHEMA_EMIT_ENGINES['3.4'], key=lambda v: tuple(map(int, v.split('.'))))\n    assert legacy['schema_version'] == '3.4'\n    assert legacy['engine_version'] == legacy['publication_receipt']['engine_version'] == expected\n    assert provider == before\n    assert legacy['input_document'] == provider['input_document']\n    validate_forecast_output(legacy)\n    assert legacy['publication_receipt']['attestation_status'] == 'unattested'\n    assert invest_contracts.adapt_revenue(legacy)['revenue_forecast_ref']['revenue_compliance_status'] == 'legacy_read_only_validated'\n\n\n@pytest.mark.parametrize('fault', ['input_currency', 'output_unit', 'source_sha', 'number', 'result_sha'])\ndef test_current_forecast_tamper_cannot_use_legacy_projection_to_bypass_validation(fault):\n    factory = load('independent_current_fixture', INV / 'tests_support/revenue_fixtures.py')\n    from contracts.evidence import canonical_sha256\n    current = factory.run_forecast(factory.forecast_document())\n    invest_contracts.validate_revenue_forecast(current)\n    altered = deepcopy(current)\n    if fault == 'input_currency':\n        altered['input_document']['currency'] = 'CNY'\n    elif fault == 'output_unit':\n        altered['unit'] = 'billion'\n    elif fault == 'source_sha':\n        altered['sources'][0]['capture']['snapshot_sha256'] = 'f' * 64\n    elif fault == 'number':\n        altered['consolidated_forecast']['base']['annual_revenue']['2026'] *= 1000\n    else:\n        altered['result_sha256'] = 'f' * 64\n    if fault != 'result_sha':\n        altered['result_sha256'] = canonical_sha256({k:v for k,v in altered.items() if k != 'result_sha256'})\n    with pytest.raises(invest_contracts.InvestmentArtifactError):\n        invest_contracts.validate_revenue_forecast(altered)\n\n\ndef test_canonical_default_and_explicit_installed_use_separate_fresh_processes():\n    canonical = INV / 'invest-core/scripts/invest_contracts.py'\n    installed = Path('C:/Users/郑曾波/.agents/skills/invest-core/scripts/invest_contracts.py')\n    assert Path(invest_contracts.__file__).resolve() == canonical.resolve()\n    env = {**os.environ, 'PYTHONDONTWRITEBYTECODE': '1', 'PYTHON_DOTENV_DISABLED': '1',\n           'REVENUE_ATTESTATION_PROVIDER': ''}\n    code_default = (\n        \"import importlib.util,pathlib,sys;\"\n        \"sys.path.insert(0,sys.argv[2]);\"\n        \"s=importlib.util.spec_from_file_location('actual_root_conftest',sys.argv[1]);\"\n        \"m=importlib.util.module_from_spec(s);s.loader.exec_module(m);\"\n        \"sys.path.insert(0,sys.argv[2]);import invest_contracts;\"\n        \"print(pathlib.Path(invest_contracts.__file__).resolve())\"\n    )\n    actual = subprocess.check_output([sys.executable, '-I', '-B', '-X', 'utf8', '-c', code_default,\n        str(INV / 'conftest.py'), str(installed.parent)], env=env, text=True, encoding='utf-8', timeout=10).strip()\n    assert Path(actual) == canonical.resolve()\n    explicit = subprocess.check_output([sys.executable, '-I', '-B', '-X', 'utf8', '-c',\n        \"import pathlib,sys;sys.path.insert(0,sys.argv[1]);import invest_contracts;print(pathlib.Path(invest_contracts.__file__).resolve())\",\n        str(installed.parent)], env=env, text=True, encoding='utf-8', timeout=10).strip()\n    assert Path(explicit) == installed.resolve() != canonical.resolve()\n",
+  "independent_test_source_sha256": "c6fcec4440fbdf2a5a7964c1c21aa9cd3ab6f95fba5927c7301a5f1af8970747",
+  "runs": [
+    {
+      "tests": 8,
+      "failures": 1,
+      "errors": 0,
+      "seconds": "0.867",
+      "xml": ".planning/architecture-quality-20261101/r7-invest-ci-independent.xml",
+      "xml_sha256": "9309d8b968cbffd88ad0cf70d85d1214474bf075a42639191d5d4b7e8fa48612",
+      "log": ".planning/architecture-quality-20261101/r7-invest-ci-independent.log",
+      "log_sha256": "f75f4eb47e53d2f369d97e7b531ec29024d4d7163ba3f18971dd12903839a6bc",
+      "console": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\r7iv-independent\\\\runtime\", \"requested_basetemp_len\": 63, \"cwd_len\": 34, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": true, \"reason\": \"resolved-basetemp-exceeds-budget\", \"effective_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\AppData\\\\Local\\\\Temp\\\\cw-pytest-basetemp\\\\20261102-105809-34d280dc\", \"effective_basetemp_len\": 75}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\nconfigfile: pytest.ini\ncollected 8 items\n\ntmp\\r7iv-independent\\test_review.py .......F                             [100%]\n\n================================== FAILURES ===================================\n_ test_canonical_default_and_explicit_installed_use_separate_fresh_processes __\ntmp\\r7iv-independent\\test_review.py:93: in test_canonical_default_and_explicit_installed_use_separate_fresh_processes\n    str(INV / 'conftest.py'), str(installed.parent)], env=env, text=True, timeout=10).strip()\n                                                                                      ^^^^^\nE   AttributeError: 'NoneType' object has no attribute 'strip'\n============================== warnings summary ===============================\n..\\..\\..\\..\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464\n  C:\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode\n  \n    self._warn_or_fail_if_strict(f\"Unknown config option: {key}\\n\")\n\ntmp/r7iv-independent/test_review.py::test_canonical_default_and_explicit_installed_use_separate_fresh_processes\n  C:\\Miniconda\\Lib\\site-packages\\_pytest\\threadexception.py:58: PytestUnhandledThreadExceptionWarning: Exception in thread Thread-1 (_readerthread)\n  \n  Traceback (most recent call last):\n    File \"C:\\Miniconda\\Lib\\threading.py\", line 1043, in _bootstrap_inner\n      self.run()\n      ~~~~~~~~^^\n    File \"C:\\Miniconda\\Lib\\threading.py\", line 994, in run\n      self._target(*self._args, **self._kwargs)\n      ~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n    File \"C:\\Miniconda\\Lib\\subprocess.py\", line 1615, in _readerthread\n      buffer.append(fh.read())\n                    ~~~~~~~^^\n    File \"<frozen codecs>\", line 325, in decode\n  UnicodeDecodeError: 'utf-8' codec can't decode byte 0xd4 in position 11: invalid continuation byte\n  \n  Enable tracemalloc to get traceback where the object was allocated.\n  See https://docs.pytest.org/en/stable/how-to/capture-warnings.html#resource-warnings for more info.\n    warnings.warn(pytest.PytestUnhandledThreadExceptionWarning(msg))\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\architecture-quality-20261101\\r7-invest-ci-independent.xml -\n=========================== short test summary info ===========================\nFAILED tmp/r7iv-independent/test_review.py::test_canonical_default_and_explicit_installed_use_separate_fresh_processes\n=================== 1 failed, 7 passed, 2 warnings in 1.06s ===================\nCW-BASETEMP-CLEANUP {\"event\": \"cleanup\", \"dir\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\AppData\\\\Local\\\\Temp\\\\cw-pytest-basetemp\\\\20261102-105809-34d280dc\", \"existed\": true, \"removed\": true}\n"
+    },
+    {
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "seconds": "0.948",
+      "xml": ".planning/architecture-quality-20261101/r7-invest-ci-independent-import.xml",
+      "xml_sha256": "17878ed3d19253e6fc4af2b1091490503626d668f9f005782472cd32a88c06a4",
+      "log": ".planning/architecture-quality-20261101/r7-invest-ci-independent-import.log",
+      "log_sha256": "924b9882d85a3790a0cbcab7451b40c4bb12667df953c0922493dd602adaad85",
+      "console": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\r7iv-independent\\\\runtime\", \"requested_basetemp_len\": 63, \"cwd_len\": 34, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": true, \"reason\": \"resolved-basetemp-exceeds-budget\", \"effective_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\AppData\\\\Local\\\\Temp\\\\cw-pytest-basetemp\\\\20261102-105844-73156ace\", \"effective_basetemp_len\": 75}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\nconfigfile: pytest.ini\ncollected 1 item\n\ntmp\\r7iv-independent\\test_review.py .                                    [100%]\n\n============================== warnings summary ===============================\n..\\..\\..\\..\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464\n  C:\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode\n  \n    self._warn_or_fail_if_strict(f\"Unknown config option: {key}\\n\")\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\architecture-quality-20261101\\r7-invest-ci-independent-import.xml -\n======================== 1 passed, 1 warning in 1.03s =========================\nCW-BASETEMP-CLEANUP {\"event\": \"cleanup\", \"dir\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\AppData\\\\Local\\\\Temp\\\\cw-pytest-basetemp\\\\20261102-105844-73156ace\", \"existed\": true, \"removed\": true}\n"
+    },
+    {
+      "tests": 1,
+      "failures": 0,
+      "errors": 0,
+      "seconds": "1.268",
+      "xml": ".planning/architecture-quality-20261101/r7-invest-ci-independent-framework.xml",
+      "xml_sha256": "45d0ccd42f259272cc48093a8d6dffbd19a9d2f86c19eae37b049f59f2e21769",
+      "log": ".planning/architecture-quality-20261101/r7-invest-ci-independent-framework.log",
+      "log_sha256": "951021ecca1977cc9a700a0c396457e710fa58d60a69ddd5466ac116b5d75334",
+      "console": ".                                                                        [100%]\n1 passed in 1.33s\n"
+    }
+  ],
+  "effective_result": "7 initial new-controls PASS, 1 corrected harness import PASS, original exact framework failure point PASS; no full8 rerun or full144/690 claim",
+  "initial_test_harness_failure": "Isolated Python -I ignores PYTHONUTF8 env; Chinese path printed in child local encoding caused parent decode failure. Added child -X utf8 and explicit UTF-8 pipe decoding; product unchanged.",
+  "critical_controls": [
+    "Two fixture copies: future provider+formatter tags cannot select unsupported legacy pair or mutate provider input/cache",
+    "Real adapter labels legacy_read_only_validated/unattested",
+    "Current input currency/output unit/sourceSHA/thousandfold number/resultSHA tamper rejected; firstfour even after outer rehash",
+    "Actual default conftest remains canonical under installed path priority; independent explicit installed fresh import stays possible",
+    "Exact original framework legacy test passes with real root conftest"
+  ],
+  "findings": [],
+  "limits": [
+    "No canonical runtime/compatibility/crypto modification",
+    "No Git/index/commit/push/install/global/config/raw/key/model write or paid API",
+    "No complete144/690/21/11-suite repeat",
+    "Installed module imported only, no deployment or full installed-suite verdict"
+  ],
+  "cleanup": {
+    "owned_scratch": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r7iv-independent",
+    "initially_absent": true,
+    "fresh_path_stat_used": true,
+    "files_before_delete": {
+      "test_review.py": {
+        "bytes": 4956,
+        "sha256": "c6fcec4440fbdf2a5a7964c1c21aa9cd3ab6f95fba5927c7301a5f1af8970747",
+        "st_nlink": 1,
+        "file_attributes": 32
+      },
+      "framework/publication-registry0/publications.jsonl": {
+        "bytes": 5502,
+        "sha256": "6a6844db1f84d346e1c67a9d3fd60b515330aa376214ccc48988657a2df03e89",
+        "st_nlink": 1,
+        "file_attributes": 32
+      }
+    },
+    "file_count": 2,
+    "bytes": 10458,
+    "cwp_relocated_pytest_temps_removed": true,
+    "framework_basetemp_inside_owned_root": true,
+    "removed": true,
+    "status": "RESTORED_INITIAL_ABSENT"
+  }
+}

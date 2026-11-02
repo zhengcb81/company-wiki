@@ -1,0 +1,253 @@
+{
+  "schema_version": "tooling-final-sweep/1",
+  "status": "COMPLETE_ONE_ACTIVE_P2_REQUIRES_ROOT_FIX",
+  "timestamp_utc": "2026-11-02T11:18:14.766220+00:00",
+  "head_at_audit": "be273dbac6013a011912844158301144215a58ec",
+  "read_only": true,
+  "scope": "CWP tools/scripts/current hooks/workflows; literal scan of source only followed by actual entry/caller tracing; excludes raw originals,keys,run materials,fees,full tests,other repos",
+  "source_sha256": {
+    ".pre-commit-config.yaml": "45adc8c6253b2781d1d57493b6adc7a391a12e47bf336a9330e85e0d40abad63",
+    ".githooks/pre-commit": "66a01feb75b547d8401410455dd6362c1e394dc8196ccb15132e490c8785b1c5",
+    ".githooks/pre-push": "f2067d1a0a5b1be7de8690e06fe77aa9c523c19d6f6ff2eb625e9cd6de1fc7a7",
+    ".github/workflows/ci.yml": "352a64e4ee78d89a1ebaefee80ed9a9df00bdba34284e4177f7a1245787a5453",
+    "tools/pre_push_gate.py": "840721fcd6101fed570ec5a60866aef140cf9157217d9210a4158e04a56002e3",
+    "tools/changed_unit_tests.py": "2715957cc38cd953908aba5fb7d15f7961aaa8ec5f24eca3204d0ce831563f30",
+    "tools/check_dependencies.py": "26b52ee55f7063e2635e237fda504e0202abceebdbd6c9da93eb15f749e59397",
+    "tools/summarize_junit_failures.py": "c83294b26471671f4f79f6170160d27fd5f354f9529c734c779151baa9ed6a7f",
+    "tools/source_case_runner.py": "5f8e5f09d38bbb3d4565a1b9e60ca8bdee99b7ce1ec0bb16210968b8879c41c4",
+    "tools/source_case_receipt.py": "041ee9e20c5c9c5926fe2a8e21f125d9b185244f7390472251bbcd3cd0bb6133",
+    "tools/source_case_checks.py": "b326f4f37d96e3917346c4dfae41afb119b2c6bd7779967dd98d967161b427f0",
+    "tools/document_understanding_benchmark/phase_c_runner.py": "162b0f9c83cd3be8fcb8764908ae4acd4da7d87a06040ad28e23a175daede4b0",
+    "tools/document_understanding_benchmark/phase_c_launcher.py": "3c860463ba04df71a474024b25383729aea39c8294b6d6ed82bdc63a8220f6d8",
+    "tools/document_understanding_benchmark/phase_c_observer.py": "f1f26a65c479df95553242e8834a8a9301a96c5d19b4a82c403c6e8dc525a5c2",
+    "tools/document_understanding_benchmark/holdout_acceptance.py": "30a5022258920f7a4b933e01ae823c18584950678c56c48dc3bb02609b49761e",
+    "tools/document_understanding_benchmark/holdout_acceptance_launcher.py": "cb7d26d905cc1c2c24d472d0fefd13f654c9054273873e5e06904b4676f3e0f0",
+    "tools/document_understanding_benchmark/final_material.py": "c6a7c38bfa2629c05ab1df0ffe8311d860ed72c635a4e60ec8e9f1f4ac88d415",
+    "tools/document_understanding_benchmark/__init__.py": "cfa1a21531f192fdfb6edc819364a0de4d8be00944ad0e2b3d0618b52ccc3672",
+    "tools/document_understanding_benchmark/__main__.py": "c0aa98d9a8bde327fab9ac0d83f0667dc1379c92133d8f7387452fda41316b57",
+    "tools/document_understanding_benchmark/review.py": "61802f0d871af4b04096b417bd17a1ca4e3540b0c55139bc768eba9f42fd2b92",
+    "tools/document_understanding_benchmark/comparison.py": "a11c76887ff40f2ed7a96faf2c516d31bc4577f5004e12b6fa2d1a1258c26c36",
+    "tools/holdout_replay/producer.py": "c23fdd8334cd5e72529dd34b81f26a730fa37d14a7c25bd2803d8d83e3f40bd1",
+    "tools/holdout_replay/__main__.py": "2534b4a09ef722701b9ab2e56181ff5e60f579426e889459f852fa11ff6e3c14",
+    "tools/identity_audit/cli.py": "d98b516702faad13ca56c34c919035b8db19aa2d66f9cba61cd58eaafb3e5ba1",
+    "tools/identity_audit/receipt.py": "9a5ab821e0625338c1e67b57473a21235fa02fafaf258126d9f62f47363451a1",
+    "tools/source_root_portability/consumer_spy.py": "347cd8fbb524a9c709779102e9adf908cb7193945df35059e8b377fc66d2fa1b",
+    "tools/g3_source_facts/cli.py": "5134cd3d618b6e49a743f7ea2bf584626b0bab0ecfeb65e67aefc86d26bdd788",
+    "tools/g3_source_facts/report.py": "9e6c7972da1d4011af6b36b129c81b8122b54fd755543fcdd5a8a256a1c31cd5",
+    "tools/g3_source_facts/budget.py": "5f6b9720c124ea62227964f42651c2d4a24443d33cc4587bbe5cb07f8e97d0af",
+    "tools/pdf_runtime_probe/run_cold_probe.py": "d66de71f32aeaba759db1311bc095ee6e76f95e937ebb6baea31f585d6452ad7",
+    "tools/pdf_runtime_deployment/deployment.py": "add2ed59e4c06ca426996ea5e44b42d3ae5cddaf42878b94b1f934748c398048",
+    "tools/ocr_comparison/manifest.py": "8d1d24050fab37c82b8e95d055d045f6b89171ba62343430004521c0b4512e8e",
+    "tools/ocr_comparison/run_x1.py": "b21cf4dc76b1305bc2b40236e0f65c53a1ee1901966c721e9c59b5e8bba52ac7",
+    "scripts/narrative_batch_configured.py": "e4c11491efb439296d7f569f2387d1d80540a31322303f3c0372348745a4b2d5",
+    "scripts/writer_policy.py": "cf895b36d091bb446da00ddfdc9cea9a565fb3f28a1d762bcfd48a269b839e2c",
+    "scripts/sitecustomize.py": "86c2ba90284a3dd8e5171dfe423ea7deff6ea08043ffa7414d25c44e91dcc14d",
+    "scripts/common.py": "075c7fc9394760b46e38268f7df2d011e9a8c75ea85e6c3f1189b86eb6f99b7d",
+    "scripts/secret_audit.py": "0e273c5ad8826d5657d5f2a8ba1aad11fd5435ae5e80485f7fd8905b49151551",
+    "src/company_wiki/automation/narrative_model.py": "e5def4ded96a55dc5342d670105c32f80ad3e61b54ddc36c19db4ee3322c6369"
+  },
+  "findings": [
+    {
+      "id": "R7-SWEEP-T01",
+      "priority": "P2",
+      "active": true,
+      "kind": "paid-result observation fixed-size veto",
+      "file": "tools/document_understanding_benchmark/phase_c_runner.py",
+      "lines": [
+        916,
+        960,
+        966,
+        1531,
+        1692
+      ],
+      "condition": "Native batch already returned exit0 and durable usage/result, but gzip expanded response exceeds compatibility constant MODEL_RESPONSE_MAX_BYTES=128KiB. Observer reads128KiB+1 then raises PHASE_C_CAPTURE_IDENTITY_DIFFERS even for correct full content/native SHA/events.",
+      "actual_caller": "phase_c_runner.main -> run_pair -> _run_pair_in_owned_root -> successful_model_observation after successful native batch, before public_bundle/cache/consumer acceptance. Outer catch marks whole pair FAIL.",
+      "impact": "Valid paid source result falsely becomes failing experiment and later reuse/consumer verification is skipped. Existing durable accounting is retained; no automatic resend proven, but false failure invites retries.",
+      "recommended_fix": "Remove fixed representation cap, stream gzip to complete SHA/count/UTF8 check without storing raw prose; keep actual native SHA/event/real decompression/I/O failures. Isolate observation failure from already persisted native business success and retain explicit incomplete observation rather than green/zero-cost or paid resend.",
+      "test_design": [
+        "valid captured final >128KiB correct native/event identities -> full count/hash success",
+        "wrong native/event hash or byte count -> explicit observation incomplete",
+        "invalid UTF8 and real missing/broken gzip -> honest diagnostics",
+        "observer exception after durable native success -> owner success/paid pin preserved, no resend or false aggregate PASS"
+      ]
+    },
+    {
+      "id": "R7-SWEEP-T02",
+      "priority": "P3",
+      "active": "public library only; no internal production CLI caller found",
+      "kind": "fixed observation assembly caps",
+      "file": "tools/document_understanding_benchmark/final_material.py",
+      "lines": [
+        45,
+        49,
+        94,
+        105,
+        341,
+        369
+      ],
+      "condition": "Public observe_final_material rejects >512evidence/group rows, >4096units, >4MiBtext; explicit caller can only lower. Also independent actual work200k bound.",
+      "actual_caller": "Exported by package __init__.py; CodeGraph no callers; current tools/scripts source search finds only definition/export; test-only/direct users exist. Not normal shared-engine/PhaseC runtime.",
+      "recommended_fix": "For any supported current observer use, remove default representation byte/row ceilings and retain actual configured work/resource accounting. Otherwise explicitly retire unused API rather than present these defaults as production policy. Do not silently truncate denominator.",
+      "test_design": [
+        "public API large valid original-linked material retains all rows and text",
+        "explicit actual work budget partial/unknown, original identity mismatch still rejected"
+      ]
+    },
+    {
+      "id": "R7-SWEEP-T03",
+      "priority": "P3",
+      "active": true,
+      "kind": "repeat test inventory in full CI",
+      "file": "tools/pre_push_gate.py + .github/workflows/ci.yml",
+      "condition": "CI all tests/unit then --fast-contracts-only repeats13 explicit Unit targets within35fast targets. Optional full local mode also appends several Unit files after fullUnit. Daily fixed smoke intentionally still needs them.",
+      "actual_caller": "GitHub workflow Focused contract tests -> pre_push_gate --fast-contracts-only; main args fast_contracts_only uses same35target tuple as daily push.",
+      "recommended_fix": "One inventory with explicit CI-covered-unit subtraction in CI-specific mode, retaining full shared daily smoke. Do not add jobs/hooks or repeatedly run full unit, and do not assume13targets means13expanded parameter cases.",
+      "explicit_unit_targets_repeated": [
+        "tests/unit/test_local_budget_observation.py::test_read_charge_reports_a_rejected_tail_separately_from_accepted_bytes",
+        "tests/unit/test_runtime_dependencies.py::test_ci_requirements_include_declared_runtime_dependencies",
+        "tests/unit/test_narrative_english_business_recall.py::test_recall_semantics_are_versioned_and_legacy_txt_locators_stay_unchanged",
+        "tests/unit/test_narrative_verify_handler.py::test_verify_handler_transcript_replays_bytes_without_provider_policy",
+        "tests/unit/test_official_json_projection_generation.py::test_old_raw_manifest_retains_exact_canonical_contract",
+        "tests/unit/test_narrative_protocol_identity_shapes.py::test_protocol_lookup_does_not_hash_non_string_json",
+        "tests/unit/test_automation_migrations.py::test_m14_classification_uses_one_snapshot_during_concurrent_init",
+        "tests/unit/test_narrative_evidence.py::test_financial_table_rows_are_dropped_but_business_rows_are_selected",
+        "tests/unit/test_narrative_evidence.py::test_numbered_project_rationale_heading_survives_a_tight_budget",
+        "tests/unit/test_narrative_transport_contracts.py::test_frozen_producer_golden_contract_and_hash_bindings",
+        "tests/unit/test_narrative_retrieval.py::test_resolver_fails_closed_when_raw_source_hash_changes",
+        "tests/unit/test_shared_reading_cache_precheck.py::test_reuse_final_receipt_has_one_owner_read_per_operation",
+        "tests/unit/test_shared_reading_cache_precheck.py::test_new_operation_rejects_changed_reused_original_before_new_fee"
+      ]
+    },
+    {
+      "id": "R7-SWEEP-T04",
+      "priority": "P3",
+      "active": "explicit card diagnostic; no automatic deployment/business caller",
+      "kind": "single-revision marker precondition",
+      "file": "tools/pdf_runtime_probe/run_cold_probe.py",
+      "lines": [
+        28,
+        53,
+        55
+      ],
+      "condition": "Any existing cold-rev5 marker/receipt refuses a new explicit cold diagnostic until hardcoded revision/outputdir changes.",
+      "recommended_fix": "If promoted to maintained diagnostic, use fresh owned attempt namespace and baseline diagnosis metadata; keep actual runtime memory/thread/deadline and prevent overwrite. Otherwise mark historical card probe retired. Not a current business permission or model-production gate."
+    }
+  ],
+  "retained_and_reasons": [
+    {
+      "surface": "precommit/static + daily push + CI",
+      "reason": "actual source/type/config failures remain errors; commits do not pytest, daily fixed smokeonce/docs0, optional full explicit. No implicit install/sync/deploy in these entries.",
+      "files": [
+        ".pre-commit-config.yaml",
+        ".githooks/pre-push",
+        "tools/pre_push_gate.py",
+        ".github/workflows/ci.yml"
+      ]
+    },
+    {
+      "surface": "legacy writer/engineering shells",
+      "reason": "static retired/source-only architectural boundary, no approval/env pair can revive. Not material human authorization. Current canonical CLI is package entry plus supported configured batch.",
+      "files": [
+        "scripts/writer_policy.py",
+        "scripts/sitecustomize.py"
+      ]
+    },
+    {
+      "surface": "explicit requested producer commit",
+      "reason": "--producer-commit is current invocation identity, not frozen gold baseline permission. Worktree dirty entries are diagnostic only; actual loaded source identity remains recorded.",
+      "files": [
+        "tools/holdout_replay/producer.py",
+        "tools/holdout_replay/__main__.py"
+      ]
+    },
+    {
+      "surface": "input/CPU/work/memory/fee/time budgets",
+      "reason": "identity-audit16MiB applies explicit request input, RAW-DUP read budget to actual byte reads, OCR min8GiB/physical memory and thread/deadline actual execution, batch uses configured limits. Do not confuse with output/receipt size or permissions.",
+      "files": [
+        "tools/identity_audit/cli.py",
+        "tools/g3_source_facts/budget.py",
+        "tools/ocr_comparison/run_x1.py",
+        "scripts/narrative_batch_configured.py"
+      ]
+    },
+    {
+      "surface": "bounded console and diagnostic samples",
+      "reason": "prepush drains all child bytes and preserves actual exit with retained tail; JUnit annotations bounded for platform4KiB but full XML retained; consumer-spy200open entries never veto and raw_non_reader count includes all events. Optional add explicit sample_limited flag for clarity; not new gate.",
+      "files": [
+        "tools/pre_push_gate.py",
+        "tools/summarize_junit_failures.py",
+        "tools/source_root_portability/consumer_spy.py"
+      ]
+    },
+    {
+      "surface": "optional benchmark semantic review/frozen denominator",
+      "reason": "no review leaves NOT_EVALUATED; missing review does not block collection/owner return. If caller supplies malformed review, do not pretend evaluated. Same-gold/source comparisons require same denominator to avoid false quality gain. No authorization receipt.",
+      "files": [
+        "tools/document_understanding_benchmark/__main__.py",
+        "tools/document_understanding_benchmark/review.py",
+        "tools/document_understanding_benchmark/comparison.py"
+      ]
+    },
+    {
+      "surface": "secret audit history authorization label",
+      "reason": "Optional secret_audit labels published-history rewrite as pending authorization; generate exits0, no auto rewrite exists, no configured hook caller. Destructive shared Git history remains a separate action, not material processing permit. No .env/key values read in this audit.",
+      "files": [
+        "scripts/secret_audit.py"
+      ]
+    },
+    {
+      "surface": "immutable raw/identity/current asof and honest I/O",
+      "reason": "one current source owner verifies actual bytes/identity/period; report output path cannot overwrite unrelated file, malformed JSON and actual I/O cannot be called saved. G3 report field/path vocabulary is standalone portability contract, not a source permission.",
+      "files": [
+        "tools/g3_source_facts/report.py",
+        "tools/source_case_runner.py"
+      ]
+    }
+  ],
+  "already_r7_not_refound": [
+    "source_case lossless records/no300k16kancestry32",
+    "PhaseC prepare callback isolation and capture size removal",
+    "prepush console tail no exit125/no alltreeclean",
+    "full storage/rawdup/identity/portability/G2 report size rules removed",
+    "generation policy not upper permission/single byte reader owner",
+    "private/public/manualmaterial/externalLLM approvals not active normal tools surfaces"
+  ],
+  "codegraph": {
+    "status": "initialized3539files74022nodes",
+    "queries": [
+      "observe_final_material context/callers",
+      "successful_model_observation callers",
+      "verify_producer callers",
+      "writer_policy context"
+    ],
+    "limitation": "calls through imports/module-qualified aliases can be missing; inspected known CLI source entry branches, no index initialization or history/run files read"
+  },
+  "tests_executed": [],
+  "static_fast_inventory": {
+    "explicit_targets": 35,
+    "unit_targets_already_in_ci_unit": 13,
+    "unit_targets": [
+      "tests/unit/test_local_budget_observation.py::test_read_charge_reports_a_rejected_tail_separately_from_accepted_bytes",
+      "tests/unit/test_runtime_dependencies.py::test_ci_requirements_include_declared_runtime_dependencies",
+      "tests/unit/test_narrative_english_business_recall.py::test_recall_semantics_are_versioned_and_legacy_txt_locators_stay_unchanged",
+      "tests/unit/test_narrative_verify_handler.py::test_verify_handler_transcript_replays_bytes_without_provider_policy",
+      "tests/unit/test_official_json_projection_generation.py::test_old_raw_manifest_retains_exact_canonical_contract",
+      "tests/unit/test_narrative_protocol_identity_shapes.py::test_protocol_lookup_does_not_hash_non_string_json",
+      "tests/unit/test_automation_migrations.py::test_m14_classification_uses_one_snapshot_during_concurrent_init",
+      "tests/unit/test_narrative_evidence.py::test_financial_table_rows_are_dropped_but_business_rows_are_selected",
+      "tests/unit/test_narrative_evidence.py::test_numbered_project_rationale_heading_survives_a_tight_budget",
+      "tests/unit/test_narrative_transport_contracts.py::test_frozen_producer_golden_contract_and_hash_bindings",
+      "tests/unit/test_narrative_retrieval.py::test_resolver_fails_closed_when_raw_source_hash_changes",
+      "tests/unit/test_shared_reading_cache_precheck.py::test_reuse_final_receipt_has_one_owner_read_per_operation",
+      "tests/unit/test_shared_reading_cache_precheck.py::test_new_operation_rejects_changed_reused_original_before_new_fee"
+    ],
+    "not_parameter_case_count": true
+  },
+  "cleanup": {
+    "project_scratch_created": false,
+    "source_or_test_files_written": false,
+    "report_only": true,
+    "ephemeral_tool_TEMP_search_spool": "one rg command used its isolated tool-managed TEMP spool; later fresh tool TEMP did not contain it; no workspace test assets/foreign cleanup"
+  },
+  "next_action": "ROOT explicitly acceptedT01 and delegated same owner narrow implementation after this report;T02-04 remain audit suggestions not claimed implemented."
+}

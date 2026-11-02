@@ -1,0 +1,192 @@
+{
+  "status": "FIXED_OBSOLETE_TEST_ORACLE_PENDING_EXACT_REMOTE_CI",
+  "task": "FF CI41444682305 focused regression failure",
+  "failed_ci": {
+    "run_id": 41444682305,
+    "commit": "b35262233c572fef7b4ba85cd24dcab144880b8c",
+    "step": "Run focused regression suite once",
+    "available_failure_detail": "exit1 only; no full remote log claimed"
+  },
+  "root_cause": "A separate installation-surface test still required the retired --skip-install-sync hook argument. The intentionally simplified hook now invokes --push-checks; full CI already has its unchanged 40-file runner.",
+  "change": {
+    "path": "C:\\Users\\郑曾波\\Projects\\filing-fetch\\tests\\test_s3_install_surface.py",
+    "before_sha256": "10f8ad1451e702b136a194b15fbb09e9abe34394cfe71dc1e477f7fc25e1522a",
+    "after_sha256": "d00dd88c3e8ddccc495e0a616079ea5596c4b79f557c6e34cb0b361777b2d736",
+    "assertions": [
+      "daily hook uses --push-checks",
+      "daily hook has no --ci-tests",
+      "daily hook has no --run-tests",
+      "daily hook has no --install"
+    ],
+    "product_runtime_changed": false
+  },
+  "pin": {
+    "compatibility_manifest": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\compatibility\\current.json",
+    "compatibility_manifest_sha256": "23fa61469fe54ade8621da8a6489583f6e96ce44f20f1b079abafc16a11d73f5",
+    "wiki": "0ccdc6896ee58063ff827e9ceab16043c7550e0c",
+    "export_scope": "git archive PIN src only",
+    "files": 366,
+    "originals_or_databases_copied": false,
+    "live_cwp_source_changed": false
+  },
+  "tests": {
+    "red": {
+      "tests": 1.0,
+      "failures": 1.0,
+      "errors": 0.0,
+      "skipped": 0.0,
+      "time": 0.106,
+      "cases": [
+        {
+          "class": "tests.test_s3_install_surface",
+          "name": "test_git_pre_push_hook_uses_fast_checks_without_the_full_suite"
+        }
+      ]
+    },
+    "green": {
+      "tests": 11.0,
+      "failures": 0.0,
+      "errors": 0.0,
+      "skipped": 0.0,
+      "time": 1.0,
+      "cases": [
+        {
+          "class": "tests.test_s3_install_surface",
+          "name": "test_manifest_is_only_runtime_scripts_docs_and_public_config_templates"
+        },
+        {
+          "class": "tests.test_s3_install_surface",
+          "name": "test_manifest_excludes_a_fake_fmp_api_key_file"
+        },
+        {
+          "class": "tests.test_s3_install_surface",
+          "name": "test_synthetic_tree_excludes_credentials_env_tests_and_run_logs"
+        },
+        {
+          "class": "tests.test_s3_install_surface",
+          "name": "test_explicit_install_copies_only_the_manifest_to_a_repo_local_target"
+        },
+        {
+          "class": "tests.test_s3_install_surface",
+          "name": "test_installing_without_an_explicit_flag_is_refused"
+        },
+        {
+          "class": "tests.test_s3_install_surface",
+          "name": "test_pre_push_only_runs_the_read_only_install_check"
+        },
+        {
+          "class": "tests.test_s3_install_surface",
+          "name": "test_git_pre_push_hook_uses_fast_checks_without_the_full_suite"
+        },
+        {
+          "class": "tests.test_ci_tests",
+          "name": "test_hook_uses_fixed_local_smoke_and_ci_retains_complete_inventory"
+        },
+        {
+          "class": "tests.test_ci_tests",
+          "name": "test_daily_gate_only_runs_ruff_and_fixed_smoke"
+        },
+        {
+          "class": "tests.test_ci_tests",
+          "name": "test_explicit_ci_runtime_keeps_priority_over_owner_config"
+        },
+        {
+          "class": "tests.test_ci_tests",
+          "name": "test_failure_keeps_full_node_output_exit_code_and_cleans_scratch"
+        }
+      ]
+    }
+  },
+  "ruff": {
+    "scope": "tests/test_s3_install_surface.py",
+    "exit_code": 0
+  },
+  "full_focused_run": {
+    "executed": false,
+    "reason": "ROOT explicitly allowed deterministic static stale-oracle diagnosis followed by minimum-node verification instead of repeating 933 cases.",
+    "claim": "No claim that this was the only failure or that complete focused CI is green; ROOT must observe next exact normal CI."
+  },
+  "ci_inventory": {
+    "files": 40,
+    "unchanged_from_failed_commit": true,
+    "workflow_changed": false,
+    "budget_or_skip_changed": false
+  },
+  "ff_runtime_before": {
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\et_v2_contract.py": "50bc9db60ac0ab16dcc0cb63f67f557857bf04c47dc19c5777e22028eb4f1d00",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\fetch_filing.py": "93f00ad38777c41b6cec24f9d98b640a1d907c1fa2cc51d0ab1379ea502688e8",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\fetch_statements.py": "4cd7a2409959a762588de262a9979a6c8c2a64db45ff128468f778f6fa947128",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_configuration.py": "869b3fbf5c9d519b05fde4835f85edfd6ed85cb8c3b1a490e31c80856763c715",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_financial_statements.py": "3334cac4b6bf3f49d3979f5e1834d8c4ff35f522938dd0f91ef13c1c6508fed4",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_local_preparation_observation.py": "2338c544bb86542bc3c36148e205ba53454406109e206e4a29311ff0f35198dd",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_local_source_prepare.py": "34193905be4503303a636e2c025075da8b4a29cb8cffcb759aaec5c87163daee",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_process_transport.py": "a95321ded274556981dc18f494513e344cd3679d7ae75e9bb5eab754c440c43a",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_process_tree.py": "4ff6acbb5d838e593e90d62c1d35d7c9ecdae35b3916d1d041bd7ed077bc504f",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_provider_cause.py": "84e2de504b1c2c03774beb3cc4e548d4b8a26b8532a6464dd38f50f3569fbeeb",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_source_candidate.py": "2f9293f1243ecc55bd88ec18a3c6499a58913041444f6ca3d256980d847a93b0",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_source_failure.py": "25b2efa46932ba887aa0ebbfd6e5b994bb3307a90962888343473c16996e4de5",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_source_ref.py": "d82e2bd49b022ac5ac7acf16604470ad7fede82b58937e7c621dc630380cf3ea",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_v2_envelope.py": "a4a5e3e5946d23e7c0fa3e22158d29a9b0b5ae41d539cf60ba06ff393469e67f",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\filing_contracts.py": "033248d7f6bb72801428fc886aa5a32b2357de88e1179c892b237ac2eee65659",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\transcript_companion.py": "7e3f28a5928270850af308b9d20f4187cbaa985f1e0a5b4dffb83c3a1c0084be",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\transcript_reuse_selection.py": "66600ac99f48f43fc4ca332a71edd5ce6a2671173f4a4da97f99f3f724b41269",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\transcript_tool_transport.py": "8fd24051d403665599a3fa2f3be3f16cb997e504d84e23ae40409b8fb96c9855"
+  },
+  "ff_runtime_after": {
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\et_v2_contract.py": "50bc9db60ac0ab16dcc0cb63f67f557857bf04c47dc19c5777e22028eb4f1d00",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\fetch_filing.py": "93f00ad38777c41b6cec24f9d98b640a1d907c1fa2cc51d0ab1379ea502688e8",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\fetch_statements.py": "4cd7a2409959a762588de262a9979a6c8c2a64db45ff128468f778f6fa947128",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_configuration.py": "869b3fbf5c9d519b05fde4835f85edfd6ed85cb8c3b1a490e31c80856763c715",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_financial_statements.py": "3334cac4b6bf3f49d3979f5e1834d8c4ff35f522938dd0f91ef13c1c6508fed4",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_local_preparation_observation.py": "2338c544bb86542bc3c36148e205ba53454406109e206e4a29311ff0f35198dd",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_local_source_prepare.py": "34193905be4503303a636e2c025075da8b4a29cb8cffcb759aaec5c87163daee",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_process_transport.py": "a95321ded274556981dc18f494513e344cd3679d7ae75e9bb5eab754c440c43a",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_process_tree.py": "4ff6acbb5d838e593e90d62c1d35d7c9ecdae35b3916d1d041bd7ed077bc504f",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_provider_cause.py": "84e2de504b1c2c03774beb3cc4e548d4b8a26b8532a6464dd38f50f3569fbeeb",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_source_candidate.py": "2f9293f1243ecc55bd88ec18a3c6499a58913041444f6ca3d256980d847a93b0",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_source_failure.py": "25b2efa46932ba887aa0ebbfd6e5b994bb3307a90962888343473c16996e4de5",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_source_ref.py": "d82e2bd49b022ac5ac7acf16604470ad7fede82b58937e7c621dc630380cf3ea",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_v2_envelope.py": "a4a5e3e5946d23e7c0fa3e22158d29a9b0b5ae41d539cf60ba06ff393469e67f",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\filing_contracts.py": "033248d7f6bb72801428fc886aa5a32b2357de88e1179c892b237ac2eee65659",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\transcript_companion.py": "7e3f28a5928270850af308b9d20f4187cbaa985f1e0a5b4dffb83c3a1c0084be",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\transcript_reuse_selection.py": "66600ac99f48f43fc4ca332a71edd5ce6a2671173f4a4da97f99f3f724b41269",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\transcript_tool_transport.py": "8fd24051d403665599a3fa2f3be3f16cb997e504d84e23ae40409b8fb96c9855"
+  },
+  "rf_wip_before": {
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\daily_alert.jsonl": "712f9e957990ca0c261cbb91c1d10b0a12606da9d7293e6f2a1581309ce295e9",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_alert.jsonl": "fc9ec2335b48d42921ca9c14c63363efca3b3096f967733e366f4dd463e4b7ed",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_manifest.json": "e2e57f28fec7477af06029adcf187468701ab0305024993bfb2953bbd43cc5c0",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\monthly_manifest.json": "56d630107429cbcb646a951306dd1ea445dd5b3146236f34d0e8df953c103b9a"
+  },
+  "rf_wip_after": {
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\daily_alert.jsonl": "712f9e957990ca0c261cbb91c1d10b0a12606da9d7293e6f2a1581309ce295e9",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_alert.jsonl": "fc9ec2335b48d42921ca9c14c63363efca3b3096f967733e366f4dd463e4b7ed",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_manifest.json": "e2e57f28fec7477af06029adcf187468701ab0305024993bfb2953bbd43cc5c0",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\monthly_manifest.json": "56d630107429cbcb646a951306dd1ea445dd5b3146236f34d0e8df953c103b9a"
+  },
+  "evidence_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\architecture-quality-20261101\\r7-ff-ci-oracle-followup",
+  "evidence_sha256": {
+    "finalize.py": "4aeeedb7b050f41c4a11ef192b0cedd7bba284ef58e509025d7aecf28db8128f",
+    "green.log": "ed86b1a5659f51935e66925b55f2563997e527faa7d6e91064aa48bf2b1c985d",
+    "green.xml": "de591554a3b2ca2ebb3a9bcf8420a035cadcfb85c3e91aad9bcc159091976914",
+    "red.log": "00c34779cc15f60ebd28b8e2b3e068ed19e4b0f3f3a1673434462471325a96de",
+    "red.xml": "b10a72be750ce87e0feba0ef3142b71bb2e01ad6d0aa766225cb5ccf721561ae",
+    "ruff.log": "a4443afdcfb6d7363adb285762515ccf7cf50473b1a05c20c1a50f6bed4d26b0",
+    "setup.json": "bd1b63078865220ec8c524965ce91e0b767b469bab4aebb15ee23cf2927ff154",
+    "setup.py": "b4579d66c1bae25634bb508d48fcbbbeacfdf74e19fcbc887afe5298f2c05636",
+    "cleanup.json": "03871c982d2505f322de9115996cfbe43d894bb1204a684534522e06d24ccad8"
+  },
+  "cleanup": {
+    "files": 418,
+    "protected_originals_models_config_or_wip_deleted": false,
+    "owned_tmp": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\ffpin-c71a2d",
+    "initial_state": "absent before creation",
+    "logical_bytes": 5696838.0,
+    "final_state": "absent"
+  },
+  "publication": {
+    "commit_or_push_performed": false,
+    "owner": "ROOT",
+    "next": "Independent read of the one-test delta, normal commit/push, observe exact remote focused result; target any remaining failure without rerunning unrelated suites."
+  }
+}

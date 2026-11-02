@@ -1,0 +1,194 @@
+{
+  "schema_version": "r7-final-sweep-core-implementation/1",
+  "status": "FROZEN_AWAITING_ROOT_INDEPENDENT_REVIEW",
+  "timestamp_utc": "2026-11-02T11:55:19.743950+00:00",
+  "baseline_head": "bd911a2bd1125fe46d7c5a0f605fe3b0104f17be",
+  "delivery_files_sha256": {
+    "src/company_wiki/automation/json_tree.py": "9c7b42973df798db7592f3ac7732cc99dd71e630bb1f3fbbf012c945329534b6",
+    "src/company_wiki/automation/narrative_contracts.py": "a70704e4450118f1e4afbc1a63b2bf8dac3e3a8de071164f07b09061f39a0044",
+    "src/company_wiki/automation/narrative_model.py": "0078293176c67b6ac63245c5ecff7bf6d1c197d33f2cba63cbb38c1c5f7bcc49",
+    "src/company_wiki/automation/narrative_model_scoped.py": "b2f174f0c5c108e79120be6e56d566eefa144079263d063e9a679b2ca4134f7b",
+    "src/company_wiki/automation/narrative_batch_request.py": "6f0a50bf78395cbe203895ae819cae7842d4600c65cd13804d116dec864e24a8",
+    "src/company_wiki/source_catalog/canonical_writer.py": "621738f1c06ab3d6a898cdf69b5058f4fa0f72125ec674ca4654e0eda4145931",
+    "src/company_wiki/source_catalog/source_availability.py": "f20ed1a17d9bcdfc429740e4da3daa3c1e60055f9aba89049a0a5def703a3552",
+    "src/company_wiki/source_catalog/local_inventory.py": "4310beb14a41f6fc8de3165e3e550e25550a2c8502a31475773072edc74fb60c",
+    "src/company_wiki/source_catalog/assertion_service.py": "d795953855d0197f40b4f288bbb5c7460407042289e86e6884e26ad4f43b3480",
+    "src/company_wiki/source_catalog/local_reconcile.py": "deef283e06665be6925d9be94e0c3e90c49fce35ff7df9ddfff0e63fb874f222",
+    "src/company_wiki/source_catalog/resolver.py": "63dddbef28b4a7dd5f4dc7a2e7c9a35e000e008945e9f365ea34f9551cc75aec",
+    "tests/unit/test_r7_final_core_simplification.py": "c661511cb0de287b4cf32d6c29371f18154bdd1a0431d05bd3bbe141c655d91f",
+    "tests/unit/test_r7_availability_budget_owner.py": "645bc419c9bd5dfc4b3d118932e857e358fac30dae7bc7fc1a0401b2ce270ce1",
+    "tests/unit/test_narrative_post_model_failure_diagnostics.py": "4c038ddeb1405c9296cf2705932213f174c35074b16006a56559700321dae54e",
+    "tests/unit/test_narrative_citation_unit_model_boundary.py": "647a1f332d737aa6d3813ce1f7bac99f68ef99ed0326804717183b31fa8dd995",
+    "tests/contract/test_source_availability.py": "a423213580a1ba877e2f2e2ed6967b7771e0fb73fc4dad490a83c83b52a68e19"
+  },
+  "source_files": 11,
+  "test_files": 5,
+  "read_only_audit_sha256": "a64d290674a09e99bc3f79283cc9077b98885ddeca08f593c35ed2a684c42d8a",
+  "additional_root_finding": "availability sidecar/inline64KiB + metadata128KiB + evidence64KiB + location64 limits all in same metadata budget family",
+  "changes": [
+    "Remove hidden batch100 and explicit final>2MiB veto; keep actual caller limits and default values",
+    "Remove16KiB optional provenance rejection; preserve real immutable import/JSON/source checks",
+    "Single iterative context-aware JSON walk; only exact known source-text slots treated as content; metadata paths/unknown structures stay protected",
+    "Canonical claim owner handles path distinction for both decoders; no text fileURI blacklist",
+    "Unify availability sidecar reads under same LocalReadBudget and real chunks; preserve exact on-disk provenanceSHA, sourceHTTPdate checks and parent account",
+    "Remove inline/evidence64KiB, metadata128KiB and64location size/count permits; real discovery/bytes/deadline/cancel boundaries stay",
+    "Two existing local_reconcile and one resolver parent-budget callsites explicitly forwarded; no reset of parent limits"
+  ],
+  "resource_retention": [
+    "max_final_bytes exact user quota",
+    "max_persistent_bytes/max_scratch_bytes",
+    "max_seconds/max_tokens/max_micro_usd",
+    "actual byte/deadline/discovery observations in parent LocalReadBudget",
+    "explicit cancellation and hard deadlines propagate even after earlier proof",
+    "unknown proof remains unavailable when no valid capture was observed"
+  ],
+  "source_boundaries": [
+    "Original identity/byte SHA/location/asof remain in original owners",
+    "No H1 source tree or semantics edits",
+    "No wrong citation/context/number promotion",
+    "Known capture after resource boundary is evidence of that one observed capture only, never full-location coverage"
+  ],
+  "test_runs": [
+    {
+      "xml": ".planning/architecture-quality-20261101/r7-final-core-red.xml",
+      "xml_sha256": "338f84f632da6bdaad11d43df3575f7e5c182435ee5196a3cb5db3e7a0ded551",
+      "log": ".planning/architecture-quality-20261101/r7-final-core-red.log",
+      "log_sha256": "d8a0d9c8d3a82f466cfa85751dbcd17e9f8f5869ca57bbc3e4dd6e5a43968fa7",
+      "console": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\r7-final-core-tdd\", \"requested_basetemp_len\": 56, \"cwd_len\": 34, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\nconfigfile: pytest.ini\ncollected 18 items\n\ntests\\unit\\test_r7_final_core_simplification.py FFF....F...FFFF...       [100%]\n\n================================== FAILURES ===================================\n__ test_explicit_batch_members_do_not_have_a_second_hidden_count_quota[101] ___\ntests\\unit\\test_r7_final_core_simplification.py:31: in test_explicit_batch_members_do_not_have_a_second_hidden_count_quota\n    actual = NarrativeBatchRequest.from_dict(value)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsrc\\company_wiki\\automation\\narrative_batch_request.py:196: in from_dict\n    raise ValueError(\"batch must contain 1 to 100 explicit work items\")\nE   ValueError: batch must contain 1 to 100 explicit work items\n__ test_explicit_batch_members_do_not_have_a_second_hidden_count_quota[250] ___\ntests\\unit\\test_r7_final_core_simplification.py:31: in test_explicit_batch_members_do_not_have_a_second_hidden_count_quota\n    actual = NarrativeBatchRequest.from_dict(value)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsrc\\company_wiki\\automation\\narrative_batch_request.py:196: in from_dict\n    raise ValueError(\"batch must contain 1 to 100 explicit work items\")\nE   ValueError: batch must contain 1 to 100 explicit work items\n______ test_explicit_final_budget_roundtrips_above_old_emergency_ceiling ______\ntests\\unit\\test_r7_final_core_simplification.py:42: in test_explicit_final_budget_roundtrips_above_old_emergency_ceiling\n    actual = NarrativeBatchRequest.from_dict(value)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsrc\\company_wiki\\automation\\narrative_batch_request.py:264: in from_dict\n    raise ValueError(\"one final artifact cannot exceed the 2 MiB emergency cap\")\nE   ValueError: one final artifact cannot exceed the 2 MiB emergency cap\n____ test_large_optional_provenance_preserves_real_original_and_full_trace ____\ntests\\unit\\test_r7_final_core_simplification.py:63: in test_large_optional_provenance_preserves_real_original_and_full_trace\n    result = CanonicalSourceWriter(catalog).import_staged(request, candidate, receipt,\nsrc\\company_wiki\\source_catalog\\canonical_writer.py:306: in import_staged\n    raise CanonicalImportError(\"provenance extensions exceed byte limit\")\nE   company_wiki.source_catalog.canonical_writer.CanonicalImportError: provenance extensions exceed byte limit\n_ test_source_body_path_text_is_content_in_public_select_contract[C:\\\\subscription\\\\contract \\u2014 Subscription contracts generate revenue.] _\ntests\\unit\\test_r7_final_core_simplification.py:117: in test_source_body_path_text_is_content_in_public_select_contract\n    parsed = NarrativeSelectResult.from_dict(wire)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsrc\\company_wiki\\automation\\narrative_contracts.py:1324: in from_dict\n    _assert_pathless_reading_wire(value)\nsrc\\company_wiki\\automation\\narrative_contracts.py:719: in _assert_pathless_reading_wire\n    assert_no_physical_paths(value)\nsrc\\company_wiki\\automation\\narrative_contracts.py:178: in assert_no_physical_paths\n    raise PhysicalPathLeakError(\"physical path value is forbidden\")\nE   company_wiki.automation.narrative_contracts.PhysicalPathLeakError: physical path value is forbidden\n_ test_source_body_path_text_is_content_in_public_select_contract[\\\\\\\\example.invalid\\\\published \\u2014 Subscription contracts generate revenue.] _\ntests\\unit\\test_r7_final_core_simplification.py:117: in test_source_body_path_text_is_content_in_public_select_contract\n    parsed = NarrativeSelectResult.from_dict(wire)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsrc\\company_wiki\\automation\\narrative_contracts.py:1324: in from_dict\n    _assert_pathless_reading_wire(value)\nsrc\\company_wiki\\automation\\narrative_contracts.py:719: in _assert_pathless_reading_wire\n    assert_no_physical_paths(value)\nsrc\\company_wiki\\automation\\narrative_contracts.py:178: in assert_no_physical_paths\n    raise PhysicalPathLeakError(\"physical path value is forbidden\")\nE   company_wiki.automation.narrative_contracts.PhysicalPathLeakError: physical path value is forbidden\n_ test_source_body_path_text_is_content_in_public_select_contract[file://public-document-example \\u2014 Subscription contracts generate revenue.] _\ntests\\unit\\test_r7_final_core_simplification.py:117: in test_source_body_path_text_is_content_in_public_select_contract\n    parsed = NarrativeSelectResult.from_dict(wire)\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsrc\\company_wiki\\automation\\narrative_contracts.py:1324: in from_dict\n    _assert_pathless_reading_wire(value)\nsrc\\company_wiki\\automation\\narrative_contracts.py:719: in _assert_pathless_reading_wire\n    assert_no_physical_paths(value)\nsrc\\company_wiki\\automation\\narrative_contracts.py:178: in assert_no_physical_paths\n    raise PhysicalPathLeakError(\"physical path value is forbidden\")\nE   company_wiki.automation.narrative_contracts.PhysicalPathLeakError: physical path value is forbidden\n_ test_real_summary_handler_preserves_path_text_and_retains_reference_checks __\ntests\\unit\\test_r7_final_core_simplification.py:123: in test_real_summary_handler_preserves_path_text_and_retains_reference_checks\n    source = NarrativeSelectResult.from_dict(source_quote('file://public-source-example — Subscription contracts generate revenue.'))\n             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsrc\\company_wiki\\automation\\narrative_contracts.py:1324: in from_dict\n    _assert_pathless_reading_wire(value)\nsrc\\company_wiki\\automation\\narrative_contracts.py:719: in _assert_pathless_reading_wire\n    assert_no_physical_paths(value)\nsrc\\company_wiki\\automation\\narrative_contracts.py:178: in assert_no_physical_paths\n    raise PhysicalPathLeakError(\"physical path value is forbidden\")\nE   company_wiki.automation.narrative_contracts.PhysicalPathLeakError: physical path value is forbidden\n============================== warnings summary ===============================\n..\\..\\..\\..\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464\n  C:\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode\n  \n    self._warn_or_fail_if_strict(f\"Unknown config option: {key}\\n\")\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\architecture-quality-20261101\\r7-final-core-red.xml -\n=========================== short test summary info ===========================\nFAILED tests/unit/test_r7_final_core_simplification.py::test_explicit_batch_members_do_not_have_a_second_hidden_count_quota[101]\nFAILED tests/unit/test_r7_final_core_simplification.py::test_explicit_batch_members_do_not_have_a_second_hidden_count_quota[250]\nFAILED tests/unit/test_r7_final_core_simplification.py::test_explicit_final_budget_roundtrips_above_old_emergency_ceiling\nFAILED tests/unit/test_r7_final_core_simplification.py::test_large_optional_provenance_preserves_real_original_and_full_trace\nFAILED tests/unit/test_r7_final_core_simplification.py::test_source_body_path_text_is_content_in_public_select_contract[C:\\\\subscription\\\\contract \\u2014 Subscription contracts generate revenue.]\nFAILED tests/unit/test_r7_final_core_simplification.py::test_source_body_path_text_is_content_in_public_select_contract[\\\\\\\\example.invalid\\\\published \\u2014 Subscription contracts generate revenue.]\nFAILED tests/unit/test_r7_final_core_simplification.py::test_source_body_path_text_is_content_in_public_select_contract[file://public-document-example \\u2014 Subscription contracts generate revenue.]\nFAILED tests/unit/test_r7_final_core_simplification.py::test_real_summary_handler_preserves_path_text_and_retains_reference_checks\n=================== 8 failed, 10 passed, 1 warning in 5.18s ===================\n",
+      "tests": 18,
+      "failures": 8,
+      "errors": 0,
+      "seconds": "5.082"
+    },
+    {
+      "xml": ".planning/architecture-quality-20261101/r7-final-core-green.xml",
+      "xml_sha256": "4376bf91f81ddea3ba435d25d9b40e5801e1c120e3323e5609409cb4fb5f9b72",
+      "log": ".planning/architecture-quality-20261101/r7-final-core-green.log",
+      "log_sha256": "81537e8adf520846eb08407e54810dff3637f0e2113e69735bb7ac8bd304e298",
+      "console": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\r7-final-core-tdd\", \"requested_basetemp_len\": 56, \"cwd_len\": 34, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\nconfigfile: pytest.ini\ncollected 18 items\n\ntests\\unit\\test_r7_final_core_simplification.py ..................       [100%]\n\n============================== warnings summary ===============================\n..\\..\\..\\..\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464\n  C:\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode\n  \n    self._warn_or_fail_if_strict(f\"Unknown config option: {key}\\n\")\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\architecture-quality-20261101\\r7-final-core-green.xml -\n======================== 18 passed, 1 warning in 4.97s ========================\n",
+      "tests": 18,
+      "failures": 0,
+      "errors": 0,
+      "seconds": "4.869"
+    },
+    {
+      "xml": ".planning/architecture-quality-20261101/r7-final-core-integration.xml",
+      "xml_sha256": "f19835614fb2a4b04d8368a56cb70b117ad9e07adf9b73badc3d4daf6f25f947",
+      "log": ".planning/architecture-quality-20261101/r7-final-core-integration.log",
+      "log_sha256": "3bee64f6238d9800576668c3ce3713fd5f456af2fee3a2a2074d1e08f432252a",
+      "console": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\r7-final-core-integration\", \"requested_basetemp_len\": 64, \"cwd_len\": 34, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": true, \"reason\": \"resolved-basetemp-exceeds-budget\", \"effective_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\AppData\\\\Local\\\\Temp\\\\cw-pytest-basetemp\\\\20261102-113313-adc4f928\", \"effective_basetemp_len\": 75}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\nconfigfile: pytest.ini\ncollected 144 items\n\ntests\\unit\\test_r7_final_core_simplification.py .....................    [ 14%]\ntests\\unit\\test_narrative_job_contracts.py ...............               [ 25%]\ntests\\contract\\test_source_catalog_canonical_writer.py .............     [ 34%]\ntests\\unit\\test_narrative_post_model_failure_diagnostics.py ............ [ 42%]\n............                                                             [ 50%]\ntests\\unit\\test_narrative_citation_unit_model_boundary.py .............. [ 60%]\n.......................                                                  [ 76%]\ntests\\unit\\test_narrative_representation_no_gate.py .................    [ 88%]\ntests\\unit\\test_narrative_batch.py .................                     [100%]\n\n============================== warnings summary ===============================\n..\\..\\..\\..\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464\n  C:\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode\n  \n    self._warn_or_fail_if_strict(f\"Unknown config option: {key}\\n\")\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\architecture-quality-20261101\\r7-final-core-integration.xml -\n======================= 144 passed, 1 warning in 19.20s =======================\nCW-BASETEMP-CLEANUP {\"event\": \"cleanup\", \"dir\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\AppData\\\\Local\\\\Temp\\\\cw-pytest-basetemp\\\\20261102-113313-adc4f928\", \"existed\": true, \"removed\": true}\n",
+      "tests": 144,
+      "failures": 0,
+      "errors": 0,
+      "seconds": "19.068"
+    },
+    {
+      "xml": ".planning/architecture-quality-20261101/r7-availability-red.xml",
+      "xml_sha256": "51cfe37d0b61bc66add08042a7ad2d0f3d47d3128c28004e27f585b03afce7ff",
+      "log": ".planning/architecture-quality-20261101/r7-availability-red.log",
+      "log_sha256": "a5ba5fa9256b4b21c5de6c988f524f71d46814153785f7269366c4090e84e30e",
+      "console": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\r7-availability-tdd\", \"requested_basetemp_len\": 58, \"cwd_len\": 34, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\nconfigfile: pytest.ini\ncollected 7 items\n\ntests\\unit\\test_r7_availability_budget_owner.py FFFFFFF                  [100%]\n\n================================== FAILURES ===================================\n_ test_large_sidecar_availability_uses_same_actual_metadata_read_budget[True] _\ntests\\unit\\test_r7_availability_budget_owner.py:25: in test_large_sidecar_availability_uses_same_actual_metadata_read_budget\n    proof = owner.verified_availability_evidence(catalog, REF, budget=budget)\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   TypeError: verified_availability_evidence() got an unexpected keyword argument 'budget'\n_ test_large_sidecar_availability_uses_same_actual_metadata_read_budget[False] _\ntests\\unit\\test_r7_availability_budget_owner.py:31: in test_large_sidecar_availability_uses_same_actual_metadata_read_budget\n    assert proof['available_by'] == '2026-10-07'\n           ^^^^^^^^^^^^^^^^^^^^^\nE   TypeError: 'NoneType' object is not subscriptable\n___ test_capture_reconciliation_keeps_full_optional_trace_and_charges_once ____\ntests\\unit\\test_r7_availability_budget_owner.py:41: in test_capture_reconciliation_keeps_full_optional_trace_and_charges_once\n    assert owner.capture_observation(catalog, REF, budget=budget) == payload\nE   AssertionError: assert None == {'schema_version': '1.0', 'request_id': 'example-request', 'provider': 'sec', 'provider_document_id': 'accession-example', ...}\nE    +  where None = <function capture_observation at 0x000001C5285937E0>(namespace(config=namespace(roots=(namespace(root_id='lake', path=WindowsPath('C:/Users/郑曾波/Projects/company-wiki/tmp/r...e0/lake')),)), reader=<contract.test_source_availability.fixture_catalog.<locals>.Reader object at 0x000001C528575940>), SourceRef(document_id='doc-example', source_id='src-example', content_sha256='4b9496fb7df017386494502e41510975df4dbf67cec685fe8dc970b6a9e710a5', byte_size=16, mime_type='text/plain', schema_version='2.0'), budget=LocalReadBudget(max_candidates=16, max_bytes=1048576, candidates=0, bytes_read=0, cancelled=False))\nE    +    where <function capture_observation at 0x000001C5285937E0> = owner.capture_observation\n________ test_true_metadata_resource_limit_stops_before_reading[bytes] ________\ntests\\unit\\test_r7_availability_budget_owner.py:53: in test_true_metadata_resource_limit_stops_before_reading\n    owner.verified_availability_evidence(catalog, REF, budget=budget)\nE   TypeError: verified_availability_evidence() got an unexpected keyword argument 'budget'\n______ test_true_metadata_resource_limit_stops_before_reading[deadline] _______\ntests\\unit\\test_r7_availability_budget_owner.py:53: in test_true_metadata_resource_limit_stops_before_reading\n    owner.verified_availability_evidence(catalog, REF, budget=budget)\nE   TypeError: verified_availability_evidence() got an unexpected keyword argument 'budget'\n__ test_large_stored_availability_is_not_lost_to_inline_representation_size ___\ntests\\unit\\test_r7_availability_budget_owner.py:68: in test_large_stored_availability_is_not_lost_to_inline_representation_size\n    proof = owner.stored_availability_evidence(SimpleNamespace(reader=object()), REF, budget=budget)\n            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   TypeError: stored_availability_evidence() got an unexpected keyword argument 'budget'\n____ test_large_source_fact_evidence_validates_json_and_retains_same_scope ____\ntests\\unit\\test_r7_availability_budget_owner.py:79: in test_large_source_fact_evidence_validates_json_and_retains_same_scope\n    _validate_source_facts(facts, evidence)\nsrc\\company_wiki\\source_catalog\\assertion_service.py:386: in _validate_source_facts\n    raise ValueError(\"source fact evidence exceeds byte limit\")\nE   ValueError: source fact evidence exceeds byte limit\n============================== warnings summary ===============================\n..\\..\\..\\..\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464\n  C:\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode\n  \n    self._warn_or_fail_if_strict(f\"Unknown config option: {key}\\n\")\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\architecture-quality-20261101\\r7-availability-red.xml -\n=========================== short test summary info ===========================\nFAILED tests/unit/test_r7_availability_budget_owner.py::test_large_sidecar_availability_uses_same_actual_metadata_read_budget[True]\nFAILED tests/unit/test_r7_availability_budget_owner.py::test_large_sidecar_availability_uses_same_actual_metadata_read_budget[False]\nFAILED tests/unit/test_r7_availability_budget_owner.py::test_capture_reconciliation_keeps_full_optional_trace_and_charges_once\nFAILED tests/unit/test_r7_availability_budget_owner.py::test_true_metadata_resource_limit_stops_before_reading[bytes]\nFAILED tests/unit/test_r7_availability_budget_owner.py::test_true_metadata_resource_limit_stops_before_reading[deadline]\nFAILED tests/unit/test_r7_availability_budget_owner.py::test_large_stored_availability_is_not_lost_to_inline_representation_size\nFAILED tests/unit/test_r7_availability_budget_owner.py::test_large_source_fact_evidence_validates_json_and_retains_same_scope\n======================== 7 failed, 1 warning in 1.14s =========================\n",
+      "tests": 7,
+      "failures": 7,
+      "errors": 0,
+      "seconds": "1.079"
+    },
+    {
+      "xml": ".planning/architecture-quality-20261101/r7-availability-green.xml",
+      "xml_sha256": "3ac888644be6119784063a9478e7035f3f1e442e3c603a1505c1ab0492004a22",
+      "log": ".planning/architecture-quality-20261101/r7-availability-green.log",
+      "log_sha256": "4255b74a50e9044e652510f80dbf1ad4dbdf578c8380680cc9a944225a180258",
+      "console": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\r7-availability-green\", \"requested_basetemp_len\": 60, \"cwd_len\": 34, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\nconfigfile: pytest.ini\ncollected 22 items\n\ntests\\unit\\test_r7_availability_budget_owner.py .......                  [ 31%]\ntests\\contract\\test_source_availability.py ..............F               [100%]\n\n================================== FAILURES ===================================\n__________________ test_excess_locations_do_not_expand_work ___________________\ntests\\contract\\test_source_availability.py:125: in test_excess_locations_do_not_expand_work\n    assert verified_availability_evidence(\nE   AssertionError: assert {'schema_version': 'source-availability-evidence/1', 'source_sha256': '4b9496fb7df017386494502e41510975df4dbf67cec685fe8dc970b6a9e710a5', 'available_by': '2026-10-07', 'basis': 'prior_verified_capture', ...} is None\nE    +  where {'schema_version': 'source-availability-evidence/1', 'source_sha256': '4b9496fb7df017386494502e41510975df4dbf67cec685fe8dc970b6a9e710a5', 'available_by': '2026-10-07', 'basis': 'prior_verified_capture', ...} = verified_availability_evidence(namespace(config=namespace(roots=(namespace(root_id='lake', path=WindowsPath('C:/Users/郑曾波/Projects/company-wiki/tmp/r...s_do_not_e0/lake')),)), reader=<test_source_availability.fixture_catalog.<locals>.Reader object at 0x0000025AD065D550>), SourceRef(document_id='doc-example', source_id='src-example', content_sha256='4b9496fb7df017386494502e41510975df4dbf67cec685fe8dc970b6a9e710a5', byte_size=16, mime_type='text/plain', schema_version='2.0'))\nE    +    where namespace(config=namespace(roots=(namespace(root_id='lake', path=WindowsPath('C:/Users/郑曾波/Projects/company-wiki/tmp/r...s_do_not_e0/lake')),)), reader=<test_source_availability.fixture_catalog.<locals>.Reader object at 0x0000025AD065D550>) = fixture_catalog(WindowsPath('C:/Users/郑曾波/Projects/company-wiki/tmp/r7-availability-green/test_excess_locations_do_not_e0'), {'schema_version': '1.0', 'request_id': 'example-request', 'provider': 'sec', 'provider_document_id': 'accession-example', ...}, cap=65)\nE    +      where {'schema_version': '1.0', 'request_id': 'example-request', 'provider': 'sec', 'provider_document_id': 'accession-example', ...} = capture_payload()\n============================== warnings summary ===============================\n..\\..\\..\\..\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464\n  C:\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode\n  \n    self._warn_or_fail_if_strict(f\"Unknown config option: {key}\\n\")\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\architecture-quality-20261101\\r7-availability-green.xml -\n=========================== short test summary info ===========================\nFAILED tests/contract/test_source_availability.py::test_excess_locations_do_not_expand_work\n=================== 1 failed, 21 passed, 1 warning in 2.05s ===================\n",
+      "tests": 22,
+      "failures": 1,
+      "errors": 0,
+      "seconds": "1.984"
+    },
+    {
+      "xml": ".planning/architecture-quality-20261101/r7-availability-final.xml",
+      "xml_sha256": "054226d090c2da4f91125f303a41293998a8992034c0cea0695a74992c31cae8",
+      "log": ".planning/architecture-quality-20261101/r7-availability-final.log",
+      "log_sha256": "555fd3abac1d1bbc9e1431152e6e305fe7b44a5ce5d3793e053f69aecaf3ac3a",
+      "console": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\r7-availability-final\", \"requested_basetemp_len\": 60, \"cwd_len\": 34, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\nconfigfile: pytest.ini\ncollected 34 items\n\ntests\\unit\\test_r7_availability_budget_owner.py ..........               [ 29%]\ntests\\contract\\test_source_availability.py ...............               [ 73%]\ntests\\unit\\test_local_source_boundaries.py .........                     [100%]\n\n============================== warnings summary ===============================\n..\\..\\..\\..\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464\n  C:\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode\n  \n    self._warn_or_fail_if_strict(f\"Unknown config option: {key}\\n\")\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\architecture-quality-20261101\\r7-availability-final.xml -\n======================== 34 passed, 1 warning in 4.02s ========================\n",
+      "tests": 34,
+      "failures": 0,
+      "errors": 0,
+      "seconds": "3.910"
+    },
+    {
+      "xml": ".planning/architecture-quality-20261101/r7-availability-callers.xml",
+      "xml_sha256": "36cabd919a92d3e006cb386ddf0bfd6d95e4004b364531f0cfee78e3c68e0e39",
+      "log": ".planning/architecture-quality-20261101/r7-availability-callers.log",
+      "log_sha256": "3c56afbadc89e1c0b7b9d37af56e9f2aeb432a4cc2940b90d1cf28981b44c10a",
+      "console": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\r7-availability-callers\", \"requested_basetemp_len\": 62, \"cwd_len\": 34, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": true, \"reason\": \"resolved-basetemp-exceeds-budget\", \"effective_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\AppData\\\\Local\\\\Temp\\\\cw-pytest-basetemp\\\\20261102-115321-e3979ae9\", \"effective_basetemp_len\": 75}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\nconfigfile: pytest.ini\ncollected 9 items\n\ntests\\unit\\test_local_source_boundaries.py .........                     [100%]\n\n============================== warnings summary ===============================\n..\\..\\..\\..\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464\n  C:\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode\n  \n    self._warn_or_fail_if_strict(f\"Unknown config option: {key}\\n\")\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\architecture-quality-20261101\\r7-availability-callers.xml -\n======================== 9 passed, 1 warning in 2.55s =========================\nCW-BASETEMP-CLEANUP {\"event\": \"cleanup\", \"dir\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\AppData\\\\Local\\\\Temp\\\\cw-pytest-basetemp\\\\20261102-115321-e3979ae9\", \"existed\": true, \"removed\": true}\n",
+      "tests": 9,
+      "failures": 0,
+      "errors": 0,
+      "seconds": "2.437"
+    }
+  ],
+  "static_checks": {
+    "ruff": "14 files PASS plus final2 thin callsites PASS",
+    "mypy": "6+3+2 source files PASS",
+    "recorded_mypy6": "Success: no issues found in 6 source files\n",
+    "recorded_mypy2": "Success: no issues found in 2 source files\n",
+    "ruff_log": "All checks passed!\n"
+  },
+  "test_expectation_migrations": [
+    "body path -> actual claim_id metadata path in two existing tests; original negative checks remain",
+    "old location>64 -> actual explicit discovery work-budget failure without a verified proof"
+  ],
+  "prior_test_manifest_superseded": "R7-CWP-CI-followup post-model file changed intentionally by this typed-body semantic correction; use this16 manifest for current independent review",
+  "scope_limits": [
+    "No complete Unit/repository/325/H1/real summary/model/API run",
+    "No original/key/config/global install/Git/index/PWF modification",
+    "No source truth or economic model verdict",
+    "ROOT owns final review/publication"
+  ],
+  "cleanup": {
+    "receipts": [
+      {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r7-final-core-tdd",
+        "file_count": 15,
+        "bytes": 1543138.0,
+        "exists_after": false,
+        "kind": "exact own pytest basetemp"
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r7-final-core-integration",
+        "file_count": 0,
+        "bytes": 0,
+        "exists_after": false,
+        "kind": "already absent / integration hook relocated and removed actual temp"
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r7-availability-tdd",
+        "file_count": 5,
+        "bytes": 2405580.0,
+        "exists_after": false,
+        "kind": "exact own pytest basetemp"
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r7-availability-green",
+        "file_count": 20,
+        "bytes": 2485078.0,
+        "exists_after": false,
+        "kind": "exact own pytest basetemp"
+      },
+      {
+        "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\r7-availability-final",
+        "file_count": 42,
+        "bytes": 3991159.0,
+        "exists_after": false,
+        "kind": "exact own pytest basetemp"
+      }
+    ],
+    "receipt_sha256": "ab092b9fce1ba9d053ea2de2cb0d795aaf9865772a23691a28ee63dcd777ed6f",
+    "removed_files": 82,
+    "removed_bytes": 10424955.0,
+    "all_requested_roots_absent": true,
+    "relocated_integration_and_callers_removed": true,
+    "initial_snapshot_limit": "Earliest own pytest basetemp roots were not separately snapshotted before initial pytest; no preexisting-content restoration claim",
+    "exact_parent_containment_fresh_stat_nonreparse": true
+  }
+}
