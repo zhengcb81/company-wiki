@@ -79,10 +79,10 @@
     "event_number_issuer": "each remains original separate binding owner; no promotion from scope alone",
     "consumer": "source cards uncertain/needs_review; RF rationale_support does not modify parameter values"
   },
-  "project_status": "ARCHITECTURE_REASSESSED_RESIDUAL_GATES_SOURCE_AND_REAL_C_OPEN",
+  "project_status": "DECOUPLING_FIRST_MODULE_WORK_DEFERRED",
   "as_of_date": "2026-11-02",
-  "observed_at_utc": "2026-11-02T19:21:06.487425+00:00",
-  "next_action": "ROOT先同族修复本地输入表示门与FF→ET→CWP最终入库预算残留，完整离线端点验收；随后T4父链/SEM-QUAL-01及单H1真实来源，再新摘要/恢复/同artifact实际RF采用。RF与AUDIT仓内既有整改可独立并行。",
+  "observed_at_utc": "2026-11-02T19:36:37.312770+00:00",
+  "next_action": "先由ROOT集中完成DECOUPLING_FIRST的D1接口/隔离测试、D2跨仓适配与测试归位、D3完整组合和独审；通过后再校准并派发RF/AUDIT等仓内业务PWF。当前不在半解耦状态下启动模块施工。",
   "publication": {
     "repositories": {
       "revenue-forecast": {
@@ -162,7 +162,7 @@
   "architecture_rectification": {
     "issues": 14,
     "status": "ENGINEERING_ACCEPTED_REAL_COMPANY_OPEN",
-    "current_work": "ROOT先同族修复本地输入表示门与FF→ET→CWP最终入库预算残留，完整离线端点验收；随后T4父链/SEM-QUAL-01及单H1真实来源，再新摘要/恢复/同artifact实际RF采用。RF与AUDIT仓内既有整改可独立并行。",
+    "current_work": "先由ROOT集中完成DECOUPLING_FIRST的D1接口/隔离测试、D2跨仓适配与测试归位、D3完整组合和独审；通过后再校准并派发RF/AUDIT等仓内业务PWF。当前不在半解耦状态下启动模块施工。",
     "registry": "review/architecture-quality-20261101/implementation-results/STATUS.json",
     "current_evidence": "review/architecture-quality-20261101/implementation-results/checklist-verification-20261102/checklist.md"
   },
@@ -173,9 +173,15 @@
   },
   "next_stages": [
     {
+      "id": "decoupling-first",
+      "status": "P0_IMPLEMENTATION_PENDING",
+      "plan": "review/architecture-reassessment-20261102/DECOUPLING_FIRST.md"
+    },
+    {
       "id": "residual-gate-families",
       "status": "CONFIRMED_OPEN",
-      "plan": "review/architecture-reassessment-20261102/README.md"
+      "plan": "review/architecture-reassessment-20261102/README.md",
+      "sequencing": "Included in decoupling resource/codec ownership, not a separate parallel lane."
     },
     {
       "id": "T4-source-parent",
@@ -371,10 +377,7 @@
       "final_import_budget"
     ],
     "active_writers": {
-      "ROOT": [
-        "company-wiki",
-        "filing-fetch"
-      ]
+      "ROOT": "necessary cross-repository decoupling only; no module business harness active"
     },
     "prepared_not_dispatched": [
       "revenue-forecast",
@@ -382,6 +385,22 @@
     ],
     "code_changes": false,
     "real_provider_calls": 0,
-    "decoupling": "storage virtualization implemented; protocol/test/deployment coupling remains; bounded repository parallel work feasible"
+    "decoupling": "storage virtualization implemented; protocol/test/deployment coupling remains; bounded repository parallel work feasible",
+    "dispatch_status": "DEFERRED_UNTIL_DECOUPLING"
+  },
+  "decoupling_first": {
+    "status": "PLAN_READY_IMPLEMENTATION_NOT_COMPLETE",
+    "plan": "review/architecture-reassessment-20261102/DECOUPLING_FIRST.md",
+    "completed": [
+      "D0 current dependency investigation"
+    ],
+    "open": [
+      "D1 public-port and isolation tests",
+      "D2 implementation/contract/CI migration",
+      "D3 combined acceptance and independent review"
+    ],
+    "module_dispatch": "DEFERRED_UNTIL_DECOUPLING",
+    "requires_user_reapproval": false,
+    "business_tasks_retained": true
   }
 }

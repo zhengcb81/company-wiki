@@ -1,0 +1,64 @@
+{
+  "status": "SEQUENCING_AND_DETAILED_PLAN_COMPLETE_DECOUPLING_IMPLEMENTATION_PENDING",
+  "module_dispatch": "DEFERRED_UNTIL_DECOUPLING",
+  "code_changes": false,
+  "paid_calls": 0,
+  "independent_design_review": {
+    "reviewer": "decoupling_acceptance",
+    "finding": "Review actual combination results in the single final review, not a separate design pre-signoff",
+    "resolution": "DECOUPLING_FIRST D3 updated before publication"
+  },
+  "owner_plan_commits": [
+    {
+      "repo": "revenue-forecast",
+      "baseline": "214a522f88167c4d756153079595457e5abfca6d",
+      "head": "50fc0e925778867009a381b26a7915fcb05cd726",
+      "branch": "main",
+      "pushed": true,
+      "remote_configured": true,
+      "files": [
+        "docs/plans/r4-owner-closure-20261102/findings.md",
+        "docs/plans/r4-owner-closure-20261102/progress.md",
+        "docs/plans/r4-owner-closure-20261102/task_plan.md"
+      ],
+      "foreign_preserved": {
+        "assurance/runs/daily_alert.jsonl": "712f9e957990ca0c261cbb91c1d10b0a12606da9d7293e6f2a1581309ce295e9",
+        "assurance/runs/monthly_manifest.json": "56d630107429cbcb646a951306dd1ea445dd5b3146236f34d0e8df953c103b9a",
+        "assurance/runs/weekly_alert.jsonl": "fc9ec2335b48d42921ca9c14c63363efca3b3096f967733e366f4dd463e4b7ed",
+        "assurance/runs/weekly_manifest.json": "e2e57f28fec7477af06029adcf187468701ab0305024993bfb2953bbd43cc5c0"
+      },
+      "runtime_changed": false
+    },
+    {
+      "repo": "revenue-forecast-audit",
+      "baseline": "38dda2a4138e6d385096a13f26eb58d2ddc2a112",
+      "head": "a84455ef864d6f9e5596a894c2b1801d8ea32cfb",
+      "branch": "main",
+      "pushed": false,
+      "remote_configured": false,
+      "files": [
+        "docs/plans/r4-owner-closure-20261102/findings.md",
+        "docs/plans/r4-owner-closure-20261102/progress.md",
+        "docs/plans/r4-owner-closure-20261102/task_plan.md"
+      ],
+      "foreign_preserved": {},
+      "runtime_changed": false
+    },
+    {
+      "repo": "filing-fetch",
+      "baseline": "1e3f70b4b4b908f16e2f1640d5d5f6b2269a045b",
+      "head": "556b6bd3a053b530e345c197d86de55e293afe37",
+      "branch": "main",
+      "pushed": true,
+      "remote_configured": true,
+      "files": [
+        "docs/plans/import-budget-closure-20261102/findings.md",
+        "docs/plans/import-budget-closure-20261102/progress.md",
+        "docs/plans/import-budget-closure-20261102/task_plan.md"
+      ],
+      "foreign_preserved": {},
+      "runtime_changed": false
+    }
+  ],
+  "root_publication": "Included in normal CWP documentation commit; use Git for exact root commit, no recursive receipt commit required."
+}

@@ -1,4 +1,4 @@
-**2026-11-02最新复核：此前定义范围工程已验，但新确认两族残留门禁。ROOT先闭合完整入库/输入预算，再T4+SEM和新真实C；RF/AUDIT既有任务可按仓并行，尚未派发。项目/循环未完成。**
+**2026-11-02最新用户决定：先集中完成解耦，D3验收后再按模块激活PWF/施工卡。RF/AUDIT暂不派发；此前可立即并行建议已取代。**
 
 # 主线剩余实施计划
 
@@ -6,7 +6,11 @@
 
 ## Next Step
 
-ROOT先同族修复本地输入表示门与FF→ET→CWP最终入库预算残留，完整离线端点验收；随后T4父链/SEM-QUAL-01及单H1真实来源，再新摘要/恢复/同artifact实际RF采用。RF与AUDIT仓内既有整改可独立并行。 具体分工和验收见[当前架构复核](review/architecture-reassessment-20261102/README.md)与[协调](review/architecture-reassessment-20261102/COORDINATION.md)。
+先由ROOT集中完成DECOUPLING_FIRST的D1接口/隔离测试、D2跨仓适配与测试归位、D3完整组合和独审；通过后再校准并派发RF/AUDIT等仓内业务PWF。当前不在半解耦状态下启动模块施工。
+
+## P0-D — 解耦优先
+
+实施与完成标准见[review/architecture-reassessment-20261102/DECOUPLING_FIRST.md](review/architecture-reassessment-20261102/DECOUPLING_FIRST.md)。D0已调查，D1–D3尚未完成。当前根任务只推进公共端口/DTO/资源/测试与CI边界；下面P1–P3业务任务保留，D3后才按各仓正式派发。不能用独立测试skip或旧CI替新架构验收。
 
 ## P0 — 已完成的CI根修
 

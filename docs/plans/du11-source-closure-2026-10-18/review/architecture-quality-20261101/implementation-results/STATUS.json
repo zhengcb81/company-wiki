@@ -53,7 +53,7 @@
       "status": "ENGINEERING_MERGED_PUSHED_MAIN_CI_GREEN_REAL_C_OPEN"
     }
   },
-  "next": "ROOT先同族修复本地输入表示门与FF→ET→CWP最终入库预算残留，完整离线端点验收；随后T4父链/SEM-QUAL-01及单H1真实来源，再新摘要/恢复/同artifact实际RF采用。RF与AUDIT仓内既有整改可独立并行。",
+  "next": "先由ROOT集中完成DECOUPLING_FIRST的D1接口/隔离测试、D2跨仓适配与测试归位、D3完整组合和独审；通过后再校准并派发RF/AUDIT等仓内业务PWF。当前不在半解耦状态下启动模块施工。",
   "historical_publication_snapshots": {
     "publication_head": "6668bc978d3ea2217a9aff30be69bde456894c04",
     "cwp_exact_ci": {
@@ -87,7 +87,7 @@
     "project_state": "R6_R4_SOURCE_SEMANTIC_ROOT_REPAIR_AND_DAILY_GATE_SIMPLIFICATION"
   },
   "canonical_entry": "../../../CURRENT_STATUS.md",
-  "project_state": "ARCHITECTURE_REASSESSED_RESIDUAL_GATES_SOURCE_AND_REAL_C_OPEN",
+  "project_state": "DECOUPLING_FIRST_MODULE_WORK_DEFERRED",
   "publication": {
     "revenue-forecast": {
       "source_head": "75c3b0e0d1eb083ab29e8c9e833ed1f95c16e688",
@@ -286,7 +286,8 @@
   "latest_reassessment": {
     "status": "NEW_RESIDUALS_OPEN",
     "report": "review/architecture-reassessment-20261102/README.md",
-    "next_action": "ROOT先同族修复本地输入表示门与FF→ET→CWP最终入库预算残留，完整离线端点验收；随后T4父链/SEM-QUAL-01及单H1真实来源，再新摘要/恢复/同artifact实际RF采用。RF与AUDIT仓内既有整改可独立并行。",
-    "note": "Prior item dispositions remain historical scoped evidence, not a global absence proof."
+    "next_action": "先由ROOT集中完成DECOUPLING_FIRST的D1接口/隔离测试、D2跨仓适配与测试归位、D3完整组合和独审；通过后再校准并派发RF/AUDIT等仓内业务PWF。当前不在半解耦状态下启动模块施工。",
+    "note": "Prior item dispositions remain historical scoped evidence, not a global absence proof.",
+    "dispatch_status": "DEFERRED_UNTIL_DECOUPLING"
   }
 }
