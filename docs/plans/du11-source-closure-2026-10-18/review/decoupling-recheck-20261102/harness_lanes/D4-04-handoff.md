@@ -7,10 +7,10 @@
 | 项 | 值 |
 |---|---|
 | 基线 HEAD | `503f6510`（母仓 master 同点） |
-| 交付 commit | `5daf7e1e7` 实现、`84764733c` 本文档、`90e9c7e26` 审查加固；**接收以分支 `codex/d4-04-transcript-wire` 的 HEAD 为准**（后续可能还有只动本文档的小提交） |
+| 交付 commit | `5daf7e1e7` 实现、`84764733c` 本文档初版、`90e9c7e26` 审查加固，其后另有「错误类型用例 + 断言收紧」小提交；**接收以分支 `codex/d4-04-transcript-wire` 的 HEAD 为准**（`git log --oneline` 可见全部，本文档不自我引用哈希） |
 | 施工位置 | 独立 worktree `C:/Users/郑曾波/Projects/company-wiki-d4-04-wire` |
 | 改动路径 | `src/company_wiki/source_catalog/transcript_import_cli.py`、`tests/contract/test_transcript_import_cli_e2e.py`、新增 `tests/fixtures/transcript_import/{ff_import_request_v2.json,generic_html_import_request_v2.json,README.md}` |
-| 写域外改动 | 无。`.githooks/pre-push` 仅文件模式差异，属母仓既有状态，未 stage |
+| 写域外改动 | 无。`.githooks/pre-push` 仅文件模式差异，属母仓既有状态，未 stage。`tests/fixtures/transcript_import/README.md` 是这两个 fixture 的来源说明，随 fixture 一起交付；它不含代码、不被测试加载，若 ROOT 严格按「只允许 fixture」判读可单独剔除 |
 
 ## 公开协议（唯一合同）
 
@@ -38,10 +38,11 @@
 
 ## 逐项闭合
 
-1. **先 RED**：在父提交 `503f6510` 的原 decoder 上跑 `test_internal_defaulted_field_does_not_change_the_wire` → `1 failed`（`TranscriptImportCliError: source_request fields differ from schema`）。修复后该文件 20 例全绿。
+1. **先 RED**：在父提交 `503f6510` 的原 decoder 上跑 `test_internal_defaulted_field_does_not_change_the_wire` → `1 failed`（`TranscriptImportCliError: source_request fields differ from schema`）。修复后该文件全绿。
 2. **真实进口路径**：字面 fixture 字节直接喂真实 CLI → `run_import` → 真实 scratch catalog → `CanonicalSourceWriter.import_staged` → 写后 `SourceVersionReader.query_ref` + `open_version` + `extract_transcript_material.verify`，并核对 sidecar `transcript_acquisition` 审计字段；第二次导入为 `deduplicated_after_download` 且 `source_ref` 不变。
 3. **内部默认字段演进**：`_EvolvedSourceRequest` / `_EvolvedDownloadCandidate` 各加一个带默认值字段（并断言字段数确实 +1，防止测试空转），monkeypatch 到 decoder 后同一 fixture 仍 `imported`，落盘原始字节一致；测试还用构造记录断言 decoder 真的构造了这两个派生类型（若将来把 import 挪进函数体使 monkeypatch 失效，测试会立刻失败而不是空转）。把同名字段写进 wire 仍被 `fields differ from schema` 拒绝。
-4. **保留的硬检查**：重复 JSON key、`NaN` 常量、非 UTF-8、超 `--max-envelope-bytes` 全部按原样拒绝；`--max-original-bytes 256` 对 862B 原件仍拒绝且不落盘。
+4. **错误类型与缺必需字段**：`fiscal_year="2026"`、`fiscal_year=true`、`allow_download="true"`、`entity=123`、`candidate.remote_size="1024"`、`candidate.amended="no"`、`candidate.fiscal_year=2026.0` 各一例 → `source_request is invalid` / `candidate is invalid`；`source_request` 传非对象 → `fields differ from schema`；缺 `mode`、缺 `remote_size` → 各自的 `fields differ from schema`。全部无落盘、无 staging。
+5. **保留的硬检查**：重复 JSON key、`NaN` 常量、非 UTF-8、超 `--max-envelope-bytes` 全部按原样拒绝；`--max-original-bytes 256` 对 862B 原件仍拒绝且不落盘。拒绝路径断言 staging 目录**不存在**（不是「存在但为空」），与原用例同级。
 
 ## 未放松的 owner 校验（实测逐项拒绝）
 
@@ -65,11 +66,11 @@ PYTHONPATH="C:/Users/郑曾波/Projects/company-wiki-d4-04-wire/src" \
            -p no:cacheprovider -q
 ```
 
-结果：**68 passed in 69.12s**（其中本卡文件 20 passed）。RED 复现：
+结果：**76 passed in 56.64s**（其中本卡文件 28 passed）。RED 复现：
 
 ```
 git checkout 503f6510 -- src/company_wiki/source_catalog/transcript_import_cli.py
-# 同上命令 + -k internal_defaulted_field  →  1 failed, 19 deselected
+# 同上命令 + -k internal_defaulted_field  →  1 failed, 27 deselected
 git checkout HEAD -- src/company_wiki/source_catalog/transcript_import_cli.py
 ```
 
@@ -77,19 +78,21 @@ git checkout HEAD -- src/company_wiki/source_catalog/transcript_import_cli.py
 
 ## 临时目录与恢复
 
-- 所有测试用 `tmp_path`；本文件内的 scratch 根由 `_remove_fixture` 显式删除并断言 `not root.exists()`，staging 目录断言为空。
+- 所有测试用 `tmp_path`；本文件内的 scratch 根由 `_remove_fixture` 显式删除并断言 `not root.exists()`；拒绝路径断言 staging 目录不存在，成功路径断言其为空。
 - 未写生产 `companies/`、`config/`、原件或数据库；未调用 provider/模型/网络。
 - 施工期探针脚本与手工临时根已删除（`_probe_*.py`、`_gen_generic_fixture.py`、`d404-*` 目录）。
 - 交付前删除本地 pre-commit 缓存 `.pc-home/`（未提交）。为跑通仓库自带 pre-commit 钩子，在母仓 `.venv` 安装了开发工具 `pre-commit==4.7.0`（钩子本身要求 `python -m pre_commit`，此前缺失导致提交被阻断）；产品依赖未变。
 
 ## 独立审查
 
-未参与实现的审查 agent（只读）结论 **PASS**，检查了 FF 字面 fixture 独立性、内部默认字段演进是否真 RED、写入后 verified read、owner 校验是否放松、envelope 硬化、写域与测试自证性；其 4 条意见全部处理：
+两轮，均由未参与实现的只读 agent 执行（可追溯 ID：审查 `agent-5a629e37-c727-4c63-a19f-e0aad9f13a30`，完成度审计 `agent-bcbb6ebb-889c-438f-9839-40a6bd7a0922`）。审查结论 **PASS**，检查了 FF 字面 fixture 独立性、内部默认字段演进是否真 RED、写入后 verified read、owner 校验是否放松、envelope 硬化、写域与测试自证性；其 4 条意见全部处理：
 
 1. 测试里 `SourceRequest(**wire)` 直接展开 wire 名 → 改为按 `_SOURCE_REQUEST_WIRE` 映射构造。
 2. fixture 与 ET golden 无漂移守卫 → 新增 `test_literal_ff_fixture_tracks_the_producer_golden`。
 3. import 主响应未做路径泄漏断言 → 新增 `_assert_no_local_path`，并对 lookup 响应同做（原 `str(root) not in stdout` 因 JSON 转义实际无效，已替换）。
 4. 缺 handoff/commit → 本文与 `5daf7e1e7`。
+
+随后一轮**逐条完成度审计**（对照卡片每个分句）指出 3 处并已修复：卡片「错误类型」一项在当时的 HEAD 上没有用例（现补 7 例类型错误 + 1 例非对象）；拒绝路径的 staging 断言被放宽成「存在但为空」（现恢复为「不存在」）；handoff 的测试数字与工作树不一致（现按最终状态回填 76/28）。审计同时确认旧用例被替换后**没有**断言丢失。
 
 ## 需 ROOT 做的 FF→ET→CWP 组合
 

@@ -188,7 +188,7 @@ def _assert_no_local_path(payload: object, root: Path) -> None:
 def _assert_nothing_written(root: Path) -> None:
     assert not _stored_files(root)
     staging = root / ".source_catalog" / "staging"
-    assert not staging.exists() or list(staging.iterdir()) == []
+    assert not staging.exists(), "a rejected import left a staging directory"
 
 
 def _remove_fixture(root: Path, parent: Path) -> None:
@@ -530,6 +530,60 @@ def test_wire_field_set_is_pinned_to_the_request_schema(tmp_path: Path) -> None:
         ):
             transcript_import_cli.run_import(
                 root, io.BytesIO(json.dumps(wrong_envelope_schema).encode("utf-8"))
+            )
+        _assert_nothing_written(root)
+    finally:
+        _remove_fixture(root, tmp_path)
+    assert not root.exists()
+
+
+@pytest.mark.parametrize(
+    ("target", "field", "value", "message"),
+    [
+        ("source_request", "fiscal_year", "2026", "source_request is invalid"),
+        ("source_request", "fiscal_year", True, "source_request is invalid"),
+        ("source_request", "allow_download", "true", "source_request is invalid"),
+        ("source_request", "entity", 123, "source_request is invalid"),
+        ("candidate", "remote_size", "1024", "candidate is invalid"),
+        ("candidate", "amended", "no", "candidate is invalid"),
+        ("candidate", "fiscal_year", 2026.0, "candidate is invalid"),
+    ],
+)
+def test_wire_wrong_value_types_are_still_rejected(
+    tmp_path: Path, target: str, field: str, value: object, message: str
+) -> None:
+    """A published field carrying the wrong JSON type is a clear rejection.
+
+    The pinned projection decides *which* fields exist; the owner types still
+    decide whether a value is usable, so this cannot degrade into "any value
+    that has the right key is accepted".
+    """
+    root = _scratch_root(tmp_path, "company-wiki-types")
+    envelope = _wire(FF_WIRE)
+    section = envelope[target]
+    assert isinstance(section, dict)
+    section[field] = value
+    try:
+        with pytest.raises(TranscriptImportCliError, match=message):
+            transcript_import_cli.run_import(
+                root, io.BytesIO(json.dumps(envelope).encode("utf-8"))
+            )
+        _assert_nothing_written(root)
+    finally:
+        _remove_fixture(root, tmp_path)
+    assert not root.exists()
+
+
+def test_wire_non_object_request_is_rejected(tmp_path: Path) -> None:
+    root = _scratch_root(tmp_path, "company-wiki-nonobject")
+    envelope = _wire(FF_WIRE)
+    envelope["source_request"] = ["not", "an", "object"]
+    try:
+        with pytest.raises(
+            TranscriptImportCliError, match="source_request fields differ from schema"
+        ):
+            transcript_import_cli.run_import(
+                root, io.BytesIO(json.dumps(envelope).encode("utf-8"))
             )
         _assert_nothing_written(root)
     finally:
