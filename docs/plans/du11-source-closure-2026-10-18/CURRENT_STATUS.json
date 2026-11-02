@@ -3,7 +3,7 @@
   "canonical_entry": "CURRENT_STATUS.md",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
-  "execution_mode": "manual_user_authorized_resumption",
+  "execution_mode": "decoupling_audit_complete_product_remediation_planned",
   "runtime_policy": {
     "budget_owner": "config/resource_budget.yaml",
     "model_owner": "config/models.yaml",
@@ -79,10 +79,10 @@
     "event_number_issuer": "each remains original separate binding owner; no promotion from scope alone",
     "consumer": "source cards uncertain/needs_review; RF rationale_support does not modify parameter values"
   },
-  "project_status": "DECOUPLING_D3_COMPLETE_PUBLISHED_T4_NEXT",
+  "project_status": "DECOUPLING_RECHECK_D4_OPEN_BEFORE_BUSINESS_DISPATCH",
   "as_of_date": "2026-11-02",
   "observed_at_utc": "2026-11-02T21:50:39.370275+00:00",
-  "next_action": "ROOT恢复T4来源父链和SEM-QUAL-01限定语义：先按冻结正反例与单个真实半年报修根因，再做新版真实摘要、缓存恢复与实际RF采用；RF/AUDIT仓内计划已就绪，仍未派发。",
+  "next_action": "ROOT freeze real-entry boundary tests and close D4-01 through D4-06; then T4/SEM and real business acceptance",
   "publication": {
     "repositories": {
       "revenue-forecast": {
@@ -217,16 +217,18 @@
   "next_stages": [
     {
       "id": "decoupling-first",
-      "status": "COMPLETE_PUBLISHED_REQUIRED_CI_GREEN",
+      "status": "REOPENED_D4_SIX_CONFIRMED_GAPS",
       "plan": "review/architecture-reassessment-20261102/DECOUPLING_FIRST.md",
-      "evidence": "review/decoupling-20261102/independent/review.md"
+      "evidence": "review/decoupling-20261102/independent/review.md",
+      "recheck": "review/decoupling-recheck-20261102/README.md"
     },
     {
       "id": "residual-gate-families",
-      "status": "CLOSED_IN_D3",
+      "status": "D3_ORIGINAL_BUDGET_FIXED_D4_FF_DIAGNOSTIC_VETO_OPEN",
       "plan": "review/architecture-reassessment-20261102/README.md",
       "sequencing": "Included in decoupling resource/codec ownership, not a separate parallel lane.",
-      "evidence": "review/decoupling-20261102/independent/review.md"
+      "evidence": "review/decoupling-20261102/independent/review.md",
+      "recheck": "review/decoupling-recheck-20261102/README.md"
     },
     {
       "id": "T4-source-parent",
@@ -414,7 +416,7 @@
     "closure": "review/architecture-quality-20261101/implementation-results/gate-rejection-followup-20261102/closure.md"
   },
   "architecture_reassessment": {
-    "status": "DECOUPLING_IMPLEMENTED_AND_INDEPENDENTLY_ACCEPTED",
+    "status": "RECHECK_FOUND_INCOMPLETE_BUSINESS_WIRING_AND_BOUNDARIES",
     "evidence": "review/architecture-reassessment-20261102/README.md",
     "coordination": "review/architecture-reassessment-20261102/COORDINATION.md",
     "new_confirmed_families": [
@@ -422,7 +424,7 @@
       "final_import_budget"
     ],
     "active_writers": {
-      "ROOT": "source mainline next; no module harness active"
+      "ROOT": "D4 recheck planning; no module harness active"
     },
     "prepared_not_dispatched": [
       "revenue-forecast",
@@ -430,11 +432,12 @@
     ],
     "code_changes": true,
     "real_provider_calls": 0,
-    "decoupling": "replaceable public ports, standalone consumer CI and ROOT actual system combination accepted",
-    "dispatch_status": "READY_NOT_DISPATCHED"
+    "decoupling": "D3 selected ports passed; six recheck gaps remain, no D4 product fixes yet",
+    "dispatch_status": "DEFERRED_UNTIL_D4_CLOSURE",
+    "recheck": "review/decoupling-recheck-20261102/README.md"
   },
   "decoupling_first": {
-    "status": "COMPLETE_PUBLISHED_REQUIRED_CI_GREEN",
+    "status": "REOPENED_D4_SIX_CONFIRMED_GAPS",
     "plan": "review/architecture-reassessment-20261102/DECOUPLING_FIRST.md",
     "completed": [
       "D0 dependency ownership",
@@ -443,14 +446,38 @@
       "D3 39 current integration tests, installed runtime, real readonly and independent review",
       "Normal mainline commits/pushes, exact remote CI and three skill entry points"
     ],
-    "open": [],
-    "module_dispatch": "READY_NOT_DISPATCHED",
+    "open": [
+      "D4-01",
+      "D4-02",
+      "D4-03",
+      "D4-04",
+      "D4-05",
+      "D4-06"
+    ],
+    "module_dispatch": "DEFERRED_UNTIL_D4_CLOSURE",
     "requires_user_reapproval": false,
     "business_tasks_retained": true,
     "independent_review": "review/decoupling-20261102/independent/review.md",
     "release": "review/decoupling-20261102/release.md",
     "exact_ci_observed_at": "2026-11-02T21:50:39.370275+00:00",
     "accepted_source_version": "3d822c41e24b3d14f926351567c37bb572b5a947",
-    "current_test_routing_version": "a03d0c0296496eeb8aac23fa0ed3774f2b31abcf"
+    "current_test_routing_version": "a03d0c0296496eeb8aac23fa0ed3774f2b31abcf",
+    "recheck": "review/decoupling-recheck-20261102/README.md",
+    "previous_D3_selected_acceptance_preserved": true
+  },
+  "decoupling_recheck": {
+    "report": "review/decoupling-recheck-20261102/README.md",
+    "evidence": "review/decoupling-recheck-20261102/evidence.json",
+    "status": "AUDIT_COMPLETE_REMEDIATION_NOT_IMPLEMENTED",
+    "open": [
+      "D4-01",
+      "D4-02",
+      "D4-03",
+      "D4-04",
+      "D4-05",
+      "D4-06"
+    ],
+    "product_changes_this_review": 0,
+    "paid_calls": 0
   }
 }

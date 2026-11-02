@@ -6,9 +6,11 @@
 
 ## Next Step
 
-D3已独审、部署并完成正常发布，代码与组合CI已绿。ROOT按T4、SEM-QUAL-01、新版真实摘要、缓存恢复、实际RF采用继续，RF/AUDIT仓内业务未派发。
+最新全面复核确认六项解耦遗漏；ROOT先按[复核/D4实施细则](review/decoupling-recheck-20261102/README.md)冻结真实入口失败测试并集中收口，再回T4/SEM及真实业务链。RF/AUDIT业务暂不派发。本次仅完成审计与计划校正，尚未实施D4。
 
 ## P0-D — 解耦优先
+
+**当前D4 OPEN：1P1/5P2，不能签全面解耦完成。** [新复核/实施细则](review/decoupling-recheck-20261102/README.md)取代原READY状态；原D3只保其已执行范围。
 
 实施与完成标准见[DECOUPLING_FIRST](review/architecture-reassessment-20261102/DECOUPLING_FIRST.md)。D0–D3工程完成并[独审通过](review/decoupling-20261102/independent/review.md)：公开端口/DTO、实际资源预算、隔离测试与ROOT组合39项零跳过；正常部署与真实原文只读验证完成。[发布记录](review/decoupling-20261102/release.md)列远端证据。P1–P3业务目标保留，不用架构通过替代新真实验收。
 

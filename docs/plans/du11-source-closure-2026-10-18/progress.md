@@ -336,3 +336,8 @@ RF 712、FF 946（76子测试）、StockWiki 110、AUDIT 43（56子测试）、E
 ## 2026-11-02 — 发布闭合
 
 D3已完成，CWP `a03d0c02`、RF `ad178dbc`、FF `508aba30`正常推主线，生产代码与当前组合CI已绿；StockWiki/AUDIT仅本地。RF回执换行补漏、FF Linux夹具与进程组退出根因已复验，三安装入口再次通过。见review/decoupling-20261102/release.md。下一步T4+SEM；仓内业务未派发。
+
+
+## 2026-11-02 — 全面解耦复核重新打开D4
+
+三独立审查+ROOT当前真实入口/隔离小探针发现1P1/5P2：Stock默认物理目录研究路径，RF实际consume端点漏传，CWP纯DTO反向runtime依赖，import wire反射内部字段，FF可选stderr否决native成功，AUDIT两真producer测试未归ROOT。旧D3选择集/发布不抹掉，但全局完成声明收窄，RF/AUDIT改DEFERRED_UNTIL_D4_CLOSURE。实施细则和证据见review/decoupling-recheck-20261102/README.md。AUDIT两例当前2P/3.57s；其他新增探针证明缺口而非假装通过；0模型/provider/原件生产配置写，临时合成根清理。本轮仅核查/计划校正，六项产品修复尚未实施。根因是组件覆盖外推全流程、无import不等于无目录耦合、prepare不等于consume及mock隐藏部署。下次先D4真实入口反例和owner根修，一个大节点独审/组合，再恢复T4/SEM和真实摘要/cache/RF采用，不重复整仓或增逐helper许可。

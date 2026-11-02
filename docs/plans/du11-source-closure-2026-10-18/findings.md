@@ -131,3 +131,8 @@ StockWiki首写因其他owner边界被自动审批拒；提供既有明确跨仓
 
 
 发布复查补漏：真实Linux归档使本机邻仓遮蔽的测试依赖显形；测试配置/生产者策略归各自owner。POSIX信号发送与进程实际终止是不同事件，须在同一既有清理grace确认，测试探针不把reap竞态当泄漏。RF摘要回执只要求一个合法JSON对象，不要求其排版。
+
+
+## 2026-11-02 — 全面解耦复核重新打开D4
+
+三独立审查+ROOT当前真实入口/隔离小探针发现1P1/5P2：Stock默认物理目录研究路径，RF实际consume端点漏传，CWP纯DTO反向runtime依赖，import wire反射内部字段，FF可选stderr否决native成功，AUDIT两真producer测试未归ROOT。旧D3选择集/发布不抹掉，但全局完成声明收窄，RF/AUDIT改DEFERRED_UNTIL_D4_CLOSURE。实施细则和证据见review/decoupling-recheck-20261102/README.md。AUDIT两例当前2P/3.57s；其他新增探针证明缺口而非假装通过；0模型/provider/原件生产配置写，临时合成根清理。本轮仅核查/计划校正，六项产品修复尚未实施。根因是组件覆盖外推全流程、无import不等于无目录耦合、prepare不等于consume及mock隐藏部署。下次先D4真实入口反例和owner根修，一个大节点独审/组合，再恢复T4/SEM和真实摘要/cache/RF采用，不重复整仓或增逐helper许可。

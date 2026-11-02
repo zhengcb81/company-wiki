@@ -1,11 +1,13 @@
-# 当前交接 — D3解耦工程通过
+# 当前交接 — 先补齐D4解耦遗漏
 
-PLAN_ID=du11-source-closure-2026-10-18；PWF_PLAN_ROOT=docs/plans。唯一状态[CURRENT_STATUS](CURRENT_STATUS.md)，原目标[MAINLINE_LOOP_GOAL](MAINLINE_LOOP_GOAL.md)保持。
+PLAN_ID=du11-source-closure-2026-10-18；唯一状态[CURRENT_STATUS](CURRENT_STATUS.md)，原目标[MAINLINE_LOOP_GOAL](MAINLINE_LOOP_GOAL.md)保持。
 
-1. 先读[独立验收](review/decoupling-20261102/independent/review.md)与[发布记录](review/decoupling-20261102/release.md)。D0–D3工程、独审与相关远端CI均已通过；增量失败根因和准确CI版本见发布记录，不重跑已过组合。
-2. ROOT恢复[原计划](task_plan.md)的T4父链/SEM-QUAL-01。先用既有冻结真实来源和合成正反例验证限定/归属；仅根因修复需要时才执行受影响真实链。新真实摘要、同跨run缓存恢复、RF实际参数/公式采用依次验收。
-3. RF/AUDIT仓内计划已校准公开连接、版本和职责，尚未派发或开工。各仓只写本仓；ROOT拥有组合与发布。正式分工见[COORDINATION](review/architecture-reassessment-20261102/COORDINATION.md)。
-4. [ROOT组合入口](../../../integration/README.md)有明确当前测试清单；历史canary/签收断言是显式重放，不恢复为日常门禁。不同端点/cwd、真实17MiB+原件/22MiB预算、原字节SHA、0重下载已有合格证据。配置中的真实额度继续，未知费用不猜0、不重POST。
-5. 保持已有原件/封存/配置/外来WIP。RF旧系统日检仍有历史告警，当前运行/发布不依赖它，系统任务查询访问受限；不要回退日志或把旧not-ok当当前结果。
+1. 先读[2026-11-02复核与D4实施细则](review/decoupling-recheck-20261102/README.md)及三份独立报告。六项OPEN，本轮只审计/改PWF，未修产品。不要依据旧D3报告直接启动业务分包。
+2. D3实际公开端口、原文预算、39项组合/安装验证与[发布记录](review/decoupling-20261102/release.md)保留；只重验D4新增影响，不能把选择集通过当全仓独立。
+3. D4按真实入口先写反例，ROOT集中接通Stock默认来源与RF实际采用，修纯DTO依赖、wire内部反射和诊断否决，归位AUDIT两项组合。一个集中大节点独审/组合，正常提交推送和必要定点部署。
+4. RF/AUDIT仓内业务PWF均为DEFERRED_UNTIL_D4_CLOSURE，未派发。D4关闭后恢复T4/SEM与真实摘要/cache/RF采用；固定公司loop未完成。
+5. 保原件/旧R4/生产配置/库和RF四assurance WIP、CWP hook模式WIP。旧RF日检仍可能追加诊断，当前计算/发布不依赖它；不要把旧not-ok当当前结果或声称任务已退休。
 
-正常宿主C:/Miniconda/python.exe -B -X utf8。定点同步按canonical现有安装器，保配置/output；RF和FF三入口已实测。没有remote的StockWiki/AUDIT如实本地交付。Dayu、IQS、Dashboard不动。
+正常宿主C:/Miniconda/python.exe -B -X utf8；若用现有PowerShell PWF resolver，它需要清除不兼容的相对PWF_PLAN_ROOT并传-PlanRoot绝对docs/plans和PLAN_ID，解析出的当前目录必须与本页一致，不能落回旧根计划。此为工具调用参数差异，不改全局技能。
+
+StockWiki/AUDIT无remote，如实本地交付；Dayu/IQS/Dashboard不动。定点部署保配置/output，不新增逐材料许可。

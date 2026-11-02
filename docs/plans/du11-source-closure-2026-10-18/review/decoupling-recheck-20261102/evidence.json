@@ -1,0 +1,414 @@
+{
+  "schema_version": "decoupling-recheck/1",
+  "reviewed_at_utc": "2026-11-02T22:04:35.447164+00:00",
+  "status": "REOPENED_SIX_CONFIRMED_GAPS_NO_PRODUCT_FIXES_THIS_REVIEW",
+  "versions": {
+    "company-wiki": "a591e48909b4b912adfaea54dc63bcad181269ef",
+    "revenue-forecast": "ad178dbcc4c407c1006659c537b09d88728b5af9",
+    "filing-fetch": "508aba308cf5206c486119c446b66172debdc09a",
+    "StockWiki": "d8d3303cb4b91fb6bfc8db6202ea3919276f833e",
+    "earnings-transcripts": "003c1c065109d0b02c7bd4de09ad3e8461a99c0e",
+    "revenue-forecast-audit": "f1ae262ed85b6da5d8b040a0b691f1041e20f0cb"
+  },
+  "open": [
+    "D4-01",
+    "D4-02",
+    "D4-03",
+    "D4-04",
+    "D4-05",
+    "D4-06"
+  ],
+  "prior_D3_selected_passes_preserved": true,
+  "severity": {
+    "P1": [
+      "D4-01"
+    ],
+    "P2": [
+      "D4-02",
+      "D4-03",
+      "D4-04",
+      "D4-05",
+      "D4-06"
+    ]
+  },
+  "consumers": {
+    "kind": "read_only_product_audit_synthetic_scratch",
+    "supplier_calls": 0,
+    "scratch": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\decoupling-recheck-20261103\\consumers\\consumer-probe-rijix1k7",
+    "rf_explicit_reader_status": "verified",
+    "rf_consume_signature": "(data: 'dict', *, request: 'dict', bindings: 'list[dict]', source_id: 'str', catalog_config: 'Path', timeout_seconds: 'float' = 30, verified_by: 'str' = 'RF narrative reader') -> 'tuple[dict, dict]'",
+    "rf_consume_explicit_command_error": "consume_narrative_input() got an unexpected keyword argument 'reader_command'",
+    "rf_consume_actual_command": [
+      "C:\\Miniconda\\python.exe",
+      "-B",
+      "-m",
+      "company_wiki.source_catalog.narrative_transport_cli",
+      "--config",
+      "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\decoupling-recheck-20261103\\consumers\\consumer-probe-rijix1k7\\opaque-not-a-real-config.handle",
+      "--operation",
+      "read"
+    ],
+    "stock_cli_returncode": 0,
+    "stock_cli_output": "Ran company pipeline: Synthetic Generic Co (TEST.N)\nPrimary type: product_driven\nSources referenced: 1\nEvidence records: 1\nWritten files: 8\nC:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\decoupling-recheck-20261103\\consumers\\consumer-probe-rijix1k7\\stockwiki-workspace\\data\\companies\\TEST.N\\external_sources.yaml\nC:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\decoupling-recheck-20261103\\consumers\\consumer-probe-rijix1k7\\stockwiki-workspace\\data\\companies\\TEST.N\\evidence_index.yaml\nC:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\decoupling-recheck-20261103\\consumers\\consumer-probe-rijix1k7\\stockwiki-workspace\\wiki\\companies\\TEST.N\\profile.md\nC:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\decoupling-recheck-20261103\\consumers\\consumer-probe-rijix1k7\\stockwiki-workspace\\wiki\\companies\\TEST.N\\classification.md\nC:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\decoupling-recheck-20261103\\consumers\\consumer-probe-rijix1k7\\stockwiki-workspace\\wiki\\companies\\TEST.N\\analysis_framework.md\nC:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\decoupling-recheck-20261103\\consumers\\consumer-probe-rijix1k7\\stockwiki-workspace\\wiki\\companies\\TEST.N\\timelines\\source_timeline.md\nC:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\decoupling-recheck-20261103\\consumers\\consumer-probe-rijix1k7\\stockwiki-workspace\\wiki\\companies\\TEST.N\\reports\\framework_bootstrap.md\nC:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\decoupling-recheck-20261103\\consumers\\consumer-probe-rijix1k7\\stockwiki-workspace\\wiki\\companies\\TEST.N\\questions\\rd_and_product.md\n",
+    "stock_cli_source": {
+      "source_id": "src_1b197f77d6087d95",
+      "original_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\decoupling-recheck-20261103\\consumers\\consumer-probe-rijix1k7\\physical-lake-location-A\\business.txt",
+      "relative_path": "business.txt",
+      "title": "business",
+      "source_type": "unknown",
+      "extension": ".txt",
+      "size_bytes": 66,
+      "modified_at": "2026-11-02T21:58:39",
+      "source_date": "2026-11-02",
+      "is_text": true,
+      "date_basis": "modified"
+    },
+    "stock_config_doc_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\decoupling-recheck-20261103\\consumers\\consumer-probe-rijix1k7\\physical-lake-location-A",
+    "stock_default_enrich_discovery_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\decoupling-recheck-20261103\\consumers\\consumer-probe-rijix1k7\\physical-lake-location-A",
+    "stock_enrich_no_doc_root_exit": 0,
+    "stock_default_enrich_public_reader_calls": 0,
+    "stock_same_bytes_different_path_changes_id": true,
+    "stock_changed_bytes_same_path_keeps_id": true,
+    "synthetic_raw_changed": true,
+    "scratch_removed": true
+  },
+  "acquisition": {
+    "transcript_import_current_wire": {
+      "outcome": "returned",
+      "status": "SourceRequest",
+      "seconds": 0.0
+    },
+    "same_wire_direct_evolved_internal_type": {
+      "outcome": "returned",
+      "status": "SourceRequestWithInternalDefault",
+      "seconds": 0.0
+    },
+    "same_wire_import_evolved_internal_type": {
+      "outcome": "raised",
+      "type": "TranscriptImportCliError",
+      "code": null,
+      "message": "source_request fields differ from schema",
+      "cause": null,
+      "seconds": 0.0
+    },
+    "local_prepare_current": {
+      "outcome": "raised",
+      "type": "FilingFetchError",
+      "code": "not_found",
+      "message": "local source preparation not_found: unknown",
+      "cause": null,
+      "seconds": 0.0
+    },
+    "local_prepare_optional_extensions": {
+      "outcome": "raised",
+      "type": "FilingFetchError",
+      "code": "upstream_error",
+      "message": "invalid local preparation receipt",
+      "cause": null,
+      "seconds": 0.0
+    },
+    "financial_tiny_result": {
+      "outcome": "returned",
+      "status": "complete",
+      "seconds": 0.761
+    },
+    "financial_valid_result_diagnostic_65537_bytes": {
+      "outcome": "raised",
+      "type": "FilingFetchError",
+      "code": "upstream_error",
+      "message": "company-wiki financial statements child failed: OutputLimitExceeded",
+      "cause": "OutputLimitExceeded",
+      "seconds": 0.385
+    },
+    "financial_valid_result_33MiB_representation": {
+      "outcome": "raised",
+      "type": "FilingFetchError",
+      "code": "upstream_error",
+      "message": "company-wiki financial statements child failed: OutputLimitExceeded",
+      "cause": "OutputLimitExceeded",
+      "seconds": 0.581
+    },
+    "scratch_restored": true,
+    "network_calls": 0
+  },
+  "pure_layer_import": [
+    {
+      "returncode": 0,
+      "observation": {
+        "mode": "ordinary",
+        "outcome": "imported",
+        "error": null,
+        "stack": [],
+        "seconds": 1.727,
+        "catalog_modules": [
+          "company_wiki.source_catalog",
+          "company_wiki.source_catalog.acquisition",
+          "company_wiki.source_catalog.acquisition_config",
+          "company_wiki.source_catalog.acquisition_failure",
+          "company_wiki.source_catalog.acquisition_journal",
+          "company_wiki.source_catalog.acquisition_service",
+          "company_wiki.source_catalog.adapter_process",
+          "company_wiki.source_catalog.adapters",
+          "company_wiki.source_catalog.adapters.common",
+          "company_wiki.source_catalog.adapters.dayu",
+          "company_wiki.source_catalog.adapters.interface",
+          "company_wiki.source_catalog.adapters.registry",
+          "company_wiki.source_catalog.admission",
+          "company_wiki.source_catalog.assertion_service",
+          "company_wiki.source_catalog.authorization",
+          "company_wiki.source_catalog.canonical_writer",
+          "company_wiki.source_catalog.compat_scan_rollout",
+          "company_wiki.source_catalog.config",
+          "company_wiki.source_catalog.dayu_cli_adapter",
+          "company_wiki.source_catalog.document_kinds",
+          "company_wiki.source_catalog.download_budget",
+          "company_wiki.source_catalog.duplicate_cleanup",
+          "company_wiki.source_catalog.extraction_quality",
+          "company_wiki.source_catalog.financial_statements",
+          "company_wiki.source_catalog.financial_statements.schema",
+          "company_wiki.source_catalog.flags",
+          "company_wiki.source_catalog.focus_cleanup",
+          "company_wiki.source_catalog.gap_plan",
+          "company_wiki.source_catalog.llm_failure_policy",
+          "company_wiki.source_catalog.lock",
+          "company_wiki.source_catalog.maintenance_retirement",
+          "company_wiki.source_catalog.metadata_observation",
+          "company_wiki.source_catalog.models",
+          "company_wiki.source_catalog.narrative_artifact_store",
+          "company_wiki.source_catalog.narrative_document",
+          "company_wiki.source_catalog.normalizer",
+          "company_wiki.source_catalog.policy",
+          "company_wiki.source_catalog.policy_2x",
+          "company_wiki.source_catalog.prompt_injection",
+          "company_wiki.source_catalog.qualification",
+          "company_wiki.source_catalog.reader",
+          "company_wiki.source_catalog.registration_scope",
+          "company_wiki.source_catalog.resolver",
+          "company_wiki.source_catalog.runtime_policy",
+          "company_wiki.source_catalog.scanner",
+          "company_wiki.source_catalog.security_code",
+          "company_wiki.source_catalog.security_identity",
+          "company_wiki.source_catalog.service",
+          "company_wiki.source_catalog.source_group_scope",
+          "company_wiki.source_catalog.source_location",
+          "company_wiki.source_catalog.source_read_policy",
+          "company_wiki.source_catalog.source_reader",
+          "company_wiki.source_catalog.store",
+          "company_wiki.source_catalog.transcript_layout"
+        ]
+      },
+      "stderr": ""
+    },
+    {
+      "returncode": 0,
+      "observation": {
+        "mode": "isolated",
+        "outcome": "failed",
+        "error": "ModuleNotFoundError: probe: storage service intentionally unavailable",
+        "stack": [
+          {
+            "file": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\decoupling-recheck-20261103\\probe_normalization_boundary.py",
+            "line": 32,
+            "code": "importlib.import_module(module)"
+          },
+          {
+            "file": "C:\\Miniconda\\Lib\\importlib\\__init__.py",
+            "line": 88,
+            "code": "return _bootstrap._gcd_import(name[level:], package, level)"
+          },
+          {
+            "file": "<frozen importlib._bootstrap>",
+            "line": 1387,
+            "code": ""
+          },
+          {
+            "file": "<frozen importlib._bootstrap>",
+            "line": 1360,
+            "code": ""
+          },
+          {
+            "file": "<frozen importlib._bootstrap>",
+            "line": 1331,
+            "code": ""
+          },
+          {
+            "file": "<frozen importlib._bootstrap>",
+            "line": 935,
+            "code": ""
+          },
+          {
+            "file": "<frozen importlib._bootstrap_external>",
+            "line": 1027,
+            "code": ""
+          },
+          {
+            "file": "<frozen importlib._bootstrap>",
+            "line": 488,
+            "code": ""
+          },
+          {
+            "file": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\document_normalization\\__init__.py",
+            "line": 23,
+            "code": "from .document import KNOWN_FORMATS, NormalizedDocument"
+          },
+          {
+            "file": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\document_normalization\\document.py",
+            "line": 17,
+            "code": "from company_wiki.source_catalog.narrative_document import ("
+          },
+          {
+            "file": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\__init__.py",
+            "line": 16,
+            "code": "from .service import SourceCatalog"
+          },
+          {
+            "file": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\decoupling-recheck-20261103\\probe_normalization_boundary.py",
+            "line": 21,
+            "code": "raise ModuleNotFoundError(\"probe: storage service intentionally unavailable\")"
+          }
+        ],
+        "seconds": 0.173,
+        "catalog_modules": [
+          "company_wiki.source_catalog.adapters",
+          "company_wiki.source_catalog.adapters.registry",
+          "company_wiki.source_catalog.config",
+          "company_wiki.source_catalog.models"
+        ]
+      },
+      "stderr": ""
+    },
+    {
+      "returncode": 0,
+      "observation": {
+        "mode": "contract",
+        "outcome": "imported",
+        "error": null,
+        "stack": [],
+        "seconds": 0.204,
+        "catalog_modules": []
+      },
+      "stderr": ""
+    },
+    {
+      "returncode": 0,
+      "observation": {
+        "mode": "engine",
+        "outcome": "failed",
+        "error": "ModuleNotFoundError: probe: storage service intentionally unavailable",
+        "stack": [
+          {
+            "file": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\decoupling-recheck-20261103\\probe_normalization_boundary.py",
+            "line": 32,
+            "code": "importlib.import_module(module)"
+          },
+          {
+            "file": "C:\\Miniconda\\Lib\\importlib\\__init__.py",
+            "line": 88,
+            "code": "return _bootstrap._gcd_import(name[level:], package, level)"
+          },
+          {
+            "file": "<frozen importlib._bootstrap>",
+            "line": 1387,
+            "code": ""
+          },
+          {
+            "file": "<frozen importlib._bootstrap>",
+            "line": 1360,
+            "code": ""
+          },
+          {
+            "file": "<frozen importlib._bootstrap>",
+            "line": 1310,
+            "code": ""
+          },
+          {
+            "file": "<frozen importlib._bootstrap>",
+            "line": 488,
+            "code": ""
+          },
+          {
+            "file": "<frozen importlib._bootstrap>",
+            "line": 1387,
+            "code": ""
+          },
+          {
+            "file": "<frozen importlib._bootstrap>",
+            "line": 1360,
+            "code": ""
+          },
+          {
+            "file": "<frozen importlib._bootstrap>",
+            "line": 1331,
+            "code": ""
+          },
+          {
+            "file": "<frozen importlib._bootstrap>",
+            "line": 935,
+            "code": ""
+          },
+          {
+            "file": "<frozen importlib._bootstrap_external>",
+            "line": 1027,
+            "code": ""
+          },
+          {
+            "file": "<frozen importlib._bootstrap>",
+            "line": 488,
+            "code": ""
+          },
+          {
+            "file": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\document_understanding\\__init__.py",
+            "line": 31,
+            "code": "from .observation_adapter import build_observation, is_selectable, selectable_unit_ids"
+          },
+          {
+            "file": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\document_understanding\\observation_adapter.py",
+            "line": 25,
+            "code": "from company_wiki.document_normalization.form_fields import has_inline_form_response"
+          },
+          {
+            "file": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\document_normalization\\__init__.py",
+            "line": 23,
+            "code": "from .document import KNOWN_FORMATS, NormalizedDocument"
+          },
+          {
+            "file": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\document_normalization\\document.py",
+            "line": 17,
+            "code": "from company_wiki.source_catalog.narrative_document import ("
+          },
+          {
+            "file": "C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\source_catalog\\__init__.py",
+            "line": 16,
+            "code": "from .service import SourceCatalog"
+          },
+          {
+            "file": "C:\\Users\\郑曾波\\Projects\\company-wiki\\.planning\\decoupling-recheck-20261103\\probe_normalization_boundary.py",
+            "line": 21,
+            "code": "raise ModuleNotFoundError(\"probe: storage service intentionally unavailable\")"
+          }
+        ],
+        "seconds": 0.169,
+        "catalog_modules": [
+          "company_wiki.source_catalog.adapters",
+          "company_wiki.source_catalog.adapters.registry",
+          "company_wiki.source_catalog.config",
+          "company_wiki.source_catalog.models"
+        ]
+      },
+      "stderr": ""
+    }
+  ],
+  "audit_bundle_tests": {
+    "passed": 2,
+    "seconds": 3.57,
+    "scope": "actual v2/v3 producer bundle import, independent host run"
+  },
+  "production_writes": 0,
+  "external_provider_calls": 0,
+  "paid_calls": 0,
+  "report_sha256": {
+    "consumers.md": "21734a95d24327b15b7a67e9130587600dde09b6f866ec67626a885be3aa7781",
+    "acquisition.md": "8cc0894eedbe6635177bb895e26fd399f1e57d09f7055dd30ce54d02c0007f5b",
+    "acceptance.md": "20345ff59ff23235b525024fc5173675dc83fa1180051ebf04b9a9cb834fd242"
+  }
+}
