@@ -331,3 +331,8 @@ RF/AUDIT/FF仓内计划经过独立边界审阅，纠正FMP原件应是JSON而TX
 ## 2026-11-02 — D3独立工程验收通过
 
 RF 712、FF 946（76子测试）、StockWiki 110、AUDIT 43（56子测试）、ET 95独立通过；CWP相关契约30、mypy422文件通过。ROOT 39P/0F/0skip/124.35s，隔离根恢复，真实A股半年报1,216,470字节经公开reader实读、配置/库SHA不变。三技能入口定点同步并实际新进程通过，重复同步零写。无收费provider或生产原文写入。独审和发布：review/decoupling-20261102/。业务原T4/SEM/真实摘要/恢复/RF采用及固定公司保持OPEN，未派发模块卡。
+
+
+## 2026-11-02 — 发布闭合
+
+D3已完成，CWP `a03d0c02`、RF `ad178dbc`、FF `508aba30`正常推主线，生产代码与当前组合CI已绿；StockWiki/AUDIT仅本地。RF回执换行补漏、FF Linux夹具与进程组退出根因已复验，三安装入口再次通过。见review/decoupling-20261102/release.md。下一步T4+SEM；仓内业务未派发。

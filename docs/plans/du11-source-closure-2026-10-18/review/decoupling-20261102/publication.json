@@ -1,0 +1,107 @@
+{
+  "status": "complete",
+  "observed": {
+    "observed_at_utc": "2026-11-02T21:50:39.370275+00:00",
+    "repositories": {
+      "company-wiki": {
+        "head": "a03d0c0296496eeb8aac23fa0ed3774f2b31abcf",
+        "runs": [
+          {
+            "name": "Source system integration",
+            "id": 41531674700,
+            "status": "completed",
+            "conclusion": "success",
+            "head_sha": "a03d0c0296496eeb8aac23fa0ed3774f2b31abcf",
+            "head_branch": "master",
+            "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41531674700",
+            "updated_at": "2026-11-02T21:49:45Z",
+            "verified_jobs": [
+              {
+                "id": 125573172850,
+                "status": "completed",
+                "conclusion": "success",
+                "started_at": "2026-11-02T21:48:23Z",
+                "completed_at": "2026-11-02T21:49:44Z"
+              }
+            ],
+            "current_chain_step": {
+              "status": "completed",
+              "conclusion": "success",
+              "started_at": "2026-11-02T21:48:56Z",
+              "completed_at": "2026-11-02T21:49:38Z"
+            }
+          }
+        ],
+        "expected_workflows": [
+          "CI",
+          "Source system integration"
+        ]
+      },
+      "revenue-forecast": {
+        "head": "ad178dbcc4c407c1006659c537b09d88728b5af9",
+        "runs": [
+          {
+            "name": "quality",
+            "id": 41529763715,
+            "status": "completed",
+            "conclusion": "success",
+            "head_sha": "ad178dbcc4c407c1006659c537b09d88728b5af9",
+            "head_branch": "main",
+            "html_url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/41529763715",
+            "updated_at": "2026-11-02T21:37:38Z"
+          }
+        ],
+        "expected_workflows": [
+          "quality"
+        ]
+      },
+      "filing-fetch": {
+        "head": "508aba308cf5206c486119c446b66172debdc09a",
+        "runs": [
+          {
+            "name": "quality",
+            "id": 41530743017,
+            "status": "completed",
+            "conclusion": "success",
+            "head_sha": "508aba308cf5206c486119c446b66172debdc09a",
+            "head_branch": "main",
+            "html_url": "https://github.com/zhengcb81/filing-fetch/actions/runs/41530743017",
+            "updated_at": "2026-11-02T21:44:25Z"
+          }
+        ],
+        "expected_workflows": [
+          "quality"
+        ]
+      }
+    },
+    "company_wiki_routing_ordinary_ci": {
+      "name": "CI",
+      "id": 41530809013,
+      "status": "completed",
+      "conclusion": "success",
+      "head_sha": "fbc2c858bf4b5f2b859cf9d753c3f126eb78f6f0",
+      "head_branch": "master",
+      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41530809013",
+      "updated_at": "2026-11-02T21:49:57Z",
+      "verified_jobs": [
+        {
+          "id": 125570176935,
+          "status": "completed",
+          "conclusion": "success",
+          "started_at": "2026-11-02T21:42:38Z",
+          "completed_at": "2026-11-02T21:49:56Z"
+        }
+      ]
+    }
+  },
+  "source_ci_earlier": {
+    "company-wiki": "3d822c41e24b3d14f926351567c37bb572b5a947",
+    "runs": [
+      41528855117,
+      41528854781
+    ]
+  },
+  "module_dispatch": "READY_NOT_DISPATCHED",
+  "no_new_paid_calls": true,
+  "originals_preserved": true
+}

@@ -79,24 +79,24 @@
     "event_number_issuer": "each remains original separate binding owner; no promotion from scope alone",
     "consumer": "source cards uncertain/needs_review; RF rationale_support does not modify parameter values"
   },
-  "project_status": "DECOUPLING_D3_ENGINEERING_PASS_PUBLICATION_IN_PROGRESS",
+  "project_status": "DECOUPLING_D3_COMPLETE_PUBLISHED_T4_NEXT",
   "as_of_date": "2026-11-02",
-  "observed_at_utc": "2026-11-02T21:27:47.494421+00:00",
-  "next_action": "D3工程及独审已通过，按实际发布记录完成主线推送和精确CI确认；随后ROOT恢复T4父链、SEM-QUAL-01、新版真实摘要、缓存恢复和RF采用。RF/AUDIT仓内PWF已按实际接口校准，尚未派发。",
+  "observed_at_utc": "2026-11-02T21:50:39.370275+00:00",
+  "next_action": "ROOT恢复T4来源父链和SEM-QUAL-01限定语义：先按冻结正反例与单个真实半年报修根因，再做新版真实摘要、缓存恢复与实际RF采用；RF/AUDIT仓内计划已就绪，仍未派发。",
   "publication": {
     "repositories": {
       "revenue-forecast": {
-        "source_head": "75c3b0e0d1eb083ab29e8c9e833ed1f95c16e688",
+        "source_head": "ad178dbcc4c407c1006659c537b09d88728b5af9",
         "exact_ci": [
           {
-            "id": 41467964497,
             "name": "quality",
-            "head_sha": "75c3b0e0d1eb083ab29e8c9e833ed1f95c16e688",
-            "head_branch": "main",
+            "id": 41529763715,
             "status": "completed",
             "conclusion": "success",
-            "html_url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/41467964497",
-            "updated_at": "2026-11-02T15:05:20Z"
+            "head_sha": "ad178dbcc4c407c1006659c537b09d88728b5af9",
+            "head_branch": "main",
+            "html_url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/41529763715",
+            "updated_at": "2026-11-02T21:37:38Z"
           }
         ]
       },
@@ -116,32 +116,68 @@
         ]
       },
       "company-wiki": {
-        "source_head": "a233fb37f200ea9b470e3926a14224c4dcaaca03",
+        "source_head": "3d822c41e24b3d14f926351567c37bb572b5a947",
         "exact_ci": [
           {
-            "id": 41503775714,
-            "name": "CI",
-            "head_sha": "a233fb37f200ea9b470e3926a14224c4dcaaca03",
-            "head_branch": "master",
+            "name": "Source system integration",
+            "id": 41531674700,
             "status": "completed",
             "conclusion": "success",
-            "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41503775714",
-            "updated_at": "2026-11-02T18:54:33Z"
+            "head_sha": "a03d0c0296496eeb8aac23fa0ed3774f2b31abcf",
+            "head_branch": "master",
+            "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41531674700",
+            "updated_at": "2026-11-02T21:49:45Z",
+            "verified_jobs": [
+              {
+                "id": 125573172850,
+                "status": "completed",
+                "conclusion": "success",
+                "started_at": "2026-11-02T21:48:23Z",
+                "completed_at": "2026-11-02T21:49:44Z"
+              }
+            ],
+            "current_chain_step": {
+              "status": "completed",
+              "conclusion": "success",
+              "started_at": "2026-11-02T21:48:56Z",
+              "completed_at": "2026-11-02T21:49:38Z"
+            }
           }
-        ]
+        ],
+        "test_routing_head": "a03d0c0296496eeb8aac23fa0ed3774f2b31abcf",
+        "source_ci_run": 41528855117,
+        "routing_ordinary_ci": {
+          "name": "CI",
+          "id": 41530809013,
+          "status": "completed",
+          "conclusion": "success",
+          "head_sha": "fbc2c858bf4b5f2b859cf9d753c3f126eb78f6f0",
+          "head_branch": "master",
+          "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41530809013",
+          "updated_at": "2026-11-02T21:49:57Z",
+          "verified_jobs": [
+            {
+              "id": 125570176935,
+              "status": "completed",
+              "conclusion": "success",
+              "started_at": "2026-11-02T21:42:38Z",
+              "completed_at": "2026-11-02T21:49:56Z"
+            }
+          ]
+        }
       },
       "filing-fetch": {
-        "source_head": "b3f0b9cceb87338c64dc8ddd698707f01ac6691a",
+        "source_head": "508aba308cf5206c486119c446b66172debdc09a",
         "exact_ci": [
           {
-            "id": 41495529161,
             "name": "quality",
-            "head_sha": "b3f0b9cceb87338c64dc8ddd698707f01ac6691a",
-            "head_branch": "main",
+            "id": 41530743017,
             "status": "completed",
             "conclusion": "success",
-            "html_url": "https://github.com/zhengcb81/filing-fetch/actions/runs/41495529161",
-            "updated_at": "2026-11-02T17:56:21Z"
+            "head_sha": "508aba308cf5206c486119c446b66172debdc09a",
+            "head_branch": "main",
+            "html_url": "https://github.com/zhengcb81/filing-fetch/actions/runs/41530743017",
+            "updated_at": "2026-11-02T21:44:25Z"
           }
         ]
       },
@@ -151,8 +187,15 @@
         "status": "MAIN_PUSHED_NO_TRACKED_ACTIONS_WORKFLOW"
       },
       "StockWiki": {
-        "source_head": "f52f257d4343f9a785e5a338088a789393db7357",
-        "status": "LOCAL_MAIN_NO_REMOTE_CONFIGURED"
+        "source_head": "d8d3303",
+        "publication": "local master; no remote",
+        "exact_ci": []
+      },
+      "revenue-forecast-audit": {
+        "source_head": "a84455ef864d6f9e5596a894c2b1801d8ea32cfb",
+        "plan_head": "f1ae262ed85b6da5d8b040a0b691f1041e20f0cb",
+        "publication": "local main; no remote",
+        "exact_ci": []
       }
     },
     "code_and_tests_pushed": true,
@@ -162,7 +205,7 @@
   "architecture_rectification": {
     "issues": 14,
     "status": "ENGINEERING_ACCEPTED_REAL_COMPANY_OPEN",
-    "current_work": "D3工程及独审已通过，按实际发布记录完成主线推送和精确CI确认；随后ROOT恢复T4父链、SEM-QUAL-01、新版真实摘要、缓存恢复和RF采用。RF/AUDIT仓内PWF已按实际接口校准，尚未派发。",
+    "current_work": "ROOT恢复T4来源父链和SEM-QUAL-01限定语义：先按冻结正反例与单个真实半年报修根因，再做新版真实摘要、缓存恢复与实际RF采用；RF/AUDIT仓内计划已就绪，仍未派发。",
     "registry": "review/architecture-quality-20261101/implementation-results/STATUS.json",
     "current_evidence": "review/architecture-quality-20261101/implementation-results/checklist-verification-20261102/checklist.md"
   },
@@ -174,7 +217,7 @@
   "next_stages": [
     {
       "id": "decoupling-first",
-      "status": "ENGINEERING_PASS_INDEPENDENT_REVIEWED",
+      "status": "COMPLETE_PUBLISHED_REQUIRED_CI_GREEN",
       "plan": "review/architecture-reassessment-20261102/DECOUPLING_FIRST.md",
       "evidence": "review/decoupling-20261102/independent/review.md"
     },
@@ -379,7 +422,7 @@
       "final_import_budget"
     ],
     "active_writers": {
-      "ROOT": "publication and integrated source mainline; no active module writer"
+      "ROOT": "source mainline next; no module harness active"
     },
     "prepared_not_dispatched": [
       "revenue-forecast",
@@ -391,21 +434,23 @@
     "dispatch_status": "READY_NOT_DISPATCHED"
   },
   "decoupling_first": {
-    "status": "D3_ENGINEERING_PASS_PUBLICATION_IN_PROGRESS",
+    "status": "COMPLETE_PUBLISHED_REQUIRED_CI_GREEN",
     "plan": "review/architecture-reassessment-20261102/DECOUPLING_FIRST.md",
     "completed": [
       "D0 dependency ownership",
       "D1 RED interface/isolation controls",
       "D2 public ports, budget and CI ownership",
-      "D3 39 current integration tests, installed runtime, real readonly and independent review"
+      "D3 39 current integration tests, installed runtime, real readonly and independent review",
+      "Normal mainline commits/pushes, exact remote CI and three skill entry points"
     ],
-    "open": [
-      "mainline publication and exact CI observation"
-    ],
+    "open": [],
     "module_dispatch": "READY_NOT_DISPATCHED",
     "requires_user_reapproval": false,
     "business_tasks_retained": true,
     "independent_review": "review/decoupling-20261102/independent/review.md",
-    "release": "review/decoupling-20261102/release.md"
+    "release": "review/decoupling-20261102/release.md",
+    "exact_ci_observed_at": "2026-11-02T21:50:39.370275+00:00",
+    "accepted_source_version": "3d822c41e24b3d14f926351567c37bb572b5a947",
+    "current_test_routing_version": "a03d0c0296496eeb8aac23fa0ed3774f2b31abcf"
   }
 }

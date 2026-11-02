@@ -6,7 +6,7 @@
 
 ## Next Step
 
-D3工程和独审已通过，按CURRENT_STATUS与本轮release记录完成主线发布。随后ROOT按T4、SEM-QUAL-01、新版真实摘要、缓存恢复、实际RF采用继续，RF/AUDIT仓内业务未派发。
+D3已独审、部署并完成正常发布，代码与组合CI已绿。ROOT按T4、SEM-QUAL-01、新版真实摘要、缓存恢复、实际RF采用继续，RF/AUDIT仓内业务未派发。
 
 ## P0-D — 解耦优先
 
