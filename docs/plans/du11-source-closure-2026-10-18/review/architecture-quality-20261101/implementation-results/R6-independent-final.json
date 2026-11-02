@@ -3,7 +3,6 @@
   "scope": "A semantic source + ROOT CI diagnostic only",
   "reviewer": "/root/rectification_review_a",
   "worktree": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2",
-  "head": "f298a383ff97b406fae27d49a3c50a16fb95dd3d",
   "observed_at_utc": "2026-11-01T23:07:15.186311+00:00",
   "frozen_files": {
     "src/company_wiki/document_understanding/statement_grammar/__init__.py": {
@@ -190,6 +189,1103 @@
   "own_tmp": {
     "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\a6",
     "initially_absent": true,
-    "finally_absent": null
-  }
+    "finally_absent": true,
+    "restored_initial_state": true
+  },
+  "author_frozen_sha_checks": {
+    "src/company_wiki/document_understanding/statement_grammar/__init__.py": {
+      "expected": "a067fcd5ce43e73a3c58cae866d1f2c497d9af29aa1633632b56618dbfad974b",
+      "actual": "a067fcd5ce43e73a3c58cae866d1f2c497d9af29aa1633632b56618dbfad974b",
+      "matches": true
+    },
+    "src/company_wiki/source_catalog/narrative_source_passage.py": {
+      "expected": "9a1e3f40c943e3c2155854ac85a9e71d44ebefa6211fa55e697b12ab70d50ca0",
+      "actual": "9a1e3f40c943e3c2155854ac85a9e71d44ebefa6211fa55e697b12ab70d50ca0",
+      "matches": true
+    },
+    "src/company_wiki/source_catalog/narrative_business_policy.py": {
+      "expected": "9e44f1cf238db06ab84e24ac410cd49beb7620210ea4043bdb1c22786f7c8f77",
+      "actual": "9e44f1cf238db06ab84e24ac410cd49beb7620210ea4043bdb1c22786f7c8f77",
+      "matches": true
+    },
+    "src/company_wiki/source_catalog/narrative_source_context.py": {
+      "expected": "a3774789bd4c5064df90d050e4be8afc72cabb2de438def29f7ba1b8689420fd",
+      "actual": "a3774789bd4c5064df90d050e4be8afc72cabb2de438def29f7ba1b8689420fd",
+      "matches": true
+    },
+    "tests/unit/du11_production/test_source_semantic_axes.py": {
+      "expected": "5469915187eedccc5747475fd5976639516417f0adc360511c66176a2735281f",
+      "actual": "5469915187eedccc5747475fd5976639516417f0adc360511c66176a2735281f",
+      "matches": true
+    }
+  },
+  "author_receipt_artifact_checks": [
+    {
+      "run": "r6-semantics-red",
+      "exists": true,
+      "sha_matches": true,
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "60",
+          "failures": "16",
+          "skipped": "0",
+          "tests": "583",
+          "time": "33.950",
+          "timestamp": "2026-11-01T22:40:40.436781+00:00",
+          "hostname": "DESKTOP-156V213"
+        }
+      ],
+      "actual_cases": 583
+    },
+    {
+      "run": "r6-axes-red",
+      "exists": true,
+      "sha_matches": true,
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "14",
+          "skipped": "0",
+          "tests": "26",
+          "time": "29.952",
+          "timestamp": "2026-11-01T22:48:18.296362+00:00",
+          "hostname": "DESKTOP-156V213"
+        }
+      ],
+      "actual_cases": 26
+    },
+    {
+      "run": "r6-semantics-green2",
+      "exists": true,
+      "sha_matches": true,
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "3",
+          "skipped": "0",
+          "tests": "683",
+          "time": "26.571",
+          "timestamp": "2026-11-01T22:53:00.967656+00:00",
+          "hostname": "DESKTOP-156V213"
+        }
+      ],
+      "actual_cases": 683
+    },
+    {
+      "run": "r6-semantics-green3",
+      "exists": true,
+      "sha_matches": true,
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0",
+          "tests": "65",
+          "time": "20.584",
+          "timestamp": "2026-11-01T22:54:44.209693+00:00",
+          "hostname": "DESKTOP-156V213"
+        }
+      ],
+      "actual_cases": 65
+    },
+    {
+      "run": "r6-courtesy-red2",
+      "exists": true,
+      "sha_matches": true,
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "2",
+          "skipped": "0",
+          "tests": "11",
+          "time": "8.527",
+          "timestamp": "2026-11-01T22:56:34.304289+00:00",
+          "hostname": "DESKTOP-156V213"
+        }
+      ],
+      "actual_cases": 11
+    },
+    {
+      "run": "r6-final-boundary-red",
+      "exists": true,
+      "sha_matches": true,
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "4",
+          "skipped": "0",
+          "tests": "5",
+          "time": "9.570",
+          "timestamp": "2026-11-01T23:00:47.203125+00:00",
+          "hostname": "DESKTOP-156V213"
+        }
+      ],
+      "actual_cases": 5
+    },
+    {
+      "run": "r6-semantics-final",
+      "exists": true,
+      "sha_matches": true,
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0",
+          "tests": "741",
+          "time": "36.507",
+          "timestamp": "2026-11-01T22:58:38.294709+00:00",
+          "hostname": "DESKTOP-156V213"
+        }
+      ],
+      "actual_cases": 741
+    },
+    {
+      "run": "r6-semantics-frozen",
+      "exists": true,
+      "sha_matches": true,
+      "suites": [
+        {
+          "name": "pytest",
+          "errors": "0",
+          "failures": "0",
+          "skipped": "0",
+          "tests": "746",
+          "time": "111.925",
+          "timestamp": "2026-11-01T23:01:19.908786+00:00",
+          "hostname": "DESKTOP-156V213"
+        }
+      ],
+      "actual_cases": 746
+    }
+  ],
+  "independent_observations": [
+    {
+      "id": "objective-concrete-then-abstract",
+      "text": "We aim to reopen neonatal wards and create value.",
+      "syntax": {
+        "status": "independent",
+        "reason": "subject_predicate",
+        "argument_nominals": [
+          "value"
+        ],
+        "weak_relation": false
+      },
+      "passage": {
+        "use": "context_only",
+        "reason": "source_abstract_objective",
+        "role": "source_context",
+        "relevant": false,
+        "financial_only": false,
+        "assessment_complete": true
+      },
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "source_roles": {
+        "clauses": [
+          {
+            "text": "We aim to reopen neonatal wards and create value.",
+            "operating": false,
+            "rule_purpose": "",
+            "independent_payload": null,
+            "payload_witnesses": [],
+            "material_payload": false,
+            "function_or_event": false
+          }
+        ],
+        "numeric_ambiguous": false,
+        "numeric_role": "unknown",
+        "bound_operating": false,
+        "raw_structure_complete": false,
+        "numeric_cells_observed": false,
+        "bound_payload": false
+      }
+    },
+    {
+      "id": "objective-abstract-then-concrete",
+      "text": "We aim to create value and reopen neonatal wards.",
+      "syntax": {
+        "status": "independent",
+        "reason": "subject_predicate",
+        "argument_nominals": [
+          "wards"
+        ],
+        "weak_relation": false
+      },
+      "passage": {
+        "use": "support",
+        "reason": "source_readable_narrative",
+        "role": "source_narrative",
+        "relevant": true,
+        "financial_only": false,
+        "assessment_complete": true
+      },
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "source_roles": {
+        "clauses": [
+          {
+            "text": "We aim to create value and reopen neonatal wards.",
+            "operating": false,
+            "rule_purpose": "",
+            "independent_payload": null,
+            "payload_witnesses": [],
+            "material_payload": false,
+            "function_or_event": false
+          }
+        ],
+        "numeric_ambiguous": false,
+        "numeric_role": "unknown",
+        "bound_operating": false,
+        "raw_structure_complete": false,
+        "numeric_cells_observed": false,
+        "bound_payload": false
+      }
+    },
+    {
+      "id": "commitment-concrete-then-abstract",
+      "text": "We are committed to treating rare diseases and creating value.",
+      "syntax": {
+        "status": "independent",
+        "reason": "subject_predicate",
+        "argument_nominals": [
+          "value"
+        ],
+        "weak_relation": false
+      },
+      "passage": {
+        "use": "context_only",
+        "reason": "source_abstract_objective",
+        "role": "source_context",
+        "relevant": false,
+        "financial_only": false,
+        "assessment_complete": true
+      },
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "source_roles": {
+        "clauses": [
+          {
+            "text": "We are committed to treating rare diseases and creating value.",
+            "operating": false,
+            "rule_purpose": "",
+            "independent_payload": null,
+            "payload_witnesses": [],
+            "material_payload": false,
+            "function_or_event": false
+          }
+        ],
+        "numeric_ambiguous": false,
+        "numeric_role": "unknown",
+        "bound_operating": false,
+        "raw_structure_complete": false,
+        "numeric_cells_observed": false,
+        "bound_payload": false
+      }
+    },
+    {
+      "id": "commitment-concrete",
+      "text": "We are committed to treating rare diseases at regional clinics.",
+      "syntax": {
+        "status": "independent",
+        "reason": "subject_predicate",
+        "argument_nominals": [
+          "diseases",
+          "clinics"
+        ],
+        "weak_relation": false
+      },
+      "passage": {
+        "use": "support",
+        "reason": "source_readable_narrative",
+        "role": "source_narrative",
+        "relevant": true,
+        "financial_only": false,
+        "assessment_complete": true
+      },
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "source_roles": {
+        "clauses": [
+          {
+            "text": "We are committed to treating rare diseases at regional clinics.",
+            "operating": false,
+            "rule_purpose": "",
+            "independent_payload": null,
+            "payload_witnesses": [],
+            "material_payload": false,
+            "function_or_event": false
+          }
+        ],
+        "numeric_ambiguous": false,
+        "numeric_role": "unknown",
+        "bound_operating": false,
+        "raw_structure_complete": false,
+        "numeric_cells_observed": false,
+        "bound_payload": false
+      }
+    },
+    {
+      "id": "weak-membership-base",
+      "text": "The art exhibit includes paintings and sculpture.",
+      "syntax": {
+        "status": "independent",
+        "reason": "subject_predicate",
+        "argument_nominals": [
+          "paintings",
+          "sculpture"
+        ],
+        "weak_relation": true
+      },
+      "passage": {
+        "use": "unresolved",
+        "reason": "source_membership_relevance_unproved",
+        "role": "source_context",
+        "relevant": false,
+        "financial_only": false,
+        "assessment_complete": true
+      },
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "source_roles": {
+        "clauses": [
+          {
+            "text": "The art exhibit includes paintings and sculpture.",
+            "operating": false,
+            "rule_purpose": "",
+            "independent_payload": null,
+            "payload_witnesses": [],
+            "material_payload": false,
+            "function_or_event": false
+          }
+        ],
+        "numeric_ambiguous": false,
+        "numeric_role": "unknown",
+        "bound_operating": false,
+        "raw_structure_complete": false,
+        "numeric_cells_observed": false,
+        "bound_payload": false
+      }
+    },
+    {
+      "id": "weak-membership-relative",
+      "text": "The art exhibit includes paintings that portray coastal villages.",
+      "syntax": {
+        "status": "independent",
+        "reason": "subject_predicate",
+        "argument_nominals": [
+          "paintings",
+          "portray",
+          "villages"
+        ],
+        "weak_relation": true
+      },
+      "passage": {
+        "use": "unresolved",
+        "reason": "source_membership_relevance_unproved",
+        "role": "source_context",
+        "relevant": false,
+        "financial_only": false,
+        "assessment_complete": true
+      },
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "source_roles": {
+        "clauses": [
+          {
+            "text": "The art exhibit includes paintings that portray coastal villages.",
+            "operating": false,
+            "rule_purpose": "",
+            "independent_payload": null,
+            "payload_witnesses": [],
+            "material_payload": false,
+            "function_or_event": false
+          }
+        ],
+        "numeric_ambiguous": false,
+        "numeric_role": "unknown",
+        "bound_operating": false,
+        "raw_structure_complete": false,
+        "numeric_cells_observed": false,
+        "bound_payload": false
+      }
+    },
+    {
+      "id": "weak-cover-relative",
+      "text": "The art exhibit covers sculptures that portray coastal villages.",
+      "syntax": {
+        "status": "independent",
+        "reason": "subject_predicate",
+        "argument_nominals": [
+          "sculptures",
+          "portray",
+          "villages"
+        ],
+        "weak_relation": true
+      },
+      "passage": {
+        "use": "unresolved",
+        "reason": "source_membership_relevance_unproved",
+        "role": "source_context",
+        "relevant": false,
+        "financial_only": false,
+        "assessment_complete": true
+      },
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "source_roles": {
+        "clauses": [
+          {
+            "text": "The art exhibit covers sculptures that portray coastal villages.",
+            "operating": false,
+            "rule_purpose": "",
+            "independent_payload": null,
+            "payload_witnesses": [],
+            "material_payload": false,
+            "function_or_event": false
+          }
+        ],
+        "numeric_ambiguous": false,
+        "numeric_role": "unknown",
+        "bound_operating": false,
+        "raw_structure_complete": false,
+        "numeric_cells_observed": false,
+        "bound_payload": false
+      }
+    },
+    {
+      "id": "business-membership",
+      "text": "Our orchard services include pruning and fungal treatment.",
+      "syntax": {
+        "status": "independent",
+        "reason": "subject_predicate",
+        "argument_nominals": [
+          "treatment"
+        ],
+        "weak_relation": false
+      },
+      "passage": {
+        "use": "support",
+        "reason": "source_business_relation",
+        "role": "source_narrative",
+        "relevant": true,
+        "financial_only": false,
+        "assessment_complete": true
+      },
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "operating_mechanism"
+        ],
+        "reasons": [
+          "operating_mechanism"
+        ],
+        "score": 3,
+        "financial_exempt": true,
+        "purpose": "operating"
+      },
+      "source_roles": {
+        "clauses": [
+          {
+            "text": "Our orchard services include pruning and fungal treatment.",
+            "operating": true,
+            "rule_purpose": "",
+            "independent_payload": true,
+            "payload_witnesses": [
+              "Our orchard services include pruning and fungal treatment."
+            ],
+            "material_payload": true,
+            "function_or_event": true
+          }
+        ],
+        "numeric_ambiguous": false,
+        "numeric_role": "unknown",
+        "bound_operating": false,
+        "raw_structure_complete": false,
+        "numeric_cells_observed": false,
+        "bound_payload": false
+      }
+    },
+    {
+      "id": "application-cover",
+      "text": "Our devices cover seed trays with porous membranes.",
+      "syntax": {
+        "status": "independent",
+        "reason": "subject_predicate",
+        "argument_nominals": [
+          "seed",
+          "trays",
+          "membranes"
+        ],
+        "weak_relation": false
+      },
+      "passage": {
+        "use": "unresolved",
+        "reason": "source_payload_unresolved",
+        "role": "source_narrative",
+        "relevant": true,
+        "financial_only": false,
+        "assessment_complete": true
+      },
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "operating_mechanism"
+        ],
+        "reasons": [
+          "operating_mechanism"
+        ],
+        "score": 3,
+        "financial_exempt": false,
+        "purpose": "operating"
+      },
+      "source_roles": {
+        "clauses": [
+          {
+            "text": "Our devices cover seed trays with porous membranes.",
+            "operating": true,
+            "rule_purpose": "",
+            "independent_payload": null,
+            "payload_witnesses": [],
+            "material_payload": false,
+            "function_or_event": true
+          }
+        ],
+        "numeric_ambiguous": false,
+        "numeric_role": "unknown",
+        "bound_operating": false,
+        "raw_structure_complete": false,
+        "numeric_cells_observed": false,
+        "bound_payload": false
+      }
+    },
+    {
+      "id": "unknown-raw",
+      "text": "Our equipment is used in rural clinics and urban markets.",
+      "syntax": {
+        "status": "independent",
+        "reason": "subject_predicate",
+        "argument_nominals": [
+          "clinics",
+          "markets"
+        ],
+        "weak_relation": false
+      },
+      "passage": {
+        "use": "unresolved",
+        "reason": "source_payload_unresolved",
+        "role": "source_narrative",
+        "relevant": true,
+        "financial_only": false,
+        "assessment_complete": true
+      },
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "operating_mechanism"
+        ],
+        "reasons": [
+          "operating_mechanism"
+        ],
+        "score": 3,
+        "financial_exempt": false,
+        "purpose": "operating"
+      },
+      "source_roles": {
+        "clauses": [
+          {
+            "text": "Our equipment is used in rural clinics and urban markets.",
+            "operating": true,
+            "rule_purpose": "",
+            "independent_payload": null,
+            "payload_witnesses": [],
+            "material_payload": false,
+            "function_or_event": true
+          }
+        ],
+        "numeric_ambiguous": false,
+        "numeric_role": "unknown",
+        "bound_operating": false,
+        "raw_structure_complete": false,
+        "numeric_cells_observed": false,
+        "bound_payload": false
+      }
+    },
+    {
+      "id": "financial-cause-other-subject",
+      "text": "Net income increased because another organization launched an exhibition.",
+      "syntax": {
+        "status": "independent",
+        "reason": "subject_predicate",
+        "argument_nominals": [
+          "exhibition"
+        ],
+        "weak_relation": false
+      },
+      "passage": {
+        "use": "context_only",
+        "reason": "source_non_assertion",
+        "role": "source_context",
+        "relevant": false,
+        "financial_only": false,
+        "assessment_complete": true
+      },
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "source_roles": {
+        "clauses": [],
+        "numeric_ambiguous": false,
+        "numeric_role": "unknown",
+        "bound_operating": false,
+        "raw_structure_complete": false,
+        "numeric_cells_observed": false,
+        "bound_payload": false
+      }
+    },
+    {
+      "id": "causal-business",
+      "text": "Our irrigation systems deliver reclaimed water to farms, reducing operating costs.",
+      "syntax": {
+        "status": "independent",
+        "reason": "subject_predicate",
+        "argument_nominals": [
+          "operating",
+          "costs"
+        ],
+        "weak_relation": false
+      },
+      "passage": {
+        "use": "support",
+        "reason": "source_business_relation",
+        "role": "source_narrative",
+        "relevant": true,
+        "financial_only": false,
+        "assessment_complete": true
+      },
+      "fact": {
+        "eligible": true,
+        "topics": [
+          "core_business",
+          "operating_mechanism"
+        ],
+        "reasons": [
+          "operating_mechanism"
+        ],
+        "score": 3,
+        "financial_exempt": true,
+        "purpose": "operating"
+      },
+      "source_roles": {
+        "clauses": [
+          {
+            "text": "Our irrigation systems deliver reclaimed water to farms, reducing operating costs.",
+            "operating": true,
+            "rule_purpose": "",
+            "independent_payload": true,
+            "payload_witnesses": [
+              "Our irrigation systems deliver reclaimed water to farms"
+            ],
+            "material_payload": true,
+            "function_or_event": true
+          }
+        ],
+        "numeric_ambiguous": false,
+        "numeric_role": "unknown",
+        "bound_operating": false,
+        "raw_structure_complete": false,
+        "numeric_cells_observed": false,
+        "bound_payload": false
+      }
+    },
+    {
+      "id": "ambiguous-CN",
+      "text": "农户购买蔬菜的村庄。",
+      "syntax": {
+        "status": "unknown",
+        "reason": "statement_grammar_ambiguous",
+        "argument_nominals": [
+          "蔬菜",
+          "村庄"
+        ],
+        "weak_relation": false
+      },
+      "passage": {
+        "use": "unresolved",
+        "reason": "source_grammar_ambiguous",
+        "role": "source_narrative",
+        "relevant": true,
+        "financial_only": false,
+        "assessment_complete": true
+      },
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "source_roles": {
+        "clauses": [
+          {
+            "text": "农户购买蔬菜的村庄",
+            "operating": false,
+            "rule_purpose": "",
+            "independent_payload": null,
+            "payload_witnesses": [],
+            "material_payload": false,
+            "function_or_event": false
+          }
+        ],
+        "numeric_ambiguous": false,
+        "numeric_role": "unknown",
+        "bound_operating": false,
+        "raw_structure_complete": false,
+        "numeric_cells_observed": false,
+        "bound_payload": false
+      }
+    },
+    {
+      "id": "fragment-CN",
+      "text": "公司拥有的沿海码头。",
+      "syntax": {
+        "status": "fragment",
+        "reason": "no_matrix_predicate",
+        "argument_nominals": [],
+        "weak_relation": false
+      },
+      "passage": {
+        "use": "unresolved",
+        "reason": "source_passage_incomplete",
+        "role": "unknown",
+        "relevant": false,
+        "financial_only": false,
+        "assessment_complete": true
+      },
+      "fact": {
+        "eligible": false,
+        "topics": [],
+        "reasons": [],
+        "score": 0,
+        "financial_exempt": false,
+        "purpose": "unknown"
+      },
+      "source_roles": {
+        "clauses": [
+          {
+            "text": "公司拥有的沿海码头",
+            "operating": false,
+            "rule_purpose": "",
+            "independent_payload": null,
+            "payload_witnesses": [],
+            "material_payload": false,
+            "function_or_event": false
+          }
+        ],
+        "numeric_ambiguous": false,
+        "numeric_role": "unknown",
+        "bound_operating": false,
+        "raw_structure_complete": false,
+        "numeric_cells_observed": false,
+        "bound_payload": false
+      }
+    }
+  ],
+  "observation_probe_source": "import sys,json\nfrom dataclasses import asdict\nfrom pathlib import Path\nw=Path('C:/Users/郑曾波/Projects/company-wiki/tmp/architecture-r2');sys.path[:0]=[str(w/'src'),str(w/'tests')]\nfrom company_wiki.source_catalog.narrative_business_policy import prepare_reading_business_assessment as prep\nfrom company_wiki.document_understanding.statement_grammar import observe_statement\ntexts=[\n('objective-concrete-then-abstract','We aim to reopen neonatal wards and create value.'),\n('objective-abstract-then-concrete','We aim to create value and reopen neonatal wards.'),\n('commitment-concrete-then-abstract','We are committed to treating rare diseases and creating value.'),\n('commitment-concrete','We are committed to treating rare diseases at regional clinics.'),\n('weak-membership-base','The art exhibit includes paintings and sculpture.'),\n('weak-membership-relative','The art exhibit includes paintings that portray coastal villages.'),\n('weak-cover-relative','The art exhibit covers sculptures that portray coastal villages.'),\n('business-membership','Our orchard services include pruning and fungal treatment.'),\n('application-cover','Our devices cover seed trays with porous membranes.'),\n('unknown-raw','Our equipment is used in rural clinics and urban markets.'),\n('financial-cause-other-subject','Net income increased because another organization launched an exhibition.'),\n('causal-business','Our irrigation systems deliver reclaimed water to farms, reducing operating costs.'),\n('ambiguous-CN','农户购买蔬菜的村庄。'),\n('fragment-CN','公司拥有的沿海码头。')]\nrows=[]\nfor name,text in texts:\n p=prep(text,{'relations':[]});rows.append({'id':name,'text':text,'syntax':asdict(observe_statement(text)),'passage':asdict(p.passage),'fact':asdict(p.fact),'source_roles':asdict(p.source_roles)})\nPath(sys.argv[1]).write_text(json.dumps(rows,ensure_ascii=False,indent=2),encoding='utf8')\nprint(json.dumps([{'id':x['id'],'syntax':x['syntax'],'passage':x['passage'],'fact_eligible':x['fact']['eligible'],'fact_reasons':x['fact']['reasons']} for x in rows],ensure_ascii=False,indent=2))\n",
+  "independent_test_source": "from pathlib import Path\nimport hashlib\nimport pytest\nfrom company_wiki.source_catalog.narrative_business_policy import prepare_reading_business_assessment\nfrom company_wiki.source_catalog import narrative_source_context\nfrom company_wiki.source_catalog.reading_recipe import business_algorithm_hashes\n\n@pytest.mark.parametrize(\"text\", (\n \"We aim to reopen neonatal wards and create value.\",\n \"We are committed to treating rare diseases and creating value.\",\n))\ndef test_concrete_coordinated_operation_cannot_be_erased_by_abstract_tail(text):\n    value = prepare_reading_business_assessment(text, {\"relations\": []})\n    assert value.passage.relevant and value.passage.use == \"support\"\n    assert not value.fact.eligible\n\n@pytest.mark.parametrize(\"pdf\", (False, True))\ndef test_new_source_context_is_bound_by_actual_ast_recipe(monkeypatch, pdf):\n    path = Path(narrative_source_context.__file__).resolve()\n    name = \"company_wiki.source_catalog.narrative_source_context\"\n    before = business_algorithm_hashes(pdf_frontend=pdf)\n    original = Path.read_bytes\n    assert before[name] == hashlib.sha256(original(path).replace(b\"\\r\\n\", b\"\\n\")).hexdigest()\n    def changed(file):\n        raw = original(file)\n        return raw+b\"\\n# independent source context mutation\\n\" if file.resolve() == path else raw\n    monkeypatch.setattr(Path, \"read_bytes\", changed)\n    assert business_algorithm_hashes(pdf_frontend=pdf)[name] != before[name]\n",
+  "independent_run": {
+    "normal_host": true,
+    "python": "C:/Miniconda/python.exe -B -X utf8",
+    "tests": 22,
+    "failed": 2,
+    "passed": 20,
+    "seconds": 21.84,
+    "junit_xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"2\" skipped=\"0\" tests=\"22\" time=\"21.843\" timestamp=\"2026-11-01T23:09:05.572803+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tmp.a6.test_independent\" name=\"test_concrete_coordinated_operation_cannot_be_erased_by_abstract_tail[We aim to reopen neonatal wards and create value.]\" time=\"10.036\"><failure message=\"AssertionError: assert (False)&#10; +  where False = SourcePassageCapability(use='context_only', reason='source_abstract_objective', role='source_context', relevant=False, financial_only=False, assessment_complete=True).relevant&#10; +    where SourcePassageCapability(use='context_only', reason='source_abstract_objective', role='source_context', relevant=False, financial_only=False, assessment_complete=True) = ReadingBusinessAssessment(fact=OperatingFact(eligible=False, topics=(), reasons=(), score=0, financial_exempt=False, p...on='source_abstract_objective', role='source_context', relevant=False, financial_only=False, assessment_complete=True)).passage\">..\\a6\\test_independent.py:14: in test_concrete_coordinated_operation_cannot_be_erased_by_abstract_tail\n    assert value.passage.relevant and value.passage.use == \"support\"\nE   AssertionError: assert (False)\nE    +  where False = SourcePassageCapability(use='context_only', reason='source_abstract_objective', role='source_context', relevant=False, financial_only=False, assessment_complete=True).relevant\nE    +    where SourcePassageCapability(use='context_only', reason='source_abstract_objective', role='source_context', relevant=False, financial_only=False, assessment_complete=True) = ReadingBusinessAssessment(fact=OperatingFact(eligible=False, topics=(), reasons=(), score=0, financial_exempt=False, p...on='source_abstract_objective', role='source_context', relevant=False, financial_only=False, assessment_complete=True)).passage</failure></testcase><testcase classname=\"tmp.a6.test_independent\" name=\"test_concrete_coordinated_operation_cannot_be_erased_by_abstract_tail[We are committed to treating rare diseases and creating value.]\" time=\"0.004\"><failure message=\"AssertionError: assert (False)&#10; +  where False = SourcePassageCapability(use='context_only', reason='source_abstract_objective', role='source_context', relevant=False, financial_only=False, assessment_complete=True).relevant&#10; +    where SourcePassageCapability(use='context_only', reason='source_abstract_objective', role='source_context', relevant=False, financial_only=False, assessment_complete=True) = ReadingBusinessAssessment(fact=OperatingFact(eligible=False, topics=(), reasons=(), score=0, financial_exempt=False, p...on='source_abstract_objective', role='source_context', relevant=False, financial_only=False, assessment_complete=True)).passage\">..\\a6\\test_independent.py:14: in test_concrete_coordinated_operation_cannot_be_erased_by_abstract_tail\n    assert value.passage.relevant and value.passage.use == \"support\"\nE   AssertionError: assert (False)\nE    +  where False = SourcePassageCapability(use='context_only', reason='source_abstract_objective', role='source_context', relevant=False, financial_only=False, assessment_complete=True).relevant\nE    +    where SourcePassageCapability(use='context_only', reason='source_abstract_objective', role='source_context', relevant=False, financial_only=False, assessment_complete=True) = ReadingBusinessAssessment(fact=OperatingFact(eligible=False, topics=(), reasons=(), score=0, financial_exempt=False, p...on='source_abstract_objective', role='source_context', relevant=False, financial_only=False, assessment_complete=True)).passage</failure></testcase><testcase classname=\"tmp.a6.test_independent\" name=\"test_new_source_context_is_bound_by_actual_ast_recipe[False]\" time=\"1.174\" /><testcase classname=\"tmp.a6.test_independent\" name=\"test_new_source_context_is_bound_by_actual_ast_recipe[True]\" time=\"0.856\" /><testcase classname=\"tmp.architecture-r2.tests.unit.test_summarize_junit_failures\" name=\"test_long_failure_inventory_survives_platform_message_and_annotation_limits\" time=\"0.060\" /><testcase classname=\"tmp.architecture-r2.tests.unit.test_summarize_junit_failures\" name=\"test_annotation_bounds_cover_escaped_utf8_and_long_case_identity\" time=\"0.070\" /><testcase classname=\"tmp.architecture-r2.tests.unit.test_summarize_junit_failures\" name=\"test_emits_test_identity_without_failure_body\" time=\"0.050\" /><testcase classname=\"tmp.architecture-r2.tests.unit.test_summarize_junit_failures\" name=\"test_caps_annotations_and_reports_remaining_failure_count\" time=\"0.054\" /><testcase classname=\"tmp.architecture-r2.tests.unit.test_summarize_junit_failures\" name=\"test_group_inventory_collapses_parameters_without_revealing_their_values\" time=\"0.032\" /><testcase classname=\"tmp.architecture-r2.tests.unit.test_summarize_junit_failures\" name=\"test_skipped_suite_does_not_read_a_report_or_emit_failure_annotations[missing-report]\" time=\"0.035\" /><testcase classname=\"tmp.architecture-r2.tests.unit.test_summarize_junit_failures\" name=\"test_skipped_suite_does_not_read_a_report_or_emit_failure_annotations[stale-failure]\" time=\"0.011\" /><testcase classname=\"tmp.architecture-r2.tests.integration.test_source_processing_handler_wire\" name=\"test_real_handler_serializes_source_processing_state[False]\" time=\"0.560\" /><testcase classname=\"tmp.architecture-r2.tests.integration.test_source_processing_handler_wire\" name=\"test_real_handler_serializes_source_processing_state[True]\" time=\"0.258\" /><testcase classname=\"tmp.architecture-r2.tests.integration.test_source_processing_handler_wire\" name=\"test_old_optional_absence_is_preserved_and_arbitrary_fields_are_still_rejected\" time=\"0.229\" /><testcase classname=\"tmp.architecture-r2.tests.unit.du11_production.test_source_semantic_axes\" name=\"test_known_context_is_prepared_once_before_pos_and_repeated_access_is_free[\\u516c\\u53f8\\u611f\\u8c22\\u6295\\u8d44\\u8005\\u7684\\u5173\\u6ce8\\u3002]\" time=\"0.031\" /><testcase classname=\"tmp.architecture-r2.tests.unit.du11_production.test_source_semantic_axes\" name=\"test_known_context_is_prepared_once_before_pos_and_repeated_access_is_free[The words paid seats appear in a list of terms.]\" time=\"0.006\" /><testcase classname=\"tmp.architecture-r2.tests.unit.du11_production.test_source_semantic_axes\" name=\"test_known_context_is_prepared_once_before_pos_and_repeated_access_is_free[Due to rounding, the amounts shown may not add to the total.]\" time=\"0.007\" /><testcase classname=\"tmp.architecture-r2.tests.unit.du11_production.test_source_semantic_axes\" name=\"test_known_context_is_prepared_once_before_pos_and_repeated_access_is_free[23  \\u4efb\\u610f\\u793a\\u8303\\u63a7\\u80a1\\u6709\\u9650\\u516c\\u53f8]\" time=\"0.007\" /><testcase classname=\"tmp.architecture-r2.tests.unit.du11_production.test_source_semantic_axes\" name=\"test_known_context_is_prepared_once_before_pos_and_repeated_access_is_free[\\u6211\\u4eec\\u7ee7\\u7eed\\u575a\\u6301\\u9ad8\\u8d28\\u91cf\\u3001\\u53ef\\u6301\\u7eed\\u53d1\\u5c55\\u7684\\u539f\\u5219\\u3002]\" time=\"0.010\" /><testcase classname=\"tmp.architecture-r2.tests.unit.du11_production.test_source_semantic_axes\" name=\"test_objective_operator_observation_is_reused_for_the_exact_source_clause[Our vessels transport liquefied gas between coastal terminals.]\" time=\"0.033\" /><testcase classname=\"tmp.architecture-r2.tests.unit.du11_production.test_source_semantic_axes\" name=\"test_objective_operator_observation_is_reused_for_the_exact_source_clause[We remain committed to sustainable development and creating value.]\" time=\"0.006\" /><testcase classname=\"tmp.architecture-r2.tests.unit.du11_production.test_source_semantic_axes\" name=\"test_generic_context_work_is_linear_in_source_length\" time=\"0.003\" /></testsuite></testsuites>",
+    "cases": [
+      {
+        "class": "tmp.a6.test_independent",
+        "name": "test_concrete_coordinated_operation_cannot_be_erased_by_abstract_tail[We aim to reopen neonatal wards and create value.]",
+        "seconds": "10.036",
+        "failures": [
+          {
+            "message": "AssertionError: assert (False)\n +  where False = SourcePassageCapability(use='context_only', reason='source_abstract_objective', role='source_context', relevant=False, financial_only=False, assessment_complete=True).relevant\n +    where SourcePassageCapability(use='context_only', reason='source_abstract_objective', role='source_context', relevant=False, financial_only=False, assessment_complete=True) = ReadingBusinessAssessment(fact=OperatingFact(eligible=False, topics=(), reasons=(), score=0, financial_exempt=False, p...on='source_abstract_objective', role='source_context', relevant=False, financial_only=False, assessment_complete=True)).passage"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "class": "tmp.a6.test_independent",
+        "name": "test_concrete_coordinated_operation_cannot_be_erased_by_abstract_tail[We are committed to treating rare diseases and creating value.]",
+        "seconds": "0.004",
+        "failures": [
+          {
+            "message": "AssertionError: assert (False)\n +  where False = SourcePassageCapability(use='context_only', reason='source_abstract_objective', role='source_context', relevant=False, financial_only=False, assessment_complete=True).relevant\n +    where SourcePassageCapability(use='context_only', reason='source_abstract_objective', role='source_context', relevant=False, financial_only=False, assessment_complete=True) = ReadingBusinessAssessment(fact=OperatingFact(eligible=False, topics=(), reasons=(), score=0, financial_exempt=False, p...on='source_abstract_objective', role='source_context', relevant=False, financial_only=False, assessment_complete=True)).passage"
+          }
+        ],
+        "errors": []
+      },
+      {
+        "class": "tmp.a6.test_independent",
+        "name": "test_new_source_context_is_bound_by_actual_ast_recipe[False]",
+        "seconds": "1.174",
+        "failures": [],
+        "errors": []
+      },
+      {
+        "class": "tmp.a6.test_independent",
+        "name": "test_new_source_context_is_bound_by_actual_ast_recipe[True]",
+        "seconds": "0.856",
+        "failures": [],
+        "errors": []
+      },
+      {
+        "class": "tmp.architecture-r2.tests.unit.test_summarize_junit_failures",
+        "name": "test_long_failure_inventory_survives_platform_message_and_annotation_limits",
+        "seconds": "0.060",
+        "failures": [],
+        "errors": []
+      },
+      {
+        "class": "tmp.architecture-r2.tests.unit.test_summarize_junit_failures",
+        "name": "test_annotation_bounds_cover_escaped_utf8_and_long_case_identity",
+        "seconds": "0.070",
+        "failures": [],
+        "errors": []
+      },
+      {
+        "class": "tmp.architecture-r2.tests.unit.test_summarize_junit_failures",
+        "name": "test_emits_test_identity_without_failure_body",
+        "seconds": "0.050",
+        "failures": [],
+        "errors": []
+      },
+      {
+        "class": "tmp.architecture-r2.tests.unit.test_summarize_junit_failures",
+        "name": "test_caps_annotations_and_reports_remaining_failure_count",
+        "seconds": "0.054",
+        "failures": [],
+        "errors": []
+      },
+      {
+        "class": "tmp.architecture-r2.tests.unit.test_summarize_junit_failures",
+        "name": "test_group_inventory_collapses_parameters_without_revealing_their_values",
+        "seconds": "0.032",
+        "failures": [],
+        "errors": []
+      },
+      {
+        "class": "tmp.architecture-r2.tests.unit.test_summarize_junit_failures",
+        "name": "test_skipped_suite_does_not_read_a_report_or_emit_failure_annotations[missing-report]",
+        "seconds": "0.035",
+        "failures": [],
+        "errors": []
+      },
+      {
+        "class": "tmp.architecture-r2.tests.unit.test_summarize_junit_failures",
+        "name": "test_skipped_suite_does_not_read_a_report_or_emit_failure_annotations[stale-failure]",
+        "seconds": "0.011",
+        "failures": [],
+        "errors": []
+      },
+      {
+        "class": "tmp.architecture-r2.tests.integration.test_source_processing_handler_wire",
+        "name": "test_real_handler_serializes_source_processing_state[False]",
+        "seconds": "0.560",
+        "failures": [],
+        "errors": []
+      },
+      {
+        "class": "tmp.architecture-r2.tests.integration.test_source_processing_handler_wire",
+        "name": "test_real_handler_serializes_source_processing_state[True]",
+        "seconds": "0.258",
+        "failures": [],
+        "errors": []
+      },
+      {
+        "class": "tmp.architecture-r2.tests.integration.test_source_processing_handler_wire",
+        "name": "test_old_optional_absence_is_preserved_and_arbitrary_fields_are_still_rejected",
+        "seconds": "0.229",
+        "failures": [],
+        "errors": []
+      },
+      {
+        "class": "tmp.architecture-r2.tests.unit.du11_production.test_source_semantic_axes",
+        "name": "test_known_context_is_prepared_once_before_pos_and_repeated_access_is_free[\\u516c\\u53f8\\u611f\\u8c22\\u6295\\u8d44\\u8005\\u7684\\u5173\\u6ce8\\u3002]",
+        "seconds": "0.031",
+        "failures": [],
+        "errors": []
+      },
+      {
+        "class": "tmp.architecture-r2.tests.unit.du11_production.test_source_semantic_axes",
+        "name": "test_known_context_is_prepared_once_before_pos_and_repeated_access_is_free[The words paid seats appear in a list of terms.]",
+        "seconds": "0.006",
+        "failures": [],
+        "errors": []
+      },
+      {
+        "class": "tmp.architecture-r2.tests.unit.du11_production.test_source_semantic_axes",
+        "name": "test_known_context_is_prepared_once_before_pos_and_repeated_access_is_free[Due to rounding, the amounts shown may not add to the total.]",
+        "seconds": "0.007",
+        "failures": [],
+        "errors": []
+      },
+      {
+        "class": "tmp.architecture-r2.tests.unit.du11_production.test_source_semantic_axes",
+        "name": "test_known_context_is_prepared_once_before_pos_and_repeated_access_is_free[23  \\u4efb\\u610f\\u793a\\u8303\\u63a7\\u80a1\\u6709\\u9650\\u516c\\u53f8]",
+        "seconds": "0.007",
+        "failures": [],
+        "errors": []
+      },
+      {
+        "class": "tmp.architecture-r2.tests.unit.du11_production.test_source_semantic_axes",
+        "name": "test_known_context_is_prepared_once_before_pos_and_repeated_access_is_free[\\u6211\\u4eec\\u7ee7\\u7eed\\u575a\\u6301\\u9ad8\\u8d28\\u91cf\\u3001\\u53ef\\u6301\\u7eed\\u53d1\\u5c55\\u7684\\u539f\\u5219\\u3002]",
+        "seconds": "0.010",
+        "failures": [],
+        "errors": []
+      },
+      {
+        "class": "tmp.architecture-r2.tests.unit.du11_production.test_source_semantic_axes",
+        "name": "test_objective_operator_observation_is_reused_for_the_exact_source_clause[Our vessels transport liquefied gas between coastal terminals.]",
+        "seconds": "0.033",
+        "failures": [],
+        "errors": []
+      },
+      {
+        "class": "tmp.architecture-r2.tests.unit.du11_production.test_source_semantic_axes",
+        "name": "test_objective_operator_observation_is_reused_for_the_exact_source_clause[We remain committed to sustainable development and creating value.]",
+        "seconds": "0.006",
+        "failures": [],
+        "errors": []
+      },
+      {
+        "class": "tmp.architecture-r2.tests.unit.du11_production.test_source_semantic_axes",
+        "name": "test_generic_context_work_is_linear_in_source_length",
+        "seconds": "0.003",
+        "failures": [],
+        "errors": []
+      }
+    ],
+    "tmp_short_basetemp_length": 43,
+    "basetemp_relocated": false,
+    "scope": "two own semantic RED + two actual recipe PDF/nonPDF + seven CI diagnostics + three actual public handler/wire + eight memo/linear controls; no full746 or realH1"
+  },
+  "frozen_source_after": {
+    "src/company_wiki/document_understanding/statement_grammar/__init__.py": "a067fcd5ce43e73a3c58cae866d1f2c497d9af29aa1633632b56618dbfad974b",
+    "src/company_wiki/source_catalog/narrative_source_passage.py": "9a1e3f40c943e3c2155854ac85a9e71d44ebefa6211fa55e697b12ab70d50ca0",
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "9e44f1cf238db06ab84e24ac410cd49beb7620210ea4043bdb1c22786f7c8f77",
+    "src/company_wiki/source_catalog/narrative_source_context.py": "a3774789bd4c5064df90d050e4be8afc72cabb2de438def29f7ba1b8689420fd",
+    "tests/unit/du11_production/test_source_semantic_axes.py": "5469915187eedccc5747475fd5976639516417f0adc360511c66176a2735281f",
+    "tools/summarize_junit_failures.py": "3df5f9811f781b9766149580de17b91116b318ea91a39229df87fddff29e2626",
+    "tests/unit/test_summarize_junit_failures.py": "c8df0fa348feee30d60f88f9dc2192281fe769b1e1f7629731a3e1397884ddc9"
+  },
+  "frozen_files_unchanged": true,
+  "outcome": "SEMANTICS_NEEDS_ROOT_FIX_CI_DIAGNOSTICS_PASS",
+  "findings": [
+    {
+      "id": "R6-A-01",
+      "priority": "P2",
+      "kind": "predicate_complement_scope_root_cause",
+      "summary": "Final lexical verb selects only abstract tail nominal, so a concrete coordinated business action is erased by a later abstract objective. Reversing conjunct order changes source relevance without changing source business content.",
+      "locations": [
+        "src/company_wiki/document_understanding/statement_grammar/__init__.py:184",
+        "src/company_wiki/source_catalog/narrative_source_context.py:92"
+      ],
+      "observed_failures": [
+        "We aim to reopen neonatal wards and create value.",
+        "We are committed to treating rare diseases and creating value."
+      ],
+      "positive_control": "We aim to create value and reopen neonatal wards.",
+      "actual_failure": "context_only/source_abstract_objective/relevantFalse/factFalse",
+      "expected": "concrete original plan remains readable/relevant with its modality, no new typed fact",
+      "fix_requirements": [
+        "Preserve governing predicate/complement scope and concrete coordinate arguments, not last-VB-only nominal tail.",
+        "No and-only or company/industry words special cases.",
+        "Guard relative/beneficiary-only material from donating an issuer action.",
+        "Preserve unknown raw/unresolved and R4/R5 capability-partial behavior."
+      ],
+      "root_notified": true,
+      "root_delegated_rework": true
+    }
+  ],
+  "accepted_scopes": [
+    "No new company/industry allowlist found in changed sources; closed reporting/courtesy/metatext constructs are functional grammar, not issuer identity.",
+    "24→36 bounded source work observes new12n scope cost; global16M/112 and grammar32n+1/4096char1024token unchanged. Memo/linear tests passed; no actual H1 performance acceptance.",
+    "Actual AST recipe binds newsourcecontext bytes for PDF and nonPDF, mutation changes recipe without touching files.",
+    "Three real public handler/wire tests preserve selected/partial strict bool/optional absence/unknownfield rejection; private validation not mocked.",
+    "CI diagnostic7selected passed including both newcases, 63 groups visible within first10 <=4096B, UTF8 escaping bounded, failurebody privacy,25case cap and skipped no-read preserved."
+  ],
+  "not_accepted_or_not_run": [
+    "Semantic A release due P2",
+    "Full exact candidate CI",
+    "Real H1",
+    "Real summary/persistent cache recovery/RF economic adoption",
+    "W23 tooling",
+    "746-suite repetition",
+    "Cause of111.94s vs36.51s slowdown/performance pass"
+  ],
+  "reviewer_own_errors": [
+    "Author report first read before author had written it; later read actual frozen files.",
+    "One exploratory rg path test_source_processing_completeness.py absent; used provided actual public handler test instead."
+  ],
+  "start_baseline_head": "f298a383ff97b406fae27d49a3c50a16fb95dd3d",
+  "root_frozen_old_version_commit": "718fced8d0cc5b15fc9eb144982b627086eaf348",
+  "reviewer_write_scope": [
+    "implementation-results/R6-independent-final.md",
+    "implementation-results/R6-independent-final.json",
+    "tmp/a6 self-owned tests/observations (removed)"
+  ]
 }

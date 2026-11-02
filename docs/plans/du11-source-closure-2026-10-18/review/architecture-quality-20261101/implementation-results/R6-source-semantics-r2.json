@@ -1,0 +1,125 @@
+{
+  "schema_version": "cwp-r6-source-semantics-r2/1",
+  "status": "FROZEN_READY_ROOT_INDEPENDENT_REVIEW",
+  "baseline_commit": "718fced8",
+  "created_at": "2026-11-01T23:45:51.046173+00:00",
+  "worktree": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2",
+  "source_test_sha256": {
+    "src/company_wiki/document_understanding/statement_grammar/__init__.py": "dace7c6b31227c934238e325e3cababf93c4f9445d6b01a208910731f46089e9",
+    "src/company_wiki/document_understanding/statement_grammar/predicate_arguments.py": "44733068065e4489f3d20e2b586fadc8840dce498613beae5c58f3260399c154",
+    "src/company_wiki/document_understanding/operating_states/assertion_roles.py": "a14877efff01cdb62e4091a2e89e98d2b93bcae27146042594c967afad188ff3",
+    "src/company_wiki/source_catalog/narrative_source_passage.py": "dccf866b6cac91edcbde52b2cb253f53957b2cc63fd8e9adceee1226b20a92a0",
+    "src/company_wiki/source_catalog/narrative_source_context.py": "d9578083a07ae26d43a847e7e814dc3242304d1cf1b88408f10caae4468b5e64",
+    "src/company_wiki/source_catalog/narrative_business_policy.py": "6c1bc1ab07d77b95e9f5a94be1e8471a0831a456f9d75422c4319571f0b0f465",
+    "tests/unit/du11_production/test_source_semantic_axes.py": "e4aaea98b9e50560cd6f454a09a63b9868dce75eed37dc42c809f2c64106438a"
+  },
+  "history_preserved": [
+    "R6-source-semantics.md",
+    "R6-source-semantics.json",
+    "R6-independent-final.json"
+  ],
+  "runs": [
+    {
+      "run": "r6-r2-complement-red",
+      "tests": 29,
+      "failures": 18,
+      "errors": 0,
+      "seconds": 20.486,
+      "junit_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r2-complement-red.xml",
+      "junit_sha256": "15dd8aeeed3245f99299850c8b812f9fcb8ec28d5f3b7834574ae6fef9c09e37"
+    },
+    {
+      "run": "r6-r2-complement-green1",
+      "tests": 29,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 10.433,
+      "junit_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r2-complement-green1.xml",
+      "junit_sha256": "458a8f52a8fc67b057f6d21ef4159936511d6247c1d0040a41e2e164d6acc6fa"
+    },
+    {
+      "run": "r6-r2-typed-relative-red",
+      "tests": 3,
+      "failures": 1,
+      "errors": 0,
+      "seconds": 18.423,
+      "junit_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r2-typed-relative-red.xml",
+      "junit_sha256": "97f859fe119684fbc77cbdb9ba926dc83a9150960dd7615d60e768d44c88937d"
+    },
+    {
+      "run": "r6-r2-goal-quantity-red",
+      "tests": 5,
+      "failures": 2,
+      "errors": 0,
+      "seconds": 14.364,
+      "junit_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r2-goal-quantity-red.xml",
+      "junit_sha256": "32b4ef23745ee797145633ff1dc580db556e4fb5381d2c17cbba968a159de8e2"
+    },
+    {
+      "run": "r6-r2-scope-green2",
+      "tests": 286,
+      "failures": 4,
+      "errors": 0,
+      "seconds": 18.772,
+      "junit_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r2-scope-green2.xml",
+      "junit_sha256": "de3b78e49cb5fd0e95fab531adff6daa9e6fe1efa422f8fcbf6f49f7c83da78e"
+    },
+    {
+      "run": "r6-r2-scope-green3",
+      "tests": 291,
+      "failures": 4,
+      "errors": 0,
+      "seconds": 21.74,
+      "junit_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r2-scope-green3.xml",
+      "junit_sha256": "94f87d4a698b88623cf088d9c6f16d0d175b06031e22fba792333888b036a285"
+    },
+    {
+      "run": "r6-r2-scope-green4",
+      "tests": 293,
+      "failures": 1,
+      "errors": 0,
+      "seconds": 24.708,
+      "junit_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r2-scope-green4.xml",
+      "junit_sha256": "720610874e9a2299250e050b682c9b79dac77380f6d41a461e5d0ed9b85630e1"
+    },
+    {
+      "run": "r6-r2-final-scope",
+      "tests": 322,
+      "failures": 0,
+      "errors": 0,
+      "seconds": 15.648,
+      "junit_path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\architecture-r2\\tmp\\r6-r2-final-scope.xml",
+      "junit_sha256": "9b8f0d8e3e7f100abf4e3189c42d119b242021d1039dcb595881de64cca9ad28"
+    }
+  ],
+  "new_predicate_scope_module_recipe_closure": {
+    "False": "44733068065e4489f3d20e2b586fadc8840dce498613beae5c58f3260399c154",
+    "True": "44733068065e4489f3d20e2b586fadc8840dce498613beae5c58f3260399c154"
+  },
+  "versions": {
+    "statement_grammar": "statement-grammar/4",
+    "source_passage": "source-passage/8",
+    "actual_resource_identity": "123fbe7c75f816991ad5112a748e59e7339a054cd40483a905ddf4c30e8c93f7"
+  },
+  "checks": {
+    "ruff": "PASS 6 sources + tests",
+    "mypy": "PASS 6 source files",
+    "diff_check": "PASS; expected CRLF conversion warnings"
+  },
+  "budgets": {
+    "document_work_limit": 16000000,
+    "selection_slots": 112,
+    "pos_work_per_char": 32,
+    "source_passage_scan_passes": 36,
+    "max_statement_chars": 4096,
+    "max_statement_tokens": 1024,
+    "extra_work": "Explicit goals (including typed goals) and unproved functional roles bind matrix/arguments before fact projection; cached single POS, no second charge. Quantified direct-role callback memo is scope-local; no numerical conversion or proof."
+  },
+  "boundaries": [
+    "Whole-clause typed witness lacks exact predicate/argument positions; goal purpose now binds before reuse. Non-goal typed fast path preserved.",
+    "Some base-verb quantified goals lack original metric proof. Kept as unresolved/relevant original, not an achieved quantity or computed value.",
+    "This bounded POS scope observer is not a full dependency parser or a general economic truth model.",
+    "No 746 rerun; 322 targeted tests do not replace full candidate CI, real H1, paid summary/cache/RF acceptance."
+  ],
+  "mutations": "6 owned sources + 1 owned test only; no main src, main PWF, Git, production, original, credential, model assets or paid API mutation"
+}

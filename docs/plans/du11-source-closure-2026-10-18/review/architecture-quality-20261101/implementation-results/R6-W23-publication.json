@@ -1,0 +1,27 @@
+{
+  "schema": "w23-root-publication/1",
+  "runtime_commit": "ae438a32c942ccc50e9f0fa4d8e9825bd11ca210",
+  "reviewed_branch_head": "7462a472ef421812228c2271df1e79dd4418c190",
+  "integrated_head": "6b70394b36cfcb8e25e681900617b2dae2d63fe4",
+  "candidate_ci": {
+    "id": 41363162079,
+    "head_sha": "6b70394b36cfcb8e25e681900617b2dae2d63fe4",
+    "head_branch": "codex/architecture-w23-repair-20261101",
+    "status": "completed",
+    "conclusion": "success",
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41363162079",
+    "created_at": "2026-11-01T23:39:22Z",
+    "updated_at": "2026-11-01T23:45:10Z"
+  },
+  "normal_candidate_push": {
+    "passed": 167,
+    "seconds": 57.59
+  },
+  "master_merge": "ff-only success; existing docs/hook byte hashes preserved",
+  "master_push": "pending after status commit",
+  "production_src_config_dependencies_equal_before": true,
+  "raw_model_files_unchanged": true,
+  "PNG_cleanup": "R6-W23-derived-cleanup.json",
+  "engineering": "ACCEPTED",
+  "empirical": "PARTIAL; actual_total_elapsed=null; old1800compliance/peak/accuracy/production suitability unproven"
+}

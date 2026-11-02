@@ -124,8 +124,8 @@
     },
     {
       "id": "W23-XIAOMI-OCR",
-      "engineering_status": "TOOLING_MERGED_PUSHED_EMPIRICAL_REWORK_REQUIRED",
-      "evidence": "review/w22-w23-reception-20261031/summary.json",
+      "engineering_status": "TOOLING_MERGED_R1_ROOT_REPAIR_ACCEPTED_EMPIRICAL_PARTIAL",
+      "evidence": "review/architecture-quality-20261101/implementation-results/R6-W23-publication.json",
       "requires_author_delivery_before_mainline": false,
       "whole_company_acceptance": false
     },
@@ -152,11 +152,11 @@
     },
     {
       "id": "W23-OCR-R1",
-      "engineering_status": "LAST_KNOWN_READY_EXECUTION_UNKNOWN",
-      "evidence": "harness_lanes/20261031/R1-setup.json",
+      "engineering_status": "ROOT_REPAIRED_INDEPENDENT_AND_FULL_CI_PASS_MASTER_MERGED",
+      "evidence": "review/architecture-quality-20261101/implementation-results/R6-W23-publication.json",
       "requires_author_delivery_before_mainline": false,
       "whole_company_acceptance": false,
-      "note": "Only last recorded READY; no independent current execution observation. Original setup946 creation snapshot; startup must include20dd platformfix. Nonblockingexperiment."
+      "note": "Experimental tooling only; old actual elapsed null and1800 compliance/peak/accuracy/production suitability unproven. No production OCR switch. Runtimeae438, integrated6b70394b; narrow generated PNG cleanup verified."
     }
   ],
   "older_parent_groups": {

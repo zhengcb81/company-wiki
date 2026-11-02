@@ -1,30 +1,34 @@
 {
   "schema_version": "company-wiki-current-plan-status/2",
-  "as_of_date": "2026-11-01",
-  "observed_at_utc": "2026-11-01T23:10:23.839152+00:00",
+  "as_of_date": "2026-11-02",
+  "observed_at_utc": "2026-11-02T00:03:30.027448+00:00",
   "canonical_entry": "CURRENT_STATUS.md",
   "plan_id": "du11-source-closure-2026-10-18",
   "plan_root": "docs/plans",
-  "project_status": "R6_RECTIFICATION_ACTIVE_STABLE_MASTER_ISOLATED_CANDIDATE",
-  "scope_this_update": "Preserve unaccepted candidate branch; normal revert returns stable master; keep green RF/Q09; finish records then pause",
-  "last_code_commit": "dbfec3beb0948006475701e2131c4d95e0586556",
+  "project_status": "R6_FULL_CI_22_FAIL_ISOLATED_OWNER_ROOT_REPAIR_ACTIVE",
+  "scope_this_update": "User resumed comprehensive rectification; W23 tool accepted and locally merged after independent/full CI; R6 corrected candidate pushed to existing full CI. Real-source/summary/recovery/RF acceptance remains OPEN.",
+  "last_code_commit": "6b70394b36cfcb8e25e681900617b2dae2d63fe4",
   "verified_publication_before_docs": {
     "local_branch": "master",
-    "local_and_remote_head": "dbfec3beb0948006475701e2131c4d95e0586556",
-    "note": "Stable revert normally pushed; final documentation commits do not change source behavior."
+    "local_head": "6b70394b36cfcb8e25e681900617b2dae2d63fe4",
+    "remote_head_last_observed": "3349b4f1436d82d78d738fe940d03a7e88961ac2",
+    "note": "W23 FF merged locally after exact candidate CI success; combined main publication awaits current R6 candidate CI and PWF commit. No main push claimed yet."
   },
   "code_ci": {
-    "id": 41306232306,
-    "head_sha": "dbfec3beb0948006475701e2131c4d95e0586556",
+    "id": 41363162079,
+    "head_sha": "6b70394b36cfcb8e25e681900617b2dae2d63fe4",
+    "head_branch": "codex/architecture-w23-repair-20261101",
     "status": "completed",
     "conclusion": "success",
-    "url": "https://github.com/zhengcb81/company-wiki/actions/runs/41306232306"
+    "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41363162079",
+    "created_at": "2026-11-01T23:39:22Z",
+    "updated_at": "2026-11-01T23:45:10Z"
   },
   "native_goal": {
     "observed_status": "paused",
     "observed_via": "get_goal on current closeout; explicit user pause",
     "objective_budget_text": "legacy2M tokens/$20; not runtime policy",
-    "note": "User requests pause after finishing current engineering/wire closeout; whole goal incomplete; runtime config10M/$20 unchanged."
+    "note": "Latest user explicitly resumed implementation. Native tool offers no active-resume operation; manual user-authorized continuation is active. Whole objective remains incomplete."
   },
   "runtime_policy": {
     "budget_owner": "config/resource_budget.yaml",
@@ -87,11 +91,11 @@
     },
     {
       "id": "P3",
-      "status": "R4_FOUR_REVIEWS_ENGINEERING_PARTLY_REPAIRED_FULL_COMPANY_OPEN_PAUSED",
+      "status": "R4_FOUR_REVIEWS_ENGINEERING_REMEDIATION_ACTIVE_REAL_COMPANY_OPEN",
       "task": "W12 original-company rerun, new-company generalization, fixed8company fullaudit/skillimprovement and finalclean streak"
     }
   ],
-  "next_action": "完成R6来源语义最终冻结与独立审查；对codex/architecture-rectification-r2-20261101执行现有完整CI，修复所有真实回归后并回master。W23在tmp/w23-r6独占工区修真实ledger/cache并独审，不切生产OCR。",
+  "next_action": "先按R6-CI-r2的22失败分组根修来源语义/纯合同导入/partial-cache边界，集中独审后重推同候选CI；仅已独审和完整CI绿的W23工具与PWF先正常发布，不把红源候选并线。再T3结构及最终H1/C。",
   "package_status_registry": "PACKAGE_STATUS.json",
   "handoff": "HANDOFF.md",
   "goal_definition": "MAINLINE_LOOP_GOAL.md",
@@ -101,8 +105,8 @@
     ".githooks/pre-push mode-only; not ours"
   ],
   "nonblocking_side_work": [
-    "W23-OCR-R1 empirical rework: last knownREADY,current executionUNKNOWN; existing productionOCR remains",
-    "IR/QA/MC accepted and merged; no further wait on these packages"
+    "W23 tool engineering accepted: ae438 runtime, independent review, integrated6b70394b exact CI41363162079 success; empirical comparison PARTIAL, production OCR unchanged.",
+    "IR/QA/MC accepted and merged; no further author delivery awaited."
   ],
   "current_limits_to_close": [
     "W21 canonicalC2 actual enhanced read/alignment; nativefallback does not sign enhancement",
@@ -1343,7 +1347,7 @@
     "source_runtime": "55c29fe5f3a9554f883156e3a4232eece04bf581"
   },
   "architecture_quality_audit": {
-    "status": "CANDIDATE_FULL_CI_FAILED_NOT_ACCEPTED_STABLE_MAIN_RESTORED_PAUSED",
+    "status": "R6_FULL_CI_22_FAIL_R3_REPAIR_ACTIVE",
     "date": "2026-11-01",
     "evidence": "review/architecture-quality-20261101/README.md",
     "implementation": "review/architecture-quality-20261101/implementation.md",
@@ -1362,17 +1366,16 @@
     ],
     "verified": "pure source admission/version probes; 20k query and prune AST probes; checker counterexamples; legacy --help; explicit dry-shadow gate",
     "not_run": [
-      "final-R5 real H1 replay",
-      "new real summary/persistent cache recovery/RF adoption",
-      "new company loop",
-      "full suite"
+      "final real H1 source replay",
+      "new real summary/persistent recovery/RF adoption",
+      "new company loop"
     ],
     "new_model_posts": 0,
     "downloads": {
       "original_documents": 0,
       "public_language_resources_and_dependencies": "downloaded as reported"
     },
-    "production_changes": false,
+    "production_changes": "W23 experimental tools locally merged; primary source rectification remains isolated pending full CI.",
     "native_goal_resumed": false,
     "all_changes_authorized": true,
     "implementation_registry": "review/architecture-quality-20261101/implementation-results/STATUS.json",
@@ -1382,7 +1385,7 @@
     "real_source_result": "v1 pre-final12/12+111/111; v2 FAIL public contract; v3 NOT_RUN_USER_PAUSE",
     "original_audit_source_head": "d38613bc926e6c95c9009971576af81978a59234",
     "full_CI_failures": 63,
-    "full_CI_evidence": "review/architecture-quality-20261101/implementation-results/CWP-failed-CI.md",
+    "full_CI_evidence": "Historical failed original candidate only; see CWP-failed-CI.md. Does not describe the current CI still running.",
     "candidate_code_sha": "6668bc978d3ea2217a9aff30be69bde456894c04"
   },
   "RF_previous_code_publication": {
@@ -1462,16 +1465,60 @@
   },
   "r6": {
     "ledger": "review/architecture-quality-20261101/implementation-results/R6-ROOT.md",
-    "status": "B_PASS_A_NEW_COORDINATED_COMPLEMENT_P2_REWORK",
-    "W23": "independent4RED; real X1/R0 transaction/cache root repair active; no model calls",
+    "status": "FULL_CI_22_FAIL_R3_OWNER_REPAIR_ACTIVE",
+    "W23": "TOOL_ENGINEERING_AND_CANDIDATE_FULL_CI_PASS_MASTER_FF; empirical_PARTIAL",
     "source_worktree": "tmp/architecture-r2",
     "source_branch": "codex/architecture-rectification-r2-20261101",
     "reapplied_commit": "f298a383",
     "W23_worktree": "tmp/w23-r6",
     "consumer": "50P independent7P+CF3stable1P",
     "ROOT_associated": "72P/28.53s normal host",
-    "ci_diagnostics": "17P/0.69s pendingfinalreview",
-    "local_checkpoint": "718fced8",
-    "source_semantics": "746P then independent14 finds abstract-tail loss; scope root repair active"
+    "ci_diagnostics": "17P/0.69s plus independent review PASS; no added CI stage.",
+    "local_checkpoint": "745a72d3",
+    "source_semantics": "A1 historical746P followed by independent new P2 FAIL; R2 generic predicate scopes322P/15.65s and independent22P/16.84s closed the bounded P2.",
+    "W23_publication": {
+      "schema": "w23-root-publication/1",
+      "runtime_commit": "ae438a32c942ccc50e9f0fa4d8e9825bd11ca210",
+      "reviewed_branch_head": "7462a472ef421812228c2271df1e79dd4418c190",
+      "integrated_head": "6b70394b36cfcb8e25e681900617b2dae2d63fe4",
+      "candidate_ci": {
+        "id": 41363162079,
+        "head_sha": "6b70394b36cfcb8e25e681900617b2dae2d63fe4",
+        "head_branch": "codex/architecture-w23-repair-20261101",
+        "status": "completed",
+        "conclusion": "success",
+        "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41363162079",
+        "created_at": "2026-11-01T23:39:22Z",
+        "updated_at": "2026-11-01T23:45:10Z"
+      },
+      "normal_candidate_push": {
+        "passed": 167,
+        "seconds": 57.59
+      },
+      "master_merge": "ff-only success; existing docs/hook byte hashes preserved",
+      "master_push": "pending after status commit",
+      "production_src_config_dependencies_equal_before": true,
+      "raw_model_files_unchanged": true,
+      "PNG_cleanup": "R6-W23-derived-cleanup.json",
+      "engineering": "ACCEPTED",
+      "empirical": "PARTIAL; actual_total_elapsed=null; old1800compliance/peak/accuracy/production suitability unproven"
+    },
+    "integrated_candidate": "9f575810ca92620a6fb6ff63cfd326a5b9f076fa",
+    "candidate_ci": {
+      "id": 41364303788,
+      "head_sha": "9f575810ca92620a6fb6ff63cfd326a5b9f076fa",
+      "head_branch": "codex/architecture-rectification-r2-20261101",
+      "status": "completed",
+      "conclusion": "failure",
+      "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41364303788",
+      "created_at": "2026-11-01T23:53:41Z",
+      "updated_at": "2026-11-02T00:00:17Z"
+    },
+    "normal_candidate_push": {
+      "passed": 167,
+      "test_seconds": 47.74,
+      "total_seconds": 62.602
+    },
+    "current_failed_ci_evidence": "review/architecture-quality-20261101/implementation-results/R6-CI-r2.md"
   }
 }

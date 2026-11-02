@@ -57,3 +57,26 @@ W23资料独审判PARTIAL可接收/工具工程不通过，6原件与970冻结�
 ## A独审新P2（不得签整合通过）
 
 746定点绿后独立14未见样例发现具体动作被抽象尾语吞掉：We aim to reopen neonatal wards and create value.→context，但倒序support；commit to treating rare diseases and creating value也错误排除。根因grammar只取最后verb后的nominal补语，而非并列predicate各自scope。已交同grammar owner先新RED再根修，要求and/or/but、嵌套/中文并列与beneficiary-only抽象目标反控，不加行业词/and特判/抬额度，不重复746。当前本地冻结commit仅保存未验收进度，未push或并master。
+
+## 同根错误传播质量修复（不混入63旧失败计数）
+
+sandbox paid故障暴露另一个真实框架质量问题：frozen dataclass Exception阻止contextlib写__traceback__，清理阶段将原有code/cause掩为FrozenInstanceError。只读AST检查runtime发现同模式4类（model caller、select、summary、verify）；新标准context cleanup测试先3真RED+1测试构造失误（HandlerMetrics必填字段），纠正构造后4/4真RED/3.03s。仅移除这4个异常类的frozen（普通source值/limits/receipt仍不可变、所有原字段校验保持），4新+21caller既有回归25P/2.52s，Ruff绿。跨类一次根修，没有为特定异常写wrapper或改预算、CAS、模型逻辑。待最终集中独审，不开新微门禁。
+
+## W23独立接收与候选集成
+
+新工具ae438a32通过真正独审，原4RED与marker前死亡/10case均绿，历史实验total_elapsed=null/1800合规未证、峰值限制与小米精度仍PARTIAL。原R1卡要求新增PNG清理，ROOT非盲删：精确路径/非reparse/PNG魔数/579214B/SHA均匹配后仅删最后生成QA页，收据R6-W23-derived-cleanup.json；原PDF/模型/其余cache未动。自身两付费测试短目录126文件12388003逻辑B清理，非实际磁盘节省测量。
+
+W23自有branch已统一codex/architecture-w23-repair-20261101，以复用同一现有CI触发；合最新稳定master3349时仅README冲突，保留新R1恢复段并解决，runtime3blob与ae438完全一致、src/config/依赖与master相同。候选6b70394b先独立CI，不等待源语义R2，也不切生产OCR。首push仅因sparse未取原hook35入口而0例未跑被拒，已补测试/脚本/config工程目录（无companies）后正常重推；不改测试/跳hook。
+
+主线语义R2收敛在通用goal/predicate直接补语作用域：不将beneficiary relative/数字借为独立proof，未知量化目标保原文unresolved而不新造metric owner；未改原模型/全局额度。
+
+W23首轮稀疏修补仍缺tests/fixtures导致normal165P/2missingF。已按Git metadata系统核全tests1177文件仅10,717,405逻辑B、最大文件123069B（没有公司原件/模型），改为统一完整工程cone-sparse：src/tests/scripts/tools/config/.githooks/.github＋本卡docs/delivery，不再逐test加例外。只有本卡工程小夹具、无companies目录；后续总控工区照同模板，避免harness交付能跑专属测试却不能运行原hook的共同问题。
+
+W23候选6b70394b精确CI41363162079 success，normal167P/57.59s。已FF主线并逐SHA保护在途ROOT文档/hook，生产src/config/依赖与稳定master相同；42工具/测试/交接文件接受，原实验数据PARTIAL，未切OCR/未跑模型。R6源745a72d3已本地正常Ruff/mypy全src保存，r2独立22项绿/16.84s，待正式报告与完整候选CI，不冒全域已过。
+
+R6-r2最终独审正式PASS：22P/16.84s、12文件前后SHA同；原并列P2范围闭合，4Exception根修也过独立测试；不冒322/746重跑或真实H1/fullCI。后续候选745a72d3已合W23稳定master，正常push/完整CI进行中。原63失败和A1 NEEDS_FIXES收据保留，注册表更新为R6 bounded-independent pass/fullCI pending。
+
+
+## R6精确候选CI22F（2026-11-02）
+
+CI41364303788已失败，unit324s非超时。新摘要成功保全12失败群/22case，原63F及A1失败仍保留；R3按source语义、纯合同导入/partial-cache原owner根修，不并红候选、不跑新真实资料或模型。ROOT marker单项1F/16.24s已归source同根coverage问题，不重复另修。W23候选全CI绿，只先发布该独立工具及本PWF。

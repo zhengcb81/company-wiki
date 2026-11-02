@@ -1,0 +1,389 @@
+{
+  "schema_version": "w23-root-repair-independent/1",
+  "reviewer": "/root/rectification_review_a",
+  "worktree": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\w23-r6",
+  "runtime_commit": "ae438a32c942ccc50e9f0fa4d8e9825bd11ca210",
+  "branch": "codex/architecture-w23-repair-20261101",
+  "at_utc": "2026-11-01T23:16:33.695580+00:00",
+  "frozen_runtime_manifest": {
+    "tools/ocr_comparison/campaign.py": {
+      "sha256": "c96ce351a2b77e86a5a168fbb003b6b3238739a9e962bb071d0e423337371912",
+      "bytes": 26582
+    },
+    "tools/ocr_comparison/cache.py": {
+      "sha256": "bde43e2a13f987f92079a10a55a2d3939873dc959529ed737ceb98f109cfe776",
+      "bytes": 3581
+    },
+    "tests/integration/test_w23_ocr_r1_transactional_runner.py": {
+      "sha256": "0ba3d46d7a34a1ea1113ea01ce50ca387a527a3369acd7174a0f0066ef726d54",
+      "bytes": 14211
+    }
+  },
+  "own_tmp": {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\w6",
+    "initially_absent": true,
+    "finally_absent": true,
+    "restored_initial_state": true
+  },
+  "not_run": [
+    "real models",
+    "real pages",
+    "downloads",
+    "paid API",
+    "all110 tests",
+    "production OCR"
+  ],
+  "baseline_intake": "R6-W23-intake.md/json",
+  "author_repair_receipt": {
+    "schema_version": "root-w23-repair/1",
+    "observed_at_utc": "2026-11-01T23:15:54.244648+00:00",
+    "worktree": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\w23-r6",
+    "branch": "codex/architecture-w23-repair-20261101",
+    "base_commit": "d2f6e6f015cb69b826b499ef56e1ab3d6053fced",
+    "runtime_commit": "ae438a32c942ccc50e9f0fa4d8e9825bd11ca210",
+    "status": "AUTHOR_REPAIRED_TESTED_PENDING_NEW_INDEPENDENT_REVIEW",
+    "production_ocr_accepted": false,
+    "real_model_calls": 0,
+    "model_downloads": 0,
+    "production_source_config_dependency_changes": 0,
+    "source_manifest": {
+      "tools/ocr_comparison/campaign.py": {
+        "raw_sha256": "c96ce351a2b77e86a5a168fbb003b6b3238739a9e962bb071d0e423337371912",
+        "lf_sha256": "135b7d5144fd1de72249659f1d3fba01b8d6ee360f7bf426ae9269e01d63b177"
+      },
+      "tools/ocr_comparison/cache.py": {
+        "raw_sha256": "bde43e2a13f987f92079a10a55a2d3939873dc959529ed737ceb98f109cfe776",
+        "lf_sha256": "d5379e40fad95cc729d8193ae60d404887341cb1d9c8c716199b3fa915044168"
+      },
+      "tests/integration/test_w23_ocr_r1_transactional_runner.py": {
+        "raw_sha256": "0ba3d46d7a34a1ea1113ea01ce50ca387a527a3369acd7174a0f0066ef726d54",
+        "lf_sha256": "0ba3d46d7a34a1ea1113ea01ce50ca387a527a3369acd7174a0f0066ef726d54"
+      }
+    },
+    "red": {
+      "new_real_route_stub_cases_failed": 8,
+      "passed": 6,
+      "seconds": 3.54
+    },
+    "prior_affected_domain": {
+      "passed": 108,
+      "warnings": 2,
+      "seconds": 93.51,
+      "overlaps_final": true
+    },
+    "final_transactional_domain": {
+      "passed": 31,
+      "seconds": 23.02,
+      "restores_owned_scratch": true
+    },
+    "current_unique_test_package": 110,
+    "unique_package_rerun_together": false,
+    "ruff": "PASS changed source/cache/test",
+    "normal_runtime_commit_hooks": "normal commit executed; configured source hooks skipped tools-only scope; manual targeted Ruff/tests passed",
+    "independent_review": {
+      "status": "pending ROOT review_a new task",
+      "historical_76292_claim_proven": false,
+      "historical_latest_report": "NEEDS_FIXES; preserved"
+    },
+    "mechanism": [
+      "same ledger short kernel mutex and durable pre-inference reservation",
+      "inference outside mutex; single campaign inference reservation",
+      "real X1/R0 routes read stable nominal-cap cache before allocation",
+      "captured outputs+same cache completion marker precede settlement; crash recovery no second inference",
+      "failed/crashed holds remain; known overruns recorded uncensored and marked partial",
+      "finite write/read checks; actual unknown old zero real-work cost blocks new allocation, not old schema; empty/known old ledgers migrate safely"
+    ],
+    "historical_experiment": {
+      "recorded_charges_seconds": 1431.40547,
+      "actual_total_elapsed_seconds": null,
+      "within_1800_proven": false,
+      "unknown": "seven zero-second R0 first-pass records; rerun is extra work",
+      "overcount_preserved_seconds": 1080,
+      "new_code_does_not_retroactively_certify": true
+    },
+    "author_artifacts_read_only_sha256": {
+      "campaign_ledger.json": "1e1b423deab85c0ec8ec2ab7939614a98cf2f2e55bee787273dc245b8d59222a",
+      "comparison.json": "0438e57fdf7c5e1c56d517203582a3ea9a9c16f3f8fddd6bffeefad2ceffa10f",
+      "comparison.md": "34fc6194c2297ae3e3f51148cad7e48773440211949387a92606c62a5b30b10e",
+      "review_independent.md": "d084eafeb43cd82bb5d10ebf4c47318a3d5f3bf4a70f69c5589bf36d7538cb10"
+    },
+    "author_png": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-w23-xiaomi-ocr-r1\\.w23_cache\\r1_pages\\r1_wanhua_qa2021_p003.png",
+      "bytes": 579214,
+      "sha256": "097eaf47d1da132c80a64dfdd42ca81c72d3b559969ca552b6bc7fb1d00478fc",
+      "action": "retained read-only; false all-deleted claim corrected"
+    },
+    "git_publication": "local runtime commit only; no main merge/push by this author",
+    "scope_errors_retained": [
+      "initial legacy regression missing two sparse JSON fixtures; materialized only those JSON",
+      "Low sandbox synthetic four-byte hardlink test refused; same host domain passed without converter edits",
+      "git sparse-checkout add --no-cone unsupported; reused existing non-cone config without that flag"
+    ]
+  },
+  "source_binding_checks": {
+    "tools/ocr_comparison/campaign.py": {
+      "raw_sha256": "c96ce351a2b77e86a5a168fbb003b6b3238739a9e962bb071d0e423337371912",
+      "lf_sha256": "135b7d5144fd1de72249659f1d3fba01b8d6ee360f7bf426ae9269e01d63b177",
+      "matches_author_raw": true,
+      "matches_author_lf": true,
+      "matches_runtime_commit_lf": true
+    },
+    "tools/ocr_comparison/cache.py": {
+      "raw_sha256": "bde43e2a13f987f92079a10a55a2d3939873dc959529ed737ceb98f109cfe776",
+      "lf_sha256": "d5379e40fad95cc729d8193ae60d404887341cb1d9c8c716199b3fa915044168",
+      "matches_author_raw": true,
+      "matches_author_lf": true,
+      "matches_runtime_commit_lf": true
+    },
+    "tests/integration/test_w23_ocr_r1_transactional_runner.py": {
+      "raw_sha256": "0ba3d46d7a34a1ea1113ea01ce50ca387a527a3369acd7174a0f0066ef726d54",
+      "lf_sha256": "0ba3d46d7a34a1ea1113ea01ce50ca387a527a3369acd7174a0f0066ef726d54",
+      "matches_author_raw": true,
+      "matches_author_lf": true,
+      "matches_runtime_commit_lf": true
+    }
+  },
+  "runtime_unchanged_after_tests": true,
+  "original_four_plus_countercontrol": {
+    "schema_version": "root-w23-light-probe/1",
+    "no_model_or_network": true,
+    "source_usage": "actual frozen campaign/cache/runner from tmp/w23-r6; only model/runner boundary stubbed",
+    "runner": "explicit stub reached through unchanged actual X1F dispatch, fake-CLI branch unused",
+    "cases": [
+      {
+        "id": "real-x1-cross-process-cache",
+        "expected": "fresh process resumes same cached page with zero backend calls and no re-charge",
+        "first": {
+          "returncode": 0,
+          "stderr_tail": ""
+        },
+        "second": {
+          "returncode": 0,
+          "stderr_tail": ""
+        },
+        "backend_calls": 1,
+        "spent_before": 1.0,
+        "spent_after": 1.0,
+        "second_cache_hit": true,
+        "verdict": "PASS"
+      },
+      {
+        "id": "real-x1-unknown-inflight-recovery",
+        "expected": "started failed invocation conservatively reserved/charged before new process resumes",
+        "failed": {
+          "returncode": 1,
+          "stderr_tail": "  result = run_x1_batch([p for p, _ in missing], deadline=deadline,\n                          total_budget=reservation[\"seconds\"], max_new_tokens=max_new_tokens,\n                          weights_mode=weights_mode, model_dir=str(model), backend_identity=identity)\n  File \"C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\w6\\probe.py\", line 18, in stub\n    raise RuntimeError('intentional failure after started work before batch return')\nRuntimeError: intentional failure after started work before batch return\n"
+        },
+        "after_failure": {
+          "schema_version": "cwp-ocr-campaign-ledger/1",
+          "plan_id": "probe",
+          "created_at_utc": "2026-11-01T23:16:46.434499+00:00",
+          "budget_seconds": 500.0,
+          "spent_seconds": 0.0,
+          "entries": [],
+          "inflight": [
+            {
+              "reservation_id": "a91d989d1ea047c79c39e09dacaad826",
+              "arm": "X1F",
+              "seconds": 500.0,
+              "created_at_utc": "2026-11-01T23:16:46.620868+00:00",
+              "pages": [
+                {
+                  "page_id": "p1",
+                  "key": "b8b707ddecb69b77ea64eb3ed9556302ba066961cd0a2565ce2e5d2c2c583186"
+                }
+              ]
+            }
+          ]
+        },
+        "recovery": {
+          "returncode": 0,
+          "stderr_tail": ""
+        },
+        "backend_calls": 1,
+        "spent_after_resume": 0.0,
+        "held_after_failure": 500.0,
+        "verdict": "PASS"
+      },
+      {
+        "id": "real-x1-zero-balance-denominator",
+        "expected": "return not_run full denominator before runner invocation with zero backend calls; identity observation is not model inference",
+        "result": {
+          "returncode": 0,
+          "stderr_tail": ""
+        },
+        "runner_calls": [],
+        "verdict": "PASS"
+      },
+      {
+        "id": "nonfinite-ledger-corruption",
+        "expected": "LedgerCorrupt for NaN budget",
+        "observed": {
+          "accepted": false,
+          "error": "ledger resource values invalid"
+        },
+        "verdict": "PASS"
+      },
+      {
+        "id": "crash-after-output-before-completion-marker",
+        "first_exit": 29,
+        "second": {
+          "returncode": 0,
+          "stderr_tail": ""
+        },
+        "backend_calls": 1,
+        "remaining": 0.0,
+        "accounting_complete": false,
+        "execution_status": "partial",
+        "cache_hit": true,
+        "inflight_count": 1,
+        "verdict": "PASS"
+      }
+    ]
+  },
+  "independent_reproducer_source": "from __future__ import annotations\nimport importlib.util,json,os,subprocess,sys,time,types\nfrom pathlib import Path\nROOT=Path(__file__).resolve().parent\n\ndef load():\n    sys.path.insert(0,'C:/Users/郑曾波/Projects/company-wiki/tmp/w23-r6/src')\n    pkg=types.ModuleType('r6_w23');pkg.__path__=['C:/Users/郑曾波/Projects/company-wiki/tmp/w23-r6/tools/ocr_comparison'];sys.modules[pkg.__name__]=pkg\n    name='r6_w23.campaign';spec=importlib.util.spec_from_file_location(name,Path('C:/Users/郑曾波/Projects/company-wiki/tmp/w23-r6/tools/ocr_comparison/campaign.py'));m=importlib.util.module_from_spec(spec);sys.modules[name]=m;spec.loader.exec_module(m)\n    mod=types.ModuleType('r6_w23.run_x1')\n    mod._model_dir=lambda path: Path(path)\n    def stub(pages,**kw):\n        counter=ROOT/(os.environ['CASE']+'-runner-calls.jsonl')\n        with counter.open('a',encoding='utf8') as f:f.write(json.dumps({'total_budget':kw['total_budget'],'deadline':kw['deadline']})+'\\n')\n        if kw['total_budget']<=0:raise ValueError('stub mirrors real validate_card_limits(total_budget=0)')\n        if os.environ.get('STUB_FAIL')=='1':\n            time.sleep(.025)\n            raise RuntimeError('intentional failure after started work before batch return')\n        return {'records':[{'page_id':p['page_id'],'status':'ok','text':'probe-only','request_seconds':1.0} for p in pages],\n                'identity':kw['backend_identity'], 'receipt':{'child':{'events':[{'event':'stage','stage':'page_start','page_id':p['page_id']} for p in pages]}}}\n    mod.run_x1_batch=stub;sys.modules[mod.__name__]=mod\n    b=types.ModuleType('r6_w23.backends');b.__path__=[];sys.modules[b.__name__]=b\n    x=types.ModuleType('r6_w23.backends.xiaomi_x1')\n    class IdentityOnly:\n        def __init__(self,**kw):self.identity_manifest={'arm':'X1','prompt_sha256':'probe-only','max_new_tokens':kw['max_new_tokens'],'weights_mode':kw['weights_mode']}\n    x.XiaomiX1=IdentityOnly;sys.modules[x.__name__]=x\n    return m\n\ndef worker():\n    m=load();case=os.environ['CASE'];\n    if os.environ.get('CUT_OUTPUT')=='1':\n        import importlib\n        cachemod=importlib.import_module('r6_w23.cache');original_put=cachemod.ResultCache.put\n        def cut_after_output(self,key,value):\n            original_put(self,key,value)\n            if not key.startswith('reservation_'):os._exit(29)\n        cachemod.ResultCache.put=cut_after_output\n    path=ROOT/(case+'-ledger.json');ledger=m.load_ledger(path)\n    out=m.run_campaign_batch(ledger_path=path,ledger=ledger,arm='X1F',pages=[{'page_id':'p1','png_sha256':'a'*64}],cache_dir=ROOT/(case+'-cache'),model_dir=str(ROOT/'dummy-model'))\n    (ROOT/(case+'-batch.json')).write_text(json.dumps(out),encoding='utf8')\n\ndef run(case,fail=False,cut=False):\n    env={**os.environ,'CASE':case,'STUB_FAIL':'1' if fail else '0','CUT_OUTPUT':'1' if cut else '0'}\n    p=subprocess.run([sys.executable,'-B','-I','-X','utf8',str(__file__),'worker'],env=env,cwd=str(ROOT),capture_output=True,text=True,encoding='utf8',errors='replace',timeout=15)\n    return {'returncode':p.returncode,'stderr_tail':p.stderr[-500:]}\n\ndef calls(case):\n    path=ROOT/(case+'-runner-calls.jsonl');return [json.loads(x) for x in path.read_text('utf8').splitlines()] if path.exists() else []\n\ndef main():\n    m=load();cases=[]\n    path=ROOT/'resume-ledger.json';m.create_ledger(path,plan_id='probe',budget_seconds=500)\n    r1=run('resume');before=m.load_ledger(path);r2=run('resume');after=m.load_ledger(path);batch=json.loads((ROOT/'resume-batch.json').read_text('utf8'))\n    cases.append({'id':'real-x1-cross-process-cache','expected':'fresh process resumes same cached page with zero backend calls and no re-charge','first':r1,'second':r2,'backend_calls':len(calls('resume')),'spent_before':before['spent_seconds'],'spent_after':after['spent_seconds'],'second_cache_hit':batch['records'][0].get('cache_hit'), 'verdict':'FAIL' if len(calls('resume'))!=1 or before['spent_seconds']!=after['spent_seconds'] else 'PASS'})\n    path=ROOT/'inflight-ledger.json';m.create_ledger(path,plan_id='probe',budget_seconds=500);failed=run('inflight',True);afterfail=m.load_ledger(path);recovery=run('inflight');afterresume=m.load_ledger(path)\n    cases.append({'id':'real-x1-unknown-inflight-recovery','expected':'started failed invocation conservatively reserved/charged before new process resumes','failed':failed,'after_failure':afterfail,'recovery':recovery,'backend_calls':len(calls('inflight')),'spent_after_resume':afterresume['spent_seconds'],'held_after_failure':500-m.remaining_seconds(afterfail),'verdict':'PASS' if afterfail.get('inflight') and m.remaining_seconds(afterfail)==0 and len(calls('inflight'))==1 else 'FAIL'})\n    path=ROOT/'exhausted-ledger.json';m.create_ledger(path,plan_id='probe',budget_seconds=1);m.record(m.load_ledger(path),path,arm='X1F',page_id='old',seconds=1,status='ok');zero=run('exhausted')\n    cases.append({'id':'real-x1-zero-balance-denominator','expected':'return not_run full denominator before model identity/runner with zero backend calls','result':zero,'runner_calls':calls('exhausted'),'verdict':'FAIL' if calls('exhausted') or zero['returncode'] else 'PASS'})\n    path=ROOT/'nonfinite-ledger.json';d={'schema_version':m.LEDGER_SCHEMA,'budget_seconds':float('nan'),'spent_seconds':0,'entries':[]};path.write_text(json.dumps(d),encoding='utf8')\n    try:\n        bad=m.load_ledger(path);observed={'accepted':True,'remaining':str(m.remaining_seconds(bad)),'request_budget':str(m.request_budget(bad))}\n    except m.LedgerCorrupt as e:observed={'accepted':False,'error':str(e)}\n    cases.append({'id':'nonfinite-ledger-corruption','expected':'LedgerCorrupt for NaN budget','observed':observed,'verdict':'FAIL' if observed['accepted'] else 'PASS'})\n    path=ROOT/'outputcut-ledger.json';m.create_ledger(path,plan_id='probe',budget_seconds=500);cut=run('outputcut',cut=True);held=m.load_ledger(path);again=run('outputcut');batch=json.loads((ROOT/'outputcut-batch.json').read_text('utf8'))\n    cases.append({'id':'crash-after-output-before-completion-marker','first_exit':cut['returncode'],'second':again,'backend_calls':len(calls('outputcut')),'remaining':batch['remaining_seconds'],'accounting_complete':batch['accounting_complete'],'execution_status':batch['execution_status'],'cache_hit':batch['records'][0].get('cache_hit'),'inflight_count':len(m.load_ledger(path)['inflight']),'verdict':'PASS' if cut['returncode']==29 and again['returncode']==0 and len(calls('outputcut'))==1 and batch['records'][0].get('cache_hit') and not batch['accounting_complete'] and batch['remaining_seconds']==0 and batch['execution_status']=='partial' else 'FAIL'})\n    result={'schema_version':'root-w23-light-probe/1','no_model_or_network':True,'source_usage':'actual frozen campaign/cache/runner from tmp/w23-r6; only model/runner boundary stubbed','runner':'explicit stub reached through unchanged actual X1F dispatch, fake-CLI branch unused','cases':cases}\n    (ROOT/'probe-results.json').write_text(json.dumps(result,ensure_ascii=False,indent=2),encoding='utf8');print(json.dumps(result,ensure_ascii=False,indent=2))\nif __name__=='__main__':worker() if len(sys.argv)>1 and sys.argv[1]=='worker' else main()\n",
+  "selected_author_tests": {
+    "passed": 10,
+    "failed": 0,
+    "seconds": 4.02,
+    "junit_xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"0\" skipped=\"0\" tests=\"10\" time=\"3.952\" timestamp=\"2026-11-01T23:17:12.358018+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tests.integration.test_w23_ocr_r1_transactional_runner\" name=\"test_two_real_routes_reuse_cache_and_original_measurement[r0_ok]\" time=\"0.469\" /><testcase classname=\"tests.integration.test_w23_ocr_r1_transactional_runner\" name=\"test_failed_started_runner_keeps_reservation_and_cannot_retry_for_free[r0_die]\" time=\"0.356\" /><testcase classname=\"tests.integration.test_w23_ocr_r1_transactional_runner\" name=\"test_result_captured_before_settle_recovers_without_runner\" time=\"0.516\" /><testcase classname=\"tests.integration.test_w23_ocr_r1_transactional_runner\" name=\"test_zero_balance_still_serves_real_x1_cache\" time=\"0.433\" /><testcase classname=\"tests.integration.test_w23_ocr_r1_transactional_runner\" name=\"test_concurrent_same_key_starts_only_one_real_runner\" time=\"0.425\" /><testcase classname=\"tests.integration.test_w23_ocr_r1_transactional_runner\" name=\"test_two_stale_process_snapshots_cannot_double_allocate\" time=\"0.248\" /><testcase classname=\"tests.integration.test_w23_ocr_r1_transactional_runner\" name=\"test_actual_overrun_is_not_censored_to_the_reserved_budget\" time=\"0.275\" /><testcase classname=\"tests.integration.test_w23_ocr_r1_transactional_runner\" name=\"test_invalid_runner_measurement_keeps_the_durable_hold\" time=\"0.394\" /><testcase classname=\"tests.integration.test_w23_ocr_r1_transactional_runner\" name=\"test_empty_or_fully_recorded_legacy_ledger_migrates_without_budget_reset[0.25]\" time=\"0.311\" /><testcase classname=\"tests.integration.test_w23_ocr_r1_transactional_runner\" name=\"test_cache_still_serves_when_legacy_real_cost_is_unknown\" time=\"0.407\" /></testsuite></testsuites>",
+    "cases": [
+      {
+        "classname": "tests.integration.test_w23_ocr_r1_transactional_runner",
+        "name": "test_two_real_routes_reuse_cache_and_original_measurement[r0_ok]",
+        "time": "0.469"
+      },
+      {
+        "classname": "tests.integration.test_w23_ocr_r1_transactional_runner",
+        "name": "test_failed_started_runner_keeps_reservation_and_cannot_retry_for_free[r0_die]",
+        "time": "0.356"
+      },
+      {
+        "classname": "tests.integration.test_w23_ocr_r1_transactional_runner",
+        "name": "test_result_captured_before_settle_recovers_without_runner",
+        "time": "0.516"
+      },
+      {
+        "classname": "tests.integration.test_w23_ocr_r1_transactional_runner",
+        "name": "test_zero_balance_still_serves_real_x1_cache",
+        "time": "0.433"
+      },
+      {
+        "classname": "tests.integration.test_w23_ocr_r1_transactional_runner",
+        "name": "test_concurrent_same_key_starts_only_one_real_runner",
+        "time": "0.425"
+      },
+      {
+        "classname": "tests.integration.test_w23_ocr_r1_transactional_runner",
+        "name": "test_two_stale_process_snapshots_cannot_double_allocate",
+        "time": "0.248"
+      },
+      {
+        "classname": "tests.integration.test_w23_ocr_r1_transactional_runner",
+        "name": "test_actual_overrun_is_not_censored_to_the_reserved_budget",
+        "time": "0.275"
+      },
+      {
+        "classname": "tests.integration.test_w23_ocr_r1_transactional_runner",
+        "name": "test_invalid_runner_measurement_keeps_the_durable_hold",
+        "time": "0.394"
+      },
+      {
+        "classname": "tests.integration.test_w23_ocr_r1_transactional_runner",
+        "name": "test_empty_or_fully_recorded_legacy_ledger_migrates_without_budget_reset[0.25]",
+        "time": "0.311"
+      },
+      {
+        "classname": "tests.integration.test_w23_ocr_r1_transactional_runner",
+        "name": "test_cache_still_serves_when_legacy_real_cost_is_unknown",
+        "time": "0.407"
+      }
+    ],
+    "normal_host": true,
+    "python": "C:/Miniconda/python.exe -B -X utf8",
+    "env": {
+      "PYTHONDONTWRITEBYTECODE": "1",
+      "PYTEST_DISABLE_PLUGIN_AUTOLOAD": "1",
+      "PYTHONPATH": "src;tests;.",
+      "TEMP_TMP_TMPDIR": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\w6\\temp"
+    },
+    "basetemp": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\w6\\b",
+    "basetemp_length": 43,
+    "relocated": false
+  },
+  "historical_artifact_checks": {
+    "campaign_ledger.json": {
+      "expected": "1e1b423deab85c0ec8ec2ab7939614a98cf2f2e55bee787273dc245b8d59222a",
+      "author_actual": "1e1b423deab85c0ec8ec2ab7939614a98cf2f2e55bee787273dc245b8d59222a",
+      "repair_worktree_actual": "1e1b423deab85c0ec8ec2ab7939614a98cf2f2e55bee787273dc245b8d59222a",
+      "matches_both": true,
+      "matches_original_raw": true,
+      "checkout_equal_after_newline_normalization": true,
+      "original_bytes": 6617,
+      "checkout_bytes": 6617
+    },
+    "comparison.json": {
+      "expected": "0438e57fdf7c5e1c56d517203582a3ea9a9c16f3f8fddd6bffeefad2ceffa10f",
+      "author_actual": "0438e57fdf7c5e1c56d517203582a3ea9a9c16f3f8fddd6bffeefad2ceffa10f",
+      "repair_worktree_actual": "0438e57fdf7c5e1c56d517203582a3ea9a9c16f3f8fddd6bffeefad2ceffa10f",
+      "matches_both": true,
+      "matches_original_raw": true,
+      "checkout_equal_after_newline_normalization": true,
+      "original_bytes": 81296,
+      "checkout_bytes": 81296
+    },
+    "comparison.md": {
+      "expected": "34fc6194c2297ae3e3f51148cad7e48773440211949387a92606c62a5b30b10e",
+      "author_actual": "34fc6194c2297ae3e3f51148cad7e48773440211949387a92606c62a5b30b10e",
+      "repair_worktree_actual": "34fc6194c2297ae3e3f51148cad7e48773440211949387a92606c62a5b30b10e",
+      "matches_both": true,
+      "matches_original_raw": true,
+      "checkout_equal_after_newline_normalization": true,
+      "original_bytes": 8101,
+      "checkout_bytes": 8101
+    },
+    "review_independent.md": {
+      "expected": "d084eafeb43cd82bb5d10ebf4c47318a3d5f3bf4a70f69c5589bf36d7538cb10",
+      "author_actual": "d084eafeb43cd82bb5d10ebf4c47318a3d5f3bf4a70f69c5589bf36d7538cb10",
+      "repair_worktree_actual": "d1652058e11e253ec61092c316dac9ba03c691a682b7eb7191d950a6347e0adb",
+      "matches_both": false,
+      "matches_original_raw": true,
+      "checkout_equal_after_newline_normalization": true,
+      "original_bytes": 40531,
+      "checkout_bytes": 40688
+    }
+  },
+  "author_png": {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki-w23-xiaomi-ocr-r1\\.w23_cache\\r1_pages\\r1_wanhua_qa2021_p003.png",
+    "bytes": 579214,
+    "sha256": "097eaf47d1da132c80a64dfdd42ca81c72d3b559969ca552b6bc7fb1d00478fc",
+    "matches_retained": true,
+    "reviewer_deleted": false
+  },
+  "material_findings": [],
+  "verdict": "PASS_TOOL_ENGINEERING_AND_LIMITED_PARTIAL_EVIDENCE_ONLY",
+  "non_claims": [
+    "Historical recorded1431.40547 charges do not establish actual total duration or1800 compliance",
+    "Historical actual total_elapsed remains null;1080 overcharge not silently netted against unknown original7R0 rows",
+    "No Xiaomi quality superiority or production OCR replacement accepted",
+    "Job peak exceeds cap empirical issue remains open",
+    "No historical76292 final review inferred; old review remains NEEDS_FIXES",
+    "No full110 repetition",
+    "No project-wide/H1/paid-summary/RF acceptance"
+  ],
+  "reviewer_own_errors": [
+    "Initial attempt looked for new test in tests/unit; actual committed path is tests/integration. No product file changed."
+  ],
+  "starting_branch": "codex/w23-root-repair-20261101",
+  "branch_rename": "ROOT normal rename during review; runtime same ae438a32",
+  "runtime_unchanged_at_finish": true,
+  "historical_originals_raw_unchanged": true,
+  "repair_historical_content_equal_after_newline_normalization": true,
+  "checkout_review_newline_note": "Only review_independent.md copy differs raw by checkout CRLF (+157B), content identical after newline normalization and tracked file unmodified. Original author raw SHA remains exact.",
+  "doc_small_fix": "Current handoff corrected 1/4 formulas fully faithful;6/10 symbols. Old requirements/limitations moved to historical_author fields; current root scope stays separate.",
+  "reviewer_write_scope": [
+    "implementation-results/R6-W23-independent-final.md",
+    "implementation-results/R6-W23-independent-final.json",
+    "self-owned tmp/w6 transient files (removed)"
+  ]
+}
