@@ -1,0 +1,199 @@
+{
+  "schema_version": "gate-tools-history-audit/1",
+  "baseline_head": "4990df805de77604ee67db5a1b53b9d0c0408f1e",
+  "baseline_sources_sha256": {
+    "tools/document_understanding_benchmark/holdout_acceptance.py": "30a5022258920f7a4b933e01ae823c18584950678c56c48dc3bb02609b49761e",
+    "tools/document_understanding_benchmark/holdout_acceptance_observer.py": "17eab9e4e6e5d7fa066e0654b49bf9a913756f7024eab1cd1fb4c8b581f36394",
+    "tools/document_understanding_benchmark/phase_c_runner.py": "3ff59fa819996698041f68e340bf1a7a73961fddba76af026c234ccf5862e589",
+    "tools/source_case_runner.py": "5f8e5f09d38bbb3d4565a1b9e60ca8bdee99b7ce1ec0bb16210968b8879c41c4",
+    "tools/document_understanding_benchmark/checkers.py": "d8792217a137fd55f1443d974c234a951945c006e9c26c62ff2e04f49d57c212",
+    "tools/holdout_replay/manifest.py": "4f46faf4fe4b70082cee2b05eef004f77738d9f71d540f9f07e4db4051930949",
+    "tools/holdout_replay/producer.py": "c23fdd8334cd5e72529dd34b81f26a730fa37d14a7c25bd2803d8d83e3f40bd1",
+    "src/company_wiki/_bounded_process.py": "25dc804ddcbb15428238862d2c6a1b46958f96e9add12c96a4b339305c6743d9"
+  },
+  "scope": "Read-only source/history audit plus isolated synthetic subprocess probes. No model/network/key/original/production writes.",
+  "history": [
+    {
+      "id": "H01",
+      "category": "REAL_SOURCE_OBSERVER_FALSE_REJECTION",
+      "evidence": "C-source-v1.md",
+      "observation": "Real H1 source processing 37.394s reached canonical result; byte-identical SHM mtime was reported as mutation.",
+      "current": "CLOSED: comparator accepts only same-byte SHM mtime change; raw/DB/WAL changes still reject."
+    },
+    {
+      "id": "H02",
+      "category": "REAL_SOURCE_WIRE_INTEGRATION_FAILURE",
+      "evidence": "C-source-v2.md",
+      "observation": "Real H1 23.170s stopped on valid producer source_processing_complete unknown to public reading_context consumer.",
+      "current": "CLOSED ENGINEERING: actual handler/golden strict bool/legacy tests and RF wire sync; this was version skew, not missing approval."
+    },
+    {
+      "id": "H03",
+      "category": "REAL_SOURCE_OBSERVER_FALSE_REJECTION",
+      "evidence": "C-source-v3-observer-failure.md;C-source-v4-independent.md",
+      "observation": "Canonical source owner returned, but observer refused record >300000B before persistence; exact original outcome then unknown. Later real output 388583B persisted.",
+      "current": "CLOSED SIZE GATE; genuine v4 semantic parent P2/real work exhaustion remain OPEN, not gate failures."
+    },
+    {
+      "id": "H04",
+      "category": "REAL_PAID_SUCCESS_OBSERVER_FAILURE",
+      "evidence": "../progress.md R4 2026-11-01;R4-context-investigation.md;AUDIT reports/r1-remediation-04/process.md",
+      "observation": "Actual configured MiMo POST:10236 tokens/1885 microUSD; 485241B artifact. Observer activation_run_id KeyError after native prepare persisted. Native paid/cache recovery later used same artifact with zero extra POST.",
+      "current": "CLOSED OBSERVER FIELD INTEGRATION; four-review research/actor/source defects are separate and remain tracked."
+    },
+    {
+      "id": "H05",
+      "category": "REAL_REGISTERED_RESULT_AUDIT_FALSE_REJECTION",
+      "evidence": "docs/plans/cross-market-rf-e2e-2026-10-08/reviews/HK-00700/review.md",
+      "observation": "Registry audit actual CLI exit1 falsely unregistered a valid result: string anchor compared to tuple generation keys; actual input/forecast/snapshot/registry hashes unchanged after fix.",
+      "current": "CLOSED; later R7 removes registry permission entirely while preserving actual content/hash validation."
+    },
+    {
+      "id": "H06",
+      "category": "INITIAL_REAL_LOOP_LEGAL_FAILURE_ENVELOPE_REJECTED",
+      "evidence": "AUDIT runs/r1-20261021-cn-wuxi-apptec/reports/fetch.md",
+      "observation": "FF rejected valid CWP blocked/local_preparation envelope under stale schema; proper unavailable JSON exit2 was hidden as generic transport failure. Local discovery charged 17 irrelevant old documents before latest-period fetch with max_candidates16.",
+      "current": "R1/R4 remediation engineering closed; this does not prove download or model success. Real relevant-population accounting and public error DTO needed fixing, not deleting actual resource budgets."
+    },
+    {
+      "id": "H07",
+      "category": "REAL_PAID_RECOVERY_POSITIVE_AND_TRUE_RESOURCE_STOP",
+      "evidence": "review/r1-w07-live-20261022.md;review/r1-w07-live-independent-20261022.md;review/r1-w07-controller-independent-20261022.md",
+      "observation": "Pure preflight81880 exceeded remaining60974:0POST, actual resource stop. After configured allocation within mother budget, real DeepSeek1POST17329tokens/6701microUSD; recovery/replay/cache0 extra POST. Earlier injected nonexistent retry-code was tool bug, fixed to legitimate IO_TRANSIENT.",
+      "current": "KEEP real fee/token bounds and native error classification. Intentional test pause is not supplier permission."
+    },
+    {
+      "id": "H08",
+      "category": "GENUINE_RESEARCH_OR_PROVIDER_FAILURE_NOT_PERMISSION",
+      "evidence": "AUDIT runs/r1-20261021-cn-wuxi-apptec/reports/process.md;storage.md;fetch.md;review/r1-w11-actual-recovery-20261024.md",
+      "observation": "Initial RF numeric arithmetic passed but Q1/TIDES target omitted, future growth assumptions not calibrated, one ratio tagged CNY, stale annual selector. MiMo401 left unknown accounting. Real index GET had no business attachment URLs.",
+      "current": "Do not relabel genuine research/units/provider/discovery gaps as gates or claim clean company acceptance."
+    },
+    {
+      "id": "H09",
+      "category": "SYNTHETIC_LEGAL_DTO_OR_PROCESS_REPRO",
+      "evidence": "R7-core-implementation.md;R7-tooling-implementation.md;R7-final-sweep-core-independent-r3.md;R7-phase-c-observation-independent.md;checklist-verification-20261102/checklist.md",
+      "observation": "Large legal DTO/deep recipe/optional diagnostics/PhaseC successful capture >128KiB and transport log caps were proven on isolated synthetic inputs; current engineering has fixes and reviews.",
+      "current": "CLOSED ENGINEERING; not evidence that every such gate caused a historical real-company paid rejection."
+    },
+    {
+      "id": "H10",
+      "category": "OLD_ORACLE_OR_FIXTURE_FAILURE_NOT_CURRENT_PERMISSION",
+      "evidence": "R7-RF-publication-followup.md;R7-invest-CI-followup.md;R7-invest-E2E-implementation.md;R7-CWP-CI-policy-test-consolidation.md",
+      "observation": "v2 independent publication rows tested as v1 chain; fake legacy schema/engine pair and unattested receipt tagged signed; old daily35/CI=PUSH inventory assertions. Correct behavior was stopped by tests/fixtures.",
+      "current": "CLOSED test/fixture roots; compatible version matrix/source/numeric checks were not relaxed."
+    }
+  ],
+  "current_entries": [
+    {
+      "id": "T-NEW-LOG",
+      "status": "MISSING_CONFIRMED_REPAIR_AUTHORIZED",
+      "owner": "holdout_acceptance._process",
+      "call_chain": "main --spec -> run_controller.call -> _process -> actual launcher -> native CLI",
+      "condition": "Actual exit0 plus stderr>max_log_bytes or stdout>max(max_log_bytes,2MiB)",
+      "effect": "Raises before full native receipt/stage observation is saved; diagnostic count becomes success permission.",
+      "fix": "Use existing process lifetime owner; complete protocol stdout separate from diagnostic stderr tail; preserve nonzero/timeout/tree ownership."
+    },
+    {
+      "id": "T-NEW-EVENT",
+      "status": "MISSING_CONFIRMED_REPAIR_AUTHORIZED",
+      "owner": "holdout_acceptance_observer.install.event",
+      "call_chain": "observed_http before original request; observed_generate after original native generate; observed_recover/replay after owner success",
+      "condition": "Cumulative events.jsonl+new event exceeds max_log_bytes, or append/fsync OSError",
+      "effect": "Size throws after post-once latch or after native paid success; observer may mask native status or prevent actual send.",
+      "fix": "No cumulative diagnostic allowance as permission; full event data once, explicit incomplete observation on I/O failure; no resend/latch bypass, keep explicit fault injection and true native failures."
+    },
+    {
+      "id": "T-PREP-MTIME",
+      "status": "ROOT_DESIGN_RECOMMENDATION",
+      "owner": "phase_c_runner.verify_preparation",
+      "condition": "Same SHA/bytes but changed mtime against old preparation; also snapshots old mother native database.",
+      "effect": "Touch-only current synthetic source refused before run; old code/sample baseline can act as admission gate.",
+      "recommendation": "Separate ground-truth/source proof/current runtime observation from old receipt equality. Same content mtime is diagnostic; actual changed originals/config/source binding must be accounted honestly. Native history compare should reconcile authoritative cumulative accounting, not require unchanged unrelated bytes. No code change in this repair scope."
+    },
+    {
+      "id": "T-FROZEN-FLAG",
+      "status": "ROOT_DESIGN_RECOMMENDATION",
+      "owner": "holdout_replay.manifest.load_manifest",
+      "condition": "False/missing frozen_before_candidate_output, including development sample",
+      "effect": "No replay accepted regardless of actual source identity.",
+      "recommendation": "Keep clean-holdout claim unproven for nonfrozen/development data, but permit ordinary measured replay with explicit classification; flag is not source/runtime approval. Do not change gold to hide outcome. No code change this scope."
+    },
+    {
+      "id": "T-COMMIT-PIN",
+      "status": "KEPT_BY_REASON",
+      "owner": "holdout_replay.producer.verify_producer",
+      "condition": "Explicit --producer-commit differs from actually checked out producer HEAD or loaded implementation identity differs.",
+      "reason": "Protects truth of specifically requested measurement revision; no old manifest commit or unrelated dirty-tree permission. A new engine can be chosen explicitly. May simplify ergonomics by default observing actual revision, not reusing stale gold pin."
+    },
+    {
+      "id": "T-REVIEW",
+      "status": "KEPT_BY_REASON",
+      "owner": "checkers.check_semantics_entailment/review.validate_review",
+      "condition": "Missing or incomplete semantic evidence review",
+      "reason": "Marks NOT_EVALUATED/PARTIAL; does not prevent raw/source retrieval or paid native execution. Quality completeness cannot be silently PASS."
+    },
+    {
+      "id": "T-ROOT-TEXT",
+      "status": "NO_RUNTIME_PERMISSION",
+      "owner": "holdout_acceptance.run_controller result.rf_consumption.reason",
+      "condition": "Text says ROOT must bind public read to actual used RF formula.",
+      "reason": "No approval input/branch. status passed is possible while RF adoption honestly not_consumed. Wording can say actual adoption unproven without ROOT role."
+    },
+    {
+      "id": "T-NATIVE-BOUNDARY",
+      "status": "KEPT_BY_REASON",
+      "owner": "holdout native/store/model caller",
+      "condition": "Second actual POST, changed request/source/artifact, unknown paid status, missing durable paid pin, real timeout/byte/fee/token bound, native fault outcome wrong.",
+      "reason": "Actual fee/resource/source/recovery truth, not artificial permission. Preserve durable latch, exact model input, actual IO_TRANSIENT pause and unknown holds."
+    }
+  ],
+  "observations": {
+    "quiet": {
+      "code": 0,
+      "receipt": {
+        "status": "completed"
+      },
+      "stderr_bytes": 0
+    },
+    "noisy": {
+      "error_type": "ControllerError",
+      "error": "HOLDOUT_CLI_LOG_BOUND_EXCEEDED",
+      "command": {
+        "command": [
+          "C:\\Miniconda\\python.exe",
+          "-B",
+          "-c",
+          "import sys;sys.stderr.write('x'*8193);print('{\"status\":\"completed\"}')"
+        ],
+        "exit": 0,
+        "stdout_bytes": 24,
+        "stdout_sha256": "00c0ea9b8c7f1700639c82440c0812dd41a6cb6429b131ee5fb3bd59b2bc5113",
+        "stderr_bytes": 8193,
+        "stderr_truncated": true
+      }
+    },
+    "event_limit": {
+      "error_type": "RuntimeError",
+      "error": "HOLDOUT_EVENT_BYTES_EXCEEDED",
+      "transport_calls": 0,
+      "post_once_exists": true
+    },
+    "mtime_only": {
+      "error": "PREPARATION_FINGERPRINT_CHANGED: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\gf7\\prepared.json",
+      "same_sha": true
+    },
+    "freeze_flag": {
+      "error": "manifest is not marked frozen_before_candidate_output",
+      "development_sample": true
+    }
+  },
+  "reproducer_source": "from pathlib import Path\nimport hashlib\nimport http.client\nimport json\nimport os\nimport sys\n\nROOT = Path(__file__).resolve().parents[2]\nsys.path[:0] = [str(ROOT), str(ROOT / 'src'), str(ROOT / 'scripts')]\nfrom tools.document_understanding_benchmark import holdout_acceptance as h\nfrom tools.document_understanding_benchmark import phase_c_runner as c\nfrom tools.holdout_replay.manifest import load_manifest\n\nowned = Path(__file__).parent\nresults = {}\nfor label, noise in [('quiet', 0), ('noisy', 8193)]:\n    dest = owned / label\n    dest.mkdir()\n    command = [sys.executable, '-B', '-c',\n               f\"import sys;sys.stderr.write('x'*{noise});print('{{\\\"status\\\":\\\"completed\\\"}}')\"]\n    try:\n        code, stdout, stderr = h._process(command, env=dict(os.environ), root=owned,\n            output=dest, label='probe', timeout=5, log_limit=4096)\n        results[label] = dict(code=code, receipt=json.loads(stdout), stderr_bytes=len(stderr))\n    except Exception as exc:\n        results[label] = dict(error_type=type(exc).__name__, error=str(exc),\n            command=json.loads((dest / 'probe.command.json').read_text()))\n\n# Only this isolated process is patched. No network socket can be opened.\nevent_root = owned / 'event'\nevent_root.mkdir()\n(event_root / 'events.jsonl').write_text(json.dumps({'event': 'prior', 'padding': 'x'*8192})+'\\n')\nconfig = event_root / 'config.json'\nconfig.write_text(json.dumps(dict(receipt_dir=str(event_root), stage='cache',\n                                 max_log_bytes=4096, allow_local_model_http=False)))\nos.environ['CWP_HOLDOUT_CONTROLLER'] = str(config)\nsent = []\nhttp.client.HTTPConnection.request = lambda *a, **kw: sent.append(True)\nfrom tools.document_understanding_benchmark import holdout_acceptance_observer as observer\nobserver.install()\nbody = json.dumps(dict(model='synthetic', messages=[{'role': 'system', 'content': 'synthetic'},\n    {'role': 'user', 'content': json.dumps({'schema_version': 'narrative-model-request/5',\n                                         'material': {'tasks': []}})}])).encode()\ntry:\n    http.client.HTTPConnection('unresolved.invalid').request('POST', '/', body=body)\n    results['event_limit'] = {'transport_calls': len(sent)}\nexcept Exception as exc:\n    results['event_limit'] = dict(error_type=type(exc).__name__, error=str(exc),\n        transport_calls=len(sent), post_once_exists=(event_root/'post-once').exists())\n\n# Touch-only preparation refusal: only this generated synthetic file is read.\nc.ROOT = owned / 'fake-project'\npath = owned / 'prepared.json'\npath.write_text('{\"synthetic\":true}')\nfingerprint = c.fingerprint(path)\nos.utime(path, ns=(path.stat().st_atime_ns, path.stat().st_mtime_ns+1_000_000_000))\ntry:\n    c.verify_preparation({'protected_fingerprints': {str(path): fingerprint},\n                          'mother_budget': {'native_observations': []}}, mode='live')\n    results['mtime_only'] = {'accepted': True}\nexcept Exception as exc:\n    results['mtime_only'] = dict(error=str(exc), same_sha=c.fingerprint(path)['sha256']==fingerprint['sha256'])\n\nsha = hashlib.sha256(b'synthetic').hexdigest()\nmanifest = dict(schema_version='w18-holdout-manifest/1', frozen_before_candidate_output=False,\n samples=[dict(sample_id='synthetic', gold_file='unused', gold_sha256=sha, document_kind='annual',\n market='US', language='en', carrier='txt', source_ref=dict(document_id='doc:'+sha, source_id='source:'+sha,\n content_sha256=sha, byte_size=9, mime_type='text/plain'), identity_evidence={},\n prior_use={'status':'development'}, reading_scope={}, designated_trap={})])\nmpath = owned / 'manifest.json'\nmpath.write_text(json.dumps(manifest))\ntry:\n    load_manifest(mpath)\n    results['freeze_flag'] = {'accepted': True}\nexcept Exception as exc:\n    results['freeze_flag'] = {'error':str(exc), 'development_sample':True}\n\n(owned/'observations.json').write_text(json.dumps(results, indent=2)+'\\n', encoding='utf-8')\nprint(json.dumps(results))\n",
+  "cleanup": {
+    "owned_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\gf7",
+    "initially_absent": true,
+    "status": "PROBE_COMPLETE_PENDING_FINAL_REPAIR_CLEANUP",
+    "no_claim_tmp_path_auto_deleted": true
+  },
+  "interpretation": "Current legal failures/unknown/quality incompleteness do not prove business success; synthetic gates distinguished from actual company incidents. Original audit immutable after repair starts."
+}

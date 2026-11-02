@@ -1,0 +1,120 @@
+{
+  "schema_version": "cwp-ci-independent/1",
+  "status": "NEEDS_ROOT_FIX",
+  "reviewed_author_report_sha256": "98dbb59eb69de85f01136aba8df65d0e47b40ae0b6d4de62085ced2bb72aa53e",
+  "reviewed_manifest": {
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\document_understanding_root\\test_native_table_observation.py": "247a54464f6d1904984f8f8247eaef61b874492f4c256082ea17244a3877d34b",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\test_atomic_summary_recipe.py": "519a515c5abb351fd7f0aafbc111576e0fac794d2d81e412d836a9bfd3b21714",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\test_narrative_extractive_runtime.py": "84e2a49cd0b2d1b3dc3a361f42052f8010351b6849f3d324d083f2f716c1c64c",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\test_official_json_model_subject.py": "d068c4ed4633ec855bd23ba0d641de81fb2243daa82279a4cc6ac94490f9eaad",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\support\\summary_output_contract_upgrade.py": "73c94ef75d882a5bcd2947721b09e7b1f7851d08dfdd186f84ee2c2bd8d6599b"
+  },
+  "observation": [
+    {
+      "case": "original",
+      "result": "ACCEPTED",
+      "input_sha256": "1221881e690be368832523c528c6e2215f30909602da75658b991baa9c451e85"
+    },
+    {
+      "case": "forged_current_input_sha",
+      "result": "ACCEPTED",
+      "input_sha256": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff"
+    }
+  ],
+  "finding": {
+    "id": "CWP-TEST-P2-CURRENT-INPUT-HASH",
+    "priority": "P2",
+    "status": "OPEN_AUTHOR_REPAIR_REQUESTED",
+    "actual": "assert_archived_request_upgrade accepts arbitrary f*64 current input_sha256 so long as it differs from the legacy value; original three displayed fields unchanged.",
+    "root_cause": "Allowed quota-induced hash change is treated as any unequal value, weakening exact current request identity regression coverage.",
+    "owner": "tests/support/summary_output_contract_upgrade.assert_archived_request_upgrade",
+    "required_fix": "Verify actual current input hash through real request owner using selected/version and its full internal bindings. Do not reconstruct only prompt/instruction/data or duplicate the hashing algorithm.",
+    "production_scope": "No actual product request bug proved; this is a test migration coverage defect. Production owner currently supplies correct hash."
+  },
+  "input_hash_responsibility": {
+    "raw": "NarrativeModelRequest.from_selection identity includes prompt,instruction,data_json,citation_mapping,group_mapping,selection and conditional subject/citation-unit mapping.",
+    "scoped": "narrative_model_scoped.build_scoped_request binds selected source_view as well; runtime.build_model_request is the dispatch owner."
+  },
+  "positive_read_findings": [
+    "Retired quota projection only pops specified20 or2/6 maxItems, text280 and exact planning/instruction fragments; all other material/role/source/citation fields remain in full equality.",
+    "Digest-only historical hash tests still use the unchanged real builder/hash owner under three temporary pure presentation ports; decoder is not patched.",
+    "Binary gzip archives match HEAD bytes exactly. Text JSON may differ solely by checkout CRLF; atomic file is also bound to exact author before/after SHA. All old64hex literals retained, no golden regenerated.",
+    "Current41-clause source-preservation positive and strict wrong-basis canonical ModelCitationError have targeted author evidence; independent delta remains pending repaired helper freeze."
+  ],
+  "protected_source_and_atomic_fixture": {
+    "src/company_wiki/automation/narrative_model.py": "e62a1cecffa783dced349578cbbf1627edd9207f4343ffd78662c35f6de80216",
+    "src/company_wiki/automation/narrative_model_scoped.py": "4b7be2625e2428054ad79d760b7f61ed462268590a92968c972e1476f6b2ee69",
+    "src/company_wiki/automation/narrative_model_runtime.py": "89c71ca89939322271fc0e7e4bb3e02c3a8e3b70d7de950ab35c0dc62abdff5b",
+    "src/company_wiki/automation/narrative_summary_protocols.py": "ff88f8db4d5935f70462ec4268d15ba9495e77df57138714cbc62e54f1689a45",
+    "tests/fixtures/atomic_recipe_legacy_requests.json": "2be3eaebf88763484324162d4d20a39042320a0b7ee8d3d0520fc86b6568b53d"
+  },
+  "immutable_archive_checks": {
+    "tests/fixtures/atomic_recipe_legacy_requests.json": {
+      "sha256": "2be3eaebf88763484324162d4d20a39042320a0b7ee8d3d0520fc86b6568b53d",
+      "byte_size": 24570,
+      "exact_head_bytes": false,
+      "head_sha256": "637098faecaea0996026d43f86e60be461ed09e34506ecdd4950fe6f0f2a0e9f",
+      "checkout_newline_only": true
+    },
+    "tests/fixtures/source_extractive_compact_request.json": {
+      "sha256": "fa3a54b812e55e4a269c2f0c8611947ebdffd564f5bfa206f4d927ec62de2863",
+      "byte_size": 3511,
+      "exact_head_bytes": true,
+      "head_sha256": "fa3a54b812e55e4a269c2f0c8611947ebdffd564f5bfa206f4d927ec62de2863",
+      "checkout_newline_only": false
+    },
+    "tests/support/reading_boundary_legacy_snapshots.json.gz": {
+      "sha256": "b8403d5c8b3b3c75c4d70ed9c02e89dd0ea83ad3ab7aa4ef2b5898149da789dd",
+      "byte_size": 20069,
+      "exact_head_bytes": true,
+      "head_sha256": "b8403d5c8b3b3c75c4d70ed9c02e89dd0ea83ad3ab7aa4ef2b5898149da789dd",
+      "checkout_newline_only": false
+    },
+    "tests/fixtures/narrative_claim_grounding/cn_h1_unit3.json.gz": {
+      "sha256": "13fcc0a584f0f5021c51282f119bfc7c7391b959914d57337b55f1eeb9e74c29",
+      "byte_size": 123069,
+      "exact_head_bytes": true,
+      "head_sha256": "13fcc0a584f0f5021c51282f119bfc7c7391b959914d57337b55f1eeb9e74c29",
+      "checkout_newline_only": false
+    }
+  },
+  "old_hash_literals": {
+    "tests/unit/document_understanding_root/test_native_table_observation.py": {
+      "old_literals_retained": true,
+      "old_count": 9,
+      "current_count": 9
+    },
+    "tests/unit/test_atomic_summary_recipe.py": {
+      "old_literals_retained": true,
+      "old_count": 0,
+      "current_count": 0
+    },
+    "tests/unit/test_narrative_extractive_runtime.py": {
+      "old_literals_retained": true,
+      "old_count": 0,
+      "current_count": 0
+    },
+    "tests/unit/test_official_json_model_subject.py": {
+      "old_literals_retained": true,
+      "old_count": 12,
+      "current_count": 12
+    },
+    "tests/support/summary_output_contract_upgrade.py": {
+      "old_literals_retained": true,
+      "old_count": 0,
+      "current_count": 0
+    }
+  },
+  "probe_source": "from dataclasses import asdict,replace\nfrom pathlib import Path\nimport json\nimport sys\n\nROOT=Path(__file__).resolve().parents[2]\nsys.path[:0]=[str(ROOT/'src'),str(ROOT/'tests')]\nfrom company_wiki.automation.narrative_model import NarrativeModelRequest\nfrom support.narrative_model_request_fixture import selection\nfrom support.summary_output_contract_upgrade import archived_compression_projection,assert_archived_request_upgrade\n\nactual=NarrativeModelRequest.from_selection(selection())\nwith archived_compression_projection():\n    archived=NarrativeModelRequest.from_selection(selection())\nrows=[]\nfor label,value in [('original',actual),('forged_current_input_sha',replace(actual,input_sha256='f'*64))]:\n    try:\n        assert_archived_request_upgrade(value,asdict(archived))\n        rows.append(dict(case=label,result='ACCEPTED',input_sha256=value.input_sha256))\n    except AssertionError:\n        rows.append(dict(case=label,result='REJECTED'))\n(Path(__file__).parent/'binding-observation.json').write_text(json.dumps(rows,indent=2)+'\\n',encoding='utf-8')\nprint(json.dumps(rows))\n",
+  "no_repeat": "Did not repeat author77/wholeUnit or product model/source execution; pure helper counterexample only.",
+  "paid": 0,
+  "network": 0,
+  "originals": 0,
+  "source_or_fixture_modified": false,
+  "cleanup": {
+    "owned_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\cq7",
+    "initially_absent": true,
+    "status": "RETAINED_OWN_EVIDENCE_PENDING_R2_REVIEW",
+    "evidence_saved_before_deletion": true
+  }
+}

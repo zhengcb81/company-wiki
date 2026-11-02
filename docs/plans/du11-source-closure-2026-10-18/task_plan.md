@@ -1,4 +1,4 @@
-**2026-11-02：整改清单41项逐项核完，3新增表示/预算漏项已补修；独审和精确CI见CURRENT_STATUS。2可选优化及真实C/循环仍OPEN。**
+**2026-11-02：原41项及后续合法结果误拒专项均有处置；最终独审/精确CI见CURRENT_STATUS。下一步T4与新版真实C；项目/循环未完成。**
 
 # 主线剩余实施计划
 
@@ -6,7 +6,7 @@
 
 ## Next Step
 
-按T4-source-note-parent-plan.md冻结去公司化父链正反例并在来源树owner根修，再单H1原90s/16M/112复验；随后新版真实摘要、paid中断/同跨run零重复与同artifact实际RF采用。
+按T4-source-note-parent-plan.md同一来源正确性节点根修父链与SEM-QUAL-01计划/验收条件丢失，先冻结泛化正反例，再单H1原90s/16M/112复验；随后新版真实摘要、paid中断/同跨run零重复与同artifact实际RF采用。 本轮gate-rejection-followup工程已独审/精确CI绿，见closure；不重复已完成节点。
 
 ## P0 — 已完成的CI根修
 

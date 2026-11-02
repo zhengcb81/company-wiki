@@ -1,18 +1,18 @@
-# 当前状态 — 逐项核对与补漏，真实公司主线继续
+# 当前状态 — 合法结果误拒清理已收口，回到真实公司主线
 
-唯一入口为本页/[机器状态](CURRENT_STATUS.json)；接手看[HANDOFF](HANDOFF.md)，步骤看[task_plan](task_plan.md)。
+唯一入口为本页/[机器状态](CURRENT_STATUS.json)；交接看[HANDOFF](HANDOFF.md)，实施看[task_plan](task_plan.md)。
 
-|责任|实际核对结果|尚未完成的边界|
+**本轮过度门禁工程已修复、集中独审并正常发布；CWP/FF/RF/invest精确CI均绿。** [本轮清单、保留理由与证据](review/architecture-quality-20261101/implementation-results/gate-rejection-followup-20261102/closure.md)覆盖历史真实误拒、当前跨仓调用、修复与原始FAIL。原41项是定义范围，不能用来断言所有caller都已清净。
+
+|责任|已完成|仍未完成|
 |---|---|---|
-|原整改清单|正式41项全部有工程处置：40项完成，Q11按边界论证保留；T01逐个核8入口|不是整项目完成，详见[完整逐项表](review/architecture-quality-20261101/implementation-results/checklist-verification-20261102/checklist.md)|
-|本次追加漏项|SourceExport两仓16MiB后置门、paid response与run binding各256KiB顶帽均已TDD补修；54P/33P/23P三批通过；独审通过|本次新源码精确CI成功|
-|正常发布|CWP/RF/FF/invest此前主线均发布；本次StockWiki正常本地主线提交见机器状态|StockWiki无remote，不冒已推送/远端CI|
-|可选优化|PDF部署同inode重复SHA、spy样本截断标记仍明确未做|均不阻断资料处理，不作主线前置|
-|技能副本|原定点部署/三新进程/安装版CLI双跑已过；本次独审150/150所检文件一致|本次只改CWP/StockWiki owner，无RF/FF/invest runtime再部署|
-|真实来源与采用|H1v4完整388583B及12重点召回保留；旧摘要/cache/RF有界结果保留|T4三个视图父链、新版真实摘要/cache/RF及公司循环仍OPEN|
+|门禁简化|摘要配额、表示大小、可选review/trace、日志/I/O、mtime、holdout执行许可、公式及ET/FF预算传播已根修|真实来源/数值/资源/恢复检查按所属owner保留，理由见本轮closure|
+|发布与技能|六仓正常主线提交；有remote的五仓已推；12定点安装目标/配置保留/重复零写与6新进程通过|StockWiki无remote；ET无tracked Actions workflow，均不冒远端CI|
+|原工程清单|原Q01–Q14/R7定义41项有处置；Q11公开接收字节复核保留|PDF同inode双SHA、spy sample_limited两项可选未做，不作前置|
+|来源与真实采用|历史H1v4完整388583B/12重点，以及旧有界摘要/cache/RF证据保留|T4三个view父链、新版真实摘要/cache/RF及公司循环仍OPEN|
 
 ## 唯一下一步
 
-按T4-source-note-parent-plan.md冻结去公司化父链正反例并在来源树owner根修，再单H1原90s/16M/112复验；随后新版真实摘要、paid中断/同跨run零重复与同artifact实际RF采用。
+按[T4父链与限定细则](review/architecture-quality-20261101/implementation-results/T4-source-note-parent-plan.md)冻结泛化正反例，在同一来源正确性节点修父链和新SEM-QUAL-01（计划/验收条件被改写为既成事实仍未诊断），再单H1原90s/16M/112复验；通过后按C-preparation跑配置真实摘要、paid中断/同跨run零重复和同artifact实际RF采用。R4六共因、研究与检测进化、固定八家/三家clean、W21和新市场责任保持。门禁工程收口不代此语义缺口通过。
 
-本轮0外部模型/下载/原件修改。原件、生产配置、R4封存、RF4WIP及外来hook保持。真实源字节/身份/期间/as-of、引用与单位/币种/数值、实际预算和CAS/unknown paid恢复归各owner；不恢复人工许可、private/public或重复签收。
+本轮0模型/下载/原件及生产配置写。RF4WIP和CWP外来hook保持；历史未归属临时产物不擅清。Dayu/IQS/Dashboard不动，不新增外包卡、人工许可或小节点签收。

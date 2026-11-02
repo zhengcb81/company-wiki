@@ -1,0 +1,129 @@
+{
+  "status": "PASS",
+  "scope": "Same-node independent R2 delta only; original FAIL preserved in math-independent.md/json.",
+  "author_report_sha256": "8ed4773ecd351bc57894b11fe48b5e13bf1b005ab639cff7bb0bf6c2cefc0b79",
+  "delivery_files_sha256": {
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\forecast\\calc.py": "808e898df8f5eab8ebe0a9312a975a9aaba76c66ac9d290e3cfb26a3ee808ee8",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\tests\\test_formula_work_budget.py": "934ce6032e6fabad899b821a204856f60b32206fad998c0aa92ac76449281894",
+    "C:\\Users\\郑曾波\\Projects\\invest-skills\\invest-core\\scripts\\invest_contracts.py": "fa515d8a1de0a01e1cb802f40d1f388c8a1f79b78af018c0adcfa521cbaf8072",
+    "C:\\Users\\郑曾波\\Projects\\invest-skills\\invest-core\\tests\\test_formula_work_budget.py": "5a9a7772e171b875c8546287117de8fad1a3fce9fdbd761823499d3bc04088e2"
+  },
+  "sources_after": {
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\forecast\\calc.py": "808e898df8f5eab8ebe0a9312a975a9aaba76c66ac9d290e3cfb26a3ee808ee8",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\tests\\test_formula_work_budget.py": "934ce6032e6fabad899b821a204856f60b32206fad998c0aa92ac76449281894",
+    "C:\\Users\\郑曾波\\Projects\\invest-skills\\invest-core\\scripts\\invest_contracts.py": "fa515d8a1de0a01e1cb802f40d1f388c8a1f79b78af018c0adcfa521cbaf8072",
+    "C:\\Users\\郑曾波\\Projects\\invest-skills\\invest-core\\tests\\test_formula_work_budget.py": "5a9a7772e171b875c8546287117de8fad1a3fce9fdbd761823499d3bc04088e2"
+  },
+  "rf_wip_before": {
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\daily_alert.jsonl": "712f9e957990ca0c261cbb91c1d10b0a12606da9d7293e6f2a1581309ce295e9",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_alert.jsonl": "fc9ec2335b48d42921ca9c14c63363efca3b3096f967733e366f4dd463e4b7ed",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_manifest.json": "e2e57f28fec7477af06029adcf187468701ab0305024993bfb2953bbd43cc5c0",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\monthly_manifest.json": "56d630107429cbcb646a951306dd1ea445dd5b3146236f34d0e8df953c103b9a"
+  },
+  "rf_wip_after": {
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\daily_alert.jsonl": "712f9e957990ca0c261cbb91c1d10b0a12606da9d7293e6f2a1581309ce295e9",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_alert.jsonl": "fc9ec2335b48d42921ca9c14c63363efca3b3096f967733e366f4dd463e4b7ed",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_manifest.json": "e2e57f28fec7477af06029adcf187468701ab0305024993bfb2953bbd43cc5c0",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\monthly_manifest.json": "56d630107429cbcb646a951306dd1ea445dd5b3146236f34d0e8df953c103b9a"
+  },
+  "closed_finding": "P2-MATH-EXPONENT-10",
+  "records": [
+    {
+      "owner": "RF",
+      "case": "fifteen_year_DCF",
+      "actual": 48.101709809096995,
+      "expected": 48.101709809096995,
+      "status": "PASS"
+    },
+    {
+      "owner": "RF",
+      "case": "forty_five_year_compounding",
+      "actual": 525.0612939668486,
+      "expected": 525.0612939668486,
+      "status": "PASS"
+    },
+    {
+      "owner": "RF",
+      "case": "actual_pow_overflow",
+      "error": "derived formula arithmetic is invalid",
+      "status": "PASS"
+    },
+    {
+      "owner": "RF",
+      "case": "nonreal_power",
+      "error": "derived formula result must be numeric",
+      "status": "PASS"
+    },
+    {
+      "owner": "RF",
+      "case": "zero_negative_power",
+      "error": "derived formula arithmetic is invalid",
+      "status": "PASS"
+    },
+    {
+      "owner": "RF",
+      "case": "true_zero_work_budget_stops_before_parse",
+      "parse_calls": 0,
+      "status": "PASS"
+    },
+    {
+      "owner": "invest",
+      "case": "fifteen_year_DCF",
+      "actual": 48.101709809096995,
+      "expected": 48.101709809096995,
+      "status": "PASS"
+    },
+    {
+      "owner": "invest",
+      "case": "forty_five_year_compounding",
+      "actual": 525.0612939668486,
+      "expected": 525.0612939668486,
+      "status": "PASS"
+    },
+    {
+      "owner": "invest",
+      "case": "actual_pow_overflow",
+      "error": "formula arithmetic is invalid",
+      "status": "PASS"
+    },
+    {
+      "owner": "invest",
+      "case": "nonreal_power",
+      "error": "formula result must be numeric",
+      "status": "PASS"
+    },
+    {
+      "owner": "invest",
+      "case": "zero_negative_power",
+      "error": "formula arithmetic is invalid",
+      "status": "PASS"
+    },
+    {
+      "owner": "invest",
+      "case": "true_zero_work_budget_stops_before_parse",
+      "parse_calls": 0,
+      "status": "PASS"
+    }
+  ],
+  "observed": "No exponent magnitude permission remains. Both explicit finite long-horizon economic formulas pass; true overflow/complex/zero-negative power and actual shared-account stop remain.",
+  "no_repeat": [
+    "author RF32/invest21",
+    "original independent12",
+    "full repo/CI"
+  ],
+  "script": "from pathlib import Path\nimport hashlib\nimport json\nimport math\nimport sys\nfrom unittest.mock import patch\n\nROOT=Path(__file__).resolve().parents[2]\nOUT=ROOT/'docs/plans/du11-source-closure-2026-10-18/review/architecture-quality-20261101/implementation-results/gate-rejection-followup-20261102'\nauthor_path=OUT/'newmath-repair-r2.json'\nauthor=json.loads(author_path.read_text(encoding='utf-8'))\nbefore={p:hashlib.sha256(Path(p).read_bytes()).hexdigest() for p in author['delivery_files_sha256']}\nassert before==author['delivery_files_sha256']\nwip={p:hashlib.sha256(Path(p).read_bytes()).hexdigest() for p in author['rf_wip_after']}\nassert wip==author['rf_wip_after']\nsys.path[:0]=['C:/Users/郑曾波/Projects/revenue-forecast/scripts',\n             'C:/Users/郑曾波/Projects/invest-skills/invest-core/scripts']\nfrom forecast import calc\nimport invest_contracts\nrows=[]\nfor owner_name,owner,entry in [('RF',calc,calc.evaluate_derived_formula),('invest',invest_contracts,invest_contracts.evaluate_formula)]:\n    for name,formula,inputs,expected in [\n        ('fifteen_year_DCF','x0/(1+x1)**x2',[100,0.05,15],100/1.05**15),\n        ('forty_five_year_compounding','x0*(1+x1)**x2',[25,0.07,45],25*1.07**45),\n    ]:\n        value=entry(formula,inputs)\n        assert math.isclose(value,expected,rel_tol=1e-12)\n        rows.append(dict(owner=owner_name,case=name,actual=value,expected=expected,status='PASS'))\n    for name,formula in [('actual_pow_overflow','1e308**11'),('nonreal_power','(-1)**0.5'),('zero_negative_power','0**-1')]:\n        try:\n            entry(formula,[])\n        except ValueError as exc:\n            rows.append(dict(owner=owner_name,case=name,error=str(exc),status='PASS'))\n        else:\n            raise AssertionError(f'{owner_name} failed {name}')\n    budget=owner.FormulaWorkBudget(max_work_units=0)\n    parsed=[]\n    original=owner.ast.parse\n    def observed(*args,**kwargs):\n        parsed.append(True)\n        return original(*args,**kwargs)\n    with patch.object(owner.ast,'parse',observed):\n        try:\n            entry('x0*(1+x1)**x2',[25,0.07,45],work_budget=budget)\n        except ValueError as exc:\n            assert 'work budget' in str(exc)\n        else:\n            raise AssertionError('explicit resource exhaustion not enforced')\n    assert not parsed\n    rows.append(dict(owner=owner_name,case='true_zero_work_budget_stops_before_parse',parse_calls=0,status='PASS'))\nafter={p:hashlib.sha256(Path(p).read_bytes()).hexdigest() for p in before}\nwip_after={p:hashlib.sha256(Path(p).read_bytes()).hexdigest() for p in wip}\nassert before==after==author['delivery_files_sha256'] and wip_after==wip\nreport=dict(status='PASS',scope='Same-node independent R2 delta only; original FAIL preserved in math-independent.md/json.',\n            author_report_sha256=hashlib.sha256(author_path.read_bytes()).hexdigest(),\n            delivery_files_sha256=before,sources_after=after,rf_wip_before=wip,rf_wip_after=wip_after,\n            closed_finding='P2-MATH-EXPONENT-10',records=rows,\n            observed='No exponent magnitude permission remains. Both explicit finite long-horizon economic formulas pass; true overflow/complex/zero-negative power and actual shared-account stop remain.',\n            no_repeat=['author RF32/invest21','original independent12','full repo/CI'],\n            script=Path(__file__).read_text(encoding='utf-8'),\n            cleanup=dict(owned_root=str(Path(__file__).parent),initially_absent=True,status='PENDING_OWNED_CLEANUP',evidence_saved_before_deletion=True),\n            paid=0,network=0,originals=0)\n(OUT/'math-independent-r2.json').write_text(json.dumps(report,ensure_ascii=False,indent=2)+'\\n',encoding='utf-8')\nmd='''# 算术R2独立增量复审\n\n**PASS：原P2-MATH-EXPONENT-10已按同owner关闭。** 原math-independent的NEEDS_FIXES与四次合法拒绝证据不覆盖、不倒签。\n\n已核newmath-repair-r2报告与4文件SHA，前后完全一致；RF四WIP字节SHA保持。两边只增量验证15年DCF、45年复合增长（均有限且>10）、真正浮点幂溢出、复数幂、零负幂，以及显式0工作预算在parser前停止，共12个公开合同控制。无新指数/长度/深度许可，无放宽真实数值/非法AST/工作预算。\n\n未重跑原独立12组、作者RF32/invest21或全仓；0模型、0网络、0原件。新脚本和逐项结果在同名JSON。自有tmp/mr7初态不存在，证据保存后精确清理，收据随后补入。\n'''\n(OUT/'math-independent-r2.md').write_text(md,encoding='utf-8')\nprint(json.dumps({'status':'PASS','incremental_contracts':len(rows),'report_sha256':hashlib.sha256((OUT/'math-independent-r2.json').read_bytes()).hexdigest()}))\n",
+  "cleanup": {
+    "owned_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\mr7",
+    "initially_absent": true,
+    "status": "RESTORED_ABSENT",
+    "evidence_saved_before_deletion": true,
+    "absolute_parent_verified": true,
+    "reparse_nodes": 0,
+    "removed_files": 1,
+    "removed_bytes": 4669.0,
+    "exists_after": false
+  },
+  "paid": 0,
+  "network": 0,
+  "originals": 0
+}

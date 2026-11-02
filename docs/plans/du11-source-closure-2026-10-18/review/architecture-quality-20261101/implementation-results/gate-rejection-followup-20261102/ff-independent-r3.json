@@ -1,0 +1,121 @@
+{
+  "schema_version": "independent-ff-r3-gate-closure/1",
+  "status": "PASS_SCOPED_FINAL_ENGINEERING_REVIEW",
+  "reviewer": "/root/rectify_readability",
+  "author_report_sha256": "78b3b6f16d4f8788b1f968c460cb54d03e22a78bacd2eddf5855dfa564ba644f",
+  "delivery_files_sha256": {
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\transcript_tool_transport.py": "d2a099533f6ac048d87dabecc5dbb198882637dfbe3dc738070b832e6cea50ea",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\tests\\test_transcript_owner_budget.py": "070806effdce51a288397370ead3bc95dc336e6eab0057a9e5d18d69c2d4c516",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\tests\\test_transcript_response_budget.py": "e3b2578a49631a87107c00ee8adbb3dd1a3ac0dbce55a29677d379d52581a419",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_process_transport.py": "9ddb6395d8af4ac4cd6da28ddabcf33355d5028f5ddbaebcebccb839f02682c1"
+  },
+  "actual_before_sha256": {
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\transcript_tool_transport.py": "d2a099533f6ac048d87dabecc5dbb198882637dfbe3dc738070b832e6cea50ea",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\tests\\test_transcript_owner_budget.py": "070806effdce51a288397370ead3bc95dc336e6eab0057a9e5d18d69c2d4c516",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\tests\\test_transcript_response_budget.py": "e3b2578a49631a87107c00ee8adbb3dd1a3ac0dbce55a29677d379d52581a419",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_process_transport.py": "9ddb6395d8af4ac4cd6da28ddabcf33355d5028f5ddbaebcebccb839f02682c1"
+  },
+  "actual_after_sha256": {
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\transcript_tool_transport.py": "d2a099533f6ac048d87dabecc5dbb198882637dfbe3dc738070b832e6cea50ea",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\tests\\test_transcript_owner_budget.py": "070806effdce51a288397370ead3bc95dc336e6eab0057a9e5d18d69c2d4c516",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\tests\\test_transcript_response_budget.py": "e3b2578a49631a87107c00ee8adbb3dd1a3ac0dbce55a29677d379d52581a419",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_process_transport.py": "9ddb6395d8af4ac4cd6da28ddabcf33355d5028f5ddbaebcebccb839f02682c1"
+  },
+  "all_four_stable": true,
+  "prior_reviews": {
+    "ff-independent-r1.json": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\gate-rejection-followup-20261102\\ff-independent-r1.json",
+      "sha256": "b972aa4d47fe28470da54a8d0a6a16f93a0497b1d0975d909799793ff40e5962",
+      "preserved": true
+    },
+    "ff-independent.json": {
+      "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\gate-rejection-followup-20261102\\ff-independent.json",
+      "sha256": "34f78ed806b97f4190db66db3aaf625d708ca0b12e2db8e9024b6beeefc51ec9",
+      "preserved": true
+    }
+  },
+  "closure": "R1 wire allocation/parent/usage retained; R2 dynamic ET pipe allocation retained; R2 remaining known-source default32MiB/receipt64KiB gap now closed at the actual _verified_open caller. Historical scope reports are not edited or retrospectively called full PASS.",
+  "implementation_review": {
+    "verified_open": "Known SourceRef.byte_size now owns actual stdout cap, while metadata receipt explicitly uses stderr_cap_bytes=None. After complete read, original bytes SHA/size, receipt SourceRef/status and manifest shape retain their owners.",
+    "shared_owner": "Only explicit None stderr is newly supported. Read loop uses normal chunks for None, exact cap+one probe for positive caps. _validate still validates stdout and positive explicit stderr; defaults unchanged; _await_lifetime/_cleanup/tree/nonzero/strictUTF8 paths unchanged. No source or process lifetime budget is waived.",
+    "scope": "Read the complete R3 source/test delta and relevant live validation/lifetime callers. No additional implementation, allUnit/85suite/large original scan or further audit expansion."
+  },
+  "independent_execution": {
+    "passed": 6,
+    "failed": 0,
+    "seconds": 2.35,
+    "command": "PYTHONPATH=src;tests PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 PYTHONDONTWRITEBYTECODE=1 C:/Miniconda/python.exe -B -X utf8 -m pytest tmp/fi73/review_ff_r3.py -q --tb=short -p no:cacheprovider --basetemp tmp/fi73/b --junitxml tmp/fi73/review.xml",
+    "controls": [
+      {
+        "id": "COMPLETE_RECEIPT",
+        "result": "PASS",
+        "detail": "Actual tiny native child emitted3B original and90KBUTF8 Chinese title inside complete source receipt; _verified_open preserved all30000Chinese characters and exact3B stdout cap/None stderr in one call."
+      },
+      {
+        "id": "REAL_SHA",
+        "result": "PASS",
+        "detail": "Same3B size but changed original bytes => real SHA rejection, one call."
+      },
+      {
+        "id": "REAL_RECEIPT_IDENTITY",
+        "result": "PASS",
+        "detail": "Complete large validJSON but wrong source_id => receipt identity rejection, one call."
+      },
+      {
+        "id": "REAL_RECEIPT_JSON",
+        "result": "PASS",
+        "detail": "Large invalidUTF8-safe nonJSON receipt => true JSON rejection after complete read, one call; not fixed-size permission."
+      },
+      {
+        "id": "REAL_STDERR_BUDGET",
+        "result": "PASS",
+        "detail": "Explicit1024B stderr allocation vs1025B output raises OutputLimitExceeded while child still in20s sleep, below outer6s; owned PID dead."
+      },
+      {
+        "id": "REAL_DEADLINE_WITH_NONE",
+        "result": "PASS",
+        "detail": "Explicit None stderr permits90KB but cannot waive1s child lifetime; ChildTimeout, owned PID dead."
+      }
+    ]
+  },
+  "limitations": [
+    "Actual subprocess used local synthetic Python command behind _run_bounded_json boundary, not real company_wiki.source_reader_cli with a production document. ROOT separately owns actual FF->ET CLI/worker offline contract.",
+    "No paid/provider/network/key/config/production-original activity, no large40MBoriginal and no rerun of prior85tests. This is final scoped engineering review of the four delivered paths, not a claim that every repository gate was globally proved necessary."
+  ],
+  "artifacts": {
+    "before.json": {
+      "sha256": "86cc349c7744411b663713c94b7de7bbce7893c6b945899a19dc237518e3a3ad",
+      "bytes": 1934,
+      "text": "{\n  \"report_sha256\": \"78b3b6f16d4f8788b1f968c460cb54d03e22a78bacd2eddf5855dfa564ba644f\",\n  \"expected\": {\n    \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\filing-fetch\\\\scripts\\\\transcript_tool_transport.py\": \"d2a099533f6ac048d87dabecc5dbb198882637dfbe3dc738070b832e6cea50ea\",\n    \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\filing-fetch\\\\tests\\\\test_transcript_owner_budget.py\": \"070806effdce51a288397370ead3bc95dc336e6eab0057a9e5d18d69c2d4c516\",\n    \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\filing-fetch\\\\tests\\\\test_transcript_response_budget.py\": \"e3b2578a49631a87107c00ee8adbb3dd1a3ac0dbce55a29677d379d52581a419\",\n    \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\filing-fetch\\\\scripts\\\\ff_process_transport.py\": \"9ddb6395d8af4ac4cd6da28ddabcf33355d5028f5ddbaebcebccb839f02682c1\"\n  },\n  \"before\": {\n    \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\filing-fetch\\\\scripts\\\\transcript_tool_transport.py\": \"d2a099533f6ac048d87dabecc5dbb198882637dfbe3dc738070b832e6cea50ea\",\n    \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\filing-fetch\\\\tests\\\\test_transcript_owner_budget.py\": \"070806effdce51a288397370ead3bc95dc336e6eab0057a9e5d18d69c2d4c516\",\n    \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\filing-fetch\\\\tests\\\\test_transcript_response_budget.py\": \"e3b2578a49631a87107c00ee8adbb3dd1a3ac0dbce55a29677d379d52581a419\",\n    \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\filing-fetch\\\\scripts\\\\ff_process_transport.py\": \"9ddb6395d8af4ac4cd6da28ddabcf33355d5028f5ddbaebcebccb839f02682c1\"\n  },\n  \"matches\": {\n    \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\filing-fetch\\\\scripts\\\\transcript_tool_transport.py\": true,\n    \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\filing-fetch\\\\tests\\\\test_transcript_owner_budget.py\": true,\n    \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\filing-fetch\\\\tests\\\\test_transcript_response_budget.py\": true,\n    \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\filing-fetch\\\\scripts\\\\ff_process_transport.py\": true\n  }\n}"
+    },
+    "review.log": {
+      "sha256": "8b39f11d62918a7f23b095ed54701b97bce1ef36b1aa31be80c6a35accd1e270",
+      "bytes": 1213,
+      "text": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\fi73\\\\b\", \"requested_basetemp_len\": 45, \"cwd_len\": 34, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\nconfigfile: pytest.ini\ncollected 6 items\n\ntmp\\fi73\\review_ff_r3.py ......                                          [100%]\n\n============================== warnings summary ===============================\n..\\..\\..\\..\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464\n  C:\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode\n  \n    self._warn_or_fail_if_strict(f\"Unknown config option: {key}\\n\")\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\fi73\\review.xml --\n======================== 6 passed, 1 warning in 2.35s =========================\n"
+    },
+    "review.xml": {
+      "sha256": "752576ea65c3d9fb9aa34771dbcb7d18174a90b33ede105dce0edcde0bd1b30a",
+      "bytes": 1112,
+      "text": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"0\" skipped=\"0\" tests=\"6\" time=\"2.274\" timestamp=\"2026-11-02T17:46:00.614064+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tmp.fi73.review_ff_r3\" name=\"test_known_source_actual_byte_budget_and_large_receipt_remain_separate[None]\" time=\"0.234\" /><testcase classname=\"tmp.fi73.review_ff_r3\" name=\"test_known_source_actual_byte_budget_and_large_receipt_remain_separate[source_sha]\" time=\"0.267\" /><testcase classname=\"tmp.fi73.review_ff_r3\" name=\"test_known_source_actual_byte_budget_and_large_receipt_remain_separate[receipt_identity]\" time=\"0.239\" /><testcase classname=\"tmp.fi73.review_ff_r3\" name=\"test_known_source_actual_byte_budget_and_large_receipt_remain_separate[receipt_json]\" time=\"0.212\" /><testcase classname=\"tmp.fi73.review_ff_r3\" name=\"test_explicit_stderr_quota_still_stops_during_read_and_reclaims_process\" time=\"0.194\" /><testcase classname=\"tmp.fi73.review_ff_r3\" name=\"test_stderr_without_representation_cap_keeps_real_deadline\" time=\"1.019\" /></testsuite></testsuites>"
+    },
+    "review_ff_r3.py": {
+      "sha256": "bde6a70ace91e61f88a6ba5279b36be40bf76331315ce6429655be837fc36e03",
+      "bytes": 3168,
+      "text": "import hashlib\nimport json\nfrom pathlib import Path\nimport sys\nimport time\n\nimport pytest\n\nsys.path.insert(0,'C:/Users/郑曾波/Projects/filing-fetch/scripts')\nimport transcript_tool_transport as owner\nimport ff_process_transport as transport\n\n\n@pytest.mark.parametrize('fault',[None,'source_sha','receipt_identity','receipt_json'])\ndef test_known_source_actual_byte_budget_and_large_receipt_remain_separate(tmp_path,monkeypatch,fault):\n    raw=b'abc'\n    sha=hashlib.sha256(raw).hexdigest()\n    ref={'document_id':'urn:company-wiki:document:sha256:'+sha,'source_id':'urn:company-wiki:source:sha256:'+sha,\n      'content_sha256':sha,'byte_size':3,'mime_type':'text/plain'}\n    receipt={'status':'ok',**{k:ref[k] for k in ('document_id','source_id','content_sha256','byte_size')}}\n    if fault=='receipt_identity':receipt['source_id']='wrong-source'\n    # Construct inside the real child, avoiding Windows command-line payload limits.\n    code='import sys,json;r='+repr(receipt)+\";r['manifest']={'title':'语'*30000};\"\n    code+=\"sys.stdout.buffer.write(\"+repr(b'abd' if fault=='source_sha' else raw)+\");\"\n    if fault=='receipt_json':code+=\"sys.stderr.buffer.write(b'not JSON'+b'x'*90000)\"\n    else:code+=\"sys.stderr.buffer.write(json.dumps(r,ensure_ascii=False).encode('utf-8'))\"\n    seen=[]\n    native=transport.run_bounded_json\n    def run(command,**kwargs):\n        seen.append(kwargs)\n        return native([sys.executable,'-B','-c',code],**kwargs)\n    monkeypatch.setattr(owner,'_run_bounded_json',run)\n    tool=owner.EarningsTranscriptsTransport(wiki_root=tmp_path,deadline=time.monotonic()+6)\n    if fault:\n        with pytest.raises(ValueError):tool._verified_open(ref)\n    else:\n        observed=tool._verified_open(ref)\n        assert observed['manifest']['title']=='语'*30000\n    assert len(seen)==1 and seen[0]['stdout_cap_bytes']==3 and seen[0]['stderr_cap_bytes'] is None\n    assert tool.company_wiki_calls==1\n\n\ndef test_explicit_stderr_quota_still_stops_during_read_and_reclaims_process(tmp_path):\n    marker=tmp_path/'child.pid'\n    command=[sys.executable,'-B','-c',\n      \"import os,sys,time;from pathlib import Path;\"+f\"Path({str(marker)!r}).write_text(str(os.getpid()));\"+\n      \"sys.stderr.buffer.write(b'x'*1025);sys.stderr.buffer.flush();time.sleep(20)\"]\n    started=time.monotonic()\n    with pytest.raises(transport.OutputLimitExceeded):\n        transport.run_bounded_json(command,timeout_seconds=6,stdout_cap_bytes=1024,stderr_cap_bytes=1024)\n    assert time.monotonic()-started<5 and marker.exists()\n    assert not transport.pid_is_alive(int(marker.read_text()))\n\n\ndef test_stderr_without_representation_cap_keeps_real_deadline(tmp_path):\n    marker=tmp_path/'child.pid'\n    command=[sys.executable,'-B','-c',\n      \"import os,sys,time;from pathlib import Path;\"+f\"Path({str(marker)!r}).write_text(str(os.getpid()));\"+\n      \"sys.stderr.buffer.write(b'x'*90000);sys.stderr.buffer.flush();time.sleep(20)\"]\n    with pytest.raises(transport.ChildTimeout):\n        transport.run_bounded_json(command,timeout_seconds=1,stdout_cap_bytes=3,stderr_cap_bytes=None)\n    assert marker.exists() and not transport.pid_is_alive(int(marker.read_text()))\n"
+    }
+  },
+  "source_or_tests_modified": false,
+  "git_index_or_main_pwf_modified": false,
+  "paid_calls": 0,
+  "network_calls": 0,
+  "downloads": 0,
+  "keys_or_config_files_read": false,
+  "production_originals_read": false,
+  "cleanup": {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\fi73",
+    "initially_absent_asserted_before_creation": true,
+    "files": 6,
+    "bytes": 7437,
+    "removed": true
+  }
+}

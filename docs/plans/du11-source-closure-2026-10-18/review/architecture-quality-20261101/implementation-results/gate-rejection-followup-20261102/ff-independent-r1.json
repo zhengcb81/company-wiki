@@ -1,0 +1,114 @@
+{
+  "schema_version": "independent-gate-repair-review/1",
+  "reviewer": "/root/rectify_readability",
+  "scope": "FF",
+  "author_report_sha256": "2d541aa6789ae56ee88dae280dd609597d3dea1385c1ac7184f4d0a79566c0cb",
+  "delivery_files_sha256": {
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\transcript_tool_transport.py": "0a7ed098dace2b48bd420a3acc8471347b47503f0f0017fced1a1f409bbb270c",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\tests\\test_transcript_owner_budget.py": "9b7247b1d9d280e85616e1d2a4f99a8ad3abc587ecabbc2c69006307b4a5fd75",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\tests\\test_transcript_response_budget.py": "e3b2578a49631a87107c00ee8adbb3dd1a3ac0dbce55a29677d379d52581a419"
+  },
+  "independently_observed_before_sha256": {
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\transcript_tool_transport.py": "0a7ed098dace2b48bd420a3acc8471347b47503f0f0017fced1a1f409bbb270c",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\tests\\test_transcript_owner_budget.py": "9b7247b1d9d280e85616e1d2a4f99a8ad3abc587ecabbc2c69006307b4a5fd75",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\tests\\test_transcript_response_budget.py": "e3b2578a49631a87107c00ee8adbb3dd1a3ac0dbce55a29677d379d52581a419"
+  },
+  "independently_observed_after_sha256": {
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\transcript_tool_transport.py": "0a7ed098dace2b48bd420a3acc8471347b47503f0f0017fced1a1f409bbb270c",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\tests\\test_transcript_owner_budget.py": "9b7247b1d9d280e85616e1d2a4f99a8ad3abc587ecabbc2c69006307b4a5fd75",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\tests\\test_transcript_response_budget.py": "e3b2578a49631a87107c00ee8adbb3dd1a3ac0dbce55a29677d379d52581a419"
+  },
+  "before_after_matches": {
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\transcript_tool_transport.py": true,
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\tests\\test_transcript_owner_budget.py": true,
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\tests\\test_transcript_response_budget.py": true
+  },
+  "artifacts": {
+    "identity-after.json": {
+      "sha256": "48ae39b36a6a4cd49085424735d3e1169d2a1dbd954c81e93de6673f37735da8",
+      "bytes": 1250,
+      "text": "{\n  \"after\": {\n    \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\filing-fetch\\\\scripts\\\\transcript_tool_transport.py\": \"0a7ed098dace2b48bd420a3acc8471347b47503f0f0017fced1a1f409bbb270c\",\n    \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\filing-fetch\\\\tests\\\\test_transcript_owner_budget.py\": \"9b7247b1d9d280e85616e1d2a4f99a8ad3abc587ecabbc2c69006307b4a5fd75\",\n    \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\filing-fetch\\\\tests\\\\test_transcript_response_budget.py\": \"e3b2578a49631a87107c00ee8adbb3dd1a3ac0dbce55a29677d379d52581a419\"\n  },\n  \"before_after_matches\": {\n    \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\filing-fetch\\\\scripts\\\\transcript_tool_transport.py\": true,\n    \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\filing-fetch\\\\tests\\\\test_transcript_owner_budget.py\": true,\n    \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\filing-fetch\\\\tests\\\\test_transcript_response_budget.py\": true\n  },\n  \"expected_matches\": {\n    \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\filing-fetch\\\\scripts\\\\transcript_tool_transport.py\": true,\n    \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\filing-fetch\\\\tests\\\\test_transcript_owner_budget.py\": true,\n    \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\filing-fetch\\\\tests\\\\test_transcript_response_budget.py\": true\n  }\n}"
+    },
+    "identity-before.json": {
+      "sha256": "1978088361bdcceb531cfff0a6fb87cc509e693861e74092b3051b83b96946ce",
+      "bytes": 1511,
+      "text": "{\n  \"author_report_sha256\": \"2d541aa6789ae56ee88dae280dd609597d3dea1385c1ac7184f4d0a79566c0cb\",\n  \"expected\": {\n    \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\filing-fetch\\\\scripts\\\\transcript_tool_transport.py\": \"0a7ed098dace2b48bd420a3acc8471347b47503f0f0017fced1a1f409bbb270c\",\n    \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\filing-fetch\\\\tests\\\\test_transcript_owner_budget.py\": \"9b7247b1d9d280e85616e1d2a4f99a8ad3abc587ecabbc2c69006307b4a5fd75\",\n    \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\filing-fetch\\\\tests\\\\test_transcript_response_budget.py\": \"e3b2578a49631a87107c00ee8adbb3dd1a3ac0dbce55a29677d379d52581a419\"\n  },\n  \"before\": {\n    \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\filing-fetch\\\\scripts\\\\transcript_tool_transport.py\": \"0a7ed098dace2b48bd420a3acc8471347b47503f0f0017fced1a1f409bbb270c\",\n    \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\filing-fetch\\\\tests\\\\test_transcript_owner_budget.py\": \"9b7247b1d9d280e85616e1d2a4f99a8ad3abc587ecabbc2c69006307b4a5fd75\",\n    \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\filing-fetch\\\\tests\\\\test_transcript_response_budget.py\": \"e3b2578a49631a87107c00ee8adbb3dd1a3ac0dbce55a29677d379d52581a419\"\n  },\n  \"matches\": {\n    \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\filing-fetch\\\\scripts\\\\transcript_tool_transport.py\": true,\n    \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\filing-fetch\\\\tests\\\\test_transcript_owner_budget.py\": true,\n    \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\filing-fetch\\\\tests\\\\test_transcript_response_budget.py\": true\n  }\n}"
+    },
+    "review.log": {
+      "sha256": "08b4cb00b28646efbd17541f5e53112953d5f52568a0a1ff9f9503bf42599f3e",
+      "bytes": 1212,
+      "text": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\fi7\\\\b\", \"requested_basetemp_len\": 44, \"cwd_len\": 34, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\nconfigfile: pytest.ini\ncollected 4 items\n\ntmp\\fi7\\review_ff.py ....                                                [100%]\n\n============================== warnings summary ===============================\n..\\..\\..\\..\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464\n  C:\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode\n  \n    self._warn_or_fail_if_strict(f\"Unknown config option: {key}\\n\")\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n-- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\fi7\\review.xml --\n======================== 4 passed, 1 warning in 0.34s =========================\n"
+    },
+    "review.xml": {
+      "sha256": "cc86d25a206230ab2cf62b7394f171b75cc34d9b6bf0b61ddc56d4f5193e04e0",
+      "bytes": 802,
+      "text": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"0\" skipped=\"0\" tests=\"4\" time=\"0.141\" timestamp=\"2026-11-02T17:33:34.908976+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tmp.fi7.review_ff\" name=\"test_nonround_explicit_allocation_and_real_parent_remaining[120.9-181.2-120-123]\" time=\"0.008\" /><testcase classname=\"tmp.fi7.review_ff\" name=\"test_nonround_explicit_allocation_and_real_parent_remaining[120.9-100.4-97-100]\" time=\"0.006\" /><testcase classname=\"tmp.fi7.review_ff\" name=\"test_nonround_explicit_allocation_and_real_parent_remaining[10.01-13.99-10-13]\" time=\"0.005\" /><testcase classname=\"tmp.fi7.review_ff\" name=\"test_parent_deadline_can_shrink_between_wire_and_actual_launch\" time=\"0.004\" /></testsuite></testsuites>"
+    },
+    "review_ff.py": {
+      "sha256": "f4f5d4d2a3ab7fbff7738d7e766ef8be9832ce44bab71df0963eaa14900b3fc3",
+      "bytes": 3107,
+      "text": "import json\nfrom pathlib import Path\nimport sys\n\nimport pytest\n\nFF = Path('C:/Users/郑曾波/Projects/filing-fetch')\nsys.path.insert(0,str(FF/'scripts'))\nimport transcript_tool_transport as transport_owner\n\n\n@pytest.fixture\ndef harness(tmp_path,monkeypatch):\n    tool=tmp_path/'offline_tool.py'\n    tool.write_text('# never executes; pure boundary injection')\n    owner=transport_owner.EarningsTranscriptsTransport(wiki_root=tmp_path,transcript_tool=tool,deadline=1000)\n    monkeypatch.setattr(owner,'_et_environment',lambda:({},None))\n    return owner\n\n\n@pytest.mark.parametrize('limit,remaining,seconds,outer',[\n    (120.9,181.2,120,123),(120.9,100.4,97,100),(10.01,13.99,10,13)])\ndef test_nonround_explicit_allocation_and_real_parent_remaining(harness,monkeypatch,limit,remaining,seconds,outer):\n    monkeypatch.setattr(harness,'_remaining',lambda:remaining)\n    seen=[]\n    def run(command,*,input_bytes,timeout_seconds,**kwargs):\n        seen.append((json.loads(input_bytes),timeout_seconds))\n        usage={'schema_version':'earnings-retrieval-usage/1','request_id':'independent',\n          'usage_complete':True,'usage':{'requests_used':7,'response_bytes_used':50000001}}\n        return b'{\"status\":\"content_too_large\",\"error_code\":\"byte_limit\"}',json.dumps(usage).encode(),2\n    monkeypatch.setattr(transport_owner,'_run_bounded_json',run)\n    result=harness._et_result(request={'request_id':'independent','security_id':'SYNTHETIC','exchange':'NYSE',\n      'fiscal_year':2025,'fiscal_quarter':4,'as_of_date':'2026-11-01'},\n      limits={'timeout_seconds':limit,'max_bytes':21000001,'max_cost_usd':'0.25'})\n    assert len(seen)==1\n    wire,timeout=seen[0]\n    assert wire['timeout_seconds']==seconds and timeout==outer\n    assert wire['max_body_bytes']==wire['max_response_bytes']==21000001\n    assert wire['max_cost_usd']=='0.25' and wire['exchange']=='nyse'\n    assert result['provider_requests']==7 and result['provider_response_bytes']==50000001\n    assert result['provider_usage_complete'] is True and result['retryable'] is False\n\n\ndef test_parent_deadline_can_shrink_between_wire_and_actual_launch(harness,monkeypatch):\n    remaining=iter([180.0,5.25])\n    monkeypatch.setattr(harness,'_remaining',lambda:next(remaining))\n    observed=[]\n    def run(command,*,input_bytes,timeout_seconds,**kwargs):\n        observed.append((json.loads(input_bytes),timeout_seconds))\n        raise transport_owner.TransportError('synthetic child transport failure')\n    monkeypatch.setattr(transport_owner,'_run_bounded_json',run)\n    result=harness._et_result(request={'request_id':'independent','security_id':'SYNTHETIC','exchange':'NYSE',\n      'fiscal_year':2025,'fiscal_quarter':4,'as_of_date':'2026-11-01'},\n      limits={'timeout_seconds':120,'max_bytes':21000001,'max_cost_usd':'0.25'})\n    assert len(observed)==1 and observed[0][0]['timeout_seconds']==120 and observed[0][1]==5.25\n    assert result['provider_usage_complete'] is False\n    assert result['provider_requests'] is None and result['provider_response_bytes'] is None\n    assert result['provider_calls']==1 and result['retryable'] is False\n"
+    }
+  },
+  "source_or_tests_modified": false,
+  "git_or_index_or_main_pwf_modified": false,
+  "paid_calls": 0,
+  "network_calls": 0,
+  "downloads": 0,
+  "keys_read": false,
+  "production_original_reads": false,
+  "cleanup": {
+    "root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\fi7",
+    "initially_absent_assertion_executed_before_creation": true,
+    "files": 9,
+    "bytes": 8046,
+    "removed": true
+  },
+  "status": "SCOPED_3_FILE_FIX_VERIFIED_FURTHER_PIPE_BUDGET_REPAIR_OPEN",
+  "test_result": {
+    "passed": 4,
+    "failed": 0,
+    "seconds": 0.34,
+    "command": "PYTHONPATH=src;tests PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 PYTHONDONTWRITEBYTECODE=1 C:/Miniconda/python.exe -B -X utf8 -m pytest tmp/fi7/review_ff.py -q --tb=short -p no:cacheprovider --basetemp tmp/fi7/b --junitxml tmp/fi7/review.xml"
+  },
+  "checks": [
+    {
+      "id": "EXPLICIT_OWNER_RESOURCES",
+      "result": "PASS_3",
+      "detail": "120.9s/parent181.2 ->120s+3cleanup; parent100.4 ->97s+3;10.01s/parent13.99->10s+3.21,000,001bytes forwarded unchanged to both raw/body; cost0.25 and lowercaseexchange unchanged."
+    },
+    {
+      "id": "SHRINKING_PARENT_AND_UNKNOWN_COST",
+      "result": "PASS",
+      "detail": "Parent shrinks180->5.25 between wire and actual launch: outer timeout5.25, provider requested120; actual transport failure returns unknown request/byte usage, calls1/nonretryable, never0cost or duplicate call."
+    },
+    {
+      "id": "MEASURED_USAGE",
+      "result": "PASS",
+      "detail": "Declared21,000,001B does not clamp measured50,000,001B/7requests; real counters remain complete independently of byte_limit error."
+    },
+    {
+      "id": "TRUE_BOUNDARIES",
+      "result": "READ_ONLY_RETAINED",
+      "detail": "Diff only removes hidden10MiB/60s min; tight parent reserve and integer granularity remain. Credential/environment/unknownpaid/import handling unchanged. Full3files read (including untracked new test), no key/config opened."
+    },
+    {
+      "id": "ET_WIRE_CONSISTENCY",
+      "result": "STATIC_ONLY",
+      "detail": "Current ET transcript_api validation accepts positive integer timeout and positive body/raw budgets without60/10MiB upper. Same-node actual public parser/offlineworker cross-contract belongs to ROOT, not asserted executed here."
+    }
+  ],
+  "findings": [
+    {
+      "id": "FF-OUTPUT-PIPE-32M",
+      "status": "ROOT_CONFIRMED_SAME_NODE_REPAIR_PENDING",
+      "type": "STATIC_CALL_CHAIN_GAP_NOT_EXECUTED_LARGE_CHILD",
+      "detail": "_et_result still invokes _run_bounded_json without derived stdout_cap_bytes. General ff_process_transport default32MiB may reject a completed response from a larger explicit raw/body allocation after base64/JSON expansion.20MiB raw fits about27MiB wrapper, but explicit128MiB quota used in migrated test cannot generally fit32MiB output. Wire-only spy success is not full download success. ROOT accepted derivation from actual requested budget, no new fixed ceiling, and will freeze ff-repair-r2."
+    }
+  ],
+  "limitations": [
+    "This is not final all-chain PASS; the confirmed fixed32MiB lower transport gap remains open for ROOT same-node repair.",
+    "Only4 independent seam tests; no85suite rerun, provider request, actual FMP/key read, imported document or large real child payload.",
+    "Git diff read originally denied sandbox directory access; authorized normal-host git read succeeded, with0Git mutation."
+  ]
+}

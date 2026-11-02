@@ -1,0 +1,32 @@
+{
+  "cwp": {
+    "head": "77d8c83fbfe226e12db8c03ab196af366abfb661",
+    "branch": "master",
+    "tracked_status": "M .githooks/pre-push\n M docs/plans/du11-source-closure-2026-10-18/CURRENT_STATUS.json\n M docs/plans/du11-source-closure-2026-10-18/CURRENT_STATUS.md\n M docs/plans/du11-source-closure-2026-10-18/findings.md\n M docs/plans/du11-source-closure-2026-10-18/progress.md\n M docs/plans/du11-source-closure-2026-10-18/task_plan.md"
+  },
+  "rf": {
+    "head": "75c3b0e0d1eb083ab29e8c9e833ed1f95c16e688",
+    "branch": "main",
+    "tracked_status": "M assurance/runs/daily_alert.jsonl\n M assurance/runs/monthly_manifest.json\n M assurance/runs/weekly_alert.jsonl\n M assurance/runs/weekly_manifest.json"
+  },
+  "ff": {
+    "head": "b3f0b9cceb87338c64dc8ddd698707f01ac6691a",
+    "branch": "main",
+    "tracked_status": ""
+  },
+  "invest": {
+    "head": "999e010312fa39a54a5071d0fdef6738c8ed18bc",
+    "branch": "main",
+    "tracked_status": ""
+  },
+  "et": {
+    "head": "003c1c065109d0b02c7bd4de09ad3e8461a99c0e",
+    "branch": "main",
+    "tracked_status": ""
+  },
+  "sk": {
+    "head": "f52f257d4343f9a785e5a338088a789393db7357",
+    "branch": "master",
+    "tracked_status": ""
+  }
+}

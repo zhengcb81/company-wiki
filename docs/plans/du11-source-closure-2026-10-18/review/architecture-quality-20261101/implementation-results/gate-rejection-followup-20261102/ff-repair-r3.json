@@ -1,0 +1,51 @@
+{
+  "status": "AUTHOR_FROZEN_PENDING_INDEPENDENT_REVIEW",
+  "delivery_files_sha256": {
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\transcript_tool_transport.py": "d2a099533f6ac048d87dabecc5dbb198882637dfbe3dc738070b832e6cea50ea",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\tests\\test_transcript_owner_budget.py": "070806effdce51a288397370ead3bc95dc336e6eab0057a9e5d18d69c2d4c516",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\tests\\test_transcript_response_budget.py": "e3b2578a49631a87107c00ee8adbb3dd1a3ac0dbce55a29677d379d52581a419",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_process_transport.py": "9ddb6395d8af4ac4cd6da28ddabcf33355d5028f5ddbaebcebccb839f02682c1"
+  },
+  "red_record": ".planning/architecture-quality-20261101/r7-publication/ff-residual-r8-budget-red.json",
+  "green_record": ".planning/architecture-quality-20261101/r7-publication/ff-residual-r8-budget-green.json",
+  "tests": {
+    "red": "3F1P",
+    "green": "85P3skip/1.98s",
+    "ruff_files": 3
+  },
+  "root_cause": "FF second min(max_bytes,10MiB) and min(explicit/remaining timeout,60) override caller resources before ET accounting.",
+  "repair": "Forward max_bytes as both raw and decoded body allocation; timeout=min(explicit, parent remaining-cleanup), integer granularity preserved.",
+  "boundary": [
+    "Actual parent remaining<=cleanup+one second stops before key/child.",
+    "Actual ET read/time/fee budget remains its sole owner.",
+    "Actual measured usage not clamped; no retry after provider/import failure.",
+    "ET matching positive timeout support is a required same-node dependency."
+  ],
+  "paid_calls": 0,
+  "downloads": 0,
+  "originals_modified": 0,
+  "configs_modified": 0,
+  "r2": {
+    "root": "ET opt-in payload still used generic fixed32MiB FF pipe despite larger operation quota.",
+    "repair": "Conservative JSON/base64 transport allocation derived from actual source quota; real process owner enforces it while reading. Other callers defaults unchanged.",
+    "red": "1real RED missing pipe budget; two intermediate4P1F runs had incomplete new not_found fixture fields; fixture corrected only.",
+    "green": "5targetedP/0.29s; see ff-residual-r8-wire-final2.json",
+    "ruff": "2delta files passed",
+    "not_run": "No128MiB provider payload or live HTTP; wire spy proves actual budget forwarded, existing bounded-process owner protects reads."
+  },
+  "r3": {
+    "reason": "The same known-size original read still used generic32MiB stdout and64KiB receipt defaults.",
+    "repair": "Exact SourceRef size is its while-read stdout allocation; metadata receipt has no hidden cap. Shared process owner supports explicit stderr None, retaining other defaults and explicit quotas.",
+    "red": "First new source test hit Windows command line length fixture; after child-internal receipt generation, actual64KiB overrun reproduced. Separate None unsupported RED retained.",
+    "green": "8focusedP/0.86s including real local90KB receipt and both actual overrun channel controls.",
+    "static": "Mypy one process owner PASS; Ruff initial E701 fixture format corrected then3delta files PASS.",
+    "prior": "ff-independent-r1 and R2 reports remain historical; final independent delta pending."
+  },
+  "mypy_cache_cleanup": {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\ff-gate-mypy-20261102",
+    "owned_by": "ROOT current explicit mypy invocation",
+    "initial_absence_measured": false,
+    "files": 155,
+    "final_absent": true
+  }
+}

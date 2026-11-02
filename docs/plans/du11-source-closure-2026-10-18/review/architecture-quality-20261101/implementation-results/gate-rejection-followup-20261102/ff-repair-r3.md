@@ -1,0 +1,7 @@
+# FF final known-source closure R3
+
+Same caller budget root now includes4paths (the previous3 plus the unique ff_process_transport owner). SourceRef already names exact original size; verified-open now forwards that as its actual stdout allocation rather than generic32MiB. Source metadata receipt has no separate64KiB permission. The shared process owner accepts stderr=None only explicitly; other caller defaults and explicit positive channel quotas remain, as do deadline/process-tree cleanup and actual SHA/size matching.
+
+New original-read test first encountered a Windows command-line fixture limit, then accurately reproduced64KiB receipt refusal by generating the90KB receipt inside the child. Separate stdout/None test showed the old validator refusal. Final8focused tests passed0.86s, including actual1025B vs1024B stdout/stderr refusal. One-process-owner mypy passed; one E701 test formatting issue was corrected before final Ruff3. No whole85rerun or40MB artifact needed. Exact byte3 original and complete90KB receipt actually traversed the real process owner.
+
+Previous author/independent reports remain as dated scopes. No actual source/config/key or network use. Per-run UUID fixtures restored absent; current explicitly named mypy cache cleaned, but its preexistence was not measured and is not claimed. Await final independent delta review; ET actual public CLI/worker integration already passed separately in ROOT et-independent.

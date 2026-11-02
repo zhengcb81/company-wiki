@@ -1,0 +1,659 @@
+{
+  "status": "ENGINEERING_COMPLETE_EXACT_CI_GREEN_REAL_C_OPEN",
+  "publication": {
+    "cwp": {
+      "kind": "cwp",
+      "action": "push",
+      "status": "SUCCESS",
+      "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "before": "fef24418a7dfdfef9ce54a71ae3c0b93143b46a5",
+      "files": [
+        "src/company_wiki/automation/narrative_batch_cli.py",
+        "src/company_wiki/automation/narrative_model.py",
+        "src/company_wiki/automation/narrative_model_caller.py",
+        "src/company_wiki/automation/narrative_model_scoped.py",
+        "src/company_wiki/automation/narrative_output_language.py",
+        "src/company_wiki/automation/narrative_paid_response.py",
+        "src/company_wiki/automation/narrative_worker_factory.py",
+        "src/company_wiki/source_catalog/assertion_service.py",
+        "src/company_wiki/source_catalog/cli.py",
+        "src/company_wiki/source_catalog/local_inventory.py",
+        "src/company_wiki/source_catalog/local_prepare_cli.py",
+        "src/company_wiki/source_catalog/local_reconcile.py",
+        "src/company_wiki/source_catalog/official_source_flow.py",
+        "tests/unit/du11_paid_response/test_paid_response.py",
+        "tests/unit/test_narrative_citation_unit_model_boundary.py",
+        "tests/unit/test_narrative_model_request.py",
+        "tests/unit/test_narrative_output_language_observer.py",
+        "tests/unit/test_narrative_partial_summary.py",
+        "tests/unit/test_narrative_scoped_runtime.py",
+        "tests/unit/test_scoped_claim_cap.py",
+        "tests/unit/test_scoped_source_admission.py",
+        "tests/unit/test_local_request_resource_ownership.py",
+        "tests/unit/test_summary_actual_output_bounds.py",
+        "tests/unit/test_narrative_source_owned_model_boundary.py",
+        "tests/unit/test_narrative_scoped_runtime_legacy.py",
+        "tests/unit/test_narrative_claim_grounding.py",
+        "tests/support/summary_output_contract_upgrade.py",
+        "src/company_wiki/_bounded_process.py",
+        "tools/document_understanding_benchmark/holdout_acceptance.py",
+        "tools/document_understanding_benchmark/holdout_acceptance_observer.py",
+        "tests/unit/test_holdout_observation_isolation.py",
+        "tools/document_understanding_benchmark/phase_c_runner.py",
+        "tools/holdout_replay/manifest.py",
+        "tools/holdout_replay/runner.py",
+        "tools/holdout_replay/worker.py",
+        "tools/holdout_replay/__main__.py",
+        "tests/unit/test_holdout_qualification_and_metadata.py",
+        "tests/holdout/w18/test_manifest_freeze.py"
+      ],
+      "wip_before": {
+        "daily_alert.jsonl": "712f9e957990ca0c261cbb91c1d10b0a12606da9d7293e6f2a1581309ce295e9",
+        "weekly_alert.jsonl": "fc9ec2335b48d42921ca9c14c63363efca3b3096f967733e366f4dd463e4b7ed",
+        "weekly_manifest.json": "e2e57f28fec7477af06029adcf187468701ab0305024993bfb2953bbd43cc5c0",
+        "monthly_manifest.json": "56d630107429cbcb646a951306dd1ea445dd5b3146236f34d0e8df953c103b9a"
+      },
+      "after": "fef24418a7dfdfef9ce54a71ae3c0b93143b46a5",
+      "elapsed_s": 11.227,
+      "foreign_hook_preserved": true,
+      "wip_after": {
+        "daily_alert.jsonl": "712f9e957990ca0c261cbb91c1d10b0a12606da9d7293e6f2a1581309ce295e9",
+        "weekly_alert.jsonl": "fc9ec2335b48d42921ca9c14c63363efca3b3096f967733e366f4dd463e4b7ed",
+        "weekly_manifest.json": "e2e57f28fec7477af06029adcf187468701ab0305024993bfb2953bbd43cc5c0",
+        "monthly_manifest.json": "56d630107429cbcb646a951306dd1ea445dd5b3146236f34d0e8df953c103b9a"
+      },
+      "crlf_restored": [],
+      "index_empty": true,
+      "foreign_wip_preserved": true
+    },
+    "cwp-ci": {
+      "kind": "cwp-ci",
+      "action": "push",
+      "status": "SUCCESS",
+      "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "before": "77d8c83fbfe226e12db8c03ab196af366abfb661",
+      "files": [
+        "tests/support/summary_output_contract_upgrade.py",
+        "tests/unit/test_summary_output_contract_upgrade.py",
+        "tests/unit/document_understanding_root/test_native_table_observation.py",
+        "tests/unit/test_atomic_summary_recipe.py",
+        "tests/unit/test_narrative_citation_unit_model_boundary.py",
+        "tests/unit/test_narrative_claim_grounding.py",
+        "tests/unit/test_narrative_scoped_runtime_legacy.py",
+        "tests/unit/test_narrative_source_owned_model_boundary.py",
+        "tests/unit/test_official_json_model_subject.py",
+        "tests/unit/test_narrative_extractive_runtime.py"
+      ],
+      "wip_before": {
+        "daily_alert.jsonl": "712f9e957990ca0c261cbb91c1d10b0a12606da9d7293e6f2a1581309ce295e9",
+        "weekly_alert.jsonl": "fc9ec2335b48d42921ca9c14c63363efca3b3096f967733e366f4dd463e4b7ed",
+        "weekly_manifest.json": "e2e57f28fec7477af06029adcf187468701ab0305024993bfb2953bbd43cc5c0",
+        "monthly_manifest.json": "56d630107429cbcb646a951306dd1ea445dd5b3146236f34d0e8df953c103b9a"
+      },
+      "after": "77d8c83fbfe226e12db8c03ab196af366abfb661",
+      "elapsed_s": 12.284,
+      "foreign_hook_preserved": true,
+      "wip_after": {
+        "daily_alert.jsonl": "712f9e957990ca0c261cbb91c1d10b0a12606da9d7293e6f2a1581309ce295e9",
+        "weekly_alert.jsonl": "fc9ec2335b48d42921ca9c14c63363efca3b3096f967733e366f4dd463e4b7ed",
+        "weekly_manifest.json": "e2e57f28fec7477af06029adcf187468701ab0305024993bfb2953bbd43cc5c0",
+        "monthly_manifest.json": "56d630107429cbcb646a951306dd1ea445dd5b3146236f34d0e8df953c103b9a"
+      },
+      "crlf_restored": [],
+      "index_empty": true,
+      "foreign_wip_preserved": true
+    },
+    "cwp-contract": {
+      "kind": "cwp-contract",
+      "action": "push",
+      "status": "SUCCESS",
+      "repo": "C:\\Users\\郑曾波\\Projects\\company-wiki",
+      "before": "a233fb37f200ea9b470e3926a14224c4dcaaca03",
+      "files": [
+        "tests/contract/test_summary_group_coverage.py"
+      ],
+      "wip_before": {
+        "daily_alert.jsonl": "712f9e957990ca0c261cbb91c1d10b0a12606da9d7293e6f2a1581309ce295e9",
+        "weekly_alert.jsonl": "fc9ec2335b48d42921ca9c14c63363efca3b3096f967733e366f4dd463e4b7ed",
+        "weekly_manifest.json": "e2e57f28fec7477af06029adcf187468701ab0305024993bfb2953bbd43cc5c0",
+        "monthly_manifest.json": "56d630107429cbcb646a951306dd1ea445dd5b3146236f34d0e8df953c103b9a"
+      },
+      "after": "a233fb37f200ea9b470e3926a14224c4dcaaca03",
+      "elapsed_s": 19.364,
+      "foreign_hook_preserved": true,
+      "wip_after": {
+        "daily_alert.jsonl": "712f9e957990ca0c261cbb91c1d10b0a12606da9d7293e6f2a1581309ce295e9",
+        "weekly_alert.jsonl": "fc9ec2335b48d42921ca9c14c63363efca3b3096f967733e366f4dd463e4b7ed",
+        "weekly_manifest.json": "e2e57f28fec7477af06029adcf187468701ab0305024993bfb2953bbd43cc5c0",
+        "monthly_manifest.json": "56d630107429cbcb646a951306dd1ea445dd5b3146236f34d0e8df953c103b9a"
+      },
+      "crlf_restored": [],
+      "index_empty": true,
+      "foreign_wip_preserved": true
+    },
+    "rf": {
+      "kind": "rf",
+      "action": "push",
+      "status": "SUCCESS",
+      "repo": "C:\\Users\\郑曾波\\Projects\\revenue-forecast",
+      "before": "75c3b0e0d1eb083ab29e8c9e833ed1f95c16e688",
+      "files": [
+        "scripts/forecast/calc.py",
+        "tests/test_formula_work_budget.py"
+      ],
+      "wip_before": {
+        "daily_alert.jsonl": "712f9e957990ca0c261cbb91c1d10b0a12606da9d7293e6f2a1581309ce295e9",
+        "weekly_alert.jsonl": "fc9ec2335b48d42921ca9c14c63363efca3b3096f967733e366f4dd463e4b7ed",
+        "weekly_manifest.json": "e2e57f28fec7477af06029adcf187468701ab0305024993bfb2953bbd43cc5c0",
+        "monthly_manifest.json": "56d630107429cbcb646a951306dd1ea445dd5b3146236f34d0e8df953c103b9a"
+      },
+      "after": "75c3b0e0d1eb083ab29e8c9e833ed1f95c16e688",
+      "elapsed_s": 10.839,
+      "foreign_hook_preserved": true,
+      "wip_after": {
+        "daily_alert.jsonl": "712f9e957990ca0c261cbb91c1d10b0a12606da9d7293e6f2a1581309ce295e9",
+        "weekly_alert.jsonl": "fc9ec2335b48d42921ca9c14c63363efca3b3096f967733e366f4dd463e4b7ed",
+        "weekly_manifest.json": "e2e57f28fec7477af06029adcf187468701ab0305024993bfb2953bbd43cc5c0",
+        "monthly_manifest.json": "56d630107429cbcb646a951306dd1ea445dd5b3146236f34d0e8df953c103b9a"
+      },
+      "crlf_restored": [],
+      "index_empty": true,
+      "foreign_wip_preserved": true
+    },
+    "invest": {
+      "kind": "invest",
+      "action": "push",
+      "status": "SUCCESS",
+      "repo": "C:\\Users\\郑曾波\\Projects\\invest-skills",
+      "before": "999e010312fa39a54a5071d0fdef6738c8ed18bc",
+      "files": [
+        "invest-core/scripts/invest_contracts.py",
+        "invest-core/tests/test_formula_work_budget.py"
+      ],
+      "wip_before": {
+        "daily_alert.jsonl": "712f9e957990ca0c261cbb91c1d10b0a12606da9d7293e6f2a1581309ce295e9",
+        "weekly_alert.jsonl": "fc9ec2335b48d42921ca9c14c63363efca3b3096f967733e366f4dd463e4b7ed",
+        "weekly_manifest.json": "e2e57f28fec7477af06029adcf187468701ab0305024993bfb2953bbd43cc5c0",
+        "monthly_manifest.json": "56d630107429cbcb646a951306dd1ea445dd5b3146236f34d0e8df953c103b9a"
+      },
+      "after": "999e010312fa39a54a5071d0fdef6738c8ed18bc",
+      "elapsed_s": 5.864,
+      "foreign_hook_preserved": true,
+      "wip_after": {
+        "daily_alert.jsonl": "712f9e957990ca0c261cbb91c1d10b0a12606da9d7293e6f2a1581309ce295e9",
+        "weekly_alert.jsonl": "fc9ec2335b48d42921ca9c14c63363efca3b3096f967733e366f4dd463e4b7ed",
+        "weekly_manifest.json": "e2e57f28fec7477af06029adcf187468701ab0305024993bfb2953bbd43cc5c0",
+        "monthly_manifest.json": "56d630107429cbcb646a951306dd1ea445dd5b3146236f34d0e8df953c103b9a"
+      },
+      "crlf_restored": [],
+      "index_empty": true,
+      "foreign_wip_preserved": true
+    },
+    "ff": {
+      "kind": "ff",
+      "action": "push",
+      "status": "SUCCESS",
+      "repo": "C:\\Users\\郑曾波\\Projects\\filing-fetch",
+      "before": "f9639caa04b54f73a1eeaef5b6072479c50459aa",
+      "files": [
+        "scripts/transcript_tool_transport.py",
+        "tests/test_transcript_owner_budget.py",
+        "tests/test_transcript_response_budget.py",
+        "scripts/ff_process_transport.py"
+      ],
+      "wip_before": {
+        "daily_alert.jsonl": "712f9e957990ca0c261cbb91c1d10b0a12606da9d7293e6f2a1581309ce295e9",
+        "weekly_alert.jsonl": "fc9ec2335b48d42921ca9c14c63363efca3b3096f967733e366f4dd463e4b7ed",
+        "weekly_manifest.json": "e2e57f28fec7477af06029adcf187468701ab0305024993bfb2953bbd43cc5c0",
+        "monthly_manifest.json": "56d630107429cbcb646a951306dd1ea445dd5b3146236f34d0e8df953c103b9a"
+      },
+      "after": "f9639caa04b54f73a1eeaef5b6072479c50459aa",
+      "elapsed_s": 5.077,
+      "foreign_hook_preserved": true,
+      "wip_after": {
+        "daily_alert.jsonl": "712f9e957990ca0c261cbb91c1d10b0a12606da9d7293e6f2a1581309ce295e9",
+        "weekly_alert.jsonl": "fc9ec2335b48d42921ca9c14c63363efca3b3096f967733e366f4dd463e4b7ed",
+        "weekly_manifest.json": "e2e57f28fec7477af06029adcf187468701ab0305024993bfb2953bbd43cc5c0",
+        "monthly_manifest.json": "56d630107429cbcb646a951306dd1ea445dd5b3146236f34d0e8df953c103b9a"
+      },
+      "crlf_restored": [],
+      "index_empty": true,
+      "foreign_wip_preserved": true
+    },
+    "ff-ci": {
+      "kind": "ff-ci",
+      "action": "push",
+      "status": "SUCCESS",
+      "repo": "C:\\Users\\郑曾波\\Projects\\filing-fetch",
+      "before": "b3f0b9cceb87338c64dc8ddd698707f01ac6691a",
+      "files": [
+        "tests/test_transcript_companion_transport.py"
+      ],
+      "wip_before": {
+        "daily_alert.jsonl": "712f9e957990ca0c261cbb91c1d10b0a12606da9d7293e6f2a1581309ce295e9",
+        "weekly_alert.jsonl": "fc9ec2335b48d42921ca9c14c63363efca3b3096f967733e366f4dd463e4b7ed",
+        "weekly_manifest.json": "e2e57f28fec7477af06029adcf187468701ab0305024993bfb2953bbd43cc5c0",
+        "monthly_manifest.json": "56d630107429cbcb646a951306dd1ea445dd5b3146236f34d0e8df953c103b9a"
+      },
+      "after": "b3f0b9cceb87338c64dc8ddd698707f01ac6691a",
+      "elapsed_s": 5.853,
+      "foreign_hook_preserved": true,
+      "wip_after": {
+        "daily_alert.jsonl": "712f9e957990ca0c261cbb91c1d10b0a12606da9d7293e6f2a1581309ce295e9",
+        "weekly_alert.jsonl": "fc9ec2335b48d42921ca9c14c63363efca3b3096f967733e366f4dd463e4b7ed",
+        "weekly_manifest.json": "e2e57f28fec7477af06029adcf187468701ab0305024993bfb2953bbd43cc5c0",
+        "monthly_manifest.json": "56d630107429cbcb646a951306dd1ea445dd5b3146236f34d0e8df953c103b9a"
+      },
+      "crlf_restored": [],
+      "index_empty": true,
+      "foreign_wip_preserved": true
+    },
+    "et": {
+      "kind": "et",
+      "action": "push",
+      "status": "SUCCESS",
+      "repo": "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts",
+      "before": "003c1c065109d0b02c7bd4de09ad3e8461a99c0e",
+      "files": [
+        "retrieval_budget.py",
+        "retrieval_runtime.py",
+        "scraper.py",
+        "transcript_api.py",
+        "transcript_artifact.py",
+        "transcript_audit.py",
+        "transcript_tool.py",
+        "tests/test_batch_runtime.py",
+        "tests/test_request_response_budget.py",
+        "tests/test_retrieval_runtime.py",
+        "tests/test_transcript_artifact.py",
+        "tests/test_explicit_response_budget.py",
+        "tests/test_optional_local_receipt.py"
+      ],
+      "wip_before": {
+        "daily_alert.jsonl": "712f9e957990ca0c261cbb91c1d10b0a12606da9d7293e6f2a1581309ce295e9",
+        "weekly_alert.jsonl": "fc9ec2335b48d42921ca9c14c63363efca3b3096f967733e366f4dd463e4b7ed",
+        "weekly_manifest.json": "e2e57f28fec7477af06029adcf187468701ab0305024993bfb2953bbd43cc5c0",
+        "monthly_manifest.json": "56d630107429cbcb646a951306dd1ea445dd5b3146236f34d0e8df953c103b9a"
+      },
+      "after": "003c1c065109d0b02c7bd4de09ad3e8461a99c0e",
+      "elapsed_s": 2.476,
+      "foreign_hook_preserved": true,
+      "wip_after": {
+        "daily_alert.jsonl": "712f9e957990ca0c261cbb91c1d10b0a12606da9d7293e6f2a1581309ce295e9",
+        "weekly_alert.jsonl": "fc9ec2335b48d42921ca9c14c63363efca3b3096f967733e366f4dd463e4b7ed",
+        "weekly_manifest.json": "e2e57f28fec7477af06029adcf187468701ab0305024993bfb2953bbd43cc5c0",
+        "monthly_manifest.json": "56d630107429cbcb646a951306dd1ea445dd5b3146236f34d0e8df953c103b9a"
+      },
+      "crlf_restored": [],
+      "index_empty": true,
+      "foreign_wip_preserved": true
+    },
+    "sk": {
+      "kind": "sk",
+      "action": "push",
+      "status": "LOCAL_MAIN_NO_REMOTE_CONFIGURED",
+      "repo": "C:\\Users\\郑曾波\\Projects\\StockWiki",
+      "before": "f52f257d4343f9a785e5a338088a789393db7357",
+      "files": [
+        "stockwiki/_narrative_process.py",
+        "stockwiki/_source_reader_v2_transport.py",
+        "stockwiki/_narrative_wire.py",
+        "stockwiki/narrative_source.py",
+        "stockwiki/_narrative_bundle.py",
+        "stockwiki/services/narrative_source.py",
+        "stockwiki/_source_reader_v2_wire.py",
+        "tests/test_r8_source_observations.py",
+        "tests/test_source_export_v2_bounded_transport.py",
+        "tests/test_narrative_reading_support_use.py",
+        "tests/test_source_export_v2_cli.py",
+        "tests/test_narrative_source.py",
+        "tests/test_narrative_source_cli.py"
+      ],
+      "wip_before": {
+        "daily_alert.jsonl": "712f9e957990ca0c261cbb91c1d10b0a12606da9d7293e6f2a1581309ce295e9",
+        "weekly_alert.jsonl": "fc9ec2335b48d42921ca9c14c63363efca3b3096f967733e366f4dd463e4b7ed",
+        "weekly_manifest.json": "e2e57f28fec7477af06029adcf187468701ab0305024993bfb2953bbd43cc5c0",
+        "monthly_manifest.json": "56d630107429cbcb646a951306dd1ea445dd5b3146236f34d0e8df953c103b9a"
+      },
+      "after": "f52f257d4343f9a785e5a338088a789393db7357",
+      "elapsed_s": 0.077,
+      "foreign_hook_preserved": true,
+      "wip_after": {
+        "daily_alert.jsonl": "712f9e957990ca0c261cbb91c1d10b0a12606da9d7293e6f2a1581309ce295e9",
+        "weekly_alert.jsonl": "fc9ec2335b48d42921ca9c14c63363efca3b3096f967733e366f4dd463e4b7ed",
+        "weekly_manifest.json": "e2e57f28fec7477af06029adcf187468701ab0305024993bfb2953bbd43cc5c0",
+        "monthly_manifest.json": "56d630107429cbcb646a951306dd1ea445dd5b3146236f34d0e8df953c103b9a"
+      },
+      "crlf_restored": [],
+      "index_empty": true,
+      "foreign_wip_preserved": true
+    }
+  },
+  "exact_ci": {
+    "rf": {
+      "repo": "revenue-forecast",
+      "head_sha": "75c3b0e0d1eb083ab29e8c9e833ed1f95c16e688",
+      "runs": [
+        {
+          "id": 41467964497,
+          "name": "quality",
+          "head_sha": "75c3b0e0d1eb083ab29e8c9e833ed1f95c16e688",
+          "head_branch": "main",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/41467964497",
+          "updated_at": "2026-11-02T15:05:20Z"
+        }
+      ]
+    },
+    "invest": {
+      "repo": "invest-skills",
+      "head_sha": "999e010312fa39a54a5071d0fdef6738c8ed18bc",
+      "runs": [
+        {
+          "id": 41468077791,
+          "name": "quality",
+          "head_sha": "999e010312fa39a54a5071d0fdef6738c8ed18bc",
+          "head_branch": "main",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/zhengcb81/invest-skills/actions/runs/41468077791",
+          "updated_at": "2026-11-02T15:05:47Z"
+        }
+      ]
+    },
+    "cwp": {
+      "repo": "company-wiki",
+      "head_sha": "a233fb37f200ea9b470e3926a14224c4dcaaca03",
+      "runs": [
+        {
+          "id": 41503775714,
+          "name": "CI",
+          "head_sha": "a233fb37f200ea9b470e3926a14224c4dcaaca03",
+          "head_branch": "master",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41503775714",
+          "updated_at": "2026-11-02T18:54:33Z"
+        }
+      ]
+    },
+    "ff": {
+      "repo": "filing-fetch",
+      "head_sha": "b3f0b9cceb87338c64dc8ddd698707f01ac6691a",
+      "runs": [
+        {
+          "id": 41495529161,
+          "name": "quality",
+          "head_sha": "b3f0b9cceb87338c64dc8ddd698707f01ac6691a",
+          "head_branch": "main",
+          "status": "completed",
+          "conclusion": "success",
+          "html_url": "https://github.com/zhengcb81/filing-fetch/actions/runs/41495529161",
+          "updated_at": "2026-11-02T17:56:21Z"
+        }
+      ]
+    },
+    "et": {
+      "repo": "earnings-transcripts",
+      "head_sha": "003c1c065109d0b02c7bd4de09ad3e8461a99c0e",
+      "runs": []
+    }
+  },
+  "deployments": {
+    "math": {
+      "status": "TARGETED_DEPLOYED_FRESH_PROCESSES_PASS",
+      "selected_files": {
+        "revenue-forecast": [
+          "scripts/forecast/calc.py"
+        ],
+        "invest-skills": [
+          "invest-core/scripts/invest_contracts.py"
+        ]
+      },
+      "configs_before": {
+        "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\config\\company_wiki.json": "7a65a00ecc526d5503359feed6a80a7578d3dbf4c8ef133ccf899aecf9383fb9",
+        "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\config\\filing_fetch.json": "1f5eb57d3e0697ae35fbc9f5d4b6e837459b56ea791508cc6ec5275b349b59b7",
+        "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast\\config\\company_wiki.json": "7a65a00ecc526d5503359feed6a80a7578d3dbf4c8ef133ccf899aecf9383fb9",
+        "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast\\config\\filing_fetch.json": "1f5eb57d3e0697ae35fbc9f5d4b6e837459b56ea791508cc6ec5275b349b59b7",
+        "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\config\\company_wiki.json": "7a65a00ecc526d5503359feed6a80a7578d3dbf4c8ef133ccf899aecf9383fb9",
+        "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\config\\filing_fetch.json": "1f5eb57d3e0697ae35fbc9f5d4b6e837459b56ea791508cc6ec5275b349b59b7"
+      },
+      "steps": [
+        {
+          "label": "install-revenue-forecast",
+          "command": [
+            "C:\\Miniconda\\python.exe",
+            "-B",
+            "-X",
+            "utf8",
+            "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\tools\\sync_installations.py",
+            "--canonical",
+            "C:\\Users\\郑曾波\\Projects\\revenue-forecast",
+            "--apply",
+            "--json",
+            "--file",
+            "scripts/forecast/calc.py"
+          ],
+          "returncode": 0
+        },
+        {
+          "label": "install-invest-skills",
+          "command": [
+            "C:\\Miniconda\\python.exe",
+            "-B",
+            "-X",
+            "utf8",
+            "C:\\Users\\郑曾波\\Projects\\invest-skills\\tools\\sync_installations.py",
+            "--canonical",
+            "C:\\Users\\郑曾波\\Projects\\invest-skills",
+            "--apply",
+            "--file",
+            "invest-core/scripts/invest_contracts.py"
+          ],
+          "returncode": 0
+        },
+        {
+          "label": "install-revenue-forecast-repeat",
+          "command": [
+            "C:\\Miniconda\\python.exe",
+            "-B",
+            "-X",
+            "utf8",
+            "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\tools\\sync_installations.py",
+            "--canonical",
+            "C:\\Users\\郑曾波\\Projects\\revenue-forecast",
+            "--apply",
+            "--json",
+            "--file",
+            "scripts/forecast/calc.py"
+          ],
+          "returncode": 0
+        },
+        {
+          "label": "install-invest-skills-repeat",
+          "command": [
+            "C:\\Miniconda\\python.exe",
+            "-B",
+            "-X",
+            "utf8",
+            "C:\\Users\\郑曾波\\Projects\\invest-skills\\tools\\sync_installations.py",
+            "--canonical",
+            "C:\\Users\\郑曾波\\Projects\\invest-skills",
+            "--apply",
+            "--file",
+            "invest-core/scripts/invest_contracts.py"
+          ],
+          "returncode": 0
+        }
+      ],
+      "installed": {
+        "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\scripts\\forecast\\calc.py": {
+          "sha256": "808e898df8f5eab8ebe0a9312a975a9aaba76c66ac9d290e3cfb26a3ee808ee8",
+          "mtime_ns": 1793630435545943700
+        },
+        "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast\\scripts\\forecast\\calc.py": {
+          "sha256": "808e898df8f5eab8ebe0a9312a975a9aaba76c66ac9d290e3cfb26a3ee808ee8",
+          "mtime_ns": 1793630435545943700
+        },
+        "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\scripts\\forecast\\calc.py": {
+          "sha256": "808e898df8f5eab8ebe0a9312a975a9aaba76c66ac9d290e3cfb26a3ee808ee8",
+          "mtime_ns": 1793630435545943700
+        },
+        "C:\\Users\\郑曾波\\.agents\\skills\\invest-core\\scripts\\invest_contracts.py": {
+          "sha256": "fa515d8a1de0a01e1cb802f40d1f388c8a1f79b78af018c0adcfa521cbaf8072",
+          "mtime_ns": 1793631958074047700
+        },
+        "C:\\Users\\郑曾波\\.claude\\skills\\invest-core\\scripts\\invest_contracts.py": {
+          "sha256": "fa515d8a1de0a01e1cb802f40d1f388c8a1f79b78af018c0adcfa521cbaf8072",
+          "mtime_ns": 1793631958121289900
+        },
+        "C:\\Users\\郑曾波\\.codex\\skills\\invest-core\\scripts\\invest_contracts.py": {
+          "sha256": "fa515d8a1de0a01e1cb802f40d1f388c8a1f79b78af018c0adcfa521cbaf8072",
+          "mtime_ns": 1793631958195071500
+        }
+      },
+      "repeat_zero_write": true,
+      "configs_after": {
+        "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\config\\company_wiki.json": "7a65a00ecc526d5503359feed6a80a7578d3dbf4c8ef133ccf899aecf9383fb9",
+        "C:\\Users\\郑曾波\\.agents\\skills\\revenue-forecast\\config\\filing_fetch.json": "1f5eb57d3e0697ae35fbc9f5d4b6e837459b56ea791508cc6ec5275b349b59b7",
+        "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast\\config\\company_wiki.json": "7a65a00ecc526d5503359feed6a80a7578d3dbf4c8ef133ccf899aecf9383fb9",
+        "C:\\Users\\郑曾波\\.claude\\skills\\revenue-forecast\\config\\filing_fetch.json": "1f5eb57d3e0697ae35fbc9f5d4b6e837459b56ea791508cc6ec5275b349b59b7",
+        "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\config\\company_wiki.json": "7a65a00ecc526d5503359feed6a80a7578d3dbf4c8ef133ccf899aecf9383fb9",
+        "C:\\Users\\郑曾波\\.codex\\skills\\revenue-forecast\\config\\filing_fetch.json": "1f5eb57d3e0697ae35fbc9f5d4b6e837459b56ea791508cc6ec5275b349b59b7"
+      },
+      "fresh_processes": [
+        {
+          "root": "C:\\Users\\郑曾波\\.agents\\skills",
+          "returncode": 0,
+          "stdout": "{\"status\": \"PASS\", \"results\": [{\"owner\": \"rf\", \"discount_value\": 48.101709809096995, \"long_formula\": true, \"real_invalid_controls\": true}, {\"owner\": \"invest\", \"discount_value\": 48.101709809096995, \"long_formula\": true, \"real_invalid_controls\": true}], \"network_calls\": 0}\r\n"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\.claude\\skills",
+          "returncode": 0,
+          "stdout": "{\"status\": \"PASS\", \"results\": [{\"owner\": \"rf\", \"discount_value\": 48.101709809096995, \"long_formula\": true, \"real_invalid_controls\": true}, {\"owner\": \"invest\", \"discount_value\": 48.101709809096995, \"long_formula\": true, \"real_invalid_controls\": true}], \"network_calls\": 0}\r\n"
+        },
+        {
+          "root": "C:\\Users\\郑曾波\\.codex\\skills",
+          "returncode": 0,
+          "stdout": "{\"status\": \"PASS\", \"results\": [{\"owner\": \"rf\", \"discount_value\": 48.101709809096995, \"long_formula\": true, \"real_invalid_controls\": true}, {\"owner\": \"invest\", \"discount_value\": 48.101709809096995, \"long_formula\": true, \"real_invalid_controls\": true}], \"network_calls\": 0}\r\n"
+        }
+      ],
+      "elapsed_s": 8.926,
+      "test_dir_restored_absent": true,
+      "paid_calls": 0,
+      "downloads": 0,
+      "original_writes": 0,
+      "logical_targets": 6
+    },
+    "filing_fetch": {
+      "status": "TARGETED_DEPLOYED_INSTALLED_OFFLINE_PASS",
+      "files": [
+        "scripts/transcript_tool_transport.py",
+        "scripts/ff_process_transport.py"
+      ],
+      "configs_before": {
+        "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\config\\company_wiki.json": "00911cfb2b191bc4bb856b6309c4da31a7b309850cbcd8c998a7eb4e003525cb",
+        "C:\\Users\\郑曾波\\.claude\\skills\\filing-fetch\\config\\company_wiki.json": "00911cfb2b191bc4bb856b6309c4da31a7b309850cbcd8c998a7eb4e003525cb",
+        "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch\\config\\company_wiki.json": "00911cfb2b191bc4bb856b6309c4da31a7b309850cbcd8c998a7eb4e003525cb"
+      },
+      "steps": [
+        {
+          "repeat": false,
+          "command": [
+            "C:\\Miniconda\\python.exe",
+            "-B",
+            "-X",
+            "utf8",
+            "C:\\Users\\郑曾波\\Projects\\filing-fetch\\tools\\sync_installs_b3.py",
+            "--install",
+            "--json",
+            "--file",
+            "scripts/transcript_tool_transport.py",
+            "--file",
+            "scripts/ff_process_transport.py"
+          ],
+          "returncode": 0
+        },
+        {
+          "repeat": true,
+          "command": [
+            "C:\\Miniconda\\python.exe",
+            "-B",
+            "-X",
+            "utf8",
+            "C:\\Users\\郑曾波\\Projects\\filing-fetch\\tools\\sync_installs_b3.py",
+            "--install",
+            "--json",
+            "--file",
+            "scripts/transcript_tool_transport.py",
+            "--file",
+            "scripts/ff_process_transport.py"
+          ],
+          "returncode": 0
+        }
+      ],
+      "installed": {
+        "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\transcript_tool_transport.py": {
+          "sha256": "d2a099533f6ac048d87dabecc5dbb198882637dfbe3dc738070b832e6cea50ea",
+          "mtime_ns": 1793641390002110200
+        },
+        "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\scripts\\ff_process_transport.py": {
+          "sha256": "9ddb6395d8af4ac4cd6da28ddabcf33355d5028f5ddbaebcebccb839f02682c1",
+          "mtime_ns": 1793641390002110200
+        },
+        "C:\\Users\\郑曾波\\.claude\\skills\\filing-fetch\\scripts\\transcript_tool_transport.py": {
+          "sha256": "d2a099533f6ac048d87dabecc5dbb198882637dfbe3dc738070b832e6cea50ea",
+          "mtime_ns": 1793641390002110200
+        },
+        "C:\\Users\\郑曾波\\.claude\\skills\\filing-fetch\\scripts\\ff_process_transport.py": {
+          "sha256": "9ddb6395d8af4ac4cd6da28ddabcf33355d5028f5ddbaebcebccb839f02682c1",
+          "mtime_ns": 1793641390002110200
+        },
+        "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch\\scripts\\transcript_tool_transport.py": {
+          "sha256": "d2a099533f6ac048d87dabecc5dbb198882637dfbe3dc738070b832e6cea50ea",
+          "mtime_ns": 1793641390002110200
+        },
+        "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch\\scripts\\ff_process_transport.py": {
+          "sha256": "9ddb6395d8af4ac4cd6da28ddabcf33355d5028f5ddbaebcebccb839f02682c1",
+          "mtime_ns": 1793641390002110200
+        }
+      },
+      "repeat_zero_write": true,
+      "configs_after": {
+        "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch\\config\\company_wiki.json": "00911cfb2b191bc4bb856b6309c4da31a7b309850cbcd8c998a7eb4e003525cb",
+        "C:\\Users\\郑曾波\\.claude\\skills\\filing-fetch\\config\\company_wiki.json": "00911cfb2b191bc4bb856b6309c4da31a7b309850cbcd8c998a7eb4e003525cb",
+        "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch\\config\\company_wiki.json": "00911cfb2b191bc4bb856b6309c4da31a7b309850cbcd8c998a7eb4e003525cb"
+      },
+      "fresh_processes": [
+        {
+          "installation": "C:\\Users\\郑曾波\\.agents\\skills\\filing-fetch",
+          "returncode": 0,
+          "stdout": "{\"status\": \"PASS_INSTALLED_OFFLINE\", \"complete_receipt_bytes\": 90000, \"caller_budget_propagated\": true, \"network_calls\": 0}\r\n"
+        },
+        {
+          "installation": "C:\\Users\\郑曾波\\.claude\\skills\\filing-fetch",
+          "returncode": 0,
+          "stdout": "{\"status\": \"PASS_INSTALLED_OFFLINE\", \"complete_receipt_bytes\": 90000, \"caller_budget_propagated\": true, \"network_calls\": 0}\r\n"
+        },
+        {
+          "installation": "C:\\Users\\郑曾波\\.codex\\skills\\filing-fetch",
+          "returncode": 0,
+          "stdout": "{\"status\": \"PASS_INSTALLED_OFFLINE\", \"complete_receipt_bytes\": 90000, \"caller_budget_propagated\": true, \"network_calls\": 0}\r\n"
+        }
+      ],
+      "elapsed_s": 2.76,
+      "restored_absent": true,
+      "paid_calls": 0,
+      "originals_modified": 0,
+      "logical_targets": 6,
+      "probe_source": "import json,socket,sys\nfrom pathlib import Path\nrepo,base=map(Path,sys.argv[1:])\nsys.path.insert(0,str(repo/'scripts'))\ndef forbidden(*a,**k):raise AssertionError('no network in deployment check')\nsocket.socket.connect=forbidden\nimport ff_process_transport as process\nimport transcript_tool_transport as et\nassert Path(process.__file__).resolve().is_relative_to(repo.resolve())\nassert Path(et.__file__).resolve().is_relative_to(repo.resolve())\nout,err,code=process.run_bounded_json([sys.executable,'-B','-c',\"import sys;sys.stdout.write('ok');sys.stderr.write('x'*90000)\"],\n    timeout_seconds=10,stdout_cap_bytes=2,stderr_cap_bytes=None)\nassert (out,len(err),code)==(b'ok',90000,0)\ntool=base/'unused.py';tool.write_text('# no network or external execution',encoding='utf-8')\nclient=et.EarningsTranscriptsTransport(wiki_root=base,transcript_tool=tool,deadline=1)\nclient._remaining=lambda:180\nclient._et_environment=lambda:({},None)\nseen=[]\ndef run(command,*,input_bytes,**kwargs):\n    seen.append((json.loads(input_bytes),kwargs))\n    return b'{\"status\":\"unavailable\",\"error_code\":\"provider_credentials_missing\"}',b'',0\net._run_bounded_json=run\nquota=21*1024*1024\nclient._et_result(request={'request_id':'installed-wire','security_id':'EXAMPLE','exchange':'NASDAQ',\n    'fiscal_year':2026,'fiscal_quarter':2,'as_of_date':'2026-09-30'},\n    limits={'max_bytes':quota,'timeout_seconds':150,'max_cost_usd':'0.00'})\nassert len(seen)==1\nrequest,kwargs=seen[0]\nassert request['max_body_bytes']==request['max_response_bytes']==quota\nassert request['timeout_seconds']==150 and kwargs['timeout_seconds']==153\nassert kwargs['stdout_cap_bytes']>quota*4/3\nprint(json.dumps({'status':'PASS_INSTALLED_OFFLINE','complete_receipt_bytes':len(err),'caller_budget_propagated':True,'network_calls':0}))\n"
+    }
+  },
+  "notes": [
+    "StockWiki local master only; no configured remote.",
+    "ET normal main pushed; no tracked GitHub workflow/Actions run for this commit.",
+    "No original/company source, real provider or LLM usage in this node.",
+    "Historical FAIL/author-freeze reports are preserved; current acceptance is the final review list."
+  ]
+}

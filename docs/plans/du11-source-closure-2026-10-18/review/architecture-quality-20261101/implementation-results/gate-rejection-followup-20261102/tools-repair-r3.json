@@ -1,0 +1,81 @@
+{
+  "schema_version": "gate-tools-repair-r3/1",
+  "status": "AUTHOR_R3_FROZEN_PENDING_INDEPENDENT_INCREMENTAL_REVIEW",
+  "preserved_r2_report_sha256": "93a97ced46934a852d789bd720bb136e4748ef9c02750d82872e1f852fa7531c",
+  "independent_failure_report_sha256": "5ef155de55c360eacc78816d0069f29cf362d526c3e465da92b06b6af7f05430",
+  "finding": "Diagnostic model-input body read/write errors prevented original native generate or HTTP boundary.",
+  "delivery_files_sha256": {
+    "src/company_wiki/_bounded_process.py": "0fe1ec07503055932ba9f6b05fa4143b56aaf8ce9861fac914bd581873f241f4",
+    "tools/document_understanding_benchmark/holdout_acceptance.py": "ec69dd77cb61034546261b9deab40c5df76c2da8e5e3e031efb9d2e0b64eaea4",
+    "tools/document_understanding_benchmark/holdout_acceptance_observer.py": "acba5095186e5498c997a9f20aa5d96a530bebf8df0da13712fb38ce7e4e2ec0",
+    "tests/unit/test_holdout_observation_isolation.py": "09bc0ee249ad73f80b5f6d4f3a050a7c6757074e1ff8bb45e12f651a58f8f1f7",
+    "tools/document_understanding_benchmark/phase_c_runner.py": "429bd2e6d4885770d16624d82dfb5c079eb4dfd1fec39178639f28a415e537e6",
+    "tools/holdout_replay/manifest.py": "f2411482c566867ae522b4c3f39ab0f2e69e55e5b85d661a2193e536e6b92380",
+    "tools/holdout_replay/runner.py": "859a2f96bcbe6bb3add1abe3c9d7bcf8112665dee497adb78514dd1677ba0d22",
+    "tools/holdout_replay/worker.py": "8e88073a8d6425e8cf5da6fb4199d99b1fe83d56fefd631157d39482154ae5ab",
+    "tools/holdout_replay/__main__.py": "06a7c82c22371d00c4cfad7a12c8c1f4ac4ca069087fc8101e9d9c4cc6b411a0",
+    "tests/unit/test_holdout_qualification_and_metadata.py": "16c90e160851b6f7f3e815a5fb9c73c1f93500f48d1249829d2b249330c0354d",
+    "tests/holdout/w18/test_manifest_freeze.py": "cd43d83507e1a3afef6d1af9f17db5c4769f43460b2bba67f2f5f7fe8318926c"
+  },
+  "delta_files_sha256": {
+    "tools/document_understanding_benchmark/holdout_acceptance_observer.py": "acba5095186e5498c997a9f20aa5d96a530bebf8df0da13712fb38ce7e4e2ec0",
+    "tests/unit/test_holdout_observation_isolation.py": "09bc0ee249ad73f80b5f6d4f3a050a7c6757074e1ff8bb45e12f651a58f8f1f7"
+  },
+  "repair": [
+    "Same observer owner observe_model_input is shared by generate and actual HTTP wrapper; no duplicated I/O permission branch.",
+    "Read/write/atomic-publication OSError records observation incomplete and returns unknown; original native execution and usage are not replaced by an observer exception.",
+    "Complete temporary staged snapshot (same model-input.json name) is atomically published; partial failed writes are never installed as a false known-mismatch baseline. Temporary data is cleaned, not another task/data store.",
+    "Successfully read and genuinely different bytes still refuse. Actual post-once exclusive latch/fsync and native paid pin/unknown usage/fault classification are unchanged.",
+    "Missing optional max_output_tokens in mismatch logging no longer throws KeyError instead of the true mismatch error."
+  ],
+  "tests": {
+    "red": {
+      "counts": {
+        "tests": "5",
+        "failures": "4",
+        "errors": "0",
+        "time": "5.639"
+      },
+      "junit": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"4\" skipped=\"0\" tests=\"5\" time=\"5.639\" timestamp=\"2026-11-02T15:09:09.727624+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tests.unit.test_holdout_observation_isolation\" name=\"test_model_input_observation_io_cannot_replace_native_success_or_one_post[write]\" time=\"0.466\"><failure message=\"OSError: synthetic snapshot write error\">tests\\unit\\test_holdout_observation_isolation.py:267: in test_model_input_observation_io_cannot_replace_native_success_or_one_post\n    assert BudgetedNarrativeCaller.generate(SimpleNamespace(_model=None,_run_id='synthetic'),\ntools\\document_understanding_benchmark\\holdout_acceptance_observer.py:122: in observed_generate\n    body_path.write_bytes(body)\ntests\\unit\\test_holdout_observation_isolation.py:263: in fail_write\n    raise OSError('synthetic snapshot write error')\nE   OSError: synthetic snapshot write error</failure></testcase><testcase classname=\"tests.unit.test_holdout_observation_isolation\" name=\"test_model_input_observation_io_cannot_replace_native_success_or_one_post[partial_write]\" time=\"0.025\"><failure message=\"OSError: synthetic snapshot write error\">tests\\unit\\test_holdout_observation_isolation.py:267: in test_model_input_observation_io_cannot_replace_native_success_or_one_post\n    assert BudgetedNarrativeCaller.generate(SimpleNamespace(_model=None,_run_id='synthetic'),\ntools\\document_understanding_benchmark\\holdout_acceptance_observer.py:122: in observed_generate\n    body_path.write_bytes(body)\ntests\\unit\\test_holdout_observation_isolation.py:263: in fail_write\n    raise OSError('synthetic snapshot write error')\nE   OSError: synthetic snapshot write error</failure></testcase><testcase classname=\"tests.unit.test_holdout_observation_isolation\" name=\"test_model_input_observation_io_cannot_replace_native_success_or_one_post[read]\" time=\"0.035\"><failure message=\"OSError: synthetic snapshot read error\">tests\\unit\\test_holdout_observation_isolation.py:267: in test_model_input_observation_io_cannot_replace_native_success_or_one_post\n    assert BudgetedNarrativeCaller.generate(SimpleNamespace(_model=None,_run_id='synthetic'),\ntools\\document_understanding_benchmark\\holdout_acceptance_observer.py:116: in observed_generate\n    if body_path.exists() and body_path.read_bytes() != body:\n                              ^^^^^^^^^^^^^^^^^^^^^^\ntests\\unit\\test_holdout_observation_isolation.py:257: in fail_read\n    raise OSError('synthetic snapshot read error')\nE   OSError: synthetic snapshot read error</failure></testcase><testcase classname=\"tests.unit.test_holdout_observation_isolation\" name=\"test_successfully_read_real_model_input_mismatch_still_refuses[generate]\" time=\"0.046\"><failure message=\"KeyError: 'max_output_tokens'\">tests\\unit\\test_holdout_observation_isolation.py:289: in test_successfully_read_real_model_input_mismatch_still_refuses\n    BudgetedNarrativeCaller.generate(SimpleNamespace(_model=None,_run_id='synthetic'),\ntools\\document_understanding_benchmark\\holdout_acceptance_observer.py:119: in observed_generate\n    actual_max_output_tokens=facts['max_output_tokens'])\n                             ^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   KeyError: 'max_output_tokens'</failure></testcase><testcase classname=\"tests.unit.test_holdout_observation_isolation\" name=\"test_successfully_read_real_model_input_mismatch_still_refuses[http]\" time=\"0.050\" /></testsuite></testsuites>",
+      "log": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\to7\\\\bt-red\", \"requested_basetemp_len\": 49, \"cwd_len\": 34, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\ncachedir: tmp\\to7\\pytest-cache\nbenchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\nconfigfile: pytest.ini\nplugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollected 5 items\n\ntests\\unit\\test_holdout_observation_isolation.py FFFF.                   [100%]\n\n================================== FAILURES ===================================\n_ test_model_input_observation_io_cannot_replace_native_success_or_one_post[write] _\ntests\\unit\\test_holdout_observation_isolation.py:267: in test_model_input_observation_io_cannot_replace_native_success_or_one_post\n    assert BudgetedNarrativeCaller.generate(SimpleNamespace(_model=None,_run_id='synthetic'),\ntools\\document_understanding_benchmark\\holdout_acceptance_observer.py:122: in observed_generate\n    body_path.write_bytes(body)\ntests\\unit\\test_holdout_observation_isolation.py:263: in fail_write\n    raise OSError('synthetic snapshot write error')\nE   OSError: synthetic snapshot write error\n_ test_model_input_observation_io_cannot_replace_native_success_or_one_post[partial_write] _\ntests\\unit\\test_holdout_observation_isolation.py:267: in test_model_input_observation_io_cannot_replace_native_success_or_one_post\n    assert BudgetedNarrativeCaller.generate(SimpleNamespace(_model=None,_run_id='synthetic'),\ntools\\document_understanding_benchmark\\holdout_acceptance_observer.py:122: in observed_generate\n    body_path.write_bytes(body)\ntests\\unit\\test_holdout_observation_isolation.py:263: in fail_write\n    raise OSError('synthetic snapshot write error')\nE   OSError: synthetic snapshot write error\n_ test_model_input_observation_io_cannot_replace_native_success_or_one_post[read] _\ntests\\unit\\test_holdout_observation_isolation.py:267: in test_model_input_observation_io_cannot_replace_native_success_or_one_post\n    assert BudgetedNarrativeCaller.generate(SimpleNamespace(_model=None,_run_id='synthetic'),\ntools\\document_understanding_benchmark\\holdout_acceptance_observer.py:116: in observed_generate\n    if body_path.exists() and body_path.read_bytes() != body:\n                              ^^^^^^^^^^^^^^^^^^^^^^\ntests\\unit\\test_holdout_observation_isolation.py:257: in fail_read\n    raise OSError('synthetic snapshot read error')\nE   OSError: synthetic snapshot read error\n__ test_successfully_read_real_model_input_mismatch_still_refuses[generate] ___\ntests\\unit\\test_holdout_observation_isolation.py:289: in test_successfully_read_real_model_input_mismatch_still_refuses\n    BudgetedNarrativeCaller.generate(SimpleNamespace(_model=None,_run_id='synthetic'),\ntools\\document_understanding_benchmark\\holdout_acceptance_observer.py:119: in observed_generate\n    actual_max_output_tokens=facts['max_output_tokens'])\n                             ^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   KeyError: 'max_output_tokens'\n--- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\to7\\red.xml ----\n=========================== short test summary info ===========================\nFAILED tests/unit/test_holdout_observation_isolation.py::test_model_input_observation_io_cannot_replace_native_success_or_one_post[write]\nFAILED tests/unit/test_holdout_observation_isolation.py::test_model_input_observation_io_cannot_replace_native_success_or_one_post[partial_write]\nFAILED tests/unit/test_holdout_observation_isolation.py::test_model_input_observation_io_cannot_replace_native_success_or_one_post[read]\nFAILED tests/unit/test_holdout_observation_isolation.py::test_successfully_read_real_model_input_mismatch_still_refuses[generate]\n========================= 4 failed, 1 passed in 5.66s =========================\n"
+    },
+    "green": {
+      "counts": {
+        "tests": "7",
+        "failures": "0",
+        "errors": "0",
+        "time": "4.510"
+      },
+      "junit": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"0\" skipped=\"0\" tests=\"7\" time=\"4.510\" timestamp=\"2026-11-02T15:10:21.182795+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tests.unit.test_holdout_observation_isolation\" name=\"test_model_input_observation_io_cannot_replace_native_success_or_one_post[write]\" time=\"0.397\" /><testcase classname=\"tests.unit.test_holdout_observation_isolation\" name=\"test_model_input_observation_io_cannot_replace_native_success_or_one_post[partial_write]\" time=\"0.066\" /><testcase classname=\"tests.unit.test_holdout_observation_isolation\" name=\"test_model_input_observation_io_cannot_replace_native_success_or_one_post[read]\" time=\"0.051\" /><testcase classname=\"tests.unit.test_holdout_observation_isolation\" name=\"test_successfully_read_real_model_input_mismatch_still_refuses[generate]\" time=\"0.036\" /><testcase classname=\"tests.unit.test_holdout_observation_isolation\" name=\"test_successfully_read_real_model_input_mismatch_still_refuses[http]\" time=\"0.033\" /><testcase classname=\"tests.unit.test_holdout_observation_isolation\" name=\"test_diagnostic_failure_preserves_explicit_fault_and_durable_pin_requirement[True-after_paid]\" time=\"0.044\" /><testcase classname=\"tests.unit.test_holdout_observation_isolation\" name=\"test_diagnostic_failure_preserves_explicit_fault_and_durable_pin_requirement[False-after_paid]\" time=\"0.037\" /></testsuite></testsuites>",
+      "log": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\to7\\\\bt-green\", \"requested_basetemp_len\": 51, \"cwd_len\": 34, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\ncachedir: tmp\\to7\\pytest-cache\nbenchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\nconfigfile: pytest.ini\nplugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollected 7 items\n\ntests\\unit\\test_holdout_observation_isolation.py .......                 [100%]\n\n-- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\to7\\green.xml ---\n============================== 7 passed in 4.51s ==============================\n"
+    }
+  },
+  "test_scope": "Only five new source-I/O/mismatch cases:4F1P -> with two original explicit fault/durable-pin controls7P. No repeat20/22/27/56 or actual model/native company run.",
+  "static": "Ruff observer and dedicated test PASS.",
+  "commands": [
+    "C:/Miniconda/python.exe -B -X utf8 -m pytest <model_input_observation_io3 + successfully_read_mismatch2> -q -o cache_dir=tmp/to7/pytest-cache --basetemp=tmp/to7/bt-red --junitxml=tmp/to7/red.xml",
+    "Same five plus diagnostic_failure_preserves_explicit_fault_and_durable_pin_requirement2: --basetemp=tmp/to7/bt-green --junitxml=tmp/to7/green.xml",
+    "C:/Miniconda/python.exe -B -m ruff check tools/document_understanding_benchmark/holdout_acceptance_observer.py tests/unit/test_holdout_observation_isolation.py"
+  ],
+  "paid": 0,
+  "actual_http": 0,
+  "network": 0,
+  "originals": 0,
+  "limits": [
+    "All HTTP transport/native generate calls in these tests are explicit in-process synthetic seams; no paid call or company acceptance is claimed.",
+    "Original R2 and independent NEEDS_FIXES reports preserved. ROOT assigns same-node independent incremental review of final11/delta2; no self-review or publication.",
+    "No main PWF/Git/index/config/production originals/global install changes."
+  ],
+  "cleanup": {
+    "owned_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\to7",
+    "initially_absent": true,
+    "status": "RESTORED_ABSENT",
+    "absolute_parent_verified": true,
+    "reparse_nodes": 0,
+    "removed_files": 40,
+    "removed_bytes": 23205.0,
+    "exists_after": false,
+    "evidence_saved_before_deletion": true,
+    "pytest_cache_isolated": true
+  }
+}

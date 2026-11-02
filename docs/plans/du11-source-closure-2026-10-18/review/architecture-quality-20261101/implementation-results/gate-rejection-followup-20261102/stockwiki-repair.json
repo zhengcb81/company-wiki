@@ -1,0 +1,43 @@
+{
+  "status": "AUTHOR_FROZEN_PENDING_INDEPENDENT_REVIEW",
+  "owner": "ROOT",
+  "repository": "C:\\Users\\郑曾波\\Projects\\StockWiki",
+  "manifest": {
+    "stockwiki/_narrative_process.py": "54c8545a30cf76be644aca912abc8791694a315d3024c2d78484459e0443c6e2",
+    "stockwiki/_source_reader_v2_transport.py": "f2817d2458d0c076455fd0b6d24ab5e285f5857a371850d3a04d9cfa19f60f81",
+    "stockwiki/_narrative_wire.py": "f4c423b87fdae5f1ac982b07ea652ab32970b78051b92cf72b548f2eb9edc8c0",
+    "stockwiki/narrative_source.py": "bd5dea3518c134cce4c1ad518093484f9080a693d9f25677db9edb4ddc6d2ea3",
+    "stockwiki/_narrative_bundle.py": "edb43d55030da547f54d2d2ea5175b21b42ee75f1782d85c8cb8b32cb76faa3b",
+    "stockwiki/services/narrative_source.py": "812b39e5f5cda7653242926ed1664bfc0d705c68391b78961d129bbc021ca162",
+    "stockwiki/_source_reader_v2_wire.py": "3a241311e5177101ca0e883a2d5a249e2fb96365e3a1ddad3c7f5ad885d825b1",
+    "tests/test_r8_source_observations.py": "c01f19ca9ce5d6b728b152f89ee855bdd338669a31236ec7812b3ece2acec89e",
+    "tests/test_source_export_v2_bounded_transport.py": "b458f22170b87045e8737a18c8b30492ba7cfcb8c9873545e2c5d110cca7008c",
+    "tests/test_narrative_reading_support_use.py": "9e57639c77e0a13c1f48d519b2906660c6ad79333a419c0c5e0639f8ba3e4991",
+    "tests/test_source_export_v2_cli.py": "370f7724e007bfbeeb2a31140f89fb798ca75fe54ae09d9e2f3c581403427fb2",
+    "tests/test_narrative_source.py": "b517663513eae0595680713849256e62c12832ccc2be9c4ecdc9cd9a487e4998",
+    "tests/test_narrative_source_cli.py": "5b9416f7c6bddbef448e39b2915adecb91095937cbc6af5d0cb070225fcf2fcf"
+  },
+  "test_records": [
+    "sk-residual-r8-red-refined",
+    "sk-residual-r8-green",
+    "sk-residual-r8-cli-red",
+    "sk-residual-r8-affected",
+    "sk-residual-r8-format-red",
+    "sk-residual-r8-format-green"
+  ],
+  "test_record_root": ".planning/architecture-quality-20261101/r7-publication",
+  "limits": {
+    "paid_calls": 0,
+    "downloads": 0,
+    "original_writes": 0,
+    "config_writes": 0
+  },
+  "boundaries": [
+    "Actual stdout/timeout/process-tree and explicit receipt budgets remain while reading.",
+    "Source/artifact original bytes, SHA, identity, period/as-of, citations and support-context partitions still verified.",
+    "Unknown/missing optional review remains not_reviewed; no promotion to source/research verified.",
+    "Whole formatted JSON and one schema-matching JSON-line plus benign diagnostics accepted; different competing receipts rejected.",
+    "Known current schema extensions preserved; no arbitrary acceptance of unknown core fields.",
+    "No remote configured for StockWiki; later normal local master commit only unless configuration changes externally."
+  ]
+}

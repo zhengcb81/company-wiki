@@ -1,0 +1,1724 @@
+{
+  "schema_version": "cwp-contract-quota-followup/1",
+  "status": "TEST_ONLY_CONTRACT_MIGRATION_FROZEN_SEMANTIC_OBSERVATION_OPEN",
+  "owner": "/root/rectify_readability",
+  "ci_history": {
+    "run": "41498876032",
+    "head": "77d8c83f",
+    "unit_status": "successful as reported by ROOT; not rerun locally",
+    "focused_status": "failed: test_prompt_twenty_claim_and_280_character_limits_are_real_output_contracts",
+    "old_failure_preserved": true
+  },
+  "old_test_sha256_at_ci_head": "bb875e64e61cfae98cf380862c7ef4e59cb5e3b303f5694de4fdb21ca15699cf",
+  "delivery_files_sha256": {
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\contract\\test_summary_group_coverage.py": "a10ace0972d824465c8aeed535879569bdcb183a06bc4cd9f42918335fa8b117"
+  },
+  "product_source_and_fixture_checks": {
+    "src/company_wiki/automation/narrative_model.py": {
+      "frozen": "e62a1cecffa783dced349578cbbf1627edd9207f4343ffd78662c35f6de80216",
+      "actual": "e62a1cecffa783dced349578cbbf1627edd9207f4343ffd78662c35f6de80216"
+    },
+    "src/company_wiki/automation/narrative_model_scoped.py": {
+      "frozen": "4b7be2625e2428054ad79d760b7f61ed462268590a92968c972e1476f6b2ee69",
+      "actual": "4b7be2625e2428054ad79d760b7f61ed462268590a92968c972e1476f6b2ee69"
+    },
+    "src/company_wiki/automation/narrative_model_runtime.py": {
+      "frozen": "89c71ca89939322271fc0e7e4bb3e02c3a8e3b70d7de950ab35c0dc62abdff5b",
+      "actual": "89c71ca89939322271fc0e7e4bb3e02c3a8e3b70d7de950ab35c0dc62abdff5b"
+    },
+    "src/company_wiki/automation/narrative_summary_protocols.py": {
+      "frozen": "ff88f8db4d5935f70462ec4268d15ba9495e77df57138714cbc62e54f1689a45",
+      "actual": "ff88f8db4d5935f70462ec4268d15ba9495e77df57138714cbc62e54f1689a45"
+    },
+    "tests/fixtures/atomic_recipe_legacy_requests.json": {
+      "frozen": "2be3eaebf88763484324162d4d20a39042320a0b7ee8d3d0520fc86b6568b53d",
+      "actual": "2be3eaebf88763484324162d4d20a39042320a0b7ee8d3d0520fc86b6568b53d"
+    }
+  },
+  "repair": {
+    "files": 1,
+    "test_only": true,
+    "original": "Fixed twenty/280 completed-output refusal was still an executable contract oracle outside the previous Unit-only impact closure.",
+    "valid_output": "21complete independent source quotes use real singleton citations without nonexistent group aliases; one>280char exact English quote retains customer acceptance/authorization/permits/testing/no-confirmed-commissioning restrictions and planned modality.",
+    "negatives": "21foreign-ref claims still reject; wrong original SHA still rejects; omitted conditional support member in declared group still rejects; supported finite future-condition rewrite records existing modality-loss diagnostic.",
+    "not_weakened": "No test deleted, no source changed, no config/advisory count or historical gzip/raw/hash regenerated. Actual source/reference/group/identity failures stay."
+  },
+  "tests": {
+    "red": "Exact old contract1F/2.12s DID_NOT_RAISE, not assumed oracle before reproduction.",
+    "first_focused_dispatch": "0tests executed: disabled plugin autoload hid existing pytest_timeout, so --timeout=180 could not parse. Diagnostic retained; reran same actual entry explicitly loading installed pytest_timeout, preserving original180s bound.",
+    "actual_focused_once": "Actual CI tools/pre_push_gate.py --fast-contracts-only executed22case specs/16unique files/149tests:147P2F/31.69s.",
+    "focused_two_failures": [
+      "New positive singleton fixture incorrectly declared nonexistent g1..g21 groups; corrected to actual independent alias scopes, without any production change.",
+      "New condition example was genuinely missed by finite diagnostic owner; its full original result is preserved as an OPEN semantic capability gap, not called a fixture-only mistake or closed by substituting another example."
+    ],
+    "targeted_fix": "Only2failed cases rerun:2P/2.31s. Supported condition pattern retained as bounded existing-owner regression; uncovered initial shape remains OPEN below. No149orUnit rerun.",
+    "ruff": "Changed single contract Python file PASS."
+  },
+  "exact_execution": {
+    "entry": "C:/Miniconda/python.exe -B -X utf8 tools/pre_push_gate.py --fast-contracts-only --junitxml=tmp/cc7/focused.xml",
+    "environment": "PYTHONPATH=src;tests; PYTEST_DISABLE_PLUGIN_AUTOLOAD=1; PYTHONDONTWRITEBYTECODE=1; PYTEST_ADDOPTS=--basetemp=tmp/cc7/focused -p no:cacheprovider -p pytest_timeout",
+    "actual_ci_selection": {
+      "entry": "tools/pre_push_gate.py --fast-contracts-only",
+      "cases": [
+        "tests/contract/test_local_prepare_failure_boundaries.py::test_real_discovery_completed_write_survives_later_unknown_failure",
+        "tests/document_normalization/test_ocr_region_recovery.py::test_roi_budget_preflight_never_calls_rejected_renderer",
+        "tests/document_normalization/test_ocr_region_recovery.py::test_rejected_render_attempt_keeps_reserved_budget",
+        "tests/document_normalization/test_ocr_region_recovery.py::test_upscale_preflight_accounts_for_64m_canvas_without_allocating_it",
+        "tests/document_normalization/test_isolated_ocr.py::test_noncooperative_native_stops_at_product_deadline[gil-block-inference-infer]",
+        "tests/document_normalization/test_isolated_ocr.py::test_native_stdin_probe_does_not_deadlock_liveness_monitor[preflight]",
+        "tests/document_normalization/test_isolated_ocr.py::test_narrative_default_proxy_carries_deadline_without_starting_native",
+        "tests/integration/test_m3_official_json_acceptance.py",
+        "tests/contract/test_zr203_reader_rewire.py::test_read_entrypoints_never_construct_catalog_store",
+        "tests/contract/test_zr1003_shadow_assertions.py::test_c2_recorded_review_is_diagnostic_metadata",
+        "tests/contract/test_zr1006_broker_cohort.py::test_c2_ramp_1_to_3_to_7",
+        "tests/contract/test_source_catalog_temp_worker_governance.py::test_owned_temp_worker_helper_detects_test_pid",
+        "tests/contract/test_source_catalog_temp_worker_governance.py::test_stop_does_not_touch_unowned_live_workers_or_temporary_files",
+        "tests/contract/test_narrative_output_plan.py",
+        "tests/contract/test_summary_group_coverage.py",
+        "tests/contract/test_official_transcript_layouts.py",
+        "tests/contract/test_transcript_speaker_affiliation.py",
+        "tests/contract/test_source_scope_qualification.py",
+        "tests/contract/test_narrative_availability.py::test_one_verified_original_buffer_one_owner_lookup_no_new_fact_writer",
+        "tests/contract/test_narrative_availability.py::test_projected_two_parents_cannot_borrow_one_raw_proof",
+        "tests/contract/test_fc905_receipt_envelope.py::test_pi03_no_review_is_explicit_not_reviewed",
+        "tests/contract/test_b10_read_chain.py::test_b10_scan_is_not_vacuous"
+      ],
+      "unique_files": [
+        "tests/contract/test_local_prepare_failure_boundaries.py",
+        "tests/document_normalization/test_ocr_region_recovery.py",
+        "tests/document_normalization/test_isolated_ocr.py",
+        "tests/integration/test_m3_official_json_acceptance.py",
+        "tests/contract/test_zr203_reader_rewire.py",
+        "tests/contract/test_zr1003_shadow_assertions.py",
+        "tests/contract/test_zr1006_broker_cohort.py",
+        "tests/contract/test_source_catalog_temp_worker_governance.py",
+        "tests/contract/test_narrative_output_plan.py",
+        "tests/contract/test_summary_group_coverage.py",
+        "tests/contract/test_official_transcript_layouts.py",
+        "tests/contract/test_transcript_speaker_affiliation.py",
+        "tests/contract/test_source_scope_qualification.py",
+        "tests/contract/test_narrative_availability.py",
+        "tests/contract/test_fc905_receipt_envelope.py",
+        "tests/contract/test_b10_read_chain.py"
+      ],
+      "case_specs": 22,
+      "file_count": 16
+    },
+    "subset_after_fix": "pytest only test_valid_source_output_keeps_twenty_one_claims_and_long_qualifiers_without_extra_quotas and test_condition_support_and_finite_modality_diagnostics_survive_quota_retirement, --basetemp tmp/cc7/fix"
+  },
+  "test_impact_matrix": {
+    "scan_python_files": 1062,
+    "area_file_counts": {
+      "conftest.py": 1,
+      "test_budget_policy_totals.py": 1,
+      "test_config_doctor.py": 1,
+      "test_phase_c_activation_recovery.py": 1,
+      "test_phase_c_extractive.py": 1,
+      "test_phase_c_finalization.py": 1,
+      "test_phase_c_readonly_source.py": 1,
+      "test_rank_material_observation.py": 1,
+      "test_relevance.py": 1,
+      "acceptance": 2,
+      "archive": 1,
+      "contract": 244,
+      "document_normalization": 12,
+      "e2e": 10,
+      "financial_statements": 13,
+      "helpers": 7,
+      "integration": 128,
+      "support": 26,
+      "unit": 593,
+      "holdout": 2,
+      "fixtures": 15
+    },
+    "matched_files": 70,
+    "matched_lines": 161,
+    "pattern": "twenty|forty|280|CLAIMS_LIMIT|CLAIM_TEXT|per[-_ ]task.{0,45}(cap|limit)|(max_claims(_per_task)?|target_claim_count|maxItems|maxLength).{0,75}\\b(2|6|20|40|280)\\b|(raises|reject|enforce).{0,75}(claim|clause|quota)",
+    "matrix": [
+      {
+        "path": "tests/contract/test_gold_mutations.py",
+        "disposition": "KEPT_REAL_SOURCE_REFERENCE_ROLE_OR_STATE_CORRECTNESS",
+        "reason": "The matched reject/claim words concern absent/foreign/duplicate source refs, stale execution, invalid role or blank prose; no arbitrary20/280 output license.",
+        "matches": [
+          {
+            "line": 145,
+            "function": "test_claim_source_reference_is_rejected",
+            "text": "        with pytest.raises(ValueError, match=\"claim source reference missing\"):"
+          }
+        ],
+        "current_file_sha256": "90865c49b9d3dc84186bee1f0165ea371701d65cd6b10e3178de9c035aa7cd0a"
+      },
+      {
+        "path": "tests/contract/test_local_discovery_limits.py",
+        "disposition": "KEPT_ACTUAL_WORK_DISCOVERY_OR_RESOURCE_CONTROLS",
+        "reason": "twenty or counts denote discovery/priority/workload scale, reclaimability or configured memory/work budgets, not the retired generated-claim quota.",
+        "matches": [
+          {
+            "line": 35,
+            "function": "test_twenty_six_metadata_groups_do_not_consume_sixteen_raw_candidates",
+            "text": "def test_twenty_six_metadata_groups_do_not_consume_sixteen_raw_candidates(tmp_path):"
+          }
+        ],
+        "current_file_sha256": "f8acce499202e3025a68abc42189a84deab0a299a346e6cad26236d2f7e1171c"
+      },
+      {
+        "path": "tests/contract/test_narrative_output_plan.py",
+        "disposition": "KEPT_ADVISORY_PLAN_OR_FINITE_DIAGNOSTIC_OBSERVATION",
+        "reason": "20/40/2 are planning/identity/material-budget inputs, not completed-result maxItems/maxLength permissions. Remaining references/quality diagnostics bind actual selected scopes. Diagnostic sampling retains complete count and limitation metadata, not source rejection.",
+        "matches": [
+          {
+            "line": 50,
+            "function": "generate",
+            "text": "        count = min(plan[\"target_claim_count\"], 6) if plan else 96"
+          },
+          {
+            "line": 93,
+            "function": "test_96_span_compact_plan_is_material_excerpt_not_row_enumeration_and_preserves_every_source_row",
+            "text": "    assert 1 <= plan[\"target_claim_count\"] <= 8 < 96 and plan[\"max_claims\"] == 20"
+          },
+          {
+            "line": 124,
+            "function": "test_compact_plan_uses_real_configured_cap_without_changing_model_or_generation_options",
+            "text": "    assert 1 <= plan[\"target_claim_count\"] <= 8 and plan[\"max_claims\"] == 20"
+          }
+        ],
+        "current_file_sha256": "58158e43fd2ad86305c0d6af15b0d288b27564a1e6385cd945de44dd9a777ecb"
+      },
+      {
+        "path": "tests/contract/test_r4b02_candidate_selection.py",
+        "disposition": "KEPT_ACTUAL_WORK_DISCOVERY_OR_RESOURCE_CONTROLS",
+        "reason": "twenty or counts denote discovery/priority/workload scale, reclaimability or configured memory/work budgets, not the retired generated-claim quota.",
+        "matches": [
+          {
+            "line": 791,
+            "function": "test_r4b02_rejected_copy_stays_reclaimable_next_to_healthy_copies",
+            "text": "def test_r4b02_rejected_copy_stays_reclaimable_next_to_healthy_copies(tmp_path):"
+          }
+        ],
+        "current_file_sha256": "04ed0d83387e96f993974e3c06eefbb949edb5a26cbd1d23aac13b523be52ce3"
+      },
+      {
+        "path": "tests/contract/test_source_catalog_security_identity.py",
+        "disposition": "NOT_A_SUMMARY_OUTPUT_LICENSE_LITERAL",
+        "reason": "Reviewed matched text is a page/box/table value, numeric unit/data, identity snapshot or market form name (for example20-F); it contains no generated-summary count/length refusal.",
+        "matches": [
+          {
+            "line": 258,
+            "function": "_workbook_bytes",
+            "text": "        [2800, \"TRACKER FUND\", \"Exchange Traded Products\", \"Exchange Traded Funds\"]"
+          }
+        ],
+        "current_file_sha256": "a03a430b7cdd0ec58cfcd36ddb4bba4fc12210a148a205a0f89e051fd2b5ee71"
+      },
+      {
+        "path": "tests/contract/test_summary_group_coverage.py",
+        "disposition": "MIGRATED_RETIRED_LICENSE_ORACLE",
+        "reason": "Only active old-output gate found: expected21claims/281characters to reject. Replaced by complete pinned21 independent quotes and >280char qualified source preservation; unrelated bad reference/source/group/condition checks kept or strengthened.",
+        "matches": [
+          {
+            "line": 148,
+            "function": "test_unknown_duplicate_or_invalid_group_declaration_is_not_silently_stripped",
+            "text": "    with pytest.raises(NarrativeContractError, match=\"summary claim evidence group\"):"
+          },
+          {
+            "line": 272,
+            "function": "test_duplicate_or_overpinned_citations_cannot_satisfy_a_finite_claim_reference_contract",
+            "text": "    with pytest.raises(NarrativeContractError, match=\"summary claim evidence IDs\"):"
+          },
+          {
+            "line": 278,
+            "function": "test_prompt_twenty_claim_and_280_character_limits_are_real_output_contracts",
+            "text": "def test_prompt_twenty_claim_and_280_character_limits_are_real_output_contracts():"
+          },
+          {
+            "line": 284,
+            "function": "test_prompt_twenty_claim_and_280_character_limits_are_real_output_contracts",
+            "text": "    with pytest.raises(NarrativeContractError, match=\"summary claims exceed twenty\"):"
+          },
+          {
+            "line": 286,
+            "function": "test_prompt_twenty_claim_and_280_character_limits_are_real_output_contracts",
+            "text": "    with pytest.raises(NarrativeContractError, match=\"summary claim text exceeds 280\"):"
+          },
+          {
+            "line": 352,
+            "function": "test_group_alias_and_canonical_citation_mixing_cannot_create_duplicate_references",
+            "text": "    with pytest.raises(NarrativeContractError, match=\"summary claim evidence IDs\"):"
+          }
+        ],
+        "current_file_sha256": "a10ace0972d824465c8aeed535879569bdcb183a06bc4cd9f42918335fa8b117"
+      },
+      {
+        "path": "tests/document_normalization/test_ocr_region_composition.py",
+        "disposition": "NOT_A_SUMMARY_OUTPUT_LICENSE_LITERAL",
+        "reason": "Reviewed matched text is a page/box/table value, numeric unit/data, identity snapshot or market form name (for example20-F); it contains no generated-summary count/length refusal.",
+        "matches": [
+          {
+            "line": 158,
+            "function": "test_unrecovered_region_surfaces_quality_counts_and_keeps_good_lines",
+            "text": "        (OCRLine(\"g ar b l ed\", (0.0, 0.0, 280.0, 30.0), 0.44),),"
+          },
+          {
+            "line": 394,
+            "function": "test_recovery_pixel_budget_rejects_before_roi_inference",
+            "text": "    fake = RecoveryFakeOCR((OCRLine(\"Recovered complete line\", (2., 12., 280., 35.), .99),), size)"
+          }
+        ],
+        "current_file_sha256": "f355a81c34193d87bb510d3f36b1e70e4731ef2a80c98ad0c70cdb1678752b3f"
+      },
+      {
+        "path": "tests/document_normalization/test_ocr_region_recovery.py",
+        "disposition": "NOT_A_SUMMARY_OUTPUT_LICENSE_LITERAL",
+        "reason": "Reviewed matched text is a page/box/table value, numeric unit/data, identity snapshot or market form name (for example20-F); it contains no generated-summary count/length refusal.",
+        "matches": [
+          {
+            "line": 134,
+            "function": "test_margin_crop_roundtrip_maps_box_by_translation",
+            "text": "    mapped = rr.map_box(transform, (5.0, 7.0, 280.0, 30.0))"
+          },
+          {
+            "line": 138,
+            "function": "test_margin_crop_roundtrip_maps_box_by_translation",
+            "text": "    assert mapped[2] == pytest.approx(WIDE[0] + 280.0, abs=1e-6)"
+          },
+          {
+            "line": 194,
+            "function": "test_recover_accepts_margin_crop_line_and_reports_records",
+            "text": "    recovered_line = OCRLine(\"We will transition\", (4.0, 9.0, 280.0, 26.0), 0.989)"
+          },
+          {
+            "line": 229,
+            "function": "test_recover_rejects_below_threshold_and_garbled_stitching",
+            "text": "            (OCRLine(\"g ar b l ed\", (0.0, 0.0, 280.0, 30.0), 0.44),),"
+          },
+          {
+            "line": 569,
+            "function": "test_filtered_low_score_remainder_prevents_partial_recovery",
+            "text": "                remainder = dropped((100*scale, 12*scale, 280*scale, 35*scale), .3, \"unread material qualifier\")"
+          },
+          {
+            "line": 584,
+            "function": "test_dropped_neighbor_outside_source_region_does_not_veto_recovery",
+            "text": "    clean = OCRLine(\"Complete source line\", (1., 12., 280., 35.), .99)"
+          },
+          {
+            "line": 679,
+            "function": "test_dropped_source_fragment_with_outside_center_stays_unrecovered",
+            "text": "            clean = OCRLine(\"Clean part of source\", (1., 12*scale, 280*scale, 35*scale), .99)"
+          }
+        ],
+        "current_file_sha256": "3acea08f310eb21549b5353e4f092ec4956bcba6be953f5eef6e52704211aa50"
+      },
+      {
+        "path": "tests/fixtures/document_normalization_layout_snapshots/native_probe.py",
+        "disposition": "KEPT_IMMUTABLE_CAPTURE_OR_LITERAL_DATA",
+        "reason": "Digest/blob/capture/coordinate data contains these digits; no normative completed-summary rejection. No fixture/gzip/raw/history regenerated.",
+        "matches": [
+          {
+            "line": 63,
+            "function": "<module>",
+            "text": "        \"sha256\": \"37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e\","
+          }
+        ],
+        "current_file_sha256": "501b323578bb8a011604101ed18a454ca6975f2da55ee5a8d4728e0125f30c0a"
+      },
+      {
+        "path": "tests/fixtures/document_normalization_layout_snapshots/synth.py",
+        "disposition": "KEPT_IMMUTABLE_CAPTURE_OR_LITERAL_DATA",
+        "reason": "Digest/blob/capture/coordinate data contains these digits; no normative completed-summary rejection. No fixture/gzip/raw/history regenerated.",
+        "matches": [
+          {
+            "line": 392,
+            "function": "two_column_units_case",
+            "text": "    b_left = _binding(\"u-left\", (60.0, 100.0, 280.0, 400.0), words=["
+          }
+        ],
+        "current_file_sha256": "838bcafb6b5d63b8a3898bcff97b32ed187cfc300c65e974e373f4449b3cff01"
+      },
+      {
+        "path": "tests/fixtures/document_understanding_layout_hints/build_inputs.py",
+        "disposition": "KEPT_IMMUTABLE_CAPTURE_OR_LITERAL_DATA",
+        "reason": "Digest/blob/capture/coordinate data contains these digits; no normative completed-summary rejection. No fixture/gzip/raw/history regenerated.",
+        "matches": [
+          {
+            "line": 102,
+            "function": "build_all",
+            "text": "                    unit(7, \"Left column paragraph three adds risks.\", (70, 164, 280, 178), size=9.0),"
+          },
+          {
+            "line": 196,
+            "function": "build_all",
+            "text": "                    unit(16, \"注：数据来源于公司内部统计。\", (70, 268, 270, 280), size=8.0, kind=\"footnote\"),"
+          }
+        ],
+        "current_file_sha256": "1a05f422a95db50d43c518e3a0c1358e36f2e076872ea5493b310ceb1b1066c3"
+      },
+      {
+        "path": "tests/fixtures/document_understanding_layout_hints/real_probe.py",
+        "disposition": "KEPT_IMMUTABLE_CAPTURE_OR_LITERAL_DATA",
+        "reason": "Digest/blob/capture/coordinate data contains these digits; no normative completed-summary rejection. No fixture/gzip/raw/history regenerated.",
+        "matches": [
+          {
+            "line": 37,
+            "function": "<module>",
+            "text": "        \"sha256\": \"37f7c62de54b33eb8f978c3ee5525471c9c7150b9cbaedc10901aa8280550d2e\","
+          }
+        ],
+        "current_file_sha256": "38226292b9492b04471feaa297c5cc7aa3d0feb74078ca9ce2b7a00b53dca1b3"
+      },
+      {
+        "path": "tests/integration/test_automation_execution_snapshot.py",
+        "disposition": "KEPT_REAL_SOURCE_REFERENCE_ROLE_OR_STATE_CORRECTNESS",
+        "reason": "The matched reject/claim words concern absent/foreign/duplicate source refs, stale execution, invalid role or blank prose; no arbitrary20/280 output license.",
+        "matches": [
+          {
+            "line": 163,
+            "function": "test_snapshot_rejects_stale_claims",
+            "text": "def test_snapshot_rejects_stale_claims(tmp_path: Path, mutation: str) -> None:"
+          }
+        ],
+        "current_file_sha256": "98f9e16fe3eeb4f536717a49164a5c1c9f9d89aee0434eb1d9c16e7191a40a9b"
+      },
+      {
+        "path": "tests/integration/test_legacy_local_reconcile.py",
+        "disposition": "KEPT_ACTUAL_WORK_DISCOVERY_OR_RESOURCE_CONTROLS",
+        "reason": "twenty or counts denote discovery/priority/workload scale, reclaimability or configured memory/work budgets, not the retired generated-claim quota.",
+        "matches": [
+          {
+            "line": 591,
+            "function": "test_request_priority_reuses_target_after_twenty_old_originals",
+            "text": "def test_request_priority_reuses_target_after_twenty_old_originals(lake):"
+          }
+        ],
+        "current_file_sha256": "da89d65917f95aac46d9b62ee6c531636e4b5e0948a5ffede915b5d59b8905df"
+      },
+      {
+        "path": "tests/integration/test_narrative_transport.py",
+        "disposition": "KEPT_POSITIVE_COMPLETED_OUTPUT_OR_REUSE_OBSERVATION",
+        "reason": "Long original/old summaries remain accepted; explicit no-quota assertions and repeated-twenty classifier memo tests do not veto valid extra claims.",
+        "matches": [
+          {
+            "line": 151,
+            "function": "test_current_reader_preserves_older_summary_above_new_generation_targets",
+            "text": "        assert all(len(claim.text) > 280 for claim in draft.claims)"
+          }
+        ],
+        "current_file_sha256": "49b66e07ea744100a27a05096d097a075093ab48fa07d02c59b64ac37088d699"
+      },
+      {
+        "path": "tests/support/legacy_reading_producer.py",
+        "disposition": "KEPT_IMMUTABLE_CAPTURE_OR_LITERAL_DATA",
+        "reason": "Digest/blob/capture/coordinate data contains these digits; no normative completed-summary rejection. No fixture/gzip/raw/history regenerated.",
+        "matches": [
+          {
+            "line": 10,
+            "function": "<module>",
+            "text": "SOURCE_BLOB = \"8a06bfa7b92808db448fa8dee1eb2ba016cfc140\""
+          }
+        ],
+        "current_file_sha256": "7ac07199cb354c83257a08c524b8f009092de2dba837e522d797ad8e862df1ac"
+      },
+      {
+        "path": "tests/support/summary_output_contract_upgrade.py",
+        "disposition": "KEPT_EXPLICIT_HISTORICAL_PROJECTION",
+        "reason": "The numbers identify immutable pre-retirement captures; helper validates strict current input identity first. Temporary old presentation only reconstructs historical SHA, never current runtime permission.",
+        "matches": [
+          {
+            "line": 14,
+            "function": "upgraded_instruction",
+            "text": "    return text.replace(\"Respect the twenty-claim and configured output bounds\","
+          },
+          {
+            "line": 16,
+            "function": "upgraded_instruction",
+            "text": "        \"Respect twenty claims, 280 characters per claim and the configured output token budget.\","
+          },
+          {
+            "line": 20,
+            "function": "upgraded_instruction",
+            "text": "        \"the response schema arrays are bounded but the program enforces the smaller per-task cap, \""
+          },
+          {
+            "line": 21,
+            "function": "upgraded_instruction",
+            "text": "        \"so exceeding it rejects the whole response. Each clause is at most 280 characters. \","
+          },
+          {
+            "line": 26,
+            "function": "upgraded_instruction",
+            "text": "        \"Respect output_plan.max_claims and max_claims_per_task and the configured output token limit. \""
+          },
+          {
+            "line": 27,
+            "function": "upgraded_instruction",
+            "text": "        \"Each clause is at most 280 characters. \","
+          },
+          {
+            "line": 37,
+            "function": "upgraded_envelope",
+            "text": "        assert claims.pop(\"maxItems\") in {2, 6}"
+          },
+          {
+            "line": 43,
+            "function": "upgraded_envelope",
+            "text": "        assert claims.pop(\"maxItems\") == 20"
+          },
+          {
+            "line": 45,
+            "function": "upgraded_envelope",
+            "text": "    assert claims[\"items\"][\"properties\"][\"text\"].pop(\"maxLength\") == 280"
+          },
+          {
+            "line": 82,
+            "function": "archived_compression_projection",
+            "text": "    The three temporary presentation ports restore only retired20/280 fields,"
+          },
+          {
+            "line": 100,
+            "function": "archived_compression_projection",
+            "text": "        claims[\"maxItems\"] = 20"
+          },
+          {
+            "line": 101,
+            "function": "archived_compression_projection",
+            "text": "        claims[\"items\"][\"properties\"][\"text\"][\"maxLength\"] = 280"
+          },
+          {
+            "line": 113,
+            "function": "archived_compression_projection",
+            "text": "            \"Respect the twenty-claim and configured output bounds\").replace("
+          },
+          {
+            "line": 116,
+            "function": "archived_compression_projection",
+            "text": "            \"Respect twenty claims, 280 characters per claim and the configured output token budget.\")"
+          }
+        ],
+        "current_file_sha256": "39f016bc2676df991fba8ebba33b81e083ea1d8023270ff1459cd1f61429a106"
+      },
+      {
+        "path": "tests/test_rank_material_observation.py",
+        "disposition": "KEPT_ADVISORY_PLAN_OR_FINITE_DIAGNOSTIC_OBSERVATION",
+        "reason": "20/40/2 are planning/identity/material-budget inputs, not completed-result maxItems/maxLength permissions. Remaining references/quality diagnostics bind actual selected scopes. Diagnostic sampling retains complete count and limitation metadata, not source rejection.",
+        "matches": [
+          {
+            "line": 87,
+            "function": "test_hint_field_types_do_not_equate_boolean_or_float_to_source_integers",
+            "text": "    view = compile_scoped_model_view(source, max_claims=len(source.evidence_spans) * 2)"
+          }
+        ],
+        "current_file_sha256": "5ba4bfd609e600ab1c0a8af0a0872bbccf32fb2393633b341003dfd96650e37e"
+      },
+      {
+        "path": "tests/unit/document_understanding_layout_hints/test_reception_common_roots.py",
+        "disposition": "NOT_A_SUMMARY_OUTPUT_LICENSE_LITERAL",
+        "reason": "Reviewed matched text is a page/box/table value, numeric unit/data, identity snapshot or market form name (for example20-F); it contains no generated-summary count/length refusal.",
+        "matches": [
+          {
+            "line": 99,
+            "function": "test_original_context_reaches_the_third_continuation_page",
+            "text": "            \"bbox\": [80, 720, 280, 733],"
+          }
+        ],
+        "current_file_sha256": "a371aca1b6d1c4ced0b269fc32e9fd2aec9772661b67864d1e7368685cbe1462"
+      },
+      {
+        "path": "tests/unit/document_understanding_layout_hints/test_single_body_lane.py",
+        "disposition": "NOT_A_SUMMARY_OUTPUT_LICENSE_LITERAL",
+        "reason": "Reviewed matched text is a page/box/table value, numeric unit/data, identity snapshot or market form name (for example20-F); it contains no generated-summary count/length refusal.",
+        "matches": [
+          {
+            "line": 93,
+            "function": "test_no_gap_and_absent_column_are_not_positive_single_lane_evidence",
+            "text": "            unit[\"layout\"][\"bbox\"] = ([90, 100 + index % 2 * 180, 280, 125 + index % 2 * 180]"
+          }
+        ],
+        "current_file_sha256": "500fbc8563efdbb8efe9e89bd61f459aa4ff493037d4213d4da9eaef40392105"
+      },
+      {
+        "path": "tests/unit/document_understanding_profiles/test_a_routing_matrix.py",
+        "disposition": "NOT_A_SUMMARY_OUTPUT_LICENSE_LITERAL",
+        "reason": "Reviewed matched text is a page/box/table value, numeric unit/data, identity snapshot or market form name (for example20-F); it contains no generated-summary count/length refusal.",
+        "matches": [
+          {
+            "line": 328,
+            "function": "test_sec_and_hk_vocabularies_never_cross_apply",
+            "text": "    twenty_f = b.observation("
+          },
+          {
+            "line": 336,
+            "function": "test_sec_and_hk_vocabularies_never_cross_apply",
+            "text": "    route = _route(twenty_f)"
+          },
+          {
+            "line": 346,
+            "function": "test_sec_and_hk_vocabularies_never_cross_apply",
+            "text": "    twenty_f_aliases = {"
+          },
+          {
+            "line": 351,
+            "function": "test_sec_and_hk_vocabularies_never_cross_apply",
+            "text": "    assert ten_k_aliases != twenty_f_aliases"
+          },
+          {
+            "line": 353,
+            "function": "test_sec_and_hk_vocabularies_never_cross_apply",
+            "text": "    assert not any(\"item 7\" in alias for alias in twenty_f_aliases)"
+          }
+        ],
+        "current_file_sha256": "2d33a9e39330f3e3a3bc3a4562fd24ce0684762ac33a8e9248c36abc76c42df7"
+      },
+      {
+        "path": "tests/unit/document_understanding_profiles/test_b_invariants.py",
+        "disposition": "NOT_A_SUMMARY_OUTPUT_LICENSE_LITERAL",
+        "reason": "Reviewed matched text is a page/box/table value, numeric unit/data, identity snapshot or market form name (for example20-F); it contains no generated-summary count/length refusal.",
+        "matches": [
+          {
+            "line": 342,
+            "function": "test_sec_profiles_use_distinct_item_vocabularies",
+            "text": "    twenty_f = module.get_profile(\"sec_20f\")"
+          },
+          {
+            "line": 351,
+            "function": "test_sec_profiles_use_distinct_item_vocabularies",
+            "text": "    assert aliases(ten_k) != aliases(ten_q) != aliases(twenty_f)"
+          },
+          {
+            "line": 353,
+            "function": "test_sec_profiles_use_distinct_item_vocabularies",
+            "text": "    assert not any(\"item 7\" in alias for alias in aliases(twenty_f))"
+          }
+        ],
+        "current_file_sha256": "0b275aad4ccbf753d6edf3062a8c9081f705dc1b1fd730331d7f6b6669e4f8c9"
+      },
+      {
+        "path": "tests/unit/document_understanding_root/test_du2_layout_bridge.py",
+        "disposition": "NOT_A_SUMMARY_OUTPUT_LICENSE_LITERAL",
+        "reason": "Reviewed matched text is a page/box/table value, numeric unit/data, identity snapshot or market form name (for example20-F); it contains no generated-summary count/length refusal.",
+        "matches": [
+          {
+            "line": 27,
+            "function": "_pdf_bytes",
+            "text": "        (70, 280), \"A note qualifies this operating disclosure.\", fontsize=8"
+          }
+        ],
+        "current_file_sha256": "60ccbe40ed612a3186f6726c9f06528bb28903ad649046705809ade171ef06df"
+      },
+      {
+        "path": "tests/unit/document_understanding_root/test_du_root_closure_applied.py",
+        "disposition": "NOT_A_SUMMARY_OUTPUT_LICENSE_LITERAL",
+        "reason": "Reviewed matched text is a page/box/table value, numeric unit/data, identity snapshot or market form name (for example20-F); it contains no generated-summary count/length refusal.",
+        "matches": [
+          {
+            "line": 69,
+            "function": "_project_document",
+            "text": "            \"高端精密刀具扩产项目 | 28000 | 20000 | 24 个月\","
+          }
+        ],
+        "current_file_sha256": "9da8881c32336fbd6e9ed93ee0ab12bf74313d545a95d4fe863ed4a27f1708b9"
+      },
+      {
+        "path": "tests/unit/document_understanding_root/test_du_root_end_to_end.py",
+        "disposition": "NOT_A_SUMMARY_OUTPUT_LICENSE_LITERAL",
+        "reason": "Reviewed matched text is a page/box/table value, numeric unit/data, identity snapshot or market form name (for example20-F); it contains no generated-summary count/length refusal.",
+        "matches": [
+          {
+            "line": 83,
+            "function": "_offering_units",
+            "text": "            \"高端精密刀具扩产项目 | 28000 | 20000 | 24 个月\","
+          }
+        ],
+        "current_file_sha256": "4c8579236199d51c4d48ab54c3291eadddc124e648d1321656c8368387911bea"
+      },
+      {
+        "path": "tests/unit/document_understanding_root/test_du_root_integration.py",
+        "disposition": "NOT_A_SUMMARY_OUTPUT_LICENSE_LITERAL",
+        "reason": "Reviewed matched text is a page/box/table value, numeric unit/data, identity snapshot or market form name (for example20-F); it contains no generated-summary count/length refusal.",
+        "matches": [
+          {
+            "line": 219,
+            "function": "test_table_row_zero_becomes_the_header_and_rows_share_a_table_id",
+            "text": "            \"高端刀具扩产项目 | 28000 | 24 个月\","
+          },
+          {
+            "line": 298,
+            "function": "test_adapted_observation_drives_the_structure_lane",
+            "text": "            \"高端精密刀具扩产项目 | 28000 | 20000 | 24 个月\","
+          }
+        ],
+        "current_file_sha256": "bfd8c5fb224581e545e1252b636f843d1f241dc2ac49606a0ba7f177d5aa9ca2"
+      },
+      {
+        "path": "tests/unit/document_understanding_root/test_native_table_production.py",
+        "disposition": "KEPT_ADVISORY_PLAN_OR_FINITE_DIAGNOSTIC_OBSERVATION",
+        "reason": "20/40/2 are planning/identity/material-budget inputs, not completed-result maxItems/maxLength permissions. Remaining references/quality diagnostics bind actual selected scopes. Diagnostic sampling retains complete count and limitation metadata, not source rejection.",
+        "matches": [
+          {
+            "line": 114,
+            "function": "test_unproven_table_mapping_remains_visible_in_real_selected_material",
+            "text": "                 reading_context=package.reading_context), max_claims=20)"
+          }
+        ],
+        "current_file_sha256": "6294587a1b79c8d6d813fbc482ccbbafce966d71f669e4c9236342206e45bce6"
+      },
+      {
+        "path": "tests/unit/document_understanding_root/test_turn_plan_qualification.py",
+        "disposition": "KEPT_ADVISORY_PLAN_OR_FINITE_DIAGNOSTIC_OBSERVATION",
+        "reason": "20/40/2 are planning/identity/material-budget inputs, not completed-result maxItems/maxLength permissions. Remaining references/quality diagnostics bind actual selected scopes. Diagnostic sampling retains complete count and limitation metadata, not source rejection.",
+        "matches": [
+          {
+            "line": 22,
+            "function": "card_texts",
+            "text": "                                   reading_context=selected.reading_context, max_claims=40)"
+          }
+        ],
+        "current_file_sha256": "05569e12b1cb98b5ae4224907a298b1e286b3d9c39ea47b021c97e66ac7efc5a"
+      },
+      {
+        "path": "tests/unit/document_understanding_selection/test_reading_balanced_coverage.py",
+        "disposition": "KEPT_ACTUAL_WORK_DISCOVERY_OR_RESOURCE_CONTROLS",
+        "reason": "twenty or counts denote discovery/priority/workload scale, reclaimability or configured memory/work budgets, not the retired generated-claim quota.",
+        "matches": [
+          {
+            "line": 141,
+            "function": "test_twenty_thousand_real_shared_signatures_keep_late_sparse_facts_and_caps",
+            "text": "def test_twenty_thousand_real_shared_signatures_keep_late_sparse_facts_and_caps("
+          }
+        ],
+        "current_file_sha256": "57e7734e0a4808f1d7a072514d435a0ade40de2825fd4be3d2df318bd87ae377"
+      },
+      {
+        "path": "tests/unit/document_understanding_selection/test_reading_budget_scale.py",
+        "disposition": "KEPT_ACTUAL_WORK_DISCOVERY_OR_RESOURCE_CONTROLS",
+        "reason": "twenty or counts denote discovery/priority/workload scale, reclaimability or configured memory/work budgets, not the retired generated-claim quota.",
+        "matches": [
+          {
+            "line": 21,
+            "function": "test_twenty_thousand_candidates_keep_all_late_priority_one_business_and_fill_cap",
+            "text": "def test_twenty_thousand_candidates_keep_all_late_priority_one_business_and_fill_cap(signatures, monkeypatch):"
+          },
+          {
+            "line": 50,
+            "function": "test_twenty_thousand_repeated_topics_leave_slots_for_independent_late_business",
+            "text": "def test_twenty_thousand_repeated_topics_leave_slots_for_independent_late_business():"
+          }
+        ],
+        "current_file_sha256": "8f764aaae32a54f129069c79e25222a900c2bb172db854f3ed9e836dea187fa5"
+      },
+      {
+        "path": "tests/unit/document_understanding_selection/test_reading_guidance_condition_scope.py",
+        "disposition": "KEPT_ADVISORY_PLAN_OR_FINITE_DIAGNOSTIC_OBSERVATION",
+        "reason": "20/40/2 are planning/identity/material-budget inputs, not completed-result maxItems/maxLength permissions. Remaining references/quality diagnostics bind actual selected scopes. Diagnostic sampling retains complete count and limitation metadata, not source rejection.",
+        "matches": [
+          {
+            "line": 83,
+            "function": "_model",
+            "text": "                                     reading_context=selected.reading_context), max_claims=20)"
+          }
+        ],
+        "current_file_sha256": "c51208649403682d6f5b6aa7e34f9a6ce6c44b4f6ef61dca094ee269a2895142"
+      },
+      {
+        "path": "tests/unit/document_understanding_selection/test_reading_multilevel_native_ancestry.py",
+        "disposition": "NOT_A_SUMMARY_OUTPUT_LICENSE_LITERAL",
+        "reason": "Reviewed matched text is a page/box/table value, numeric unit/data, identity snapshot or market form name (for example20-F); it contains no generated-summary count/length refusal.",
+        "matches": [
+          {
+            "line": 20,
+            "function": "_tree",
+            "text": "        rows.append((1, \"1 / 2\" if mode == \"page_counter\" else \"7 / 2\", 4, (280, 780, 330, 792)))"
+          },
+          {
+            "line": 32,
+            "function": "_tree",
+            "text": "        rows.append((page, \"2 / 2\", 11, (280, 780, 330, 792)))"
+          }
+        ],
+        "current_file_sha256": "7c82d9b3f8837059738bb60f92a99d79eb85ac3fcf088e31d6938c178290893b"
+      },
+      {
+        "path": "tests/unit/document_understanding_selection/test_reading_native_dependency_closure.py",
+        "disposition": "KEPT_ADVISORY_PLAN_OR_FINITE_DIAGNOSTIC_OBSERVATION",
+        "reason": "20/40/2 are planning/identity/material-budget inputs, not completed-result maxItems/maxLength permissions. Remaining references/quality diagnostics bind actual selected scopes. Diagnostic sampling retains complete count and limitation metadata, not source rejection.",
+        "matches": [
+          {
+            "line": 706,
+            "function": "test_a_real_cross_page_restriction_stays_readable_despite_structural_proof_use",
+            "text": "                                   reading_context=selected.reading_context, max_claims=40)"
+          }
+        ],
+        "current_file_sha256": "aa1454780fc52a5017760218b64e08d1553c3440b9364c23a3a7346899b229cc"
+      },
+      {
+        "path": "tests/unit/document_understanding_selection/test_reading_navigation_context.py",
+        "disposition": "NOT_A_SUMMARY_OUTPUT_LICENSE_LITERAL",
+        "reason": "Reviewed matched text is a page/box/table value, numeric unit/data, identity snapshot or market form name (for example20-F); it contains no generated-summary count/length refusal.",
+        "matches": [
+          {
+            "line": 19,
+            "function": "_case",
+            "text": "            (1, \"1 / 2\", 5, (280, 780, 330, 792)),"
+          },
+          {
+            "line": 22,
+            "function": "_case",
+            "text": "             \"新增订单金额达到2亿元。\", \"全年交付设备达到300台。\", \"已验收设备达到280台。\"][:body_count]"
+          },
+          {
+            "line": 27,
+            "function": "_case",
+            "text": "             (2, \"2 / 2\", 4, (280, 780, 330, 792))]"
+          }
+        ],
+        "current_file_sha256": "e870b9e24fe43b2dfc26fa8a672b81c8145101e9870ea6f8d6eea0f63c05d8ce"
+      },
+      {
+        "path": "tests/unit/document_understanding_selection/test_reading_untyped_numeric_quality.py",
+        "disposition": "KEPT_ADVISORY_PLAN_OR_FINITE_DIAGNOSTIC_OBSERVATION",
+        "reason": "20/40/2 are planning/identity/material-budget inputs, not completed-result maxItems/maxLength permissions. Remaining references/quality diagnostics bind actual selected scopes. Diagnostic sampling retains complete count and limitation metadata, not source rejection.",
+        "matches": [
+          {
+            "line": 113,
+            "function": "_assert_quality_retained_and_generation_deferred",
+            "text": "                        reading_context=selected.reading_context), max_claims=20,"
+          },
+          {
+            "line": 219,
+            "function": "test_year_label_is_neither_a_numeric_table_nor_independent_business_support",
+            "text": "                        reading_context=selected.reading_context), max_claims=20,"
+          }
+        ],
+        "current_file_sha256": "241b984f9f9230a7133e94d3faf26e10f2ebe52c3521de25ea1a8fc9994f5cf9"
+      },
+      {
+        "path": "tests/unit/document_understanding_selection/test_reading_value_coverage.py",
+        "disposition": "KEPT_ACTUAL_WORK_DISCOVERY_OR_RESOURCE_CONTROLS",
+        "reason": "twenty or counts denote discovery/priority/workload scale, reclaimability or configured memory/work budgets, not the retired generated-claim quota.",
+        "matches": [
+          {
+            "line": 123,
+            "function": "test_twenty_thousand_descriptions_leave_late_fact_anchors_inside_existing_caps",
+            "text": "def test_twenty_thousand_descriptions_leave_late_fact_anchors_inside_existing_caps():"
+          }
+        ],
+        "current_file_sha256": "b6193489014cce54851eb3c3df33c5a680dcef5b1b9790ac8f64e83d50df2aae"
+      },
+      {
+        "path": "tests/unit/document_understanding_selection/test_source_support_use.py",
+        "disposition": "KEPT_IMMUTABLE_CAPTURE_OR_LITERAL_DATA",
+        "reason": "Digest/blob/capture/coordinate data contains these digits; no normative completed-summary rejection. No fixture/gzip/raw/history regenerated.",
+        "matches": [
+          {
+            "line": 351,
+            "function": "<module>",
+            "text": "    (8, ('urn:company-wiki:evidence-span:sha256:32d5668cc470d4ca328098a8deb6e2b86c2907786b8aca869974f061c1b4bbf0',), False),"
+          },
+          {
+            "line": 366,
+            "function": "<module>",
+            "text": "    (23, ('urn:company-wiki:evidence-span:sha256:4b0dcf1d2805672cfb61e7b85361f4e9c59eba7e0b3cb48600cce507332c9e77',), True),"
+          },
+          {
+            "line": 390,
+            "function": "<module>",
+            "text": "    (47, ('urn:company-wiki:evidence-span:sha256:7368c6055284dd1db049904d2aa2809e6e1521c0237feb29889566c51345ad21',), True),"
+          }
+        ],
+        "current_file_sha256": "ea70297f225a2129584b2429546fa531a35784f8ed425cebcee1de91bfb75b7e"
+      },
+      {
+        "path": "tests/unit/document_understanding_structure/test_page_counter_furniture.py",
+        "disposition": "NOT_A_SUMMARY_OUTPUT_LICENSE_LITERAL",
+        "reason": "Reviewed matched text is a page/box/table value, numeric unit/data, identity snapshot or market form name (for example20-F); it contains no generated-summary count/length refusal.",
+        "matches": [
+          {
+            "line": 14,
+            "function": "_unit",
+            "text": "            \"bbox\": [280, y, 340, y + 12], \"page_width\": 600, \"page_height\": 800,"
+          },
+          {
+            "line": 64,
+            "function": "test_page_edge_band_alone_does_not_prove_a_stable_page_counter",
+            "text": "        units[1].bbox = (280, 710, 340, 722)"
+          }
+        ],
+        "current_file_sha256": "5b7af5bd601b01c2ba014cf1f08fe8cdead5dc868deb6b6e2d4c07b590f0cdb6"
+      },
+      {
+        "path": "tests/unit/du11_production/test_convertible_policy_scope.py",
+        "disposition": "NOT_A_SUMMARY_OUTPUT_LICENSE_LITERAL",
+        "reason": "Reviewed matched text is a page/box/table value, numeric unit/data, identity snapshot or market form name (for example20-F); it contains no generated-summary count/length refusal.",
+        "matches": [
+          {
+            "line": 15,
+            "function": "test_actual_offering_policy_keeps_sales_and_project_windows_independent",
+            "text": "        source_id=unit.source_id, source_sha256=sha, page_count=280,"
+          }
+        ],
+        "current_file_sha256": "277905bf973fa4f778a4500056d87a338cd9c4198ddb1399ac34a069c2bc63a8"
+      },
+      {
+        "path": "tests/unit/du11_production/test_native_prose_continuity.py",
+        "disposition": "NOT_A_SUMMARY_OUTPUT_LICENSE_LITERAL",
+        "reason": "Reviewed matched text is a page/box/table value, numeric unit/data, identity snapshot or market form name (for example20-F); it contains no generated-summary count/length refusal.",
+        "matches": [
+          {
+            "line": 88,
+            "function": "test_native_bullet_measurements_survive_default_parse_without_a_second_read",
+            "text": "        page.insert_text((60+2.6*size,100+1.55*size),'one hundred twenty million because demand improved.',fontsize=size)"
+          }
+        ],
+        "current_file_sha256": "eb6aab9b5178278c249ee1be4ffe3b9c6bbba190bb06f6c7cf7a1d7e6bffff21"
+      },
+      {
+        "path": "tests/unit/du11_production/test_pdf_candidates.py",
+        "disposition": "NOT_A_SUMMARY_OUTPUT_LICENSE_LITERAL",
+        "reason": "Reviewed matched text is a page/box/table value, numeric unit/data, identity snapshot or market form name (for example20-F); it contains no generated-summary count/length refusal.",
+        "matches": [
+          {
+            "line": 167,
+            "function": "test_two_column_prose_does_not_become_an_operating_table",
+            "text": "    value = snapshot((100, [(50, 280, '公司产能在2025年增长100%，未来仍将继续扩大。'),"
+          },
+          {
+            "line": 169,
+            "function": "test_two_column_prose_does_not_become_an_operating_table",
+            "text": "                     (120, [(50, 280, '新工厂计划未来投入运营，产能规划仍有不确定性。'),"
+          },
+          {
+            "line": 181,
+            "function": "test_description_only_two_column_paragraphs_still_do_not_qualify",
+            "text": "    value = snapshot((100, [(50, 280, '公司产能不断提高，未来仍将继续扩大。'),"
+          },
+          {
+            "line": 183,
+            "function": "test_description_only_two_column_paragraphs_still_do_not_qualify",
+            "text": "                     (120, [(50, 280, '新工厂计划未来投入运营，产能规划仍有不确定性。'),"
+          }
+        ],
+        "current_file_sha256": "4bd68272ba3b161b5a88038604aa91ad8bb5c2c1eeb0bc7fed2077a65b0b97a3"
+      },
+      {
+        "path": "tests/unit/test_cold_probe_repeatability.py",
+        "disposition": "KEPT_ACTUAL_WORK_DISCOVERY_OR_RESOURCE_CONTROLS",
+        "reason": "twenty or counts denote discovery/priority/workload scale, reclaimability or configured memory/work budgets, not the retired generated-claim quota.",
+        "matches": [
+          {
+            "line": 19,
+            "function": "test_explicit_probe_rerun_preserves_prior_receipts_without_revision_bump",
+            "text": "        \"max_memory_bytes\": 128000000, \"environment_sha256\": \"a\" * 64,"
+          }
+        ],
+        "current_file_sha256": "cfbe6150e529e474357f8ce964282328941efe084cbdfb301289d853da2751d2"
+      },
+      {
+        "path": "tests/unit/test_latest_local_source_discovery.py",
+        "disposition": "KEPT_ACTUAL_WORK_DISCOVERY_OR_RESOURCE_CONTROLS",
+        "reason": "twenty or counts denote discovery/priority/workload scale, reclaimability or configured memory/work budgets, not the retired generated-claim quota.",
+        "matches": [
+          {
+            "line": 67,
+            "function": "test_latest_bounded_retries_advance_beyond_twenty_old_originals",
+            "text": "def test_latest_bounded_retries_advance_beyond_twenty_old_originals(tmp_path):"
+          }
+        ],
+        "current_file_sha256": "93b1326c7cbdf998e26d16c59ce2a90c62066e8c90676337bc6ebaa16d5e14f9"
+      },
+      {
+        "path": "tests/unit/test_local_source_boundaries.py",
+        "disposition": "NOT_A_SUMMARY_OUTPUT_LICENSE_LITERAL",
+        "reason": "Reviewed matched text is a page/box/table value, numeric unit/data, identity snapshot or market form name (for example20-F); it contains no generated-summary count/length refusal.",
+        "matches": [
+          {
+            "line": 16,
+            "function": "<module>",
+            "text": "NAME = \"\\u548c\\u5149\\u79d1\\u6280\""
+          }
+        ],
+        "current_file_sha256": "6d0b613c6efc7eb50e3d8e9ef6f69ee993cb3b983f652e2ecb573dc08b9c0d75"
+      },
+      {
+        "path": "tests/unit/test_m3_official_json_parser.py",
+        "disposition": "KEPT_IMMUTABLE_CAPTURE_OR_LITERAL_DATA",
+        "reason": "Digest/blob/capture/coordinate data contains these digits; no normative completed-summary rejection. No fixture/gzip/raw/history regenerated.",
+        "matches": [
+          {
+            "line": 135,
+            "function": "test_frozen_latest_page1_anchors_match_evidence_index",
+            "text": "        \"867efb169b6d008051428057f448603cb9071fb7222e4750f906c1f086135444\""
+          }
+        ],
+        "current_file_sha256": "383a7baecd674ee8bffa8d3bf7a84b538af55bc261d19db05c59ffda0b86ccec"
+      },
+      {
+        "path": "tests/unit/test_main_ocr_selection.py",
+        "disposition": "NOT_A_SUMMARY_OUTPUT_LICENSE_LITERAL",
+        "reason": "Reviewed matched text is a page/box/table value, numeric unit/data, identity snapshot or market form name (for example20-F); it contains no generated-summary count/length refusal.",
+        "matches": [
+          {
+            "line": 24,
+            "function": "unit",
+            "text": "        \"image_width\": 2800,"
+          }
+        ],
+        "current_file_sha256": "718f73d134045d8bd5bb7f5d22867cdd81b2621360b8ff2e92dd588b1b14e3a6"
+      },
+      {
+        "path": "tests/unit/test_narrative_citation_unit_model_boundary.py",
+        "disposition": "KEPT_REAL_SOURCE_REFERENCE_ROLE_OR_STATE_CORRECTNESS",
+        "reason": "The matched reject/claim words concern absent/foreign/duplicate source refs, stale execution, invalid role or blank prose; no arbitrary20/280 output license.",
+        "matches": [
+          {
+            "line": 144,
+            "function": "test_missing_unknown_old_namespace_or_bad_unit_shape_rejects_whole_claim",
+            "text": "def test_missing_unknown_old_namespace_or_bad_unit_shape_rejects_whole_claim(bad):"
+          }
+        ],
+        "current_file_sha256": "6f32a0ff10e4b00155750c7bed311aa7cd02f12f0901e4d39e52ba11a7d16370"
+      },
+      {
+        "path": "tests/unit/test_narrative_evidence.py",
+        "disposition": "NOT_A_SUMMARY_OUTPUT_LICENSE_LITERAL",
+        "reason": "Reviewed matched text is a page/box/table value, numeric unit/data, identity snapshot or market form name (for example20-F); it contains no generated-summary count/length refusal.",
+        "matches": [
+          {
+            "line": 1376,
+            "function": "test_financing_project_heading_selects_and_groups_split_paragraph_context",
+            "text": "        metadata={\"pdf_block\": 1, \"bbox\": (100.0, 70.0, 280.0, 84.0)},"
+          }
+        ],
+        "current_file_sha256": "03be35480eecdb308c19573299c6d33a96971c36f3fd0e8b5ef6e5f208c2ba1c"
+      },
+      {
+        "path": "tests/unit/test_narrative_extractive_runtime.py",
+        "disposition": "KEPT_POSITIVE_COMPLETED_OUTPUT_OR_REUSE_OBSERVATION",
+        "reason": "Long original/old summaries remain accepted; explicit no-quota assertions and repeated-twenty classifier memo tests do not veto valid extra claims.",
+        "matches": [
+          {
+            "line": 70,
+            "function": "test_complete_original_negation_and_long_passage_cannot_be_substring_rewritten",
+            "text": "    assert len(draft['claims'][0]['text']) > 280"
+          }
+        ],
+        "current_file_sha256": "84e2a49cd0b2d1b3dc3a361f42052f8010351b6849f3d324d083f2f716c1c64c"
+      },
+      {
+        "path": "tests/unit/test_narrative_fidelity_artifacts.py",
+        "disposition": "KEPT_ADVISORY_AND_SYNTHETIC_MODEL_EXAMPLE",
+        "reason": "40 is source-plan metadata; text[:280] shapes an explicit synthetic model reply for artifact tests, not a decoder/schema rejection threshold. No claim that such truncation certifies semantic quality.",
+        "matches": [
+          {
+            "line": 19,
+            "function": "materials",
+            "text": "    view=compile_scoped_model_view(source,max_claims=40)"
+          },
+          {
+            "line": 26,
+            "function": "materials",
+            "text": "        'drafts_by_task':{task.key:[{'text':text[:280],'basis_parts':[part],'modality':'actual'}]}"
+          },
+          {
+            "line": 150,
+            "function": "test_batch_receipt_keeps_assessment_without_optional_provider_meter_fields",
+            "text": "    view=compile_scoped_model_view(source,max_claims=40)"
+          },
+          {
+            "line": 151,
+            "function": "test_batch_receipt_keeps_assessment_without_optional_provider_meter_fields",
+            "text": "    report=assess_summary(source,summary.to_dict()['draft']['claims'],plan_max_claims=40,"
+          },
+          {
+            "line": 165,
+            "function": "test_terminal_compaction_keeps_assessment_without_retain_full_summary_body",
+            "text": "    view=compile_scoped_model_view(source,max_claims=40)"
+          },
+          {
+            "line": 166,
+            "function": "test_terminal_compaction_keeps_assessment_without_retain_full_summary_body",
+            "text": "    report=assess_summary(source,summary.to_dict()['draft']['claims'],plan_max_claims=40,"
+          }
+        ],
+        "current_file_sha256": "3915ea996319062c200607b57b205ce5ac5e3e945dae0a1f3b7caf48e06b5695"
+      },
+      {
+        "path": "tests/unit/test_narrative_fidelity_runtime.py",
+        "disposition": "KEPT_ADVISORY_PLAN_OR_FINITE_DIAGNOSTIC_OBSERVATION",
+        "reason": "20/40/2 are planning/identity/material-budget inputs, not completed-result maxItems/maxLength permissions. Remaining references/quality diagnostics bind actual selected scopes. Diagnostic sampling retains complete count and limitation metadata, not source rejection.",
+        "matches": [
+          {
+            "line": 28,
+            "function": "test_new_identity_and_actual_request_plan_are_explicit",
+            "text": "    assert wire['material']['max_claims']==40"
+          },
+          {
+            "line": 29,
+            "function": "test_new_identity_and_actual_request_plan_are_explicit",
+            "text": "    assert wire['output_plan']['max_claims']==40"
+          },
+          {
+            "line": 42,
+            "function": "test_legacy_prompts_and_plan_markers_are_preserved",
+            "text": "    assert wire['material']['max_claims']==20"
+          },
+          {
+            "line": 43,
+            "function": "test_legacy_prompts_and_plan_markers_are_preserved",
+            "text": "    assert wire['output_plan']['max_claims_per_task']==2"
+          }
+        ],
+        "current_file_sha256": "42bbbc554dad46e180e607ce41382981b079bcfa0def68193651d96352bf01a1"
+      },
+      {
+        "path": "tests/unit/test_narrative_frame_hints.py",
+        "disposition": "KEPT_ADVISORY_PLAN_OR_FINITE_DIAGNOSTIC_OBSERVATION",
+        "reason": "20/40/2 are planning/identity/material-budget inputs, not completed-result maxItems/maxLength permissions. Remaining references/quality diagnostics bind actual selected scopes. Diagnostic sampling retains complete count and limitation metadata, not source rejection.",
+        "matches": [
+          {
+            "line": 62,
+            "function": "test_context_only_fragment_cannot_donate_source_hints_or_change_support",
+            "text": "    view = compile_scoped_model_view(source, max_claims=40)"
+          }
+        ],
+        "current_file_sha256": "54d42df6f2241b24fc426e9a61b2b884c19ba36f54d7393b00a94c65911f0449"
+      },
+      {
+        "path": "tests/unit/test_narrative_job_contracts.py",
+        "disposition": "KEPT_POSITIVE_COMPLETED_OUTPUT_OR_REUSE_OBSERVATION",
+        "reason": "Long original/old summaries remain accepted; explicit no-quota assertions and repeated-twenty classifier memo tests do not veto valid extra claims.",
+        "matches": [
+          {
+            "line": 352,
+            "function": "test_summary_result_encoding_does_not_discard_valid_claim_text",
+            "text": "def test_summary_result_encoding_does_not_discard_valid_claim_text() -> None:"
+          }
+        ],
+        "current_file_sha256": "e7c438de8592331c4e0f449eceb769826643666a6910657571eeeb43ce6acca1"
+      },
+      {
+        "path": "tests/unit/test_narrative_output_language_claim_scope.py",
+        "disposition": "KEPT_POSITIVE_COMPLETED_OUTPUT_OR_REUSE_OBSERVATION",
+        "reason": "Long original/old summaries remain accepted; explicit no-quota assertions and repeated-twenty classifier memo tests do not veto valid extra claims.",
+        "matches": [
+          {
+            "line": 128,
+            "function": "test_repeated_twenty_claims_reuse_one_finite_classification_pass",
+            "text": "def test_repeated_twenty_claims_reuse_one_finite_classification_pass(monkeypatch):"
+          }
+        ],
+        "current_file_sha256": "3f1d0e5e4b5139c05f3463aa999dd7bd96636ec3a00120ff1425bde093f7b15a"
+      },
+      {
+        "path": "tests/unit/test_narrative_output_language_observer.py",
+        "disposition": "KEPT_POSITIVE_COMPLETED_OUTPUT_OR_REUSE_OBSERVATION",
+        "reason": "Long original/old summaries remain accepted; explicit no-quota assertions and repeated-twenty classifier memo tests do not veto valid extra claims.",
+        "matches": [
+          {
+            "line": 48,
+            "function": "<module>",
+            "text": "_PROSE = {'synthetic-en-1': 'The new plasma reactor completed customer validation this quarter and received repeat orders. Shipments increased as the installation team reduced the time needed to qualify each production l"
+          },
+          {
+            "line": 74,
+            "function": "test_actual_saved_twenty_spanish_claims_and_only_their_actual_english_citations",
+            "text": "def test_actual_saved_twenty_spanish_claims_and_only_their_actual_english_citations(observer):"
+          }
+        ],
+        "current_file_sha256": "0b0965216ba7d5d166805f9ddab1fbd25dd3841cae0fc453960b8e82151f9af5"
+      },
+      {
+        "path": "tests/unit/test_narrative_reading_model_projection.py",
+        "disposition": "KEPT_ADVISORY_PLAN_OR_FINITE_DIAGNOSTIC_OBSERVATION",
+        "reason": "20/40/2 are planning/identity/material-budget inputs, not completed-result maxItems/maxLength permissions. Remaining references/quality diagnostics bind actual selected scopes. Diagnostic sampling retains complete count and limitation metadata, not source rejection.",
+        "matches": [
+          {
+            "line": 91,
+            "function": "test_new_plan_uses_real_groups_and_keeps_current_and_next_separate_under_configured_cap",
+            "text": "    assert data[\"output_plan\"][\"target_claim_count\"] == 20"
+          },
+          {
+            "line": 92,
+            "function": "test_new_plan_uses_real_groups_and_keeps_current_and_next_separate_under_configured_cap",
+            "text": "    assert data[\"output_plan\"][\"max_claims\"] == 20"
+          },
+          {
+            "line": 101,
+            "function": "test_new_plan_uses_real_groups_and_keeps_current_and_next_separate_under_configured_cap",
+            "text": "    assert json.loads(actual[\"messages\"][1][\"content\"])[\"output_plan\"][\"target_claim_count\"] == 20"
+          }
+        ],
+        "current_file_sha256": "0386330152db38b21573a156e8de3d20c34d4442d833baeef2b632f98c091bf3"
+      },
+      {
+        "path": "tests/unit/test_narrative_reading_transport.py",
+        "disposition": "KEPT_ADVISORY_PLAN_OR_FINITE_DIAGNOSTIC_OBSERVATION",
+        "reason": "20/40/2 are planning/identity/material-budget inputs, not completed-result maxItems/maxLength permissions. Remaining references/quality diagnostics bind actual selected scopes. Diagnostic sampling retains complete count and limitation metadata, not source rejection.",
+        "matches": [
+          {
+            "line": 731,
+            "function": "test_group_closure_limit_has_correct_dimension_through_public_result",
+            "text": "    model_material = compile_scoped_model_view(result, max_claims=20).to_model_dict()"
+          },
+          {
+            "line": 952,
+            "function": "test_unread_diagnostic_samples_preserve_full_counts_and_honest_limitation",
+            "text": "        counts={\"opaque_pages\": 0, \"deferred_pages\": 0, \"deferred_unit_ids\": 0, \"unassigned_unit_ids\": 28000},"
+          },
+          {
+            "line": 970,
+            "function": "test_unread_diagnostic_samples_preserve_full_counts_and_honest_limitation",
+            "text": "        assert strategy[\"unread\"][\"counts\"][\"unassigned_unit_ids\"] == 28000"
+          }
+        ],
+        "current_file_sha256": "e3ad7cf6027f8db7aa51f804e9de46b40de5681b093148f39276b0b04d95d095"
+      },
+      {
+        "path": "tests/unit/test_narrative_scoped_model_view.py",
+        "disposition": "KEPT_ADVISORY_PLAN_OR_FINITE_DIAGNOSTIC_OBSERVATION",
+        "reason": "20/40/2 are planning/identity/material-budget inputs, not completed-result maxItems/maxLength permissions. Remaining references/quality diagnostics bind actual selected scopes. Diagnostic sampling retains complete count and limitation metadata, not source rejection.",
+        "matches": [
+          {
+            "line": 18,
+            "function": "view",
+            "text": "    return compile_scoped_model_view(selected, max_claims=20)"
+          }
+        ],
+        "current_file_sha256": "678c8925b3f84cef04d5afb413e9a19aa72c5892e8e6246416f31ed3547f1c8b"
+      },
+      {
+        "path": "tests/unit/test_narrative_scoped_runtime.py",
+        "disposition": "KEPT_ADVISORY_PLAN_OR_FINITE_DIAGNOSTIC_OBSERVATION",
+        "reason": "20/40/2 are planning/identity/material-budget inputs, not completed-result maxItems/maxLength permissions. Remaining references/quality diagnostics bind actual selected scopes. Diagnostic sampling retains complete count and limitation metadata, not source rejection.",
+        "matches": [
+          {
+            "line": 67,
+            "function": "test_v4_reconstructs_program_identity_and_task_order_not_response_key_order",
+            "text": "    view=compile_scoped_model_view(selected,max_claims=20)"
+          },
+          {
+            "line": 129,
+            "function": "test_correct_task_and_valid_basis_do_not_claim_semantic_quality",
+            "text": "    bound=compile_scoped_model_view(with_reading(),max_claims=20).resolve_basis('t1',['p1'])"
+          }
+        ],
+        "current_file_sha256": "48f806ac6282cc399f234f295c5e9f4d8e3aa67f6a61f408b412117f76731f4d"
+      },
+      {
+        "path": "tests/unit/test_narrative_scoped_runtime_binding.py",
+        "disposition": "KEPT_ADVISORY_PLAN_OR_FINITE_DIAGNOSTIC_OBSERVATION",
+        "reason": "20/40/2 are planning/identity/material-budget inputs, not completed-result maxItems/maxLength permissions. Remaining references/quality diagnostics bind actual selected scopes. Diagnostic sampling retains complete count and limitation metadata, not source rejection.",
+        "matches": [
+          {
+            "line": 106,
+            "function": "test_qa_own_support_and_context_survive_canonical_decode",
+            "text": "    view=compile_scoped_model_view(selected,max_claims=20)"
+          }
+        ],
+        "current_file_sha256": "73a1314b1bd2b5083921b43b6c3f1b4221512c3666a8b6db6875bb4120c00c24"
+      },
+      {
+        "path": "tests/unit/test_narrative_summarize_handler.py",
+        "disposition": "KEPT_REAL_SOURCE_REFERENCE_ROLE_OR_STATE_CORRECTNESS",
+        "reason": "The matched reject/claim words concern absent/foreign/duplicate source refs, stale execution, invalid role or blank prose; no arbitrary20/280 output license.",
+        "matches": [
+          {
+            "line": 592,
+            "function": "test_summarize_handler_rejects_invalid_summary_claims",
+            "text": "def test_summarize_handler_rejects_invalid_summary_claims(case: str) -> None:"
+          }
+        ],
+        "current_file_sha256": "b15ba5751fb0976818b498a9e1ea2f381d733b73dfae6b3664eb57a58e65882a"
+      },
+      {
+        "path": "tests/unit/test_narrative_summary_assessment.py",
+        "disposition": "KEPT_ADVISORY_PLAN_OR_FINITE_DIAGNOSTIC_OBSERVATION",
+        "reason": "20/40/2 are planning/identity/material-budget inputs, not completed-result maxItems/maxLength permissions. Remaining references/quality diagnostics bind actual selected scopes. Diagnostic sampling retains complete count and limitation metadata, not source rejection.",
+        "matches": [
+          {
+            "line": 14,
+            "function": "claim",
+            "text": "    task=compile_scoped_model_view(source,max_claims=20).plan.tasks[index]"
+          },
+          {
+            "line": 23,
+            "function": "test_missing_tasks_remain_visible_without_claiming_semantic_pass",
+            "text": "    report=assess_summary(source,[claim(source)],plan_max_claims=20,requested_task_keys=[\"t1\",\"t2\",\"t3\"])"
+          },
+          {
+            "line": 32,
+            "function": "test_budget_deferred_and_unavailable_are_distinct_not_hidden",
+            "text": "    report=assess_summary(source,[claim(source)],plan_max_claims=20,requested_task_keys=['t1'])"
+          },
+          {
+            "line": 45,
+            "function": "test_claim_prefix_cannot_forge_emission_and_inputs_are_immutable",
+            "text": "    report=assess_summary(source,[emitted],plan_max_claims=20,requested_task_keys=['t1','t2'])"
+          },
+          {
+            "line": 50,
+            "function": "test_claim_prefix_cannot_forge_emission_and_inputs_are_immutable",
+            "text": "    assert assess_summary(source,[bad],plan_max_claims=20,requested_task_keys=['t1','t2'])['emitted_task_keys']==[]"
+          },
+          {
+            "line": 56,
+            "function": "test_requested_set_requires_real_unique_admitted_tasks",
+            "text": "        assess_summary(source_with_metadata({}),[],plan_max_claims=20,requested_task_keys=keys)"
+          },
+          {
+            "line": 91,
+            "function": "test_plan_marker_is_explicit_and_diagnostic_truncation_is_visible",
+            "text": "    first=assess_summary(source,[],plan_max_claims=20,requested_task_keys=['t1'])"
+          },
+          {
+            "line": 92,
+            "function": "test_plan_marker_is_explicit_and_diagnostic_truncation_is_visible",
+            "text": "    second=assess_summary(source,[],plan_max_claims=40,requested_task_keys=['t1'])"
+          },
+          {
+            "line": 98,
+            "function": "test_plan_marker_is_explicit_and_diagnostic_truncation_is_visible",
+            "text": "    report=assess_summary(source,invalid,plan_max_claims=20,requested_task_keys=['t1'])"
+          },
+          {
+            "line": 114,
+            "function": "test_same_support_with_different_task_intent_is_not_arbitrarily_assigned",
+            "text": "    assert assess_summary(source,[item],plan_max_claims=40,"
+          },
+          {
+            "line": 116,
+            "function": "test_same_support_with_different_task_intent_is_not_arbitrarily_assigned",
+            "text": "    report=assess_summary(source,[item],plan_max_claims=40,requested_task_keys=['t1','t2'])"
+          },
+          {
+            "line": 125,
+            "function": "test_no_known_violation_is_not_a_general_semantic_verdict",
+            "text": "    report=assess_summary(source,[item],plan_max_claims=20,requested_task_keys=['t1'])"
+          }
+        ],
+        "current_file_sha256": "096ec432f68b9977a0b2796b953e1c5aebd50ceaa8464ee6687c29e5338698ed"
+      },
+      {
+        "path": "tests/unit/test_official_json_model_subject.py",
+        "disposition": "KEPT_REAL_SOURCE_REFERENCE_ROLE_OR_STATE_CORRECTNESS",
+        "reason": "The matched reject/claim words concern absent/foreign/duplicate source refs, stale execution, invalid role or blank prose; no arbitrary20/280 output license.",
+        "matches": [
+          {
+            "line": 283,
+            "function": "test_invalid_roles_and_context_closure_reject_whole_claim",
+            "text": "def test_invalid_roles_and_context_closure_reject_whole_claim("
+          },
+          {
+            "line": 443,
+            "function": "<module>",
+            "text": "        \"data_sha256\": \"7ed74c3dbe44f43ee8a39e02717a60e8144280533f63bdd8894faba9b3a4cdd4\","
+          }
+        ],
+        "current_file_sha256": "adba7da8ae8b6cfd053aef2d4e3ce1faf1db0f055636cc37233ed76a50a9c09f"
+      },
+      {
+        "path": "tests/unit/test_phase_c_observer.py",
+        "disposition": "KEPT_ADVISORY_PLAN_OR_FINITE_DIAGNOSTIC_OBSERVATION",
+        "reason": "20/40/2 are planning/identity/material-budget inputs, not completed-result maxItems/maxLength permissions. Remaining references/quality diagnostics bind actual selected scopes. Diagnostic sampling retains complete count and limitation metadata, not source rejection.",
+        "matches": [
+          {
+            "line": 41,
+            "function": "_envelope",
+            "text": "            max_claims=20 if version.endswith(\"/4\") else len(source.evidence_spans) * 2)"
+          }
+        ],
+        "current_file_sha256": "fed97d1cc8888a3d8fd663632d6f09ec677d640bc54e123f6baeaf5f5d275d0f"
+      },
+      {
+        "path": "tests/unit/test_scoped_claim_cap.py",
+        "disposition": "KEPT_ADVISORY_PLAN_OR_FINITE_DIAGNOSTIC_OBSERVATION",
+        "reason": "20/40/2 are planning/identity/material-budget inputs, not completed-result maxItems/maxLength permissions. Remaining references/quality diagnostics bind actual selected scopes. Diagnostic sampling retains complete count and limitation metadata, not source rejection.",
+        "matches": [
+          {
+            "line": 7,
+            "function": "test_scoped_plan_states_the_target_and_per_task_cap",
+            "text": "def test_scoped_plan_states_the_target_and_per_task_cap():"
+          },
+          {
+            "line": 9,
+            "function": "test_scoped_plan_states_the_target_and_per_task_cap",
+            "text": "    assert plan[\"max_claims\"] == MAX_SUMMARY_CLAIMS == 40"
+          },
+          {
+            "line": 11,
+            "function": "test_scoped_plan_states_the_target_and_per_task_cap",
+            "text": "    assert plan[\"max_claims_per_task\"] == 2"
+          }
+        ],
+        "current_file_sha256": "e8c07b388d5429c998138bdf951fe3f1337f06a43b5e4d57ce35472ff593bb62"
+      },
+      {
+        "path": "tests/unit/test_scoped_source_admission.py",
+        "disposition": "KEPT_ADVISORY_PLAN_OR_FINITE_DIAGNOSTIC_OBSERVATION",
+        "reason": "20/40/2 are planning/identity/material-budget inputs, not completed-result maxItems/maxLength permissions. Remaining references/quality diagnostics bind actual selected scopes. Diagnostic sampling retains complete count and limitation metadata, not source rejection.",
+        "matches": [
+          {
+            "line": 54,
+            "function": "test_unresolved_source_table_is_not_sent_as_a_rewritable_fact",
+            "text": "    view = scoped.compile_scoped_model_view(source, max_claims=20)"
+          },
+          {
+            "line": 105,
+            "function": "test_exact_source_scope_duplicates_do_not_take_multiple_summary_slots",
+            "text": "    view = scoped.compile_scoped_model_view(source, max_claims=20)"
+          },
+          {
+            "line": 120,
+            "function": "test_summary_target_is_not_a_requirement_to_fill_with_weak_material",
+            "text": "    assert wire['output_plan']['max_claims'] == 40"
+          },
+          {
+            "line": 121,
+            "function": "test_summary_target_is_not_a_requirement_to_fill_with_weak_material",
+            "text": "    assert wire['output_plan']['max_claims_per_task'] == 2"
+          }
+        ],
+        "current_file_sha256": "b664f5382a1bad317d372327847feacd4dfc45b8e0e3f05212c7e6b83415f8c5"
+      },
+      {
+        "path": "tests/unit/test_source_summary_capability.py",
+        "disposition": "KEPT_ADVISORY_PLAN_OR_FINITE_DIAGNOSTIC_OBSERVATION",
+        "reason": "20/40/2 are planning/identity/material-budget inputs, not completed-result maxItems/maxLength permissions. Remaining references/quality diagnostics bind actual selected scopes. Diagnostic sampling retains complete count and limitation metadata, not source rejection.",
+        "matches": [
+          {
+            "line": 76,
+            "function": "test_readable_source_is_preserved_but_does_not_consume_a_generation_slot",
+            "text": "        source.evidence_spans, reading_context=source.reading_context, max_claims=20"
+          },
+          {
+            "line": 123,
+            "function": "test_support_use_is_carried_per_view_instead_of_borrowed_from_context",
+            "text": "    view = compile_scoped_model_view(source, max_claims=20)"
+          },
+          {
+            "line": 141,
+            "function": "test_legacy_source_cards_remain_readable_with_their_old_binding",
+            "text": "        source.evidence_spans, reading_context=source.reading_context, max_claims=20"
+          },
+          {
+            "line": 157,
+            "function": "test_current_ungrouped_source_does_not_invent_a_complete_support_assessment",
+            "text": "    view = compile_scoped_model_view(source, max_claims=20)"
+          }
+        ],
+        "current_file_sha256": "d7f0900198dfb3779c5a29830f6881baf2ebc24fe4be6862af2d141afcc36d86"
+      },
+      {
+        "path": "tests/unit/test_source_summary_tasks.py",
+        "disposition": "KEPT_ADVISORY_PLAN_OR_FINITE_DIAGNOSTIC_OBSERVATION",
+        "reason": "20/40/2 are planning/identity/material-budget inputs, not completed-result maxItems/maxLength permissions. Remaining references/quality diagnostics bind actual selected scopes. Diagnostic sampling retains complete count and limitation metadata, not source rejection.",
+        "matches": [
+          {
+            "line": 15,
+            "function": "plan",
+            "text": "def plan(rows, ctx=None, *, max_claims=20):"
+          }
+        ],
+        "current_file_sha256": "bb3ed03d430ea9b67dcd5c726c1981176eeef5eecdc0bd21e639b6964d4c097c"
+      },
+      {
+        "path": "tests/unit/test_summary_actual_output_bounds.py",
+        "disposition": "KEPT_POSITIVE_COMPLETED_OUTPUT_OR_REUSE_OBSERVATION",
+        "reason": "Long original/old summaries remain accepted; explicit no-quota assertions and repeated-twenty classifier memo tests do not veto valid extra claims.",
+        "matches": [
+          {
+            "line": 49,
+            "function": "<module>",
+            "text": "@pytest.mark.parametrize(\"form\", [\"long_qualified_quote\", \"twenty_one\", \"forty_one\"])"
+          },
+          {
+            "line": 52,
+            "function": "test_public_handler_preserves_source_valid_generated_claims",
+            "text": "    texts = [source.evidence_spans[0].raw_text] if form == \"long_qualified_quote\" else statements[:21 if form == \"twenty_one\" else 41]"
+          },
+          {
+            "line": 73,
+            "function": "<module>",
+            "text": "@pytest.mark.parametrize(\"form\", [\"long_qualified_quote\", \"three_clauses\", \"forty_one\"])"
+          },
+          {
+            "line": 97,
+            "function": "test_response_schema_has_no_compression_license",
+            "text": "            assert not (value.get(\"type\") == \"string\" and value.get(\"maxLength\") == 280)"
+          },
+          {
+            "line": 98,
+            "function": "test_response_schema_has_no_compression_license",
+            "text": "            assert not (value.get(\"type\") == \"array\" and value.get(\"maxItems\") in {2, 6, 20, 40})"
+          }
+        ],
+        "current_file_sha256": "8ab02f38caeab57c00685ec631395ba96ec7de7995f1ad29747fa664d101f8c1"
+      },
+      {
+        "path": "tests/unit/test_w04_narrative_semantics.py",
+        "disposition": "KEPT_IMMUTABLE_CAPTURE_OR_LITERAL_DATA",
+        "reason": "Digest/blob/capture/coordinate data contains these digits; no normative completed-summary rejection. No fixture/gzip/raw/history regenerated.",
+        "matches": [
+          {
+            "line": 521,
+            "function": "<module>",
+            "text": "        \"unit_id\": \"urn:company-wiki:narrative-unit:sha256:cd56e30cf27f473e35b4434ca13344452280d376e9a3d71482fca5688c6377ba\","
+          },
+          {
+            "line": 945,
+            "function": "<module>",
+            "text": "            88.27935028076172"
+          },
+          {
+            "line": 1073,
+            "function": "<module>",
+            "text": "          \"block_sha256\": \"013792806e4d4e3944610207453360a3ec6108ff37cf92feccf9b640cd5245c3\","
+          },
+          {
+            "line": 1773,
+            "function": "<module>",
+            "text": "        \"unit_id\": \"urn:company-wiki:narrative-unit:sha256:854bb4cae94e618361cd8bf3945b5e0553b280181fed255cf9c8dad5a3a258dd\","
+          },
+          {
+            "line": 1985,
+            "function": "<module>",
+            "text": "        \"unit_id\": \"urn:company-wiki:narrative-unit:sha256:0a2e4c032b4adf31e4e2491f7ed78b3bc8864380332de4cae0a2e280fbe20ce5\","
+          },
+          {
+            "line": 2541,
+            "function": "<module>",
+            "text": "        88.27935028076172"
+          },
+          {
+            "line": 2572,
+            "function": "<module>",
+            "text": "        88.27935028076172"
+          },
+          {
+            "line": 2700,
+            "function": "<module>",
+            "text": "      \"block_sha256\": \"e941280bf84db960638e8f6129e58bb51298b8d17c725943ad5f344cb92d8924\","
+          }
+        ],
+        "current_file_sha256": "9141e52483c6920f982619fe3e5e09d7862ffd1b5a5138eec4f909a7c61b3373"
+      }
+    ],
+    "disposition_counts": {
+      "KEPT_REAL_SOURCE_REFERENCE_ROLE_OR_STATE_CORRECTNESS": 5,
+      "KEPT_ACTUAL_WORK_DISCOVERY_OR_RESOURCE_CONTROLS": 8,
+      "KEPT_ADVISORY_PLAN_OR_FINITE_DIAGNOSTIC_OBSERVATION": 20,
+      "NOT_A_SUMMARY_OUTPUT_LICENSE_LITERAL": 20,
+      "MIGRATED_RETIRED_LICENSE_ORACLE": 1,
+      "KEPT_IMMUTABLE_CAPTURE_OR_LITERAL_DATA": 8,
+      "KEPT_POSITIVE_COMPLETED_OUTPUT_OR_REUSE_OBSERVATION": 6,
+      "KEPT_EXPLICIT_HISTORICAL_PROJECTION": 1,
+      "KEPT_ADVISORY_AND_SYNTHETIC_MODEL_EXAMPLE": 1
+    },
+    "active_old_oracles_found": 1,
+    "active_old_oracles_migrated": 1,
+    "other_source_or_fixture_changes": 0,
+    "integration": "Reviewed integration matches include old long-summary acceptance, real stale execution/claim source state, and more-than20local-discovery progression; kept.",
+    "e2e": "All e2e Python files included; no relevant old claim-license oracle match. Not claimed executed whole e2e.",
+    "metadata_comment": "test_narrative_summary_assessment.py still has an old non-enforcing comment that canonical clauses were capped. It is not an assertion/runtime gate; no extra Unit edit in this bounded contract node.",
+    "semantic_open": "Condition qualification loss is a separate verified OPEN producer capability observation in condition-open.json, not made passing by this quota migration."
+  },
+  "matrix_lesson": {
+    "root": "Previous producer representation cleanup and local acceptance considered Unit/archive call sites but missed executable contract tests in the actual CI selector.",
+    "future_minimal_closure": "Before declaring representation-policy migration complete: scan entire tests Python tree and classify actual negative oracles versus immutable captures/advisory/test data; map direct schema/decoder/wire users across Unit, contract, integration/e2e; run actual affected CI focused selection once plus failed deltas. Do not add per-edit manual approvals or rerun whole Unit for each old oracle.",
+    "applied_now": "1062Python files,70matched files161initial lines, each file reasoned in matrix;1active old quota oracle migrated. Contract244/integration128/e2e10 included. Other advisory/realresource/reference/fixture values retained, not counted as unremoved gates."
+  },
+  "open_semantic_observations": [
+    {
+      "id": "T4-R4-CONDITION-SCOPE-LOSS",
+      "status": "OPEN_MUST_FIX_BEFORE_REAL_SUMMARY_ACCEPTANCE",
+      "priority": "P2",
+      "ownership": "Future shared assertion/frame/source-summary-fidelity owner, not output quota contract. ROOT notified and owns PWF sequencing.",
+      "evidence": {
+        "status": "OPEN_SEMANTIC_CAPABILITY_OBSERVATION_NOT_REPAIRED",
+        "scope": "Synthetic source quote and complete actual citations; no model call. Legacy closure never claimed general entailment; finite future diagnostics still miss this actual shape.",
+        "source_text": [
+          "公司计划在项目建成后为工厂提供产能保障。",
+          "该安排仍须客户完成验收后方可投产。"
+        ],
+        "claim_text": "公司已为工厂提供产能保障。",
+        "claim_modality": "actual",
+        "source_spans": [
+          {
+            "schema_version": "1.0.0",
+            "span_id": "urn:company-wiki:evidence-span:sha256:b20308d0a4969ddb4c0b7dfe965ee20e3ef757f3b8299a625b594bfc3958bdde",
+            "source_id": "urn:company-wiki:source:sha256:4d8193c55d4e7a77d9342b52362c5ef02c45d6e308fe4426d8beacae4944d569",
+            "locator": "loc:v1/page:9/paragraph:32",
+            "coordinates": {
+              "page_number": 9,
+              "paragraph_index": 32,
+              "table_index": null,
+              "row_index": null,
+              "column_index": null,
+              "char_start": null,
+              "char_end": null
+            },
+            "raw_text": "公司计划在项目建成后为工厂提供产能保障。",
+            "structured_value": {
+              "source_role": "company_filing",
+              "language": "zh",
+              "selection_group_id": "conditional"
+            },
+            "parser_name": "synthetic-source-derived",
+            "parser_version": "1.0.0",
+            "output_sha256": "3a1a3dc82f1e34f38204dc8dcd282a911a56ee7238b347abcc743ef213f2cf49",
+            "parse_status": "parsed",
+            "quality_flags": []
+          },
+          {
+            "schema_version": "1.0.0",
+            "span_id": "urn:company-wiki:evidence-span:sha256:fa4a3af7f5591ac3260ca0a292a6aa29a8aa2a5787adffa5f7392a553d08311d",
+            "source_id": "urn:company-wiki:source:sha256:4d8193c55d4e7a77d9342b52362c5ef02c45d6e308fe4426d8beacae4944d569",
+            "locator": "loc:v1/page:9/paragraph:33",
+            "coordinates": {
+              "page_number": 9,
+              "paragraph_index": 33,
+              "table_index": null,
+              "row_index": null,
+              "column_index": null,
+              "char_start": null,
+              "char_end": null
+            },
+            "raw_text": "该安排仍须客户完成验收后方可投产。",
+            "structured_value": {
+              "source_role": "company_filing",
+              "language": "zh",
+              "selection_group_id": "conditional"
+            },
+            "parser_name": "synthetic-source-derived",
+            "parser_version": "1.0.0",
+            "output_sha256": "be1e8d10cc7359ae22ddaceec74768fbfd36cc997ffaf80531b47bbbd12d4384",
+            "parse_status": "parsed",
+            "quality_flags": []
+          }
+        ],
+        "actual_legacy_decode": {
+          "source_id": "urn:company-wiki:source:sha256:4d8193c55d4e7a77d9342b52362c5ef02c45d6e308fe4426d8beacae4944d569",
+          "source_sha256": "4d8193c55d4e7a77d9342b52362c5ef02c45d6e308fe4426d8beacae4944d569",
+          "language": "zh",
+          "claims": [
+            {
+              "claim_id": "c1",
+              "text": "公司已为工厂提供产能保障。",
+              "evidence_ids": [
+                "urn:company-wiki:evidence-span:sha256:b20308d0a4969ddb4c0b7dfe965ee20e3ef757f3b8299a625b594bfc3958bdde",
+                "urn:company-wiki:evidence-span:sha256:fa4a3af7f5591ac3260ca0a292a6aa29a8aa2a5787adffa5f7392a553d08311d"
+              ],
+              "claim_type": "company_statement",
+              "modality": "actual",
+              "needs_review": false
+            }
+          ],
+          "status": "draft"
+        },
+        "prose_diagnostics": [],
+        "atomic_prose_diagnostics": [],
+        "current_v7": {
+          "request_prompt": "reading-source-scoped/4.3.0",
+          "basis_parts": [
+            "p1",
+            "p2"
+          ],
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:b20308d0a4969ddb4c0b7dfe965ee20e3ef757f3b8299a625b594bfc3958bdde",
+            "urn:company-wiki:evidence-span:sha256:fa4a3af7f5591ac3260ca0a292a6aa29a8aa2a5787adffa5f7392a553d08311d"
+          ],
+          "actual_decode": {
+            "source_id": "urn:company-wiki:source:sha256:4d8193c55d4e7a77d9342b52362c5ef02c45d6e308fe4426d8beacae4944d569",
+            "source_sha256": "4d8193c55d4e7a77d9342b52362c5ef02c45d6e308fe4426d8beacae4944d569",
+            "language": "zh",
+            "claims": [
+              {
+                "claim_id": "t1-1",
+                "text": "公司已为工厂提供产能保障。",
+                "evidence_ids": [
+                  "urn:company-wiki:evidence-span:sha256:b20308d0a4969ddb4c0b7dfe965ee20e3ef757f3b8299a625b594bfc3958bdde",
+                  "urn:company-wiki:evidence-span:sha256:fa4a3af7f5591ac3260ca0a292a6aa29a8aa2a5787adffa5f7392a553d08311d"
+                ],
+                "claim_type": "company_statement",
+                "modality": "actual",
+                "needs_review": false
+              }
+            ],
+            "status": "draft"
+          }
+        }
+      },
+      "interpretation": "Valid complete source/citations do not certify paraphrase truth. The supplied source is a conditional plan with required acceptance; rewritten actual completion loses conditions. Both current v7 public decode and legacy accept draft/needs_reviewfalse; both finite diagnostics return[] for this shape. A different already-supported pattern passing does not resolve this gap.",
+      "original_statement_correction": "Author initially described both new focused failures as fixture issues; corrected explicitly to ROOT. Only nonexistent singleton group was a fixture mistake. The conditional semantic failure remains unclosed."
+    }
+  ],
+  "production_changes": 0,
+  "source_fixture_history_or_config_changes": 0,
+  "git_index_main_pwf_changes": 0,
+  "paid_calls": 0,
+  "network_calls": 0,
+  "production_originals_or_keys_read": false,
+  "artifacts": {
+    "red.log": {
+      "sha256": "6a7763ac490e37cd277f0c60197dbfc191f7463319e28e9c82b765c8db7a4f31",
+      "bytes": 1941,
+      "text": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\cc7\\\\red\", \"requested_basetemp_len\": 46, \"cwd_len\": 34, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\nconfigfile: pytest.ini\ncollected 1 item\n\ntests\\contract\\test_summary_group_coverage.py F                          [100%]\n\n================================== FAILURES ===================================\n_ test_prompt_twenty_claim_and_280_character_limits_are_real_output_contracts _\ntests\\contract\\test_summary_group_coverage.py:284: in test_prompt_twenty_claim_and_280_character_limits_are_real_output_contracts\n    with pytest.raises(NarrativeContractError, match=\"summary claims exceed twenty\"):\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   Failed: DID NOT RAISE NarrativeContractError\n============================== warnings summary ===============================\n..\\..\\..\\..\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464\n  C:\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode\n  \n    self._warn_or_fail_if_strict(f\"Unknown config option: {key}\\n\")\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n--- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\cc7\\red.xml ----\n=========================== short test summary info ===========================\nFAILED tests/contract/test_summary_group_coverage.py::test_prompt_twenty_claim_and_280_character_limits_are_real_output_contracts\n======================== 1 failed, 1 warning in 2.12s =========================\n"
+    },
+    "red.xml": {
+      "sha256": "2ec2ea3980003539025ff37981c9f5fe052f718f3b98bd9ab9be24a18d5acd50",
+      "bytes": 849,
+      "text": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"1\" skipped=\"0\" tests=\"1\" time=\"2.043\" timestamp=\"2026-11-02T18:25:03.670459+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tests.contract.test_summary_group_coverage\" name=\"test_prompt_twenty_claim_and_280_character_limits_are_real_output_contracts\" time=\"0.011\"><failure message=\"Failed: DID NOT RAISE NarrativeContractError\">tests\\contract\\test_summary_group_coverage.py:284: in test_prompt_twenty_claim_and_280_character_limits_are_real_output_contracts\n    with pytest.raises(NarrativeContractError, match=\"summary claims exceed twenty\"):\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   Failed: DID NOT RAISE NarrativeContractError</failure></testcase></testsuite></testsuites>"
+    },
+    "focused.log": {
+      "sha256": "843f8453f713274bf7ab313dba30fc046662ba2136326065e80e5a52619c4643",
+      "bytes": 464,
+      "text": "\n=== CI fast contract smoke set ===\n\nERROR: usage: python -m pytest [options] [file_or_dir] [file_or_dir] [...]\n\npython -m pytest: error: unrecognized arguments: --timeout=180\n\n  inifile: C:\\Users\\郑曾波\\Projects\\company-wiki\\pytest.ini\n\n  rootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\n\n\n\n\nFAILED: CI fast contract smoke set\n\nGATE RED at: CI fast contract smoke set\nFix the root cause (see revenue-forecast ci_root_fix.md), do not bypass.\n"
+    },
+    "focused-final.log": {
+      "sha256": "8a34afc9205edd0e6989d81fea41e8370ea6322975f6b45a125304500f83118b",
+      "bytes": 4771,
+      "text": "\n=== CI fast contract smoke set ===\nCW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\AppData\\\\Local\\\\Temp\\\\cwpp-m54zkum1\", \"requested_basetemp_len\": 45, \"cwd_len\": 34, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\n\n============================= test session starts =============================\n\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\n\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\n\nconfigfile: pytest.ini\n\ntimeout: 180.0s\n\ntimeout method: thread\n\ntimeout func_only: False\n\ncollected 149 items\n\n\n\ntests\\contract\\test_local_prepare_failure_boundaries.py .                [  0%]\n\ntests\\document_normalization\\test_ocr_region_recovery.py ........        [  6%]\n\ntests\\document_normalization\\test_isolated_ocr.py ...                    [  8%]\n\ntests\\integration\\test_m3_official_json_acceptance.py .................. [ 20%]\n\n...........................                                              [ 38%]\n\ntests\\contract\\test_zr203_reader_rewire.py .                             [ 38%]\n\ntests\\contract\\test_zr1003_shadow_assertions.py .                        [ 39%]\n\ntests\\contract\\test_zr1006_broker_cohort.py .                            [ 40%]\n\ntests\\contract\\test_source_catalog_temp_worker_governance.py ..          [ 41%]\n\ntests\\contract\\test_narrative_output_plan.py ......                      [ 45%]\n\ntests\\contract\\test_summary_group_coverage.py ...................F..F... [ 63%]\n\n                                                                         [ 63%]\n\ntests\\contract\\test_official_transcript_layouts.py ..........            [ 69%]\n\ntests\\contract\\test_transcript_speaker_affiliation.py .............      [ 78%]\n\ntests\\contract\\test_source_scope_qualification.py ...................... [ 93%]\n\n.....                                                                    [ 96%]\n\ntests\\contract\\test_narrative_availability.py ...                        [ 98%]\n\ntests\\contract\\test_fc905_receipt_envelope.py .                          [ 99%]\n\ntests\\contract\\test_b10_read_chain.py .                                  [100%]\n\n\n\n================================== FAILURES ===================================\n\n_ test_valid_source_output_keeps_twenty_one_claims_and_long_qualifiers_without_extra_quotas _\n\ntests\\contract\\test_summary_group_coverage.py:286: in test_valid_source_output_keeps_twenty_one_claims_and_long_qualifiers_without_extra_quotas\n\n    decoded = decode_model_draft(reply(selected, many), selected=selected)\n\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n\nsrc\\company_wiki\\automation\\narrative_model.py:874: in decode_model_draft\n\n    raise first_error\n\nsrc\\company_wiki\\automation\\narrative_model.py:854: in decode_model_draft\n\n    _validate_group_declarations(declarations, groups, claim.get(\"evidence_ids\"))\n\nsrc\\company_wiki\\automation\\narrative_model.py:896: in _validate_group_declarations\n\n    raise NarrativeContractError(\"summary claim evidence group declaration is invalid\")\n\nE   company_wiki.automation.narrative_contracts.NarrativeContractError: summary claim evidence group declaration is invalid\n\n_ test_condition_support_and_finite_modality_diagnostics_survive_quota_retirement _\n\ntests\\contract\\test_summary_group_coverage.py:346: in test_condition_support_and_finite_modality_diagnostics_survive_quota_retirement\n\n    assert \"possible_modality_mismatch\" in {\n\nE   AssertionError: assert 'possible_modality_mismatch' in set()\n\n============================== warnings summary ===============================\n\n..\\..\\..\\..\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464\n\n  C:\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode\n\n  \n\n    self._warn_or_fail_if_strict(f\"Unknown config option: {key}\\n\")\n\n\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n\n- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\cc7\\focused.xml --\n\n=========================== short test summary info ===========================\n\nFAILED tests/contract/test_summary_group_coverage.py::test_valid_source_output_keeps_twenty_one_claims_and_long_qualifiers_without_extra_quotas\n\nFAILED tests/contract/test_summary_group_coverage.py::test_condition_support_and_finite_modality_diagnostics_survive_quota_retirement\n\n================== 2 failed, 147 passed, 1 warning in 31.69s ==================\n\n\n\nFAILED: CI fast contract smoke set\n\nGATE RED at: CI fast contract smoke set\nFix the root cause (see revenue-forecast ci_root_fix.md), do not bypass.\n"
+    },
+    "focused.xml": {
+      "sha256": "5f0c34024942d78839b926de3961945c317293c81c617e73240af93d4b36f5b2",
+      "bytes": 27524,
+      "text": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"2\" skipped=\"0\" tests=\"149\" time=\"31.624\" timestamp=\"2026-11-02T18:29:50.907054+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tests.contract.test_local_prepare_failure_boundaries\" name=\"test_real_discovery_completed_write_survives_later_unknown_failure\" time=\"0.348\" /><testcase classname=\"tests.document_normalization.test_ocr_region_recovery\" name=\"test_roi_budget_preflight_never_calls_rejected_renderer[max_image_pixels-margin]\" time=\"0.217\" /><testcase classname=\"tests.document_normalization.test_ocr_region_recovery\" name=\"test_roi_budget_preflight_never_calls_rejected_renderer[max_image_pixels-split]\" time=\"0.053\" /><testcase classname=\"tests.document_normalization.test_ocr_region_recovery\" name=\"test_roi_budget_preflight_never_calls_rejected_renderer[max_image_pixels-upscale]\" time=\"0.004\" /><testcase classname=\"tests.document_normalization.test_ocr_region_recovery\" name=\"test_roi_budget_preflight_never_calls_rejected_renderer[max_total_pixels-margin]\" time=\"0.002\" /><testcase classname=\"tests.document_normalization.test_ocr_region_recovery\" name=\"test_roi_budget_preflight_never_calls_rejected_renderer[max_total_pixels-split]\" time=\"0.052\" /><testcase classname=\"tests.document_normalization.test_ocr_region_recovery\" name=\"test_roi_budget_preflight_never_calls_rejected_renderer[max_total_pixels-upscale]\" time=\"0.006\" /><testcase classname=\"tests.document_normalization.test_ocr_region_recovery\" name=\"test_rejected_render_attempt_keeps_reserved_budget\" time=\"0.002\" /><testcase classname=\"tests.document_normalization.test_ocr_region_recovery\" name=\"test_upscale_preflight_accounts_for_64m_canvas_without_allocating_it\" time=\"0.001\" /><testcase classname=\"tests.document_normalization.test_isolated_ocr\" name=\"test_noncooperative_native_stops_at_product_deadline[gil-block-inference-infer]\" time=\"1.966\" /><testcase classname=\"tests.document_normalization.test_isolated_ocr\" name=\"test_native_stdin_probe_does_not_deadlock_liveness_monitor[preflight]\" time=\"1.500\" /><testcase classname=\"tests.document_normalization.test_isolated_ocr\" name=\"test_narrative_default_proxy_carries_deadline_without_starting_native\" time=\"0.006\" /><testcase classname=\"tests.integration.test_m3_official_json_acceptance\" name=\"test_persisted_projection_is_loadable_and_idempotent\" time=\"0.189\" /><testcase classname=\"tests.integration.test_m3_official_json_acceptance\" name=\"test_public_cli_reloads_by_projection_id\" time=\"2.993\" /><testcase classname=\"tests.integration.test_m3_official_json_acceptance\" name=\"test_multi_page_spans_are_bound_to_their_own_parent\" time=\"0.227\" /><testcase classname=\"tests.integration.test_m3_official_json_acceptance\" name=\"test_latest_record_revision_cannot_leak_past_as_of[2026-10-09 10:00:00]\" time=\"0.113\" /><testcase classname=\"tests.integration.test_m3_official_json_acceptance\" name=\"test_latest_record_revision_cannot_leak_past_as_of[unparseable]\" time=\"0.139\" /><testcase classname=\"tests.integration.test_m3_official_json_acceptance\" name=\"test_precollected_answer_without_answer_availability_stays_unknown\" time=\"0.157\" /><testcase classname=\"tests.integration.test_m3_official_json_acceptance\" name=\"test_self_hashed_derivative_claims_must_match_parent_semantics[role-replay_projection]\" time=\"0.146\" /><testcase classname=\"tests.integration.test_m3_official_json_acceptance\" name=\"test_self_hashed_derivative_claims_must_match_parent_semantics[role-build_projection_export]\" time=\"0.133\" /><testcase classname=\"tests.integration.test_m3_official_json_acceptance\" name=\"test_self_hashed_derivative_claims_must_match_parent_semantics[selected-replay_projection]\" time=\"0.125\" /><testcase classname=\"tests.integration.test_m3_official_json_acceptance\" name=\"test_self_hashed_derivative_claims_must_match_parent_semantics[selected-build_projection_export]\" time=\"0.124\" /><testcase classname=\"tests.integration.test_m3_official_json_acceptance\" name=\"test_self_hashed_derivative_claims_must_match_parent_semantics[times-replay_projection]\" time=\"0.113\" /><testcase classname=\"tests.integration.test_m3_official_json_acceptance\" name=\"test_self_hashed_derivative_claims_must_match_parent_semantics[times-build_projection_export]\" time=\"0.122\" /><testcase classname=\"tests.integration.test_m3_official_json_acceptance\" name=\"test_self_hashed_derivative_claims_must_match_parent_semantics[issuer-replay_projection]\" time=\"0.116\" /><testcase classname=\"tests.integration.test_m3_official_json_acceptance\" name=\"test_self_hashed_derivative_claims_must_match_parent_semantics[issuer-build_projection_export]\" time=\"0.104\" /><testcase classname=\"tests.integration.test_m3_official_json_acceptance\" name=\"test_distinct_question_and_answer_issuers_are_not_merged\" time=\"0.126\" /><testcase classname=\"tests.integration.test_m3_official_json_acceptance\" name=\"test_container_sha_matches_its_final_token_bytes[{&quot;left&quot;:{&quot;x&quot;:1},&quot;right&quot;:{&quot;x&quot;:2}}-/left]\" time=\"0.002\" /><testcase classname=\"tests.integration.test_m3_official_json_acceptance\" name=\"test_container_sha_matches_its_final_token_bytes[{&quot;left&quot;:{&quot;x&quot;:1},&quot;right&quot;:{&quot;x&quot;:2}}-/right]\" time=\"0.001\" /><testcase classname=\"tests.integration.test_m3_official_json_acceptance\" name=\"test_container_sha_matches_its_final_token_bytes[{&quot;rows&quot;:[1,2]}-/rows]\" time=\"0.001\" /><testcase classname=\"tests.integration.test_m3_official_json_acceptance\" name=\"test_container_sha_matches_its_final_token_bytes[{&quot;rows&quot;:[]}-/rows]\" time=\"0.001\" /><testcase classname=\"tests.integration.test_m3_official_json_acceptance\" name=\"test_container_sha_matches_its_final_token_bytes[{&quot;rows&quot;:{}}-/rows]\" time=\"0.001\" /><testcase classname=\"tests.integration.test_m3_official_json_acceptance\" name=\"test_container_sha_matches_its_final_token_bytes[{&quot;rows&quot;:[{&quot;inner&quot;:{&quot;x&quot;:1}},[]]}-]\" time=\"0.001\" /><testcase classname=\"tests.integration.test_m3_official_json_acceptance\" name=\"test_container_sha_matches_its_final_token_bytes[{&quot;rows&quot;:[{&quot;inner&quot;:{&quot;x&quot;:1}},[]]}-/rows]\" time=\"0.001\" /><testcase classname=\"tests.integration.test_m3_official_json_acceptance\" name=\"test_container_sha_matches_its_final_token_bytes[{&quot;rows&quot;:[{&quot;inner&quot;:{&quot;x&quot;:1}},[]]}-/rows/0]\" time=\"0.001\" /><testcase classname=\"tests.integration.test_m3_official_json_acceptance\" name=\"test_container_sha_matches_its_final_token_bytes[{&quot;rows&quot;:[{&quot;inner&quot;:{&quot;x&quot;:1}},[]]}-/rows/0/inner]\" time=\"0.001\" /><testcase classname=\"tests.integration.test_m3_official_json_acceptance\" name=\"test_container_sha_matches_its_final_token_bytes[{&quot;rows&quot;:[{&quot;inner&quot;:{&quot;x&quot;:1}},[]]}-/rows/1]\" time=\"0.001\" /><testcase classname=\"tests.integration.test_m3_official_json_acceptance\" name=\"test_sealed_parser_100_payload_is_typed_unsupported_without_upgrade\" time=\"0.118\" /><testcase classname=\"tests.integration.test_m3_official_json_acceptance\" name=\"test_pagination_metadata_drift_is_partial_without_losing_originals[changed0]\" time=\"0.231\" /><testcase classname=\"tests.integration.test_m3_official_json_acceptance\" name=\"test_pagination_metadata_drift_is_partial_without_losing_originals[changed1]\" time=\"0.233\" /><testcase classname=\"tests.integration.test_m3_official_json_acceptance\" name=\"test_repeated_record_across_adjacent_pages_is_not_complete_or_double_selected\" time=\"0.237\" /><testcase classname=\"tests.integration.test_m3_official_json_acceptance\" name=\"test_conflicting_revisions_under_one_record_id_do_not_select_arbitrary_version\" time=\"0.243\" /><testcase classname=\"tests.integration.test_m3_official_json_acceptance\" name=\"test_missing_record_id_is_observed_but_cannot_prove_full_page_coverage\" time=\"0.237\" /><testcase classname=\"tests.integration.test_m3_official_json_acceptance\" name=\"test_consistent_complete_collection_can_arrive_in_either_page_order\" time=\"0.214\" /><testcase classname=\"tests.integration.test_m3_official_json_acceptance\" name=\"test_non_integer_numeric_forms_never_become_issuer_identity_proof[1.9]\" time=\"0.117\" /><testcase classname=\"tests.integration.test_m3_official_json_acceptance\" name=\"test_non_integer_numeric_forms_never_become_issuer_identity_proof[true]\" time=\"0.158\" /><testcase classname=\"tests.integration.test_m3_official_json_acceptance\" name=\"test_non_integer_numeric_forms_never_become_issuer_identity_proof[1.0]\" time=\"0.144\" /><testcase classname=\"tests.integration.test_m3_official_json_acceptance\" name=\"test_non_integer_numeric_forms_never_become_issuer_identity_proof[1e0]\" time=\"0.112\" /><testcase classname=\"tests.integration.test_m3_official_json_acceptance\" name=\"test_non_integer_numeric_forms_never_become_issuer_identity_proof[9.007199254740993e15]\" time=\"0.136\" /><testcase classname=\"tests.integration.test_m3_official_json_acceptance\" name=\"test_non_integer_numeric_forms_never_become_issuer_identity_proof[1e30]\" time=\"0.116\" /><testcase classname=\"tests.integration.test_m3_official_json_acceptance\" name=\"test_lexical_integer_issuer_ids_keep_exact_arbitrary_precision[1]\" time=\"0.110\" /><testcase classname=\"tests.integration.test_m3_official_json_acceptance\" name=\"test_lexical_integer_issuer_ids_keep_exact_arbitrary_precision[9007199254740993]\" time=\"0.106\" /><testcase classname=\"tests.integration.test_m3_official_json_acceptance\" name=\"test_lexical_integer_issuer_ids_keep_exact_arbitrary_precision[1267650600228229401496703205376]\" time=\"0.092\" /><testcase classname=\"tests.integration.test_m3_official_json_acceptance\" name=\"test_fractional_pagination_cannot_become_complete[page]\" time=\"0.216\" /><testcase classname=\"tests.integration.test_m3_official_json_acceptance\" name=\"test_fractional_pagination_cannot_become_complete[page_size]\" time=\"0.238\" /><testcase classname=\"tests.integration.test_m3_official_json_acceptance\" name=\"test_fractional_pagination_cannot_become_complete[page_count]\" time=\"0.245\" /><testcase classname=\"tests.integration.test_m3_official_json_acceptance\" name=\"test_fractional_pagination_cannot_become_complete[item_total]\" time=\"0.227\" /><testcase classname=\"tests.contract.test_zr203_reader_rewire\" name=\"test_read_entrypoints_never_construct_catalog_store\" time=\"0.039\" /><testcase classname=\"tests.contract.test_zr1003_shadow_assertions\" name=\"test_c2_recorded_review_is_diagnostic_metadata\" time=\"0.060\" /><testcase classname=\"tests.contract.test_zr1006_broker_cohort\" name=\"test_c2_ramp_1_to_3_to_7\" time=\"0.001\" /><testcase classname=\"tests.contract.test_source_catalog_temp_worker_governance\" name=\"test_owned_temp_worker_helper_detects_test_pid\" time=\"0.036\" /><testcase classname=\"tests.contract.test_source_catalog_temp_worker_governance\" name=\"test_stop_does_not_touch_unowned_live_workers_or_temporary_files\" time=\"1.407\" /><testcase classname=\"tests.contract.test_narrative_output_plan\" name=\"test_96_span_compact_plan_is_material_excerpt_not_row_enumeration_and_preserves_every_source_row\" time=\"0.374\" /><testcase classname=\"tests.contract.test_narrative_output_plan\" name=\"test_compact_plan_uses_real_configured_cap_without_changing_model_or_generation_options[1200]\" time=\"0.124\" /><testcase classname=\"tests.contract.test_narrative_output_plan\" name=\"test_compact_plan_uses_real_configured_cap_without_changing_model_or_generation_options[2400]\" time=\"0.124\" /><testcase classname=\"tests.contract.test_narrative_output_plan\" name=\"test_compact_plan_uses_real_configured_cap_without_changing_model_or_generation_options[8192]\" time=\"0.129\" /><testcase classname=\"tests.contract.test_narrative_output_plan\" name=\"test_truncated_96_span_attempt_settles_once_with_safe_length_diagnostic_and_cannot_blindly_replay\" time=\"0.488\" /><testcase classname=\"tests.contract.test_narrative_output_plan\" name=\"test_truncation_reaches_handler_static_diagnostics_with_original_source_identity_and_no_success\" time=\"0.193\" /><testcase classname=\"tests.contract.test_summary_group_coverage\" name=\"test_model_envelope_has_stable_whole_groups_without_duplicate_text_or_source_changes\" time=\"0.013\" /><testcase classname=\"tests.contract.test_summary_group_coverage\" name=\"test_omitted_hk_service_fee_or_us_previously_azure_tail_cannot_support_a_declared_group[HK]\" time=\"0.015\" /><testcase classname=\"tests.contract.test_summary_group_coverage\" name=\"test_omitted_hk_service_fee_or_us_previously_azure_tail_cannot_support_a_declared_group[US-new-W02]\" time=\"0.010\" /><testcase classname=\"tests.contract.test_summary_group_coverage\" name=\"test_omitted_hk_service_fee_or_us_previously_azure_tail_cannot_support_a_declared_group[US-sealed-old-group]\" time=\"0.009\" /><testcase classname=\"tests.contract.test_summary_group_coverage\" name=\"test_complete_multi_proposition_claim_keeps_exact_citations_and_no_group_wire_extensions\" time=\"0.012\" /><testcase classname=\"tests.contract.test_summary_group_coverage\" name=\"test_unrelated_adjacent_paragraph_is_never_added_to_close_the_business_group\" time=\"0.013\" /><testcase classname=\"tests.contract.test_summary_group_coverage\" name=\"test_legacy_or_explicit_narrow_claim_can_survive_but_partial_context_is_diagnostic[None]\" time=\"0.008\" /><testcase classname=\"tests.contract.test_summary_group_coverage\" name=\"test_legacy_or_explicit_narrow_claim_can_survive_but_partial_context_is_diagnostic[declaration1]\" time=\"0.011\" /><testcase classname=\"tests.contract.test_summary_group_coverage\" name=\"test_unknown_duplicate_or_invalid_group_declaration_is_not_silently_stripped[declaration0]\" time=\"0.012\" /><testcase classname=\"tests.contract.test_summary_group_coverage\" name=\"test_unknown_duplicate_or_invalid_group_declaration_is_not_silently_stripped[declaration1]\" time=\"0.012\" /><testcase classname=\"tests.contract.test_summary_group_coverage\" name=\"test_unknown_duplicate_or_invalid_group_declaration_is_not_silently_stripped[g1]\" time=\"0.012\" /><testcase classname=\"tests.contract.test_summary_group_coverage\" name=\"test_unknown_duplicate_or_invalid_group_declaration_is_not_silently_stripped[declaration3]\" time=\"0.011\" /><testcase classname=\"tests.contract.test_summary_group_coverage\" name=\"test_one_incomplete_group_claim_is_discarded_whole_without_modifying_the_good_claim\" time=\"0.009\" /><testcase classname=\"tests.contract.test_summary_group_coverage\" name=\"test_handler_reports_static_group_reason_and_never_builds_a_success_artifact\" time=\"0.024\" /><testcase classname=\"tests.contract.test_summary_group_coverage\" name=\"test_nine_member_complete_atomic_sentence_is_representable_inside_existing_transport_caps\" time=\"0.021\" /><testcase classname=\"tests.contract.test_summary_group_coverage\" name=\"test_public_summary_result_roundtrips_without_new_group_alias_contract\" time=\"0.015\" /><testcase classname=\"tests.contract.test_summary_group_coverage\" name=\"test_explicit_null_group_declaration_is_malformed_not_a_legacy_absence\" time=\"0.010\" /><testcase classname=\"tests.contract.test_summary_group_coverage\" name=\"test_duplicate_or_overpinned_citations_cannot_satisfy_a_finite_claim_reference_contract[ids0]\" time=\"0.007\" /><testcase classname=\"tests.contract.test_summary_group_coverage\" name=\"test_duplicate_or_overpinned_citations_cannot_satisfy_a_finite_claim_reference_contract[ids1]\" time=\"0.011\" /><testcase classname=\"tests.contract.test_summary_group_coverage\" name=\"test_valid_source_output_keeps_twenty_one_claims_and_long_qualifiers_without_extra_quotas\" time=\"0.023\"><failure message=\"company_wiki.automation.narrative_contracts.NarrativeContractError: summary claim evidence group declaration is invalid\">tests\\contract\\test_summary_group_coverage.py:286: in test_valid_source_output_keeps_twenty_one_claims_and_long_qualifiers_without_extra_quotas\n    decoded = decode_model_draft(reply(selected, many), selected=selected)\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nsrc\\company_wiki\\automation\\narrative_model.py:874: in decode_model_draft\n    raise first_error\nsrc\\company_wiki\\automation\\narrative_model.py:854: in decode_model_draft\n    _validate_group_declarations(declarations, groups, claim.get(\"evidence_ids\"))\nsrc\\company_wiki\\automation\\narrative_model.py:896: in _validate_group_declarations\n    raise NarrativeContractError(\"summary claim evidence group declaration is invalid\")\nE   company_wiki.automation.narrative_contracts.NarrativeContractError: summary claim evidence group declaration is invalid</failure></testcase><testcase classname=\"tests.contract.test_summary_group_coverage\" name=\"test_removing_output_quotas_does_not_accept_wrong_source_or_reference[reference]\" time=\"0.007\" /><testcase classname=\"tests.contract.test_summary_group_coverage\" name=\"test_removing_output_quotas_does_not_accept_wrong_source_or_reference[source]\" time=\"0.006\" /><testcase classname=\"tests.contract.test_summary_group_coverage\" name=\"test_condition_support_and_finite_modality_diagnostics_survive_quota_retirement\" time=\"0.044\"><failure message=\"AssertionError: assert 'possible_modality_mismatch' in set()\">tests\\contract\\test_summary_group_coverage.py:346: in test_condition_support_and_finite_modality_diagnostics_survive_quota_retirement\n    assert \"possible_modality_mismatch\" in {\nE   AssertionError: assert 'possible_modality_mismatch' in set()</failure></testcase><testcase classname=\"tests.contract.test_summary_group_coverage\" name=\"test_foreign_id_after_nine_valid_members_is_rejected_without_padding_or_new_source_identity\" time=\"0.011\" /><testcase classname=\"tests.contract.test_summary_group_coverage\" name=\"test_complete_us_group_closure_does_not_remove_ocr_uncertainty_or_borrow_consumer_bullet\" time=\"0.006\" /><testcase classname=\"tests.contract.test_summary_group_coverage\" name=\"test_group_alias_and_canonical_citation_mixing_cannot_create_duplicate_references\" time=\"0.006\" /><testcase classname=\"tests.contract.test_official_transcript_layouts\" name=\"test_actual_issuer_natural_heading_colon_speakers_end_and_qa\" time=\"0.024\" /><testcase classname=\"tests.contract.test_official_transcript_layouts\" name=\"test_second_layout_titled_speaker_labels_and_question_and_answer_heading\" time=\"0.002\" /><testcase classname=\"tests.contract.test_official_transcript_layouts\" name=\"test_navigation_or_metrics_without_true_speaker_body_are_rejected[&lt;title&gt;Transcript&lt;/title&gt;&lt;nav&gt;Transcript&lt;/nav&gt;&lt;p&gt;Our products expand overseas.&lt;/p&gt;]\" time=\"0.001\" /><testcase classname=\"tests.contract.test_official_transcript_layouts\" name=\"test_navigation_or_metrics_without_true_speaker_body_are_rejected[&lt;h1&gt;Earnings Call Transcript&lt;/h1&gt;&lt;p&gt;Contact: Investor Relations&lt;/p&gt;&lt;p&gt;Download: PDF&lt;/p&gt;]\" time=\"0.001\" /><testcase classname=\"tests.contract.test_official_transcript_layouts\" name=\"test_navigation_or_metrics_without_true_speaker_body_are_rejected[&lt;h2&gt;Transcript&lt;/h2&gt;&lt;p&gt;Revenue: Our new products grew strongly.&lt;/p&gt;]\" time=\"0.001\" /><testcase classname=\"tests.contract.test_official_transcript_layouts\" name=\"test_ambiguous_empty_heading_body_is_not_success\" time=\"0.002\" /><testcase classname=\"tests.contract.test_official_transcript_layouts\" name=\"test_call_page_title_cannot_promote_trace_id_or_navigation_to_a_speaker\" time=\"0.002\" /><testcase classname=\"tests.contract.test_official_transcript_layouts\" name=\"test_natural_heading_incomplete_call_retains_named_coverage_failure\" time=\"0.002\" /><testcase classname=\"tests.contract.test_official_transcript_layouts\" name=\"test_legacy_version_replays_original_heading_layout_and_new_identity_is_separate\" time=\"0.065\" /><testcase classname=\"tests.contract.test_official_transcript_layouts\" name=\"test_closing_courtesy_before_operator_direction_remains_last_actual_speaker\" time=\"0.002\" /><testcase classname=\"tests.contract.test_transcript_speaker_affiliation\" name=\"test_comma_affiliation_first_question_retains_actual_analyst[Alex Rivera-Westshore Research]\" time=\"0.002\" /><testcase classname=\"tests.contract.test_transcript_speaker_affiliation\" name=\"test_comma_affiliation_first_question_retains_actual_analyst[Priya Shah-NORTHBANK]\" time=\"0.003\" /><testcase classname=\"tests.contract.test_transcript_speaker_affiliation\" name=\"test_comma_affiliation_first_question_retains_actual_analyst[Jordan Lee-Independent Research]\" time=\"0.003\" /><testcase classname=\"tests.contract.test_transcript_speaker_affiliation\" name=\"test_comma_affiliation_first_question_retains_actual_analyst[Chris Jones-Southgate Capital]\" time=\"0.003\" /><testcase classname=\"tests.contract.test_transcript_speaker_affiliation\" name=\"test_comma_affiliation_first_question_retains_actual_analyst[Robin Khan-Regional Markets]\" time=\"0.003\" /><testcase classname=\"tests.contract.test_transcript_speaker_affiliation\" name=\"test_comma_affiliation_first_question_retains_actual_analyst[Dana Morris-Longview Partners]\" time=\"0.002\" /><testcase classname=\"tests.contract.test_transcript_speaker_affiliation\" name=\"test_six_questions_and_closing_courtesies_keep_six_parent_groups\" time=\"0.036\" /><testcase classname=\"tests.contract.test_transcript_speaker_affiliation\" name=\"test_prepared_management_identity_is_case_insensitive_without_changing_display\" time=\"0.001\" /><testcase classname=\"tests.contract.test_transcript_speaker_affiliation\" name=\"test_comma_title_can_start_a_real_prepared_management_turn\" time=\"0.003\" /><testcase classname=\"tests.contract.test_transcript_speaker_affiliation\" name=\"test_comma_does_not_promote_metrics_or_contact_into_speakers[Revenue, Europe]\" time=\"0.002\" /><testcase classname=\"tests.contract.test_transcript_speaker_affiliation\" name=\"test_comma_does_not_promote_metrics_or_contact_into_speakers[Financial Results, Europe]\" time=\"0.001\" /><testcase classname=\"tests.contract.test_transcript_speaker_affiliation\" name=\"test_comma_does_not_promote_metrics_or_contact_into_speakers[Contact, Relations]\" time=\"0.002\" /><testcase classname=\"tests.contract.test_transcript_speaker_affiliation\" name=\"test_legacy_natural_parser_fingerprint_is_frozen_and_replayable\" time=\"0.012\" /><testcase classname=\"tests.contract.test_source_scope_qualification\" name=\"test_false_cached_scope_is_rejected_at_every_filing_reuse_entry[open-wrong_cik]\" time=\"0.289\" /><testcase classname=\"tests.contract.test_source_scope_qualification\" name=\"test_false_cached_scope_is_rejected_at_every_filing_reuse_entry[open-wrong_year]\" time=\"0.278\" /><testcase classname=\"tests.contract.test_source_scope_qualification\" name=\"test_false_cached_scope_is_rejected_at_every_filing_reuse_entry[open-wrong_company_binding]\" time=\"0.248\" /><testcase classname=\"tests.contract.test_source_scope_qualification\" name=\"test_false_cached_scope_is_rejected_at_every_filing_reuse_entry[verify-wrong_cik]\" time=\"0.261\" /><testcase classname=\"tests.contract.test_source_scope_qualification\" name=\"test_false_cached_scope_is_rejected_at_every_filing_reuse_entry[verify-wrong_year]\" time=\"0.249\" /><testcase classname=\"tests.contract.test_source_scope_qualification\" name=\"test_false_cached_scope_is_rejected_at_every_filing_reuse_entry[verify-wrong_company_binding]\" time=\"0.244\" /><testcase classname=\"tests.contract.test_source_scope_qualification\" name=\"test_false_cached_scope_is_rejected_at_every_filing_reuse_entry[resolver-wrong_cik]\" time=\"0.214\" /><testcase classname=\"tests.contract.test_source_scope_qualification\" name=\"test_false_cached_scope_is_rejected_at_every_filing_reuse_entry[resolver-wrong_year]\" time=\"0.230\" /><testcase classname=\"tests.contract.test_source_scope_qualification\" name=\"test_false_cached_scope_is_rejected_at_every_filing_reuse_entry[resolver-wrong_company_binding]\" time=\"0.234\" /><testcase classname=\"tests.contract.test_source_scope_qualification\" name=\"test_false_cached_scope_is_rejected_at_every_filing_reuse_entry[ensure-wrong_cik]\" time=\"0.255\" /><testcase classname=\"tests.contract.test_source_scope_qualification\" name=\"test_false_cached_scope_is_rejected_at_every_filing_reuse_entry[ensure-wrong_year]\" time=\"0.244\" /><testcase classname=\"tests.contract.test_source_scope_qualification\" name=\"test_false_cached_scope_is_rejected_at_every_filing_reuse_entry[ensure-wrong_company_binding]\" time=\"0.247\" /><testcase classname=\"tests.contract.test_source_scope_qualification\" name=\"test_false_cached_scope_is_rejected_at_every_filing_reuse_entry[stage-wrong_cik]\" time=\"0.268\" /><testcase classname=\"tests.contract.test_source_scope_qualification\" name=\"test_false_cached_scope_is_rejected_at_every_filing_reuse_entry[stage-wrong_year]\" time=\"0.244\" /><testcase classname=\"tests.contract.test_source_scope_qualification\" name=\"test_false_cached_scope_is_rejected_at_every_filing_reuse_entry[stage-wrong_company_binding]\" time=\"0.246\" /><testcase classname=\"tests.contract.test_source_scope_qualification\" name=\"test_unproven_correct_scope_uses_single_sha_buffer_under_remaining_budget[reader]\" time=\"0.218\" /><testcase classname=\"tests.contract.test_source_scope_qualification\" name=\"test_unproven_correct_scope_uses_single_sha_buffer_under_remaining_budget[resolver]\" time=\"0.219\" /><testcase classname=\"tests.contract.test_source_scope_qualification\" name=\"test_raw_preview_remains_byte_only_for_false_filing_labels\" time=\"0.245\" /><testcase classname=\"tests.contract.test_source_scope_qualification\" name=\"test_complete_original_scope_proof_streams_sha_without_master_or_reparse[reader]\" time=\"0.257\" /><testcase classname=\"tests.contract.test_source_scope_qualification\" name=\"test_complete_original_scope_proof_streams_sha_without_master_or_reparse[resolver]\" time=\"0.293\" /><testcase classname=\"tests.contract.test_source_scope_qualification\" name=\"test_complete_original_scope_proof_streams_sha_without_master_or_reparse[prepare]\" time=\"0.259\" /><testcase classname=\"tests.contract.test_source_scope_qualification\" name=\"test_registered_provenance_cannot_stand_in_for_actual_dei_scope[unknown]\" time=\"0.237\" /><testcase classname=\"tests.contract.test_source_scope_qualification\" name=\"test_registered_provenance_cannot_stand_in_for_actual_dei_scope[conflict]\" time=\"0.216\" /><testcase classname=\"tests.contract.test_source_scope_qualification\" name=\"test_conflicting_registered_issuer_observations_are_named\" time=\"0.232\" /><testcase classname=\"tests.contract.test_source_scope_qualification\" name=\"test_incomplete_issuer_record_binding_observes_registered_company_once[None]\" time=\"0.309\" /><testcase classname=\"tests.contract.test_source_scope_qualification\" name=\"test_incomplete_issuer_record_binding_observes_registered_company_once[another-record]\" time=\"0.294\" /><testcase classname=\"tests.contract.test_source_scope_qualification\" name=\"test_complete_original_company_proof_still_rejects_conflicting_url_provenance\" time=\"0.294\" /><testcase classname=\"tests.contract.test_narrative_availability\" name=\"test_one_verified_original_buffer_one_owner_lookup_no_new_fact_writer[pdf]\" time=\"0.784\" /><testcase classname=\"tests.contract.test_narrative_availability\" name=\"test_one_verified_original_buffer_one_owner_lookup_no_new_fact_writer[json]\" time=\"0.472\" /><testcase classname=\"tests.contract.test_narrative_availability\" name=\"test_projected_two_parents_cannot_borrow_one_raw_proof\" time=\"0.453\" /><testcase classname=\"tests.contract.test_fc905_receipt_envelope\" name=\"test_pi03_no_review_is_explicit_not_reviewed\" time=\"0.116\" /><testcase classname=\"tests.contract.test_b10_read_chain\" name=\"test_b10_scan_is_not_vacuous\" time=\"3.661\" /></testsuite></testsuites>"
+    },
+    "fix.log": {
+      "sha256": "4029adc46f8b066b5938128452b6c85655fc77f4d4dffd95577b8502ac57dd26",
+      "bytes": 1214,
+      "text": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\cc7\\\\fix\", \"requested_basetemp_len\": 46, \"cwd_len\": 34, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\nconfigfile: pytest.ini\ncollected 2 items\n\ntests\\contract\\test_summary_group_coverage.py ..                         [100%]\n\n============================== warnings summary ===============================\n..\\..\\..\\..\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464\n  C:\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode\n  \n    self._warn_or_fail_if_strict(f\"Unknown config option: {key}\\n\")\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n--- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\cc7\\fix.xml ----\n======================== 2 passed, 1 warning in 2.31s =========================\n"
+    },
+    "fix.xml": {
+      "sha256": "d0f1ba0ff882dcccd9a754e77fae58f0ac3066f838a7bcb376135791990755a0",
+      "bytes": 595,
+      "text": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"0\" skipped=\"0\" tests=\"2\" time=\"2.241\" timestamp=\"2026-11-02T18:31:38.522385+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tests.contract.test_summary_group_coverage\" name=\"test_valid_source_output_keeps_twenty_one_claims_and_long_qualifiers_without_extra_quotas\" time=\"0.026\" /><testcase classname=\"tests.contract.test_summary_group_coverage\" name=\"test_condition_support_and_finite_modality_diagnostics_survive_quota_retirement\" time=\"0.037\" /></testsuite></testsuites>"
+    },
+    "ruff.log": {
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "bytes": 19,
+      "text": "All checks passed!\n"
+    },
+    "scan_tests.py": {
+      "sha256": "1714dde375ac353d588ee0d7ba845d42e7d5f74ef6f4b4977baf07f29a8561f1",
+      "bytes": 2061,
+      "text": "import ast\nimport hashlib\nimport json\nfrom pathlib import Path\nimport subprocess\n\npattern = (r'twenty|forty|280|CLAIMS_LIMIT|CLAIM_TEXT|per[-_ ]task.{0,45}(cap|limit)|'\n           r'(max_claims(_per_task)?|target_claim_count|maxItems|maxLength).{0,75}\\b(2|6|20|40|280)\\b|'\n           r'(raises|reject|enforce).{0,75}(claim|clause|quota)')\nprocess = subprocess.run(['rg','--json','-n','-i',pattern,'tests','--glob','*.py'],capture_output=True,text=True,encoding='utf-8',check=False)\nassert process.returncode in (0,1), process.stderr\nrows=[]\nparsed={}\nfor line in process.stdout.splitlines():\n    event=json.loads(line)\n    if event['type']!='match':continue\n    data=event['data'];path=data['path']['text'];number=data['line_number']\n    if path not in parsed:\n        parsed[path]=[n for n in ast.walk(ast.parse(Path(path).read_text(encoding='utf-8-sig')))\n                      if isinstance(n,(ast.FunctionDef,ast.AsyncFunctionDef))]\n    owner=next((node.name for node in parsed[path] if node.lineno<=number<=node.end_lineno),'<module>')\n    rows.append({'path':path.replace('\\\\','/'),'line':number,'function':owner,'text':data['lines']['text'].rstrip()})\nrecord={'pattern':pattern,'scope':'Complete tests tree: all Python test/support/embedded-capture modules; no numeric-only broad match over irrelevant fixture bytes.',\n        'files_scanned':len(list(Path('tests').rglob('*.py'))),'matching_files':len({r['path'] for r in rows}),'matches':rows}\nPath('tmp/cc7/scan.json').write_text(json.dumps(record,ensure_ascii=False,indent=2),encoding='utf-8')\nsummary={p:[{'line':r['line'],'function':r['function'],'text':r['text'][:180]} for r in rows if r['path']==p] for p in sorted({r['path'] for r in rows})}\nPath('tmp/cc7/scan-summary.json').write_text(json.dumps(summary,ensure_ascii=False,indent=2),encoding='utf-8')\nprint(json.dumps({'scanned':record['files_scanned'],'matching_files':record['matching_files'],'matches':len(rows),'non_unit_files':{k:v for k,v in summary.items() if '/unit/' not in k and '/support/' not in k}},ensure_ascii=False,indent=2))\n"
+    },
+    "build_matrix.py": {
+      "sha256": "89365e0403ac6521b683591bee48d613b283bb53cf349275b978cba58ac293bf",
+      "bytes": 6171,
+      "text": "import json\nfrom collections import Counter\nfrom pathlib import Path\n\ndirectory=Path('tmp/cc7')\nscan=json.loads((directory/'scan-before.json').read_text(encoding='utf-8'))\nrows=scan['matches']\nadvisory={'test_narrative_output_plan.py','test_native_table_production.py','test_turn_plan_qualification.py',\n 'test_reading_guidance_condition_scope.py','test_reading_native_dependency_closure.py','test_reading_untyped_numeric_quality.py',\n 'test_narrative_fidelity_runtime.py','test_narrative_frame_hints.py','test_narrative_reading_model_projection.py',\n 'test_narrative_reading_transport.py','test_narrative_scoped_model_view.py','test_narrative_scoped_runtime.py',\n 'test_narrative_scoped_runtime_binding.py','test_narrative_summary_assessment.py','test_phase_c_observer.py',\n 'test_scoped_claim_cap.py','test_scoped_source_admission.py','test_source_summary_capability.py','test_source_summary_tasks.py',\n 'test_rank_material_observation.py'}\ncorrectness={'test_gold_mutations.py','test_automation_execution_snapshot.py','test_narrative_citation_unit_model_boundary.py',\n 'test_narrative_summarize_handler.py','test_official_json_model_subject.py'}\nresources={'test_local_discovery_limits.py','test_r4b02_candidate_selection.py','test_legacy_local_reconcile.py',\n 'test_reading_balanced_coverage.py','test_reading_budget_scale.py','test_reading_value_coverage.py',\n 'test_latest_local_source_discovery.py','test_cold_probe_repeatability.py'}\npositive={'test_narrative_transport.py','test_narrative_extractive_runtime.py','test_summary_actual_output_bounds.py',\n 'test_narrative_job_contracts.py','test_narrative_output_language_claim_scope.py','test_narrative_output_language_observer.py'}\nmatrix=[]\nfor path in sorted({r['path'] for r in rows}):\n name=Path(path).name\n candidates=[r for r in rows if r['path']==path]\n if path=='tests/contract/test_summary_group_coverage.py':\n  disposition='MIGRATED_RETIRED_LICENSE_ORACLE'\n  reason='Only active old-output gate found: expected21claims/281characters to reject. Replaced by complete pinned21 independent quotes and >280char qualified source preservation; unrelated bad reference/source/group/condition checks kept or strengthened.'\n elif path=='tests/support/summary_output_contract_upgrade.py':\n  disposition='KEPT_EXPLICIT_HISTORICAL_PROJECTION'\n  reason='The numbers identify immutable pre-retirement captures; helper validates strict current input identity first. Temporary old presentation only reconstructs historical SHA, never current runtime permission.'\n elif '/fixtures/' in path or name in {'legacy_reading_producer.py','test_w04_narrative_semantics.py','test_source_support_use.py','test_m3_official_json_parser.py'}:\n  disposition='KEPT_IMMUTABLE_CAPTURE_OR_LITERAL_DATA'\n  reason='Digest/blob/capture/coordinate data contains these digits; no normative completed-summary rejection. No fixture/gzip/raw/history regenerated.'\n elif name=='test_narrative_fidelity_artifacts.py':\n  disposition='KEPT_ADVISORY_AND_SYNTHETIC_MODEL_EXAMPLE'\n  reason='40 is source-plan metadata; text[:280] shapes an explicit synthetic model reply for artifact tests, not a decoder/schema rejection threshold. No claim that such truncation certifies semantic quality.'\n elif name in advisory:\n  disposition='KEPT_ADVISORY_PLAN_OR_FINITE_DIAGNOSTIC_OBSERVATION'\n  reason='20/40/2 are planning/identity/material-budget inputs, not completed-result maxItems/maxLength permissions. Remaining references/quality diagnostics bind actual selected scopes. Diagnostic sampling retains complete count and limitation metadata, not source rejection.'\n elif name in correctness:\n  disposition='KEPT_REAL_SOURCE_REFERENCE_ROLE_OR_STATE_CORRECTNESS'\n  reason='The matched reject/claim words concern absent/foreign/duplicate source refs, stale execution, invalid role or blank prose; no arbitrary20/280 output license.'\n elif name in resources:\n  disposition='KEPT_ACTUAL_WORK_DISCOVERY_OR_RESOURCE_CONTROLS'\n  reason='twenty or counts denote discovery/priority/workload scale, reclaimability or configured memory/work budgets, not the retired generated-claim quota.'\n elif name in positive:\n  disposition='KEPT_POSITIVE_COMPLETED_OUTPUT_OR_REUSE_OBSERVATION'\n  reason='Long original/old summaries remain accepted; explicit no-quota assertions and repeated-twenty classifier memo tests do not veto valid extra claims.'\n else:\n  disposition='NOT_A_SUMMARY_OUTPUT_LICENSE_LITERAL'\n  reason='Reviewed matched text is a page/box/table value, numeric unit/data, identity snapshot or market form name (for example20-F); it contains no generated-summary count/length refusal.'\n matrix.append({'path':path,'disposition':disposition,'reason':reason,'matches':[{'line':r['line'],'function':r['function'],'text':r['text'][:220]} for r in candidates]})\nareas=Counter(str(p.relative_to('tests')).replace('\\\\','/').split('/')[0] for p in Path('tests').rglob('*.py'))\nrecord={'scan_python_files':scan['files_scanned'],'area_file_counts':dict(areas),'matched_files':scan['matching_files'],\n 'matched_lines':len(rows),'pattern':scan['pattern'],'matrix':matrix,'disposition_counts':dict(Counter(r['disposition'] for r in matrix)),\n 'active_old_oracles_found':1,'active_old_oracles_migrated':1,'other_source_or_fixture_changes':0,\n 'integration':'Reviewed integration matches include old long-summary acceptance, real stale execution/claim source state, and more-than20local-discovery progression; kept.','e2e':'All e2e Python files included; no relevant old claim-license oracle match. Not claimed executed whole e2e.',\n 'metadata_comment':'test_narrative_summary_assessment.py still has an old non-enforcing comment that canonical clauses were capped. It is not an assertion/runtime gate; no extra Unit edit in this bounded contract node.',\n 'semantic_open':'Condition qualification loss is a separate verified OPEN producer capability observation in condition-open.json, not made passing by this quota migration.'}\n(directory/'matrix.json').write_text(json.dumps(record,ensure_ascii=False,indent=2),encoding='utf-8')\nprint(json.dumps({'scanned':record['scan_python_files'],'areas':dict(areas),'matched':len(matrix),'dispositions':record['disposition_counts']}))\n"
+    },
+    "condition_observation.py": {
+      "sha256": "49f7cc6944f73bb779a1299f8db47b332c6836d9d1e4bdf5f9d4fd8b55066aad",
+      "bytes": 2917,
+      "text": "import json,sys\nfrom dataclasses import replace\nfrom pathlib import Path\nsys.path[:0]=['src','tests']\nfrom support.fresh_summary_fixture import grouped_selection,claim,draft_for\nfrom company_wiki.automation.narrative_model import NarrativeModelRequest,NarrativeModelResponse,decode_model_draft\nfrom company_wiki.automation.narrative_summary_assessment import prose_diagnostics,atomic_prose_diagnostics\nfrom company_wiki.automation.narrative_model_runtime import build_model_request,decode_model_draft as decode_runtime\nfrom company_wiki.automation.narrative_model_scoped import compile_scoped_model_view\nfrom unit.test_narrative_reading_transport import reading_context\ntext=('公司计划在项目建成后为工厂提供产能保障。','该安排仍须客户完成验收后方可投产。')\nrewritten='公司已为工厂提供产能保障。'\nselected=grouped_selection(text,('conditional','conditional'))\nrequest=NarrativeModelRequest.from_selection(selected)\nresponse=NarrativeModelResponse('offline','fixture',request.prompt_version,json.dumps(draft_for(selected,[claim(rewritten,['e1','e2'],['g1'])]),ensure_ascii=False).encode())\nrecord={'status':'OPEN_SEMANTIC_CAPABILITY_OBSERVATION_NOT_REPAIRED','scope':'Synthetic source quote and complete actual citations; no model call. Legacy closure never claimed general entailment; finite future diagnostics still miss this actual shape.',\n 'source_text':list(text),'claim_text':rewritten,'claim_modality':'actual',\n 'source_spans':[s.to_dict() for s in selected.evidence_spans],\n 'actual_legacy_decode':decode_model_draft(response,selected=selected),\n 'prose_diagnostics':prose_diagnostics(text[0],rewritten,'actual'),\n 'atomic_prose_diagnostics':atomic_prose_diagnostics(text[0],rewritten,'actual')}\ncontext=reading_context(selected)\ncontext['groups']=context['groups'][:1]\nsource=replace(selected,reading_context=context)\ntry:\n request=build_model_request(source,reading_projection_version='reading-model-input/7')\n view=compile_scoped_model_view(source,max_claims=40)\n task=view.model_tasks[0]\n parts=[part for part,sid in view.to_binding()['task_parts'][task.key].items() if sid in task.support_ids]\n response=NarrativeModelResponse('offline','fixture',request.prompt_version,json.dumps({'drafts_by_task':{task.key:[{'text':rewritten,'basis_parts':parts,'modality':'actual'}]}},ensure_ascii=False).encode())\n record['current_v7']={'request_prompt':request.prompt_version,'basis_parts':parts,'support_ids':list(task.support_ids),\n                       'actual_decode':decode_runtime(response,selected=source,reading_projection_version='reading-model-input/7')}\nexcept Exception as exc:\n record['current_v7']={'status':'OBSERVATION_UNAVAILABLE','exception':type(exc).__name__,'reason':str(exc)}\nPath('tmp/cc7/condition-open.json').write_text(json.dumps(record,ensure_ascii=False,indent=2),encoding='utf-8')\nprint(json.dumps(record,ensure_ascii=False,indent=2))\n"
+    }
+  },
+  "cleanup": {
+    "root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\cc7",
+    "initial_absence_asserted_before_creation": true,
+    "files": 21,
+    "bytes": 319144,
+    "removed": true
+  },
+  "acceptance": "Root/recipe non-author test delta and scan-matrix review then normal publish/CI required. Gate migration engineering is not a full true-summary semantic PASS; OPEN T4/R4 observation must be handled before that real acceptance."
+}

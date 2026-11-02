@@ -1,0 +1,135 @@
+{
+  "schema_version": "independent-tools-gate-rejection-review/1",
+  "status": "NEEDS_ROOT_FIX_P2",
+  "reviewer": "/root/rectify_readability",
+  "author_report": {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\gate-rejection-followup-20261102\\tools-repair-r2.json",
+    "sha256": "93a97ced46934a852d789bd720bb136e4748ef9c02750d82872e1f852fa7531c"
+  },
+  "reviewed_delivery_files_sha256": {
+    "src/company_wiki/_bounded_process.py": "0fe1ec07503055932ba9f6b05fa4143b56aaf8ce9861fac914bd581873f241f4",
+    "tools/document_understanding_benchmark/holdout_acceptance.py": "ec69dd77cb61034546261b9deab40c5df76c2da8e5e3e031efb9d2e0b64eaea4",
+    "tools/document_understanding_benchmark/holdout_acceptance_observer.py": "98c1070c8ebacd456d577d24f2470672973602941f48ffd14671d9dfd22f3fc7",
+    "tests/unit/test_holdout_observation_isolation.py": "a24103a2c4a4f13d1b6ecfad1a457cd4d11b673f6412a444c9886eef7e8876b3",
+    "tools/document_understanding_benchmark/phase_c_runner.py": "429bd2e6d4885770d16624d82dfb5c079eb4dfd1fec39178639f28a415e537e6",
+    "tools/holdout_replay/manifest.py": "f2411482c566867ae522b4c3f39ab0f2e69e55e5b85d661a2193e536e6b92380",
+    "tools/holdout_replay/runner.py": "859a2f96bcbe6bb3add1abe3c9d7bcf8112665dee497adb78514dd1677ba0d22",
+    "tools/holdout_replay/worker.py": "8e88073a8d6425e8cf5da6fb4199d99b1fe83d56fefd631157d39482154ae5ab",
+    "tools/holdout_replay/__main__.py": "06a7c82c22371d00c4cfad7a12c8c1f4ac4ca069087fc8101e9d9c4cc6b411a0",
+    "tests/unit/test_holdout_qualification_and_metadata.py": "16c90e160851b6f7f3e815a5fb9c73c1f93500f48d1249829d2b249330c0354d",
+    "tests/holdout/w18/test_manifest_freeze.py": "cd43d83507e1a3afef6d1af9f17db5c4769f43460b2bba67f2f5f7fe8318926c"
+  },
+  "identity_observed_at_end_of_independent_run": {
+    "src/company_wiki/_bounded_process.py": "0fe1ec07503055932ba9f6b05fa4143b56aaf8ce9861fac914bd581873f241f4",
+    "tools/document_understanding_benchmark/holdout_acceptance.py": "ec69dd77cb61034546261b9deab40c5df76c2da8e5e3e031efb9d2e0b64eaea4",
+    "tools/document_understanding_benchmark/holdout_acceptance_observer.py": "98c1070c8ebacd456d577d24f2470672973602941f48ffd14671d9dfd22f3fc7",
+    "tests/unit/test_holdout_observation_isolation.py": "a24103a2c4a4f13d1b6ecfad1a457cd4d11b673f6412a444c9886eef7e8876b3",
+    "tools/document_understanding_benchmark/phase_c_runner.py": "429bd2e6d4885770d16624d82dfb5c079eb4dfd1fec39178639f28a415e537e6",
+    "tools/holdout_replay/manifest.py": "f2411482c566867ae522b4c3f39ab0f2e69e55e5b85d661a2193e536e6b92380",
+    "tools/holdout_replay/runner.py": "859a2f96bcbe6bb3add1abe3c9d7bcf8112665dee497adb78514dd1677ba0d22",
+    "tools/holdout_replay/worker.py": "8e88073a8d6425e8cf5da6fb4199d99b1fe83d56fefd631157d39482154ae5ab",
+    "tools/holdout_replay/__main__.py": "06a7c82c22371d00c4cfad7a12c8c1f4ac4ca069087fc8101e9d9c4cc6b411a0",
+    "tests/unit/test_holdout_qualification_and_metadata.py": "16c90e160851b6f7f3e815a5fb9c73c1f93500f48d1249829d2b249330c0354d",
+    "tests/holdout/w18/test_manifest_freeze.py": "cd43d83507e1a3afef6d1af9f17db5c4769f43460b2bba67f2f5f7fe8318926c"
+  },
+  "identity_matches": {
+    "src/company_wiki/_bounded_process.py": true,
+    "tools/document_understanding_benchmark/holdout_acceptance.py": true,
+    "tools/document_understanding_benchmark/holdout_acceptance_observer.py": true,
+    "tests/unit/test_holdout_observation_isolation.py": true,
+    "tools/document_understanding_benchmark/phase_c_runner.py": true,
+    "tools/holdout_replay/manifest.py": true,
+    "tools/holdout_replay/runner.py": true,
+    "tools/holdout_replay/worker.py": true,
+    "tools/holdout_replay/__main__.py": true,
+    "tests/unit/test_holdout_qualification_and_metadata.py": true,
+    "tests/holdout/w18/test_manifest_freeze.py": true
+  },
+  "identity_method": "Author declared final freeze at entry; 11/11 hashes independently checked at end of the read-only 7-case run before notifying author to repair. No false assertion that an independent pre-run hash snapshot was saved. R3 delta review must independently capture before/after actual SHA.",
+  "findings": [
+    {
+      "id": "TOOLS-INDEPENDENT-P2-INPUT-OBSERVATION-IO",
+      "priority": "P2",
+      "status": "REPRODUCED",
+      "file": "tools/document_understanding_benchmark/holdout_acceptance_observer.py",
+      "symbol": "install.observed_generate",
+      "line": 122,
+      "trigger": "Only model-input.json Path.write_bytes raises OSError; canonical request_preflight returns a complete synthetic request.",
+      "actual": "OSError escapes before original_generate, native call count0, no incomplete observation event/atexit marker for this failure. Thus diagnostic capture still vetoes normal native work.",
+      "expected": "Treat optional body capture IO inability as observation unknown/incomplete while native generation still executes once; do not ignore successfully observed real body mismatch; paid pin/request recovery and real POST-once latch stay strict.",
+      "related_static_same_root": "observed_http also performs body_path exists/read_bytes/write_bytes without isolated observation errors (initial comparison and post-latch capture). These are the same optional body observer IO owner, not a new user permission. Only observed_generate write is independently executed RED in this report.",
+      "root_fix_scope": "Author requested to centralize model-input observation read/write errors, preserving genuine matching-byte comparison and the real transport post-once latch. Reviewer did not modify source."
+    }
+  ],
+  "checks": [
+    {
+      "id": "COMPLETE_PROTOCOL_OBSERVER_ERROR",
+      "status": "PASS",
+      "evidence": "Real owned child emits2.4MB JSON +33000stderr bytes; failing optional stderr observer called once; return0/full stdout; one retained stderr byte; stderr_observation_completeFalse; one native side effect."
+    },
+    {
+      "id": "DEVELOPMENT_UNKNOWN_DECLARATION",
+      "status": "PASS_4_CASES",
+      "evidence": "False/None/stringtrue/int1 prior freeze, with fresh/development/malformed list status/missing prior-use samples: global and every sample eligibleFalse, eligible_sample_count0."
+    },
+    {
+      "id": "NONZERO_WITH_LOG_FAILURE",
+      "status": "PASS",
+      "evidence": "Real owned child exit9 remains9 and native failed JSON remains complete despite only stderr log file write error; observation-incomplete marker visible."
+    },
+    {
+      "id": "QUALIFICATION_CALLER_CLOSURE",
+      "status": "READ_ONLY_CONFIRMED",
+      "evidence": "Same pure owner used by manifest runner selected set, per-sample row before resolve/failure/timeout paths, worker result initializer, verify-freeze/stdout, bootstrap.json/stdout and run CLI top-level. No runtime clean-loop counter in this tools tree consumes generic overall=ok as independent/quality success; scope explicitly declared_sample_independence_not_quality_or_loop_stopping. Mixed eligible/ineligible declarations remain per-sample, no quality PASS claim."
+    },
+    {
+      "id": "TRUE_BOUNDARIES",
+      "status": "READ_ONLY_RETAINED",
+      "evidence": "Actual SHA+byte comparison survives mtime-only drift; missing SHA/bytes unequal; native history/usage changes not waived. verify_producer mismatch and verify_manifest_gold actual pinned hash still reject. Child deadline/tree cleanup, nonzero, explicit stdout byte cap, PaidResponsePin durability, request mismatch and post-once latch are not removed by diff. No author22 or full Unit rerun claimed."
+    }
+  ],
+  "independent_execution": {
+    "command": "PYTHONPATH=src;tests PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 PYTHONDONTWRITEBYTECODE=1 C:/Miniconda/python.exe -B -X utf8 -m pytest tmp/ti7/review_tools.py -q --tb=short -p no:cacheprovider --basetemp tmp/ti7/b --junitxml tmp/ti7/review.xml",
+    "result": "6P1F",
+    "pytest_seconds": 3.39,
+    "tests": 7,
+    "scope": "Pure synthetic fixtures/real owned child only; original_generate intentionally stubbed and request_preflight seam explicit; no real provider, source parser, company data or quality acceptance."
+  },
+  "codegraph": "Caller queries for declared_holdout_qualification and _same_content returned no edges in current index; actual diff and known entry/caller files read, not inferred graph coverage.",
+  "artifacts": {
+    "identity.json": {
+      "sha256": "c55290c67b53f3d6de7e2a71876b3c67b0e7216be0c76e264f0e774bbe359624",
+      "bytes": 3497,
+      "text": "{\n  \"author_report_sha256\": \"93a97ced46934a852d789bd720bb136e4748ef9c02750d82872e1f852fa7531c\",\n  \"expected_sha256\": {\n    \"src/company_wiki/_bounded_process.py\": \"0fe1ec07503055932ba9f6b05fa4143b56aaf8ce9861fac914bd581873f241f4\",\n    \"tools/document_understanding_benchmark/holdout_acceptance.py\": \"ec69dd77cb61034546261b9deab40c5df76c2da8e5e3e031efb9d2e0b64eaea4\",\n    \"tools/document_understanding_benchmark/holdout_acceptance_observer.py\": \"98c1070c8ebacd456d577d24f2470672973602941f48ffd14671d9dfd22f3fc7\",\n    \"tests/unit/test_holdout_observation_isolation.py\": \"a24103a2c4a4f13d1b6ecfad1a457cd4d11b673f6412a444c9886eef7e8876b3\",\n    \"tools/document_understanding_benchmark/phase_c_runner.py\": \"429bd2e6d4885770d16624d82dfb5c079eb4dfd1fec39178639f28a415e537e6\",\n    \"tools/holdout_replay/manifest.py\": \"f2411482c566867ae522b4c3f39ab0f2e69e55e5b85d661a2193e536e6b92380\",\n    \"tools/holdout_replay/runner.py\": \"859a2f96bcbe6bb3add1abe3c9d7bcf8112665dee497adb78514dd1677ba0d22\",\n    \"tools/holdout_replay/worker.py\": \"8e88073a8d6425e8cf5da6fb4199d99b1fe83d56fefd631157d39482154ae5ab\",\n    \"tools/holdout_replay/__main__.py\": \"06a7c82c22371d00c4cfad7a12c8c1f4ac4ca069087fc8101e9d9c4cc6b411a0\",\n    \"tests/unit/test_holdout_qualification_and_metadata.py\": \"16c90e160851b6f7f3e815a5fb9c73c1f93500f48d1249829d2b249330c0354d\",\n    \"tests/holdout/w18/test_manifest_freeze.py\": \"cd43d83507e1a3afef6d1af9f17db5c4769f43460b2bba67f2f5f7fe8318926c\"\n  },\n  \"observed_sha256\": {\n    \"src/company_wiki/_bounded_process.py\": \"0fe1ec07503055932ba9f6b05fa4143b56aaf8ce9861fac914bd581873f241f4\",\n    \"tools/document_understanding_benchmark/holdout_acceptance.py\": \"ec69dd77cb61034546261b9deab40c5df76c2da8e5e3e031efb9d2e0b64eaea4\",\n    \"tools/document_understanding_benchmark/holdout_acceptance_observer.py\": \"98c1070c8ebacd456d577d24f2470672973602941f48ffd14671d9dfd22f3fc7\",\n    \"tests/unit/test_holdout_observation_isolation.py\": \"a24103a2c4a4f13d1b6ecfad1a457cd4d11b673f6412a444c9886eef7e8876b3\",\n    \"tools/document_understanding_benchmark/phase_c_runner.py\": \"429bd2e6d4885770d16624d82dfb5c079eb4dfd1fec39178639f28a415e537e6\",\n    \"tools/holdout_replay/manifest.py\": \"f2411482c566867ae522b4c3f39ab0f2e69e55e5b85d661a2193e536e6b92380\",\n    \"tools/holdout_replay/runner.py\": \"859a2f96bcbe6bb3add1abe3c9d7bcf8112665dee497adb78514dd1677ba0d22\",\n    \"tools/holdout_replay/worker.py\": \"8e88073a8d6425e8cf5da6fb4199d99b1fe83d56fefd631157d39482154ae5ab\",\n    \"tools/holdout_replay/__main__.py\": \"06a7c82c22371d00c4cfad7a12c8c1f4ac4ca069087fc8101e9d9c4cc6b411a0\",\n    \"tests/unit/test_holdout_qualification_and_metadata.py\": \"16c90e160851b6f7f3e815a5fb9c73c1f93500f48d1249829d2b249330c0354d\",\n    \"tests/holdout/w18/test_manifest_freeze.py\": \"cd43d83507e1a3afef6d1af9f17db5c4769f43460b2bba67f2f5f7fe8318926c\"\n  },\n  \"matches\": {\n    \"src/company_wiki/_bounded_process.py\": true,\n    \"tools/document_understanding_benchmark/holdout_acceptance.py\": true,\n    \"tools/document_understanding_benchmark/holdout_acceptance_observer.py\": true,\n    \"tests/unit/test_holdout_observation_isolation.py\": true,\n    \"tools/document_understanding_benchmark/phase_c_runner.py\": true,\n    \"tools/holdout_replay/manifest.py\": true,\n    \"tools/holdout_replay/runner.py\": true,\n    \"tools/holdout_replay/worker.py\": true,\n    \"tools/holdout_replay/__main__.py\": true,\n    \"tests/unit/test_holdout_qualification_and_metadata.py\": true,\n    \"tests/holdout/w18/test_manifest_freeze.py\": true\n  }\n}"
+    },
+    "review.log": {
+      "sha256": "c388104510a0a09de7bffcb698080aae8c5f3e48da3c9716c0d3c3c60a5e2416",
+      "bytes": 2042,
+      "text": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\ti7\\\\b\", \"requested_basetemp_len\": 44, \"cwd_len\": 34, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\nconfigfile: pytest.ini\ncollected 7 items\n\ntmp\\ti7\\review_tools.py .F.....                                          [100%]\n\n================================== FAILURES ===================================\n___ test_model_input_observation_write_failure_cannot_replace_native_result ___\ntmp\\ti7\\review_tools.py:63: in test_model_input_observation_write_failure_cannot_replace_native_result\n    result=BudgetedNarrativeCaller.generate(SimpleNamespace(_model=None,_run_id='one'),\ntools\\document_understanding_benchmark\\holdout_acceptance_observer.py:122: in observed_generate\n    body_path.write_bytes(body)\ntmp\\ti7\\review_tools.py:58: in fail_input\n    raise OSError('synthetic observer body storage failure')\nE   OSError: synthetic observer body storage failure\n============================== warnings summary ===============================\n..\\..\\..\\..\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464\n  C:\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode\n  \n    self._warn_or_fail_if_strict(f\"Unknown config option: {key}\\n\")\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n-- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\ti7\\review.xml --\n=========================== short test summary info ===========================\nFAILED tmp/ti7/review_tools.py::test_model_input_observation_write_failure_cannot_replace_native_result\n=================== 1 failed, 6 passed, 1 warning in 3.39s ====================\n"
+    },
+    "review.xml": {
+      "sha256": "a7950177c031cd63068f37ec02ac109fdc8e54ae8981a80affc8cc4f630787ac",
+      "bytes": 1771,
+      "text": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"1\" skipped=\"0\" tests=\"7\" time=\"3.306\" timestamp=\"2026-11-02T15:04:06.610758+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tmp.ti7.review_tools\" name=\"test_stderr_observer_exception_does_not_retry_or_clip_completed_protocol\" time=\"0.335\" /><testcase classname=\"tmp.ti7.review_tools\" name=\"test_model_input_observation_write_failure_cannot_replace_native_result\" time=\"0.054\"><failure message=\"OSError: synthetic observer body storage failure\">tmp\\ti7\\review_tools.py:63: in test_model_input_observation_write_failure_cannot_replace_native_result\n    result=BudgetedNarrativeCaller.generate(SimpleNamespace(_model=None,_run_id='one'),\ntools\\document_understanding_benchmark\\holdout_acceptance_observer.py:122: in observed_generate\n    body_path.write_bytes(body)\ntmp\\ti7\\review_tools.py:58: in fail_input\n    raise OSError('synthetic observer body storage failure')\nE   OSError: synthetic observer body storage failure</failure></testcase><testcase classname=\"tmp.ti7.review_tools\" name=\"test_unfrozen_development_or_unknown_prior_never_gets_clean_counts[False]\" time=\"0.002\" /><testcase classname=\"tmp.ti7.review_tools\" name=\"test_unfrozen_development_or_unknown_prior_never_gets_clean_counts[None]\" time=\"0.002\" /><testcase classname=\"tmp.ti7.review_tools\" name=\"test_unfrozen_development_or_unknown_prior_never_gets_clean_counts[true]\" time=\"0.001\" /><testcase classname=\"tmp.ti7.review_tools\" name=\"test_unfrozen_development_or_unknown_prior_never_gets_clean_counts[1]\" time=\"0.001\" /><testcase classname=\"tmp.ti7.review_tools\" name=\"test_controller_observation_failure_does_not_hide_real_nonzero\" time=\"0.224\" /></testsuite></testsuites>"
+    },
+    "review_tools.py": {
+      "sha256": "1fa111bac76b08052dc17748de3ed33b9264e062d85a12e01f9ea10d20f30588",
+      "bytes": 4748,
+      "text": "from __future__ import annotations\nimport atexit\nimport hashlib\nimport json\nimport os\nfrom pathlib import Path\nimport subprocess\nimport sys\nfrom types import SimpleNamespace\n\nimport pytest\n\nfrom company_wiki._bounded_process import run_bounded\nfrom company_wiki.automation.narrative_model_caller import BudgetedNarrativeCaller\nfrom tools.document_understanding_benchmark import holdout_acceptance as controller\nfrom tools.document_understanding_benchmark import holdout_acceptance_contracts as contracts\nfrom tools.document_understanding_benchmark import holdout_acceptance_observer as observer\nfrom tools.holdout_replay.manifest import declared_holdout_qualification\n\n\ndef test_stderr_observer_exception_does_not_retry_or_clip_completed_protocol(tmp_path):\n    marker = tmp_path/'native-count'\n    command = [sys.executable,'-B','-c',\n        \"import sys;from pathlib import Path;\"+f\"Path({str(marker)!r}).write_text('one');\"+\n        \"sys.stderr.buffer.write(b'diagnostics'*3000);sys.stderr.flush();\"+\n        \"sys.stdout.buffer.write(b'{\\\"payload\\\":\\\"'+b'x'*2400000+b'\\\"}')\"]\n    calls=[]\n    def broken(chunk):\n        calls.append(len(chunk))\n        raise OSError('synthetic observer failure')\n    result=run_bounded(command,timeout_seconds=6,stdout_cap_bytes=None,stderr_cap_bytes=1,\n        stderr_log_tail=True,stderr_observer=broken)\n    assert result['returncode']==0 and len(json.loads(result['stdout'])['payload'])==2400000\n    assert result['stderr_observation_complete'] is False and len(calls)==1\n    assert marker.read_text()=='one' and result['stderr_bytes_read']==33000\n\n\ndef test_model_input_observation_write_failure_cannot_replace_native_result(tmp_path,monkeypatch,capsys):\n    config=tmp_path/'controller.json'\n    config.write_text(json.dumps({'receipt_dir':str(tmp_path),'stage':'cache','allow_local_model_http':False}))\n    monkeypatch.setenv('CWP_HOLDOUT_CONTROLLER',str(config))\n    monkeypatch.setattr(observer,'_INSTALLED',False)\n    callbacks=[]\n    monkeypatch.setattr(atexit,'register',callbacks.append)\n    calls=[]\n    monkeypatch.setattr(BudgetedNarrativeCaller,'generate',lambda *a: calls.append('native') or ('response','usage'))\n    # Register all observer-owned class mutations with MonkeyPatch restoration.\n    import http.client\n    from company_wiki.automation.narrative_http_model import NarrativeHTTPModel\n    from company_wiki.automation.store import AutomationStore\n    for cls,name in [(http.client.HTTPConnection,'request'),(BudgetedNarrativeCaller,'_recover'),\n                     (NarrativeHTTPModel,'replay_response'),(AutomationStore,'finish_attempt')]:\n        monkeypatch.setattr(cls,name,getattr(cls,name))\n    monkeypatch.setattr(contracts,'request_preflight',lambda *a:(b'{\"native\":\"request\"}',{'http_body_sha256':'a'*64}))\n    old_write=Path.write_bytes\n    def fail_input(path,data):\n        if path.name=='model-input.json':\n            raise OSError('synthetic observer body storage failure')\n        return old_write(path,data)\n    monkeypatch.setattr(Path,'write_bytes',fail_input)\n    observer.install()\n    try:\n        result=BudgetedNarrativeCaller.generate(SimpleNamespace(_model=None,_run_id='one'),\n            SimpleNamespace(attempt=SimpleNamespace(attempt_id='one')),None)\n    finally:\n        for callback in callbacks:\n            callback()\n    assert result==('response','usage') and calls==['native']\n    assert 'HOLDOUT_OBSERVATION_INCOMPLETE' in capsys.readouterr().err\n\n\n@pytest.mark.parametrize('frozen',[False,None,'true',1])\ndef test_unfrozen_development_or_unknown_prior_never_gets_clean_counts(frozen):\n    value=declared_holdout_qualification({'frozen_before_candidate_output':frozen,'samples':[\n        {'sample_id':'a','prior_use':{'status':'fresh'}},{'sample_id':'b','prior_use':{'status':'development'}},\n        {'sample_id':'c','prior_use':{'status':['fresh']}},{'sample_id':'d'}]})\n    assert value['eligible_for_clean_holdout'] is False and value['eligible_sample_count']==0\n    assert all(row['eligible_for_clean_holdout'] is False for row in value['samples'])\n\n\ndef test_controller_observation_failure_does_not_hide_real_nonzero(tmp_path,monkeypatch):\n    old_write=Path.write_bytes\n    def fail_log(path,value):\n        if path.name.endswith('.stderr.log'):\n            raise OSError('synthetic log failure')\n        return old_write(path,value)\n    monkeypatch.setattr(Path,'write_bytes',fail_log)\n    code,body,stderr=controller._process([sys.executable,'-B','-c',\n        \"import sys;print('{\\\"status\\\":\\\"failed\\\"}');sys.exit(9)\"],\n        env=dict(os.environ),root=tmp_path,output=tmp_path,label='failed',timeout=5,log_limit=1)\n    assert code==9 and json.loads(body)['status']=='failed'\n    assert b'HOLDOUT_OBSERVATION_INCOMPLETE' in stderr\n"
+    }
+  },
+  "runtime_source_or_tests_modified": false,
+  "git_index_or_main_pwf_modified": false,
+  "production_or_original_read": false,
+  "keys_read": false,
+  "paid_calls": 0,
+  "downloads": 0,
+  "network_calls": 0,
+  "cleanup": {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\ti7",
+    "ownership": "All listed top-level entries are this independent probe, identity seal, logs/XML and its pytest-owned basetemp. Directory absence was not independently timestamped before AddFile; no stronger restoration claim. Unexpected top-level entries would prevent cleanup.",
+    "files": 7,
+    "bytes": 12650,
+    "deleted": true
+  }
+}

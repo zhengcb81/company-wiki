@@ -1,0 +1,35 @@
+{
+  "status": "AUTHOR_FROZEN_PENDING_INDEPENDENT_REVIEW",
+  "delivery_files_sha256": {
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\transcript_tool_transport.py": "8fb1678687a005b5f43cbd85f90974318f50986067dc89111c01963aef739284",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\tests\\test_transcript_owner_budget.py": "82fb638270c0e5eededa3bec92b230399a1014a27482f94d319e2880b0a06534",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\tests\\test_transcript_response_budget.py": "e3b2578a49631a87107c00ee8adbb3dd1a3ac0dbce55a29677d379d52581a419"
+  },
+  "red_record": ".planning/architecture-quality-20261101/r7-publication/ff-residual-r8-budget-red.json",
+  "green_record": ".planning/architecture-quality-20261101/r7-publication/ff-residual-r8-budget-green.json",
+  "tests": {
+    "red": "3F1P",
+    "green": "85P3skip/1.98s",
+    "ruff_files": 3
+  },
+  "root_cause": "FF second min(max_bytes,10MiB) and min(explicit/remaining timeout,60) override caller resources before ET accounting.",
+  "repair": "Forward max_bytes as both raw and decoded body allocation; timeout=min(explicit, parent remaining-cleanup), integer granularity preserved.",
+  "boundary": [
+    "Actual parent remaining<=cleanup+one second stops before key/child.",
+    "Actual ET read/time/fee budget remains its sole owner.",
+    "Actual measured usage not clamped; no retry after provider/import failure.",
+    "ET matching positive timeout support is a required same-node dependency."
+  ],
+  "paid_calls": 0,
+  "downloads": 0,
+  "originals_modified": 0,
+  "configs_modified": 0,
+  "r2": {
+    "root": "ET opt-in payload still used generic fixed32MiB FF pipe despite larger operation quota.",
+    "repair": "Conservative JSON/base64 transport allocation derived from actual source quota; real process owner enforces it while reading. Other callers defaults unchanged.",
+    "red": "1real RED missing pipe budget; two intermediate4P1F runs had incomplete new not_found fixture fields; fixture corrected only.",
+    "green": "5targetedP/0.29s; see ff-residual-r8-wire-final2.json",
+    "ruff": "2delta files passed",
+    "not_run": "No128MiB provider payload or live HTTP; wire spy proves actual budget forwarded, existing bounded-process owner protects reads."
+  }
+}

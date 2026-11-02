@@ -1,0 +1,280 @@
+{
+  "schema_version": "cwp-contract-independent/1",
+  "status": "PASS",
+  "scope": "Retired output-quota contract migration only. SEM-QUAL-01 remains actual OPEN product issue; no semantic completeness or real-summary acceptance.",
+  "author_report_sha256": "b829fd5c9cfdc9e12159413553b7b297d3b8af506798f09f60bf848ae9ec0ccb",
+  "delivery_files_sha256": {
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\contract\\test_summary_group_coverage.py": "a10ace0972d824465c8aeed535879569bdcb183a06bc4cd9f42918335fa8b117"
+  },
+  "test_before": {
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\contract\\test_summary_group_coverage.py": "a10ace0972d824465c8aeed535879569bdcb183a06bc4cd9f42918335fa8b117"
+  },
+  "test_after": {
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\contract\\test_summary_group_coverage.py": "a10ace0972d824465c8aeed535879569bdcb183a06bc4cd9f42918335fa8b117"
+  },
+  "protected_source_fixture_before": {
+    "src/company_wiki/automation/narrative_model.py": "e62a1cecffa783dced349578cbbf1627edd9207f4343ffd78662c35f6de80216",
+    "src/company_wiki/automation/narrative_model_scoped.py": "4b7be2625e2428054ad79d760b7f61ed462268590a92968c972e1476f6b2ee69",
+    "src/company_wiki/automation/narrative_model_runtime.py": "89c71ca89939322271fc0e7e4bb3e02c3a8e3b70d7de950ab35c0dc62abdff5b",
+    "src/company_wiki/automation/narrative_summary_protocols.py": "ff88f8db4d5935f70462ec4268d15ba9495e77df57138714cbc62e54f1689a45",
+    "tests/fixtures/atomic_recipe_legacy_requests.json": "2be3eaebf88763484324162d4d20a39042320a0b7ee8d3d0520fc86b6568b53d"
+  },
+  "protected_source_fixture_after": {
+    "src/company_wiki/automation/narrative_model.py": "e62a1cecffa783dced349578cbbf1627edd9207f4343ffd78662c35f6de80216",
+    "src/company_wiki/automation/narrative_model_scoped.py": "4b7be2625e2428054ad79d760b7f61ed462268590a92968c972e1476f6b2ee69",
+    "src/company_wiki/automation/narrative_model_runtime.py": "89c71ca89939322271fc0e7e4bb3e02c3a8e3b70d7de950ab35c0dc62abdff5b",
+    "src/company_wiki/automation/narrative_summary_protocols.py": "ff88f8db4d5935f70462ec4268d15ba9495e77df57138714cbc62e54f1689a45",
+    "tests/fixtures/atomic_recipe_legacy_requests.json": "2be3eaebf88763484324162d4d20a39042320a0b7ee8d3d0520fc86b6568b53d"
+  },
+  "review": [
+    "Only the declared contract test file changed, not runtime/decoder/fixture/hash/config.",
+    "Positive over-quota examples are21 independent exact source quotes and a complete>280char planned statement, not fabricated repeated claims or nonexistent group aliases.",
+    "Foreign citations/source SHA and missing conditional group support still reject; supported finite-modality mismatch remains diagnostic. Mechanical closure does not claim proposition entailment.",
+    "Actual CI selected file was outside former Unit-only closure. Whole tests-tree matrix includes Unit, contract, integration/e2e and actual focused selector; matches are classified rather than bulk replacing all20/280 values."
+  ],
+  "independent_contract_tests": {
+    "counts": {
+      "tests": "4",
+      "failures": "0",
+      "errors": "0",
+      "time": "1.584"
+    },
+    "junit": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"0\" skipped=\"0\" tests=\"4\" time=\"1.584\" timestamp=\"2026-11-02T18:42:15.220397+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tests.contract.test_summary_group_coverage\" name=\"test_valid_source_output_keeps_twenty_one_claims_and_long_qualifiers_without_extra_quotas\" time=\"0.118\" /><testcase classname=\"tests.contract.test_summary_group_coverage\" name=\"test_removing_output_quotas_does_not_accept_wrong_source_or_reference[reference]\" time=\"0.005\" /><testcase classname=\"tests.contract.test_summary_group_coverage\" name=\"test_removing_output_quotas_does_not_accept_wrong_source_or_reference[source]\" time=\"0.006\" /><testcase classname=\"tests.contract.test_summary_group_coverage\" name=\"test_condition_support_and_finite_modality_diagnostics_survive_quota_retirement\" time=\"0.024\" /></testsuite></testsuites>",
+    "log": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\ct7\\\\bt-delta\", \"requested_basetemp_len\": 51, \"cwd_len\": 34, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\ncachedir: tmp\\ct7\\pytest-cache\nbenchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\nconfigfile: pytest.ini\nplugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollected 4 items\n\ntests\\contract\\test_summary_group_coverage.py ....                       [100%]\n\n-- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\ct7\\delta.xml ---\n============================== 4 passed in 1.59s ==============================\n"
+  },
+  "matrix_review": {
+    "actual_python_file_counts": {
+      "conftest.py": 1,
+      "test_budget_policy_totals.py": 1,
+      "test_config_doctor.py": 1,
+      "test_phase_c_activation_recovery.py": 1,
+      "test_phase_c_extractive.py": 1,
+      "test_phase_c_finalization.py": 1,
+      "test_phase_c_readonly_source.py": 1,
+      "test_rank_material_observation.py": 1,
+      "test_relevance.py": 1,
+      "acceptance": 2,
+      "archive": 1,
+      "contract": 244,
+      "document_normalization": 12,
+      "e2e": 10,
+      "financial_statements": 13,
+      "helpers": 7,
+      "integration": 128,
+      "support": 26,
+      "unit": 593,
+      "holdout": 2,
+      "fixtures": 15
+    },
+    "matched_files": 70,
+    "initial_match_lines": 161,
+    "all70_current_file_sha_verified": true,
+    "classification_counts": {
+      "KEPT_REAL_SOURCE_REFERENCE_ROLE_OR_STATE_CORRECTNESS": 5,
+      "KEPT_ACTUAL_WORK_DISCOVERY_OR_RESOURCE_CONTROLS": 8,
+      "KEPT_ADVISORY_PLAN_OR_FINITE_DIAGNOSTIC_OBSERVATION": 20,
+      "NOT_A_SUMMARY_OUTPUT_LICENSE_LITERAL": 20,
+      "MIGRATED_RETIRED_LICENSE_ORACLE": 1,
+      "KEPT_IMMUTABLE_CAPTURE_OR_LITERAL_DATA": 8,
+      "KEPT_POSITIVE_COMPLETED_OUTPUT_OR_REUSE_OBSERVATION": 6,
+      "KEPT_EXPLICIT_HISTORICAL_PROJECTION": 1,
+      "KEPT_ADVISORY_AND_SYNTHETIC_MODEL_EXAMPLE": 1
+    },
+    "only_migrated_oracle": [
+      "tests/contract/test_summary_group_coverage.py"
+    ],
+    "initial_candidate_lines_are_historical_not_current_remaining_gates": true,
+    "ci_case_specs": [
+      "tests/contract/test_local_prepare_failure_boundaries.py::test_real_discovery_completed_write_survives_later_unknown_failure",
+      "tests/document_normalization/test_ocr_region_recovery.py::test_roi_budget_preflight_never_calls_rejected_renderer",
+      "tests/document_normalization/test_ocr_region_recovery.py::test_rejected_render_attempt_keeps_reserved_budget",
+      "tests/document_normalization/test_ocr_region_recovery.py::test_upscale_preflight_accounts_for_64m_canvas_without_allocating_it",
+      "tests/document_normalization/test_isolated_ocr.py::test_noncooperative_native_stops_at_product_deadline[gil-block-inference-infer]",
+      "tests/document_normalization/test_isolated_ocr.py::test_native_stdin_probe_does_not_deadlock_liveness_monitor[preflight]",
+      "tests/document_normalization/test_isolated_ocr.py::test_narrative_default_proxy_carries_deadline_without_starting_native",
+      "tests/integration/test_m3_official_json_acceptance.py",
+      "tests/contract/test_zr203_reader_rewire.py::test_read_entrypoints_never_construct_catalog_store",
+      "tests/contract/test_zr1003_shadow_assertions.py::test_c2_recorded_review_is_diagnostic_metadata",
+      "tests/contract/test_zr1006_broker_cohort.py::test_c2_ramp_1_to_3_to_7",
+      "tests/contract/test_source_catalog_temp_worker_governance.py::test_owned_temp_worker_helper_detects_test_pid",
+      "tests/contract/test_source_catalog_temp_worker_governance.py::test_stop_does_not_touch_unowned_live_workers_or_temporary_files",
+      "tests/contract/test_narrative_output_plan.py",
+      "tests/contract/test_summary_group_coverage.py",
+      "tests/contract/test_official_transcript_layouts.py",
+      "tests/contract/test_transcript_speaker_affiliation.py",
+      "tests/contract/test_source_scope_qualification.py",
+      "tests/contract/test_narrative_availability.py::test_one_verified_original_buffer_one_owner_lookup_no_new_fact_writer",
+      "tests/contract/test_narrative_availability.py::test_projected_two_parents_cannot_borrow_one_raw_proof",
+      "tests/contract/test_fc905_receipt_envelope.py::test_pi03_no_review_is_explicit_not_reviewed",
+      "tests/contract/test_b10_read_chain.py::test_b10_scan_is_not_vacuous"
+    ],
+    "ci_unique_file_count": 16,
+    "actual_ci_entry": "tools/pre_push_gate.py --fast-contracts-only uses CI_CONTRACT_CASES (Unit excluded because separate complete Unit job)",
+    "boundaries": "The pattern audit is not proof of zero unknown defects. Non-enforcing old comments/immutable captures/advisory/example/numeric geometry are not runtime permissions."
+  },
+  "semantic_readiness": "OPEN_NOT_ACCEPTED",
+  "open_product_findings": [
+    {
+      "id": "SEM-QUAL-01",
+      "author_id": "T4-R4-CONDITION-SCOPE-LOSS",
+      "priority": "P2",
+      "status": "INDEPENDENTLY_REPRODUCED_OPEN_MUST_FIX_BEFORE_REAL_SUMMARY_ACCEPTANCE",
+      "observed": {
+        "issue": "SEM-QUAL-01/T4-R4-CONDITION-SCOPE-LOSS",
+        "assessment": "OPEN_PRODUCT_CAPABILITY_NOT_A_PASS_OR_FIXED_FIXTURE",
+        "source_text": [
+          "公司计划在项目建成后为工厂提供产能保障。",
+          "该安排仍须客户完成验收后方可投产。"
+        ],
+        "claim_text": "公司已为工厂提供产能保障。",
+        "source_spans": [
+          {
+            "schema_version": "1.0.0",
+            "span_id": "urn:company-wiki:evidence-span:sha256:b20308d0a4969ddb4c0b7dfe965ee20e3ef757f3b8299a625b594bfc3958bdde",
+            "source_id": "urn:company-wiki:source:sha256:4d8193c55d4e7a77d9342b52362c5ef02c45d6e308fe4426d8beacae4944d569",
+            "locator": "loc:v1/page:9/paragraph:32",
+            "coordinates": {
+              "page_number": 9,
+              "paragraph_index": 32,
+              "table_index": null,
+              "row_index": null,
+              "column_index": null,
+              "char_start": null,
+              "char_end": null
+            },
+            "raw_text": "公司计划在项目建成后为工厂提供产能保障。",
+            "structured_value": {
+              "source_role": "company_filing",
+              "language": "zh",
+              "selection_group_id": "conditional"
+            },
+            "parser_name": "synthetic-source-derived",
+            "parser_version": "1.0.0",
+            "output_sha256": "3a1a3dc82f1e34f38204dc8dcd282a911a56ee7238b347abcc743ef213f2cf49",
+            "parse_status": "parsed",
+            "quality_flags": []
+          },
+          {
+            "schema_version": "1.0.0",
+            "span_id": "urn:company-wiki:evidence-span:sha256:fa4a3af7f5591ac3260ca0a292a6aa29a8aa2a5787adffa5f7392a553d08311d",
+            "source_id": "urn:company-wiki:source:sha256:4d8193c55d4e7a77d9342b52362c5ef02c45d6e308fe4426d8beacae4944d569",
+            "locator": "loc:v1/page:9/paragraph:33",
+            "coordinates": {
+              "page_number": 9,
+              "paragraph_index": 33,
+              "table_index": null,
+              "row_index": null,
+              "column_index": null,
+              "char_start": null,
+              "char_end": null
+            },
+            "raw_text": "该安排仍须客户完成验收后方可投产。",
+            "structured_value": {
+              "source_role": "company_filing",
+              "language": "zh",
+              "selection_group_id": "conditional"
+            },
+            "parser_name": "synthetic-source-derived",
+            "parser_version": "1.0.0",
+            "output_sha256": "be1e8d10cc7359ae22ddaceec74768fbfd36cc997ffaf80531b47bbbd12d4384",
+            "parse_status": "parsed",
+            "quality_flags": []
+          }
+        ],
+        "legacy": {
+          "source_id": "urn:company-wiki:source:sha256:4d8193c55d4e7a77d9342b52362c5ef02c45d6e308fe4426d8beacae4944d569",
+          "source_sha256": "4d8193c55d4e7a77d9342b52362c5ef02c45d6e308fe4426d8beacae4944d569",
+          "language": "zh",
+          "claims": [
+            {
+              "claim_id": "c1",
+              "text": "公司已为工厂提供产能保障。",
+              "evidence_ids": [
+                "urn:company-wiki:evidence-span:sha256:b20308d0a4969ddb4c0b7dfe965ee20e3ef757f3b8299a625b594bfc3958bdde",
+                "urn:company-wiki:evidence-span:sha256:fa4a3af7f5591ac3260ca0a292a6aa29a8aa2a5787adffa5f7392a553d08311d"
+              ],
+              "claim_type": "company_statement",
+              "modality": "actual",
+              "needs_review": false
+            }
+          ],
+          "status": "draft"
+        },
+        "prose_diagnostics": [],
+        "atomic_diagnostics": [],
+        "current_v7": {
+          "prompt_version": "reading-source-scoped/4.3.0",
+          "support_ids": [
+            "urn:company-wiki:evidence-span:sha256:b20308d0a4969ddb4c0b7dfe965ee20e3ef757f3b8299a625b594bfc3958bdde",
+            "urn:company-wiki:evidence-span:sha256:fa4a3af7f5591ac3260ca0a292a6aa29a8aa2a5787adffa5f7392a553d08311d"
+          ],
+          "basis_parts": [
+            "p1",
+            "p2"
+          ],
+          "draft": {
+            "source_id": "urn:company-wiki:source:sha256:4d8193c55d4e7a77d9342b52362c5ef02c45d6e308fe4426d8beacae4944d569",
+            "source_sha256": "4d8193c55d4e7a77d9342b52362c5ef02c45d6e308fe4426d8beacae4944d569",
+            "language": "zh",
+            "claims": [
+              {
+                "claim_id": "t1-1",
+                "text": "公司已为工厂提供产能保障。",
+                "evidence_ids": [
+                  "urn:company-wiki:evidence-span:sha256:b20308d0a4969ddb4c0b7dfe965ee20e3ef757f3b8299a625b594bfc3958bdde",
+                  "urn:company-wiki:evidence-span:sha256:fa4a3af7f5591ac3260ca0a292a6aa29a8aa2a5787adffa5f7392a553d08311d"
+                ],
+                "claim_type": "company_statement",
+                "modality": "actual",
+                "needs_review": false
+              }
+            ],
+            "status": "draft"
+          }
+        }
+      },
+      "owner_sha256": {
+        "src/company_wiki/automation/narrative_summary_assessment.py": "f1a86e4ff560d7a6029ff7338542b1407e392b745da7f1a4488a95155812dc16"
+      },
+      "interpretation": "Original conditional future plan and required acceptance are rewritten as completed actual claim with complete support. Legacy and v7 both return draft/needs_reviewfalse and finite prose/atomic diagnostics[]. This is a real current capability problem, not solved by switching the passing control to a known-supported sentence.",
+      "disposition": "ROOT carries into T4/R4 shared source/claim qualification task before real-summary acceptance. Do not add a company/one-sentence patch or treat every mechanical citation as semantic proof."
+    }
+  ],
+  "original_history": "CI77d8c83f Unit success and Focused1old oracleFAIL preserved; author focused149=147P2F, alias fixturefix and retained semantic OPEN separate; only two fixed current controls rerun2P. Independent4P is neither149rerun nor a semanticPASS.",
+  "future_checklist_method": [
+    "Locate production schema/decoder/wire owners and actual callers first.",
+    "Scan/classify the entire tests tree, including Unit, contract, integration/e2e, immutable support/fixtures. Separate real budgets/source/role constraints from retired output permission.",
+    "Read actual CI selector/job commands and map affected test nodes/files, not merely Unit directory or pattern names.",
+    "Run the actual affected focused selection once; preserve full failure identities; retest only changed failed deltas. No per-edit approvals or repeated complete Unit.",
+    "Keep semantic counterexamples with exact source, locator, support and actual decoder output OPEN under their real owner; green quota migration cannot close them."
+  ],
+  "pwf_ownership": "ROOT owns task_plan/CURRENT_STATUS/T4 plan update; review did not rewrite shared PWF. ROOT explicitly confirmed SEM-QUAL-01 must be carried in the pending same publication.",
+  "semantic_probe_source": "from dataclasses import replace\nfrom pathlib import Path\nimport hashlib\nimport json\nimport sys\n\nROOT=Path(__file__).resolve().parents[2]\nsys.path[:0]=[str(ROOT/'src'),str(ROOT/'tests')]\nfrom support.fresh_summary_fixture import grouped_selection,claim,draft_for\nfrom company_wiki.automation.narrative_model import NarrativeModelRequest,NarrativeModelResponse,decode_model_draft\nfrom company_wiki.automation.narrative_summary_assessment import prose_diagnostics,atomic_prose_diagnostics\nfrom company_wiki.automation.narrative_model_runtime import build_model_request,decode_model_draft as decode_runtime\nfrom company_wiki.automation.narrative_model_scoped import compile_scoped_model_view\nfrom unit.test_narrative_reading_transport import reading_context\n\nout=ROOT/'docs/plans/du11-source-closure-2026-10-18/review/architecture-quality-20261101/implementation-results/gate-rejection-followup-20261102'\nauthor_path=out/'cwp-contract-followup.json'\nauthor=json.loads(author_path.read_text(encoding='utf-8'))\nbefore={p:hashlib.sha256(Path(p).read_bytes()).hexdigest() for p in author['delivery_files_sha256']}\nassert before==author['delivery_files_sha256']\nchecks={p:hashlib.sha256((ROOT/p).read_bytes()).hexdigest() for p in author['product_source_and_fixture_checks']}\nassert all(checks[p]==v['frozen']==v['actual'] for p,v in author['product_source_and_fixture_checks'].items())\nmatrix=author['test_impact_matrix']\nmatrix_actual={row['path']:hashlib.sha256((ROOT/row['path']).read_bytes()).hexdigest() for row in matrix['matrix']}\nassert all(matrix_actual[row['path']]==row['current_file_sha256'] for row in matrix['matrix'])\nrecord=dict(author_sha256=hashlib.sha256(author_path.read_bytes()).hexdigest(),test_manifest=before,\n            frozen_protected=checks,matrix_verified_paths=matrix_actual)\n(Path(__file__).parent/'before.json').write_text(json.dumps(record,ensure_ascii=False,indent=2)+'\\n',encoding='utf-8')\ntexts=('公司计划在项目建成后为工厂提供产能保障。','该安排仍须客户完成验收后方可投产。')\nrewritten='公司已为工厂提供产能保障。'\nselected=grouped_selection(texts,('conditional','conditional'))\nrequest=NarrativeModelRequest.from_selection(selected)\nresponse=NarrativeModelResponse('offline','independent-synthetic',request.prompt_version,\n    json.dumps(draft_for(selected,[claim(rewritten,['e1','e2'],['g1'])]),ensure_ascii=False).encode())\nobservation=dict(issue='SEM-QUAL-01/T4-R4-CONDITION-SCOPE-LOSS',\n    assessment='OPEN_PRODUCT_CAPABILITY_NOT_A_PASS_OR_FIXED_FIXTURE',\n    source_text=list(texts),claim_text=rewritten,source_spans=[span.to_dict() for span in selected.evidence_spans],\n    legacy=decode_model_draft(response,selected=selected),\n    prose_diagnostics=prose_diagnostics(texts[0],rewritten,'actual'),\n    atomic_diagnostics=atomic_prose_diagnostics(texts[0],rewritten,'actual'))\ncontext=reading_context(selected)\ncontext['groups']=context['groups'][:1]\nscoped=replace(selected,reading_context=context)\nrequest=build_model_request(scoped,reading_projection_version='reading-model-input/7')\nview=compile_scoped_model_view(scoped,max_claims=40)\ntask=view.model_tasks[0]\nparts=[part for part,sid in view.to_binding()['task_parts'][task.key].items() if sid in task.support_ids]\nresponse=NarrativeModelResponse('offline','independent-synthetic',request.prompt_version,\n    json.dumps({'drafts_by_task':{task.key:[dict(text=rewritten,basis_parts=parts,modality='actual')]}},ensure_ascii=False).encode())\nobservation['current_v7']=dict(prompt_version=request.prompt_version,support_ids=list(task.support_ids),\n    basis_parts=parts,draft=decode_runtime(response,selected=scoped,reading_projection_version='reading-model-input/7'))\n# Observe, do not lock this incorrect behavior into a passing regression oracle.\n(Path(__file__).parent/'semantic-open.json').write_text(json.dumps(observation,ensure_ascii=False,indent=2)+'\\n',encoding='utf-8')\nprint(json.dumps({'legacy_status':observation['legacy']['status'],\n    'legacy_review':observation['legacy']['claims'][0]['needs_review'],\n    'v7_status':observation['current_v7']['draft']['status'],\n    'v7_review':observation['current_v7']['draft']['claims'][0]['needs_review'],\n    'diagnostics':[observation['prose_diagnostics'],observation['atomic_diagnostics']],\n    'issue_still_open':True},ensure_ascii=False))\n",
+  "semantic_probe_log": "{\"legacy_status\": \"draft\", \"legacy_review\": false, \"v7_status\": \"draft\", \"v7_review\": false, \"diagnostics\": [[], []], \"issue_still_open\": true}\n",
+  "commands": [
+    "C:/Miniconda/python.exe -B -I -X utf8 tmp/ct7/observe.py",
+    "C:/Miniconda/python.exe -B -X utf8 -m pytest <positive21+long1> <wrong_ref/source2> <known_supported_condition1> -q -o cache_dir=tmp/ct7/pytest-cache --basetemp=tmp/ct7/bt-delta --junitxml=tmp/ct7/delta.xml"
+  ],
+  "no_repeat": [
+    "full149focused",
+    "completeUnit",
+    "provider/model/download/originals",
+    "runtime or historical fixture rewrites"
+  ],
+  "paid": 0,
+  "network": 0,
+  "originals": 0,
+  "cleanup": {
+    "owned_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\ct7",
+    "initially_absent": true,
+    "status": "RESTORED_ABSENT",
+    "absolute_parent_verified": true,
+    "reparse_nodes": 0,
+    "removed_files": 12,
+    "removed_bytes": 32832.0,
+    "exists_after": false,
+    "evidence_saved_before_deletion": true,
+    "pytest_cache_isolated": true,
+    "no_foreign_worktree_or_history_deleted": true
+  }
+}

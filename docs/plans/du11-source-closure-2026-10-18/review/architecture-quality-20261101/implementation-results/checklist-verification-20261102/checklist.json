@@ -1301,10 +1301,10 @@
     },
     {
       "id": "RETAINED-FORMULA",
-      "title": "500字符公式与自然语言摘录不同，属于受限递归算术工作保护。",
-      "status": "KEPT_BY_REASON",
-      "exact_disposition": "KEPT_BY_REASON",
-      "evidence_file": "crossrepo-independent.json",
+      "title": "旧500字符/指数10上限已被合法公式反例推翻；仅真实算术/显式工作账户仍验。",
+      "status": "REMOVED_AFTER_PUBLIC_REPRO",
+      "exact_disposition": "REMOVED_AFTER_PUBLIC_REPRO",
+      "evidence_file": "../gate-rejection-followup-20261102/math-independent-r2.json",
       "evidence_item_id": "RETAINED-FORMULA",
       "sources": [
         "scripts/forecast/calc.py",
@@ -1315,7 +1315,7 @@
         "Invest公式节点/数值验证控制"
       ],
       "remaining_boundary": "",
-      "detail": "Full requirement, actual source symbols, tests/reviews/publication and scope are in the linked per-item dossier; no new test execution is inferred."
+      "detail": "Original KEPT_BY_REASON dossier preserved as dated audit; this current matrix is superseded by reviewed real arithmetic repair."
     },
     {
       "id": "RETAINED-CREDENTIAL",
@@ -1477,5 +1477,13 @@
     "Large exact text17MB probe and loopback large body are synthetic engineering checks, not real company/source quality acceptance.",
     "RF register_publication Raises docstring and pre-push same-CI-table comment still use historical wording; no corresponding runtime permission exists. These two editorial notes are not silently counted as fixed."
   ],
-  "publication_evidence": "publication.json"
+  "publication_evidence": "publication.json",
+  "followup_current": {
+    "status": "ENGINEERING_COMPLETE_EXACT_CI_GREEN_REAL_C_OPEN",
+    "closure": "../gate-rejection-followup-20261102/closure.md",
+    "overrides": [
+      "RETAINED-FORMULA old500/exponent10 reason disproved; actual arithmetic work/invalid math preserved.",
+      "Resource label alone is not retention proof: explicit budget override, metadata and optional observation caller closures now repaired."
+    ]
+  }
 }

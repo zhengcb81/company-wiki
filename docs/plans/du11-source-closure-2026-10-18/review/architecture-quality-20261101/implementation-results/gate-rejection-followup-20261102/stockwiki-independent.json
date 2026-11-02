@@ -1,0 +1,182 @@
+{
+  "schema_version": "stockwiki-independent-review/2",
+  "status": "PASS_TECHNICAL_NODE",
+  "reviewed_author_sha256": "fcd5eebc12f7c96ac50f113a6e9b1bad3e7e56cf4ba29b692a6ddd79182057e3",
+  "delivery_files_sha256": {
+    "stockwiki/_narrative_process.py": "54c8545a30cf76be644aca912abc8791694a315d3024c2d78484459e0443c6e2",
+    "stockwiki/_source_reader_v2_transport.py": "328c21435f774f1e9af3223501517303207e5b9d357c16c16bbff4956d947892",
+    "stockwiki/_narrative_wire.py": "f4c423b87fdae5f1ac982b07ea652ab32970b78051b92cf72b548f2eb9edc8c0",
+    "stockwiki/narrative_source.py": "bd5dea3518c134cce4c1ad518093484f9080a693d9f25677db9edb4ddc6d2ea3",
+    "stockwiki/_narrative_bundle.py": "edb43d55030da547f54d2d2ea5175b21b42ee75f1782d85c8cb8b32cb76faa3b",
+    "stockwiki/services/narrative_source.py": "812b39e5f5cda7653242926ed1664bfc0d705c68391b78961d129bbc021ca162",
+    "stockwiki/_source_reader_v2_wire.py": "9c34e6b58b683a5056654dbddade6cb6dc90a629e2f185ed62f3b2220ae86ca2",
+    "tests/test_r8_source_observations.py": "8c871956c52887284a033b9d73ca9b9afbdf1506a9346775c7ac514400606873",
+    "tests/test_source_export_v2_bounded_transport.py": "b458f22170b87045e8737a18c8b30492ba7cfcb8c9873545e2c5d110cca7008c",
+    "tests/test_narrative_reading_support_use.py": "9e57639c77e0a13c1f48d519b2906660c6ad79333a419c0c5e0639f8ba3e4991",
+    "tests/test_source_export_v2_cli.py": "370f7724e007bfbeeb2a31140f89fb798ca75fe54ae09d9e2f3c581403427fb2",
+    "tests/test_narrative_source.py": "b517663513eae0595680713849256e62c12832ccc2be9c4ecdc9cd9a487e4998",
+    "tests/test_narrative_source_cli.py": "5b9416f7c6bddbef448e39b2915adecb91095937cbc6af5d0cb070225fcf2fcf"
+  },
+  "source_before_public_e2e": {
+    "stockwiki/_narrative_process.py": "54c8545a30cf76be644aca912abc8791694a315d3024c2d78484459e0443c6e2",
+    "stockwiki/_source_reader_v2_transport.py": "328c21435f774f1e9af3223501517303207e5b9d357c16c16bbff4956d947892",
+    "stockwiki/_narrative_wire.py": "f4c423b87fdae5f1ac982b07ea652ab32970b78051b92cf72b548f2eb9edc8c0",
+    "stockwiki/narrative_source.py": "bd5dea3518c134cce4c1ad518093484f9080a693d9f25677db9edb4ddc6d2ea3",
+    "stockwiki/_narrative_bundle.py": "edb43d55030da547f54d2d2ea5175b21b42ee75f1782d85c8cb8b32cb76faa3b",
+    "stockwiki/services/narrative_source.py": "812b39e5f5cda7653242926ed1664bfc0d705c68391b78961d129bbc021ca162",
+    "stockwiki/_source_reader_v2_wire.py": "9c34e6b58b683a5056654dbddade6cb6dc90a629e2f185ed62f3b2220ae86ca2",
+    "tests/test_r8_source_observations.py": "8c871956c52887284a033b9d73ca9b9afbdf1506a9346775c7ac514400606873",
+    "tests/test_source_export_v2_bounded_transport.py": "b458f22170b87045e8737a18c8b30492ba7cfcb8c9873545e2c5d110cca7008c",
+    "tests/test_narrative_reading_support_use.py": "9e57639c77e0a13c1f48d519b2906660c6ad79333a419c0c5e0639f8ba3e4991",
+    "tests/test_source_export_v2_cli.py": "370f7724e007bfbeeb2a31140f89fb798ca75fe54ae09d9e2f3c581403427fb2",
+    "tests/test_narrative_source.py": "b517663513eae0595680713849256e62c12832ccc2be9c4ecdc9cd9a487e4998",
+    "tests/test_narrative_source_cli.py": "5b9416f7c6bddbef448e39b2915adecb91095937cbc6af5d0cb070225fcf2fcf"
+  },
+  "source_after_public_e2e": {
+    "stockwiki/_narrative_process.py": "54c8545a30cf76be644aca912abc8791694a315d3024c2d78484459e0443c6e2",
+    "stockwiki/_source_reader_v2_transport.py": "328c21435f774f1e9af3223501517303207e5b9d357c16c16bbff4956d947892",
+    "stockwiki/_narrative_wire.py": "f4c423b87fdae5f1ac982b07ea652ab32970b78051b92cf72b548f2eb9edc8c0",
+    "stockwiki/narrative_source.py": "bd5dea3518c134cce4c1ad518093484f9080a693d9f25677db9edb4ddc6d2ea3",
+    "stockwiki/_narrative_bundle.py": "edb43d55030da547f54d2d2ea5175b21b42ee75f1782d85c8cb8b32cb76faa3b",
+    "stockwiki/services/narrative_source.py": "812b39e5f5cda7653242926ed1664bfc0d705c68391b78961d129bbc021ca162",
+    "stockwiki/_source_reader_v2_wire.py": "9c34e6b58b683a5056654dbddade6cb6dc90a629e2f185ed62f3b2220ae86ca2",
+    "tests/test_r8_source_observations.py": "8c871956c52887284a033b9d73ca9b9afbdf1506a9346775c7ac514400606873",
+    "tests/test_source_export_v2_bounded_transport.py": "b458f22170b87045e8737a18c8b30492ba7cfcb8c9873545e2c5d110cca7008c",
+    "tests/test_narrative_reading_support_use.py": "9e57639c77e0a13c1f48d519b2906660c6ad79333a419c0c5e0639f8ba3e4991",
+    "tests/test_source_export_v2_cli.py": "370f7724e007bfbeeb2a31140f89fb798ca75fe54ae09d9e2f3c581403427fb2",
+    "tests/test_narrative_source.py": "b517663513eae0595680713849256e62c12832ccc2be9c4ecdc9cd9a487e4998",
+    "tests/test_narrative_source_cli.py": "5b9416f7c6bddbef448e39b2915adecb91095937cbc6af5d0cb070225fcf2fcf"
+  },
+  "source_current": {
+    "stockwiki/_narrative_process.py": "54c8545a30cf76be644aca912abc8791694a315d3024c2d78484459e0443c6e2",
+    "stockwiki/_source_reader_v2_transport.py": "328c21435f774f1e9af3223501517303207e5b9d357c16c16bbff4956d947892",
+    "stockwiki/_narrative_wire.py": "f4c423b87fdae5f1ac982b07ea652ab32970b78051b92cf72b548f2eb9edc8c0",
+    "stockwiki/narrative_source.py": "bd5dea3518c134cce4c1ad518093484f9080a693d9f25677db9edb4ddc6d2ea3",
+    "stockwiki/_narrative_bundle.py": "edb43d55030da547f54d2d2ea5175b21b42ee75f1782d85c8cb8b32cb76faa3b",
+    "stockwiki/services/narrative_source.py": "812b39e5f5cda7653242926ed1664bfc0d705c68391b78961d129bbc021ca162",
+    "stockwiki/_source_reader_v2_wire.py": "9c34e6b58b683a5056654dbddade6cb6dc90a629e2f185ed62f3b2220ae86ca2",
+    "tests/test_r8_source_observations.py": "8c871956c52887284a033b9d73ca9b9afbdf1506a9346775c7ac514400606873",
+    "tests/test_source_export_v2_bounded_transport.py": "b458f22170b87045e8737a18c8b30492ba7cfcb8c9873545e2c5d110cca7008c",
+    "tests/test_narrative_reading_support_use.py": "9e57639c77e0a13c1f48d519b2906660c6ad79333a419c0c5e0639f8ba3e4991",
+    "tests/test_source_export_v2_cli.py": "370f7724e007bfbeeb2a31140f89fb798ca75fe54ae09d9e2f3c581403427fb2",
+    "tests/test_narrative_source.py": "b517663513eae0595680713849256e62c12832ccc2be9c4ecdc9cd9a487e4998",
+    "tests/test_narrative_source_cli.py": "5b9416f7c6bddbef448e39b2915adecb91095937cbc6af5d0cb070225fcf2fcf"
+  },
+  "thirteen_files_unchanged": true,
+  "preserved_r1_sha256": "76f77f29a3ca006293ee3b4f0056c5ff668d3afd3c672691d4a3dba889f08b3e",
+  "findings": [
+    {
+      "id": "SK-P2-PROTOCOL-CANDIDATE",
+      "status": "CLOSED_BY_R2",
+      "evidence": "Independent public duplicate/nonfinite/masked-schema controls refuse; unrelated malformed diagnostics still accepted."
+    },
+    {
+      "id": "SK-P2-FINITE-TIMEOUT",
+      "status": "CLOSED_BY_R2",
+      "evidence": "Both raw public constructor and config reject NaN/Infinity; explicit901seconds/4MiB/2MiB receipt budget still accepted."
+    }
+  ],
+  "new_p1_p2": [],
+  "full_read": "Read complete original13 source/test diff and untracked new test, then only repaired3-path code/test delta. Actual StockWiki AGENTS respected as technical evidence scope; no business-ready claim.",
+  "architecture": [
+    "Runtime StockWiki imports only its owned wire/process/source modules, never CWP private implementation. CWP internals are imported by isolated test fixtures only; production integration uses source/narrative public CLIs and versioned DTO.",
+    "Narrative exact artifact original byte size/SHA checked before noncanonical JSON parsing; identity/source/period/as-of and source/evidence output hashes remain.",
+    "Support/context evidence membership, disjoint partition and citation closure still validated; no source/reference correctness removed with count caps.",
+    "Optional malformed/foreign/unavailable review remains not_reviewed; trace absence and source_processing_complete=False are preserved, not promoted to research acceptance or completed source processing.",
+    "One process lifetime owner enforces actual explicit output/receipt budgets, timeout and descendant cleanup; no replacement fixed16K/256K/1.31MiB representation allowance.",
+    "Lenient duplicate-pair parse is schema classification only. Source data always comes from strict parser; bad claimed protocol cannot be laundered by good receipt."
+  ],
+  "independent_delta": {
+    "cases": 11,
+    "assertions": [
+      "good+same-schema duplicate rejected",
+      "good+same-schema NaN rejected",
+      "duplicate schema expected then unrelated still rejected",
+      "actual unrelated duplicate/NaN diagnostic JSON accepted alongside valid receipt",
+      "formatted pinned body source SHA verified; missing trace/partial processing/context_only/invalid review stay diagnostic",
+      "artifact bytes, as-of and support/context overlap negatives still rejected",
+      "raw constructor/config finitepositive timeout; legitimate large explicit allocation preserved"
+    ],
+    "probe_source": "from copy import deepcopy\nimport hashlib\nimport json\nfrom pathlib import Path\nimport sys\n\nimport pytest\n\nSW=Path('C:/Users/郑曾波/Projects/StockWiki')\nsys.path[:0]=[str(SW),str(SW/'tests')]\nfrom stockwiki.narrative_source import NarrativeSourceError,NarrativeSourceTransport,read_narrative\nfrom stockwiki.source_reader_v2 import SourceExportV2Error,VerifiedOpenTransport\nfrom test_narrative_source import GOLDEN,canonical,resign\nfrom test_narrative_reading_support_use import reading\n\n\ndef wire():\n    return [json.loads((GOLDEN/name).read_bytes()) for name in ('read_request.json','bundle.json','read_receipt.json')]\n\n\ndef transport(data,stderr,limit=2*1024**2):\n    return NarrativeSourceTransport(argv_prefix=['explicit-synthetic'],timeout_s=3,max_stdout_bytes=limit,\n        runner=lambda *args,**kwargs:(0,data,stderr))\n\n\n@pytest.mark.parametrize('bad_kind',['duplicate','nonfinite','masked_schema'])\ndef test_same_protocol_bad_json_cannot_be_laundered_by_a_good_receipt(bad_kind):\n    request,bundle,receipt=wire()\n    body=resign(request,bundle,receipt)\n    good=canonical(receipt)\n    if bad_kind=='duplicate':\n        bad=good.replace(b'\"status\":\"ok\"',b'\"status\":\"ok\",\"status\":\"conflict\"',1)\n    elif bad_kind=='masked_schema':\n        bad=b'{\"schema_version\":\"narrative-read-receipt/1\",\"schema_version\":\"unrelated\"}'\n    else:\n        value=deepcopy(receipt);value['locator_count']=float('nan');bad=json.dumps(value).encode()\n    with pytest.raises(NarrativeSourceError) as error:\n        read_narrative(request,transport(body,good+b'\\n'+bad+b'\\n'))\n    assert error.value.error_code in {'duplicate_json_key','nonfinite_number'}\n\n\ndef test_real_unrelated_diagnostic_json_is_not_an_extra_permission():\n    request,bundle,receipt=wire()\n    body=resign(request,bundle,receipt)\n    log=b'{\"event\":\"warning\",\"repeat\":1,\"repeat\":2,\"value\":NaN}\\n'\n    result=read_narrative(request,transport(body,log+canonical(receipt)+b'\\n')).to_dict()\n    assert result['evidence']==bundle['evidence_spans']\n\n\ndef test_formatted_pinned_artifact_preserves_partial_context_and_unreviewed_status():\n    request,bundle,receipt=wire()\n    context=reading(bundle,use='context_only')\n    context.pop('selection_trace')\n    context['source_processing_complete']=False\n    bundle['prompt_review']={'status':'not_detected','source_sha256':'f'*64}\n    data=json.dumps(bundle,ensure_ascii=False,indent=3).encode()\n    request['narrative_ref']['artifact_sha256']=hashlib.sha256(data).hexdigest()\n    request['narrative_ref']['byte_size']=len(data)\n    receipt['narrative_ref']=deepcopy(request['narrative_ref'])\n    result=read_narrative(request,transport(data,json.dumps(receipt,indent=2).encode())).to_dict()\n    assert result['reading_context']==context\n    assert result['reading_context']['source_processing_complete'] is False\n    assert result['reading_context']['groups'][0]['citation_views'][0]['reading_support_use']=='context_only'\n    assert result['prompt_review_observation']['prompt_injection_status']=='not_reviewed'\n    assert 'accepted' not in result and 'research_state' not in result\n\n\n@pytest.mark.parametrize('fault',['artifact','asof','partition'])\ndef test_byte_asof_and_context_partition_truth_remain_required(fault):\n    request,bundle,receipt=wire()\n    if fault=='partition':\n        group=reading(bundle)['groups'][0]\n        view=group['citation_views'][0]\n        view['context_evidence_ids']=list(view['support_evidence_ids'])\n    if fault=='asof':\n        request['as_of_date']='2020-01-01';receipt['as_of_date']='2020-01-01'\n    body=resign(request,bundle,receipt)\n    if fault=='artifact':\n        body+=b' '\n    with pytest.raises(NarrativeSourceError):\n        read_narrative(request,transport(body,canonical(receipt)+b'\\n'))\n\n\n@pytest.mark.parametrize('value',[float('nan'),float('inf')])\ndef test_raw_public_constructor_and_config_reject_nonfinite_actual_time(tmp_path,value):\n    options=dict(python_executable=sys.executable,argv_prefix=['unused'],timeout_s=value,max_stdout_bytes=1024)\n    with pytest.raises(SourceExportV2Error,match='reader_config_invalid'):\n        VerifiedOpenTransport(**options)\n    config=tmp_path/'config.json';config.write_text(json.dumps(dict(schema_version='1.0',**options)))\n    with pytest.raises(SourceExportV2Error,match='reader_config_invalid'):\n        VerifiedOpenTransport.from_config(config)\n\n\ndef test_positive_real_allocations_are_not_replaced_with_old_caps():\n    result=VerifiedOpenTransport(python_executable=sys.executable,argv_prefix=['unused'],timeout_s=901,\n        max_stdout_bytes=4*1024**2,max_receipt_bytes=2*1024**2)\n    assert result.timeout_s==901 and result.max_receipt_bytes==2*1024**2\n"
+  },
+  "actual_e2e": {
+    "tests": [
+      "tests/e2e/test_cwp_narrative_source.py::test_generated_persistent_package_enters_stockwiki_public_cli[txt]",
+      "tests/e2e/test_cwp_source_export_v2.py::test_real_text_source_end_to_end_verified_with_quote"
+    ],
+    "actual_producer": "C:/Users/郑曾波/Projects/company-wiki",
+    "consumer": "C:/Users/郑曾波/Projects/StockWiki",
+    "proved": [
+      "Actual CWP SourceCatalog + handler/projector publication with synthetic ReplayNarrativeModel; public narrative reference/read and actual Stock CLI consume same persistent artifact.",
+      "Actual raw CWP SourceExport v2 export + verified-open and Stock source-read-v2 CLI replay an owned UTF8 quote/locator. Wrong version pin returns typed refusal.",
+      "Narrative repeated read deterministic; fixture catalog byte content unchanged; no research accepted/Stock SQLite created.",
+      "Both E2E fixture cleanup restores their own initial directory snapshots. No P06/real company specimen paths selected."
+    ],
+    "extra_existing_controls": [
+      "test_excess_channel_stops_before_deadline_and_reaps_descendant[stdout-64-stdout_over_limit]",
+      "test_excess_channel_stops_before_deadline_and_reaps_descendant[stderr-262144-stderr_over_limit]",
+      "test_unusable_quality_or_physical_metadata_cannot_become_dto[physical_source_url]"
+    ]
+  },
+  "evidence": {
+    "delta": {
+      "counts": {
+        "tests": "11",
+        "failures": "0",
+        "errors": "0",
+        "time": "1.126"
+      },
+      "junit": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"0\" skipped=\"0\" tests=\"11\" time=\"1.126\" timestamp=\"2026-11-02T17:38:27.345786+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tmp.si7.test_delta\" name=\"test_same_protocol_bad_json_cannot_be_laundered_by_a_good_receipt[duplicate]\" time=\"0.459\" /><testcase classname=\"tmp.si7.test_delta\" name=\"test_same_protocol_bad_json_cannot_be_laundered_by_a_good_receipt[nonfinite]\" time=\"0.009\" /><testcase classname=\"tmp.si7.test_delta\" name=\"test_same_protocol_bad_json_cannot_be_laundered_by_a_good_receipt[masked_schema]\" time=\"0.004\" /><testcase classname=\"tmp.si7.test_delta\" name=\"test_real_unrelated_diagnostic_json_is_not_an_extra_permission\" time=\"0.009\" /><testcase classname=\"tmp.si7.test_delta\" name=\"test_formatted_pinned_artifact_preserves_partial_context_and_unreviewed_status\" time=\"0.011\" /><testcase classname=\"tmp.si7.test_delta\" name=\"test_byte_asof_and_context_partition_truth_remain_required[artifact]\" time=\"0.007\" /><testcase classname=\"tmp.si7.test_delta\" name=\"test_byte_asof_and_context_partition_truth_remain_required[asof]\" time=\"0.009\" /><testcase classname=\"tmp.si7.test_delta\" name=\"test_byte_asof_and_context_partition_truth_remain_required[partition]\" time=\"0.008\" /><testcase classname=\"tmp.si7.test_delta\" name=\"test_raw_public_constructor_and_config_reject_nonfinite_actual_time[nan]\" time=\"0.057\" /><testcase classname=\"tmp.si7.test_delta\" name=\"test_raw_public_constructor_and_config_reject_nonfinite_actual_time[inf]\" time=\"0.041\" /><testcase classname=\"tmp.si7.test_delta\" name=\"test_positive_real_allocations_are_not_replaced_with_old_caps\" time=\"0.003\" /></testsuite></testsuites>",
+      "log": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\si7\\\\bt-delta\", \"requested_basetemp_len\": 51, \"cwd_len\": 31, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\ncachedir: tmp\\si7\\pytest-cache\nbenchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\nconfigfile: pytest.ini\nplugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollected 11 items\n\n..\\company-wiki\\tmp\\si7\\test_delta.py ...........                        [100%]\n\n-- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\si7\\delta.xml ---\n============================= 11 passed in 1.15s ==============================\n"
+    },
+    "e2e": {
+      "counts": {
+        "tests": "5",
+        "failures": "0",
+        "errors": "0",
+        "time": "20.469"
+      },
+      "junit": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"0\" skipped=\"0\" tests=\"5\" time=\"20.469\" timestamp=\"2026-11-02T17:39:59.739844+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tests.e2e.test_cwp_narrative_source\" name=\"test_generated_persistent_package_enters_stockwiki_public_cli[txt]\" time=\"9.324\" /><testcase classname=\"tests.e2e.test_cwp_source_export_v2\" name=\"test_real_text_source_end_to_end_verified_with_quote\" time=\"6.305\" /><testcase classname=\"tests.test_source_export_v2_bounded_transport\" name=\"test_excess_channel_stops_before_deadline_and_reaps_descendant[stdout-64-stdout_over_limit]\" time=\"2.326\" /><testcase classname=\"tests.test_source_export_v2_bounded_transport\" name=\"test_excess_channel_stops_before_deadline_and_reaps_descendant[stderr-262144-stderr_over_limit]\" time=\"2.281\" /><testcase classname=\"tests.test_narrative_source\" name=\"test_unusable_quality_or_physical_metadata_cannot_become_dto[physical_source_url]\" time=\"0.010\" /></testsuite></testsuites>",
+      "log": ".....                                                                    [100%]\n5 passed in 20.47s\n"
+    }
+  },
+  "static": {
+    "command": "C:/Miniconda/python.exe -B -m ruff check <13 frozen source/test paths>",
+    "exit_code": 0,
+    "output": "All checks passed!"
+  },
+  "commands": [
+    "C:/Miniconda/python.exe -B -X utf8 -m pytest C:/Users/郑曾波/Projects/company-wiki/tmp/si7/test_delta.py -q -o cache_dir=<owned>/pytest-cache --basetemp=<owned>/bt-delta --junitxml=<owned>/delta.xml",
+    "STOCKWIKI_CWP_PROJECT=C:/Users/郑曾波/Projects/company-wiki; C:/Miniconda/python.exe -B -X utf8 -m pytest <two listed synthetic E2Es> <explicit byte-budget/descendant2> <physical_source_url1> -q -o cache_dir=<owned>/pytest-cache --basetemp=<owned>/bt-e2e --junitxml=<owned>/e2e.xml"
+  ],
+  "no_repeat": [
+    "author136 affected group",
+    "author27 framing group",
+    "entire Stock/CWP suite",
+    "real PDF/P06/IR/prospectus samples",
+    "paid summary/cache/RF actual adoption"
+  ],
+  "boundaries": [
+    "PASS covers this technical gate/transport node only, not full company research/extraction quality or project completion.",
+    "0real originals,0downloads,0model/provider/API/network calls; synthetic publication uses the explicit ReplayNarrativeModel fixture.",
+    "No author source/test/Git/index/config/global writes. Existing untracked production/dashboard/run paths were listed only and left untouched.",
+    "Ruff shared cache metadata was not inventoried/restored; no cache/foreign worktree cleanup guessed. All pytest basetemp/cache/logs are isolated under owned root."
+  ],
+  "cleanup": {
+    "owned_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\si7",
+    "initially_absent": true,
+    "status": "RESTORED_ABSENT",
+    "absolute_parent_verified": true,
+    "reparse_nodes": 0,
+    "removed_files": 27,
+    "removed_bytes": 110416.0,
+    "exists_after": false,
+    "evidence_saved_before_deletion": true,
+    "pytest_cache_isolated": true,
+    "no_foreign_worktree_or_history_deleted": true
+  },
+  "paid": 0,
+  "network": 0,
+  "downloads": 0,
+  "real_originals": 0
+}

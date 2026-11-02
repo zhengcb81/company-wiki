@@ -1,0 +1,130 @@
+{
+  "schema_version": "cwp-ci-followup-current-binding-r2/1",
+  "status": "TEST_ONLY_R2_FROZEN_PENDING_INDEPENDENT_REVIEW",
+  "owner": "/root/rectify_readability",
+  "prior_author_report": {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\gate-rejection-followup-20261102\\cwp-ci-followup.json",
+    "sha256": "98dbb59eb69de85f01136aba8df65d0e47b40ae0b6d4de62085ced2bb72aa53e",
+    "preserved": true
+  },
+  "original_failed_ci": {
+    "run_id": "41493443430",
+    "source": "fef24418",
+    "seven_failures_preserved": true,
+    "no_final_ci_pass_claim": true
+  },
+  "finding": {
+    "status": "REPRODUCED_AND_REPAIRED_PENDING_REVIEW",
+    "root": "Previous helper only required actual.input_sha256!=old input_sha256. Arbitraryf*64passed when visible request content correct, weakening input binding.",
+    "independent_probe": "ROOT recipe tmp/cq7/probe_binding.py; reviewer-owned path was only read, never modified or cleaned by this author.",
+    "own_red": "New test expects forged current hash rejection, originally1F/4.03s DID_NOT_RAISE.",
+    "field_contract": "Real legacy hash additionally binds citation_mapping/group_mapping/selection/subject_binding/citation_unit_mapping, scoped adds task binding. It cannot be independently reconstructed by hashing only four display fields."
+  },
+  "repair": {
+    "single_owner": "Existing tests/support/summary_output_contract_upgrade.py, mandatory selected context and explicit projection at every consumer.",
+    "identity": "Uses actual existing runtime.build_model_request with selected/version and the capture actual output_plan.configured_output_tokens retarget when present. It strictly compares all four public request fields INCLUDING input_sha256 to that owner-produced result; no SHA algorithm or private identity-frame duplication, no decoder patch.",
+    "presentation": "After strict current binding, existing narrow archived quota/instruction/advisory comparison remains unchanged. Old input!=archive check stays in addition, not as substitute.",
+    "callers": "All7existing helper invocation sites pass their real public selection/version. No fallback to unverified/inequality-only for missing context.",
+    "capture_boundary": "Reconstruction covers the forms actually captured by these archives: initial request or single HTTP output-budget retarget. It does not invent history for arbitrary successive retarget chains."
+  },
+  "tests": {
+    "green": "32P/7.65s:12new positive/negative identity cases plus all7caller-node parameter closures. No77rerun.",
+    "controls": [
+      "Forgedf*64current identity rejected.",
+      "Legacy None/1/2/3 initial and8192budgeted captures: genuine identities accepted and forged rejected.",
+      "Scoped4/6 current genuine identity accepted, forged rejected against immutable full captures.",
+      "Same displayed data_json but source_units selection-context change yields different real hash and is rejected; proves beyond four visible field hashing.",
+      "Native canonical and originalraw/request/http/input/data/instruction/draft historical SHA remain original and pass through real builder."
+    ],
+    "ruff": "All10cumulative delivery test/support files PASS.",
+    "source": "0production source/fixture changes, original4source+atomicfixture fingerprints unchanged.",
+    "mypy": "Not rerun, no production source changes."
+  },
+  "command": "PYTHONPATH=src;tests PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 PYTHONDONTWRITEBYTECODE=1 C:/Miniconda/python.exe -B -X utf8 -m pytest tests/unit/test_summary_output_contract_upgrade.py [seven exact helper caller nodes as listed in green.log] -q --tb=short -p no:cacheprovider --basetemp tmp/ci72/green --junitxml tmp/ci72/green.xml",
+  "delta_files_sha256": {
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\support\\summary_output_contract_upgrade.py": "39f016bc2676df991fba8ebba33b81e083ea1d8023270ff1459cd1f61429a106",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\test_summary_output_contract_upgrade.py": "b36adf7b7353387cfd33c5bceb11d6da6c1c491e1e4815294b1387159ec3493f",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\document_understanding_root\\test_native_table_observation.py": "49a0e8d8281a54481b6171c89819e05646983e5be97ac0ee35e5346a96a567a9",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\test_atomic_summary_recipe.py": "97f710b3c349b506379a9515623201da33ad80035d55659db017c65f001e2852",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\test_narrative_citation_unit_model_boundary.py": "6f32a0ff10e4b00155750c7bed311aa7cd02f12f0901e4d39e52ba11a7d16370",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\test_narrative_claim_grounding.py": "cbdd62bd673fe4ccc19a00894034eede6b49dea4054e0a4cbf2570ac3a897b56",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\test_narrative_scoped_runtime_legacy.py": "0b361849aaab6e79288a5375edb298cb5f2bf6761a141a26e228b00fb113337b",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\test_narrative_source_owned_model_boundary.py": "222ad3c42c6314787bc539a05260d39279f1ee1e1d1c5458668d3c07232278eb",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\test_official_json_model_subject.py": "adba7da8ae8b6cfd053aef2d4e3ce1faf1db0f055636cc37233ed76a50a9c09f"
+  },
+  "delivery_files_sha256": {
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\support\\summary_output_contract_upgrade.py": "39f016bc2676df991fba8ebba33b81e083ea1d8023270ff1459cd1f61429a106",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\test_summary_output_contract_upgrade.py": "b36adf7b7353387cfd33c5bceb11d6da6c1c491e1e4815294b1387159ec3493f",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\document_understanding_root\\test_native_table_observation.py": "49a0e8d8281a54481b6171c89819e05646983e5be97ac0ee35e5346a96a567a9",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\test_atomic_summary_recipe.py": "97f710b3c349b506379a9515623201da33ad80035d55659db017c65f001e2852",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\test_narrative_citation_unit_model_boundary.py": "6f32a0ff10e4b00155750c7bed311aa7cd02f12f0901e4d39e52ba11a7d16370",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\test_narrative_claim_grounding.py": "cbdd62bd673fe4ccc19a00894034eede6b49dea4054e0a4cbf2570ac3a897b56",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\test_narrative_scoped_runtime_legacy.py": "0b361849aaab6e79288a5375edb298cb5f2bf6761a141a26e228b00fb113337b",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\test_narrative_source_owned_model_boundary.py": "222ad3c42c6314787bc539a05260d39279f1ee1e1d1c5458668d3c07232278eb",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\test_official_json_model_subject.py": "adba7da8ae8b6cfd053aef2d4e3ce1faf1db0f055636cc37233ed76a50a9c09f",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\test_narrative_extractive_runtime.py": "84e2a49cd0b2d1b3dc3a361f42052f8010351b6849f3d324d083f2f716c1c64c"
+  },
+  "source_and_fixture_unchanged": {
+    "src/company_wiki/automation/narrative_model.py": {
+      "prior_frozen": "e62a1cecffa783dced349578cbbf1627edd9207f4343ffd78662c35f6de80216",
+      "current": "e62a1cecffa783dced349578cbbf1627edd9207f4343ffd78662c35f6de80216"
+    },
+    "src/company_wiki/automation/narrative_model_scoped.py": {
+      "prior_frozen": "4b7be2625e2428054ad79d760b7f61ed462268590a92968c972e1476f6b2ee69",
+      "current": "4b7be2625e2428054ad79d760b7f61ed462268590a92968c972e1476f6b2ee69"
+    },
+    "src/company_wiki/automation/narrative_model_runtime.py": {
+      "prior_frozen": "89c71ca89939322271fc0e7e4bb3e02c3a8e3b70d7de950ab35c0dc62abdff5b",
+      "current": "89c71ca89939322271fc0e7e4bb3e02c3a8e3b70d7de950ab35c0dc62abdff5b"
+    },
+    "src/company_wiki/automation/narrative_summary_protocols.py": {
+      "prior_frozen": "ff88f8db4d5935f70462ec4268d15ba9495e77df57138714cbc62e54f1689a45",
+      "current": "ff88f8db4d5935f70462ec4268d15ba9495e77df57138714cbc62e54f1689a45"
+    },
+    "tests/fixtures/atomic_recipe_legacy_requests.json": {
+      "prior_frozen": "2be3eaebf88763484324162d4d20a39042320a0b7ee8d3d0520fc86b6568b53d",
+      "current": "2be3eaebf88763484324162d4d20a39042320a0b7ee8d3d0520fc86b6568b53d"
+    }
+  },
+  "artifacts": {
+    "green.log": {
+      "sha256": "73cf41c3ba62380a7986be6ae12175b751747e41f97106aa74cc79c5938b6262",
+      "bytes": 1867,
+      "text": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\ci72\\\\green\", \"requested_basetemp_len\": 49, \"cwd_len\": 34, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\nconfigfile: pytest.ini\ncollected 32 items\n\ntests\\unit\\test_summary_output_contract_upgrade.py ............          [ 37%]\ntests\\unit\\document_understanding_root\\test_native_table_observation.py . [ 40%]\n                                                                         [ 40%]\ntests\\unit\\test_atomic_summary_recipe.py ...                             [ 50%]\ntests\\unit\\test_narrative_citation_unit_model_boundary.py ....           [ 62%]\ntests\\unit\\test_narrative_claim_grounding.py .                           [ 65%]\ntests\\unit\\test_narrative_scoped_runtime_legacy.py ..                    [ 71%]\ntests\\unit\\test_narrative_source_owned_model_boundary.py ......          [ 90%]\ntests\\unit\\test_official_json_model_subject.py ...                       [100%]\n\n============================== warnings summary ===============================\n..\\..\\..\\..\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464\n  C:\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode\n  \n    self._warn_or_fail_if_strict(f\"Unknown config option: {key}\\n\")\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n-- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\ci72\\green.xml --\n======================== 32 passed, 1 warning in 7.65s ========================\n"
+    },
+    "green.xml": {
+      "sha256": "e21b7f23b4a82d334da09086e5e56060df8015f4af3de89961e375a460e10193",
+      "bytes": 6217,
+      "text": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"0\" skipped=\"0\" tests=\"32\" time=\"7.531\" timestamp=\"2026-11-02T18:06:08.297152+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tests.unit.test_summary_output_contract_upgrade\" name=\"test_archived_compatibility_rejects_forged_current_input_hash\" time=\"0.016\" /><testcase classname=\"tests.unit.test_summary_output_contract_upgrade\" name=\"test_request_binding_checks_selection_context_absent_from_displayed_wire\" time=\"0.013\" /><testcase classname=\"tests.unit.test_summary_output_contract_upgrade\" name=\"test_real_bound_request_passes_and_bad_hash_fails_in_each_legacy_capture[None-None]\" time=\"0.040\" /><testcase classname=\"tests.unit.test_summary_output_contract_upgrade\" name=\"test_real_bound_request_passes_and_bad_hash_fails_in_each_legacy_capture[None-reading-model-input/1]\" time=\"0.042\" /><testcase classname=\"tests.unit.test_summary_output_contract_upgrade\" name=\"test_real_bound_request_passes_and_bad_hash_fails_in_each_legacy_capture[None-reading-model-input/2]\" time=\"0.034\" /><testcase classname=\"tests.unit.test_summary_output_contract_upgrade\" name=\"test_real_bound_request_passes_and_bad_hash_fails_in_each_legacy_capture[None-reading-model-input/3]\" time=\"0.035\" /><testcase classname=\"tests.unit.test_summary_output_contract_upgrade\" name=\"test_real_bound_request_passes_and_bad_hash_fails_in_each_legacy_capture[8192-None]\" time=\"0.037\" /><testcase classname=\"tests.unit.test_summary_output_contract_upgrade\" name=\"test_real_bound_request_passes_and_bad_hash_fails_in_each_legacy_capture[8192-reading-model-input/1]\" time=\"0.038\" /><testcase classname=\"tests.unit.test_summary_output_contract_upgrade\" name=\"test_real_bound_request_passes_and_bad_hash_fails_in_each_legacy_capture[8192-reading-model-input/2]\" time=\"0.043\" /><testcase classname=\"tests.unit.test_summary_output_contract_upgrade\" name=\"test_real_bound_request_passes_and_bad_hash_fails_in_each_legacy_capture[8192-reading-model-input/3]\" time=\"0.046\" /><testcase classname=\"tests.unit.test_summary_output_contract_upgrade\" name=\"test_current_scoped_input_identity_is_not_waived_by_archived_presentation[reading-model-input/4]\" time=\"0.023\" /><testcase classname=\"tests.unit.test_summary_output_contract_upgrade\" name=\"test_current_scoped_input_identity_is_not_waived_by_archived_presentation[reading-model-input/6]\" time=\"0.022\" /><testcase classname=\"tests.unit.document_understanding_root.test_native_table_observation\" name=\"test_pre_table_bridge_canonical_identity_and_all_legacy_model_wires_stay_exact\" time=\"0.142\" /><testcase classname=\"tests.unit.test_atomic_summary_recipe\" name=\"test_versioned_selected_input_and_http_instruction_match_declared_capture[reading-model-input/4]\" time=\"0.024\" /><testcase classname=\"tests.unit.test_atomic_summary_recipe\" name=\"test_versioned_selected_input_and_http_instruction_match_declared_capture[reading-model-input/5]\" time=\"0.020\" /><testcase classname=\"tests.unit.test_atomic_summary_recipe\" name=\"test_versioned_selected_input_and_http_instruction_match_declared_capture[reading-model-input/6]\" time=\"0.022\" /><testcase classname=\"tests.unit.test_narrative_citation_unit_model_boundary\" name=\"test_explicit_v2_material_and_http_contract_preserve_frozen_scope_without_retired_quotas[raw-overlap]\" time=\"0.061\" /><testcase classname=\"tests.unit.test_narrative_citation_unit_model_boundary\" name=\"test_explicit_v2_material_and_http_contract_preserve_frozen_scope_without_retired_quotas[official]\" time=\"0.025\" /><testcase classname=\"tests.unit.test_narrative_citation_unit_model_boundary\" name=\"test_explicit_v2_material_and_http_contract_preserve_frozen_scope_without_retired_quotas[official-identical-labels]\" time=\"0.024\" /><testcase classname=\"tests.unit.test_narrative_citation_unit_model_boundary\" name=\"test_explicit_v2_material_and_http_contract_preserve_frozen_scope_without_retired_quotas[english-standalone]\" time=\"0.022\" /><testcase classname=\"tests.unit.test_narrative_claim_grounding\" name=\"test_real_paid_response_replays_through_the_actual_decoder\" time=\"0.591\" /><testcase classname=\"tests.unit.test_narrative_scoped_runtime_legacy\" name=\"test_pre_v4_published_v3_material_http_and_capability_contracts_keep_nonquota_fields[raw-v3]\" time=\"0.030\" /><testcase classname=\"tests.unit.test_narrative_scoped_runtime_legacy\" name=\"test_pre_v4_published_v3_material_http_and_capability_contracts_keep_nonquota_fields[official-v3]\" time=\"0.024\" /><testcase classname=\"tests.unit.test_narrative_source_owned_model_boundary\" name=\"test_six_frozen_legacy_material_contracts_keep_scope_without_compression_permissions[raw_plain]\" time=\"0.012\" /><testcase classname=\"tests.unit.test_narrative_source_owned_model_boundary\" name=\"test_six_frozen_legacy_material_contracts_keep_scope_without_compression_permissions[raw_reading_none]\" time=\"0.022\" /><testcase classname=\"tests.unit.test_narrative_source_owned_model_boundary\" name=\"test_six_frozen_legacy_material_contracts_keep_scope_without_compression_permissions[raw_reading_v1]\" time=\"0.027\" /><testcase classname=\"tests.unit.test_narrative_source_owned_model_boundary\" name=\"test_six_frozen_legacy_material_contracts_keep_scope_without_compression_permissions[official_none]\" time=\"0.022\" /><testcase classname=\"tests.unit.test_narrative_source_owned_model_boundary\" name=\"test_six_frozen_legacy_material_contracts_keep_scope_without_compression_permissions[official_v1]\" time=\"0.023\" /><testcase classname=\"tests.unit.test_narrative_source_owned_model_boundary\" name=\"test_six_frozen_legacy_material_contracts_keep_scope_without_compression_permissions[official_same_labels_none]\" time=\"0.012\" /><testcase classname=\"tests.unit.test_official_json_model_subject\" name=\"test_original_raw_model_input_and_decoder_remain_byte_canonical[expected0]\" time=\"0.010\" /><testcase classname=\"tests.unit.test_official_json_model_subject\" name=\"test_original_raw_model_input_and_decoder_remain_byte_canonical[expected1]\" time=\"0.014\" /><testcase classname=\"tests.unit.test_official_json_model_subject\" name=\"test_original_raw_model_input_and_decoder_remain_byte_canonical[expected2]\" time=\"0.299\" /></testsuite></testsuites>"
+    },
+    "red.log": {
+      "sha256": "194ac01b14333cc51adc8831d6d2965b4c0dd10306f0455cc59a93a4008dfa27",
+      "bytes": 1823,
+      "text": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\ci72\\\\red\", \"requested_basetemp_len\": 47, \"cwd_len\": 34, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\nconfigfile: pytest.ini\ncollected 1 item\n\ntests\\unit\\test_summary_output_contract_upgrade.py F                     [100%]\n\n================================== FAILURES ===================================\n________ test_archived_compatibility_rejects_forged_current_input_hash ________\ntests\\unit\\test_summary_output_contract_upgrade.py:18: in test_archived_compatibility_rejects_forged_current_input_hash\n    with pytest.raises(AssertionError):\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   Failed: DID NOT RAISE AssertionError\n============================== warnings summary ===============================\n..\\..\\..\\..\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464\n  C:\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode\n  \n    self._warn_or_fail_if_strict(f\"Unknown config option: {key}\\n\")\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n--- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\ci72\\red.xml ---\n=========================== short test summary info ===========================\nFAILED tests/unit/test_summary_output_contract_upgrade.py::test_archived_compatibility_rejects_forged_current_input_hash\n======================== 1 failed, 1 warning in 4.03s =========================\n"
+    },
+    "red.xml": {
+      "sha256": "3970d74a249c047999e91f2cdb5ba2ac173d84caef55b49c1d690410f0767d0e",
+      "bytes": 722,
+      "text": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"1\" skipped=\"0\" tests=\"1\" time=\"3.724\" timestamp=\"2026-11-02T18:04:46.676982+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tests.unit.test_summary_output_contract_upgrade\" name=\"test_archived_compatibility_rejects_forged_current_input_hash\" time=\"0.017\"><failure message=\"Failed: DID NOT RAISE AssertionError\">tests\\unit\\test_summary_output_contract_upgrade.py:18: in test_archived_compatibility_rejects_forged_current_input_hash\n    with pytest.raises(AssertionError):\n         ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nE   Failed: DID NOT RAISE AssertionError</failure></testcase></testsuite></testsuites>"
+    },
+    "ruff.log": {
+      "sha256": "82b3e6a6c090a57601d22943bd23fca9218d1031dbe5a7b754092f9a156b4f18",
+      "bytes": 19,
+      "text": "All checks passed!\n"
+    }
+  },
+  "source_or_decoder_modified": false,
+  "historical_sha_or_gzip_rewritten": false,
+  "git_index_or_main_pwf_modified": false,
+  "paid_calls": 0,
+  "network_calls": 0,
+  "keys_or_production_originals_read": false,
+  "cleanup": {
+    "root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\ci72",
+    "initially_absent_asserted_before_creation": true,
+    "files": 5,
+    "bytes": 10648,
+    "removed": true
+  },
+  "acceptance": "ROOT non-author recipe delta review and normal publication/CI required; author does not self-sign final CI."
+}

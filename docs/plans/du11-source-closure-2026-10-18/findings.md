@@ -87,3 +87,13 @@ H1 v4正向intro/12重点已过，实际树父链仍继承前一备注的(4)标�
 正式41项全部映射：40工程完成、Q11按边界保留；T01逐个核8入口。独立核对发现两仓SourceExport16MiB后置门，ROOT继续查出paid response与run binding各256KiB隐藏顶帽，已同owner根修。CWP2F1P/Stock1F及binding1F历史保存；修后54P/13s、33P/5.21s、ledger23P/5.21s，loopback大body中断unknown→新lease/无凭证恢复1POST。独审=True；本次新源码精确CI成功。2可选优化保未做，T4/真实C/R4/公司loop保持。已更正原README/implementation暂停、R7在途与STATUS旧daily167的当前表述，历史报告保留。
 
 StockWiki首写因其他owner边界被自动审批拒；提供既有明确跨仓/StockWiki授权、clean状态和精确2文件证据后原动作获准，没有换通道或再次问用户。只读定位时若干旧文件名已不存在，改用CodeGraph已定位文件和实际清单；未据缺文件推断功能未实现。
+
+
+## 2026-11-02 — 合法结果被拒专项复查
+
+用户要求再次全面清查。已复用原PWF，历史拒绝、当前CWP合同/工作流、跨仓provider/消费者三部分只读核查；此前41项是定义工程范围，不作为全局无残留证明。确认问题同owner TDD直接修，最终集中独审/发布。0原件/生产配置写入，先不跑收费或重复全量。
+
+
+## 2026-11-02 — 合法结果误拒专项收口
+
+历史真实误拒与当前合成反例已分清；核心共因是可选观察/表示规则/默认顶帽重复否决合法结果。六仓按所属owner修复、集中独审、正常主线发布，有CI四仓最终精确绿；ET无workflow、StockWiki无remote如实标记。原CWP7F/FF首轮失败、后续Focused旧oracle遗漏和中间夹具失误保持，旧oracle仅做退休规则窄迁移。预算/来源/数值/unknown-paid反控不弱化，0模型/下载/原件/生产配置写。新发现SEM-QUAL-01为真语义缺口不是夹具：计划/验收条件可能被改为actual而无诊断，仍OPEN并在真实摘要前根修，已并入T4同一来源正确性节点。详情review/architecture-quality-20261101/implementation-results/gate-rejection-followup-20261102/closure.md及publication.json。下一步回T4/限定及新真实摘要/cache/RF采用，不签整体目标完成。

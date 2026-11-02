@@ -67,6 +67,7 @@
     }
   },
   "current_limits_to_close": [
+    "SEM-QUAL-01: current v7 and legacy may accept planned/conditional source rewritten as actual; source/claim/locators frozen, generic qualifier binding required before real summary.",
     "W21 canonicalC2 actual enhanced read/alignment; nativefallback does not sign enhancement",
     "Berkshire15unprocessed explicitly retained; full-source/long-frontier generalization remains partial,10required DEV business atoms now present",
     "P3 W12 company rerun, latest communications/demand/competition/scenario calibration, US regulatoryPDF/HK/US_RPO and genuinely unexposed holdouts"
@@ -78,76 +79,85 @@
     "event_number_issuer": "each remains original separate binding owner; no promotion from scope alone",
     "consumer": "source cards uncertain/needs_review; RF rationale_support does not modify parameter values"
   },
-  "project_status": "R7_CHECKLIST_VERIFIED_RESIDUALS_REPAIRED_EXACT_CI_GREEN_REAL_C_OPEN",
+  "project_status": "GATE_REJECTION_FOLLOWUP_ENGINEERING_COMPLETE_REAL_C_OPEN",
   "as_of_date": "2026-11-02",
-  "observed_at_utc": "2026-11-02T14:05:36.181826+00:00",
-  "next_action": "按T4-source-note-parent-plan.md冻结去公司化父链正反例并在来源树owner根修，再单H1原90s/16M/112复验；随后新版真实摘要、paid中断/同跨run零重复与同artifact实际RF采用。",
+  "observed_at_utc": "2026-11-02T18:55:12.876910+00:00",
+  "next_action": "按T4-source-note-parent-plan.md同一来源正确性节点根修父链与SEM-QUAL-01计划/验收条件丢失，先冻结泛化正反例，再单H1原90s/16M/112复验；随后新版真实摘要、paid中断/同跨run零重复与同artifact实际RF采用。",
   "publication": {
     "repositories": {
-      "company-wiki": {
-        "source_head": "cb2488e2924dedb37bc9c63f471334fb0022b942",
-        "exact_ci": [
-          {
-            "id": 41457662863,
-            "name": "CI",
-            "head_sha": "cb2488e2924dedb37bc9c63f471334fb0022b942",
-            "head_branch": "master",
-            "status": "completed",
-            "conclusion": "success",
-            "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41457662863",
-            "updated_at": "2026-11-02T14:04:35Z"
-          }
-        ]
-      },
-      "filing-fetch": {
-        "source_head": "350cb39dad8a1116d76fd44824fe353ae210d384",
-        "exact_ci": [
-          {
-            "id": 41450346468,
-            "name": "quality",
-            "head_sha": "350cb39dad8a1116d76fd44824fe353ae210d384",
-            "head_branch": "main",
-            "status": "completed",
-            "conclusion": "success",
-            "html_url": "https://github.com/zhengcb81/filing-fetch/actions/runs/41450346468",
-            "updated_at": "2026-11-02T13:10:05Z"
-          }
-        ]
-      },
       "revenue-forecast": {
-        "source_head": "e44c7e9717c05346086e5ec07bc1f30373f8279f",
+        "source_head": "75c3b0e0d1eb083ab29e8c9e833ed1f95c16e688",
         "exact_ci": [
           {
-            "id": 41444705227,
+            "id": 41467964497,
             "name": "quality",
-            "head_sha": "e44c7e9717c05346086e5ec07bc1f30373f8279f",
+            "head_sha": "75c3b0e0d1eb083ab29e8c9e833ed1f95c16e688",
             "head_branch": "main",
             "status": "completed",
             "conclusion": "success",
-            "html_url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/41444705227",
-            "updated_at": "2026-11-02T12:27:34Z"
+            "html_url": "https://github.com/zhengcb81/revenue-forecast/actions/runs/41467964497",
+            "updated_at": "2026-11-02T15:05:20Z"
           }
         ]
       },
       "invest-skills": {
-        "source_head": "9b68cc9b9bac194ede4881453f7706528bc18add",
+        "source_head": "999e010312fa39a54a5071d0fdef6738c8ed18bc",
         "exact_ci": [
           {
-            "id": 41442479736,
+            "id": 41468077791,
             "name": "quality",
-            "head_sha": "9b68cc9b9bac194ede4881453f7706528bc18add",
+            "head_sha": "999e010312fa39a54a5071d0fdef6738c8ed18bc",
             "head_branch": "main",
             "status": "completed",
             "conclusion": "success",
-            "html_url": "https://github.com/zhengcb81/invest-skills/actions/runs/41442479736",
-            "updated_at": "2026-11-02T12:10:54Z"
+            "html_url": "https://github.com/zhengcb81/invest-skills/actions/runs/41468077791",
+            "updated_at": "2026-11-02T15:05:47Z"
           }
         ]
+      },
+      "company-wiki": {
+        "source_head": "a233fb37f200ea9b470e3926a14224c4dcaaca03",
+        "exact_ci": [
+          {
+            "id": 41503775714,
+            "name": "CI",
+            "head_sha": "a233fb37f200ea9b470e3926a14224c4dcaaca03",
+            "head_branch": "master",
+            "status": "completed",
+            "conclusion": "success",
+            "html_url": "https://github.com/zhengcb81/company-wiki/actions/runs/41503775714",
+            "updated_at": "2026-11-02T18:54:33Z"
+          }
+        ]
+      },
+      "filing-fetch": {
+        "source_head": "b3f0b9cceb87338c64dc8ddd698707f01ac6691a",
+        "exact_ci": [
+          {
+            "id": 41495529161,
+            "name": "quality",
+            "head_sha": "b3f0b9cceb87338c64dc8ddd698707f01ac6691a",
+            "head_branch": "main",
+            "status": "completed",
+            "conclusion": "success",
+            "html_url": "https://github.com/zhengcb81/filing-fetch/actions/runs/41495529161",
+            "updated_at": "2026-11-02T17:56:21Z"
+          }
+        ]
+      },
+      "earnings-transcripts": {
+        "source_head": "003c1c065109d0b02c7bd4de09ad3e8461a99c0e",
+        "exact_ci": [],
+        "status": "MAIN_PUSHED_NO_TRACKED_ACTIONS_WORKFLOW"
+      },
+      "StockWiki": {
+        "source_head": "f52f257d4343f9a785e5a338088a789393db7357",
+        "status": "LOCAL_MAIN_NO_REMOTE_CONFIGURED"
       }
     },
     "code_and_tests_pushed": true,
     "all_exact_ci_success": true,
-    "note": "source_head binds the engineering/test bundle; subsequent PWF-only commits do not change runtime or retrigger CWP CI."
+    "note": "Four configured CI repositories green; ET no workflow, StockWiki no remote. Later PWF-only commit does not change runtime."
   },
   "architecture_rectification": {
     "issues": 14,
@@ -158,13 +168,19 @@
   },
   "existing_capabilities": {
     "storage_virtualization": "Implemented; no new storage/database rewrite or cross-layer file access.",
-    "gate_simplification": "R7 active-caller residuals, public guidance, diagnostic/library rerun rules and duplicate engineering tests accepted and normally published.",
+    "gate_simplification": "R7 plus current caller/diagnostic/resource follow-up reviewed and normally published; real checks and unproven company acceptance stay separate.",
     "historical_summary_recovery_rf": "Old Huali15/12atoms and Berkshire73/10atoms recovery/adoption are bounded historical evidence; current runtime real C OPEN."
   },
   "next_stages": [
     {
       "id": "T4-source-parent",
       "status": "OPEN",
+      "plan": "review/architecture-quality-20261101/implementation-results/T4-source-note-parent-plan.md"
+    },
+    {
+      "id": "SEM-QUAL-01",
+      "status": "OPEN_REAL_SEMANTIC_DEFECT_BEFORE_REAL_SUMMARY",
+      "evidence": "review/architecture-quality-20261101/implementation-results/gate-rejection-followup-20261102/cwp-contract-followup.json",
       "plan": "review/architecture-quality-20261101/implementation-results/T4-source-note-parent-plan.md"
     },
     {
@@ -318,7 +334,7 @@
   "data_and_worktree_boundaries": {
     "raw_documents": "Preserve originals/production config/DB and frozenR4 history; no rawPDF/oldDB copies.",
     "foreign_wip": "CWP pre-push physical mode and RF4assurance exact initial bytes preserved; other historical unowned files not guessed/deleted.",
-    "other_owners": "Dayu/IQS/Dashboard/StockWiki external work unchanged.",
+    "other_owners": "Dayu/IQS/Dashboard and StockWiki foreign data/dashboard WIP unchanged; ROOT-owned StockWiki13 transport files accepted on local master.",
     "paid_model_calls": 0
   },
   "environment_observation": {
@@ -334,5 +350,11 @@
     "production_ocr_switched": false,
     "new_model_inferences": 0,
     "originals_and_model_assets_unchanged": true
+  },
+  "gate_rejection_followup": {
+    "status": "ENGINEERING_COMPLETE_EXACT_CI_GREEN_REAL_C_OPEN",
+    "priority": "P0_BEFORE_T4_CLOSED_ENGINEERING",
+    "plan": "review/architecture-quality-20261101/implementation-results/gate-rejection-followup-20261102/plan.md",
+    "closure": "review/architecture-quality-20261101/implementation-results/gate-rejection-followup-20261102/closure.md"
   }
 }

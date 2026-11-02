@@ -1,3 +1,5 @@
+**当前补充：合法结果误拒后续专项已收口，见[最新closure](../gate-rejection-followup-20261102/closure.md)；本表原41项范围不等于所有caller无残留。**
+
 # 整改清单逐项核对结果
 
 原始正式清单 **41项**（Q01–Q14及六份R7原审计）全部有明确对应，遗漏ID为0。T01再展开为8个实际工具入口。另记录3个本轮新发现的实质遗漏、2个未做的可选优化；不把增量/父子条目重复计成缺陷数或项目进度百分比。
@@ -96,7 +98,7 @@
 |INV-INSTALL|同步只写明确文件，保配置/其他文件，不得每push整套覆盖。|工程完成|[INV-INSTALL完整记录](crossrepo-independent.md)|
 |RETAINED-RESOURCES|不把真实下载/HTTP/子进程bytes、timeout、token/费用/空间/本地读工作预算混为表示许可。|按理由保留|[RETAINED-RESOURCES完整记录](crossrepo-independent.md)|
 |RETAINED-CORRECTNESS|源字节/公司/期次/as-of、引用partition、币种单位/公式重算与真实signed声明仍需严格。|按理由保留|[RETAINED-CORRECTNESS完整记录](crossrepo-independent.md)|
-|RETAINED-FORMULA|500字符公式与自然语言摘录不同，属于受限递归算术工作保护。|按理由保留|[RETAINED-FORMULA完整记录](crossrepo-independent.md)|
+|RETAINED-FORMULA|旧500字符/指数10“保护”理由已被合法公式反例推翻；本轮取消，真实算术工作按owner显式账户。|本轮已取消；原保留报告是历史|[当前根修与独审](../gate-rejection-followup-20261102/math-independent-r2.md)|
 |RETAINED-CREDENTIAL|FF credential scalar4096是凭证读取，不是财报/配置表示许可。|按理由保留|[RETAINED-CREDENTIAL完整记录](crossrepo-independent.md)|
 |RETAINED-LEGACY-DIAGNOSTICS|明确退休/显式audit/version工具不应再当正常canary门禁重复删除。|按理由保留|[RETAINED-LEGACY-DIAGNOSTICS完整记录](crossrepo-independent.md)|
 |CROSS-DEPLOYMENT|canonical通过还需覆盖实际三个技能安装根，并防整目录覆盖/配置漂移。|工程完成|[CROSS-DEPLOYMENT完整记录](crossrepo-independent.md)|

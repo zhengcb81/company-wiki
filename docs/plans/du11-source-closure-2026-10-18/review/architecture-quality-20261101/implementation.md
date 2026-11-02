@@ -1,3 +1,5 @@
+**当前补充：2026-11-02合法结果误拒专项已完成独审/正常发布；最新状态以主CURRENT_STATUS及gate-rejection-followup-20261102/closure.md为准，旧保留理由如公式500已被反例推翻。**
+
 # 代码质量共因整改细则 — 原工程已发布，真实C继续
 
 入口：[原始审查](README.md) → [逐项核对](implementation-results/checklist-verification-20261102/checklist.md) → 主计划`../../task_plan.md`。原14项工程13项完成、Q11按边界保留；R7及本次新增漏项的当前独审/发布/CI见主CURRENT_STATUS。下方A/B/C保留原实施要求，不是要求重新施工。真实C未完成。

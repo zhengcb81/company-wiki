@@ -1,0 +1,27 @@
+{
+  "status": "AUTHOR_FROZEN_PENDING_INDEPENDENT_REVIEW",
+  "delivery_files_sha256": {
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\transcript_tool_transport.py": "0a7ed098dace2b48bd420a3acc8471347b47503f0f0017fced1a1f409bbb270c",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\tests\\test_transcript_owner_budget.py": "9b7247b1d9d280e85616e1d2a4f99a8ad3abc587ecabbc2c69006307b4a5fd75",
+    "C:\\Users\\郑曾波\\Projects\\filing-fetch\\tests\\test_transcript_response_budget.py": "e3b2578a49631a87107c00ee8adbb3dd1a3ac0dbce55a29677d379d52581a419"
+  },
+  "red_record": ".planning/architecture-quality-20261101/r7-publication/ff-residual-r8-budget-red.json",
+  "green_record": ".planning/architecture-quality-20261101/r7-publication/ff-residual-r8-budget-green.json",
+  "tests": {
+    "red": "3F1P",
+    "green": "85P3skip/1.98s",
+    "ruff_files": 3
+  },
+  "root_cause": "FF second min(max_bytes,10MiB) and min(explicit/remaining timeout,60) override caller resources before ET accounting.",
+  "repair": "Forward max_bytes as both raw and decoded body allocation; timeout=min(explicit, parent remaining-cleanup), integer granularity preserved.",
+  "boundary": [
+    "Actual parent remaining<=cleanup+one second stops before key/child.",
+    "Actual ET read/time/fee budget remains its sole owner.",
+    "Actual measured usage not clamped; no retry after provider/import failure.",
+    "ET matching positive timeout support is a required same-node dependency."
+  ],
+  "paid_calls": 0,
+  "downloads": 0,
+  "originals_modified": 0,
+  "configs_modified": 0
+}

@@ -1,0 +1,116 @@
+{
+  "schema_version": "cwp-ci-independent/2",
+  "status": "PASS",
+  "scope": "Test/support CI-migration delta only; exact next remote CI remains ROOT responsibility.",
+  "reviewed_author_report_sha256": "98865e834a72a4a88242e0130675ae412b170ca9181b8fff6452aef15f186f46",
+  "delivery_files_sha256": {
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\support\\summary_output_contract_upgrade.py": "39f016bc2676df991fba8ebba33b81e083ea1d8023270ff1459cd1f61429a106",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\test_summary_output_contract_upgrade.py": "b36adf7b7353387cfd33c5bceb11d6da6c1c491e1e4815294b1387159ec3493f",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\document_understanding_root\\test_native_table_observation.py": "49a0e8d8281a54481b6171c89819e05646983e5be97ac0ee35e5346a96a567a9",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\test_atomic_summary_recipe.py": "97f710b3c349b506379a9515623201da33ad80035d55659db017c65f001e2852",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\test_narrative_citation_unit_model_boundary.py": "6f32a0ff10e4b00155750c7bed311aa7cd02f12f0901e4d39e52ba11a7d16370",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\test_narrative_claim_grounding.py": "cbdd62bd673fe4ccc19a00894034eede6b49dea4054e0a4cbf2570ac3a897b56",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\test_narrative_scoped_runtime_legacy.py": "0b361849aaab6e79288a5375edb298cb5f2bf6761a141a26e228b00fb113337b",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\test_narrative_source_owned_model_boundary.py": "222ad3c42c6314787bc539a05260d39279f1ee1e1d1c5458668d3c07232278eb",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\test_official_json_model_subject.py": "adba7da8ae8b6cfd053aef2d4e3ce1faf1db0f055636cc37233ed76a50a9c09f",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\test_narrative_extractive_runtime.py": "84e2a49cd0b2d1b3dc3a361f42052f8010351b6849f3d324d083f2f716c1c64c"
+  },
+  "source_before": {
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\support\\summary_output_contract_upgrade.py": "39f016bc2676df991fba8ebba33b81e083ea1d8023270ff1459cd1f61429a106",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\test_summary_output_contract_upgrade.py": "b36adf7b7353387cfd33c5bceb11d6da6c1c491e1e4815294b1387159ec3493f",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\document_understanding_root\\test_native_table_observation.py": "49a0e8d8281a54481b6171c89819e05646983e5be97ac0ee35e5346a96a567a9",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\test_atomic_summary_recipe.py": "97f710b3c349b506379a9515623201da33ad80035d55659db017c65f001e2852",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\test_narrative_citation_unit_model_boundary.py": "6f32a0ff10e4b00155750c7bed311aa7cd02f12f0901e4d39e52ba11a7d16370",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\test_narrative_claim_grounding.py": "cbdd62bd673fe4ccc19a00894034eede6b49dea4054e0a4cbf2570ac3a897b56",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\test_narrative_scoped_runtime_legacy.py": "0b361849aaab6e79288a5375edb298cb5f2bf6761a141a26e228b00fb113337b",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\test_narrative_source_owned_model_boundary.py": "222ad3c42c6314787bc539a05260d39279f1ee1e1d1c5458668d3c07232278eb",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\test_official_json_model_subject.py": "adba7da8ae8b6cfd053aef2d4e3ce1faf1db0f055636cc37233ed76a50a9c09f",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\test_narrative_extractive_runtime.py": "84e2a49cd0b2d1b3dc3a361f42052f8010351b6849f3d324d083f2f716c1c64c"
+  },
+  "source_after": {
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\support\\summary_output_contract_upgrade.py": "39f016bc2676df991fba8ebba33b81e083ea1d8023270ff1459cd1f61429a106",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\test_summary_output_contract_upgrade.py": "b36adf7b7353387cfd33c5bceb11d6da6c1c491e1e4815294b1387159ec3493f",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\document_understanding_root\\test_native_table_observation.py": "49a0e8d8281a54481b6171c89819e05646983e5be97ac0ee35e5346a96a567a9",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\test_atomic_summary_recipe.py": "97f710b3c349b506379a9515623201da33ad80035d55659db017c65f001e2852",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\test_narrative_citation_unit_model_boundary.py": "6f32a0ff10e4b00155750c7bed311aa7cd02f12f0901e4d39e52ba11a7d16370",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\test_narrative_claim_grounding.py": "cbdd62bd673fe4ccc19a00894034eede6b49dea4054e0a4cbf2570ac3a897b56",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\test_narrative_scoped_runtime_legacy.py": "0b361849aaab6e79288a5375edb298cb5f2bf6761a141a26e228b00fb113337b",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\test_narrative_source_owned_model_boundary.py": "222ad3c42c6314787bc539a05260d39279f1ee1e1d1c5458668d3c07232278eb",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\test_official_json_model_subject.py": "adba7da8ae8b6cfd053aef2d4e3ce1faf1db0f055636cc37233ed76a50a9c09f",
+    "C:\\Users\\郑曾波\\Projects\\company-wiki\\tests\\unit\\test_narrative_extractive_runtime.py": "84e2a49cd0b2d1b3dc3a361f42052f8010351b6849f3d324d083f2f716c1c64c"
+  },
+  "preserved_r1_sha256": "41419598411b7e8dff3d51e0ecbd4dd4a1cd2d8b013f3a30ea59dd294336d735",
+  "closed_finding": "CWP-TEST-P2-CURRENT-INPUT-HASH",
+  "new_p1_p2": [],
+  "review": [
+    "Shared helper requires real selected/version context and delegates current request reconstruction to existing runtime.build_model_request, including one captured output-token retarget.",
+    "It strictly compares all four current request fields, including the full real input hash with hidden source/citation/selection/task bindings; no hash DAG copied and no decoder patched.",
+    "Archived presentation change remains narrowly20/280 or2/6/280 plus exact retired instruction/planning fragments. Nonquota actor/material/provider/budget fields remain exact.",
+    "All seven caller groups pass their actual source context/projection; captured8192 retarget is explicit, no skip/context-signature permission.",
+    "Old original canonical/request/HTTP/data/instruction/draft hashes remain unchanged; four model/protocol sources and atomic fixture keep prior exact SHA; four JSON/gzip archives keep exact working-tree SHA through independent tests."
+  ],
+  "independent_tests": {
+    "counts": {
+      "tests": "9",
+      "failures": "0",
+      "errors": "0",
+      "time": "3.394"
+    },
+    "own_cases": [
+      "Original arbitrary-current-hash counterexample now rejects; genuine request passes.",
+      "Actually rebuilt requests with changed actor or raw material cannot match old nonquota capture.",
+      "Presentation patch context restores all three functions and exact emitted request after exception; decoder/hasher object identity unchanged.",
+      "8192-budgeted request binds hidden source_units despite identical data_json; wrong source context rejects.",
+      "HTTP upgrade preserves all non-message provider/output-budget fields; full actual current HTTP object equals exact narrow upgrade."
+    ],
+    "original_nodes": [
+      "tests/unit/document_understanding_root/test_native_table_observation.py::test_pre_table_bridge_canonical_identity_and_all_legacy_model_wires_stay_exact",
+      "tests/unit/test_narrative_extractive_runtime.py::test_v4_keeps_complete_source_clauses_above_advisory_budget_and_rejects_wrong_basis",
+      "tests/unit/test_narrative_extractive_runtime.py::test_native_support_and_context_are_preserved_without_promoting_question_to_answer",
+      "tests/unit/test_narrative_extractive_runtime.py::test_capacity_defers_complete_cards_instead_of_cutting_them"
+    ],
+    "junit": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"0\" skipped=\"0\" tests=\"9\" time=\"3.394\" timestamp=\"2026-11-02T18:12:02.974988+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tmp.cq7.test_delta\" name=\"test_original_forged_hash_probe_is_closed_by_real_full_binding_owner\" time=\"0.151\" /><testcase classname=\"tmp.cq7.test_delta\" name=\"test_nonquota_actor_and_raw_material_changes_are_still_visible\" time=\"0.011\" /><testcase classname=\"tmp.cq7.test_delta\" name=\"test_presentation_context_restores_after_exception_without_decoder_or_cache_leak\" time=\"0.006\" /><testcase classname=\"tmp.cq7.test_delta\" name=\"test_budgeted_hidden_selection_binding_is_not_a_four_field_hash\" time=\"0.019\" /><testcase classname=\"tmp.cq7.test_delta\" name=\"test_archived_http_upgrade_keeps_nonquota_provider_and_budget_fields_exact\" time=\"0.004\" /><testcase classname=\"tests.unit.document_understanding_root.test_native_table_observation\" name=\"test_pre_table_bridge_canonical_identity_and_all_legacy_model_wires_stay_exact\" time=\"0.061\" /><testcase classname=\"tests.unit.test_narrative_extractive_runtime\" name=\"test_v4_keeps_complete_source_clauses_above_advisory_budget_and_rejects_wrong_basis\" time=\"0.013\" /><testcase classname=\"tests.unit.test_narrative_extractive_runtime\" name=\"test_native_support_and_context_are_preserved_without_promoting_question_to_answer\" time=\"0.019\" /><testcase classname=\"tests.unit.test_narrative_extractive_runtime\" name=\"test_capacity_defers_complete_cards_instead_of_cutting_them\" time=\"0.012\" /></testsuite></testsuites>",
+    "log": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\cq7\\\\bt-delta\", \"requested_basetemp_len\": 51, \"cwd_len\": 34, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\ncachedir: tmp\\cq7\\pytest-cache\nbenchmark: 5.2.3 (defaults: timer=time.perf_counter disable_gc=False min_rounds=5 min_time=0.000005 max_time=1.0 calibration_precision=10 warmup=False warmup_iterations=100000)\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\nconfigfile: pytest.ini\nplugins: anyio-4.13.0, Faker-40.19.1, langsmith-0.14.4, asyncio-1.3.0, base-url-2.1.0, benchmark-5.2.3, cov-7.0.0, html-4.1.1, metadata-3.1.1, mock-3.15.1, playwright-0.7.2, timeout-2.4.0, xdist-3.8.0\nasyncio: mode=Mode.AUTO, debug=False, asyncio_default_fixture_loop_scope=None, asyncio_default_test_loop_scope=function\ncollected 9 items\n\ntmp\\cq7\\test_delta.py .....                                              [ 55%]\ntests\\unit\\document_understanding_root\\test_native_table_observation.py . [ 66%]\n                                                                         [ 66%]\ntests\\unit\\test_narrative_extractive_runtime.py ...                      [100%]\n\n-- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\cq7\\delta.xml ---\n============================== 9 passed in 3.40s ==============================\n",
+    "source": "from dataclasses import asdict,replace\nimport json\nfrom pathlib import Path\nimport sys\n\nimport pytest\n\nROOT=Path(__file__).resolve().parents[2]\nsys.path[:0]=[str(ROOT/'src'),str(ROOT/'tests')]\nfrom company_wiki.automation import narrative_model as model\nfrom company_wiki.automation.narrative_model_runtime import build_model_request\nfrom support.narrative_model_request_fixture import selection\nfrom support.summary_output_contract_upgrade import (\n    archived_compression_projection,assert_archived_request_upgrade,upgraded_http_body,\n)\nfrom unit.test_narrative_reading_transport import with_reading\nfrom unit.test_narrative_source_owned_model_boundary import http_port\n\n\ndef archive(source,version=None,output_tokens=None):\n    with archived_compression_projection():\n        request=build_model_request(source,reading_projection_version=version)\n        if output_tokens is not None:\n            request=request.with_output_budget(output_tokens)\n    return asdict(request)\n\n\ndef test_original_forged_hash_probe_is_closed_by_real_full_binding_owner():\n    source=selection()\n    current=build_model_request(source)\n    old=archive(source)\n    assert_archived_request_upgrade(current,old,selected=source)\n    with pytest.raises(AssertionError):\n        assert_archived_request_upgrade(replace(current,input_sha256='f'*64),old,selected=source)\n\n\ndef test_nonquota_actor_and_raw_material_changes_are_still_visible():\n    source=selection()\n    old=archive(source)\n    changed=selection(role='management')\n    actual=build_model_request(changed)\n    # A genuinely rebuilt current request, not merely an invalid hash object.\n    with pytest.raises(AssertionError):\n        assert_archived_request_upgrade(actual,old,selected=changed)\n    changed=selection(text_suffix=' An unapproved additional operating fact.')\n    actual=build_model_request(changed)\n    with pytest.raises(AssertionError):\n        assert_archived_request_upgrade(actual,old,selected=changed)\n\n\ndef test_presentation_context_restores_after_exception_without_decoder_or_cache_leak():\n    ports=tuple(getattr(model,key) for key in ('_response_schema','_output_plan','_boundary_instruction','decode_model_draft','canonical_json_hash'))\n    source=selection()\n    before=build_model_request(source)\n    with pytest.raises(RuntimeError,match='synthetic interrupted test'):\n        with archived_compression_projection():\n            legacy=build_model_request(source)\n            assert legacy.data_json!=before.data_json\n            assert model.decode_model_draft is ports[3]\n            raise RuntimeError('synthetic interrupted test')\n    assert tuple(getattr(model,key) for key in ('_response_schema','_output_plan','_boundary_instruction','decode_model_draft','canonical_json_hash'))==ports\n    assert asdict(build_model_request(source))==asdict(before)\n\n\ndef test_budgeted_hidden_selection_binding_is_not_a_four_field_hash():\n    source=with_reading()\n    version='reading-model-input/1'\n    actual=build_model_request(source,reading_projection_version=version).with_output_budget(8192)\n    old=archive(source,version,8192)\n    assert_archived_request_upgrade(actual,old,selected=source,reading_projection_version=version)\n    changed=replace(source,selection=replace(source.selection,source_units=source.selection.source_units+1))\n    rebuilt=build_model_request(changed,reading_projection_version=version).with_output_budget(8192)\n    assert rebuilt.data_json==actual.data_json and rebuilt.input_sha256!=actual.input_sha256\n    with pytest.raises(AssertionError):\n        assert_archived_request_upgrade(actual,old,selected=changed,reading_projection_version=version)\n\n\ndef test_archived_http_upgrade_keeps_nonquota_provider_and_budget_fields_exact():\n    source=selection()\n    with archived_compression_projection():\n        old_request=build_model_request(source)\n        old_http=http_port().request_bytes(old_request)\n    old=json.loads(old_http)\n    upgraded=upgraded_http_body(old_http)\n    assert {k:v for k,v in upgraded.items() if k!='messages'}=={k:v for k,v in old.items() if k!='messages'}\n    current=build_model_request(source)\n    assert json.loads(http_port().request_bytes(current))==upgraded\n"
+  },
+  "protected_source_and_atomic_fixture_after": {
+    "src/company_wiki/automation/narrative_model.py": "e62a1cecffa783dced349578cbbf1627edd9207f4343ffd78662c35f6de80216",
+    "src/company_wiki/automation/narrative_model_scoped.py": "4b7be2625e2428054ad79d760b7f61ed462268590a92968c972e1476f6b2ee69",
+    "src/company_wiki/automation/narrative_model_runtime.py": "89c71ca89939322271fc0e7e4bb3e02c3a8e3b70d7de950ab35c0dc62abdff5b",
+    "src/company_wiki/automation/narrative_summary_protocols.py": "ff88f8db4d5935f70462ec4268d15ba9495e77df57138714cbc62e54f1689a45",
+    "tests/fixtures/atomic_recipe_legacy_requests.json": "2be3eaebf88763484324162d4d20a39042320a0b7ee8d3d0520fc86b6568b53d"
+  },
+  "immutable_archive_after": {
+    "tests/fixtures/atomic_recipe_legacy_requests.json": "2be3eaebf88763484324162d4d20a39042320a0b7ee8d3d0520fc86b6568b53d",
+    "tests/fixtures/source_extractive_compact_request.json": "fa3a54b812e55e4a269c2f0c8611947ebdffd564f5bfa206f4d927ec62de2863",
+    "tests/support/reading_boundary_legacy_snapshots.json.gz": "b8403d5c8b3b3c75c4d70ed9c02e89dd0ea83ad3ab7aa4ef2b5898149da789dd",
+    "tests/fixtures/narrative_claim_grounding/cn_h1_unit3.json.gz": "13fcc0a584f0f5021c51282f119bfc7c7391b959914d57337b55f1eeb9e74c29"
+  },
+  "archive_representation_note": "R1 correctly distinguishes binary gzip exact HEAD bytes from JSON-only checkout CRLF/LF. Here all four original working-tree raw SHA match their R1 measurements exactly; no newline reset or fixture edit.",
+  "original_ci": "CI41493443430/fef24418 seven failures remain historical FAIL. Author76P+single exact negative correction and R2 32P are separate; independent9P is not a claimed77 rerun.",
+  "command": "C:/Miniconda/python.exe -B -X utf8 -m pytest tmp/cq7/test_delta.py <four listed original nodes> -q -o cache_dir=tmp/cq7/pytest-cache --basetemp=tmp/cq7/bt-delta --junitxml=tmp/cq7/delta.xml",
+  "not_run": [
+    "wholeUnit/77 group",
+    "model/API/download/original company source",
+    "new summary/cache/actualRF adoption",
+    "Git/index/publication/global install"
+  ],
+  "exact_remote_ci": "PENDING_ROOT_NORMAL_PUBLICATION_AND_EXACT_RUN",
+  "paid": 0,
+  "network": 0,
+  "originals": 0,
+  "author_source_or_fixture_modified": false,
+  "cleanup": {
+    "owned_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\cq7",
+    "initially_absent": true,
+    "status": "RESTORED_ABSENT",
+    "absolute_parent_verified": true,
+    "reparse_nodes": 0,
+    "removed_files": 13,
+    "removed_bytes": 27031.0,
+    "exists_after": false,
+    "evidence_saved_before_deletion": true,
+    "pytest_cache_isolated": true,
+    "no_foreign_worktree_or_history_deleted": true
+  }
+}

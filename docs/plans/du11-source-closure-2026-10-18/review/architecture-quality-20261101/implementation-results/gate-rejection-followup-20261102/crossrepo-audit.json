@@ -1,0 +1,1178 @@
+{
+  "status": "AUDIT_FROZEN_CONFIRMED_RESIDUALS_BEFORE_REPAIR",
+  "scope": [
+    "revenue-forecast",
+    "filing-fetch",
+    "invest-skills",
+    "StockWiki",
+    "earnings-transcripts"
+  ],
+  "excluded": [
+    "Dayu",
+    "invest-quick-scan",
+    "Dashboard"
+  ],
+  "closed_not_recounted": [
+    "SourceExport JSON16MiB",
+    "paid-response262144",
+    "run-binding262144"
+  ],
+  "source_writes": 0,
+  "paid_calls": 0,
+  "downloads": 0,
+  "baseline": {
+    "RF": {
+      "root": "C:\\Users\\郑曾波\\Projects\\revenue-forecast",
+      "head": {
+        "rc": 0,
+        "out": "e44c7e9717c05346086e5ec07bc1f30373f8279f"
+      },
+      "branch": {
+        "rc": 0,
+        "out": "main"
+      },
+      "runtime_sha256": {
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\__init__.py": "f7343866b80251c3d2105c6d34446898784ef6272ed9310dfee7cbecf8db3459",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\analysis\\__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\analysis\\confidence.py": "ba54a0c28a568a68aebb6cb8a1fde438c73fcfada4ffc3bfb16613d91f95b820",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\analysis\\sensitivity.py": "e17c99b721002bcfd2697a0a167c40a35b717020156d51398fe92b7992994064",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\asset_ownership.py": "2dc8931451b88f410de5011bac2e80cc74f838e11e94c5627170a6e0ab891ed0",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\commercial_terms.py": "6596d4492fcfb31cb73efaf75fb482d90156f2fbc91ab29be272e24745546005",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\company_wiki_narrative_contracts.py": "194649f53fb0d288420f3d2d574fbd8b4ca74986a505f338f02336ebcacf3a53",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\company_wiki_narrative_posix.py": "64e36fcbe5c541e45e3b4ca8afd0f1484fc26d22db55d7e1a40d31a453877c1c",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\company_wiki_narrative_process.py": "2996426ec668b6e8be3a878f5cdcd3004a3cb526b4183ab0d81d84a71b62754b",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\company_wiki_narrative_reader.py": "3893be41d94713a966cb81f7a2a9edb15dafb7759780b5c64763d1d285863c34",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\company_wiki_narrative_tree.py": "561f921d20636532ec13d4c2a116af120a88a2b56e55de6fbadf61f137bef8ba",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\company_wiki_source.py": "e6e1df861ea25d2a23ada3e7ca9e5c1c68fdfd25cea620bdd9354d553d3f1111",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\company_wiki_source_reader_v2.py": "faad30176392975725a3c66f0ab972ae3aa0842b7a34fa092c758efc35f94528",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\company_wiki_source_v2.py": "68c14925f0bfe419dd86a12d3b69d2c73a8222d8a7760ce3ce15a366410ec3d1",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\confidence_policy.py": "a2444c1ebb7f7ed9144e0db0199d1055da20b126b3026f90e114c55817ed822f",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\contracts\\__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\contracts\\annual_consumption.py": "7bba88869eb3edaae9a668d55d5287321c01c0cb259dafa189bdde548b3aa33a",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\contracts\\company_wiki_original.py": "536389cd97c2f1a5471cb8efc529354e3ac59d1b14f72365638418ce86db47f2",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\contracts\\constants.py": "30aceaa4d8c2332fe8bfebf1ae21ea7373c1d29968f28719a9d1e10dfa287d4e",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\contracts\\document.py": "1804bba0294a38d6bc55034cdfaac42b6e1e3f87807a6242e9038ce65d7e7f54",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\contracts\\evidence.py": "13f54e95790763ebf75e795ee97e7fcd22ba377d0223cc70bd018d531aa22321",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\contracts\\period_flow.py": "46ff9890b21f2147162d510da8c6e1749d6d9f0ae7bc5d242e4e63876f91bddf",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\contracts\\recognition.py": "551ddb361d28ef8466051fa848d25a3bcc954fb998ef8e3c474c7140e91e0375",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\contracts\\source_clock.py": "201807b094016dd38b0e9f24098b22ee1484f4a78af9951cee637ca226a4661b",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\contracts\\source_diagnostics.py": "d21c7aa9e0f72ec77b9fc9d580d8bb4689b256380170c611fa69f6d0d00bda72",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\contracts\\source_provenance.py": "a15bde04c812bf54c84ba309535541875bfbb0513d2cbf4386040de1e76994df",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\filing_fetch_client.py": "d5acb5a1e31445db06d92cd1b7fdd9381399825ab7f3d9270c562f29bb6d44bc",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\filing_upstream_cause.py": "3cede5008d138f8343ab79e36e2d4e478c987a9db58e2cf2e94df9779fd847fb",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\fix_hashes.py": "586126e1d475a411a2be74a695206d3d23fa2676215abbcab017b34b829104bd",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\forecast\\calc.py": "c5a86d843b0679a5292fa1e3ea27ebd2e628d9d19067047a228117e0e7b954a3",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\forecast\\dependencies.py": "98bfda50e29b3a694f9e76c71ea49782c973afaea39586223915aa04399d6d14",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\forecast\\segments.py": "4039d0923f4d34251d5466dfe56b6599cbc54786a55a349599acd10061694949",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\generate_input_template.py": "72ab8f53271718a1148b030888afd17efa8d85dd0cef52d51d359b7ab10846c0",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\installation_manifest.py": "923b40645ca9d5fe06c9e713e4542b2028b0adde448b83db75bcd8260a05a492",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\internal_flow.py": "05814b9286889088278fc5cf0c47a40452026bbc926f8f382db7e70de38a1355",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\lint_input.py": "2814b157faad471dda24e363f03da38c84933f651f7c3f72b82206829e4f25f1",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\mine_year_operation.py": "602255c766897dcabf8c5107c0ba3116686aab7dca683066fdffc70b88628986",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\mixed_recognition.py": "04ed62e0b61af523818aeff961cebc34eadc3df4b1b7756e5a32c9f8e432f232",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\model_extensions.py": "c5c15d782834546cf1d58a0a9c2d664db79898b6cc9517c657bcfac743ce2f92",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\model_registry.py": "39da2c1201e8cfe66f8db6c4e378d44771763fd670ee2811c42136fddf427f38",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\narrative_citation_context.py": "cd8d01533f539a9a65beb0500300a76915156dda9b39a497c14f0d53add01ed0",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\narrative_source_preparation.py": "d51965272faa99e5601186775f4b467c8caff734d52db3b8c5833fc758cbcafd",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\narrative_summary_observations.py": "614553685d7647e7e75426cfdb22a14668736a2c11f0c53698acb3d1a7961d55",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\narrative_summary_provenance.py": "0ad15963e7182cd0de0d97a5771d1bd3da9c4a42784d2046e9c51a2098fdbd13",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\narrative_summary_usage.py": "e46089e5dccb7ee1552983228018e788aeab2c22593fd1b7fc223c2386b66916",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\processed_artifact_canary.py": "19869b02cb370add57b5910d360e3ae864b870a2825d76894ea36530a9ccacfc",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\publication_registry.py": "30a3541cd3c3d79778c5b473b1b3b755d41ccf5208dafe8cd7996e651352b6a1",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\reconciliation.py": "c4b69e4ee1f3dc9822aed05b9facfd5bb44575b6b51b706dede46277ee5996f5",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\research\\__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\research\\authoring_projection.py": "00f1afb61975d2a88b8d7021ea38756590fdfa961673472787c3e50b45668703",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\research\\communication_scope.py": "96e4b63a3c90825241c395281ff5f3b4cf8496290a63757f150cb74244140a8e",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\research\\coverage.py": "ae6519cc18fea823dcc9d5e47956a2aea6da3270f1041b28d7bf1b783cd4b470",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\research\\drivers.py": "2a05dc3489fe46a2455cc28b23fbc5f4787bbf4c8e43d170d98d9222f96a126e",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\research\\evidence_roles.py": "f94942ccf9fb8617b325b13b5b2b34d5776777e4d7015e60b7c8db9383bbe761",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\research\\input_evidence.py": "3b90fb9201c5c90dc9de45f6f6feedddb0827fb40594218b0684723691370d11",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\research\\input_quantities.py": "b4160bbd73d539b79f5edf00bedef6f1a3bd9071a3475bef06ee6342bb9406c1",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\research\\input_targets.py": "d580465c042d4c00ea102d00bf92eca6a357371dcb11c433d5808eeb80be0247",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\research\\native_dependencies.py": "567e43535fca604afb7e2a375a00906935de1b8a3314c2659af618e0c846bab5",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\research\\revenue_basis.py": "54d98be3813618a0cc40f57fbe1179c7c7f03a2531108ae8a36b72df2fb9c0d2",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\research\\target_comparison.py": "a3389665e6656f0b2168fa740a25faaaf950a5f689302d10c99930f50f375b2c",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\research\\target_measurement.py": "0192fc18918214b4157db61a96ac948254795c9ee9bad6bba52c5b8824e5018b",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\research\\target_scope.py": "494b02ffbdee9779e17d05cd065000a09e7314a78abecfaa953952c733751cee",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\research\\targets.py": "21ddf8812c4511c9b019cf70e9db3201b63604c6237f16c99a4d1517302314bc",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\research\\timing_bridge.py": "1df60466342836611709c2e4d6d158dcf6fe8bc90301308e263c24908d4b186d",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\research_projection.py": "0b1754b93857aa0a7c3f2c703c14db7fb3f9b3aacb4b54b4d88b3367d83dc353",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\research_support_diagnostics.py": "397f40e59249e93e372d191e85a6ee2fbc68b266ff7b399972fbe000b955f085",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\revenue_backtest.py": "56e443eabc225de55ac2b80f23fcab94a18c44220848ad04887e17395f8f7d73",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\revenue_constraints.py": "6ce99c1d59fa3858213e31bf9dadc351591ef0eda006d957f07cf1a839e57374",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\revenue_core.py": "28614d4e670c204d24cd8f65f872a56a29694692dc6a2f180af2f2f779fb8109",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\revenue_forecast.py": "7ad3eb9d7f1aec8bda83f80c342332e0b7643c229c9620784258472163872abb",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\revenue_publication.py": "bc2bb4a33e36ed9ad82bc4ffe33e57de8999002c2c7910b9c8b9d1565678fcd0",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\revenue_report.py": "3f5c1324e2be453ffcb8c58945304fc4e5ca831a71266d5c6b80620874915b23",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\rolling_backtest.py": "80de3bfbf47d1dc6b59fc8de94733f996463edb5d749923b6ab7039875d4ec8b",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\schema_compatibility.py": "7aa6803b4567fb28d9797a406256a07834d6fe7ddddeaaae9b9f4f3f087ff9e5",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\schema_fields.py": "54276494dcb280b23791c3a7614eb2090997a68e1116d78f6efdf02edf52a01c",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\schema_optin.py": "6a3e01ea8ab95e5d705ff21c86274db6fc16b3569a19d74c2d1558cd3cf6b3a3",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\source_narrative_context.py": "c71b53bf25ea67a1c1b5b83d5ecad6a63fe653786298f5b5ed3625e35a66a5fe",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\source_period_semantics.py": "d1c155189ccd631037e85f2f2005a8cf04cbe24c20497ede157a0d33e3d4c1ff",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\source_preparation.py": "3c4aa95987b3d90fc807e76d9eb564f9797eb2e97cfd3b881758e74043fa2e07",
+        "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\trust_anchor.py": "9abdcec55a524574b55e0111f513338f79a486f536985d036b94b4a71ba1310c"
+      }
+    },
+    "FF": {
+      "root": "C:\\Users\\郑曾波\\Projects\\filing-fetch",
+      "head": {
+        "rc": 0,
+        "out": "350cb39dad8a1116d76fd44824fe353ae210d384"
+      },
+      "branch": {
+        "rc": 0,
+        "out": "main"
+      },
+      "runtime_sha256": {
+        "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\et_v2_contract.py": "50bc9db60ac0ab16dcc0cb63f67f557857bf04c47dc19c5777e22028eb4f1d00",
+        "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\fetch_filing.py": "93f00ad38777c41b6cec24f9d98b640a1d907c1fa2cc51d0ab1379ea502688e8",
+        "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\fetch_statements.py": "4cd7a2409959a762588de262a9979a6c8c2a64db45ff128468f778f6fa947128",
+        "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_configuration.py": "869b3fbf5c9d519b05fde4835f85edfd6ed85cb8c3b1a490e31c80856763c715",
+        "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_financial_statements.py": "3334cac4b6bf3f49d3979f5e1834d8c4ff35f522938dd0f91ef13c1c6508fed4",
+        "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_local_preparation_observation.py": "2338c544bb86542bc3c36148e205ba53454406109e206e4a29311ff0f35198dd",
+        "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_local_source_prepare.py": "34193905be4503303a636e2c025075da8b4a29cb8cffcb759aaec5c87163daee",
+        "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_process_transport.py": "a95321ded274556981dc18f494513e344cd3679d7ae75e9bb5eab754c440c43a",
+        "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_process_tree.py": "4ff6acbb5d838e593e90d62c1d35d7c9ecdae35b3916d1d041bd7ed077bc504f",
+        "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_provider_cause.py": "84e2de504b1c2c03774beb3cc4e548d4b8a26b8532a6464dd38f50f3569fbeeb",
+        "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_source_candidate.py": "2f9293f1243ecc55bd88ec18a3c6499a58913041444f6ca3d256980d847a93b0",
+        "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_source_failure.py": "25b2efa46932ba887aa0ebbfd6e5b994bb3307a90962888343473c16996e4de5",
+        "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_source_ref.py": "d82e2bd49b022ac5ac7acf16604470ad7fede82b58937e7c621dc630380cf3ea",
+        "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\ff_v2_envelope.py": "a4a5e3e5946d23e7c0fa3e22158d29a9b0b5ae41d539cf60ba06ff393469e67f",
+        "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\filing_contracts.py": "033248d7f6bb72801428fc886aa5a32b2357de88e1179c892b237ac2eee65659",
+        "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\transcript_companion.py": "7e3f28a5928270850af308b9d20f4187cbaa985f1e0a5b4dffb83c3a1c0084be",
+        "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\transcript_reuse_selection.py": "66600ac99f48f43fc4ca332a71edd5ce6a2671173f4a4da97f99f3f724b41269",
+        "C:\\Users\\郑曾波\\Projects\\filing-fetch\\scripts\\transcript_tool_transport.py": "8fd24051d403665599a3fa2f3be3f16cb997e504d84e23ae40409b8fb96c9855"
+      }
+    },
+    "invest": {
+      "root": "C:\\Users\\郑曾波\\Projects\\invest-skills",
+      "head": {
+        "rc": 0,
+        "out": "9b68cc9b9bac194ede4881453f7706528bc18add"
+      },
+      "branch": {
+        "rc": 0,
+        "out": "main"
+      },
+      "runtime_sha256": {
+        "C:\\Users\\郑曾波\\Projects\\invest-skills\\invest-compare\\scripts\\compare_artifacts.py": "5b4bf3d9a9017aa9dc0043eaad65ea1af425ed8ca8fa39ab6d98ad9bb984501c",
+        "C:\\Users\\郑曾波\\Projects\\invest-skills\\invest-core\\scripts\\invest_contracts.py": "e5025385fe9894e8488cd59fcfd90bbbce69679291c7a05d5622771d7a06494b",
+        "C:\\Users\\郑曾波\\Projects\\invest-skills\\invest-distribution\\scripts\\capital_allocation.py": "4eceb143d40b5721509e92fdef7a6adbbeea53b90e86c7f04fd3c029621306cf",
+        "C:\\Users\\郑曾波\\Projects\\invest-skills\\invest-financials\\scripts\\financial_model.py": "2a0bfecd5809917f0b7c5f684d1a229aa5afd98c0ff294499d9d511b24289fa2",
+        "C:\\Users\\郑曾波\\Projects\\invest-skills\\invest-framework\\scripts\\bundle_validator.py": "40e4bf8c78fb533aa3bffb2dd246adb85360b2885d6c615c1cdaa89ed3fc03ce",
+        "C:\\Users\\郑曾波\\Projects\\invest-skills\\invest-framework\\scripts\\company_orchestrator.py": "133fc297751d60c2959b6aad4d9017f355ef72890df7304ed5c9d38498ba61a7",
+        "C:\\Users\\郑曾波\\Projects\\invest-skills\\invest-framework\\scripts\\manifest_contract.py": "d63d83b3f178973ad73b64ec4cc796c548b4caccb4635e2a4919ef921c77c95d",
+        "C:\\Users\\郑曾波\\Projects\\invest-skills\\invest-psychology\\scripts\\psychology_check.py": "7e6a4e38d745d94e6caba17d1ba011e090e7e327f599bd11817225f60a28e9d0",
+        "C:\\Users\\郑曾波\\Projects\\invest-skills\\invest-sotp\\scripts\\sotp_model.py": "7bc5d77237c1df6913cfdc4587d873b6ea248fb682edd66f36dfbff83bfaa1d2",
+        "C:\\Users\\郑曾波\\Projects\\invest-skills\\invest-valuation\\scripts\\valuation_model.py": "fd02ef343cf50197ce40f48efe4e9e340d23c2f7244f15a4ca2b387e509a1898"
+      }
+    },
+    "StockWiki": {
+      "root": "C:\\Users\\郑曾波\\Projects\\StockWiki",
+      "head": {
+        "rc": 0,
+        "out": "9e8e308b37b668620a94376494fef4fdc3b55bed"
+      },
+      "branch": {
+        "rc": 0,
+        "out": "master"
+      },
+      "runtime_sha256": {
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\__init__.py": "e11c7f9e908d1ac641ebecca52b21d2fbdf9100755800888058bea65ccf8e618",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\_narrative_bundle.py": "91be9e443dd51160b5fe20091d21ff9163781a72da1fa35ab60ea75e2790943e",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\_narrative_process.py": "7c61fbf909bd95126280dc0fa602e27b14eb0b721e49af668436fc24b3a7d203",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\_narrative_process_tree.py": "fc89499c530d93203104033c34cd15b13d201b96fb702ac6cfe59627ebc30c3e",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\_narrative_wire.py": "1a4662a334ca2536b61e005a9b1960b68d7b162e90dc4f13960ff90118538af5",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\_source_reader_v2_bundle.py": "c2d53ed9c9f129d5db63bff75c82a6ad5132c55caa049c9484bec91a8ef72615",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\_source_reader_v2_transport.py": "a3888360bc064ca2b1312a652e4084ed5c1f421948603117c990d4880263514c",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\_source_reader_v2_wire.py": "725aa5506c7cef415083e08fea0c5fcc369f0aa7fc3e0772da0d0f75be4a482c",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\_text.py": "c0d3dec865c26bc123b27ef16c81ed7a4d42636049361abefff2407a6bcb3a44",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\analysis.py": "4ef54b5bc3b192acb93518431811bbd7f8f39c459912fdc9ee4c3d7465236394",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\analysis_evidence.py": "76476c22d72fa1ec4475ef24dc730307a68ac35632f8fe33e782fc1900758da6",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\analysis_render.py": "cc417fefbe4eb52f4fc373326cb95fba3af339290fe014f1d8bcd16c9d54c775",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\audit.py": "995d2e0a813daaf36aa43301779ccb0e97f0c8378ae7b79ebac86a3c283de52e",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\audit_dimensions.py": "8b4bbe427cdb0aac825b9b4d9e61a4beaf1339077c973fd9088479881d196d87",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\backup.py": "b70830d1a6ff614f556280e3c9fd79e2390704b8c1968f9cb87e98a75d81bfcd",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\cli.py": "872dd5f810cd7f3a3a7c0ad9d30e5259dd8cddc855d639534805510adb44cde2",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\cli_parsers\\__init__.py": "6590a5131f3e30506ffe3b9cff878fe00ecfe4624d3f5a7398c59be523be36b3",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\cli_parsers\\backup.py": "bc20a70e48f24a54693aa1baf20da291da07a5c41dabeba5d5c131376a240d99",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\cli_parsers\\company.py": "430f4ce68634151c56e0315dd66b61a7bae57cb107d3c7369e8e0a50a62ec199",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\cli_parsers\\core.py": "adfba11908fd33ea21ae8f7f9775d7d7eab1fd6b59e40aba475fb422fe5699b7",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\cli_parsers\\dayu.py": "1b028f547099868131aae587b7966c2862abde704ee313481182a4cd2f409735",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\cli_parsers\\evidence_gap.py": "9fc9e51258aaa3e6cb1e358f5d77bfdf14017c856eed422b18d637c151cc05a2",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\cli_parsers\\evolution.py": "afc899d9666a9c64990c4d507d97dd4c1fab718b21668cdd4db4029d743a99d1",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\cli_parsers\\identity_g2b.py": "2f6b1b54fa4564997302152ba9ba4970d325630772321ba0995f2c3ae0c2f4d8",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\cli_parsers\\industry.py": "95be77478c12e65c35c7f644e052523e0acff71852d891972b839d608140db34",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\cli_parsers\\narrative_source.py": "df34a1b12acbff152de765024f844635c8855499a4046bb60aa4adb46e38ce7b",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\cli_parsers\\news.py": "e3b5a6e2914a307f0554b78c016b53a1bacbb754da6a00b3fb775eb3552fcf5e",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\cli_parsers\\obsidian.py": "8778e25cca0759284267966ae362c7dbd48e7444ab050c0fadc114cfd209bdd2",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\cli_parsers\\pipeline.py": "2d4dfe7305b16f4130654cfec7d08b03352c41f1745b9154cf94fca6a43b027b",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\cli_parsers\\quick_scan.py": "d58a266388403a46286a242deb7197caf0d54e3ce24a4f0bf59f9458de34ad3a",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\cli_parsers\\review.py": "56b08d704ab5f54063fa472a4ee49440d4ce0d4526c84a50774577624ea457e4",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\cli_parsers\\runtime.py": "aec53f24dd40e21050349d4e2ee686e78494e0c1d9b015d3699dba419a7049fe",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\cli_parsers\\source_reader_v2.py": "a9e19c4d9c0f1e393272a5ff8f6be3aef824e6c85df48741dc3cc27f9b52708f",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\cli_parsers\\workspace.py": "613aff2804aa5a22384f8f66ffe85abad5bf4ecfa0e5e6928458eabe37fef484",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\cli_registry.py": "84c1205427c3901f0b8495aceaa8e1863464a42d13fa9685c62873bda0e970a7",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\config.py": "d6ab49bbf406e77dc6ac39f5155154df8aa98bc1ee4f006496b33c8f82a5d613",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\content_conformance.py": "1d7c235dd11799db3d20104a26ec65401a7435a78ff5ec578d2e13ed27ecd685",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\crosslink.py": "483ec094cdba928c0afd40ccc11ff9b7b601e368e025ba8a9f887694391b07eb",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\dashboard.py": "4b8a79340d3f04f5f702992d35dae71894c65f2da7e1b791415f52712dd5028c",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\dayu_evidence.py": "59da916810d894e26fa313d0db8c108d45b6b9c967e619368b1e2c5f06e8724a",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\dir_index.py": "c6dfcfac4d8b10295fff723c87e3f79f7e9a6867611050ae70707dedaa61ee2d",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\document_signals.py": "f1dd454da8a9825a40158f16486ef3a723edfee0c416dbfa2f9053af4516007a",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\document_signals_helpers.py": "326a689e068984d1cb14db386400ae468c4241529cc298e187e3b6c040c7bac9",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\documents.py": "e673606d95df3a2ceb8c2f8f43862945b8df991635e077e281bb594589ca9f69",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\enrichment.py": "f0e1130a2d396cecf1b62548c4bd1b00918670e541b56f460abb405f677f9865",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\evidence_gap.py": "785e0ac373213e421663f991248c357db877d0b79be332e9e16d56a782106d05",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\evolution.py": "63c472f7df3c8f1ee973faf8166e504c946a7ed263bd63ffa58ba401c5689f96",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\evolution_apply.py": "dec948b1e489f7b9512820101ab2c73bc1fd1352feeb4e7c03395b9f9e55d568",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\evolution_proposers.py": "b56ae087a5684a1b2066e2d1d99f5a5940c22615be434b7f4437be499dc6c6c9",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\evolution_review.py": "0fd075058a7c7662cb514d216b1dbc301d40115fbf03d9c6536b38358bbd5484",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\framework.py": "fe911d6ddbaf8a67612eba5a584fa22c2581fbef07a4beec616accfc637a5efe",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\framework_validators.py": "730cd4001c7c5a13c96f1116e478fb8e8782851c33746e2b103677b89832b4f4",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\framework_validators_base.py": "682e774a228a7551ab4241a5c56b13d72f26746683f6ba93f53cbab9d7bc652e",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\framework_validators_forests.py": "ea3e2ff8a75cd4446ad98584c64d942e1a62aebbca5a9262f11b5d207a28e0e6",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\framework_validators_industry.py": "c0c940c9b2d841a40317432a1114ad3eee06de690cce3d3bdcbd035645ecaa33",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\framework_validators_okf.py": "3414cc5ca9acd865bcd9000c9ad1f6fd90cc021e97257f08d1aa2a16f869c92a",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\framework_validators_policy.py": "ec923498b8192802d26040411469da739e1b33f5b0cabe3823d010b76f3cec33",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\framework_validators_topics.py": "cba599dec330d55330020e3726a3e2bdf594dd0c721610ede2ed79d48471fe7f",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\hypothesis_ledger.py": "9c40b3f9623c42ff2864bd7383d225ba1f413ab2d39e8cff960621310754021e",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\i18n_labels.py": "75e8bfdf291585bacf1cbf2415f3e4ec3992946b3fd18dca4243d54d240711f6",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\identity_g2b.py": "c667ce6c7b22e3a545cdfd8ad265b1c80d3cef78adc4bea38d7809b6c78d2db1",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\identity_g2b_cli.py": "964487e6c91b987a39a58c4be0ead69b4ea3d78b1cc4d177f147a0d7aa04f023",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\identity_import.py": "832b391dfd6e26ab893fba26927fecfa7fdfa0128d5c428e841ba1fa1dd709aa",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\identity_mapping.py": "fac474253c6c529debef1011fa00dcecd07b2de2a9ff886e1d059c2736b6b043",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\identity_receipts.py": "58e5abcf757b507af6dc9cb7ff332e84f97ee0a6322214df928728fc97cf13ac",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\identity_snapshot.py": "70e32c4c3606a861e497c5a47ade661e7689bf4e578c052b3240c73c04ad82aa",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\industry.py": "4e306268e6ca9144bfac5413a15690e411dcddc345631e7840ba1ce9c5c679ea",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\industry_gap.py": "c5752c5141a40f8e0ffe4d79058aab7b162d2b0c935306ec4f008d6c9f461533",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\industry_helpers.py": "7ef7adb8a5e2edb6d3fb173c18e10fbe53f60393e095265532f057a362ef3d4b",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\industry_helpers_base.py": "0befb52c27a33cdc6e3d0149d6e478bed5069afe28e20230bb433d3cbde2c166",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\industry_helpers_data.py": "22c25555f2f864f491fead35c9271438e99362adf743c53b548b21d5a32487e5",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\industry_helpers_render.py": "804dab898d9e05967cb7d3bfcd10da888a030ee2ee21541f196d91a100acb9c9",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\industry_report.py": "7d4611d46f44f3387cfd84d2a85ed377110134392095f665555baa15a68ece2a",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\industry_report_render.py": "666448d20e398dfa1f14d455ed5c676c38c321e70abcd53b381016ed72aac2cd",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\industry_signals.py": "70576de74580d317562f20cd2fb2e1d0164822057daf5f5409a76f9ecd262ab7",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\integrations\\__init__.py": "cf84c5825219101e12857a3287fe4a1d375c7caf3a1bfc93698c90157d2ade27",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\integrations\\dayu_cli.py": "7bc7e51a0b1d611836ba7d04c53322eada19053131b20ee80b6d6d3f91432665",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\integrations\\dayu_metadata.py": "380f721e8445189296e5b5b055eea2cb3961bd65ee8f41d6249c0ae853f421f6",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\llm_classifier.py": "7be80dc5f40d6315c44f4c88bd8ef1e65b9027520273233904ed07b6b506840a",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\llm_provider.py": "fc05f74c4ac3cda34e268f14e32d5889e0b92edb1608bff711411e376de1b26f",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\llm_review.py": "203cbe6e98a0f652b1b09a96e02e61dfe5ab35e4b155b1e9cfaab98df84e28b8",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\market_registry.py": "b3333e0fb9dafac599b900884a9082d9ea975798c98984d31beac0597b633db9",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\narrative_source.py": "4025c9acfbeed3f57d2844679c7b2195b5a7fbd5a5955ef1ad0e14140094b199",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\news.py": "e0158816356e4c4fcd14e1839b41aef6701cc3b0a00895f756cb10a09901af8f",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\news_audit.py": "6c261b67837c20f3d1e21fc84dd67eee76eabc8e9a5b5d77ab817c61848640ae",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\news_fetch.py": "ef9700a9bad632473f8bf6da061c14a762d8cc1e56a80e7f853be5544dcd7dc1",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\news_helpers.py": "bba06c17f4181f687e7cca0f779890a707072986c216e87646663eef800993dc",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\news_helpers_base.py": "d8d12f1f651d94918b9e81efaf8eb2b9b1207f8484f9499335830fa8c03ef279",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\news_import.py": "8f0cc0496cc11954d368703ea747c0038fa93a154b02892cc3688c46541b7c56",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\news_models.py": "b3f8a009cfef29297b8f04d63cc848b02c97ae8ce40f8a84cfe9c700e214b433",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\news_writers.py": "aac94fd05a803b2f2a86383a050e142ff94b92b4fa668c8cd949dbb578717c0f",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\obsidian_export.py": "147768a52fdfa901597c3ca95aa6fa944d5deb9ae863285fb129bafbff7ecd5f",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\okf.py": "1d92eac1b6a5a9935c4e032a149416336a36a65ffec144d93733ee03c9f41fe5",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\okf_export.py": "23d991c30c9a9132a57aef76afaaedc4eb4c98abc7bae9d74cedf83a0ab00649",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\paths.py": "7d6ce107efe77681b5afe4d7aa39ffec075eb5fb0e474b0c1ee28b9cf2914b3d",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\perf.py": "8b9a480b3320dbb7d213725dd878bb685667eaaba7d1989cb6672094ef834869",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\pipeline.py": "cf3a6947d2c0fefbb024a78be42c851b3a8712d1f5dd0f62aa948bdca61b5687",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\preflight.py": "c97d03b359d06b34c6a129f61030cfd48d43d02234c255879811663cce2bbd9a",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\prompts.py": "624330e78fcdb0b11166dd50c44d17d8cfd6fa8f3e495194450173be6fc59006",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\question_timeline.py": "82937d20739a1fb876d6282402a262c5a2c90400025ad24d5717f451372524bf",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_analysis.py": "305b06ca58c42c18ed8f7651b18157f2bcfabe6b7336b62e39c50cc9e8552610",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_assessment_cli.py": "e7f71590a11130e302810c69d50d5a02b11237068a60366411449d2ee56eae68",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_backup.py": "278360f2ca46cdf480fd4f364e580ae156f82e0603c598a79d61797bcfcb8aa8",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_backup_manifest.py": "705254cc102bcfff0aa6f3d2a840a762018f180356ded618ef77552c47c5e83c",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_candidate_import.py": "9fcf4113fb1ff99c4d50d9f6713ee436639a974585419f37862335172cdb6086",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_candidates.py": "463705ee731ed23e6460ac80a69429eac12c484dd1bd226c2f60db706c34ba93",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_capabilities.py": "5d62addb6e81f3457f1710ddc5615f206744987d3e32dff65daacad83c561256",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_conditions.py": "f757604866144439c0ebafc36f65f08b30b9a534cdc795efaa0e731d8a653885",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_delivery.py": "27208402b1672bc776aa469f6a9f77e4b27f24c072c044ee5758fbacf715cc73",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_evidence.py": "2b48d1f14e97f05b703dc1d865b1810ed557b66aad979e53879f94ac666e7525",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_execution_qualification.py": "0fdd04f3a9b89758461585276c9e7a8c059ecd8a85d206c44bd2526e755cc8e0",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_execution_qualification_cli.py": "72c75c2af9769869f74698e7c73230a9e20ad5c6931c094dfc966748737b2491",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_freshness.py": "1f6d17689d769c650a693d6351f93fc0430829b108f99b966ecd7e90f93a45d2",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_identity.py": "2d894e50a6e07b0abdcc37ca2733fdb7d17bb5efe9f7dff6e64112dc9ed30230",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_import.py": "55748ae5115bedf2d1e9583c78ff812aebaed767034ce053300b1956b880043a",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_issuer_bootstrap.py": "ef9f1c00af9e27f67de1fa6e06a7c5d05c5eb46c4c57a52401ec73bce4003542",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_issuer_bridge.py": "c437edeff219072dd1e3cba00524d56a09bdb1558dd12817bf636282bab565eb",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_maintenance.py": "bd7be2a2685ccecbab9ad9aef4864a694f379e861151d608f14819955cfa0c36",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_module_refresh.py": "895eae80c55007feff5d6cf8d53ba73cbe5a14b0ae69d131d5c37389186cf835",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_observations.py": "d643a192da40dc0e125373f2451431d0172de2485c7bcfbf50c7486b2ebcde5b",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_profiles.py": "ae9ef506f7c2d23ad0763580c06ceb65331effc6c6bf0b56b0ce2b0bd437219a",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_qualification.py": "72e439f1ba369e112d21d1c1f041838bda37a633bfdbbd15afd4726f8d925a63",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_qualification_cli.py": "0e06df95676199d9731eb5ba40656efb1ed0480205e74901197b06ce3e04b74f",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_qualification_review.py": "3d472fbfc61c3a23e20edf5090302ed1e90a131202c5c64365a48d48a2f43f64",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_query.py": "72332d88d4d48fe8e45c2415cdabd3838849cd4e803e1f72c3cbf376bf9def09",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_query_capture.py": "7ec03def775dcb5673796174fdd0d566682151398eb5cb6d51d038303c258073",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_query_contract.py": "89445aa2b7d21946c5287e2e673d22f60e94e061bf228162a6fcf3df580e87ba",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_query_pool.py": "3adf15bcf0ff2232dd3361a766757ee951d4a6a0e0419a11cc49adb906ad4586",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_query_pool_assessment.py": "acf7237b2e3a7e74a92dbdc3cc4f522597dc419c4fbd62759372d6c0cb14cc51",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_query_pool_qualified.py": "885eb4656cf34a894fe684fa5cad0a6b741bea07d2f7dbc1baf54d562b80aea4",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_query_pool_scoped.py": "cf0204ff1d40f6f4f33005be0fea83c8e0fa1eda0948aed1edf32a8884fb531c",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_query_pool_service.py": "18f0c23730b9a189e5320f5aa0d0a9fb2237875797e868c7e8e67f9b6054b33e",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_query_scope.py": "239ef8e34e6b9412d74291925b5ecd022d222842b6655230635c36a53dd48064",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_query_v2.py": "a1dbd15923ae10f49d0b920aabad2ba78d52d30c192e43289c1a4c5271248e1b",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_query_v2_cli.py": "5171058a8b41e558b7c14dcce67bde830618bd6e2ba0f53e36fea68e8256c6b5",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_recovery.py": "35046d296c7742087ed7c10815e9ecc8dfd1c0c66942772324be8d7d110bbd06",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_refresh.py": "12fd9f189d59863e576b5605f1ad6ef05c243be26e27dff2a37b9d551469fb83",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_refresh_approval.py": "0182d5c63c6f751e87eabc8a09106f60c340ce10a7110387742af067ad3a9bce",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_refresh_contract.py": "4590a2e0ce85dad5da16d6be12bda77cae360d3e9dc53077f478cc348cad24f8",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_refresh_delegation.py": "4f4351de8e0215fc3d19747fae7ed41816aa74eaa2a3d02966c5dd06272ff0a7",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_refresh_owner_cli.py": "22cf14ad9b3a48af511f133c3091d73549382beb22f4522774d6404287e37e7e",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_refresh_preview.py": "bfa31b1585914af4e6cb2aa66f7d84cfd0dedbf8e66f6b9e8d72e5ced507b810",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_refresh_principal.py": "af76d633cf013a0e6e2eec9955932f86d293eea9765a7b2b218b11fedf435d16",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_refresh_records.py": "73b927898fabbccc87d4c2b6a2eb93b2b6c3d12bb9cddf28860ded3fd34255e3",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_research_context.py": "fd719b18f871d9f797aab55c1946a117a05336ed3c3a605f51385d2219717245",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_review_leads.py": "b5250123a0c954d3483ae17b68bd0155339bceae8438078c9a70009fc8fe5d0d",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_route_validation.py": "54882c9650cdbd714944789762d090b1c431005bd2941bb776f7abcff1a37c6e",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_routes.py": "09ec99425a8998d2e9bf8d08d94d3fd68c155778deaa55bca638d858a3ff9be5",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_routes_cli.py": "37ca6a52e42cea3aef3e9c8ba6849f3093c4b71d63ff54415283235651a5c648",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_rows.py": "a9a81d4cb67a176443d5092dc2eb86edc75c28591035a8ab8f62b1326a00a04a",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_rules.py": "53afa69aa1737964b0575d5715ec4525f95dab3caaf91df51de3cb20ecb456f8",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_saved_research_publication.py": "8ed089895270173df077feb7127ad07256a05b509d3a47ba50925d8147209a41",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_schema.py": "7c47d1950c34345aabc22517c783e0837d27c8183fb3c2a2b69ce9572e640656",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_store.py": "0f21ef25c3bc386bfe061b248ce28636e5578c6bbbecbe8054a871e578314faf",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_subject_authority.py": "cb96c5a2a1118338539efbdeb72ce065e21523771e3ff65205e83df0471fb644",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_subject_dispatch.py": "febd8e44ea5f2558c03565cdac34d617bb79d157a1dce133661c0d9fd83b954b",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_subject_dispatch_cli.py": "4883618562fdac1a02ac38b2e8a6e28d1f0b07eeaad2a85e3b4a3966540938bf",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_subject_refresh.py": "a9c466637aa54ef9dac4cc10025ee7d0c9dfb47ea62ef855a11f7461ab5815d8",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_universe.py": "6676cc9d756eb73c50f2cc108954e95e01a15c1967f3f7ebeed6355b96d2e71c",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_work_decision_owner.py": "9f2f97ad801d1ce6504faa1fa5fbec305b613a2549d7ed4f11dc65fb1662a1fc",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_work_delegation.py": "f0ef9912cde1774676e3d1cc89e50b8a3423db58fdc333a10e3fb63b8193db5a",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\remediation.py": "e056c53d878d44b5969bb2f34f72e8333ebb99330d53301699c819f972d10818",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\report_export.py": "80deab5e6355d9f18f72ca5c1e87e73ab0f60b7670c308f489694fe4cc7e5f52",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\report_writer.py": "8975e0b5b6d7792a34562ceef1c5b27eef115288d49e71bcdca82d3a7bfc4762",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\review_policy.py": "3b395cfc327afe1a9833b90993c9cf1bc040feca3f7bfd0b5031c7bc9258636d",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\review_runner.py": "19ed87910e2dd4cfb61bab8a657b2d30f49db4ea2fbd567c345b659231b5398e",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\review_workflow.py": "6daba32cc277b9f0c72437e0f4609b5f8e7535013dc7394e69862869dbccca5b",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\review_workflow_helpers.py": "fbe399df29bb99de28baec49051f910c90647e916d574e184000c1a184b520a4",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\review_workflow_helpers_base.py": "941fa7f9f4297716d896fe7076225c8790fc2c741fb60f437620085a49be571c",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\review_workflow_helpers_batch.py": "3181f523587c32ed56e225c7c76a3b3d0f14ad58e748083e39ef0a8a037b124a",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\review_workflow_helpers_flow.py": "12ff3a3935990340dd2e60e40b02542fc90bb5493bbfb4970d9d3ea419328216",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\review_workflow_helpers_report.py": "0e33386e80cc7aa5bb5e226d7f16ae9cb088aabea1e1d35f308b306343e7d9a8",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\runtime.py": "de81157b873cb04477d94e3a88addf731dc03193ee62c842f6ba6d1b7aab2de6",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\runtime_store.py": "9b1726a9e130042fc7141e4fc32ab4c4eac74a40be544f1b32749e0c93f00591",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\scaffold.py": "4618425384f4bb305bf968921298847e149bfaf3fd50b89826b684ea42e13583",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\schema.py": "9ae09fd0639e77ebeca60a2aaa0cef9d750853dd245605c3de09e795557489aa",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\services\\__init__.py": "6b3191203508155d14fabe239c379832451c5a0354414246b91677bdbb199175",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\services\\_common.py": "d14942171c971594fb7a6aeaf8d3eb9b7c4b03e8a11111a457c7b3df896ea7d9",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\services\\backup.py": "67c732d5c42ad71523d038481746af5054f419ee790fc3393d128d324f604b33",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\services\\company.py": "921a3ecaa7c3c96659600f67d85761baebed4ffb4db91ab4e212c9e063e25ac2",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\services\\core.py": "33405b11c10371a571754ed7abca218dd1d8bc1dd5d0d78de3e7bb274b2a1aa5",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\services\\dayu.py": "5a2527d165f72f4c581ac5d8246f93e37cfe9c6f7ee94ce2bd29ed656078cf23",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\services\\evidence_gap.py": "cc5fd14e8261e12ce2286aa4a5ec8c7fa082c4ad93ca7d636a0a5aca0f829c36",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\services\\evolution.py": "c1fc997a0c128ddf6a5458471df5ec18b148a199531cf1caa09ea0697608cf43",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\services\\identity_g2b.py": "10bf117ccd76d5bfe755a417d77fbf5f6849cf59a60ae18b0ea92dbdfbfb8787",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\services\\industry.py": "c4359207bdc9b516c100227add021a3d578ddd714e14ed3ba3ee9d797c13294e",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\services\\narrative_source.py": "b2f3c857157728dc78cdced656fa28b3a3ef95aa9f1a40854e7c159a3eb6a245",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\services\\news.py": "a726d1eb0682d37756a03e822e45d5443c3f0ceb590ba13c60e13a9a3ac50760",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\services\\obsidian.py": "7c421a9cb9c30260ac0352e0ac1a9e2cd84e91fdf6d327e3c81263a8d1bb70b3",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\services\\pipeline.py": "422410955f3375b4055139d5b2a3648076bce2937675a051254da1a26e54821b",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\services\\pipeline_planner.py": "b852b73c81b6768855fa9f9fe93600bb4a3380a44fcae8a82ce1685f3178e950",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\services\\review.py": "6884cdc1f638e4bbde97b7cc22fcb890caa214a46fad481c150f2cce825e9774",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\services\\runtime.py": "c1dc43c40ce09027d56293a82ac10f07e22990fe71a1ce8c6f028d506aedf876",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\services\\source_reader_v2.py": "758d5c7107226e5306a39e31b4af9d8dac2e53dce90a5131bf107ea095070762",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\services\\workspace.py": "952c6fa71538ddfaf54069b34c3c734d7f465341b299e53e466f1a3cc52529c9",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\snr_governance.py": "f762f9bec1f6a7b694843d9fcd3f914f22d599958e90bfbcc0f405e4cbf530e5",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\source_reader_v2.py": "aca45c731bf62ce9e039ce7f86c2bb7121e963630ca00f25dfa98086ae4a816f",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\sources.py": "e9ef53d40851b673ee11d813078a54f475b4488b35899a0c88aba3313c9cd65d",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\timeline_review.py": "a40ec08955032631e314d8e7ba4d3a2e097e287951e52f28ef8c2868e133539a",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\timeline_review_render.py": "1b808ee106f2bfe15336d0ae33c212adbc3205d268d3c791f5f085bb28a13fba",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\topic_policy.py": "dc2ddf202f09810287ac5ed034a98f70006e3d1911f33408c80adeec57533b90",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\ui.py": "b518e6e5239c1140cf94dc9f0f1a28bfc6543fac2a552d7b3980f78970a41e57",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\ui_assets.py": "29d15796fb62b2a3d5af38ec047400b02126820d19f610ccb2627da1bc6f3ea0",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\ui_company.py": "e87ff397023b57e984a9da989c9f9fc9f75daeb99ede6b048bd0072544f56bf6",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\ui_industry.py": "bcc6c9df43f9bfc677c093292f0f69090e102d1da32b29f9e47e35b68b3d594c",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\ui_jobs.py": "af9446fa59abc966dbb193e8f5b7b9ba0b96451e51445d1afa8cc90e8c25078e",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\ui_policy.py": "f9fa1bb0fee407700832b301c720ee67179b8e8347621acddb81223ae2dad2a1",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\ui_quick_scan.py": "dd319b2385c42e8e448051426ea4fc093cb3dae3747eade0be52bc9784baf9b6",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\ui_reviews.py": "447f55b5f12ee4a173b7bb1405d8f7f3ceffff67a6f52bc8ed0f639463387814",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\ui_summary.py": "108d700d3892a5e808645c3353368e85cc502bc93027449fe46c8a205ec15cb6",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\ui_utils.py": "7f47264cd4305ddb683028f8d9a2b0833ae29925ae55cba48a03c494a6223d58",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\ui_wiki.py": "25fa39944bfcd45daf7963863698fe1f376386f8be3286a6daaf5d738f039313",
+        "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\wiki_index.py": "c4a3021adf48888b3b9cc5006b961ac12c726dd91171e6fd0e2c636e6b16e47a"
+      }
+    },
+    "ET": {
+      "root": "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts",
+      "head": {
+        "rc": 0,
+        "out": "2584b7eed062a9a30254bc06b4f19ab5471b414e"
+      },
+      "branch": {
+        "rc": 0,
+        "out": "main"
+      },
+      "runtime_sha256": {
+        "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\cache.py": "730918288f1803ba083d4f1e070afe4ba2ec4d47abc9b41708ea161cf11ac9e2",
+        "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\common.py": "c0243a204daa15a9be10e611b6786707d78953279259f6cd98bee6b74c2f74a1",
+        "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\config.py": "e4ef8517ba3a08a10e09860d4cbc8be499001bce9eff5f67475e684ea1baa5e6",
+        "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\eval_translation.py": "3836bb554cc8ccd165f45bc3f34d7d72ed103a0754fa2758e9aec5875fdfa85d",
+        "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\legacy_projection_comparison.py": "2f9acacf6d11f23f495a530e4eba82997c3019d20124e2c8a9f6c0fb2051b661",
+        "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\lock.py": "807dc2da83600868a9892a7701c3fdc862e36a42928a359dba75f84a40b7d2f7",
+        "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\make_interleaved.py": "49faa8c070cb72541832642ccee679c0ab2c851ae8da48edf09c65c02e55f748",
+        "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\naming.py": "651ed98907eda000b4e76369631f5df5afb353d6416ff3652f48c2c39239f47a",
+        "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\parser.py": "1544fa9b0c06dde8eea68851358acdb03339b54eb7271ced47e7a1436a9099f7",
+        "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\reader.py": "b8af7ad63f80e7b99147d63c2bf7a7594815b8ca7e81abb90a21fa8541c07c36",
+        "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\retrieval_budget.py": "41fbb08ea1e6d9b4f9eca9fa29fc380d4d1335f02f694942dd4b0c503b641001",
+        "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\retrieval_runtime.py": "2655bbadeccc98e74c51df1f3e49171f0a827f7699abee0afc4e7d665ffb1957",
+        "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\retrieval_worker.py": "8ec0836b061e48c172a92c3e2b02afc155c921c4a85660211df88ef4df7c94d5",
+        "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\scraper.py": "39482cf65a65fcf2d4e5c0987c9549a050bc1adc92b488de0b6566632ecd9e6f",
+        "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\transcript_api.py": "771fc0d50e714a39b7e0d50e6d07012f2aa5ba96eeecacff4538ecc9f9d2f603",
+        "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\transcript_artifact.py": "63cfd1134f5fc94a5059585c2d603ff4e6826700cebae3150781d59fd297874b",
+        "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\transcript_audit.py": "3814dfbb1efc513991d68889dc52e7568cc219f907393f7abbf7745609946204",
+        "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\transcript_extraction.py": "c6c7a0d4d5e411b616bc3a90a16158183ba83977cb6ac92fb14e1e73da591abd",
+        "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\transcript_tool.py": "1684c922c8bff9a6ecc26fa5502a5abdc147e6c273619c5817e16325d7449003",
+        "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\translate.py": "5007982868df09aeffa4574065b1870d9b7efe7ab1e018548a2e177e2e049389",
+        "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\translator.py": "9512df05f5b7f596b6b37baeca2a9a511ade5dc4ab4dce9fc96fcf561b7fbc4f"
+      }
+    }
+  },
+  "runtime_ast_inventory": {
+    "RF": {
+      "files": 80,
+      "conditions_for_manual_caller_review": [
+        {
+          "file": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\filing_upstream_cause.py",
+          "line": 454,
+          "expression": "not (normal_gap and reason is None) and (not isinstance(reason, str) or not 0 < len(reason) <= 512 or any((ord(c) < 32 for c in reason)) or any((c in reason for c in ('/', '\\\\', '?', '='))))"
+        },
+        {
+          "file": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\filing_upstream_cause.py",
+          "line": 455,
+          "expression": "0 < len(reason) <= 512"
+        },
+        {
+          "file": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\forecast\\calc.py",
+          "line": 58,
+          "expression": "len(formula) <= 500"
+        }
+      ]
+    },
+    "FF": {
+      "files": 18,
+      "conditions_for_manual_caller_review": []
+    },
+    "invest": {
+      "files": 10,
+      "conditions_for_manual_caller_review": [
+        {
+          "file": "C:\\Users\\郑曾波\\Projects\\invest-skills\\invest-core\\scripts\\invest_contracts.py",
+          "line": 254,
+          "expression": "len(formula) <= 500"
+        }
+      ]
+    },
+    "StockWiki": {
+      "files": 213,
+      "conditions_for_manual_caller_review": [
+        {
+          "file": "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\_narrative_bundle.py",
+          "line": 215,
+          "expression": "not isinstance(groups, list) or len(groups) > 512"
+        },
+        {
+          "file": "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\_narrative_bundle.py",
+          "line": 208,
+          "expression": "not isinstance(raw, list) or len(raw) > 512 or (nonempty and (not raw)) or any((not isinstance(ref, str) or ref not in ids for ref in raw)) or (len(raw) != len(set(raw)))"
+        },
+        {
+          "file": "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\_narrative_bundle.py",
+          "line": 215,
+          "expression": "len(groups) > 512"
+        },
+        {
+          "file": "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\_narrative_bundle.py",
+          "line": 208,
+          "expression": "len(raw) > 512"
+        },
+        {
+          "file": "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_issuer_bootstrap.py",
+          "line": 90,
+          "expression": "not isinstance(authorization_ref, str) or not authorization_ref.strip() or len(authorization_ref) > 512 or any((ord(c) < 32 for c in authorization_ref))"
+        },
+        {
+          "file": "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_issuer_bootstrap.py",
+          "line": 91,
+          "expression": "len(authorization_ref) > 512"
+        },
+        {
+          "file": "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_qualification_review.py",
+          "line": 30,
+          "expression": "not isinstance(value, dict) or set(value) != REQUEST_KEYS or value['protocol'] != 'stockwiki.qualification_review_request/1.0.0' or (value['decision'] not in {'grant', 'revoke'}) or (value['requested_"
+        },
+        {
+          "file": "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_qualification_review.py",
+          "line": 48,
+          "expression": "len(canonical_bytes(value)) > 32 * 1024"
+        },
+        {
+          "file": "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_query_v2_cli.py",
+          "line": 45,
+          "expression": "len(raw) > 8 * 1024 * 1024"
+        },
+        {
+          "file": "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_query_v2_cli.py",
+          "line": 45,
+          "expression": "len(raw) > 8 * 1024 * 1024"
+        },
+        {
+          "file": "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_refresh_owner_cli.py",
+          "line": 51,
+          "expression": "len(raw) > 8 * 1024 * 1024"
+        },
+        {
+          "file": "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_refresh_owner_cli.py",
+          "line": 51,
+          "expression": "len(raw) > 8 * 1024 * 1024"
+        },
+        {
+          "file": "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_refresh_owner_cli.py",
+          "line": 216,
+          "expression": "completed.returncode != 0 or len(completed.stdout) > 8 * 1024 * 1024"
+        },
+        {
+          "file": "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_refresh_owner_cli.py",
+          "line": 243,
+          "expression": "len(raw) > 8 * 1024 * 1024"
+        },
+        {
+          "file": "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_refresh_owner_cli.py",
+          "line": 243,
+          "expression": "len(raw) > 8 * 1024 * 1024"
+        },
+        {
+          "file": "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_refresh_owner_cli.py",
+          "line": 216,
+          "expression": "len(completed.stdout) > 8 * 1024 * 1024"
+        },
+        {
+          "file": "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_refresh_principal.py",
+          "line": 26,
+          "expression": "not 0 < size.value <= 65536"
+        },
+        {
+          "file": "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_refresh_principal.py",
+          "line": 26,
+          "expression": "0 < size.value <= 65536"
+        },
+        {
+          "file": "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_subject_dispatch_cli.py",
+          "line": 71,
+          "expression": "len(raw) > 128 * 1024"
+        },
+        {
+          "file": "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\quick_scan_subject_dispatch_cli.py",
+          "line": 71,
+          "expression": "len(raw) > 128 * 1024"
+        }
+      ]
+    },
+    "ET": {
+      "files": 21,
+      "conditions_for_manual_caller_review": [
+        {
+          "file": "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\transcript_tool.py",
+          "line": 220,
+          "expression": "len(raw.encode('utf-8')) > 128 * 1024"
+        },
+        {
+          "file": "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\transcript_tool.py",
+          "line": 220,
+          "expression": "len(raw.encode('utf-8')) > 128 * 1024"
+        }
+      ]
+    }
+  },
+  "rf_four_wip_before": {
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\daily_alert.jsonl": "712f9e957990ca0c261cbb91c1d10b0a12606da9d7293e6f2a1581309ce295e9",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_alert.jsonl": "fc9ec2335b48d42921ca9c14c63363efca3b3096f967733e366f4dd463e4b7ed",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_manifest.json": "e2e57f28fec7477af06029adcf187468701ab0305024993bfb2953bbd43cc5c0",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\monthly_manifest.json": "56d630107429cbcb646a951306dd1ea445dd5b3146236f34d0e8df953c103b9a"
+  },
+  "formula_public_probes": [
+    {
+      "repo": "RF",
+      "entry": "forecast.calc.evaluate_derived_formula",
+      "formula_length": 505,
+      "ast_nodes": 6,
+      "same_ast": true,
+      "short_result": 3.5,
+      "exception_type": "ForecastInputError",
+      "error": "derived formula is too long"
+    },
+    {
+      "repo": "invest",
+      "entry": "invest_contracts.evaluate_formula",
+      "formula_length": 505,
+      "ast_nodes": 6,
+      "same_ast": true,
+      "short_result": 3.5,
+      "exception_type": "InvestmentArtifactError",
+      "error": "formula is too long"
+    }
+  ],
+  "reviewer_errors": [
+    "First evidence-save embedded JSON booleans as Python literal; NameError before writing. Corrected to json.loads; product/probes unchanged."
+  ],
+  "stockwiki_receipt_public_probe": [
+    {
+      "case": "short",
+      "returncode": 0,
+      "source_bytes": 2,
+      "explicit_stdout_budget": 1024,
+      "receipt_bytes": 1414,
+      "bundle_bytes": 1857,
+      "wire_accepted_by_CWP_and_StockWiki": true,
+      "stdout_bytes": 924,
+      "stderr": "",
+      "verified_output": "verified"
+    },
+    {
+      "case": "long",
+      "returncode": 2,
+      "source_bytes": 2,
+      "explicit_stdout_budget": 1024,
+      "receipt_bytes": 271415,
+      "bundle_bytes": 271858,
+      "wire_accepted_by_CWP_and_StockWiki": true,
+      "stdout_bytes": 0,
+      "stderr": "{\"error_code\": \"stderr_over_limit\", \"detail\": \"\"}",
+      "verified_output": null
+    }
+  ],
+  "owned_tmp": {
+    "files": 9,
+    "final_state": "absent",
+    "file_manifest": {
+      "short-bundle.json": {
+        "sha256": "4d27bc2ab784b5552b5e98e6d1d620149de0ce0dd3c6214c8af7a073bdcd882c",
+        "bytes": 1857
+      },
+      "short-config.json": {
+        "sha256": "1401e6d5ff7f4121ae3b980c6052af13035ec43e5fdefb22f5100db541d0e3e2",
+        "bytes": 315
+      },
+      "long-bundle.json": {
+        "sha256": "cf02d15cd5a5a4df73036da86f81a43f485c1c4e7c867d728f60f6c9bad56e8f",
+        "bytes": 271858
+      },
+      "long-config.json": {
+        "sha256": "00a5c075e754ebf3a79dafb5f7c7efefcf7fbf5a6db171a342ccf79a6d8d27ec",
+        "bytes": 314
+      },
+      "et-local\\ACME_Q3_2026_earnings_call.txt": {
+        "sha256": "af8cbbb26c385f9271e944589080a0a1303a6971e90bc88c9b3eb49cc66c14b1",
+        "bytes": 303
+      },
+      "long-receipt.json": {
+        "sha256": "ade9725ace7b395f5d248ede1fbb2e5324fb7d72a6a3070fdc989e47387d6477",
+        "bytes": 271415
+      },
+      "short-receipt.json": {
+        "sha256": "d657a73bf2c635264cf84538c86c0dcee3a85cb0803b37e2164ec834bb07cc9a",
+        "bytes": 1414
+      },
+      "producer.py": {
+        "sha256": "7c1b636405884df94be393b5aa281872d9408ced0f769143c37b31a569bdb669",
+        "bytes": 179
+      },
+      "et-local\\ACME_Q3_2026_earnings_call.receipt.json": {
+        "sha256": "c2c1f2add42c2f1e1a6b676f565352f44752e86580f3ca8a3d85d38ff9cfadb9",
+        "bytes": 494
+      }
+    },
+    "logical_bytes": 548149,
+    "no_reparse": true,
+    "initial_state": "absent",
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\gcf-b2e61a"
+  },
+  "et_public_probes": [
+    {
+      "case": "valid exact local original no optional sidecar",
+      "outcome": "legacy_unverified",
+      "error_code": null,
+      "file_sha256": "af8cbbb26c385f9271e944589080a0a1303a6971e90bc88c9b3eb49cc66c14b1"
+    },
+    {
+      "case": "same valid exact original malformed sidecar only",
+      "outcome": "receipt_invalid",
+      "error_code": "receipt_invalid",
+      "file_sha256": "af8cbbb26c385f9271e944589080a0a1303a6971e90bc88c9b3eb49cc66c14b1",
+      "original_unchanged": true,
+      "caller": "scraper._finalize_existing maps this to output_conflict/failure; absent sidecar is reusable legacy_unverified"
+    },
+    {
+      "case": "declared trusted receipt actual body checksum mismatch negative",
+      "outcome": "receipt_mismatch",
+      "error_code": "receipt_mismatch",
+      "interpretation": "This is actual integrity mismatch; do not auto-label verified or silently delete original."
+    },
+    {
+      "case": "public fetch_transcript short",
+      "status": "fetched",
+      "error_code": null,
+      "same_valid_json": true,
+      "declared_raw_response_budget": 20971520,
+      "payload_bytes": 125,
+      "actual_bytes_emitted": 125,
+      "calls": 1,
+      "closed": true,
+      "content_bytes": 40
+    },
+    {
+      "case": "public fetch_transcript large-valid-whitespace",
+      "status": "content_too_large",
+      "error_code": "byte_limit",
+      "same_valid_json": true,
+      "declared_raw_response_budget": 20971520,
+      "payload_bytes": 17825917,
+      "actual_bytes_emitted": 16842752,
+      "calls": 1,
+      "closed": true,
+      "content_bytes": null
+    }
+  ],
+  "stockwiki_narrative_public_probes": [
+    {
+      "case": "baseline",
+      "body_bytes": 4042,
+      "sha_size_ref_and_source_unchanged_except_artifact_rebinding": true,
+      "result": "ACCEPTED",
+      "evidence": 1
+    },
+    {
+      "case": "optional-review-only",
+      "body_bytes": 3996,
+      "sha_size_ref_and_source_unchanged_except_artifact_rebinding": true,
+      "result": "REJECTED",
+      "type": "NarrativeSourceError",
+      "code": "review_fields"
+    },
+    {
+      "case": "reading-schema4",
+      "body_bytes": 4461,
+      "sha_size_ref_and_source_unchanged_except_artifact_rebinding": true,
+      "result": "ACCEPTED",
+      "evidence": 1
+    },
+    {
+      "case": "reading-schema4-current-optional-field",
+      "body_bytes": 4496,
+      "sha_size_ref_and_source_unchanged_except_artifact_rebinding": true,
+      "result": "REJECTED",
+      "type": "NarrativeSourceError",
+      "code": "reading_context_fields"
+    },
+    {
+      "case": "public transport explicit2MiB budget configuration",
+      "actual_io_performed": false,
+      "result": "REJECTED",
+      "code": "reader_config_invalid"
+    }
+  ],
+  "observed_at_utc": "2026-11-02T14:22:03.027009+00:00",
+  "findings": [
+    {
+      "id": "CR-01",
+      "severity": "P2",
+      "status": "CONFIRMED_BEFORE_AUTHORIZED_REPAIR",
+      "owner": "RF/invest arithmetic owners; reviewer authorized narrow TDD after audit",
+      "root_cause": "Raw formula length500 is a representation permit, not actual arithmetic work. Same AST/input values with harmless interior whitespace are refused.",
+      "implementation": [
+        {
+          "repo": "RF",
+          "path": "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\scripts\\forecast\\calc.py",
+          "sha256": "c5a86d843b0679a5292fa1e3ea27ebd2e628d9d19067047a228117e0e7b954a3",
+          "symbols": [
+            "evaluate_derived_formula",
+            "_evaluate_formula_node"
+          ]
+        },
+        {
+          "repo": "invest",
+          "path": "C:\\Users\\郑曾波\\Projects\\invest-skills\\invest-core\\scripts\\invest_contracts.py",
+          "sha256": "e5025385fe9894e8488cd59fcfd90bbbce69679291c7a05d5622771d7a06494b",
+          "symbols": [
+            "evaluate_formula",
+            "_evaluate_formula_node"
+          ]
+        }
+      ],
+      "callers": [
+        "RF contracts/document.py::_validate_derived + forecast/calc.py::materialize_derived_parameters + contracts/period_flow.py/evidence_roles conversion use the same evaluator",
+        "invest_core _validate_parameters→evaluate_formula→finite_number"
+      ],
+      "actual_probes": [
+        {
+          "repo": "RF",
+          "entry": "forecast.calc.evaluate_derived_formula",
+          "formula_length": 505,
+          "ast_nodes": 6,
+          "same_ast": true,
+          "short_result": 3.5,
+          "exception_type": "ForecastInputError",
+          "error": "derived formula is too long"
+        },
+        {
+          "repo": "invest",
+          "entry": "invest_contracts.evaluate_formula",
+          "formula_length": 505,
+          "ast_nodes": 6,
+          "same_ast": true,
+          "short_result": 3.5,
+          "exception_type": "InvestmentArtifactError",
+          "error": "formula is too long"
+        }
+      ],
+      "required_fix": "Remove character permit, support true long formulas too; one explicit actual parsing/AST/evaluation work owner per repository, no cross-repo circular import or skip/approval flag. Retain unknown-variable/finite/zero-divide/power/invalid-node/math correctness controls."
+    },
+    {
+      "id": "CR-02",
+      "severity": "P2",
+      "status": "CONFIRMED_ROOT_STOCKWIKI_OWNER",
+      "owner": "ROOT StockWiki transport",
+      "root_cause": "Receipt channel has immutable256KiB hard limit independent of explicit caller source-byte budget. Valid source2B and complete valid manifest271k are refused.",
+      "implementation": [
+        {
+          "repo": "StockWiki",
+          "path": "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\_source_reader_v2_transport.py",
+          "sha256": "a3888360bc064ca2b1312a652e4084ed5c1f421948603117c990d4880263514c",
+          "symbols": [
+            "VerifiedOpenTransport.from_config",
+            "open_verified"
+          ]
+        },
+        {
+          "repo": "StockWiki",
+          "path": "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\_narrative_process.py",
+          "sha256": "7c61fbf909bd95126280dc0fa602e27b14eb0b721e49af668436fc24b3a7d203",
+          "symbols": [
+            "run_bounded"
+          ]
+        },
+        {
+          "repo": "StockWiki",
+          "path": "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\services\\source_reader_v2.py",
+          "sha256": "758d5c7107226e5306a39e31b4af9d8dac2e53dce90a5131bf107ea095070762",
+          "symbols": [
+            "run_source_read_v2"
+          ]
+        }
+      ],
+      "actual_probes": [
+        {
+          "case": "short",
+          "returncode": 0,
+          "source_bytes": 2,
+          "explicit_stdout_budget": 1024,
+          "receipt_bytes": 1414,
+          "bundle_bytes": 1857,
+          "wire_accepted_by_CWP_and_StockWiki": true,
+          "stdout_bytes": 924,
+          "stderr": "",
+          "verified_output": "verified"
+        },
+        {
+          "case": "long",
+          "returncode": 2,
+          "source_bytes": 2,
+          "explicit_stdout_budget": 1024,
+          "receipt_bytes": 271415,
+          "bundle_bytes": 271858,
+          "wire_accepted_by_CWP_and_StockWiki": true,
+          "stdout_bytes": 0,
+          "stderr": "{\"error_code\": \"stderr_over_limit\", \"detail\": \"\"}",
+          "verified_output": null
+        }
+      ],
+      "required_fix": "Keep actual stream/deadline/process-tree resource owner, but allow caller receipt/combined transport budget without a second constant top cap; do not truncate valid JSON or silently claim verified. No StockWiki writes by reviewer."
+    },
+    {
+      "id": "CR-03",
+      "severity": "P2",
+      "status": "CONFIRMED_ROOT_STOCKWIKI_OWNER",
+      "owner": "ROOT StockWiki narrative consumer",
+      "root_cause": "StockWiki retains old local caps and diagnostic permits after CWP/RF expanded valid source metadata: body/config/request/receipt top caps, optional review refusal, exact context schema4 missing current optional source_processing_complete.",
+      "implementation": [
+        {
+          "repo": "StockWiki",
+          "path": "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\narrative_source.py",
+          "sha256": "4025c9acfbeed3f57d2844679c7b2195b5a7fbd5a5955ef1ad0e14140094b199",
+          "symbols": [
+            "NarrativeSourceTransport.__init__",
+            "from_config",
+            "read",
+            "read_narrative"
+          ]
+        },
+        {
+          "repo": "StockWiki",
+          "path": "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\_narrative_wire.py",
+          "sha256": "1a4662a334ca2536b61e005a9b1960b68d7b162e90dc4f13960ff90118538af5",
+          "symbols": [
+            "MAX_BODY",
+            "MAX_CHANNEL",
+            "narrative_ref",
+            "read_request",
+            "parse_json"
+          ]
+        },
+        {
+          "repo": "StockWiki",
+          "path": "C:\\Users\\郑曾波\\Projects\\StockWiki\\stockwiki\\_narrative_bundle.py",
+          "sha256": "91be9e443dd51160b5fe20091d21ff9163781a72da1fa35ab60ea75e2790943e",
+          "symbols": [
+            "_diagnostics",
+            "_reading_extension",
+            "load_verified_view"
+          ]
+        }
+      ],
+      "actual_probes": [
+        {
+          "case": "baseline",
+          "body_bytes": 4042,
+          "sha_size_ref_and_source_unchanged_except_artifact_rebinding": true,
+          "result": "ACCEPTED",
+          "evidence": 1
+        },
+        {
+          "case": "optional-review-only",
+          "body_bytes": 3996,
+          "sha_size_ref_and_source_unchanged_except_artifact_rebinding": true,
+          "result": "REJECTED",
+          "type": "NarrativeSourceError",
+          "code": "review_fields"
+        },
+        {
+          "case": "reading-schema4",
+          "body_bytes": 4461,
+          "sha_size_ref_and_source_unchanged_except_artifact_rebinding": true,
+          "result": "ACCEPTED",
+          "evidence": 1
+        },
+        {
+          "case": "reading-schema4-current-optional-field",
+          "body_bytes": 4496,
+          "sha_size_ref_and_source_unchanged_except_artifact_rebinding": true,
+          "result": "REJECTED",
+          "type": "NarrativeSourceError",
+          "code": "reading_context_fields"
+        },
+        {
+          "case": "public transport explicit2MiB budget configuration",
+          "actual_io_performed": false,
+          "result": "REJECTED",
+          "code": "reader_config_invalid"
+        }
+      ],
+      "static_same_owner": [
+        "groups/references512, citation views<=2",
+        "request/config/receipt16KiB",
+        "artifact byte_size<=1,310,720 and explicit max_stdout_bytes cannot exceed same constant",
+        "review exact5field/status/hash and schema4 context exactfields become whole-source gates"
+      ],
+      "required_fix": "Versioned wire owner should preserve valid core source/ref/hash/locators/support-context partition and source_processing false/unknown honestly; unknown/bad owner diagnostic cannot deny real material. Actual resource budgets stay caller controlled. Do not label source accepted by ignoring missing true core proof. Static extra caps require targeted controls in ROOT repair, not asserted separately reproduced here."
+    },
+    {
+      "id": "CR-04",
+      "severity": "P2",
+      "status": "CONFIRMED_BEFORE_AUTHORIZED_ET_REPAIR",
+      "owner": "ET transcript_api budget owner; reviewer authorized after math stabilization",
+      "root_cause": "Explicit actual max_response_bytes20MiB is silently tightened to a provider constant16MiB; valid identical JSON with harmless padding becomes content_too_large though caller budget remains. HTML/raw opt-in uses related fixed ceilings.",
+      "implementation": [
+        {
+          "repo": "ET",
+          "path": "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\transcript_api.py",
+          "sha256": "771fc0d50e714a39b7e0d50e6d07012f2aa5ba96eeecacff4538ecc9f9d2f603",
+          "symbols": [
+            "_read_fmp_payload",
+            "_body_response_cap",
+            "_source_payload_fields",
+            "_validate_request",
+            "fetch_transcript"
+          ]
+        },
+        {
+          "repo": "ET",
+          "path": "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\retrieval_budget.py",
+          "sha256": "41fbb08ea1e6d9b4f9eca9fa29fc380d4d1335f02f694942dd4b0c503b641001",
+          "symbols": [
+            "UsageCounter",
+            "_BudgetSession",
+            "_BudgetResponse"
+          ]
+        }
+      ],
+      "actual_probes": [
+        {
+          "case": "public fetch_transcript short",
+          "status": "fetched",
+          "error_code": null,
+          "same_valid_json": true,
+          "declared_raw_response_budget": 20971520,
+          "payload_bytes": 125,
+          "actual_bytes_emitted": 125,
+          "calls": 1,
+          "closed": true,
+          "content_bytes": 40
+        },
+        {
+          "case": "public fetch_transcript large-valid-whitespace",
+          "status": "content_too_large",
+          "error_code": "byte_limit",
+          "same_valid_json": true,
+          "declared_raw_response_budget": 20971520,
+          "payload_bytes": 17825917,
+          "actual_bytes_emitted": 16842752,
+          "calls": 1,
+          "closed": true,
+          "content_bytes": null
+        }
+      ],
+      "static_related_limits": [
+        "HTML wrapper _body_response_cap chooses MAX_BODY_BYTES even with explicit raw response budget",
+        "opt-in source payload16MiB/base64 result24MiB fixed second checks after read",
+        "max_body_bytes schema<=10MiB and request timeout<=60s are distinct current hard request ceilings; do not auto-delete real deadline without owner design"
+      ],
+      "required_fix": "Single operation meter/request response budget governs provider read + payload materialization. Omitted quota may keep documented defaults; explicit higher resource budget must not be min-clamped to old constants. Preserve actual caller body/output/time/fee/unknown usage. Synthetic HTTP only."
+    },
+    {
+      "id": "CR-05",
+      "severity": "P2",
+      "status": "CONFIRMED_BEFORE_AUTHORIZED_ET_REPAIR",
+      "owner": "ET transcript_artifact local reuse; reviewer authorized after math stabilization",
+      "root_cause": "Non-authoritative malformed sidecar is worse than missing sidecar for the exact same valid original. Unchanged local TXT with explicit company/period is accepted legacy_unverified without sidecar, then turned output_conflict solely by malformed optional JSON.",
+      "implementation": [
+        {
+          "repo": "ET",
+          "path": "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\transcript_artifact.py",
+          "sha256": "63cfd1134f5fc94a5059585c2d603ff4e6826700cebae3150781d59fd297874b",
+          "symbols": [
+            "read_receipt",
+            "parse_receipt",
+            "verify_stored_original"
+          ]
+        },
+        {
+          "repo": "ET",
+          "path": "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\scraper.py",
+          "sha256": "39482cf65a65fcf2d4e5c0987c9549a050bc1adc92b488de0b6566632ecd9e6f",
+          "symbols": [
+            "_finalize_existing",
+            "_ENTRY_STATUS_FOR_OUTCOME"
+          ]
+        }
+      ],
+      "actual_probes": [
+        {
+          "case": "valid exact local original no optional sidecar",
+          "outcome": "legacy_unverified",
+          "error_code": null,
+          "file_sha256": "af8cbbb26c385f9271e944589080a0a1303a6971e90bc88c9b3eb49cc66c14b1"
+        },
+        {
+          "case": "same valid exact original malformed sidecar only",
+          "outcome": "receipt_invalid",
+          "error_code": "receipt_invalid",
+          "file_sha256": "af8cbbb26c385f9271e944589080a0a1303a6971e90bc88c9b3eb49cc66c14b1",
+          "original_unchanged": true,
+          "caller": "scraper._finalize_existing maps this to output_conflict/failure; absent sidecar is reusable legacy_unverified"
+        },
+        {
+          "case": "declared trusted receipt actual body checksum mismatch negative",
+          "outcome": "receipt_mismatch",
+          "error_code": "receipt_mismatch",
+          "interpretation": "This is actual integrity mismatch; do not auto-label verified or silently delete original."
+        }
+      ],
+      "required_fix": "Bad/missing non-authoritative metadata can downgrade to honest legacy_unverified with diagnostic while exact header identity/period/raw remain checked. Genuine explicit receipt source/body SHA or pin contradiction must remain refusal. Never silently verified, overwrite original or redownload to resolve a bad note."
+    }
+  ],
+  "reproducers": {
+    "stockwiki_receipt": {
+      "source": "from pathlib import Path\nfrom types import SimpleNamespace\nfrom contextlib import redirect_stdout,redirect_stderr\nimport hashlib,io,json,sys,time\nfrom company_wiki.source_contract import EvidenceSpan,EvidenceCoordinates,ParseStatus,SourceExportBundleV2,source_id_for_sha256\nfrom stockwiki.source_reader_v2 import SOURCE_EXPORT_ID_PREFIX,SOURCE_READ_RECEIPT_SCHEMA_VERSION,load_bundle\nfrom stockwiki.services.source_reader_v2 import run_source_read_v2\nroot=Path('C:/Users/郑曾波/Projects/company-wiki');owned=root/'tmp/gcf-b2e61a';assert not owned.exists();assert owned.resolve().parent==(root/'tmp').resolve();owned.mkdir()\ngold=json.loads(Path('C:/Users/郑曾波/Projects/StockWiki/tests/fixtures/source_v2/source_export_bundle.json').read_text(encoding='utf-8'))\noriginal=b'ok';digest=hashlib.sha256(original).hexdigest();sid=source_id_for_sha256(digest)\nspan=EvidenceSpan.create(source_id=sid,coordinates=EvidenceCoordinates(char_start=0,char_end=2),raw_text='ok',structured_value=None,parser_name='exact-source-probe',parser_version='1.0.0',parse_status=ParseStatus.PARSED,quality_flags=())\ncanon=lambda x:json.dumps(x,ensure_ascii=False,sort_keys=True,separators=(',',':'),allow_nan=False)\nstub=owned/'producer.py';stub.write_text(\"import sys\\nfrom pathlib import Path\\nsys.stdout.buffer.write(b'ok');sys.stdout.buffer.flush()\\nsys.stderr.buffer.write(Path(sys.argv[1]).read_bytes());sys.stderr.buffer.flush()\\n\",encoding='utf-8')\nresults=[]\nfor name,title in [('short','public source title'),('long','public source title '+('q'*270000))]:\n wire=dict(gold);m=dict(gold['manifests'][0]);m.update(title=title,source_id=sid,content_sha256=digest,byte_size=2,mime_type='text/plain')\n wire.update(manifests=[m],evidence_spans=[span.to_dict()],counts={'source_manifests':1,'evidence_spans':1})\n payload={k:v for k,v in wire.items() if k not in {'export_id','bundle_sha256'}};h=hashlib.sha256(canon(payload).encode()).hexdigest();wire.update(export_id=SOURCE_EXPORT_ID_PREFIX+h,bundle_sha256=h)\n assert SourceExportBundleV2.from_dict(wire).bundle_sha256==h\n raw=canon(wire).encode(); assert load_bundle(raw).bundle_sha256==h\n receipt={'schema_version':SOURCE_READ_RECEIPT_SCHEMA_VERSION,'status':'ok','document_id':m['document_id'],'source_id':sid,'content_sha256':digest,'byte_size':2,'policy_sha256':'1'*64,'source_read_policy_sha256':'2'*64,'read_at':'2026-11-02T15:00:00Z','manifest':m,'review':None}\n rpath=owned/(name+'-receipt.json');rpath.write_text(canon(receipt),encoding='utf-8')\n bpath=owned/(name+'-bundle.json');bpath.write_bytes(raw)\n cfg=owned/(name+'-config.json');cfg.write_text(canon({'schema_version':'1.0','python_executable':sys.executable,'argv_prefix':[sys.executable,str(stub),str(rpath)],'timeout_s':5,'max_stdout_bytes':1024}),encoding='utf-8')\n stdout,stderr=io.StringIO(),io.StringIO()\n with redirect_stdout(stdout),redirect_stderr(stderr):\n  code=run_source_read_v2(SimpleNamespace(bundle=str(bpath),source_id=sid,document_id=None,content_sha256=None,locator=None,reader_config=str(cfg)))\n results.append({'case':name,'returncode':code,'source_bytes':2,'explicit_stdout_budget':1024,'receipt_bytes':len(rpath.read_bytes()),'bundle_bytes':len(raw),'wire_accepted_by_CWP_and_StockWiki':True,'stdout_bytes':len(stdout.getvalue().encode()),'stderr':stderr.getvalue().strip(),'verified_output':json.loads(stdout.getvalue())['verification_status'] if stdout.getvalue() else None})\nout=root/'docs/plans/du11-source-closure-2026-10-18/review/architecture-quality-20261101/implementation-results/gate-rejection-followup-20261102/crossrepo-audit.json';d=json.loads(out.read_text(encoding='utf-8'));d['stockwiki_receipt_public_probe']=results;d['owned_tmp']={'path':str(owned),'initial_state':'absent','final_state':'pending cleanup'};out.write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\\n',encoding='utf-8')\nprint(json.dumps(results,ensure_ascii=False))\n",
+      "sha256": "41d50c8011a61cc8bc6c9ff398e9b2835b988b8c9b9a126fc4ba4c39a23fc7b7"
+    },
+    "stockwiki_narrative": {
+      "source": "from pathlib import Path\nimport copy,hashlib,json\nfrom stockwiki.narrative_source import NarrativeSourceTransport,read_narrative\nroot=Path('C:/Users/郑曾波/Projects/company-wiki');gold=Path('C:/Users/郑曾波/Projects/StockWiki/tests/fixtures/narrative_v1')\ncanon=lambda x:json.dumps(x,ensure_ascii=False,sort_keys=True,separators=(',',':')).encode()\nresults=[]\nfor name in ['baseline','optional-review-only','reading-schema4','reading-schema4-current-optional-field']:\n request=json.loads((gold/'read_request.json').read_bytes());bundle=json.loads((gold/'bundle.json').read_bytes());receipt=json.loads((gold/'read_receipt.json').read_bytes())\n if name=='optional-review-only':bundle['prompt_review']={'status':'unavailable','reason':'review_storage_unreadable'}\n if name.startswith('reading-schema4'):\n  bundle['reading_context']={'schema_version':'du-production-reading/4','reading_policy_version':'du-sent-policy/1+'+'1'*64,'reading_policies':[],'business_facets':[],'constraints':[],'groups':[],'unread':{},'deferred':[],'layout_coverage':{},'deferred_count':0,'deferred_limited':False,'selection_diagnostics':[],'selection_trace':{'schema_version':'selection-trace/1'}}\n  if name.endswith('optional-field'):bundle['reading_context']['source_processing_complete']=False\n raw=canon(bundle);request['narrative_ref'].update(artifact_sha256=hashlib.sha256(raw).hexdigest(),byte_size=len(raw));receipt['narrative_ref']=copy.deepcopy(request['narrative_ref'])\n def runner(command,**kwargs):return 0,raw,canon(receipt)+b'\\n'\n transport=NarrativeSourceTransport(argv_prefix=['synthetic-replay-no-network'],timeout_s=5,max_stdout_bytes=1310720,runner=runner)\n try:\n  view=read_narrative(request,transport);out={'result':'ACCEPTED','evidence':len(view.to_dict()['evidence'])}\n except Exception as exc:out={'result':'REJECTED','type':type(exc).__name__,'code':getattr(exc,'error_code',None)}\n results.append({'case':name,'body_bytes':len(raw),'sha_size_ref_and_source_unchanged_except_artifact_rebinding':True,**out})\ntry:NarrativeSourceTransport(argv_prefix=['synthetic'],timeout_s=5,max_stdout_bytes=2*1024*1024);out={'result':'ACCEPTED'}\nexcept Exception as exc:out={'result':'REJECTED','code':getattr(exc,'error_code',None)}\nresults.append({'case':'public transport explicit2MiB budget configuration','actual_io_performed':False,**out})\np=root/'docs/plans/du11-source-closure-2026-10-18/review/architecture-quality-20261101/implementation-results/gate-rejection-followup-20261102/crossrepo-audit.json';d=json.loads(p.read_text(encoding='utf-8'));d['stockwiki_narrative_public_probes']=results;p.write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\\n',encoding='utf-8');print(json.dumps(results))\n",
+      "sha256": "a5fde1262251a0878cd48ead05dfe9a0072eda960eeecbe81aac9d643a91c3ae"
+    },
+    "et": {
+      "source": "from pathlib import Path\nimport importlib.util,json\nfrom transcript_api import fetch_transcript,ProviderSettings\nfrom transcript_artifact import verify_stored_original,receipt_path\nROOT=Path('C:/Users/郑曾波/Projects/company-wiki');owned=ROOT/'tmp/gcf-b2e61a';assert owned.is_dir()\net=Path('C:/Users/郑曾波/Projects/earnings-transcripts/earnings-transcripts')\nspec=importlib.util.spec_from_file_location('ind_et_fixture',et/'tests/test_transcript_artifact.py');fixture=importlib.util.module_from_spec(spec);spec.loader.exec_module(fixture)\noriginal=fixture.write_txt(owned/'et-local',fixture.make_text())\nbefore=original.read_bytes()\nresults=[]\nv=verify_stored_original(original,ticker='ACME',quarter='Q3 2026')\nresults.append({'case':'valid exact local original no optional sidecar','outcome':v.outcome,'error_code':v.error_code,'file_sha256':v.file_sha256})\nreceipt_path(original).write_bytes(b'{broken optional metadata')\nv=verify_stored_original(original,ticker='ACME',quarter='Q3 2026')\nresults.append({'case':'same valid exact original malformed sidecar only','outcome':v.outcome,'error_code':v.error_code,'file_sha256':v.file_sha256,'original_unchanged':original.read_bytes()==before,'caller':'scraper._finalize_existing maps this to output_conflict/failure; absent sidecar is reusable legacy_unverified'})\nreceipt_path(original).unlink()\nfixture.attach_receipt(original)\ndata=json.loads(receipt_path(original).read_text(encoding='utf-8'));data['body_sha256']='0'*64;receipt_path(original).write_text(json.dumps(data),encoding='utf-8')\nv=verify_stored_original(original,ticker='ACME',quarter='Q3 2026')\nresults.append({'case':'declared trusted receipt actual body checksum mismatch negative','outcome':v.outcome,'error_code':v.error_code,'interpretation':'This is actual integrity mismatch; do not auto-label verified or silently delete original.'})\nclass Response:\n status_code=200;url='https://financialmodelingprep.com/stable/earning-call-transcript';headers={'Content-Type':'application/json'}\n def __init__(self,payload):self.payload=payload;self.closed=False;self.emitted=0\n def iter_content(self,chunk_size):\n  for i in range(0,len(self.payload),chunk_size):\n   part=self.payload[i:i+chunk_size];self.emitted+=len(part);yield part\n def close(self):self.closed=True\nclass Session:\n def __init__(self,response):self.response=response;self.headers={};self.calls=0\n def get(self,*args,**kwargs):self.calls+=1;return self.response\n def close(self):pass\nbase=json.dumps([{'symbol':'ACME','year':2026,'quarter':3,'date':'2026-10-01','content':'CEO: We launched the new public service.'}]).encode()\nfor name,padding in [('short',0),('large-valid-whitespace',17*1024*1024)]:\n payload=b' '*padding+base;response=Response(payload);session=Session(response)\n request={'schema_version':'earnings-transcript-request/1','request_id':'synthetic-request','ticker':'ACME','exchange':'nyse','fiscal_year':2026,'fiscal_quarter':3,'as_of_date':'2026-11-02','provider':'fmp','download_authorized':True,'timeout_seconds':30,'max_body_bytes':1000000,'max_response_bytes':20*1024*1024}\n result=fetch_transcript(request,session_factory=lambda:session,fmp_api_key='TEST_FAKE_KEY_ONLY',provider_settings=ProviderSettings(fmp_enabled=True),include_source_payload=False)\n results.append({'case':'public fetch_transcript '+name,'status':result['status'],'error_code':result.get('error_code'),'same_valid_json':json.loads(payload)==json.loads(base),'declared_raw_response_budget':20*1024*1024,'payload_bytes':len(payload),'actual_bytes_emitted':response.emitted,'calls':session.calls,'closed':response.closed,'content_bytes':result.get('content_bytes')})\nout=ROOT/'docs/plans/du11-source-closure-2026-10-18/review/architecture-quality-20261101/implementation-results/gate-rejection-followup-20261102/crossrepo-audit.json';d=json.loads(out.read_text(encoding='utf-8'));d['et_public_probes']=results;out.write_text(json.dumps(d,ensure_ascii=False,indent=2)+'\\n',encoding='utf-8');print(json.dumps(results,ensure_ascii=False))\n",
+      "sha256": "136c7742d02979e05333712dc13c68a51cd55299881c8842c9ca8355800d7033"
+    },
+    "formula": {
+      "source": "Fresh process per repository: import evaluate_derived_formula/evaluate_formula; short='x0+0'; long='x0'+(' '*501)+'+0'; assert ast.dump(ast.parse(short,mode='eval')) == ast.dump(ast.parse(long,mode='eval')); short([3.5]) returns3.5, long rejects solely len>500.",
+      "sha256": "7cfa5e9e64c6cbc0ca63918ea3b45a143b647c0971fcced2798a779f52220f82"
+    }
+  },
+  "reviewed_and_retained": [
+    {
+      "area": "RF/FF identity/period/as-of/raw hashes",
+      "actual_responsibility": "Cross-process wire receipt/ref/manifest source bytes and expected period/date are distinct received-data checks. RF immutable VerifiedOriginalRead lets same-transaction composition reuse a single source read/hash. Public raw builders and frozen artifact reload independently validate their boundary.",
+      "decision": "Keep actual identity/time/units/hash and named mismatches; no new per-material permission or generic trusted flag."
+    },
+    {
+      "area": "RF/invest registry and attestation",
+      "actual_responsibility": "Current run_forecast emits valid unattested when no trusted signer; rebuildable registry I/O diagnostic does not deny result. invest accepts self-contained output and strong economic/input recomputation. Missing claimed actual source/result hash is not an approval receipt; do not falsely call invalid data verified.",
+      "decision": "No new registry/host signature permission found in current ordinary chain. RF signer response64KiB only yields unattested on failure, not denial of normal forecast; lower priority diagnostic resource, not a current valid-result veto."
+    },
+    {
+      "area": "FF",
+      "actual_responsibility": "Current root config reader no64KiB cap; optional localprep JSON preserves primary status and unknown usage. Legacy authorization is optional scope/caps; request intent controls download. Process stdout32MiB is actual read budget, not an additional already-loaded representation check. Provider stderr64KiB parse cap loses optional detail only; no demonstrated successful-source denial.",
+      "decision": "No new proven current FF normal-result rejection found; do not count prior fixed diagnostic/config caps again. Future caller requiring larger real output should be allowed to specify its operation resource budget."
+    },
+    {
+      "area": "ET translation/LLM/cache/overwrite",
+      "actual_responsibility": "scraper defaults original language; TranslatorFactory invoked only explicit --translate, _maybe_translate returns before initialization otherwise. transcript_api/tool pure original retrieval does not initialize LLM. JsonCache corrupt cache can miss without denying an existing valid source. Actual receipt hash mismatch protects raw integrity; output conflict does not overwrite originals.",
+      "decision": "Keep explicit source identity/period/hash/no-clobber and actual network request intent. Do not require translation/LLM just to use TXT, and fix malformed metadata gateCR-05 separately."
+    }
+  ],
+  "scope_limits": [
+    "CodeGraph returned stale/noncanonical context; current top-level allowlisted runtime AST/source and explicit public callers used instead. No index init.",
+    "342 runtime files hashed/AST inventoried across5canonical repos; this is structural coverage plus targeted public-chain reading, not every line/function or provider production behavior proven.",
+    "StockWiki quick_scan_* IQS/issuer-qualification integration names appeared in static inventory; no IQS repository or active other-owner workflow was executed/modified. Those owner-specific user identity/business qualification controls are not signed globally absent here.",
+    "No Dayu/IQS/Dashboard directories, production config values, actual keys, original documents, outputs/history runs, downloads or models read/executed. Technical golden fixtures and synthetic source were used.",
+    "SourceExport/paid/binding previous closed caps are not repeated as findings."
+  ],
+  "snapshot_after_read": {
+    "RF": {
+      "changed_runtime_paths": []
+    },
+    "FF": {
+      "changed_runtime_paths": []
+    },
+    "invest": {
+      "changed_runtime_paths": []
+    },
+    "StockWiki": {
+      "changed_runtime_paths": []
+    },
+    "ET": {
+      "changed_runtime_paths": []
+    }
+  },
+  "rf_four_wip_after": {
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\daily_alert.jsonl": "712f9e957990ca0c261cbb91c1d10b0a12606da9d7293e6f2a1581309ce295e9",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_alert.jsonl": "fc9ec2335b48d42921ca9c14c63363efca3b3096f967733e366f4dd463e4b7ed",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_manifest.json": "e2e57f28fec7477af06029adcf187468701ab0305024993bfb2953bbd43cc5c0",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\monthly_manifest.json": "56d630107429cbcb646a951306dd1ea445dd5b3146236f34d0e8df953c103b9a"
+  },
+  "rf_four_wip_unchanged": true,
+  "implementation_handoff": {
+    "RF_invest_math": "Explicitly authorized to reviewer after audit; separate crossrepo-repair.md/json and own TDD, ROOT final independent review/commit.",
+    "ET": "Explicitly authorized to reviewer after math stable; separate et-repair.md/json; source/raw integrity and caller resource owner preserved.",
+    "StockWiki": "ROOT owns repair; reviewer remains read-only.",
+    "audit_status": "This audit is historical BEFORE_REPAIR evidence, not a release receipt; later manifests bind repaired runtime."
+  },
+  "technical_fixture_sha256": {
+    "C:\\Users\\郑曾波\\Projects\\StockWiki\\tests\\fixtures\\source_v2\\source_export_bundle.json": "50127fc93f77e38f391917e5b152037c5375e385eedd0284419555348e16d793",
+    "C:\\Users\\郑曾波\\Projects\\StockWiki\\tests\\fixtures\\narrative_v1\\bundle.json": "18f5ad055b89aa6e9d408cbb9bfae9ad0fcb30065aae23a170e9a03d5fdae251",
+    "C:\\Users\\郑曾波\\Projects\\StockWiki\\tests\\fixtures\\narrative_v1\\read_request.json": "c29e4b0a2fcf2c01a0db91dd19a80c9f608a559a61f258e7fa5a8423e07ead82",
+    "C:\\Users\\郑曾波\\Projects\\StockWiki\\tests\\fixtures\\narrative_v1\\read_receipt.json": "bf98c07be262325c5b5298adc3e2e89d90eae2796e9dca1141524074667d4f39",
+    "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\tests\\test_transcript_artifact.py": "3c3fe992ae9bc03c9599d4316590e97ce081eb14789853b0142b1e3820803411"
+  }
+}

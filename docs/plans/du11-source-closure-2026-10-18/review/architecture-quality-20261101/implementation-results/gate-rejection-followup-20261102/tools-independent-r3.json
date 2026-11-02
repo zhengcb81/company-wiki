@@ -1,0 +1,148 @@
+{
+  "schema_version": "independent-gate-repair-review/1",
+  "reviewer": "/root/rectify_readability",
+  "scope": "TOOLS",
+  "author_report_sha256": "7d71c6b4b173d3ad4d634d57d8febdba37212b9bece30a6c334bbde83147d5a7",
+  "delivery_files_sha256": {
+    "src/company_wiki/_bounded_process.py": "0fe1ec07503055932ba9f6b05fa4143b56aaf8ce9861fac914bd581873f241f4",
+    "tools/document_understanding_benchmark/holdout_acceptance.py": "ec69dd77cb61034546261b9deab40c5df76c2da8e5e3e031efb9d2e0b64eaea4",
+    "tools/document_understanding_benchmark/holdout_acceptance_observer.py": "acba5095186e5498c997a9f20aa5d96a530bebf8df0da13712fb38ce7e4e2ec0",
+    "tests/unit/test_holdout_observation_isolation.py": "09bc0ee249ad73f80b5f6d4f3a050a7c6757074e1ff8bb45e12f651a58f8f1f7",
+    "tools/document_understanding_benchmark/phase_c_runner.py": "429bd2e6d4885770d16624d82dfb5c079eb4dfd1fec39178639f28a415e537e6",
+    "tools/holdout_replay/manifest.py": "f2411482c566867ae522b4c3f39ab0f2e69e55e5b85d661a2193e536e6b92380",
+    "tools/holdout_replay/runner.py": "859a2f96bcbe6bb3add1abe3c9d7bcf8112665dee497adb78514dd1677ba0d22",
+    "tools/holdout_replay/worker.py": "8e88073a8d6425e8cf5da6fb4199d99b1fe83d56fefd631157d39482154ae5ab",
+    "tools/holdout_replay/__main__.py": "06a7c82c22371d00c4cfad7a12c8c1f4ac4ca069087fc8101e9d9c4cc6b411a0",
+    "tests/unit/test_holdout_qualification_and_metadata.py": "16c90e160851b6f7f3e815a5fb9c73c1f93500f48d1249829d2b249330c0354d",
+    "tests/holdout/w18/test_manifest_freeze.py": "cd43d83507e1a3afef6d1af9f17db5c4769f43460b2bba67f2f5f7fe8318926c"
+  },
+  "independently_observed_before_sha256": {
+    "src/company_wiki/_bounded_process.py": "0fe1ec07503055932ba9f6b05fa4143b56aaf8ce9861fac914bd581873f241f4",
+    "tools/document_understanding_benchmark/holdout_acceptance.py": "ec69dd77cb61034546261b9deab40c5df76c2da8e5e3e031efb9d2e0b64eaea4",
+    "tools/document_understanding_benchmark/holdout_acceptance_observer.py": "acba5095186e5498c997a9f20aa5d96a530bebf8df0da13712fb38ce7e4e2ec0",
+    "tests/unit/test_holdout_observation_isolation.py": "09bc0ee249ad73f80b5f6d4f3a050a7c6757074e1ff8bb45e12f651a58f8f1f7",
+    "tools/document_understanding_benchmark/phase_c_runner.py": "429bd2e6d4885770d16624d82dfb5c079eb4dfd1fec39178639f28a415e537e6",
+    "tools/holdout_replay/manifest.py": "f2411482c566867ae522b4c3f39ab0f2e69e55e5b85d661a2193e536e6b92380",
+    "tools/holdout_replay/runner.py": "859a2f96bcbe6bb3add1abe3c9d7bcf8112665dee497adb78514dd1677ba0d22",
+    "tools/holdout_replay/worker.py": "8e88073a8d6425e8cf5da6fb4199d99b1fe83d56fefd631157d39482154ae5ab",
+    "tools/holdout_replay/__main__.py": "06a7c82c22371d00c4cfad7a12c8c1f4ac4ca069087fc8101e9d9c4cc6b411a0",
+    "tests/unit/test_holdout_qualification_and_metadata.py": "16c90e160851b6f7f3e815a5fb9c73c1f93500f48d1249829d2b249330c0354d",
+    "tests/holdout/w18/test_manifest_freeze.py": "cd43d83507e1a3afef6d1af9f17db5c4769f43460b2bba67f2f5f7fe8318926c"
+  },
+  "independently_observed_after_sha256": {
+    "src/company_wiki/_bounded_process.py": "0fe1ec07503055932ba9f6b05fa4143b56aaf8ce9861fac914bd581873f241f4",
+    "tools/document_understanding_benchmark/holdout_acceptance.py": "ec69dd77cb61034546261b9deab40c5df76c2da8e5e3e031efb9d2e0b64eaea4",
+    "tools/document_understanding_benchmark/holdout_acceptance_observer.py": "acba5095186e5498c997a9f20aa5d96a530bebf8df0da13712fb38ce7e4e2ec0",
+    "tests/unit/test_holdout_observation_isolation.py": "09bc0ee249ad73f80b5f6d4f3a050a7c6757074e1ff8bb45e12f651a58f8f1f7",
+    "tools/document_understanding_benchmark/phase_c_runner.py": "429bd2e6d4885770d16624d82dfb5c079eb4dfd1fec39178639f28a415e537e6",
+    "tools/holdout_replay/manifest.py": "f2411482c566867ae522b4c3f39ab0f2e69e55e5b85d661a2193e536e6b92380",
+    "tools/holdout_replay/runner.py": "859a2f96bcbe6bb3add1abe3c9d7bcf8112665dee497adb78514dd1677ba0d22",
+    "tools/holdout_replay/worker.py": "8e88073a8d6425e8cf5da6fb4199d99b1fe83d56fefd631157d39482154ae5ab",
+    "tools/holdout_replay/__main__.py": "06a7c82c22371d00c4cfad7a12c8c1f4ac4ca069087fc8101e9d9c4cc6b411a0",
+    "tests/unit/test_holdout_qualification_and_metadata.py": "16c90e160851b6f7f3e815a5fb9c73c1f93500f48d1249829d2b249330c0354d",
+    "tests/holdout/w18/test_manifest_freeze.py": "cd43d83507e1a3afef6d1af9f17db5c4769f43460b2bba67f2f5f7fe8318926c"
+  },
+  "before_after_matches": {
+    "src/company_wiki/_bounded_process.py": true,
+    "tools/document_understanding_benchmark/holdout_acceptance.py": true,
+    "tools/document_understanding_benchmark/holdout_acceptance_observer.py": true,
+    "tests/unit/test_holdout_observation_isolation.py": true,
+    "tools/document_understanding_benchmark/phase_c_runner.py": true,
+    "tools/holdout_replay/manifest.py": true,
+    "tools/holdout_replay/runner.py": true,
+    "tools/holdout_replay/worker.py": true,
+    "tools/holdout_replay/__main__.py": true,
+    "tests/unit/test_holdout_qualification_and_metadata.py": true,
+    "tests/holdout/w18/test_manifest_freeze.py": true
+  },
+  "artifacts": {
+    "identity-after.json": {
+      "sha256": "8f0942a1a7f818a55f91b26b24f42dab5b97e5458b52c709374d677d9206cf9c",
+      "bytes": 2724,
+      "text": "{\n  \"after\": {\n    \"src/company_wiki/_bounded_process.py\": \"0fe1ec07503055932ba9f6b05fa4143b56aaf8ce9861fac914bd581873f241f4\",\n    \"tools/document_understanding_benchmark/holdout_acceptance.py\": \"ec69dd77cb61034546261b9deab40c5df76c2da8e5e3e031efb9d2e0b64eaea4\",\n    \"tools/document_understanding_benchmark/holdout_acceptance_observer.py\": \"acba5095186e5498c997a9f20aa5d96a530bebf8df0da13712fb38ce7e4e2ec0\",\n    \"tests/unit/test_holdout_observation_isolation.py\": \"09bc0ee249ad73f80b5f6d4f3a050a7c6757074e1ff8bb45e12f651a58f8f1f7\",\n    \"tools/document_understanding_benchmark/phase_c_runner.py\": \"429bd2e6d4885770d16624d82dfb5c079eb4dfd1fec39178639f28a415e537e6\",\n    \"tools/holdout_replay/manifest.py\": \"f2411482c566867ae522b4c3f39ab0f2e69e55e5b85d661a2193e536e6b92380\",\n    \"tools/holdout_replay/runner.py\": \"859a2f96bcbe6bb3add1abe3c9d7bcf8112665dee497adb78514dd1677ba0d22\",\n    \"tools/holdout_replay/worker.py\": \"8e88073a8d6425e8cf5da6fb4199d99b1fe83d56fefd631157d39482154ae5ab\",\n    \"tools/holdout_replay/__main__.py\": \"06a7c82c22371d00c4cfad7a12c8c1f4ac4ca069087fc8101e9d9c4cc6b411a0\",\n    \"tests/unit/test_holdout_qualification_and_metadata.py\": \"16c90e160851b6f7f3e815a5fb9c73c1f93500f48d1249829d2b249330c0354d\",\n    \"tests/holdout/w18/test_manifest_freeze.py\": \"cd43d83507e1a3afef6d1af9f17db5c4769f43460b2bba67f2f5f7fe8318926c\"\n  },\n  \"before_after_matches\": {\n    \"src/company_wiki/_bounded_process.py\": true,\n    \"tools/document_understanding_benchmark/holdout_acceptance.py\": true,\n    \"tools/document_understanding_benchmark/holdout_acceptance_observer.py\": true,\n    \"tests/unit/test_holdout_observation_isolation.py\": true,\n    \"tools/document_understanding_benchmark/phase_c_runner.py\": true,\n    \"tools/holdout_replay/manifest.py\": true,\n    \"tools/holdout_replay/runner.py\": true,\n    \"tools/holdout_replay/worker.py\": true,\n    \"tools/holdout_replay/__main__.py\": true,\n    \"tests/unit/test_holdout_qualification_and_metadata.py\": true,\n    \"tests/holdout/w18/test_manifest_freeze.py\": true\n  },\n  \"expected_matches\": {\n    \"src/company_wiki/_bounded_process.py\": true,\n    \"tools/document_understanding_benchmark/holdout_acceptance.py\": true,\n    \"tools/document_understanding_benchmark/holdout_acceptance_observer.py\": true,\n    \"tests/unit/test_holdout_observation_isolation.py\": true,\n    \"tools/document_understanding_benchmark/phase_c_runner.py\": true,\n    \"tools/holdout_replay/manifest.py\": true,\n    \"tools/holdout_replay/runner.py\": true,\n    \"tools/holdout_replay/worker.py\": true,\n    \"tools/holdout_replay/__main__.py\": true,\n    \"tests/unit/test_holdout_qualification_and_metadata.py\": true,\n    \"tests/holdout/w18/test_manifest_freeze.py\": true\n  }\n}"
+    },
+    "identity-before.json": {
+      "sha256": "d50595ca07d6dbcab915da661d73c093d8fd63922702ad168da6b18ab837ac90",
+      "bytes": 3481,
+      "text": "{\n  \"author_report_sha256\": \"7d71c6b4b173d3ad4d634d57d8febdba37212b9bece30a6c334bbde83147d5a7\",\n  \"expected\": {\n    \"src/company_wiki/_bounded_process.py\": \"0fe1ec07503055932ba9f6b05fa4143b56aaf8ce9861fac914bd581873f241f4\",\n    \"tools/document_understanding_benchmark/holdout_acceptance.py\": \"ec69dd77cb61034546261b9deab40c5df76c2da8e5e3e031efb9d2e0b64eaea4\",\n    \"tools/document_understanding_benchmark/holdout_acceptance_observer.py\": \"acba5095186e5498c997a9f20aa5d96a530bebf8df0da13712fb38ce7e4e2ec0\",\n    \"tests/unit/test_holdout_observation_isolation.py\": \"09bc0ee249ad73f80b5f6d4f3a050a7c6757074e1ff8bb45e12f651a58f8f1f7\",\n    \"tools/document_understanding_benchmark/phase_c_runner.py\": \"429bd2e6d4885770d16624d82dfb5c079eb4dfd1fec39178639f28a415e537e6\",\n    \"tools/holdout_replay/manifest.py\": \"f2411482c566867ae522b4c3f39ab0f2e69e55e5b85d661a2193e536e6b92380\",\n    \"tools/holdout_replay/runner.py\": \"859a2f96bcbe6bb3add1abe3c9d7bcf8112665dee497adb78514dd1677ba0d22\",\n    \"tools/holdout_replay/worker.py\": \"8e88073a8d6425e8cf5da6fb4199d99b1fe83d56fefd631157d39482154ae5ab\",\n    \"tools/holdout_replay/__main__.py\": \"06a7c82c22371d00c4cfad7a12c8c1f4ac4ca069087fc8101e9d9c4cc6b411a0\",\n    \"tests/unit/test_holdout_qualification_and_metadata.py\": \"16c90e160851b6f7f3e815a5fb9c73c1f93500f48d1249829d2b249330c0354d\",\n    \"tests/holdout/w18/test_manifest_freeze.py\": \"cd43d83507e1a3afef6d1af9f17db5c4769f43460b2bba67f2f5f7fe8318926c\"\n  },\n  \"before\": {\n    \"src/company_wiki/_bounded_process.py\": \"0fe1ec07503055932ba9f6b05fa4143b56aaf8ce9861fac914bd581873f241f4\",\n    \"tools/document_understanding_benchmark/holdout_acceptance.py\": \"ec69dd77cb61034546261b9deab40c5df76c2da8e5e3e031efb9d2e0b64eaea4\",\n    \"tools/document_understanding_benchmark/holdout_acceptance_observer.py\": \"acba5095186e5498c997a9f20aa5d96a530bebf8df0da13712fb38ce7e4e2ec0\",\n    \"tests/unit/test_holdout_observation_isolation.py\": \"09bc0ee249ad73f80b5f6d4f3a050a7c6757074e1ff8bb45e12f651a58f8f1f7\",\n    \"tools/document_understanding_benchmark/phase_c_runner.py\": \"429bd2e6d4885770d16624d82dfb5c079eb4dfd1fec39178639f28a415e537e6\",\n    \"tools/holdout_replay/manifest.py\": \"f2411482c566867ae522b4c3f39ab0f2e69e55e5b85d661a2193e536e6b92380\",\n    \"tools/holdout_replay/runner.py\": \"859a2f96bcbe6bb3add1abe3c9d7bcf8112665dee497adb78514dd1677ba0d22\",\n    \"tools/holdout_replay/worker.py\": \"8e88073a8d6425e8cf5da6fb4199d99b1fe83d56fefd631157d39482154ae5ab\",\n    \"tools/holdout_replay/__main__.py\": \"06a7c82c22371d00c4cfad7a12c8c1f4ac4ca069087fc8101e9d9c4cc6b411a0\",\n    \"tests/unit/test_holdout_qualification_and_metadata.py\": \"16c90e160851b6f7f3e815a5fb9c73c1f93500f48d1249829d2b249330c0354d\",\n    \"tests/holdout/w18/test_manifest_freeze.py\": \"cd43d83507e1a3afef6d1af9f17db5c4769f43460b2bba67f2f5f7fe8318926c\"\n  },\n  \"matches\": {\n    \"src/company_wiki/_bounded_process.py\": true,\n    \"tools/document_understanding_benchmark/holdout_acceptance.py\": true,\n    \"tools/document_understanding_benchmark/holdout_acceptance_observer.py\": true,\n    \"tests/unit/test_holdout_observation_isolation.py\": true,\n    \"tools/document_understanding_benchmark/phase_c_runner.py\": true,\n    \"tools/holdout_replay/manifest.py\": true,\n    \"tools/holdout_replay/runner.py\": true,\n    \"tools/holdout_replay/worker.py\": true,\n    \"tools/holdout_replay/__main__.py\": true,\n    \"tests/unit/test_holdout_qualification_and_metadata.py\": true,\n    \"tests/holdout/w18/test_manifest_freeze.py\": true\n  }\n}"
+    },
+    "initial_regression.py": {
+      "sha256": "625f4cf3cf9379dd35d8ca13375777ba50f1801221203eb86a545eaf827122f3",
+      "bytes": 4840,
+      "text": "from __future__ import annotations\nimport atexit\nimport hashlib\nimport json\nimport os\nfrom pathlib import Path\nimport subprocess\nimport sys\nfrom types import SimpleNamespace\n\nimport pytest\n\nfrom company_wiki._bounded_process import run_bounded\nfrom company_wiki.automation.narrative_model_caller import BudgetedNarrativeCaller\nfrom tools.document_understanding_benchmark import holdout_acceptance as controller\nfrom tools.document_understanding_benchmark import holdout_acceptance_contracts as contracts\nfrom tools.document_understanding_benchmark import holdout_acceptance_observer as observer\nfrom tools.holdout_replay.manifest import declared_holdout_qualification\n\n\ndef test_stderr_observer_exception_does_not_retry_or_clip_completed_protocol(tmp_path):\n    marker = tmp_path/'native-count'\n    command = [sys.executable,'-B','-c',\n        \"import sys;from pathlib import Path;\"+f\"Path({str(marker)!r}).write_text('one');\"+\n        \"sys.stderr.buffer.write(b'diagnostics'*3000);sys.stderr.flush();\"+\n        \"sys.stdout.buffer.write(b'{\\\"payload\\\":\\\"'+b'x'*2400000+b'\\\"}')\"]\n    calls=[]\n    def broken(chunk):\n        calls.append(len(chunk))\n        raise OSError('synthetic observer failure')\n    result=run_bounded(command,timeout_seconds=6,stdout_cap_bytes=None,stderr_cap_bytes=1,\n        stderr_log_tail=True,stderr_observer=broken)\n    assert result['returncode']==0 and len(json.loads(result['stdout'])['payload'])==2400000\n    assert result['stderr_observation_complete'] is False and len(calls)==1\n    assert marker.read_text()=='one' and result['stderr_bytes_read']==33000\n\n\ndef test_model_input_observation_write_failure_cannot_replace_native_result(tmp_path,monkeypatch,capsys):\n    config=tmp_path/'controller.json'\n    config.write_text(json.dumps({'receipt_dir':str(tmp_path),'stage':'cache','allow_local_model_http':False}))\n    monkeypatch.setenv('CWP_HOLDOUT_CONTROLLER',str(config))\n    monkeypatch.setattr(observer,'_INSTALLED',False)\n    callbacks=[]\n    monkeypatch.setattr(atexit,'register',callbacks.append)\n    calls=[]\n    monkeypatch.setattr(BudgetedNarrativeCaller,'generate',lambda *a: calls.append('native') or ('response','usage'))\n    # Register all observer-owned class mutations with MonkeyPatch restoration.\n    import http.client\n    from company_wiki.automation.narrative_http_model import NarrativeHTTPModel\n    from company_wiki.automation.store import AutomationStore\n    for cls,name in [(http.client.HTTPConnection,'request'),(BudgetedNarrativeCaller,'_recover'),\n                     (NarrativeHTTPModel,'replay_response'),(AutomationStore,'finish_attempt')]:\n        monkeypatch.setattr(cls,name,getattr(cls,name))\n    monkeypatch.setattr(contracts,'request_preflight',lambda *a:(b'{\"native\":\"request\"}',{'http_body_sha256':'a'*64}))\n    old_write=Path.write_bytes\n    def fail_input(path,data):\n        if path.name=='model-input.json':\n            raise OSError('synthetic observer body storage failure')\n        return old_write(path,data)\n    monkeypatch.setattr(Path,'write_bytes',fail_input)\n    observer.install()\n    try:\n        result=BudgetedNarrativeCaller.generate(SimpleNamespace(_model=None,_run_id='one'),\n            SimpleNamespace(attempt=SimpleNamespace(attempt_id='one')),None)\n    finally:\n        for callback in callbacks:\n            callback()\n    assert result==('response','usage') and calls==['native']\n    assert 'HOLDOUT_OBSERVATION_INCOMPLETE' in capsys.readouterr().err\n\n\n@pytest.mark.parametrize('frozen',[False,None,'true',1])\ndef test_unfrozen_development_or_unknown_prior_never_gets_clean_counts(frozen):\n    value=declared_holdout_qualification({'frozen_before_candidate_output':frozen,'samples':[\n        {'sample_id':'a','prior_use':{'status':'fresh'}},{'sample_id':'b','prior_use':{'status':'development'}},\n        {'sample_id':'c','prior_use':{'status':['fresh']}},{'sample_id':'d'}]})\n    assert value['eligible_for_clean_holdout'] is False and value['eligible_sample_count']==0\n    assert all(row['eligible_for_clean_holdout'] is False for row in value['samples'])\n\n\ndef test_controller_observation_failure_does_not_hide_real_nonzero(tmp_path,monkeypatch):\n    old_write=Path.write_bytes\n    def fail_log(path,value):\n        if path.name.endswith('.stderr.log'):\n            raise OSError('synthetic log failure')\n        return old_write(path,value)\n    monkeypatch.setattr(Path,'write_bytes',fail_log)\n    code,body,stderr=controller._process([sys.executable,'-B','-c',\n        \"import sys;print('{\\\"status\\\":\\\"failed\\\"}');sys.exit(9)\"],\n        env=dict(os.environ),root=tmp_path,output=tmp_path,label='failed',timeout=5,log_limit=1)\n    assert code==9 and json.loads(body)['status']=='failed'\n    assert b'HOLDOUT_OBSERVATION_INCOMPLETE' in stderr\n"
+    },
+    "review.log": {
+      "sha256": "4c67884614ea3cadf16746eb45e26055525731d789ad25232b6e2ed77679c5b6",
+      "bytes": 1294,
+      "text": "CW-BASETEMP-DECISION {\"event\": \"decision\", \"requested_basetemp\": \"C:\\\\Users\\\\\\u90d1\\u66fe\\u6ce2\\\\Projects\\\\company-wiki\\\\tmp\\\\ti73\\\\b\", \"requested_basetemp_len\": 45, \"cwd_len\": 34, \"threshold\": 60, \"win32_path_limit\": 210, \"generation_reserve\": 150, \"relocated\": false, \"reason\": \"within-budget\"}\n============================= test session starts =============================\nplatform win32 -- Python 3.13.9, pytest-9.1.1, pluggy-1.5.0\nrootdir: C:\\Users\\郑曾波\\Projects\\company-wiki\nconfigfile: pytest.ini\ncollected 7 items\n\ntmp\\ti73\\initial_regression.py .                                         [ 14%]\ntmp\\ti73\\review_r3.py ......                                             [100%]\n\n============================== warnings summary ===============================\n..\\..\\..\\..\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464\n  C:\\Miniconda\\Lib\\site-packages\\_pytest\\config\\__init__.py:1464: PytestConfigWarning: Unknown config option: asyncio_mode\n  \n    self._warn_or_fail_if_strict(f\"Unknown config option: {key}\\n\")\n\n-- Docs: https://docs.pytest.org/en/stable/how-to/capture-warnings.html\n- generated xml file: C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\ti73\\review.xml --\n======================== 7 passed, 1 warning in 1.85s =========================\n"
+    },
+    "review.xml": {
+      "sha256": "1d37dd17b09ae7fdc2d984e5e8b7b009c89e1ff873b62b13885074c4c1d94b96",
+      "bytes": 1246,
+      "text": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"0\" skipped=\"0\" tests=\"7\" time=\"1.795\" timestamp=\"2026-11-02T17:34:49.337663+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tmp.ti73.initial_regression\" name=\"test_model_input_observation_write_failure_cannot_replace_native_result\" time=\"0.021\" /><testcase classname=\"tmp.ti73.review_r3\" name=\"test_input_observation_faults_remain_unknown_and_never_enable_second_post[read]\" time=\"0.040\" /><testcase classname=\"tmp.ti73.review_r3\" name=\"test_input_observation_faults_remain_unknown_and_never_enable_second_post[partial_write]\" time=\"0.032\" /><testcase classname=\"tmp.ti73.review_r3\" name=\"test_input_observation_faults_remain_unknown_and_never_enable_second_post[publish]\" time=\"0.033\" /><testcase classname=\"tmp.ti73.review_r3\" name=\"test_successfully_observed_different_request_remains_a_true_mismatch[generate]\" time=\"0.021\" /><testcase classname=\"tmp.ti73.review_r3\" name=\"test_successfully_observed_different_request_remains_a_true_mismatch[http]\" time=\"0.017\" /><testcase classname=\"tmp.ti73.review_r3\" name=\"test_unknown_paid_pin_cannot_be_invented_from_an_observer_io_fault\" time=\"0.015\" /></testsuite></testsuites>"
+    },
+    "review_r3.py": {
+      "sha256": "949cf223eeccc643636d0ed84268c1f2a513d2d47e0bd90afcc7c650e94ecb92",
+      "bytes": 5232,
+      "text": "import atexit\nimport http.client\nimport json\nfrom pathlib import Path\nfrom types import SimpleNamespace\n\nimport pytest\n\nfrom company_wiki.automation.narrative_model_caller import BudgetedNarrativeCaller\nfrom company_wiki.automation.narrative_http_model import NarrativeHTTPModel\nfrom company_wiki.automation.store import AutomationStore\nfrom tools.document_understanding_benchmark import holdout_acceptance_observer as observer\nfrom tools.document_understanding_benchmark import holdout_acceptance_contracts as contracts\n\n\n@pytest.fixture\ndef seam(tmp_path,monkeypatch):\n    config=tmp_path/'observer.json'\n    value={'receipt_dir':str(tmp_path),'stage':'cache','allow_local_model_http':False}\n    config.write_text(json.dumps(value))\n    monkeypatch.setenv('CWP_HOLDOUT_CONTROLLER',str(config))\n    monkeypatch.setattr(observer,'_INSTALLED',False)\n    callbacks=[]\n    monkeypatch.setattr(atexit,'register',callbacks.append)\n    native=[]\n    posted=[]\n    monkeypatch.setattr(BudgetedNarrativeCaller,'generate',lambda *a:native.append('one') or ('response','usage'))\n    monkeypatch.setattr(http.client.HTTPConnection,'request',lambda *a,**k:posted.append('one'))\n    for cls,name in [(BudgetedNarrativeCaller,'_recover'),(NarrativeHTTPModel,'replay_response'),(AutomationStore,'finish_attempt')]:\n        monkeypatch.setattr(cls,name,getattr(cls,name))\n    body=json.dumps({'model':'synthetic','messages':[{'role':'system','content':'synthetic'},\n      {'role':'user','content':json.dumps({'schema_version':'narrative-model-request/5','material':{'tasks':[]}})}]}).encode()\n    monkeypatch.setattr(contracts,'request_preflight',lambda *a:(body,{'http_body_sha256':'a'*64}))\n    context=SimpleNamespace(attempt=SimpleNamespace(attempt_id='one'),job=SimpleNamespace(job_id='one'))\n    caller=SimpleNamespace(_model=None,_run_id='one',_store=SimpleNamespace(reservations_for_run=lambda _:[]))\n    return SimpleNamespace(root=tmp_path,config=config,config_value=value,callbacks=callbacks,native=native,\n      posted=posted,body=body,caller=caller,context=context)\n\n\n@pytest.mark.parametrize('fault',['read','partial_write','publish'])\ndef test_input_observation_faults_remain_unknown_and_never_enable_second_post(seam,monkeypatch,capsys,fault):\n    path=seam.root/'model-input.json'\n    if fault=='read':\n        path.write_bytes(seam.body)\n    old_read,old_write,old_replace=Path.read_bytes,Path.write_bytes,observer.os.replace\n    def read(p):\n        if p.name=='model-input.json' and fault=='read':\n            raise OSError('synthetic diagnostic read')\n        return old_read(p)\n    def write(p,body):\n        if p.name=='model-input.json' and fault=='partial_write':\n            old_write(p,body[:7])\n            raise OSError('synthetic partial diagnostic write')\n        return old_write(p,body)\n    def replace(source,destination):\n        if Path(destination).name=='model-input.json' and fault=='publish':\n            raise OSError('synthetic diagnostic publish')\n        return old_replace(source,destination)\n    monkeypatch.setattr(Path,'read_bytes',read)\n    monkeypatch.setattr(Path,'write_bytes',write)\n    monkeypatch.setattr(observer.os,'replace',replace)\n    observer.install()\n    assert BudgetedNarrativeCaller.generate(seam.caller,seam.context,None)==('response','usage')\n    http.client.HTTPConnection('offline.invalid').request('POST','/',body=seam.body)\n    with pytest.raises(RuntimeError,match='HOLDOUT_SECOND_POST_REFUSED'):\n        http.client.HTTPConnection('offline.invalid').request('POST','/',body=seam.body)\n    assert seam.native==['one'] and seam.posted==['one']\n    for callback in seam.callbacks:callback()\n    assert 'HOLDOUT_OBSERVATION_INCOMPLETE' in capsys.readouterr().err\n    assert not list(seam.root.glob('.model-input-*'))\n    if fault!='read':assert not path.exists()\n\n\n@pytest.mark.parametrize('entry',['generate','http'])\ndef test_successfully_observed_different_request_remains_a_true_mismatch(seam,entry):\n    path=seam.root/'model-input.json'\n    path.write_bytes(b'known different bytes')\n    observer.install()\n    with pytest.raises(RuntimeError,match='HOLDOUT_MODEL_INPUT_CHANGED'):\n        if entry=='generate':BudgetedNarrativeCaller.generate(seam.caller,seam.context,None)\n        else:http.client.HTTPConnection('offline.invalid').request('POST','/',body=seam.body)\n    assert seam.native==[] and seam.posted==[]\n    assert not (seam.root/'post-once').exists() and path.read_bytes()==b'known different bytes'\n\n\ndef test_unknown_paid_pin_cannot_be_invented_from_an_observer_io_fault(seam,monkeypatch,capsys):\n    seam.config_value['stage']='after_paid'\n    seam.config.write_text(json.dumps(seam.config_value))\n    old_write=Path.write_bytes\n    def fail(p,value):\n        if p.name=='model-input.json':raise OSError('synthetic diagnostic failure')\n        return old_write(p,value)\n    monkeypatch.setattr(Path,'write_bytes',fail)\n    observer.install()\n    with pytest.raises(RuntimeError,match='HOLDOUT_PAID_PIN_NOT_DURABLE'):\n        BudgetedNarrativeCaller.generate(seam.caller,seam.context,None)\n    assert seam.native==['one'] and seam.posted==[]\n    for callback in seam.callbacks:callback()\n    assert 'HOLDOUT_OBSERVATION_INCOMPLETE' in capsys.readouterr().err\n"
+    }
+  },
+  "source_or_tests_modified": false,
+  "git_or_index_or_main_pwf_modified": false,
+  "paid_calls": 0,
+  "network_calls": 0,
+  "downloads": 0,
+  "keys_read": false,
+  "production_original_reads": false,
+  "cleanup": {
+    "root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\ti73",
+    "initially_absent_assertion_executed_before_creation": true,
+    "files": 26,
+    "bytes": 22754,
+    "removed": true
+  },
+  "status": "PASS_SCOPED_ENGINEERING_INCREMENTAL_REVIEW",
+  "prior_failure_report": {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\gate-rejection-followup-20261102\\tools-independent.json",
+    "sha256": "5ef155de55c360eacc78816d0069f29cf362d526c3e465da92b06b6af7f05430",
+    "preserved": true
+  },
+  "test_result": {
+    "passed": 7,
+    "failed": 0,
+    "seconds": 1.85,
+    "command": "PYTHONPATH=src;tests PYTEST_DISABLE_PLUGIN_AUTOLOAD=1 PYTHONDONTWRITEBYTECODE=1 C:/Miniconda/python.exe -B -X utf8 -m pytest tmp/ti73/initial_regression.py::test_model_input_observation_write_failure_cannot_replace_native_result tmp/ti73/review_r3.py -q --tb=short -p no:cacheprovider --basetemp tmp/ti73/b --junitxml tmp/ti73/review.xml"
+  },
+  "checks": [
+    {
+      "id": "ORIGINAL_P2",
+      "result": "PASS",
+      "detail": "Exact original Path.write_bytes(name=model-input.json) fault: native returns once, observation incomplete marker present, not hidden by changing IO path."
+    },
+    {
+      "id": "READ_PARTIAL_WRITE_ATOMIC_PUBLISH",
+      "result": "PASS_3",
+      "detail": "Generate/read and HTTP same owner; read/partial-write/os.replace failure leaves diagnostic unknown, native generate once/HTTP once, second POST refused; no .model-input-* remnants or failed partial baseline published."
+    },
+    {
+      "id": "REAL_BODY_MISMATCH",
+      "result": "PASS_2",
+      "detail": "Successfully read genuinely different bytes cause HOLDOUT_MODEL_INPUT_CHANGED in both generate and HTTP entries with0native/0POST and no latch created."
+    },
+    {
+      "id": "UNKNOWN_PAID_PIN",
+      "result": "PASS",
+      "detail": "Diagnostic body capture failure cannot manufacture native paid pin: original native seam runs once, then explicit HOLDOUT_PAID_PIN_NOT_DURABLE; no transport attempt or extra call."
+    },
+    {
+      "id": "BASELINE_NONDELTA",
+      "result": "11_OF_11_STABLE",
+      "detail": "Only observer+one dedicated test differ from R2; prior6passing controls and full caller review retained, not rerun or upgraded to model/source quality acceptance."
+    }
+  ],
+  "limitations": [
+    "All generate/HTTP calls in this delta are explicit synthetic in-process seams. No real SDK/provider/company parse/RF use or paid recovery acceptance.",
+    "No original22/wholeUnit rerun. Final normal publication, CI, installation and actual company acceptance belong to ROOT.",
+    "Atomic temporary snapshot is diagnostic staging only; paid pin/post-once remain native separate responsibilities. No source identity or actual resource budget removed."
+  ]
+}

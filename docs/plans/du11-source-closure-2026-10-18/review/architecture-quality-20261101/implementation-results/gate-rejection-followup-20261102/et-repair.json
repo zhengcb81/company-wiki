@@ -1,0 +1,415 @@
+{
+  "status": "IMPLEMENTATION_FROZEN_PENDING_ROOT_INDEPENDENT_REVIEW",
+  "observed_at_utc": "2026-11-02T15:10:42.054224+00:00",
+  "canonical_root": "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts",
+  "git_head": {
+    "rc": 0,
+    "stdout": "2584b7eed062a9a30254bc06b4f19ab5471b414e\n",
+    "stderr": ""
+  },
+  "git_status": {
+    "rc": 0,
+    "stdout": " M retrieval_budget.py\n M retrieval_runtime.py\n M scraper.py\n M tests/test_batch_runtime.py\n M tests/test_request_response_budget.py\n M tests/test_retrieval_runtime.py\n M tests/test_transcript_artifact.py\n M transcript_api.py\n M transcript_artifact.py\n M transcript_audit.py\n M transcript_tool.py\n?? .workbuddy-ai/\n?? eval_results.json\n?? tests/test_explicit_response_budget.py\n?? tests/test_optional_local_receipt.py\n",
+    "stderr": ""
+  },
+  "diff_stat": {
+    "rc": 0,
+    "stdout": " retrieval_budget.py                   |  5 ++\n retrieval_runtime.py                  | 17 ++++++-\n scraper.py                            |  8 ++-\n tests/test_batch_runtime.py           | 11 ++--\n tests/test_request_response_budget.py |  6 +--\n tests/test_retrieval_runtime.py       |  8 +--\n tests/test_transcript_artifact.py     | 94 +++++++++++++++--------------------\n transcript_api.py                     | 42 +++++++++-------\n transcript_artifact.py                | 88 +++++++++++++++++++++-----------\n transcript_audit.py                   |  2 +\n transcript_tool.py                    |  2 +-\n 11 files changed, 166 insertions(+), 117 deletions(-)\n",
+    "stderr": ""
+  },
+  "audit_before_repair": {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\docs\\plans\\du11-source-closure-2026-10-18\\review\\architecture-quality-20261101\\implementation-results\\gate-rejection-followup-20261102\\crossrepo-audit.json",
+    "sha256": "375d842892496dd0e734e72de022d05d9f30ff20ccecb96f5e6740403f8ab521",
+    "items": [
+      "CR04",
+      "CR05"
+    ],
+    "evidence_preserved": true
+  },
+  "delivery_files_sha256": {
+    "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\retrieval_budget.py": "81927eee1ac585bdb28ec053bfadc761fa053cddc5251870ed9e4ffe9af4595a",
+    "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\retrieval_runtime.py": "bd15870fc36ffa5f8997c51ee1be48407562d7d73f25f4ef525e494dffe85eff",
+    "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\scraper.py": "1ff812020acbef84c367eb5473054a1561e412f5769f982c5272210ebb808a5c",
+    "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\transcript_api.py": "a1176be11c34d6a4f76e0883887652ce0b7aca35c7a27a141303419aa063f569",
+    "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\transcript_artifact.py": "0844baa61e0b38730cfb6a8fe049135b98c16ed493de9168026674a570963b18",
+    "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\transcript_audit.py": "2c5b2faef8907e0b888378e3ec921a44c78da9211840a20af4800d8097349238",
+    "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\transcript_tool.py": "d94148cf42f5d59cd709cbd9fb79c97d92e65e2a24857ba88dc2cb86c961c360",
+    "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\tests\\test_batch_runtime.py": "52b621ccaea8041f338cc128e10cbd8186bd6ca40761efca7e20f3a95e518238",
+    "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\tests\\test_request_response_budget.py": "abe5bea488c26f80f62fd85a73c3b670ea2b0ace4e6fadcd6da11b1374b00cb9",
+    "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\tests\\test_retrieval_runtime.py": "fc8897f16be78a429770d856d7a7751e0ddd5a5d4750d0583b3bd421a536f183",
+    "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\tests\\test_transcript_artifact.py": "3e730aecf2acfaa8c0cd142278cdddc888e702c8a3faa40eb90152aebaf4be29",
+    "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\tests\\test_explicit_response_budget.py": "bdc7259b7fb7d2bcfbd6d2f9baf838a7b43d42ffd6ecdfd4a310e7f8300a5770",
+    "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\tests\\test_optional_local_receipt.py": "aff9fe6d77aa6c343ec0b34c86205485c07d5bdd6cb34b5f518ac57dfc885c12"
+  },
+  "runtime_scope_delta": {
+    "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\retrieval_budget.py": {
+      "before": "41fbb08ea1e6d9b4f9eca9fa29fc380d4d1335f02f694942dd4b0c503b641001",
+      "after": "81927eee1ac585bdb28ec053bfadc761fa053cddc5251870ed9e4ffe9af4595a"
+    },
+    "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\retrieval_runtime.py": {
+      "before": "2655bbadeccc98e74c51df1f3e49171f0a827f7699abee0afc4e7d665ffb1957",
+      "after": "bd15870fc36ffa5f8997c51ee1be48407562d7d73f25f4ef525e494dffe85eff"
+    },
+    "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\scraper.py": {
+      "before": "39482cf65a65fcf2d4e5c0987c9549a050bc1adc92b488de0b6566632ecd9e6f",
+      "after": "1ff812020acbef84c367eb5473054a1561e412f5769f982c5272210ebb808a5c"
+    },
+    "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\transcript_api.py": {
+      "before": "771fc0d50e714a39b7e0d50e6d07012f2aa5ba96eeecacff4538ecc9f9d2f603",
+      "after": "a1176be11c34d6a4f76e0883887652ce0b7aca35c7a27a141303419aa063f569"
+    },
+    "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\transcript_artifact.py": {
+      "before": "63cfd1134f5fc94a5059585c2d603ff4e6826700cebae3150781d59fd297874b",
+      "after": "0844baa61e0b38730cfb6a8fe049135b98c16ed493de9168026674a570963b18"
+    },
+    "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\transcript_audit.py": {
+      "before": "3814dfbb1efc513991d68889dc52e7568cc219f907393f7abbf7745609946204",
+      "after": "2c5b2faef8907e0b888378e3ec921a44c78da9211840a20af4800d8097349238"
+    },
+    "C:\\Users\\郑曾波\\Projects\\earnings-transcripts\\earnings-transcripts\\transcript_tool.py": {
+      "before": "1684c922c8bff9a6ecc26fa5502a5abdc147e6c273619c5817e16325d7449003",
+      "after": "d94148cf42f5d59cd709cbd9fb79c97d92e65e2a24857ba88dc2cb86c961c360"
+    }
+  },
+  "runtime_outside_scope_unchanged": true,
+  "math_final_unchanged": true,
+  "rf_four_wip_unchanged": true,
+  "rf_four_wip_after": {
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\daily_alert.jsonl": "712f9e957990ca0c261cbb91c1d10b0a12606da9d7293e6f2a1581309ce295e9",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_alert.jsonl": "fc9ec2335b48d42921ca9c14c63363efca3b3096f967733e366f4dd463e4b7ed",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\weekly_manifest.json": "e2e57f28fec7477af06029adcf187468701ab0305024993bfb2953bbd43cc5c0",
+    "C:\\Users\\郑曾波\\Projects\\revenue-forecast\\assurance\\runs\\monthly_manifest.json": "56d630107429cbcb646a951306dd1ea445dd5b3146236f34d0e8df953c103b9a"
+  },
+  "repairs": [
+    {
+      "item": "CR04",
+      "owner": "retrieval_budget._BudgetSession / transcript_api._operation_read_cap / retrieval_runtime._result_read_limit",
+      "behavior": "Propagate explicit canonical-body, operation remaining raw bytes and wall-time quotas through FMP, HTML, listing, opt-in payload and supervised result serialization; remove immutable16MiB/10MiB/2MiB/24MiB/60s post-allocation permissions. Default provider raw limit remains only if neither operation nor session allocates a quota.",
+      "kept": "single existing BatchBudget byte/request counters, per-request canonical-body quota, actual wall deadline, supervisor termination+cleanup, monetary quota, identity/period/as-of/host/MIME/hash checks"
+    },
+    {
+      "item": "CR05",
+      "owner": "transcript_artifact.verify_stored_original / read_receipt",
+      "behavior": "Verify immutable TXT/header/identity/period independently; missing, malformed or unreadable non-authoritative sidecar may only yield legacy_unverified with diagnostic. Parsed explicit conflicting identities, periods, hashes/sizes or URL pins remain genuine refusal; no new fetch, translation, raw or bad-note rewrite. Strict public receipt parser still rejects malformed metadata.",
+      "kept": "No provenance fabricated and no legacy original upgraded to verified. Raw corruption/invalid UTF8/missing identity cannot be made valid by a bad note."
+    }
+  ],
+  "public_interfaces": {
+    "operation_quota": "earnings-transcript-request/1 max_body_bytes/max_response_bytes positive int and timeout_seconds positive int; no immutable 10MiB or60s maximum",
+    "session_quota": "_BudgetSession.remaining_response_bytes reads the SAME BatchBudget.response_bytes_left; no second accounting counter",
+    "runtime_wire": "result read allocation is derived from declared body/raw/remaining budgets plus JSON representation upper bound, not old MAX_RESULT_BYTES; explicit read/worker deadlines and shape/type remain",
+    "artifact": "ArtifactVerdict.diagnostics tuple[str,...]; ReceiptError.observation only carries parsed optional sidecar for explicit-conflict checking"
+  },
+  "tests": {
+    "red": {
+      "log_sha256": "39a474387a9ac7fc9d60211c2ac4791d93fa69adcc3ade16487c79d860cf7976",
+      "log": "FFFFF..FFFFFFFFFFF.F                                                     [100%]\n================================== FAILURES ===================================\n__________ test_explicit_fmp_raw_budget_is_not_min_clamped_to_16mib ___________\ntests\\test_explicit_response_budget.py:44: in test_explicit_fmp_raw_budget_is_not_min_clamped_to_16mib\n    assert result[\"status\"] == \"fetched\"\nE   AssertionError: assert 'content_too_large' == 'fetched'\nE     \nE     - fetched\nE     + content_too_large\n_______ test_opt_in_payload_has_no_second_base64_representation_top_cap _______\ntests\\test_explicit_response_budget.py:53: in test_opt_in_payload_has_no_second_base64_representation_top_cap\n    assert result[\"status\"] == \"fetched\"\nE   AssertionError: assert 'content_too_large' == 'fetched'\nE     \nE     - fetched\nE     + content_too_large\n__________ test_html_body_wrapper_uses_the_explicit_operation_budget __________\ntests\\test_explicit_response_budget.py:65: in test_html_body_wrapper_uses_the_explicit_operation_budget\n    assert result[\"status\"] == \"fetched\"\nE   AssertionError: assert 'content_too_large' == 'fetched'\nE     \nE     - fetched\nE     + content_too_large\n_______ test_listing_wrapper_shares_the_same_explicit_operation_budget ________\ntests\\test_explicit_response_budget.py:76: in test_listing_wrapper_shares_the_same_explicit_operation_budget\n    assert result[\"status\"] == \"fetched\" and len(session.calls) == 2\nE   AssertionError: assert ('content_too_large' == 'fetched'\nE     \nE     - fetched\nE     + content_too_large)\n_________ test_declared_canonical_body_budget_has_no_hidden_10mib_top _________\ntests\\test_explicit_response_budget.py:83: in test_declared_canonical_body_budget_has_no_hidden_10mib_top\n    assert result[\"status\"] == \"fetched\"\nE   AssertionError: assert 'invalid_request' == 'fetched'\nE     \nE     - fetched\nE     + invalid_request\n______ test_supervisor_result_bound_tracks_the_explicit_operation_budget ______\ntests\\test_explicit_response_budget.py:114: in test_supervisor_result_bound_tracks_the_explicit_operation_budget\n    assert observed and observed[0] > retrieval_runtime.MAX_RESULT_BYTES\nE   assert ([153092096] and 153092096 > 153092096)\nE    +  where 153092096 = retrieval_runtime.MAX_RESULT_BYTES\n_ test_optional_bad_sidecar_downgrades_but_preserves_proven_local_original[half-json] _\ntests\\test_optional_local_receipt.py:28: in test_optional_bad_sidecar_downgrades_but_preserves_proven_local_original\n    assert verdict.outcome == \"legacy_unverified\"\nE   AssertionError: assert 'receipt_invalid' == 'legacy_unverified'\nE     \nE     - legacy_unverified\nE     + receipt_invalid\n_ test_optional_bad_sidecar_downgrades_but_preserves_proven_local_original[encoding] _\ntests\\test_optional_local_receipt.py:28: in test_optional_bad_sidecar_downgrades_but_preserves_proven_local_original\n    assert verdict.outcome == \"legacy_unverified\"\nE   AssertionError: assert 'receipt_invalid' == 'legacy_unverified'\nE     \nE     - legacy_unverified\nE     + receipt_invalid\n_ test_optional_bad_sidecar_downgrades_but_preserves_proven_local_original[array] _\ntests\\test_optional_local_receipt.py:28: in test_optional_bad_sidecar_downgrades_but_preserves_proven_local_original\n    assert verdict.outcome == \"legacy_unverified\"\nE   AssertionError: assert 'receipt_invalid' == 'legacy_unverified'\nE     \nE     - legacy_unverified\nE     + receipt_invalid\n_ test_optional_bad_sidecar_downgrades_but_preserves_proven_local_original[future] _\ntests\\test_optional_local_receipt.py:28: in test_optional_bad_sidecar_downgrades_but_preserves_proven_local_original\n    assert verdict.outcome == \"legacy_unverified\"\nE   AssertionError: assert 'receipt_invalid' == 'legacy_unverified'\nE     \nE     - legacy_unverified\nE     + receipt_invalid\n_ test_optional_bad_sidecar_downgrades_but_preserves_proven_local_original[missing-fields] _\ntests\\test_optional_local_receipt.py:28: in test_optional_bad_sidecar_downgrades_but_preserves_proven_local_original\n    assert verdict.outcome == \"legacy_unverified\"\nE   AssertionError: assert 'receipt_invalid' == 'legacy_unverified'\nE     \nE     - legacy_unverified\nE     + receipt_invalid\n_ test_optional_bad_sidecar_downgrades_but_preserves_proven_local_original[deep-invalid] _\ntests\\test_optional_local_receipt.py:27: in test_optional_bad_sidecar_downgrades_but_preserves_proven_local_original\n    verdict = verify_stored_original(txt, ticker=\"ACME\", quarter=\"Q3 2026\")\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntranscript_artifact.py:412: in verify_stored_original\n    receipt = read_receipt(txt_path)\n              ^^^^^^^^^^^^^^^^^^^^^^\ntranscript_artifact.py:321: in read_receipt\n    return parse_receipt(raw)\n           ^^^^^^^^^^^^^^^^^^\ntranscript_artifact.py:229: in parse_receipt\n    receipt = json.loads(text)\n              ^^^^^^^^^^^^^^^^\nC:\\Miniconda\\Lib\\json\\__init__.py:346: in loads\n    return _default_decoder.decode(s)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\nC:\\Miniconda\\Lib\\json\\decoder.py:345: in decode\n    obj, end = self.raw_decode(s, idx=_w(s, 0).end())\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nC:\\Miniconda\\Lib\\json\\decoder.py:361: in raw_decode\n    obj, end = self.scan_once(s, idx)\n               ^^^^^^^^^^^^^^^^^^^^^^\nE   RecursionError: maximum recursion depth exceeded while decoding a JSON array from a unicode string\n_ test_explicit_conflicting_pin_remains_refusal_even_in_incomplete_sidecar[pin0-identity_mismatch] _\ntests\\test_optional_local_receipt.py:45: in test_explicit_conflicting_pin_remains_refusal_even_in_incomplete_sidecar\n    assert verdict.outcome == outcome\nE   AssertionError: assert 'receipt_invalid' == 'identity_mismatch'\nE     \nE     - identity_mismatch\nE     + receipt_invalid\n_ test_explicit_conflicting_pin_remains_refusal_even_in_incomplete_sidecar[pin1-period_mismatch] _\ntests\\test_optional_local_receipt.py:45: in test_explicit_conflicting_pin_remains_refusal_even_in_incomplete_sidecar\n    assert verdict.outcome == outcome\nE   AssertionError: assert 'receipt_invalid' == 'period_mismatch'\nE     \nE     - period_mismatch\nE     + receipt_invalid\n_ test_explicit_conflicting_pin_remains_refusal_even_in_incomplete_sidecar[pin2-receipt_mismatch] _\ntests\\test_optional_local_receipt.py:45: in test_explicit_conflicting_pin_remains_refusal_even_in_incomplete_sidecar\n    assert verdict.outcome == outcome\nE   AssertionError: assert 'receipt_invalid' == 'receipt_mismatch'\nE     \nE     - receipt_mismatch\nE     + receipt_invalid\n_____________ test_bad_note_cannot_supply_missing_header_identity _____________\ntests\\test_optional_local_receipt.py:53: in test_bad_note_cannot_supply_missing_header_identity\n    assert verdict.outcome == \"identity_missing\"\nE   AssertionError: assert 'receipt_invalid' == 'identity_missing'\nE     \nE     - identity_missing\nE     + receipt_invalid\n______ test_actual_cli_reuses_bad_note_original_without_llm_or_download _______\ntests\\test_optional_local_receipt.py:77: in test_actual_cli_reuses_bad_note_original_without_llm_or_download\n    rc = scraper.main([\"--source\", \"fmp\", \"--periods\", \"2026Q3\", \"--output\", str(out)],\nscraper.py:1294: in main\n    transcripts_root = get_path(cfg, \"transcripts_dir\")\n                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nconfig.py:20: in get_path\n    base = Path(cfg[\"paths\"][\"base_dir\"]).resolve()\n                ^^^^^^^^^^^^^^^^^^^^^^^^\nE   KeyError: 'base_dir'\n=========================== short test summary info ===========================\nFAILED tests/test_explicit_response_budget.py::test_explicit_fmp_raw_budget_is_not_min_clamped_to_16mib\nFAILED tests/test_explicit_response_budget.py::test_opt_in_payload_has_no_second_base64_representation_top_cap\nFAILED tests/test_explicit_response_budget.py::test_html_body_wrapper_uses_the_explicit_operation_budget\nFAILED tests/test_explicit_response_budget.py::test_listing_wrapper_shares_the_same_explicit_operation_budget\nFAILED tests/test_explicit_response_budget.py::test_declared_canonical_body_budget_has_no_hidden_10mib_top\nFAILED tests/test_explicit_response_budget.py::test_supervisor_result_bound_tracks_the_explicit_operation_budget\nFAILED tests/test_optional_local_receipt.py::test_optional_bad_sidecar_downgrades_but_preserves_proven_local_original[half-json]\nFAILED tests/test_optional_local_receipt.py::test_optional_bad_sidecar_downgrades_but_preserves_proven_local_original[encoding]\nFAILED tests/test_optional_local_receipt.py::test_optional_bad_sidecar_downgrades_but_preserves_proven_local_original[array]\nFAILED tests/test_optional_local_receipt.py::test_optional_bad_sidecar_downgrades_but_preserves_proven_local_original[future]\nFAILED tests/test_optional_local_receipt.py::test_optional_bad_sidecar_downgrades_but_preserves_proven_local_original[missing-fields]\nFAILED tests/test_optional_local_receipt.py::test_optional_bad_sidecar_downgrades_but_preserves_proven_local_original[deep-invalid]\nFAILED tests/test_optional_local_receipt.py::test_explicit_conflicting_pin_remains_refusal_even_in_incomplete_sidecar[pin0-identity_mismatch]\nFAILED tests/test_optional_local_receipt.py::test_explicit_conflicting_pin_remains_refusal_even_in_incomplete_sidecar[pin1-period_mismatch]\nFAILED tests/test_optional_local_receipt.py::test_explicit_conflicting_pin_remains_refusal_even_in_incomplete_sidecar[pin2-receipt_mismatch]\nFAILED tests/test_optional_local_receipt.py::test_bad_note_cannot_supply_missing_header_identity\nFAILED tests/test_optional_local_receipt.py::test_actual_cli_reuses_bad_note_original_without_llm_or_download\n17 failed, 3 passed in 1.98s\n",
+      "junit_sha256": "0343e94ee25b1f06c81cf0feaf0ecffd74f69a8cb79982a8510568f81a0448c6",
+      "junit_xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"17\" skipped=\"0\" tests=\"20\" time=\"1.922\" timestamp=\"2026-11-02T14:48:20.164387+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tests.test_explicit_response_budget\" name=\"test_explicit_fmp_raw_budget_is_not_min_clamped_to_16mib\" time=\"0.016\"><failure message=\"AssertionError: assert 'content_too_large' == 'fetched'&#10;  &#10;  - fetched&#10;  + content_too_large\">tests\\test_explicit_response_budget.py:44: in test_explicit_fmp_raw_budget_is_not_min_clamped_to_16mib\n    assert result[\"status\"] == \"fetched\"\nE   AssertionError: assert 'content_too_large' == 'fetched'\nE     \nE     - fetched\nE     + content_too_large</failure></testcase><testcase classname=\"tests.test_explicit_response_budget\" name=\"test_opt_in_payload_has_no_second_base64_representation_top_cap\" time=\"0.017\"><failure message=\"AssertionError: assert 'content_too_large' == 'fetched'&#10;  &#10;  - fetched&#10;  + content_too_large\">tests\\test_explicit_response_budget.py:53: in test_opt_in_payload_has_no_second_base64_representation_top_cap\n    assert result[\"status\"] == \"fetched\"\nE   AssertionError: assert 'content_too_large' == 'fetched'\nE     \nE     - fetched\nE     + content_too_large</failure></testcase><testcase classname=\"tests.test_explicit_response_budget\" name=\"test_html_body_wrapper_uses_the_explicit_operation_budget\" time=\"0.011\"><failure message=\"AssertionError: assert 'content_too_large' == 'fetched'&#10;  &#10;  - fetched&#10;  + content_too_large\">tests\\test_explicit_response_budget.py:65: in test_html_body_wrapper_uses_the_explicit_operation_budget\n    assert result[\"status\"] == \"fetched\"\nE   AssertionError: assert 'content_too_large' == 'fetched'\nE     \nE     - fetched\nE     + content_too_large</failure></testcase><testcase classname=\"tests.test_explicit_response_budget\" name=\"test_listing_wrapper_shares_the_same_explicit_operation_budget\" time=\"0.003\"><failure message=\"AssertionError: assert ('content_too_large' == 'fetched'&#10;  &#10;  - fetched&#10;  + content_too_large)\">tests\\test_explicit_response_budget.py:76: in test_listing_wrapper_shares_the_same_explicit_operation_budget\n    assert result[\"status\"] == \"fetched\" and len(session.calls) == 2\nE   AssertionError: assert ('content_too_large' == 'fetched'\nE     \nE     - fetched\nE     + content_too_large)</failure></testcase><testcase classname=\"tests.test_explicit_response_budget\" name=\"test_declared_canonical_body_budget_has_no_hidden_10mib_top\" time=\"0.001\"><failure message=\"AssertionError: assert 'invalid_request' == 'fetched'&#10;  &#10;  - fetched&#10;  + invalid_request\">tests\\test_explicit_response_budget.py:83: in test_declared_canonical_body_budget_has_no_hidden_10mib_top\n    assert result[\"status\"] == \"fetched\"\nE   AssertionError: assert 'invalid_request' == 'fetched'\nE     \nE     - fetched\nE     + invalid_request</failure></testcase><testcase classname=\"tests.test_explicit_response_budget\" name=\"test_actual_explicit_raw_quota_still_refuses_overrun_and_closes\" time=\"0.000\" /><testcase classname=\"tests.test_explicit_response_budget\" name=\"test_omitted_raw_quota_keeps_legacy_default_instead_of_unbounded_http\" time=\"0.016\" /><testcase classname=\"tests.test_explicit_response_budget\" name=\"test_supervisor_result_bound_tracks_the_explicit_operation_budget\" time=\"0.643\"><failure message=\"assert ([153092096] and 153092096 &gt; 153092096)&#10; +  where 153092096 = retrieval_runtime.MAX_RESULT_BYTES\">tests\\test_explicit_response_budget.py:114: in test_supervisor_result_bound_tracks_the_explicit_operation_budget\n    assert observed and observed[0] &gt; retrieval_runtime.MAX_RESULT_BYTES\nE   assert ([153092096] and 153092096 &gt; 153092096)\nE    +  where 153092096 = retrieval_runtime.MAX_RESULT_BYTES</failure></testcase><testcase classname=\"tests.test_optional_local_receipt\" name=\"test_optional_bad_sidecar_downgrades_but_preserves_proven_local_original[half-json]\" time=\"0.058\"><failure message=\"AssertionError: assert 'receipt_invalid' == 'legacy_unverified'&#10;  &#10;  - legacy_unverified&#10;  + receipt_invalid\">tests\\test_optional_local_receipt.py:28: in test_optional_bad_sidecar_downgrades_but_preserves_proven_local_original\n    assert verdict.outcome == \"legacy_unverified\"\nE   AssertionError: assert 'receipt_invalid' == 'legacy_unverified'\nE     \nE     - legacy_unverified\nE     + receipt_invalid</failure></testcase><testcase classname=\"tests.test_optional_local_receipt\" name=\"test_optional_bad_sidecar_downgrades_but_preserves_proven_local_original[encoding]\" time=\"0.016\"><failure message=\"AssertionError: assert 'receipt_invalid' == 'legacy_unverified'&#10;  &#10;  - legacy_unverified&#10;  + receipt_invalid\">tests\\test_optional_local_receipt.py:28: in test_optional_bad_sidecar_downgrades_but_preserves_proven_local_original\n    assert verdict.outcome == \"legacy_unverified\"\nE   AssertionError: assert 'receipt_invalid' == 'legacy_unverified'\nE     \nE     - legacy_unverified\nE     + receipt_invalid</failure></testcase><testcase classname=\"tests.test_optional_local_receipt\" name=\"test_optional_bad_sidecar_downgrades_but_preserves_proven_local_original[array]\" time=\"0.008\"><failure message=\"AssertionError: assert 'receipt_invalid' == 'legacy_unverified'&#10;  &#10;  - legacy_unverified&#10;  + receipt_invalid\">tests\\test_optional_local_receipt.py:28: in test_optional_bad_sidecar_downgrades_but_preserves_proven_local_original\n    assert verdict.outcome == \"legacy_unverified\"\nE   AssertionError: assert 'receipt_invalid' == 'legacy_unverified'\nE     \nE     - legacy_unverified\nE     + receipt_invalid</failure></testcase><testcase classname=\"tests.test_optional_local_receipt\" name=\"test_optional_bad_sidecar_downgrades_but_preserves_proven_local_original[future]\" time=\"0.020\"><failure message=\"AssertionError: assert 'receipt_invalid' == 'legacy_unverified'&#10;  &#10;  - legacy_unverified&#10;  + receipt_invalid\">tests\\test_optional_local_receipt.py:28: in test_optional_bad_sidecar_downgrades_but_preserves_proven_local_original\n    assert verdict.outcome == \"legacy_unverified\"\nE   AssertionError: assert 'receipt_invalid' == 'legacy_unverified'\nE     \nE     - legacy_unverified\nE     + receipt_invalid</failure></testcase><testcase classname=\"tests.test_optional_local_receipt\" name=\"test_optional_bad_sidecar_downgrades_but_preserves_proven_local_original[missing-fields]\" time=\"0.019\"><failure message=\"AssertionError: assert 'receipt_invalid' == 'legacy_unverified'&#10;  &#10;  - legacy_unverified&#10;  + receipt_invalid\">tests\\test_optional_local_receipt.py:28: in test_optional_bad_sidecar_downgrades_but_preserves_proven_local_original\n    assert verdict.outcome == \"legacy_unverified\"\nE   AssertionError: assert 'receipt_invalid' == 'legacy_unverified'\nE     \nE     - legacy_unverified\nE     + receipt_invalid</failure></testcase><testcase classname=\"tests.test_optional_local_receipt\" name=\"test_optional_bad_sidecar_downgrades_but_preserves_proven_local_original[deep-invalid]\" time=\"0.019\"><failure message=\"RecursionError: maximum recursion depth exceeded while decoding a JSON array from a unicode string\">tests\\test_optional_local_receipt.py:27: in test_optional_bad_sidecar_downgrades_but_preserves_proven_local_original\n    verdict = verify_stored_original(txt, ticker=\"ACME\", quarter=\"Q3 2026\")\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntranscript_artifact.py:412: in verify_stored_original\n    receipt = read_receipt(txt_path)\n              ^^^^^^^^^^^^^^^^^^^^^^\ntranscript_artifact.py:321: in read_receipt\n    return parse_receipt(raw)\n           ^^^^^^^^^^^^^^^^^^\ntranscript_artifact.py:229: in parse_receipt\n    receipt = json.loads(text)\n              ^^^^^^^^^^^^^^^^\nC:\\Miniconda\\Lib\\json\\__init__.py:346: in loads\n    return _default_decoder.decode(s)\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^\nC:\\Miniconda\\Lib\\json\\decoder.py:345: in decode\n    obj, end = self.raw_decode(s, idx=_w(s, 0).end())\n               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nC:\\Miniconda\\Lib\\json\\decoder.py:361: in raw_decode\n    obj, end = self.scan_once(s, idx)\n               ^^^^^^^^^^^^^^^^^^^^^^\nE   RecursionError: maximum recursion depth exceeded while decoding a JSON array from a unicode string</failure></testcase><testcase classname=\"tests.test_optional_local_receipt\" name=\"test_explicit_conflicting_pin_remains_refusal_even_in_incomplete_sidecar[pin0-identity_mismatch]\" time=\"0.017\"><failure message=\"AssertionError: assert 'receipt_invalid' == 'identity_mismatch'&#10;  &#10;  - identity_mismatch&#10;  + receipt_invalid\">tests\\test_optional_local_receipt.py:45: in test_explicit_conflicting_pin_remains_refusal_even_in_incomplete_sidecar\n    assert verdict.outcome == outcome\nE   AssertionError: assert 'receipt_invalid' == 'identity_mismatch'\nE     \nE     - identity_mismatch\nE     + receipt_invalid</failure></testcase><testcase classname=\"tests.test_optional_local_receipt\" name=\"test_explicit_conflicting_pin_remains_refusal_even_in_incomplete_sidecar[pin1-period_mismatch]\" time=\"0.018\"><failure message=\"AssertionError: assert 'receipt_invalid' == 'period_mismatch'&#10;  &#10;  - period_mismatch&#10;  + receipt_invalid\">tests\\test_optional_local_receipt.py:45: in test_explicit_conflicting_pin_remains_refusal_even_in_incomplete_sidecar\n    assert verdict.outcome == outcome\nE   AssertionError: assert 'receipt_invalid' == 'period_mismatch'\nE     \nE     - period_mismatch\nE     + receipt_invalid</failure></testcase><testcase classname=\"tests.test_optional_local_receipt\" name=\"test_explicit_conflicting_pin_remains_refusal_even_in_incomplete_sidecar[pin2-receipt_mismatch]\" time=\"0.018\"><failure message=\"AssertionError: assert 'receipt_invalid' == 'receipt_mismatch'&#10;  &#10;  - receipt_mismatch&#10;  + receipt_invalid\">tests\\test_optional_local_receipt.py:45: in test_explicit_conflicting_pin_remains_refusal_even_in_incomplete_sidecar\n    assert verdict.outcome == outcome\nE   AssertionError: assert 'receipt_invalid' == 'receipt_mismatch'\nE     \nE     - receipt_mismatch\nE     + receipt_invalid</failure></testcase><testcase classname=\"tests.test_optional_local_receipt\" name=\"test_bad_note_cannot_supply_missing_header_identity\" time=\"0.017\"><failure message=\"AssertionError: assert 'receipt_invalid' == 'identity_missing'&#10;  &#10;  - identity_missing&#10;  + receipt_invalid\">tests\\test_optional_local_receipt.py:53: in test_bad_note_cannot_supply_missing_header_identity\n    assert verdict.outcome == \"identity_missing\"\nE   AssertionError: assert 'receipt_invalid' == 'identity_missing'\nE     \nE     - identity_missing\nE     + receipt_invalid</failure></testcase><testcase classname=\"tests.test_optional_local_receipt\" name=\"test_actual_receipt_checksum_mismatch_never_becomes_verified\" time=\"0.020\" /><testcase classname=\"tests.test_optional_local_receipt\" name=\"test_actual_cli_reuses_bad_note_original_without_llm_or_download\" time=\"0.006\"><failure message=\"KeyError: 'base_dir'\">tests\\test_optional_local_receipt.py:77: in test_actual_cli_reuses_bad_note_original_without_llm_or_download\n    rc = scraper.main([\"--source\", \"fmp\", \"--periods\", \"2026Q3\", \"--output\", str(out)],\nscraper.py:1294: in main\n    transcripts_root = get_path(cfg, \"transcripts_dir\")\n                       ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nconfig.py:20: in get_path\n    base = Path(cfg[\"paths\"][\"base_dir\"]).resolve()\n                ^^^^^^^^^^^^^^^^^^^^^^^^\nE   KeyError: 'base_dir'</failure></testcase></testsuite></testsuites>",
+      "tests": 20,
+      "failures": 17,
+      "errors": 0,
+      "skipped": 0,
+      "duration": "1.922",
+      "case_identities": [
+        "tests.test_explicit_response_budget::test_explicit_fmp_raw_budget_is_not_min_clamped_to_16mib",
+        "tests.test_explicit_response_budget::test_opt_in_payload_has_no_second_base64_representation_top_cap",
+        "tests.test_explicit_response_budget::test_html_body_wrapper_uses_the_explicit_operation_budget",
+        "tests.test_explicit_response_budget::test_listing_wrapper_shares_the_same_explicit_operation_budget",
+        "tests.test_explicit_response_budget::test_declared_canonical_body_budget_has_no_hidden_10mib_top",
+        "tests.test_explicit_response_budget::test_actual_explicit_raw_quota_still_refuses_overrun_and_closes",
+        "tests.test_explicit_response_budget::test_omitted_raw_quota_keeps_legacy_default_instead_of_unbounded_http",
+        "tests.test_explicit_response_budget::test_supervisor_result_bound_tracks_the_explicit_operation_budget",
+        "tests.test_optional_local_receipt::test_optional_bad_sidecar_downgrades_but_preserves_proven_local_original[half-json]",
+        "tests.test_optional_local_receipt::test_optional_bad_sidecar_downgrades_but_preserves_proven_local_original[encoding]",
+        "tests.test_optional_local_receipt::test_optional_bad_sidecar_downgrades_but_preserves_proven_local_original[array]",
+        "tests.test_optional_local_receipt::test_optional_bad_sidecar_downgrades_but_preserves_proven_local_original[future]",
+        "tests.test_optional_local_receipt::test_optional_bad_sidecar_downgrades_but_preserves_proven_local_original[missing-fields]",
+        "tests.test_optional_local_receipt::test_optional_bad_sidecar_downgrades_but_preserves_proven_local_original[deep-invalid]",
+        "tests.test_optional_local_receipt::test_explicit_conflicting_pin_remains_refusal_even_in_incomplete_sidecar[pin0-identity_mismatch]",
+        "tests.test_optional_local_receipt::test_explicit_conflicting_pin_remains_refusal_even_in_incomplete_sidecar[pin1-period_mismatch]",
+        "tests.test_optional_local_receipt::test_explicit_conflicting_pin_remains_refusal_even_in_incomplete_sidecar[pin2-receipt_mismatch]",
+        "tests.test_optional_local_receipt::test_bad_note_cannot_supply_missing_header_identity",
+        "tests.test_optional_local_receipt::test_actual_receipt_checksum_mismatch_never_becomes_verified",
+        "tests.test_optional_local_receipt::test_actual_cli_reuses_bad_note_original_without_llm_or_download"
+      ]
+    },
+    "cli-red": {
+      "log_sha256": "7ad266de1f1d022deb3d901fe892cc83a519cdf9d5b5f061d724909958fc26be",
+      "log": "F                                                                        [100%]\n================================== FAILURES ===================================\n______ test_actual_cli_reuses_bad_note_original_without_llm_or_download _______\ntests\\test_optional_local_receipt.py:79: in test_actual_cli_reuses_bad_note_original_without_llm_or_download\n    assert rc == 0\nE   assert 1 == 0\n---------------------------- Captured stdout call -----------------------------\n======================================================================\nBATCH REPORT\n======================================================================\n  ACME   2026-Q3    output_conflict      bytes=39  0.00s\n----------------------------------------------------------------------\n  output_conflict=1\n  budget: requests=0/64  response_bytes=0/67108864  output_bytes=0/33554432\n  exit: failure\n======================================================================\n---------------------------- Captured stderr call -----------------------------\nerror: ACME 2026-Q3: output_conflict/receipt_invalid\n2026-11-02 14:48:48,294 [INFO] request et-s3-19091ce563dc413aa0535f4fcdd8ff7c status=output_conflict bytes=39 elapsed=0.00s\n2026-11-02 14:48:48,296 [INFO] Summary saved: C:\\Users\\֣����\\Projects\\company-wiki\\tmp\\et-r7-b29f1c\\cli-red-base\\test_actual_cli_reuses_bad_not0\\out\\summary.txt (1 transcripts)\n=========================== short test summary info ===========================\nFAILED tests/test_optional_local_receipt.py::test_actual_cli_reuses_bad_note_original_without_llm_or_download\n1 failed in 1.18s\n",
+      "junit_sha256": "47fab8ed936fa7ef67a8f499bec9a785dbe1f38d99a9d9c5ced650338c96dd46",
+      "junit_xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"1\" skipped=\"0\" tests=\"1\" time=\"1.103\" timestamp=\"2026-11-02T14:48:47.419775+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tests.test_optional_local_receipt\" name=\"test_actual_cli_reuses_bad_note_original_without_llm_or_download\" time=\"0.040\"><failure message=\"assert 1 == 0\">tests\\test_optional_local_receipt.py:79: in test_actual_cli_reuses_bad_note_original_without_llm_or_download\n    assert rc == 0\nE   assert 1 == 0</failure></testcase></testsuite></testsuites>",
+      "tests": 1,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "duration": "1.103",
+      "case_identities": [
+        "tests.test_optional_local_receipt::test_actual_cli_reuses_bad_note_original_without_llm_or_download"
+      ]
+    },
+    "green": {
+      "log_sha256": "d907e5c05bb330c57d2d9b2303d45dded9219140e0a8e8cb73ef8519dcd0468f",
+      "log": "....................                                                     [100%]\n20 passed in 10.45s\n",
+      "junit_sha256": "065870bde50390b76c95eeb27dd34793cf6fde1ad05f3fa2b87fd0ec923be779",
+      "junit_xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"0\" skipped=\"0\" tests=\"20\" time=\"10.307\" timestamp=\"2026-11-02T14:55:04.326788+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tests.test_explicit_response_budget\" name=\"test_explicit_fmp_raw_budget_is_not_min_clamped_to_16mib\" time=\"0.097\" /><testcase classname=\"tests.test_explicit_response_budget\" name=\"test_opt_in_payload_has_no_second_base64_representation_top_cap\" time=\"0.211\" /><testcase classname=\"tests.test_explicit_response_budget\" name=\"test_html_body_wrapper_uses_the_explicit_operation_budget\" time=\"7.654\" /><testcase classname=\"tests.test_explicit_response_budget\" name=\"test_listing_wrapper_shares_the_same_explicit_operation_budget\" time=\"0.502\" /><testcase classname=\"tests.test_explicit_response_budget\" name=\"test_declared_canonical_body_budget_has_no_hidden_10mib_top\" time=\"0.002\" /><testcase classname=\"tests.test_explicit_response_budget\" name=\"test_actual_explicit_raw_quota_still_refuses_overrun_and_closes\" time=\"0.001\" /><testcase classname=\"tests.test_explicit_response_budget\" name=\"test_omitted_raw_quota_keeps_legacy_default_instead_of_unbounded_http\" time=\"0.030\" /><testcase classname=\"tests.test_explicit_response_budget\" name=\"test_supervisor_result_bound_tracks_the_explicit_operation_budget\" time=\"0.714\" /><testcase classname=\"tests.test_optional_local_receipt\" name=\"test_optional_bad_sidecar_downgrades_but_preserves_proven_local_original[half-json]\" time=\"0.027\" /><testcase classname=\"tests.test_optional_local_receipt\" name=\"test_optional_bad_sidecar_downgrades_but_preserves_proven_local_original[encoding]\" time=\"0.016\" /><testcase classname=\"tests.test_optional_local_receipt\" name=\"test_optional_bad_sidecar_downgrades_but_preserves_proven_local_original[array]\" time=\"0.016\" /><testcase classname=\"tests.test_optional_local_receipt\" name=\"test_optional_bad_sidecar_downgrades_but_preserves_proven_local_original[future]\" time=\"0.014\" /><testcase classname=\"tests.test_optional_local_receipt\" name=\"test_optional_bad_sidecar_downgrades_but_preserves_proven_local_original[missing-fields]\" time=\"0.016\" /><testcase classname=\"tests.test_optional_local_receipt\" name=\"test_optional_bad_sidecar_downgrades_but_preserves_proven_local_original[deep-invalid]\" time=\"0.017\" /><testcase classname=\"tests.test_optional_local_receipt\" name=\"test_explicit_conflicting_pin_remains_refusal_even_in_incomplete_sidecar[pin0-identity_mismatch]\" time=\"0.024\" /><testcase classname=\"tests.test_optional_local_receipt\" name=\"test_explicit_conflicting_pin_remains_refusal_even_in_incomplete_sidecar[pin1-period_mismatch]\" time=\"0.015\" /><testcase classname=\"tests.test_optional_local_receipt\" name=\"test_explicit_conflicting_pin_remains_refusal_even_in_incomplete_sidecar[pin2-receipt_mismatch]\" time=\"0.015\" /><testcase classname=\"tests.test_optional_local_receipt\" name=\"test_bad_note_cannot_supply_missing_header_identity\" time=\"0.011\" /><testcase classname=\"tests.test_optional_local_receipt\" name=\"test_actual_receipt_checksum_mismatch_never_becomes_verified\" time=\"0.020\" /><testcase classname=\"tests.test_optional_local_receipt\" name=\"test_actual_cli_reuses_bad_note_original_without_llm_or_download\" time=\"0.060\" /></testsuite></testsuites>",
+      "tests": 20,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "duration": "10.307",
+      "case_identities": [
+        "tests.test_explicit_response_budget::test_explicit_fmp_raw_budget_is_not_min_clamped_to_16mib",
+        "tests.test_explicit_response_budget::test_opt_in_payload_has_no_second_base64_representation_top_cap",
+        "tests.test_explicit_response_budget::test_html_body_wrapper_uses_the_explicit_operation_budget",
+        "tests.test_explicit_response_budget::test_listing_wrapper_shares_the_same_explicit_operation_budget",
+        "tests.test_explicit_response_budget::test_declared_canonical_body_budget_has_no_hidden_10mib_top",
+        "tests.test_explicit_response_budget::test_actual_explicit_raw_quota_still_refuses_overrun_and_closes",
+        "tests.test_explicit_response_budget::test_omitted_raw_quota_keeps_legacy_default_instead_of_unbounded_http",
+        "tests.test_explicit_response_budget::test_supervisor_result_bound_tracks_the_explicit_operation_budget",
+        "tests.test_optional_local_receipt::test_optional_bad_sidecar_downgrades_but_preserves_proven_local_original[half-json]",
+        "tests.test_optional_local_receipt::test_optional_bad_sidecar_downgrades_but_preserves_proven_local_original[encoding]",
+        "tests.test_optional_local_receipt::test_optional_bad_sidecar_downgrades_but_preserves_proven_local_original[array]",
+        "tests.test_optional_local_receipt::test_optional_bad_sidecar_downgrades_but_preserves_proven_local_original[future]",
+        "tests.test_optional_local_receipt::test_optional_bad_sidecar_downgrades_but_preserves_proven_local_original[missing-fields]",
+        "tests.test_optional_local_receipt::test_optional_bad_sidecar_downgrades_but_preserves_proven_local_original[deep-invalid]",
+        "tests.test_optional_local_receipt::test_explicit_conflicting_pin_remains_refusal_even_in_incomplete_sidecar[pin0-identity_mismatch]",
+        "tests.test_optional_local_receipt::test_explicit_conflicting_pin_remains_refusal_even_in_incomplete_sidecar[pin1-period_mismatch]",
+        "tests.test_optional_local_receipt::test_explicit_conflicting_pin_remains_refusal_even_in_incomplete_sidecar[pin2-receipt_mismatch]",
+        "tests.test_optional_local_receipt::test_bad_note_cannot_supply_missing_header_identity",
+        "tests.test_optional_local_receipt::test_actual_receipt_checksum_mismatch_never_becomes_verified",
+        "tests.test_optional_local_receipt::test_actual_cli_reuses_bad_note_original_without_llm_or_download"
+      ]
+    },
+    "adjacent": {
+      "log_sha256": "2e7c8c1e16f54c5de9788f71b7c0c2971254c384eea5b65a6a9ce33bed73552c",
+      "log": "............................................................             [100%]\n60 passed in 6.93s\n",
+      "junit_sha256": "08058175b1547c69abe3b925df267eab3727db2ef8a9011b8830fca82be1963a",
+      "junit_xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"0\" skipped=\"0\" tests=\"60\" time=\"6.696\" timestamp=\"2026-11-02T14:59:46.966742+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tests.test_transcript_artifact\" name=\"test_parse_quarter_label_accepts_only_render_format\" time=\"0.001\" /><testcase classname=\"tests.test_transcript_artifact\" name=\"test_receipt_path_is_txt_sidecar\" time=\"0.004\" /><testcase classname=\"tests.test_transcript_artifact\" name=\"test_unparseable_expected_quarter_is_caller_error\" time=\"0.004\" /><testcase classname=\"tests.test_transcript_artifact\" name=\"test_valid_english_and_chinese_legacy_files[Prepared Remarks\\n\\nOperator \\u2014 Good morning everyone.]\" time=\"0.017\" /><testcase classname=\"tests.test_transcript_artifact\" name=\"test_valid_english_and_chinese_legacy_files[\\u8fd0\\u8425\\u65b9\\u2014\\u2014\\u5927\\u5bb6\\u65e9\\u4e0a\\u597d\\u3002\\u4eca\\u5929\\u6211\\u4eec\\u8ba8\\u8bba\\u7b2c\\u4e09\\u5b63\\u5ea6\\u4e1a\\u7ee9\\u4e0e\\u5c55\\u671b\\u3002]\" time=\"0.023\" /><testcase classname=\"tests.test_transcript_artifact\" name=\"test_empty_and_whitespace_only_bodies_are_corrupt\" time=\"0.042\" /><testcase classname=\"tests.test_transcript_artifact\" name=\"test_missing_file_is_named_unreadable\" time=\"0.004\" /><testcase classname=\"tests.test_transcript_artifact\" name=\"test_invalid_utf8_is_corrupt_even_with_header_like_bytes\" time=\"0.024\" /><testcase classname=\"tests.test_transcript_artifact\" name=\"test_truncated_body_reports_actual_bytes_not_characters\" time=\"0.023\" /><testcase classname=\"tests.test_transcript_artifact\" name=\"test_role_header_body_roundtrip_with_embedded_separator\" time=\"0.022\" /><testcase classname=\"tests.test_transcript_artifact\" name=\"test_wrong_quarter_header_is_period_mismatch\" time=\"0.022\" /><testcase classname=\"tests.test_transcript_artifact\" name=\"test_wrong_ticker_header_is_identity_mismatch\" time=\"0.018\" /><testcase classname=\"tests.test_transcript_artifact\" name=\"test_ticker_match_is_case_insensitive\" time=\"0.018\" /><testcase classname=\"tests.test_transcript_artifact\" name=\"test_url_mismatch_is_identity_mismatch\" time=\"0.019\" /><testcase classname=\"tests.test_transcript_artifact\" name=\"test_url_na_header_does_not_contradict_expected_url\" time=\"0.022\" /><testcase classname=\"tests.test_transcript_artifact\" name=\"test_url_match_proves_identity_when_ticker_absent\" time=\"0.015\" /><testcase classname=\"tests.test_transcript_artifact\" name=\"test_url_only_without_quarter_is_identity_missing\" time=\"0.027\" /><testcase classname=\"tests.test_transcript_artifact\" name=\"test_unprovable_identity_reports_identity_missing[header0]\" time=\"0.005\" /><testcase classname=\"tests.test_transcript_artifact\" name=\"test_unprovable_identity_reports_identity_missing[header1]\" time=\"0.019\" /><testcase classname=\"tests.test_transcript_artifact\" name=\"test_unprovable_identity_reports_identity_missing[header2]\" time=\"0.017\" /><testcase classname=\"tests.test_transcript_artifact\" name=\"test_unprovable_identity_reports_identity_missing[header3]\" time=\"0.017\" /><testcase classname=\"tests.test_transcript_artifact\" name=\"test_unprovable_identity_reports_identity_missing[header4]\" time=\"0.017\" /><testcase classname=\"tests.test_transcript_artifact\" name=\"test_download_receipt_roundtrip_is_verified\" time=\"0.010\" /><testcase classname=\"tests.test_transcript_artifact\" name=\"test_audit_receipt_match_stays_legacy_unverified\" time=\"0.017\" /><testcase classname=\"tests.test_transcript_artifact\" name=\"test_missing_receipt_is_none\" time=\"0.020\" /><testcase classname=\"tests.test_transcript_artifact\" name=\"test_bad_receipt_bytes_are_non_authoritative_diagnostics[{&quot;schema&quot;: &quot;et-local-text-receipt/1&quot;, &quot;kind&quot;: &quot;down]\" time=\"0.018\" /><testcase classname=\"tests.test_transcript_artifact\" name=\"test_bad_receipt_bytes_are_non_authoritative_diagnostics[not json at all]\" time=\"0.021\" /><testcase classname=\"tests.test_transcript_artifact\" name=\"test_bad_receipt_bytes_are_non_authoritative_diagnostics[\\xff\\xfe{&quot;schema&quot;: &quot;et-local-text-receipt/1&quot;}]\" time=\"0.025\" /><testcase classname=\"tests.test_transcript_artifact\" name=\"test_bad_receipt_bytes_are_non_authoritative_diagnostics[[]]\" time=\"0.008\" /><testcase classname=\"tests.test_transcript_artifact\" name=\"test_bad_receipt_bytes_are_non_authoritative_diagnostics[{&quot;schema&quot;: &quot;other/9&quot;, &quot;kind&quot;: &quot;download&quot;}]\" time=\"0.019\" /><testcase classname=\"tests.test_transcript_artifact\" name=\"test_bad_receipt_bytes_are_non_authoritative_diagnostics[{&quot;schema&quot;: &quot;et-local-text-receipt/1&quot;, &quot;kind&quot;: &quot;evil&quot;}]\" time=\"0.019\" /><testcase classname=\"tests.test_transcript_artifact\" name=\"test_receipt_schema_notes_do_not_override_original_but_explicit_pins_still_bind\" time=\"0.162\" /><testcase classname=\"tests.test_transcript_artifact\" name=\"test_bad_audit_fields_never_become_download_provenance\" time=\"0.048\" /><testcase classname=\"tests.test_transcript_artifact\" name=\"test_parse_receipt_exposes_named_code\" time=\"0.001\" /><testcase classname=\"tests.test_transcript_artifact\" name=\"test_tampered_bytes_conflict_with_download_receipt\" time=\"0.030\" /><testcase classname=\"tests.test_transcript_artifact\" name=\"test_receipt_identity_contradiction_is_named_mismatch\" time=\"0.049\" /><testcase classname=\"tests.test_transcript_artifact\" name=\"test_crlf_file_verifies_against_its_own_receipt\" time=\"0.036\" /><testcase classname=\"tests.test_transcript_artifact\" name=\"test_newline_conversion_invalidates_receipt\" time=\"0.041\" /><testcase classname=\"tests.test_transcript_artifact\" name=\"test_download_receipt_binds_actual_payload_bytes\" time=\"0.002\" /><testcase classname=\"tests.test_transcript_artifact\" name=\"test_audit_receipt_keeps_unprovable_fields_null\" time=\"0.023\" /><testcase classname=\"tests.test_transcript_artifact\" name=\"test_download_receipt_provider_mapping\" time=\"0.003\" /><testcase classname=\"tests.test_transcript_artifact\" name=\"test_write_atomic_replaces_and_leaves_no_temp\" time=\"0.008\" /><testcase classname=\"tests.test_transcript_artifact\" name=\"test_write_atomic_failure_keeps_existing_and_cleans_temp\" time=\"0.016\" /><testcase classname=\"tests.test_transcript_artifact\" name=\"test_verdict_dataclass_defaults_are_inert\" time=\"0.001\" /><testcase classname=\"tests.test_batch_runtime\" name=\"test_bad_optional_receipt_is_diagnostic_and_original_reused\" time=\"0.784\" /><testcase classname=\"tests.test_retrieval_runtime\" name=\"test_legacy_result_constant_does_not_veto_explicit_operation_quota\" time=\"0.672\" /><testcase classname=\"tests.test_retrieval_runtime\" name=\"test_result_file_loader_accepts_valid_envelope\" time=\"0.034\" /><testcase classname=\"tests.test_retrieval_runtime\" name=\"test_result_file_after_deadline_is_not_accepted_as_fetched\" time=\"0.013\" /><testcase classname=\"tests.test_retrieval_runtime\" name=\"test_result_file_loader_rejects_untrusted_envelopes\" time=\"0.100\" /><testcase classname=\"tests.test_retrieval_runtime\" name=\"test_missing_result_file_is_worker_failure\" time=\"0.008\" /><testcase classname=\"tests.test_retrieval_runtime\" name=\"test_blocked_get_is_reaped_within_deadline_and_cleanup_grace\" time=\"3.051\" /><testcase classname=\"tests.test_request_response_budget\" name=\"test_explicit_operation_quota_does_not_inherit_provider_default_hardcap\" time=\"0.004\" /><testcase classname=\"tests.test_request_response_budget\" name=\"test_second_chunk_is_counted_and_third_is_not_read\" time=\"0.001\" /><testcase classname=\"tests.test_request_response_budget\" name=\"test_large_operation_and_small_body_quota_are_separate\" time=\"0.002\" /><testcase classname=\"tests.test_request_response_budget\" name=\"test_optional_request_and_response_quotas_are_independent[None-1024-response_bytes]\" time=\"0.001\" /><testcase classname=\"tests.test_request_response_budget\" name=\"test_optional_request_and_response_quotas_are_independent[1-None-request_limit]\" time=\"0.002\" /><testcase classname=\"tests.test_transcript_api\" name=\"test_candidate_fetch_rejects_wrong_period_or_cross_host_before_network\" time=\"0.001\" /><testcase classname=\"tests.test_transcript_api\" name=\"test_fmp_rejects_response_for_wrong_quarter\" time=\"0.001\" /><testcase classname=\"tests.test_transcript_api\" name=\"test_fmp_excludes_call_after_requested_as_of_date\" time=\"0.001\" /><testcase classname=\"tests.test_transcript_api\" name=\"test_fmp_enforces_canonical_content_byte_limit\" time=\"0.001\" /></testsuite></testsuites>",
+      "tests": 60,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "duration": "6.696",
+      "case_identities": [
+        "tests.test_transcript_artifact::test_parse_quarter_label_accepts_only_render_format",
+        "tests.test_transcript_artifact::test_receipt_path_is_txt_sidecar",
+        "tests.test_transcript_artifact::test_unparseable_expected_quarter_is_caller_error",
+        "tests.test_transcript_artifact::test_valid_english_and_chinese_legacy_files[Prepared Remarks\\n\\nOperator \\u2014 Good morning everyone.]",
+        "tests.test_transcript_artifact::test_valid_english_and_chinese_legacy_files[\\u8fd0\\u8425\\u65b9\\u2014\\u2014\\u5927\\u5bb6\\u65e9\\u4e0a\\u597d\\u3002\\u4eca\\u5929\\u6211\\u4eec\\u8ba8\\u8bba\\u7b2c\\u4e09\\u5b63\\u5ea6\\u4e1a\\u7ee9\\u4e0e\\u5c55\\u671b\\u3002]",
+        "tests.test_transcript_artifact::test_empty_and_whitespace_only_bodies_are_corrupt",
+        "tests.test_transcript_artifact::test_missing_file_is_named_unreadable",
+        "tests.test_transcript_artifact::test_invalid_utf8_is_corrupt_even_with_header_like_bytes",
+        "tests.test_transcript_artifact::test_truncated_body_reports_actual_bytes_not_characters",
+        "tests.test_transcript_artifact::test_role_header_body_roundtrip_with_embedded_separator",
+        "tests.test_transcript_artifact::test_wrong_quarter_header_is_period_mismatch",
+        "tests.test_transcript_artifact::test_wrong_ticker_header_is_identity_mismatch",
+        "tests.test_transcript_artifact::test_ticker_match_is_case_insensitive",
+        "tests.test_transcript_artifact::test_url_mismatch_is_identity_mismatch",
+        "tests.test_transcript_artifact::test_url_na_header_does_not_contradict_expected_url",
+        "tests.test_transcript_artifact::test_url_match_proves_identity_when_ticker_absent",
+        "tests.test_transcript_artifact::test_url_only_without_quarter_is_identity_missing",
+        "tests.test_transcript_artifact::test_unprovable_identity_reports_identity_missing[header0]",
+        "tests.test_transcript_artifact::test_unprovable_identity_reports_identity_missing[header1]",
+        "tests.test_transcript_artifact::test_unprovable_identity_reports_identity_missing[header2]",
+        "tests.test_transcript_artifact::test_unprovable_identity_reports_identity_missing[header3]",
+        "tests.test_transcript_artifact::test_unprovable_identity_reports_identity_missing[header4]",
+        "tests.test_transcript_artifact::test_download_receipt_roundtrip_is_verified",
+        "tests.test_transcript_artifact::test_audit_receipt_match_stays_legacy_unverified",
+        "tests.test_transcript_artifact::test_missing_receipt_is_none",
+        "tests.test_transcript_artifact::test_bad_receipt_bytes_are_non_authoritative_diagnostics[{\"schema\": \"et-local-text-receipt/1\", \"kind\": \"down]",
+        "tests.test_transcript_artifact::test_bad_receipt_bytes_are_non_authoritative_diagnostics[not json at all]",
+        "tests.test_transcript_artifact::test_bad_receipt_bytes_are_non_authoritative_diagnostics[\\xff\\xfe{\"schema\": \"et-local-text-receipt/1\"}]",
+        "tests.test_transcript_artifact::test_bad_receipt_bytes_are_non_authoritative_diagnostics[[]]",
+        "tests.test_transcript_artifact::test_bad_receipt_bytes_are_non_authoritative_diagnostics[{\"schema\": \"other/9\", \"kind\": \"download\"}]",
+        "tests.test_transcript_artifact::test_bad_receipt_bytes_are_non_authoritative_diagnostics[{\"schema\": \"et-local-text-receipt/1\", \"kind\": \"evil\"}]",
+        "tests.test_transcript_artifact::test_receipt_schema_notes_do_not_override_original_but_explicit_pins_still_bind",
+        "tests.test_transcript_artifact::test_bad_audit_fields_never_become_download_provenance",
+        "tests.test_transcript_artifact::test_parse_receipt_exposes_named_code",
+        "tests.test_transcript_artifact::test_tampered_bytes_conflict_with_download_receipt",
+        "tests.test_transcript_artifact::test_receipt_identity_contradiction_is_named_mismatch",
+        "tests.test_transcript_artifact::test_crlf_file_verifies_against_its_own_receipt",
+        "tests.test_transcript_artifact::test_newline_conversion_invalidates_receipt",
+        "tests.test_transcript_artifact::test_download_receipt_binds_actual_payload_bytes",
+        "tests.test_transcript_artifact::test_audit_receipt_keeps_unprovable_fields_null",
+        "tests.test_transcript_artifact::test_download_receipt_provider_mapping",
+        "tests.test_transcript_artifact::test_write_atomic_replaces_and_leaves_no_temp",
+        "tests.test_transcript_artifact::test_write_atomic_failure_keeps_existing_and_cleans_temp",
+        "tests.test_transcript_artifact::test_verdict_dataclass_defaults_are_inert",
+        "tests.test_batch_runtime::test_bad_optional_receipt_is_diagnostic_and_original_reused",
+        "tests.test_retrieval_runtime::test_legacy_result_constant_does_not_veto_explicit_operation_quota",
+        "tests.test_retrieval_runtime::test_result_file_loader_accepts_valid_envelope",
+        "tests.test_retrieval_runtime::test_result_file_after_deadline_is_not_accepted_as_fetched",
+        "tests.test_retrieval_runtime::test_result_file_loader_rejects_untrusted_envelopes",
+        "tests.test_retrieval_runtime::test_missing_result_file_is_worker_failure",
+        "tests.test_retrieval_runtime::test_blocked_get_is_reaped_within_deadline_and_cleanup_grace",
+        "tests.test_request_response_budget::test_explicit_operation_quota_does_not_inherit_provider_default_hardcap",
+        "tests.test_request_response_budget::test_second_chunk_is_counted_and_third_is_not_read",
+        "tests.test_request_response_budget::test_large_operation_and_small_body_quota_are_separate",
+        "tests.test_request_response_budget::test_optional_request_and_response_quotas_are_independent[None-1024-response_bytes]",
+        "tests.test_request_response_budget::test_optional_request_and_response_quotas_are_independent[1-None-request_limit]",
+        "tests.test_transcript_api::test_candidate_fetch_rejects_wrong_period_or_cross_host_before_network",
+        "tests.test_transcript_api::test_fmp_rejects_response_for_wrong_quarter",
+        "tests.test_transcript_api::test_fmp_excludes_call_after_requested_as_of_date",
+        "tests.test_transcript_api::test_fmp_enforces_canonical_content_byte_limit"
+      ]
+    },
+    "io-red": {
+      "log_sha256": "035028e3ad8057d1e52f2fac40ba71268c3987c691a6be772a9230410cb91dcf",
+      "log": ".F                                                                       [100%]\n================================== FAILURES ===================================\n_ test_optional_sidecar_capacity_failure_cannot_deny_healthy_original[sidecar-memory] _\ntests\\test_optional_local_receipt.py:96: in test_optional_sidecar_capacity_failure_cannot_deny_healthy_original\n    verdict = verify_stored_original(txt, ticker=\"ACME\", quarter=\"Q3 2026\")\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntranscript_artifact.py:455: in verify_stored_original\n    receipt = read_receipt(txt_path)\n              ^^^^^^^^^^^^^^^^^^^^^^\ntranscript_artifact.py:329: in read_receipt\n    raw = path.read_bytes()\n          ^^^^^^^^^^^^^^^^^\ntests\\test_optional_local_receipt.py:93: in read\n    raise failure(\"synthetic sidecar capacity failure\")\nE   MemoryError: synthetic sidecar capacity failure\n=========================== short test summary info ===========================\nFAILED tests/test_optional_local_receipt.py::test_optional_sidecar_capacity_failure_cannot_deny_healthy_original[sidecar-memory]\n1 failed, 1 passed in 0.97s\n",
+      "junit_sha256": "fc63fa4e295b71d8a8f0990bb6f19a4fb105e827d326a76217f2311bbe9653ac",
+      "junit_xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"1\" skipped=\"0\" tests=\"2\" time=\"0.765\" timestamp=\"2026-11-02T15:03:19.126555+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tests.test_optional_local_receipt\" name=\"test_optional_sidecar_capacity_failure_cannot_deny_healthy_original[sidecar-io]\" time=\"0.011\" /><testcase classname=\"tests.test_optional_local_receipt\" name=\"test_optional_sidecar_capacity_failure_cannot_deny_healthy_original[sidecar-memory]\" time=\"0.006\"><failure message=\"MemoryError: synthetic sidecar capacity failure\">tests\\test_optional_local_receipt.py:96: in test_optional_sidecar_capacity_failure_cannot_deny_healthy_original\n    verdict = verify_stored_original(txt, ticker=\"ACME\", quarter=\"Q3 2026\")\n              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\ntranscript_artifact.py:455: in verify_stored_original\n    receipt = read_receipt(txt_path)\n              ^^^^^^^^^^^^^^^^^^^^^^\ntranscript_artifact.py:329: in read_receipt\n    raw = path.read_bytes()\n          ^^^^^^^^^^^^^^^^^\ntests\\test_optional_local_receipt.py:93: in read\n    raise failure(\"synthetic sidecar capacity failure\")\nE   MemoryError: synthetic sidecar capacity failure</failure></testcase></testsuite></testsuites>",
+      "tests": 2,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "duration": "0.765",
+      "case_identities": [
+        "tests.test_optional_local_receipt::test_optional_sidecar_capacity_failure_cannot_deny_healthy_original[sidecar-io]",
+        "tests.test_optional_local_receipt::test_optional_sidecar_capacity_failure_cannot_deny_healthy_original[sidecar-memory]"
+      ]
+    },
+    "io-green": {
+      "log_sha256": "3ad6ba3094b506690ef67c030786670f962fe3a6d99d4600fd1ecae601bbb16c",
+      "log": "..                                                                       [100%]\n2 passed in 0.71s\n",
+      "junit_sha256": "2b025e5cfd33a8ebebceb4fe5dc2c1fb5eccbf835340cb6f70bd749773723941",
+      "junit_xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"0\" skipped=\"0\" tests=\"2\" time=\"0.622\" timestamp=\"2026-11-02T15:06:42.074290+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tests.test_optional_local_receipt\" name=\"test_optional_sidecar_capacity_failure_cannot_deny_healthy_original[sidecar-io]\" time=\"0.011\" /><testcase classname=\"tests.test_optional_local_receipt\" name=\"test_optional_sidecar_capacity_failure_cannot_deny_healthy_original[sidecar-memory]\" time=\"0.005\" /></testsuite></testsuites>",
+      "tests": 2,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "duration": "0.622",
+      "case_identities": [
+        "tests.test_optional_local_receipt::test_optional_sidecar_capacity_failure_cannot_deny_healthy_original[sidecar-io]",
+        "tests.test_optional_local_receipt::test_optional_sidecar_capacity_failure_cannot_deny_healthy_original[sidecar-memory]"
+      ]
+    },
+    "time-red": {
+      "log_sha256": "91a8b69425e08323f72e1f084b4c5db06848eb461160309e3ffe59ac317fd75d",
+      "log": "FFF........                                                              [100%]\n================================== FAILURES ===================================\n__________ test_explicit_time_quota_is_not_an_immutable_api_maximum ___________\ntests\\test_explicit_response_budget.py:127: in test_explicit_time_quota_is_not_an_immutable_api_maximum\n    assert result[\"status\"] == \"fetched\" and len(session.calls) == 1\nE   AssertionError: assert ('invalid_request' == 'fetched'\nE     \nE     - fetched\nE     + invalid_request)\n______________ test_explicit_time_quota_reaches_metadata_listing ______________\ntests\\test_explicit_response_budget.py:138: in test_explicit_time_quota_reaches_metadata_listing\n    assert result[\"status\"] == \"available\" and len(session.calls) == 1\nE   AssertionError: assert ('invalid_request' == 'available'\nE     \nE     - available\nE     + invalid_request)\n___________ test_public_cli_preserves_time_quota_in_real_supervisor ___________\ntests\\test_explicit_response_budget.py:161: in test_public_cli_preserves_time_quota_in_real_supervisor\n    assert json.loads(output.getvalue())[\"status\"] == \"fetched\"\nE   AssertionError: assert 'invalid_request' == 'fetched'\nE     \nE     - fetched\nE     + invalid_request\n=========================== short test summary info ===========================\nFAILED tests/test_explicit_response_budget.py::test_explicit_time_quota_is_not_an_immutable_api_maximum\nFAILED tests/test_explicit_response_budget.py::test_explicit_time_quota_reaches_metadata_listing\nFAILED tests/test_explicit_response_budget.py::test_public_cli_preserves_time_quota_in_real_supervisor\n3 failed, 8 passed, 8 deselected in 1.19s\n",
+      "junit_sha256": "23e3f2208ce600f76170bdc3ec356c4d6434683c511f08be9358be18c8f4fba3",
+      "junit_xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"3\" skipped=\"0\" tests=\"11\" time=\"1.092\" timestamp=\"2026-11-02T15:08:32.537453+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tests.test_explicit_response_budget\" name=\"test_explicit_time_quota_is_not_an_immutable_api_maximum\" time=\"0.002\"><failure message=\"AssertionError: assert ('invalid_request' == 'fetched'&#10;  &#10;  - fetched&#10;  + invalid_request)\">tests\\test_explicit_response_budget.py:127: in test_explicit_time_quota_is_not_an_immutable_api_maximum\n    assert result[\"status\"] == \"fetched\" and len(session.calls) == 1\nE   AssertionError: assert ('invalid_request' == 'fetched'\nE     \nE     - fetched\nE     + invalid_request)</failure></testcase><testcase classname=\"tests.test_explicit_response_budget\" name=\"test_explicit_time_quota_reaches_metadata_listing\" time=\"0.001\"><failure message=\"AssertionError: assert ('invalid_request' == 'available'&#10;  &#10;  - available&#10;  + invalid_request)\">tests\\test_explicit_response_budget.py:138: in test_explicit_time_quota_reaches_metadata_listing\n    assert result[\"status\"] == \"available\" and len(session.calls) == 1\nE   AssertionError: assert ('invalid_request' == 'available'\nE     \nE     - available\nE     + invalid_request)</failure></testcase><testcase classname=\"tests.test_explicit_response_budget\" name=\"test_public_cli_preserves_time_quota_in_real_supervisor\" time=\"0.008\"><failure message=\"AssertionError: assert 'invalid_request' == 'fetched'&#10;  &#10;  - fetched&#10;  + invalid_request\">tests\\test_explicit_response_budget.py:161: in test_public_cli_preserves_time_quota_in_real_supervisor\n    assert json.loads(output.getvalue())[\"status\"] == \"fetched\"\nE   AssertionError: assert 'invalid_request' == 'fetched'\nE     \nE     - fetched\nE     + invalid_request</failure></testcase><testcase classname=\"tests.test_explicit_response_budget\" name=\"test_invalid_time_quota_still_refuses_before_http[zero]\" time=\"0.001\" /><testcase classname=\"tests.test_explicit_response_budget\" name=\"test_invalid_time_quota_still_refuses_before_http[bool]\" time=\"0.001\" /><testcase classname=\"tests.test_explicit_response_budget\" name=\"test_invalid_time_quota_still_refuses_before_http[infinity]\" time=\"0.001\" /><testcase classname=\"tests.test_explicit_response_budget\" name=\"test_invalid_time_quota_still_refuses_before_http[nan]\" time=\"0.001\" /><testcase classname=\"tests.test_explicit_response_budget\" name=\"test_invalid_metadata_time_quota_still_refuses_before_http[zero]\" time=\"0.001\" /><testcase classname=\"tests.test_explicit_response_budget\" name=\"test_invalid_metadata_time_quota_still_refuses_before_http[bool]\" time=\"0.001\" /><testcase classname=\"tests.test_explicit_response_budget\" name=\"test_invalid_metadata_time_quota_still_refuses_before_http[infinity]\" time=\"0.001\" /><testcase classname=\"tests.test_explicit_response_budget\" name=\"test_invalid_metadata_time_quota_still_refuses_before_http[nan]\" time=\"0.001\" /></testsuite></testsuites>",
+      "tests": 11,
+      "failures": 3,
+      "errors": 0,
+      "skipped": 0,
+      "duration": "1.092",
+      "case_identities": [
+        "tests.test_explicit_response_budget::test_explicit_time_quota_is_not_an_immutable_api_maximum",
+        "tests.test_explicit_response_budget::test_explicit_time_quota_reaches_metadata_listing",
+        "tests.test_explicit_response_budget::test_public_cli_preserves_time_quota_in_real_supervisor",
+        "tests.test_explicit_response_budget::test_invalid_time_quota_still_refuses_before_http[zero]",
+        "tests.test_explicit_response_budget::test_invalid_time_quota_still_refuses_before_http[bool]",
+        "tests.test_explicit_response_budget::test_invalid_time_quota_still_refuses_before_http[infinity]",
+        "tests.test_explicit_response_budget::test_invalid_time_quota_still_refuses_before_http[nan]",
+        "tests.test_explicit_response_budget::test_invalid_metadata_time_quota_still_refuses_before_http[zero]",
+        "tests.test_explicit_response_budget::test_invalid_metadata_time_quota_still_refuses_before_http[bool]",
+        "tests.test_explicit_response_budget::test_invalid_metadata_time_quota_still_refuses_before_http[infinity]",
+        "tests.test_explicit_response_budget::test_invalid_metadata_time_quota_still_refuses_before_http[nan]"
+      ]
+    },
+    "time-green": {
+      "log_sha256": "2d2941a3313d0cbfff50fc14758261eb7488663963279676e134c7ff6a390b77",
+      "log": ".F.........                                                              [100%]\n================================== FAILURES ===================================\n______________ test_explicit_time_quota_reaches_metadata_listing ______________\ntests\\test_explicit_response_budget.py:135: in test_explicit_time_quota_reaches_metadata_listing\n    assert result[\"status\"] == \"available\" and len(session.calls) == 1\nE   AssertionError: assert ('discovered' == 'available'\nE     \nE     - available\nE     + discovered)\n=========================== short test summary info ===========================\nFAILED tests/test_explicit_response_budget.py::test_explicit_time_quota_reaches_metadata_listing\n1 failed, 10 passed, 8 deselected in 1.48s\n",
+      "junit_sha256": "e77c66d61a221b7fa66f28937c87f399173a41cafedd506dc98ef983e815e5fc",
+      "junit_xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"1\" skipped=\"0\" tests=\"11\" time=\"1.411\" timestamp=\"2026-11-02T15:08:54.412037+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tests.test_explicit_response_budget\" name=\"test_explicit_time_quota_is_not_an_immutable_api_maximum\" time=\"0.003\" /><testcase classname=\"tests.test_explicit_response_budget\" name=\"test_explicit_time_quota_reaches_metadata_listing\" time=\"0.001\"><failure message=\"AssertionError: assert ('discovered' == 'available'&#10;  &#10;  - available&#10;  + discovered)\">tests\\test_explicit_response_budget.py:135: in test_explicit_time_quota_reaches_metadata_listing\n    assert result[\"status\"] == \"available\" and len(session.calls) == 1\nE   AssertionError: assert ('discovered' == 'available'\nE     \nE     - available\nE     + discovered)</failure></testcase><testcase classname=\"tests.test_explicit_response_budget\" name=\"test_public_cli_preserves_time_quota_in_real_supervisor\" time=\"0.630\" /><testcase classname=\"tests.test_explicit_response_budget\" name=\"test_invalid_time_quota_still_refuses_before_http[zero]\" time=\"0.002\" /><testcase classname=\"tests.test_explicit_response_budget\" name=\"test_invalid_time_quota_still_refuses_before_http[bool]\" time=\"0.002\" /><testcase classname=\"tests.test_explicit_response_budget\" name=\"test_invalid_time_quota_still_refuses_before_http[infinity]\" time=\"0.001\" /><testcase classname=\"tests.test_explicit_response_budget\" name=\"test_invalid_time_quota_still_refuses_before_http[nan]\" time=\"0.001\" /><testcase classname=\"tests.test_explicit_response_budget\" name=\"test_invalid_metadata_time_quota_still_refuses_before_http[zero]\" time=\"0.000\" /><testcase classname=\"tests.test_explicit_response_budget\" name=\"test_invalid_metadata_time_quota_still_refuses_before_http[bool]\" time=\"0.000\" /><testcase classname=\"tests.test_explicit_response_budget\" name=\"test_invalid_metadata_time_quota_still_refuses_before_http[infinity]\" time=\"0.000\" /><testcase classname=\"tests.test_explicit_response_budget\" name=\"test_invalid_metadata_time_quota_still_refuses_before_http[nan]\" time=\"0.000\" /></testsuite></testsuites>",
+      "tests": 11,
+      "failures": 1,
+      "errors": 0,
+      "skipped": 0,
+      "duration": "1.411",
+      "case_identities": [
+        "tests.test_explicit_response_budget::test_explicit_time_quota_is_not_an_immutable_api_maximum",
+        "tests.test_explicit_response_budget::test_explicit_time_quota_reaches_metadata_listing",
+        "tests.test_explicit_response_budget::test_public_cli_preserves_time_quota_in_real_supervisor",
+        "tests.test_explicit_response_budget::test_invalid_time_quota_still_refuses_before_http[zero]",
+        "tests.test_explicit_response_budget::test_invalid_time_quota_still_refuses_before_http[bool]",
+        "tests.test_explicit_response_budget::test_invalid_time_quota_still_refuses_before_http[infinity]",
+        "tests.test_explicit_response_budget::test_invalid_time_quota_still_refuses_before_http[nan]",
+        "tests.test_explicit_response_budget::test_invalid_metadata_time_quota_still_refuses_before_http[zero]",
+        "tests.test_explicit_response_budget::test_invalid_metadata_time_quota_still_refuses_before_http[bool]",
+        "tests.test_explicit_response_budget::test_invalid_metadata_time_quota_still_refuses_before_http[infinity]",
+        "tests.test_explicit_response_budget::test_invalid_metadata_time_quota_still_refuses_before_http[nan]"
+      ]
+    },
+    "time-final": {
+      "log_sha256": "0353dcbafa03b8fb6765f52b506d3813a0e6ac0b15379bededf604bf1fe8ff05",
+      "log": "...........                                                              [100%]\n11 passed, 8 deselected in 1.29s\n",
+      "junit_sha256": "6adef190dcece5c2ef2ef074590e149d09eb45515801087aafdd42f65c38d13a",
+      "junit_xml": "<?xml version=\"1.0\" encoding=\"utf-8\"?><testsuites name=\"pytest tests\"><testsuite name=\"pytest\" errors=\"0\" failures=\"0\" skipped=\"0\" tests=\"11\" time=\"1.231\" timestamp=\"2026-11-02T15:09:16.942915+00:00\" hostname=\"DESKTOP-156V213\"><testcase classname=\"tests.test_explicit_response_budget\" name=\"test_explicit_time_quota_is_not_an_immutable_api_maximum\" time=\"0.002\" /><testcase classname=\"tests.test_explicit_response_budget\" name=\"test_explicit_time_quota_reaches_metadata_listing\" time=\"0.001\" /><testcase classname=\"tests.test_explicit_response_budget\" name=\"test_public_cli_preserves_time_quota_in_real_supervisor\" time=\"0.615\" /><testcase classname=\"tests.test_explicit_response_budget\" name=\"test_invalid_time_quota_still_refuses_before_http[zero]\" time=\"0.001\" /><testcase classname=\"tests.test_explicit_response_budget\" name=\"test_invalid_time_quota_still_refuses_before_http[bool]\" time=\"0.001\" /><testcase classname=\"tests.test_explicit_response_budget\" name=\"test_invalid_time_quota_still_refuses_before_http[infinity]\" time=\"0.001\" /><testcase classname=\"tests.test_explicit_response_budget\" name=\"test_invalid_time_quota_still_refuses_before_http[nan]\" time=\"0.001\" /><testcase classname=\"tests.test_explicit_response_budget\" name=\"test_invalid_metadata_time_quota_still_refuses_before_http[zero]\" time=\"0.000\" /><testcase classname=\"tests.test_explicit_response_budget\" name=\"test_invalid_metadata_time_quota_still_refuses_before_http[bool]\" time=\"0.000\" /><testcase classname=\"tests.test_explicit_response_budget\" name=\"test_invalid_metadata_time_quota_still_refuses_before_http[infinity]\" time=\"0.000\" /><testcase classname=\"tests.test_explicit_response_budget\" name=\"test_invalid_metadata_time_quota_still_refuses_before_http[nan]\" time=\"0.000\" /></testsuite></testsuites>",
+      "tests": 11,
+      "failures": 0,
+      "errors": 0,
+      "skipped": 0,
+      "duration": "1.231",
+      "case_identities": [
+        "tests.test_explicit_response_budget::test_explicit_time_quota_is_not_an_immutable_api_maximum",
+        "tests.test_explicit_response_budget::test_explicit_time_quota_reaches_metadata_listing",
+        "tests.test_explicit_response_budget::test_public_cli_preserves_time_quota_in_real_supervisor",
+        "tests.test_explicit_response_budget::test_invalid_time_quota_still_refuses_before_http[zero]",
+        "tests.test_explicit_response_budget::test_invalid_time_quota_still_refuses_before_http[bool]",
+        "tests.test_explicit_response_budget::test_invalid_time_quota_still_refuses_before_http[infinity]",
+        "tests.test_explicit_response_budget::test_invalid_time_quota_still_refuses_before_http[nan]",
+        "tests.test_explicit_response_budget::test_invalid_metadata_time_quota_still_refuses_before_http[zero]",
+        "tests.test_explicit_response_budget::test_invalid_metadata_time_quota_still_refuses_before_http[bool]",
+        "tests.test_explicit_response_budget::test_invalid_metadata_time_quota_still_refuses_before_http[infinity]",
+        "tests.test_explicit_response_budget::test_invalid_metadata_time_quota_still_refuses_before_http[nan]"
+      ]
+    }
+  },
+  "test_summary": {
+    "initial_new20": "17F3P first; one CLI missing fakebase_dir fixture error corrected and independently reproduced1F;17 unique real REDs across corrected runs.20P10.45s after implementation.",
+    "adjacent_existing60": "60P6.93s; artifact strict parser+all real identity/checksum controls, real reuse CLI, supervised allocation, explicit quota+canonical body+host/period/asof and blocked GET deadline termination/cleanup.",
+    "sidecar_capacity": "read failure OSError passes, MemoryError1F; same existing optional-note owner catches both and read/decode capacity now diagnostic;2P0.71s",
+    "time_quota": "3F8P1.19s; first repair10P1F1.48s due new-test success label available vs real discovered; corrected fixture only, final11P1.29s. Actual CLI real worker immediate fake HTTP returned120.0 to supervisor, no real120s wait.",
+    "coverage_unique": 93,
+    "no_claim": "No final monolithic93 run claimed:20 new +60 existing +2 capacity +11 time are incremental distinct cases; unchanged earlier branches not rerun.",
+    "actual_unique_case_count": 93
+  },
+  "oracle_migrations": [
+    "test_transcript_artifact.py malformed non-authoritative sidecars become diagnostic legacy; strict parser still rejects. Two old invalid-metadata fixtures previously used fake byte/hash pins; replaced with actual attach/audit receipts before metadata mutation, so true pin mismatch is not reclassified.",
+    "test_batch_runtime.py bad optional JSON original reuse now successful/diagnostic and fake configuration explicitly points at ownedtmp. No HTTP or LLM instantiated.",
+    "test_retrieval_runtime.py monkeypatched old wire cap no longer vetoes explicit quota; envelope parsing, actual deadlines, result file boundary and cleanup remain.",
+    "test_request_response_budget.py explicit128MiB request no longer silently inherits patched512 provider default; real small operation/body negatives remain."
+  ],
+  "fixture_and_tool_errata": [
+    "Initial realCLI fixture missing config.paths.base_dir caused1 of17 first failures; corrected before actual CLI RED (1F) and20P.",
+    "New metadata time success oracle first used available; actual canonical success is discovered; intermediate1F retained, only new fixture expectation corrected.",
+    "One source transformation composition failed before calling tools because unescaped JS template backticks; no file operation executed on that attempt."
+  ],
+  "static": {
+    "first_ruff12_files": "All checks passed (ruff.log archived)",
+    "final_ruff5_files": "All checks passed; transcript_api.py transcript_tool.py transcript_artifact.py and2newtests; value-only fixture correction followed no semantic/style change",
+    "initial_ruff_log": "All checks passed!\n"
+  },
+  "crossrepo_caller_boundary": {
+    "FF_owned_by_ROOT": "filing-fetch/scripts/transcript_tool_transport.py::_et_result still min(limits.max_bytes,10MiB) and min(limits.timeout,self._remaining()-3,60) at audit; ROOT notified and is repairing FF caller. ET this manifest now accepts explicit larger valid quotas. FF config directly points canonical transcript_tool.py; ET has no global skill installer."
+  },
+  "calls": {
+    "actual_paid_calls": 0,
+    "actual_network": 0,
+    "downloads": 0,
+    "production_original_reads_or_writes": 0,
+    "actual_key_reads": 0,
+    "global_installs": 0,
+    "git_writes": 0
+  },
+  "unowned_worktree_files_preserved": [
+    ".workbuddy-ai/",
+    "eval_results.json"
+  ],
+  "limits": [
+    "No full ET or crossrepo CI rerun; ROOT will decide publication and one independent large-node review.",
+    "No provider compatibility/accuracy result from live FMP or web content claimed.",
+    "StockWiki receipt/narrative work belongs ROOT; no IQS/Dayu/Dashboard modifications."
+  ],
+  "owned_tmp": {
+    "path": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\et-r7-b29f1c",
+    "files": 159,
+    "logical_bytes": 95964,
+    "initial_state": "ABSENT",
+    "final_state": "ABSENT",
+    "native_only": true,
+    "source_model_originals_deleted": 0
+  }
+}

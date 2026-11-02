@@ -1,0 +1,428 @@
+{
+  "status": "READ_ONLY_AUDIT_FROZEN_FIVE_CONFIRMED_FAMILIES_IMPLEMENTATION_NEXT",
+  "reviewer": "/root/rectify_readability",
+  "scope": "Current CWPsource_contract/source_catalog/automation liveentry review, small pure/public synthetic repros only; old closedR7 not counted new.",
+  "findings": [
+    {
+      "id": "CWP-GATE-01",
+      "status": "CONFIRMED_MUST_REMOVE",
+      "priority": "P1",
+      "entry": "NarrativeSummarizeHandler -> narrative_model_runtime.decode_model_draft -> legacy/scoped decoder",
+      "files": [
+        "automation/narrative_model.py",
+        "automation/narrative_model_scoped.py",
+        "automation/narrative_summary_protocols.py"
+      ],
+      "trigger": "legacy claims>20; scoped count>40/per-task2 or<=6; all text>280, separately encoded in instructions/schema/decoder and protocol planning.",
+      "proof": "Real syntheticPDF parsed/selected/replayed; same SHA/actor/2026scope, normal typed source validator PASS.797char exact quote(1058B) handler terminal CLAIM_TEXT;21independent37char original claims(5849B) terminal CLAIMS_LIMIT; scoped3short local clauses per task and single797char clause both refuse.1fake model response already exists; no actual provider.",
+      "root_cause": "A prompt compression target and arbitrary response representation shares are treated as source validity after actual output is returned. Neither refusal cites consumed token/HTTP/storage/time.",
+      "action": "One owner separates soft generation targets from actual output validation. Remove20/40/280/per-task veto consistently from prompt/schema/decoder; retain real configured resources and exact requested task/source/basis/actor/condition/modality/currency/citation validation. Unknown tasks do not become support."
+    },
+    {
+      "id": "CWP-GATE-02",
+      "status": "CONFIRMED_MUST_REMOVE",
+      "priority": "P1",
+      "entry": "narrative_batch_cli.main / source_catalog.cli source-facts / local_prepare_cli.main",
+      "files": [
+        "automation/narrative_batch_cli.py",
+        "source_catalog/cli.py",
+        "source_catalog/local_prepare_cli.py"
+      ],
+      "trigger": "trusted local batch requestread262145/refuse>262144; source-facts and local-prepare read131073/refuse>131072.",
+      "proof": "Same277429B decoded valid batch request passes library from_dict, CLI exitsinvalid before run_batch. Same exact source facts420537B complete JSON/proof records through library, CLI refuses source facts request exceeds byte limit; source bytes and assertion count retained.",
+      "root_cause": "Already explicit local task/evidence files have an unconfigurable small read permit unrelated to request actual work/model/download/resource limits. API andCLI disagree.",
+      "action": "Read trusted explicit request fully and run same canonical schema/resource validation as API. No raised cap or allow flag. Include equivalent stdin local-prepare caller. Keep original/download/HTTP/work/fee budgets."
+    },
+    {
+      "id": "CWP-GATE-03",
+      "status": "CONFIRMED_MUST_REMOVE",
+      "priority": "P1/P2",
+      "entry": "prepare_local_source/restore_document_facts/official_source_flow -> observe_document / verify_registered_original",
+      "files": [
+        "source_catalog/local_inventory.py",
+        "source_catalog/local_reconcile.py",
+        "source_catalog/assertion_service.py",
+        "source_catalog/official_source_flow.py"
+      ],
+      "trigger": "observe_document SELECT LIMIT65 then history>64 blocked; locations>256 observed or verified rejects before actual local read budget.",
+      "proof": "65normal retire/restore cycles leave same active source and same SHA; public original open succeeds. observe_document throws retirement_history_limit solely due earlier audit count. Location256 same active code paths; not independently mass-reproduced.",
+      "root_cause": "Historical metadata/cardinality is a second material eligibility permit. Caller already owns LocalReadBudget/deadline/discovery account; all current live callers identified, including CAS snapshot reread.",
+      "action": "Remove hard history/location counts; charge actual row/metadata/byte traversal to shared existing LocalReadBudget, pass same object through all callers. Preserve source/status/fact accuracy and concurrent snapshot/CAS detection. Do not cache partial snapshot as complete or silently reactivate invalid retirement."
+    },
+    {
+      "id": "CWP-GATE-04",
+      "status": "CONFIRMED_MUST_REMOVE",
+      "priority": "P2",
+      "entry": "NarrativeHTTPModel configured client -> BudgetedNarrativeCaller.validate_identity -> PaidResponsePin",
+      "files": [
+        "automation/narrative_paid_response.py",
+        "automation/narrative_worker_factory.py"
+      ],
+      "trigger": "model_id/adapter_id/prompt_version lengths>256 refused even though configured HTTP adapter accepts same model_id.",
+      "proof": "268char trimmed nonempty explicitly configured model_id accepted by real NarrativeHTTPModel with1MB response and10k output allowance; PaidResponseArtifacts.validate_identity refuses before storage/0POST.",
+      "root_cause": "Configuration identity labels gain a second unrelated serialized length permit at durable receipt construction, same family as previously repaired responsebyte cap.",
+      "action": "Remove length-only identity veto. Keep type/nonempty/trim and exact current model/adapter/prompt/request SHA/recovery conflict checks; migrate old257-invalid oracle to real bad identity and long valid recovery controls."
+    },
+    {
+      "id": "CWP-GATE-05",
+      "status": "CONFIRMED_MUST_REMOVE",
+      "priority": "P1",
+      "entry": "NarrativeHTTPModel complete150145B response/finish_reason length -> BudgetedNarrativeCaller -> NarrativeBudgetCallError.__post_init__",
+      "files": [
+        "automation/narrative_model_caller.py"
+      ],
+      "trigger": "content_bytes diagnostic scalar>128KiB raisesValueError although HTTP complete bytes were under actual configured400000B budget.",
+      "proof": "Public generate with in-memory streamingHTTP1request, content150000, complete validusage92. It raises invalid response content byte diagnostic instead of MODEL_OUTPUT_TRUNCATED; existing reservation alreadyknown/charged92. No network/provider.",
+      "root_cause": "A measured diagnostic integer is compared with old default body quota instead of preserving actual completed response/error; wrapping masks correct failure and accounting diagnostics.",
+      "action": "Remove only diagnostic upper bound, retain nonnegative realint and actual finish/status/stage/usage correctness. Preserve true truncated/error outcome and settled/unknown fee status, no catch-all success or duplicate paid retry."
+    }
+  ],
+  "active_limit_inventory": [
+    {
+      "area": "Summary20/40/280/per-task",
+      "disposition": "REMOVE_CONFIRMED",
+      "references": [
+        "CWP-GATE-01"
+      ]
+    },
+    {
+      "area": "TrustedCLI256KiB/128KiB",
+      "disposition": "REMOVE_CONFIRMED",
+      "references": [
+        "CWP-GATE-02"
+      ]
+    },
+    {
+      "area": "History64/location256",
+      "disposition": "REMOVE_CONFIRMED",
+      "references": [
+        "CWP-GATE-03"
+      ]
+    },
+    {
+      "area": "Paid identity256",
+      "disposition": "REMOVE_CONFIRMED",
+      "references": [
+        "CWP-GATE-04"
+      ]
+    },
+    {
+      "area": "Paid content_bytes diagnostic128KiB",
+      "disposition": "REMOVE_CONFIRMED",
+      "references": [
+        "CWP-GATE-05"
+      ]
+    },
+    {
+      "area": "Output language20claims/96spans/5600claimchars/48000sourcechars",
+      "disposition": "NOT_A_HARD_REFUSAL_QUALITY_OBSERVATION",
+      "reason": "observe_summary_language returns unavailable when observer work scope exceeded; summarize handler keeps source-oriented result but marks needs_review. Not a manual permit. Removing output decoder quotas must not leave an accidental20claim availability mismatch unexamined; prefer actual shared observer work budgeting and explicit diagnostic abstention, not pretending classification occurred."
+    },
+    {
+      "area": "native range200kpage/2Mtotal/<=8members",
+      "disposition": "KEEP_TRANSIENT_BOUNDARY_WITH_FALLBACK",
+      "reason": "Actual build_native_page_view(200001chars,request300000) returnsNone without changing original. Parser keeps original units, _candidates carrierNone continues parsed.units; native coverage explicitlydeferred. Not proven to refuse a normal already-generated result. Fixed-only-lower API could later share WorkBudget, but no scope/source deletion or extra allow flag warranted."
+    },
+    {
+      "area": "RealHTML normalizer path text",
+      "disposition": "NOT_REPRODUCED",
+      "reason": "Real normalize_document -> NarrativeUnit.to_evidence_span -> public select DTO accepts file://public/manual.txt when source language correctly supplied. No actual DocumentUnit or typedunit/text payload exists in this current tree. Unknown invented metadata.text remains forbidden; do not expand wildcard exception."
+    },
+    {
+      "area": "Source/ref/hash/period/as-of; unique evidence/known task/complete context",
+      "disposition": "KEEP_CORRECTNESS",
+      "reason": "Identity, location/source fidelity and qualifier closure define what is cited; not optional review permission. A token budget does not permit missing actor/negation/context/unknowntask to masquerade as support."
+    },
+    {
+      "area": "Checkpoint/preflight/storage/HTTPtoken/bytes/time/cumulative fees/unknownpaid",
+      "disposition": "KEEP_ACTUAL_RESOURCES",
+      "reason": "Measured allocations/I/O/deadline and uncertain already-paid state; existing accounts remain authoritative, no new registry/receipt许可. Different request replay conflicts and real pinSHA stay required."
+    },
+    {
+      "area": "Initial snapshot + commit snapshot recheck",
+      "disposition": "KEEP_CONCURRENCY_BUT_SHARE_BUDGET",
+      "reason": "restore_document_facts checks optimistic current source facts/status twice around byte/fact work; this is concurrent-change protection, not repeated issuer approval. All metadata traversals must consume same account."
+    },
+    {
+      "area": "LocalPrepareLimits upper configuration maxima256candidates/1GiB/600sec/etc",
+      "disposition": "STATIC_CONFIGURATION_POLICY_REVIEW_NOT_NORMAL_RESULT_PROOF",
+      "reason": "Active explicit resource ceilings differ from representation gates; audit did not execute a legitimate full request above maxima or demonstrate resource-consumed output denial. Do not call them necessary solely because namedbudget; future owner should justify host constraint or make actual task budget authoritative."
+    },
+    {
+      "area": "source_fact textvalue2048 and version/risklabel128/256",
+      "disposition": "STATIC_REMAINING_TYPED_LABEL_CAPS_NEED_TARGETED_VALIDITY_ORACLE",
+      "reason": "Active literals exist. No complete normal original-title/version/claim-risk public acceptance oracle was built for these in this bounded audit, so not signed as verified necessary or a proven source loss. Exact versions/market/security enum/hash syntax remain separate correctness checks."
+    },
+    {
+      "area": "Evidence-view limit500/query4096/pagination",
+      "disposition": "EXPLICIT_QUERY_WORK_OWNER_NOT_POST_RESULT_VETO",
+      "reason": "Applies to requested search scope before query, returnedview no fixed serialized size veto. May make maxima configuration-owned later; not evidence normal complete downloaded/source result was rejected."
+    },
+    {
+      "area": "Partial/deferred source processing",
+      "disposition": "KEEP_HONEST_PARTIAL_NOT_BLANKET_GATE",
+      "reason": "Previously repaired processing capability chain must retain independently complete material and explicit deferred IDs. This audit did not rediscover a whole-source partial veto; R7closed cases are not relabeled new findings."
+    },
+    {
+      "area": "Legacycanary/manual prompt review/diagnostic size strings",
+      "disposition": "ALREADY_CLOSED_NOT_NEW",
+      "reason": "R7 activequery/summary/export paths have no new manual approval or fixed diagnostic result permission proven here; constants left as compatibility names alone are not a bug."
+    }
+  ],
+  "observations": [
+    [
+      {
+        "id": "legacy_long_claim",
+        "typed_source_validator": "PASS",
+        "handler_outcome": "terminal_failure",
+        "error_code": "SUMMARY_INVALID",
+        "detail": "model draft violates the summary contract (rule=CLAIM_TEXT)",
+        "claims": 1,
+        "max_text_chars": 797,
+        "response_json_bytes": 1058,
+        "model_calls": 1,
+        "effects": [],
+        "source_sha256": "04906f207d931daaf08b970c2b2e745959b84c3b3db6ca9c963cf03574d74099"
+      },
+      {
+        "id": "legacy21_claims",
+        "typed_source_validator": "PASS",
+        "handler_outcome": "terminal_failure",
+        "error_code": "SUMMARY_INVALID",
+        "detail": "model draft violates the summary contract (rule=CLAIMS_LIMIT)",
+        "claims": 21,
+        "max_text_chars": 37,
+        "response_json_bytes": 5849,
+        "model_calls": 1,
+        "effects": [],
+        "source_sha256": "04906f207d931daaf08b970c2b2e745959b84c3b3db6ca9c963cf03574d74099"
+      },
+      {
+        "id": "scoped_per_task3",
+        "error_type": "NarrativeContractError",
+        "detail": "scoped task clauses exceed per-task cap",
+        "claims": 3,
+        "max_text_chars": 37
+      },
+      {
+        "id": "scoped_long_claim",
+        "error_type": "NarrativeContractError",
+        "detail": "summary claim text exceeds 280 characters",
+        "claims": 1,
+        "max_text_chars": 797
+      },
+      {
+        "id": "batch_cli256k",
+        "library_from_dict": "PASS",
+        "same_decoded_request": true,
+        "cli_exit": 1,
+        "cli_result": {
+          "error": "NARRATIVE_BATCH_INVALID_REQUEST",
+          "schema_version": "narrative-batch-result/1",
+          "status": "failed"
+        },
+        "run_batch_calls": 0,
+        "bytes": 277429
+      },
+      {
+        "id": "real_normalized_path",
+        "error_type": "NarrativeContractError",
+        "detail": "source_metadata.language is invalid",
+        "actual_metadata_keys": [
+          "normalization_schema",
+          "format",
+          "source_sha256",
+          "source_locator",
+          "transform",
+          "dom_path",
+          "backend",
+          "language",
+          "selection_reasons",
+          "source_role",
+          "text_sha256",
+          "topics",
+          "unit_kind"
+        ]
+      }
+    ],
+    [
+      {
+        "id": "source_facts_cli128k",
+        "library_result": {
+          "status": "recorded",
+          "assertion_id": "sa-ff7ae60634704cfdb51be60d91d5c6ce",
+          "document_id": "urn:company-wiki:document:sha256:713f099f93ce176669d093721c5d2b0d74274e53026f38edcb4da90c04c2059e",
+          "source_id": "urn:company-wiki:source:sha256:713f099f93ce176669d093721c5d2b0d74274e53026f38edcb4da90c04c2059e"
+        },
+        "request_bytes": 420537,
+        "cli_exit": 1,
+        "cli_stdout": "",
+        "assertions_before_after": [
+          1,
+          1
+        ],
+        "original_sha256": "713f099f93ce176669d093721c5d2b0d74274e53026f38edcb4da90c04c2059e"
+      },
+      {
+        "id": "retirement_history64",
+        "source_read": "PASS",
+        "active": true,
+        "history_rows": 65,
+        "error_type": "SourceReadError",
+        "reason": "retirement_history_limit",
+        "source_sha256": "713f099f93ce176669d093721c5d2b0d74274e53026f38edcb4da90c04c2059e"
+      },
+      {
+        "id": "real_normalizer_path_recheck",
+        "result": "PASS",
+        "text": "file://public/manual.txt",
+        "metadata_keys": [
+          "normalization_schema",
+          "format",
+          "source_sha256",
+          "source_locator",
+          "transform",
+          "dom_path",
+          "backend",
+          "language",
+          "selection_reasons",
+          "source_role",
+          "text_sha256",
+          "topics",
+          "unit_kind"
+        ]
+      }
+    ],
+    [
+      {
+        "id": "paid_identity256",
+        "http_configuration": "PASS",
+        "model_chars": 268,
+        "paid_identity": "REFUSED",
+        "error_type": "PaidResponseError",
+        "detail": "paid response identity is invalid",
+        "model_calls": 0
+      },
+      {
+        "id": "native_range_optional_cap",
+        "requested_limits": {
+          "max_page_chars": 300000
+        },
+        "effective": {
+          "max_total_chars": 2000000,
+          "max_page_chars": 200000
+        },
+        "view_is_none": true,
+        "original_text_chars": 200001,
+        "original_untouched": true,
+        "scope": "pure transient view; _candidates keeps parsed.units when no carrier; not a proven normal-result refusal"
+      }
+    ],
+    {
+      "id": "paid_error_diagnostic128k",
+      "response_body_bytes": 150145,
+      "content_bytes": 150000,
+      "configured_response_bytes": 400000,
+      "public_generate_exception": "ValueError",
+      "detail": "invalid response content byte diagnostic",
+      "requests": 1,
+      "reservation_usage_status": "known",
+      "charged_tokens": 92
+    }
+  ],
+  "source_sha256": {
+    "src/company_wiki/automation/narrative_model.py": "0078293176c67b6ac63245c5ecff7bf6d1c197d33f2cba63cbb38c1c5f7bcc49",
+    "src/company_wiki/automation/narrative_model_scoped.py": "b2f174f0c5c108e79120be6e56d566eefa144079263d063e9a679b2ca4134f7b",
+    "src/company_wiki/automation/narrative_summary_protocols.py": "ff88f8db4d5935f70462ec4268d15ba9495e77df57138714cbc62e54f1689a45",
+    "src/company_wiki/automation/narrative_model_runtime.py": "89c71ca89939322271fc0e7e4bb3e02c3a8e3b70d7de950ab35c0dc62abdff5b",
+    "src/company_wiki/automation/narrative_summarize.py": "cb68422bb0804836b4abc49971559071f82559ea07a27e1726cbd916dd03410b",
+    "src/company_wiki/automation/narrative_output_language.py": "91cc43343b2c191048136875973d0ad44e3b5b17c854991e237bab9489b671e4",
+    "src/company_wiki/automation/narrative_contracts.py": "a70704e4450118f1e4afbc1a63b2bf8dac3e3a8de071164f07b09061f39a0044",
+    "src/company_wiki/automation/narrative_batch_cli.py": "268c047d8c5d6b72716ecf6e77a74165c38afc268cd72b8b94590b3ea85b3d0d",
+    "src/company_wiki/automation/narrative_batch_request.py": "6f0a50bf78395cbe203895ae819cae7842d4600c65cd13804d116dec864e24a8",
+    "src/company_wiki/automation/narrative_paid_response.py": "ddae70c75780bec7e0eaee9ca7e5f5ca96eb928c649e806045e1c3fedf9f38d2",
+    "src/company_wiki/automation/narrative_model_caller.py": "35d4e471fb12d07f1c1c53a928146409d078593fc2583cadc59670445a5b7360",
+    "src/company_wiki/automation/narrative_worker_factory.py": "52365927ef03ea107426fd5bcfe5738c0812139a2132a661a3147a20c6a4cec6",
+    "src/company_wiki/source_catalog/cli.py": "db547958b8d1f60f95eef7f40ee2be5aa187ac4ac7e4a185ab5738732e038650",
+    "src/company_wiki/source_catalog/local_prepare_cli.py": "2a65e18133c2f3c57dd0129dbdf648f9ae9f1576e74d9a82b81a4feecc4665cc",
+    "src/company_wiki/source_catalog/local_inventory.py": "4310beb14a41f6fc8de3165e3e550e25550a2c8502a31475773072edc74fb60c",
+    "src/company_wiki/source_catalog/local_reconcile.py": "deef283e06665be6925d9be94e0c3e90c49fce35ff7df9ddfff0e63fb874f222",
+    "src/company_wiki/source_catalog/assertion_service.py": "d795953855d0197f40b4f288bbb5c7460407042289e86e6884e26ad4f43b3480",
+    "src/company_wiki/source_catalog/official_source_flow.py": "05fd9c9c87a887e0de9e9c3b14381c83c26f55bd709c64268cf79450017e56c5",
+    "src/company_wiki/source_catalog/narrative_native_ranges.py": "52c98582dce20157a64209c53c9f64c20774db30e8121228762c81da09033915",
+    "src/company_wiki/source_catalog/narrative_evidence.py": "60decd880f2c059fd7a2c2a3740143b8f36d604b0d464d6dc20b434363b81987",
+    "src/company_wiki/source_catalog/narrative_reading.py": "a7a426af6a1982640bb0ca142506bd282edff0c0192949e8407c2f87e857a8d2",
+    "src/company_wiki/automation/narrative_evidence_view.py": "8650825c5c1b9152ac787663af449db12cfcd1a68174d9195f2490d489090a4e",
+    "src/company_wiki/automation/narrative_transport_contracts.py": "2bc39a06fd46b378731434230fefcca40a1b94f2a186c4073f3736e6f2e6f76b",
+    "src/company_wiki/source_catalog/source_reader.py": "9261cb6798be5688c96096c1b3c4c3492a649696942c02371f4d000eacabaa7c"
+  },
+  "callers": {
+    "observe_document": [
+      "local_reconcile._discover_source_groups",
+      "local_reconcile._prepare_local_source",
+      "assertion_service.restore_document_facts(initial+CAS)",
+      "official_source_flow restoration"
+    ],
+    "verify_registered_original": [
+      "assertion_service.restore_document_facts"
+    ]
+  },
+  "probe_sources": {
+    "probe.py": {
+      "sha256": "60e1f42c12ab084952306aa9ec0ead866d2a8294b33918ea1ff483662f31e4c2",
+      "bytes": 6221,
+      "text": "from __future__ import annotations\nimport contextlib\nfrom dataclasses import replace, asdict\nimport hashlib\nimport io\nimport json\nfrom pathlib import Path\nimport sys\nfrom unittest.mock import patch\n\nROOT=Path('C:/Users/郑曾波/Projects/company-wiki')\nOWN=Path(__file__).resolve().parent\nsys.path[:0]=[str(ROOT/'src'),str(ROOT/'tests'),str(ROOT)]\nfrom unit import test_narrative_select_handler as select\nfrom unit import test_narrative_summarize_handler as summarize\nfrom unit.test_narrative_batch import _request\nfrom company_wiki.automation.narrative_batch_request import NarrativeBatchRequest\nfrom company_wiki.automation import narrative_batch_cli\nfrom company_wiki.automation.models import HandlerOutcome\nfrom company_wiki.automation.narrative_contracts import NarrativeSelectResult\nfrom company_wiki.source_catalog.narrative_document import NarrativeEvidencePackage\nfrom company_wiki.source_catalog.narrative_evidence import SummaryClaim,SourceSummaryDraft,validate_summary_draft\nfrom unit.test_narrative_reading_transport import reading_context\nfrom unit.test_scoped_source_admission import decode as scoped_decode\nfrom company_wiki.document_normalization import normalize_document\n\nresults=[]\nlines=[f'Company delivered {1001+i} pumps in 2026.' for i in range(21)]\ndata=select._pdf_bytes('\\n'.join(lines))\npayload=select._payload(data,title='Synthetic operating update',document_kind='annual_report',language='en',mime_type='application/pdf')\ndef selector(parsed,**kwargs):\n    spans=tuple(unit.to_evidence_span(topics=(),selection_reasons=('business_progress',)) for unit in parsed.units)\n    return NarrativeEvidencePackage(source_id=parsed.source_id,source_sha256=parsed.source_sha256,\n        document_kind='annual_report',status='selected',evidence_spans=spans,selection_limit=len(spans),\n        candidate_count=len(spans),dropped_financial_count=0,source_units=len(parsed.units),\n        omitted_candidate_count=0,coverage_complete=True)\nraw,_=select._run(payload,data,selector=selector)\nassert raw.outcome is HandlerOutcome.SUCCEEDED,raw.error\nselected=NarrativeSelectResult.from_dict(raw.result)\nsid=selected.evidence_spans[0].span_id\nlong_text=selected.evidence_spans[0].raw_text\nassert len(long_text)>280\ndef claims(texts):\n    return [dict(claim_id=f'claim-{i}',text=text,evidence_ids=[sid],claim_type='company_statement',modality='actual',needs_review=False)\n            for i,text in enumerate(texts)]\ndef typed_valid(rows):\n    draft=SourceSummaryDraft(selected.source_ref.source_id,selected.source_ref.content_sha256,'en',\n        tuple(SummaryClaim(**{**row,'evidence_ids':tuple(row['evidence_ids'])}) for row in rows))\n    validate_summary_draft(draft,source_id=selected.source_ref.source_id,\n        source_sha256=selected.source_ref.content_sha256,language='en',evidence_spans=selected.evidence_spans)\nfor label,texts in [('legacy_long_claim',[long_text]),('legacy21_claims',lines)]:\n    rows=claims(texts);typed_valid(rows)\n    model=summarize.ReplayModel(draft_overrides={'claims':rows})\n    outcome,_,_=summarize._run(selected,model=model)\n    assert outcome.outcome is HandlerOutcome.TERMINAL_FAILURE,outcome\n    results.append({'id':label,'typed_source_validator':'PASS','handler_outcome':outcome.outcome.value,\n        'error_code':outcome.error.code,'detail':outcome.error.detail,'claims':len(rows),\n        'max_text_chars':max(map(len,texts)),'response_json_bytes':len(json.dumps(rows).encode()),\n        'model_calls':len(model.calls),'effects':list(outcome.effects),'source_sha256':selected.source_ref.content_sha256})\nsource=replace(selected,reading_context=reading_context(selected))\nfor label,rows in [('scoped_per_task3',[{'text':text,'basis_parts':['p1'],'modality':'actual'} for text in lines[:3]]),\n                   ('scoped_long_claim',[{'text':long_text,'basis_parts':['p1'],'modality':'actual'}])]:\n    try:scoped_decode(source,{'t1':rows})\n    except Exception as error:results.append({'id':label,'error_type':type(error).__name__,'detail':str(error),\n        'claims':len(rows),'max_text_chars':max(len(r['text']) for r in rows)})\n    else:raise AssertionError('expected existing scoped quota refusal')\nrequest=_request().to_dict();wire=NarrativeBatchRequest.from_dict(request)\nfile=OWN/'batch-request.json';file.write_bytes(json.dumps(request).encode()+b' '*(270*1024))\ncalled=[]\nwith patch.object(narrative_batch_cli,'run_batch',side_effect=lambda *args,**kwargs:called.append(1) or {'status':'completed'}),contextlib.redirect_stdout(io.StringIO()) as stdout:\n    code=narrative_batch_cli.main(['--project-root',str(OWN),'--catalog-config',str(OWN/'not-read.yaml'),\n        '--automation-db',str(OWN/'not-created.db'),'--work-dir',str(OWN/'not-created'), '--request',str(file)])\nassert code==1 and called==[]\nresults.append({'id':'batch_cli256k','library_from_dict':'PASS','same_decoded_request':json.loads(file.read_bytes())==request,\n    'cli_exit':code,'cli_result':json.loads(stdout.getvalue()),'run_batch_calls':len(called),'bytes':file.stat().st_size})\n# Real normalization owner, not an invented structured_value.text field.\nbody=b'<html><body><p>file://public/manual.txt</p></body></html>'\ndigest=hashlib.sha256(body).hexdigest()\nnormalized=normalize_document(body,source_id='urn:company-wiki:source:sha256:'+digest,source_sha256=digest,mime_type='text/html')\nspan=normalized.units[0].to_evidence_span(topics=(),selection_reasons=('business_progress',))\nwire=selected.to_dict();wire['evidence_spans']=[span.to_dict()]\nwire['source_ref'].update(source_id=span.source_id,content_sha256=digest,byte_size=len(body),mime_type='text/html')\nwire['selection']['selected_count']=1\nwire['source_metadata']['language']=normalized.units[0].language\ntry:NarrativeSelectResult.from_dict(wire)\nexcept Exception as error:results.append({'id':'real_normalized_path','error_type':type(error).__name__,'detail':str(error),'actual_metadata_keys':list(span.structured_value)})\nelse:results.append({'id':'real_normalized_path','result':'PASS','raw_text':span.raw_text,'actual_metadata_keys':list(span.structured_value)})\n(OWN/'observations.json').write_text(json.dumps(results,ensure_ascii=False,indent=2),encoding='utf-8')\nprint(json.dumps(results,ensure_ascii=False,indent=2))\n"
+    },
+    "probe2.py": {
+      "sha256": "f67b7725d172f257152ef485556c19ca369789cbda5c21fdeaa33991b3e53b81",
+      "bytes": 3851,
+      "text": "from __future__ import annotations\nfrom dataclasses import asdict\nimport contextlib,hashlib,io,json,sys\nfrom pathlib import Path\nROOT=Path('C:/Users/郑曾波/Projects/company-wiki');OWN=Path(__file__).resolve().parent\nsys.path[:0]=[str(ROOT/'src'),str(ROOT/'tests'),str(ROOT)]\nfrom unit.test_source_facts import lake,_apply,_evidence,_assertions\nfrom company_wiki.source_catalog.cli import main\nfrom company_wiki.source_catalog.local_inventory import observe_document\nfrom company_wiki.source_catalog.store import retire_document,restore_document\nfrom company_wiki.document_normalization import normalize_document\nfrom company_wiki.automation.narrative_contracts import NarrativeSelectResult\nfrom support.narrative_model_request_fixture import selection\nimport yaml\nout=[]\nroot=OWN/'source-facts';root.mkdir();g=lake.__wrapped__(root);env=next(g)\ntry:\n catalog,reader,ref,original=env\n facts={'security_id':'002643'};evidence=_evidence(facts);evidence['security_id']['detail']='合成来源注记。'*20000\n result=_apply(env,facts,evidence)\n assert result['status']=='recorded'\n request=root/'request.json';request.write_text(json.dumps({'source_ref':asdict(ref),'facts':facts,'evidence':evidence},ensure_ascii=False),encoding='utf-8')\n cfg=root/'config.yaml';cfg.write_text(yaml.safe_dump({'schema_version':'1.0','catalog_dir':str(catalog.config.catalog_dir),\n     'roots':[{'root_id':'company_raw','kind':'company_raw','path':str(root/'companies')}]}),encoding='utf-8')\n before=len(_assertions(catalog))\n with contextlib.redirect_stdout(io.StringIO()) as output:\n  code=main(['--config',str(cfg),'source-facts','--request',str(request)])\n out.append({'id':'source_facts_cli128k','library_result':result,'request_bytes':request.stat().st_size,\n  'cli_exit':code,'cli_stdout':output.getvalue(),'assertions_before_after':[before,len(_assertions(catalog))],\n  'original_sha256':hashlib.sha256(original.read_bytes()).hexdigest()})\n for index in range(65):\n  retire_document(catalog.store,document_id=ref.document_id,reason='synthetic lifecycle cycle',created_by='probe')\n  restore_document(catalog.store,document_id=ref.document_id,reason='same original still verified',created_by='probe')\n opened=reader.open_version(ref);assert opened.data==original.read_bytes()\n try:observe_document(catalog,ref.document_id)\n except Exception as error:out.append({'id':'retirement_history64','source_read':'PASS','active':True,\n      'history_rows':65,'error_type':type(error).__name__,'reason':getattr(error,'reason',str(error)),\n      'source_sha256':ref.content_sha256})\n else:raise AssertionError('expected history cap to be active')\nfinally:g.close()\nbody=b'<html><body><p>file://public/manual.txt</p></body></html>';digest=hashlib.sha256(body).hexdigest()\ndoc=normalize_document(body,source_id='urn:company-wiki:source:sha256:'+digest,source_sha256=digest,mime_type='text/html')\nunit=doc.units[0];span=unit.to_evidence_span(topics=(),selection_reasons=('business_progress',))\nwire=selection(1).to_dict();wire['evidence_spans']=[span.to_dict()]\nwire['source_ref'].update(source_id=span.source_id,content_sha256=digest,byte_size=len(body),mime_type='text/html')\nwire['source_metadata']['language']='en';wire['parser']={'name':unit.parser_name,'version':unit.parser_version}\nwire['selection'].update(selected_count=1,pages_total=0,pages_read=0,lines_total=1)\ntry:NarrativeSelectResult.from_dict(wire)\nexcept Exception as error:out.append({'id':'real_normalizer_path_recheck','error_type':type(error).__name__,'detail':str(error),'metadata_keys':list(span.structured_value)})\nelse:out.append({'id':'real_normalizer_path_recheck','result':'PASS','text':span.raw_text,'metadata_keys':list(span.structured_value)})\n(OWN/'observations2.json').write_text(json.dumps(out,ensure_ascii=False,indent=2),encoding='utf-8')\nprint(json.dumps(out,ensure_ascii=False,indent=2))\n"
+    },
+    "probe3.py": {
+      "sha256": "8c4f367551e6719012a306c0a26436cb2f3460229dba9518765d4bd1d0282e92",
+      "bytes": 1865,
+      "text": "import json,sys\nfrom pathlib import Path\nROOT=Path('C:/Users/郑曾波/Projects/company-wiki');OWN=Path(__file__).resolve().parent\nsys.path.insert(0,str(ROOT/'src'))\nfrom company_wiki.automation.narrative_http_model import NarrativeHTTPModel\nfrom company_wiki.automation.narrative_paid_response import PaidResponseArtifacts\nfrom company_wiki.source_catalog.narrative_native_ranges import native_range_limits,build_native_page_view\nclass Objects:\n def put(self,*args):raise AssertionError('must stop before storage')\n def read(self,*args,**kwargs):raise AssertionError('must not read')\nmodel=NarrativeHTTPModel(endpoint='https://example.invalid/v1/chat/completions',model_id='configured-'+('m'*257),api_key_env='UNREAD_SYNTHETIC_KEY',max_output_tokens=10000,max_response_bytes=1000000)\ntry:PaidResponseArtifacts(Objects(),max_response_bytes=model.max_response_bytes).validate_identity(request_sha256='a'*64,model_id=model.model_id,adapter_id='configured',prompt_version='prompt/1')\nexcept Exception as error:identity={'id':'paid_identity256','http_configuration':'PASS','model_chars':len(model.model_id),'paid_identity':'REFUSED','error_type':type(error).__name__,'detail':str(error),'model_calls':0}\nelse:raise AssertionError('expected identity quota')\ntext='x'*200001\nview=build_native_page_view([(0,(0.0,0.0,100.0,100.0),text)],max_chars=300000)\nout=[identity,{'id':'native_range_optional_cap','requested_limits':{'max_page_chars':300000},'effective':native_range_limits({'max_page_chars':300000}),'view_is_none':view is None,'original_text_chars':len(text),'original_untouched':text=='x'*200001,'scope':'pure transient view; _candidates keeps parsed.units when no carrier; not a proven normal-result refusal'}]\n(OWN/'observations3.json').write_text(json.dumps(out,ensure_ascii=False,indent=2),encoding='utf-8');print(json.dumps(out,ensure_ascii=False,indent=2))\n"
+    },
+    "probe4.py": {
+      "sha256": "c99f9c4990c48e1721076bdf40312e00e539ccc4e33336cf4c4e51aa7be95402",
+      "bytes": 2138,
+      "text": "import hashlib,json,sys\nfrom pathlib import Path\nfrom types import SimpleNamespace\nimport pytest\nROOT=Path('C:/Users/郑曾波/Projects/company-wiki');OWN=Path(__file__).resolve().parent\nsys.path[:0]=[str(ROOT/'src'),str(ROOT/'tests')]\nfrom unit.du11_paid_response import test_paid_response as h\nfrom company_wiki.automation.narrative_http_model import NarrativeHTTPModel\nbody=json.loads(h.BODY);body['choices'][0]['message']['content']='x'*150000;body['choices'][0]['finish_reason']='length'\nbody=json.dumps(body).encode();state=SimpleNamespace(calls=0)\nclass Response:\n status=200\n def __init__(self):self.offset=0\n def getheader(self,name):return str(len(body)) if name=='Content-Length' else None\n def isclosed(self):return self.offset>=len(body)\n def read1(self,n):\n  value=body[self.offset:self.offset+n];self.offset+=len(value);return value\nclass Connection:\n sock=None\n def __init__(self,*args,**kwargs):pass\n def request(self,*args,**kwargs):state.calls+=1\n def getresponse(self):return Response()\n def close(self):pass\nmp=pytest.MonkeyPatch()\ntry:\n mp.setattr('http.client.HTTPConnection',Connection);mp.setenv('AUDIT_SYNTHETIC_KEY','only-synthetic')\n model=NarrativeHTTPModel(endpoint='http://127.0.0.1/v1/chat/completions',allow_local_http=True,model_id='model',api_key_env='AUDIT_SYNTHETIC_KEY',max_output_tokens=10000,max_response_bytes=400000)\n root=OWN/'error-chain';root.mkdir();env=h.seed_owned(root,SimpleNamespace(model=model))\n try:h.caller(env).generate(env.context(),h.REQUEST)\n except Exception as error:out={'id':'paid_error_diagnostic128k','response_body_bytes':len(body),'content_bytes':150000,'configured_response_bytes':400000,'public_generate_exception':type(error).__name__,'detail':str(error),'requests':state.calls,\n  'reservation_usage_status':env.runs.get_reservation('run','paid').usage_status,'charged_tokens':env.runs.get_reservation('run','paid').charged_tokens}\n else:raise AssertionError('expected finish_reason length error')\n (OWN/'observations4.json').write_text(json.dumps(out,ensure_ascii=False,indent=2),encoding='utf-8');print(json.dumps(out,ensure_ascii=False,indent=2))\nfinally:mp.undo()\n"
+    }
+  },
+  "logs": {
+    "probe-import-error.log": {
+      "sha256": "af0c24cfce565a4bdd7053a1dfc13a5e5a9518eb887052c548795b0446b47bee",
+      "bytes": 438,
+      "text": "Traceback (most recent call last):\r\n  File \"C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\g7ca\\probe.py\", line 23, in <module>\r\n    from company_wiki.automation.narrative_model import NarrativeModelResponse,build_model_request,decode_model_draft\r\nImportError: cannot import name 'build_model_request' from 'company_wiki.automation.narrative_model' (C:\\Users\\郑曾波\\Projects\\company-wiki\\src\\company_wiki\\automation\\narrative_model.py)\r\n"
+    },
+    "probe.log": {
+      "sha256": "6e5c95db6f01da105e03e5351bca213057817d4734f10193049fb2028f8fb15d",
+      "bytes": 2094,
+      "text": "[\r\n  {\r\n    \"id\": \"legacy_long_claim\",\r\n    \"typed_source_validator\": \"PASS\",\r\n    \"handler_outcome\": \"terminal_failure\",\r\n    \"error_code\": \"SUMMARY_INVALID\",\r\n    \"detail\": \"model draft violates the summary contract (rule=CLAIM_TEXT)\",\r\n    \"claims\": 1,\r\n    \"max_text_chars\": 797,\r\n    \"response_json_bytes\": 1058,\r\n    \"model_calls\": 1,\r\n    \"effects\": [],\r\n    \"source_sha256\": \"04906f207d931daaf08b970c2b2e745959b84c3b3db6ca9c963cf03574d74099\"\r\n  },\r\n  {\r\n    \"id\": \"legacy21_claims\",\r\n    \"typed_source_validator\": \"PASS\",\r\n    \"handler_outcome\": \"terminal_failure\",\r\n    \"error_code\": \"SUMMARY_INVALID\",\r\n    \"detail\": \"model draft violates the summary contract (rule=CLAIMS_LIMIT)\",\r\n    \"claims\": 21,\r\n    \"max_text_chars\": 37,\r\n    \"response_json_bytes\": 5849,\r\n    \"model_calls\": 1,\r\n    \"effects\": [],\r\n    \"source_sha256\": \"04906f207d931daaf08b970c2b2e745959b84c3b3db6ca9c963cf03574d74099\"\r\n  },\r\n  {\r\n    \"id\": \"scoped_per_task3\",\r\n    \"error_type\": \"NarrativeContractError\",\r\n    \"detail\": \"scoped task clauses exceed per-task cap\",\r\n    \"claims\": 3,\r\n    \"max_text_chars\": 37\r\n  },\r\n  {\r\n    \"id\": \"scoped_long_claim\",\r\n    \"error_type\": \"NarrativeContractError\",\r\n    \"detail\": \"summary claim text exceeds 280 characters\",\r\n    \"claims\": 1,\r\n    \"max_text_chars\": 797\r\n  },\r\n  {\r\n    \"id\": \"batch_cli256k\",\r\n    \"library_from_dict\": \"PASS\",\r\n    \"same_decoded_request\": true,\r\n    \"cli_exit\": 1,\r\n    \"cli_result\": {\r\n      \"error\": \"NARRATIVE_BATCH_INVALID_REQUEST\",\r\n      \"schema_version\": \"narrative-batch-result/1\",\r\n      \"status\": \"failed\"\r\n    },\r\n    \"run_batch_calls\": 0,\r\n    \"bytes\": 277429\r\n  },\r\n  {\r\n    \"id\": \"real_normalized_path\",\r\n    \"error_type\": \"NarrativeContractError\",\r\n    \"detail\": \"source_metadata.language is invalid\",\r\n    \"actual_metadata_keys\": [\r\n      \"normalization_schema\",\r\n      \"format\",\r\n      \"source_sha256\",\r\n      \"source_locator\",\r\n      \"transform\",\r\n      \"dom_path\",\r\n      \"backend\",\r\n      \"language\",\r\n      \"selection_reasons\",\r\n      \"source_role\",\r\n      \"text_sha256\",\r\n      \"topics\",\r\n      \"unit_kind\"\r\n    ]\r\n  }\r\n]\r\n"
+    },
+    "probe2.log": {
+      "sha256": "5af0f71e926425382835b86c34b2ce7d71ac124295b6806ec03ef75181f1d5b9",
+      "bytes": 1478,
+      "text": "{\"error\": \"source facts request exceeds byte limit\", \"error_type\": \"fatal\", \"retryable\": false, \"status\": \"failed\"}\r\n[\r\n  {\r\n    \"id\": \"source_facts_cli128k\",\r\n    \"library_result\": {\r\n      \"status\": \"recorded\",\r\n      \"assertion_id\": \"sa-ff7ae60634704cfdb51be60d91d5c6ce\",\r\n      \"document_id\": \"urn:company-wiki:document:sha256:713f099f93ce176669d093721c5d2b0d74274e53026f38edcb4da90c04c2059e\",\r\n      \"source_id\": \"urn:company-wiki:source:sha256:713f099f93ce176669d093721c5d2b0d74274e53026f38edcb4da90c04c2059e\"\r\n    },\r\n    \"request_bytes\": 420537,\r\n    \"cli_exit\": 1,\r\n    \"cli_stdout\": \"\",\r\n    \"assertions_before_after\": [\r\n      1,\r\n      1\r\n    ],\r\n    \"original_sha256\": \"713f099f93ce176669d093721c5d2b0d74274e53026f38edcb4da90c04c2059e\"\r\n  },\r\n  {\r\n    \"id\": \"retirement_history64\",\r\n    \"source_read\": \"PASS\",\r\n    \"active\": true,\r\n    \"history_rows\": 65,\r\n    \"error_type\": \"SourceReadError\",\r\n    \"reason\": \"retirement_history_limit\",\r\n    \"source_sha256\": \"713f099f93ce176669d093721c5d2b0d74274e53026f38edcb4da90c04c2059e\"\r\n  },\r\n  {\r\n    \"id\": \"real_normalizer_path_recheck\",\r\n    \"result\": \"PASS\",\r\n    \"text\": \"file://public/manual.txt\",\r\n    \"metadata_keys\": [\r\n      \"normalization_schema\",\r\n      \"format\",\r\n      \"source_sha256\",\r\n      \"source_locator\",\r\n      \"transform\",\r\n      \"dom_path\",\r\n      \"backend\",\r\n      \"language\",\r\n      \"selection_reasons\",\r\n      \"source_role\",\r\n      \"text_sha256\",\r\n      \"topics\",\r\n      \"unit_kind\"\r\n    ]\r\n  }\r\n]\r\n"
+    },
+    "probe3.log": {
+      "sha256": "f890b2edf6a23fcc83a24dcaedc4dc3611dfb21791163217aabc1e00850b9946",
+      "bytes": 683,
+      "text": "[\r\n  {\r\n    \"id\": \"paid_identity256\",\r\n    \"http_configuration\": \"PASS\",\r\n    \"model_chars\": 268,\r\n    \"paid_identity\": \"REFUSED\",\r\n    \"error_type\": \"PaidResponseError\",\r\n    \"detail\": \"paid response identity is invalid\",\r\n    \"model_calls\": 0\r\n  },\r\n  {\r\n    \"id\": \"native_range_optional_cap\",\r\n    \"requested_limits\": {\r\n      \"max_page_chars\": 300000\r\n    },\r\n    \"effective\": {\r\n      \"max_total_chars\": 2000000,\r\n      \"max_page_chars\": 200000\r\n    },\r\n    \"view_is_none\": true,\r\n    \"original_text_chars\": 200001,\r\n    \"original_untouched\": true,\r\n    \"scope\": \"pure transient view; _candidates keeps parsed.units when no carrier; not a proven normal-result refusal\"\r\n  }\r\n]\r\n"
+    },
+    "probe4.log": {
+      "sha256": "50f9905ce1fced2f51c40728ab6b6c56597c551791dfbb2bfb0b2375421a3a8e",
+      "bytes": 331,
+      "text": "{\r\n  \"id\": \"paid_error_diagnostic128k\",\r\n  \"response_body_bytes\": 150145,\r\n  \"content_bytes\": 150000,\r\n  \"configured_response_bytes\": 400000,\r\n  \"public_generate_exception\": \"ValueError\",\r\n  \"detail\": \"invalid response content byte diagnostic\",\r\n  \"requests\": 1,\r\n  \"reservation_usage_status\": \"known\",\r\n  \"charged_tokens\": 92\r\n}\r\n"
+    }
+  },
+  "method": "CodeGraph used forcurrent class/validator/callers; incomplete caller graph returnednone despite actualimports, so exact known-current allowlistedfiles read. No historymirror source basis. One unused build_model_request import was wrong; firstprobe0execution ImportError retained, removed unusedimport and repeatedoriginalprobe once. HTML initialprobe had wrongunknown metadata language; correctedlang reproducedPASS, not pathbug.",
+  "paid_calls": 0,
+  "downloads": 0,
+  "production_or_original_reads": false,
+  "keys_read": false,
+  "source_or_tests_or_git_or_pwf_modified": false,
+  "temporary_root": "C:\\Users\\郑曾波\\Projects\\company-wiki\\tmp\\g7ca",
+  "cleanup": "Owned directory initially absent. Retained for ROOTauthorized same-owner TDD now; rawlogs/probes already persisted. Final repair report must measure exact cleanup before handoff.",
+  "implementation_authorization": "ROOT explicitly assigned summary/protocols/CLIs/local_inventory and all livebudgetcallers/PaidResponsePin to this owner after this read-only evidence. Implementation is separate cwp-repair.md/json and requires independent ROOT review, not self-signoff."
+}

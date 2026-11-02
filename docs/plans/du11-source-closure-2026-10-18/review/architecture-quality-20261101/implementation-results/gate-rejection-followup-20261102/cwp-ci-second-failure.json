@@ -1,0 +1,195 @@
+{
+  "source_head": "77d8c83fbfe226e12db8c03ab196af366abfb661",
+  "run_id": 41498876032,
+  "jobs": [
+    {
+      "id": 125460889144,
+      "name": "Fast checks (Python 3.12)",
+      "conclusion": "failure",
+      "steps": [
+        {
+          "name": "Set up job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 1,
+          "started_at": "2026-11-02T18:15:49Z",
+          "completed_at": "2026-11-02T18:15:50Z"
+        },
+        {
+          "name": "Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 2,
+          "started_at": "2026-11-02T18:15:50Z",
+          "completed_at": "2026-11-02T18:15:55Z"
+        },
+        {
+          "name": "Set up Python 3.12",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 3,
+          "started_at": "2026-11-02T18:15:55Z",
+          "completed_at": "2026-11-02T18:16:00Z"
+        },
+        {
+          "name": "Install dependencies",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 4,
+          "started_at": "2026-11-02T18:16:00Z",
+          "completed_at": "2026-11-02T18:16:30Z"
+        },
+        {
+          "name": "Ruff lint",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 5,
+          "started_at": "2026-11-02T18:16:30Z",
+          "completed_at": "2026-11-02T18:16:30Z"
+        },
+        {
+          "name": "Strict type check on src",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 6,
+          "started_at": "2026-11-02T18:16:30Z",
+          "completed_at": "2026-11-02T18:16:43Z"
+        },
+        {
+          "name": "Compileall and config doctor",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 7,
+          "started_at": "2026-11-02T18:16:43Z",
+          "completed_at": "2026-11-02T18:16:47Z"
+        },
+        {
+          "name": "Unit tests",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 8,
+          "started_at": "2026-11-02T18:16:47Z",
+          "completed_at": "2026-11-02T18:22:41Z"
+        },
+        {
+          "name": "Unit test failure summary",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 9,
+          "started_at": "2026-11-02T18:22:41Z",
+          "completed_at": "2026-11-02T18:22:41Z"
+        },
+        {
+          "name": "Focused contract tests",
+          "status": "completed",
+          "conclusion": "failure",
+          "number": 10,
+          "started_at": "2026-11-02T18:22:41Z",
+          "completed_at": "2026-11-02T18:22:51Z"
+        },
+        {
+          "name": "Focused contract failure summary",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 11,
+          "started_at": "2026-11-02T18:22:51Z",
+          "completed_at": "2026-11-02T18:22:51Z"
+        },
+        {
+          "name": "CLI smoke test",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 12,
+          "started_at": "2026-11-02T18:22:51Z",
+          "completed_at": "2026-11-02T18:22:51Z"
+        },
+        {
+          "name": "Scan for hardcoded secrets",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 13,
+          "started_at": "2026-11-02T18:22:51Z",
+          "completed_at": "2026-11-02T18:22:51Z"
+        },
+        {
+          "name": "Post Set up Python 3.12",
+          "status": "completed",
+          "conclusion": "skipped",
+          "number": 25,
+          "started_at": "2026-11-02T18:22:51Z",
+          "completed_at": "2026-11-02T18:22:51Z"
+        },
+        {
+          "name": "Post Run actions/checkout@v4",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 26,
+          "started_at": "2026-11-02T18:22:51Z",
+          "completed_at": "2026-11-02T18:22:52Z"
+        },
+        {
+          "name": "Complete job",
+          "status": "completed",
+          "conclusion": "success",
+          "number": 27,
+          "started_at": "2026-11-02T18:22:52Z",
+          "completed_at": "2026-11-02T18:22:52Z"
+        }
+      ]
+    }
+  ],
+  "annotations": {
+    "125460889144": [
+      {
+        "path": ".github",
+        "blob_href": "https://github.com/zhengcb81/company-wiki/blob/77d8c83fbfe226e12db8c03ab196af366abfb661/.github",
+        "start_line": 2,
+        "start_column": null,
+        "end_line": 2,
+        "end_column": null,
+        "annotation_level": "warning",
+        "title": "",
+        "message": "Node.js 20 is deprecated. The following actions target Node.js 20 but are being forced to run on Node.js 24: actions/checkout@v4, actions/setup-python@v5. For more information see: https://github.blog/changelog/2025-09-19-deprecation-of-node-20-on-github-actions-runners/",
+        "raw_details": ""
+      },
+      {
+        "path": ".github",
+        "blob_href": "https://github.com/zhengcb81/company-wiki/blob/77d8c83fbfe226e12db8c03ab196af366abfb661/.github",
+        "start_line": 15,
+        "start_column": null,
+        "end_line": 15,
+        "end_column": null,
+        "annotation_level": "failure",
+        "title": "",
+        "message": "tests.contract.test_summary_group_coverage::test_prompt_twenty_claim_and_280_character_limits_are_real_output_contracts [Failed]\nFailure groups (1 failed cases):\ntests.contract.test_summary_group_coverage::test_prompt_twenty_claim_and_280_character_limits_are_real_output_contracts [Failed] x1",
+        "raw_details": ""
+      },
+      {
+        "path": ".github",
+        "blob_href": "https://github.com/zhengcb81/company-wiki/blob/77d8c83fbfe226e12db8c03ab196af366abfb661/.github",
+        "start_line": 66,
+        "start_column": null,
+        "end_line": 66,
+        "end_column": null,
+        "annotation_level": "failure",
+        "title": "",
+        "message": "Process completed with exit code 1.",
+        "raw_details": ""
+      },
+      {
+        "path": ".github",
+        "blob_href": "https://github.com/zhengcb81/company-wiki/blob/77d8c83fbfe226e12db8c03ab196af366abfb661/.github",
+        "start_line": 1,
+        "start_column": null,
+        "end_line": 1,
+        "end_column": null,
+        "annotation_level": "notice",
+        "title": "",
+        "message": "\"The ubuntu-latest label will migrate to Ubuntu 26 beginning October 19, 2026. For more information, see https://github.com/actions/runner-images/issues/14748\"",
+        "raw_details": ""
+      }
+    ]
+  },
+  "status": "HISTORICAL_FAILURE_PRESERVED_ROOT_CAUSE_INVESTIGATION",
+  "response": "Only implicated nodes/contracts reproduced; no local full-Unit rerun."
+}

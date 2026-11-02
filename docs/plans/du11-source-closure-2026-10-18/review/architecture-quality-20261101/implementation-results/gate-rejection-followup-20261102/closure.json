@@ -1,0 +1,112 @@
+{
+  "status": "ENGINEERING_COMPLETE_EXACT_CI_GREEN_REAL_C_OPEN",
+  "observed_at_utc": "2026-11-02T18:55:12.876910+00:00",
+  "families": [
+    [
+      "CWP output",
+      "20/40条、每task2/6条、280字、语言观察取样长度等额外许可",
+      "完整合法内容保留；生成目标仅建议，真实token/HTTP/引用/主体/限定校验仍负责",
+      "cwp-repair.json"
+    ],
+    [
+      "CWP CLI/storage",
+      "本地输入128/256KiB、retirement64/location256、pin标签长度及content_bytes诊断标量帽",
+      "API/CLI同owner；历史查询按真实work账户分页，错误诊断不再遮住真实truncated/known usage",
+      "cwp-independent.json"
+    ],
+    [
+      "Tools",
+      "日志/事件累计大小与观察文件I/O、mtime-only比较、freeze/prior-use执行许可",
+      "native结果与可选观察分离；内容SHA+bytes；开发样本可跑但不能冒clean holdout",
+      "tools-independent-r3.json"
+    ],
+    [
+      "StockWiki",
+      "256KiB/16KiB/1.31MiB与groups512/views2等表示帽、可选review/trace许可和字节canonical性",
+      "实际预算可配置；完整来源/不确定性保留，不产生研究签收",
+      "stockwiki-independent.json"
+    ],
+    [
+      "RF/invest",
+      "公式500字符和指数10上限",
+      "迭代算术；可选累计工作账户；真实overflow/非数/未知变量仍拒",
+      "math-independent-r2.json"
+    ],
+    [
+      "ET",
+      "16/10/2/24MiB和60s对显式预算的二次顶帽；坏非权威sidecar拦原文",
+      "同一真实预算贯穿API/CLI/worker；健康TXT legacy复用，真实SHA/身份/期次冲突仍拒",
+      "et-independent.json"
+    ],
+    [
+      "FF",
+      "ET body10MiB/time60和编码pipe32MiB、已知原文32MiB/receipt64KiB钳制",
+      "按请求实际quota/原件精确size分配，源SHA/实际超额/父deadline/回收不放宽",
+      "ff-independent-r3.json"
+    ]
+  ],
+  "retained": [
+    {
+      "id": "source-truth",
+      "reason": "原文字节SHA、公司/期次/as-of和真实引用检查保护错源错期，不是人工许可。现有主体/限定反控保留；新发现SEM-QUAL-01条件覆盖缺口仍OPEN，不能说语义验证完备。公开接收端校验实收字节，不能信任进程外自报verified。"
+    },
+    {
+      "id": "numeric-truth",
+      "reason": "币种、单位、finite、公式/收入重算保留；合法长式和长期幂不再按长度或指数被拒。"
+    },
+    {
+      "id": "real-resource",
+      "reason": "用户配置/请求的累计费用token/实读字节/时间/空间及明确工作账户保留；不会再用任意序列化大小或不可提高的常量充当第二许可。"
+    },
+    {
+      "id": "recovery",
+      "reason": "lease/CAS/幂等/未知费用/单POST保护防止覆盖原文、降账和重复付费。"
+    },
+    {
+      "id": "protocol",
+      "reason": "确实冲突的协议记录、坏JSON/重复key/NaN不能被另一条好回执洗白；普通日志和可选旁注不据此被要求人审。"
+    },
+    {
+      "id": "experiment-honesty",
+      "reason": "未冻结/开发/未知prior-use可执行，但不能计为未见holdout/clean停止样本；显式要求某producer版本时仍须实测版本一致。"
+    },
+    {
+      "id": "unsupported-or-unproven",
+      "reason": "真实不支持的执行协议、真正语言/语义不确定保留unknown；原始units仍可用的几何视图内存fallback不再被当来源拒绝。"
+    }
+  ],
+  "final_reviews": {
+    "cwp-independent.json": "def9f20eee332d6490764d55b6dff105a4accff353e31224cc3e00e06f501768",
+    "cwp-ci-independent.json": "ae35b2c81074c4e5edde31ea0e5566ca42f297b84d8615492c952161c6feeeb5",
+    "cwp-contract-independent.json": "78d8c7927ad0470bf460b62df219beee9d32e723cb36f406f961fda414315c1b",
+    "tools-independent-r3.json": "6de232cb7c6fd11a3dcf3e4c680a0105636e0e654ab25366919e48b03f0000ed",
+    "stockwiki-independent.json": "e87d365513e1dda8c695caf2119832692b83b73e0162f95a6a884ee6d9ad1466",
+    "math-independent-r2.json": "387407d7a31f4fa5b4bdacd9a154f8c62222fc31d2c02f779059dceaac10f83a",
+    "et-independent.json": "a520f2fdda6dac27f7330ebc50414b21020b89080a1050400b99f401c0ba41f7",
+    "ff-independent-r3.json": "8f13d0d6df84e7341be7b8df7c9ecf1dd2c8400d50a1da1c064b7399ab7cd53e"
+  },
+  "publication": "publication.json",
+  "historical_failures": "tools-history-audit.md",
+  "next": "T4-source-parent then real new summary/cache/RF adoption; no real-company acceptance in this gate node.",
+  "limits": {
+    "paid_calls": 0,
+    "downloads": 0,
+    "originals_modified": 0,
+    "production_config_modified": 0
+  },
+  "not_claimed": "All files/all providers/all possible inputs proven; full company loop or original41 scope being universal absence proof.",
+  "open_semantic_issue": {
+    "id": "SEM-QUAL-01",
+    "priority": "P2_BEFORE_REAL_SUMMARY",
+    "aliases": [
+      "T4-R4-CONDITION-SCOPE-LOSS"
+    ],
+    "relationship": "Additional public counterexample for the existing T4/R4 qualification/attribution responsibility, not a new gate or separate goal.",
+    "source": "公司计划在项目建成后为工厂提供产能保障。该安排仍须客户完成验收后方可投产。",
+    "bad_claim": "公司已为工厂提供产能保障。",
+    "observed": "Legacy and current v7 decode accept draft/needs_review=false, with empty prose/atomic diagnostics despite p1/p2 citations.",
+    "evidence": "cwp-contract-followup.json",
+    "status": "OPEN_REAL_SEMANTIC_DEFECT_NOT_A_GATE",
+    "next_owner": "Existing T4/R4 source/qualification owner; no company-specific keyword patch and no raised quota."
+  }
+}
