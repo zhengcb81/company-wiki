@@ -24,10 +24,21 @@ def _scalar(value: Any) -> None:
 
 def walk_json(value: Any) -> Iterator[Any]:
     """Yield each node; explicitly detect ancestor cycles without a depth cap."""
+    for _context, current in walk_json_context(value):
+        yield current
+
+
+def walk_json_context(value: Any, *, context: Any = None,
+                      child_context: Callable[[Any, str | int], Any] | None = None) -> Iterator[tuple[Any, Any]]:
+    """Carry an owner's finite field state using the same JSON/cycle checks.
+
+    Context is per edge, never inferred from string values or object identity.
+    No full ancestor paths are copied, so traversal remains linear in nodes.
+    """
     active: set[int] = set()
-    pending: list[tuple[bool, Any]] = [(False, value)]
+    pending: list[tuple[bool, Any, Any]] = [(False, value, context)]
     while pending:
-        leaving, current = pending.pop()
+        leaving, current, state = pending.pop()
         if leaving:
             active.remove(id(current))
             continue
@@ -35,16 +46,18 @@ def walk_json(value: Any) -> Iterator[Any]:
             if id(current) in active:
                 raise ValueError("JSON contains a circular reference")
             active.add(id(current))
-            pending.append((True, current))
+            pending.append((True, current, state))
             if isinstance(current, Mapping):
                 if any(not isinstance(key, str) for key in current):
                     raise TypeError("JSON object keys must be strings")
-                pending.extend((False, child) for child in reversed(tuple(current.values())))
+                entries = tuple(current.items())
             else:
-                pending.extend((False, child) for child in reversed(current))
+                entries = tuple(enumerate(current))
+            pending.extend((False, child, child_context(state, key) if child_context else state)
+                           for key, child in reversed(entries))
         else:
             _scalar(current)
-        yield current
+        yield state, current
 
 
 def copy_json(value: Any, *, freeze: bool = False,

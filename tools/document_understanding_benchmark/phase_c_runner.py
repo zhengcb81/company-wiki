@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import argparse
+import codecs
 from contextlib import closing
 from dataclasses import asdict
 from datetime import UTC, datetime
@@ -913,7 +914,6 @@ def successful_model_observation(receipt, native, events, materials: Path, run_i
     """
     from collections import Counter
     from company_wiki.automation.models import canonical_json_hash
-    from company_wiki.automation.narrative_model import MODEL_RESPONSE_MAX_BYTES
     from company_wiki.automation.narrative_summary_execution import extract_summary_execution
     from company_wiki.automation.narrative_model_extractive import EXTRACTIVE_MODEL_PROJECTION_VERSION
     from company_wiki.automation.narrative_summary_assessment import ASSESSMENT_SCHEMA
@@ -955,20 +955,32 @@ def successful_model_observation(receipt, native, events, materials: Path, run_i
         path = materials / filename
         if path.parent.resolve() != materials.resolve():
             raise ValueError("PHASE_C_CAPTURE_PATH_INVALID")
+        digest = hashlib.sha256()
+        size = 0
+        decoder = codecs.getincrementaldecoder("utf-8")()
         try:
             with gzip.open(path, "rb") as stream:
-                raw = stream.read(MODEL_RESPONSE_MAX_BYTES + 1)
+                # Buffer size bounds memory, never whether a paid final is
+                # observable. Actual execution/transport limits belong to the
+                # configured source and model owners.
+                for part in iter(lambda: stream.read(65536), b""):
+                    digest.update(part)
+                    size += len(part)
+                    decoder.decode(part, final=False)
+                decoder.decode(b"", final=True)
+        except UnicodeError as exc:
+            raise ValueError("PHASE_C_CAPTURE_UTF8_INVALID") from exc
         except (OSError, EOFError) as exc:
             raise ValueError("PHASE_C_CAPTURE_UNAVAILABLE") from exc
-        sha = hashlib.sha256(raw).hexdigest()
+        sha = digest.hexdigest()
         observations = [row for row in events if row.get("event") == "model_final_observed"
                         and row.get("run_id") == run_id and row.get("attempt_id") == record["attempt_id"]]
-        if (len(raw) > MODEL_RESPONSE_MAX_BYTES or sha != expected or not observations
-                or any(row.get("final_sha256") != sha or row.get("final_bytes") != len(raw)
+        if (sha != expected or not observations
+                or any(row.get("final_sha256") != sha or row.get("final_bytes") != size
                        for row in observations)):
             raise ValueError("PHASE_C_CAPTURE_IDENTITY_DIFFERS")
         captures.append({"attempt_id": record["attempt_id"], "status": "CAPTURED_AND_NATIVE_HASH_MATCHED",
-                         "sha256": sha, "bytes": len(raw), "usage_status": record["usage_status"]})
+                          "sha256": sha, "bytes": size, "usage_status": record["usage_status"]})
     result = {"source_card_execution": audit, "paid_response_capture": captures}
     if assessment is not None:
         # This is program-owned emission/diagnostic metadata, not the old
@@ -990,6 +1002,36 @@ def successful_model_observation(receipt, native, events, materials: Path, run_i
             report_origin="native_batch_receipt.model_diagnostics.execution",
         )
     return result
+
+def record_successful_model_observation(
+    state, receipt, native, events_path: Path, materials: Path, run_id: str, *, reading_model_projection,
+):
+    """Keep observation failures separate from an already durable native success.
+
+    Later source/cache checks still run. Missing evidence remains explicitly
+    incomplete instead of being called an acceptance PASS or repeated payment.
+    """
+    observation = {"status": "OBSERVED", "native_exit": 0,
+                   "native_batch_status": receipt.get("status")}
+    try:
+        result = successful_model_observation(
+            receipt, native, read_rows(events_path), materials, run_id,
+            reading_model_projection=reading_model_projection,
+        )
+    except Exception as exc:
+        # Owner-defined reason codes contain no captured/provider prose.
+        reasons = {
+            "PHASE_C_EXTRACTIVE_EXECUTION_NOT_OBSERVED",
+            "PHASE_C_FIDELITY_ASSESSMENT_NOT_OBSERVED",
+            "PHASE_C_CAPTURE_PATH_INVALID", "PHASE_C_CAPTURE_UNAVAILABLE",
+            "PHASE_C_CAPTURE_IDENTITY_DIFFERS", "PHASE_C_CAPTURE_UTF8_INVALID",
+        }
+        reason = str(exc) if isinstance(exc, ValueError) and str(exc) in reasons else "PHASE_C_OBSERVATION_FAILED"
+        observation.update(status="INCOMPLETE", error_type=type(exc).__name__, reason=reason)
+    else:
+        state.update(result)
+    state["model_observation"] = observation
+
 
 def run_pair(
     sample,
@@ -1528,9 +1570,9 @@ def _run_pair_in_owned_root(
                 write_json(observer, observer_config)
             if code != 0:
                 raise ValueError("INITIAL_BATCH_FAILED_NO_BLIND_RESEND")
-            state.update(successful_model_observation(
-                receipt, native, read_rows(events), materials, current_run,
-                reading_model_projection=projections[version]))
+            record_successful_model_observation(
+                state, receipt, native, events, materials, current_run,
+                reading_model_projection=projections[version])
             reference, bundle, read_request, replay = public_bundle(
                 root, output, env, config, imported, descriptor, current_run,
                 source_selection=outcome.get('source_registration', {}).get('selection'),
@@ -1688,7 +1730,10 @@ def _run_pair_in_owned_root(
                     if item.pop("historical_exact_ref_full_context_verified", False):
                         item["current_exact_ref_full_context_verified"] = True
         if outcome.get("status") != "PRE_RESERVATION_BLOCKED":
-            outcome["status"] = "PASS"
+            outcome["status"] = ("OBSERVATION_INCOMPLETE" if any(
+                state.get("model_observation", {}).get("status") == "INCOMPLETE"
+                for state in states
+            ) else "PASS")
     except Exception as exc:
         from tools.document_understanding_benchmark.phase_c_readonly_source import ReadonlySourceGap
 

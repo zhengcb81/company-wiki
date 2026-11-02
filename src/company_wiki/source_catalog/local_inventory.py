@@ -119,17 +119,25 @@ class LocalReadBudget(_ReadBudget):
         from .resolver import _needs_hydration
         if _needs_hydration(before):
             raise SourceReadError("unavailable", "placeholder_not_hydrated")
-        if not resolved.is_file() or before.st_size > 131072:
-            raise SourceReadError("unavailable", "local_metadata_byte_limit")
+        if not resolved.is_file():
+            raise SourceReadError("blocked", "local_metadata_unreadable")
         if before.st_size > self.max_bytes - self.bytes_read:
             self._stop("budget_exceeded", "max_bytes")
+        chunks = []
         with resolved.open("rb") as stream:
-            data = stream.read(min(131073, self.max_bytes - self.bytes_read + 1))
-        stop = self.charge(len(data))
-        if stop:
-            raise SourceReadError("unavailable", stop)
+            while True:
+                self.check()
+                # Chunk size is an IO implementation detail, not a document cap.
+                chunk = stream.read(min(65536, self.max_bytes - self.bytes_read + 1))
+                if not chunk:
+                    break
+                stop = self.charge(len(chunk))
+                if stop:
+                    raise SourceReadError("unavailable", stop)
+                chunks.append(chunk)
+        data = b"".join(chunks)
         after = resolved.stat()
-        if len(data) > 131072 or (before.st_size, before.st_mtime_ns) != (after.st_size, after.st_mtime_ns):
+        if (before.st_size, before.st_mtime_ns) != (after.st_size, after.st_mtime_ns):
             raise SourceReadError("unavailable", "local_metadata_changed")
         try:
             value = json.loads(data)

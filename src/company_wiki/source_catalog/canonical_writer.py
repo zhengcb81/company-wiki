@@ -31,7 +31,6 @@ if TYPE_CHECKING:
 
 CANONICAL_IMPORT_SCHEMA_VERSION = "1.0"
 CANONICAL_IMPORT_RESULT_SCHEMA_VERSION = "2.0"
-MAX_PROVENANCE_EXTENSIONS_BYTES = 16 * 1024
 _INVALID_WINDOWS_CHARS = re.compile(r'[<>:"/\\|?*\x00-\x1f]+')
 _SAFE_EXTENSION = re.compile(r"^\.[a-z0-9]{1,10}$")
 _RESERVED_WINDOWS_NAMES = {
@@ -299,11 +298,9 @@ class CanonicalSourceWriter:
             ):
                 raise CanonicalImportError("invalid provenance extension name")
             try:
-                extension_size = len(canonical_json(dict(provenance_extensions)).encode("utf-8"))
+                canonical_json(dict(provenance_extensions)).encode("utf-8")
             except (TypeError, ValueError) as exc:
                 raise CanonicalImportError("provenance extensions must be canonical JSON") from exc
-            if extension_size > MAX_PROVENANCE_EXTENSIONS_BYTES:
-                raise CanonicalImportError("provenance extensions exceed byte limit")
         staged = self._validate_staged(request, candidate, receipt)
         return self._commit_staged(request, candidate, receipt, staged,
                                    provenance_extensions=provenance_extensions, budget=budget)

@@ -382,8 +382,7 @@ def _validate_source_facts(facts: dict[str, Any], evidence: dict[str, Any]) -> N
             raise ValueError(f"{key} has no field locator")
         if "value" not in observation or observation["value"] != value:
             raise ValueError(f"{key} disagrees with its field evidence")
-    if len(canonical_json(evidence).encode("utf-8")) > 65536:
-        raise ValueError("source fact evidence exceeds byte limit")
+    canonical_json(evidence).encode("utf-8")  # Validate JSON without a second representation quota.
 
 
 def record_source_facts(catalog: Any, *, ref: Any, facts: dict[str, Any],

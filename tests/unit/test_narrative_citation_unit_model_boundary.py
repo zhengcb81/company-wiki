@@ -256,7 +256,8 @@ def test_v3_preserves_actual_output_limits_strict_json_and_translation_guards(co
     if condition == "long_text":
         claims = [{**one, "text": "x" * 281}]
     if condition == "path":
-        claims = [{**one, "text": "file:///C:/secret/material.pdf"}]
+        # A logical identifier is metadata; quoted body text may contain URLs.
+        claims = [{**one, "claim_id": "file:///C:/secret/material.pdf"}]
     payload = {"claims": claims}
     if condition == "translation":
         payload["translate"] = True

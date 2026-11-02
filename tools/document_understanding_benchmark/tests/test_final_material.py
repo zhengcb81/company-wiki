@@ -15,6 +15,8 @@ improvement.
 
 from __future__ import annotations
 
+import hashlib
+
 import pytest
 
 from tools.document_understanding_benchmark.tests.final_material import (
@@ -282,6 +284,36 @@ def test_limits_must_be_a_mapping_and_zero_budget_stops():
 def test_limits_that_are_exceeded_refuse_rather_than_truncate():
     with pytest.raises(ValueError, match="limit"):
         _observe(limits={"max_evidence_rows": 2})
+
+
+@pytest.mark.parametrize("kind", ["rows", "groups", "text"])
+def test_complete_material_has_no_implicit_representation_cap(kind):
+    if kind == "text":
+        source = originals({"e1": "u-stores"})
+        text = "original business disclosure. " * 160000
+        source["units"]["e1"]["text"] = text
+        envelope = material(evidence=[["e1", text]], groups=[])
+        expected = 1
+    else:
+        count = 513
+        source = originals({f"e{i}": "u-stores" for i in range(count)})
+        for i, unit in enumerate(source["units"].values()):
+            unit.update(locator=f"loc:v1/page:{i + 1}/paragraph:1",
+                        page=i + 1, unit_id=f"unit-{i}")
+        text = ORIGINAL_UNITS["u-stores"]["text"]
+        rows = [[f"e{i}", text] for i in range(count if kind == "rows" else 1)]
+        groups = [[f"g{i}", ["e0"]] for i in range(count)] if kind == "groups" else []
+        envelope = material(evidence=rows, groups=groups)
+        expected = len(rows)
+    source["groups"] = {}
+    observed = _observe(material=envelope, originals=source)
+    assert observed["metrics"]["evidence_rows"] == expected
+    expected_text = "\n".join(row[1] for row in envelope["evidence"])
+    assert hashlib.sha256(observed["selected_text"].encode()).hexdigest() == (
+        hashlib.sha256(expected_text.encode()).hexdigest()
+    )
+    if kind == "groups":
+        assert observed["metrics"]["evidence_groups"] == 513
 
 
 # ---------------------------------------------------------------------------

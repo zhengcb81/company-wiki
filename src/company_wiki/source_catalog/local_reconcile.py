@@ -528,7 +528,7 @@ def _discover_source_groups(catalog, identity, budget, request, *, historical=No
             from .source_availability import stored_availability_evidence
             period_known = scope.facts.get("document_kind") not in PERIODIC_DOCUMENT_KINDS or (
                 type(scope.facts.get("fiscal_year")) is int and bool(scope.facts.get("fiscal_period")))
-            date_observed = bool(scope.facts.get("published_date")) or stored_availability_evidence(catalog, ref) is not None
+            date_observed = bool(scope.facts.get("published_date")) or stored_availability_evidence(catalog, ref, budget=budget) is not None
             if (relation is ScopeRelation.MATCH and scope.authority == "source-facts" and period_known
                     and date_observed and row['document_kind'] == scope.facts['document_kind']):
                 # Discovery consumes stored scope proof. The final selected
@@ -780,7 +780,7 @@ def _prepare_local_source(
                 from .qualification import qualify_source
                 from .source_availability import stored_availability_evidence
                 date_quality = qualify_source(None, as_of_date=request.as_of_date,
-                    availability_evidence=stored_availability_evidence(catalog, ref), source_sha256=ref.content_sha256)
+                    availability_evidence=stored_availability_evidence(catalog, ref, budget=budget), source_sha256=ref.content_sha256)
                 if not date_quality.historical_date_eligible:
                     diagnostics.append({"document_id": ref.document_id, "reason": "publication_date_unknown"})
         except (

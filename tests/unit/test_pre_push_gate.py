@@ -44,3 +44,28 @@ def test_manual_full_gate_retains_its_original_deadline(tmp_path, monkeypatch):
     command, options = observed[0]
     assert "tests/unit" in command and options["timeout"] == 600
     assert "-n" in command and command[command.index("-n") + 1] == "2"
+
+
+def test_ci_contract_step_does_not_repeat_unit_cases(monkeypatch):
+    observed = []
+    monkeypatch.setattr(gate, "_dispatch_gate", lambda cmd, *_args:
+                        observed.append(cmd) or 0)
+    assert gate.main(["--fast-contracts-only"]) == 0
+    assert len(observed) == 1
+    expected = {case for case in gate.FAST_CONTRACT_CASES
+                if not case.startswith("tests/unit/")}
+    actual = {arg for arg in observed[0] if arg.startswith("tests/")}
+    assert actual == expected and actual
+    assert not any(arg.startswith("tests/unit") for arg in observed[0])
+
+
+def test_explicit_full_mode_runs_unit_once_then_only_remaining_contracts(monkeypatch):
+    observed = []
+    monkeypatch.setattr(gate, "_dispatch_gate", lambda cmd, *_args:
+                        observed.append(cmd) or 0)
+    assert gate.main([]) == 0
+    pytest_commands = [cmd for cmd in observed if "pytest" in cmd]
+    assert sum("tests/unit" in cmd for cmd in pytest_commands) == 1
+    assert len(pytest_commands) == 2
+    assert not any(arg.startswith("tests/unit/") for arg in pytest_commands[-1])
+    assert "tests/contract/test_b10_read_chain.py" in pytest_commands[-1]

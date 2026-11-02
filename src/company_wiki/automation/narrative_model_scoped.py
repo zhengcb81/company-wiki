@@ -288,7 +288,7 @@ def decode_scoped_draft(response, *, selected: NarrativeSelectResult,
         validate_summary_claim,
     )
     from . import narrative_model as legacy
-    from .narrative_contracts import NarrativeContractError, _claim_from_dict, _claim_to_dict, assert_no_physical_paths
+    from .narrative_contracts import NarrativeContractError, _claim_from_dict, _claim_to_dict
     if response.prompt_version != protocol.prompt:
         raise legacy.ModelResponseError('model response prompt version differs from request')
     if selected.reading_context is None:
@@ -344,7 +344,6 @@ def decode_scoped_draft(response, *, selected: NarrativeSelectResult,
                     'modality': raw['modality'], 'needs_review': False}
                 if binding.context_ids:
                     claim['context_evidence_ids'] = list(binding.context_ids)
-                assert_no_physical_paths(claim)
                 typed = _claim_from_dict(claim)
                 if len(typed.text) > 280:
                     raise NarrativeContractError('summary claim text exceeds 280 characters')

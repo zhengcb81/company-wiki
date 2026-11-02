@@ -121,7 +121,13 @@ def test_proof_read_is_bounded_and_does_not_scan_roots(tmp_path):
     assert verified_availability_evidence(catalog, REF) is None
 
 
-def test_excess_locations_do_not_expand_work(tmp_path):
-    assert verified_availability_evidence(
-        fixture_catalog(tmp_path, capture_payload(), cap=65), REF,
-    ) is None
+def test_explicit_location_work_budget_stops_without_a_verified_capture(tmp_path):
+    from company_wiki.source_catalog.local_inventory import LocalPrepareLimits, LocalReadBudget
+    from company_wiki.source_catalog.source_reader import SourceReadError
+    payload = capture_payload()
+    payload['receipt']['content_sha256'] = 'f' * 64
+    budget = LocalReadBudget(LocalPrepareLimits(max_discovery_entries=1))
+    with pytest.raises(SourceReadError) as raised:
+        verified_availability_evidence(fixture_catalog(tmp_path, payload, cap=65), REF, budget=budget)
+    assert raised.value.reason == 'local_discovery_entry_limit'
+    assert budget.triggered_bound == 'max_discovery_entries'

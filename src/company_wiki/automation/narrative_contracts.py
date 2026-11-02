@@ -82,6 +82,21 @@ _SELECTION_STATUSES = frozenset(
 _QUALITY_STATUSES = frozenset({"verified", "needs_review", "skipped_no_narrative"})
 _REVIEW_STATUSES = frozenset({"not_detected", "detected_and_ignored", "not_reviewed"})
 
+# Only these typed wire slots carry source/summary prose. An arbitrary field
+# called text/raw_text in metadata or an unknown envelope grants no exemption.
+_SOURCE_TEXT = object()
+_SPAN_TEXT_FIELDS = {"*": {"raw_text": _SOURCE_TEXT}}
+_CLAIM_TEXT_FIELDS = {"*": {"text": _SOURCE_TEXT}}
+_DRAFT_TEXT_FIELDS = {"claims": _CLAIM_TEXT_FIELDS}
+_SOURCE_TEXT_ENVELOPES: dict[str, Any] = {
+    **{schema: {"evidence_spans": _SPAN_TEXT_FIELDS} for schema in SUPPORTED_SELECT_RESULT_SCHEMAS},
+    **{schema: {"draft": _DRAFT_TEXT_FIELDS}
+       for schema in (SUMMARY_RESULT_SCHEMA, PROJECTED_SUMMARY_RESULT_SCHEMA)},
+    **{schema: {"evidence_spans": _SPAN_TEXT_FIELDS, "summary": {"draft": _DRAFT_TEXT_FIELDS}}
+       for schema in (BUNDLE_SCHEMA, PROJECTED_BUNDLE_SCHEMA, ASSESSED_BUNDLE_SCHEMA,
+                      ASSESSED_PROJECTED_BUNDLE_SCHEMA)},
+}
+
 
 class NarrativeContractError(ValueError):
     """A narrative job payload differs from the frozen contract."""
@@ -167,14 +182,24 @@ def _looks_like_path(value: str) -> bool:
 
 
 def assert_no_physical_paths(value: object) -> None:
-    """Reject physical locations; representation depth is not a permission."""
-    from .json_tree import walk_json
-    for item in walk_json(value):
+    """Reject storage metadata, while known typed source-body slots stay data."""
+    schema = value.get("schema_version") if isinstance(value, Mapping) else None
+    fields = _SOURCE_TEXT_ENVELOPES.get(schema) if isinstance(schema, str) else None
+    _assert_physical_metadata(value, fields)
+
+
+def _assert_physical_metadata(value: object, fields: object) -> None:
+    from .json_tree import walk_json_context
+
+    def child_context(state: object, key: str | int) -> object:
+        return state.get("*" if isinstance(key, int) else key) if isinstance(state, Mapping) else None
+
+    for state, item in walk_json_context(value, context=fields, child_context=child_context):
         if isinstance(item, Mapping):
             for key in item:
                 if key.lower() in _PATH_KEYS:
                     raise PhysicalPathLeakError(f"physical path field is forbidden: {key}")
-        elif isinstance(item, str) and _looks_like_path(item):
+        elif state is not _SOURCE_TEXT and isinstance(item, str) and _looks_like_path(item):
             raise PhysicalPathLeakError("physical path value is forbidden")
 
 
@@ -1518,6 +1543,7 @@ def _claim_from_dict(value: object) -> SummaryClaim:
         | ({"context_evidence_ids"} if isinstance(value, Mapping) and "context_evidence_ids" in value else set()),
         "summary claim",
     )
+    _assert_physical_metadata(item, {"text": _SOURCE_TEXT})
     evidence_ids = tuple(
         _text(raw, "summary claim evidence_id")
         for raw in _array(item["evidence_ids"], "summary claim evidence_ids")

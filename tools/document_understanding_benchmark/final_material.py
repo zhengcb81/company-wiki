@@ -42,16 +42,13 @@ FINAL_OBSERVED_ENTRY_POINT = (
     "company_wiki.automation.narrative_model.NarrativeModelRequest.from_selection"
 )
 
-#: Default resource bounds for one observation. These are *assembly* bounds: a
-#: caller may lower them, and reaching one refuses the observation rather than
-#: truncating it, because a truncated observation silently shrinks the recall
-#: denominator it is later compared on.
+#: One actual work budget. Optional representation limits come only from an
+#: explicit caller allocation, never another hidden ceiling over the material.
 DEFAULT_LIMITS: dict[str, int] = {
-    "max_evidence_rows": 512,
-    "max_evidence_groups": 512,
-    "max_units": 4096,
-    "max_text_bytes": 4 * 1024 * 1024,
     "max_work_units": 200_000,
+}
+_LIMIT_FIELDS = frozenset(DEFAULT_LIMITS) | {
+    "max_evidence_rows", "max_evidence_groups", "max_units", "max_text_bytes",
 }
 
 #: Group kinds the observer may report. A material group is by construction a
@@ -98,14 +95,17 @@ def _effective_limits(limits: Mapping[str, Any] | None) -> dict[str, int]:
     if not isinstance(limits, Mapping):
         raise FinalMaterialError("limits must be a mapping")
     for key, value in limits.items():
-        if key not in DEFAULT_LIMITS:
+        if key not in _LIMIT_FIELDS:
             raise FinalMaterialError(f"unknown limit {key!r}")
         if type(value) is not int or value <= 0:
             raise FinalMaterialError(f"limit {key!r} must be a positive integer")
-        # A caller may lower a bound, never raise it: these are technical hard
-        # limits, and raising them from a call site would defeat the point.
-        effective[key] = min(effective[key], value)
+        effective[key] = value
     return effective
+
+
+def _over_allocation(actual: int, key: str, limits: Mapping[str, int]) -> bool:
+    maximum = limits.get(key)
+    return maximum is not None and actual > maximum
 
 
 # ---------------------------------------------------------------------------
@@ -318,6 +318,8 @@ def observe_final_material(
     checked_execution = _require_mapping(execution, "execution")
     envelope = _require_mapping(material, "material")
     source = _Originals(originals)
+    if _over_allocation(len(source.units), "max_units", effective):
+        raise FinalMaterialError("originals exceeded the requested unit limit")
 
     source_block = _require_mapping(envelope.get("source") or envelope.get("subject") or {},
                                     "material.source")
@@ -338,7 +340,7 @@ def observe_final_material(
         column_key="evidence_columns",
         default_columns=("id", "raw_text", "source_role", "quality_flags"),
     )
-    if len(rows) > effective["max_evidence_rows"]:
+    if _over_allocation(len(rows), "max_evidence_rows", effective):
         raise FinalMaterialError(
             f"material carries {len(rows)} evidence rows, over the limit of "
             f"{effective['max_evidence_rows']}"
@@ -366,7 +368,7 @@ def observe_final_material(
             raise FinalMaterialError("observation exceeded its work limit")
         text = _resolve_text(row, original, alias=alias)
         text_bytes += len(text.encode("utf8"))
-        if text_bytes > effective["max_text_bytes"]:
+        if _over_allocation(text_bytes, "max_text_bytes", effective):
             raise FinalMaterialError(
                 f"observation text exceeds the limit of {effective['max_text_bytes']} bytes"
             )
@@ -397,7 +399,7 @@ def observe_final_material(
         column_key="evidence_group_columns",
         default_columns=("id", "evidence_ids"),
     )
-    if len(group_rows) > effective["max_evidence_groups"]:
+    if _over_allocation(len(group_rows), "max_evidence_groups", effective):
         raise FinalMaterialError(
             f"material carries {len(group_rows)} groups, over the limit of "
             f"{effective['max_evidence_groups']}"

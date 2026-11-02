@@ -23,7 +23,7 @@ from company_wiki.source_catalog.narrative_document import selected_summary_inpu
 
 from .narrative_contracts import (
     NarrativeContractError, NarrativeSelectResult, _claim_from_dict, _draft_from_dict,
-    assert_no_physical_paths, _draft_to_dict, SubjectSummaryDraft,
+    _draft_to_dict, SubjectSummaryDraft,
     subject_draft_from_dict, subject_draft_to_dict, validate_subject_summary_identity,
     _reading_context,
 )
@@ -855,7 +855,6 @@ def decode_model_draft(
                 raise NarrativeContractError("summary claim text exceeds 280 characters")
             declarations = claim.pop("evidence_group_ids", _GROUP_DECLARATION_ABSENT)
             _validate_group_declarations(declarations, groups, claim.get("evidence_ids"))
-            assert_no_physical_paths(claim)
             typed = _claim_from_dict(claim)
             if id_counts[typed.claim_id] != 1:
                 raise NarrativeContractError("summary claim IDs are duplicated")

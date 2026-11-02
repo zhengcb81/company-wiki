@@ -192,8 +192,8 @@ class NarrativeBatchRequest:
             if selector != "0.9.0":
                 raise ValueError("explicit reading_model_projection requires selector_version 0.9.0")
         membership = value[membership_field]
-        if not isinstance(membership, list) or not 1 <= len(membership) <= 100:
-            raise ValueError("batch must contain 1 to 100 explicit work items")
+        if not isinstance(membership, list) or not membership:
+            raise ValueError("batch must contain explicit work items")
         sources: dict[str, SourceRefValue] = {}
         items: dict[str, NarrativeBatchItem] = {}
         for raw in membership:
@@ -260,8 +260,6 @@ class NarrativeBatchRequest:
         final_bytes = _integer(
             value.get("max_final_bytes", 2 * 1024 * 1024), "max_final_bytes"
         )
-        if final_bytes > 2 * 1024 * 1024:
-            raise ValueError("one final artifact cannot exceed the 2 MiB emergency cap")
         return cls(
             _text(value["run_id"], "run_id"),
             tuple(sources.values()),

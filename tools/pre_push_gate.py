@@ -122,6 +122,12 @@ FAST_CONTRACT_CASES = (
     "tests/unit/test_shared_reading_cache_precheck.py::test_new_operation_rejects_changed_reused_original_before_new_fee",
 )
 
+# CI and explicit full mode already run all Unit tests. Daily pushes still use
+# the complete fixed smoke above; never turn this filter into impacted expansion.
+CI_CONTRACT_CASES = tuple(
+    case for case in FAST_CONTRACT_CASES if not case.startswith("tests/unit/")
+)
+
 
 def _print_output(value: str) -> None:
     """A legacy console must not erase a child's diagnostic or its exit code."""
@@ -369,7 +375,7 @@ def main(argv: list[str] | None = None) -> int:
     parser.add_argument(
         "--fast-contracts-only",
         action="store_true",
-        help="run the curated portable contract smoke set used by CI and the push hook",
+        help="run remaining contract smoke after CI's full Unit step; push uses its fixed set",
     )
     parser.add_argument(
         "--junitxml",
@@ -391,22 +397,19 @@ def main(argv: list[str] | None = None) -> int:
     ]
     focused_contract_gate = (
             [sys.executable, "-m", "pytest", "-q", "--tb=short", "--timeout=180",
-             "tests/unit/test_narrative_evidence.py",
-             "tests/unit/test_narrative_transport_contracts.py",
              "tests/contract/test_legacy_observation.py",
              "tests/contract/test_zr506_section_chunk_fact.py",
-             "tests/unit/test_narrative_retrieval.py",
              "tests/contract/test_fc905_receipt_envelope.py",
              "tests/contract/test_b10_read_chain.py",
-             "tests/unit/test_writer_freeze.py",
              "tests/contract/test_fc1307_host_assumption_gate.py",
-             *CURRENT_CI_REGRESSION_CASES],
+             *(case for case in CURRENT_CI_REGRESSION_CASES
+               if not case.startswith("tests/unit/"))],
             "focused contracts, recent CI regressions, and gate regression tests",
             None,
     )
     fast_contract_gate = (
         [sys.executable, "-m", "pytest", "-q", "--tb=short", "--timeout=180",
-         *FAST_CONTRACT_CASES],
+         *CI_CONTRACT_CASES],
         "CI fast contract smoke set",
         None,
     )

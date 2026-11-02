@@ -161,6 +161,16 @@ class _ReadBudget:
         """Caller-side cancellation: no further candidate byte is read."""
         self.cancelled = True
 
+    def check(self) -> None:
+        """Honor the parent's stop state without resetting its read account.
+
+        LocalReadBudget extends this same checkpoint with its real deadline.
+        A plain resolver budget owns bytes/candidates and explicit cancellation.
+        """
+        if self.cancelled:
+            from .source_reader import SourceReadError
+            raise SourceReadError("unavailable", "cancelled")
+
     def begin_request(self) -> None:
         """Start a request on this budget.
 
@@ -1458,7 +1468,7 @@ class SourceResolver:
             from .source_availability import stored_availability_evidence
             qualification = qualify_source(document["published_date"], as_of_date=request.as_of_date,
                                            local_bytes_status=availability,
-                                           availability_evidence=(stored_availability_evidence(self.catalog, source_ref)
+                                           availability_evidence=(stored_availability_evidence(self.catalog, source_ref, budget=budget)
                                                if not document["published_date"] else None),
                                            source_sha256=source_ref.content_sha256)
             if handle is None:
