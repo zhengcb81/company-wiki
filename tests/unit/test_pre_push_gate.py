@@ -1,5 +1,6 @@
 """Daily feedback keeps its unit boundary and every curated invariant."""
 import sys
+from io import StringIO
 
 from tools import pre_push_gate as gate
 
@@ -69,3 +70,19 @@ def test_explicit_full_mode_runs_unit_once_then_only_remaining_contracts(monkeyp
     assert len(pytest_commands) == 2
     assert not any(arg.startswith("tests/unit/") for arg in pytest_commands[-1])
     assert "tests/contract/test_b10_read_chain.py" in pytest_commands[-1]
+
+
+def test_daily_push_runs_only_fixed_owner_nodes_without_ci_integration_files(monkeypatch):
+    observed = []
+    monkeypatch.setattr(gate, "changed_paths", lambda *_args: ["src/company_wiki/changed.py"])
+    monkeypatch.setattr(gate.sys, "stdin", StringIO(""))
+    monkeypatch.setattr(gate, "_dispatch_gate", lambda cmd, *_args:
+                        observed.append(cmd) or 0)
+    assert gate.main(["--push-checks"]) == 0
+    assert len(observed) == 1
+    targets = [arg for arg in observed[0] if arg.startswith("tests/")]
+    assert len(targets) == 9
+    assert all("::" in node and node in gate.FAST_CONTRACT_CASES for node in targets)
+    assert not any(node.startswith("tests/integration/") for node in targets)
+    assert any("changed_reused_original_before_new_fee" in node for node in targets)
+    assert any("raw_source_hash_changes" in node for node in targets)

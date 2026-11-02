@@ -128,6 +128,20 @@ CI_CONTRACT_CASES = tuple(
     case for case in FAST_CONTRACT_CASES if not case.startswith("tests/unit/")
 )
 
+# The daily hook is a short source/receipt/cache boundary check. Expensive OCR,
+# multi-repository and full-file contracts remain in CI and explicit acceptance.
+DAILY_PUSH_CASES = (
+    "tests/unit/test_local_budget_observation.py::test_read_charge_reports_a_rejected_tail_separately_from_accepted_bytes",
+    "tests/unit/test_runtime_dependencies.py::test_ci_requirements_include_declared_runtime_dependencies",
+    "tests/unit/test_narrative_protocol_identity_shapes.py::test_protocol_lookup_does_not_hash_non_string_json",
+    "tests/unit/test_narrative_transport_contracts.py::test_frozen_producer_golden_contract_and_hash_bindings",
+    "tests/unit/test_narrative_retrieval.py::test_resolver_fails_closed_when_raw_source_hash_changes",
+    "tests/unit/test_shared_reading_cache_precheck.py::test_reuse_final_receipt_has_one_owner_read_per_operation",
+    "tests/unit/test_shared_reading_cache_precheck.py::test_new_operation_rejects_changed_reused_original_before_new_fee",
+    "tests/contract/test_fc905_receipt_envelope.py::test_pi03_no_review_is_explicit_not_reviewed",
+    "tests/contract/test_zr203_reader_rewire.py::test_read_entrypoints_never_construct_catalog_store",
+)
+
 
 def _print_output(value: str) -> None:
     """A legacy console must not erase a child's diagnostic or its exit code."""
@@ -421,7 +435,7 @@ def main(argv: list[str] | None = None) -> int:
                   "tests_not_run: non-runtime range; CI policy unchanged.")
             return 0
         reason = "unknown push range" if changes is None else "runtime or configuration changes"
-        targets = list(FAST_CONTRACT_CASES)
+        targets = list(DAILY_PUSH_CASES)
         deferred = "change-specific tests are the author's responsibility; full suites remain in CI"
         print(f"Push scope: {reason}; planned {len(targets)} target(s); "
               f"full_validation_pending: {deferred}.")
