@@ -2,9 +2,9 @@
 
 PLAN_ID=du11-source-closure-2026-10-18；唯一状态[CURRENT_STATUS](CURRENT_STATUS.md)，原目标[MAINLINE_LOOP_GOAL](MAINLINE_LOOP_GOAL.md)保持。
 
-1. 先读[2026-11-02复核与D4实施细则](review/decoupling-recheck-20261102/README.md)及三份独立报告。六项OPEN，本轮只审计/改PWF，未修产品。不要依据旧D3报告直接启动业务分包。
+1. 先读[2026-11-02复核与D4实施细则](review/decoupling-recheck-20261102/README.md)及三份独立报告。六项OPEN，本轮只审计/改PWF，未修产品。五张互斥写域的实现卡已备妥，尚未派发，见[D4_PACKAGES](review/decoupling-recheck-20261102/harness_lanes/D4_PACKAGES.md)；不要依据旧D3报告启动RF/AUDIT业务计划。
 2. D3实际公开端口、原文预算、39项组合/安装验证与[发布记录](review/decoupling-20261102/release.md)保留；只重验D4新增影响，不能把选择集通过当全仓独立。
-3. D4按真实入口先写反例，ROOT集中接通Stock默认来源与RF实际采用，修纯DTO依赖、wire内部反射和诊断否决，归位AUDIT两项组合。一个集中大节点独审/组合，正常提交推送和必要定点部署。
+3. 五张包各按原卡先写反例；Stock CWP接口+StockWiki同卡负责，RF/CWP解析层/CWP wire/FF stderr分别独占写域。ROOT 不外包最后一哩测试：读 [ROOT-D4-final-integration](review/decoupling-recheck-20261102/harness_lanes/ROOT-D4-final-integration.md)，收齐交付后归位 AUDIT 并做一次组合。
 4. RF/AUDIT仓内业务PWF均为DEFERRED_UNTIL_D4_CLOSURE，未派发。D4关闭后恢复T4/SEM与真实摘要/cache/RF采用；固定公司loop未完成。
 5. 保原件/旧R4/生产配置/库和RF四assurance WIP、CWP hook模式WIP。旧RF日检仍可能追加诊断，当前计算/发布不依赖它；不要把旧not-ok当当前结果或声称任务已退休。
 

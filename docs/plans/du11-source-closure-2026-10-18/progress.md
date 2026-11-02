@@ -341,3 +341,7 @@ D3已完成，CWP `a03d0c02`、RF `ad178dbc`、FF `508aba30`正常推主线，�
 ## 2026-11-02 — 全面解耦复核重新打开D4
 
 三独立审查+ROOT当前真实入口/隔离小探针发现1P1/5P2：Stock默认物理目录研究路径，RF实际consume端点漏传，CWP纯DTO反向runtime依赖，import wire反射内部字段，FF可选stderr否决native成功，AUDIT两真producer测试未归ROOT。旧D3选择集/发布不抹掉，但全局完成声明收窄，RF/AUDIT改DEFERRED_UNTIL_D4_CLOSURE。实施细则和证据见review/decoupling-recheck-20261102/README.md。AUDIT两例当前2P/3.57s；其他新增探针证明缺口而非假装通过；0模型/provider/原件生产配置写，临时合成根清理。本轮仅核查/计划校正，六项产品修复尚未实施。根因是组件覆盖外推全流程、无import不等于无目录耦合、prepare不等于consume及mock隐藏部署。下次先D4真实入口反例和owner根修，一个大节点独审/组合，再恢复T4/SEM和真实摘要/cache/RF采用，不重复整仓或增逐helper许可。
+
+## 2026-11-02 — D4施工包准备完成，未派发
+
+经重新评估“只拆安全独立任务”，已写5张 implementation cards。Stock/CWP接口和Stock消费者合成一张跨仓卡，避免接口分叉；RF、CWP model、CWP transcript wire、FF diagnostic四域单仓分开。AUDIT test relocation/final multi-repo integration始终由ROOT拥有，依赖各实现交付不能安全预发给外包。每张卡规定互斥路径、先RED、相关层单元/接口集成/真实隔离端到端、一个交付前独审agent修复闭环、handoff格式；没有添加每helper门禁。没有产品代码修改或实际派发。唯一入口与卡状态见CURRENT_STATUS/HANDOFF和review/decoupling-recheck-20261102/harness_lanes/D4_PACKAGES.md。

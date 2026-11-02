@@ -136,3 +136,7 @@ StockWiki首写因其他owner边界被自动审批拒；提供既有明确跨仓
 ## 2026-11-02 — 全面解耦复核重新打开D4
 
 三独立审查+ROOT当前真实入口/隔离小探针发现1P1/5P2：Stock默认物理目录研究路径，RF实际consume端点漏传，CWP纯DTO反向runtime依赖，import wire反射内部字段，FF可选stderr否决native成功，AUDIT两真producer测试未归ROOT。旧D3选择集/发布不抹掉，但全局完成声明收窄，RF/AUDIT改DEFERRED_UNTIL_D4_CLOSURE。实施细则和证据见review/decoupling-recheck-20261102/README.md。AUDIT两例当前2P/3.57s；其他新增探针证明缺口而非假装通过；0模型/provider/原件生产配置写，临时合成根清理。本轮仅核查/计划校正，六项产品修复尚未实施。根因是组件覆盖外推全流程、无import不等于无目录耦合、prepare不等于consume及mock隐藏部署。下次先D4真实入口反例和owner根修，一个大节点独审/组合，再恢复T4/SEM和真实摘要/cache/RF采用，不重复整仓或增逐helper许可。
+
+## 2026-11-02 — D4写域拆卡（准备态）
+
+按用户要求只拆安全独立的范围：D4-01 CWP公司来源列表+StockWiki默认消费同卡；D4-02 RF实际摘要采用；D4-03 CWP解析纯层；D4-04 CWP电话会wire；D4-05 FF诊断与native结果。AUDIT两项测试归位和最终跨仓组合留ROOT，不算外包卡。五卡均是PREPARED_NOT_DISPATCHED；每卡有不重叠写域/TDD/完整端到端验收/交付前独审和问题修复要求，且不改Dayu/IQS/业务主线。具体入口 review/decoupling-recheck-20261102/harness_lanes/D4_PACKAGES.md。实现通过前 RF/AUDIT 继续DEFERRED。

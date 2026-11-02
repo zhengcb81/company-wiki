@@ -82,7 +82,7 @@
   "project_status": "DECOUPLING_RECHECK_D4_OPEN_BEFORE_BUSINESS_DISPATCH",
   "as_of_date": "2026-11-02",
   "observed_at_utc": "2026-11-02T21:50:39.370275+00:00",
-  "next_action": "ROOT freeze real-entry boundary tests and close D4-01 through D4-06; then T4/SEM and real business acceptance",
+  "next_action": "D4-01..05 are prepared, not dispatched; each owner writes its RED tests and completes implementation/review. ROOT owns D4-06 AUDIT relocation and one final integration; then T4/SEM and real business acceptance",
   "publication": {
     "repositories": {
       "revenue-forecast": {
@@ -479,5 +479,18 @@
     ],
     "product_changes_this_review": 0,
     "paid_calls": 0
+  },
+  "implementation_packages": {
+    "status": "PREPARED_NOT_DISPATCHED",
+    "overview": "review/decoupling-recheck-20261102/harness_lanes/D4_PACKAGES.md",
+    "implementation_cards": [
+      "D4-01-stockwiki-source-virtualization.md",
+      "D4-02-rf-narrative-consumption.md",
+      "D4-03-cwp-document-layer.md",
+      "D4-04-transcript-import-contract.md",
+      "D4-05-ff-process-diagnostics.md"
+    ],
+    "root_owned_final_integration": "review/decoupling-recheck-20261102/harness_lanes/ROOT-D4-final-integration.md",
+    "reason_root_owns_integration": "Waits for five implementation handoffs and consolidates AUDIT producer tests; not independent worker scope."
   }
 }

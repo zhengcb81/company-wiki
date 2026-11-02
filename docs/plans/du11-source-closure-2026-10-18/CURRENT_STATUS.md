@@ -19,8 +19,10 @@
 5. FF固定stderr大小仍能把已有合法成功结果翻成upstream_error。
 6. AUDIT两项真实CWP测试未归ROOT组合；本次2P证明当前功能可用，不代表覆盖已归位。
 
+实施已按互斥写域拆成[五张外包实现卡](review/decoupling-recheck-20261102/harness_lanes/D4_PACKAGES.md)，目前仅是准备状态、尚未派发。StockWiki来源端与消费端留在同一卡；ROOT/AUDIT最终组合由[ROOT任务说明](review/decoupling-recheck-20261102/harness_lanes/ROOT-D4-final-integration.md)自持，不作为外包包。
+
 ## 唯一下一步
 
-ROOT按[D4](review/decoupling-recheck-20261102/README.md)先冻结上述真实入口的失败测试，再按责任层修复并集中组合/独审。**RF/AUDIT业务模块改回DEFERRED_UNTIL_D4_CLOSURE，尚未派发。** 这是修正解耦完成度，不是新增人工许可。D4关闭后恢复T4父链、SEM-QUAL-01、新版真实摘要、缓存恢复、RF实际采用与既有公司循环。
+五张实现卡目前已备妥、尚未派发；各卡负责人先冻结本线RED测试，再按责任层修复并交独立审查。ROOT保留D4-06的AUDIT测试归位与收齐后的一次组合验收。**RF/AUDIT业务计划仍为DEFERRED_UNTIL_D4_CLOSURE。** D4关闭后恢复T4父链、SEM-QUAL-01、新版真实摘要、缓存恢复、RF实际采用与既有公司循环。
 
 三表输出容量、local_prepare扩展兼容、Sina provider泛化和组合CI触发范围另列能力限制，不冒真实生产故障，也不扩成额外阻塞。原件/生产配置/DB/封存与已有WIP保留；Dayu/IQS/Dashboard不动。只在大节点独审，不重复超时全量测试。

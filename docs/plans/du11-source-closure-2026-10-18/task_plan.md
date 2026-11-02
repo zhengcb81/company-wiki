@@ -6,11 +6,11 @@
 
 ## Next Step
 
-最新全面复核确认六项解耦遗漏；ROOT先按[复核/D4实施细则](review/decoupling-recheck-20261102/README.md)冻结真实入口失败测试并集中收口，再回T4/SEM及真实业务链。RF/AUDIT业务暂不派发。本次仅完成审计与计划校正，尚未实施D4。
+最新全面复核确认六项解耦遗漏。五张互斥实现卡已备妥、尚未派发；各卡负责人先冻结本线RED行为测试，再实现、独审并交接。ROOT保留D4-06的AUDIT测试归位和一次最终组合，不重复接管各卡测试。RF/AUDIT业务计划仍DEFERRED；D4完成前不启动T4/SEM或真实业务链。
 
 ## P0-D — 解耦优先
 
-**当前D4 OPEN：1P1/5P2，不能签全面解耦完成。** [新复核/实施细则](review/decoupling-recheck-20261102/README.md)取代原READY状态；原D3只保其已执行范围。
+**当前D4 OPEN：1P1/5P2，不能签全面解耦完成。** [新复核/实施细则](review/decoupling-recheck-20261102/README.md)取代原READY状态；原D3只保其已执行范围。五张互斥实现卡已备好但未派发；[最终AUDIT归位与跨仓组合](review/decoupling-recheck-20261102/harness_lanes/ROOT-D4-final-integration.md)留ROOT收尾。
 
 实施与完成标准见[DECOUPLING_FIRST](review/architecture-reassessment-20261102/DECOUPLING_FIRST.md)。D0–D3工程完成并[独审通过](review/decoupling-20261102/independent/review.md)：公开端口/DTO、实际资源预算、隔离测试与ROOT组合39项零跳过；正常部署与真实原文只读验证完成。[发布记录](review/decoupling-20261102/release.md)列远端证据。P1–P3业务目标保留，不用架构通过替代新真实验收。
 
