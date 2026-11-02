@@ -275,19 +275,78 @@ def test_duplicate_or_overpinned_citations_cannot_satisfy_a_finite_claim_referen
         )
 
 
-def test_prompt_twenty_claim_and_280_character_limits_are_real_output_contracts():
-    selected = grouped_selection()
+def test_valid_source_output_keeps_twenty_one_claims_and_long_qualifiers_without_extra_quotas():
+    texts = tuple(f"公司第{i}号设备已完成交付，并已通过客户验收。" for i in range(21))
+    selected = grouped_selection(texts, (None,) * 21)
+    before = selected.to_dict()
     many = [
+        claim(text, [f"e{i + 1}"], [], name=f"c{i}")
+        for i, text in enumerate(texts)
+    ]
+    decoded = decode_model_draft(reply(selected, many), selected=selected)
+    assert [item["text"] for item in decoded["claims"]] == list(texts)
+    assert [item["evidence_ids"] for item in decoded["claims"]] == [
+        [span.span_id] for span in selected.evidence_spans
+    ]
+    assert selected.to_dict() == before
+
+    long_text = (
+        "The company plans to open a new service center only after the customer has completed site acceptance. "
+        "The proposal remains subject to the customer's final authorization, environmental permits and installation "
+        "testing; no commissioning date has been confirmed and the designed capacity must not be reported as "
+        "production, shipments, revenue or an unconditional order."
+    )
+    qualified = grouped_selection((long_text,), (None,), language="en")
+    entire = {**claim(long_text, ["e1"], []), "modality": "planned"}
+    decoded = decode_model_draft(reply(qualified, [entire]), selected=qualified)
+    assert len(long_text) > 280
+    assert decoded["claims"][0]["text"] == long_text
+    assert decoded["claims"][0]["modality"] == "planned"
+    assert decoded["claims"][0]["evidence_ids"] == [qualified.evidence_spans[0].span_id]
+
+
+@pytest.mark.parametrize("fault", ["reference", "source"])
+def test_removing_output_quotas_does_not_accept_wrong_source_or_reference(fault):
+    selected = grouped_selection()
+    before = selected.to_dict()
+    claims = [
         claim("理財及支付服務收入增加", ["e1", "e2"], ["g1"], name=f"c{i}")
         for i in range(21)
     ]
-    with pytest.raises(NarrativeContractError, match="summary claims exceed twenty"):
-        decode_model_draft(reply(selected, many), selected=selected)
-    with pytest.raises(NarrativeContractError, match="summary claim text exceeds 280"):
+    if fault == "reference":
+        for item in claims:
+            item["evidence_ids"] = ["foreign-source-span"]
+        with pytest.raises(ModelResponseError, match="citation is not in the pinned selection"):
+            decode_model_draft(reply(selected, claims), selected=selected)
+    else:
+        payload = draft_for(selected, claims)
+        payload["draft"]["source_sha256"] = "f" * 64
+        response = NarrativeModelResponse("offline", "fixture", NarrativeModelRequest.from_selection(selected).prompt_version,
+            json.dumps(payload, ensure_ascii=False).encode())
+        with pytest.raises(NarrativeContractError, match="source"):
+            decode_model_draft(response, selected=selected)
+    assert selected.to_dict() == before
+
+
+def test_condition_support_and_finite_modality_diagnostics_survive_quota_retirement():
+    from company_wiki.automation.narrative_summary_assessment import prose_diagnostics
+
+    source = ("项目建成后将为工厂提供产能保障。", "该安排仍须客户完成验收后方可投产。")
+    selected = grouped_selection(source, ("conditional", "conditional"))
+    complete = {**claim("".join(source), ["e1", "e2"], ["g1"]), "modality": "planned"}
+    decoded = decode_model_draft(reply(selected, [complete]), selected=selected)
+    assert decoded["claims"][0]["text"] == "".join(source)
+    with pytest.raises(NarrativeContractError, match="group coverage is incomplete"):
         decode_model_draft(
-            reply(selected, [claim("業" * 281, ["e1", "e2"], ["g1"])]),
+            reply(selected, [{**complete, "evidence_ids": ["e1"]}]),
             selected=selected,
         )
+    # Group membership is structural, not entailment. The existing fidelity
+    # owner records this known loss of a future/conditional qualification.
+    assert "possible_modality_mismatch" in {
+        row["rule_code"] for row in prose_diagnostics(source[0], "工厂已获得产能保障。", "actual")
+    }
+    assert not prose_diagnostics(source[0], source[0], "planned")
 
 
 def test_foreign_id_after_nine_valid_members_is_rejected_without_padding_or_new_source_identity():
