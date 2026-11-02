@@ -29,6 +29,7 @@ CURRENT_TESTS = (
     "integration/revenue_forecast/test_m3_acquisition_usage_e2e.py",
     "integration/filing_fetch/test_source_ref_v2_cli.py",
     "integration/filing_fetch/test_real_source_query.py",
+    "integration/filing_fetch/test_dropbox_policy_owner.py",
     "integration/filing_fetch/test_real_et_preflight.py",
     "integration/filing_fetch/test_runtime_config_loader.py",
     "integration/filing_fetch/test_transcript_original_roundtrip.py",

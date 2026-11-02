@@ -24,6 +24,8 @@ RF 的25个整文件迁移表在 [revenue_forecast/migration.json](revenue_forec
 
 不要直接对整个 `integration/` 运行全量 pytest。默认入口有清晰的当前清单；历史现场套件需显式选择。普通提交继续使用各仓的小范围本地检查，组合只在接口变化和大节点执行。
 
+`source-system.yml`负责这里的变更；仅改组合用例或运行器不会再重复触发CWP普通单元CI。涉及CWP生产代码的提交仍正常执行本仓CI。
+
 ## 部署接口
 
 FF 的 `WikiConnection` 将 cwd、公开命令前缀和可选采集配置集中在 `ff_company_wiki_connection.py`；六操作为 catalog/query/local_prepare/open/transcript_import/financial_statements。旧 `company_wiki_root` 配置通过同一适配器保兼容，只有该适配器知道旧目录布局。配置明确选择 connection 后，缺操作报清晰配置错误，不偷偷回退到另一套部署。

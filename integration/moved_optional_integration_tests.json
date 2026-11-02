@@ -22,5 +22,11 @@
     "destination": "integration/filing_fetch/test_transcript_original_roundtrip.py",
     "body_sha256": "db47f2a70c9471ec765ba34da89e6bca39c87094666ce557ee61788c78da5c96",
     "assertions": "retained; explicit producer and fixture roots"
+  },
+  {
+    "original": "filing-fetch/tests/test_dropbox_config_invariants.py::test_config_dbx_04_dropbox_root_defined_in_wiki_policy_only",
+    "destination": "integration/filing_fetch/test_dropbox_policy_owner.py",
+    "body_sha256": "1ece7a0e70260413fab17644b48b1874edfcf2f605c3b7bacd4ffb820e84abda",
+    "assertions": "unchanged; explicit producer root"
   }
 ]
