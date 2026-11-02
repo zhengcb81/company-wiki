@@ -91,7 +91,7 @@ def failed_body(selected, condition, *, physical_path=None):
         # An explicit filesystem reference has the same meaning on every host;
         # a bare POSIX string also overlaps valid JSON-pointer/source notation.
         claim["text"] = physical_path.as_uri()
-    elif condition == "size":
+    elif condition == "large_legal":
         claim["claim_id"] = "claim-" + "a" * 70000
     return canonical_json(value).encode("utf-8"), prompt
 
@@ -147,7 +147,6 @@ def assert_failure(result, *, body, code, rule, observed=True, metrics=NATIVE):
     ("group_declaration", "SUMMARY_INVALID", "GROUP_DECLARATION"),
     ("group_closure", "SUMMARY_INVALID", "GROUP_INCOMPLETE"),
     ("path", "MODEL_RESPONSE_INVALID", "PHYSICAL_PATH"),
-    ("size", "RESULT_TOO_LARGE", "RESULT_SIZE"),
 ])
 def test_each_real_post_model_validation_failure_has_final_hash_rule_and_native_usage(
     condition, code, rule, isolated_original_and_config,
@@ -160,6 +159,30 @@ def test_each_real_post_model_validation_failure_has_final_hash_rule_and_native_
         assert json.loads(body)["draft"]["claims"][0]["text"].startswith("file://")
     result = run_response(selected, body, prompt=prompt)
     assert_failure(result, body=body, code=code, rule=rule)
+    assert selected.to_dict() == before
+
+
+def test_large_legal_post_model_result_keeps_complete_claims_identity_and_native_usage():
+    from company_wiki.automation.narrative_summary_execution import parse_summary_job_result
+    selected = with_reading(selection(3))
+    before = selected.to_dict()
+    body, prompt = failed_body(selected, 'large_legal')
+    result = run_response(selected, body, prompt=prompt)
+    assert len(body) > 64 * 1024
+    assert result.outcome is HandlerOutcome.SUCCEEDED, result.error
+    assert result.metrics == NATIVE
+    summary_result = parse_summary_job_result(result.result, selected=selected)
+    # The normal decoder resolves e1 aliases and applies source-quality state.
+    # Size alone must change neither normalization nor the complete claim.
+    baseline_body = canonical_json(valid_body(selected)).encode('utf-8')
+    baseline = parse_summary_job_result(run_response(selected, baseline_body).result, selected=selected)
+    expected = baseline.to_dict()['draft']
+    expected['claims'][0]['claim_id'] = json.loads(body)['draft']['claims'][0]['claim_id']
+    assert summary_result.to_dict()['draft'] == expected
+    assert summary_result.model.response_sha256 == hashlib.sha256(body).hexdigest()
+    assert len(summary_result.draft.claims[0].claim_id) == 70006
+    assert 'failed_final' not in result.result
+    assert HandlerResult.from_dict(result.to_dict()).to_dict() == result.to_dict()
     assert selected.to_dict() == before
 
 

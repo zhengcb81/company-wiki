@@ -96,7 +96,11 @@ def test_model_only_receives_cards_that_can_reach_the_canonical_draft():
     plan = compile_extractive_plan(source)
     admitted = {row["task"] for row in plan.execution["tasks"]
                 if row["source_disposition"] == "admitted"}
-    assert 0 < len(admitted) < 96
+    assert len(admitted) == 96  # No implicit 56 KiB representation permission.
+    assert len(canonical_json(plan.draft).encode('utf-8')) > 56 * 1024
+    assert [claim['text'] for claim in plan.draft['claims']] == [
+        span.raw_text for span in source.evidence_spans
+    ]
     envelope = json.loads(build_extractive_request(source).data_json)
     material = envelope["material"]
     assert material["schema_version"] == "source-extractive-ranking-view/1"
@@ -104,16 +108,28 @@ def test_model_only_receives_cards_that_can_reach_the_canonical_draft():
     assert envelope["output_plan"]["available_task_count"] == len(admitted)
     assert all(isinstance(index, int) and not isinstance(index, bool) and index >= 0
                for row in material["tasks"] for index in row[1] + row[2])
+    assert source.selection.status == 'partial'
+    assert source.selection.omitted_candidate_count == 20
+    assert envelope['output_plan']['coverage'] == 'selected_source_tasks_only'
 
 
-def test_rank_for_an_untransmitted_deferred_task_is_not_an_actual_model_read():
-    source = selected(96, text_suffix="Complete original passage." * 20)
+def source_with_unprocessed_scope():
+    from unit.test_source_summary_capability import current_wire
+    # A real unassessed source scope, rather than an implicit byte quota, is
+    # unavailable to ranking. Its original task/quote remains in the source.
+    return NarrativeSelectResult.from_dict(current_wire(('support',) * 95 + ('unresolved',)))
+
+
+def test_rank_for_an_untransmitted_unresolved_task_is_not_an_actual_model_read():
+    source = source_with_unprocessed_scope()
     plan = compile_extractive_plan(source)
-    deferred = next(row["task"] for row in plan.execution["tasks"]
-                    if row["source_disposition"] == "deferred")
+    unprocessed = next(row['task'] for row in plan.execution['tasks']
+                       if row['source_disposition'] == 'unsupported')
     request = build_extractive_request(source)
+    transmitted = {row[0] for row in json.loads(request.data_json)['material']['tasks']}
+    assert unprocessed not in transmitted and len(transmitted) == 95
     response = NarrativeModelResponse("offline", "configured", request.prompt_version,
-        canonical_json({"decisions": [{"task": deferred, "priority": "high",
+        canonical_json({"decisions": [{"task": unprocessed, "priority": "high",
                                       "disposition": "consider"}]}).encode())
     decoded = decode_extractive_result(response, selected=source)
     assert decoded.execution["model_diagnostic"] == "RANK_INVALID"
@@ -121,7 +137,8 @@ def test_rank_for_an_untransmitted_deferred_task_is_not_an_actual_model_read():
 
 
 def test_all_transmitted_ranks_do_not_hide_the_unprocessed_source_remainder():
-    source = selected(96, text_suffix="Complete original passage." * 20)
+    source = source_with_unprocessed_scope()
+    before = source.to_dict()
     plan = compile_extractive_plan(source)
     tasks = [row for row in plan.execution["tasks"] if row["source_disposition"] == "admitted"]
     request = build_extractive_request(source)
@@ -131,8 +148,13 @@ def test_all_transmitted_ranks_do_not_hide_the_unprocessed_source_remainder():
     decoded = decode_extractive_result(response, selected=source)
     assert decoded.execution["model_diagnostic"] == "RANK_INCOMPLETE"
     assert not decoded.execution["model_coverage_complete"]
+    assert not decoded.execution['source_coverage_complete']
+    assert len(decoded.draft['claims']) == len(tasks) == 95
+    assert len(decoded.execution['tasks']) == 96
     assert all(row["model_disposition"] == "unprocessed" for row in decoded.execution["tasks"]
-               if row["source_disposition"] == "deferred")
+               if row["source_disposition"] == "unsupported")
+    assert source.to_dict() == before
+    assert source.selection.status == 'partial'
 
 
 @pytest.mark.parametrize("use", ["context_only", "unresolved"])

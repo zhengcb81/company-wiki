@@ -116,7 +116,8 @@ def test_duplicate_must_reference_an_admitted_claim_and_true_same_source_scope(
         wrap_summary(summary, report)
 
 
-def test_report_byte_cap_is_measured_without_dropping_rows(materials):
+def test_large_report_keeps_every_row_without_a_representation_permission(materials):
+    from company_wiki.automation.models import canonical_json
     _, summary, report = materials
     report["tasks"] = [
         dict(report["tasks"][1], task="t" + str(i)) for i in range(1, 400)
@@ -127,8 +128,15 @@ def test_report_byte_cap_is_measured_without_dropping_rows(materials):
         reason="source_card",
         claim_id="t1-source",
     )
-    with pytest.raises(NarrativeContractError):
-        wrap_summary(summary, report)
+    wrapped = wrap_summary(summary, report)
+    assert len(canonical_json(wrapped['execution']).encode('utf-8')) > 32 * 1024
+    assert extract_summary_execution(wrapped) == report
+    assert [row['task'] for row in wrapped['execution']['tasks']] == [
+        't' + str(i) for i in range(1, 400)
+    ]
+    assert parse_summary_job_result(wrapped) == summary
+    assert not wrapped['execution']['source_coverage_complete']
+    assert not wrapped['execution']['model_coverage_complete']
 
 
 def test_terminal_receipt_keeps_typed_report_without_summary(materials):

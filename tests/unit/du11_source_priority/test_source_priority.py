@@ -168,17 +168,25 @@ def test_allocator_identity_and_actual_module_path_are_bound_to_worktree():
     assert owner.SOURCE_CARD_ALLOCATION_VERSION == allocation.SOURCE_CARD_ALLOCATION_VERSION == 'source-card-allocation/2'
 
 
-def test_default_fifty_six_kib_capacity_keeps_late_operating_fact_and_all_task_rows():
+@pytest.mark.parametrize('max_draft_bytes', [None, 56 * 1024])
+def test_default_preserves_all_cards_and_explicit_capacity_keeps_late_operating_fact(max_draft_bytes):
     texts = [('Ordinary source description.' * 200) + str(i) for i in range(12)]
     texts.append('Complete remaining obligations and conversion timing.' * 140)
     value = source(texts, [policy(80)] * 12 + [policy(2, 'meaningful_fact', 500)])
-    plan = owner.compile_extractive_plan(value)
-    assert len(canonical_json(plan.draft).encode()) <= 56 * 1024
+    before = value.to_dict()
+    plan = owner.compile_extractive_plan(value, max_draft_bytes=max_draft_bytes)
+    if max_draft_bytes is None:
+        assert len(canonical_json(plan.draft).encode()) > 56 * 1024
+        assert [claim['text'] for claim in plan.draft['claims']] == texts
+        assert all(row['source_disposition'] == 'admitted' for row in plan.execution['tasks'])
+    else:
+        assert len(canonical_json(plan.draft).encode()) <= max_draft_bytes
+        assert any(row['source_disposition'] == 'deferred' for row in plan.execution['tasks'])
     assert len(plan.execution['tasks']) == 13
     assert plan.execution['tasks'][-1]['source_disposition'] == 'admitted'
-    assert any(row['source_disposition'] == 'deferred' for row in plan.execution['tasks'])
     assert any(claim['text'] == texts[-1] for claim in plan.draft['claims'])
     assert [row['task'] for row in plan.execution['tasks']] == ['t' + str(i) for i in range(1, 14)]
+    assert value.to_dict() == before
 
 
 def test_allocator_semantics_participate_in_actual_boundary_identity(monkeypatch):

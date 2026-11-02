@@ -21,6 +21,8 @@ import copy
 import json
 from pathlib import Path
 
+import pytest
+
 from tools.narrative_g2_replay import oracle, specs
 from tools.narrative_g2_replay.oracle import (
     STATUS_FAIL,
@@ -364,17 +366,49 @@ def test_not_run_and_unknown_are_never_pass():
     assert verdict.statuses.get("annual-report") != STATUS_PASS
 
 
-def test_report_may_not_exceed_eight_mib(tmp_path: Path):
+def test_report_larger_than_eight_mib_is_written_completely(tmp_path: Path):
     from tools.narrative_g2_replay import report as report_mod
 
-    assert report_mod.MAX_REPORT_BYTES == 8 * 1024 * 1024
+    attempt = report_mod.create_attempt(tmp_path / "out")
+    record = _record()
+    # R7: presentation volume is not execution permission. Keep every original
+    # field and a genuinely large trace, rather than checking an old constant.
+    record["diagnostic_trace"] = {
+        "exact_text": "原始诊断🙂" + "x" * (8 * 1024 * 1024 + 1),
+        "source_processing_complete": False,
+        "unobserved": None,
+    }
+    before = copy.deepcopy(record)
+    path = report_mod.write_report(attempt, record)
+    assert path.is_file() and path.stat().st_size > 8 * 1024 * 1024
+    assert json.loads(path.read_text(encoding="utf-8")) == before == record
+
+
+@pytest.mark.parametrize("invalid", [float("nan"), object()], ids=["nonfinite", "non_json"])
+def test_report_encoding_failure_preserves_the_previous_report(tmp_path: Path, invalid):
+    from tools.narrative_g2_replay import report as report_mod
+
     attempt = report_mod.create_attempt(tmp_path / "out")
     record = _record()
     path = report_mod.write_report(attempt, record)
-    assert path.is_file()
-    assert json.loads(path.read_text(encoding="utf-8"))["schema_version"] == (
-        "narrative-g2-replay/1"
-    )
+    before = path.read_bytes()
+    record["invalid_diagnostic"] = invalid
+    with pytest.raises((ValueError, TypeError)):
+        report_mod.write_report(attempt, record)
+    assert path.read_bytes() == before
+
+
+def test_report_real_write_failure_is_not_reported_as_saved(tmp_path: Path):
+    from tools.narrative_g2_replay import report as report_mod
+
+    attempt = report_mod.create_attempt(tmp_path / "out")
+    conflict = attempt.path / "report.json"
+    conflict.mkdir()
+    sentinel = conflict / "keep.txt"
+    sentinel.write_bytes(b"pre-existing directory content")
+    with pytest.raises(OSError):
+        report_mod.write_report(attempt, _record())
+    assert conflict.is_dir() and sentinel.read_bytes() == b"pre-existing directory content"
 
 
 def test_attempt_directories_are_never_overwritten(tmp_path: Path):

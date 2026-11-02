@@ -80,6 +80,26 @@ def test_generation_read_fingerprint_is_not_a_worker_permission():
         data=b"verified source bytes", byte_size=payload.source_ref.byte_size,
         read_at="2026-10-08T00:00:00Z", policy_sha256="a" * 64, source_read_policy_sha256="c" * 64)
     validate_opened_identity(payload, opened)
+    # The current verified reader, not the persisted generation fingerprint,
+    # owns actual byte verification. This consumer binds its returned identity.
+    assert opened.policy_sha256 != payload.expected_read_policy_sha256
+
+
+@pytest.mark.parametrize('change', [
+    {'source_id': 'a-different-source'},
+    {'document_id': 'a-different-document'},
+    {'content_sha256': 'f' * 64},
+    {'byte_size': 999},
+    {'data': b'truncated'},
+])
+def test_verified_reader_observation_still_must_match_the_requested_source(change):
     from dataclasses import replace
-    with pytest.raises(NarrativeSourceGuardError, match="SOURCE_HASH_MISMATCH"):
-        validate_opened_identity(payload, replace(opened, data=b"X" * len(opened.data)))
+    from company_wiki.automation.narrative_source_guard import validate_opened_identity
+    from company_wiki.source_catalog.source_reader import VerifiedContent
+    payload = _payload()
+    opened = VerifiedContent(document_id=payload.source_ref.document_id,
+        source_id=payload.source_ref.source_id, content_sha256=payload.source_ref.content_sha256,
+        data=b'verified source bytes', byte_size=payload.source_ref.byte_size,
+        read_at='2026-10-08T00:00:00Z', policy_sha256='a' * 64, source_read_policy_sha256='c' * 64)
+    with pytest.raises(NarrativeSourceGuardError, match='SOURCE_HASH_MISMATCH'):
+        validate_opened_identity(payload, replace(opened, **change))
