@@ -814,8 +814,15 @@ def _business_coverage_relation(clause: str) -> bool:
 
 def _reading_relations(clauses: tuple[str, ...], *,
                        causal_observations: dict[str, bool] | None = None,
-                       metric_observations: _MetricObservations | None = None) -> tuple[str, ...]:
+                       metric_observations: _MetricObservations | None = None,
+                       prepared: dict[str, tuple[str, ...]] | None = None) -> tuple[str, ...]:
     """Specific source relationships, not a bag of nouns across sentences."""
+    if prepared is not None:
+        for clause in clauses:
+            if clause not in prepared:
+                prepared[clause] = _reading_relations((clause,), causal_observations=causal_observations,
+                                                     metric_observations=metric_observations)
+        return tuple(dict.fromkeys(reason for clause in clauses for reason in prepared[clause]))
     reasons: list[str] = []
     for clause in clauses:
         if _GENERIC_DEFINITION.search(clause) and not _COMPANY_ANCHOR.search(clause):
@@ -871,10 +878,25 @@ def _reading_relations(clauses: tuple[str, ...], *,
     return tuple(dict.fromkeys(reasons))
 
 
+def _independent_reading_relation(value: str, *, causal_observations: dict[str, bool],
+                                 metric_observations: _MetricObservations,
+                                 prepared: dict[str, tuple[str, ...]]) -> bool:
+    """Reuse the original bound-relation proof, never all descriptive labels.
+
+    The existing finance-exemption kinds have independently bound arguments;
+    broad plan/description reasons are not a positive payload by exclusion.
+    One canonical clause cache is shared with later fact projection.
+    """
+    return bool(_FINANCIAL_BUSINESS_RELATIONS.intersection(_reading_relations(
+        _reading_clauses(_reading_text(value)), causal_observations=causal_observations,
+        metric_observations=metric_observations, prepared=prepared)))
+
+
 def _detect_reading_business_fact(text: str, recognize, *, source_roles=None,
                                   payload_observations: list[bool] | None = None,
                                   causal_observations: dict[str, bool] | None = None,
                                   metric_observations: _MetricObservations | None = None,
+                                  relation_observations: dict[str, tuple[str, ...]] | None = None,
                                   include_source_descriptions: bool = True) -> OperatingFact:
     """Operating activity and bounded business relationships, independent of issuer.
 
@@ -902,7 +924,7 @@ def _detect_reading_business_fact(text: str, recognize, *, source_roles=None,
     activity = any(concrete_operating_event(clause) or
                    (_OBJECT.search(clause) and _ACTIVITY.search(clause)) for clause in clauses)
     relations = _reading_relations(clauses, causal_observations=causal_observations,
-                                   metric_observations=metric_observations)
+                                   metric_observations=metric_observations, prepared=relation_observations)
     if payload_observations is not None:
         # These owners just observed actual disclosure/measurement arguments.
         # Keep the proof here, before public descriptive reason projection.
@@ -948,6 +970,7 @@ def detect_reading_business_fact(text: str, *, include_source_descriptions: bool
     roles = prepare_source_assertions(text)
     causal_observations: dict[str, bool] = {}
     metric_observations: _MetricObservations = {}
+    relation_observations: dict[str, tuple[str, ...]] = {}
     if include_source_descriptions:
         statement_scope = prepare_source_statement_scope(text, roles,
             accounting_text=lambda value: bool(_SOURCE_ACCOUNTING.search(value)),
@@ -955,11 +978,15 @@ def detect_reading_business_fact(text: str, *, include_source_descriptions: bool
                 value, causal_observations, metric_observations=metric_observations),
             measurement_relation=lambda value: _business_revenue_measure(
                 value, metric_observations=metric_observations),
-            quantified_argument=source_has_operating_measure)
-        text, roles = statement_scope.text, statement_scope.roles
+            quantified_argument=source_has_operating_measure,
+            business_relation=lambda value: _independent_reading_relation(value,
+                causal_observations=causal_observations, metric_observations=metric_observations,
+                prepared=relation_observations))
+        text, roles = statement_scope.text, statement_scope.fact_roles or statement_scope.roles
     return _purpose_fact(_detect_reading_business_fact(text, detect_business_fact, source_roles=roles,
                          causal_observations=causal_observations,
                          metric_observations=metric_observations,
+                         relation_observations=relation_observations,
                          include_source_descriptions=include_source_descriptions),
                          source_purpose(text, prepared=roles))
 
@@ -1053,13 +1080,17 @@ def prepare_reading_business_assessment(text: str, source_relations: dict, *, re
         return bool(_SOURCE_ACCOUNTING.search(clause) or accounting_field(clause))
     causal_observations: dict[str, bool] = {}
     metric_observations: _MetricObservations = {}
+    relation_observations: dict[str, tuple[str, ...]] = {}
     statement_scope = prepare_source_statement_scope(text, source_roles, accounting_text=accounting_text,
         causal_relation=lambda value: _observed_causal_relation(
             value, causal_observations, metric_observations=metric_observations),
         measurement_relation=lambda value: _business_revenue_measure(
             value, metric_observations=metric_observations),
-        quantified_argument=source_has_operating_measure, grammar_work_budget=grammar_work_budget)
-    text, source_roles = statement_scope.text, statement_scope.roles
+        quantified_argument=source_has_operating_measure, grammar_work_budget=grammar_work_budget,
+        business_relation=lambda value: _independent_reading_relation(value,
+            causal_observations=causal_observations, metric_observations=metric_observations,
+            prepared=relation_observations))
+    text, fact_roles = statement_scope.text, statement_scope.fact_roles or statement_scope.roles
     if statement_scope.suppressed:
         # Keep the source relations/refs verbatim. Only an assertion observed
         # inside a statement sentence can retain its existing binding proof.
@@ -1071,21 +1102,23 @@ def prepare_reading_business_assessment(text: str, source_relations: dict, *, re
             in statement_scope.assertion_keys for bound, relation in
             zip(relation_bindings, source_relations.get('relations', ())))
     observed: list[bool] = []
-    description = _purpose_fact(_detect_reading_business_fact(text, recognize, source_roles=source_roles,
+    description = _purpose_fact(_detect_reading_business_fact(text, recognize, source_roles=fact_roles,
                                                             causal_observations=causal_observations,
                                                             metric_observations=metric_observations,
+                                                            relation_observations=relation_observations,
                                                             payload_observations=observed),
-                                source_purpose(text, prepared=source_roles))
+                                source_purpose(text, prepared=fact_roles))
     from .narrative_operating_resources import operating_resource_relations
     resource_reasons = operating_resource_relations(_reading_text(text))
     recognition_scope = named_recognition_scope(_reading_text(text))
-    source_roles = replace(source_roles, bound_payload=bool(
-        source_roles.bound_payload or any(relation_bindings) or any(observed)
+    fact_roles = replace(fact_roles, bound_payload=bool(
+        fact_roles.bound_payload or any(relation_bindings) or any(observed)
         or any(operating_observed) or resource_reasons or recognition_scope
         or revenue_recognition_mechanism(text)))
     fact = project_reading_business_fact(original_text, source_relations, description=description, ref_text=ref_text,
-        source_roles=source_roles, relation_bindings=relation_bindings,
+        source_roles=fact_roles, relation_bindings=relation_bindings,
         resource_reasons=resource_reasons, recognition_scope=recognition_scope)
+    source_roles = replace(statement_scope.roles, bound_payload=fact_roles.bound_payload)
     financial = reading_financial_only(text, fact, recognize=recognize)
     # The old prepared use is monotonic input to the broader quote capability,
     # not a second scan or an invitation to mutate operating/state proofs.

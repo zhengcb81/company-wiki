@@ -31,7 +31,7 @@ from .narrative_source_context import (
 )
 
 
-SOURCE_PASSAGE_POLICY_VERSION = 'source-passage/8'
+SOURCE_PASSAGE_POLICY_VERSION = 'source-passage/9'
 # Preparation reuses normalized clauses from the already charged assessment.
 # Includes generic grammar, negative envelopes, account and cause scans, plus
 # the measurement callback's normalized clause view. Metric proofs themselves
@@ -61,6 +61,9 @@ class SourceStatementScope:
     business_causal_keys: frozenset[str] = frozenset()
     grammar_results: tuple[tuple[str, StatementObservation], ...] = ()
     context_results: tuple[tuple[str, SourceClauseContext], ...] = ()
+    # Source observations and fact eligibility are different views. A known
+    # generic or unresolved argument remains an observed grammatical role.
+    fact_roles: SourceAssertionRoles | None = None
 
 
 _CN_QUESTION = re.compile(r'\s*(?:请问|請問|是否|会不会|會不會)')
@@ -106,6 +109,7 @@ def prepare_source_statement_scope(text: str, roles: SourceAssertionRoles, *,
         causal_relation: Callable[[str], bool] | None = None,
         measurement_relation: Callable[[str], bool] | None = None,
         quantified_argument: Callable[[str], bool] | None = None,
+        business_relation: Callable[[str], bool] | None = None,
         grammar_work_budget=None) -> SourceStatementScope:
     """Observe every sentence once; suppress question/courtesy proof anywhere.
 
@@ -117,6 +121,7 @@ def prepare_source_statement_scope(text: str, roles: SourceAssertionRoles, *,
     start = 0
     segments: list[tuple[int, int, bool]] = []
     suppressed = False
+    source_allowed_segments: dict[int, bool] = {}
     grammar_results = []
     context_results_list = []
     prepared_grammar = {}
@@ -129,9 +134,11 @@ def prepare_source_statement_scope(text: str, roles: SourceAssertionRoles, *,
 
     for clause in roles.clauses:
         key = statement_assertion_key(clause.text)
-        context = source_clause_context(clause.text, clause)
+        context = source_clause_context(clause.text, clause, work_budget=grammar_work_budget)
+        typed_business = bool(context.status == 'candidate' and not context.objective_operator
+                              and business_relation and business_relation(clause.text))
         if context.status == 'candidate' and (context.objective_operator or
-                clause.operating and clause.independent_payload is not True):
+                clause.operating and clause.independent_payload is not True and not typed_business):
             observation = observe_statement(clause.text, work_budget=grammar_work_budget,
                 lexical_boundaries=(context.objective_end,) if context.objective_end is not None else ())
             prepared_grammar[key] = observation
@@ -145,8 +152,11 @@ def prepare_source_statement_scope(text: str, roles: SourceAssertionRoles, *,
         end = _SENTENCE_END.search(text, start)
         stop = end.end() if end else len(text)
         key = statement_assertion_key(text[start:stop])
-        boundary = (prepared_grammar[key] if key in prepared_grammar else
-                    observe_english_statement_boundary(text[start:stop], work_budget=grammar_work_budget))
+        prepared = prepared_grammar.get(key)
+        boundary = observe_english_statement_boundary(text[start:stop], work_budget=grammar_work_budget,
+                                                       prepared=prepared)
+        if boundary is None and key in contexts and contexts[key].objective_operator:
+            boundary = prepared
         if boundary is not None and key not in prepared_grammar:
             grammar_results.append((key, boundary))
         question = (bool(end and end.group() in {'?', '？'})
@@ -161,17 +171,21 @@ def prepare_source_statement_scope(text: str, roles: SourceAssertionRoles, *,
             # Explicit backward verification governs only its immediately
             # preceding proposition, not every earlier independent statement.
             segments[-1] = (previous_start, previous_stop, False)
+            source_allowed_segments[previous_start] = False
         grammar_unknown = bool(boundary and boundary.status == 'unknown')
-        allowed = not (question or grammar_unknown or bool(boundary and boundary.status == 'fragment')
-                       or _COURTESY.match(text, start)
-                       or _METADATA_STATEMENT.search(text, start, stop))
+        source_allowed = not (question or _COURTESY.match(text, start)
+                              or _METADATA_STATEMENT.search(text, start, stop)
+                              or bool(boundary and boundary.status == 'fragment'))
+        source_allowed_segments[start] = source_allowed
+        allowed = source_allowed and not (grammar_unknown or bool(boundary and boundary.status == 'fragment'))
         segments.append((start, stop, allowed))
         suppressed |= not allowed
         start = stop
     if (not suppressed and CAUSAL_LINK.search(text) is None
-            and all(context.status == 'candidate' for _, context in context_results)):
+            and all(context.status == 'candidate' for _, context in context_results)
+            and all(observation.status != 'unknown' for observation in prepared_grammar.values())):
         return SourceStatementScope(text, roles, grammar_results=tuple(grammar_results),
-                                    context_results=context_results)
+                                    context_results=context_results, fact_roles=roles)
     normalized = []
     segment_ranges = []
     offset = 0
@@ -202,11 +216,16 @@ def prepare_source_statement_scope(text: str, roles: SourceAssertionRoles, *,
             memberships[statement_index].append(clause)
     masked = []
     clauses = []
+    source_clauses = []
     assertion_keys = set()
     causal_keys: set[str] = set()
     for (start, stop, allowed), segment, members in zip(segments, normalized, memberships):
+        if source_allowed_segments[start]:
+            source_clauses.extend(members)
         members = [clause for clause in members
-                   if contexts[statement_assertion_key(clause.text)].status == 'candidate']
+                   if contexts[statement_assertion_key(clause.text)].status == 'candidate'
+                   and (statement_assertion_key(clause.text) not in prepared_grammar
+                        or prepared_grammar[statement_assertion_key(clause.text)].status != 'unknown')]
         if not members:
             allowed = False
         cause = CAUSAL_LINK.search(segment)
@@ -235,11 +254,13 @@ def prepare_source_statement_scope(text: str, roles: SourceAssertionRoles, *,
             clauses.extend(members)
             assertion_keys.add(segment.strip(' \t\r\n.。!?？！;；'))
             assertion_keys.update(clause.text.strip(' \t\r\n.。!?？！;；') for clause in members)
-    prepared_roles = (replace(roles, clauses=tuple(clauses), bound_operating=False,
-                             bound_payload=False) if suppressed else roles)
-    return SourceStatementScope(''.join(masked), prepared_roles, suppressed,
+    fact_roles = (replace(roles, clauses=tuple(clauses), bound_operating=False,
+                          bound_payload=False) if suppressed else roles)
+    source_roles = (roles if len(source_clauses) == len(roles.clauses) else
+                    replace(roles, clauses=tuple(source_clauses), bound_operating=False, bound_payload=False))
+    return SourceStatementScope(''.join(masked), source_roles, suppressed,
                                 frozenset(assertion_keys), frozenset(causal_keys),
-                                tuple(grammar_results), context_results)
+                                tuple(grammar_results), context_results, fact_roles)
 
 
 def _declarative(text: str, *, grammar_observations: list[StatementObservation] | None = None,
@@ -266,7 +287,7 @@ def _declarative(text: str, *, grammar_observations: list[StatementObservation] 
     observation = grammar_results.get(key) if grammar_results is not None else None
     prepared = clause_contexts.get(key) if clause_contexts is not None else None
     if prepared is None and source_role is not None:
-        prepared = source_clause_context(text, source_role)
+        prepared = source_clause_context(text, source_role, work_budget=grammar_work_budget)
         if clause_contexts is not None:
             clause_contexts[key] = prepared
     if prepared is not None and prepared.status != 'candidate':
@@ -357,6 +378,15 @@ def prepare_source_passage(
     grammar_results = {key: observation for key, observation in statement_scope.grammar_results
                        if key not in clause_contexts or clause_contexts[key].status == 'candidate'}
     grammar_observations = list(grammar_results.values())
+    active_clauses = [clause for clause in clauses if
+        statement_assertion_key(clause.text) not in clause_contexts
+        or clause_contexts[statement_assertion_key(clause.text)].status == 'candidate']
+    if clauses and not active_clauses:
+        semantic = [clause_contexts[statement_assertion_key(clause.text)] for clause in clauses]
+        unresolved = next((value for value in semantic if value.status == 'unresolved'), None)
+        if unresolved is not None:
+            return SourcePassageCapability('unresolved', unresolved.reason, 'source_context', unresolved.relevant)
+        return context(semantic[0].reason)
     if has_prefix and not clauses:
         uncertainty = _grammar_uncertainty(grammar_observations)
         if uncertainty is not None:

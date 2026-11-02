@@ -61,6 +61,11 @@ def predicate_argument_scopes(tagged: list[tuple[str, str]], start: int, *,
             attachment = 'background_relative' if background else 'direct_relative'
             continue
         if conjunction or word in {',', '，'}:
+            # A coordinated NP keeps its own head/modifiers even when the
+            # next token is not tagged as a verb. Otherwise an unrelated
+            # final NP would donate its head to all earlier complements.
+            if arguments or quantifiers:
+                flush()
             coordinated = True
             continue
         if preposition:

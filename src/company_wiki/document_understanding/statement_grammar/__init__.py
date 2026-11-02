@@ -79,7 +79,8 @@ def english_question_start(text: str) -> bool:
 
 
 def observe_english_statement_boundary(text: str, *,
-        work_budget: WorkBudget | None = None) -> StatementObservation | None:
+        work_budget: WorkBudget | None = None,
+        prepared: StatementObservation | None = None) -> StatementObservation | None:
     """Distinguish interrogatives/subordinates before a typed proof is reused.
 
     Auxiliary inversion is explicit. A wh prefix alone cannot decide between
@@ -90,7 +91,7 @@ def observe_english_statement_boundary(text: str, *,
     if english_question_start(text):
         return StatementObservation('fragment', 'interrogative_scope')
     if _EN_WH_START.match(text):
-        return observe_statement(text, work_budget=work_budget)
+        return prepared if prepared is not None else observe_statement(text, work_budget=work_budget)
     return None
 
 

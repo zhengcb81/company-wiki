@@ -222,8 +222,7 @@ _ABSTRACT_EN_WORDS = frozenset((
     "help helping enhance enhancing can could will would allow allows "
     "better evolving constantly is are be as capabilities ability "
     "software equipment workloads solutions solution provide provides provided "
-    "support supports supported form forms formed goal goals vision aspiration aspirations "
-    "outstanding strategic best-in-class more most less least fewer fewest"
+    "support supports supported form forms formed"
 ).split())
 _ABSTRACT_EN_TOKEN = re.compile(r"[a-z]+(?:-[a-z]+)*|[^\s.,:()]+", re.I)
 _ABSTRACT_CN = re.compile(
@@ -231,8 +230,7 @@ _ABSTRACT_CN = re.compile(
     r"所有|广大|丰富|广泛|优质|全面|多样|多类|配套|未来|将|更多|高质量|高質量|产品|服务|技术|平台|业务|行业|客户|需求|"
     r"发展|开发|创新|数字化|转型|升级|增长|基础|能力|价值|成功|利益|效益|繁荣|幸福|快乐|满意度|参与度|"
     r"不断|持续|变化|提升|提高|满足|支持|提供|作为|软件|设备|工作负载|解决方案|"
-    r"助力|推动|促进|使|能够|可以|旨在|目标|愿景|原则|理念|宏伟|远大|美好|是|"
-    r"(?:更|最)?(?:大|小|多|少|高|低)|"
+    r"助力|推动|促进|使|能够|可以|旨在|目标|是|"
     r"[\s.。:：,，、;；()（）])+")
 _OBJECTIVE_PREDICATE = re.compile(
     r"旨在|目标|使我们|\b(?:aims?|aiming|enabl\w*|help\w*)\b", re.I)
@@ -257,6 +255,11 @@ def abstract_source_argument(value: str) -> bool:
         return True
     tokens = _ABSTRACT_EN_TOKEN.findall(value.casefold())
     return bool(tokens) and all(token in _ABSTRACT_EN_WORDS for token in tokens)
+
+
+def source_offering_head(value: str) -> bool:
+    """Reuse existing source offering grammar; this alone proves no payload."""
+    return _DESCRIPTION_OBJECT.fullmatch(value) is not None
 
 
 def _nominal_member_identity(value: str) -> bool:
@@ -391,6 +394,7 @@ class _DescriptionProof:
     witness: str
     descriptive_only: bool = False
     material_scope: bool = False
+    argument_target: str = ''
 
 
 def _source_process_proofs(value: str) -> Iterator[_DescriptionProof]:
@@ -495,7 +499,7 @@ def _clause_description_proofs(value: str) -> Iterator[_DescriptionProof]:
             if observed_scope and payload is None and not abstract_source_argument(target):
                 payload = True
             yield _DescriptionProof(payload, value, descriptive_only=True,
-                                    material_scope=observed_scope)
+                                    material_scope=observed_scope, argument_target=target)
     # One clause-local index supplies both head-first descriptions and
     # actor/action-first objects. Resource heads remain object-only here.
     heads = {(match.start(), match.end()): True for match in _DESCRIPTION_OBJECT.finditer(value)}
@@ -521,7 +525,8 @@ def _clause_description_proofs(value: str) -> Iterator[_DescriptionProof]:
                 yield _DescriptionProof(_argument_payload(description['target'],
                     concrete_action=description['verb'].casefold() != 'for',
                     complete=_argument_closed(value, end+description.end('target'))), value,
-                    bool(_UNSPECIFIED_VARIANTS.fullmatch(description['target'].strip())))
+                    bool(_UNSPECIFIED_VARIANTS.fullmatch(description['target'].strip())),
+                    argument_target=description['target'])
             continue
         for grammar in (_EN_FUNCTION, _EN_PASSIVE_USE, _EN_CONSTRAINT, _EN_STATE, _EN_PLAN):
             match = grammar.match(tail)
@@ -541,13 +546,15 @@ def _clause_description_proofs(value: str) -> Iterator[_DescriptionProof]:
                     continue
             yield _DescriptionProof(_argument_payload(match['target'],
                 concrete_action=not _WEAK_FUNCTION.fullmatch(match.groupdict().get('verb', 'for')),
-                complete=_argument_closed(value, end+match.end('target'))), value)
+                complete=_argument_closed(value, end+match.end('target'))), value,
+                argument_target=match['target'])
         match = _CN_FUNCTION.match(tail)
         if (match is not None and not _AGENT_DERIVATION.match(match['target'])
                 and _description_payload(match['target'])):
             yield _DescriptionProof(_argument_payload(match['target'],
                 concrete_action=not _WEAK_FUNCTION.fullmatch(match['verb']),
-                complete=_argument_closed(value, end+match.end('target'))), value)
+                complete=_argument_closed(value, end+match.end('target'))), value,
+                argument_target=match['target'])
         match = _CN_STATE.match(tail)
         if match is not None and (match['aux'] or match['verb']):
             yield _DescriptionProof(True, value)
@@ -665,6 +672,9 @@ class AssertionRole:
     # adapter keeps its event/function scope without erasing independently
     # proved quantity/billing disclosures or changing the 0.9 reading policy.
     function_or_event: bool = True
+    # Already matched local function/composition arguments. These normalized
+    # words provide relevance scopes, never source offsets or positive proof.
+    argument_targets: tuple[str, ...] = ()
 
 
 @dataclass(frozen=True)
@@ -735,8 +745,10 @@ def prepare_source_assertions(text: str) -> SourceAssertionRoles:
         material = any(proof.independent is True and (not proof.descriptive_only or proof.material_scope)
                        for _, proofs in parts for proof in proofs)
         function_or_event = any(not proof.descriptive_only for _, proofs in parts for proof in proofs)
+        targets = tuple(dict.fromkeys(proof.argument_target for _, proofs in parts
+                                      for proof in proofs if proof.argument_target))
         clauses.append(AssertionRole(text_clause,operating,purpose,independent,witnesses,material,
-                                     function_or_event))
+                                     function_or_event, targets))
     shape=observe_value_cells(text)
     numeric=shape.unbound_numeric_cells
     return SourceAssertionRoles(tuple(clauses),numeric,

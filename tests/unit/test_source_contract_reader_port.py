@@ -1,8 +1,8 @@
 """Source contracts accept a narrow backend, without importing a catalog."""
-import os
 import subprocess
 import sys
 from dataclasses import replace
+from pathlib import Path
 
 import pytest
 
@@ -27,16 +27,55 @@ def test_export_accepts_delegating_read_backend_without_concrete_inheritance(tmp
         catalog.close()
 
 
-def test_pure_source_identity_contract_import_has_no_catalog_runtime():
+def _pure_identity_contract_probe(*, additional_import=""):
+    source_root = Path(__file__).resolve().parents[2] / "src"
     code = '''
+import importlib.abc
+from pathlib import Path
 import sys
+
+class NoCatalogRuntime(importlib.abc.MetaPathFinder):
+    def find_spec(self, fullname, path=None, target=None):
+        if fullname == 'company_wiki.source_catalog' or fullname.startswith('company_wiki.source_catalog.'):
+            raise AssertionError('pure source contract imported catalog runtime: ' + fullname)
+
+source_root = Path(sys.argv[1]).resolve()
+sys.path.insert(0, str(source_root))
+sys.meta_path.insert(0, NoCatalogRuntime())
+from company_wiki.source_contract import source_version
 from company_wiki.source_contract.source_version import SourceRef, VerifiedContent
+assert Path(source_version.__file__).resolve() == source_root / 'company_wiki/source_contract/source_version.py'
 assert not any(m.startswith('company_wiki.source_catalog') for m in sys.modules)
 assert SourceRef and VerifiedContent
 '''
-    result = subprocess.run([sys.executable, '-B', '-c', code], env=os.environ.copy(),
-                            capture_output=True, text=True, timeout=10)
+    # pytest's conftest changes only this process's sys.path. The fresh probe
+    # must bind the candidate tree rather than rely on PYTHONPATH or an older
+    # editable install; -S also prevents unrelated site startup dependencies.
+    return subprocess.run(
+        [sys.executable, '-I', '-S', '-B', '-c', code + additional_import, str(source_root)],
+        capture_output=True, text=True, timeout=10,
+    )
+
+
+@pytest.mark.parametrize("inherited_pythonpath", ["absent", "unrelated-tree"])
+def test_pure_source_identity_contract_import_has_no_catalog_runtime(
+    tmp_path, monkeypatch, inherited_pythonpath,
+):
+    if inherited_pythonpath == "absent":
+        monkeypatch.delenv("PYTHONPATH", raising=False)
+    else:
+        shadow = tmp_path / "company_wiki"
+        shadow.mkdir()
+        (shadow / "__init__.py").write_text("raise AssertionError('wrong source tree')\n")
+        monkeypatch.setenv("PYTHONPATH", str(tmp_path))
+    result = _pure_identity_contract_probe()
     assert result.returncode == 0, result.stderr
+
+
+def test_pure_source_identity_import_probe_rejects_catalog_dependency():
+    result = _pure_identity_contract_probe(additional_import="\nimport company_wiki.source_catalog\n")
+    assert result.returncode != 0
+    assert "pure source contract imported catalog runtime: company_wiki.source_catalog" in result.stderr
 
 
 def test_public_backend_cannot_attest_forged_bytes_using_correct_identity_fields(tmp_path):

@@ -101,9 +101,9 @@ def test_known_context_is_prepared_once_before_pos_and_repeated_access_is_free(m
     original = owner.source_clause_context
     calls = []
 
-    def counted(value, role):
+    def counted(value, role, **kwargs):
         calls.append(value)
-        return original(value, role)
+        return original(value, role, **kwargs)
 
     def unexpected(*args, **kwargs):
         raise AssertionError('known discourse context must not execute a POS fallback')

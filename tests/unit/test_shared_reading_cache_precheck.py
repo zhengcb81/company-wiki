@@ -19,7 +19,7 @@ from company_wiki.automation.narrative_model import NARRATIVE_PROMPT_VERSION, Na
 from company_wiki.automation.narrative_summarize import NarrativeSummarizeHandler
 from company_wiki.automation.narrative_verify import NarrativeVerifyHandler
 from company_wiki.automation.narrative_selection_generation import reading_material_sha256
-from company_wiki.document_understanding import decision_inventory as inventory
+from company_wiki.source_catalog import narrative_decision_inventory as inventory
 from company_wiki.document_understanding.profiles import registry
 from unit.test_narrative_reading_generation_store import _selected
 
@@ -139,6 +139,17 @@ def test_current_partial_inventory_is_never_same_even_with_broken_stub_compare(m
     monkeypatch.setattr(inventory, "current_decision_trace", lambda frozen: current)
     assert generation.current_reading_decision_matches(final) is False
     assert calls == []
+
+
+def test_complete_current_inventory_reaches_comparator(monkeypatch):
+    final = _final()
+    current = inventory.current_decision_trace(final["reading_dependencies"])
+    assert current["inventory_complete"] is True
+    calls = []
+    _stub_port(monkeypatch, compare=lambda *args: calls.append(args) or {"status": "same"})
+    monkeypatch.setattr(inventory, "current_decision_trace", lambda frozen: current)
+    assert generation.current_reading_decision_matches(final) is True
+    assert calls == [(final["reading_dependencies"], current)]
 
 
 @pytest.mark.parametrize("module", ["generation", "source-selector"])
