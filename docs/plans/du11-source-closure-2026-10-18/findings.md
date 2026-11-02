@@ -97,3 +97,12 @@ StockWiki首写因其他owner边界被自动审批拒；提供既有明确跨仓
 ## 2026-11-02 — 合法结果误拒专项收口
 
 历史真实误拒与当前合成反例已分清；核心共因是可选观察/表示规则/默认顶帽重复否决合法结果。六仓按所属owner修复、集中独审、正常主线发布，有CI四仓最终精确绿；ET无workflow、StockWiki无remote如实标记。原CWP7F/FF首轮失败、后续Focused旧oracle遗漏和中间夹具失误保持，旧oracle仅做退休规则窄迁移。预算/来源/数值/unknown-paid反控不弱化，0模型/下载/原件/生产配置写。新发现SEM-QUAL-01为真语义缺口不是夹具：计划/验收条件可能被改为actual而无诊断，仍OPEN并在真实摘要前根修，已并入T4同一来源正确性节点。详情review/architecture-quality-20261101/implementation-results/gate-rejection-followup-20261102/closure.md及publication.json。下一步回T4/限定及新真实摘要/cache/RF采用，不签整体目标完成。
+
+
+## 2026-11-02 — 效果与第一性原理复核、仓内PWF分工
+
+三独立子审确认：旧21条摘要限制已去，但OCR/CLI表示门和ET/FF成功后CWP最终16MiB入库帽仍在；official128MiB/300s为显式参数二次上帽。小型离线反例与探针已存review/architecture-reassessment-20261102；0真实模型/下载/原件/产品修改。此前“清零”不能由41项推出。
+
+主卡点是完整链预算归属、来源父链/跨段限定和最终真实采用，不是再建底层数据库。已有SourceSummaryTask/SourceCard/quote-primary复用；未知保留，有限词法不冒语义证明。ROOT写CWP/FF，RF/AUDIT各仓新PWF承接既有R4，计划已备未派发；完整组合端点和单次大节点独审见COORDINATION。
+
+操作记录：跨仓Git只读受默认sandbox拒写/访问后，同操作用已支持宿主提权成功；未改ACL。初次patch同路径delete/add冲突未写入，改正常Update后成功。原R4大JSON读取输出截断，仅按具体字段继续，不据截断内容作结论。独立探针初次KeyError/glob失误与更正详见报告。产品/真实公司验收均未恢复。

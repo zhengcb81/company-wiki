@@ -79,10 +79,10 @@
     "event_number_issuer": "each remains original separate binding owner; no promotion from scope alone",
     "consumer": "source cards uncertain/needs_review; RF rationale_support does not modify parameter values"
   },
-  "project_status": "GATE_REJECTION_FOLLOWUP_ENGINEERING_COMPLETE_REAL_C_OPEN",
+  "project_status": "ARCHITECTURE_REASSESSED_RESIDUAL_GATES_SOURCE_AND_REAL_C_OPEN",
   "as_of_date": "2026-11-02",
-  "observed_at_utc": "2026-11-02T18:55:12.876910+00:00",
-  "next_action": "按T4-source-note-parent-plan.md同一来源正确性节点根修父链与SEM-QUAL-01计划/验收条件丢失，先冻结泛化正反例，再单H1原90s/16M/112复验；随后新版真实摘要、paid中断/同跨run零重复与同artifact实际RF采用。",
+  "observed_at_utc": "2026-11-02T19:21:06.487425+00:00",
+  "next_action": "ROOT先同族修复本地输入表示门与FF→ET→CWP最终入库预算残留，完整离线端点验收；随后T4父链/SEM-QUAL-01及单H1真实来源，再新摘要/恢复/同artifact实际RF采用。RF与AUDIT仓内既有整改可独立并行。",
   "publication": {
     "repositories": {
       "revenue-forecast": {
@@ -162,16 +162,21 @@
   "architecture_rectification": {
     "issues": 14,
     "status": "ENGINEERING_ACCEPTED_REAL_COMPANY_OPEN",
-    "current_work": "按T4-source-note-parent-plan.md冻结去公司化父链正反例并在来源树owner根修，再单H1原90s/16M/112复验；随后新版真实摘要、paid中断/同跨run零重复与同artifact实际RF采用。",
+    "current_work": "ROOT先同族修复本地输入表示门与FF→ET→CWP最终入库预算残留，完整离线端点验收；随后T4父链/SEM-QUAL-01及单H1真实来源，再新摘要/恢复/同artifact实际RF采用。RF与AUDIT仓内既有整改可独立并行。",
     "registry": "review/architecture-quality-20261101/implementation-results/STATUS.json",
     "current_evidence": "review/architecture-quality-20261101/implementation-results/checklist-verification-20261102/checklist.md"
   },
   "existing_capabilities": {
     "storage_virtualization": "Implemented; no new storage/database rewrite or cross-layer file access.",
-    "gate_simplification": "R7 plus current caller/diagnostic/resource follow-up reviewed and normally published; real checks and unproven company acceptance stay separate.",
+    "gate_simplification": "Prior bounded fixes accepted; latest audit confirms remaining local-input representation caps and final-import budget caps. Not globally gate-free.",
     "historical_summary_recovery_rf": "Old Huali15/12atoms and Berkshire73/10atoms recovery/adoption are bounded historical evidence; current runtime real C OPEN."
   },
   "next_stages": [
+    {
+      "id": "residual-gate-families",
+      "status": "CONFIRMED_OPEN",
+      "plan": "review/architecture-reassessment-20261102/README.md"
+    },
     {
       "id": "T4-source-parent",
       "status": "OPEN",
@@ -356,5 +361,27 @@
     "priority": "P0_BEFORE_T4_CLOSED_ENGINEERING",
     "plan": "review/architecture-quality-20261101/implementation-results/gate-rejection-followup-20261102/plan.md",
     "closure": "review/architecture-quality-20261101/implementation-results/gate-rejection-followup-20261102/closure.md"
+  },
+  "architecture_reassessment": {
+    "status": "REVIEW_AND_PLANS_COMPLETE_PRODUCT_FIXES_NOT_STARTED",
+    "evidence": "review/architecture-reassessment-20261102/README.md",
+    "coordination": "review/architecture-reassessment-20261102/COORDINATION.md",
+    "new_confirmed_families": [
+      "local_input_representation",
+      "final_import_budget"
+    ],
+    "active_writers": {
+      "ROOT": [
+        "company-wiki",
+        "filing-fetch"
+      ]
+    },
+    "prepared_not_dispatched": [
+      "revenue-forecast",
+      "revenue-forecast-audit"
+    ],
+    "code_changes": false,
+    "real_provider_calls": 0,
+    "decoupling": "storage virtualization implemented; protocol/test/deployment coupling remains; bounded repository parallel work feasible"
   }
 }

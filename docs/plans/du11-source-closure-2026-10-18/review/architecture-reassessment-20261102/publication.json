@@ -1,0 +1,66 @@
+{
+  "scope": "planning_and_readonly_review_only",
+  "product_code_changes": false,
+  "external_provider_calls": 0,
+  "source_documents_modified": 0,
+  "independent_review": {
+    "rectification": "verify_rectification; saved offline probe exit0/5.81s",
+    "architecture": "mainline_rethink; README/coordination reviewed",
+    "boundaries_and_owner_plans": "boundary_assessment; plans reviewed; FMP original JSON versus derived TXT corrected before publication"
+  },
+  "documents_validated": "JSON parsed, review relative links exist, exact file allowlists; normal hooks retained",
+  "repository_plans": [
+    {
+      "repo": "revenue-forecast",
+      "baseline": "75c3b0e0d1eb083ab29e8c9e833ed1f95c16e688",
+      "head": "214a522f88167c4d756153079595457e5abfca6d",
+      "branch": "main",
+      "pushed": true,
+      "remote_configured": true,
+      "files": [
+        "docs/plans/r4-owner-closure-20261102/findings.md",
+        "docs/plans/r4-owner-closure-20261102/progress.md",
+        "docs/plans/r4-owner-closure-20261102/task_plan.md"
+      ],
+      "foreign_preserved": {
+        "assurance/runs/daily_alert.jsonl": "712f9e957990ca0c261cbb91c1d10b0a12606da9d7293e6f2a1581309ce295e9",
+        "assurance/runs/monthly_manifest.json": "56d630107429cbcb646a951306dd1ea445dd5b3146236f34d0e8df953c103b9a",
+        "assurance/runs/weekly_alert.jsonl": "fc9ec2335b48d42921ca9c14c63363efca3b3096f967733e366f4dd463e4b7ed",
+        "assurance/runs/weekly_manifest.json": "e2e57f28fec7477af06029adcf187468701ab0305024993bfb2953bbd43cc5c0"
+      },
+      "runtime_changed": false
+    },
+    {
+      "repo": "revenue-forecast-audit",
+      "baseline": "8e8281c0e4a6d361485bad183c124e12e6459797",
+      "head": "38dda2a4138e6d385096a13f26eb58d2ddc2a112",
+      "branch": "main",
+      "pushed": false,
+      "remote_configured": false,
+      "files": [
+        "docs/plans/r4-owner-closure-20261102/findings.md",
+        "docs/plans/r4-owner-closure-20261102/progress.md",
+        "docs/plans/r4-owner-closure-20261102/task_plan.md"
+      ],
+      "foreign_preserved": {},
+      "runtime_changed": false
+    },
+    {
+      "repo": "filing-fetch",
+      "baseline": "b3f0b9cceb87338c64dc8ddd698707f01ac6691a",
+      "head": "1e3f70b4b4b908f16e2f1640d5d5f6b2269a045b",
+      "branch": "main",
+      "pushed": true,
+      "remote_configured": true,
+      "files": [
+        "docs/plans/import-budget-closure-20261102/findings.md",
+        "docs/plans/import-budget-closure-20261102/progress.md",
+        "docs/plans/import-budget-closure-20261102/task_plan.md"
+      ],
+      "foreign_preserved": {},
+      "runtime_changed": false
+    }
+  ],
+  "root_publication": "This file is included in the normal CWP documentation commit; read Git HEAD for its publication, no recursive self-hash requirement.",
+  "remaining": "All new residual gate fixes, T4/SEM and new real summary/recovery/RF adoption remain OPEN."
+}

@@ -53,7 +53,7 @@
       "status": "ENGINEERING_MERGED_PUSHED_MAIN_CI_GREEN_REAL_C_OPEN"
     }
   },
-  "next": "按T4-source-note-parent-plan.md同一来源正确性节点根修父链与SEM-QUAL-01计划/验收条件丢失，先冻结泛化正反例，再单H1原90s/16M/112复验；随后新版真实摘要、paid中断/同跨run零重复与同artifact实际RF采用。",
+  "next": "ROOT先同族修复本地输入表示门与FF→ET→CWP最终入库预算残留，完整离线端点验收；随后T4父链/SEM-QUAL-01及单H1真实来源，再新摘要/恢复/同artifact实际RF采用。RF与AUDIT仓内既有整改可独立并行。",
   "historical_publication_snapshots": {
     "publication_head": "6668bc978d3ea2217a9aff30be69bde456894c04",
     "cwp_exact_ci": {
@@ -87,7 +87,7 @@
     "project_state": "R6_R4_SOURCE_SEMANTIC_ROOT_REPAIR_AND_DAILY_GATE_SIMPLIFICATION"
   },
   "canonical_entry": "../../../CURRENT_STATUS.md",
-  "project_state": "GATE_REJECTION_FOLLOWUP_ENGINEERING_COMPLETE_REAL_C_OPEN",
+  "project_state": "ARCHITECTURE_REASSESSED_RESIDUAL_GATES_SOURCE_AND_REAL_C_OPEN",
   "publication": {
     "revenue-forecast": {
       "source_head": "75c3b0e0d1eb083ab29e8c9e833ed1f95c16e688",
@@ -282,5 +282,11 @@
     "evidence": "cwp-contract-followup.json",
     "status": "OPEN_REAL_SEMANTIC_DEFECT_NOT_A_GATE",
     "next_owner": "Existing T4/R4 source/qualification owner; no company-specific keyword patch and no raised quota."
+  },
+  "latest_reassessment": {
+    "status": "NEW_RESIDUALS_OPEN",
+    "report": "review/architecture-reassessment-20261102/README.md",
+    "next_action": "ROOT先同族修复本地输入表示门与FF→ET→CWP最终入库预算残留，完整离线端点验收；随后T4父链/SEM-QUAL-01及单H1真实来源，再新摘要/恢复/同artifact实际RF采用。RF与AUDIT仓内既有整改可独立并行。",
+    "note": "Prior item dispositions remain historical scoped evidence, not a global absence proof."
   }
 }
