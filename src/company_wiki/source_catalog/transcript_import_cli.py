@@ -1,10 +1,21 @@
-"""Bounded stdin bridge for canonical import of one transcript tool result."""
+"""Bounded stdin bridge for canonical import of one transcript tool result.
+
+The inbound JSON is a *public, versioned wire*, not a serialization of the
+company-wiki owner models.  ``REQUEST_SCHEMA`` plus the projections below are
+the whole contract: the accepted field set is listed here and is deliberately
+independent of ``dataclasses.fields(SourceRequest)`` /
+``dataclasses.fields(DownloadCandidate)``.  Owner-side refactoring may add
+internal fields (with defaults) without silently making them required wire
+fields for an already released producer.  Every owner check that matters -
+source identity, period/as-of, original bytes and SHA, byte budget - still runs
+after decoding, on the owner types.
+"""
 
 from __future__ import annotations
 
 import argparse
 import json
-from dataclasses import asdict, fields
+from dataclasses import asdict
 from datetime import datetime, timezone
 from pathlib import Path
 import sys
@@ -29,6 +40,52 @@ MAX_ENVELOPE_BYTES = MAX_TOOL_RESULT_BYTES + 128 * 1024
 _ENVELOPE_FIELDS = frozenset(
     {"schema_version", "source_request", "candidate", "transcript_result"}
 )
+
+# Wire field -> owner attribute.  The wire name is what the producer sends; the
+# owner name is what the current model calls it.  They coincide today, and the
+# pairs stay explicit so a rename inside company-wiki cannot move a public
+# field by accident.  Adding a field to either side of this table is a wire
+# change and therefore a ``REQUEST_SCHEMA`` change.
+_SOURCE_REQUEST_WIRE: tuple[tuple[str, str], ...] = (
+    ("schema_version", "schema_version"),
+    ("entity", "entity"),
+    ("market", "market"),
+    ("security_id", "security_id"),
+    ("document_kind", "document_kind"),
+    ("form_type", "form_type"),
+    ("fiscal_year", "fiscal_year"),
+    ("fiscal_period", "fiscal_period"),
+    ("language", "language"),
+    ("provider", "provider"),
+    ("provider_document_id", "provider_document_id"),
+    ("as_of_date", "as_of_date"),
+    ("mode", "mode"),
+    ("allow_download", "allow_download"),
+)
+_CANDIDATE_WIRE: tuple[tuple[str, str], ...] = (
+    ("candidate_id", "candidate_id"),
+    ("provider", "provider"),
+    ("provider_document_id", "provider_document_id"),
+    ("market", "market"),
+    ("entity", "entity"),
+    ("title", "title"),
+    ("source_url", "source_url"),
+    ("document_kind", "document_kind"),
+    ("filing_date", "filing_date"),
+    ("fiscal_year", "fiscal_year"),
+    ("form_type", "form_type"),
+    ("fiscal_period", "fiscal_period"),
+    ("language", "language"),
+    ("amended", "amended"),
+    ("etag", "etag"),
+    ("last_modified", "last_modified"),
+    ("remote_size", "remote_size"),
+    ("adapter_payload_json", "adapter_payload_json"),
+    ("schema_version", "schema_version"),
+)
+
+SOURCE_REQUEST_WIRE_FIELDS = frozenset(name for name, _ in _SOURCE_REQUEST_WIRE)
+CANDIDATE_WIRE_FIELDS = frozenset(name for name, _ in _CANDIDATE_WIRE)
 
 
 class TranscriptImportCliError(ValueError):
@@ -69,12 +126,21 @@ def _read_envelope(stream: BinaryIO, *, max_bytes: int | None = None) -> dict[st
     return value
 
 
-def _dataclass_from_object(cls: Any, value: Any, name: str) -> Any:
-    expected = {item.name for item in fields(cls) if item.init}
-    if not isinstance(value, dict) or set(value) != expected:
+def _project(
+    cls: Any, value: Any, name: str, wire: tuple[tuple[str, str], ...]
+) -> Any:
+    """Decode one pinned wire object onto the current owner type.
+
+    Only the fields named in ``wire`` may appear.  Anything else - including an
+    internal owner field that was never published - is a wire violation, and a
+    missing published field is one too.  Owner fields outside ``wire`` take
+    their own declared defaults; a required one is an internal bug and fails
+    here as an invalid request rather than being invented by the decoder.
+    """
+    if not isinstance(value, dict) or set(value) != {field for field, _ in wire}:
         raise TranscriptImportCliError(f"{name} fields differ from schema")
     try:
-        return cls(**value)
+        return cls(**{attribute: value[field] for field, attribute in wire})
     except (TypeError, ValueError) as exc:
         raise TranscriptImportCliError(f"{name} is invalid") from exc
 
@@ -84,11 +150,11 @@ def run_import(wiki_root: Path, stream: BinaryIO, *,
     max_envelope_bytes: int | None = None,
 ) -> dict[str, Any]:
     envelope = _read_envelope(stream, max_bytes=max_envelope_bytes)
-    request = _dataclass_from_object(
-        SourceRequest, envelope["source_request"], "source_request"
+    request = _project(
+        SourceRequest, envelope["source_request"], "source_request", _SOURCE_REQUEST_WIRE
     )
-    candidate = _dataclass_from_object(
-        DownloadCandidate, envelope["candidate"], "candidate"
+    candidate = _project(
+        DownloadCandidate, envelope["candidate"], "candidate", _CANDIDATE_WIRE
     )
     if not isinstance(envelope["transcript_result"], dict):
         raise TranscriptImportCliError("transcript_result must be an object")
