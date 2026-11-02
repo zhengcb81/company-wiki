@@ -185,7 +185,9 @@ def _page_chain(previous: ObservationUnit, current: ObservationUnit) -> bool:
     text = previous.text.rstrip()
     if not text:
         return False
-    if text.endswith(("。", "！", "？", "；", ".", "!", "?", ";", "：", ":")):
+    from ..text_boundaries import ends_complete_sentence
+
+    if ends_complete_sentence(text) or text.endswith(("：", ":")):
         return False
     if current.page is None or previous.page is None:
         return False

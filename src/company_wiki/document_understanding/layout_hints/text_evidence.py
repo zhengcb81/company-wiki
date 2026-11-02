@@ -10,6 +10,8 @@ from __future__ import annotations
 import re
 import unicodedata
 
+from ..text_boundaries import ends_complete_sentence
+
 _WS_RE = re.compile(r"\s+")
 
 NUMBER_RE = re.compile(r"^[+\-]?\d{1,3}(?:,\d{3})*(?:\.\d+)?%?$|^\d+(?:\.\d+)?%?$|^[—–-]$")
@@ -101,8 +103,14 @@ def is_figure_caption(text: str) -> bool:
 
 
 def has_terminal_punctuation(text: str) -> bool:
+    """Observe source hard terminals, plus the layout's bare list markers.
+
+    A trailing quotation must not make complete numbered prose eligible for
+    heading inference again. The broader historical layout marker set still
+    includes a bare colon; callers must not treat that as a complete sentence.
+    """
     value = normalize_ws(text)
-    return bool(value) and value[-1] in TERMINAL_PUNCTUATION
+    return ends_complete_sentence(value) or bool(value) and value[-1] in TERMINAL_PUNCTUATION
 
 
 def heading_number_level(text: str) -> int | None:

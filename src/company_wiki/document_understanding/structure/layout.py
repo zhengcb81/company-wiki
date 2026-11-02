@@ -17,6 +17,7 @@ from __future__ import annotations
 
 from company_wiki.document_normalization.form_fields import has_inline_form_response
 from company_wiki.document_normalization.table_shapes import has_tabular_value_tail
+from company_wiki.document_understanding.text_boundaries import ends_complete_sentence
 
 from collections.abc import Sequence
 from dataclasses import dataclass
@@ -304,7 +305,7 @@ def is_heading(unit: ObservationUnit, *, toc_ids: frozenset[str] | None = None) 
     if len(unit.text) <= 80 and _APPENDIX_HEADING.fullmatch(unit.text):
         return True
     if _HEADING_NUMBER.match(unit.text) and len(unit.text) <= 80:
-        return not unit.text.rstrip().endswith(("。", "；", ";", "."))
+        return not ends_complete_sentence(unit.text)
     return False
 
 

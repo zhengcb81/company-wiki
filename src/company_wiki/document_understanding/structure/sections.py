@@ -24,6 +24,7 @@ from .contract import (
     MAX_CONTINUATION_UNITS,
 )
 from .contract import ObservationUnit
+from .source_scopes import build_source_marked_scopes
 
 _SECTION_ROLE_HINTS: tuple[tuple[tuple[str, ...], str], ...] = (
     (("募集资金", "募投", "发行", "可转债", "资金用途", "本次发行"), "fundraising"),
@@ -104,6 +105,7 @@ class SectionBuild:
     required_context_by_unit_id: dict[str, tuple[str, ...]] = field(default_factory=dict)
     required_source_by_unit_id: dict[str, tuple[str, ...]] = field(default_factory=dict)
     source_proofs_by_unit_id: dict[str, tuple[dict[str, Any], ...]] = field(default_factory=dict)
+    unresolved_scope_unit_ids: frozenset[str] = frozenset()
 
 
 def _role_for_heading(text: str, fallback: str) -> str:
@@ -346,6 +348,10 @@ def build_sections(
     reading order and a section may span pages.
     """
     diagnostics: list[dict] = []
+    account = native_context.work_budget if native_context is not None else work_budget
+    if account is not None:
+        account.charge(1 + len(units))
+    unit_index = {unit.unit_id: unit for unit in units}
     toc_ids = ordering.toc_ids
     furniture = ordering.running_header_ids
     has_heading_evidence = any(
@@ -371,11 +377,18 @@ def build_sections(
     source_seen = False
     native_list_scopes = (_native_list_scopes(ordering, native_context) if native_context is not None
                           else _native_list_scopes(ordering, work_budget=work_budget))
+    note_scopes, note_diagnostics = build_source_marked_scopes(ordering,
+        native_context=native_context, limits=limits, work_budget=work_budget)
+    diagnostics.extend(note_diagnostics)
+    unresolved_scope_ids = frozenset(uid for scope in note_scopes.values()
+                                    for uid in scope.unresolved_unit_ids)
     required_context_by_unit: dict[str, tuple[str, ...]] = {}
     required_source_by_unit: dict[str, tuple[str, ...]] = {}
     source_proofs_by_unit: dict[str, tuple[dict[str, Any], ...]] = {}
     native_frames: list[tuple[set[str], list[SectionDraft]]] = []
     native_intro_ids: set[str] = set()
+    note_members: frozenset[str] = frozenset()
+    note_parent_stack: list[SectionDraft] | None = None
 
     def open_section(
         unit: ObservationUnit,
@@ -437,6 +450,8 @@ def build_sections(
             # projection. A prior parent's heading cannot classify this body.
             stack.clear()
             native_frames.clear()
+            note_parent_stack = None
+            note_members = frozenset()
             active_part_depth = None
             active_item = None
             last_page = None
@@ -447,6 +462,32 @@ def build_sections(
             continue
         if (unit.unit_id in furniture or unit.unit_id in display_title_ids
                 or unit.unit_id in native_intro_ids):
+            continue
+        # A new original note (including the same actor/number) first closes
+        # the old local frame. Never snapshot the prior note as its ancestor.
+        note_scope = note_scopes.get(unit.unit_id)
+        if note_parent_stack is not None and (note_scope is not None or unit.unit_id not in note_members):
+            stack[:] = note_parent_stack
+            native_frames.clear()
+            note_parent_stack = None
+            note_members = frozenset()
+        if note_scope is not None:
+            note_parent_stack = list(stack)
+            note_members = note_scope.member_ids
+            for destination, mapping in ((required_context_by_unit, note_scope.context_by_unit),
+                                         (required_source_by_unit, note_scope.source_by_unit)):
+                destination.update(mapping)
+            source_proofs_by_unit.update(note_scope.proofs_by_unit)
+            current = open_section(unit,
+                heading_units=[unit_index[uid] for uid in note_scope.intro_ids],
+                depth_override=((stack[-1].depth or 0) if stack else 0) + 1,
+                contextual_outline=True)
+            current.basis.append("source_note_scope")
+            for uid in note_scope.intro_ids:
+                unit_section[uid] = current.section_id
+            native_intro_ids.update(note_scope.intro_ids[1:])
+            last_page = unit.page
+            carry_units = 0
             continue
         while native_frames and unit.unit_id not in native_frames[-1][0]:
             _members, parent_stack = native_frames.pop()
@@ -600,7 +641,7 @@ def build_sections(
             }
         )
 
-    by_id = {unit.unit_id: unit for unit in units}
+    by_id = unit_index
     for draft in sections:
         if draft.language is None:
             draft.language = _dominant_language(
@@ -650,6 +691,7 @@ def build_sections(
         required_context_by_unit_id=required_context_by_unit,
         required_source_by_unit_id=required_source_by_unit,
         source_proofs_by_unit_id=source_proofs_by_unit,
+        unresolved_scope_unit_ids=unresolved_scope_ids,
     )
 
 

@@ -150,7 +150,9 @@ DEPENDENT_STATEMENT = re.compile(
 
 
 def closed_source_statement(text: str) -> bool:
-    return text.rstrip().rstrip("\"'”’）)]》").endswith(("。", "！", "？", ".", "!", "?", ";", "；"))
+    from ..text_boundaries import ends_complete_sentence
+
+    return ends_complete_sentence(text)
 
 
 def source_courtesy_statement(text: str) -> bool:

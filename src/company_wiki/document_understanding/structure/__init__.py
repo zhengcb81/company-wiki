@@ -349,7 +349,8 @@ def _build_structure(observation, *, limits=None, work_budget=None, state=None, 
         coverage["complete"]
         and not over_budget
         and not any(
-            item["code"] in {"WORK_BUDGET_EXCEEDED", "RELATION_BUDGET_EXCEEDED"}
+            item["code"] in {"WORK_BUDGET_EXCEEDED", "RELATION_BUDGET_EXCEEDED",
+                             "SOURCE_SCOPE_UNPROVEN", "SOURCE_SCOPE_LIMIT_REACHED"}
             for item in diagnostics
         )
     )
@@ -360,6 +361,12 @@ def _build_structure(observation, *, limits=None, work_budget=None, state=None, 
     for semantic in semantic_units:
         members = semantic.get("member_unit_ids", ())
         reserve(work_budget, 1 + len(members))
+        scope_unknown = [uid for uid in members if uid in section_build.unresolved_scope_unit_ids]
+        if scope_unknown:
+            semantic["completeness"] = "partial"
+            semantic.setdefault("diagnostics", []).append({
+                "code": "SOURCE_SCOPE_UNPROVEN", "unit_ids": scope_unknown,
+                "detail": "local source introduction or adjacency is unproven"})
         context_by_unit: dict[str, list[str]] = {}
         source_by_unit: dict[str, list[str]] = {}
         proofs_by_unit: dict[str, list[dict[str, Any]]] = {}

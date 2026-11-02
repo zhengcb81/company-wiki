@@ -17,6 +17,7 @@ from company_wiki.document_understanding.narrative_continuity import (
 from company_wiki.document_understanding.operating_states.relations import (
     independent_statement_start, DEPENDENT_STATEMENT,
 )
+from company_wiki.document_understanding.text_boundaries import ends_complete_sentence
 from .narrative_document import DocumentStructure
 
 def prepare_native_materials(parsed: DocumentStructure, pipeline: Mapping[str, Any], classify=None, *,
@@ -53,6 +54,15 @@ def prepare_native_materials(parsed: DocumentStructure, pipeline: Mapping[str, A
     table_owners: set[int] = set()
     atomic_projects: set[int] = set()
     context_blocked: set[str] = set(native_dependencies.blocked)
+    # Structure owns exact unresolved scope targets; material compilation must
+    # not turn an omitted local introduction into smaller complete evidence.
+    for diagnostic in structure.get("diagnostics", ()):
+        if diagnostic.get("code") not in {"SOURCE_SCOPE_UNPROVEN", "SOURCE_SCOPE_LIMIT_REACHED"}:
+            continue
+        targets = diagnostic.get("unit_ids", ())
+        work_budget.charge(1 + len(targets))
+        context_blocked.update(uid for uid in targets
+                               if uid in units and units[uid].source_id == parsed.source_id)
     other_members: set[str] = set()
     table_furniture = {unit["unit_id"] for unit in observation
                        if unit.get("kind") in {"table_row", "table_header", "table_caption"}}
@@ -296,8 +306,7 @@ def prepare_native_materials(parsed: DocumentStructure, pipeline: Mapping[str, A
         return result
 
     def source_statement_closed(uid: str) -> bool:
-        text = units[uid].raw_text.rstrip().rstrip("\"'”’）)]》")
-        return text.endswith(("。", "！", "？", ".", "!", "?", ";", "；"))
+        return ends_complete_sentence(units[uid].raw_text)
 
     def statement_members(member_ids):
         # The continuity owner has already proven the native frame/scope and
@@ -308,8 +317,7 @@ def prepare_native_materials(parsed: DocumentStructure, pipeline: Mapping[str, A
         pending = []
         for uid in member_ids:
             pending.append(uid)
-            text = units[uid].raw_text.rstrip().rstrip("\"'”’）)]》")
-            if text.endswith(("。", "！", "？", ".", "!", "?", ";", "；")):
+            if ends_complete_sentence(units[uid].raw_text):
                 statements.append(pending)
                 pending = []
         if pending:

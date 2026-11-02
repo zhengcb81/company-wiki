@@ -25,9 +25,11 @@ import re
 from company_wiki.document_normalization.form_fields import has_inline_form_response
 from company_wiki.document_normalization.table_shapes import has_tabular_value_tail
 
+from .text_boundaries import ends_complete_sentence
+
 INPUT_SCHEMA_VERSION = "du-input/1"
 
-OBSERVATION_ADAPTER_VERSION = "du-observation-adapter/9"
+OBSERVATION_ADAPTER_VERSION = "du-observation-adapter/10"
 
 _READING_LAYOUT_FIELDS = frozenset({"bbox", "page", "column", "page_width", "page_height", "coordinate_frame", "rotation",
                                   "granularity", "font_size", "font_weight", "frame_converted", "cropbox", "cropbox_position"})
@@ -131,7 +133,9 @@ _NUMBERED_HEADING = (
     (r"^\d{1,2}(?:\.\d{1,2}){1,3}\s*[\u4e00-\u9fffA-Za-z]\S*", 3),
 )
 
-_HEADING_TERMINATOR = ("。", "；", ";", "：", ":")
+# This adapter also rejects list introductions; a colon is not a complete
+# sentence boundary and remains separate from the shared terminal observer.
+_HEADING_TERMINATOR = ("：", ":")
 _UNIT_CAPTION = (
     "单位：",
     "单位:",
@@ -217,7 +221,7 @@ def _heading_level(text: str, metadata: Mapping[str, Any]) -> int | None:
     stripped = text.strip()
     if not stripped or len(stripped) > _MAX_HEADING_CHARS or "\n" in stripped:
         return None
-    if stripped.endswith(_HEADING_TERMINATOR):
+    if ends_complete_sentence(stripped) or stripped.endswith(_HEADING_TERMINATOR):
         return None
     for pattern, level in _NUMBERED_HEADING:
         if re.match(pattern, stripped):

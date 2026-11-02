@@ -21,8 +21,9 @@ from company_wiki.resource_budget import WorkBudget, WorkBudgetExceeded
 from .indented_tail_geometry import indented_terminal_tail_proof
 from .hanging_indent_geometry import hanging_body_proof, is_bullet_start
 from .source_turn_markers import explicit_qa_marker, observed_source_turn, SOURCE_TURN_MARKER_PREFIX_CHARS
+from .text_boundaries import ends_complete_sentence
 
-NARRATIVE_CONTINUITY_FEATURE_VERSION = "native-narrative-continuity/11"
+NARRATIVE_CONTINUITY_FEATURE_VERSION = "native-narrative-continuity/12"
 _LIMITS = {
     "max_units": 50_000,
     "max_window_units": 8,
@@ -56,11 +57,61 @@ def native_section_key(hints: Mapping[str, Any], fallback: Any) -> Any:
 
 
 def _terminal(text: str) -> bool:
-    return (
-        text.rstrip()
-        .rstrip("\"'”’）)]》")
-        .endswith(("。", "！", "？", ".", "!", "?", ";", "；"))
-    )
+    return ends_complete_sentence(text)
+
+
+def source_member_neighbour(left: Mapping[str, Any], right: Mapping[str, Any], *,
+                            left_provenance: Mapping[str, Any],
+                            right_provenance: Mapping[str, Any]) -> dict[str, Any] | None:
+    """Observe existing exact member/character edges without optional geometry.
+
+    The parser/alignment owner supplies these original memberships. This does
+    not infer sentences, headings or actors, and is not a page-flow proof.
+    """
+    a, b = left.get("hints", {}), right.get("hints", {})
+    if not isinstance(a, Mapping) or not isinstance(b, Mapping):
+        return None
+    source = a.get("source_id")
+    ordinal, next_ordinal = _integer(left.get("ordinal")), _integer(right.get("ordinal"))
+    if (not isinstance(source, str) or not source or b.get("source_id") != source
+            or left_provenance.get("source_id") != source
+            or right_provenance.get("source_id") != source
+            or left.get("page") != right.get("page")
+            or ordinal is None or next_ordinal != ordinal + 1
+            or left.get("role") != right.get("role") or not _compatible_turn(a, b)
+            or left.get("kind") != "paragraph" or right.get("kind") != "paragraph"
+            or any(h.get("table_id") is not None or h.get("table_region") is True
+                   for h in (a, b))):
+        return None
+    am, bm = a.get("paragraph_membership"), b.get("paragraph_membership")
+    if (isinstance(am, Mapping) and isinstance(bm, Mapping)
+            and am.get("version") == bm.get("version") == "pdf-paragraph-membership/1"
+            and isinstance(am.get("group"), str) and len(am["group"]) == 64
+            and am.get("group") == bm.get("group")
+            and type(am.get("position")) is int and type(bm.get("position")) is int
+            and bm["position"] == am["position"] + 1
+            and type(am.get("count")) is int and am.get("count") == bm.get("count")
+            and 0 <= am["position"] < bm["position"] < am["count"] <= 64
+            and am.get("next") == right["unit_id"]
+            and bm.get("previous") == left["unit_id"]):
+        return {"left": left["unit_id"], "right": right["unit_id"],
+                "basis": "source_exact_paragraph_membership", "group": am["group"]}
+    block = _integer(left_provenance.get("pdf_block"))
+    if block is None or _integer(right_provenance.get("pdf_block")) != block:
+        return None
+    start, end = (_integer(left_provenance.get(key))
+                  for key in ("block_char_start", "block_char_end"))
+    next_start, next_end = (_integer(right_provenance.get(key))
+                            for key in ("block_char_start", "block_char_end"))
+    digest = left_provenance.get("block_sha256")
+    if (not isinstance(digest, str) or len(digest) != 64
+            or right_provenance.get("block_sha256") != digest
+            or start is None or end is None or next_start is None or next_end is None
+            or not 0 <= start < end <= next_start < next_end
+            or next_start - end > 2):
+        return None
+    return {"left": left["unit_id"], "right": right["unit_id"],
+            "basis": "native_block_character_ranges"}
 
 
 @dataclass(frozen=True)
@@ -377,6 +428,47 @@ class NativeSourceContext:
             self.diagnostics[diagnostic] += 1
         return proof
 
+    def member_neighbour(self, left_id: str, right_id: str) -> dict[str, Any] | None:
+        """Reuse parser-owned membership; no font, bbox or column prerequisite."""
+        self._charge()
+        left, right = self.units.get(left_id), self.units.get(right_id)
+        if not self.unique or left is None or right is None:
+            return None
+        return source_member_neighbour(left, right,
+            left_provenance=self.provenance.get(left_id, {}),
+            right_provenance=self.provenance.get(right_id, {}))
+
+    def same_page_neighbour(self, left_id: str, right_id: str) -> dict[str, Any] | None:
+        """Physical fallback for two original adjacent complete or open units.
+
+        Unlike sentence continuity this observes local order, not font equality
+        or unfinished grammar. Unknown lanes are not a positive physical proof.
+        """
+        self._charge()
+        left, right = self.observe(left_id), self.observe(right_id)
+        if (not self.unique or left is None or right is None
+                or left.source != right.source or left.page != right.page
+                or right.ordinal != left.ordinal + 1
+                or right.paragraph != left.paragraph + 1
+                or right.block != left.block + 1 or left.frame != right.frame
+                or left.unit.get("role") != right.unit.get("role")
+                or not _compatible_turn(left.unit.get("hints", {}), right.unit.get("hints", {}))):
+            return None
+        column = left.column
+        if (type(column) not in (int, str) or column != right.column
+                or type(column) is not type(right.column)
+                or isinstance(column, bool) or isinstance(column, int) and column < 0
+                or isinstance(column, str) and not column.strip()):
+            return None
+        complete, unproven = self.page_coverage(left, right)
+        a, b = left.bbox, right.bbox
+        overlap = min(a[2], b[2]) - max(a[0], b[0])
+        if (not complete or left.page in unproven or b[1] < a[3]
+                or overlap < 0.8 * min(a[2] - a[0], b[2] - b[0])):
+            return None
+        return {"basis": "observed_adjacent_same_page_flow", "left": left_id,
+                "right": right_id, "page": left.page, "column": column}
+
 
 class _Analysis:
     def __init__(self, limits: Mapping[str, Any] | None, work_budget: WorkBudget | None = None,
@@ -553,40 +645,13 @@ class _Analysis:
             return None
         if not self.charge(min(len(right.unit['text']), SOURCE_TURN_MARKER_PREFIX_CHARS)) or explicit_qa_marker(right.unit['text']):
             return None
-        a_hint = left.unit.get("hints", {}).get("paragraph_membership", {})
-        b_hint = right.unit.get("hints", {}).get("paragraph_membership", {})
-        if (isinstance(a_hint, Mapping) and isinstance(b_hint, Mapping)
-                and a_hint.get("version") == b_hint.get("version") == "pdf-paragraph-membership/1"
-                and isinstance(a_hint.get("group"), str) and len(a_hint["group"]) == 64
-                and a_hint.get("group") == b_hint.get("group")
-                and type(a_hint.get("position")) is int and type(b_hint.get("position")) is int
-                and b_hint["position"] == a_hint["position"] + 1
-                and type(a_hint.get("count")) is int and a_hint.get("count") == b_hint.get("count")
-                and 0 <= a_hint["position"] < b_hint["position"] < a_hint["count"] <= 64
-                and a_hint.get("next") == right.unit["unit_id"]
-                and b_hint.get("previous") == left.unit["unit_id"]):
-            return {"left": left.unit["unit_id"], "right": right.unit["unit_id"],
-                    "basis": "source_exact_paragraph_membership", "group": a_hint["group"]}
+        member_proof = source_member_neighbour(left.unit, right.unit,
+            left_provenance=left.provenance, right_provenance=right.provenance)
+        if member_proof is not None:
+            if left.block != right.block or left.bbox == right.bbox:
+                return member_proof
         if left.block == right.block:
-            left_meta, right_meta = left.provenance, right.provenance
-            end, start = (
-                _integer(left_meta.get("block_char_end")),
-                _integer(right_meta.get("block_char_start")),
-            )
-            if (
-                not left_meta.get("block_sha256")
-                or left_meta.get("block_sha256") != right_meta.get("block_sha256")
-                or end is None
-                or start is None
-                or not 0 <= start - end <= 2
-                or left.bbox != right.bbox
-            ):
-                return None
-            return {
-                "left": left.unit["unit_id"],
-                "right": right.unit["unit_id"],
-                "basis": "native_block_character_ranges",
-            }
+            return None
         if (not allow_complete_boundary and _terminal(left.unit["text"])) or right.block != left.block + 1:
             return None
         a, b = left.bbox, right.bbox
