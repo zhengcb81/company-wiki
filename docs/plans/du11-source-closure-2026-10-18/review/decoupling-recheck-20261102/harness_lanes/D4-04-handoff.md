@@ -29,6 +29,7 @@
 - `candidate` 逐字段取自同文件 `_candidate`（825-864），含 `adapter_payload_json` 的 `sort_keys` 紧凑拼写 `{"exchange":"nasdaq","market":"US","security_id":"MSFT"}`。
 - `transcript_result` 取自 ET producer golden `tests/fixtures/transcript_fmp/fmp_v2.fetched.json`（ET `4924d57`），仅 `request_id` 替换为 CWP 对同一 `source_request` 的实际哈希 `urn:company-wiki:source-request:sha256:7bb1c2ea677e9b94bb348a17854f0b1e690bec4597961fc0d112d39a9b143a8f`。该 id 是 FF 从 CWP lookup 取回再转交 ET、ET 原样回显的值，属真实 wire 的一部分。
 - 该值由 `test_literal_ff_fixture_tracks_the_producer_golden` 守护：除 `request_id` 外必须与 ET golden 完全一致，golden 更新时测试失败，迫使刻意刷新而非静默漂移。
+- 同一字面 `request_id` 也是 identity 投影的哨兵：一旦 `SourceRequest.identity_dict()` 被改动（新增/改名 identity 字段），该值不再匹配，导入会以 `result request_id does not match request` 失败。这是**有意的**公开身份变更，必须与 `REQUEST_SCHEMA` 一起决策，不能靠顺手刷新 fixture 绕过。
 
 `tests/fixtures/transcript_import/generic_html_import_request_v2.json`
 - 非 FMP（HTML）分支的同一 envelope，冻结原先由 `datetime.now()` 与 owner 模型在运行时生成的日期/hash，使本文件不再有任何运行时推导的期望。
@@ -39,7 +40,7 @@
 
 1. **先 RED**：在父提交 `503f6510` 的原 decoder 上跑 `test_internal_defaulted_field_does_not_change_the_wire` → `1 failed`（`TranscriptImportCliError: source_request fields differ from schema`）。修复后该文件 20 例全绿。
 2. **真实进口路径**：字面 fixture 字节直接喂真实 CLI → `run_import` → 真实 scratch catalog → `CanonicalSourceWriter.import_staged` → 写后 `SourceVersionReader.query_ref` + `open_version` + `extract_transcript_material.verify`，并核对 sidecar `transcript_acquisition` 审计字段；第二次导入为 `deduplicated_after_download` 且 `source_ref` 不变。
-3. **内部默认字段演进**：`_EvolvedSourceRequest` / `_EvolvedDownloadCandidate` 各加一个带默认值字段（并断言字段数确实 +1，防止测试空转），monkeypatch 到 decoder 后同一 fixture 仍 `imported`，落盘原始字节一致；把同名字段写进 wire 仍被 `fields differ from schema` 拒绝。
+3. **内部默认字段演进**：`_EvolvedSourceRequest` / `_EvolvedDownloadCandidate` 各加一个带默认值字段（并断言字段数确实 +1，防止测试空转），monkeypatch 到 decoder 后同一 fixture 仍 `imported`，落盘原始字节一致；测试还用构造记录断言 decoder 真的构造了这两个派生类型（若将来把 import 挪进函数体使 monkeypatch 失效，测试会立刻失败而不是空转）。把同名字段写进 wire 仍被 `fields differ from schema` 拒绝。
 4. **保留的硬检查**：重复 JSON key、`NaN` 常量、非 UTF-8、超 `--max-envelope-bytes` 全部按原样拒绝；`--max-original-bytes 256` 对 862B 原件仍拒绝且不落盘。
 
 ## 未放松的 owner 校验（实测逐项拒绝）
@@ -64,7 +65,7 @@ PYTHONPATH="C:/Users/郑曾波/Projects/company-wiki-d4-04-wire/src" \
            -p no:cacheprovider -q
 ```
 
-结果：**68 passed in 80.67s**（其中本卡文件 20 passed）。RED 复现：
+结果：**68 passed in 69.12s**（其中本卡文件 20 passed）。RED 复现：
 
 ```
 git checkout 503f6510 -- src/company_wiki/source_catalog/transcript_import_cli.py

@@ -39,6 +39,9 @@ GENERIC_WIRE = FIXTURE_ROOT / "generic_html_import_request_v2.json"
 ET_GOLDEN = REPO_ROOT / "tests" / "fixtures" / "transcript_fmp" / "fmp_v2.fetched.json"
 
 
+_EVOLVED_CONSTRUCTIONS: list[type] = []
+
+
 @dataclass(frozen=True)
 class _EvolvedSourceRequest(SourceRequest):
     """Test double: the owner model grew one internal defaulted field.
@@ -49,12 +52,20 @@ class _EvolvedSourceRequest(SourceRequest):
 
     _internal_projection_hint: str | None = None
 
+    def __post_init__(self) -> None:
+        super().__post_init__()
+        _EVOLVED_CONSTRUCTIONS.append(type(self))
+
 
 @dataclass(frozen=True)
 class _EvolvedDownloadCandidate(DownloadCandidate):
     """Test double: the owner model grew one internal defaulted field."""
 
     _internal_retry_hint: int = 0
+
+    def __post_init__(self) -> None:
+        super().__post_init__()
+        _EVOLVED_CONSTRUCTIONS.append(type(self))
 
 
 def _sha(data: bytes) -> str:
@@ -396,10 +407,18 @@ def test_internal_defaulted_field_does_not_change_the_wire(
 
     root = _scratch_root(tmp_path, "company-wiki-evolved")
     original = _payload(_wire(FF_WIRE))
+    _EVOLVED_CONSTRUCTIONS.clear()
     try:
         response = transcript_import_cli.run_import(
             root, io.BytesIO(_wire_bytes(FF_WIRE))
         )
+        # The decoder must have built the evolved types, not the base ones; a
+        # local import inside run_import would otherwise make this test pass
+        # without proving anything.
+        assert _EVOLVED_CONSTRUCTIONS == [
+            _EvolvedSourceRequest,
+            _EvolvedDownloadCandidate,
+        ]
         assert response["status"] == "imported"
         assert response["canonical_status"] == "imported_new"
         assert response["provider_payload_sha256"] == _sha(original)
